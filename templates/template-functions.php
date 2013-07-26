@@ -129,13 +129,12 @@ if(!function_exists('property_overview_image')) {
 
     $image = wpp_get_image_link($property['featured_image'], $thumbnail_size, array('return'=>'array'));
 
-
     if(!empty($image)) {
       ob_start();
       ?>
       <div class="property_image">
         <a href="<?php echo $thumbnail_link; ?>" title="<?php echo $property['post_title'] . ($property['parent_title'] ? __(' of ', 'wpp') . $property['parent_title'] : "");?>"  class="property_overview_thumb property_overview_thumb_<?php echo $thumbnail_size; ?> <?php echo $link_class; ?> thumbnail" rel="properties" >
-          <img width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" src="<?php echo $image['link']; ?>" alt="<?php echo $property['post_title'];?>" />
+          <img width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" src="<?php echo $image['link']; ?>" alt="<?php echo $property['post_title'];?>" style="width:<?php echo $image['width']; ?>px;height:<?php echo $image['height']; ?>px;" />
         </a>
       </div>
       <?php
@@ -904,7 +903,7 @@ if(!function_exists('draw_stats')):
     }
 
     $property = prepare_property_for_display($property);
-    
+
     $defaults = array(
       'sort_by_groups' => $wp_properties['configuration']['property_overview']['sort_stats_by_groups'],
       'display' => 'dl_list',
@@ -1364,7 +1363,7 @@ if(!function_exists('draw_property_search_form')):
         if(!isset($search_values[$attrib])) {
           continue;
         }
-        $label = (empty($property_stats[$attrib]) ? WPP_F::de_slug($attrib) : $property_stats[$attrib]);
+        $label = apply_filters( 'wpp::search_attribute::label', (empty($property_stats[$attrib]) ? WPP_F::de_slug($attrib) : $property_stats[$attrib] ), $attrib );
 
         ?>
         <li class="wpp_search_form_element seach_attribute_<?php echo $attrib; ?>  wpp_search_attribute_type_<?php echo $wp_properties['searchable_attr_fields'][$attrib]; ?> <?php echo ((!empty($wp_properties['searchable_attr_fields'][$attrib]) && $wp_properties['searchable_attr_fields'][$attrib] == 'checkbox') ? 'wpp-checkbox-el' : ''); ?><?php echo ((!empty($wp_properties['searchable_attr_fields'][$attrib]) && ($wp_properties['searchable_attr_fields'][$attrib]=='multi_checkbox' && count($search_values[$attrib])==1 ) || $wp_properties['searchable_attr_fields'][$attrib]=='checkbox') ?' single_checkbox':'')?>">

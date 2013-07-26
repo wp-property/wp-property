@@ -3,7 +3,7 @@
 Name: Admin Tools
 Feature ID: 1
 Minimum Core Version: 1.36.0
-Version: 3.5.1
+Version: 3.5.2
 Description: Tools for developing themes and extensions for WP-Property.
 Class: class_admin_tools
 */
@@ -399,7 +399,7 @@ class class_admin_tools {
           <td class="wpp_draggable_handle">&nbsp;</td>
 
           <td class="wpp_attribute_name_col" >
-            <ul>
+            <ul class="wpp_attribute_name">
               <li>
                 <input class="slug_setter" type="text" name="wpp_settings[property_stats][<?php echo $slug; ?>]" value="<?php echo $label; ?>" />
               </li>
@@ -411,6 +411,7 @@ class class_admin_tools {
                 </div>
                 <?php endif; ?>
               </li>
+              <?php do_action( 'wpp::property_attributes::attribute_name', $slug ); ?>
               <li>
                 <span class="wpp_show_advanced"><?php _e('Toggle Advanced Settings', 'wpp'); ?></span>
               </li>
@@ -460,6 +461,7 @@ class class_admin_tools {
                   <?php _e('Show in "All Properties" table.', 'wpp'); ?>
                 </label>
               </li>
+              <?php do_action( 'wpp::property_attributes::settings', $slug ); ?>
               <li class="wpp_development_advanced_option">
                 <span class="wpp_delete_row wpp_link"><?php _e('Delete Attribute','wpp') ?></span>
               </li>

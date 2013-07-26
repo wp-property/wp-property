@@ -479,9 +479,19 @@ class UD_API {
    * @author peshkov@UD
    * @version 1.0
    */
-  static function get_template_part( $name , $path = array() ) {
+  static function get_template_part( $name , $path = array(), $opts = array() ) {
     $name = (array)$name;
     $template = "";
+
+    /**
+     * Set default instance.
+     * Template can depend on instance. For example: facebook, PDF, etc.
+     */
+    $instance = apply_filters( "ud::current_instance", "default" );
+
+    $opts = wp_parse_args( $opts, array(
+      'instance' => $instance,
+    ) );
 
     foreach($name as $n) {
       $n = "{$n}.php";
@@ -490,11 +500,16 @@ class UD_API {
         foreach((array)$path as $p) {
           if(file_exists($p . "/" . $n)) {
             $template = $p . "/" . $n;
+            break(2);
           }
         }
       }
       if(!empty($template)) break;
     }
+
+    $template = apply_filters( "ud::template_part::{$opts['instance']}", $template, array( 'name' => $name, 'path' => $path, 'opts' => $opts ) );
+
+    WPP_F::console_log($template,$instance);
 
     return !empty($template) ? $template : false;
   }
@@ -1211,7 +1226,7 @@ class UD_API {
    */
   static function nice_time( $time = false, $args = false ) {
 
-     $args = wp_parse_args( $args, array(
+    $args = wp_parse_args( $args, array(
       'format' => 'date_and_time'
     ));
 
@@ -1219,16 +1234,16 @@ class UD_API {
       return false;
     }
 
-    if($format == 'date') {
+    if($args[ 'format' ] == 'date') {
       return date(get_option('date_format'), $time);
     }
 
-    if($format == 'time') {
+    if($args[ 'format' ] == 'time') {
       return date(get_option('time_format'), $time);
     }
 
-    if($format == 'date_and_time') {
-      return date(get_option('date_format'), $time) . " " . date(get_option('time_format'), $time);
+    if($args[ 'format' ] == 'date_and_time') {
+      return date( get_option('date_format'), $time ) . ' '  . date( get_option('time_format'), $time );
     }
 
     return false;
@@ -1257,6 +1272,99 @@ class UD_API {
   static function is_url($url) {
     _deprecated_function( __FUNCTION__, '3.4', 'esc_url' );
     return preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $url);
+  }
+
+  /**
+   * Wrapper function to send notification with WP-CRM or without one
+   * @param mixed $args['user']
+   * @param sting $args['trigger_action']
+   * @param sting $args['data']             aka $notification_data
+   * @param sting $args['crm_log_message']
+   * @param sting $args['subject']          using in email notification
+   * @param sting $args['message']          using in email notification
+   * @uses self::replace_data()
+   * @uses wp_crm_send_notification()
+   * @return boolean false if notification was not sent successfully
+   * @autor odokienko@UD
+   */
+  static function send_notification(  $args = array()) {
+
+    $args = wp_parse_args( $args, array(
+      'ignore_wp_crm' => false,
+      'user'  => false,
+      'trigger_action' => false,
+      'data' => array(),
+      'message'  => '',
+      'subject' => '',
+      'crm_log_message' => ''
+    ));
+
+    if(is_numeric($args['user'])){
+      $args['user'] = get_user_by('id', $args['user']);
+    }elseif(filter_var($args['user'], FILTER_VALIDATE_EMAIL)){
+      $args['user'] = get_user_by('email', $args['user']);
+    }elseif(is_string($args['user'])){
+      $args['user'] = get_user_by('login', $args['user']);
+    }
+
+    if(!is_object($args['user']) || empty($args['user']->data->user_email)){
+      return false;
+    }
+
+    if( function_exists('wp_crm_send_notification') &&
+         empty($args['ignore_wp_crm'])
+    ) {
+
+      if(!empty($args['crm_log_message'])){
+        wp_crm_add_to_user_log( $args['user']->ID, self::replace_data($args['crm_log_message'],$args['data']));
+      }
+
+      if(!empty($args['trigger_action'])){
+        $notifications = WP_CRM_F::get_trigger_action_notification( $args['trigger_action'] );
+        if( !empty( $notifications ) ) {
+          return wp_crm_send_notification( $args['trigger_action'] , $args['data'] );
+        }
+      }
+
+    }
+
+    if(empty($args['message'])){
+      return false;
+    }
+
+    return wp_mail($args['user']->data->user_email,self::replace_data($args['subject'],$args['data']),self::replace_data($args['message'],$args['data']));
+
+  }
+
+  /**
+   * Replace in $str all entries of keys of the given $values
+   * where each key will be rounded by $brackets['left'] and $brackets['right']
+   * with the relevant values of the $values
+   * @param string|array $str
+   * @param array $values
+   * @param array $brackets
+   * @return string|array
+   * @author odokienko@UD
+   */
+  static function replace_data($str='',$values=array(),$brackets=array('left'=>'[','right'=>']')){
+    $values = (array) $values;
+    $replacements = array_keys ($values);
+    array_walk( $replacements, create_function('&$val', '$val = "'.$brackets['left'].'".$val."'.$brackets['right'].'";'));
+    return str_replace ( $replacements, array_values ($values), $str );
+  }
+
+  /**
+   * Gets complicated html entity e.g. Table and ou|ol
+   * and removes whitespace characters include new line.
+   * we should to do this before use nl2br
+   *
+   * @author odokienko@UD
+   */
+  static function cleanup_extra_whitespace( $content ){
+
+    $content = preg_replace_callback( '~<(?:table|ul|ol )[^>]*>.*?<\/( ?:table|ul|ol )>~ims',create_function( '$matches', 'return preg_replace(\'~>[\s]+<((?:t[rdh]|li|\/tr|/table|/ul ))~ims\',\'><$1\',$matches[0]);' ), $content );
+
+    return $content;
   }
 
 

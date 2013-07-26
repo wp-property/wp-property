@@ -77,6 +77,9 @@ class WPP_Object_List_Table extends WPP_List_Table {
     $can_edit_post = current_user_can( $post_type_object->cap->edit_post);
     $can_edit_post = apply_filters('wpp_list_table_can_edit_post', $can_edit_post);
 
+    $can_delete_post = current_user_can( $post_type_object->cap->delete_post, $post->ID );
+    $can_delete_post = apply_filters('wpp_list_table_can_delete_post', $can_delete_post);
+    
     $result = "<tr id='object-{$ID}' class='wpp_parent_element'>";
 
     list( $columns, $hidden ) = $this->get_column_info();
@@ -120,7 +123,7 @@ class WPP_Object_List_Table extends WPP_List_Table {
            $actions['edit'] = '<a href="' . get_edit_post_link( $post->ID, true ) . '" title="' . esc_attr( __( 'Edit this item' ) ) . '">' . __( 'Edit' ) . '</a>';
           }
 
-          if ( current_user_can( $post_type_object->cap->delete_post, $post->ID ) ) {
+          if ( $can_delete_post ) {
             if ( 'trash' == $post->post_status ) {
               global $wp_version;
               $_wpnonce = ( version_compare( $wp_version, '3.5', '>=' ) ? 'untrash-post_' : 'untrash-' . $post->post_type . '_' ) . $post->ID ;

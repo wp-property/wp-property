@@ -312,9 +312,9 @@ class WPP_F extends UD_API {
   function load_assets($types = array()) {
     global $post, $property, $wp_properties;
 
-    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wpp-jquery-ui-slider');"));
-    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wpp-jquery-ui-mouse');"));
-    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wpp-jquery-ui-widget');"));
+    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('jquery-ui-slider');"));
+    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('jquery-ui-mouse');"));
+    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('jquery-ui-widget');"));
     add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wpp-jquery-fancybox');"));
     add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wpp-jquery-address');"));
     add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wpp-jquery-scrollTo');"));
@@ -332,7 +332,7 @@ class WPP_F extends UD_API {
             add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('google-maps');"));
           }
 
-          add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wpp-jquery-ui-mouse');"));
+          add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('jquery-ui-mouse');"));
         break;
 
         case 'overview':
@@ -1065,6 +1065,7 @@ class WPP_F extends UD_API {
       }
     }
 
+    $keys[] = 'post_author';
     $keys[] = 'post_title';
     $keys[] = 'post_date';
     $keys[] = 'post_id';
@@ -3123,8 +3124,20 @@ class WPP_F extends UD_API {
    * @param string/ $args
    *
   */
-  static function get_properties($args = "", $total = false) {
+  static function get_properties( $args = "", $total = false ) {
     global $wpdb, $wp_properties, $wpp_query;
+
+    $_query_keys = array();
+
+    /* Define keys that should not be used to query data */
+    $_system_keys = array(
+      'pagi',
+      'pagination',
+      'limit_query',
+      'starting_row',
+      'sort_by',
+      'sort_order'
+    );
 
     // Non post_meta fields
     $non_post_meta = array(
@@ -3134,49 +3147,43 @@ class WPP_F extends UD_API {
       'ID' => 'equal',
       'post_parent' => 'equal',
       'post_date'   => 'date'
-    );
+     );
 
-    /**
-     * Specific meta data can contain value with commas. E.g. location field ( address_attribute )
-     * The current list contains meta slugs which will be ignored for comma parsing. peshkov@UD
-     */
-    $commas_ignore = apply_filters( 'wpp::get_properties::commas_ignore', array_filter( array( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) ) );
-
-    $capture_sql_args = array('limit_query');
+    $capture_sql_args = array( 'limit_query' );
 
     //** added to avoid range and "LIKE" searches on single numeric values *
-    if(is_array($args)) {
-      foreach($args as $thing => $value) {
+    if( is_array( $args )) {
+      foreach( (array) $args as $thing => $value ) {
 
-        if(in_array($thing, $capture_sql_args)) {
+        if( in_array( $thing, (array) $capture_sql_args)) {
           $sql_args[$thing] = $value;
-          unset($args[$thing]);
+          unset( $args[$thing] );
           continue;
         }
 
         // unset empty filter options
-        if ( empty( $value ) ) {
-          unset($args[$thing]);
+        if( empty( $value ) ) {
+          unset( $args[$thing] );
           continue;
         }
 
-        if ( is_array( $value ) ) {
-          $value = implode(',', $value);
+        if( is_array( $value ) ) {
+          $value = implode( ',', $value );
         }
-        $value = trim($value);
+        $value = trim( $value );
 
         $original_value = $value;
 
         //** If not CSV and last character is a +, we look for open-ended ranges, i.e. bedrooms: 5+
-        if(substr($original_value, -1, 1) == '+' && !strpos($original_value, ',')) {
+        if( substr( $original_value, -1, 1 ) == '+' && !strpos( $original_value, ',' )) {
           //** User requesting an open ended range, we leave it off with a dash, i.e. 500- */
-          $args[$thing] = str_replace('+', '', $value) .'-';
-        } elseif(is_numeric($value)) {
+          $args[$thing] = str_replace( '+', '', $value ) .'-';
+        } elseif( is_numeric( $value )) {
           //** If number is numeric, we do a specific serach, i.e. 500-500 */
-          if ( !key_exists($thing, $non_post_meta) ) {
+          if( !array_key_exists( $thing, $non_post_meta ) ) {
             $args[$thing] = $value .'-'. $value;
           }
-        } elseif(is_string($value)) {
+        } elseif( is_string( $value )) {
           $args[$thing] = $value;
         }
       }
@@ -3187,105 +3194,98 @@ class WPP_F extends UD_API {
     );
 
     $query = wp_parse_args( $args, $defaults );
-    $query = (array)apply_filters('wpp_get_properties_query', $query);
-    $query_keys = array_keys($query);
+    $query = apply_filters( 'wpp_get_properties_query', $query );
+    $query_keys = array_keys( (array)$query );
 
-    // Search by non meta values
+    //** Search by non meta values */
     $additional_sql = '';
 
-    // Show 'publish' posts if status is not specified
-    if ( !key_exists( 'post_status', $query ) ) {
+    //** Show 'publish' posts if status is not specified */
+    if( !array_key_exists( 'post_status', $query ) ) {
       $additional_sql .= " AND p.post_status = 'publish' ";
     } else {
-      if ( $query['post_status'] != 'all' ) {
-        $additional_sql .= " AND p.post_status = '{$query['post_status']}' ";
+      if( $query[ 'post_status' ] != 'all' ) {
+        if( strpos( $query[ 'post_status' ], ',' ) === false ) {
+          $additional_sql .= " AND p.post_status = '{$query[ 'post_status' ]}' ";
+        } else {
+          $post_status = explode( ',', $query[ 'post_status' ] );
+          foreach ( $post_status as &$ps ) {
+            $ps = trim( $ps );
+          }
+          $additional_sql .= " AND p.post_status IN ( '" . implode( "','", $post_status ) . "') ";
+        }
+      }else{
+          $additional_sql .= " AND p.post_status <> 'auto-draft' ";
       }
-      unset($query['post_status']);
+      unset( $query[ 'post_status' ] );
     }
 
-    foreach( $non_post_meta as $field => $condition ) {
-      if ( key_exists( $field, $query ) ) {
-        if ( $condition == 'like' ) {
+    foreach( (array) $non_post_meta as $field => $condition ) {
+      if( array_key_exists( $field, $query ) ) {
+        if( $condition == 'like' ) {
           $additional_sql .= " AND p.$field LIKE '%{$query[ $field ]}%' ";
         }
-        if ( $condition == 'equal' ) {
+        if( $condition == 'equal' ) {
           $additional_sql .= " AND p.$field = '{$query[ $field ]}' ";
         }
-        if ( $condition == 'date' ) {
-          $date_cond = array();
-          $date_range = preg_split('~-~',$query[ $field ]);
-          foreach ($date_range as $range_part => $part_value){
-
-            if (preg_match('~(\d{4})(\d{2})?(\d{2})?~',$part_value,$matches)){
-              switch ($range_part){
-                case 0: $op_sing = ' >= '; break;
-                case 1: $op_sing = ' <= '; break;
-                default ; $op_sing = ' = '; break;
-              }
-              $date_cond[] = " ( p.$field $op_sing '{$matches[1]}-".((!empty($matches[2]))?$matches[2]:($range_part==0?'01':'12'))."-".((!empty($matches[3]))?$matches[3]:($range_part==0?'01':'31')). ($range_part==0?' 00:00':' 23:59') ."' ) ";
-            }
-          }
-          $additional_sql .= " AND ( ".implode(' AND ', $date_cond) ." ) ";
+        if( $condition == 'date' ) {
+          $additional_sql .= " AND YEAR( p.$field ) = ".substr( $query[ $field ], 0, 4 )." AND MONTH( p.$field ) = ".substr( $query[ $field ], 4, 2 )." ";
         }
         unset( $query[ $field ] );
       }
     }
 
-    if(!empty($sql_args['limit_query'])) {
-      $sql_args['starting_row'] = ($sql_args['starting_row'] ? $sql_args['starting_row'] : 0);
-      $limit_query = "LIMIT {$sql_args[starting_row]}, {$sql_args[limit_query]};";
+    if( !empty( $sql_args[ 'limit_query' ] )) {
+      $sql_args[ 'starting_row' ] = ( $sql_args[ 'starting_row' ] ? $sql_args[ 'starting_row' ] : 0 );
+      $limit_query = "LIMIT {$sql_args[ 'starting_row' ]}, {$sql_args[ 'limit_query' ]};";
 
-    } elseif (substr_count($query['pagi'], '--')) {
-      $pagi = explode('--', $query['pagi']);
-      if(count($pagi) == 2 && is_numeric($pagi[0]) && is_numeric($pagi[1])) {
+    } elseif( substr_count( $query[ 'pagi' ], '--' )) {
+      $pagi = explode( '--', $query[ 'pagi' ] );
+      if( count( $pagi ) == 2 && is_numeric( $pagi[0] ) && is_numeric( $pagi[1] )) {
         $limit_query = "LIMIT $pagi[0], $pagi[1];";
       }
     }
 
-
     /** Handles the sort_by parameter in the Short Code */
-    if( $query['sort_by'] ) {
-      $sql_sort_by = $query['sort_by'];
-      $sql_sort_order = ($query['sort_order']) ? strtoupper($query['sort_order']) : 'ASC';
+    if( $query[ 'sort_by' ] ) {
+      $sql_sort_by = $query[ 'sort_by' ];
+      $sql_sort_order = ( $query[ 'sort_order' ] ) ? strtoupper( $query[ 'sort_order' ] ) : 'ASC';
     } else {
       $sql_sort_by = 'post_date';
       $sql_sort_order = 'ASC';
     }
 
     //** Unsert arguments that will conflict with attribute query */
-    unset( $query['pagi'] );
-    unset( $query['pagination'] );
-    unset( $query['limit_query'] );
-    unset( $query['starting_row'] );
-    unset( $query['sort_by'] );
-    unset( $query['sort_order'] );
+    foreach( (array) $_system_keys as $system_key ) {
+      unset( $query[ $system_key ] );
+    }
 
     // Go down the array list narrowing down matching properties
-    foreach ($query as $meta_key => $criteria) {
+    foreach( (array) $query as $meta_key => $criteria ) {
 
       $specific = '';
-      $criteria = WPP_F::encode_mysql_input( $criteria, $meta_key);
+      $criteria = WPP_F::encode_mysql_input( $criteria, $meta_key );
 
-      // Stop filtering (loop) because no IDs left
-      if (isset($matching_ids) && empty($matching_ids)) {
+      // Stop filtering ( loop ) because no IDs left
+      if( isset( $matching_ids ) && empty( $matching_ids )) {
         break;
       }
 
-      if ( !in_array( $meta_key, (array)$commas_ignore ) && substr_count($criteria, ',') || substr_count($criteria, '&ndash;') || substr_count($criteria, '--')) {
-        if (substr_count($criteria, ',') && !substr_count($criteria, '&ndash;')) {
-          $comma_and = explode(',', $criteria);
+      if( substr_count( $criteria, ',' ) || substr_count( $criteria, '&ndash;' ) || substr_count( $criteria, '--' )) {
+        if( substr_count( $criteria, ',' ) && !substr_count( $criteria, '&ndash;' )) {
+          $comma_and = explode( ',', $criteria );
         }
-        if (substr_count($criteria, '&ndash;') && !substr_count($criteria, ',')) {
-          $cr = explode('&ndash;', $criteria);
+        if( substr_count( $criteria, '&ndash;' ) && !substr_count( $criteria, ',' )) {
+          $cr = explode( '&ndash;', $criteria );
 
-          // Check pieces of criteria. Array should contains 2 integer's elements
+          // Check pieces of criteria. Array should contains 2 int's elements
           // In other way, it's just value of meta_key
-          if(count($cr) > 2 || ((int)$cr[0] == 0 && (int)$cr[1] == 0)) {
+          if( count( $cr ) > 2 || ( (int )$cr[0] == 0 && ( int )$cr[1] == 0)) {
             $specific = $criteria;
           } else {
             $hyphen_between = $cr;
             // If min value doesn't exist, set 1
-            if(empty($hyphen_between[0])) {
+            if( empty( $hyphen_between[0] )) {
               $hyphen_between[0] = 1;
             }
           }
@@ -3294,40 +3294,40 @@ class WPP_F extends UD_API {
         $specific = $criteria;
       }
 
-      if (!$limit_query) {
+      if( !$limit_query ) {
         $limit_query = '';
       }
 
-      switch ($meta_key) {
+      switch ( $meta_key ) {
 
         case 'property_type':
 
           // Get all property types
-          if ($specific == 'all') {
-            if (isset($matching_ids)) {
-              $matching_id_filter = implode("' OR ID ='", $matching_ids);
-              $matching_ids = $wpdb->get_col("SELECT ID FROM {$wpdb->posts} WHERE (ID ='$matching_id_filter') AND post_type = 'property'");
+          if( $specific == 'all' ) {
+            if( isset( $matching_ids )) {
+              $matching_id_filter = implode( "' OR ID ='", $matching_ids );
+              $matching_ids = $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE (ID ='$matching_id_filter' ) AND post_type = 'property'");
             } else {
-              $matching_ids = $wpdb->get_col("SELECT ID FROM {$wpdb->posts} WHERE post_type = 'property'");
+              $matching_ids = $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'property'" );
             }
             break;
           }
 
           //** If comma_and is set, $criteria is ignored, otherwise $criteria is used */
-          $property_type_array = is_array($comma_and) ? $comma_and : array($specific);
+          $property_type_array = is_array( $comma_and ) ? $comma_and : array( $specific );
 
           //** Make sure property type is in slug format */
-          foreach($property_type_array as $key => $this_property_type) {
-            foreach($wp_properties['property_types'] as $pt_key => $pt_value) {
-              if(strtolower($pt_value) == strtolower($this_property_type)) {
+          foreach( $property_type_array as $key => $this_property_type ) {
+            foreach( (array) $wp_properties[ 'property_types' ] as $pt_key => $pt_value) {
+              if( strtolower( $pt_value ) == strtolower( $this_property_type )) {
                 $property_type_array[$key] = $pt_key;
               }
             }
           }
 
-          if ( $comma_and ) {
+          if( $comma_and ) {
             //** Multiple types passed */
-            $where_string = implode("' OR meta_value ='", $property_type_array);
+            $where_string = implode( "' OR meta_value ='", $property_type_array );
           } else {
             //** Only on type passed */
             $where_string = $property_type_array[0];
@@ -3335,56 +3335,61 @@ class WPP_F extends UD_API {
 
 
           // See if mathinc_ids have already been filtered down
-          if ( isset($matching_ids) ) {
-            $matching_id_filter = implode("' OR post_id ='", $matching_ids);
-            $matching_ids = $wpdb->get_col("SELECT post_id FROM {$wpdb->prefix}postmeta WHERE (post_id ='$matching_id_filter') AND (meta_key = 'property_type' AND (meta_value ='$where_string'))");
+          if( isset( $matching_ids ) ) {
+            $matching_id_filter = implode( "' OR post_id ='", $matching_ids );
+            $matching_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE (post_id ='$matching_id_filter' ) AND ( meta_key = 'property_type' AND (meta_value ='$where_string' ))");
           } else {
-            $matching_ids = $wpdb->get_col("SELECT post_id FROM {$wpdb->prefix}postmeta WHERE (meta_key = 'property_type' AND (meta_value ='$where_string'))");
+            $matching_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE (meta_key = 'property_type' AND (meta_value ='$where_string' ))");
           }
 
         break;
 
+        case apply_filters( 'wpp::get_properties::custom_case', false, $meta_key ):
+
+          $matching_ids = apply_filters( 'wpp::get_properties::custom_key', $matching_ids, $meta_key, $criteria );
+
+          break;
+
         default:
 
           // Get all properties for that meta_key
-          if ($specific == 'all' && !$comma_and && !$hyphen_between) {
+          if( $specific == 'all' && !$comma_and && !$hyphen_between ) {
 
-            if (isset($matching_ids)) {
-              $matching_id_filter = implode("' OR post_id ='", $matching_ids);
-              $matching_ids = $wpdb->get_col("SELECT post_id FROM {$wpdb->prefix}postmeta WHERE (post_id ='$matching_id_filter') AND (meta_key = '$meta_key')");
-              //$wpdb->print_error();
+            if( isset( $matching_ids )) {
+              $matching_id_filter = implode( "' OR post_id ='", $matching_ids );
+              $matching_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE (post_id ='$matching_id_filter' ) AND ( meta_key = '$meta_key' )");
             } else {
-              $matching_ids = $wpdb->get_col("SELECT post_id FROM {$wpdb->prefix}postmeta WHERE (meta_key = '$meta_key')");
+              $matching_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE (meta_key = '$meta_key' )");
             }
             break;
 
           } else {
 
-            if ( $comma_and ) {
-              $where_and = "(meta_value ='" . implode("' OR meta_value ='", $comma_and)."')";
+            if( $comma_and ) {
+              $where_and = "( meta_value ='" . implode("' OR meta_value ='", $comma_and )."')";
               $specific = $where_and;
             }
 
-            if ( $hyphen_between ) {
+            if( $hyphen_between ) {
               // We are going to see if we are looking at some sort of date, in which case we have a special MySQL modifier
               $adate = false;
-              if(preg_match('%\d{1,2}/\d{1,2}/\d{4}%i', $hyphen_between[0])) $adate = true;
+              if( preg_match( '%\\d{1,2}/\\d{1,2}/\\d{4}%i', $hyphen_between[0] )) $adate = true;
 
-              if(!empty($hyphen_between[1])) {
+              if( !empty( $hyphen_between[1] )) {
 
-                if(preg_match('%\d{1,2}/\d{1,2}/\d{4}%i', $hyphen_between[1])){
-                  foreach($hyphen_between as $key => $value) {
-                    $hyphen_between[$key] = "STR_TO_DATE('{$value}', '%c/%e/%Y')";
+                if( preg_match( '%\\d{1,2}/\\d{1,2}/\\d{4}%i', $hyphen_between[1] )){
+                  foreach( $hyphen_between as $key => $value ) {
+                    $hyphen_between[$key] = "STR_TO_DATE( '{$value}', '%c/%e/%Y' )";
                   }
-                  $where_between = "STR_TO_DATE(`meta_value`, '%c/%e/%Y') BETWEEN " . implode(" AND ", $hyphen_between)."";
+                  $where_between = "STR_TO_DATE( `meta_value`, '%c/%e/%Y' ) BETWEEN " . implode( " AND ", $hyphen_between )."";
                 } else {
-                  $where_between = "`meta_value` BETWEEN " . implode(" AND ", $hyphen_between)."";
+                  $where_between = "`meta_value` BETWEEN " . implode( " AND ", $hyphen_between )."";
                 }
 
               } else {
 
-                if($adate) {
-                  $where_between = "STR_TO_DATE(`meta_value`, '%c/%e/%Y') >= STR_TO_DATE('{$hyphen_between[0]}', '%c/%e/%Y')";
+                if( $adate ) {
+                  $where_between = "STR_TO_DATE( `meta_value`, '%c/%e/%Y' ) >= STR_TO_DATE( '{$hyphen_between[0]}', '%c/%e/%Y' )";
                 } else {
                   $where_between = "`meta_value` >= $hyphen_between[0]";
                 }
@@ -3393,30 +3398,46 @@ class WPP_F extends UD_API {
               $specific = $where_between;
             }
 
-            if ($specific == 'true') {
+            if( $specific == 'true' ) {
               // If properties data were imported, meta value can be '1' instead of 'true'
               // So we're trying to find also '1'
-              $specific = "meta_value IN ('true', '1')";
-            } elseif(!substr_count($specific, 'meta_value')) {
+              $specific = "meta_value IN ( 'true', '1' )";
+            } elseif( !substr_count( $specific, 'meta_value' )) {
               // Adds conditions for Searching by partial value
-              $s = explode(' ', trim($specific));
+              $s = explode( ' ', trim( $specific ));
               $specific = '';
               $count = 0;
-              foreach($s as $p) {
-                if($count > 0) {
+              foreach( $s as $p ) {
+                if( $count > 0 ) {
                   $specific .= " AND ";
                 }
-                $specific .= "meta_value LIKE '%{$p}%'";
+                //** Determine if we need use LIKE in SQL query */
+                preg_match( "/^#(.+)#$/", $p, $matches );
+                if( $matches ) {
+                  $specific .= "meta_value = '{$matches[1]}'";
+                } else {
+                  $specific .= "meta_value LIKE '%{$p}%'";
+                }
                 $count++;
               }
             }
 
-            if (isset($matching_ids)) {
-              $matching_id_filter = implode(",", $matching_ids);
-              $matching_ids = $wpdb->get_col("SELECT post_id FROM {$wpdb->prefix}postmeta WHERE post_id IN ($matching_id_filter) AND meta_key = '$meta_key' AND $specific");
+            if( isset( $matching_ids )) {
+              $matching_id_filter = implode( ",", $matching_ids );
+              $sql_query = "SELECT post_id FROM {$wpdb->postmeta} WHERE post_id IN ( $matching_id_filter ) AND meta_key = '$meta_key' AND $specific";
             } else {
-              $matching_ids = $wpdb->get_col("SELECT post_id FROM {$wpdb->prefix}postmeta WHERE meta_key = '$meta_key' AND $specific $sql_order");
+              $sql_query = "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '$meta_key' AND $specific";
             }
+
+            //** Some specific additional conditions can be set in filters */
+            $sql_query = apply_filters( 'wpp::get_properties::meta_key::sql_query', $sql_query, array(
+              'meta_key' => $meta_key,
+              'specific' => $specific,
+              'matching_id_filter' => isset( $matching_id_filter ) ? $matching_id_filter : false,
+              'criteria' => $criteria,
+            ) );
+
+            $matching_ids = $wpdb->get_col( $sql_query );
 
           }
           break;
@@ -3426,12 +3447,10 @@ class WPP_F extends UD_API {
       unset( $comma_and );
       unset( $hyphen_between );
 
-
     } // END foreach
 
-
     // Return false, if there are any result using filter conditions
-    if (empty($matching_ids)) {
+    if( empty( $matching_ids )) {
       return false;
     }
 
@@ -3439,15 +3458,14 @@ class WPP_F extends UD_API {
     $matching_ids = array_unique( $matching_ids );
 
     // Sorts the returned Properties by the selected sort order
-    if ($sql_sort_by &&
+    if( $sql_sort_by &&
         $sql_sort_by != 'menu_order' &&
         $sql_sort_by != 'post_date' &&
-        $sql_sort_by != 'post_title' ) {
-
+        $sql_sort_by != 'post_title'  ) {
 
       //** Sorts properties in random order. */
       if( $sql_sort_by === 'random' ) {
-        
+
         $result = $wpdb->get_col("
           SELECT ID FROM {$wpdb->posts } AS p
           WHERE ID IN (" . implode(",", $matching_ids) . ")
@@ -3458,15 +3476,16 @@ class WPP_F extends UD_API {
       } else {
 
         //** Determine if all values of meta_key are numbers we use CAST in SQL query to avoid sort issues */
-        if( self::meta_has_number_data_type ( $matching_ids, $sql_sort_by ) ) {
-          $meta_value = "CAST(meta_value AS DECIMAL(20,3))";
+        if( self::meta_has_number_data_type( $matching_ids, $sql_sort_by )) {
+          $meta_value = "CAST( meta_value AS DECIMAL(20,3 ))";
         } else {
           $meta_value = "meta_value";
         }
-        $result = $wpdb->get_col("
-          SELECT p.ID , (SELECT pm.meta_value FROM {$wpdb->postmeta} AS pm WHERE pm.post_id = p.ID AND pm.meta_key = '{$sql_sort_by}') as meta_value
+
+        $result = $wpdb->get_col( "
+          SELECT p.ID , (SELECT pm.meta_value FROM {$wpdb->postmeta} AS pm WHERE pm.post_id = p.ID AND pm.meta_key = '{$sql_sort_by}' LIMIT 1 ) as meta_value
             FROM {$wpdb->posts} AS p
-            WHERE p.ID IN (" . implode(",", $matching_ids) . ")
+            WHERE p.ID IN ( " . implode(",", $matching_ids ) . ")
             {$additional_sql}
             ORDER BY {$meta_value} {$sql_sort_order}
             {$limit_query}");
@@ -3475,9 +3494,9 @@ class WPP_F extends UD_API {
 
     } else {
 
-      $result = $wpdb->get_col("
+      $result = $wpdb->get_col( "
         SELECT ID FROM {$wpdb->posts } AS p
-        WHERE ID IN (" . implode(",", $matching_ids) . ")
+        WHERE ID IN (" . implode(",", $matching_ids ) . ")
         $additional_sql
         ORDER BY $sql_sort_by $sql_sort_order
         $limit_query");
@@ -3485,18 +3504,19 @@ class WPP_F extends UD_API {
     }
 
     // Stores the total Properties returned
-    if ($total) {
-      $total = count($wpdb->get_col("
-        SELECT p.ID FROM {$wpdb->posts} AS p
-          WHERE p.ID IN (" . implode(",", $matching_ids) . ")
+    if( $total ) {
+      $total = count( $wpdb->get_col("
+        SELECT p.ID
+          FROM {$wpdb->posts} AS p
+          WHERE p.ID IN (" . implode(",", $matching_ids ) . ")
           {$additional_sql}"));
     }
 
     if( !empty( $result ) ) {
       $return = array();
-      if(!empty($total)) {
-        $return['total'] = $total;
-        $return['results'] = $result;
+      if( !empty( $total )) {
+        $return[ 'total' ] = $total;
+        $return[ 'results' ] = $result;
       } else {
         $return = $result;
       }
@@ -3505,6 +3525,7 @@ class WPP_F extends UD_API {
     }
 
     return false;
+
   }
 
 
@@ -3632,14 +3653,14 @@ class WPP_F extends UD_API {
 /**
    * Load property information into an array or an object
    *
-    * @version 1.11 Added support for multiple meta values for a given key
-    *
-    * @since 1.11
+   * @version 1.11 Added support for multiple meta values for a given key
+   *
+   * @since 1.11
    * @version 1.14 - fixed problem with drafts
    * @todo Code pertaining to displaying data should be migrated to prepare_property_for_display() like :$real_value = nl2br($real_value);
    * @todo Fix the long dashes - when in latitude or longitude it breaks it when using static map
    *
-    */
+   */
   static function get_property($id, $args = false) {
     global $wp_properties, $wpdb;
 
@@ -3727,6 +3748,7 @@ class WPP_F extends UD_API {
      * Figure out what the thumbnail is, and load all sizes
      */
     if($load_thumbnail == 'true') {
+
       $wp_image_sizes = get_intermediate_image_sizes();
 
       $thumbnail_id = get_post_meta( $id, '_thumbnail_id', true );
@@ -3764,7 +3786,6 @@ class WPP_F extends UD_API {
 
     }
 
-
    /*
     *
     * Load all attached images and their sizes
@@ -3799,7 +3820,7 @@ class WPP_F extends UD_API {
 
       $return['is_child'] = true;
 
-      $parent_object = WPP_F::get_property($post['post_parent'], "get_children=false");
+      $parent_object = WPP_F::get_property($post['post_parent'], array('load_gallery' => $load_gallery, 'get_children' => false));
 
       $return['parent_id'] = $post['post_parent'];
       $return['parent_link'] = $parent_object['permalink'];
@@ -3831,7 +3852,7 @@ class WPP_F extends UD_API {
         //** Cycle through children and get necessary variables */
         foreach($children as $child_id) {
 
-          $child_object = WPP_F::get_property($child_id, "load_parent=false");
+          $child_object = WPP_F::get_property($child_id, array('load_gallery' => $load_gallery, 'load_parent' => false));
           $return['children'][$child_id] = $child_object;
 
           //** Save child image URLs into one array for quick access */
@@ -4077,7 +4098,7 @@ class WPP_F extends UD_API {
     foreach($property_stats as $slug => $label) {
 
       // Determine if it's frontend and the attribute is hidden for frontend
-      if(!is_admin() && in_array($slug, (array)$wp_properties['hidden_frontend_attributes'])) {
+      if(!is_admin() && in_array( $slug, (array)$wp_properties['hidden_frontend_attributes'] ) && !current_user_can( 'manage_options' ) ) {
         continue;
       }
 
@@ -5268,53 +5289,84 @@ class WPP_F extends UD_API {
    * @source WPP_F
    *
    */
-  function base_url($page = '') {
+  static function base_url( $page = '', $get = '' ) {
     global $wpdb,  $wp_properties;
 
-    $permalink = get_option('permalink_structure');
+    $permalink = '';
+    $permalink_structure = get_option( 'permalink_structure' );
 
-    // Using Permalinks
-    if ( '' != $permalink) {
-
-      if(!is_numeric($page)) {
-        $page = $wpdb->get_var("SELECT ID FROM {$wpdb->prefix}posts where post_name = '$page'");
+    //** Using Permalinks */
+    if( '' != $permalink_structure ) {
+      $page_id = false;
+      if( !is_numeric( $page ) ) {
+        $page_id = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} where post_name = %s", $page ) );
+      } else {
+        $page_id = $page;
       }
-
-      // If the page doesn't exist, return default url (base_slug)
-      if(empty($page)) {
-        return site_url() . "/" . $wp_properties['configuration']['base_slug'] . '/';
+      //** If the page doesn't exist, return default url ( base_slug ) */
+      if( empty( $page_id ) ) {
+        $permalink = site_url() . "/" . ( !is_numeric( $page ) ? $page : $wp_properties['configuration' ][ 'base_slug' ] ) . '/';
+      } else {
+        $permalink = get_permalink( $page_id );
       }
+    }
 
-      return get_permalink($page);
-
-    } else {
-      // Not using permalinks
-
-      // If a slug is passed, convert it into ID
-      if(!is_numeric($page)) {
-        $page_id = $wpdb->get_var("SELECT ID FROM {$wpdb->prefix}posts where post_name = '$page' AND post_status = 'publish' AND post_type = 'page'");
-
-        // In case no actual page_id was found, we continue using non-numeric $page, it may be 'property'
-        if(!$page_id)
+    //** Not using permalinks */
+    else {
+      //** If a slug is passed, convert it into ID */
+      if( !is_numeric( $page ) ) {
+        $page_id = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} where post_name = %s AND post_status = 'publish' AND post_type = 'page'", $page ) );
+        //* In case no actual page_id was found, we continue using non-numeric $page, it may be 'property' */
+        if( !$page_id ) {
           $query = '?p=' . $page;
-        else
+        } else {
           $query = '?page_id=' . $page_id;
-
+        }
       } else {
         $page_id = $page;
         $query = '?page_id=' . $page_id;
       }
+      $permalink = home_url( $query );
+    }
 
-    $permalink = home_url($query);
-
+    //** Now set GET params */
+    if( !empty( $get ) ) {
+      $get = wp_parse_args( $get );
+      $get = http_build_query( $get, '', '&' );
+      $permalink .= ( strpos( $permalink, '?' ) === false ) ? '?' : '&';
+      $permalink .= $get;
     }
 
     return $permalink;
 
   }
 
-
-
+  /**
+   * Returns clear post status
+   *
+   * @author peshkov@UD
+   * @version 0.1
+   */
+  static function clear_post_status( $post_status = '', $ucfirst = true ) {
+    switch ( $post_status ) {
+      case 'publish':
+        $post_status = __( 'published','wpp' );
+        break;
+      case 'pending':
+        $post_status = __( 'pending','wpp' );
+        break;
+      case 'trash':
+        $post_status = __( 'trashed','wpp' );
+        break;
+      case 'inherit':
+        $post_status = __( 'inherited','wpp' );
+        break;
+      case 'auto-draft':
+        $post_status = __( 'drafted','wpp' );
+        break;
+    }
+    return ( $ucfirst ? ucfirst( $post_status ) : $post_status );
+  }
 
 }
 

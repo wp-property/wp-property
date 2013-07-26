@@ -62,7 +62,7 @@ msgstr "Condizioni contrattuali"
 
 #: ../action_hooks.php:87
 msgid "Pet Policy"
-msgstr "Policy Animali"
+msgstr "Polizza Animali"
 
 #: ../action_hooks.php:88
 msgid "School"
@@ -70,7 +70,7 @@ msgstr "Scuola"
 
 #: ../action_hooks.php:89 ../core/premium/class_wpp_pdf_flyer.php:1111
 msgid "Tagline"
-msgstr "Descrizione breve immobile"
+msgstr "Breve descrizione immobile"
 
 #: ../action_hooks.php:136
 msgid "Studio"
@@ -113,15 +113,15 @@ msgstr "Annulla"
 
 #: ../action_hooks.php:200
 msgid "Failed"
-msgstr ""
+msgstr "Fallito"
 
 #: ../default_api.php:22
 msgid "Sorry, invalid request."
-msgstr ""
+msgstr "Spiacenti, paramento invalido"
 
 #: ../default_api.php:242 ../core/premium/class_wpp_power_tools.php:361
 msgid "View "
-msgstr ""
+msgstr "Vedi"
 
 #: ../default_api.php:356 ../core/class_widgets.php:706
 #: ../core/class_widgets.php:816 ../core/class_widgets.php:957
@@ -156,15 +156,15 @@ msgstr "Proprietà in vendita."
 
 #: ../default_api.php:513
 msgid "Set Coordinates Manually."
-msgstr ""
+msgstr "Inserisci l'indirizzo manualmente"
 
 #: ../default_api.php:518 ../core/premium/class_wpp_property_import.php:2281
 msgid "Latitude"
-msgstr ""
+msgstr "latitudine"
 
 #: ../default_api.php:523 ../core/premium/class_wpp_property_import.php:2282
 msgid "Longitude"
-msgstr ""
+msgstr "Longitudine"
 
 #: ../default_api.php:653 ../default_api.php:659
 #: ../core/class_functions.php:2910 ../core/class_functions.php:4265
@@ -178,7 +178,7 @@ msgstr "Si"
 #: ../default_api.php:694
 #, fuzzy
 msgid "Format phone number."
-msgstr "Numero di telefono di default"
+msgstr "Numero di telefono di base"
 
 #: ../default_api.php:706
 msgid "Convert \"Yes\" and \"True\" values to checked icons on the front-end."
@@ -218,7 +218,7 @@ msgstr "Impostazioni"
 
 #: ../core/class_core.php:698
 msgid "Menu Sort Order:"
-msgstr ""
+msgstr "Menu Ordinato Per:"
 
 #: ../core/class_core.php:701
 #, fuzzy
@@ -332,7 +332,7 @@ msgstr "Informazioni generali"
 
 #: ../core/class_core.php:1056
 msgid "NO NAME"
-msgstr ""
+msgstr "Senza Nome"
 
 #: ../core/class_core.php:1062 ../templates/template-functions.php:1393
 msgid "Search"
@@ -344,7 +344,7 @@ msgstr "Piano terra "
 
 #: ../core/class_core.php:1277
 msgid "Sort By:"
-msgstr ""
+msgstr "Ordinato per"
 
 #: ../core/class_core.php:1758 ../core/class_functions.php:256
 msgid "Edit Property"
@@ -387,7 +387,7 @@ msgstr "Impostazioni generali"
 
 #: ../core/class_core.php:1768
 msgid "Manage Categories"
-msgstr ""
+msgstr "Modifica Categorie"
 
 #: ../core/class_core.php:1820
 #, fuzzy
@@ -414,7 +414,7 @@ msgstr ""
 
 #: ../core/class_core.php:1829
 msgid "Please upgrade Wordpress to the latest version for detailed help."
-msgstr ""
+msgstr "Prego, aggiorna il cms all'ultima versione"
 
 #: ../core/class_core.php:1829
 msgid ""
@@ -999,7 +999,7 @@ msgstr ""
 #: ../core/class_widgets.php:204
 #, php-format
 msgid "Other %1s"
-msgstr ""
+msgstr "Altro %1s"
 
 #: ../core/class_widgets.php:206
 #, php-format
@@ -1017,7 +1017,7 @@ msgstr "%s a %s per %s"
 #: ../core/class_widgets.php:318 ../core/class_widgets.php:540
 #: ../core/class_widgets.php:773 ../core/class_widgets.php:1017
 msgid "More"
-msgstr ""
+msgstr "Vedi"
 
 #: ../core/class_widgets.php:331 ../core/class_widgets.php:548
 #: ../core/class_widgets.php:780 ../core/class_widgets.php:1026
@@ -4102,7 +4102,7 @@ msgstr "Tipologia di immobile"
 #: ../core/premium/class_wpp_property_import.php:3855
 #, fuzzy
 msgid "Sort by:"
-msgstr "Ricercabile"
+msgstr "Ordinato per"
 
 #: ../core/premium/class_wpp_property_import.php:3856
 msgid "Last Run"
@@ -5266,7 +5266,7 @@ msgstr ""
 #: ../templates/template-functions.php:1058
 #, fuzzy
 msgid "Other"
-msgstr "Ordine"
+msgstr "Altro"
 
 #: ../templates/template-functions.php:1641
 msgid "Website"

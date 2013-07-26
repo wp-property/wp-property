@@ -528,17 +528,16 @@ body.property_page_show_agents .wp-list-table .column-id {
     word-wrap: break-word; /* IE 5.5+ */
  }
 
-.wpp_attribute_name_col input.slug {
-    width: 96%;
+.wpp_attribute_name_col input {
+    width: 226px;
 }
 
 .wpp_attribute_name_col input.slug_setter {
     font-size: 1.1em;
-    width: 96%;
 }
 
-#wpp_inquiry_attribute_fields .wpp_attribute_name_col {
-  width: 150px;
+#wpp_inquiry_attribute_fields .wpp_attribute_name {
+  width: 240px;
 }
 
 
@@ -548,7 +547,7 @@ body.property_page_show_agents .wp-list-table .column-id {
 }
 
 #wpp_inquiry_attribute_fields .wpp_settings_input_col {
-  width: 120px;
+  width: 150px;
 }
 
 .wpp_search_input_col select,
@@ -1412,3 +1411,53 @@ p.pad10 {
 }
 
 .wpp_fb_like{margin:6px 0 0 10px; display: inline;}
+
+
+#wpp_facebook_canvases input[type="text"],
+#wpp_facebook_canvases select {
+  width: 250px;
+}
+#wpp_facebook_canvases .wpp_fb_canvas_urls input {
+  width: 100%;
+}
+#wpp_facebook_canvases .wpp_fb_page_message {
+  color: #FF6363;
+  font-size: 0.8em;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  color: #FF6363;
+  line-height: 12px;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-top: 5px;
+  padding: 8px;
+  border: 1px solid #FFD3D3;
+  background: none repeat scroll 0 0 #FFEDED;
+  text-shadow:1px 1px 1px #FFFFFF;
+  -webkit-text-shadow:1px 1px 1px #FFFFFF;
+  -moz-text-shadow:1px 1px 1px #FFFFFF;
+  display: none;
+}
+.wpp_fb_tabs_found_properies {
+  position:absolute;
+  margin-left: 32px;
+  background: #fff;
+  border: 1px solid #ccc;
+  overflow-y: scroll;
+  height: 200px;
+  -moz-border-radius: 3px; /* Firefox */
+  -webkit-border-radius: 3px; /* Safari, Chrome */
+  border-radius: 3px; /* CSS3 */
+  -webkit-box-shadow: 0px 1px 3px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    0px 1px 3px rgba(50, 50, 50, 0.75);
+  box-shadow:         0px 1px 3px rgba(50, 50, 50, 0.75);
+}
+.wpp_fb_tabs_found_properies li {
+  margin: 0;
+  padding: 5px;
+  border-bottom: 1px solid #e8e8e8;
+}
+.wpp_fb_canvas_options_list {
+  margin-top: 5px !important;
+}

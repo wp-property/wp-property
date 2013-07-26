@@ -265,7 +265,7 @@ var updateRowNames = function(instance, allowRandomSlug) {
   var old_slug = jQuery(this_row).attr('slug');
   // Get data from input.slug_setter
   var new_slug = jQuery(instance).val();
-  
+
   // Convert into slug
   new_slug = wpp_create_slug(new_slug);
 
@@ -305,19 +305,19 @@ var updateRowNames = function(instance, allowRandomSlug) {
     var old_name = jQuery(e).attr('name');
     if (typeof old_name != 'undefined' && !jQuery(e).hasClass('wpp_no_change_name')) {
       var new_name =  old_name.replace('['+old_slug+']','['+new_slug+']');
-      if(jQuery(e).attr('id')) {
-        var old_id = jQuery(e).attr('id');
-        var new_id =  old_id.replace('['+old_slug+']','['+new_slug+']');
-      }
       // Update to new name
       jQuery(e).attr('name', new_name);
+    }
+    var old_id = jQuery(e).attr('id');
+    if( typeof old_id != 'undefined' ) {
+      var new_id =  old_id.replace( old_slug, new_slug );
       jQuery(e).attr('id', new_id);
     }
   });
 
   // Cycle through labels too
   jQuery('label', this_row).each(function(i,e) {
-    if(jQuery(e).attr('id')) {
+    if( typeof jQuery(e).attr('for') != 'undefined' ) {
       var old_for = jQuery(e).attr('for');
       var new_for =  old_for.replace(old_slug,new_slug);
       // Update to new name
@@ -496,6 +496,7 @@ function wpp_add_row(element) {
   } else if (allow_random_slug) {
     //* Update Row names */
     var slug_setter = jQuery("input.slug_setter", cloned);
+    jQuery(slug_setter).attr('value', '');
     if(slug_setter.length > 0) {
       updateRowNames(slug_setter.get(0), true);
     }
@@ -701,6 +702,8 @@ jQuery(document).ready(function() {
     if(row_count > 1) {
       jQuery(parent).hide();
       jQuery(parent).remove();
+    } else {
+      jQuery(parent).attr( 'new_row', 'true' );
     }
 
     table.trigger('row_removed', [parent]);

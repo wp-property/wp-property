@@ -1,8 +1,9 @@
 <?php
 /**
- * Template Name: Default
+ * Template Name: Default Page
+ * Type: page
  */
-?>
+?><!DOCTYPE html>
 <html>
   <head>
 <?php wp_head(); ?>

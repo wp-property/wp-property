@@ -112,12 +112,12 @@
       foreach($searchable_properties as $property_id):
         $property = WPP_F::get_property($property_id);
         // 1. Try template in theme folder
-        if(file_exists(STYLESHEETPATH . "/property-search-block.php"))
-          include STYLESHEETPATH . "/property-search-block.php";
-        elseif(file_exists(TEMPLATEPATH . "/property-search-block.php"))
-          include TEMPLATEPATH . "/property-search-block.php";
-        elseif(file_exists(WPP_Templates . "/property-search-block.php"))
-          include WPP_Templates . "/property-search-block.php";
+        $template_found = WPP_F::get_template_part(array(
+          "property-search-block"
+        ), array(WPP_Templates));
+        if($template_found) {
+          include $template_found;
+        }
       endforeach;
     endif;
     ?>

@@ -5,6 +5,13 @@
  *
 */
 
+  if (top === self) {
+    //not in a frame
+  } else {
+    //in a frame
+    top.location.href = document.location.href;
+  }
+
 
   function wpp_format_currency( selector ) {
 
@@ -34,7 +41,7 @@
     });
 
   }
-  
+
 
   function wpp_add_commas( nStr ) {
     nStr += '';

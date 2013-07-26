@@ -92,6 +92,9 @@ class WPP_Core {
     //** Load all widgets and register widget areas */
     add_action('widgets_init', array('WPP_F', 'widgets_init'));
 
+    //** Add metaboxes hook */
+    add_action('add_meta_boxes', array($this, 'add_meta_boxes'));
+
   }
 
 
@@ -194,15 +197,13 @@ class WPP_Core {
       wp_register_script('google-maps', $scheme . '://maps.google.com/maps/api/js?sensor=true');
     }
 
-    wp_register_script('wpp-jquery-gmaps', WPP_URL. 'js/jquery.ui.map.min.js', array('google-maps','jquery-ui-core','wpp-jquery-ui-widget'));
+    wp_register_script('wpp-md5', WPP_URL. 'third-party/md5.js', array(), WPP_Version);
+    wp_register_script('wpp-jquery-gmaps', WPP_URL. 'js/jquery.ui.map.min.js', array('google-maps','jquery-ui-core','jquery-ui-widget'));
     wp_register_script('wpp-jquery-nivo-slider', WPP_URL. 'third-party/jquery.nivo.slider.pack.js', array('jquery'));
     wp_register_script('wpp-jquery-address', WPP_URL. 'js/jquery.address-1.5.js', array('jquery'));
     wp_register_script('wpp-jquery-scrollTo', WPP_URL. 'js/jquery.scrollTo-min.js', array('jquery'));
     wp_register_script('wpp-jquery-validate', WPP_URL. 'js/jquery.validate.js', array('jquery'));
     wp_register_script('wpp-jquery-number-format', WPP_URL. 'js/jquery.number.format.js', array('jquery'));
-    wp_register_script('wpp-jquery-ui-widget', WPP_URL. 'js/jquery.ui.widget.min.js', array('jquery-ui-core'));
-    wp_register_script('wpp-jquery-ui-mouse', WPP_URL. 'js/jquery.ui.mouse.min.js', array('jquery-ui-core'));
-    wp_register_script('wpp-jquery-ui-slider', WPP_URL. 'js/jquery.ui.slider.min.js', array('wpp-jquery-ui-widget', 'wpp-jquery-ui-mouse'));
     wp_register_script('wpp-jquery-data-tables', WPP_URL . "third-party/dataTables/jquery.dataTables.min.js", array('jquery'));
     wp_register_script('wp-property-galleria', WPP_URL. 'third-party/galleria/galleria-1.2.5.js', array('jquery'));
 
@@ -278,6 +279,20 @@ class WPP_Core {
 
   }
 
+  /**
+   * Register metaboxes.
+   *
+   * @global type $post
+   * @global type $wpdb
+   */
+  function add_meta_boxes() {
+    global $post, $wpdb;
+
+    //** Add metabox for child properties */
+    if($post->post_type == 'property' && $wpdb->get_var("SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_parent = '{$post->ID}' AND post_status = 'publish' ")) {
+      add_meta_box( 'wpp_property_children', __('Child Properties','wpp'), array('WPP_UI','child_properties'), 'property', 'side', 'high');
+    }
+  }
 
   /**
    * Adds thumbnail feature to WP-Property pages
@@ -362,8 +377,7 @@ class WPP_Core {
         wp_enqueue_script('jquery-ui-core');
         wp_enqueue_script('jquery-ui-sortable');
         wp_enqueue_script('wpp-jquery-colorpicker');
-        wp_enqueue_style('wpp-jquery-colorpicker-css');
-
+        wp_enqueue_style( 'wpp-jquery-colorpicker-css');
         break;
 
       //** Widgets Page */
@@ -1038,10 +1052,6 @@ class WPP_Core {
     // Plug page actions -> Add Settings Link to plugin overview page
     add_filter('plugin_action_links', array('WPP_Core', 'plugin_action_links'), 10, 2 );
 
-    if($post->post_type == 'property' && $wpdb->get_var("SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_parent = '{$post->ID}' AND post_status = 'publish' ")) {
-      add_meta_box( 'wpp_property_children', __('Child Properties','wpp'), array('WPP_UI','child_properties'), 'property', 'side', 'high');
-    }
-
     //* Adds metabox 'General Information' to Property Edit Page */
     add_meta_box( 'wpp_property_meta', __('General Information','wpp'), array('WPP_UI','metabox_meta'), 'property', 'normal', 'high');
     //* Adds 'Group' metaboxes to Property Edit Page */
@@ -1248,9 +1258,11 @@ class WPP_Core {
     function shortcode_property_overview($atts = "")  {
       global $wp_properties, $wpp_query, $property, $post, $wp_query;
 
-      WPP_F::force_script_inclusion('wpp-jquery-ui-widget');
-      WPP_F::force_script_inclusion('wpp-jquery-ui-mouse');
-      WPP_F::force_script_inclusion('wpp-jquery-ui-slider');
+      $atts = wp_parse_args( $atts, array() );
+
+      WPP_F::force_script_inclusion('jquery-ui-widget');
+      WPP_F::force_script_inclusion('jquery-ui-mouse');
+      WPP_F::force_script_inclusion('jquery-ui-slider');
       WPP_F::force_script_inclusion('wpp-jquery-address');
       WPP_F::force_script_inclusion('wpp-jquery-scrollTo');
       WPP_F::force_script_inclusion('wpp-jquery-fancybox');
@@ -1292,6 +1304,16 @@ class WPP_Core {
       $defaults['in_new_window'] = false;
 
       $defaults = apply_filters('shortcode_property_overview_allowed_args', $defaults, $atts);
+
+      //** We add # to value which says that we don't want to use LIKE in SQL query for searching this value. */
+      foreach( $atts as $key => $val ) {
+        if( isset( $wp_properties[ 'property_stats' ][ $key ] ) && !key_exists( $key, $defaults ) ) {
+          if( substr_count( $val, ',' ) || substr_count( $val, '&ndash;' ) || substr_count( $val, '--' ) ) {
+            continue;
+          }
+          $atts[ $key ] = '#' . $val . '#';
+        }
+      }
 
       if(!empty($atts['ajax_call'])) {
         //** If AJAX call then the passed args have all the data we need */
