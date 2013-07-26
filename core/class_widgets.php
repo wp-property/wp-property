@@ -690,6 +690,7 @@ class FeaturedPropertiesWidget extends WP_Widget {
     $address_format = $instance['address_format'];
     $hide_image = $instance['hide_image'];
     $amount_items = $instance['amount_items'];
+    $random_items = $instance['random_items'];
     $property_stats = $wp_properties['property_stats'];
 
     if(empty($address_format)) {
@@ -705,7 +706,8 @@ class FeaturedPropertiesWidget extends WP_Widget {
       $property_stats['property_type'] = __('Property Type', 'wpp');
     }
 
-    $all_featured = WPP_F::get_properties("featured=true&property_type=all&pagi=0--$amount_items");
+    $random_sort = $random_items == 1 ? '&sort_by=random' : '';
+    $all_featured = WPP_F::get_properties( "featured=true&property_type=all&pagi=0--{$amount_items}{$random_sort}" );
 
     /** Bail out if no children */
     if(!$all_featured) {
@@ -803,6 +805,7 @@ class FeaturedPropertiesWidget extends WP_Widget {
     $address_format = esc_attr($instance['address_format']);
     $enable_more = $instance['enable_more'];
     $enable_view_all = $instance['enable_view_all'];
+    $random_items = $instance['random_items'];
     $property_stats = $wp_properties['property_stats'];
 
     if(empty($address_format)) {
@@ -844,6 +847,12 @@ class FeaturedPropertiesWidget extends WP_Widget {
     <p>
       <label for="<?php echo $this->get_field_id('amount_items'); ?>"><?php _e('Listings to display?', 'wpp'); ?>
         <input style="width:30px" id="<?php echo $this->get_field_id('amount_items'); ?>" name="<?php echo $this->get_field_name('amount_items'); ?>" type="text" value="<?php echo (empty($amount_items)) ? 5 : $amount_items; ?>" />
+      </label>
+    </p>
+    <p>
+      <label for="<?php echo $this->get_field_id('random_items'); ?>">
+        <input id="<?php echo $this->get_field_id('random_items'); ?>" name="<?php echo $this->get_field_name('random_items'); ?>" type="checkbox" value="1" <?php if(!empty($random_items)) echo ' checked="checked"'; ?> />
+        <?php _e('Display properties in random order?', 'wpp'); ?>
       </label>
     </p>
     <p><?php _e('Select the stats you want to display','wpp') ?></p>

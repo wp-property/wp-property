@@ -903,6 +903,8 @@ if(!function_exists('draw_stats')):
       $property = (object)$property;
     }
 
+    $property = prepare_property_for_display($property);
+    
     $defaults = array(
       'sort_by_groups' => $wp_properties['configuration']['property_overview']['sort_stats_by_groups'],
       'display' => 'dl_list',
@@ -910,15 +912,35 @@ if(!function_exists('draw_stats')):
       'make_link' => 'true',
       'hide_false' => 'false',
       'first_alt' => 'false',
+      'return_blank' => 'false',
+      //** Args below are related to WPP 2.0. but it's needed to have the compatibility with new Denali versions */
+      'include_clsf' => 'all', // The list of classifications separated by commas or array which should be included. Enabled values: all|[classification,classification2]
+      'title' => 'true',
     );
 
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
-    $property_stats = WPP_F::get_stat_values_and_labels($property, $args);
-
+    $property_stats = array();
     $groups = $wp_properties['property_groups'];
 
-    if(!$property_stats) {
+    /**
+     * Determine if we should draw meta data.
+     * The functionality below is related to WPP2.0
+     * Now it just adds compatibility with new Denali versions
+     */
+    if( $include_clsf == 'detail' ) {
+      $sort_by_groups = 'false';
+      foreach( (array)$wp_properties['property_meta'] as $k => $v  ) {
+        if( empty( $property->$k ) || $k == 'tagline' ) {
+          continue;
+        }
+        $property_stats[ $k ] = $v;
+      }
+    } else {
+      $property_stats = WPP_F::get_stat_values_and_labels($property, $args);
+    }
+
+    if( empty( $property_stats ) ) {
       return;
     }
 
@@ -1014,6 +1036,12 @@ if(!function_exists('draw_stats')):
             <span class="attribute"><?php echo $label; ?>:</span>
             <span class="value"><?php echo $value; ?>&nbsp;</span>
             <br />
+            <?php
+            break;
+          case 'detail':
+            ?>
+            <h4 class="wpp_attribute"><?php echo $label; ?><span class="separator">:</span></h4>
+            <p class="value"><?php echo $value; ?>&nbsp;</p>
             <?php
             break;
         }
@@ -1231,7 +1259,7 @@ if(!function_exists('draw_property_search_form')):
       'cache' => true
     );
 
-    WPP_F::force_script_inclusion('jquery-number-format');
+    WPP_F::force_script_inclusion('wpp-jquery-number-format');
     $args = wp_parse_args( $args, $defaults );
     if(empty($args['search_attributes']) && isset($args['searchable_attributes'])) {
       $args['search_attributes'] = $args['searchable_attributes'];

@@ -334,8 +334,9 @@
   // Coordinate manual override
   add_filter('wpp_property_stats_input_'. $wp_properties['configuration']['address_attribute'], 'wpp_property_stats_input_address', 0, 3);
 
-  add_action('save_property', 'save_property_coordinate_override', 0, 3);
   add_action('save_property', 'wpp_save_property_aggregated_data', 0, 2);
+  
+
 
   //add_action("wpp_ui_after_attribute_{$wp_properties['configuration']['address_attribute']}", 'wpp_show_coords');
   add_action('wpp_ui_after_attribute_price', 'wpp_show_week_month_selection');
@@ -560,6 +561,8 @@
   }
 
 
+
+
   /**
    * Updates numeric and currency attribute of parent property on child property saving.
    * Sets attribute's value based on children values ( sets aggregated value ).
@@ -640,42 +643,6 @@
 
       }
 
-    }
-
-  }
-
-
-  /**
-   * Save manually entered coordinates if setting exists
-   *
-   * Does not blank out latitude or longitude unless maual_coordinates are set
-   *
-   * @since 1.08
-   */
-  function save_property_coordinate_override($post_id, $post_data, $geo_data) {
-    global $wp_properties;
-
-    if (get_post_meta($post_id, 'manual_coordinates', true) != 'true') {
-
-      if($geo_data->latitude)
-        update_post_meta($post_id, 'latitude', (float)$geo_data->latitude);
-
-      if($geo_data->longitude)
-        update_post_meta($post_id, 'longitude', (float)$geo_data->longitude);
-
-    } else {
-
-      if (!empty($post_data['wpp_data']['meta'][$wp_properties['configuration']['address_attribute']])){
-        update_post_meta($post_id, 'location', $post_data['wpp_data']['meta'][$wp_properties['configuration']['address_attribute']]);
-        update_post_meta($post_id, 'display_address', $post_data['wpp_data']['meta'][$wp_properties['configuration']['address_attribute']]);
-      }
-
-      $old_coordinates = ( empty($post_data['wpp_data']['meta']['latitude']) || empty($post_data['wpp_data']['meta']['longitude']) ) ? "" : array('lat'=>(float)$post_data['wpp_data']['meta']['latitude'],'lng'=>(float)$post_data['wpp_data']['meta']['longitude']);
-
-      if (!empty($old_coordinates)){
-        update_post_meta($post_id, 'latitude', $old_coordinates['lat']);
-        update_post_meta($post_id, 'longitude', $old_coordinates['lng']);
-      }
     }
 
   }

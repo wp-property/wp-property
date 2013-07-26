@@ -9,6 +9,7 @@
         <style type="text/css">
             div.heading_text {font-size:<?php echo $wpp_pdf_flyer['font_size_header']; ?>px;border-bottom:2px solid <?php echo (!empty($wpp_pdf_flyer['section_bgcolor']) ? $wpp_pdf_flyer['section_bgcolor'] : '#DADADA'); ?>;}
             .pdf-text {font-size:<?php echo $wpp_pdf_flyer['font_size_content']; ?>px;}
+            .pdf-text .attribute .separator{ display: inline-block; padding: 0 5px 0 2px; }
             .pdf-note {font-size:<?php echo $wpp_pdf_flyer['font_size_note']; ?>px;}
             table.bg-header {background-color:<?php echo (!empty($wpp_pdf_flyer['header_color']) ? $wpp_pdf_flyer['header_color'] : '#EDEDED'); ?>;}
             table.bg-section {background-color:<?php echo (!empty($wpp_pdf_flyer['section_bgcolor']) ? $wpp_pdf_flyer['section_bgcolor'] : '#EDEDED'); ?>;}
@@ -95,10 +96,10 @@
                                     <?php foreach($property['gallery'] as $image) : ?>
                                         <?php if($counter == $wpp_pdf_flyer['num_pictures']) break; ?>
                                         <?php if(empty($image[$wpp_pdf_flyer['secondary_photos']])) continue; ?>
-                                        <?php 
-                                          $counter++; 
+                                        <?php
+                                          $counter++;
                                           $this_image = wpp_get_image_link($image['attachment_id'], $wpp_pdf_flyer['secondary_photos'], array('return' => 'array'));
-                                
+
                                         ?>
                                         <tr>
                                             <td><table cellspacing="0" cellpadding="10" border="0" class="bg-section">

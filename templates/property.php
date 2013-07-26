@@ -18,8 +18,8 @@
 */
 
 // Uncomment to disable fancybox script being loaded on this page
-//wp_deregister_script('jquery-fancybox');
-//wp_deregister_script('jquery-fancybox-css');
+//wp_deregister_script('wpp-jquery-fancybox');
+//wp_deregister_script('wpp-jquery-fancybox-css');
 ?>
 
 <?php get_header(); ?>

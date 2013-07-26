@@ -1,10 +1,10 @@
-=== WP-Property - WordPress Powered Real Estate and Property Management === 
+=== WP-Property - WordPress Powered Real Estate and Property Management ===
 Contributors:  usability_dynamics, anton-korotkoff, andypotanin
 Donate link: http://usabilitydynamics.com/products/wp-property/
 Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 3.0
 Tested up to: 3.5.1
-Stable tag: 1.37.1
+Stable tag: 1.37.2
 
 
 == Description ==
@@ -217,6 +217,16 @@ We are moving out of beta stages, but you may still experience bugs now and then
 We are still in early stages, so updates will be coming out routinely.  Please do not hesitate to send us feedback and suggestions.
 
 == Changelog ==
+
+= 1.37.2 =
+* Namespaces fixes to prevent conflicts with third party plugins and themes
+* Added ability to enable/disable sorting properties by title
+* Added ability to show random featured properties
+* FEPS: Fixed single property address & manual coordinates issue
+* PDF Flyer: fixed issues related to non-Latin characters in post title
+* PDF Flyer: added displaying currency and separator symbols
+* PDF Flyer: QR_code was made clickable
+* French Localization updates
 
 = 1.37.1 =
 * Address validation fixes

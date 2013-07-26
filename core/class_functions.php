@@ -312,14 +312,14 @@ class WPP_F extends UD_API {
   function load_assets($types = array()) {
     global $post, $property, $wp_properties;
 
-    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('jquery-ui-slider');"));
-    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('jquery-ui-mouse');"));
-    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('jquery-ui-widget');"));
-    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('jquery-fancybox');"));
-    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('jquery-address');"));
-    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('jquery-scrollTo');"));
+    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wpp-jquery-ui-slider');"));
+    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wpp-jquery-ui-mouse');"));
+    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wpp-jquery-ui-widget');"));
+    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wpp-jquery-fancybox');"));
+    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wpp-jquery-address');"));
+    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wpp-jquery-scrollTo');"));
     add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wp-property-frontend');"));
-    wp_enqueue_style('jquery-fancybox-css');
+    wp_enqueue_style('wpp-jquery-fancybox-css');
     wp_enqueue_style('jquery-ui');
 
     foreach($types as $type) {
@@ -332,7 +332,7 @@ class WPP_F extends UD_API {
             add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('google-maps');"));
           }
 
-          add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('jquery-ui-mouse');"));
+          add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wpp-jquery-ui-mouse');"));
         break;
 
         case 'overview':
@@ -1087,6 +1087,12 @@ class WPP_F extends UD_API {
     function get_sortable_keys(){
       global $wp_properties;
 
+      $sortable_attrs = array();
+
+      if( isset( $wp_properties['configuration']['property_overview']['add_sort_by_title'] ) && $wp_properties['configuration']['property_overview']['add_sort_by_title'] != 'false' ) {
+        $sortable_attrs['post_title'] = __('Title', 'wpp');
+      }
+
       if (!empty($wp_properties['property_stats']) && $wp_properties['sortable_attributes']) {
         foreach ($wp_properties['property_stats'] as $slug => $label) {
           if(in_array($slug, $wp_properties['sortable_attributes']) ) {
@@ -1095,17 +1101,10 @@ class WPP_F extends UD_API {
         }
       }
 
-      if(!empty($sortable_attrs)) {
-        /* Add default 'Title' sort attribute */
-        $sortable_attrs['post_title'] = __('Title', 'wpp');
-        return $sortable_attrs;
-      }
-
       //* If not set, menu_order will not be used at all if any of the attributes are marked as searchable */
-      $sortable_attrs = array(
-        'menu_order' => __('Default', 'wpp'),
-        'post_title' => __('Title', 'wpp')
-      );
+      if( empty( $sortable_attrs ) ) {
+        $sortable_attrs[ 'menu_order' ] = __('Default', 'wpp');
+      }
 
       if(!empty($sortable_attrs)) {
         return $sortable_attrs;
@@ -1625,91 +1624,20 @@ class WPP_F extends UD_API {
 
     $google_map_localizations = WPP_F::draw_localization_dropdown('return_array=true');
 
-     foreach( (array) $all_properties as $post_id ) {
+    foreach( (array) $all_properties as $post_id ) {
       if ($delay){
         sleep($delay);
       }
 
-      $geo_data = false;
-      $geo_data_coordinates = false;
-      $current_coordinates = get_post_meta($post_id,'latitude', true) . get_post_meta($post_id,'longitude', true);
+      $result = WPP_F::revalidate_address($post_id,array('skip_existing'=>$skip_existing, 'return_geo_data'=>$return_geo_data));
 
-      if($skip_existing == 'true' && !empty($current_coordinates)) {
-        continue;
+
+      $return[$result['status']][] = $post_id;
+
+      if($return_geo_data) {
+        $return['geo_data'][$post_id] = $result['geo_data'];
       }
 
-      $address = get_post_meta($post_id, $wp_properties['configuration']['address_attribute'], true);
-
-      $coordinates = ($latitude == '0' || $longitude == '0') ? "" : array('lat'=>get_post_meta($post_id,'latitude', true),'lng'=>get_post_meta($post_id,'longitude', true));
-
-      $manual_coordinates = get_post_meta($post_id, 'manual_coordinates', true);
-
-      if (!empty($address)){
-        $geo_data = WPP_F::geo_locate_address($address, $wp_properties['configuration']['google_maps_localization'], true);
-      }
-
-      if (!empty($coordinates) && $manual_coordinates=='true'){
-        $geo_data_coordinates = WPP_F::geo_locate_address($address, $wp_properties['configuration']['google_maps_localization'], true, $coordinates );
-      }
-
-      /** if Address was invalid or empty but we have valid $coordinates we use them */
-      if (empty($geo_data->formatted_address) && !empty($geo_data_coordinates->formatted_address)){
-        $geo_data = $geo_data_coordinates;
-        /** clean up $address to remember that addres was empty or invalid*/
-        $address = '';
-      }
-
-      if(!empty($geo_data->formatted_address)) {
-        update_post_meta($post_id, 'address_is_formatted', true);
-        update_post_meta($post_id, 'wpp::last_address_validation', time());
-        update_post_meta($post_id, $wp_properties['configuration']['address_attribute'], $geo_data->formatted_address);
-        update_post_meta($post_id, 'street_number', $geo_data->street_number);
-        update_post_meta($post_id, 'route', $geo_data->route);
-        update_post_meta($post_id, 'city', $geo_data->city);
-        update_post_meta($post_id, 'county', $geo_data->county);
-        update_post_meta($post_id, 'state', $geo_data->state);
-        update_post_meta($post_id, 'state_code', $geo_data->state_code);
-        update_post_meta($post_id, 'country', $geo_data->country);
-        update_post_meta($post_id, 'country_code', $geo_data->country_code);
-        update_post_meta($post_id, 'postal_code', $geo_data->postal_code);
-
-        //** Neccessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
-        $exclude_from_supermap = get_post_meta( $post_id, 'exclude_from_supermap', true );
-        if( !$exclude_from_supermap ) {
-          add_post_meta( $post_id, 'exclude_from_supermap', 'false' );
-        }
-
-        if (get_post_meta($post_id, 'manual_coordinates', true) != 'true' &&
-          get_post_meta($post_id, 'manual_coordinates', true) != '1') {
-
-          update_post_meta($post_id, 'latitude', $geo_data->latitude);
-          update_post_meta($post_id, 'longitude', $geo_data->longitude);
-        }
-
-        if (empty($address)){
-          update_post_meta($post_id, $wp_properties['configuration']['address_attribute'], WPP_F::encode_mysql_input( $geo_data->formatted_address, $wp_properties['configuration']['address_attribute']));
-        }
-
-        if($return_geo_data) {
-          $return['geo_data'][$post_id] = $geo_data;
-        }
-
-        $return['updated'][] = $post_id;
-
-      } else {
-          // Try to figure out what went wrong
-
-        if( $geo_data->status == 'OVER_QUERY_LIMIT' || $geo_data->status == 'REQUEST_DENIED' ){
-          $return['over_query_limit'][] = $post_id;
-        } elseif( empty( $address ) && empty( $geo_data )) {
-          $return['empty_address'][] = $post_id;
-          update_post_meta( $post_id, 'address_is_formatted', false );
-        }else{
-          $return['failed'][] = $post_id;
-          update_post_meta( $post_id, 'address_is_formatted', false );
-        }
-
-      }
 
     }
 
@@ -1723,32 +1651,30 @@ class WPP_F extends UD_API {
         'delay' => $delay + 0.05
       ));
 
-      $return['updated'] = array_merge($return['updated'],$rerevalidate_result['updated']);
-      $return['failed'] = array_merge($return['failed'],$rerevalidate_result['failed']);
+      $return['updated'] = array_merge((array)$return['updated'],(array)$rerevalidate_result['updated']);
+      $return['failed'] = array_merge((array)$return['failed'],(array)$rerevalidate_result['failed']);
       $return['over_query_limit'] = $rerevalidate_result['over_query_limit'];
 
       $return['attempt'] = $rerevalidate_result['attempt'];
     }
 
-
-
-    $return['updated'] = array_unique( $return['updated'] );
-    $return['over_query_limit']  = array_unique( $return['over_query_limit'] );
-    $return['failed']  = array_unique( $return['failed'] );
+    foreach (array('updated','over_query_limit','failed','empty_address') as $status){
+      $return[$status] = ( $echo_result == 'true' ) ? count( array_unique( (array)$return[$status] )) : array_unique( (array)$return[$status] );
+    }
 
     $return[ 'success' ] = 'true';
-    $return[ 'message' ] = sprintf( __( 'Updated %1$d %2$s using the %3$s localization.','wpp' ),count( $return['updated'] ), WPP_F::property_label( 'plural' ),$google_map_localizations[$wp_properties[ 'configuration' ][ 'google_maps_localization' ]]);
+    $return[ 'message' ] = sprintf( __( 'Updated %1$d %2$s using the %3$s localization.','wpp' ),( $echo_result == 'true' ) ? $return['updated'] : count( $return['updated'] ), WPP_F::property_label( 'plural' ),$google_map_localizations[$wp_properties[ 'configuration' ][ 'google_maps_localization' ]]);
 
     if( $return['empty_address'] ) {
-      $return[ 'message' ] .= "<br />" . sprintf( __( '%1$d %2$s has empty address.','wpp' ),count( $return['empty_address'] ),WPP_F::property_label( 'plural' ));
+      $return[ 'message' ] .= "<br />" . sprintf( __( '%1$d %2$s has empty address.','wpp' ), ( $echo_result == 'true' ) ? $return['empty_address'] : count( $return['empty_address'] ),WPP_F::property_label( 'plural' ));
     }
 
     if( $return['failed'] ) {
-      $return[ 'message' ] .= "<br />" . sprintf( __( '%1$d %2$s could not be updated.','wpp' ),count( $return['failed'] ),WPP_F::property_label( 'plural' ));
+      $return[ 'message' ] .= "<br />" . sprintf( __( '%1$d %2$s could not be updated.','wpp' ), ( $echo_result == 'true' ) ? $return['failed'] : count( $return['failed'] ),WPP_F::property_label( 'plural' ));
     }
 
     if( $return['over_query_limit'] ) {
-      $return[ 'message' ] .= "<br />" . sprintf( __( '%1$d %2$s was ignored because query limit was exceeded.','wpp' ),count( $return['over_query_limit'] ),WPP_F::property_label( 'plural' ));
+      $return[ 'message' ] .= "<br />" . sprintf( __( '%1$d %2$s was ignored because query limit was exceeded.','wpp' ), ( $echo_result == 'true' ) ? $return['over_query_limit'] : count( $return['over_query_limit'] ),WPP_F::property_label( 'plural' ));
     }
 
     //** Warning Silincer */
@@ -1760,6 +1686,139 @@ class WPP_F extends UD_API {
       return $return;
     }
 
+  }
+
+  /**
+   * Address validation function
+   *
+   * Since 1.37.2 extracted from save_property and revalidate_all_addresses to make same functionality
+   *
+   * @global array $wp_properties
+   * @param integer $post_id
+   * @param array $args
+   * @return array
+   * @since 1.37.2
+   * @author odokienko@UD
+   */
+  static function revalidate_address($post_id, $args=array()){
+    global $wp_properties;
+
+    $defaults = array(
+      'skip_existing' => 'false',
+      'return_geo_data' => false,
+      'post_data'=>false,
+      'old_geo_data'=>false
+    );
+
+    $args = wp_parse_args( $args, $defaults );
+
+    extract( $args, EXTR_SKIP );
+
+    $return = array();
+    $geo_data = false;
+    $geo_data_coordinates = false;
+    $current_coordinates = get_post_meta($post_id,'latitude', true) . get_post_meta($post_id,'longitude', true);
+    $address_is_formatted = get_post_meta($post_id, 'address_is_formatted', true);
+
+    $address = get_post_meta($post_id, $wp_properties['configuration']['address_attribute'], true);
+
+    $coordinates = ($latitude == '0' || $longitude == '0') ? "" : array('lat'=>get_post_meta($post_id,'latitude', true),'lng'=>get_post_meta($post_id,'longitude', true));
+
+    /* will be true if address is empty and used manual_coordinates and coordinates is not empty */
+    $manual_coordinates = get_post_meta($post_id, 'manual_coordinates', true);
+    $manual_coordinates = ($manual_coordinates != 'true' && $manual_coordinates != '1') ? false : true;
+
+    if($skip_existing == 'true' && !empty($current_coordinates) && $address_is_formatted=='true') {
+      return $return['status'] = 'skipped';
+    }
+
+    if( empty($coordinates) && empty($address) ){
+
+
+
+    }else{
+
+      $address_by_coordinates = !empty($coordinates) && $manual_coordinates && empty($address) ;
+
+      if (!empty($address)){
+        $geo_data = WPP_F::geo_locate_address($address, $wp_properties['configuration']['google_maps_localization'], true);
+      }
+
+      if (!empty($coordinates) && $manual_coordinates ){
+        $geo_data_coordinates = WPP_F::geo_locate_address($address, $wp_properties['configuration']['google_maps_localization'], true, $coordinates );
+      }
+
+      /** if Address was invalid or empty but we have valid $coordinates we use them */
+      if ( !empty($geo_data_coordinates->formatted_address) && ($address_by_coordinates || empty($geo_data->formatted_address))){
+        $geo_data = $geo_data_coordinates;
+        /** clean up $address to remember that addres was empty or invalid*/
+        $address = '';
+      }
+
+      if (empty($geo_data) && !empty($old_geo_data['old_coordinates'])){
+        $return['status'] = 'empty_address';
+      }
+
+    }
+
+
+    if(!empty($geo_data->formatted_address)) {
+
+      foreach((array)$wp_properties['geo_type_attributes']+array('display_address') as $meta_key){
+        delete_post_meta($post_id, $meta_key);
+      }
+
+      update_post_meta($post_id, 'address_is_formatted', true);
+
+      if(!empty($wp_properties['configuration']['address_attribute']) && (!$manual_coordinates || $address_by_coordinates)) {
+        update_post_meta($post_id, $wp_properties['configuration']['address_attribute'], WPP_F::encode_mysql_input( $geo_data->formatted_address, $wp_properties['configuration']['address_attribute']));
+      }
+
+      foreach($geo_data as $geo_type => $this_data) {
+        if (in_array($geo_type,(array)$wp_properties['geo_type_attributes']) && !in_array($geo_type, array('latitude','longitude'))){
+          update_post_meta($post_id, $geo_type, WPP_F::encode_mysql_input( $this_data, $geo_type));
+        }
+      }
+
+      update_post_meta( $post_id, 'wpp::last_address_validation', time());
+
+      update_post_meta($post_id, 'latitude',  $manual_coordinates ? $coordinates['lat'] : $geo_data->latitude);
+      update_post_meta($post_id, 'longitude', $manual_coordinates ? $coordinates['lng'] : $geo_data->longitude);
+
+      if($return_geo_data) {
+        $return['geo_data'] = $geo_data;
+      }
+
+      $return['status'] = 'updated';
+
+    }
+
+
+    // Try to figure out what went wrong
+    if( !empty($geo_data->status) && ( $geo_data->status == 'OVER_QUERY_LIMIT' || $geo_data->status == 'REQUEST_DENIED' ) ){
+      $return['status'] = 'over_query_limit';
+    } elseif( empty( $address ) && empty( $geo_data )) {
+
+      foreach((array)$wp_properties['geo_type_attributes']+array('display_address') as $meta_key){
+        delete_post_meta($post_id, $meta_key);
+      }
+
+      $return['status'] = 'empty_address';
+      update_post_meta( $post_id, 'address_is_formatted', false );
+    }elseif(empty($return['status'])){
+      $return['status'] = 'failed';
+      update_post_meta( $post_id, 'address_is_formatted', false );
+    }
+
+
+
+    //** Neccessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
+    if( !metadata_exists( 'post', $post_id, 'exclude_from_supermap' ) ) {
+      add_post_meta( $post_id, 'exclude_from_supermap', 'false' );
+    }
+
+
+    return $return;
   }
 
 
@@ -3385,31 +3444,33 @@ class WPP_F extends UD_API {
         $sql_sort_by != 'post_date' &&
         $sql_sort_by != 'post_title' ) {
 
-      /*
-       * Determine if all values of meta_key are numbers
-       * we use CAST in SQL query to avoid sort issues
-       */
-      if(self::meta_has_number_data_type ($matching_ids, $sql_sort_by)) {
-        $meta_value = "CAST(meta_value AS DECIMAL(20,3))";
+
+      //** Sorts properties in random order. */
+      if( $sql_sort_by === 'random' ) {
+        
+        $result = $wpdb->get_col("
+          SELECT ID FROM {$wpdb->posts } AS p
+          WHERE ID IN (" . implode(",", $matching_ids) . ")
+          $additional_sql
+          ORDER BY RAND() $sql_sort_order
+          $limit_query");
+
       } else {
-        $meta_value = "meta_value";
-      }
 
-      $result = $wpdb->get_col("
-        SELECT p.ID , (SELECT pm.meta_value FROM {$wpdb->postmeta} AS pm WHERE pm.post_id = p.ID AND pm.meta_key = '{$sql_sort_by}') as meta_value
-          FROM {$wpdb->posts} AS p
-          WHERE p.ID IN (" . implode(",", $matching_ids) . ")
-          {$additional_sql}
-          ORDER BY {$meta_value} {$sql_sort_order}
-          {$limit_query}");
-
-      // Stores the total Properties returned
-      if ($total) {
-        $total = count($wpdb->get_col("
-          SELECT p.ID
+        //** Determine if all values of meta_key are numbers we use CAST in SQL query to avoid sort issues */
+        if( self::meta_has_number_data_type ( $matching_ids, $sql_sort_by ) ) {
+          $meta_value = "CAST(meta_value AS DECIMAL(20,3))";
+        } else {
+          $meta_value = "meta_value";
+        }
+        $result = $wpdb->get_col("
+          SELECT p.ID , (SELECT pm.meta_value FROM {$wpdb->postmeta} AS pm WHERE pm.post_id = p.ID AND pm.meta_key = '{$sql_sort_by}') as meta_value
             FROM {$wpdb->posts} AS p
             WHERE p.ID IN (" . implode(",", $matching_ids) . ")
-            {$additional_sql}"));
+            {$additional_sql}
+            ORDER BY {$meta_value} {$sql_sort_order}
+            {$limit_query}");
+
       }
 
     } else {
@@ -3421,13 +3482,14 @@ class WPP_F extends UD_API {
         ORDER BY $sql_sort_by $sql_sort_order
         $limit_query");
 
-      // Stores the total Properties returned
-      if($total) {
-        $total = count($wpdb->get_col("
-          SELECT ID FROM {$wpdb->posts} AS p
-          WHERE ID IN (" . implode(",", $matching_ids) . ")
+    }
+
+    // Stores the total Properties returned
+    if ($total) {
+      $total = count($wpdb->get_col("
+        SELECT p.ID FROM {$wpdb->posts} AS p
+          WHERE p.ID IN (" . implode(",", $matching_ids) . ")
           {$additional_sql}"));
-      }
     }
 
     if( !empty( $result ) ) {
@@ -3583,10 +3645,6 @@ class WPP_F extends UD_API {
 
     $id = trim($id);
 
-    if($return = wp_cache_get($id.$args)) {
-      return $return;
-    }
-
      $defaults = array(
       'get_children' => 'true',
       'return_object' => 'false',
@@ -3597,6 +3655,11 @@ class WPP_F extends UD_API {
      );
 
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
+
+    $args = is_array( $args ) ? http_build_query( $args ) : (string)$args;
+    if($return = wp_cache_get($id.$args)) {
+      return $return;
+    }
 
     $post = get_post($id, ARRAY_A);
 
@@ -4004,13 +4067,8 @@ class WPP_F extends UD_API {
 
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
-    if($exclude) {
-      $exclude = explode(',', $exclude);
-    }
-
-    if($include) {
-      $include = explode(',', $include);
-    }
+    $exclude = isset( $exclude ) ? ( is_array( $exclude ) ? $exclude : explode(',', $exclude) ) : false;
+    $include = isset( $include ) ? ( is_array( $include ) ? $include : explode(',', $include) ) : false;
 
     if(!$property_stats) {
       $property_stats = $wp_properties['property_stats'];
@@ -4172,7 +4230,7 @@ class WPP_F extends UD_API {
           <?php echo $imageHTML; ?>
           <?php if($infobox_settings['show_direction_link'] == 'true'): ?>
           <div class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_directions_link">
-            <a target="_blank" href="http://maps.google.com/maps?gl=us&daddr=<?php echo addslashes(str_replace(' ','+', $property[$wp_properties['configuration']['address_attribute']])); ?>" class="btn btn-info"><?php _e('Get Directions','wpp') ?></a>
+            <a target="_blank" href="http://maps.google.com/maps?gl=us&daddr=<?php echo addslashes(str_replace(' ','+', $property['formatted_address'])); ?>" class="btn btn-info"><?php _e('Get Directions','wpp') ?></a>
           </div>
           <?php endif; ?>
         </td>
@@ -4181,7 +4239,7 @@ class WPP_F extends UD_API {
         <td class="wpp_google_maps_right_col" vertical-align="top" style="vertical-align: top;">
         <?php if(!$image['link'] && $infobox_settings['show_direction_link'] == 'true') { ?>
           <div class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_directions_link">
-          <a target="_blank" href="http://maps.google.com/maps?gl=us&daddr=<?php echo addslashes(str_replace(' ','+', $property[$wp_properties['configuration']['address_attribute']])); ?>" class="btn btn-info"><?php _e('Get Directions','wpp') ?></a>
+          <a target="_blank" href="http://maps.google.com/maps?gl=us&daddr=<?php echo addslashes(str_replace(' ','+', $property['formatted_address'])); ?>" class="btn btn-info"><?php _e('Get Directions','wpp') ?></a>
           </div>
         <?php }
 

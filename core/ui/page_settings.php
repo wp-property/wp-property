@@ -511,6 +511,7 @@ if(get_option('permalink_structure') == '') {
           <li><?php echo WPP_F::checkbox('name=wpp_settings[configuration][property_overview][show_children]&label=' . __('Show children properties.','wpp'), $wp_properties['configuration']['property_overview']['show_children']); ?></li>
           <li><?php echo WPP_F::checkbox('name=wpp_settings[configuration][property_overview][fancybox_preview]&label=' . __('Show larger image of property when image is clicked using fancybox.','wpp') , $wp_properties['configuration']['property_overview']['fancybox_preview']); ?></li>
           <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][bottom_insert_pagenation]&label=" . __('Show pagination on bottom of results.','wpp'), $wp_properties['configuration']['bottom_insert_pagenation']); ?></li>
+          <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][property_overview][add_sort_by_title]&label=" . __('Add sorting by property\'s title.','wpp'), $wp_properties['configuration']['property_overview']['add_sort_by_title']); ?></li>
          </ul>
 
       </td>
