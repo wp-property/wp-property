@@ -103,6 +103,11 @@ class WPP_Object_List_Table extends WPP_List_Table {
 
       switch($column) {
 
+        //** Adds ability to customize any column we want. peshkov@UD */
+        case ( apply_filters( "wpp::single_row::{$column}", false, $post ) ):
+          $r .= apply_filters( "wpp::single_row::{$column}::render", '', $post );
+          break;
+
         case 'cb':
           if ( $can_edit_post ) {
             $r .= '<input type="checkbox" name="post[]" value="'. get_the_ID() . '"/>';

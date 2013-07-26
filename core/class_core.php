@@ -191,7 +191,7 @@ class WPP_Core {
     wp_register_script('wpp-jquery-fancybox', WPP_URL. 'third-party/fancybox/jquery.fancybox-1.3.4.pack.js', array('jquery','wpp-localization'), '1.7.3' );
     wp_register_script('wpp-jquery-colorpicker', WPP_URL. 'third-party/colorpicker/colorpicker.js', array('jquery','wpp-localization'));
     wp_register_script('wpp-jquery-easing', WPP_URL. 'third-party/fancybox/jquery.easing-1.3.pack.js', array('jquery','wpp-localization'), '1.7.3' );
-    wp_register_script('wpp-jquery-ajaxupload', WPP_URL. 'js/fileuploader.js', array('jquery'));
+    wp_register_script('wpp-jquery-ajaxupload', WPP_URL. 'js/fileuploader.js', array('jquery','wpp-localization'));
     wp_register_script('wp-property-admin-overview', WPP_URL. 'js/wp-property-admin-overview.js', array('jquery','wpp-localization'), WPP_Version);
     wp_register_script('wp-property-admin-widgets', WPP_URL. 'js/wp-property-admin-widgets.js', array('jquery','wpp-localization'), WPP_Version);
     wp_register_script('wp-property-backend-global', WPP_URL. 'js/wp-property-backend-global.js', array('jquery','wpp-localization'), WPP_Version);
@@ -660,7 +660,12 @@ class WPP_Core {
 
       //* Only admins can mark properties as featured. */
       if( $meta_key == 'featured' && !current_user_can('manage_options') ) {
-        continue;
+        //** But be sure that meta 'featured' exists at all */
+        if( !metadata_exists( 'post', $post_id, $meta_key ) ) {
+          $meta_value = 'false';
+        } else {
+          continue;
+        }
       }
 
       //* Remove certain characters */
@@ -861,6 +866,18 @@ class WPP_Core {
   function template_redirect() {
     global $post, $property, $wp_query, $wp_properties, $wp_styles, $wpp_query, $wp_taxonomies;
 
+    //** Load global wp-property script on all frontend pages */
+    wp_enqueue_script( 'wp-property-global' );
+
+    //** Load essential styles that are used in widgets */
+    wp_enqueue_style( 'wp-property-frontend' );
+    wp_enqueue_style( 'wp-property-theme-specific' );
+
+    //** Load non-essential scripts and styles if option is enabled to load them globally */
+    if($wp_properties['configuration']['load_scripts_everywhere'] == 'true') {
+      WPP_F::console_log('Loading WP-Property scripts globally.');
+      WPP_F::load_assets(array('single', 'overview'));
+    }
 
     if($wp_properties['configuration']['do_not_enable_text_widget_shortcodes'] != 'true') {
       add_filter('widget_text', 'do_shortcode');
@@ -872,19 +889,6 @@ class WPP_Core {
     if ( !empty($wp_query->query_vars['preview']) && $post->post_type == "property" && $post->post_status == "publish" ) {
       wp_redirect( get_permalink($post->ID) );
       die();
-    }
-
-    //** Load global wp-property script on all frontend pages */
-    wp_enqueue_script( 'wp-property-global' );
-
-    //** Load essential styles that are used in widgets */
-    wp_enqueue_style('wp-property-frontend');
-    wp_enqueue_style('wp-property-theme-specific');
-
-    //** Load non-essential scripts and styles if option is enabled to load them globally */
-    if($wp_properties['configuration']['load_scripts_everywhere'] == 'true') {
-      WPP_F::console_log('Loading WP-Property scripts globally.');
-      WPP_F::load_assets(array('single', 'overview'));
     }
 
     /*

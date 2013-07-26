@@ -1,0 +1,17 @@
+.svn
+.idea
+.idea/workspace.xml
+.DS_Store
+.dynamic
+*premium
+.Trashes
+*.sublime-project
+*.sublime-workspace
+
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz

@@ -193,14 +193,5 @@
       'tagline' => __('Will appear on overview pages and on top of every listing page.','wpp'))
   );
 
-  //* Javascript files Localization */
-  $wp_properties['l10n'] = array(
-    'uploading' => __( 'Uploading', 'wpp' ),
-    'drop_file' => __( 'Drop files here to upload', 'wpp' ),
-    'upload_images' => __( 'Upload Image', 'wpp' ),
-    'cancel'    => __( 'Cancel', 'wpp' ),
-    'fail'      => __( 'Failed', 'wpp' )
-  );
-
   // Overwrite $wp_properties with database setting
   $wp_properties = UD_API::array_merge_recursive_distinct($wp_properties, $wp_properties_db);

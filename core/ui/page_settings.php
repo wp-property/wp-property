@@ -505,6 +505,7 @@ if(get_option('permalink_structure') == '') {
       <td>
         <p>
         <?php _e('These are the settings for the [property_overview] shortcode.  The shortcode displays a list of all building / root properties.<br />The display settings may be edited further by customizing the <b>wp-content/plugins/wp-properties/templates/property-overview.php</b> file.  To avoid losing your changes during updates, create a <b>property-overview.php</b> file in your template directory, which will be automatically loaded.','wpp') ?>
+        </p>
         <ul>
           <li><?php _e('Thumbnail size:','wpp') ?> <?php WPP_F::image_sizes_dropdown("name=wpp_settings[configuration][property_overview][thumbnail_size]&selected=" . $wp_properties['configuration']['property_overview']['thumbnail_size']); ?></li>
           <li><?php echo WPP_F::checkbox('name=wpp_settings[configuration][property_overview][show_children]&label=' . __('Show children properties.','wpp'), $wp_properties['configuration']['property_overview']['show_children']); ?></li>
