@@ -1361,9 +1361,6 @@ class LatestPropertiesWidget extends WP_Widget {
         /* Run on load to hide property type attribut if there is less than 2 property types */
         wpp_adjust_property_type_option();
 
-        /* Select the correc tab */
-        wpp_set_group_or_ungroup();
-
         jQuery("#all_atributes_<?php echo $this->id; ?>.wpp_sortable_attributes").sortable();
 
         /* Setup tab the grouping/ungrouping tabs, and trigger checking the select box when tabs are switched */
@@ -1376,6 +1373,9 @@ class LatestPropertiesWidget extends WP_Widget {
             }
           }
         });
+        
+        /* Select the correct tab */
+        wpp_set_group_or_ungroup();
 
         /* Not sure if this is important */
         if(typeof wpp_search_widget_dragstop == "undefined") {
@@ -1387,7 +1387,7 @@ class LatestPropertiesWidget extends WP_Widget {
 
         /* Select grouped tab if grouping is enabled here */
         <?php if($stats_by_groups && $group_attributes == 'true') { ?>
-        jQuery(".wpp_subtle_tabs").tabs('select',1);
+          jQuery(".wpp_subtle_tabs").tabs('select',1);
         <?php } ?>
 
         jQuery("#<?php echo $this->get_field_id('group_attributes'); ?>").change(function() {

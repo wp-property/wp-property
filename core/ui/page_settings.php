@@ -68,7 +68,13 @@
       wpp_setup_default_property_page();
     });
 
-    jQuery("#wpp_settings_tabs").tabs({ cookie: {  name: 'wpp_settings_tabs', expires: 30 } });
+    
+    if( document.location.hash != '' && jQuery( document.location.hash ).length > 0 ) {
+      jQuery("#wpp_settings_tabs").tabs();
+    } else {
+      jQuery("#wpp_settings_tabs").tabs({ cookie: {  name: 'wpp_settings_tabs', expires: 30 } });
+    }
+    
 
     // Show settings array
     jQuery("#wpp_show_settings_array").click(function() {
@@ -446,7 +452,7 @@
           ?>
             <tr class="wpp_dynamic_table_row" slug="<?php echo $slug; ?>">
               <td  class="wpp_slug">
-                <input class="slug_setter slug"  type="text" value="<?php echo $slug; ?>" />
+                <input class="slug_setter slug wpp_slug_can_be_empty"  type="text" value="<?php echo $slug; ?>" />
               </td>
               <td class="wpp_width">
                 <input type="text" name="wpp_settings[image_sizes][<?php echo $slug; ?>][width]" value="<?php echo $image_dimensions['width']; ?>" />

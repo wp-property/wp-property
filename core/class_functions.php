@@ -1531,7 +1531,7 @@ class WPP_F extends UD_API {
    * @since 1.05
    *
    */
-   static function revalidate_all_addresses($args = '') {
+   static function revalidate_all_addresses( $args = '' ) {
     global $wp_properties, $wpdb;
 
     set_time_limit(600);
@@ -1554,7 +1554,7 @@ class WPP_F extends UD_API {
 
     $google_map_localizations = WPP_F::draw_localization_dropdown('return_array=true');
 
-     foreach($all_properties as $post_id) {
+     foreach( $all_properties as $post_id ) {
       $geo_data = false;
       $geo_data_coordinates = false;
       $current_coordinates = get_post_meta($post_id,'latitude', true) . get_post_meta($post_id,'longitude', true);
@@ -1596,6 +1596,12 @@ class WPP_F extends UD_API {
         update_post_meta($post_id, 'country', $geo_data->country);
         update_post_meta($post_id, 'country_code', $geo_data->country_code);
         update_post_meta($post_id, 'postal_code', $geo_data->postal_code);
+        
+        //** Neccessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
+        $exclude_from_supermap = get_post_meta( $post_id, 'exclude_from_supermap', true );
+        if( !$exclude_from_supermap ) {
+          add_post_meta( $post_id, 'exclude_from_supermap', 'false' );
+        }
 
         if (get_post_meta($post_id, 'manual_coordinates', true) != 'true' &&
           get_post_meta($post_id, 'manual_coordinates', true) != '1') {

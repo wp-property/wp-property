@@ -1,10 +1,10 @@
 === WP-Property - WordPress Powered Real Estate and Property Management ===
 Contributors:  usability_dynamics, anton-korotkoff, andypotanin
 Donate link: http://usabilitydynamics.com/products/wp-property/
-Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import 
+Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 3.0
-Tested up to: 3.4.2
-Stable tag: 1.36.1
+Tested up to: 3.5
+Stable tag: 1.36.2
 
 
 == Description ==
@@ -217,6 +217,11 @@ We are moving out of beta stages, but you may still experience bugs now and then
 We are still in early stages, so updates will be coming out routinely.  Please do not hesitate to send us feedback and suggestions.
 
 == Changelog ==
+
+= 1.36.2 =
+* Added WordPress 3.5 compatibility.
+* Fixed new image size adding.
+* Fixed revalidation of addresses.
 
 = 1.36.1 =
 * Fixed can_get_image() function what solves many issues with displaying images on PDF Flyer and PDF Lists including displaying of Location Map on PDF Flyer.

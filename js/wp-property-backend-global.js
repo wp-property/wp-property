@@ -265,12 +265,13 @@ var updateRowNames = function(instance, allowRandomSlug) {
   var old_slug = jQuery(this_row).attr('slug');
   // Get data from input.slug_setter
   var new_slug = jQuery(instance).val();
+  
   // Convert into slug
   new_slug = wpp_create_slug(new_slug);
 
   // Don't allow to blank out slugs
   if(new_slug == "") {
-    if(allowRandomSlug) {
+    if(allowRandomSlug && !jQuery(instance).hasClass( 'wpp_slug_can_be_empty' ) ) {
       new_slug = 'random_' + Math.floor(Math.random()*1000);
     } else {
       return;
@@ -284,13 +285,15 @@ var updateRowNames = function(instance, allowRandomSlug) {
   }
 
   // Get all slugs of the table
+  jQuery(instance).addClass( 'wpp_current_slug_is_being_checked' );
   var slugs = jQuery(this_row).parents('table').find('input.slug');
   slugs.each(function(k, v){
-    if ( jQuery(v).val() == new_slug ) {
+    if ( jQuery(v).val() == new_slug && !jQuery(v).hasClass( 'wpp_current_slug_is_being_checked' ) ) {
       new_slug = 'random_' + Math.floor(Math.random()*1000);
       return false;
     }
   });
+  jQuery(instance).removeClass( 'wpp_current_slug_is_being_checked' );
 
   // If slug input.slug exists in row, we modify it
   jQuery(".slug" , this_row).val(new_slug);

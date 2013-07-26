@@ -194,7 +194,7 @@ class WPP_Core {
 
     wp_register_script('jquery-gmaps', WPP_URL. 'js/jquery.ui.map.min.js', array('google-maps','jquery-ui-core','jquery-ui-widget'));
     wp_register_script('jquery-nivo-slider', WPP_URL. 'third-party/jquery.nivo.slider.pack.js', array('jquery'));
-    wp_register_script('jquery-address', WPP_URL. 'js/jquery.address-1.3.2.js', array('jquery'));
+    wp_register_script('jquery-address', WPP_URL. 'js/jquery.address-1.5.js', array('jquery'));
     wp_register_script('jquery-scrollTo', WPP_URL. 'js/jquery.scrollTo-min.js', array('jquery'));
     wp_register_script('jquery-validate', WPP_URL. 'js/jquery.validate.js', array('jquery'));
     wp_register_script('jquery-number-format', WPP_URL. 'js/jquery.number.format.js', array('jquery'));
@@ -568,9 +568,10 @@ class WPP_Core {
    *
    */
   function save_property( $post_id ) {
-    global $wp_rewrite, $wp_properties;
-
-    if (!wp_verify_nonce( $_POST['_wpnonce'],'update-property_' . $post_id)) {
+    global $wp_rewrite, $wp_properties, $wp_version;
+    
+    $_wpnonce = ( version_compare( $wp_version, '3.5', '>=' ) ? 'update-post_' : 'update-property_' ) . $post_id ;
+    if ( !wp_verify_nonce( $_POST['_wpnonce'], $_wpnonce ) || $_POST[ 'post_type' ] !== 'property' ) {
       return $post_id;
     }
 
@@ -591,6 +592,12 @@ class WPP_Core {
     }
 
     $update_data = $_REQUEST['wpp_data']['meta'];
+    
+    //** Neccessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
+    if( empty( $update_data['exclude_from_supermap'] ) ) $update_data['exclude_from_supermap'] = 'false';
+    if( (float)$update_data[ 'latitude' ] == 0 ) $update_data['latitude'] = '';
+    if( (float)$update_data[ 'longitude' ] == 0 ) $update_data['longitude'] = '';
+    
     /* get old coordinates */
     $old_lat = get_post_meta($post_id,'latitude', true);
     $old_lng = get_post_meta($post_id,'longitude', true);

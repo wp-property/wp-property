@@ -633,7 +633,7 @@ body.property_page_show_agents .wp-list-table .column-id {
 
 .wpp_agent_page .wpp_agent_image_wrapper {
   width:81px;
-  height:23px;
+  height:25px;
   overflow:hidden;
   padding-top:4px;
   float:right;
@@ -983,7 +983,8 @@ input.wpp_featured_toggle {
 
       .wpp_tabs  ul.tabs li a:hover { color: #9D611D; }
 
-    .wpp_tabs  ul.tabs li.ui-tabs-selected {
+    .wpp_tabs  ul.tabs li.ui-tabs-selected,
+    .wpp_tabs  ul.tabs li.ui-state-active {
       height: 26px;
       background: none repeat scroll 0 0 #FFFFFF;
       border-bottom: 1px solid #FFFFFF; }
