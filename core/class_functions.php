@@ -2008,7 +2008,6 @@ class WPP_F extends UD_API {
   /**
   * Handles user input, so a standard is created for supporting special characters.
   *
-  * Added fix for PHP versions earlier than 4.3.0
   *
   * @param  string   $input to be converted
   * @return   string   $result
@@ -2019,20 +2018,10 @@ class WPP_F extends UD_API {
       return (float)$input;
     }
 
-    /* If PHP version is newer than 4.3.0, else apply fix. */
-    if ( strnatcmp(phpversion(),'4.3.0' ) >= 0 ) {
-      $result = str_replace(html_entity_decode('-', ENT_COMPAT, 'UTF-8'), '&ndash;', $input);
-    } else {
-      $result = str_replace( utf8_encode( html_entity_decode('-') ), '&ndash;', $input );
-    }
-
-    //** In case &ndash; is already converted and exists in its actual dash form */
-    $result = str_replace('–', '&ndash;', $result);
-
     /* Uses WPs built in esc_html, works like a charm. */
-    $result = esc_html( $result );
+    $input = esc_html( $input );
 
-    return $result;
+    return $input;
   }
 
 
@@ -2884,6 +2873,9 @@ class WPP_F extends UD_API {
       // Schedule event
       wp_schedule_event(time(), 'daily', 'wpp_premium_feature_check');
 
+      //** Upgrade data if needed */
+      WPP_Legacy::upgrade();
+
       // Update option to latest version so this isn't run on next admin page load
       update_option( "wpp_version", $wpp_version );
 
@@ -3195,7 +3187,13 @@ class WPP_F extends UD_API {
       'ID' => 'equal',
       'post_parent' => 'equal',
       'post_date'   => 'date'
-     );
+    );
+
+    /**
+     * Specific meta data can contain value with commas. E.g. location field ( address_attribute )
+     * The current list contains meta slugs which will be ignored for comma parsing. peshkov@UD
+     */
+    $commas_ignore = apply_filters( 'wpp::get_properties::commas_ignore', array_filter( array( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) ) );
 
     $capture_sql_args = array( 'limit_query' );
 
@@ -3319,12 +3317,12 @@ class WPP_F extends UD_API {
         break;
       }
 
-      if( substr_count( $criteria, ',' ) || substr_count( $criteria, '&ndash;' ) || substr_count( $criteria, '--' )) {
-        if( substr_count( $criteria, ',' ) && !substr_count( $criteria, '&ndash;' )) {
+      if( !in_array( $meta_key, (array)$commas_ignore ) && substr_count( $criteria, ',' ) || substr_count( $criteria, '-' ) || substr_count( $criteria, '--' )) {
+        if( substr_count( $criteria, ',' ) && !substr_count( $criteria, '-' )) {
           $comma_and = explode( ',', $criteria );
         }
-        if( substr_count( $criteria, '&ndash;' ) && !substr_count( $criteria, ',' )) {
-          $cr = explode( '&ndash;', $criteria );
+        if( substr_count( $criteria, '-' ) && !substr_count( $criteria, ',' )) {
+          $cr = explode( '-', $criteria );
 
           // Check pieces of criteria. Array should contains 2 int's elements
           // In other way, it's just value of meta_key
@@ -3505,8 +3503,7 @@ class WPP_F extends UD_API {
     // Remove duplicates
     $matching_ids = array_unique( $matching_ids );
 
-    $matching_ids = apply_filters( 'wpp::get_properties::matching_ids', $matching_ids, array_merge($args, array('additional_sql'=>$additional_sql, 'total'=>$total)) );
-
+    $matching_ids = apply_filters( 'wpp::get_properties::matching_ids', $matching_ids, array_merge( (array)$query, array( 'additional_sql'=> $additional_sql, 'total' => $total ) ) );
 
     // Sorts the returned Properties by the selected sort order
     if( $sql_sort_by &&
@@ -3787,7 +3784,6 @@ class WPP_F extends UD_API {
 
       }
      }
-
 
     $return = array_merge($return, $post);
 

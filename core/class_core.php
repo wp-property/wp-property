@@ -7,7 +7,6 @@
  * @package WP-Property
 */
 
-
 /**
  * WP-Property Core Framework Class
  *
@@ -1269,7 +1268,9 @@ class WPP_Core {
     function shortcode_property_overview($atts = "")  {
       global $wp_properties, $wpp_query, $property, $post, $wp_query;
 
-      $atts = wp_parse_args( $atts, array() );
+      $atts = wp_parse_args( $atts, array(
+        'strict_search' => 'false'
+      ) );
 
       WPP_F::force_script_inclusion('jquery-ui-widget');
       WPP_F::force_script_inclusion('jquery-ui-mouse');
@@ -1314,15 +1315,17 @@ class WPP_Core {
       $defaults['class'] = 'wpp_property_overview_shortcode';
       $defaults['in_new_window'] = false;
 
-      $defaults = apply_filters('shortcode_property_overview_allowed_args', $defaults, $atts);
+      $defaults = apply_filters( 'shortcode_property_overview_allowed_args', $defaults, $atts );
 
       //** We add # to value which says that we don't want to use LIKE in SQL query for searching this value. */
-      foreach( $atts as $key => $val ) {
-        if( isset( $wp_properties[ 'property_stats' ][ $key ] ) && !key_exists( $key, $defaults ) && $key != 'property_type' ) {
-          if( substr_count( $val, ',' ) || substr_count( $val, '&ndash;' ) || substr_count( $val, '--' ) ) {
-            continue;
+      if( $atts['strict_search'] == 'true' ) {
+        foreach( $atts as $key => $val ) {
+          if( isset( $wp_properties[ 'property_stats' ][ $key ] ) && !key_exists( $key, $defaults ) && $key != 'property_type' ) {
+            if( substr_count( $val, ',' ) || substr_count( $val, '&ndash;' ) || substr_count( $val, '--' ) ) {
+              continue;
+            }
+            $atts[ $key ] = '#' . $val . '#';
           }
-          $atts[ $key ] = '#' . $val . '#';
         }
       }
 

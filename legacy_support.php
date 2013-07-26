@@ -8,44 +8,38 @@
 */
 
 
-//add_filter('wpp_property_overview_render', array('wpp_legacy', 'wpp_property_overview_render'));
+class WPP_Legacy {
 
-
-class wpp_legacy {
-
-
-
-/** 
-   * Hook into shortcode_property_overview() as it returns property_overview results
+  /**
+   * Adds compatibility with legacy functionality on WP-Property upgrade
    *
    */
-    function wpp_property_overview_render($result) {
-      global $wpp_query;
-      //die("<pre style='color: white;'> props_atts:" . print_r($wpp_query, true). "</pre>");
+  static function upgrade(  ) {
+    global $wpdb;
 
-      /* 
-        Manually load pagination for sites that are using a custom property-overview.php template 
-        because in 1.17.3 we stopped using property-pagination.php template and started using
-        wpi_draw_pagination() and wpp_draw_sorter() to render pagination and sorting
-      */
-         
-      if(file_exists(STYLESHEETPATH . "/property-overview.php") ||
-        file_exists(TEMPLATEPATH . "/property-overview.php")) {
-        //** User has a custom prperty-overview.php template, we inject pagination. */
-        //** Issue: how do we identify property-overview.php files that are using the new style ? *
- 
-        $top_pagination = wpi_draw_pagination(array('return' => true, 'class' => 'wpp_top_pagination'));
-        $bottom_pagination = wpi_draw_pagination(array('return' => true, 'class' => 'wpp_bottom_pagination'));
-        
-        //$result['result'] = $top_pagination . $result['result'] . $bottom_pagination;
-        //$result['result'] = $result['result'];
-        
-        $new_result[] = $result['top'] . 'test' . $top_pagination . $result['result'] . $bottom_pagination . $result['bottom'];
-         return $new_result;
-        
+    $installed_ver = get_option( "wpp_version", 0 );
+    $wpp_version = WPP_Version;
+
+    if( @version_compare( $installed_ver, WPP_Version ) == '-1' ) {
+
+      switch( $installed_ver ) {
+
+        /**
+         * Upgrade:
+         * - WPP postmeta data were saved to database with '&ndash;' instead of '-' in value. Function encode_sql_input was modified and it doesn't change '-' to '&ndash' anymore
+         * So to prevent search result issues we need to update database data.
+         * peshkov@UD
+         */
+        case ( version_compare( $installed_ver, '1.37.4' ) == '-1' ):
+
+          $wpdb->query( "UPDATE {$wpdb->prefix}postmeta SET meta_value = REPLACE( meta_value, '&ndash;', '-')" );
+
+          break;
+
       }
-       return $result;
-  
+
     }
+
+  }
 
 }
