@@ -355,9 +355,12 @@ ul.feps_property_input_fields .description {
 .wpp_ui .wpp_pagination_slider.ui-slider-horizontal {
   background: none repeat scroll 0 0 #DDDDDD;
   border: 1px solid #606060;
-  height: 16px;
+  height: 8px;
   width: 75%;
   margin: 0 auto;
+  box-shadow: inset 0 0 5px grey;
+  -moz-box-shadow: inset 0 0 5px grey;
+  -webkit-box-shadow: inset 0 0 5px grey;
 }
 
 .wpp_pagination_slider_status {
@@ -395,10 +398,26 @@ ul.feps_property_input_fields .description {
 }
 
 .wpp_ui .wpp_pagination_slider.ui-slider-horizontal .ui-slider-handle {
-  height: 24px;
-  width: 26px;
+  border: 1px solid #848484;
+  box-shadow: 0 0 2px lightgrey;
+  -moz-box-shadow: 0 0 2px lightgrey;
+  -webkit-box-shadow: 0 0 2px lightgrey;
+  height: 15px;
+  width: 15px;
   margin-left: -8px;
   top: -4px;
+  border-radius: 15px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  background-color: #ffffff;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(255, 255, 255)), to(rgb(132, 132, 132)));
+  background-image: -webkit-linear-gradient(top, rgb(255, 255, 255), rgb(132, 132, 132));
+  background-image: -moz-linear-gradient(top, rgb(255, 255, 255), rgb(132, 132, 132));
+  background-image: -o-linear-gradient(top, rgb(255, 255, 255), rgb(132, 132, 132));
+  background-image: -ms-linear-gradient(top, rgb(255, 255, 255), rgb(132, 132, 132));
+  background-image: linear-gradient(top, rgb(255, 255, 255), rgb(132, 132, 132));
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#ffffff', EndColorStr='#848484');
+
 }
 
 .wpp_ui .wpp_pagination_slider.wpp_slider_loading .ui-slider-handle {
@@ -912,18 +931,15 @@ ul.wpp_property_stats.list li .value {}
   margin-bottom: 10px;
   padding: 1%;
   position: relative;
-  width: 99%;
+  width: 98%;
 }
 
 .wpp_row_view .wpp_overview_right_column {
-  display:table-cell;
-  vertical-align: top;
+  display:block;
 }
 
 .wpp_row_view .property_div .wpp_overview_left_column {
-  vertical-align: top;
-  display: table-cell;
-  position: relative;
+  display: block;
 }
 
 .wpp_row_view .child_properties {
@@ -960,7 +976,7 @@ ul.wpp_property_stats.list li .value {}
 .wpp_row_view .property_image .property_overview_thumb {
   background: none repeat scroll 0 0 #EFEFEF;
   color: black;
-  display: table-cell;
+  display: block;
   text-align: center;
   text-decoration: none;
   vertical-align: middle;
@@ -1063,40 +1079,42 @@ ul.wpp_property_stats.list li .value {}
 /* --- Supermap ---*/
 .super_map_list_property {}
 
+.supermap_filter_wrapper,
 .property_in_list {
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  background: none repeat scroll 0 0 #F7F7F7;
-  border: 1px solid #E8E8E8;
   margin-bottom: 6px;
   width: 96%;
 }
 
 .map_filters {
   display: none;
-  background: #DAE0FF;
   margin-bottom: 0px;
   line-height: 12px;
 }
 
-.super_map_list .map_filters li ul {
-  margin-left:20px;
+.class_wpp_supermap_elements{
+  padding: 10px;
 }
 
-.super_map_list .map_filters li ul li {
-  list-style: none;
+.super_map_list .map_filters ul {
+  list-style: none outside none;
+  margin: 0;
+}
+
+.super_map_list .map_filters ul li{
+  margin: 0;
 }
 
 .hide_filter {
-  background: #DAE0FF;
-  border: 2px ridge grey;
   text-align: center;
-  margin-bottom:10px;
 }
 
 .super_map_list input {
-  margin: 5px 5px 5px 0;
+  margin: 5px 0;
+}
+
+.super_map_list input[type="text"] {
+  padding: 5px 5%;
+  width: 90%;
 }
 
 .super_map, .super_map_list {
@@ -1167,36 +1185,40 @@ input.wpp_supermap_input_field_min, input.wpp_supermap_input_field_max {
 
 .super_map_list ul.property_in_list_items {
   list-style-type: none;
-  margin: 5px;
-  padding: 0;
+  margin: 0;
+  padding: 5px;
   font-size: 0.9em;
   position: relative;
 }
 
-.super_map_list ul.property_in_list_items li {
+.super_map_list ul.property_in_list_items > li {
   background: transparent;
   list-style-type: none;
   display: block;
-  margin-right: 6px;
+  margin: 0;
 }
 
-.super_map_list ul.property_in_list_items li.supermap_list_title span {
+.super_map_list ul.property_in_list_items > li span.attribute{
+  font-weight: bold;
+}
+
+.super_map_list ul.property_in_list_items > li.supermap_list_title span {
   color: #004893;
   font-size: 1.2em;
   cursor: pointer;
   text-decoration: none;
 }
 
-.super_map_list ul.property_in_list_items li.supermap_list_thumb {
-  float: left;
-  position: relative;
-  top: 5px;
-  left: 5px;
-  padding-left: 0;
-  margin-right: 10px;
+.super_map_list ul.property_in_list_items > li.supermap_list_thumb {
+  padding: 5px 10px;
+}
+.super_map_list ul.property_in_list_items > li.supermap_list_thumb span{
+  display:inline-block;
 }
 
-.super_map_list ul.property_in_list_items li.supermap_list_view_property {
+
+
+.super_map_list ul.property_in_list_items > li.supermap_list_view_property {
   color: #004893;
   font-size: 1em;
   cursor: pointer;

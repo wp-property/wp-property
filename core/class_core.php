@@ -36,6 +36,9 @@ class WPP_Core {
     //** Load premium features */
     WPP_F::load_premium();
 
+    //** Modify request to change feed */
+    add_filter('request', 'property_feed');
+
     //** Check if Facebook tries to request site */
     add_action('init', array('WPP_F', 'check_facebook_tabs'));
 
@@ -65,12 +68,11 @@ class WPP_Core {
    *
    * @since 1.11
    * @uses $wp_properties WP-Property configuration array
-   * @uses $wp_rewrite WordPress rewrite object
    * @access public
    *
    */
   function init_upper() {
-    global $wp_properties, $wp_rewrite;
+    global $wp_properties;
 
     //** Init action hook */
     do_action('wpp_init');
@@ -90,9 +92,6 @@ class WPP_Core {
     //** Load all widgets and register widget areas */
     add_action('widgets_init', array('WPP_F', 'widgets_init'));
 
-    //** Has to be called everytime, or else the custom slug will not work */
-    $wp_rewrite->flush_rules();
-
   }
 
 
@@ -103,12 +102,11 @@ class WPP_Core {
    *
    * @since 1.31.0
    * @uses $wp_properties WP-Property configuration array
-   * @uses $wp_rewrite WordPress rewrite object
    * @access public
    *
    */
   function init_lower() {
-    global $wp_properties, $wp_rewrite;
+    global $wp_properties;
 
     /** Ajax functions */
     add_action('wp_ajax_wpp_ajax_max_set_property_type', create_function("",' die(WPP_F::mass_set_property_type($_REQUEST["property_type"]));'));
@@ -568,8 +566,8 @@ class WPP_Core {
    *
    */
   function save_property( $post_id ) {
-    global $wp_rewrite, $wp_properties, $wp_version;
-    
+    global $wp_properties, $wp_version;
+
     $_wpnonce = ( version_compare( $wp_version, '3.5', '>=' ) ? 'update-post_' : 'update-property_' ) . $post_id ;
     if ( !wp_verify_nonce( $_POST['_wpnonce'], $_wpnonce ) || $_POST[ 'post_type' ] !== 'property' ) {
       return $post_id;
@@ -592,12 +590,19 @@ class WPP_Core {
     }
 
     $update_data = $_REQUEST['wpp_data']['meta'];
-    
+
     //** Neccessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
-    if( empty( $update_data['exclude_from_supermap'] ) ) $update_data['exclude_from_supermap'] = 'false';
+    if( empty( $_REQUEST[ 'exclude_from_supermap' ] ) ) {
+      $exclude_from_supermap = get_post_meta( $post_id, 'exclude_from_supermap', true );
+      if( !$exclude_from_supermap ) {
+        $update_data['exclude_from_supermap'] = 'false';
+      }
+    }
+
+
     if( (float)$update_data[ 'latitude' ] == 0 ) $update_data['latitude'] = '';
     if( (float)$update_data[ 'longitude' ] == 0 ) $update_data['longitude'] = '';
-    
+
     /* get old coordinates */
     $old_lat = get_post_meta($post_id,'latitude', true);
     $old_lng = get_post_meta($post_id,'longitude', true);
@@ -715,8 +720,6 @@ class WPP_Core {
     }
 
     do_action('save_property',$post_id, $_REQUEST, $geo_data);
-
-    $wp_rewrite->flush_rules();
 
     return true;
   }
@@ -1089,7 +1092,7 @@ class WPP_Core {
    *
    */
   function admin_init() {
-    global $wp_rewrite, $wp_properties, $post;
+    global $wp_properties, $post;
 
     WPP_F::fix_screen_options();
 

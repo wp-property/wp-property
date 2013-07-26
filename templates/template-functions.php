@@ -695,9 +695,7 @@ if(!function_exists('prepare_property_for_display')):
     }
 
     /* Used to apply different filters depending on where the attribute is displayed. i.e. google_map_infobox  */
-    if($args['scope']) {
-      $attribute_scope = $args['scope'];
-    }
+    $attribute_scope = (!empty($args['scope'])) ? $args['scope'] : false;
 
     $return_type = (is_object($property) ? 'object' : 'array');
 
@@ -744,10 +742,10 @@ if(!function_exists('prepare_property_for_display')):
       //** Only executed shortcodes if the value isn't an array */
       if(!is_array($attribute_value)) {
 
-        if($args['do_not_execute_shortcodes'] == 'true' || $meta_key == 'post_content') {
+        if( (!empty($args['do_not_execute_shortcodes']) && $args['do_not_execute_shortcodes'] == 'true') || $meta_key == 'post_content') {
           continue;
         }
-
+        
         $attribute_value = do_shortcode(html_entity_decode($attribute_value));
 
         $attribute_value = str_replace("\n", "", nl2br($attribute_value));

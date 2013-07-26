@@ -4,7 +4,7 @@ Donate link: http://usabilitydynamics.com/products/wp-property/
 Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 3.0
 Tested up to: 3.5
-Stable tag: 1.36.2
+Stable tag: 1.36.3
 
 
 == Description ==
@@ -217,6 +217,18 @@ We are moving out of beta stages, but you may still experience bugs now and then
 We are still in early stages, so updates will be coming out routinely.  Please do not hesitate to send us feedback and suggestions.
 
 == Changelog ==
+
+= 1.36.3 =
+* Fixed pagination slider on property_overview
+* Fixed property restoring from trash in Wordpress 3.5
+* Flush rules fixes.
+* Added RSS feed for properties
+* Fixed Attributes dragging on property search widget's form
+* Fixed Featured properties shortcode
+* Fixed themes specific CSS
+* Fixed Fancybox on Supermap's infobox
+* Added ability to sort slideshow images for single property
+* Updated localization files
 
 = 1.36.2 =
 * Added WordPress 3.5 compatibility.

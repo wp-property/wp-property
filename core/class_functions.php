@@ -1596,7 +1596,7 @@ class WPP_F extends UD_API {
         update_post_meta($post_id, 'country', $geo_data->country);
         update_post_meta($post_id, 'country_code', $geo_data->country_code);
         update_post_meta($post_id, 'postal_code', $geo_data->postal_code);
-        
+
         //** Neccessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
         $exclude_from_supermap = get_post_meta( $post_id, 'exclude_from_supermap', true );
         if( !$exclude_from_supermap ) {
@@ -1671,7 +1671,11 @@ class WPP_F extends UD_API {
     }
 
     if(class_exists('JSMin')) {
-      $data = JSMin::minify($data);
+      try {
+        $data = JSMin::minify($data);
+      }catch (Exception $e) {
+        return $data;
+      }
     }
 
     return $data;
@@ -2368,7 +2372,7 @@ class WPP_F extends UD_API {
    *
     */
   static function settings_action($force_db = false) {
-    global $wp_properties, $wp_rewrite;
+    global $wp_properties;
 
     // Process saving settings
     if(isset($_REQUEST['wpp_settings']) && wp_verify_nonce($_REQUEST['_wpnonce'], 'wpp_setting_save') ) {
@@ -2402,8 +2406,6 @@ class WPP_F extends UD_API {
 
 
       update_option('wpp_settings', $wpp_settings);
-
-      $wp_rewrite->flush_rules();
 
       // Load settings out of database to overwrite defaults from action_hooks.
       $wp_properties_db = get_option('wpp_settings');
@@ -2630,10 +2632,11 @@ class WPP_F extends UD_API {
    *
     */
   static function activation() {
-
-    // Do nothing because only ran on activation, not updates, as of 3.1
+    global $wp_rewrite;
+    // Do close to nothing because only ran on activation, not updates, as of 3.1
     // Now handled by WPP_F::manual_activation().
 
+    $wp_rewrite->flush_rules();
   }
 
 
@@ -3973,9 +3976,7 @@ class WPP_F extends UD_API {
       );
     }
 
-    if(empty($infobox_settings['minimum_box_width'])) {
-      $infobox_settings['minimum_box_width'] = '400';
-    }
+    $infobox_style = (!empty($infobox_settings['minimum_box_width'])) ? 'style="min-width: '.$infobox_settings['minimum_box_width'].'px;"' : '';
 
     foreach($infobox_attributes as $attribute) {
       $property_stats[$attribute] = $wp_properties['property_stats'][$attribute];
@@ -3994,7 +3995,7 @@ class WPP_F extends UD_API {
 
     ob_start(); ?>
 
-    <div id="infowindow" style="min-width:<?php echo $infobox_settings['minimum_box_width']; ?>px;">
+    <div id="infowindow" <?php echo $infobox_style;?>>
     <?php if($infobox_settings['show_property_title']  == 'true') { ?>
       <div class="wpp_google_maps_attribute_row_property_title" >
       <a href="<?php echo get_permalink($property['ID']); ?>"><?php echo $property['post_title']; ?></a>
@@ -5149,5 +5150,21 @@ if(!function_exists('wpp_recursive_unlink')){
         return true;
       }
     }
+  }
+}
+
+/**
+ * Add 'property' to the list of RSSable post_types.
+ *
+ * @param string $request
+ * @return string
+ * @author korotkov@ud
+ * @since 1.36.2
+ */
+if ( !function_exists('property_feed') ) {
+  function property_feed($request) {
+    if (isset($request['feed']) && !isset($request['post_type']))
+      $request['post_type'] = get_post_types( array( '_builtin'=>false ) );
+    return $request;
   }
 }

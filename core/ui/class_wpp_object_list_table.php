@@ -122,7 +122,9 @@ class WPP_Object_List_Table extends WPP_List_Table {
 
           if ( current_user_can( $post_type_object->cap->delete_post, $post->ID ) ) {
             if ( 'trash' == $post->post_status ) {
-              $actions['untrash'] = "<a title='" . esc_attr( __( 'Restore this item from the Trash' ) ) . "' href='" . wp_nonce_url( admin_url( sprintf( $post_type_object->_edit_link . '&amp;action=untrash', $post->ID ) ), 'untrash-' . $post->post_type . '_' . $post->ID ) . "'>" . __( 'Restore' ) . "</a>";
+              global $wp_version;
+              $_wpnonce = ( version_compare( $wp_version, '3.5', '>=' ) ? 'untrash-post_' : 'untrash-' . $post->post_type . '_' ) . $post->ID ;
+              $actions['untrash'] = "<a title='" . esc_attr( __( 'Restore this item from the Trash' ) ) . "' href='" . wp_nonce_url( admin_url( sprintf( $post_type_object->_edit_link . '&amp;action=untrash', $post->ID ) ), $_wpnonce ) . "'>" . __( 'Restore' ) . "</a>";
             } elseif ( EMPTY_TRASH_DAYS && 'pending' != $post->post_status ) {
               $actions['trash'] = "<a class='submitdelete' title='" . esc_attr( __( 'Move this item to the Trash' ) ) . "' href='" . get_delete_post_link( $post->ID ) . "'>" . __( 'Trash' ) . "</a>";
             }

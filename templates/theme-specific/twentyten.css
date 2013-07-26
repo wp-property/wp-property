@@ -125,9 +125,6 @@ ul.wpp_property_stats.list li .attribute { font-weight: normal;}
   overflow: auto;
   margin-bottom: 10px;
 }
-.wpp_row_view .wpp_overview_right_column {
-	width: 99%;
-}
 
 ul.wpp_overview_data {
 	margin-left: 10px;

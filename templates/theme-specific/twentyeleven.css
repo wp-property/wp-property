@@ -113,10 +113,6 @@
  .wpp_row_view .wpp_overview_right_column { padding-top: 5px; }
  .wpp_row_view .property_image .property_overview_thumb { background: transparent; }
 
-.wpp_row_view .property_div .wpp_overview_left_column {
-    padding-left: 8px;
-    padding-top: 8px;
-}
 
 .properties_pagination a.nav, .properties_pagination a.page_button {
   font-size: 0.9em;
@@ -285,6 +281,7 @@
 
 .wpp_search_properties_widget .wpp_search_elements li {
   margin-bottom: 7px;
+  list-style: none outside none;
 }
 
 .wpp_search_properties_widget input.wpp_search_input_field_min,

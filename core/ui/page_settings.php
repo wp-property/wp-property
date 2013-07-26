@@ -17,41 +17,44 @@
 */
 
 
-  //** Check if premium folder is writable */
-  $wp_messages = WPP_F::check_premium_folder_permissions();
+//** Check if premium folder is writable */
+$wp_messages = WPP_F::check_premium_folder_permissions();
 
-  $object_label = array(
-    'singular' => WPP_F::property_label( 'singular' ),
-    'plural' => WPP_F::property_label( 'plural' )
-  );
+$object_label = array(
+  'singular' => WPP_F::property_label( 'singular' ),
+  'plural' => WPP_F::property_label( 'plural' )
+);
 
-  $wrapper_classes = array('wpp_settings_page');
+$wrapper_classes = array('wpp_settings_page');
 
-  if(isset($_REQUEST['message'])) {
+if(isset($_REQUEST['message'])) {
 
-    switch($_REQUEST['message']) {
+  switch($_REQUEST['message']) {
 
-      case 'updated':
-      $wp_messages['notice'][] = __("Settings updated.", 'wpp');
-      break;
+    case 'updated':
+    $wp_messages['notice'][] = __("Settings updated.", 'wpp');
+    break;
 
-    }
   }
+}
 
-  $parseUrl = parse_url(trim(get_bloginfo('url')));
-  $this_domain = trim($parseUrl['host'] ? $parseUrl['host'] : array_shift(explode('/', $parseUrl['path'], 2)));
+//** We have to update Rewrite rules here. peshkov@UD */
+flush_rewrite_rules();
 
-  /** Check if custom css exists */
-  if ( file_exists( STYLESHEETPATH . '/wp_properties.css') || file_exists( TEMPLATEPATH . '/wp_properties.css')) {
-    $using_custom_css = true;
-  }
+$parseUrl = parse_url(trim(get_bloginfo('url')));
+$this_domain = trim($parseUrl['host'] ? $parseUrl['host'] : array_shift(explode('/', $parseUrl['path'], 2)));
+
+/** Check if custom css exists */
+if ( file_exists( STYLESHEETPATH . '/wp_properties.css') || file_exists( TEMPLATEPATH . '/wp_properties.css')) {
+  $using_custom_css = true;
+}
 
 
-  if(get_option('permalink_structure') == '') {
-    $wrapper_classes[] = 'no_permalinks';
-  } else {
-    $wrapper_classes[] = 'have_permalinks';
-  }
+if(get_option('permalink_structure') == '') {
+  $wrapper_classes[] = 'no_permalinks';
+} else {
+  $wrapper_classes[] = 'have_permalinks';
+}
 
 ?>
 
@@ -68,13 +71,13 @@
       wpp_setup_default_property_page();
     });
 
-    
+
     if( document.location.hash != '' && jQuery( document.location.hash ).length > 0 ) {
       jQuery("#wpp_settings_tabs").tabs();
     } else {
       jQuery("#wpp_settings_tabs").tabs({ cookie: {  name: 'wpp_settings_tabs', expires: 30 } });
     }
-    
+
 
     // Show settings array
     jQuery("#wpp_show_settings_array").click(function() {

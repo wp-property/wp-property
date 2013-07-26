@@ -1354,6 +1354,10 @@ class LatestPropertiesWidget extends WP_Widget {
       ?>
      <script type="text/javascript">
 
+      jQuery(document).bind('ajaxComplete', function(){
+        jQuery(".wpp_all_attributes .wpp_sortable_attributes").sortable();
+      });
+
       jQuery(document).ready(function(){
 
         var this_search_box = jQuery("#wpp_property_search_wrapper_<?php echo $this->number; ?>");
@@ -1361,7 +1365,7 @@ class LatestPropertiesWidget extends WP_Widget {
         /* Run on load to hide property type attribut if there is less than 2 property types */
         wpp_adjust_property_type_option();
 
-        jQuery("#all_atributes_<?php echo $this->id; ?>.wpp_sortable_attributes").sortable();
+        jQuery("#all_atributes_<?php echo $this->id; ?> .wpp_sortable_attributes").sortable();
 
         /* Setup tab the grouping/ungrouping tabs, and trigger checking the select box when tabs are switched */
         jQuery(".wpp_subtle_tabs").tabs({
@@ -1373,7 +1377,7 @@ class LatestPropertiesWidget extends WP_Widget {
             }
           }
         });
-        
+
         /* Select the correct tab */
         wpp_set_group_or_ungroup();
 
@@ -1615,6 +1619,26 @@ class LatestPropertiesWidget extends WP_Widget {
       $show_caption = esc_attr($instance['show_caption']);
       $show_description = esc_attr($instance['show_description']);
       $gallery  = ($post->gallery)?$post->gallery:$property['gallery'];
+
+      $slideshow_order = maybe_unserialize(($post->slideshow_images)?$post->slideshow_images:$property['slideshow_images']);
+      $gallery_order   = maybe_unserialize(($post->gallery_images)?$post->gallery_images:$property['gallery_images']);
+
+      //** Calculate order of images */
+      if ( is_array( $slideshow_order ) && is_array( $gallery_order ) ) {
+        $order = array_merge($slideshow_order, $gallery_order);
+
+        //** Get images from the list of images by order */
+        foreach( $order as $order_id ) {
+          foreach( $gallery as $image_slug => $gallery_image_data ) {
+            if ( $gallery_image_data['attachment_id'] == $order_id ) {
+              $prepared_gallery_images[$image_slug] = $gallery_image_data;
+            }
+          }
+        }
+
+        //** Be sure we show ALL property images in gallery */
+        $gallery = array_merge($prepared_gallery_images, $gallery);
+      }
 
       if(empty($image_type)) {
         $image_type = 'thumbnail';
