@@ -55,7 +55,7 @@
     static function init() {
       global $shortcode_tags;
 
-      $shortcodes = array_keys($shortcode_tags);
+      $shortcodes = array_keys((array)$shortcode_tags);
 
       //** Load list-attachments shortcode if the List Attachments Shortcode plugin does not exist */
       if(!in_array('list-attachments', $shortcodes)) {
@@ -335,6 +335,7 @@
   add_filter('wpp_property_stats_input_'. $wp_properties['configuration']['address_attribute'], 'wpp_property_stats_input_address', 0, 3);
 
   add_action('save_property', 'save_property_coordinate_override', 0, 3);
+  add_action('save_property', 'wpp_save_property_aggregated_data', 0, 2);
 
   //add_action("wpp_ui_after_attribute_{$wp_properties['configuration']['address_attribute']}", 'wpp_show_coords');
   add_action('wpp_ui_after_attribute_price', 'wpp_show_week_month_selection');
@@ -560,10 +561,93 @@
 
 
   /**
+   * Updates numeric and currency attribute of parent property on child property saving.
+   * Sets attribute's value based on children values ( sets aggregated value ).
+   *
+   * @param integer $post_id
+   * @param array $post_data
+   * @used WPP_F::save_property();
+   * @author peshkov@UD
+   */
+  function wpp_save_property_aggregated_data( $post_id, $post_data ) {
+    global $wpdb, $wp_properties;
+
+    if( empty( $post_data[ 'parent_id' ] ) ) {
+      return null;
+    }
+
+    //** Get children */
+    $children = $wpdb->get_col( $wpdb->prepare( "
+      SELECT ID
+        FROM {$wpdb->posts}
+          WHERE  post_type = 'property'
+          AND post_status = 'publish'
+          AND post_parent = %s
+            ORDER BY menu_order ASC
+    ", $post_data[ 'parent_id' ] ) );
+
+    if(count($children) > 0) {
+
+      $range = array();
+
+      //** Cycle through children and get necessary variables */
+      foreach($children as $child_id) {
+
+        $child_object = WPP_F::get_property($child_id, "load_parent=false");
+
+        //** Exclude variables from searchable attributes (to prevent ranges) */
+        $excluded_attributes = $wp_properties[ 'geo_type_attributes' ];
+        $excluded_attributes[] = $wp_properties[ 'configuration' ][ 'address_attribute' ];
+
+        foreach( $wp_properties['searchable_attributes'] as $searchable_attribute ) {
+
+          $attribute_data = WPP_F::get_attribute_data( $searchable_attribute );
+
+          if( $attribute_data['numeric'] || $attribute_data['currency'] ) {
+            if( !empty( $child_object[$searchable_attribute] ) && !in_array( $searchable_attribute, $excluded_attributes ) ) {
+              if( !isset( $range[ $searchable_attribute ] ) ) $range[ $searchable_attribute ] = array();
+              $range[ $searchable_attribute ][]  = $child_object[ $searchable_attribute ];
+            }
+
+          }
+        }
+      }
+
+      foreach( $range as $range_attribute => $range_values ) {
+        //* Cycle through all values of this range (attribute), and fix any ranges that use dashes */
+        foreach( $range_values as $key => $single_value ) {
+          //* Remove dollar signs */
+          $single_value = str_replace( "$" , '', $single_value );
+          //* Fix ranges */
+          if( strpos( $single_value, '&ndash;' ) ) {
+            $split = explode( '&ndash;', $single_value );
+            foreach( $split as $new_single_value ) {
+              if( !empty( $new_single_value ) ) {
+                array_push( $range_values, trim( $new_single_value ) );
+              }
+            }
+            //* Unset original value with dash */
+            unset( $range_values[$key] );
+          }
+        }
+
+        $val = @array_sum( $range_values );
+        $val = is_numeric( $val ) && $val > 0 ? $val : 0;
+
+        update_post_meta( $post_data[ 'parent_id' ], $range_attribute, $val);
+
+      }
+
+    }
+
+  }
+
+
+  /**
    * Save manually entered coordinates if setting exists
-    *
-    * Does not blank out latitude or longitude unless maual_coordinates are set
-    *
+   *
+   * Does not blank out latitude or longitude unless maual_coordinates are set
+   *
    * @since 1.08
    */
   function save_property_coordinate_override($post_id, $post_data, $geo_data) {
@@ -850,16 +934,12 @@
 
     $content = trim(str_replace(array("$", ","), "", $content));
 
-    if (!is_numeric($content) && substr_count($content, '-')){
-      $hyphen_between = explode('-', $content);
-      return ($currency_symbol_placement == 'before' ? $currency_symbol : ''). WPP_F::format_numeric($hyphen_between[0]) . ($currency_symbol_placement == 'after' ? $currency_symbol : '') . ' - ' . ($currency_symbol_placement == 'before' ? $currency_symbol : '') . WPP_F::format_numeric($hyphen_between[1]) . ($currency_symbol_placement == 'after' ? $currency_symbol : '');
-    } elseif (!is_numeric($content)) {
-
-      //** Not numeric, cannot format */
-      return $content;
-
+    if ( !is_numeric($content) ){
+      return preg_replace_callback( '/(\d+)/', create_function(
+        '$matches',
+        'return add_dollar_sign( $matches[0] );'
+      ), $content );
     } else {
-
       return ($currency_symbol_placement == 'before' ? $currency_symbol : '') . WPP_F::format_numeric($content) . ($currency_symbol_placement == 'after' ? $currency_symbol : '');
     }
   }

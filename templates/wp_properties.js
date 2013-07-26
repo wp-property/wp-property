@@ -34,4 +34,14 @@ jQuery(document).ready(function() {
 
   });
 
+  jQuery(".ui-tabs").bind("tabsshow", function(event, ui) {
+    var panel = ui.panel;
+    jQuery(document).trigger("wpp::ui-tabs::tabsshow",panel);
+  });
+
+  jQuery(".ui-tabs").bind("tabsselect", function(event, ui) {
+    var panel = ui.panel;
+    jQuery(document).trigger("wpp::ui-tabs::tabsselect",panel);
+  });
+
 });

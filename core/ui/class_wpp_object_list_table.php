@@ -251,7 +251,7 @@ class WPP_Object_List_Table extends WPP_List_Table {
             if($post->featured)
               $r .= "<input type='button' id='wpp_feature_{$post->ID}' class='wpp_featured_toggle wpp_is_featured' nonce='".wp_create_nonce('wpp_make_featured_' . $post->ID)."' value='".__('Featured','wpp')."' />";
             else
-              $r .= "<input type='button' id='wpp_feature_{$post->ID}' class='wpp_featured_toggle' ' nonce='".wp_create_nonce('wpp_make_featured_' . $post->ID)."'  value='".__('Feature','wpp')."' />";
+              $r .= "<input type='button' id='wpp_feature_{$post->ID}' class='wpp_featured_toggle' ' nonce='".wp_create_nonce('wpp_make_featured_' . $post->ID)."'  value='".__('Add to Featured','wpp')."' />";
           } else {
             if($post->featured)
               $r .=  __('Featured','wpp');

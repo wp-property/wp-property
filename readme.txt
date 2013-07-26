@@ -3,8 +3,8 @@ Contributors:  usability_dynamics, anton-korotkoff, andypotanin
 Donate link: http://usabilitydynamics.com/products/wp-property/
 Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 3.0
-Tested up to: 3.5
-Stable tag: 1.36.3
+Tested up to: 3.5.1
+Stable tag: 1.37.0
 
 
 == Description ==
@@ -217,6 +217,24 @@ We are moving out of beta stages, but you may still experience bugs now and then
 We are still in early stages, so updates will be coming out routinely.  Please do not hesitate to send us feedback and suggestions.
 
 == Changelog ==
+
+= 1.37.0 =
+* Changes in Address Validation due to OVER_QUERY_LIMIT issues
+* Global Slideshow fixes
+* Fixed property overview bottom pagination issue
+* Fixed PropertyType Label in Property Search widget
+* Fixed property search by address attributes
+* Fixed issues with widgets shown inside tabbed area
+* Corrected behavior when values were displayed as True from non-boolean fields if it starts from 1;
+* Fixed OtherProperties Widget
+* Fixed Search widget's selected values in dropdown fields on page result
+* Fixed global $property var type which caused fatal errors in different places
+* Fixed issue on Premium Features ( Settings page ) related to localization usage
+* Fixed Regenerate All PDF Flyers and Lists process
+* Fixed showing of currency symbols and number separators
+* Added ability to show email as a link
+* Fixed aggregating currency and number attributes for parent property which solves issues related to data sorting
+* Updated localization files
 
 = 1.36.3 =
 * Fixed pagination slider on property_overview

@@ -599,7 +599,6 @@ class WPP_Core {
       }
     }
 
-
     if( (float)$update_data[ 'latitude' ] == 0 ) $update_data['latitude'] = '';
     if( (float)$update_data[ 'longitude' ] == 0 ) $update_data['longitude'] = '';
 
@@ -691,6 +690,8 @@ class WPP_Core {
 
     if($geo_data->status == 'OVER_QUERY_LIMIT') {
       //** Could add some sort of user notification that over limit */
+    }else{
+      update_post_meta( $post_id, 'wpp::last_address_validation', time());
     }
 
     //* Check if property has children */
@@ -934,7 +935,7 @@ class WPP_Core {
     }
 
     //** Monitor taxonomy archive queries */
-    if(is_tax() && in_array($wp_query->query_vars['taxonomy'], array_keys($wp_taxonomies))) {
+    if(is_tax() && in_array($wp_query->query_vars['taxonomy'], array_keys((array)$wp_taxonomies))) {
       //** Once get_properties(); can accept taxonomy searches, we can inject a search request in here */
     }
 
@@ -1350,7 +1351,7 @@ class WPP_Core {
 
       $defaults = apply_filters('shortcode_property_overview_allowed_args', $defaults, $atts);
 
-      if($atts['ajax_call']) {
+      if(!empty($atts['ajax_call'])) {
         //** If AJAX call then the passed args have all the data we need */
         $wpp_query = $atts;
 
@@ -1684,8 +1685,8 @@ class WPP_Core {
       $property = $post;
     }
 
-    //** Convert to object */
-    $property = (object) $property;
+    //** Convert to array */
+    $property = (array) $property;
 
     //** Force map to be enabled here */
     $skip_default_google_map_check = true;

@@ -87,7 +87,7 @@ class WPP_UI {
     $stats_group = (!empty($attrs['args']['group']) ? $attrs['args']['group'] : false);
 
     $disabled_attributes = (array) $wp_properties['geo_type_attributes'];
-    $property_stats = $wp_properties['property_stats'];
+    $property_stats = (array)$wp_properties['property_stats'];
     $stat_keys = array_keys($property_stats);
 
     //** If an attribute with 'property_type' slug exists, we tweak UI *'
@@ -334,26 +334,26 @@ class WPP_UI {
         } else {
           $predefined_values = false;
         }
-        
+
 
         //** Check input type */
         $input_type = $wp_properties['admin_attr_fields'][$slug];
-        
+
         if($input_type == 'checkbox') {
           $predefined_values = array('true,false');
         }
 
         //** If input type is not set, but pre-defined values exist, try to guess what input type user intended to have */
         if(empty($input_type) && is_array($predefined_values)) {
-        
+
           if(count($predefined_values) == 2 && (in_array('true', $predefined_values) && in_array('false', $predefined_values))) {
             $input_type = 'checkbox';
           } else {
-            $input_type = 'dropdown';          
+            $input_type = 'dropdown';
           }
-        
+
         }
-        
+
         //** If anything is missing we fall back on regular input field */
         if(empty($predefined_values) || empty($input_type)) {
           $input_type = false;
@@ -362,22 +362,22 @@ class WPP_UI {
         ?>
 
         <tr class="<?php echo implode(' ', $row_classes); ?>">
-        
+
           <th>
             <label for="wpp_meta_<?php echo $slug; ?>"><?php echo $label; ?></label>
           </th>
-          
+
           <td class="wpp_attribute_cell">
-          
+
             <span class="disabled_message"><?php echo sprintf(__('Editing %s is disabled, it may be inherited.', 'wpp'), $label); ?></span>
-            
+
             <?php if($attribute_data['currency'] && $wp_properties['configuration']['currency_symbol_placement'] == 'before') { ?>
               <span class="currency"><?php echo $wp_properties['configuration']['currency_symbol']; ?></span>
             <?php } ?>
 
 
-            <?php       
- 
+            <?php
+
             $value = $property[$slug];
 
             if ($value === true) {
@@ -385,32 +385,32 @@ class WPP_UI {
             }
 
             if(in_array($slug, (array) $disabled_attributes))  {
-            
+
               $html_input = "<input type='text' id='wpp_meta_{$slug}' name='wpp_data[meta][{$slug}]' class='text-input wpp_field_disabled {$attribute_data['ui_class']}' value='{$value}' disabled='disabled' />";
-            
+
             } else {
-            
-            
-              switch ($input_type) {              
-              
+
+
+              switch ($input_type) {
+
                 case 'checkbox':
-                  $html_input = "<input type='hidden' name='wpp_data[meta][{$slug}]' value='false' /><input " . checked($value, 'true', false) . "type='checkbox' id='wpp_meta_{$slug}' name='wpp_data[meta][{$slug}]' value='true' {$disabled} /> <label for='wpp_meta_{$slug}'>" . __('Enable.', 'wpp') . "</label>";                
+                  $html_input = "<input type='hidden' name='wpp_data[meta][{$slug}]' value='false' /><input " . checked($value, 'true', false) . "type='checkbox' id='wpp_meta_{$slug}' name='wpp_data[meta][{$slug}]' value='true' {$disabled} /> <label for='wpp_meta_{$slug}'>" . __('Enable.', 'wpp') . "</label>";
                 break;
-                
-                
+
+
                 case 'dropdown':
                   foreach ($predefined_values as $option) {
                      $predefined_options[$slug][] = "<option " . selected(esc_attr(trim($value)), esc_attr(trim(str_replace('-', '&ndash;', $option))), false) . " value='" . esc_attr($option) . "'>" . apply_filters('wpp_stat_filter_' . $slug, $option) . "</option>";
                    }
-                   $html_input = "<select id='wpp_meta_{$slug}' name='wpp_data[meta][{$slug}]'><option value=''> - </option>" . implode($predefined_options[$slug]) . "</select>";                
-                break;                
-                
-                default:
-                  $html_input = "<input type='text' id='wpp_meta_{$slug}' name='wpp_data[meta][{$slug}]' class='text-input {$attribute_data[ui_class]}' value=\"{$value}\" />";                
+                   $html_input = "<select id='wpp_meta_{$slug}' name='wpp_data[meta][{$slug}]'><option value=''> - </option>" . implode($predefined_options[$slug]) . "</select>";
                 break;
-              
+
+                default:
+                  $html_input = "<input type='text' id='wpp_meta_{$slug}' name='wpp_data[meta][{$slug}]' class='text-input {$attribute_data['ui_class']}' value=\"{$value}\" />";
+                break;
+
               }
- 
+
             }
 
             echo apply_filters("wpp_property_stats_input_$slug", $html_input, $slug, $property);
@@ -419,7 +419,7 @@ class WPP_UI {
             if($attribute_data['currency'] && $wp_properties['configuration']['currency_symbol_placement'] == 'after') {
               echo $wp_properties['configuration']['currency_symbol'];
             }
-            
+
             ?>
 
             <span class="description">
@@ -442,7 +442,7 @@ class WPP_UI {
               <span class="disabled_message"><?php echo sprintf(__('Editing %s is disabled, it may be inherited.', 'wpp'), $label); ?></span>
               <textarea id="wpp_data_meta_<?php echo $slug; ?>" name="wpp_data[meta][<?php echo $slug; ?>]"><?php echo preg_replace('%&ndash;|�%i', '-', get_post_meta($object->ID, $slug, true)); ?></textarea>
               <?php if (!empty($wp_properties['descriptions'][$slug])): ?>
-                <span class="description"><?php echo $wp_properties['descriptions'][$slug]; ?></span>
+                <span class="wpp_meta_description"><?php echo $wp_properties['descriptions'][$slug]; ?></span>
               <?php endif; ?>
             </td>
           </tr>
@@ -566,7 +566,7 @@ class WPP_UI {
 
     $type_label = ($attribute['label'] ? $attribute['label'] : sprintf(__('%1s Type', 'wpp'), WPP_F::property_label()));
 
-    $property_type_slugs = array_keys($wp_properties['property_types']);
+    $property_type_slugs = array_keys((array)$wp_properties['property_types']);
 
     if(count($wp_properties['property_types']) > 1) { ?>
       <tr class="wpp_attribute_row_type wpp_attribute_row <?php if (is_array($wp_properties['hidden_attributes'][$property['property_type']]) && in_array('type', $wp_properties['hidden_attributes'][$property['property_type']])) echo 'disabled_row;'; ?>">

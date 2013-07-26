@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Property\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-26 18:08+0200\n"
+"POT-Creation-Date: 2013-02-06 18:20+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
 "Language-Team: \n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.5.5\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: ..\n"
 
@@ -54,7 +54,7 @@ msgstr "Депозит"
 msgid "Area"
 msgstr "Площадь"
 
-#: ../action_hooks.php:78 ../core/class_functions.php:4259
+#: ../action_hooks.php:78 ../core/class_functions.php:4391
 msgid "Phone Number"
 msgstr "Телефон"
 
@@ -78,94 +78,11 @@ msgstr "Дополнительно"
 msgid "Studio"
 msgstr "Студия"
 
-#: ../action_hooks.php:189 ../action_hooks.php:191 ../action_hooks.php:201
-#: ../action_hooks.php:202 ../core/class_functions.php:2216
-msgid "Features"
-msgstr "Свойства"
-
-#: ../action_hooks.php:192 ../action_hooks.php:203 ../action_hooks.php:212
-#: ../core/ui/class_wpp_object_list_table.php:254
-msgid "Feature"
-msgstr "Свойство"
-
-#: ../action_hooks.php:193 ../action_hooks.php:204
-msgid "Search Features"
-msgstr "Поиск свойств"
-
-#: ../action_hooks.php:194 ../action_hooks.php:205
-msgid "All Features"
-msgstr "Все свойства"
-
-#: ../action_hooks.php:195 ../action_hooks.php:206
-msgid "Parent Feature"
-msgstr "Родительское свойство"
-
-#: ../action_hooks.php:196 ../action_hooks.php:207
-msgid "Parent Feature:"
-msgstr "Родительское свойство:"
-
-#: ../action_hooks.php:197 ../action_hooks.php:208
-msgid "Edit Feature"
-msgstr "Редактировать свойство"
-
-#: ../action_hooks.php:198 ../action_hooks.php:209
-msgid "Update Feature"
-msgstr "Обновить свойство"
-
-#: ../action_hooks.php:199 ../action_hooks.php:210
-msgid "Add New Feature"
-msgstr "Добавить новое свойство"
-
-#: ../action_hooks.php:200 ../action_hooks.php:211
-msgid "New Feature Name"
-msgstr "Название нового свойства"
-
-#: ../action_hooks.php:219 ../action_hooks.php:221 ../action_hooks.php:231
-#: ../action_hooks.php:232
-msgid "Community Features"
-msgstr "Общественные свойства"
-
-#: ../action_hooks.php:222 ../action_hooks.php:233 ../action_hooks.php:242
-msgid "Community Feature"
-msgstr "Общественные свойство"
-
-#: ../action_hooks.php:223 ../action_hooks.php:234
-msgid "Search Community Features"
-msgstr "Поиск общественных свойств"
-
-#: ../action_hooks.php:224 ../action_hooks.php:235
-msgid "All Community Features"
-msgstr "Все общественные свойства"
-
-#: ../action_hooks.php:225 ../action_hooks.php:236
-msgid "Parent Community Feature"
-msgstr "Родительские общественные свойства"
-
-#: ../action_hooks.php:226 ../action_hooks.php:237
-msgid "Parent Community Feature:"
-msgstr "Родительские общественные свойства:"
-
-#: ../action_hooks.php:227 ../action_hooks.php:238
-msgid "Edit Community Feature"
-msgstr "Редактировать общественные свойства"
-
-#: ../action_hooks.php:228 ../action_hooks.php:239
-msgid "Update Community Feature"
-msgstr "Обновить  общественные свойства"
-
-#: ../action_hooks.php:229 ../action_hooks.php:240
-msgid "Add New Community Feature"
-msgstr "Добавить новое общественное свойство"
-
-#: ../action_hooks.php:230 ../action_hooks.php:241
-msgid "New Community Feature Name"
-msgstr "Название нового общественного свойства"
-
-#: ../action_hooks.php:252
+#: ../action_hooks.php:189
 msgid "The property type will determine the layout."
 msgstr "Тип объекта подхватит соответствующий шаблон."
 
-#: ../action_hooks.php:253
+#: ../action_hooks.php:190
 msgid ""
 "Customize what appears in search results in the attribute section.  For "
 "example: 1bed, 2baths, area varies slightly."
@@ -173,30 +90,30 @@ msgstr ""
 "Настройте, что будет показываться в результатах поиска в блоке атрибутов. "
 "Например: 1 кровать, 2 ванные."
 
-#: ../action_hooks.php:254
+#: ../action_hooks.php:191
 msgid "Will appear on overview pages and on top of every listing page."
 msgstr ""
 "Будет отображаться на страницах списка объектов и вверху каждой страницы "
 "каталогов."
 
-#: ../action_hooks.php:259
+#: ../action_hooks.php:196
 msgid "Uploading"
 msgstr "Загрузка"
 
-#: ../action_hooks.php:260
+#: ../action_hooks.php:197
 msgid "Drop files here to upload"
 msgstr "Перетащите файлы сюда для загрузки"
 
-#: ../action_hooks.php:261 ../core/premium/class_wpp_feps.php:2158
+#: ../action_hooks.php:198 ../core/premium/class_wpp_feps.php:2158
 msgid "Upload Image"
 msgstr "Загрузить изображение"
 
-#: ../action_hooks.php:262 ../core/ui/page_settings.php:729
+#: ../action_hooks.php:199 ../core/ui/page_settings.php:729
 #: ../core/ui/page_settings.php:736 ../core/ui/page_settings.php:742
 msgid "Cancel"
 msgstr "Отмена"
 
-#: ../action_hooks.php:263
+#: ../action_hooks.php:200
 msgid "Failed"
 msgstr "Не удалось"
 
@@ -208,16 +125,17 @@ msgstr "Извините, неверный запрос."
 msgid "View "
 msgstr "Смотреть"
 
-#: ../default_api.php:354 ../core/class_widgets.php:712
-#: ../core/class_widgets.php:820 ../core/class_widgets.php:955
-#: ../core/class_widgets.php:1060 ../core/class_widgets.php:1301
+#: ../default_api.php:354 ../core/class_widgets.php:719
+#: ../core/class_widgets.php:827 ../core/class_widgets.php:962
+#: ../core/class_widgets.php:1067 ../core/class_widgets.php:1308
 #: ../core/premium/class_wpp_pdf_flyer.php:1058
 #: ../core/premium/class_wpp_property_import.php:2283
+#: ../templates/template-functions.php:1270
 msgid "Property Type"
 msgstr "Тип объекта"
 
-#: ../default_api.php:358 ../core/class_core.php:852
-#: ../core/class_functions.php:4254
+#: ../default_api.php:358 ../core/class_core.php:854
+#: ../core/class_functions.php:4386
 #: ../core/premium/class_wpp_property_import.php:2273
 msgid "City"
 msgstr "Город"
@@ -235,9 +153,8 @@ msgid "This is a rental property."
 msgstr "Объект под аренду"
 
 #: ../default_api.php:493
-#, fuzzy
 msgid "This property is for sale."
-msgstr "Этот объект может быть"
+msgstr "Этот объект может быть продан."
 
 #: ../default_api.php:511
 msgid "Set Coordinates Manually."
@@ -252,11 +169,11 @@ msgid "Longitude"
 msgstr "Долгота"
 
 #: ../default_api.php:600 ../default_api.php:606
-#: ../core/class_functions.php:2741 ../core/class_functions.php:4045
-#: ../core/premium/class_wpp_supermap.php:1058
-#: ../core/premium/class_wpp_supermap.php:1625
+#: ../core/class_functions.php:2854 ../core/class_functions.php:4177
+#: ../core/premium/class_wpp_supermap.php:1055
+#: ../core/premium/class_wpp_supermap.php:1635
 #: ../core/ui/page_settings.php:525 ../core/ui/page_settings.php:539
-#: ../templates/template-functions.php:954
+#: ../templates/template-functions.php:987
 msgid "Yes"
 msgstr "Да"
 
@@ -267,26 +184,23 @@ msgstr "Форматировать телефонный номер"
 #: ../default_api.php:653
 msgid "Convert \"Yes\" and \"True\" values to checked icons on the front-end."
 msgstr ""
+"Преобразовать значения \"Да\" и \"True\" в иконки чекбоксов на фронт-энде."
 
 #: ../default_api.php:707
-#, fuzzy
 msgid " sq. ft."
 msgstr " кв. м."
 
 #: ../default_api.php:887
-#, fuzzy
 msgid "Address was validated by Google Maps."
-msgstr "Адрес еще не валидирован."
+msgstr "Адрес был валидирован Google Maps."
 
 #: ../default_api.php:889
-#, fuzzy
 msgid ""
 "Address has not yet been validated, should be formatted as: street, city, "
 "state, postal code, country. Locations are validated through Google Maps."
 msgstr ""
-"<span class='description'>Адрес не прошел проверку и должен быть "
-"отформатирован как:  улица, город, штат, индекс, страна. Местоположение было "
-"проверено через Google Maps.</span>"
+"Адрес не прошел проверку и должен быть отформатирован как:  улица, город, "
+"штат, индекс, страна. Местоположение было проверено через Google Maps."
 
 #: ../core/class_core.php:300 ../core/class_core.php:396
 #: ../core/premium/class_admin_tools.php:384
@@ -304,177 +218,170 @@ msgstr "Настройки"
 msgid "Child Properties"
 msgstr "Вложенный объект"
 
-#: ../core/class_core.php:742
+#: ../core/class_core.php:744
 msgid "Menu Sort Order:"
 msgstr "Порядок отображения в меню"
 
-#: ../core/class_core.php:745
+#: ../core/class_core.php:747
 msgid "Display in featured listings."
 msgstr "Отображать объект в листинге избранных."
 
-#: ../core/class_core.php:808
-#, fuzzy, php-format
+#: ../core/class_core.php:810
+#, php-format
 msgid "Property updated. <a href=\"%s\">view property</a>"
-msgstr "%2$s обновлен. <a href=\"%s\">Просмотр %2$s</a>"
+msgstr "Объект обновлен. <a href=\"%s\">Просмотр объект</a>"
 
-#: ../core/class_core.php:809
+#: ../core/class_core.php:811
 msgid "Custom field updated."
 msgstr "Поле обновлено."
 
-#: ../core/class_core.php:810
+#: ../core/class_core.php:812
 msgid "Custom field deleted."
 msgstr "Поле удалено."
 
-#: ../core/class_core.php:811
+#: ../core/class_core.php:813
 msgid "Property updated."
 msgstr "Объект обновлен"
 
-#: ../core/class_core.php:813
-#, fuzzy, php-format
-msgid "Property restored to revision from %s"
-msgstr "%1$s восстановлен из ревизии %s"
-
-#: ../core/class_core.php:814
-#, fuzzy, php-format
-msgid "Property published. <a href=\"%s\">View property</a>"
-msgstr "%2$s опубликован. <a href=\"%s\">Просмотр объекта</a>"
-
 #: ../core/class_core.php:815
-#, fuzzy
-msgid "Property saved."
-msgstr "Объект обновлен"
+#, php-format
+msgid "Property restored to revision from %s"
+msgstr "Объект восстановлен из ревизии %s"
 
 #: ../core/class_core.php:816
-#, fuzzy, php-format
-msgid ""
-"Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
-msgstr "%1$s создан. <a target=\"_blank\" href=\"%1$s\">Посмотреть %2$s</a>"
+#, php-format
+msgid "Property published. <a href=\"%s\">View property</a>"
+msgstr "Объект опубликован. <a href=\"%s\">Просмотр объекта</a>"
 
 #: ../core/class_core.php:817
-#, fuzzy, php-format
+msgid "Property saved."
+msgstr "Объект сохранен."
+
+#: ../core/class_core.php:818
+#, php-format
+msgid ""
+"Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+msgstr "Объект создан. <a target=\"_blank\" href=\"%s\">Посмотреть объект</a>"
+
+#: ../core/class_core.php:819
+#, php-format
 msgid ""
 "Property scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href="
 "\"%2$s\">Preview property</a>"
 msgstr ""
-"%3$s запланирован на: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
-"\">Посмотреть %4$s</a>"
+"Объект запланирован на: <strong>%1$s</strong>. <a target=\"_blank\" href="
+"\"%2$s\">Предпросмотр объекта</a>"
 
-#: ../core/class_core.php:819
+#: ../core/class_core.php:821
 #: ../core/premium/class_wpp_property_import.php:301
 msgid "M j, Y @ G:i"
 msgstr "j M, Y @ H:i"
 
-#: ../core/class_core.php:820
-#, fuzzy, php-format
+#: ../core/class_core.php:822
+#, php-format
 msgid ""
 "Property draft updated. <a target=\"_blank\" href=\"%s\">Preview property</a>"
 msgstr ""
-"%2$s черновик объекта обновлен <a target=\"_blank\" href=\"%s\">Посмотреть "
+"Черновик объекта обновлен <a target=\"_blank\" href=\"%s\">Посмотреть "
 "объекта</a>"
 
-#: ../core/class_core.php:842 ../core/class_functions.php:1039
-#: ../core/class_functions.php:1046 ../core/class_functions.php:2213
-#: ../core/class_widgets.php:416 ../core/class_widgets.php:634
-#: ../core/class_widgets.php:860 ../core/class_widgets.php:1100
+#: ../core/class_core.php:844 ../core/class_functions.php:1100
+#: ../core/class_functions.php:1107 ../core/class_functions.php:2326
+#: ../core/class_widgets.php:423 ../core/class_widgets.php:641
+#: ../core/class_widgets.php:867 ../core/class_widgets.php:1107
 #: ../core/premium/class_wpp_feps.php:1973
 #: ../core/premium/class_wpp_feps.php:2005
 msgid "Title"
 msgstr "Заголовок"
 
-#: ../core/class_core.php:843 ../core/class_functions.php:2214
-#: ../core/class_functions.php:4405 ../core/ud_api.php:987
+#: ../core/class_core.php:845 ../core/class_functions.php:2327
+#: ../core/class_functions.php:4537 ../core/ud_api.php:989
 #: ../core/premium/class_admin_tools.php:583
 msgid "Type"
 msgstr "Тип"
 
-#: ../core/class_core.php:853 ../core/class_functions.php:2215
+#: ../core/class_core.php:855 ../core/class_functions.php:2328
 msgid "Overview"
 msgstr "Обзор"
 
-#: ../core/class_core.php:854 ../core/class_functions.php:2217
-#: ../core/class_functions.php:4409
+#: ../core/class_core.php:856 ../core/class_functions.php:2330
+#: ../core/class_functions.php:4541
 #: ../core/ui/class_wpp_object_list_table.php:252
 #: ../core/ui/class_wpp_object_list_table.php:257
 msgid "Featured"
 msgstr "Избранное"
 
-#: ../core/class_core.php:855 ../core/ui/property_metaboxes.php:66
+#: ../core/class_core.php:857 ../core/ui/property_metaboxes.php:66
 #: ../core/ui/property_metaboxes.php:67
 msgid "Order"
 msgstr "Порядок отображения"
 
-#: ../core/class_core.php:856 ../core/class_functions.php:2224
+#: ../core/class_core.php:858 ../core/class_functions.php:2337
 #: ../core/premium/class_wpp_pdf_flyer.php:823
 msgid "Thumbnail"
 msgstr "Миниатюра"
 
-#: ../core/class_core.php:1103
+#: ../core/class_core.php:1105
 msgid "General Information"
 msgstr "Общая информация"
 
-#: ../core/class_core.php:1113
+#: ../core/class_core.php:1115
 msgid "NO NAME"
 msgstr "Без имени"
 
-#: ../core/class_core.php:1119 ../templates/template-functions.php:1348
+#: ../core/class_core.php:1121 ../templates/template-functions.php:1387
 msgid "Search"
 msgstr "Поиск"
 
-#: ../core/class_core.php:1330
+#: ../core/class_core.php:1332
 msgid "Floor plans at location:"
 msgstr "Планы этажей здания:"
 
-#: ../core/class_core.php:1334
+#: ../core/class_core.php:1336
 msgid "Sort By:"
 msgstr "Сортировать по:"
 
-#: ../core/class_core.php:1804 ../core/class_functions.php:195
+#: ../core/class_core.php:1806 ../core/class_functions.php:256
 msgid "Edit Property"
 msgstr "Редактировать объект"
 
-#: ../core/class_core.php:1805
-#, fuzzy
-msgid "Read Property"
-msgstr "Новый объект"
-
-#: ../core/class_core.php:1806
-#, fuzzy
-msgid "Delete Property"
-msgstr "Новый объект"
-
 #: ../core/class_core.php:1807
-#, fuzzy
+msgid "Read Property"
+msgstr "Читать объект"
+
+#: ../core/class_core.php:1808
+msgid "Delete Property"
+msgstr "Удалять объект"
+
+#: ../core/class_core.php:1809
 msgid "Edit Properties"
 msgstr "Редактировать объект"
 
-#: ../core/class_core.php:1808
-#, fuzzy
-msgid "Edit Other Properties"
-msgstr "Редактировать объект"
-
-#: ../core/class_core.php:1809
-#, fuzzy
-msgid "Publish Properties"
-msgstr "Объекты"
-
 #: ../core/class_core.php:1810
-#, fuzzy
-msgid "Read Private Properties"
-msgstr "Редактировать объект"
+msgid "Edit Other Properties"
+msgstr "Редактировать другие объекты"
+
+#: ../core/class_core.php:1811
+msgid "Publish Properties"
+msgstr "Публикавать объекты"
 
 #: ../core/class_core.php:1812
+msgid "Read Private Properties"
+msgstr "Читать приватные объекты"
+
+#: ../core/class_core.php:1814
 msgid "Manage Settings"
 msgstr "Управление параметрами"
 
-#: ../core/class_core.php:1814
+#: ../core/class_core.php:1816
 msgid "Manage Categories"
 msgstr "Управление категориями"
 
-#: ../core/class_core.php:1866
+#: ../core/class_core.php:1868
 msgid "For more information:"
 msgstr "Для более подробной информации:"
 
-#: ../core/class_core.php:1867
+#: ../core/class_core.php:1869
 msgid ""
 "<a href=\"https://usabilitydynamics.com/products/wp-property/\" target="
 "\"_blank\">WP-Property Product Page</a>"
@@ -482,7 +389,7 @@ msgstr ""
 "<a href=\"https://usabilitydynamics.com/products/wp-property/\" target="
 "\"_blank\">Страница WP-Property</a>"
 
-#: ../core/class_core.php:1868
+#: ../core/class_core.php:1870
 msgid ""
 "<a href=\"https://usabilitydynamics.com/products/wp-property/forum/\" target="
 "\"_blank\">WP-Property Forums</a>"
@@ -490,7 +397,7 @@ msgstr ""
 "<a href=\"https://usabilitydynamics.com/products/wp-property/forum/\" target="
 "\"_blank\">Форумы WP-Property</a>"
 
-#: ../core/class_core.php:1869
+#: ../core/class_core.php:1871
 msgid ""
 "<a href=\"https://usabilitydynamics.com/help/\" target=\"_blank\">WP-"
 "Property Tutorials</a>"
@@ -498,13 +405,13 @@ msgstr ""
 "<a href=\"https://usabilitydynamics.com/help/\" target=\"_blank"
 "\">Руководства WP-Property</a>"
 
-#: ../core/class_core.php:1875
+#: ../core/class_core.php:1877
 msgid "Please upgrade Wordpress to the latest version for detailed help."
 msgstr ""
 "Пожалуйста, обновите Wordpress до последней версии, для получения подробной "
 "справки."
 
-#: ../core/class_core.php:1875
+#: ../core/class_core.php:1877
 msgid ""
 "Or visit <a href=\"https://usabilitydynamics.com/tutorials/wp-property-help/"
 "\" target=\"_blank\">WP-Property Help Page</a> on UsabilityDynamics.com"
@@ -518,13 +425,13 @@ msgstr ""
 msgid "An error occurred during API key request: <b>%s</b>."
 msgstr "Во время запроса API ключа произошла ошибка <b> %s </b>."
 
-#: ../core/class_functions.php:109 ../core/class_functions.php:190
-#: ../core/class_functions.php:1183
+#: ../core/class_functions.php:109 ../core/class_functions.php:251
+#: ../core/class_functions.php:1244
 #: ../core/premium/class_wpp_power_tools.php:333
 msgid "Properties"
 msgstr "Объекты"
 
-#: ../core/class_functions.php:113 ../core/class_functions.php:192
+#: ../core/class_functions.php:113 ../core/class_functions.php:253
 #: ../core/premium/class_wpp_facebook_tabs.php:839
 #: ../core/premium/class_wpp_facebook_tabs.php:888
 msgid "Property"
@@ -540,56 +447,138 @@ msgstr "Объект: %s"
 msgid "Sidebar located on the %s page."
 msgstr "Боковая панель расположена на странице %s."
 
-#: ../core/class_functions.php:191
-#, fuzzy
-msgid "All Properties"
-msgstr "Объекты"
+#: ../core/class_functions.php:190 ../core/class_functions.php:192
+#: ../core/class_functions.php:202 ../core/class_functions.php:203
+#: ../core/class_functions.php:2329
+msgid "Features"
+msgstr "Свойства"
 
-#: ../core/class_functions.php:193
-#, fuzzy
+#: ../core/class_functions.php:193 ../core/class_functions.php:204
+#: ../core/class_functions.php:213
+msgid "Feature"
+msgstr "Свойства"
+
+#: ../core/class_functions.php:194 ../core/class_functions.php:205
+msgid "Search Features"
+msgstr "Поиск свойств"
+
+#: ../core/class_functions.php:195 ../core/class_functions.php:206
+msgid "All Features"
+msgstr "Все свойства"
+
+#: ../core/class_functions.php:196 ../core/class_functions.php:207
+msgid "Parent Feature"
+msgstr "Родительское свойство"
+
+#: ../core/class_functions.php:197 ../core/class_functions.php:208
+msgid "Parent Feature:"
+msgstr "Родительское свойство:"
+
+#: ../core/class_functions.php:198 ../core/class_functions.php:209
+msgid "Edit Feature"
+msgstr "Редактировать свойство"
+
+#: ../core/class_functions.php:199 ../core/class_functions.php:210
+msgid "Update Feature"
+msgstr "Обновить свойство"
+
+#: ../core/class_functions.php:200 ../core/class_functions.php:211
+msgid "Add New Feature"
+msgstr "Добавить новое свойство"
+
+#: ../core/class_functions.php:201 ../core/class_functions.php:212
+msgid "New Feature Name"
+msgstr "Название нового свойства"
+
+#: ../core/class_functions.php:220 ../core/class_functions.php:222
+#: ../core/class_functions.php:232 ../core/class_functions.php:233
+msgid "Community Features"
+msgstr "Общественные свойства"
+
+#: ../core/class_functions.php:223 ../core/class_functions.php:234
+#: ../core/class_functions.php:243
+msgid "Community Feature"
+msgstr "Общественные свойства"
+
+#: ../core/class_functions.php:224 ../core/class_functions.php:235
+msgid "Search Community Features"
+msgstr "Поиск общественных свойств"
+
+#: ../core/class_functions.php:225 ../core/class_functions.php:236
+msgid "All Community Features"
+msgstr "Все общественные свойства"
+
+#: ../core/class_functions.php:226 ../core/class_functions.php:237
+msgid "Parent Community Feature"
+msgstr "Родительские общественные свойства"
+
+#: ../core/class_functions.php:227 ../core/class_functions.php:238
+msgid "Parent Community Feature:"
+msgstr "Родительские общественные свойства:"
+
+#: ../core/class_functions.php:228 ../core/class_functions.php:239
+msgid "Edit Community Feature"
+msgstr "Редактировать общественные свойства"
+
+#: ../core/class_functions.php:229 ../core/class_functions.php:240
+msgid "Update Community Feature"
+msgstr "Обновить  общественные свойства"
+
+#: ../core/class_functions.php:230 ../core/class_functions.php:241
+msgid "Add New Community Feature"
+msgstr "Добавить новое общественное свойство"
+
+#: ../core/class_functions.php:231 ../core/class_functions.php:242
+msgid "New Community Feature Name"
+msgstr "Название нового общественного свойства"
+
+#: ../core/class_functions.php:252
+msgid "All Properties"
+msgstr "Все объекты"
+
+#: ../core/class_functions.php:254
 msgid "Add Property"
 msgstr "Добавить новый объект"
 
-#: ../core/class_functions.php:194
+#: ../core/class_functions.php:255
 msgid "Add New Property"
 msgstr "Добавить новый объект"
 
-#: ../core/class_functions.php:196
+#: ../core/class_functions.php:257
 msgid "New Property"
 msgstr "Новый объект"
 
-#: ../core/class_functions.php:197 ../core/premium/class_wpp_supermap.php:1074
-#: ../core/premium/class_wpp_supermap.php:1640
+#: ../core/class_functions.php:258 ../core/premium/class_wpp_supermap.php:1071
+#: ../core/premium/class_wpp_supermap.php:1650
 msgid "View Property"
 msgstr "Посмотреть объект"
 
-#: ../core/class_functions.php:198
+#: ../core/class_functions.php:259
 msgid "Search Properties"
 msgstr "Найти объект"
 
-#: ../core/class_functions.php:199
+#: ../core/class_functions.php:260
 msgid "No properties found"
 msgstr "Не найдено ни одного объекта"
 
-#: ../core/class_functions.php:200
-#, fuzzy
+#: ../core/class_functions.php:261
 msgid "No properties found in Trash"
-msgstr "Не найдено ни одного объекта"
+msgstr "Не найдено ни одного объекта в "
 
-#: ../core/class_functions.php:556
+#: ../core/class_functions.php:617
 msgid "Could not detect."
 msgstr "Не удалось обнаружить."
 
-#: ../core/class_functions.php:677
-#, fuzzy, php-format
+#: ../core/class_functions.php:738
+#, php-format
 msgid "Set %1s properties to \"%2s\" property type"
-msgstr "Задать  \"%2$s\" %3$s тип для %1$s %4$s"
+msgstr "Присвоить %1s объектам \"%2s\" тип объектов"
 
-#: ../core/class_functions.php:1045
+#: ../core/class_functions.php:1106
 msgid "Default"
 msgstr "По умолчанию"
 
-#: ../core/class_functions.php:1497
+#: ../core/class_functions.php:1558
 msgid ""
 "If you have problems automatically downloading premium features, it may be "
 "due to PHP not having ownership issues over the premium feature folder."
@@ -598,7 +587,7 @@ msgstr ""
 "это может быть связано с тем, что PHP не имеет прав собственности на папку с "
 "премиальными дополнениями."
 
-#: ../core/class_functions.php:1507
+#: ../core/class_functions.php:1568
 msgid ""
 "There is an ownership issue with the premium folder, which means your site "
 "cannot download WP-Property premium features and receive updates.  Please "
@@ -613,7 +602,7 @@ msgstr ""
 "plugins/wp-property/core/premium</b>. Имейте в виду: изменение прав доступа "
 "к файлу не исправит это."
 
-#: ../core/class_functions.php:1514
+#: ../core/class_functions.php:1575
 msgid ""
 "One of the folders that is necessary for downloading additional features for "
 "the WP-Property plugin is not writable.  This means features cannot be "
@@ -625,250 +614,262 @@ msgstr ""
 "могут быть загружены. Для исправления Вам необходимо установить права на "
 "папку <b>wp-content/plugins/wp-property/core/premium</b> в 0755."
 
-#: ../core/class_functions.php:2028
+#: ../core/class_functions.php:1739
+#, php-format
+msgid "Updated %1$d %2$s using the %3$s localization."
+msgstr "%1$d %2$s  обновлены, используя %3$s локализацию."
+
+#: ../core/class_functions.php:1742
+#, php-format
+msgid "%1$d %2$s has empty address."
+msgstr "%1$d %2$s содержат пустой адрес."
+
+#: ../core/class_functions.php:1746
+#, php-format
+msgid "%1$d %2$s could not be updated."
+msgstr "%1$d %2$s не может быть обновлены."
+
+#: ../core/class_functions.php:1750
+#, php-format
+msgid "%1$d %2$s was ignored because query limit was exceeded."
+msgstr "%1$d %2$s было игнорировано, так как истекло время запроса."
+
+#: ../core/class_functions.php:2141
 msgid "Cache was successfully cleared"
 msgstr "Кэш успешно очищен"
 
-#: ../core/class_functions.php:2068
+#: ../core/class_functions.php:2181
 #, php-format
 msgid "An error occurred during premium feature check: <b> %s </b>."
 msgstr "Во время проверки премиум дополнения произошла ошибка: <b> %s </b>."
 
-#: ../core/class_functions.php:2098
+#: ../core/class_functions.php:2211
 msgid "The API key could not be generated."
 msgstr "API не может быть генерирован."
 
-#: ../core/class_functions.php:2100
+#: ../core/class_functions.php:2213
 #, php-format
 msgid "An error occurred during premium feature check: <b>%s</b>."
 msgstr "Во время проверки премиум дополнения произошла ошибка: <b> %s </b>."
 
-#: ../core/class_functions.php:2130
+#: ../core/class_functions.php:2243
 msgid "Feature Name"
 msgstr "Название дополнения"
 
-#: ../core/class_functions.php:2131 ../core/class_functions.php:2511
-#: ../core/class_functions.php:2604
+#: ../core/class_functions.php:2244 ../core/class_functions.php:2624
 msgid "Version"
 msgstr "Версия"
 
-#: ../core/class_functions.php:2132 ../core/class_functions.php:2512
-#: ../core/class_functions.php:2605 ../core/premium/class_wpp_feps.php:1957
+#: ../core/class_functions.php:2245 ../core/class_functions.php:2625
+#: ../core/premium/class_wpp_feps.php:1957
 #: ../core/premium/class_wpp_pdf_flyer.php:1286
 msgid "Description"
 msgstr "Описание"
 
-#: ../core/class_functions.php:2146
+#: ../core/class_functions.php:2259
 #, php-format
 msgid "WP-Property Premium Feature: %s updated to version %s from %s."
 msgstr "WP-Property - Премиум дополнение %s обновлено до версии %s с %s."
 
-#: ../core/class_functions.php:2148
+#: ../core/class_functions.php:2261
 #, php-format
 msgid "WP-Property Premium Feature: %s updated to version %s."
 msgstr "WP-Property - Премиум дополнение %s обновлено до версии %s."
 
-#: ../core/class_functions.php:2165
-#, fuzzy
+#: ../core/class_functions.php:2278
 msgid ""
 "Update ran successfully but no features were downloaded because the setting "
 "is disabled. Enable in the \"Developer\" tab."
 msgstr ""
 "Обновление прошло успешно, но дополнения не были загружены, потому что этот "
-"параметр отключен. Включите его во вкладке  \"Структура Данных\"."
+"параметр отключен. Включите его во вкладке  \"Разработчик\"."
 
-#: ../core/class_functions.php:2168
+#: ../core/class_functions.php:2281
 msgid "Update ran successfully."
 msgstr "Обновление прошло успешно."
 
-#: ../core/class_functions.php:2510 ../core/class_functions.php:2603
-#: ../core/class_functions.php:4260 ../core/premium/class_agents.php:1674
+#: ../core/class_functions.php:2623 ../core/class_functions.php:4392
+#: ../core/premium/class_agents.php:1674
 #: ../core/premium/class_wpp_supermap.php:202
-#: ../core/premium/class_wpp_supermap.php:346
-#: ../templates/template-functions.php:1593
+#: ../core/premium/class_wpp_supermap.php:344
+#: ../templates/template-functions.php:1631
 msgid "Name"
 msgstr "Название"
 
-#: ../core/class_functions.php:2513
+#: ../core/class_functions.php:2626
 msgid "Minimum Core Version"
 msgstr "Минимальная версия ядра"
 
-#: ../core/class_functions.php:2743 ../core/ui/page_settings.php:525
-#: ../core/ui/page_settings.php:539 ../templates/template-functions.php:959
+#: ../core/class_functions.php:2856 ../core/ui/page_settings.php:525
+#: ../core/ui/page_settings.php:539 ../templates/template-functions.php:992
 msgid "No"
 msgstr "Нет"
 
-#: ../core/class_functions.php:3779
+#: ../core/class_functions.php:3912
 msgid " sq ft."
 msgstr " кв. фт."
 
-#: ../core/class_functions.php:4012 ../core/class_functions.php:4021
+#: ../core/class_functions.php:4145 ../core/class_functions.php:4154
 msgid "Get Directions"
 msgstr "Получить направление"
 
-#: ../core/class_functions.php:4251
+#: ../core/class_functions.php:4383
 #: ../core/premium/class_wpp_pdf_flyer.php:139
 msgid "General Settings"
 msgstr "Основные Настройки"
 
-#: ../core/class_functions.php:4252
-#, fuzzy
+#: ../core/class_functions.php:4384
 msgid "Find your property"
-msgstr "Это не ваш объект"
+msgstr "Найти Ваш ваш объект"
 
-#: ../core/class_functions.php:4253 ../core/premium/class_agents.php:444
+#: ../core/class_functions.php:4385 ../core/premium/class_agents.php:444
 #: ../core/premium/class_wpp_property_import.php:3917
 #: ../core/ui/class_wpp_object_list_table.php:120
 msgid "Edit"
 msgstr "Редактировать"
 
-#: ../core/class_functions.php:4255
+#: ../core/class_functions.php:4387
 msgid "Contact us"
 msgstr "Форма связи"
 
-#: ../core/class_functions.php:4256
+#: ../core/class_functions.php:4388
 msgid "Login"
 msgstr "Вход"
 
-#: ../core/class_functions.php:4257
+#: ../core/class_functions.php:4389
 msgid "Explore"
 msgstr "Обзор"
 
-#: ../core/class_functions.php:4258
+#: ../core/class_functions.php:4390
 msgid "Message"
 msgstr "Сообщение"
 
-#: ../core/class_functions.php:4261
+#: ../core/class_functions.php:4393
 msgid "E-mail"
 msgstr "Электронная почта"
 
-#: ../core/class_functions.php:4262
+#: ../core/class_functions.php:4394
 msgid "Send Message"
 msgstr "Отослать сообщение"
 
-#: ../core/class_functions.php:4263
+#: ../core/class_functions.php:4395
 msgid "Submit Inquiry"
 msgstr "Отправить запрос"
 
-#: ../core/class_functions.php:4264
+#: ../core/class_functions.php:4396
 msgid "Inquiry"
 msgstr "Запрос"
 
-#: ../core/class_functions.php:4265
+#: ../core/class_functions.php:4397
 msgid "Comment About"
 msgstr "Коментировать"
 
-#: ../core/class_functions.php:4266
+#: ../core/class_functions.php:4398
 msgid "Inquire About"
 msgstr "Сделать запрос"
 
-#: ../core/class_functions.php:4267
+#: ../core/class_functions.php:4399
 msgid "Inquiry About:"
 msgstr "Запрос:"
 
-#: ../core/class_functions.php:4268
+#: ../core/class_functions.php:4400
 msgid "Inquiry message:"
 msgstr "Сообщение запроса:"
 
-#: ../core/class_functions.php:4269
+#: ../core/class_functions.php:4401
 msgid "You forgot to enter your e-mail."
 msgstr "Вы забыли ввести адрес электронной почты."
 
-#: ../core/class_functions.php:4270
+#: ../core/class_functions.php:4402
 msgid "You forgot to enter a message."
 msgstr "Вы забыли ввести сообщение."
 
-#: ../core/class_functions.php:4271
+#: ../core/class_functions.php:4403
 msgid "You forgot to enter your  name."
 msgstr "Вы забыли ввести Ваше имя."
 
-#: ../core/class_functions.php:4272
+#: ../core/class_functions.php:4404
 msgid "Error with sending message. Please contact site administrator."
 msgstr ""
 "Ошибка отправки сообщения. Пожалуйста, свяжитесь с администратором сайта."
 
-#: ../core/class_functions.php:4273
+#: ../core/class_functions.php:4405
 msgid "Thank you for your message."
 msgstr "Спасибо за Ваше сообщение."
 
-#: ../core/class_functions.php:4414
+#: ../core/class_functions.php:4546
 msgid "Status"
 msgstr "Статус"
 
-#: ../core/class_functions.php:4419
+#: ../core/class_functions.php:4551
 msgid "Author"
 msgstr "Автор"
 
-#: ../core/class_functions.php:4424
+#: ../core/class_functions.php:4556
 msgid "Date"
 msgstr "Дата"
 
-#: ../core/class_functions.php:4506
+#: ../core/class_functions.php:4638
 msgid "All"
 msgstr "Все"
 
-#: ../core/class_functions.php:4516 ../core/premium/class_agents.php:1975
-#: ../templates/template-functions.php:1397
-#: ../templates/template-functions.php:1410
-#: ../templates/template-functions.php:1447
+#: ../core/class_functions.php:4648 ../core/premium/class_agents.php:1975
+#: ../templates/template-functions.php:1436
+#: ../templates/template-functions.php:1448
+#: ../templates/template-functions.php:1485
 msgid "Any"
 msgstr "Любое"
 
-#: ../core/class_functions.php:4525 ../core/class_list_table.php:306
+#: ../core/class_functions.php:4657 ../core/class_list_table.php:306
 msgid "Show all dates"
 msgstr "Показывать все даты "
 
-#: ../core/class_functions.php:4635
+#: ../core/class_functions.php:4767
 msgid "General Help"
 msgstr "Общая справка"
 
-#: ../core/class_functions.php:4636
+#: ../core/class_functions.php:4768
 msgid "Comming soon..."
 msgstr "Скоро..."
 
-#: ../core/class_functions.php:4653
-#, fuzzy
+#: ../core/class_functions.php:4785
 msgid "Default Properties Page"
-msgstr "Изображнние объекта по умолчанию"
+msgstr "Страница объекта по умолчанию"
 
-#: ../core/class_functions.php:4654
-#, fuzzy
+#: ../core/class_functions.php:4786
 msgid ""
 "The default <b>property page</b> will be used to display property search "
 "results, as well as be the base for property URLs. "
 msgstr ""
-"Используется для отображения результатов поиска %1s, а так же как база для "
-"%1s URL."
+"Страница объектов по умолчанию используется для отображения результатов "
+"поиска объектов, а так же как база для URL объектов."
 
-#: ../core/class_functions.php:4655
-#, fuzzy
+#: ../core/class_functions.php:4787
 msgid ""
-"By default, the <b>Default Properties Page</b> is set to <b>property</b>, "
+"By default, the <b>Default Properties Page</b> is set to <b>properties</b>, "
 "which is a dynamically created page used for displaying property search "
 "results. "
 msgstr ""
-"По умолчанию, <b>Страница %2$s по умолчанию</b> является <b>%1$s</b>, это "
-"динамически созданная страница дл яотображения результатов поиска %1$s. "
+"По умолчанию, <b>Страница объектов по умолчанию</b> является <b>properties</"
+"b>, это динамически созданная страница дл яотображения результатов поиска "
+"объектов."
 
-#: ../core/class_functions.php:4656
-#, fuzzy
+#: ../core/class_functions.php:4788
 msgid ""
 "We recommend you create an actual WordPress page to be used as the "
 "<b>Default Properties Page</b>. For example, you may create a root page "
 "called \"Real Estate\" - the URL of the default property page will be "
 msgstr ""
-"Мы рекомендуем Вам создать реальную страницуl WordPress для использования ее "
-"в качестве <b>Страницы %2$s по умолчанию</b>. Например, Вы можете создать "
-"базовую страницу \"Недвижимость\" - адрес страницы  %1$s по умолчанию  будет "
-"%3$s<b>/недвижимость/</b>, и Ваше %3$s будет иметь адрес %3$s/недвижимость/"
-"<b>название_недвижимости</b>/"
+"Мы рекомендуем Вам создать реальную страницу WordPress для использования ее "
+"в качестве <b>Страницы объектов по умолчанию</b>. Например, Вы можете "
+"создать базовую страницу \"Недвижимость\" - адрес страницы  объектов по "
+"умолчанию  будет"
 
-#: ../core/class_functions.php:4658 ../core/ui/page_settings.php:268
+#: ../core/class_functions.php:4790 ../core/ui/page_settings.php:268
 msgid "Display"
 msgstr "Отображение"
 
-#: ../core/class_functions.php:4659
-#, fuzzy
+#: ../core/class_functions.php:4791
 msgid ""
 "This tab allows you to do many things. Make custom picture sizes that will "
 "let you to make posting pictures easier. Change the way you view property "
@@ -880,27 +881,27 @@ msgid ""
 msgstr ""
 "Эта вкладка позволяет делать многие вещи. Сделать пользовательские размеры "
 "изображения, которые позволят вам легче сделать размещение фотографии. "
-"Изменить способ отображения %1$s фотографий с использованием Fancy Box, "
-"использовать нумерацию страниц в нижней части страниц %1$s и стоит ли "
-"показывать дочерние %2$s. Управлять атрибутами карт Google и размерами "
+"Изменить способ отображения изображений объектов с использованием Fancy Box, "
+"использовать нумерацию страниц в нижней части страниц объектов и стоит ли "
+"показывать дочерние объекты. Управлять атрибутами карт Google и размерами "
 "эскиза карты. Выберите здесь, какие атрибуты вы хотите показать при выводе "
-"%1$s на карте. Изменить валюту и размещение символов."
+"объектов на карте. Изменить валюту и размещение символов."
 
-#: ../core/class_functions.php:4661 ../core/ui/page_settings.php:289
+#: ../core/class_functions.php:4793 ../core/ui/page_settings.php:289
 msgid "Premium Features"
-msgstr "Премиум дополнения."
+msgstr "Премиум дополнения"
 
-#: ../core/class_functions.php:4662
+#: ../core/class_functions.php:4794
 msgid "Tab allows you to manage your WP-Property Premium Features"
 msgstr ""
 " Вкладка позволяет Вам управлять WP-Property Премиум дополнениями WP-"
 "Property."
 
-#: ../core/class_functions.php:4664 ../core/ui/page_settings.php:291
+#: ../core/class_functions.php:4796 ../core/ui/page_settings.php:291
 msgid "Help"
 msgstr "Справка"
 
-#: ../core/class_functions.php:4665
+#: ../core/class_functions.php:4797
 msgid ""
 "This tab will help you troubleshoot your plugin, do exports and check for "
 "updates for Premium Features"
@@ -908,11 +909,11 @@ msgstr ""
 "Эта вкладка поможет вам устранить неполадки плагина, сделать экспорт и "
 "проверить наличие обновлений для премиальных дополнений."
 
-#: ../core/class_functions.php:4670
+#: ../core/class_functions.php:4802
 msgid "More Help"
 msgstr "Детальная справка"
 
-#: ../core/class_functions.php:4671
+#: ../core/class_functions.php:4803
 msgid ""
 "Visit <a target=\"_blank\" href=\"https://usabilitydynamics.com/products/wp-"
 "property/\">WP-Property Help Page</a> on UsabilityDynamics.com for more help."
@@ -921,7 +922,7 @@ msgstr ""
 "wp-property/\">Страницу помощи WP-Property</a> на UsabilityDynamics.com для "
 "более детальной помощи."
 
-#: ../core/class_functions.php:4780
+#: ../core/class_functions.php:4912
 #, php-format
 msgid ""
 "You cannot use your site as Facebook Application. You should <a href=\"%s"
@@ -949,16 +950,14 @@ msgid "You may append the export URL with the following arguments:"
 msgstr "Вы можете добавить URL экспорта со следующими аргументами:"
 
 #: ../core/class_property_export.php:45
-#, fuzzy
 msgid "Slug for the property type."
-msgstr "Слаг для %1$s типа."
+msgstr "Слаг для типа объекта."
 
 #: ../core/class_property_export.php:46
 msgid "or"
 msgstr "или"
 
 #: ../core/class_property_export.php:59
-#, fuzzy
 msgid "There has been an error retreiving your API key."
 msgstr "Возникла ошибка при получении Вашего API ключа."
 
@@ -967,9 +966,8 @@ msgid "Invalid API key."
 msgstr "Неправильный API ключ."
 
 #: ../core/class_property_export.php:137
-#, fuzzy
 msgid "No published properties."
-msgstr "Объекты"
+msgstr "Нет опубликованных объектов"
 
 #: ../core/class_widgets.php:40 ../core/premium/class_admin_tools.php:300
 #, php-format
@@ -983,10 +981,10 @@ msgid ""
 msgstr ""
 "Отображение списка выбранных атрибутов %1s при загрузке на странице %2s."
 
-#: ../core/class_widgets.php:176 ../core/class_widgets.php:392
-#: ../core/class_widgets.php:599 ../core/class_widgets.php:836
-#: ../core/class_widgets.php:1076 ../core/class_widgets.php:1437
-#: ../core/class_widgets.php:1736 ../core/premium/class_agents.php:2153
+#: ../core/class_widgets.php:176 ../core/class_widgets.php:399
+#: ../core/class_widgets.php:606 ../core/class_widgets.php:843
+#: ../core/class_widgets.php:1083 ../core/class_widgets.php:1444
+#: ../core/class_widgets.php:1743 ../core/premium/class_agents.php:2153
 msgid "Title:"
 msgstr "Заголовок:"
 
@@ -999,241 +997,231 @@ msgid "Display attributes labels."
 msgstr "Отображать названия атрибутов."
 
 #: ../core/class_widgets.php:219
-#, fuzzy, php-format
+#, php-format
 msgid "Other %1s"
-msgstr "Порядок %1$s"
+msgstr "Другие %1s"
 
 #: ../core/class_widgets.php:221
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Display a list of %1s that share a parent with the currently displayed "
 "property."
-msgstr "Отображение дочерних %2$s(если есть) для текущего %1$s."
+msgstr ""
+"Отображать список %1s , которые делят родительский с отображаемым объектом."
 
-#: ../core/class_widgets.php:294 ../core/class_widgets.php:527
-#: ../core/class_widgets.php:750 ../core/class_widgets.php:986
+#: ../core/class_widgets.php:301 ../core/class_widgets.php:534
+#: ../core/class_widgets.php:757 ../core/class_widgets.php:993
 #, php-format
 msgid "%s at %s for %s"
 msgstr "%s на %s за %s"
 
-#: ../core/class_widgets.php:325 ../core/class_widgets.php:547
-#: ../core/class_widgets.php:778 ../core/class_widgets.php:1015
+#: ../core/class_widgets.php:332 ../core/class_widgets.php:554
+#: ../core/class_widgets.php:785 ../core/class_widgets.php:1022
 msgid "More"
 msgstr "Детали"
 
-#: ../core/class_widgets.php:338 ../core/class_widgets.php:555
-#: ../core/class_widgets.php:785 ../core/class_widgets.php:1024
+#: ../core/class_widgets.php:345 ../core/class_widgets.php:562
+#: ../core/class_widgets.php:792 ../core/class_widgets.php:1031
 msgid "View All"
 msgstr "Смотреть все"
 
-#: ../core/class_widgets.php:389
-#, fuzzy
+#: ../core/class_widgets.php:396
 msgid ""
 "The widget will show other properties that share a parent with the currently "
 "displayed property."
 msgstr ""
-"Виджет покажет другие %2$s, которые имеют один родительский с отображенным в "
-"настоящее время %1$s."
+"Виджет покажет другие объекты, которые имеют один родительский с "
+"отображенным в настоящее время объектом."
 
-#: ../core/class_widgets.php:398
+#: ../core/class_widgets.php:405
 msgid "Hide images."
 msgstr "Скрыть рисунки."
 
-#: ../core/class_widgets.php:402 ../core/class_widgets.php:617
-#: ../core/class_widgets.php:847 ../core/class_widgets.php:1087
+#: ../core/class_widgets.php:409 ../core/class_widgets.php:624
+#: ../core/class_widgets.php:854 ../core/class_widgets.php:1094
 msgid "Image Size:"
 msgstr "Размер изображения:"
 
-#: ../core/class_widgets.php:407 ../core/class_widgets.php:622
-#: ../core/class_widgets.php:852 ../core/class_widgets.php:1092
+#: ../core/class_widgets.php:414 ../core/class_widgets.php:629
+#: ../core/class_widgets.php:859 ../core/class_widgets.php:1099
 msgid "Listings to display?"
 msgstr "Отображать объявления?"
 
-#: ../core/class_widgets.php:411
+#: ../core/class_widgets.php:418
 msgid "Select the attributes you want to display: "
 msgstr "Выберите атрибуты, которые вы хотите показывать:"
 
-#: ../core/class_widgets.php:429 ../core/class_widgets.php:648
-#: ../core/class_widgets.php:872 ../core/class_widgets.php:1112
+#: ../core/class_widgets.php:436 ../core/class_widgets.php:655
+#: ../core/class_widgets.php:879 ../core/class_widgets.php:1119
 msgid "Address Format:"
 msgstr "Формат адреса:"
 
-#: ../core/class_widgets.php:437 ../core/class_widgets.php:655
-#: ../core/class_widgets.php:879 ../core/class_widgets.php:1119
+#: ../core/class_widgets.php:444 ../core/class_widgets.php:662
+#: ../core/class_widgets.php:886 ../core/class_widgets.php:1126
 msgid "Show \"More\" link?"
 msgstr "Показывать ссылку \"Детали\"?"
 
-#: ../core/class_widgets.php:441 ../core/class_widgets.php:662
-#: ../core/class_widgets.php:885 ../core/class_widgets.php:1125
+#: ../core/class_widgets.php:448 ../core/class_widgets.php:669
+#: ../core/class_widgets.php:892 ../core/class_widgets.php:1132
 msgid "Show \"View All\" link?"
 msgstr "Показывать ссылку \"Смотреть все\"?"
 
-#: ../core/class_widgets.php:445
-#, fuzzy
+#: ../core/class_widgets.php:452
 msgid "If property has no parent, show other properties of same type."
-msgstr "Если %1$s не имеет родительских, показать другие %2$s этого типа."
+msgstr "Если объект не имеет родительских, показать другие объекты этого типа."
 
-#: ../core/class_widgets.php:449
-#, fuzzy
+#: ../core/class_widgets.php:456
 msgid "Randomize order of displayed properties."
-msgstr "Рандомозировать порядок отображения %1$s."
+msgstr "Рандомозировать порядок отображения объектов."
 
-#: ../core/class_widgets.php:466
+#: ../core/class_widgets.php:473
 #, php-format
 msgid "Child %1s"
 msgstr "Дочерняя  %1s"
 
-#: ../core/class_widgets.php:466
-#, fuzzy
+#: ../core/class_widgets.php:473
 msgid "Show child properties (if any) for currently displayed property"
-msgstr "Отображение дочерних %2$s (если есть) для текущего %1$s"
+msgstr "Отображение дочерних объектов (если есть) для текущего объекта"
 
-#: ../core/class_widgets.php:597
-#, fuzzy
+#: ../core/class_widgets.php:604
 msgid ""
 "The widget will not be displayed if the currently viewed property has no "
 "children."
 msgstr ""
-"Виджет не будет отображаться, если текущий объект не имеет вложенных  %1$s."
+"Виджет не будет отображаться, если текущий объект не имеет дочерних объектов."
 
-#: ../core/class_widgets.php:608 ../core/class_widgets.php:843
-#: ../core/class_widgets.php:1083
+#: ../core/class_widgets.php:615 ../core/class_widgets.php:850
+#: ../core/class_widgets.php:1090
 msgid "Hide Images?"
 msgstr "Скрыть рисунки?"
 
-#: ../core/class_widgets.php:630 ../core/class_widgets.php:856
+#: ../core/class_widgets.php:637 ../core/class_widgets.php:863
 msgid "Select the stats you want to display"
 msgstr "Выберите атрибуты, которые вы хотите показывать"
 
-#: ../core/class_widgets.php:681
+#: ../core/class_widgets.php:688
 #, php-format
 msgid "Featured %1s"
 msgstr "Избранные %1s"
 
-#: ../core/class_widgets.php:681
-#, fuzzy
+#: ../core/class_widgets.php:688
 msgid "List of properties that were marked as Featured"
-msgstr "Список %1$s, помеченных как Избранные"
+msgstr "Список объектов, помеченных как Избранные"
 
-#: ../core/class_widgets.php:909
+#: ../core/class_widgets.php:916
 msgid "Featured Properies"
 msgstr "Избранные объекты"
 
-#: ../core/class_widgets.php:928
-#, fuzzy, php-format
+#: ../core/class_widgets.php:935
+#, php-format
 msgid "Latest %1s"
-msgstr "Последние %1$s"
+msgstr "Последние %1s"
 
-#: ../core/class_widgets.php:928
-#, fuzzy
+#: ../core/class_widgets.php:935
 msgid "List of the latest properties created on this site"
-msgstr "Список всех последних %1$s, созданных на сайте"
+msgstr "Список всех последних объектов, созданных на сайте"
 
-#: ../core/class_widgets.php:1077
-#, fuzzy
+#: ../core/class_widgets.php:1084
 msgid "Latest Properties"
-msgstr "Последний объект"
+msgstr "Последние объекты"
 
-#: ../core/class_widgets.php:1096
+#: ../core/class_widgets.php:1103
 msgid "Select stats you want to display"
 msgstr "Выберите атрибуты, которые вы хотите показывать"
 
-#: ../core/class_widgets.php:1146
+#: ../core/class_widgets.php:1153
 #, php-format
 msgid "%1s Search"
 msgstr "Поиск %1s "
 
-#: ../core/class_widgets.php:1149
+#: ../core/class_widgets.php:1156
 #, php-format
 msgid "Display a highly customizable  %1s search form."
 msgstr "Отображение настраиваемой формы поиска %1s"
 
-#: ../core/class_widgets.php:1350
-#, fuzzy
+#: ../core/class_widgets.php:1357
 msgid "No searchable property types were found."
-msgstr "Не найдены доступные к поиску типы %1$s."
+msgstr "Не найдены доступные к поиску типов объектов."
 
-#: ../core/class_widgets.php:1443
-#, fuzzy
+#: ../core/class_widgets.php:1450
 msgid "Property types to search:"
-msgstr "Тип объекта запроса."
+msgstr "Тип объекта к поиску:"
 
-#: ../core/class_widgets.php:1457
+#: ../core/class_widgets.php:1464
 msgid "Select the attributes you want to search."
 msgstr "Выберите атрибуты для поиска."
 
-#: ../core/class_widgets.php:1461
+#: ../core/class_widgets.php:1468
 msgid "All Attributes"
 msgstr "Все атрибуты"
 
-#: ../core/class_widgets.php:1464
+#: ../core/class_widgets.php:1471
 msgid "Grouped Attributes"
 msgstr "Группированные атрибуты"
 
-#: ../core/class_widgets.php:1485
+#: ../core/class_widgets.php:1492
 msgid "Ungrouped"
 msgstr "Негруппированные"
 
-#: ../core/class_widgets.php:1509
+#: ../core/class_widgets.php:1516
 msgid "Group attributes together."
 msgstr "Группировать атрибуты."
 
-#: ../core/class_widgets.php:1521
+#: ../core/class_widgets.php:1528
 msgid "Default Sort Order"
 msgstr "Порядок сортировки по умолчанию"
 
-#: ../core/class_widgets.php:1531
+#: ../core/class_widgets.php:1538
 msgid "Descending"
 msgstr "По убыванию"
 
-#: ../core/class_widgets.php:1532
+#: ../core/class_widgets.php:1539
 msgid "Acending"
 msgstr "По возрастанию "
 
-#: ../core/class_widgets.php:1540
+#: ../core/class_widgets.php:1547
 msgid "Use pagination"
 msgstr "Использовать пагинацию"
 
-#: ../core/class_widgets.php:1545
+#: ../core/class_widgets.php:1552
 msgid "Items per page"
 msgstr "Элементов на страницу"
 
-#: ../core/class_widgets.php:1551
+#: ../core/class_widgets.php:1558
 msgid "Toggle Advanced Search Options"
 msgstr "Расширенные параметры поиска"
 
-#: ../core/class_widgets.php:1583
+#: ../core/class_widgets.php:1590
 msgid "Search Properies"
 msgstr "Поиск объектов"
 
-#: ../core/class_widgets.php:1607
+#: ../core/class_widgets.php:1614
 #, php-format
 msgid "%1s Gallery"
 msgstr "Галлерея %1s"
 
-#: ../core/class_widgets.php:1607
-#, fuzzy
+#: ../core/class_widgets.php:1614
 msgid "List of all images attached to the current property"
-msgstr "Список всех рисунков, прикрепленных к текущему %1$s"
+msgstr "Список всех изображений, прикрепленных к текущему объекту"
 
-#: ../core/class_widgets.php:1741
+#: ../core/class_widgets.php:1748
 msgid "Regular Size:"
 msgstr "Обычный размер:"
 
-#: ../core/class_widgets.php:1746
+#: ../core/class_widgets.php:1753
 msgid "Large Image Size:"
 msgstr "Большой размер изображения:"
 
-#: ../core/class_widgets.php:1753
+#: ../core/class_widgets.php:1760
 #, php-format
 msgid "Show %s Images"
 msgstr "Показывать %s изображений"
 
-#: ../core/class_widgets.php:1758
+#: ../core/class_widgets.php:1765
 msgid "Show Image Captions"
 msgstr "Показать подписи изображений"
 
-#: ../core/class_widgets.php:1763
+#: ../core/class_widgets.php:1770
 msgid "Show Image Descriptions."
 msgstr "Показать описания изображения."
 
@@ -1246,12 +1234,12 @@ msgstr "API сервис не определен."
 msgid "API Failure: %1s."
 msgstr "API Ошибка: %1s."
 
-#: ../core/ud_api.php:744
+#: ../core/ud_api.php:746
 msgid "Unknown error."
 msgstr "Неизвестная ошибка."
 
-#: ../core/ud_api.php:832
-#, fuzzy, php-format
+#: ../core/ud_api.php:834
+#, php-format
 msgid ""
 "You cannot call UD_API::log() before the %1$s hook, since the current user "
 "is not yet known."
@@ -1259,40 +1247,40 @@ msgstr ""
 "Вы не можете вызвать UD_Functions::log() до %1$s хука, так как текущий "
 "пользователь пока не известен."
 
-#: ../core/ud_api.php:846
+#: ../core/ud_api.php:848
 msgid "Log Started."
 msgstr "Логирование началось."
 
-#: ../core/ud_api.php:951
-#, fuzzy, php-format
+#: ../core/ud_api.php:953
+#, php-format
 msgid "You cannot call UD_API::add_log_page() after the %1$s hook."
 msgstr "Вы не можете вызвать UD_Functions::add_log_page() после хука %1$s."
 
-#: ../core/ud_api.php:980
+#: ../core/ud_api.php:982
 msgid "Log Page for"
 msgstr "Лог для страницы"
 
-#: ../core/ud_api.php:981
+#: ../core/ud_api.php:983
 msgid "Clear Log"
 msgstr "Очистить лог"
 
-#: ../core/ud_api.php:986
+#: ../core/ud_api.php:988
 msgid "Timestamp"
 msgstr "Время"
 
-#: ../core/ud_api.php:988
+#: ../core/ud_api.php:990
 msgid "Event"
 msgstr "Событие"
 
-#: ../core/ud_api.php:989
+#: ../core/ud_api.php:991
 msgid "User"
 msgstr "Пользователь"
 
-#: ../core/ud_api.php:990
+#: ../core/ud_api.php:992
 msgid "Related Object"
 msgstr "Связанный объект"
 
-#: ../core/ud_api.php:1000 ../templates/template-functions.php:608
+#: ../core/ud_api.php:1002 ../templates/template-functions.php:642
 msgid "None"
 msgstr "Ни одного"
 
@@ -1302,9 +1290,8 @@ msgstr "Управлять Инструментами Администратор
 
 #: ../core/premium/class_admin_tools.php:82
 #: ../core/premium/class_admin_tools.php:109
-#, fuzzy
 msgid "Developer"
-msgstr "Ключи разработчика"
+msgstr "Разработчик"
 
 #: ../core/premium/class_admin_tools.php:83
 msgid ""
@@ -1319,16 +1306,14 @@ msgstr ""
 "если таковой не найден."
 
 #: ../core/premium/class_admin_tools.php:84
-#, fuzzy
 msgid ""
 "If <b>Searchable</b> is checked then the property will be loaded for search, "
 "and available on the property search widget."
 msgstr ""
-"Если <b>Доступно для поиска</b> выбрано, %1$s будет доступен поиску и "
-"виджету поиска %1$s."
+"Если <b>Доступно для поиска</b> выбрано, объект будет доступен поиску и "
+"виджету поиска объектов."
 
 #: ../core/premium/class_admin_tools.php:85
-#, fuzzy
 msgid ""
 "If <b>Location Matters</b> is checked, then an address field will be "
 "displayed for the property, and validated against Google Maps API.  "
@@ -1336,47 +1321,43 @@ msgid ""
 "is installed."
 msgstr ""
 "Если <b>Месторасположение важно</b> если отмечено, то поле адреса будет "
-"отображаться для %1$s, адреса будут проверены на Google Maps API. Кроме "
-"того, %1$s будет отображаться на SuperMap, если это премиум дополнение "
+"отображаться для объекта, адреса будут проверены на Google Maps API. Кроме "
+"того, объект будет отображаться на SuperMap, если это премиум дополнение "
 "установлено."
 
 #: ../core/premium/class_admin_tools.php:86
-#, fuzzy
 msgid ""
 "<b>Hidden Attributes</b> determine which attributes are not applicable to "
 "the given property type, and will be grayed out in the back-end."
 msgstr ""
 "<b> Скрытые Атрибуты</b> определяет, какие атрибуты не применимы к данному "
-"типу %1$s, будут выделены серым цветом на бэк-энде."
+"типу объектов, будут выделены серым цветом на бэк-энде."
 
 #: ../core/premium/class_admin_tools.php:87
-#, fuzzy
 msgid ""
 "<b>Inheritance</b> determines which attributes should be automatically "
 "inherited from the parent property"
 msgstr ""
 "<b>Наследование</b> определяет, какие атрибуты должны быть автоматически "
-"унаследованы от родительских %1$s."
+"унаследованы от родительских объектов."
 
 #: ../core/premium/class_admin_tools.php:88
-#, fuzzy
 msgid ""
 "Property attributes are meant to be short entries that can be searchable, on "
 "the back-end attributes will be displayed as single-line input boxes. On the "
 "front-end they are displayed using a definitions list."
 msgstr ""
-"Атрибуты %1$s -  это короткие характеризующие записи доступные для поиска. "
-"На бэкенде атрибуты будут отображены как поля ввода. На фронтенде они будут "
-"выглядеть как список определений."
+"Атрибуты объектов -  это короткие характеризующие записи доступные для "
+"поиска. На бэкенде атрибуты будут отображены как поля ввода. На фронтенде "
+"они будут выглядеть как список определений."
 
 #: ../core/premium/class_admin_tools.php:89
-#, fuzzy
 msgid ""
 "Making an attribute as \"searchable\" will list it as one of the searchable "
 "options in the Property Search widget settings."
 msgstr ""
 "Выбор для атрибута \"доступный для поиска \"  сделает его одним из вариантов "
-"поиска в виджете поиска %1$s."
+"поиска в виджете поиска объектов."
 
 #: ../core/premium/class_admin_tools.php:90
 msgid ""
@@ -1387,22 +1368,20 @@ msgstr ""
 "параметры на этой странице."
 
 #: ../core/premium/class_admin_tools.php:91
-#, fuzzy
 msgid ""
 "<b>Search Input:</b> Select and input type and enter comma-separated values "
 "that you would like to be used in property search, on the front-end."
 msgstr ""
-"<b> Ввод для поиска: </b> Выберите тип ввода и введите значения, разделенные "
-"запятыми, которые Вы хотите использовать для поиска %1$s, на фронт-энде."
+"<b> Ввод для Поиска: </b> Выберите тип ввода и введите значения, разделенные "
+"запятыми, которые Вы хотите использовать для поиска объектов на фронт-энде."
 
 #: ../core/premium/class_admin_tools.php:92
-#, fuzzy
 msgid ""
 "<b>Data Entry:</b> Enter comma-separated values that you would like to use "
 "on the back-end when editing properties."
 msgstr ""
-"<b>Административный: </b> введите значения, разделенные запятыми, которые бы "
-"Вы хотели использовать на бэк-энде для редактирования %1$s."
+"<b>Ввод данных: </b> Введите значения, разделенные запятыми, которые бы Вы "
+"хотели использовать на бэк-энде для редактирования объектов."
 
 #: ../core/premium/class_admin_tools.php:235
 #: ../core/premium/class_admin_tools.php:410
@@ -1432,9 +1411,8 @@ msgid "Sort Stats by Groups"
 msgstr "Сортировать по группам"
 
 #: ../core/premium/class_admin_tools.php:318
-#, fuzzy
 msgid "Group Name"
-msgstr "Группа"
+msgstr "Имя группы"
 
 #: ../core/premium/class_admin_tools.php:319
 #: ../core/premium/class_admin_tools.php:584
@@ -1463,7 +1441,7 @@ msgstr "Назначить"
 #: ../core/premium/class_wpp_pdf_flyer.php:1146
 #: ../core/premium/class_wpp_property_import.php:3918
 #: ../core/premium/class_wpp_supermap.php:230
-#: ../core/premium/class_wpp_supermap.php:379
+#: ../core/premium/class_wpp_supermap.php:377
 #: ../core/ui/class_wpp_object_list_table.php:56
 #: ../core/ui/page_settings.php:466
 msgid "Delete"
@@ -1491,13 +1469,12 @@ msgid "Group"
 msgstr "Группа"
 
 #: ../core/premium/class_admin_tools.php:385
-#, fuzzy
 msgid "Search Input"
-msgstr "Поле поиска:"
+msgstr "Ввод для Поиска"
 
 #: ../core/premium/class_admin_tools.php:386
 msgid "Data Entry"
-msgstr "Ввод данных"
+msgstr "Ввод Данных"
 
 #: ../core/premium/class_admin_tools.php:415
 #: ../core/premium/class_wpp_feps.php:1977
@@ -1506,9 +1483,8 @@ msgid "Toggle Advanced Settings"
 msgstr "Дополнительные настройки"
 
 #: ../core/premium/class_admin_tools.php:430
-#, fuzzy
 msgid "Sortable."
-msgstr "Подлежит сортировке"
+msgstr "Подлежит сортировке."
 
 #: ../core/premium/class_admin_tools.php:436
 msgid "Searchable."
@@ -1527,9 +1503,8 @@ msgid "Format: currency."
 msgstr "Формат: валюта."
 
 #: ../core/premium/class_admin_tools.php:460
-#, fuzzy
 msgid "Show in \"All Properties\" table."
-msgstr "Объекты"
+msgstr "Показывать в таблице Все Объекты."
 
 #: ../core/premium/class_admin_tools.php:464
 msgid "Delete Attribute"
@@ -1546,7 +1521,7 @@ msgstr "Диапазоный ввода текста"
 
 #: ../core/premium/class_admin_tools.php:476
 msgid "Range Dropdown"
-msgstr "Range Dropdown"
+msgstr "Диапазон выпадающим списком"
 
 #: ../core/premium/class_admin_tools.php:477
 #: ../core/premium/class_admin_tools.php:494
@@ -1556,11 +1531,11 @@ msgstr "Выбор выпадающим списком"
 #: ../core/premium/class_admin_tools.php:478
 #: ../core/premium/class_admin_tools.php:495
 msgid "Single Checkbox"
-msgstr "Single Checkbox"
+msgstr "Чекбокс"
 
 #: ../core/premium/class_admin_tools.php:479
 msgid "Multi-Checkbox"
-msgstr "Multi-Checkbox"
+msgstr "Мультичекбокс"
 
 #: ../core/premium/class_admin_tools.php:510
 #: ../core/premium/class_admin_tools.php:568
@@ -1568,7 +1543,7 @@ msgstr "Multi-Checkbox"
 #: ../core/premium/class_agents.php:738
 #: ../core/premium/class_wpp_feps.php:2032
 #: ../core/premium/class_wpp_property_import.php:2301
-#: ../core/premium/class_wpp_supermap.php:387 ../core/ui/page_settings.php:491
+#: ../core/premium/class_wpp_supermap.php:385 ../core/ui/page_settings.php:491
 msgid "Add Row"
 msgstr "Добавить строку"
 
@@ -1683,9 +1658,8 @@ msgid ", or you can specify which fields to show:"
 msgstr ", или Вы можете определить какие поля показывать"
 
 #: ../core/premium/class_agents.php:153
-#, fuzzy
 msgid "To query agent properties:"
-msgstr "Запрос агентских %1$s:"
+msgstr "Для запроса объектов агента:"
 
 #: ../core/premium/class_agents.php:155
 msgid "Shortcode Attribute Fields"
@@ -1709,9 +1683,8 @@ msgid "%1$s <span class=\"count\">(%2$s)</span>"
 msgstr "%1$s <span class=\"счет\">(%2$s)</span>"
 
 #: ../core/premium/class_agents.php:276
-#, fuzzy
 msgid "Match the \"Property Agent\" attribute to "
-msgstr "Сопоставить атрибут \"%1$s Agent\" к"
+msgstr "Сопоставить атрибут \"Агент Объекта\" к"
 
 #: ../core/premium/class_agents.php:282
 msgid " field, when it is found, and associate with agent."
@@ -1730,9 +1703,8 @@ msgid "Agent"
 msgstr "Агент"
 
 #: ../core/premium/class_agents.php:518
-#, fuzzy
 msgid "No Properties."
-msgstr "Объекты"
+msgstr "Нет Объектов."
 
 #: ../core/premium/class_agents.php:540
 msgid "Create Agent"
@@ -1769,16 +1741,15 @@ msgstr "Контент, который отображается в виджет�
 #: ../core/premium/class_agents.php:585
 #: ../core/premium/class_wpp_pdf_flyer.php:1021
 #: ../core/premium/class_wpp_pdf_flyer.php:1472
-#: ../core/premium/class_wpp_supermap.php:835
-#: ../core/premium/class_wpp_supermap.php:1173
+#: ../core/premium/class_wpp_supermap.php:833
+#: ../core/premium/class_wpp_supermap.php:1170
 #: ../core/ui/page_settings.php:325
 msgid "Options"
 msgstr "Опции"
 
 #: ../core/premium/class_agents.php:591
-#, fuzzy
 msgid "Allow property inquiries to be sent directly to agent."
-msgstr "Разрешить запросы %1$s направлять непосредственно агенту."
+msgstr "Разрешить направлять запросы об объектах непосредственно агенту."
 
 #: ../core/premium/class_agents.php:599 ../core/premium/class_agents.php:2144
 msgid "Full Bio"
@@ -1797,9 +1768,8 @@ msgid "Save"
 msgstr "Сохранить"
 
 #: ../core/premium/class_agents.php:631
-#, fuzzy
 msgid "Associated Properties"
-msgstr "Избранные объекты"
+msgstr "Ассоциированные объекты"
 
 #: ../core/premium/class_agents.php:632
 msgid "Images"
@@ -1815,10 +1785,9 @@ msgid "Agent Roles"
 msgstr "Роли агента"
 
 #: ../core/premium/class_agents.php:696
-#, fuzzy
 msgid "User roles that can be associated with properties as agents."
 msgstr ""
-"Пользователь роли, которые могут быть связаны с %1$s в качестве агентов."
+"Пользователь роли, которые могут быть связаны с объектами в качестве агентов."
 
 #: ../core/premium/class_agents.php:713
 msgid "Agent Fields"
@@ -1885,7 +1854,7 @@ msgid "Please enter a writeup for flyers."
 msgstr "Пожалуйста, введите резюме для флаеров."
 
 #: ../core/premium/class_agents.php:1186
-#: ../core/premium/class_wpp_supermap.php:499
+#: ../core/premium/class_wpp_supermap.php:497
 msgid "File should be an image"
 msgstr "Файл должен быть изображением"
 
@@ -1894,7 +1863,7 @@ msgid "Agent ID is not set"
 msgstr "ID  агента не установлено"
 
 #: ../core/premium/class_agents.php:1219
-#: ../core/premium/class_wpp_supermap.php:552
+#: ../core/premium/class_wpp_supermap.php:550
 msgid "Looks like, Image can not be uploaded."
 msgstr "Изображение не может быть загружено."
 
@@ -2027,18 +1996,17 @@ msgid "Read private pages"
 msgstr "Читать приватные страницы"
 
 #: ../core/premium/class_agents.php:1673
-#: ../templates/template-functions.php:1595
+#: ../templates/template-functions.php:1633
 msgid "Email"
 msgstr "Электронная почта"
 
 #: ../core/premium/class_agents.php:1782
-#, fuzzy
 msgid ""
 "Agent can see only the properties which are assigned to him. Agent will be "
 "automaticly assigned to the property which he will create."
 msgstr ""
-"Агент видит только %2$s, связанные с ним. Агент будет автоматически связан с "
-"%1$s, которые он создает. "
+"Агент видит только объекты, связанные с ним. Агент будет автоматически "
+"связан с объектами, которые он создает. "
 
 #: ../core/premium/class_agents.php:2142
 #: ../core/premium/class_wpp_supermap.php:201
@@ -2054,13 +2022,12 @@ msgid "Email Address"
 msgstr "Адрес электронной почты"
 
 #: ../core/premium/class_wpp_dynamic_filter.php:56
-#, fuzzy
 msgid "Manage Dynamic Filter"
-msgstr "Управление PDF флаером"
+msgstr "Управление Динамическим фильтром"
 
 #: ../core/premium/class_wpp_dynamic_filter.php:68
 msgid "Dynamic Filter"
-msgstr ""
+msgstr "Динамический фильтр"
 
 #: ../core/premium/class_wpp_facebook_tabs.php:184
 msgid "Facebook Tabs"
@@ -2082,7 +2049,6 @@ msgstr ""
 "обязательным с 1 октября 2011 года."
 
 #: ../core/premium/class_wpp_facebook_tabs.php:187
-#, fuzzy
 msgid "Use form below for managing you Canvases."
 msgstr "Используйте форму ниже для управления Вашими холстами/Canvases."
 
@@ -2152,12 +2118,17 @@ msgid ""
 "<b>Open links in new window</b><br />Check this option if you need to open "
 "EACH link of your WP-Property Facebook Tab in new window."
 msgstr ""
+"<b>Открывать ссылки в новом окне</b><br />Отметте эту опцию, если Вам "
+"необходимо открывать КАЖДУЮ ссылку WP-Property Facebook Tab в новом окне."
 
 #: ../core/premium/class_wpp_facebook_tabs.php:198
 msgid ""
 "<b>Open forms in new window</b><br />The same as <b>Open links in new "
 "window</b> but for forms. Every form will be submitted in new window."
 msgstr ""
+"<b>Открывать форму в новом окне</b><br />Как и <b>открывать ссылки в новом "
+"окне</b>но применительно к формам. Каждая форма будет размещена в отдельном "
+"окне."
 
 #: ../core/premium/class_wpp_facebook_tabs.php:200
 msgid ""
@@ -2225,7 +2196,6 @@ msgstr ""
 "Facebook, куда мы ссылаемся на странице холстов/Canvases."
 
 #: ../core/premium/class_wpp_facebook_tabs.php:802
-#, fuzzy
 msgid ""
 "You will need to create an app using your Facebook account.  Once the app is "
 "created, you will be able to add it to one of your pages."
@@ -2233,12 +2203,11 @@ msgstr ""
 "Приложения на Facebook являются веб-приложениями, которые загружаются в "
 "контекст Facebook в то, что мы называем Страница Холстов(Canvas Page). Вам "
 "понадобится создать приложение используя аккаунт Facebook. Как только "
-"приложение будет создано, Вы сможете добавить одну из вашиз страниц. "
+"приложение будет создано, Вы сможете добавить одну из вашиз страниц."
 
 #: ../core/premium/class_wpp_facebook_tabs.php:802
-#, fuzzy
 msgid "Create Facebook App."
-msgstr "Создать  Facebook App"
+msgstr "Создать  Facebook App."
 
 #: ../core/premium/class_wpp_facebook_tabs.php:808
 msgid "General"
@@ -2297,7 +2266,6 @@ msgid "App Secret:"
 msgstr "App Секрет:"
 
 #: ../core/premium/class_wpp_facebook_tabs.php:907
-#, fuzzy
 msgid "App ID:"
 msgstr "App ID/API ключ:"
 
@@ -2322,20 +2290,16 @@ msgid "Create Facebook Application using next settings"
 msgstr "Создать приложение Facebook используя следующие настройки"
 
 #: ../core/premium/class_wpp_facebook_tabs.php:930
-#, fuzzy
 msgid "Canvas URL:"
-msgstr "Защищенный URL холста/Canvas:"
+msgstr "URL холста/Canvas:"
 
 #: ../core/premium/class_wpp_facebook_tabs.php:934
 msgid "Secure Canvas URL:"
 msgstr "Защищенный URL холста/Canvas:"
 
 #: ../core/premium/class_wpp_facebook_tabs.php:937
-#, fuzzy
 msgid "Applicable for both Application and Page Tab"
-msgstr ""
-"Используйте этот URL во время создания приложений Facebook. Применяется для "
-"приложений и вкладок страниц."
+msgstr "Применимо как для приложения и так и для вкладки страницы"
 
 #: ../core/premium/class_wpp_facebook_tabs.php:947
 msgid "Add Another Canvas"
@@ -2357,52 +2321,48 @@ msgstr ""
 "премиальным дополнениям."
 
 #: ../core/premium/class_wpp_feps.php:200
-#, fuzzy
 msgid ""
 "<b>New User Role:</b> Role to assign to users submitting properties if they "
 "do not already have an account."
 msgstr ""
-"<b>Новая пользовательская роль:</b><br />Роль, которая будет присвоена после "
-"размещения %4$s, если пользователь еще не имеет аккаунта."
+"<b>Новая пользовательская роль:</b>Роль, которая будет присвоена после "
+"размещения объекта, если пользователь еще не имеет аккаунта."
 
 #: ../core/premium/class_wpp_feps.php:201
 msgid "<b>Form Name:</b> For internal reference."
-msgstr ""
+msgstr "<b>Имя Формы:</b> Для внутреннего использования."
 
 #: ../core/premium/class_wpp_feps.php:202
 msgid "<b>Shortcode:</b> Shortcode to render the form."
-msgstr ""
+msgstr "<b>Шорткод:</b> Шорткод для создания формы."
 
 #: ../core/premium/class_wpp_feps.php:203
-#, fuzzy
 msgid ""
 "<b>Property Status:</b> Status to assign to new properties after they are "
 "submitted."
 msgstr ""
-"<b>%1$s Статус:</b><br />Статус, который присваивается новым %3$s после их "
+"<b>Статус объекта:</b>Статус, который присваивается новым объектам после их "
 "размещения."
 
 #: ../core/premium/class_wpp_feps.php:204
-#, fuzzy
 msgid "<b>Property Type:</b> Default property type of submitted properties."
-msgstr "<b>%1$s Тип:</b><br />Тип %3$s по умолчанию после размещения %4$s."
+msgstr ""
+"<b>%1$s Тип:</b><br />Тип объектов по умолчанию после размещения объекта."
 
 #: ../core/premium/class_wpp_feps.php:205
-#, fuzzy
 msgid ""
 "<b>Preview Thumbnail Size:</b> The size of the image to be used to display "
 "the thumbnail of an uploaded image."
 msgstr ""
-"<b>Размер изображений предпросмотра:</b><br />Размер изображений, который "
-"будет использоваться для предпросмотра загруженных изображений."
+"<b>Размер изображений предпросмотра:</b>Размер изображений, который будет "
+"использоваться для предпросмотра загруженных изображений."
 
 #: ../core/premium/class_wpp_feps.php:206
-#, fuzzy
 msgid ""
 "<b>Image Upload Limit:</b> The maximum number of images that can be uploaded "
 "per submission."
 msgstr ""
-"<b>Лимит загружаемых изображений:</b><br /> Максимальное число изображений, "
+"<b>Лимит загружаемых изображений:</b><> Максимальное число изображений, "
 "которые могут быть загружены в течении одного размещения."
 
 #: ../core/premium/class_wpp_feps.php:208
@@ -2445,7 +2405,6 @@ msgstr ""
 "CRM.</h3>"
 
 #: ../core/premium/class_wpp_feps.php:234
-#, fuzzy
 msgid ""
 "<p>For your notifications on any of this Trigger actions &mdash; <i>FEPS: "
 "Pending Approval</i>, <i>FEPS: Property Submitted</i>, <i>FEPS: User Account "
@@ -2458,7 +2417,6 @@ msgstr ""
 "&mdash; Вы можете использовать следующие шорткоды:</p>"
 
 #: ../core/premium/class_wpp_feps.php:243
-#, fuzzy
 msgid ""
 "<p>For Trigger action <i>FEPS: Pending Approval</i> &mdash; you can use this "
 "shortcodes:</p>"
@@ -2467,31 +2425,28 @@ msgstr ""
 "можете использовать следующие шорткоды:</p>"
 
 #: ../core/premium/class_wpp_feps.php:251
-#, fuzzy
 msgid ""
 "<p>For Trigger action <i>FEPS: Property Submitted</i> &mdash; you can use "
 "this shortcodes:</p>"
 msgstr ""
-"<p>Для триггерного действия <i>FEPS: Размещенные %1$s</i> &mdash; Вы можете "
-"использовать следующие шорткоды:</p>"
+"<p>Для триггерного действия <i>FEPS: Объект размещен %1$s</i> &mdash; Вы "
+"можете использовать следующие шорткоды:</p>"
 
 #: ../core/premium/class_wpp_feps.php:259
-#, fuzzy
 msgid ""
 "<p>For Trigger action <i>FEPS: User Account Approved</i> &mdash; you can use "
 "this shortcodes:</p>"
 msgstr ""
-"<p>Для триггерного действия <i>FEPS: Подлежит одобрению</i> &mdash; Вы "
-"можете использовать следующие шорткоды:</p>"
+"<p>Для триггерного действия <i>FEPS: Аккаутн пользователя одобрен</i> "
+"&mdash; Вы можете использовать следующие шорткоды:</p>"
 
 #: ../core/premium/class_wpp_feps.php:267
-#, fuzzy
 msgid ""
 "<p>For Trigger action <i>FEPS: User Account Created</i> &mdash; you can use "
 "this shortcodes:</p>"
 msgstr ""
-"<p>Для триггерного действия <i>FEPS: Размещены</i> &mdash; Вы можете "
-"использовать следующие шорткоды:</p>"
+"<p>Для триггерного действия <i>FEPS: Аккаутн пользователя создан</i> &mdash; "
+"Вы можете использовать следующие шорткоды:</p>"
 
 #: ../core/premium/class_wpp_feps.php:381
 msgid "Account Created"
@@ -2504,35 +2459,35 @@ msgid ""
 "Hello.%1$s%1$sYour account on %2$s has been created and is waiting for "
 "approval.%1$s%1$sAccess data:%1$s%3$s / %4$s"
 msgstr ""
+"Здравствуйте.%1$s%1$sВаш аккаунт на %2$s создан и ожидает подтверждения.%1$s"
+"%1$sДанные доступа:%1$s%3$s / %4$s"
 
 #: ../core/premium/class_wpp_feps.php:405
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Hello.%1$s%1$sYour account on %2$s has been created.%1$s%1$sAccess data:%1$s"
 "%3$s / %4$s"
 msgstr ""
-"Здравствуйте.%1$s%1$s Ваш %2$s получен.%1$s%1$s вы можете посетить его, "
-"воспользовавшись URL:%1$s[pending_url]"
+"Здравствуйте.%1$s%1$s Ваш аккаунт на %2$s создан.%1$s%1$s вы можете посетить "
+"его, воспользовавшись %1$s%3$s / %4$s"
 
 #: ../core/premium/class_wpp_feps.php:416
 msgid "User Account Created"
 msgstr "Аккаунт пользователя создан"
 
 #: ../core/premium/class_wpp_feps.php:432
-#, fuzzy, php-format
+#, php-format
 msgid "User account created via FEPS property submission of (%1s)."
-msgstr ""
-"Аккаунт пользователя, созданный с помощью FEPS %3$s размещение ([title])."
+msgstr "Аккаунт пользователя, создан с помощью FEPS (%1s)."
 
 #: ../core/premium/class_wpp_feps.php:477
 msgid "Submission Approved"
 msgstr "Размещение утверждено"
 
 #: ../core/premium/class_wpp_feps.php:488
-#, fuzzy, php-format
+#, php-format
 msgid "User-submitted property (%1s) approved and published."
-msgstr ""
-"Пользователь-отправитель %1$s ([property_title]) утверждено и опубликовано."
+msgstr "Пользователь-отправитель %1$s утвержден и опубликовано."
 
 #: ../core/premium/class_wpp_feps.php:506
 msgid "User Account Approved"
@@ -2543,9 +2498,9 @@ msgid "Submission Received"
 msgstr "Заявка на размещение получена"
 
 #: ../core/premium/class_wpp_feps.php:545
-#, fuzzy, php-format
+#, php-format
 msgid "User submitted property (%1s) using FEPS."
-msgstr "Пользователь отправил %1$s ([property_title]) используя FEPS."
+msgstr "Пользователь отправил отъект %1$s используя FEPS."
 
 #: ../core/premium/class_wpp_feps.php:633
 msgid "Manage FEPS"
@@ -2576,9 +2531,8 @@ msgid "This listing is pending your approval."
 msgstr "Это предложение ожидает Вашего одобрения."
 
 #: ../core/premium/class_wpp_feps.php:1211
-#, fuzzy
 msgid "Property Forms"
-msgstr "Объект: %s"
+msgstr "Формы объектов"
 
 #: ../core/premium/class_wpp_feps.php:1258
 msgid "Requested FEPS form not found."
@@ -2631,6 +2585,7 @@ msgstr "Аккаунт найден, пожалуйста, введите пар
 #: ../core/premium/class_wpp_feps.php:1605
 msgid "Your account will be setup after your submission is approved."
 msgstr ""
+"Ваша учетная запись будет настроена после того, как отправка будет одобрена."
 
 #: ../core/premium/class_wpp_feps.php:1642
 msgid "FEPS forms updated."
@@ -2638,9 +2593,8 @@ msgstr "FEPS формы обновлены."
 
 #: ../core/premium/class_wpp_feps.php:1649
 #: ../core/premium/class_wpp_property_import.php:79
-#, fuzzy
 msgid "Property Content"
-msgstr "Meta-данные объекта"
+msgstr "Контент объекта"
 
 #: ../core/premium/class_wpp_feps.php:1653
 #: ../core/premium/class_wpp_feps.php:2297
@@ -2652,9 +2606,8 @@ msgid "Unnamed Form"
 msgstr "Неназванная форма"
 
 #: ../core/premium/class_wpp_feps.php:1840
-#, fuzzy
 msgid "Front End Property Submissions"
-msgstr "Front End %1$s Submissions"
+msgstr "Front End Property Submissions"
 
 #: ../core/premium/class_wpp_feps.php:1882
 msgid "Form Name:"
@@ -2665,14 +2618,12 @@ msgid "Shortcode:"
 msgstr "Шорткод:"
 
 #: ../core/premium/class_wpp_feps.php:1893
-#, fuzzy
 msgid "Property Status:"
-msgstr "Атрибуты объектов"
+msgstr "Статус объекта:"
 
 #: ../core/premium/class_wpp_feps.php:1902
-#, fuzzy
 msgid "Property Type:"
-msgstr "Тип объекта"
+msgstr "Тип объекта:"
 
 #: ../core/premium/class_wpp_feps.php:1912
 msgid "Preview Thumbnail Size:"
@@ -2687,9 +2638,8 @@ msgid "New User Role:"
 msgstr "Новая роль пользователя:"
 
 #: ../core/premium/class_wpp_feps.php:1941
-#, fuzzy
 msgid "Other Settings:"
-msgstr "Основные Настройки"
+msgstr "Другие Настройки:"
 
 #: ../core/premium/class_wpp_feps.php:1944
 msgid "Disable new user account creation notification."
@@ -2703,9 +2653,8 @@ msgstr "Атрибут"
 #: ../core/premium/class_wpp_feps.php:1969
 #: ../core/premium/class_wpp_pdf_flyer.php:818
 #: ../core/premium/class_wpp_property_import.php:78
-#, fuzzy
 msgid "Property Title"
-msgstr "Тип объекта"
+msgstr "Название объекта"
 
 #: ../core/premium/class_wpp_feps.php:2010
 msgid "Required"
@@ -2745,7 +2694,6 @@ msgid "Manage PDF Flyer"
 msgstr "Управление PDF флаером"
 
 #: ../core/premium/class_wpp_pdf_flyer.php:140
-#, fuzzy
 msgid ""
 "Unless <b>Don't make accessible for public</b> is checked for a list, it "
 "will be accessible by anybody who visits your website, provided they have a "
@@ -2758,12 +2706,11 @@ msgstr ""
 "Если <b>Не делать публичным.</b> не выбран для списка, он будет доступен "
 "любому посетителю веб сайта, у которого есть соотсетствующая ссылка. Списки "
 "хранятся в папке загрузок, но для пользователей они будут появляться под "
-"главной <b>страницей %1$s</b>. Другими словами, если Ваша страница %2$s по "
-"умолчанию 'all-properties', все Ваши списки будут иметь адрес: http://"
-"website.com/all-properties/the-list-filename.pdf"
+"главной <b>страницей объектов</b>. Другими словами, если Ваша страница "
+"объектов по умолчанию 'all-properties', все Ваши списки будут иметь адрес: "
+"http://website.com/all-properties/the-list-filename.pdf"
 
 #: ../core/premium/class_wpp_pdf_flyer.php:141
-#, fuzzy
 msgid ""
 "By default, the PDF lists are generated every time you save this page, and "
 "when any property is updated or created.  You may select <b>Regenerate list "
@@ -2772,8 +2719,8 @@ msgid ""
 "server."
 msgstr ""
 "По умолчанию, Список PDF  генерируется каждый раз, когда Вы сохраняете "
-"страницу, и когда любой из %1$s обновляется или создается. Вы можете выбрать "
-"<b>Регенерировать список каждый раз при открытии</b>, чтобы список "
+"страницу, и когда любй из объектов обновляется или создается. Вы можете "
+"выбрать <b>Регенерировать список каждый раз при открытии</b>, чтобы список "
 "генерировался каждый раз, когда открывается в браузере, однако, это может "
 "вызвать необязательную назнузку на сервер."
 
@@ -2783,15 +2730,14 @@ msgid "Advanced Query"
 msgstr "Расширенный запрос"
 
 #: ../core/premium/class_wpp_pdf_flyer.php:143
-#, fuzzy
 msgid ""
 "The advanced query can be used just like the [property_overview] shortcode. "
 "For example, if you wanted the list to only show two bedroom properties, "
 "your query would simply be: <b>[property_overview bedrooms=2]</b>."
 msgstr ""
 "Расширенный запрос может быть использован как шорткод [property_overview]. "
-"Например, если Вы хотите показать только %1$s с двумя спальнями, Ваш запрос "
-"будет выглядеть так: <b>[property_overview bedrooms=2]</b>."
+"Например, если Вы хотите показать только объект с двумя спальнями, Ваш "
+"запрос будет выглядеть так: <b>[property_overview bedrooms=2]</b>."
 
 #: ../core/premium/class_wpp_pdf_flyer.php:144
 msgid ""
@@ -2820,26 +2766,23 @@ msgstr ""
 "попытке открытия списка на фронт-энде."
 
 #: ../core/premium/class_wpp_pdf_flyer.php:147
-#, fuzzy
 msgid ""
 "When a single property is updated, the list(s) it is included on are deleted "
 "as well.  It is up to you if you want to regenerate the lists manually, or "
 "wait for a visitor to attempt to open a list, at which point it will be "
 "regenerated automatically."
 msgstr ""
-"Если %1$s обновлено, список(списки) включают его или удаляют также. Вы "
+"Если объект обновлен, список(списки) включают его или удаляются также. Вы "
 "можете выбрать, регенерировать ли список вручную, или чтобы список "
 "обновлялся при открытии."
 
 #: ../core/premium/class_wpp_pdf_flyer.php:162
-#, fuzzy
 msgid "PDF Flyer Options"
-msgstr "PDF Флаер"
+msgstr "Настройки PDF Флаера "
 
 #: ../core/premium/class_wpp_pdf_flyer.php:174
-#, fuzzy
 msgid "Exclude property from PDF Lists"
-msgstr "Исключить %1$s из списка PDF"
+msgstr "Исключить объект из списка PDF"
 
 #: ../core/premium/class_wpp_pdf_flyer.php:799
 #: ../core/premium/class_wpp_pdf_flyer.php:996
@@ -2859,19 +2802,18 @@ msgid "Sample PDF List"
 msgstr "Sample PDF List"
 
 #: ../core/premium/class_wpp_pdf_flyer.php:957
-#, fuzzy
 msgid ""
 "Regenerating PDF Lists. If you have a lot of properties this process may "
 "take a while, please do not close this browser window until it is complete."
 msgstr ""
-"Регенерируются Списки PDF. Если у Вас есть множество %1$s, этот процесс "
+"Регенерируются Списки PDF. Если у Вас есть множество объектов, этот процесс "
 "может занять значительное время. Пожалуйста не закрывайте окно браузера до "
 "завершения."
 
 #: ../core/premium/class_wpp_pdf_flyer.php:977
 #: ../core/premium/class_wpp_pdf_flyer.php:1697
 msgid "Finished."
-msgstr "Закончено."
+msgstr "Завершено."
 
 #: ../core/premium/class_wpp_pdf_flyer.php:1022
 #: ../core/premium/class_wpp_property_import.php:2265
@@ -2899,14 +2841,12 @@ msgid "Group by:"
 msgstr "Группировать по:"
 
 #: ../core/premium/class_wpp_pdf_flyer.php:1062
-#, fuzzy
 msgid "Properties per page:"
-msgstr "Элементов на страницу"
+msgstr "Объектов на страницу:"
 
 #: ../core/premium/class_wpp_pdf_flyer.php:1072
-#, fuzzy
 msgid "Show child properties."
-msgstr "Вложенный объект"
+msgstr "Показывать дочерние объекты."
 
 #: ../core/premium/class_wpp_pdf_flyer.php:1077
 msgid "Don't make accessible for public."
@@ -2925,7 +2865,6 @@ msgid "Contact Information will be shown on every page"
 msgstr "Котактная информация будет показана на каждой странице"
 
 #: ../core/premium/class_wpp_pdf_flyer.php:1106
-#, fuzzy
 msgid ""
 "You may use WPP Query arguments here to perform a more advanced queryies, "
 "and limits. Wrap your query into [property_overview] as with a regular "
@@ -3012,30 +2951,27 @@ msgid "PDF"
 msgstr "PDF"
 
 #: ../core/premium/class_wpp_pdf_flyer.php:1466
-#, fuzzy, php-format
+#, php-format
 msgid "Warning: <b>%s</b> is not writable, PDF flyer cannot be created."
 msgstr "Внимание: <b>%s</b>не подлежит записи, PDF Флаер не может быть создан."
 
 #: ../core/premium/class_wpp_pdf_flyer.php:1478
-#, fuzzy
 msgid "Show panel that allows you to create PDF property lists."
-msgstr "Показывать панель, которая позволяет создавать списки PDF %1$s."
+msgstr "Показывать панель, которая позволяет создавать списки PDF объектов."
 
 #: ../core/premium/class_wpp_pdf_flyer.php:1483
-#, fuzzy
 msgid ""
 "Generate property flyers automatically when somebody tries to view them for "
 "the first time."
 msgstr ""
-"Генерировать Флаеры %1$s автоматически, когда кто-либо старается посмотреть "
-"их в первый раз."
+"Генерировать Флаеры объектов автоматически, когда кто-либо старается "
+"посмотреть их в первый раз."
 
 #: ../core/premium/class_wpp_pdf_flyer.php:1488
 msgid "Generate QR Code."
 msgstr "Генерировать код QR."
 
 #: ../core/premium/class_wpp_pdf_flyer.php:1493
-#, fuzzy
 msgid ""
 "Truncate the Description when it's displayed in Flyer (It can be helpful, "
 "when the data can not be placed on one page)."
@@ -3081,6 +3017,11 @@ msgstr "Первичный размер изображения"
 msgid "Secondary Images"
 msgstr "Дополнительные изображения"
 
+#: ../core/premium/class_wpp_pdf_flyer.php:1593
+#, php-format
+msgid "Show %1$s images."
+msgstr "Показывать %1$s изображений."
+
 #: ../core/premium/class_wpp_pdf_flyer.php:1599
 msgid "Logo URL"
 msgstr "URL лого"
@@ -3098,10 +3039,95 @@ msgstr "Цвет шапки"
 msgid "Section background color"
 msgstr "Выбор цвета фона"
 
+#: ../core/premium/class_wpp_pdf_flyer.php:1643
+msgid "Shortcode examples:<br />"
+msgstr "Примеры шорткодов:<br />"
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1644
+msgid ""
+"<strong>[property_flyer]</strong> - Returns a html link to the PDF Flyer<br /"
+">"
+msgstr ""
+"<strong>[property_flyer]</strong> - Возвращает html ссылку к PDF Флаеру<br />"
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1645
+msgid ""
+"<strong>[property_flyer title='PDF Flyer']</strong> - Returns a html link to "
+"the PDF Flyer with custom title.<br />"
+msgstr ""
+"<strong>[property_flyer title='PDF Flyer']</strong> - Возвращает html ссылку "
+"к PDF Флаеру с пользовательским заголовком<br />"
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1646
+msgid ""
+"<strong>[property_flyer urlonly='yes']</strong> -  Returns the raw URL to "
+"the PDF Flyer (for use in custom html).<br />"
+msgstr ""
+"<strong>[property_flyer urlonly='yes']</strong> - Возвращает исходный  URL к "
+"PDF Флаеру(для пользовательского html).<br />"
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1647
+msgid ""
+"<strong>[property_flyer class='custom_css_class']</strong> - For use with a "
+"custom CSS class.<br />"
+msgstr ""
+"<strong>[property_flyer class='custom_css_class']</strong> - Для "
+"использования с пользовательским CSS классом.<br />"
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1648
+msgid ""
+"<strong>[property_flyer image='url_to_custom_image']</strong> - Returns "
+"url_to_custom_image with a link to the PDF Flyer."
+msgstr ""
+"<strong>[property_flyer image='url_to_custom_image']</strong>  - Возвращает "
+"url_to_custom_image со ссылкой к PDF Флаеру<br />"
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1655
+msgid ""
+"You can regenerate all your PDF flyers, but depending on your server, it can "
+"be very time consuming if you have many properties."
+msgstr ""
+"Вы можете регенерировать все ваши PDF флаеры, но в зависимости от вашего "
+"сервера, это может занять очень много времени, если у вас есть много "
+"объектов."
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1656
+msgid "Regenerate all Flyers"
+msgstr "Пересоздать все флаеры"
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1657
+msgid "Close Result's Logs"
+msgstr "Закрыть журнал результатов"
+
 #: ../core/premium/class_wpp_pdf_flyer.php:1677
-#, fuzzy
 msgid "Property List is got. Start generate PDF Flyers..."
-msgstr "%1$s Список получен. Начало генерации PDF Флаеров..."
+msgstr "Список объектов получен. Начало генерации PDF Флаеров..."
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1687
+msgid "PDF Flyer for property \""
+msgstr "PDF Флаер для объекта \""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1687
+msgid "\" is generated."
+msgstr "\" сгегенерирован."
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1689
+msgid "<b>Error. PDF Flyer for property \""
+msgstr "<b>Ошибка. PDF Флаер для объекта \""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1689
+msgid "\" could not be generated.</b>"
+msgstr "\"  не может быть генерирован.</b>"
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1693
+msgid "Could not regenerate PDF Flyer for property \""
+msgstr "невозможно генерировать PDF Флаер для объекта \""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1693
+msgid "\". Looks like, something caused error on server."
+msgstr ""
+"\". Похоже, что на сервере возникла ошибка. Пожалуйста, попробуйте "
+"регенерировать PDF Флаеры позже."
 
 #: ../core/premium/class_wpp_pdf_flyer.php:1699
 msgid "There are no any property to generate PDF Flyer for."
@@ -3142,16 +3168,14 @@ msgid "Capabilities"
 msgstr "Возможности"
 
 #: ../core/premium/class_wpp_power_tools.php:169
-#, fuzzy
 msgid "WP Property Capabilities"
-msgstr "Роли возможностей"
+msgstr "Роли возможностей WP Property"
 
 #: ../core/premium/class_wpp_power_tools.php:173
 msgid "Role"
-msgstr ""
+msgstr "Роль"
 
 #: ../core/premium/class_wpp_power_tools.php:186
-#, fuzzy
 msgid "Administrator has all capabilities which can not be managed."
 msgstr ""
 "Администратор обладает всеми возможностями. По соображениям безопасности это "
@@ -3176,7 +3200,6 @@ msgid "Labels"
 msgstr "Ярлыки"
 
 #: ../core/premium/class_wpp_power_tools.php:283
-#, fuzzy
 msgid "Contextual Menus"
 msgstr "Контекстуальные меню"
 
@@ -3189,25 +3212,21 @@ msgstr ""
 "если Вы размещаете \"Яхты\" или \"Самолеты\".  "
 
 #: ../core/premium/class_wpp_power_tools.php:293
-#, fuzzy
 msgid "Singular Property:"
-msgstr "Единичное:"
+msgstr "Объект в единственном числе:"
 
 #: ../core/premium/class_wpp_power_tools.php:295
-#, fuzzy
 msgid "Default is \"Property\", will change the label in the navigation menus."
-msgstr "По умолчанию \"Property\", будут изменены ярлыки навигационного меню."
+msgstr "По умолчанию \"Объект\", будут изменены ярлыки навигационного меню."
 
 #: ../core/premium/class_wpp_power_tools.php:299
-#, fuzzy
 msgid "Plural Property:"
-msgstr "Новый объект"
+msgstr "Объект во множественном числе:"
 
 #: ../core/premium/class_wpp_power_tools.php:301
-#, fuzzy
 msgid ""
 "Default is \"Properties\", will change the label in the navigation menus."
-msgstr "По умолчанию \"Property\", будут изменены ярлыки навигационного меню."
+msgstr "По умолчанию \"Объекты\", будут изменены ярлыки навигационного меню."
 
 #: ../core/premium/class_wpp_power_tools.php:308
 msgid ""
@@ -3230,58 +3249,49 @@ msgid "Add New "
 msgstr "Добавить новый"
 
 #: ../core/premium/class_wpp_power_tools.php:359
-#, fuzzy
 msgid "Edit "
 msgstr "Редактировать"
 
 #: ../core/premium/class_wpp_power_tools.php:360
-#, fuzzy
 msgid "New "
-msgstr "Новый %1$s"
+msgstr "Новый"
 
 #: ../core/premium/class_wpp_power_tools.php:373
-#, fuzzy
 msgid "All "
-msgstr "Все %1$s"
+msgstr "Все"
 
 #: ../core/premium/class_wpp_power_tools.php:374
 msgid "Search "
 msgstr "Поиск"
 
 #: ../core/premium/class_wpp_power_tools.php:375
-#, fuzzy
 msgid "No "
 msgstr "Нет"
 
 #: ../core/premium/class_wpp_power_tools.php:375
-#: ../templates/template-functions.php:609
+#: ../templates/template-functions.php:643
 msgid " found."
 msgstr "найдено."
 
 #: ../core/premium/class_wpp_property_import.php:80
-#, fuzzy
 msgid "Property Excerpt"
-msgstr "Мета объекта"
+msgstr "Выдержка объекта"
 
 #: ../core/premium/class_wpp_property_import.php:81
-#, fuzzy
 msgid "Property Status"
-msgstr "Атрибуты объектов"
+msgstr "Статус объектов"
 
 #: ../core/premium/class_wpp_property_import.php:82
-#, fuzzy
 msgid "Property Order"
-msgstr "Поиск объекта"
+msgstr "Порядок объекта"
 
 #: ../core/premium/class_wpp_property_import.php:83
-#, fuzzy
 msgid "Property Date"
-msgstr "Страница объекта"
+msgstr "Дата объекта"
 
 #: ../core/premium/class_wpp_property_import.php:84
-#, fuzzy
 msgid "Property Author"
-msgstr "Meta-данные объекта"
+msgstr "Автор объекта"
 
 #: ../core/premium/class_wpp_property_import.php:177
 #, php-format
@@ -3289,6 +3299,7 @@ msgid ""
 "Starting Browser-Initiated Import: %1s. Using XML Importer %2s and WP-"
 "Property %3s."
 msgstr ""
+"Начало импорта в браузере: %1s. Используя XML Importer %2s и WP-Property %3s."
 
 #: ../core/premium/class_wpp_property_import.php:248
 msgid "Manage XML Importer"
@@ -3311,15 +3322,13 @@ msgstr "Последний Импорт"
 #: ../core/premium/class_wpp_property_import.php:471
 #: ../core/premium/class_wpp_property_import.php:476
 #: ../core/premium/class_wpp_property_import.php:499
-#, fuzzy
 msgid "Time: "
-msgstr "Время"
+msgstr "Время:"
 
 #: ../core/premium/class_wpp_property_import.php:562
 #: ../core/premium/class_wpp_property_import.php:2978
-#, fuzzy
 msgid "An error occured."
-msgstr "Возникла ошибка"
+msgstr "Возникла ошибка."
 
 #: ../core/premium/class_wpp_property_import.php:587
 #, php-format
@@ -3327,39 +3336,36 @@ msgid ""
 "There are (%1s) unattached files related to listings that were imported "
 "using the XML Importer."
 msgstr ""
+"(%1s) неприкрепленных файла, относящихся к объектам были импортированы "
+"используя XML Импортер."
 
 #: ../core/premium/class_wpp_property_import.php:588
-#, fuzzy
 msgid "Delete Unattached Files"
-msgstr "Удалять страницы других"
+msgstr "Удалять неприкрепленные файлы"
 
 #: ../core/premium/class_wpp_property_import.php:594
 msgid "Look up XML import history."
-msgstr ""
+msgstr "Просмотреть историю XML импорта."
 
 #: ../core/premium/class_wpp_property_import.php:595
-#, fuzzy
 msgid "Show XML Import History"
-msgstr "Справка по XML Импортеру"
+msgstr "Показать историю XML Импортера"
 
 #: ../core/premium/class_wpp_property_import.php:597
 msgid "Show last 500 imported items in descending order."
-msgstr ""
+msgstr "Показать последние 500 импортированных пунктов в порядке убывания."
 
 #: ../core/premium/class_wpp_property_import.php:677
-#, fuzzy
 msgid "( Imported )"
-msgstr "Импортировано"
+msgstr "(Импортировано)"
 
 #: ../core/premium/class_wpp_property_import.php:686
-#, fuzzy
 msgid "Schedule coult not be imported."
-msgstr "ID графика не установлено."
+msgstr "Таблица не может быть импортирована."
 
 #: ../core/premium/class_wpp_property_import.php:732
-#, fuzzy
 msgid "Importer"
-msgstr "Импорт"
+msgstr "Импортер"
 
 #: ../core/premium/class_wpp_property_import.php:808
 #, php-format
@@ -3367,6 +3373,8 @@ msgid ""
 "Starting Cron-Initiated Import: %1s. Using XML Importer %2s and WP-Property "
 "%3s."
 msgstr ""
+"Начало Cron-Инициализированного импорта: %1s. Используя XML Importer %2s и "
+"WP-Property %3s."
 
 #: ../core/premium/class_wpp_property_import.php:863
 msgid "XML Importer Help"
@@ -3398,14 +3406,17 @@ msgid ""
 "usabilitydynamics.com/\" target=\"_blank\">rets.usabilitydynamics.com</a> to "
 "determine. "
 msgstr ""
+"<b>Класс ресурса объекта:</b> Обычно это служит для определения типа "
+"объекта, таких как Commercial или  Residential, названия рознятся в "
+"зависимости от RETS провайдера. Используйте <a href=\"http://rets."
+"usabilitydynamics.com/\" target=\"_blank\">rets.usabilitydynamics.com</a> "
+"для их определения. "
 
 #: ../core/premium/class_wpp_property_import.php:869
-#, fuzzy
 msgid "XPath Query to Property Elements"
-msgstr "Выберите элемент объекта."
+msgstr "XPath запрос к элементам объекта"
 
 #: ../core/premium/class_wpp_property_import.php:870
-#, fuzzy
 msgid ""
 "In order to begin importing data, you must first identify what the "
 "\"repeating property element\" is in the XML file.  Typically this would be "
@@ -3416,16 +3427,15 @@ msgid ""
 "and apply the XPath Rules in the Attribute Map section. "
 msgstr ""
 "Для начала импорта данных, во-первых, Вы должны определить 'повторяющийся "
-"элемент %1$s' в XML файле. Обычно, это такие элементы как <b>property</b> "
+"элемент объекта' в XML файле. Обычно, это такие элементы как <b>property</b> "
 "или <b>object</b>, где отвечающие XPath правила будут  <b>//property</b> или "
 "<b>//object</b>, соответственно. Простейший способ идентифицировать его -  "
 "просмотреть файл для поиска повторяющейся модели. Запрос должен выбрать "
 "элементы для цикла применения правил  XPath в разделе Карта Атрибутов."
 
 #: ../core/premium/class_wpp_property_import.php:872
-#, fuzzy
 msgid "Import Limits"
-msgstr "Импорт"
+msgstr "Лимиты импорта"
 
 #: ../core/premium/class_wpp_property_import.php:873
 msgid ""
@@ -3435,6 +3445,11 @@ msgid ""
 "objects has actually passsed quality inspection, and have been saved to the "
 "database."
 msgstr ""
+"Существует два вида лимитов - первый лимит останавливает импорт после "
+"определенного количества обработанных объектов до того, как они будут "
+"проверены качественно, второй же остановит импорт только когда определенное "
+"количество объектов пройдет качественный контроль, они будут сохранены в "
+"базе данных.  "
 
 #: ../core/premium/class_wpp_property_import.php:874
 msgid ""
@@ -3444,10 +3459,14 @@ msgid ""
 "already exist in the system - properties that already exist will be marked "
 "as updated."
 msgstr ""
+"Ограничение импорта работает хорошо, когда Вы выполняете пробный импорт. "
+"Лимит в <b>10</b> остановит импорт, как только 10 объектов будет создано. "
+"Импортер не считает объекты, которые были пропущены в процессе импорта - "
+"объкты, которые уже существуют в системе будут помечены как обновленные."
 
 #: ../core/premium/class_wpp_property_import.php:876
 msgid "Running the Import"
-msgstr ""
+msgstr "Запусить импорт"
 
 #: ../core/premium/class_wpp_property_import.php:877
 msgid ""
@@ -3455,6 +3474,9 @@ msgid ""
 "a cron job.  Using the browser is easy, and viable when you have a small "
 "feed, or a very good server. "
 msgstr ""
+"Есть два способа запустить импорт, с помощью браузера и cron. Использование "
+"браузера легче и пригодно, если у Вас есть небольшая лента или очень хороший "
+"сервер."
 
 #: ../core/premium/class_wpp_property_import.php:878
 msgid ""
@@ -3464,20 +3486,26 @@ msgid ""
 "displayed, followed by the command you would need to enter into the cron job "
 "builder, for the import schedule to be executed."
 msgstr ""
+"При работе с большими лентами или с целью автоматизации, рекомендуется "
+"выполнять скрипт импорта используя cron. Для каждого \"Графика Импорта\", "
+"который Вы создаете, будет отображено поле <b>Команда Cron</b>"
 
 #: ../core/premium/class_wpp_property_import.php:880
 msgid "Function: free_text"
-msgstr ""
+msgstr "Функция: free_text"
 
 #: ../core/premium/class_wpp_property_import.php:881
 msgid ""
 "To insert some common text, use the <b>free_text</b> command, like so: "
 "<b>free_text: Imported from Some List</b> and the text will be kept as is."
 msgstr ""
+"Чтобы вставить обычный текст, используйте команду <b>free_text</b> например: "
+"<b>free_text: Импортировано из какого-то списка</b> - текст сохранится как "
+"он есть."
 
 #: ../core/premium/class_wpp_property_import.php:883
 msgid "Function: concat"
-msgstr ""
+msgstr "Функция: concat"
 
 #: ../core/premium/class_wpp_property_import.php:884
 msgid ""
@@ -3486,6 +3514,10 @@ msgid ""
 "the text between the quotes being executed as xPath rules, while text "
 "outside of quotes being inserted as it is."
 msgstr ""
+"Вы также можете соединять обычный текст с результатом правила xPath, , "
+"например: <b>concat:http://sourcesite.com/images/'Photo7'</b> текст в "
+"кавычках выполняется по правилам XPath, в то время как текст вне кавычек "
+"вставляется как он есть."
 
 #: ../core/premium/class_wpp_property_import.php:885
 msgid ""
@@ -3493,10 +3525,13 @@ msgid ""
 "example you can create the Property Title from a few XML attributes: "
 "<b>concat:'bedrooms' bedroom house in 'location/city'</b>"
 msgstr ""
+"Вы можете также использовать concat, чтобы соединять множественные правила  "
+"xPath, например, Вы можете создать имя объекта из нескольких XML атрибутов: "
+"<b>concat:'bedrooms' bedroom house in 'location/city'</b>"
 
 #: ../core/premium/class_wpp_property_import.php:887
 msgid "Function: concat_list"
-msgstr ""
+msgstr "Функция: concat_list"
 
 #: ../core/premium/class_wpp_property_import.php:888
 msgid ""
@@ -3505,78 +3540,84 @@ msgid ""
 "path, then grab child \"value\" and \"label\" paths and import them as a "
 "single line. "
 msgstr ""
+"Пример: [concat_list root_path=\"options/option\" label_path=\"label\" "
+"value_path=\"value\" concat_character=\":\" ] будет искать options/option "
+"путь, затем брать дочернее значение \"значения\" и  \"заголовка\" пути и "
+"импотрировать их как одну строку."
 
 #: ../core/premium/class_wpp_property_import.php:931
 #, php-format
 msgid "Found %1s properties from database that were imported from this feed."
 msgstr ""
+"Найдено %1s объектов из базы данных, которые были импортированы из ленты."
 
 #: ../core/premium/class_wpp_property_import.php:945
 #, php-format
 msgid "Property ID %1s has been deleted. Total deleted so far: %2s"
-msgstr ""
+msgstr "Объект с ID %1s был удален. Всего удалено: %2s"
 
 #: ../core/premium/class_wpp_property_import.php:1201
 #, php-format
 msgid ""
 "Deleted %1s unattached property files that were created from an XML import."
 msgstr ""
+"Удалено %1s неприкрепленных файлов объектов, которые были созданы в процессе "
+"XML импорта."
 
 #: ../core/premium/class_wpp_property_import.php:1209
-#, fuzzy
 msgid "Something went wrong, did not delete any unattached images."
-msgstr "Что-то пошло не так, %1$s не найдено для удаления."
+msgstr ""
+"Что-то пошло не так, не удалено ни одного неприкрепленного изображения."
 
 #: ../core/premium/class_wpp_property_import.php:1247
-#, fuzzy, php-format
+#, php-format
 msgid "All %1$s properties have been deleted in %2$s seconds."
-msgstr "Все %1$s %4$s из ленты %2$s удалены за %3$s секунд."
+msgstr "Все %1$s объекты были удалены за %2$s секунд."
 
 #: ../core/premium/class_wpp_property_import.php:1249
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Although %1$s properties were found, only %2$s have been deleted in %3$s "
 "seconds."
 msgstr ""
-"Не смотря на то, что %1$s %4$s были найдены, только %2$s были удалены за "
+"Не смотря на то, что %1$s объекты были найдены, только %2$s были удалены за "
 "%3$s секунд."
 
 #: ../core/premium/class_wpp_property_import.php:1253
-#, fuzzy
 msgid "Something went wrong, no properties were found to delete."
-msgstr "Что-то пошло не так, %1$s не найдено для удаления."
+msgstr "Что-то пошло не так, не найдено ни одного объекта для удаления."
 
 #: ../core/premium/class_wpp_property_import.php:1333
-#, fuzzy, php-format
+#, php-format
 msgid "Created temporary directory for import: %1$s."
-msgstr "Невозможно создать директорию для %1s."
+msgstr "Создана временная директория для импорта: %1s."
 
 #: ../core/premium/class_wpp_property_import.php:1366
-#, fuzzy, php-format
+#, php-format
 msgid "Could not load XML Object from raw data: %1s."
-msgstr "Невозможно создать директорию для %1s."
+msgstr "Невозможно загрузить XML объект: %1s."
 
 #: ../core/premium/class_wpp_property_import.php:1368
 msgid "Could not load XML Object from raw data - empty result returned."
 msgstr ""
+"Невозможно загрузить XML объект из исходых данных - возвращены пустые "
+"результаты."
 
 #: ../core/premium/class_wpp_property_import.php:1370
 msgid "Could not load XML Object from raw data."
-msgstr ""
+msgstr "Невозможно загрузить XML объект из исходных данных."
 
 #: ../core/premium/class_wpp_property_import.php:1374
-#, fuzzy
 msgid "XML data cannot be loaded."
-msgstr "Изображение не может быть загружено."
+msgstr "Данные XML не может быть загружены."
 
 #: ../core/premium/class_wpp_property_import.php:1407
-#, fuzzy
 msgid "Data loaded from cache."
-msgstr "Данные унаследованы от родителя"
+msgstr "Данные загружены из кэша."
 
 #: ../core/premium/class_wpp_property_import.php:1413
 msgid " object(s) found with XPath Rule: "
-msgstr ""
+msgstr "объектов найдено с XPath правилом:"
 
 #: ../core/premium/class_wpp_property_import.php:1414
 #, php-format
@@ -3584,89 +3625,93 @@ msgid ""
 "%1s objects identified: <a href=\"%2s\" target=\"_blank\">download processed "
 "XML file</a> ( %3s )."
 msgstr ""
+"%1s объектов идентофицировано: <a href=\"%2s\" target=\"_blank\">загрузить "
+"результирующий XML файл</a> ( %3s )."
 
 #: ../core/premium/class_wpp_property_import.php:1416
 msgid "Root Element XPath Rule: "
-msgstr ""
+msgstr "XPath Rule корневого элемента:"
 
 #: ../core/premium/class_wpp_property_import.php:1420
 msgid "No Root Element XPath Rule, displaying most root elements."
 msgstr ""
+"Нет правила xPath для корневого элемента, отображение наиболее корневого "
+"элемента."
 
 #: ../core/premium/class_wpp_property_import.php:1424
-#, fuzzy
 msgid "No objects found."
-msgstr "Не найдено ни одного объекта"
+msgstr "Не найдено ни одного объекта."
 
 #: ../core/premium/class_wpp_property_import.php:1431
 #, php-format
 msgid "Preview truncated: showing: %1s of full feed:"
-msgstr ""
+msgstr "Предпросмотр ограничен: показ: %1s всей ленты:"
 
 #: ../core/premium/class_wpp_property_import.php:1436
-#, fuzzy, php-format
+#, php-format
 msgid "Available tags in source: %1s"
-msgstr "Доступные тэги:"
+msgstr "Доступные тэги: %1s"
 
 #: ../core/premium/class_wpp_property_import.php:1669
 #, php-format
 msgid "XPath rules for object #%1d processed with %2d extracted attributes."
-msgstr ""
+msgstr "Правила XPath для объекта #%1d обработаны с %2d атрибутами."
 
 #: ../core/premium/class_wpp_property_import.php:1675
 #, php-format
 msgid "Stopping import due to specified pre-QC limit of %1d."
-msgstr ""
+msgstr "Остановка импорта из-за pre-QC лимита в %1d."
 
 #: ../core/premium/class_wpp_property_import.php:1696
-#, fuzzy, php-format
+#, php-format
 msgid "Importing %1s"
-msgstr "Импортирование"
+msgstr "Импортирование %1s"
 
 #: ../core/premium/class_wpp_property_import.php:1736
 #: ../core/premium/class_wpp_property_import.php:1737
 #, php-format
 msgid "Deleted all ( %1s ) properties that originated from this feed."
-msgstr ""
+msgstr "Удалены все ( %1s ) объекта, которые были импортированы из этой ленты."
 
 #: ../core/premium/class_wpp_property_import.php:1739
 #: ../core/premium/class_wpp_property_import.php:1814
 msgid ""
 "Did not find any properties that have been imported from this feed to remove."
 msgstr ""
+"Не найдено ни одного объекта, который бы был импортирован из этой ленты, для "
+"удаления."
 
 #: ../core/premium/class_wpp_property_import.php:1744
 msgid "Did not remove any old properties."
-msgstr ""
+msgstr "Не удалено ни одного объекта."
 
 #: ../core/premium/class_wpp_property_import.php:1757
 #, php-format
 msgid "Stopping import due to specified post-QC limit of %1d."
-msgstr ""
+msgstr "Остановка импорта из-за post-QC лимита в %1d."
 
 #: ../core/premium/class_wpp_property_import.php:1803
 #, php-format
 msgid "Object cycle done. Completed %1d cycles."
-msgstr ""
+msgstr "Завершено %1d циклов."
 
 #: ../core/premium/class_wpp_property_import.php:1811
 #: ../core/premium/class_wpp_property_import.php:1812
 #, php-format
 msgid "Deleted ( %1s ) properties that are no longer in the feed."
-msgstr ""
+msgstr "Удалено ( %1s ) объектов, которых больше нет в ленте."
 
 #: ../core/premium/class_wpp_property_import.php:1838
 msgid "Deleted the import temporary directory."
-msgstr ""
+msgstr "Временная директория импорта удалена."
 
 #: ../core/premium/class_wpp_property_import.php:1840
 msgid "Unable to delete the import temporary directory"
-msgstr ""
+msgstr "Невозможно удалить временную директорию импорта."
 
 #: ../core/premium/class_wpp_property_import.php:1935
-#, fuzzy
 msgid "Import name"
-msgstr "Импорт"
+msgstr "Имя импорта"
 
 #: ../core/premium/class_wpp_property_import.php:1944
 msgid "Source"
@@ -3677,27 +3722,24 @@ msgid "URL"
 msgstr "URL"
 
 #: ../core/premium/class_wpp_property_import.php:1952
-#: ../templates/template-functions.php:1320
 msgid "Type:"
 msgstr "Тип:"
 
 #: ../core/premium/class_wpp_property_import.php:1955
 msgid "XML / JSON"
-msgstr ""
+msgstr "XML / JSON"
 
 #: ../core/premium/class_wpp_property_import.php:1956
 msgid "CSV"
 msgstr "CSV"
 
 #: ../core/premium/class_wpp_property_import.php:1957
-#, fuzzy
 msgid "Google Spreadsheet"
-msgstr "Google Maps"
+msgstr "Google Spreadsheet"
 
 #: ../core/premium/class_wpp_property_import.php:1958
-#, fuzzy
 msgid "WP-Property Feed"
-msgstr "Атрибут  WP Property"
+msgstr "WP-Property Feed"
 
 #: ../core/premium/class_wpp_property_import.php:1959
 msgid "RETS"
@@ -3708,18 +3750,16 @@ msgid "Send GET variables as POST data."
 msgstr "Отправлять GET переменные в виде POST данных."
 
 #: ../core/premium/class_wpp_property_import.php:1980
-#, fuzzy
 msgid "Google Username"
-msgstr "Google Maps"
+msgstr "Имя пользователя Google"
 
 #: ../core/premium/class_wpp_property_import.php:1984
-#, fuzzy
 msgid "Google Password"
-msgstr "Пароль"
+msgstr "Пароль Google "
 
 #: ../core/premium/class_wpp_property_import.php:1988
 msgid "Google Extra Query Vars"
-msgstr ""
+msgstr "Дополнительные запросы Google Vars"
 
 #: ../core/premium/class_wpp_property_import.php:1989
 msgid ""
@@ -3728,83 +3768,79 @@ msgid ""
 "docs</a> for the format of this field ( should be name value pairs, without "
 "the beginning \"?\" )"
 msgstr ""
+"Посетите <a href=\"http://code.google.com/apis/spreadsheets/data/3.0/"
+"reference.html#ListParameters\" target=\"_blank\">Google Spreadsheet API "
+"docs</a> для форматирования этой ленты(должны быть пары значений имен, без "
+"начала \"?\" )"
 
 #: ../core/premium/class_wpp_property_import.php:1993
-#, fuzzy
 msgid "RETS Username."
-msgstr "Пользователь"
+msgstr "Имя пользователя RETS"
 
 #: ../core/premium/class_wpp_property_import.php:1997
-#, fuzzy
 msgid "RETS Password."
-msgstr "Пароль"
+msgstr "Пароль RETS."
 
 #: ../core/premium/class_wpp_property_import.php:2001
-#, fuzzy
 msgid "Property Resource Class."
-msgstr "Объект сохранен"
+msgstr "Класс свойства ресурса."
 
 #: ../core/premium/class_wpp_property_import.php:2005
 msgid "Primary Key for Resource."
-msgstr ""
+msgstr "Первичный Ключ ресурса."
 
 #: ../core/premium/class_wpp_property_import.php:2005
 msgid "Also referred to as \"Key Field\". Default is \"ListingKey\""
-msgstr ""
+msgstr "Также упоминается как \"Key Field\". По умолчанию \"ListingKey\""
 
 #: ../core/premium/class_wpp_property_import.php:2009
 msgid "Photo Object."
-msgstr ""
+msgstr "Фото Объект."
 
 #: ../core/premium/class_wpp_property_import.php:2009
-#, fuzzy
 msgid "Default is \"Photo\""
-msgstr "Страница %1$s по умолчанию"
+msgstr "Изображение по умолчанию"
 
 #: ../core/premium/class_wpp_property_import.php:2013
-#, fuzzy
 msgid "User-Agent String."
-msgstr "User-Agent"
+msgstr "User-Agent."
 
 #: ../core/premium/class_wpp_property_import.php:2013
 #: ../core/premium/class_wpp_property_import.php:2017
 msgid "May be required by your RETS"
-msgstr ""
+msgstr "Может требоваться Вашим RETS"
 
 #: ../core/premium/class_wpp_property_import.php:2017
-#, fuzzy
 msgid "User-Agent Password."
-msgstr "User-Agent"
+msgstr "Пароль User-Agent"
 
 #: ../core/premium/class_wpp_property_import.php:2026
-#, fuzzy
 msgid "RETS Version."
-msgstr "Версия"
+msgstr "Версия RETS "
 
 #: ../core/premium/class_wpp_property_import.php:2026
 msgid "Version is set by your RETS provider."
-msgstr ""
+msgstr "Версия установленная Вашим провайдером RETS."
 
 #: ../core/premium/class_wpp_property_import.php:2030
-#, fuzzy
 msgid "Property Query."
-msgstr "Поиск объекта"
+msgstr "Запрос объекта."
 
 #: ../core/premium/class_wpp_property_import.php:2030
 msgid ""
 "Accepts <a href=\"https://www.flexmls.com/support/rets/tutorials/dmql/\" "
 "target=\"_blank\">DMQL</a> - Default is \"(ListingStatus=|Active)\""
 msgstr ""
+"Применимы <a href=\"https://www.flexmls.com/support/rets/tutorials/dmql/\" "
+"target=\"_blank\">DMQL</a> - По умолчанию \"(ListingStatus=|Active)\""
 
 #: ../core/premium/class_wpp_property_import.php:2034
-#, fuzzy
 msgid "Toggle Advanced Source Options"
-msgstr "Расширенные параметры поиска"
+msgstr "Расширенные параметры источника"
 
 #: ../core/premium/class_wpp_property_import.php:2040
-#, fuzzy
 msgid "Root XPath Query:"
-msgstr "Правило XPath"
+msgstr "Корневое правило XPath"
 
 #: ../core/premium/class_wpp_property_import.php:2042
 #: ../core/ui/page_settings.php:347
@@ -3814,50 +3850,45 @@ msgstr "Что это?"
 #: ../core/premium/class_wpp_property_import.php:2050
 #: ../core/premium/class_wpp_property_import.php:2719
 #: ../core/premium/class_wpp_property_import.php:2792
-#, fuzzy
 msgid "Preview Raw Data"
-msgstr "Предпросмотр"
+msgstr "Предпросмотр данных"
 
 #: ../core/premium/class_wpp_property_import.php:2052
-#, fuzzy
 msgid "Close Preview"
-msgstr "Предпросмотр"
+msgstr "Закрыть предпросмотр"
 
 #: ../core/premium/class_wpp_property_import.php:2068
-#, fuzzy
 msgid "Default Property Type"
-msgstr "Изображнние объекта по умолчанию"
+msgstr "Тип объекта по умолчанию"
 
 #: ../core/premium/class_wpp_property_import.php:2076
-#, fuzzy
 msgid "Will be defaulted to if no xPath rule exists for the \"Property Type\"."
 msgstr ""
 "Будет выбранным по умолчанию, если xPath правила не существует для \"типа "
-"%1$s\"."
+"объектов\"."
 
 #: ../core/premium/class_wpp_property_import.php:2092
 msgid "<b>Pre-QC Limit:</b> Limit import to the first"
-msgstr ""
+msgstr "<b>Pre-QC Limit:</b> Лимит импорта до первого"
 
 #: ../core/premium/class_wpp_property_import.php:2094
-#, fuzzy
 msgid "properties in the feed."
-msgstr "Не найдено ни одного объекта"
+msgstr "объектов в ленте."
 
 #: ../core/premium/class_wpp_property_import.php:2095
 msgid "More about limits."
-msgstr ""
+msgstr "Подробнее о лимитах."
 
 #: ../core/premium/class_wpp_property_import.php:2099
 msgid "<b>Post-QC Limit:</b> Limit import to the first"
-msgstr ""
+msgstr "Лимит импорта до первого"
 
 #: ../core/premium/class_wpp_property_import.php:2101
 msgid "created properties that have passed quality standards."
-msgstr ""
+msgstr "создано объектов, которые прошли стандарты качества."
 
 #: ../core/premium/class_wpp_property_import.php:2107
-#, fuzzy, php-format
+#, php-format
 msgid "Only import images that are over %1spx in width, and %2spx in height."
 msgstr ""
 "Импортировать только изображения, которые больше %1$spx в ширину и %2$spx в "
@@ -3865,12 +3896,11 @@ msgstr ""
 
 #: ../core/premium/class_wpp_property_import.php:2112
 msgid "Minimum sizes are ignored if blank."
-msgstr ""
+msgstr "Минимальные размеры игнорируются, если не заполнено."
 
 #: ../core/premium/class_wpp_property_import.php:2116
-#, fuzzy
 msgid "Imported properties must have at least "
-msgstr "Импотрированные %1$s должны иметь по крайней мере"
+msgstr "Импотрированные объекты должны иметь по крайней мере"
 
 #: ../core/premium/class_wpp_property_import.php:2117
 msgid ", but no more than "
@@ -3882,29 +3912,32 @@ msgstr " валидные изображения."
 
 #: ../core/premium/class_wpp_property_import.php:2124
 msgid "Do not import properties that have been imported less than "
-msgstr ""
+msgstr "Не импортировать объекты, которые были импортированы менее, чем"
 
 #: ../core/premium/class_wpp_property_import.php:2126
-#, fuzzy
 msgid "hour(s) ago."
-msgstr "%s часов назад"
+msgstr "часов назад"
 
 #: ../core/premium/class_wpp_property_import.php:2133
 msgid "Automatically set the first image as the thumbnail."
-msgstr ""
+msgstr "Автоматически делать первое изображение миниатюрой."
 
 #: ../core/premium/class_wpp_property_import.php:2140
 msgid ""
 "Remove properties that are no longer in source XML from this site's "
 "database. This can now be done if the the import configuration has a Pre-QC "
-"or Post-QD Limit."
+"or Post-QC Limit."
 msgstr ""
+"Удалять объекты, которых больше нет в исходном XML из базы данных сайта. Это "
+"возможно, если конфигурация импорта имеет  Pre-QC or Post-QС лимиты."
 
 #: ../core/premium/class_wpp_property_import.php:2146
 msgid ""
 "When updating an existing property, remove all old images before downloading "
 "new ones."
 msgstr ""
+"При обновлении существующих объектов, удалять все изображения до загрузки "
+"новых."
 
 #: ../core/premium/class_wpp_property_import.php:2152
 #, php-format
@@ -3912,63 +3945,67 @@ msgid ""
 "Send email updates to the site admin e-mail address ( %1s ) when import "
 "schedules are executed and completed."
 msgstr ""
+"Послать уведомление по электронной почте администратору сайта ( %1s ), когда "
+"график будет выполнен и импорт закончен."
 
 #: ../core/premium/class_wpp_property_import.php:2159
 msgid ""
 "Remove all properties that were originally imported from this feed on import."
 msgstr ""
+"Удалить в процессе импорта все объекты, которые были импортированы из этой "
+"ленты."
 
 #: ../core/premium/class_wpp_property_import.php:2166
 msgid "Completely remove <b>all</b> existing properties prior to import."
-msgstr ""
+msgstr "Удалить <b>все</b> существующие объекты до импорта."
 
 #: ../core/premium/class_wpp_property_import.php:2173
 msgid "Fix strings that are in all caps."
-msgstr ""
+msgstr "Исправить строки из заглавных букв."
 
 #: ../core/premium/class_wpp_property_import.php:2180
 msgid "Scan for any formatting tags and strip them out."
-msgstr ""
+msgstr "Сканировать на наличие любых форматирующих тегов и пропускать их."
 
 #: ../core/premium/class_wpp_property_import.php:2188
-#, fuzzy
 msgid "Automatically load imported images into property slideshow."
-msgstr "Автоматически вставить обзор объектов в  контент страницы объекта."
+msgstr "Автоматически вставить импортированные изображения в слайдшоу."
 
 #: ../core/premium/class_wpp_property_import.php:2196
 msgid ""
 "Geolocate listings that do not already have latitute and longitude values."
 msgstr ""
+"Выполнять геолокацию объектов, которые не имеют значений широты и долготы."
 
 #: ../core/premium/class_wpp_property_import.php:2202
 msgid "Enable detailed logging to assist with troubleshooting."
 msgstr ""
+"Включить подробное логгирование для оказания помощи в устранении неполадок."
 
 #: ../core/premium/class_wpp_property_import.php:2208
 msgid "Show SQL Queries and errors."
-msgstr ""
+msgstr "Показывать SQL запросы и ошибки"
 
 #: ../core/premium/class_wpp_property_import.php:2215
-#, fuzzy
 msgid "Toggle Advanced Options"
-msgstr "Расширенные параметры поиска"
+msgstr "Расширенные параметры"
 
 #: ../core/premium/class_wpp_property_import.php:2222
-#, fuzzy
 msgid "Automatic Matching"
-msgstr "Автоматически подключать стандартный CSS."
+msgstr "Автоматическое сопоставление"
 
 #: ../core/premium/class_wpp_property_import.php:2224
 #: ../core/premium/class_wpp_property_import.php:3599
-#, fuzzy
 msgid "Automatically Match"
-msgstr "Автоматически подключать стандартный CSS."
+msgstr "Сопоставить автоматически"
 
 #: ../core/premium/class_wpp_property_import.php:2225
 msgid ""
 "This will work for WP-Property exports and imports, but will have mixed "
 "results with uniquely formatted feeds."
 msgstr ""
+"Это будет работать для экспотрати импорта WP-Property, но создаст смешанные "
+"результаты с неравно форматированными лентами."
 
 #: ../core/premium/class_wpp_property_import.php:2230
 msgid "Attribute Map"
@@ -3979,25 +4016,24 @@ msgid ""
 "Use XPath rules to setup the paths to the individual XML attributes to match "
 "them up with WP-Property attributes."
 msgstr ""
+"Используйте XPath правила для настройки отдельных XML атрибутов для "
+"сопоставления их с атрибутами WP-Property."
 
 #: ../core/premium/class_wpp_property_import.php:2234
-#, fuzzy
 msgid "Sort Attribute Rules"
-msgstr "Атрибут, доступный сортировке"
+msgstr "Сортировать правила атрибутов"
 
 #: ../core/premium/class_wpp_property_import.php:2240
-#, fuzzy
 msgid "WP-Property Attribute"
-msgstr "Атрибут  WP Property"
+msgstr "Атрибут  WP-Property"
 
 #: ../core/premium/class_wpp_property_import.php:2241
 msgid "XPath Rule"
 msgstr "Правило XPath"
 
 #: ../core/premium/class_wpp_property_import.php:2253
-#, fuzzy
 msgid "WordPress Attributes"
-msgstr "Атрибуты адреса"
+msgstr "Атрибуты WordPress"
 
 #: ../core/premium/class_wpp_property_import.php:2271
 msgid "Street Number"
@@ -4024,29 +4060,24 @@ msgid "Postal Code"
 msgstr "Почновый код"
 
 #: ../core/premium/class_wpp_property_import.php:2282
-#, fuzzy
 msgid "WP-Property Attributes"
-msgstr "Атрибут  WP Property"
+msgstr "Атрибут  WP-Property"
 
 #: ../core/premium/class_wpp_property_import.php:2285
-#, fuzzy
 msgid "Property Agent"
-msgstr "Meta-данные объекта"
+msgstr "Агент"
 
 #: ../core/premium/class_wpp_property_import.php:2287
-#, fuzzy
 msgid "Global Property ID"
-msgstr "Объект"
+msgstr "Глобальное ID объекта"
 
 #: ../core/premium/class_wpp_property_import.php:2288
-#, fuzzy
 msgid "Display Address"
-msgstr "Адрес"
+msgstr "Отображаемый адрес"
 
 #: ../core/premium/class_wpp_property_import.php:2300
-#, fuzzy
 msgid "Delete Selected"
-msgstr "Таблица удалена."
+msgstr "Удалить выбранное"
 
 #: ../core/premium/class_wpp_property_import.php:2319
 #: ../core/premium/class_wpp_property_import.php:2816
@@ -4055,30 +4086,28 @@ msgid "Save Configuration"
 msgstr "Сохранить настройки"
 
 #: ../core/premium/class_wpp_property_import.php:2335
-#, fuzzy
 msgid "Preview Import"
-msgstr "Импорт"
+msgstr "Предпросмотр импорта"
 
 #: ../core/premium/class_wpp_property_import.php:2336
-#, fuzzy
 msgid "Process Full Import"
-msgstr "Тип объекта"
+msgstr "Осуществить полный импорт"
 
 #: ../core/premium/class_wpp_property_import.php:2395
 #, php-format
 msgid ""
 "No UI data was returned. Mostly likely an encoding error. Encoding: %1s "
 msgstr ""
+"Данные пользователького интерфейса не были возвращены. Верояно, ошибка "
+"кодировки. Encoding: %1s "
 
 #: ../core/premium/class_wpp_property_import.php:2469
-#, fuzzy
 msgid "Schedule imported from file."
 msgstr "Таблица импортирована из загруженного файла."
 
 #: ../core/premium/class_wpp_property_import.php:2664
-#, fuzzy
 msgid "Please save schedule first."
-msgstr "Пожалуйста, сохраните, чтобы добавить изображения."
+msgstr "Пожалуйста, сначала сохраните график."
 
 #: ../core/premium/class_wpp_property_import.php:2711
 #: ../core/premium/class_wpp_property_import.php:2791
@@ -4090,19 +4119,18 @@ msgstr ""
 "хватает памяти."
 
 #: ../core/premium/class_wpp_property_import.php:2740
-#: ../core/premium/class_wpp_slideshow.php:1420
-#: ../core/premium/class_wpp_supermap.php:1665
+#: ../core/premium/class_wpp_slideshow.php:1440
+#: ../core/premium/class_wpp_supermap.php:1675
 msgid "Loading..."
 msgstr "Загрузка..."
 
 #: ../core/premium/class_wpp_property_import.php:2766
-#, fuzzy
 msgid "Preview Again"
-msgstr "Предпросмотр"
+msgstr "Предпросмотреть опять"
 
 #: ../core/premium/class_wpp_property_import.php:2818
 msgid "Saving the XML Importer schedule, please wait..."
-msgstr ""
+msgstr "Сохранение графика  XML Импортера, пожалуйста, подождите..."
 
 #: ../core/premium/class_wpp_property_import.php:2820
 #: ../core/premium/class_wpp_property_import.php:2856
@@ -4111,40 +4139,36 @@ msgid "Processing..."
 msgstr "Обработка..."
 
 #: ../core/premium/class_wpp_property_import.php:2836
-#, fuzzy
 msgid "Schedule has been saved."
 msgstr "Таблица сохранена."
 
 #: ../core/premium/class_wpp_property_import.php:2854
 msgid "Updating the XML Importer schedule, please wait..."
-msgstr ""
+msgstr "Обновление графика XML Импортера, пожалуйста, подождите..."
 
 #: ../core/premium/class_wpp_property_import.php:2871
-#, fuzzy
 msgid "Schedule has been updated."
-msgstr "Таблица удалена."
+msgstr "Таблица обновлена."
 
 #: ../core/premium/class_wpp_property_import.php:2962
 msgid "Confirm that you want to delete all "
-msgstr ""
+msgstr "Подтвердите, что хотите удалить все"
 
 #: ../core/premium/class_wpp_property_import.php:2962
-#, fuzzy
 msgid ""
 " properties from this feed by typing in in 'delete' below, or press 'Cancel' "
 "to cancel."
 msgstr ""
-"Подтвердите, что Вы хотите удалить все %1$s из фида написав \"Удалить\" ниже "
-"или нажмите  \"Отмена\" чтобы отменить."
+" объекты из ленты написав 'Удалить' ниже или нажмите  'Отмена' чтобы "
+"отменить."
 
 #: ../core/premium/class_wpp_property_import.php:2993
 msgid "Are you sure?"
 msgstr "Вы уверены?"
 
 #: ../core/premium/class_wpp_property_import.php:3140
-#, fuzzy
 msgid "Enabled Options"
-msgstr "Опции"
+msgstr "Задействованные опции"
 
 #: ../core/premium/class_wpp_property_import.php:3207
 msgid "Toggle Advanced"
@@ -4160,134 +4184,117 @@ msgstr "Уникальный ID атрибут."
 
 #: ../core/premium/class_wpp_property_import.php:3623
 msgid "The source evaluation resulted in an Internal Server Error!"
-msgstr ""
+msgstr "Оценка источника вызвала внутреннюю ошибку сервера!"
 
 #: ../core/premium/class_wpp_property_import.php:3629
 msgid "Request error:"
-msgstr ""
+msgstr "Ошибка запроса:"
 
 #: ../core/premium/class_wpp_property_import.php:3794
 msgid "Check Source"
 msgstr "Проверить источник"
 
 #: ../core/premium/class_wpp_property_import.php:3804
-#, fuzzy
 msgid "Source is Good: Reload."
-msgstr "Источник впорядке"
+msgstr "Источник в порядке: Перегрузить."
 
 #: ../core/premium/class_wpp_property_import.php:3809
-#, fuzzy
 msgid "Cannot Load Source: Reload."
-msgstr "Невозможно связаться с источником"
+msgstr "Невозможно связаться с источником: Перегрузить."
 
 #: ../core/premium/class_wpp_property_import.php:3814
 msgid "Internal Server Error!"
-msgstr ""
+msgstr "Внутренняя ошибка сервера!"
 
 #: ../core/premium/class_wpp_property_import.php:3823
-#, fuzzy
 msgid "Property Importer"
-msgstr "Тип объекта"
+msgstr "Импортер Объектов"
 
 #: ../core/premium/class_wpp_property_import.php:3853
-#, fuzzy
 msgid "Sort by:"
-msgstr "Поддерживает сортировку"
+msgstr "Сортировать по:"
 
 #: ../core/premium/class_wpp_property_import.php:3854
 msgid "Last Run"
-msgstr ""
+msgstr "Последний запуск"
 
 #: ../core/premium/class_wpp_property_import.php:3855
-#, fuzzy
 msgid "Created Properties"
-msgstr "Избранные объекты"
+msgstr "Созданные объекты"
 
 #: ../core/premium/class_wpp_property_import.php:3856
-#, fuzzy
 msgid "Updated Properties"
-msgstr "Избранные объекты"
+msgstr "Обновленные объекты"
 
 #: ../core/premium/class_wpp_property_import.php:3857
-#, fuzzy
 msgid "Total Properties"
-msgstr "Объекты"
+msgstr "Всего объектов"
 
 #: ../core/premium/class_wpp_property_import.php:3858
 msgid "Limit"
-msgstr ""
+msgstr "Лимит"
 
 #: ../core/premium/class_wpp_property_import.php:3866
-#, fuzzy
 msgid "Saved Import Schedules"
-msgstr "Расписание импорта:"
+msgstr "Сохранить таблицу импорта"
 
 #: ../core/premium/class_wpp_property_import.php:3879
-#, fuzzy
 msgid "Last run "
-msgstr "Последний Импорт"
+msgstr "Последний импорт"
 
 #: ../core/premium/class_wpp_property_import.php:3879
 msgid " ago."
-msgstr ""
+msgstr "назад."
 
 #: ../core/premium/class_wpp_property_import.php:3884
-#, fuzzy
 msgid "Updated "
-msgstr "Обновить"
+msgstr "Обновлено"
 
 #: ../core/premium/class_wpp_property_import.php:3884
 #: ../core/premium/class_wpp_property_import.php:3889
 #: ../core/premium/class_wpp_property_import.php:3894
-#, fuzzy
 msgid " objects."
-msgstr "Не найдено ни одного объекта"
+msgstr "объекты"
 
 #: ../core/premium/class_wpp_property_import.php:3889
-#, fuzzy
 msgid "Created "
-msgstr "Избранное"
+msgstr "Созданное"
 
 #: ../core/premium/class_wpp_property_import.php:3894
 msgid "Limited to "
-msgstr ""
+msgstr "Ограничено до"
 
 #: ../core/premium/class_wpp_property_import.php:3899
-#, fuzzy
 msgid "Total Properties: "
-msgstr "Объекты"
+msgstr "Всего объектов:"
 
 #: ../core/premium/class_wpp_property_import.php:3911
-#, fuzzy
 msgid "Source URL:"
-msgstr "Источник"
+msgstr "URL источника:"
 
 #: ../core/premium/class_wpp_property_import.php:3912
 msgid "Cron Command:"
-msgstr ""
+msgstr "Команда Cron:"
 
 #: ../core/premium/class_wpp_property_import.php:3919
 msgid "Run Import in Browser"
-msgstr ""
+msgstr "Запустить импорт в браузере"
 
 #: ../core/premium/class_wpp_property_import.php:3920
-#, fuzzy
 msgid "Save to File"
-msgstr "Сохранить и закрыть"
+msgstr "Сохранить в файл"
 
 #: ../core/premium/class_wpp_property_import.php:3922
-#, fuzzy
 msgid "Delete All Properties"
-msgstr "Объекты"
+msgstr "Удалить все объекты"
 
 #: ../core/premium/class_wpp_property_import.php:3934
 msgid "You do not have any saved schedules. Create one now."
 msgstr "У вас нет запланированных заданий. Можете создать сейчас."
 
 #: ../core/premium/class_wpp_property_import.php:3943
-#, fuzzy
 msgid "Import Schedule"
-msgstr "Расписание импорта:"
+msgstr "Таблица импорта"
 
 #: ../core/premium/class_wpp_property_import.php:3945
 msgid "Upload File"
@@ -4295,42 +4302,45 @@ msgstr "Загрузить файл"
 
 #: ../core/premium/class_wpp_property_import.php:4027
 msgid "Updating existing listing."
-msgstr ""
+msgstr "Обновить существующий список."
 
 #: ../core/premium/class_wpp_property_import.php:4044
 msgid ""
 "Attempted to update property, but wp_update_post() did not return an ID. "
-msgstr ""
+msgstr "Попытка обновить объект, но wp_update_post() не вернул ID. "
 
 #: ../core/premium/class_wpp_property_import.php:4069
 msgid "Skipping property, last import "
-msgstr ""
+msgstr "Пропуск объекта, последний импорт"
 
 #: ../core/premium/class_wpp_property_import.php:4069
 msgid " ago"
-msgstr ""
+msgstr "назад"
 
 #: ../core/premium/class_wpp_property_import.php:4085
-#, fuzzy
 msgid "Creating new listing."
-msgstr "Предосмотр объявлений"
+msgstr "Создание нового объекта."
 
 #: ../core/premium/class_wpp_property_import.php:4107
 #, php-format
 msgid "Object import failed. Error: %1s."
-msgstr ""
+msgstr "Импорт объекта неуспешен. Ошибка: %1s."
 
 #: ../core/premium/class_wpp_property_import.php:4111
 msgid ""
 "Object import failed - no Property Title detected or set, a requirement to "
 "creating a property."
 msgstr ""
+"Импорт объекта неудачен - не определено имени объекта, необходимого для "
+"создания объекта."
 
 #: ../core/premium/class_wpp_property_import.php:4115
 msgid ""
 "Object import failed.  Post cold not be created nor updated, and post_id was "
 "not found or created."
 msgstr ""
+"Импорт объекта неуспешен. Пост не может быть создан или обновлен и post_id "
+"не был найден или создан."
 
 #: ../core/premium/class_wpp_property_import.php:4154
 #, php-format
@@ -4338,41 +4348,48 @@ msgid ""
 "Attachment referenced in database not found on disk: (%1s), removing "
 "reference from DB."
 msgstr ""
+"Вложения, указанные в базе не найдены на диске: (%1s), удаление упоминания в "
+"БД."
 
 #: ../core/premium/class_wpp_property_import.php:4167
 #, php-format
 msgid "Duplicate attachment file found (%1s) and deleted."
-msgstr ""
+msgstr "Дублированные прикрепления файлов обнаружены (%1s) и удалены."
 
 #: ../core/premium/class_wpp_property_import.php:4420
 msgid ""
 "After import property has less than the required amount of images - deleting "
 "property as configured."
 msgstr ""
+"После импорта объект имеел меньшее количество изображений, чем требовалось - "
+"удаление согласно конфигурации."
 
 #: ../core/premium/class_wpp_property_import.php:4423
 msgid ""
 "After import property has no images, but was unable to delete the property."
 msgstr ""
+"После импорта объект не имеет изображений, но удалить объект не удалось."
 
 #: ../core/premium/class_wpp_property_import.php:4428
 #, php-format
 msgid "After import property has a total of %1s images."
-msgstr ""
+msgstr "После импорта объект имеет %1s изображений."
 
 #: ../core/premium/class_wpp_property_import.php:4709
-#, fuzzy, php-format
+#, php-format
 msgid "Image directory %1s could not be created."
-msgstr "%1$d %2$s не могут быть обнослены."
+msgstr "Директория изображений %1s не может быть создана."
 
 #: ../core/premium/class_wpp_property_import.php:4743
 msgid "Could not save image saved image - empty file returned by server."
 msgstr ""
+"Невозможно сохранить изображение, сохраненное изображение - пустой файл, "
+"возвращенный сервером."
 
 #: ../core/premium/class_wpp_property_import.php:4760
 #, php-format
 msgid "Image %1s downloaded, but appears corrupt - deleting."
-msgstr ""
+msgstr "Изображения %1s скачаны, но оказались поврежденными - удалены."
 
 #: ../core/premium/class_wpp_property_import.php:4778
 #: ../core/premium/class_wpp_property_import.php:5066
@@ -4380,34 +4397,35 @@ msgstr ""
 msgid ""
 "Image %1s downloaded, but image size failed quality standards - deleting."
 msgstr ""
+"Изображение %1s загружено, но размер не прошел стандарты качества - удаление."
 
 #: ../core/premium/class_wpp_property_import.php:4808
 #, php-format
 msgid "Downloaded %1s image(s) for %2s #%3s."
-msgstr ""
+msgstr "Загружено %1s изображений для %2s #%3s."
 
 #: ../core/premium/class_wpp_property_import.php:5012
 msgid "on disk using file_get_contents()"
-msgstr ""
+msgstr "на диск, используя file_get_contents()"
 
 #: ../core/premium/class_wpp_property_import.php:5017
 msgid "Attempting to get image  ( "
-msgstr ""
+msgstr "Попытка занрузить изображение ("
 
 #: ../core/premium/class_wpp_property_import.php:5031
 #, php-format
 msgid "Unable to get image %1s using the %2s method."
-msgstr ""
+msgstr "Невозможно получить изобрадение %1s используя метод %2s."
 
 #: ../core/premium/class_wpp_property_import.php:5047
 #, php-format
 msgid "Image %1s corrupted - skipped."
-msgstr ""
+msgstr "Изображение %1s повреждено - пропущено."
 
 #: ../core/premium/class_wpp_property_import.php:5086
-#, fuzzy, php-format
+#, php-format
 msgid "Unable to save image %1s."
-msgstr "Невозможно создать части: %1s"
+msgstr "Невозможно сохнанить изображение %1s."
 
 #: ../core/premium/class_wpp_slideshow.php:93
 msgid "Manage Slideshow"
@@ -4458,12 +4476,12 @@ msgid "Slideshow Options"
 msgstr "Опции слайдшоу"
 
 #: ../core/premium/class_wpp_slideshow.php:796
-#: ../core/premium/class_wpp_slideshow.php:1508
+#: ../core/premium/class_wpp_slideshow.php:1536
 msgid "Slideshow Images:"
 msgstr "В слайдшоу:"
 
 #: ../core/premium/class_wpp_slideshow.php:818
-#: ../core/premium/class_wpp_slideshow.php:1522
+#: ../core/premium/class_wpp_slideshow.php:1550
 msgid "All Images:"
 msgstr "Все изображения:"
 
@@ -4478,9 +4496,36 @@ msgstr "Слайдшоу"
 
 #: ../core/premium/class_wpp_slideshow.php:1031
 #: ../core/premium/class_wpp_slideshow.php:1215
-#: ../core/premium/class_wpp_slideshow.php:1478
+#: ../core/premium/class_wpp_slideshow.php:1498
 msgid "Global Slideshow"
 msgstr "Общее Слайдшоу"
+
+#: ../core/premium/class_wpp_slideshow.php:1036
+msgid "Clicking on an image will open up the property its attached to."
+msgstr "Нажатие на изображение откроет объект, к которому оно прикреплено."
+
+#: ../core/premium/class_wpp_slideshow.php:1040
+msgid "Show property title and tagline in slideshow."
+msgstr "Показывать заголовки объектов и теги в слайдшоу."
+
+#: ../core/premium/class_wpp_slideshow.php:1044
+msgid "Slideshow Size: "
+msgstr "Размер слайдшоу:"
+
+#: ../core/premium/class_wpp_slideshow.php:1065
+#, php-format
+msgid ""
+"The global slideshow will look for all images that are over the specified "
+"size.  Add images to the global slideshow <a href=\"%1$s\">here</a>. The "
+"built-in sizes, such as <b>medium</b> and <b>large</b> may not work because "
+"WordPress does not crop them during resizing, resulting in artbitrary "
+"heights. "
+msgstr ""
+"Глобальное слайд-шоу будет искать все изображения, которые больше указанного "
+"размера. Добавить изображения в глобальном слайд-шоу <a href=\"%1$s\">здесь</"
+"a>. Встроенные размеры, такие как средние и крупные могут не работать, "
+"потому что WordPress не обрезает их при изменении размеров, результируя "
+"произвольную высоту."
 
 #: ../core/premium/class_wpp_slideshow.php:1075
 msgid "Display in Global Slideshow Caption:"
@@ -4503,11 +4548,10 @@ msgid "Single Listing Slideshow"
 msgstr "Слайдшоу 1 объекта"
 
 #: ../core/premium/class_wpp_slideshow.php:1110
-#, fuzzy
 msgid "Slideshow image size to be used for single property pages."
 msgstr ""
-"Размер рисунков слайдшоу, который будет использоваться на страницах одного "
-"%1$s."
+"Размер изображений слайдшоу, который будет использоваться на страницах "
+"объектов."
 
 #: ../core/premium/class_wpp_slideshow.php:1114
 msgid "Show pagination buttons in slideshow."
@@ -4518,14 +4562,13 @@ msgid "Thumbnail Size"
 msgstr "Размер миниатюры"
 
 #: ../core/premium/class_wpp_slideshow.php:1128
-#, fuzzy
 msgid ""
 "This width is used on \"Slideshow\" page on the Property editing page to "
 "display available images, this setting <b>does not</b> affect the actual "
 "slideshow on the front-end."
 msgstr ""
-"Эта ширина используется на странице \"Slideshow\" на странице редактирование "
-"%1$s для отображения доступных изображений. Эта настройка не влияет на "
+"Эта ширина используется на странице \"Слайдшоу\" на странице редактирование "
+"объекта для отображения доступных изображений. Эти настройки не влияет на "
 "отображение слайдшоу на фронт-енде."
 
 #: ../core/premium/class_wpp_slideshow.php:1139
@@ -4566,15 +4609,15 @@ msgstr "Время паузы:"
 msgid "The pause time between transitions."
 msgstr "Время паузы между переходами."
 
-#: ../core/premium/class_wpp_slideshow.php:1252
+#: ../core/premium/class_wpp_slideshow.php:1261
 msgid "Slideshow selection and order saved."
 msgstr "Рисунки слайдшоу и их порядок сохранены."
 
-#: ../core/premium/class_wpp_slideshow.php:1487
+#: ../core/premium/class_wpp_slideshow.php:1515
 msgid "WP-Property Slideshow"
 msgstr "WP-Property Slideshow"
 
-#: ../core/premium/class_wpp_slideshow.php:1488
+#: ../core/premium/class_wpp_slideshow.php:1516
 msgid ""
 "This slideshow can be integrated into your front-end pages by either using "
 "the shortcode, or pasting PHP code into your theme."
@@ -4582,13 +4625,13 @@ msgstr ""
 "Данное слайдшоу может быть интегрировано на страницы при помощи "
 "использования сокращенного кода (shortcode) или вставки PHP кода в Вашу тему."
 
-#: ../core/premium/class_wpp_slideshow.php:1491
+#: ../core/premium/class_wpp_slideshow.php:1519
 msgid ""
 "Drag images from selection on the left to the selection on the right, and "
 "then click save."
 msgstr "Перетащите изображение из левой части в правую и нажмите Сохранить."
 
-#: ../core/premium/class_wpp_slideshow.php:1492
+#: ../core/premium/class_wpp_slideshow.php:1520
 #, php-format
 msgid ""
 "This list gets all images from your media library that are over %s pixels "
@@ -4597,7 +4640,7 @@ msgstr ""
 "Данный список загружает все изображения из Вашей медиа-библиотеки, которые "
 "больше %s пикселей в ширину и %s пикселей в высоту."
 
-#: ../core/premium/class_wpp_slideshow.php:1499
+#: ../core/premium/class_wpp_slideshow.php:1527
 msgid "Save Selection and Order"
 msgstr "Сохранить выбор и порядок"
 
@@ -4610,35 +4653,31 @@ msgid "Supermap"
 msgstr "Supermap"
 
 #: ../core/premium/class_wpp_supermap.php:160
-#, fuzzy
 msgid "Sidebar Attributes"
-msgstr "Атрибуты для колонки в SuperMap"
+msgstr "Атрибуты для сайдбара"
 
 #: ../core/premium/class_wpp_supermap.php:162
-#, fuzzy
 msgid ""
 "Select the attributes you want to display in the left sidebar on the "
 "supermap."
-msgstr "Выберите атрибуты, которые вы хотите показывать:"
+msgstr ""
+"Выберите атрибуты, которые вы хотите показывать в левом сайдбаре SuperMap."
 
 #: ../core/premium/class_wpp_supermap.php:176
-#, fuzzy
 msgid ""
 "Display \"View Property\" link in the left sidebar. It directs user to "
 "Property Page."
 msgstr ""
-"Отображать ссылку \"Посетить %1$s\" в левом сайдбаре. Она направит "
-"пользователя к странице %1$s."
+"Отображать ссылку \"Посмотреть объект\" в левом сайдбаре. Она направит "
+"пользователя на страницу объекта."
 
 #: ../core/premium/class_wpp_supermap.php:182
-#, fuzzy
 msgid "Supermap Sidebar Thumbnail:"
-msgstr "Миниатюра в сайдбаре для Supermap"
+msgstr "Миниатюра в сайдбаре для Supermap:"
 
 #: ../core/premium/class_wpp_supermap.php:187
-#, fuzzy
 msgid "Do not show a property thumbnail in sidebar."
-msgstr "Не показывать эскизы в фильтре боковой панели."
+msgstr "Не показывать миниатюры в фильтре боковой панели."
 
 #: ../core/premium/class_wpp_supermap.php:190
 msgid ""
@@ -4648,72 +4687,90 @@ msgstr ""
 "заново."
 
 #: ../core/premium/class_wpp_supermap.php:195
-#, fuzzy
 msgid "Map Markers:"
-msgstr "Маркер на карте:"
+msgstr "Маркеры карты:"
 
 #: ../core/premium/class_wpp_supermap.php:238
 msgid "Add Marker"
 msgstr "Добавить маркер"
 
 #: ../core/premium/class_wpp_supermap.php:338
-#, fuzzy
 msgid "Map Areas:"
-msgstr "Территории"
+msgstr "Территории:"
 
-#: ../core/premium/class_wpp_supermap.php:347
+#: ../core/premium/class_wpp_supermap.php:340
+msgid ""
+"<p>Map areas let you draw our areas on the map, such as neighborhoods.</"
+"p><p>Just add to shortcode attribute <b>show_areas=all</b> to draw all areas "
+"on the map. Also You can use area's slugs to show them on the map, like as "
+"<b>show_areas=new_york,washington</b>. Please, use coordinates in this "
+"format: <b>(82.72, -37.79)(69.54, -57.48)(68.93, -18.63).</b></p><p><i>This "
+"is an experimental feature, you may not want to use it on a live site.  "
+"We're eager to hear your feedback regarding this feature and the "
+"capabilities that would be useful to you.</i></p>"
+msgstr ""
+"<p>Карта областей позволяет рисовать фигуры для областей на карте, таких как "
+"районы, государства или страны.</p><p>Добавьте к шорткоду атрибут "
+"<b>show_areas=all</b> чтобы отобразить все территории на карте. Также Вы "
+"можете использовать слаги территорий для отображения их на карте "
+"<b>show_areas=new_york,washington</b>. Пожалуйста используйте координаты в "
+"таком формате: <b>(82.72, -37.79)(69.54, -57.48)(68.93, -18.63).</b></"
+"p><p><i>Это экспериментальная опция, Вы можете не использовать ее на своем "
+"сайте. Мы хотели бы услышать Ваше мнение относительно этой функции и "
+"изменений, которые были бы полезны для Вас.</i></p>"
+
+#: ../core/premium/class_wpp_supermap.php:345
 msgid "Coordinates"
 msgstr "Координаты"
 
-#: ../core/premium/class_wpp_supermap.php:348
+#: ../core/premium/class_wpp_supermap.php:346
 msgid "Fill Color"
 msgstr "Выберите цвет"
 
-#: ../core/premium/class_wpp_supermap.php:349
+#: ../core/premium/class_wpp_supermap.php:347
 msgid "Opacity"
 msgstr "Прозрачность"
 
-#: ../core/premium/class_wpp_supermap.php:350
+#: ../core/premium/class_wpp_supermap.php:348
 msgid "Stoke Color"
 msgstr "Цвет при нажатии"
 
-#: ../core/premium/class_wpp_supermap.php:351
+#: ../core/premium/class_wpp_supermap.php:349
 msgid "Hover Color"
 msgstr "Цвет при  наведении"
 
-#: ../core/premium/class_wpp_supermap.php:430
-#: ../core/premium/class_wpp_supermap.php:683
+#: ../core/premium/class_wpp_supermap.php:428
+#: ../core/premium/class_wpp_supermap.php:681
 msgid "Map Marker"
 msgstr "Метка на карте"
 
-#: ../core/premium/class_wpp_supermap.php:432
-#: ../core/premium/class_wpp_supermap.php:685
+#: ../core/premium/class_wpp_supermap.php:430
+#: ../core/premium/class_wpp_supermap.php:683
 msgid "Default by Google"
 msgstr "По умолчанию (Google)"
 
-#: ../core/premium/class_wpp_supermap.php:632
+#: ../core/premium/class_wpp_supermap.php:630
 msgid "Supermap Options"
 msgstr "Опции Supermap "
 
-#: ../core/premium/class_wpp_supermap.php:645
-#, fuzzy
+#: ../core/premium/class_wpp_supermap.php:643
 msgid "Exclude property from Supermap"
-msgstr "Исключить %1$s из SuperMap."
+msgstr "Исключить объект из SuperMap."
 
-#: ../core/premium/class_wpp_supermap.php:845
+#: ../core/premium/class_wpp_supermap.php:843
 #, php-format
 msgid "Element cannot be rendered, missing %1s script."
 msgstr "Элемент не может быть сформирован, отсутствует сценарий %1s."
 
-#: ../core/premium/class_wpp_supermap.php:1134
+#: ../core/premium/class_wpp_supermap.php:1131
 msgid "No results found."
 msgstr "Ничего не найдено."
 
-#: ../core/premium/class_wpp_supermap.php:1664
+#: ../core/premium/class_wpp_supermap.php:1674
 msgid "Show More"
 msgstr "Подробнее"
 
-#: ../core/premium/class_wpp_supermap.php:1744
+#: ../core/premium/class_wpp_supermap.php:1754
 msgid "Loading"
 msgstr "Загрузка"
 
@@ -4765,17 +4822,21 @@ msgstr "Просмотр"
 msgid "Toggle %1s more."
 msgstr "Более детально %1s."
 
+#: ../core/ui/class_wpp_object_list_table.php:254
+msgid "Add to Featured"
+msgstr "Добавить к избранным"
+
 #: ../core/ui/page_settings.php:35
 msgid "Settings updated."
 msgstr "Настройки сохранены."
 
 #: ../core/ui/page_settings.php:173
-#, fuzzy
 msgid ""
 "You are about to set ALL your properties to the selected property type. Are "
 "you sure?"
 msgstr ""
-"Вы собираетесь причислить ВСЕ ваши %2$s выбранному типу %1$s. Вы уверены?"
+"Вы собираетесь причислить ВСЕ ваши объекты выбранному типу объектов. Вы "
+"уверены?"
 
 #: ../core/ui/page_settings.php:303
 msgid "Feature Updates"
@@ -4801,16 +4862,17 @@ msgid "Disable \"on-the-fly\" image regeneration."
 msgstr "Отключить генерацию изображений \"на лету\""
 
 #: ../core/ui/page_settings.php:331
-#, fuzzy
 msgid ""
 "Automatically delete all property images and attachments when a property is "
 "deleted."
-msgstr "Автоматически вставить обзор объектов в  контент страницы объекта."
+msgstr ""
+"Автоматически удалять все изображения объектов и прикрепления при удалении "
+"объекта."
 
 #: ../core/ui/page_settings.php:337
-#, fuzzy, php-format
+#, php-format
 msgid "Default %1s Page"
-msgstr "Страница %1$s по умолчанию"
+msgstr "Страница %1s по умолчанию"
 
 #: ../core/ui/page_settings.php:342
 msgid "Property (Default)"
@@ -4820,6 +4882,7 @@ msgstr "Объект (По умолчанию)"
 #, php-format
 msgid "You must have permalinks enabled to change the Default %1s page."
 msgstr ""
+"Вы должны активировать пермалинки, чтобы менять страницу %1s по умолчанию."
 
 #: ../core/ui/page_settings.php:362
 msgid "Automatically overwrite this page's content with [property_overview]."
@@ -4835,43 +4898,38 @@ msgstr ""
 "[property_overview]."
 
 #: ../core/ui/page_settings.php:366
-#, fuzzy
 msgid ""
 "If checked, be sure to include [property_overview] somewhere in the content, "
 "or no properties will be displayed."
 msgstr ""
-"Если отмечено, убедитесь, что вы используете Shortcode  [property_overview] "
-"на страницах. Иначе, %1$s не будут отображаться."
+"Если отмечено, убедитесь, что вы используете  [property_overview] на "
+"страницах. Иначе, объекты не будут отображаться."
 
 #: ../core/ui/page_settings.php:373
-#, fuzzy
 msgid "Automatic Geolocation"
-msgstr "Геолокация"
+msgstr "Автоматическая геолокация"
 
 #: ../core/ui/page_settings.php:376
-#, fuzzy
 msgid "Attribute to use for physical addresses:"
 msgstr "Атрибуты, используемые для адреса:"
 
 #: ../core/ui/page_settings.php:377
-#, fuzzy
 msgid "Localize addresses in:"
-msgstr "Ревалидировать все адреса используя"
+msgstr "Локализовать адреса в:"
 
 #: ../core/ui/page_settings.php:383
 msgid "Styles and Scripts"
-msgstr ""
+msgstr "Стили и скрипты"
 
 #: ../core/ui/page_settings.php:386
-#, fuzzy
 msgid ""
 "Load default CSS. If unchecked, the wp-properties.css in your theme folder "
 "will not be loaded."
 msgstr ""
-"Если не отмечено, Ваш пользовательский wp-properties.css не будет загружен."
+"Загрузить CSS по умолчанию. Если не отмечено, Ваш пользовательский wp-"
+"properties.css не будет загружен."
 
 #: ../core/ui/page_settings.php:386
-#, fuzzy
 msgid "Load default CSS."
 msgstr "Автоматически подключать стандартный CSS."
 
@@ -4896,10 +4954,9 @@ msgid "Default Phone Number"
 msgstr "Телефон по умолчанию"
 
 #: ../core/ui/page_settings.php:404
-#, fuzzy
 msgid ""
 "Phone number to use when a property-specific phone number is not specified."
-msgstr "Номер телефона, который использовать если %1s телефон не указан."
+msgstr "Номер телефона, который использовать если телефон объекта не указан."
 
 #: ../core/ui/page_settings.php:419
 msgid "Image Sizes"
@@ -4918,12 +4975,10 @@ msgid "Height"
 msgstr "Высота"
 
 #: ../core/ui/page_settings.php:504
-#, fuzzy
 msgid "Overview Shortcode"
-msgstr "Шорткод обзора %1$s"
+msgstr "Шорткод обзора"
 
 #: ../core/ui/page_settings.php:507
-#, fuzzy
 msgid ""
 "These are the settings for the [property_overview] shortcode.  The shortcode "
 "displays a list of all building / root properties.<br />The display settings "
@@ -4932,22 +4987,20 @@ msgid ""
 "during updates, create a <b>property-overview.php</b> file in your template "
 "directory, which will be automatically loaded."
 msgstr ""
-"Шорткод [property_overview] показывает список всех  %1$s.<br /> Настройки "
-"отображения могут быть изменены в  файле <b>wp-content/plugins/wp-properties/"
-"templates/property-overview.php</b>.  Для того, чтобы избежать потери Ваших "
-"изменений после обновления, создайте файл <b>property-overview.php</b> в "
-"папке Вашего шаблона и он будет автоматически использоваться вместо "
-"стандартного."
+"Шорткод [property_overview] показывает список всех  объектов. <br /"
+">Настройки отображения могут быть изменены в  файле <b>wp-content/plugins/wp-"
+"properties/templates/property-overview.php</b>.  Для того, чтобы избежать "
+"потери Ваших изменений после обновления, создайте файл <b>property-overview."
+"php</b> в папке Вашего шаблона и он будет автоматически использоваться "
+"вместо стандартного."
 
 #: ../core/ui/page_settings.php:510
-#, fuzzy
 msgid "Thumbnail size:"
-msgstr "Размер миниатюры"
+msgstr "Размер миниатюры:"
 
 #: ../core/ui/page_settings.php:511
-#, fuzzy
 msgid "Show children properties."
-msgstr "Показать дочерние %1$s."
+msgstr "Показать дочерние объекты."
 
 #: ../core/ui/page_settings.php:512
 msgid "Show larger image of property when image is clicked using fancybox."
@@ -4964,7 +5017,6 @@ msgid "Property Page"
 msgstr "Страница объекта"
 
 #: ../core/ui/page_settings.php:522
-#, fuzzy
 msgid ""
 "These are the settings for the [property_overview] shortcode.  The shortcode "
 "displays a list of all building / root properties.<br /> The display "
@@ -4973,17 +5025,16 @@ msgid ""
 "during updates, create a <b>property.php</b> file in your template "
 "directory, which will be automatically loaded."
 msgstr ""
-"Шорткод [property_overview] показывает список всех  %1$s.<br /> Настройки "
-"отображения могут быть изменены в  файле <b>wp-content/plugins/wp-properties/"
-"templates/property-overview.php</b>.  Для того, чтобы избежать потери Ваших "
-"изменений после обновления, создайте файл <b>property-overview.php</b> в "
-"папке Вашего шаблона и он будет автоматически использоваться вместо "
-"стандартного."
+"Шорткод [property_overview] показывает список всех  объектов.<br /> "
+"Настройки отображения могут быть изменены в  файле <b>wp-content/plugins/wp-"
+"properties/templates/property-overview.php</b>.  Для того, чтобы избежать "
+"потери Ваших изменений после обновления, создайте файл <b>property-overview."
+"php</b> в папке Вашего шаблона и он будет автоматически использоваться "
+"вместо стандартного."
 
 #: ../core/ui/page_settings.php:524
-#, fuzzy
 msgid "Sort property stats by groups."
-msgstr "Сортировать по группам"
+msgstr "Сортировать атрибуты по группам."
 
 #: ../core/ui/page_settings.php:525 ../core/ui/page_settings.php:539
 #, php-format
@@ -4998,52 +5049,44 @@ msgid "Google Maps"
 msgstr "Google Maps"
 
 #: ../core/ui/page_settings.php:537
-#, fuzzy
 msgid "Map Thumbnail Size:"
 msgstr "Размер миниатюры для карты:"
 
 #: ../core/ui/page_settings.php:538
-#, fuzzy
 msgid "Map Zoom Level:"
-msgstr "и уровень зума:"
+msgstr "Уровень зума:"
 
 #: ../core/ui/page_settings.php:542
-#, fuzzy
 msgid "Attributes to display in popup after a property on a map is clicked."
-msgstr "Атрибуты, которые будут отображаться по клику на %1$s на карте."
+msgstr "Атрибуты, которые будут отображаться по клику на карте объекта."
 
 #: ../core/ui/page_settings.php:546
-#, fuzzy
 msgid "Show Property Title"
-msgstr "Тип объекта"
+msgstr "Показывать тип объекта"
 
 #: ../core/ui/page_settings.php:555
 msgid "Show Directions Link"
 msgstr "Получить направление"
 
 #: ../core/ui/page_settings.php:556
-#, fuzzy
 msgid "Do not show a list of child properties in Infobox. "
-msgstr "Не показывать список дочерних %1$s в инфобоксе."
+msgstr "Не показывать список дочерних объектов в инфобоксе."
 
 #: ../core/ui/page_settings.php:563
 msgid "Address Display"
 msgstr "Показывать адрес"
 
 #: ../core/ui/page_settings.php:570
-#, fuzzy
 msgid "Available tags:"
-msgstr "Доступные тэги локации: %s"
+msgstr "Доступные тэги локации:"
 
 #: ../core/ui/page_settings.php:576
-#, fuzzy
 msgid "Currency & Numbers"
-msgstr "Символ валюты"
+msgstr "Валюта и цифры"
 
 #: ../core/ui/page_settings.php:579
-#, fuzzy
 msgid "Currency symbol."
-msgstr "символ валюты."
+msgstr "Символ валюты."
 
 #: ../core/ui/page_settings.php:581
 msgid "Thousands separator symbol:"
@@ -5058,7 +5101,6 @@ msgid ", (comma)"
 msgstr ", (запятая)"
 
 #: ../core/ui/page_settings.php:587
-#, fuzzy
 msgid "The character separating the 1 and the 5: $1<b>,</b>500"
 msgstr "Символ, разделяющий 1 и 5: в $1<b>,</b>500"
 
@@ -5072,23 +5114,20 @@ msgstr "Перед числом"
 
 #: ../core/ui/page_settings.php:596
 msgid "After number"
-msgstr "После цифер"
+msgstr "После цифр"
 
 #: ../core/ui/page_settings.php:608
-#, fuzzy
 msgid "Admin Settings"
-msgstr "Настройки"
+msgstr "Настройки администратора"
 
 #: ../core/ui/page_settings.php:612
-#, fuzzy
 msgid "Thumbnail size for property images displayed on Properties page: "
 msgstr ""
-"Размер изображений эскизов, отображаемых на бэк-энде всех %1$s страниц:"
+"Размер изображений эскизов, отображаемых на бэк-энде всех страниц объектов:"
 
 #: ../core/ui/page_settings.php:614
-#, fuzzy
 msgid "Completely hide hidden attributes when editing properties."
-msgstr "Полностью скрывать скрытые атрибуты при редактировании %1$s."
+msgstr "Полностью скрывать скрытые атрибуты при редактировании объектов."
 
 #: ../core/ui/page_settings.php:670
 msgid "[purchase feature]"
@@ -5120,7 +5159,6 @@ msgstr ""
 "дополнение."
 
 #: ../core/ui/page_settings.php:711
-#, fuzzy
 msgid ""
 "If prompted for your domain name during a premium feature purchase, enter as "
 "appears here:"
@@ -5129,14 +5167,12 @@ msgstr ""
 "Премиум Дополний, вводите его, как показано здесь:"
 
 #: ../core/ui/page_settings.php:717
-#, fuzzy
 msgid "Restore Backup of WP-Property Configuration"
-msgstr "Загрузить резервную копию конфигурации WP-Property:"
+msgstr "Загрузить резервную копию конфигурации WP-Property"
 
 #: ../core/ui/page_settings.php:718
-#, fuzzy
 msgid "Download Backup of Current WP-Property Configuration."
-msgstr "Скачать текущую конфигурацию WP-Property"
+msgstr "Скачать текущую конфигурацию WP-Property."
 
 #: ../core/ui/page_settings.php:723
 msgid "Revalidate all addresses using"
@@ -5151,27 +5187,24 @@ msgid "Revalidate"
 msgstr "Заново проверить"
 
 #: ../core/ui/page_settings.php:727
-#, fuzzy
 msgid ""
 "Enter in the ID of the property you want to look up, and the class will be "
 "displayed below."
 msgstr ""
-"Введите %1$s ID, который хотите найти, и информация о нем будет отображена "
-"ниже."
+"Введите ID объекта, который хотите найти, и информация о нем будет "
+"отображена ниже."
 
 #: ../core/ui/page_settings.php:729 ../core/ui/page_settings.php:736
 msgid "Lookup"
 msgstr "Найти"
 
 #: ../core/ui/page_settings.php:733
-#, fuzzy
 msgid "Get property image data."
-msgstr "Получить информацию о картинке %1$s."
+msgstr "Получить информацию об изображениях объекта."
 
 #: ../core/ui/page_settings.php:734
-#, fuzzy
 msgid "Property ID:"
-msgstr "Объект"
+msgstr "ID объекта:"
 
 #: ../core/ui/page_settings.php:741
 msgid ""
@@ -5188,22 +5221,20 @@ msgid "Show $wp_properties"
 msgstr "Показать $wp_properties"
 
 #: ../core/ui/page_settings.php:747
-#, fuzzy
 msgid ""
 "Clear WPP Cache. Some shortcodes and widgets use cache, so the good practice "
 "is clear it after widget, shortcode changes."
 msgstr ""
-"Некоторые шорткоды и виджеты используют кэш, пожтому полезно очищать кэш "
-"после их изменения."
+"Очистить WP-Pproperty кэш. Некоторые шорткоды и виджеты используют кэш, "
+"поэтому полезно очищать кэш после их изменения."
 
 #: ../core/ui/page_settings.php:748
 msgid "Clear Cache"
 msgstr "Очистить кеш"
 
 #: ../core/ui/page_settings.php:751
-#, fuzzy
 msgid "Set all properties to same property type:"
-msgstr "Установить всем %2$s одинаковый тип %1$s:"
+msgstr "Установить всем объектам одинаковый тип:"
 
 #: ../core/ui/page_settings.php:756
 msgid "Set"
@@ -5239,27 +5270,25 @@ msgstr ""
 "Нужна помощь? Используйте вкладку Справка в правом верхнем углу страницы."
 
 #: ../core/ui/property_metaboxes.php:110
-#, fuzzy, php-format
+#, php-format
 msgid "<strong>Warning!</strong> The %1s property type has been deleted."
-msgstr "<strong>Внимание!</strong>  %1$s %2$s тип был удален."
+msgstr "<strong>Внимание!</strong>  тип объекта %1s был удален."
 
 #: ../core/ui/property_metaboxes.php:251 ../core/ui/property_metaboxes.php:257
 msgid "Falls Under"
 msgstr "Является частью"
 
 #: ../core/ui/property_metaboxes.php:260
-#, fuzzy
 msgid "ID of parent property"
-msgstr "родительские объекты"
+msgstr "ID родительского объекта"
 
 #: ../core/ui/property_metaboxes.php:278
 msgid "Numbers only."
 msgstr "Только цифры."
 
 #: ../core/ui/property_metaboxes.php:296
-#, fuzzy
 msgid "Values aggregated from child properties."
-msgstr "Значения собраны из дочерних %1$s."
+msgstr "Значения собраны из дочерних объектов."
 
 #: ../core/ui/property_metaboxes.php:372 ../core/ui/property_metaboxes.php:442
 #, php-format
@@ -5316,23 +5345,23 @@ msgstr ""
 msgid " of "
 msgstr "из"
 
-#: ../templates/template-functions.php:612
+#: ../templates/template-functions.php:646
 msgid "Viewing page"
 msgstr "Просмотр страницы"
 
-#: ../templates/template-functions.php:612
+#: ../templates/template-functions.php:646
 msgid "of"
 msgstr "из"
 
-#: ../templates/template-functions.php:638
+#: ../templates/template-functions.php:672
 msgid "Prev"
 msgstr "Назад"
 
-#: ../templates/template-functions.php:639
+#: ../templates/template-functions.php:673
 msgid "Next"
 msgstr "Далее"
 
-#: ../templates/template-functions.php:670
+#: ../templates/template-functions.php:704
 msgid ""
 "Conditional query tags do not work before the query is run. Before then, "
 "they always return false."
@@ -5340,30 +5369,30 @@ msgstr ""
 "Условные запросы тегов не работают до выполнения запроса. До этого, они "
 "всегда возвращаются ложными."
 
-#: ../templates/template-functions.php:1019
+#: ../templates/template-functions.php:1052
 msgid "Other"
 msgstr "Другие"
 
-#: ../templates/template-functions.php:1597
+#: ../templates/template-functions.php:1635
 msgid "Website"
 msgstr "Сайт"
 
-#: ../templates/template-functions.php:1600
+#: ../templates/template-functions.php:1638
 #, php-format
 msgid "Required fields are marked %s"
 msgstr "Обязательные поля помечены %s"
 
-#: ../templates/template-functions.php:1603
+#: ../templates/template-functions.php:1641
 msgid "Comment"
 msgstr "Коментарий"
 
-#: ../templates/template-functions.php:1604
+#: ../templates/template-functions.php:1642
 #, php-format
 msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
 msgstr ""
 "Вы должны <a href=\"%s\">войти</a>, чтобы иметь возможность коментировать."
 
-#: ../templates/template-functions.php:1605
+#: ../templates/template-functions.php:1643
 #, php-format
 msgid ""
 "Logged in as <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\" title=\"Log out of "
@@ -5372,11 +5401,11 @@ msgstr ""
 "Зарегистрированы как <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\" title="
 "\"Выйти\">Выйти?</a>"
 
-#: ../templates/template-functions.php:1606
+#: ../templates/template-functions.php:1644
 msgid "Your email address will not be published."
 msgstr "Ваш адрес электронной почты не будет опубликован."
 
-#: ../templates/template-functions.php:1607
+#: ../templates/template-functions.php:1645
 #, php-format
 msgid ""
 "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags "
@@ -5385,20 +5414,20 @@ msgstr ""
 "Вы можете использовать эти <abbr title=\"HyperText Markup Language\">HTML</"
 "abbr> теги и атрибуты: %s"
 
-#: ../templates/template-functions.php:1610
+#: ../templates/template-functions.php:1648
 msgid "Leave a Reply"
 msgstr "Оставить отзыв"
 
-#: ../templates/template-functions.php:1611
+#: ../templates/template-functions.php:1649
 #, php-format
 msgid "Leave a Reply to %s"
 msgstr "Оставить отзыв на  %s"
 
-#: ../templates/template-functions.php:1612
+#: ../templates/template-functions.php:1650
 msgid "Cancel reply"
 msgstr "Отменить ответ"
 
-#: ../templates/template-functions.php:1613
+#: ../templates/template-functions.php:1651
 msgid "Post Comment"
 msgstr "Опубликовать коментарий"
 
@@ -5743,15 +5772,6 @@ msgstr "Опубликовать коментарий"
 
 #~ msgid "%1$s%2$s has: %3$s images."
 #~ msgstr "%1$s%2$s содержит: %3$s изображений."
-
-#~ msgid "Updated %1$d %2$s using the %3$s localization."
-#~ msgstr "%1$d %2$s  обновлены, используя %3$s локализацию."
-
-#~ msgid "%1$d %2$s has empty address."
-#~ msgstr "%1$d %2$s содержат пустой адрес."
-
-#~ msgid "%1$d %2$s was ignored because query limit was exceeded."
-#~ msgstr "%1$d %2$s было игнорировано, так как истекло время запроса."
 
 #~ msgid "Unfeature"
 #~ msgstr "Удилить из избранных"
@@ -6596,9 +6616,6 @@ msgstr "Опубликовать коментарий"
 #~ msgid "Show child %1$s."
 #~ msgstr "Показывать дочерние %1$s."
 
-#~ msgid "Regenerate"
-#~ msgstr "Регенерировать"
-
 #~ msgid ""
 #~ "Scan the code above with your mobile device to go directly to the %s "
 #~ "website for %s"
@@ -6615,33 +6632,14 @@ msgstr "Опубликовать коментарий"
 #~ msgid "Truncate the Description when it's displayed in Flyer."
 #~ msgstr "Обрезать описание, когда оно отображается в Флаере."
 
-#~ msgid "Regenerate all Flyers"
-#~ msgstr "Пересоздать все флаеры"
-
-#~ msgid "Close Result's Logs"
-#~ msgstr "Закрыть журнал результатов"
-
-#~ msgid ""
-#~ "You can regenerate all your PDF flyers, but depending on your server, it "
-#~ "can be very time consuming if you have many %1$s."
-#~ msgstr ""
-#~ "Вы можете регенерировать все ваши PDF флаеры, но в зависимости от вашего "
-#~ "сервера, это может занять очень много времени, если у вас есть много %1$s."
-
 #~ msgid "Information Display"
 #~ msgstr "Отображение информации"
 
 #~ msgid "Photo Sizes"
 #~ msgstr "Размеры фото"
 
-#~ msgid "Show %s images."
-#~ msgstr "Показывать %s изображений."
-
 #~ msgid "Shortcode examples"
 #~ msgstr "Примеры Shortcode"
-
-#~ msgid "Returns a html link to the PDF Flyer"
-#~ msgstr "Возвращает html ссылку к PDF Флаеру"
 
 #~ msgid "Returns a html link to the PDF Flyer with custom title."
 #~ msgstr "Возвращает htm ссылку на PDF Флаер с касомным названием."
@@ -7345,15 +7343,6 @@ msgstr "Опубликовать коментарий"
 
 #~ msgid "here"
 #~ msgstr "здесь"
-
-#~ msgid ""
-#~ "The built-in sizes, such as medium and large may not work because "
-#~ "WordPress does not crop them during resizing, resulting in arbitrary "
-#~ "heights."
-#~ msgstr ""
-#~ "Встроенные размеры, такие как средние и крупные могут не работать, потому "
-#~ "что WordPress не обрезает их при изменении размеров, результируя "
-#~ "произвольную высоту."
 
 #~ msgid ""
 #~ "Please visit the <a href=\"%s\">slideshow settings page</a> and select "

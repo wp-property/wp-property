@@ -146,6 +146,7 @@ class UD_API {
    * @author potanin@UD
    */
   static function array_insert_before($array, $key, $new) {
+    $array = (array)$array;
     $keys = array_keys($array);
     $pos = (int) array_search($key, $keys);
     return array_merge(
@@ -163,6 +164,7 @@ class UD_API {
    * @author potanin@UD
    */
   static function array_insert_after($array, $key, $new) {
+    $array = (array)$array;
     $keys = array_keys($array);
     $pos = (int) array_search($key, $keys) + 1;
     return array_merge(
@@ -1069,6 +1071,8 @@ class UD_API {
       return false;
     }
 
+    $return = new stdClass();
+
     $address = urlencode( $address );
 
     $url = str_replace(" ", "+" ,"http://maps.google.com/maps/api/geocode/json?".((is_array($latlng))?"latlng={$latlng['lat']},{$latlng['lng']}":"address={$address}")."&sensor=true&language={$localization}");
@@ -1156,6 +1160,43 @@ class UD_API {
 
   }
 
+  /**
+   * Returns avaliability of Google's Geocoding Service based on time of last returned status OVER_QUERY_LIMIT
+   * @uses const self::blocking_for_new_validation_interval
+   * @uses option ud::geo_locate_address_last_OVER_QUERY_LIMIT
+   * @param type $update used to set option value in time()
+   * @return boolean
+   * @author odokienko@UD
+   */
+  static function available_address_validation($update=false){
+    global $wpdb;
+
+    if (empty($update)){
+
+      $last_error = (int)get_option('ud::geo_locate_address_last_OVER_QUERY_LIMIT');
+      if(!empty($last_error) && (time()-(int)$last_error)<2){
+        sleep(1);
+      }
+      /*if (!empty($last_error) && (((int)$last_error + self::blocking_for_new_validation_interval ) > time()) ){
+        sleep(1);
+        //return false;
+      }else{
+        //** if last success validation was less than a seccond ago we will wait for 1 seccond
+        $last = $wpdb->get_var("
+          SELECT if(DATE_ADD(FROM_UNIXTIME(pm.meta_value), INTERVAL 1 SECOND) < NOW(), 0, UNIX_TIMESTAMP()-pm.meta_value) LAST
+          FROM {$wpdb->postmeta} pm
+          WHERE pm.meta_key='wpp::last_address_validation'
+          LIMIT 1
+        ");
+        usleep((int)$last);
+      }*/
+    }else{
+      update_option('ud::geo_locate_address_last_OVER_QUERY_LIMIT',time());
+      return false;
+    }
+
+    return true;
+  }
 
   /**
    * Returns date and/or time using the WordPress date or time format, as configured.

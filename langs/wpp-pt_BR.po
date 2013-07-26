@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Property\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-26 18:05+0200\n"
+"POT-Creation-Date: 2013-02-06 18:20+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
 "Language-Team: Usability Dynamics <info@usabilitydynamics.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;_n;_x\n"
 "X-Poedit-Basepath: .\n"
 "X-Textdomain-Support: yes\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.5.5\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: ..\n"
 
@@ -64,7 +64,7 @@ msgid "Area"
 msgstr "Área"
 
 # @ wpp
-#: ../action_hooks.php:78 ../core/class_functions.php:4259
+#: ../action_hooks.php:78 ../core/class_functions.php:4391
 msgid "Phone Number"
 msgstr "Telefone"
 
@@ -94,115 +94,12 @@ msgid "Studio"
 msgstr "Estúdio"
 
 # @ wpp
-#: ../action_hooks.php:189 ../action_hooks.php:191 ../action_hooks.php:201
-#: ../action_hooks.php:202 ../core/class_functions.php:2216
-msgid "Features"
-msgstr "Características"
-
-# @ wpp
-#: ../action_hooks.php:192 ../action_hooks.php:203 ../action_hooks.php:212
-#: ../core/ui/class_wpp_object_list_table.php:254
-msgid "Feature"
-msgstr "Característica"
-
-# @ wpp
-#: ../action_hooks.php:193 ../action_hooks.php:204
-msgid "Search Features"
-msgstr "Pesquisar Características"
-
-# @ wpp
-#: ../action_hooks.php:194 ../action_hooks.php:205
-msgid "All Features"
-msgstr "Todas as Características"
-
-# @ wpp
-#: ../action_hooks.php:195 ../action_hooks.php:206
-msgid "Parent Feature"
-msgstr "Característica Primária"
-
-# @ wpp
-#: ../action_hooks.php:196 ../action_hooks.php:207
-msgid "Parent Feature:"
-msgstr "Característica Primária:"
-
-# @ wpp
-#: ../action_hooks.php:197 ../action_hooks.php:208
-msgid "Edit Feature"
-msgstr "Editar Característica"
-
-# @ wpp
-#: ../action_hooks.php:198 ../action_hooks.php:209
-msgid "Update Feature"
-msgstr "Atualizar Característica"
-
-# @ wpp
-#: ../action_hooks.php:199 ../action_hooks.php:210
-msgid "Add New Feature"
-msgstr "Adicionar Nova Característica"
-
-# @ wpp
-#: ../action_hooks.php:200 ../action_hooks.php:211
-msgid "New Feature Name"
-msgstr "Nome da Nova Característica"
-
-# @ wpp
-#: ../action_hooks.php:219 ../action_hooks.php:221 ../action_hooks.php:231
-#: ../action_hooks.php:232
-msgid "Community Features"
-msgstr "Características da Região"
-
-# @ wpp
-#: ../action_hooks.php:222 ../action_hooks.php:233 ../action_hooks.php:242
-msgid "Community Feature"
-msgstr "Característica da Região"
-
-# @ wpp
-#: ../action_hooks.php:223 ../action_hooks.php:234
-msgid "Search Community Features"
-msgstr "Pesquisar Características da Região"
-
-# @ wpp
-#: ../action_hooks.php:224 ../action_hooks.php:235
-msgid "All Community Features"
-msgstr "Todas as Características de Região"
-
-# @ wpp
-#: ../action_hooks.php:225 ../action_hooks.php:236
-msgid "Parent Community Feature"
-msgstr "Característica de Região Primária"
-
-# @ wpp
-#: ../action_hooks.php:226 ../action_hooks.php:237
-msgid "Parent Community Feature:"
-msgstr "Característica de Região Primária:"
-
-# @ wpp
-#: ../action_hooks.php:227 ../action_hooks.php:238
-msgid "Edit Community Feature"
-msgstr "Editar Característica de Região"
-
-# @ wpp
-#: ../action_hooks.php:228 ../action_hooks.php:239
-msgid "Update Community Feature"
-msgstr "Atualizar Característica de Região"
-
-# @ wpp
-#: ../action_hooks.php:229 ../action_hooks.php:240
-msgid "Add New Community Feature"
-msgstr "Adicionar Nova Característica de Região"
-
-# @ wpp
-#: ../action_hooks.php:230 ../action_hooks.php:241
-msgid "New Community Feature Name"
-msgstr "Nome da Nova Característica de Região"
-
-# @ wpp
-#: ../action_hooks.php:252
+#: ../action_hooks.php:189
 msgid "The property type will determine the layout."
 msgstr "O tipo de imóvel irá determinar o layout."
 
 # @ wpp
-#: ../action_hooks.php:253
+#: ../action_hooks.php:190
 msgid ""
 "Customize what appears in search results in the attribute section.  For "
 "example: 1bed, 2baths, area varies slightly."
@@ -211,33 +108,33 @@ msgstr ""
 "exemplo: 1cama, 2banheiros, área varia poucamente."
 
 # @ wpp
-#: ../action_hooks.php:254
+#: ../action_hooks.php:191
 msgid "Will appear on overview pages and on top of every listing page."
 msgstr "Aparecerá nas páginas de sumário e no topo de cada página catalogada."
 
 # @ wpp
-#: ../action_hooks.php:259
+#: ../action_hooks.php:196
 msgid "Uploading"
 msgstr "Fazendo Upload"
 
 # @ wpp
-#: ../action_hooks.php:260
+#: ../action_hooks.php:197
 msgid "Drop files here to upload"
 msgstr "Solte arquivos aqui para fazer upload"
 
 # @ wpp
-#: ../action_hooks.php:261 ../core/premium/class_wpp_feps.php:2158
+#: ../action_hooks.php:198 ../core/premium/class_wpp_feps.php:2158
 msgid "Upload Image"
 msgstr "Fazer Upload de Imagem"
 
 # @ wpp
-#: ../action_hooks.php:262 ../core/ui/page_settings.php:729
+#: ../action_hooks.php:199 ../core/ui/page_settings.php:729
 #: ../core/ui/page_settings.php:736 ../core/ui/page_settings.php:742
 msgid "Cancel"
 msgstr "Cancelar"
 
 # @ wpp
-#: ../action_hooks.php:263
+#: ../action_hooks.php:200
 msgid "Failed"
 msgstr "Falhou"
 
@@ -252,17 +149,18 @@ msgstr "Ver "
 
 # @ wpp
 # @ default
-#: ../default_api.php:354 ../core/class_widgets.php:712
-#: ../core/class_widgets.php:820 ../core/class_widgets.php:955
-#: ../core/class_widgets.php:1060 ../core/class_widgets.php:1301
+#: ../default_api.php:354 ../core/class_widgets.php:719
+#: ../core/class_widgets.php:827 ../core/class_widgets.php:962
+#: ../core/class_widgets.php:1067 ../core/class_widgets.php:1308
 #: ../core/premium/class_wpp_pdf_flyer.php:1058
 #: ../core/premium/class_wpp_property_import.php:2283
+#: ../templates/template-functions.php:1270
 msgid "Property Type"
 msgstr "Tipo de Imóvel"
 
 # @ wpp
-#: ../default_api.php:358 ../core/class_core.php:852
-#: ../core/class_functions.php:4254
+#: ../default_api.php:358 ../core/class_core.php:854
+#: ../core/class_functions.php:4386
 #: ../core/premium/class_wpp_property_import.php:2273
 msgid "City"
 msgstr "Cidade"
@@ -305,11 +203,11 @@ msgstr "Longitude"
 # @ wp
 # @ wpp
 #: ../default_api.php:600 ../default_api.php:606
-#: ../core/class_functions.php:2741 ../core/class_functions.php:4045
-#: ../core/premium/class_wpp_supermap.php:1058
-#: ../core/premium/class_wpp_supermap.php:1625
+#: ../core/class_functions.php:2854 ../core/class_functions.php:4177
+#: ../core/premium/class_wpp_supermap.php:1055
+#: ../core/premium/class_wpp_supermap.php:1635
 #: ../core/ui/page_settings.php:525 ../core/ui/page_settings.php:539
-#: ../templates/template-functions.php:954
+#: ../templates/template-functions.php:987
 msgid "Yes"
 msgstr "Sim"
 
@@ -363,62 +261,62 @@ msgid "Child Properties"
 msgstr "Configurações secundárias"
 
 # @ wpp
-#: ../core/class_core.php:742
+#: ../core/class_core.php:744
 msgid "Menu Sort Order:"
 msgstr "Order de Exibição do Menu:"
 
 # @ wpp
-#: ../core/class_core.php:745
+#: ../core/class_core.php:747
 msgid "Display in featured listings."
 msgstr "Exibir na lista de Destaques."
 
 # @ wpp
-#: ../core/class_core.php:808
+#: ../core/class_core.php:810
 #, php-format
 msgid "Property updated. <a href=\"%s\">view property</a>"
 msgstr "Imóvel atualizado. <a href=\"%s\">Ver imóvel</a>"
 
 # @ wpp
-#: ../core/class_core.php:809
+#: ../core/class_core.php:811
 msgid "Custom field updated."
 msgstr "Campo personalizado atualizado."
 
 # @ wpp
-#: ../core/class_core.php:810
+#: ../core/class_core.php:812
 msgid "Custom field deleted."
 msgstr "Campo personalizado deletado."
 
 # @ wpp
-#: ../core/class_core.php:811
+#: ../core/class_core.php:813
 msgid "Property updated."
 msgstr "Imóvel atualizado."
 
 # @ wpp
-#: ../core/class_core.php:813
+#: ../core/class_core.php:815
 #, php-format
 msgid "Property restored to revision from %s"
 msgstr "Imóvel restaurado para revisão a partir de %s"
 
 # @ wpp
-#: ../core/class_core.php:814
+#: ../core/class_core.php:816
 #, php-format
 msgid "Property published. <a href=\"%s\">View property</a>"
 msgstr "Imóvel atualizado. <a href=\"%s\">Ver imóvel</a>"
 
 # @ wpp
-#: ../core/class_core.php:815
+#: ../core/class_core.php:817
 msgid "Property saved."
 msgstr "Imóvel salvo."
 
 # @ wpp
-#: ../core/class_core.php:816
+#: ../core/class_core.php:818
 #, php-format
 msgid ""
 "Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
 msgstr "Imóvel enviado. <a target=\"_blank\" href=\"%s\">Prever imóvel</a>"
 
 # @ wpp
-#: ../core/class_core.php:817
+#: ../core/class_core.php:819
 #, php-format
 msgid ""
 "Property scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href="
@@ -428,13 +326,13 @@ msgstr ""
 "\"%2$s\">Prever imóvel</a>"
 
 # @ wpp
-#: ../core/class_core.php:819
+#: ../core/class_core.php:821
 #: ../core/premium/class_wpp_property_import.php:301
 msgid "M j, Y @ G:i"
 msgstr "M j, Y @ G:i"
 
 # @ wpp
-#: ../core/class_core.php:820
+#: ../core/class_core.php:822
 #, php-format
 msgid ""
 "Property draft updated. <a target=\"_blank\" href=\"%s\">Preview property</a>"
@@ -443,126 +341,126 @@ msgstr ""
 "a>"
 
 # @ wpp
-#: ../core/class_core.php:842 ../core/class_functions.php:1039
-#: ../core/class_functions.php:1046 ../core/class_functions.php:2213
-#: ../core/class_widgets.php:416 ../core/class_widgets.php:634
-#: ../core/class_widgets.php:860 ../core/class_widgets.php:1100
+#: ../core/class_core.php:844 ../core/class_functions.php:1100
+#: ../core/class_functions.php:1107 ../core/class_functions.php:2326
+#: ../core/class_widgets.php:423 ../core/class_widgets.php:641
+#: ../core/class_widgets.php:867 ../core/class_widgets.php:1107
 #: ../core/premium/class_wpp_feps.php:1973
 #: ../core/premium/class_wpp_feps.php:2005
 msgid "Title"
 msgstr "Título"
 
 # @ wpp
-#: ../core/class_core.php:843 ../core/class_functions.php:2214
-#: ../core/class_functions.php:4405 ../core/ud_api.php:987
+#: ../core/class_core.php:845 ../core/class_functions.php:2327
+#: ../core/class_functions.php:4537 ../core/ud_api.php:989
 #: ../core/premium/class_admin_tools.php:583
 msgid "Type"
 msgstr "Tipo"
 
 # @ wpp
-#: ../core/class_core.php:853 ../core/class_functions.php:2215
+#: ../core/class_core.php:855 ../core/class_functions.php:2328
 msgid "Overview"
 msgstr "Visão Geral"
 
 # @ wpp
-#: ../core/class_core.php:854 ../core/class_functions.php:2217
-#: ../core/class_functions.php:4409
+#: ../core/class_core.php:856 ../core/class_functions.php:2330
+#: ../core/class_functions.php:4541
 #: ../core/ui/class_wpp_object_list_table.php:252
 #: ../core/ui/class_wpp_object_list_table.php:257
 msgid "Featured"
 msgstr "Destacado"
 
 # @ wpp
-#: ../core/class_core.php:855 ../core/ui/property_metaboxes.php:66
+#: ../core/class_core.php:857 ../core/ui/property_metaboxes.php:66
 #: ../core/ui/property_metaboxes.php:67
 msgid "Order"
 msgstr "Ordem"
 
 # @ wpp
-#: ../core/class_core.php:856 ../core/class_functions.php:2224
+#: ../core/class_core.php:858 ../core/class_functions.php:2337
 #: ../core/premium/class_wpp_pdf_flyer.php:823
 msgid "Thumbnail"
 msgstr "Miniatura"
 
 # @ wpp
-#: ../core/class_core.php:1103
+#: ../core/class_core.php:1105
 msgid "General Information"
 msgstr "Informações Gerais"
 
 # @ wpp
-#: ../core/class_core.php:1113
+#: ../core/class_core.php:1115
 msgid "NO NAME"
 msgstr "SEM NOME"
 
 # @ wpp
-#: ../core/class_core.php:1119 ../templates/template-functions.php:1348
+#: ../core/class_core.php:1121 ../templates/template-functions.php:1387
 msgid "Search"
 msgstr "Pequisar"
 
 # @ wpp
-#: ../core/class_core.php:1330
+#: ../core/class_core.php:1332
 msgid "Floor plans at location:"
 msgstr "Plantas da localização:"
 
 # @ wpp
-#: ../core/class_core.php:1334
+#: ../core/class_core.php:1336
 msgid "Sort By:"
 msgstr "Exibir Por:"
 
 # @ wpp
-#: ../core/class_core.php:1804 ../core/class_functions.php:195
+#: ../core/class_core.php:1806 ../core/class_functions.php:256
 msgid "Edit Property"
 msgstr "Editar Imóvel"
 
 # @ wpp
-#: ../core/class_core.php:1805
+#: ../core/class_core.php:1807
 #, fuzzy
 msgid "Read Property"
 msgstr "Ler Imóvel"
 
 # @ wpp
-#: ../core/class_core.php:1806
+#: ../core/class_core.php:1808
 #, fuzzy
 msgid "Delete Property"
 msgstr "Deletar Imóvel"
 
 # @ wpp
-#: ../core/class_core.php:1807
+#: ../core/class_core.php:1809
 msgid "Edit Properties"
 msgstr "Editar Imóveis"
 
 # @ wpp
-#: ../core/class_core.php:1808
+#: ../core/class_core.php:1810
 msgid "Edit Other Properties"
 msgstr "Editar Outros Imóveis"
 
 # @ wpp
-#: ../core/class_core.php:1809
+#: ../core/class_core.php:1811
 msgid "Publish Properties"
 msgstr "Publicar Imóveis"
 
 # @ wpp
-#: ../core/class_core.php:1810
+#: ../core/class_core.php:1812
 msgid "Read Private Properties"
 msgstr "Ver os Imóveis Privados"
 
 # @ wpp
-#: ../core/class_core.php:1812
+#: ../core/class_core.php:1814
 msgid "Manage Settings"
 msgstr "Gerenciar Configurações"
 
 # @ wpp
-#: ../core/class_core.php:1814
+#: ../core/class_core.php:1816
 msgid "Manage Categories"
 msgstr "Gerenciar Categorias"
 
 # @ default
-#: ../core/class_core.php:1866
+#: ../core/class_core.php:1868
 msgid "For more information:"
 msgstr "Para mais informações:"
 
 # @ default
-#: ../core/class_core.php:1867
+#: ../core/class_core.php:1869
 #, fuzzy
 msgid ""
 "<a href=\"https://usabilitydynamics.com/products/wp-property/\" target="
@@ -572,7 +470,7 @@ msgstr ""
 "\"_blank\">Página de produtos do WP-Property</a>"
 
 # @ default
-#: ../core/class_core.php:1868
+#: ../core/class_core.php:1870
 msgid ""
 "<a href=\"https://usabilitydynamics.com/products/wp-property/forum/\" target="
 "\"_blank\">WP-Property Forums</a>"
@@ -581,7 +479,7 @@ msgstr ""
 "\"_blank\">Fórum do WP-Property</a>"
 
 # @ default
-#: ../core/class_core.php:1869
+#: ../core/class_core.php:1871
 #, fuzzy
 msgid ""
 "<a href=\"https://usabilitydynamics.com/help/\" target=\"_blank\">WP-"
@@ -591,13 +489,13 @@ msgstr ""
 "do WP-Property</a>"
 
 # @ wpp
-#: ../core/class_core.php:1875
+#: ../core/class_core.php:1877
 #, fuzzy
 msgid "Please upgrade Wordpress to the latest version for detailed help."
 msgstr "Por favor, atualize para o WordPress 3.3, para uma ajuda mais detalha."
 
 # @ default
-#: ../core/class_core.php:1875
+#: ../core/class_core.php:1877
 #, fuzzy
 msgid ""
 "Or visit <a href=\"https://usabilitydynamics.com/tutorials/wp-property-help/"
@@ -614,15 +512,15 @@ msgstr "Um erro occoreu durante a checagem de utilidades prêmio: <b>%s</b>."
 
 # @ default
 # @ wpp
-#: ../core/class_functions.php:109 ../core/class_functions.php:190
-#: ../core/class_functions.php:1183
+#: ../core/class_functions.php:109 ../core/class_functions.php:251
+#: ../core/class_functions.php:1244
 #: ../core/premium/class_wpp_power_tools.php:333
 msgid "Properties"
 msgstr "Imóveis"
 
 # @ default
 # @ wpp
-#: ../core/class_functions.php:113 ../core/class_functions.php:192
+#: ../core/class_functions.php:113 ../core/class_functions.php:253
 #: ../core/premium/class_wpp_facebook_tabs.php:839
 #: ../core/premium/class_wpp_facebook_tabs.php:888
 msgid "Property"
@@ -641,64 +539,169 @@ msgid "Sidebar located on the %s page."
 msgstr "Barra lateral localizada na página %s."
 
 # @ wpp
-#: ../core/class_functions.php:191
+#: ../core/class_functions.php:190 ../core/class_functions.php:192
+#: ../core/class_functions.php:202 ../core/class_functions.php:203
+#: ../core/class_functions.php:2329
+msgid "Features"
+msgstr "Características"
+
+# @ wpp
+#: ../core/class_functions.php:193 ../core/class_functions.php:204
+#: ../core/class_functions.php:213
+msgid "Feature"
+msgstr "Característica"
+
+# @ wpp
+#: ../core/class_functions.php:194 ../core/class_functions.php:205
+msgid "Search Features"
+msgstr "Pesquisar Características"
+
+# @ wpp
+#: ../core/class_functions.php:195 ../core/class_functions.php:206
+msgid "All Features"
+msgstr "Todas as Características"
+
+# @ wpp
+#: ../core/class_functions.php:196 ../core/class_functions.php:207
+msgid "Parent Feature"
+msgstr "Característica Primária"
+
+# @ wpp
+#: ../core/class_functions.php:197 ../core/class_functions.php:208
+msgid "Parent Feature:"
+msgstr "Característica Primária:"
+
+# @ wpp
+#: ../core/class_functions.php:198 ../core/class_functions.php:209
+msgid "Edit Feature"
+msgstr "Editar Característica"
+
+# @ wpp
+#: ../core/class_functions.php:199 ../core/class_functions.php:210
+msgid "Update Feature"
+msgstr "Atualizar Característica"
+
+# @ wpp
+#: ../core/class_functions.php:200 ../core/class_functions.php:211
+msgid "Add New Feature"
+msgstr "Adicionar Nova Característica"
+
+# @ wpp
+#: ../core/class_functions.php:201 ../core/class_functions.php:212
+msgid "New Feature Name"
+msgstr "Nome da Nova Característica"
+
+# @ wpp
+#: ../core/class_functions.php:220 ../core/class_functions.php:222
+#: ../core/class_functions.php:232 ../core/class_functions.php:233
+msgid "Community Features"
+msgstr "Características da Região"
+
+# @ wpp
+#: ../core/class_functions.php:223 ../core/class_functions.php:234
+#: ../core/class_functions.php:243
+msgid "Community Feature"
+msgstr "Característica da Região"
+
+# @ wpp
+#: ../core/class_functions.php:224 ../core/class_functions.php:235
+msgid "Search Community Features"
+msgstr "Pesquisar Características da Região"
+
+# @ wpp
+#: ../core/class_functions.php:225 ../core/class_functions.php:236
+msgid "All Community Features"
+msgstr "Todas as Características de Região"
+
+# @ wpp
+#: ../core/class_functions.php:226 ../core/class_functions.php:237
+msgid "Parent Community Feature"
+msgstr "Característica de Região Primária"
+
+# @ wpp
+#: ../core/class_functions.php:227 ../core/class_functions.php:238
+msgid "Parent Community Feature:"
+msgstr "Característica de Região Primária:"
+
+# @ wpp
+#: ../core/class_functions.php:228 ../core/class_functions.php:239
+msgid "Edit Community Feature"
+msgstr "Editar Característica de Região"
+
+# @ wpp
+#: ../core/class_functions.php:229 ../core/class_functions.php:240
+msgid "Update Community Feature"
+msgstr "Atualizar Característica de Região"
+
+# @ wpp
+#: ../core/class_functions.php:230 ../core/class_functions.php:241
+msgid "Add New Community Feature"
+msgstr "Adicionar Nova Característica de Região"
+
+# @ wpp
+#: ../core/class_functions.php:231 ../core/class_functions.php:242
+msgid "New Community Feature Name"
+msgstr "Nome da Nova Característica de Região"
+
+# @ wpp
+#: ../core/class_functions.php:252
 msgid "All Properties"
 msgstr "Todos os Imóveis"
 
 # @ wpp
-#: ../core/class_functions.php:193
+#: ../core/class_functions.php:254
 msgid "Add Property"
 msgstr "Adicionar Imóvel"
 
 # @ wpp
-#: ../core/class_functions.php:194
+#: ../core/class_functions.php:255
 msgid "Add New Property"
 msgstr "Adicionar Novo Imóvel"
 
 # @ wpp
-#: ../core/class_functions.php:196
+#: ../core/class_functions.php:257
 msgid "New Property"
 msgstr "Novo Imóvel"
 
 # @ wpp
-#: ../core/class_functions.php:197 ../core/premium/class_wpp_supermap.php:1074
-#: ../core/premium/class_wpp_supermap.php:1640
+#: ../core/class_functions.php:258 ../core/premium/class_wpp_supermap.php:1071
+#: ../core/premium/class_wpp_supermap.php:1650
 msgid "View Property"
 msgstr "Ver Imóvel"
 
 # @ wpp
-#: ../core/class_functions.php:198
+#: ../core/class_functions.php:259
 msgid "Search Properties"
 msgstr "Pesquisar Imóveis"
 
 # @ wpp
-#: ../core/class_functions.php:199
+#: ../core/class_functions.php:260
 msgid "No properties found"
 msgstr "Não foram encontrados imóveis"
 
 # @ wpp
-#: ../core/class_functions.php:200
+#: ../core/class_functions.php:261
 msgid "No properties found in Trash"
 msgstr "Não foram encontrados imóveis na Lixeira"
 
 # @ wpp
-#: ../core/class_functions.php:556
+#: ../core/class_functions.php:617
 msgid "Could not detect."
 msgstr "Não foi possível detectar."
 
 # @ wpp
-#: ../core/class_functions.php:677
+#: ../core/class_functions.php:738
 #, php-format
 msgid "Set %1s properties to \"%2s\" property type"
 msgstr "Estabelecer %1s imóveis para \"%2s\" tipo de imóvel"
 
 # @ wpp
-#: ../core/class_functions.php:1045
+#: ../core/class_functions.php:1106
 msgid "Default"
 msgstr "Padrão"
 
 # @ wpp
-#: ../core/class_functions.php:1497
+#: ../core/class_functions.php:1558
 msgid ""
 "If you have problems automatically downloading premium features, it may be "
 "due to PHP not having ownership issues over the premium feature folder."
@@ -708,7 +711,7 @@ msgstr ""
 "prêmio."
 
 # @ wpp
-#: ../core/class_functions.php:1507
+#: ../core/class_functions.php:1568
 msgid ""
 "There is an ownership issue with the premium folder, which means your site "
 "cannot download WP-Property premium features and receive updates.  Please "
@@ -724,7 +727,7 @@ msgstr ""
 "consertar isto."
 
 # @ wpp
-#: ../core/class_functions.php:1514
+#: ../core/class_functions.php:1575
 msgid ""
 "One of the folders that is necessary for downloading additional features for "
 "the WP-Property plugin is not writable.  This means features cannot be "
@@ -736,48 +739,68 @@ msgstr ""
 "ser baixadas. Para consertar isto, você deve configurar as <b>wp-content/"
 "plugins/wp-property/core/premium</b> permissões para 0755."
 
+#: ../core/class_functions.php:1739
+#, php-format
+msgid "Updated %1$d %2$s using the %3$s localization."
+msgstr ""
+
+#: ../core/class_functions.php:1742
+#, php-format
+msgid "%1$d %2$s has empty address."
+msgstr ""
+
 # @ wpp
-#: ../core/class_functions.php:2028
+#: ../core/class_functions.php:1746
+#, fuzzy, php-format
+msgid "%1$d %2$s could not be updated."
+msgstr "A chave API não pode ser recriada."
+
+#: ../core/class_functions.php:1750
+#, php-format
+msgid "%1$d %2$s was ignored because query limit was exceeded."
+msgstr ""
+
+# @ wpp
+#: ../core/class_functions.php:2141
 msgid "Cache was successfully cleared"
 msgstr "O cache foi esvaziado com sucesso"
 
 # @ wpp
-#: ../core/class_functions.php:2068
+#: ../core/class_functions.php:2181
 #, fuzzy, php-format
 msgid "An error occurred during premium feature check: <b> %s </b>."
 msgstr "Um erro ocorreu durante a checagem de utilizades prêmio: <b>  %s </b>."
 
 # @ wpp
-#: ../core/class_functions.php:2098
+#: ../core/class_functions.php:2211
 msgid "The API key could not be generated."
 msgstr "A chave API não pode ser recriada."
 
 # @ wpp
-#: ../core/class_functions.php:2100
+#: ../core/class_functions.php:2213
 #, fuzzy, php-format
 msgid "An error occurred during premium feature check: <b>%s</b>."
 msgstr "Um erro occoreu durante a checagem de utilidades prêmio: <b>%s</b>."
 
 # @ wpp
-#: ../core/class_functions.php:2130
+#: ../core/class_functions.php:2243
 msgid "Feature Name"
 msgstr "Nome do Destaque"
 
 # @ wpp
-#: ../core/class_functions.php:2131 ../core/class_functions.php:2511
-#: ../core/class_functions.php:2604
+#: ../core/class_functions.php:2244 ../core/class_functions.php:2624
 msgid "Version"
 msgstr "Versão"
 
 # @ wpp
-#: ../core/class_functions.php:2132 ../core/class_functions.php:2512
-#: ../core/class_functions.php:2605 ../core/premium/class_wpp_feps.php:1957
+#: ../core/class_functions.php:2245 ../core/class_functions.php:2625
+#: ../core/premium/class_wpp_feps.php:1957
 #: ../core/premium/class_wpp_pdf_flyer.php:1286
 msgid "Description"
 msgstr "Descrição"
 
 # @ wpp
-#: ../core/class_functions.php:2146
+#: ../core/class_functions.php:2259
 #, php-format
 msgid "WP-Property Premium Feature: %s updated to version %s from %s."
 msgstr ""
@@ -785,13 +808,13 @@ msgstr ""
 "partir de %s."
 
 # @ wpp
-#: ../core/class_functions.php:2148
+#: ../core/class_functions.php:2261
 #, php-format
 msgid "WP-Property Premium Feature: %s updated to version %s."
 msgstr "Características Premium do WP-Property: %s atualizadas para versão %s"
 
 # @ wpp
-#: ../core/class_functions.php:2165
+#: ../core/class_functions.php:2278
 msgid ""
 "Update ran successfully but no features were downloaded because the setting "
 "is disabled. Enable in the \"Developer\" tab."
@@ -800,196 +823,196 @@ msgstr ""
 "configurações estão desativadas. Ative no botão \"Desenvolvedor\""
 
 # @ wpp
-#: ../core/class_functions.php:2168
+#: ../core/class_functions.php:2281
 msgid "Update ran successfully."
 msgstr "Atualização ocorreu com sucesso."
 
 # @ wpp
 # @ default
-#: ../core/class_functions.php:2510 ../core/class_functions.php:2603
-#: ../core/class_functions.php:4260 ../core/premium/class_agents.php:1674
+#: ../core/class_functions.php:2623 ../core/class_functions.php:4392
+#: ../core/premium/class_agents.php:1674
 #: ../core/premium/class_wpp_supermap.php:202
-#: ../core/premium/class_wpp_supermap.php:346
-#: ../templates/template-functions.php:1593
+#: ../core/premium/class_wpp_supermap.php:344
+#: ../templates/template-functions.php:1631
 msgid "Name"
 msgstr "Nome"
 
 # @ wpp
-#: ../core/class_functions.php:2513
+#: ../core/class_functions.php:2626
 msgid "Minimum Core Version"
 msgstr "Versão mínima do núcleo"
 
 # @ wp
 # @ wpp
-#: ../core/class_functions.php:2743 ../core/ui/page_settings.php:525
-#: ../core/ui/page_settings.php:539 ../templates/template-functions.php:959
+#: ../core/class_functions.php:2856 ../core/ui/page_settings.php:525
+#: ../core/ui/page_settings.php:539 ../templates/template-functions.php:992
 msgid "No"
 msgstr "Não"
 
 # @ wpp
-#: ../core/class_functions.php:3779
+#: ../core/class_functions.php:3912
 msgid " sq ft."
 msgstr "m2"
 
 # @ wpp
-#: ../core/class_functions.php:4012 ../core/class_functions.php:4021
+#: ../core/class_functions.php:4145 ../core/class_functions.php:4154
 msgid "Get Directions"
 msgstr "Pegar Direções"
 
 # @ wpp
-#: ../core/class_functions.php:4251
+#: ../core/class_functions.php:4383
 #: ../core/premium/class_wpp_pdf_flyer.php:139
 msgid "General Settings"
 msgstr "Configurações Gerais"
 
 # @ wpp
-#: ../core/class_functions.php:4252
+#: ../core/class_functions.php:4384
 msgid "Find your property"
 msgstr "Encontre seu Imóvel"
 
 # @ wpp
 # @ default
-#: ../core/class_functions.php:4253 ../core/premium/class_agents.php:444
+#: ../core/class_functions.php:4385 ../core/premium/class_agents.php:444
 #: ../core/premium/class_wpp_property_import.php:3917
 #: ../core/ui/class_wpp_object_list_table.php:120
 msgid "Edit"
 msgstr "Editar"
 
 # @ wpp
-#: ../core/class_functions.php:4255
+#: ../core/class_functions.php:4387
 msgid "Contact us"
 msgstr "Contate-nos"
 
 # @ wpp
-#: ../core/class_functions.php:4256
+#: ../core/class_functions.php:4388
 msgid "Login"
 msgstr "Login"
 
 # @ wpp
-#: ../core/class_functions.php:4257
+#: ../core/class_functions.php:4389
 msgid "Explore"
 msgstr "Explorar"
 
 # @ wpp
-#: ../core/class_functions.php:4258
+#: ../core/class_functions.php:4390
 msgid "Message"
 msgstr "Mensagem"
 
 # @ wpp
-#: ../core/class_functions.php:4261
+#: ../core/class_functions.php:4393
 msgid "E-mail"
 msgstr "Email"
 
 # @ wpp
-#: ../core/class_functions.php:4262
+#: ../core/class_functions.php:4394
 msgid "Send Message"
 msgstr "Enviar Mensagem"
 
 # @ wpp
-#: ../core/class_functions.php:4263
+#: ../core/class_functions.php:4395
 msgid "Submit Inquiry"
 msgstr "Enviar Proposta"
 
 # @ wpp
-#: ../core/class_functions.php:4264
+#: ../core/class_functions.php:4396
 msgid "Inquiry"
 msgstr "Proposta"
 
 # @ wpp
-#: ../core/class_functions.php:4265
+#: ../core/class_functions.php:4397
 msgid "Comment About"
 msgstr "Comentário Sobre"
 
 # @ wpp
-#: ../core/class_functions.php:4266
+#: ../core/class_functions.php:4398
 msgid "Inquire About"
 msgstr "Proposta"
 
 # @ wpp
-#: ../core/class_functions.php:4267
+#: ../core/class_functions.php:4399
 msgid "Inquiry About:"
 msgstr "Proposta:"
 
 # @ wpp
-#: ../core/class_functions.php:4268
+#: ../core/class_functions.php:4400
 msgid "Inquiry message:"
 msgstr "Mensagem da Proposta:"
 
 # @ wpp
-#: ../core/class_functions.php:4269
+#: ../core/class_functions.php:4401
 msgid "You forgot to enter your e-mail."
 msgstr "Você esqueceu de digitar seu email."
 
 # @ wpp
-#: ../core/class_functions.php:4270
+#: ../core/class_functions.php:4402
 msgid "You forgot to enter a message."
 msgstr "Você esqueceu de digitar sua mensagem."
 
 # @ wpp
-#: ../core/class_functions.php:4271
+#: ../core/class_functions.php:4403
 msgid "You forgot to enter your  name."
 msgstr "Você esqueceu de digitar seu nome."
 
 # @ wpp
-#: ../core/class_functions.php:4272
+#: ../core/class_functions.php:4404
 msgid "Error with sending message. Please contact site administrator."
 msgstr "Erro ao enviar mensagem. Por favor contate o administrador do site."
 
 # @ wpp
-#: ../core/class_functions.php:4273
+#: ../core/class_functions.php:4405
 msgid "Thank you for your message."
 msgstr "Obrigado por enviar sua mensagem."
 
 # @ wpp
-#: ../core/class_functions.php:4414
+#: ../core/class_functions.php:4546
 msgid "Status"
 msgstr "Situação"
 
 # @ wpp
-#: ../core/class_functions.php:4419
+#: ../core/class_functions.php:4551
 msgid "Author"
 msgstr "Autor"
 
 # @ wpp
-#: ../core/class_functions.php:4424
+#: ../core/class_functions.php:4556
 msgid "Date"
 msgstr "Data"
 
 # @ wpp
-#: ../core/class_functions.php:4506
+#: ../core/class_functions.php:4638
 msgid "All"
 msgstr "Todos"
 
 # @ wpp
-#: ../core/class_functions.php:4516 ../core/premium/class_agents.php:1975
-#: ../templates/template-functions.php:1397
-#: ../templates/template-functions.php:1410
-#: ../templates/template-functions.php:1447
+#: ../core/class_functions.php:4648 ../core/premium/class_agents.php:1975
+#: ../templates/template-functions.php:1436
+#: ../templates/template-functions.php:1448
+#: ../templates/template-functions.php:1485
 msgid "Any"
 msgstr "Qualquer"
 
 # @ wpp
 # @ default
-#: ../core/class_functions.php:4525 ../core/class_list_table.php:306
+#: ../core/class_functions.php:4657 ../core/class_list_table.php:306
 msgid "Show all dates"
 msgstr "Mostrar todas as datas"
 
 # @ wpp
-#: ../core/class_functions.php:4635
+#: ../core/class_functions.php:4767
 msgid "General Help"
 msgstr "Informações Gerais"
 
-#: ../core/class_functions.php:4636
+#: ../core/class_functions.php:4768
 msgid "Comming soon..."
 msgstr ""
 
 # @ default
-#: ../core/class_functions.php:4653
+#: ../core/class_functions.php:4785
 msgid "Default Properties Page"
 msgstr "Página padrão de Imóveis"
 
 # @ wpp
-#: ../core/class_functions.php:4654
+#: ../core/class_functions.php:4786
 msgid ""
 "The default <b>property page</b> will be used to display property search "
 "results, as well as be the base for property URLs. "
@@ -998,16 +1021,17 @@ msgstr ""
 "pesquisas de imóveis, bem como ser a base de URL para todos os imóveis. "
 
 # @ wpp
-#: ../core/class_functions.php:4655
+#: ../core/class_functions.php:4787
+#, fuzzy
 msgid ""
-"By default, the <b>Default Properties Page</b> is set to <b>property</b>, "
+"By default, the <b>Default Properties Page</b> is set to <b>properties</b>, "
 "which is a dynamically created page used for displaying property search "
 "results. "
 msgstr ""
 "Por padrão, a <b>página de imóveis</b> padrão é definada como <b>Imóveis</"
 "b>. Uma página dinamicamente criada que exibe resultados de pesquisas "
 
-#: ../core/class_functions.php:4656
+#: ../core/class_functions.php:4788
 msgid ""
 "We recommend you create an actual WordPress page to be used as the "
 "<b>Default Properties Page</b>. For example, you may create a root page "
@@ -1015,11 +1039,11 @@ msgid ""
 msgstr ""
 
 # @ wpp
-#: ../core/class_functions.php:4658 ../core/ui/page_settings.php:268
+#: ../core/class_functions.php:4790 ../core/ui/page_settings.php:268
 msgid "Display"
 msgstr "Exibir"
 
-#: ../core/class_functions.php:4659
+#: ../core/class_functions.php:4791
 msgid ""
 "This tab allows you to do many things. Make custom picture sizes that will "
 "let you to make posting pictures easier. Change the way you view property "
@@ -1031,35 +1055,35 @@ msgid ""
 msgstr ""
 
 # @ wpp
-#: ../core/class_functions.php:4661 ../core/ui/page_settings.php:289
+#: ../core/class_functions.php:4793 ../core/ui/page_settings.php:289
 #, fuzzy
 msgid "Premium Features"
 msgstr "Característica Primária"
 
 # @ wpp
-#: ../core/class_functions.php:4662
+#: ../core/class_functions.php:4794
 #, fuzzy
 msgid "Tab allows you to manage your WP-Property Premium Features"
 msgstr "Recursos Premium do WP-Property"
 
 # @ wpp
-#: ../core/class_functions.php:4664 ../core/ui/page_settings.php:291
+#: ../core/class_functions.php:4796 ../core/ui/page_settings.php:291
 msgid "Help"
 msgstr "Ajuda"
 
-#: ../core/class_functions.php:4665
+#: ../core/class_functions.php:4797
 msgid ""
 "This tab will help you troubleshoot your plugin, do exports and check for "
 "updates for Premium Features"
 msgstr ""
 
 # @ default
-#: ../core/class_functions.php:4670
+#: ../core/class_functions.php:4802
 msgid "More Help"
 msgstr "Mais Ajuda"
 
 # @ default
-#: ../core/class_functions.php:4671
+#: ../core/class_functions.php:4803
 #, fuzzy
 msgid ""
 "Visit <a target=\"_blank\" href=\"https://usabilitydynamics.com/products/wp-"
@@ -1068,7 +1092,7 @@ msgstr ""
 "<a href=\"http://usabilitydynamics.com/products/wp-property/\" target="
 "\"_blank\">Página de produtos do WP-Property</a>"
 
-#: ../core/class_functions.php:4780
+#: ../core/class_functions.php:4912
 #, php-format
 msgid ""
 "You cannot use your site as Facebook Application. You should <a href=\"%s"
@@ -1138,10 +1162,10 @@ msgstr ""
 
 # @ default
 # @ wpp
-#: ../core/class_widgets.php:176 ../core/class_widgets.php:392
-#: ../core/class_widgets.php:599 ../core/class_widgets.php:836
-#: ../core/class_widgets.php:1076 ../core/class_widgets.php:1437
-#: ../core/class_widgets.php:1736 ../core/premium/class_agents.php:2153
+#: ../core/class_widgets.php:176 ../core/class_widgets.php:399
+#: ../core/class_widgets.php:606 ../core/class_widgets.php:843
+#: ../core/class_widgets.php:1083 ../core/class_widgets.php:1444
+#: ../core/class_widgets.php:1743 ../core/premium/class_agents.php:2153
 msgid "Title:"
 msgstr "Título:"
 
@@ -1172,26 +1196,26 @@ msgstr ""
 "exibido no momento."
 
 # @ wpp
-#: ../core/class_widgets.php:294 ../core/class_widgets.php:527
-#: ../core/class_widgets.php:750 ../core/class_widgets.php:986
+#: ../core/class_widgets.php:301 ../core/class_widgets.php:534
+#: ../core/class_widgets.php:757 ../core/class_widgets.php:993
 #, php-format
 msgid "%s at %s for %s"
 msgstr "%s em %s para %s"
 
 # @ wpp
-#: ../core/class_widgets.php:325 ../core/class_widgets.php:547
-#: ../core/class_widgets.php:778 ../core/class_widgets.php:1015
+#: ../core/class_widgets.php:332 ../core/class_widgets.php:554
+#: ../core/class_widgets.php:785 ../core/class_widgets.php:1022
 msgid "More"
 msgstr "Mais"
 
 # @ wpp
-#: ../core/class_widgets.php:338 ../core/class_widgets.php:555
-#: ../core/class_widgets.php:785 ../core/class_widgets.php:1024
+#: ../core/class_widgets.php:345 ../core/class_widgets.php:562
+#: ../core/class_widgets.php:792 ../core/class_widgets.php:1031
 msgid "View All"
 msgstr "Ver Todos"
 
 # @ wpp
-#: ../core/class_widgets.php:389
+#: ../core/class_widgets.php:396
 msgid ""
 "The widget will show other properties that share a parent with the currently "
 "displayed property."
@@ -1200,70 +1224,70 @@ msgstr ""
 "que o exibido no momento."
 
 # @ wpp
-#: ../core/class_widgets.php:398
+#: ../core/class_widgets.php:405
 msgid "Hide images."
 msgstr "Esconder imagens."
 
 # @ wpp
-#: ../core/class_widgets.php:402 ../core/class_widgets.php:617
-#: ../core/class_widgets.php:847 ../core/class_widgets.php:1087
+#: ../core/class_widgets.php:409 ../core/class_widgets.php:624
+#: ../core/class_widgets.php:854 ../core/class_widgets.php:1094
 msgid "Image Size:"
 msgstr "Tamanho da Imagem:"
 
 # @ wpp
-#: ../core/class_widgets.php:407 ../core/class_widgets.php:622
-#: ../core/class_widgets.php:852 ../core/class_widgets.php:1092
+#: ../core/class_widgets.php:414 ../core/class_widgets.php:629
+#: ../core/class_widgets.php:859 ../core/class_widgets.php:1099
 msgid "Listings to display?"
 msgstr "Quais imóveis exibir?"
 
 # @ wpp
-#: ../core/class_widgets.php:411
+#: ../core/class_widgets.php:418
 msgid "Select the attributes you want to display: "
 msgstr "Selecione os atributos que você deseja exibir: "
 
 # @ wpp
-#: ../core/class_widgets.php:429 ../core/class_widgets.php:648
-#: ../core/class_widgets.php:872 ../core/class_widgets.php:1112
+#: ../core/class_widgets.php:436 ../core/class_widgets.php:655
+#: ../core/class_widgets.php:879 ../core/class_widgets.php:1119
 msgid "Address Format:"
 msgstr "Formato do Endereço:"
 
 # @ wpp
-#: ../core/class_widgets.php:437 ../core/class_widgets.php:655
-#: ../core/class_widgets.php:879 ../core/class_widgets.php:1119
+#: ../core/class_widgets.php:444 ../core/class_widgets.php:662
+#: ../core/class_widgets.php:886 ../core/class_widgets.php:1126
 msgid "Show \"More\" link?"
 msgstr "Mostar \"Mais\" link?"
 
 # @ wpp
-#: ../core/class_widgets.php:441 ../core/class_widgets.php:662
-#: ../core/class_widgets.php:885 ../core/class_widgets.php:1125
+#: ../core/class_widgets.php:448 ../core/class_widgets.php:669
+#: ../core/class_widgets.php:892 ../core/class_widgets.php:1132
 msgid "Show \"View All\" link?"
 msgstr "Mostrar \"Ver Todos\" link?"
 
 # @ wpp
-#: ../core/class_widgets.php:445
+#: ../core/class_widgets.php:452
 msgid "If property has no parent, show other properties of same type."
 msgstr ""
 "Se um imóvel não possuir primário, exibir outros imóveis do mesmo tipo."
 
 # @ wpp
-#: ../core/class_widgets.php:449
+#: ../core/class_widgets.php:456
 msgid "Randomize order of displayed properties."
 msgstr "Torne aleatória a ordem de exibição de imóveis."
 
 # @ wpp
-#: ../core/class_widgets.php:466
+#: ../core/class_widgets.php:473
 #, php-format
 msgid "Child %1s"
 msgstr "%1s Secundário"
 
 # @ wpp
-#: ../core/class_widgets.php:466
+#: ../core/class_widgets.php:473
 msgid "Show child properties (if any) for currently displayed property"
 msgstr ""
 "Exibir imóveis secundários (se existentes) para o imóvel exibido no momento"
 
 # @ wpp
-#: ../core/class_widgets.php:597
+#: ../core/class_widgets.php:604
 msgid ""
 "The widget will not be displayed if the currently viewed property has no "
 "children."
@@ -1271,169 +1295,169 @@ msgstr ""
 "O componente não será exibidio se o imóvel em vista não possui secundários."
 
 # @ wpp
-#: ../core/class_widgets.php:608 ../core/class_widgets.php:843
-#: ../core/class_widgets.php:1083
+#: ../core/class_widgets.php:615 ../core/class_widgets.php:850
+#: ../core/class_widgets.php:1090
 msgid "Hide Images?"
 msgstr "Esconder Imagens:"
 
 # @ wpp
-#: ../core/class_widgets.php:630 ../core/class_widgets.php:856
+#: ../core/class_widgets.php:637 ../core/class_widgets.php:863
 msgid "Select the stats you want to display"
 msgstr "Selecione as estatísticas que você deseja exibir"
 
 # @ wpp
-#: ../core/class_widgets.php:681
+#: ../core/class_widgets.php:688
 #, php-format
 msgid "Featured %1s"
 msgstr "%1s em Destaque"
 
 # @ wpp
-#: ../core/class_widgets.php:681
+#: ../core/class_widgets.php:688
 msgid "List of properties that were marked as Featured"
 msgstr "Listar imóveis que estão marcados como Destaque"
 
 # @ wpp
-#: ../core/class_widgets.php:909
+#: ../core/class_widgets.php:916
 msgid "Featured Properies"
 msgstr "Imóveis Destacados"
 
 # @ wpp
-#: ../core/class_widgets.php:928
+#: ../core/class_widgets.php:935
 #, php-format
 msgid "Latest %1s"
 msgstr "%1s mais recentes"
 
 # @ wpp
-#: ../core/class_widgets.php:928
+#: ../core/class_widgets.php:935
 msgid "List of the latest properties created on this site"
 msgstr "Listar os imóveis mais recentemente criados neste site"
 
 # @ wpp
-#: ../core/class_widgets.php:1077
+#: ../core/class_widgets.php:1084
 msgid "Latest Properties"
 msgstr "Imóveis Recentes"
 
 # @ wpp
-#: ../core/class_widgets.php:1096
+#: ../core/class_widgets.php:1103
 msgid "Select stats you want to display"
 msgstr "Selecione as estatísticas que você deseja exibir"
 
 # @ wpp
-#: ../core/class_widgets.php:1146
+#: ../core/class_widgets.php:1153
 #, php-format
 msgid "%1s Search"
 msgstr "Pesquisar %1s"
 
 # @ wpp
-#: ../core/class_widgets.php:1149
+#: ../core/class_widgets.php:1156
 #, php-format
 msgid "Display a highly customizable  %1s search form."
 msgstr "Exibir um formulário de pesquisa de %1s altamente personalizado."
 
 # @ wpp
-#: ../core/class_widgets.php:1350
+#: ../core/class_widgets.php:1357
 msgid "No searchable property types were found."
 msgstr "Tipos de imóvel pesquisados não foram encontrados."
 
 # @ wpp
-#: ../core/class_widgets.php:1443
+#: ../core/class_widgets.php:1450
 msgid "Property types to search:"
 msgstr "Tipos de imóveis a pesquisar:"
 
 # @ wpp
-#: ../core/class_widgets.php:1457
+#: ../core/class_widgets.php:1464
 msgid "Select the attributes you want to search."
 msgstr "Selecione os atributes que você deseja pesquisar."
 
 # @ wpp
-#: ../core/class_widgets.php:1461
+#: ../core/class_widgets.php:1468
 msgid "All Attributes"
 msgstr "Todos os Atributos"
 
 # @ wpp
-#: ../core/class_widgets.php:1464
+#: ../core/class_widgets.php:1471
 msgid "Grouped Attributes"
 msgstr "Atributos Agrupados"
 
 # @ wpp
-#: ../core/class_widgets.php:1485
+#: ../core/class_widgets.php:1492
 msgid "Ungrouped"
 msgstr "Desagrupados"
 
 # @ default
-#: ../core/class_widgets.php:1509
+#: ../core/class_widgets.php:1516
 msgid "Group attributes together."
 msgstr "Agrupar atributos."
 
 # @ wpp
-#: ../core/class_widgets.php:1521
+#: ../core/class_widgets.php:1528
 msgid "Default Sort Order"
 msgstr "Ordem de exibição padrão"
 
 # @ default
-#: ../core/class_widgets.php:1531
+#: ../core/class_widgets.php:1538
 msgid "Descending"
 msgstr "Descendente"
 
 # @ default
-#: ../core/class_widgets.php:1532
+#: ../core/class_widgets.php:1539
 msgid "Acending"
 msgstr "Ascendente"
 
 # @ wpp
-#: ../core/class_widgets.php:1540
+#: ../core/class_widgets.php:1547
 msgid "Use pagination"
 msgstr "Usar paginação"
 
 # @ wpp
-#: ../core/class_widgets.php:1545
+#: ../core/class_widgets.php:1552
 msgid "Items per page"
 msgstr "Ítens por página"
 
 # @ wpp
-#: ../core/class_widgets.php:1551
+#: ../core/class_widgets.php:1558
 msgid "Toggle Advanced Search Options"
 msgstr "Alterne Opções de Busca Avançada"
 
 # @ wpp
-#: ../core/class_widgets.php:1583
+#: ../core/class_widgets.php:1590
 msgid "Search Properies"
 msgstr "Pesquisar Imóveis"
 
 # @ wpp
-#: ../core/class_widgets.php:1607
+#: ../core/class_widgets.php:1614
 #, php-format
 msgid "%1s Gallery"
 msgstr "Galeria de %1s"
 
 # @ wpp
-#: ../core/class_widgets.php:1607
+#: ../core/class_widgets.php:1614
 msgid "List of all images attached to the current property"
 msgstr "Listar todas as imagens anexadas a este Imóvel "
 
 # @ default
-#: ../core/class_widgets.php:1741
+#: ../core/class_widgets.php:1748
 msgid "Regular Size:"
 msgstr "Tamanho normal:"
 
 # @ default
-#: ../core/class_widgets.php:1746
+#: ../core/class_widgets.php:1753
 msgid "Large Image Size:"
 msgstr "Tamanho das imagens largas:"
 
 # @ wpp
-#: ../core/class_widgets.php:1753
+#: ../core/class_widgets.php:1760
 #, php-format
 msgid "Show %s Images"
 msgstr "Exibir imagens %s"
 
 # @ wpp
-#: ../core/class_widgets.php:1758
+#: ../core/class_widgets.php:1765
 msgid "Show Image Captions"
 msgstr "Exibir título das imagens"
 
 # @ wpp
-#: ../core/class_widgets.php:1763
+#: ../core/class_widgets.php:1770
 msgid "Show Image Descriptions."
 msgstr "Exibir descrição das imagens."
 
@@ -1447,11 +1471,11 @@ msgstr ""
 msgid "API Failure: %1s."
 msgstr "%1s em Destaque"
 
-#: ../core/ud_api.php:744
+#: ../core/ud_api.php:746
 msgid "Unknown error."
 msgstr ""
 
-#: ../core/ud_api.php:832
+#: ../core/ud_api.php:834
 #, php-format
 msgid ""
 "You cannot call UD_API::log() before the %1$s hook, since the current user "
@@ -1459,48 +1483,48 @@ msgid ""
 msgstr ""
 
 # @ wpp
-#: ../core/ud_api.php:846
+#: ../core/ud_api.php:848
 msgid "Log Started."
 msgstr "Log iniciado."
 
-#: ../core/ud_api.php:951
+#: ../core/ud_api.php:953
 #, php-format
 msgid "You cannot call UD_API::add_log_page() after the %1$s hook."
 msgstr ""
 
 # @ wpp
-#: ../core/ud_api.php:980
+#: ../core/ud_api.php:982
 #, fuzzy
 msgid "Log Page for"
 msgstr "Página de Log do UD para"
 
 # @ wpp
-#: ../core/ud_api.php:981
+#: ../core/ud_api.php:983
 msgid "Clear Log"
 msgstr "Limpar log"
 
 # @ wpp
-#: ../core/ud_api.php:986
+#: ../core/ud_api.php:988
 msgid "Timestamp"
 msgstr "Horário"
 
 # @ wpp
-#: ../core/ud_api.php:988
+#: ../core/ud_api.php:990
 msgid "Event"
 msgstr "Evento"
 
 # @ wpp
-#: ../core/ud_api.php:989
+#: ../core/ud_api.php:991
 msgid "User"
 msgstr "Usuário"
 
 # @ wpp
-#: ../core/ud_api.php:990
+#: ../core/ud_api.php:992
 msgid "Related Object"
 msgstr "Objetos Relacionados"
 
 # @ wpp
-#: ../core/ud_api.php:1000 ../templates/template-functions.php:608
+#: ../core/ud_api.php:1002 ../templates/template-functions.php:642
 msgid "None"
 msgstr "Nenhum"
 
@@ -1683,7 +1707,7 @@ msgstr "Atribuir"
 #: ../core/premium/class_wpp_pdf_flyer.php:1146
 #: ../core/premium/class_wpp_property_import.php:3918
 #: ../core/premium/class_wpp_supermap.php:230
-#: ../core/premium/class_wpp_supermap.php:379
+#: ../core/premium/class_wpp_supermap.php:377
 #: ../core/ui/class_wpp_object_list_table.php:56
 #: ../core/ui/page_settings.php:466
 msgid "Delete"
@@ -1807,7 +1831,7 @@ msgstr "Multi-Checkbox"
 #: ../core/premium/class_agents.php:738
 #: ../core/premium/class_wpp_feps.php:2032
 #: ../core/premium/class_wpp_property_import.php:2301
-#: ../core/premium/class_wpp_supermap.php:387 ../core/ui/page_settings.php:491
+#: ../core/premium/class_wpp_supermap.php:385 ../core/ui/page_settings.php:491
 msgid "Add Row"
 msgstr "Adicionar Linha"
 
@@ -2052,8 +2076,8 @@ msgstr "Conteúdo que é exibido no widget do Corretor"
 #: ../core/premium/class_agents.php:585
 #: ../core/premium/class_wpp_pdf_flyer.php:1021
 #: ../core/premium/class_wpp_pdf_flyer.php:1472
-#: ../core/premium/class_wpp_supermap.php:835
-#: ../core/premium/class_wpp_supermap.php:1173
+#: ../core/premium/class_wpp_supermap.php:833
+#: ../core/premium/class_wpp_supermap.php:1170
 #: ../core/ui/page_settings.php:325
 msgid "Options"
 msgstr "Opções"
@@ -2190,7 +2214,7 @@ msgstr "Por favor, digite antes de escrever os folhetos."
 
 # @ wpp
 #: ../core/premium/class_agents.php:1186
-#: ../core/premium/class_wpp_supermap.php:499
+#: ../core/premium/class_wpp_supermap.php:497
 msgid "File should be an image"
 msgstr "Arquivo precisa ser uma imagem"
 
@@ -2200,7 +2224,7 @@ msgstr ""
 
 # @ wpp
 #: ../core/premium/class_agents.php:1219
-#: ../core/premium/class_wpp_supermap.php:552
+#: ../core/premium/class_wpp_supermap.php:550
 msgid "Looks like, Image can not be uploaded."
 msgstr "Parece que não foi possível fazer o upload da imagem."
 
@@ -2366,7 +2390,7 @@ msgstr "Ler páginas privadas"
 # @ wpp
 # @ default
 #: ../core/premium/class_agents.php:1673
-#: ../templates/template-functions.php:1595
+#: ../templates/template-functions.php:1633
 msgid "Email"
 msgstr "Email"
 
@@ -3487,6 +3511,12 @@ msgstr "Tamanho de Foto Primária"
 msgid "Secondary Images"
 msgstr "Imagens Secundárias"
 
+# @ wpp
+#: ../core/premium/class_wpp_pdf_flyer.php:1593
+#, fuzzy, php-format
+msgid "Show %1$s images."
+msgstr "Exibir imagens %s"
+
 # @ default
 #: ../core/premium/class_wpp_pdf_flyer.php:1599
 msgid "Logo URL"
@@ -3509,9 +3539,100 @@ msgid "Section background color"
 msgstr "Cor de fundo da seção"
 
 # @ default
+#: ../core/premium/class_wpp_pdf_flyer.php:1643
+#, fuzzy
+msgid "Shortcode examples:<br />"
+msgstr "Exemplos de shortcode:"
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1644
+msgid ""
+"<strong>[property_flyer]</strong> - Returns a html link to the PDF Flyer<br /"
+">"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1645
+msgid ""
+"<strong>[property_flyer title='PDF Flyer']</strong> - Returns a html link to "
+"the PDF Flyer with custom title.<br />"
+msgstr ""
+
+# @ default
+#: ../core/premium/class_wpp_pdf_flyer.php:1646
+#, fuzzy
+msgid ""
+"<strong>[property_flyer urlonly='yes']</strong> -  Returns the raw URL to "
+"the PDF Flyer (for use in custom html).<br />"
+msgstr ""
+"Retorna a URL bruta para a Lista PDF (para usar em html personalizada)."
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1647
+msgid ""
+"<strong>[property_flyer class='custom_css_class']</strong> - For use with a "
+"custom CSS class.<br />"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1648
+msgid ""
+"<strong>[property_flyer image='url_to_custom_image']</strong> - Returns "
+"url_to_custom_image with a link to the PDF Flyer."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1655
+msgid ""
+"You can regenerate all your PDF flyers, but depending on your server, it can "
+"be very time consuming if you have many properties."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1656
+msgid "Regenerate all Flyers"
+msgstr ""
+
+# @ default
+#: ../core/premium/class_wpp_pdf_flyer.php:1657
+#, fuzzy
+msgid "Close Result's Logs"
+msgstr "Filtrar Resultados"
+
+# @ default
 #: ../core/premium/class_wpp_pdf_flyer.php:1677
 msgid "Property List is got. Start generate PDF Flyers..."
 msgstr "Lista de Imóveis foi aceita. Começando a produzir Panfletos PDF... "
+
+# @ wpp
+#: ../core/premium/class_wpp_pdf_flyer.php:1687
+#, fuzzy
+msgid "PDF Flyer for property \""
+msgstr "Panfleto em PDF para "
+
+# @ wpp
+#: ../core/premium/class_wpp_pdf_flyer.php:1687
+#, fuzzy
+msgid "\" is generated."
+msgstr "Corretor criado."
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1689
+msgid "<b>Error. PDF Flyer for property \""
+msgstr ""
+
+# @ wpp
+#: ../core/premium/class_wpp_pdf_flyer.php:1689
+#, fuzzy
+msgid "\" could not be generated.</b>"
+msgstr "A chave API não pode ser recriada."
+
+# @ wpp
+#: ../core/premium/class_wpp_pdf_flyer.php:1693
+#, fuzzy
+msgid "Could not regenerate PDF Flyer for property \""
+msgstr "Não foi possível encontrar um panfleto em PDF para %1s."
+
+# @ default
+#: ../core/premium/class_wpp_pdf_flyer.php:1693
+#, fuzzy
+msgid "\". Looks like, something caused error on server."
+msgstr ""
+"Aparentemente, algo causou um erro no servidor. Por favor, tente reproduzir "
+"PDF Flyer mais tarde."
 
 # @ default
 #: ../core/premium/class_wpp_pdf_flyer.php:1699
@@ -3683,7 +3804,7 @@ msgstr "Não "
 
 # @ wpp
 #: ../core/premium/class_wpp_power_tools.php:375
-#: ../templates/template-functions.php:609
+#: ../templates/template-functions.php:643
 msgid " found."
 msgstr "encontrado(s)."
 
@@ -4102,7 +4223,6 @@ msgstr ""
 
 # @ wpp
 #: ../core/premium/class_wpp_property_import.php:1952
-#: ../templates/template-functions.php:1320
 msgid "Type:"
 msgstr "Tipo:"
 
@@ -4328,7 +4448,7 @@ msgstr ""
 msgid ""
 "Remove properties that are no longer in source XML from this site's "
 "database. This can now be done if the the import configuration has a Pre-QC "
-"or Post-QD Limit."
+"or Post-QC Limit."
 msgstr ""
 
 #: ../core/premium/class_wpp_property_import.php:2146
@@ -4540,8 +4660,8 @@ msgstr ""
 
 # @ wpp
 #: ../core/premium/class_wpp_property_import.php:2740
-#: ../core/premium/class_wpp_slideshow.php:1420
-#: ../core/premium/class_wpp_supermap.php:1665
+#: ../core/premium/class_wpp_slideshow.php:1440
+#: ../core/premium/class_wpp_supermap.php:1675
 #, fuzzy
 msgid "Loading..."
 msgstr "Carregando"
@@ -4929,14 +5049,14 @@ msgstr "Exibir título das imagens"
 
 # @ wpp
 #: ../core/premium/class_wpp_slideshow.php:796
-#: ../core/premium/class_wpp_slideshow.php:1508
+#: ../core/premium/class_wpp_slideshow.php:1536
 #, fuzzy
 msgid "Slideshow Images:"
 msgstr "Exibir imagens %s"
 
 # @ default
 #: ../core/premium/class_wpp_slideshow.php:818
-#: ../core/premium/class_wpp_slideshow.php:1522
+#: ../core/premium/class_wpp_slideshow.php:1550
 #, fuzzy
 msgid "All Images:"
 msgstr "Imagens"
@@ -4954,8 +5074,34 @@ msgstr "Exibir"
 
 #: ../core/premium/class_wpp_slideshow.php:1031
 #: ../core/premium/class_wpp_slideshow.php:1215
-#: ../core/premium/class_wpp_slideshow.php:1478
+#: ../core/premium/class_wpp_slideshow.php:1498
 msgid "Global Slideshow"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1036
+msgid "Clicking on an image will open up the property its attached to."
+msgstr ""
+
+# @ wpp
+#: ../core/premium/class_wpp_slideshow.php:1040
+#, fuzzy
+msgid "Show property title and tagline in slideshow."
+msgstr "Exibir paginação no final dos resultados."
+
+# @ wpp
+#: ../core/premium/class_wpp_slideshow.php:1044
+#, fuzzy
+msgid "Slideshow Size: "
+msgstr "Exibir imagens %s"
+
+#: ../core/premium/class_wpp_slideshow.php:1065
+#, php-format
+msgid ""
+"The global slideshow will look for all images that are over the specified "
+"size.  Add images to the global slideshow <a href=\"%1$s\">here</a>. The "
+"built-in sizes, such as <b>medium</b> and <b>large</b> may not work because "
+"WordPress does not crop them during resizing, resulting in artbitrary "
+"heights. "
 msgstr ""
 
 #: ../core/premium/class_wpp_slideshow.php:1075
@@ -5039,29 +5185,29 @@ msgstr ""
 msgid "The pause time between transitions."
 msgstr ""
 
-#: ../core/premium/class_wpp_slideshow.php:1252
+#: ../core/premium/class_wpp_slideshow.php:1261
 msgid "Slideshow selection and order saved."
 msgstr ""
 
 # @ wpp
-#: ../core/premium/class_wpp_slideshow.php:1487
+#: ../core/premium/class_wpp_slideshow.php:1515
 #, fuzzy
 msgid "WP-Property Slideshow"
 msgstr "Capacidades do WP-Property"
 
-#: ../core/premium/class_wpp_slideshow.php:1488
+#: ../core/premium/class_wpp_slideshow.php:1516
 msgid ""
 "This slideshow can be integrated into your front-end pages by either using "
 "the shortcode, or pasting PHP code into your theme."
 msgstr ""
 
-#: ../core/premium/class_wpp_slideshow.php:1491
+#: ../core/premium/class_wpp_slideshow.php:1519
 msgid ""
 "Drag images from selection on the left to the selection on the right, and "
 "then click save."
 msgstr ""
 
-#: ../core/premium/class_wpp_slideshow.php:1492
+#: ../core/premium/class_wpp_slideshow.php:1520
 #, php-format
 msgid ""
 "This list gets all images from your media library that are over %s pixels "
@@ -5069,7 +5215,7 @@ msgid ""
 msgstr ""
 
 # @ wpp
-#: ../core/premium/class_wpp_slideshow.php:1499
+#: ../core/premium/class_wpp_slideshow.php:1527
 #, fuzzy
 msgid "Save Selection and Order"
 msgstr "Seleção Primária"
@@ -5140,73 +5286,85 @@ msgstr "Adicionar Marcador"
 msgid "Map Areas:"
 msgstr "Áreas do Mapa:"
 
+#: ../core/premium/class_wpp_supermap.php:340
+msgid ""
+"<p>Map areas let you draw our areas on the map, such as neighborhoods.</"
+"p><p>Just add to shortcode attribute <b>show_areas=all</b> to draw all areas "
+"on the map. Also You can use area's slugs to show them on the map, like as "
+"<b>show_areas=new_york,washington</b>. Please, use coordinates in this "
+"format: <b>(82.72, -37.79)(69.54, -57.48)(68.93, -18.63).</b></p><p><i>This "
+"is an experimental feature, you may not want to use it on a live site.  "
+"We're eager to hear your feedback regarding this feature and the "
+"capabilities that would be useful to you.</i></p>"
+msgstr ""
+
 # @ wpp
-#: ../core/premium/class_wpp_supermap.php:347
+#: ../core/premium/class_wpp_supermap.php:345
 msgid "Coordinates"
 msgstr "Coordenadas"
 
 # @ wpp
-#: ../core/premium/class_wpp_supermap.php:348
+#: ../core/premium/class_wpp_supermap.php:346
 msgid "Fill Color"
 msgstr "Cor de Preenchimento"
 
 # @ wpp
-#: ../core/premium/class_wpp_supermap.php:349
+#: ../core/premium/class_wpp_supermap.php:347
 msgid "Opacity"
 msgstr "Opacidade"
 
 # @ wpp
-#: ../core/premium/class_wpp_supermap.php:350
+#: ../core/premium/class_wpp_supermap.php:348
 msgid "Stoke Color"
 msgstr "Cor quando riscado"
 
 # @ wpp
-#: ../core/premium/class_wpp_supermap.php:351
+#: ../core/premium/class_wpp_supermap.php:349
 msgid "Hover Color"
 msgstr "Cor quando pairando"
 
 # @ wpp
-#: ../core/premium/class_wpp_supermap.php:430
-#: ../core/premium/class_wpp_supermap.php:683
+#: ../core/premium/class_wpp_supermap.php:428
+#: ../core/premium/class_wpp_supermap.php:681
 msgid "Map Marker"
 msgstr "Marcador do Mapa"
 
 # @ wpp
-#: ../core/premium/class_wpp_supermap.php:432
-#: ../core/premium/class_wpp_supermap.php:685
+#: ../core/premium/class_wpp_supermap.php:430
+#: ../core/premium/class_wpp_supermap.php:683
 msgid "Default by Google"
 msgstr "Padrão por Google"
 
 # @ wpp
-#: ../core/premium/class_wpp_supermap.php:632
+#: ../core/premium/class_wpp_supermap.php:630
 msgid "Supermap Options"
 msgstr "Opçãos do Supermapa"
 
 # @ wpp
-#: ../core/premium/class_wpp_supermap.php:645
+#: ../core/premium/class_wpp_supermap.php:643
 #, fuzzy
 msgid "Exclude property from Supermap"
 msgstr "Excluir imóvel do Supermapa"
 
 # @ wpp
-#: ../core/premium/class_wpp_supermap.php:845
+#: ../core/premium/class_wpp_supermap.php:843
 #, php-format
 msgid "Element cannot be rendered, missing %1s script."
 msgstr "Elemente não pôde ser executado, faltando %1s script."
 
 # @ wpp
-#: ../core/premium/class_wpp_supermap.php:1134
+#: ../core/premium/class_wpp_supermap.php:1131
 msgid "No results found."
 msgstr "Não foram encontrados resultados."
 
 # @ wpp
-#: ../core/premium/class_wpp_supermap.php:1664
+#: ../core/premium/class_wpp_supermap.php:1674
 #, fuzzy
 msgid "Show More"
 msgstr "Mostar \"Mais\" link?"
 
 # @ wpp
-#: ../core/premium/class_wpp_supermap.php:1744
+#: ../core/premium/class_wpp_supermap.php:1754
 msgid "Loading"
 msgstr "Carregando"
 
@@ -5268,6 +5426,12 @@ msgstr "Ver"
 #, php-format
 msgid "Toggle %1s more."
 msgstr "Alterne mais %1s."
+
+# @ wpp
+#: ../core/ui/class_wpp_object_list_table.php:254
+#, fuzzy
+msgid "Add to Featured"
+msgstr "Adicionar Nova Característica"
 
 # @ wpp
 #: ../core/ui/page_settings.php:35
@@ -5890,27 +6054,27 @@ msgid " of "
 msgstr " de "
 
 # @ wpp
-#: ../templates/template-functions.php:612
+#: ../templates/template-functions.php:646
 msgid "Viewing page"
 msgstr "Vendo a Página"
 
 # @ wpp
-#: ../templates/template-functions.php:612
+#: ../templates/template-functions.php:646
 msgid "of"
 msgstr "de"
 
 # @ wpp
-#: ../templates/template-functions.php:638
+#: ../templates/template-functions.php:672
 msgid "Prev"
 msgstr "Anterior"
 
 # @ wpp
-#: ../templates/template-functions.php:639
+#: ../templates/template-functions.php:673
 msgid "Next"
 msgstr "Próximo"
 
 # @ default
-#: ../templates/template-functions.php:670
+#: ../templates/template-functions.php:704
 msgid ""
 "Conditional query tags do not work before the query is run. Before then, "
 "they always return false."
@@ -5919,35 +6083,35 @@ msgstr ""
 "antes, o retorno sempre é falso."
 
 # @ wpp
-#: ../templates/template-functions.php:1019
+#: ../templates/template-functions.php:1052
 msgid "Other"
 msgstr "Outro"
 
 # @ default
-#: ../templates/template-functions.php:1597
+#: ../templates/template-functions.php:1635
 msgid "Website"
 msgstr "Website"
 
 # @ default
-#: ../templates/template-functions.php:1600
+#: ../templates/template-functions.php:1638
 #, php-format
 msgid "Required fields are marked %s"
 msgstr "Campos requeridos são marcados com %s"
 
 # @ default
-#: ../templates/template-functions.php:1603
+#: ../templates/template-functions.php:1641
 #, fuzzy
 msgid "Comment"
 msgstr "Postar Comentário"
 
 # @ default
-#: ../templates/template-functions.php:1604
+#: ../templates/template-functions.php:1642
 #, php-format
 msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
 msgstr "Você deve ser <a href=\"%s\">logged in</a> para postar um comentário."
 
 # @ default
-#: ../templates/template-functions.php:1605
+#: ../templates/template-functions.php:1643
 #, php-format
 msgid ""
 "Logged in as <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\" title=\"Log out of "
@@ -5957,12 +6121,12 @@ msgstr ""
 "desta conta\">Sair?</a>"
 
 # @ default
-#: ../templates/template-functions.php:1606
+#: ../templates/template-functions.php:1644
 msgid "Your email address will not be published."
 msgstr "Seu email não será publicado."
 
 # @ default
-#: ../templates/template-functions.php:1607
+#: ../templates/template-functions.php:1645
 #, php-format
 msgid ""
 "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags "
@@ -5972,22 +6136,22 @@ msgstr ""
 "abbr> tags e atributes: %s"
 
 # @ default
-#: ../templates/template-functions.php:1610
+#: ../templates/template-functions.php:1648
 msgid "Leave a Reply"
 msgstr "Responder"
 
 # @ default
-#: ../templates/template-functions.php:1611
+#: ../templates/template-functions.php:1649
 #, php-format
 msgid "Leave a Reply to %s"
 msgstr "Respondar a %s"
 
 # @ default
-#: ../templates/template-functions.php:1612
+#: ../templates/template-functions.php:1650
 msgid "Cancel reply"
 msgstr "Cancelar Resposta"
 
 # @ default
-#: ../templates/template-functions.php:1613
+#: ../templates/template-functions.php:1651
 msgid "Post Comment"
 msgstr "Postar Comentário"

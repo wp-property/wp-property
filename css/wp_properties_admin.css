@@ -1123,8 +1123,8 @@ html .wpp_tabs  ul.tabs li.active, html .wpp_tabs  ul.tabs li.active a:hover {
     #property_meta .inside .widefat textarea,
     .inside table.property_meta.widefat textarea { width: 100%; }
 
-    #property_meta .inside .widefat .description,
-    .inside table.property_meta.widefat .description {
+    #property_meta .inside .widefat .wpp_meta_description,
+    .inside table.property_meta.widefat .wpp_meta_description {
       color: #C1C1C1;
       float: right;
       font-style: normal;
@@ -1171,7 +1171,7 @@ html .wpp_tabs  ul.tabs li.active, html .wpp_tabs  ul.tabs li.active a:hover {
     #property_meta .inside .widefat input.text-input.wpp_numeric,
     .inside table.property_meta.widefat input.text-input.wpp_numeric,
     #property_meta .inside .widefat input.text-input.wpp_currency,
-    .inside table.property_meta.widefat input.text-input.wpp_currency { width: 125px; }
+    .inside table.property_meta.widefat input.text-input.wpp_currency { width: 200px; }
 
 .disabled_message { display: none; }
 
@@ -1194,7 +1194,7 @@ html .wpp_tabs  ul.tabs li.active, html .wpp_tabs  ul.tabs li.active a:hover {
   display:none;
 }
 
-.disabled_row .description,
+.disabled_row .wpp_meta_description,
 .disabled_row .wpp_prefill_values,
 .disabled_row .wpp_prefill_attribute,
 .disabled_row .currency,

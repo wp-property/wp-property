@@ -325,7 +325,7 @@ if(get_option('permalink_structure') == '') {
       <th><?php _e('Options','wpp'); ?></th>
       <td>
         <ul>
-          <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][include_in_regular_search_results]&label=" . sprintf( __('Include %1s in regular search results.', 'wpp'), strtolower( $object_label['plural'] ) ) , $wp_properties['configuration']['include_in_regular_search_results']); ?></li>
+          <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][include_in_regular_search_results]&label=" . sprintf( __('Include %1s in regular search results.', 'wpp'), $object_label['plural'] ) , $wp_properties['configuration']['include_in_regular_search_results']); ?></li>
           <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][do_not_automatically_regenerate_thumbnails]&label=" . __('Disable "on-the-fly" image regeneration.', 'wpp'), $wp_properties['configuration']['do_not_automatically_regenerate_thumbnails']); ?></li>
           <?php /* <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][do_not_automatically_geo_validate_on_property_view]&label=" . __('Disable front-end "on-the-fly" address validation.', 'wpp'), $wp_properties['configuration']['do_not_automatically_geo_validate_on_property_view']); ?></li> */ ?>
           <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][auto_delete_attachments]&label=" . __('Automatically delete all property images and attachments when a property is deleted.', 'wpp'), $wp_properties['configuration']['auto_delete_attachments']); ?></li>

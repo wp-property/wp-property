@@ -247,15 +247,23 @@ class OtherPropertiesWidget extends WP_Widget {
       return;
     }
 
+
+    if(is_object($property)) {
+      $this_property = (array) $property;
+    } else {
+      $this_property = $property;
+    }
+
     if($post->post_parent) {
       $properties = get_posts(array(
+        'numberposts'   => !empty( $amount_items ) ? $amount_items : 0,
         'post_type'     => 'property',
         'post_status'   => 'publish',
         'post_parent'   => $post->post_parent,
         'exclude'         => $post->ID
       ));
     } else {
-      $properties = WPP_F::get_properties("property_type={$property['property_type']}&pagi=0--$amount_items");
+      $properties = WPP_F::get_properties("property_type={$this_property['property_type']}&pagi=0--$amount_items");
     }
 
     if(empty($properties)) {
@@ -912,7 +920,7 @@ function wpp_featured_properties($args = false, $custom = false){
     'address_format'=> '[street_number] [street_name], [city], [state]'
   );
   if($custom) {
-    $default = array_merge($default, $custom);
+    $default = array_merge($default, (array)$custom);
   }
   FeaturedPropertiesWidget::widget($args, $default);
 }
@@ -1588,7 +1596,7 @@ class LatestPropertiesWidget extends WP_Widget {
     );
 
     if($custom) {
-      $default = array_merge($default, $custom);
+      $default = array_merge($default, (array)$custom);
     }
 
     $count = strlen(implode('-', $default['searchable_attributes'])) . strlen(implode('-', $default['searchable_property_types']));
@@ -1618,7 +1626,7 @@ class LatestPropertiesWidget extends WP_Widget {
       $gallery_count = esc_attr($instance['gallery_count']);
       $show_caption = esc_attr($instance['show_caption']);
       $show_description = esc_attr($instance['show_description']);
-      $gallery  = ($post->gallery)?$post->gallery:$property['gallery'];
+      $gallery  = (array)(($post->gallery)?$post->gallery:$property['gallery']);
 
       $slideshow_order = maybe_unserialize(($post->slideshow_images)?$post->slideshow_images:$property['slideshow_images']);
       $gallery_order   = maybe_unserialize(($post->gallery_images)?$post->gallery_images:$property['gallery_images']);
@@ -1626,6 +1634,7 @@ class LatestPropertiesWidget extends WP_Widget {
       //** Calculate order of images */
       if ( is_array( $slideshow_order ) && is_array( $gallery_order ) ) {
         $order = array_merge($slideshow_order, $gallery_order);
+        $prepared_gallery_images = array();
 
         //** Get images from the list of images by order */
         foreach( $order as $order_id ) {
@@ -1637,7 +1646,7 @@ class LatestPropertiesWidget extends WP_Widget {
         }
 
         //** Be sure we show ALL property images in gallery */
-        $gallery = array_merge($prepared_gallery_images, $gallery);
+        $gallery = array_merge( $prepared_gallery_images, $gallery );
       }
 
       if(empty($image_type)) {

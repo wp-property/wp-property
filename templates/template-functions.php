@@ -251,6 +251,14 @@ if(!function_exists('wpi_draw_pagination')):
       if(typeof wpp_pagination_history_ran == 'undefined') {
         var wpp_pagination_history_ran = false;
       }
+      /*
+       * Init variable only at once.
+       * Variable used for preventing of senging request twice if bottom pagination in use;
+       * odokienko@UD
+       */
+      if(typeof wpp_pagination_request_<?php echo $unique_hash; ?> == 'undefined') {
+        var wpp_pagination_request_<?php echo $unique_hash; ?> = false;
+      }
       /* Init variable only at once */
       if(typeof wpp_pagination_<?php echo $unique_hash; ?> == 'undefined') {
         var wpp_pagination_<?php echo $unique_hash; ?> = false;
@@ -418,6 +426,9 @@ if(!function_exists('wpi_draw_pagination')):
           if(typeof scroll_to == 'undefined') {
             scroll_to = true;
           }
+
+          wpp_pagination_request_<?php echo $unique_hash; ?> = true;
+
           data = wpp_query_<?php echo $unique_hash; ?>;
           /* Update page counter */
           jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_current_page_count").text(this_page);
@@ -468,6 +479,7 @@ if(!function_exists('wpi_draw_pagination')):
                 'overlayShow' : false
               });
               jQuery(document).trigger('wpp_pagination_change_complete',{'overview_id' : <?php echo $unique_hash; ?>});
+              wpp_pagination_request_<?php echo $unique_hash; ?> = false;
             },
             "json"
           );
@@ -489,6 +501,10 @@ if(!function_exists('wpi_draw_pagination')):
         //** Do not assign click event again */
         if(!jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_back').data('events') ) {
           jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_back').click(function() {
+            if (wpp_pagination_request_<?php echo $unique_hash; ?>){
+              return false;
+            }
+
             var current_value =  jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider").slider("value");
             if(current_value == 1) { return; }
             var new_value = current_value - 1;
@@ -498,6 +514,11 @@ if(!function_exists('wpi_draw_pagination')):
         }
         if(!jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_forward').data('events') ) {
           jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_forward').click(function() {
+
+            if (wpp_pagination_request_<?php echo $unique_hash; ?>){
+              return false;
+            }
+
             var current_value =  jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider").slider("value");
             if(max_slider_pos && (current_value == max_slider_pos || max_slider_pos < 1 )) { return; }
             var new_value = current_value + 1;
@@ -507,6 +528,11 @@ if(!function_exists('wpi_draw_pagination')):
         }
         if(!jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_link').data('events') ) {
           jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_link').click(function() {
+
+            if (wpp_pagination_request_<?php echo $unique_hash; ?>){
+              return false;
+            }
+
             var attribute = jQuery(this).attr('sort_slug');
             var sort_order = jQuery(this).attr('sort_order');
             var this_attribute = jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_link[sort_slug="+attribute+"]");
@@ -530,6 +556,11 @@ if(!function_exists('wpi_draw_pagination')):
         }
         if(!jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_dropdown').data('events') ) {
           jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_dropdown').change(function() {
+
+            if (wpp_pagination_request_<?php echo $unique_hash; ?>){
+              return false;
+            }
+
             var parent = jQuery(this).parents('.wpp_sorter_options');
             var attribute = jQuery(":selected", this).attr('sort_slug');
             var sort_element = jQuery(".sort_order", parent);
@@ -542,6 +573,9 @@ if(!function_exists('wpi_draw_pagination')):
         }
         if(!jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_overview_sorter').data('events') ) {
           jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_overview_sorter').click(function() {
+            if (wpp_pagination_request_<?php echo $unique_hash; ?>){
+              return false;
+            }
             var parent = jQuery(this).parents('.wpp_sorter_options');
             var sort_element = this;
             var dropdown_element = jQuery(".wpp_sortable_dropdown", parent);
@@ -745,7 +779,7 @@ if(!function_exists('prepare_property_for_display')):
         if( (!empty($args['do_not_execute_shortcodes']) && $args['do_not_execute_shortcodes'] == 'true') || $meta_key == 'post_content') {
           continue;
         }
-        
+
         $attribute_value = do_shortcode(html_entity_decode($attribute_value));
 
         $attribute_value = str_replace("\n", "", nl2br($attribute_value));
@@ -945,8 +979,7 @@ if(!function_exists('draw_stats')):
       $value = html_entity_decode($value);
 
       //** Single "true" is converted to 1 by get_properties() we check 1 as well, as long as it isn't a numeric attribute */
-      if( (  $attribute_data['data_input_type']=='checkbox' && ($value == 'true' || $value == 1) ) ||
-          ( !$attribute_data['numeric'] && empty($attribute_data['data_input_type']) && ( $value === 1  || $value === '1' ) ) )
+      if( (  $attribute_data['data_input_type']=='checkbox' && ($value == 'true' || $value == 1) ) )
       {
         if($show_true_as_image == 'true') {
           $value = '<div class="true-checkbox-image"></div>';
@@ -963,6 +996,11 @@ if(!function_exists('draw_stats')):
       if($make_link == 'true' && WPP_F::isURL($value)) {
         $value = str_replace('&ndash;', '-', $value);
         $value = "<a href='{$value}' title='{$label}'>{$value}</a>";
+      }
+
+      //* Make emails into clickable links */
+      if($make_link == 'true' && WPP_F::is_email($value)) {
+        $value = "<a href='mailto:{$value}'>{$value}</a>";
       }
 
       $stats[$attribute_label]= $value;
@@ -1112,11 +1150,13 @@ if(!function_exists('sort_stats_by_groups')):
 
     $wpp_property_stat_labels = apply_filters('wpp_property_stat_labels', $wp_properties['property_stats']);
 
-    $wpp_property_stat_labels_flip = array_flip($wpp_property_stat_labels);
+    $wpp_property_stat_labels_flip = array_flip((array)$wpp_property_stat_labels);
+
+    $fixed_stats = array();
 
     if($args['includes_values'] == true) {
       //** Fix data when an array is passed with actual values, such as from draw_stats() */
-      foreach($stats as $meta_label => $real_value) {
+      foreach( (array) $stats as $meta_label => $real_value) {
         $meta_key = $wpp_property_stat_labels_flip[$meta_label];
         //echo "$meta_key - $attribute_label <br />";
         $fixed_stats[$meta_label] = $meta_key;
@@ -1125,15 +1165,15 @@ if(!function_exists('sort_stats_by_groups')):
 
     //** Convert regular stat array to array with values as keys */
     if($args['fix_stats_array'] = true) {
-      foreach($stats as $meta_key) {
+      foreach( (array) $stats as $meta_key) {
         $attribute_label = $wpp_property_stat_labels[$meta_key];
         $fixed_stats[$attribute_label] = $meta_key;
       }
       $stats = $fixed_stats;
     }
 
-    $labels_to_keys = array_flip($wp_properties['property_stats']);
-    $group_keys = array_keys($wp_properties['property_groups']);
+    $labels_to_keys = array_flip((array)$wp_properties['property_stats']);
+    $group_keys = array_keys((array)$wp_properties['property_groups']);
 
     //** Get group from settings, or set to first group as default */
     $main_stats_group = (!empty($wp_properties['configuration']['main_stats_group']) ? $wp_properties['configuration']['main_stats_group'] : $group_keys[0]);
@@ -1142,7 +1182,7 @@ if(!function_exists('sort_stats_by_groups')):
 
     $ungrouped_stats = array();
 
-    foreach($stats as $label => $value) {
+    foreach((array)$stats as $label => $value) {
 
       $slug = $labels_to_keys[$label];
 
@@ -1229,6 +1269,12 @@ if(!function_exists('draw_property_search_form')):
     if(!is_array($search_attributes)) {
       return;
     }
+
+    $property_stats = $wp_properties['property_stats'];
+    if(!isset($property_stats['property_type'])) {
+      $property_stats['property_type'] = __('Property Type', 'wpp');
+    }
+
     //** Load search values for attributes (from cache, or generate) */
     if (!empty($search_attributes) && !empty($searchable_property_types)) {
       $search_values = WPP_F::get_search_values($search_attributes, $searchable_property_types, $cache, $instance_id);
@@ -1315,10 +1361,8 @@ if(!function_exists('draw_property_search_form')):
         if(!isset($search_values[$attrib])) {
           continue;
         }
-        $label = (empty($wp_properties['property_stats'][$attrib]) ? WPP_F::de_slug($attrib) : $wp_properties['property_stats'][$attrib]);
-        if(empty($label) && $attrib == 'property_type') {
-          $label = __('Type:', 'wpp');
-        }
+        $label = (empty($property_stats[$attrib]) ? WPP_F::de_slug($attrib) : $property_stats[$attrib]);
+
         ?>
         <li class="wpp_search_form_element seach_attribute_<?php echo $attrib; ?>  wpp_search_attribute_type_<?php echo $wp_properties['searchable_attr_fields'][$attrib]; ?> <?php echo ((!empty($wp_properties['searchable_attr_fields'][$attrib]) && $wp_properties['searchable_attr_fields'][$attrib] == 'checkbox') ? 'wpp-checkbox-el' : ''); ?><?php echo ((!empty($wp_properties['searchable_attr_fields'][$attrib]) && ($wp_properties['searchable_attr_fields'][$attrib]=='multi_checkbox' && count($search_values[$attrib])==1 ) || $wp_properties['searchable_attr_fields'][$attrib]=='checkbox') ?' single_checkbox':'')?>">
           <?php ob_start(); ?>
@@ -1405,11 +1449,10 @@ if(!function_exists('wpp_render_search_input')):
           break;
         case 'dropdown':
           ?>
-          <?php //var_dump($value);$req_attr = WPP_F::encode_mysql_input($value); var_dump($req_attr); ?>
           <select id="<?php echo $random_element_id; ?>" class="wpp_search_select_field wpp_search_select_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>" name="wpp_search[<?php echo $attrib; ?>]" >
           <option value="-1"><?php _e( 'Any' ,'wpp' ) ?></option>
           <?php foreach( $search_values[$attrib] as $v ) : ?>
-            <option value="<?php echo esc_attr($v); ?>" <?php selected($req_attr,$v); ?>><?php echo esc_attr( apply_filters("wpp_stat_filter_{$attrib}", $v) ); ?></option>
+            <option value="<?php echo esc_attr($v); ?>" <?php selected($value, $v ); ?>><?php echo esc_attr( apply_filters("wpp_stat_filter_{$attrib}", $v) ); ?></option>
           <?php endforeach; ?>
           </select>
           <?php

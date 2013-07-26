@@ -21,7 +21,7 @@
 
   /**
    *
-   * System-wide Filters and Settings 
+   * System-wide Filters and Settings
    *
    */
 
@@ -135,13 +135,13 @@
     'bedrooms' => array(
       __('Studio','wpp') => '0.5'
   ));
-  
+
   /**
    *
    * Display and UI related filters
    *
    */
-  
+
   //* Don't load defaults if settings exist in db */
   if(!is_array($wp_properties_db['image_sizes']))
     $wp_properties['image_sizes'] = array(
@@ -150,10 +150,10 @@
       'sidebar_wide' => array('width'=> '195', 'height' => '130'),
       'slideshow' => array('width'=> '640', 'height' => '235')
     );
-  
+
   $wp_properties['default_coords']['latitude'] = '57.7973333';
   $wp_properties['default_coords']['longitude'] = '12.0502107';
-  
+
   //* Geo type attributes are predefined and should not be editable on property adding/updating */
   $wp_properties['geo_type_attributes'] = array(
     'formatted_address',
@@ -168,7 +168,7 @@
     'country_code',
     'postal_code'
   );
-  
+
   // Image URLs.
   $wp_properties['images']['map_icon_shadow'] = WPP_URL . "images/map_icon_shadow.png";
 
@@ -183,69 +183,6 @@
     'show_property_title' => true
     );
 
-  $wp_properties['taxonomies'] = array(
-    'property_feature'  =>  array(
-       'hierarchical' => false,
-       'label' => _x( 'Features', 'taxonomy general name' , 'wpp'),
-       'labels' =>  array(
-        'name' => _x( 'Features', 'taxonomy general name' , 'wpp'),
-        'singular_name' => _x( 'Feature', 'taxonomy singular name', 'wpp'),
-        'search_items' =>  __( 'Search Features', 'wpp'),
-        'all_items' => __( 'All Features', 'wpp'),
-        'parent_item' => __( 'Parent Feature' , 'wpp'),
-        'parent_item_colon' => __( 'Parent Feature:' , 'wpp'),
-        'edit_item' => __( 'Edit Feature' , 'wpp'), 
-        'update_item' => __( 'Update Feature' , 'wpp'),
-        'add_new_item' => __( 'Add New Feature' , 'wpp'),
-        'new_item_name' => __( 'New Feature Name' , 'wpp'),
-        'menu_name' => __( 'Features' , 'wpp'),
-        'name' => _x( 'Features', 'taxonomy general name' , 'wpp'),
-        'singular_name' => _x( 'Feature', 'taxonomy singular name' , 'wpp'),
-        'search_items' =>  __( 'Search Features' , 'wpp'),
-        'all_items' => __( 'All Features' , 'wpp'),
-        'parent_item' => __( 'Parent Feature' , 'wpp'),
-        'parent_item_colon' => __( 'Parent Feature:' , 'wpp'),
-        'edit_item' => __( 'Edit Feature' , 'wpp'), 
-        'update_item' => __( 'Update Feature' , 'wpp'),
-        'add_new_item' => __( 'Add New Feature' , 'wpp'),
-        'new_item_name' => __( 'New Feature Name' , 'wpp'),
-        'menu_name' => __( 'Feature', 'wpp' )
-      ),
-         'query_var' => 'property_feature',
-         'rewrite' => array('slug' => 'feature' )
-    ),
-    'community_feature'  =>  array(
-       'hierarchical' => false,
-       'label' => _x( 'Community Features', 'taxonomy general name' , 'wpp'),
-       'labels' =>  array(
-        'name' => _x( 'Community Features', 'taxonomy general name' , 'wpp'),
-        'singular_name' => _x( 'Community Feature', 'taxonomy singular name' , 'wpp'),
-        'search_items' =>  __( 'Search Community Features' , 'wpp'),
-        'all_items' => __( 'All Community Features' , 'wpp'),
-        'parent_item' => __( 'Parent Community Feature' , 'wpp'),
-        'parent_item_colon' => __( 'Parent Community Feature:' , 'wpp'),
-        'edit_item' => __( 'Edit Community Feature' , 'wpp'), 
-        'update_item' => __( 'Update Community Feature' , 'wpp'),
-        'add_new_item' => __( 'Add New Community Feature' , 'wpp'),
-        'new_item_name' => __( 'New Community Feature Name' , 'wpp'),
-        'menu_name' => __( 'Community Features' , 'wpp'),
-        'name' => _x( 'Community Features', 'taxonomy general name' , 'wpp'),
-        'singular_name' => _x( 'Community Feature', 'taxonomy singular name' , 'wpp'),
-        'search_items' =>  __( 'Search Community Features' , 'wpp'),
-        'all_items' => __( 'All Community Features' , 'wpp'),
-        'parent_item' => __( 'Parent Community Feature' , 'wpp'),
-        'parent_item_colon' => __( 'Parent Community Feature:' , 'wpp'),
-        'edit_item' => __( 'Edit Community Feature' , 'wpp'), 
-        'update_item' => __( 'Update Community Feature' , 'wpp'),
-        'add_new_item' => __( 'Add New Community Feature' , 'wpp'),
-        'new_item_name' => __( 'New Community Feature Name' , 'wpp'),
-        'menu_name' => __( 'Community Feature', 'wpp' )
-      ),       
-       'query_var' => 'community_feature',
-       'rewrite' => array('slug' => 'community_feature' )
-      )
-  );
-  
   // Default attribute label descriptions for the back-end
   $wp_properties['descriptions'] = array(
     'descriptions' => array(
@@ -253,7 +190,7 @@
       'custom_attribute_overview' => __('Customize what appears in search results in the attribute section.  For example: 1bed, 2baths, area varies slightly.','wpp'),
       'tagline' => __('Will appear on overview pages and on top of every listing page.','wpp'))
   );
-  
+
   //* Javascript files Localization */
   $wp_properties['l10n'] = array(
     'uploading' => __( 'Uploading', 'wpp' ),
@@ -262,6 +199,6 @@
     'cancel'    => __( 'Cancel', 'wpp' ),
     'fail'      => __( 'Failed', 'wpp' )
   );
-  
+
   // Overwrite $wp_properties with database setting
   $wp_properties = UD_API::array_merge_recursive_distinct($wp_properties, $wp_properties_db);
