@@ -2,16 +2,16 @@
 require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
 
 /*
- * 
+ *
  * The current class is just wrapper.
  * To use dataTables Overview,
  * You should create child class
- * 
+ *
  */
 class WPP_List_Table extends WP_List_Table  {
- 
+
   public $table_scope;
-    
+
   /**
    * Setup options mostly.
    *
@@ -19,7 +19,7 @@ class WPP_List_Table extends WP_List_Table  {
    *
    */
   function __construct($args = '') {
-    
+
     $args = wp_parse_args( $args, array(
       'plural' => '',
       'iColumns' => 3,
@@ -31,23 +31,23 @@ class WPP_List_Table extends WP_List_Table  {
       'singular' => '',
       'ajax' => false
     ) );
-    
+
     $this->_args = $args;
-    
+
     if(empty($this->_args['current_screen'])) {
       if($this->_args['ajax'] != true) {
         $screen = get_current_screen();
         $this->_args['current_screen'] = $screen->id;
       }
     }
-    
+
     //* Returns columns, hidden, sortable */
     list( $columns, $hidden ) = $this->get_column_info();
-    
+
     //** Build aoColumns for ajax return */
     $column_count = 0;
     foreach($columns as $column_slug => $column_title) {
-      
+
       if(in_array( $column_slug, $hidden )) {
         $column_visible = 'false';
       } else {
@@ -58,7 +58,7 @@ class WPP_List_Table extends WP_List_Table  {
       $this->column_ids[$column_count] = $column_slug;
       $column_count++;
     }
-    
+
     $this->_args['iColumns'] = count($this->aoColumns);
     $this->table_scope = $this->_args['table_scope'];
   }
@@ -77,8 +77,8 @@ class WPP_List_Table extends WP_List_Table  {
     /*if ( empty( $_REQUEST['s'] ) && !$this->has_items() ) {
       return;
     }*/
-    
-    $input_id = $input_id . '-search-input'; 
+
+    $input_id = $input_id . '-search-input';
     ?>
     <p class="search-box">
       <label class="screen-reader-text" for="<?php echo $input_id ?>"><?php echo $text; ?>:</label>
@@ -87,7 +87,7 @@ class WPP_List_Table extends WP_List_Table  {
     </p>
     <?php
   }
-  
+
   /**
    * Whether the table has items to display or not
    *
@@ -95,7 +95,7 @@ class WPP_List_Table extends WP_List_Table  {
   function has_items() {
     return !empty( $this->all_items );
   }
-  
+
   /**
    * Initialize the DataTable View
    *
@@ -108,7 +108,7 @@ class WPP_List_Table extends WP_List_Table  {
       <?php foreach($this->column_ids as $col_id => $col_slug) : ?>
       wp_table_column_ids['<?php echo $col_slug; ?>'] = '<?php echo $col_id; ?>';
       <?php endforeach; ?>
-      
+
       jQuery(document).ready(function() {
         /* Initialize the dataTable */
         //return;
@@ -142,25 +142,25 @@ class WPP_List_Table extends WP_List_Table  {
           "aoColumns": [<?php echo implode(",", $this->aoColumns); ?>],
           "fnDrawCallback": function() { wp_list_table_do_columns();}
         });
-        
+
         /* Search by Filter */
         jQuery("#<?php echo $this->table_scope; ?>-filter #search-submit").click(function(event) {
           event.preventDefault();
           wp_list_table.fnDraw();
           return false;
         });
-        
+
         jQuery('.metabox-prefs').change(function() {
           wp_list_table_do_columns();
         });
       });
-      
+
       //** Check which columns are hidden, and hide data table columns */
       function wp_list_table_do_columns() {
         // Hide any "hidden" columns from table
         var visible_columns = jQuery('.hide-column-tog').filter(':checked').map(function() { return jQuery(this).val(); });
         var hidden_columns = jQuery('.hide-column-tog').filter(':not(:checked)').map(function() { return jQuery(this).val(); });
-        
+
         jQuery.each(hidden_columns, function(key, row_class) {
           jQuery('#wp-list-table .' + row_class).hide();
         });
@@ -169,9 +169,9 @@ class WPP_List_Table extends WP_List_Table  {
         });
       }
     </script>
-    <?php 
+    <?php
   }
-  
+
   /**
    * Get a list of all, hidden and sortable columns, with filter applied
    *
@@ -181,37 +181,37 @@ class WPP_List_Table extends WP_List_Table  {
    * @return array
    */
   function get_column_info() {
-    
+
     if ( isset( $this->_column_headers ) ) {
       return $this->_column_headers;
     }
-    
+
     $screen = convert_to_screen( $this->_args['current_screen'] );
-    
+
     //print_r( $this->_args );
-    
+
     $columns = get_column_headers( $screen );
-    
+
     $hidden = get_hidden_columns( $screen );
-    
+
     $_sortable = apply_filters( "manage_{$screen->id}_sortable_columns", $this->get_sortable_columns() );
     
     $sortable = array();
     foreach ( $_sortable as $id => $data ) {
       if ( empty( $data ) )
         continue;
-      
+
       $data = (array) $data;
       if ( !isset( $data[1] ) )
         $data[1] = false;
-      
+
       $sortable[$id] = $data;
     }
-    
+
     $this->_column_headers = array( $columns, $hidden, $sortable );
     return $this->_column_headers;
   }
-  
+
   /**
    * Get search results based on query.
    *
@@ -219,32 +219,32 @@ class WPP_List_Table extends WP_List_Table  {
    *
    */
   function prepare_items($wpp_search = false, $ajax = true) {
-    
+
     $wpp_search = apply_filters('prepare_wpp_properties_search', $wpp_search);
-    
+
     if ( !$ajax ) $this->all_items = array();
-    
+
     if(!isset($this->all_items)) {
       $this->all_items = WPP_F::get_properties( $wpp_search );
     }
-    
+
     //** Do pagination  */
     if(!empty($this->all_items) && $this->_args['per_page'] != -1) {
       $this->item_pages = array_chunk($this->all_items, $this->_args['per_page']);
-      
+
       $total_chunks = count($this->item_pages);
-      
+
       //** figure out what page chunk we are on based on iDisplayStart
       $this_chunk = ($this->_args['iDisplayStart'] / $this->_args['per_page']);
-      
+
       //** Get page items */
       $this->items = $this->item_pages[$this_chunk];
-      
+
     } else {
       $this->items = $this->all_items;
     }
   }
-  
+
   /**
    * Generate the table navigation above or below the table
    *
@@ -260,7 +260,7 @@ class WPP_List_Table extends WP_List_Table  {
     $this->bulk_actions( $which );
     $bulk_actions = ob_get_contents();
     ob_end_clean();
-    
+
     /* Always show tablenav wrapper. */
       ?>
       <div class="tablenav <?php echo esc_attr( $which ); ?>">
@@ -272,9 +272,9 @@ class WPP_List_Table extends WP_List_Table  {
         <br class="clear" />
       </div>
       <?php
-    
+
   }
-  
+
   /**
    * Display a monthly dropdown for filtering items
    *
@@ -283,24 +283,24 @@ class WPP_List_Table extends WP_List_Table  {
    */
   function months_dropdown( $post_type, $field_name = 'm', $return = false) {
     global $wpdb, $wp_locale;
-    
+
     $months = $wpdb->get_results( $wpdb->prepare( "
       SELECT DISTINCT YEAR( post_date ) AS year, MONTH( post_date ) AS month
       FROM $wpdb->posts
       WHERE post_type = %s
       ORDER BY post_date DESC
     ", $post_type ) );
-    
+
     $month_count = count( $months );
-    
+
     if ( !$month_count || ( 1 == $month_count && 0 == $months[0]->month ) ) {
       return false;
     }
-    
+
     $m = isset( $_GET['m'] ) ? (int) $_GET['m'] : 0;
-    
+
     ob_start();
-    
+
     ?>
     <select name="<?php echo $field_name; ?>">
       <option<?php selected( $m, 0 ); ?> value='0'><?php _e( 'Show all dates' ); ?></option>
@@ -309,10 +309,10 @@ class WPP_List_Table extends WP_List_Table  {
       if ( 0 == $arc_row->year ) {
         continue;
       }
-      
+
       $month = zeroise( $arc_row->month, 2 );
       $year = $arc_row->year;
-      
+
       printf( "<option %s value='%s'>%s</option>\n",
         selected( $m, $year . $month, false ),
         esc_attr( $arc_row->year . $month ),
@@ -322,24 +322,24 @@ class WPP_List_Table extends WP_List_Table  {
     ?>
     </select>
     <?php
-    
+
     $content = ob_get_contents();
     ob_end_clean();
-    
+
     if($return) {
       return $content;
     } else {
       echo $content;
     }
-    
+
   }
-  
+
   function display_rows() {
     foreach ( $this->items as $userid => $object ) {
        echo "\n\t", $this->single_row( $object);
     }
   }
-  
+
   /**
    * Display the table
    *
@@ -357,13 +357,13 @@ class WPP_List_Table extends WP_List_Table  {
         <?php $this->print_column_headers(); ?>
         </tr>
       </thead>
-      
+
       <tfoot>
         <tr>
         <?php $this->print_column_headers( false ); ?>
         </tr>
       </tfoot>
-      
+
       <tbody id="the-list">
         <?php $this->display_rows_or_placeholder(); ?>
       </tbody>
@@ -376,7 +376,7 @@ class WPP_List_Table extends WP_List_Table  {
     //** DataTables expects a set number of columns */
     $result[0] =  '';
     $result[1] =  __( 'Nothing found.' );
-    
+
     if(count($result) < $this->_args['iColumns']) {
       $add_columns = ($this->_args['iColumns'] - count($result));
       //** Add some blank rows to not break json result array */
@@ -388,18 +388,18 @@ class WPP_List_Table extends WP_List_Table  {
     }
     return $result;
   }
-  
+
   /**
    * Keep it simple here.  Mostly to be either replaced by child classes, or hook into
    *
    */
   function single_cell($full_column_name,$object, $object_id) {
     global $wpi;
-    
+
     $object = (array) $object;
-    
+
     $column_name = str_replace('wpp_', '', $full_column_name);
-    
+
     $cell_data = array(
       'table_scope' => $this->_args['table_scope'],
       'column_name' => $column_name,
@@ -407,14 +407,14 @@ class WPP_List_Table extends WP_List_Table  {
       'object' => $object,
       'wpp_list_table' => $this
     );
-    
-    $value = (isset($object[$column_name])) ? $object[$column_name] : ""; 
-    
+
+    $value = (isset($object[$column_name])) ? $object[$column_name] : "";
+
     $r = apply_filters( $this->_args['table_scope'] .  '_table_cell', $value, $cell_data);
-    
+
     return $r;
   }
-  
+
   /**
 	 * Print column headers, accounting for hidden and sortable columns.
 	 *
@@ -469,19 +469,19 @@ class WPP_List_Table extends WP_List_Table  {
 				}
 
 				$column_display_name = '<a href="' . esc_url( add_query_arg( compact( 'orderby', 'order' ), $current_url ) ) . '"><span>' . $column_display_name . '</span><span class="sorting-indicator"></span></a>';
-        
+
       }
 
 			$id = $with_id ? "id='$column_key'" : '';
 
 			if ( !empty( $class ) )
 				$class = "class='" . join( ' ', $class ) . "'";
-      
+
       if ( 'cb' == $column_key )
         $column_display_name = '<input type="checkbox" class="check-all" />';
 
 			echo "<th scope='col' $id $class $style>$column_display_name</th>";
 		}
 	}
-  
+
 }

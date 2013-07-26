@@ -56,6 +56,8 @@ class WPP_Object_List_Table extends WPP_List_Table {
       $actions['delete'] = __( 'Delete' );
     }
 
+    $actions = apply_filters( 'wpp::all_properties::bulk_actions', $actions );
+
     return $actions;
   }
 
@@ -79,7 +81,7 @@ class WPP_Object_List_Table extends WPP_List_Table {
 
     $can_delete_post = current_user_can( $post_type_object->cap->delete_post, $post->ID );
     $can_delete_post = apply_filters('wpp_list_table_can_delete_post', $can_delete_post);
-    
+
     $result = "<tr id='object-{$ID}' class='wpp_parent_element'>";
 
     list( $columns, $hidden ) = $this->get_column_info();
@@ -254,7 +256,7 @@ class WPP_Object_List_Table extends WPP_List_Table {
             if($post->featured)
               $r .= "<input type='button' id='wpp_feature_{$post->ID}' class='wpp_featured_toggle wpp_is_featured' nonce='".wp_create_nonce('wpp_make_featured_' . $post->ID)."' value='".__('Featured','wpp')."' />";
             else
-              $r .= "<input type='button' id='wpp_feature_{$post->ID}' class='wpp_featured_toggle' ' nonce='".wp_create_nonce('wpp_make_featured_' . $post->ID)."'  value='".__('Add to Featured','wpp')."' />";
+              $r .= "<input type='button' id='wpp_feature_{$post->ID}' class='wpp_featured_toggle' nonce='".wp_create_nonce('wpp_make_featured_' . $post->ID)."'  value='".__('Add to Featured','wpp')."' />";
           } else {
             if($post->featured)
               $r .=  __('Featured','wpp');
@@ -295,8 +297,6 @@ class WPP_Object_List_Table extends WPP_List_Table {
     }
 
     $result .= '</tr>';
-
-    //var_dump( $this->_args['ajax'] );
 
     if($this->_args['ajax']) {
       return $ajax_cells;

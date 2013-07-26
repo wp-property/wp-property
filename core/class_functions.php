@@ -280,6 +280,7 @@ class WPP_F extends UD_API {
     ));
 
     if($wp_properties['taxonomies']) {
+
       foreach($wp_properties['taxonomies'] as $taxonomy => $taxonomy_data) {
 
         //** Check if taxonomy is disabled */
@@ -293,7 +294,12 @@ class WPP_F extends UD_API {
           'labels' => $taxonomy_data['labels'],
           'query_var' => $taxonomy,
           'rewrite' => array('slug' => $taxonomy ),
-          'capabilities' => array('manage_terms' => 'manage_wpp_categories')
+          'capabilities' => array(
+            'manage_terms' => 'manage_wpp_categories',
+            'edit_terms' => 'manage_wpp_categories',
+            'delete_terms' => 'manage_wpp_categories',
+            'assign_terms' => 'manage_wpp_categories'
+          )
         ));
       }
     }
@@ -1598,7 +1604,7 @@ class WPP_F extends UD_API {
     set_time_limit( 600 );
     ob_start();
 
-    $defaults = array(
+    extract( wp_parse_args( $args, array(
       'property_ids' => false,
       'echo_result' => 'true',
       'skip_existing' => 'false',
@@ -1606,9 +1612,7 @@ class WPP_F extends UD_API {
       'attempt' => 1,
       'max_attempts' => 10,
       'delay' => 0            //Delay validation in seconds
-    );
-
-    extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
+    )), EXTR_SKIP);
 
     if( is_array( $property_ids )) {
       $all_properties = $property_ids;
@@ -1704,40 +1708,37 @@ class WPP_F extends UD_API {
   static function revalidate_address($post_id, $args=array()){
     global $wp_properties;
 
-    $defaults = array(
+    $args = wp_parse_args( $args, array(
       'skip_existing' => 'false',
       'return_geo_data' => false,
       'post_data'=>false,
-      'old_geo_data'=>false
-    );
-
-    $args = wp_parse_args( $args, $defaults );
+    ) );
 
     extract( $args, EXTR_SKIP );
 
     $return = array();
+
     $geo_data = false;
     $geo_data_coordinates = false;
-    $current_coordinates = get_post_meta($post_id,'latitude', true) . get_post_meta($post_id,'longitude', true);
+    $latitude = get_post_meta( $post_id,'latitude', true );
+    $longitude = get_post_meta( $post_id,'longitude', true );
+    $current_coordinates = $latitude . $longitude;
     $address_is_formatted = get_post_meta($post_id, 'address_is_formatted', true);
 
     $address = get_post_meta($post_id, $wp_properties['configuration']['address_attribute'], true);
 
-    $coordinates = ($latitude == '0' || $longitude == '0') ? "" : array('lat'=>get_post_meta($post_id,'latitude', true),'lng'=>get_post_meta($post_id,'longitude', true));
-
-    /* will be true if address is empty and used manual_coordinates and coordinates is not empty */
-    $manual_coordinates = get_post_meta($post_id, 'manual_coordinates', true);
-    $manual_coordinates = ($manual_coordinates != 'true' && $manual_coordinates != '1') ? false : true;
+    $coordinates = ( empty( $latitude ) || empty( $longitude )) ? "" : array('lat'=>get_post_meta($post_id,'latitude', true),'lng'=>get_post_meta($post_id,'longitude', true));
 
     if($skip_existing == 'true' && !empty($current_coordinates) && $address_is_formatted=='true') {
-      return $return['status'] = 'skipped';
+      $return['status'] = 'skipped';
     }
 
-    if( empty($coordinates) && empty($address) ){
+    if( !(empty($coordinates) && empty($address)) ){
 
+      /* will be true if address is empty and used manual_coordinates and coordinates is not empty */
+      $manual_coordinates = get_post_meta($post_id, 'manual_coordinates', true);
+      $manual_coordinates = ($manual_coordinates != 'true' && $manual_coordinates != '1') ? false : true;
 
-
-    }else{
 
       $address_by_coordinates = !empty($coordinates) && $manual_coordinates && empty($address) ;
 
@@ -1756,7 +1757,7 @@ class WPP_F extends UD_API {
         $address = '';
       }
 
-      if (empty($geo_data) && !empty($old_geo_data['old_coordinates'])){
+      if (empty($geo_data)){
         $return['status'] = 'empty_address';
       }
 
@@ -1794,6 +1795,8 @@ class WPP_F extends UD_API {
 
     }
 
+    //** Logs the last validation status for better troubleshooting */
+    update_post_meta( $post_id, 'wpp::google_validation_status', $geo_data->status );
 
     // Try to figure out what went wrong
     if( !empty($geo_data->status) && ( $geo_data->status == 'OVER_QUERY_LIMIT' || $geo_data->status == 'REQUEST_DENIED' ) ){
@@ -1847,6 +1850,51 @@ class WPP_F extends UD_API {
     if(class_exists('JSMin')) {
       try {
         $data = JSMin::minify($data);
+      }catch (Exception $e) {
+        return $data;
+      }
+    }
+
+    return $data;
+
+  }
+
+
+  /**
+   * Minify CSS
+   *
+   * Syntax:
+   * string CssMin::minify(string $source [, array $filters = array()][, array $plugins = array()]);
+   *
+   * string $source
+   * The source css as string.
+   * array $filters
+   * The filter configuration as array (optional). See Filter Configuration
+   * array $plugins
+   * The plugin configuration as array (optional). See: Plugin Configuration
+   * Example
+   * //Simple minification WITHOUT filter or plugin configuration
+   * $result = CssMin::minify(file_get_contents("path/to/source.css"));
+   * //Minification WITH filter or plugin configuration
+   * $filters = array();
+   * $plugins = array();
+   * // Minify via CssMin adapter function
+   * $result = CssMin::minify(file_get_contents("path/to/source.css"), $filters, $plugins);
+   * // Minify via CssMinifier class
+   * $minifier = new CssMinifier(file_get_contents("path/to/source.css"), $filters, $plugins);
+   * $result = $minifier->getMinified();
+   *
+   * @since 1.37.3.2
+   * @author odokienko@UD
+   */
+   static function minify_css($data) {
+
+    include_once WPP_Path. 'third-party/cssmin.php';
+
+    if(class_exists('CssMin')) {
+      try {
+        $minified_data = CssMin::minify($data);
+        return $minified_data;
       }catch (Exception $e) {
         return $data;
       }
@@ -3457,6 +3505,9 @@ class WPP_F extends UD_API {
     // Remove duplicates
     $matching_ids = array_unique( $matching_ids );
 
+    $matching_ids = apply_filters( 'wpp::get_properties::matching_ids', $matching_ids, array_merge($args, array('additional_sql'=>$additional_sql, 'total'=>$total)) );
+
+
     // Sorts the returned Properties by the selected sort order
     if( $sql_sort_by &&
         $sql_sort_by != 'menu_order' &&
@@ -3521,7 +3572,7 @@ class WPP_F extends UD_API {
         $return = $result;
       }
 
-      return $return;
+      return apply_filters( 'wpp::get_properties::result', $return, $args );
     }
 
     return false;
@@ -4838,8 +4889,6 @@ class WPP_F extends UD_API {
 
       switch ( $_REQUEST['action'] ) {
 
-        default: break;
-
         case 'trash':
           foreach( $_REQUEST['post'] as $post_id ) {
             $post_id = (int)$post_id;
@@ -4863,6 +4912,11 @@ class WPP_F extends UD_API {
               wp_trash_post($post_id);
             }
           }
+          break;
+
+        default:
+          //** Any custom action can be processed using action hook */
+          do_action( 'wpp::all_properties::process_bulk_action', $_REQUEST['action'] );
           break;
 
       }

@@ -103,24 +103,10 @@
 
         <?php if ( empty($wp_properties['property_groups']) || $wp_properties['configuration']['property_overview']['sort_stats_by_groups'] != 'true' ) : ?>
           <ul id="property_stats" class="<?php wpp_css('property::property_stats', "property_stats overview_stats list"); ?>">
-            <?php if(!empty($post->display_address)): ?>
-            <li class="wpp_stat_plain_list_location alt">
-              <span class="attribute"><?php echo $wp_properties['property_stats'][$wp_properties['configuration']['address_attribute']]; ?><span class="wpp_colon">:</span></span>
-              <span class="value"><?php echo $post->display_address; ?>&nbsp;</span>
-            </li>
-            <?php endif; ?>
-            <?php @draw_stats("display=list&make_link=true&exclude={$wp_properties['configuration']['address_attribute']}"); ?>
+            <?php @draw_stats("display=list&make_link=true"); ?>
           </ul>
         <?php else: ?>
-          <?php if(!empty($post->display_address)): ?>
-          <ul id="property_stats" class="<?php wpp_css('property::property_stats', "property_stats overview_stats list"); ?>">
-            <li class="wpp_stat_plain_list_location alt">
-              <span class="attribute"><?php echo $wp_properties['property_stats'][$wp_properties['configuration']['address_attribute']]; ?><span class="wpp_colon">:</span></span>
-              <span class="value"><?php echo $post->display_address; ?>&nbsp;</span>
-            </li>
-          </ul>
-          <?php endif; ?>
-          <?php @draw_stats("display=list&make_link=true&exclude={$wp_properties['configuration']['address_attribute']}"); ?>
+          <?php @draw_stats("display=list&make_link=true"); ?>
         <?php endif; ?>
 
         <?php if(!empty($wp_properties['taxonomies'])) foreach($wp_properties['taxonomies'] as $tax_slug => $tax_data): ?>

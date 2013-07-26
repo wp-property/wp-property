@@ -401,13 +401,13 @@ function toggle_advanced_options() {
 
 
       if(jQuery(this).is(":checked")) {
-        if(toggle_logic = 'reverse') {
+        if(toggle_logic == 'reverse') {
           jQuery(element_path).hide();
         } else {
           jQuery(element_path).show();
         }
       } else {
-        if(toggle_logic = 'reverse') {
+        if(toggle_logic == 'reverse') {
           jQuery(element_path).show();
         } else {
           jQuery(element_path).hide();

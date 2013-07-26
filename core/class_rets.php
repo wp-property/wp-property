@@ -525,7 +525,7 @@ class phRETS {
       $search_arguments['Offset'] = 1;
     }
     else { }
-    
+
     if (!empty($optional_params['Select'])) {
       $search_arguments['Select'] = $optional_params['Select'];
     }
@@ -549,7 +549,7 @@ class phRETS {
         $this->set_error_info("phrets", -1, "Last SearchQuery() has resulted in 300+ requests to the server.  Stopping to prevent abuse");
         return false;
       }
-      
+
       // make request
       $result = $this->RETSRequest($this->capability_url['Search'], $search_arguments);
       if (!$result) {
@@ -623,13 +623,13 @@ class phRETS {
 
   public function Search($resource, $class, $query = "", $optional_params = array()) {
     $data_table = array();
-    
+
     $int_result_pointer = $this->SearchQuery($resource, $class, $query, $optional_params);
-    
+
     while ($row = $this->FetchRow($int_result_pointer)) {
       $data_table[] = $row;
     }
-    
+
     return $data_table;
   }
 
@@ -1210,7 +1210,7 @@ class phRETS {
     }
 
     if (empty($this->cookie_file)) {
-      $this->cookie_file = tempnam("", "phrets");
+      $this->cookie_file = tempnam( sys_get_temp_dir(), "phrets");
     }
 
     @touch($this->cookie_file);

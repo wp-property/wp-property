@@ -464,7 +464,8 @@ if(!function_exists('wpi_draw_pagination')):
               }
               p_wrapper.html(content);
               /* Total properties count may change depending on sorting (if sorted by an attribute that all properties do not have) */
-              jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_property_results").text(result_data.wpp_query.properties?result_data.wpp_query.properties.total:0);
+              /* It seems issue mentioned above are fexed so nex line unneeded, commented odokienko@UD */
+              // jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_property_results").text(result_data.wpp_query.properties?result_data.wpp_query.properties.total:0);
               <?php if($use_pagination) { ?>
               /* Update max page in slider and in display */
               jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider").slider("option", "max",  result_data.wpp_query.pages);
@@ -610,9 +611,12 @@ if(!function_exists('wpi_draw_pagination')):
     <div class="properties_pagination <?php echo $settings['class']; ?> wpp_slider_pagination" id="properties_pagination_<?php echo $unique_hash; ?>">
       <div class="wpp_pagination_slider_status">
         <span class="wpp_property_results_options">
-          <?php if($hide_count != 'true') { ?>
-            <span class="wpp_property_results"><?php echo ($properties['total'] > 0 ? WPP_F::format_numeric($properties['total']) : __('None', 'wpp')); ?></span>
-            <?php _e(' found.', 'wpp'); ?>
+          <?php if($hide_count != 'true') {
+            $wpp_property_results = '<span class="wpp_property_results">';
+            $wpp_property_results .=  ($properties['total'] > 0 ? WPP_F::format_numeric($properties['total']) : __('None', 'wpp'));
+            $wpp_property_results .= __(' found.', 'wpp');
+            echo apply_filters( 'wpp::wpi_draw_pagination::wpp_property_results', $wpp_property_results, array('properties'=>$properties, 'settings'=>$settings) );
+          ?>
           <?php } ?>
           <?php if($use_pagination) { ?>
           <?php _e('Viewing page', 'wpp'); ?> <span class="wpp_current_page_count">1</span> <?php _e('of', 'wpp'); ?> <span class="wpp_total_page_count"><?php echo $pages; ?></span>.
@@ -754,6 +758,11 @@ if(!function_exists('prepare_property_for_display')):
           continue;
         }
 
+        //** Determine if the current attribute is address and set it as display address */
+        if( $meta_key == $wp_properties['configuration']['address_attribute'] && !empty( $property[ 'display_address' ] ) ) {
+          $attribute_value = $property[ 'display_address' ];
+        }
+
         $attribute_value = do_shortcode(html_entity_decode($attribute_value));
 
         $attribute_value = str_replace("\n", "", nl2br($attribute_value));
@@ -860,7 +869,7 @@ if(!function_exists('get_features')) {
     $features_html = array();
     if($features) {
       foreach ($features as $feature) {
-        if($links) {
+        if($args['links'] == 'true') {
           array_push($features_html, '<a href="' . get_term_link($feature->slug, $args['type']) . '">' . $feature->name . '</a>');
         } else {
           array_push($features_html, $feature->name);
@@ -898,11 +907,11 @@ if(!function_exists('draw_stats')):
       $property = $post;
     }
 
-    if(is_array($property)) {
-      $property = (object)$property;
-    }
+    $property = prepare_property_for_display( $property );
 
-    $property = prepare_property_for_display($property);
+    if(is_array($property)) {
+      $property = WPP_F::array_to_object( $property );
+    }
 
     $defaults = array(
       'sort_by_groups' => $wp_properties['configuration']['property_overview']['sort_stats_by_groups'],
@@ -960,11 +969,6 @@ if(!function_exists('draw_stats')):
       //** Do not show attributes that have value of 'value' if enabled */
       if($hide_false == 'true' && $value == 'false') {
         continue;
-      }
-
-      //* Determine if the current attribute is address and display_address is set */
-      if($tag == $wp_properties['configuration']['address_attribute'] && !empty($property->display_address)) {
-        $value = $property->display_address;
       }
 
       //* Skip blank values (check after filters have been applied) */

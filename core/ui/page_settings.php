@@ -506,13 +506,13 @@ if(get_option('permalink_structure') == '') {
         <p>
         <?php _e('These are the settings for the [property_overview] shortcode.  The shortcode displays a list of all building / root properties.<br />The display settings may be edited further by customizing the <b>wp-content/plugins/wp-properties/templates/property-overview.php</b> file.  To avoid losing your changes during updates, create a <b>property-overview.php</b> file in your template directory, which will be automatically loaded.','wpp') ?>
         <ul>
-
           <li><?php _e('Thumbnail size:','wpp') ?> <?php WPP_F::image_sizes_dropdown("name=wpp_settings[configuration][property_overview][thumbnail_size]&selected=" . $wp_properties['configuration']['property_overview']['thumbnail_size']); ?></li>
           <li><?php echo WPP_F::checkbox('name=wpp_settings[configuration][property_overview][show_children]&label=' . __('Show children properties.','wpp'), $wp_properties['configuration']['property_overview']['show_children']); ?></li>
           <li><?php echo WPP_F::checkbox('name=wpp_settings[configuration][property_overview][fancybox_preview]&label=' . __('Show larger image of property when image is clicked using fancybox.','wpp') , $wp_properties['configuration']['property_overview']['fancybox_preview']); ?></li>
           <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][bottom_insert_pagenation]&label=" . __('Show pagination on bottom of results.','wpp'), $wp_properties['configuration']['bottom_insert_pagenation']); ?></li>
           <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][property_overview][add_sort_by_title]&label=" . __('Add sorting by property\'s title.','wpp'), $wp_properties['configuration']['property_overview']['add_sort_by_title']); ?></li>
-         </ul>
+          <?php do_action( 'wpp::settings::display::overview_shortcode' ); ?>
+        </ul>
 
       </td>
     </tr>
