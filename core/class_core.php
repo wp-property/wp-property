@@ -1307,7 +1307,7 @@ class WPP_Core {
 
       //** We add # to value which says that we don't want to use LIKE in SQL query for searching this value. */
       foreach( $atts as $key => $val ) {
-        if( isset( $wp_properties[ 'property_stats' ][ $key ] ) && !key_exists( $key, $defaults ) ) {
+        if( isset( $wp_properties[ 'property_stats' ][ $key ] ) && !key_exists( $key, $defaults ) && $key != 'property_type' ) {
           if( substr_count( $val, ',' ) || substr_count( $val, '&ndash;' ) || substr_count( $val, '--' ) ) {
             continue;
           }

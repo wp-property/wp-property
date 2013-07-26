@@ -3403,22 +3403,22 @@ class WPP_F extends UD_API {
               // So we're trying to find also '1'
               $specific = "meta_value IN ( 'true', '1' )";
             } elseif( !substr_count( $specific, 'meta_value' )) {
-              // Adds conditions for Searching by partial value
-              $s = explode( ' ', trim( $specific ));
-              $specific = '';
-              $count = 0;
-              foreach( $s as $p ) {
-                if( $count > 0 ) {
-                  $specific .= " AND ";
-                }
-                //** Determine if we need use LIKE in SQL query */
-                preg_match( "/^#(.+)#$/", $p, $matches );
-                if( $matches ) {
-                  $specific .= "meta_value = '{$matches[1]}'";
-                } else {
+              //** Determine if we don't need to use LIKE in SQL query */
+              preg_match( "/^#(.+)#$/", $specific, $matches );
+              if( $matches ) {
+                $specific = " meta_value = '{$matches[1]}'";
+              } else {
+                //** Adds conditions for Searching by partial value */
+                $s = explode( ' ', trim( $specific ));
+                $specific = '';
+                $count = 0;
+                foreach( $s as $p ) {
+                  if( $count > 0 ) {
+                    $specific .= " AND ";
+                  }
                   $specific .= "meta_value LIKE '%{$p}%'";
+                  $count++;
                 }
-                $count++;
               }
             }
 
