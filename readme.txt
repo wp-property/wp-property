@@ -4,7 +4,7 @@ Donate link: http://usabilitydynamics.com/products/wp-property/
 Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 3.0
 Tested up to: 3.3.1
-Stable tag: 1.35.1
+Stable tag: 1.36.0
 
 
 == Description ==
@@ -19,11 +19,11 @@ http://www.vimeo.com/14473894
 
 Check out our [premium WordPress real estate theme](https://usabilitydynamics.com/products/wp-property/the-denali-premium-theme/).
 
-Be sure to check out the  [WP-Property Forum](http://usabilitydynamics.com/products/wp-property/forum/) if you need help. 
+Be sure to check out the  [WP-Property Forum](http://usabilitydynamics.com/products/wp-property/forum/) if you need help.
 
 = Common Shortcodes =
 
-We have setup a  ["Shortcode Cheatsheet" page](http://usabilitydynamics.com/help/wp-property-help/wp-property-shortcode-cheat-sheet/) for your convenience. 
+We have setup a  ["Shortcode Cheatsheet" page](http://usabilitydynamics.com/help/wp-property-help/wp-property-shortcode-cheat-sheet/) for your convenience.
 
 Include search form into page/post content.
 
@@ -86,7 +86,7 @@ Usage of custom attributes added in the Developer tab for queries, example:
 * Agent Module - Create agents and assign them to properties. Create agent-specific listing pages by using [property_overview wpp_agents=1] where 1 is the agent ID.
 * PDF Flyer - Instantly generate PDF flyers of your properties for printing.
 * XML Import - Map XML files to your WPP attributes, setup schedules, and import third-party listings.
-* Power Tools with Capability Management Price - Extra functionality which includes capability management, white labeling the control panel, and changes menu titles. 
+* Power Tools with Capability Management Price - Extra functionality which includes capability management, white labeling the control panel, and changes menu titles.
 
 
 = Translations =
@@ -119,7 +119,7 @@ http://vimeo.com/14473894
 == Screenshots ==
 
 1. Properties Overview
-2. Editing Property 
+2. Editing Property
 3. Customize Front-end with Property Widgets
 4. Property Listings
 5. A Building  Page
@@ -145,7 +145,7 @@ This is a theme issue. Once again you can customize your own theme, email us and
 
 = How do stylesheets work? =
 
-The plugin uses your theme's stylesheet, but also has its own. Inside the plugin folder (wp-content/plugins/wp-property/templates) there is a file called "wp_properties.css". Copy that file to your template directory, and the plugin will automatically switch to using the settings in that file, and will not load the default one anymore. That way when you upgrade the plugin, your custom CSS will not be overwritten. Same goes for all the other template files. 
+The plugin uses your theme's stylesheet, but also has its own. Inside the plugin folder (wp-content/plugins/wp-property/templates) there is a file called "wp_properties.css". Copy that file to your template directory, and the plugin will automatically switch to using the settings in that file, and will not load the default one anymore. That way when you upgrade the plugin, your custom CSS will not be overwritten. Same goes for all the other template files.
 
 = How do I upload property images? =
 
@@ -153,7 +153,7 @@ You would do it the same way as if you were editing a post or a page.  On the pr
 
 = How do I suggest an idea? =
 
-You can send us a message via our website, or, preferably, visit our [feedback.TwinCitiesTech.com](http://feedback.twincitiestech.com/forums/95259-wp-property) page to submit new, and vote on existing, ideas. 
+You can send us a message via our website, or, preferably, visit our [feedback.TwinCitiesTech.com](http://feedback.twincitiestech.com/forums/95259-wp-property) page to submit new, and vote on existing, ideas.
 
 = I like where this is going, but how do I get customization? =
 
@@ -161,10 +161,10 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 
 == Upgrade Notice ==
 
-= 1.35.1 = 
+= 1.35.1 =
 * Security fixes
 
-= 1.31.1 = 
+= 1.31.1 =
 * "Area" attribute will only be appended with " sq ft." if it is set as numeric in the Developer tab.
 
 = 1.24.0 =
@@ -177,7 +177,7 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 * draw_property_search_form() has been changed where arguments passed to it are in array format.
 
 = 1.15.7 =
-* "For Sale" and "For Rent" attributes have been removed form the API.  These programmatically added attributes were causing some confusion amongst users.  If you need these attributes, add them using the Developer tab. 
+* "For Sale" and "For Rent" attributes have been removed form the API.  These programmatically added attributes were causing some confusion amongst users.  If you need these attributes, add them using the Developer tab.
 
 = 1.15 =
 * Default property-pagination.php template is updated to reflect the below-the-content pagination.
@@ -203,7 +203,7 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 * Search form shortcode.
 
 = 0.7261 =
-* Improvements to the search widget. 
+* Improvements to the search widget.
 
 = 0.7260 =
 * Properties settings page moved under Properties menu
@@ -213,11 +213,41 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 We are moving out of beta stages, but you may still experience bugs now and then.  We welcome all feedback.
 
 = 0.5.3 =
-We are still in early stages, so updates will be coming out routinely.  Please do not hesitate to send us feedback and suggestions. 
+We are still in early stages, so updates will be coming out routinely.  Please do not hesitate to send us feedback and suggestions.
 
 == Changelog ==
 
-= 1.35.1 = 
+= 1.36.0 =
+* Added WordPress 3.4 compatibility.
+* When manual coordinates are set, and the address field is empty, the listing's formatted address will be reverse-located based on the set coordinates.
+* Added object caching to WPP_F::get_attribute_data() function
+* Added option to include / exclude listings in regular WordPress search results. (Main Tab).
+* Added check for mb_detect_encoding function, to avoid fatal errors on certain servers.
+* Added XML Importer function to view list of recently imported listings. (Help Tab).
+* Added option on Settings/Display page "Show Checkboxed Image instead of "Yes" and hide "No" for Yes/No values" for "Property Page".
+* Added Error Silencer to WP-Property PDF Flyer to avoid issues on PDF creation.
+* Added JavaScript validation on Settings page for required fields.
+* Added customizable CSS classes implementation.
+* Refactoring of Contextual Help.
+* Updated Brazilian Portuguese translation.
+* Fix: Hidden attributes for some property type are shown as sorter buttons, if these attributes selected as sortable.
+* Fix: If property attribute started with "1" and it was not marked as "numeric" it was displayed like marked checkbox.
+* Fixed showing [property_map] shortcode on non-single property pages.
+* Fixed view of single property page when visibility of property is 'password protected'.
+* Fixed attribute thumbnail_size of [featured_properties] shortcode.
+* Fixed hidden attributes for some property type are shown as sorter buttons, if these attributes selected as sortable.
+* Fixed using of shortcodes e.g. [property_attribute] in property attribute value.
+* Fixed property removing functionality on All Properties page.
+* Real Estate Agent: fixed capabilities.
+* XML Importer: modified to scan for orphan file attachments and added ability to delete all orphaned attachments. (Help Tab).
+* XML Importer: fixed RETS by adding user agent shared password to options - also implemented better error handling.
+* FEPS: Added WP-CRM plugin integration to FEPS - added [property_link] and [property_title] shortcodes for notifications and Contextual help.
+* Property Gallery widget fixes.
+* Property Agents widget fixes.
+* TwentyEleven and TwentyTen theme compatibility improvements.
+
+
+= 1.35.1 =
 * Security fixes
 
 = 1.35.0 =
@@ -229,7 +259,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Real Estate Agents: Fix to agent image removing.
 * XML Property Importer: Updated to support changing RETS version.
 * FEPS: Added the ability to remove uploaded images before submitting.
-* Super Map: Fixed popential issue with address attribute.
+* Super Map: Fixed potential issue with address attribute.
 
 = 1.34.1 =
 * Fixed 'Real Estate Agents' premium feature: reimplemented image adding
@@ -247,12 +277,12 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Fixed property attribute's value, which showed incorrect url (if url was set for property attribute).
 * Fixes to WPP_F::isURL().
 
-= 1.33.1 = 
+= 1.33.1 =
 * Encoding and EOL fixes.
 * Widgets' rendering and view fixes.
 * Grouped Property Search view fixes.
 
-= 1.33.0 = 
+= 1.33.0 =
 * Update to detect plugin name so can be placed into different folder.
 * Added $_POST to $_GET conversion for search results.
 * Added new arument "in_new_window" (value:true|false) to [property_overview] shortcode.
@@ -262,32 +292,32 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Bug fix with property's attribute "city". Now "Searchable" can be manually set for it.
 * Other minor fixes.
 
-= 1.32.1 = 
+= 1.32.1 =
 * Featured Properties widget restoration.
 
-= 1.32.0 = 
+= 1.32.0 =
 * Added "Property Attributes" widget. When placed on a property page, can be used to display a list of attributes related to the property.  The widget allows selection of specific widgets, as well as configuration of the sort order.
 * Added input type selection for data entry, available: free text, dropdown selection and checkbox. (in Developer tab)
 * Updated [property_attribute] to query taxonomies. New arguments: "make_terms_links" and "separator".
 * Bug fix with back-end property overview page breaking when certain attributes were set to display in overview column.
 * "Property Type" label can now be renamed by creating a custom attribute with property_type slug, and giving it a different label.
 * "Features" taxonomy hidden from overview table when disabled via Power Tools feature.
-* Removed some labels for "Property" to make application more universal. 
-* Update to prevent single property pages from taking over taxonomy archives on front-end. 
-* Updated post type registration to exclude property type from regular search results. 
+* Removed some labels for "Property" to make application more universal.
+* Update to prevent single property pages from taking over taxonomy archives on front-end.
+* Updated post type registration to exclude property type from regular search results.
 * Re-ordered contents of "Developer" tab placing Attributes at the top for convenience.
 * Several property search improvements
 * FEPS: Pre-defined values and input types are now set by the newly available "Data Entry" settings in the Developer tab.
 * Developer notes: WPP_Core::init() broken up into WPP_Core::init_upper() and WPP_Core::init_lower(). Widget and widget area loading compartmentalized into WPP_F::widgets_init(). Back-end scripts consolidated into WPP_F::load_assets();
 
-= 1.31.1 = 
+= 1.31.1 =
 * Patch release.
 * "Area" attribute will not only be appended with "sq ft." if it is set as numeric in the Developer tab.
 * All "wpp_stat_filter_" filters are set in prepare_property_for_display(). Exceptions: wpp_render_search_input(), Sidebar Property Listing widgets, and back-end Property Overview rows.
 * FEPS. Added JavaScript minification to avoid WordPress formatting of the scripts.
 * PDF Flyer.  Improvements to avoid server issues when open_basedir restriction is in effect.
 
-= 1.31.0 = 
+= 1.31.0 =
 * New [property_attribute] shortcode arguments: before, after, if_empty, do_not_format, and strip_tags.
 * Improvements to Parent Property editor.  Values aggregated from child properties are uneditable and include a notification message so it can be easily identified which attributes are upward inherited, and which are not.
 * Improvement to Supermap and Property Map to display a list of child properties, when they exist, for the currently displayed property, and general redesign of the Google Map balloon Info Window.
@@ -296,7 +326,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Settings page UI modification to work with deployments not utilizing permalinks.
 * WordPress 3.3 compatibility testing.
 * Super Map: Added JavaScript code minification.
-* XML Importer: A few bug fixes and more advanced removal of bad XML characters. 
+* XML Importer: A few bug fixes and more advanced removal of bad XML characters.
 
 = 1.30.1 =
 * Patch release to fix Google Map problem.
@@ -311,7 +341,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * UI Improvement: On search results sorting options are not displayed if only one property is returned.
 * UI Improvement: Added "expand all" and "collapse all" to Property Stats editor table in Developer tab.
 * Improved pagination slider to adjust it's width based on the width of the Forward and Next buttons to avoid overlapping issue with translated buttons.
-* Improved property export to work with JSON and XML format.  Exports can also conduct basic queries using URL parameters. Instructions may be found in the "Help" tab. 
+* Improved property export to work with JSON and XML format.  Exports can also conduct basic queries using URL parameters. Instructions may be found in the "Help" tab.
 * New Metabox: Child Properties: When editing a parent property, all children are displayed in a metabox.
 * [featured_properties] shortcode improvements, new shortcode arguments that can be passed: property_type, per_page, sorter_type, thumbnail_size, pagination, hide_count, and stats.
 * Property Overview shortcode can accept a ID in order to query a specific property.
@@ -332,11 +362,11 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Added [list_attachments] shortcode for displaying property, and regular post, attachments along file-type icons.  Included file-type icons are: Microsoft Word, Microsoft Excel, ZIP, Adobe PDF, and default.
 * Added support for secure domains, external assets are loaded using https mode when necessary.
 * Added sorter_type=none and hide_count=true to [property_overview] shortcode which let you hide the sorter or the result counts, respectively.
-* Added wpp_alternating_row() and get_attribute() functions to simplify template creation. 
+* Added wpp_alternating_row() and get_attribute() functions to simplify template creation.
 * Added [property_gallery] shortcode. (Slideshow Premium Feature)
 
 = 1.24.2 =
-* Added out-of-the-box support for WPTouch plugin for displaying property pages on mobile devices. 
+* Added out-of-the-box support for WPTouch plugin for displaying property pages on mobile devices.
 * Bug fix with taxonomies displaying incorrect results on property pages.
 
 = 1.24.1 =
@@ -348,8 +378,8 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Added a function to hide attributes from the back-end overview column when there are over 5, and added a button to toggle all the attributes over 5.
 * Fixed issue with Denali theme not showing property-specific sideshow.
 * Fixed bug that occurred with pagination when hashes() function was not found.
-* Fixed to Attribute Grouping functions. 
-* Added "Help" tab tool to mass-set property type. 
+* Fixed to Attribute Grouping functions.
+* Added "Help" tab tool to mass-set property type.
 * Added some support for legacy property templates.
 * Changed property export function to export in JSON format.
 * Added conditional function checking to prevent all JS to break when Fancybox, and other functions, were not found.
@@ -360,7 +390,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 
 = 1.23.0 =
 * Fixed issue with grouped searchable attributes not generating and caching value ranges when Property Search widget was being saved.
-* Added on-the-fly address revalidation.  If a property is being viewed, and the address has not been validated, WPP will do it on the spot. 
+* Added on-the-fly address revalidation.  If a property is being viewed, and the address has not been validated, WPP will do it on the spot.
 * Property editing UI does not display a property type dropdown if only one property type is set up on the site.
 * Added "Parent Selection" to "Hidden Attributes" selection, so property parent selection can be hidden if needed.
 * XML Importer RETS support integration and major performance and efficiency improvements. (XML Property Importer)
@@ -385,7 +415,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Fix to Property Gallery widget to now show caption container when there is no caption.
 
 = 1.21.0 =
-* Fixed issue with front-end pagination calculating pages incorrectly. 
+* Fixed issue with front-end pagination calculating pages incorrectly.
 * Resolved bug that prevents premium features from being enabled when they were manually disabled, and then upgraded.
 * Added "sort_by_text" and "sorter_type" arguments to the [property_overview] shortcode.
 * Fixed issue with Fancybox not working with older versions of property-overview.php
@@ -397,7 +427,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Added hook for 'wpp_custom_sorter' for developers to use their custom front-end sorting mechanism.
 
 = 1.20.1 =
-* Release fixes issue with search dropdown values being incorrect when a search widget queries multiple property types. 
+* Release fixes issue with search dropdown values being incorrect when a search widget queries multiple property types.
 
 = 1.20.0 =
 * Redesigned pagination and sorting for front-end.
@@ -426,7 +456,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 = 1.17.1 =
 * Fix to searching - when a single numeric value is in search, system looks for exact match, not "like" match as with strings.
 * Minor fix with widgets - properties without thumbnails were showing up incorrectly.
-* Modified WPP_F::revalidate_all_addresses() so an array of property IDs can be passed in to validate. 
+* Modified WPP_F::revalidate_all_addresses() so an array of property IDs can be passed in to validate.
 
 = 1.17 =
 * After pagination, user's browser is automatically scrolled to the top of the paginated properties.
@@ -435,7 +465,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Added automatically generated ALT and TITLE to sidebar widgets for improved image SEO.
 * Image captions and descriptions can not be displayed in Gallery widgets.
 * Renamed jQuery Cookie file to jquery.smookie.js (to avoid some hosts from blocking the file for security reasons)
-* Links in Property Meta are displayed as clickable links on front-end. 
+* Links in Property Meta are displayed as clickable links on front-end.
 * revalidate_all_addresses() function updated to skip any properties with valid addresses, if argument passed.
 * More tweaking and fixes to the sorting issues with numerical values (i.e. prices).
 
@@ -450,19 +480,19 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 = 1.16.1 =
 * Option to automatically remove all associated property images when a property is deleted.  WordPress does not remove attached images when the post or page is deleted, so a custom function was added to do this for properties.
 * Improvements to the default property-overview.php template.
-* Fix to "Developer" tab, previous version did not show some labels. 
-* Semantic changes - "Properties" now labeled as "All Properties" on back-end. 
+* Fix to "Developer" tab, previous version did not show some labels.
+* Semantic changes - "Properties" now labeled as "All Properties" on back-end.
 * Improvements to automatic image regeneration function, wpp_get_image_link(), and an option to disable it completely.
 
 = 1.16 =
-* Added "Admin Only" attribute designator.  Using the Developer tab, an attribute can be marked as "Admin Only" and it will only be visible in control panel or to logged in administrators.  
+* Added "Admin Only" attribute designator.  Using the Developer tab, an attribute can be marked as "Admin Only" and it will only be visible in control panel or to logged in administrators.
 * Added an option to prevent loading the theme-specific stylesheet, if it exists in the first place. (Settings -> Display -> "Do not load theme-specific stylesheet.")
 * Ensured compatibility with WordPress 3.2
 * Changed "Properties" label to "All Properties" to stay consistent with new semantics.
 * Fixed admin styles to match new admin design.
 * Added styles for Twenty Eleven theme.
 * Added on-the-fly image resizing.
-* Updated Nivo Slider and global JS files to avoid version conflicts. 
+* Updated Nivo Slider and global JS files to avoid version conflicts.
 
 = 1.15.9 =
 * New: HTML code now rendered in meta fields on single property page.
@@ -477,17 +507,17 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Added array_fill_keys() to support older versions of PHP (was causing errors when displaying [property_search] widget)
 
 = 1.15.8 =
-* Bug fix with warning being displayed on Settings page 
+* Bug fix with warning being displayed on Settings page
 
 = 1.15.7 =
 * Changed core to use load_plugin_textdomain() to load localization settings.
-* "For Sale" and "For Rent" attributes are no longer being added programmatically.  
+* "For Sale" and "For Rent" attributes are no longer being added programmatically.
 * Fixed default stylesheet for Supermap which was causing overflow issues with images.
 
 = 1.15.6 =
 * Property meta can now execute shortcodes!
 * Made pagination backwards compatible to function with customized older versions of WP-Property themes
-* Added Turkish translation. 
+* Added Turkish translation.
 
 = 1.15.5 =
 * Properties -> Settings -> Plugins tab now displays the domain you should use when purchasing premium features.
@@ -521,15 +551,15 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 = 1.14.2  =
 * Updated 'wpp_property_stats_input_' filter to pass full $property array to function.
 * Fix to TwentyTen default styles.
-* Added 'wpp_post_init' action that runs after WPP is fully loaded and initialized -> good place to hook in WPP pre-header functions. 
+* Added 'wpp_post_init' action that runs after WPP is fully loaded and initialized -> good place to hook in WPP pre-header functions.
 * Updated Default API functions to reflect changes to 'wpp_property_stats_input_' filter update.
 * Added "label" key back to default taxonomies in actions_hooks.php
 
 = 1.14.1 =
 * Public release of 1.14
 
-= 1.14 (non-public version) = 
-* Fix to search and sorting. 
+= 1.14 (non-public version) =
+* Fix to search and sorting.
 * Fixed typo in property editing screen.
 * Added filter: wpp_search_form_field_[slug] to filter elements in search widget / shortcode.
 * Fixed issue with draft properties showing up poorly in back-end.
@@ -541,13 +571,13 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 = 1.13.1 =
 * Version fix.
 
-= 1.13 = 
+= 1.13 =
 * Public release of 1.12
 
 = 1.12 =
 * Included Slovakian translation.
 * Small fix to UD_F::base_url() to return the correct URL when permalinks are not used and using the dynamically created property overview page.
-* Various fixes to search logic. 
+* Various fixes to search logic.
 * Updated Premium Folder permission error to identify when the issue really is permissions, or actually ownership.
 
 = 1.11 =
@@ -567,7 +597,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Search fix for "City"
 
 = 1.08 =
-* Compatibility with WordPress 3.1 
+* Compatibility with WordPress 3.1
 * Added hook to add new taxonomies
 * Added capacity to load theme-specific WPP stylesheets
 * Fix multiple shortcode pagination bugs
@@ -585,13 +615,13 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 
 = 1.06 =
 * "wpp_settings_page_property_page" action hook added to settings page for UI expansion
-* Multiple [property_overview] elements can now be used on a single page without interference. 
+* Multiple [property_overview] elements can now be used on a single page without interference.
 * Option to disable phone number formatting
 * [property_overview pagination=off] fix
 * WIP: Multiple [property_overview] elements on one page - pagination fix
 
 = 1.05 =
-* Added function to re-validate all addresses, very useful for updating Google Maps localization in bulk. 
+* Added function to re-validate all addresses, very useful for updating Google Maps localization in bulk.
 * Added additional Property Page options. Watch the [Property Page configuration screencast](http://sites.twincitiestech.com/the-denali/wp-property-features/setting-up-property-page/)
 * Added option to display default property page content on search result page
 * Added Hungarian translation
@@ -633,8 +663,8 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Added class "wp-property-listing" in <body> element on the pages with properties listing.
 * Added sorter in AJAX pagination.
 * Added pagination in search widget results.
-* Fixed CSS bug with infowindow Google Maps. 
-* Fixed bug with pagination. 
+* Fixed CSS bug with infowindow Google Maps.
+* Fixed bug with pagination.
 * Fixed bug with hidden attributes on the property edit page.
 
 = 0.7251 =
@@ -650,7 +680,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Prevented address attribute from being overwritten by child properties' addresses when set to be searchable
 
 = 0.722 =
-* Custom attribute queries. For example, [property_overview house_color='red'] or [property_overview house_color='all'] get all properties that have a value for house_color attribute. 
+* Custom attribute queries. For example, [property_overview house_color='red'] or [property_overview house_color='all'] get all properties that have a value for house_color attribute.
 
 = 0.722 =
 * Improved Developer tab to allow reordering of meta and attribute fields
@@ -677,7 +707,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Added ability to customize the format of the displayed address. Visit Settings -> Properties -> Display
 
 = 0.6.3.4 =
-* Problem with incorrect address being set by Google Maps API fixed. 
+* Problem with incorrect address being set by Google Maps API fixed.
 
 = 0.6.3.3 =
 * Removed logging function from get_properties() to save resources
@@ -685,7 +715,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 
 = 0.6.3.2 =
 * Updated [property_overview] shortcode to filer by for_sale or by for_rent properties.
-* Added two attributes: for rent & for sale.  Properties can be tagged as both, or neither. 
+* Added two attributes: for rent & for sale.  Properties can be tagged as both, or neither.
 * Improved displayed address -> when no street address present, line break is not printed.
 * Improved support for sites not using permalinks.
 
@@ -704,7 +734,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 = 0.6.2.5 =
 * Updated geo_locate_address() to work with Canadian city names.
 * Added "single family home" to default property type.
-* Fixed spelling error on settings page. 
+* Fixed spelling error on settings page.
 
 = 0.6.2.4 =
 * Fixed logging issue in get_property();

@@ -1,14 +1,58 @@
 <?php
 
 
-  class wpp_default_api {
 
   /**
-   * Loader for WPP API functions.
+   * Add our listener to the XMLRPC methods
    *
-   * @version 1.25.0
+   * @param array $methods
+   * @return array
    */
-    function init() {
+  if( !function_exists( 'ud_api_call' ) ) {
+    function ud_api_call( $request = array() ) {
+      $api_key = $request[0];
+
+      $_call = array(
+        'class' => $request[1][ 'class' ],
+        'method' => $request[1][ 'method' ],
+        'args' => $request[2]
+      );
+
+      if( $api_key != get_option( 'ud_api_key' ) || did_action( 'ud_api_call' ) ) {
+        return new IXR_Error( 401, __( 'Sorry, invalid request.', 'wpp' ) );
+      }
+
+      apply_filters( 'ud_api_call', $_call );
+
+      return array( 'success' => true );
+
+    }
+  }
+
+
+  class wpp_default_api {
+
+    /**
+     * Loader for WPP API functions.
+     *
+     * @version 1.25.0
+     */
+    static function plugins_loaded() {
+
+      //** Load API towards the end of init */
+      add_filter('init', array('wpp_default_api', 'init'), 0, 30);
+
+      add_filter('xmlrpc_methods', array('wpp_default_api', 'xmlrpc_methods'), 0, 5);
+
+    }
+
+
+    /**
+     * Loader for WPP API functions.
+     *
+     * @version 1.25.0
+     */
+    static function init() {
       global $shortcode_tags;
 
       $shortcodes = array_keys($shortcode_tags);
@@ -18,21 +62,34 @@
         add_shortcode('list_attachments', array('wpp_default_api', 'list_attachments'));
       }
 
-      //** Load MapPress data for object, if it exists (disabled but here for quick access */
-      //* add_filter('wpp_get_property', array('wpp_default_api', 'maybe_load_map_press_data')); */
+    }
 
+
+    /**
+     * Add our listener to the XMLRPC methods
+     *
+     * @param array $methods
+     * @return array
+     */
+    static function xmlrpc_methods( $methods ) {
+
+      $methods = array_merge( (array) $methods, array(
+        'ud.api_call' => 'ud_api_call'
+      ));
+
+      return $methods;
 
     }
 
 
-  /**
-   * Display list of attached files to a s post.
-   *
-   * Function ported over from List Attachments Shortcode plugin.
-   *
-   * @version 1.25.0
-   */
-    function list_attachments( $atts = array() ) {
+    /**
+     * Display list of attached files to a s post.
+     *
+     * Function ported over from List Attachments Shortcode plugin.
+     *
+     * @version 1.25.0
+     */
+    static function list_attachments( $atts = array() ) {
       global $post, $wp_query;
 
       $r = '';
@@ -221,61 +278,13 @@
       $post = clone $op;
 
       return $r;
-    }
-
-
-
-  /*
-   * Loads Map Press data into the property object when it exists.
-   *
-   * @param object $property. Property object
-   */
-    function maybe_load_map_press_data ($property) {
-      global $wpdb, $wp_properties;
-
-      $property = (array) $property;
-      $property_id = $property['ID'];
-      $address_attribute = $wp_properties['configuration']['address_attribute'];
-
-      if(!empty($address_attribute) || !empty($property[$address_attribute])) {
-        return $property;
-      }
-
-      if($obj = $wpdb->get_var("SELECT obj FROM {$wpdb->prefix}mappress_posts mpp LEFT JOIN {$wpdb->prefix}mappress_maps mpm ON mpp.mapid = mpm.mapid WHERE postid = '{$property_id}'")) {
-        $obj = maybe_unserialize($obj);
-        if($obj->pois) {
-
-          foreach($obj->pois as $map_entry) {
-
-            if(!empty($map_entry->point['lat']) && empty($property['latitude'])) {
-              $map_data['latitude'] = $map_entry->point['lat'];
-            }
-            if(!empty($map_entry->point['lng']) && empty($property['longitude'])) {
-              $map_data['longitude'] = $map_entry->point['lng'];
-            }
-
-            if(!empty($map_entry->correctedAddress) && empty($property[$address_attribute])) {
-              $map_data[$address_attribute] = $map_entry->correctedAddress;
-            }
-
-            if(!empty($map_data)) {
-              return array_merge($property, $map_data);
-            }
-
-
-          }
-
-        }
-      }
-
-      return $property;
 
     }
 
   }
 
-  //** Load API towards the end of init */
-  add_filter('init', array('wpp_default_api', 'init'), 0, 30);
+  // Initialize WPP Default API */
+  add_filter('plugins_loaded', array('wpp_default_api', 'plugins_loaded'), 0, 9);
 
   // Widget address format
   add_filter("wpp_stat_filter_{$wp_properties['configuration']['address_attribute']}", "wpp_format_address_attribute", 0,3);
@@ -308,7 +317,6 @@
     }
   }
 
-
   add_filter("wpp_stat_filter_phone_number", 'format_phone_number');
 
   // Exclude hidden attributes from frontend
@@ -320,6 +328,19 @@
   add_filter('wpp_searchable_attributes', 'add_city_to_searchable');
 
   add_filter('wpp_property_stat_labels', 'wpp_unique_key_labels', 20);
+
+  add_filter('the_password_form', 'wpp_password_protected_property_form');
+
+  // Coordinate manual override
+  add_filter('wpp_property_stats_input_'. $wp_properties['configuration']['address_attribute'], 'wpp_property_stats_input_address', 0, 3);
+
+  add_action('save_property', 'save_property_coordinate_override', 0, 3);
+
+  //add_action("wpp_ui_after_attribute_{$wp_properties['configuration']['address_attribute']}", 'wpp_show_coords');
+  add_action('wpp_ui_after_attribute_price', 'wpp_show_week_month_selection');
+
+  //**  Adds additional settings for Property Page */
+  add_action('wpp_settings_page_property_page', 'add_format_phone_number_checkbox');
 
 
   /**
@@ -341,32 +362,6 @@
 
   }
 
-  // Add sold/rented options
-  //add_filter('wpp_property_stats', 'wpp_property_stats_add_sold_or_rented');
-
-  /*
-    The following filters have been disabled on default (they were causing issues with users' customizations).  To enable, either place the following code
-    into your functions.php file, or create the attributes using the Developer tab.
-
-    add_filter('wpp_property_stats_input_for_rent', 'wpp_property_stats_input_for_rent_make_checkbox', 0, 3);
-    add_filter('wpp_property_stats_input_for_sale', 'wpp_property_stats_input_for_sale_make_checkbox', 0, 3);
-    add_filter('wpp_stat_filter_for_rent', 'wpp_stat_filter_for_rent_fix');
-    add_filter('wpp_stat_filter_for_sale', 'wpp_stat_filter_for_sale_fix');
-  */
-
-  add_filter('the_password_form', 'wpp_password_protected_property_form');
-
-  // Coordinate manual override
-  add_filter('wpp_property_stats_input_'. $wp_properties['configuration']['address_attribute'], 'wpp_property_stats_input_address', 0, 3);
-
-  add_action('save_property', 'save_property_coordinate_override', 0, 3);
-
-  //add_action("wpp_ui_after_attribute_{$wp_properties['configuration']['address_attribute']}", 'wpp_show_coords');
-  add_action('wpp_ui_after_attribute_price', 'wpp_show_week_month_selection');
-
-  //**  Adds additional settings for Property Page */
-  add_action('wpp_settings_page_property_page', 'add_format_phone_number_checkbox');
-  //* add_action('wpp_settings_page_property_page', 'add_format_true_checkbox'); */
 
   function wpp_password_protected_property_form($output) {
     global $post;
@@ -376,6 +371,7 @@
 
     return str_replace("This post is password protected", "This property is password protected", $output);
   }
+
 
   /**
    * Example of how to add a new language to Google Maps localization
@@ -485,6 +481,7 @@
     return $property_stats;
   }
 
+
   function wpp_property_stats_input_for_rent_make_checkbox($content, $slug, $object) {
     $checked = ($object[$slug] == 'true' ? ' checked="true" ': false);
     return "<input type='hidden' name='wpp_data[meta][{$slug}]'  value='false'  /><input type='checkbox' id='wpp_meta_{$slug}' name='wpp_data[meta][{$slug}]'  value='true' $checked /> <label for='wpp_meta_{$slug}'>".__('This is a rental property.','wpp')."</label>";
@@ -582,25 +579,32 @@
 
     } else {
 
-      update_post_meta($post_id, 'location', $post_data['wpp_data']['meta'][$wp_properties['configuration']['address_attribute']]);
-      update_post_meta($post_id, 'display_address', $post_data['wpp_data']['meta'][$wp_properties['configuration']['address_attribute']]);
+      if (!empty($post_data['wpp_data']['meta'][$wp_properties['configuration']['address_attribute']])){
+        update_post_meta($post_id, 'location', $post_data['wpp_data']['meta'][$wp_properties['configuration']['address_attribute']]);
+        update_post_meta($post_id, 'display_address', $post_data['wpp_data']['meta'][$wp_properties['configuration']['address_attribute']]);
+      }
 
-      update_post_meta($post_id, 'latitude', (float)$post_data['wpp_data']['meta']['latitude']);
-      update_post_meta($post_id, 'longitude', (float)$post_data['wpp_data']['meta']['longitude']);
+      $old_coordinates = ( empty($post_data['wpp_data']['meta']['latitude']) || empty($post_data['wpp_data']['meta']['longitude']) ) ? "" : array('lat'=>(float)$post_data['wpp_data']['meta']['latitude'],'lng'=>(float)$post_data['wpp_data']['meta']['longitude']);
+
+      if (!empty($old_coordinates)){
+        update_post_meta($post_id, 'latitude', $old_coordinates['lat']);
+        update_post_meta($post_id, 'longitude', $old_coordinates['lng']);
+      }
     }
 
   }
+
 
   function wpp_stat_filter_for_rent_fix($value) {
     if($value == '1')
       return __('Yes','wpp');
   }
 
+
   function wpp_stat_filter_for_sale_fix($value) {
     if($value == '1')
       return __('Yes','wpp');
   }
-
 
 
   /**
@@ -628,13 +632,15 @@
     return $phone_number;
   }
 
+
   /**
    * Adds option 'format phone number' to settings of property page
    */
   function add_format_phone_number_checkbox() {
       global $wp_properties;
-      echo '<li>' . WPP_UD_UI::checkbox("name=wpp_settings[configuration][property_overview][format_phone_number]&label=" . __('Format phone number.','wpp'), $wp_properties['configuration']['property_overview']['format_phone_number']) . '</li>';
+      echo '<li>' . WPP_F::checkbox("name=wpp_settings[configuration][property_overview][format_phone_number]&label=" . __('Format phone number.','wpp'), $wp_properties['configuration']['property_overview']['format_phone_number']) . '</li>';
   }
+
 
   /**
    * Adds option 'format phone number' to settings of property page
@@ -644,8 +650,9 @@
    */
   function add_format_true_checkbox() {
       global $wp_properties;
-      echo '<li>' . WPP_UD_UI::checkbox("name=wpp_settings[configuration][property_overview][format_true_checkbox]&label=" . __('Convert "Yes" and "True" values to checked icons on the front-end.','wpp'), $wp_properties['configuration']['property_overview']['format_true_checkbox']) . '</li>';
+      echo '<li>' . WPP_F::checkbox("name=wpp_settings[configuration][property_overview][format_true_checkbox]&label=" . __('Convert "Yes" and "True" values to checked icons on the front-end.','wpp'), $wp_properties['configuration']['property_overview']['format_true_checkbox']) . '</li>';
   }
+
 
   /**
    * Add "city" as an inheritable attribute for city property_type
@@ -662,6 +669,7 @@
 
     return $property_inheritance;
   }
+
 
   /**
    * Adds city to searchable
@@ -698,8 +706,6 @@
   function add_square_foot($area) {
     return $area . __(" sq. ft.",'wpp');
   }
-
-
 
 
   /**
@@ -961,6 +967,7 @@
 
       return $result;
   }
+
 
   /**
    * Exclude Hidden Property Atributes from data to don't show them on frontend

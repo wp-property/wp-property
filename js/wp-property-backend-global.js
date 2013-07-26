@@ -266,7 +266,7 @@ var updateRowNames = function(instance, allowRandomSlug) {
   // Get data from input.slug_setter
   var new_slug = jQuery(instance).val();
   // Convert into slug
-  var new_slug = wpp_create_slug(new_slug);
+  new_slug = wpp_create_slug(new_slug);
 
   // Don't allow to blank out slugs
   if(new_slug == "") {
@@ -276,6 +276,21 @@ var updateRowNames = function(instance, allowRandomSlug) {
       return;
     }
   }
+
+  // There is no sense to continue if slugs are the same /
+  if ( old_slug == new_slug ) {
+    //* new_slug = 'random_' + Math.floor(Math.random()*1000); */
+    return;
+  }
+
+  // Get all slugs of the table
+  var slugs = jQuery(this_row).parents('table').find('input.slug');
+  slugs.each(function(k, v){
+    if ( jQuery(v).val() == new_slug ) {
+      new_slug = 'random_' + Math.floor(Math.random()*1000);
+      return false;
+    }
+  });
 
   // If slug input.slug exists in row, we modify it
   jQuery(".slug" , this_row).val(new_slug);
@@ -441,9 +456,47 @@ function wpp_add_row(element) {
   //* Clone last row */
   var cloned = jQuery(".wpp_dynamic_table_row:last", table).clone();
 
+  //return;
   //* Set unique 'id's and 'for's for elements of the new row */
   var unique = Math.floor(Math.random()*1000);
   wpp_set_unique_ids(cloned, unique);
+
+
+  //* Increment name value automatically */
+  if(auto_increment) {
+    //* Cycle through all child elements and fix names */
+    jQuery('input,select,textarea', cloned).each(function(element) {
+      var old_name = jQuery(this).attr('name');
+      var matches = old_name.match(/\[(\d{1,2})\]/);
+      if (matches) {
+        old_count = parseInt(matches[1]);
+        new_count = (old_count + 1);
+      }
+      var new_name =  old_name.replace('[' + old_count + ']','[' + new_count + ']');
+      //* Update to new name */
+      jQuery(this).attr('name', new_name);
+    });
+
+  } else if (use_random_row_id) {
+    //* Get the current random id of row */
+    var random_row_id = jQuery(cloned).attr('random_row_id');
+    var new_random_row_id = Math.floor(Math.random()*1000)
+    //* Cycle through all child elements and fix names */
+    jQuery('input,select,textarea', cloned).each(function(element) {
+      var old_name = jQuery(this).attr('name');
+      var new_name =  old_name.replace('[' + random_row_id + ']','[' + new_random_row_id + ']');
+      //* Update to new name */
+      jQuery(this).attr('name', new_name);
+    });
+    jQuery(cloned).attr('random_row_id', new_random_row_id);
+
+  } else if (allow_random_slug) {
+    //* Update Row names */
+    var slug_setter = jQuery("input.slug_setter", cloned);
+    if(slug_setter.length > 0) {
+      updateRowNames(slug_setter.get(0), true);
+    }
+  }
 
   //* Insert new row after last one */
   jQuery(cloned).appendTo(table);
@@ -461,42 +514,6 @@ function wpp_add_row(element) {
   jQuery("select", added_row).val('');
   jQuery("input[type=text]", added_row).val('');
   jQuery("input[type=checkbox]", added_row).attr('checked', false);
-
-  //* Increment name value automatically */
-  if(auto_increment) {
-    //* Cycle through all child elements and fix names */
-    jQuery('input,select,textarea', added_row).each(function(element) {
-      var old_name = jQuery(this).attr('name');
-      var matches = old_name.match(/\[(\d{1,2})\]/);
-      if (matches) {
-        old_count = parseInt(matches[1]);
-        new_count = (old_count + 1);
-      }
-      var new_name =  old_name.replace('[' + old_count + ']','[' + new_count + ']');
-      //* Update to new name */
-      jQuery(this).attr('name', new_name);
-    });
-
-  } else if (use_random_row_id) {
-    //* Get the current random id of row */
-    var random_row_id = jQuery(added_row).attr('random_row_id');
-    var new_random_row_id = Math.floor(Math.random()*1000)
-    //* Cycle through all child elements and fix names */
-    jQuery('input,select,textarea', added_row).each(function(element) {
-      var old_name = jQuery(this).attr('name');
-      var new_name =  old_name.replace('[' + random_row_id + ']','[' + new_random_row_id + ']');
-      //* Update to new name */
-      jQuery(this).attr('name', new_name);
-    });
-    jQuery(added_row).attr('random_row_id', new_random_row_id);
-
-  } else if (allow_random_slug) {
-    //* Update Row names */
-    var slug_setter = jQuery("input.slug_setter", added_row);
-    if(slug_setter.length > 0) {
-      updateRowNames(slug_setter.get(0), true);
-    }
-  }
 
   //* Unset 'new_row' attribute */
   jQuery(added_row).attr('new_row', 'true');
@@ -520,34 +537,59 @@ function wpp_add_row(element) {
  *
  * @param element
  */
-function wpp_toggle_contextual_help(element) {
-  panel = jQuery("#contextual-help-wrap");
-  link = jQuery("#contextual-help-link-wrap");
+function wpp_toggle_contextual_help( element, event ) {
+  var el = jQuery( element );
+  var screen_meta = jQuery("#screen-meta");
+  var panel = jQuery("#contextual-help-wrap");
+  var help_link = jQuery("#contextual-help-link");
+  var scroll_to = el.attr('wpp_scroll_to') && jQuery( el.attr('wpp_scroll_to') ).length ? jQuery( el.attr('wpp_scroll_to') ) : false;
 
-  if ( panel.is(':visible') ) {
+  /* If Already Open - we close Help */
+  if ( help_link.hasClass( 'screen-meta-active' ) ) {
+
+    help_link.removeClass( 'screen-meta-active' );
+
     panel.slideUp( 'fast', function() {
-      link.removeClass('screen-meta-active');
+      panel.hide();
+      screen_meta.hide();
       jQuery('.screen-meta-toggle').css('visibility', '');
     });
-    jQuery(wpp_scroll_to).removeClass('wpp_contextual_highlight');
+
+    if( scroll_to ) {
+      scroll_to.removeClass( 'wpp_contextual_highlight');
+    }
+
     return;
 
-  } else {
-    panel.slideDown( 'fast', function() {
-      link.addClass('screen-meta-active');
-    });
   }
 
-  if(jQuery(element).attr('wpp_scroll_to')) {
-    var wpp_scroll_to = jQuery(element).attr('wpp_scroll_to');
-    if(jQuery(wpp_scroll_to).length) {
-      jQuery('html, body').animate({
-        scrollTop: jQuery(wpp_scroll_to).offset().top
-      }, 1000);
+  /* If not open - we open help and maybe scroll to something */
+  if ( !help_link.hasClass( 'screen-meta-active' ) ) {
 
-      jQuery(wpp_scroll_to).addClass('wpp_contextual_highlight');
+    help_link.addClass('screen-meta-active');
+
+    if( scroll_to ) {
+      scroll_to.addClass( 'wpp_contextual_highlight' );
     }
+
+    panel.slideDown( 'fast', function() {
+      panel.show();
+      screen_meta.show();
+
+      if( scroll_to ) {
+
+        jQuery('html, body').animate({
+          scrollTop: scroll_to.offset().top
+        }, 1000);
+
+      }
+
+    });
+
+    return;
+
   }
+
 }
 
 /**
@@ -611,8 +653,8 @@ jQuery(document).ready(function() {
   toggle_advanced_options();
 
   //* Easy way of displaying the contextual help dropdown */
-  jQuery(".wpp_toggle_contextual_help").live("click", function () {
-    wpp_toggle_contextual_help(this);
+  jQuery(".wpp_toggle_contextual_help").live("click", function( event ) {
+    wpp_toggle_contextual_help(this , event );
   });
 
   // Toggle wpp_wpp_settings_configuration_do_not_override_search_result_page_
@@ -658,7 +700,7 @@ jQuery(document).ready(function() {
       jQuery(parent).remove();
     }
 
-    table.trigger('row_removed');
+    table.trigger('row_removed', [parent]);
   });
 
   jQuery('.wpp_attach_to_agent').live('click', function(){

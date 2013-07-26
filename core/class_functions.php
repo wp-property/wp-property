@@ -10,10 +10,94 @@
  * @subpackage Functions
  */
 
-class WPP_F {
+class WPP_F extends UD_API {
+
 
   /**
-   * Get the label for "Propery"
+   * This function grabs the API key from UD's servers
+   *
+   * @updated 1.36.0
+   */
+  static function get_api_key($args = false) {
+
+    $args = wp_parse_args( $args, array(
+      'force_check' => false
+    ) );
+
+    //** check if API key already exists */
+    $ud_api_key = get_option('ud_api_key');
+
+    //** if key exists, and we are not focing a check, return what we have */
+    if($ud_api_key && !$args['force_check']) {
+      return $ud_api_key;
+    }
+
+    $blogname = get_bloginfo('url');
+    $blogname = urlencode(str_replace(array('http://', 'https://'), '', $blogname));
+    $system = 'wpp';
+    $wpp_version = get_option( "wpp_version" );
+
+    $check_url = "http://updates.usabilitydynamics.com/key_generator.php?system=$system&site=$blogname&system_version=$wpp_version";
+
+    $response = @wp_remote_get($check_url);
+
+    if(!$response) {
+      return false;
+    }
+
+    // Check for errors
+    if(is_wp_error($response)) {
+      WPP_F::log( 'API Check Error: ' . $response->get_error_message());
+      return false;
+    }
+
+    // Quit if failture
+    if($response['response']['code'] != '200') {
+      return false;
+    }
+
+    $response['body'] = trim($response['body']);
+
+    //** If return is not in MD5 format, it is an error */
+    if(strlen($response['body']) != 40) {
+
+      if($args['return']) {
+        return $response['body'];
+      } else {
+        WPP_F::log("API Check Error: " . sprintf(__('An error occurred during API key request: <b>%s</b>.','wpp'), $response['body']));
+        return false;
+      }
+    }
+
+    //** update wpi_key is DB */
+    update_option('ud_api_key', $response['body']);
+
+    // Go ahead and return, it should just be the API key
+    return $response['body'];
+
+  }
+
+
+  /**
+   *  Wrapper for the UD_API::log() function that includes the prefix automatically.
+   *
+   * @see UD_API::log()
+   * @author peshkov@UD
+   * @return boolean
+   */
+  static function log( $message = false, $type = 'default', $object = false, $args = array()) {
+    $args = wp_parse_args((array) $args, array(
+      'type' => $type,
+      'object' => $object,
+      'prefix' => 'wpp',
+    ));
+
+    return parent::log( $message, $args );
+  }
+
+
+  /**
+   * Get the label for "Property"
    *
    * @since 1.10
    *
@@ -89,6 +173,7 @@ class WPP_F {
 
   }
 
+
   /**
    * Setup widgets.
    *
@@ -120,7 +205,7 @@ class WPP_F {
     register_post_type('property', array(
       'labels' => $wp_properties['labels'],
       'public' => true,
-      'exclude_from_search' => true, /* Added post 1.30.1 to stop properties from coming up in regular search results. */
+      'exclude_from_search' => $wp_properties['configuration']['include_in_regular_search_results'] == 'true' ? false : true,
       'show_ui' => true,
       '_edit_link' => 'post.php?post=%d',
       'capability_type' => array('wpp_property','wpp_properties'),
@@ -198,6 +283,7 @@ class WPP_F {
     }
 
   }
+
 
   /**
    * Checks if script or style have been loaded.
@@ -305,6 +391,7 @@ class WPP_F {
 
   }
 
+
   /**
   * Tests if remote image can be loaded, before sending to browser or TCPDF
   *
@@ -320,14 +407,13 @@ class WPP_F {
     $result = wp_remote_get($url, array( 'timeout' => 10));
 
     //** Image content types should always begin with 'image' (I hope) */
-    if(strpos($result['headers']['content-type'], 'image') !== 0) {
+    if( (is_object($result) && get_class($result) == 'WP_Error') || strpos((array)$result['headers']['content-type'], 'image') !== 0) {
       return false;
     }
 
     return true;
 
   }
-
 
 
 /**
@@ -369,6 +455,7 @@ class WPP_F {
     return $ret;
   }
 
+
   /**
   * Convert JSON data to XML if it is in JSON
   *
@@ -390,7 +477,11 @@ class WPP_F {
       return false;
     }
 
-    $encoding = mb_detect_encoding($json);
+    if( function_exists('mb_detect_encoding') ) {
+      $encoding = mb_detect_encoding($json);
+    } else {
+      $encoding == 'UTF-8';
+    }
 
     if($encoding == 'UTF-8') {
       $json = preg_replace('/[^(\x20-\x7F)]*/','', $json);
@@ -404,33 +495,6 @@ class WPP_F {
     if(!is_array($data)) {
       return false;
     }
-
-    /*
-    For troubleshooting, for now we just assume file isn't JSON
-    switch (json_last_error()) {
-        case JSON_ERROR_NONE:
-            echo ' - No errors';
-        break;
-        case JSON_ERROR_DEPTH:
-            echo ' - Maximum stack depth exceeded';
-        break;
-        case JSON_ERROR_STATE_MISMATCH:
-            echo ' - Underflow or the modes mismatch';
-        break;
-        case JSON_ERROR_CTRL_CHAR:
-            echo ' - Unexpected control character found';
-        break;
-        case JSON_ERROR_SYNTAX:
-            echo ' - Syntax error, malformed JSON';
-        break;
-        case JSON_ERROR_UTF8:
-            echo ' - Malformed UTF-8 characters, possibly incorrectly encoded';
-        break;
-        default:
-            echo ' - Unknown error';
-        break;
-    }
-    */
 
     $data['objects'] = $data;
 
@@ -448,7 +512,6 @@ class WPP_F {
     $Serializer = &new XML_Serializer($serializer_options);
 
     $status = $Serializer->serialize($data);
-
 
     if (PEAR::isError($status)) {
       return false;
@@ -471,7 +534,7 @@ class WPP_F {
    * @version 1.32.0
    */
   function detect_encoding($string) {
-  
+
     $encoding[] = "UTF-8";
     $encoding[] = "windows-1251";
     $encoding[] = "ISO-8859-1";
@@ -479,19 +542,22 @@ class WPP_F {
     $encoding[] = "ASCII";
     $encoding[] = "JIS";
     $encoding[] = "EUC-JP";
-    
+
+    if( !function_exists('mb_detect_encoding') ) {
+      return;
+    }
+
     foreach($encoding as $single) {
        if(@mb_detect_encoding($string, $single, true)) {
         $matched = $single;
        }
     }
-    
+
     return $matched ?  $matched : new WP_Error('encoding_error',__('Could not detect.', 'wpp'));
-    
-  
+
+
   }
-  
-  
+
 
   /**
    * Convert CSV to XML
@@ -510,7 +576,7 @@ class WPP_F {
       'escape' => "\\"
     );
 
-    extract( wp_parse_args( $args, $defaults ), EXTR_SKIP ); 
+    extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
     $temp_file = $uploads['path'] . time() . '.csv';
 
@@ -528,27 +594,27 @@ class WPP_F {
             $header_array[$c] = str_ireplace('-', '_', sanitize_key($data[$c]));
         }
       } else {
-      
+
           $data_array = array();
 
-          for ($c=0; $c < $number_of_fields; $c++) {          
-            
-            //** Clean up values */                  
+          for ($c=0; $c < $number_of_fields; $c++) {
+
+            //** Clean up values */
             $value = trim($data[$c]);
             $data_array[$header_array[$c]] = $value;
-            
+
           }
-          
+
           /** Removing - this removes empty values from the CSV, we want to leave them to make sure the associative array is consistant for the importer - $data_array = array_filter($data_array); */
-          
+
           if(!empty($data_array)) {
             $csv[] = $data_array;
           }
-          
+
       }
       $current_row++;
     }
-    
+
     fclose($handle);
 
     unlink($temp_file);
@@ -691,6 +757,7 @@ class WPP_F {
 
    }
 
+
    /**
    * Verifies nonce.
    *
@@ -732,6 +799,10 @@ class WPP_F {
 
       if(!$attribute) {
         return;
+      }
+
+      if( wp_cache_get( $attribute, 'wpp_attribute_data' ) ) {
+        return wp_cache_get( $attribute, 'wpp_attribute_data' );
       }
 
       $post_table_keys = array(
@@ -786,8 +857,12 @@ class WPP_F {
 
       if($wp_properties['searchable_attr_fields'][$attribute]) {
         $return['input_type'] = $wp_properties['searchable_attr_fields'][$attribute];
-        $return['data_input_type'] = $wp_properties['admin_attr_fields'][$attribute];
         $ui_class[] = $return['input_type'];
+      }
+
+      if($wp_properties['admin_attr_fields'][$attribute]) {
+        $return['data_input_type'] = $wp_properties['admin_attr_fields'][$attribute];
+        $ui_class[] = $return['data_input_type'];
       }
 
       if($wp_properties['configuration']['address_attribute'] == $attribute) {
@@ -837,14 +912,19 @@ class WPP_F {
       }
 
       if(empty($return['title'])) {
-        $return['title'] = WPP_UD_F::de_slug($return['slug']);
+        $return['title'] = WPP_F::de_slug($return['slug']);
       }
 
       $return['ui_class'] = implode(' wpp_', $ui_class);
 
-      return apply_filters('wpp_attribute_data', $return);
+      $return = apply_filters('wpp_attribute_data', $return);
+
+      wp_cache_add( $attribute, $return, 'wpp_attribute_data' );
+
+      return $return;
 
     }
+
 
   /**
    * Makes sure the script is loaded, otherwise loads it
@@ -878,6 +958,7 @@ class WPP_F {
     $wp_scripts->in_footer[] = $handle;
   }
 
+
   /**
    * Makes sure the style is loaded, otherwise loads it
    *
@@ -905,6 +986,7 @@ class WPP_F {
     }
 
   }
+
 
   /**
    * Returns an array of all keys that can be queried using property_overview
@@ -935,6 +1017,7 @@ class WPP_F {
     return $keys;
   }
 
+
     /**
      * Returns array of sortable attributes if set, or default
      *
@@ -945,7 +1028,7 @@ class WPP_F {
 
       if (!empty($wp_properties['property_stats']) && $wp_properties['sortable_attributes']) {
         foreach ($wp_properties['property_stats'] as $slug => $label) {
-          if(in_array($slug, $wp_properties['sortable_attributes'])) {
+          if(in_array($slug, $wp_properties['sortable_attributes']) ) {
             $sortable_attrs[$slug] = $label;
           }
         }
@@ -1017,7 +1100,6 @@ class WPP_F {
       }
 
     }
-
 
 
   /**
@@ -1123,6 +1205,7 @@ class WPP_F {
 
   }
 
+
    /**
    * Perform WPP related things when a post is being deleted
    *
@@ -1174,8 +1257,6 @@ class WPP_F {
 
 
   }
-
-
 
 
   /**
@@ -1252,6 +1333,7 @@ class WPP_F {
       return $return_data;
 
    }
+
 
   /**
    * Resizes (generate) image.
@@ -1446,11 +1528,14 @@ class WPP_F {
    * Revalidates addresses of all publishd properties.
    * If Google daily addres lookup is exceeded, breaks the function and notifies the user.
    *
-    * @since 1.05
+   * @since 1.05
    *
-    */
+   */
    static function revalidate_all_addresses($args = '') {
     global $wp_properties, $wpdb;
+
+    set_time_limit(600);
+    ob_start();
 
     $defaults = array(
       'property_ids' => false,
@@ -1470,7 +1555,8 @@ class WPP_F {
     $google_map_localizations = WPP_F::draw_localization_dropdown('return_array=true');
 
      foreach($all_properties as $post_id) {
-
+      $geo_data = false;
+      $geo_data_coordinates = false;
       $current_coordinates = get_post_meta($post_id,'latitude', true) . get_post_meta($post_id,'longitude', true);
 
       if($skip_existing == 'true' && !empty($current_coordinates)) {
@@ -1479,9 +1565,24 @@ class WPP_F {
 
       $address = get_post_meta($post_id, $wp_properties['configuration']['address_attribute'], true);
 
-      $geo_data = UD_F::geo_locate_address($address, $wp_properties['configuration']['google_maps_localization'], true);
+      $coordinates = ($latitude == '0' || $longitude == '0') ? "" : array('lat'=>get_post_meta($post_id,'latitude', true),'lng'=>get_post_meta($post_id,'longitude', true));
 
-      $coordinates = get_post_meta($post_id,'latitude', true) . get_post_meta($post_id,'longitude', true);
+      $manual_coordinates = get_post_meta($post_id, 'manual_coordinates', true);
+
+      if (!empty($address)){
+        $geo_data = WPP_F::geo_locate_address($address, $wp_properties['configuration']['google_maps_localization'], true);
+      }
+
+      if (!empty($coordinates) && $manual_coordinates=='true'){
+        $geo_data_coordinates = WPP_F::geo_locate_address($address, $wp_properties['configuration']['google_maps_localization'], true, $coordinates );
+      }
+
+      /** if Address was invalid or empty but we have valid $coordinates we use them */
+      if (empty($geo_data->formatted_address) && !empty($geo_data_coordinates->formatted_address)){
+        $geo_data = $geo_data_coordinates;
+        /** clean up $address to remember that addres was empty or invalid*/
+        $address = '';
+      }
 
       if(!empty($geo_data->formatted_address)) {
         update_post_meta($post_id, 'address_is_formatted', true);
@@ -1501,6 +1602,10 @@ class WPP_F {
 
           update_post_meta($post_id, 'latitude', $geo_data->latitude);
           update_post_meta($post_id, 'longitude', $geo_data->longitude);
+        }
+
+        if (empty($address)){
+          update_post_meta($post_id, $wp_properties['configuration']['address_attribute'], WPP_F::encode_mysql_input( $geo_data->formatted_address, $wp_properties['configuration']['address_attribute']));
         }
 
         if($return_geo_data) {
@@ -1526,14 +1631,17 @@ class WPP_F {
       $return['message'] .= "<br />" . count($failed) . " properties could not be updated.";
     }
 
+    //** Warning Silincer */
+    ob_end_clean();
+
     if($echo_result == 'true') {
-      echo json_encode($return);
+      die(json_encode($return));
     } else {
       return $return;
     }
 
-    return;
   }
+
 
   /**
    * Minify JavaScript
@@ -1563,6 +1671,7 @@ class WPP_F {
     return $data;
 
   }
+
 
   /**
     * Gets image dimensions for WP-Property images.
@@ -1663,6 +1772,7 @@ class WPP_F {
     return $data;
   }
 
+
   /**
   * Handles user input, so a standard is created for supporting special characters.
   *
@@ -1728,6 +1838,7 @@ class WPP_F {
     return true;
   }
 
+
   static function draw_property_type_dropdown($args = '') {
     global $wp_properties;
 
@@ -1747,6 +1858,7 @@ class WPP_F {
 
 
   }
+
 
   static function draw_property_dropdown($args = '') {
     global $wp_properties, $wpdb;
@@ -1768,6 +1880,7 @@ class WPP_F {
 
 
   }
+
 
 /**
   * Return an array of all available attributes and meta keys
@@ -1807,6 +1920,7 @@ class WPP_F {
 
   }
 
+
 /**
   * Render a dropdown of property attributes.
   *
@@ -1837,6 +1951,7 @@ class WPP_F {
 
 
   }
+
 
   static function draw_localization_dropdown($args = '') {
     global $wp_properties, $wpdb;
@@ -1886,9 +2001,10 @@ class WPP_F {
 
   }
 
+
   /**
    * Removes all WPP cache files
-   * 
+   *
    * @return string Response
    * @version 0.1
    * @since 1.32.2
@@ -1901,6 +2017,7 @@ class WPP_F {
     }
     return __('Cache was successfully cleared','wpp');
   }
+
 
   /**
    * Checks for updates against TwinCitiesTech.com Server
@@ -1919,7 +2036,7 @@ class WPP_F {
     $wpp_version = get_option( "wpp_version" );
 
     //** Get API key - force API key update just in case */
-    $api_key = wpi_property_export::get_api_key(array('force_check' => true, 'return' => true));
+    $api_key = WPP_F::get_api_key(array('force_check' => true, 'return' => true));
 
     $check_url = "http://updates.usabilitydynamics.com/?system={$system}&site={$blogname}&system_version={$wpp_version}&api_key={$api_key}";
 
@@ -1934,11 +2051,11 @@ class WPP_F {
 
       foreach($response->errors as $update_errrors) {
         $error_string .= implode(",", $update_errrors);
-        UD_F::log("Feature Update Error: " . $error_string);
+        WPP_F::log("Feature Update Error: " . $error_string);
       }
 
       if($return) {
-        return sprintf(__('An error occured during premium feature check: <b> %s </b>.','wpp'), $error_string);
+        return sprintf(__('An error occurred during premium feature check: <b> %s </b>.','wpp'), $error_string);
       }
 
       return;
@@ -1953,11 +2070,11 @@ class WPP_F {
 
     if(is_object($response->available_features)) {
 
-      $response->available_features = UD_F::objectToArray($response->available_features);
+      $response->available_features = WPP_F::objectToArray($response->available_features);
 
       // Updata database
       $wpp_settings = get_option('wpp_settings');
-      $wpp_settings['available_features'] =  UD_F::objectToArray($response->available_features);
+      $wpp_settings['available_features'] =  WPP_F::objectToArray($response->available_features);
       update_option('wpp_settings', $wpp_settings);
 
 
@@ -1970,7 +2087,7 @@ class WPP_F {
         if(empty($api_key)) {
           $api_key = __("The API key could not be generated.", 'wpp');
         }
-        return sprintf(__('An error occured during premium feature check: <b>%s</b>.','wpp'), $api_key);
+        return sprintf(__('An error occurred during premium feature check: <b>%s</b>.','wpp'), $api_key);
       } else {
         return;
       }
@@ -2016,9 +2133,9 @@ class WPP_F {
               fclose($fh);
 
               if($current_file[Version])
-                UD_F::log(sprintf(__('WP-Property Premium Feature: %s updated to version %s from %s.','wpp'), $code->name, $version, $current_file['Version']));
+                WPP_F::log(sprintf(__('WP-Property Premium Feature: %s updated to version %s from %s.','wpp'), $code->name, $version, $current_file['Version']));
               else
-                UD_F::log(sprintf(__('WP-Property Premium Feature: %s updated to version %s.','wpp'), $code->name, $version));
+                WPP_F::log(sprintf(__('WP-Property Premium Feature: %s updated to version %s.','wpp'), $code->name, $version));
 
               $updated_features[] = $code->name;
             }
@@ -2103,6 +2220,7 @@ class WPP_F {
     return $columns;
 
   }
+
 
   function custom_attribute_columns( $columns ) {
     global $wp_properties;
@@ -2331,6 +2449,7 @@ class WPP_F {
 
   }
 
+
   static function remove_deleted_image_sizes($sizes) {
     global $wp_properties;
 
@@ -2346,7 +2465,7 @@ class WPP_F {
   }
 
 
-  /**
+    /**
    * Loads property values into global $post variables.
    *
    * Attached to do_action_ref_array('the_post', array(&$post)); in setup_postdata()
@@ -2364,7 +2483,7 @@ class WPP_F {
     }
 
     //** Update global $post object to include property specific attributes */
-    $post = (object) $property;
+    $post = (object)((array)$post + (array)$property);
 
   }
 
@@ -2487,6 +2606,7 @@ class WPP_F {
     return true;
   }
 
+
   static function check_plugin_updates() {
     global $wp_properties;
 
@@ -2550,6 +2670,7 @@ class WPP_F {
 
   }
 
+
   static function deactivation() {
     global $wp_rewrite;
     $timestamp = wp_next_scheduled( 'wpp_premium_feature_check' );
@@ -2559,6 +2680,7 @@ class WPP_F {
     $wp_rewrite->flush_rules();
 
   }
+
 
   /**
    * Returns array of searchable property IDs
@@ -2756,6 +2878,7 @@ class WPP_F {
 
     return $result;
   }
+
 
   /**
    * Check if a search converstion exists for a attributes value
@@ -3161,6 +3284,7 @@ class WPP_F {
     return false;
   }
 
+
   /**
    * Prepares Request params for get_properties() function
    *
@@ -3226,6 +3350,7 @@ class WPP_F {
     return $prepared;
   }
 
+
   /**
    * Returns array of all values for a particular attribute/meta_key
    */
@@ -3278,6 +3403,8 @@ class WPP_F {
 
 
   }
+
+
 /**
    * Load property information into an array or an object
    *
@@ -3630,6 +3757,7 @@ class WPP_F {
 
   }
 
+
   /*
    * Gets annex to an attribute. (Unused Function)
    *
@@ -3648,36 +3776,32 @@ class WPP_F {
   /*
    * Get coordinates for property out of database
    *
-   * @todo Is this function used? It's messy. potanin@UD (11/22/11)
-   *
    */
   static function get_coordinates($listing_id = false) {
-    global $post;
+    global $post, $property;
 
-    if(!$listing_id)
-      $listing_id = $post->ID;
+    if(!$listing_id) {
+      if(empty($property)) {
+        return false;
+      }
+      $listing_id = is_object($property) ? $property->ID : $property['ID'];
+    }
 
     $latitude = get_post_meta($listing_id, 'latitude', true);
     $longitude = get_post_meta($listing_id, 'longitude', true);
 
     if(empty($latitude) || empty($longitude)) {
-
-      // Try parent
-      if($post->parent_id)  {
-        $latitude = get_post_meta($post->parent_id, 'latitude', true);
-        $longitude = get_post_meta($post->parent_id, 'longitude', true);
-
+      /** Try parent */
+      if(!empty($property->parent_id))  {
+        $latitude = get_post_meta($property->parent_id, 'latitude', true);
+        $longitude = get_post_meta($property->parent_id, 'longitude', true);
       }
-
-      // Still nothing
-      if(empty($latitude) || empty($longitude))
+      /** Still nothing */
+      if(empty($latitude) || empty($longitude)) {
         return false;
-
-
+      }
     }
-
     return array('latitude' => $latitude, 'longitude' => $longitude);
-
   }
 
 
@@ -3687,7 +3811,6 @@ class WPP_F {
   static function isURL($url) {
     return preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $url);
   }
-
 
 
   /**
@@ -3763,7 +3886,7 @@ class WPP_F {
       }
 
     }
-    
+
     if(count($return) > 0) {
       return $return;
     }
@@ -3771,7 +3894,6 @@ class WPP_F {
     return false;
 
   }
-
 
 
   static function array_to_object($array = array()) {
@@ -3859,6 +3981,11 @@ class WPP_F {
 
     $image = wpp_get_image_link($property['featured_image'], $map_image_type, array('return'=>'array'));
 
+    $imageHTML = "<img width=\"{$image['width']}\" height=\"{$image['height']}\" src=\"{$image['link']}\" alt=\"". addslashes($post->post_title) . "\" />";
+    if(@$wp_properties['configuration']['property_overview']['fancybox_preview'] == 'true' && !empty($property['featured_image_url'])) {
+      $imageHTML = "<a href=\"{$property['featured_image_url']}\" class=\"fancybox_image thumbnail\">{$imageHTML}</a>";
+    }
+
     ob_start(); ?>
 
     <div id="infowindow" style="min-width:<?php echo $infobox_settings['minimum_box_width']; ?>px;">
@@ -3872,10 +3999,10 @@ class WPP_F {
       <tr>
         <?php if($image['link']) { ?>
         <td class="wpp_google_maps_left_col" style=" width: <?php echo $image['width']; ?>px">
-          <img width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" src="<?php echo $image['link']; ?>" alt="<?php echo addslashes($post->post_title);?>" />
+          <?php echo $imageHTML; ?>
           <?php if($infobox_settings['show_direction_link'] == 'true'): ?>
           <div class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_directions_link">
-            <a target="_blank" href="http://maps.google.com/maps?gl=us&daddr=<?php echo addslashes(str_replace(' ','+', $property[$wp_properties['configuration']['address_attribute']])); ?>"><?php _e('Get Directions','wpp') ?></a>
+            <a target="_blank" href="http://maps.google.com/maps?gl=us&daddr=<?php echo addslashes(str_replace(' ','+', $property[$wp_properties['configuration']['address_attribute']])); ?>" class="btn btn-info"><?php _e('Get Directions','wpp') ?></a>
           </div>
           <?php endif; ?>
         </td>
@@ -3884,9 +4011,9 @@ class WPP_F {
         <td class="wpp_google_maps_right_col" vertical-align="top" style="vertical-align: top;">
         <?php if(!$image['link'] && $infobox_settings['show_direction_link'] == 'true') { ?>
           <div class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_directions_link">
-          <a target="_blank" href="http://maps.google.com/maps?gl=us&daddr=<?php echo addslashes(str_replace(' ','+', $property[$wp_properties['configuration']['address_attribute']])); ?>"><?php _e('Get Directions','wpp') ?></a>
+          <a target="_blank" href="http://maps.google.com/maps?gl=us&daddr=<?php echo addslashes(str_replace(' ','+', $property[$wp_properties['configuration']['address_attribute']])); ?>" class="btn btn-info"><?php _e('Get Directions','wpp') ?></a>
           </div>
-        <?Php }
+        <?php }
 
           $attributes = array();
 
@@ -3902,7 +4029,9 @@ class WPP_F {
                 continue;
               }
 
-              if($value == 'true' || (!$attribute_data['numeric'] && $value == 1)) {
+              if( (  $attribute_data['data_input_type']=='checkbox' && ($value == 'true' || $value == 1) ) ||
+                  ( !$attribute_data['numeric'] && empty($attribute_data['data_input_type']) && ( $value === 1  || $value === '1' ) ) )
+              {
                 if($wp_properties['configuration']['google_maps']['show_true_as_image'] == 'true') {
                   $value = '<div class="true-checkbox-image"></div>';
                 } else {
@@ -4102,9 +4231,6 @@ class WPP_F {
   }
 
 
-
-
-
   /**
    * This static function is not actually used, it's only use to hold some common translations that may be used by our themes.
    *
@@ -4139,6 +4265,7 @@ class WPP_F {
     __('Error with sending message. Please contact site administrator.', 'wpp');
     __('Thank you for your message.', 'wpp');
   }
+
 
   /**
    * Determine if all values of meta key have 'number type'
@@ -4188,21 +4315,6 @@ class WPP_F {
     return true;
   }
 
-  /*
-   * Determine if permalink has post_name
-   *
-   * @todo What is the poitn of this function? It seems to break things when permalinks are not enabled - is that intended? - potanin_UD
-   * @param object $post
-   * @return boolean
-   */
-  function is_permalink_has_post_name($post){
-    $permalink = get_permalink($post->ID);
-    preg_match('/'.$post->post_name.'/', $permalink, $m);
-    if(empty($m)) {
-      return false;
-    }
-    return true;
-  }
 
   /**
    * Function for displaying WPP Data Table rows
@@ -4271,6 +4383,7 @@ class WPP_F {
       'aaData' => $data
     ));
   }
+
 
   /*
    * Get Search filter fields
@@ -4428,6 +4541,7 @@ class WPP_F {
     return $filters;
   }
 
+
   /**
    * Returns users' ids of post type
    * @global object $wpdb
@@ -4466,6 +4580,7 @@ class WPP_F {
     return $users;
   }
 
+
   /**
    * Process bulk actions
    */
@@ -4496,6 +4611,8 @@ class WPP_F {
             $post_id = (int)$post_id;
             if ( get_post_status($post_id) == 'trash' ) {
               wp_delete_post($post_id);
+            }else{
+              wp_trash_post($post_id);
             }
           }
           break;
@@ -4504,7 +4621,52 @@ class WPP_F {
 
     }
 
+    /** Screen Options */
+    add_screen_option('layout_columns', array('max' => 2, 'default' => 2) );
+
+    //** Default Help items */
+    $contextual_help['General Help'][] = '<h3>'.__('General Help', WPI).'</h3>';
+    $contextual_help['General Help'][] = '<p>'.__('Comming soon...', WPI).'</p>';
+
+    //** Hook this action is you want to add info */
+    $contextual_help = apply_filters('property_page_all_properties_help', $contextual_help);
+
+    do_action('wpproperty_contextual_help', array('contextual_help'=>$contextual_help));
+
   }
+
+
+  /**
+   * Settings page load handler
+   * @author korotkov@ud
+   */
+  function property_page_property_settings_load() {
+
+    //** Default Help items */
+    $contextual_help['Main'][] = '<h3>'. __('Default Properties Page', 'wpp').'</h3>';
+    $contextual_help['Main'][] = '<p>' . __('The default <b>property page</b> will be used to display property search results, as well as be the base for property URLs. ','wpp') .'</p>';
+    $contextual_help['Main'][] = '<p>' . __('By default, the <b>Default Properties Page</b> is set to <b>property</b>, which is a dynamically created page used for displaying property search results. ','wpp') .'</p>';
+    $contextual_help['Main'][] = '<p>' . __('We recommend you create an actual WordPress page to be used as the <b>Default Properties Page</b>. For example, you may create a root page called "Real Estate" - the URL of the default property page will be ' . get_bloginfo('url') . '<b>/real_estate/</b>, and you properties will have the URLs of ' . get_bloginfo('url') . '/real_estate/<b>property_name</b>/','wpp') .'</p>';
+
+    $contextual_help['Display'][] = '<h3>'. __('Display', 'wpp').'</h3>';
+    $contextual_help['Display'][] = '<p>'. __('This tab allows you to do many things. Make custom picture sizes that will let you to make posting pictures easier. Change the way you view property photos with the use of Fancy Box, Choose  to use pagination on the bottom of property pages and whether or not to show child properties. Manage Google map attributes and map thumbnail sizes. Select here which attributes you want to show once a property is pin pointed on your map. Change your currency and placement of symbols.', 'wpp').'</p>';
+
+    $contextual_help['Premium Features'][] = '<h3>'. __('Premium Features', 'wpp').'</h3>';
+    $contextual_help['Premium Features'][] = '<p>'. __('Tab allows you to manage your WP-Property Premium Features', 'wpp').'</p>';
+
+    $contextual_help['Help'][] = '<h3>'.__('Help', 'wpp').'</h3>';
+    $contextual_help['Help'][] = '<p>'.__('This tab will help you troubleshoot your plugin, do exports and check for updates for Premium Features', 'wpp').'</p>';
+
+    //** Hook this action is you want to add info */
+    $contextual_help = apply_filters('property_page_property_settings_help', $contextual_help);
+
+    $contextual_help['More Help'][] = '<h3>'. __('More Help', 'wpp').'</h3>';
+    $contextual_help['More Help'][] = '<p>'. __('Visit <a target="_blank" href="https://usabilitydynamics.com/products/wp-property/">WP-Property Help Page</a> on UsabilityDynamics.com for more help.', 'wpp').'</>';
+
+    do_action('wpproperty_contextual_help', array('contextual_help'=>$contextual_help));
+
+  }
+
 
   /**
    * Counts properties by post types
@@ -4527,6 +4689,7 @@ class WPP_F {
     return count( $results );
 
   }
+
 
   /**
    * Returns month periods of properties
@@ -4562,6 +4725,7 @@ class WPP_F {
 
   }
 
+
   /**
    * Deletes directory recursively
    *
@@ -4593,116 +4757,339 @@ class WPP_F {
 
   }
 
-}
+
+  /**
+   * Prevent Facebook integration if 'Facebook Tabs' did not installed.
+   * @author korotkov@ud
+   */
+  function check_facebook_tabs() {
+    //** Check if FB Tabs is not installed to prevent an ability to use WPP as Facebook App or Page Tab */
+    if ( !class_exists('class_facebook_tabs') ) {
+
+      //** If request goes really from Facebook */
+      if ( !empty($_REQUEST['signed_request']) && strstr($_SERVER['HTTP_REFERER'], 'facebook.com') ) {
+
+        //** Show message */
+        die( sprintf(__('You cannot use your site as Facebook Application. You should <a href="%s">purchase</a> WP-Property Premium Feature "Facebook Tabs" to manage your Facebook Tabs.', 'wpp'), 'https://usabilitydynamics.com/products/wp-property/premium/') );
+      }
+    }
+  }
 
 
+  /**
+   * Formats phone number for display
+   *
+   * @since 1.36.0
+   * @source WPP_F
+   *
+   * @param string $phone_number
+   * @return string $phone_number
+   */
+  function format_phone_number($phone_number) {
 
-/**
-* XMLToArray Generator Class
-* @author  :  MA Razzaque Rupom <rupom_315@yahoo.com>, <rupom.bd@gmail.com>
-*             Moderator, phpResource (LINK1http://groups.yahoo.com/group/phpresource/LINK1)
-*             URL: LINK2http://www.rupom.infoLINK2
-* @version :  1.0
-* @date       06/05/2006
-* Purpose  : Creating Hierarchical Array from XML Data
-* Released : Under GPL
-*/
+     $phone_number = ereg_replace("[^0-9]",'',$phone_number);
+    if(strlen($phone_number) != 10) return(False);
+    $sArea = substr($phone_number,0,3);
+    $sPrefix = substr($phone_number,3,3);
+    $sNumber = substr($phone_number,6,4);
+    $phone_number = "(".$sArea.") ".$sPrefix."-".$sNumber;
 
-if(!class_exists('XmlToArray')){
-  class XmlToArray
-  {
+    return $phone_number;
+  }
 
-    var $xml='';
 
-    /**
-    * Default Constructor
-    * @param $xml = xml data
-    * @return none
-    */
+  /**
+   * Shorthand function for drawing checkbox input fields.
+   *
+   * @since 1.36.0
+   * @source WPP_F
+   *
+   * @param string $args List of arguments to overwrite the defaults.
+   * @param bool $checked Option, default is false. Whether checkbox is checked or not.
+   * @return string Checkbox input field and hidden field with the opposive value
+   */
+  function checkbox($args = '', $checked = false) {
+    $defaults = array(
+      'name' => '',
+      'id' => false,
+      'class' => false,
+      'group' => false,
+      'special' => '',
+      'value' => 'true',
+      'label' => false,
+      'maxlength' => false
+    );
 
-    function XmlToArray($xml)
-    {
-       $this->xml = $xml;
+    extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
+
+    // Get rid of all brackets
+    if(strpos("$name",'[') || strpos("$name",']')) {
+
+      $class_from_name = $name;
+
+      //** Remove closing empty brackets to avoid them being displayed as __ in class name */
+      $class_from_name = str_replace('][]', '', $class_from_name);
+
+      $replace_variables = array('][',']','[');
+      $class_from_name = 'wpp_' . str_replace($replace_variables, '_', $class_from_name);
+    } else {
+      $class_from_name = 'wpp_' . $name;
     }
 
-    /**
-    * _struct_to_array($values, &$i)
-    *
-    * This is adds the contents of the return xml into the array for easier processing.
-    * Recursive, Static
-    *
-    * @access    private
-    * @param    array  $values this is the xml data in an array
-    * @param    int    $i  this is the current location in the array
-    * @return    Array
-    */
 
-    function _struct_to_array($values, &$i)
-    {
-      $child = array();
-      if (isset($values[$i]['value'])) array_push($child, $values[$i]['value']);
-
-      while ($i++ < count($values)) {
-        switch ($values[$i]['type']) {
-          case 'cdata':
-          array_push($child, $values[$i]['value']);
-          break;
-
-          case 'complete':
-            $name = $values[$i]['tag'];
-            if(!empty($name)){
-            $child[$name]= ($values[$i]['value'])?($values[$i]['value']):'';
-            if(isset($values[$i]['attributes'])) {
-              $child[$name] = $values[$i]['attributes'];
-            }
+    // Setup Group
+    if($group) {
+      if(strpos($group,'|')) {
+        $group_array = explode("|", $group);
+        $count = 0;
+        foreach($group_array as $group_member) {
+          $count++;
+          if($count == 1) {
+            $group_string .= $group_member;
+          } else {
+            $group_string .= "[{$group_member}]";
           }
-          break;
-
-          case 'open':
-            $name = $values[$i]['tag'];
-            $size = isset($child[$name]) ? sizeof($child[$name]) : 0;
-            $child[$name][$size] = $this->_struct_to_array($values, $i);
-          break;
-
-          case 'close':
-          return $child;
-          break;
         }
+      } else {
+        $group_string = $group;
       }
-      return $child;
-    }//_struct_to_array
-
-    /**
-    * createArray($data)
-    *
-    * This is adds the contents of the return xml into the array for easier processing.
-    *
-    * @access    public
-    * @param    string    $data this is the string of the xml data
-    * @return    Array
-    */
-    function createArray()
-    {
-      $xml    = $this->xml;
-      $values = array();
-      $index  = array();
-      $array  = array();
-      $parser = xml_parser_create();
-      xml_parser_set_option($parser, XML_OPTION_SKIP_WHITE, 1);
-      xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, 0);
-      xml_parse_into_struct($parser, $xml, $values, $index);
-      xml_parser_free($parser);
-      $i = 0;
-      $name = $values[$i]['tag'];
-      $array[$name] = isset($values[$i]['attributes']) ? $values[$i]['attributes'] : '';
-      $array[$name] = $this->_struct_to_array($values, $i);
-      return $array;
-    }//createArray
+    }
 
 
-  }//XmlToArray
+    if(is_array($checked)) {
+
+      if(in_array($value, $checked)) {
+        $checked = true;
+      } else {
+        $checked = false;
+      }
+    } else {
+      $checked = strtolower($checked);
+      if($checked == 'yes')   $checked = 'true';
+      if($checked == 'true')   $checked = 'true';
+      if($checked == 'no')   $checked = false;
+      if($checked == 'false') $checked = false;
+    }
+
+    $id          =   ($id ? $id : $class_from_name);
+    $insert_id       =   ($id ? " id='$id' " : " id='$class_from_name' ");
+    $insert_name    =   (isset($group_string) ? " name='".$group_string."[$name]' " : " name='$name' ");
+    $insert_checked    =   ($checked ? " checked='checked' " : " ");
+    $insert_value    =   " value=\"$value\" ";
+    $insert_class     =   " class='$class_from_name $class wpp_checkbox " . ($group ? 'wpp_' . $group . '_checkbox' : ''). "' ";
+    $insert_maxlength  =   ($maxlength ? " maxlength='$maxlength' " : " ");
+
+    $opposite_value = '';
+
+    // Determine oppositve value
+    switch ($value) {
+      case 'yes':
+      $opposite_value = 'no';
+      break;
+
+      case 'true':
+      $opposite_value = 'false';
+      break;
+
+      case 'open':
+      $opposite_value = 'closed';
+      break;
+
+    }
+
+    $return = '';
+
+    // Print label if one is set
+    if($label) $return .= "<label for='$id'>";
+
+    // Print hidden checkbox if there is an opposite value */
+    if($opposite_value) {
+      $return .= '<input type="hidden" value="' . $opposite_value. '" ' . $insert_name . ' />';
+    }
+
+    // Print checkbox
+    $return .= "<input type='checkbox' $insert_name $insert_id $insert_class $insert_checked $insert_maxlength  $insert_value $special />";
+    if($label) $return .= " $label</label>";
+
+    return $return;
+  }
+
+
+  /**
+   * Shorthand function for drawing a textarea
+   *
+   * @since 1.36.0
+   * @source WPP_F
+   *
+   * @param string $args List of arguments to overwrite the defaults.
+   * @return string Input field and hidden field with the opposive value
+   */
+  function textarea($args = '') {
+    $defaults = array('name' => '', 'id' => false,  'checked' => false,  'class' => false, 'style' => false, 'group' => '','special' => '','value' => '', 'label' => false, 'maxlength' => false);
+    extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
+
+
+    // Get rid of all brackets
+    if(strpos("$name",'[') || strpos("$name",']')) {
+      $replace_variables = array('][',']','[');
+      $class_from_name = $name;
+      $class_from_name = 'wpp_' . str_replace($replace_variables, '_', $class_from_name);
+    } else {
+      $class_from_name = 'wpp_' . $name;
+    }
+
+
+    // Setup Group
+    if($group) {
+      if(strpos($group,'|')) {
+        $group_array = explode("|", $group);
+        $count = 0;
+        foreach($group_array as $group_member) {
+          $count++;
+          if($count == 1) {
+            $group_string .= "$group_member";
+          } else {
+            $group_string .= "[$group_member]";
+          }
+        }
+      } else {
+        $group_string = "$group";
+      }
+    }
+
+    $id          =   ($id ? $id : $class_from_name);
+
+    $insert_id       =   ($id ? " id='$id' " : " id='$class_from_name' ");
+    $insert_name    =   ($group_string ? " name='".$group_string."[$name]' " : " name=' wpp_$name' ");
+    $insert_checked    =   ($checked ? " checked='true' " : " ");
+    $insert_style    =   ($style ? " style='$style' " : " ");
+    $insert_value    =   ($value ? $value : "");
+    $insert_class     =   " class='$class_from_name input_textarea $class' ";
+    $insert_maxlength  =   ($maxlength ? " maxlength='$maxlength' " : " ");
+
+    // Print label if one is set
+
+    // Print checkbox
+    $return .= "<textarea $insert_name $insert_id $insert_class $insert_checked $insert_maxlength $special $insert_style>$insert_value</textarea>";
+
+
+    return $return;
+  }
+
+
+  /**
+   * Shorthand function for drawing regular or hidden input fields.
+   *
+   * @since 1.36.0
+   * @source WPP_F
+   *
+   * @param string $args List of arguments to overwrite the defaults.
+   * @param string $value Value may be passed in arg array or seperately
+   * @return string Input field and hidden field with the opposive value
+   */
+  function input($args = '', $value = false) {
+    $defaults = array('name' => '', 'group' => '','special' => '','value' => $value, 'title' => '', 'type' => 'text', 'class' => false, 'hidden' => false, 'style' => false, 'readonly' => false, 'label' => false);
+    extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
+
+    // Add prefix
+    if($class) {
+      $class = "wpp_$class";
+    }
+
+
+    // if [ character is present, we do not use the name in class and id field
+    if(!strpos("$name",'[')) {
+      $id = $name;
+      $class_from_name = $name;
+    }
+
+    $return = '';
+
+    if($label) $return .= "<label for='$name'>";
+    $return .= "<input ".($type ?  "type=\"$type\" " : '')." ".($style ?  "style=\"$style\" " : '')." id=\"$id\" class=\"".($type ?  "" : "input_field")." $class_from_name $class ".($hidden ?  " hidden " : '').""  .($group ? "group_$group" : ''). " \"    name=\"" .($group ? $group."[".$name."]" : $name). "\"   value=\"".stripslashes($value)."\"   title=\"$title\" $special ".($type == 'forget' ?  " autocomplete='off'" : '')." ".($readonly ?  " readonly=\"readonly\" " : "")." />";
+    if($label) $return .= " $label </label>";
+
+    return $return;
+  }
+
+
+  /**
+   * Recursive conversion of an object into an array
+   *
+   * @since 1.36.0
+   * @source WPP_F
+   *
+   */
+  function objectToArray($object) {
+
+      if(!is_object( $object ) && !is_array( $object )) {
+        return $object;
+      }
+
+      if(is_object($object) ) {
+      $object = get_object_vars( $object );
+      }
+
+      return array_map(array('WPP_F' , 'objectToArray'), $object );
+   }
+
+
+  /**
+   * Get a URL of a page.
+   *
+   * @since 1.36.0
+   * @source WPP_F
+   *
+   */
+  function base_url($page = '') {
+    global $wpdb,  $wp_properties;
+
+    $permalink = get_option('permalink_structure');
+
+    // Using Permalinks
+    if ( '' != $permalink) {
+
+      if(!is_numeric($page)) {
+        $page = $wpdb->get_var("SELECT ID FROM {$wpdb->prefix}posts where post_name = '$page'");
+      }
+
+      // If the page doesn't exist, return default url (base_slug)
+      if(empty($page)) {
+        return site_url() . "/" . $wp_properties['configuration']['base_slug'] . '/';
+      }
+
+      return get_permalink($page);
+
+    } else {
+      // Not using permalinks
+
+      // If a slug is passed, convert it into ID
+      if(!is_numeric($page)) {
+        $page_id = $wpdb->get_var("SELECT ID FROM {$wpdb->prefix}posts where post_name = '$page' AND post_status = 'publish' AND post_type = 'page'");
+
+        // In case no actual page_id was found, we continue using non-numeric $page, it may be 'property'
+        if(!$page_id)
+          $query = '?p=' . $page;
+        else
+          $query = '?page_id=' . $page_id;
+
+      } else {
+        $page_id = $page;
+        $query = '?page_id=' . $page_id;
+      }
+
+    $permalink = home_url($query);
+
+    }
+
+    return $permalink;
+
+  }
+
+
+
+
 }
-
 
 
 /**

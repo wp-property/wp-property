@@ -25,19 +25,19 @@
  * @package WP-Property
 */?>
  <?php if ( have_properties() ) { ?>
- <div class="wpp_row_view wpp_property_view_result">
-  <div class="all-properties">
+ <div class="<?php wpp_css('property_overview::row_view', "wpp_row_view wpp_property_view_result"); ?>">
+  <div class="<?php wpp_css('property_overview::all_properties', "all-properties"); ?>">
   <?php foreach ( returned_properties('load_gallery=false') as $property) {  ?>
 
-    <div class="property_div <?php echo $property['post_type']; ?> clearfix">
+    <div class="<?php wpp_css('property_overview::property_div', "property_div {$property['post_type']} clearfix"); ?>">
 
-        <div class="wpp_overview_left_column">
+        <div class="<?php wpp_css('property_overview::left_column', "wpp_overview_left_column"); ?>">
           <?php property_overview_image(); ?>
         </div>
 
-        <div class="wpp_overview_right_column">
+        <div class="<?php wpp_css('property_overview::right_column', "wpp_overview_right_column"); ?>">
 
-            <ul class="wpp_overview_data">
+            <ul class="<?php wpp_css('property_overview::data', "wpp_overview_data"); ?>">
                 <li class="property_title">
                     <a <?php echo $in_new_window; ?> href="<?php echo $property['permalink']; ?>"><?php echo $property['post_title']; ?></a>
                     <?php if($property['is_child']): ?>
@@ -66,7 +66,7 @@
             <?php if($property['price']): ?>
                 <li class="property_price"><?php echo $property['price']; ?></li>
             <?php endif; ?>
-            
+
             <?php if($show_children && $property['children']): ?>
             <li class="child_properties">
                 <div class="wpd_floorplans_title"><?php echo $child_properties_title; ?></div>
@@ -80,7 +80,7 @@
                 </table>
             </li>
             <?php endif; ?>
-            
+
             <?php if(!empty($wpp_query['detail_button'])) : ?>
             <li><a <?php echo $in_new_window; ?> class="button" href="<?php echo $property['permalink']; ?>"><?php echo $wpp_query['detail_button'] ?></a></li>
             <?php endif; ?>

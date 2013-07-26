@@ -134,7 +134,7 @@ if(!function_exists('property_overview_image')) {
       ob_start();
       ?>
       <div class="property_image">
-        <a href="<?php echo $thumbnail_link; ?>" title="<?php echo $property['post_title'] . ($property['parent_title'] ? __(' of ', 'wpp') . $property['parent_title'] : "");?>"  class="property_overview_thumb property_overview_thumb_<?php echo $thumbnail_size; ?> <?php echo $link_class; ?>" rel="properties" >
+        <a href="<?php echo $thumbnail_link; ?>" title="<?php echo $property['post_title'] . ($property['parent_title'] ? __(' of ', 'wpp') . $property['parent_title'] : "");?>"  class="property_overview_thumb property_overview_thumb_<?php echo $thumbnail_size; ?> <?php echo $link_class; ?> thumbnail" rel="properties" >
           <img width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" src="<?php echo $image['link']; ?>" alt="<?php echo $property['post_title'];?>" />
         </a>
       </div>
@@ -603,26 +603,28 @@ if(!function_exists('wpi_draw_pagination')):
     ob_start(); ?>
     <div class="properties_pagination <?php echo $settings['class']; ?> wpp_slider_pagination" id="properties_pagination_<?php echo $unique_hash; ?>">
       <div class="wpp_pagination_slider_status">
-        <?php if($hide_count != 'true') { ?>
-          <span class="wpp_property_results"><?php echo ($properties['total'] > 0 ? WPP_F::format_numeric($properties['total']) : __('None', 'wpp')); ?></span>
-          <?php _e(' found.', 'wpp'); ?>
-        <?php } ?>
-        <?php if($use_pagination) { ?>
-        <?php _e('Viewing page', 'wpp'); ?> <span class="wpp_current_page_count">1</span> <?php _e('of', 'wpp'); ?> <span class="wpp_total_page_count"><?php echo $pages; ?></span>.
-        <?php } ?>
+        <span class="wpp_property_results_options">
+          <?php if($hide_count != 'true') { ?>
+            <span class="wpp_property_results"><?php echo ($properties['total'] > 0 ? WPP_F::format_numeric($properties['total']) : __('None', 'wpp')); ?></span>
+            <?php _e(' found.', 'wpp'); ?>
+          <?php } ?>
+          <?php if($use_pagination) { ?>
+          <?php _e('Viewing page', 'wpp'); ?> <span class="wpp_current_page_count">1</span> <?php _e('of', 'wpp'); ?> <span class="wpp_total_page_count"><?php echo $pages; ?></span>.
+          <?php } ?>
+        </span>
         <?php if($sortable_attrs) { ?>
-        <span class="wpp_sorter_options"><label  class="wpp_sort_by_text"><?php echo $settings['sort_by_text']; ?></label>
+        <span class="wpp_sorter_options"><span  class="wpp_sort_by_text"><?php echo $settings['sort_by_text']; ?></span>
         <?php
         if($settings['sorter_type'] == 'buttons') { ?>
         <?php foreach($sortable_attrs as $slug => $label) { ?>
-          <span class="wpp_sortable_link <?php echo ($sort_by == $slug ? 'wpp_sorted_element':''); ?>" sort_order="<?php echo $sort_order ?>" sort_slug="<?php echo $slug; ?>"><?php echo $label; ?></span>
+          <span class="wpp_sortable_link <?php echo ($sort_by == $slug ? 'wpp_sorted_element':''); ?> label label-info" sort_order="<?php echo $sort_order ?>" sort_slug="<?php echo $slug; ?>"><?php echo $label; ?></span>
         <?php } } elseif($settings['sorter_type'] == 'dropdown') { ?>
-        <select class="wpp_sortable_dropdown sort_by" name="sort_by">
+        <select class="wpp_sortable_dropdown sort_by label-info" name="sort_by">
         <?php foreach($sortable_attrs as $slug => $label) { ?>
           <option <?php echo ($sort_by == $slug ? 'class="wpp_sorted_element" selected="true"':''); ?> sort_slug="<?php echo $slug; ?>" value="<?php echo $slug; ?>"><?php echo $label; ?></option>
         <?php } ?>
         </select>
-        <span class="wpp_overview_sorter sort_order <?php echo $sort_order ?>" sort_order="<?php echo $sort_order ?>"></span>
+        <?php /* <span class="wpp_overview_sorter sort_order <?php echo $sort_order ?> label label-info" sort_order="<?php echo $sort_order ?>"></span> */ ?>
         <?php } else {
           do_action('wpp_custom_sorter', array('settings' => $settings, 'wpp_query' => $wpp_query, 'sorter_type' => $settings['sorter_type']));
         }
@@ -746,7 +748,7 @@ if(!function_exists('prepare_property_for_display')):
           continue;
         }
 
-        $attribute_value = do_shortcode("{$attribute_value}");
+        $attribute_value = do_shortcode(html_entity_decode($attribute_value));
 
         $attribute_value = str_replace("\n", "", nl2br($attribute_value));
 
@@ -819,21 +821,21 @@ endif;
 if(!function_exists('the_tagline')):
    function the_tagline($before = '', $after = '', $echo = true) {
     global $post;
-    
+
     $content = $post->tagline;
-    
+
     if ( strlen($content) == 0 ) {
       return;
     }
-      
+
     $content = $before . $content . $after;
-    
+
     if ( $echo ) {
       echo $content;
     } else {
       return $content;
     }
-    
+
   }
 endif;
 
@@ -897,9 +899,10 @@ if(!function_exists('draw_stats')):
     $defaults = array(
       'sort_by_groups' => $wp_properties['configuration']['property_overview']['sort_stats_by_groups'],
       'display' => 'dl_list',
-      'show_true_as_image' => 'false',
+      'show_true_as_image' => $wp_properties['configuration']['property_overview']['show_true_as_image'],
       'make_link' => 'true',
-      'hide_false' => 'false'
+      'hide_false' => 'false',
+      'first_alt' => 'false',
     );
 
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
@@ -944,13 +947,17 @@ if(!function_exists('draw_stats')):
       $value = html_entity_decode($value);
 
       //** Single "true" is converted to 1 by get_properties() we check 1 as well, as long as it isn't a numeric attribute */
-      if($value == 'true' || (!$attribute_data['numeric'] && $value == 1)){
+      if( (  $attribute_data['data_input_type']=='checkbox' && ($value == 'true' || $value == 1) ) ||
+          ( !$attribute_data['numeric'] && empty($attribute_data['data_input_type']) && ( $value === 1  || $value === '1' ) ) )
+      {
         if($show_true_as_image == 'true') {
           $value = '<div class="true-checkbox-image"></div>';
         } else {
           $value = __('Yes', 'wpp');
         }
       } else if ($value == 'false') {
+        if($wp_properties['configuration']['property_overview']['show_true_as_image']=='true')
+          continue;
         $value = __('No', 'wpp');
       }
 
@@ -960,32 +967,33 @@ if(!function_exists('draw_stats')):
         $value = "<a href='{$value}' title='{$label}'>{$value}</a>";
       }
 
-      $stats[$attribute_label] = $value;
+      $stats[$attribute_label]= $value;
     }
 
     if($display == 'array') {
       return $stats;
     }
 
+    $alt = $first_alt == 'true' ? "" : "alt";
+
     //** Disable regular list if groups are NOT enabled, or if groups is not an array */
     if($sort_by_groups != 'true' || !is_array($groups)) {
 
-      $alt = 'alt';
-
       foreach ($stats as $label => $value) {
         $tag = $labels_to_keys[$label];
-        $alt = $alt == "alt" ? "" : "alt";
+
+        $alt = ($alt == "alt") ? "" : "alt";
         switch($display) {
           case 'dl_list':
             ?>
-            <dt class="wpp_stat_dt_<?php echo $tag; ?>"><?php echo $label; ?></dt>
+            <dt class="wpp_stat_dt_<?php echo $tag; ?>"><?php echo $label; ?><span class="wpp_colon">:</span></dt>
             <dd class="wpp_stat_dd_<?php echo $tag; ?> <?php echo $alt; ?>"><?php echo $value; ?>&nbsp;</dd>
             <?php
             break;
           case 'list':
             ?>
             <li class="wpp_stat_plain_list_<?php echo $tag; ?> <?php echo $alt; ?>">
-              <span class="attribute"><?php echo $label; ?>:</span>
+              <span class="attribute"><?php echo $label; ?><span class="wpp_colon">:</span></span>
               <span class="value"><?php echo $value; ?>&nbsp;</span>
             </li>
             <?php
@@ -1006,22 +1014,25 @@ if(!function_exists('draw_stats')):
       $labels_to_keys = array_flip($wp_properties['property_stats']);
 
       foreach($stats_by_groups as $gslug => $gstats) {
-
+        ?>
+        <div class="wpp_feature_list">
+        <?php
         if($main_stats_group != $gslug || !@key_exists($gslug, $groups)) {
           $group_name = ( @key_exists($gslug, $groups) ? $groups[$gslug]['name'] : __('Other','wpp') );
           ?>
-          <span class="wpp_stats_group"><?php echo $group_name; ?></span>
+          <h2 class="wpp_stats_group"><?php echo $group_name; ?></h2>
           <?php
         }
 
-        $alt = 'alt';
         switch($display) {
           case 'dl_list':
             ?>
-            <dl id="property_stats" class="property_stats overview_stats">
+            <dl class="wpp_property_stats overview_stats">
             <?php foreach($gstats as $label => $value) : ?>
-              <?php $tag = $labels_to_keys[$label]; ?>
-              <?php $alt = $alt == "alt" ? "" : "alt"; ?>
+              <?php
+                $tag = $labels_to_keys[$label];
+              ?>
+              <?php $alt = ($alt == "alt") ? "" : "alt"; ?>
               <dt class="wpp_stat_dt_<?php echo $tag; ?>"><?php echo $label; ?></dt>
               <dd class="wpp_stat_dd_<?php echo $tag; ?> <?php echo $alt; ?>"><?php echo $value; ?>&nbsp;</dd>
             <?php endforeach; ?>
@@ -1030,10 +1041,12 @@ if(!function_exists('draw_stats')):
             break;
           case 'list':
             ?>
-            <ul class="overview_stats wpp_property_stats">
+            <ul class="overview_stats wpp_property_stats list">
             <?php foreach($gstats as $label => $value) : ?>
-              <?php $tag = $labels_to_keys[$label]; ?>
-              <?php $alt = $alt == "alt" ? "" : "alt"; ?>
+              <?php
+                $tag = $labels_to_keys[$label];
+                $alt = ($alt == "alt") ? "" : "alt";
+              ?>
               <li class="wpp_stat_plain_list_<?php echo $tag; ?> <?php echo $alt; ?>">
                 <span class="attribute"><?php echo $label; ?>:</span>
                 <span class="value"><?php echo $value; ?>&nbsp;</span>
@@ -1044,6 +1057,7 @@ if(!function_exists('draw_stats')):
             break;
           case 'plain_list':
             foreach($gstats as $label => $value) {
+              $tag = $labels_to_keys[$label];
               ?>
               <span class="attribute"><?php echo $label; ?>:</span>
               <span class="value"><?php echo $value; ?>&nbsp;</span>
@@ -1052,6 +1066,9 @@ if(!function_exists('draw_stats')):
             }
             break;
         }
+        ?>
+        </div>
+        <?php
       }
     }
 
@@ -1232,7 +1249,7 @@ if(!function_exists('draw_property_search_form')):
         }
       }
     } ?>
-    <form action="<?php echo  UD_F::base_url($wp_properties['configuration']['base_slug']); ?>" method="post">
+    <form action="<?php echo WPP_F::base_url($wp_properties['configuration']['base_slug']); ?>" method="post">
     <?php if($sort_order){ ?>
     <input type="hidden" name="wpp_search[sort_order]" value ="<?php echo esc_attr($sort_order); ?>" />
     <?php } ?>
@@ -1300,12 +1317,12 @@ if(!function_exists('draw_property_search_form')):
         if(!isset($search_values[$attrib])) {
           continue;
         }
-        $label = (empty($wp_properties['property_stats'][$attrib]) ? UD_F::de_slug($attrib) : $wp_properties['property_stats'][$attrib]);
+        $label = (empty($wp_properties['property_stats'][$attrib]) ? WPP_F::de_slug($attrib) : $wp_properties['property_stats'][$attrib]);
         if(empty($label) && $attrib == 'property_type') {
           $label = __('Type:', 'wpp');
         }
         ?>
-        <li class="wpp_search_form_element seach_attribute_<?php echo $attrib; ?>  wpp_search_attribute_type_<?php echo $wp_properties['searchable_attr_fields'][$attrib]; ?> <?php echo ((!empty($wp_properties['searchable_attr_fields'][$attrib]) && $wp_properties['searchable_attr_fields'][$attrib] == 'checkbox') ? 'wpp-checkbox-el' : ''); ?>">
+        <li class="wpp_search_form_element seach_attribute_<?php echo $attrib; ?>  wpp_search_attribute_type_<?php echo $wp_properties['searchable_attr_fields'][$attrib]; ?> <?php echo ((!empty($wp_properties['searchable_attr_fields'][$attrib]) && $wp_properties['searchable_attr_fields'][$attrib] == 'checkbox') ? 'wpp-checkbox-el' : ''); ?><?php echo ((!empty($wp_properties['searchable_attr_fields'][$attrib]) && ($wp_properties['searchable_attr_fields'][$attrib]=='multi_checkbox' && count($search_values[$attrib])==1 ) || $wp_properties['searchable_attr_fields'][$attrib]=='checkbox') ?' single_checkbox':'')?>">
           <?php ob_start(); ?>
           <?php $random_element_id = 'wpp_search_element_' . rand(1000,9999); ?>
           <label for="<?php echo $random_element_id; ?>" class="wpp_search_label wpp_search_label_<?php echo $attrib; ?>"><?php echo $label; ?><span class="wpp_search_post_label_colon">:</span></label>
@@ -1330,7 +1347,7 @@ if(!function_exists('draw_property_search_form')):
       <div class="clear"></div>
       </li>
       <?php } ?>
-      <li class="wpp_search_form_element submit"><input type="submit" class="wpp_search_button submit" value="<?php _e('Search','wpp') ?>" /></li>
+      <li class="wpp_search_form_element submit"><input type="submit" class="wpp_search_button submit btn btn-large" value="<?php _e('Search','wpp') ?>" /></li>
     </ul>
     </form>
   <?php }
@@ -1390,7 +1407,7 @@ if(!function_exists('wpp_render_search_input')):
           break;
         case 'dropdown':
           ?>
-          <?php $req_attr = WPP_F::encode_mysql_input(stripslashes($value)); ?>
+          <?php //var_dump($value);$req_attr = WPP_F::encode_mysql_input($value); var_dump($req_attr); ?>
           <select id="<?php echo $random_element_id; ?>" class="wpp_search_select_field wpp_search_select_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>" name="wpp_search[<?php echo $attrib; ?>]" >
           <option value="-1"><?php _e( 'Any' ,'wpp' ) ?></option>
           <?php foreach( $search_values[$attrib] as $v ) : ?>
@@ -1624,7 +1641,7 @@ if(!function_exists('wpp_inquiry_form')):
               <?php echo apply_filters( 'comment_form_field_comment', $args['comment_field'] ); ?>
               <?php echo $args['comment_notes_after']; ?>
               <p class="form-submit">
-                <input name="submit" type="submit" id="<?php echo esc_attr( $args['id_submit'] ); ?>" value="<?php echo esc_attr( $args['label_submit'] ); ?>" />
+                <input name="submit" type="submit" id="<?php echo esc_attr( $args['id_submit'] ); ?>" value="<?php echo esc_attr( $args['label_submit'] ); ?>" class="btn" />
                 <?php comment_id_fields( $post_id ); ?>
               </p>
               <?php do_action( 'comment_form', $post_id ); ?>
@@ -1638,4 +1655,35 @@ if(!function_exists('wpp_inquiry_form')):
       <?php
     }
   }
+endif;
+
+if(!function_exists('wpp_css')):
+
+  /**
+   * It returns specific classes for element.
+   * This function is just wrapper.
+   * See: WPP_F::get_css_classes();
+   *
+   * @param type $element [required] It's used for determine which classes should be filtered.
+   * It can be set of template and element: "{template}::{element}"
+   * @param array $classes [optional] Set of classes
+   * @param boolean $return [optional] If false, prints classes. If true returns array of classes
+   * @param array $args [optional] Any set of additional arguments which can be needed.
+   * @return array|echo
+   * @author peshkov@UD
+   * @version 0.1
+   */
+  function wpp_css($element, $classes = false, $return = false, $args = array()) {
+    $args = array_merge((array)$args, array(
+      'instance' => 'wpp',
+      'element' => $element,
+      'classes' => $classes,
+      'return' => $return,
+    ));
+    if(is_callable(array('WPP_F','get_css_classes'))) {
+      return WPP_F::get_css_classes($args);
+    }
+    return false;
+  }
+
 endif;

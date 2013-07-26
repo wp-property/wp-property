@@ -12,7 +12,6 @@
 */
 ?>
 
-
 <script type="text/javascript">
 	jQuery(function() {
 
@@ -90,52 +89,38 @@
 	});
 </script>
 
+<div class="<?php wpp_css('property_search::s_filter_box', "wpp_s_filter_box clearfix"); ?>">
+  <div  class="clearfix">
+  <?php foreach($wp_properties['searchable_attributes'] as $searchable_attribute): ?>
+    <div class="wpp_s_filter_container">
+      <p>
+        <label for="<?php echo $searchable_attribute; ?>_result"><?php echo $wp_properties['property_stats'][$searchable_attribute]; ?>:</label>
+        <input type="text" id="<?php echo $searchable_attribute; ?>_result" style="border:0; color:#f6931f; font-weight:bold; width: 155px;"  />
+      </p>
+      <div id="<?php echo $searchable_attribute; ?>_slider"></div>
+    </div>
+  <?php endforeach; ?>
+  </div>
+</div>
 
-	<div class="wpp_s_filter_box clearfix">
-		<div  class="clearfix">
-		<?php foreach($wp_properties['searchable_attributes'] as $searchable_attribute): ?>
-			<div class="wpp_s_filter_container">
-			<p>
-				<label for="<?php echo $searchable_attribute; ?>_result"><?php echo $wp_properties['property_stats'][$searchable_attribute]; ?>:</label>
-				<input type="text" id="<?php echo $searchable_attribute; ?>_result" style="border:0; color:#f6931f; font-weight:bold; width: 155px;"  />
-			</p>
+<div id="content" class="<?php wpp_css('property_search::content', "page type-page hentry"); ?>" >
+  <div style="width: 890px; float: left;">
+    <?php
+    $searchable_properties = WPP_F::get_searchable_properties();
 
-			<div id="<?php echo $searchable_attribute; ?>_slider"></div>
-			</div>
-		<?php endforeach; ?>
-		</div>
-
-
-	</div>
-
-
-
-<div id="content" class="page type-page hentry" >
-	<div style="width: 890px; float: left;">
-
-
-		<?php
-		$searchable_properties = WPP_F::get_searchable_properties();
-
-		if($searchable_properties):
-			foreach($searchable_properties as $property_id):
-				$property = WPP_F::get_property($property_id);
-
-
-			// 1. Try template in theme folder
-			if(file_exists(STYLESHEETPATH . "/property-search-block.php"))
-				include STYLESHEETPATH . "/property-search-block.php";
-			elseif(file_exists(TEMPLATEPATH . "/property-search-block.php"))
-				include TEMPLATEPATH . "/property-search-block.php";
-			elseif(file_exists(WPP_Templates . "/property-search-block.php"))
-				include WPP_Templates . "/property-search-block.php";
-
-			endforeach;
-		endif;
-		?>
-
- 	</div>
-
-
+    if($searchable_properties):
+      foreach($searchable_properties as $property_id):
+        $property = WPP_F::get_property($property_id);
+        // 1. Try template in theme folder
+        if(file_exists(STYLESHEETPATH . "/property-search-block.php"))
+          include STYLESHEETPATH . "/property-search-block.php";
+        elseif(file_exists(TEMPLATEPATH . "/property-search-block.php"))
+          include TEMPLATEPATH . "/property-search-block.php";
+        elseif(file_exists(WPP_Templates . "/property-search-block.php"))
+          include WPP_Templates . "/property-search-block.php";
+      endforeach;
+    endif;
+    ?>
+  </div>
 </div>
 

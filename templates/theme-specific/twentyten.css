@@ -1,10 +1,10 @@
-/*  
+/*
 	Theme-specific styles are introduced in WP-Property 1.08.
 	In order to avoid breaking existing sites, not all TwentyTen theme elements are transfered here yet.
-	
+
 	Version: 0.6
  */
- 
+
 #content ul.wpp_agent_info_list,
 #main .widget-area ul.wpp_agent_info_list {
   margin-left: 0;
@@ -14,37 +14,37 @@
  .wpp_the_content {
   margin-bottom: 15px;
 }
- 
- 
+
+
  .wpp_row_view div.property_div {
   padding: 1% 1% 10px;
  }
- 
- 
+
+
  .entry-content .wpp_sortable_dropdown {
   margin :0;
  }
- 
+
  .wpp_pagination_slider_wrapper .wpp_pagination_back, .wpp_pagination_slider_wrapper .wpp_pagination_forward {
     background: none repeat scroll 0 0 #E4E4E4;
     border: 1px solid #919191;
     font-size: 0.8em;
  }
- 
+
  .wpp_sorter_options .wpp_sortable_link.wpp_sorted_element {
   background: none repeat scroll 0 0 #F7F7F7;
   border: 1px solid #6D6D6D;
   color: #1C1711;
  }
- 
+
  .wpp_sorter_options .wpp_sortable_link  {
   font-size: .8em;
  }
- 
+
  .wpp_ui .wpp_pagination_slider .ui-slider-handle {
   background-image:none;
 }
- 
+
 div.sidebar_gallery_item .wpp_image_widget_caption  {
     background: none repeat scroll 0 0 #F4F4F4;
     margin: 0 9px 10px 0;
@@ -53,7 +53,7 @@ div.sidebar_gallery_item .wpp_image_widget_caption  {
     text-align: center;
     top: -13px;
 }
-   
+
 .wpp_stats_group {
   display: block;
   font-size: 1.3em;
@@ -67,14 +67,15 @@ div.sidebar_gallery_item .wpp_image_widget_caption  {
 }
 
 
-#property_stats.overview_stats dt, .wpp_property_stats.overview_stats dt {
-  font-weight: normal;
-}
-   
+#property_stats.overview_stats dt,
+.wpp_property_stats.overview_stats dt,
+ul#property_stats.list li .attribute,
+ul.wpp_property_stats.list li .attribute { font-weight: normal;}
+
 #primary.widget-area ul.wpp_search_elements  .wpp_search_attribute_type_range_input  input[type="text"] {
   width: 40px;
 }
-    
+
 #primary.widget-area ul.wpp_search_elements  .wpp_search_attribute_type_input   input[type="text"] {
   width: 90px;
 }
@@ -83,7 +84,7 @@ div.sidebar_gallery_item .wpp_image_widget_caption  {
   max-width: 110px;
   float: left;
 }
- 
+
 #main .widget-area ul.wpp_search_elements {
   margin-top: 10px;
 }
@@ -124,7 +125,7 @@ div.sidebar_gallery_item .wpp_image_widget_caption  {
   overflow: auto;
   margin-bottom: 10px;
 }
-.wpp_row_view .wpp_overview_right_column { 
+.wpp_row_view .wpp_overview_right_column {
 	width: 99%;
 }
 
@@ -142,7 +143,7 @@ div.wpp_google_maps_attribute_row_property_title {
 }
 
 #content .shortcode_featured_properties ul li dt, #content .big_featured_property ul li dd {
-    
+
 }
 
 .wpp_featured_properties_shortcode li.wp-caption {

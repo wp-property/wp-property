@@ -1,28 +1,9 @@
-<?php
-/**
- * Property Default Template for Single Property View
- *
- * Overwrite by creating your own in the theme directory called either:
- * property.php
- * or add the property type to the end to customize further, example:
- * property-building.php or property-floorplan.php, etc.
- *
- * By default the system will look for file with property type suffix first,
- * if none found, will default to: property.php
- *
- * Copyright 2010 Andy Potanin <andy.potanin@twincitiestech.com>
- *
- * @version 1.3
- * @author Andy Potanin <andy.potnain@twincitiestech.com>
- * @package WP-Property
-*/
+<html>
+  <head>
+<?php wp_head(); ?>
+  </head>
+  <body class="facebook">
 
-// Uncomment to disable fancybox script being loaded on this page
-//wp_deregister_script('jquery-fancybox');
-//wp_deregister_script('jquery-fancybox-css');
-?>
-
-<?php get_header(); ?>
 <?php the_post(); ?>
 
     <script type="text/javascript">
@@ -87,22 +68,22 @@
   </script>
 
 
-  <div id="container" class="<?php wpp_css('property::container', array((!empty($post->property_type) ? $post->property_type . "_container" : ""))); ?>">
-    <div id="content" class="<?php wpp_css('property::content', "property_content"); ?>" role="main">
+  <div id="container" class="<?php echo (!empty($post->property_type) ? $post->property_type . "_container" : "");?>">
+    <div id="content" role="main" class="property_content">
       <div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 
-      <div class="<?php wpp_css('property::title', "building_title_wrapper"); ?>">
+      <div class="building_title_wrapper">
         <h1 class="property-title entry-title"><?php the_title(); ?></h1>
         <h3 class="entry-subtitle"><?php the_tagline(); ?></h3>
       </div>
 
 
-      <div class="<?php wpp_css('property::entry_content', "entry-content"); ?>">
-        <div class="<?php wpp_css('property::the_content', "wpp_the_content"); ?>"><?php @the_content(); ?></div>
+      <div class="entry-content">
+        <div class="wpp_the_content"><?php @the_content(); ?></div>
 
         <?php if ( empty($wp_properties['property_groups']) || $wp_properties['configuration']['property_overview']['sort_stats_by_groups'] != 'true' ) : ?>
-          <ul id="property_stats" class="<?php wpp_css('property::property_stats', "property_stats overview_stats list"); ?>">
+          <ul id="property_stats" class="<?php wpp_css('fb_property::property_stats', "property_stats overview_stats list"); ?>">
             <?php if(!empty($post->display_address)): ?>
             <li class="wpp_stat_plain_list_location alt">
               <span class="attribute"><?php echo $wp_properties['property_stats'][$wp_properties['configuration']['address_attribute']]; ?><span class="wpp_colon">:</span></span>
@@ -113,7 +94,7 @@
           </ul>
         <?php else: ?>
           <?php if(!empty($post->display_address)): ?>
-          <ul id="property_stats" class="<?php wpp_css('property::property_stats', "property_stats overview_stats list"); ?>">
+          <ul id="property_stats" class="<?php wpp_css('fb_property::property_stats', "property_stats overview_stats list"); ?>">
             <li class="wpp_stat_plain_list_location alt">
               <span class="attribute"><?php echo $wp_properties['property_stats'][$wp_properties['configuration']['address_attribute']]; ?><span class="wpp_colon">:</span></span>
               <span class="value"><?php echo $post->display_address; ?>&nbsp;</span>
@@ -146,7 +127,7 @@
 
 
         <?php if(WPP_F::get_coordinates()): ?>
-          <div id="property_map" class="<?php wpp_css('property::property_map'); ?>" style="width:100%; height:450px"></div>
+          <div id="property_map" style="width:100%; height:450px"></div>
         <?php endif; ?>
 
         <?php if(class_exists('WPP_Inquiry')): ?>
@@ -156,7 +137,7 @@
 
 
         <?php if($post->post_parent): ?>
-          <a href="<?php echo $post->parent_link; ?>" class="<?php wpp_css('btn', "btn btn-return"); ?>"><?php _e('Return to building page.','wpp') ?></a>
+          <a href="<?php echo $post->parent_link; ?>" class="btn btn-return"><?php _e('Return to building page.','wpp') ?></a>
         <?php endif; ?>
 
       </div><!-- .entry-content -->
@@ -170,7 +151,7 @@
   // Primary property-type sidebar.
   if ( is_active_sidebar( "wpp_sidebar_" . $post->property_type ) ) : ?>
 
-    <div id="primary" class="<?php wpp_css('property::primary', "widget-area wpp_sidebar_{$post->property_type}"); ?>" role="complementary">
+    <div id="primary" class="widget-area <?php echo "wpp_sidebar_" . $post->property_type; ?>" role="complementary">
       <ul class="xoxo">
         <?php dynamic_sidebar( "wpp_sidebar_" . $post->property_type ); ?>
       </ul>
@@ -179,4 +160,6 @@
 <?php endif; ?>
 
 
- <?php get_footer(); ?>
+<?php wp_footer(); ?>
+  </body>
+</html>

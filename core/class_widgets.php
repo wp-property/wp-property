@@ -218,7 +218,7 @@ class OtherPropertiesWidget extends WP_Widget {
       false,
       sprintf(__('Other %1s','wpp'), WPP_F::property_label('plural')),
       array(
-        'description' => sprintf(__('Display a list of %1s that share a parent witht the currently displayed property.', 'wpp'), $property_label)
+        'description' => sprintf(__('Display a list of %1s that share a parent with the currently displayed property.', 'wpp'), $property_label)
       ),
       array(
         'width' => 300
@@ -229,7 +229,7 @@ class OtherPropertiesWidget extends WP_Widget {
 
   /** @see WP_Widget::widget */
   function widget($args, $instance) {
-    global $post, $wp_properties;
+    global $post, $wp_properties,$property;
     extract( $args );
 
     $title       = apply_filters('widget_title', $instance['title']);
@@ -246,7 +246,7 @@ class OtherPropertiesWidget extends WP_Widget {
     if(!isset($post->ID) || ($post->post_parent == 0 && $show_properties_of_type != 'on')) {
       return;
     }
-    
+
     if($post->post_parent) {
       $properties = get_posts(array(
         'post_type'     => 'property',
@@ -254,8 +254,12 @@ class OtherPropertiesWidget extends WP_Widget {
         'post_parent'   => $post->post_parent,
         'exclude'         => $post->ID
       ));
-    } else {    
-      $properties = WPP_F::get_properties("property_type=For Sale&pagi=0--$amount_items");      
+    } else {
+      $properties = WPP_F::get_properties("property_type={$property['property_type']}&pagi=0--$amount_items");
+    }
+
+    if(empty($properties)) {
+      return;
     }
 
     $html[] = $before_widget;
@@ -264,16 +268,16 @@ class OtherPropertiesWidget extends WP_Widget {
     if ( $title ) {
       $html[] = $before_title . $title . $after_title;
     }
-    
+
     if($shuffle_order == 'on') {
       shuffle($properties);
-    }    
-    
+    }
+
 
     ob_start();
 
     foreach($properties as $single) {
-    
+
       $property_id = is_object($single) ? $single->ID : $single;
 
       $this_property  = WPP_F::get_property($property_id, 'return_object=true');
@@ -286,7 +290,7 @@ class OtherPropertiesWidget extends WP_Widget {
         <div class="property_widget_block apartment_entry clearfix" style="<?php echo ($image['width'] ? 'width: ' . ($image['width']+5) . 'px;' : ''); ?>" >
 
         <?php if ($hide_image !== 'on' && !empty($image)) { ?>
-          <a class="sidebar_property_thumbnail"  href="<?php echo $this_property->permalink; ?>">
+          <a class="sidebar_property_thumbnail thumbnail"  href="<?php echo $this_property->permalink; ?>">
             <img width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" src="<?php echo $image['link'];?>" alt="<?php echo sprintf(__('%s at %s for %s','wpp'), $this_property->post_title, $this_property->location, $this_property->price); ?>" />
           </a>
         <?php } ?>
@@ -318,7 +322,7 @@ class OtherPropertiesWidget extends WP_Widget {
         </ul>
 
         <?php if ($instance['enable_more'] =='on') {
-          echo '<p class="more"><a href="'. $this_property->permalink.'">'.__('More','wpp').'</a></p>';
+          echo '<p class="more"><a href="'. $this_property->permalink.'" class="btn btn-info">'.__('More','wpp').'</a></p>';
         } ?>
 
          </div>
@@ -331,7 +335,7 @@ class OtherPropertiesWidget extends WP_Widget {
       ob_end_clean();
 
       if ($instance['enable_view_all'] =='on') {
-        $html[] = '<p class="view-all"><a href="'. site_url() .'/'. $wp_properties['configuration']['base_slug'] .'">'.__('View All','wpp').'</a></p>';
+        $html[] = '<p class="view-all"><a href="'. site_url() .'/'. $wp_properties['configuration']['base_slug'] .'" class="btn btn-large">'.__('View All','wpp').'</a></p>';
       }
 
       $html[] = '</div>';
@@ -435,7 +439,7 @@ class OtherPropertiesWidget extends WP_Widget {
       <li>
         <input id="<?php echo $this->get_field_id('enable_view_all'); ?>" name="<?php echo $this->get_field_name('enable_view_all'); ?>" type="checkbox" value="on" <?php if($enable_view_all=='on') echo " checked='checked';"; ?> />
         <label for="<?php echo $this->get_field_id('enable_view_all'); ?>"><?php _e('Show "View All" link?','wpp'); ?></label>
-      </li>      
+      </li>
       <li>
         <input id="<?php echo $this->get_field_id('show_properties_of_type'); ?>" name="<?php echo $this->get_field_name('show_properties_of_type'); ?>" type="checkbox" value="on" <?php checked('on', $show_properties_of_type); ?> />
         <label for="<?php echo $this->get_field_id('show_properties_of_type'); ?>"><?php _e('If property has no parent, show other properties of same type.','wpp'); ?></label>
@@ -519,7 +523,7 @@ class ChildPropertiesWidget extends WP_Widget {
       <div class="property_widget_block apartment_entry clearfix" style="<?php echo ($width ? 'width: ' . ($width+5) . 'px;' : ''); ?>">
         <?php if ($hide_image !== 'on') : ?>
           <?php if(!empty($image)): ?>
-            <a class="sidebar_property_thumbnail"  href="<?php echo $this_property->permalink; ?>">
+            <a class="sidebar_property_thumbnail thumbnail"  href="<?php echo $this_property->permalink; ?>">
             <img width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" src="<?php echo $image['link'];?>" alt="<?php echo sprintf(__('%s at %s for %s','wpp'), $this_property->post_title, $this_property->location, $this_property->price); ?>" />
             </a>
           <?php else: ?>
@@ -540,7 +544,7 @@ class ChildPropertiesWidget extends WP_Widget {
         </ul>
 
         <?php if ($instance['enable_more'] =='on') : ?>
-          <p class="more"><a href="<?php echo $this_property->permalink; ?>"><?php _e('More','wpp'); ?></a></p>
+          <p class="more"><a href="<?php echo $this_property->permalink; ?>" class="btn btn-info"><?php _e('More','wpp'); ?></a></p>
         <?php endif; ?>
       </div>
       <?php
@@ -548,7 +552,7 @@ class ChildPropertiesWidget extends WP_Widget {
     }
 
     if ($instance['enable_view_all'] =='on') {
-      echo '<p class="view-all"><a href="'. site_url() .'/'. $wp_properties['configuration']['base_slug'] .'">'.__('View All','wpp').'</a></p>';
+      echo '<p class="view-all"><a href="'. site_url() .'/'. $wp_properties['configuration']['base_slug'] .'" class="btn btn-large">'.__('View All','wpp').'</a></p>';
     }
     echo '<div class="clear"></div>';
     echo '</div>';
@@ -743,7 +747,7 @@ class FeaturedPropertiesWidget extends WP_Widget {
       <div class="property_widget_block  clearfix"  style="<?php echo ($width ? 'width: ' . ($width+5) . 'px;' : ''); ?> min-height: <?php echo $height; ?>px;">
       <?php if ($hide_image !=='on'): ?>
         <?php if(!empty($image)) : ?>
-        <a class="sidebar_property_thumbnail" href="<?php echo $this_property->permalink; ?>"><img width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" src="<?php echo $image['link'];?>" alt="<?php echo sprintf(__('%s at %s for %s','wpp'), $this_property->post_title, $this_property->location, $this_property->price); ?>" /></a>
+        <a class="sidebar_property_thumbnail thumbnail" href="<?php echo $this_property->permalink; ?>"><img width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" src="<?php echo $image['link'];?>" alt="<?php echo sprintf(__('%s at %s for %s','wpp'), $this_property->post_title, $this_property->location, $this_property->price); ?>" /></a>
         <?php else : ?>
         <div class="wpp_no_image" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px;" ></div>
         <?php endif; ?>
@@ -771,14 +775,14 @@ class FeaturedPropertiesWidget extends WP_Widget {
         <?php endif; ?>
       </ul>
       <?php if ($instance['enable_more'] =='on') : ?>
-        <p class="more"><a href="<?php echo $this_property->permalink; ?>"><?php _e('More','wpp'); ?></a></p>
+        <p class="more"><a href="<?php echo $this_property->permalink; ?>" class="btn btn-info"><?php _e('More','wpp'); ?></a></p>
       <?php endif; ?>
       </div>
       <?php
       unset($this_property);
     }
     if ($instance['enable_view_all'] =='on') {
-      echo '<p class="view-all"><a href="'. site_url() .'/'. $wp_properties['configuration']['base_slug'] .'">'.__('View All','wpp').'</a></p>';
+      echo '<p class="view-all"><a href="'. site_url() .'/'. $wp_properties['configuration']['base_slug'] .'" class="btn btn-large">'.__('View All','wpp').'</a></p>';
     }
     echo '<div class="clear"></div>';
     echo '</div>';
@@ -978,7 +982,7 @@ class LatestPropertiesWidget extends WP_Widget {
       <div class="property_widget_block latest_entry clearfix" style="<?php echo ($width ? 'width: ' . ($width+5) . 'px;' : ''); ?>">
       <?php if ($hide_image !=='on'){ ?>
         <?php if(!empty($image)) : ?>
-          <a class="sidebar_property_thumbnail latest_property_thumbnail"  href="<?php echo $this_property->permalink; ?>">
+          <a class="sidebar_property_thumbnail latest_property_thumbnail thumbnail"  href="<?php echo $this_property->permalink; ?>">
             <img width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" src="<?php echo $image['url'];?>" alt="<?php echo sprintf(__('%s at %s for %s','wpp'), $this_property->post_title, $this_property->location, $this_property->price); ?>" />
           </a>
         <?php else : ?>
@@ -1008,7 +1012,7 @@ class LatestPropertiesWidget extends WP_Widget {
       echo '</ul>';
 
       if ($instance['enable_more'] =='on') {
-        echo '<p class="more"><a href="'. $this_property->permalink.'">'.__('More','wpp').'</a></p>';
+        echo '<p class="more"><a href="'. $this_property->permalink.'" class="btn btn-info">'.__('More','wpp').'</a></p>';
       }
       ?>
       </div>
@@ -1017,7 +1021,7 @@ class LatestPropertiesWidget extends WP_Widget {
     }
 
     if ($instance['enable_view_all'] =='on') {
-      echo '<p class="view-all"><a href="'. site_url() .'/'. $wp_properties['configuration']['base_slug'] .'">'.__('View All','wpp').'</a></p>';
+      echo '<p class="view-all"><a href="'. site_url() .'/'. $wp_properties['configuration']['base_slug'] .'" class="btn btn-large">'.__('View All','wpp').'</a></p>';
     }
     echo '<div class="clear"></div>';
     echo '</div>';
@@ -1332,7 +1336,7 @@ class LatestPropertiesWidget extends WP_Widget {
         $attribute_label = $property_stats['property_stats'][$slug];
 
         if(empty($attribute_label)) {
-          $attribute_label = UD_F::de_slug($slug);
+          $attribute_label = WPP_F::de_slug($slug);
         }
 
         $temp_attrs[$attribute_label] = $slug;
@@ -1360,7 +1364,7 @@ class LatestPropertiesWidget extends WP_Widget {
         /* Select the correc tab */
         wpp_set_group_or_ungroup();
 
-        jQuery("#all_atributes_<?php echo $this->id; ?> .wpp_sortable_attributes").sortable();
+        jQuery("#all_atributes_<?php echo $this->id; ?>.wpp_sortable_attributes").sortable();
 
         /* Setup tab the grouping/ungrouping tabs, and trigger checking the select box when tabs are switched */
         jQuery(".wpp_subtle_tabs").tabs({
@@ -1601,7 +1605,7 @@ class LatestPropertiesWidget extends WP_Widget {
 
     /** @see WP_Widget::widget */
     function widget($args, $instance) {
-      global  $wp_properties, $post;
+      global  $wp_properties, $post, $property;
       extract( $args );
 
       $title = apply_filters('widget_title', $instance['title']);
@@ -1610,16 +1614,13 @@ class LatestPropertiesWidget extends WP_Widget {
       $gallery_count = esc_attr($instance['gallery_count']);
       $show_caption = esc_attr($instance['show_caption']);
       $show_description = esc_attr($instance['show_description']);
-
-      if(empty($big_image_type)) {
-        $big_image_type = 'large';
-      }
+      $gallery  = ($post->gallery)?$post->gallery:$property['gallery'];
 
       if(empty($image_type)) {
         $image_type = 'thumbnail';
       }
 
-      if(!is_array($post->gallery)) {
+      if(!is_array($gallery)) {
         return;
       }
 
@@ -1638,23 +1639,24 @@ class LatestPropertiesWidget extends WP_Widget {
         $html[] = $before_title . $title . $after_title;
       }
 
-
       ob_start();
 
-      if(is_array($post->gallery)) {
+      if(is_array($gallery)) {
 
         $real_count = 0;
 
-        foreach($post->gallery as $image) {
+        foreach($gallery as $image) {
 
-          $big_image = wpp_get_image_link($image['attachment_id'], $big_image_type);
           $thumb_image = wpp_get_image_link($image['attachment_id'], $image_type);
-
           ?>
           <div class="sidebar_gallery_item">
-            <a href="<?php echo $big_image; ?>" class="fancybox_image" rel="property_gallery">
+            <?php if(!empty($big_image_type)) : ?>
+              <?php $big_image = wpp_get_image_link($image['attachment_id'], $big_image_type); ?>
+              <a href="<?php echo $big_image; ?>" class="fancybox_image thumbnail" rel="property_gallery">
                 <img src="<?php echo $thumb_image; ?>" title="<?php echo esc_attr($image['post_excerpt'] ? $image['post_excerpt'] : $image['post_title'] . ' - ' . $post->post_title); ?>" alt="<?php echo esc_attr($image['post_excerpt'] ? $image['post_excerpt'] : $image['post_title']); ?>" class="wpp_gallery_widget_image size-thumbnail "  width="<?php echo $thumbnail_dimensions['width']; ?>" height="<?php echo $thumbnail_dimensions['height']; ?>" />
-            </a>
+              </a>
+            <?php else : ?>
+              <img src="<?php echo $thumb_image; ?>" title="<?php echo esc_attr($image['post_excerpt'] ? $image['post_excerpt'] : $image['post_title'] . ' - ' . $post->post_title); ?>" alt="<?php echo esc_attr($image['post_excerpt'] ? $image['post_excerpt'] : $image['post_title']); ?>" class="wpp_gallery_widget_image size-thumbnail "  width="<?php echo $thumbnail_dimensions['width']; ?>" height="<?php echo $thumbnail_dimensions['height']; ?>" />            <?php endif; ?>
             <?php if($show_caption == 'on' && !empty($image['post_excerpt'])) { ?>
               <div class="wpp_image_widget_caption"><?php echo $image['post_excerpt']; ?></div>
             <?php } ?>

@@ -106,7 +106,7 @@ class WPP_UI {
 
     //** Check for current property type if it is deleted */
     if(is_array($wp_properties['property_types']) && isset($property['property_type']) && !in_array($property['property_type'], array_keys($wp_properties['property_types']))) {
-      $wp_properties['property_types'][$property['property_type']] =  WPP_UD_F::de_slug($property['property_type']);
+      $wp_properties['property_types'][$property['property_type']] =  WPP_F::de_slug($property['property_type']);
       $wp_properties['descriptions']['property_type'] = '<span class="attention">' . sprintf(__('<strong>Warning!</strong> The %1s property type has been deleted.', 'wpp'), $wp_properties['property_types'][$property['property_type']]) . '</span>';
     }
 

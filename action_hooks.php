@@ -264,4 +264,4 @@
   );
   
   // Overwrite $wp_properties with database setting
-  $wp_properties = UD_F::array_merge_recursive_distinct($wp_properties, $wp_properties_db);
+  $wp_properties = UD_API::array_merge_recursive_distinct($wp_properties, $wp_properties_db);
