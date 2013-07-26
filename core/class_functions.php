@@ -407,7 +407,7 @@ class WPP_F extends UD_API {
     $result = wp_remote_get($url, array( 'timeout' => 10));
 
     //** Image content types should always begin with 'image' (I hope) */
-    if( (is_object($result) && get_class($result) == 'WP_Error') || strpos((array)$result['headers']['content-type'], 'image') !== 0) {
+    if( (is_object($result) && get_class($result) == 'WP_Error') || strpos((string)$result['headers']['content-type'], 'image' ) === false ) {
       return false;
     }
 

@@ -1171,14 +1171,13 @@ class WPP_Core {
       'bottom_pagination_flag' => 'false',
       'pagination' => 'off',
       'stats' => '',
-      'image_type' => 'thumbnail',
       'thumbnail_size' => 'thumbnail'
     );
 
     $args = array_merge($defaults, $atts);
 
     //** Using "image_type" is obsolete */
-    if(empty($args['thumbnail_size']) &&  !empty($args['image_type'])) {
+    if( $args['thumbnail_size'] == $defaults['thumbnail_size'] && !empty($args['image_type'])) {
       $args['thumbnail_size'] = $args['image_type'];
     }
 
@@ -1208,7 +1207,6 @@ class WPP_Core {
 
     }
 
-    $args['thumbnail_size'] = $args['image_type'];
     $args['disable_wrapper'] = 'true';
     $args['featured'] = 'true';
     $args['template'] = 'featured-shortcode';

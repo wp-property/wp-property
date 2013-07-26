@@ -228,7 +228,11 @@
 
 <div class="wrap <?php echo implode(' ', $wrapper_classes); ?>">
 <?php screen_icon(); ?>
-<h2 class='wpp_settings_page_header'><?php  echo $wp_properties['labels']['name'] . ' ' . __('Settings','wpp') ?></h2>
+<h2 class='wpp_settings_page_header'><?php  echo $wp_properties['labels']['name'] . ' ' . __('Settings','wpp') ?>
+<div class="wpp_fb_like">
+  <div class="fb-like" data-href="https://www.facebook.com/wpproperty" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
+</div>
+</h2>
 
 <?php if(isset($wp_messages['error']) && $wp_messages['error']): ?>
 <div class="error">
@@ -769,3 +773,7 @@
 
 </form>
 </div>
+
+ <!--fb-->
+<div id="fb-root"></div>
+<script type="text/javascript">(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=373515126019844"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>

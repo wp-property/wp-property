@@ -1,10 +1,10 @@
 === WP-Property - WordPress Powered Real Estate and Property Management ===
 Contributors:  usability_dynamics, anton-korotkoff, andypotanin
 Donate link: http://usabilitydynamics.com/products/wp-property/
-Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
+Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import 
 Requires at least: 3.0
-Tested up to: 3.3.1
-Stable tag: 1.36.0
+Tested up to: 3.4.2
+Stable tag: 1.36.1
 
 
 == Description ==
@@ -91,6 +91,7 @@ Usage of custom attributes added in the Developer tab for queries, example:
 
 = Translations =
 
+* English (UK)
 * French (FR)
 * Danish (DK)
 * German (DE)
@@ -217,6 +218,13 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 
 == Changelog ==
 
+= 1.36.1 =
+* Fixed can_get_image() function what solves many issues with displaying images on PDF Flyer and PDF Lists including displaying of Location Map on PDF Flyer.
+* Fixed Features and Community Features section which becomes hidden after Regenerating of all Flyers.
+* Fixed displaying of Agents' information on PDF Flyer.
+* Fixed generating of PDF Lists.
+* Fixed parameter thumbnail_size of [featured_property] shortcode.
+
 = 1.36.0 =
 * Added WordPress 3.4 compatibility.
 * When manual coordinates are set, and the address field is empty, the listing's formatted address will be reverse-located based on the set coordinates.
@@ -245,7 +253,6 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Property Gallery widget fixes.
 * Property Agents widget fixes.
 * TwentyEleven and TwentyTen theme compatibility improvements.
-
 
 = 1.35.1 =
 * Security fixes
