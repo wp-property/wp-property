@@ -335,7 +335,6 @@
   add_filter('wpp_property_stats_input_'. $wp_properties['configuration']['address_attribute'], 'wpp_property_stats_input_address', 0, 3);
 
   add_action('save_property', 'wpp_save_property_aggregated_data', 0, 2);
-  
 
 
   //add_action("wpp_ui_after_attribute_{$wp_properties['configuration']['address_attribute']}", 'wpp_show_coords');
@@ -637,7 +636,7 @@
         $average = isset( $wp_properties[ 'configuration' ][ 'show_aggregated_value_as_average' ] ) ? $wp_properties[ 'configuration' ][ 'show_aggregated_value_as_average' ] : false ;
 
         $val = @array_sum( $range_values );
-        $val = is_numeric( $val ) && $val > 0 ? ( $average == 'true' ? $val / count( $range_values ) : $val ) : 0;
+        $val = is_numeric( $val ) && $val > 0 ? ( $average == 'true' ? ceil( $val / count( $range_values ) ) : $val ) : 0;
 
         update_post_meta( $post_data[ 'parent_id' ], $range_attribute, $val);
 

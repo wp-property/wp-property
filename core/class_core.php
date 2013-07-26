@@ -693,16 +693,17 @@ class WPP_Core {
       }
     }
 
-    WPP_F::maybe_set_gpid($post_id);
+    WPP_F::maybe_set_gpid( $post_id );
 
-    if($_REQUEST['parent_id']) {
-      update_post_meta($post_id, 'parent_gpid', WPP_F::maybe_set_gpid($_REQUEST['parent_id']));
+    if( isset( $_REQUEST['parent_id'] ) ) {
+      $_REQUEST['parent_id'] = WPP_F::update_parent_id( $_REQUEST['parent_id'], $post_id );
     }
 
     do_action('save_property',$post_id, $_REQUEST, $geo_data);
 
     return true;
   }
+
 
   /**
    * Inserts content into the "Publish" metabox on property pages
@@ -871,6 +872,9 @@ class WPP_Core {
       die();
     }
 
+    //** Load global wp-property script on all frontend pages */
+    wp_enqueue_script( 'wp-property-global' );
+
     //** Load essential styles that are used in widgets */
     wp_enqueue_style('wp-property-frontend');
     wp_enqueue_style('wp-property-theme-specific');
@@ -950,8 +954,6 @@ class WPP_Core {
       }
 
     }
-
-    do_action('wpp_template_redirect_post_scripts');
 
     //** Scripts loaded only on single property pages */
     if ($wp_query->single_property_page && !post_password_required($post)) {
@@ -1042,6 +1044,8 @@ class WPP_Core {
       }
 
     }
+
+    do_action('wpp_template_redirect_post_scripts');
 
   }
 
@@ -1299,8 +1303,8 @@ class WPP_Core {
       $defaults['bottom_pagination_flag'] = ($wp_properties['configuration']['bottom_insert_pagenation'] == 'true' ? true : false);
       $defaults['thumbnail_size'] = $wp_properties['configuration']['property_overview']['thumbnail_size'];
       $defaults['sort_by_text'] = __('Sort By:', 'wpp');
-      $defaults['sort_by'] = 'menu_order';
-      $defaults['sort_order'] = 'ASC';
+      $defaults['sort_by'] = 'post_date';
+      $defaults['sort_order'] = 'DESC';
       $defaults['template'] = false;
       $defaults['ajax_call'] = false;
       $defaults['disable_wrapper'] = false;

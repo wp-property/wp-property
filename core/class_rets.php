@@ -1420,8 +1420,14 @@ class phRETS {
     curl_setopt($this->ch, CURLOPT_URL, $request_url);
 
     curl_setopt($this->ch, CURLOPT_HTTPHEADER, array($request_headers));
+
     // do it
     $response_body = curl_exec($this->ch);
+
+    if( $response_body === false) {
+     $response_body = 'Curl error: ' . curl_error( $this->ch );
+    }
+
     $response_code = curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
 
     if ($this->debug_mode == true) {

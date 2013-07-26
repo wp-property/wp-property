@@ -268,50 +268,6 @@ html *:not(body.facebook div.property #container){
   height: 0 !important;
 }
 
-/* FEPS */
-.facebook .wpp_feps_map {
-  border: 1px solid #B3B3B3;
-}
-.facebook .wpp_feps_loc_found,
-.facebook .wpp_feps_loc_not_found {
-  padding: 5px;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  -moz-text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  -webkit-text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  -khtml-text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-}
-.facebook .wpp_feps_loc_found {
-  background-color: #DFF0D8;
-  color: #468847;
-  border: 1px solid #D6E9C6;
-}
-.facebook .wpp_feps_loc_not_found {
-  background-color: #F2DEDE;
-  border: 1px solid #EED3D7;
-  color: #B94A48;
-}
-.facebook ul.feps_property_input_fields div.wpp_feps_label_wrapper {
-  background: #e7e7e7;
-  border-top: 1px solid #D0D0D0;
-  padding: 2px 7px 5px;
-  float: left;
-  width: 98%;
-}
-.facebook li.wpp_feps_row_wrapper span.the_title {
-  font-size: 11px;
-  font-weight: bold;
-}
-.facebook ul.feps_property_input_fields textarea,
-.facebook ul.feps_property_input_fields input[type="text"],
-.facebook ul.feps_user_input_fields input[type="text"],
-.facebook ul.feps_user_input_fields input[type="password"] {
-  width: 100%;
-}
-.facebook ul.feps_user_input_fields li.wpp_feps_row_wrapper .wpp_feps_input_wrapper,
-.facebook ul.feps_property_input_fields li.wpp_feps_row_wrapper .wpp_feps_input_wrapper {
-  clear: both;
-}
-
 /* PROPERTY OVERVIEW */
 .facebook .wpp_row_view div.property_div {
   background: none repeat scroll 0 0 #F2F2F2;
@@ -740,9 +696,7 @@ html *:not(body.facebook div.property #container){
 
 /* FEPS Styles Begin ================================================== */
 
-.facebook .wpp_feps_map {
-  border: 1px solid #B3B3B3;
-}
+
 .facebook .wpp_feps_loc_found,
 .facebook .wpp_feps_loc_not_found {
   padding: 5px;
@@ -761,22 +715,17 @@ html *:not(body.facebook div.property #container){
   border: 1px solid #EED3D7;
   color: #B94A48;
 }
+
 .facebook ul.feps_property_input_fields div.wpp_feps_label_wrapper {
-  background: #e7e7e7;
-  border-top: 1px solid #D0D0D0;
-  padding: 2px 0 5px;
-  float: left;
-  width: 98%;
+  padding: 2px 0;
+  width: 100%;
+}
+.facebook ul.feps_property_input_fields div.wpp_feps_label_wrapper label {
+  padding: 0 18px 0 0;
 }
 .facebook li.wpp_feps_row_wrapper span.the_title {
   font-size: 11px;
   font-weight: bold;
-}
-.facebook ul.feps_property_input_fields textarea,
-.facebook ul.feps_property_input_fields input[type="text"],
-.facebook ul.feps_user_input_fields input[type="text"],
-.facebook ul.feps_user_input_fields input[type="password"] {
-  width: 100%;
 }
 .facebook ul.feps_user_input_fields li.wpp_feps_row_wrapper .wpp_feps_input_wrapper,
 .facebook ul.feps_property_input_fields li.wpp_feps_row_wrapper .wpp_feps_input_wrapper {
@@ -784,10 +733,6 @@ html *:not(body.facebook div.property #container){
 }
 .facebook ul.feps_user_input_fields li.wpp_feps_row_wrapper, ul.feps_property_input_fields li.wpp_feps_row_wrapper {
   margin-bottom: 10px;
-}
-.facebook ul.feps_property_input_fields li.wpp_feps_row_wrapper.wpp_checkbox input.wpp_checkbox {
-  margin-top: 10px;
-  position: inherit;
 }
 .facebook .wpp_feps_preview_thumb {
   box-shadow: 0 0 2px;
@@ -797,40 +742,6 @@ html *:not(body.facebook div.property #container){
   width: 230px;
   height: auto;
 }
-/*
-.wpp_feps_row_wrapper:hover .wpp_feps_description_wrapper,
-.wpp_feps_row_wrapper:active .wpp_feps_description_wrapper,
-{
-  display: block;
-  line-height: 18px;
-  opacity: 0.8;
-  transition: all 0.3s ease-in-out 0s;
-  visibility: visible;
-}
-
-.wpp_feps_description_wrapper
-{
-  background-color: #3B5998;
-  border-radius: 5px 5px 5px 5px;
-  color: white;
-  display: none;
-  font-size: 13px;
-  font-weight: normal;
-  left: 25px;
-  letter-spacing: 0.1em;
-  opacity: 0;
-  margin-top
-  padding: 5px 10px;
-  position: absolute;
-  text-align: left;
-  text-shadow: none;
-  white-space: normal;
-  width: 300px;
-  z-index: 9999;
-}*/
-
-
-
 .facebook form.wpp_feps_form label.error {
   display: block
 }
@@ -936,18 +847,6 @@ ul.feps_property_input_fields li.wpp_feps_row_wrapper {
   width: 101px;
 }
 
-
-.facebook ul.feps_property_input_fields li.wpp_feps_row_wrapper.wpp_checkbox input.wpp_checkbox {
-  float: left;
-  position: relative;
-  top: 7px;
-}
-
-
-.facebook ul.feps_property_input_fields li.wpp_feps_row_wrapper.wpp_checkbox  label {
-
-}
-
 .facebook ul.feps_property_input_fields li.wpp_feps_row_wrapper.wpp_checkbox  label span.description {
   float: none
 }
@@ -977,22 +876,11 @@ ul.feps_property_input_fields li.wpp_feps_row_wrapper {
   min-height: 100px
 }
 
-.facebook ul.feps_property_input_fields textarea,
-.facebook ul.feps_property_input_fields input[type="text"],
-.facebook ul.feps_user_input_fields input[type="text"],
-.facebook ul.feps_user_input_fields input[type="password"] {
-  display: block;
-  margin-bottom: 5px;
-  margin-top: 2px;
-  width: 98%;
-}
-
 .facebook ul.feps_property_input_fields select {
   -khtml-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
   -mox-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
   background: none repeat scroll 0 0 #FAFAFA;
-  border: 1px solid #DDDDDD;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
   color: #888888;
   padding: 3px;
@@ -1040,22 +928,12 @@ ul.feps_property_input_fields li.wpp_feps_row_wrapper {
   margin-right: 10px;
 }
 
-
 .facebook .entry-content ul.wpp_feps_step_tabs li.active {
   font-weight: bold;
   background-color: #6A8DA5;
   color: white;
 }
-/*
-.facebook .entry-content ul.wpp_feps_step_tabs li:hover {
-  color: #777;
-  background-color: #f7f7f7;
-}
 
-.facebook .entry-content ul.wpp_feps_step_tabs li.active:hover {
-  background-color: #f9f9f9;
-  color: #707070; }
-*/
 .facebook .wpp_feps_tab_content {
   padding: 20px;
   border-top: none;
@@ -1122,5 +1000,61 @@ ul.feps_property_input_fields li.wpp_feps_row_wrapper {
 .facebook .wpp_feps_user_menu .wpp_feps_filter,
 .facebook .wpp_feps_user_menu .wpp_feps_all_listings { margin-top: 10px; }
 .facebook .wpp_feps_user_menu li { margin: 0; }
+
+ul.feps_property_input_fields li.wpp_feps_row_wrapper {
+  border: 1px solid #D6D6D6;
+  margin-bottom: 12px;
+  padding: 4px;
+  background: none repeat scroll 0 0 #FFF;
+}
+
+.wpp_feps_description_wrapper span.attribute_description_text {
+  color: #CCCCCC;
+  font-size: 0.8em;
+}
+
+ul.feps_property_input_fields li.wpp_feps_row_wrapper.wpp_checkbox input.wpp_checkbox {
+  top: 0;
+}
+
+ul.feps_property_input_fields textarea,
+ul.feps_property_input_fields input[type="text"],
+ul.feps_property_input_fields select,
+ul.feps_user_input_fields input[type="text"] {
+  width: 95%;
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: 4px solid #EEEEEE;
+  border-radius: 5px 5px 5px 5px;
+  box-shadow: 0 1px 3px rgba(204, 204, 204, 0.95) inset;
+  padding: 10px;
+  position: relative;
+}
+
+ul.feps_property_input_fields select {
+  width: 100%;
+}
+
+.wpp_feps_input_error {
+  border: 4px solid #FFC5C4 !important;
+}
+
+input.wpp_checkbox.wpp_feps_input_error {
+  box-shadow: 2px 2px 1px #DD5D40;
+  -moz-box-shadow: 2px 2px 1px #DD5D40;
+  -webkit-box-shadow: 2px 2px 1px #DD5D40;
+  -khtml-box-shadow: 2px 2px 1px #DD5D40;
+  -o-box-shadow: 2px 2px 1px #DD5D40;
+  -ms-box-shadow: 2px 2px 1px #DD5D40;
+}
+
+ul.feps_user_input_fields li {
+  list-style: none;
+}
+
+ul.feps_property_input_fields li.required label {
+  padding-right: 15px;
+  background: url("../images/red-asterisk.jpg") no-repeat top right;
+}
+
 
 /* FEPS Styles End ================================================== */

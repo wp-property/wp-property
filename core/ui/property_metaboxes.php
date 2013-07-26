@@ -232,34 +232,37 @@ class WPP_UI {
 
       <?php //* 'Falls Under' field should be shown only in 'General Information' metabox */ ?>
       <?php if($instance == 'wpp_property_meta') : ?>
-        <?php //** Do not do page dropdown when there are a lot of properties */ ?>
-        <?php $property_count = $wpdb->get_var("SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_type = 'property' AND post_status = 'publish' "); ?>
-        <?php if($property_count < 200) : ?>
-          <?php
-          $pages = wp_dropdown_pages(array(
-            'post_type' => 'property',
-            'exclude_tree' => $object->ID,
-            'selected' => $object->post_parent,
-            'name' => 'parent_id',
-            'show_option_none' => __('(no parent)', 'wpp'),
-            'sort_column' => 'menu_order, post_title',
-            'echo' => 0
-          ));
-          ?>
-          <?php if (!empty($pages)) : ?>
-          <tr class="wpp_attribute_row_parent wpp_attribute_row <?php if (is_array($wp_properties['hidden_attributes'][$property['property_type']]) && in_array('parent', $wp_properties['hidden_attributes'][$property['property_type']])) {  echo 'disabled_row;'; } ?>">
-            <th><?php _e('Falls Under', 'wpp'); ?></th>
-            <td><?php echo $pages; ?></td>
-          </tr>
+        <?php if ( !WPP_F::has_children( $object->ID ) ) : ?>
+          <?php //** Do not do page dropdown when there are a lot of properties */ ?>
+          <?php $property_count = $wpdb->get_var("SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_type = 'property' AND post_status = 'publish' "); ?>
+          <?php if($property_count < 200) : ?>
+            <?php
+            $pages = wp_dropdown_pages(array(
+              'post_type' => 'property',
+              'exclude_tree' => $object->ID,
+              'selected' => $object->post_parent,
+              'name' => 'parent_id',
+              'show_option_none' => __('(no parent)', 'wpp'),
+              'sort_column' => 'menu_order, post_title',
+              'echo' => 0,
+              'depth' => 1
+            ));
+            ?>
+            <?php if (!empty($pages)) : ?>
+            <tr class="wpp_attribute_row_parent wpp_attribute_row <?php if (is_array($wp_properties['hidden_attributes'][$property['property_type']]) && in_array('parent', $wp_properties['hidden_attributes'][$property['property_type']])) {  echo 'disabled_row;'; } ?>">
+              <th><?php _e('Falls Under', 'wpp'); ?></th>
+              <td><?php echo $pages; ?></td>
+            </tr>
+            <?php endif; ?>
+          <?php else : ?>
+            <tr class="wpp_attribute_row_parent wpp_attribute_row <?php if (is_array($wp_properties['hidden_attributes'][$property['property_type']]) && in_array('parent', $wp_properties['hidden_attributes'][$property['property_type']])) {  echo 'disabled_row;'; } ?>">
+              <th><?php _e('Falls Under', 'wpp'); ?></th>
+              <td>
+                <input name="parent_id" value="<?php echo $property['parent_id']; ?>" />
+                <span class="description"><?php _e('ID of parent property', 'wpp'); ?></span>
+              </td>
+            </tr>
           <?php endif; ?>
-        <?php else : ?>
-          <tr class="wpp_attribute_row_parent wpp_attribute_row <?php if (is_array($wp_properties['hidden_attributes'][$property['property_type']]) && in_array('parent', $wp_properties['hidden_attributes'][$property['property_type']])) {  echo 'disabled_row;'; } ?>">
-            <th><?php _e('Falls Under', 'wpp'); ?></th>
-            <td>
-              <input name="parent_id" value="<?php echo $property['parent_id']; ?>" />
-              <span class="description"><?php _e('ID of parent property', 'wpp'); ?></span>
-            </td>
-          </tr>
         <?php endif; ?>
         <?php if(!$property_type_in_attributes) { WPP_UI::property_type_selector($property); } ?>
       <?php endif; ?>
@@ -400,7 +403,7 @@ class WPP_UI {
 
                 case 'dropdown':
                   foreach ($predefined_values as $option) {
-                     $predefined_options[$slug][] = "<option " . selected(esc_attr(trim($value)), esc_attr(trim(str_replace('-', '&ndash;', $option))), false) . " value='" . esc_attr($option) . "'>" . apply_filters('wpp_stat_filter_' . $slug, $option) . "</option>";
+                     $predefined_options[$slug][] = "<option " . selected(esc_attr(trim($value)), esc_attr(trim($option)), false) . " value='" . esc_attr($option) . "'>" . apply_filters('wpp_stat_filter_' . $slug, $option) . "</option>";
                    }
                    $html_input = "<select id='wpp_meta_{$slug}' name='wpp_data[meta][{$slug}]'><option value=''> - </option>" . implode($predefined_options[$slug]) . "</select>";
                 break;

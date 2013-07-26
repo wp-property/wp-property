@@ -1,6 +1,8 @@
 /**
- * Adds specific header to AJAX requests
+ * Facebook Tabs script
+ * Must be enqueued on all facebook pages.
  */
+
 if( typeof wpp_fb_tabs != 'undefined' ) {
 
   //** Try to convert strings to JSON objects */
@@ -15,6 +17,9 @@ if( typeof wpp_fb_tabs != 'undefined' ) {
     }
   }
 
+  /**
+   * Adds specific header to AJAX requests
+   */
   jQuery(document).ajaxSend(function(event, xhr, settings) {
     xhr.setRequestHeader( "X-FB-CANVAS", wpp_fb_tabs.canvas );
   });
