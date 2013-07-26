@@ -1621,11 +1621,15 @@ class WPP_F extends UD_API {
       ");
     }
 
-    $return['updated'] = $return['over_query_limit'] = $return['over_query_limit']= array();
+    $return['updated'] = $return['failed'] = $return['over_query_limit'] = $return['over_query_limit']= array();
 
     $google_map_localizations = WPP_F::draw_localization_dropdown('return_array=true');
 
      foreach( (array) $all_properties as $post_id ) {
+      if ($delay){
+        sleep($delay);
+      }
+
       $geo_data = false;
       $geo_data_coordinates = false;
       $current_coordinates = get_post_meta($post_id,'latitude', true) . get_post_meta($post_id,'longitude', true);
@@ -1706,21 +1710,17 @@ class WPP_F extends UD_API {
         }
 
       }
-      if ($delay){
-        sleep($delay);
-      }
+
     }
 
     $return['attempt'] = $attempt;
     if (!empty($return['over_query_limit']) && $max_attempts >= $attempt) {
-      if ($delay){
-        sleep($delay + 0.01);
-      }
+
       $rerevalidate_result = self::revalidate_all_addresses(array(
         'property_ids' => $return['over_query_limit'],
         'echo_result' => false,
         'attempt' => $attempt + 1,
-        'delay' => $delay + 0.01
+        'delay' => $delay + 0.05
       ));
 
       $return['updated'] = array_merge($return['updated'],$rerevalidate_result['updated']);
@@ -1734,6 +1734,7 @@ class WPP_F extends UD_API {
 
     $return['updated'] = array_unique( $return['updated'] );
     $return['over_query_limit']  = array_unique( $return['over_query_limit'] );
+    $return['failed']  = array_unique( $return['failed'] );
 
     $return[ 'success' ] = 'true';
     $return[ 'message' ] = sprintf( __( 'Updated %1$d %2$s using the %3$s localization.','wpp' ),count( $return['updated'] ), WPP_F::property_label( 'plural' ),$google_map_localizations[$wp_properties[ 'configuration' ][ 'google_maps_localization' ]]);
@@ -2761,7 +2762,7 @@ class WPP_F extends UD_API {
     */
   static function manual_activation() {
 
-    $installed_ver = get_option( "wpp_version" );
+    $installed_ver = get_option( "wpp_version", 0 );
     $wpp_version = WPP_Version;
 
     if(@version_compare($installed_ver, $wpp_version) == '-1') {
@@ -2876,6 +2877,12 @@ class WPP_F extends UD_API {
   static function get_search_values($search_attributes, $searchable_property_types, $cache = true, $instance_id = false) {
     global $wpdb, $wp_properties;
 
+    // Non post_meta fields
+    $non_post_meta = array(
+      'ID' => 'equal',
+      'post_date'   => 'date'
+    );
+
     if($instance_id) {
       //** Load value array from cache if it exists (search widget creates it on update */
       $cachefile = WPP_Path . 'cache/searchwidget/' . $instance_id . '.values.res';
@@ -2895,15 +2902,15 @@ class WPP_F extends UD_API {
       }
 
       if(!is_array($searchable_property_types)) {
-        $searchable_property_types = explode(',', $searchable_property_types);
-        foreach($searchable_property_types as $k => $v) {
+        foreach(explode(',', $searchable_property_types) as $k => $v) {
           $searchable_property_types[$k] = trim($v);
         }
       }
-      $searchable_property_types = "AND pm2.meta_value IN ('" . implode("','", $searchable_property_types) . "')";
+      $searchable_property_types_sql = "AND pm2.meta_value IN ('" . implode("','", $searchable_property_types) . "')";
 
       //** Cycle through requested attributes */
       foreach($search_attributes as $searchable_attribute) {
+
 
         if($searchable_attribute == 'property_type') {
           continue;
@@ -2932,7 +2939,24 @@ class WPP_F extends UD_API {
             $range[$searchable_attribute][] = $predefined_search_values;
           }
 
-        } else {
+        } elseif(array_key_exists($searchable_attribute,$non_post_meta)){
+
+          $type = $non_post_meta[$searchable_attribute];
+
+          //** No predefined value exist */
+          $db_values = $wpdb->get_col("
+            SELECT DISTINCT(". ( $type == 'data' ? "DATE_FORMAT(p1.{$searchable_attribute}, '%Y%m')" : "p1.{$searchable_attribute}") .")
+            FROM {$wpdb->posts} p1
+            LEFT JOIN {$wpdb->postmeta} pm2 ON p1.ID = pm2.post_id
+            WHERE pm2.meta_key = 'property_type' $searchable_property_types_sql
+            order by p1.{$searchable_attribute}
+          ");
+
+          //* Get all available values for this attribute for this property_type */
+          $range[$searchable_attribute] = $db_values;
+
+        }else {
+
 
           //** No predefined value exist */
           $db_values = $wpdb->get_col("
@@ -2940,7 +2964,7 @@ class WPP_F extends UD_API {
             FROM {$wpdb->postmeta} pm1
             LEFT JOIN {$wpdb->postmeta} pm2 ON pm1.post_id = pm2.post_id
             WHERE pm1.meta_key = '{$searchable_attribute}' AND pm2.meta_key = 'property_type'
-            $searchable_property_types
+            $searchable_property_types_sql
             AND pm1.meta_value != ''
             ORDER BY " . ($is_numeric ? 'ABS(' : ''). "pm1.meta_value" . ($is_numeric ? ')' : ''). " ASC
           ");
@@ -4776,7 +4800,7 @@ class WPP_F extends UD_API {
     //** Hook this action is you want to add info */
     $contextual_help = apply_filters('property_page_all_properties_help', $contextual_help);
 
-    do_action('wpproperty_contextual_help', array('contextual_help'=>$contextual_help));
+    do_action('wpp_contextual_help', array('contextual_help'=>$contextual_help));
 
   }
 
@@ -4808,7 +4832,7 @@ class WPP_F extends UD_API {
     $contextual_help['More Help'][] = '<h3>'. __('More Help', 'wpp').'</h3>';
     $contextual_help['More Help'][] = '<p>'. __('Visit <a target="_blank" href="https://usabilitydynamics.com/products/wp-property/">WP-Property Help Page</a> on UsabilityDynamics.com for more help.', 'wpp').'</>';
 
-    do_action('wpproperty_contextual_help', array('contextual_help'=>$contextual_help));
+    do_action('wpp_contextual_help', array('contextual_help'=>$contextual_help));
 
   }
 

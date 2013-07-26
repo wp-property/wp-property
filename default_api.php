@@ -296,8 +296,8 @@
   add_action("after_setup_theme", array('WPP_Core', "after_setup_theme"));
 
   // Add some default actions
-  add_filter("wpp_stat_filter_price", 'add_dollar_sign');
-  add_filter("wpp_stat_filter_deposit", 'add_dollar_sign');
+  //add_filter("wpp_stat_filter_price", 'add_dollar_sign');
+  //add_filter("wpp_stat_filter_deposit", 'add_dollar_sign');
 
   //** Add dollar sign to all attributes marked as currency */
   if(is_array($wp_properties['currency_attributes'])) {
@@ -631,8 +631,10 @@
           }
         }
 
+        $average = isset( $wp_properties[ 'configuration' ][ 'show_aggregated_value_as_average' ] ) ? $wp_properties[ 'configuration' ][ 'show_aggregated_value_as_average' ] : false ;
+
         $val = @array_sum( $range_values );
-        $val = is_numeric( $val ) && $val > 0 ? $val : 0;
+        $val = is_numeric( $val ) && $val > 0 ? ( $average == 'true' ? $val / count( $range_values ) : $val ) : 0;
 
         update_post_meta( $post_data[ 'parent_id' ], $range_attribute, $val);
 

@@ -598,6 +598,11 @@ if(get_option('permalink_structure') == '') {
 
           </li>
 
+          <li>
+            <?php echo WPP_F::checkbox("name=wpp_settings[configuration][show_aggregated_value_as_average]&label=" . __( 'Parent property\'s aggregated value should be set as average of children values. If not, - the aggregated value will be set as sum of children values.', 'wpp' ), $wp_properties['configuration']['show_aggregated_value_as_average']); ?>
+            <br/><span class="description"><?php _e( 'Aggregated value is set only for numeric and currency attributes and can be updated ( set ) only on child property\'s saving.', 'wpp' ); ?></span>
+          </li>
+
        </ul>
       </td>
     </tr>

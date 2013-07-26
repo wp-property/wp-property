@@ -162,7 +162,7 @@ class WPP_Core {
     add_action('wpp_premium_feature_check', array('WPP_F', 'feature_check'));
 
     //** Contextual Help */
-    add_action('wpproperty_contextual_help', array($this, 'wpp_contextual_help'));
+    add_action('wpp_contextual_help', array($this, 'wpp_contextual_help'));
 
     //** Page loading handlers */
     add_action('load-property_page_all_properties', array( 'WPP_F', 'property_page_all_properties_load' ));
@@ -183,6 +183,7 @@ class WPP_Core {
     wp_register_script('jquery-cookie', WPP_URL. 'js/jquery.smookie.js', array('jquery'), '1.7.3' );
     wp_register_script('jquery-ajaxupload', WPP_URL. 'js/fileuploader.js', array('jquery'));
     wp_register_script('wp-property-admin-overview', WPP_URL. 'js/wp-property-admin-overview.js', array('jquery'),WPP_Version);
+    wp_register_script('wp-property-admin-widgets', WPP_URL. 'js/wp-property-admin-widgets.js', array('jquery'),WPP_Version);
     wp_register_script('wp-property-backend-global', WPP_URL. 'js/wp-property-backend-global.js', array('jquery'),WPP_Version);
     wp_register_script('wp-property-global', WPP_URL. 'js/wp-property-global.js', array('jquery'),WPP_Version);
 
@@ -367,6 +368,7 @@ class WPP_Core {
       wp_enqueue_script('jquery-ui-sortable');
       wp_enqueue_script('jquery-ui-tabs');
       wp_enqueue_style('jquery-ui');
+      wp_enqueue_script('wp-property-admin-widgets');
     }
 
     //** Automatically insert styles sheet if one exists with $current_screen->ID name */
@@ -580,7 +582,7 @@ class WPP_Core {
       $dir = opendir($directory);
       while(($cachefile = readdir($dir))){
         if ( is_file ($directory."/".$cachefile)) {
-          unlink ($directory."/".$cachefile);
+          unlink($directory."/".$cachefile);
         }
       }
     }
@@ -609,9 +611,7 @@ class WPP_Core {
     /* get old location */
     $old_location = get_post_meta($post_id, $wp_properties['configuration']['address_attribute'], true);
 
-    foreach((array)$wp_properties['geo_type_attributes']+array('display_address') as $meta_key){
-      delete_post_meta($post_id, $meta_key);
-    }
+
 
     foreach($update_data as $meta_key => $meta_value) {
       $attribute_data = WPP_F::get_attribute_data($meta_key);
@@ -666,6 +666,11 @@ class WPP_Core {
       }
 
       if(!empty($geo_data->formatted_address)) {
+
+        foreach((array)$wp_properties['geo_type_attributes']+array('display_address') as $meta_key){
+          delete_post_meta($post_id, $meta_key);
+        }
+
         update_post_meta($post_id, 'address_is_formatted', true);
 
         if(!empty($wp_properties['configuration']['address_attribute'])) {
@@ -682,17 +687,25 @@ class WPP_Core {
           update_post_meta($post_id, $wp_properties['configuration']['address_attribute'], WPP_F::encode_mysql_input( $geo_data->formatted_address, $wp_properties['configuration']['address_attribute']));
         }
 
+        update_post_meta( $post_id, 'wpp::last_address_validation', time());
+
       } else {
         // Try to figure out why it failed
-        update_post_meta($post_id, 'address_is_formatted', false);
+        if($geo_data->status == 'OVER_QUERY_LIMIT' || $geo_data->status == 'REQUEST_DENIED' ) {
+          //** OVER_QUERY_LIMIT is not a reason to count that address is not formated */
+        }else{
+          update_post_meta($post_id, 'address_is_formatted', false);
+        }
       }
+    }elseif( empty($coordinates) && empty($new_location) ){
+
+      foreach((array)$wp_properties['geo_type_attributes']+array('display_address') as $meta_key){
+        delete_post_meta($post_id, $meta_key);
+      }
+
+      update_post_meta($post_id, 'address_is_formatted', false);
     }
 
-    if($geo_data->status == 'OVER_QUERY_LIMIT') {
-      //** Could add some sort of user notification that over limit */
-    }else{
-      update_post_meta( $post_id, 'wpp::last_address_validation', time());
-    }
 
     //* Check if property has children */
     $children = get_children("post_parent=$post_id&post_type=property");
@@ -1517,11 +1530,22 @@ class WPP_Core {
         $result['top'] = '<div id="wpp_shortcode_'. $defaults['unique_hash'] .'" class="wpp_ui '.$wpp_query['class'].'">';
       }
 
-      $result['top_pagination'] = wpi_draw_pagination(array('return' => true, 'class' => 'wpp_top_pagination', 'sorter_type' => $wpp_query['sorter_type'], 'hide_count' => $hide_count, 'sort_by_text' => $wpp_query['sort_by_text']));
+      $result['top_pagination'] = wpi_draw_pagination( array(
+        'class' => 'wpp_top_pagination',
+        'sorter_type' => $wpp_query['sorter_type'],
+        'hide_count' => $hide_count,
+        'sort_by_text' => $wpp_query['sort_by_text'],
+      ) );
       $result['result'] = $ob_get_contents;
 
       if($wpp_query['bottom_pagination_flag'] == 'true') {
-        $result['bottom_pagination'] = wpi_draw_pagination(array('return' => true, 'class' => 'wpp_bottom_pagination', 'sorter_type' => $wpp_query['sorter_type'], 'hide_count' => $hide_count, 'sort_by_text' => $wpp_query['sort_by_text']));
+        $result['bottom_pagination'] = wpi_draw_pagination( array(
+          'class' => 'wpp_bottom_pagination',
+          'sorter_type' => $wpp_query['sorter_type'],
+          'hide_count' => $hide_count,
+          'sort_by_text' => $wpp_query['sort_by_text'],
+          'javascript' => false
+        ) );
       }
 
       if($wpp_query['disable_wrapper'] != 'true') {

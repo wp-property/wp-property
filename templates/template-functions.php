@@ -195,6 +195,16 @@ if(!function_exists('wpi_draw_pagination')):
   function wpi_draw_pagination($settings = '') {
     global $wpp_query, $wp_properties;
 
+    $settings = wp_parse_args( $settings, array(
+      'javascript' => true,
+      'return' => true,
+      'class' => '',
+      'sorter_type' => 'none',
+      'hide_count' => false,
+      'sort_by_text' => isset( $wpp_query['sort_by_text'] ) ? $wpp_query['sort_by_text'] : '',
+      'javascript' => true
+    ) );
+
     if(is_array($wpp_query) || is_object($wpp_query)) {
       extract($wpp_query);
     }
@@ -215,210 +225,204 @@ if(!function_exists('wpi_draw_pagination')):
       $sortable_attrs = false;
     }
 
-    ob_start(); ?>
-    <script type="text/javascript">
-      /*
-       * The functionality below is used for pagination and sorting the list of properties
-       * It can be called twice (for top and bottom pagination blocks)
-       * or more times (on multiple shortcodes)
-       * So the current javascript functionality should not to be initialized twice.
-       */
-      /*
-       * Init global WPP_QUERY variable which will contain all query objects
-       */
-      if(typeof wpp_query == 'undefined') {
-        var wpp_query = [];
-      }
-      /*
-       *
-       */
-      if(typeof document_ready == 'undefined') {
-          var document_ready = false;
-      }
-      /*
-       * Initialize shortcode's wpp_query object
-       */
-      if(typeof wpp_query_<?php echo $unique_hash; ?> == 'undefined') {
-        var wpp_query_<?php echo $unique_hash; ?> = <?php echo json_encode($wpp_query); ?>;
-        /* Default values for ajax query. It's used when we go to base URL using back button */
-        wpp_query_<?php echo $unique_hash; ?>['default_query'] = wpp_query_<?php echo $unique_hash; ?>.query;
-        /* Push query objects to global wpp_query variable */
-        wpp_query.push(wpp_query_<?php echo $unique_hash; ?>);
-      }
-      /*
-       * Init variable only at once
-       */
-      if(typeof wpp_pagination_history_ran == 'undefined') {
-        var wpp_pagination_history_ran = false;
-      }
-      /*
-       * Init variable only at once.
-       * Variable used for preventing of senging request twice if bottom pagination in use;
-       * odokienko@UD
-       */
-      if(typeof wpp_pagination_request_<?php echo $unique_hash; ?> == 'undefined') {
-        var wpp_pagination_request_<?php echo $unique_hash; ?> = false;
-      }
-      /* Init variable only at once */
-      if(typeof wpp_pagination_<?php echo $unique_hash; ?> == 'undefined') {
-        var wpp_pagination_<?php echo $unique_hash; ?> = false;
-      }
-      if(typeof first_load == 'undefined') {
-        var first_load = true;
-      }
-      /* Watch for address URL for back buttons support */
-      if(!wpp_pagination_history_ran) {
-        wpp_pagination_history_ran = true;
+    //** */
+    if ( $settings[ 'javascript' ] ) {
+
+      ob_start(); ?>
+      <script type="text/javascript">
         /*
-         * On change location (address) Event.
-         *
-         * Also used as Back button functionality.
-         *
-         * Attention! This event is unique (binds at once) and is used for any (multiple) shortcode
+         * The functionality below is used for pagination and sorting the list of properties
+         * It can be many times (on multiple shortcodes)
+         * So the current javascript functionality should not to be initialized twice.
          */
-         jQuery(document).ready(function() {
-          if(!jQuery.isFunction(jQuery.fn.slider)) {
-            return;
-          }
-          jQuery.address.change(function(event){
-            callPagination(event);
-          });
-        });
         /*
-         * Parse location (address) hash,
-         * Setup shortcode params by hash params
-         * Calls ajax pagination
+         * Init global WPP_QUERY variable which will contain all query objects
          */
-        function callPagination(event) {
+        if(typeof wpp_query == 'undefined') {
+          var wpp_query = [];
+        }
+        /*
+         *
+         */
+        if(typeof document_ready == 'undefined') {
+            var document_ready = false;
+        }
+        /*
+         * Initialize shortcode's wpp_query object
+         */
+        if(typeof wpp_query_<?php echo $unique_hash; ?> == 'undefined') {
+          var wpp_query_<?php echo $unique_hash; ?> = <?php echo json_encode($wpp_query); ?>;
+          /* Default values for ajax query. It's used when we go to base URL using back button */
+          wpp_query_<?php echo $unique_hash; ?>['default_query'] = wpp_query_<?php echo $unique_hash; ?>.query;
+          /* Push query objects to global wpp_query variable */
+          wpp_query.push(wpp_query_<?php echo $unique_hash; ?>);
+        }
+        /*
+         * Init variable only at once
+         */
+        if(typeof wpp_pagination_history_ran == 'undefined') {
+          var wpp_pagination_history_ran = false;
+        }
+        /* Init variable only at once */
+        if(typeof wpp_pagination_<?php echo $unique_hash; ?> == 'undefined') {
+          var wpp_pagination_<?php echo $unique_hash; ?> = false;
+        }
+        if(typeof first_load == 'undefined') {
+          var first_load = true;
+        }
+        /* Watch for address URL for back buttons support */
+        if(!wpp_pagination_history_ran) {
+          wpp_pagination_history_ran = true;
           /*
-           * We have to be sure that DOM is ready
-           * if it's not, wait 0.1 sec and call function again
+           * On change location (address) Event.
+           *
+           * Also used as Back button functionality.
+           *
+           * Attention! This event is unique (binds at once) and is used for any (multiple) shortcode
            */
-          if(!document_ready) {
-            window.setTimeout(function(){
-              callPagination(event);
-            }, 100);
-            return false;
-          }
-          var history = {};
-          /* Parse hash value (params) */
-          var hashes = event.value.replace(/^\//, '');
-          /* Determine if we have hash params */
-          if(hashes) {
-            hashes = hashes.split('&');
-            for (var i in hashes) {
-              if(typeof hashes[i] != 'function') {
-                hash = hashes[i].split('=');
-                history[hash[0]] = hash[1];
-              }
+           jQuery(document).ready(function() {
+            if(!jQuery.isFunction(jQuery.fn.slider)) {
+              return;
             }
-            if(history.i) {
-              /* get current shortcode's object */
-              var index = parseInt(history.i) - 1;
-              if(index >= 0) {
-                var q = wpp_query[index];
-              }
-              if(typeof q == 'undefined' || q.length == 0) {
-                //ERROR
-                return false;
-              }
-              if(history.sort_by && history.sort_by != '') {
-                q.sort_by = history.sort_by;
-              }
-              if(history.sort_order  && history.sort_order != '') {
-                q.sort_order = history.sort_order;
-              }
-              /* 'Select/Unselect' sortable buttons */
-              var sortable_links = jQuery('#wpp_shortcode_' + q.unique_hash + ' .wpp_sortable_link');
-              if(sortable_links.length > 0 ) {
-                sortable_links.each(function(i,e){
-                  jQuery(e).removeClass("wpp_sorted_element");
-                  if(jQuery(e).attr('sort_slug') == q.sort_by) {
-                    jQuery(e).addClass("wpp_sorted_element");
-                  }
-                });
-              }
-              if(history.requested_page && history.requested_page != '') {
-                eval('wpp_do_ajax_pagination_' + q.unique_hash + '(' + history.requested_page + ')');
-              } else {
-                eval('wpp_do_ajax_pagination_' + q.unique_hash + '(1)');
-              }
-            } else {
+            jQuery.address.change(function(event){
+              callPagination(event);
+            });
+          });
+          /*
+           * Parse location (address) hash,
+           * Setup shortcode params by hash params
+           * Calls ajax pagination
+           */
+          function callPagination(event) {
+            /*
+             * We have to be sure that DOM is ready
+             * if it's not, wait 0.1 sec and call function again
+             */
+            if(!document_ready) {
+              window.setTimeout(function(){
+                callPagination(event);
+              }, 100);
               return false;
             }
-          } else {
-            /* Looks like it's base url
-             * Determine if this first load, we do nothing
-             * If not, - we use 'back button' functionality.
-             */
-            if(first_load) {
-              first_load = false;
-            } else {
-              /*
-               * Set default pagination values for all shortcodes
-               */
-              for(var i in wpp_query) {
-                wpp_query[i].sort_by = wpp_query[i].default_query.sort_by;
-                wpp_query[i].sort_order = wpp_query[i].default_query.sort_order;
+            var history = {};
+            /* Parse hash value (params) */
+            var hashes = event.value.replace(/^\//, '');
+            /* Determine if we have hash params */
+            if(hashes) {
+              hashes = hashes.split('&');
+              for (var i in hashes) {
+                if(typeof hashes[i] != 'function') {
+                  hash = hashes[i].split('=');
+                  history[hash[0]] = hash[1];
+                }
+              }
+              if(history.i) {
+                /* get current shortcode's object */
+                var index = parseInt(history.i) - 1;
+                if(index >= 0) {
+                  var q = wpp_query[index];
+                }
+                if(typeof q == 'undefined' || q.length == 0) {
+                  //ERROR
+                  return false;
+                }
+                if(history.sort_by && history.sort_by != '') {
+                  q.sort_by = history.sort_by;
+                }
+                if(history.sort_order  && history.sort_order != '') {
+                  q.sort_order = history.sort_order;
+                }
                 /* 'Select/Unselect' sortable buttons */
-                var sortable_links = jQuery('#wpp_shortcode_' + wpp_query[i].unique_hash + ' .wpp_sortable_link');
+                var sortable_links = jQuery('#wpp_shortcode_' + q.unique_hash + ' .wpp_sortable_link');
                 if(sortable_links.length > 0 ) {
-                  sortable_links.each(function(ie,e){
+                  sortable_links.each(function(i,e){
                     jQuery(e).removeClass("wpp_sorted_element");
-                    if(jQuery(e).attr('sort_slug') == wpp_query[i].sort_by) {
+                    if(jQuery(e).attr('sort_slug') == q.sort_by) {
                       jQuery(e).addClass("wpp_sorted_element");
                     }
                   });
                 }
-                eval('wpp_do_ajax_pagination_' + wpp_query[i].unique_hash + '(1, false)');
+                if(history.requested_page && history.requested_page != '') {
+                  eval('wpp_do_ajax_pagination_' + q.unique_hash + '(' + history.requested_page + ')');
+                } else {
+                  eval('wpp_do_ajax_pagination_' + q.unique_hash + '(1)');
+                }
+              } else {
+                return false;
+              }
+            } else {
+              /* Looks like it's base url
+               * Determine if this first load, we do nothing
+               * If not, - we use 'back button' functionality.
+               */
+              if(first_load) {
+                first_load = false;
+              } else {
+                /*
+                 * Set default pagination values for all shortcodes
+                 */
+                for(var i in wpp_query) {
+                  wpp_query[i].sort_by = wpp_query[i].default_query.sort_by;
+                  wpp_query[i].sort_order = wpp_query[i].default_query.sort_order;
+                  /* 'Select/Unselect' sortable buttons */
+                  var sortable_links = jQuery('#wpp_shortcode_' + wpp_query[i].unique_hash + ' .wpp_sortable_link');
+                  if(sortable_links.length > 0 ) {
+                    sortable_links.each(function(ie,e){
+                      jQuery(e).removeClass("wpp_sorted_element");
+                      if(jQuery(e).attr('sort_slug') == wpp_query[i].sort_by) {
+                        jQuery(e).addClass("wpp_sorted_element");
+                      }
+                    });
+                  }
+                  eval('wpp_do_ajax_pagination_' + wpp_query[i].unique_hash + '(1, false)');
+                }
               }
             }
           }
         }
-      }
-      /*
-       * Changes location (address) hash based on pagination
-       *
-       * We use this function extend of wpp_do_ajax_pagination()
-       * because wpp_do_ajax_pagination() is called on change Address Value's event
-       *
-       * @param int this_page Page which will be loaded
-       * @param object data WPP_QUERY object
-       * @return object data Returns updated WPP_QUERY object
-       */
-      if(typeof changeAddressValue == 'undefined' ) {
-        function changeAddressValue (this_page, data) {
-          var q = window.wpp_query;
-          /* Get the current shortcode's index */
-          var index = 0;
-          for (var i in q) {
-            if(q[i].unique_hash == data.unique_hash) {
-              index = (++i);
-              break;
+        /*
+         * Changes location (address) hash based on pagination
+         *
+         * We use this function extend of wpp_do_ajax_pagination()
+         * because wpp_do_ajax_pagination() is called on change Address Value's event
+         *
+         * @param int this_page Page which will be loaded
+         * @param object data WPP_QUERY object
+         * @return object data Returns updated WPP_QUERY object
+         */
+        if(typeof changeAddressValue == 'undefined' ) {
+          function changeAddressValue (this_page, data) {
+            var q = window.wpp_query;
+            /* Get the current shortcode's index */
+            var index = 0;
+            for (var i in q) {
+              if(q[i].unique_hash == data.unique_hash) {
+                index = (++i);
+                break;
+              }
             }
+            /* Set data query which will be used in history hash below */
+            var q = {
+              requested_page : this_page,
+              sort_order : data.sort_order,
+              sort_by : data.sort_by,
+              i : index
+            };
+            /* Update WPP_QUERY query */
+            data.query.requested_page = this_page;
+            data.query.sort_order = data.sort_order;
+            data.query.sort_by = data.sort_by;
+            /*
+             * Update page URL for back-button support (needs to do sort order and direction)
+             * jQuery.address.value() and jQuery.address.path() double binds jQuery.change() event, some way
+             * so for now, we use window.location
+             */
+            var history = jQuery.param(q);
+            window.location.hash = '/' + history;
+            return data;
           }
-          /* Set data query which will be used in history hash below */
-          var q = {
-            requested_page : this_page,
-            sort_order : data.sort_order,
-            sort_by : data.sort_by,
-            i : index
-          };
-          /* Update WPP_QUERY query */
-          data.query.requested_page = this_page;
-          data.query.sort_order = data.sort_order;
-          data.query.sort_by = data.sort_by;
-          /*
-           * Update page URL for back-button support (needs to do sort order and direction)
-           * jQuery.address.value() and jQuery.address.path() double binds jQuery.change() event, some way
-           * so for now, we use window.location
-           */
-          var history = jQuery.param(q);
-          window.location.hash = '/' + history;
-          return data;
         }
-      }
-      if(typeof wpp_do_ajax_pagination_<?php echo $unique_hash; ?> == 'undefined') {
+
         function wpp_do_ajax_pagination_<?php echo $unique_hash; ?>(this_page, scroll_to) {
           if(typeof this_page == 'undefined') {
             this_page = 1;
@@ -426,8 +430,6 @@ if(!function_exists('wpi_draw_pagination')):
           if(typeof scroll_to == 'undefined') {
             scroll_to = true;
           }
-
-          wpp_pagination_request_<?php echo $unique_hash; ?> = true;
 
           data = wpp_query_<?php echo $unique_hash; ?>;
           /* Update page counter */
@@ -479,125 +481,95 @@ if(!function_exists('wpi_draw_pagination')):
                 'overlayShow' : false
               });
               jQuery(document).trigger('wpp_pagination_change_complete',{'overview_id' : <?php echo $unique_hash; ?>});
-              wpp_pagination_request_<?php echo $unique_hash; ?> = false;
             },
             "json"
           );
         }
-      }
-      jQuery(document).ready(function() {
-        if(!jQuery.isFunction(jQuery.fn.slider)) {
-          /* console.log("jQuery.slider not loaded."); */
-        }
-        if(!jQuery.isFunction(jQuery.fn.address)) {
-          /* console.log("jQuery.address not loaded."); */
-        }
-        if(!jQuery.isFunction(jQuery.fn.slider) || !jQuery.isFunction(jQuery.fn.slider)) {
-          jQuery(".wpp_pagination_slider_wrapper").hide();
-          return;
-        }
-        document_ready = true;
-        max_slider_pos = <?php echo ($pages ? $pages : 'null'); ?>;
-        //** Do not assign click event again */
-        if(!jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_back').data('events') ) {
-          jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_back').click(function() {
-            if (wpp_pagination_request_<?php echo $unique_hash; ?>){
-              return false;
-            }
 
-            var current_value =  jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider").slider("value");
-            if(current_value == 1) { return; }
-            var new_value = current_value - 1;
-            jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider").slider("value", new_value);
-            wpp_query_<?php echo $unique_hash; ?> = changeAddressValue(new_value, wpp_query_<?php echo $unique_hash; ?>);
-          });
-        }
-        if(!jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_forward').data('events') ) {
-          jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_forward').click(function() {
-
-            if (wpp_pagination_request_<?php echo $unique_hash; ?>){
-              return false;
-            }
-
-            var current_value =  jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider").slider("value");
-            if(max_slider_pos && (current_value == max_slider_pos || max_slider_pos < 1 )) { return; }
-            var new_value = current_value + 1;
-            jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider").slider("value",new_value);
-            wpp_query_<?php echo $unique_hash; ?> = changeAddressValue(new_value, wpp_query_<?php echo $unique_hash; ?>);
-          });
-        }
-        if(!jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_link').data('events') ) {
-          jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_link').click(function() {
-
-            if (wpp_pagination_request_<?php echo $unique_hash; ?>){
-              return false;
-            }
-
-            var attribute = jQuery(this).attr('sort_slug');
-            var sort_order = jQuery(this).attr('sort_order');
-            var this_attribute = jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_link[sort_slug="+attribute+"]");
-            if(jQuery(this).is(".wpp_sorted_element")) {
-              var currently_sorted = true;
+        jQuery(document).ready(function() {
+          if(!jQuery.isFunction(jQuery.fn.slider) || !jQuery.isFunction(jQuery.fn.slider)) {
+            jQuery(".wpp_pagination_slider_wrapper").hide();
+            return null;
+          }
+          document_ready = true;
+          max_slider_pos = <?php echo ($pages ? $pages : 'null'); ?>;
+          //** Do not assign click event again */
+          if(!jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_back').data('events') ) {
+            jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_back').click(function() {
+              var current_value =  jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider").slider("value");
+              if(current_value == 1) { return; }
+              var new_value = current_value - 1;
+              jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider").slider("value", new_value);
+              wpp_query_<?php echo $unique_hash; ?> = changeAddressValue(new_value, wpp_query_<?php echo $unique_hash; ?>);
+            });
+          }
+          if(!jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_forward').data('events') ) {
+            jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_forward').click(function() {
+              var current_value =  jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider").slider("value");
+              if(max_slider_pos && (current_value == max_slider_pos || max_slider_pos < 1 )) { return; }
+              var new_value = current_value + 1;
+              jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider").slider("value",new_value);
+              wpp_query_<?php echo $unique_hash; ?> = changeAddressValue(new_value, wpp_query_<?php echo $unique_hash; ?>);
+            });
+          }
+          if(!jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_link').data('events') ) {
+            jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_link').click(function() {
+              var attribute = jQuery(this).attr('sort_slug');
+              var sort_order = jQuery(this).attr('sort_order');
+              var this_attribute = jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_link[sort_slug="+attribute+"]");
+              if(jQuery(this).is(".wpp_sorted_element")) {
+                var currently_sorted = true;
+                /* If this attribute is already sorted, we switch sort order */
+                if(sort_order == "ASC") {
+                  sort_order = "DESC";
+                } else if(sort_order == "DESC") {
+                  sort_order = "ASC";
+                }
+              }
+              jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_link").removeClass("wpp_sorted_element");
+              wpp_query_<?php echo $unique_hash; ?>.sort_by = attribute;
+              wpp_query_<?php echo $unique_hash; ?>.sort_order = sort_order;
+              jQuery(this_attribute).addClass("wpp_sorted_element");
+              jQuery(this_attribute).attr("sort_order", sort_order);
+              /* Get ajax results and reset to first page */
+              wpp_query_<?php echo $unique_hash; ?> = changeAddressValue(1, wpp_query_<?php echo $unique_hash; ?>);
+            });
+          }
+          if(!jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_dropdown').data('events') ) {
+            jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_dropdown').change(function() {
+              var parent = jQuery(this).parents('.wpp_sorter_options');
+              var attribute = jQuery(":selected", this).attr('sort_slug');
+              var sort_element = jQuery(".sort_order", parent);
+              var sort_order = jQuery(sort_element).attr('sort_order');
+              wpp_query_<?php echo $unique_hash; ?>.sort_by = attribute;
+              wpp_query_<?php echo $unique_hash; ?>.sort_order = sort_order;
+              /* Get ajax results and reset to first page */
+              wpp_query_<?php echo $unique_hash; ?> = changeAddressValue(1, wpp_query_<?php echo $unique_hash; ?>);
+            });
+          }
+          if(!jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_overview_sorter').data('events') ) {
+            jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_overview_sorter').click(function() {
+              var parent = jQuery(this).parents('.wpp_sorter_options');
+              var sort_element = this;
+              var dropdown_element = jQuery(".wpp_sortable_dropdown", parent);
+              var attribute = jQuery(":selected", dropdown_element).attr('sort_slug');
+              var sort_order = jQuery(sort_element).attr('sort_order');
+              jQuery(sort_element).removeClass(sort_order);
               /* If this attribute is already sorted, we switch sort order */
               if(sort_order == "ASC") {
                 sort_order = "DESC";
               } else if(sort_order == "DESC") {
                 sort_order = "ASC";
               }
-            }
-            jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_link").removeClass("wpp_sorted_element");
-            wpp_query_<?php echo $unique_hash; ?>.sort_by = attribute;
-            wpp_query_<?php echo $unique_hash; ?>.sort_order = sort_order;
-            jQuery(this_attribute).addClass("wpp_sorted_element");
-            jQuery(this_attribute).attr("sort_order", sort_order);
-            /* Get ajax results and reset to first page */
-            wpp_query_<?php echo $unique_hash; ?> = changeAddressValue(1, wpp_query_<?php echo $unique_hash; ?>);
-          });
-        }
-        if(!jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_dropdown').data('events') ) {
-          jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_dropdown').change(function() {
-
-            if (wpp_pagination_request_<?php echo $unique_hash; ?>){
-              return false;
-            }
-
-            var parent = jQuery(this).parents('.wpp_sorter_options');
-            var attribute = jQuery(":selected", this).attr('sort_slug');
-            var sort_element = jQuery(".sort_order", parent);
-            var sort_order = jQuery(sort_element).attr('sort_order');
-            wpp_query_<?php echo $unique_hash; ?>.sort_by = attribute;
-            wpp_query_<?php echo $unique_hash; ?>.sort_order = sort_order;
-            /* Get ajax results and reset to first page */
-            wpp_query_<?php echo $unique_hash; ?> = changeAddressValue(1, wpp_query_<?php echo $unique_hash; ?>);
-          });
-        }
-        if(!jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_overview_sorter').data('events') ) {
-          jQuery('#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_overview_sorter').click(function() {
-            if (wpp_pagination_request_<?php echo $unique_hash; ?>){
-              return false;
-            }
-            var parent = jQuery(this).parents('.wpp_sorter_options');
-            var sort_element = this;
-            var dropdown_element = jQuery(".wpp_sortable_dropdown", parent);
-            var attribute = jQuery(":selected", dropdown_element).attr('sort_slug');
-            var sort_order = jQuery(sort_element).attr('sort_order');
-            jQuery(sort_element).removeClass(sort_order);
-            /* If this attribute is already sorted, we switch sort order */
-            if(sort_order == "ASC") {
-              sort_order = "DESC";
-            } else if(sort_order == "DESC") {
-              sort_order = "ASC";
-            }
-            wpp_query_<?php echo $unique_hash; ?>.sort_by = attribute;
-            wpp_query_<?php echo $unique_hash; ?>.sort_order = sort_order;
-            jQuery(sort_element).attr("sort_order", sort_order);
-            jQuery(sort_element).addClass(sort_order);
-            /* Get ajax results and reset to first page */
-            wpp_query_<?php echo $unique_hash; ?> = changeAddressValue(1, wpp_query_<?php echo $unique_hash; ?>);
-          });
-        }
-        <?php if($use_pagination) { ?>
-        if(!wpp_pagination_<?php echo $unique_hash; ?>) {
+              wpp_query_<?php echo $unique_hash; ?>.sort_by = attribute;
+              wpp_query_<?php echo $unique_hash; ?>.sort_order = sort_order;
+              jQuery(sort_element).attr("sort_order", sort_order);
+              jQuery(sort_element).addClass(sort_order);
+              /* Get ajax results and reset to first page */
+              wpp_query_<?php echo $unique_hash; ?> = changeAddressValue(1, wpp_query_<?php echo $unique_hash; ?>);
+            });
+          }
+          <?php if($use_pagination) { ?>
           jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider_wrapper").each(function() {
             var this_parent = this;
             /* Slider */
@@ -624,15 +596,16 @@ if(!function_exists('wpi_draw_pagination')):
             jQuery('.wpp_pagination_slider .ui-slider-handle', this).append('<div class="slider_page_info"><div class="val">1</div><div class="arrow"></div></div>');
 
           });
-          wpp_pagination_<?php echo $unique_hash; ?> = true;
-        }
-        <?php } ?>
-      });
-    </script>
-    <?php
+          <?php } ?>
+        });
 
-    $js_result = ob_get_contents();
-    ob_end_clean();
+      </script>
+      <?php
+
+      $js_result = ob_get_contents();
+      ob_end_clean();
+
+    }
 
     ob_start(); ?>
     <div class="properties_pagination <?php echo $settings['class']; ?> wpp_slider_pagination" id="properties_pagination_<?php echo $unique_hash; ?>">
@@ -677,12 +650,14 @@ if(!function_exists('wpi_draw_pagination')):
     </div>
     <div class="ajax_loader"></div>
     <?php
-    $html_result = ob_get_contents();
+    $result = ob_get_contents();
     ob_end_clean();
 
     //** Combine JS (after minification) with HTML results */
-    $js_result = WPP_F::minify_js($js_result);
-    $result = $js_result . $html_result;
+    if( $settings[ 'javascript' ] && isset( $js_result ) ) {
+      $js_result = WPP_F::minify_js($js_result);
+      $result = $js_result . $result;
+    }
 
     if($settings['return'] == 'true') {
       return $result;
