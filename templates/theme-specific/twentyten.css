@@ -316,3 +316,12 @@ input.wpp_checkbox.wpp_feps_input_error {
   -o-box-shadow: 0px 1px 0px #FF8989;
   -ms-box-shadow: 0px 1px 0px #FF8989;
 }
+
+.wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li span {
+  font-size: 14px !important;
+}
+
+
+#content .wpp_feps_subscription_plan_form li.wpp_feps_row_wrapper p {
+  margin-bottom: 0;
+}

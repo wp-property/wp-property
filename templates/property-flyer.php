@@ -37,7 +37,7 @@
                             <td><span style="font-size:<?php echo $wpp_pdf_flyer['font_size_header']; ?>px;"><b><?php echo $property['post_title'];?></b></span>
                                 <?php $tagline = $property['tagline']; ?>
                                 <?php if (!empty($wpp_pdf_flyer['pr_tagline']) && !empty($tagline)) : ?>
-                                <br/><span style="font-size:<?php echo $wpp_pdf_flyer['font_size_content']; ?>px;color:#797979;"><?php echo $tagline ?></span>
+                              <br/><span style="font-size:<?php echo $wpp_pdf_flyer['font_size_content']; ?>px;color:#797979;"><?php echo $tagline ?></span>
                                 <?php endif; ?>
                             </td>
                         </tr>
@@ -57,7 +57,7 @@
                                 <tr>
                                     <td colspan="3"><table cellspacing="0" cellpadding="10" border="0" class="bg-section">
                                         <tr>
-                                            <td><img src="<?php echo $wpp_pdf_flyer['featured_image_url']; ?>"   alt="" />
+                                            <td><img src="<?php echo $wpp_pdf_flyer['featured_image_url']; ?>" width="<?php echo ($wpp_pdf_flyer['first_col_width']-20); ?>" alt="" />
                                             </td>
                                         </tr>
                                         </table>

@@ -700,6 +700,10 @@ class class_admin_tools {
             <span class="description"><?php _e('The log is always active, but the UI is hidden.  If enabled, it will be visible in the admin sidebar.','wpp'); ?></span>
           </li>
           <li>
+            <?php  echo WPP_F::checkbox("name=wpp_settings[configuration][allow_parent_deep_depth]&label=" . __('Enable \'Falls Under\' deep depth.','wpp'), $wp_properties['configuration']['allow_parent_deep_depth']); ?> <br />
+            <span class="description"><?php _e('Allows to set child property as parent.','wpp'); ?></span>
+          </li>
+          <li>
             <?php  echo WPP_F::checkbox("name=wpp_settings[configuration][disable_automatic_feature_update]&label=" . __('Disable automatic feature updates.','wpp'), $wp_properties['configuration']['disable_automatic_feature_update']); ?> <br />
             <span class="description"><?php _e('If disabled, feature updates will not be downloaded automatically.','wpp'); ?></span>
           </li>

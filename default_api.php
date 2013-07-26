@@ -300,19 +300,19 @@
   //add_filter("wpp_stat_filter_deposit", 'add_dollar_sign');
 
   //** Add dollar sign to all attributes marked as currency */
-  if(is_array($wp_properties['currency_attributes'])) {
+  if( isset( $wp_properties['currency_attributes'] ) && is_array( $wp_properties['currency_attributes'] ) ) {
     foreach($wp_properties['currency_attributes'] as $attribute) {
       add_filter("wpp_stat_filter_{$attribute}", 'add_dollar_sign');
     }
   }
 
   //** Format values as numeric if marked as numeric_attributes */
-  if(is_array($wp_properties['numeric_attributes'])) {
-    foreach($wp_properties['numeric_attributes'] as $attribute) {
+  if( isset( $wp_properties['numeric_attributes'] ) && is_array( $wp_properties['numeric_attributes'] ) ) {
+    foreach( $wp_properties['numeric_attributes'] as $attribute ) {
       add_filter("wpp_stat_filter_{$attribute}", array('WPP_F', 'format_numeric'));
     }
 
-    if(in_array('area', $wp_properties['numeric_attributes'])) {
+    if( in_array( 'area', $wp_properties['numeric_attributes'] ) ) {
       add_filter("wpp_stat_filter_area", 'add_square_foot');
     }
   }

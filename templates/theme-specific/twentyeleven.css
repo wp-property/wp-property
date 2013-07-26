@@ -480,3 +480,23 @@ ul.feps_property_input_fields li.required label {
   padding-right: 15px;
   background: url("../images/red-asterisk.jpg") no-repeat top right;
 }
+
+/* Sponsored listings tabs */
+
+ul.wpp_feps_step_tabs {
+  margin-left: 0;
+}
+
+.wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li span {
+  font-size: 14px !important;
+}
+
+/* END Sponsored listings tabs */
+
+/* SUBSCRIPTION PLAN */
+
+.wpp_feps_subscription_plan_form ul.feps_property_input_fields li.wpp_feps_row_wrapper {
+  margin-bottom: 0;
+}
+
+/* END SUBSCRIPTION PLAN */

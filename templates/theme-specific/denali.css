@@ -1,9 +1,9 @@
-/*  
+/*
   Theme-specific styles are introduced in WP-Property 1.08.
   New styles specifically for Denali can be stored here.
   This will prevent us form having to release a new version of Denali whenever we add new features to WPP that affect it.
 
-  WP-Property loads this stylesheet after the other Denali styles are loaded, so it has authority.  
+  WP-Property loads this stylesheet after the other Denali styles are loaded, so it has authority.
 
   This file is loaded for Denali child theme as well.  Loading can be disabled in Settings -> Display -> "Do not load theme-specific stylesheet."
 
@@ -11,13 +11,13 @@
 
   Version: 0.1
  */
- 
- 
+
+
 /* FEPS Styles Begin */
 
 
 .container .wpp_feps_form .wpp_feps_row_wrapper {
-  list-style:none !important;  
+  list-style:none !important;
   width: 100%;
   padding: 0 0 9px 0;
   margin-bottom: 13px;
@@ -34,10 +34,10 @@
 
 
 .wpp_feps_form span.wpp_feps_input_error {
-  color: #A53535; 
+  color: #A53535;
 }
 
-.wpp_feps_form .wpp_feps_row_wrapper.wpp_checkbox  .wpp_feps_label_wrapper {  
+.wpp_feps_form .wpp_feps_row_wrapper.wpp_checkbox  .wpp_feps_label_wrapper {
   position: absolute;
   text-align: left;
   width: 100%;
@@ -67,7 +67,7 @@
 .wpp_feps_form input.wpp_feps_submit_form {
   float: right;
 }
- 
+
 .wpp_feps_form .wpp_feps_row_wrapper .wpp_feps_label_wrapper {
   clear: left;
   float: left;
@@ -94,17 +94,17 @@
 }
 
 .wpp_feps_form .wpp_feps_row_wrapper .wpp_feps_input_wrapper .wpp_feps_input_content {
-  margin-left: 230px; /* +20 to Base Width */ 
+  margin-left: 230px; /* +20 to Base Width */
   padding-right: 3px;
 }
 
 .wpp_feps_form .wpp_feps_row_wrapper .wpp_feps_description_wrapper {
   clear: both;
-  margin-left: 230px; 
+  margin-left: 230px;
 }
 
 .wpp_feps_form ul.feps_property_input_fields div.qq-upload-button {
-  margin-left: 220px; 
+  margin-left: 220px;
   float: left;
 }
 .wpp_feps_form ul.feps_property_input_fields ul.qq-upload-list {
@@ -144,8 +144,36 @@
     text-align: righ;
 }
 
-.wpp_feps_form .wpp_feps_row_wrapper.image_upload .wpp_feps_input_wrapper .wpp_feps_input_content { 
+.wpp_feps_form .wpp_feps_row_wrapper.image_upload .wpp_feps_input_wrapper .wpp_feps_input_content {
     margin-left: 10px;
+}
+
+.mceContentBody .wpp_feps_form ul li,
+.entry-content .wpp_feps_form ul li,
+.mceContentBody .wpp_feps_sponsored_listing ul li,
+.entry-content .wpp_feps_sponsored_listing ul li {
+  margin-bottom: auto;
+  padding-left: 0;
+}
+
+.wpp_feps_form ul.wpp_feps_subscription_plan_info {
+  background-color: #EFEFEF;
+  border: 1px solid #D6D6D6;
+  padding: 15px;
+}
+
+.wpp_feps_form ul.wpp_feps_subscription_plan_info .description {
+  font-size: 12px;
+  color: #ADADAD;
+}
+
+.container .wpp_feps_form ul li.wpp_feps_subscription_plan {
+  padding: 15px 0;
+  margin-bottom: 0;
+}
+
+.wpp_feps_form .wpp_feps_subscription_plan .wpp_feps_input_wrapper .wpp_feps_input_content {
+  padding-right: 15px;
 }
 
 /* FEPS Styles End */

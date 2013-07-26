@@ -34,25 +34,28 @@
     'address_attribute' => 'location',
     'google_maps_localization' => 'en',
     'display_address_format' => '[city], [state]'
-    );
+  );
 
   // Default setings for [property_overview] shortcode
   $wp_properties['configuration']['property_overview'] = array(
     'thumbnail_size' => 'tiny_thumb',
     'fancybox_preview' => 'true',
     'display_slideshow' => 'false',
-    'show_children' => 'true');
+    'show_children' => 'true'
+  );
 
-   $wp_properties['configuration']['single_property_view'] = array(
+  $wp_properties['configuration']['single_property_view'] = array(
     'map_image_type' => 'tiny_thumb',
-    'gm_zoom_level' => '13');
+    'gm_zoom_level' => '13'
+  );
 
    // Default setings for admin UI
   $wp_properties['configuration']['admin_ui'] = array(
-    'overview_table_thumbnail_size' => 'tiny_thumb');
+    'overview_table_thumbnail_size' => 'tiny_thumb'
+  );
 
   // Setup property types to be used.
-  if(!is_array($wp_properties_db['property_types']))
+  if( !isset( $wp_properties_db[ 'property_types' ] ) || !is_array( $wp_properties_db[ 'property_types' ] ) )
     $wp_properties['property_types'] =  array(
       'building' => __('Building','wpp'),
       'floorplan' => __('Floorplan','wpp'),
@@ -61,45 +64,43 @@
 
 
   // Setup property types to be used.
-  if(!is_array($wp_properties_db['property_inheritance']))
-   $wp_properties['property_inheritance'] =  array(
-    'floorplan' => array("street_number", "route", 'state', 'postal_code', 'location', 'display_address', 'address_is_formatted'));
-
-
-  // Property stats. Can be searchable, displayed as input boxes on editing page.
-  if(!is_array($wp_properties_db['property_stats']))
-  $wp_properties['property_stats'] =  array(
-    'location' => __('Address','wpp'),
-    'price' => __('Price','wpp'),
-    'bedrooms' => __('Bedrooms','wpp'),
-    'bathrooms' => __('Bathrooms','wpp'),
-    'deposit' => __('Deposit','wpp'),
-    'area' => __('Area','wpp'),
-    'phone_number' => __('Phone Number','wpp'),
-    'deposit' => __('Deposit','wpp')
-  );
-
-
-  // Property meta.  Typically not searchable, displayed as textarea on editing page.
-  if(!is_array($wp_properties_db['property_meta']))
-  $wp_properties['property_meta'] =  array(
-    'lease_terms' => __('Lease Terms','wpp'),
-    'pet_policy' => __('Pet Policy','wpp'),
-    'school' => __('School','wpp'),
-    'tagline' => __('Tagline','wpp')
-  );
-
-  // On property editing page - determines which fields to hide for a particular property type
-  if(!is_array($wp_properties_db['hidden_attributes']))
-  $wp_properties['hidden_attributes'] = array(
-    'floorplan' => array('location', 'parking', 'school'), /*  Floorplans inherit location. Parking and school are generally same for all floorplans in a building */
-    'building' => array('price', 'bedrooms', 'bathrooms', 'area', 'deposit'),
-    'single_family_home' => array('deposit', 'lease_terms', 'pet_policy')
+  if( !isset( $wp_properties_db[ 'property_inheritance' ] ) || !is_array( $wp_properties_db[ 'property_inheritance' ] ) )
+    $wp_properties['property_inheritance'] =  array(
+      'floorplan' => array("street_number", "route", 'state', 'postal_code', 'location', 'display_address', 'address_is_formatted')
     );
 
+  // Property stats. Can be searchable, displayed as input boxes on editing page.
+  if( !isset( $wp_properties_db[ 'property_stats' ] ) || !is_array($wp_properties_db[ 'property_stats' ] ) )
+    $wp_properties['property_stats'] =  array(
+      'location' => __('Address','wpp'),
+      'price' => __('Price','wpp'),
+      'bedrooms' => __('Bedrooms','wpp'),
+      'bathrooms' => __('Bathrooms','wpp'),
+      'deposit' => __('Deposit','wpp'),
+      'area' => __('Area','wpp'),
+      'phone_number' => __('Phone Number','wpp'),
+      'deposit' => __('Deposit','wpp')
+    );
 
-   // Determines property types that have addresses.
-  if(!is_array($wp_properties_db['location_matters']))
+  // Property meta.  Typically not searchable, displayed as textarea on editing page.
+  if( !isset( $wp_properties_db[ 'property_meta' ] ) || !is_array( $wp_properties_db[ 'property_meta' ] ) )
+    $wp_properties['property_meta'] =  array(
+      'lease_terms' => __('Lease Terms','wpp'),
+      'pet_policy' => __('Pet Policy','wpp'),
+      'school' => __('School','wpp'),
+      'tagline' => __('Tagline','wpp')
+    );
+
+  // On property editing page - determines which fields to hide for a particular property type
+  if( !isset( $wp_properties_db[ 'hidden_attributes' ] ) || !is_array( $wp_properties_db[ 'hidden_attributes' ] ) )
+    $wp_properties['hidden_attributes'] = array(
+      'floorplan' => array('location', 'parking', 'school'), /*  Floorplans inherit location. Parking and school are generally same for all floorplans in a building */
+      'building' => array('price', 'bedrooms', 'bathrooms', 'area', 'deposit'),
+      'single_family_home' => array('deposit', 'lease_terms', 'pet_policy')
+    );
+
+  // Determines property types that have addresses.
+  if( !isset( $wp_properties_db[ 'location_matters' ] ) || !is_array( $wp_properties_db[ 'location_matters' ] ) )
     $wp_properties['location_matters'] = array('building', 'single_family_home');
 
 
@@ -110,31 +111,31 @@
    */
 
   // Determine which property types should actually be searchable.
-  if(!is_array($wp_properties_db['searchable_property_types']))
-  $wp_properties['searchable_property_types'] =  array(
-    'floorplan',
-    'single_family_home'
-  );
+  if( !isset( $wp_properties_db[ 'searchable_property_types' ] ) || !is_array($wp_properties_db[ 'searchable_property_types' ] ) )
+    $wp_properties['searchable_property_types'] =  array(
+      'floorplan',
+      'single_family_home'
+    );
 
 
   // Attributes to use in searching.
-  if(!is_array($wp_properties_db['searchable_attributes']))
-  $wp_properties['searchable_attributes'] =  array(
-    'area',
-    'deposit',
-    'bedrooms',
-    'bathrooms',
-    'city',
-    'price'
-  );
+  if( !isset( $wp_properties_db[ 'searchable_attributes' ] ) || !is_array($wp_properties_db[ 'searchable_attributes' ] ) )
+    $wp_properties['searchable_attributes'] =  array(
+      'area',
+      'deposit',
+      'bedrooms',
+      'bathrooms',
+      'city',
+      'price'
+    );
 
 
   // Convert phrases to searchable values.  Converts string stats into numeric values for searching and filtering.
-  if(!isset($wp_properties_db['search_conversions']) || !is_array($wp_properties_db['search_conversions']))
-  $wp_properties['search_conversions'] =array(
-    'bedrooms' => array(
-      __('Studio','wpp') => '0.5'
-  ));
+  if( !isset( $wp_properties_db[ 'search_conversions' ] ) || !is_array( $wp_properties_db[ 'search_conversions' ] ) )
+    $wp_properties['search_conversions'] =array(
+      'bedrooms' => array(
+        __('Studio','wpp') => '0.5'
+    ));
 
   /**
    *
@@ -143,7 +144,7 @@
    */
 
   //* Don't load defaults if settings exist in db */
-  if(!is_array($wp_properties_db['image_sizes']))
+  if( !isset( $wp_properties_db[ 'image_sizes' ] ) || !is_array($wp_properties_db[ 'image_sizes' ] ) )
     $wp_properties['image_sizes'] = array(
       'map_thumb' => array('width'=> '75', 'height' => '75'),
       'tiny_thumb' => array('width'=> '100', 'height' => '100'),
@@ -172,11 +173,12 @@
   // Image URLs.
   $wp_properties['images']['map_icon_shadow'] = WPP_URL . "images/map_icon_shadow.png";
 
-  if(!is_array($wp_properties_db['configuration']['google_maps']['infobox_attributes']))
-  $wp_properties['configuration']['google_maps']['infobox_attributes'] = array(
-    'bedrooms',
-    'bathrooms',
-    'price');
+  if( !isset( $wp_properties_db['configuration']['google_maps']['infobox_attributes'] ) || !is_array($wp_properties_db['configuration']['google_maps']['infobox_attributes'] ) )
+    $wp_properties['configuration']['google_maps']['infobox_attributes'] = array(
+      'bedrooms',
+      'bathrooms',
+      'price'
+    );
 
   $wp_properties['configuration']['google_maps']['infobox_settings'] = array(
     'show_direction_link' => true,

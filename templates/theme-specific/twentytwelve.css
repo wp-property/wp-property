@@ -1,0 +1,18 @@
+/*
+  TwentyTwelve Specific Styles
+  Version: 0.1
+ */
+
+/* FEPS */
+
+.wpp_feps_form ul li.submit_action {
+  margin-left: 0;
+}
+
+form.wpp_feps_form ul.feps_property_input_fields {
+  margin-bottom: 10px;
+}
+
+/* END FEPS */
+
+

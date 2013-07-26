@@ -910,29 +910,76 @@ ul.feps_property_input_fields li.wpp_feps_row_wrapper {
   z-index: 1;
 }
 
+/* SPONSORED LISTINGS TABS MENU */
+
 .facebook .entry-content ul.wpp_feps_step_tabs li {
   display: inline;
   overflow: hidden;
   list-style-type: none;
-  color: grey;
-  font: 1em "Trebuchet MS", Arial, sans-serif;
-  padding: 3px 5px;
-  text-decoration: none;
-
-  background-color: #F7F7F7;
-  border-width: 1px 1px 0px;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  list-style-position: inside;
   cursor: default;
-  margin-right: 10px;
+  margin-left: -10px;
 }
 
-.facebook .entry-content ul.wpp_feps_step_tabs li.active {
+.facebook .entry-content ul.wpp_feps_step_tabs li:first-child {
+  margin-left: 0;
+}
+
+.facebook .entry-content ul.wpp_feps_step_tabs li:last-child span {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  -moz-border-top-right-radius: 5px;
+  -moz-border-bottom-right-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+}
+
+.facebook .entry-content ul.wpp_feps_step_tabs li:last-child span.wpp_feps_arrow {
+  padding:0;
+  background: none;
+}
+
+.facebook .entry-content ul.wpp_feps_step_tabs li span.wpp_feps_arrow {
+  height: 18px;
+  line-height: 18px;
+  padding: 3px 0 3px 18px;
+  border: none;
+  border-radius: 0;
+  background: transparent url("../images/arrows_right.png") 0 -291px no-repeat;
+}
+
+.facebook .entry-content ul.wpp_feps_step_tabs li span {
+  padding: 3px 5px;
+  color: grey;
+  text-decoration: none;
+  font: 1em "Trebuchet MS", Arial, sans-serif;
+  background-color: #F7F7F7;
+  border-width: 1px 1px 0px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  -moz-border-top-left-radius: 5px;
+  -moz-border-bottom-left-radius: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+}
+
+.facebook .entry-content ul.wpp_feps_step_tabs li span.wpp_feps_tab_value {
+  -moz-box-shadow: -2px 0 3px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: -2px 0 3px rgba(0, 0, 0, 0.15);
+  box-shadow: -2px 0 3px rgba(0, 0, 0, 0.15);
+}
+
+.facebook .entry-content ul.wpp_feps_step_tabs li.active span.wpp_feps_arrow {
+  background: transparent url("../images/arrows_right.png") 0 0 no-repeat;
+}
+
+.facebook .entry-content ul.wpp_feps_step_tabs li.active span {
   font-weight: bold;
   background-color: #6A8DA5;
   color: white;
 }
+
+/* END SPONSORED LISTINGS TABS MENU */
 
 .facebook .wpp_feps_tab_content {
   padding: 20px;

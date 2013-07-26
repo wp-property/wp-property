@@ -535,8 +535,10 @@ if(get_option('permalink_structure') == '') {
       <td>
 
         <ul>
-          <li><?php _e('Map Thumbnail Size:','wpp') ?> <?php WPP_F::image_sizes_dropdown("name=wpp_settings[configuration][single_property_view][map_image_type]&selected=" . $wp_properties['configuration']['single_property_view']['map_image_type']); ?></li>
-          <li><?php _e('Map Zoom Level:','wpp') ?> <?php echo WPP_F::input("name=wpp_settings[configuration][gm_zoom_level]&style=width: 30px;",$wp_properties['configuration']['gm_zoom_level']); ?></li>
+          <li><?php _e('Map Thumbnail Size:','wpp'); ?> <?php WPP_F::image_sizes_dropdown("name=wpp_settings[configuration][single_property_view][map_image_type]&selected=" . $wp_properties['configuration']['single_property_view']['map_image_type']); ?></li>
+          <li><?php _e('Map Zoom Level:','wpp'); ?> <?php echo WPP_F::input("name=wpp_settings[configuration][gm_zoom_level]&style=width: 30px;",$wp_properties['configuration']['gm_zoom_level']); ?></li>
+          <li><?php _e('Custom Latitude Coordinate','wpp'); ?>: <?php echo WPP_F::input("name=wpp_settings[custom_coords][latitude]&style=width: 100px;", $wp_properties['custom_coords']['latitude']); ?> <span class="description"><?php printf(__('Default is "%s"','wpp'), $wp_properties['default_coords']['latitude'] ); ?></span></li>
+          <li><?php _e('Custom Longitude Coordinate','wpp'); ?>: <?php echo WPP_F::input("name=wpp_settings[custom_coords][longitude]&style=width: 100px;", $wp_properties['custom_coords']['longitude']); ?> <span class="description"><?php printf( __('Default is "%s"','wpp'), $wp_properties['default_coords']['longitude'] ); ?></span></li>
           <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][google_maps][show_true_as_image]&label=". sprintf(__('Show Checkboxed Image instead of "%s" and hide "%s" for %s/%s values','wpp'), __('Yes', 'wpp'),__('No', 'wpp'),__('Yes', 'wpp'),__('No', 'wpp')), $wp_properties['configuration']['google_maps']['show_true_as_image']); ?></li>
         </ul>
 

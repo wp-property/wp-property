@@ -1,9 +1,12 @@
 <?php
+
+include_once 'wpp_tcpdf.php';
+
 /*
  * Class for PDF List generation
  *
  */
-class TCPDF_List extends TCPDF {
+class TCPDF_List extends WPP_TCPDF {
 
   private $wpp_background;
 
@@ -25,6 +28,7 @@ class TCPDF_List extends TCPDF {
     $this->wpp_title = (!empty($atts['title']) ? $atts['title'] : '' );
     $this->wpp_tagline = (!empty($atts['tagline']) ? $atts['tagline'] : '' );
     $this->wpp_contact_info = (!empty($atts['contact_info']) ? $atts['contact_info'] : '' );
+    $this->wpp_setfont = (!empty($atts['setfont']) ? $atts['setfont'] : 'helvetica' );
 
     // If it's not array, looks like it has HEX format.
     // This way, try to Convert HEX to RGB
@@ -78,7 +82,7 @@ class TCPDF_List extends TCPDF {
    */
   public function Header() {
     // Set font
-    $this->SetFont('helvetica', 'B', 14);
+    $this->SetFont($this->wpp_setfont, 'B', 14);
     $this->SetTextColor($this->wpp_text_color[0], $this->wpp_text_color[1], $this->wpp_text_color[2]);
     $this->SetFillColor($this->wpp_background[0], $this->wpp_background[1], $this->wpp_background[2]);
     $this->SetCellPaddings( 5, 0, 5, 0 );
@@ -128,7 +132,7 @@ class TCPDF_List extends TCPDF {
   public function Footer() {
     $this->SetY(-7);
     // Set font
-    $this->SetFont('helvetica', 'N', 11);
+    $this->SetFont($this->wpp_setfont, 'N', 11);
     $this->SetTextColor($this->wpp_text_color[0], $this->wpp_text_color[1], $this->wpp_text_color[2]);
     $this->SetFillColor($this->wpp_background[0], $this->wpp_background[1], $this->wpp_background[2]);
     $this->SetCellPaddings( 3, 0, 0, 0 );

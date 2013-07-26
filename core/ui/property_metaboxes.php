@@ -232,12 +232,12 @@ class WPP_UI {
 
       <?php //* 'Falls Under' field should be shown only in 'General Information' metabox */ ?>
       <?php if($instance == 'wpp_property_meta') : ?>
-        <?php if ( !WPP_F::has_children( $object->ID ) ) : ?>
+        <?php if ( !WPP_F::has_children( $object->ID ) || ( !empty( $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] ) && $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] == 'true' ) ) : ?>
           <?php //** Do not do page dropdown when there are a lot of properties */ ?>
           <?php $property_count = $wpdb->get_var("SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_type = 'property' AND post_status = 'publish' "); ?>
           <?php if($property_count < 200) : ?>
             <?php
-            $pages = wp_dropdown_pages(array(
+            $params = array(
               'post_type' => 'property',
               'exclude_tree' => $object->ID,
               'selected' => $object->post_parent,
@@ -246,7 +246,11 @@ class WPP_UI {
               'sort_column' => 'menu_order, post_title',
               'echo' => 0,
               'depth' => 1
-            ));
+            );
+            if( !empty( $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] ) && $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] == 'true' ) {
+              unset( $params[ 'depth' ] );
+            }
+            $pages = wp_dropdown_pages( apply_filters( 'wpp::falls_under::dropdown_pages', $params ) );
             ?>
             <?php if (!empty($pages)) : ?>
             <tr class="wpp_attribute_row_parent wpp_attribute_row <?php if (is_array($wp_properties['hidden_attributes'][$property['property_type']]) && in_array('parent', $wp_properties['hidden_attributes'][$property['property_type']])) {  echo 'disabled_row;'; } ?>">

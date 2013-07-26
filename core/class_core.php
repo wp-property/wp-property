@@ -260,6 +260,8 @@ class WPP_Core {
     //** Modify Front-end property body class */
     add_filter('body_class', array('WPP_Core', 'properties_body_class'));
 
+    add_filter( 'wp_get_attachment_link', array( 'WPP_F', 'wp_get_attachment_link' ), 10, 6 );
+
     /** Load all shortcodes */
     add_shortcode('property_overview', array($this, 'shortcode_property_overview'));
     add_shortcode('property_search', array($this, 'shortcode_property_search'));
@@ -268,7 +270,7 @@ class WPP_Core {
     add_shortcode('property_attribute', array($this, 'shortcode_property_attribute'));
 
     if(!empty($wp_properties['alternative_shortcodes']['property_overview'])) {
-      add_shortcode("{$wp_properties[alternative_shortcodes][property_overview]}", array($this, 'shortcode_property_overview'));
+      add_shortcode("{$wp_properties[ 'alternative_shortcodes' ][ 'property_overview' ]}", array($this, 'shortcode_property_overview'));
     }
 
 
@@ -517,28 +519,28 @@ class WPP_Core {
 
     //** Determine if this is the Default Property Page */
 
-    if($wp->request == $wp_properties['configuration']['base_slug']) {
+    if( isset( $wp_properties['configuration']['base_slug'] ) && $wp->request == $wp_properties['configuration']['base_slug'] ) {
       $wp_query->wpp_root_property_page = true;
     }
 
-    if($wp->query_string == "p=" . $wp_properties['configuration']['base_slug']) {
+    if( !empty( $wp_properties['configuration']['base_slug'] ) && $wp->query_string == "p=" . $wp_properties['configuration']['base_slug'] ) {
       $wp_query->wpp_root_property_page = true;
     }
 
-    if($query->query_vars['name'] == $wp_properties['configuration']['base_slug']) {
+    if( isset( $query->query_vars['name'] ) && $query->query_vars['name'] == $wp_properties['configuration']['base_slug']) {
       $wp_query->wpp_root_property_page = true;
     }
 
-    if($query->query_vars['pagename'] == $wp_properties['configuration']['base_slug']) {
+    if( isset( $query->query_vars['pagename'] ) && $query->query_vars['pagename'] == $wp_properties['configuration']['base_slug']) {
       $wp_query->wpp_root_property_page = true;
     }
 
-    if($query->query_vars['category_name'] == $wp_properties['configuration']['base_slug']) {
+    if( isset( $query->query_vars['category_name'] ) && $query->query_vars['category_name'] == $wp_properties['configuration']['base_slug']) {
       $wp_query->wpp_root_property_page = true;
     }
 
     //** If this is a the root property page, and the Dynamic Default Property page is used */
-    if($wp_query->wpp_root_property_page && $wp_properties['configuration']['base_slug'] == 'property') {
+    if( $wp_query->wpp_root_property_page && $wp_properties['configuration']['base_slug'] == 'property' ) {
       $wp_query->wpp_default_property_page = true;
 
       WPP_F::console_log('Overriding default 404 page status.');

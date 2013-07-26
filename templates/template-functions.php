@@ -939,10 +939,13 @@ if(!function_exists('draw_stats')):
     if( $include_clsf == 'detail' ) {
       $sort_by_groups = 'false';
       foreach( (array)$wp_properties['property_meta'] as $k => $v  ) {
-        if( empty( $property->$k ) || $k == 'tagline' ) {
+        if( $k == 'tagline' ) {
           continue;
         }
-        $property_stats[ $k ] = $v;
+        $value = get_post_meta( $property->ID, $k, true );
+        if( !empty( $value ) ) {
+          $property_stats[ $v ] = $value;
+        }
       }
     } else {
       $property_stats = WPP_F::get_stat_values_and_labels($property, $args);

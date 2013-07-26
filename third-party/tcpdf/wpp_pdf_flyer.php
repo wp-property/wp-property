@@ -1,10 +1,13 @@
 <?php
+
+@include_once 'wpp_tcpdf.php';
+
 /*
  * Class for PDF Flyer Generation
  *
  * @author potanin@UD
  */
-class WPP_PDF_Flyer extends TCPDF {
+class WPP_PDF_Flyer extends WPP_TCPDF {
 
   /*
    * Override to avoid fatal errors when errors occur.

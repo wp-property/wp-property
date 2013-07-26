@@ -1144,7 +1144,7 @@ class LatestPropertiesWidget extends WP_Widget {
       $property_label = strtolower(WPP_F::property_label());
 
       parent::__construct(
-        $id,
+        false,
         sprintf(__('%1s Search','wpp'), WPP_F::property_label()),
         array(
           'classname' => 'wpp_property_attributes',
@@ -1329,7 +1329,8 @@ class LatestPropertiesWidget extends WP_Widget {
       } else {
         $ungrouped_searchable_attributes = $all_searchable_attributes;
       }
-      //$ungrouped_searchable_attributes = $all_searchable_attributes;
+
+      $ungrouped_searchable_attributes = array_unique( $ungrouped_searchable_attributes );
 
       //* Perpare $all_searchable_attributes for using by sort function */
       $temp_attrs = array();

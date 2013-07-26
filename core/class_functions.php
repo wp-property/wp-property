@@ -284,7 +284,9 @@ class WPP_F extends UD_API {
       foreach($wp_properties['taxonomies'] as $taxonomy => $taxonomy_data) {
 
         //** Check if taxonomy is disabled */
-        if(is_array($wp_properties['configuration']['disabled_taxonomies']) && in_array($taxonomy, $wp_properties['configuration']['disabled_taxonomies'])) {
+        if( isset( $wp_properties['configuration']['disabled_taxonomies'] ) &&
+            is_array( $wp_properties['configuration']['disabled_taxonomies'] ) &&
+            in_array( $taxonomy, $wp_properties['configuration']['disabled_taxonomies'] ) ) {
           continue;
         }
 
@@ -334,7 +336,7 @@ class WPP_F extends UD_API {
 
         case 'single':
 
-          if($wp_properties['configuration']['do_not_use']['locations'] != 'true') {
+          if( !isset( $wp_properties['configuration']['do_not_use']['locations'] ) || $wp_properties['configuration']['do_not_use']['locations'] != 'true' ) {
             add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('google-maps');"));
           }
 
@@ -2666,7 +2668,7 @@ class WPP_F extends UD_API {
     $wp_properties['property_meta']       = apply_filters('wpp_property_meta' , $wp_properties['property_meta']);
     $wp_properties['property_stats']       = apply_filters('wpp_property_stats' , $wp_properties['property_stats']);
     $wp_properties['property_types']       = apply_filters('wpp_property_types' , $wp_properties['property_types']);
-    $wp_properties['taxonomies']         = apply_filters('wpp_taxonomies' , $wp_properties['taxonomies']);
+    $wp_properties['taxonomies']         = apply_filters( 'wpp_taxonomies' , ( isset( $wp_properties['taxonomies'] ) ? $wp_properties['taxonomies'] : array() ) );
 
     $wp_properties = stripslashes_deep($wp_properties);
 
@@ -2768,7 +2770,7 @@ class WPP_F extends UD_API {
             $wp_properties['installed_features'][$plugin_slug]['disabled'] = 'true';
             $wp_properties['installed_features'][$plugin_slug]['needs_higher_wpp_version'] = 'true';
 
-          } elseif ($wp_properties['installed_features'][$plugin_slug]['disabled'] != 'true') {
+          } elseif ( !isset( $wp_properties['installed_features'][$plugin_slug]['disabled'] ) || $wp_properties['installed_features'][$plugin_slug]['disabled'] != 'true') {
 
             //** Load feature, everything is good**/
 
@@ -3191,6 +3193,12 @@ class WPP_F extends UD_API {
   static function get_properties( $args = "", $total = false ) {
     global $wpdb, $wp_properties, $wpp_query;
 
+    //** The function can be overwritten using the filter below. */
+    $response = apply_filters( 'wpp::get_properties::custom', null, $args, $total );
+    if( $response !== null ) {
+      return $response;
+    }
+
     $_query_keys = array();
 
     /* Define keys that should not be used to query data */
@@ -3244,16 +3252,18 @@ class WPP_F extends UD_API {
 
         $original_value = $value;
 
+        $numeric = in_array( $thing, (array)$wp_properties[ 'numeric_attributes' ] ) ? true : false;
+
         //** If not CSV and last character is a +, we look for open-ended ranges, i.e. bedrooms: 5+
-        if( substr( $original_value, -1, 1 ) == '+' && !strpos( $original_value, ',' )) {
+        if( substr( $original_value, -1, 1 ) == '+' && !strpos( $original_value, ',' ) && $numeric ) {
           //** User requesting an open ended range, we leave it off with a dash, i.e. 500- */
           $args[$thing] = str_replace( '+', '', $value ) .'-';
-        } elseif( is_numeric( $value )) {
-          //** If number is numeric, we do a specific serach, i.e. 500-500 */
+        } elseif( is_numeric( $value ) && $numeric ) {
+          //** If number is numeric, we do a specific search, i.e. 500-500 */
           if( !array_key_exists( $thing, $non_post_meta ) ) {
             $args[$thing] = $value .'-'. $value;
           }
-        } elseif( is_string( $value )) {
+        } elseif( is_string( $value ) ) {
           $args[$thing] = $value;
         }
       }
@@ -3341,7 +3351,9 @@ class WPP_F extends UD_API {
         break;
       }
 
-      if( !in_array( $meta_key, (array)$commas_ignore ) && substr_count( $criteria, ',' ) || substr_count( $criteria, '-' ) || substr_count( $criteria, '--' )) {
+      $numeric = in_array( $meta_key, (array)$wp_properties[ 'numeric_attributes' ] ) ? true : false;
+
+      if( !in_array( $meta_key, (array)$commas_ignore ) && substr_count( $criteria, ',' ) || ( substr_count( $criteria, '-' ) && $numeric ) || substr_count( $criteria, '--' )) {
         if( substr_count( $criteria, ',' ) && !substr_count( $criteria, '-' )) {
           $comma_and = explode( ',', $criteria );
         }
@@ -3623,7 +3635,7 @@ class WPP_F extends UD_API {
     return false;
   }
 
-  
+
   /**
    * Prepares Request params for get_properties() function
    *
@@ -4430,7 +4442,7 @@ class WPP_F extends UD_API {
    * @since 1.37.5
    */
   static function update_parent_id( $parent_id, $post_id ) {
-    global $wpdb;
+    global $wpdb, $wp_properties;
 
     $parent_id = !empty( $parent_id ) ? $parent_id : 0;
 
@@ -4440,7 +4452,9 @@ class WPP_F extends UD_API {
       $parent_id = 0;
     } else {
       if( $post->post_parent > 0 ) {
-        $parent_id = 0;
+        if( empty( $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] ) || $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] != 'true' ) {
+          $parent_id = 0;
+        }
       }
     }
 
@@ -5049,6 +5063,31 @@ class WPP_F extends UD_API {
 
 
   /**
+   * Returns custom default coordinates
+   *
+   * @global array $wp_properties
+   * @return array
+   * @author peshkov@UD
+   * @since 1.37.6
+   */
+  static function get_default_coordinates() {
+    global $wp_properties;
+
+    $coords = $wp_properties['default_coords'];
+
+    if( !empty( $wp_properties[ 'custom_coords' ][ 'latitude' ] ) ) {
+      $coords[ 'latitude' ] = $wp_properties[ 'custom_coords' ][ 'latitude' ];
+    }
+
+    if( !empty( $wp_properties[ 'custom_coords' ][ 'longitude' ] ) ) {
+      $coords[ 'longitude' ] = $wp_properties[ 'custom_coords' ][ 'longitude' ];
+    }
+
+    return $coords;
+  }
+
+
+  /**
    * Counts properties by post types
    * @global object $wpdb
    * @param array $post_status
@@ -5473,6 +5512,37 @@ class WPP_F extends UD_API {
 
   }
 
+
+  /**
+   * Fixes images permalinks in [gallery] shortcode
+   *
+   * @param string $output
+   * @param int $id
+   * @param type $size
+   * @param type $permalink
+   * @param type $icon
+   * @param type $text
+   * @return string
+   * @author peshkov@UD
+   * @since 1.37.6
+   */
+  function wp_get_attachment_link( $output, $id, $size, $permalink, $icon, $text ) {
+
+    if( function_exists( 'debug_backtrace' ) && !is_admin() ) {
+      $backtrace = debug_backtrace();
+      foreach( (array)$backtrace as $f ) {
+        if( $f[ 'function' ] === 'gallery_shortcode' ) {
+          $link = wp_get_attachment_url( $id );
+          $output = preg_replace( '/href=[\",\'](.*?)[\",\']/', 'href=\''.$link.'\'', $output );
+          break;
+        }
+      }
+    }
+
+    return $output;
+  }
+
+
   /**
    * Returns clear post status
    *
@@ -5529,6 +5599,7 @@ if(!function_exists('array_fill_keys')){
 
 }
 
+
 /**
  * Delete a file or recursively delete a directory
  *
@@ -5556,6 +5627,7 @@ if(!function_exists('wpp_recursive_unlink')){
     }
   }
 }
+
 
 /**
  * Add 'property' to the list of RSSable post_types.

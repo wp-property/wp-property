@@ -130,6 +130,106 @@ body.idevice .wpp_sidebar_listing .sidebar_gallery_item {
 
 
 /* FEPS Styles Begin */
+
+/* SPONSORED LISTINGS TABS MENU */
+
+.wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li {
+  display: inline;
+  overflow: hidden;
+  list-style-type: none;
+  list-style-position: inside;
+  cursor: default;
+  margin-left: -10px;
+}
+
+.wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li:first-child {
+  margin-left: 0;
+}
+
+.wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li:last-child span {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  -moz-border-top-right-radius: 5px;
+  -moz-border-bottom-right-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+}
+
+.wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li:last-child span.wpp_feps_arrow {
+  padding:0;
+  background: none;
+}
+
+.wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li span.wpp_feps_arrow {
+  height: 18px;
+  line-height: 18px;
+  padding: 3px 0 3px 18px;
+  border: none;
+  border-radius: 0;
+  background: transparent url("../templates/images/arrows_right.png") 0 -291px no-repeat;
+}
+
+.wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li span {
+  padding: 3px 5px;
+  color: grey;
+  text-decoration: none;
+  font: 1em "Trebuchet MS", Arial, sans-serif;
+  background-color: #F7F7F7;
+  border-width: 1px 1px 0px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  -moz-border-top-left-radius: 5px;
+  -moz-border-bottom-left-radius: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+}
+
+.wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li span.wpp_feps_tab_value {
+  -moz-box-shadow: -2px 0 3px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: -2px 0 3px rgba(0, 0, 0, 0.15);
+  box-shadow: -2px 0 3px rgba(0, 0, 0, 0.15);
+}
+
+.wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li.active span.wpp_feps_arrow {
+  background: transparent url("../templates/images/arrows_right.png") 0 0 no-repeat;
+}
+
+.wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li.active span {
+  font-weight: bold;
+  background-color: #6A8DA5;
+  color: white;
+}
+
+/* END SPONSORED LISTINGS TABS MENU */
+
+/* SUBSCRIPTION PLAN */
+
+
+.wpp_feps_subscription_plan_form li.feps_plan_selected {
+  background: #F7F7F7;
+}
+
+.wpp_feps_subscription_plan_form li.wpp_feps_row_wrapper {
+  cursor: pointer;
+  padding: 10px;
+  margin: 0;
+}
+
+.wpp_feps_subscription_plan_form li.wpp_feps_row_wrapper .the_title {
+  font-weight: bold;
+}
+
+.wpp_feps_subscription_plan_form li.wpp_feps_row_wrapper p {
+  margin-bottom: 0;
+}
+
+.wpp_feps_subscription_plan_form .wpp_feps_subscription_plan_info li.images_limit.no_image_field{
+  display:none;
+}
+
+
+/* END SUBSCRIPTION PLAN */
+
 form.wpp_feps_form label.error {
   display: block;
 }
@@ -230,7 +330,8 @@ form.wpp_feps_form ul.feps_property_input_fields {
 }
 
 ul.feps_user_input_fields li.wpp_feps_row_wrapper,
-ul.feps_property_input_fields li.wpp_feps_row_wrapper {
+ul.feps_property_input_fields li.wpp_feps_row_wrapper,
+ul.feps_user_input_fields li.wpp_feps_input_wrapper {
   list-style: none;
   list-style-type: none;
 }
