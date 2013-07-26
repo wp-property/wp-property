@@ -431,7 +431,7 @@ class WPP_Core {
     }
 
     // Load jQuery UI Tabs and Cookie into settings page (settings_page_property_settings)
-    add_action('admin_print_scripts-' . $settings_page, create_function('', "wp_enqueue_script('jquery-ui-tabs');wp_enqueue_script('wpp-jquery-cookie');"));
+    add_action('admin_print_scripts-' . $settings_page, create_function('', "wp_enqueue_script('jquery-ui-tabs');wp_enqueue_script('jquery-cookie');"));
 
   }
 

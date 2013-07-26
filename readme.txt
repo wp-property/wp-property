@@ -4,7 +4,7 @@ Donate link: http://usabilitydynamics.com/products/wp-property/
 Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 3.0
 Tested up to: 3.5.1
-Stable tag: 1.37.2
+Stable tag: 1.37.2.1
 
 
 == Description ==
@@ -162,6 +162,9 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 
 == Upgrade Notice ==
 
+= 1.37.2.1 =
+* Fixed tab breaking on settings page.
+
 = 1.35.1 =
 * Security fixes
 
@@ -217,6 +220,9 @@ We are moving out of beta stages, but you may still experience bugs now and then
 We are still in early stages, so updates will be coming out routinely.  Please do not hesitate to send us feedback and suggestions.
 
 == Changelog ==
+
+= 1.37.2.1 =
+* Fixed tab breaking on settings page.
 
 = 1.37.2 =
 * Namespaces fixes to prevent conflicts with third party plugins and themes
@@ -712,139 +718,3 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Similar properties widget added.
 * Google Maps popup box customization.
 * Additional search input options.
-
-= 0.7261 =
-* Major change to search logic - considerable improvements, as well as caching.
-* Search widget improvement - select from different input methods under Developer tab.
-* Fixes with WPP request-specific body class being added to the body element on all property pages.
-
-= 0.7260 =
-* Settings page moved under Properties menu
-* Russian translation added.
-* Added class "wp-property-listing" in <body> element on the pages with properties listing.
-* Added sorter in AJAX pagination.
-* Added pagination in search widget results.
-* Fixed CSS bug with infowindow Google Maps.
-* Fixed bug with pagination.
-* Fixed bug with hidden attributes on the property edit page.
-
-= 0.7251 =
-* CSS error fixed
-
-= 0.725 =
-* Added AJAX pagination
-* Fixed bug with searching
-
-= 0.724 =
-* Localization added for Google Maps.
-* Added fix for properties with empty addresses
-* Prevented address attribute from being overwritten by child properties' addresses when set to be searchable
-
-= 0.722 =
-* Custom attribute queries. For example, [property_overview house_color='red'] or [property_overview house_color='all'] get all properties that have a value for house_color attribute.
-
-= 0.722 =
-* Improved Developer tab to allow reordering of meta and attribute fields
-* Added [county] to list of usable address tags
-
-= 0.721 =
-* Improved error handling and reporting of feature update failure.
-* Plugin notifies user if premium feature folder permissions are non-writable.
-* Some columns are hidden by default on overview page for users with no setting.
-
-= 0.72 =
-* Bug fix.
-
-= 0.71 =
-* Improved the address generating function.  It now automatically removes commas and line breaks if there is no content around them.
-
-= 0.7 =
-* Plugin fully internationalized, and ready for translation.
-
-= 0.6.3.6 =
-* Address display setting added to "Featured" and "Child" properties widgets as well.
-
-= 0.6.3.5 =
-* Added ability to customize the format of the displayed address. Visit Settings -> Properties -> Display
-
-= 0.6.3.4 =
-* Problem with incorrect address being set by Google Maps API fixed.
-
-= 0.6.3.3 =
-* Removed logging function from get_properties() to save resources
-* Removed MSIE FancyBox CSS that was causing "close" button to be hidden
-
-= 0.6.3.2 =
-* Updated [property_overview] shortcode to filer by for_sale or by for_rent properties.
-* Added two attributes: for rent & for sale.  Properties can be tagged as both, or neither.
-* Improved displayed address -> when no street address present, line break is not printed.
-* Improved support for sites not using permalinks.
-
-= 0.6.3.1 =
-* Added custom currency support.
-
-= 0.6.3.0 =
-* Rewrote property-overview.php and significantly improved CSS
-* property-overview.php output now renders property on MSIE
-* Improved featured shortcode to work on MSIE
-* Added prepare_property_for_display() which runs a given property object array through all appropriate filters
-
-= 0.6.2.6 =
-* Added shortcode option to return all properties: [property_overview type=all], or simply [property_overview], which defaults to type=all.
-
-= 0.6.2.5 =
-* Updated geo_locate_address() to work with Canadian city names.
-* Added "single family home" to default property type.
-* Fixed spelling error on settings page.
-
-= 0.6.2.4 =
-* Fixed logging issue in get_property();
-
-= 0.6.2.3 =
-* Fixed issue with slashes in property names preventing Google Maps from working.
-
-= 0.6.2.2 =
-* Fixed array_merge() warning in class_functions.php on line 532.
-
-= 0.6.2.1 =
-* Fixed array_merge() warning in class_functions.php on line 529.
-* Added additional installation instructions.
-
-= 0.6.2 =
-* Updated meta data inheritance, now physically saved to database for all children properties on parent save.
-
-= 0.6.1 =
-* Re-upload, action-hooks.php was not uploaded to repository.
-
-= 0.6.0 =
-* Added "Developer" feature - a UI for creating new property types, attributes, etc.
-* Added a new shortcode for displaying featured properties.
-* Improved loading time by approximately 60%.
-* Rewrite WPP_F::get_properties(), significantly improving search.
-* Improved search widget, made compatible with custom property types.
-* Fixed bug get_post_thumbnail_id() bug caused by running WP-Property with themes that don't support featured thumbnails.
-
-= 0.5.5 =
-* Added new installation message with instructions.
-* Added toggable "Feature" button to the overview page.
-* Hid monthly filter on overview page - not applicable to properties.
-
-= 0.5.4 =
-* Hid "Quick Edit" for property types.
-* Improved default front-end CSS.
-* Fixed problem with default "large" image not being set for Widget images, not defaults to WP "large" image type.
-
-= 0.5.3 =
-* Improved Settings Page -> custom image sizes can now be added using UI.
-* Added new columns to overview page.
-* Modified get_property().
-* Improved Widgets, adding a search widget.
-
-= 0.5.2 =
-* Modified to work with default slug of 'property' in the event of a property page not being set.
-
-= 0.5.1 =
-* Fixed issue with incorrect folder structure.
-
-= 0.5 =
-* Initial Public Release.
