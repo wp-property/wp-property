@@ -1,0 +1,4032 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-11-06 19:28-0500\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Andy Potanin <andy.potanin@usabilitydynamics.com>\n"
+"Language-Team: Usability Dynamics, Inc. <info@usabilitydynamics.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"X-Poedit-KeywordsList: __;_e;_x;_n;_n_noop;_c\n"
+"X-Poedit-Basepath: wp-property\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SearchPath-0: C:\\wamp\\www\\wordpress-plugins\\wp-content\\plugins\\wp-property\n"
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:57
+msgid "Building"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:58
+msgid "Floorplan"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:59
+msgid "Single Family Home"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:72
+msgid "Address"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:73
+msgid "Price"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:74
+msgid "Bedrooms"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:75
+msgid "Bathrooms"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:76
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:79
+msgid "Deposit"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:77
+msgid "Area"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:78
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3660
+msgid "Phone Number"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:86
+msgid "Lease Terms"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:87
+msgid "Pet Policy"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:88
+msgid "School"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:89
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1064
+msgid "Tagline"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:136
+msgid "Studio"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:189
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:191
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:201
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:202
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1721
+msgid "Features"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:192
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:203
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:212
+msgid "Feature"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:193
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:204
+msgid "Search Features"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:194
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:205
+msgid "All Features"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:195
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:206
+msgid "Parent Feature"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:196
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:207
+msgid "Parent Feature:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:197
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:208
+msgid "Edit Feature"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:198
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:209
+msgid "Update Feature"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:199
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:210
+msgid "Add New Feature"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:200
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:211
+msgid "New Feature Name"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:219
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:221
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:231
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:232
+msgid "Community Features"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:222
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:233
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:242
+msgid "Community Feature"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:223
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:234
+msgid "Search Community Features"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:224
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:235
+msgid "All Community Features"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:225
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:236
+msgid "Parent Community Feature"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:226
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:237
+msgid "Parent Community Feature:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:227
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:238
+msgid "Edit Community Feature"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:228
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:239
+msgid "Update Community Feature"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:229
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:240
+msgid "Add New Community Feature"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:230
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:241
+msgid "New Community Feature Name"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:252
+msgid "The property type will determine the layout."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:253
+msgid "Customize what appears in search results in the attribute section.  For example: 1bed, 2baths, area varies slightly."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:254
+msgid "Will appear on overview pages and on top of every listing page."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:259
+msgid "Uploading"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:260
+msgid "Drop files here to upload"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:261
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2242
+msgid "Upload Image"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:262
+msgid "Cancel"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/action_hooks.php:263
+msgid "Failed"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/default_api.php:185
+msgid "View "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/default_api.php:329
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1110
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:247
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1034
+msgid "Property Type"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/default_api.php:333
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:835
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3655
+msgid "City"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/default_api.php:482
+msgid "For Sale"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/default_api.php:483
+msgid "For Rent"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/default_api.php:490
+msgid "This is a rental property."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/default_api.php:496
+msgid "This property is for sale."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/default_api.php:514
+msgid "Set Coordinates Manually."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/default_api.php:519
+msgid "Latitude"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/default_api.php:524
+msgid "Longitude"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/default_api.php:596
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/default_api.php:601
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3442
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:4102
+msgid "Yes"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/default_api.php:636
+msgid "Format phone number."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/default_api.php:647
+msgid "Convert \"Yes\" and \"True\" values to checked icons on the front-end."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/default_api.php:695
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3207
+msgid " sq ft."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/default_api.php:877
+msgid "Address was validated by Google Maps."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/default_api.php:879
+msgid "Address has not yet been validated, should be formatted as: street, city, state, postal code, country. Locations are validated through Google Maps."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:143
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:737
+msgid "Properties"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:144
+msgid "All Properties"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:145
+msgid "Property"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:146
+msgid "Add Property"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:147
+msgid "Add New Property"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:148
+msgid "Edit Property"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:149
+msgid "New Property"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:150
+msgid "View Property"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:151
+msgid "Search Properties"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:152
+msgid "No properties found"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:153
+msgid "No properties found in Trash"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:225
+#, php-format
+msgid "Property: %s"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:227
+#, php-format
+msgid "Sidebar located on the %s page."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:329
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:425
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:249
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:436
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:558
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:996
+msgid "Settings"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:349
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:305
+msgid "Child Properties"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:397
+msgid "WP-Property Help"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:398
+msgid "The <b>property page</b> will be used to display property search results, as well as the base for property URLs.  For example, if the URL of your property page is "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:399
+msgid "On-the-fly image generation means that image sizes, such as different sized thumbnails, are generated automatically when a visitor requests it online.  Alternatively, you could manually regenerate thumbnails by using a third-party plugin."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:487
+#, php-format
+msgid "Be advised, since you don't have permalinks enabled, you must visit the <a href=\"%s\">Settings Page</a> and set a custom property overview page."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:488
+#, php-format
+msgid "By default, your property overview will be displayed on the <a href=\"%s\">%s</a> page. You may change the overview page on the <a href=\"%s\">Settings Page</a>"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:494
+msgid "Thank you for installing WP-Property!"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:496
+msgid "You may also visit <a href=\"http://usabilitydynamics.com/products/wp-property/\">TwinCitiesTech.com</a> for more information, and <a href=\"http://usabilitydynamics.com/products/wp-property/screencasts/\">screencasts</a>."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:726
+msgid "Menu Sort Order:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:729
+msgid "Display property in featured listing."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:791
+#, php-format
+msgid "Property updated. <a href=\"%s\">view property</a>"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:792
+msgid "Custom field updated."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:793
+msgid "Custom field deleted."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:794
+msgid "Property updated."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:796
+#, php-format
+msgid "Property restored to revision from %s"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:797
+#, php-format
+msgid "Property published. <a href=\"%s\">View property</a>"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:798
+msgid "Property saved."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:799
+#, php-format
+msgid "Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:800
+#, php-format
+msgid "Property scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Preview property</a>"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:802
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:803
+#, php-format
+msgid "Property draft updated. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:825
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:594
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1718
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:260
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:475
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:689
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:920
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1720
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1721
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1777
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1778
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2069
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2101
+msgid "Title"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:826
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1719
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3817
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:714
+msgid "Type"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:836
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1720
+msgid "Overview"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:837
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1722
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3821
+msgid "Featured"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:838
+msgid "Order"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:839
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1725
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:799
+msgid "Thumbnail"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:1105
+msgid "General Information"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:1115
+msgid "NO NAME"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:1121
+msgid "Search"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:1337
+msgid "Floor plans at location:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:1341
+msgid "Sort By:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:1778
+msgid "Edit Propery"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:1779
+msgid "Read Propery"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:1780
+msgid "Delete Propery"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:1781
+msgid "Edit Properties"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:1782
+msgid "Edit Other Properties"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:1783
+msgid "Publish Properties"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:1784
+msgid "Read Private Properties"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:1786
+msgid "Manage Settings"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_core.php:1788
+msgid "Manage Categories"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:278
+#, php-format
+msgid "Set %1s properties to \"%2s\" property type"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:593
+msgid "Default"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1053
+msgid "If you have problems automatically downloading premium features, it may be due to PHP not having ownership issues over the premium feature folder."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1063
+msgid "There is an ownership issue with the premium folder, which means your site cannot download WP-Property premium features and receive updates.  Please contact your host to fix this - PHP needs ownership over the <b>wp-content/plugins/wp-property/core/premium</b> folder.  Be advised: changing the file permissions will not fix this."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1070
+msgid "One of the folders that is necessary for downloading additional features for the WP-Property plugin is not writable.  This means features cannot be downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-property/core/premium</b> permissions to 0755."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1573
+#, php-format
+msgid "An error occured during premium feature check: <b> %s </b>."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1603
+msgid "The API key could not be generated."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1605
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_property_export.php:123
+#, php-format
+msgid "An error occured during premium feature check: <b>%s</b>."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1635
+msgid "Feature Name"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1636
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:2016
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:2109
+msgid "Version"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1637
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:2017
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:2110
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1692
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2053
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1257
+msgid "Description"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1651
+#, php-format
+msgid "WP-Property Premium Feature: %s updated to version %s from %s."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1653
+#, php-format
+msgid "WP-Property Premium Feature: %s updated to version %s."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1670
+msgid "Update ran successfully but no features were downloaded because the setting is disabled. Enable in the \"Developer\" tab."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:1673
+msgid "Update ran successfully."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:2015
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:2108
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3661
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1702
+msgid "Name"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:2018
+msgid "Minimum WPP Version"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3416
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3426
+msgid "Get Directions"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3448
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:4104
+msgid "No"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3652
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:145
+msgid "General Settings"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3653
+msgid "Find your property"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3654
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:411
+msgid "Edit"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3656
+msgid "Contact us"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3657
+msgid "Login"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3658
+msgid "Explore"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3659
+msgid "Message"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3662
+msgid "E-mail"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3663
+msgid "Send Message"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3664
+msgid "Submit Inquiry"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3665
+msgid "Inquiry"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3666
+msgid "Comment About"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3667
+msgid "Inquire About"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3668
+msgid "Inquiry About:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3669
+msgid "Inquiry message:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3670
+msgid "You forgot to enter your e-mail."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3671
+msgid "You forgot to enter a message."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3672
+msgid "You forgot to enter your  name."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3673
+msgid "Error with sending message. Please contact site administrator."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3674
+msgid "Thank you for your message."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3826
+msgid "Status"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3831
+msgid "Author"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3836
+msgid "Date"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3918
+msgid "All"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3928
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:2003
+msgid "Any"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_functions.php:3937
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_list_table.php:306
+msgid "Show all dates"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_list_table.php:378
+msgid "Nothing found."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_property_export.php:34
+msgid "Feed URL:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_property_export.php:36
+msgid "Open"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_property_export.php:38
+msgid "You may append the export URL with the following arguments:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_property_export.php:45
+msgid "Slug for the property type."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_property_export.php:46
+msgid "or"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_property_export.php:59
+msgid "There has been an error retreiving your API key."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_property_export.php:164
+msgid "Invalid API key."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_property_export.php:204
+msgid "No published properties."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:71
+msgid "HTML"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:72
+msgid "Visual"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:164
+msgid "Most Used"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:183
+msgid "You cannot modify this taxonomy."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:191
+#, php-format
+msgid "+ %s"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:649
+msgid "Processing..."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:705
+msgid "UD Log Page for"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:706
+msgid "Clear Log"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:713
+msgid "Timestamp"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:715
+msgid "Event"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:716
+msgid "User"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:717
+msgid "Related Object"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:1011
+msgid "Cache table does not exist. Attempting to create:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:1024
+#, php-format
+msgid "SQL Ran: %s , verifying existance."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:1029
+msgid "Table created and exists."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:1033
+msgid "Table not created."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:1101
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:1138
+msgid "Log Started."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:1230
+msgid "Today"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:1231
+msgid "Tomorrow "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:1231
+msgid "Yesterday "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:1232
+#, php-format
+msgid " in %d days "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:1232
+#, php-format
+msgid "%d days ago"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:1351
+msgid "Automatically logged failed JSON response: "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:1478
+#, php-format
+msgid "%s hours ago"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_ud.php:1480
+#, php-format
+msgid "%s minutes ago"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:97
+msgid "Other Properties"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:97
+msgid "Show other properties (if any) with the same Parent"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:162
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:369
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:583
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:815
+#, php-format
+msgid "%s at %s for %s"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:181
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:390
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:606
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:836
+msgid "More"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:187
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:396
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:612
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:845
+msgid "View All"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:229
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:438
+msgid "The widget will not be displayed if the currently viewed property has no children."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:231
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:440
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:656
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:888
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1242
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1523
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:2111
+msgid "Title:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:238
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:449
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:665
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:895
+msgid "Hide Images?"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:247
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:458
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:674
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:904
+msgid "Image Size:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:251
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:463
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:679
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:909
+msgid "Listings to display?"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:256
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:471
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:684
+msgid "Select the stats you want to display"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:274
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:489
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:703
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:933
+msgid "Address Format:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:281
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:496
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:711
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:940
+msgid "Show \"More\" link?"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:288
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:503
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:718
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:947
+msgid "Show \"View All\" link?"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:305
+msgid "Show child properties (if any) for currently displayed property"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:520
+msgid "Featured Properties"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:520
+msgid "List of properties that were marked as Featured"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:738
+msgid "Featured Properies"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:758
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:889
+msgid "Latest Properties"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:758
+msgid "List of the latest properties created on this site"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:915
+msgid "Select stats you want to display"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:965
+msgid "Property Search"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:965
+msgid "Display a highly customizable property search form"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1159
+msgid "No searchable property types were found."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1248
+msgid "Property types to search:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1262
+msgid "Select the attributes you want to search."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1266
+msgid "All Attributes"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1269
+msgid "Grouped Attributes"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1290
+msgid "Ungrouped"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1314
+msgid "Group attributes together."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1326
+msgid "Default Sort Order"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1336
+msgid "Descending"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1337
+msgid "Acending"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1345
+msgid "Use pagination"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1350
+msgid "Items per page"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1356
+msgid "Toggle Advanced Search Options"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1388
+msgid "Search Properies"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1412
+msgid "Property Gallery"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1412
+msgid "List of all images attached to the current property"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1528
+msgid "Regular Size:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1533
+msgid "Large Image Size:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1540
+#, php-format
+msgid "Show %s Images"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1545
+msgid "Show Image Captions"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/class_widgets.php:1550
+msgid "Show Image Descriptions."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:67
+msgid "Manage Admin Tools"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:84
+msgid "Developer Tab Help"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:85
+msgid "The <b>slug</b> is automatically created from the title and is used in the back-end.  It is also used for template selection, example: floorplan will look for a template called property-floorplan.php in your theme folder, or default to property.php if nothing is found."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:86
+msgid "If <b>Searchable</b> is checked then the property will be loaded for search, and available on the property search widget."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:87
+msgid "If <b>Location Matters</b> is checked, then an address field will be displayed for the property, and validated against Google Maps API.  Additionally, the property will be displayed on the SuperMap, if the feature is installed."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:88
+msgid "<b>Hidden Attributes</b> determine which attributes are not applicable to the given property type, and will be grayed out in the back-end."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:89
+msgid "<b>Inheritance</b> determines which attributes should be automatically inherited from the parent property"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:90
+msgid "Property attributes are meant to be short entries that can be searchable, on the back-end attributes will be displayed as single-line input boxes. On the front-end they are displayed using a definitions list."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:91
+msgid "Making an attribute as \"searchable\" will list it as one of the searchable options in the Property Search widget settings."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:92
+msgid "Be advised, attributes added via add_filter() function supercede the settings on this page."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:93
+msgid "<b>Search Strings and Values:</b> Select and input type and enter comma-separated values that you would like to be used in property search, on the front-end."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:94
+msgid "<b>Data Entry Values:</b> Enter comma-separated values that you would like to use on the back-end when editing properties."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:115
+msgid "Developer"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:226
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:462
+msgid "Attention! This attribute (slug) is used by Google Validator and Address Display functionality. It is set automaticaly and can not be edited on Property Adding/Updating page."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:243
+msgid "Property Types"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:248
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:371
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:872
+msgid "Slug"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:250
+msgid "Hidden Attributes"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:251
+msgid "Inheritance"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:270
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:485
+msgid "Searchable"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:275
+msgid "Location Matters"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:311
+msgid "Parent Selection"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:340
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:542
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:600
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:887
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1699
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2128
+msgid "Add Row"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:352
+msgid "Property Stats"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:355
+msgid "Advanced Property Stats Settings:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:356
+msgid "expand all"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:357
+msgid "collapse all"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:358
+msgid "Sort Stats by Groups"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:370
+msgid "Group Name"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:372
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1691
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2052
+msgid "Main"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:373
+msgid "Group Color"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:392
+msgid "Assign"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:408
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:412
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:881
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1122
+msgid "Delete"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:417
+msgid "Add Group"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:418
+msgid "Unassign from Group"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:421
+msgid "Apply"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:434
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:556
+msgid "Attribute Name"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:435
+msgid "Group"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:437
+msgid "Search Settings and Values "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:438
+msgid "Data Entry Values"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:467
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1726
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1796
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2073
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2112
+msgid "Toggle Advanced Settings"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:481
+msgid "Sortable"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:489
+msgid "Admin Only"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:493
+msgid "Format as number"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:497
+msgid "Format as currency"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:501
+msgid "Add column on \"All Properties\" page"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:504
+msgid "Delete Attribute"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:516
+msgid "Text Input"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:517
+msgid "Text Input Range"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:518
+msgid "Range (dropdown)"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:519
+msgid "Dropdown"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:520
+msgid "Checkbox"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:521
+msgid "Multi-Checkbox"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:549
+msgid "Property Meta"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:550
+msgid "Meta is used for descriptions,  on the back-end  meta fields will be displayed as textareas.  On the front-end they will be displayed as individual sections."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:557
+msgid "Attribute Slug"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:584
+msgid "Show in Admin Only"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:590
+msgid "Delete Meta Attribute"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:612
+msgid "Advanced Options"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:615
+msgid "Show Log."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:616
+msgid "The log is always active, but the UI is hidden.  If enabled, it will be visible in the admin sidebar."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:619
+msgid "Disable automatic feature updates."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:620
+msgid "If disabled, WP-Property will not automatically download updates to premium features."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:623
+msgid "Disable WordPress update_post_caches() function."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:624
+msgid "This may solve Out of Memory issues if you have a lot of properties."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:627
+msgid "Enable developer mode - some extra information displayed via Firebug console."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:150
+msgid "Manage Real Estate Agents"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:197
+#, php-format
+msgid "%1$s <span class=\"count\">(%2$s)</span>"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:224
+msgid "Match the \"Property Agent\" attribute to "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:230
+msgid " field, when it is found, and associate with agent."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:295
+msgid "Agent Image Size"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:319
+msgid "Agent Information"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:389
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1997
+msgid "Agent"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:516
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:559
+msgid "Attach to Agent"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:552
+msgid "Saved."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:619
+msgid "No Properties."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:638
+msgid "Create Agent"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:638
+msgid "Update Agent"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:652
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:2099
+msgid "Display Name"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:657
+msgid "Username"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:660
+msgid "Usernames cannot be changed."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:665
+msgid "E-Mail"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:671
+msgid "Widget Bio"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:675
+msgid "Content that is displayed in the agent widget."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:681
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:997
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1443
+msgid "Options"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:687
+msgid "Allow property inquiries to be sent directly to agent."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:695
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:2102
+msgid "Full Bio"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:699
+msgid "Content that can be displayed in the shortcode."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:723
+msgid "Primary"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:724
+msgid "Save"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:725
+msgid "Associated Properties"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:726
+msgid "Images"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:741
+msgid "Agent Shortcodes"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:742
+msgid "Show agent information:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:742
+msgid ", or you can specify which fields to show:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:743
+msgid "To query agent properties:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:745
+msgid "Shortcode Attribute Fields"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:746
+msgid "The following attributes can be used in the [agent_card] shortcode."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:765
+msgid "Example Using All Available Fields"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:797
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:979
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1017
+msgid "Agents"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:844
+msgid "Agent Roles"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:845
+msgid "User roles that can be associated with properties as agents."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:862
+msgid "Agent Fields"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:863
+msgid "Extra data fields to be used for agent profiles."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:866
+msgid "Custom fields may be used to adapt the information about agents to suit your needs."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:871
+msgid "Field name"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1017
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1969
+msgid "Add New"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1039
+msgid "User removed."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1108
+msgid "Please enter a valid e-mail."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1121
+msgid "Agent updated."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1124
+msgid "Agent created."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1127
+msgid "Edit Agent"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1176
+msgid "Associated Agents"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1241
+#, php-format
+msgid "You can add fields on the <a href=\"%s\">settings page</a>."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1246
+msgid "Flyer Writeup"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1249
+msgid "Please enter a writeup for flyers."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1307
+msgid "Please save first to add images."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1314
+msgid "No images found."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1321
+msgid "Remove"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1329
+msgid "Add Image"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1575
+msgid "Moderate comments"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1576
+msgid "Manage categories"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1577
+msgid "Manage links"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1578
+msgid "Upload files"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1579
+msgid "Edit posts"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1580
+msgid "Edit other's posts"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1581
+msgid "Edit published posts"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1582
+msgid "Publish posts"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1583
+msgid "Edit pages"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1584
+msgid "Read"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1585
+msgid "Edit other's pages"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1586
+msgid "Edit published pages"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1587
+msgid "Publish pages"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1588
+msgid "Delete pages"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1589
+msgid "Delete other's pages"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1590
+msgid "Delete published pages"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1591
+msgid "Delete posts"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1592
+msgid "Delete other's posts"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1593
+msgid "Delete published posts"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1594
+msgid "Delete private posts"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1595
+msgid "Edit private posts"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1596
+msgid "Read private posts"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1597
+msgid "Delete private pages"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1598
+msgid "Edit private pages"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1599
+msgid "Read private pages"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1701
+msgid "Email"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:1810
+msgid "Agent can see only the properties which are assigned to him. Agent will be automaticly assigned to the property which he will create."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:2100
+msgid "Image"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:2101
+msgid "Widget Text"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_agents.php:2108
+msgid "Email Address"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:234
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:242
+#, php-format
+msgid "Hello.%1$s%1$sYour account on %2$s has been created and is waiting for approval.%1$s%1$sAccess data:%1$s%3$s / %4$s"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:248
+#, php-format
+msgid "Hello.%1$s%1$sYour account on %2$s has been created.%1$s%1$sAccess data:%1$s%3$s / %4$s"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:426
+msgid "Manage FEPS"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:444
+msgid "Approve Listing"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:537
+msgid " (Pending Approval)"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:633
+msgid "An error occured, the form could not be found"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:889
+msgid "Publish Now"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:899
+msgid "This listing is pending your approval."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:983
+msgid "Property Forms"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1006
+msgid "Notifications"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1007
+msgid "Please install <a href=\"http://wordpress.org/extend/plugins/wp-crm/\">WP-CRM</a> to setup notifications."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1034
+msgid "Requested FEPS form not found."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1066
+msgid "The requested form does not have any fields."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1181
+msgid "Publish"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1255
+msgid "Your e-mail:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1266
+msgid "Your Password:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1277
+msgid "Submit"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1331
+msgid "Please type in your e-mail address."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1341
+msgid "Checking if account exists."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1344
+msgid "Checking your credentials."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1359
+msgid "Your credentials have been verified."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1365
+msgid "Your login credentials are not correct."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1370
+msgid "Account found, please type in your password."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1376
+msgid "Your account will be setup after your submission is approved."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1420
+msgid "FEPS settings updated."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1427
+msgid "Property Content"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1431
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2335
+msgid "Image Upload"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1472
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1986
+msgid "Form Name:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1483
+msgid " For internal use only."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1497
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1993
+msgid "Shortcode:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1508
+msgid " Shortcode to render the form."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1515
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1999
+msgid "New User Role:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1537
+msgid " Role to assign to users submitting properties if they do not already have an account."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1543
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2008
+msgid "Property Status:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1561
+msgid " Status to assign to new properties after they are submitted."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1567
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2018
+msgid "Property Type:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1585
+msgid " Default property type of submitted properties."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1591
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2028
+msgid "Preview Thumbnail Size:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1612
+msgid " The size of the image to be used to display the thumbnail of an uploaded image."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1618
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2034
+msgid "Images Limit:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1629
+msgid " The maximum number of images that can be uploaded per submission."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1712
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1756
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2062
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2088
+msgid "Attribute"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1714
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2065
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:794
+msgid "Property Title"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1946
+msgid "Front End Property Submissions"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1988
+msgid "For internal use only."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:1995
+msgid "Shortcode to render the form."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2004
+msgid "Role to assign to users submitting properties if they do not already have an account."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2014
+msgid "Status to assign to new properties after they are submitted."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2024
+msgid "Default property type of submitted properties."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2030
+msgid "The size of the image to be used to display the thumbnail of an uploaded image."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2036
+msgid "The maximum number of images that can be uploaded per submission."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2106
+msgid "Required"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2139
+msgid "Save Changes"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2247
+#, php-format
+msgid "No more than %1d image(s)."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2492
+msgid "<strong>ERROR</strong>: Account is not approved."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2509
+msgid "There is a JavaScript error on this page preventing it from displaying the dynamic map."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2535
+msgid "Your location has been successfully found by Google Maps."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_feps.php:2538
+msgid "Your address could not be found, please try again."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:110
+msgid "Manage PDF Flyer"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:146
+msgid "Unless <b>Don't make accessible for public</b> is checked for a list, it will be accessible by anybody who visits your website, provided they have a link to the list.  The lists are stored in your uploads folder, but to the users they appear to be below your main <b>Property Page</b>.  In other words, if your default property page is 'all-properties', all your lists will have urls that will go something like: http://website.com/all-properties/the-list-filename.pdf"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:147
+msgid "By default, the PDF lists are generated every time you save this page, and when any property is updated or created.  You may select <b>Regenerate list every time it is opened</b> to have the list generated every time it is opened in a browser, however, this may cause some unnecessary strain on your server."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:148
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1079
+msgid "Advanced Query"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:149
+msgid "The advanced query can be used just like the [property_overview] shortcode. For example, if you wanted the list to only show two bedroom properties, your query would simply be: <b>[property_overview bedrooms=2]</b>."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:150
+msgid "You could make these as complex as you would like. If you wanted to query all apartments between $400 and $700 dollars in St. Paul, you would use: <b>[property_overview property_type=apartment price=400-700 city='St. Paul' sorrt_by=route]</b>."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:151
+msgid "List Creation"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:152
+msgid "PDF Lists are deleted every time a change is made to this page, and may either be regenerated by clicking the Regenerate button below, or by trying to open the list on the front-end."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:153
+msgid "When a single property is updated, the list(s) it is included on are deleted as well.  It is up to you if you want to regenerate the lists manually, or wait for a visitor to attempt to open a list, at which point it will be regenerated automatically."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:165
+msgid "PDF Flyer Options"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:177
+msgid "Exclude property from PDF Lists"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:778
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:972
+msgid "PDF Lists"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:798
+msgid "Full Description"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:833
+msgid "List settings updated and old lists have been deleted. "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:872
+msgid "Sample PDF List"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:933
+msgid "Regenerating PDF Lists. If you have a lot of properties this process may take a while, please do not close this browser window until it is complete."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:953
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1660
+msgid "Finished."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:998
+msgid "Attributes"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1011
+msgid "List Name:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1016
+msgid "File Name:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1021
+msgid "Actions:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1022
+msgid "View PDF"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1033
+msgid "Group by:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1038
+msgid "Properties per page:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1048
+msgid "Show child properties."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1053
+msgid "Don't make accessible for public."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1058
+msgid "Regenerate list every time it is opened."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1071
+msgid "Contact Information"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1074
+msgid "Contact Information will be shown on every page"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1082
+msgid "You may use [property_overview] shortcode tags to query properties for this list. Click the \"Help\" tab in the top right corner for more details."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1087
+msgid "Header & Footer background color:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1092
+msgid "Header & Footer text color:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1097
+msgid "Text color:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1133
+msgid "Add List"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1134
+msgid "Save Lists"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1142
+msgid "Regenerate all PDF Lists.  This will create, or recreate, all your lists."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1144
+msgid "Refresh Page"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1149
+msgid "Shortcode examples:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1151
+msgid "Returns a formatted HTML link to the PDF List."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1152
+msgid "Returns a html link to the PDF List with custom title."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1153
+msgid "Returns the raw URL to the PDF List (for use in custom html)."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1154
+msgid "For use with a custom CSS class."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1155
+msgid "Returns url_to_custom_image with a link to the PDF List."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1219
+msgid "PDF Flyer"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1245
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1494
+msgid "Details"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1273
+msgid "Location"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1388
+#, php-format
+msgid ", or <a href=\"%s\" target=\"_blank\">view flyer</a>."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1402
+msgid "PDF"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1437
+#, php-format
+msgid "Warning: <b>%s</b> is not writable, PDF flyer cannot be created."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1449
+msgid "Show panel that allows you to create PDF property lists."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1454
+msgid "Generate property flyers automatically when somebody tries to view them for the first time."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1459
+msgid "Generate QR Code"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1464
+msgid "Truncate the Description when it's displayed in Flyer (It can be helpful, when the data can not be placed on one page)."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1472
+msgid "Display"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1477
+msgid "Title (Header)"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1482
+msgid "Tagline under Title (Header)"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1487
+msgid "QR Code's note (if QR Code exists)"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1530
+msgid "Description (if exists)"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1535
+msgid "Location on Map (if exists)"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1540
+msgid "Features (if exists)"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1545
+msgid "Agent Information (if exists)"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1552
+msgid "Primary Photo Size"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1559
+msgid "Secondary Images"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1574
+msgid "Logo URL"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1577
+msgid "Use JPEG and GIF images only."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1581
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1584
+msgid "Header color"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1589
+msgid "Section background color"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1640
+msgid "Property List is got. Start generate PDF Flyers..."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1662
+msgid "There are no any property to generate PDF Flyer for."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1666
+msgid "Looks like, something caused error on server. Please, try to regenerate PDF Flyers later."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:1752
+#, php-format
+msgid "Could not find a PDF flyer for %1s."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:2050
+msgid "Flyer"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:2059
+msgid "PDF flyer for "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:112
+msgid "Manage Capabilities"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:113
+msgid "Manage White Label"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:153
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:174
+msgid "Capabilities"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:169
+msgid "WP Property Capabilities"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:173
+msgid "Role"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:186
+msgid "Administrator has all capabilities which can not be managed."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:246
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2121
+msgid "Taxonomies"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:250
+#, php-format
+msgid "Disable %1$s taxonomy."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:277
+msgid "White Label"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:282
+msgid "Labels"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:283
+msgid "Contextual Menus"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:289
+msgid "Use this menu to rename WP-Property components, for example if you are listing \"Real Estate\", or \"Vehicles\"."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:293
+msgid "Singular Property:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:295
+msgid "Default is \"Property\", will change the label in the navigation menus."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:299
+msgid "Plural Property:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:301
+msgid "Default is \"Properties\", will change the label in the navigation menus."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:323
+msgid "Contextual menus are displayed when a user clicks the \"Help\" tab in the top right corner of a page."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:328
+msgid "Overview Page Contextual Help:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:330
+msgid "i.e. \"Properties\""
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:377
+msgid "Add "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:378
+msgid "Add New "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:379
+msgid "Edit "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:380
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:381
+msgid "New "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:392
+msgid "All "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:393
+msgid "Search "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:394
+msgid "No "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_power_tools.php:394
+msgid " found."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:73
+msgid "Property Excerpt"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:74
+msgid "Property Status"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:75
+msgid "Property Order"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:76
+msgid "Property Date"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:77
+msgid "Property Author"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:223
+msgid "Manage XML Importer"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:280
+#, php-format
+msgid "Imported on: <b>%1$s</b> <a href=\"%2$s\" title=\"%3$s\">Importer</a>"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:360
+msgid "ago"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:369
+msgid "Last Import"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:412
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:433
+msgid "Time: "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:494
+msgid "Look up XML import history."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:495
+msgid "Show XML Import History"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:575
+msgid "(Imported)"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:584
+msgid "Schedule coult not be imported."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:623
+msgid "XML Importer Help"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:624
+msgid "By default, xPath are executed in the xPath input boxes. <a target=\"_blank\" href=\"http://www.w3schools.com/xpath/xpath_syntax.asp\">W3 Schools XPath Syntax</a>. "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:625
+msgid "Example: get all the option values that have a label for \"height\": <b>options/option[label = \"Height\"]/value </b>"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:627
+msgid "XPath Query to Property Elements"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:628
+msgid "In order to begin importing data, you must first identify what the \"repeating property element\" is in the XML file.  Typically this would be something like <b>property</b> or <b>object</b>, where the corresponding XPath rules would be <b>//property</b> or <b>//object</b>, respectively. The easiest way to identify it is to look through the feed for a repeating pattern. The query must select the elements in order to cycle through them and apply the XPath Rules in the Attribute Map section. "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:630
+msgid "Import Limits"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:631
+msgid "There are two type of limits - the first limit will stop the import after a certain number of objects have been processed before they are checked for quality, while the second limit will stop only after the specified number of objects has actually passsed quality inspection, and have been saved to the database."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:632
+msgid "Limiting imports works well when you are running incremental imports.  A limit of <b>10</b> will stop after 10 properties have been created.  The importer does not count properties that were skipped during import or that already exist in the system - properties that already exist will be marked as updated."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:634
+msgid "Running the Import"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:635
+msgid "There are two ways to process an import, using the browser, or by setting up a cron job.  Using the browser is easy, and viable when you have a small feed, or a very good server. "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:636
+msgid "When working with larger feeds, or for the purposes of automation, it is advisable to execute your import script using a cron job.  For every \"Import Schedule\" you create, a <b>Cron Command</b> field will be displayed, followed by the command you would need to enter into the cron job builder, for the import schedule to be executed."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:638
+msgid "Function: free_text"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:639
+msgid "To insert some common text, use the <b>free_text</b> command, like so: <b>free_text: Imported from Some List</b> and the text will be kept as is."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:641
+msgid "Function: concat"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:642
+msgid "You can also combine free text wtih xPath rule results using <b>concat</b>, example: <b>concat:http://sourcesite.com/images/'Photo7'</b> will result in the text between the quotes being executed as xPath rules, while text outside of quotes being inserted as it is."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:643
+msgid "You can also use concat to combine multiple xPath rules together, for example you can create the Property Title from a few XML attributes: <b>concat:'bedrooms' bedroom house in 'location/city'</b>"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:645
+msgid "Function: concat_list"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:646
+msgid "Example: [concat_list root_path=\"options/option\" label_path=\"label\" value_path=\"value\" concat_character=\":\" ] will look for options/option path, then grab child \"value\" and \"label\" paths and import them as a single line. "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:668
+msgid "Importer"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:808
+#, php-format
+msgid "Found %1s properties from database that were imported from this feed."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:821
+#, php-format
+msgid "Property ID %1s has been deleted - %2s"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1081
+#, php-format
+msgid "All %1$s properties have been deleted in %2$s seconds."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1083
+#, php-format
+msgid "Although %1$s properties were found, only %2$s have been deleted in %3$s seconds."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1087
+msgid "Something went wrong, no properties were found to delete."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1169
+#, php-format
+msgid "Created temporary directory for import: %1$s."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1202
+#, php-format
+msgid "Could not load XML Object from raw data: %1s."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1204
+msgid "Could not load XML Object from raw data - empty result returned."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1206
+msgid "Could not load XML Object from raw data."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1210
+msgid "XML data cannot be loaded."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1238
+msgid "Data loaded from cache."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1244
+msgid " object(s) found with XPath Rule: "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1245
+#, php-format
+msgid "%1s objects identified: <a href=\"%2s\" target=\"_blank\">download processed XML file</a> (%3s)."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1247
+msgid "Root Element XPath Rule: "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1251
+msgid "No Root Element XPath Rule, displaying most root elements."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1255
+msgid "No objects found."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1261
+#, php-format
+msgid "Preview truncated: showing: %1s of full feed:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1534
+#, php-format
+msgid "XPath rules for object #%1d processed with %2d extracted attributes."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1542
+#, php-format
+msgid "Stopping import due to specified pre-QC limit of %1d."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1565
+#, php-format
+msgid "Importing %1s"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1610
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1611
+#, php-format
+msgid "Deleted all (%1s) properties that originated from this feed."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1613
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1688
+msgid "Did not find any properties that have been imported from this feed to remove."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1618
+msgid "Did not remove any old properties."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1631
+#, php-format
+msgid "Stopping import due to specified post-QC limit of %1d."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1677
+#, php-format
+msgid "Object cycle done. Completed %1d cycles."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1685
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1686
+#, php-format
+msgid "Deleted (%1s) properties that are no longer in the feed."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1712
+msgid "Deleted the import temporary directory."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1714
+msgid "Unable to delete the import temporary directory"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1802
+msgid "Import name"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1811
+msgid "Source"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1816
+msgid "URL"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1819
+msgid "Type:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1822
+msgid "XML / JSON"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1823
+msgid "Google Spreadsheet"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1824
+msgid "WP-Property Feed"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1825
+msgid "RETS"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1836
+msgid "Send GET variables as POST data."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1841
+msgid "Google Username"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1846
+msgid "Google Password"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1851
+msgid "Google Extra Query Vars"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1852
+msgid "See the <a href=\"http://code.google.com/apis/spreadsheets/data/3.0/reference.html#ListParameters\" target=\"_blank\">Google Spreadsheet API docs</a> for the format of this field (should be name value pairs, without the beginning \"?\")"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1857
+msgid "RETS Username"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1861
+msgid "RETS Password"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1865
+msgid "RETS Property Class (Required, Use <a href=\"http://retsmd.com/\" target=\"_blank\">RetsMD</a> to Determine Value)"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1869
+msgid "RETS Property Query (Optional, Accepts DMQL - Default is \"(ListingStatus=|Active)\")"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1873
+msgid "RETS Property Primary ID (Optional, Default is \"ListingKey\")"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1877
+msgid "RETS Photo Object (Optional, Default is \"Photo\")"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1881
+msgid "RETS Version String (Optional)"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1885
+msgid "RETS User-Agent String (Optional)"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1889
+msgid "Toggle Advanced Source Options"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1895
+msgid "Root XPath Query:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1897
+msgid "What is this?"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1905
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2562
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2623
+msgid "Preview Raw Data"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1907
+msgid "Close Preview"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1923
+msgid "Default Property Type"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1931
+msgid "Will be defaulted to if no xPath rule exists for the \"Property Type\"."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1949
+msgid "<b>Pre-QC Limit:</b> Limit import to the first"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1951
+msgid "properties in the feed."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1952
+msgid "More about limits."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1956
+msgid "<b>Post-QC Limit:</b> Limit import to the first"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1958
+msgid "created properties that have passed quality standards."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1964
+#, php-format
+msgid "Only import images that are over %1spx in width, and %2spx in height."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1969
+msgid "Minimum sizes are ignored if blank."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1973
+msgid "Imported properties must have at least "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1974
+msgid ", but no more than "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1976
+msgid " valid images."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1981
+msgid "Do not import properties that have been imported less than "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1983
+msgid "hour(s) ago."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1990
+msgid "Remove all properties that were originally imported from this feed on import."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1998
+msgid "Remove properties that are no longer in source XML from this site's database."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2005
+msgid "When updating an existing property, remove all old images before downloading new ones."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2011
+#, php-format
+msgid "Send email updates to the site admin e-mail address (%1s) when import schedules are executed and completed."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2018
+msgid "Completely remove <b>all</b> existing properties prior to import."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2025
+msgid "Fix strings that are in all caps."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2032
+msgid "Scan for any formatting tags and remove them from data."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2040
+msgid "Automatically load imported images into property slideshow."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2048
+msgid "Revalidate address on completion (get latitude and longitude for every property using Google Maps API)."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2063
+msgid "Log a lot of details during imports (good for troubleshooting)."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2070
+msgid "Toggle Advanced Options"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2077
+msgid "Automatic Matching"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2079
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3357
+msgid "Automatically Match"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2080
+msgid "This will work for WP-Property exports and imports, but will have mixed results with uniquely formatted feeds."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2085
+msgid "Attribute Map"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2088
+msgid "Use XPath rules to setup the paths to the individual XML attributes to match them up with WP-Property attributes."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2089
+msgid "Sort Attribute Rules"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2095
+msgid "WP-Property Attribute"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2096
+msgid "XPath Rule"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2114
+msgid "WordPress Attributes"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2132
+msgid "Street Number"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2133
+msgid "Street"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2135
+msgid "County"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2136
+msgid "State"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2137
+msgid "Country"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2138
+msgid "Postal Code"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2143
+msgid "WP-Property Attributes"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2146
+msgid "Property Agent"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2148
+msgid "Global Property ID"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2149
+msgid "Display Address"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2161
+msgid "Delete Selected"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2180
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2640
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2676
+msgid "Save Configuration"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2196
+msgid "Preview Import"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2197
+msgid "Process Full Import"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2311
+msgid "Schedule imported from file."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2507
+msgid "Please save schedule first."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2554
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2622
+msgid "500 Internal Server Error! Your hosting account is most likely running out of memory."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2570
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1367
+msgid "Loading..."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2599
+msgid "Preview Again"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2642
+msgid "Saving the XML Importer schedule, please wait..."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2660
+msgid "Schedule has been saved."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2678
+msgid "Updating the XML Importer schedule, please wait..."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2694
+msgid "Schedule has been updated."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2785
+msgid "Confirm that you want to delete all "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2785
+msgid " properties from this feed by typing in in 'delete' below, or press 'Cancel' to cancel."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2801
+msgid "An error occured."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2816
+msgid "Are you sure?"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2914
+msgid "Enabled Options"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:2963
+msgid "Toggle Advanced"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3077
+msgid "Select a unique ID attribute."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3079
+msgid "Unique ID attribute."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3381
+msgid "The source evaluation resulted in an Internal Server Error!"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3387
+msgid "Request error:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3554
+msgid "Check Source"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3564
+msgid "Source is Good: Reload."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3569
+msgid "Cannot Load Source: Reload."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3574
+msgid "Internal Server Error!"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3583
+msgid "Property Importer"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3613
+msgid "Sort by:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3614
+msgid "Last Run"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3615
+msgid "Created Properties"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3616
+msgid "Updated Properties"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3617
+msgid "Total Properties"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3618
+msgid "Limit"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3626
+msgid "Saved Import Schedules"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3639
+msgid "Last run "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3639
+msgid " ago."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3644
+msgid "Updated "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3644
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3649
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3654
+msgid " objects."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3649
+msgid "Created "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3654
+msgid "Limited to "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3659
+msgid "Total Properties: "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3671
+msgid "Source URL:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3672
+msgid "Cron Command:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3679
+msgid "Run Import in Browser"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3680
+msgid "Save to File"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3682
+msgid "Delete All Properties"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3694
+msgid "You do not have any saved schedules. Create one now."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3703
+msgid "Import Schedule"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3705
+msgid "Upload File"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3798
+msgid "Attempted to update property, but wp_update_post() did not return an ID. "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3823
+msgid "Skipping property, last import "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3823
+msgid " ago"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3856
+msgid "Object import failed - no Property Title detected or set, a requirement to creating a property."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:3859
+msgid "Object import failed.  Post cold not be created nor updates, and post_id was not found or created to continue import."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:4117
+msgid "After import property has less than the required amount of images - deleting property as configured."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:4120
+msgid "After import property has no images, but was unable to delete the property."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:4125
+#, php-format
+msgid "After import property has a total of %1s images."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:4555
+msgid "on disk using file_get_contents()"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:4573
+msgid "on disk using wp_remote_post()"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:4579
+#, php-format
+msgid "Unable to get image %1s using the %2s method."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:4593
+#, php-format
+msgid "Image %1s downloaded, but appears corrupt - deleting."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:4611
+#, php-format
+msgid "Image %1s downloaded, but image size failed quality standards - deleting."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:4628
+#, php-format
+msgid "Unable to save image %1s."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:93
+msgid "Manage Slideshow"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:251
+msgid "Display as carousel gallery."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:255
+msgid "Gallery transition type:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:257
+msgid "Crossfade betweens images"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:258
+msgid "Fade into background color"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:259
+msgid "Pulse"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:260
+msgid "Slide"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:261
+msgid "Fadeslide"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:267
+msgid "Crop images."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:272
+msgid "Enforce minimum image width."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:276
+msgid "Carousel Thumbnail Size:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:481
+msgid "Slideshow Options"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:760
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1455
+msgid "Slideshow Images:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:782
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1469
+msgid "All Images:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:851
+msgid "Image is too small."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:904
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:920
+msgid "Slideshow"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:978
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1162
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1425
+msgid "Global Slideshow"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1022
+msgid "Display in Global Slideshow Caption:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1026
+msgid "Title."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1027
+msgid "Excerpt."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1028
+msgid "Tagline."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1034
+msgid "Single Listing Slideshow"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1057
+msgid "Slideshow image size to be used for single property pages."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1061
+msgid "Show pagination buttons in slideshow."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1070
+msgid "Thumbnail Size"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1075
+msgid "This width is used on \"Slideshow\" page on the Property editing page to display available images, this setting <b>does not</b> affect the actual slideshow on the front-end."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1086
+msgid "Effect:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1092
+msgid "Effect that will be used to change from one image to the next."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1096
+msgid "Slices:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1102
+msgid "If the transition includes slices, this number determines how many slices to cut the image up into during transitions."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1106
+msgid "Animation Speed:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1112
+msgid "How quickly the transition should happen, in miliseconds."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1116
+msgid "Pause Time:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1122
+msgid "The pause time between transitions."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1199
+msgid "Slideshow selection and order saved."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1434
+msgid "WP-Property Slideshow"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1435
+msgid "This slideshow can be integrated into your front-end pages by either using the shortcode, or pasting PHP code into your theme."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1438
+msgid "Drag images from selection on the left to the selection on the right, and then click save."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1439
+#, php-format
+msgid "This list gets all images from your media library that are over %s pixels wide and %s pixels tall."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1446
+msgid "Save Selection and Order"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:74
+msgid "Manage Supermap"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:88
+msgid "Supermap"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:154
+msgid "Sidebar Attributes"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:156
+msgid "Select the attributes you want to display in the left sidebar on the supermap."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:170
+msgid "Display \"View Property\" link in the left sidebar. It directs user to Property Page."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:176
+msgid "Supermap Sidebar Thumbnail:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:180
+msgid "If you create a new image size, please be sure to regenerate all thumbnails. "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:185
+msgid "Map Markers:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:228
+msgid "Add Marker"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:328
+msgid "Map Areas:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:337
+msgid "Coordinates"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:338
+msgid "Fill Color"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:339
+msgid "Opacity"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:340
+msgid "Stoke Color"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:341
+msgid "Hover Color"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:420
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:673
+msgid "Map Marker"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:422
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:675
+msgid "Default by Google"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:489
+msgid "File should be an image"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:542
+msgid "Looks like, Image can not be uploaded."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:622
+msgid "Supermap Options"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:635
+msgid "Exclude property from supermap"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:832
+#, php-format
+msgid "Element cannot be rendered, missing %1s script."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:1517
+msgid "SHOW MORE"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:1593
+msgid "Loading"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/class_wpp_object_list_table.php:54
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/class_wpp_object_list_table.php:132
+msgid "Restore"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/class_wpp_object_list_table.php:55
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/class_wpp_object_list_table.php:138
+msgid "Delete Permanently"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/class_wpp_object_list_table.php:56
+msgid "Move to Trash"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/class_wpp_object_list_table.php:119
+#, php-format
+msgid "Edit &#8220;%s&#8221;"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/class_wpp_object_list_table.php:127
+msgid "Edit this item"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/class_wpp_object_list_table.php:132
+msgid "Restore this item from the Trash"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/class_wpp_object_list_table.php:134
+msgid "Move this item to the Trash"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/class_wpp_object_list_table.php:134
+msgid "Trash"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/class_wpp_object_list_table.php:138
+msgid "Delete this item permanently"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/class_wpp_object_list_table.php:143
+#, php-format
+msgid "View &#8220;%s&#8221;"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/class_wpp_object_list_table.php:143
+msgid "View"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/class_wpp_object_list_table.php:184
+#, php-format
+msgid "Toggle %1s more."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:28
+msgid "Settings updated."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:133
+msgid "You are about to set ALL your properties to the selected property type. Are you sure?"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:237
+msgid "Plugins"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:239
+msgid "Help"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:250
+msgid "Page"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:253
+msgid "Property (Default)"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:271
+msgid "Always overwrite this page's content with [property_overview]."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:276
+msgid "If checked, be sure to include [property_overview] somewhere in the content, or no properties will be displayed."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:279
+msgid "View list of available shortcodes."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:285
+msgid "Default Phone Number"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:288
+msgid "Phone number to use when a property-specific phone number is not specified."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:293
+msgid "Address Attribute"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:295
+msgid "Attribute to use for address:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:297
+msgid "and localize for:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:305
+msgid "Automatically delete all property images and attachments when a property is deleted."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:306
+msgid "Disable \"on-the-fly\" image regeneration."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:308
+msgid "Do not execute shortcodes in Text Widgets."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:329
+msgid "Load default CSS. If unchecked, the wp-properties.css in your theme folder will not be loaded."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:331
+msgid "Load default CSS."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:337
+msgid "Load WP-Property scripts on all front-end pages."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:342
+msgid "Do not load theme-specific stylesheet."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:343
+msgid "This version of WP-Property has a stylesheet made specifically for the theme you are using."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:353
+msgid "Image Sizes"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:356
+msgid "Image sizes used throughout the plugin."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:358
+#, php-format
+msgid "After adding/removing image size, be sure to <a href=\"%s\">regenerate thumbnails</a> using the Regenerate Thumbnails plugin."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:362
+msgid "We strongly recommend to <a href=\"http://wordpress.org/extend/plugins/regenerate-thumbnails/\">Regenerate Thumbnails</a> plugin by Viper007Bond."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:370
+msgid "Width"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:371
+msgid "Height"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:447
+msgid "Overview Shortcode"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:450
+msgid "These are the settings for the [property_overview] shortcode.  The shortcode displays a list of all building / root properties.<br />The display settings may be edited further by customizing the <b>wp-content/plugins/wp-properties/templates/property-overview.php</b> file.  To avoid losing your changes during updates, create a <b>property-overview.php</b> file in your template directory, which will be automatically loaded."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:453
+msgid "Thumbnail size:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:455
+msgid "Show children properties."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:458
+msgid "Show larger image of property when image is clicked using fancybox."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:464
+msgid "Show pagination on bottom of results."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:473
+msgid "Property Page"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:475
+msgid "These are the settings for the [property_overview] shortcode.  The shortcode displays a list of all building / root properties.<br /> The display settings may be edited further by customizing the <b>wp-content/plugins/wp-properties/templates/property.php</b> file.  To avoid losing your changes during updates, create a <b>property.php</b> file in your template directory, which will be automatically loaded."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:477
+msgid "Display larger image, or slideshow, at the top of the property listing."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:478
+msgid "Sort property stats by groups."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:487
+msgid "Google Maps"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:491
+msgid "Map Thumbnail Size:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:492
+msgid "Map Zoom Level:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:493
+msgid "Show Checkboxes Image instead of \"Yes\" and hide \"No\" on Yes/No values"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:496
+msgid "Attributes to display in popup after a property on a map is clicked."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:500
+msgid "Show Property Title"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:509
+msgid "Show Directions Link"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:517
+msgid "Address Display"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:524
+msgid "Available tags:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:530
+msgid "Currency & Numbers"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:533
+msgid "Currency symbol."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:535
+msgid "Thousands separator symbol:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:538
+msgid ". (period)"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:539
+msgid ", (comma)"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:541
+msgid "The character separating the 1 and the 5: $1<b>,</b>500"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:546
+msgid "Currency symbol placement:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:549
+msgid "Before number"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:550
+msgid "After number"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:562
+msgid "Admin Settings"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:566
+msgid "Thumbnail size for property images displayed on Properties page: "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:568
+msgid "Completely hide hidden attributes when editing properties."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:601
+msgid "WP-Property Premium Features"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:602
+msgid "When purchasing the premium features you will need to specify your domain to add the license correctly.  This is your domain:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:635
+msgid "[purchase feature]"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:650
+#, php-format
+msgid "This feature is disabled because it requires WP-Property %1$s or higher."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:652
+msgid "Disable plugin."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:656
+msgid "Feature installed, using version"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:659
+#, php-format
+msgid "Please visit <a href=\"%s\">UsabilityDynamics.com</a> to purchase this feature."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:675
+msgid "Force check of allowed premium features."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:676
+msgid "Check Updates"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:680
+msgid "Enter in the ID of the property you want to look up, and the class will be displayed below."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:682
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:690
+msgid "Lookup"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:687
+msgid "Get property image data."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:688
+msgid "Property ID:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:697
+msgid "Look up the <b>$wp_properties</b> global settings array.  This array stores all the default settings, which are overwritten by database settings, and custom filters."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:698
+msgid "Show $wp_properties"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:704
+msgid "Restore Backup of WP-Property Configuration"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:705
+msgid "Download Backup of Current WP-Property Configuration."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:711
+msgid "Revalidate all addresses using"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:711
+msgid "localization"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:712
+msgid "Revalidate"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:715
+msgid "Set all properties to same property type:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:720
+msgid "Set"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:726
+msgid "Memory Usage:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/page_settings.php:729
+msgid "Peak Memory Usage:"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:48
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:244
+msgid "(no parent)"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:51
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:52
+msgid "Parent"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:60
+msgid "Template"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:61
+msgid "Page Template"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:62
+msgid "Default Template"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:69
+msgid "Need help? Use the Help tab in the upper right of your screen."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:110
+#, php-format
+msgid "<strong>Warning!</strong> The %1s property type has been deleted."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:251
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:257
+msgid "Falls Under"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:260
+msgid "ID of parent property"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:311
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:365
+#, php-format
+msgid "Editing %s is disabled, it may be inherited."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:331
+msgid "Enable."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:348
+msgid "Numbers only."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:397
+msgid "Hide"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:397
+msgid "Show"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:476
+msgid "Filter Results"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/property-overview-page.php:24
+msgid "Sorry, we could not find what you were looking for.  Since you are here, take a look at some of our properties."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/property-overview.php:98
+#, php-format
+msgid "Sorry, no properties found - try expanding your search, or <a href=\"%s\">view all</a>."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/property.php:154
+msgid "Interested?"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/property.php:160
+msgid "Return to building page."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:109
+msgid " of "
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:579
+msgid "None"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:583
+msgid "Viewing page"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:583
+msgid "of"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:608
+msgid "Prev"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:609
+msgid "Next"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:640
+msgid "Conditional query tags do not work before the query is run. Before then, they always return false."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:949
+msgid "Other"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:1504
+msgid "Website"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:1507
+#, php-format
+msgid "Required fields are marked %s"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:1510
+msgid "Comment"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:1511
+#, php-format
+msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:1512
+#, php-format
+msgid "Logged in as <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\" title=\"Log out of this account\">Log out?</a>"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:1513
+msgid "Your email address will not be published."
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:1514
+#, php-format
+msgid "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes: %s"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:1517
+msgid "Leave a Reply"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:1518
+#, php-format
+msgid "Leave a Reply to %s"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:1519
+msgid "Cancel reply"
+msgstr ""
+
+#: C:\wamp\www\wordpress-plugins\wp-content\plugins\wp-property/templates/template-functions.php:1520
+msgid "Post Comment"
+msgstr ""
+

@@ -1,0 +1,2535 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-07-05 20:59-0500\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Custom CMS www.customcms.dk <mail@customcms.dk>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"X-Poedit-KeywordsList: __;_e;_x;_n;_n_noop;_c\n"
+"X-Poedit-Basepath: wp-property\\wp-content\\plugins\\wp-property\\\n"
+"X-Poedit-Language: Danish\n"
+"X-Poedit-Country: DENMARK\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-SearchPath-0: wp-property\\wp-content\\plugins\\wp-property\n"
+
+#: /wp-property/action_hooks.php:57
+msgid "Building"
+msgstr "Bygning"
+
+#: /wp-property/action_hooks.php:58
+msgid "Floorplan"
+msgstr "Stue plan"
+
+#: /wp-property/action_hooks.php:59
+msgid "Single Family Home"
+msgstr "Villa"
+
+#: /wp-property/action_hooks.php:72
+#: /wp-property/core/premium/class_wpp_property_import.php:1019
+msgid "Address"
+msgstr "Adresse"
+
+#: /wp-property/action_hooks.php:73
+msgid "Price"
+msgstr "Pris"
+
+#: /wp-property/action_hooks.php:74
+msgid "Bedrooms"
+msgstr "Værelser"
+
+#: /wp-property/action_hooks.php:75
+msgid "Bathrooms"
+msgstr "Badeværelser"
+
+#: /wp-property/action_hooks.php:76
+#: /wp-property/action_hooks.php:79
+msgid "Deposit"
+msgstr "Depot"
+
+#: /wp-property/action_hooks.php:77
+msgid "Area"
+msgstr "Område"
+
+#: /wp-property/action_hooks.php:78
+#: /wp-property/core/class_functions.php:2328
+msgid "Phone Number"
+msgstr "Telefon nr"
+
+#: /wp-property/action_hooks.php:86
+msgid "Lease Terms"
+msgstr "Lejebetingelser"
+
+#: /wp-property/action_hooks.php:87
+msgid "Pet Policy"
+msgstr "Kæledyrs politik"
+
+#: /wp-property/action_hooks.php:88
+msgid "School"
+msgstr "Skole"
+
+#: /wp-property/action_hooks.php:89
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1018
+msgid "Tagline"
+msgstr "Tilføjelse"
+
+#: /wp-property/action_hooks.php:136
+msgid "Studio"
+msgstr "Studio"
+
+#: /wp-property/action_hooks.php:175
+#: /wp-property/action_hooks.php:177
+#: /wp-property/action_hooks.php:187
+#: /wp-property/action_hooks.php:188
+msgid "Features"
+msgstr "Faciliteter"
+
+#: /wp-property/action_hooks.php:178
+#: /wp-property/action_hooks.php:189
+#: /wp-property/action_hooks.php:198
+#: /wp-property/core/class_core.php:905
+msgid "Feature"
+msgstr "Facilitet"
+
+#: /wp-property/action_hooks.php:179
+#: /wp-property/action_hooks.php:190
+msgid "Search Features"
+msgstr "Søg faciliteter"
+
+#: /wp-property/action_hooks.php:180
+#: /wp-property/action_hooks.php:191
+msgid "All Features"
+msgstr "Alle faciliteter"
+
+#: /wp-property/action_hooks.php:181
+#: /wp-property/action_hooks.php:192
+msgid "Parent Feature"
+msgstr "Hoved facilitet"
+
+#: /wp-property/action_hooks.php:182
+#: /wp-property/action_hooks.php:193
+msgid "Parent Feature:"
+msgstr "Hoved facilitet:"
+
+#: /wp-property/action_hooks.php:183
+#: /wp-property/action_hooks.php:194
+msgid "Edit Feature"
+msgstr "Rediger facilitet"
+
+#: /wp-property/action_hooks.php:184
+#: /wp-property/action_hooks.php:195
+msgid "Update Feature"
+msgstr "Opdater facilitet"
+
+#: /wp-property/action_hooks.php:185
+#: /wp-property/action_hooks.php:196
+msgid "Add New Feature"
+msgstr "Tilføj facilitet"
+
+#: /wp-property/action_hooks.php:186
+#: /wp-property/action_hooks.php:197
+msgid "New Feature Name"
+msgstr "Nyt faciliteter navn"
+
+#: /wp-property/action_hooks.php:205
+#: /wp-property/action_hooks.php:207
+#: /wp-property/action_hooks.php:217
+#: /wp-property/action_hooks.php:218
+msgid "Community Features"
+msgstr "Fælles faciliteter"
+
+#: /wp-property/action_hooks.php:208
+#: /wp-property/action_hooks.php:219
+#: /wp-property/action_hooks.php:228
+msgid "Community Feature"
+msgstr "Fælles facilitet"
+
+#: /wp-property/action_hooks.php:209
+#: /wp-property/action_hooks.php:220
+msgid "Search Community Features"
+msgstr "Søg på fælles faciliteter"
+
+#: /wp-property/action_hooks.php:210
+#: /wp-property/action_hooks.php:221
+msgid "All Community Features"
+msgstr "Alle fælles faciliteter "
+
+#: /wp-property/action_hooks.php:211
+#: /wp-property/action_hooks.php:222
+msgid "Parent Community Feature"
+msgstr "Hoved, fælles facilitet"
+
+#: /wp-property/action_hooks.php:212
+#: /wp-property/action_hooks.php:223
+msgid "Parent Community Feature:"
+msgstr "Hoved, fælles facilitet:"
+
+#: /wp-property/action_hooks.php:213
+#: /wp-property/action_hooks.php:224
+msgid "Edit Community Feature"
+msgstr "Rediger fælles facilitet"
+
+#: /wp-property/action_hooks.php:214
+#: /wp-property/action_hooks.php:225
+msgid "Update Community Feature"
+msgstr "Opdater fælles facilitet"
+
+#: /wp-property/action_hooks.php:215
+#: /wp-property/action_hooks.php:226
+msgid "Add New Community Feature"
+msgstr "Tilføj fælles facilitet"
+
+#: /wp-property/action_hooks.php:216
+#: /wp-property/action_hooks.php:227
+msgid "New Community Feature Name"
+msgstr "Nyt fælles facilitet navn"
+
+#: /wp-property/action_hooks.php:239
+msgid "The property type will determine the layout."
+msgstr "Ejendomstypen vil bestemme dit layout"
+
+#: /wp-property/action_hooks.php:240
+msgid "Customize what appears in search results in the attribute section.  For example: 1bed, 2baths, area varies slightly."
+msgstr "Tilpas hvad der vises i søgeresultaterne for detaljerne. F.eks.: 1 seng, 2 bade, område varierer. "
+
+#: /wp-property/action_hooks.php:241
+msgid "Will appear on overview pages and on top of every listing page."
+msgstr "Vises på oversigt sider og i toppen af hver enkelt side."
+
+#: /wp-property/default_api.php:127
+msgid "For Sale"
+msgstr "Til Salg"
+
+#: /wp-property/default_api.php:128
+msgid "For Rent"
+msgstr "Udlejes"
+
+#: /wp-property/default_api.php:135
+msgid "This is a rental property."
+msgstr "Dette er til udlejning. "
+
+#: /wp-property/default_api.php:141
+msgid "This property is for sale."
+msgstr "Dette er til salg. "
+
+#: /wp-property/default_api.php:159
+msgid "Set Coordinates Manually."
+msgstr "Vælg koordinaterne manuelt."
+
+#: /wp-property/default_api.php:164
+#: /wp-property/core/premium/class_wpp_property_import.php:1032
+msgid "Latitude"
+msgstr "Breddegrad"
+
+#: /wp-property/default_api.php:169
+#: /wp-property/core/premium/class_wpp_property_import.php:1033
+msgid "Longitude"
+msgstr "Længdegrad"
+
+#: /wp-property/default_api.php:242
+#: /wp-property/default_api.php:247
+msgid "Yes"
+msgstr "Ja"
+
+#: /wp-property/default_api.php:281
+msgid "Format phone number."
+msgstr "Telefon nr. layout"
+
+#: /wp-property/default_api.php:329
+#: /wp-property/core/class_functions.php:1915
+msgid " sq ft."
+msgstr "Kvadrat meter"
+
+#: /wp-property/default_api.php:502
+msgid "Address was validated by Google Maps."
+msgstr "Adresse blev valideret af Google Maps."
+
+#: /wp-property/default_api.php:504
+msgid "Address has not yet been validated, should be formatted as: street, city, state, postal code, country. Locations are validated through Google Maps."
+msgstr "Adresse er endnu ikke valideret, skal være formateret som: gade, by, stat, postnummer, land. Steder bliver valideret via Google Maps."
+
+#: /wp-property/core/class_core.php:134
+msgid "All Properties"
+msgstr "Alle Ejendomme"
+
+#: /wp-property/core/class_core.php:135
+#: /wp-property/core/class_core.php:156
+msgid "Property"
+msgstr "Ejendom"
+
+#: /wp-property/core/class_core.php:136
+#: /wp-property/core/class_core.php:139
+msgid "New Property"
+msgstr "Ny Ejendom"
+
+#: /wp-property/core/class_core.php:137
+msgid "Add New Property"
+msgstr "Tilføj en Ejendom"
+
+#: /wp-property/core/class_core.php:138
+msgid "Edit Property"
+msgstr "Rediger Ejendom"
+
+#: /wp-property/core/class_core.php:140
+msgid "View Property"
+msgstr "Vis Ejendom"
+
+#: /wp-property/core/class_core.php:141
+msgid "Search Properties"
+msgstr "Søg ejendomme"
+
+#: /wp-property/core/class_core.php:142
+msgid "No properties found"
+msgstr "Ingen ejendomme fundet"
+
+#: /wp-property/core/class_core.php:143
+msgid "No properties found in Trash"
+msgstr "Ingen ejendomme fundet i papirkurv"
+
+#: /wp-property/core/class_core.php:206
+#, php-format
+msgid "Property: %s"
+msgstr "Ejendom: %s"
+
+#: /wp-property/core/class_core.php:208
+#, php-format
+msgid "Sidebar located on the %s page."
+msgstr "Sidebar placeret på %s side."
+
+#: /wp-property/core/class_core.php:292
+#: /wp-property/core/class_core.php:371
+#: /wp-property/core/premium/class_admin_tools.php:102
+#: /wp-property/core/premium/class_admin_tools.php:204
+#: /wp-property/core/premium/class_wpp_slideshow.php:735
+msgid "Settings"
+msgstr "Instillinger"
+
+#: /wp-property/core/class_core.php:411
+#, php-format
+msgid "Be advised, since you don't have permalinks enabled, you must visit the <a href=\"%s\">Settings Page</a> and set a custom property overview page."
+msgstr "Vær opmærksom på, da du ikke har permalinks aktiveret, skal du gå til <a href=\"%s\"> indstilinger</ a> og angive en brugerdefineret oversigtsside."
+
+#: /wp-property/core/class_core.php:412
+#, php-format
+msgid "By default, your property overview will be displayed on the <a href=\"%s\">%s</a> page. You may change the overview page on the <a href=\"%s\">Settings Page</a>"
+msgstr "Som standard vil din ejendoms oversigt blive vist på <a href=\"%s\">% s </ a> side. Du kan ændre oversigtssiden under <a href=\"%s\"> Indstillinger </ a>"
+
+#: /wp-property/core/class_core.php:418
+msgid "Thank you for installing WP-Property!"
+msgstr ""
+
+#: /wp-property/core/class_core.php:420
+msgid "You may also visit <a href=\"http://twincitiestech.com/plugins/wp-property/\">TwinCitiesTech.com</a> for more information, and <a href=\"http://twincitiestech.com/plugins/wp-property/screencasts/\">screencasts</a>."
+msgstr ""
+
+#: /wp-property/core/class_core.php:659
+msgid "Menu Sort Order:"
+msgstr ""
+
+#: /wp-property/core/class_core.php:662
+msgid "Display property in featured listing."
+msgstr "Sorter ejendomme efter faciliteter."
+
+#: /wp-property/core/class_core.php:725
+#, php-format
+msgid "Property updated. <a href=\"%s\">view property</a>"
+msgstr "Ejendommen er opdateret. <a href=\"%s\">vis ejendommen</a>"
+
+#: /wp-property/core/class_core.php:726
+msgid "Custom field updated."
+msgstr "Brugerdefineret felt opdateret."
+
+#: /wp-property/core/class_core.php:727
+msgid "Custom field deleted."
+msgstr "Brugerdefineret felt slettet."
+
+#: /wp-property/core/class_core.php:728
+msgid "Property updated."
+msgstr "Ejendommen er opdateret."
+
+#: /wp-property/core/class_core.php:730
+#, php-format
+msgid "Property restored to revision from %s"
+msgstr "Ejendom gendannet fra %s"
+
+#: /wp-property/core/class_core.php:731
+#, php-format
+msgid "Property published. <a href=\"%s\">View property</a>"
+msgstr "Ejendom udgivet"
+
+#: /wp-property/core/class_core.php:732
+msgid "Property saved."
+msgstr "Ejendom gemt"
+
+#: /wp-property/core/class_core.php:733
+#, php-format
+msgid "Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+msgstr "Ejendom tilføjet. <a target=\"_blank\" href=\"%s\">Vis ejendom</a>"
+
+#: /wp-property/core/class_core.php:734
+#, php-format
+msgid "Property scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Preview property</a>"
+msgstr ""
+
+#: /wp-property/core/class_core.php:736
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: /wp-property/core/class_core.php:737
+#, php-format
+msgid "Property draft updated. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+msgstr ""
+
+#: /wp-property/core/class_core.php:759
+#: /wp-property/core/class_core.php:1324
+#: /wp-property/core/class_widgets.php:257
+#: /wp-property/core/class_widgets.php:468
+#: /wp-property/core/class_widgets.php:681
+#: /wp-property/core/class_widgets.php:906
+msgid "Title"
+msgstr "Titel"
+
+#: /wp-property/core/class_core.php:760
+msgid "Type"
+msgstr "Type"
+
+#: /wp-property/core/class_core.php:769
+#: /wp-property/core/class_functions.php:2323
+#: /wp-property/core/premium/class_wpp_property_import.php:1022
+msgid "City"
+msgstr "By"
+
+#: /wp-property/core/class_core.php:770
+msgid "Overview"
+msgstr "Oversigt"
+
+#: /wp-property/core/class_core.php:771
+#: /wp-property/core/class_core.php:903
+#: /wp-property/core/class_core.php:908
+msgid "Featured"
+msgstr "Fasilitet"
+
+#: /wp-property/core/class_core.php:772
+msgid "Order"
+msgstr "Sorter"
+
+#: /wp-property/core/class_core.php:773
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:758
+msgid "Thumbnail"
+msgstr ""
+
+#: /wp-property/core/class_core.php:841
+msgid " - "
+msgstr ""
+
+#: /wp-property/core/class_core.php:1112
+msgid "General Information"
+msgstr ""
+
+#: /wp-property/core/class_core.php:1288
+msgid "Floor plans at location:"
+msgstr "Stueplan på lokationen"
+
+#: /wp-property/core/class_core.php:1323
+msgid "Default"
+msgstr "Standard"
+
+#: /wp-property/core/class_functions.php:114
+msgid "If you have problems automatically downloading premium features, it may be due to PHP not having ownership issues over the premium feature folder."
+msgstr ""
+
+#: /wp-property/core/class_functions.php:124
+msgid "There is an ownership issue with the premium folder, which means your site cannot download WP-Property premium features and receive updates.  Please contact your host to fix this - PHP needs ownership over the <b>wp-content/plugins/wp-property/core/premium</b> folder.  Be advised: changing the file permissions will not fix this."
+msgstr ""
+
+#: /wp-property/core/class_functions.php:131
+msgid "One of the folders that is necessary for downloading additional features for the WP-Property plugin is not writable.  This means features cannot be downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-property/core/premium</b> permissions to 0755."
+msgstr ""
+
+#: /wp-property/core/class_functions.php:195
+msgid "Address revalidation failed because the Google daily address look-up limit has been exceeded."
+msgstr ""
+
+#: /wp-property/core/class_functions.php:197
+msgid "An error occured that prevented geo-location from working."
+msgstr ""
+
+#: /wp-property/core/class_functions.php:594
+#, php-format
+msgid "An error occured during premium feature check: <b> %s </b>."
+msgstr ""
+
+#: /wp-property/core/class_functions.php:643
+msgid "Feature Name"
+msgstr "Fasilitets Navn"
+
+#: /wp-property/core/class_functions.php:644
+#: /wp-property/core/class_functions.php:957
+#: /wp-property/core/class_functions.php:1044
+msgid "Version"
+msgstr ""
+
+#: /wp-property/core/class_functions.php:645
+#: /wp-property/core/class_functions.php:958
+#: /wp-property/core/class_functions.php:1045
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1202
+msgid "Description"
+msgstr "Beskrivelse"
+
+#: /wp-property/core/class_functions.php:660
+#, php-format
+msgid "WP-Property Premium Feature: %s updated to version %s from %s."
+msgstr ""
+
+#: /wp-property/core/class_functions.php:662
+#, php-format
+msgid "WP-Property Premium Feature: %s updated to version %s."
+msgstr ""
+
+#: /wp-property/core/class_functions.php:679
+msgid "Update ran successfully but no features were downloaded because the setting is disabled. Enable in the \"Developer\" tab."
+msgstr ""
+
+#: /wp-property/core/class_functions.php:682
+msgid "Update ran successfully."
+msgstr ""
+
+#: /wp-property/core/class_functions.php:956
+#: /wp-property/core/class_functions.php:1043
+#: /wp-property/core/class_functions.php:2329
+#: /wp-property/core/premium/class_agents.php:1390
+#: /wp-property/core/premium/class_wpp_supermap.php:98
+msgid "Name"
+msgstr "Navn"
+
+#: /wp-property/core/class_functions.php:959
+msgid "Minimum WPP Version"
+msgstr ""
+
+#: /wp-property/core/class_functions.php:2115
+msgid "Get Directions"
+msgstr "Vis Mapper"
+
+#: /wp-property/core/class_functions.php:2321
+msgid "Find your property"
+msgstr "Find din ejendom"
+
+#: /wp-property/core/class_functions.php:2322
+#: /wp-property/core/premium/class_agents.php:285
+#: /wp-property/core/premium/class_wpp_property_import.php:1791
+msgid "Edit"
+msgstr "Rediger"
+
+#: /wp-property/core/class_functions.php:2324
+msgid "Contact us"
+msgstr "Kontakt os"
+
+#: /wp-property/core/class_functions.php:2325
+msgid "Login"
+msgstr ""
+
+#: /wp-property/core/class_functions.php:2326
+msgid "Explore"
+msgstr "Gennemse"
+
+#: /wp-property/core/class_functions.php:2327
+msgid "Message"
+msgstr "Besked"
+
+#: /wp-property/core/class_functions.php:2330
+msgid "E-mail"
+msgstr ""
+
+#: /wp-property/core/class_functions.php:2331
+msgid "Send Message"
+msgstr "Send Besked"
+
+#: /wp-property/core/class_functions.php:2332
+msgid "Submit Inquiry"
+msgstr "Send en forespørgsel"
+
+#: /wp-property/core/class_functions.php:2333
+msgid "Inquiry"
+msgstr "Forespørgsel"
+
+#: /wp-property/core/class_functions.php:2334
+msgid "Comment About"
+msgstr "Kommenter"
+
+#: /wp-property/core/class_functions.php:2335
+msgid "Inquire About"
+msgstr "Forespørgsel om"
+
+#: /wp-property/core/class_functions.php:2336
+msgid "Inquiry About:"
+msgstr "Forespørgsel om:"
+
+#: /wp-property/core/class_functions.php:2337
+msgid "Inquiry message:"
+msgstr "Forespørgsel:"
+
+#: /wp-property/core/class_functions.php:2338
+msgid "You forgot to enter your e-mail."
+msgstr "Du skal skrive din e-mail."
+
+#: /wp-property/core/class_functions.php:2339
+msgid "You forgot to enter a message."
+msgstr "Du skal skrive en besked."
+
+#: /wp-property/core/class_functions.php:2340
+msgid "You forgot to enter your  name."
+msgstr "Du skal skrive dit navn."
+
+#: /wp-property/core/class_functions.php:2341
+msgid "Error with sending message. Please contact site administrator."
+msgstr "Fejl i forsøg på at sende besked. Kontakt venligst webstedets administrator."
+
+#: /wp-property/core/class_functions.php:2342
+msgid "Thank you for your message."
+msgstr "Tak for beskeden."
+
+#: /wp-property/core/class_property_export.php:27
+msgid "This URL lets you access your property export feed, it is custom to your site:"
+msgstr ""
+
+#: /wp-property/core/class_property_export.php:38
+#: /wp-property/core/class_property_export.php:42
+msgid "There has been an error retreiving your API key."
+msgstr ""
+
+#: /wp-property/core/class_property_export.php:86
+msgid "Invalid API key."
+msgstr ""
+
+#: /wp-property/core/class_property_export.php:94
+msgid "No published properties."
+msgstr "Ejendommen blev ikke oprettet."
+
+#: /wp-property/core/class_ud.php:414
+#: /wp-property/core/premium/class_wpp_property_import.php:1734
+msgid "Processing..."
+msgstr "Behandler..."
+
+#: /wp-property/core/class_ud.php:470
+msgid "UD Log Page for"
+msgstr ""
+
+#: /wp-property/core/class_ud.php:471
+msgid "Clear Log"
+msgstr ""
+
+#: /wp-property/core/class_ud.php:478
+msgid "Timestamp"
+msgstr ""
+
+#: /wp-property/core/class_ud.php:479
+msgid "Event"
+msgstr ""
+
+#: /wp-property/core/class_ud.php:480
+msgid "User"
+msgstr "Bruger"
+
+#: /wp-property/core/class_ud.php:747
+msgid "Cache table does not exist. Attempting to create:"
+msgstr ""
+
+#: /wp-property/core/class_ud.php:760
+#, php-format
+msgid "SQL Ran: %s , verifying existance."
+msgstr ""
+
+#: /wp-property/core/class_ud.php:765
+msgid "Table created and exists."
+msgstr ""
+
+#: /wp-property/core/class_ud.php:769
+msgid "Table not created."
+msgstr ""
+
+#: /wp-property/core/class_ud.php:836
+#: /wp-property/core/class_ud.php:873
+msgid "Log Started."
+msgstr ""
+
+#: /wp-property/core/class_ud.php:965
+msgid "Today"
+msgstr "Idag"
+
+#: /wp-property/core/class_ud.php:966
+msgid "Tomorrow "
+msgstr "Imorgen"
+
+#: /wp-property/core/class_ud.php:966
+msgid "Yesterday "
+msgstr "Igår"
+
+#: /wp-property/core/class_ud.php:967
+#, php-format
+msgid " in %d days "
+msgstr "om %d dage"
+
+#: /wp-property/core/class_ud.php:967
+#, php-format
+msgid "%d days ago"
+msgstr "%d dage siden"
+
+#: /wp-property/core/class_ud.php:1087
+msgid "Automatically logged failed JSON response: "
+msgstr ""
+
+#: /wp-property/core/class_ud.php:1214
+#, php-format
+msgid "%s hours ago"
+msgstr "%s timer siden"
+
+#: /wp-property/core/class_ud.php:1216
+#, php-format
+msgid "%s minutes ago"
+msgstr "%s minutter siden"
+
+#: /wp-property/core/class_widgets.php:97
+msgid "Other Properties"
+msgstr "Andre Ejendomme"
+
+#: /wp-property/core/class_widgets.php:97
+msgid "Show other properties (if any) with the same Parent"
+msgstr "Vis andre Ejendomme (hvis der er nogen) med samme hoved gruppe."
+
+#: /wp-property/core/class_widgets.php:158
+#: /wp-property/core/class_widgets.php:362
+#: /wp-property/core/class_widgets.php:575
+#: /wp-property/core/class_widgets.php:802
+#, php-format
+msgid "%s at %s for %s"
+msgstr "%s ved %s for %s"
+
+#: /wp-property/core/class_widgets.php:178
+#: /wp-property/core/class_widgets.php:383
+#: /wp-property/core/class_widgets.php:598
+#: /wp-property/core/class_widgets.php:826
+msgid "More"
+msgstr "Mere"
+
+#: /wp-property/core/class_widgets.php:184
+#: /wp-property/core/class_widgets.php:389
+#: /wp-property/core/class_widgets.php:604
+#: /wp-property/core/class_widgets.php:833
+msgid "View All"
+msgstr "Vis alle"
+
+#: /wp-property/core/class_widgets.php:226
+#: /wp-property/core/class_widgets.php:431
+msgid "The widget will not be displayed if the currently viewed property has no children."
+msgstr ""
+
+#: /wp-property/core/class_widgets.php:228
+#: /wp-property/core/class_widgets.php:433
+#: /wp-property/core/class_widgets.php:648
+#: /wp-property/core/class_widgets.php:874
+#: /wp-property/core/class_widgets.php:1022
+#: /wp-property/core/class_widgets.php:1229
+#: /wp-property/core/premium/class_agents.php:1561
+msgid "Title:"
+msgstr "Titel:"
+
+#: /wp-property/core/class_widgets.php:235
+#: /wp-property/core/class_widgets.php:442
+#: /wp-property/core/class_widgets.php:657
+#: /wp-property/core/class_widgets.php:881
+msgid "Hide Images?"
+msgstr "Skjul Billeder?"
+
+#: /wp-property/core/class_widgets.php:244
+#: /wp-property/core/class_widgets.php:451
+#: /wp-property/core/class_widgets.php:666
+#: /wp-property/core/class_widgets.php:890
+msgid "Image Size:"
+msgstr "Billede størrelse"
+
+#: /wp-property/core/class_widgets.php:248
+#: /wp-property/core/class_widgets.php:456
+#: /wp-property/core/class_widgets.php:671
+#: /wp-property/core/class_widgets.php:895
+msgid "Listings to display?"
+msgstr ""
+
+#: /wp-property/core/class_widgets.php:253
+#: /wp-property/core/class_widgets.php:464
+#: /wp-property/core/class_widgets.php:676
+msgid "Select the stats you want to display"
+msgstr ""
+
+#: /wp-property/core/class_widgets.php:271
+#: /wp-property/core/class_widgets.php:482
+#: /wp-property/core/class_widgets.php:695
+#: /wp-property/core/class_widgets.php:919
+msgid "Address Format:"
+msgstr "Adresse layout:"
+
+#: /wp-property/core/class_widgets.php:278
+#: /wp-property/core/class_widgets.php:489
+#: /wp-property/core/class_widgets.php:703
+#: /wp-property/core/class_widgets.php:926
+msgid "Show \"More\" link?"
+msgstr ""
+
+#: /wp-property/core/class_widgets.php:285
+#: /wp-property/core/class_widgets.php:496
+#: /wp-property/core/class_widgets.php:710
+#: /wp-property/core/class_widgets.php:933
+msgid "Show \"View All\" link?"
+msgstr ""
+
+#: /wp-property/core/class_widgets.php:302
+msgid "Child Properties"
+msgstr "Undergruppe Ejendomme"
+
+#: /wp-property/core/class_widgets.php:302
+msgid "Show child properties (if any) for currently displayed property"
+msgstr ""
+
+#: /wp-property/core/class_widgets.php:513
+msgid "Featured Properties"
+msgstr "Fasiliteter Ejendomme"
+
+#: /wp-property/core/class_widgets.php:513
+msgid "List of properties that were marked as Featured"
+msgstr ""
+
+#: /wp-property/core/class_widgets.php:730
+msgid "Featured Properies"
+msgstr ""
+
+#: /wp-property/core/class_widgets.php:750
+#: /wp-property/core/class_widgets.php:875
+msgid "Latest Properties"
+msgstr ""
+
+#: /wp-property/core/class_widgets.php:750
+msgid "List of the latest properties created on this site"
+msgstr ""
+
+#: /wp-property/core/class_widgets.php:901
+msgid "Select stats you want to display"
+msgstr ""
+
+#: /wp-property/core/class_widgets.php:951
+msgid "Property Search"
+msgstr "Søg efter ejendom"
+
+#: /wp-property/core/class_widgets.php:951
+msgid "Display a highly customizable property search form"
+msgstr ""
+
+#: /wp-property/core/class_widgets.php:1017
+msgid "No searchable property types were found."
+msgstr ""
+
+#: /wp-property/core/class_widgets.php:1032
+msgid "Use pagination"
+msgstr "Brug side navigation."
+
+#: /wp-property/core/class_widgets.php:1036
+msgid "Items per page"
+msgstr "Elementer pr side"
+
+#: /wp-property/core/class_widgets.php:1043
+msgid "Property types to search:"
+msgstr ""
+
+#: /wp-property/core/class_widgets.php:1058
+msgid "Select the attributes you want to search."
+msgstr ""
+
+#: /wp-property/core/class_widgets.php:1065
+#: /wp-property/core/premium/class_admin_tools.php:88
+msgid "Property Types"
+msgstr "Ejendoms typer"
+
+#: /wp-property/core/class_widgets.php:1106
+msgid "City is an automatically created attribute once the address is validated."
+msgstr ""
+
+#: /wp-property/core/class_widgets.php:1133
+msgid "Search Properies"
+msgstr "Søg Ejendomme"
+
+#: /wp-property/core/class_widgets.php:1156
+msgid "Property Gallery"
+msgstr "Ejendoms Galleri"
+
+#: /wp-property/core/class_widgets.php:1156
+msgid "List of all images attached to the current property"
+msgstr "Oversigt over alle ejendommens billeder"
+
+#: /wp-property/core/class_widgets.php:1235
+msgid "Thumbnail Size:"
+msgstr ""
+
+#: /wp-property/core/class_widgets.php:1241
+msgid "Popup Image Size:"
+msgstr "Popup billedets størrelse:"
+
+#: /wp-property/core/class_widgets.php:1249
+#, php-format
+msgid "Show %s Images"
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:47
+msgid "Developer"
+msgstr "Udvikler"
+
+#: /wp-property/core/premium/class_admin_tools.php:90
+msgid ""
+"<p>Create new property types using this menu. </p>\n"
+"        <p>The <b>slug</b> is automatically created from the title and is used in the back-end.  It is also used for template selection, example: floorplan will look for a template called property-floorplan.php in your theme folder, or default to property.php if nothing is found.</p>\n"
+"        <p>If <b>Searchable</b> is checked then the property will be loaded for search, and available on the property search widget.</p>\n"
+"        <p>If <b>Location Matters</b> is checked, then an address field will be displayed for the property, and validated against Google Maps API.  Additionally, the property will be displayed on the SuperMap, if the feature is installed.</p>\n"
+"        <p><b>Hidden Attributes</b> determine which attributes are not applicable to the given property type, and will be grayed out in the back-end.</p>\n"
+"        <p><b>Inheritance</b> determines which attributes should be automatically inherited from the parent property.</p>"
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:100
+#: /wp-property/core/premium/class_admin_tools.php:286
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:988
+#: /wp-property/core/premium/class_wpp_property_import.php:1030
+msgid "Property Type"
+msgstr "Ejendoms Type"
+
+#: /wp-property/core/premium/class_admin_tools.php:101
+#: /wp-property/core/premium/class_admin_tools.php:287
+#: /wp-property/core/premium/class_agents.php:689
+#: /wp-property/core/premium/class_wpp_supermap.php:99
+#: /wp-property/core/ui/page_settings.php:298
+msgid "Slug"
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:103
+msgid "Hidden Attributes"
+msgstr "Skjulte Attributter"
+
+#: /wp-property/core/premium/class_admin_tools.php:104
+msgid "Inheritance"
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:123
+#: /wp-property/core/premium/class_admin_tools.php:236
+msgid "Searchable"
+msgstr "Søgebar"
+
+#: /wp-property/core/premium/class_admin_tools.php:128
+msgid "Location Matters"
+msgstr "Lokation er betydningsfuld"
+
+#: /wp-property/core/premium/class_admin_tools.php:179
+#: /wp-property/core/premium/class_admin_tools.php:273
+#: /wp-property/core/premium/class_admin_tools.php:311
+#: /wp-property/core/premium/class_agents.php:704
+#: /wp-property/core/premium/class_wpp_property_import.php:1047
+#: /wp-property/core/premium/class_wpp_supermap.php:139
+#: /wp-property/core/ui/page_settings.php:362
+msgid "Add Row"
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:190
+msgid "Property Fields"
+msgstr "Ejendoms felter"
+
+#: /wp-property/core/premium/class_admin_tools.php:192
+msgid "Property Stats"
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:193
+msgid ""
+"<p>Property attributes are meant to be short entries that can be searchable, on the back-end attributes will be displayed as single-line input boxes. On the front-end they are displayed using a definitions list.</p>\n"
+"        <p>Making an attribute as \"searchable\" will list it as one of the searchable options in the Property Search widget settings.</p>\n"
+"        <p>Be advised, attributes added via add_filter() function supercede the settings on this page.</p>"
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:197
+msgid "If an attribute has <b>Admin Predefined Values</b>, a list of comma-separated words, a dropdown will be displayed instead of an input box on the property editing page for the given attribute."
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:203
+msgid "Attribute Name"
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:205
+msgid "Search Input"
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:206
+msgid "Admin Dropdown Values"
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:232
+msgid "Sortable"
+msgstr "Sorterbar"
+
+#: /wp-property/core/premium/class_admin_tools.php:239
+msgid "Admin Only"
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:251
+msgid "input"
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:252
+msgid "range (input)"
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:253
+msgid "range (dropdown)"
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:254
+msgid "dropdown"
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:255
+msgid "checkbox"
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:264
+#: /wp-property/core/premium/class_admin_tools.php:302
+#: /wp-property/core/premium/class_agents.php:286
+#: /wp-property/core/premium/class_agents.php:698
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1076
+#: /wp-property/core/premium/class_wpp_property_import.php:1792
+#: /wp-property/core/premium/class_wpp_supermap.php:131
+#: /wp-property/core/ui/page_settings.php:338
+msgid "Delete"
+msgstr "Slet"
+
+#: /wp-property/core/premium/class_admin_tools.php:279
+msgid "Property Meta"
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:280
+msgid "Meta is used for descriptions,  on the back-end  meta fields will be displayed as textareas.  On the front-end they will be displayed as individual sections."
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:322
+#: /wp-property/core/premium/class_wpp_property_import.php:888
+msgid "Advanced Options"
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:326
+msgid "Show Log."
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:327
+msgid "The log is always active, but the UI is hidden.  If enabled, it will be visible in the admin sidebar."
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:330
+msgid "Disable automatic feature updates."
+msgstr ""
+
+#: /wp-property/core/premium/class_admin_tools.php:331
+msgid "If disabled, WP-Property will not automatically download updates to premium features."
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:171
+msgid "Agent Image Size"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:195
+msgid "Agent Information"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:263
+msgid "Agent"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:390
+msgid "Attach to Agent"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:426
+msgid "Saved."
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:493
+msgid "No Properties."
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:511
+msgid "Create Agent"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:511
+msgid "Update Agent"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:525
+#: /wp-property/core/premium/class_agents.php:1549
+msgid "Display Name"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:530
+msgid "Username"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:533
+msgid "Usernames cannot be changed."
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:538
+msgid "E-Mail"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:544
+msgid "Widget Bio"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:548
+msgid "Content that is displayed in the agent widget."
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:554
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1355
+#: /wp-property/core/premium/class_wpp_supermap.php:698
+msgid "Options"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:560
+msgid "Allow property inquiries to be sent directly to agent."
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:568
+#: /wp-property/core/premium/class_agents.php:1552
+msgid "Full Bio"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:572
+msgid "Content that can be displayed in the shortcode."
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:595
+msgid "Primary"
+msgstr "Primær"
+
+#: /wp-property/core/premium/class_agents.php:596
+msgid "Save"
+msgstr "Gem"
+
+#: /wp-property/core/premium/class_agents.php:597
+msgid "Associated Properties"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:598
+msgid "Images"
+msgstr "Billeder"
+
+#: /wp-property/core/premium/class_agents.php:608
+msgid "Agent Shortcodes"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:609
+msgid "Show agent information:"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:609
+msgid ", or you can specify which fields to show:"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:610
+msgid "To query agent properties:"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:612
+msgid "Shortcode Attribute Fields"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:613
+msgid "The following attributes can be used in the [agent_card] shortcode."
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:632
+msgid "Example Using All Available Fields"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:655
+#: /wp-property/core/premium/class_agents.php:749
+#: /wp-property/core/premium/class_agents.php:780
+msgid "Agents"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:680
+#: /wp-property/core/premium/class_agents.php:682
+msgid "Fields"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:683
+msgid "Custom fields may be used to adapt the information about agents to suit your needs."
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:688
+msgid "Field name"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:712
+#: /wp-property/core/premium/class_agents.php:714
+msgid "Capabilities"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:715
+msgid "The agent feature adds a new WordPress role called \"Real Estate Agent\". Just like any WordPress role, different capabilities may be assigned to limit what the user can do in the system."
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:716
+msgid "To manage the role's capabilities, please consider downloading a plugin such as"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:780
+#: /wp-property/core/premium/class_wpp_property_import.php:1754
+msgid "Add New"
+msgstr "Tilføj Ny"
+
+#: /wp-property/core/premium/class_agents.php:802
+msgid "User removed."
+msgstr "Bruger fjernet."
+
+#: /wp-property/core/premium/class_agents.php:858
+msgid "Please enter a valid e-mail."
+msgstr "Indtast en gyldig e-mail."
+
+#: /wp-property/core/premium/class_agents.php:871
+msgid "Agent updated."
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:874
+msgid "Agent created."
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:877
+msgid "Edit Agent"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:923
+msgid "Associated Agents"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:974
+#, php-format
+msgid "You can add fields on the <a href=\"%s\">settings page</a>."
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:979
+msgid "Flyer Writeup"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:982
+msgid "Please enter a writeup for flyers."
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:1040
+msgid "Please save first to add images."
+msgstr "Gem før du vil tilføge billeder."
+
+#: /wp-property/core/premium/class_agents.php:1047
+msgid "No images found."
+msgstr "Billede ikke fundet"
+
+#: /wp-property/core/premium/class_agents.php:1054
+msgid "Remove"
+msgstr "Fjern"
+
+#: /wp-property/core/premium/class_agents.php:1062
+msgid "Add Image"
+msgstr "Tilføj Billede"
+
+#: /wp-property/core/premium/class_agents.php:1287
+msgid "Moderate comments"
+msgstr "Rediger kommentarer"
+
+#: /wp-property/core/premium/class_agents.php:1288
+msgid "Manage categories"
+msgstr "Håndter kategorier"
+
+#: /wp-property/core/premium/class_agents.php:1289
+msgid "Manage links"
+msgstr "Håndter links"
+
+#: /wp-property/core/premium/class_agents.php:1290
+msgid "Upload files"
+msgstr "Upload filer"
+
+#: /wp-property/core/premium/class_agents.php:1291
+msgid "Edit posts"
+msgstr "Rediger Indlæg"
+
+#: /wp-property/core/premium/class_agents.php:1292
+msgid "Edit other's posts"
+msgstr "Rediger andre indlæg"
+
+#: /wp-property/core/premium/class_agents.php:1293
+msgid "Edit published posts"
+msgstr "Rediger indlæg der er udgivet"
+
+#: /wp-property/core/premium/class_agents.php:1294
+msgid "Publish posts"
+msgstr "Udgiv indlæg"
+
+#: /wp-property/core/premium/class_agents.php:1295
+msgid "Edit pages"
+msgstr "Gediger sider"
+
+#: /wp-property/core/premium/class_agents.php:1296
+msgid "Read"
+msgstr "Læs"
+
+#: /wp-property/core/premium/class_agents.php:1297
+msgid "Edit other's pages"
+msgstr "Rediger andre sider"
+
+#: /wp-property/core/premium/class_agents.php:1298
+msgid "Edit published pages"
+msgstr "Rediger sider der er udgivet"
+
+#: /wp-property/core/premium/class_agents.php:1299
+msgid "Publish pages"
+msgstr "Udgiv sider"
+
+#: /wp-property/core/premium/class_agents.php:1300
+msgid "Delete pages"
+msgstr "Slet sider"
+
+#: /wp-property/core/premium/class_agents.php:1301
+msgid "Delete other's pages"
+msgstr "Slet andre sider"
+
+#: /wp-property/core/premium/class_agents.php:1302
+msgid "Delete published pages"
+msgstr "Slet udgivne sider"
+
+#: /wp-property/core/premium/class_agents.php:1303
+msgid "Delete posts"
+msgstr "Slæt indlæg"
+
+#: /wp-property/core/premium/class_agents.php:1304
+msgid "Delete other's posts"
+msgstr "Slæt andre indlæg"
+
+#: /wp-property/core/premium/class_agents.php:1305
+msgid "Delete published posts"
+msgstr "Slet indlæg der er udgivet"
+
+#: /wp-property/core/premium/class_agents.php:1306
+msgid "Delete private posts"
+msgstr "Slet private indlæg"
+
+#: /wp-property/core/premium/class_agents.php:1307
+msgid "Edit private posts"
+msgstr "Rediger private indlæg"
+
+#: /wp-property/core/premium/class_agents.php:1308
+msgid "Read private posts"
+msgstr "Læs private indlæg"
+
+#: /wp-property/core/premium/class_agents.php:1309
+msgid "Delete private pages"
+msgstr "Slet private sider"
+
+#: /wp-property/core/premium/class_agents.php:1310
+msgid "Edit private pages"
+msgstr "Rediger private sider"
+
+#: /wp-property/core/premium/class_agents.php:1311
+msgid "Read private pages"
+msgstr "Læs private sider"
+
+#: /wp-property/core/premium/class_agents.php:1389
+msgid "Email"
+msgstr ""
+
+#: /wp-property/core/premium/class_agents.php:1550
+msgid "Image"
+msgstr "Billede"
+
+#: /wp-property/core/premium/class_agents.php:1551
+msgid "Widget Text"
+msgstr "Widget Tekst"
+
+#: /wp-property/core/premium/class_agents.php:1558
+msgid "Email Address"
+msgstr "Email Addresse"
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:123
+#: /wp-property/core/ui/page_settings.php:261
+msgid "General Settings"
+msgstr "Generelle indstillinger"
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:124
+msgid "Unless <b>Don't make accessible for public</b> is checked for a list, it will be accessible by anybody who visits your website, provided they have a link to the list.  The lists are stored in your uploads folder, but to the users they appear to be below your main <b>Property Page</b>.  In other words, if your default property page is 'all-properties', all your lists will have urls that will go something like: http://website.com/all-properties/the-list-filename.pdf"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:125
+msgid "By default, the PDF lists are generated every time you save this page, and when any property is updated or created.  You may select <b>Regenerate list every time it is opened</b> to have the list generated every time it is opened in a browser, however, this may cause some unnecessary strain on your server."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:126
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1033
+msgid "Advanced Query"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:127
+msgid "The advanced query can be used just like the [property_overview] shortcode. For example, if you wanted the list to only show two bedroom properties, your query would simply be: <b>[property_overview bedrooms=2]</b>."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:128
+msgid "You could make these as complex as you would like. If you wanted to query all apartments between $400 and $700 dollars in St. Paul, you would use: <b>[property_overview property_type=apartment price=400-700 city='St. Paul' sorrt_by=route]</b>."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:129
+msgid "List Creation"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:130
+msgid "PDF Lists are deleted every time a change is made to this page, and may either be regenerated by clicking the Regenerate button below, or by trying to open the list on the front-end."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:131
+msgid "When a single property is updated, the list(s) it is included on are deleted as well.  It is up to you if you want to regenerate the lists manually, or wait for a visitor to attempt to open a list, at which point it will be regenerated automatically."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:143
+msgid "PDF Flyer Options"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:155
+msgid "Exclude property from PDF Lists"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:737
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:926
+msgid "PDF Lists"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:753
+#: /wp-property/core/premium/class_wpp_property_import.php:50
+msgid "Property Title"
+msgstr "Ejendommens Titel"
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:757
+msgid "Full Description"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:792
+msgid "List settings updated and old lists have been deleted. "
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:831
+msgid "Sample PDF List"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:887
+msgid "Regenerating PDF Lists. If you have a lot of properties this process may take a while, please do not close this browser window until it is complete."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:907
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1534
+msgid "Finished."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:964
+msgid "List Name:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:969
+msgid "File Name:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:975
+msgid "Actions:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:976
+msgid "View PDF"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:987
+msgid "Group by:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:992
+msgid "Properties per page:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1002
+msgid "Show child properties."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1007
+msgid "Don't make accessible for public."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1012
+msgid "Regenerate list every time it is opened."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1025
+msgid "Contact Information"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1028
+msgid "Contact Information will be shown on every page"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1036
+msgid "You may use [property_overview] shortcode tags to query properties for this list. Click the \"Help\" tab in the top right corner for more details."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1041
+msgid "Header & Footer background color:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1046
+msgid "Header & Footer text color:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1051
+msgid "Text color:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1087
+msgid "Add List"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1088
+msgid "Save Lists"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1096
+msgid "Regenerate all PDF Lists.  This will create, or recreate, all your lists."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1098
+msgid "Refresh Page"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1103
+msgid "Shortcode examples:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1105
+msgid "Returns a formatted HTML link to the PDF List."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1106
+msgid "Returns a html link to the PDF List with custom title."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1107
+msgid "Returns the raw URL to the PDF List (for use in custom html)."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1108
+msgid "For use with a custom CSS class."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1109
+msgid "Returns url_to_custom_image with a link to the PDF List."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1173
+msgid "PDF Flyer"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1190
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1399
+msgid "Details"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1218
+msgid "Location"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1300
+#, php-format
+msgid ", or <a href=\"%s\" target=\"_blank\">view flyer</a>."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1314
+msgid "PDF"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1349
+#, php-format
+msgid "Warning: <b>%s</b> is not writable, PDF flyer cannot be created."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1361
+msgid "Show panel that allows you to create PDF property lists."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1366
+msgid "Generate property flyers automatically when somebody tries to view them for the first time."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1371
+msgid "Generate QR Code"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1379
+#: /wp-property/core/ui/page_settings.php:163
+msgid "Display"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1384
+msgid "Title (Header)"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1389
+msgid "Tagline under Title (Header)"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1394
+msgid "QR Code's note (if QR Code exists)"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1404
+msgid "Description (if exists)"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1409
+msgid "Location on Map (if exists)"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1414
+msgid "Features (if exists)"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1419
+msgid "Agent Information (if exists)"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1426
+msgid "Primary Photo Size"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1433
+msgid "Secondary Images"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1448
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1451
+msgid "Logo URL"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1455
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1458
+msgid "Header color"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1463
+msgid "Section background color"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1514
+msgid "Property List is got. Start generate PDF Flyers..."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1536
+msgid "There are no any property to generate PDF Flyer for."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1540
+msgid "Looks like, something caused error on server. Please, try to regenerate PDF Flyers later."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_pdf_flyer.php:1900
+msgid "Flyer"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:51
+msgid "Property Content"
+msgstr "Ejendoms indhold"
+
+#: /wp-property/core/premium/class_wpp_property_import.php:52
+msgid "Property Excerpt"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:53
+msgid "Property Status"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:54
+msgid "Property Order"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:55
+msgid "Property Date"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:103
+msgid "ago"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:112
+msgid "Last Import"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:134
+msgid "Time: "
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:187
+msgid "Look up XML import history."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:188
+msgid "Show XML Import History"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:320
+msgid "Schedule coult not be imported."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:372
+#: /wp-property/core/premium/class_wpp_property_import.php:1779
+#: /wp-property/core/premium/class_wpp_property_import.php:1831
+msgid "Import"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:503
+msgid "XML file cannot be loaded."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:779
+msgid "Preview limited to 5 objects, proceed once settings are configured."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:810
+msgid "Source (URL)"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:815
+msgid "URL"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:818
+msgid "XML Feed"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:819
+msgid "Google Spreadsheet"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:820
+msgid "WP-Property Feed"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:827
+msgid "Send GET variables as POST data."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:832
+msgid "Google Username"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:837
+msgid "Google Password"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:842
+msgid "Google Extra Query Vars"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:843
+msgid "See the <a href=\"http://code.google.com/apis/spreadsheets/data/3.0/reference.html#ListParameters\" target=\"_blank\">Google Spreadsheet API docs</a> for the format of this field (should be name value pairs, without the beginning \"?\")"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:847
+msgid "XPath Query for property elements:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:864
+msgid "Give the import some sort of title for reference."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:871
+msgid "Default Property Type"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:879
+msgid "Will be defaulted to if no xPath rule exists for the \"Property Type\"."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:897
+msgid "Allow import job to be run from URL without logging in."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:904
+msgid "Remove and re-download all images."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:910
+msgid "Do not import properties that have been imported less than "
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:912
+msgid "hour(s) ago."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:921
+msgid "Remove listings that are no longer in source XML from this site's database."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:929
+msgid "Completely remove all existing properties prior to import."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:937
+msgid "Remove PDF flyers on import."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:944
+msgid "Revalidate address on completion (get latitude and longitude for every property using Google Maps API)."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:962
+msgid "Toggle Advanced Options"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:969
+msgid "Automatic Matching"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:971
+msgid "Use XPath rules to setup the paths to the individual XML attributes to match them up with WP-Property attributes."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:972
+msgid "You can also try to automate the matching.  This will work for WP-Property exports and imports, but will have mixed results with uniquely formatted feeds:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:973
+msgid "Automatically Match"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:979
+msgid "Attribute Map"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:986
+msgid "WP-Property Attribute"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:987
+msgid "XPath Rule"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1003
+msgid "WordPress Attributes"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1009
+msgid "Taxonomies"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1014
+msgid "Attributes"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1020
+msgid "Street Number"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1021
+msgid "Street"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1023
+msgid "County"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1024
+msgid "State"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1025
+msgid "Country"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1026
+msgid "Postal Code"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1029
+msgid "WP-Property Attributes"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1031
+msgid "Global Property ID"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1034
+msgid "Display Address"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1046
+msgid "Delete Selected"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1065
+msgid "Unique ID field."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1070
+msgid "Save Configuration"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1192
+msgid "Schedule imported from file."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1405
+msgid "Are you sure?"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1740
+msgid "Source is good."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1745
+msgid "Cannot load source."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1754
+msgid "Property Importer"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1793
+msgid "Run Now"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1794
+msgid "Save to File"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1820
+msgid "You do not have any saved schedules. Create one now."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1829
+msgid "Import Schedule"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1919
+msgid "Attempted to update propertybuy wp_update_post() did not return an ID. "
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_property_import.php:1973
+msgid "Object import failed.  Post cold not be created nor updates, and post_id was not found or created to continue import."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:159
+msgid "Slideshow Options"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:423
+#: /wp-property/core/premium/class_wpp_slideshow.php:1158
+msgid "Slideshow Images:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:445
+#: /wp-property/core/premium/class_wpp_slideshow.php:1172
+msgid "All Images:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:543
+msgid "Image size does not exist."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:545
+msgid "Original image is too small."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:547
+msgid "Regenerate thumbnail."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:594
+#: /wp-property/core/premium/class_wpp_slideshow.php:603
+#: /wp-property/core/premium/class_wpp_slideshow.php:1331
+msgid "Slideshow"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:653
+#: /wp-property/core/premium/class_wpp_slideshow.php:865
+#: /wp-property/core/premium/class_wpp_slideshow.php:1126
+msgid "Global Slideshow"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:697
+msgid "Single Listing Slideshow"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:718
+msgid "Slideshow image size to be used for single property pages."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:724
+msgid "Thumbnail Size"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:729
+msgid "This width is used on \"Slideshow\" page on the Property editing page to display available images, this setting <b>does not</b> affect the actual slideshow on the front-end."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:740
+msgid "Effect:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:746
+msgid "Effect that will be used to change from one image to the next."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:750
+msgid "Slices:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:756
+msgid "If the transition includes slices, this number determines how many slices to cut the image up into during transitions."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:760
+msgid "Animation Speed:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:766
+msgid "How quickly the transition should happen, in miliseconds."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:770
+msgid "Pause Time:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:776
+msgid "The pause time between transitions."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:902
+msgid "Slideshow selection and order saved."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:1059
+msgid "Loading..."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:1135
+msgid "WP-Property Slideshow"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:1136
+msgid "This slideshow can be integrated into your front-end pages by either using the shortcode, or pasting PHP code into your theme."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:1139
+msgid "Drag images from selection on the left to the selection on the right, and then click save."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:1140
+#, php-format
+msgid "This list gets all images from your media library that are over %s pixels wide and %s pixels tall."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:1141
+msgid "To include the slideshow into the content of a property, use the following shortcode: [property_slideshow]"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:1142
+msgid "Developers: Include the slideshow in your PHP files by using global_slideshow(); for the global slideshow and property_slideshow(property_id); for property-specific slideshows. "
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:1149
+msgid "Save Selection and Order"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:1225
+msgid "Disable slideshow on property page."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:1316
+msgid "Some Slideshow Options"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:1325
+msgid "WPP Slideshow"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_slideshow.php:1332
+msgid "WPP Slideshow with options"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_supermap.php:39
+msgid "Supermap"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_supermap.php:65
+msgid "Sidebar Attributes"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_supermap.php:67
+msgid "Select the attributes you want to display in the left sidebar on the supermap."
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_supermap.php:81
+msgid "Supermap sidebar thumbnail:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_supermap.php:85
+msgid "If you create a new image size, please be sure to regenerate all thumbnails. "
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_supermap.php:90
+msgid "Map Areas:"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_supermap.php:100
+msgid "Fill Color"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_supermap.php:101
+msgid "Opacity"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_supermap.php:102
+msgid "Stoke Color"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_supermap.php:103
+msgid "Hover Color"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_supermap.php:163
+msgid "Supermap Options"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_supermap.php:170
+msgid "Exclude property from supermap"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_supermap.php:777
+#: /wp-property/core/premium/class_wpp_supermap.php:787
+#: /wp-property/core/premium/class_wpp_supermap.php:806
+msgid "Any"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_supermap.php:780
+msgid "+"
+msgstr ""
+
+#: /wp-property/core/premium/class_wpp_supermap.php:820
+msgid "Loading"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:28
+msgid "Settings updated."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:137
+msgid "Property Settings"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:162
+msgid "Main"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:184
+msgid "Plugins"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:186
+msgid "Help"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:197
+#: /wp-property/core/ui/page_settings.php:403
+msgid "Property Page"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:200
+msgid "Property (Default)"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:218
+msgid "Always overwrite this page's content with [property_overview]."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:225
+msgid "If checked, be sure to include [property_overview] somewhere in the content, or no properties will be displayed."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:228
+msgid "View list of available shortcodes."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:232
+msgid "The <b>property page</b> will be used to display property search results, as well as the base for property URLs.  For example, if the URL of your property page is "
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:237
+msgid "Default Phone Number"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:240
+msgid "Phone number to use when a property-specific phone number is not specified."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:245
+msgid "Address Attribute"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:247
+msgid "Attribute to use for address:"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:249
+msgid "and localize for:"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:266
+msgid "Automatically include default CSS."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:271
+msgid "Do not load theme-specific stylesheet."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:272
+msgid "This version of WP-Property has a stylesheet made specifically for the theme you are using."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:282
+msgid "Image Sizes"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:285
+msgid "Image sizes used throughout the plugin."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:287
+#, php-format
+msgid "After adding/removing image size, be sure to <a href=\"%s\">regenerate thumbnails</a> using the Regenerate Thumbnails plugin."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:291
+msgid "We strongly recommend to <a href=\"http://wordpress.org/extend/plugins/regenerate-thumbnails/\">Regenerate Thumbnails</a> plugin by Viper007Bond."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:299
+msgid "Width"
+msgstr "Brede"
+
+#: /wp-property/core/ui/page_settings.php:300
+msgid "Height"
+msgstr "Højde"
+
+#: /wp-property/core/ui/page_settings.php:376
+msgid "Overview Shortcode"
+msgstr "Oversigt koder"
+
+#: /wp-property/core/ui/page_settings.php:379
+msgid ""
+"These are the settings for the [property_overview] shortcode.  The shortcode displays a list of all building / root properties.<br />\n"
+"        The display settings may be edited further by customizing the <b>wp-content/plugins/wp-properties/templates/property-overview.php</b> file.  To avoid losing your changes during updates, create a <b>property-overview.php</b> file in your template directory, which will be automatically loaded."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:383
+msgid "Thumbnail size:"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:385
+msgid "Show children properties."
+msgstr "Vis undergruppe ejendomme."
+
+#: /wp-property/core/ui/page_settings.php:388
+msgid "Show larger image of property when image is clicked using fancybox."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:394
+msgid "Show pagination on bottom of results."
+msgstr "Vis side navigation i bunden af resultatet."
+
+#: /wp-property/core/ui/page_settings.php:405
+msgid ""
+"These are the settings for the [property_overview] shortcode.  The shortcode displays a list of all building / root properties.<br />\n"
+"        The display settings may be edited further by customizing the <b>wp-content/plugins/wp-properties/templates/property.php</b> file.  To avoid losing your changes during updates, create a <b>property.php</b> file in your template directory, which will be automatically loaded."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:409
+msgid "Display larger image, or slideshow, at the top of the property listing."
+msgstr "Vis et større billede, eller slideshow, i toppen af ejendommens oversigt."
+
+#: /wp-property/core/ui/page_settings.php:420
+msgid "Google Maps"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:424
+msgid "Map Thumbnail Size:"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:425
+msgid "Map Zoom Level:"
+msgstr "Kortets Zoom niveau:"
+
+#: /wp-property/core/ui/page_settings.php:428
+msgid "Attributes to display in popup after a property on a map is clicked."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:449
+msgid "Address Display"
+msgstr "Vis Adresse"
+
+#: /wp-property/core/ui/page_settings.php:456
+msgid "Available tags:"
+msgstr "Tilgængelige tags"
+
+#: /wp-property/core/ui/page_settings.php:462
+msgid "Currency & Numbers"
+msgstr "Valuta & Tal"
+
+#: /wp-property/core/ui/page_settings.php:465
+msgid "Currency symbol."
+msgstr "Valuta symbol."
+
+#: /wp-property/core/ui/page_settings.php:467
+msgid "Thousands separator symbol:"
+msgstr "Tusindtalsseparator symbol:"
+
+#: /wp-property/core/ui/page_settings.php:470
+msgid ". (period)"
+msgstr ". (punktum)"
+
+#: /wp-property/core/ui/page_settings.php:471
+msgid ", (comma)"
+msgstr ", (komma)"
+
+#: /wp-property/core/ui/page_settings.php:473
+msgid "The character separating the 1 and the 5: $1<b>,</b>500"
+msgstr "Karakteren imellem 1 og 5: $1<b>,</b>500"
+
+#: /wp-property/core/ui/page_settings.php:478
+msgid "Currency symbol placement:"
+msgstr "Valuta symbol placering"
+
+#: /wp-property/core/ui/page_settings.php:481
+msgid "Before number"
+msgstr "Før nummer"
+
+#: /wp-property/core/ui/page_settings.php:482
+msgid "After number"
+msgstr "Efter nummer"
+
+#: /wp-property/core/ui/page_settings.php:494
+msgid "Admin Settings"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:498
+msgid "Thumbnail size for property images displayed on Properties page: "
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:500
+msgid "Completely hide hidden attributes when editing properties."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:533
+msgid "WP-Property Premium Features"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:534
+msgid "Premium features will become available shortly, we are still waiting on more feedback on the core of the plugin."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:535
+msgid "When purchasing the premium features you will need to specify your domain to add the license correctly.  This if your domain:"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:569
+msgid "[purchase feature]"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:584
+#, php-format
+msgid "This feature is disabled because it requires WP-Property %1$s or higher."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:586
+msgid "Disable plugin."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:590
+msgid "Feature installed, using version"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:594
+#, php-format
+msgid "Please visit <a href=\"%s\">TwinCitiesTech.com</a> to purchase this feature."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:609
+msgid "Enter in the ID of the property you want to look up, and the class will be displayed below."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:611
+msgid "Lookup"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:611
+#: /wp-property/core/ui/page_settings.php:619
+msgid "Cancel"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:618
+msgid "Look up the <b>$wp_properties</b> global settings array.  This array stores all the default settings, which are overwritten by database settings, and custom filters."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:619
+msgid "Show $wp_properties"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:625
+msgid "Restore Backup of WP-Property Configuration"
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:626
+msgid "Download Backup of Current WP-Property Configuration."
+msgstr ""
+
+#: /wp-property/core/ui/page_settings.php:630
+msgid "Force check of allowed premium features."
+msgstr "Gennemtving kontrol af tilladt ekstra faciliteter."
+
+#: /wp-property/core/ui/page_settings.php:631
+msgid "Check Updates"
+msgstr "Kontroller Opdateringer"
+
+#: /wp-property/core/ui/page_settings.php:637
+msgid "Revalidate"
+msgstr "Valider igen"
+
+#: /wp-property/core/ui/page_settings.php:643
+msgid "Memory Usage:"
+msgstr "Brugt hukommelses:"
+
+#: /wp-property/core/ui/page_settings.php:646
+msgid "Peak Memory Usage:"
+msgstr "Max brugt hukommelses:"
+
+#: /wp-property/core/ui/page_settings.php:660
+msgid "Save Changes"
+msgstr "Gem ændringer"
+
+#: /wp-property/core/ui/property_metaboxes.php:19
+#: /wp-property/core/ui/property_metaboxes.php:160
+msgid "(no parent)"
+msgstr "(ingen hoved gruppe)"
+
+#: /wp-property/core/ui/property_metaboxes.php:25
+#: /wp-property/core/ui/property_metaboxes.php:26
+msgid "Parent"
+msgstr "Hoved gruppe"
+
+#: /wp-property/core/ui/property_metaboxes.php:34
+msgid "Template"
+msgstr "Skabelon"
+
+#: /wp-property/core/ui/property_metaboxes.php:35
+msgid "Page Template"
+msgstr "Side Skabelon"
+
+#: /wp-property/core/ui/property_metaboxes.php:36
+msgid "Default Template"
+msgstr "Standard Skabelon "
+
+#: /wp-property/core/ui/property_metaboxes.php:43
+msgid "Need help? Use the Help tab in the upper right of your screen."
+msgstr "Brug for hjælp, Brug Hjælp øverst til højre"
+
+#: /wp-property/core/ui/property_metaboxes.php:164
+msgid "Falls Under"
+msgstr "Hører ind under"
+
+#: /wp-property/core/ui/property_metaboxes.php:212
+#: /wp-property/core/ui/property_metaboxes.php:255
+#, php-format
+msgid "Editing %s is disabled, it may be inherited."
+msgstr "Redigering %s er deaktiveret, det kan være nedarvet."
+
+#: /wp-property/core/ui/property_metaboxes.php:225
+msgid "Enable."
+msgstr "Aktiver"
+
+#: /wp-property/templates/property-overview-page.php:24
+msgid "Sorry, we could not find what you were looking for.  Since you are here, take a look at some of our properties."
+msgstr "Beklager, vi kunne ikke finde det du søgte. Da du er her, tage et kig på nogle af vores ejendomme."
+
+#: /wp-property/templates/property-overview.php:68
+msgid " of "
+msgstr " af "
+
+#: /wp-property/templates/property-overview.php:132
+#, php-format
+msgid "Sorry, no properties found - try expanding your search, or <a href=\"%s\">view all</a>."
+msgstr "Desværre, ingen ejendomme fundet - udvid din søgning , eller <a href=\"%s\">Vis alle</a>."
+
+#: /wp-property/templates/property-pagination.php:22
+msgid "Prev"
+msgstr "Forrige"
+
+#: /wp-property/templates/property-pagination.php:39
+msgid "Next"
+msgstr "Næste"
+
+#: /wp-property/templates/property-pagination.php:46
+msgid "Order By:"
+msgstr "Sorter efter:"
+
+#: /wp-property/templates/property.php:145
+msgid "Interested?"
+msgstr "Interesseret?"
+
+#: /wp-property/templates/property.php:151
+msgid "Return to building page."
+msgstr "Tilbage til bygning siden."
+
+#: /wp-property/templates/template-functions.php:27
+msgid "Conditional query tags do not work before the query is run. Before then, they always return false."
+msgstr ""
+
+#: /wp-property/templates/template-functions.php:263
+msgid "No"
+msgstr "Nej"
+
+#: /wp-property/templates/template-functions.php:340
+msgid "Price:"
+msgstr "Pris:"
+
+#: /wp-property/templates/template-functions.php:341
+msgid "Bed(s):"
+msgstr "Senge:"
+
+#: /wp-property/templates/template-functions.php:342
+msgid "Bath(s):"
+msgstr "Bade:"
+
+#: /wp-property/templates/template-functions.php:343
+msgid "Square Ft:"
+msgstr "Kvadrat meter:"
+
+#: /wp-property/templates/template-functions.php:420
+msgid "Type:"
+msgstr "Type:"
+
+#: /wp-property/templates/template-functions.php:517
+msgid "Search"
+msgstr "Søg"
+

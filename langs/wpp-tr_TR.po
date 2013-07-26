@@ -1,0 +1,2236 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-05-11 14:34-0500\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Hakan Cengiz <hakancengiz@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"X-Poedit-KeywordsList: __;_e;_x;_n;_n_noop;_c\n"
+"X-Poedit-Basepath: C:\\wamp\\www\\usabilitydynamics.com\\development\\wp-property\\wp-content\\plugins\\wp-property\\\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SearchPath-0: C:\\wamp\\www\\usabilitydynamics.com\\development\\wp-property\\wp-content\\plugins\\wp-property\n"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:57
+msgid "Building"
+msgstr "Yapı"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:58
+msgid "Floorplan"
+msgstr "Daire"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:59
+msgid "Single Family Home"
+msgstr "Müstakil ev"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:72
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:955
+msgid "Address"
+msgstr "Adres"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:73
+msgid "Price"
+msgstr "Fiyat"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:74
+msgid "Bedrooms"
+msgstr "Yatak Odası"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:75
+msgid "Bathrooms"
+msgstr "Banyo"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:76
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:79
+msgid "Deposit"
+msgstr "Depozito"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:77
+msgid "Area"
+msgstr "Bölge"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:78
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2068
+msgid "Phone Number"
+msgstr "Telefon"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:86
+msgid "Lease Terms"
+msgstr "Kiralama koşulları"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:87
+msgid "Pet Policy"
+msgstr "Evcil hayvan koşulları"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:88
+msgid "School"
+msgstr "Okul"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:89
+msgid "Tagline"
+msgstr "Etiketler"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:136
+msgid "Studio"
+msgstr "Stüdyo"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:175
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:177
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:187
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:188
+msgid "Features"
+msgstr "Özellikler"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:178
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:189
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:198
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:902
+msgid "Feature"
+msgstr "Özellik"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:179
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:190
+msgid "Search Features"
+msgstr "Arama seçenekleri"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:180
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:191
+msgid "All Features"
+msgstr "Tüm seçenekler"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:181
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:192
+msgid "Parent Feature"
+msgstr "Üst özellik"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:182
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:193
+msgid "Parent Feature:"
+msgstr "Üst özellik"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:183
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:194
+msgid "Edit Feature"
+msgstr "Özelliği düzenle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:184
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:195
+msgid "Update Feature"
+msgstr "Özelliği güncelle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:185
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:196
+msgid "Add New Feature"
+msgstr "Yeni özellik ekle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:186
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:197
+msgid "New Feature Name"
+msgstr "Yeni özellik adı"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:205
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:207
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:217
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:218
+msgid "Community Features"
+msgstr "Topluluk özellikleri"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:208
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:219
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:228
+msgid "Community Feature"
+msgstr "Topluluk özelliği"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:209
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:220
+msgid "Search Community Features"
+msgstr "Topluluk özellikleri arama"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:210
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:221
+msgid "All Community Features"
+msgstr "Tüm topluluk özellikleri"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:211
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:222
+msgid "Parent Community Feature"
+msgstr "Üst topluluk özelliği"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:212
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:223
+msgid "Parent Community Feature:"
+msgstr "Üst topluluk özelliği:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:213
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:224
+msgid "Edit Community Feature"
+msgstr "Topluluk özelliğini düzenle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:214
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:225
+msgid "Update Community Feature"
+msgstr "Topluluk özelliğini güncelle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:215
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:226
+msgid "Add New Community Feature"
+msgstr "Yeni topluluk özelliği"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:216
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:227
+msgid "New Community Feature Name"
+msgstr "Yeni topluluk özelliği adı"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:239
+msgid "The property type will determine the layout."
+msgstr "Emlak tipi dış görünümü belirleyecek"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:240
+msgid "Customize what appears in search results in the attribute section.  For example: 1bed, 2baths, area varies slightly."
+msgstr "Aramalarınızda sonuçlarınızı seçeneklerden özelleştirin. Örneğin: 1yatak, 2banyo, alan hafif değişiklik gösterir gibi."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:241
+msgid "Will appear on overview pages and on top of every listing page."
+msgstr "Genel görünüm sayfalarında ve her listeyen sayfanın başında görüntülenecek."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/default_api.php:119
+msgid "For Sale"
+msgstr "Satılık"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/default_api.php:120
+msgid "For Rent"
+msgstr "Kiralık"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/default_api.php:127
+msgid "This is a rental property."
+msgstr "Bu emlak kiralıktır."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/default_api.php:133
+msgid "This property is for sale."
+msgstr "Bu emlak satılıktır."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/default_api.php:152
+msgid "Set Coordinates Manually (When unchecked the coordinates will be set (and validated) by Google Maps)"
+msgstr "Koordinatları elle atayın (İşaretli değilken Google tarafından atanacaktır)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/default_api.php:157
+msgid "Latitude"
+msgstr "Enlem"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/default_api.php:162
+msgid "Longitude"
+msgstr "Boylam"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/default_api.php:222
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/default_api.php:227
+msgid "Yes"
+msgstr "Evet"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/default_api.php:261
+msgid "Format phone number."
+msgstr "Telefon numarası biçimlendir"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/default_api.php:309
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:1744
+msgid " sq ft."
+msgstr "metrekare"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/default_api.php:482
+msgid "Address was validated by Google Maps."
+msgstr "Adres Google Maps tarafından doğrulandı."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/default_api.php:484
+msgid "Address has not yet been validated, should be formatted as: street, city, state, postal code, country. Locations are validated through Google Maps."
+msgstr "Adres henüz doğrulanmadı, şu şekilde biçimlendirilmeli: cadde, şehir, eyalet, postakodu, ülke. Adresler Google Maps tarafından doğrulanır."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:133
+msgid "Properties"
+msgstr "Emlaklar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:134
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:155
+msgid "Property"
+msgstr "Emlak"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:135
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:770
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1573
+msgid "Add New"
+msgstr "Yeni ekle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:136
+msgid "Add New Property"
+msgstr "Yeni emlak ekle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:137
+msgid "Edit Property"
+msgstr "Emlak düzenle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:138
+msgid "New Property"
+msgstr "Yeni emlak"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:139
+msgid "View Property"
+msgstr "Emlak görüntüle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:140
+msgid "Search Properties"
+msgstr "Arama seçenekleri"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:141
+msgid "No properties found"
+msgstr "Emlak bulunamadı"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:142
+msgid "No properties found in Trash"
+msgstr "Çöp kutusunda emlak bulunamadı"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:205
+#, php-format
+msgid "Property: %s"
+msgstr "Emlak: %s"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:207
+#, php-format
+msgid "Sidebar located on the %s page."
+msgstr "Kenar çubuğu %s sayfasına yerleştirildi."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:290
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:369
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:102
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:204
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:735
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:409
+#, php-format
+msgid "Be advised, since you don't have permalinks enabled, you must visit the <a href=\"%s\">Settings Page</a> and set a custom property overview page."
+msgstr "Permalinkleri aktif etmediğiniz sürece <a href=\"%s\">Ayarlar Sayfası</a>'nı ziyaret etmeniz ve özelleştirilmiş emlak sayfası atamanız tavsiye edilir."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:410
+#, php-format
+msgid "By default, your property overview will be displayed on the <a href=\"%s\">%s</a> page. You may change the overview page on the <a href=\"%s\">Settings Page</a>"
+msgstr "Varsayılan olarak, emlak sayfanız <a href=\"%s\">%s</a> olarak görüntülenecek. Genel görünüm sayfasını <a href=\"%s\">Ayarlar Sayfası</a>'ndan değiştirebilirsiniz."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:416
+msgid "Thank you for installing WP-Property!"
+msgstr "WP-Property Emlak aracını yüklediğiniz için teşekkürler!"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:418
+msgid "You may also visit <a href=\"http://twincitiestech.com/plugins/wp-property/\">TwinCitiesTech.com</a> for more information, and <a href=\"http://twincitiestech.com/plugins/wp-property/screencasts/\">screencasts</a>."
+msgstr "Daha fazla bilgi için <a href=\"http://twincitiestech.com/plugins/wp-property/\">TwinCitiesTech.com</a> ve <a href=\"http://twincitiestech.com/plugins/wp-property/screencasts/\">screencasts</a> adreslerini ziyaret edebilirsiniz."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:657
+msgid "Menu Sort Order:"
+msgstr "Menü sıralaması:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:660
+msgid "Display property in featured listing."
+msgstr "Özellikli Emlaklarda göster."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:723
+#, php-format
+msgid "Property updated. <a href=\"%s\">view property</a>"
+msgstr "Emlak güncellendi. <a href=\"%s\">Emlak görüntüle</a>"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:724
+msgid "Custom field updated."
+msgstr "Özel alan güncellendi."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:725
+msgid "Custom field deleted."
+msgstr "Özel alan silindi."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:726
+msgid "Property updated."
+msgstr "Emlak güncellendi."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:728
+#, php-format
+msgid "Property restored to revision from %s"
+msgstr "Emlak %s sürümünden geri yüklendi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:729
+#, php-format
+msgid "Property published. <a href=\"%s\">View property</a>"
+msgstr "Emlak yayımlandı. <a href=\"%s\">Emlak görüntüle</a>"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:730
+msgid "Property saved."
+msgstr "Emlak kaydedildi."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:731
+#, php-format
+msgid "Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+msgstr "Emlak eklendi. <a target=\"_blank\" href=\"%s\">Emlak önizleme</a>"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:732
+#, php-format
+msgid "Property scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Preview property</a>"
+msgstr "Emlak takvime eklendi: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Emlak önizleme</a>"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:734
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:735
+#, php-format
+msgid "Property draft updated. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+msgstr "Emlak taslağı güncellendi.  <a target=\"_blank\" href=\"%s\">Emlak önizleme</a>"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:757
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:1318
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:257
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:468
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:681
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:906
+msgid "Title"
+msgstr "Başlık"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:758
+msgid "Type"
+msgstr "Tip"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:767
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2063
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:958
+msgid "City"
+msgstr "İl"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:768
+msgid "Overview"
+msgstr "Genel görünüm"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:769
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:900
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:905
+msgid "Featured"
+msgstr "Özellikli"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:770
+msgid "Order"
+msgstr "Sipariş"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:771
+msgid "Thumbnail"
+msgstr "Küçük resim"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:839
+msgid " - "
+msgstr "-"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:1106
+msgid "General Information"
+msgstr "Genel bilgiler"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:1282
+msgid "Floor plans at location:"
+msgstr "Daire planları:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:1317
+msgid "Default"
+msgstr "Varsayılan"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:39
+msgid "If you have problems automatically downloading premium features, it may be due to PHP not having ownership issues over the premium feature folder."
+msgstr "Ücretli özellikleri otomatik indirirken problem yaşıyorsanız, PHP ücretli özellikler klasörünüzün sahipliğine sahip olmayabilir."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:49
+msgid "There is an ownership issue with the premium folder, which means your site cannot download WP-Property premium features and receive updates.  Please contact your host to fix this - PHP needs ownership over the <b>wp-content/plugins/wp-property/core/premium</b> folder.  Be advised: changing the file permissions will not fix this."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:56
+msgid "One of the folders that is necessary for downloading additional features for the WP-Property plugin is not writable.  This means features cannot be downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-property/core/premium</b> permissions to 0755."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:120
+msgid "Address revalidation failed because the Google daily address look-up limit has been exceeded."
+msgstr "Adres doğrulanamadı, çünkü Google günlük adres gözatma sınırı aşıldı."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:122
+msgid "An error occured that prevented geo-location from working."
+msgstr "Geo-yerleşim çalışmasına engel olan bir hata oluştu."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:486
+#, php-format
+msgid "An error occured during premium feature check: <b> %s </b>."
+msgstr "Ücretli özellik kontrolü yaparken bir hata oluştu: <b> %s </b>."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:539
+msgid "Feature Name"
+msgstr "Özellik adı"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:540
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:846
+msgid "Version"
+msgstr "Sürüm"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:541
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:847
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:142
+msgid "Description"
+msgstr "Açıklama"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:556
+#, php-format
+msgid "WP-Property Premium Feature: %s updated to version %s from %s."
+msgstr "WP-Property Emlak ücretli özellik: %s, yeni sürüme güncellendi %s, eski sürüm %s."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:558
+#, php-format
+msgid "WP-Property Premium Feature: %s updated to version %s."
+msgstr "WP-Property Emlak ücretli özellik: eski sürüm %s, yeni sürüme güncellendi %s."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:575
+msgid "Update ran successfully."
+msgstr "Güncelleme başarılı bir şekilde çalıştırıldı."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:845
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2069
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1392
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:96
+msgid "Name"
+msgstr "Ad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:1936
+msgid "Get Directions"
+msgstr "Yön bul"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2061
+msgid "Find your property"
+msgstr "Emlak bul"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2062
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:285
+msgid "Edit"
+msgstr "Düzenle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2064
+msgid "Contact us"
+msgstr "Bize yazın"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2065
+msgid "Login"
+msgstr "Giriş"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2066
+msgid "Explore"
+msgstr "Araştır"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2067
+msgid "Message"
+msgstr "Mesaj"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2070
+msgid "E-mail"
+msgstr "E-posta"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2071
+msgid "Send Message"
+msgstr "Mesaj gönder"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2072
+msgid "Submit Inquiry"
+msgstr "Sorgu gönder"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2073
+msgid "Inquiry"
+msgstr "Sorgu"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2074
+msgid "Comment About"
+msgstr "Yorum bırak"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2075
+msgid "Inquire About"
+msgstr "Sorgu yaz"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2076
+msgid "Inquiry About:"
+msgstr "Sorgu yaz:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2077
+msgid "Inquiry message:"
+msgstr "Sorgu tümcesi:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2078
+msgid "You forgot to enter your e-mail."
+msgstr "E-posta girmeyi unuttunuz."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2079
+msgid "You forgot to enter a message."
+msgstr "Mesaj girmeyi unuttunuz."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2080
+msgid "You forgot to enter your  name."
+msgstr "Adınızı girmeyi unuttunuz."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2081
+msgid "Error with sending message. Please contact site administrator."
+msgstr "Mesaj gönderirken hata oluştu. Site yöneticisi ile görüşünüz."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2082
+msgid "Thank you for your message."
+msgstr "Mesajınız için teşekkürler."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_property_export.php:23
+msgid "This URL lets you access your property export feed, it is custom to your site:"
+msgstr "Bu adres(URL) emlak dışa aktarım beslemesine erişmenize izin veriyor, sitenize özel:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_property_export.php:34
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_property_export.php:38
+msgid "There has been an error retreiving your API key."
+msgstr "API anahtarını getirirken hata oluştu."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_property_export.php:82
+msgid "Invalid API key."
+msgstr "Hatalı API anahtarı."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_property_export.php:90
+msgid "No published properties."
+msgstr "Yayımlanmış emlak yok."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:401
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1553
+msgid "Processing..."
+msgstr "İşliyor..."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:457
+msgid "UD Log Page for"
+msgstr "UD kütük sayfası "
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:458
+msgid "Clear Log"
+msgstr "Kütüğü temizle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:465
+msgid "Timestamp"
+msgstr "Zaman etiketi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:466
+msgid "Event"
+msgstr "Olay"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:467
+msgid "User"
+msgstr "Kullanıcı"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:734
+msgid "Cache table does not exist. Attempting to create:"
+msgstr "Önbellek tablosu yok. Yaratmaya çalışıyor:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:747
+#, php-format
+msgid "SQL Ran: %s , verifying existance."
+msgstr "SQL çalıştı: %s, varlığı doğrulanıyor."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:752
+msgid "Table created and exists."
+msgstr "Tablo yaratıldı ve artık var."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:756
+msgid "Table not created."
+msgstr "Tablo yaratılamadı."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:823
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:860
+msgid "Log Started."
+msgstr "Kütük başladı."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:952
+msgid "Today"
+msgstr "Bugün"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:953
+msgid "Tomorrow "
+msgstr "Yarın"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:953
+msgid "Yesterday "
+msgstr "Dün"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:954
+#, php-format
+msgid " in %d days "
+msgstr "%d gün içinde"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:954
+#, php-format
+msgid "%d days ago"
+msgstr "%d gün önce"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:1074
+msgid "Automatically logged failed JSON response: "
+msgstr "Otomatik kütük kayıtlarında JSON yanıtı hata oluşturdu:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:1201
+#, php-format
+msgid "%s hours ago"
+msgstr "%s saat önce"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:1203
+#, php-format
+msgid "%s minutes ago"
+msgstr "%s dakika önce"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:97
+msgid "Other Properties"
+msgstr "Diğer emlaklar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:97
+msgid "Show other properties (if any) with the same Parent"
+msgstr "Varsa aynı üste bağlı diğer emlakları göster"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:158
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:362
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:575
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:802
+#, php-format
+msgid "%s at %s for %s"
+msgstr "%s %s'de %s için"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:178
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:383
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:598
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:826
+msgid "More"
+msgstr "Daha fazla"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:184
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:389
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:604
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:833
+msgid "View All"
+msgstr "Tümünü göster"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:226
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:431
+msgid "The widget will not be displayed if the currently viewed property has no children."
+msgstr "Görüntülenen emlak alt bileşene sahip değilse araç görüntülenmeyecek."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:228
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:433
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:648
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:874
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1022
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1229
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1563
+msgid "Title:"
+msgstr "Başlık:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:235
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:442
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:657
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:881
+msgid "Hide Images?"
+msgstr "Resimler gizlensin mi?"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:244
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:451
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:666
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:890
+msgid "Image Size:"
+msgstr "Resim boyutu:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:248
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:456
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:671
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:895
+msgid "Listings to display?"
+msgstr "Listeler görüntülensin mi?"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:253
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:464
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:676
+msgid "Select the stats you want to display"
+msgstr "Görüntülemek istediğiniz istatistiği seçin"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:271
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:482
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:695
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:919
+msgid "Address Format:"
+msgstr "Adres biçimi:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:278
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:489
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:703
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:926
+msgid "Show \"More\" link?"
+msgstr "\"More\" bağlantısı gösterilsin mi?"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:285
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:496
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:710
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:933
+msgid "Show \"View All\" link?"
+msgstr "\"View All\" bağlantısı görüntülensin mi?"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:302
+msgid "Child Properties"
+msgstr "Alt Emlak"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:302
+msgid "Show child properties (if any) for currently displayed property"
+msgstr "Görüntülenen emlak için alt emlakları göster"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:513
+msgid "Featured Properties"
+msgstr "Özellikli emlaklar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:513
+msgid "List of properties that were marked as Featured"
+msgstr "Özellikli emlak olarak işaretli emlakların listesi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:730
+msgid "Featured Properies"
+msgstr "Özellikli emlaklar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:750
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:875
+msgid "Latest Properties"
+msgstr "Son emlaklar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:750
+msgid "List of the latest properties created on this site"
+msgstr "En son eklenen emlak listesi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:901
+msgid "Select stats you want to display"
+msgstr "Görüntülemek istediğiniz istatistiği seçiniz"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:951
+msgid "Property Search"
+msgstr "Emlak arama"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:951
+msgid "Display a highly customizable property search form"
+msgstr "Daha çok özelleştirilebilir emlak arama formu göster"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1017
+msgid "No searchable property types were found."
+msgstr "Aranabilir emlak tipi bulunamadı"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1032
+msgid "Use pagination"
+msgstr "Sayfalama kullan"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1036
+msgid "Items per page"
+msgstr "Sayfa başına nesne"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1043
+msgid "Property types to search:"
+msgstr "Aranacak emlak tipi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1058
+msgid "Select the attributes you want to search."
+msgstr "Aranacak özellikleri seçin"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1065
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:88
+msgid "Property Types"
+msgstr "Emlak tipleri"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1106
+msgid "City is an automatically created attribute once the address is validated."
+msgstr "İl otomatik olarak adres doğrunlandıktan sonra yaratılır"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1133
+msgid "Search Properies"
+msgstr "Emlak arama"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1156
+msgid "Property Gallery"
+msgstr "Emlak galerisi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1156
+msgid "List of all images attached to the current property"
+msgstr "Geçerli emlak için atanmış tüm resimlerin listesi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1235
+msgid "Thumbnail Size:"
+msgstr "Küçük resim boyutu"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1241
+msgid "Popup Image Size:"
+msgstr "Açılır pencere resim boyutu:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1249
+#, php-format
+msgid "Show %s Images"
+msgstr "%s tane resim göster"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:47
+msgid "Developer"
+msgstr "Geliştirici"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:90
+msgid ""
+"<p>Create new property types using this menu. </p>\n"
+"        <p>The <b>slug</b> is automatically created from the title and is used in the back-end.  It is also used for template selection, example: floorplan will look for a template called property-floorplan.php in your theme folder, or default to property.php if nothing is found.</p>\n"
+"        <p>If <b>Searchable</b> is checked then the property will be loaded for search, and available on the property search widget.</p>\n"
+"        <p>If <b>Location Matters</b> is checked, then an address field will be displayed for the property, and validated against Google Maps API.  Additionally, the property will be displayed on the SuperMap, if the feature is installed.</p>\n"
+"        <p><b>Hidden Attributes</b> determine which attributes are not applicable to the given property type, and will be grayed out in the back-end.</p>\n"
+"        <p><b>Inheritance</b> determines which attributes should be automatically inherited from the parent property.</p>"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:100
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:283
+msgid "Property Type"
+msgstr "Emlak tipi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:101
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:284
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:682
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:97
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:291
+msgid "Slug"
+msgstr "Deyiş"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:103
+msgid "Hidden Attributes"
+msgstr "Gizli özellikler"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:104
+msgid "Inheritance"
+msgstr "Devralınan"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:123
+msgid "Searchable"
+msgstr "Aranabilir"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:128
+msgid "Location Matters"
+msgstr "Yerleşim önemli"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:179
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:270
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:308
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:697
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:975
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:137
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:355
+msgid "Add Row"
+msgstr "Satır ekle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:190
+msgid "Property Fields"
+msgstr "Emlak alanları"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:192
+msgid "Property Stats"
+msgstr "Emlak istatistikleri"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:193
+msgid ""
+"<p>Property attributes are meant to be short entries that can be searchable, on the back-end attributes will be displayed as single-line input boxes. On the front-end they are displayed using a definitions list.</p>\n"
+"        <p>Making an attribute as \"searchable\" will list it as one of the searchable options in the Property Search widget settings.</p>\n"
+"        <p>Be advised, attributes added via add_filter() function supercede the settings on this page.</p>"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:197
+msgid "If an attribute has <b>Admin Predefined Values</b>, a list of comma-separated words, a dropdown will be displayed instead of an input box on the property editing page for the given attribute."
+msgstr "Bir nitelik <b>Yönetici Öntanımlı Değerler</b> içeriyorsa, belirtilen niteliğe ait emlak düzenleme sayfasında girdi kutusu yerine virgülle ayrılmış sözcükler listesi,  açılır liste görüntülenir."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:203
+msgid "Attribute Name"
+msgstr "Özellik adı"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:205
+msgid "Search Input"
+msgstr "Arama girdisi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:206
+msgid "Admin Dropdown Values"
+msgstr "Yönetici açılır değerleri"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:248
+msgid "input"
+msgstr "girdi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:249
+msgid "range (input)"
+msgstr "aralık (girdi)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:250
+msgid "range (dropdown)"
+msgstr "aralık (açılır)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:251
+msgid "dropdown"
+msgstr "açılır"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:252
+msgid "checkbox"
+msgstr "işaret kutusu"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:261
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:299
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:286
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:691
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:129
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:331
+msgid "Delete"
+msgstr "Sil"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:276
+msgid "Property Meta"
+msgstr "Emlak diğer bilgileri"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:277
+msgid "Meta is used for descriptions,  on the back-end  meta fields will be displayed as textareas.  On the front-end they will be displayed as individual sections."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:319
+msgid "Log"
+msgstr "Kütük"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:321
+msgid "Show Log."
+msgstr "Kütüğü göster"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:322
+msgid "The log is always active, but the UI is hidden.  If enabled, it will be visible in the admin sidebar."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:173
+msgid "Agent Image Size"
+msgstr "Temsil resim boyutu"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:197
+msgid "Agent Information"
+msgstr "Temsil bilgileri"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:263
+msgid "Agent"
+msgstr "Temsil"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:390
+msgid "Attach to Agent"
+msgstr "Temsile ekle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:426
+msgid "Saved."
+msgstr "Kaydedildi."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:493
+msgid "No Properties."
+msgstr "Emlak yok."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:511
+msgid "Create Agent"
+msgstr "Temsil yarat"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:511
+msgid "Update Agent"
+msgstr "Temsil güncelle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:523
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1551
+msgid "Display Name"
+msgstr "Ad görüntüle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:528
+msgid "Username"
+msgstr "Kullanıcı adı"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:531
+msgid "Usernames cannot be changed."
+msgstr "Kullanıcı adları değiştirilemez."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:536
+msgid "E-Mail"
+msgstr "E-posta"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:542
+msgid "Widget Bio"
+msgstr "Araç biyografisi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:546
+msgid "Content that is displayed in the agent widget."
+msgstr "Temsil araçta görüntülenen içerik."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:552
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:295
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:696
+msgid "Options"
+msgstr "Ayarlar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:558
+msgid "Allow property inquiries to be sent directly to agent."
+msgstr "Emlak sorgularının direkt temsile gönderilmesine izin ver."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:566
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1554
+msgid "Full Bio"
+msgstr "Tam biyografi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:570
+msgid "Content that can be displayed in the shortcode."
+msgstr "Kısa kod içinde görüntülenen içerik."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:593
+msgid "Primary"
+msgstr "İlk"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:594
+msgid "Save"
+msgstr "Kaydet"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:595
+msgid "Associated Properties"
+msgstr "İlişkili emlaklar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:596
+msgid "Images"
+msgstr "Resimler"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:606
+msgid "Agent Shortcodes"
+msgstr "Temsil kısa kod"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:607
+msgid "Show agent information:"
+msgstr "Temsil bilgilerini göster:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:607
+msgid ", or you can specify which fields to show:"
+msgstr ", ya da görüntülenecek alanları belirtebilirsiniz:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:608
+msgid "To query agent properties:"
+msgstr "Temsil özelliklerini sorgulamak için:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:610
+msgid "Shortcode Attribute Fields"
+msgstr "Kısa kod nitelik alanları"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:611
+msgid "The following attributes can be used in the [agent_card] shortcode."
+msgstr "Aşağıdaki nitelikler temsil kartı kısa kodu için kullanılabilir. [agent_card]"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:628
+msgid "Example Using All Available Fields"
+msgstr "Örneğin tüm kullanılabilir alanların kullanılması"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:651
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:739
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:770
+msgid "Agents"
+msgstr "Temsilciler"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:673
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:675
+msgid "Fields"
+msgstr "Alanlar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:676
+msgid "Custom fields may be used to adapt the information about agents to suit your needs."
+msgstr "Özel alanlar temsil hakkında bilgileri ihtiyaçlarınıza göre adapte etmek için kullanılabilir."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:681
+msgid "Field name"
+msgstr "Alan adı"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:705
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:707
+msgid "Capabilities"
+msgstr "Yetenekler"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:708
+msgid "Assign capabilities to agents."
+msgstr "Yetenekleri temsile ata"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:714
+msgid "Capability"
+msgstr "Yetenek"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:792
+msgid "User removed."
+msgstr "Kullanıcı silindi."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:859
+msgid "Agent updated."
+msgstr "Temsilci güncellendi."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:862
+msgid "Agent created."
+msgstr "Temsilci yaratıldı."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:865
+msgid "Edit Agent"
+msgstr "Temsilciyi düzenle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:911
+msgid "Associated Agents"
+msgstr "İlişkili temsilciler"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:962
+#, php-format
+msgid "You can add fields on the <a href=\"%s\">settings page</a>."
+msgstr "<a href=\"%s\">Ayarlar sayfasında</a> alanları ekleyebilirsiniz."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:967
+msgid "Flyer Writeup"
+msgstr "Broşür yaz"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:970
+msgid "Please enter a writeup for flyers."
+msgstr "Broşür için ayrıntı girin."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1028
+msgid "Please save first to add images."
+msgstr "Lütfen resimleri eklemek için önce kaydedin."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1035
+msgid "No images found."
+msgstr "Resim bulunamadı."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1042
+msgid "Remove"
+msgstr "Kaldır"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1050
+msgid "Add Image"
+msgstr "Resim ekle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1289
+msgid "Moderate comments"
+msgstr "Yorumları kontrol et"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1290
+msgid "Manage categories"
+msgstr "Kategorileri yönet"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1291
+msgid "Manage links"
+msgstr "Bağlantıları yönet"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1292
+msgid "Upload files"
+msgstr "Dosya yükle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1293
+msgid "Edit posts"
+msgstr "Gönderileri düzenle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1294
+msgid "Edit other's posts"
+msgstr "Diğer gönderileri düzenle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1295
+msgid "Edit published posts"
+msgstr "Yayımlanmış gönderileri düzenle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1296
+msgid "Publish posts"
+msgstr "Gönderileri yayımla"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1297
+msgid "Edit pages"
+msgstr "Sayfaları düzenle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1298
+msgid "Read"
+msgstr "Oku"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1299
+msgid "Edit other's pages"
+msgstr "Diğerlerinin sayfalarını düzenle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1300
+msgid "Edit published pages"
+msgstr "Yayımlanmış sayfaları düzenle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1301
+msgid "Publish pages"
+msgstr "Sayfayı yayımla"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1302
+msgid "Delete pages"
+msgstr "Sayfayı sil"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1303
+msgid "Delete other's pages"
+msgstr "Diğerlerinin sayfasını sil"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1304
+msgid "Delete published pages"
+msgstr "Yayımlanmış sayfaları sil"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1305
+msgid "Delete posts"
+msgstr "Gönderileri sil"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1306
+msgid "Delete other's posts"
+msgstr "Diğerlerinin gönderilerini sil"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1307
+msgid "Delete published posts"
+msgstr "Yayımlanmış gönderileri sil"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1308
+msgid "Delete private posts"
+msgstr "Özel gönderileri sil"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1309
+msgid "Edit private posts"
+msgstr "Özel gönderileri düzenle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1310
+msgid "Read private posts"
+msgstr "Özel göderileri oku"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1311
+msgid "Delete private pages"
+msgstr "Özel sayfaları sil"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1312
+msgid "Edit private pages"
+msgstr "Özel sayfaları düzenle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1313
+msgid "Read private pages"
+msgstr "Özel sayfaları oku"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1391
+msgid "Email"
+msgstr "E-posta"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1552
+msgid "Image"
+msgstr "Resim"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1553
+msgid "Widget Text"
+msgstr "Araç metni"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1560
+msgid "Email Address"
+msgstr "E-posta adresi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:113
+msgid "PDF Flyer"
+msgstr "PDF çıktı"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:130
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:334
+msgid "Details"
+msgstr "Ayrıntılar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:158
+msgid "Location"
+msgstr "Yerleşim"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:240
+#, php-format
+msgid ", or <a href=\"%s\" target=\"_blank\">view flyer</a>."
+msgstr ", ya da <a href=\"%s\" target=\"_blank\">çıktıyı görüntüle</a>."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:254
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:757
+msgid "Flyer"
+msgstr "Çıktı"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:289
+#, php-format
+msgid "Warning: <b>%s</b> is not writable, PDF flyer cannot be created."
+msgstr "Uyarı: <b>%s</b> yazılabilir değil, PDF çıktı yaratılamadı."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:301
+msgid "Generate flyers automatically when somebody tries to view them for the first time."
+msgstr "Çıktıları ilk kez görüntülenmek istendiklerinde yarat."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:306
+msgid "Generate QR Code"
+msgstr "QR kodu üret"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:314
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:163
+msgid "Display"
+msgstr "Görüntüle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:319
+msgid "Title (Header)"
+msgstr "Başlık (Header)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:324
+msgid "Tagline under Title (Header)"
+msgstr "Başlıktaki etiket satırı (Header)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:329
+msgid "QR Code's note (if QR Code exists)"
+msgstr "QR kodu notu (QR kodu varsa)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:339
+msgid "Description (if exists)"
+msgstr "Açıklama (varsa)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:344
+msgid "Location on Map (if exists)"
+msgstr "Haritada yerleşim (varsa)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:349
+msgid "Features (if exists)"
+msgstr "Özellikler (varsa)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:354
+msgid "Agent Information (if exists)"
+msgstr "Temsilci bilgisi (varsa)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:361
+msgid "Primary Photo Size"
+msgstr "İlk fotoğraf boyutu"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:368
+msgid "Secondary Images"
+msgstr "İkincil resimler"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:383
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:386
+msgid "Logo URL"
+msgstr "Logo URL"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:390
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:393
+msgid "Header color"
+msgstr "Başlık rengi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:398
+msgid "Section background color"
+msgstr "Bölüm zemin rengi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:449
+msgid "Property List is got. Start generate PDF Flyers..."
+msgstr "Emlak listesi alındı. PDF çıktı üretmek iin başlatın..."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:469
+msgid "Finished."
+msgstr "Bitti."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:471
+msgid "There are no any property to generate PDF Flyer for."
+msgstr "PDF çıktı üretmek için hiçbir emlak yok."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:475
+msgid "Looks like, something caused error on server. Please, try to regenerate PDF Flyers later."
+msgstr "Sunucuda birşeyler hata üretmiş gibi görünüyor. Lütfen, PDF çıktıları yeniden üretmek için tekrar deneyin."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:87
+msgid "ago"
+msgstr "önce"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:96
+msgid "Last Import"
+msgstr "Son içeri aktarma"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:97
+msgid "Import Unique ID"
+msgstr "İçeri aktarma eşsiz numarası"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:159
+msgid "Look up XML import history."
+msgstr "XML içeri aktarma geçmişine gözat."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:160
+msgid "Show XML Import History"
+msgstr "XML içeri aktarma geçmişini göster"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:291
+msgid "Schedule coult not be imported."
+msgstr "Zamanlama içeri aktarılamadı."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:343
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1598
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1650
+msgid "Import"
+msgstr "İçeri aktar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:493
+msgid "begin"
+msgstr "başla"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:536
+msgid "end"
+msgstr "bitir"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:710
+msgid "Did not import any objects."
+msgstr "Hiç bir nesne içeri aktarılamadı."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:714
+msgid "Preview limited to 5 objects, proceed once settings are configured."
+msgstr "5 nesneye kadar önizle, ayarlar atanınca devam et."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:747
+msgid "Source (URL)"
+msgstr "Kaynak (URL)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:752
+msgid "URL"
+msgstr "URL (Web adresi)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:755
+msgid "XML Feed"
+msgstr "XML Besleme"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:756
+msgid "Google Spreadsheet"
+msgstr "Google Dökümanlar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:757
+msgid "WP-Property Feed"
+msgstr "WP-Property Besleme"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:764
+msgid "Send GET variables as POST data."
+msgstr "GET değişkenlerini POST veri olarak gönder."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:769
+msgid "Google Username"
+msgstr "Google kullanıcı adı"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:774
+msgid "Google Password"
+msgstr "Google şifre"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:779
+msgid "Google Extra Query Vars"
+msgstr "Google ekstra sorgu değişkenleri"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:780
+msgid "See the <a href=\"http://code.google.com/apis/spreadsheets/data/3.0/reference.html#ListParameters\" target=\"_blank\">Google Spreadsheet API docs</a> for the format of this field (should be name value pairs, without the beginning \"?\")"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:784
+msgid "XPath Query for property elements:"
+msgstr "Emlak için XPath sorgu elemanları:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:801
+msgid "Give the import some sort of title for reference."
+msgstr "Referans için başlıkların bir kısmını içeri ver."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:832
+msgid "Allow to be run from URL for cron jobs."
+msgstr "URL ile cron jobs çalıştırılmasına izin ver."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:839
+msgid "Remove and re-download all images."
+msgstr "Kaldır ve tüm resimleri yeniden indir."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:845
+msgid "Do not import properties that have been imported less than "
+msgstr "Şu kadardan az içeri aktarılmış emlakları içeri aktarma "
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:847
+msgid "hour(s) ago."
+msgstr "saat önce."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:856
+msgid "Remove listings that are no longer in source XML from this site's database."
+msgstr "Bu sitenin veritabanından XML kaynak içinde artık bulunmayan listelemeleri kaldır."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:864
+msgid "Completely remove all existing properties prior to import."
+msgstr "İçeri aktarma önceliğine göre varolan emlakların tümünü tamamen kaldır."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:872
+msgid "Remove PDF flyers on import."
+msgstr "İçeri aktarmada PDF çıktıları kaldır."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:879
+msgid "Revalidate address on completion (get latitude and longitude for every property using Google Maps API)."
+msgstr "Tamamlanınca adresi yeniden doğrula (enlem ve boylamı tüm emlaklar için Google Maps API kullanarak al)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:885
+msgid "If your XML feed does not provide a one-line address field, but has the address broken up into different attributes (i.e. \"route\", \"city\", \"state\", etc), attempt to reassemble the address from those variables, then revalidate."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:899
+msgid "Automatic Matching"
+msgstr "Otomatik eşleştirme"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:902
+msgid "Use XPath rules to setup the paths to the individual XML attributes to match them up with WP-Property attributes."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:904
+msgid "Automatically Match (Experimental)"
+msgstr "Otomatik eşleştir (Deneyimsel)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:912
+msgid "Attribute Map"
+msgstr "Nitelik haritası"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:921
+msgid "WP-Property Attribute"
+msgstr "WP-Property niteliği"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:922
+msgid "XPath Rule"
+msgstr "XPath kuralı"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:938
+msgid "WordPress Attributes"
+msgstr "Wordpress nitelikleri"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:945
+msgid "Taxonomies"
+msgstr "Sınıflandırma"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:950
+msgid "Attributes"
+msgstr "Nitelikler"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:956
+msgid "Street Number"
+msgstr "Cadde numarası"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:957
+msgid "Street"
+msgstr "Cadde"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:959
+msgid "County"
+msgstr "İlçe"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:960
+msgid "State"
+msgstr "Eyalet"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:961
+msgid "Country"
+msgstr "Ülke"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:962
+msgid "Postal Code"
+msgstr "Postakodu"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:974
+msgid "Delete Selected"
+msgstr "Seçileni sil"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:991
+msgid "Unique id field"
+msgstr "Eşsiz numara alanı"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:997
+msgid "Save Configuration"
+msgstr "Ayarları kaydet"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1120
+msgid "Schedule imported from file."
+msgstr "Zamanlama dosyadan içeri aktarıldı."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1368
+msgid "Are you sure?"
+msgstr "Emin misiniz?"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1559
+msgid "Source is good."
+msgstr "Kaynak iyi."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1564
+msgid "Cannot load source."
+msgstr "Kaynak yüklenemedi."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1573
+msgid "Importer"
+msgstr "İçeri aktarıcı"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1639
+msgid "You do not have any saved schedules. Create one now."
+msgstr "Herhangi bir zamanlamanız yok. Bir tane yaratın."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1648
+msgid "Import Schedule"
+msgstr "Zamanlamayı içeri aktar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:159
+msgid "Slideshow Options"
+msgstr "Slayt gösterisi ayarları"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:423
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1158
+msgid "Slideshow Images:"
+msgstr "Slayt gösterisi resimleri:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:445
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1172
+msgid "All Images:"
+msgstr "Tüm resimler:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:543
+msgid "Image size does not exist."
+msgstr "Resim boyutları atanmamış."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:545
+msgid "Original image is too small."
+msgstr "Orijinal resim çok küçük."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:547
+msgid "Regenerate thumbnail."
+msgstr "Küçük resimleri tekrar yarat."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:594
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:603
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1322
+msgid "Slideshow"
+msgstr "Slayt gösterisi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:653
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:865
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1126
+msgid "Global Slideshow"
+msgstr "Tümünün slayt gösterisi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:697
+msgid "Single Listing Slideshow"
+msgstr "Tek listeleme slayt gösterisi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:718
+msgid "Slideshow image size to be used for single property pages."
+msgstr "Tek emlak sayfası slayt gösterisi için resim boyutları."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:724
+msgid "Thumbnail Size"
+msgstr "Küçük resim boyutları"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:729
+msgid "This width is used on \"Slideshow\" page on the Property editing page to display available images, this setting <b>does not</b> affect the actual slideshow on the front-end."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:740
+msgid "Effect:"
+msgstr "Geçiş:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:746
+msgid "Effect that will be used to change from one image to the next."
+msgstr "Bir resimden diğerine geçerken kullanılacak geçiş:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:750
+msgid "Slices:"
+msgstr "Dilimler:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:756
+msgid "If the transition includes slices, this number determines how many slices to cut the image up into during transitions."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:760
+msgid "Animation Speed:"
+msgstr "Animasyon hızı:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:766
+msgid "How quickly the transition should happen, in miliseconds."
+msgstr "Geçişin ne kadar hızlı gerçekleşeceği, milisaniye."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:770
+msgid "Pause Time:"
+msgstr "Bekletme süresi:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:776
+msgid "The pause time between transitions."
+msgstr "Geçişler arası bekletme süresi:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:902
+msgid "Slideshow selection and order saved."
+msgstr "Slayt gösterisi seçimi ve sırası kaydedildi."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1059
+msgid "Loading..."
+msgstr "Yükleniyor..."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1135
+msgid "WP-Property Slideshow"
+msgstr "WP-Property slayt gösterisi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1136
+msgid "This slideshow can be integrated into your front-end pages by either using the shortcode, or pasting PHP code into your theme."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1139
+msgid "Drag images from selection on the left to the selection on the right, and then click save."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1140
+#, php-format
+msgid "This list gets all images from your media library that are over %s pixels wide and %s pixels tall."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1141
+msgid "To include the slideshow into the content of a property, use the following shortcode: [property_slideshow]"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1142
+msgid "Developers: Include the slideshow in your PHP files by using global_slideshow(); for the global slideshow and property_slideshow(property_id); for property-specific slideshows. "
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1149
+msgid "Save Selection and Order"
+msgstr "Seçimi ve sırayı kaydet"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1225
+msgid "Disable slideshow on property page."
+msgstr "Emlak sayfasında slayt gösterisini kapat."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1307
+msgid "Some Slideshow Options"
+msgstr "Bir kaç slayt gösterisi ayarı"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1316
+msgid "WPP Slideshow"
+msgstr "WPP Slayt Gösterisi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1323
+msgid "WPP Slideshow with options"
+msgstr "Ayarlar ile WPP Slayt Gösterisi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:39
+msgid "Supermap"
+msgstr "SuperHarita"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:65
+msgid "Sidebar Attributes"
+msgstr "Kenar Çubuğu nitelikleri"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:67
+msgid "Select the attributes you want to display in the left sidebar on the supermap."
+msgstr "SuperHarita üzerinde kenar çubuğunda görüntülenecek niteliği seçin."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:79
+msgid "Supermap sidebar thumbnail:"
+msgstr "SuperHarita kenar çubuğu küçük resmi:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:83
+msgid "If you create a new image size, please be sure to regenerate all thumbnails. "
+msgstr "Yeni resim boyutu yaratırsanız, küçük resimleri yeniden yarattığınızdan emin olun."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:88
+msgid "Map Areas:"
+msgstr "Harita alanı:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:98
+msgid "Fill Color"
+msgstr "Renk doldur"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:99
+msgid "Opacity"
+msgstr "Şeffaflık"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:100
+msgid "Stoke Color"
+msgstr "Tıkıştırılmış renk"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:101
+msgid "Hover Color"
+msgstr "Üzerinde rengi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:161
+msgid "Supermap Options"
+msgstr "SuperHarita seçenekleri"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:168
+msgid "Exclude property from supermap"
+msgstr "Emlak SuperHaritada gösterilmesin"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:775
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:785
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:804
+msgid "Any"
+msgstr "Herhangi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:778
+msgid "+"
+msgstr "+"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:818
+msgid "Loading"
+msgstr "Yükleniyor"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:28
+msgid "Settings updated."
+msgstr "Seçenekler güncellendi."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:137
+msgid "Property Settings"
+msgstr "Emlak ayarları"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:162
+msgid "Main"
+msgstr "Ana"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:184
+msgid "Plugins"
+msgstr "Eklentiler"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:186
+msgid "Help"
+msgstr "Yardım"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:197
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:396
+msgid "Property Page"
+msgstr "Emlak sayfası"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:200
+msgid "Property (Default)"
+msgstr "Emlak (Varsayılan)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:218
+msgid "Always overwrite this page's content with [property_overview]."
+msgstr "Daima sayfa içeriğinin üzerine yaz."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:225
+msgid "If checked, be sure to include [property_overview] somewhere in the content, or no properties will be displayed."
+msgstr "İşaretlerseniz, [property_overview] kodunu içeriğin içinde bir yerlerde bulundurduğunuzdan emin olun ya da hiç bir emlak görüntülenmeyecek."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:228
+msgid "View list of available shortcodes."
+msgstr "Kullanılabilir kısa kodların listesini görüntüle."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:232
+msgid "The <b>property page</b> will be used to display property search results, as well as the base for property URLs.  For example, if the URL of your property page is "
+msgstr "Arama sonuçları "
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:237
+msgid "Default Phone Number"
+msgstr "Varsayılan telefon numarası"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:240
+msgid "Phone number to use when a property-specific phone number is not specified."
+msgstr "Emlak özel telefon numarası atanmadığında kullanılacak telefon numarası."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:245
+msgid "Address Attribute"
+msgstr "Adres niteliği"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:247
+msgid "Attribute to use for address:"
+msgstr "Adres için kullanılacak nitelik:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:249
+msgid "and localize for:"
+msgstr "ve yerleştirilecek:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:261
+msgid "General Settings"
+msgstr "Genel ayarlar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:263
+msgid "These are the general display settings"
+msgstr "Genel görüntü ayarları"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:266
+msgid "Automatically include default CSS."
+msgstr "Otomatik olarak varsayılan CSS kullan."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:275
+msgid "Image Sizes"
+msgstr "Resim boyutları"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:278
+msgid "Image sizes used throughout the plugin."
+msgstr "Eklentide kullanılan resim boyutları"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:280
+#, php-format
+msgid "After adding/removing image size, be sure to <a href=\"%s\">regenerate thumbnails</a> using the Regenerate Thumbnails plugin."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:284
+msgid "We strongly recommend to <a href=\"http://wordpress.org/extend/plugins/regenerate-thumbnails/\">Regenerate Thumbnails</a> plugin by Viper007Bond."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:292
+msgid "Width"
+msgstr "Genişlik"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:293
+msgid "Height"
+msgstr "Yükseklik"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:369
+msgid "Overview Shortcode"
+msgstr "Kısa kod genel bakış"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:372
+msgid ""
+"These are the settings for the [property_overview] shortcode.  The shortcode displays a list of all building / root properties.<br />\n"
+"        The display settings may be edited further by customizing the <b>wp-content/plugins/wp-properties/templates/property-overview.php</b> file.  To avoid losing your changes during updates, create a <b>property-overview.php</b> file in your template directory, which will be automatically loaded."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:376
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:492
+msgid "Thumbnail size:"
+msgstr "Küçük resim boyutu:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:378
+msgid "Show children properties."
+msgstr "Alt özellikleri göster."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:381
+msgid "Show larger image of property when image is clicked using fancybox."
+msgstr "Fancybox kullanan resim tıklandığında emlak için daha büyük resmi göster."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:387
+msgid "Show pagination on bottom of results."
+msgstr "Sonuçların en altında sayfalama göster."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:398
+msgid ""
+"These are the settings for the [property_overview] shortcode.  The shortcode displays a list of all building / root properties.<br />\n"
+"        The display settings may be edited further by customizing the <b>wp-content/plugins/wp-properties/templates/property.php</b> file.  To avoid losing your changes during updates, create a <b>property.php</b> file in your template directory, which will be automatically loaded."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:402
+msgid "Display larger image, or slideshow, at the top of the property listing."
+msgstr "Emlak listelemenin en başında, daha büyük resim ya da slayt gösterisi göster."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:413
+msgid "Google Maps"
+msgstr "Google Haritalar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:417
+msgid "Map Thumbnail Size:"
+msgstr "Harita küçük resim boyutu:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:418
+msgid "Map Zoom Level:"
+msgstr "Harita yakınlaştırma seviyesi:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:440
+msgid "Address Display"
+msgstr "Adres gösterimi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:447
+msgid "Available tags:"
+msgstr "Kullanılabilir etiketler"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:453
+msgid "Currency & Numbers"
+msgstr "Para birimi ve Sayılar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:456
+msgid "Currency symbol."
+msgstr "Para Birimi simgesi"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:458
+msgid "Thousands separator symbol:"
+msgstr "Binlik ayracı:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:461
+msgid ". (period)"
+msgstr ". (zaman ayracı)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:462
+msgid ", (comma)"
+msgstr ", (virgül)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:464
+msgid "The character separating the 1 and the 5: $1<b>,</b>500"
+msgstr "Ayırıcı karakter 1 ve 5: $1<b>,</b>500"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:469
+msgid "Currency symbol placement:"
+msgstr "Para birimi sembolü değiştirme:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:472
+msgid "Before number"
+msgstr "Sayıdan önce"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:473
+msgid "After number"
+msgstr "Sayıdan sonra"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:485
+msgid "Admin Overview Page"
+msgstr "Yönetici genel görünüm sayfası"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:489
+msgid "These settings are for the main property page on the back-end."
+msgstr "Bu ayarlar en sonda ana emlak sayfası için."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:524
+msgid "WP-Property Premium Features"
+msgstr "WP-Property Ücretli Özellikler"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:525
+msgid "Premium features will become available shortly, we are still waiting on more feedback on the core of the plugin."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:526
+msgid "When purchasing the premium features you will need to specify your domain to add the license correctly.  This if your domain:"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:557
+msgid "[purchase feature]"
+msgstr "[satın al]"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:570
+msgid "Disable plugin."
+msgstr "Eklentiyi etkisizleştir."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:574
+msgid "Feature installed, using version"
+msgstr "Özellik yüklendi, sürüm"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:576
+#, php-format
+msgid "Please visit <a href=\"%s\">TwinCitiesTech.com</a> to purchase this feature."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:591
+msgid "Enter in the ID of the property you want to look up, and the class will be displayed below."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:593
+msgid "Lookup"
+msgstr "Gözat"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:593
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:601
+msgid "Cancel"
+msgstr "İptal"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:600
+msgid "Look up the <b>$wp_properties</b> global settings array.  This array stores all the default settings, which are overwritten by database settings, and custom filters."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:601
+msgid "Show $wp_properties"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:607
+msgid "Restore Backup of WP-Property Configuration"
+msgstr "Ayarları geri yükle"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:608
+msgid "Download Backup of Current WP-Property Configuration."
+msgstr "Ayarların yedeğini indir"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:612
+msgid "Force check of allowed premium features."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:613
+msgid "Check Updates"
+msgstr "Güncellemeleri kontrol et"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:619
+msgid "Revalidate"
+msgstr "Tekrar doğrula"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:632
+msgid "Save Changes"
+msgstr "Değişiklikleri kaydet"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:19
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:153
+msgid "(no parent)"
+msgstr "(üst yok)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:25
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:26
+msgid "Parent"
+msgstr "Üst"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:34
+msgid "Template"
+msgstr "Şablon"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:35
+msgid "Page Template"
+msgstr "Sayfa şablonu"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:36
+msgid "Default Template"
+msgstr "Varsayılan şablon"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:43
+msgid "Need help? Use the Help tab in the upper right of your screen."
+msgstr "Yardıma mı ihtiyacınız var? Yukarıdaki Yardım sekmesini kullanın."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:157
+msgid "Falls Under"
+msgstr "Altına iner"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:189
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:237
+#, php-format
+msgid "Editing %s is disabled, it may be inherited."
+msgstr "Düzenleme devre dışı %s, devralınmış olabilir."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:203
+msgid "Enable."
+msgstr "Aktifleştir."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/property-overview-page.php:24
+msgid "Sorry, we could not find what you were looking for.  Since you are here, take a look at some of our properties."
+msgstr "Üzgünüm, aradığınızı bulamadım. Buradayken, birkaç özelliğe göz atın."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/property-overview.php:53
+msgid " of "
+msgstr "ait"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/property-overview.php:117
+#, php-format
+msgid "Sorry, no properties found - try expanding your search, or <a href=\"%s\">view all</a>."
+msgstr "Üzgünüm, hiç bir emlak bulunamadı - aramanızı genişletin ya da  <a href=\"%s\">tümünü görüntüleyin</a>."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/property-pagination.php:22
+msgid "Prev"
+msgstr "Önceki"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/property-pagination.php:39
+msgid "Next"
+msgstr "Sonraki"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/property-pagination.php:46
+msgid "Order By:"
+msgstr "Sırala:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/property.php:144
+msgid "Interested?"
+msgstr "İlginizi mi çekti?"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/property.php:150
+msgid "Return to building page."
+msgstr "Yapı sayfasına dönün."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/template-functions.php:27
+msgid "Conditional query tags do not work before the query is run. Before then, they always return false."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/template-functions.php:324
+msgid "Price:"
+msgstr "Fiyat:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/template-functions.php:325
+msgid "Bed(s):"
+msgstr "Yatak:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/template-functions.php:326
+msgid "Bath(s):"
+msgstr "Banyo:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/template-functions.php:327
+msgid "Square Ft:"
+msgstr "Metrekare:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/template-functions.php:404
+msgid "Type:"
+msgstr "Tip:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/template-functions.php:502
+msgid "Search"
+msgstr "Arama"
+

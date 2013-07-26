@@ -1,0 +1,1831 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-04-01 13:35-0500\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Andy Potanin\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"X-Poedit-KeywordsList: __;_e;_x;_n;_n_noop;_c\n"
+"X-Poedit-Basepath: \\Users\\gloriaubaldini\\Desktop\\WP Property lingua\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:57
+msgid "Building"
+msgstr "Edificio"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:58
+msgid "Floorplan"
+msgstr "Departamento"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:59
+msgid "Single Family Home"
+msgstr "Casa"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:72
+msgid "Address"
+msgstr "Dirección"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:73
+msgid "Price"
+msgstr "Precio"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:74
+msgid "Bedrooms"
+msgstr "Dormitorios"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:75
+msgid "Bathrooms"
+msgstr "Baños"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:76
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:79
+msgid "Deposit"
+msgstr "Garage"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:77
+msgid "Area"
+msgstr "Superficie"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:78
+msgid "Phone Number"
+msgstr "Teléfono"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:86
+msgid "Lease Terms"
+msgstr "Términos de Alquiler"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:87
+msgid "Pet Policy"
+msgstr "Política de Mascotas"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:88
+msgid "School"
+msgstr "Escuela"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:89
+#, fuzzy
+msgid "Tagline"
+msgstr "Tagline"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:136
+msgid "Studio"
+msgstr "Estudio"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:175
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:177
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:188
+msgid "Features"
+msgstr "Características"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:178
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:187
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:189
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:198
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:889
+msgid "Feature"
+msgstr "Característica"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:179
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:190
+#, fuzzy
+msgid "Search Features"
+msgstr "Buscar Propiedad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:180
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:191
+#, fuzzy
+msgid "All Features"
+msgstr "Características"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:181
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:192
+#, fuzzy
+msgid "Parent Feature"
+msgstr "Característica"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:182
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:193
+#, fuzzy
+msgid "Parent Feature:"
+msgstr "Característica"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:183
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:194
+#, fuzzy
+msgid "Edit Feature"
+msgstr "Característica"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:184
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:195
+#, fuzzy
+msgid "Update Feature"
+msgstr "Característica"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:185
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:196
+#, fuzzy
+msgid "Add New Feature"
+msgstr "Agregar Nueva Propiedad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:186
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:197
+#, fuzzy
+msgid "New Feature Name"
+msgstr "Nombre de la Característica"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:205
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:207
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:218
+msgid "Community Features"
+msgstr "Servicios"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:208
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:217
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:219
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:228
+#, fuzzy
+msgid "Community Feature"
+msgstr "Servicios"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:209
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:220
+#, fuzzy
+msgid "Search Community Features"
+msgstr "Servicios"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:210
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:221
+#, fuzzy
+msgid "All Community Features"
+msgstr "Servicios"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:211
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:222
+#, fuzzy
+msgid "Parent Community Feature"
+msgstr "Servicios"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:212
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:223
+#, fuzzy
+msgid "Parent Community Feature:"
+msgstr "Servicios"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:213
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:224
+#, fuzzy
+msgid "Edit Community Feature"
+msgstr "Servicios"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:214
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:225
+#, fuzzy
+msgid "Update Community Feature"
+msgstr "Servicios"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:215
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:226
+#, fuzzy
+msgid "Add New Community Feature"
+msgstr "Servicios"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:216
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:227
+#, fuzzy
+msgid "New Community Feature Name"
+msgstr "Servicios"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:239
+#, fuzzy
+msgid "The property type will determine the layout."
+msgstr "El tipo de propiedad determinará el layout."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:240
+msgid "Customize what appears in search results in the attribute section.  For example: 1bed, 2baths, area varies slightly."
+msgstr "Personalizar lo que aparece en los resultados de búsqueda en la sección de atributos. Por ejemplo: 1 cama, 2 baños, área varía ligeramente."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/action_hooks.php:241
+msgid "Will appear on overview pages and on top of every listing page."
+msgstr "Aparecerá en las páginas de información general y en la parte superior de cada página del anuncio."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:134
+msgid "Properties"
+msgstr "Propiedades"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:135
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:156
+msgid "Property"
+msgstr "Propiedad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:136
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:508
+msgid "Add New"
+msgstr "Agregar Nueva"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:137
+msgid "Add New Property"
+msgstr "Agregar Nueva Propiedad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:138
+msgid "Edit Property"
+msgstr "Modificar Propiedad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:139
+msgid "New Property"
+msgstr "Nueva Propiedad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:140
+msgid "View Property"
+msgstr "Ver Propiedad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:141
+msgid "Search Properties"
+msgstr "Propiedades de la búsqueda"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:142
+msgid "No properties found"
+msgstr "No se encontraron propiedades"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:143
+msgid "No properties found in Trash"
+msgstr "No tiene propiedades en la papelera."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:206
+#, php-format
+msgid "Property: %s"
+msgstr "Propiedad: %s"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:286
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:365
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:102
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:202
+msgid "Settings"
+msgstr "Configuraciones"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:405
+#, php-format
+msgid "Be advised, since you don't have permalinks enabled, you must visit the <a href=\"%s\">Settings Page</a> and set a custom property overview page."
+msgstr "Atención, ya que los enlaces permanentes no estan habilitados, debe dirigirse a <a href=\"%s\">Settings Page</a>."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:406
+#, php-format
+msgid "By default, your property overview will be displayed on the <a href=\"%s\">%s</a> page. You may change the overview page on the <a href=\"%s\">Settings Page</a>"
+msgstr "De forma predeterminada, su visión del inmueble se muestra en la <a href=\"%s\">%s</a> . Usted puede cambiar la página de información general sobre la <a href=\"%s\">Configuración de la Página</a>"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:412
+msgid "Thank you for installing WP-Property!"
+msgstr "Gracias por instalar WP-Property!"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:414
+#, fuzzy
+msgid "You may also visit <a href=\"http://twincitiestech.com/plugins/wp-property/\">TwinCitiesTech.com</a> for more information, and <a href=\"http://twincitiestech.com/plugins/wp-property/screencasts/\">screencasts</a>."
+msgstr "<p>Para mayor información visite el sitio oficial del plugin <a href=\"http://twincitiestech.com/plugins/wp-property/\">TwinCitiesTech.com</a> y <a href=\"http://twincitiestech.com/plugins/wp-property/screencasts/\">video illustrativi</a>.</div>"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:643
+msgid "Menu Sort Order:"
+msgstr "Orden del Menú:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:646
+msgid "Display property in featured listing."
+msgstr "Mostrar propiedades en el listado principal."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:709
+#, fuzzy, php-format
+msgid "Property updated. <a href=\"%s\">view property</a>"
+msgstr "Propiedad Actualizada <a href=\"%s\">Visualizar anuncio</a>"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:710
+msgid "Custom field updated."
+msgstr "Campo personalizado actualizado."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:711
+msgid "Custom field deleted."
+msgstr "Campo personalizado eliminado."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:712
+msgid "Property updated."
+msgstr "Anuncio actualizado."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:714
+#, php-format
+msgid "Property restored to revision from %s"
+msgstr "Anuncio restaurado de la revisión de %s"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:715
+#, php-format
+msgid "Property published. <a href=\"%s\">View property</a>"
+msgstr "Anuncio Publicado. <a href=\"%s\">Ver Anuncio</a>"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:716
+msgid "Property saved."
+msgstr "Anuncio salvado."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:717
+#, php-format
+msgid "Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+msgstr "Anuncio presentado. <a target=\"_blank\" href=\"%s\">Ver anuncio</a>"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:718
+#, php-format
+msgid "Property scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Preview property</a>"
+msgstr "Anuncio programado para: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Visulizar Anuncio</a>"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:720
+msgid "M j, Y @ G:i"
+msgstr "M j, Y @ G:i"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:721
+#, php-format
+msgid "Property draft updated. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+msgstr "Proyecto de actualización de anuncio. <a target=\"_blank\" href=\"%s\">Visualizar Anuncio</a>"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:743
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:1291
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:261
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:472
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:685
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:910
+msgid "Title"
+msgstr "Título"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:744
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:203
+msgid "Type"
+msgstr "Tipo"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:753
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2036
+msgid "City"
+msgstr "Ciudad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:754
+msgid "Overview"
+msgstr "Descripción del Inmueble"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:755
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:887
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:892
+msgid "Featured"
+msgstr "Destacados"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:756
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:33
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:34
+msgid "Order"
+msgstr "Orden"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:757
+msgid "Thumbnail"
+msgstr "Miniatura"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:824
+msgid "Validated:"
+msgstr "Validado:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:824
+msgid "view on map"
+msgstr "Visualizar en  Google Maps"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:826
+msgid "Address not validated."
+msgstr "Dirección no valida."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:1092
+msgid "General Information"
+msgstr "Información General"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:1252
+msgid "Floor plans at location:"
+msgstr "Planos de planta en la ubicación:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_core.php:1290
+msgid "Default"
+msgstr "Defecto"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:39
+msgid "If you have problems automatically downloading premium features, it may be due to PHP not having ownership issues over the premium feature folder."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:49
+msgid "There is an ownership issue with the premium folder, which means your site cannot download WP-Property premium features and receive updates.  Please contact your host to fix this - PHP needs ownership over the <b>wp-content/plugins/wp-property/core/premium</b> folder.  Be advised: changing the file permissions will not fix this."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:56
+msgid "One of the folders that is necessary for downloading additional features for the WP-Property plugin is not writable.  This means features cannot be downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-property/core/premium</b> permissions to 0755."
+msgstr "Una de las carpetas que es necesaria para la descarga de funciones adicionales para el WP-Property plugin no se puede escribir. Esta cuenta con los medios no se pueden descargar. Para solucionar este problema, es necesario establecer el <b>wp-content/plugins/wp-property/core/premium</b> permisos a 0755."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:448
+#, php-format
+msgid "An error occured during premium feature check: <b> %s </b>."
+msgstr "Se produjo un error durante el registro característica premium:<b> %s </b>."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:501
+msgid "Feature Name"
+msgstr "Nombre de la Característica"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:502
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:785
+msgid "Version"
+msgstr "Versión"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:503
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:786
+msgid "Description"
+msgstr "Descripción"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:518
+#, php-format
+msgid "WP-Property Premium Feature: %s updated to version %s from %s."
+msgstr "WP-Property Característica Premium: %s ha sido actualizada a la versión %s de %s."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:520
+#, php-format
+msgid "WP-Property Premium Feature: %s updated to version %s."
+msgstr "WP-Property Característica Premium: %s actualizada a la versión %s."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:537
+msgid "Update ran successfully."
+msgstr "La actualización se ejecutó correctamente."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:784
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2041
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:108
+msgid "Name"
+msgstr "Nombre"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:1718
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/default_api.php:304
+msgid " sq ft."
+msgstr "m2."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:1910
+msgid "Get Directions"
+msgstr "Cómo Llegar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2035
+msgid "Find your property"
+msgstr "Buscar Pisos"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2037
+msgid "Contact us"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2038
+#, fuzzy
+msgid "Login"
+msgstr "Log"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2039
+msgid "Explore"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2040
+msgid "Message"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2042
+#, fuzzy
+msgid "E-mail"
+msgstr "Principal"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_functions.php:2043
+msgid "Send Message"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:401
+msgid "Processing..."
+msgstr "Procesando..."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:457
+msgid "UD Log Page for"
+msgstr "UD Log Page per"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:458
+msgid "Clear Log"
+msgstr "Borrar Registro"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:465
+msgid "Timestamp"
+msgstr "Sello de Tiempo"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:466
+msgid "Event"
+msgstr "Evento"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:467
+msgid "User"
+msgstr "Usuario"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:734
+msgid "Cache table does not exist. Attempting to create:"
+msgstr "La Tabla de caché no existe. Intentando crearla..."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:747
+#, php-format
+msgid "SQL Ran: %s , verifying existance."
+msgstr "SQL Corrió:% s, verificando su existencia."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:752
+msgid "Table created and exists."
+msgstr "Tabla creada "
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:756
+msgid "Table not created."
+msgstr "Tabla no creada."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:823
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:860
+msgid "Log Started."
+msgstr "Registro Iniciado."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:952
+msgid "Today"
+msgstr "Hoy"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:953
+msgid "Tomorrow "
+msgstr "Mañana"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:953
+msgid "Yesterday "
+msgstr "Ayer"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:954
+#, php-format
+msgid " in %d days "
+msgstr "en %d días "
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:954
+#, php-format
+msgid "%d days ago"
+msgstr "hace %d días"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:1074
+msgid "Automatically logged failed JSON response: "
+msgstr "Falló el registro automático de la respuesta JSON:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:1195
+#, php-format
+msgid "%s hours ago"
+msgstr "%s horas atrás"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_ud.php:1197
+#, php-format
+msgid "%s minutes ago"
+msgstr "%s minutos"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:97
+msgid "Other Properties"
+msgstr "Otras propiedades"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:97
+#, fuzzy
+msgid "Show other properties (if any) with the same Parent"
+msgstr "Mostar propiedades hijas (si tuviese) para la propiedad actual"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:163
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:366
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:579
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:806
+#, php-format
+msgid "%s at %s for %s"
+msgstr "%s en %s para %s"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:182
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:387
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:602
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:830
+msgid "More"
+msgstr "Más"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:188
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:393
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:608
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:837
+msgid "View All"
+msgstr "Ver Todo"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:230
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:435
+msgid "The widget will not be displayed if the currently viewed property has no children."
+msgstr "Este widget no será mostrado si la propiedad visual actual no tiene subpropiedades"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:232
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:437
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:652
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:878
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1024
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1230
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:1066
+msgid "Title:"
+msgstr "Título:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:239
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:446
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:661
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:885
+msgid "Hide Images?"
+msgstr "Ocultar imágenes?"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:248
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:455
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:670
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:894
+msgid "Image Size:"
+msgstr "Tamaño de la imágen:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:252
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:460
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:675
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:899
+msgid "Listings to display?"
+msgstr "Listados para mostrar?"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:257
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:468
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:680
+msgid "Select the stats you want to display"
+msgstr "Seleccione las estadísticas que desea mostrar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:275
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:486
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:699
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:923
+msgid "Address Format:"
+msgstr "Formato de la Dirección:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:282
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:493
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:707
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:930
+msgid "Show \"More\" link?"
+msgstr "Mostrar \"Más\" enlaces?"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:289
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:500
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:714
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:937
+msgid "Show \"View All\" link?"
+msgstr "Mostrar \"Ver Todos\" los enlaces?"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:306
+msgid "Child Properties"
+msgstr "Subpropiedad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:306
+msgid "Show child properties (if any) for currently displayed property"
+msgstr "Mostar propiedades hijas (si tuviese) para la propiedad actual"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:517
+msgid "Featured Properties"
+msgstr "Propiedades Destacadas"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:517
+msgid "List of properties that were marked as Featured"
+msgstr "Lista de propiedades que se han marcado como destacadas"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:734
+msgid "Featured Properies"
+msgstr "Inmuebles Destacados"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:754
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:879
+msgid "Latest Properties"
+msgstr "Últimas Propiedades"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:754
+msgid "List of the latest properties created on this site"
+msgstr "Lista de los últimos inmuebles creados en este sitio"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:905
+msgid "Select stats you want to display"
+msgstr "Seleccione las estadísticas que desea mostrar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:955
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1025
+msgid "Property Search"
+msgstr "Buscar Propiedades"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:955
+msgid "Display a highly customizable property search form"
+msgstr "Mostrar una propiedad altamente personalizable en el formulario de búsqueda"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1019
+msgid "No searchable property types were found."
+msgstr "Ningún tipo de propiedades se ha encotrado."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1034
+msgid "Use pagination"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1038
+msgid "Items per page"
+msgstr "Items por página"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1045
+msgid "Property types to search:"
+msgstr "Tipos de propiedades para buscar:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1060
+msgid "Select the attributes you want to search."
+msgstr "Seleccionar los atributos que desea buscar."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1108
+msgid "City is an automatically created attribute once the address is validated."
+msgstr "La ciudad es un atributo que se crea automáticamente una vez que la dirección es validada en Google Maps."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1135
+msgid "Search Properies"
+msgstr "Buscar Propiedad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1158
+msgid "Property Gallery"
+msgstr "Galleria fotografica del anuncio"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1158
+msgid "List of all images attached to the current property"
+msgstr "Lista de todas las imágenes que se adjuntan al inmueble actual"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1236
+msgid "Thumbnail Size:"
+msgstr "Tamaño de la miniatura:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1242
+msgid "Popup Image Size:"
+msgstr "Tamaño de la imágen del pop-up:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/class_widgets.php:1250
+#, php-format
+msgid "Show %s Images"
+msgstr "Mostrar %s Imágen"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:47
+msgid "Developer"
+msgstr "Desarrollador"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:88
+msgid "Property Types"
+msgstr "Tipos de Propiedad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:90
+msgid ""
+"<p>Create new property types using this menu. </p>\n"
+"\t\t\t\t<p>The <b>slug</b> is automatically created from the title and is used in the back-end.  It is also used for template selection, example: floorplan will look for a template called property-floorplan.php in your theme folder, or default to property.php if nothing is found.</p>\n"
+"\t\t\t\t<p>If <b>Searchable</b> is checked then the property will be loaded for search, and available on the property search widget.</p>\n"
+"\t\t\t\t<p>If <b>Location Matters</b> is checked, then an address field will be displayed for the property, and validated against Google Maps API.  Additionally, the property will be displayed on the SuperMap, if the feature is installed.</p>\n"
+"\t\t\t\t<p><b>Hidden Attributes</b> determine which attributes are not applicable to the given property type, and will be grayed out in the back-end.</p>\n"
+"\t\t\t\t<p><b>Inheritance</b> determines which attributes should be automatically inherited from the parent property.</p>"
+msgstr ""
+"<p>Crear nuevos tipos de propiedad mediante este menú.</p>\n"
+"\t\t\t\t<p>El <b>slug</b> se crea automáticamente a partir del título y se utiliza en el back-end. También se utiliza para la selección de la plantilla, por ejemplo: el plano buscará una plantilla llamada property-floorplan.php en su carpeta de temas, o por defecto a property.php si no se encuentra nada.</p>\n"
+"\t\t\t\t<p>Si la <b>búsqueda</b>está activada, la propiedad será cargada para la búsqueda, y disponible en el widget de búsqueda de inmuebles.</p>\n"
+"\t\t\t\t<p>Si la<b>ubicación</b> está activada,  un campo de dirección se mostrará para la propiedad, y validados contra el API de Google Maps. Además, la propiedad se muestra en la SuperMap, si la función está instalada.</p>\n"
+"\t\t\t\t<p>Los <b>Atributros Ocultosi</b> determinan que atributos no son aplicables a un tipo de propiedades determinade, y será  gris en el back-end.</p>\n"
+"\t\t\t\t<p>La<b>Herencia</b> determina qué atributos se heredan automáticamente de la propiedad de los padres.</p>"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:100
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:201
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:275
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:155
+msgid "Property Type"
+msgstr "Tipos de Propiedad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:101
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:276
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:414
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:109
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:285
+msgid "Slug"
+msgstr "Slug"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:103
+msgid "Hidden Attributes"
+msgstr "Atributos Ocultos"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:104
+msgid "Inheritance"
+msgstr "Atributos Hereditarios"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:123
+msgid "Searchable"
+msgstr "Búsqueda"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:128
+msgid "Location Matters"
+msgstr "Location Matters"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:179
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:262
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:300
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:429
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:859
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:159
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:349
+msgid "Add Row"
+msgstr "Agregar Fila"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:190
+msgid "Property Fields"
+msgstr "Campos relativos a la propiedad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:192
+msgid "Property Stats"
+msgstr "Estadísticas de la Propiedad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:193
+msgid ""
+"<p>Property attributes are meant to be short entries that can be searchable, on the back-end attributes will be displayed as single-line input boxes. On the front-end they are displayed using a definitions list.</p>\n"
+"\t\t\t\t<p>Making an attribute as \"searchable\" will list it as one of the searchable options in the Property Search widget settings.</p>\n"
+"\t\t\t\t<p>Be advised, attributes added via add_filter() function supercede the settings on this page.</p>"
+msgstr ""
+"<p>Los atributos del inmueble están destinados a ser entradas cortas que puedan ser buscadas, los atributos de fondo se muestran como cuadros de entrada de una sola línea. En el front-end que se muestra mediante una lista de definiciones.</p>\n"
+"\t\t\t\t<p>Rendere un attributo \"ricercabile\" lo farà apparire nelle opzioni di ricerca nello widget di Ricerca immobili.</p>\n"
+"\t\t\t\t<p>Attenzione, gli attributi aggiunti tramite la funzione add_filter() sostituiscono le impostazioni presenti in questa pagina.</p>"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:245
+msgid "input"
+msgstr "input"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:246
+msgid "range (input)"
+msgstr "rango (input)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:247
+msgid "range (dropdown)"
+msgstr "rango (dropdown)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:248
+msgid "dropdown"
+msgstr "dropdown"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:249
+msgid "checkbox"
+msgstr "checkbox"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:253
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:291
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:99
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:423
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:149
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:325
+msgid "Delete"
+msgstr "Eliminar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:268
+msgid "Property Meta"
+msgstr "Propiedad Meta"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:269
+msgid "Meta is used for descriptions,  on the back-end  meta fields will be displayed as textareas.  On the front-end they will be displayed as individual sections."
+msgstr "Meta es utilizado para las descripciones, en el back-end de los campos de metadatos se muestra como áreas de texto. En el front-end que se muestran como secciones individuales. "
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:311
+msgid "Log"
+msgstr "Log"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:313
+msgid "Show Log."
+msgstr "Mostrar Log"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_admin_tools.php:314
+msgid "The log is always active, but the UI is hidden.  If enabled, it will be visible in the admin sidebar."
+msgstr "El registro es siempre activo, pero la interfaz de usuario está oculta. Si se activa, será visible en la barra lateral de administración."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:98
+msgid "Edit"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:212
+msgid "Attach to Agent"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:265
+msgid "Saved."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:285
+#, fuzzy
+msgid "No Properties."
+msgstr "Propiedades"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:304
+msgid "Create Agent"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:304
+msgid "Update Agent"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:318
+#, fuzzy
+msgid "Display Name"
+msgstr "Visualización"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:323
+#, fuzzy
+msgid "Username"
+msgstr "Usuario"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:326
+msgid "Usernames cannot be changed."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:331
+#, fuzzy
+msgid "E-Mail"
+msgstr "Principal"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:336
+msgid "Widget Content"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:359
+msgid "Primary"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:360
+msgid "Save"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:361
+#, fuzzy
+msgid "Associated Properties"
+msgstr "Propiedades Destacadas"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:362
+#, fuzzy
+msgid "Images"
+msgstr "Todas las Imágenes:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:385
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:471
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:508
+msgid "Agents"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:405
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:407
+#, fuzzy
+msgid "Fields"
+msgstr "camas"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:408
+msgid "Custom fields may be used to adapt the information about agents to suit your needs."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:413
+msgid "Field name"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:437
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:439
+msgid "Capabilities"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:440
+msgid "Assign capabilities to agents."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:446
+msgid "Capability"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:512
+#, fuzzy
+msgid "User updated."
+msgstr "Anuncio actualizado."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:516
+msgid "User removed."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:551
+#, fuzzy
+msgid "Edit Agent"
+msgstr "Modificar Propiedad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:591
+msgid "Associated Agents"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:648
+#, php-format
+msgid "You can add fields on the <a href=\"%s\">settings page</a>."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:653
+msgid "Flyer Writeup"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:656
+msgid "Please enter a writeup for flyers."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:703
+#, fuzzy
+msgid "No images found."
+msgstr "No se encontraron propiedades"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:707
+msgid "Remove"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:915
+msgid "Moderate comments"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:916
+msgid "Manage categories"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:917
+msgid "Manage links"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:918
+msgid "Upload files"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:919
+#, fuzzy
+msgid "Edit posts"
+msgstr "Modificar Propiedad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:920
+msgid "Edit other's posts"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:921
+msgid "Edit published posts"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:922
+msgid "Publish posts"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:923
+#, fuzzy
+msgid "Edit pages"
+msgstr "Modificar Propiedad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:924
+msgid "Read"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:925
+msgid "Edit other's pages"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:926
+msgid "Edit published pages"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:927
+#, fuzzy
+msgid "Publish pages"
+msgstr "Imágenes del Slideshow:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:928
+#, fuzzy
+msgid "Delete pages"
+msgstr "Eliminar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:929
+msgid "Delete other's pages"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:930
+msgid "Delete published pages"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:931
+#, fuzzy
+msgid "Delete posts"
+msgstr "Eliminar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:932
+msgid "Delete other's posts"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:933
+msgid "Delete published posts"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:934
+msgid "Delete private posts"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:935
+msgid "Edit private posts"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:936
+msgid "Read private posts"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:937
+msgid "Delete private pages"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:938
+msgid "Edit private pages"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_agents.php:939
+msgid "Read private pages"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:94
+#, fuzzy, php-format
+msgid ", or <a href=\"%s\">view flyer</a>."
+msgstr "Propiedad Actualizada <a href=\"%s\">Visualizar anuncio</a>"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_pdf_flyer.php:113
+msgid "Flyer"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:77
+#, fuzzy
+msgid "Last Import"
+msgstr "Nuova proprietà"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:142
+msgid "Look up XML import history."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:143
+msgid "Show XML Import History"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:288
+msgid "Import"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:692
+msgid "If your file is not remotely hosted, simply upload it using the Media Uploader, then copy and paste the URL below."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:708
+msgid "Choose a property element."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:713
+msgid "Send GET variables as POST data."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:727
+msgid "Give the import some sort of title for reference."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:758
+msgid "Allow to be run from URL for cron jobs."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:765
+msgid "Remove and re-download all images."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:771
+msgid "Do not import properties that have been imported less than "
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:773
+#, fuzzy
+msgid "hour(s) ago."
+msgstr "%s horas atrás"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:782
+msgid "Remove listings that are no longer in source XML from this site's database."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:790
+msgid "Completely remove all existing properties prior to import."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:807
+#, fuzzy
+msgid "WP-Property Attribute"
+msgstr "WP-Property Características Premium "
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:808
+msgid "XPath Rule"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:858
+msgid "Delete selected"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:874
+msgid "Unique id field"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:880
+msgid "Save Configuration"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_property_import.php:1318
+msgid "You do not have any saved schedules. Create one now."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:52
+msgid "Slideshow Options"
+msgstr "Opciones del Slideshow"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:308
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:949
+msgid "Slideshow Images:"
+msgstr "Imágenes del Slideshow:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:330
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:963
+msgid "All Images:"
+msgstr "Todas las Imágenes:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:482
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:491
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1104
+msgid "Slideshow"
+msgstr "Slideshow"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:520
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:667
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:908
+msgid "Global Slideshow"
+msgstr "Slideshow General"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:564
+msgid "Single Listing Slideshow"
+msgstr "Slideshow para un solo listado"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:585
+msgid "Slideshow image size to be used for single property pages."
+msgstr "Tamaño de las imágenes del Slideshow que se usará para las páginas de una sola propiedad"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:591
+msgid "Thumbnail Width"
+msgstr "Ancho de la miniatura:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:596
+msgid "This width is used on \"Slideshow\" page on the Property editing page to display available images, this setting <b>does not</b> affect the actual slideshow on the front-end."
+msgstr "Este ancho es usado en la página \"Slideshow\", en la página de edición de la Propiedad, para mostrar las imágenes disponibles. Esta opción no afecta el slideshow actual en el front-end."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:699
+msgid "Slideshow selection and order saved."
+msgstr "Selección y presentación del slideshow para guardar."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:917
+msgid "WP-Property Slideshow"
+msgstr "Slideshow WP-Property"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:918
+msgid "This slideshow can be integrated into your front-end pages by either using the shortcode, or pasting PHP code into your theme."
+msgstr "Este slideshow se puede integrar en sus páginas de inicio, ya sea utilizando el código corto, o pegando el código PHP en su tema."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:921
+msgid "Drag images from selection on the left to the selection on the right, and then click save."
+msgstr "Arrastra las imágenes desde la selección de la izquierda hasta la selección de la derecha, y luego haga clic en Guardar."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:922
+#, php-format
+msgid "This list gets all images from your media library that are over %s pixels wide and %s pixels tall."
+msgstr "Esta lista de todas las imágenes de tu biblioteca de medios de comunicación que son más de% s píxeles de ancho y% s alto píxeles."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:923
+msgid "To include the slideshow into the content of a property, use the following shortcode: [property_slideshow]"
+msgstr "Para incluir el slideshow en el contenido de una propiedad, use el siguiente shortcode: [property_slideshow]"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:924
+msgid "Developers: Include the slideshow in your PHP files by using global_slideshow(); for the global slideshow and property_slideshow(property_id); for property-specific slideshows. "
+msgstr "Desarrolladores: Incluye el slideshow en tus archivos PHP usando global_slideshow(); para el slideshow global y property_slideshow(property_id); para el slideshow de una propiedad específica."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:931
+msgid "Save Selection and Order"
+msgstr "Guardar Selección y Presentación"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1007
+msgid "Disable slideshow on property page."
+msgstr "Desabilitar slideshow en la página del anuncio."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1089
+msgid "Some Slideshow Options"
+msgstr "Algunas Opciones del Slideshow"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1098
+msgid "WPP Slideshow"
+msgstr "WPP Slideshow"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_slideshow.php:1105
+msgid "WPP Slideshow with options"
+msgstr "WPP Slideshow con opciones"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:42
+msgid "Supermap"
+msgstr "Supermap"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:90
+msgid "Supermap sidebar thumbnail:"
+msgstr "Miniatura para el lateral del Supermap:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:94
+msgid "If you create a new image size, please be sure to regenerate all thumbnails. "
+msgstr "Si creas un nuevo tamaño de imagen, por favor asegúrate de regenerar todas las miniaturas."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:99
+msgid "Map Areas:"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:110
+msgid "Fill Color"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:111
+msgid "Opacity"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:112
+msgid "Stoke Color"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:113
+msgid "Hover Color"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:193
+msgid "Supermap Options"
+msgstr "Opciones de Supermap"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:200
+msgid "Exclude property from supermap"
+msgstr "Excluir la propiedad de supermap"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:698
+msgid "Options"
+msgstr "Opciones"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:809
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:821
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:848
+msgid "Any"
+msgstr "Cualquiera"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/premium/class_wpp_supermap.php:863
+msgid "Loading"
+msgstr "Cargando"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:121
+msgid "Property Settings"
+msgstr "Configuración"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:146
+msgid "Main"
+msgstr "Principal"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:147
+msgid "Display"
+msgstr "Visualización"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:168
+msgid "Plugins"
+msgstr "Plugins"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:170
+msgid "Help"
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:180
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:383
+msgid "Property Page"
+msgstr "Página de Propiedades"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:183
+msgid "Property (Default)"
+msgstr "Annuncio (Default)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:201
+msgid "Always overwrite this page's content with [property_overview]."
+msgstr "Sobreescribir siempre el contenido de esta página con  [property_overview]."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:209
+msgid "If checked, be sure to include [property_overview] somewhere in the content, or no properties will be displayed."
+msgstr "Si marca esta opción, asegúrate de incluir  [property_overview] en algún lugar del contenido, de lo contrario no se mostrará ninguna propiedad."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:213
+msgid "View list of available shortcodes."
+msgstr "Ver listado de shortcodes disponibles."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:217
+#, fuzzy
+msgid "The <b>property page</b> will be used to display property search results, as well as the base for property URLs.  For example, if the URL of your property page is "
+msgstr "La página de la propiedad será usada para mostrar los resultados de las búsquedas, como así también será la base de las URLs de las propiedades. Por ejemplo, si la URL de una propiedad es"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:222
+msgid "Default Phone Number"
+msgstr "Número de Teléfono Predeterminado"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:225
+msgid "Phone number to use when a property-specific phone number is not specified."
+msgstr "Número de teléfono por defecto del sistema."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:230
+msgid "Address Attribute"
+msgstr "Atributos de la dirección "
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:232
+msgid "Attribute to use for address:"
+msgstr "Atributos de utilizar la dirección:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:234
+msgid "and localize for:"
+msgstr "y localizar a:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:239
+msgid "Currency"
+msgstr "Moneda"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:242
+msgid "Currency symbol."
+msgstr "Símbolo de moneda."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:255
+msgid "General Settings"
+msgstr "Configuración General"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:257
+msgid "These are the general display settings"
+msgstr "Parámetros de visualización en general "
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:260
+msgid "Automatically include default CSS."
+msgstr "Incluir automaticamente CSS por defecto."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:269
+msgid "Image Sizes"
+msgstr "Tamaño de las imágenes"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:272
+msgid "Image sizes used throughout the plugin."
+msgstr "Tamaños de las imágenes utilizadas en el plugin."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:274
+#, php-format
+msgid "After adding/removing image size, be sure to <a href=\"%s\">regenerate thumbnails</a> using the Regenerate Thumbnails plugin."
+msgstr "Dopo aver aggiunto/rimosso le dimensioni immagine, assicurati di <a href=\"%s\">rigenerare le miniature</a> con il plugin Regenerate Thumbnails."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:278
+msgid "We strongly recommend to <a href=\"http://wordpress.org/extend/plugins/regenerate-thumbnails/\">Regenerate Thumbnails</a> plugin by Viper007Bond."
+msgstr "Se recomienda utilizar el  plugin <a href=\"http://wordpress.org/extend/plugins/regenerate-thumbnails/\">Regenerate Thumbnails</a> de Viper007Bond."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:286
+msgid "Width"
+msgstr "Ancho"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:287
+msgid "Height"
+msgstr "Alto"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:363
+msgid "Overview Shortcode"
+msgstr "Descripción del Código Abreviado"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:366
+#, fuzzy
+msgid ""
+"These are the settings for the [property_overview] shortcode.  The shortcode displays a list of all building / root properties.<br />\n"
+"\t\t\t\tThe display settings may be edited further by customizing the <b>wp-content/plugins/wp-properties/templates/property-overview.php</b> file.  To avoid losing your changes during updates, create a <b>property-overview.php</b> file in your template directory, which will be automatically loaded."
+msgstr "Estos son los valores para el código abreviado [property_overview]. La muestra abreviada de una lista de todas las propiedades de la raíz del edificio. <br>La configuración de la pantalla puede ser editada aún más por la personalización del archivo <b>wp-content/plugins/wp-properties/templates/property-overview.php</b>. Para evitar la pérdida de sus cambios durante las actualizaciones, crear un archivo <b>property-overview.php</b>  en el directorio de plantillas, que se carga automáticamente."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:370
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:449
+msgid "Thumbnail size:"
+msgstr "Tamaño de la miniatura:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:372
+msgid "Show children properties."
+msgstr "Mostrar las propiedades pequeñas."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:375
+msgid "Show larger image of property when image is clicked using fancybox."
+msgstr "Mostrar una imagen mayor cuando se hace clic con fancybox."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:385
+#, fuzzy
+msgid ""
+"These are the settings for the [property_overview] shortcode.  The shortcode displays a list of all building / root properties.<br />\n"
+"\t\t\t\tThe display settings may be edited further by customizing the <b>wp-content/plugins/wp-properties/templates/property.php</b> file.  To avoid losing your changes during updates, create a <b>property.php</b> file in your template directory, which will be automatically loaded."
+msgstr "Estos son los valores para el código abreviado [property_overview]. La muestra abreviada de una lista de todas las propiedades de la raíz del edificio.  <br>La configuración de la pantalla puede ser editada aún más por la personalización del archivo <b>wp-content/plugins/wp-properties/templates/property.php</ b>. Para evitar la pérdida de sus cambios durante las actualizaciones, crear un archivo <b>property.php</ b> en el directorio de plantillas, que se carga automáticamente."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:389
+msgid "Display larger image, or slideshow, at the top of the property listing."
+msgstr "Mostrar la imágen más grande, o pasar las diapositivas, en la parte superior de la lista de propiedades."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:400
+msgid "Google Maps"
+msgstr "Google Maps"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:404
+msgid "Map Thumbnail Size:"
+msgstr "Tamaño del mapa miniatura:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:405
+msgid "Map Zoom Level:"
+msgstr "Nivel del zoom del Mapa:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:427
+msgid "Address Display"
+msgstr "Dirección de pantalla"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:434
+msgid "Available tags:"
+msgstr "Tags Disponibles:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:442
+#, fuzzy
+msgid "Admin Overview Page"
+msgstr "Pagina General"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:446
+msgid "These settings are for the main property page on the back-end."
+msgstr "Estos ajustes son para la página de propiedades principales en el back-end."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:481
+msgid "WP-Property Premium Features"
+msgstr "WP-Property Características Premium "
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:482
+msgid "Premium features will become available shortly, we are still waiting on more feedback on the core of the plugin."
+msgstr "Características Premium estará disponible en breve, todavía estamos esperando a más información sobre el núcleo del plugin."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:507
+msgid "[learn more]"
+msgstr "[approfondisci]"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:520
+msgid "Disable plugin."
+msgstr "Desactivar el plugin."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:524
+msgid "Feature installed, using version"
+msgstr "Característica instalada, utilizando la versión"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:526
+#, php-format
+msgid "Please visit <a href=\"%s\">TwinCitiesTech.com</a> to purchase this feature."
+msgstr "Por favor, visite <a href=\"%s\">TwinCitiesTech.com</a> para comprar esta función."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:541
+msgid "Enter in the ID of the property you want to look up, and the class will be displayed below."
+msgstr "Introduzca el ID de la propiedad que desea buscar, y la clase se muestra a continuación."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:543
+msgid "Lookup"
+msgstr "Visualizar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:543
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:551
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:550
+msgid "Look up the <b>$wp_properties</b> global settings array.  This array stores all the default settings, which are overwritten by database settings, and custom filters."
+msgstr "Busque el array <b>$wp_properties</b>de la configuración global. Esta matriz de las tiendas de toda la configuración por defecto, que son sustituidos por configuración de base de datos y filtros personalizados."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:551
+msgid "Show $wp_properties"
+msgstr "Mostrar $wp_properties"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:557
+msgid "Force check of allowed premium features."
+msgstr "Fuerza de verificación de características premium permitido."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:558
+msgid "Check Updates"
+msgstr "Comprobar actualizaciones."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:564
+msgid "Revalidate"
+msgstr "Revalidar"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/page_settings.php:577
+msgid "Save Changes"
+msgstr "Salvar modificaciónes"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:11
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:145
+msgid "(no parent)"
+msgstr "(ninguna propiedad padre)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:17
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:18
+msgid "Parent"
+msgstr "Propiedad Padre"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:26
+msgid "Template"
+msgstr "Plantilla"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:27
+msgid "Page Template"
+msgstr "Plantilla de Página"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:28
+msgid "Default Template"
+msgstr "Plantilla por Defecto"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:35
+msgid "Need help? Use the Help tab in the upper right of your screen."
+msgstr "¿Necesita ayuda? Use la pestaña Ayuda en la parte superior derecha de la pantalla."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:149
+msgid "Falls Under"
+msgstr "Dentro de"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:182
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/core/ui/property_metaboxes.php:206
+#, php-format
+msgid "Editing %s is disabled, it may be inherited."
+msgstr "La edición%s está deshabilitada, puede ser heredada."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/default_api.php:119
+msgid "For Sale"
+msgstr "En Venta"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/default_api.php:120
+msgid "For Rent"
+msgstr "En Alquiler"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/default_api.php:127
+msgid "This is a rental property."
+msgstr "Propiedad en alquiler."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/default_api.php:133
+msgid "This property is for sale."
+msgstr "Propiedad a la venta."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/default_api.php:152
+msgid "Set Coordinates Manually (When unchecked the coordinates will be set (and validated) by Google Maps)"
+msgstr "Establecer coordenadas de forma manual (si esta opción no está marcada, las coordenadas serán establecidas y validadas por Google Maps)"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/default_api.php:157
+msgid "Latitude"
+msgstr "Latitud"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/default_api.php:162
+msgid "Longitude"
+msgstr "Longitud"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/default_api.php:217
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/default_api.php:222
+msgid "Yes"
+msgstr "Si"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/default_api.php:256
+#, fuzzy
+msgid "Format phone number."
+msgstr "Número de Teléfono Predeterminado"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/default_api.php:475
+#, fuzzy
+msgid "Address was validated by Google Maps."
+msgstr "<span class='description'>La dirección fue validada por  Google Maps.</span>"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/default_api.php:477
+#, fuzzy
+msgid "Address has not yet been validated, should be formatted as: street, city, state, postal code, country. Locations are validated through Google Maps."
+msgstr "<span class='description'>La dirección no ha sido validada, debe tener el formato: calle, ciudad, estado, código postal, país. Las ubicaciones son validadas a través de Google Maps.</span>"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/property-overview-page.php:24
+msgid "Sorry, we could not find what you were looking for.  Since you are here, take a look at some of our properties."
+msgstr "Lo sentimos, no pudimos encontrar lo que estás buscando. Puesto que usted está aquí, eche un vistazo a algunas de nuestras propiedades."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/property-overview.php:117
+#, php-format
+msgid "Sorry, no properties found - try expanding your search, or <a href=\"%s\">view all</a>."
+msgstr "Es una lástima, sin anuncios encontrados, intenta ampliar su búsqueda, o <a href=\"%s\">visualizar todos los anuncios disponibles</a>."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/property-pagination.php:18
+msgid "Prev"
+msgstr "Anterior"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/property-pagination.php:31
+msgid "Next"
+msgstr "Siguiente"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/property-pagination.php:38
+msgid "Order By:"
+msgstr "Orden"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/property.php:144
+msgid "Interested?"
+msgstr "Interesado?"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/property.php:150
+msgid "Return to building page."
+msgstr "Volver a la página de la inmobiliaria."
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/template-functions.php:27
+msgid "Conditional query tags do not work before the query is run. Before then, they always return false."
+msgstr ""
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/template-functions.php:321
+msgid "Price:"
+msgstr "Precio:"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/template-functions.php:322
+msgid "Bed(s):"
+msgstr "Cama(s):"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/template-functions.php:323
+msgid "Bath(s):"
+msgstr "Baño(s):"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/template-functions.php:324
+msgid "Square Ft:"
+msgstr "Metros cuadrados"
+
+#: C:\wamp\www\usabilitydynamics.com\development\wp-property\wp-content\plugins\wp-property/templates/template-functions.php:499
+msgid "Search"
+msgstr "Buscar"
+
+#~ msgid "Pagination options for search results"
+#~ msgstr "Opciones de paginación de resultados de la búsqueda"
+
+#~ msgid "Do you want to use pagination?"
+#~ msgstr "Quieres usar la paginación?"
+
+#~ msgid "Sortable"
+#~ msgstr "Orden"
+
+#~ msgid "Show common values."
+#~ msgstr "Mostrar valores comunes."
+
+#~ msgid "Cancel."
+#~ msgstr "Cancelar."
+
+#~ msgid "Admin UI"
+#~ msgstr "Administrador de la Interfaz"
+
+#~ msgid "Troubleshooting"
+#~ msgstr "Solución de Problemas"
+
+#~ msgid "Select an item"
+#~ msgstr "Seleccionar item"
+
+#~ msgid "Show Image?"
+#~ msgstr "Mostrar Imágen?"
+
+#~ msgid "select image dimensions"
+#~ msgstr "selecciona el tamaño de imágen"
+
+#~ msgid ""
+#~ "This width used on \"Media &rarr; Slideshow\" page to display available "
+#~ "images"
+#~ msgstr ""
+#~ "Este ancho es utilizado en el  \"Media &rarr; Slideshow\" de la página "
+#~ "para mostrar las imágenes disponibles"
+
+#~ msgid "Property Slideshow <br>(displayed on individual property pages)"
+#~ msgstr ""
+#~ "Propiedades del Slideshow  <br>(visualizadas en la página individual del "
+#~ "anuncio)"
+
+#~ msgid "For rent"
+#~ msgstr "En Alquiler"
+
+#~ msgid "For sale"
+#~ msgstr "En Venta"
+
+#~ msgid "bed"
+#~ msgstr "cama"
+
+#~ msgid "Automatically insert property overview into property page content."
+#~ msgstr ""
+#~ "Insertar automáticamente la información general de la propiedad en el "
+#~ "contenido de la página."
+
+#~ msgid ""
+#~ "If unchecked, you will have to copy and paste one of the shortcodes into "
+#~ "the content to display property information on the page."
+#~ msgstr ""
+#~ "Si no se controla, tendrá que copiar y pegar uno de los códigos cortos en "
+#~ "el contenido que se mostrará información de la propiedad en la página."
+
+#~ msgid "[property_overview] - Property Overview"
+#~ msgstr "[property_overview] - Descripción del inmueble"
+
+#~ msgid "Copy and paste the shortcodes into the page content."
+#~ msgstr "Copia y pega el código de acceso en el contenido de la página."
+
+#~ msgid "Submit"
+#~ msgstr "Invia"
+
+#~ msgid "Speakers"
+#~ msgstr "Speakers"
+
+#~ msgid "Speaker"
+#~ msgstr "Speaker"

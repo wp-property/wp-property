@@ -1,0 +1,151 @@
+/*  
+  Theme-specific styles are introduced in WP-Property 1.08.
+  New styles specifically for Denali can be stored here.
+  This will prevent us form having to release a new version of Denali whenever we add new features to WPP that affect it.
+
+  WP-Property loads this stylesheet after the other Denali styles are loaded, so it has authority.  
+
+  This file is loaded for Denali child theme as well.  Loading can be disabled in Settings -> Display -> "Do not load theme-specific stylesheet."
+
+  This file should only include critical CSS rules - mostly structural. Colors and images should be loaded into the main Denali styles.
+
+  Version: 0.1
+ */
+ 
+ 
+/* FEPS Styles Begin */
+
+
+.container .wpp_feps_form .wpp_feps_row_wrapper {
+  list-style:none !important;  
+  width: 100%;
+  padding: 0 0 9px 0;
+  margin-bottom: 13px;
+}
+
+.container .entry-content .wpp_feps_form  li {
+  list-style: none;
+  list-style-type: none;
+}
+
+.wpp_feps_form {
+  overflow: hidden;
+}
+
+
+.wpp_feps_form span.wpp_feps_input_error {
+  color: #A53535; 
+}
+
+.wpp_feps_form .wpp_feps_row_wrapper.wpp_checkbox  .wpp_feps_label_wrapper {  
+  position: absolute;
+  text-align: left;
+  width: 100%;
+  z-index: 1;
+}
+
+.wpp_feps_form ul.feps_property_input_fields li.wpp_feps_row_wrapper.wpp_checkbox label {
+  display: block;
+  margin-left: 262px;
+  overflow: auto;
+}
+
+.wpp_feps_form .wpp_feps_row_wrapper.wpp_checkbox  .wpp_feps_label_wrapper .the_title {
+  float: left;
+  text-transform: none;
+}
+
+.wpp_feps_form .wpp_feps_row_wrapper.wpp_checkbox .wpp_feps_input_wrapper {
+  clear: none;
+  display: block;
+  float: left;
+  margin: 0;
+  min-height: 2em;
+  z-index: 2;
+}
+
+.wpp_feps_form input.wpp_feps_submit_form {
+  float: right;
+}
+ 
+.wpp_feps_form .wpp_feps_row_wrapper .wpp_feps_label_wrapper {
+  clear: left;
+  float: left;
+  position: relative;
+  width: 215px;  /* Base Width */
+  text-align: right;
+}
+.wpp_feps_form .feps_user_input_fields .wpp_feps_label_wrapper,
+.wpp_feps_form .feps_user_input_fields .wpp_feps_input_wrapper {
+  margin-top: 10px;
+}
+
+.wpp_feps_form .wpp_feps_row_wrapper .wpp_feps_input_wrapper {
+  clear: right;
+  float: right;
+  margin-left: -240px; /* -(40 + Base Width) */
+  width: 100%;
+  margin-bottom: 0px;
+  position: relative;
+}
+
+.wpp_feps_form .wpp_feps_row_wrapper .wpp_feps_input_wrapper  span.images_limit {
+  position: absolute;
+}
+
+.wpp_feps_form .wpp_feps_row_wrapper .wpp_feps_input_wrapper .wpp_feps_input_content {
+  margin-left: 230px; /* +20 to Base Width */ 
+  padding-right: 3px;
+}
+
+.wpp_feps_form .wpp_feps_row_wrapper .wpp_feps_description_wrapper {
+  clear: both;
+  margin-left: 230px; 
+}
+
+.wpp_feps_form ul.feps_property_input_fields div.qq-upload-button {
+  margin-left: 220px; 
+  float: left;
+}
+.wpp_feps_form ul.feps_property_input_fields ul.qq-upload-list {
+  clear: both;
+  padding-top: 15px;
+}
+
+.wpp_feps_form ul.feps_property_input_fields li.qq-upload-success {
+  margin: 0 0 10px 10px;
+  padding: 0;
+  float: right;
+}
+
+.wpp_feps_form ul.feps_property_input_fields img.wpp_feps_preview_thumb {
+  border: 3px solid #FFFFFF;
+  box-shadow: 0 0 4px #000000;
+  -moz-box-shadow: 0 0 4px #000000;
+  -webkit-box-shadow: 0 0 4px #000000;
+  -khtml-box-shadow: 0 0 4px #000000;
+  -o-box-shadow: 0 0 4px #000000;
+  -ms-box-shadow: 0 0 4px #000000;
+  height: auto;
+  width: 188px !important;
+}
+
+.wpp_feps_form .the_title {
+  text-transform: uppercase;
+  float: right;
+}
+
+.wpp_feps_form .wpp_feps_ajax_message {
+    color: #5B4949;
+    display: block;
+    float: right;
+    line-height: 52px;
+    margin-right: 10px;
+    text-align: righ;
+}
+
+.wpp_feps_form .wpp_feps_row_wrapper.image_upload .wpp_feps_input_wrapper .wpp_feps_input_content { 
+    margin-left: 10px;
+}
+
+/* FEPS Styles End */

@@ -1,0 +1,12 @@
+html {
+  overflow-x: hidden;
+}
+.header_dropdown_div .wpp_search_properties_widget .wpp_search_elements li {
+  overflow: hidden !important;
+}
+.body_upper_background {
+  left:0px;
+}
+.wpp_pagination_slider_status {
+  margin-bottom: 5px;
+}
