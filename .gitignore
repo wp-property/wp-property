@@ -4,6 +4,7 @@
 .DS_Store
 .dynamic
 *premium
+*cache
 .Trashes
 *.sublime-project
 *.sublime-workspace
