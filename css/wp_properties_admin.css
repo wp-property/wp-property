@@ -1504,3 +1504,7 @@ p.pad10 {
   border-color: #DFDFDF;
   background-color: #EEEEEE;
 }
+
+#wp-list-table .column-feps {
+  width: 200px;
+}
