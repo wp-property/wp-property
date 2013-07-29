@@ -187,6 +187,7 @@ class WPP_Core {
 
     //** Load early so plugins can use them as well */
     wp_register_script( 'wpp-localization', get_bloginfo( 'wpurl' ) . '/wp-admin/admin-ajax.php?action=wpp_js_localization', array(), WPP_Version );
+    wp_localize_script( 'wpp-localization', 'wpp', array( 'instance' => $this->get_instance() ) );
 
     wp_register_script('wpp-jquery-fancybox', WPP_URL. 'third-party/fancybox/jquery.fancybox-1.3.4.pack.js', array('jquery','wpp-localization'), '1.7.3' );
     wp_register_script('wpp-jquery-colorpicker', WPP_URL. 'third-party/colorpicker/colorpicker.js', array('jquery','wpp-localization'));
@@ -195,7 +196,7 @@ class WPP_Core {
     wp_register_script('wp-property-admin-overview', WPP_URL. 'js/wp-property-admin-overview.js', array('jquery','wpp-localization'), WPP_Version);
     wp_register_script('wp-property-admin-widgets', WPP_URL. 'js/wp-property-admin-widgets.js', array('jquery','wpp-localization'), WPP_Version);
     wp_register_script('wp-property-backend-global', WPP_URL. 'js/wp-property-backend-global.js', array('jquery','wpp-localization'), WPP_Version);
-    wp_register_script('wp-property-global', WPP_URL. 'js/wp-property-global.js', array('jquery','wpp-localization'), WPP_Version);
+    wp_register_script( 'wp-property-global', WPP_URL. 'js/wp-property-global.js', array('jquery','wpp-localization'), WPP_Version );
     wp_register_script('jquery-cookie', WPP_URL. 'js/jquery.smookie.js', array('jquery','wpp-localization'), '1.7.3' );
 
     if(WPP_F::can_get_script($scheme . '://maps.google.com/maps/api/js?sensor=true')) {
@@ -1905,6 +1906,31 @@ class WPP_Core {
       global $current_screen;
       add_contextual_help($current_screen->id, '<p>'.__('Please upgrade Wordpress to the latest version for detailed help.', 'wpp').'</p><p>'.__('Or visit <a href="https://usabilitydynamics.com/tutorials/wp-property-help/" target="_blank">WP-Property Help Page</a> on UsabilityDynamics.com', 'wpp').'</p>');
     }
+  }
+
+
+  /**
+   * Returns specific instance data which is used by javascript
+   * Javascript Reference: window.wpp.instance
+   *
+   * @author peshkov@UD
+   * @since 1.38
+   * @return array
+   */
+  function get_instance() {
+
+    $data = array(
+      'request' => $_REQUEST,
+      'get' => $_GET,
+      'post' => $_POST,
+      'iframe_enabled' => false,
+    );
+
+    if( isset( $data[ 'request' ][ 'wp_customize' ] ) && $data[ 'request' ][ 'wp_customize' ] == 'on' ) {
+      $data[ 'iframe_enabled' ] = true;
+    }
+
+    return apply_filters( 'wpp::get_instance', $data );
   }
 
 }
