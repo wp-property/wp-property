@@ -1620,7 +1620,7 @@ class WPP_Core {
       $return['before'] = html_entity_decode($args['before']);
     }
 
-    $return['value'] = apply_filters('wpp_property_attribute_shortcode', $value, $the_property);
+    $return['value'] = apply_filters( 'wpp_property_attribute_shortcode', $value, $this_property );
 
     if($args['strip_tags'] == "true" && !empty($return['value'])) {
       $return['value'] = strip_tags($return['value']);
@@ -1631,7 +1631,7 @@ class WPP_Core {
     }
 
     //** When no value is found */
-    if(empty($value['value'])) {
+    if( empty( $return['value'] ) ) {
 
       if(!empty($args['if_empty'])) {
         return $args['if_empty'];
