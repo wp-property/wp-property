@@ -131,6 +131,15 @@ body.idevice .wpp_sidebar_listing .sidebar_gallery_item {
 
 /* FEPS Styles Begin */
 
+/* FEPS Menu */
+
+.wpp_feps_user_menu li,
+.wpp_feps_user_menu h4 {
+  margin-bottom: 10px;
+}
+
+/* END FEPS Menu */
+
 .wpp_feps_form .wpp_feps_input_wrapper.back_action {
   float: left;
 }
@@ -863,12 +872,17 @@ ul.wpp_google_maps_infobox .wpp_google_maps_attribute_row span.value{
 /* Version 1.0 End */
 
 
-#content .wpp_shortcode_search {
+#content .wpp_shortcode_search,
+#content .wpp_shortcode_feps_menu {
   background: #F2F2F2;
   padding: 10px;
   position: relative;
 }
 
+.wpp_shortcode_feps_menu h5 {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
 
 #content .wpp_shortcode_search  ul{
   list-style-type:none;
@@ -892,6 +906,26 @@ ul.wpp_google_maps_infobox .wpp_google_maps_attribute_row span.value{
 #content .wpp_shortcode_search  ul li.submit .wpp_search_button {
   margin:0;
 }
+
+#content .wpp_shortcode_feps_menu h5 {
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+#content .wpp_shortcode_feps_menu li h5 {
+  font-weight: normal;
+}
+
+#content .wpp_shortcode_feps_menu ul {
+  margin: 0;
+  list-style-position: inside;
+}
+
+#content .wpp_shortcode_feps_menu li.wpp_feps_filter {
+  list-style: none;
+}
+
 
 #content .shortcode_featured_properties dl, #content .shortcode_featured_properties dd, #content .shortcode_featured_properties dt {
   margin: 0;
@@ -1234,9 +1268,19 @@ ul.wpp_property_stats.list li .value {}
   display: block;
 }
 
+.wpp_feps_row .wpp_overview_feps_column {
+  background-color: #F7F7F7;
+  padding:10px 8px;
+  font-size: 1em;
+}
+
+#content .wpp_feps_row .wpp_overview_feps_column ul {
+  margin: 0;
+}
+
 div.wpp_overview_feps_column ul,
-.wpp_row_view .property_div div.wpp_overview_feps_column .feps_action{
-  padding: 0 0 0 5px;
+.wpp_row_view .property_div div.wpp_overview_feps_column .feps_action {
+  padding: 0;
   display: block;
 }
 
@@ -1260,37 +1304,18 @@ div.wpp_overview_feps_column ul{
   padding-left: 0;
 }
 
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action > li:first-child {
+  margin-left: 0;
+}
 
 .wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action > li,
 .wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action li.actions ul li{
   width: auto;
   float:left;
   clear:none;
+  margin-left: 10px;
 }
 
-.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action li.actions ul li{
-  margin: 0;
-  padding: 0;
-  line-height: 1.5em;
-}
-
-
-
-.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action li.actions ul li a{
-  width:auto;
-  padding: 0 0.5em;
-  margin-top: 0;
-}
-.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action li.actions ul li a:first-child{
-  padding: 0 0.5em 0 1em;
-}
-.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action li.actions ul li a:last-child{
-  padding: 0 1em 0 0.5em;
-}
-.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action > li.post_status,
-.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action > li.expired_date{
-  min-width: 9.5em;
-}
 
 .wpp_row_view .child_properties {
   clear: both;

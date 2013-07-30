@@ -27,6 +27,31 @@ ul.feps_user_input_fields li.wpp_feps_row_wrapper {
   margin-bottom: 10px;
 }
 
+#content .wpp_shortcode_feps_menu h5 {
+  margin-top: 0;
+}
+
+#content .wpp_shortcode_feps_menu li {
+  margin-left: 0;
+}
+
+#content .wpp_shortcode_feps_menu li h5 {
+  margin: 5px 0;
+}
+
 /* END FEPS */
+
+
+/* Property Search */
+
+#content .wpp_shortcode_search li {
+  margin-left: 0;
+}
+
+#content .wpp_shortcode_search ul li.submit {
+  padding: 0;
+}
+
+/* END Property Search */
 
 

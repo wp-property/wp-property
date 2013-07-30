@@ -501,6 +501,18 @@ ul.feps_property_input_fields li.required label {
   margin-top: 22px;
 }
 
+.wpp_shortcode_feps_menu li.wpp_feps_filter {
+  list-style-type: none;
+}
+
+.widget .wpp_shortcode_feps_menu ul {
+  margin-left: 0;
+}
+
+.widget .wpp_shortcode_feps_menu li {
+  list-style-position: inside;
+}
+
 /* Sponsored listings tabs */
 
 ul.wpp_feps_step_tabs {
