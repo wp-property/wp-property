@@ -343,3 +343,22 @@ input.wpp_checkbox.wpp_feps_input_error {
   margin-left: 0;
 }
 
+.widget_myfepswidget h3 {
+  margin-bottom: 10px;
+}
+
+#main ul .wpp_shortcode_feps_menu ul {
+  margin-left: 0;
+}
+
+#main ul .wpp_shortcode_feps_menu li {
+  margin-left: 0;
+  list-style-position: inside;
+}
+
+.wpp_shortcode_feps_menu li.wpp_feps_filter {
+  list-style-type: none;
+}
+
+/* END FEPS */
+

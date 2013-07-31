@@ -20,10 +20,12 @@ if (empty($argv[0])) {
   exit(1);
 }
 
+//** Enable/disable debug mode. debug_mode argv must be passed to enable it. */
+define( 'WPP_DEBUG_MODE', ( !empty( $argv[3] ) && $argv[3] == 'debug_mode' ? true : false ) );
+
 $cron_action = $argv[1];
 $schedule_hash = $argv[2];
 $ms_url = (!empty($argv[3])) ? $argv[3] : '';
-
 
 //** Load WP */
 $wp_load_path = preg_replace('%wp-content[/\\\\]plugins[/\\\\]wp-property[/\\\\]cron.php%ix', 'wp-load.php', __FILE__);

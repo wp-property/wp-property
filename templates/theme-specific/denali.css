@@ -238,4 +238,39 @@ ul.feps_spc_details {
   text-decoration: none;
 }
 
+#content .wpp_shortcode_feps_menu {
+  background: none repeat scroll 0 0 #FBFAF5;
+  border: 6px solid #F4F4EA;
+  border-radius: 7px 7px 7px 7px;
+  margin: 10px 0;
+  overflow: auto;
+  padding: 16px;
+}
+
+#content .wpp_shortcode_feps_menu li {
+  padding-left: 0;
+}
+
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action li.actions ul li{
+  margin: 0 0 0 10px;
+  padding: 0;
+  line-height: 1.5em;
+}
+
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action li.actions ul li a{
+  width:auto;
+  padding: 0 0.5em;
+  margin-top: 0;
+}
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action li.actions ul li a:first-child{
+  padding: 0 0.5em 0 1em;
+}
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action li.actions ul li a:last-child{
+  padding: 0 1em 0 0.5em;
+}
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action > li.post_status,
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action > li.expired_date{
+  min-width: 9.5em;
+}
+
 /* FEPS Styles End */
