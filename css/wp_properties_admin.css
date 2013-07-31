@@ -1499,6 +1499,15 @@ p.pad10 {
   cursor: default;
 }
 
+.feps_specific_pages_links .feps_title {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.feps_specific_pages_links .feps_templates label {
+  display: inline;
+}
+
 .feps_specific_pages_links input {
   width: 100%;
   border-color: #DFDFDF;
