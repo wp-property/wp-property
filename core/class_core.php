@@ -210,7 +210,7 @@ class WPP_Core {
     wp_register_script('wpp-jquery-scrollTo', WPP_URL. 'js/jquery.scrollTo-min.js', array('jquery','wpp-localization'));
     wp_register_script('wpp-jquery-validate', WPP_URL. 'js/jquery.validate.js', array('jquery','wpp-localization'));
     wp_register_script('wpp-jquery-number-format', WPP_URL. 'js/jquery.number.format.js', array('jquery','wpp-localization'));
-    wp_register_script('wpp-jquery-data-tables', WPP_URL . "third-party/dataTables/jquery.dataTables.min.js", array('jquery','wpp-localization'));
+    wp_register_script('wpp-jquery-data-tables', WPP_URL . "third-party/dataTables/jquery.dataTables.js", array('jquery','wpp-localization'));
     wp_register_script('wp-property-galleria', WPP_URL. 'third-party/galleria/galleria-1.2.5.js', array('jquery','wpp-localization'));
 
     wp_register_style('wpp-jquery-fancybox-css', WPP_URL. 'third-party/fancybox/jquery.fancybox-1.3.4.css');

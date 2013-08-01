@@ -540,7 +540,7 @@ class WPP_UI {
 
     <div class="major-publishing-actions">
       <div class="publishing-action">
-      <?php submit_button( __('Filter Results'), 'button', false, false, array('id' => 'search-submit')); ?>
+      <?php submit_button( __( 'Filter Results', 'wpp' ), 'button', false, false, array( 'id' => 'search-submit' ) ); ?>
       </div>
       <br class='clear' />
     </div>

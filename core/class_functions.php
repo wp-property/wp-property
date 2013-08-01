@@ -4868,7 +4868,7 @@ class WPP_F extends UD_API {
           $attrs = array();
           if(is_array($attr_values)) {
             foreach( $attr_values as $attr ) {
-              $attrs[$attr] = $attr == 'true' ? 'Yes' : 'No';
+              $attrs[$attr] = $attr == 'true' ? __( 'Yes', 'wpp' ) : __( 'No', 'wpp' );
             }
           }
           $attr_values = $attrs;
@@ -4881,7 +4881,20 @@ class WPP_F extends UD_API {
           if(is_array($attr_values)) {
             foreach ($attr_values as $attr) {
               $count = self::get_properties_quantity( array( $attr ) );
-              $attrs[$attr] = strtoupper( substr($attr, 0, 1) ).substr($attr, 1, strlen($attr)).' ('. WPP_F::format_numeric($count).')';
+              switch( $attr ) {
+                case 'publish':
+                  $label = __( 'Published', 'wpp' );
+                  break;
+                case 'pending':
+                  $label = __( 'Pending', 'wpp' );
+                  break;
+                case 'trash':
+                  $label = __( 'Trashed', 'wpp' );
+                  break;
+                default:
+                  $label = strtoupper( substr($attr, 0, 1) ).substr($attr, 1, strlen($attr));
+              }
+              $attrs[$attr] = $label.' ('. WPP_F::format_numeric($count).')';
               $all += $count;
             }
           }
