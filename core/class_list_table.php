@@ -118,7 +118,7 @@ class WPP_List_Table extends WP_List_Table  {
           "iDisplayLength" : <?php echo $this->_args['per_page']; ?>,
           "bAutoWidth": false,
           "oLanguage": {
-            "sLengthMenu": 'Display <select><option value="25">25 </option><option value="50">50 </option><option value="100">100</option><option value="-1">All </option></select> records',
+            "sLengthMenu": wpp.strings.dtables.display + ' <select><option value="25">25 </option><option value="50">50 </option><option value="100">100</option><option value="-1">' + wpp.strings.dtables.all + ' </option></select> ' + wpp.strings.dtables.records,
             "sProcessing": '<div class="ajax_loader_overview"></div>'
           },
           "iColumns": <?php echo count($this->aoColumnDefs); ?>,
@@ -195,7 +195,7 @@ class WPP_List_Table extends WP_List_Table  {
     $hidden = get_hidden_columns( $screen );
 
     $_sortable = apply_filters( "manage_{$screen->id}_sortable_columns", $this->get_sortable_columns() );
-    
+
     $sortable = array();
     foreach ( $_sortable as $id => $data ) {
       if ( empty( $data ) )
