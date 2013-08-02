@@ -187,15 +187,16 @@ class WPP_Core {
 
     //** Load early so plugins can use them as well */
     wp_register_script( 'wpp-localization', get_bloginfo( 'wpurl' ) . '/wp-admin/admin-ajax.php?action=wpp_js_localization', array(), WPP_Version );
+    wp_localize_script( 'wpp-localization', 'wpp', array( 'instance' => $this->get_instance() ) );
 
     wp_register_script('wpp-jquery-fancybox', WPP_URL. 'third-party/fancybox/jquery.fancybox-1.3.4.pack.js', array('jquery','wpp-localization'), '1.7.3' );
     wp_register_script('wpp-jquery-colorpicker', WPP_URL. 'third-party/colorpicker/colorpicker.js', array('jquery','wpp-localization'));
     wp_register_script('wpp-jquery-easing', WPP_URL. 'third-party/fancybox/jquery.easing-1.3.pack.js', array('jquery','wpp-localization'), '1.7.3' );
-    wp_register_script('wpp-jquery-ajaxupload', WPP_URL. 'js/fileuploader.js', array('jquery'));
+    wp_register_script('wpp-jquery-ajaxupload', WPP_URL. 'js/fileuploader.js', array('jquery','wpp-localization'));
     wp_register_script('wp-property-admin-overview', WPP_URL. 'js/wp-property-admin-overview.js', array('jquery','wpp-localization'), WPP_Version);
     wp_register_script('wp-property-admin-widgets', WPP_URL. 'js/wp-property-admin-widgets.js', array('jquery','wpp-localization'), WPP_Version);
     wp_register_script('wp-property-backend-global', WPP_URL. 'js/wp-property-backend-global.js', array('jquery','wpp-localization'), WPP_Version);
-    wp_register_script('wp-property-global', WPP_URL. 'js/wp-property-global.js', array('jquery','wpp-localization'), WPP_Version);
+    wp_register_script( 'wp-property-global', WPP_URL. 'js/wp-property-global.js', array('jquery','wpp-localization'), WPP_Version );
     wp_register_script('jquery-cookie', WPP_URL. 'js/jquery.smookie.js', array('jquery','wpp-localization'), '1.7.3' );
 
     if(WPP_F::can_get_script($scheme . '://maps.google.com/maps/api/js?sensor=true')) {
@@ -209,7 +210,7 @@ class WPP_Core {
     wp_register_script('wpp-jquery-scrollTo', WPP_URL. 'js/jquery.scrollTo-min.js', array('jquery','wpp-localization'));
     wp_register_script('wpp-jquery-validate', WPP_URL. 'js/jquery.validate.js', array('jquery','wpp-localization'));
     wp_register_script('wpp-jquery-number-format', WPP_URL. 'js/jquery.number.format.js', array('jquery','wpp-localization'));
-    wp_register_script('wpp-jquery-data-tables', WPP_URL . "third-party/dataTables/jquery.dataTables.min.js", array('jquery','wpp-localization'));
+    wp_register_script('wpp-jquery-data-tables', WPP_URL . "third-party/dataTables/jquery.dataTables.js", array('jquery','wpp-localization'));
     wp_register_script('wp-property-galleria', WPP_URL. 'third-party/galleria/galleria-1.2.5.js', array('jquery','wpp-localization'));
 
     wp_register_style('wpp-jquery-fancybox-css', WPP_URL. 'third-party/fancybox/jquery.fancybox-1.3.4.css');
@@ -660,7 +661,12 @@ class WPP_Core {
 
       //* Only admins can mark properties as featured. */
       if( $meta_key == 'featured' && !current_user_can('manage_options') ) {
-        continue;
+        //** But be sure that meta 'featured' exists at all */
+        if( !metadata_exists( 'post', $post_id, $meta_key ) ) {
+          $meta_value = 'false';
+        } else {
+          continue;
+        }
       }
 
       //* Remove certain characters */
@@ -861,6 +867,18 @@ class WPP_Core {
   function template_redirect() {
     global $post, $property, $wp_query, $wp_properties, $wp_styles, $wpp_query, $wp_taxonomies;
 
+    //** Load global wp-property script on all frontend pages */
+    wp_enqueue_script( 'wp-property-global' );
+
+    //** Load essential styles that are used in widgets */
+    wp_enqueue_style( 'wp-property-frontend' );
+    wp_enqueue_style( 'wp-property-theme-specific' );
+
+    //** Load non-essential scripts and styles if option is enabled to load them globally */
+    if($wp_properties['configuration']['load_scripts_everywhere'] == 'true') {
+      WPP_F::console_log('Loading WP-Property scripts globally.');
+      WPP_F::load_assets(array('single', 'overview'));
+    }
 
     if($wp_properties['configuration']['do_not_enable_text_widget_shortcodes'] != 'true') {
       add_filter('widget_text', 'do_shortcode');
@@ -872,19 +890,6 @@ class WPP_Core {
     if ( !empty($wp_query->query_vars['preview']) && $post->post_type == "property" && $post->post_status == "publish" ) {
       wp_redirect( get_permalink($post->ID) );
       die();
-    }
-
-    //** Load global wp-property script on all frontend pages */
-    wp_enqueue_script( 'wp-property-global' );
-
-    //** Load essential styles that are used in widgets */
-    wp_enqueue_style('wp-property-frontend');
-    wp_enqueue_style('wp-property-theme-specific');
-
-    //** Load non-essential scripts and styles if option is enabled to load them globally */
-    if($wp_properties['configuration']['load_scripts_everywhere'] == 'true') {
-      WPP_F::console_log('Loading WP-Property scripts globally.');
-      WPP_F::load_assets(array('single', 'overview'));
     }
 
     /*
@@ -1615,7 +1620,7 @@ class WPP_Core {
       $return['before'] = html_entity_decode($args['before']);
     }
 
-    $return['value'] = apply_filters('wpp_property_attribute_shortcode', $value, $the_property);
+    $return['value'] = apply_filters( 'wpp_property_attribute_shortcode', $value, $this_property );
 
     if($args['strip_tags'] == "true" && !empty($return['value'])) {
       $return['value'] = strip_tags($return['value']);
@@ -1626,7 +1631,7 @@ class WPP_Core {
     }
 
     //** When no value is found */
-    if(empty($value['value'])) {
+    if( empty( $return['value'] ) ) {
 
       if(!empty($args['if_empty'])) {
         return $args['if_empty'];
@@ -1901,6 +1906,31 @@ class WPP_Core {
       global $current_screen;
       add_contextual_help($current_screen->id, '<p>'.__('Please upgrade Wordpress to the latest version for detailed help.', 'wpp').'</p><p>'.__('Or visit <a href="https://usabilitydynamics.com/tutorials/wp-property-help/" target="_blank">WP-Property Help Page</a> on UsabilityDynamics.com', 'wpp').'</p>');
     }
+  }
+
+
+  /**
+   * Returns specific instance data which is used by javascript
+   * Javascript Reference: window.wpp.instance
+   *
+   * @author peshkov@UD
+   * @since 1.38
+   * @return array
+   */
+  function get_instance() {
+
+    $data = array(
+      'request' => $_REQUEST,
+      'get' => $_GET,
+      'post' => $_POST,
+      'iframe_enabled' => false,
+    );
+
+    if( isset( $data[ 'request' ][ 'wp_customize' ] ) && $data[ 'request' ][ 'wp_customize' ] == 'on' ) {
+      $data[ 'iframe_enabled' ] = true;
+    }
+
+    return apply_filters( 'wpp::get_instance', $data );
   }
 
 }

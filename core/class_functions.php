@@ -601,28 +601,29 @@ class WPP_F extends UD_API {
    *
    * @version 1.32.0
    */
-  function detect_encoding($string) {
+  function detect_encoding( $string ) {
 
-    $encoding[] = "UTF-8";
-    $encoding[] = "windows-1251";
-    $encoding[] = "ISO-8859-1";
-    $encoding[] = "GBK";
-    $encoding[] = "ASCII";
-    $encoding[] = "JIS";
-    $encoding[] = "EUC-JP";
+    $encoding = array(
+      'UTF-8',
+      'windows-1251',
+      'ISO-8859-1',
+      'GBK',
+      'ASCII',
+      'JIS',
+      'EUC-JP',
+    );
 
-    if( !function_exists('mb_detect_encoding') ) {
+    if( !function_exists( 'mb_detect_encoding' ) ) {
       return;
     }
 
-    foreach($encoding as $single) {
-       if(@mb_detect_encoding($string, $single, true)) {
+    foreach( $encoding as $single ) {
+       if( @mb_detect_encoding( $string, $single, true ) ) {
         $matched = $single;
        }
     }
 
     return $matched ?  $matched : new WP_Error('encoding_error',__('Could not detect.', 'wpp'));
-
 
   }
 
@@ -862,136 +863,136 @@ class WPP_F extends UD_API {
    * @todo Consider putting this into settings action, or somewhere, so it its only ran once, or adding caching
    * @version 1.17.3
    */
-    function get_attribute_data($attribute = false) {
-      global $wp_properties;
+  function get_attribute_data($attribute = false) {
+    global $wp_properties;
 
-      if(!$attribute) {
-        return;
-      }
+    if(!$attribute) {
+      return;
+    }
 
-      if( wp_cache_get( $attribute, 'wpp_attribute_data' ) ) {
-        return wp_cache_get( $attribute, 'wpp_attribute_data' );
-      }
+    if( wp_cache_get( $attribute, 'wpp_attribute_data' ) ) {
+      return wp_cache_get( $attribute, 'wpp_attribute_data' );
+    }
 
-      $post_table_keys = array(
-        'post_author',
-        'post_date',
-        'post_date_gmt',
-        'post_content',
-        'post_title',
-        'post_excerpt',
-        'post_status',
-        'comment_status',
-        'ping_status',
-        'post_password',
-        'post_name',
-        'to_ping',
-        'pinged',
-        'post_modified',
-        'post_modified_gmt',
-        'post_content_filtered',
-        'post_parent',
-        'guid',
-        'menu_order',
-        'post_type',
-        'post_mime_type',
-        'comment_count');
+    $post_table_keys = array(
+      'post_author',
+      'post_date',
+      'post_date_gmt',
+      'post_content',
+      'post_title',
+      'post_excerpt',
+      'post_status',
+      'comment_status',
+      'ping_status',
+      'post_password',
+      'post_name',
+      'to_ping',
+      'pinged',
+      'post_modified',
+      'post_modified_gmt',
+      'post_content_filtered',
+      'post_parent',
+      'guid',
+      'menu_order',
+      'post_type',
+      'post_mime_type',
+      'comment_count');
 
-      if(!$attribute) {
-        return;
-      }
+    if(!$attribute) {
+      return;
+    }
 
-      $ui_class = array($attribute);
+    $ui_class = array($attribute);
 
-      if(in_array($attribute, $post_table_keys)) {
-        $return['storage_type'] = 'post_table';
-      }
+    if(in_array($attribute, $post_table_keys)) {
+      $return['storage_type'] = 'post_table';
+    }
 
-      $return['slug'] = $attribute;
+    $return['slug'] = $attribute;
 
-      if($wp_properties['property_stats'][$attribute]) {
-        $return['is_stat'] = 'true';
-        $return['storage_type'] = 'meta_key';
-        $return['label'] = $wp_properties['property_stats'][$attribute];
-      }
+    if($wp_properties['property_stats'][$attribute]) {
+      $return['is_stat'] = 'true';
+      $return['storage_type'] = 'meta_key';
+      $return['label'] = $wp_properties['property_stats'][$attribute];
+    }
 
-      if($wp_properties['property_meta'][$attribute]) {
-        $return['is_meta'] = 'true';
-        $return['storage_type'] = 'meta_key';
-        $return['label'] = $wp_properties['property_meta'][$attribute];
-        $return['input_type'] = 'textarea';
-        $return['data_input_type'] = 'textarea';
-      }
+    if($wp_properties['property_meta'][$attribute]) {
+      $return['is_meta'] = 'true';
+      $return['storage_type'] = 'meta_key';
+      $return['label'] = $wp_properties['property_meta'][$attribute];
+      $return['input_type'] = 'textarea';
+      $return['data_input_type'] = 'textarea';
+    }
 
-      if($wp_properties['searchable_attr_fields'][$attribute]) {
-        $return['input_type'] = $wp_properties['searchable_attr_fields'][$attribute];
-        $ui_class[] = $return['input_type'];
-      }
+    if($wp_properties['searchable_attr_fields'][$attribute]) {
+      $return['input_type'] = $wp_properties['searchable_attr_fields'][$attribute];
+      $ui_class[] = $return['input_type'];
+    }
 
-      if($wp_properties['admin_attr_fields'][$attribute]) {
-        $return['data_input_type'] = $wp_properties['admin_attr_fields'][$attribute];
-        $ui_class[] = $return['data_input_type'];
-      }
+    if($wp_properties['admin_attr_fields'][$attribute]) {
+      $return['data_input_type'] = $wp_properties['admin_attr_fields'][$attribute];
+      $ui_class[] = $return['data_input_type'];
+    }
 
-      if($wp_properties['configuration']['address_attribute'] == $attribute) {
-        $return['is_address_attribute'] = 'true';
-        $ui_class[] = 'address_attribute';
-      }
+    if($wp_properties['configuration']['address_attribute'] == $attribute) {
+      $return['is_address_attribute'] = 'true';
+      $ui_class[] = 'address_attribute';
+    }
 
-      if(is_array($wp_properties['property_inheritance'])) {
-        foreach($wp_properties['property_inheritance'] as $property_type => $type_data) {
-          if(in_array($attribute, $type_data)) {
-            $return['inheritance'][] = $property_type;
-          }
+    if(is_array($wp_properties['property_inheritance'])) {
+      foreach($wp_properties['property_inheritance'] as $property_type => $type_data) {
+        if(in_array($attribute, $type_data)) {
+          $return['inheritance'][] = $property_type;
         }
       }
-
-      if(is_array($wp_properties['predefined_values']) && ($predefined_values = $wp_properties['predefined_values'][$attribute]))  {
-        $return['predefined_values'] = $predefined_values;
-      }
-
-      if(is_array($wp_properties['predefined_search_values']) && ($predefined_values = $wp_properties['predefined_search_values'][$attribute]))  {
-        $return['predefined_search_values'] = $predefined_values;
-      }
-
-      if(is_array($wp_properties['sortable_attributes']) && in_array($attribute, $wp_properties['sortable_attributes'])) {
-        $return['sortable'] = true;
-        $ui_class[] = 'sortable';
-      }
-
-      if(is_array($wp_properties['hidden_frontend_attributes']) && in_array($attribute, $wp_properties['hidden_frontend_attributes'])) {
-        $return['hidden_frontend_attribute'] = true;
-        $ui_class[] = 'fe_hidden';
-      }
-
-      if(is_array($wp_properties['currency_attributes']) && in_array($attribute, $wp_properties['currency_attributes'])) {
-        $return['currency'] = true;
-        $ui_class[] = 'currency';
-      }
-
-      if(is_array($wp_properties['numeric_attributes']) && in_array($attribute, $wp_properties['numeric_attributes'])) {
-        $return['numeric'] = true;
-        $ui_class[] = 'numeric';
-      }
-
-      if(is_array($wp_properties['searchable_attributes']) && in_array($attribute, $wp_properties['searchable_attributes'])) {
-        $return['searchable'] = true;
-        $ui_class[] = 'searchable';
-      }
-
-      if(empty($return['title'])) {
-        $return['title'] = WPP_F::de_slug($return['slug']);
-      }
-
-      $return['ui_class'] = implode(' wpp_', $ui_class);
-
-      $return = apply_filters('wpp_attribute_data', $return);
-
-      wp_cache_add( $attribute, $return, 'wpp_attribute_data' );
-
-      return $return;
-
     }
+
+    if(is_array($wp_properties['predefined_values']) && ($predefined_values = $wp_properties['predefined_values'][$attribute]))  {
+      $return['predefined_values'] = $predefined_values;
+    }
+
+    if(is_array($wp_properties['predefined_search_values']) && ($predefined_values = $wp_properties['predefined_search_values'][$attribute]))  {
+      $return['predefined_search_values'] = $predefined_values;
+    }
+
+    if(is_array($wp_properties['sortable_attributes']) && in_array($attribute, $wp_properties['sortable_attributes'])) {
+      $return['sortable'] = true;
+      $ui_class[] = 'sortable';
+    }
+
+    if(is_array($wp_properties['hidden_frontend_attributes']) && in_array($attribute, $wp_properties['hidden_frontend_attributes'])) {
+      $return['hidden_frontend_attribute'] = true;
+      $ui_class[] = 'fe_hidden';
+    }
+
+    if(is_array($wp_properties['currency_attributes']) && in_array($attribute, $wp_properties['currency_attributes'])) {
+      $return['currency'] = true;
+      $ui_class[] = 'currency';
+    }
+
+    if(is_array($wp_properties['numeric_attributes']) && in_array($attribute, $wp_properties['numeric_attributes'])) {
+      $return['numeric'] = true;
+      $ui_class[] = 'numeric';
+    }
+
+    if(is_array($wp_properties['searchable_attributes']) && in_array($attribute, $wp_properties['searchable_attributes'])) {
+      $return['searchable'] = true;
+      $ui_class[] = 'searchable';
+    }
+
+    if(empty($return['title'])) {
+      $return['title'] = WPP_F::de_slug($return['slug']);
+    }
+
+    $return['ui_class'] = implode(' wpp_', $ui_class);
+
+    $return = apply_filters('wpp_attribute_data', $return);
+
+    wp_cache_add( $attribute, $return, 'wpp_attribute_data' );
+
+    return $return;
+
+  }
 
 
   /**
@@ -1605,15 +1606,18 @@ class WPP_F extends UD_API {
     set_time_limit( 600 );
     ob_start();
 
-    extract( wp_parse_args( $args, array(
+    $args = wp_parse_args( $args, array(
       'property_ids' => false,
       'echo_result' => 'true',
       'skip_existing' => 'false',
       'return_geo_data' => false,
       'attempt' => 1,
       'max_attempts' => 10,
-      'delay' => 0            //Delay validation in seconds
-    )), EXTR_SKIP);
+      'delay' => 0,            //Delay validation in seconds
+      'increase_delay_by' => 0.25
+    ));
+
+    extract( $args, EXTR_SKIP);
 
     if( is_array( $property_ids )) {
       $all_properties = $property_ids;
@@ -1650,11 +1654,12 @@ class WPP_F extends UD_API {
     $return['attempt'] = $attempt;
     if (!empty($return['over_query_limit']) && $max_attempts >= $attempt) {
 
-      $rerevalidate_result = self::revalidate_all_addresses(array(
+      $rerevalidate_result = self::revalidate_all_addresses(
+        $args + array(
         'property_ids' => $return['over_query_limit'],
         'echo_result' => false,
         'attempt' => $attempt + 1,
-        'delay' => $delay + 0.05
+        'delay' => $delay + $increase_delay_by
       ));
 
       $return['updated'] = array_merge((array)$return['updated'],(array)$rerevalidate_result['updated']);
@@ -2190,6 +2195,7 @@ class WPP_F extends UD_API {
       'el' => 'Greek',
       'es' => 'Spanish',
       'fr' => 'French',
+      'hu' => 'Hungarian',
       'it' => 'Italian',
       'ja' => 'Japanese',
       'ko' => 'Korean',
@@ -3193,6 +3199,10 @@ class WPP_F extends UD_API {
   static function get_properties( $args = "", $total = false ) {
     global $wpdb, $wp_properties, $wpp_query;
 
+    //** Prints args to firebug if debug mode is enabled */
+    $log = is_array( $args ) ? urldecode( http_build_query( $args ) ) : $args;
+    WPP_F::console_log("get_properties() args: {$log}");
+
     //** The function can be overwritten using the filter below. */
     $response = apply_filters( 'wpp::get_properties::custom', null, $args, $total );
     if( $response !== null ) {
@@ -3727,6 +3737,7 @@ class WPP_F extends UD_API {
     /*if(empty($prefill_meta[0]))
       unset($prefill_meta);*/
 
+
     $prefill_meta = apply_filters('wpp_prefill_meta', $prefill_meta, $slug);
 
     if(count($prefill_meta) < 1)
@@ -4204,7 +4215,7 @@ class WPP_F extends UD_API {
     foreach($property_stats as $slug => $label) {
 
       // Determine if it's frontend and the attribute is hidden for frontend
-      if(!is_admin() && in_array( $slug, (array)$wp_properties['hidden_frontend_attributes'] ) && !current_user_can( 'manage_options' ) ) {
+      if( in_array( $slug, (array)$wp_properties['hidden_frontend_attributes'] ) && !current_user_can( 'manage_options' ) ) {
         continue;
       }
 
@@ -4776,11 +4787,12 @@ class WPP_F extends UD_API {
   }
 
 
-  /*
+  /**
    * Get Search filter fields
+   *
    */
   function get_search_filters() {
-    global $wp_properties, $wpdb;
+    global $wp_properties;
 
     $filters = array();
     $filter_fields = array(
@@ -4821,23 +4833,10 @@ class WPP_F extends UD_API {
         case 'input': break;
 
         case 'multi_checkbox':
-          $attr_values = self::get_all_attribute_values( $slug );
-
-          break;
-
         case 'range_dropdown':
-          $attr_values = self::get_all_attribute_values( $slug );
-
-          break;
-
         case 'dropdown':
-          $attr_values = self::get_all_attribute_values( $slug );
-
-          break;
-
         case 'radio':
           $attr_values = self::get_all_attribute_values( $slug );
-
           break;
 
       }
@@ -4869,7 +4868,7 @@ class WPP_F extends UD_API {
           $attrs = array();
           if(is_array($attr_values)) {
             foreach( $attr_values as $attr ) {
-              $attrs[$attr] = $attr == 'true' ? 'Yes' : 'No';
+              $attrs[$attr] = $attr == 'true' ? __( 'Yes', 'wpp' ) : __( 'No', 'wpp' );
             }
           }
           $attr_values = $attrs;
@@ -4882,7 +4881,20 @@ class WPP_F extends UD_API {
           if(is_array($attr_values)) {
             foreach ($attr_values as $attr) {
               $count = self::get_properties_quantity( array( $attr ) );
-              $attrs[$attr] = strtoupper( substr($attr, 0, 1) ).substr($attr, 1, strlen($attr)).' ('. WPP_F::format_numeric($count).')';
+              switch( $attr ) {
+                case 'publish':
+                  $label = __( 'Published', 'wpp' );
+                  break;
+                case 'pending':
+                  $label = __( 'Pending', 'wpp' );
+                  break;
+                case 'trash':
+                  $label = __( 'Trashed', 'wpp' );
+                  break;
+                default:
+                  $label = strtoupper( substr($attr, 0, 1) ).substr($attr, 1, strlen($attr));
+              }
+              $attrs[$attr] = $label.' ('. WPP_F::format_numeric($count).')';
               $all += $count;
             }
           }

@@ -2,9 +2,9 @@
 Contributors:  usability_dynamics, Anton Korotkoff, andypotanin
 Donate link: http://usabilitydynamics.com/products/wp-property/
 Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
-Requires at least: 3.0
+Requires at least: 3.4.2
 Tested up to: 3.5.1
-Stable tag: 1.37.6
+Stable tag: 1.38.0
 
 
 == Description ==
@@ -162,6 +162,9 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 
 == Upgrade Notice ==
 
+= 1.38 =
+* Added compatibility with FEPS 2.0 premium feature.
+
 = 1.37.3.1 =
 * Fixed [property_overview] attributes settings.
 
@@ -223,6 +226,17 @@ We are moving out of beta stages, but you may still experience bugs now and then
 We are still in early stages, so updates will be coming out routinely.  Please do not hesitate to send us feedback and suggestions.
 
 == Changelog ==
+
+= 1.38.0 =
+* Added compatibility with Front End Property Submissions (FEPS) 2.0 premium feature.
+* Added Hungarian language to address validation.
+* Added debugger for get_properties() which prints args to Firebug when debug mode is enabled.
+* Fixed admin_only functionality for property stats and meta.
+* Fixed Filter metabox functionality on All Properties page.
+* Fixed encoding issues for XMLI premium feature.
+* Localization fixes.
+* Removed $wp_properties['l10n'].
+* Removed third-party library CustomInput.
 
 = 1.37.6 =
 * Added fonts for PDF Flyer premium feature

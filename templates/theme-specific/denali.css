@@ -64,7 +64,7 @@
   z-index: 2;
 }
 
-.wpp_feps_form input.wpp_feps_submit_form {
+.wpp_feps_form  .wpp_feps_input_wrapper.submit_action {
   float: right;
 }
 
@@ -136,12 +136,8 @@
 }
 
 .wpp_feps_form .wpp_feps_ajax_message {
-    color: #5B4949;
-    display: block;
-    float: right;
-    line-height: 52px;
-    margin-right: 10px;
-    text-align: righ;
+  color: #5B4949;
+  line-height: 52px;
 }
 
 .wpp_feps_form .wpp_feps_row_wrapper.image_upload .wpp_feps_input_wrapper .wpp_feps_input_content {
@@ -174,6 +170,107 @@
 
 .wpp_feps_form .wpp_feps_subscription_plan .wpp_feps_input_wrapper .wpp_feps_input_content {
   padding-right: 15px;
+}
+
+form.wpi_checkout .total_price {
+  left:0;
+}
+
+.wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li span {
+  padding: 8px 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  -moz-border-top-right-radius: 5px;
+  -moz-border-bottom-right-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+}
+
+ul.wpp_feps_step_tabs {
+  margin: 15px 0 20px 0;
+}
+
+.wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li span.wpp_feps_arrow {
+  margin-left: -5px;
+}
+
+.wpp_feps_form ul.feps_spc_details li.wpp_feps_row_wrapper .wpp_feps_label_wrapper {
+  width: 180px;
+}
+
+.wpp_feps_form ul.feps_spc_details li.wpp_feps_row_wrapper .wpp_feps_input_wrapper {
+  margin-left: -200px;
+}
+
+.wpp_feps_form ul.feps_spc_details li.wpp_feps_row_wrapper .wpp_feps_input_content {
+  margin-left: 200px;
+}
+
+.wpp_feps_form ul.feps_spc_details li.wpp_feps_row_wrapper {
+  padding:10px;
+  margin:0;
+}
+
+.wpp_feps_form ul.feps_spc_details .wpp_feps_row_wrapper label {
+  line-height: 1.1em;
+}
+
+.wpp_feps_form ul.feps_spc_details ul.wpp_feps_subscription_plan_info {
+  border: 0;
+  padding: 0;
+  background: none;
+}
+
+.feps_spc_details_wrapper .submit_action_wrapper li.submit_action {
+  float: none;
+}
+
+.feps_spc_details_wrapper .submit_action_wrapper li.submit_action input {
+  margin: 0;
+}
+
+ul.feps_spc_details {
+  background-color: #EFEFEF;
+}
+
+.feps_spc_details_wrapper ul.feps_spc_details a {
+  color: #987965;
+  text-decoration: none;
+}
+
+#content .wpp_shortcode_feps_menu {
+  background: none repeat scroll 0 0 #FBFAF5;
+  border: 6px solid #F4F4EA;
+  border-radius: 7px 7px 7px 7px;
+  margin: 10px 0;
+  overflow: auto;
+  padding: 16px;
+}
+
+#content .wpp_shortcode_feps_menu li {
+  padding-left: 0;
+}
+
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action li.actions ul li{
+  margin: 0 0 0 10px;
+  padding: 0;
+  line-height: 1.5em;
+}
+
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action li.actions ul li a{
+  width:auto;
+  padding: 0 0.5em;
+  margin-top: 0;
+}
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action li.actions ul li a:first-child{
+  padding: 0 0.5em 0 1em;
+}
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action li.actions ul li a:last-child{
+  padding: 0 1em 0 0.5em;
+}
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action > li.post_status,
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action > li.expired_date{
+  min-width: 9.5em;
 }
 
 /* FEPS Styles End */

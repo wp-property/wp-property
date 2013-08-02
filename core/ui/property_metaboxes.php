@@ -460,104 +460,87 @@ class WPP_UI {
     <?php
   }
 
-  function metabox_property_filter($wp_list_table) {
 
+  /**
+   * Renders Filter Metabox ( All Properties page )
+   *
+   * @global type $wp_properties
+   * @param type $wp_list_table
+   */
+  function metabox_property_filter($wp_list_table) {
     global $wp_properties;
+
+    $wp_list_table->search_box('Search', 'property');
+
+    $filters = WPP_F::get_search_filters();
+
     ?>
     <div class="misc-pub-section">
+      <?php if (!empty($filters)) : ?>
+        <?php foreach ($filters as $key => $filter) : ?>
+          <?php
+          //** If there are not available values we ignore filter */
+          if ( empty($filter['values']) || !is_array( $filter['values'] ) ) { continue; }
+          ?>
+          <ul class="wpp_overview_filters <?php echo $key; ?>">
+            <li class="wpp_filter_section_title"><?php echo $filter['label']; ?><a class="wpp_filter_show"><?php echo $key == 'post_status' ? __('Hide', 'wpp') : __('Show', 'wpp') ?></a></li>
+            <li class="all wpp_checkbox_filter" <?php echo $key == 'post_status' ? 'style="display:block;"' : '' ?> >
+              <?php
+              switch ($filter['type']) {
 
-      <?php $wp_list_table->search_box('Search', 'property'); ?>
+                default: break;
 
-      <?php $filters = WPP_F::get_search_filters(); ?>
+                case 'multi_checkbox':
+                  ?>
+                  <ul class="wpp_multi_checkbox">
+                    <?php foreach ($filter['values'] as $value => $label) : ?>
+                      <?php $unique_id = rand(10000, 99999); ?>
+                      <li>
+                        <input name="wpp_search[<?php echo $key; ?>][]" id="wpp_attribute_checkbox_<?php echo $unique_id; ?>" type="checkbox" value="<?php echo $value; ?>" />
+                        <label for="wpp_attribute_checkbox_<?php echo $unique_id; ?>"><?php echo $label; ?></label>
+                      </li>
+                    <?php endforeach; ?>
+                  </ul>
+                  <?php
+                  break;
 
-      <?php
-      if (!empty($filters)) {
-        foreach ($filters as $key => $filter) {
-          // If there are available values
-          if (!empty($filter['values']) && count($filter['values']) > 1 ) {
-            ?>
+                case 'dropdown':
+                  $unique_id = rand(10000, 99999);
+                  ?>
+                  <select id="wpp_attribute_dropdown_<?php echo $unique_id; ?>" class="wpp_search_select_field wpp_search_select_field_<?php echo $key; ?>" name="wpp_search[<?php echo $key; ?>]" >
+                    <?php foreach ($filter['values'] as $value => $label) : ?>
+                      <option value="<?php echo esc_attr($value); ?>" <?php echo $value == $filter['default'] ? 'selected="selected"' : '' ?> >
+                        <?php echo $label; ?>
+                      </option>
+                    <?php endforeach; ?>
+                  </select>
+                  <?php
+                  break;
 
-            <ul class="wpp_overview_filters <?php echo $key; ?>">
-              <li class="wpp_filter_section_title"><?php echo $filter['label']; ?><a class="wpp_filter_show"><?php echo $key == 'post_status' ? __('Hide', 'wpp') : __('Show', 'wpp') ?></a></li>
-              <li class="all wpp_checkbox_filter" <?php echo $key == 'post_status' ? 'style="display:block;"' : '' ?> >
+                case 'radio': ?>
+                  <ul>
+                    <?php foreach ($filter['values'] as $value => $label) : ?>
+                      <li>
+                        <input id="radio_filter_<?php echo $value; ?>" type="radio" value="<?php echo esc_attr($value); ?>" name="wpp_search[<?php echo $key; ?>]" <?php echo ($value == $filter['default'] ? 'checked="checked"' : ''); ?> />
+                        <label for="radio_filter_<?php echo $value; ?>"><?php echo $label; ?></label>
+                      </li>
+                    <?php endforeach; ?>
+                  </ul>
+                  <?php
+                  break;
 
-                <?php
-                switch ($filter['type']) {
-
-                  default: break;
-
-                  case 'multi_checkbox':
-                    ?>
-
-                    <ul class="wpp_multi_checkbox">
-                      <?php
-                      if (is_array($filter['values'])) {
-                        foreach ($filter['values'] as $value => $label) {
-                          $unique_id = rand(10000, 99999);
-                          ?>
-                          <li>
-                            <input name="wpp_search[<?php echo $key; ?>][]" id="wpp_attribute_checkbox_<?php echo $unique_id; ?>" type="checkbox" value="<?php echo $value; ?>" />
-                            <label for="wpp_attribute_checkbox_<?php echo $unique_id; ?>"><?php echo $label; ?></label>
-                          </li>
-                        <?php }
-                      } ?>
-
-                    </ul>
-
-                    <?php break;
-
-                  case 'dropdown': $unique_id = rand(10000, 99999); ?>
-
-                    <select id="wpp_attribute_dropdown_<?php echo $unique_id; ?>" class="wpp_search_select_field wpp_search_select_field_<?php echo $key; ?>" name="wpp_search[<?php echo $key; ?>]" >
-
-                      <?php
-                      if (is_array($filter['values'])) {
-                        foreach ($filter['values'] as $value => $label) {
-                          ?>
-                          <option value="<?php echo esc_attr($value); ?>" <?php echo $value == $filter['default'] ? 'selected="selected"' : '' ?> >
-                            <?php
-                            echo $label;
-                            ?>
-                          </option>
-                <?php }
-              } ?>
-                    </select>
-
-                    <?php break;
-
-                  case 'radio': ?>
-                    <ul>
-                      <?php
-                      if (is_array($filter['values'])) {
-
-                        foreach ($filter['values'] as $value => $label) {
-                          ?>
-                          <li>
-                            <input id="radio_filter_<?php echo $value; ?>" type="radio" value="<?php echo esc_attr($value); ?>" name="wpp_search[<?php echo $key; ?>]" <?php echo ($value == $filter['default'] ? 'checked="checked"' : ''); ?> />
-                            <label for="radio_filter_<?php echo $value; ?>"><?php echo $label; ?></label>
-                          </li>
-
-                <?php } break;
               }
-          } ?>
-                </ul>
+              ?>
+            </li></ul>
 
-              </li></ul>
-
-
-            <?php
-          }
-        }
-      }
-
-      do_action('wpi_invoice_list_filter');
-      ?>
-
+        <?php endforeach; ?>
+      <?php endif; ?>
+      <?php do_action('wpi_invoice_list_filter'); ?>
     </div>
 
     <div class="major-publishing-actions">
       <div class="publishing-action">
-    <?php submit_button(__('Filter Results'), 'button', false, false, array('id' => 'search-submit')); ?>
+      <?php submit_button( __( 'Filter Results', 'wpp' ), 'button', false, false, array( 'id' => 'search-submit' ) ); ?>
       </div>
       <br class='clear' />
     </div>
