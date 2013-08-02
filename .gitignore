@@ -8,6 +8,7 @@
 .Trashes
 *.sublime-project
 *.sublime-workspace
+*.bat
 
 *.seed
 *.log
