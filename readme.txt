@@ -162,6 +162,9 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 
 == Upgrade Notice ==
 
+= 1.38 =
+* Added compatibility with FEPS 2.0 premium feature.
+
 = 1.37.3.1 =
 * Fixed [property_overview] attributes settings.
 
@@ -225,7 +228,15 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 == Changelog ==
 
 = 1.38.0 =
-* WIP
+* Added compatibility with Front End Property Submissions (FEPS) 2.0 premium feature.
+* Added Hungarian language to address validation.
+* Added debugger for get_properties() which prints args to Firebug when debug mode is enabled.
+* Fixed admin_only functionality for property stats and meta.
+* Fixed Filter metabox functionality on All Properties page.
+* Fixed encoding issues for XMLI premium feature.
+* Localization fixes.
+* Removed $wp_properties['l10n'].
+* Removed third-party library CustomInput.
 
 = 1.37.6 =
 * Added fonts for PDF Flyer premium feature

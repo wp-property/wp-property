@@ -111,9 +111,9 @@ table.display {
 	margin: 0 auto;
 	clear: both;
 	width: 100%;
-	
+
 	/* Note Firefox 3.5 and before have a bug with border-collapse
-	 * ( https://bugzilla.mozilla.org/show%5Fbug.cgi?id=155955 ) 
+	 * ( https://bugzilla.mozilla.org/show%5Fbug.cgi?id=155955 )
 	 * border-spacing: 0; is one possible option. Conditional-css.com is
 	 * useful for this kind of thing
 	 *
@@ -121,7 +121,7 @@ table.display {
 	 * It subtracts one px relative to the other browsers from the first column, and
 	 * adds one to the end...
 	 *
-	 * If you want that effect I'd suggest setting a border-top/left on th/td's and 
+	 * If you want that effect I'd suggest setting a border-top/left on th/td's and
 	 * then filling in the gaps with other borders.
 	 */
 }
@@ -151,7 +151,7 @@ table.display td {
 table.display td.center {
 	text-align: center;
 }
- 
+
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -233,13 +233,13 @@ tr.even {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Misc
  */
- 
+
  #wp-list-table_wrapper {
   position: relative;
   top: -30px; /* Adjust for table nav */
   z-index: 1;
  }
- 
+
 .dataTables_scroll {
 	clear: both;
 }
@@ -258,7 +258,7 @@ tr.even {
 
 }
 
- 
+
 .top .dataTables_info {
 	float: none;
 }
@@ -319,27 +319,26 @@ td.details {
 }
 
 .paging_full_numbers span.paginate_button {
-  background: url("../../../../../wp-admin/images/menu-bits.gif") repeat-x scroll left -379px #EEEEEE;
   border-color: #E3E3E3;
   cursor: pointer;
   margin-right: 7px;
 }
 
 .paging_full_numbers span.paginate_button:hover {
-	
+
 }
 
 .paging_full_numbers span.paginate_active {
 	background-color: #99B3FF;
   background-color: #7D7D7D;
-  color: #FFFFFF;  
+  color: #FFFFFF;
 }
 
 table.display tr.even.row_selected td {
 	background-color: #B0BED9;
 }
 
-table.display tr.odd.row_selected td {    
+table.display tr.odd.row_selected td {
 
 }
 
@@ -349,11 +348,11 @@ table.display tr.odd.row_selected td {
  */
 /* For the standard odd/even */
 tr.odd td.sorting_1 {
-	
+
 }
 
 tr.odd td.sorting_2 {
-	
+
 }
 
 /* For the Conditional-CSS grading rows */
