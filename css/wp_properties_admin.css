@@ -496,6 +496,34 @@ body.property_page_show_agents .wp-list-table .column-id {
   width: 30px;
 }
 
+.wpp_feps_subsc_plan .wp-tab-panel {
+  padding: 0.5em;
+  height: auto;
+  max-height: none;
+}
+
+.wpp_feps_subsc_plan .wp-tab-panel h3 {
+  cursor: pointer;
+}
+
+.wpp_feps_subsc_plan .wp-tab-panel li.wpp_feps_plan_row {
+  border: 1px solid #DFDFDF;
+}
+
+.wpp_feps_subsc_plan .wp-tab-panel li.wpp_feps_plan_row:last-child,
+.wpp_feps_subsc_plan .wp-tab-panel ul.wpp_feps_subscription_plan_info li {
+  margin-bottom: 0;
+}
+
+.wpp_feps_subsc_plan .wp-tab-panel th.wpp_feps_subscription_plan_radio_holder {
+  width: 50px;
+  text-align: center;
+}
+
+.wpp_feps_subsc_plan .wp-tab-panel h3 {
+
+}
+
 .wp-tab-panel {
   border-style: solid;
   border-width: 1px;
@@ -674,10 +702,12 @@ body.property_page_show_agents .wp-list-table .column-id {
   padding:10px 0 0 0;
 }
 
-.wpp_agent_select_wrap {
+.wpp_agent_select_wrap,
+.misc-pub-section .wpp-block-wrap {
   padding-top: 10px;
 }
-.wpp_agent_selector_title {
+.wpp_agent_selector_title,
+.misc-pub-section .wpp-block-title {
     -moz-border-radius: 3px 3px 0 0;
     background-color: #F1F1F1;
     border-color: #DFDFDF;
@@ -1102,14 +1132,16 @@ html .wpp_tabs  ul.tabs li.active, html .wpp_tabs  ul.tabs li.active a:hover {
 
 
     #property_meta .inside .widefat th,
-    .inside table.property_meta.widefat th {
+    .inside table.property_meta.widefat th,
+    .wpp_list table.widefat th {
       background: #E1E1E1;
       padding-left: 15px;
       vertical-align: top;
       width: 150px; }
 
     #property_meta .inside .widefat td,
-    .inside table.property_meta.widefat td {
+    .inside table.property_meta.widefat td,
+    .wpp_list table.widefat td {
       border-bottom: 1px solid #EFEFEF;
       vertical-align: middle;
       }
@@ -1342,19 +1374,18 @@ td.wpp_premium_feature_image { width: 250px; }
   cursor: pointer;
   font-weight: normal;
 }
-.wpp_property_admin_notice {
-  background: none repeat scroll 0 0 #000000;
+.wp-core-ui.wpp_property_admin_notice {
+  background: linear-gradient(to top, #E5E5E5, #F4F4F4) repeat scroll 0 0 #EEEEEE;
   border-radius: 5px 5px 5px 5px;
   -moz-border-radius: 5px 5px 5px 5px;
   -webkit-border-radius: 5px 5px 5px 5px;
   -khtml-border-radius: 5px 5px 5px 5px;
-  margin-right: 200px;
-  padding: 5px;
+  padding: 5px 10px;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
-.wpp_property_admin_notice p
-{
-  color: #FFFFFF;
+.wp-core-ui.wpp_property_admin_notice span {
+  color: #464646;
   font-size: 16px;
   font-weight: bold;
   height: 24px;
@@ -1362,16 +1393,8 @@ td.wpp_premium_feature_image { width: 250px; }
   padding: 0;
   vertical-align: middle;
 }
-.wpp_property_admin_notice p a{
-  font-size: 14px;
-  font-weight: normal;
-  padding: 5px;
-  text-decoration: none;
-  border-radius: 2px;
-  background: #f1f1f1;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -khtml-border-radius: 2px;
+.wp-core-ui.wpp_property_admin_notice span a {
+  margin-left: 10px;
 }
 
 /* SEARCH WIDGET */
@@ -1460,4 +1483,37 @@ p.pad10 {
 }
 .wpp_fb_canvas_options_list {
   margin-top: 5px !important;
+}
+
+.wpp_list .inside {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.wpp_list table.widefat {
+  border: none;
+}
+
+.feps_specific_pages_links label {
+  display: block;
+  cursor: default;
+}
+
+.feps_specific_pages_links .feps_title {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.feps_specific_pages_links .feps_templates label {
+  display: inline;
+}
+
+.feps_specific_pages_links input {
+  width: 100%;
+  border-color: #DFDFDF;
+  background-color: #EEEEEE;
+}
+
+#wp-list-table .column-feps {
+  width: 200px;
 }

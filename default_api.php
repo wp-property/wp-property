@@ -1025,7 +1025,7 @@
   function wpp_exclude_hidden_attributes($property) {
     global $wp_properties;
 
-    if(!is_admin()) {
+    if( !current_user_can( 'manage_options' ) ) {
       foreach($property as $slug => $value) {
         // Determine if the attribute is hidden for frontend
         if(in_array($slug, (array)$wp_properties['hidden_frontend_attributes'])) {

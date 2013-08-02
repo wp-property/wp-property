@@ -924,6 +924,7 @@ if(!function_exists('draw_stats')):
       //** Args below are related to WPP 2.0. but it's needed to have the compatibility with new Denali versions */
       'include_clsf' => 'all', // The list of classifications separated by commas or array which should be included. Enabled values: all|[classification,classification2]
       'title' => 'true',
+      'stats_prefix'  => sanitize_key(WPP_F::property_label( 'singular' ))
     );
 
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
@@ -938,13 +939,12 @@ if(!function_exists('draw_stats')):
      */
     if( $include_clsf == 'detail' ) {
       $sort_by_groups = 'false';
-      foreach( (array)$wp_properties['property_meta'] as $k => $v  ) {
+      foreach( $wp_properties['property_meta'] as $k => $v  ) {
         if( $k == 'tagline' ) {
           continue;
         }
-        $value = get_post_meta( $property->ID, $k, true );
-        if( !empty( $value ) ) {
-          $property_stats[ $v ] = $value;
+        if( !empty( $property->$k ) ) {
+          $property_stats[ $k ] = $property->$k;
         }
       }
     } else {
@@ -1025,13 +1025,13 @@ if(!function_exists('draw_stats')):
         switch($display) {
           case 'dl_list':
             ?>
-            <dt class="wpp_stat_dt_<?php echo $tag; ?>"><?php echo $label; ?><span class="wpp_colon">:</span></dt>
-            <dd class="wpp_stat_dd_<?php echo $tag; ?> <?php echo $alt; ?>"><?php echo $value; ?>&nbsp;</dd>
+            <dt class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_dt_<?php echo $tag; ?>"><?php echo $label; ?><span class="wpp_colon">:</span></dt>
+            <dd class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_dd_<?php echo $tag; ?> <?php echo $alt; ?>"><?php echo $value; ?>&nbsp;</dd>
             <?php
             break;
           case 'list':
             ?>
-            <li class="wpp_stat_plain_list_<?php echo $tag; ?> <?php echo $alt; ?>">
+            <li class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_plain_list_<?php echo $tag; ?> <?php echo $alt; ?>">
               <span class="attribute"><?php echo $label; ?><span class="wpp_colon">:</span></span>
               <span class="value"><?php echo $value; ?>&nbsp;</span>
             </li>
@@ -1039,8 +1039,8 @@ if(!function_exists('draw_stats')):
             break;
           case 'plain_list':
             ?>
-            <span class="attribute"><?php echo $label; ?>:</span>
-            <span class="value"><?php echo $value; ?>&nbsp;</span>
+            <span class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> attribute"><?php echo $label; ?>:</span>
+            <span class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> value"><?php echo $value; ?>&nbsp;</span>
             <br />
             <?php
             break;
@@ -1078,8 +1078,8 @@ if(!function_exists('draw_stats')):
                 $tag = $labels_to_keys[$label];
               ?>
               <?php $alt = ($alt == "alt") ? "" : "alt"; ?>
-              <dt class="wpp_stat_dt_<?php echo $tag; ?>"><?php echo $label; ?></dt>
-              <dd class="wpp_stat_dd_<?php echo $tag; ?> <?php echo $alt; ?>"><?php echo $value; ?>&nbsp;</dd>
+              <dt class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_dt_<?php echo $tag; ?>"><?php echo $label; ?></dt>
+              <dd class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_dd_<?php echo $tag; ?> <?php echo $alt; ?>"><?php echo $value; ?>&nbsp;</dd>
             <?php endforeach; ?>
             </dl>
             <?php
@@ -1092,7 +1092,7 @@ if(!function_exists('draw_stats')):
                 $tag = $labels_to_keys[$label];
                 $alt = ($alt == "alt") ? "" : "alt";
               ?>
-              <li class="wpp_stat_plain_list_<?php echo $tag; ?> <?php echo $alt; ?>">
+              <li class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_plain_list_<?php echo $tag; ?> <?php echo $alt; ?>">
                 <span class="attribute"><?php echo $label; ?>:</span>
                 <span class="value"><?php echo $value; ?>&nbsp;</span>
               </li>
@@ -1104,8 +1104,8 @@ if(!function_exists('draw_stats')):
             foreach($gstats as $label => $value) {
               $tag = $labels_to_keys[$label];
               ?>
-              <span class="attribute"><?php echo $label; ?>:</span>
-              <span class="value"><?php echo $value; ?>&nbsp;</span>
+              <span class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> attribute"><?php echo $label; ?>:</span>
+              <span class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> value"><?php echo $value; ?>&nbsp;</span>
               <br />
               <?php
             }

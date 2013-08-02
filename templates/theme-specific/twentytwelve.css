@@ -5,14 +5,53 @@
 
 /* FEPS */
 
-.wpp_feps_form ul li.submit_action {
-  margin-left: 0;
-}
-
 form.wpp_feps_form ul.feps_property_input_fields {
   margin-bottom: 10px;
 }
 
+.wpp_feps_form ul li,
+.wpp_feps_form ul li.submit_action {
+  margin-left: 0;
+  margin-bottom: 0;
+}
+
+.wpp_feps_form.feps_spc_details_wrapper ul.wpp_feps_subscription_plan_info li {
+  margin-left: 0;
+}
+
+.wpp_feps_form ul.wpp_feps_subscription_plan_info li {
+  margin-left: 20px;
+}
+
+ul.feps_user_input_fields li.wpp_feps_row_wrapper {
+  margin-bottom: 10px;
+}
+
+#content .wpp_shortcode_feps_menu h5 {
+  margin-top: 0;
+}
+
+#content .wpp_shortcode_feps_menu li {
+  margin-left: 0;
+}
+
+#content .wpp_shortcode_feps_menu li h5 {
+  margin: 5px 0;
+}
+
 /* END FEPS */
+
+
+/* Property Search */
+
+#content .wpp_shortcode_search li {
+  margin-left: 0;
+}
+
+#content .wpp_shortcode_search ul li.submit {
+  padding: 0;
+}
+
+/* END Property Search */
 
 

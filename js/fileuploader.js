@@ -485,17 +485,17 @@ qq.FileUploader = function(o){
         listElement: null,
 
         template: '<div class="qq-uploader">' +
-                '<div class="qq-upload-drop-area"><span>'+l10n.drop_file+'</span></div>' +
-                '<div class="qq-upload-button">'+l10n.upload_images+'</div>' +
+                '<div class="qq-upload-drop-area"><span>'+wpp.strings.drop_file+'</span></div>' +
+                '<div class="qq-upload-button">'+wpp.strings.upload_images+'</div>' +
                 '<ul class="qq-upload-list"></ul>' +
              '</div>',
 
         // template for one item in file list
         fileTemplate: '<li>' +
-                '<span class="qq-upload-file"></span><a class="qq-upload-cancel" href="#">'+l10n.cancel+'</a>' +
+                '<span class="qq-upload-file"></span><a class="qq-upload-cancel" href="#">'+wpp.strings.cancel+'</a>' +
                 '<span class="qq-upload-spinner"></span>' +
                 '<span class="qq-upload-size"></span>' +
-                '<span class="qq-upload-failed-text">'+l10n.fail+'</span>' +
+                '<span class="qq-upload-failed-text">'+wpp.strings.fail+'</span>' +
             '</li>',
 
         classes: {
@@ -633,7 +633,7 @@ qq.extend(qq.FileUploader.prototype, {
         item.qqFileId = id;
 
         var fileElement = this._find(item, 'file');
-        qq.setText(fileElement, l10n.uploading+': ' +  this._formatFileName(fileName));
+        qq.setText(fileElement, wpp.strings.uploading+': ' +  this._formatFileName(fileName));
         this._find(item, 'size').style.display = 'none';
 
         this._listElement.appendChild(item);
@@ -1009,7 +1009,7 @@ qq.extend(qq.UploadHandlerForm.prototype, {
         var fileName = this.getName(id);
 
         params['qqfile'] = fileName;
-          
+
         var iframe = this._createIframe(id);
         var form = this._createForm(iframe, params);
         form.appendChild(input);

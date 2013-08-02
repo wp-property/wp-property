@@ -428,14 +428,27 @@ ul.feps_property_input_fields li.wpp_feps_row_wrapper.wpp_checkbox input.wpp_che
 ul.feps_property_input_fields textarea,
 ul.feps_property_input_fields input[type="text"],
 ul.feps_property_input_fields select,
-ul.feps_user_input_fields input[type="text"] {
-  width: 95%;
+ul.feps_user_input_fields input[type="text"],
+#content form.wpi_checkout .text-input,
+#content form.wpi_checkout select {
   background: none repeat scroll 0 0 #FFFFFF;
   border: 4px solid #EEEEEE;
   border-radius: 5px 5px 5px 5px;
   box-shadow: 0 1px 3px rgba(204, 204, 204, 0.95) inset;
   padding: 10px;
+}
+
+ul.feps_property_input_fields textarea,
+ul.feps_property_input_fields input[type="text"],
+ul.feps_property_input_fields select,
+ul.feps_user_input_fields input[type="text"] {
+  width: 95%;
   position: relative;
+}
+
+#content .wpi_checkout .text-input,
+#content .wpi_checkout select {
+  width: 250px;
 }
 
 ul.feps_property_input_fields select {
@@ -459,7 +472,8 @@ ul.feps_user_input_fields li {
   list-style: none;
 }
 
-input.wpp_feps_submit_form, div.qq-upload-button {
+.feps_action_btn,
+div.qq-upload-button {
   background: #222 !important;
 	border: none !important;
 	-moz-border-radius: 3px;
@@ -471,14 +485,32 @@ input.wpp_feps_submit_form, div.qq-upload-button {
 	cursor: pointer !important;
 	font-size: 15px !important;
 	margin: 20px 0 !important;
-	padding: 5px 42px 5px 22px !important;
-	position: relative;
+	/* padding: 5px 42px 5px 22px !important; */
+	padding: 5px 22px !important;
+  position: relative;
 	text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
 }
 
 ul.feps_property_input_fields li.required label {
   padding-right: 15px;
   background: url("../images/red-asterisk.jpg") no-repeat top right;
+}
+
+
+.wpp_feps_form .wpp_feps_ajax_message {
+  margin-top: 22px;
+}
+
+.wpp_shortcode_feps_menu li.wpp_feps_filter {
+  list-style-type: none;
+}
+
+.widget .wpp_shortcode_feps_menu ul {
+  margin-left: 0;
+}
+
+.widget .wpp_shortcode_feps_menu li {
+  list-style-position: inside;
 }
 
 /* Sponsored listings tabs */
@@ -491,12 +523,17 @@ ul.wpp_feps_step_tabs {
   font-size: 14px !important;
 }
 
+.wpp_feps_sponsored_listing .wpi_checkout_wrapper ul {
+  margin-left: 0;
+  margin-bottom: 0;
+}
+
 /* END Sponsored listings tabs */
 
-/* SUBSCRIPTION PLAN */
+/* FEPS : SUBSCRIPTION PLAN */
 
 .wpp_feps_subscription_plan_form ul.feps_property_input_fields li.wpp_feps_row_wrapper {
   margin-bottom: 0;
 }
 
-/* END SUBSCRIPTION PLAN */
+/* END FEPS : SUBSCRIPTION PLAN */

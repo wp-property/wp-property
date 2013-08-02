@@ -247,8 +247,13 @@ ul.wpp_agent_info_list li {list-style: none;}
 .wpp_feps_preview_thumb {
   max-width: 640px;
 }
-.wpp_feps_form input[type="text"], .wpp_feps_form input[type="password"] {
-  width: 99% !important;
+
+
+ul.feps_property_input_fields textarea,
+ul.feps_property_input_fields input[type="text"],
+ul.feps_user_input_fields input[type="text"],
+ul.feps_user_input_fields input[type="password"] {
+  width: 99%;
 }
 
 .wpp_feps_description_wrapper span.attribute_description_text {
@@ -294,6 +299,10 @@ ul.feps_property_input_fields li.wpp_feps_row_wrapper {
   padding-bottom: 10px;
 }
 
+ul.wpp_feps_subscription_plan_list li.wpp_feps_row_wrapper {
+  margin-bottom: 0;
+}
+
 .wpp_feps_form input {
   margin: 0;
 }
@@ -317,6 +326,10 @@ input.wpp_checkbox.wpp_feps_input_error {
   -ms-box-shadow: 0px 1px 0px #FF8989;
 }
 
+.wpp_feps_sponsored_listing ul.wpp_feps_step_tabs {
+  margin-left: 0;
+}
+
 .wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li span {
   font-size: 14px !important;
 }
@@ -325,3 +338,27 @@ input.wpp_checkbox.wpp_feps_input_error {
 #content .wpp_feps_subscription_plan_form li.wpp_feps_row_wrapper p {
   margin-bottom: 0;
 }
+
+.wpp_feps_sponsored_listing .wpi_checkout_wrapper ul {
+  margin-left: 0;
+}
+
+.widget_myfepswidget h3 {
+  margin-bottom: 10px;
+}
+
+#main ul .wpp_shortcode_feps_menu ul {
+  margin-left: 0;
+}
+
+#main ul .wpp_shortcode_feps_menu li {
+  margin-left: 0;
+  list-style-position: inside;
+}
+
+.wpp_shortcode_feps_menu li.wpp_feps_filter {
+  list-style-type: none;
+}
+
+/* END FEPS */
+
