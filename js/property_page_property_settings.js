@@ -25,7 +25,7 @@ jQuery(document).ready(function() {
     if (error_field.object != false ) {
       /* do focus on tab with error field */
       if(typeof error_field.tab_index !='undefined') {
-        jQuery('#wpp_settings_tabs').tabs('select', error_field.tab_index);
+        jQuery('#wpp_settings_tabs').tabs('option', 'active', error_field.tab_index);
       }
       /* mark error field and remove mark on keyup */
       jQuery(error_field.object).addClass('ui-state-error').one('keyup',function(){jQuery(this).removeClass('ui-state-error');});
