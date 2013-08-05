@@ -3,8 +3,8 @@ Contributors:  usability_dynamics, Anton Korotkoff, andypotanin
 Donate link: http://usabilitydynamics.com/products/wp-property/
 Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 3.4.2
-Tested up to: 3.5.1
-Stable tag: 1.38.0
+Tested up to: 3.6
+Stable tag: 1.38.1
 
 
 == Description ==
@@ -226,6 +226,10 @@ We are moving out of beta stages, but you may still experience bugs now and then
 We are still in early stages, so updates will be coming out routinely.  Please do not hesitate to send us feedback and suggestions.
 
 == Changelog ==
+
+= 1.38.1 =
+* Added compatibility with Wordpress 3.6.
+* Removed anonymous function which caused parse error in PHP <5.3.
 
 = 1.38.0 =
 * Added compatibility with Front End Property Submissions (FEPS) 2.0 premium feature.

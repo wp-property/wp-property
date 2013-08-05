@@ -12,7 +12,7 @@ if ( top === self ) {
   //in a frame
   if( typeof window.wpp === 'object' &&
       typeof window.wpp.instance === 'object' &&
-      typeof window.wpp.instance.iframe_enabled !== 'undefined' && 
+      typeof window.wpp.instance.iframe_enabled !== 'undefined' &&
       window.wpp.instance.iframe_enabled === true ) {
     // ignore. Application allows to be used in iframe
   } else {
