@@ -22,9 +22,9 @@ wpp.widgets._search_properties_widget = function( e ) {
   /* */
   var set_group_or_ungroup = function() {
     if(jQuery( "input.wpp_toggle_attribute_grouping", e ).is(":checked")) {
-      jQuery(".wpp_subtle_tabs", e ).tabs('select',1);
+      jQuery(".wpp_subtle_tabs", e ).tabs( 'option', 'active', 1 );
     } else {
-      jQuery(".wpp_subtle_tabs", e ).tabs('select',0);
+      jQuery(".wpp_subtle_tabs", e ).tabs( 'option', 'active', 0 );
     }
   }
 
