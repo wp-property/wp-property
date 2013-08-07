@@ -1918,12 +1918,14 @@ class WPP_Core {
    * @return array
    */
   function get_instance() {
+    global $wp_properties;
 
     $data = array(
       'request' => $_REQUEST,
       'get' => $_GET,
       'post' => $_POST,
       'iframe_enabled' => false,
+      'settings' => $wp_properties,
     );
 
     if( isset( $data[ 'request' ][ 'wp_customize' ] ) && $data[ 'request' ][ 'wp_customize' ] == 'on' ) {
