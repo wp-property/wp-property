@@ -182,6 +182,11 @@ class WPP_Core {
 
     add_filter("wpp_attribute_filter", array('WPP_F', 'attribute_filter'), 10, 2);
 
+    //** Add custom image sizes */
+    foreach($wp_properties['image_sizes'] as $image_name => $image_sizes) {
+      add_image_size($image_name, $image_sizes['width'], $image_sizes['height'], true);
+    }
+
     //** Determine if we are secure */
     $scheme = (is_ssl() && !is_admin() ? 'https' : 'http');
 
@@ -243,11 +248,6 @@ class WPP_Core {
       wp_register_script('wp-property-frontend', get_bloginfo('template_url') . '/wp_properties.js', array('jquery-ui-core','wpp-localization'), WPP_Version, true);
     } elseif (file_exists( WPP_Templates . '/wp_properties.js')) {
       wp_register_script('wp-property-frontend', WPP_URL . 'templates/wp_properties.js', array('jquery-ui-core','wpp-localization'),WPP_Version, true);
-    }
-
-    //** Add custom image sizes */
-    foreach($wp_properties['image_sizes'] as $image_name => $image_sizes) {
-      add_image_size($image_name, $image_sizes['width'], $image_sizes['height'], true);
     }
 
     //** Add troubleshoot log page */
