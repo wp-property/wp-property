@@ -64,7 +64,6 @@ $l10n = array(
     'please_save' => __( 'Please save schedule first.', 'wpp' ),
     'toggle_advanced' => __( 'Toggle Advanced', 'wpp' ),
     'processing' => __( 'Processing...', 'wpp' ),
-    'automatically_match' => __( 'Automatically Match.', 'wpp' ),
     'cannot_reload_source' => __( 'Cannot Load Source: Reload.', 'wpp' ),
     'internal_server_error' => __( 'Internal Server Error!.', 'wpp' ),
     'source_is_good' => __( 'Source Is Good. Reload.', 'wpp' )

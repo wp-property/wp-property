@@ -1,6 +1,9 @@
 /**
  * XMLI Scripts
  *
+ *
+ *
+ *
  * @author: potanin@UD
  * @date: 8/19/13
  */
@@ -10,7 +13,576 @@
 wpp.strings = wpp.strings || {};
 
 // XMLI Instance Object.
-wpp.xmli = {
+wpp.xmli = jQuery.extend({
+
+  settings: {
+    debug: true
+  },
+
+  /**
+   * Initializer.
+   *
+   */
+  ready: function ready() {
+    wpp.xmli.debug( 'wpp.xmli.ready()' );
+
+    var import_hash = false;
+    var schedule_id;
+
+    wpp.xmli.refresh_dom();
+
+    jQuery( ".wppi_delete_all_orphan_attachments" ).click( function ( e ) {
+
+      var notice_container = jQuery( '.wppi_delete_all_orphan_attachments_result' ).show();
+
+      jQuery( notice_container ).html( "Deleting all unattached images. You can close your browser, the operation will continue until completion." );
+
+      jQuery.post( ajaxurl, {
+        action: 'wpp_property_import_handler',
+        wpp_action: 'delete_all_orphan_attachments'
+      }, function ( result ) {
+        if ( result && result.success ) {
+          jQuery( notice_container ).html( result.ui );
+        } else {
+          jQuery( notice_container ).html( 'An error occured.' );
+        }
+
+      }, 'json' );
+
+    });
+
+    jQuery( "#wpp_ajax_show_xml_imort_history" ).click( function () {
+
+      jQuery( ".wpp_ajax_show_xml_imort_history_result" ).html( "" );
+
+      jQuery.post( ajaxurl, {
+        action: 'wpp_ajax_show_xml_imort_history'
+      }, function ( data ) {
+        jQuery( ".wpp_ajax_show_xml_imort_history_result" ).show();
+        jQuery( ".wpp_ajax_show_xml_imort_history_result" ).html( data );
+
+      });
+    });
+
+    jQuery( ".wpp_xi_sort_rules" ).live( "click", function () {
+
+      var list_wrapper = jQuery( "#wpp_property_import_attribute_mapper" );
+      var listitems = jQuery( ".wpp_dynamic_table_row", list_wrapper ).get();
+
+      listitems.sort( function ( a, b ) {
+
+        var compA = jQuery( "select.wpp_import_attribute_dropdown option:selected", a ).text();
+        var compB = jQuery( "select.wpp_import_attribute_dropdown option:selected", b ).text();
+
+        if ( compA === undefined ) {
+          compA = 0;
+        } else {
+          compA = compA;
+        }
+
+        if ( compB === undefined ) {
+          compB = 0;
+        } else {
+          compB = compB;
+        }
+
+        var index = ( compA < compB ) ? -1 : ( compA > compB ) ? 1 : 0;
+        console.log( compA + ' - ' + compB + ': ' + index );
+
+        return index;
+
+      } )
+
+      jQuery.each( listitems, function ( idx, itm ) {
+        list_wrapper.append( itm );
+      });
+
+    });
+
+    jQuery( "#wpp_property_import_choose_root_element" ).live( "change", function () {
+      var value = jQuery( this ).val();
+      var fixed_value = value.replace( /'/g, '"' );
+      jQuery( this ).val( fixed_value );
+    });
+
+    jQuery( ".wpp_xi_advanced_setting input[type=checkbox]" ).live( "change", function () {
+      var wrapper = jQuery( this ).closest( ".wpp_xi_advanced_setting" );
+      if ( jQuery( this ).is( ":checked" ) ) {
+        jQuery( wrapper ).addClass( "wpp_xi_enabld_row" );
+      } else {
+        jQuery( wrapper ).removeClass( "wpp_xi_enabld_row" );
+      }
+
+      wpp.xmli.advanced_option_counter();
+
+    });
+
+    jQuery( ".wpp_xi_advanced_setting input[type=text]" ).live( "change", function () {
+      var wrapper = jQuery( this ).closest( ".wpp_xi_advanced_setting" );
+      var value = jQuery( this ).val();
+
+      if ( value === "" || value === '0' ) {
+
+        /* If 0 blank out this value */
+        jQuery( this ).val( '' );
+
+        /* Check if all inputs are empty */
+        if ( jQuery( "input:text[value != '' ]", wrapper ).length == 0 ) {
+          jQuery( wrapper ).removeClass( 'wpp_xi_enabld_row' );
+        }
+
+      } else {
+        jQuery( wrapper ).addClass( 'wpp_xi_enabld_row' );
+      }
+
+      wpp.xmli.advanced_option_counter();
+
+    });
+
+    jQuery( '.wpp_property_toggle_import_settings' ).live( "click", function () {
+      jQuery( ".wpp_property_import_settings" ).toggle();
+      wpp.xmli.advanced_option_counter();
+    });
+
+    jQuery( ".wpp_import_delete_row" ).live( "click", function () {
+      if ( !jQuery( 'input[name^="wpp_property_import[map]"]:checkbox:checked' ).length ) return false;
+      if ( !confirm( 'Are you sure you want remove these items?' ) ) return false;
+      jQuery( 'input[name^="wpp_property_import[map]"]:checkbox' ).each( function () {
+        if ( this.checked ) {
+          if ( jQuery( '#wpp_property_import_attribute_mapper .wpp_dynamic_table_row' ).length == 1 )
+            jQuery( ".wpp_add_row" ).click();
+          jQuery( this ).parents( '.wpp_dynamic_table_row' ).remove();
+
+        }
+      } )
+      jQuery( jQuery( '[name^="wpp_property_import[map]"]:checkbox' ).parents( '.wpp_dynamic_table_row' ).get().reverse() ).each( function ( index ) {
+        jQuery( this ).find( 'input,select' ).each( function () {
+          var old_name = jQuery( this ).attr( 'name' );
+          var matches = old_name.match( /\[( \d{1,2} )\]/ );
+          if ( matches ) {
+            old_count = parseInt( matches[1] );
+            new_count = ( index + 1 );
+          }
+          var new_name = old_name.replace( '[' + old_count + ']', '[' + new_count + ']' );
+          jQuery( this ).attr( 'name', new_name );
+        });
+      } )
+
+//** Create unique ID selected  **/
+      wpp.xmli.import_build_unique_id_selector();
+    } )
+
+    jQuery( '#check_all' ).live( 'click', function () {
+      if ( this.checked ) {
+        jQuery( '[name^="wpp_property_import[map]"]:checkbox' ).attr( 'checked', 'checked' );
+      } else {
+        jQuery( '[name^="wpp_property_import[map]"]:checkbox' ).attr( 'checked', '' );
+      }
+    } )
+
+    jQuery( "#wpp_i_do_full_import" ).live( "click", function () {
+
+      /* Blank out preview result since it will be deleted after completion of import */
+      jQuery( "wpp_i_preview_raw_data_result" ).html( "" );
+
+      var import_hash = jQuery( "#import_hash" ).val();
+
+      if ( import_hash != "" ) {
+        window.open( wpp.home_url + "/?wpp_schedule_import=" + import_hash + "&echo_log=true", 'wpp_i_do_full_import' );
+      } else {
+        wpp.xmli.actions_bar_message( wpp.strings.xmli.please_save, "bad", 7000 );
+      }
+
+    });
+
+    jQuery( "#wpp_i_preview_action" ).live( "click", function () {
+
+      var source_type = jQuery( "#wpp_property_import_source_type option:selected" ).val();
+
+      jQuery( "#wpp_i_preview_action" ).val( 'Loading...' );
+
+      /*jQuery( "#wpp_i_preview_action" ).attr( 'disabled', true ); */
+
+      jQuery( "#wpp_import_object_preview" ).html( "<pre class=\"wpp_class_pre\"></pre>" );
+
+      var params = {
+        action: 'wpp_property_import_handler',
+        wpp_action: 'execute_schedule_import',
+        preview: 'true',
+        data: jQuery( "#wpp_property_import_setup" ).serialize()
+      }
+
+      if ( schedule_id !== undefined ) {
+        params.schedule_id = schedule_id;
+      }
+
+      if ( source_type !== undefined ) {
+        params.source_type = source_type;
+      }
+
+      jQuery.post( ajaxurl, params,function ( result ) {
+        jQuery( "#wpp_i_preview_action" ).attr( 'disabled', false );
+        jQuery( "#wpp_i_preview_action" ).val( 'Preview Again' );
+
+        if ( result.success == 'true' ) {
+          wpp.xmli.actions_bar_message();
+          jQuery( "#wpp_import_object_preview" ).show();
+          jQuery( "#wpp_import_object_preview" ).html( "<pre class=\"wpp_class_pre\">" + result.ui + "</pre>" );
+        } else {
+          alert( result.message );
+        }
+
+      }, 'json' ).success(function () {
+        } ).error( function ( result ) {
+          if ( result.status == 500 ) {
+            wpp.xmli.actions_bar_message( wpp.strings.xmli.out_of_memory, 'bad' );
+            jQuery( "#wpp_i_preview_action" ).val( 'Preview Again' );
+          }
+        });
+    });
+
+    jQuery( ".wpp_i_close_preview" ).live( "click", function () {
+      jQuery( "#wpp_i_preview_raw_data" ).val( 'Preview Raw Data' );
+      jQuery( ".wpp_i_close_preview" ).hide();
+      jQuery( ".wppi_raw_preview_result" ).hide();
+      jQuery( ".wppi_raw_preview_result" ).html( "" );
+    });
+
+    jQuery( "#wpp_i_preview_raw_data" ).live( "click", function () {
+
+      var source_type = jQuery( "#wpp_property_import_source_type option:selected" ).val();
+
+      if ( !wpp.xmli.validate_source_info( source_type ) ) {
+        return false;
+      }
+
+      if ( source_type == "" ) {
+        jQuery( "#wpp_property_import_source_type" ).addClass( 'wpp_error' );
+        return;
+      } else {
+        jQuery( "#wpp_property_import_source_type" ).removeClass( 'wpp_error' );
+      }
+
+      wpp.xmli.preview_raw_preview_result( wpp.strings.xmli.loading );
+
+      jQuery( "#wpp_i_preview_raw_data" ).attr( 'disabled', true );
+
+      var params = {
+        action: 'wpp_property_import_handler',
+        wpp_action: 'execute_schedule_import',
+        raw_preview: 'true',
+        data: jQuery( "#wpp_property_import_setup" ).serialize()
+      }
+
+      if ( schedule_id !== undefined ) {
+        params.schedule_id = schedule_id;
+      }
+
+      if ( source_type !== undefined ) {
+        params.source_type = source_type;
+      }
+
+      wpp.xmli.loading_show();
+
+      jQuery.post( ajaxurl, params,function ( result ) {
+
+        wpp.xmli.loading_hide();
+
+        jQuery( "#wpp_i_preview_raw_data" ).attr( 'disabled', false );
+        jQuery( "#wpp_i_preview_raw_data" ).val( 'Preview Again' );
+
+        if ( result.success === true || result.success === 'true' ) {
+
+          wpp.xmli.preview_raw_preview_result( result.preview_bar_message );
+
+          /* Should always return a schedule ID */
+          wpp.xmli.set_schedule_id( result.schedule_id );
+
+          jQuery( ".wpp_i_close_preview" ).show();
+          jQuery( ".wppi_raw_preview_result" ).show();
+          jQuery( ".wppi_raw_preview_result" ).html( "<pre class=\"wpp_class_pre\">" + result.ui + "</pre>" );
+        } else {
+          wpp.xmli.preview_raw_preview_result( result.message, "bad" );
+        }
+
+        wpp.xmli.loading_hide();
+
+      }, 'json' ).success(function () {
+        } ).error( function ( result ) {
+
+          jQuery( "#wpp_i_preview_raw_data" ).attr( 'disabled', false );
+
+          if ( result.status == 500 ) {
+            wpp.xmli.preview_raw_preview_result( wpp.strings.xmli.out_of_memory, 'bad' );
+            jQuery( "#wpp_i_preview_raw_data" ).val( 'Preview Raw Data' );
+          }
+
+          wpp.xmli.preview_raw_preview_result( result.responseText, "bad" );
+
+          wpp.xmli.loading_hide();
+
+        });
+
+
+    });
+
+    //** Update to get matched tags from array. */
+    jQuery( "#wpp_import_auto_match" ).live( "click", function () {
+      wpp.xmli.perform_auto_matching();
+    });
+
+    jQuery( "#wpp_property_import_save" ).live( "click", function ( e ) {
+
+      e.preventDefault();
+
+      var this_button = this;
+      var original_text = wpp.strings.xmli.save;
+
+      wpp.xmli.actions_bar_message( wpp.strings.xmli.saving );
+
+      jQuery( this_button ).val( wpp.strings.xmli.processing );
+
+
+      var params = {
+        action: 'wpp_property_import_handler',
+        wpp_action: 'save_new_schedule',
+        data: jQuery( "#wpp_property_import_setup" ).serialize()
+      }
+
+      /* schedule_id may have been created during a preview or source eval */
+      if ( schedule_id !== undefined ) {
+        params.schedule_id = schedule_id;
+      }
+
+      jQuery.post( ajaxurl, params, function ( result ) {
+        if ( result.success == 'true' ) {
+          wpp.xmli.actions_bar_message( wpp.strings.xmli.saved, "good", 7000 );
+          wpp.xmli.set_schedule_id( result.schedule_id );
+          wpp.xmli.set_schedule_hash( result.hash );
+          jQuery( this_button ).val( original_text );
+
+        } else {
+          wpp.xmli.actions_bar_message( result.message, 'error' );
+        }
+      }, 'json' );
+    });
+
+    jQuery( "#wpp_property_import_update" ).live( "click", function ( e ) {
+
+      e.preventDefault();
+
+      var this_button = this;
+      var original_text = wpp.strings.xmli.save;
+
+      wpp.xmli.actions_bar_message( wpp.strings.xmli.updating );
+
+      jQuery( this_button ).val( wpp.strings.xmli.processing );
+
+      schedule_id = jQuery( this ).attr( 'schedule_id' );
+
+      jQuery.post( ajaxurl, {
+        action: 'wpp_property_import_handler',
+        wpp_action: 'update_schedule',
+        schedule_id: schedule_id,
+        data: jQuery( "#wpp_property_import_setup" ).serialize()
+      }, function ( result ) {
+
+        if ( typeof result === 'object' && result.success === 'true' ) {
+          wpp.xmli.set_schedule_id( result.schedule_id );
+          wpp.xmli.set_schedule_hash( result.hash );
+          wpp.xmli.actions_bar_message( wpp.strings.xmli.updated, "good", 7000 );
+
+          jQuery( this_button ).val( original_text );
+
+        } else {
+          wpp.xmli.actions_bar_message( result.message, 'error' );
+        }
+
+      }, 'json' );
+    });
+
+    /* Activated when "Add New" buttin is clicked */
+    jQuery( "#wpp_property_import_add_import" ).click( function () {
+      jQuery( ".updated" ).remove();
+      wpp.xmli.show_schedule_editor_ui();
+    });
+
+    jQuery( ".wpp_property_import_edit_report" ).click( function ( e ) {
+      var schedule_id = jQuery( this ).attr( 'schedule_id' );
+      wpp.xmli.show_schedule_editor_ui( schedule_id );
+    });
+
+    /* Sort schedules on overview page */
+    jQuery( ".wpp_i_sort_schedules" ).click( function ( e ) {
+
+      e.preventDefault();
+
+      jQuery( ".wpp_i_sort_schedules a" ).removeClass( "current" );
+
+      jQuery( "a", this ).addClass( "current" );
+
+      var sort_by = jQuery( this ).attr( "sort_by" );
+      var sort_direction = jQuery( this ).attr( "sort_direction" );
+      var mylist = jQuery( '#wpp_property_import_overview tbody' );
+      var listitems = mylist.children( 'tr' ).get();
+
+      listitems.sort( function ( a, b ) {
+
+        var compA = jQuery( a ).attr( sort_by );
+        var compB = jQuery( b ).attr( sort_by );
+
+        if ( compA === undefined ) {
+          compA = 0;
+        } else {
+          compA = parseInt( compA );
+        }
+
+        if ( compB === undefined ) {
+          compB = 0;
+        } else {
+          compB = parseInt( compB );
+        }
+
+        if ( sort_direction == "DESC" ) {
+          var index = ( compA < compB ) ? -1 : ( compA > compB ) ? 1 : 0;
+        } else {
+          var index = ( compA > compB ) ? -1 : ( compA < compB ) ? 1 : 0;
+        }
+
+
+        return index;
+
+      } )
+
+//** Switch sorting direction */
+      if ( sort_direction == "DESC" ) {
+        jQuery( this ).attr( "sort_direction", "ASC" )
+      } else {
+        jQuery( this ).attr( "sort_direction", "DESC" )
+      }
+
+      jQuery.each( listitems, function ( idx, itm ) {
+        mylist.append( itm );
+      });
+
+
+    });
+
+    jQuery( ".wppi_delete_all_feed_properties" ).click( function ( e ) {
+
+      e.preventDefault();
+
+      var verify_response;
+      var row = jQuery( this ).parents( ".wpp_i_schedule_row" );
+      var total_properties = jQuery( row ).attr( "total_properties" );
+      var schedule_id = jQuery( row ).attr( "schedule_id" );
+      var import_title = jQuery( row ).attr( "import_title" );
+
+      verify_response = prompt( "Confirm that you want to delete all " + total_properties + " properties from this feed by typing in in 'delete' below, or press 'Cancel' to cancel." );
+
+      if ( verify_response == "delete" ) {
+
+        jQuery( "#wpp_property_import_ajax" ).show();
+        jQuery( "#wpp_property_import_ajax" ).html( "<div class='updated below-h2'><p>Deleting all properties from " + import_title + ". You can close your browser, the operation will continue until completion.</p></div>" );
+
+        jQuery.post( ajaxurl, {
+          action: 'wpp_property_import_handler',
+          schedule_id: schedule_id,
+          wpp_action: 'delete_all_schedule_properties'
+        }, function ( result ) {
+          if ( result.success == 'true' ) {
+            jQuery( "#wpp_property_import_ajax" ).html( "<div class='updated below-h2'><p>" + result.ui + "</p></div>" );
+          } else {
+            jQuery( "#wpp_property_import_ajax" ).html( "<div class='updated below-h2'><p>" + wpp.strings.xmli.error_occured + "</p></div>" );
+          }
+        }, 'json' );
+
+      } else {
+        return;
+      }
+
+    });
+
+    jQuery( ".wpp_property_import_delete_report" ).click( function ( e ) {
+      e.preventDefault();
+
+      if ( !confirm( wpp.strings.xmli.are_you_sure ) )
+        return;
+
+      var schedule_id = jQuery( this ).attr( 'schedule_id' );
+      var rmel = jQuery( this ).parents( 'tr' );
+
+      jQuery.post( ajaxurl, {
+        action: 'wpp_property_import_handler',
+        schedule_id: schedule_id,
+        wpp_action: 'delete_schedule'
+      }, function ( result ) {
+        if ( result.success == 'true' ) {
+          jQuery( rmel ).remove();
+          if ( jQuery( '#wpp_property_import_overview tr' ).length == 1 )
+            jQuery( '#wpp_property_import_overview' ).remove();
+        }
+      }, 'json' );
+    });
+
+    /* Vlidate source and get info when one of the source-related fields is updated. */
+    jQuery( "#wpp_property_import_remote_url, #wpp_property_import_username, #wpp_property_import_password" ).live( "change", function () {
+      wpp.xmli.determine_settings( {} );
+    });
+
+    /* If source is selected, remove error and determine settings */
+    jQuery( "#wpp_property_import_source_type" ).live( "change", wpp.xmli.source_changed );
+
+    /* Vlidate source when "Source is Good" label is pressed. Third argument forces cache refresh. */
+    jQuery( '#wpp_property_import_source_status' ).live( 'click', function () {
+      wpp.xmli.evaluate_source( this, false, true );
+    });
+
+    jQuery( "#wpp_property_import_unique_id" ).live( 'change', function () {
+      wpp.xmli.import_build_unique_id_selector();
+    });
+
+    jQuery( 'select[name^="wpp_property_import[map]"]' ).live( 'change', function () {
+      wpp.xmli.import_build_unique_id_selector();
+    });
+
+  },
+
+  /**
+   * Source Changed.
+   *
+   */
+  source_changed: function source_changed() {
+    wpp.xmli.debug( 'wpp.xmli.source_changed()' )
+
+    wpp.xmli.determine_settings( {} );
+
+    jQuery( "#wpp_property_import_source_type" ).removeClass( 'wpp_error' );
+
+  },
+
+  /**
+   * XMLI Logger.
+   *
+   * @usage
+   *    wpp.xmli.debug( 'My message.' );
+   *
+   * @for wpp.xmli
+   * @method log
+   * @author potanin@UD
+   */
+  debug: function debug() {
+
+    // Ignore if debugging is not enabled.
+    if( !wpp.xmli.settings.debug ) {
+      return;
+    }
+
+    if( 'function' === typeof console.log ) {
+      console.log.apply( console, arguments );
+    }
+
+  },
 
   /**
    * Toggle loading icon at the top of the page.
@@ -87,6 +659,7 @@ wpp.xmli = {
    *
    */
   perform_auto_matching: function perform_auto_matching () {
+    wpp.xmli.debug( 'wpp.xmli.perform_auto_matching()' );
 
     var wpp_all_importable_attributes = new Array();
     var wpp_all_importable_attributes_labels = new Array();
@@ -106,9 +679,10 @@ wpp.xmli = {
       jQuery( "#wpp_import_auto_match" ).val( 'Reloading XML...' );
       jQuery( "#wpp_import_auto_match" ).attr( 'disabled', true );
 
-      wpp.xmli.import_evaluate_source( false, wpp.xmli.perform_auto_matching );
+      wpp.xmli.evaluate_source( false, wpp.xmli.perform_auto_matching );
 
       return;
+
     }
 
     /* Get all WPP tags from first dropdown */
@@ -258,7 +832,8 @@ wpp.xmli = {
    * Verifies source can be loaded and is valid.
    * Returns matched_tags and stored in wpp_auto_matched_tags
    */
-  import_evaluate_source: function import_evaluate_source ( object, callback_func, do_not_use_cache ) {
+  evaluate_source: function evaluate_source ( object, callback_func, do_not_use_cache ) {
+    wpp.xmli.debug( 'wpp.xmli.evaluate_source()' );
 
     /* Be default we do not re-cache */
     if ( !do_not_use_cache ) {
@@ -266,7 +841,6 @@ wpp.xmli = {
     }
 
     var remote_url = jQuery( "#wpp_property_import_remote_url" ).val();
-    var root_element = jQuery( "#wpp_property_import_choose_root_element" ).val();
     var import_type = jQuery( "#wpp_property_import_source_type option:selected" ).val();
 
     if ( !remote_url.length || import_type == "" ) {
@@ -525,6 +1099,7 @@ wpp.xmli = {
    *
    */
   source_status: function source_status ( status ) {
+    wpp.xmli.debug( 'wpp.xmli.source_status()' );
 
     jQuery( "#wpp_property_import_source_status" ).removeClass();
 
@@ -561,8 +1136,15 @@ wpp.xmli = {
 
   },
 
-  /* Ensure all necessary data for given source is filled in */
+  /**
+   * Ensure all necessary data for given source is filled in
+   *
+   * @param type
+   * @returns {boolean}
+   */
   validate_source_info: function validate_source_info ( type ) {
+    wpp.xmli.debug( 'wpp.xmli.validate_source_info()' );
+
     var required_fields = jQuery( "input.wpp_required", "[wpp_i_source_type=" + type + "]" );
     var success = true;
 
@@ -586,11 +1168,14 @@ wpp.xmli = {
     return success;
   },
 
-  /*  Displays editor UI */
+  /**
+   * Displays editor UI
+   *
+   * @param passed_schedule_id
+   */
   show_schedule_editor_ui: function show_schedule_editor_ui ( passed_schedule_id ) {
 
     wpp.xmli.loading_show();
-
 
     jQuery( ".updated" ).remove();
 
@@ -624,7 +1209,10 @@ wpp.xmli = {
 
   },
 
-  /* Handles functions and UI configurations when a major DOM change is made */
+  /**
+   * Handles functions and UI configurations when a major DOM change is made
+   *
+   */
   advanced_option_counter: function advanced_option_counter () {
 
     /* Special Rules: Limits cannot be used with property deletion */
@@ -659,21 +1247,33 @@ wpp.xmli = {
 
   },
 
-  /* Disables, resets, and grays out an option */
+  /**
+   * Disables, resets, and grays out an option
+   *
+   * @param element
+   */
   disable_advanced_option: function disable_advanced_option ( element ) {
     jQuery( element ).prop( 'disabled', true );
     jQuery( element ).prop( 'checked', false );
     jQuery( element ).closest( 'li.wpp_xi_advanced_setting' ).css( 'opacity', 0.3 ).removeClass( '.wpp_xi_enabld_row' );
   },
 
-  /* Enables an option */
+  /**
+   * Enables an option
+   *
+   * @param element
+   */
   enable_advanced_option: function enable_advanced_option ( element ) {
     jQuery( element ).prop( 'disabled', false );
     jQuery( element ).closest( 'li.wpp_xi_advanced_setting' ).css( 'opacity', 1 );
   },
 
-  /* Handles functions and UI configurations when a major DOM change is made */
+  /**
+   * Handles functions and UI configurations when a major DOM change is made
+   *
+   */
   refresh_dom: function refresh_dom () {
+    wpp.xmli.debug( 'wpp.xmli.refresh_dom()' );
 
     var current_page = false;
 
@@ -689,24 +1289,27 @@ wpp.xmli = {
       } else {
         current_page = 'overview';
       }
+
     }
   },
 
-  /* Determine if "Toggle Advanced Settings" link should be displayed for this source type */
+  /**
+   * Determine if "Toggle Advanced Settings" link should be displayed for this source type
+   *
+   * @param response
+   */
   determine_settings: function determine_settings ( response ) {
+    wpp.xmli.debug( 'wpp.xmli.determine_settings()' );
 
-    var source_url = jQuery( "#wpp_property_import_remote_url" ).val();
     var source_type = jQuery( "#wpp_property_import_source_type option:selected" ).val();
+    var source_label = jQuery( "#wpp_property_import_source_type option:selected" ).html();
+    var source_url = jQuery( "#wpp_property_import_remote_url" ).val();
 
     if ( source_url != "" && source_type != "" ) {
       wpp.xmli.source_status( 'ready_to_check' );
     } else {
       wpp.xmli.source_status( '' );
     }
-
-    var source_url = jQuery( "#wpp_property_import_remote_url" ).val();
-    var source_type = jQuery( "#wpp_property_import_source_type" ).val();
-    var source_label = jQuery( "#wpp_property_import_source_type option:selected" ).html();
 
     /* Hide all non-import-type-specific advanced options */
     jQuery( ".wpp_i_advanced_source_settings" ).hide();
@@ -736,8 +1339,14 @@ wpp.xmli = {
 
   },
 
-  /* Ran after the import editor screen is displayed */
+  /**
+   * Ran after the import editor screen is displayed
+   *
+   * @param response
+   */
   run_on_import_ui_display: function run_on_import_ui_display ( response ) {
+    wpp.xmli.debug( 'wpp.xmli.run_on_import_ui_display()' );
+
     wpp.xmli.determine_settings( response );
     wpp.xmli.import_build_unique_id_selector();
 
@@ -769,533 +1378,8 @@ wpp.xmli = {
 
   }
 
+}, wpp.xmli || {} );
 
-};
-
-jQuery( document ).ready( function ( $ ) {
-
-  var import_hash = false;
-  var schedule_id;
-
-  wpp.xmli.refresh_dom();
-
-  jQuery( ".wppi_delete_all_orphan_attachments" ).click( function ( e ) {
-
-    var notice_container = jQuery( '.wppi_delete_all_orphan_attachments_result' ).show();
-
-    jQuery( notice_container ).html( "Deleting all unattached images. You can close your browser, the operation will continue until completion." );
-
-    jQuery.post( ajaxurl, {
-      action: 'wpp_property_import_handler',
-      wpp_action: 'delete_all_orphan_attachments'
-    }, function ( result ) {
-      if ( result && result.success ) {
-        jQuery( notice_container ).html( result.ui );
-      } else {
-        jQuery( notice_container ).html( 'An error occured.' );
-      }
-
-    }, 'json' );
-
-  });
-
-  jQuery( "#wpp_ajax_show_xml_imort_history" ).click( function () {
-
-    jQuery( ".wpp_ajax_show_xml_imort_history_result" ).html( "" );
-
-    jQuery.post( ajaxurl, {
-      action: 'wpp_ajax_show_xml_imort_history'
-    }, function ( data ) {
-      jQuery( ".wpp_ajax_show_xml_imort_history_result" ).show();
-      jQuery( ".wpp_ajax_show_xml_imort_history_result" ).html( data );
-
-    });
-  });
-
-  jQuery( ".wpp_xi_sort_rules" ).live( "click", function () {
-
-    var list_wrapper = jQuery( "#wpp_property_import_attribute_mapper" );
-    var listitems = jQuery( ".wpp_dynamic_table_row", list_wrapper ).get();
-
-    listitems.sort( function ( a, b ) {
-
-      var compA = jQuery( "select.wpp_import_attribute_dropdown option:selected", a ).text();
-      var compB = jQuery( "select.wpp_import_attribute_dropdown option:selected", b ).text();
-
-      if ( compA === undefined ) {
-        compA = 0;
-      } else {
-        compA = compA;
-      }
-
-      if ( compB === undefined ) {
-        compB = 0;
-      } else {
-        compB = compB;
-      }
-
-      var index = ( compA < compB ) ? -1 : ( compA > compB ) ? 1 : 0;
-      console.log( compA + ' - ' + compB + ': ' + index );
-
-      return index;
-
-    } )
-
-    jQuery.each( listitems, function ( idx, itm ) {
-      list_wrapper.append( itm );
-    });
-
-  });
-
-  jQuery( "#wpp_property_import_choose_root_element" ).live( "change", function () {
-    var value = jQuery( this ).val();
-    var fixed_value = value.replace( /'/g, '"' );
-    jQuery( this ).val( fixed_value );
-  });
-
-  jQuery( ".wpp_xi_advanced_setting input[type=checkbox]" ).live( "change", function () {
-    var wrapper = jQuery( this ).closest( ".wpp_xi_advanced_setting" );
-    if ( jQuery( this ).is( ":checked" ) ) {
-      jQuery( wrapper ).addClass( "wpp_xi_enabld_row" );
-    } else {
-      jQuery( wrapper ).removeClass( "wpp_xi_enabld_row" );
-    }
-
-    wpp.xmli.advanced_option_counter();
-
-  });
-
-  jQuery( ".wpp_xi_advanced_setting input[type=text]" ).live( "change", function () {
-    var wrapper = jQuery( this ).closest( ".wpp_xi_advanced_setting" );
-    var value = jQuery( this ).val();
-
-    if ( value === "" || value === '0' ) {
-
-      /* If 0 blank out this value */
-      jQuery( this ).val( '' );
-
-      /* Check if all inputs are empty */
-      if ( jQuery( "input:text[value != '' ]", wrapper ).length == 0 ) {
-        jQuery( wrapper ).removeClass( 'wpp_xi_enabld_row' );
-      }
-
-    } else {
-      jQuery( wrapper ).addClass( 'wpp_xi_enabld_row' );
-    }
-
-    wpp.xmli.advanced_option_counter();
-
-  });
-
-  jQuery( '.wpp_property_toggle_import_settings' ).live( "click", function () {
-    jQuery( ".wpp_property_import_settings" ).toggle();
-    wpp.xmli.advanced_option_counter();
-  });
-
-  jQuery( ".wpp_import_delete_row" ).live( "click", function () {
-    if ( !jQuery( 'input[name^="wpp_property_import[map]"]:checkbox:checked' ).length ) return false;
-    if ( !confirm( 'Are you sure you want remove these items?' ) ) return false;
-    jQuery( 'input[name^="wpp_property_import[map]"]:checkbox' ).each( function () {
-      if ( this.checked ) {
-        if ( jQuery( '#wpp_property_import_attribute_mapper .wpp_dynamic_table_row' ).length == 1 )
-          jQuery( ".wpp_add_row" ).click();
-        jQuery( this ).parents( '.wpp_dynamic_table_row' ).remove();
-
-      }
-    } )
-    jQuery( jQuery( '[name^="wpp_property_import[map]"]:checkbox' ).parents( '.wpp_dynamic_table_row' ).get().reverse() ).each( function ( index ) {
-      jQuery( this ).find( 'input,select' ).each( function () {
-        var old_name = jQuery( this ).attr( 'name' );
-        var matches = old_name.match( /\[( \d{1,2} )\]/ );
-        if ( matches ) {
-          old_count = parseInt( matches[1] );
-          new_count = ( index + 1 );
-        }
-        var new_name = old_name.replace( '[' + old_count + ']', '[' + new_count + ']' );
-        jQuery( this ).attr( 'name', new_name );
-      });
-    } )
-
-//** Create unique ID selected  **/
-    wpp.xmli.import_build_unique_id_selector();
-  } )
-
-  jQuery( '#check_all' ).live( 'click', function () {
-    if ( this.checked ) {
-      jQuery( '[name^="wpp_property_import[map]"]:checkbox' ).attr( 'checked', 'checked' );
-    } else {
-      jQuery( '[name^="wpp_property_import[map]"]:checkbox' ).attr( 'checked', '' );
-    }
-  } )
-
-  jQuery( "#wpp_i_do_full_import" ).live( "click", function () {
-
-    /* Blank out preview result since it will be deleted after completion of import */
-    jQuery( "wpp_i_preview_raw_data_result" ).html( "" );
-
-    var import_hash = jQuery( "#import_hash" ).val();
-
-    if ( import_hash != "" ) {
-      window.open( wpp.home_url + "/?wpp_schedule_import=" + import_hash + "&echo_log=true", 'wpp_i_do_full_import' );
-    } else {
-      wpp.xmli.actions_bar_message( wpp.strings.xmli.please_save, "bad", 7000 );
-    }
-
-  });
-
-  jQuery( "#wpp_i_preview_action" ).live( "click", function () {
-
-    var source_type = jQuery( "#wpp_property_import_source_type option:selected" ).val();
-
-    jQuery( "#wpp_i_preview_action" ).val( 'Loading...' );
-
-    /*jQuery( "#wpp_i_preview_action" ).attr( 'disabled', true ); */
-
-    jQuery( "#wpp_import_object_preview" ).html( "<pre class=\"wpp_class_pre\"></pre>" );
-
-    var params = {
-      action: 'wpp_property_import_handler',
-      wpp_action: 'execute_schedule_import',
-      preview: 'true',
-      data: jQuery( "#wpp_property_import_setup" ).serialize()
-    }
-
-    if ( schedule_id !== undefined ) {
-      params.schedule_id = schedule_id;
-    }
-
-    if ( source_type !== undefined ) {
-      params.source_type = source_type;
-    }
-
-    jQuery.post( ajaxurl, params,function ( result ) {
-      jQuery( "#wpp_i_preview_action" ).attr( 'disabled', false );
-      jQuery( "#wpp_i_preview_action" ).val( 'Preview Again' );
-
-      if ( result.success == 'true' ) {
-        wpp.xmli.actions_bar_message();
-        jQuery( "#wpp_import_object_preview" ).show();
-        jQuery( "#wpp_import_object_preview" ).html( "<pre class=\"wpp_class_pre\">" + result.ui + "</pre>" );
-      } else {
-        alert( result.message );
-      }
-
-    }, 'json' ).success(function () {
-      } ).error( function ( result ) {
-        if ( result.status == 500 ) {
-          wpp.xmli.actions_bar_message( wpp.strings.xmli.out_of_memory, 'bad' );
-          jQuery( "#wpp_i_preview_action" ).val( 'Preview Again' );
-        }
-      });
-  });
-
-  jQuery( ".wpp_i_close_preview" ).live( "click", function () {
-    jQuery( "#wpp_i_preview_raw_data" ).val( 'Preview Raw Data' );
-    jQuery( ".wpp_i_close_preview" ).hide();
-    jQuery( ".wppi_raw_preview_result" ).hide();
-    jQuery( ".wppi_raw_preview_result" ).html( "" );
-  });
-
-  jQuery( "#wpp_i_preview_raw_data" ).live( "click", function () {
-
-    var source_type = jQuery( "#wpp_property_import_source_type option:selected" ).val();
-
-    if ( !wpp.xmli.validate_source_info( source_type ) ) {
-      return false;
-    }
-
-    if ( source_type == "" ) {
-      jQuery( "#wpp_property_import_source_type" ).addClass( 'wpp_error' );
-      return;
-    } else {
-      jQuery( "#wpp_property_import_source_type" ).removeClass( 'wpp_error' );
-    }
-
-    wpp.xmli.preview_raw_preview_result( wpp.strings.xmli.loading );
-
-    jQuery( "#wpp_i_preview_raw_data" ).attr( 'disabled', true );
-
-    var params = {
-      action: 'wpp_property_import_handler',
-      wpp_action: 'execute_schedule_import',
-      raw_preview: 'true',
-      data: jQuery( "#wpp_property_import_setup" ).serialize()
-    }
-
-    if ( schedule_id !== undefined ) {
-      params.schedule_id = schedule_id;
-    }
-
-    if ( source_type !== undefined ) {
-      params.source_type = source_type;
-    }
-
-    wpp.xmli.loading_show();
-
-    jQuery.post( ajaxurl, params,function ( result ) {
-
-      wpp.xmli.loading_hide();
-
-      jQuery( "#wpp_i_preview_raw_data" ).attr( 'disabled', false );
-      jQuery( "#wpp_i_preview_raw_data" ).val( 'Preview Again' );
-
-      if ( result.success === true || result.success === 'true' ) {
-
-        wpp.xmli.preview_raw_preview_result( result.preview_bar_message );
-
-        /* Should always return a schedule ID */
-        wpp.xmli.set_schedule_id( result.schedule_id );
-
-        jQuery( ".wpp_i_close_preview" ).show();
-        jQuery( ".wppi_raw_preview_result" ).show();
-        jQuery( ".wppi_raw_preview_result" ).html( "<pre class=\"wpp_class_pre\">" + result.ui + "</pre>" );
-      } else {
-        wpp.xmli.preview_raw_preview_result( result.message, "bad" );
-      }
-
-      wpp.xmli.loading_hide();
-
-    }, 'json' ).success(function () {
-      } ).error( function ( result ) {
-
-        jQuery( "#wpp_i_preview_raw_data" ).attr( 'disabled', false );
-
-        if ( result.status == 500 ) {
-          wpp.xmli.preview_raw_preview_result( wpp.strings.xmli.out_of_memory, 'bad' );
-          jQuery( "#wpp_i_preview_raw_data" ).val( 'Preview Raw Data' );
-        }
-
-        wpp.xmli.preview_raw_preview_result( result.responseText, "bad" );
-
-        wpp.xmli.loading_hide();
-
-      });
-
-
-  });
-
-  //** Update to get matched tags from array. */
-  jQuery( "#wpp_import_auto_match" ).live( "click", function () {
-    wpp.xmli.perform_auto_matching();
-  });
-
-  jQuery( "#wpp_property_import_save" ).live( "click", function ( e ) {
-
-    e.preventDefault();
-
-    var this_button = this;
-    var original_text = wpp.strings.xmli.save;
-
-    wpp.xmli.actions_bar_message( wpp.strings.xmli.saving );
-
-    jQuery( this_button ).val( wpp.strings.xmli.processing );
-
-
-    var params = {
-      action: 'wpp_property_import_handler',
-      wpp_action: 'save_new_schedule',
-      data: jQuery( "#wpp_property_import_setup" ).serialize()
-    }
-
-    /* schedule_id may have been created during a preview or source eval */
-    if ( schedule_id !== undefined ) {
-      params.schedule_id = schedule_id;
-    }
-
-    jQuery.post( ajaxurl, params, function ( result ) {
-      if ( result.success == 'true' ) {
-        wpp.xmli.actions_bar_message( wpp.strings.xmli.saved, "good", 7000 );
-        wpp.xmli.set_schedule_id( result.schedule_id );
-        wpp.xmli.set_schedule_hash( result.hash );
-        jQuery( this_button ).val( original_text );
-
-      } else {
-        wpp.xmli.actions_bar_message( result.message, 'error' );
-      }
-    }, 'json' );
-  });
-
-  jQuery( "#wpp_property_import_update" ).live( "click", function ( e ) {
-
-    e.preventDefault();
-
-    var this_button = this;
-    var original_text = wpp.strings.xmli.save;
-
-    wpp.xmli.actions_bar_message( wpp.strings.xmli.updating );
-
-    jQuery( this_button ).val( wpp.strings.xmli.processing );
-
-    schedule_id = jQuery( this ).attr( 'schedule_id' );
-
-    jQuery.post( ajaxurl, {
-      action: 'wpp_property_import_handler',
-      wpp_action: 'update_schedule',
-      schedule_id: schedule_id,
-      data: jQuery( "#wpp_property_import_setup" ).serialize()
-    }, function ( result ) {
-
-      if ( typeof result === 'object' && result.success === 'true' ) {
-        wpp.xmli.set_schedule_id( result.schedule_id );
-        wpp.xmli.set_schedule_hash( result.hash );
-        wpp.xmli.actions_bar_message( wpp.strings.xmli.updated, "good", 7000 );
-
-        jQuery( this_button ).val( original_text );
-
-      } else {
-        wpp.xmli.actions_bar_message( result.message, 'error' );
-      }
-
-    }, 'json' );
-  });
-
-  /* Activated when "Add New" buttin is clicked */
-  jQuery( "#wpp_property_import_add_import" ).click( function () {
-    jQuery( ".updated" ).remove();
-    wpp.xmli.show_schedule_editor_ui();
-  });
-
-  jQuery( ".wpp_property_import_edit_report" ).click( function ( e ) {
-    var schedule_id = jQuery( this ).attr( 'schedule_id' );
-    wpp.xmli.show_schedule_editor_ui( schedule_id );
-  });
-
-  /* Sort schedules on overview page */
-  jQuery( ".wpp_i_sort_schedules" ).click( function ( e ) {
-
-    e.preventDefault();
-
-    jQuery( ".wpp_i_sort_schedules a" ).removeClass( "current" );
-
-    jQuery( "a", this ).addClass( "current" );
-
-    var sort_by = jQuery( this ).attr( "sort_by" );
-    var sort_direction = jQuery( this ).attr( "sort_direction" );
-    var mylist = jQuery( '#wpp_property_import_overview tbody' );
-    var listitems = mylist.children( 'tr' ).get();
-
-    listitems.sort( function ( a, b ) {
-
-      var compA = jQuery( a ).attr( sort_by );
-      var compB = jQuery( b ).attr( sort_by );
-
-      if ( compA === undefined ) {
-        compA = 0;
-      } else {
-        compA = parseInt( compA );
-      }
-
-      if ( compB === undefined ) {
-        compB = 0;
-      } else {
-        compB = parseInt( compB );
-      }
-
-      if ( sort_direction == "DESC" ) {
-        var index = ( compA < compB ) ? -1 : ( compA > compB ) ? 1 : 0;
-      } else {
-        var index = ( compA > compB ) ? -1 : ( compA < compB ) ? 1 : 0;
-      }
-
-
-      return index;
-
-    } )
-
-//** Switch sorting direction */
-    if ( sort_direction == "DESC" ) {
-      jQuery( this ).attr( "sort_direction", "ASC" )
-    } else {
-      jQuery( this ).attr( "sort_direction", "DESC" )
-    }
-
-    jQuery.each( listitems, function ( idx, itm ) {
-      mylist.append( itm );
-    });
-
-
-  });
-
-  jQuery( ".wppi_delete_all_feed_properties" ).click( function ( e ) {
-
-    e.preventDefault();
-
-    var verify_response;
-    var row = jQuery( this ).parents( ".wpp_i_schedule_row" );
-    var total_properties = jQuery( row ).attr( "total_properties" );
-    var schedule_id = jQuery( row ).attr( "schedule_id" );
-    var import_title = jQuery( row ).attr( "import_title" );
-
-    verify_response = prompt( "Confirm that you want to delete all " + total_properties + " properties from this feed by typing in in 'delete' below, or press 'Cancel' to cancel." );
-
-    if ( verify_response == "delete" ) {
-
-      jQuery( "#wpp_property_import_ajax" ).show();
-      jQuery( "#wpp_property_import_ajax" ).html( "<div class='updated below-h2'><p>Deleting all properties from " + import_title + ". You can close your browser, the operation will continue until completion.</p></div>" );
-
-      jQuery.post( ajaxurl, {
-        action: 'wpp_property_import_handler',
-        schedule_id: schedule_id,
-        wpp_action: 'delete_all_schedule_properties'
-      }, function ( result ) {
-        if ( result.success == 'true' ) {
-          jQuery( "#wpp_property_import_ajax" ).html( "<div class='updated below-h2'><p>" + result.ui + "</p></div>" );
-        } else {
-          jQuery( "#wpp_property_import_ajax" ).html( "<div class='updated below-h2'><p>" + wpp.strings.xmli.error_occured + "</p></div>" );
-        }
-      }, 'json' );
-
-    } else {
-      return;
-    }
-
-  });
-
-  jQuery( ".wpp_property_import_delete_report" ).click( function ( e ) {
-    e.preventDefault();
-
-    if ( !confirm( wpp.strings.xmli.are_you_sure ) )
-      return;
-
-    var schedule_id = jQuery( this ).attr( 'schedule_id' );
-    var rmel = jQuery( this ).parents( 'tr' );
-
-    jQuery.post( ajaxurl, {
-      action: 'wpp_property_import_handler',
-      schedule_id: schedule_id,
-      wpp_action: 'delete_schedule'
-    }, function ( result ) {
-      if ( result.success == 'true' ) {
-        jQuery( rmel ).remove();
-        if ( jQuery( '#wpp_property_import_overview tr' ).length == 1 )
-          jQuery( '#wpp_property_import_overview' ).remove();
-      }
-    }, 'json' );
-  });
-
-  /* Vlidate source and get info when one of the source-related fields is updated. */
-  jQuery( "#wpp_property_import_remote_url, #wpp_property_import_username, #wpp_property_import_password" ).live( "change", function () {
-    wpp.xmli.determine_settings( {} );
-  });
-
-  /* If source is selected, remove error and determine settings */
-  jQuery( "#wpp_property_import_source_type" ).live( "change", function () {
-    wpp.xmli.determine_settings( {} );
-    jQuery( "#wpp_property_import_source_type" ).removeClass( 'wpp_error' );
-  });
-
-  /* Vlidate source when "Source is Good" label is pressed. Third argument forces cache refresh. */
-  jQuery( '#wpp_property_import_source_status' ).live( 'click', function () {
-    wpp.xmli.import_evaluate_source( this, false, true );
-  });
-
-  jQuery( "#wpp_property_import_unique_id" ).live( 'change', function () {
-    wpp.xmli.import_build_unique_id_selector();
-  });
-
-  jQuery( 'select[name^="wpp_property_import[map]"]' ).live( 'change', function () {
-    wpp.xmli.import_build_unique_id_selector();
-  });
-
-});
+// Bind XMLI initializer.
+jQuery( document ).ready( wpp.xmli.ready );
 
