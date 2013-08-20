@@ -70,7 +70,7 @@ include_once WPP_Path . 'core/class_rets.php';
 include_once WPP_Path . 'core/class_mail.php';
 
 /** Load in hooks that deal with legacy and backwards-compat issues */
-include_once WPP_Path . 'legacy_support.php';
+include_once WPP_Path . 'core/class_legacy.php';
 
 // Register activation hook -> has to be in the main plugin file
 register_activation_hook( __FILE__,array( 'WPP_F', 'activation' ) );
@@ -80,22 +80,3 @@ register_deactivation_hook( __FILE__,array( 'WPP_F', 'deactivation' ) );
 
 // Initiate the plugin
 add_action( "after_setup_theme", create_function( '', 'new WPP_Core;' ) );
-
-//** Support for legacy UD Classes - extend WPP_F, which in turn extends UD_API */
-if( !class_exists( 'WPP_UD_F' ) ) {
-  class WPP_UD_F extends WPP_F { }
-}
-
-if( !class_exists( 'WPP_UD_UI' ) ) {
-  class WPP_UD_UI extends WPP_F { }
-}
-
-if( !class_exists( 'UD_UI' ) ) {
-  class UD_UI extends WPP_F { }
-}
-
-if( !class_exists( 'UD_F' ) ) {
-  class UD_F extends WPP_F { }
-}
-
-

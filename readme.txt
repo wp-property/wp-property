@@ -227,6 +227,13 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 
 == Changelog ==
 
+= 1.39.0 =
+* General code clean-up of PHP and JavaScript libraries and core files.
+* Updated Portuguese translation thanks to Raphael Suzuki. (https://github.com/UsabilityDynamics/wp-property/pull/11)
+* Added /static directory which contains auto-generated code documentation for developers - generated via YUIDoc syntax.
+* Added a "makefile" for building WP-Property - build includes running unit tests and updating documentation.
+* Added testing environment via Mocha (Node.js) for developers.
+
 = 1.38.1 =
 * Added compatibility with Wordpress 3.6.
 * Removed anonymous function which caused parse error in PHP <5.3.
