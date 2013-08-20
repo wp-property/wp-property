@@ -173,11 +173,6 @@ class WPP_Core {
 
     add_filter( "wpp_attribute_filter", array( 'WPP_F', 'attribute_filter' ), 10, 2 );
 
-    //** Add custom image sizes */
-    foreach($wp_properties['image_sizes'] as $image_name => $image_sizes) {
-      add_image_size($image_name, $image_sizes['width'], $image_sizes['height'], true);
-    }
-
     //** Determine if we are secure */
     $scheme = ( is_ssl() && !is_admin() ? 'https' : 'http' );
 
@@ -241,14 +236,11 @@ class WPP_Core {
       wp_register_script( 'wp-property-frontend', WPP_URL . 'templates/wp_properties.js', array( 'jquery-ui-core', 'wpp-localization' ), WPP_Version, true );
     }
 
-<<<<<<< HEAD
-=======
     //** Add custom image sizes */
     foreach ( $wp_properties[ 'image_sizes' ] as $image_name => $image_sizes ) {
       add_image_size( $image_name, $image_sizes[ 'width' ], $image_sizes[ 'height' ], true );
     }
 
->>>>>>> upstream/development
     //** Add troubleshoot log page */
     if ( isset( $wp_properties[ 'configuration' ][ 'show_ud_log' ] ) && $wp_properties[ 'configuration' ][ 'show_ud_log' ] == 'true' ) {
       WPP_F::add_log_page();
@@ -1919,14 +1911,12 @@ class WPP_Core {
    * @return array
    */
   function get_instance() {
-    global $wp_properties;
 
     $data = array(
       'request' => $_REQUEST,
       'get' => $_GET,
       'post' => $_POST,
       'iframe_enabled' => false,
-      'settings' => $wp_properties,
     );
 
     if ( isset( $data[ 'request' ][ 'wp_customize' ] ) && $data[ 'request' ][ 'wp_customize' ] == 'on' ) {
