@@ -17,6 +17,7 @@ add_action('wp_ajax_nopriv_wpp_export_properties', array('wpi_property_export', 
  */
 class wpi_property_export {
 
+
   /**
    * This function shows help stuff on the properties settings help tab
    */
@@ -49,159 +50,174 @@ class wpi_property_export {
     </div> <?php
     }
 
-    /**
-     * This function generates your unique site's export feed
-     * @returns string URL to site's export feed
-     */
-    function get_property_export_url() {
-      if ($apikey = WPP_F::get_api_key()) {
-        if (empty($apikey))
-          return __("There has been an error retreiving your API key.", "wpp");
-        // We have the API key, we need to build the url
-        return admin_url('admin-ajax.php') . "?action=wpp_export_properties&api=" . $apikey;
-      }
-      //return __("There has been an error retreiving your API key.", "wpp");
-      return false;
+
+  /**
+   * This function generates your unique site's export feed
+   * @returns string URL to site's export feed
+   */
+  function get_property_export_url() {
+    if ($apikey = WPP_F::get_api_key()) {
+      if (empty($apikey))
+        return __("There has been an error retreiving your API key.", "wpp");
+      // We have the API key, we need to build the url
+      return admin_url('admin-ajax.php') . "?action=wpp_export_properties&api=" . $apikey;
     }
-
-    /**
-     * This function takes all your properties and exports it as an XML feed
-     *
-     * @todo Improve efficiency of function, times out quickly for feeds of 500 properties. memory_limit and set_time_limit should be removed once efficiency is improved
-     *
-     */
-    function wpp_export_properties() {
-      global $wp_properties;
-
-      ini_set('memory_limit', -1);
-
-      $mtime = microtime();
-      $mtime = explode(" ", $mtime);
-      $mtime = $mtime[1] + $mtime[0];
-      $starttime = $mtime;
-
-      // Set a new path
-      set_include_path(get_include_path() . PATH_SEPARATOR . WPP_Path . 'third-party/XML/');
-      // Include our necessary libaries
-      require_once 'Serializer.php';
-      require_once 'Unserializer.php';
-
-      $api_key = WPP_F::get_api_key();
-
-      $taxonomies = $wp_properties['taxonomies'];
-
-      // If the API key isn't valid, we quit
-      if ($_REQUEST['api'] != $api_key) {
-        die(__('Invalid API key.', 'wpp'));
-      }
-
-      if (isset($_REQUEST['limit'])) {
-        $per_page = $_REQUEST['limit'];
-        $starting_row = 0;
-      }
-
-      if (isset($_REQUEST['per_page'])) {
-        $per_page = $_REQUEST['per_page'];
-      }
-
-      if (isset($_REQUEST['starting_row'])) {
-        $starting_row = $_REQUEST['starting_row'];
-      }
-
-      if (isset($_REQUEST['property_type'])) {
-        $property_type = $_REQUEST['property_type'];
-      } else {
-        $property_type = 'all';
-      }
-
-      if (strtolower($_REQUEST['format']) == 'xml') {
-        $xml_format = true;
-      } else {
-        $xml_format = false;
-      }
-
-      $wpp_query['query']['property_type'] = 'listing';
-
-      $wpp_query['query']['pagi'] = $starting_row . '--' . $per_page;
-      $wpp_query['query']['sort_by'] = ($_REQUEST['sort_by'] ? $_REQUEST['sort_by'] : 'post_date' );
-      $wpp_query['query']['sort_order'] = ($_REQUEST['sort_order'] ? $_REQUEST['sort_order'] : 'ASC' );
-      $wpp_query['query']['property_type'] = $property_type;
-
-      $wpp_query = WPP_F::get_properties($wpp_query['query'], true);
-
-      $results = $wpp_query['results'];
-
-      if (count($results) == 0) {
-        die(__('No published properties.', 'wpp'));
-      }
-
-      if ($xml_format) {
-        header('Content-type: text/xml');
-        header('Content-Disposition: inline; filename="wpp_xml_data.xml"');
-      } else {
-        header('Content-type: application/json');
-        header('Content-Disposition: inline; filename="wpp_xml_data.json"');
-      }
-
-      header("Cache-Control: no-cache");
-      header("Pragma: no-cache");
-
-      foreach ($results as $count => $id) {
-
-        //** Reserve time on every iteration. */
-        set_time_limit(0);
-
-        $property = WPP_F::get_property($id, "return_object=true&load_parent=false");
-
-        if ($property->post_parent && !$property->parent_gpid) {
-          $property->parent_gpid = WPP_F::maybe_set_gpid($property->post_parent);
-        }
-
-        // Unset the children, as we'll get to those
-        unset(
-                $property->wpp_agents, $property->comment_count, $property->post_modified_gmt, $property->comment_status, $property->post_password, $property->children, $property->guid, $property->filter, $property->post_author, $property->permalink, $property->ping_status, $property->post_modified, $property->post_mime_type
-        );
-
-        // Set unique site ID
-        $property->wpp_unique_id = md5($api_key . $property->ID);
-
-        //** Get taxonomies */
-        if ($taxonomies) {
-          foreach ($taxonomies as $taxonomy_slug => $taxonomy_data) {
-            if ($these_terms = wp_get_object_terms($property->ID, $taxonomy_slug, array('fields' => 'names'))) {
-              $property->taxonomies->{$taxonomy_slug} = $these_terms;
-            }
-          }
-        }
-
-        $fixed_property = new stdClass();
-
-        foreach ($property as $meta_key => $meta_value) {
-
-          if (is_array($meta_value) || is_object($meta_value)) {
-            $fixed_property->$meta_key = $meta_value;
-            continue;
-          }
-
-          //** Maybe Unserialize */
-          $meta_value = maybe_unserialize($meta_value);
-
-          //$meta_value = htmlentities($meta_value);
-          $fixed_property->$meta_key = $meta_value;
-          //$fixed_property->$meta_key = '<![CDATA[' .  ($meta_value) . ']]>';
-        }
-
-        $properties[$id] = $fixed_property;
-      }
-
-      $result = json_encode($properties);
-
-      if ($xml_format) {
-        $result = WPP_F::json_to_xml($result);
-      }
-
-
-      die($result);
-    }
-
+    //return __("There has been an error retreiving your API key.", "wpp");
+    return false;
   }
+
+  /**
+   * This function takes all your properties and exports it as an XML feed
+   *
+   * @todo Improve efficiency of function, times out quickly for feeds of 500 properties. memory_limit and set_time_limit should be removed once efficiency is improved
+   *
+   */
+  function wpp_export_properties() {
+    global $wp_properties;
+
+    ini_set('memory_limit', -1);
+
+    $mtime = microtime();
+    $mtime = explode(" ", $mtime);
+    $mtime = $mtime[1] + $mtime[0];
+    $starttime = $mtime;
+
+    // Set a new path
+    set_include_path(get_include_path() . PATH_SEPARATOR . WPP_Path . 'third-party/XML/');
+    // Include our necessary libaries
+    require_once 'Serializer.php';
+    require_once 'Unserializer.php';
+
+    $api_key = WPP_F::get_api_key();
+
+    $taxonomies = $wp_properties['taxonomies'];
+
+    // If the API key isn't valid, we quit
+    if ( !isset( $_REQUEST['api'] ) || $_REQUEST['api'] != $api_key ) {
+      die(__('Invalid API key.', 'wpp'));
+    }
+
+    if ( isset( $_REQUEST['limit'] ) ) {
+      $per_page = $_REQUEST['limit'];
+      $starting_row = 0;
+    }
+
+    if (isset($_REQUEST['per_page'])) {
+      $per_page = $_REQUEST['per_page'];
+    }
+
+    if (isset($_REQUEST['starting_row'])) {
+      $starting_row = $_REQUEST['starting_row'];
+    }
+
+    if (isset($_REQUEST['property_type'])) {
+      $property_type = $_REQUEST['property_type'];
+    } else {
+      $property_type = 'all';
+    }
+
+    if ( strtolower( $_REQUEST['format'] ) == 'xml' ) {
+      $xml_format = true;
+    } else {
+      $xml_format = false;
+    }
+
+    $wpp_query['query']['pagi'] = $starting_row . '--' . $per_page;
+    $wpp_query['query']['sort_by'] = ($_REQUEST['sort_by'] ? $_REQUEST['sort_by'] : 'post_date' );
+    $wpp_query['query']['sort_order'] = ($_REQUEST['sort_order'] ? $_REQUEST['sort_order'] : 'ASC' );
+    $wpp_query['query']['property_type'] = $property_type;
+
+    $wpp_query['query'] = apply_filters( 'wpp::xml::export::query', $wpp_query['query'] );
+
+    $wpp_query = WPP_F::get_properties( $wpp_query['query'], true );
+
+    $results = $wpp_query['results'];
+
+    if (count($results) == 0) {
+      die( __( 'No published properties.', 'wpp' ) );
+    }
+
+    if ( $xml_format ) {
+
+    } else {
+
+    }
+
+    $properties = array();
+
+    foreach ( $results as $count => $id ) {
+
+      //** Reserve time on every iteration. */
+      set_time_limit(0);
+
+      $property = WPP_F::get_property($id, "return_object=false&load_parent=false&get_children=false");
+
+      if ( $property[ 'post_parent' ] && !$property[ 'parent_gpid' ] ) {
+        $property[ 'parent_gpid' ] = WPP_F::maybe_set_gpid( $property[ 'post_parent' ] );
+      }
+
+      // Unset unnecessary data
+      unset(
+        $property[ 'wpp_agents' ],
+        $property[ 'comment_count' ],
+        $property[ 'post_modified_gmt' ],
+        $property[ 'comment_status' ],
+        $property[ 'post_password' ],
+        $property[ 'guid' ],
+        $property[ 'filter' ],
+        $property[ 'post_author' ],
+        $property[ 'permalink' ],
+        $property[ 'ping_status' ],
+        $property[ 'post_modified' ],
+        $property[ 'post_mime_type' ]
+      );
+
+      // Set unique site ID
+      $property[ 'wpp_unique_id' ] = md5( $api_key . $property[ 'ID' ] );
+
+      //** Get taxonomies */
+      if ( $taxonomies ) {
+        foreach ($taxonomies as $taxonomy_slug => $taxonomy_data) {
+          if ($these_terms = wp_get_object_terms($property[ 'ID' ], $taxonomy_slug, array('fields' => 'names'))) {
+            $property[ 'taxonomies' ][ $taxonomy_slug ] = $these_terms;
+          }
+        }
+      }
+
+      $fixed_property = array();
+      foreach ( $property as $meta_key => $meta_value ) {
+        // Maybe Unserialize
+        $meta_value = maybe_unserialize( $meta_value );
+        if ( is_array( $meta_value ) || is_object( $meta_value ) ) {
+          $fixed_property[ $meta_key ] = $meta_value;
+          continue;
+        }
+        $fixed_property[ $meta_key ] = $meta_value;
+      }
+      $properties[$id] = $fixed_property;
+
+    }
+
+    $properties = apply_filters( 'wpp::xml::export::data', $properties );
+
+    $result = json_encode( $properties );
+
+    if ($xml_format) {
+      $result = WPP_F::json_to_xml( $result, apply_filters( 'wpp::xml::export::serializer_options', array() ) );
+      if( !$result ) {
+        die( __( 'There is an Error on trying to create XML feed.', 'wpp' ) );
+      }
+      header('Content-type: text/xml');
+      header('Content-Disposition: inline; filename="wpp_xml_data.xml"');
+    } else {
+      header('Content-type: application/json');
+      header('Content-Disposition: inline; filename="wpp_xml_data.json"');
+    }
+
+    header( "Cache-Control: no-cache" );
+    header( "Pragma: no-cache" );
+
+    die($result);
+  }
+
+}

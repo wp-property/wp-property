@@ -529,7 +529,18 @@ class WPP_F extends UD_API {
   *
   * @version 1.26.0
   */
-  function json_to_xml($json) {
+  function json_to_xml( $json, $options ) {
+
+    //** An array of serializer options */
+    $options = wp_parse_args( $options , array(
+      'indent' => " ",
+      'linebreak' => "\n",
+      'addDecl' => true,
+      'encoding' => 'ISO-8859-1',
+      'rootName' => 'objects',
+      'defaultTagName' => 'object',
+      'mode' => false
+    ) );
 
     if(empty($json)) {
       return false;
@@ -564,22 +575,9 @@ class WPP_F extends UD_API {
       return false;
     }
 
-    $data['objects'] = $data;
+    $Serializer = &new XML_Serializer( $options );
 
-    // An array of serializer options
-    $serializer_options = array (
-      'indent' => " ",
-      'linebreak' => "\n",
-      'addDecl' => true,
-      'encoding' => 'ISO-8859-1',
-      'rootName' => 'objects',
-      'defaultTagName' => 'object',
-      'mode' => 'simplexml'
-    );
-
-    $Serializer = &new XML_Serializer($serializer_options);
-
-    $status = $Serializer->serialize($data);
+    $status = $Serializer->serialize( $data );
 
     if (PEAR::isError($status)) {
       return false;
