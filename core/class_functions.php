@@ -511,30 +511,11 @@ class WPP_F extends UD_API {
   }
 
   /**
-<<<<<<< HEAD
-  * Convert JSON data to XML if it is in JSON
-  *
-  * @version 1.26.0
-  */
-  function json_to_xml( $json, $options ) {
-
-    //** An array of serializer options */
-    $options = wp_parse_args( $options , array(
-      'indent' => " ",
-      'linebreak' => "\n",
-      'addDecl' => true,
-      'encoding' => 'ISO-8859-1',
-      'rootName' => 'objects',
-      'defaultTagName' => 'object',
-      'mode' => false
-    ) );
-=======
    * Convert JSON data to XML if it is in JSON
    *
    * @version 1.26.0
    */
   function json_to_xml( $json ) {
->>>>>>> upstream/development
 
     if ( empty( $json ) ) {
       return false;
@@ -569,9 +550,6 @@ class WPP_F extends UD_API {
       return false;
     }
 
-<<<<<<< HEAD
-    $Serializer = &new XML_Serializer( $options );
-=======
     $data[ 'objects' ] = $data;
 
     // An array of serializer options
@@ -587,7 +565,6 @@ class WPP_F extends UD_API {
 
     // @notice Removed "&new" to kill PHP depreciated notice.
     $Serializer = new XML_Serializer( $serializer_options );
->>>>>>> upstream/development
 
     $status = $Serializer->serialize( $data );
 
