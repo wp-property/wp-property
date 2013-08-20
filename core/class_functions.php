@@ -2596,6 +2596,12 @@ class WPP_F extends UD_API {
 
   }
 
+  /**
+   * Utility to remove deleted image sizes.
+   *
+   * @param $sizes
+   * @return mixed
+   */
   static function remove_deleted_image_sizes( $sizes ) {
     global $wp_properties;
 
