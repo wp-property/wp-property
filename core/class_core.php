@@ -186,7 +186,7 @@ class WPP_Core {
     wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'js/fileuploader.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wp-property-admin-overview', WPP_URL . 'js/wp-property-admin-overview.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-admin-widgets', WPP_URL . 'js/wp-property-admin-widgets.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-backend-global', WPP_URL . 'js/wp-property-backend-global.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-backend-global', WPP_URL . 'js/wp-property-backend-global.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-global', WPP_URL . 'js/wp-property-global.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'jquery-cookie', WPP_URL . 'js/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
 
