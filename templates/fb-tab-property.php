@@ -77,12 +77,6 @@ global $property, $wp_properties;
           <div id="property_map" style="width:100%; height:450px"></div>
         <?php endif; ?>
 
-        <?php if(class_exists('WPP_Inquiry')): ?>
-          <h2><?php _e('Interested?','wpp') ?></h2>
-          <?php WPP_Inquiry::contact_form(); ?>
-        <?php endif; ?>
-
-
         <?php if($property[ 'post_parent' ]): ?>
           <a href="<?php echo $property[ 'parent_link' ]; ?>" class="btn btn-return"><?php _e('Return to building page.','wpp') ?></a>
         <?php endif; ?>

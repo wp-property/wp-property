@@ -135,12 +135,6 @@
           <div id="property_map" class="<?php wpp_css('property::property_map'); ?>" style="width:100%; height:450px"></div>
         <?php endif; ?>
 
-        <?php if(class_exists('WPP_Inquiry')): ?>
-          <h2><?php _e('Interested?','wpp') ?></h2>
-          <?php WPP_Inquiry::contact_form(); ?>
-        <?php endif; ?>
-
-
         <?php if($post->post_parent): ?>
           <a href="<?php echo $post->parent_link; ?>" class="<?php wpp_css('btn', "btn btn-return"); ?>"><?php _e('Return to building page.','wpp') ?></a>
         <?php endif; ?>
