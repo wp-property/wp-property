@@ -66,6 +66,58 @@ class WPP_Export {
     return false;
   }
 
+
+  /**
+   * Converts arrays, objects, strings to XML object
+   *
+   * @see class XML_Serializer
+   * @param array $data
+   * @param array $options Serializer options
+   * @author peshkov@UD
+   */
+  function convert_to_xml( $data, $options ) {
+
+    //** An array of serializer options */
+    $options = wp_parse_args( $options , array(
+      'indent' => " ",
+      'linebreak' => "\n",
+      'addDecl' => true,
+      'encoding' => 'ISO-8859-1',
+      'rootName' => 'objects',
+      'defaultTagName' => 'object',
+      'mode' => false
+    ) );
+
+    try {
+
+      if(!class_exists('XML_Serializer')) {
+        set_include_path(get_include_path() . PATH_SEPARATOR . WPP_Path.'third-party/XML/');
+        @require_once 'Serializer.php';
+      }
+
+      //** If class still doesn't exist, for whatever reason, we fail */
+      if( !class_exists( 'XML_Serializer' ) ) {
+        throw new Exception( __( 'XML_Serializer could not be loaded.', 'pea' ) );
+      }
+
+      $Serializer = &new XML_Serializer( $options );
+
+      $status = $Serializer->serialize( $data );
+
+      if (PEAR::isError($status)) {
+        throw new Exception( __( 'Could not convert data to XML.', 'pea' ) );
+      }
+
+      $data = $Serializer->getSerializedData();
+
+    } catch( Exception $e ) {
+      return new WP_Error( 'error', $e->getMessage() );
+    }
+
+    return $data;
+  }
+
+
   /**
    * This function takes all your properties and exports it as an XML feed
    *
@@ -199,16 +251,21 @@ class WPP_Export {
 
     $properties = apply_filters( 'wpp::xml::export::data', $properties );
 
-    $result = json_encode( $properties );
-
     if ($xml_format) {
+      $result = self::convert_to_xml( $properties, apply_filters( 'wpp::xml::export::serializer_options', array() ) );
+
+      /** Deprecated. peshkov@UD
+      $result = json_encode( $properties );
       $result = WPP_F::json_to_xml( $result, apply_filters( 'wpp::xml::export::serializer_options', array() ) );
+      //*/
+
       if( !$result ) {
         die( __( 'There is an Error on trying to create XML feed.', 'wpp' ) );
       }
       header('Content-type: text/xml');
       header('Content-Disposition: inline; filename="wpp_xml_data.xml"');
     } else {
+      $result = json_encode( $properties );
       header('Content-type: application/json');
       header('Content-Disposition: inline; filename="wpp_xml_data.json"');
     }

@@ -515,7 +515,18 @@ class WPP_F extends UD_API {
    *
    * @version 1.26.0
    */
-  function json_to_xml( $json ) {
+  function json_to_xml( $json, $options = array() ) {
+
+    //** An array of serializer options */
+    $options = wp_parse_args( $options , array(
+      'indent' => " ",
+      'linebreak' => "\n",
+      'addDecl' => true,
+      'encoding' => 'ISO-8859-1',
+      'rootName' => 'objects',
+      'defaultTagName' => 'object',
+      'mode' => false
+    ) );
 
     if ( empty( $json ) ) {
       return false;
@@ -550,21 +561,7 @@ class WPP_F extends UD_API {
       return false;
     }
 
-    $data[ 'objects' ] = $data;
-
-    // An array of serializer options
-    $serializer_options = array(
-      'indent' => " ",
-      'linebreak' => "\n",
-      'addDecl' => true,
-      'encoding' => 'ISO-8859-1',
-      'rootName' => 'objects',
-      'defaultTagName' => 'object',
-      'mode' => 'simplexml'
-    );
-
-    // @notice Removed "&new" to kill PHP depreciated notice.
-    $Serializer = new XML_Serializer( $serializer_options );
+    $Serializer = &new XML_Serializer( $options );
 
     $status = $Serializer->serialize( $data );
 
@@ -1140,6 +1137,7 @@ class WPP_F extends UD_API {
 
   }
 
+
   /**
    * Format a number as numeric
    *
@@ -1154,12 +1152,25 @@ class WPP_F extends UD_API {
     $thousands_sep = ( !empty( $wp_properties[ 'configuration' ][ 'thousands_sep' ] ) ? $wp_properties[ 'configuration' ][ 'thousands_sep' ] : "," );
 
     if ( is_numeric( $content ) ) {
-      return number_format( $content, 0, $dec_point, $thousands_sep );
-    } else {
-      return $content;
+      $decimals = self::is_decimal( $content ) ? 2 : 0;
+      $content = number_format( $content, $decimals, $dec_point, $thousands_sep );
     }
 
+    return $content;
   }
+
+
+  /**
+   * Determine if variable is decimal
+   *
+   * @param mixed $val
+   * @return bool
+   * @author peshkov@UD
+   */
+  function is_decimal( $val ) {
+    return is_numeric( $val ) && floor( $val ) != $val;
+  }
+
 
   /**
    * Checks if an file exists in the uploads directory from a URL

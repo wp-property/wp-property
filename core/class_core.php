@@ -173,6 +173,11 @@ class WPP_Core {
 
     add_filter( "wpp_attribute_filter", array( 'WPP_F', 'attribute_filter' ), 10, 2 );
 
+    //** Add custom image sizes */
+    foreach ( $wp_properties[ 'image_sizes' ] as $image_name => $image_sizes ) {
+      add_image_size( $image_name, $image_sizes[ 'width' ], $image_sizes[ 'height' ], true );
+    }
+
     //** Determine if we are secure */
     $scheme = ( is_ssl() && !is_admin() ? 'https' : 'http' );
 
@@ -186,7 +191,7 @@ class WPP_Core {
     wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'js/fileuploader.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wp-property-admin-overview', WPP_URL . 'js/wp-property-admin-overview.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-admin-widgets', WPP_URL . 'js/wp-property-admin-widgets.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-backend-global', WPP_URL . 'js/wp-property-backend-global.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-backend-global', WPP_URL . 'js/wp-property-backend-global.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-global', WPP_URL . 'js/wp-property-global.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'jquery-cookie', WPP_URL . 'js/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
 
@@ -234,11 +239,6 @@ class WPP_Core {
       wp_register_script( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp-localization' ), WPP_Version, true );
     } elseif ( file_exists( WPP_Templates . '/wp_properties.js' ) ) {
       wp_register_script( 'wp-property-frontend', WPP_URL . 'templates/wp_properties.js', array( 'jquery-ui-core', 'wpp-localization' ), WPP_Version, true );
-    }
-
-    //** Add custom image sizes */
-    foreach ( $wp_properties[ 'image_sizes' ] as $image_name => $image_sizes ) {
-      add_image_size( $image_name, $image_sizes[ 'width' ], $image_sizes[ 'height' ], true );
     }
 
     //** Add troubleshoot log page */
@@ -1913,12 +1913,14 @@ class WPP_Core {
    * @return array
    */
   function get_instance() {
+    global $wp_properties;
 
     $data = array(
       'request' => $_REQUEST,
       'get' => $_GET,
       'post' => $_POST,
       'iframe_enabled' => false,
+      'settings' => $wp_properties,
     );
 
     if ( isset( $data[ 'request' ][ 'wp_customize' ] ) && $data[ 'request' ][ 'wp_customize' ] == 'on' ) {
