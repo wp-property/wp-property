@@ -643,7 +643,7 @@ class WPP_F extends UD_API {
 
     while ( ( $data = fgetcsv( $handle, 10000, "," ) ) !== FALSE ) {
       $number_of_fields = count( $data );
-
+      $header_array = array();
       if ( $current_row == 1 ) {
         for ( $c = 0; $c < $number_of_fields; $c++ ) {
           $header_array[ $c ] = str_ireplace( '-', '_', sanitize_key( $data[ $c ] ));
@@ -661,6 +661,7 @@ class WPP_F extends UD_API {
         }
 
         /** Removing - this removes empty values from the CSV, we want to leave them to make sure the associative array is consistant for the importer - $data_array = array_filter($data_array); */
+        $csv = array();
         if ( !empty( $data_array ) ) {
           $csv[ ] = $data_array;
         }
@@ -1554,7 +1555,13 @@ class WPP_F extends UD_API {
 
     set_time_limit( 600 );
     ob_start();
-
+    $delay = empty($delay) ? 0 : $delay;
+    $attempt = empty($attempt) ? 1 : $attempt;
+    $max_attempts = empty($max_attempts) ? 10 : $max_attempts;
+    $increase_delay_by = empty($increase_delay_by) ? 0.25 : $increase_delay_by;
+    $echo_result = empty($echo_result) ? 'true' : $echo_result;
+    $skip_existing = empty($skip_existing) ? 'false' : $skip_existing;
+    $return_geo_data = empty($return_geo_data) ? false : $return_geo_data;
     $args = wp_parse_args( $args, array(
       'property_ids' => false,
       'echo_result' => 'true',
@@ -1660,7 +1667,8 @@ class WPP_F extends UD_API {
    */
   static function revalidate_address( $post_id, $args = array() ) {
     global $wp_properties;
-
+    $skip_existing = empty($skip_existing) ? 'false' : $skip_existing;
+    $return_geo_data = empty($return_geo_data) ? false : $return_geo_data;
     $args = wp_parse_args( $args, array(
       'skip_existing' => 'false',
       'return_geo_data' => false,
@@ -2000,7 +2008,8 @@ class WPP_F extends UD_API {
 
   static function draw_property_type_dropdown( $args = '' ) {
     global $wp_properties;
-
+    $id = empty($id) ? 'wpp_property_type' : $id;
+    $selected = empty($selected) ? '' : $selected;
     $defaults = array( 'id' => 'wpp_property_type', 'name' => 'wpp_property_type', 'selected' => '' );
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
@@ -2018,7 +2027,8 @@ class WPP_F extends UD_API {
 
   static function draw_property_dropdown( $args = '' ) {
     global $wp_properties, $wpdb;
-
+    $id = empty($id) ? 'wpp_property_type' : $id;
+    $selected = empty($selected) ? '' : $selected;
     $defaults = array( 'id' => 'wpp_properties', 'name' => 'wpp_properties', 'selected' => '' );
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
@@ -2042,7 +2052,7 @@ class WPP_F extends UD_API {
    */
   static function get_total_attribute_array( $args = '', $extra_values = false ) {
     global $wp_properties, $wpdb;
-
+    $use_optgroups = empty($use_optgroups) ? 'false' : $use_optgroups;
     $defaults = array(
       'use_optgroups' => 'false'
     );
@@ -2081,6 +2091,9 @@ class WPP_F extends UD_API {
   static function draw_attribute_dropdown( $args = '', $extra_values = false ) {
     global $wp_properties, $wpdb;
 
+    $id = empty($id) ? 'wpp_attribute' : $id;
+    $selected = empty($selected) ? 'false' : $selected;
+    $name = empty($name) ? 'wpp_attribute' : $name;
     $defaults = array( 'id' => 'wpp_attribute', 'name' => 'wpp_attribute', 'selected' => '' );
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
@@ -2106,7 +2119,9 @@ class WPP_F extends UD_API {
 
   static function draw_localization_dropdown( $args = '' ) {
     global $wp_properties, $wpdb;
-
+    $return_array = empty($return_array) ? 'false' : $return_array;
+    $id = empty($id) ? 'wpp_google_maps_localization' : $id;
+    $selected = empty($selected) ? '' : $selected;
     $defaults = array( 'id' => 'wpp_google_maps_localization', 'name' => 'wpp_google_maps_localization', 'selected' => '', 'return_array' => 'false' );
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
@@ -2398,7 +2413,8 @@ class WPP_F extends UD_API {
    */
   static function image_sizes_dropdown( $args = "" ) {
     global $wp_properties;
-
+    $blank_selection_label = empty($blank_selection_label) ? ' - ' : $blank_selection_label;
+    $selected = empty($selected) ? 'none' : $selected;
     $defaults = array(
       'name' => 'wpp_image_sizes',
       'selected' => 'none',
@@ -2444,7 +2460,7 @@ class WPP_F extends UD_API {
    */
   static function image_sizes( $type = false, $args = "" ) {
     global $_wp_additional_image_sizes;
-
+    $return_all = empty($return_all) ? 'none' : $return_all;
     $defaults = array(
       'return_all' => false
     );
@@ -3680,7 +3696,12 @@ class WPP_F extends UD_API {
     global $wp_properties, $wpdb;
 
     $id = trim( $id );
-
+    $get_children = empty($get_children) ? 'true' : $get_children;
+    $return_object = empty($return_object) ? 'false' : $return_object;
+    $load_gallery = empty($load_gallery) ? 'true' : $load_gallery;
+    $load_thumbnail = empty($load_thumbnail) ? 'true' : $load_thumbnail;
+    $allow_multiple_values = empty($allow_multiple_values) ? 'false' : $allow_multiple_values;
+    $load_parent = empty($load_parent) ? 'true' : $load_parent;
     $defaults = array(
       'get_children' => 'true',
       'return_object' => 'false',
@@ -3691,7 +3712,6 @@ class WPP_F extends UD_API {
     );
 
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
-
     $args = is_array( $args ) ? http_build_query( $args ) : (string)$args;
     if ( $return = wp_cache_get( $id . $args ) ) {
       return $return;
@@ -4095,8 +4115,8 @@ class WPP_F extends UD_API {
 
     $exclude = isset( $exclude ) ? ( is_array( $exclude ) ? $exclude : explode( ',', $exclude ) ) : false;
     $include = isset( $include ) ? ( is_array( $include ) ? $include : explode( ',', $include ) ) : false;
-
-    if ( !$property_stats ) {
+    $return = array();
+    if ( empty($property_stats) ) {
       $property_stats = $wp_properties[ 'property_stats' ];
     }
 
@@ -5112,6 +5132,13 @@ class WPP_F extends UD_API {
    * @return string Checkbox input field and hidden field with the opposive value
    */
   function checkbox( $args = '', $checked = false ) {
+    $name = empty($name) ? '' : $name;
+    $id = empty($id) ? false : $id;
+    $class = empty($class) ? false : $class;
+    $group = empty($group) ? false : $group;
+    $special = empty($special) ? '' : $special;
+    $value = empty($value) ? 'true' : $value;
+    $maxlength = empty($maxlength) ? false : $maxlength;
     $defaults = array(
       'name' => '',
       'id' => false,
@@ -5144,6 +5171,7 @@ class WPP_F extends UD_API {
       if ( strpos( $group, '|' ) ) {
         $group_array = explode( "|", $group );
         $count = 0;
+        $group_string = '';
         foreach ( $group_array as $group_member ) {
           $count++;
           if ( $count == 1 ) {
@@ -5225,6 +5253,18 @@ class WPP_F extends UD_API {
    * @return string Input field and hidden field with the opposive value
    */
   function textarea( $args = '' ) {
+    $name = empty($name) ? '' : $name;
+    $id = empty($id) ? false : $id;
+    $checked = empty($checked) ? false : $checked;
+    $class = empty($class) ? false : $class;
+    $style = empty($style) ? false : $style;
+    $group = empty($group) ? '' : $group;
+    $special = empty($special) ? '' : $special;
+    $value = empty($value) ? '' : $value;
+    $label = empty($label) ? false : $label;
+    $maxlength = empty($maxlength) ? false : $maxlength;
+    $return = empty($return) ? '' : $return;
+
     $defaults = array( 'name' => '', 'id' => false, 'checked' => false, 'class' => false, 'style' => false, 'group' => '', 'special' => '', 'value' => '', 'label' => false, 'maxlength' => false );
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
@@ -5242,6 +5282,7 @@ class WPP_F extends UD_API {
       if ( strpos( $group, '|' ) ) {
         $group_array = explode( "|", $group );
         $count = 0;
+        $group_string = '';
         foreach ( $group_array as $group_member ) {
           $count++;
           if ( $count == 1 ) {
@@ -5284,6 +5325,17 @@ class WPP_F extends UD_API {
    * @return string Input field and hidden field with the opposive value
    */
   function input( $args = '', $value = false ) {
+    $name = empty($name) ? '' : $name;
+    $label = empty($label) ? false : $label;
+    $style = empty($style) ? false : $style;
+    $type = empty($type) ? 'text' : $type;
+    $class = empty($class) ? false : $class;
+    $hidden = empty($hidden) ? false : $hidden;
+    $group = empty($group) ? '' : $group;
+    $readonly = empty($readonly) ? false : $readonly;
+    $special = empty($special) ? '' : $special;
+    $title = empty($title) ? '' : $title;
+      
     $defaults = array( 'name' => '', 'group' => '', 'special' => '', 'value' => $value, 'title' => '', 'type' => 'text', 'class' => false, 'hidden' => false, 'style' => false, 'readonly' => false, 'label' => false );
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
@@ -5293,6 +5345,7 @@ class WPP_F extends UD_API {
     }
 
     // if [ character is present, we do not use the name in class and id field
+    $id = '';
     if ( !strpos( "$name", '[' ) ) {
       $id = $name;
       $class_from_name = $name;

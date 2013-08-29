@@ -1143,7 +1143,7 @@ class WPP_Core {
     if ( !$atts ) {
       $atts = array();
     }
-
+    $hide_count = '';
     $defaults = array(
       'property_type' => '',
       'type' => '',
@@ -1213,7 +1213,9 @@ class WPP_Core {
    */
   function shortcode_property_search( $atts = "" ) {
     global $post, $wp_properties;
-
+    $group_attributes = '';
+    $per_page = '';
+    $pagination = '';
     extract( shortcode_atts( array(
       'searchable_attributes' => '',
       'searchable_property_types' => '',
@@ -1508,7 +1510,7 @@ class WPP_Core {
     $result[ 'top_pagination' ] = wpi_draw_pagination( array(
       'class' => 'wpp_top_pagination',
       'sorter_type' => $wpp_query[ 'sorter_type' ],
-      'hide_count' => $hide_count,
+      'hide_count' => $wpp_query[ 'hide_count' ],
       'sort_by_text' => $wpp_query[ 'sort_by_text' ],
     ) );
     $result[ 'result' ] = $ob_get_contents;
@@ -1517,7 +1519,7 @@ class WPP_Core {
       $result[ 'bottom_pagination' ] = wpi_draw_pagination( array(
         'class' => 'wpp_bottom_pagination',
         'sorter_type' => $wpp_query[ 'sorter_type' ],
-        'hide_count' => $hide_count,
+        'hide_count' => $wpp_query[ 'hide_count' ],
         'sort_by_text' => $wpp_query[ 'sort_by_text' ],
         'javascript' => false
       ) );
