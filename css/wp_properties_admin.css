@@ -327,9 +327,9 @@ select.wpp_field_disabled {
     font-weight: bold;
 }
 
-.property_page_page_feps  .wpp_add_tab {
-    cursor: pointer;
-  }
+.wpp_add_tab {
+  cursor: pointer;
+}
 
 .property_page_page_feps  .feps_form_info {
   width: 49%;

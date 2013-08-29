@@ -43,5 +43,31 @@ $l10n = array(
     'all'                   => __( 'All', 'wpp' ),
   ),
 
+  // XML Importer Strings. e.g. wpp.strings.xmli.internal_server_error
+  'xmli' => array(
+    'request_error' => __( 'Request error:', 'wpp' ),
+    'evaluation_500_error' => __( 'The source evaluation resulted in an Internal Server Error!', 'wpp' ),
+    'automatically_match' => __( 'Automatically Match', 'wpp' ),
+    'unique_id_attribute' => __( 'Unique ID attribute.', 'wpp' ),
+    'select_unique_id' => __( 'Select a unique ID attribute.', 'wpp' ),
+    'settings' => __( 'Settings', 'wpp' ),
+    'enabled_options' => __( 'Enabled Options', 'wpp' ),
+    'are_you_sure' => __( 'Are you sure?', 'wpp' ),
+    'error_occured' => __( 'An error occured.', 'wpp' ),
+    'save' => __( 'Save Configuration', 'wpp' ),
+    'saved' => __( 'Schedule has been saved.', 'wpp' ),
+    'saving' => __( 'Saving the XML Importer schedule, please wait...', 'wpp' ),
+    'updating' => __( 'Updating the XML Importer schedule, please wait...', 'wpp' ),
+    'updated' => __( 'Schedule has been updated.', 'wpp' ),
+    'out_of_memory' => __( '500 Internal Server Error! Your hosting account is most likely running out of memory.', 'wpp' ),
+    'loading' => __( 'Loading...', 'wpp' ),
+    'please_save' => __( 'Please save schedule first.', 'wpp' ),
+    'toggle_advanced' => __( 'Toggle Advanced', 'wpp' ),
+    'processing' => __( 'Processing...', 'wpp' ),
+    'cannot_reload_source' => __( 'Cannot Load Source: Reload.', 'wpp' ),
+    'internal_server_error' => __( 'Internal Server Error!.', 'wpp' ),
+    'source_is_good' => __( 'Source Is Good. Reload.', 'wpp' )
+  )
+
 );
 
