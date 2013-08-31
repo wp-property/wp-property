@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>js/property_page_property_settings.js - WP-Property</title>
+    <title>core/class_legacy.php - WP-Property</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -90,47 +90,76 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: js/property_page_property_settings.js</h1>
+                        <h1 class="file-heading">File: core/class_legacy.php</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-jQuery(document).ready(function() {
+&lt;?php
+/**
+ * Legacy Support
+ *
+ * This file deals with upgrading and backwards compatability issues.
+ *
+ * @package WP-Property
+ */
+class WPP_Legacy {
 
   /**
-   * Handles form saving
-   * Do any validation/data work before the settings page form is submitted
-   * @author odokienko@UD
+   * Adds compatibility with legacy functionality on WP-Property upgrade
+   *
    */
-  jQuery(&quot;.wpp_settings_page form&quot;).submit(function( form ) {
-    var error_field = {object:false,tab_index:false};
+  static function upgrade() {
+    global $wpdb;
 
-    /* The next block make validation for required fields    */
-     jQuery(&quot;form #wpp_settings_tabs :input[validation_required=true],form #wpp_settings_tabs .wpp_required_field :input,form #wpp_settings_tabs :input[required],form #wpp_settings_tabs :input.slug_setter&quot;).each(function(){
+    $installed_ver = get_option( &quot;wpp_version&quot;, 0 );
+    $wpp_version = WPP_Version;
 
-      /* we allow empty value if dynamic_table has only one row */
-      var dynamic_table_row_count = jQuery(this).closest(&#x27;.wpp_dynamic_table_row&#x27;).parent().children(&#x27;tr.wpp_dynamic_table_row&#x27;).length;
+    if ( @version_compare( $installed_ver, WPP_Version ) == &#x27;-1&#x27; ) {
 
-      if (!jQuery(this).val() &amp;&amp; dynamic_table_row_count!=1){
-        error_field.object = this;
-        error_field.tab_index = jQuery(&#x27;#wpp_settings_tabs a[href=&quot;#&#x27; + jQuery( error_field.object ).closest( &quot;.ui-tabs-panel&quot; ).attr(&#x27;id&#x27;) + &#x27;&quot;]&#x27;).parent().index();
-        return false;
+      switch ( $installed_ver ) {
+
+        /**
+         * Upgrade:
+         * - WPP postmeta data were saved to database with &#x27;&amp;ndash;&#x27; instead of &#x27;-&#x27; in value. Function encode_sql_input was modified and it doesn&#x27;t change &#x27;-&#x27; to &#x27;&amp;ndash&#x27; anymore
+         * So to prevent search result issues we need to update database data.
+         * peshkov@UD
+         */
+        case ( version_compare( $installed_ver, &#x27;1.37.4&#x27; ) == &#x27;-1&#x27; ):
+
+          $wpdb-&gt;query( &quot;UPDATE {$wpdb-&gt;prefix}postmeta SET meta_value = REPLACE( meta_value, &#x27;&amp;ndash;&#x27;, &#x27;-&#x27;)&quot; );
+
+          break;
+
       }
-    });
 
-    /* if error_field object is not empty then we&#x27;ve error found */
-    if (error_field.object != false ) {
-      /* do focus on tab with error field */
-      if(typeof error_field.tab_index !=&#x27;undefined&#x27;) {
-        jQuery(&#x27;#wpp_settings_tabs&#x27;).tabs(&#x27;option&#x27;, &#x27;active&#x27;, error_field.tab_index);
-      }
-      /* mark error field and remove mark on keyup */
-      jQuery(error_field.object).addClass(&#x27;ui-state-error&#x27;).one(&#x27;keyup&#x27;,function(){jQuery(this).removeClass(&#x27;ui-state-error&#x27;);});
-      jQuery(error_field.object).focus();
-      return false;
     }
-  });
 
-});
+  }
+
+}
+
+//** Support for legacy UD Classes - extend WPP_F, which in turn extends UD_API */
+if ( !class_exists( &#x27;WPP_UD_F&#x27; ) ) {
+  class WPP_UD_F extends WPP_F {
+  }
+}
+
+if ( !class_exists( &#x27;WPP_UD_UI&#x27; ) ) {
+  class WPP_UD_UI extends WPP_F {
+  }
+}
+
+if ( !class_exists( &#x27;UD_UI&#x27; ) ) {
+  class UD_UI extends WPP_F {
+  }
+}
+
+if ( !class_exists( &#x27;UD_F&#x27; ) ) {
+  class UD_F extends WPP_F {
+  }
+}
+
+
     </pre>
 </div>
 

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>core/premium/class_wpp_power_tools.php - WP-Property</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="http://a3d72a45d111006ec192-ec5b80a12b0b09b4d52373336afb4254.r80.cf1.rackcdn.com/usability-dynamics.png" title="WP-Property"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.38.2</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/wpp.html">wpp</a></li>
+            
+                <li><a href="../classes/wpp.overview.html">wpp.overview</a></li>
+            
+                <li><a href="../classes/wpp.xmli.html">wpp.xmli</a></li>
+            
+                <li><a href="../classes/WPP_RETS.html">WPP_RETS</a></li>
+            
+                <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: core/premium/class_wpp_power_tools.php</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&lt;?php
+/**
+ * Name: Power Tools
+ * Class: class_wpp_power_tools
+ * Version: 0.5.3
+ * Feature ID: 13
+ * Minimum Core Version: 1.37.3.2
+ * Description: Power tools for WPP to include capabilities management.
+ */
+
+add_action(&#x27;wpp_init&#x27;, array(&#x27;class_wpp_power_tools&#x27;, &#x27;init&#x27;));
+add_action(&#x27;wpp_pre_init&#x27;, array(&#x27;class_wpp_power_tools&#x27;, &#x27;pre_init&#x27;));
+add_action(&#x27;admin_menu&#x27;, array(&#x27;class_wpp_power_tools&#x27;, &#x27;admin_menu&#x27;));
+
+add_filter(&#x27;wpp_taxonomies&#x27;, array(&#x27;class_wpp_power_tools&#x27;, &#x27;wpp_taxonomies&#x27;));
+
+
+/**
+ * Contains administrative functions
+ * to manage WPP capabilities
+ *
+ * @author Maxim Peshkov
+ */
+class class_wpp_power_tools {
+
+  /*
+   * (custom) Capability to manage the current feature
+   */
+  static protected $capability_capability = &quot;manage_wpp_capabilities&quot;;
+  static protected $capability_white_label = &quot;manage_white_label&quot;;
+
+  /**
+   * Special functions that must be called prior to init
+   *
+   */
+  function pre_init() {
+
+    //* Add capabilities */
+    add_filter(&#x27;wpp_capabilities&#x27;, array(&#x27;class_wpp_power_tools&#x27;, &quot;add_capability&quot;));
+
+    //* Saves WPP capabilities */
+    add_filter(&#x27;wpp_settings_save&#x27;, array(&#x27;class_wpp_power_tools&#x27;,&#x27;save_capabilities&#x27;));
+
+    add_action(&#x27;wpp_settings_display_tab_bottom&#x27;,  array(&#x27;class_wpp_power_tools&#x27;, &quot;wpp_settings_display_tab_bottom&quot;));
+
+    add_action(&#x27;wpp_settings_main_tab_bottom&#x27;,  array(&#x27;class_wpp_power_tools&#x27;, &quot;wpp_settings_main_tab_bottom&quot;));
+
+    add_filter(&#x27;wpp_object_labels&#x27;, array(&#x27;class_wpp_power_tools&#x27;, &quot;wpp_object_labels&quot;));
+
+  }
+
+  /*
+   * Apply feature&#x27;s Hooks and other functionality
+   */
+  static function init() {
+
+    if(current_user_can(self::$capability_capability)) {
+      //* Add Inquiry page to Property Settings page array */
+      add_filter(&#x27;wpp_settings_nav&#x27;, array(&#x27;class_wpp_power_tools&#x27;, &#x27;settings_nav&#x27;));
+      //* Add Settings Page */
+      add_action(&#x27;wpp_settings_content_capabilities&#x27;, array(&#x27;class_wpp_power_tools&#x27;, &#x27;capabilities_settings_page&#x27;));
+      //** Add &#x27;Capabilities&#x27; tab to Contextual Help */
+      add_action( &#x27;property_page_property_settings_help&#x27;, array( __CLASS__, &#x27;wpp_contextual_help&#x27; ) );
+    }
+
+  }
+
+
+  /**
+   * Disable taxonomies.
+   *
+   * @since 0.1
+   */
+  function wpp_taxonomies( $wpp_taxonomies = false ) {
+    global $wp_properties;
+
+    $disabled_taxonomies = false;
+    if( isset( $wp_properties[&#x27;configuration&#x27;][&#x27;disabled_taxonomies&#x27;] ) &amp;&amp; is_array( $wp_properties[&#x27;configuration&#x27;][&#x27;disabled_taxonomies&#x27;] ) ) {
+      $disabled_taxonomies = array_keys($wp_properties[&#x27;configuration&#x27;][&#x27;disabled_taxonomies&#x27;]);
+    }
+
+    if( !$wpp_taxonomies || !$disabled_taxonomies ) {
+      return $wpp_taxonomies;
+    }
+
+    $disabled_taxonomies = array_keys( $disabled_taxonomies );
+
+    foreach( $wpp_taxonomies as $taxonomy_slug =&gt; $taxonomy_label ) {
+
+      if(in_array($taxonomy_slug, $disabled_taxonomies)) {
+        unset($wpp_taxonomies[$taxonomy_slug]);
+      }
+    }
+
+    return $wpp_taxonomies;
+
+  }
+
+
+  /**
+   * Adds contextual help.
+   *
+   * @since 0.1
+   */
+  function admin_menu() {
+
+    add_filter(&#x27;wpp_contextual_help_overview&#x27;, array(&#x27;class_wpp_power_tools&#x27;, &quot;wpp_contextual_help_overview&quot;));
+
+  }
+
+
+  /**
+   * Adds Custom capability to the current premium feature
+   */
+  function add_capability($capabilities) {
+
+    $capabilities[self::$capability_capability] = __(&#x27;Manage Capabilities&#x27;,&#x27;wpp&#x27;);
+    $capabilities[self::$capability_white_label] = __(&#x27;Manage White Label&#x27;,&#x27;wpp&#x27;);
+
+    return $capabilities;
+  }
+
+
+  /**
+   * Save capabilities
+   */
+  function save_capabilities($wpp_settings) {
+    global $wp_roles, $wpp_capabilities;
+
+    foreach($wp_roles-&gt;roles as $r_slug =&gt; $role) {
+      if($r_slug == &#x27;administrator&#x27;) {
+        continue;
+      }
+
+      $role =&amp; get_role($r_slug);
+      foreach($wpp_capabilities as $cap =&gt; $value){
+        if (isset($wpp_settings[&#x27;capabilities&#x27;][$r_slug]) &amp;&amp; in_array($cap, $wpp_settings[&#x27;capabilities&#x27;][$r_slug])) {
+          $role-&gt;add_cap($cap);
+        } else {
+          $role-&gt;remove_cap($cap);
+        }
+      }
+    }
+
+    if(!empty($wpp_settings[&#x27;capabilities&#x27;])) {
+      unset($wpp_settings[&#x27;capabilities&#x27;]);
+    }
+
+    return $wpp_settings;
+  }
+
+
+  /**
+   * Adds contextual help fpr Capabilities tab on Settings page
+   *
+   * @param array $data
+   * @return array
+   * @author peshkov@UD
+   */
+  public function wpp_contextual_help( $data ) {
+
+    $capabilities_help = array(
+      &#x27;&lt;h3&gt;&#x27; . __( &#x27;Capabilities&#x27;, &#x27;wpp&#x27; ) .&#x27;&lt;/h3&gt;&#x27;,
+      &#x27;&lt;h4&gt;&#x27; . __( &#x27;View Properties&#x27;, &#x27;wpp&#x27; ) . &#x27;&lt;/h4&gt;&#x27;,
+      &#x27;&lt;p&gt;&#x27; . __( &#x27;Adds Properties menu and user can see the list of all available properties.&#x27;, &#x27;wpp&#x27; ) .&#x27;&lt;/p&gt;&#x27;,
+      &#x27;&lt;p&gt;&#x27; . __( &#x27;It is required capability to manage WP-Property. All capabilities depend on this one.&#x27;, &#x27;wpp&#x27; ) .&#x27;&lt;/p&gt;&#x27;,
+      &#x27;&lt;p&gt;&#x27; . __( &#x27;For example, user can not edit property if he has capability \&#x27;Add/Edit Property\&#x27;, but doesn\&#x27;t have \&#x27;View Properties\&#x27; capability.&#x27;, &#x27;wpp&#x27; ) .&#x27;&lt;/p&gt;&#x27;,
+      &#x27;&lt;h4&gt;&#x27; . __( &#x27;Add/Edit Properties&#x27;, &#x27;wpp&#x27; ) . &#x27;&lt;/h4&gt;&#x27;,
+      &#x27;&lt;p&gt;&#x27; . __( &#x27;Allows to add new property and edit properties where user is author. To edit properties where user is not author ( which he didn\&#x27;t create ), user must have \&#x27;Edit Other Properties\&#x27; ( see below ).&#x27;, &#x27;wpp&#x27; ) .&#x27;&lt;/p&gt;&#x27;,
+      &#x27;&lt;h4&gt;&#x27; . __( &#x27;Edit Other Properties&#x27;, &#x27;wpp&#x27; ) . &#x27;&lt;/h4&gt;&#x27;,
+      &#x27;&lt;p&gt;&#x27; . __( &#x27;Allows to edit properties where user is not author ( which he didn\&#x27;t create )&#x27;, &#x27;wpp&#x27; ) .&#x27;&lt;/p&gt;&#x27;,
+      &#x27;&lt;h4&gt;&#x27; . __( &#x27;Delete Properties&#x27;, &#x27;wpp&#x27; ) . &#x27;&lt;/h4&gt;&#x27;,
+      &#x27;&lt;p&gt;&#x27; . __( &#x27;Allows user to delete properties. This capability depends on \&#x27;Add/Edit Properties\&#x27; and \&#x27;Edit Other Properties\&#x27;.&#x27;, &#x27;wpp&#x27; ) .&#x27;&lt;/p&gt;&#x27;,
+      &#x27;&lt;p&gt;&#x27; . __( &#x27;User can delete properties where he is author if he has \&#x27;Add/Edit Properties\&#x27; capability&#x27;, &#x27;wpp&#x27; ) .&#x27;&lt;/p&gt;&#x27;,
+      &#x27;&lt;p&gt;&#x27; . __( &#x27;User can delete properties where he is not author if he has \&#x27;Edit Other Properties\&#x27; capability&#x27;, &#x27;wpp&#x27; ) .&#x27;&lt;/p&gt;&#x27;,
+      &#x27;&lt;h4&gt;&#x27; . __( &#x27;Publish Properties&#x27;, &#x27;wpp&#x27; ) . &#x27;&lt;/h4&gt;&#x27;,
+      &#x27;&lt;p&gt;&#x27; . __( &#x27;Allows user to publish properties.&#x27;, &#x27;wpp&#x27; ) .&#x27;&lt;/p&gt;&#x27;,
+      &#x27;&lt;h4&gt;&#x27; . __( &#x27;Manage Settings&#x27;, &#x27;wpp&#x27; ) . &#x27;&lt;/h4&gt;&#x27;,
+      &#x27;&lt;p&gt;&#x27; . __( &#x27;Allows user to manage WP-Property settings. Adds \&#x27;Settings\&#x27; page to menu.&#x27;, &#x27;wpp&#x27; ) .&#x27;&lt;/p&gt;&#x27;,
+      &#x27;&lt;h4&gt;&#x27; . __( &#x27;Manage Taxonomies&#x27;, &#x27;wpp&#x27; ) . &#x27;&lt;/h4&gt;&#x27;,
+      &#x27;&lt;p&gt;&#x27; . __( &#x27;Allows user to manage taxonomies such as &lt;b&gt;Feature&lt;/b&gt; and &lt;b&gt;Community Feature&lt;/b&gt;&#x27;, &#x27;wpp&#x27; ) .&#x27;&lt;/p&gt;&#x27;,
+      &#x27;&lt;h3&gt;&#x27; . __( &#x27;Other manage capabilities&#x27;, &#x27;wpp&#x27; ) . &#x27;&lt;/h3&gt;&#x27;,
+      &#x27;&lt;p&gt;&#x27; . __( &#x27;Other capabilities belong to premium features settings and functionality. User who has no capability to manage specific premium feature will not be able to manage it.&#x27;, &#x27;wpp&#x27; ) . &#x27;&lt;/p&gt;&#x27;,
+    );
+
+    $data[&#x27;Capabilities&#x27;] = apply_filters( &#x27;wpp::contextual_help::capabilities&#x27;, $capabilities_help );
+
+    return $data;
+
+  }
+
+
+  /**
+   * Adds menu to settings page navigation
+   *
+   */
+  function settings_nav($tabs) {
+    $tabs[&#x27;capabilities&#x27;] = array(
+      &#x27;slug&#x27; =&gt; &#x27;capabilities&#x27;,
+      &#x27;title&#x27; =&gt; __(&#x27;Capabilities&#x27;,&#x27;wpp&#x27;)
+    );
+    return $tabs;
+  }
+
+
+  /**
+   * Displays advanced management page
+   *
+   */
+  function capabilities_settings_page() {
+    global $wp_roles, $wpp_capabilities;
+    ?&gt;
+
+    &lt;table class=&quot;form-table&quot;&gt;
+      &lt;tr&gt;
+        &lt;td&gt;
+          &lt;h3&gt;&lt;?php _e(&#x27;WP Property Capabilities&#x27;,&#x27;wpp&#x27;) ?&gt;&lt;/h3&gt;
+          &lt;p&gt;&lt;?php printf( __( &#x27;User Roles capabilities management. See more details what every capability does %shere%s.&#x27; ), &#x27;&lt;span class=&quot;wpp_link wpp_toggle_contextual_help&quot;&gt;&#x27;, &#x27;&lt;/span&gt;&#x27; ); ?&gt;&lt;/p&gt;
+          &lt;table class=&quot;ud_ui_dynamic_table widefat&quot;&gt;
+          &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;th style=&quot;width:20%;&quot;&gt;&lt;?php _e(&#x27;Role&#x27;,&#x27;wpp&#x27;) ?&gt;&lt;/th&gt;
+              &lt;th&gt;&lt;?php _e(&#x27;Capabilities&#x27;,&#x27;wpp&#x27;) ?&gt;&lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            &lt;?php foreach ($wp_roles-&gt;roles as $r_slug =&gt; $role) : ?&gt;
+            &lt;tr&gt;
+              &lt;td&gt;
+                &lt;h4 style=&quot;margin:0;&quot;&gt;&lt;?php _e($role[&#x27;name&#x27;],&#x27;wpp&#x27;) ?&gt;&lt;/h4&gt;
+                &lt;?php
+                  $description = &quot;&quot;;
+                  switch ($r_slug) {
+                    case &quot;administrator&quot;:
+                      $description = __(&#x27;Administrator has all capabilities which can not be managed.&#x27;, &#x27;wpp&#x27;);
+                      break;
+                  }
+                ?&gt;
+                &lt;div style=&quot;description&quot;&gt;&lt;?php echo apply_filters(&#x27;wpp_role_description_&#x27;. $r_slug, $description); ?&gt;&lt;/div&gt;
+              &lt;/td&gt;
+              &lt;td&gt;
+                &lt;ul class=&quot;wp-tab-panel wpp_hidden_property_attributes&quot;&gt;
+                  &lt;?php foreach($wpp_capabilities as $cap =&gt; $value): ?&gt;
+                  &lt;?php $checked = (array_key_exists($cap , $role[&#x27;capabilities&#x27;]) ? &quot;checked=\&quot;checked\&quot;&quot; : &quot;&quot;); ?&gt;
+                  &lt;?php $disabled = ( ($r_slug == &quot;administrator&quot;) ? &quot;disabled=\&quot;disabled\&quot;&quot; : &quot;&quot;); ?&gt;
+                  &lt;li&gt;
+                    &lt;input id=&quot;wpp_&lt;?php echo $r_slug;?&gt;_&lt;?php echo $cap;?&gt;_capability&quot; &lt;?php echo $checked; ?&gt; &lt;?php echo $disabled; ?&gt; type=&quot;checkbox&quot; name=&quot;wpp_settings[capabilities][&lt;?php echo $r_slug; ?&gt;][]&quot; value=&quot;&lt;?php echo $cap; ?&gt;&quot; /&gt;
+                    &lt;label for=&quot;wpp_&lt;?php echo $r_slug;?&gt;_&lt;?php echo $cap;?&gt;_capability&quot;&gt;
+                    &lt;?php _e($value, &#x27;wpp&#x27;);?&gt;
+                    &lt;/label&gt;
+                  &lt;/li&gt;
+                  &lt;?php endforeach; ?&gt;
+                &lt;/ul&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;?php endforeach; ?&gt;
+          &lt;/tbody&gt;
+          &lt;/table&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;?php
+  }
+
+
+  function wpp_settings_main_tab_bottom($wp_properties = false) {
+
+    if(!$wp_properties) {
+      global $wp_properties;
+    }
+
+
+    if(is_array($wp_properties[&#x27;taxonomies&#x27;])) {
+      foreach($wp_properties[&#x27;taxonomies&#x27;] as $taxonomy =&gt; $taxonomy_data) {
+        $configurable_taxonomies[$taxonomy] = $taxonomy_data[&#x27;label&#x27;];
+      }
+    }
+
+
+    if(is_array($wp_properties[&#x27;configuration&#x27;][&#x27;disabled_taxonomies&#x27;])) {
+      foreach($wp_properties[&#x27;configuration&#x27;][&#x27;disabled_taxonomies&#x27;] as $taxonomy =&gt; $taxonomy_label) {
+        $configurable_taxonomies[$taxonomy] = $taxonomy_label;
+      }
+    }
+
+    if(!is_array($configurable_taxonomies)) {
+      return;
+    }
+
+
+    ?&gt;
+
+    &lt;?php if(is_array($configurable_taxonomies)) { ?&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;?php _e(&#x27;Taxonomies&#x27;,&#x27;wpp&#x27;); ?&gt;&lt;/th&gt;
+      &lt;td&gt;
+        &lt;ul&gt;
+          &lt;?php foreach($configurable_taxonomies as $taxonomy =&gt; $taxonomy_label) { ?&gt;
+            &lt;li&gt;&lt;?php echo WPP_F::checkbox(&quot;id=wpp_settings_configuration_disabled_taxonomies_{$taxonomy}&amp;name=wpp_settings[configuration][disabled_taxonomies][{$taxonomy}]&amp;value={$taxonomy_label}&amp;label=&quot; . sprintf(__(&#x27;Disable %1$s taxonomy.&#x27;, &#x27;wpp&#x27;), $taxonomy_label), $wp_properties[&#x27;configuration&#x27;][&#x27;disabled_taxonomies&#x27;]); ?&gt;&lt;/li&gt;
+          &lt;?php } ?&gt;
+        &lt;/ul&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;?php } ?&gt;
+
+    &lt;?php
+  }
+
+
+  function wpp_settings_display_tab_bottom() {
+    global $wp_properties;
+
+    if(!current_user_can(self::$capability_capability)) {
+      return;
+    }
+
+    if(empty($wp_properties[&#x27;configuration&#x27;][&#x27;feature_settings&#x27;][&#x27;white_label&#x27;])) {
+      class_wpp_power_tools::load_white_label_defaults();
+    }
+
+    $labels = $wp_properties[&#x27;configuration&#x27;][&#x27;feature_settings&#x27;][&#x27;white_label&#x27;][&#x27;labels&#x27;];
+    $contextual_help = $wp_properties[&#x27;configuration&#x27;][&#x27;feature_settings&#x27;][&#x27;white_label&#x27;][&#x27;contextual_help&#x27;];
+
+    ?&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;?php _e(&#x27;White Label&#x27;, &#x27;wpp&#x27;); ?&gt;&lt;/th&gt;
+      &lt;td&gt;
+
+      &lt;div class=&quot;wpp_subtle_tabs wpp_nl_tabs&quot; &gt;
+        &lt;ul class=&quot;wpp_section_tabs&quot;&gt;
+          &lt;li&gt;&lt;a href=&quot;#wpp_wl_labels&quot;&gt;&lt;?php _e(&#x27;Labels&#x27;, &#x27;wpp&#x27;); ?&gt;&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#wpp_wl_contextual_help&quot;&gt;&lt;?php _e(&#x27;Contextual Menus&#x27;, &#x27;wpp&#x27;); ?&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+
+
+        &lt;div id=&quot;wpp_wl_labels&quot; class=&quot;wp-tab-panel&quot;&gt;
+          &lt;div class=&quot;wpp_subtle_tab_description&quot;&gt;
+            &lt;?php _e(&#x27;Use this menu to rename WP-Property components, for example if you are listing &quot;Real Estate&quot;, or &quot;Vehicles&quot;.&#x27;, &#x27;wpp&#x27;); ?&gt;
+          &lt;/div&gt;
+          &lt;ul&gt;
+            &lt;li&gt;
+              &lt;label&gt;&lt;?php _e(&#x27;Singular Property:&#x27;, &#x27;wpp&#x27;); ?&gt;&lt;/label&gt;
+              &lt;input name=&quot;wpp_settings[configuration][feature_settings][white_label][labels][singular_name]&quot; value=&quot;&lt;?php echo esc_attr($labels[&#x27;singular_name&#x27;]); ?&gt;&quot; /&gt;
+              &lt;span class=&quot;description&quot;&gt;&lt;?php _e(&#x27;Default is &quot;Property&quot;, will change the label in the navigation menus.&#x27;, &#x27;wpp&#x27;); ?&gt;&lt;/span&gt;
+            &lt;/li&gt;
+
+            &lt;li&gt;
+              &lt;label&gt;&lt;?php _e(&#x27;Plural Property:&#x27;, &#x27;wpp&#x27;); ?&gt;&lt;/label&gt;
+              &lt;input name=&quot;wpp_settings[configuration][feature_settings][white_label][labels][plural_name]&quot; value=&quot;&lt;?php echo esc_attr($labels[&#x27;plural_name&#x27;]); ?&gt;&quot; /&gt;
+              &lt;span class=&quot;description&quot;&gt;&lt;?php _e(&#x27;Default is &quot;Properties&quot;, will change the label in the navigation menus.&#x27;, &#x27;wpp&#x27;); ?&gt;&lt;/span&gt;
+            &lt;/li&gt;
+
+          &lt;/ul&gt;
+          &lt;/div&gt;
+        &lt;div id=&quot;wpp_wl_contextual_help&quot; class=&quot;wp-tab-panel&quot;&gt;
+          &lt;div class=&quot;wpp_subtle_tab_description&quot;&gt;
+            &lt;?php _e(&#x27;Contextual menus are displayed when a user clicks the &quot;Help&quot; tab in the top right corner of a page.&#x27;, &#x27;wpp&#x27;); ?&gt;
+          &lt;/div&gt;
+
+          &lt;ul&gt;
+            &lt;li&gt;
+              &lt;label&gt;&lt;?php _e(&#x27;Overview Page Contextual Help:&#x27;, &#x27;wpp&#x27;); ?&gt;&lt;/label&gt;
+              &lt;textarea class=&quot;code&quot; name=&quot;wpp_settings[configuration][feature_settings][white_label][contextual_help][overview_page]&quot;&gt;&lt;?php echo esc_attr($contextual_help[&#x27;overview_page&#x27;]); ?&gt;&lt;/textarea&gt;
+            &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;?php
+
+  }
+
+  /**
+  * Load default settings
+  *
+  * @since 0.1
+  */
+  function load_white_label_defaults() {
+    global $wp_properties;
+    $wp_properties[&#x27;configuration&#x27;][&#x27;feature_settings&#x27;][&#x27;white_label&#x27;][&#x27;labels&#x27;][&#x27;name&#x27;] = __(&#x27;Properties&#x27;);
+  }
+
+
+  function wpp_contextual_help_overview($text) {
+    global $wp_properties;
+
+    $contextual_help = $wp_properties[&#x27;configuration&#x27;][&#x27;feature_settings&#x27;][&#x27;white_label&#x27;][&#x27;contextual_help&#x27;];
+
+    if(!empty($contextual_help[&#x27;overview_page&#x27;])) {
+      return nl2br($contextual_help[&#x27;overview_page&#x27;]);
+    }
+
+    return $text;
+  }
+
+
+  function wpp_object_labels($labels) {
+    global $wp_properties;
+
+    $custom_labels = $wp_properties[&#x27;configuration&#x27;][&#x27;feature_settings&#x27;][&#x27;white_label&#x27;][&#x27;labels&#x27;];
+
+    if(!empty($custom_labels[&#x27;singular_name&#x27;])) {
+      $labels[&#x27;singular_name&#x27;] = $custom_labels[&#x27;singular_name&#x27;];
+      $labels[&#x27;add_new&#x27;] =  __(&#x27;Add &#x27;, &#x27;wpp&#x27;) .  $custom_labels[&#x27;singular_name&#x27;];
+      $labels[&#x27;add_new_item&#x27;] =  __(&#x27;Add New &#x27;, &#x27;wpp&#x27;) .  $custom_labels[&#x27;singular_name&#x27;];
+      $labels[&#x27;edit_item&#x27;] =  __(&#x27;Edit &#x27;, &#x27;wpp&#x27;) .  $custom_labels[&#x27;singular_name&#x27;];
+      $labels[&#x27;new_item&#x27;] =  __(&#x27;New &#x27;, &#x27;wpp&#x27;) .  $custom_labels[&#x27;singular_name&#x27;];
+      $labels[&#x27;view_item&#x27;] =  __(&#x27;View &#x27;, &#x27;wpp&#x27;) .  $custom_labels[&#x27;singular_name&#x27;];
+    }
+
+    /*
+    if(!empty($custom_labels[&#x27;agents&#x27;])) {
+      $label[&#x27;agents&#x27;][&#x27;singular&#x27;] = $custom_labels[&#x27;agents&#x27;];
+      $label[&#x27;agents&#x27;][&#x27;plural&#x27;] = $custom_labels[&#x27;agents&#x27;];
+    }
+    */
+
+    if(!empty($custom_labels[&#x27;plural_name&#x27;])) {
+      $labels[&#x27;name&#x27;] = $custom_labels[&#x27;plural_name&#x27;];
+      $labels[&#x27;all_items&#x27;] = __(&#x27;All &#x27;, &#x27;wpp&#x27;) . $custom_labels[&#x27;plural_name&#x27;];
+      $labels[&#x27;search_items&#x27;] = __(&#x27;Search &#x27;, &#x27;wpp&#x27;) . $custom_labels[&#x27;plural_name&#x27;];
+      $labels[&#x27;not_found&#x27;] = __(&#x27;No &#x27;, &#x27;wpp&#x27;) . $custom_labels[&#x27;plural_name&#x27;] . __(&#x27; found.&#x27;, &#x27;wpp&#x27;) ;
+    }
+
+    return $labels;
+  }
+
+
+}
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

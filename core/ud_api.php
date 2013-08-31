@@ -5,8 +5,8 @@
  * @copyright Copyright (c) 2010 - 2012, Usability Dynamics, Inc.
  * @license https://usabilitydynamics.com/services/theme-and-plugin-eula/
  * @link http://api.usabilitydynamics.com/readme/ud_api.txt UD API Changelog
- * @version 1.0.1
  *
+ * @version 1.0.2
  */
 
 if ( class_exists( 'UD_API' ) ) {
@@ -31,7 +31,6 @@ class UD_API {
   function UD_API() {
     $this->__construct();
   }
-
 
   /**
    * Handler for general API calls to UD
@@ -73,7 +72,6 @@ class UD_API {
 
   }
 
-
   /**
    * Converts slashes for Windows paths.
    *
@@ -84,7 +82,6 @@ class UD_API {
   static function fix_path( $path ) {
     return str_replace( '\\', '/', $path );
   }
-
 
   /**
    * Applies trim() function to all values in an array
@@ -101,7 +98,6 @@ class UD_API {
     return $array;
 
   }
-
 
   /**
    * Returns image sizes for a passed image size slug
@@ -138,7 +134,6 @@ class UD_API {
 
   }
 
-
   /**
    * Insert array into an associative array before a specific key
    *
@@ -156,7 +151,6 @@ class UD_API {
     );
   }
 
-
   /**
    * Insert array into an associative array after a specific key
    *
@@ -173,7 +167,6 @@ class UD_API {
       array_slice( $array, $pos )
     );
   }
-
 
   /**
    * Attemp to convert a plural US word into a singular.
@@ -199,7 +192,6 @@ class UD_API {
     return $word;
 
   }
-
 
   /**
    * Convert bytes into the logical unit of measure based on size.
@@ -232,7 +224,6 @@ class UD_API {
       return $bytes . ' B';
     }
   }
-
 
   /**
    * Used to enable/disable/print SQL log
@@ -270,7 +261,6 @@ class UD_API {
 
   }
 
-
   /**
    * Helpder function for figuring out if another specific function is a predecesor of current function.
    *
@@ -287,7 +277,6 @@ class UD_API {
 
   }
 
-
   /**
    * Helpder function for figuring out if a specific file is a predecesor of current file.
    *
@@ -303,7 +292,6 @@ class UD_API {
     }
 
   }
-
 
   /**
    * Parse standard WordPress readme file
@@ -331,7 +319,6 @@ class UD_API {
 
   }
 
-
   /**
    * Fixed serialized arrays which sometimes get messed up in WordPress
    *
@@ -341,7 +328,6 @@ class UD_API {
     $tmp = preg_replace( '/^a:\d+:\{/', '', $serialized );
     return self::repair_serialized_array_callback( $tmp ); // operates on and whittles down the actual argument
   }
-
 
   /**
    * The recursive function that does all of the heavy lifing. Do not call directly.
@@ -424,7 +410,6 @@ class UD_API {
     return $data;
   }
 
-
   /**
    * Determine if an item is in array and return checked
    *
@@ -437,7 +422,6 @@ class UD_API {
     }
 
   }
-
 
   /**
    * Check if the current WP version is older then given parameter $version.
@@ -453,7 +437,6 @@ class UD_API {
     $version = preg_replace( "/^([0-9\.]+)-(.)+$/", "$1", $version );
     return ( (float)$current_version < (float)$version ) ? true : false;
   }
-
 
   /**
    * Determine if any requested template exists and return path to it.
@@ -499,7 +482,6 @@ class UD_API {
     return !empty( $template ) ? $template : false;
   }
 
-
   /**
    * The goal of function is going through specific filters and return (or print) classes.
    * This function should not be called directly.
@@ -526,7 +508,7 @@ class UD_API {
       'instance' => '',
       'element' => '',
       'return' => false,
-    ));
+    ) );
 
     extract( $args );
 
@@ -538,8 +520,8 @@ class UD_API {
     }
 
     foreach ( $classes as &$c ) $c = trim( $c );
-    $instance = (string) $instance;
-    $element = (string) $element;
+    $instance = (string)$instance;
+    $element = (string)$element;
 
     //** Now go through the filters */
     $classes = apply_filters( "$instance::css::$element", $classes, $args );
@@ -550,7 +532,6 @@ class UD_API {
 
     return $classes;
   }
-
 
   /**
    * Return simple array of column tables in a table
@@ -574,7 +555,6 @@ class UD_API {
     return $columns;
 
   }
-
 
   /**
    * Creates a Quick-Access table for post
@@ -677,7 +657,6 @@ class UD_API {
 
   }
 
-
   /**
    * Update post data in QA table
    *
@@ -746,7 +725,6 @@ class UD_API {
 
   }
 
-
   /**
    * Merges any number of arrays / parameters recursively,
    *
@@ -782,7 +760,6 @@ class UD_API {
     return $base;
   }
 
-
   /**
    * Returns a URL to a post object based on passed variable.
    *
@@ -808,7 +785,6 @@ class UD_API {
       return get_permalink( $id );
 
   }
-
 
   /**
    * Add an entry to the plugin-specifig log.
@@ -877,7 +853,6 @@ class UD_API {
 
   }
 
-
   /**
    * Used to get the current plugin's log created via UD class
    *
@@ -919,7 +894,6 @@ class UD_API {
 
   }
 
-
   /**
    * Delete UD log for this plugin.
    *
@@ -936,7 +910,6 @@ class UD_API {
 
     delete_option( $log );
   }
-
 
   /**
    * Creates Admin Menu page for UD Log
@@ -956,7 +929,6 @@ class UD_API {
     add_action( 'admin_menu', create_function( '', "add_menu_page( __( 'Log' ,UD_API_Transdomain ), __( 'Log',UD_API_Transdomain ), 10, 'ud_log', array( 'UD_API', 'show_log_page' ) );" ) );
 
   }
-
 
   /**
    * !DISABLED. Displays the UD UI log page.
@@ -1011,7 +983,6 @@ class UD_API {
 
   }
 
-
   /**
    * Turns a passed string into a URL slug
    *
@@ -1041,7 +1012,6 @@ class UD_API {
     return $slug;
   }
 
-
   /**
    * Convert a slug to a more readable string
    *
@@ -1051,7 +1021,6 @@ class UD_API {
   static function de_slug( $string ) {
     return ucwords( str_replace( "_", " ", $string ) );
   }
-
 
   /**
    * Returns location information from Google Maps API call
@@ -1234,7 +1203,6 @@ class UD_API {
 
   }
 
-
   /**
    * Depreciated. Displays the numbers of days elapsed between a provided date and today.
    *
@@ -1245,7 +1213,6 @@ class UD_API {
     _deprecated_function( __FUNCTION__, '3.4', 'human_time_diff' );
     human_time_diff( $from, $to );
   }
-
 
   /**
    * Depreciated.
@@ -1351,7 +1318,6 @@ class UD_API {
     return $content;
   }
 
-
   /**
    * Wrapper for json_encode function.
    * Emulates JSON_UNESCAPED_UNICODE.
@@ -1365,7 +1331,6 @@ class UD_API {
     array_walk_recursive( $arr, create_function( '&$item, $key', 'if (is_string($item)) $item = mb_encode_numericentity($item, array (0x80, 0xffff, 0, 0xffff), "UTF-8");' ) );
     return mb_decode_numericentity( json_encode( $arr ), array( 0x80, 0xffff, 0, 0xffff ), 'UTF-8' );
   }
-
 
 }
 

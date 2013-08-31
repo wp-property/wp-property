@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.1</em>
+            <em>API Docs for: 1.38.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -46,6 +46,8 @@
                 <li><a href="../classes/wpp.overview.html">wpp.overview</a></li>
             
                 <li><a href="../classes/wpp.xmli.html">wpp.xmli</a></li>
+            
+                <li><a href="../classes/WPP_RETS.html">WPP_RETS</a></li>
             
                 <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
             
@@ -100,12 +102,11 @@
  * @since 3.0
  * @access private
  */
-
-require_once(WPP_Path . &#x27;core/class_list_table.php&#x27;);
+require_once( WPP_Path . &#x27;core/class_list_table.php&#x27; );
 
 class WPP_Object_List_Table extends WPP_List_Table {
 
-  function __construct($args = &#x27;&#x27;) {
+  function __construct( $args = &#x27;&#x27; ) {
     $args = wp_parse_args( $args, array(
       &#x27;plural&#x27; =&gt; &#x27;&#x27;,
       &#x27;iColumns&#x27; =&gt; 3,
@@ -118,7 +119,7 @@ class WPP_Object_List_Table extends WPP_List_Table {
       &#x27;ajax&#x27; =&gt; false
     ) );
 
-    parent::__construct($args);
+    parent::__construct( $args );
   }
 
   /**
@@ -145,9 +146,9 @@ class WPP_Object_List_Table extends WPP_List_Table {
   public function get_bulk_actions() {
     $actions = array();
 
-    if(current_user_can(&#x27;delete_wpp_property&#x27;)) {
-      $actions[&#x27;untrash&#x27;] = __( &#x27;Restore&#x27; );
-      $actions[&#x27;delete&#x27;] = __( &#x27;Delete&#x27; );
+    if ( current_user_can( &#x27;delete_wpp_property&#x27; ) ) {
+      $actions[ &#x27;untrash&#x27; ] = __( &#x27;Restore&#x27; );
+      $actions[ &#x27;delete&#x27; ] = __( &#x27;Delete&#x27; );
     }
 
     $actions = apply_filters( &#x27;wpp::all_properties::bulk_actions&#x27;, $actions );
@@ -164,17 +165,17 @@ class WPP_Object_List_Table extends WPP_List_Table {
 
     $ID = (int) $ID;
 
-    $post = WPP_F::get_property($ID);
+    $post = WPP_F::get_property( $ID );
 
     $post = (object) $post;
 
-    $title = _draft_or_post_title($post-&gt;ID);
+    $title = _draft_or_post_title( $post-&gt;ID );
     $post_type_object = get_post_type_object( $post-&gt;post_type );
-    $can_edit_post = current_user_can( $post_type_object-&gt;cap-&gt;edit_post);
-    $can_edit_post = apply_filters(&#x27;wpp_list_table_can_edit_post&#x27;, $can_edit_post);
+    $can_edit_post = current_user_can( $post_type_object-&gt;cap-&gt;edit_post );
+    $can_edit_post = apply_filters( &#x27;wpp_list_table_can_edit_post&#x27;, $can_edit_post );
 
     $can_delete_post = current_user_can( $post_type_object-&gt;cap-&gt;delete_post, $post-&gt;ID );
-    $can_delete_post = apply_filters(&#x27;wpp_list_table_can_delete_post&#x27;, $can_delete_post);
+    $can_delete_post = apply_filters( &#x27;wpp_list_table_can_delete_post&#x27;, $can_delete_post );
 
     $result = &quot;&lt;tr id=&#x27;object-{$ID}&#x27; class=&#x27;wpp_parent_element&#x27;&gt;&quot;;
 
@@ -195,7 +196,7 @@ class WPP_Object_List_Table extends WPP_List_Table {
 
       $r = &quot;&quot;;
 
-      switch($column) {
+      switch ( $column ) {
 
         //** Adds ability to customize any column we want. peshkov@UD */
         case ( apply_filters( &quot;wpp::single_row::{$column}&quot;, false, $post ) ):
@@ -204,11 +205,11 @@ class WPP_Object_List_Table extends WPP_List_Table {
 
         case &#x27;cb&#x27;:
           if ( $can_edit_post ) {
-            $r .= &#x27;&lt;input type=&quot;checkbox&quot; name=&quot;post[]&quot; value=&quot;&#x27;. get_the_ID() . &#x27;&quot;/&gt;&#x27;;
+            $r .= &#x27;&lt;input type=&quot;checkbox&quot; name=&quot;post[]&quot; value=&quot;&#x27; . get_the_ID() . &#x27;&quot;/&gt;&#x27;;
           } else {
             $r .= &#x27;&amp;nbsp;&#x27;;
           }
-        break;
+          break;
 
         case &#x27;title&#x27;:
           $attributes = &#x27;class=&quot;post-title page-title column-title&quot;&#x27; . $style;
@@ -217,155 +218,153 @@ class WPP_Object_List_Table extends WPP_List_Table {
           } else {
             $r .= $title;
           }
-          $r .= (isset( $parent_name ) ? &#x27; | &#x27; . $post_type_object-&gt;labels-&gt;parent_item_colon . &#x27; &#x27; . esc_html( $parent_name ) : &#x27;&#x27;);
+          $r .= ( isset( $parent_name ) ? &#x27; | &#x27; . $post_type_object-&gt;labels-&gt;parent_item_colon . &#x27; &#x27; . esc_html( $parent_name ) : &#x27;&#x27; );
 
           $actions = array();
           if ( $can_edit_post &amp;&amp; &#x27;trash&#x27; != $post-&gt;post_status &amp;&amp; &#x27;archived&#x27; != $post-&gt;post_status ) {
-           $actions[&#x27;edit&#x27;] = &#x27;&lt;a href=&quot;&#x27; . get_edit_post_link( $post-&gt;ID, true ) . &#x27;&quot; title=&quot;&#x27; . esc_attr( __( &#x27;Edit this item&#x27; ) ) . &#x27;&quot;&gt;&#x27; . __( &#x27;Edit&#x27; ) . &#x27;&lt;/a&gt;&#x27;;
+            $actions[ &#x27;edit&#x27; ] = &#x27;&lt;a href=&quot;&#x27; . get_edit_post_link( $post-&gt;ID, true ) . &#x27;&quot; title=&quot;&#x27; . esc_attr( __( &#x27;Edit this item&#x27; ) ) . &#x27;&quot;&gt;&#x27; . __( &#x27;Edit&#x27; ) . &#x27;&lt;/a&gt;&#x27;;
           }
 
           if ( $can_delete_post ) {
             if ( &#x27;trash&#x27; == $post-&gt;post_status ) {
               global $wp_version;
-              $_wpnonce = ( version_compare( $wp_version, &#x27;3.5&#x27;, &#x27;&gt;=&#x27; ) ? &#x27;untrash-post_&#x27; : &#x27;untrash-&#x27; . $post-&gt;post_type . &#x27;_&#x27; ) . $post-&gt;ID ;
-              $actions[&#x27;untrash&#x27;] = &quot;&lt;a title=&#x27;&quot; . esc_attr( __( &#x27;Restore this item from the Trash&#x27; ) ) . &quot;&#x27; href=&#x27;&quot; . wp_nonce_url( admin_url( sprintf( $post_type_object-&gt;_edit_link . &#x27;&amp;amp;action=untrash&#x27;, $post-&gt;ID ) ), $_wpnonce ) . &quot;&#x27;&gt;&quot; . __( &#x27;Restore&#x27; ) . &quot;&lt;/a&gt;&quot;;
+              $_wpnonce = ( version_compare( $wp_version, &#x27;3.5&#x27;, &#x27;&gt;=&#x27; ) ? &#x27;untrash-post_&#x27; : &#x27;untrash-&#x27; . $post-&gt;post_type . &#x27;_&#x27; ) . $post-&gt;ID;
+              $actions[ &#x27;untrash&#x27; ] = &quot;&lt;a title=&#x27;&quot; . esc_attr( __( &#x27;Restore this item from the Trash&#x27; ) ) . &quot;&#x27; href=&#x27;&quot; . wp_nonce_url( admin_url( sprintf( $post_type_object-&gt;_edit_link . &#x27;&amp;amp;action=untrash&#x27;, $post-&gt;ID ) ), $_wpnonce ) . &quot;&#x27;&gt;&quot; . __( &#x27;Restore&#x27; ) . &quot;&lt;/a&gt;&quot;;
             } elseif ( EMPTY_TRASH_DAYS &amp;&amp; &#x27;pending&#x27; != $post-&gt;post_status ) {
-              $actions[&#x27;trash&#x27;] = &quot;&lt;a class=&#x27;submitdelete&#x27; title=&#x27;&quot; . esc_attr( __( &#x27;Move this item to the Trash&#x27; ) ) . &quot;&#x27; href=&#x27;&quot; . get_delete_post_link( $post-&gt;ID ) . &quot;&#x27;&gt;&quot; . __( &#x27;Trash&#x27; ) . &quot;&lt;/a&gt;&quot;;
+              $actions[ &#x27;trash&#x27; ] = &quot;&lt;a class=&#x27;submitdelete&#x27; title=&#x27;&quot; . esc_attr( __( &#x27;Move this item to the Trash&#x27; ) ) . &quot;&#x27; href=&#x27;&quot; . get_delete_post_link( $post-&gt;ID ) . &quot;&#x27;&gt;&quot; . __( &#x27;Trash&#x27; ) . &quot;&lt;/a&gt;&quot;;
             }
 
             if ( &#x27;trash&#x27; == $post-&gt;post_status || !EMPTY_TRASH_DAYS ) {
-              $actions[&#x27;delete&#x27;] = &quot;&lt;a class=&#x27;submitdelete permanently&#x27; title=&#x27;&quot; . esc_attr( __( &#x27;Delete this item permanently&#x27; ) ) . &quot;&#x27; href=&#x27;&quot; . get_delete_post_link( $post-&gt;ID, &#x27;&#x27;, true ) . &quot;&#x27;&gt;&quot; . __( &#x27;Delete Permanently&#x27; ) . &quot;&lt;/a&gt;&quot;;
+              $actions[ &#x27;delete&#x27; ] = &quot;&lt;a class=&#x27;submitdelete permanently&#x27; title=&#x27;&quot; . esc_attr( __( &#x27;Delete this item permanently&#x27; ) ) . &quot;&#x27; href=&#x27;&quot; . get_delete_post_link( $post-&gt;ID, &#x27;&#x27;, true ) . &quot;&#x27;&gt;&quot; . __( &#x27;Delete Permanently&#x27; ) . &quot;&lt;/a&gt;&quot;;
             }
           }
 
           if ( &#x27;trash&#x27; != $post-&gt;post_status &amp;&amp; &#x27;archived&#x27; != $post-&gt;post_status ) {
-            $actions[&#x27;view&#x27;] = &#x27;&lt;a target=&quot;_blank&quot; href=&quot;&#x27; . get_permalink( $post-&gt;ID ) . &#x27;&quot; title=&quot;&#x27; . esc_attr( sprintf( __( &#x27;View &amp;#8220;%s&amp;#8221;&#x27; ), $title ) ) . &#x27;&quot; rel=&quot;permalink&quot;&gt;&#x27; . __( &#x27;View&#x27; ) . &#x27;&lt;/a&gt;&#x27;;
+            $actions[ &#x27;view&#x27; ] = &#x27;&lt;a target=&quot;_blank&quot; href=&quot;&#x27; . get_permalink( $post-&gt;ID ) . &#x27;&quot; title=&quot;&#x27; . esc_attr( sprintf( __( &#x27;View &amp;#8220;%s&amp;#8221;&#x27; ), $title ) ) . &#x27;&quot; rel=&quot;permalink&quot;&gt;&#x27; . __( &#x27;View&#x27; ) . &#x27;&lt;/a&gt;&#x27;;
           }
 
           $actions = apply_filters( is_post_type_hierarchical( $post-&gt;post_type ) ? &#x27;page_row_actions&#x27; : &#x27;post_row_actions&#x27;, $actions, $post );
           $r .= $this-&gt;row_actions( $actions );
-        break;
+          break;
 
         case &#x27;property_type&#x27;:
           $property_type = $post-&gt;property_type;
-          $r .= $wp_properties[&#x27;property_types&#x27;][$property_type];
-        break;
+          $r .= $wp_properties[ &#x27;property_types&#x27; ][ $property_type ];
+          break;
 
         case &#x27;overview&#x27;:
 
-          $overview_stats = $wp_properties[&#x27;property_stats&#x27;];
+          $overview_stats = $wp_properties[ &#x27;property_stats&#x27; ];
 
-          unset($overview_stats[&#x27;phone_number&#x27;]);
+          unset( $overview_stats[ &#x27;phone_number&#x27; ] );
 
           $stat_count = 0;
           $hidden_count = 0;
 
-          foreach($overview_stats as $stat =&gt; $label) {
+          foreach ( $overview_stats as $stat =&gt; $label ) {
 
             $values = $post-&gt;$stat;
 
-            if(!is_array($values)) {
-              $values = array($values);
+            if ( !is_array( $values ) ) {
+              $values = array( $values );
             }
 
-            foreach($values as $value) {
+            foreach ( $values as $value ) {
 
               $print_values = array();
 
-              if(empty($value) || strlen($value) &gt; 15) {
+              if ( empty( $value ) || strlen( $value ) &gt; 15 ) {
                 continue;
               }
 
-              $print_values[] = apply_filters(&quot;wpp_stat_filter_{$stat}&quot;, $value);
+              $print_values[ ] = apply_filters( &quot;wpp_stat_filter_{$stat}&quot;, $value );
 
-              $print_values = implode(&#x27;&lt;br /&gt;&#x27;, $print_values);
+              $print_values = implode( &#x27;&lt;br /&gt;&#x27;, $print_values );
 
               $stat_count++;
 
-              if($stat_count &gt; 5) {
+              if ( $stat_count &gt; 5 ) {
                 $stat_row_class = &#x27;hidden wpp_overview_hidden_stats&#x27;;
                 $hidden_count++;
               }
 
-              $display_stats[$stat] = &#x27;&lt;li class=&quot;&#x27;.$stat_row_class.&#x27;&quot;&gt;&lt;span class=&quot;wpp_label&quot;&gt;&#x27; . $label . &#x27;:&lt;/span&gt; &lt;span class=&quot;wpp_value&quot;&gt;&#x27; . $print_values . &#x27;&lt;/span&gt;&lt;/li&gt;&#x27;;
+              $display_stats[ $stat ] = &#x27;&lt;li class=&quot;&#x27; . $stat_row_class . &#x27;&quot;&gt;&lt;span class=&quot;wpp_label&quot;&gt;&#x27; . $label . &#x27;:&lt;/span&gt; &lt;span class=&quot;wpp_value&quot;&gt;&#x27; . $print_values . &#x27;&lt;/span&gt;&lt;/li&gt;&#x27;;
 
             }
 
           }
 
-          if(is_array($display_stats) &amp;&amp; count($display_stats) &gt; 0) {
+          if ( is_array( $display_stats ) &amp;&amp; count( $display_stats ) &gt; 0 ) {
 
-            if($stat_count &gt; 5) {
-              $display_stats[&#x27;toggle_advanced&#x27;] = &#x27;&lt;li class=&quot;wpp_show_advanced&quot; advanced_option_class=&quot;wpp_overview_hidden_stats&quot;&gt;&#x27; . sprintf(__(&#x27;Toggle %1s more.&#x27;, &#x27;wpp&#x27;), $hidden_count) . &#x27;&lt;/li&gt;&#x27;;
+            if ( $stat_count &gt; 5 ) {
+              $display_stats[ &#x27;toggle_advanced&#x27; ] = &#x27;&lt;li class=&quot;wpp_show_advanced&quot; advanced_option_class=&quot;wpp_overview_hidden_stats&quot;&gt;&#x27; . sprintf( __( &#x27;Toggle %1s more.&#x27;, &#x27;wpp&#x27; ), $hidden_count ) . &#x27;&lt;/li&gt;&#x27;;
             }
 
-            $r .= &#x27;&lt;ul class=&quot;wpp_overview_column_stats wpp_something_advanced_wrapper&quot;&gt;&#x27; . implode(&#x27;&#x27;, $display_stats) . &#x27;&lt;/ul&gt;&#x27;;
+            $r .= &#x27;&lt;ul class=&quot;wpp_overview_column_stats wpp_something_advanced_wrapper&quot;&gt;&#x27; . implode( &#x27;&#x27;, $display_stats ) . &#x27;&lt;/ul&gt;&#x27;;
           }
 
-        break;
+          break;
 
         case &#x27;features&#x27;:
-          $features = get_the_terms($post-&gt;ID, &quot;property_feature&quot;);
+          $features = get_the_terms( $post-&gt;ID, &quot;property_feature&quot; );
           $features_html = array();
 
+          if ( $features &amp;&amp; !is_wp_error( $features ) ) {
+            foreach ( $features as $feature ) {
 
-          if($features &amp;&amp; !is_wp_error($features)) {
-            foreach ($features as $feature) {
-
-              $feature_link = get_term_link($feature, &quot;property_feature&quot;);
+              $feature_link = get_term_link( $feature, &quot;property_feature&quot; );
 
               //** If for some reason get_term_link() returns a WP error object, we avoid using it in URL */
-              if(is_wp_error($feature_link)) {
+              if ( is_wp_error( $feature_link ) ) {
                 continue;
               }
 
-              array_push($features_html, &#x27;&lt;a href=&quot;&#x27; .  $feature_link .  &#x27;&quot;&gt;&#x27; . $feature-&gt;name . &#x27;&lt;/a&gt;&#x27;);
+              array_push( $features_html, &#x27;&lt;a href=&quot;&#x27; . $feature_link . &#x27;&quot;&gt;&#x27; . $feature-&gt;name . &#x27;&lt;/a&gt;&#x27; );
             }
 
-            $r .= implode($features_html, &quot;, &quot;);
+            $r .= implode( $features_html, &quot;, &quot; );
           }
 
-        break;
+          break;
 
         case &#x27;thumbnail&#x27;:
 
-          if($post-&gt;featured_image) {
+          if ( $post-&gt;featured_image ) {
 
-            $overview_thumb_type = $wp_properties[&#x27;configuration&#x27;][&#x27;admin_ui&#x27;][&#x27;overview_table_thumbnail_size&#x27;];
+            $overview_thumb_type = $wp_properties[ &#x27;configuration&#x27; ][ &#x27;admin_ui&#x27; ][ &#x27;overview_table_thumbnail_size&#x27; ];
 
-            if(empty($overview_thumb_type)) {
+            if ( empty( $overview_thumb_type ) ) {
               $overview_thumb_type = &#x27;thumbnail&#x27;;
             }
 
-            $image_thumb_obj = wpp_get_image_link($post-&gt;featured_image, $overview_thumb_type, array(&#x27;return&#x27;=&gt;&#x27;array&#x27;));
+            $image_thumb_obj = wpp_get_image_link( $post-&gt;featured_image, $overview_thumb_type, array( &#x27;return&#x27; =&gt; &#x27;array&#x27; ) );
 
           }
 
-          if(!empty($image_thumb_obj)) {
-            $r .= &#x27;&lt;a href=&quot;&#x27;.$post-&gt;images[&#x27;large&#x27;].&#x27;&quot; class=&quot;fancybox&quot; rel=&quot;overview_group&quot; title=&quot;&#x27;.$post-&gt;post_title.&#x27;&quot;&gt;&lt;img src=&quot;&#x27;.$image_thumb_obj[&#x27;url&#x27;].&#x27;&quot; width=&quot;&#x27;.$image_thumb_obj[&#x27;width&#x27;].&#x27;&quot; height=&quot;&#x27;.$image_thumb_obj[&#x27;height&#x27;].&#x27;&quot; /&gt;&lt;/a&gt;&#x27;;
+          if ( !empty( $image_thumb_obj ) ) {
+            $r .= &#x27;&lt;a href=&quot;&#x27; . $post-&gt;images[ &#x27;large&#x27; ] . &#x27;&quot; class=&quot;fancybox&quot; rel=&quot;overview_group&quot; title=&quot;&#x27; . $post-&gt;post_title . &#x27;&quot;&gt;&lt;img src=&quot;&#x27; . $image_thumb_obj[ &#x27;url&#x27; ] . &#x27;&quot; width=&quot;&#x27; . $image_thumb_obj[ &#x27;width&#x27; ] . &#x27;&quot; height=&quot;&#x27; . $image_thumb_obj[ &#x27;height&#x27; ] . &#x27;&quot; /&gt;&lt;/a&gt;&#x27;;
           } else {
             $r .= &quot; - &quot;;
           }
 
-        break;
+          break;
 
         case &#x27;featured&#x27;:
 
-          if(current_user_can(&#x27;manage_options&#x27;)) {
-            if($post-&gt;featured)
-              $r .= &quot;&lt;input type=&#x27;button&#x27; id=&#x27;wpp_feature_{$post-&gt;ID}&#x27; class=&#x27;wpp_featured_toggle wpp_is_featured&#x27; nonce=&#x27;&quot;.wp_create_nonce(&#x27;wpp_make_featured_&#x27; . $post-&gt;ID).&quot;&#x27; value=&#x27;&quot;.__(&#x27;Featured&#x27;,&#x27;wpp&#x27;).&quot;&#x27; /&gt;&quot;;
+          if ( current_user_can( &#x27;manage_options&#x27; ) ) {
+            if ( $post-&gt;featured )
+              $r .= &quot;&lt;input type=&#x27;button&#x27; id=&#x27;wpp_feature_{$post-&gt;ID}&#x27; class=&#x27;wpp_featured_toggle wpp_is_featured&#x27; nonce=&#x27;&quot; . wp_create_nonce( &#x27;wpp_make_featured_&#x27; . $post-&gt;ID ) . &quot;&#x27; value=&#x27;&quot; . __( &#x27;Featured&#x27;, &#x27;wpp&#x27; ) . &quot;&#x27; /&gt;&quot;;
             else
-              $r .= &quot;&lt;input type=&#x27;button&#x27; id=&#x27;wpp_feature_{$post-&gt;ID}&#x27; class=&#x27;wpp_featured_toggle&#x27; nonce=&#x27;&quot;.wp_create_nonce(&#x27;wpp_make_featured_&#x27; . $post-&gt;ID).&quot;&#x27;  value=&#x27;&quot;.__(&#x27;Add to Featured&#x27;,&#x27;wpp&#x27;).&quot;&#x27; /&gt;&quot;;
+              $r .= &quot;&lt;input type=&#x27;button&#x27; id=&#x27;wpp_feature_{$post-&gt;ID}&#x27; class=&#x27;wpp_featured_toggle&#x27; nonce=&#x27;&quot; . wp_create_nonce( &#x27;wpp_make_featured_&#x27; . $post-&gt;ID ) . &quot;&#x27;  value=&#x27;&quot; . __( &#x27;Add to Featured&#x27;, &#x27;wpp&#x27; ) . &quot;&#x27; /&gt;&quot;;
           } else {
-            if($post-&gt;featured)
-              $r .=  __(&#x27;Featured&#x27;,&#x27;wpp&#x27;);
+            if ( $post-&gt;featured )
+              $r .= __( &#x27;Featured&#x27;, &#x27;wpp&#x27; );
             else
               $r .= &quot;&quot;;
 
           }
 
-        break;
-
+          break;
 
         default:
 
@@ -373,23 +372,23 @@ class WPP_Object_List_Table extends WPP_List_Table {
 
           $value = $post-&gt;{$column};
 
-          if(!is_array($value)) {
-            $value = array($value);
+          if ( !is_array( $value ) ) {
+            $value = array( $value );
           }
 
-          foreach($value as $single_value) {
-            $print_values[] = apply_filters(&quot;wpp_attribute_filter&quot;, $single_value, $column);
+          foreach ( $value as $single_value ) {
+            $print_values[ ] = apply_filters( &quot;wpp_attribute_filter&quot;, $single_value, $column );
           }
 
-          $print_values = implode(&#x27;&lt;br /&gt;&#x27;, $print_values);
+          $print_values = implode( &#x27;&lt;br /&gt;&#x27;, $print_values );
 
           $r .= $print_values;
 
-        break;
+          break;
       }
 
       //** Need to insert some sort of space in there to avoid DataTable error that occures when &quot;null&quot; is returned */
-      $ajax_cells[] = $r;
+      $ajax_cells[ ] = $r;
 
       $result .= $r;
       $result .= &quot;&lt;/td&gt;&quot;;
@@ -397,14 +396,12 @@ class WPP_Object_List_Table extends WPP_List_Table {
 
     $result .= &#x27;&lt;/tr&gt;&#x27;;
 
-    if($this-&gt;_args[&#x27;ajax&#x27;]) {
+    if ( $this-&gt;_args[ &#x27;ajax&#x27; ] ) {
       return $ajax_cells;
     }
 
     return $result;
   }
-
-
 
 }
     </pre>
