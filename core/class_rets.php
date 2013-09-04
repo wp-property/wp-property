@@ -1461,8 +1461,8 @@ class WPP_RETS {
     }
 
     $in_str = preg_replace( '/\&\s/', '&amp; ', $in_str );
-    $cur_encoding = mb_detect_encoding( $in_str );
-    if ( $cur_encoding == "UTF-8" && mb_check_encoding( $in_str, "UTF-8" ) ) {
+    $cur_encoding = function_exists( 'mb_detect_encoding' ) ? mb_detect_encoding( $in_str ) : false;
+    if ( !$cur_encoding || ( $cur_encoding == "UTF-8" && mb_check_encoding( $in_str, "UTF-8" ) ) ) {
       return $in_str;
     } else {
       return utf8_encode( $in_str );

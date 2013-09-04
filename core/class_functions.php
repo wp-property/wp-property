@@ -542,11 +542,7 @@ class WPP_F extends UD_API {
       return false;
     }
 
-    if ( function_exists( 'mb_detect_encoding' ) ) {
-      $encoding = mb_detect_encoding( $json );
-    } else {
-      $encoding = 'UTF-8';
-    }
+    $encoding = function_exists( 'mb_detect_encoding' ) ? mb_detect_encoding( $json ) : 'UTF-8';
 
     if ( $encoding == 'UTF-8' ) {
       $json = preg_replace( '/[^(\x20-\x7F)]*/', '', $json );
@@ -561,7 +557,7 @@ class WPP_F extends UD_API {
       return false;
     }
 
-    $Serializer = &new XML_Serializer( $options );
+    $Serializer = new XML_Serializer( $options );
 
     $status = $Serializer->serialize( $data );
 
