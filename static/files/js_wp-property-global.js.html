@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.1</em>
+            <em>API Docs for: 1.38.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -46,6 +46,8 @@
                 <li><a href="../classes/wpp.overview.html">wpp.overview</a></li>
             
                 <li><a href="../classes/wpp.xmli.html">wpp.xmli</a></li>
+            
+                <li><a href="../classes/WPP_RETS.html">WPP_RETS</a></li>
             
                 <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
             
@@ -211,6 +213,123 @@ jQuery.extend( wpp = wpp || {}, {
 
     }
 
+  },
+
+  /**
+   * http://kevin.vanzonneveld.net
+   * +      original by: Philippe Jausions (http://pear.php.net/user/jausions)
+   * +      original by: Aidan Lister (http://aidanlister.com/)
+   * + reimplemented by: Kankrelune (http://www.webfaktory.info/)
+   * +      improved by: Brett Zamir (http://brett-zamir.me)
+   * +      improved by: Scott Baker
+   * +      improved by: Theriault
+   * *        example 1: version_compare(&#x27;8.2.5rc&#x27;, &#x27;8.2.5a&#x27;);
+   * *        returns 1: 1
+   * *        example 2: version_compare(&#x27;8.2.50&#x27;, &#x27;8.2.52&#x27;, &#x27;&lt;&#x27;);
+   * *        returns 2: true
+   * *        example 3: version_compare(&#x27;5.3.0-dev&#x27;, &#x27;5.3.0&#x27;);
+   * *        returns 3: -1
+   * *        example 4: version_compare(&#x27;4.1.0.52&#x27;,&#x27;4.01.0.51&#x27;);
+   * *        returns 4: 1
+   */
+  version_compare: function(v1, v2, operator) {
+    // BEGIN REDUNDANT
+    this.php_js = this.php_js || {};
+    this.php_js.ENV = this.php_js.ENV || {};
+    // END REDUNDANT
+    // Important: compare must be initialized at 0.
+    var i = 0,
+      x = 0,
+      compare = 0,
+      // vm maps textual PHP versions to negatives so they&#x27;re less than 0.
+      // PHP currently defines these as CASE-SENSITIVE. It is important to
+      // leave these as negatives so that they can come before numerical versions
+      // and as if no letters were there to begin with.
+      // (1alpha is &lt; 1 and &lt; 1.1 but &gt; 1dev1)
+      // If a non-numerical value can&#x27;t be mapped to this table, it receives
+      // -7 as its value.
+      vm = {
+        &#x27;dev&#x27;: -6,
+        &#x27;alpha&#x27;: -5,
+        &#x27;a&#x27;: -5,
+        &#x27;beta&#x27;: -4,
+        &#x27;b&#x27;: -4,
+        &#x27;RC&#x27;: -3,
+        &#x27;rc&#x27;: -3,
+        &#x27;#&#x27;: -2,
+        &#x27;p&#x27;: 1,
+        &#x27;pl&#x27;: 1
+      },
+      // This function will be called to prepare each version argument.
+      // It replaces every _, -, and + with a dot.
+      // It surrounds any nonsequence of numbers/dots with dots.
+      // It replaces sequences of dots with a single dot.
+      //    version_compare(&#x27;4..0&#x27;, &#x27;4.0&#x27;) == 0
+      // Important: A string of 0 length needs to be converted into a value
+      // even less than an unexisting value in vm (-7), hence [-8].
+      // It&#x27;s also important to not strip spaces because of this.
+      //   version_compare(&#x27;&#x27;, &#x27; &#x27;) == 1
+      prepVersion = function (v) {
+        v = (&#x27;&#x27; + v).replace(/[_\-+]/g, &#x27;.&#x27;);
+        v = v.replace(/([^.\d]+)/g, &#x27;.$1.&#x27;).replace(/\.{2,}/g, &#x27;.&#x27;);
+        return (!v.length ? [-8] : v.split(&#x27;.&#x27;));
+      },
+      // This converts a version component to a number.
+      // Empty component becomes 0.
+      // Non-numerical component becomes a negative number.
+      // Numerical component becomes itself as an integer.
+      numVersion = function (v) {
+        return !v ? 0 : (isNaN(v) ? vm[v] || -7 : parseInt(v, 10));
+      };
+    v1 = prepVersion(v1);
+    v2 = prepVersion(v2);
+    x = Math.max(v1.length, v2.length);
+    for (i = 0; i &lt; x; i++) {
+      if (v1[i] == v2[i]) {
+        continue;
+      }
+      v1[i] = numVersion(v1[i]);
+      v2[i] = numVersion(v2[i]);
+      if (v1[i] &lt; v2[i]) {
+        compare = -1;
+        break;
+      } else if (v1[i] &gt; v2[i]) {
+        compare = 1;
+        break;
+      }
+    }
+    if (!operator) {
+      return compare;
+    }
+
+    // Important: operator is CASE-SENSITIVE.
+    // &quot;No operator&quot; seems to be treated as &quot;&lt;.&quot;
+    // Any other values seem to make the function return null.
+    switch (operator) {
+    case &#x27;&gt;&#x27;:
+    case &#x27;gt&#x27;:
+      return (compare &gt; 0);
+    case &#x27;&gt;=&#x27;:
+    case &#x27;ge&#x27;:
+      return (compare &gt;= 0);
+    case &#x27;&lt;=&#x27;:
+    case &#x27;le&#x27;:
+      return (compare &lt;= 0);
+    case &#x27;==&#x27;:
+    case &#x27;=&#x27;:
+    case &#x27;eq&#x27;:
+      return (compare === 0);
+    case &#x27;&lt;&gt;&#x27;:
+    case &#x27;!=&#x27;:
+    case &#x27;ne&#x27;:
+      return (compare !== 0);
+    case &#x27;&#x27;:
+    case &#x27;&lt;&#x27;:
+    case &#x27;lt&#x27;:
+      return (compare &lt; 0);
+    default:
+      return null;
+    }
   }
 
 });

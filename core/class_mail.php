@@ -13,6 +13,7 @@ class WPP_Mail {
   /**
    *
    * @param type $notification
+   *
    * @author peshkov@UD
    * @since 1.38
    */
@@ -108,6 +109,7 @@ class WPP_Mail {
    *
    * @param int $post_id
    * @param array $args
+   *
    * @author peshkov@UD
    * @since 1.38
    */
