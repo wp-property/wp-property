@@ -256,14 +256,13 @@
 
           $echo_size = ( ( $showsize ) ? ' <span class="attachment-size">' . WPP_F::get_filesize( str_replace( $upload_dir['baseurl'], $upload_dir['basedir'], $attlink ) ) . '</span>' : '' ) ;
 
-          if( !empty( $atts['groupby'] ) && $current_group != $att->$grouper ) {
+          if( !empty( $atts['groupby'] )) {
             if( $open ) {
               $r .= $atts['closing'] . $atts['after_item'];
               $open = false;
             }
             $r .= $atts['before_item'] . '<h3>' . $att->$grouper . '</h3>' . $atts['opening'];
             $open = true;
-            $current_group = $att->$grouper;
           }
           $attlink = $att->attlink;
           $r .= $this_before_item . '<a href="' . $attlink .'" title="'.$echo_title.'" class="wpp_attachment ' . $icon_class . '">' . apply_filters('the_title',$att->post_title) . '</a>'  . $echo_size  . $echo_description . $atts['after_item'];

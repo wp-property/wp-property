@@ -5149,6 +5149,7 @@ class WPP_F extends UD_API {
     $group = empty($group) ? false : $group;
     $special = empty($special) ? '' : $special;
     $value = empty($value) ? 'true' : $value;
+    $label = empty($label) ? false : $label;
     $maxlength = empty($maxlength) ? false : $maxlength;
     $defaults = array(
       'name' => '',
