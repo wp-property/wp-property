@@ -1505,7 +1505,7 @@ class WPP_Core {
       $result[ 'top' ] = '<div id="wpp_shortcode_' . $defaults[ 'unique_hash' ] . '" class="wpp_ui ' . $wpp_query[ 'class' ] . '">';
     }
 
-    $result[ 'top_pagination' ] = wpi_draw_pagination( array(
+    $result[ 'top_pagination' ] = wpp_draw_pagination( array(
       'class' => 'wpp_top_pagination',
       'sorter_type' => $wpp_query[ 'sorter_type' ],
       'hide_count' => $wpp_query[ 'hide_count' ],
@@ -1514,7 +1514,7 @@ class WPP_Core {
     $result[ 'result' ] = $ob_get_contents;
 
     if ( $wpp_query[ 'bottom_pagination_flag' ] == 'true' ) {
-      $result[ 'bottom_pagination' ] = wpi_draw_pagination( array(
+      $result[ 'bottom_pagination' ] = wpp_draw_pagination( array(
         'class' => 'wpp_bottom_pagination',
         'sorter_type' => $wpp_query[ 'sorter_type' ],
         'hide_count' => $wpp_query[ 'hide_count' ],
