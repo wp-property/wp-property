@@ -1547,6 +1547,7 @@ class WPP_F extends UD_API {
 
   }
 
+
   /**
    * Revalidate all addresses
    *
@@ -1671,7 +1672,6 @@ class WPP_F extends UD_API {
     $args = wp_parse_args( $args, array(
       'skip_existing' => 'false',
       'return_geo_data' => false,
-      'post_data' => false,
     ));
 
     extract( $args, EXTR_SKIP );
@@ -1691,6 +1691,7 @@ class WPP_F extends UD_API {
 
     if ( $skip_existing == 'true' && !empty( $current_coordinates ) && $address_is_formatted == 'true' ) {
       $return[ 'status' ] = 'skipped';
+      return $return;
     }
 
     if ( !( empty( $coordinates ) && empty( $address ) ) ) {
