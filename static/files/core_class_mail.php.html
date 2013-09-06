@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.1</em>
+            <em>API Docs for: 1.38.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -46,6 +46,8 @@
                 <li><a href="../classes/wpp.overview.html">wpp.overview</a></li>
             
                 <li><a href="../classes/wpp.xmli.html">wpp.xmli</a></li>
+            
+                <li><a href="../classes/WPP_RETS.html">WPP_RETS</a></li>
             
                 <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
             
@@ -102,12 +104,12 @@
  * @package WP-Property
  * @since 1.38
  */
-
 class WPP_Mail {
 
   /**
    *
    * @param type $notification
+   *
    * @author peshkov@UD
    * @since 1.38
    */
@@ -115,7 +117,6 @@ class WPP_Mail {
     $notification = apply_filters( &#x27;wpp::send_notification&#x27;, $notification );
     UD_API::send_notification( $notification );
   }
-
 
   /**
    *
@@ -133,7 +134,6 @@ class WPP_Mail {
     ) );
   }
 
-
   /**
    *
    * @author peshkov@UD
@@ -144,35 +144,34 @@ class WPP_Mail {
 
     $user_data = get_userdata( $user_id );
 
-    $activation_link = get_bloginfo(&#x27;home&#x27;).&#x27;?wpp_user=&#x27;.$user_id.&#x27;&amp;wpp_user_activation=&#x27;.md5($user_id.$user_data-&gt;data-&gt;user_email.SECURE_AUTH_SALT);
+    $activation_link = get_bloginfo( &#x27;home&#x27; ) . &#x27;?wpp_user=&#x27; . $user_id . &#x27;&amp;wpp_user_activation=&#x27; . md5( $user_id . $user_data-&gt;data-&gt;user_email . SECURE_AUTH_SALT );
 
-    $notification[&#x27;trigger_action&#x27;] = &#x27;feps_use_account_created&#x27;;
-    $notification[&#x27;user&#x27;] = $user_id;
-    $notification[&#x27;subject&#x27;] = __(&#x27;Account Created&#x27;, &#x27;wpp&#x27;);
-    $notification[&#x27;message&#x27;] = sprintf(__(&#x27;Hello [display_name]%1$s%1$sYour account on [site_url] has been created and is waiting for activation.%1$s%1$sClick this link to activate your account:%1$s[activation_link]%1$s%1$sAccess data:%1$s[user_login] / [user_password]&#x27;, &#x27;wpp&#x27;), PHP_EOL);
-    $notification[&#x27;crm_log_message&#x27;] = __(&#x27;New User account created.&#x27;, &#x27;wpp&#x27; );
+    $notification[ &#x27;trigger_action&#x27; ] = &#x27;feps_use_account_created&#x27;;
+    $notification[ &#x27;user&#x27; ] = $user_id;
+    $notification[ &#x27;subject&#x27; ] = __( &#x27;Account Created&#x27;, &#x27;wpp&#x27; );
+    $notification[ &#x27;message&#x27; ] = sprintf( __( &#x27;Hello [display_name]%1$s%1$sYour account on [site_url] has been created and is waiting for activation.%1$s%1$sClick this link to activate your account:%1$s[activation_link]%1$s%1$sAccess data:%1$s[user_login] / [user_password]&#x27;, &#x27;wpp&#x27; ), PHP_EOL );
+    $notification[ &#x27;crm_log_message&#x27; ] = __( &#x27;New User account created.&#x27;, &#x27;wpp&#x27; );
 
-    $notification[&#x27;data&#x27;][&#x27;notification_type&#x27;] = __(&#x27;User Account Created&#x27;, &#x27;wpp&#x27;);
-    $notification[&#x27;data&#x27;][&#x27;user_email&#x27;] = $user_data-&gt;data-&gt;user_email;
-    $notification[&#x27;data&#x27;][&#x27;display_name&#x27;] = $user_data-&gt;data-&gt;display_name;
-    $notification[&#x27;data&#x27;][&#x27;user_login&#x27;] = $new_user[&#x27;user_login&#x27;];
-    $notification[&#x27;data&#x27;][&#x27;user_password&#x27;] = $new_user[&#x27;user_pass&#x27;];
-    $notification[&#x27;data&#x27;][&#x27;site_url&#x27;]     = site_url();
-    $notification[&#x27;data&#x27;][&#x27;activation_link&#x27;] = $activation_link;
-    $notification[&#x27;data&#x27;][&#x27;system_message&#x27;] = $notification[&#x27;message&#x27;];
+    $notification[ &#x27;data&#x27; ][ &#x27;notification_type&#x27; ] = __( &#x27;User Account Created&#x27;, &#x27;wpp&#x27; );
+    $notification[ &#x27;data&#x27; ][ &#x27;user_email&#x27; ] = $user_data-&gt;data-&gt;user_email;
+    $notification[ &#x27;data&#x27; ][ &#x27;display_name&#x27; ] = $user_data-&gt;data-&gt;display_name;
+    $notification[ &#x27;data&#x27; ][ &#x27;user_login&#x27; ] = $new_user[ &#x27;user_login&#x27; ];
+    $notification[ &#x27;data&#x27; ][ &#x27;user_password&#x27; ] = $new_user[ &#x27;user_pass&#x27; ];
+    $notification[ &#x27;data&#x27; ][ &#x27;site_url&#x27; ] = site_url();
+    $notification[ &#x27;data&#x27; ][ &#x27;activation_link&#x27; ] = $activation_link;
+    $notification[ &#x27;data&#x27; ][ &#x27;system_message&#x27; ] = $notification[ &#x27;message&#x27; ];
 
     $notification = UD_API::array_merge_recursive_distinct( $notification, $args );
 
     self::_send_notification( $notification );
   }
 
-
   /**
    *
    * @author peshkov@UD
    * @since 1.38
    */
-  function feps_post_approved ( $post_id, $args = array() ) {
+  function feps_post_approved( $post_id, $args = array() ) {
     global $wp_post_statuses;
 
     $notification = self::_notification_template();
@@ -182,31 +181,31 @@ class WPP_Mail {
     $user_id = $_property[ &#x27;post_author&#x27; ];
     $user = get_user_by( &#x27;id&#x27;, $user_id );
 
-    $notification[&#x27;trigger_action&#x27;] = &#x27;pending_property_approve&#x27;;
-    $notification[&#x27;user&#x27;] = $user;
-    $notification[&#x27;subject&#x27;] = __(&#x27;Submission Approved&#x27;, &#x27;wpp&#x27;);
-    $notification[&#x27;message&#x27;] = sprintf( __(&#x27;Hello.%1$s%1$sYour %2$s has been published.%1$s%1$sYou can view it using this URL: %1$s[property_link]&#x27;, &#x27;wpp&#x27;), PHP_EOL, WPP_F::property_label( &#x27;singular&#x27; ) );
-    $notification[&#x27;crm_log_message&#x27;] = sprintf(__(&#x27;User-submitted %1$s ([property_title]) approved and published.&#x27;, &#x27;wpp&#x27;), WPP_F::property_label( &#x27;singular&#x27; ) );
+    $notification[ &#x27;trigger_action&#x27; ] = &#x27;pending_property_approve&#x27;;
+    $notification[ &#x27;user&#x27; ] = $user;
+    $notification[ &#x27;subject&#x27; ] = __( &#x27;Submission Approved&#x27;, &#x27;wpp&#x27; );
+    $notification[ &#x27;message&#x27; ] = sprintf( __( &#x27;Hello.%1$s%1$sYour %2$s has been published.%1$s%1$sYou can view it using this URL: %1$s[property_link]&#x27;, &#x27;wpp&#x27; ), PHP_EOL, WPP_F::property_label( &#x27;singular&#x27; ) );
+    $notification[ &#x27;crm_log_message&#x27; ] = sprintf( __( &#x27;User-submitted %1$s ([property_title]) approved and published.&#x27;, &#x27;wpp&#x27; ), WPP_F::property_label( &#x27;singular&#x27; ) );
 
-    $notification[&#x27;data&#x27;][&#x27;notification_type&#x27;] = __(&#x27;Submission Approved&#x27;, &#x27;wpp&#x27;);
-    $notification[&#x27;data&#x27;][&#x27;user_email&#x27;] = $user-&gt;data-&gt;user_email;
-    $notification[&#x27;data&#x27;][&#x27;display_name&#x27;] = $user-&gt;data-&gt;display_name;
-    $notification[&#x27;data&#x27;][&#x27;site_url&#x27;] = site_url();
-    $notification[&#x27;data&#x27;][&#x27;url&#x27;]  = $notification[&#x27;data&#x27;][&#x27;property_link&#x27;] =  class_wpp_feps::get_feps_permalink( $_property, false );
-    $notification[&#x27;data&#x27;][&#x27;title&#x27;] = $notification[&#x27;data&#x27;][&#x27;property_title&#x27;] = $post-&gt;post_title;
-    $notification[&#x27;data&#x27;][&#x27;status&#x27;] = @$wp_post_statuses[get_post_status($post_id)]-&gt;label;
+    $notification[ &#x27;data&#x27; ][ &#x27;notification_type&#x27; ] = __( &#x27;Submission Approved&#x27;, &#x27;wpp&#x27; );
+    $notification[ &#x27;data&#x27; ][ &#x27;user_email&#x27; ] = $user-&gt;data-&gt;user_email;
+    $notification[ &#x27;data&#x27; ][ &#x27;display_name&#x27; ] = $user-&gt;data-&gt;display_name;
+    $notification[ &#x27;data&#x27; ][ &#x27;site_url&#x27; ] = site_url();
+    $notification[ &#x27;data&#x27; ][ &#x27;url&#x27; ] = $notification[ &#x27;data&#x27; ][ &#x27;property_link&#x27; ] = class_wpp_feps::get_feps_permalink( $_property, false );
+    $notification[ &#x27;data&#x27; ][ &#x27;title&#x27; ] = $notification[ &#x27;data&#x27; ][ &#x27;property_title&#x27; ] = $post-&gt;post_title;
+    $notification[ &#x27;data&#x27; ][ &#x27;status&#x27; ] = @$wp_post_statuses[ get_post_status( $post_id ) ]-&gt;label;
 
     $notification = UD_API::array_merge_recursive_distinct( $notification, $args );
 
     self::_send_notification( $notification );
   }
 
-
   /**
    * Should be called on FEPS property status update
    *
    * @param int $post_id
    * @param array $args
+   *
    * @author peshkov@UD
    * @since 1.38
    */
@@ -219,34 +218,33 @@ class WPP_Mail {
 
     $user = get_userdata( $_property[ &#x27;post_author&#x27; ] );
 
-    $notification[&#x27;trigger_action&#x27;] = &#x27;feps_status_updated&#x27;;
-    $notification[&#x27;user&#x27;] = $user;
-    $notification[&#x27;subject&#x27;] = __(&#x27;Status Updated&#x27;, &#x27;wpp&#x27; );
-    $notification[&#x27;message&#x27;] = sprintf( __(&#x27;Hello.%1$s%1$sYour %2$s status has been updated.%1$s%1$sYou can view it using this URL: %1$s[property_link]&#x27;, &#x27;wpp&#x27;), PHP_EOL, WPP_F::property_label( &#x27;singular&#x27; ) );
-    $notification[&#x27;crm_log_message&#x27;] = sprintf( __(&#x27;FEPS %1$s ([property_title]) status has been changed.&#x27;, &#x27;wpp&#x27;), WPP_F::property_label( &#x27;singular&#x27; ) );
+    $notification[ &#x27;trigger_action&#x27; ] = &#x27;feps_status_updated&#x27;;
+    $notification[ &#x27;user&#x27; ] = $user;
+    $notification[ &#x27;subject&#x27; ] = __( &#x27;Status Updated&#x27;, &#x27;wpp&#x27; );
+    $notification[ &#x27;message&#x27; ] = sprintf( __( &#x27;Hello.%1$s%1$sYour %2$s status has been updated.%1$s%1$sYou can view it using this URL: %1$s[property_link]&#x27;, &#x27;wpp&#x27; ), PHP_EOL, WPP_F::property_label( &#x27;singular&#x27; ) );
+    $notification[ &#x27;crm_log_message&#x27; ] = sprintf( __( &#x27;FEPS %1$s ([property_title]) status has been changed.&#x27;, &#x27;wpp&#x27; ), WPP_F::property_label( &#x27;singular&#x27; ) );
 
-    $notification[&#x27;data&#x27;][&#x27;notification_type&#x27;] = __(&#x27;Status Updated&#x27;, &#x27;wpp&#x27;);
-    $notification[&#x27;data&#x27;][&#x27;site_url&#x27;] = site_url();
-    $notification[&#x27;data&#x27;][&#x27;user_email&#x27;] = $user-&gt;data-&gt;user_email;
-    $notification[&#x27;data&#x27;][&#x27;display_name&#x27;] = $user-&gt;data-&gt;display_name;
-    $notification[&#x27;data&#x27;][&#x27;user_login&#x27;] = $user-&gt;data-&gt;user_login;
-    $notification[&#x27;data&#x27;][&#x27;user_password&#x27;] = $user-&gt;data-&gt;user_pass;
-    $notification[&#x27;data&#x27;][&#x27;title&#x27;] = $notification[&#x27;data&#x27;][&#x27;property_title&#x27;] = $post_after-&gt;post_title;
-    $notification[&#x27;data&#x27;][&#x27;url&#x27;]  = $notification[&#x27;data&#x27;][&#x27;property_link&#x27;] =  class_wpp_feps::get_feps_permalink( $_property, false );
-    $notification[&#x27;data&#x27;][&#x27;status&#x27;] = @$wp_post_statuses[$_property[&#x27;post_status&#x27;]]-&gt;label;
+    $notification[ &#x27;data&#x27; ][ &#x27;notification_type&#x27; ] = __( &#x27;Status Updated&#x27;, &#x27;wpp&#x27; );
+    $notification[ &#x27;data&#x27; ][ &#x27;site_url&#x27; ] = site_url();
+    $notification[ &#x27;data&#x27; ][ &#x27;user_email&#x27; ] = $user-&gt;data-&gt;user_email;
+    $notification[ &#x27;data&#x27; ][ &#x27;display_name&#x27; ] = $user-&gt;data-&gt;display_name;
+    $notification[ &#x27;data&#x27; ][ &#x27;user_login&#x27; ] = $user-&gt;data-&gt;user_login;
+    $notification[ &#x27;data&#x27; ][ &#x27;user_password&#x27; ] = $user-&gt;data-&gt;user_pass;
+    $notification[ &#x27;data&#x27; ][ &#x27;title&#x27; ] = $notification[ &#x27;data&#x27; ][ &#x27;property_title&#x27; ] = $post_after-&gt;post_title;
+    $notification[ &#x27;data&#x27; ][ &#x27;url&#x27; ] = $notification[ &#x27;data&#x27; ][ &#x27;property_link&#x27; ] = class_wpp_feps::get_feps_permalink( $_property, false );
+    $notification[ &#x27;data&#x27; ][ &#x27;status&#x27; ] = @$wp_post_statuses[ $_property[ &#x27;post_status&#x27; ] ]-&gt;label;
 
     $notification = UD_API::array_merge_recursive_distinct( $notification, $args );
 
     self::_send_notification( $notification );
   }
 
-
   /**
    *
    * @author peshkov@UD
    * @since 1.38
    */
-  function feps_post_created ( $post_id, $args= array() ) {
+  function feps_post_created( $post_id, $args = array() ) {
     global $wp_post_statuses;
 
     $notification = self::_notification_template();
@@ -256,19 +254,19 @@ class WPP_Mail {
     $user_id = $_property[ &#x27;post_author&#x27; ];
     $user = get_user_by( &#x27;id&#x27;, $user_id );
 
-    $notification[&#x27;trigger_action&#x27;] = &#x27;pending_property_added&#x27;;
-    $notification[&#x27;user&#x27;] = $user;
-    $notification[&#x27;subject&#x27;] =  __(&#x27;Submission Received&#x27;, &#x27;wpp&#x27;);
-    $notification[&#x27;message&#x27;] = sprintf( __(&#x27;Hello.%1$s%1$sYour %2$s has been received.%1$s%1$sYou can view it using this URL:%1$s[pending_url]&#x27;, &#x27;wpp&#x27;), PHP_EOL, WPP_F::property_label( &#x27;singular&#x27; ) );
-    $notification[&#x27;crm_log_message&#x27;] = sprintf( __(&#x27;User submitted %1$s ([property_title]) using FEPS.&#x27;, &#x27;wpp&#x27;), WPP_F::property_label( &#x27;singular&#x27; ) );
+    $notification[ &#x27;trigger_action&#x27; ] = &#x27;pending_property_added&#x27;;
+    $notification[ &#x27;user&#x27; ] = $user;
+    $notification[ &#x27;subject&#x27; ] = __( &#x27;Submission Received&#x27;, &#x27;wpp&#x27; );
+    $notification[ &#x27;message&#x27; ] = sprintf( __( &#x27;Hello.%1$s%1$sYour %2$s has been received.%1$s%1$sYou can view it using this URL:%1$s[pending_url]&#x27;, &#x27;wpp&#x27; ), PHP_EOL, WPP_F::property_label( &#x27;singular&#x27; ) );
+    $notification[ &#x27;crm_log_message&#x27; ] = sprintf( __( &#x27;User submitted %1$s ([property_title]) using FEPS.&#x27;, &#x27;wpp&#x27; ), WPP_F::property_label( &#x27;singular&#x27; ) );
 
-    $notification[&#x27;data&#x27;][&#x27;notification_type&#x27;] = __(&#x27;Submission Received&#x27;, &#x27;wpp&#x27;);
-    $notification[&#x27;data&#x27;][&#x27;display_name&#x27;] = $user-&gt;data-&gt;display_name;
-    $notification[&#x27;data&#x27;][&#x27;user_email&#x27;] = $user-&gt;data-&gt;user_email;
-    $notification[&#x27;data&#x27;][&#x27;site_url&#x27;] = site_url();
-    $notification[&#x27;data&#x27;][&#x27;pending_url&#x27;] = class_wpp_feps::get_feps_permalink( $_property, false );
-    $notification[&#x27;data&#x27;][&#x27;title&#x27;] = $notification[&#x27;data&#x27;][&#x27;property_title&#x27;] = $_property[&#x27;post_title&#x27;];
-    $notification[&#x27;data&#x27;][&#x27;status&#x27;] = @$wp_post_statuses[$_property[&#x27;post_status&#x27;]]-&gt;label;
+    $notification[ &#x27;data&#x27; ][ &#x27;notification_type&#x27; ] = __( &#x27;Submission Received&#x27;, &#x27;wpp&#x27; );
+    $notification[ &#x27;data&#x27; ][ &#x27;display_name&#x27; ] = $user-&gt;data-&gt;display_name;
+    $notification[ &#x27;data&#x27; ][ &#x27;user_email&#x27; ] = $user-&gt;data-&gt;user_email;
+    $notification[ &#x27;data&#x27; ][ &#x27;site_url&#x27; ] = site_url();
+    $notification[ &#x27;data&#x27; ][ &#x27;pending_url&#x27; ] = class_wpp_feps::get_feps_permalink( $_property, false );
+    $notification[ &#x27;data&#x27; ][ &#x27;title&#x27; ] = $notification[ &#x27;data&#x27; ][ &#x27;property_title&#x27; ] = $_property[ &#x27;post_title&#x27; ];
+    $notification[ &#x27;data&#x27; ][ &#x27;status&#x27; ] = @$wp_post_statuses[ $_property[ &#x27;post_status&#x27; ] ]-&gt;label;
 
     $notification = UD_API::array_merge_recursive_distinct( $notification, $args );
 

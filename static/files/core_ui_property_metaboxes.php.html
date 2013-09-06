@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.1</em>
+            <em>API Docs for: 1.38.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -46,6 +46,8 @@
                 <li><a href="../classes/wpp.overview.html">wpp.overview</a></li>
             
                 <li><a href="../classes/wpp.xmli.html">wpp.xmli</a></li>
+            
+                <li><a href="../classes/WPP_RETS.html">WPP_RETS</a></li>
             
                 <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
             
@@ -164,10 +166,10 @@ class WPP_UI {
     &lt;?php } ?&gt;
     &lt;p&gt;&lt;strong&gt;&lt;?php _e( &#x27;Order&#x27;, &#x27;wpp&#x27; ) ?&gt;&lt;/strong&gt;&lt;/p&gt;
     &lt;p&gt;&lt;label class=&quot;screen-reader-text&quot; for=&quot;menu_order&quot;&gt;&lt;?php _e( &#x27;Order&#x27;, &#x27;wpp&#x27; ) ?&gt;&lt;/label&gt;&lt;input name=&quot;menu_order&quot;
-                                                                                                      type=&quot;text&quot;
-                                                                                                      size=&quot;4&quot;
-                                                                                                      id=&quot;menu_order&quot;
-                                                                                                      value=&quot;&lt;?php echo esc_attr( $post-&gt;menu_order ) ?&gt;&quot;/&gt;
+        type=&quot;text&quot;
+        size=&quot;4&quot;
+        id=&quot;menu_order&quot;
+        value=&quot;&lt;?php echo esc_attr( $post-&gt;menu_order ) ?&gt;&quot;/&gt;
     &lt;/p&gt;
     &lt;p&gt;&lt;?php if ( &#x27;page&#x27; == $post-&gt;post_type )
         _e( &#x27;Need help? Use the Help tab in the upper right of your screen.&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/p&gt;
@@ -190,8 +192,8 @@ class WPP_UI {
     $instance = $attrs[ &#x27;id&#x27; ];
     $stats_group = ( !empty( $attrs[ &#x27;args&#x27; ][ &#x27;group&#x27; ] ) ? $attrs[ &#x27;args&#x27; ][ &#x27;group&#x27; ] : false );
 
-    $disabled_attributes = (array)$wp_properties[ &#x27;geo_type_attributes&#x27; ];
-    $property_stats = (array)$wp_properties[ &#x27;property_stats&#x27; ];
+    $disabled_attributes = (array) $wp_properties[ &#x27;geo_type_attributes&#x27; ];
+    $property_stats = (array) $wp_properties[ &#x27;property_stats&#x27; ];
     $stat_keys = array_keys( $property_stats );
 
     //** If an attribute with &#x27;property_type&#x27; slug exists, we tweak UI *&#x27;
@@ -408,7 +410,7 @@ class WPP_UI {
       if ( is_array( $wp_properties[ &#x27;hidden_attributes&#x27; ][ $property[ &#x27;property_type&#x27; ] ] ) &amp;&amp; in_array( &#x27;parent&#x27;, $wp_properties[ &#x27;hidden_attributes&#x27; ][ $property[ &#x27;property_type&#x27; ] ] ) ) {
         $row_classes[ ] = &#x27;disabled_row&#x27;;
       }
-      if ( in_array( $slug, (array)$wp_properties[ &#x27;hidden_frontend_attributes&#x27; ] ) ) {
+      if ( in_array( $slug, (array) $wp_properties[ &#x27;hidden_frontend_attributes&#x27; ] ) ) {
         $row_classes[ ] = &#x27;wpp_hidden_frontend_attribute&#x27;;
       }
 
@@ -457,7 +459,6 @@ class WPP_UI {
       } else {
         $predefined_values = false;
       }
-
 
       //** Check input type */
       $input_type = $wp_properties[ &#x27;admin_attr_fields&#x27; ][ $slug ];
@@ -508,19 +509,17 @@ class WPP_UI {
             $value = &#x27;true&#x27;;
           }
 
-          if ( in_array( $slug, (array)$disabled_attributes ) ) {
+          if ( in_array( $slug, (array) $disabled_attributes ) ) {
 
             $html_input = &quot;&lt;input type=&#x27;text&#x27; id=&#x27;wpp_meta_{$slug}&#x27; name=&#x27;wpp_data[meta][{$slug}]&#x27; class=&#x27;text-input wpp_field_disabled {$attribute_data[&#x27;ui_class&#x27;]}&#x27; value=&#x27;{$value}&#x27; disabled=&#x27;disabled&#x27; /&gt;&quot;;
 
           } else {
-
 
             switch ( $input_type ) {
 
               case &#x27;checkbox&#x27;:
                 $html_input = &quot;&lt;input type=&#x27;hidden&#x27; name=&#x27;wpp_data[meta][{$slug}]&#x27; value=&#x27;false&#x27; /&gt;&lt;input &quot; . checked( $value, &#x27;true&#x27;, false ) . &quot;type=&#x27;checkbox&#x27; id=&#x27;wpp_meta_{$slug}&#x27; name=&#x27;wpp_data[meta][{$slug}]&#x27; value=&#x27;true&#x27; {$disabled} /&gt; &lt;label for=&#x27;wpp_meta_{$slug}&#x27;&gt;&quot; . __( &#x27;Enable.&#x27;, &#x27;wpp&#x27; ) . &quot;&lt;/label&gt;&quot;;
                 break;
-
 
               case &#x27;dropdown&#x27;:
                 foreach ( $predefined_values as $option ) {
@@ -567,7 +566,7 @@ class WPP_UI {
             &lt;span
               class=&quot;disabled_message&quot;&gt;&lt;?php echo sprintf( __( &#x27;Editing %s is disabled, it may be inherited.&#x27;, &#x27;wpp&#x27; ), $label ); ?&gt;&lt;/span&gt;
             &lt;textarea id=&quot;wpp_data_meta_&lt;?php echo $slug; ?&gt;&quot;
-                      name=&quot;wpp_data[meta][&lt;?php echo $slug; ?&gt;]&quot;&gt;&lt;?php echo preg_replace( &#x27;%&amp;ndash;|�%i&#x27;, &#x27;-&#x27;, get_post_meta( $object-&gt;ID, $slug, true ) ); ?&gt;&lt;/textarea&gt;
+              name=&quot;wpp_data[meta][&lt;?php echo $slug; ?&gt;]&quot;&gt;&lt;?php echo preg_replace( &#x27;%&amp;ndash;|�%i&#x27;, &#x27;-&#x27;, get_post_meta( $object-&gt;ID, $slug, true ) ); ?&gt;&lt;/textarea&gt;
             &lt;?php if ( !empty( $wp_properties[ &#x27;descriptions&#x27; ][ $slug ] ) ): ?&gt;
               &lt;span class=&quot;wpp_meta_description&quot;&gt;&lt;?php echo $wp_properties[ &#x27;descriptions&#x27; ][ $slug ]; ?&gt;&lt;/span&gt;
             &lt;?php endif; ?&gt;
@@ -584,6 +583,7 @@ class WPP_UI {
    * Renders Filter Metabox ( All Properties page )
    *
    * @global type $wp_properties
+   *
    * @param type $wp_list_table
    */
   function metabox_property_filter( $wp_list_table ) {
@@ -620,8 +620,8 @@ class WPP_UI {
                       &lt;?php $unique_id = rand( 10000, 99999 ); ?&gt;
                       &lt;li&gt;
                         &lt;input name=&quot;wpp_search[&lt;?php echo $key; ?&gt;][]&quot;
-                               id=&quot;wpp_attribute_checkbox_&lt;?php echo $unique_id; ?&gt;&quot; type=&quot;checkbox&quot;
-                               value=&quot;&lt;?php echo $value; ?&gt;&quot;/&gt;
+                          id=&quot;wpp_attribute_checkbox_&lt;?php echo $unique_id; ?&gt;&quot; type=&quot;checkbox&quot;
+                          value=&quot;&lt;?php echo $value; ?&gt;&quot;/&gt;
                         &lt;label for=&quot;wpp_attribute_checkbox_&lt;?php echo $unique_id; ?&gt;&quot;&gt;&lt;?php echo $label; ?&gt;&lt;/label&gt;
                       &lt;/li&gt;
                     &lt;?php endforeach; ?&gt;
@@ -633,8 +633,8 @@ class WPP_UI {
                   $unique_id = rand( 10000, 99999 );
                   ?&gt;
                   &lt;select id=&quot;wpp_attribute_dropdown_&lt;?php echo $unique_id; ?&gt;&quot;
-                          class=&quot;wpp_search_select_field wpp_search_select_field_&lt;?php echo $key; ?&gt;&quot;
-                          name=&quot;wpp_search[&lt;?php echo $key; ?&gt;]&quot;&gt;
+                    class=&quot;wpp_search_select_field wpp_search_select_field_&lt;?php echo $key; ?&gt;&quot;
+                    name=&quot;wpp_search[&lt;?php echo $key; ?&gt;]&quot;&gt;
                     &lt;?php foreach ( $filter[ &#x27;values&#x27; ] as $value =&gt; $label ) : ?&gt;
                       &lt;option
                         value=&quot;&lt;?php echo esc_attr( $value ); ?&gt;&quot; &lt;?php echo $value == $filter[ &#x27;default&#x27; ] ? &#x27;selected=&quot;selected&quot;&#x27; : &#x27;&#x27; ?&gt; &gt;
@@ -651,8 +651,8 @@ class WPP_UI {
                     &lt;?php foreach ( $filter[ &#x27;values&#x27; ] as $value =&gt; $label ) : ?&gt;
                       &lt;li&gt;
                         &lt;input id=&quot;radio_filter_&lt;?php echo $value; ?&gt;&quot; type=&quot;radio&quot;
-                               value=&quot;&lt;?php echo esc_attr( $value ); ?&gt;&quot;
-                               name=&quot;wpp_search[&lt;?php echo $key; ?&gt;]&quot; &lt;?php echo( $value == $filter[ &#x27;default&#x27; ] ? &#x27;checked=&quot;checked&quot;&#x27; : &#x27;&#x27; ); ?&gt; /&gt;
+                          value=&quot;&lt;?php echo esc_attr( $value ); ?&gt;&quot;
+                          name=&quot;wpp_search[&lt;?php echo $key; ?&gt;]&quot; &lt;?php echo( $value == $filter[ &#x27;default&#x27; ] ? &#x27;checked=&quot;checked&quot;&#x27; : &#x27;&#x27; ); ?&gt; /&gt;
                         &lt;label for=&quot;radio_filter_&lt;?php echo $value; ?&gt;&quot;&gt;&lt;?php echo $label; ?&gt;&lt;/label&gt;
                       &lt;/li&gt;
                     &lt;?php endforeach; ?&gt;
@@ -692,7 +692,7 @@ class WPP_UI {
 
     $type_label = ( $attribute[ &#x27;label&#x27; ] ? $attribute[ &#x27;label&#x27; ] : sprintf( __( &#x27;%1s Type&#x27;, &#x27;wpp&#x27; ), WPP_F::property_label() ) );
 
-    $property_type_slugs = array_keys( (array)$wp_properties[ &#x27;property_types&#x27; ] );
+    $property_type_slugs = array_keys( (array) $wp_properties[ &#x27;property_types&#x27; ] );
 
     if ( count( $wp_properties[ &#x27;property_types&#x27; ] ) &gt; 1 ) {
       ?&gt;
@@ -715,7 +715,7 @@ class WPP_UI {
       &lt;/tr&gt;
     &lt;?php } else { ?&gt;
       &lt;input type=&quot;hidden&quot; id=&quot;wpp_meta_property_type&quot; name=&quot;wpp_data[meta][property_type]&quot; id=&quot;property_type&quot;
-             value=&quot;&lt;?php echo( $property[ &#x27;property_type&#x27; ] ? strtolower( $property[ &#x27;property_type&#x27; ] ) : $property_type_slugs[ 0 ] ); ?&gt;&quot;/&gt;
+        value=&quot;&lt;?php echo( $property[ &#x27;property_type&#x27; ] ? strtolower( $property[ &#x27;property_type&#x27; ] ) : $property_type_slugs[ 0 ] ); ?&gt;&quot;/&gt;
     &lt;?php
     }
 

@@ -22,7 +22,7 @@
 //wp_deregister_script('wpp-jquery-fancybox-css');
 ?>
 
-<?php get_header(); ?>
+<?php get_template_part( 'templates/header' ); ?>
 <?php the_post(); ?>
 
     <script type="text/javascript">
@@ -159,4 +159,4 @@
 <?php endif; ?>
 
 
- <?php get_footer(); ?>
+ <?php get_template_part( 'templates/footer' ); ?>

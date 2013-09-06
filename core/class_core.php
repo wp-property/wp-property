@@ -21,7 +21,7 @@ class WPP_Core {
     global $wp_properties;
 
     //** Determine if memory limit is low and increase it */
-    if ( (int)ini_get( 'memory_limit' ) < 128 ) {
+    if ( (int) ini_get( 'memory_limit' ) < 128 ) {
       ini_set( 'memory_limit', '128M' );
     }
 
@@ -212,7 +212,7 @@ class WPP_Core {
     wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'third-party/fancybox/jquery.fancybox-1.3.4.css' );
     wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'third-party/colorpicker/colorpicker.css' );
     wp_register_style( 'jquery-ui', WPP_URL . 'css/jquery-ui.css' );
-    wp_register_style( 'wpp-jquery-data-tables', WPP_URL . "third-party/dataTables/wpp-data-tables.css" );
+    wp_register_style( 'wpp-jquery-data-tables', WPP_URL . "css/wpp-data-tables.css" );
 
     /** Find and register stylesheet  */
     if ( file_exists( STYLESHEETPATH . '/wp-properties.css' ) ) {
@@ -264,7 +264,6 @@ class WPP_Core {
     if ( !empty( $wp_properties[ 'alternative_shortcodes' ][ 'property_overview' ] ) ) {
       add_shortcode( "{$wp_properties[ 'alternative_shortcodes' ]['property_overview']}", array( $this, 'shortcode_property_overview' ) );
     }
-
 
     //** Make Property Featured Via AJAX */
     if ( isset( $_REQUEST[ '_wpnonce' ] ) ) {
@@ -446,6 +445,7 @@ class WPP_Core {
 
     /**
      * Next used to add custom submenu page 'All Properties' with Javascript dataTable
+     *
      * @author Anton K
      */
     if ( !empty( $submenu[ 'edit.php?post_type=property' ] ) ) {
@@ -501,6 +501,7 @@ class WPP_Core {
    * assume that the request is a search.
    *
    * @param $query
+   *
    * @since 0.5
    */
   function parse_request( $query ) {
@@ -575,7 +576,6 @@ class WPP_Core {
       WPP_F::console_log( 'WPP_F::parse_request() ran, determined that request is for: ' . implode( ', ', $wpp_pages ) );
     }
 
-
   }
 
   /**
@@ -602,7 +602,6 @@ class WPP_Core {
       WPP_F::console_log( 'Automatically inserted property overview shortcode into search page content.' );
       return WPP_Core::shortcode_property_overview();
     }
-
 
     return $content;
   }
@@ -648,8 +647,8 @@ class WPP_Core {
       }
     }
 
-    if ( (float)$update_data[ 'latitude' ] == 0 ) $update_data[ 'latitude' ] = '';
-    if ( (float)$update_data[ 'longitude' ] == 0 ) $update_data[ 'longitude' ] = '';
+    if ( (float) $update_data[ 'latitude' ] == 0 ) $update_data[ 'latitude' ] = '';
+    if ( (float) $update_data[ 'longitude' ] == 0 ) $update_data[ 'longitude' ] = '';
 
     /* get old coordinates and location */
     $old_lat = get_post_meta( $post_id, 'latitude', true );
@@ -685,7 +684,6 @@ class WPP_Core {
       delete_post_meta( $post_id, $meta_key );
       add_post_meta( $post_id, $meta_key, $meta_value );
     }
-
 
     //* Check if property has children */
     $children = get_children( "post_parent=$post_id&post_type=property" );
@@ -785,7 +783,7 @@ class WPP_Core {
       3 => __( 'Custom field deleted.', 'wpp' ),
       4 => __( 'Property updated.', 'wpp' ),
       /* translators: %s: date and time of the revision */
-      5 => isset( $_GET[ 'revision' ] ) ? sprintf( __( 'Property restored to revision from %s', 'wpp' ), wp_post_revision_title( (int)$_GET[ 'revision' ], false ) ) : false,
+      5 => isset( $_GET[ 'revision' ] ) ? sprintf( __( 'Property restored to revision from %s', 'wpp' ), wp_post_revision_title( (int) $_GET[ 'revision' ], false ) ) : false,
       6 => sprintf( __( 'Property published. <a href="%s">View property</a>', 'wpp' ), esc_url( get_permalink( $post_id ) ) ),
       7 => __( 'Property saved.', 'wpp' ),
       8 => sprintf( __( 'Property submitted. <a target="_blank" href="%s">Preview property</a>', 'wpp' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ) ),
@@ -844,7 +842,6 @@ class WPP_Core {
   function sortable_columns( $columns ) {
     global $wp_properties;
 
-
     $columns[ 'type' ] = 'type';
     $columns[ 'featured' ] = 'featured';
 
@@ -854,7 +851,6 @@ class WPP_Core {
     }
 
     $columns = apply_filters( 'wpp_admin_sortable_columns', $columns );
-
 
     return $columns;
   }
@@ -911,7 +907,7 @@ class WPP_Core {
     }
 
     //** Monitor taxonomy archive queries */
-    if ( is_tax() && in_array( $wp_query->query_vars[ 'taxonomy' ], array_keys( (array)$wp_taxonomies ) ) ) {
+    if ( is_tax() && in_array( $wp_query->query_vars[ 'taxonomy' ], array_keys( (array) $wp_taxonomies ) ) ) {
       //** Once get_properties(); can accept taxonomy searches, we can inject a search request in here */
     }
 
@@ -1130,6 +1126,7 @@ class WPP_Core {
    * @todo Consider making this function depend on shortcode_property_overview() more so pagination and sorting functions work.
    *
    * @since 0.60
+   *
    * @param string $listing_id Listing ID must be passed
    *
    * @uses WPP_F::get_properties()
@@ -1259,7 +1256,6 @@ class WPP_Core {
 
     return $content;
 
-
   }
 
   /**
@@ -1269,7 +1265,9 @@ class WPP_Core {
    * Retirms html content to be displayed after location attribute on property edit page
    *
    * @since 1.081
+   *
    * @param string $listing_id Listing ID must be passed
+   *
    * @return string $result
    *
    * @uses WPP_F::get_properties()
@@ -1443,7 +1441,7 @@ class WPP_Core {
     $property_type = $wpp_query[ 'query' ][ 'property_type' ];
 
     if ( !empty( $property_type ) ) {
-      foreach ( (array)$wp_properties[ 'hidden_attributes' ][ $property_type ] as $attr_key ) {
+      foreach ( (array) $wp_properties[ 'hidden_attributes' ][ $property_type ] as $attr_key ) {
         unset( $wpp_query[ 'sortable_attrs' ][ $attr_key ] );
       }
     }
@@ -1552,7 +1550,7 @@ class WPP_Core {
       $this_property = $post;
     }
 
-    $this_property = (array)$this_property;
+    $this_property = (array) $this_property;
 
     if ( !$atts ) {
       $atts = array();
@@ -1638,7 +1636,6 @@ class WPP_Core {
       }
     }
 
-
     if ( is_array( $return ) ) {
       return implode( '', $return );
     }
@@ -1683,7 +1680,7 @@ class WPP_Core {
     }
 
     //** Convert to array */
-    $property = (array)$property;
+    $property = (array) $property;
 
     //** Force map to be enabled here */
     $skip_default_google_map_check = true;
@@ -1746,8 +1743,10 @@ class WPP_Core {
 
   /**
    * Checks settings data on accord with existing wp_properties data ( before option updates )
+   *
    * @param array $wpp_settings New wpp settings data
    * @param array $wp_properties Old wpp settings data
+   *
    * @return array $wpp_settings
    */
   function check_wp_settings_data( $wpp_settings, $wp_properties ) {
@@ -1842,11 +1841,11 @@ class WPP_Core {
     /** All additional localizations must be added using the filter below. */
     $l10n = apply_filters( 'wpp::js::localization', $l10n );
 
-    foreach ( (array)$l10n as $key => $value ) {
+    foreach ( (array) $l10n as $key => $value ) {
       if ( !is_scalar( $value ) ) {
         continue;
       }
-      $l10n[ $key ] = html_entity_decode( (string)$value, ENT_QUOTES, 'UTF-8' );
+      $l10n[ $key ] = html_entity_decode( (string) $value, ENT_QUOTES, 'UTF-8' );
     }
 
     header( 'Content-type: application/x-javascript' );
@@ -1859,7 +1858,9 @@ class WPP_Core {
    * WPP Contextual Help
    *
    * @global $current_screen
+   *
    * @param $args
+   *
    * @author korotkov@ud
    */
   function wpp_contextual_help( $args = array() ) {
@@ -1875,14 +1876,14 @@ class WPP_Core {
     if ( is_callable( array( 'WP_Screen', 'add_help_tab' ) ) ) {
 
       //** Loop through help items and build tabs */
-      foreach ( (array)$contextual_help as $help_tab_title => $help ) {
+      foreach ( (array) $contextual_help as $help_tab_title => $help ) {
 
         //** Add tab with current info */
         get_current_screen()->add_help_tab(
           array(
             'id' => sanitize_title( $help_tab_title ),
             'title' => __( $help_tab_title, 'wpp' ),
-            'content' => implode( "\n", (array)$contextual_help[ $help_tab_title ] ),
+            'content' => implode( "\n", (array) $contextual_help[ $help_tab_title ] ),
           )
         );
 
