@@ -1689,7 +1689,7 @@ class WPP_F extends UD_API {
 
     $coordinates = ( empty( $latitude ) || empty( $longitude ) ) ? "" : array( 'lat' => get_post_meta( $post_id, 'latitude', true ), 'lng' => get_post_meta( $post_id, 'longitude', true ));
 
-    if ( $skip_existing == 'true' && !empty( $current_coordinates ) && $address_is_formatted == 'true' ) {
+    if ( $skip_existing == 'true' && !empty( $current_coordinates ) && in_array( $address_is_formatted, array( '1', 'true' ) ) ) {
       $return[ 'status' ] = 'skipped';
       return $return;
     }
