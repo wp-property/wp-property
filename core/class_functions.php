@@ -542,11 +542,7 @@ class WPP_F extends UD_API {
       return false;
     }
 
-    if ( function_exists( 'mb_detect_encoding' ) ) {
-      $encoding = mb_detect_encoding( $json );
-    } else {
-      $encoding = 'UTF-8';
-    }
+    $encoding = function_exists( 'mb_detect_encoding' ) ? mb_detect_encoding( $json ) : 'UTF-8';
 
     if ( $encoding == 'UTF-8' ) {
       $json = preg_replace( '/[^(\x20-\x7F)]*/', '', $json );
@@ -561,7 +557,7 @@ class WPP_F extends UD_API {
       return false;
     }
 
-    $Serializer = & new XML_Serializer( $options );
+    $Serializer = new XML_Serializer( $options );
 
     $status = $Serializer->serialize( $data );
 
@@ -1550,6 +1546,7 @@ class WPP_F extends UD_API {
 
   }
 
+
   /**
    * Revalidate all addresses
    *
@@ -1676,8 +1673,7 @@ class WPP_F extends UD_API {
     $args = wp_parse_args( $args, array(
       'skip_existing' => 'false',
       'return_geo_data' => false,
-      'post_data' => false,
-    ) );
+    ));
 
     extract( $args, EXTR_SKIP );
 
@@ -1694,8 +1690,9 @@ class WPP_F extends UD_API {
 
     $coordinates = ( empty( $latitude ) || empty( $longitude ) ) ? "" : array( 'lat' => get_post_meta( $post_id, 'latitude', true ), 'lng' => get_post_meta( $post_id, 'longitude', true ) );
 
-    if ( $skip_existing == 'true' && !empty( $current_coordinates ) && $address_is_formatted == 'true' ) {
+    if ( $skip_existing == 'true' && !empty( $current_coordinates ) && in_array( $address_is_formatted, array( '1', 'true' ) ) ) {
       $return[ 'status' ] = 'skipped';
+      return $return;
     }
 
     if ( !( empty( $coordinates ) && empty( $address ) ) ) {
