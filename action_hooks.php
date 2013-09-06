@@ -79,7 +79,6 @@
       'deposit' => __('Deposit','wpp'),
       'area' => __('Area','wpp'),
       'phone_number' => __('Phone Number','wpp'),
-      'deposit' => __('Deposit','wpp')
     );
 
   // Property meta.  Typically not searchable, displayed as textarea on editing page.

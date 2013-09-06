@@ -84,7 +84,7 @@ class WPP_Object_List_Table extends WPP_List_Table {
     $result = "<tr id='object-{$ID}' class='wpp_parent_element'>";
 
     list( $columns, $hidden ) = $this->get_column_info();
-
+    $ajax_cells = array();
     foreach ( $columns as $column => $column_display_name ) {
 
       $class = "class=\"$column column-$column\"";
@@ -165,8 +165,8 @@ class WPP_Object_List_Table extends WPP_List_Table {
           $stat_count = 0;
           $hidden_count = 0;
 
-          foreach ( $overview_stats as $stat => $label ) {
-
+          $display_stats = array();
+          foreach($overview_stats as $stat => $label) {
             $values = $post->$stat;
 
             if ( !is_array( $values ) ) {
@@ -186,8 +186,8 @@ class WPP_Object_List_Table extends WPP_List_Table {
               $print_values = implode( '<br />', $print_values );
 
               $stat_count++;
-
-              if ( $stat_count > 5 ) {
+              $stat_row_class = '';
+              if($stat_count > 5) {
                 $stat_row_class = 'hidden wpp_overview_hidden_stats';
                 $hidden_count++;
               }
