@@ -571,7 +571,7 @@ class WPP_UI {
 
         <?php endforeach; ?>
       <?php endif; ?>
-      <?php do_action( 'wpi_invoice_list_filter' ); ?>
+      <?php do_action( 'wpp_invoice_list_filter' ); ?>
     </div>
 
     <div class="major-publishing-actions">

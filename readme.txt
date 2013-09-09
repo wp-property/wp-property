@@ -181,7 +181,7 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 * Changed property export function to export in JSON format.
 
 = 1.20.0 =
-* Major changes to the way pagination is handled.  Pagination is no longer loaded from a file but from wpi_draw_pagination().
+* Major changes to the way pagination is handled.  Pagination is no longer loaded from a file but from wpp_draw_pagination().
 
 = 1.17.2 =
 * draw_property_search_form() has been changed where arguments passed to it are in array format.
@@ -575,7 +575,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 = 1.20.0 =
 * Redesigned pagination and sorting for front-end.
 * New back-end UI for dynamic property filtering.
-* Added new template functions such as have_properties(), returned_properties() and wpi_draw_pagination().
+* Added new template functions such as have_properties(), returned_properties() and wpp_draw_pagination().
 * Attributes marked as numeric or currency filter our bad characters as you type on the property editing screen.
 * Fixed issue with price ranges in drop-downs and in property overview displaying incorrectly.
 * draw_stats("show_true_as_image=true") will render a checkbox on front-end for attributes with value of "true".
