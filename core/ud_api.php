@@ -501,7 +501,10 @@ class UD_API {
    * @version 0.1
    */
   static function get_css_classes( $args = array() ) {
-
+    $classes = '';
+    $instance = '';
+    $element = '';
+    $return = '';
     //** Set arguments */
     $args = wp_parse_args( (array)$args, array(
       'classes' => array(),
@@ -796,7 +799,9 @@ class UD_API {
    *
    */
   static function log( $message = false, $args = array() ) {
-
+    $prefix = '';
+    $type = '';
+    $object = '';
     $args = wp_parse_args( $args, array(
       'type' => 'default',
       'object' => false,
@@ -870,7 +875,7 @@ class UD_API {
    *
    */
   static function get_log( $args = false ) {
-
+    $prefix = '';
     $args = wp_parse_args( $args, array(
       'limit' => 20,
       'prefix' => 'ud'
@@ -900,7 +905,7 @@ class UD_API {
    * @uses update_option()
    */
   static function delete_log( $args = array() ) {
-
+    $prefix = '';
     $args = wp_parse_args( $args, array(
       'prefix' => 'ud'
     ) );
@@ -995,7 +1000,7 @@ class UD_API {
    * @return string
    */
   static function create_slug( $content, $args = false ) {
-
+    $separator = '';
     $defaults = array(
       'separator' => '-',
       'check_existance' => false

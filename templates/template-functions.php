@@ -179,7 +179,7 @@ if ( !function_exists( 'have_properties' ) ) {
   }
 }
 
-if ( !function_exists( 'wpi_draw_pagination' ) ):
+if ( !function_exists( 'wpp_draw_pagination' ) ):
   /**
    * Figures out if current page is the property overview page
    *
@@ -189,7 +189,7 @@ if ( !function_exists( 'wpi_draw_pagination' ) ):
    * @since 1.10
    *
    */
-  function wpi_draw_pagination( $settings = '' ) {
+  function wpp_draw_pagination( $settings = '' ) {
     global $wpp_query, $wp_properties;
 
     $settings = wp_parse_args( $settings, array(
@@ -613,7 +613,7 @@ if ( !function_exists( 'wpi_draw_pagination' ) ):
             $wpp_property_results = '<span class="wpp_property_results">';
             $wpp_property_results .= ( $properties[ 'total' ] > 0 ? WPP_F::format_numeric( $properties[ 'total' ] ) : __( 'None', 'wpp' ) );
             $wpp_property_results .= __( ' found.', 'wpp' );
-            echo apply_filters( 'wpp::wpi_draw_pagination::wpp_property_results', $wpp_property_results, array( 'properties' => $properties, 'settings' => $settings ) );
+            echo apply_filters( 'wpp::wpp_draw_pagination::wpp_property_results', $wpp_property_results, array( 'properties' => $properties, 'settings' => $settings ) );
             ?>
           <?php } ?>
           <?php if ( $use_pagination ) { ?>
