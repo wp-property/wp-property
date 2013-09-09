@@ -135,7 +135,7 @@ class WPP_Core {
     add_action( 'save_post', array( $this, 'save_property' ) );
 
     //** Address revalidation @since 1.37.2 @author odokienko@UD */
-    add_action( 'save_property', create_function( '$post_id, $postdata, $geo_data', 'WPP_F::revalidate_address($post_id, array("post_data"=>$postdata, "old_geo_data"=>$geo_data)); ' ), 0, 3 );
+    add_action( 'save_property', create_function( '$post_id', 'WPP_F::revalidate_address($post_id);' ) );
 
     add_action( 'before_delete_post', array( 'WPP_F', 'before_delete_post' ) );
     add_filter( 'post_updated_messages', array( 'WPP_Core', 'property_updated_messages' ), 5 );
@@ -711,7 +711,7 @@ class WPP_Core {
       $_REQUEST[ 'parent_id' ] = WPP_F::update_parent_id( $_REQUEST[ 'parent_id' ], $post_id );
     }
 
-    do_action( 'save_property', $post_id, $_REQUEST, $geo_data );
+    do_action( 'save_property', $post_id );
 
     return true;
   }
