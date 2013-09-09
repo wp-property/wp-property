@@ -13,7 +13,6 @@
 <div class="wp_wpp_overview_wrapper wrap">
   <?php screen_icon(); ?>
   <h2><?php echo $wp_properties['labels']['all_items']; ?> <a href="<?php echo admin_url('post-new.php?post_type=property'); ?>" class="button add-new-h2"><?php echo $wp_properties['labels']['add_new_item']; ?></a></h2>
-  <?php //WPP_Functions::print_messages(); ?>
 
   <form id="<?php echo $wp_list_table->table_scope; ?>-filter" action="#" method="POST">
     <?php if(!WPP_F::is_older_wp_version('3.4')) : ?>
