@@ -991,7 +991,7 @@ if ( !function_exists( 'draw_stats' ) ):
       $value = html_entity_decode( $value );
 
       //** Single "true" is converted to 1 by get_properties() we check 1 as well, as long as it isn't a numeric attribute */
-      if ( ( $attribute_data[ 'data_input_type' ] == 'checkbox' && ( $value == 'true' || $value == 1 ) ) ) {
+      if ( ( $attribute_data[ 'data_input_type' ] == 'checkbox' && in_array( strtolower( $value ), array( 'true', '1', 'yes' ) ) ) ) {
         if ( $show_true_as_image == 'true' ) {
           $value = '<div class="true-checkbox-image"></div>';
         } else {

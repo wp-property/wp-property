@@ -517,7 +517,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <tr>
       <th><?php _e( 'Property Page', 'wpp' ) ?></th>
       <td>
-        <p><?php _e( 'These are the settings for the [property_overview] shortcode.  The shortcode displays a list of all building / root properties.<br /> The display settings may be edited further by customizing the <b>wp-content/plugins/wp-properties/templates/property.php</b> file.  To avoid losing your changes during updates, create a <b>property.php</b> file in your template directory, which will be automatically loaded.', 'wpp' ) ?>
+        <p><?php _e( 'The display settings may be edited further by customizing the <b>wp-content/plugins/wp-properties/templates/property.php</b> file.  To avoid losing your changes during updates, create a <b>property.php</b> file in your template directory, which will be automatically loaded.', 'wpp' ) ?>
         <ul>
           <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][sort_stats_by_groups]&label=" . __( 'Sort property stats by groups.', 'wpp' ), $wp_properties[ 'configuration' ][ 'property_overview' ][ 'sort_stats_by_groups' ] ); ?></li>
           <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][show_true_as_image]&label=" . sprintf( __( 'Show Checkboxed Image instead of "%s" and hide "%s" for %s/%s values', 'wpp' ), __( 'Yes', 'wpp' ), __( 'No', 'wpp' ), __( 'Yes', 'wpp' ), __( 'No', 'wpp' ) ), $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_true_as_image' ] ); ?></li>
