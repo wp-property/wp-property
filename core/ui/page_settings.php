@@ -649,6 +649,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
       <table id="wpp_premium_feature_table" cellpadding="0" cellspacing="0">
       <?php foreach ( $wp_properties[ 'available_features' ] as $plugin_slug => $plugin_data ): ?>
+        <?php if( $plugin_slug == 'class_admin_tools' ) continue; ?>
 
         <input type="hidden" name="wpp_settings[available_features][<?php echo $plugin_slug; ?>][title]" value="<?php echo $plugin_data[ 'title' ]; ?>"/>
         <input type="hidden" name="wpp_settings[available_features][<?php echo $plugin_slug; ?>][tagline]" value="<?php echo $plugin_data[ 'tagline' ]; ?>"/>
