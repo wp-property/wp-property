@@ -8,7 +8,7 @@
  * @package WP-Property
  */
  global $post, $wp_properties;
-get_template_part( 'templates/header' ); ?>
+get_header(); ?>
 
 <div id="container" class="<?php wpp_css('property_overview_page::container'); ?>">
   <div id="content" class="<?php wpp_css('property_overview_page::content'); ?>" role="main">
@@ -31,4 +31,4 @@ get_template_part( 'templates/header' ); ?>
 </div><!-- #container -->
 
 <?php get_sidebar(); ?>
-<?php get_template_part( 'templates/footer' ); ?>
+<?php get_footer(); ?>
