@@ -143,7 +143,7 @@ class Property_Attributes_Widget extends WP_Widget {
     ?>
     <div class="wpp_widget" data-widget="property_attributes_widget" data-widget_number="<?php echo $this->number; ?>">
       <p>
-        <label for="<?php echo $this->get_field_id( 'widget_title' ); ?>"><?php _e( 'Title:' ); ?>
+        <label for="<?php echo $this->get_field_id( 'widget_title' ); ?>"><?php _e( 'Title:', 'wpp' ); ?>
           <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
                  name="<?php echo $this->get_field_name( 'title' ); ?>" type="text"
                  value="<?php echo esc_attr( $instance[ 'title' ] ); ?>"/></label>
@@ -1558,7 +1558,7 @@ class SearchPropertiesWidget extends WP_Widget {
                  type="checkbox" value="true"
                  name="<?php echo $this->get_field_name( 'group_attributes' ); ?>" <?php checked( $group_attributes, 'true' ); ?> />
           <label
-            for="<?php echo $this->get_field_id( 'group_attributes' ); ?>"><?php _e( 'Group attributes together.' ); ?></label>
+            for="<?php echo $this->get_field_id( 'group_attributes' ); ?>"><?php _e( 'Group attributes together.', 'wpp' ); ?></label>
         </div>
       </li>
       <?php } ?>
@@ -1585,8 +1585,8 @@ class SearchPropertiesWidget extends WP_Widget {
                 <select id="<?php echo $this->get_field_id( 'sort_order' ); ?>"
                         name="<?php echo $this->get_field_name( 'sort_order' ); ?>">
                   <option></option>
-                  <option value="DESC"  <?php selected( $sort_order, 'DESC' ); ?> ><?php _e( 'Descending' ); ?></option>
-                  <option value="ASC"  <?php selected( $sort_order, 'ASC' ); ?> ><?php _e( 'Acending' ); ?></option>
+                  <option value="DESC"  <?php selected( $sort_order, 'DESC' ); ?> ><?php _e( 'Descending', 'wpp' ); ?></option>
+                  <option value="ASC"  <?php selected( $sort_order, 'ASC' ); ?> ><?php _e( 'Acending', 'wpp' ); ?></option>
                 </select>
 
               </li>
@@ -1808,18 +1808,18 @@ class GalleryPropertiesWidget extends WP_Widget {
     $gallery_count = $instance[ 'gallery_count' ]; ?>
 
     <p>
-      <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
+      <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'wpp' ); ?></label>
       <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
              name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>"/>
     </p>
 
     <p>
-      <label for="<?php echo $this->get_field_id( 'image_type' ); ?>"><?php _e( 'Regular Size:' ); ?></label>
+      <label for="<?php echo $this->get_field_id( 'image_type' ); ?>"><?php _e( 'Regular Size:', 'wpp' ); ?></label>
       <?php WPP_F::image_sizes_dropdown( "name=" . $this->get_field_name( 'image_type' ) . "&selected=" . $image_type ); ?>
     </p>
 
     <p class="wpp_gallery_big_image_type">
-      <label for="<?php echo $this->get_field_id( 'big_image_type' ); ?>"><?php _e( 'Large Image Size:' ); ?></label>
+      <label for="<?php echo $this->get_field_id( 'big_image_type' ); ?>"><?php _e( 'Large Image Size:', 'wpp' ); ?></label>
       <?php WPP_F::image_sizes_dropdown( "name=" . $this->get_field_name( 'big_image_type' ) . "&selected=" . $big_image_type ); ?>
     </p>
 

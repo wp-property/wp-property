@@ -314,7 +314,7 @@ class WPP_List_Table extends WP_List_Table {
 
     ?>
     <select name="<?php echo $field_name; ?>">
-      <option<?php selected( $m, 0 ); ?> value='0'><?php _e( 'Show all dates' ); ?></option>
+      <option<?php selected( $m, 0 ); ?> value='0'><?php _e( 'Show all dates', 'wpp' ); ?></option>
       <?php
       foreach ( $months as $arc_row ) {
         if ( 0 == $arc_row->year ) {

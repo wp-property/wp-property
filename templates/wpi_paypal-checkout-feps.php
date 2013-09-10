@@ -111,7 +111,7 @@
     <?php if($atts['terms']) : ?>
       <li class="<?php wpp_css("feps-checkout-template::row-wrapper", array("wpp_feps_row_wrapper")); ?>">
         <div class="<?php wpp_css("feps-checkout-template::label-wrapper","wpp_feps_label_wrapper"); ?>">
-          <label><span class="<?php wpp_css("feps-checkout-template::the_title","the_title"); ?>"><?php echo apply_filters('wpi_spc::terms_label', __('Agreement')); ?></span></label>
+          <label><span class="<?php wpp_css("feps-checkout-template::the_title","the_title"); ?>"><?php echo apply_filters('wpi_spc::terms_label', __('Agreement', 'wpp')); ?></span></label>
         </div>
         <div class="<?php wpp_css("feps-checkout-template::input-wrapper","wpp_feps_input_wrapper"); ?>">
           <div  class="<?php wpp_css("feps-checkout-template::input-content","wpp_feps_input_content wpi_checkout_input_content"); ?> wpi_checkout_row_terms wpi_checkout_row">
