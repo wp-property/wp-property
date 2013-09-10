@@ -54,6 +54,9 @@ include_once WPP_Path . 'default_api.php';
 /** Loads general functions used by WP-Property */
 include_once WPP_Path . 'core/class_functions.php';
 
+/** Loads Admin Tools feature */
+include_once WPP_Path . 'core/class_admin_tools.php';
+
 /** Loads export functionality */
 include_once WPP_Path . 'core/class_property_export.php';
 
