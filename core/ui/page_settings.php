@@ -588,7 +588,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
               <option value="." <?php selected( $wp_properties[ 'configuration' ][ 'thousands_sep' ], '.' ); ?>><?php _e( '. (period)', 'wpp' ); ?></option>
               <option value="," <?php selected( $wp_properties[ 'configuration' ][ 'thousands_sep' ], ',' ); ?>><?php _e( ', (comma)', 'wpp' ); ?></option>
              </select>
-             <span class="description"><?php _e( 'The character separating the 1 and the 5: $1<b>,</b>500' ); ?></span>
+             <span class="description"><?php _e( 'The character separating the 1 and the 5: $1<b>,</b>500', 'wpp' ); ?></span>
 
           </li>
 

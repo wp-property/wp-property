@@ -391,7 +391,7 @@ class WPP_List_Table extends WP_List_Table {
   function no_items() {
     //** DataTables expects a set number of columns */
     $result[ 0 ] = '';
-    $result[ 1 ] = __( 'Nothing found.' );
+    $result[ 1 ] = __( 'Nothing found.', 'wpp' );
 
     if ( count( $result ) < $this->_args[ 'iColumns' ] ) {
       $add_columns = ( $this->_args[ 'iColumns' ] - count( $result ) );
