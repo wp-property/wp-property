@@ -1328,14 +1328,16 @@ class WPP_Core {
     $defaults = apply_filters( 'shortcode_property_overview_allowed_args', $defaults, $atts );
 
     //** We add # to value which says that we don't want to use LIKE in SQL query for searching this value. */
-    if ( $atts[ 'strict_search' ] == 'true' ) {
-      foreach ( $atts as $key => $val ) {
-        if ( isset( $wp_properties[ 'property_stats' ][ $key ] ) && !key_exists( $key, $defaults ) && $key != 'property_type' ) {
-          if ( substr_count( $val, ',' ) || substr_count( $val, '&ndash;' ) || substr_count( $val, '--' ) ) {
-            continue;
-          }
-          $atts[ $key ] = '#' . $val . '#';
+    $required_strict_search = apply_filters( 'wpp::required_strict_search', array( 'wpp_agents' ) );
+    foreach ( $atts as $key => $val ) {
+      if ( ( ( $atts[ 'strict_search' ] == 'true' && isset( $wp_properties[ 'property_stats' ][ $key ] ) ) ||
+           in_array( $key, $required_strict_search ) ) &&
+           !key_exists( $key, $defaults ) && $key != 'property_type'
+      ) {
+        if ( substr_count( $val, ',' ) || substr_count( $val, '&ndash;' ) || substr_count( $val, '--' ) ) {
+          continue;
         }
+        $atts[ $key ] = '#' . $val . '#';
       }
     }
 
