@@ -953,7 +953,7 @@ if ( !function_exists( 'draw_stats' ) ):
           continue;
         }
         if ( !empty( $property->$k ) ) {
-          $property_stats[ $k ] = $property->$k;
+          $property_stats[ $v ] = $property->$k;
         }
       }
     } else {
