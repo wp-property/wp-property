@@ -130,7 +130,7 @@ class WPP_List_Table extends WP_List_Table {
           "bProcessing": true,
           "bServerSide": true,
           "aoColumnDefs": [<?php echo implode(',', $this->aoColumnDefs); ?>],
-          "sAjaxSource": ajaxurl + '?&action=<?php echo $this->_args['ajax_action']; ?>',
+          "sAjaxSource": wpp.instance.ajax_url + '?&action=<?php echo $this->_args['ajax_action']; ?>',
           "fnServerData": function ( sSource, aoData, fnCallback ) {
             aoData.push( {
               name: 'wpp_filter_vars',

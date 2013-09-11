@@ -103,7 +103,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     // Check plugin updates
     jQuery( "#wpp_ajax_check_plugin_updates" ).click( function () {
       jQuery( '.plugin_status' ).remove();
-      jQuery.post( ajaxurl, {
+      jQuery.post( wpp.instance.ajax_url, {
         action: 'wpp_ajax_check_plugin_updates'
       }, function ( data ) {
         message = "<div class='plugin_status updated fade'><p>" + data + "</p></div>";
@@ -114,7 +114,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     /** Clear Cache */
     jQuery( "#wpp_clear_cache" ).click( function () {
       jQuery( '.clear_cache_status' ).remove();
-      jQuery.post( ajaxurl, {
+      jQuery.post( wpp.instance.ajax_url, {
         action: 'wpp_ajax_clear_cache'
       }, function ( data ) {
         message = "<div class='clear_cache_status updated fade'><p>" + data + "</p></div>";
@@ -129,7 +129,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       jQuery( this ).attr( 'disabled', true );
       jQuery( '.address_revalidation_status' ).remove();
 
-      jQuery.post( ajaxurl, {
+      jQuery.post( wpp.instance.ajax_url, {
         action: 'wpp_ajax_revalidate_all_addresses'
       }, function ( data ) {
 
@@ -151,7 +151,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
       jQuery( "#wpp_ajax_property_result" ).html( "" );
 
-      jQuery.post( ajaxurl, {
+      jQuery.post( wpp.instance.ajax_url, {
         action: 'wpp_ajax_property_query',
         property_id: property_id
       }, function ( data ) {
@@ -172,7 +172,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
       var property_type = jQuery( "#wpp_ajax_max_set_property_type_type" ).val();
 
-      jQuery.post( ajaxurl, {
+      jQuery.post( wpp.instance.ajax_url, {
         action: 'wpp_ajax_max_set_property_type',
         property_type: property_type
       }, function ( data ) {
@@ -189,7 +189,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
       jQuery( "#wpp_ajax_image_result" ).html( "" );
 
-      jQuery.post( ajaxurl, {
+      jQuery.post( wpp.instance.ajax_url, {
         action: 'wpp_ajax_image_query',
         image_id: image_id
       }, function ( data ) {
@@ -204,7 +204,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     /** Show property query */
     jQuery( "#wpp_check_premium_updates" ).click( function () {
       jQuery( "#wpp_plugins_ajax_response" ).hide();
-      jQuery.post( ajaxurl, {
+      jQuery.post( wpp.instance.ajax_url, {
         action: 'wpp_ajax_check_plugin_updates'
       }, function ( data ) {
         jQuery( "#wpp_plugins_ajax_response" ).show();

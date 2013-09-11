@@ -1685,7 +1685,7 @@ class WPP_F extends UD_API {
     extract( $args, EXTR_SKIP );
     $skip_existing = isset($skip_existing) ? $skip_existing : 'false';
     $return_geo_data = isset($return_geo_data) ? $return_geo_data : false;
-    
+
     $return = array();
 
     $geo_data = false;
@@ -2026,7 +2026,7 @@ class WPP_F extends UD_API {
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
     $id = isset($id) ? $id : 'wpp_property_type';
     $selected = isset($selected) ? $selected : '';
-    
+
     if ( !is_array( $wp_properties[ 'property_types' ] ) )
       return;
 
@@ -2073,7 +2073,7 @@ class WPP_F extends UD_API {
 
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
     $use_optgroups = isset($use_optgroups) ? $use_optgroups : 'false';
-    
+
     $property_stats = $wp_properties[ 'property_stats' ];
     $property_meta = $wp_properties[ 'property_meta' ];
 
@@ -2111,7 +2111,7 @@ class WPP_F extends UD_API {
     $id = isset($id) ? $id : 'wpp_attribute';
     $selected = isset($selected) ? $selected : 'false';
     $name = isset($name) ? $name : 'wpp_attribute';
-    
+
     $attributes = $wp_properties[ 'property_stats' ];
 
     if ( is_array( $extra_values ) ) {
@@ -2140,7 +2140,7 @@ class WPP_F extends UD_API {
     $return_array = isset($return_array) ? $return_array : 'false';
     $id = isset($id) ? $id : 'wpp_google_maps_localization';
     $selected = isset($selected) ? $selected : '';
-    
+
     $attributes = array(
       'en' => 'English',
       'ar' => 'Arabic',
@@ -2440,7 +2440,7 @@ class WPP_F extends UD_API {
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
     $blank_selection_label = isset($blank_selection_label) ? $blank_selection_label : ' - ';
     $selected = isset($selected) ? $selected : 'none';
-    
+
     if ( empty( $id ) && !empty( $name ) ) {
       $id = $name;
     }
@@ -2485,7 +2485,7 @@ class WPP_F extends UD_API {
 
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
     $return_all = isset($return_all) ? $return_all : 'none';
-        
+
     if ( !$type ) {
       return false;
     }
@@ -3738,7 +3738,7 @@ class WPP_F extends UD_API {
     $load_thumbnail = isset($load_thumbnail) ? $load_thumbnail : 'true';
     $allow_multiple_values = isset($allow_multiple_values) ? $allow_multiple_values : 'false';
     $load_parent = isset($load_parent) ? $load_parent : 'true';
-    
+
     $args = is_array( $args ) ? http_build_query( $args ) : (string) $args;
     if ( $return = wp_cache_get( $id . $args ) ) {
       return $return;
@@ -5196,7 +5196,7 @@ class WPP_F extends UD_API {
     $value = isset($value) ? $value : 'true';
     $label = isset($label) ? $label : false;
     $maxlength = isset($maxlength) ? $maxlength : false;
-    
+
     // Get rid of all brackets
     if ( strpos( "$name", '[' ) || strpos( "$name", ']' ) ) {
 
@@ -5312,7 +5312,7 @@ class WPP_F extends UD_API {
     $label = isset($label) ? $label : false;
     $maxlength = isset($maxlength) ? $maxlength : false;
     $return = isset($return) ? $return : '';
-    
+
     // Get rid of all brackets
     if ( strpos( "$name", '[' ) || strpos( "$name", ']' ) ) {
       $replace_variables = array( '][', ']', '[' );
@@ -5383,7 +5383,7 @@ class WPP_F extends UD_API {
     $readonly = isset($readonly) ? $readonly : false;
     $special = isset($special) ? $special : '';
     $title = isset($title) ? $title : '';
-    
+
     // Add prefix
     if ( $class ) {
       $class = "wpp_$class";

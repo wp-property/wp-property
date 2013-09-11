@@ -46,7 +46,7 @@ jQuery.extend( wpp = wpp || {}, { overview: {
   toggle_featured: function toggle_featured() {
     var post_id = jQuery( this ).attr( "id" ).replace( 'wpp_feature_', '' );
 
-    jQuery.post( ajaxurl, {
+    jQuery.post( wpp.instance.ajax_url, {
         post_id: post_id,
         action: 'wpp_make_featured',
         _wpnonce: jQuery( this ).attr( "nonce" )

@@ -58,7 +58,7 @@ if( typeof wpp.init_feps_form !== 'function' ) {
       this_form.prev().hide().removeClass( 'error' );
 
       var data = this_form.serialize();
-      jQuery.post( wpp.strings.ajaxurl, {
+      jQuery.post( wpp.instance.ajax_url, {
         action: "wpp_feps_save_property",
         data: data
       }, function( response ) {
@@ -93,7 +93,7 @@ if( typeof wpp.init_feps_form !== 'function' ) {
         return false;
       }
 
-      if ( wpp.strings.user_logged_in === 'true' ) {
+      if ( wpp.instance.user_logged_in === 'true' ) {
         submit_form( 0 );
         //jQuery( 'input.wpp_feps_submit_form', this_form ).hide();
         return false;
@@ -117,7 +117,7 @@ if( typeof wpp.init_feps_form !== 'function' ) {
         jQuery(".wpp_feps_ajax_message", this_form).text( wpp.strings.checking_credentials );
       }
 
-      jQuery.post( wpp.strings.ajaxurl, {
+      jQuery.post( wpp.instance.ajax_url, {
         action: "wpp_feps_email_lookup",
         user_email: user_email,
         user_password: user_password
