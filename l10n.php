@@ -16,6 +16,9 @@ $l10n = array(
   'featured'                => __( 'Featured', 'wpp' ),
   'add_to_featured'         => __( 'Add to Featured', 'wpp' ),
 
+  //** Admin Settings page */
+  'undefined_error'         => __( 'Undefined Error.', '' ),
+
   //** Ajaxupload */
   'uploading'               => __( 'Uploading', 'wpp' ),
   'drop_file'               => __( 'Drop files here to upload', 'wpp' ),

@@ -255,7 +255,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 </div>
 <?php endif; ?>
 
-<form method="post" action="<?php echo admin_url( 'edit.php?post_type=property&page=property_settings' ); ?>" enctype="multipart/form-data"/>
+<form id="wpp_settings_form" method="post" action="<?php echo admin_url( 'edit.php?post_type=property&page=property_settings' ); ?>" enctype="multipart/form-data"/>
 <?php wp_nonce_field( 'wpp_setting_save' ); ?>
 
 <div id="wpp_settings_tabs" class="wpp_tabs clearfix">
@@ -730,7 +730,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
       <div class="wpp_settings_block">
         <?php _e( "Restore Backup of WP-Property Configuration", 'wpp' ); ?>
-        : <input name="wpp_settings[settings_from_backup]" type="file"/>
+        : <input name="wpp_settings[settings_from_backup]" id="wpp_backup_file" type="file"/>
         <a href="<?php echo wp_nonce_url( "edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup", 'download-wpp-backup' ); ?>"><?php _e( 'Download Backup of Current WP-Property Configuration.', 'wpp' ); ?></a>
       </div>
 
