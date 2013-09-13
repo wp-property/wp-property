@@ -22,4 +22,4 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
 }}});
 
 // Initialize Overview.
-jQuery( document ).ready( wpp.settings.ready );
+jQuery( document ).ready( wpp.ui.settings.ready );

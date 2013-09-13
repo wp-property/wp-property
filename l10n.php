@@ -43,7 +43,7 @@ $l10n = array(
     'all'                   => __( 'All', 'wpp' ),
   ),
 
-  // XML Importer Strings. e.g. wpp.strings.xmli.internal_server_error
+  //** XML Importer */
   'xmli' => array(
     'request_error' => __( 'Request error:', 'wpp' ),
     'evaluation_500_error' => __( 'The source evaluation resulted in an Internal Server Error!', 'wpp' ),
@@ -67,7 +67,13 @@ $l10n = array(
     'cannot_reload_source' => __( 'Cannot Load Source: Reload.', 'wpp' ),
     'internal_server_error' => __( 'Internal Server Error!.', 'wpp' ),
     'source_is_good' => __( 'Source Is Good. Reload.', 'wpp' )
-  )
+  ),
+
+  'feps' => array(
+    'unnamed_form' => __( 'Unnamed Form', 'wpp' ),
+    'form_could_not_be_removed_1' => __( 'Form could not be removed because of some server error.', 'wpp' ),
+    'form_could_not_be_removed_2' => __( 'Form could not be removed because form ID is undefined.', 'wpp' ),
+  ),
 
 );
 
