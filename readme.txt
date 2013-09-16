@@ -229,7 +229,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 
 = 1.38.3 =
 * Admin Tools functionality moved from premium features to core.
-* Fixed Yes/No values for checkbox type inputs.
+* Fixed Yes/No values for checkbox type inputs. 
 * Fixed the issue related to huge settings data ( when there are more than ~150 property attributes ) on settings saving ( max_input_vars ).
 * Fixed save_property action.
 * Fixed address validation.
