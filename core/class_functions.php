@@ -2550,8 +2550,6 @@ class WPP_F extends UD_API {
      * For example, user can set more than 150 property attributes where every attribute has own set of params.
      */
     $request = urldecode( $_REQUEST[ 'data' ] );
-    $data = array();
-    parse_str( $request, $data );
     $tokens = explode( "&", $request );
     $data = array();
     foreach ( $tokens as $token ) {
@@ -2565,7 +2563,7 @@ class WPP_F extends UD_API {
       'message' => '',
       'redirect' => admin_url( "edit.php?post_type=property&page=property_settings&message=updated" )
     );
-    
+
     try {
       if ( empty( $data[ 'wpp_settings' ] ) || !wp_verify_nonce( $data[ '_wpnonce' ], 'wpp_setting_save' ) ) {
         throw new Exception( __( 'Request can not be verified.', 'wpp' ) );
