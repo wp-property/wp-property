@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.1</em>
+            <em>API Docs for: 1.38.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -46,6 +46,8 @@
                 <li><a href="../classes/wpp.overview.html">wpp.overview</a></li>
             
                 <li><a href="../classes/wpp.xmli.html">wpp.xmli</a></li>
+            
+                <li><a href="../classes/WPP_RETS.html">WPP_RETS</a></li>
             
                 <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
             
@@ -95,12 +97,13 @@
 &lt;?php
 /**
  * This file holds the functionality that allows us to export our properties to an XML feed
+ *
  * @since 1.4.2
  */
 /** First we need to add our appropriate actions */
-add_action(&#x27;wpp_settings_help_tab&#x27;, array(&#x27;wpi_property_export&#x27;, &#x27;help_tab&#x27;), 10, 4);
-add_action(&#x27;wp_ajax_wpp_export_properties&#x27;, array(&#x27;wpi_property_export&#x27;, &#x27;wpp_export_properties&#x27;));
-add_action(&#x27;wp_ajax_nopriv_wpp_export_properties&#x27;, array(&#x27;wpi_property_export&#x27;, &#x27;wpp_export_properties&#x27;));
+add_action( &#x27;wpp_settings_help_tab&#x27;, array( &#x27;WPP_Export&#x27;, &#x27;help_tab&#x27; ), 10, 4 );
+add_action( &#x27;wp_ajax_wpp_export_properties&#x27;, array( &#x27;WPP_Export&#x27;, &#x27;wpp_export_properties&#x27; ) );
+add_action( &#x27;wp_ajax_nopriv_wpp_export_properties&#x27;, array( &#x27;WPP_Export&#x27;, &#x27;wpp_export_properties&#x27; ) );
 
 /**
  * This is the actual object which peforms all of the functionality
@@ -109,196 +112,267 @@ add_action(&#x27;wp_ajax_nopriv_wpp_export_properties&#x27;, array(&#x27;wpi_pro
  * @todo: Featured image is not being imported. Should be able to take from feed.
  *
  */
-class wpi_property_export {
+class WPP_Export {
 
   /**
    * This function shows help stuff on the properties settings help tab
    */
   function help_tab() {
-    $export_url = wpi_property_export::get_property_export_url();
+    $export_url = WPP_Export::get_property_export_url();
 
-    if (!$export_url) {
+    if ( !$export_url ) {
       return;
     }
 
     $export_url = $export_url . &#x27;&amp;limit=10&amp;format=json&#x27;;
     ?&gt;
     &lt;div class=&quot;wpp_settings_block&quot;&gt;
-      &lt;label for=&quot;wpp_export_url&quot;&gt;&lt;?php _e(&#x27;Feed URL:&#x27;, &#x27;wpp&#x27;); ?&gt;&lt;/label&gt;
-      &lt;input id=&quot;wpp_export_url&quot; type=&quot;text&quot; style=&quot;width: 70%&quot; readonly=&quot;true&quot; value=&quot;&lt;?php echo esc_attr($export_url); ?&gt;&quot; /&gt;
-      &lt;a class=&quot;button&quot; href=&quot;&lt;?php echo $export_url; ?&gt;&quot;&gt;&lt;?php _e(&#x27;Open&#x27;, &#x27;wpp&#x27;); ?&gt;&lt;/a&gt;
-      &lt;br /&gt;&lt;br /&gt;
-      &lt;?php _e(&#x27;You may append the export URL with the following arguments:&#x27;, &#x27;wpp&#x27;); ?&gt;
+      &lt;label for=&quot;wpp_export_url&quot;&gt;&lt;?php _e( &#x27;Feed URL:&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/label&gt;
+      &lt;input id=&quot;wpp_export_url&quot; type=&quot;text&quot; style=&quot;width: 70%&quot; readonly=&quot;true&quot; value=&quot;&lt;?php echo esc_attr( $export_url ); ?&gt;&quot;/&gt;
+      &lt;a class=&quot;button&quot; href=&quot;&lt;?php echo $export_url; ?&gt;&quot;&gt;&lt;?php _e( &#x27;Open&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/a&gt;
+      &lt;br/&gt;&lt;br/&gt;
+      &lt;?php _e( &#x27;You may append the export URL with the following arguments:&#x27;, &#x27;wpp&#x27; ); ?&gt;
       &lt;ul style=&quot;margin: 15px 0 0 10px&quot;&gt;
         &lt;li&gt;&lt;b&gt;limit&lt;/b&gt; - number&lt;/li&gt;
         &lt;li&gt;&lt;b&gt;per_page&lt;/b&gt; - number&lt;/li&gt;
         &lt;li&gt;&lt;b&gt;starting_row&lt;/b&gt; - number&lt;/li&gt;
         &lt;li&gt;&lt;b&gt;sort_order&lt;/b&gt; - number&lt;/li&gt;
         &lt;li&gt;&lt;b&gt;sort_by&lt;/b&gt; - number&lt;/li&gt;
-        &lt;li&gt;&lt;b&gt;property_type&lt;/b&gt; - string - &lt;?php _e(&#x27;Slug for the property type.&#x27;, &#x27;wpp&#x27;); ?&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;b&gt;format&lt;/b&gt; - string - &quot;xml&quot; &lt;?php _e(&#x27;or&#x27;, &#x27;wpp&#x27;); ?&gt; &quot;json&quot;&lt;/li&gt;
+        &lt;li&gt;&lt;b&gt;property_type&lt;/b&gt; - string - &lt;?php _e( &#x27;Slug for the property type.&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;b&gt;format&lt;/b&gt; - string - &quot;xml&quot; &lt;?php _e( &#x27;or&#x27;, &#x27;wpp&#x27; ); ?&gt; &quot;json&quot;&lt;/li&gt;
       &lt;/ul&gt;
-    &lt;/li&gt;
-    &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;/ul&gt;
     &lt;/div&gt; &lt;?php
-    }
-
-    /**
-     * This function generates your unique site&#x27;s export feed
-     * @returns string URL to site&#x27;s export feed
-     */
-    function get_property_export_url() {
-      if ($apikey = WPP_F::get_api_key()) {
-        if (empty($apikey))
-          return __(&quot;There has been an error retreiving your API key.&quot;, &quot;wpp&quot;);
-        // We have the API key, we need to build the url
-        return admin_url(&#x27;admin-ajax.php&#x27;) . &quot;?action=wpp_export_properties&amp;api=&quot; . $apikey;
-      }
-      //return __(&quot;There has been an error retreiving your API key.&quot;, &quot;wpp&quot;);
-      return false;
-    }
-
-    /**
-     * This function takes all your properties and exports it as an XML feed
-     *
-     * @todo Improve efficiency of function, times out quickly for feeds of 500 properties. memory_limit and set_time_limit should be removed once efficiency is improved
-     *
-     */
-    function wpp_export_properties() {
-      global $wp_properties;
-
-      ini_set(&#x27;memory_limit&#x27;, -1);
-
-      $mtime = microtime();
-      $mtime = explode(&quot; &quot;, $mtime);
-      $mtime = $mtime[1] + $mtime[0];
-      $starttime = $mtime;
-
-      // Set a new path
-      set_include_path(get_include_path() . PATH_SEPARATOR . WPP_Path . &#x27;third-party/XML/&#x27;);
-      // Include our necessary libaries
-      require_once &#x27;Serializer.php&#x27;;
-      require_once &#x27;Unserializer.php&#x27;;
-
-      $api_key = WPP_F::get_api_key();
-
-      $taxonomies = $wp_properties[&#x27;taxonomies&#x27;];
-
-      // If the API key isn&#x27;t valid, we quit
-      if ($_REQUEST[&#x27;api&#x27;] != $api_key) {
-        die(__(&#x27;Invalid API key.&#x27;, &#x27;wpp&#x27;));
-      }
-
-      if (isset($_REQUEST[&#x27;limit&#x27;])) {
-        $per_page = $_REQUEST[&#x27;limit&#x27;];
-        $starting_row = 0;
-      }
-
-      if (isset($_REQUEST[&#x27;per_page&#x27;])) {
-        $per_page = $_REQUEST[&#x27;per_page&#x27;];
-      }
-
-      if (isset($_REQUEST[&#x27;starting_row&#x27;])) {
-        $starting_row = $_REQUEST[&#x27;starting_row&#x27;];
-      }
-
-      if (isset($_REQUEST[&#x27;property_type&#x27;])) {
-        $property_type = $_REQUEST[&#x27;property_type&#x27;];
-      } else {
-        $property_type = &#x27;all&#x27;;
-      }
-
-      if (strtolower($_REQUEST[&#x27;format&#x27;]) == &#x27;xml&#x27;) {
-        $xml_format = true;
-      } else {
-        $xml_format = false;
-      }
-
-      $wpp_query[&#x27;query&#x27;][&#x27;property_type&#x27;] = &#x27;listing&#x27;;
-
-      $wpp_query[&#x27;query&#x27;][&#x27;pagi&#x27;] = $starting_row . &#x27;--&#x27; . $per_page;
-      $wpp_query[&#x27;query&#x27;][&#x27;sort_by&#x27;] = ($_REQUEST[&#x27;sort_by&#x27;] ? $_REQUEST[&#x27;sort_by&#x27;] : &#x27;post_date&#x27; );
-      $wpp_query[&#x27;query&#x27;][&#x27;sort_order&#x27;] = ($_REQUEST[&#x27;sort_order&#x27;] ? $_REQUEST[&#x27;sort_order&#x27;] : &#x27;ASC&#x27; );
-      $wpp_query[&#x27;query&#x27;][&#x27;property_type&#x27;] = $property_type;
-
-      $wpp_query = WPP_F::get_properties($wpp_query[&#x27;query&#x27;], true);
-
-      $results = $wpp_query[&#x27;results&#x27;];
-
-      if (count($results) == 0) {
-        die(__(&#x27;No published properties.&#x27;, &#x27;wpp&#x27;));
-      }
-
-      if ($xml_format) {
-        header(&#x27;Content-type: text/xml&#x27;);
-        header(&#x27;Content-Disposition: inline; filename=&quot;wpp_xml_data.xml&quot;&#x27;);
-      } else {
-        header(&#x27;Content-type: application/json&#x27;);
-        header(&#x27;Content-Disposition: inline; filename=&quot;wpp_xml_data.json&quot;&#x27;);
-      }
-
-      header(&quot;Cache-Control: no-cache&quot;);
-      header(&quot;Pragma: no-cache&quot;);
-
-      foreach ($results as $count =&gt; $id) {
-
-        //** Reserve time on every iteration. */
-        set_time_limit(0);
-
-        $property = WPP_F::get_property($id, &quot;return_object=true&amp;load_parent=false&quot;);
-
-        if ($property-&gt;post_parent &amp;&amp; !$property-&gt;parent_gpid) {
-          $property-&gt;parent_gpid = WPP_F::maybe_set_gpid($property-&gt;post_parent);
-        }
-
-        // Unset the children, as we&#x27;ll get to those
-        unset(
-                $property-&gt;wpp_agents, $property-&gt;comment_count, $property-&gt;post_modified_gmt, $property-&gt;comment_status, $property-&gt;post_password, $property-&gt;children, $property-&gt;guid, $property-&gt;filter, $property-&gt;post_author, $property-&gt;permalink, $property-&gt;ping_status, $property-&gt;post_modified, $property-&gt;post_mime_type
-        );
-
-        // Set unique site ID
-        $property-&gt;wpp_unique_id = md5($api_key . $property-&gt;ID);
-
-        //** Get taxonomies */
-        if ($taxonomies) {
-          foreach ($taxonomies as $taxonomy_slug =&gt; $taxonomy_data) {
-            if ($these_terms = wp_get_object_terms($property-&gt;ID, $taxonomy_slug, array(&#x27;fields&#x27; =&gt; &#x27;names&#x27;))) {
-              $property-&gt;taxonomies-&gt;{$taxonomy_slug} = $these_terms;
-            }
-          }
-        }
-
-        $fixed_property = new stdClass();
-
-        foreach ($property as $meta_key =&gt; $meta_value) {
-
-          if (is_array($meta_value) || is_object($meta_value)) {
-            $fixed_property-&gt;$meta_key = $meta_value;
-            continue;
-          }
-
-          //** Maybe Unserialize */
-          $meta_value = maybe_unserialize($meta_value);
-
-          //$meta_value = htmlentities($meta_value);
-          $fixed_property-&gt;$meta_key = $meta_value;
-          //$fixed_property-&gt;$meta_key = &#x27;&lt;![CDATA[&#x27; .  ($meta_value) . &#x27;]]&gt;&#x27;;
-        }
-
-        $properties[$id] = $fixed_property;
-      }
-
-      $result = json_encode($properties);
-
-      if ($xml_format) {
-        $result = WPP_F::json_to_xml($result);
-      }
-
-
-      die($result);
-    }
-
   }
+
+  /**
+   * This function generates your unique site&#x27;s export feed
+   *
+   * @returns string URL to site&#x27;s export feed
+   */
+  function get_property_export_url() {
+    if ( $apikey = WPP_F::get_api_key() ) {
+      if ( empty( $apikey ) )
+        return __( &quot;There has been an error retreiving your API key.&quot;, &quot;wpp&quot; );
+      // We have the API key, we need to build the url
+      return admin_url( &#x27;admin-ajax.php&#x27; ) . &quot;?action=wpp_export_properties&amp;api=&quot; . $apikey;
+    }
+    //return __(&quot;There has been an error retreiving your API key.&quot;, &quot;wpp&quot;);
+    return false;
+  }
+
+  /**
+   * Converts arrays, objects, strings to XML object
+   *
+   * @see class XML_Serializer
+   *
+   * @param array $data
+   * @param array $options Serializer options
+   *
+   * @author peshkov@UD
+   */
+  function convert_to_xml( $data, $options ) {
+
+    //** An array of serializer options */
+    $options = wp_parse_args( $options, array(
+      &#x27;indent&#x27; =&gt; &quot; &quot;,
+      &#x27;linebreak&#x27; =&gt; &quot;\n&quot;,
+      &#x27;addDecl&#x27; =&gt; true,
+      &#x27;encoding&#x27; =&gt; &#x27;ISO-8859-1&#x27;,
+      &#x27;rootName&#x27; =&gt; &#x27;objects&#x27;,
+      &#x27;defaultTagName&#x27; =&gt; &#x27;object&#x27;,
+      &#x27;mode&#x27; =&gt; false
+    ) );
+
+    try {
+
+      if ( !class_exists( &#x27;XML_Serializer&#x27; ) ) {
+        set_include_path( get_include_path() . PATH_SEPARATOR . WPP_Path . &#x27;third-party/XML/&#x27; );
+        @require_once &#x27;Serializer.php&#x27;;
+      }
+
+      //** If class still doesn&#x27;t exist, for whatever reason, we fail */
+      if ( !class_exists( &#x27;XML_Serializer&#x27; ) ) {
+        throw new Exception( __( &#x27;XML_Serializer could not be loaded.&#x27;, &#x27;pea&#x27; ) );
+      }
+
+      $Serializer = &amp; new XML_Serializer( $options );
+
+      $status = $Serializer-&gt;serialize( $data );
+
+      if ( PEAR::isError( $status ) ) {
+        throw new Exception( __( &#x27;Could not convert data to XML.&#x27;, &#x27;pea&#x27; ) );
+      }
+
+      $data = $Serializer-&gt;getSerializedData();
+
+    } catch ( Exception $e ) {
+      return new WP_Error( &#x27;error&#x27;, $e-&gt;getMessage() );
+    }
+
+    return $data;
+  }
+
+  /**
+   * This function takes all your properties and exports it as an XML feed
+   *
+   * @todo Improve efficiency of function, times out quickly for feeds of 500 properties. memory_limit and set_time_limit should be removed once efficiency is improved
+   *
+   */
+  function wpp_export_properties() {
+    global $wp_properties;
+
+    ini_set( &#x27;memory_limit&#x27;, -1 );
+
+    $mtime = microtime();
+    $mtime = explode( &quot; &quot;, $mtime );
+    $mtime = $mtime[ 1 ] + $mtime[ 0 ];
+    $starttime = $mtime;
+
+    // Set a new path
+    set_include_path( get_include_path() . PATH_SEPARATOR . WPP_Path . &#x27;third-party/XML/&#x27; );
+    // Include our necessary libaries
+    require_once &#x27;Serializer.php&#x27;;
+    require_once &#x27;Unserializer.php&#x27;;
+
+    $api_key = WPP_F::get_api_key();
+
+    $taxonomies = $wp_properties[ &#x27;taxonomies&#x27; ];
+
+    // If the API key isn&#x27;t valid, we quit
+    if ( !isset( $_REQUEST[ &#x27;api&#x27; ] ) || $_REQUEST[ &#x27;api&#x27; ] != $api_key ) {
+      die( __( &#x27;Invalid API key.&#x27;, &#x27;wpp&#x27; ) );
+    }
+
+    if ( isset( $_REQUEST[ &#x27;limit&#x27; ] ) ) {
+      $per_page = $_REQUEST[ &#x27;limit&#x27; ];
+      $starting_row = 0;
+    }
+
+    if ( isset( $_REQUEST[ &#x27;per_page&#x27; ] ) ) {
+      $per_page = $_REQUEST[ &#x27;per_page&#x27; ];
+    }
+
+    if ( isset( $_REQUEST[ &#x27;starting_row&#x27; ] ) ) {
+      $starting_row = $_REQUEST[ &#x27;starting_row&#x27; ];
+    }
+
+    if ( isset( $_REQUEST[ &#x27;property_type&#x27; ] ) ) {
+      $property_type = $_REQUEST[ &#x27;property_type&#x27; ];
+    } else {
+      $property_type = &#x27;all&#x27;;
+    }
+
+    if ( strtolower( $_REQUEST[ &#x27;format&#x27; ] ) == &#x27;xml&#x27; ) {
+      $xml_format = true;
+    } else {
+      $xml_format = false;
+    }
+
+    $wpp_query[ &#x27;query&#x27; ][ &#x27;pagi&#x27; ] = $starting_row . &#x27;--&#x27; . $per_page;
+    $wpp_query[ &#x27;query&#x27; ][ &#x27;sort_by&#x27; ] = ( $_REQUEST[ &#x27;sort_by&#x27; ] ? $_REQUEST[ &#x27;sort_by&#x27; ] : &#x27;post_date&#x27; );
+    $wpp_query[ &#x27;query&#x27; ][ &#x27;sort_order&#x27; ] = ( $_REQUEST[ &#x27;sort_order&#x27; ] ? $_REQUEST[ &#x27;sort_order&#x27; ] : &#x27;ASC&#x27; );
+    $wpp_query[ &#x27;query&#x27; ][ &#x27;property_type&#x27; ] = $property_type;
+
+    $wpp_query[ &#x27;query&#x27; ] = apply_filters( &#x27;wpp::xml::export::query&#x27;, $wpp_query[ &#x27;query&#x27; ] );
+
+    $wpp_query = WPP_F::get_properties( $wpp_query[ &#x27;query&#x27; ], true );
+
+    $results = $wpp_query[ &#x27;results&#x27; ];
+
+    if ( count( $results ) == 0 ) {
+      die( __( &#x27;No published properties.&#x27;, &#x27;wpp&#x27; ) );
+    }
+
+    if ( $xml_format ) {
+
+    } else {
+
+    }
+
+    $properties = array();
+
+    foreach ( $results as $count =&gt; $id ) {
+
+      //** Reserve time on every iteration. */
+      set_time_limit( 0 );
+
+      $property = WPP_F::get_property( $id, &quot;return_object=false&amp;load_parent=false&amp;get_children=false&quot; );
+
+      if ( $property[ &#x27;post_parent&#x27; ] &amp;&amp; !$property[ &#x27;parent_gpid&#x27; ] ) {
+        $property[ &#x27;parent_gpid&#x27; ] = WPP_F::maybe_set_gpid( $property[ &#x27;post_parent&#x27; ] );
+      }
+
+      // Unset unnecessary data
+      unset(
+      $property[ &#x27;comment_count&#x27; ],
+      $property[ &#x27;post_modified_gmt&#x27; ],
+      $property[ &#x27;comment_status&#x27; ],
+      $property[ &#x27;post_password&#x27; ],
+      $property[ &#x27;guid&#x27; ],
+      $property[ &#x27;filter&#x27; ],
+      $property[ &#x27;post_author&#x27; ],
+      $property[ &#x27;permalink&#x27; ],
+      $property[ &#x27;ping_status&#x27; ],
+      $property[ &#x27;post_modified&#x27; ],
+      $property[ &#x27;post_mime_type&#x27; ]
+      );
+
+      // Set unique site ID
+      $property[ &#x27;wpp_unique_id&#x27; ] = md5( $api_key . $property[ &#x27;ID&#x27; ] );
+
+      //** Get taxonomies */
+      if ( $taxonomies ) {
+        foreach ( $taxonomies as $taxonomy_slug =&gt; $taxonomy_data ) {
+          if ( $these_terms = wp_get_object_terms( $property[ &#x27;ID&#x27; ], $taxonomy_slug, array( &#x27;fields&#x27; =&gt; &#x27;names&#x27; ) ) ) {
+            $property[ &#x27;taxonomies&#x27; ][ $taxonomy_slug ] = $these_terms;
+          }
+        }
+      }
+
+      $fixed_property = array();
+      foreach ( $property as $meta_key =&gt; $meta_value ) {
+        // Maybe Unserialize
+        $meta_value = maybe_unserialize( $meta_value );
+        if ( is_array( $meta_value ) || is_object( $meta_value ) ) {
+          $fixed_property[ $meta_key ] = $meta_value;
+          continue;
+        }
+        $fixed_property[ $meta_key ] = $meta_value;
+      }
+      $properties[ $id ] = $fixed_property;
+
+    }
+
+    $properties = apply_filters( &#x27;wpp::xml::export::data&#x27;, $properties );
+
+    if ( $xml_format ) {
+      $result = self::convert_to_xml( $properties, apply_filters( &#x27;wpp::xml::export::serializer_options&#x27;, array() ) );
+
+      /** Deprecated. peshkov@UD
+      $result = json_encode( $properties );
+      $result = WPP_F::json_to_xml( $result, apply_filters( &#x27;wpp::xml::export::serializer_options&#x27;, array() ) );
+      //*/
+
+      if ( !$result ) {
+        die( __( &#x27;There is an Error on trying to create XML feed.&#x27;, &#x27;wpp&#x27; ) );
+      }
+      header( &#x27;Content-type: text/xml&#x27; );
+      header( &#x27;Content-Disposition: inline; filename=&quot;wpp_xml_data.xml&quot;&#x27; );
+    } else {
+      $result = json_encode( $properties );
+      header( &#x27;Content-type: application/json&#x27; );
+      header( &#x27;Content-Disposition: inline; filename=&quot;wpp_xml_data.json&quot;&#x27; );
+    }
+
+    header( &quot;Cache-Control: no-cache&quot; );
+    header( &quot;Pragma: no-cache&quot; );
+
+    die( $result );
+  }
+
+}
     </pre>
 </div>
 

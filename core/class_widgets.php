@@ -45,7 +45,10 @@ class Property_Attributes_Widget extends WP_Widget {
    * @since 1.31.0
    */
   function widget( $args, $instance ) {
-
+    $before_widget = '';
+    $before_title = '';
+    $after_title = '';
+    $after_widget = '';
     extract( $args );
 
     if ( empty( $instance ) ) {
@@ -201,6 +204,10 @@ class OtherPropertiesWidget extends WP_Widget {
   /** @see WP_Widget::widget */
   function widget( $args, $instance ) {
     global $post, $wp_properties, $property;
+    $before_widget = '';
+    $before_title = '';
+    $after_title = '';
+    $after_widget = '';
     extract( $args );
 
     $title = apply_filters( 'widget_title', $instance[ 'title' ] );
@@ -478,7 +485,10 @@ class ChildPropertiesWidget extends WP_Widget {
    */
   function widget( $args, $instance ) {
     global $post, $wp_properties;
-
+    $before_widget = '';
+    $before_title = '';
+    $after_title = '';
+    $after_widget = '';
     extract( $args );
 
     $title = apply_filters( 'widget_title', $instance[ 'title' ] );
@@ -714,6 +724,10 @@ class FeaturedPropertiesWidget extends WP_Widget {
    *
    */
   function widget( $args, $instance ) {
+    $before_widget = '';
+    $before_title = '';
+    $after_title = '';
+    $after_widget = '';
     global $wp_properties;
     extract( $args );
     $title = apply_filters( 'widget_title', $instance[ 'title' ] );
@@ -994,7 +1008,10 @@ class LatestPropertiesWidget extends WP_Widget {
    */
   function widget( $args, $instance ) {
     global $wp_properties;
-
+    $before_widget = '';
+    $before_title = '';
+    $after_title = '';
+    $after_widget = '';
     extract( $args );
 
     $title = apply_filters( 'widget_title', $instance[ 'title' ] );
@@ -1238,7 +1255,11 @@ class SearchPropertiesWidget extends WP_Widget {
   function widget( $args, $instance ) {
 
     global $wp_properties;
-
+    $before_widget = '';
+    $before_title = '';
+    $after_title = '';
+    $after_widget = '';
+    $widget_id = '';
     extract( $args );
     $title = apply_filters( 'widget_title', $instance[ 'title' ] );
 
@@ -1649,6 +1670,10 @@ class GalleryPropertiesWidget extends WP_Widget {
   /** @see WP_Widget::widget */
   function widget( $args, $instance ) {
     global $wp_properties, $post, $property;
+    $before_widget = '';
+    $before_title = '';
+    $after_title = '';
+    $after_widget = '';
     extract( $args );
 
     $title = apply_filters( 'widget_title', $instance[ 'title' ] );

@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.1</em>
+            <em>API Docs for: 1.38.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -46,6 +46,8 @@
                 <li><a href="../classes/wpp.overview.html">wpp.overview</a></li>
             
                 <li><a href="../classes/wpp.xmli.html">wpp.xmli</a></li>
+            
+                <li><a href="../classes/WPP_RETS.html">WPP_RETS</a></li>
             
                 <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
             
@@ -128,7 +130,7 @@ class WPP_List_Table extends WP_List_Table {
       &#x27;table_scope&#x27; =&gt; &#x27;&#x27;, // Should be set in child class!
       &#x27;singular&#x27; =&gt; &#x27;&#x27;,
       &#x27;ajax&#x27; =&gt; false
-    ));
+    ) );
 
     $this-&gt;_args = $args;
 
@@ -181,7 +183,7 @@ class WPP_List_Table extends WP_List_Table {
     &lt;p class=&quot;search-box&quot;&gt;
       &lt;label class=&quot;screen-reader-text&quot; for=&quot;&lt;?php echo $input_id ?&gt;&quot;&gt;&lt;?php echo $text; ?&gt;:&lt;/label&gt;
       &lt;input type=&quot;text&quot; id=&quot;&lt;?php echo $input_id ?&gt;&quot; name=&quot;wpp_search[post_title]&quot;
-             value=&quot;&lt;?php _admin_search_query(); ?&gt;&quot;/&gt;
+        value=&quot;&lt;?php _admin_search_query(); ?&gt;&quot;/&gt;
       &lt;?php /* submit_button( $text, &#x27;button&#x27;, false, false, array(&#x27;id&#x27; =&gt; &#x27;search-submit&#x27;)); */ ?&gt;
     &lt;/p&gt;
   &lt;?php
@@ -299,14 +301,14 @@ class WPP_List_Table extends WP_List_Table {
 
     $hidden = get_hidden_columns( $screen );
 
-    $_sortable = apply_filters( &quot;manage_{$screen-&gt;id}_sortable_columns&quot;, $this-&gt;get_sortable_columns());
+    $_sortable = apply_filters( &quot;manage_{$screen-&gt;id}_sortable_columns&quot;, $this-&gt;get_sortable_columns() );
 
     $sortable = array();
     foreach ( $_sortable as $id =&gt; $data ) {
       if ( empty( $data ) )
         continue;
 
-      $data = (array)$data;
+      $data = (array) $data;
       if ( !isset( $data[ 1 ] ) )
         $data[ 1 ] = false;
 
@@ -394,7 +396,7 @@ class WPP_List_Table extends WP_List_Table {
       FROM $wpdb-&gt;posts
       WHERE post_type = %s
       ORDER BY post_date DESC
-    &quot;, $post_type ));
+    &quot;, $post_type ) );
 
     $month_count = count( $months );
 
@@ -402,7 +404,7 @@ class WPP_List_Table extends WP_List_Table {
       return false;
     }
 
-    $m = isset( $_GET[ &#x27;m&#x27; ] ) ? (int)$_GET[ &#x27;m&#x27; ] : 0;
+    $m = isset( $_GET[ &#x27;m&#x27; ] ) ? (int) $_GET[ &#x27;m&#x27; ] : 0;
 
     ob_start();
 
@@ -456,8 +458,8 @@ class WPP_List_Table extends WP_List_Table {
     $this-&gt;display_tablenav( &#x27;top&#x27;, $args );
     ?&gt;
     &lt;div class=&quot;wpp_above_overview_table&quot;&gt;&lt;/div&gt;
-    &lt;table id=&quot;wp-list-table&quot; class=&quot;wp-list-table &lt;?php echo implode( &#x27; &#x27;, $this-&gt;get_table_classes()); ?&gt;&quot;
-           cellspacing=&quot;0&quot;&gt;
+    &lt;table id=&quot;wp-list-table&quot; class=&quot;wp-list-table &lt;?php echo implode( &#x27; &#x27;, $this-&gt;get_table_classes() ); ?&gt;&quot;
+      cellspacing=&quot;0&quot;&gt;
       &lt;thead&gt;
       &lt;tr&gt;
         &lt;?php $this-&gt;print_column_headers(); ?&gt;
@@ -488,7 +490,7 @@ class WPP_List_Table extends WP_List_Table {
     $result[ 1 ] = __( &#x27;Nothing found.&#x27; );
 
     if ( count( $result ) &lt; $this-&gt;_args[ &#x27;iColumns&#x27; ] ) {
-      $add_columns = ( $this-&gt;_args[ &#x27;iColumns&#x27; ] - count( $result ));
+      $add_columns = ( $this-&gt;_args[ &#x27;iColumns&#x27; ] - count( $result ) );
       //** Add some blank rows to not break json result array */
       $i = 1;
       while ( $i &lt;= $add_columns ) {
@@ -506,7 +508,7 @@ class WPP_List_Table extends WP_List_Table {
   function single_cell( $full_column_name, $object, $object_id ) {
     global $wpi;
 
-    $object = (array)$object;
+    $object = (array) $object;
 
     $column_name = str_replace( &#x27;wpp_&#x27;, &#x27;&#x27;, $full_column_name );
 

@@ -3,8 +3,8 @@ Contributors:  usability_dynamics, Anton Korotkoff, andypotanin
 Donate link: http://usabilitydynamics.com/products/wp-property/
 Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 3.4.2
-Tested up to: 3.6
-Stable tag: 1.38.2
+Tested up to: 3.6.1
+Stable tag: 1.38.3
 
 
 == Description ==
@@ -181,7 +181,7 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 * Changed property export function to export in JSON format.
 
 = 1.20.0 =
-* Major changes to the way pagination is handled.  Pagination is no longer loaded from a file but from wpi_draw_pagination().
+* Major changes to the way pagination is handled.  Pagination is no longer loaded from a file but from wpp_draw_pagination().
 
 = 1.17.2 =
 * draw_property_search_form() has been changed where arguments passed to it are in array format.
@@ -226,6 +226,18 @@ We are moving out of beta stages, but you may still experience bugs now and then
 We are still in early stages, so updates will be coming out routinely.  Please do not hesitate to send us feedback and suggestions.
 
 == Changelog ==
+
+= 1.38.3 =
+* Admin Tools functionality moved from premium features to core.
+* Fixed Yes/No values for checkbox type inputs. 
+* Fixed the issue related to huge settings data ( when there are more than ~150 property attributes ) on settings saving ( max_input_vars ).
+* Fixed save_property action.
+* Fixed address validation.
+* Fixed property overview search by wpp_agents and added ability to add custom strict search using filter 'wpp::required_strict_search'.
+* Fixed meta fields labels on single property page.
+* Fixed different issues related to XML Importer premium feature.
+* Fixed data reset on adding new form for Front End Property Submissions (FEPS) premium feature.
+* Cleaned up php and javascript code.
 
 = 1.38.2 =
 * General code clean-up of PHP and JavaScript libraries, core and templates files.
@@ -575,7 +587,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 = 1.20.0 =
 * Redesigned pagination and sorting for front-end.
 * New back-end UI for dynamic property filtering.
-* Added new template functions such as have_properties(), returned_properties() and wpi_draw_pagination().
+* Added new template functions such as have_properties(), returned_properties() and wpp_draw_pagination().
 * Attributes marked as numeric or currency filter our bad characters as you type on the property editing screen.
 * Fixed issue with price ranges in drop-downs and in property overview displaying incorrectly.
 * draw_stats("show_true_as_image=true") will render a checkbox on front-end for attributes with value of "true".

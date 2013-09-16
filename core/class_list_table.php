@@ -34,7 +34,7 @@ class WPP_List_Table extends WP_List_Table {
       'table_scope' => '', // Should be set in child class!
       'singular' => '',
       'ajax' => false
-    ));
+    ) );
 
     $this->_args = $args;
 
@@ -87,7 +87,7 @@ class WPP_List_Table extends WP_List_Table {
     <p class="search-box">
       <label class="screen-reader-text" for="<?php echo $input_id ?>"><?php echo $text; ?>:</label>
       <input type="text" id="<?php echo $input_id ?>" name="wpp_search[post_title]"
-             value="<?php _admin_search_query(); ?>"/>
+        value="<?php _admin_search_query(); ?>"/>
       <?php /* submit_button( $text, 'button', false, false, array('id' => 'search-submit')); */ ?>
     </p>
   <?php
@@ -130,7 +130,7 @@ class WPP_List_Table extends WP_List_Table {
           "bProcessing": true,
           "bServerSide": true,
           "aoColumnDefs": [<?php echo implode(',', $this->aoColumnDefs); ?>],
-          "sAjaxSource": ajaxurl + '?&action=<?php echo $this->_args['ajax_action']; ?>',
+          "sAjaxSource": wpp.instance.ajax_url + '?&action=<?php echo $this->_args['ajax_action']; ?>',
           "fnServerData": function ( sSource, aoData, fnCallback ) {
             aoData.push( {
               name: 'wpp_filter_vars',
@@ -205,14 +205,14 @@ class WPP_List_Table extends WP_List_Table {
 
     $hidden = get_hidden_columns( $screen );
 
-    $_sortable = apply_filters( "manage_{$screen->id}_sortable_columns", $this->get_sortable_columns());
+    $_sortable = apply_filters( "manage_{$screen->id}_sortable_columns", $this->get_sortable_columns() );
 
     $sortable = array();
     foreach ( $_sortable as $id => $data ) {
       if ( empty( $data ) )
         continue;
 
-      $data = (array)$data;
+      $data = (array) $data;
       if ( !isset( $data[ 1 ] ) )
         $data[ 1 ] = false;
 
@@ -300,7 +300,7 @@ class WPP_List_Table extends WP_List_Table {
       FROM $wpdb->posts
       WHERE post_type = %s
       ORDER BY post_date DESC
-    ", $post_type ));
+    ", $post_type ) );
 
     $month_count = count( $months );
 
@@ -308,7 +308,7 @@ class WPP_List_Table extends WP_List_Table {
       return false;
     }
 
-    $m = isset( $_GET[ 'm' ] ) ? (int)$_GET[ 'm' ] : 0;
+    $m = isset( $_GET[ 'm' ] ) ? (int) $_GET[ 'm' ] : 0;
 
     ob_start();
 
@@ -362,8 +362,8 @@ class WPP_List_Table extends WP_List_Table {
     $this->display_tablenav( 'top', $args );
     ?>
     <div class="wpp_above_overview_table"></div>
-    <table id="wp-list-table" class="wp-list-table <?php echo implode( ' ', $this->get_table_classes()); ?>"
-           cellspacing="0">
+    <table id="wp-list-table" class="wp-list-table <?php echo implode( ' ', $this->get_table_classes() ); ?>"
+      cellspacing="0">
       <thead>
       <tr>
         <?php $this->print_column_headers(); ?>
@@ -394,7 +394,7 @@ class WPP_List_Table extends WP_List_Table {
     $result[ 1 ] = __( 'Nothing found.' );
 
     if ( count( $result ) < $this->_args[ 'iColumns' ] ) {
-      $add_columns = ( $this->_args[ 'iColumns' ] - count( $result ));
+      $add_columns = ( $this->_args[ 'iColumns' ] - count( $result ) );
       //** Add some blank rows to not break json result array */
       $i = 1;
       while ( $i <= $add_columns ) {
@@ -412,7 +412,7 @@ class WPP_List_Table extends WP_List_Table {
   function single_cell( $full_column_name, $object, $object_id ) {
     global $wpi;
 
-    $object = (array)$object;
+    $object = (array) $object;
 
     $column_name = str_replace( 'wpp_', '', $full_column_name );
 
