@@ -11,6 +11,7 @@
  */
 class WPP_Core {
 
+
   /**
    * Highest-level function initialized on plugin load
    *
@@ -21,7 +22,7 @@ class WPP_Core {
     global $wp_properties;
 
     //** Determine if memory limit is low and increase it */
-    if ( (int)ini_get( 'memory_limit' ) < 128 ) {
+    if ( (int) ini_get( 'memory_limit' ) < 128 ) {
       ini_set( 'memory_limit', '128M' );
     }
 
@@ -53,6 +54,7 @@ class WPP_Core {
     add_filter( 'wpp_settings_save', array( 'WPP_Core', 'check_wp_settings_data' ), 0, 2 );
 
   }
+
 
   /**
    * Called on init, as early as possible.
@@ -88,6 +90,7 @@ class WPP_Core {
 
   }
 
+
   /**
    * Secondary WPP Initialization ran towards the end of init()
    *
@@ -109,6 +112,7 @@ class WPP_Core {
     add_action( 'wp_ajax_wpp_ajax_clear_cache', create_function( "", '  echo WPP_F::clear_cache(); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_revalidate_all_addresses', create_function( "", '  echo WPP_F::revalidate_all_addresses(); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_list_table', create_function( "", ' die(WPP_F::list_table());' ) );
+    add_action( 'wp_ajax_wpp_save_settings', create_function( "", ' die(WPP_F::save_settings());' ) );
 
     /** Ajax pagination for property_overview */
     add_action( "wp_ajax_wpp_property_overview_pagination", array( $this, "ajax_property_overview" ) );
@@ -135,7 +139,7 @@ class WPP_Core {
     add_action( 'save_post', array( $this, 'save_property' ) );
 
     //** Address revalidation @since 1.37.2 @author odokienko@UD */
-    add_action( 'save_property', create_function( '$post_id, $postdata, $geo_data', 'WPP_F::revalidate_address($post_id, array("post_data"=>$postdata, "old_geo_data"=>$geo_data)); ' ), 0, 3 );
+    add_action( 'save_property', create_function( '$post_id', 'WPP_F::revalidate_address($post_id);' ) );
 
     add_action( 'before_delete_post', array( 'WPP_F', 'before_delete_post' ) );
     add_filter( 'post_updated_messages', array( 'WPP_Core', 'property_updated_messages' ), 5 );
@@ -189,10 +193,11 @@ class WPP_Core {
     wp_register_script( 'wpp-jquery-colorpicker', WPP_URL . 'third-party/colorpicker/colorpicker.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-easing', WPP_URL . 'third-party/fancybox/jquery.easing-1.3.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
     wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'js/fileuploader.js', array( 'jquery', 'wpp-localization' ) );
-    wp_register_script( 'wp-property-admin-overview', WPP_URL . 'js/wp-property-admin-overview.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-admin-widgets', WPP_URL . 'js/wp-property-admin-widgets.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-backend-global', WPP_URL . 'js/wp-property-backend-global.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-global', WPP_URL . 'js/wp-property-global.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-admin-overview', WPP_URL . 'js/wpp.admin.overview.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-admin-widgets', WPP_URL . 'js/wpp.admin.widgets.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-admin-settings', WPP_URL . 'js/wpp.admin.settings.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-backend-global', WPP_URL . 'js/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-global', WPP_URL . 'js/wpp.global.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'jquery-cookie', WPP_URL . 'js/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
 
     if ( WPP_F::can_get_script( $scheme . '://maps.google.com/maps/api/js?sensor=true' ) ) {
@@ -212,7 +217,7 @@ class WPP_Core {
     wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'third-party/fancybox/jquery.fancybox-1.3.4.css' );
     wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'third-party/colorpicker/colorpicker.css' );
     wp_register_style( 'jquery-ui', WPP_URL . 'css/jquery-ui.css' );
-    wp_register_style( 'wpp-jquery-data-tables', WPP_URL . "third-party/dataTables/wpp-data-tables.css" );
+    wp_register_style( 'wpp-jquery-data-tables', WPP_URL . "css/wpp-data-tables.css" );
 
     /** Find and register stylesheet  */
     if ( file_exists( STYLESHEETPATH . '/wp-properties.css' ) ) {
@@ -265,7 +270,6 @@ class WPP_Core {
       add_shortcode( "{$wp_properties[ 'alternative_shortcodes' ]['property_overview']}", array( $this, 'shortcode_property_overview' ) );
     }
 
-
     //** Make Property Featured Via AJAX */
     if ( isset( $_REQUEST[ '_wpnonce' ] ) ) {
       if ( wp_verify_nonce( $_REQUEST[ '_wpnonce' ], "wpp_make_featured_" . $_REQUEST[ 'post_id' ] ) ) {
@@ -277,6 +281,7 @@ class WPP_Core {
     do_action( 'wpp_post_init' );
 
   }
+
 
   /**
    * Register metaboxes.
@@ -293,6 +298,7 @@ class WPP_Core {
     }
   }
 
+
   /**
    * Adds thumbnail feature to WP-Property pages
    *
@@ -305,10 +311,12 @@ class WPP_Core {
     add_theme_support( 'post-thumbnails' );
   }
 
+
   /**
    * Adds "Settings" link to the plugin overview page
    *
-   *
+
+   *  *
    * @since 0.60
    *
    */
@@ -320,6 +328,7 @@ class WPP_Core {
     }
     return $links;
   }
+
 
   /**
    * Can enqueue scripts on specific pages, and print content into head
@@ -338,6 +347,7 @@ class WPP_Core {
       case 'property_page_all_properties':
         wp_enqueue_script( 'wp-property-backend-global' );
         wp_enqueue_script( 'wp-property-admin-overview' );
+
       case 'property':
         wp_enqueue_script( 'wp-property-global' );
         //** Enabldes fancybox js, css and loads overview scripts */
@@ -347,55 +357,33 @@ class WPP_Core {
         wp_enqueue_script( 'wpp-jquery-data-tables' );
         wp_enqueue_style( 'wpp-jquery-fancybox-css' );
         wp_enqueue_style( 'wpp-jquery-data-tables' );
-
         //** Get width of overview table thumbnail, and set css */
         $thumbnail_attribs = WPP_F::image_sizes( $wp_properties[ 'configuration' ][ 'admin_ui' ][ 'overview_table_thumbnail_size' ] );
         $thumbnail_width = ( !empty( $thumbnail_attribs[ 'width' ] ) ? $thumbnail_attribs[ 'width' ] : false );
         if ( $thumbnail_width ) {
           ?>
           <style typ="text/css">
-            #wp-list-table.wp-list-table .column-thumbnail {
-              width: <?php echo $thumbnail_width + 20; ?>px;
-            }
-
-            #wp-list-table.wp-list-table td.column-thumbnail {
-              text-align: right;
-            }
-
-            #wp-list-table.wp-list-table .column-type {
-              width: 90px;
-            }
-
-            #wp-list-table.wp-list-table .column-menu_order {
-              width: 50px;
-            }
-
-            #wp-list-table.wp-list-table td.column-menu_order {
-              text-align: center;
-            }
-
-            #wp-list-table.wp-list-table .column-featured {
-              width: 100px;
-            }
-
-            #wp-list-table.wp-list-table .check-column {
-              width: 26px;
-            }
+            #wp-list-table.wp-list-table .column-thumbnail { width: <?php echo $thumbnail_width + 20; ?>px; }
+            #wp-list-table.wp-list-table td.column-thumbnail { text-align: right; }
+            #wp-list-table.wp-list-table .column-type { width: 90px; }
+            #wp-list-table.wp-list-table .column-menu_order { width: 50px; }
+            #wp-list-table.wp-list-table td.column-menu_order { text-align: center; }
+            #wp-list-table.wp-list-table .column-featured { width: 100px; }
+            #wp-list-table.wp-list-table .check-column { width: 26px; }
           </style>
-        <?php
+          <?php
         }
-
         break;
 
       //** Settings Page */
       case 'property_page_property_settings':
         wp_enqueue_script( 'wp-property-backend-global' );
         wp_enqueue_script( 'wp-property-global' );
-
         wp_enqueue_script( 'jquery' );
         wp_enqueue_script( 'jquery-ui-core' );
         wp_enqueue_script( 'jquery-ui-sortable' );
         wp_enqueue_script( 'wpp-jquery-colorpicker' );
+        wp_enqueue_script( 'wp-property-admin-settings' );
         wp_enqueue_style( 'wpp-jquery-colorpicker-css' );
         break;
 
@@ -403,7 +391,6 @@ class WPP_Core {
       case 'widgets':
         wp_enqueue_script( 'wp-property-backend-global' );
         wp_enqueue_script( 'wp-property-global' );
-
         wp_enqueue_script( 'jquery-ui-core' );
         wp_enqueue_script( 'jquery-ui-sortable' );
         wp_enqueue_script( 'jquery-ui-tabs' );
@@ -446,6 +433,7 @@ class WPP_Core {
 
     /**
      * Next used to add custom submenu page 'All Properties' with Javascript dataTable
+     *
      * @author Anton K
      */
     if ( !empty( $submenu[ 'edit.php?post_type=property' ] ) ) {
@@ -501,6 +489,7 @@ class WPP_Core {
    * assume that the request is a search.
    *
    * @param $query
+   *
    * @since 0.5
    */
   function parse_request( $query ) {
@@ -575,7 +564,6 @@ class WPP_Core {
       WPP_F::console_log( 'WPP_F::parse_request() ran, determined that request is for: ' . implode( ', ', $wpp_pages ) );
     }
 
-
   }
 
   /**
@@ -603,9 +591,9 @@ class WPP_Core {
       return WPP_Core::shortcode_property_overview();
     }
 
-
     return $content;
   }
+
 
   /**
    * Hooks into save_post function and saves additional property data
@@ -648,8 +636,8 @@ class WPP_Core {
       }
     }
 
-    if ( (float)$update_data[ 'latitude' ] == 0 ) $update_data[ 'latitude' ] = '';
-    if ( (float)$update_data[ 'longitude' ] == 0 ) $update_data[ 'longitude' ] = '';
+    if ( (float) $update_data[ 'latitude' ] == 0 ) $update_data[ 'latitude' ] = '';
+    if ( (float) $update_data[ 'longitude' ] == 0 ) $update_data[ 'longitude' ] = '';
 
     /* get old coordinates and location */
     $old_lat = get_post_meta( $post_id, 'latitude', true );
@@ -686,7 +674,6 @@ class WPP_Core {
       add_post_meta( $post_id, $meta_key, $meta_value );
     }
 
-
     //* Check if property has children */
     $children = get_children( "post_parent=$post_id&post_type=property" );
 
@@ -713,7 +700,7 @@ class WPP_Core {
       $_REQUEST[ 'parent_id' ] = WPP_F::update_parent_id( $_REQUEST[ 'parent_id' ], $post_id );
     }
 
-    do_action( 'save_property', $post_id, $_REQUEST, $geo_data );
+    do_action( 'save_property', $post_id );
 
     return true;
   }
@@ -785,7 +772,7 @@ class WPP_Core {
       3 => __( 'Custom field deleted.', 'wpp' ),
       4 => __( 'Property updated.', 'wpp' ),
       /* translators: %s: date and time of the revision */
-      5 => isset( $_GET[ 'revision' ] ) ? sprintf( __( 'Property restored to revision from %s', 'wpp' ), wp_post_revision_title( (int)$_GET[ 'revision' ], false ) ) : false,
+      5 => isset( $_GET[ 'revision' ] ) ? sprintf( __( 'Property restored to revision from %s', 'wpp' ), wp_post_revision_title( (int) $_GET[ 'revision' ], false ) ) : false,
       6 => sprintf( __( 'Property published. <a href="%s">View property</a>', 'wpp' ), esc_url( get_permalink( $post_id ) ) ),
       7 => __( 'Property saved.', 'wpp' ),
       8 => sprintf( __( 'Property submitted. <a target="_blank" href="%s">Preview property</a>', 'wpp' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ) ),
@@ -844,7 +831,6 @@ class WPP_Core {
   function sortable_columns( $columns ) {
     global $wp_properties;
 
-
     $columns[ 'type' ] = 'type';
     $columns[ 'featured' ] = 'featured';
 
@@ -854,7 +840,6 @@ class WPP_Core {
     }
 
     $columns = apply_filters( 'wpp_admin_sortable_columns', $columns );
-
 
     return $columns;
   }
@@ -911,7 +896,7 @@ class WPP_Core {
     }
 
     //** Monitor taxonomy archive queries */
-    if ( is_tax() && in_array( $wp_query->query_vars[ 'taxonomy' ], array_keys( (array)$wp_taxonomies ) ) ) {
+    if ( is_tax() && in_array( $wp_query->query_vars[ 'taxonomy' ], array_keys( (array) $wp_taxonomies ) ) ) {
       //** Once get_properties(); can accept taxonomy searches, we can inject a search request in here */
     }
 
@@ -1130,6 +1115,7 @@ class WPP_Core {
    * @todo Consider making this function depend on shortcode_property_overview() more so pagination and sorting functions work.
    *
    * @since 0.60
+   *
    * @param string $listing_id Listing ID must be passed
    *
    * @uses WPP_F::get_properties()
@@ -1143,7 +1129,7 @@ class WPP_Core {
     if ( !$atts ) {
       $atts = array();
     }
-
+    $hide_count = '';
     $defaults = array(
       'property_type' => '',
       'type' => '',
@@ -1213,7 +1199,9 @@ class WPP_Core {
    */
   function shortcode_property_search( $atts = "" ) {
     global $post, $wp_properties;
-
+    $group_attributes = '';
+    $per_page = '';
+    $pagination = '';
     extract( shortcode_atts( array(
       'searchable_attributes' => '',
       'searchable_property_types' => '',
@@ -1259,7 +1247,6 @@ class WPP_Core {
 
     return $content;
 
-
   }
 
   /**
@@ -1269,7 +1256,9 @@ class WPP_Core {
    * Retirms html content to be displayed after location attribute on property edit page
    *
    * @since 1.081
+   *
    * @param string $listing_id Listing ID must be passed
+   *
    * @return string $result
    *
    * @uses WPP_F::get_properties()
@@ -1328,14 +1317,16 @@ class WPP_Core {
     $defaults = apply_filters( 'shortcode_property_overview_allowed_args', $defaults, $atts );
 
     //** We add # to value which says that we don't want to use LIKE in SQL query for searching this value. */
-    if ( $atts[ 'strict_search' ] == 'true' ) {
-      foreach ( $atts as $key => $val ) {
-        if ( isset( $wp_properties[ 'property_stats' ][ $key ] ) && !key_exists( $key, $defaults ) && $key != 'property_type' ) {
-          if ( substr_count( $val, ',' ) || substr_count( $val, '&ndash;' ) || substr_count( $val, '--' ) ) {
-            continue;
-          }
-          $atts[ $key ] = '#' . $val . '#';
+    $required_strict_search = apply_filters( 'wpp::required_strict_search', array( 'wpp_agents' ) );
+    foreach ( $atts as $key => $val ) {
+      if ( ( ( $atts[ 'strict_search' ] == 'true' && isset( $wp_properties[ 'property_stats' ][ $key ] ) ) ||
+           in_array( $key, $required_strict_search ) ) &&
+           !key_exists( $key, $defaults ) && $key != 'property_type'
+      ) {
+        if ( substr_count( $val, ',' ) || substr_count( $val, '&ndash;' ) || substr_count( $val, '--' ) ) {
+          continue;
         }
+        $atts[ $key ] = '#' . $val . '#';
       }
     }
 
@@ -1443,7 +1434,7 @@ class WPP_Core {
     $property_type = $wpp_query[ 'query' ][ 'property_type' ];
 
     if ( !empty( $property_type ) ) {
-      foreach ( (array)$wp_properties[ 'hidden_attributes' ][ $property_type ] as $attr_key ) {
+      foreach ( (array) $wp_properties[ 'hidden_attributes' ][ $property_type ] as $attr_key ) {
         unset( $wpp_query[ 'sortable_attrs' ][ $attr_key ] );
       }
     }
@@ -1505,19 +1496,19 @@ class WPP_Core {
       $result[ 'top' ] = '<div id="wpp_shortcode_' . $defaults[ 'unique_hash' ] . '" class="wpp_ui ' . $wpp_query[ 'class' ] . '">';
     }
 
-    $result[ 'top_pagination' ] = wpi_draw_pagination( array(
+    $result[ 'top_pagination' ] = wpp_draw_pagination( array(
       'class' => 'wpp_top_pagination',
       'sorter_type' => $wpp_query[ 'sorter_type' ],
-      'hide_count' => $hide_count,
+      'hide_count' => $wpp_query[ 'hide_count' ],
       'sort_by_text' => $wpp_query[ 'sort_by_text' ],
     ) );
     $result[ 'result' ] = $ob_get_contents;
 
     if ( $wpp_query[ 'bottom_pagination_flag' ] == 'true' ) {
-      $result[ 'bottom_pagination' ] = wpi_draw_pagination( array(
+      $result[ 'bottom_pagination' ] = wpp_draw_pagination( array(
         'class' => 'wpp_bottom_pagination',
         'sorter_type' => $wpp_query[ 'sorter_type' ],
-        'hide_count' => $hide_count,
+        'hide_count' => $wpp_query[ 'hide_count' ],
         'sort_by_text' => $wpp_query[ 'sort_by_text' ],
         'javascript' => false
       ) );
@@ -1552,7 +1543,7 @@ class WPP_Core {
       $this_property = $post;
     }
 
-    $this_property = (array)$this_property;
+    $this_property = (array) $this_property;
 
     if ( !$atts ) {
       $atts = array();
@@ -1638,7 +1629,6 @@ class WPP_Core {
       }
     }
 
-
     if ( is_array( $return ) ) {
       return implode( '', $return );
     }
@@ -1683,7 +1673,7 @@ class WPP_Core {
     }
 
     //** Convert to array */
-    $property = (array)$property;
+    $property = (array) $property;
 
     //** Force map to be enabled here */
     $skip_default_google_map_check = true;
@@ -1746,8 +1736,10 @@ class WPP_Core {
 
   /**
    * Checks settings data on accord with existing wp_properties data ( before option updates )
+   *
    * @param array $wpp_settings New wpp settings data
    * @param array $wp_properties Old wpp settings data
+   *
    * @return array $wpp_settings
    */
   function check_wp_settings_data( $wpp_settings, $wp_properties ) {
@@ -1842,16 +1834,16 @@ class WPP_Core {
     /** All additional localizations must be added using the filter below. */
     $l10n = apply_filters( 'wpp::js::localization', $l10n );
 
-    foreach ( (array)$l10n as $key => $value ) {
+    foreach ( (array) $l10n as $key => $value ) {
       if ( !is_scalar( $value ) ) {
         continue;
       }
-      $l10n[ $key ] = html_entity_decode( (string)$value, ENT_QUOTES, 'UTF-8' );
+      $l10n[ $key ] = html_entity_decode( (string) $value, ENT_QUOTES, 'UTF-8' );
     }
 
     header( 'Content-type: application/x-javascript' );
 
-    die( "var wpp = ( typeof wpp === 'object' ) ? wpp : {}; wpp.strings = " . json_encode( $l10n ) . '; wpp.home_url = "' . home_url() . '";' );
+    die( "var wpp = ( typeof wpp === 'object' ) ? wpp : {}; wpp.strings = " . json_encode( $l10n ) . ';' );
 
   }
 
@@ -1859,7 +1851,9 @@ class WPP_Core {
    * WPP Contextual Help
    *
    * @global $current_screen
+   *
    * @param $args
+   *
    * @author korotkov@ud
    */
   function wpp_contextual_help( $args = array() ) {
@@ -1875,14 +1869,14 @@ class WPP_Core {
     if ( is_callable( array( 'WP_Screen', 'add_help_tab' ) ) ) {
 
       //** Loop through help items and build tabs */
-      foreach ( (array)$contextual_help as $help_tab_title => $help ) {
+      foreach ( (array) $contextual_help as $help_tab_title => $help ) {
 
         //** Add tab with current info */
         get_current_screen()->add_help_tab(
           array(
             'id' => sanitize_title( $help_tab_title ),
             'title' => __( $help_tab_title, 'wpp' ),
-            'content' => implode( "\n", (array)$contextual_help[ $help_tab_title ] ),
+            'content' => implode( "\n", (array) $contextual_help[ $help_tab_title ] ),
           )
         );
 
@@ -1918,6 +1912,9 @@ class WPP_Core {
       'get' => $_GET,
       'post' => $_POST,
       'iframe_enabled' => false,
+      'ajax_url' => admin_url('admin-ajax.php'),
+      'home_url' => home_url(),
+      'user_logged_in' => is_user_logged_in() ? 'true' : 'false',
       'settings' => $wp_properties,
     );
 

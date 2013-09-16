@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>js/property_page_property_settings.js - WP-Property</title>
+    <title>WPP_RETS - WP-Property</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -90,48 +90,63 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: js/property_page_property_settings.js</h1>
+                        <h1>WPP_RETS Class</h1>
+<div class="box meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-jQuery(document).ready(function() {
+    
 
-  /**
-   * Handles form saving
-   * Do any validation/data work before the settings page form is submitted
-   * @author odokienko@UD
-   */
-  jQuery(&quot;.wpp_settings_page form&quot;).submit(function( form ) {
-    var error_field = {object:false,tab_index:false};
+    
+        <div class="foundat">
+            Defined in: <a href="../files/core_class_rets.php.html#l2"><code>core&#x2F;class_rets.php:2</code></a>
+        </div>
+    
 
-    /* The next block make validation for required fields    */
-     jQuery(&quot;form #wpp_settings_tabs :input[validation_required=true],form #wpp_settings_tabs .wpp_required_field :input,form #wpp_settings_tabs :input[required],form #wpp_settings_tabs :input.slug_setter&quot;).each(function(){
+    
 
-      /* we allow empty value if dynamic_table has only one row */
-      var dynamic_table_row_count = jQuery(this).closest(&#x27;.wpp_dynamic_table_row&#x27;).parent().children(&#x27;tr.wpp_dynamic_table_row&#x27;).length;
+    
+</div>
 
-      if (!jQuery(this).val() &amp;&amp; dynamic_table_row_count!=1){
-        error_field.object = this;
-        error_field.tab_index = jQuery(&#x27;#wpp_settings_tabs a[href=&quot;#&#x27; + jQuery( error_field.object ).closest( &quot;.ui-tabs-panel&quot; ).attr(&#x27;id&#x27;) + &#x27;&quot;]&#x27;).parent().index();
-        return false;
-      }
-    });
 
-    /* if error_field object is not empty then we&#x27;ve error found */
-    if (error_field.object != false ) {
-      /* do focus on tab with error field */
-      if(typeof error_field.tab_index !=&#x27;undefined&#x27;) {
-        jQuery(&#x27;#wpp_settings_tabs&#x27;).tabs(&#x27;option&#x27;, &#x27;active&#x27;, error_field.tab_index);
-      }
-      /* mark error field and remove mark on keyup */
-      jQuery(error_field.object).addClass(&#x27;ui-state-error&#x27;).one(&#x27;keyup&#x27;,function(){jQuery(this).removeClass(&#x27;ui-state-error&#x27;);});
-      jQuery(error_field.object).focus();
-      return false;
-    }
-  });
 
-});
-    </pre>
+<div class="box intro">
+    <p>WP-Property Customized version of PHRETS</p>
+
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+
+        
+
+        
+
+        
+    </div>
 </div>
 
                     </div>

@@ -144,8 +144,6 @@
 
     </div><!-- #content -->
   </div><!-- #container -->
-
-
 <?php
   // Primary property-type sidebar.
   if ( is_active_sidebar( "wpp_sidebar_" . $post->property_type ) ) : ?>
@@ -158,5 +156,4 @@
 
 <?php endif; ?>
 
-
- <?php get_footer(); ?>
+<?php get_footer(); ?>

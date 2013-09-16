@@ -13,6 +13,7 @@ class WPP_Mail {
   /**
    *
    * @param type $notification
+   *
    * @author peshkov@UD
    * @since 1.38
    */
@@ -95,7 +96,7 @@ class WPP_Mail {
     $notification[ 'data' ][ 'display_name' ] = $user->data->display_name;
     $notification[ 'data' ][ 'site_url' ] = site_url();
     $notification[ 'data' ][ 'url' ] = $notification[ 'data' ][ 'property_link' ] = class_wpp_feps::get_feps_permalink( $_property, false );
-    $notification[ 'data' ][ 'title' ] = $notification[ 'data' ][ 'property_title' ] = $post->post_title;
+    $notification[ 'data' ][ 'title' ] = $notification[ 'data' ][ 'property_title' ] = $_property['post_title'];
     $notification[ 'data' ][ 'status' ] = @$wp_post_statuses[ get_post_status( $post_id ) ]->label;
 
     $notification = UD_API::array_merge_recursive_distinct( $notification, $args );
@@ -108,6 +109,7 @@ class WPP_Mail {
    *
    * @param int $post_id
    * @param array $args
+   *
    * @author peshkov@UD
    * @since 1.38
    */
@@ -132,7 +134,7 @@ class WPP_Mail {
     $notification[ 'data' ][ 'display_name' ] = $user->data->display_name;
     $notification[ 'data' ][ 'user_login' ] = $user->data->user_login;
     $notification[ 'data' ][ 'user_password' ] = $user->data->user_pass;
-    $notification[ 'data' ][ 'title' ] = $notification[ 'data' ][ 'property_title' ] = $post_after->post_title;
+    $notification[ 'data' ][ 'title' ] = $notification[ 'data' ][ 'property_title' ] = $_property['post_title'];
     $notification[ 'data' ][ 'url' ] = $notification[ 'data' ][ 'property_link' ] = class_wpp_feps::get_feps_permalink( $_property, false );
     $notification[ 'data' ][ 'status' ] = @$wp_post_statuses[ $_property[ 'post_status' ] ]->label;
 

@@ -52,7 +52,7 @@ td.wp_crm_user_card  ul li.primary {
 	text-align: center;
 	color: #999;
 	font-size: 14px;
-  background: #FFF url(images/horizontal-ajax-loader.gif) no-repeat center center;
+  background: #FFF url(../third-party/dataTables/images/horizontal-ajax-loader.gif) no-repeat center center;
 }
 
 .dataTables_length {
