@@ -633,10 +633,11 @@ class WPP_F extends UD_API {
     $current_row = 1;
 
     $handle = fopen( $temp_file, "r" );
+    $header_array = array();
+    $csv = array();
 
     while ( ( $data = fgetcsv( $handle, 10000, "," ) ) !== FALSE ) {
       $number_of_fields = count( $data );
-      $header_array = array();
       if ( $current_row == 1 ) {
         for ( $c = 0; $c < $number_of_fields; $c++ ) {
           $header_array[ $c ] = str_ireplace( '-', '_', sanitize_key( $data[ $c ] ) );
@@ -654,7 +655,7 @@ class WPP_F extends UD_API {
         }
 
         /** Removing - this removes empty values from the CSV, we want to leave them to make sure the associative array is consistant for the importer - $data_array = array_filter($data_array); */
-        $csv = array();
+
         if ( !empty( $data_array ) ) {
           $csv[ ] = $data_array;
         }
@@ -2542,7 +2543,7 @@ class WPP_F extends UD_API {
    */
   function save_settings() {
     global $wp_properties;
-    
+
     /**
      * Parses Query.
      * HACK. The current logic solves the issue of max_input_vars in the case if query is huge.
