@@ -4,7 +4,7 @@ Donate link: http://usabilitydynamics.com/products/wp-property/
 Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 3.4.2
 Tested up to: 3.6.1
-Stable tag: 1.38.3
+Stable tag: 1.38.3.1
 
 
 == Description ==
@@ -227,9 +227,12 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 
 == Changelog ==
 
+= 1.38.3.1 =
+* Fixed typo which broke property_overview pagination.
+
 = 1.38.3 =
 * Admin Tools functionality moved from premium features to core.
-* Fixed Yes/No values for checkbox type inputs. 
+* Fixed Yes/No values for checkbox type inputs.
 * Fixed the issue related to huge settings data ( when there are more than ~150 property attributes ) on settings saving ( max_input_vars ).
 * Fixed save_property action.
 * Fixed address validation.

@@ -420,7 +420,7 @@ if ( !function_exists( 'wpp_draw_pagination' ) ):
           }
         }
 
-        function wpp_do_ajax_pagination_ <?php echo $unique_hash; ?>( this_page, scroll_to ) {
+        function wpp_do_ajax_pagination_<?php echo $unique_hash; ?>( this_page, scroll_to ) {
           if ( typeof this_page == 'undefined' ) {
             this_page = 1;
           }
@@ -460,8 +460,7 @@ if ( !function_exists( 'wpp_draw_pagination' ) ):
               p_wrapper.html( content );
               /* Total properties count may change depending on sorting (if sorted by an attribute that all properties do not have) */
               /* It seems issue mentioned above are fexed so nex line unneeded, commented odokienko@UD */
-              // jQuery("#wpp_shortcode_
-              <?php echo $unique_hash; ?> .wpp_property_results").text(result_data.wpp_query.properties?result_data.wpp_query.properties.total:0);
+              // jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_property_results").text(result_data.wpp_query.properties?result_data.wpp_query.properties.total:0);
               <?php if($use_pagination) { ?>
               /* Update max page in slider and in display */
               jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider" ).slider( "option", "max", result_data.wpp_query.pages );
