@@ -37,7 +37,7 @@ wpp.xmli = jQuery.extend({
 
       jQuery( notice_container ).html( "Deleting all unattached images. You can close your browser, the operation will continue until completion." );
 
-      jQuery.post( ajaxurl, {
+      jQuery.post( wpp.instance.ajax_url, {
         action: 'wpp_property_import_handler',
         wpp_action: 'delete_all_orphan_attachments'
       }, function ( result ) {
@@ -55,7 +55,7 @@ wpp.xmli = jQuery.extend({
 
       jQuery( ".wpp_ajax_show_xml_imort_history_result" ).html( "" );
 
-      jQuery.post( ajaxurl, {
+      jQuery.post( wpp.instance.ajax_url, {
         action: 'wpp_ajax_show_xml_imort_history'
       }, function ( data ) {
         jQuery( ".wpp_ajax_show_xml_imort_history_result" ).show();
@@ -168,7 +168,7 @@ wpp.xmli = jQuery.extend({
         });
       } )
 
-//** Create unique ID selected  **/
+      //** Create unique ID selected  **/
       wpp.xmli.import_build_unique_id_selector();
     } )
 
@@ -188,7 +188,7 @@ wpp.xmli = jQuery.extend({
       var import_hash = jQuery( "#import_hash" ).val();
 
       if ( import_hash != "" ) {
-        window.open( wpp.home_url + "/?wpp_schedule_import=" + import_hash + "&echo_log=true", 'wpp_i_do_full_import' );
+        window.open( wpp.instance.home_url + "/?wpp_schedule_import=" + import_hash + "&echo_log=true", 'wpp_i_do_full_import' );
       } else {
         wpp.xmli.actions_bar_message( wpp.strings.xmli.please_save, "bad", 7000 );
       }
@@ -220,7 +220,7 @@ wpp.xmli = jQuery.extend({
         params.source_type = source_type;
       }
 
-      jQuery.post( ajaxurl, params,function ( result ) {
+      jQuery.post( wpp.instance.ajax_url, params,function ( result ) {
         jQuery( "#wpp_i_preview_action" ).attr( 'disabled', false );
         jQuery( "#wpp_i_preview_action" ).val( 'Preview Again' );
 
@@ -284,7 +284,7 @@ wpp.xmli = jQuery.extend({
 
       wpp.xmli.loading_show();
 
-      jQuery.post( ajaxurl, params,function ( result ) {
+      jQuery.post( wpp.instance.ajax_url, params,function ( result ) {
 
         wpp.xmli.loading_hide();
 
@@ -354,7 +354,7 @@ wpp.xmli = jQuery.extend({
         params.schedule_id = schedule_id;
       }
 
-      jQuery.post( ajaxurl, params, function ( result ) {
+      jQuery.post( wpp.instance.ajax_url, params, function ( result ) {
         if ( result.success == 'true' ) {
           wpp.xmli.actions_bar_message( wpp.strings.xmli.saved, "good", 7000 );
           wpp.xmli.set_schedule_id( result.schedule_id );
@@ -380,7 +380,7 @@ wpp.xmli = jQuery.extend({
 
       schedule_id = jQuery( this ).attr( 'schedule_id' );
 
-      jQuery.post( ajaxurl, {
+      jQuery.post( wpp.instance.ajax_url, {
         action: 'wpp_property_import_handler',
         wpp_action: 'update_schedule',
         schedule_id: schedule_id,
@@ -485,7 +485,7 @@ wpp.xmli = jQuery.extend({
         jQuery( "#wpp_property_import_ajax" ).show();
         jQuery( "#wpp_property_import_ajax" ).html( "<div class='updated below-h2'><p>Deleting all properties from " + import_title + ". You can close your browser, the operation will continue until completion.</p></div>" );
 
-        jQuery.post( ajaxurl, {
+        jQuery.post( wpp.instance.ajax_url, {
           action: 'wpp_property_import_handler',
           schedule_id: schedule_id,
           wpp_action: 'delete_all_schedule_properties'
@@ -512,7 +512,7 @@ wpp.xmli = jQuery.extend({
       var schedule_id = jQuery( this ).attr( 'schedule_id' );
       var rmel = jQuery( this ).parents( 'tr' );
 
-      jQuery.post( ajaxurl, {
+      jQuery.post( wpp.instance.ajax_url, {
         action: 'wpp_property_import_handler',
         schedule_id: schedule_id,
         wpp_action: 'delete_schedule'
@@ -911,7 +911,7 @@ wpp.xmli = jQuery.extend({
       params.schedule_id = schedule_id;
     }
 
-    jQuery.post( ajaxurl, params,function ( result ) {
+    jQuery.post( wpp.instance.ajax_url, params,function ( result ) {
 
       wpp.xmli.loading_hide();
 
@@ -1194,7 +1194,7 @@ wpp.xmli = jQuery.extend({
       params.schedule_id = schedule_id;
     }
 
-    jQuery.post( ajaxurl, params, function ( result ) {
+    jQuery.post( wpp.instance.ajax_url, params, function ( result ) {
       if ( result.success == 'true' ) {
         jQuery( ".wpp_import_overview_page_element" ).hide();
         jQuery( "#wpp_property_import_ajax" ).html( result.ui ).show();

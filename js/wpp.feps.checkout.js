@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
     jQuery('.wpp_feps_message').html( '' );
     jQuery('.wpp_feps_message').removeClass( 'error' );
     var data = jQuery( this ).serialize();
-    jQuery.post( wpp.strings.ajaxurl, data, function(response) {
+    jQuery.post( wpp.instance.ajax_url, data, function(response) {
       if ( response.success ) {
         jQuery( '.feps_spc_details_wrapper .submit_action_wrapper' ).remove();
         jQuery( '.wpp_feps_change_subscription_plan' ).remove();

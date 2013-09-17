@@ -422,6 +422,7 @@ class WPP_UI {
             switch ( $input_type ) {
 
               case 'checkbox':
+                $value = in_array( strtolower( $value ), array( 'true', '1', 'yes' ) ) ? 'true' : $value;
                 $html_input = "<input type='hidden' name='wpp_data[meta][{$slug}]' value='false' /><input " . checked( $value, 'true', false ) . "type='checkbox' id='wpp_meta_{$slug}' name='wpp_data[meta][{$slug}]' value='true' {$disabled} /> <label for='wpp_meta_{$slug}'>" . __( 'Enable.', 'wpp' ) . "</label>";
                 break;
 

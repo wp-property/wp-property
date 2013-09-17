@@ -633,10 +633,11 @@ class WPP_F extends UD_API {
     $current_row = 1;
 
     $handle = fopen( $temp_file, "r" );
+    $header_array = array();
+    $csv = array();
 
     while ( ( $data = fgetcsv( $handle, 10000, "," ) ) !== FALSE ) {
       $number_of_fields = count( $data );
-      $header_array = array();
       if ( $current_row == 1 ) {
         for ( $c = 0; $c < $number_of_fields; $c++ ) {
           $header_array[ $c ] = str_ireplace( '-', '_', sanitize_key( $data[ $c ] ) );
@@ -654,7 +655,7 @@ class WPP_F extends UD_API {
         }
 
         /** Removing - this removes empty values from the CSV, we want to leave them to make sure the associative array is consistant for the importer - $data_array = array_filter($data_array); */
-        $csv = array();
+
         if ( !empty( $data_array ) ) {
           $csv[ ] = $data_array;
         }
@@ -1685,7 +1686,7 @@ class WPP_F extends UD_API {
     extract( $args, EXTR_SKIP );
     $skip_existing = isset($skip_existing) ? $skip_existing : 'false';
     $return_geo_data = isset($return_geo_data) ? $return_geo_data : false;
-    
+
     $return = array();
 
     $geo_data = false;
@@ -2026,7 +2027,7 @@ class WPP_F extends UD_API {
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
     $id = isset($id) ? $id : 'wpp_property_type';
     $selected = isset($selected) ? $selected : '';
-    
+
     if ( !is_array( $wp_properties[ 'property_types' ] ) )
       return;
 
@@ -2073,7 +2074,7 @@ class WPP_F extends UD_API {
 
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
     $use_optgroups = isset($use_optgroups) ? $use_optgroups : 'false';
-    
+
     $property_stats = $wp_properties[ 'property_stats' ];
     $property_meta = $wp_properties[ 'property_meta' ];
 
@@ -2111,7 +2112,7 @@ class WPP_F extends UD_API {
     $id = isset($id) ? $id : 'wpp_attribute';
     $selected = isset($selected) ? $selected : 'false';
     $name = isset($name) ? $name : 'wpp_attribute';
-    
+
     $attributes = $wp_properties[ 'property_stats' ];
 
     if ( is_array( $extra_values ) ) {
@@ -2140,7 +2141,7 @@ class WPP_F extends UD_API {
     $return_array = isset($return_array) ? $return_array : 'false';
     $id = isset($id) ? $id : 'wpp_google_maps_localization';
     $selected = isset($selected) ? $selected : '';
-    
+
     $attributes = array(
       'en' => 'English',
       'ar' => 'Arabic',
@@ -2440,7 +2441,7 @@ class WPP_F extends UD_API {
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
     $blank_selection_label = isset($blank_selection_label) ? $blank_selection_label : ' - ';
     $selected = isset($selected) ? $selected : 'none';
-    
+
     if ( empty( $id ) && !empty( $name ) ) {
       $id = $name;
     }
@@ -2485,7 +2486,7 @@ class WPP_F extends UD_API {
 
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
     $return_all = isset($return_all) ? $return_all : 'none';
-        
+
     if ( !$type ) {
       return false;
     }
@@ -2532,8 +2533,63 @@ class WPP_F extends UD_API {
 
   }
 
+
   /**
-   * Saves settings, applies filters, and loads settings into global variable
+   * AJAX Handler.
+   * Saves WPP Settings
+   *
+   * @author peshkov@UD
+   * @since 1.38.3
+   */
+  function save_settings() {
+    global $wp_properties;
+
+    /**
+     * Parses Query.
+     * HACK. The current logic solves the issue of max_input_vars in the case if query is huge.
+     * For example, user can set more than 150 property attributes where every attribute has own set of params.
+     */
+    $request = urldecode( $_REQUEST[ 'data' ] );
+    $tokens = explode( "&", $request );
+    $data = array();
+    foreach ( $tokens as $token ) {
+      $arr = array();
+      parse_str( $token, $arr );
+      $data = self::extend( $data, $arr );
+    }
+
+    $return = array(
+      'success' => true,
+      'message' => '',
+      'redirect' => admin_url( "edit.php?post_type=property&page=property_settings&message=updated" )
+    );
+
+    try {
+      if ( empty( $data[ 'wpp_settings' ] ) || !wp_verify_nonce( $data[ '_wpnonce' ], 'wpp_setting_save' ) ) {
+        throw new Exception( __( 'Request can not be verified.', 'wpp' ) );
+      }
+      //** Allow features to preserve their settings that are not configured on the settings page */
+      $wpp_settings = apply_filters( 'wpp_settings_save', $data[ 'wpp_settings' ], $wp_properties );
+      //** Prevent removal of featured settings configurations if they are not present */
+      if ( !empty( $wp_properties[ 'configuration' ][ 'feature_settings' ] ) ) {
+        foreach ( $wp_properties[ 'configuration' ][ 'feature_settings' ] as $feature_type => $preserved_settings ) {
+          if ( empty( $data[ 'wpp_settings' ][ 'configuration' ][ 'feature_settings' ][ $feature_type ] ) ) {
+            $wpp_settings[ 'configuration' ][ 'feature_settings' ][ $feature_type ] = $preserved_settings;
+          }
+        }
+      }
+      update_option( 'wpp_settings', $wpp_settings );
+    } catch ( Exception $e ) {
+      $return[ 'success' ] = false;
+      $return[ 'message' ] = $e->getMessage();
+    }
+    return json_encode( $return );
+  }
+
+
+  /**
+   * Loads settings into global variable
+   * Also restores data from backup file.
    *
    * Attached to do_action_ref_array('the_post', array(&$post)); in setup_postdata()
    *
@@ -2549,53 +2605,40 @@ class WPP_F extends UD_API {
   static function settings_action( $force_db = false ) {
     global $wp_properties;
 
-    // Process saving settings
-    if ( isset( $_REQUEST[ 'wpp_settings' ] ) && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'wpp_setting_save' ) ) {
-
-      // Handle backup
-      if ( $backup_file = $_FILES[ 'wpp_settings' ][ 'tmp_name' ][ 'settings_from_backup' ] ) {
-        $backup_contents = file_get_contents( $backup_file );
-
-        if ( !empty( $backup_contents ) )
-          $decoded_settings = json_decode( $backup_contents, true );
-
-        if ( !empty( $decoded_settings ) )
-          $_REQUEST[ 'wpp_settings' ] = $decoded_settings;
+    //** Handle backup */
+    if ( isset( $_REQUEST[ 'wpp_settings' ] ) &&
+         wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'wpp_setting_save' ) &&
+         !empty( $_FILES[ 'wpp_settings' ][ 'tmp_name' ][ 'settings_from_backup' ] )
+    ) {
+      $backup_file = $_FILES[ 'wpp_settings' ][ 'tmp_name' ][ 'settings_from_backup' ];
+      $backup_contents = file_get_contents( $backup_file );
+      if ( !empty( $backup_contents ) ) {
+        $decoded_settings = json_decode( $backup_contents, true );
       }
-
-      // Allow features to preserve their settings that are not configured on the settings page
-      $wpp_settings = apply_filters( 'wpp_settings_save', $_REQUEST[ 'wpp_settings' ], $wp_properties );
-
-      // Prevent removal of featured settings configurations if they are not present
-      if ( !empty( $wp_properties[ 'configuration' ][ 'feature_settings' ] ) ) {
-        foreach ( $wp_properties[ 'configuration' ][ 'feature_settings' ] as $feature_type => $preserved_settings ) {
-
-          if ( empty( $_REQUEST[ 'wpp_settings' ][ 'configuration' ][ 'feature_settings' ][ $feature_type ] ) ) {
-
-            $wpp_settings[ 'configuration' ][ 'feature_settings' ][ $feature_type ] = $preserved_settings;
-
+      if ( !empty( $decoded_settings ) ) {
+        //** Allow features to preserve their settings that are not configured on the settings page */
+        $wpp_settings = apply_filters( 'wpp_settings_save', $decoded_settings, $wp_properties );
+        //** Prevent removal of featured settings configurations if they are not present */
+        if ( !empty( $wp_properties[ 'configuration' ][ 'feature_settings' ] ) ) {
+          foreach ( $wp_properties[ 'configuration' ][ 'feature_settings' ] as $feature_type => $preserved_settings ) {
+            if ( empty( $decoded_settings[ 'configuration' ][ 'feature_settings' ][ $feature_type ] ) ) {
+              $wpp_settings[ 'configuration' ][ 'feature_settings' ][ $feature_type ] = $preserved_settings;
+            }
           }
-
+        }
+        update_option( 'wpp_settings', $wpp_settings );
+        //** Load settings out of database to overwrite defaults from action_hooks. */
+        $wp_properties_db = get_option( 'wpp_settings' );
+        //** Overwrite $wp_properties with database setting */
+        $wp_properties = array_merge( $wp_properties, $wp_properties_db );
+        //** Reload page to make sure higher-end functions take affect of new settings */
+        //** The filters below will be ran on reload, but the saving functions won't */
+        if ( $_REQUEST[ 'page' ] == 'property_settings' ) {
+          unset( $_REQUEST );
+          wp_redirect( admin_url( "edit.php?post_type=property&page=property_settings&message=updated" ) );
+          exit;
         }
       }
-
-      update_option( 'wpp_settings', $wpp_settings );
-
-      // Load settings out of database to overwrite defaults from action_hooks.
-      $wp_properties_db = get_option( 'wpp_settings' );
-
-      // Overwrite $wp_properties with database setting
-      $wp_properties = array_merge( $wp_properties, $wp_properties_db );
-
-      // Reload page to make sure higher-end functions take affect of new settings
-      // The filters below will be ran on reload, but the saving functions won't
-      if ( $_REQUEST[ 'page' ] == 'property_settings' ) ;
-      {
-        unset( $_REQUEST );
-        wp_redirect( admin_url( "edit.php?post_type=property&page=property_settings&message=updated" ) );
-        exit;
-      }
-
     }
 
     if ( $force_db ) {
@@ -3738,7 +3781,7 @@ class WPP_F extends UD_API {
     $load_thumbnail = isset($load_thumbnail) ? $load_thumbnail : 'true';
     $allow_multiple_values = isset($allow_multiple_values) ? $allow_multiple_values : 'false';
     $load_parent = isset($load_parent) ? $load_parent : 'true';
-    
+
     $args = is_array( $args ) ? http_build_query( $args ) : (string) $args;
     if ( $return = wp_cache_get( $id . $args ) ) {
       return $return;
@@ -5195,7 +5238,7 @@ class WPP_F extends UD_API {
     $value = isset($value) ? $value : 'true';
     $label = isset($label) ? $label : false;
     $maxlength = isset($maxlength) ? $maxlength : false;
-    
+
     // Get rid of all brackets
     if ( strpos( "$name", '[' ) || strpos( "$name", ']' ) ) {
 
@@ -5311,7 +5354,7 @@ class WPP_F extends UD_API {
     $label = isset($label) ? $label : false;
     $maxlength = isset($maxlength) ? $maxlength : false;
     $return = isset($return) ? $return : '';
-    
+
     // Get rid of all brackets
     if ( strpos( "$name", '[' ) || strpos( "$name", ']' ) ) {
       $replace_variables = array( '][', ']', '[' );
@@ -5382,7 +5425,7 @@ class WPP_F extends UD_API {
     $readonly = isset($readonly) ? $readonly : false;
     $special = isset($special) ? $special : '';
     $title = isset($title) ? $title : '';
-    
+
     // Add prefix
     if ( $class ) {
       $class = "wpp_$class";

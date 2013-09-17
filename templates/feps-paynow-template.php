@@ -21,8 +21,7 @@ global $wpi_settings;
   jQuery(document).ready(function(){
     jQuery('.wpp_feps_pay_now_button').click(function(){
       jQuery(this).attr('disabled', true).html('<?php _e('Loading...', 'wpp'); ?>');
-      var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
-      jQuery.post(ajaxurl, jQuery('.wpp_feps_pay_now_form').serialize(), function(response) {
+      jQuery.post( wpp.instance.ajax_url, jQuery('.wpp_feps_pay_now_form').serialize(), function(response) {
         if ( response.success ) {
           jQuery('.wpp_feps_pay_now').remove();
           jQuery('.wpp_feps_pay_now_result').html(response.message+' <a href="'+response.redirect+'">View Properties.</a>').show();

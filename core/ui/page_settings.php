@@ -56,181 +56,6 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 }
 
 ?>
-
-<script type="text/javascript">
-
-  jQuery( document ).ready( function () {
-
-    //* Tabs for various UI elements */
-    jQuery( '.wpp_subtle_tabs' ).tabs();
-
-    wpp_setup_default_property_page();
-
-    jQuery( "#wpp_settings_base_slug" ).change( function () {
-      wpp_setup_default_property_page();
-    } );
-
-    if ( document.location.hash != '' && jQuery( document.location.hash ).length > 0 ) {
-      jQuery( "#wpp_settings_tabs" ).tabs();
-    } else {
-      jQuery( "#wpp_settings_tabs" ).tabs( { cookie: {  name: 'wpp_settings_tabs', expires: 30 } } );
-    }
-
-    // Show settings array
-    jQuery( "#wpp_show_settings_array" ).click( function () {
-      jQuery( "#wpp_show_settings_array_cancel" ).show();
-      jQuery( "#wpp_show_settings_array_result" ).show();
-    } );
-
-    // Hide settings array
-    jQuery( "#wpp_show_settings_array_cancel" ).click( function () {
-      jQuery( "#wpp_show_settings_array_result" ).hide();
-      jQuery( this ).hide();
-    } );
-
-    // Hide property query
-    jQuery( "#wpp_ajax_property_query_cancel" ).click( function () {
-      jQuery( "#wpp_ajax_property_result" ).hide();
-      jQuery( this ).hide();
-    } );
-
-    // Hide image query
-    jQuery( "#wpp_ajax_image_query_cancel" ).click( function () {
-      jQuery( "#wpp_ajax_image_result" ).hide();
-      jQuery( this ).hide();
-    } );
-
-    // Check plugin updates
-    jQuery( "#wpp_ajax_check_plugin_updates" ).click( function () {
-      jQuery( '.plugin_status' ).remove();
-      jQuery.post( ajaxurl, {
-        action: 'wpp_ajax_check_plugin_updates'
-      }, function ( data ) {
-        message = "<div class='plugin_status updated fade'><p>" + data + "</p></div>";
-        jQuery( message ).insertAfter( "h2" );
-      } );
-    } );
-
-    /** Clear Cache */
-    jQuery( "#wpp_clear_cache" ).click( function () {
-      jQuery( '.clear_cache_status' ).remove();
-      jQuery.post( ajaxurl, {
-        action: 'wpp_ajax_clear_cache'
-      }, function ( data ) {
-        message = "<div class='clear_cache_status updated fade'><p>" + data + "</p></div>";
-        jQuery( message ).insertAfter( "h2" );
-      } );
-    } );
-
-    // Revalidate all addresses
-    jQuery( "#wpp_ajax_revalidate_all_addresses" ).click( function () {
-
-      jQuery( this ).val( 'Processing...' );
-      jQuery( this ).attr( 'disabled', true );
-      jQuery( '.address_revalidation_status' ).remove();
-
-      jQuery.post( ajaxurl, {
-        action: 'wpp_ajax_revalidate_all_addresses'
-      }, function ( data ) {
-
-        jQuery( "#wpp_ajax_revalidate_all_addresses" ).val( 'Revalidate again' );
-        jQuery( "#wpp_ajax_revalidate_all_addresses" ).attr( 'disabled', false );
-
-        if ( data.success == 'true' )
-          message = "<div class='address_revalidation_status updated fade'><p>" + data.message + "</p></div>"; else
-          message = "<div class='address_revalidation_status error fade'><p>" + data.message + "</p></div>";
-
-        jQuery( message ).insertAfter( "h2" );
-      }, 'json' );
-    } );
-
-    // Show property query
-    jQuery( "#wpp_ajax_property_query" ).click( function () {
-
-      var property_id = jQuery( "#wpp_property_class_id" ).val();
-
-      jQuery( "#wpp_ajax_property_result" ).html( "" );
-
-      jQuery.post( ajaxurl, {
-        action: 'wpp_ajax_property_query',
-        property_id: property_id
-      }, function ( data ) {
-        jQuery( "#wpp_ajax_property_result" ).show();
-        jQuery( "#wpp_ajax_property_result" ).html( data );
-        jQuery( "#wpp_ajax_property_query_cancel" ).show();
-
-      } );
-
-    } );
-
-    //** Mass set property type */
-    jQuery( "#wpp_ajax_max_set_property_type" ).click( function () {
-
-      if ( !confirm( "<?php _e('You are about to set ALL your properties to the selected property type. Are you sure?', 'wpp'); ?>" ) ) {
-        return;
-      }
-
-      var property_type = jQuery( "#wpp_ajax_max_set_property_type_type" ).val();
-
-      jQuery.post( ajaxurl, {
-        action: 'wpp_ajax_max_set_property_type',
-        property_type: property_type
-      }, function ( data ) {
-        jQuery( "#wpp_ajax_max_set_property_type_result" ).show();
-        jQuery( "#wpp_ajax_max_set_property_type_result" ).html( data );
-      } );
-
-    } );
-
-    // Show image data
-    jQuery( "#wpp_ajax_image_query" ).click( function () {
-
-      var image_id = jQuery( "#wpp_image_id" ).val();
-
-      jQuery( "#wpp_ajax_image_result" ).html( "" );
-
-      jQuery.post( ajaxurl, {
-        action: 'wpp_ajax_image_query',
-        image_id: image_id
-      }, function ( data ) {
-        jQuery( "#wpp_ajax_image_result" ).show();
-        jQuery( "#wpp_ajax_image_result" ).html( data );
-        jQuery( "#wpp_ajax_image_query_cancel" ).show();
-
-      } );
-
-    } );
-
-    /** Show property query */
-    jQuery( "#wpp_check_premium_updates" ).click( function () {
-      jQuery( "#wpp_plugins_ajax_response" ).hide();
-      jQuery.post( ajaxurl, {
-        action: 'wpp_ajax_check_plugin_updates'
-      }, function ( data ) {
-        jQuery( "#wpp_plugins_ajax_response" ).show();
-        jQuery( "#wpp_plugins_ajax_response" ).html( data );
-      } );
-    } );
-
-  } );
-
-  /* Modifies UI to reflect Default Property Page selection */
-  function wpp_setup_default_property_page () {
-    var selection = jQuery( "#wpp_settings_base_slug" ).val();
-
-    /* Default Property Page is dynamic. */
-    if ( selection == "property" ) {
-      jQuery( ".wpp_non_property_page_settings" ).hide();
-      jQuery( ".wpp_non_property_page_settings input[type=checkbox]" ).attr( "checked", false );
-      jQuery( ".wpp_non_property_page_settings input[type=checkbox]" ).attr( "disabled", true );
-    } else {
-      jQuery( ".wpp_non_property_page_settings" ).show();
-      jQuery( ".wpp_non_property_page_settings input[type=checkbox]" ).attr( "disabled", false );
-    }
-
-  }
- </script>
-
 <div class="wrap <?php echo implode( ' ', $wrapper_classes ); ?>">
 <?php screen_icon(); ?>
 <h2 class='wpp_settings_page_header'><?php echo $wp_properties[ 'labels' ][ 'name' ] . ' ' . __( 'Settings', 'wpp' ) ?>
@@ -255,7 +80,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 </div>
 <?php endif; ?>
 
-<form method="post" action="<?php echo admin_url( 'edit.php?post_type=property&page=property_settings' ); ?>" enctype="multipart/form-data"/>
+<form id="wpp_settings_form" method="post" action="<?php echo admin_url( 'edit.php?post_type=property&page=property_settings' ); ?>" enctype="multipart/form-data"/>
 <?php wp_nonce_field( 'wpp_setting_save' ); ?>
 
 <div id="wpp_settings_tabs" class="wpp_tabs clearfix">
@@ -517,7 +342,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <tr>
       <th><?php _e( 'Property Page', 'wpp' ) ?></th>
       <td>
-        <p><?php _e( 'These are the settings for the [property_overview] shortcode.  The shortcode displays a list of all building / root properties.<br /> The display settings may be edited further by customizing the <b>wp-content/plugins/wp-properties/templates/property.php</b> file.  To avoid losing your changes during updates, create a <b>property.php</b> file in your template directory, which will be automatically loaded.', 'wpp' ) ?>
+        <p><?php _e( 'The display settings may be edited further by customizing the <b>wp-content/plugins/wp-properties/templates/property.php</b> file.  To avoid losing your changes during updates, create a <b>property.php</b> file in your template directory, which will be automatically loaded.', 'wpp' ) ?>
         <ul>
           <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][sort_stats_by_groups]&label=" . __( 'Sort property stats by groups.', 'wpp' ), $wp_properties[ 'configuration' ][ 'property_overview' ][ 'sort_stats_by_groups' ] ); ?></li>
           <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][show_true_as_image]&label=" . sprintf( __( 'Show Checkboxed Image instead of "%s" and hide "%s" for %s/%s values', 'wpp' ), __( 'Yes', 'wpp' ), __( 'No', 'wpp' ), __( 'Yes', 'wpp' ), __( 'No', 'wpp' ) ), $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_true_as_image' ] ); ?></li>
@@ -730,7 +555,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
       <div class="wpp_settings_block">
         <?php _e( "Restore Backup of WP-Property Configuration", 'wpp' ); ?>
-        : <input name="wpp_settings[settings_from_backup]" type="file"/>
+        : <input name="wpp_settings[settings_from_backup]" id="wpp_backup_file" type="file"/>
         <a href="<?php echo wp_nonce_url( "edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup", 'download-wpp-backup' ); ?>"><?php _e( 'Download Backup of Current WP-Property Configuration.', 'wpp' ); ?></a>
       </div>
 

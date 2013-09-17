@@ -6,7 +6,7 @@
  * @license https://usabilitydynamics.com/services/theme-and-plugin-eula/
  * @link http://api.usabilitydynamics.com/readme/ud_api.txt UD API Changelog
  *
- * @version 1.0.2
+ * @version 1.0.3
  */
 
 if ( class_exists( 'UD_API' ) ) {
@@ -71,6 +71,38 @@ class UD_API {
     }
 
   }
+
+
+  /**
+   * Port of jQuery.extend() function.
+   *
+   * @since 1.0.3
+   * @version 0.1
+   */
+  static function extend() {
+    //$arrays = array_reverse( func_get_args() );
+    $arrays = func_get_args();
+    $base = array_shift( $arrays );
+    if( !is_array( $base ) ) $base = empty( $base ) ? array() : array( $base );
+    foreach( (array) $arrays as $append ) {
+      if( !is_array( $append ) ) $append = array( $append );
+      foreach( (array) $append as $key => $value ) {
+        if( !array_key_exists( $key, $base ) and !is_numeric( $key ) ) {
+        $base[ $key ] = $append[ $key ];
+        continue;
+        }
+        if( @is_array( $value ) or @is_array( $base[ $key ] ) ) {
+        $base[ $key ] = self::extend( $base[ $key ], $append[ $key ] );
+        } else if( is_numeric( $key ) ) {
+        if( !in_array( $value, $base ) ) $base[] = $value;
+        } else {
+        $base[ $key ] = $value;
+        }
+      }
+    }
+    return $base;
+  }
+
 
   /**
    * Converts slashes for Windows paths.
