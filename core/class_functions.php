@@ -5212,10 +5212,10 @@ class WPP_F extends UD_API {
 
     // Setup Group
     if ( $group ) {
+      $group_string = '';
       if ( strpos( $group, '|' ) ) {
         $group_array = explode( "|", $group );
-        $count = 0;
-        $group_string = '';
+        $count = 0;        
         foreach ( $group_array as $group_member ) {
           $count++;
           if ( $count == 1 ) {
@@ -5323,10 +5323,10 @@ class WPP_F extends UD_API {
 
     // Setup Group
     if ( $group ) {
+      $group_string = '';
       if ( strpos( $group, '|' ) ) {
         $group_array = explode( "|", $group );
-        $count = 0;
-        $group_string = '';
+        $count = 0;        
         foreach ( $group_array as $group_member ) {
           $count++;
           if ( $count == 1 ) {
