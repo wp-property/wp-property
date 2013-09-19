@@ -2751,6 +2751,11 @@ class WPP_F extends UD_API {
 
           $plugin_slug = str_replace( array( '.php' ), '', $file );
 
+          //** Admin tools premium feature was moved to core. So it must not be loaded twice. */
+          if( $plugin_slug == 'class_admin_tools' ) {
+            continue;
+          }
+
           $plugin_data = @get_file_data( WPP_Premium . "/" . $file, $default_headers, 'plugin' );
           $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'name' ] = $plugin_data[ 'Name' ];
           $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ] = $plugin_data[ 'Version' ];
