@@ -1561,7 +1561,7 @@ class WPP_F extends UD_API {
   static function revalidate_all_addresses( $args = '' ) {
     global $wp_properties, $wpdb;
 
-    set_time_limit( 600 );
+    set_time_limit( 0 );
     ob_start();
 
     $args = wp_parse_args( $args, array(
@@ -1570,7 +1570,7 @@ class WPP_F extends UD_API {
       'skip_existing' => 'false',
       'return_geo_data' => false,
       'attempt' => 1,
-      'max_attempts' => 10,
+      'max_attempts' => 7,
       'delay' => 0, //Delay validation in seconds
       'increase_delay_by' => 0.25
     ) );
@@ -1614,15 +1614,16 @@ class WPP_F extends UD_API {
     }
 
     $return[ 'attempt' ] = $attempt;
-    if ( !empty( $return[ 'over_query_limit' ] ) && $max_attempts >= $attempt ) {
+    if ( !empty( $return[ 'over_query_limit' ] ) && $max_attempts >= $attempt && $delay < 2 ) {
 
-      $rerevalidate_result = self::revalidate_all_addresses(
-        $args + array(
-          'property_ids' => $return[ 'over_query_limit' ],
-          'echo_result' => false,
-          'attempt' => $attempt + 1,
-          'delay' => $delay + $increase_delay_by
-        ) );
+      $_args = array(
+        'property_ids' => $return[ 'over_query_limit' ],
+        'echo_result' => false,
+        'attempt' => $attempt + 1,
+        'delay' => $delay + $increase_delay_by,
+      ) + $args;
+
+      $rerevalidate_result = self::revalidate_all_addresses( $_args );
 
       $return[ 'updated' ] = array_merge( (array) $return[ 'updated' ], (array) $rerevalidate_result[ 'updated' ] );
       $return[ 'failed' ] = array_merge( (array) $return[ 'failed' ], (array) $rerevalidate_result[ 'failed' ] );
@@ -2750,6 +2751,11 @@ class WPP_F extends UD_API {
         if ( end( @explode( ".", $file ) ) == 'php' ) {
 
           $plugin_slug = str_replace( array( '.php' ), '', $file );
+
+          //** Admin tools premium feature was moved to core. So it must not be loaded twice. */
+          if( $plugin_slug == 'class_admin_tools' ) {
+            continue;
+          }
 
           $plugin_data = @get_file_data( WPP_Premium . "/" . $file, $default_headers, 'plugin' );
           $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'name' ] = $plugin_data[ 'Name' ];
