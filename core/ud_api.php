@@ -1308,7 +1308,7 @@ class UD_API {
       }
 
       if ( !empty( $args[ 'trigger_action' ] ) ) {
-        $notifications = WP_CRM_F::get_trigger_action_notification( $args[ 'trigger_action' ] );
+        $notifications = WP_CRM_N::get_trigger_action_notification( $args[ 'trigger_action' ] );
         if ( !empty( $notifications ) ) {
           return wp_crm_send_notification( $args[ 'trigger_action' ], $args[ 'data' ] );
         }
