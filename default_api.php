@@ -272,7 +272,7 @@ if ( isset( $wp_properties[ 'numeric_attributes' ] ) && is_array( $wp_properties
   if ( isset( $wp_properties['searchable_attr_fields'] ) && is_array( $wp_properties['searchable_attr_fields'] ) ) {
     foreach( $wp_properties['searchable_attr_fields'] as $key => $value ) {
       if ( $value == 'checkbox' ) {
-        add_filter("wpp_stat_filter_$key", create_function(' $value ', ' return $value == "0" ? __("No", WPP) : __("Yes", WPP); '));
+        add_filter("wpp_stat_filter_$key", create_function(' $value ', ' return $value == "0" ? __("No", "wpp") : __("Yes", "wpp"); '));
       }
     }
   }
