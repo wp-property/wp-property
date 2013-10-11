@@ -698,7 +698,7 @@ if( !class_exists( 'class_admin_tools' ) ) {
             </li>
             <li>
               <?php  echo WPP_F::checkbox("name=wpp_settings[configuration][allow_parent_deep_depth]&label=" . __('Enable \'Falls Under\' deep depth.','wpp'), $wp_properties['configuration']['allow_parent_deep_depth']); ?> <br />
-              <span class="description"><?php _e('Allows to set child property as parent.','wpp'); ?></span>
+              <span class="description"><?php printf( __( 'Allows to set child %1s as parent.', 'wpp' ), WPP_F::property_label( 'singular' ) )  ?></span>
             </li>
             <li>
               <?php  echo WPP_F::checkbox("name=wpp_settings[configuration][disable_automatic_feature_update]&label=" . __('Disable automatic feature updates.','wpp'), $wp_properties['configuration']['disable_automatic_feature_update']); ?> <br />
@@ -706,7 +706,7 @@ if( !class_exists( 'class_admin_tools' ) ) {
             </li>
             <li>
               <?php  echo WPP_F::checkbox("name=wpp_settings[configuration][disable_wordpress_postmeta_cache]&label=" . __('Disable WordPress update_post_caches() function.','wpp'), $wp_properties['configuration']['disable_wordpress_postmeta_cache']); ?> <br />
-              <span class="description"><?php _e('This may solve Out of Memory issues if you have a lot of properties.','wpp'); ?></span>
+              <span class="description"><?php printf( __('This may solve Out of Memory issues if you have a lot of %1s.','wpp'), WPP_F::property_label( 'plural' )); ?></span>
             </li>
             <li>
               <?php  echo WPP_F::checkbox("name=wpp_settings[configuration][developer_mode]&label=" . __('Enable developer mode - some extra information displayed via Firebug console.','wpp'), $wp_properties['configuration']['developer_mode']); ?> <br />
