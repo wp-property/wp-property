@@ -5495,7 +5495,7 @@ class WPP_F extends UD_API {
       }
       //** If the page doesn't exist, return default url ( base_slug ) */
       if ( empty( $page_id ) ) {
-        $permalink = site_url() . "/" . ( !is_numeric( $page ) ? $page : $wp_properties[ 'configuration' ][ 'base_slug' ] ) . '/';
+        $permalink = home_url() . "/" . ( !is_numeric( $page ) ? $page : $wp_properties[ 'configuration' ][ 'base_slug' ] ) . '/';
       } else {
         $permalink = get_permalink( $page_id );
       }

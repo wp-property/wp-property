@@ -1505,7 +1505,8 @@ p.pad10 {
 }
 
 .feps_specific_pages_links .feps_templates label {
-  display: inline;
+  display: inline-block;
+  width: 120px;
 }
 
 .feps_specific_pages_links input {
