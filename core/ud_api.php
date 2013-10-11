@@ -71,6 +71,27 @@ class UD_API {
     }
 
   }
+  
+  
+  /**
+   * Parses Query.
+   * HACK. The current logic solves the issue of max_input_vars in the case if query is huge.
+   * For example, user can set more than 150 property attributes where every attribute has own set of params.
+   * 
+   * @see parse_str() Default PHP function
+   * @version 1.0
+   * @author peshkov@UD
+   */
+  function parse_str( $request, $data = array() ) {
+    $request = urldecode( $request );
+    $tokens = explode( "&", $request );
+    foreach ( $tokens as $token ) {
+      $arr = array();
+      parse_str( $token, $arr );
+      $data = self::extend( $data, $arr );
+    }
+    return $data;
+  }
 
 
   /**
