@@ -47,8 +47,7 @@ class WPP_Core {
     //** Pre-init action hook */
     do_action( 'wpp_pre_init' );
 
-    //* set WPP capabilities */
-    $this->set_capabilities();
+    
 
     // Check settings data on accord with existing wp_properties data before option updates
     add_filter( 'wpp_settings_save', array( 'WPP_Core', 'check_wp_settings_data' ), 0, 2 );
@@ -81,6 +80,9 @@ class WPP_Core {
 
     //** Set up our custom object and taxonomyies */
     WPP_F::register_post_type_and_taxonomies();
+    
+    //* set WPP capabilities */
+    $this->set_capabilities();
 
     //** Load all widgets and register widget areas */
     add_action( 'widgets_init', array( 'WPP_F', 'widgets_init' ) );
@@ -1790,12 +1792,12 @@ class WPP_Core {
     //* General WPP capabilities */
     $wpp_capabilities = array(
       //* Manage WPP Properties Capabilities */
-      'edit_wpp_properties' => __( 'View Properties', 'wpp' ),
-      'edit_wpp_property' => __( 'Add/Edit Properties', 'wpp' ),
-      'edit_others_wpp_properties' => __( 'Edit Other Properties', 'wpp' ),
+      'edit_wpp_properties' => sprintf( __( 'View %1s', 'wpp' ), WPP_F::property_label( 'plural' ) ),
+      'edit_wpp_property' => sprintf( __( 'Add/Edit %1s', 'wpp' ), WPP_F::property_label( 'plural' ) ),
+      'edit_others_wpp_properties' => sprintf( __( 'Edit Other %1s', 'wpp' ), WPP_F::property_label( 'plural' ) ),
       //'read_wpp_property' => __( 'Read Property', 'wpp' ),
-      'delete_wpp_property' => __( 'Delete Properties', 'wpp' ),
-      'publish_wpp_properties' => __( 'Publish Properties', 'wpp' ),
+      'delete_wpp_property' => sprintf( __( 'Delete %1s', 'wpp' ), WPP_F::property_label( 'plural' ) ),
+      'publish_wpp_properties' => sprintf( __( 'Publish %1s', 'wpp' ), WPP_F::property_label( 'plural' ) ),
       //'read_private_wpp_properties' => __( 'Read Private Properties', 'wpp' ),
       //* WPP Settings capability */
       'manage_wpp_settings' => __( 'Manage Settings', 'wpp' ),

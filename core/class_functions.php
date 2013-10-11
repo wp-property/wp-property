@@ -102,11 +102,11 @@ class WPP_F extends UD_API {
     global $wp_post_types;
 
     if ( $type == 'plural' ) {
-      return ( $wp_post_types[ 'property' ]->labels->name ? $wp_post_types[ 'property' ]->labels->name : __( 'Properties' ) );
+      return ( $wp_post_types[ 'property' ]->labels->name ? $wp_post_types[ 'property' ]->labels->name : __( 'Properties', 'wpp' ) );
     }
 
     if ( $type == 'singular' ) {
-      return ( $wp_post_types[ 'property' ]->labels->singular_name ? $wp_post_types[ 'property' ]->labels->singular_name : __( 'Property' ) );
+      return ( $wp_post_types[ 'property' ]->labels->singular_name ? $wp_post_types[ 'property' ]->labels->singular_name : __( 'Property' , 'wpp') );
     }
 
   }
@@ -2974,9 +2974,9 @@ class WPP_F extends UD_API {
 
     // Filter bool values
     if ( $value == 'true' ) {
-      $value = __( 'Yes', 'wp' );
+      $value = __( 'Yes', 'wpp' );
     } elseif ( $value == 'false' ) {
-      $value = __( 'No', 'wp' );
+      $value = __( 'No', 'wpp' );
     }
 
     // Filter currency
@@ -4719,7 +4719,6 @@ class WPP_F extends UD_API {
     $sColumns = $_REQUEST[ 'sColumns' ];
     $order_by = $_REQUEST[ 'iSortCol_0' ];
     $sort_dir = $_REQUEST[ 'sSortDir_0' ];
-    //$current_screen = $wpi_settings['pages']['main'];
 
     //** Parse the serialized filters array */
     parse_str( $_REQUEST[ 'wpp_filter_vars' ], $wpp_filter_vars );
@@ -5015,8 +5014,8 @@ class WPP_F extends UD_API {
     add_screen_option( 'layout_columns', array( 'max' => 2, 'default' => 2 ) );
 
     //** Default Help items */
-    $contextual_help[ 'General Help' ][ ] = '<h3>' . __( 'General Help', WPI ) . '</h3>';
-    $contextual_help[ 'General Help' ][ ] = '<p>' . __( 'Comming soon...', WPI ) . '</p>';
+    $contextual_help[ 'General Help' ][ ] = '<h3>' . __( 'General Help', 'wpp' ) . '</h3>';
+    $contextual_help[ 'General Help' ][ ] = '<p>' . __( 'Comming soon...', 'wpp' ) . '</p>';
 
     //** Hook this action is you want to add info */
     $contextual_help = apply_filters( 'property_page_all_properties_help', $contextual_help );
@@ -5262,10 +5261,10 @@ class WPP_F extends UD_API {
 
     // Setup Group
     if ( $group ) {
+      $group_string = '';
       if ( strpos( $group, '|' ) ) {
         $group_array = explode( "|", $group );
-        $count = 0;
-        $group_string = '';
+        $count = 0;        
         foreach ( $group_array as $group_member ) {
           $count++;
           if ( $count == 1 ) {
@@ -5373,10 +5372,10 @@ class WPP_F extends UD_API {
 
     // Setup Group
     if ( $group ) {
+      $group_string = '';
       if ( strpos( $group, '|' ) ) {
         $group_array = explode( "|", $group );
-        $count = 0;
-        $group_string = '';
+        $count = 0;        
         foreach ( $group_array as $group_member ) {
           $count++;
           if ( $count == 1 ) {

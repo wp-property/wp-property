@@ -314,7 +314,7 @@ class WPP_List_Table extends WP_List_Table {
 
     ?>
     <select name="<?php echo $field_name; ?>">
-      <option<?php selected( $m, 0 ); ?> value='0'><?php _e( 'Show all dates' ); ?></option>
+      <option<?php selected( $m, 0 ); ?> value='0'><?php _e( 'Show all dates', 'wpp' ); ?></option>
       <?php
       foreach ( $months as $arc_row ) {
         if ( 0 == $arc_row->year ) {
@@ -391,7 +391,7 @@ class WPP_List_Table extends WP_List_Table {
   function no_items() {
     //** DataTables expects a set number of columns */
     $result[ 0 ] = '';
-    $result[ 1 ] = __( 'Nothing found.' );
+    $result[ 1 ] = __( 'Nothing found.', 'wpp' );
 
     if ( count( $result ) < $this->_args[ 'iColumns' ] ) {
       $add_columns = ( $this->_args[ 'iColumns' ] - count( $result ) );

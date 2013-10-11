@@ -98,7 +98,7 @@ class WPP_Export {
 
       //** If class still doesn't exist, for whatever reason, we fail */
       if ( !class_exists( 'XML_Serializer' ) ) {
-        throw new Exception( __( 'XML_Serializer could not be loaded.', 'pea' ) );
+        throw new Exception( __( 'XML_Serializer could not be loaded.', 'wpp' ) );
       }
 
       $Serializer = & new XML_Serializer( $options );
@@ -106,7 +106,7 @@ class WPP_Export {
       $status = $Serializer->serialize( $data );
 
       if ( PEAR::isError( $status ) ) {
-        throw new Exception( __( 'Could not convert data to XML.', 'pea' ) );
+        throw new Exception( __( 'Could not convert data to XML.', 'wpp' ) );
       }
 
       $data = $Serializer->getSerializedData();

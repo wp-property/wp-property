@@ -756,7 +756,7 @@ class UD_API {
       }
     }
 
-    return $response ? $response : new WP_Error( 'error', $wpdb->print_error() ? $wpdb->print_error() : __( 'Unknown error.' . $wpdb->last_query ) );
+    return $response ? $response : new WP_Error( 'error', $wpdb->print_error() ? $wpdb->print_error() : __( 'Unknown error.' . $wpdb->last_query, 'wpp' ) );
 
   }
 
@@ -843,7 +843,7 @@ class UD_API {
     $log = "{$prefix}_log";
 
     if ( !did_action( 'init' ) ) {
-      _doing_it_wrong( __FUNCTION__, sprintf( __( 'You cannot call UD_API::log() before the %1$s hook, since the current user is not yet known.' ), 'init' ), '3.4' );
+      _doing_it_wrong( __FUNCTION__, sprintf( __( 'You cannot call UD_API::log() before the %1$s hook, since the current user is not yet known.', 'wpp' ), 'init' ), '3.4' );
       return false;
     }
 
@@ -959,7 +959,7 @@ class UD_API {
   static function add_log_page() {
 
     if ( did_action( 'admin_menu' ) ) {
-      _doing_it_wrong( __FUNCTION__, sprintf( __( 'You cannot call UD_API::add_log_page() after the %1$s hook.' ), 'init' ), '3.4' );
+      _doing_it_wrong( __FUNCTION__, sprintf( __( 'You cannot call UD_API::add_log_page() after the %1$s hook.', 'wpp' ), 'init' ), '3.4' );
       return false;
     }
 
@@ -1007,7 +1007,7 @@ class UD_API {
       $output[ ] = '<td>' . self::nice_time( $event[ 'time' ] ) . '</td>';
       $output[ ] = '<td>' . $event[ 'type' ] . '</td>';
       $output[ ] = '<td>' . $event[ 'message' ] . '</td>';
-      $output[ ] = '<td>' . ( is_numeric( $event[ 'user' ] ) ? get_userdata( $event[ 'user' ] )->display_name : __( 'None' ) ) . '</td>';
+      $output[ ] = '<td>' . ( is_numeric( $event[ 'user' ] ) ? get_userdata( $event[ 'user' ] )->display_name : __( 'None', 'wpp' ) ) . '</td>';
       $output[ ] = '<td>' . $event[ 'object' ] . '</td>';
       $output[ ] = '</tr>';
     }
