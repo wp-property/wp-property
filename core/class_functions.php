@@ -102,11 +102,11 @@ class WPP_F extends UD_API {
     global $wp_post_types;
 
     if ( $type == 'plural' ) {
-      return ( $wp_post_types[ 'property' ]->labels->name ? $wp_post_types[ 'property' ]->labels->name : __( 'Properties' ) );
+      return ( $wp_post_types[ 'property' ]->labels->name ? $wp_post_types[ 'property' ]->labels->name : __( 'Properties', 'wpp' ) );
     }
 
     if ( $type == 'singular' ) {
-      return ( $wp_post_types[ 'property' ]->labels->singular_name ? $wp_post_types[ 'property' ]->labels->singular_name : __( 'Property' ) );
+      return ( $wp_post_types[ 'property' ]->labels->singular_name ? $wp_post_types[ 'property' ]->labels->singular_name : __( 'Property' , 'wpp') );
     }
 
   }
@@ -1561,7 +1561,7 @@ class WPP_F extends UD_API {
   static function revalidate_all_addresses( $args = '' ) {
     global $wp_properties, $wpdb;
 
-    set_time_limit( 600 );
+    set_time_limit( 0 );
     ob_start();
 
     $args = wp_parse_args( $args, array(
@@ -1570,7 +1570,7 @@ class WPP_F extends UD_API {
       'skip_existing' => 'false',
       'return_geo_data' => false,
       'attempt' => 1,
-      'max_attempts' => 10,
+      'max_attempts' => 7,
       'delay' => 0, //Delay validation in seconds
       'increase_delay_by' => 0.25
     ) );
@@ -1614,15 +1614,16 @@ class WPP_F extends UD_API {
     }
 
     $return[ 'attempt' ] = $attempt;
-    if ( !empty( $return[ 'over_query_limit' ] ) && $max_attempts >= $attempt ) {
+    if ( !empty( $return[ 'over_query_limit' ] ) && $max_attempts >= $attempt && $delay < 2 ) {
 
-      $rerevalidate_result = self::revalidate_all_addresses(
-        $args + array(
-          'property_ids' => $return[ 'over_query_limit' ],
-          'echo_result' => false,
-          'attempt' => $attempt + 1,
-          'delay' => $delay + $increase_delay_by
-        ) );
+      $_args = array(
+        'property_ids' => $return[ 'over_query_limit' ],
+        'echo_result' => false,
+        'attempt' => $attempt + 1,
+        'delay' => $delay + $increase_delay_by,
+      ) + $args;
+
+      $rerevalidate_result = self::revalidate_all_addresses( $_args );
 
       $return[ 'updated' ] = array_merge( (array) $return[ 'updated' ], (array) $rerevalidate_result[ 'updated' ] );
       $return[ 'failed' ] = array_merge( (array) $return[ 'failed' ], (array) $rerevalidate_result[ 'failed' ] );
@@ -2544,19 +2545,7 @@ class WPP_F extends UD_API {
   function save_settings() {
     global $wp_properties;
 
-    /**
-     * Parses Query.
-     * HACK. The current logic solves the issue of max_input_vars in the case if query is huge.
-     * For example, user can set more than 150 property attributes where every attribute has own set of params.
-     */
-    $request = urldecode( $_REQUEST[ 'data' ] );
-    $tokens = explode( "&", $request );
-    $data = array();
-    foreach ( $tokens as $token ) {
-      $arr = array();
-      parse_str( $token, $arr );
-      $data = self::extend( $data, $arr );
-    }
+    $data = self::parse_str( $_REQUEST[ 'data' ] );
 
     $return = array(
       'success' => true,
@@ -2973,9 +2962,9 @@ class WPP_F extends UD_API {
 
     // Filter bool values
     if ( $value == 'true' ) {
-      $value = __( 'Yes', 'wp' );
+      $value = __( 'Yes', 'wpp' );
     } elseif ( $value == 'false' ) {
-      $value = __( 'No', 'wp' );
+      $value = __( 'No', 'wpp' );
     }
 
     // Filter currency
@@ -4718,7 +4707,6 @@ class WPP_F extends UD_API {
     $sColumns = $_REQUEST[ 'sColumns' ];
     $order_by = $_REQUEST[ 'iSortCol_0' ];
     $sort_dir = $_REQUEST[ 'sSortDir_0' ];
-    //$current_screen = $wpi_settings['pages']['main'];
 
     //** Parse the serialized filters array */
     parse_str( $_REQUEST[ 'wpp_filter_vars' ], $wpp_filter_vars );
@@ -5014,8 +5002,8 @@ class WPP_F extends UD_API {
     add_screen_option( 'layout_columns', array( 'max' => 2, 'default' => 2 ) );
 
     //** Default Help items */
-    $contextual_help[ 'General Help' ][ ] = '<h3>' . __( 'General Help', WPI ) . '</h3>';
-    $contextual_help[ 'General Help' ][ ] = '<p>' . __( 'Comming soon...', WPI ) . '</p>';
+    $contextual_help[ 'General Help' ][ ] = '<h3>' . __( 'General Help', 'wpp' ) . '</h3>';
+    $contextual_help[ 'General Help' ][ ] = '<p>' . __( 'Comming soon...', 'wpp' ) . '</p>';
 
     //** Hook this action is you want to add info */
     $contextual_help = apply_filters( 'property_page_all_properties_help', $contextual_help );
@@ -5261,10 +5249,10 @@ class WPP_F extends UD_API {
 
     // Setup Group
     if ( $group ) {
+      $group_string = '';
       if ( strpos( $group, '|' ) ) {
         $group_array = explode( "|", $group );
-        $count = 0;
-        $group_string = '';
+        $count = 0;        
         foreach ( $group_array as $group_member ) {
           $count++;
           if ( $count == 1 ) {
@@ -5372,10 +5360,10 @@ class WPP_F extends UD_API {
 
     // Setup Group
     if ( $group ) {
+      $group_string = '';
       if ( strpos( $group, '|' ) ) {
         $group_array = explode( "|", $group );
-        $count = 0;
-        $group_string = '';
+        $count = 0;        
         foreach ( $group_array as $group_member ) {
           $count++;
           if ( $count == 1 ) {
@@ -5495,7 +5483,7 @@ class WPP_F extends UD_API {
       }
       //** If the page doesn't exist, return default url ( base_slug ) */
       if ( empty( $page_id ) ) {
-        $permalink = site_url() . "/" . ( !is_numeric( $page ) ? $page : $wp_properties[ 'configuration' ][ 'base_slug' ] ) . '/';
+        $permalink = home_url() . "/" . ( !is_numeric( $page ) ? $page : $wp_properties[ 'configuration' ][ 'base_slug' ] ) . '/';
       } else {
         $permalink = get_permalink( $page_id );
       }

@@ -71,6 +71,27 @@ class UD_API {
     }
 
   }
+  
+  
+  /**
+   * Parses Query.
+   * HACK. The current logic solves the issue of max_input_vars in the case if query is huge.
+   * For example, user can set more than 150 property attributes where every attribute has own set of params.
+   * 
+   * @see parse_str() Default PHP function
+   * @version 1.0
+   * @author peshkov@UD
+   */
+  function parse_str( $request, $data = array() ) {
+    $request = urldecode( $request );
+    $tokens = explode( "&", $request );
+    foreach ( $tokens as $token ) {
+      $arr = array();
+      parse_str( $token, $arr );
+      $data = self::extend( $data, $arr );
+    }
+    return $data;
+  }
 
 
   /**
@@ -756,7 +777,7 @@ class UD_API {
       }
     }
 
-    return $response ? $response : new WP_Error( 'error', $wpdb->print_error() ? $wpdb->print_error() : __( 'Unknown error.' . $wpdb->last_query ) );
+    return $response ? $response : new WP_Error( 'error', $wpdb->print_error() ? $wpdb->print_error() : __( 'Unknown error.' . $wpdb->last_query, 'wpp' ) );
 
   }
 
@@ -843,7 +864,7 @@ class UD_API {
     $log = "{$prefix}_log";
 
     if ( !did_action( 'init' ) ) {
-      _doing_it_wrong( __FUNCTION__, sprintf( __( 'You cannot call UD_API::log() before the %1$s hook, since the current user is not yet known.' ), 'init' ), '3.4' );
+      _doing_it_wrong( __FUNCTION__, sprintf( __( 'You cannot call UD_API::log() before the %1$s hook, since the current user is not yet known.', 'wpp' ), 'init' ), '3.4' );
       return false;
     }
 
@@ -959,7 +980,7 @@ class UD_API {
   static function add_log_page() {
 
     if ( did_action( 'admin_menu' ) ) {
-      _doing_it_wrong( __FUNCTION__, sprintf( __( 'You cannot call UD_API::add_log_page() after the %1$s hook.' ), 'init' ), '3.4' );
+      _doing_it_wrong( __FUNCTION__, sprintf( __( 'You cannot call UD_API::add_log_page() after the %1$s hook.', 'wpp' ), 'init' ), '3.4' );
       return false;
     }
 
@@ -1007,7 +1028,7 @@ class UD_API {
       $output[ ] = '<td>' . self::nice_time( $event[ 'time' ] ) . '</td>';
       $output[ ] = '<td>' . $event[ 'type' ] . '</td>';
       $output[ ] = '<td>' . $event[ 'message' ] . '</td>';
-      $output[ ] = '<td>' . ( is_numeric( $event[ 'user' ] ) ? get_userdata( $event[ 'user' ] )->display_name : __( 'None' ) ) . '</td>';
+      $output[ ] = '<td>' . ( is_numeric( $event[ 'user' ] ) ? get_userdata( $event[ 'user' ] )->display_name : __( 'None', 'wpp' ) ) . '</td>';
       $output[ ] = '<td>' . $event[ 'object' ] . '</td>';
       $output[ ] = '</tr>';
     }
@@ -1308,7 +1329,7 @@ class UD_API {
       }
 
       if ( !empty( $args[ 'trigger_action' ] ) ) {
-        $notifications = WP_CRM_F::get_trigger_action_notification( $args[ 'trigger_action' ] );
+        $notifications = WP_CRM_N::get_trigger_action_notification( $args[ 'trigger_action' ] );
         if ( !empty( $notifications ) ) {
           return wp_crm_send_notification( $args[ 'trigger_action' ], $args[ 'data' ] );
         }
