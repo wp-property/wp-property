@@ -476,6 +476,7 @@ if( !class_exists( 'class_admin_tools' ) ) {
                     <option value="dropdown" <?php selected($wp_properties['searchable_attr_fields'][$slug],'dropdown'); ?>><?php _e('Dropdown Selection','wpp') ?></option>
                     <option value="checkbox" <?php selected($wp_properties['searchable_attr_fields'][$slug], 'checkbox'); ?>><?php _e('Single Checkbox','wpp') ?></option>
                     <option value="multi_checkbox" <?php selected($wp_properties['searchable_attr_fields'][$slug], 'multi_checkbox'); ?>><?php _e('Multi-Checkbox','wpp') ?></option>
+                    <?php do_action( 'wpp::property_attributes::searchable_attr_field', $slug ); ?>
                   </select>
                 </li>
                 <li>
@@ -492,6 +493,7 @@ if( !class_exists( 'class_admin_tools' ) ) {
                     <option value="input" <?php selected($wp_properties['admin_attr_fields'][$slug],'input'); ?>><?php _e('Free Text','wpp') ?></option>
                     <option value="dropdown" <?php selected($wp_properties['admin_attr_fields'][$slug],'dropdown'); ?>><?php _e('Dropdown Selection','wpp') ?></option>
                     <option value="checkbox" <?php selected($wp_properties['admin_attr_fields'][$slug], 'checkbox'); ?>><?php _e('Single Checkbox','wpp') ?></option>
+                    <?php do_action( 'wpp::property_attributes::admin_attr_field', $slug ); ?>
                   </select>
                 </li>
                 <li>
