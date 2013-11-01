@@ -2545,19 +2545,7 @@ class WPP_F extends UD_API {
   function save_settings() {
     global $wp_properties;
 
-    /**
-     * Parses Query.
-     * HACK. The current logic solves the issue of max_input_vars in the case if query is huge.
-     * For example, user can set more than 150 property attributes where every attribute has own set of params.
-     */
-    $request = urldecode( $_REQUEST[ 'data' ] );
-    $tokens = explode( "&", $request );
-    $data = array();
-    foreach ( $tokens as $token ) {
-      $arr = array();
-      parse_str( $token, $arr );
-      $data = self::extend( $data, $arr );
-    }
+    $data = self::parse_str( $_REQUEST[ 'data' ] );
 
     $return = array(
       'success' => true,
