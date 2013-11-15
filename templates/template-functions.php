@@ -1292,7 +1292,7 @@ if ( !function_exists( 'draw_property_search_form' ) ):
 
     $property_stats = $wp_properties[ 'property_stats' ];
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
-      $property_stats[ 'property_type' ] = __( 'Property Type', 'wpp' );
+      $property_stats[ 'property_type' ] = sprintf(__( '%1s Type', 'wpp' ), WPP_F::property_label( 'singular' ) );
     }
 
     //** Load search values for attributes (from cache, or generate) */

@@ -78,15 +78,15 @@ if( !class_exists( 'class_admin_tools' ) ) {
 
       $data['Developer'][] = '<h3>' . __('Developer', 'wpp') .'</h3>';
       $data['Developer'][] = '<p>' . __('The <b>slug</b> is automatically created from the title and is used in the back-end.  It is also used for template selection, example: floorplan will look for a template called property-floorplan.php in your theme folder, or default to property.php if nothing is found.') .'</p>';
-      $data['Developer'][] = '<p>' . __('If <b>Searchable</b> is checked then the property will be loaded for search, and available on the property search widget.') .'</p>';
-      $data['Developer'][] = '<p>' . __('If <b>Location Matters</b> is checked, then an address field will be displayed for the property, and validated against Google Maps API.  Additionally, the property will be displayed on the SuperMap, if the feature is installed.') .'</p>';
-      $data['Developer'][] = '<p>' . __('<b>Hidden Attributes</b> determine which attributes are not applicable to the given property type, and will be grayed out in the back-end.') .'</p>';
-      $data['Developer'][] = '<p>' . __('<b>Inheritance</b> determines which attributes should be automatically inherited from the parent property') .'</p>';
-      $data['Developer'][] = '<p>' . __('Property attributes are meant to be short entries that can be searchable, on the back-end attributes will be displayed as single-line input boxes. On the front-end they are displayed using a definitions list.') .'</p>';
-      $data['Developer'][] = '<p>' . __('Making an attribute as "searchable" will list it as one of the searchable options in the Property Search widget settings.') .'</p>';
+      $data['Developer'][] = '<p>' . sprintf(__('If <b>Searchable</b> is checked then the property will be loaded for search, and available on the %1s search widget.') .'</p>', WPP_F::property_label( 'singular' ) );
+      $data['Developer'][] = '<p>' . sprintf(__('If <b>Location Matters</b> is checked, then an address field will be displayed for the property, and validated against Google Maps API.  Additionally, the %1s will be displayed on the SuperMap, if the feature is installed.') .'</p>', WPP_F::property_label( 'singular' ) );
+      $data['Developer'][] = '<p>' . sprintf(__('<b>Hidden Attributes</b> determine which attributes are not applicable to the given %1s type, and will be grayed out in the back-end.') .'</p>', WPP_F::property_label( 'singular' ) );
+      $data['Developer'][] = '<p>' . sprintf(__('<b>Inheritance</b> determines which attributes should be automatically inherited from the parent %1s') .'</p>', WPP_F::property_label( 'singular' ) );
+      $data['Developer'][] = '<p>' . sprintf(__('%1s attributes are meant to be short entries that can be searchable, on the back-end attributes will be displayed as single-line input boxes. On the front-end they are displayed using a definitions list.') .'</p>', WPP_F::property_label( 'singular' ) );
+      $data['Developer'][] = '<p>' . sprintf(__('Making an attribute as "searchable" will list it as one of the searchable options in the %1s Search widget settings.') .'</p>', WPP_F::property_label( 'singular' ) );
       $data['Developer'][] = '<p>' . __('Be advised, attributes added via add_filter() function supercede the settings on this page.') .'</p>';
-      $data['Developer'][] = '<p>' . __('<b>Search Input:</b> Select and input type and enter comma-separated values that you would like to be used in property search, on the front-end.', 'wpp') .'</p>';
-      $data['Developer'][] = '<p>' . __('<b>Data Entry:</b> Enter comma-separated values that you would like to use on the back-end when editing properties.', 'wpp') .'</p>';
+      $data['Developer'][] = '<p>' . sprintf(__('<b>Search Input:</b> Select and input type and enter comma-separated values that you would like to be used in %1s search, on the front-end.', 'wpp') .'</p>', WPP_F::property_label( 'singular' ) );
+      $data['Developer'][] = '<p>' . sprintf(__('<b>Data Entry:</b> Enter comma-separated values that you would like to use on the back-end when editing %1s.', 'wpp'), WPP_F::property_label( 'plural' ) ) .'</p>';
 
       return $data;
 

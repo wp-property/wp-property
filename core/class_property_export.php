@@ -186,7 +186,7 @@ class WPP_Export {
     $results = $wpp_query[ 'results' ];
 
     if ( count( $results ) == 0 ) {
-      die( __( 'No published properties.', 'wpp' ) );
+      die( sprintf(__( 'No published %1s.', 'wpp' ), WPP_F::property_label( 'plural' ) ) );
     }
 
     if ( $xml_format ) {

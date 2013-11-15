@@ -108,7 +108,7 @@ class WPP_Core {
 
     /** Ajax functions */
     add_action( 'wp_ajax_wpp_ajax_max_set_property_type', create_function( "", ' die(WPP_F::mass_set_property_type($_REQUEST["property_type"]));' ) );
-    add_action( 'wp_ajax_wpp_ajax_property_query', create_function( "", ' $class = WPP_F::get_property(trim($_REQUEST["property_id"])); if($class) { echo "WPP_F::get_property() output: \n\n"; print_r($class); echo "\nAfter prepare_property_for_display() filter:\n\n"; print_r(prepare_property_for_display($class));  } else { echo __("No property found.","wpp"); } die();' ) );
+    add_action( 'wp_ajax_wpp_ajax_property_query', create_function( "", ' $class = WPP_F::get_property(trim($_REQUEST["property_id"])); if($class) { echo "WPP_F::get_property() output: \n\n"; print_r($class); echo "\nAfter prepare_property_for_display() filter:\n\n"; print_r(prepare_property_for_display($class));  } else { echo sprintf(__("No %1s found.","wpp"), WPP_F::property_label( "singular" ) );; } die();' ) );
     add_action( 'wp_ajax_wpp_ajax_image_query', create_function( "", ' $class = WPP_F::get_property_image_data($_REQUEST["image_id"]); if($class)  print_r($class); else echo __("No image found.","wpp"); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_check_plugin_updates', create_function( "", '  echo WPP_F::check_plugin_updates(); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_clear_cache', create_function( "", '  echo WPP_F::clear_cache(); die();' ) );
@@ -296,7 +296,7 @@ class WPP_Core {
 
     //** Add metabox for child properties */
     if ( $post->post_type == 'property' && $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_parent = '{$post->ID}' AND post_status = 'publish' " ) ) {
-      add_meta_box( 'wpp_property_children', __( 'Child Properties', 'wpp' ), array( 'WPP_UI', 'child_properties' ), 'property', 'side', 'high' );
+      add_meta_box( 'wpp_property_children', sprintf(__( 'Child %1s', 'wpp' ), WPP_F::property_label( 'plural' ) ), array( 'WPP_UI', 'child_properties' ), 'property', 'side', 'high' );
     }
   }
 
@@ -769,19 +769,20 @@ class WPP_Core {
 
     $messages[ 'property' ] = array(
       0 => '', // Unused. Messages start at index 1.
-      1 => sprintf( __( 'Property updated. <a href="%s">view property</a>', 'wpp' ), esc_url( get_permalink( $post_id ) ) ),
+      1 => sprintf( __( '%2s updated. <a href="%s">view %1s</a>', 'wpp' ), WPP_F::property_label( 'singular' ), esc_url( get_permalink( $post_id ) ), WPP_F::property_label( 'singular' ) ),
       2 => __( 'Custom field updated.', 'wpp' ),
       3 => __( 'Custom field deleted.', 'wpp' ),
-      4 => __( 'Property updated.', 'wpp' ),
+      4 => sprintf(__( '%1s updated.', 'wpp' ), WPP_F::property_label( 'singular' ) ),
       /* translators: %s: date and time of the revision */
-      5 => isset( $_GET[ 'revision' ] ) ? sprintf( __( 'Property restored to revision from %s', 'wpp' ), wp_post_revision_title( (int) $_GET[ 'revision' ], false ) ) : false,
-      6 => sprintf( __( 'Property published. <a href="%s">View property</a>', 'wpp' ), esc_url( get_permalink( $post_id ) ) ),
-      7 => __( 'Property saved.', 'wpp' ),
-      8 => sprintf( __( 'Property submitted. <a target="_blank" href="%s">Preview property</a>', 'wpp' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ) ),
-      9 => sprintf( __( 'Property scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview property</a>', 'wpp' ),
+      5 => isset( $_GET[ 'revision' ] ) ? sprintf( __( '%1s restored to revision from %s', 'wpp' ), WPP_F::property_label( 'singular' ), wp_post_revision_title( (int) $_GET[ 'revision' ], false ) ) : false,
+      6 => sprintf( __( '%1s published. <a href="%s">View %2s</a>', 'wpp' ), WPP_F::property_label( 'singular' ), esc_url( get_permalink( $post_id ) ), WPP_F::property_label( 'singular' ) ),
+      7 => sprintf(__( '%1s saved.', 'wpp' ), WPP_F::property_label( 'singular' )),
+      8 => sprintf( __( '%1s submitted. <a target="_blank" href="%s">Preview %2s</a>', 'wpp' ), WPP_F::property_label( 'singular' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), WPP_F::property_label( 'singular' ) ),
+      9 => sprintf( __( '%1s scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview %2s</a>', 'wpp' ),
         // translators: Publish box date format, see http://php.net/date
-        date_i18n( __( 'M j, Y @ G:i', 'wpp' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_id ) ) ),
-      10 => sprintf( __( 'Property draft updated. <a target="_blank" href="%s">Preview property</a>', 'wpp' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ) ),
+        WPP_F::property_label( 'singular' ),
+        date_i18n( __( 'M j, Y @ G:i', 'wpp' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_id ) ), WPP_F::property_label( 'singular' ) ),
+      10 => sprintf( __( '%1s draft updated. <a target="_blank" href="%s">Preview %2s</a>', 'wpp' ), WPP_F::property_label( 'singular' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), WPP_F::property_label( 'singular' ) ),
     );
 
     $messages = apply_filters( 'wpp_updated_messages', $messages );
