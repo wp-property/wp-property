@@ -465,8 +465,8 @@ if ( !function_exists( 'wpp_draw_pagination' ) ):
               /* Update max page in slider and in display */
               jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider" ).slider( "option", "max", result_data.wpp_query.pages );
               jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_total_page_count" ).text( result_data.wpp_query.pages );
-              max_slider_pos = result_data.wpp_query.pages;
-              if ( max_slider_pos == 0 ) jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_current_page_count" ).text( 0 );
+              max_slider_pos_<?php echo $unique_hash; ?> = result_data.wpp_query.pages;
+              if ( max_slider_pos_<?php echo $unique_hash; ?> == 0 ) jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_current_page_count" ).text( 0 );
               <?php } ?>
               jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> a.fancybox_image" ).fancybox( {
                 'transitionIn': 'elastic',
@@ -485,7 +485,7 @@ if ( !function_exists( 'wpp_draw_pagination' ) ):
             return null;
           }
           document_ready = true;
-          max_slider_pos = <?php echo ($pages ? $pages : 'null'); ?>;
+          max_slider_pos_<?php echo $unique_hash; ?> = <?php echo ($pages ? $pages : 'null'); ?>;
           //** Do not assign click event again */
           if ( !jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_back' ).data( 'events' ) ) {
             jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_back' ).click( function () {
@@ -501,7 +501,7 @@ if ( !function_exists( 'wpp_draw_pagination' ) ):
           if ( !jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_forward' ).data( 'events' ) ) {
             jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_forward' ).click( function () {
               var current_value = jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider" ).slider( "value" );
-              if ( max_slider_pos && (current_value == max_slider_pos || max_slider_pos < 1 ) ) {
+              if ( max_slider_pos_<?php echo $unique_hash; ?> && (current_value == max_slider_pos_<?php echo $unique_hash; ?> || max_slider_pos_<?php echo $unique_hash; ?> < 1 ) ) {
                 return;
               }
               var new_value = current_value + 1;
