@@ -66,7 +66,7 @@
 
   <ul class="<?php wpp_css("feps-default-template::fields-wrapper","feps_user_input_fields"); ?>">
 
-    <?php if (empty($current_user->data)) { ?>
+    <?php if (empty($current_user->data)) : ?>
       <li class="<?php wpp_css("feps-default-template::row-wrapper", array("wpp_feps_row_wrapper")); ?>">
         <div class="<?php wpp_css("feps-default-template::label-wrapper", array("wpp_feps_label_wrapper")); ?>">
           <label for="<?php echo $form_id; ?>_user_email"><span class="<?php wpp_css("feps-default-template::the_title","the_title"); ?>"><?php _e('Your e-mail:', 'wpp'); ?></span></label>
@@ -89,7 +89,10 @@
         </div>
         <div class="<?php wpp_css("feps-default-template::clear","clear"); ?>"></div>
       </li>
-    <?php } ?>
+    <?php endif; ?>
+      
+    <?php do_action( 'wpp::feps::edit_property', $property ); ?>
+    
     <li class="<?php wpp_css("feps-default-template::input-wrapper","wpp_feps_input_wrapper submit_action"); ?> ">
       <span class="<?php wpp_css("feps-default-template::ajax-message","wpp_feps_ajax_message"); ?>"></span>
       <input tabindex="<?php echo $tabindex; ?>" type="submit" class="<?php wpp_css("feps-default-template::submit","wpp_feps_submit_form btn feps_action_btn"); ?>" value="<?php echo apply_filters( 'feps::template::submit::btn', __('Submit', 'wpp'), $property, $form ); ?>" />

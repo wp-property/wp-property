@@ -12,9 +12,14 @@
 
 global $wpi_settings, $wpp_feps_subsc_plan;
 
+$post_id = $_REQUEST['feps'];
+$renew_plan = get_post_meta( $post_id, FEPS_RENEW_PLAN, true );
+$renew_plan = !empty( $renew_plan ) && $renew_plan == 'true' ? 'checked' : '';
+
 ?><form method="POST" action="<?php echo class_wpp_feps::get_edit_feps_permalink( $_REQUEST['feps'], 'checkout' ); ?>" class="<?php wpp_css("feps-subpaln-template::form","wpp_feps_form"); ?> wpp_feps_subscription_plan_form">
-  <?php wp_nonce_field( 'feps_select_subscription_plan', '_wpnonce' ); ?>
-  <?php $checked = false; ?>
+    <?php wp_nonce_field( 'feps_select_subscription_plan', '_wpnonce' ); ?>
+    <?php $checked = false; ?>
+    <h3><?php _e( 'Choose Subscription Plan', 'wpp' ); ?>:</h3>
     <ul class="<?php wpp_css("feps-subpaln-template::fields-wrapper","wpp_feps_subscription_plan_list feps_property_input_fields"); ?>">
     <?php foreach( (array)$subscription_plans as $plan_key => $plan_data ): ?>
       <?php if( empty( $wpp_feps_subsc_plan ) ) $wpp_feps_subsc_plan = $plan_key; ?>
@@ -46,11 +51,25 @@ global $wpi_settings, $wpp_feps_subsc_plan;
         <div class="<?php wpp_css("feps-subpaln-template::clear","clear"); ?>"></div>
       </li>
     <?php $checked=true; endforeach; ?>
+  </ul><br/>
+  <h3><?php _e( 'Subscription Plan Options', 'wpp' ); ?>:</h3>
+  <ul class="<?php wpp_css("feps-default-template::fields-wrapper",""); ?>">
+    <li>
+      <div class="<?php wpp_css("feps-default-template::input-wrapper","wpp_feps_input_wrapper"); ?>">
+        <div class="<?php wpp_css("feps-default-template::input-content","wpp_feps_input_content"); ?>">
+          <label>
+            <input id="renew_plan_<?php echo $post_id; ?>" type="checkbox" value="" <?php echo $renew_plan; ?> /> 
+            <?php printf( __( 'Enable automatic renewal of Subscription plan for the current %1$s when subscription time is expired.', 'wpp' ), WPP_F::property_label( 'singular' ) ); ?>
+            <span class="<?php wpp_css("feps-default-template::attribute_description_text","attribute_description_text"); ?>"><?php printf( __( 'Credits will be automatically withdrawn from your balance. Notice, automatic renewal will be done only if you have enough credits on your balance.', 'wpp' ), WPP_F::property_label( 'singular' ) ); ?></span>
+          </label>
+        </div>
+      </div>
+    </li>
   </ul>
   <ul class="<?php wpp_css("feps-subpaln-template::fields-wrapper","feps_actions feps_user_input_fields"); ?>">
     <?php if( !empty( $form_data[ 'can_manage_feps' ] ) && $form_data[ 'can_manage_feps' ] == 'true' ) : ?>
     <li class="<?php wpp_css("feps-subpaln-template::back-action-wrapper","wpp_feps_input_wrapper back_action"); ?>">
-      <input type="button" onclick="window.location.href = '<?php echo class_wpp_feps::get_edit_feps_permalink( $_REQUEST['feps'], 'edit' ); ?>';" value="<?php _e('Back', 'wpp'); ?>" class="<?php wpp_css("feps-subpaln-template::back-action","btn feps_action_btn"); ?>" />
+      <input type="button" onclick="window.location.href = '<?php echo class_wpp_feps::get_edit_feps_permalink( $post_id, 'edit' ); ?>';" value="<?php _e('Back', 'wpp'); ?>" class="<?php wpp_css("feps-subpaln-template::back-action","btn feps_action_btn"); ?>" />
     </li>
     <?php endif; ?>
     <li class="<?php wpp_css("feps-subpaln-template::submit-action-wrapper","wpp_feps_input_wrapper submit_action"); ?> ">
