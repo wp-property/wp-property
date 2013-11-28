@@ -256,6 +256,10 @@ body.idevice .wpp_sidebar_listing .sidebar_gallery_item {
   font-size: 12px;
 }
 
+.wpp_feps_form .wpp_feps_plan_options li {
+  list-style-type: none;
+}
+
 /* END SUBSCRIPTION PLAN */
 
 /* CHECKOUT */
