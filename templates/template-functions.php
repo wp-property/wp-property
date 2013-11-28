@@ -1436,7 +1436,7 @@ if ( !function_exists( 'wpp_render_search_input' ) ):
       'random_element_id' => 'wpp_search_element_' . rand( 1000, 9999 ),
       'value' => false
     );
-    extract( wp_parse_args( $args, $defaults ) );
+    extract( $args = wp_parse_args( $args, $defaults ) );
     $attribute_data = WPP_F::get_attribute_data( $attrib );
     $use_input_type = $wp_properties[ 'searchable_attr_fields' ][ $attrib ];
     if ( !empty( $input_type ) ) {
@@ -1496,6 +1496,9 @@ if ( !function_exists( 'wpp_render_search_input' ) ):
           ?>
           <input id="<?php echo $random_element_id; ?>" type="checkbox" class="<?php echo $attribute_data[ 'ui_class' ]; ?>" name="wpp_search[<?php echo $attrib; ?>]" <?php checked( $value, 'true' ); ?> value="true"/>
           <?php
+          break;
+        default:
+          echo apply_filters( 'wpp::render_search_input::custom', '', $args );
           break;
       }
     } else {
