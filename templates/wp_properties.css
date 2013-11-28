@@ -138,6 +138,12 @@ body.idevice .wpp_sidebar_listing .sidebar_gallery_item {
   margin-bottom: 10px;
 }
 
+
+.wpp_feps_property_info .title {
+  font-weight: bold;
+  color: #4D4D4D;
+}
+
 /* END FEPS Menu */
 
 .wpp_feps_form .wpp_feps_input_wrapper.back_action {
