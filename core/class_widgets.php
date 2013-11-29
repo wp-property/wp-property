@@ -477,7 +477,7 @@ class ChildPropertiesWidget extends WP_Widget {
    * Constructor
    */
   function ChildPropertiesWidget() {
-    parent::WP_Widget( false, $name = sprintf( __( 'Child %1s', 'wpp' ), WPP_F::property_label( 'plural' ) ), array( 'description' => __( 'Show child properties (if any) for currently displayed property', 'wpp' ) ) );
+    parent::WP_Widget( false, $name = sprintf( __( 'Child %1s', 'wpp' ), WPP_F::property_label( 'plural' ) ), array( 'description' => sprintf( __( 'Show child %1s (if any) for currently displayed %2s', 'wpp' ), WPP_F::property_label( 'plural' ), WPP_F::property_label( 'singular' ) ) ) );
   }
 
   /**
@@ -716,7 +716,7 @@ class FeaturedPropertiesWidget extends WP_Widget {
    * constructor
    */
   function FeaturedPropertiesWidget() {
-    parent::WP_Widget( false, $name = sprintf( __( 'Featured %1s', 'wpp' ), WPP_F::property_label( 'plural' ) ), array( 'description' => __( 'List of properties that were marked as Featured', 'wpp' ) ) );
+    parent::WP_Widget( false, $name = sprintf( __( 'Featured %1s', 'wpp' ), WPP_F::property_label( 'plural' ) ), array( 'description' => sprintf( __( 'List of %1s that were marked as Featured', 'wpp' ), WPP_F::property_label( 'plural' ) ) ) );
   }
 
   /**
@@ -752,7 +752,7 @@ class FeaturedPropertiesWidget extends WP_Widget {
     }
 
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
-      $property_stats[ 'property_type' ] = __( 'Property Type', 'wpp' );
+      $property_stats[ 'property_type' ] = sprintf(__( '%1s Type', 'wpp' ), WPP_F::property_label( 'singular' ) );
     }
 
     $random_sort = $random_items == 1 ? '&sort_by=random' : '';
@@ -869,7 +869,7 @@ class FeaturedPropertiesWidget extends WP_Widget {
     }
 
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
-      $property_stats[ 'property_type' ] = __( 'Property Type', 'wpp' );
+      $property_stats[ 'property_type' ] = sprintf( __( '%1s Type', 'wpp' ), WPP_F::property_label( 'singular' ) );
     }
     ?>
     <script type="text/javascript">
@@ -1000,7 +1000,7 @@ class LatestPropertiesWidget extends WP_Widget {
    * constructor
    */
   function LatestPropertiesWidget() {
-    parent::WP_Widget( false, $name = sprintf( __( 'Latest %1s', 'wpp' ), WPP_F::property_label( 'plural' ) ), array( 'description' => __( 'List of the latest properties created on this site', 'wpp' ) ) );
+    parent::WP_Widget( false, $name = sprintf( __( 'Latest %1s', 'wpp' ), WPP_F::property_label( 'plural' ) ), array( 'description' => sprintf(__( 'List of the latest %1s created on this site', 'wpp' ), WPP_F::property_label( 'plural' ) ) ) );
   }
 
   /**
@@ -1030,7 +1030,7 @@ class LatestPropertiesWidget extends WP_Widget {
     }
 
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
-      $property_stats[ 'property_type' ] = __( 'Property Type', 'wpp' );
+      $property_stats[ 'property_type' ] = sprintf(__( '%1s Type', 'wpp' ), WPP_F::property_label( 'singular' ) );
     }
 
     $arg = array(
@@ -1139,7 +1139,7 @@ class LatestPropertiesWidget extends WP_Widget {
     }
 
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
-      $property_stats[ 'property_type' ] = __( 'Property Type', 'wpp' );
+      $property_stats[ 'property_type' ] = sprintf(__( '%1s Type', 'wpp' ), WPP_F::property_label( 'singular' ) );
     }
     ?>
     <script type="text/javascript">
@@ -1158,7 +1158,7 @@ class LatestPropertiesWidget extends WP_Widget {
       <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'wpp' ); ?>
         <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
                name="<?php echo $this->get_field_name( 'title' ); ?>" type="text"
-               value="<?php echo ( !empty( $title ) ) ? $title : __( 'Latest Properties', 'wpp' ); ?>"/>
+               value="<?php echo ( !empty( $title ) ) ? $title : sprintf( __( 'Latest %1s', 'wpp' ), WPP_F::property_label( 'plural' ) ); ?>"/>
       </label>
     </p>
     <p>
@@ -1398,7 +1398,7 @@ class SearchPropertiesWidget extends WP_Widget {
 
     /** Set label for list below only */
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
-      $property_stats[ 'property_type' ] = __( 'Property Type', 'wpp' );
+      $property_stats[ 'property_type' ] = sprintf(__( '%1s Type', 'wpp' ), WPP_F::property_label( 'singular' ) );
     }
 
     if ( is_array( $all_searchable_property_types ) && count( $all_searchable_property_types ) > 1 ) {
@@ -1664,7 +1664,7 @@ class GalleryPropertiesWidget extends WP_Widget {
 
   /** constructor */
   function GalleryPropertiesWidget() {
-    parent::WP_Widget( false, $name = sprintf( __( '%1s Gallery', 'wpp' ), WPP_F::property_label() ), array( 'description' => __( 'List of all images attached to the current property', 'wpp' ) ) );
+    parent::WP_Widget( false, $name = sprintf( __( '%1s Gallery', 'wpp' ), WPP_F::property_label() ), array( 'description' => sprintf(__( 'List of all images attached to the current %1s', 'wpp' ), WPP_F::property_label( 'singular' ) ) ) );
   }
 
   /** @see WP_Widget::widget */

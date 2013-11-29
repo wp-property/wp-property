@@ -117,7 +117,7 @@ class WPP_UI {
     //** Check for current property type if it is deleted */
     if ( is_array( $wp_properties[ 'property_types' ] ) && isset( $property[ 'property_type' ] ) && !in_array( $property[ 'property_type' ], array_keys( $wp_properties[ 'property_types' ] ) ) ) {
       $wp_properties[ 'property_types' ][ $property[ 'property_type' ] ] = WPP_F::de_slug( $property[ 'property_type' ] );
-      $wp_properties[ 'descriptions' ][ 'property_type' ] = '<span class="attention">' . sprintf( __( '<strong>Warning!</strong> The %1s property type has been deleted.', 'wpp' ), $wp_properties[ 'property_types' ][ $property[ 'property_type' ] ] ) . '</span>';
+      $wp_properties[ 'descriptions' ][ 'property_type' ] = '<span class="attention">' . sprintf( __( '<strong>Warning!</strong> The %1s %2s type has been deleted.', 'wpp' ), $wp_properties[ 'property_types' ][ $property[ 'property_type' ] ], WPP_F::property_label( 'singular' ) ) . '</span>';
     }
 
     ?>
@@ -322,7 +322,7 @@ class WPP_UI {
       if ( in_array( $slug, $upwards_inherited_attributes ) ) {
         $row_classes[ ] = 'wpp_upwards_inherited_attributes';
         $disabled_attributes[ ] = $slug;
-        $attribute_description = array( __( 'Values aggregated from child properties.', 'wpp' ) );
+        $attribute_description = array( sprintf( __( 'Values aggregated from child %1s.', 'wpp' ), WPP_F::property_label( 'plural' ) ) );
       }
 
       if ( $wp_properties[ 'configuration' ][ 'allow_multiple_attribute_values' ] == 'true' && !in_array( $slug, apply_filters( 'wpp_single_value_attributes', array( 'property_type' ) ) ) ) {

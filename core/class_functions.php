@@ -721,7 +721,7 @@ class WPP_F extends UD_API {
       return false;
     }
 
-    return sprintf( __( 'Set %1s properties to "%2s" property type', 'wpp' ), count( $success ), $property_type );
+    return sprintf( __( 'Set %1s %4s to "%2s" %3s type', 'wpp' ), count( $success ), WPP_F::property_label( 'plural' ), $property_type, WPP_F::property_label( 'singular' ) );
 
   }
 

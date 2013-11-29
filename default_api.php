@@ -310,7 +310,7 @@ add_action( 'wpp_settings_page_property_page', 'add_format_phone_number_checkbox
 function wpp_unique_key_labels( $stats ) {
 
   if ( empty( $stats[ 'property_type' ] ) ) {
-    $stats[ 'property_type' ] = __( 'Property Type', 'wpp' );
+    $stats[ 'property_type' ] = sprintf(__( '%1s Type', 'wpp' ), WPP_F::property_label( 'singular' ) );
   }
 
   if ( empty( $stats[ 'city' ] ) ) {
