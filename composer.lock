@@ -1,0 +1,69 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "b19c7555f29f9e4d5e5b3b61a2e9933a",
+    "packages": [
+        {
+            "name": "usabilitydynamics/ud_asset",
+            "version": "0.1.0",
+            "dist": {
+                "type": "file",
+                "url": "https://raw.github.com/UsabilityDynamics/vendor/master/lib/ud_asset.php",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library"
+        },
+        {
+            "name": "usabilitydynamics/ud_cloud",
+            "version": "0.1.0",
+            "dist": {
+                "type": "file",
+                "url": "https://raw.github.com/UsabilityDynamics/vendor/master/lib/ud_cloud.php",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library"
+        },
+        {
+            "name": "usabilitydynamics/ud_functions",
+            "version": "0.1.0",
+            "dist": {
+                "type": "file",
+                "url": "https://raw.github.com/UsabilityDynamics/vendor/master/lib/ud_functions.php",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library"
+        },
+        {
+            "name": "usabilitydynamics/ud_saas",
+            "version": "0.1.0",
+            "dist": {
+                "type": "file",
+                "url": "https://raw.github.com/UsabilityDynamics/vendor/master/lib/ud_saas.php",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": [
+
+    ],
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}
