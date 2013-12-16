@@ -268,7 +268,7 @@ class WPP_F extends UD_API {
         'slug' => $wp_properties[ 'configuration' ][ 'base_slug' ]
       ),
       'query_var' => $wp_properties[ 'configuration' ][ 'base_slug' ],
-      'supports' => array( 'title', 'editor', 'thumbnail' ),
+      'supports' => array( 'title', 'editor', 'thumbnail', 'comments' ),
       'menu_icon' => WPP_URL . 'images/pp_menu-1.6.png'
     ) );
 
