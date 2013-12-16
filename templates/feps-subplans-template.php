@@ -40,6 +40,10 @@ $renew_plan = !empty( $renew_plan ) && $renew_plan == 'true' ? 'checked' : '';
                 <label><?php _e('Duration:', 'wpp'); ?></label>
                 <span><?php printf( "%d %s", $plan_data['duration']['value'], _n( $plan_data['duration']['interval'], $plan_data['duration']['interval'].'s', $plan_data['duration']['value'], 'wpp' ) ); ?></span>
               </li>
+              <li class="<?php wpp_css("feps-subpaln-template::info-element","is_featured"); ?>">
+                <label><?php _e( 'Featured:', 'wpp' ); ?></label>
+                <span><?php ( isset( $plan_data[ 'is_featured' ] ) && $plan_data[ 'is_featured' ] == 'true' ) ? _e( 'Yes', 'wpp' ) : _e( 'No', 'wpp' ); ?></span>
+              </li>
               <li class="<?php wpp_css("feps-subpaln-template::info-element","images_limit" . ($form_has_images ? '' : " no_image_field") ); ?>">
                 <label><?php _e('Images:', 'wpp'); ?></label>
                 <span><?php echo (!empty($plan_data['images_limit']) ? $plan_data['images_limit'] : 1 ); ?></span>

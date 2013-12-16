@@ -46,6 +46,10 @@
               <label><?php _e('Duration:', 'wpp'); ?></label>
               <span><?php printf( "%d %s", $plan['duration']['value'], _n( $plan['duration']['interval'], $plan['duration']['interval'].'s', $plan['duration']['value'], 'wpp' ) ); ?></span>
             </li>
+            <li class="<?php wpp_css("feps-purchase-template::info-element","is_featured"); ?>">
+              <label><?php _e( 'Featured:', 'wpp' ); ?></label>
+              <span><?php ( isset( $plan[ 'is_featured' ] ) && $plan[ 'is_featured' ] == 'true' ) ? _e( 'Yes', 'wpp' ) : _e( 'No', 'wpp' ); ?></span>
+            </li>
             <?php if ( $form_has_images ) : ?>
             <li class="<?php wpp_css( "feps-purchase-template::info-element", "images_limit " ); ?>">
               <label><?php _e('Images:', 'wpp'); ?></label>
