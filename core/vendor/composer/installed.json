@@ -1,0 +1,54 @@
+[
+    {
+        "name": "usabilitydynamics/ud_cloud",
+        "version": "0.1.0",
+        "version_normalized": "0.1.0.0",
+        "dist": {
+            "type": "file",
+            "url": "https://raw.github.com/UsabilityDynamics/vendor/master/lib/ud_cloud.php",
+            "reference": null,
+            "shasum": null
+        },
+        "type": "library",
+        "installation-source": "dist"
+    },
+    {
+        "name": "usabilitydynamics/ud_functions",
+        "version": "0.1.0",
+        "version_normalized": "0.1.0.0",
+        "dist": {
+            "type": "file",
+            "url": "https://raw.github.com/UsabilityDynamics/vendor/master/lib/ud_functions.php",
+            "reference": null,
+            "shasum": null
+        },
+        "type": "library",
+        "installation-source": "dist"
+    },
+    {
+        "name": "usabilitydynamics/ud_saas",
+        "version": "0.1.0",
+        "version_normalized": "0.1.0.0",
+        "dist": {
+            "type": "file",
+            "url": "https://raw.github.com/UsabilityDynamics/vendor/master/lib/ud_saas.php",
+            "reference": null,
+            "shasum": null
+        },
+        "type": "library",
+        "installation-source": "dist"
+    },
+    {
+        "name": "usabilitydynamics/ud_asset",
+        "version": "0.1.0",
+        "version_normalized": "0.1.0.0",
+        "dist": {
+            "type": "file",
+            "url": "https://raw.github.com/UsabilityDynamics/vendor/master/lib/ud_asset.php",
+            "reference": null,
+            "shasum": null
+        },
+        "type": "library",
+        "installation-source": "dist"
+    }
+]
