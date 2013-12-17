@@ -101,7 +101,7 @@ class WPP_TCPDF extends TCPDF {
     foreach ($this->font_extentions as $ext){
       $cdn_fonts_file = $cdn_fonts_url . $font . $ext;
 
-      $font_request = wp_remote_get( preg_replace('~\s~','%20', $cdn_fonts_file), array( 'timeout' => apply_filters('wpp_pf_wp_remote_timeout',300 ) ) );
+      $font_request = wp_remote_get( preg_replace('~\s~','%20', $cdn_fonts_file), array( 'timeout' => apply_filters('wpp_pf_wp_remote_timeout', 10 ) ) );
 
       if( is_wp_error( $font_request ) || empty( $font_request['body'] ) || $font_request['response']['code']=='404' ) {
         continue;
@@ -116,23 +116,23 @@ class WPP_TCPDF extends TCPDF {
 
 
   /**
-	 * Overloaded TCPDF function to give us ability inject function retrieve_cdn_font();
-	 * @see TCPDF::getFontBuffer()
-	 * @author odokienko@UD
-   * @since 1.37.6
-	 */
-	protected function getFontBuffer($font) {
+   * Overloaded TCPDF function to give us ability inject function retrieve_cdn_font();
+   * @see TCPDF::getFontBuffer()
+   * @author odokienko@UD
+   * @since 1.37.6 
+   */
+  protected function getFontBuffer($font) {
 
     if ($this->diskcache AND isset($this->fonts[$font])) {
-			return unserialize($this->readDiskCache($this->fonts[$font]));
-		} elseif (isset($this->fonts[$font])) {
-			return $this->fonts[$font];
-		}else{
+      return unserialize($this->readDiskCache($this->fonts[$font]));
+    } elseif (isset($this->fonts[$font])) {
+      return $this->fonts[$font];
+    }else{
       $this->retrieve_cdn_font($font);
     }
 
-		return false;
-	}
+    return false;
+  }
 
   /**
    * Scans K_PATH_MAIN.'fonts/' folder and moves all files to $this->_getfontpath() folder
