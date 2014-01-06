@@ -1,7 +1,6 @@
 {
-  "name": "WP-Property",
-  "version": "1.38.2",
-  "type": "wordpress-plugin",
+  "name": "usabilitydynamics/wp-property",
+  "version": "1.38.3.2",
   "homepage": "http://github.com/UsabilityDynamics/wp-property",
   "license": [
     "GPL-3.0+"
@@ -22,69 +21,12 @@
   ],
   "repositories": [
     {
-      "type": "package",
-      "package": {
-        "name": "usabilitydynamics/ud_asset",
-        "version": "0.1.0",
-        "dist": {
-          "url": "https://raw.github.com/UsabilityDynamics/vendor/master/lib/ud_asset.php",
-          "type": "file"
-        }
-      }
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "usabilitydynamics/ud_cloud",
-        "version": "0.1.0",
-        "dist": {
-          "url": "https://raw.github.com/UsabilityDynamics/vendor/master/lib/ud_cloud.php",
-          "type": "file"
-        }
-      }
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "usabilitydynamics/ud_functions",
-        "version": "0.1.0",
-        "dist": {
-          "url": "https://raw.github.com/UsabilityDynamics/vendor/master/lib/ud_functions.php",
-          "type": "file"
-        }
-      }
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "usabilitydynamics/ud_saas",
-        "version": "0.1.0",
-        "dist": {
-          "url": "https://raw.github.com/UsabilityDynamics/vendor/master/lib/ud_saas.php",
-          "type": "file"
-        }
-      }
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "usabilitydynamics/ud_asset",
-        "version": "0.1.0",
-        "dist": {
-          "url": "https://raw.github.com/UsabilityDynamics/vendor/master/lib/ud_asset.php",
-          "type": "file"
-        }
-      }
+      "type": "composer",
+      "url": "http://repository.usabilitydynamics.com"
     }
   ],
-  "config": {
-    "vendor-dir": "core/vendor",
-    "component-dir": "js/vendor"
-  },
   "require": {
-    "usabilitydynamics/ud_asset": "*",
-    "usabilitydynamics/ud_cloud": "*",
-    "usabilitydynamics/ud_functions": "*",
-    "usabilitydynamics/ud_saas": "*"
+    "usabilitydynamics/lib-requires": "*",
+    "usabilitydynamics/lib-utility": "*"
   }
 }
