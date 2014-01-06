@@ -24,7 +24,7 @@ class WPP_Export {
   function help_tab() {
     $export_url = WPP_Export::get_property_export_url();
 
-    if ( !$export_url ) {
+    if( !$export_url ) {
       return;
     }
 
@@ -45,8 +45,6 @@ class WPP_Export {
         <li><b>property_type</b> - string - <?php _e( 'Slug for the property type.', 'wpp' ); ?></li>
         <li><b>format</b> - string - "xml" <?php _e( 'or', 'wpp' ); ?> "json"</li>
       </ul>
-      </li>
-      </ul>
     </div> <?php
   }
 
@@ -56,12 +54,14 @@ class WPP_Export {
    * @returns string URL to site's export feed
    */
   function get_property_export_url() {
-    if ( $apikey = WPP_F::get_api_key() ) {
-      if ( empty( $apikey ) )
+    if( $apikey = WPP_F::get_api_key() ) {
+      if( empty( $apikey ) )
         return __( "There has been an error retreiving your API key.", "wpp" );
+
       // We have the API key, we need to build the url
       return admin_url( 'admin-ajax.php' ) . "?action=wpp_export_properties&api=" . $apikey;
     }
+
     //return __("There has been an error retreiving your API key.", "wpp");
     return false;
   }
@@ -74,30 +74,31 @@ class WPP_Export {
    * @param array $data
    * @param array $options Serializer options
    *
+   * @return array|string|\WP_Error
    * @author peshkov@UD
    */
   function convert_to_xml( $data, $options ) {
 
     //** An array of serializer options */
     $options = wp_parse_args( $options, array(
-      'indent' => " ",
-      'linebreak' => "\n",
-      'addDecl' => true,
-      'encoding' => 'ISO-8859-1',
-      'rootName' => 'objects',
+      'indent'         => " ",
+      'linebreak'      => "\n",
+      'addDecl'        => true,
+      'encoding'       => 'ISO-8859-1',
+      'rootName'       => 'objects',
       'defaultTagName' => 'object',
-      'mode' => false
+      'mode'           => false
     ) );
 
     try {
 
-      if ( !class_exists( 'XML_Serializer' ) ) {
+      if( !class_exists( 'XML_Serializer' ) ) {
         set_include_path( get_include_path() . PATH_SEPARATOR . WPP_Path . 'third-party/XML/' );
         @require_once 'Serializer.php';
       }
 
       //** If class still doesn't exist, for whatever reason, we fail */
-      if ( !class_exists( 'XML_Serializer' ) ) {
+      if( !class_exists( 'XML_Serializer' ) ) {
         throw new Exception( __( 'XML_Serializer could not be loaded.', 'wpp' ) );
       }
 
@@ -105,13 +106,13 @@ class WPP_Export {
 
       $status = $Serializer->serialize( $data );
 
-      if ( PEAR::isError( $status ) ) {
+      if( PEAR::isError( $status ) ) {
         throw new Exception( __( 'Could not convert data to XML.', 'wpp' ) );
       }
 
       $data = $Serializer->getSerializedData();
 
-    } catch ( Exception $e ) {
+    } catch( Exception $e ) {
       return new WP_Error( 'error', $e->getMessage() );
     }
 
@@ -129,9 +130,9 @@ class WPP_Export {
 
     ini_set( 'memory_limit', -1 );
 
-    $mtime = microtime();
-    $mtime = explode( " ", $mtime );
-    $mtime = $mtime[ 1 ] + $mtime[ 0 ];
+    $mtime     = microtime();
+    $mtime     = explode( " ", $mtime );
+    $mtime     = $mtime[ 1 ] + $mtime[ 0 ];
     $starttime = $mtime;
 
     // Set a new path
@@ -145,38 +146,38 @@ class WPP_Export {
     $taxonomies = $wp_properties[ 'taxonomies' ];
 
     // If the API key isn't valid, we quit
-    if ( !isset( $_REQUEST[ 'api' ] ) || $_REQUEST[ 'api' ] != $api_key ) {
+    if( !isset( $_REQUEST[ 'api' ] ) || $_REQUEST[ 'api' ] != $api_key ) {
       die( __( 'Invalid API key.', 'wpp' ) );
     }
 
-    if ( isset( $_REQUEST[ 'limit' ] ) ) {
-      $per_page = $_REQUEST[ 'limit' ];
+    if( isset( $_REQUEST[ 'limit' ] ) ) {
+      $per_page     = $_REQUEST[ 'limit' ];
       $starting_row = 0;
     }
 
-    if ( isset( $_REQUEST[ 'per_page' ] ) ) {
+    if( isset( $_REQUEST[ 'per_page' ] ) ) {
       $per_page = $_REQUEST[ 'per_page' ];
     }
 
-    if ( isset( $_REQUEST[ 'starting_row' ] ) ) {
+    if( isset( $_REQUEST[ 'starting_row' ] ) ) {
       $starting_row = $_REQUEST[ 'starting_row' ];
     }
 
-    if ( isset( $_REQUEST[ 'property_type' ] ) ) {
+    if( isset( $_REQUEST[ 'property_type' ] ) ) {
       $property_type = $_REQUEST[ 'property_type' ];
     } else {
       $property_type = 'all';
     }
 
-    if ( strtolower( $_REQUEST[ 'format' ] ) == 'xml' ) {
+    if( strtolower( $_REQUEST[ 'format' ] ) == 'xml' ) {
       $xml_format = true;
     } else {
       $xml_format = false;
     }
 
-    $wpp_query[ 'query' ][ 'pagi' ] = $starting_row . '--' . $per_page;
-    $wpp_query[ 'query' ][ 'sort_by' ] = ( $_REQUEST[ 'sort_by' ] ? $_REQUEST[ 'sort_by' ] : 'post_date' );
-    $wpp_query[ 'query' ][ 'sort_order' ] = ( $_REQUEST[ 'sort_order' ] ? $_REQUEST[ 'sort_order' ] : 'ASC' );
+    $wpp_query[ 'query' ][ 'pagi' ]          = $starting_row . '--' . $per_page;
+    $wpp_query[ 'query' ][ 'sort_by' ]       = ( $_REQUEST[ 'sort_by' ] ? $_REQUEST[ 'sort_by' ] : 'post_date' );
+    $wpp_query[ 'query' ][ 'sort_order' ]    = ( $_REQUEST[ 'sort_order' ] ? $_REQUEST[ 'sort_order' ] : 'ASC' );
     $wpp_query[ 'query' ][ 'property_type' ] = $property_type;
 
     $wpp_query[ 'query' ] = apply_filters( 'wpp::xml::export::query', $wpp_query[ 'query' ] );
@@ -185,11 +186,11 @@ class WPP_Export {
 
     $results = $wpp_query[ 'results' ];
 
-    if ( count( $results ) == 0 ) {
-      die( sprintf(__( 'No published %1s.', 'wpp' ), WPP_F::property_label( 'plural' ) ) );
+    if( count( $results ) == 0 ) {
+      die( sprintf( __( 'No published %1s.', 'wpp' ), WPP_F::property_label( 'plural' ) ) );
     }
 
-    if ( $xml_format ) {
+    if( $xml_format ) {
 
     } else {
 
@@ -197,14 +198,14 @@ class WPP_Export {
 
     $properties = array();
 
-    foreach ( $results as $count => $id ) {
+    foreach( $results as $count => $id ) {
 
       //** Reserve time on every iteration. */
       set_time_limit( 0 );
 
       $property = WPP_F::get_property( $id, "return_object=false&load_parent=false&get_children=false" );
 
-      if ( $property[ 'post_parent' ] && !$property[ 'parent_gpid' ] ) {
+      if( $property[ 'post_parent' ] && !$property[ 'parent_gpid' ] ) {
         $property[ 'parent_gpid' ] = WPP_F::maybe_set_gpid( $property[ 'post_parent' ] );
       }
 
@@ -227,19 +228,19 @@ class WPP_Export {
       $property[ 'wpp_unique_id' ] = md5( $api_key . $property[ 'ID' ] );
 
       //** Get taxonomies */
-      if ( $taxonomies ) {
-        foreach ( $taxonomies as $taxonomy_slug => $taxonomy_data ) {
-          if ( $these_terms = wp_get_object_terms( $property[ 'ID' ], $taxonomy_slug, array( 'fields' => 'names' ) ) ) {
+      if( $taxonomies ) {
+        foreach( $taxonomies as $taxonomy_slug => $taxonomy_data ) {
+          if( $these_terms = wp_get_object_terms( $property[ 'ID' ], $taxonomy_slug, array( 'fields' => 'names' ) ) ) {
             $property[ 'taxonomies' ][ $taxonomy_slug ] = $these_terms;
           }
         }
       }
 
       $fixed_property = array();
-      foreach ( $property as $meta_key => $meta_value ) {
+      foreach( $property as $meta_key => $meta_value ) {
         // Maybe Unserialize
         $meta_value = maybe_unserialize( $meta_value );
-        if ( is_array( $meta_value ) || is_object( $meta_value ) ) {
+        if( is_array( $meta_value ) || is_object( $meta_value ) ) {
           $fixed_property[ $meta_key ] = $meta_value;
           continue;
         }
@@ -251,15 +252,15 @@ class WPP_Export {
 
     $properties = apply_filters( 'wpp::xml::export::data', $properties );
 
-    if ( $xml_format ) {
+    if( $xml_format ) {
       $result = self::convert_to_xml( $properties, apply_filters( 'wpp::xml::export::serializer_options', array() ) );
 
       /** Deprecated. peshkov@UD
       $result = json_encode( $properties );
-      $result = WPP_F::json_to_xml( $result, apply_filters( 'wpp::xml::export::serializer_options', array() ) );
-      //*/
+       * $result = WPP_F::json_to_xml( $result, apply_filters( 'wpp::xml::export::serializer_options', array() ) );
+       * //*/
 
-      if ( !$result ) {
+      if( !$result ) {
         die( __( 'There is an Error on trying to create XML feed.', 'wpp' ) );
       }
       header( 'Content-type: text/xml' );

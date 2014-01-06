@@ -227,6 +227,12 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 
 == Changelog ==
 
+= 1.40.0 =
+* Added LESS source files for styles and Grunt task to build minified and development styles.
+* Added unminified JavaScript asset sources and Grunt task to build.
+* Cleaned up PHPDoc tags in code fixed overall code formatting.
+* Added proper composer.json with valid dependencies.
+
 = 1.38.3.2 =
 * Fixed fatal error related to redeclaration of class.
 
