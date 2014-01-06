@@ -13,34 +13,45 @@ module.exports = function( grunt ) {
     // Get Package.
     pkg: grunt.file.readJSON( 'composer.json' ),
 
-    // Compile LESS in app.css
+    // Compile Core and Template Styles.
     less: {
       production: {
         options: {
           yuicompress: true,
           relativeUrls: true
         },
-        files: [
-          {
-            expand: true,
-            cwd: 'css/src',
-            src: [ '*.less' ],
-            dest: 'css'
-          }
-        ]
+        files: {
+          'css/wpp-data-tables.css': [ 'css/src/wpp-data-tables.less' ],
+          'css/wp_properties_admin.css': [ 'css/src/wp_properties_admin.less' ],
+          'css/jquery-ui.css': [ 'css/src/jquery-ui.less' ],
+          'templates/wp_properties.css': [ 'templates/src/wp_properties.less' ],
+          'templates/wp_properties-ie_7.css': [ 'templates/src/wp_properties-ie_7.less' ],
+          'templates/wp_properties-msie.css': [ 'templates/src/wp_properties-msie.less' ],
+          'templates/theme-specific/denali.css': [ 'templates/theme-specific/src/denali.less' ],
+          'templates/theme-specific/fb_properties.css': [ 'templates/theme-specific/src/fb_properties.less' ],
+          'templates/theme-specific/twentyeleven.css': [ 'templates/theme-specific/src/twentyeleven.less' ],
+          'templates/theme-specific/twentyten.css': [ 'templates/theme-specific/src/twentyten.less' ],
+          'templates/theme-specific/twentytwelve.css': [ 'templates/theme-specific/src/twentytwelve.less' ]
+        }
       },
       development: {
         options: {
+          yuicompress: false,
           relativeUrls: true
         },
-        files: [
-          {
-            expand: true,
-            cwd: 'css/src',
-            src: [ '*.less' ],
-            dest: 'css'
-          }
-        ]
+        files: {
+          'css/wpp-data-tables.dev.css': [ 'css/src/wpp-data-tables.less' ],
+          'css/wp_properties_admin.dev.css': [ 'css/src/wp_properties_admin.less' ],
+          'css/jquery-ui.dev.css': [ 'css/src/jquery-ui.less' ],
+          'templates/wp_properties.dev.css': [ 'templates/src/wp_properties.less' ],
+          'templates/wp_properties-ie_7.dev.css': [ 'templates/src/wp_properties-ie_7.less' ],
+          'templates/wp_properties-msie.dev.css': [ 'templates/src/wp_properties-msie.less' ],
+          'templates/theme-specific/denali.dev.css': [ 'templates/theme-specific/src/denali.less' ],
+          'templates/theme-specific/fb_properties.dev.css': [ 'templates/theme-specific/src/fb_properties.less' ],
+          'templates/theme-specific/twentyeleven.dev.css': [ 'templates/theme-specific/src/twentyeleven.less' ],
+          'templates/theme-specific/twentyten.dev.css': [ 'templates/theme-specific/src/twentyten.less' ],
+          'templates/theme-specific/twentytwelve.dev.css': [ 'templates/theme-specific/src/twentytwelve.less' ]
+        }
       }
     },
 
@@ -74,7 +85,7 @@ module.exports = function( grunt ) {
       }
     },
 
-    // Minify and Move Core Scripts.
+    // Minify Core and Template Scripts.
     uglify: {
       production: {
         options: {
@@ -82,6 +93,9 @@ module.exports = function( grunt ) {
           beautify: false
         },
         files: [
+          {
+            'templates/wp_properties.js': [ 'templates/src/wp_properties.js' ]
+          },
           {
             expand: true,
             cwd: 'js/src',
@@ -95,10 +109,17 @@ module.exports = function( grunt ) {
           mangle: false,
           beautify: true
         },
-        files: {
-          //'application/scripts/app.dev.js': [ 'application/scripts/src/app.js' ],
-          //'application/scripts/network.dev.js': [ 'application/scripts/src/network.js' ]
-        }
+        files: [
+          {
+            'templates/wp_properties.dev.js': [ 'templates/src/wp_properties.js' ]
+          },
+          {
+            expand: true,
+            cwd: 'js/src',
+            src: [ '*.js' ],
+            dest: 'js'
+          }
+        ]
       }
     },
 
