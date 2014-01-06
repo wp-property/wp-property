@@ -7,6 +7,12 @@
   ],
   "authors": [
     {
+      "name": "Andy Potanin",
+      "email": "andy.potanin@usabilitydynamics.com",
+      "homepage": "http://usabilitydynamics.com",
+      "role": "Developer"
+    },
+    {
       "name": "Maxim Peshkov",
       "email": "maxim.peshkov@usabilitydynamics.com",
       "homepage": "http://usabilitydynamics.com",

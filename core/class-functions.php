@@ -4737,7 +4737,7 @@ class WPP_F extends UD_API {
   function list_table() {
     global $current_screen;
 
-    include WPP_Path . 'core/ui/class_wpp_object_list_table.php';
+    include WPP_Path . 'core/class-object-list-table.php';
 
     //** Get the paramters we care about */
     $sEcho         = $_REQUEST[ 'sEcho' ];
