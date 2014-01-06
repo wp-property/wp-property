@@ -149,6 +149,7 @@ module.exports = function( grunt ) {
     // Clean Directories.
     clean: {
       all: [
+        "cache",
         "vendor",
         "composer.lock"
       ]

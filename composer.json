@@ -28,11 +28,20 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=5.3",
+
+    "tecnick.com/tcpdf": "dev-master",
+    "datatables/datatables": "dev-master",
+    "jms/serializer": "0.14.*@dev",
+    "zend/gdata": "dev-master",
+    "natxet/CssMin": "dev-master",
+    "linkorb/jsmin-php": "dev-master",
+
     "usabilitydynamics/lib-api": "master",
     "usabilitydynamics/lib-ui": "master",
     "usabilitydynamics/lib-settings": "master",
     "usabilitydynamics/lib-requires": "master",
     "usabilitydynamics/lib-utility": "master",
+
     "usabilitydynamics/wp-property-admin-tools": "master",
     "usabilitydynamics/wp-property-feps": "master",
     "usabilitydynamics/wp-property-agents": "master",
@@ -40,13 +49,7 @@
     "usabilitydynamics/wp-property-supermap": "master",
     "usabilitydynamics/wp-property-importer": "master",
     "usabilitydynamics/wp-property-slideshow": "master",
-    "usabilitydynamics/wp-property-power-tools": "master",
-    "tecnick.com/tcpdf": "dev-master",
-    "datatables/datatables": "dev-master",
-    "jms/serializer": "0.14.*@dev",
-    "zend/gdata": "dev-master",
-    "natxet/CssMin": "dev-master",
-    "linkorb/jsmin-php": "dev-master"
+    "usabilitydynamics/wp-property-power-tools": "master"
 
   }
 }

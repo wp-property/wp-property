@@ -32,7 +32,7 @@ if ( isset( $_REQUEST[ 'message' ] ) ) {
 
     case 'updated':
       $wp_messages[ 'notice' ][ ] = __( "Settings updated.", 'wpp' );
-      break;
+    break;
 
   }
 }
@@ -57,7 +57,6 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
 ?>
 <div class="wrap <?php echo implode( ' ', $wrapper_classes ); ?>">
-<?php screen_icon(); ?>
 <h2 class='wpp_settings_page_header'><?php echo $wp_properties[ 'labels' ][ 'name' ] . ' ' . __( 'Settings', 'wpp' ) ?>
   <div class="wpp_fb_like">
   <div class="fb-like" data-href="https://www.facebook.com/wpproperty" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
