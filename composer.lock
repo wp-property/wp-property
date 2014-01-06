@@ -3,51 +3,247 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "b19c7555f29f9e4d5e5b3b61a2e9933a",
+    "hash": "a10c0cdb0ab7d0e891def09f2839a860",
     "packages": [
         {
-            "name": "usabilitydynamics/ud_asset",
-            "version": "0.1.0",
-            "dist": {
-                "type": "file",
-                "url": "https://raw.github.com/UsabilityDynamics/vendor/master/lib/ud_asset.php",
-                "reference": null,
-                "shasum": null
+            "name": "justinrainbow/json-schema",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/justinrainbow/json-schema.git",
+                "reference": "05ff6d8d79fe3ad190b0663d80d3f9deee79416c"
             },
-            "type": "library"
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/05ff6d8d79fe3ad190b0663d80d3f9deee79416c",
+                "reference": "05ff6d8d79fe3ad190b0663d80d3f9deee79416c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "JsonSchema": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "NewBSD"
+            ],
+            "authors": [
+                {
+                    "name": "Igor Wiedler",
+                    "email": "igor@wiedler.ch",
+                    "homepage": "http://wiedler.ch/igor/"
+                },
+                {
+                    "name": "Bruno Prieto Reis",
+                    "email": "bruno.p.reis@gmail.com"
+                },
+                {
+                    "name": "Justin Rainbow",
+                    "email": "justin.rainbow@gmail.com"
+                },
+                {
+                    "name": "Robert Schönthal",
+                    "email": "seroscho@googlemail.com",
+                    "homepage": "http://digitalkaoz.net"
+                }
+            ],
+            "description": "A library to validate a json schema.",
+            "homepage": "https://github.com/justinrainbow/json-schema",
+            "keywords": [
+                "json",
+                "schema"
+            ],
+            "time": "2012-01-03 00:33:17"
         },
         {
-            "name": "usabilitydynamics/ud_cloud",
-            "version": "0.1.0",
+            "name": "usabilitydynamics/lib-api",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/lib-api",
+                "reference": "master"
+            },
             "dist": {
-                "type": "file",
-                "url": "https://raw.github.com/UsabilityDynamics/vendor/master/lib/ud_cloud.php",
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/lib-api/archive/master.zip",
                 "reference": null,
                 "shasum": null
             },
-            "type": "library"
+            "require": {
+                "usabilitydynamics/lib-utility": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "time": "2014-01-02 08:46:27"
         },
         {
-            "name": "usabilitydynamics/ud_functions",
-            "version": "0.1.0",
+            "name": "usabilitydynamics/lib-requires",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/lib-requires",
+                "reference": "master"
+            },
             "dist": {
-                "type": "file",
-                "url": "https://raw.github.com/UsabilityDynamics/vendor/master/lib/ud_functions.php",
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/lib-requires/archive/master.zip",
                 "reference": null,
                 "shasum": null
             },
-            "type": "library"
+            "require": {
+                "usabilitydynamics/lib-utility": "master"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib"
+                ]
+            },
+            "time": "2014-01-06 13:19:47"
         },
         {
-            "name": "usabilitydynamics/ud_saas",
-            "version": "0.1.0",
+            "name": "usabilitydynamics/lib-settings",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/lib-settings",
+                "reference": "master"
+            },
             "dist": {
-                "type": "file",
-                "url": "https://raw.github.com/UsabilityDynamics/vendor/master/lib/ud_saas.php",
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/lib-settings/archive/master.zip",
                 "reference": null,
                 "shasum": null
             },
-            "type": "library"
+            "require": {
+                "usabilitydynamics/lib-utility": "*"
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "scripts/settings.js"
+                    ],
+                    "templates": [
+                        "views/new-installation.xhtml"
+                    ],
+                    "files": [
+                        "schemas/settings.json"
+                    ]
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "lib"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andy Potanin",
+                    "email": "andy.potanin@usabilitydynamics.com",
+                    "homepage": "http://usabilitydynamics.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Maxim Peshkov",
+                    "email": "maxim.peshkov@usabilitydynamics.com",
+                    "homepage": "http://usabilitydynamics.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Anton Korotkov",
+                    "email": "anton.korotkov@usabilitydynamics.com",
+                    "homepage": "http://usabilitydynamics.com",
+                    "role": "Developer"
+                }
+            ],
+            "homepage": "http://github.com/usabilitydynamics/lib-settings",
+            "keywords": [
+                "settings"
+            ],
+            "support": {
+                "issues": "https://github.com/usabilitydynamics/lib-settings/issues"
+            },
+            "time": "2014-01-03 14:38:26"
+        },
+        {
+            "name": "usabilitydynamics/lib-ui",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/lib-ui",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/lib-ui/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "usabilitydynamics/lib-utility": "master"
+            },
+            "type": "library",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "scripts/ui.js"
+                    ],
+                    "styles": [
+                        "styles/ui.css",
+                        "styles/ui.less"
+                    ]
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "lib"
+                ]
+            },
+            "keywords": [
+                "api"
+            ],
+            "time": "2014-01-06 12:57:35"
+        },
+        {
+            "name": "usabilitydynamics/lib-utility",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/lib-utility",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/lib-utility/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "justinrainbow/json-schema": "1.1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib"
+                ]
+            },
+            "time": "2014-01-06 12:57:36"
         }
     ],
     "packages-dev": [
@@ -56,13 +252,13 @@
     "aliases": [
 
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": [
 
     ],
-    "platform": [
-
-    ],
+    "platform": {
+        "php": ">=5.3"
+    },
     "platform-dev": [
 
     ]
