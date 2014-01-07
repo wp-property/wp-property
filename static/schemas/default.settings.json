@@ -1,0 +1,137 @@
+{
+  "attributes": {
+    "price": {
+      "slug": "price",
+      "label": "l10n.price",
+      "description": "l10n.price_desc",
+      "classification": "currency",
+      "searchable": true,
+      "sortable": true,
+      "in_overview": true
+    },
+    "bedrooms": {
+      "slug": "bedrooms",
+      "label": "l10n.bedrooms",
+      "description": "l10n.bedrooms_desc",
+      "classification": "numeric",
+      "searchable": true,
+      "sortable": false
+    },
+    "bathrooms": {
+      "slug": "bathrooms",
+      "label": "l10n.bathrooms",
+      "description": "l10n.bathrooms_desc",
+      "classification": "numeric",
+      "searchable": true,
+      "sortable": false
+    },
+    "phone_number": {
+      "slug": "phone_number",
+      "label": "l10n.phone_number",
+      "description": "l10n.phone_number_desc",
+      "classification": "phone_number"
+    },
+    "address": {
+      "slug": "address",
+      "label": "l10n.address",
+      "description": "l10n.address_desc",
+      "classification": "location"
+    },
+    "area": {
+      "slug": "area",
+      "label": "l10n.area",
+      "description": "l10n.area_desc",
+      "classification": "area"
+    },
+    "deposit": {
+      "slug": "deposit",
+      "label": "l10n.deposit",
+      "description": "l10n.deposit_desc",
+      "classification": "currency"
+    },
+    "county": {
+      "slug": "county",
+      "group": "geo_location"
+    },
+    "country_code": {
+      "slug": "country_code",
+      "group": "geo_location"
+    },
+    "city": {
+      "slug": "city",
+      "group": "geo_location"
+    },
+    "state_code": {
+      "slug": "state_code",
+      "group": "geo_location"
+    },
+    "postal_code": {
+      "slug": "postal_code",
+      "group": "geo_location"
+    },
+    "district": {
+      "slug": "district",
+      "group": "geo_location"
+    },
+    "route": {
+      "slug": "route",
+      "group": "geo_location"
+    },
+    "street_number": {
+      "slug": "street_number",
+      "group": "geo_location"
+    },
+    "category": {
+      "slug": "category",
+      "group": "taxonomy"
+    },
+    "community_feature": {
+      "slug": "community_feature",
+      "group": "taxonomy"
+    },
+    "property_feature": {
+      "slug": "property_feature",
+      "group": "taxonomy"
+    }
+  },
+  "types": {
+    "single_family_home": {
+      "label": "l10n.single_family_home",
+      "slug": "single_family_home",
+      "description": "",
+      "searchable": true,
+      "location_matters": true
+    },
+    "building": {
+      "label": "l10n.building",
+      "slug": "building",
+      "description": "",
+      "searchable": true,
+      "location_matters": true
+    },
+    "floorplan": {
+      "label": "l10n.floorplan",
+      "slug": "floorplan",
+      "description": "",
+      "searchable": true,
+      "location_matters": true
+    },
+    "farm": {
+      "label": "l10n.farm",
+      "slug": "farm",
+      "description": "",
+      "searchable": true,
+      "location_matters": true
+    }
+  },
+  "groups": {
+    "geo_location": {
+      "slug": "geo_location",
+      "label": "l10n.geo_location"
+    },
+    "taxonomy": {
+      "slug": "taxonomy",
+      "label": "l10n.taxonomy"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 {
   "name": "usabilitydynamics/wp-property",
-  "version": "1.40.0",
+  "version": "2.0.0",
+  "type": "library",
   "homepage": "http://github.com/UsabilityDynamics/wp-property",
   "license": [
     "GPL-3.0+"
@@ -34,20 +35,19 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=5.3",
-
     "tecnick.com/tcpdf": "dev-master",
     "datatables/datatables": "dev-master",
     "jms/serializer": "0.14.*@dev",
     "zend/gdata": "dev-master",
     "natxet/CssMin": "dev-master",
     "linkorb/jsmin-php": "dev-master",
-
     "usabilitydynamics/lib-api": "master",
     "usabilitydynamics/lib-ui": "master",
     "usabilitydynamics/lib-settings": "master",
     "usabilitydynamics/lib-requires": "master",
-    "usabilitydynamics/lib-utility": "master",
-
+    "usabilitydynamics/lib-utility": "master"
+  },
+  "require-dev": {
     "usabilitydynamics/wp-property-admin-tools": "master",
     "usabilitydynamics/wp-property-feps": "master",
     "usabilitydynamics/wp-property-agents": "master",
@@ -56,6 +56,8 @@
     "usabilitydynamics/wp-property-importer": "master",
     "usabilitydynamics/wp-property-slideshow": "master",
     "usabilitydynamics/wp-property-power-tools": "master"
-
+  },
+  "autoload": {
+    "classmap": [ "lib" ]
   }
 }

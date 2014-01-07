@@ -1,0 +1,96 @@
+{
+    "description": "Upgrade rules.",
+    "2.0": {
+        "description": "Significant structural changes.",
+        "mapping": {
+            "ignore": [
+                "something_obsolete"
+            ],
+            "settings": {
+                "_geo_attributes": {
+                    "property": "geo_type_attributes",
+                    "format": "array"
+                },
+                "configuration": {
+                    "show_ud_log": {
+                        "default": true
+                    }
+                }
+            },
+            "property": {
+                "_wpp::featured": {
+                    "property": "featured",
+                    "format": "boolean"
+                }
+            },
+            "options": {
+                "wpp::installation_time": {
+                    "format": "timestamp",
+                    "default": "timestamp"
+                },
+                "wpp::last_update_time": {
+                    "format": "timestamp",
+                    "default": "timestamp"
+                }
+            }
+        },
+        "tests": [
+            {
+                "type": "apply_filter",
+                "test": "callable",
+                "items": [
+                    "wpp_supermap_marker",
+                    "wpp_get_attribute",
+                    "wpp_property_stat_labels"
+                ]
+            },
+            {
+                "type": "php_method",
+                "test": "callable",
+                "items": [
+                    "WPP_F::get_coordinates",
+                    "WPP_F::to_boolean",
+                    "WPP_F::google_maps_infobox",
+                    "WPP_F::image_sizes_dropdown",
+                    "WPP_Config::get_attribute_data",
+                    "UD_F::de_slug",
+                    "UD_UI::checkbox",
+                    "have_properties",
+                    "property_overview_image",
+                    "returned_properties",
+                    "the_tagline",
+                    "get_features",
+                    "draw_stats",
+                    "WPP_Core::shortcode_property_overview",
+                    "WPP_F::can_get_image",
+                    "WPP_F::google_maps_infobox",
+                    "WPP_F::get_coordinates",
+                    "WPP_F::get_attrib_prefix",
+                    "WPP_F::get_attrib_annex",
+                    "WPP_F::get_searchable_properties",
+                    "prepare_property_for_display"
+                ]
+            }
+        ]
+    },
+    "schema": {
+        "mapping": {
+            "settings": {
+                "description": "Changes to WPP Configuration object.",
+                "type": "object"
+            },
+            "property": {
+                "description": "Changed to WPP objects.",
+                "type": "object"
+            },
+            "options": {
+                "description": "Changes to WP options.",
+                "type": "object"
+            }
+        },
+        "tests": {
+            "description": "UD unit tests to execute after upgrade to ensure success.",
+            "type": "array"
+        }
+    }
+}

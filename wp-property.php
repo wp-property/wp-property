@@ -2,9 +2,9 @@
 /**
  * Plugin Name: WP-Property
  * Plugin URI: http://usabilitydynamics.com/products/wp-property/
- * Description: Property and Real Estate Management Plugin for WordPress.  Create a directory of real estate / rental properties and integrate them into you WordPress CMS.
+ * Description: Property and Real Estate Management Plugin for WordPress. Create a directory of real estate / rental properties and integrate them into you WordPress CMS.
  * Author: Usability Dynamics, Inc.
- * Version: 1.40.0
+ * Version: 2.0.0
  * Author URI: http://usabilitydynamics.com
  * Network: True
  *
@@ -25,59 +25,8 @@
  *
  */
 
-/** This Version  */
-define( 'WPP_Version', '1.40.0' );
+// Include bootstrap.
+include_once( __DIR__ . '/lib/class-bootstrap.php' );
 
-/** Get Directory - not always wp-property */
-define( 'WPP_Directory', dirname( plugin_basename( __FILE__ ) ) );
-
-/** Path for Includes */
-define( 'WPP_Path', plugin_dir_path( __FILE__ ) );
-
-/** Path for front-end links */
-define( 'WPP_URL', plugin_dir_url( __FILE__ ) );
-
-/** Directory path for includes of template files  */
-define( 'WPP_Templates', WPP_Path . 'templates' );
-
-/** Directory path for includes of template files  */
-define( 'WPP_Premium', WPP_Path . 'core/premium' );
-
-//** Global Usability Dynamics functions */
-include_once WPP_Path . 'core/class-api.php';
-
-/** Loads built-in plugin metadata and allows for third-party modification to hook into the filters. Has to be included here to run after template functions.php */
-include_once WPP_Path . 'action_hooks.php';
-
-/** Defaults filters and hooks */
-include_once WPP_Path . 'default_api.php';
-
-/** Loads general functions used by WP-Property */
-include_once WPP_Path . 'core/class-functions.php';
-
-/** Loads export functionality */
-include_once WPP_Path . 'core/class-property_export.php';
-
-/** Loads all the metaboxes for the property page */
-include_once WPP_Path . 'core/ui/property_metaboxes.php';
-
-/** Loads all the metaboxes for the property page */
-include_once WPP_Path . 'core/class-core.php';
-
-/** Bring in the RETS library */
-include_once WPP_Path . 'core/class-rets.php';
-
-/** Load set of static methods for mail notifications */
-include_once WPP_Path . 'core/class-mail.php';
-
-/** Load in hooks that deal with legacy and backwards-compat issues */
-include_once WPP_Path . 'core/class-legacy.php';
-
-// Register activation hook -> has to be in the main plugin file
-register_activation_hook( __FILE__,array( 'WPP_F', 'activation' ) );
-
-// Register activation hook -> has to be in the main plugin file
-register_deactivation_hook( __FILE__,array( 'WPP_F', 'deactivation' ) );
-
-// Initiate the plugin
-add_action( "after_setup_theme", create_function( '', 'new WPP_Core;' ) );
+// Initialize.
+new UsabilityDynamics\WPP\Bootstrap();

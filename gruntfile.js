@@ -24,9 +24,9 @@ module.exports = function( grunt ) {
           'css/wpp-data-tables.css': [ 'css/src/wpp-data-tables.less' ],
           'css/wp_properties_admin.css': [ 'css/src/wp_properties_admin.less' ],
           'css/jquery-ui.css': [ 'css/src/jquery-ui.less' ],
-          'templates/wp_properties.css': [ 'templates/src/wp_properties.less' ],
-          'templates/wp_properties-ie_7.css': [ 'templates/src/wp_properties-ie_7.less' ],
-          'templates/wp_properties-msie.css': [ 'templates/src/wp_properties-msie.less' ],
+          'templates/wp_properties.css': [ 'css/src/wp_properties.less' ],
+          'templates/wp_properties-ie_7.css': [ 'css/src/wp_properties-ie_7.less' ],
+          'templates/wp_properties-msie.css': [ 'css/src/wp_properties-msie.less' ],
           'templates/theme-specific/denali.css': [ 'templates/theme-specific/src/denali.less' ],
           'templates/theme-specific/fb_properties.css': [ 'templates/theme-specific/src/fb_properties.less' ],
           'templates/theme-specific/twentyeleven.css': [ 'templates/theme-specific/src/twentyeleven.less' ],
@@ -43,9 +43,9 @@ module.exports = function( grunt ) {
           'css/wpp-data-tables.dev.css': [ 'css/src/wpp-data-tables.less' ],
           'css/wp_properties_admin.dev.css': [ 'css/src/wp_properties_admin.less' ],
           'css/jquery-ui.dev.css': [ 'css/src/jquery-ui.less' ],
-          'templates/wp_properties.dev.css': [ 'templates/src/wp_properties.less' ],
-          'templates/wp_properties-ie_7.dev.css': [ 'templates/src/wp_properties-ie_7.less' ],
-          'templates/wp_properties-msie.dev.css': [ 'templates/src/wp_properties-msie.less' ],
+          'templates/wp_properties.dev.css': [ 'css/src/wp_properties.less' ],
+          'templates/wp_properties-ie_7.dev.css': [ 'css/src/wp_properties-ie_7.less' ],
+          'templates/wp_properties-msie.dev.css': [ 'css/src/wp_properties-msie.less' ],
           'templates/theme-specific/denali.dev.css': [ 'templates/theme-specific/src/denali.less' ],
           'templates/theme-specific/fb_properties.dev.css': [ 'templates/theme-specific/src/fb_properties.less' ],
           'templates/theme-specific/twentyeleven.dev.css': [ 'templates/theme-specific/src/twentyeleven.less' ],
@@ -94,7 +94,7 @@ module.exports = function( grunt ) {
         },
         files: [
           {
-            'templates/wp_properties.js': [ 'templates/src/wp_properties.js' ]
+            'templates/wp_properties.js': [ 'js/src/wp_properties.js' ]
           },
           {
             expand: true,
@@ -111,7 +111,7 @@ module.exports = function( grunt ) {
         },
         files: [
           {
-            'templates/wp_properties.dev.js': [ 'templates/src/wp_properties.js' ]
+            'templates/wp_properties.dev.js': [ 'js/src/wp_properties.js' ]
           },
           {
             expand: true,
@@ -186,6 +186,9 @@ module.exports = function( grunt ) {
 
   // Register NPM Tasks.
   grunt.registerTask( 'default', [ 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
+
+  // Prepare for Distribution.
+  grunt.registerTask( 'make-distribution', [ 'markdown', 'less', 'yuidoc', 'uglify' ] );
 
   // Development Mode.
   grunt.registerTask( 'dev', [ 'symlink:dev', 'watch' ] );

@@ -1,0 +1,633 @@
+{
+  "_attribute_classifications": {
+    "string": {
+      "label": "l10n.short_text",
+      "slug": "string",
+      "description": "l10n.used_for_short_desc",
+      "settings": {
+        "type": "string",
+        "indexable": true,
+        "searchable": true,
+        "editable": true,
+        "admin_only": false
+      },
+      "search": [
+        "input", "dropdown", "multi_checkbox"
+      ],
+      "admin": [
+        "input", "dropdown"
+      ]
+    },
+    "detail": {
+      "label": "Long Text",
+      "slug": "detail",
+      "description": "Not searchable, but can have an unlimited amount of content.",
+      "settings": {
+        "type": "string",
+        "indexable": false,
+        "searchable": true,
+        "editable": true,
+        "admin_only": false
+      },
+      "search": [
+        "input"
+      ],
+      "admin": [
+        "textarea"
+      ]
+    },
+    "currency": {
+      "label": "Currency",
+      "slug": "currency",
+      "description": "Similar to numeric values, but currency symbols will be applied.",
+      "settings": {
+        "type": "currency",
+        "indexable": true,
+        "searchable": true,
+        "editable": true,
+        "admin_only": false
+      },
+      "search": [
+        "input", "range_input", "range_dropdown", "dropdown", "multi_checkbox"
+      ],
+      "admin": [
+        "input", "dropdown"
+      ]
+    },
+    "location": {
+      "label": "Physical Address",
+      "slug": "location",
+      "description": "Will be geo-located. Main address can be chosen on Basic Settings tab or first address will be set as main autonatically.",
+      "settings": {
+        "type": "geo_location",
+        "indexable": true,
+        "searchable": true,
+        "editable": true,
+        "admin_only": false
+      },
+      "search": [
+        "input", "dropdown", "multi_checkbox"
+      ],
+      "admin": [
+        "input", "dropdown"
+      ]
+    },
+    "numeric": {
+      "label": "Numeric",
+      "slug": "numeric",
+      "description": "Searchable and sortable. Allows multi-selections and ranges.",
+      "settings": {
+        "searchable": true,
+        "editable": true,
+        "admin_only": false
+      },
+      "search": [
+        "input", "range_input", "range_dropdown", "dropdown", "multi_checkbox"
+      ],
+      "admin": [
+        "input", "dropdown"
+      ]
+    },
+    "timestamp": {
+      "label": "Date",
+      "slug": "timestamp",
+      "description": "A date or a time. Searchable.",
+      "settings": {
+        "searchable": true,
+        "editable": true,
+        "admin_only": false
+      },
+      "search": [
+        "date", "range_date"
+      ],
+      "admin": [
+        "date"
+      ]
+    },
+    "link": {
+      "label": "URL",
+      "slug": "link",
+      "description": "Put your URLs here. Searchable.",
+      "settings": {
+        "searchable": true,
+        "editable": true,
+        "admin_only": false
+      },
+      "search": [
+        "input", "dropdown", "multi_checkbox"
+      ],
+      "admin": [
+        "input", "dropdown"
+      ]
+    },
+    "agent_name": {
+      "label": "Person's Name",
+      "slug": "agent_name",
+      "description": "Person's or Real Estate Agent's name. Searchable.",
+      "settings": {
+        "searchable": true,
+        "editable": true,
+        "admin_only": false
+      },
+      "search": [
+        "input", "dropdown", "multi_checkbox"
+      ],
+      "admin": [
+        "input", "dropdown"
+      ]
+    },
+    "boolean": {
+      "label": "Yes / No",
+      "slug": "boolean",
+      "description": "A boolean value - meaning the value is either yes, or no.",
+      "settings": {
+        "searchable": true,
+        "editable": true,
+        "admin_only": false
+      },
+      "search": [
+        "checkbox"
+      ],
+      "admin": [
+        "checkbox"
+      ]
+    },
+    "area": {
+      "label": "Area",
+      "slug": "area",
+      "description": "Made for area attributes. Searchable.",
+      "settings": {
+        "searchable": true,
+        "editable": true,
+        "admin_only": false
+      },
+      "search": [
+        "input", "range_input", "range_dropdown", "dropdown", "multi_checkbox"
+      ],
+      "admin": [
+        "input", "dropdown"
+      ]
+    },
+    "email": {
+      "label": "Email Address",
+      "slug": "email",
+      "settings": {
+        "searchable": true,
+        "editable": true,
+        "admin_only": false
+      },
+      "search": [
+        "input", "dropdown", "multi_checkbox"
+      ],
+      "admin": [
+        "input", "dropdown"
+      ]
+    },
+    "phone_number": {
+      "label": "Phone / Fax",
+      "slug": "phone_number",
+      "settings": {
+        "searchable": true,
+        "editable": true,
+        "admin_only": false
+      },
+      "search": [
+        "input", "dropdown", "multi_checkbox"
+      ],
+      "admin": [
+        "input", "dropdown"
+      ]
+    },
+    "admin_note": {
+      "label": "Admin Note",
+      "slug": "admin_note",
+      "description": "Standard input box that is hidden from the front end.",
+      "settings": {
+        "searchable": false,
+        "editable": true,
+        "admin_only": true
+      },
+      "search": [],
+      "admin": [
+        "input"
+      ]
+    },
+    "geo": {
+      "label": "Geo Attribute",
+      "slug": "geo",
+      "description": "Geo Location specific attribute, which is used by Google Validator. The value can not be editable.",
+      "settings": {
+        "indexable": true,
+        "searchable": true,
+        "editable": false,
+        "admin_only": true
+      },
+      "search": [
+        "input", "dropdown", "multi_checkbox"
+      ],
+      "admin": []
+    },
+    "taxonomy": {
+      "label": "Taxonomy",
+      "slug": "taxonomy",
+      "description": "Registers custom taxonomy.",
+      "settings": {
+        "searchable": true,
+        "editable": false,
+        "admin_only": true,
+        "can_be_disabled": true
+      },
+      "search": [
+        "input", "multi_checkbox"
+      ],
+      "admin": []
+    },
+    "property_type": {
+      "label": "Property Type",
+      "slug": "property_type",
+      "description": "System Classification to handle property types functionality",
+      "settings": {
+        "searchable": true,
+        "editable": true,
+        "admin_only": true,
+        "system": true,
+        "admin_predefined_values": false,
+        "search_predefined_values": false
+      },
+      "search": [
+        "input", "dropdown", "multi_checkbox"
+      ],
+      "admin": [
+        "dropdown"
+      ]
+    }
+  },
+  "_constants": {
+    "WPP_Debug": "Toggles debug / developer mode.",
+    "WPP_Version": "Current WPP version."
+  },
+  "_content_modules": {
+    "gallery": {
+      "description": "Image gallery for a single listing.",
+      "nestable": true,
+      "requires": "property",
+      "properties": {
+        "title": {
+          "description": "Title of module.",
+          "type": "string"
+        },
+        "image_type": {
+          "type": "string",
+          "description": "Size of thumbnail image.",
+          "values": "{$image_sizes}"
+        },
+        "big_image_type": {
+          "type": "string",
+          "description": "Size of full-size image.",
+          "values": "{$image_sizes}"
+        },
+        "gallery_count": {
+          "type": "integer",
+          "description": "Maximum number of images."
+        },
+        "show_caption": {
+          "type": "boolean",
+          "description": "Display capations for gallery items."
+        },
+        "show_description": {
+          "type": "boolean",
+          "description": "Display descriptions for gallery items."
+        },
+        "property_id": {
+          "type": "integer",
+          "description": "ID of property to get images for.",
+          "default": "property.ID",
+          "required": true
+        }
+      }
+    },
+    "property_slideshow": {},
+    "global_slideshow": {},
+    "property_gallery": {},
+    "property_map": {
+      "nestable": true,
+      "requires": "property"
+    },
+    "property_attribute": {
+      "nestable": true,
+      "requires": "property"
+    },
+    "property_attributes": {},
+    "list_attachments": {},
+    "taxonomy_terms": {},
+    "property_search": {},
+    "property_overview": {},
+    "featured_properties": {
+      "type": "array"
+    },
+    "other_properties": {
+      "type": "array"
+    },
+    "child_properties": {
+      "type": "type"
+    },
+    "latest_properties": {
+      "loop": true
+    },
+    "featured-properties": {
+      "loop": true
+    },
+    "google_maps_infobox": {},
+    "property_flyer": {},
+    "wpp_pdf_list": {},
+    "supermap": {},
+    "agent_card": {}
+  },
+  "_core_features": {
+    "locations": true,
+    "featured": true
+  },
+  "_geo_attributes": [
+    "formatted_address", "street_number", "route", "district", "city", "county", "state", "state_code", "country",
+    "country_code", "postal_code", "latitude", "longitude", "_wpp::geo_hash", "_wpp::location_type"
+  ],
+  "_input_types": {
+    "input": "l10n.field_input",
+    "dropdown": "l10n.field_dropdown",
+    "textarea": "l10n.field_textarea",
+    "checkbox": "l10n.field_checkbox",
+    "multi_checkbox": "l10n.field_multi_checkbox",
+    "range_input": "l10n.field_range_input",
+    "range_dropdown": "l10n.field_range_dropdown",
+    "date": "l10n.field_date",
+    "range_date": "l10n.range_date"
+  },
+  "_predefined_attributes": {
+    "property_type": {
+      "label": "Property Type",
+      "slug": "property_type",
+      "description": "Determines the layout and attributes settings",
+      "classification": "property_type",
+      "meta": true
+    },
+    "source_id": {
+      "label": "ID",
+      "slug": "source_id",
+      "description": "Internal unique identifier of every listing",
+      "classification": "numeric",
+      "usage": "unique",
+      "frequency_weight": "1",
+      "analysis_weight": "1",
+      "variations": {
+        "name": "ID",
+        "type": "wordpress"
+      },
+      "meta": false
+    },
+    "modification_time": {
+      "label": "Date Modified",
+      "slug": "modification_time",
+      "classification": "timestamp",
+      "description": "Date and time stamp of last modification",
+      "searchable": true,
+      "variations": {
+        "name": "post_modified",
+        "type": "wordpress"
+      },
+      "meta": false
+    },
+    "publish_time": {
+      "label": "Date Listed",
+      "slug": "publish_time",
+      "classification": "timestamp",
+      "searchable": true,
+      "variations": {
+        "name": "post_date",
+        "type": "wordpress"
+      },
+      "meta": false
+    },
+    "public_visibility": {
+      "label": "Public Visibility",
+      "slug": "public_visibility",
+      "classification": "string",
+      "searchable": false,
+      "values": [
+        "Publish", "Trash"
+      ],
+      "variations": {
+        "name": "post_status",
+        "type": "wordpress"
+      },
+      "meta": false
+    },
+    "title": {
+      "label": "Title",
+      "slug": "title",
+      "classification": "string",
+      "variations": {
+        "name": "post_title",
+        "type": "wordpress"
+      },
+      "meta": false
+    },
+    "description": {
+      "label": "Detailed Description",
+      "slug": "description",
+      "classification": "detail",
+      "variations": {
+        "name": "post_content",
+        "type": "wordpress"
+      },
+      "meta": false
+    },
+    "county": {
+      "label": "County",
+      "slug": "county",
+      "description": "Geo Location. The value is been generating automatically by Google Address Validator.",
+      "classification": "geo",
+      "meta": true
+    },
+    "country_code": {
+      "label": "Country Code",
+      "slug": "country_code",
+      "description": "Geo Location. The value is been generating automatically by Google Address Validator.",
+      "classification": "geo",
+      "meta": true
+    },
+    "city": {
+      "label": "City",
+      "slug": "city",
+      "description": "Geo Location. The value is been generating automatically by Google Address Validator.",
+      "classification": "geo",
+      "meta": true
+    },
+    "state_code": {
+      "label": "State Code",
+      "slug": "state_code",
+      "description": "Geo Location. The value is been generating automatically by Google Address Validator.",
+      "classification": "geo",
+      "meta": true
+    },
+    "postal_code": {
+      "label": "Postal Code",
+      "slug": "postal_code",
+      "description": "Geo Location. The value is been generating automatically by Google Address Validator.",
+      "classification": "geo",
+      "meta": true
+    },
+    "district": {
+      "label": "District",
+      "slug": "district",
+      "description": "Geo Location. The value is been generating automatically by Google Address Validator.",
+      "classification": "geo",
+      "meta": true
+    },
+    "route": {
+      "label": "Route",
+      "slug": "route",
+      "description": "Geo Location. The value is been generating automatically by Google Address Validator.",
+      "classification": "geo",
+      "meta": true
+    },
+    "street_number": {
+      "label": "Street Number",
+      "slug": "street_number",
+      "description": "Geo Location. The value is been generating automatically by Google Address Validator.",
+      "classification": "geo",
+      "meta": true
+    }
+  },
+  "_predefined_groups": {
+    "wpp_main": {
+      "label": "l10n.main",
+      "slug": "wpp_main",
+      "reserved": true
+    }
+  },
+  "_primary_keys": {
+    "post_title": "l10n.post_title",
+    "post_type": "l10n.post_type",
+    "post_content": "l10n.post_content",
+    "post_excerpt": "l10n.post_excerpt",
+    "post_status": "l10n.post_status",
+    "menu_order": "l10n.menu_order",
+    "post_date": "l10n.post_date",
+    "post_author": "l10n.post_author",
+    "post_date_gmt": "l10n.post_date_gmt",
+    "post_parent": "l10n.post_parent",
+    "ping_status": "l10n.ping_status",
+    "comment_status": "l10n.comment_status",
+    "post_password": "l10n.post_password"
+  },
+  "_regex": {
+    "is_url": "|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i",
+    "has_number_data_type": "#^[\\d,\\.\\,]+$#",
+    "mysql_date": "%\\d{1,2}/\\d{1,2}/\\d{4}%i",
+    "get_script_url": "#^(.*/)?([^/]+)$#"
+  },
+  "_rewrite_rules": {
+    "%property_type%/(.+?)/?$": "index.php?property_type=$matches[1]&pagename=$matches[2]"
+  },
+  "configuration": {
+    "admin_ui": {
+      "overview_table_thumbnail_size": "thumbnail"
+    },
+    "auto_delete_attachments": "false",
+    "autoload_css": "true",
+    "automatically_insert_overview": "true",
+    "base_slug": "property",
+    "bottom_insert_pagenation": "false",
+    "build_mode": "false",
+    "completely_hide_hidden_attributes_in_admin_ui": "false",
+    "currency_symbol": "$",
+    "currency_symbol_placement": "before",
+    "developer_mode": "false",
+    "disable_automatic_feature_update": "false",
+    "disable_wordpress_postmeta_cache": "false",
+    "display_address_format": "[city], [state]",
+    "do_not_automatically_regenerate_thumbnails": "false",
+    "do_not_load_theme_specific_css": "false",
+    "do_not_override_search_result_page": "false",
+    "do_not_register_sidebars": "true",
+    "gm_zoom_level": "13",
+    "google_maps": {
+      "infobox_settings": {
+        "show_direction_link": true,
+        "show_property_title": true
+      },
+      "infobox_attributes": []
+    },
+    "google_maps_localization": "en",
+    "load_scripts_everywhere": "false",
+    "main_stats_group": "wpp_main",
+    "overview_template": "",
+    "property_overview": {
+      "thumbnail_size": "thumbnail",
+      "fancybox_preview": "true",
+      "display_slideshow": "false",
+      "show_children": "true",
+      "sort_stats_by_groups": "false",
+      "field": "value"
+    },
+    "show_ud_log": "false",
+    "single_listing_template": "",
+    "single_property_view": {
+      "map_image_type": "thumbnail",
+      "gm_zoom_level": "13"
+    },
+    "thousands_sep": ","
+  },
+  "default_coords": {
+    "latitude": "",
+    "longitude": ""
+  },
+  "descriptions": {
+    "property_type": "The property type will determine the layout."
+  },
+  "location_matters": [],
+  "taxonomies": {
+    "property_feature": {
+      "hierarchical": false,
+      "label": "Features",
+      "labels": {
+        "name": "Features",
+        "singular_name": "Feature",
+        "search_items": "Search Features",
+        "all_items": "All Features",
+        "parent_item": "Parent Feature",
+        "parent_item_colon": "Parent Feature:",
+        "edit_item": "Edit Feature",
+        "update_item": "Update Feature",
+        "add_new_item": "Add New Feature",
+        "new_item_name": "New Feature Name",
+        "menu_name": "Feature"
+      },
+      "query_var": "property_feature",
+      "rewrite": {
+        "slug": "feature"
+      }
+    },
+    "community_feature": {
+      "hierarchical": false,
+      "label": "Community Features",
+      "labels": {
+        "name": "Community Features",
+        "singular_name": "Community Feature",
+        "search_items": "Search Community Features",
+        "all_items": "All Community Features",
+        "parent_item": "Parent Community Feature",
+        "parent_item_colon": "Parent Community Feature:",
+        "edit_item": "Edit Community Feature",
+        "update_item": "Update Community Feature",
+        "add_new_item": "Add New Community Feature",
+        "new_item_name": "New Community Feature Name",
+        "menu_name": "Community Feature"
+      },
+      "query_var": "community_feature",
+      "rewrite": {
+        "slug": "community_feature"
+      }
+    }
+  }
+}

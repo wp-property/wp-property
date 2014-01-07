@@ -35,3 +35,8 @@ Be sure to check out the  [WP-Property Forum](http://usabilitydynamics.com/produ
 * Out of the box support for two property types, Building and Floorplan.   More can be added via WP-Property API.
 * Property types follow a hierarchical format, having the ability of inheriting settings - i.e. buildings (or communities) will automatically calculate the price range of all floor-plans below them.
 * Free!
+
+### Release Instructions
+ - run "composer update --prefer-dist"
+ - run "grunt make-distribution"
+ - uploads static/assets to http://plugins.svn.wordpress.org/wp-property/assets/

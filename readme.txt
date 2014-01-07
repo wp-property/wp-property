@@ -162,6 +162,13 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 
 == Upgrade Notice ==
 
+= 2.00 =
+* languages directory renamed from 'langs' to 'languages
+* core directory renamed to lib
+* class files renamed to follow class-{name} standard
+* widget classes moved to own directory
+* composer introduced for vendor libs
+
 = 1.38 =
 * Added compatibility with FEPS 2.0 premium feature.
 

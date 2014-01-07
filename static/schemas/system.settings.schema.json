@@ -1,0 +1,1256 @@
+{
+  "title": "WP-Property 2.0 Schema",
+  "description": "Schema for WP-Property 2.0 configuration.",
+  "properties": {
+    "_attribute_classifications": {
+      "type": "object",
+      "description": "Available attribute field classifications.",
+      "properties": {
+        "admin_note": {
+          "type": "object",
+          "properties": {
+            "admin": {
+              "type": "object",
+              "id": "admin",
+              "properties": {
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                }
+              }
+            },
+            "description": {
+              "type": "string",
+              "id": "description",
+              "required": false
+            },
+            "label": {
+              "type": "string",
+              "id": "label",
+              "required": false
+            },
+            "search": {
+              "type": "array",
+              "id": "search",
+              "required": false
+            },
+            "settings": {
+              "type": "object",
+              "id": "settings",
+              "properties": {
+                "searchable": {
+                  "type": "boolean",
+                  "id": "searchable",
+                  "required": false
+                }
+              }
+            }
+          }
+        },
+        "agent_name": {
+          "type": "object",
+          "id": "agent_name",
+          "properties": {
+            "admin": {
+              "type": "object",
+              "id": "admin",
+              "properties": {
+                "dropdown": {
+                  "type": "string",
+                  "id": "dropdown",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                }
+              }
+            },
+            "description": {
+              "type": "string",
+              "id": "description",
+              "required": false
+            },
+            "label": {
+              "type": "string",
+              "id": "label",
+              "required": false
+            },
+            "search": {
+              "type": "object",
+              "id": "search",
+              "properties": {
+                "dropdown": {
+                  "type": "string",
+                  "id": "dropdown",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                },
+                "multi_checkbox": {
+                  "type": "string",
+                  "id": "multi_checkbox",
+                  "required": false
+                }
+              }
+            },
+            "settings": {
+              "type": "object",
+              "id": "settings",
+              "properties": {
+                "searchable": {
+                  "type": "boolean",
+                  "id": "searchable",
+                  "required": false
+                }
+              }
+            }
+          }
+        },
+        "area": {
+          "type": "object",
+          "id": "area",
+          "properties": {
+            "admin": {
+              "type": "object",
+              "id": "admin",
+              "properties": {
+                "dropdown": {
+                  "type": "string",
+                  "id": "dropdown",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                }
+              }
+            },
+            "description": {
+              "type": "string",
+              "id": "description",
+              "required": false
+            },
+            "label": {
+              "type": "string",
+              "id": "label",
+              "required": false
+            },
+            "search": {
+              "type": "object",
+              "id": "search",
+              "properties": {
+                "dropdown": {
+                  "type": "string",
+                  "id": "dropdown",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                },
+                "multi_checkbox": {
+                  "type": "string",
+                  "id": "multi_checkbox",
+                  "required": false
+                },
+                "range_dropdown": {
+                  "type": "string",
+                  "id": "range_dropdown",
+                  "required": false
+                },
+                "range_input": {
+                  "type": "string",
+                  "id": "range_input",
+                  "required": false
+                }
+              }
+            },
+            "settings": {
+              "type": "object",
+              "id": "settings",
+              "properties": {
+                "searchable": {
+                  "type": "boolean",
+                  "id": "searchable",
+                  "required": false
+                }
+              }
+            }
+          }
+        },
+        "boolean": {
+          "type": "object",
+          "id": "boolean",
+          "properties": {
+            "admin": {
+              "type": "object",
+              "id": "admin",
+              "properties": {
+                "checkbox": {
+                  "type": "string",
+                  "id": "checkbox",
+                  "required": false
+                }
+              }
+            },
+            "description": {
+              "type": "string",
+              "id": "description",
+              "required": false
+            },
+            "label": {
+              "type": "string",
+              "id": "label",
+              "required": false
+            },
+            "search": {
+              "type": "object",
+              "id": "search",
+              "properties": {
+                "checkbox": {
+                  "type": "string",
+                  "id": "checkbox",
+                  "required": false
+                }
+              }
+            },
+            "settings": {
+              "type": "object",
+              "id": "settings",
+              "properties": {
+                "searchable": {
+                  "type": "boolean",
+                  "id": "searchable",
+                  "required": false
+                }
+              }
+            }
+          }
+        },
+        "currency": {
+          "type": "object",
+          "id": "currency",
+          "properties": {
+            "admin": {
+              "type": "object",
+              "id": "admin",
+              "properties": {
+                "dropdown": {
+                  "type": "string",
+                  "id": "dropdown",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                }
+              }
+            },
+            "description": {
+              "type": "string",
+              "id": "description",
+              "required": false
+            },
+            "label": {
+              "type": "string",
+              "id": "label",
+              "required": false
+            },
+            "search": {
+              "type": "object",
+              "id": "search",
+              "properties": {
+                "dropdown": {
+                  "type": "string",
+                  "id": "dropdown",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                },
+                "multi_checkbox": {
+                  "type": "string",
+                  "id": "multi_checkbox",
+                  "required": false
+                },
+                "range_dropdown": {
+                  "type": "string",
+                  "id": "range_dropdown",
+                  "required": false
+                },
+                "range_input": {
+                  "type": "string",
+                  "id": "range_input",
+                  "required": false
+                }
+              }
+            },
+            "settings": {
+              "type": "object",
+              "id": "settings",
+              "properties": {
+                "indexable": {
+                  "type": "boolean",
+                  "id": "indexable",
+                  "required": false
+                },
+                "type": {
+                  "type": "string",
+                  "id": "type",
+                  "required": false
+                },
+                "searchable": {
+                  "type": "boolean",
+                  "id": "searchable",
+                  "required": false
+                }
+              }
+            }
+          }
+        },
+        "detail": {
+          "type": "object",
+          "id": "detail",
+          "properties": {
+            "admin": {
+              "type": "object",
+              "id": "admin",
+              "properties": {
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                }
+              }
+            },
+            "description": {
+              "type": "string",
+              "id": "description",
+              "required": false
+            },
+            "label": {
+              "type": "string",
+              "id": "label",
+              "required": false
+            },
+            "search": {
+              "type": "object",
+              "id": "search",
+              "properties": {
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                }
+              }
+            },
+            "settings": {
+              "type": "object",
+              "id": "settings",
+              "properties": {
+                "indexable": {
+                  "type": "boolean",
+                  "id": "indexable",
+                  "required": false
+                },
+                "type": {
+                  "type": "string",
+                  "id": "type",
+                  "required": false
+                },
+                "searchable": {
+                  "type": "boolean",
+                  "id": "searchable",
+                  "required": false
+                }
+              }
+            }
+          }
+        },
+        "email": {
+          "type": "object",
+          "id": "email",
+          "properties": {
+            "admin": {
+              "type": "object",
+              "id": "admin",
+              "properties": {
+                "dropdown": {
+                  "type": "string",
+                  "id": "dropdown",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                }
+              }
+            },
+            "label": {
+              "type": "string",
+              "id": "label",
+              "required": false
+            },
+            "search": {
+              "type": "object",
+              "id": "search",
+              "properties": {
+                "dropdown": {
+                  "type": "string",
+                  "id": "dropdown",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                },
+                "multi_checkbox": {
+                  "type": "string",
+                  "id": "multi_checkbox",
+                  "required": false
+                }
+              }
+            },
+            "settings": {
+              "type": "object",
+              "id": "settings",
+              "properties": {
+                "searchable": {
+                  "type": "boolean",
+                  "id": "searchable",
+                  "required": false
+                }
+              }
+            }
+          }
+        },
+        "link": {
+          "type": "object",
+          "id": "link",
+          "properties": {
+            "admin": {
+              "type": "object",
+              "id": "admin",
+              "properties": {
+                "dropdown": {
+                  "type": "string",
+                  "id": "dropdown",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                }
+              }
+            },
+            "description": {
+              "type": "string",
+              "id": "description",
+              "required": false
+            },
+            "label": {
+              "type": "string",
+              "id": "label",
+              "required": false
+            },
+            "search": {
+              "type": "object",
+              "id": "search",
+              "properties": {
+                "dropdown": {
+                  "type": "string",
+                  "id": "dropdown",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                },
+                "multi_checkbox": {
+                  "type": "string",
+                  "id": "multi_checkbox",
+                  "required": false
+                }
+              }
+            },
+            "settings": {
+              "type": "object",
+              "id": "settings",
+              "properties": {
+                "searchable": {
+                  "type": "boolean",
+                  "id": "searchable",
+                  "required": false
+                }
+              }
+            }
+          }
+        },
+        "location": {
+          "type": "object",
+          "id": "location",
+          "properties": {
+            "admin": {
+              "type": "object",
+              "id": "admin",
+              "properties": {
+                "dropdown": {
+                  "type": "string",
+                  "id": "dropdown",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                }
+              }
+            },
+            "description": {
+              "type": "string",
+              "id": "description",
+              "required": false
+            },
+            "label": {
+              "type": "string",
+              "id": "label",
+              "required": false
+            },
+            "search": {
+              "type": "object",
+              "id": "search",
+              "properties": {
+                "dropdown": {
+                  "type": "string",
+                  "id": "dropdown",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                },
+                "multi_checkbox": {
+                  "type": "string",
+                  "id": "multi_checkbox",
+                  "required": false
+                }
+              }
+            },
+            "settings": {
+              "type": "object",
+              "id": "settings",
+              "properties": {
+                "indexable": {
+                  "type": "boolean",
+                  "id": "indexable",
+                  "required": false
+                },
+                "type": {
+                  "type": "string",
+                  "id": "type",
+                  "required": false
+                },
+                "searchable": {
+                  "type": "boolean",
+                  "id": "searchable",
+                  "required": false
+                }
+              }
+            }
+          }
+        },
+        "numeric": {
+          "type": "object",
+          "id": "numeric",
+          "properties": {
+            "admin": {
+              "type": "object",
+              "id": "admin",
+              "properties": {
+                "dropdown": {
+                  "type": "string",
+                  "id": "dropdown",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                }
+              }
+            },
+            "description": {
+              "type": "string",
+              "id": "description",
+              "required": false
+            },
+            "label": {
+              "type": "string",
+              "id": "label",
+              "required": false
+            },
+            "search": {
+              "type": "object",
+              "id": "search",
+              "properties": {
+                "dropdown": {
+                  "type": "string",
+                  "id": "dropdown",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                },
+                "multi_checkbox": {
+                  "type": "string",
+                  "id": "multi_checkbox",
+                  "required": false
+                },
+                "range_dropdown": {
+                  "type": "string",
+                  "id": "range_dropdown",
+                  "required": false
+                },
+                "range_input": {
+                  "type": "string",
+                  "id": "range_input",
+                  "required": false
+                }
+              }
+            },
+            "settings": {
+              "type": "object",
+              "id": "settings",
+              "properties": {
+                "searchable": {
+                  "type": "boolean",
+                  "id": "searchable",
+                  "required": false
+                }
+              }
+            }
+          }
+        },
+        "phone_number": {
+          "type": "object",
+          "id": "phone_number",
+          "properties": {
+            "admin": {
+              "type": "object",
+              "id": "admin",
+              "properties": {
+                "dropdown": {
+                  "type": "string",
+                  "id": "dropdown",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                }
+              }
+            },
+            "label": {
+              "type": "string",
+              "id": "label",
+              "required": false
+            },
+            "search": {
+              "type": "object",
+              "id": "search",
+              "properties": {
+                "dropdown": {
+                  "type": "string",
+                  "id": "dropdown",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                },
+                "multi_checkbox": {
+                  "type": "string",
+                  "id": "multi_checkbox",
+                  "required": false
+                }
+              }
+            },
+            "settings": {
+              "type": "object",
+              "id": "settings",
+              "properties": {
+                "searchable": {
+                  "type": "boolean",
+                  "id": "searchable",
+                  "required": false
+                }
+              }
+            }
+          }
+        },
+        "string": {
+          "type": "object",
+          "id": "string",
+          "properties": {
+            "admin": {
+              "type": "object",
+              "id": "admin",
+              "properties": {
+                "dropdown": {
+                  "type": "string",
+                  "id": "dropdown",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                }
+              }
+            },
+            "description": {
+              "type": "string",
+              "id": "description",
+              "required": false
+            },
+            "label": {
+              "type": "string",
+              "id": "label",
+              "required": false
+            },
+            "search": {
+              "type": "object",
+              "id": "search",
+              "properties": {
+                "dropdown": {
+                  "type": "string",
+                  "id": "dropdown",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                },
+                "multi_checkbox": {
+                  "type": "string",
+                  "id": "multi_checkbox",
+                  "required": false
+                }
+              }
+            },
+            "settings": {
+              "type": "object",
+              "id": "settings",
+              "properties": {
+                "indexable": {
+                  "type": "boolean",
+                  "id": "indexable",
+                  "required": false
+                },
+                "type": {
+                  "type": "string",
+                  "id": "type",
+                  "required": false
+                },
+                "searchable": {
+                  "type": "boolean",
+                  "id": "searchable",
+                  "required": false
+                }
+              }
+            }
+          }
+        },
+        "timestamp": {
+          "type": "object",
+          "id": "timestamp",
+          "properties": {
+            "admin": {
+              "type": "object",
+              "id": "admin",
+              "properties": {
+                "date_picker": {
+                  "type": "string",
+                  "id": "date_picker",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                }
+              }
+            },
+            "description": {
+              "type": "string",
+              "id": "description",
+              "required": false
+            },
+            "label": {
+              "type": "string",
+              "id": "label",
+              "required": false
+            },
+            "search": {
+              "type": "object",
+              "id": "search",
+              "properties": {
+                "date_picker": {
+                  "type": "string",
+                  "id": "date_picker",
+                  "required": false
+                },
+                "input": {
+                  "type": "string",
+                  "id": "input",
+                  "required": false
+                }
+              }
+            },
+            "settings": {
+              "type": "object",
+              "id": "settings",
+              "properties": {
+                "searchable": {
+                  "type": "boolean",
+                  "id": "searchable",
+                  "required": false
+                }
+              }
+            }
+          }
+        },
+        "geo": {
+          "type": "object",
+          "id": "geo",
+          "properties": {
+            "admin": {
+              "type": "object",
+              "id": "admin",
+              "required": false
+            },
+            "description": {
+              "type": "string",
+              "id": "description",
+              "required": false
+            },
+            "label": {
+              "type": "string",
+              "id": "label",
+              "required": false
+            },
+            "search": {
+              "dropdown": {
+                "type": "string",
+                "id": "dropdown",
+                "required": false
+              },
+              "input": {
+                "type": "string",
+                "id": "input",
+                "required": false
+              },
+              "multi_checkbox": {
+                "type": "string",
+                "id": "multi_checkbox",
+                "required": false
+              }
+            },
+            "settings": {
+              "type": "object",
+              "id": "settings",
+              "properties": {
+                "indexable": {
+                  "type": "boolean",
+                  "id": "indexable",
+                  "required": false
+                },
+                "type": {
+                  "type": "string",
+                  "id": "type",
+                  "required": false
+                },
+                "searchable": {
+                  "type": "boolean",
+                  "id": "searchable",
+                  "required": false
+                },
+                "editable": {
+                  "type": "string",
+                  "id": "editable",
+                  "required": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "_standard_attributes": {
+      "description": "Data set of standard attributes for a particular industry.",
+      "type": "object"
+    },
+    "_geo_attributes": {
+      "type": "object",
+      "description": "List of meta keys used for storing geolocation data.",
+      "usage": [
+        "computed"
+      ]
+    },
+    "_constants": {
+      "description": "List of available constants and their descriptions.",
+      "type": "object"
+    },
+    "_primary_keys": {
+      "type": "object",
+      "description": "List of property keys that are not stored in the meta table."
+    },
+    "_regex": {
+      "type": "object",
+      "id": "_regex",
+      "properties": {
+        "get_script_url": {
+          "type": "string",
+          "id": "get_script_url",
+          "required": false
+        },
+        "has_number_data_type": {
+          "type": "string",
+          "id": "has_number_data_type",
+          "required": false
+        },
+        "is_url": {
+          "type": "string",
+          "id": "is_url",
+          "required": false
+        },
+        "mysql_date": {
+          "type": "string",
+          "id": "mysql_date",
+          "required": false
+        }
+      }
+    },
+    "_rewrite_rules": {
+      "description": "Regular expressions used throughout plugin.",
+      "type": "object",
+      "defaults": {
+        "css/wp_properties.css?ver=(.+?)": "index.php?wpp_asset=wpp_css&version=$matches[1]",
+        "css/wpp_css.css?ver=(.+?)": "index.php?wpp_asset=wpp_css&version=$matches[1]",
+        "js/wpp_js.css?ver=(.+?)": "index.php?wpp_asset=wpp_js&version=$matches[1]",
+        "js/wpp_settings.js?ver=(.+?)": "index.php?wpp_asset=wpp_settings&version=$matches[1]",
+        "%property_type%/(.+?)/?$": "index.php?property_type=$matches[1]&pagename=$matches[2]"
+      }
+    },
+    "_data_structure": {
+      "description": "Computed data structure including property types and fields.",
+      "type": "object"
+    },
+    "_server_capabilities": {
+      "description": "Computed data set of server settings. ",
+      "type": "object",
+      "usage": "computed"
+    },
+    "_version": {
+      "type": "string",
+      "description": "Plugin version used to generate settings."
+    },
+    "_template_elements": {
+      "description": "Definitions of available UI elements, which may be inserted via Shortcodes, Widgets, Modules or PHP functions.",
+      "type": "array",
+      "items": {
+        "id": "ui_element",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "args": {
+            "type": "object"
+          }
+        }
+      },
+      "default": [
+        {
+          "key": "property_overview",
+          "args": {
+            "child_properties_title": "Floor plans at location:",
+            "per_page": 10,
+            "fancybox_preview": "$configuration.property_overview.fancybox_preview",
+            "thumbnail_size": "$configuration.property_overview.thumbnail_size",
+            "show_children": "$configuration.property_overview.show_children",
+            "bottom_pagination_flag": "$configuration.bottom_insert_pagenation",
+            "sorter_type": "$configuration.property_overview.sorter_type|buttons",
+            "sort_by_text": "Sort By:",
+            "sort_by": "menu_order"
+          }
+        }
+      ]
+    },
+    "configuration": {
+      "description": "Primary plugin configuration.",
+      "type": "object",
+      "properties": {
+        "build_mode": {
+          "description": "When enabled, WPP monitors JS and CSS assets to updates, and recompiles them. The Frontend Model is also recompiled on every request.",
+          "type": "boolean",
+          "default": true
+        },
+        "admin_ui": {
+          "type": "object",
+          "id": "admin_ui",
+          "properties": {
+            "overview_table_thumbnail_size": {
+              "type": "string"
+            }
+          }
+        },
+        "auto_delete_attachments": {
+          "type": "string"
+        },
+        "autoload_css": {
+          "type": "string",
+          "default": "true"
+        },
+        "automatically_insert_overview": {
+          "type": "string",
+          "default": true
+        },
+        "base_slug": {
+          "type": "string"
+        },
+        "bottom_insert_pagenation": {
+          "type": "string",
+          "id": "bottom_insert_pagenation",
+          "required": false
+        },
+        "completely_hide_hidden_attributes_in_admin_ui": {
+          "type": "string",
+          "id": "completely_hide_hidden_attributes_in_admin_ui",
+          "required": false
+        },
+        "currency_symbol_placement": {
+          "type": "string",
+          "id": "currency_symbol_placement",
+          "required": false
+        },
+        "currency_symbol": {
+          "type": "string",
+          "id": "currency_symbol",
+          "required": false
+        },
+        "developer_mode": {
+          "type": "string",
+          "id": "developer_mode",
+          "required": false
+        },
+        "disable_automatic_feature_update": {
+          "type": "string",
+          "id": "disable_automatic_feature_update",
+          "required": false
+        },
+        "disable_wordpress_postmeta_cache": {
+          "type": "string",
+          "id": "disable_wordpress_postmeta_cache",
+          "required": false
+        },
+        "display_address_format": {
+          "type": "string",
+          "id": "display_address_format",
+          "required": false
+        },
+        "do_not_automatically_regenerate_thumbnails": {
+          "type": "string",
+          "id": "do_not_automatically_regenerate_thumbnails",
+          "required": false
+        },
+        "do_not_load_theme_specific_css": {
+          "type": "string",
+          "id": "do_not_load_theme_specific_css",
+          "required": false
+        },
+        "do_not_override_search_result_page": {
+          "type": "string",
+          "id": "do_not_override_search_result_page",
+          "required": false
+        },
+        "do_not_register_sidebars": {
+          "type": "string",
+          "id": "do_not_register_sidebars",
+          "required": false
+        },
+        "gm_zoom_level": {
+          "type": "string",
+          "id": "gm_zoom_level",
+          "required": false
+        },
+        "google_maps_localization": {
+          "type": "string",
+          "id": "google_maps_localization",
+          "required": false
+        },
+        "google_maps": {
+          "type": "object",
+          "id": "google_maps",
+          "properties": {
+            "infobox_settings": {
+              "type": "object",
+              "id": "infobox_settings",
+              "properties": {
+                "show_direction_link": {
+                  "type": "boolean",
+                  "id": "show_direction_link",
+                  "required": false
+                },
+                "show_property_title": {
+                  "type": "boolean",
+                  "id": "show_property_title",
+                  "required": false
+                }
+              }
+            }
+          }
+        },
+        "load_scripts_everywhere": {
+          "type": "string",
+          "id": "load_scripts_everywhere",
+          "required": false
+        },
+        "overview_template": {
+          "type": "string",
+          "id": "overview_template",
+          "required": false
+        },
+        "property_overview": {
+          "type": "object",
+          "id": "property_overview",
+          "properties": {
+            "display_slideshow": {
+              "type": "string",
+              "id": "display_slideshow",
+              "required": false
+            },
+            "fancybox_preview": {
+              "type": "string",
+              "id": "fancybox_preview",
+              "required": false
+            },
+            "field": {
+              "type": "string",
+              "id": "field",
+              "required": false
+            },
+            "show_children": {
+              "type": "string",
+              "id": "show_children",
+              "required": false
+            },
+            "sort_stats_by_groups": {
+              "type": "string",
+              "id": "sort_stats_by_groups",
+              "required": false
+            },
+            "thumbnail_size": {
+              "type": "string",
+              "id": "thumbnail_size",
+              "required": false
+            }
+          }
+        },
+        "show_ud_log": {
+          "type": "string",
+          "id": "show_ud_log",
+          "required": false
+        },
+        "single_listing_template": {
+          "type": "string",
+          "id": "single_listing_template",
+          "required": false
+        },
+        "single_property_view": {
+          "type": "object",
+          "id": "single_property_view",
+          "properties": {
+            "gm_zoom_level": {
+              "type": "string",
+              "id": "gm_zoom_level",
+              "required": false
+            },
+            "map_image_type": {
+              "type": "string",
+              "id": "map_image_type",
+              "required": false
+            }
+          }
+        },
+        "thousands_sep": {
+          "type": "string",
+          "id": "thousands_sep",
+          "required": false
+        }
+      }
+    },
+    "descriptions": {
+      "type": "object",
+      "description": "Textual descriptions for attributes."
+    },
+    "property_stats": {
+      "type": "object",
+      "description": "Simple attributes."
+    },
+    "property_meta": {
+      "type": "object",
+      "description": "Long textual attributes."
+    },
+    "property_types": {
+      "type": "object",
+      "description": "List of available property types."
+    },
+    "hierarchical_property_types": {
+      "type": "array",
+      "description": "Added in 2.0, identifies all property types that accept parent-child relationships."
+    },
+    "property_type_meta": {
+      "type": "object",
+      "description": "Added in 2.0, lists meta settings for a property type."
+    },
+    "attribute_classification": {
+      "type": "object",
+      "description": "Stores associations between attribute fields and their classifications."
+    },
+    "core_features": {
+      "description": "Data set of features available in plugin, and status. Added in version 2.0",
+      "properties": {
+        "locations": {
+          "description": "Listing geo-location and maps.",
+          "default": true
+        },
+        "featured": {
+          "description": "Markign listings as featured. Includes Featured Properties shortcode.",
+          "default": true
+        }
+      }
+    }
+  }
+}
