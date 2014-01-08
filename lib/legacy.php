@@ -6,6 +6,14 @@
  *
  */
 
+add_action( 'wpp:metaboxes', function( $context ) {
+  do_action( 'wpp_metaboxes', $context  );
+});
+
+add_action( 'wpp:save_property', function( $id, $context ) {
+  do_action( 'save_property',  $id, $context  );
+});
+
 if( !class_exists( 'WPP_Core' ) ) {
   class WPP_Core extends \UsabilityDynamics\WPP\Bootstrap {}
 }

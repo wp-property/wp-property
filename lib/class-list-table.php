@@ -112,78 +112,83 @@ namespace UsabilityDynamics\WPP {
       function data_tables_script( $args = '' ) {
         ?>
         <script type="text/javascript">
-      var wp_list_table;
-      var wp_table_column_ids = {}
-      <?php foreach($this->column_ids as $col_id => $col_slug) : ?>
-      wp_table_column_ids['<?php echo $col_slug; ?>'] = '<?php echo $col_id; ?>';
-      <?php endforeach; ?>
+        var wp_list_table;
+        var wp_table_column_ids = {}
 
-      jQuery( document ).ready( function() {
-        /* Initialize the dataTable */
-        //return;
-        wp_list_table = jQuery( "#wp-list-table" ).dataTable( {
-          "sPaginationType": "full_numbers",
-          "sDom": 'prtpl',
-          "iDisplayLength": <?php echo $this->_args['per_page']; ?>,
-          "bAutoWidth": false,
-          "oLanguage": {
-            "sLengthMenu": wpp.strings.dtables.display + ' <select><option value="25">25 </option><option value="50">50 </option><option value="100">100</option><option value="-1">' + wpp.strings.dtables.all + ' </option></select> ' + wpp.strings.dtables.records,
-            "sProcessing": '<div class="ajax_loader_overview"></div>'
-          },
-          "iColumns": <?php echo count($this->aoColumnDefs); ?>,
-          "bProcessing": true,
-          "bServerSide": true,
-          "aoColumnDefs": [<?php echo implode(',', $this->aoColumnDefs); ?>],
-          "sAjaxSource": wpp.instance.ajax_url + '?&action=<?php echo $this->_args['ajax_action']; ?>',
-          "fnServerData": function( sSource, aoData, fnCallback ) {
-            aoData.push( {
-              name: 'wpp_filter_vars',
-              value: jQuery( '#<?php echo $this->table_scope; ?>-filter' ).serialize()
-            } );
-            jQuery.ajax( {
-              "dataType": 'json',
-              "type": "POST",
-              "url": sSource,
-              "data": aoData,
-              "success": [fnCallback, wpp.overview.initialize()]
-            } );
-          },
-          "aoColumns": [<?php echo implode(",", $this->aoColumns); ?>],
-          "fnDrawCallback": function() {
+        <?php foreach($this->column_ids as $col_id => $col_slug) { ?>
+        wp_table_column_ids['<?php echo $col_slug; ?>'] = '<?php echo $col_id; ?>';
+        <?php } ?>
+
+        jQuery( document ).ready( function() {
+
+          wp_list_table = jQuery( "#wp-list-table" ).dataTable({
+            "sPaginationType": "full_numbers",
+            "sDom": 'prtpl',
+            "iDisplayLength": <?php echo $this->_args['per_page']; ?>,
+            "bAutoWidth": false,
+            "oLanguage": {
+              "sLengthMenu": wpp.strings.dtables.display + ' <select><option value="25">25 </option><option value="50">50 </option><option value="100">100</option><option value="-1">' + wpp.strings.dtables.all + ' </option></select> ' + wpp.strings.dtables.records,
+              "sProcessing": '<div class="ajax_loader_overview"></div>'
+            },
+            "iColumns": <?php echo count($this->aoColumnDefs); ?>,
+            "bProcessing": true,
+            "bServerSide": true,
+            "aoColumnDefs": [<?php echo implode(',', $this->aoColumnDefs); ?>],
+            "sAjaxSource": wpp.instance.ajax_url + '?&action=<?php echo $this->_args['ajax_action']; ?>',
+            "fnServerData": function( sSource, aoData, fnCallback ) {
+
+              aoData.push({
+                name: 'wpp_filter_vars',
+                value: jQuery( '#<?php echo $this->table_scope; ?>-filter' ).serialize()
+              });
+
+              jQuery.ajax({
+                "dataType": 'json',
+                "type": "POST",
+                "url": sSource,
+                "data": aoData,
+                "success": [fnCallback, wpp.overview.initialize()]
+              });
+
+            },
+            "aoColumns": [<?php echo implode(",", $this->aoColumns); ?>],
+            "fnDrawCallback": function() {
+              wp_list_table_do_columns();
+            }
+          });
+
+          /* Search by Filter */
+          jQuery( "#<?php echo $this->table_scope; ?>-filter #search-submit" ).click( function( event ) {
+            event.preventDefault();
+            wp_list_table.fnDraw();
+            return false;
+          });
+
+          jQuery( '.metabox-prefs' ).change( function() {
             wp_list_table_do_columns();
-          }
-        } );
+          });
 
-        /* Search by Filter */
-        jQuery( "#<?php echo $this->table_scope; ?>-filter #search-submit" ).click( function( event ) {
-          event.preventDefault();
-          wp_list_table.fnDraw();
-          return false;
-        } );
+        });
 
-        jQuery( '.metabox-prefs' ).change( function() {
-          wp_list_table_do_columns();
-        } );
-      } );
+        //** Check which columns are hidden, and hide data table columns */
+        function wp_list_table_do_columns() {
+          // Hide any "hidden" columns from table
+          var visible_columns = jQuery( '.hide-column-tog' ).filter( ':checked' ).map( function() {
+            return jQuery( this ).val();
+          });
+          var hidden_columns = jQuery( '.hide-column-tog' ).filter( ':not(:checked)' ).map( function() {
+            return jQuery( this ).val();
+          });
 
-      //** Check which columns are hidden, and hide data table columns */
-      function wp_list_table_do_columns() {
-        // Hide any "hidden" columns from table
-        var visible_columns = jQuery( '.hide-column-tog' ).filter( ':checked' ).map( function() {
-          return jQuery( this ).val();
-        } );
-        var hidden_columns = jQuery( '.hide-column-tog' ).filter( ':not(:checked)' ).map( function() {
-          return jQuery( this ).val();
-        } );
+          jQuery.each( hidden_columns, function( key, row_class ) {
+            jQuery( '#wp-list-table .' + row_class ).hide();
+          });
+          jQuery.each( visible_columns, function( key, row_class ) {
+            jQuery( '#wp-list-table .' + row_class ).show();
+          });
+        }
 
-        jQuery.each( hidden_columns, function( key, row_class ) {
-          jQuery( '#wp-list-table .' + row_class ).hide();
-        } );
-        jQuery.each( visible_columns, function( key, row_class ) {
-          jQuery( '#wp-list-table .' + row_class ).show();
-        } );
-      }
-    </script>
+        </script>
       <?php
       }
 
@@ -241,7 +246,7 @@ namespace UsabilityDynamics\WPP {
         if( !$ajax ) $this->all_items = array();
 
         if( !isset( $this->all_items ) ) {
-          $this->all_items = Utility::get_properties( $wpp_search );
+          $this->all_items = \UsabilityDynamics\WPP\Utility::get_properties( $wpp_search );
         }
 
         //** Do pagination  */
@@ -507,6 +512,7 @@ namespace UsabilityDynamics\WPP {
       }
 
     }
+
   }
 
 }

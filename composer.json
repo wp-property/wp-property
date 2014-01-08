@@ -40,6 +40,7 @@
     "zend/gdata": "dev-master",
     "natxet/CssMin": "dev-master",
     "linkorb/jsmin-php": "dev-master",
+    "wordpress/meta-box": "master",
     "usabilitydynamics/lib-api": "master",
     "usabilitydynamics/lib-ui": "master",
     "usabilitydynamics/lib-settings": "master",

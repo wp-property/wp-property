@@ -49,8 +49,6 @@
             
                 <li><a href="../classes/WPP.html">WPP</a></li>
             
-                <li><a href="../classes/wpp_default_api.html">wpp_default_api</a></li>
-            
                 <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
             
             </ul>
@@ -107,7 +105,7 @@ class FeaturedPropertiesWidget extends WP_Widget {
    * constructor
    */
   function FeaturedPropertiesWidget() {
-    parent::WP_Widget( false, $name = sprintf( __( &#x27;Featured %1s&#x27;, &#x27;wpp&#x27; ), Utility::property_label( &#x27;plural&#x27; ) ), array( &#x27;description&#x27; =&gt; sprintf( __( &#x27;List of %1s that were marked as Featured&#x27;, &#x27;wpp&#x27; ), Utility::property_label( &#x27;plural&#x27; ) ) ) );
+    parent::WP_Widget( false, $name = sprintf( __( &#x27;Featured %1s&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;plural&#x27; ) ), array( &#x27;description&#x27; =&gt; sprintf( __( &#x27;List of %1s that were marked as Featured&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;plural&#x27; ) ) ) );
   }
 
   /**
@@ -139,15 +137,15 @@ class FeaturedPropertiesWidget extends WP_Widget {
     if ( !$image_type ) {
       $image_type = &#x27;&#x27;;
     } else {
-      $image_size = Utility::image_sizes( $image_type );
+      $image_size = \UsabilityDynamics\WPP\Utility::image_sizes( $image_type );
     }
 
     if ( !isset( $property_stats[ &#x27;property_type&#x27; ] ) ) {
-      $property_stats[ &#x27;property_type&#x27; ] = sprintf(__( &#x27;%1s Type&#x27;, &#x27;wpp&#x27; ), Utility::property_label( &#x27;singular&#x27; ) );
+      $property_stats[ &#x27;property_type&#x27; ] = sprintf(__( &#x27;%1s Type&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;singular&#x27; ) );
     }
 
     $random_sort = $random_items == 1 ? &#x27;&amp;sort_by=random&#x27; : &#x27;&#x27;;
-    $all_featured = Utility::get_properties( &quot;featured=true&amp;property_type=all&amp;pagi=0--{$amount_items}{$random_sort}&quot; );
+    $all_featured = \UsabilityDynamics\WPP\Utility::get_properties( &quot;featured=true&amp;property_type=all&amp;pagi=0--{$amount_items}{$random_sort}&quot; );
 
     /** Bail out if no children */
     if ( !$all_featured ) {
@@ -174,7 +172,7 @@ class FeaturedPropertiesWidget extends WP_Widget {
         continue;
       }
       $count++;
-      $this_property = Utility::get_property( $featured, &#x27;return_object=true&#x27; );
+      $this_property = \UsabilityDynamics\WPP\Utility::get_property( $featured, &#x27;return_object=true&#x27; );
       $image = wpp_get_image_link( $this_property-&gt;featured_image, $image_type, array( &#x27;return&#x27; =&gt; &#x27;array&#x27; ) );
       $width = ( !empty( $image_size[ &#x27;width&#x27; ] ) ? $image_size[ &#x27;width&#x27; ] : ( !empty( $image[ &#x27;width&#x27; ] ) ? $image[ &#x27;width&#x27; ] : &#x27;&#x27; ) );
       $height = ( !empty( $image_size[ &#x27;height&#x27; ] ) ? $image_size[ &#x27;height&#x27; ] : ( !empty( $image[ &#x27;height&#x27; ] ) ? $image[ &#x27;height&#x27; ] : &#x27;&#x27; ) );
@@ -260,7 +258,7 @@ class FeaturedPropertiesWidget extends WP_Widget {
     }
 
     if ( !isset( $property_stats[ &#x27;property_type&#x27; ] ) ) {
-      $property_stats[ &#x27;property_type&#x27; ] = sprintf( __( &#x27;%1s Type&#x27;, &#x27;wpp&#x27; ), Utility::property_label( &#x27;singular&#x27; ) );
+      $property_stats[ &#x27;property_type&#x27; ] = sprintf( __( &#x27;%1s Type&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;singular&#x27; ) );
     }
     ?&gt;
     &lt;script type=&quot;text/javascript&quot;&gt;
@@ -292,7 +290,7 @@ class FeaturedPropertiesWidget extends WP_Widget {
     &lt;p
       id=&quot;choose_thumb_featured&quot; &lt;?php echo( $hide_image !== &#x27;on&#x27; ? &#x27;style=&quot;display:block;&quot;&#x27; : &#x27;style=&quot;display:none;&quot;&#x27; ); ?&gt;&gt;
       &lt;label for=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;image_type&#x27; ); ?&gt;&quot;&gt;&lt;?php _e( &#x27;Image Size:&#x27;, &#x27;wpp&#x27; ); ?&gt;
-        &lt;?php Utility::image_sizes_dropdown( &quot;name=&quot; . $this-&gt;get_field_name( &#x27;image_type&#x27; ) . &quot;&amp;selected=&quot; . $image_type ); ?&gt;
+        &lt;?php \UsabilityDynamics\WPP\Utility::image_sizes_dropdown( &quot;name=&quot; . $this-&gt;get_field_name( &#x27;image_type&#x27; ) . &quot;&amp;selected=&quot; . $image_type ); ?&gt;
       &lt;/label&gt;
     &lt;/p&gt;
     &lt;p&gt;

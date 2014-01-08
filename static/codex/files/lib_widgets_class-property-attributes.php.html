@@ -49,8 +49,6 @@
             
                 <li><a href="../classes/WPP.html">WPP</a></li>
             
-                <li><a href="../classes/wpp_default_api.html">wpp_default_api</a></li>
-            
                 <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
             
             </ul>
@@ -112,11 +110,11 @@ class Property_Attributes_Widget extends WP_Widget {
    */
   function __construct() {
 
-    $property_label = strtolower( Utility::property_label() );
+    $property_label = strtolower( \UsabilityDynamics\WPP\Utility::property_label() );
 
     parent::__construct(
       &#x27;wpp_property_attributes&#x27;,
-      sprintf( __( &#x27;%1s Attributes&#x27;, &#x27;wpp&#x27; ), Utility::property_label() ),
+      sprintf( __( &#x27;%1s Attributes&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label() ),
       array(
         &#x27;classname&#x27;   =&gt; &#x27;wpp_property_attributes&#x27;,
         &#x27;description&#x27; =&gt; sprintf( __( &#x27;Display a list of selected %1s attributes when loaded on a single %2s page.&#x27;, &#x27;wpp&#x27; ), $property_label, $property_label )
@@ -179,7 +177,7 @@ class Property_Attributes_Widget extends WP_Widget {
       }
 
       if( $show_labels ) {
-        $attribute = Utility::get_attribute_data( $slug );
+        $attribute = \UsabilityDynamics\WPP\Utility::get_attribute_data( $slug );
       }
 
       $attributes[ ] = &#x27;&lt;li class=&quot;&#x27; . $slug . &#x27;&quot;&gt;&#x27; . ( $show_labels ? &#x27;&lt;span class=&quot;attribute&quot;&gt;&#x27; . $attribute[ &#x27;label&#x27; ] . &#x27;&lt;span class=&quot;separator&quot;&gt;:&lt;/span&gt; &lt;/span&gt;&#x27; : &#x27;&#x27; ) . &#x27;&lt;/span&gt;&lt;span class=&quot;value&quot;&gt;&#x27; . $value . &#x27;&lt;/span&gt;&lt;/li&gt;&#x27;;
@@ -213,8 +211,8 @@ class Property_Attributes_Widget extends WP_Widget {
     $main_options   = array();
     $widget_options = ( is_array( $instance ) ? $instance : array() );
 
-    foreach( Utility::get_total_attribute_array() as $slug =&gt; $label ) {
-      $main_options[ $slug ] = Utility::get_attribute_data( $slug );
+    foreach( \UsabilityDynamics\WPP\Utility::get_total_attribute_array() as $slug =&gt; $label ) {
+      $main_options[ $slug ] = \UsabilityDynamics\WPP\Utility::get_attribute_data( $slug );
     }
 
     //** We don&#x27;t want to mix in the title into our array */

@@ -95,7 +95,7 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties, $wpdb;
         static $loaded = false;
 
-        $property = Utility::get_property( $object->ID );
+        $property = \UsabilityDynamics\WPP\Utility::get_property( $object->ID );
 
         $instance    = $attrs[ 'id' ];
         $stats_group = ( !empty( $attrs[ 'args' ][ 'group' ] ) ? $attrs[ 'args' ][ 'group' ] : false );
@@ -115,13 +115,13 @@ namespace UsabilityDynamics\WPP {
 
         //* Set default property type */
         if( empty( $this_property_type ) && empty( $property[ 'post_name' ] ) ) {
-          $this_property_type = Utility::get_most_common_property_type();
+          $this_property_type = \UsabilityDynamics\WPP\Utility::get_most_common_property_type();
         }
 
         //** Check for current property type if it is deleted */
         if( is_array( $wp_properties[ 'property_types' ] ) && isset( $property[ 'property_type' ] ) && !in_array( $property[ 'property_type' ], array_keys( $wp_properties[ 'property_types' ] ) ) ) {
-          $wp_properties[ 'property_types' ][ $property[ 'property_type' ] ] = Utility::de_slug( $property[ 'property_type' ] );
-          $wp_properties[ 'descriptions' ][ 'property_type' ]                = '<span class="attention">' . sprintf( __( '<strong>Warning!</strong> The %1s %2s type has been deleted.', 'wpp' ), $wp_properties[ 'property_types' ][ $property[ 'property_type' ] ], Utility::property_label( 'singular' ) ) . '</span>';
+          $wp_properties[ 'property_types' ][ $property[ 'property_type' ] ] = \UsabilityDynamics\WPP\Utility::de_slug( $property[ 'property_type' ] );
+          $wp_properties[ 'descriptions' ][ 'property_type' ]                = '<span class="attention">' . sprintf( __( '<strong>Warning!</strong> The %1s %2s type has been deleted.', 'wpp' ), $wp_properties[ 'property_types' ][ $property[ 'property_type' ] ], \UsabilityDynamics\WPP\Utility::property_label( 'singular' ) ) . '</span>';
         }
 
         ?>
@@ -250,7 +250,7 @@ namespace UsabilityDynamics\WPP {
 
     <?php //* 'Falls Under' field should be shown only in 'General Information' metabox */ ?>
     <?php if( $instance == 'wpp_property_meta' ) : ?>
-      <?php if( !Utility::has_children( $object->ID ) || ( !empty( $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] ) && $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] == 'true' ) ) : ?>
+      <?php if( !\UsabilityDynamics\WPP\Utility::has_children( $object->ID ) || ( !empty( $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] ) && $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] == 'true' ) ) : ?>
         <?php //** Do not do page dropdown when there are a lot of properties */ ?>
         <?php $property_count = $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_type = 'property' AND post_status = 'publish' " ); ?>
         <?php if( $property_count < 200 ) : ?>
@@ -304,7 +304,7 @@ namespace UsabilityDynamics\WPP {
 
     foreach( $property_stats as $slug => $label ) {
 
-      $attribute_data = Utility::get_attribute_data( $slug );
+      $attribute_data = \UsabilityDynamics\WPP\Utility::get_attribute_data( $slug );
 
       $attribute_description = array();
 
@@ -326,7 +326,7 @@ namespace UsabilityDynamics\WPP {
       if( in_array( $slug, $upwards_inherited_attributes ) ) {
         $row_classes[ ]         = 'wpp_upwards_inherited_attributes';
         $disabled_attributes[ ] = $slug;
-        $attribute_description  = array( sprintf( __( 'Values aggregated from child %1s.', 'wpp' ), Utility::property_label( 'plural' ) ) );
+        $attribute_description  = array( sprintf( __( 'Values aggregated from child %1s.', 'wpp' ), \UsabilityDynamics\WPP\Utility::property_label( 'plural' ) ) );
       }
 
       if( $wp_properties[ 'configuration' ][ 'allow_multiple_attribute_values' ] == 'true' && !in_array( $slug, apply_filters( 'wpp_single_value_attributes', array( 'property_type' ) ) ) ) {
@@ -500,7 +500,7 @@ namespace UsabilityDynamics\WPP {
 
         $wp_list_table->search_box( 'Search', 'property' );
 
-        $filters = Utility::get_search_filters();
+        $filters = \UsabilityDynamics\WPP\Utility::get_search_filters();
 
         ?>
         <div class="misc-pub-section">
@@ -598,9 +598,9 @@ namespace UsabilityDynamics\WPP {
       function property_type_selector( $property ) {
         global $wp_properties;
 
-        $attribute = Utility::get_attribute_data( 'property_type' );
+        $attribute = \UsabilityDynamics\WPP\Utility::get_attribute_data( 'property_type' );
 
-        $type_label = ( $attribute[ 'label' ] ? $attribute[ 'label' ] : sprintf( __( '%1s Type', 'wpp' ), Utility::property_label() ) );
+        $type_label = ( $attribute[ 'label' ] ? $attribute[ 'label' ] : sprintf( __( '%1s Type', 'wpp' ), \UsabilityDynamics\WPP\Utility::property_label() ) );
 
         $property_type_slugs = array_keys( (array) $wp_properties[ 'property_types' ] );
 

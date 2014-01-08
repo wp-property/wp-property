@@ -49,8 +49,6 @@
             
                 <li><a href="../classes/WPP.html">WPP</a></li>
             
-                <li><a href="../classes/wpp_default_api.html">wpp_default_api</a></li>
-            
                 <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
             
             </ul>
@@ -103,6 +101,14 @@
  * Support for legacy UD Classes - extend WPP_F, which in turn extends UD_API
  *
  */
+
+add_action( &#x27;wpp:metaboxes&#x27;, function( $context ) {
+  do_action( &#x27;wpp_metaboxes&#x27;, $context  );
+});
+
+add_action( &#x27;wpp:save_property&#x27;, function( $id, $context ) {
+  do_action( &#x27;save_property&#x27;,  $id, $context  );
+});
 
 if( !class_exists( &#x27;WPP_Core&#x27; ) ) {
   class WPP_Core extends \UsabilityDynamics\WPP\Bootstrap {}

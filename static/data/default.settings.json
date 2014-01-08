@@ -1,0 +1,151 @@
+{
+  "configuration": {
+    "autoload_css": "true",
+    "automatically_insert_overview": "true",
+    "base_slug": "property",
+    "currency_symbol": "$",
+    "address_attribute": "location",
+    "google_maps_localization": "en",
+    "display_address_format": "[city], [state]",
+    "property_overview": {
+      "thumbnail_size": "tiny_thumb",
+      "fancybox_preview": "true",
+      "display_slideshow": "false",
+      "show_children": "true"
+    },
+    "single_property_view": {
+      "map_image_type": "tiny_thumb",
+      "gm_zoom_level": "13"
+    },
+    "admin_ui": {
+      "overview_table_thumbnail_size": "tiny_thumb"
+    },
+    "google_maps": {
+      "infobox_attributes": [
+        "bedrooms",
+        "bathrooms",
+        "price"
+      ],
+      "infobox_settings": {
+        "show_direction_link": true,
+        "show_property_title": true
+      }
+    }
+  },
+  "property_types": {
+    "building": "Building",
+    "floorplan": "Floorplan",
+    "single_family_home": "Single Family Home"
+  },
+  "property_inheritance": {
+    "floorplan": [
+      "street_number",
+      "route",
+      "state",
+      "postal_code",
+      "location",
+      "display_address",
+      "address_is_formatted"
+    ]
+  },
+  "property_stats": {
+    "location": "Address",
+    "price": "Price",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "deposit": "Deposit",
+    "area": "Area",
+    "phone_number": "Phone Number"
+  },
+  "property_meta": {
+    "lease_terms": "Lease Terms",
+    "pet_policy": "Pet Policy",
+    "school": "School",
+    "tagline": "Tagline"
+  },
+  "hidden_attributes": {
+    "floorplan": [
+      "location",
+      "parking",
+      "school"
+    ],
+    "building": [
+      "price",
+      "bedrooms",
+      "bathrooms",
+      "area",
+      "deposit"
+    ],
+    "single_family_home": [
+      "deposit",
+      "lease_terms",
+      "pet_policy"
+    ]
+  },
+  "location_matters": [
+    "building",
+    "single_family_home"
+  ],
+  "searchable_property_types": [
+    "floorplan",
+    "single_family_home"
+  ],
+  "searchable_attributes": [
+    "area",
+    "deposit",
+    "bedrooms",
+    "bathrooms",
+    "city",
+    "price"
+  ],
+  "search_conversions": {
+    "bedrooms": {
+      "Studio": "0.5"
+    }
+  },
+  "image_sizes": {
+    "map_thumb": {
+      "width": "75",
+      "height": "75"
+    },
+    "tiny_thumb": {
+      "width": "100",
+      "height": "100"
+    },
+    "sidebar_wide": {
+      "width": "195",
+      "height": "130"
+    },
+    "slideshow": {
+      "width": "640",
+      "height": "235"
+    }
+  },
+  "default_coords": {
+    "latitude": "57.7973333",
+    "longitude": "12.0502107"
+  },
+  "geo_type_attributes": [
+    "formatted_address",
+    "street_number",
+    "route",
+    "district",
+    "city",
+    "county",
+    "state",
+    "state_code",
+    "country",
+    "country_code",
+    "postal_code"
+  ],
+  "images": {
+    "map_icon_shadow": "http://usabilitydynamics.com/modules/wp-property/images/map_icon_shadow.png"
+  },
+  "descriptions": {
+    "descriptions": {
+      "property_type": "The property type will determine the layout.",
+      "custom_attribute_overview": "Customize what appears in search results in the attribute section.  For example: 1bed, 2baths, area varies slightly.",
+      "tagline": "Will appear on overview pages and on top of every listing page."
+    }
+  }
+}

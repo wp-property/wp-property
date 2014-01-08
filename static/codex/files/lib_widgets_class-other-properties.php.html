@@ -49,8 +49,6 @@
             
                 <li><a href="../classes/WPP.html">WPP</a></li>
             
-                <li><a href="../classes/wpp_default_api.html">wpp_default_api</a></li>
-            
                 <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
             
             </ul>
@@ -104,11 +102,11 @@ class OtherPropertiesWidget extends WP_Widget {
 
   function OtherPropertiesWidget() {
 
-    $property_label = strtolower( Utility::property_label( &#x27;plural&#x27; ) );
+    $property_label = strtolower( \UsabilityDynamics\WPP\Utility::property_label( &#x27;plural&#x27; ) );
 
     parent::__construct(
       false,
-      sprintf( __( &#x27;Other %1s&#x27;, &#x27;wpp&#x27; ), Utility::property_label( &#x27;plural&#x27; ) ),
+      sprintf( __( &#x27;Other %1s&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;plural&#x27; ) ),
       array(
         &#x27;description&#x27; =&gt; sprintf( __( &#x27;Display a list of %1s that share a parent with the currently displayed property.&#x27;, &#x27;wpp&#x27; ), $property_label )
       ),
@@ -159,7 +157,7 @@ class OtherPropertiesWidget extends WP_Widget {
         &#x27;exclude&#x27; =&gt; $post-&gt;ID
       ) );
     } else {
-      $properties = Utility::get_properties( &quot;property_type={$this_property[&#x27;property_type&#x27;]}&amp;pagi=0--$amount_items&quot; );
+      $properties = \UsabilityDynamics\WPP\Utility::get_properties( &quot;property_type={$this_property[&#x27;property_type&#x27;]}&amp;pagi=0--$amount_items&quot; );
     }
 
     if ( empty( $properties ) ) {
@@ -184,7 +182,7 @@ class OtherPropertiesWidget extends WP_Widget {
 
       $property_id = is_object( $single ) ? $single-&gt;ID : $single;
 
-      $this_property = Utility::get_property( $property_id, &#x27;return_object=true&#x27; );
+      $this_property = \UsabilityDynamics\WPP\Utility::get_property( $property_id, &#x27;return_object=true&#x27; );
 
       $this_property = prepare_property_for_display( $this_property );
 
@@ -312,7 +310,7 @@ class OtherPropertiesWidget extends WP_Widget {
     &lt;p
       class=&quot;choose_thumb_other&quot; &lt;?php echo ( $hide_image !== &#x27;on&#x27; ) ? &#x27;style=&quot;display:block;&quot;&#x27; : &#x27;style=&quot;display:none;&quot;&#x27;; ?&gt;&gt;
       &lt;label for=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;image_type&#x27; ); ?&gt;&quot;&gt;&lt;?php _e( &#x27;Image Size:&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/label&gt;
-      &lt;?php Utility::image_sizes_dropdown( &quot;name=&quot; . $this-&gt;get_field_name( &#x27;image_type&#x27; ) . &quot;&amp;selected=&quot; . $image_type ); ?&gt;
+      &lt;?php \UsabilityDynamics\WPP\Utility::image_sizes_dropdown( &quot;name=&quot; . $this-&gt;get_field_name( &#x27;image_type&#x27; ) . &quot;&amp;selected=&quot; . $image_type ); ?&gt;
     &lt;/p&gt;
 
     &lt;p&gt;

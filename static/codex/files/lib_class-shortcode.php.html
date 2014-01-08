@@ -49,8 +49,6 @@
             
                 <li><a href="../classes/WPP.html">WPP</a></li>
             
-                <li><a href="../classes/wpp_default_api.html">wpp_default_api</a></li>
-            
                 <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
             
             </ul>
@@ -117,7 +115,7 @@ namespace UsabilityDynamics\WPP {
       /**
        * Declare and Add Shortcodes
        *
-       * @todo Integrate with Utility::export_listings();
+       * @todo Integrate with \UsabilityDynamics\WPP\Utility::export_listings();
        * @since 2.0
        */
       static function initialize() {
@@ -233,7 +231,7 @@ namespace UsabilityDynamics\WPP {
       static function featured_properties( $atts = false, $content = &#x27;&#x27; ) {
         global $wp_properties, $wpp_query, $post;
 
-        $default_property_type = Utility::get_most_common_property_type();
+        $default_property_type = \UsabilityDynamics\WPP\Utility::get_most_common_property_type();
 
         if( !$atts ) {
           $atts = array();
@@ -367,7 +365,7 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties, $property;
 
         if( is_admin() &amp;&amp; !DOING_AJAX ) {
-          return sprintf( __( &#x27;%1$s Attributes&#x27;, &#x27;wpp&#x27; ), Utility::property_label( &#x27;singular&#x27; ) );
+          return sprintf( __( &#x27;%1$s Attributes&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;singular&#x27; ) );
         }
 
         $atts = shortcode_atts( array(
@@ -393,7 +391,7 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties, $post, $property;
 
         if( is_admin() &amp;&amp; !DOING_AJAX ) {
-          return sprintf( __( &#x27;%1$s Taxonomy Terms&#x27;, &#x27;wpp&#x27; ), Utility::property_label( &#x27;singular&#x27; ) );
+          return sprintf( __( &#x27;%1$s Taxonomy Terms&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;singular&#x27; ) );
         }
 
         $atts = shortcode_atts( array(
@@ -437,7 +435,7 @@ namespace UsabilityDynamics\WPP {
         global $post, $property;
 
         if( is_admin() &amp;&amp; !DOING_AJAX ) {
-          return sprintf( __( &#x27;%1$s Attribute&#x27;, &#x27;wpp&#x27; ), Utility::property_label( &#x27;singular&#x27; ) );
+          return sprintf( __( &#x27;%1$s Attribute&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;singular&#x27; ) );
         }
 
         $this_property = $property;
@@ -468,7 +466,7 @@ namespace UsabilityDynamics\WPP {
 
         if( $args[ &#x27;property_id&#x27; ] != $this_property[ &#x27;ID&#x27; ] ) {
 
-          $this_property = Utility::get_property( $args[ &#x27;property_id&#x27; ] );
+          $this_property = \UsabilityDynamics\WPP\Utility::get_property( $args[ &#x27;property_id&#x27; ] );
 
           if( $args[ &#x27;do_not_format&#x27; ] != &quot;true&quot; ) {
             $this_property = prepare_property_for_display( $this_property );
@@ -545,7 +543,7 @@ namespace UsabilityDynamics\WPP {
         $_property = $property;
 
         if( is_admin() &amp;&amp; !DOING_AJAX ) {
-          return sprintf( __( &#x27;%1$s Map&#x27;, &#x27;wpp&#x27; ), Utility::property_label( &#x27;singular&#x27; ) );
+          return sprintf( __( &#x27;%1$s Map&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;singular&#x27; ) );
         }
 
         $atts = shortcode_atts( array(
@@ -558,7 +556,7 @@ namespace UsabilityDynamics\WPP {
 
         /** Try to get property if an ID is passed */
         if( is_numeric( $atts[ &#x27;property_id&#x27; ] ) ) {
-          $property = Utility::get_property( $atts[ &#x27;property_id&#x27; ] );
+          $property = \UsabilityDynamics\WPP\Utility::get_property( $atts[ &#x27;property_id&#x27; ] );
         }
 
         /** Load into $property object */
@@ -574,7 +572,7 @@ namespace UsabilityDynamics\WPP {
         $hide_infobox = ( $atts[ &#x27;hide_infobox&#x27; ] == &#x27;true&#x27; ? true : false );
 
         /** Find most appropriate template */
-        $template_found = Utility::get_template_part( array(
+        $template_found = \UsabilityDynamics\WPP\Utility::get_template_part( array(
           &#x27;content-single-property-map&#x27;,
           &#x27;property-map&#x27;
         ), array( WPP_Templates ) );
@@ -758,7 +756,7 @@ namespace UsabilityDynamics\WPP {
               $this_before_item = str_replace( &#x27;&gt;&#x27;, &#x27; class=&quot;&#x27; . implode( &#x27; &#x27;, $container_classes ) . &#x27;&quot;&gt;&#x27;, $atts[ &#x27;before_item&#x27; ] );
             }
 
-            $echo_size = ( ( $showsize ) ? &#x27; &lt;span class=&quot;attachment-size&quot;&gt;&#x27; . Utility::get_filesize( str_replace( $upload_dir[ &#x27;baseurl&#x27; ], $upload_dir[ &#x27;basedir&#x27; ], $attlink ) ) . &#x27;&lt;/span&gt;&#x27; : &#x27;&#x27; );
+            $echo_size = ( ( $showsize ) ? &#x27; &lt;span class=&quot;attachment-size&quot;&gt;&#x27; . \UsabilityDynamics\WPP\Utility::get_filesize( str_replace( $upload_dir[ &#x27;baseurl&#x27; ], $upload_dir[ &#x27;basedir&#x27; ], $attlink ) ) . &#x27;&lt;/span&gt;&#x27; : &#x27;&#x27; );
 
             if( !empty( $atts[ &#x27;groupby&#x27; ] ) &amp;&amp; $current_group != $att-&gt;$grouper ) {
               if( $open ) {

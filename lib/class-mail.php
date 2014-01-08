@@ -24,7 +24,7 @@ namespace UsabilityDynamics\WPP {
        */
       function _send_notification( $notification ) {
         $notification = apply_filters( 'wpp::send_notification', $notification );
-        Utility::send_notification( $notification );
+        \UsabilityDynamics\WPP\Utility::send_notification( $notification );
       }
 
       /**
@@ -71,7 +71,7 @@ namespace UsabilityDynamics\WPP {
         $notification[ 'data' ][ 'activation_link' ]   = $activation_link;
         $notification[ 'data' ][ 'system_message' ]    = $notification[ 'message' ];
 
-        $notification = \UsabilityDynamics\Utility::extend( $notification, $args );
+        $notification = \UsabilityDynamics\WPP\Utility::extend( $notification, $args );
 
         self::_send_notification( $notification );
       }
@@ -86,7 +86,7 @@ namespace UsabilityDynamics\WPP {
 
         $notification = self::_notification_template();
 
-        $_property = Utility::get_property( $post_id, array( 'get_children' => 'false' ) );
+        $_property = \UsabilityDynamics\WPP\Utility::get_property( $post_id, array( 'get_children' => 'false' ) );
 
         $user_id = $_property[ 'post_author' ];
         $user    = get_user_by( 'id', $user_id );
@@ -94,8 +94,8 @@ namespace UsabilityDynamics\WPP {
         $notification[ 'trigger_action' ]  = 'pending_property_approve';
         $notification[ 'user' ]            = $user;
         $notification[ 'subject' ]         = __( 'Submission Approved', 'wpp' );
-        $notification[ 'message' ]         = sprintf( __( 'Hello.%1$s%1$sYour %2$s has been published.%1$s%1$sYou can view it using this URL: %1$s[property_link]', 'wpp' ), PHP_EOL, Utility::property_label( 'singular' ) );
-        $notification[ 'crm_log_message' ] = sprintf( __( 'User-submitted %1$s ([property_title]) approved and published.', 'wpp' ), Utility::property_label( 'singular' ) );
+        $notification[ 'message' ]         = sprintf( __( 'Hello.%1$s%1$sYour %2$s has been published.%1$s%1$sYou can view it using this URL: %1$s[property_link]', 'wpp' ), PHP_EOL, \UsabilityDynamics\WPP\Utility::property_label( 'singular' ) );
+        $notification[ 'crm_log_message' ] = sprintf( __( 'User-submitted %1$s ([property_title]) approved and published.', 'wpp' ), \UsabilityDynamics\WPP\Utility::property_label( 'singular' ) );
 
         $notification[ 'data' ][ 'notification_type' ] = __( 'Submission Approved', 'wpp' );
         $notification[ 'data' ][ 'user_email' ]        = $user->data->user_email;
@@ -105,7 +105,7 @@ namespace UsabilityDynamics\WPP {
         $notification[ 'data' ][ 'title' ]             = $notification[ 'data' ][ 'property_title' ] = $_property[ 'post_title' ];
         $notification[ 'data' ][ 'status' ]            = @$wp_post_statuses[ get_post_status( $post_id ) ]->label;
 
-        $notification = \UsabilityDynamics\Utility::extend( $notification, $args );
+        $notification = \UsabilityDynamics\WPP\Utility::extend( $notification, $args );
 
         self::_send_notification( $notification );
       }
@@ -124,15 +124,15 @@ namespace UsabilityDynamics\WPP {
 
         $notification = self::_notification_template();
 
-        $_property = Utility::get_property( $post_id, array( 'get_children' => 'false' ) );
+        $_property = \UsabilityDynamics\WPP\Utility::get_property( $post_id, array( 'get_children' => 'false' ) );
 
         $user = get_userdata( $_property[ 'post_author' ] );
 
         $notification[ 'trigger_action' ]  = 'feps_status_updated';
         $notification[ 'user' ]            = $user;
         $notification[ 'subject' ]         = __( 'Status Updated', 'wpp' );
-        $notification[ 'message' ]         = sprintf( __( 'Hello.%1$s%1$sYour %2$s status has been updated.%1$s%1$sYou can view it using this URL: %1$s[property_link]', 'wpp' ), PHP_EOL, Utility::property_label( 'singular' ) );
-        $notification[ 'crm_log_message' ] = sprintf( __( 'FEPS %1$s ([property_title]) status has been changed.', 'wpp' ), Utility::property_label( 'singular' ) );
+        $notification[ 'message' ]         = sprintf( __( 'Hello.%1$s%1$sYour %2$s status has been updated.%1$s%1$sYou can view it using this URL: %1$s[property_link]', 'wpp' ), PHP_EOL, \UsabilityDynamics\WPP\Utility::property_label( 'singular' ) );
+        $notification[ 'crm_log_message' ] = sprintf( __( 'FEPS %1$s ([property_title]) status has been changed.', 'wpp' ), \UsabilityDynamics\WPP\Utility::property_label( 'singular' ) );
 
         $notification[ 'data' ][ 'notification_type' ] = __( 'Status Updated', 'wpp' );
         $notification[ 'data' ][ 'site_url' ]          = site_url();
@@ -144,7 +144,7 @@ namespace UsabilityDynamics\WPP {
         $notification[ 'data' ][ 'url' ]               = $notification[ 'data' ][ 'property_link' ] = class_wpp_feps::get_feps_permalink( $_property, false );
         $notification[ 'data' ][ 'status' ]            = @$wp_post_statuses[ $_property[ 'post_status' ] ]->label;
 
-        $notification = \UsabilityDynamics\Utility::extend( $notification, $args );
+        $notification = \UsabilityDynamics\WPP\Utility::extend( $notification, $args );
 
         self::_send_notification( $notification );
       }
@@ -159,7 +159,7 @@ namespace UsabilityDynamics\WPP {
 
         $notification = self::_notification_template();
 
-        $_property = Utility::get_property( $post_id, array( 'get_children' => 'false' ) );
+        $_property = \UsabilityDynamics\WPP\Utility::get_property( $post_id, array( 'get_children' => 'false' ) );
 
         $user_id = $_property[ 'post_author' ];
         $user    = get_user_by( 'id', $user_id );
@@ -167,8 +167,8 @@ namespace UsabilityDynamics\WPP {
         $notification[ 'trigger_action' ]  = 'pending_property_added';
         $notification[ 'user' ]            = $user;
         $notification[ 'subject' ]         = __( 'Submission Received', 'wpp' );
-        $notification[ 'message' ]         = sprintf( __( 'Hello.%1$s%1$sYour %2$s has been received.%1$s%1$sYou can view it using this URL:%1$s[pending_url]', 'wpp' ), PHP_EOL, Utility::property_label( 'singular' ) );
-        $notification[ 'crm_log_message' ] = sprintf( __( 'User submitted %1$s ([property_title]) using FEPS.', 'wpp' ), Utility::property_label( 'singular' ) );
+        $notification[ 'message' ]         = sprintf( __( 'Hello.%1$s%1$sYour %2$s has been received.%1$s%1$sYou can view it using this URL:%1$s[pending_url]', 'wpp' ), PHP_EOL, \UsabilityDynamics\WPP\Utility::property_label( 'singular' ) );
+        $notification[ 'crm_log_message' ] = sprintf( __( 'User submitted %1$s ([property_title]) using FEPS.', 'wpp' ), \UsabilityDynamics\WPP\Utility::property_label( 'singular' ) );
 
         $notification[ 'data' ][ 'notification_type' ] = __( 'Submission Received', 'wpp' );
         $notification[ 'data' ][ 'display_name' ]      = $user->data->display_name;
@@ -178,7 +178,7 @@ namespace UsabilityDynamics\WPP {
         $notification[ 'data' ][ 'title' ]             = $notification[ 'data' ][ 'property_title' ] = $_property[ 'post_title' ];
         $notification[ 'data' ][ 'status' ]            = @$wp_post_statuses[ $_property[ 'post_status' ] ]->label;
 
-        $notification = \UsabilityDynamics\Utility::extend( $notification, $args );
+        $notification = \UsabilityDynamics\WPP\Utility::extend( $notification, $args );
 
         self::_send_notification( $notification );
       }

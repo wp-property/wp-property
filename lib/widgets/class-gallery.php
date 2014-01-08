@@ -6,7 +6,7 @@ class GalleryPropertiesWidget extends WP_Widget {
 
   /** constructor */
   function GalleryPropertiesWidget() {
-    parent::WP_Widget( false, $name = sprintf( __( '%1s Gallery', 'wpp' ), Utility::property_label() ), array( 'description' => sprintf(__( 'List of all images attached to the current %1s', 'wpp' ), Utility::property_label( 'singular' ) ) ) );
+    parent::WP_Widget( false, $name = sprintf( __( '%1s Gallery', 'wpp' ), \UsabilityDynamics\WPP\Utility::property_label() ), array( 'description' => sprintf(__( 'List of all images attached to the current %1s', 'wpp' ), \UsabilityDynamics\WPP\Utility::property_label( 'singular' ) ) ) );
   }
 
   /** @see WP_Widget::widget */
@@ -55,7 +55,7 @@ class GalleryPropertiesWidget extends WP_Widget {
       return;
     }
 
-    $thumbnail_dimensions = Utility::image_sizes( $image_type );
+    $thumbnail_dimensions = \UsabilityDynamics\WPP\Utility::image_sizes( $image_type );
 
     //** The current widget can be used on the page twice. So ID of the current DOM element (widget) has to be unique */
     /*
@@ -157,12 +157,12 @@ class GalleryPropertiesWidget extends WP_Widget {
 
     <p>
       <label for="<?php echo $this->get_field_id( 'image_type' ); ?>"><?php _e( 'Regular Size:', 'wpp' ); ?></label>
-      <?php Utility::image_sizes_dropdown( "name=" . $this->get_field_name( 'image_type' ) . "&selected=" . $image_type ); ?>
+      <?php \UsabilityDynamics\WPP\Utility::image_sizes_dropdown( "name=" . $this->get_field_name( 'image_type' ) . "&selected=" . $image_type ); ?>
     </p>
 
     <p class="wpp_gallery_big_image_type">
       <label for="<?php echo $this->get_field_id( 'big_image_type' ); ?>"><?php _e( 'Large Image Size:', 'wpp' ); ?></label>
-      <?php Utility::image_sizes_dropdown( "name=" . $this->get_field_name( 'big_image_type' ) . "&selected=" . $big_image_type ); ?>
+      <?php \UsabilityDynamics\WPP\Utility::image_sizes_dropdown( "name=" . $this->get_field_name( 'big_image_type' ) . "&selected=" . $big_image_type ); ?>
     </p>
 
     <p>

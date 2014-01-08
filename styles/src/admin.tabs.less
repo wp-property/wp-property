@@ -1,3 +1,5 @@
+@tab-height: 35px;
+
 .wpp_tabs {
   margin-top: 10px;
 
@@ -18,63 +20,58 @@
   }
 
   ul.tabs {
-    border-bottom: 1px solid #CBCBCB;
+    //border-bottom: 1px solid #CBCBCB;
     float: left;
-    height: 37px;
+    height: @tab-height + 1;
     list-style: none;
     margin: 0;
     background: transparent;
-    border: none;
+    border-left: none;
+    border-top: none;
+    border-right: none;
     padding: 0 0 0 15px;
     width: 100%;
 
     li.ui-state-default {
+      background: #e4e4e4;
+
+      &:hover {
+        background: #FFFFFF;
+      }
 
       &.ui-state-active,
       &.ui-tabs-selected {
-        height: 25px;
-        background: none repeat scroll 0 0 #FFFFFF;
-        border-bottom: 1px solid #FFFFFF;
+        height: 36px;
+        background: #f1f1f1;
+        border-bottom: 1px solid transparent;
       }
 
-      &.ui-tabs-selected {
-        a:hover {
-          background: #FFFFFF;
-        }
-      }
-
-      padding: 6px 10px;
+      padding: 0;
       font-weight: 700;
       font-size: 15px;
-      line-height: 24px;
+      line-height: @tab-height;
+      height: @tab-height;
 
       -moz-border-radius-topleft: 5px;
       -moz-border-radius-topright: 5px;
       -webkit-border-top-left-radius: 5px;
       -webkit-border-top-right-radius: 5px;
-      background: none repeat scroll 0 0 #F4F4F4;
       border-color: #D0D0D0;
       border-style: solid solid none;
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
       border-width: 1px 1px 0;
       float: left;
-      height: 24px;
       margin: 0 10px -1px 0;
       overflow: hidden;
       position: relative;
 
-
-      a {
+      a.ui-tabs-anchor {
         color: #000000;
-        line-height: 25px;
+        line-height: @tab-height;
         outline: medium none;
-        padding: 0 10px;
+        padding: 6px 15px;
         text-decoration: none;
-      }
-
-      a:hover {
-        color: #9D611D;
       }
 
       a.remove-tab {
@@ -104,7 +101,7 @@
   }
 
   div.wpp_settings_block {
-    background: none repeat scroll 0 0 #F7F7F7;
+    background: #f5f5f5;
     border: 1px solid #E7E7E7;
     margin-bottom: 10px;
     overflow: auto;
@@ -116,8 +113,8 @@
     -moz-border-radius-bottomright: 5px;
     -webkit-border-bottom-left-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
-    background: none repeat scroll 0 0 #FFFFFF;
-    border-top: 1px solid #DEDEDE;
+    //background: none repeat scroll 0 0 #FFFFFF;
+    border-top: 1px solid #ccc;
     border-left: 0px;
     border-right: 0px;
     border-bottom: 0px;
@@ -125,19 +122,19 @@
     float: left;
     padding: 0 0 20px;
     width: 100%;
+
     table {
 
     }
+
   }
 
   .ui-tabs-hide {
     display: none !important;
   }
 
-  select {
-    option {
-      padding-right: 10px;
-    }
+  select option {
+    padding-right: 10px;
   }
 
   .wpp_permanent_image {

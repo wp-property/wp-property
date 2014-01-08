@@ -22,7 +22,7 @@ module.exports = function( grunt ) {
         },
         files: {
           'styles/wpp-data-tables.css': [ 'styles/src/wpp-data-tables.less' ],
-          'styles/wp_properties_admin.css': [ 'styles/src/wp_properties_admin.less' ],
+          'styles/wpp-admin.css': [ 'styles/src/admin.all.less' ],
           'styles/jquery-ui.css': [ 'styles/src/jquery-ui.less' ],
           'templates/wp_properties.css': [ 'styles/src/wp_properties.less' ],
           'templates/wp_properties-ie_7.css': [ 'styles/src/wp_properties-ie_7.less' ],
@@ -41,7 +41,7 @@ module.exports = function( grunt ) {
         },
         files: {
           'styles/wpp-data-tables.dev.css': [ 'styles/src/wpp-data-tables.less' ],
-          'styles/wp_properties_admin.dev.css': [ 'styles/src/wp_properties_admin.less' ],
+          'styles/wpp-admin.dev.css': [ 'styles/src/admin.all.less' ],
           'styles/jquery-ui.dev.css': [ 'styles/src/jquery-ui.less' ],
           'templates/wp_properties.dev.css': [ 'styles/src/wp_properties.less' ],
           'templates/wp_properties-ie_7.dev.css': [ 'styles/src/wp_properties-ie_7.less' ],

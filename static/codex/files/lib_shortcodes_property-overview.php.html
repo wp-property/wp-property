@@ -49,8 +49,6 @@
             
                 <li><a href="../classes/WPP.html">WPP</a></li>
             
-                <li><a href="../classes/wpp_default_api.html">wpp_default_api</a></li>
-            
                 <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
             
             </ul>
@@ -111,7 +109,7 @@
  *
  * @return string $result
  *
- * @uses Utility::get_properties()
+ * @uses \UsabilityDynamics\WPP\Utility::get_properties()
  */
 namespace UsabilityDynamics\WPP {
 
@@ -130,23 +128,23 @@ namespace UsabilityDynamics\WPP {
      * @internal param string $listing_id Listing ID must be passed
      *
      * @return string $result
-     * @uses Utility::get_properties()
+     * @uses \UsabilityDynamics\WPP\Utility::get_properties()
      */
     class Property_Overview extends \UsabilityDynamics\WPP\Shortcode {
 
       function __construct( $atts = &#x27;&#x27;, $content = &#x27;&#x27; ) {
         global $wp_properties, $wpp_query, $property, $post, $wp_query;
 
-        Utility::wp_enqueue_script( &#x27;jquery-ui-widget&#x27; );
-        Utility::wp_enqueue_script( &#x27;jquery-ui-mouse&#x27; );
-        Utility::wp_enqueue_script( &#x27;jquery-ui-slider&#x27; );
-        Utility::wp_enqueue_script( &#x27;jquery-address&#x27; );
-        Utility::wp_enqueue_script( &#x27;jquery-scrollto&#x27; );
-        Utility::wp_enqueue_script( &#x27;jquery-fancybox&#x27; );
-        Utility::wp_enqueue_script( &#x27;wp-property-frontend&#x27; );
+        \UsabilityDynamics\WPP\Utility::wp_enqueue_script( &#x27;jquery-ui-widget&#x27; );
+        \UsabilityDynamics\WPP\Utility::wp_enqueue_script( &#x27;jquery-ui-mouse&#x27; );
+        \UsabilityDynamics\WPP\Utility::wp_enqueue_script( &#x27;jquery-ui-slider&#x27; );
+        \UsabilityDynamics\WPP\Utility::wp_enqueue_script( &#x27;jquery-address&#x27; );
+        \UsabilityDynamics\WPP\Utility::wp_enqueue_script( &#x27;jquery-scrollto&#x27; );
+        \UsabilityDynamics\WPP\Utility::wp_enqueue_script( &#x27;jquery-fancybox&#x27; );
+        \UsabilityDynamics\WPP\Utility::wp_enqueue_script( &#x27;wp-property-frontend&#x27; );
 
         /** This needs to be done because a key has to exist in the $deafult array for shortcode_atts() to load passed value */
-        foreach( (array) Utility::get_queryable_keys() as $key ) {
+        foreach( (array) \UsabilityDynamics\WPP\Utility::get_queryable_keys() as $key ) {
           $queryable_keys[ $key ] = false;
         }
 
@@ -213,7 +211,7 @@ namespace UsabilityDynamics\WPP {
           /** Handle search */
           if( $wpp_search = $_REQUEST[ &#x27;wpp_search&#x27; ] ) {
             $wpp_query[ &#x27;query&#x27; ] = shortcode_atts( $wpp_query[ &#x27;query&#x27; ], $wpp_search );
-            $wpp_query[ &#x27;query&#x27; ] = Utility::prepare_search_attributes( $wpp_query[ &#x27;query&#x27; ] );
+            $wpp_query[ &#x27;query&#x27; ] = \UsabilityDynamics\WPP\Utility::prepare_search_attributes( $wpp_query[ &#x27;query&#x27; ] );
 
             if( isset( $_REQUEST[ &#x27;wpp_search&#x27; ][ &#x27;sort_by&#x27; ] ) ) {
               $wpp_query[ &#x27;sort_by&#x27; ] = $_REQUEST[ &#x27;wpp_search&#x27; ][ &#x27;sort_by&#x27; ];
@@ -244,7 +242,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         /** Load settings that are not passed via shortcode atts */
-        $wpp_query[ &#x27;sortable_attrs&#x27; ] = Utility::get_sortable_keys();
+        $wpp_query[ &#x27;sortable_attrs&#x27; ] = \UsabilityDynamics\WPP\Utility::get_sortable_keys();
 
         /** Detect currently property for conditional in-shortcode usage that will be replaced from values */
         if( isset( $post ) ) {
@@ -273,7 +271,7 @@ namespace UsabilityDynamics\WPP {
         unset( $wpp_query[ &#x27;query&#x27; ][ &#x27;requested_page&#x27; ] );
 
         /** Load the results */
-        $wpp_query[ &#x27;properties&#x27; ] = Utility::get_properties( $wpp_query[ &#x27;query&#x27; ], true );
+        $wpp_query[ &#x27;properties&#x27; ] = \UsabilityDynamics\WPP\Utility::get_properties( $wpp_query[ &#x27;query&#x27; ], true );
 
         /** Calculate number of pages */
         if( $wpp_query[ &#x27;pagination&#x27; ] == &#x27;on&#x27; ) {
@@ -291,7 +289,7 @@ namespace UsabilityDynamics\WPP {
 
         /** Legacy Support - include variables so old templates still work */
         $properties             = $wpp_query[ &#x27;properties&#x27; ][ &#x27;results&#x27; ];
-        $thumbnail_sizes        = Utility::image_sizes( $wpp_query[ &#x27;thumbnail_size&#x27; ] );
+        $thumbnail_sizes        = \UsabilityDynamics\WPP\Utility::image_sizes( $wpp_query[ &#x27;thumbnail_size&#x27; ] );
         $child_properties_title = $wpp_query[ &#x27;child_properties_title&#x27; ];
         $unique                 = $wpp_query[ &#x27;unique_hash&#x27; ];
         $thumbnail_size         = $wpp_query[ &#x27;thumbnail_size&#x27; ];
@@ -325,7 +323,7 @@ namespace UsabilityDynamics\WPP {
         extract( $wp_query-&gt;query_vars, EXTR_SKIP );
 
         /** Try find custom template */
-        $template_found = Utility::get_template_part( array(
+        $template_found = \UsabilityDynamics\WPP\Utility::get_template_part( array(
           &quot;property-overview-{$template}&quot;,
           &quot;property-overview-{$property_type}&quot;,
           &quot;property-{$template}&quot;,
@@ -397,16 +395,16 @@ namespace UsabilityDynamics\WPP {
           &#x27;strict_search&#x27; =&gt; &#x27;false&#x27;
         ) );
 
-        Utility::force_script_inclusion( &#x27;jquery-ui-widget&#x27; );
-        Utility::force_script_inclusion( &#x27;jquery-ui-mouse&#x27; );
-        Utility::force_script_inclusion( &#x27;jquery-ui-slider&#x27; );
-        Utility::force_script_inclusion( &#x27;wpp-jquery-address&#x27; );
-        Utility::force_script_inclusion( &#x27;wpp-jquery-scrollTo&#x27; );
-        Utility::force_script_inclusion( &#x27;wpp-jquery-fancybox&#x27; );
-        Utility::force_script_inclusion( &#x27;wp-property-frontend&#x27; );
+        \UsabilityDynamics\WPP\Utility::force_script_inclusion( &#x27;jquery-ui-widget&#x27; );
+        \UsabilityDynamics\WPP\Utility::force_script_inclusion( &#x27;jquery-ui-mouse&#x27; );
+        \UsabilityDynamics\WPP\Utility::force_script_inclusion( &#x27;jquery-ui-slider&#x27; );
+        \UsabilityDynamics\WPP\Utility::force_script_inclusion( &#x27;wpp-jquery-address&#x27; );
+        \UsabilityDynamics\WPP\Utility::force_script_inclusion( &#x27;wpp-jquery-scrollTo&#x27; );
+        \UsabilityDynamics\WPP\Utility::force_script_inclusion( &#x27;wpp-jquery-fancybox&#x27; );
+        \UsabilityDynamics\WPP\Utility::force_script_inclusion( &#x27;wp-property-frontend&#x27; );
 
         //** Load all queriable attributes **/
-        foreach( Utility::get_queryable_keys() as $key ) {
+        foreach( \UsabilityDynamics\WPP\Utility::get_queryable_keys() as $key ) {
           //** This needs to be done because a key has to exist in the $deafult array for shortcode_atts() to load passed value */
           $queryable_keys[ $key ] = false;
         }
@@ -477,7 +475,7 @@ namespace UsabilityDynamics\WPP {
 
         } else {
           /** Determine if fancybox style is included */
-          Utility::force_style_inclusion( &#x27;wpp-jquery-fancybox-css&#x27; );
+          \UsabilityDynamics\WPP\Utility::force_style_inclusion( &#x27;wpp-jquery-fancybox-css&#x27; );
 
           //** Merge defaults with passed arguments */
           $wpp_query            = shortcode_atts( $defaults, $atts );
@@ -486,7 +484,7 @@ namespace UsabilityDynamics\WPP {
           //** Handle search */
           if( $wpp_search = $_REQUEST[ &#x27;wpp_search&#x27; ] ) {
             $wpp_query[ &#x27;query&#x27; ] = shortcode_atts( $wpp_query[ &#x27;query&#x27; ], $wpp_search );
-            $wpp_query[ &#x27;query&#x27; ] = Utility::prepare_search_attributes( $wpp_query[ &#x27;query&#x27; ] );
+            $wpp_query[ &#x27;query&#x27; ] = \UsabilityDynamics\WPP\Utility::prepare_search_attributes( $wpp_query[ &#x27;query&#x27; ] );
 
             if( isset( $_REQUEST[ &#x27;wpp_search&#x27; ][ &#x27;sort_by&#x27; ] ) ) {
               $wpp_query[ &#x27;sort_by&#x27; ] = $_REQUEST[ &#x27;wpp_search&#x27; ][ &#x27;sort_by&#x27; ];
@@ -518,7 +516,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         //** Load settings that are not passed via shortcode atts */
-        $wpp_query[ &#x27;sortable_attrs&#x27; ] = Utility::get_sortable_keys();
+        $wpp_query[ &#x27;sortable_attrs&#x27; ] = \UsabilityDynamics\WPP\Utility::get_sortable_keys();
 
         //** Replace dynamic field values */
 
@@ -549,7 +547,7 @@ namespace UsabilityDynamics\WPP {
         unset( $wpp_query[ &#x27;query&#x27; ][ &#x27;requested_page&#x27; ] );
 
         //** Load the results */
-        $wpp_query[ &#x27;properties&#x27; ] = Utility::get_properties( $wpp_query[ &#x27;query&#x27; ], true );
+        $wpp_query[ &#x27;properties&#x27; ] = \UsabilityDynamics\WPP\Utility::get_properties( $wpp_query[ &#x27;query&#x27; ], true );
 
         //** Calculate number of pages */
         if( $wpp_query[ &#x27;pagination&#x27; ] == &#x27;on&#x27; ) {
@@ -567,7 +565,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Legacy Support - include variables so old templates still work */
         $properties             = $wpp_query[ &#x27;properties&#x27; ][ &#x27;results&#x27; ];
-        $thumbnail_sizes        = Utility::image_sizes( $wpp_query[ &#x27;thumbnail_size&#x27; ] );
+        $thumbnail_sizes        = \UsabilityDynamics\WPP\Utility::image_sizes( $wpp_query[ &#x27;thumbnail_size&#x27; ] );
         $child_properties_title = $wpp_query[ &#x27;child_properties_title&#x27; ];
         $unique                 = $wpp_query[ &#x27;unique_hash&#x27; ];
         $thumbnail_size         = $wpp_query[ &#x27;thumbnail_size&#x27; ];
@@ -601,7 +599,7 @@ namespace UsabilityDynamics\WPP {
         extract( $wp_query-&gt;query_vars, EXTR_SKIP );
 
         //** Try find custom template */
-        $template_found = Utility::get_template_part( array(
+        $template_found = \UsabilityDynamics\WPP\Utility::get_template_part( array(
           &quot;property-overview-{$template}&quot;,
           &quot;property-overview-{$property_type}&quot;,
           &quot;property-{$template}&quot;,

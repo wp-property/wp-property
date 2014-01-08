@@ -10,14 +10,13 @@ namespace UsabilityDynamics\WPP {
 
   if( !class_exists( 'UsabilityDynamics\WPP\Object_List_Table' ) ) {
 
-    //require_once( WPP_Path . 'core/class-list-table.php' );
-
     class Object_List_Table extends \UsabilityDynamics\WPP\List_Table {
 
       /**
        * @param string $args
        */
       function __construct( $args = '' ) {
+
         $args = wp_parse_args( $args, array(
           'plural'         => '',
           'iColumns'       => 3,
@@ -28,7 +27,7 @@ namespace UsabilityDynamics\WPP {
           'table_scope'    => 'wpp_overview',
           'singular'       => '',
           'ajax'           => false
-        ) );
+        ));
 
         parent::__construct( $args );
       }
@@ -71,12 +70,12 @@ namespace UsabilityDynamics\WPP {
        * Generate HTML for a single row on the users.php admin panel.
        *
        */
-      function single_row( $ID ) {
+      function single_row( $id ) {
         global $post, $wp_properties;
 
-        $ID = (int) $ID;
+        $id = (int) $id;
 
-        $post = Utility::get_property( $ID );
+        $post = \UsabilityDynamics\WPP\Utility::get_property( $id );
 
         $post = (object) $post;
 
@@ -88,11 +87,13 @@ namespace UsabilityDynamics\WPP {
         $can_delete_post = current_user_can( $post_type_object->cap->delete_post, $post->ID );
         $can_delete_post = apply_filters( 'wpp_list_table_can_delete_post', $can_delete_post );
 
-        $result = "<tr id='object-{$ID}' class='wpp_parent_element'>";
+        $result = "<tr id='object-{$id}' class='wpp_parent_element'>";
 
         list( $columns, $hidden ) = $this->get_column_info();
+
         $ajax_cells = array();
-        foreach( $columns as $column => $column_display_name ) {
+
+        foreach( (array) $columns as $column => $column_display_name ) {
 
           $class = "class=\"$column column-$column\"";
           $style = '';

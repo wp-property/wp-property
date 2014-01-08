@@ -49,8 +49,6 @@
             
                 <li><a href="../classes/WPP.html">WPP</a></li>
             
-                <li><a href="../classes/wpp_default_api.html">wpp_default_api</a></li>
-            
                 <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
             
             </ul>
@@ -108,14 +106,13 @@ namespace UsabilityDynamics\WPP {
 
   if( !class_exists( &#x27;UsabilityDynamics\WPP\Object_List_Table&#x27; ) ) {
 
-    //require_once( WPP_Path . &#x27;core/class-list-table.php&#x27; );
-
     class Object_List_Table extends \UsabilityDynamics\WPP\List_Table {
 
       /**
        * @param string $args
        */
       function __construct( $args = &#x27;&#x27; ) {
+
         $args = wp_parse_args( $args, array(
           &#x27;plural&#x27;         =&gt; &#x27;&#x27;,
           &#x27;iColumns&#x27;       =&gt; 3,
@@ -126,7 +123,7 @@ namespace UsabilityDynamics\WPP {
           &#x27;table_scope&#x27;    =&gt; &#x27;wpp_overview&#x27;,
           &#x27;singular&#x27;       =&gt; &#x27;&#x27;,
           &#x27;ajax&#x27;           =&gt; false
-        ) );
+        ));
 
         parent::__construct( $args );
       }
@@ -169,12 +166,12 @@ namespace UsabilityDynamics\WPP {
        * Generate HTML for a single row on the users.php admin panel.
        *
        */
-      function single_row( $ID ) {
+      function single_row( $id ) {
         global $post, $wp_properties;
 
-        $ID = (int) $ID;
+        $id = (int) $id;
 
-        $post = Utility::get_property( $ID );
+        $post = \UsabilityDynamics\WPP\Utility::get_property( $id );
 
         $post = (object) $post;
 
@@ -186,11 +183,13 @@ namespace UsabilityDynamics\WPP {
         $can_delete_post = current_user_can( $post_type_object-&gt;cap-&gt;delete_post, $post-&gt;ID );
         $can_delete_post = apply_filters( &#x27;wpp_list_table_can_delete_post&#x27;, $can_delete_post );
 
-        $result = &quot;&lt;tr id=&#x27;object-{$ID}&#x27; class=&#x27;wpp_parent_element&#x27;&gt;&quot;;
+        $result = &quot;&lt;tr id=&#x27;object-{$id}&#x27; class=&#x27;wpp_parent_element&#x27;&gt;&quot;;
 
         list( $columns, $hidden ) = $this-&gt;get_column_info();
+
         $ajax_cells = array();
-        foreach( $columns as $column =&gt; $column_display_name ) {
+
+        foreach( (array) $columns as $column =&gt; $column_display_name ) {
 
           $class = &quot;class=\&quot;$column column-$column\&quot;&quot;;
           $style = &#x27;&#x27;;

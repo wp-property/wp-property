@@ -49,8 +49,6 @@
             
                 <li><a href="../classes/WPP.html">WPP</a></li>
             
-                <li><a href="../classes/wpp_default_api.html">wpp_default_api</a></li>
-            
                 <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
             
             </ul>
@@ -148,7 +146,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Try to get property if an ID is passed */
         if( is_numeric( $args[ &#x27;property_id&#x27; ] ) ) {
-          $property = Utility::get_property( $args[ &#x27;property_id&#x27; ] );
+          $property = \UsabilityDynamics\WPP\Utility::get_property( $args[ &#x27;property_id&#x27; ] );
         }
 
         //** Load into $property object */
@@ -167,7 +165,7 @@ namespace UsabilityDynamics\WPP {
         $hide_infobox = ( $args[ &#x27;hide_infobox&#x27; ] == &#x27;true&#x27; ? true : false );
 
         //** Find most appropriate template */
-        $template_found = Utility::get_template_part( array( &quot;content-single-property-map&quot;, &quot;property-map&quot; ), array( WPP_Templates ) );
+        $template_found = \UsabilityDynamics\WPP\Utility::get_template_part( array( &quot;content-single-property-map&quot;, &quot;property-map&quot; ), array( WPP_Templates ) );
         if( !$template_found ) {
           return false;
         }

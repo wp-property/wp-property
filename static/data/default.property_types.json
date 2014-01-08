@@ -1,0 +1,7 @@
+{
+  "property_types": {
+    "building": "Building",
+    "floorplan": "Floorplan",
+    "single_family_home": "Single Family Home"
+  }
+}

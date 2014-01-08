@@ -49,8 +49,6 @@
             
                 <li><a href="../classes/WPP.html">WPP</a></li>
             
-                <li><a href="../classes/wpp_default_api.html">wpp_default_api</a></li>
-            
                 <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
             
             </ul>
@@ -193,7 +191,7 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties, $wpdb;
         static $loaded = false;
 
-        $property = Utility::get_property( $object-&gt;ID );
+        $property = \UsabilityDynamics\WPP\Utility::get_property( $object-&gt;ID );
 
         $instance    = $attrs[ &#x27;id&#x27; ];
         $stats_group = ( !empty( $attrs[ &#x27;args&#x27; ][ &#x27;group&#x27; ] ) ? $attrs[ &#x27;args&#x27; ][ &#x27;group&#x27; ] : false );
@@ -213,13 +211,13 @@ namespace UsabilityDynamics\WPP {
 
         //* Set default property type */
         if( empty( $this_property_type ) &amp;&amp; empty( $property[ &#x27;post_name&#x27; ] ) ) {
-          $this_property_type = Utility::get_most_common_property_type();
+          $this_property_type = \UsabilityDynamics\WPP\Utility::get_most_common_property_type();
         }
 
         //** Check for current property type if it is deleted */
         if( is_array( $wp_properties[ &#x27;property_types&#x27; ] ) &amp;&amp; isset( $property[ &#x27;property_type&#x27; ] ) &amp;&amp; !in_array( $property[ &#x27;property_type&#x27; ], array_keys( $wp_properties[ &#x27;property_types&#x27; ] ) ) ) {
-          $wp_properties[ &#x27;property_types&#x27; ][ $property[ &#x27;property_type&#x27; ] ] = Utility::de_slug( $property[ &#x27;property_type&#x27; ] );
-          $wp_properties[ &#x27;descriptions&#x27; ][ &#x27;property_type&#x27; ]                = &#x27;&lt;span class=&quot;attention&quot;&gt;&#x27; . sprintf( __( &#x27;&lt;strong&gt;Warning!&lt;/strong&gt; The %1s %2s type has been deleted.&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;property_types&#x27; ][ $property[ &#x27;property_type&#x27; ] ], Utility::property_label( &#x27;singular&#x27; ) ) . &#x27;&lt;/span&gt;&#x27;;
+          $wp_properties[ &#x27;property_types&#x27; ][ $property[ &#x27;property_type&#x27; ] ] = \UsabilityDynamics\WPP\Utility::de_slug( $property[ &#x27;property_type&#x27; ] );
+          $wp_properties[ &#x27;descriptions&#x27; ][ &#x27;property_type&#x27; ]                = &#x27;&lt;span class=&quot;attention&quot;&gt;&#x27; . sprintf( __( &#x27;&lt;strong&gt;Warning!&lt;/strong&gt; The %1s %2s type has been deleted.&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;property_types&#x27; ][ $property[ &#x27;property_type&#x27; ] ], \UsabilityDynamics\WPP\Utility::property_label( &#x27;singular&#x27; ) ) . &#x27;&lt;/span&gt;&#x27;;
         }
 
         ?&gt;
@@ -348,7 +346,7 @@ namespace UsabilityDynamics\WPP {
 
     &lt;?php //* &#x27;Falls Under&#x27; field should be shown only in &#x27;General Information&#x27; metabox */ ?&gt;
     &lt;?php if( $instance == &#x27;wpp_property_meta&#x27; ) : ?&gt;
-      &lt;?php if( !Utility::has_children( $object-&gt;ID ) || ( !empty( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;allow_parent_deep_depth&#x27; ] ) &amp;&amp; $wp_properties[ &#x27;configuration&#x27; ][ &#x27;allow_parent_deep_depth&#x27; ] == &#x27;true&#x27; ) ) : ?&gt;
+      &lt;?php if( !\UsabilityDynamics\WPP\Utility::has_children( $object-&gt;ID ) || ( !empty( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;allow_parent_deep_depth&#x27; ] ) &amp;&amp; $wp_properties[ &#x27;configuration&#x27; ][ &#x27;allow_parent_deep_depth&#x27; ] == &#x27;true&#x27; ) ) : ?&gt;
         &lt;?php //** Do not do page dropdown when there are a lot of properties */ ?&gt;
         &lt;?php $property_count = $wpdb-&gt;get_var( &quot;SELECT COUNT(ID) FROM {$wpdb-&gt;posts} WHERE post_type = &#x27;property&#x27; AND post_status = &#x27;publish&#x27; &quot; ); ?&gt;
         &lt;?php if( $property_count &lt; 200 ) : ?&gt;
@@ -402,7 +400,7 @@ namespace UsabilityDynamics\WPP {
 
     foreach( $property_stats as $slug =&gt; $label ) {
 
-      $attribute_data = Utility::get_attribute_data( $slug );
+      $attribute_data = \UsabilityDynamics\WPP\Utility::get_attribute_data( $slug );
 
       $attribute_description = array();
 
@@ -424,7 +422,7 @@ namespace UsabilityDynamics\WPP {
       if( in_array( $slug, $upwards_inherited_attributes ) ) {
         $row_classes[ ]         = &#x27;wpp_upwards_inherited_attributes&#x27;;
         $disabled_attributes[ ] = $slug;
-        $attribute_description  = array( sprintf( __( &#x27;Values aggregated from child %1s.&#x27;, &#x27;wpp&#x27; ), Utility::property_label( &#x27;plural&#x27; ) ) );
+        $attribute_description  = array( sprintf( __( &#x27;Values aggregated from child %1s.&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;plural&#x27; ) ) );
       }
 
       if( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;allow_multiple_attribute_values&#x27; ] == &#x27;true&#x27; &amp;&amp; !in_array( $slug, apply_filters( &#x27;wpp_single_value_attributes&#x27;, array( &#x27;property_type&#x27; ) ) ) ) {
@@ -598,7 +596,7 @@ namespace UsabilityDynamics\WPP {
 
         $wp_list_table-&gt;search_box( &#x27;Search&#x27;, &#x27;property&#x27; );
 
-        $filters = Utility::get_search_filters();
+        $filters = \UsabilityDynamics\WPP\Utility::get_search_filters();
 
         ?&gt;
         &lt;div class=&quot;misc-pub-section&quot;&gt;
@@ -696,9 +694,9 @@ namespace UsabilityDynamics\WPP {
       function property_type_selector( $property ) {
         global $wp_properties;
 
-        $attribute = Utility::get_attribute_data( &#x27;property_type&#x27; );
+        $attribute = \UsabilityDynamics\WPP\Utility::get_attribute_data( &#x27;property_type&#x27; );
 
-        $type_label = ( $attribute[ &#x27;label&#x27; ] ? $attribute[ &#x27;label&#x27; ] : sprintf( __( &#x27;%1s Type&#x27;, &#x27;wpp&#x27; ), Utility::property_label() ) );
+        $type_label = ( $attribute[ &#x27;label&#x27; ] ? $attribute[ &#x27;label&#x27; ] : sprintf( __( &#x27;%1s Type&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label() ) );
 
         $property_type_slugs = array_keys( (array) $wp_properties[ &#x27;property_types&#x27; ] );
 

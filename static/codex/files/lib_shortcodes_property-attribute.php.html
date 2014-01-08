@@ -49,8 +49,6 @@
             
                 <li><a href="../classes/WPP.html">WPP</a></li>
             
-                <li><a href="../classes/wpp_default_api.html">wpp_default_api</a></li>
-            
                 <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
             
             </ul>
@@ -164,7 +162,7 @@ namespace UsabilityDynamics\WPP {
 
         if( $args[ &#x27;property_id&#x27; ] != $this_property[ &#x27;ID&#x27; ] ) {
 
-          $this_property = Utility::get_property( $args[ &#x27;property_id&#x27; ] );
+          $this_property = \UsabilityDynamics\WPP\Utility::get_property( $args[ &#x27;property_id&#x27; ] );
 
           if( $args[ &#x27;do_not_format&#x27; ] != &quot;true&quot; ) {
             $this_property = prepare_property_for_display( $this_property );

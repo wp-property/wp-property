@@ -49,8 +49,6 @@
             
                 <li><a href="../classes/WPP.html">WPP</a></li>
             
-                <li><a href="../classes/wpp_default_api.html">wpp_default_api</a></li>
-            
                 <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
             
             </ul>
@@ -106,11 +104,11 @@ class SearchPropertiesWidget extends WP_Widget {
   /** constructor */
   function SearchPropertiesWidget() {
 
-    $property_label = strtolower( Utility::property_label() );
+    $property_label = strtolower( \UsabilityDynamics\WPP\Utility::property_label() );
 
     parent::__construct(
       false,
-      sprintf( __( &#x27;%1s Search&#x27;, &#x27;wpp&#x27; ), Utility::property_label() ),
+      sprintf( __( &#x27;%1s Search&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label() ),
       array(
         &#x27;classname&#x27; =&gt; &#x27;wpp_property_attributes&#x27;,
         &#x27;description&#x27; =&gt; sprintf( __( &#x27;Display a highly customizable  %1s search form.&#x27;, &#x27;wpp&#x27; ), $property_label )
@@ -221,9 +219,9 @@ class SearchPropertiesWidget extends WP_Widget {
 
     if ( $group_attributes == &#x27;true&#x27; ) {
 
-      Utility::get_search_values( $grouped_searchable_attributes, $searchable_property_types, false, $this-&gt;id );
+      \UsabilityDynamics\WPP\Utility::get_search_values( $grouped_searchable_attributes, $searchable_property_types, false, $this-&gt;id );
     } else {
-      Utility::get_search_values( $searchable_attributes, $searchable_property_types, false, $this-&gt;id );
+      \UsabilityDynamics\WPP\Utility::get_search_values( $searchable_attributes, $searchable_property_types, false, $this-&gt;id );
     }
 
     return $new_instance;
@@ -269,7 +267,7 @@ class SearchPropertiesWidget extends WP_Widget {
 
     /** Set label for list below only */
     if ( !isset( $property_stats[ &#x27;property_type&#x27; ] ) ) {
-      $property_stats[ &#x27;property_type&#x27; ] = sprintf(__( &#x27;%1s Type&#x27;, &#x27;wpp&#x27; ), Utility::property_label( &#x27;singular&#x27; ) );
+      $property_stats[ &#x27;property_type&#x27; ] = sprintf(__( &#x27;%1s Type&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;singular&#x27; ) );
     }
 
     if ( is_array( $all_searchable_property_types ) &amp;&amp; count( $all_searchable_property_types ) &gt; 1 ) {
@@ -308,7 +306,7 @@ class SearchPropertiesWidget extends WP_Widget {
       $attribute_label = $property_stats[ &#x27;property_stats&#x27; ][ $slug ];
 
       if ( empty( $attribute_label ) ) {
-        $attribute_label = Utility::de_slug( $slug );
+        $attribute_label = \UsabilityDynamics\WPP\Utility::de_slug( $slug );
       }
 
       $temp_attrs[ $attribute_label ] = $slug;

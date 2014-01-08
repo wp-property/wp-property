@@ -8,7 +8,7 @@ class ChildPropertiesWidget extends WP_Widget {
    * Constructor
    */
   function ChildPropertiesWidget() {
-    parent::WP_Widget( false, $name = sprintf( __( 'Child %1s', 'wpp' ), Utility::property_label( 'plural' ) ), array( 'description' => sprintf( __( 'Show child %1s (if any) for currently displayed %2s', 'wpp' ), Utility::property_label( 'plural' ), Utility::property_label( 'singular' ) ) ) );
+    parent::WP_Widget( false, $name = sprintf( __( 'Child %1s', 'wpp' ), \UsabilityDynamics\WPP\Utility::property_label( 'plural' ) ), array( 'description' => sprintf( __( 'Show child %1s (if any) for currently displayed %2s', 'wpp' ), \UsabilityDynamics\WPP\Utility::property_label( 'plural' ), \UsabilityDynamics\WPP\Utility::property_label( 'singular' ) ) ) );
   }
 
   /**
@@ -38,7 +38,7 @@ class ChildPropertiesWidget extends WP_Widget {
     if( !$image_type ) {
       $image_type = '';
     } else {
-      $image_size = Utility::image_sizes( $image_type );
+      $image_size = \UsabilityDynamics\WPP\Utility::image_sizes( $image_type );
     }
 
     $argus = array(
@@ -63,7 +63,7 @@ class ChildPropertiesWidget extends WP_Widget {
     }
 
     foreach( $attachments as $attached ) {
-      $this_property = Utility::get_property( $attached->ID, 'return_object=true' );
+      $this_property = \UsabilityDynamics\WPP\Utility::get_property( $attached->ID, 'return_object=true' );
       $image         = wpp_get_image_link( $this_property->featured_image, $image_type, array( 'return' => 'array' ) );
       $width         = ( !empty( $image_size[ 'width' ] ) ? $image_size[ 'width' ] : ( !empty( $image[ 'width' ] ) ? $image[ 'width' ] : '' ) );
       $height        = ( !empty( $image_size[ 'height' ] ) ? $image_size[ 'height' ] : ( !empty( $image[ 'height' ] ) ? $image[ 'height' ] : '' ) );
@@ -172,7 +172,7 @@ class ChildPropertiesWidget extends WP_Widget {
       echo 'style="display:none;"';
     ?>>
       <label for="<?php echo $this->get_field_id( 'image_type' ); ?>"><?php _e( 'Image Size:', 'wpp' ); ?>
-        <?php Utility::image_sizes_dropdown( "name=" . $this->get_field_name( 'image_type' ) . "&selected=" . $image_type ); ?>
+        <?php \UsabilityDynamics\WPP\Utility::image_sizes_dropdown( "name=" . $this->get_field_name( 'image_type' ) . "&selected=" . $image_type ); ?>
       </label>
 
     <p>

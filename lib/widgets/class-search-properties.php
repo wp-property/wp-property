@@ -8,11 +8,11 @@ class SearchPropertiesWidget extends WP_Widget {
   /** constructor */
   function SearchPropertiesWidget() {
 
-    $property_label = strtolower( Utility::property_label() );
+    $property_label = strtolower( \UsabilityDynamics\WPP\Utility::property_label() );
 
     parent::__construct(
       false,
-      sprintf( __( '%1s Search', 'wpp' ), Utility::property_label() ),
+      sprintf( __( '%1s Search', 'wpp' ), \UsabilityDynamics\WPP\Utility::property_label() ),
       array(
         'classname' => 'wpp_property_attributes',
         'description' => sprintf( __( 'Display a highly customizable  %1s search form.', 'wpp' ), $property_label )
@@ -123,9 +123,9 @@ class SearchPropertiesWidget extends WP_Widget {
 
     if ( $group_attributes == 'true' ) {
 
-      Utility::get_search_values( $grouped_searchable_attributes, $searchable_property_types, false, $this->id );
+      \UsabilityDynamics\WPP\Utility::get_search_values( $grouped_searchable_attributes, $searchable_property_types, false, $this->id );
     } else {
-      Utility::get_search_values( $searchable_attributes, $searchable_property_types, false, $this->id );
+      \UsabilityDynamics\WPP\Utility::get_search_values( $searchable_attributes, $searchable_property_types, false, $this->id );
     }
 
     return $new_instance;
@@ -171,7 +171,7 @@ class SearchPropertiesWidget extends WP_Widget {
 
     /** Set label for list below only */
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
-      $property_stats[ 'property_type' ] = sprintf(__( '%1s Type', 'wpp' ), Utility::property_label( 'singular' ) );
+      $property_stats[ 'property_type' ] = sprintf(__( '%1s Type', 'wpp' ), \UsabilityDynamics\WPP\Utility::property_label( 'singular' ) );
     }
 
     if ( is_array( $all_searchable_property_types ) && count( $all_searchable_property_types ) > 1 ) {
@@ -210,7 +210,7 @@ class SearchPropertiesWidget extends WP_Widget {
       $attribute_label = $property_stats[ 'property_stats' ][ $slug ];
 
       if ( empty( $attribute_label ) ) {
-        $attribute_label = Utility::de_slug( $slug );
+        $attribute_label = \UsabilityDynamics\WPP\Utility::de_slug( $slug );
       }
 
       $temp_attrs[ $attribute_label ] = $slug;

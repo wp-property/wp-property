@@ -5,237 +5,24 @@
  * @since 0.0.1
  * @class wpp_default_api
  */
-class wpp_default_api {
 
-  /**
-   * Loader for WPP API functions.
-   *
-   * @version 1.25.0
-   */
-  static function plugins_loaded() {
+/**
+ * Loader for WPP API functions.
+ *
+ * @version 1.25.0
+ */
+add_filter( 'init', function () {
 
-    //** Load API towards the end of init */
-    add_filter( 'init', array( 'wpp_default_api', 'init' ), 0, 30 );
+  //** Load API towards the end of init */
+  global $shortcode_tags;
 
+  $shortcodes = array_keys( (array) $shortcode_tags );
+
+  if( !in_array( 'list-attachments', $shortcodes ) ) {
+    add_shortcode( 'list_attachments', 'wpp_list_attachments' );
   }
 
-  /**
-   * Loader for WPP API functions.
-   *
-   * @version 1.25.0
-   */
-  static function init() {
-    global $shortcode_tags;
-
-    $shortcodes = array_keys( (array) $shortcode_tags );
-
-    //** Load list-attachments shortcode if the List Attachments Shortcode plugin does not exist */
-    if( !in_array( 'list-attachments', $shortcodes ) ) {
-      add_shortcode( 'list_attachments', array( 'wpp_default_api', 'list_attachments' ) );
-    }
-
-  }
-
-  /**
-   * Display list of attached files to a s post.
-   *
-   * Function ported over from List Attachments Shortcode plugin.
-   *
-   * @version 1.25.0
-   */
-  static function list_attachments( $atts = array() ) {
-    global $post, $wp_query;
-
-    $r = '';
-
-    if( !is_array( $atts ) ) {
-      $atts = array();
-    }
-
-    $defaults = array(
-      'type'                 => NULL,
-      'orderby'              => NULL,
-      'groupby'              => NULL,
-      'order'                => NULL,
-      'post_id'              => false,
-      'before_list'          => '',
-      'after_list'           => '',
-      'opening'              => '<ul class="attachment-list wpp_attachment_list">',
-      'closing'              => '</ul>',
-      'before_item'          => '<li>',
-      'after_item'           => '</li>',
-      'show_descriptions'    => true,
-      'include_icon_classes' => true,
-      'showsize'             => false
-    );
-
-    $atts = array_merge( $defaults, $atts );
-
-    if( isset( $atts[ 'post_id' ] ) && is_numeric( $atts[ 'post_id' ] ) ) {
-      $post = get_post( $atts[ 'post_id' ] );
-    }
-
-    if( !$post ) {
-      return;
-    }
-
-    if( !empty( $atts[ 'type' ] ) ) {
-      $types = explode( ',', str_replace( ' ', '', $atts[ 'type' ] ) );
-    } else {
-      $types = array();
-    }
-
-    $showsize   = ( $atts[ 'showsize' ] == true || $atts[ 'showsize' ] == 'true' || $atts[ 'showsize' ] == 1 ) ? true : false;
-    $upload_dir = wp_upload_dir();
-
-    $op = clone $post;
-    $oq = clone $wp_query;
-
-    foreach( array( 'before_list', 'after_list', 'opening', 'closing', 'before_item', 'after_item' ) as $htmlItem ) {
-      $atts[ $htmlItem ] = str_replace( array( '&lt;', '&gt;' ), array( '<', '>' ), $atts[ $htmlItem ] );
-    }
-
-    $args = array(
-      'post_type'   => 'attachment',
-      'numberposts' => -1,
-      'post_status' => null,
-      'post_parent' => $post->ID,
-    );
-
-    if( !empty( $atts[ 'orderby' ] ) ) {
-      $args[ 'orderby' ] = $atts[ 'orderby' ];
-    }
-    if( !empty( $atts[ 'order' ] ) ) {
-      $atts[ 'order' ] = ( in_array( $atts[ 'order' ], array( 'a', 'asc', 'ascending' ) ) ) ? 'asc' : 'desc';
-      $args[ 'order' ] = $atts[ 'order' ];
-    }
-    if( !empty( $atts[ 'groupby' ] ) ) {
-      $args[ 'orderby' ] = $atts[ 'groupby' ];
-    }
-
-    $attachments = get_posts( $args );
-
-    if( $attachments ) {
-      $grouper = $atts[ 'groupby' ];
-      $test    = $attachments;
-      $test    = array_shift( $test );
-      if( !property_exists( $test, $grouper ) ) {
-        $grouper = 'post_' . $grouper;
-      }
-
-      $attlist = array();
-
-      foreach( $attachments as $att ) {
-        $key = ( !empty( $atts[ 'groupby' ] ) ) ? $att->$grouper : $att->ID;
-        $key .= ( !empty( $atts[ 'orderby' ] ) ) ? $att->$atts[ 'orderby' ] : '';
-
-        $attlink = wp_get_attachment_url( $att->ID );
-
-        if( count( $types ) ) {
-          foreach( $types as $t ) {
-            if( substr( $attlink, ( 0 - strlen( '.' . $t ) ) ) == '.' . $t ) {
-              $attlist[ $key ]          = clone $att;
-              $attlist[ $key ]->attlink = $attlink;
-            }
-          }
-        } else {
-          $attlist[ $key ]          = clone $att;
-          $attlist[ $key ]->attlink = $attlink;
-        }
-      }
-      if( $atts[ 'groupby' ] ) {
-        if( $atts[ 'order' ] == 'asc' ) {
-          ksort( $attlist );
-        } else {
-          krsort( $attlist );
-        }
-      }
-    }
-
-    if( count( $attlist ) ) {
-      $open = false;
-      $r    = $atts[ 'before_list' ] . $atts[ 'opening' ];
-      foreach( $attlist as $att ) {
-
-        $container_classes = array( 'attachment_container' );
-
-        //** Determine class to display for this file type */
-        if( $atts[ 'include_icon_classes' ] ) {
-
-          switch( $att->post_mime_type ) {
-
-            case 'application/zip':
-              $class = 'zip';
-              break;
-
-            case 'vnd.ms-excel':
-              $class = 'excel';
-              break;
-
-            case 'image/jpeg':
-            case 'image/png':
-            case 'image/gif':
-            case 'image/bmp':
-              $class = 'image';
-              break;
-
-            default:
-              $class = 'default';
-              break;
-          }
-        }
-
-        $icon_class = ( $class ? 'wpp_attachment_icon file-' . $class : false );
-
-        //** Determine if description shuold be displayed, and if it is not empty */
-        $echo_description = ( $atts[ 'show_descriptions' ] && !empty( $att->post_content ) ? ' <span class="attachment_description"> ' . $att->post_content . ' </span> ' : false );
-
-        $echo_title = ( $att->post_excerpt ? $att->post_excerpt : __( 'View ', 'wpp' ) . apply_filters( 'the_title_attribute', $att->post_title ) );
-
-        if( $icon_class ) {
-          $container_classes[ ] = 'has_icon';
-        }
-
-        if( !empty( $echo_description ) ) {
-          $container_classes[ ] = 'has_description';
-        }
-
-        //** Add conditional classes if class is not already passed into container */
-        if( !strpos( $atts[ 'before_item' ], 'class' ) ) {
-          $this_before_item = str_replace( '>', ' class="' . implode( ' ', $container_classes ) . '">', $atts[ 'before_item' ] );
-        }
-
-        $echo_size = ( ( $showsize ) ? ' <span class="attachment-size">' . Utility::get_filesize( str_replace( $upload_dir[ 'baseurl' ], $upload_dir[ 'basedir' ], $attlink ) ) . '</span>' : '' );
-
-        if( !empty( $atts[ 'groupby' ] ) && $current_group != $att->$grouper ) {
-          if( $open ) {
-            $r .= $atts[ 'closing' ] . $atts[ 'after_item' ];
-            $open = false;
-          }
-          $r .= $atts[ 'before_item' ] . '<h3>' . $att->$grouper . '</h3>' . $atts[ 'opening' ];
-          $open          = true;
-          $current_group = $att->$grouper;
-        }
-        $attlink = $att->attlink;
-        $r .= $this_before_item . '<a href="' . $attlink . '" title="' . $echo_title . '" class="wpp_attachment ' . $icon_class . '">' . apply_filters( 'the_title', $att->post_title ) . '</a>' . $echo_size . $echo_description . $atts[ 'after_item' ];
-      }
-      if( $open ) {
-        $r .= $atts[ 'closing' ] . $atts[ 'after_item' ];
-      }
-      $r .= $atts[ 'closing' ] . $atts[ 'after_list' ];
-    }
-
-    $wp_query = clone $oq;
-    $post     = clone $op;
-
-    return $r;
-
-  }
-
-}
-
-// Initialize WPP Default API */
-add_filter( 'plugins_loaded', array( 'wpp_default_api', 'plugins_loaded' ), 0, 9 );
+}, 0, 30 );
 
 // Widget address format
 add_filter( "wpp_stat_filter_{$wp_properties[ 'configuration' ]['address_attribute']}", "wpp_format_address_attribute", 0, 3 );
@@ -303,6 +90,202 @@ add_action( 'wpp_ui_after_attribute_price', 'wpp_show_week_month_selection' );
 add_action( 'wpp_settings_page_property_page', 'add_format_phone_number_checkbox' );
 
 /**
+ * Display list of attached files to a s post.
+ *
+ * Function ported over from List Attachments Shortcode plugin.
+ *
+ * @version 1.25.0
+ */
+function wpp_list_attachments( $atts = array() ) {
+  global $post, $wp_query;
+
+  $r = '';
+
+  if( !is_array( $atts ) ) {
+    $atts = array();
+  }
+
+  $defaults = array(
+    'type'                 => NULL,
+    'orderby'              => NULL,
+    'groupby'              => NULL,
+    'order'                => NULL,
+    'post_id'              => false,
+    'before_list'          => '',
+    'after_list'           => '',
+    'opening'              => '<ul class="attachment-list wpp_attachment_list">',
+    'closing'              => '</ul>',
+    'before_item'          => '<li>',
+    'after_item'           => '</li>',
+    'show_descriptions'    => true,
+    'include_icon_classes' => true,
+    'showsize'             => false
+  );
+
+  $atts = array_merge( $defaults, $atts );
+
+  if( isset( $atts[ 'post_id' ] ) && is_numeric( $atts[ 'post_id' ] ) ) {
+    $post = get_post( $atts[ 'post_id' ] );
+  }
+
+  if( !$post ) {
+    return;
+  }
+
+  if( !empty( $atts[ 'type' ] ) ) {
+    $types = explode( ',', str_replace( ' ', '', $atts[ 'type' ] ) );
+  } else {
+    $types = array();
+  }
+
+  $showsize   = ( $atts[ 'showsize' ] == true || $atts[ 'showsize' ] == 'true' || $atts[ 'showsize' ] == 1 ) ? true : false;
+  $upload_dir = wp_upload_dir();
+
+  $op = clone $post;
+  $oq = clone $wp_query;
+
+  foreach( array( 'before_list', 'after_list', 'opening', 'closing', 'before_item', 'after_item' ) as $htmlItem ) {
+    $atts[ $htmlItem ] = str_replace( array( '&lt;', '&gt;' ), array( '<', '>' ), $atts[ $htmlItem ] );
+  }
+
+  $args = array(
+    'post_type'   => 'attachment',
+    'numberposts' => -1,
+    'post_status' => null,
+    'post_parent' => $post->ID,
+  );
+
+  if( !empty( $atts[ 'orderby' ] ) ) {
+    $args[ 'orderby' ] = $atts[ 'orderby' ];
+  }
+  if( !empty( $atts[ 'order' ] ) ) {
+    $atts[ 'order' ] = ( in_array( $atts[ 'order' ], array( 'a', 'asc', 'ascending' ) ) ) ? 'asc' : 'desc';
+    $args[ 'order' ] = $atts[ 'order' ];
+  }
+  if( !empty( $atts[ 'groupby' ] ) ) {
+    $args[ 'orderby' ] = $atts[ 'groupby' ];
+  }
+
+  $attachments = get_posts( $args );
+
+  if( $attachments ) {
+    $grouper = $atts[ 'groupby' ];
+    $test    = $attachments;
+    $test    = array_shift( $test );
+    if( !property_exists( $test, $grouper ) ) {
+      $grouper = 'post_' . $grouper;
+    }
+
+    $attlist = array();
+
+    foreach( $attachments as $att ) {
+      $key = ( !empty( $atts[ 'groupby' ] ) ) ? $att->$grouper : $att->ID;
+      $key .= ( !empty( $atts[ 'orderby' ] ) ) ? $att->$atts[ 'orderby' ] : '';
+
+      $attlink = wp_get_attachment_url( $att->ID );
+
+      if( count( $types ) ) {
+        foreach( $types as $t ) {
+          if( substr( $attlink, ( 0 - strlen( '.' . $t ) ) ) == '.' . $t ) {
+            $attlist[ $key ]          = clone $att;
+            $attlist[ $key ]->attlink = $attlink;
+          }
+        }
+      } else {
+        $attlist[ $key ]          = clone $att;
+        $attlist[ $key ]->attlink = $attlink;
+      }
+    }
+    if( $atts[ 'groupby' ] ) {
+      if( $atts[ 'order' ] == 'asc' ) {
+        ksort( $attlist );
+      } else {
+        krsort( $attlist );
+      }
+    }
+  }
+
+  if( count( $attlist ) ) {
+    $open = false;
+    $r    = $atts[ 'before_list' ] . $atts[ 'opening' ];
+    foreach( $attlist as $att ) {
+
+      $container_classes = array( 'attachment_container' );
+
+      //** Determine class to display for this file type */
+      if( $atts[ 'include_icon_classes' ] ) {
+
+        switch( $att->post_mime_type ) {
+
+          case 'application/zip':
+            $class = 'zip';
+            break;
+
+          case 'vnd.ms-excel':
+            $class = 'excel';
+            break;
+
+          case 'image/jpeg':
+          case 'image/png':
+          case 'image/gif':
+          case 'image/bmp':
+            $class = 'image';
+            break;
+
+          default:
+            $class = 'default';
+            break;
+        }
+      }
+
+      $icon_class = ( $class ? 'wpp_attachment_icon file-' . $class : false );
+
+      //** Determine if description shuold be displayed, and if it is not empty */
+      $echo_description = ( $atts[ 'show_descriptions' ] && !empty( $att->post_content ) ? ' <span class="attachment_description"> ' . $att->post_content . ' </span> ' : false );
+
+      $echo_title = ( $att->post_excerpt ? $att->post_excerpt : __( 'View ', 'wpp' ) . apply_filters( 'the_title_attribute', $att->post_title ) );
+
+      if( $icon_class ) {
+        $container_classes[ ] = 'has_icon';
+      }
+
+      if( !empty( $echo_description ) ) {
+        $container_classes[ ] = 'has_description';
+      }
+
+      //** Add conditional classes if class is not already passed into container */
+      if( !strpos( $atts[ 'before_item' ], 'class' ) ) {
+        $this_before_item = str_replace( '>', ' class="' . implode( ' ', $container_classes ) . '">', $atts[ 'before_item' ] );
+      }
+
+      $echo_size = ( ( $showsize ) ? ' <span class="attachment-size">' . \UsabilityDynamics\WPP\Utility::get_filesize( str_replace( $upload_dir[ 'baseurl' ], $upload_dir[ 'basedir' ], $attlink ) ) . '</span>' : '' );
+
+      if( !empty( $atts[ 'groupby' ] ) && $current_group != $att->$grouper ) {
+        if( $open ) {
+          $r .= $atts[ 'closing' ] . $atts[ 'after_item' ];
+          $open = false;
+        }
+        $r .= $atts[ 'before_item' ] . '<h3>' . $att->$grouper . '</h3>' . $atts[ 'opening' ];
+        $open          = true;
+        $current_group = $att->$grouper;
+      }
+      $attlink = $att->attlink;
+      $r .= $this_before_item . '<a href="' . $attlink . '" title="' . $echo_title . '" class="wpp_attachment ' . $icon_class . '">' . apply_filters( 'the_title', $att->post_title ) . '</a>' . $echo_size . $echo_description . $atts[ 'after_item' ];
+    }
+    if( $open ) {
+      $r .= $atts[ 'closing' ] . $atts[ 'after_item' ];
+    }
+    $r .= $atts[ 'closing' ] . $atts[ 'after_list' ];
+  }
+
+  $wp_query = clone $oq;
+  $post     = clone $op;
+
+  return $r;
+
+}
+
+/**
  * Add labels to system-generated attributes that do not have custom-set values
  *
  * @since 1.22.0
@@ -310,7 +293,7 @@ add_action( 'wpp_settings_page_property_page', 'add_format_phone_number_checkbox
 function wpp_unique_key_labels( $stats ) {
 
   if( empty( $stats[ 'property_type' ] ) ) {
-    $stats[ 'property_type' ] = sprintf( __( '%1s Type', 'wpp' ), Utility::property_label( 'singular' ) );
+    $stats[ 'property_type' ] = sprintf( __( '%1s Type', 'wpp' ), \UsabilityDynamics\WPP\Utility::property_label( 'singular' ) );
   }
 
   if( empty( $stats[ 'city' ] ) ) {
@@ -359,7 +342,7 @@ function wpp_format_address_attribute( $data, $property = false, $format = "[str
   //** If the currently requested properties address has not been formatted, and on-the-fly geo-lookup has not been disabled, try to look up now */
   if( !$property->address_is_formatted && $wp_properties[ 'configuration' ][ 'do_not_automatically_geo_validate_on_property_view' ] != 'true' ) {
     //** Silently attempt to validate address, right now */
-    $geo_data = Utility::revalidate_all_addresses( array( 'property_ids' => array( $property->ID ), 'echo_result' => false, 'return_geo_data' => true ) );
+    $geo_data = \UsabilityDynamics\WPP\Utility::revalidate_all_addresses( array( 'property_ids' => array( $property->ID ), 'echo_result' => false, 'return_geo_data' => true ) );
 
     if( $this_geo_data = $geo_data[ 'geo_data' ][ $property->ID ] ) {
 
@@ -518,7 +501,7 @@ function wpp_property_stats_input_address( $content, $slug, $object ) {
  * @param integer $post_id
  *
  * @return null
- * @used Utility::save_property();
+ * @used \UsabilityDynamics\WPP\Utility::save_property();
  * @author peshkov@UD
  */
 function wpp_save_property_aggregated_data( $post_id ) {
@@ -545,7 +528,7 @@ function wpp_save_property_aggregated_data( $post_id ) {
     //** Cycle through children and get necessary variables */
     foreach( $children as $child_id ) {
 
-      $child_object = Utility::get_property( $child_id, "load_parent=false" );
+      $child_object = \UsabilityDynamics\WPP\Utility::get_property( $child_id, "load_parent=false" );
 
       //** Exclude variables from searchable attributes (to prevent ranges) */
       $excluded_attributes    = $wp_properties[ 'geo_type_attributes' ];
@@ -553,7 +536,7 @@ function wpp_save_property_aggregated_data( $post_id ) {
 
       foreach( $wp_properties[ 'searchable_attributes' ] as $searchable_attribute ) {
 
-        $attribute_data = Utility::get_attribute_data( $searchable_attribute );
+        $attribute_data = \UsabilityDynamics\WPP\Utility::get_attribute_data( $searchable_attribute );
 
         if( $attribute_data[ 'numeric' ] || $attribute_data[ 'currency' ] ) {
           if( !empty( $child_object[ $searchable_attribute ] ) && !in_array( $searchable_attribute, $excluded_attributes ) ) {
@@ -638,7 +621,7 @@ function format_phone_number( $phone_number ) {
  */
 function add_format_phone_number_checkbox() {
   global $wp_properties;
-  echo '<li>' . Utility::checkbox( "name=wpp_settings[configuration][property_overview][format_phone_number]&label=" . __( 'Format phone number.', 'wpp' ), $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_phone_number' ] ) . '</li>';
+  echo '<li>' . \UsabilityDynamics\WPP\Utility::checkbox( "name=wpp_settings[configuration][property_overview][format_phone_number]&label=" . __( 'Format phone number.', 'wpp' ), $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_phone_number' ] ) . '</li>';
 }
 
 /**
@@ -649,13 +632,13 @@ function add_format_phone_number_checkbox() {
  */
 function add_format_true_checkbox() {
   global $wp_properties;
-  echo '<li>' . Utility::checkbox( "name=wpp_settings[configuration][property_overview][format_true_checkbox]&label=" . __( 'Convert "Yes" and "True" values to checked icons on the front-end.', 'wpp' ), $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_true_checkbox' ] ) . '</li>';
+  echo '<li>' . \UsabilityDynamics\WPP\Utility::checkbox( "name=wpp_settings[configuration][property_overview][format_true_checkbox]&label=" . __( 'Convert "Yes" and "True" values to checked icons on the front-end.', 'wpp' ), $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_true_checkbox' ] ) . '</li>';
 }
 
 /**
  * Add "city" as an inheritable attribute for city property_type
  *
- * Modifies $wp_properties['property_inheritance'] in Utility::settings_action(), overriding database settings
+ * Modifies $wp_properties['property_inheritance'] in \UsabilityDynamics\WPP\Utility::settings_action(), overriding database settings
  *
  * @since 1.0
  *
@@ -673,7 +656,7 @@ function add_city_to_inheritance( $property_inheritance ) {
 /**
  * Adds city to searchable
  *
- * Modifies $wp_properties['searchable_attributes'] in Utility::settings_action(), overriding database settings
+ * Modifies $wp_properties['searchable_attributes'] in \UsabilityDynamics\WPP\Utility::settings_action(), overriding database settings
  *
  * @since 1.0
  *
@@ -715,7 +698,7 @@ function add_square_foot( $area ) {
  * Demonstrates how to add a new attribute to the property class
  *
  * @since 1.08
- * @uses Utility::get_coordinates() Creates an array from string $args.
+ * @uses \UsabilityDynamics\WPP\Utility::get_coordinates() Creates an array from string $args.
  *
  * @param $property
  *
@@ -841,7 +824,7 @@ function add_display_address( $property ) {
  * Demonstrates how to add dollar signs before all prices and deposits
  *
  * @since 1.15.3
- * @uses Utility::get_coordinates() Creates an array from string $args.
+ * @uses \UsabilityDynamics\WPP\Utility::get_coordinates() Creates an array from string $args.
  *
  * @param $content
  *
@@ -863,7 +846,7 @@ function add_dollar_sign( $content ) {
       'return add_dollar_sign( $matches[0] );'
     ), $content );
   } else {
-    return ( $currency_symbol_placement == 'before' ? $currency_symbol : '' ) . Utility::format_numeric( $content ) . ( $currency_symbol_placement == 'after' ? $currency_symbol : '' );
+    return ( $currency_symbol_placement == 'before' ? $currency_symbol : '' ) . \UsabilityDynamics\WPP\Utility::format_numeric( $content ) . ( $currency_symbol_placement == 'after' ? $currency_symbol : '' );
   }
 }
 
@@ -873,7 +856,7 @@ function add_dollar_sign( $content ) {
  * Echos html content to be displayed after location attribute on property edit page
  *
  * @since 1.0
- * @uses Utility::get_coordinates() Creates an array from string $args.
+ * @uses \UsabilityDynamics\WPP\Utility::get_coordinates() Creates an array from string $args.
  *
  * @param bool|string $listing_id Listing ID must be passed
  */
@@ -883,7 +866,7 @@ function wpp_show_coords( $listing_id = false ) {
     return;
 
   // If latitude and logitude meta isn't set, returns false
-  $coords = Utility::get_coordinates( $listing_id );
+  $coords = \UsabilityDynamics\WPP\Utility::get_coordinates( $listing_id );
 
   echo "<span class='description'>";
   if( $coords ) {

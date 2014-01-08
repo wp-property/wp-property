@@ -4,6 +4,10 @@
     "type": "git",
     "url": "https://github.com/UsabilityDynamics/wp-property"
   },
+  "dependencies": {
+    "zombie": "*",
+    "wordpress": "*"
+  },
   "devDependencies": {
     "grunt-requirejs": "*",
     "grunt-contrib-requirejs": "*",

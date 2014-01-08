@@ -5,8 +5,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "UsabilityDynamics\\WPP.Bootstrap",
         "UsabilityDynamics\\WPP.Loader",
         "WPP",
-        "WPP_UI",
-        "wpp_default_api"
+        "WPP_UI"
     ],
     "modules": [],
     "allModules": []

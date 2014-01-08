@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "45730a2cc41db04ad0249522fb78bfad",
+    "hash": "a5e168af1d8dc2c4886552e8cbcfbacc",
     "packages": [
         {
             "name": "datatables/datatables",
@@ -675,7 +675,7 @@
                     "lib"
                 ]
             },
-            "time": "2014-01-07 20:32:19"
+            "time": "2014-01-08 06:00:07"
         },
         {
             "name": "usabilitydynamics/lib-settings",
@@ -692,9 +692,10 @@
                 "shasum": null
             },
             "require": {
+                "justinrainbow/json-schema": "1.1.*",
                 "usabilitydynamics/lib-utility": "*"
             },
-            "type": "component",
+            "type": "library",
             "extra": {
                 "component": {
                     "scripts": [
@@ -713,37 +714,8 @@
                     "lib"
                 ]
             },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Andy Potanin",
-                    "email": "andy.potanin@usabilitydynamics.com",
-                    "homepage": "http://usabilitydynamics.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Maxim Peshkov",
-                    "email": "maxim.peshkov@usabilitydynamics.com",
-                    "homepage": "http://usabilitydynamics.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Anton Korotkov",
-                    "email": "anton.korotkov@usabilitydynamics.com",
-                    "homepage": "http://usabilitydynamics.com",
-                    "role": "Developer"
-                }
-            ],
             "homepage": "http://github.com/usabilitydynamics/lib-settings",
-            "keywords": [
-                "settings"
-            ],
-            "support": {
-                "issues": "https://github.com/usabilitydynamics/lib-settings/issues"
-            },
-            "time": "2014-01-03 14:38:26"
+            "time": "2014-01-08 06:02:12"
         },
         {
             "name": "usabilitydynamics/lib-ui",
@@ -782,7 +754,7 @@
             "keywords": [
                 "api"
             ],
-            "time": "2014-01-06 20:37:11"
+            "time": "2014-01-08 03:06:55"
         },
         {
             "name": "usabilitydynamics/lib-utility",
@@ -798,16 +770,39 @@
                 "reference": null,
                 "shasum": null
             },
-            "require": {
-                "justinrainbow/json-schema": "1.1.*"
-            },
             "type": "library",
             "autoload": {
                 "classmap": [
                     "lib"
                 ]
             },
-            "time": "2014-01-06 12:57:36"
+            "time": "2014-01-08 05:21:23"
+        },
+        {
+            "name": "wordpress/meta-box",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rilwis/meta-box",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/rilwis/meta-box/archive/3.4.6.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "inc/fields",
+                    "inc/common.php",
+                    "inc/field.php",
+                    "inc/helpers.php",
+                    "inc/meta-box.php"
+                ]
+            },
+            "time": "2013-12-27 01:23:13"
         },
         {
             "name": "zend/gdata",
@@ -913,16 +908,16 @@
             "time": "2014-01-07 23:32:35"
         },
         {
-            "name": "usabilitydynamics/wp-property-export",
+            "name": "usabilitydynamics/wp-property-exporter",
             "version": "master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:UsabilityDynamics/wp-property-export",
+                "url": "git@github.com:UsabilityDynamics/wp-property-exporter",
                 "reference": "master"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/usabilitydynamics/wp-property-export/archive/master.zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-exporter/archive/master.zip",
                 "reference": null,
                 "shasum": null
             },

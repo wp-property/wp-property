@@ -49,8 +49,6 @@
             
                 <li><a href="../classes/WPP.html">WPP</a></li>
             
-                <li><a href="../classes/wpp_default_api.html">wpp_default_api</a></li>
-            
                 <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
             
             </ul>
@@ -104,7 +102,7 @@ class GalleryPropertiesWidget extends WP_Widget {
 
   /** constructor */
   function GalleryPropertiesWidget() {
-    parent::WP_Widget( false, $name = sprintf( __( &#x27;%1s Gallery&#x27;, &#x27;wpp&#x27; ), Utility::property_label() ), array( &#x27;description&#x27; =&gt; sprintf(__( &#x27;List of all images attached to the current %1s&#x27;, &#x27;wpp&#x27; ), Utility::property_label( &#x27;singular&#x27; ) ) ) );
+    parent::WP_Widget( false, $name = sprintf( __( &#x27;%1s Gallery&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label() ), array( &#x27;description&#x27; =&gt; sprintf(__( &#x27;List of all images attached to the current %1s&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;singular&#x27; ) ) ) );
   }
 
   /** @see WP_Widget::widget */
@@ -153,7 +151,7 @@ class GalleryPropertiesWidget extends WP_Widget {
       return;
     }
 
-    $thumbnail_dimensions = Utility::image_sizes( $image_type );
+    $thumbnail_dimensions = \UsabilityDynamics\WPP\Utility::image_sizes( $image_type );
 
     //** The current widget can be used on the page twice. So ID of the current DOM element (widget) has to be unique */
     /*
@@ -255,12 +253,12 @@ class GalleryPropertiesWidget extends WP_Widget {
 
     &lt;p&gt;
       &lt;label for=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;image_type&#x27; ); ?&gt;&quot;&gt;&lt;?php _e( &#x27;Regular Size:&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/label&gt;
-      &lt;?php Utility::image_sizes_dropdown( &quot;name=&quot; . $this-&gt;get_field_name( &#x27;image_type&#x27; ) . &quot;&amp;selected=&quot; . $image_type ); ?&gt;
+      &lt;?php \UsabilityDynamics\WPP\Utility::image_sizes_dropdown( &quot;name=&quot; . $this-&gt;get_field_name( &#x27;image_type&#x27; ) . &quot;&amp;selected=&quot; . $image_type ); ?&gt;
     &lt;/p&gt;
 
     &lt;p class=&quot;wpp_gallery_big_image_type&quot;&gt;
       &lt;label for=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;big_image_type&#x27; ); ?&gt;&quot;&gt;&lt;?php _e( &#x27;Large Image Size:&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/label&gt;
-      &lt;?php Utility::image_sizes_dropdown( &quot;name=&quot; . $this-&gt;get_field_name( &#x27;big_image_type&#x27; ) . &quot;&amp;selected=&quot; . $big_image_type ); ?&gt;
+      &lt;?php \UsabilityDynamics\WPP\Utility::image_sizes_dropdown( &quot;name=&quot; . $this-&gt;get_field_name( &#x27;big_image_type&#x27; ) . &quot;&amp;selected=&quot; . $big_image_type ); ?&gt;
     &lt;/p&gt;
 
     &lt;p&gt;
