@@ -3,7 +3,7 @@
         "name": "usabilitydynamics/wp-property",
         "description": "",
         "version": "2.0.0",
-        "url": "http://github.com/UsabilityDynamics/wp-property"
+        "url": ""
     },
     "files": {
         "lib/_legacy/action_hooks.php": {
@@ -135,7 +135,7 @@
             },
             "fors": {
                 "Loader": 1,
-                "UsabilityDynamics\\WPP.Bootstrap": 1,
+                "Bootstrap": 1,
                 "WPP": 1
             },
             "namespaces": {
@@ -227,139 +227,6 @@
             "classes": {},
             "fors": {},
             "namespaces": {}
-        },
-        "js/src/fb_properties.js": {
-            "name": "js/src/fb_properties.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "js/src/fileuploader.js": {
-            "name": "js/src/fileuploader.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "js/src/jquery.smookie.js": {
-            "name": "js/src/jquery.smookie.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "js/src/property_page_property_settings.js": {
-            "name": "js/src/property_page_property_settings.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "js/src/wpp.admin.agent.js": {
-            "name": "js/src/wpp.admin.agent.js",
-            "modules": {},
-            "classes": {},
-            "fors": {
-                "wpp.ui.agents": 1
-            },
-            "namespaces": {}
-        },
-        "js/src/wpp.admin.feps.js": {
-            "name": "js/src/wpp.admin.feps.js",
-            "modules": {},
-            "classes": {},
-            "fors": {
-                "wpp.ui.feps": 1
-            },
-            "namespaces": {}
-        },
-        "js/src/wpp.admin.global.js": {
-            "name": "js/src/wpp.admin.global.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "js/src/wpp.admin.overview.js": {
-            "name": "js/src/wpp.admin.overview.js",
-            "modules": {},
-            "classes": {
-                "wpp.overview": 1
-            },
-            "fors": {
-                "wpp.overview": 1
-            },
-            "namespaces": {}
-        },
-        "js/src/wpp.admin.settings.js": {
-            "name": "js/src/wpp.admin.settings.js",
-            "modules": {},
-            "classes": {},
-            "fors": {
-                "wpp.ui.settings": 1
-            },
-            "namespaces": {}
-        },
-        "js/src/wpp.admin.widgets.js": {
-            "name": "js/src/wpp.admin.widgets.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "js/src/wpp.admin.xmli.js": {
-            "name": "js/src/wpp.admin.xmli.js",
-            "modules": {},
-            "classes": {},
-            "fors": {
-                "wpp.xmli": 1
-            },
-            "namespaces": {}
-        },
-        "js/src/wpp.feps.checkout.js": {
-            "name": "js/src/wpp.feps.checkout.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "js/src/wpp.feps.spc.js": {
-            "name": "js/src/wpp.feps.spc.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "js/src/wpp.feps.submit.js": {
-            "name": "js/src/wpp.feps.submit.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "js/src/wpp.feps.subscription.js": {
-            "name": "js/src/wpp.feps.subscription.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "js/src/wpp.global.js": {
-            "name": "js/src/wpp.global.js",
-            "modules": {},
-            "classes": {},
-            "fors": {
-                "wpp": 1
-            },
-            "namespaces": {}
-        },
-        "js/jquery.scrollTo-min.js": {
-            "name": "js/jquery.scrollTo-min.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
         }
     },
     "modules": {},
@@ -379,7 +246,7 @@
         },
         "UsabilityDynamics\\WPP.Bootstrap": {
             "name": "UsabilityDynamics\\WPP.Bootstrap",
-            "shortname": "Bootstrap",
+            "shortname": "UsabilityDynamics\\WPP.Bootstrap",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -404,15 +271,25 @@
             "extension_for": [],
             "namespace": "UsabilityDynamics\\WPP"
         },
-        "UsabilityDynamics\\WPP.WPP": {
-            "name": "UsabilityDynamics\\WPP.WPP",
+        "Bootstrap": {
+            "name": "Bootstrap",
+            "shortname": "Bootstrap",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": ""
+        },
+        "WPP": {
+            "name": "WPP",
             "shortname": "WPP",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "namespace": "UsabilityDynamics\\WPP"
+            "namespace": ""
         },
         "WPP_UI": {
             "name": "WPP_UI",
@@ -426,69 +303,6 @@
             "file": "lib/class-ui.php",
             "line": 2,
             "description": "Class WPP_UI"
-        },
-        "wpp.ui.agents": {
-            "name": "wpp.ui.agents",
-            "shortname": "wpp.ui.agents",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "namespace": ""
-        },
-        "wpp.ui.feps": {
-            "name": "wpp.ui.feps",
-            "shortname": "wpp.ui.feps",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "namespace": ""
-        },
-        "wpp.overview": {
-            "name": "wpp.overview",
-            "shortname": "wpp.overview",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "namespace": "",
-            "file": "js/src/wpp.admin.overview.js",
-            "line": 1,
-            "description": "WP-Property Admin Overview Scripts"
-        },
-        "wpp.ui.settings": {
-            "name": "wpp.ui.settings",
-            "shortname": "wpp.ui.settings",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "namespace": ""
-        },
-        "wpp.xmli": {
-            "name": "wpp.xmli",
-            "shortname": "wpp.xmli",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "namespace": ""
-        },
-        "wpp": {
-            "name": "wpp",
-            "shortname": "wpp",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "namespace": ""
         }
     },
     "classitems": [
@@ -1400,14 +1214,14 @@
             "file": "lib/class-bootstrap.php",
             "line": 2,
             "description": "UsabilityDynamics\\WPP Bootstrap",
-            "verison": "0.4.1",
+            "verison": "2.0.0",
             "author": "potanin@UD",
             "class": "UsabilityDynamics\\WPP.Bootstrap",
             "namespace": "UsabilityDynamics\\WPP"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 26,
+            "line": 27,
             "description": "Plugin Version.",
             "static": 1,
             "itemtype": "property",
@@ -1418,7 +1232,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 35,
+            "line": 36,
             "description": "Name of Primary Object.",
             "static": 1,
             "itemtype": "property",
@@ -1429,7 +1243,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 44,
+            "line": 45,
             "description": "Textdomain String",
             "access": "public",
             "tagname": "",
@@ -1441,7 +1255,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 53,
+            "line": 54,
             "description": "Singleton Instance Reference.",
             "access": "public",
             "tagname": "",
@@ -1454,7 +1268,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 63,
+            "line": 64,
             "description": "Settings Instance.",
             "static": 1,
             "itemtype": "property",
@@ -1465,7 +1279,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 72,
+            "line": 73,
             "description": "API Instance.",
             "static": 1,
             "itemtype": "property",
@@ -1476,7 +1290,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 81,
+            "line": 82,
             "description": "Current Theme.",
             "static": 1,
             "itemtype": "property",
@@ -1487,7 +1301,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 90,
+            "line": 91,
             "description": "Constructor.\n\nUsabilityDynamics components should be avialable.\n- class_exists( '\\UsabilityDynamics\\API' );\n- class_exists( '\\UsabilityDynamics\\Utility' );",
             "itemtype": "method",
             "name": "__construct",
@@ -1495,30 +1309,30 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 137,
+            "line": 138,
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 140,
+            "line": 141,
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 169,
+            "line": 170,
             "description": "Run on plugin activation.\n\nAs of WP 3.1 this is not ran on automatic update.",
             "since": "1.10",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 185,
+            "line": 186,
             "description": "Plugin Deactivation",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 199,
+            "line": 200,
             "description": "Renders a critical failure.",
             "example": [
                 "\n   self::fail( 'Critical plugin failure!' );"
@@ -1533,7 +1347,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 211,
+            "line": 212,
             "description": "Adds thumbnail feature to WP-Property pages",
             "todo": [
                 "Make sure only ran on property pages"
@@ -1543,7 +1357,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 234,
+            "line": 235,
             "description": "Called on init, as early as possible.",
             "since": "1.11",
             "uses": [
@@ -1554,12 +1368,12 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 251,
+            "line": 252,
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 274,
+            "line": 275,
             "description": "Secondary WPP Initialization ran towards the end of init()\n\nLoads things that we want make accessible for modification via other plugins.",
             "since": "1.31.0",
             "uses": [
@@ -1570,78 +1384,78 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 287,
+            "line": 288,
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 297,
+            "line": 298,
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 301,
+            "line": 302,
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 308,
+            "line": 309,
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 313,
+            "line": 314,
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 327,
+            "line": 328,
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 330,
+            "line": 331,
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 333,
+            "line": 334,
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 401,
+            "line": 402,
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 441,
+            "line": 442,
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 464,
+            "line": 465,
             "description": "Performs front-end pre-header functionality\n\nThis function is not called on amdin side\nLoads conditional CSS styles",
             "since": "1.11",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 666,
+            "line": 667,
             "description": "Runs pre-header functions on admin-side only\n\nChecks if plugin has been updated.",
             "since": "1.10",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 728,
+            "line": 729,
             "description": "Register metaboxes.",
             "global": "type $wpdb",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 743,
+            "line": 744,
             "description": "Check if WP-Property RaaS Active",
             "return": {
                 "description": "bool"
@@ -1650,14 +1464,14 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 752,
+            "line": 753,
             "description": "Adds \"Settings\" link to the plugin overview page\n\n *",
             "since": "0.60",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 769,
+            "line": 770,
             "description": "Can enqueue scripts on specific pages, and print content into head",
             "uses": [
                 "$current_screen global variable"
@@ -1667,21 +1481,21 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 879,
+            "line": 880,
             "description": "Sets up additional pages and loads their scripts",
             "since": "0.5",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 893,
+            "line": 894,
             "description": "Next used to add custom submenu page 'All Properties' with Javascript dataTable",
             "author": "Anton K",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 925,
+            "line": 926,
             "description": "Modify admin body class on property pages for CSS",
             "todo": [
                 "$current_screen does not seem to work in 3.8."
@@ -1691,7 +1505,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 951,
+            "line": 952,
             "description": "Fixed property pages being seen as 404 pages\n\nRan on parse_request;\n\nWP handle_404() function decides if current request should be a 404 page\nMarking the global variable $wp_query->is_search to true makes the function\nassume that the request is a search.",
             "params": [
                 {
@@ -1704,19 +1518,19 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1013,
+            "line": 1014,
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1038,
+            "line": 1039,
             "description": "Modifies post content",
             "since": "1.04",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1068,
+            "line": 1069,
             "description": "Hooks into save_post function and saves additional property data",
             "todo": [
                 "Add some sort of custom capability so not only admins can make properties as featured. i.e. Agents can make their own properties featured."
@@ -1726,28 +1540,28 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1178,
+            "line": 1179,
             "description": "Inserts content into the \"Publish\" metabox on property pages",
             "since": "1.04",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1211,
+            "line": 1212,
             "description": "Removes \"quick edit\" link on property type objects\n\nCalled in via page_row_actions filter",
             "since": "0.5",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1228,
+            "line": 1229,
             "description": "Adds property-relevant messages to the property post type object",
             "since": "0.5",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1261,
+            "line": 1262,
             "description": "Sets up property-type columns",
             "since": "0.54",
             "uses": [
@@ -1758,21 +1572,21 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1297,
+            "line": 1298,
             "description": "Sets up sortable columns columns",
             "since": "1.08",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1319,
+            "line": 1320,
             "description": "Adds wp-property-listing class in search results and property_overview pages",
             "since": "0.7260",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1334,
+            "line": 1335,
             "description": "Checks settings data on accord with existing wp_properties data ( before option updates )",
             "params": [
                 {
@@ -1791,20 +1605,20 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1359,
+            "line": 1360,
             "description": "Hack to avoid issues with capabilities and views.",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1379,
+            "line": 1380,
             "description": "Adds all WPP custom capabilities to administrator role.\nPremium feature capabilities are added by filter in this function, see below.",
             "author": "peshkov@UD",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1425,
+            "line": 1426,
             "description": "Generates javascript file with localization.\nAdds localization support to all WP-Property scripts.\nAccessible via wp-ajax.php calls.",
             "since": "1.37.3.2",
             "author": "peshkov@UD",
@@ -1812,12 +1626,12 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1440,
+            "line": 1441,
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1456,
+            "line": 1457,
             "description": "WPP Contextual Help",
             "global": "$current_screen",
             "params": [
@@ -1831,7 +1645,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1505,
+            "line": 1506,
             "description": "Returns specific instance data which is used by javascript\nJavascript Reference: window.wpp.instance",
             "author": "peshkov@UD",
             "since": "1.38",
@@ -1842,30 +1656,28 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1535,
+            "line": 1536,
             "description": "Get Setting.\n\n   // Get Setting\n   Bootstrap::get( 'my_key' )",
             "itemtype": "method",
             "name": "get",
             "author": "potanin@UD",
             "since": "0.1.1",
-            "class": "UsabilityDynamics\\WPP.Bootstrap",
-            "namespace": "UsabilityDynamics\\WPP"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1562,
+            "line": 1563,
             "description": "Set Setting.",
             "usage": "// Set Setting\n   Bootstrap::set( 'my_key', 'my-value' )",
             "itemtype": "method",
             "name": "get",
             "author": "potanin@UD",
             "since": "0.1.1",
-            "class": "UsabilityDynamics\\WPP.Bootstrap",
-            "namespace": "UsabilityDynamics\\WPP"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1580,
+            "line": 1581,
             "description": "Get the WPP Singleton\n\nConcept based on the CodeIgniter get_instance() concept.",
             "example": [
                 "\n\n     var settings = WPP::get_instance()->Settings;\n     var api = WPP::$instance()->API;"
@@ -1876,7 +1688,7 @@
             },
             "itemtype": "method",
             "name": "get_instance",
-            "class": "UsabilityDynamics\\WPP.WPP"
+            "class": "WPP"
         },
         {
             "file": "lib/class-formatting.php",
@@ -2605,14 +2417,14 @@
             "author": "Andy Potanin <andy.potanin@twincitiestech.com>",
             "package": "WP-Property",
             "subpackage": "Functions",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 18,
             "description": "This function grabs the API key from UD's servers",
             "updated": "1.36.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -2643,13 +2455,13 @@
             "path": "array $path [optional]. Method tries to find template in theme, but also it can be found in given list of pathes.",
             "author": "peshkov@UD",
             "version": "1.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 105,
             "description": "Set default instance.\nTemplate can depend on instance. For example: facebook, PDF, etc.",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -2669,7 +2481,7 @@
                 "description": "boolean false if notification was not sent successfully"
             },
             "autor": "odokienko@UD",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -2700,35 +2512,35 @@
             "return": {
                 "description": "boolean"
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 220,
             "description": "Get the label for \"Property\"",
             "since": "1.10",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 239,
             "description": "Setup widgets and widget areas.",
             "since": "1.31.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 301,
             "description": "Registers post types and taxonomies.",
             "since": "1.31.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 416,
             "description": "Loads applicable WP-Properrty scripts and styles",
             "since": "1.10",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -2738,68 +2550,68 @@
                 "Add handler for styles."
             ],
             "since": "Denali 3.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 485,
             "description": "PHP function to echoing a message to JS console",
             "since": "1.32.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 513,
             "description": "Tests if remote script or CSS file can be opened prior to sending it to browser",
             "version": "1.26.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 560,
             "description": "Tests if remote image can be loaded, before sending to browser or TCPDF",
             "version": "1.26.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 583,
             "description": "Remove non-XML characters",
             "version": "1.30.2",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 622,
             "description": "Convert JSON data to XML if it is in JSON",
             "version": "1.26.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 685,
             "description": "Convert CSV to XML\n\nFunction ported over from List Attachments Shortcode plugin.",
             "version": "1.32.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 718,
             "description": "Convert CSV to XML\n\nFunction ported over from List Attachments Shortcode plugin.",
             "version": "1.32.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 766,
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 787,
             "description": "Get filesize of a file.\n\nFunction ported over from List Attachments Shortcode plugin.",
             "version": "1.25.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -2809,7 +2621,7 @@
                 "Add regex to check for opening and closing bracket."
             ],
             "version": "1.23.1",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -2819,28 +2631,28 @@
                 "Add regex to check for opening and closing bracket."
             ],
             "version": "1.23.1",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 861,
             "description": "Reassemble address from parts",
             "version": "1.23.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 890,
             "description": "Creates a nonce, similar to wp_create_nonce() but does not depend on user being logged in",
             "version": "1.17.3",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 911,
             "description": "Verifies nonce.",
             "version": "1.17.3",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -2853,14 +2665,14 @@
                 "or adding caching"
             ],
             "version": "1.17.3",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 1078,
             "description": "Makes sure the script is loaded, otherwise loads it",
             "version": "1.17.3",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -2876,21 +2688,21 @@
                 "description": "bool"
             },
             "author": "Maxim Peshkov",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 1140,
             "description": "Returns an array of all keys that can be queried using property_overview",
             "version": "1.17.3",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 1172,
             "description": "Returns array of sortable attributes if set, or default",
             "version": "1.17.2",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -2900,21 +2712,21 @@
                 "This function is a hack. Need to use post_type rewrites better. - potanin@UD"
             ],
             "version": "1.26.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 1235,
             "description": "Pre post query - for now mostly to disable caching",
             "version": "1.17.2",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 1253,
             "description": "Format a number as numeric",
             "version": "1.16.3",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -2930,7 +2742,7 @@
                 "description": "bool"
             },
             "author": "peshkov@UD",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -2940,21 +2752,21 @@
                 "update to handle images outside the uploads folder"
             ],
             "version": "1.16.3",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 1312,
             "description": "Setup default property page.",
             "version": "1.16.3",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 1365,
             "description": "Perform WPP related things when a post is being deleted\n\nMakes sure all attached files and images get deleted.",
             "version": "1.16.1",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -2963,7 +2775,7 @@
             "todo": [
                 "add some sort of light validating that the the passed item here is in fact an image"
             ],
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -2989,28 +2801,28 @@
                 "description": "array. Image data for first image size (if multiple provided). Or FALSE if file could not be generated."
             },
             "since": "1.6",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 1600,
             "description": "Check if theme-specific stylesheet exists.\n\nget_option('template') seems better choice than get_option('stylesheet'), which returns the current theme's slug\nwhich is a problem when a child theme is used. We want the parent theme's slug.",
             "since": "1.6",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 1621,
             "description": "Check permissions and ownership of premium folder.",
             "since": "1.13",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 1666,
             "description": "Revalidate all addresses\n\nRevalidates addresses of all publishd properties.\nIf Google daily addres lookup is exceeded, breaks the function and notifies the user.",
             "since": "1.05",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3032,24 +2844,24 @@
             },
             "since": "1.37.2",
             "author": "odokienko@UD",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 1840,
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 1843,
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 1911,
             "description": "Minify JavaScript\n\nUses third-party JSMin if class isn't declared.\nIf WP3 is detected, class not loaded to avoid footer warning error.\nIf for some reason W3_Plugin is active, but JSMin is not found,\nwe load ours to avoid breaking property maps.",
             "since": "1.06",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3057,28 +2869,28 @@
             "description": "Minify CSS\n\nSyntax:\nstring CssMin::minify(string $source [, array $filters = array()][, array $plugins = array()]);\n\nstring $source\nThe source css as string.\narray $filters\nThe filter configuration as array (optional). See Filter Configuration\narray $plugins\nThe plugin configuration as array (optional). See: Plugin Configuration\nExample\n//Simple minification WITHOUT filter or plugin configuration\n$result = CssMin::minify(file_get_contents(\"path/to/source.css\"));\n//Minification WITH filter or plugin configuration\n$filters = array();\n$plugins = array();\n// Minify via CssMin adapter function\n$result = CssMin::minify(file_get_contents(\"path/to/source.css\"), $filters, $plugins);\n// Minify via CssMinifier class\n$minifier = new CssMinifier(file_get_contents(\"path/to/source.css\"), $filters, $plugins);\n$result = $minifier->getMinified();",
             "since": "1.37.3.2",
             "author": "odokienko@UD",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 1989,
             "description": "Gets image dimensions for WP-Property images.\n\nThis function is no longer used, only here for legacy support.",
             "since": "1.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 2001,
             "description": "Prevents all columns on the overview page from being enabled if nothing is configured",
             "since": "0.721",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 2035,
             "description": "Determines most common property type (used for defaults when needed)",
             "since": "0.55",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3093,13 +2905,13 @@
             "return": {
                 "description": "Array"
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 2076,
             "description": "Split the string properly, so no interference with &ndash; which is used in user input.",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3118,7 +2930,7 @@
             "return": {
                 "description": "string   $result"
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3134,26 +2946,26 @@
             "return": {
                 "description": "string   $result"
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 2125,
             "description": "Determines if all of the arrays values are numeric",
             "since": "0.55",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 2186,
             "description": "Return an array of all available attributes and meta keys",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 2225,
             "description": "Render a dropdown of property attributes.",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3165,7 +2977,7 @@
             "version": "0.1",
             "since": "1.32.2",
             "author": "Maxim Peshkov",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3173,28 +2985,28 @@
             "description": "Checks for updates against TwinCitiesTech.com Server",
             "since": "0.55",
             "version": "1.13.1",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 2474,
             "description": "Makes a given property featured, usuall called via ajax",
             "since": "0.721",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 2502,
             "description": "Add or remove taxonomy columns",
             "since": "3.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 2548,
             "description": "Displays dropdown of available property size images",
             "since": "0.54",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3214,7 +3026,7 @@
             "return": {
                 "description": "array keys: 'width' and 'height' if image type sizes found."
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3222,7 +3034,7 @@
             "description": "AJAX Handler.\nSaves WPP Settings",
             "author": "peshkov@UD",
             "since": "1.38.3",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3238,7 +3050,7 @@
                 "description": "array|$wp_properties"
             },
             "since": "1.12",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3253,14 +3065,14 @@
             "return": {
                 "description": "mixed"
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 2812,
             "description": "Loads property values into global $post variables.\n\nAttached to do_action_ref_array('the_post', array(&$post)); in setup_postdata()\nRan after template_redirect.\n$property is loaded in WPP_Core::template_redirect();",
             "since": "0.54",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3268,7 +3080,7 @@
             "description": "Check for premium features and load them",
             "updated": "1.6",
             "since": "0.624",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3283,7 +3095,7 @@
             "return": {
                 "description": "boolean."
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3293,7 +3105,7 @@
             "return": {
                 "description": "null"
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3301,19 +3113,19 @@
             "description": "Run manually when a version mismatch is detected.\n\nHolds official current version designation.\nCalled in admin_init hook.",
             "since": "1.10",
             "version": "1.13",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 3019,
             "description": "Moved from WPP_Legacy",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 3033,
             "description": "Upgrade:\n- WPP postmeta data were saved to database with '&ndash;' instead of '-' in value. Function encode_sql_input was modified and it doesn't change '-' to '&ndash' anymore\nSo to prevent search result issues we need to update database data.\npeshkov@UD",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3323,7 +3135,7 @@
                 "description": "array|$wp_properties"
             },
             "since": "0.621",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3342,7 +3154,7 @@
             "return": {
                 "description": "mixed|string|void $value Modified value"
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3370,13 +3182,13 @@
                 "description": "array|$range"
             },
             "since": "0.57",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 3278,
             "description": "Check if a search converstion exists for a attributes value",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3400,18 +3212,18 @@
             "return": {
                 "description": "bool|mixed|void"
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 3368,
             "description": "Specific meta data can contain value with commas. E.g. location field ( address_attribute )\nThe current list contains meta slugs which will be ignored for comma parsing. peshkov@UD",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 3473,
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3428,7 +3240,7 @@
             },
             "author": "peshkov@UD",
             "since": "1.37.5",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3443,13 +3255,13 @@
             "return": {
                 "description": "array $attrs"
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 3850,
             "description": "Returns array of all values for a particular attribute/meta_key",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3457,7 +3269,7 @@
             "todo": [
                 "check if this condition is required - Anton Korotkov"
             ],
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3469,7 +3281,7 @@
                 "Code pertaining to displaying data should be migrated to prepare_property_for_display() like :$real_value = nl2br($real_value);",
                 "Fix the long dashes - when in latitude or longitude it breaks it when using static map"
             ],
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3479,23 +3291,23 @@
                 "This should be obsolete",
                 "in any case we can't assume everyone uses USD - potanin@UD (11/22/11)"
             ],
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 4288,
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 4293,
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 4302,
             "description": "Validate if a URL is valid.",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3510,14 +3322,14 @@
             "return": {
                 "description": "boolean"
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 4320,
             "description": "Returns an array of a property's stats and their values.\n\nQuery is array of variables to use load ours to avoid breaking property maps.",
             "since": "1.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3526,7 +3338,7 @@
             "filter": "wpp_google_maps_infobox",
             "version": "1.11 - added return if $post or address attribute are not set to prevent fatal error",
             "since": "1.081",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3547,14 +3359,14 @@
             },
             "author": "peshkov@UD",
             "since": "1.37.5",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 4614,
             "description": "Returns property object for displaying on map\n\nUsed for speeding up property queries, only returns:\nID, post_title, atitude, longitude, exclude_from_supermap, location, supermap display_attributes and featured image urls\n\n1.11: addded htmlspecialchars and addslashes to post_title",
             "since": "1.11",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3577,7 +3389,7 @@
                 "API call to UD server to verify there is no duplicates"
             ],
             "since": "1.6",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3593,21 +3405,21 @@
                 "description": "string | Returns GPID"
             },
             "since": "1.6",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 4748,
             "description": "Returns post_id fro GPID if it exists",
             "since": "1.6",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 4770,
             "description": "This static function is not actually used, it's only use to hold some common translations that may be used by our themes.\n\nTranslations for Denali theme.",
             "since": "1.14",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3628,20 +3440,20 @@
             },
             "since": "1.16.2",
             "author": "Maxim Peshkov",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 4854,
             "description": "Function for displaying WPP Data Table rows\n\nPorted from WP-CRM",
             "since": "3.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 4917,
             "description": "Get Search filter fields",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3657,25 +3469,25 @@
             "return": {
                 "description": "array"
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 5119,
             "description": "Process bulk actions",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 5162,
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 5176,
             "description": "Settings page load handler",
             "author": "korotkov@ud",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3687,7 +3499,7 @@
             },
             "author": "peshkov@UD",
             "since": "1.37.6",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3703,7 +3515,7 @@
             "return": {
                 "description": "int"
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3713,7 +3525,7 @@
             "return": {
                 "description": "array"
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3729,14 +3541,14 @@
                 "description": "bool"
             },
             "author": "korotkov@ud",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
             "line": 5325,
             "description": "Prevent Facebook integration if 'Facebook Tabs' did not installed.",
             "author": "korotkov@ud",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3753,7 +3565,7 @@
             "return": {
                 "description": "string $phone_number"
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3774,7 +3586,7 @@
             "return": {
                 "description": "string Checkbox input field and hidden field with the opposive value"
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3791,7 +3603,7 @@
             "return": {
                 "description": "string Input field and hidden field with the opposive value"
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3812,7 +3624,7 @@
             "return": {
                 "description": "string Input field and hidden field with the opposive value"
             },
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3820,7 +3632,7 @@
             "description": "Recursive conversion of an object into an array",
             "since": "1.36.0",
             "source": "WPP_F",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3828,7 +3640,7 @@
             "description": "Get a URL of a page.",
             "since": "1.36.0",
             "source": "WPP_F",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3865,7 +3677,7 @@
             },
             "author": "peshkov@UD",
             "since": "1.37.6",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-utility.php",
@@ -3873,19 +3685,19 @@
             "description": "Returns clear post status",
             "author": "peshkov@UD",
             "version": "0.1",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/class-widget.php",
             "line": 2,
             "description": "WP-Property Widget Class",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/legacy.php",
             "line": 2,
             "description": "Backwards Compatibility\n\nSupport for legacy UD Classes - extend WPP_F, which in turn extends UD_API",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/pluggable.php",
@@ -3893,14 +3705,14 @@
             "description": "Assorted Pluggable Functions",
             "author": "potanin@UD",
             "since": "2.0.0",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/pluggable.php",
             "line": 9,
             "description": "Implementing this for old versions of PHP",
             "since": "1.15.9",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/pluggable.php",
@@ -3919,7 +3731,7 @@
             "version": "0.1",
             "since": "1.32.2",
             "author": "peshkov@UD",
-            "class": "wpp.ui.agents"
+            "class": ""
         },
         {
             "file": "lib/pluggable.php",
@@ -3939,990 +3751,6 @@
             },
             "author": "korotkov@ud",
             "since": "1.36.2",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fb_properties.js",
-            "line": 1,
-            "description": "Facebook Tabs script\nMust be enqueued on all facebook pages.",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fb_properties.js",
-            "line": 20,
-            "description": "Adds specific header to AJAX requests",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 1,
-            "description": "http://github.com/valums/file-uploader\n\nMultiple file upload component with progress-bar, drag-and-drop.\n© 2010 Andrew Valums ( andrew(at)valums.com )\n\nLicensed under GNU GPL 2 or later and GNU LGPL 2 or later, see license.txt.",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 16,
-            "description": "Adds all missing properties from second obj to first obj",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 25,
-            "description": "Searches for a given element in the array, returns -1 if it is not present.",
-            "params": [
-                {
-                    "name": "from",
-                    "description": "The index at which to begin the search",
-                    "type": "Number",
-                    "optional": true
-                }
-            ],
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 79,
-            "description": "Insert node a before node b.",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 100,
-            "description": "Creates and returns element from html string\nUses innerHTML to create an element",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 117,
-            "description": "Sets styles for an element.\nFixes opacity in IE6-8.",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 181,
-            "description": "obj2url() takes a json-object as argument and generates\na querystring. pretty much like jQuery.param()\n\nhow to use:\n\n   `qq.obj2url({a:'b',c:'d'},'http://any.url/upload?otherParam=value');`\n\nwill result in:\n\n   `http://any.url/upload?otherParam=value&a=b&c=d`",
-            "params": [
-                {
-                    "name": "Object",
-                    "description": "JSON-Object"
-                },
-                {
-                    "name": "String",
-                    "description": "current querystring-part"
-                }
-            ],
-            "return": {
-                "description": "String encoded querystring"
-            },
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 248,
-            "description": "Creates upload button, validates upload, but doesn't create file list or dd.",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 473,
-            "description": "Class that creates upload widget with drag-and-drop and file list",
-            "inherits": "qq.FileUploaderBasic",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 538,
-            "description": "Gets one of the elements listed in this._options.classes",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 651,
-            "description": "delegate click event for cancel link",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 859,
-            "description": "Class for uploading files, uploading itself is handled by child classes",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 882,
-            "description": "Adds file or file input to the queue",
-            "return": {
-                "description": "id"
-            },
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 887,
-            "description": "Sends the file identified by id and additional query params to the server",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 902,
-            "description": "Cancels file upload by id",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 909,
-            "description": "Cancells all uploads",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 918,
-            "description": "Returns name of the file identified by id",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 922,
-            "description": "Returns size of the file identified by id",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 926,
-            "description": "Returns id of files being uploaded or\nwaiting for their turn",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 933,
-            "description": "Actual upload method",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 937,
-            "description": "Actual cancel method",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 941,
-            "description": "Removes element from queue, starts upload of next",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 957,
-            "description": "Class for uploading files using form and iframe",
-            "inherits": "qq.UploadHandlerAbstract",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 1062,
-            "description": "Returns json object received by iframe from server.",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 1081,
-            "description": "Creates iframe with unique name",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 1101,
-            "description": "Creates form, that will be submitted to iframe",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 1123,
-            "description": "Class for uploading files using xhr",
-            "inherits": "qq.UploadHandlerAbstract",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 1152,
-            "description": "Adds file to the queue\nReturns id to use with upload, cancel",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 1172,
-            "description": "Returns uploaded bytes for file identified by id",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/fileuploader.js",
-            "line": 1178,
-            "description": "Sends the file identified by id and additional query params to the server",
-            "params": [
-                {
-                    "name": "params",
-                    "description": "name-value string pairs",
-                    "type": "Object"
-                }
-            ],
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/jquery.smookie.js",
-            "line": 3,
-            "description": "jQuery Cookie plugin\n\nCopyright (c) 2010 Klaus Hartl (stilbuero.de)\nDual licensed under the MIT and GPL licenses:\nhttp://www.opensource.org/licenses/mit-license.php\nhttp://www.gnu.org/licenses/gpl.html",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/jquery.smookie.js",
-            "line": 15,
-            "description": "Create a cookie with the given key and value and other optional parameters.",
-            "example": [
-                " $.cookie('the_cookie', 'the_value');",
-                " $.cookie('the_cookie', 'the_value', { expires: 7, path: '/', domain: 'jquery.com', secure: true });",
-                " $.cookie('the_cookie', 'the_value');",
-                " $.cookie('the_cookie', null);"
-            ],
-            "desc": "Delete a cookie by passing null as value. Keep in mind that you have to use the same path and domain\n      used when the cookie was set.",
-            "params": [
-                {
-                    "name": "String",
-                    "description": "key The key of the cookie."
-                },
-                {
-                    "name": "String",
-                    "description": "value The value of the cookie."
-                },
-                {
-                    "name": "Object",
-                    "description": "options An object literal containing key/value pairs to provide optional cookie attributes."
-                }
-            ],
-            "option": "Boolean secure If true, the secure attribute of the cookie will be set and the cookie transmission will\n                       require a secure protocol (like HTTPS).",
-            "type": "undefined",
-            "name": "$.cookie",
-            "cat": "Plugins/Cookie",
-            "author": "Klaus Hartl/klaus.hartl@stilbuero.de",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/jquery.smookie.js",
-            "line": 46,
-            "description": "Get the value of a cookie with the given key.",
-            "example": [
-                " $.cookie('the_cookie');"
-            ],
-            "desc": "Get the value of a cookie.",
-            "params": [
-                {
-                    "name": "String",
-                    "description": "key The key of the cookie."
-                }
-            ],
-            "return": {
-                "description": "The value of the cookie."
-            },
-            "type": "String",
-            "name": "$.cookie",
-            "cat": "Plugins/Cookie",
-            "author": "Klaus Hartl/klaus.hartl@stilbuero.de",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/property_page_property_settings.js",
-            "line": 3,
-            "description": "Handles form saving\nDo any validation/data work before the settings page form is submitted",
-            "author": "odokienko@UD",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/wpp.admin.agent.js",
-            "line": 1,
-            "description": "WP-Property Edit Agent Page\n\nThis file is included on Edit Agent page.",
-            "author": "peshkov@UD",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/wpp.admin.agent.js",
-            "line": 10,
-            "description": "Initialize DOM.",
-            "itemtype": "method",
-            "name": "ready",
-            "class": "wpp.ui.agents"
-        },
-        {
-            "file": "js/src/wpp.admin.feps.js",
-            "line": 1,
-            "description": "WP-Property FEPS Page ( Property Forms )\n\nThis file is included on Edit Agent page.",
-            "author": "peshkov@UD",
-            "class": "wpp.ui.feps"
-        },
-        {
-            "file": "js/src/wpp.admin.feps.js",
-            "line": 10,
-            "description": "Initialize DOM.",
-            "itemtype": "method",
-            "name": "ready",
-            "class": "wpp.ui.feps"
-        },
-        {
-            "file": "js/src/wpp.admin.feps.js",
-            "line": 140,
-            "description": "Render Close button on tabs",
-            "itemtype": "method",
-            "name": "init_close_btn",
-            "class": "wpp.ui.feps"
-        },
-        {
-            "file": "js/src/wpp.admin.feps.js",
-            "line": 199,
-            "description": "Set default field values after adding new tab",
-            "itemtype": "method",
-            "name": "set_default_field_values",
-            "class": "wpp.ui.feps"
-        },
-        {
-            "file": "js/src/wpp.admin.feps.js",
-            "line": 216,
-            "description": "Update dom after changes",
-            "itemtype": "method",
-            "name": "update_dom",
-            "class": "wpp.ui.feps"
-        },
-        {
-            "file": "js/src/wpp.admin.feps.js",
-            "line": 266,
-            "description": "Ran after a row is added",
-            "itemtype": "method",
-            "name": "on_added_row",
-            "class": "wpp.ui.feps"
-        },
-        {
-            "file": "js/src/wpp.admin.global.js",
-            "line": 1,
-            "description": "WP-Property Global Admin Scripts\n\nThis file is included on all back-end pages, so extra care needs be taken to avoid conflicts",
-            "class": "wpp.overview"
-        },
-        {
-            "file": "js/src/wpp.admin.global.js",
-            "line": 8,
-            "description": "Assign Property Stat to Group Functionality",
-            "params": [
-                {
-                    "name": "object",
-                    "description": "opt Params"
-                }
-            ],
-            "author": "Maxim Peshkov",
-            "class": "wpp.overview"
-        },
-        {
-            "file": "js/src/wpp.admin.global.js",
-            "line": 207,
-            "description": "Basic e-mail validation",
-            "params": [
-                {
-                    "name": "address",
-                    "description": ""
-                }
-            ],
-            "return": {
-                "description": "boolean. Returns true if email address is successfully validated."
-            },
-            "class": "wpp.overview"
-        },
-        {
-            "file": "js/src/wpp.admin.global.js",
-            "line": 223,
-            "description": "Bind ColorPicker with input fields '.wpp_input_colorpicker'",
-            "params": [
-                {
-                    "name": "object",
-                    "description": "instance. jQuery object"
-                }
-            ],
-            "class": "wpp.overview"
-        },
-        {
-            "file": "js/src/wpp.admin.global.js",
-            "line": 249,
-            "description": "Updates Row field names",
-            "params": [
-                {
-                    "name": "object",
-                    "description": "instance. DOM element"
-                },
-                {
-                    "name": "boolean",
-                    "description": "allowRandomSlug. Determine if Row can contains random slugs."
-                }
-            ],
-            "class": "wpp.overview"
-        },
-        {
-            "file": "js/src/wpp.admin.global.js",
-            "line": 331,
-            "description": "Toggle advanced options that are somehow related to the clicked trigger\n\nIf trigger element has an attr of 'show_type_source', then function attempt to find that element and get its value\nif value is found, that value is used as an additional requirement when finding which elements to toggle\n\nExample: <span class=\"wpp_show_advanced\" show_type_source=\"id_of_input_with_a_string\" advanced_option_class=\"class_of_elements_to_trigger\" show_type_element_attribute=\"attribute_name_to_match\">Show Advanced</span>\nThe above, when clicked, will toggle all elements within the same parent tree of cicked element, with class of \"advanced_option_class\" and with attribute of \"show_type_element_attribute\" the equals value of \"#id_of_input_with_a_string\"\n\nClicking the trigger in example when get the value of:\n<input id=\"value_from_source_element\" value=\"some_sort_of_identifier\" />\n\nAnd then toggle all elements like below:\n<li class=\"class_of_elements_to_trigger\" attribute_name_to_match=\"some_sort_of_identifier\">Data that will be toggled.</li>\n\nCopyright 2011 Usability Dynamics, Inc. <info@usabilitydynamics.com>",
-            "class": "wpp.overview"
-        },
-        {
-            "file": "js/src/wpp.admin.global.js",
-            "line": 427,
-            "params": [
-                {
-                    "name": "slug",
-                    "description": ""
-                }
-            ],
-            "return": {
-                "description": ""
-            },
-            "class": "wpp.overview"
-        },
-        {
-            "file": "js/src/wpp.admin.global.js",
-            "line": 439,
-            "description": "Adds new Row to the table",
-            "params": [
-                {
-                    "name": "element",
-                    "description": ""
-                }
-            ],
-            "return": {
-                "description": ""
-            },
-            "class": "wpp.overview"
-        },
-        {
-            "file": "js/src/wpp.admin.global.js",
-            "line": 538,
-            "description": "Slides down WP contextual help,\nand if 'wpp_scroll_to' attribute exists, scroll to it.",
-            "params": [
-                {
-                    "name": "element",
-                    "description": ""
-                }
-            ],
-            "class": "wpp.overview"
-        },
-        {
-            "file": "js/src/wpp.admin.global.js",
-            "line": 599,
-            "params": [
-                {
-                    "name": "functionName",
-                    "description": ""
-                },
-                {
-                    "name": "context",
-                    "description": ""
-                },
-                {
-                    "name": "args",
-                    "description": ""
-                }
-            ],
-            "return": {
-                "description": ""
-            },
-            "class": "wpp.overview"
-        },
-        {
-            "file": "js/src/wpp.admin.global.js",
-            "line": 616,
-            "description": "Set unique IDs and FORs of DOM elements recursivly",
-            "params": [
-                {
-                    "name": "object",
-                    "description": "el. jQuery DOM object"
-                },
-                {
-                    "name": "integer",
-                    "description": "unique. Unique suffix which will be added to all IDs and FORs"
-                }
-            ],
-            "author": "Maxim Peshkov",
-            "class": "wpp.overview"
-        },
-        {
-            "file": "js/src/wpp.admin.global.js",
-            "line": 647,
-            "description": "DOCUMENT READY EVENTS AND ACTIONS",
-            "class": "wpp.overview"
-        },
-        {
-            "file": "js/src/wpp.admin.overview.js",
-            "line": 9,
-            "description": "Initialize DOM.",
-            "itemtype": "method",
-            "name": "ready",
-            "class": "wpp.overview"
-        },
-        {
-            "file": "js/src/wpp.admin.overview.js",
-            "line": 40,
-            "description": "Toggle Feature.",
-            "itemtype": "method",
-            "name": "toggle_featured",
-            "class": "wpp.overview"
-        },
-        {
-            "file": "js/src/wpp.admin.overview.js",
-            "line": 71,
-            "description": "Initialize User Interface.\n\nThis function may be ran multiple times.",
-            "itemtype": "method",
-            "name": "initialize",
-            "class": "wpp.overview"
-        },
-        {
-            "file": "js/src/wpp.admin.settings.js",
-            "line": 1,
-            "description": "WP-Property Admin Settings page",
-            "class": "wpp.ui.settings"
-        },
-        {
-            "file": "js/src/wpp.admin.settings.js",
-            "line": 7,
-            "description": "Initialize DOM.",
-            "itemtype": "method",
-            "name": "ready",
-            "class": "wpp.ui.settings"
-        },
-        {
-            "file": "js/src/wpp.admin.settings.js",
-            "line": 15,
-            "description": "Handles data saving.\nOnly if we don't upload backup file!",
-            "author": "peshkov@UD",
-            "class": "wpp.ui.settings"
-        },
-        {
-            "file": "js/src/wpp.admin.settings.js",
-            "line": 177,
-            "class": "wpp.ui.settings"
-        },
-        {
-            "file": "js/src/wpp.admin.settings.js",
-            "line": 190,
-            "description": "Modifies UI to reflect Default Property Page selection",
-            "itemtype": "method",
-            "name": "setup_default_property_page",
-            "class": "wpp.ui.settings"
-        },
-        {
-            "file": "js/src/wpp.admin.widgets.js",
-            "line": 1,
-            "description": "WP-Property Widgets Page\n\nThis file is included on widgets page.",
-            "auhor": "peshkov@UD",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.widgets.js",
-            "line": 14,
-            "description": "Inits Search Properties Widget form's functionality\nShould not be called directly: used by wpp.widgets.run()",
-            "author": "peshkov@UD",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.widgets.js",
-            "line": 69,
-            "description": "Inits Property Attributes Widget functionality\nShould not be called directly: used by wpp.widgets.run()",
-            "author": "peshkov@UD",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.widgets.js",
-            "line": 80,
-            "description": "Goes through all wpp widgets and inits them",
-            "author": "peshkov@UD",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 1,
-            "description": "XMLI Scripts",
-            "author": ": potanin@UD",
-            "date": ": 8/19/13",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 22,
-            "description": "Initializer.",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 551,
-            "description": "Source Changed.",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 564,
-            "description": "XMLI Logger.",
-            "usage": "wpp.xmli.debug( 'My message.' );",
-            "itemtype": "method",
-            "name": "log",
-            "author": "potanin@UD",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 587,
-            "description": "Toggle loading icon at the top of the page.",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 595,
-            "description": "Toggle loading icon at the top of the page.",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 603,
-            "description": "Rebuild unique ID dropdown",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 657,
-            "description": "Add attribute and xPath rows based on matched tags from XML feed and avaialble attributes.",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 802,
-            "description": "Remove any blank rows from table.",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 829,
-            "description": "Ran when any information regarding the source URL, type, or login information is chaged.\n\nVerifies source can be loaded and is valid.\nReturns matched_tags and stored in wpp_auto_matched_tags",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 881,
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 962,
-            "description": "Sets schedule_id for current DOM",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 976,
-            "description": "Sets schedule_id for current DOM",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 993,
-            "description": "Display a message in the \"Action Bar\", below the Attribute Map",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 1050,
-            "description": "Display a message in the \"Raw Preview\" message section",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 1074,
-            "description": "Display a message in the \"Raw Preview\" message section",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 1097,
-            "description": "Sets the status of the source URL in UI",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 1139,
-            "description": "Ensure all necessary data for given source is filled in",
-            "params": [
-                {
-                    "name": "type",
-                    "description": ""
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Boolean"
-            },
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 1171,
-            "description": "Displays editor UI",
-            "params": [
-                {
-                    "name": "passed_schedule_id",
-                    "description": ""
-                }
-            ],
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 1212,
-            "description": "Handles functions and UI configurations when a major DOM change is made",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 1250,
-            "description": "Disables, resets, and grays out an option",
-            "params": [
-                {
-                    "name": "element",
-                    "description": ""
-                }
-            ],
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 1261,
-            "description": "Enables an option",
-            "params": [
-                {
-                    "name": "element",
-                    "description": ""
-                }
-            ],
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 1271,
-            "description": "Handles functions and UI configurations when a major DOM change is made",
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 1296,
-            "description": "Determine if \"Toggle Advanced Settings\" link should be displayed for this source type",
-            "params": [
-                {
-                    "name": "response",
-                    "description": ""
-                }
-            ],
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.admin.xmli.js",
-            "line": 1342,
-            "description": "Ran after the import editor screen is displayed",
-            "params": [
-                {
-                    "name": "response",
-                    "description": ""
-                }
-            ],
-            "class": "wpp.xmli"
-        },
-        {
-            "file": "js/src/wpp.feps.checkout.js",
-            "line": 1,
-            "description": "FEPS Checkout step",
-            "author": "peshkov@UD",
-            "class": "wpp"
-        },
-        {
-            "file": "js/src/wpp.feps.checkout.js",
-            "line": 46,
-            "params": [
-                {
-                    "name": "event",
-                    "description": "",
-                    "type": "Type"
-                },
-                {
-                    "name": "result",
-                    "description": "",
-                    "type": "Type"
-                },
-                {
-                    "name": "target",
-                    "description": "",
-                    "type": "Type"
-                },
-                {
-                    "name": "gateway",
-                    "description": "",
-                    "type": "Type"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Undefined"
-            },
-            "class": "wpp"
-        },
-        {
-            "file": "js/src/wpp.feps.checkout.js",
-            "line": 78,
-            "description": "Shows result of checkout process",
-            "params": [
-                {
-                    "name": "message",
-                    "description": "",
-                    "type": "Type"
-                },
-                {
-                    "name": "property_id",
-                    "description": "",
-                    "type": "Type"
-                },
-                {
-                    "name": "error",
-                    "description": "",
-                    "type": "Type"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Undefined"
-            },
-            "class": "wpp"
-        },
-        {
-            "file": "js/src/wpp.feps.spc.js",
-            "line": 1,
-            "description": "FEPS SPC page",
-            "author": "peshkov@UD",
-            "class": "wpp"
-        },
-        {
-            "file": "js/src/wpp.feps.submit.js",
-            "line": 1,
-            "description": "FEPS Submit/Edit step",
-            "author": "peshkov@UD",
-            "class": "wpp"
-        },
-        {
-            "file": "js/src/wpp.feps.subscription.js",
-            "line": 1,
-            "description": "FEPS Subscription plans step",
-            "author": "peshkov@UD",
-            "class": "wpp"
-        },
-        {
-            "file": "js/src/wpp.global.js",
-            "line": 1,
-            "description": "WP-Property Global Scripts\n\nThis file is included on all front-end and specific back-end pages.",
-            "class": "wpp"
-        },
-        {
-            "file": "js/src/wpp.global.js",
-            "line": 30,
-            "description": "Global Debug Logger\n\nAccepts any number of arguments and passes them to console.log, if available.\nReturns the first argument.",
-            "usage": "wpp.debug( 'debug data', { key: 'some value' } );",
-            "return": {
-                "description": "Returns first argument.",
-                "type": "Data"
-            },
-            "itemtype": "method",
-            "name": "debug",
-            "class": "wpp"
-        },
-        {
-            "file": "js/src/wpp.global.js",
-            "line": 58,
-            "description": "Formatting Methods. (todo)",
-            "class": "wpp"
-        },
-        {
-            "file": "js/src/wpp.global.js",
-            "line": 64,
-            "description": "Format Currency",
-            "class": "wpp"
-        },
-        {
-            "file": "js/src/wpp.global.js",
-            "line": 78,
-            "description": "Format Number",
-            "class": "wpp"
-        },
-        {
-            "file": "js/src/wpp.global.js",
-            "line": 101,
-            "description": "Add Commas",
-            "itemtype": "method",
-            "name": "commas",
-            "class": "wpp"
-        },
-        {
-            "file": "js/src/wpp.global.js",
-            "line": 122,
-            "description": "http://kevin.vanzonneveld.net\n+      original by: Philippe Jausions (http://pear.php.net/user/jausions)\n+      original by: Aidan Lister (http://aidanlister.com/)\n+ reimplemented by: Kankrelune (http://www.webfaktory.info/)\n+      improved by: Brett Zamir (http://brett-zamir.me)\n+      improved by: Scott Baker\n+      improved by: Theriault\n*        example 1: version_compare('8.2.5rc', '8.2.5a');\n*        returns 1: 1\n*        example 2: version_compare('8.2.50', '8.2.52', '<');\n*        returns 2: true\n*        example 3: version_compare('5.3.0-dev', '5.3.0');\n*        returns 3: -1\n*        example 4: version_compare('4.1.0.52','4.01.0.51');\n*        returns 4: 1",
-            "class": "wpp"
-        },
-        {
-            "file": "js/src/wpp.global.js",
-            "line": 241,
-            "description": "Legacy Support",
-            "params": [
-                {
-                    "name": "selector",
-                    "description": ""
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "*"
-            },
-            "class": "wpp"
-        },
-        {
-            "file": "js/src/wpp.global.js",
-            "line": 251,
-            "description": "Legacy Support",
-            "params": [
-                {
-                    "name": "selector",
-                    "description": ""
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "*"
-            },
-            "class": "wpp"
-        },
-        {
-            "file": "js/src/wpp.global.js",
-            "line": 261,
-            "description": "Legacy Support",
-            "params": [
-                {
-                    "name": "data",
-                    "description": ""
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "*"
-            },
-            "class": "wpp"
-        },
-        {
-            "file": "js/jquery.scrollTo-min.js",
-            "line": 1,
-            "description": "jQuery.ScrollTo - Easy element scrolling using jQuery.\nCopyright (c) 2007-2009 Ariel Flesler - aflesler(at)gmail(dot)com | http://flesler.blogspot.com\nDual licensed under MIT and GPL.\nDate: 5/25/2009",
-            "author": "Ariel Flesler",
-            "version": "1.4.2\n\nhttp://flesler.blogspot.com/2007/10/jqueryscrollto.html",
             "class": ""
         }
     ],
@@ -5013,23 +3841,23 @@
         },
         {
             "message": "unknown tag: var",
-            "line": " lib/class-bootstrap.php:44"
+            "line": " lib/class-bootstrap.php:45"
         },
         {
             "message": "unknown tag: access",
-            "line": " lib/class-bootstrap.php:234"
+            "line": " lib/class-bootstrap.php:235"
         },
         {
             "message": "unknown tag: access",
-            "line": " lib/class-bootstrap.php:274"
+            "line": " lib/class-bootstrap.php:275"
         },
         {
             "message": "unknown tag: access",
-            "line": " lib/class-bootstrap.php:1261"
+            "line": " lib/class-bootstrap.php:1262"
         },
         {
             "message": "unknown tag: usage",
-            "line": " lib/class-bootstrap.php:1562"
+            "line": " lib/class-bootstrap.php:1563"
         },
         {
             "message": "unknown tag: package",
@@ -5334,118 +4162,6 @@
         {
             "message": "unknown tag: version",
             "line": " lib/pluggable.php:34"
-        },
-        {
-            "message": "unknown tag: inherits",
-            "line": " js/src/fileuploader.js:473"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " js/src/fileuploader.js:882"
-        },
-        {
-            "message": "unknown tag: inherits",
-            "line": " js/src/fileuploader.js:957"
-        },
-        {
-            "message": "unknown tag: inherits",
-            "line": " js/src/fileuploader.js:1123"
-        },
-        {
-            "message": "unknown tag: desc",
-            "line": " js/src/jquery.smookie.js:15"
-        },
-        {
-            "message": "unknown tag: desc",
-            "line": " js/src/jquery.smookie.js:15"
-        },
-        {
-            "message": "unknown tag: desc",
-            "line": " js/src/jquery.smookie.js:15"
-        },
-        {
-            "message": "unknown tag: desc",
-            "line": " js/src/jquery.smookie.js:15"
-        },
-        {
-            "message": "unknown tag: option",
-            "line": " js/src/jquery.smookie.js:15"
-        },
-        {
-            "message": "unknown tag: option",
-            "line": " js/src/jquery.smookie.js:15"
-        },
-        {
-            "message": "unknown tag: option",
-            "line": " js/src/jquery.smookie.js:15"
-        },
-        {
-            "message": "unknown tag: option",
-            "line": " js/src/jquery.smookie.js:15"
-        },
-        {
-            "message": "unknown tag: name",
-            "line": " js/src/jquery.smookie.js:15"
-        },
-        {
-            "message": "unknown tag: cat",
-            "line": " js/src/jquery.smookie.js:15"
-        },
-        {
-            "message": "unknown tag: desc",
-            "line": " js/src/jquery.smookie.js:46"
-        },
-        {
-            "message": "unknown tag: name",
-            "line": " js/src/jquery.smookie.js:46"
-        },
-        {
-            "message": "unknown tag: cat",
-            "line": " js/src/jquery.smookie.js:46"
-        },
-        {
-            "message": "unknown tag: auhor",
-            "line": " js/src/wpp.admin.widgets.js:1"
-        },
-        {
-            "message": "unknown tag: date",
-            "line": " js/src/wpp.admin.xmli.js:1"
-        },
-        {
-            "message": "unknown tag: usage",
-            "line": " js/src/wpp.admin.xmli.js:564"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " js/src/wpp.admin.xmli.js:1139"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " js/src/wpp.feps.checkout.js:46"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " js/src/wpp.feps.checkout.js:78"
-        },
-        {
-            "message": "unknown tag: usage",
-            "line": " js/src/wpp.global.js:30"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " js/src/wpp.global.js:241"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " js/src/wpp.global.js:251"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " js/src/wpp.global.js:261"
-        },
-        {
-            "message": "unknown tag: version",
-            "line": " js/jquery.scrollTo-min.js:1"
         },
         {
             "message": "Missing item type\nWP-Property Actions and Hooks File\n\nDo not modify arrays found in these files, use the filters to modify them in your functions.php file\nSets up default settings and loads a few actions.\n\nDocumentation: http://twincitiestech.com/plugins/wp-property/api-documentation/\n\nCopyright 2010 Andy Potanin <andy.potanin@twincitiestech.com>",
@@ -5913,183 +4629,183 @@
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:137"
+            "line": " lib/class-bootstrap.php:138"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:140"
+            "line": " lib/class-bootstrap.php:141"
         },
         {
             "message": "Missing item type\nRun on plugin activation.\n\nAs of WP 3.1 this is not ran on automatic update.",
-            "line": " lib/class-bootstrap.php:169"
+            "line": " lib/class-bootstrap.php:170"
         },
         {
             "message": "Missing item type\nPlugin Deactivation",
-            "line": " lib/class-bootstrap.php:185"
+            "line": " lib/class-bootstrap.php:186"
         },
         {
             "message": "Missing item type\nRenders a critical failure.",
-            "line": " lib/class-bootstrap.php:199"
+            "line": " lib/class-bootstrap.php:200"
         },
         {
             "message": "Missing item type\nAdds thumbnail feature to WP-Property pages",
-            "line": " lib/class-bootstrap.php:211"
+            "line": " lib/class-bootstrap.php:212"
         },
         {
             "message": "Missing item type\nCalled on init, as early as possible.",
-            "line": " lib/class-bootstrap.php:234"
+            "line": " lib/class-bootstrap.php:235"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:251"
+            "line": " lib/class-bootstrap.php:252"
         },
         {
             "message": "Missing item type\nSecondary WPP Initialization ran towards the end of init()\n\nLoads things that we want make accessible for modification via other plugins.",
-            "line": " lib/class-bootstrap.php:274"
+            "line": " lib/class-bootstrap.php:275"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:287"
+            "line": " lib/class-bootstrap.php:288"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:297"
+            "line": " lib/class-bootstrap.php:298"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:301"
+            "line": " lib/class-bootstrap.php:302"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:308"
+            "line": " lib/class-bootstrap.php:309"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:313"
+            "line": " lib/class-bootstrap.php:314"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:327"
+            "line": " lib/class-bootstrap.php:328"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:330"
+            "line": " lib/class-bootstrap.php:331"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:333"
+            "line": " lib/class-bootstrap.php:334"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:401"
+            "line": " lib/class-bootstrap.php:402"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:441"
+            "line": " lib/class-bootstrap.php:442"
         },
         {
             "message": "Missing item type\nPerforms front-end pre-header functionality\n\nThis function is not called on amdin side\nLoads conditional CSS styles",
-            "line": " lib/class-bootstrap.php:464"
+            "line": " lib/class-bootstrap.php:465"
         },
         {
             "message": "Missing item type\nRuns pre-header functions on admin-side only\n\nChecks if plugin has been updated.",
-            "line": " lib/class-bootstrap.php:666"
+            "line": " lib/class-bootstrap.php:667"
         },
         {
             "message": "Missing item type\nRegister metaboxes.",
-            "line": " lib/class-bootstrap.php:728"
+            "line": " lib/class-bootstrap.php:729"
         },
         {
             "message": "Missing item type\nCheck if WP-Property RaaS Active",
-            "line": " lib/class-bootstrap.php:743"
+            "line": " lib/class-bootstrap.php:744"
         },
         {
             "message": "Missing item type\nAdds \"Settings\" link to the plugin overview page\n\n *",
-            "line": " lib/class-bootstrap.php:752"
+            "line": " lib/class-bootstrap.php:753"
         },
         {
             "message": "Missing item type\nCan enqueue scripts on specific pages, and print content into head",
-            "line": " lib/class-bootstrap.php:769"
+            "line": " lib/class-bootstrap.php:770"
         },
         {
             "message": "Missing item type\nSets up additional pages and loads their scripts",
-            "line": " lib/class-bootstrap.php:879"
+            "line": " lib/class-bootstrap.php:880"
         },
         {
             "message": "Missing item type\nNext used to add custom submenu page 'All Properties' with Javascript dataTable",
-            "line": " lib/class-bootstrap.php:893"
+            "line": " lib/class-bootstrap.php:894"
         },
         {
             "message": "Missing item type\nModify admin body class on property pages for CSS",
-            "line": " lib/class-bootstrap.php:925"
+            "line": " lib/class-bootstrap.php:926"
         },
         {
             "message": "Missing item type\nFixed property pages being seen as 404 pages\n\nRan on parse_request;\n\nWP handle_404() function decides if current request should be a 404 page\nMarking the global variable $wp_query->is_search to true makes the function\nassume that the request is a search.",
-            "line": " lib/class-bootstrap.php:951"
+            "line": " lib/class-bootstrap.php:952"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:1013"
+            "line": " lib/class-bootstrap.php:1014"
         },
         {
             "message": "Missing item type\nModifies post content",
-            "line": " lib/class-bootstrap.php:1038"
+            "line": " lib/class-bootstrap.php:1039"
         },
         {
             "message": "Missing item type\nHooks into save_post function and saves additional property data",
-            "line": " lib/class-bootstrap.php:1068"
+            "line": " lib/class-bootstrap.php:1069"
         },
         {
             "message": "Missing item type\nInserts content into the \"Publish\" metabox on property pages",
-            "line": " lib/class-bootstrap.php:1178"
+            "line": " lib/class-bootstrap.php:1179"
         },
         {
             "message": "Missing item type\nRemoves \"quick edit\" link on property type objects\n\nCalled in via page_row_actions filter",
-            "line": " lib/class-bootstrap.php:1211"
+            "line": " lib/class-bootstrap.php:1212"
         },
         {
             "message": "Missing item type\nAdds property-relevant messages to the property post type object",
-            "line": " lib/class-bootstrap.php:1228"
+            "line": " lib/class-bootstrap.php:1229"
         },
         {
             "message": "Missing item type\nSets up property-type columns",
-            "line": " lib/class-bootstrap.php:1261"
+            "line": " lib/class-bootstrap.php:1262"
         },
         {
             "message": "Missing item type\nSets up sortable columns columns",
-            "line": " lib/class-bootstrap.php:1297"
+            "line": " lib/class-bootstrap.php:1298"
         },
         {
             "message": "Missing item type\nAdds wp-property-listing class in search results and property_overview pages",
-            "line": " lib/class-bootstrap.php:1319"
+            "line": " lib/class-bootstrap.php:1320"
         },
         {
             "message": "Missing item type\nChecks settings data on accord with existing wp_properties data ( before option updates )",
-            "line": " lib/class-bootstrap.php:1334"
+            "line": " lib/class-bootstrap.php:1335"
         },
         {
             "message": "Missing item type\nHack to avoid issues with capabilities and views.",
-            "line": " lib/class-bootstrap.php:1359"
+            "line": " lib/class-bootstrap.php:1360"
         },
         {
             "message": "Missing item type\nAdds all WPP custom capabilities to administrator role.\nPremium feature capabilities are added by filter in this function, see below.",
-            "line": " lib/class-bootstrap.php:1379"
+            "line": " lib/class-bootstrap.php:1380"
         },
         {
             "message": "Missing item type\nGenerates javascript file with localization.\nAdds localization support to all WP-Property scripts.\nAccessible via wp-ajax.php calls.",
-            "line": " lib/class-bootstrap.php:1425"
+            "line": " lib/class-bootstrap.php:1426"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:1440"
+            "line": " lib/class-bootstrap.php:1441"
         },
         {
             "message": "Missing item type\nWPP Contextual Help",
-            "line": " lib/class-bootstrap.php:1456"
+            "line": " lib/class-bootstrap.php:1457"
         },
         {
             "message": "Missing item type\nReturns specific instance data which is used by javascript\nJavascript Reference: window.wpp.instance",
-            "line": " lib/class-bootstrap.php:1505"
+            "line": " lib/class-bootstrap.php:1506"
         },
         {
             "message": "Missing item type\nWP-Property Formatting\n\nHandle value conversions, object normalization, schema mapping, etc.",
@@ -6918,390 +5634,6 @@
         {
             "message": "Missing item type\nAdd 'property' to the list of RSSable post_types.",
             "line": " lib/pluggable.php:62"
-        },
-        {
-            "message": "Missing item type\nFacebook Tabs script\nMust be enqueued on all facebook pages.",
-            "line": " js/src/fb_properties.js:1"
-        },
-        {
-            "message": "Missing item type\nAdds specific header to AJAX requests",
-            "line": " js/src/fb_properties.js:20"
-        },
-        {
-            "message": "Missing item type\nhttp://github.com/valums/file-uploader\n\nMultiple file upload component with progress-bar, drag-and-drop.\n© 2010 Andrew Valums ( andrew(at)valums.com )\n\nLicensed under GNU GPL 2 or later and GNU LGPL 2 or later, see license.txt.",
-            "line": " js/src/fileuploader.js:1"
-        },
-        {
-            "message": "Missing item type\nAdds all missing properties from second obj to first obj",
-            "line": " js/src/fileuploader.js:16"
-        },
-        {
-            "message": "Missing item type\nSearches for a given element in the array, returns -1 if it is not present.",
-            "line": " js/src/fileuploader.js:25"
-        },
-        {
-            "message": "Missing item type\nInsert node a before node b.",
-            "line": " js/src/fileuploader.js:79"
-        },
-        {
-            "message": "Missing item type\nCreates and returns element from html string\nUses innerHTML to create an element",
-            "line": " js/src/fileuploader.js:100"
-        },
-        {
-            "message": "Missing item type\nSets styles for an element.\nFixes opacity in IE6-8.",
-            "line": " js/src/fileuploader.js:117"
-        },
-        {
-            "message": "Missing item type\nobj2url() takes a json-object as argument and generates\na querystring. pretty much like jQuery.param()\n\nhow to use:\n\n   `qq.obj2url({a:'b',c:'d'},'http://any.url/upload?otherParam=value');`\n\nwill result in:\n\n   `http://any.url/upload?otherParam=value&a=b&c=d`",
-            "line": " js/src/fileuploader.js:181"
-        },
-        {
-            "message": "Missing item type\nCreates upload button, validates upload, but doesn't create file list or dd.",
-            "line": " js/src/fileuploader.js:248"
-        },
-        {
-            "message": "Missing item type\nClass that creates upload widget with drag-and-drop and file list",
-            "line": " js/src/fileuploader.js:473"
-        },
-        {
-            "message": "Missing item type\nGets one of the elements listed in this._options.classes",
-            "line": " js/src/fileuploader.js:538"
-        },
-        {
-            "message": "Missing item type\ndelegate click event for cancel link",
-            "line": " js/src/fileuploader.js:651"
-        },
-        {
-            "message": "Missing item type\nClass for uploading files, uploading itself is handled by child classes",
-            "line": " js/src/fileuploader.js:859"
-        },
-        {
-            "message": "Missing item type\nAdds file or file input to the queue",
-            "line": " js/src/fileuploader.js:882"
-        },
-        {
-            "message": "Missing item type\nSends the file identified by id and additional query params to the server",
-            "line": " js/src/fileuploader.js:887"
-        },
-        {
-            "message": "Missing item type\nCancels file upload by id",
-            "line": " js/src/fileuploader.js:902"
-        },
-        {
-            "message": "Missing item type\nCancells all uploads",
-            "line": " js/src/fileuploader.js:909"
-        },
-        {
-            "message": "Missing item type\nReturns name of the file identified by id",
-            "line": " js/src/fileuploader.js:918"
-        },
-        {
-            "message": "Missing item type\nReturns size of the file identified by id",
-            "line": " js/src/fileuploader.js:922"
-        },
-        {
-            "message": "Missing item type\nReturns id of files being uploaded or\nwaiting for their turn",
-            "line": " js/src/fileuploader.js:926"
-        },
-        {
-            "message": "Missing item type\nActual upload method",
-            "line": " js/src/fileuploader.js:933"
-        },
-        {
-            "message": "Missing item type\nActual cancel method",
-            "line": " js/src/fileuploader.js:937"
-        },
-        {
-            "message": "Missing item type\nRemoves element from queue, starts upload of next",
-            "line": " js/src/fileuploader.js:941"
-        },
-        {
-            "message": "Missing item type\nClass for uploading files using form and iframe",
-            "line": " js/src/fileuploader.js:957"
-        },
-        {
-            "message": "Missing item type\nReturns json object received by iframe from server.",
-            "line": " js/src/fileuploader.js:1062"
-        },
-        {
-            "message": "Missing item type\nCreates iframe with unique name",
-            "line": " js/src/fileuploader.js:1081"
-        },
-        {
-            "message": "Missing item type\nCreates form, that will be submitted to iframe",
-            "line": " js/src/fileuploader.js:1101"
-        },
-        {
-            "message": "Missing item type\nClass for uploading files using xhr",
-            "line": " js/src/fileuploader.js:1123"
-        },
-        {
-            "message": "Missing item type\nAdds file to the queue\nReturns id to use with upload, cancel",
-            "line": " js/src/fileuploader.js:1152"
-        },
-        {
-            "message": "Missing item type\nReturns uploaded bytes for file identified by id",
-            "line": " js/src/fileuploader.js:1172"
-        },
-        {
-            "message": "Missing item type\nSends the file identified by id and additional query params to the server",
-            "line": " js/src/fileuploader.js:1178"
-        },
-        {
-            "message": "Missing item type\njQuery Cookie plugin\n\nCopyright (c) 2010 Klaus Hartl (stilbuero.de)\nDual licensed under the MIT and GPL licenses:\nhttp://www.opensource.org/licenses/mit-license.php\nhttp://www.gnu.org/licenses/gpl.html",
-            "line": " js/src/jquery.smookie.js:3"
-        },
-        {
-            "message": "Missing item type\nCreate a cookie with the given key and value and other optional parameters.",
-            "line": " js/src/jquery.smookie.js:15"
-        },
-        {
-            "message": "Missing item type\nGet the value of a cookie with the given key.",
-            "line": " js/src/jquery.smookie.js:46"
-        },
-        {
-            "message": "Missing item type\nHandles form saving\nDo any validation/data work before the settings page form is submitted",
-            "line": " js/src/property_page_property_settings.js:3"
-        },
-        {
-            "message": "Missing item type\nWP-Property Edit Agent Page\n\nThis file is included on Edit Agent page.",
-            "line": " js/src/wpp.admin.agent.js:1"
-        },
-        {
-            "message": "Missing item type\nWP-Property FEPS Page ( Property Forms )\n\nThis file is included on Edit Agent page.",
-            "line": " js/src/wpp.admin.feps.js:1"
-        },
-        {
-            "message": "Missing item type\nWP-Property Global Admin Scripts\n\nThis file is included on all back-end pages, so extra care needs be taken to avoid conflicts",
-            "line": " js/src/wpp.admin.global.js:1"
-        },
-        {
-            "message": "Missing item type\nAssign Property Stat to Group Functionality",
-            "line": " js/src/wpp.admin.global.js:8"
-        },
-        {
-            "message": "Missing item type\nBasic e-mail validation",
-            "line": " js/src/wpp.admin.global.js:207"
-        },
-        {
-            "message": "Missing item type\nBind ColorPicker with input fields '.wpp_input_colorpicker'",
-            "line": " js/src/wpp.admin.global.js:223"
-        },
-        {
-            "message": "Missing item type\nUpdates Row field names",
-            "line": " js/src/wpp.admin.global.js:249"
-        },
-        {
-            "message": "Missing item type\nToggle advanced options that are somehow related to the clicked trigger\n\nIf trigger element has an attr of 'show_type_source', then function attempt to find that element and get its value\nif value is found, that value is used as an additional requirement when finding which elements to toggle\n\nExample: <span class=\"wpp_show_advanced\" show_type_source=\"id_of_input_with_a_string\" advanced_option_class=\"class_of_elements_to_trigger\" show_type_element_attribute=\"attribute_name_to_match\">Show Advanced</span>\nThe above, when clicked, will toggle all elements within the same parent tree of cicked element, with class of \"advanced_option_class\" and with attribute of \"show_type_element_attribute\" the equals value of \"#id_of_input_with_a_string\"\n\nClicking the trigger in example when get the value of:\n<input id=\"value_from_source_element\" value=\"some_sort_of_identifier\" />\n\nAnd then toggle all elements like below:\n<li class=\"class_of_elements_to_trigger\" attribute_name_to_match=\"some_sort_of_identifier\">Data that will be toggled.</li>\n\nCopyright 2011 Usability Dynamics, Inc. <info@usabilitydynamics.com>",
-            "line": " js/src/wpp.admin.global.js:331"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/src/wpp.admin.global.js:427"
-        },
-        {
-            "message": "Missing item type\nAdds new Row to the table",
-            "line": " js/src/wpp.admin.global.js:439"
-        },
-        {
-            "message": "Missing item type\nSlides down WP contextual help,\nand if 'wpp_scroll_to' attribute exists, scroll to it.",
-            "line": " js/src/wpp.admin.global.js:538"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/src/wpp.admin.global.js:599"
-        },
-        {
-            "message": "Missing item type\nSet unique IDs and FORs of DOM elements recursivly",
-            "line": " js/src/wpp.admin.global.js:616"
-        },
-        {
-            "message": "Missing item type\nDOCUMENT READY EVENTS AND ACTIONS",
-            "line": " js/src/wpp.admin.global.js:647"
-        },
-        {
-            "message": "Missing item type\nWP-Property Admin Settings page",
-            "line": " js/src/wpp.admin.settings.js:1"
-        },
-        {
-            "message": "Missing item type\nHandles data saving.\nOnly if we don't upload backup file!",
-            "line": " js/src/wpp.admin.settings.js:15"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/src/wpp.admin.settings.js:177"
-        },
-        {
-            "message": "Missing item type\nWP-Property Widgets Page\n\nThis file is included on widgets page.",
-            "line": " js/src/wpp.admin.widgets.js:1"
-        },
-        {
-            "message": "Missing item type\nInits Search Properties Widget form's functionality\nShould not be called directly: used by wpp.widgets.run()",
-            "line": " js/src/wpp.admin.widgets.js:14"
-        },
-        {
-            "message": "Missing item type\nInits Property Attributes Widget functionality\nShould not be called directly: used by wpp.widgets.run()",
-            "line": " js/src/wpp.admin.widgets.js:69"
-        },
-        {
-            "message": "Missing item type\nGoes through all wpp widgets and inits them",
-            "line": " js/src/wpp.admin.widgets.js:80"
-        },
-        {
-            "message": "Missing item type\nXMLI Scripts",
-            "line": " js/src/wpp.admin.xmli.js:1"
-        },
-        {
-            "message": "Missing item type\nInitializer.",
-            "line": " js/src/wpp.admin.xmli.js:22"
-        },
-        {
-            "message": "Missing item type\nSource Changed.",
-            "line": " js/src/wpp.admin.xmli.js:551"
-        },
-        {
-            "message": "Missing item type\nToggle loading icon at the top of the page.",
-            "line": " js/src/wpp.admin.xmli.js:587"
-        },
-        {
-            "message": "Missing item type\nToggle loading icon at the top of the page.",
-            "line": " js/src/wpp.admin.xmli.js:595"
-        },
-        {
-            "message": "Missing item type\nRebuild unique ID dropdown",
-            "line": " js/src/wpp.admin.xmli.js:603"
-        },
-        {
-            "message": "Missing item type\nAdd attribute and xPath rows based on matched tags from XML feed and avaialble attributes.",
-            "line": " js/src/wpp.admin.xmli.js:657"
-        },
-        {
-            "message": "Missing item type\nRemove any blank rows from table.",
-            "line": " js/src/wpp.admin.xmli.js:802"
-        },
-        {
-            "message": "Missing item type\nRan when any information regarding the source URL, type, or login information is chaged.\n\nVerifies source can be loaded and is valid.\nReturns matched_tags and stored in wpp_auto_matched_tags",
-            "line": " js/src/wpp.admin.xmli.js:829"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/src/wpp.admin.xmli.js:881"
-        },
-        {
-            "message": "Missing item type\nSets schedule_id for current DOM",
-            "line": " js/src/wpp.admin.xmli.js:962"
-        },
-        {
-            "message": "Missing item type\nSets schedule_id for current DOM",
-            "line": " js/src/wpp.admin.xmli.js:976"
-        },
-        {
-            "message": "Missing item type\nDisplay a message in the \"Action Bar\", below the Attribute Map",
-            "line": " js/src/wpp.admin.xmli.js:993"
-        },
-        {
-            "message": "Missing item type\nDisplay a message in the \"Raw Preview\" message section",
-            "line": " js/src/wpp.admin.xmli.js:1050"
-        },
-        {
-            "message": "Missing item type\nDisplay a message in the \"Raw Preview\" message section",
-            "line": " js/src/wpp.admin.xmli.js:1074"
-        },
-        {
-            "message": "Missing item type\nSets the status of the source URL in UI",
-            "line": " js/src/wpp.admin.xmli.js:1097"
-        },
-        {
-            "message": "Missing item type\nEnsure all necessary data for given source is filled in",
-            "line": " js/src/wpp.admin.xmli.js:1139"
-        },
-        {
-            "message": "Missing item type\nDisplays editor UI",
-            "line": " js/src/wpp.admin.xmli.js:1171"
-        },
-        {
-            "message": "Missing item type\nHandles functions and UI configurations when a major DOM change is made",
-            "line": " js/src/wpp.admin.xmli.js:1212"
-        },
-        {
-            "message": "Missing item type\nDisables, resets, and grays out an option",
-            "line": " js/src/wpp.admin.xmli.js:1250"
-        },
-        {
-            "message": "Missing item type\nEnables an option",
-            "line": " js/src/wpp.admin.xmli.js:1261"
-        },
-        {
-            "message": "Missing item type\nHandles functions and UI configurations when a major DOM change is made",
-            "line": " js/src/wpp.admin.xmli.js:1271"
-        },
-        {
-            "message": "Missing item type\nDetermine if \"Toggle Advanced Settings\" link should be displayed for this source type",
-            "line": " js/src/wpp.admin.xmli.js:1296"
-        },
-        {
-            "message": "Missing item type\nRan after the import editor screen is displayed",
-            "line": " js/src/wpp.admin.xmli.js:1342"
-        },
-        {
-            "message": "Missing item type\nFEPS Checkout step",
-            "line": " js/src/wpp.feps.checkout.js:1"
-        },
-        {
-            "message": "Missing item type",
-            "line": " js/src/wpp.feps.checkout.js:46"
-        },
-        {
-            "message": "Missing item type\nShows result of checkout process",
-            "line": " js/src/wpp.feps.checkout.js:78"
-        },
-        {
-            "message": "Missing item type\nFEPS SPC page",
-            "line": " js/src/wpp.feps.spc.js:1"
-        },
-        {
-            "message": "Missing item type\nFEPS Submit/Edit step",
-            "line": " js/src/wpp.feps.submit.js:1"
-        },
-        {
-            "message": "Missing item type\nFEPS Subscription plans step",
-            "line": " js/src/wpp.feps.subscription.js:1"
-        },
-        {
-            "message": "Missing item type\nWP-Property Global Scripts\n\nThis file is included on all front-end and specific back-end pages.",
-            "line": " js/src/wpp.global.js:1"
-        },
-        {
-            "message": "Missing item type\nFormatting Methods. (todo)",
-            "line": " js/src/wpp.global.js:58"
-        },
-        {
-            "message": "Missing item type\nFormat Currency",
-            "line": " js/src/wpp.global.js:64"
-        },
-        {
-            "message": "Missing item type\nFormat Number",
-            "line": " js/src/wpp.global.js:78"
-        },
-        {
-            "message": "Missing item type\nhttp://kevin.vanzonneveld.net\n+      original by: Philippe Jausions (http://pear.php.net/user/jausions)\n+      original by: Aidan Lister (http://aidanlister.com/)\n+ reimplemented by: Kankrelune (http://www.webfaktory.info/)\n+      improved by: Brett Zamir (http://brett-zamir.me)\n+      improved by: Scott Baker\n+      improved by: Theriault\n*        example 1: version_compare('8.2.5rc', '8.2.5a');\n*        returns 1: 1\n*        example 2: version_compare('8.2.50', '8.2.52', '<');\n*        returns 2: true\n*        example 3: version_compare('5.3.0-dev', '5.3.0');\n*        returns 3: -1\n*        example 4: version_compare('4.1.0.52','4.01.0.51');\n*        returns 4: 1",
-            "line": " js/src/wpp.global.js:122"
-        },
-        {
-            "message": "Missing item type\nLegacy Support",
-            "line": " js/src/wpp.global.js:241"
-        },
-        {
-            "message": "Missing item type\nLegacy Support",
-            "line": " js/src/wpp.global.js:251"
-        },
-        {
-            "message": "Missing item type\nLegacy Support",
-            "line": " js/src/wpp.global.js:261"
-        },
-        {
-            "message": "Missing item type\njQuery.ScrollTo - Easy element scrolling using jQuery.\nCopyright (c) 2007-2009 Ariel Flesler - aflesler(at)gmail(dot)com | http://flesler.blogspot.com\nDual licensed under MIT and GPL.\nDate: 5/25/2009",
-            "line": " js/jquery.scrollTo-min.js:1"
         }
     ]
 }

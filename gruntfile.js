@@ -175,6 +175,8 @@ module.exports = function( grunt ) {
           'lib/*.*',
           'scripts/*.*',
           'static/*.*',
+          'static/codex/*.*',
+          'static/codex/files/*.*',
           'styles/*.*',
           'templates/*.*',
           '*.*'
