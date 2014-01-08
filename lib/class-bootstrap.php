@@ -159,7 +159,9 @@ namespace UsabilityDynamics\WPP {
 
         // Load Default API and Template Functions.
         Template::load( 'default-api.php' );
+        //** Doesn't work */
         Template::load( 'template-functions.php' );
+        include_once WPP_Path.'/templates/template-functions.php';
 
         // Register activation hook -> has to be in the main plugin file
         register_activation_hook( __FILE__, array( &$this, 'activation' ) );
@@ -815,7 +817,7 @@ namespace UsabilityDynamics\WPP {
           }
         }
 
-        add_meta_box( 'propetry_filter', $wp_properties[ 'labels' ][ 'name' ] . ' ' . __( 'Search', 'wpp' ), array( 'WPP_UI', 'metabox_property_filter' ), 'property_page_all_properties', 'normal' );
+        add_meta_box( 'propetry_filter', $wp_properties[ 'labels' ][ 'name' ] . ' ' . __( 'Search', 'wpp' ), array( 'UsabilityDynamics\WPP\UI', 'metabox_property_filter' ), 'property_page_all_properties', 'normal' );
 
         // Add Metaboxes.
         do_action( 'wpp:metaboxes', $this );

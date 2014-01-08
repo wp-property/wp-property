@@ -249,7 +249,7 @@ namespace UsabilityDynamics\WPP {
                   $overview_thumb_type = 'thumbnail';
                 }
 
-                $image_thumb_obj = wpp_get_image_link( $post->featured_image, $overview_thumb_type, array( 'return' => 'array' ) );
+                $image_thumb_obj = \wpp_get_image_link( $post->featured_image, $overview_thumb_type, array( 'return' => 'array' ) );
 
               }
 
