@@ -133,8 +133,6 @@ namespace UsabilityDynamics\WPP {
         // Define Constants.
         $this->define_constants();
 
-
-
         // property_meta
         // location_matters
         // searchable_property_types
@@ -187,7 +185,7 @@ namespace UsabilityDynamics\WPP {
         add_filter( 'wpp_settings_save', array( &$this, 'check_wp_settings_data' ), 0, 2 );
 
         // Modify request to change feed
-        add_filter( 'request', 'property_feed' );
+        add_filter( 'request', array( &$this, 'property_feed' ) );
 
       }
 
@@ -204,6 +202,7 @@ namespace UsabilityDynamics\WPP {
           self::fail( 'WP-Property vendor directory missing; attempted to find it in: ' . dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'vendor/autoload.php' );
         }
 
+        // Vendor Autoloader.
         include_once( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'vendor/autoload.php' );
 
         // Legacy Support.
@@ -230,6 +229,29 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Add 'property' to the list of RSSable post_types.
+       *
+       * @param string $request
+       *
+       * @return string
+       * @author korotkov@ud
+       * @since 1.36.2
+       */
+      public function property_feed( $qv ) {
+
+        if( isset( $qv[ 'feed' ] ) && !isset( $qv[ 'post_type' ] ) ) {
+          $qv[ 'post_type' ] = get_post_types( $args = array(
+            'public'   => true,
+            '_builtin' => false
+          ) );
+          array_push( $qv[ 'post_type' ], 'post' );
+        }
+
+        return $qv;
+
+      }
+
+      /**
        * Run on plugin activation.
        *
        * As of WP 3.1 this is not ran on automatic update.
@@ -238,7 +260,7 @@ namespace UsabilityDynamics\WPP {
        *
        * @since 1.10
        */
-      public static function activation() {
+      public function activation() {
         global $wp_rewrite;
         // Do close to nothing because only ran on activation, not updates, as of 3.1
         // Now handled by Utility::manual_activation().
@@ -250,7 +272,7 @@ namespace UsabilityDynamics\WPP {
        * Plugin Deactivation
        *
        */
-      public static function deactivation() {
+      public function deactivation() {
         global $wp_rewrite;
         $timestamp = wp_next_scheduled( 'wpp_premium_feature_check' );
         wp_unschedule_event( $timestamp, 'wpp_premium_feature_check' );
@@ -268,7 +290,7 @@ namespace UsabilityDynamics\WPP {
        *
        * @param $data
        */
-      public static function fail( $data ) {
+      public function fail( $data ) {
         wp_die( '<h1>' . __( 'WP-Property Failure', 'wpp' ) . '</h1><p>' . $data . '</p>' );
       }
 
@@ -420,19 +442,15 @@ namespace UsabilityDynamics\WPP {
         add_action( 'wp_ajax_wpp_ajax_list_table', create_function( "", ' die(Utility::list_table());' ) );
         add_action( 'wp_ajax_wpp_save_settings', create_function( "", ' die(Utility::save_settings());' ) );
 
-        /** Ajax pagination for property_overview */
-        add_action( "wp_ajax_wpp_property_overview_pagination", array( $this, "ajax_property_overview" ) );
-        add_action( "wp_ajax_nopriv_wpp_property_overview_pagination", array( $this, "ajax_property_overview" ) );
-
         /** Localization */
-        add_action( "wp_ajax_wpp_js_localization", array( __CLASS__, "localize_scripts" ) );
-        add_action( "wp_ajax_nopriv_wpp_js_localization", array( __CLASS__, "localize_scripts" ) );
+        add_action( "wp_ajax_wpp_js_localization", array( &$this, "localize_scripts" ) );
+        add_action( "wp_ajax_nopriv_wpp_js_localization", array( &$this, "localize_scripts" ) );
 
         add_filter( "manage_edit-property_sortable_columns", array( &$this, "sortable_columns" ) );
         add_filter( "manage_edit-property_columns", array( &$this, "edit_columns" ) );
 
         /** Called in setup_postdata().  We add property values here to make available in global $post variable on frontend */
-        add_action( 'the_post', array( 'WPP_F', 'the_post' ) );
+        add_action( 'the_post', array( 'UsabilityDynamics\WPP\Utility', 'the_post' ) );
 
         add_action( "the_content", array( &$this, "the_content" ) );
 
@@ -563,7 +581,7 @@ namespace UsabilityDynamics\WPP {
         add_filter( 'wp_get_attachment_link', array( 'WPP_F', 'wp_get_attachment_link' ), 10, 6 );
 
         /** Load all shortcodes */
-        add_shortcode( 'property_overview', array( $this, 'shortcode_property_overview' ) );
+
         add_shortcode( 'property_search', array( $this, 'shortcode_property_search' ) );
         add_shortcode( 'featured_properties', array( $this, 'shortcode_featured_properties' ) );
         add_shortcode( 'property_map', array( $this, 'shortcode_property_map' ) );
@@ -795,7 +813,7 @@ namespace UsabilityDynamics\WPP {
        * @since 1.10
        *
        */
-      function admin_init() {
+      public function admin_init() {
         global $wp_properties, $post;
 
         Utility::fix_screen_options();
@@ -847,7 +865,7 @@ namespace UsabilityDynamics\WPP {
        * @global type $post
        * @global type $wpdb
        */
-      function add_meta_boxes() {
+      public function add_meta_boxes() {
         global $post, $wpdb;
 
         //** Add metabox for child properties */
@@ -861,7 +879,7 @@ namespace UsabilityDynamics\WPP {
        *
        * @return bool
        */
-      static function is_active() {
+      public function is_active() {
         return true;
       }
 
@@ -872,7 +890,7 @@ namespace UsabilityDynamics\WPP {
        * @since 0.624
        *
        */
-      static function load_premium() {
+      public function load_premium() {
         global $wp_properties;
 
         $default_headers = array(
@@ -964,7 +982,7 @@ namespace UsabilityDynamics\WPP {
        *
        * @return boolean.
        */
-      static function check_premium( $slug ) {
+      public function check_premium( $slug ) {
         global $wp_properties;
 
         if( empty( $wp_properties[ 'installed_features' ][ $slug ][ 'version' ] ) ) {
@@ -995,7 +1013,7 @@ namespace UsabilityDynamics\WPP {
        * @global array $wp_properties
        * @return null
        */
-      static function check_plugin_updates() {
+      public function check_plugin_updates() {
         global $wp_properties;
 
         $result = Utility::feature_check();
@@ -1019,7 +1037,7 @@ namespace UsabilityDynamics\WPP {
        * @version 1.13
        *
        */
-      static function manual_activation() {
+      public function manual_activation() {
 
         $installed_ver = get_option( "wpp_version", 0 );
         $wpp_version   = WPP_Version;
@@ -1054,7 +1072,7 @@ namespace UsabilityDynamics\WPP {
        * Moved from WPP_Legacy
        *
        */
-      static function upgrade() {
+      public function upgrade() {
         global $wpdb;
 
         $installed_ver = get_option( "wpp_version", 0 );
@@ -1089,7 +1107,7 @@ namespace UsabilityDynamics\WPP {
        * @since 0.60
        *
        */
-      static function plugin_action_links( $links, $file ) {
+      public function plugin_action_links( $links, $file ) {
 
         if( $file == 'wp-property/wp-property.php' ) {
           $settings_link = '<a href="' . admin_url( "edit.php?post_type=property&page=property_settings" ) . '">' . __( 'Settings', 'wpp' ) . '</a>';
@@ -1107,7 +1125,7 @@ namespace UsabilityDynamics\WPP {
        * @since 0.53
        *
        */
-      function admin_enqueue_scripts( $hook ) {
+      public function admin_enqueue_scripts( $hook ) {
         global $current_screen, $wp_properties, $wpdb;
 
         wp_localize_script( 'wpp-localization', 'wpp', array( 'instance' => $this->locale_instance() ) );
@@ -1269,7 +1287,7 @@ namespace UsabilityDynamics\WPP {
        *
        * @since 0.5
        */
-      static function admin_body_class( $admin_body_class ) {
+      public function admin_body_class( $admin_body_class ) {
         global $current_screen;
 
         $classes = explode( ' ', trim( $admin_body_class ) );
@@ -1301,7 +1319,7 @@ namespace UsabilityDynamics\WPP {
        *
        * @since 0.5
        */
-      static function parse_request( $query ) {
+      public function parse_request( $query ) {
         global $wp, $wp_query, $wp_properties, $wpdb;
 
         //** If we don't have permalinks, our base slug is always default */
@@ -1381,7 +1399,7 @@ namespace UsabilityDynamics\WPP {
        * @since 1.04
        *
        */
-      static function the_content( $content ) {
+      public function the_content( $content ) {
         global $post, $wp_properties, $wp_query;
 
         if( !isset( $wp_query->is_property_overview ) ) {
@@ -1522,7 +1540,7 @@ namespace UsabilityDynamics\WPP {
        * @since 1.04
        *
        */
-      static function post_submitbox_misc_actions() {
+      public function post_submitbox_misc_actions() {
         global $post, $wp_properties;
 
         if( $post->post_type == 'property' ) {
@@ -1557,7 +1575,8 @@ namespace UsabilityDynamics\WPP {
        * @since 0.5
        *
        */
-      static function property_row_actions( $actions, $post ) {
+      public function property_row_actions( $actions, $post ) {
+
         if( $post->post_type != 'property' )
           return $actions;
 
@@ -1573,7 +1592,7 @@ namespace UsabilityDynamics\WPP {
        * @since 0.5
        *
        */
-      static function property_updated_messages( $messages ) {
+      public function property_updated_messages( $messages ) {
         global $post_id, $post;
 
         $messages[ 'property' ] = array(
@@ -1607,7 +1626,7 @@ namespace UsabilityDynamics\WPP {
        * @access public
        *
        */
-      static function edit_columns( $columns ) {
+      public function edit_columns( $columns ) {
         global $wp_properties;
 
         unset( $columns );
@@ -1641,7 +1660,7 @@ namespace UsabilityDynamics\WPP {
        * @since 1.08
        *
        */
-      static function sortable_columns( $columns ) {
+      public function sortable_columns( $columns ) {
         global $wp_properties;
 
         $columns[ 'type' ]     = 'type';
@@ -1662,7 +1681,7 @@ namespace UsabilityDynamics\WPP {
        *
        * @since 0.7260
        */
-      static function properties_body_class( $classes ) {
+      public function properties_body_class( $classes ) {
         global $post, $wp_properties;
 
         if( strpos( $post->post_content, "property_overview" ) || ( is_search() && isset( $_REQUEST[ 'wpp_search' ] ) ) || ( $wp_properties[ 'configuration' ][ 'base_slug' ] == $post->post_name ) ) {
@@ -1680,7 +1699,7 @@ namespace UsabilityDynamics\WPP {
        *
        * @return array $wpp_settings
        */
-      static function check_wp_settings_data( $wpp_settings, $wp_properties ) {
+      public function check_wp_settings_data( $wpp_settings, $wp_properties ) {
         if( is_array( $wpp_settings ) && is_array( $wp_properties ) ) {
           foreach( (array) $wp_properties as $key => $value ) {
             if( !isset( $wpp_settings[ $key ] ) ) {
@@ -1701,7 +1720,7 @@ namespace UsabilityDynamics\WPP {
        * Hack to avoid issues with capabilities and views.
        *
        */
-      static function current_screen( $screen ) {
+      public function current_screen( $screen ) {
 
         // property_page_all_properties
         // property_page_property_settings
@@ -1723,7 +1742,7 @@ namespace UsabilityDynamics\WPP {
        *
        * @author peshkov@UD
        */
-      static function set_capabilities() {
+      public function set_capabilities() {
         global $wpp_capabilities;
 
         //* Get Administrator role for adding custom capabilities */
@@ -1771,7 +1790,7 @@ namespace UsabilityDynamics\WPP {
        * @since 1.37.3.2
        * @author peshkov@UD
        */
-      static function localize_scripts() {
+      public function localize_scripts() {
 
         $l10n = array();
 
@@ -1803,7 +1822,7 @@ namespace UsabilityDynamics\WPP {
        *
        * @author korotkov@ud
        */
-      static function wpp_contextual_help( $args = array() ) {
+      public function wpp_contextual_help( $args = array() ) {
         global $contextual_help;
 
         $args = Utility::parse_args( $args, array(
@@ -1824,7 +1843,7 @@ namespace UsabilityDynamics\WPP {
        * @since 1.38
        * @return array
        */
-      protected function locale_instance() {
+      public function locale_instance() {
         global $wp_properties;
 
         $data = array(
@@ -1858,7 +1877,7 @@ namespace UsabilityDynamics\WPP {
        * @author potanin@UD
        * @since 0.1.1
        */
-      public static function get( $key, $default = null ) {
+      public function get( $key, $default = null ) {
         return self::$instance->_settings ? self::$instance->_settings->get( $key, $default ) : null;
       }
 
@@ -1876,7 +1895,7 @@ namespace UsabilityDynamics\WPP {
        * @author potanin@UD
        * @since 0.1.1
        */
-      public static function set( $key, $value = null ) {
+      public function set( $key, $value = null ) {
         return self::$instance->_settings ? self::$instance->_settings->set( $key, $value ) : null;
       }
 
@@ -1896,7 +1915,7 @@ namespace UsabilityDynamics\WPP {
        * @method get_instance
        * @for WPP
        */
-      public static function &get_instance() {
+      public function &get_instance() {
         return self::$instance;
       }
 

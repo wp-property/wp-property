@@ -36,7 +36,25 @@ namespace UsabilityDynamics\WPP {
      */
     class Property_Overview extends \UsabilityDynamics\WPP\Shortcode {
 
-      function __construct( $atts = '', $content = '' ) {
+      function __construct( $atts = '' ) {
+
+        // Ajax pagination for property_overview
+        add_action( "wp_ajax_wpp_property_overview_pagination", array( &$this, "ajax_property_overview" ) );
+        add_action( "wp_ajax_nopriv_wpp_property_overview_pagination", array( &$this, "ajax_property_overview" ) );
+
+        add_shortcode( 'property_overview', array( &$this, 'shortcode_property_overview' ) );
+
+      }
+
+      /**
+       * The Actual Shortcode
+       *
+       * @param string $atts
+       * @param string $content
+       *
+       * @return mixed|string|void
+       */
+      public function shortcode( $atts = '', $content = '' ) {
         global $wp_properties, $wpp_query, $property, $post, $wp_query;
 
         \UsabilityDynamics\WPP\Utility::wp_enqueue_script( 'jquery-ui-widget' );

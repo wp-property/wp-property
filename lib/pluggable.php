@@ -74,29 +74,3 @@ if( !function_exists( 'wpp_recursive_unlink' ) ) {
   }
 }
 
-/**
- * Add 'property' to the list of RSSable post_types.
- *
- * @todo Why is this a stand-alone function?
- *
- * @param string $request
- *
- * @return string
- * @author korotkov@ud
- * @since 1.36.2
- */
-if( !function_exists( 'property_feed' ) ) {
-  function property_feed( $qv ) {
-
-    if( isset( $qv[ 'feed' ] ) && !isset( $qv[ 'post_type' ] ) ) {
-      $qv[ 'post_type' ] = get_post_types( $args = array(
-        'public'   => true,
-        '_builtin' => false
-      ) );
-      array_push( $qv[ 'post_type' ], 'post' );
-    }
-
-    return $qv;
-
-  }
-}
