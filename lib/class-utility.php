@@ -1933,7 +1933,7 @@ namespace UsabilityDynamics\WPP {
             sleep( $delay );
           }
 
-          $result = self::revalidate_address( $post_id, array( 'skip_existing' => $skip_existing, 'return_geo_data' => $return_geo_data ) );
+          $result = Listing::revalidate_address( $post_id, array( 'skip_existing' => $skip_existing, 'return_geo_data' => $return_geo_data ) );
 
           $return[ $result[ 'status' ] ][ ] = $post_id;
 
@@ -1990,138 +1990,6 @@ namespace UsabilityDynamics\WPP {
           return $return;
         }
 
-      }
-
-      /**
-       * Address validation function
-       *
-       * Since 1.37.2 extracted from save_property and revalidate_all_addresses to make same functionality
-       *
-       * @global array  $wp_properties
-       *
-       * @param integer $post_id
-       * @param array   $args
-       *
-       * @return array
-       * @since 1.37.2
-       * @author odokienko@UD
-       */
-      static function revalidate_address( $post_id, $args = array() ) {
-        global $wp_properties;
-
-        $args = wp_parse_args( $args, array(
-          'skip_existing'   => 'false',
-          'return_geo_data' => false,
-        ) );
-
-        extract( $args, EXTR_SKIP );
-        $skip_existing   = isset( $skip_existing ) ? $skip_existing : 'false';
-        $return_geo_data = isset( $return_geo_data ) ? $return_geo_data : false;
-
-        $return = array();
-
-        $geo_data             = false;
-        $geo_data_coordinates = false;
-        $latitude             = get_post_meta( $post_id, 'latitude', true );
-        $longitude            = get_post_meta( $post_id, 'longitude', true );
-        $current_coordinates  = $latitude . $longitude;
-        $address_is_formatted = get_post_meta( $post_id, 'address_is_formatted', true );
-
-        $address = get_post_meta( $post_id, $wp_properties[ 'configuration' ][ 'address_attribute' ], true );
-
-        $coordinates = ( empty( $latitude ) || empty( $longitude ) ) ? "" : array( 'lat' => get_post_meta( $post_id, 'latitude', true ), 'lng' => get_post_meta( $post_id, 'longitude', true ) );
-
-        if( $skip_existing == 'true' && !empty( $current_coordinates ) && in_array( $address_is_formatted, array( '1', 'true' ) ) ) {
-          $return[ 'status' ] = 'skipped';
-
-          return $return;
-        }
-
-        if( !( empty( $coordinates ) && empty( $address ) ) ) {
-
-          /* will be true if address is empty and used manual_coordinates and coordinates is not empty */
-          $manual_coordinates = get_post_meta( $post_id, 'manual_coordinates', true );
-          $manual_coordinates = ( $manual_coordinates != 'true' && $manual_coordinates != '1' ) ? false : true;
-
-          $address_by_coordinates = !empty( $coordinates ) && $manual_coordinates && empty( $address );
-
-          if( !empty( $address ) ) {
-            $geo_data = self::geo_locate_address( $address, $wp_properties[ 'configuration' ][ 'google_maps_localization' ], true );
-          }
-
-          if( !empty( $coordinates ) && $manual_coordinates ) {
-            $geo_data_coordinates = self::geo_locate_address( $address, $wp_properties[ 'configuration' ][ 'google_maps_localization' ], true, $coordinates );
-          }
-
-          /** if Address was invalid or empty but we have valid $coordinates we use them */
-          if( !empty( $geo_data_coordinates->formatted_address ) && ( $address_by_coordinates || empty( $geo_data->formatted_address ) ) ) {
-            $geo_data = $geo_data_coordinates;
-            /** clean up $address to remember that addres was empty or invalid*/
-            $address = '';
-          }
-
-          if( empty( $geo_data ) ) {
-            $return[ 'status' ] = 'empty_address';
-          }
-
-        }
-
-        if( !empty( $geo_data->formatted_address ) ) {
-
-          foreach( (array) $wp_properties[ 'geo_type_attributes' ] + array( 'display_address' ) as $meta_key ) {
-            delete_post_meta( $post_id, $meta_key );
-          }
-
-          update_post_meta( $post_id, 'address_is_formatted', true );
-
-          if( !empty( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) && ( !$manual_coordinates || $address_by_coordinates ) ) {
-            update_post_meta( $post_id, $wp_properties[ 'configuration' ][ 'address_attribute' ], self::encode_mysql_input( $geo_data->formatted_address, $wp_properties[ 'configuration' ][ 'address_attribute' ] ) );
-          }
-
-          foreach( $geo_data as $geo_type => $this_data ) {
-            if( in_array( $geo_type, (array) $wp_properties[ 'geo_type_attributes' ] ) && !in_array( $geo_type, array( 'latitude', 'longitude' ) ) ) {
-              update_post_meta( $post_id, $geo_type, self::encode_mysql_input( $this_data, $geo_type ) );
-            }
-          }
-
-          update_post_meta( $post_id, 'wpp::last_address_validation', time() );
-
-          update_post_meta( $post_id, 'latitude', $manual_coordinates ? $coordinates[ 'lat' ] : $geo_data->latitude );
-          update_post_meta( $post_id, 'longitude', $manual_coordinates ? $coordinates[ 'lng' ] : $geo_data->longitude );
-
-          if( $return_geo_data ) {
-            $return[ 'geo_data' ] = $geo_data;
-          }
-
-          $return[ 'status' ] = 'updated';
-
-        }
-
-        //** Logs the last validation status for better troubleshooting */
-        update_post_meta( $post_id, 'wpp::google_validation_status', $geo_data->status );
-
-        // Try to figure out what went wrong
-        if( !empty( $geo_data->status ) && ( $geo_data->status == 'OVER_QUERY_LIMIT' || $geo_data->status == 'REQUEST_DENIED' ) ) {
-          $return[ 'status' ] = 'over_query_limit';
-        } elseif( empty( $address ) && empty( $geo_data ) ) {
-
-          foreach( (array) $wp_properties[ 'geo_type_attributes' ] + array( 'display_address' ) as $meta_key ) {
-            delete_post_meta( $post_id, $meta_key );
-          }
-
-          $return[ 'status' ] = 'empty_address';
-          update_post_meta( $post_id, 'address_is_formatted', false );
-        } elseif( empty( $return[ 'status' ] ) ) {
-          $return[ 'status' ] = 'failed';
-          update_post_meta( $post_id, 'address_is_formatted', false );
-        }
-
-        //** Neccessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
-        if( !metadata_exists( 'post', $post_id, 'exclude_from_supermap' ) ) {
-          add_post_meta( $post_id, 'exclude_from_supermap', 'false' );
-        }
-
-        return $return;
       }
 
       /**
@@ -4596,43 +4464,6 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       * Updates parent ID.
-       * Determines if parent exists and it doesn't have own parent.
-       *
-       * @param integer $parent_id
-       * @param integer $post_id
-       *
-       * @return int
-       * @author peshkov@UD
-       * @since 1.37.5
-       */
-      static function update_parent_id( $parent_id, $post_id ) {
-        global $wpdb, $wp_properties;
-
-        $parent_id = !empty( $parent_id ) ? $parent_id : 0;
-
-        $post = get_post( $_REQUEST[ 'parent_id' ] );
-
-        if( !$post ) {
-          $parent_id = 0;
-        } else {
-          if( $post->post_parent > 0 ) {
-            if( empty( $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] ) || $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] != 'true' ) {
-              $parent_id = 0;
-            }
-          }
-        }
-
-        if( $parent_id == 0 ) {
-          $wpdb->query( "UPDATE {$wpdb->posts} SET post_parent=0 WHERE ID={$post_id}" );
-        }
-
-        update_post_meta( $post_id, 'parent_gpid', self::maybe_set_gpid( $parent_id ) );
-
-        return $parent_id;
-      }
-
-      /**
        * Returns property object for displaying on map
        *
        * Used for speeding up property queries, only returns:
@@ -4705,64 +4536,6 @@ namespace UsabilityDynamics\WPP {
         }
 
         return $return;
-
-      }
-
-      /**
-       * Generates Global Property ID for standard reference point during imports.
-       *
-       * Property ID is currently not used.
-       *
-       * @return integer. Global ID number
-       *
-       * @param bool|int $property_id . Property ID.
-       *
-       * @param bool     $check_existance
-       *
-       * @todo API call to UD server to verify there is no duplicates
-       * @since 1.6
-       */
-      static function get_gpid( $property_id = false, $check_existance = false ) {
-
-        if( $check_existance && $property_id ) {
-          $exists = get_post_meta( $property_id, 'wpp_gpid', true );
-
-          if( $exists ) {
-            return $exists;
-          }
-        }
-
-        return 'gpid_' . rand( 1000000000, 9999999999 );
-
-      }
-
-      /**
-       * Generates Global Property ID if it does not exist
-       *
-       * @param bool $property_id
-       *
-       * @return string | Returns GPID
-       * @since 1.6
-       */
-      static function maybe_set_gpid( $property_id = false ) {
-
-        if( !$property_id ) {
-          return false;
-        }
-
-        $exists = get_post_meta( $property_id, 'wpp_gpid', true );
-
-        if( $exists ) {
-          return $exists;
-        }
-
-        $gpid = self::get_gpid( $property_id, true );
-
-        update_post_meta( $property_id, 'wpp_gpid', $gpid );
-
-        return $gpid;
-
-        return false;
 
       }
 

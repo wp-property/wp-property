@@ -460,7 +460,7 @@ namespace UsabilityDynamics\WPP {
         add_action( "admin_menu", array( &$this, 'admin_menu' ) );
 
         add_action( "post_submitbox_misc_actions", array( &$this, "post_submitbox_misc_actions" ) );
-        add_action( 'save_post', array( &$this, 'save_property' ) );
+        add_action( 'save_post', array( 'UsabilityDynamics\WPP\Listing', 'save' ) );
 
         add_action( 'before_delete_post', array( 'UsabilityDynamics\WPP\Utility', 'before_delete_post' ) );
         add_filter( 'post_updated_messages', array( &$this, 'property_updated_messages' ), 5 );
@@ -1421,117 +1421,6 @@ namespace UsabilityDynamics\WPP {
         }
 
         return $content;
-      }
-
-      /**
-       * Hooks into save_post function and saves additional property data
-       *
-       *
-       * @todo Add some sort of custom capability so not only admins can make properties as featured. i.e. Agents can make their own properties featured.
-       * @since 1.04
-       */
-      public function save_property( $post_id ) {
-        global $wp_properties, $wp_version;
-
-        $_wpnonce = ( version_compare( $wp_version, '3.5', '>=' ) ? 'update-post_' : 'update-property_' ) . $post_id;
-
-        if( !wp_verify_nonce( $_POST[ '_wpnonce' ], $_wpnonce ) || $_POST[ 'post_type' ] !== 'property' ) {
-          return $post_id;
-        }
-
-        //* Delete cache files of search values for search widget's form */
-        $directory = WPP_Path . 'cache/searchwidget';
-
-        if( is_dir( $directory ) ) {
-          $dir = opendir( $directory );
-          while( ( $cachefile = readdir( $dir ) ) ) {
-            if( is_file( $directory . "/" . $cachefile ) ) {
-              unlink( $directory . "/" . $cachefile );
-            }
-          }
-        }
-
-        if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-          return $post_id;
-        }
-
-        $update_data = $_REQUEST[ 'wpp_data' ][ 'meta' ];
-
-        //** Neccessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
-        if( empty( $_REQUEST[ 'exclude_from_supermap' ] ) ) {
-          if( !metadata_exists( 'post', $post_id, 'exclude_from_supermap' ) ) {
-            $update_data[ 'exclude_from_supermap' ] = 'false';
-          }
-        }
-
-        if( (float) $update_data[ 'latitude' ] == 0 ) $update_data[ 'latitude' ] = '';
-        if( (float) $update_data[ 'longitude' ] == 0 ) $update_data[ 'longitude' ] = '';
-
-        /* get old coordinates and location */
-        $old_lat  = get_post_meta( $post_id, 'latitude', true );
-        $old_lng  = get_post_meta( $post_id, 'longitude', true );
-        $geo_data = array(
-          'old_coordinates' => ( ( empty( $old_lat ) ) || ( empty( $old_lng ) ) ) ? "" : array( 'lat' => $old_lat, 'lng' => $old_lng ),
-          'old_location'    => ( !empty( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) ) ? get_post_meta( $post_id, $wp_properties[ 'configuration' ][ 'address_attribute' ], true ) : ''
-        );
-
-        foreach( (array) $update_data as $meta_key => $meta_value ) {
-          $attribute_data = Utility::get_attribute_data( $meta_key );
-
-          //* Cleans the user input */
-          $meta_value = Utility::encode_mysql_input( $meta_value, $meta_key );
-
-          //* Only admins can mark properties as featured. */
-          if( $meta_key == 'featured' && !current_user_can( 'manage_options' ) ) {
-            //** But be sure that meta 'featured' exists at all */
-            if( !metadata_exists( 'post', $post_id, $meta_key ) ) {
-              $meta_value = 'false';
-            } else {
-              continue;
-            }
-          }
-
-          //* Remove certain characters */
-
-          if( $attribute_data[ 'currency' ] || $attribute_data[ 'numeric' ] ) {
-            $meta_value = str_replace( array( "$", "," ), '', $meta_value );
-          }
-
-          //* Overwrite old post meta allowing only one value */
-          delete_post_meta( $post_id, $meta_key );
-          add_post_meta( $post_id, $meta_key, $meta_value );
-        }
-
-        //* Check if property has children */
-        $children = get_children( "post_parent=$post_id&post_type=property" );
-
-        //* Write any data to children properties that are supposed to inherit things */
-        if( count( $children ) > 0 ) {
-          foreach( (array) $children as $child_id => $child_data ) {
-            //* Determine child property_type */
-            $child_property_type = get_post_meta( $child_id, 'property_type', true );
-            //* Check if child's property type has inheritence rules, and if meta_key exists in inheritance array */
-            if( is_array( $wp_properties[ 'property_inheritance' ][ $child_property_type ] ) ) {
-              foreach( (array) $wp_properties[ 'property_inheritance' ][ $child_property_type ] as $i_meta_key ) {
-                $parent_meta_value = get_post_meta( $post_id, $i_meta_key, true );
-                //* inheritance rule exists for this property_type for this meta_key */
-                update_post_meta( $child_id, $i_meta_key, $parent_meta_value );
-              }
-            }
-          }
-        }
-
-        Utility::maybe_set_gpid( $post_id );
-
-        if( isset( $_REQUEST[ 'parent_id' ] ) ) {
-          $_REQUEST[ 'parent_id' ] = Utility::update_parent_id( $_REQUEST[ 'parent_id' ], $post_id );
-        }
-
-        Utility::revalidate_address($post_id);
-
-        do_action( 'wpp:save_property', $post_id, $this );
-
-        return true;
       }
 
       /**
