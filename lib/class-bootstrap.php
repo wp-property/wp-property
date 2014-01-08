@@ -520,7 +520,7 @@ namespace UsabilityDynamics\WPP {
         wp_register_script( 'wpp-jquery-scrollTo', WPP_URL . 'scripts/jquery.scrollTo-min.js', array( 'jquery', 'wpp.localization' ) );
         wp_register_script( 'wpp-jquery-validate', WPP_URL . 'scripts/jquery.validate.js', array( 'jquery', 'wpp.localization' ) );
         wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'scripts/jquery.number.format.js', array( 'jquery', 'wpp.localization' ) );
-        wp_register_script( 'wpp-jquery-data-tables', WPP_URL . "third-party/dataTables/jquery.dataTables.js", array( 'jquery', 'wpp.localization' ) );
+        wp_register_script( 'wpp-jquery-data-tables', WPP_URL . "vendor/datatables/datatables/media/js/jquery.dataTables.js", array( 'jquery', 'wpp.localization' ) );
         wp_register_script( 'jquery-cookie', WPP_URL . 'scripts/jquery.smookie.js', array( 'jquery', 'wpp.localization' ), '1.7.3' );
         wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?sensor=true' );
 
