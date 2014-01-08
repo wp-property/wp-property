@@ -6,6 +6,14 @@
  *
  */
 
+add_action( 'wpp:init:pre', function( $context ) {
+  do_action( 'wpp_pre_init', $context );
+});
+
+add_action( 'wpp:init', function( $context ) {
+  do_action( 'wpp_init', $context );
+});
+
 add_action( 'wpp:metaboxes', function( $context ) {
   do_action( 'wpp_metaboxes', $context  );
 });

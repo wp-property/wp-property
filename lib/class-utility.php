@@ -31,9 +31,9 @@ namespace UsabilityDynamics\WPP {
       static function load_template( $name, $args = array() ) {
 
         $args = (object) wp_parse_args( $args, array(
-          'once' => false,
+          'once'   => false,
           'prefix' => 'property-',
-        ));
+        ) );
 
         // Add prefix if not already there.
         if( strpos( $name, $args->prefix ) !== 0 ) {
@@ -61,6 +61,7 @@ namespace UsabilityDynamics\WPP {
        * @since 2.0.0
        *
        * @param bool $name
+       *
        * @return bool
        */
       static function locate_template( $name = false ) {
@@ -509,121 +510,6 @@ namespace UsabilityDynamics\WPP {
         if( $type == 'singular' ) {
           return ( $wp_post_types[ 'property' ]->labels->singular_name ? $wp_post_types[ 'property' ]->labels->singular_name : __( 'Property', 'wpp' ) );
         }
-
-      }
-
-      /**
-       * Registers post types and taxonomies.
-       *
-       * @since 1.31.0
-       *
-       */
-      static function register_post_type_and_taxonomies() {
-        global $wp_properties;
-
-        // Setup taxonomies
-        $wp_properties[ 'taxonomies' ] = apply_filters( 'wpp_taxonomies', array(
-          'property_feature'  => array(
-            'hierarchical' => false,
-            'label'        => _x( 'Features', 'taxonomy general name', 'wpp' ),
-            'labels'       => array(
-              'name'              => _x( 'Features', 'taxonomy general name', 'wpp' ),
-              'singular_name'     => _x( 'Feature', 'taxonomy singular name', 'wpp' ),
-              'search_items'      => __( 'Search Features', 'wpp' ),
-              'all_items'         => __( 'All Features', 'wpp' ),
-              'parent_item'       => __( 'Parent Feature', 'wpp' ),
-              'parent_item_colon' => __( 'Parent Feature:', 'wpp' ),
-              'edit_item'         => __( 'Edit Feature', 'wpp' ),
-              'update_item'       => __( 'Update Feature', 'wpp' ),
-              'add_new_item'      => __( 'Add New Feature', 'wpp' ),
-              'new_item_name'     => __( 'New Feature Name', 'wpp' ),
-              'menu_name'         => __( 'Feature', 'wpp' )
-            ),
-            'query_var'    => 'property_feature',
-            'rewrite'      => array( 'slug' => 'feature' )
-          ),
-          'community_feature' => array(
-            'hierarchical' => false,
-            'label'        => _x( 'Community Features', 'taxonomy general name', 'wpp' ),
-            'labels'       => array(
-              'name'              => _x( 'Community Features', 'taxonomy general name', 'wpp' ),
-              'singular_name'     => _x( 'Community Feature', 'taxonomy singular name', 'wpp' ),
-              'search_items'      => __( 'Search Community Features', 'wpp' ),
-              'all_items'         => __( 'All Community Features', 'wpp' ),
-              'parent_item'       => __( 'Parent Community Feature', 'wpp' ),
-              'parent_item_colon' => __( 'Parent Community Feature:', 'wpp' ),
-              'edit_item'         => __( 'Edit Community Feature', 'wpp' ),
-              'update_item'       => __( 'Update Community Feature', 'wpp' ),
-              'add_new_item'      => __( 'Add New Community Feature', 'wpp' ),
-              'new_item_name'     => __( 'New Community Feature Name', 'wpp' ),
-              'menu_name'         => __( 'Community Feature', 'wpp' )
-            ),
-            'query_var'    => 'community_feature',
-            'rewrite'      => array( 'slug' => 'community_feature' )
-          )
-        ) );
-
-        $wp_properties[ 'labels' ] = apply_filters( 'wpp_object_labels', array(
-          'name'               => __( 'Properties', 'wpp' ),
-          'all_items'          => __( 'All Properties', 'wpp' ),
-          'singular_name'      => __( 'Property', 'wpp' ),
-          'add_new'            => __( 'Add Property', 'wpp' ),
-          'add_new_item'       => __( 'Add New Property', 'wpp' ),
-          'edit_item'          => __( 'Edit Property', 'wpp' ),
-          'new_item'           => __( 'New Property', 'wpp' ),
-          'view_item'          => __( 'View Property', 'wpp' ),
-          'search_items'       => __( 'Search Properties', 'wpp' ),
-          'not_found'          => __( 'No properties found', 'wpp' ),
-          'not_found_in_trash' => __( 'No properties found in Trash', 'wpp' ),
-          'parent_item_colon'  => ''
-        ) );
-
-        // Register custom post types
-        register_post_type( 'property', array(
-          'labels'              => $wp_properties[ 'labels' ],
-          'public'              => true,
-          'exclude_from_search' => $wp_properties[ 'configuration' ][ 'include_in_regular_search_results' ] == 'true' ? false : true,
-          'show_ui'             => true,
-          '_edit_link'          => 'post.php?post=%d',
-          'capability_type'     => array( 'wpp_property', 'wpp_properties' ),
-          'hierarchical'        => true,
-          'rewrite'             => array(
-            'slug' => $wp_properties[ 'configuration' ][ 'base_slug' ]
-          ),
-          'query_var'           => $wp_properties[ 'configuration' ][ 'base_slug' ],
-          'supports'            => array( 'title', 'editor', 'thumbnail', 'comments' ),
-          'menu_icon'           => WPP_URL . 'images/pp_menu-1.6.png'
-        ) );
-
-        if( $wp_properties[ 'taxonomies' ] ) {
-
-          foreach( $wp_properties[ 'taxonomies' ] as $taxonomy => $taxonomy_data ) {
-
-            //** Check if taxonomy is disabled */
-            if( isset( $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] ) &&
-              is_array( $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] ) &&
-              in_array( $taxonomy, $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] )
-            ) {
-              continue;
-            }
-
-            register_taxonomy( $taxonomy, 'property', array(
-              'hierarchical' => $taxonomy_data[ 'hierarchical' ],
-              'label'        => $taxonomy_data[ 'label' ],
-              'labels'       => $taxonomy_data[ 'labels' ],
-              'query_var'    => $taxonomy,
-              'rewrite'      => array( 'slug' => $taxonomy ),
-              'capabilities' => array(
-                'manage_terms' => 'manage_wpp_categories',
-                'edit_terms'   => 'manage_wpp_categories',
-                'delete_terms' => 'manage_wpp_categories',
-                'assign_terms' => 'manage_wpp_categories'
-              )
-            ) );
-          }
-        }
-
-        register_taxonomy_for_object_type( 'property_features', 'property' );
 
       }
 
@@ -2631,6 +2517,11 @@ namespace UsabilityDynamics\WPP {
 
       }
 
+      /**
+       * @param $columns
+       *
+       * @return mixed
+       */
       static function custom_attribute_columns( $columns ) {
         global $wp_properties;
 
