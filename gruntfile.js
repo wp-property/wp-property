@@ -182,25 +182,6 @@ module.exports = function( grunt ) {
           ]
         }
 
-      },
-      master: {
-        options: {
-          message: 'Automatic push.',
-          branch: 'master'
-        },
-        files: {
-          src: [
-            'images/*.*',
-            'languages/*.*',
-            'lib/*.*',
-            'scripts/*.*',
-            'static/*.*',
-            'styles/*.*',
-            'templates/*.*',
-            '*.*'
-          ]
-        }
-
       }
     },
 
@@ -255,10 +236,10 @@ module.exports = function( grunt ) {
   grunt.registerTask( 'make-distribution', [ 'markdown', 'less', 'yuidoc', 'uglify' ] );
 
   // Prepare and Push to Git.
-  grunt.registerTask( 'push', [ 'clean:temp', 'markdown', 'less', 'yuidoc', 'uglify', 'gitcommit:development', 'gitpush:development'  ] );
+  grunt.registerTask( 'push', [ 'clean:temp', 'markdown', 'less', 'yuidoc', 'uglify', 'gitcommit', 'gitpush:development'  ] );
 
   // Prepare and Push to Git master.
-  grunt.registerTask( 'push-master', [ 'clean:temp', 'markdown', 'less', 'yuidoc', 'uglify', 'gitcommit:master', 'gitpush:master'  ] );
+  grunt.registerTask( 'push-master', [ 'clean:temp', 'markdown', 'less', 'yuidoc', 'uglify', 'gitcommit', 'gitpush:master'  ] );
 
   // Development Mode.
   grunt.registerTask( 'dev', [ 'symlink:dev', 'watch' ] );
