@@ -3884,7 +3884,7 @@ namespace UsabilityDynamics\WPP {
           $return[ 'address' ] = $return[ 'location' ];
         }
 
-        $return[ 'wpp_gpid' ]  = self::maybe_set_gpid( $id );
+        $return[ 'wpp_gpid' ]  = Listing::maybe_set_gpid( $id );
         $return[ 'permalink' ] = get_permalink( $id );
 
         //** Make sure property_type stays as slug, or it will break many things:  (widgets, class names, etc)  */
@@ -4488,7 +4488,7 @@ namespace UsabilityDynamics\WPP {
         $sColumns = explode( ",", $sColumns );
 
         //* Init table object */
-        $wp_list_table = new WPP_Object_List_Table( array(
+        $wp_list_table = new Object_List_Table( array(
           "ajax"           => true,
           "per_page"       => $per_page,
           "iDisplayStart"  => $iDisplayStart,

@@ -432,7 +432,7 @@ namespace UsabilityDynamics\WPP {
         add_action( 'wp_ajax_wpp_ajax_check_plugin_updates', create_function( "", '  echo Utility::check_plugin_updates(); die();' ) );
         add_action( 'wp_ajax_wpp_ajax_clear_cache', create_function( "", '  echo Utility::clear_cache(); die();' ) );
         add_action( 'wp_ajax_wpp_ajax_revalidate_all_addresses', create_function( "", '  echo Utility::revalidate_all_addresses(); die();' ) );
-        add_action( 'wp_ajax_wpp_ajax_list_table', create_function( "", ' die(Utility::list_table());' ) );
+        add_action( 'wp_ajax_wpp_ajax_list_table', create_function( "", ' die(UsabilityDynamics\WPP\Utility::list_table());' ) );
         add_action( 'wp_ajax_wpp_save_settings', create_function( "", ' die(Utility::save_settings());' ) );
 
         /** Localization */
