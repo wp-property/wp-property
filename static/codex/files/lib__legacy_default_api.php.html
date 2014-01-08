@@ -103,237 +103,24 @@
  * @since 0.0.1
  * @class wpp_default_api
  */
-class wpp_default_api {
 
-  /**
-   * Loader for WPP API functions.
-   *
-   * @version 1.25.0
-   */
-  static function plugins_loaded() {
+/**
+ * Loader for WPP API functions.
+ *
+ * @version 1.25.0
+ */
+add_filter( &#x27;init&#x27;, function () {
 
-    //** Load API towards the end of init */
-    add_filter( &#x27;init&#x27;, array( &#x27;wpp_default_api&#x27;, &#x27;init&#x27; ), 0, 30 );
+  //** Load API towards the end of init */
+  global $shortcode_tags;
 
+  $shortcodes = array_keys( (array) $shortcode_tags );
+
+  if( !in_array( &#x27;list-attachments&#x27;, $shortcodes ) ) {
+    add_shortcode( &#x27;list_attachments&#x27;, &#x27;wpp_list_attachments&#x27; );
   }
 
-  /**
-   * Loader for WPP API functions.
-   *
-   * @version 1.25.0
-   */
-  static function init() {
-    global $shortcode_tags;
-
-    $shortcodes = array_keys( (array) $shortcode_tags );
-
-    //** Load list-attachments shortcode if the List Attachments Shortcode plugin does not exist */
-    if( !in_array( &#x27;list-attachments&#x27;, $shortcodes ) ) {
-      add_shortcode( &#x27;list_attachments&#x27;, array( &#x27;wpp_default_api&#x27;, &#x27;list_attachments&#x27; ) );
-    }
-
-  }
-
-  /**
-   * Display list of attached files to a s post.
-   *
-   * Function ported over from List Attachments Shortcode plugin.
-   *
-   * @version 1.25.0
-   */
-  static function list_attachments( $atts = array() ) {
-    global $post, $wp_query;
-
-    $r = &#x27;&#x27;;
-
-    if( !is_array( $atts ) ) {
-      $atts = array();
-    }
-
-    $defaults = array(
-      &#x27;type&#x27;                 =&gt; NULL,
-      &#x27;orderby&#x27;              =&gt; NULL,
-      &#x27;groupby&#x27;              =&gt; NULL,
-      &#x27;order&#x27;                =&gt; NULL,
-      &#x27;post_id&#x27;              =&gt; false,
-      &#x27;before_list&#x27;          =&gt; &#x27;&#x27;,
-      &#x27;after_list&#x27;           =&gt; &#x27;&#x27;,
-      &#x27;opening&#x27;              =&gt; &#x27;&lt;ul class=&quot;attachment-list wpp_attachment_list&quot;&gt;&#x27;,
-      &#x27;closing&#x27;              =&gt; &#x27;&lt;/ul&gt;&#x27;,
-      &#x27;before_item&#x27;          =&gt; &#x27;&lt;li&gt;&#x27;,
-      &#x27;after_item&#x27;           =&gt; &#x27;&lt;/li&gt;&#x27;,
-      &#x27;show_descriptions&#x27;    =&gt; true,
-      &#x27;include_icon_classes&#x27; =&gt; true,
-      &#x27;showsize&#x27;             =&gt; false
-    );
-
-    $atts = array_merge( $defaults, $atts );
-
-    if( isset( $atts[ &#x27;post_id&#x27; ] ) &amp;&amp; is_numeric( $atts[ &#x27;post_id&#x27; ] ) ) {
-      $post = get_post( $atts[ &#x27;post_id&#x27; ] );
-    }
-
-    if( !$post ) {
-      return;
-    }
-
-    if( !empty( $atts[ &#x27;type&#x27; ] ) ) {
-      $types = explode( &#x27;,&#x27;, str_replace( &#x27; &#x27;, &#x27;&#x27;, $atts[ &#x27;type&#x27; ] ) );
-    } else {
-      $types = array();
-    }
-
-    $showsize   = ( $atts[ &#x27;showsize&#x27; ] == true || $atts[ &#x27;showsize&#x27; ] == &#x27;true&#x27; || $atts[ &#x27;showsize&#x27; ] == 1 ) ? true : false;
-    $upload_dir = wp_upload_dir();
-
-    $op = clone $post;
-    $oq = clone $wp_query;
-
-    foreach( array( &#x27;before_list&#x27;, &#x27;after_list&#x27;, &#x27;opening&#x27;, &#x27;closing&#x27;, &#x27;before_item&#x27;, &#x27;after_item&#x27; ) as $htmlItem ) {
-      $atts[ $htmlItem ] = str_replace( array( &#x27;&amp;lt;&#x27;, &#x27;&amp;gt;&#x27; ), array( &#x27;&lt;&#x27;, &#x27;&gt;&#x27; ), $atts[ $htmlItem ] );
-    }
-
-    $args = array(
-      &#x27;post_type&#x27;   =&gt; &#x27;attachment&#x27;,
-      &#x27;numberposts&#x27; =&gt; -1,
-      &#x27;post_status&#x27; =&gt; null,
-      &#x27;post_parent&#x27; =&gt; $post-&gt;ID,
-    );
-
-    if( !empty( $atts[ &#x27;orderby&#x27; ] ) ) {
-      $args[ &#x27;orderby&#x27; ] = $atts[ &#x27;orderby&#x27; ];
-    }
-    if( !empty( $atts[ &#x27;order&#x27; ] ) ) {
-      $atts[ &#x27;order&#x27; ] = ( in_array( $atts[ &#x27;order&#x27; ], array( &#x27;a&#x27;, &#x27;asc&#x27;, &#x27;ascending&#x27; ) ) ) ? &#x27;asc&#x27; : &#x27;desc&#x27;;
-      $args[ &#x27;order&#x27; ] = $atts[ &#x27;order&#x27; ];
-    }
-    if( !empty( $atts[ &#x27;groupby&#x27; ] ) ) {
-      $args[ &#x27;orderby&#x27; ] = $atts[ &#x27;groupby&#x27; ];
-    }
-
-    $attachments = get_posts( $args );
-
-    if( $attachments ) {
-      $grouper = $atts[ &#x27;groupby&#x27; ];
-      $test    = $attachments;
-      $test    = array_shift( $test );
-      if( !property_exists( $test, $grouper ) ) {
-        $grouper = &#x27;post_&#x27; . $grouper;
-      }
-
-      $attlist = array();
-
-      foreach( $attachments as $att ) {
-        $key = ( !empty( $atts[ &#x27;groupby&#x27; ] ) ) ? $att-&gt;$grouper : $att-&gt;ID;
-        $key .= ( !empty( $atts[ &#x27;orderby&#x27; ] ) ) ? $att-&gt;$atts[ &#x27;orderby&#x27; ] : &#x27;&#x27;;
-
-        $attlink = wp_get_attachment_url( $att-&gt;ID );
-
-        if( count( $types ) ) {
-          foreach( $types as $t ) {
-            if( substr( $attlink, ( 0 - strlen( &#x27;.&#x27; . $t ) ) ) == &#x27;.&#x27; . $t ) {
-              $attlist[ $key ]          = clone $att;
-              $attlist[ $key ]-&gt;attlink = $attlink;
-            }
-          }
-        } else {
-          $attlist[ $key ]          = clone $att;
-          $attlist[ $key ]-&gt;attlink = $attlink;
-        }
-      }
-      if( $atts[ &#x27;groupby&#x27; ] ) {
-        if( $atts[ &#x27;order&#x27; ] == &#x27;asc&#x27; ) {
-          ksort( $attlist );
-        } else {
-          krsort( $attlist );
-        }
-      }
-    }
-
-    if( count( $attlist ) ) {
-      $open = false;
-      $r    = $atts[ &#x27;before_list&#x27; ] . $atts[ &#x27;opening&#x27; ];
-      foreach( $attlist as $att ) {
-
-        $container_classes = array( &#x27;attachment_container&#x27; );
-
-        //** Determine class to display for this file type */
-        if( $atts[ &#x27;include_icon_classes&#x27; ] ) {
-
-          switch( $att-&gt;post_mime_type ) {
-
-            case &#x27;application/zip&#x27;:
-              $class = &#x27;zip&#x27;;
-              break;
-
-            case &#x27;vnd.ms-excel&#x27;:
-              $class = &#x27;excel&#x27;;
-              break;
-
-            case &#x27;image/jpeg&#x27;:
-            case &#x27;image/png&#x27;:
-            case &#x27;image/gif&#x27;:
-            case &#x27;image/bmp&#x27;:
-              $class = &#x27;image&#x27;;
-              break;
-
-            default:
-              $class = &#x27;default&#x27;;
-              break;
-          }
-        }
-
-        $icon_class = ( $class ? &#x27;wpp_attachment_icon file-&#x27; . $class : false );
-
-        //** Determine if description shuold be displayed, and if it is not empty */
-        $echo_description = ( $atts[ &#x27;show_descriptions&#x27; ] &amp;&amp; !empty( $att-&gt;post_content ) ? &#x27; &lt;span class=&quot;attachment_description&quot;&gt; &#x27; . $att-&gt;post_content . &#x27; &lt;/span&gt; &#x27; : false );
-
-        $echo_title = ( $att-&gt;post_excerpt ? $att-&gt;post_excerpt : __( &#x27;View &#x27;, &#x27;wpp&#x27; ) . apply_filters( &#x27;the_title_attribute&#x27;, $att-&gt;post_title ) );
-
-        if( $icon_class ) {
-          $container_classes[ ] = &#x27;has_icon&#x27;;
-        }
-
-        if( !empty( $echo_description ) ) {
-          $container_classes[ ] = &#x27;has_description&#x27;;
-        }
-
-        //** Add conditional classes if class is not already passed into container */
-        if( !strpos( $atts[ &#x27;before_item&#x27; ], &#x27;class&#x27; ) ) {
-          $this_before_item = str_replace( &#x27;&gt;&#x27;, &#x27; class=&quot;&#x27; . implode( &#x27; &#x27;, $container_classes ) . &#x27;&quot;&gt;&#x27;, $atts[ &#x27;before_item&#x27; ] );
-        }
-
-        $echo_size = ( ( $showsize ) ? &#x27; &lt;span class=&quot;attachment-size&quot;&gt;&#x27; . Utility::get_filesize( str_replace( $upload_dir[ &#x27;baseurl&#x27; ], $upload_dir[ &#x27;basedir&#x27; ], $attlink ) ) . &#x27;&lt;/span&gt;&#x27; : &#x27;&#x27; );
-
-        if( !empty( $atts[ &#x27;groupby&#x27; ] ) &amp;&amp; $current_group != $att-&gt;$grouper ) {
-          if( $open ) {
-            $r .= $atts[ &#x27;closing&#x27; ] . $atts[ &#x27;after_item&#x27; ];
-            $open = false;
-          }
-          $r .= $atts[ &#x27;before_item&#x27; ] . &#x27;&lt;h3&gt;&#x27; . $att-&gt;$grouper . &#x27;&lt;/h3&gt;&#x27; . $atts[ &#x27;opening&#x27; ];
-          $open          = true;
-          $current_group = $att-&gt;$grouper;
-        }
-        $attlink = $att-&gt;attlink;
-        $r .= $this_before_item . &#x27;&lt;a href=&quot;&#x27; . $attlink . &#x27;&quot; title=&quot;&#x27; . $echo_title . &#x27;&quot; class=&quot;wpp_attachment &#x27; . $icon_class . &#x27;&quot;&gt;&#x27; . apply_filters( &#x27;the_title&#x27;, $att-&gt;post_title ) . &#x27;&lt;/a&gt;&#x27; . $echo_size . $echo_description . $atts[ &#x27;after_item&#x27; ];
-      }
-      if( $open ) {
-        $r .= $atts[ &#x27;closing&#x27; ] . $atts[ &#x27;after_item&#x27; ];
-      }
-      $r .= $atts[ &#x27;closing&#x27; ] . $atts[ &#x27;after_list&#x27; ];
-    }
-
-    $wp_query = clone $oq;
-    $post     = clone $op;
-
-    return $r;
-
-  }
-
-}
-
-// Initialize WPP Default API */
-add_filter( &#x27;plugins_loaded&#x27;, array( &#x27;wpp_default_api&#x27;, &#x27;plugins_loaded&#x27; ), 0, 9 );
+}, 0, 30 );
 
 // Widget address format
 add_filter( &quot;wpp_stat_filter_{$wp_properties[ &#x27;configuration&#x27; ][&#x27;address_attribute&#x27;]}&quot;, &quot;wpp_format_address_attribute&quot;, 0, 3 );
@@ -399,6 +186,202 @@ add_action( &#x27;wpp_ui_after_attribute_price&#x27;, &#x27;wpp_show_week_month_
 
 //**  Adds additional settings for Property Page */
 add_action( &#x27;wpp_settings_page_property_page&#x27;, &#x27;add_format_phone_number_checkbox&#x27; );
+
+/**
+ * Display list of attached files to a s post.
+ *
+ * Function ported over from List Attachments Shortcode plugin.
+ *
+ * @version 1.25.0
+ */
+function wpp_list_attachments( $atts = array() ) {
+  global $post, $wp_query;
+
+  $r = &#x27;&#x27;;
+
+  if( !is_array( $atts ) ) {
+    $atts = array();
+  }
+
+  $defaults = array(
+    &#x27;type&#x27;                 =&gt; NULL,
+    &#x27;orderby&#x27;              =&gt; NULL,
+    &#x27;groupby&#x27;              =&gt; NULL,
+    &#x27;order&#x27;                =&gt; NULL,
+    &#x27;post_id&#x27;              =&gt; false,
+    &#x27;before_list&#x27;          =&gt; &#x27;&#x27;,
+    &#x27;after_list&#x27;           =&gt; &#x27;&#x27;,
+    &#x27;opening&#x27;              =&gt; &#x27;&lt;ul class=&quot;attachment-list wpp_attachment_list&quot;&gt;&#x27;,
+    &#x27;closing&#x27;              =&gt; &#x27;&lt;/ul&gt;&#x27;,
+    &#x27;before_item&#x27;          =&gt; &#x27;&lt;li&gt;&#x27;,
+    &#x27;after_item&#x27;           =&gt; &#x27;&lt;/li&gt;&#x27;,
+    &#x27;show_descriptions&#x27;    =&gt; true,
+    &#x27;include_icon_classes&#x27; =&gt; true,
+    &#x27;showsize&#x27;             =&gt; false
+  );
+
+  $atts = array_merge( $defaults, $atts );
+
+  if( isset( $atts[ &#x27;post_id&#x27; ] ) &amp;&amp; is_numeric( $atts[ &#x27;post_id&#x27; ] ) ) {
+    $post = get_post( $atts[ &#x27;post_id&#x27; ] );
+  }
+
+  if( !$post ) {
+    return;
+  }
+
+  if( !empty( $atts[ &#x27;type&#x27; ] ) ) {
+    $types = explode( &#x27;,&#x27;, str_replace( &#x27; &#x27;, &#x27;&#x27;, $atts[ &#x27;type&#x27; ] ) );
+  } else {
+    $types = array();
+  }
+
+  $showsize   = ( $atts[ &#x27;showsize&#x27; ] == true || $atts[ &#x27;showsize&#x27; ] == &#x27;true&#x27; || $atts[ &#x27;showsize&#x27; ] == 1 ) ? true : false;
+  $upload_dir = wp_upload_dir();
+
+  $op = clone $post;
+  $oq = clone $wp_query;
+
+  foreach( array( &#x27;before_list&#x27;, &#x27;after_list&#x27;, &#x27;opening&#x27;, &#x27;closing&#x27;, &#x27;before_item&#x27;, &#x27;after_item&#x27; ) as $htmlItem ) {
+    $atts[ $htmlItem ] = str_replace( array( &#x27;&amp;lt;&#x27;, &#x27;&amp;gt;&#x27; ), array( &#x27;&lt;&#x27;, &#x27;&gt;&#x27; ), $atts[ $htmlItem ] );
+  }
+
+  $args = array(
+    &#x27;post_type&#x27;   =&gt; &#x27;attachment&#x27;,
+    &#x27;numberposts&#x27; =&gt; -1,
+    &#x27;post_status&#x27; =&gt; null,
+    &#x27;post_parent&#x27; =&gt; $post-&gt;ID,
+  );
+
+  if( !empty( $atts[ &#x27;orderby&#x27; ] ) ) {
+    $args[ &#x27;orderby&#x27; ] = $atts[ &#x27;orderby&#x27; ];
+  }
+  if( !empty( $atts[ &#x27;order&#x27; ] ) ) {
+    $atts[ &#x27;order&#x27; ] = ( in_array( $atts[ &#x27;order&#x27; ], array( &#x27;a&#x27;, &#x27;asc&#x27;, &#x27;ascending&#x27; ) ) ) ? &#x27;asc&#x27; : &#x27;desc&#x27;;
+    $args[ &#x27;order&#x27; ] = $atts[ &#x27;order&#x27; ];
+  }
+  if( !empty( $atts[ &#x27;groupby&#x27; ] ) ) {
+    $args[ &#x27;orderby&#x27; ] = $atts[ &#x27;groupby&#x27; ];
+  }
+
+  $attachments = get_posts( $args );
+
+  if( $attachments ) {
+    $grouper = $atts[ &#x27;groupby&#x27; ];
+    $test    = $attachments;
+    $test    = array_shift( $test );
+    if( !property_exists( $test, $grouper ) ) {
+      $grouper = &#x27;post_&#x27; . $grouper;
+    }
+
+    $attlist = array();
+
+    foreach( $attachments as $att ) {
+      $key = ( !empty( $atts[ &#x27;groupby&#x27; ] ) ) ? $att-&gt;$grouper : $att-&gt;ID;
+      $key .= ( !empty( $atts[ &#x27;orderby&#x27; ] ) ) ? $att-&gt;$atts[ &#x27;orderby&#x27; ] : &#x27;&#x27;;
+
+      $attlink = wp_get_attachment_url( $att-&gt;ID );
+
+      if( count( $types ) ) {
+        foreach( $types as $t ) {
+          if( substr( $attlink, ( 0 - strlen( &#x27;.&#x27; . $t ) ) ) == &#x27;.&#x27; . $t ) {
+            $attlist[ $key ]          = clone $att;
+            $attlist[ $key ]-&gt;attlink = $attlink;
+          }
+        }
+      } else {
+        $attlist[ $key ]          = clone $att;
+        $attlist[ $key ]-&gt;attlink = $attlink;
+      }
+    }
+    if( $atts[ &#x27;groupby&#x27; ] ) {
+      if( $atts[ &#x27;order&#x27; ] == &#x27;asc&#x27; ) {
+        ksort( $attlist );
+      } else {
+        krsort( $attlist );
+      }
+    }
+  }
+
+  if( count( $attlist ) ) {
+    $open = false;
+    $r    = $atts[ &#x27;before_list&#x27; ] . $atts[ &#x27;opening&#x27; ];
+    foreach( $attlist as $att ) {
+
+      $container_classes = array( &#x27;attachment_container&#x27; );
+
+      //** Determine class to display for this file type */
+      if( $atts[ &#x27;include_icon_classes&#x27; ] ) {
+
+        switch( $att-&gt;post_mime_type ) {
+
+          case &#x27;application/zip&#x27;:
+            $class = &#x27;zip&#x27;;
+            break;
+
+          case &#x27;vnd.ms-excel&#x27;:
+            $class = &#x27;excel&#x27;;
+            break;
+
+          case &#x27;image/jpeg&#x27;:
+          case &#x27;image/png&#x27;:
+          case &#x27;image/gif&#x27;:
+          case &#x27;image/bmp&#x27;:
+            $class = &#x27;image&#x27;;
+            break;
+
+          default:
+            $class = &#x27;default&#x27;;
+            break;
+        }
+      }
+
+      $icon_class = ( $class ? &#x27;wpp_attachment_icon file-&#x27; . $class : false );
+
+      //** Determine if description shuold be displayed, and if it is not empty */
+      $echo_description = ( $atts[ &#x27;show_descriptions&#x27; ] &amp;&amp; !empty( $att-&gt;post_content ) ? &#x27; &lt;span class=&quot;attachment_description&quot;&gt; &#x27; . $att-&gt;post_content . &#x27; &lt;/span&gt; &#x27; : false );
+
+      $echo_title = ( $att-&gt;post_excerpt ? $att-&gt;post_excerpt : __( &#x27;View &#x27;, &#x27;wpp&#x27; ) . apply_filters( &#x27;the_title_attribute&#x27;, $att-&gt;post_title ) );
+
+      if( $icon_class ) {
+        $container_classes[ ] = &#x27;has_icon&#x27;;
+      }
+
+      if( !empty( $echo_description ) ) {
+        $container_classes[ ] = &#x27;has_description&#x27;;
+      }
+
+      //** Add conditional classes if class is not already passed into container */
+      if( !strpos( $atts[ &#x27;before_item&#x27; ], &#x27;class&#x27; ) ) {
+        $this_before_item = str_replace( &#x27;&gt;&#x27;, &#x27; class=&quot;&#x27; . implode( &#x27; &#x27;, $container_classes ) . &#x27;&quot;&gt;&#x27;, $atts[ &#x27;before_item&#x27; ] );
+      }
+
+      $echo_size = ( ( $showsize ) ? &#x27; &lt;span class=&quot;attachment-size&quot;&gt;&#x27; . Utility::get_filesize( str_replace( $upload_dir[ &#x27;baseurl&#x27; ], $upload_dir[ &#x27;basedir&#x27; ], $attlink ) ) . &#x27;&lt;/span&gt;&#x27; : &#x27;&#x27; );
+
+      if( !empty( $atts[ &#x27;groupby&#x27; ] ) &amp;&amp; $current_group != $att-&gt;$grouper ) {
+        if( $open ) {
+          $r .= $atts[ &#x27;closing&#x27; ] . $atts[ &#x27;after_item&#x27; ];
+          $open = false;
+        }
+        $r .= $atts[ &#x27;before_item&#x27; ] . &#x27;&lt;h3&gt;&#x27; . $att-&gt;$grouper . &#x27;&lt;/h3&gt;&#x27; . $atts[ &#x27;opening&#x27; ];
+        $open          = true;
+        $current_group = $att-&gt;$grouper;
+      }
+      $attlink = $att-&gt;attlink;
+      $r .= $this_before_item . &#x27;&lt;a href=&quot;&#x27; . $attlink . &#x27;&quot; title=&quot;&#x27; . $echo_title . &#x27;&quot; class=&quot;wpp_attachment &#x27; . $icon_class . &#x27;&quot;&gt;&#x27; . apply_filters( &#x27;the_title&#x27;, $att-&gt;post_title ) . &#x27;&lt;/a&gt;&#x27; . $echo_size . $echo_description . $atts[ &#x27;after_item&#x27; ];
+    }
+    if( $open ) {
+      $r .= $atts[ &#x27;closing&#x27; ] . $atts[ &#x27;after_item&#x27; ];
+    }
+    $r .= $atts[ &#x27;closing&#x27; ] . $atts[ &#x27;after_list&#x27; ];
+  }
+
+  $wp_query = clone $oq;
+  $post     = clone $op;
+
+  return $r;
+
+}
 
 /**
  * Add labels to system-generated attributes that do not have custom-set values

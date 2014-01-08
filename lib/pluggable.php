@@ -6,6 +6,21 @@
  * @since 2.0.0
  */
 
+if( !function_exists( 'wpp_get_template_part' ) ) {
+  /**
+   * Get Template Part
+   *
+   * @param $name
+   * @param $path
+   * @param $opts
+   *
+   * @return bool|mixed|string|\UsabilityDynamics\WP_Error|void
+   */
+  function wpp_get_template_part( $name, $path, $opts ) {
+    return \UsabilityDynamics\WPP\Utility::get_template_part( $name, $path, $opts  );
+  }
+}
+
 /**
  * Implementing this for old versions of PHP
  *

@@ -68,6 +68,7 @@
       "lib/class-module.php",
       "lib/class-object-list-table.php",
       "lib/class-shortcode.php",
+      "lib/class-settings.php",
       "lib/class-template.php",
       "lib/class-ui.php",
       "lib/class-utility.php",

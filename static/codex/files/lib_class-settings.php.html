@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib/pluggable.php - usabilitydynamics/wp-property</title>
+    <title>lib/class-settings.php - usabilitydynamics/wp-property</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -92,112 +92,32 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib/pluggable.php</h1>
+                        <h1 class="file-heading">File: lib/class-settings.php</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 &lt;?php
 /**
- * Assorted Pluggable Functions
+ * WP-Property Settings
  *
- * @author potanin@UD
+ * @author Usability Dynamics, Inc. &lt;info@usabilitydynamics.com&gt;
+ * @package WP-Property
  * @since 2.0.0
  */
+namespace UsabilityDynamics\WPP {
 
-if( !function_exists( &#x27;wpp_get_template_part&#x27; ) ) {
-  /**
-   * Get Template Part
-   *
-   * @param $name
-   * @param $path
-   * @param $opts
-   *
-   * @return bool|mixed|string|\UsabilityDynamics\WP_Error|void
-   */
-  function wpp_get_template_part( $name, $path, $opts ) {
-    return \UsabilityDynamics\WPP\Utility::get_template_part( $name, $path, $opts  );
-  }
-}
+  if( !class_exists( &#x27;UsabilityDynamics\WPP\Settings&#x27; ) ) {
 
-/**
- * Implementing this for old versions of PHP
- *
- * @since 1.15.9
- */
-if( !function_exists( &#x27;array_fill_keys&#x27; ) ) {
-
-  function array_fill_keys( $target, $value = &#x27;&#x27; ) {
-
-    if( is_array( $target ) ) {
-
-      foreach( $target as $key =&gt; $val ) {
-
-        $filledArray[ $val ] = is_array( $value ) ? $value[ $key ] : $value;
-
-      }
+    class Settings extends \UsabilityDynamics\Settings {
 
     }
 
-    return $filledArray;
-
   }
 
 }
 
-/**
- * Delete a file or recursively delete a directory
- *
- * @param string  $str Path to file or directory
- * @param boolean $flag If false, doesn&#x27;t remove root directory
- *
- * @version 0.1
- * @since 1.32.2
- * @author peshkov@UD
- */
-if( !function_exists( &#x27;wpp_recursive_unlink&#x27; ) ) {
-  function wpp_recursive_unlink( $str, $flag = false ) {
-    if( is_file( $str ) ) {
-      return @unlink( $str );
-    } elseif( is_dir( $str ) ) {
-      $scan = glob( rtrim( $str, &#x27;/&#x27; ) . &#x27;/*&#x27; );
-      foreach( $scan as $index =&gt; $path ) {
-        wpp_recursive_unlink( $path, true );
-      }
-      if( $flag ) {
-        return @rmdir( $str );
-      } else {
-        return true;
-      }
-    }
-  }
-}
 
-/**
- * Add &#x27;property&#x27; to the list of RSSable post_types.
- *
- * @todo Why is this a stand-alone function?
- *
- * @param string $request
- *
- * @return string
- * @author korotkov@ud
- * @since 1.36.2
- */
-if( !function_exists( &#x27;property_feed&#x27; ) ) {
-  function property_feed( $qv ) {
 
-    if( isset( $qv[ &#x27;feed&#x27; ] ) &amp;&amp; !isset( $qv[ &#x27;post_type&#x27; ] ) ) {
-      $qv[ &#x27;post_type&#x27; ] = get_post_types( $args = array(
-        &#x27;public&#x27;   =&gt; true,
-        &#x27;_builtin&#x27; =&gt; false
-      ) );
-      array_push( $qv[ &#x27;post_type&#x27; ], &#x27;post&#x27; );
-    }
-
-    return $qv;
-
-  }
-}
 
     </pre>
 </div>

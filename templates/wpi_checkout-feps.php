@@ -44,7 +44,7 @@
        $display = true;
       }
 
-      $template_found = WPP_F::get_template_part( array(
+      $template_found = wpp_get_template_part( array(
         "{$gateway_key}-checkout-{$template}",
         "{$gateway_key}-checkout-{$template}.tpl",
         "{$gateway_key}-checkout",
