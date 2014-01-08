@@ -137,10 +137,14 @@ namespace UsabilityDynamics\WPP {
             "sAjaxSource": wpp.instance.ajax_url + '?&action=<?php echo $this->_args['ajax_action']; ?>',
             "fnServerData": function( sSource, aoData, fnCallback ) {
 
-              aoData.push({
-                name: 'wpp_filter_vars',
-                value: jQuery( '#<?php echo $this->table_scope; ?>-filter' ).serialize()
-              });
+              if ( typeof aoData != 'object' ) {
+                aoData.push({
+                  name: 'wpp_filter_vars',
+                  value: jQuery( '#<?php echo $this->table_scope; ?>-filter' ).serialize()
+                });
+              } else {
+                aoData.wpp_filter_vars = jQuery( '#<?php echo $this->table_scope; ?>-filter' ).serialize();
+              }
 
               jQuery.ajax({
                 "dataType": 'json',
