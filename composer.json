@@ -65,6 +65,7 @@
       "lib/class-bootstrap.php",
       "lib/class-exception.php",
       "lib/class-formatting.php",
+      "lib/class-listing.php",
       "lib/class-list-table.php",
       "lib/class-mail.php",
       "lib/class-module.php",
