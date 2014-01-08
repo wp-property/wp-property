@@ -21,12 +21,12 @@ module.exports = function( grunt ) {
           relativeUrls: true
         },
         files: {
-          'css/wpp-data-tables.css': [ 'css/src/wpp-data-tables.less' ],
-          'css/wp_properties_admin.css': [ 'css/src/wp_properties_admin.less' ],
-          'css/jquery-ui.css': [ 'css/src/jquery-ui.less' ],
-          'templates/wp_properties.css': [ 'css/src/wp_properties.less' ],
-          'templates/wp_properties-ie_7.css': [ 'css/src/wp_properties-ie_7.less' ],
-          'templates/wp_properties-msie.css': [ 'css/src/wp_properties-msie.less' ],
+          'styles/wpp-data-tables.css': [ 'styles/src/wpp-data-tables.less' ],
+          'styles/wp_properties_admin.css': [ 'styles/src/wp_properties_admin.less' ],
+          'styles/jquery-ui.css': [ 'styles/src/jquery-ui.less' ],
+          'templates/wp_properties.css': [ 'styles/src/wp_properties.less' ],
+          'templates/wp_properties-ie_7.css': [ 'styles/src/wp_properties-ie_7.less' ],
+          'templates/wp_properties-msie.css': [ 'styles/src/wp_properties-msie.less' ],
           'templates/theme-specific/denali.css': [ 'templates/theme-specific/src/denali.less' ],
           'templates/theme-specific/fb_properties.css': [ 'templates/theme-specific/src/fb_properties.less' ],
           'templates/theme-specific/twentyeleven.css': [ 'templates/theme-specific/src/twentyeleven.less' ],
@@ -40,12 +40,12 @@ module.exports = function( grunt ) {
           relativeUrls: true
         },
         files: {
-          'css/wpp-data-tables.dev.css': [ 'css/src/wpp-data-tables.less' ],
-          'css/wp_properties_admin.dev.css': [ 'css/src/wp_properties_admin.less' ],
-          'css/jquery-ui.dev.css': [ 'css/src/jquery-ui.less' ],
-          'templates/wp_properties.dev.css': [ 'css/src/wp_properties.less' ],
-          'templates/wp_properties-ie_7.dev.css': [ 'css/src/wp_properties-ie_7.less' ],
-          'templates/wp_properties-msie.dev.css': [ 'css/src/wp_properties-msie.less' ],
+          'styles/wpp-data-tables.dev.css': [ 'styles/src/wpp-data-tables.less' ],
+          'styles/wp_properties_admin.dev.css': [ 'styles/src/wp_properties_admin.less' ],
+          'styles/jquery-ui.dev.css': [ 'styles/src/jquery-ui.less' ],
+          'templates/wp_properties.dev.css': [ 'styles/src/wp_properties.less' ],
+          'templates/wp_properties-ie_7.dev.css': [ 'styles/src/wp_properties-ie_7.less' ],
+          'templates/wp_properties-msie.dev.css': [ 'styles/src/wp_properties-msie.less' ],
           'templates/theme-specific/denali.dev.css': [ 'templates/theme-specific/src/denali.less' ],
           'templates/theme-specific/fb_properties.dev.css': [ 'templates/theme-specific/src/fb_properties.less' ],
           'templates/theme-specific/twentyeleven.dev.css': [ 'templates/theme-specific/src/twentyeleven.less' ],
@@ -63,11 +63,11 @@ module.exports = function( grunt ) {
         version: '<%= pkg.version %>',
         url: '<%= pkg.homepage %>',
         options: {
-          extension: '.js,.php',
+          extension: '.scripts,.php',
           outdir: 'static/codex/',
           "paths": [
             "./lib",
-            "./js"
+            "./scripts"
           ]
         }
       }
@@ -80,11 +80,11 @@ module.exports = function( grunt ) {
         debounceDelay: 500
       },
       less: {
-        files: [ 'css/src/*.less' ],
+        files: [ 'styles/src/*.less' ],
         tasks: [ 'less' ]
       },
       js: {
-        files: [ 'js/*' ],
+        files: [ 'scripts/*' ],
         tasks: [ 'uglify' ]
       }
     },
@@ -98,13 +98,13 @@ module.exports = function( grunt ) {
         },
         files: [
           {
-            'templates/wp_properties.js': [ 'js/src/wp_properties.js' ]
+            'templates/wp_properties.js': [ 'scripts/src/wp_properties.js' ]
           },
           {
             expand: true,
-            cwd: 'js/src',
+            cwd: 'scripts/src',
             src: [ '*.js' ],
-            dest: 'js'
+            dest: 'scripts'
           }
         ]
       },
@@ -115,13 +115,13 @@ module.exports = function( grunt ) {
         },
         files: [
           {
-            'templates/wp_properties.dev.js': [ 'js/src/wp_properties.js' ]
+            'templates/wp_properties.dev.js': [ 'scripts/src/wp_properties.js' ]
           },
           {
             expand: true,
-            cwd: 'js/src',
+            cwd: 'scripts/src',
             src: [ '*.js' ],
-            dest: 'js'
+            dest: 'scripts'
           }
         ]
       }
@@ -152,11 +152,70 @@ module.exports = function( grunt ) {
 
     // Clean Directories.
     clean: {
+      temp: [
+        "cache"
+      ],
       all: [
         "cache",
         "vendor",
         "composer.lock"
       ]
+    },
+
+    // Commit to Git.
+    gitcommit: {
+      development: {
+        options: {
+          message: 'Automatic push.',
+          branch: 'development'
+        },
+        files: {
+          src: [
+            'images/*.*',
+            'languages/*.*',
+            'lib/*.*',
+            'scripts/*.*',
+            'static/*.*',
+            'styles/*.*',
+            'templates/*.*',
+            '*.*'
+          ]
+        }
+
+      },
+      master: {
+        options: {
+          message: 'Automatic push.',
+          branch: 'master'
+        },
+        files: {
+          src: [
+            'images/*.*',
+            'languages/*.*',
+            'lib/*.*',
+            'scripts/*.*',
+            'static/*.*',
+            'styles/*.*',
+            'templates/*.*',
+            '*.*'
+          ]
+        }
+
+      }
+    },
+
+    // Pust to Git.
+    gitpush: {
+      development: {
+        options: {
+          branch: 'development'
+        }
+      },
+      master: {
+        options: {
+          branch: 'master'
+        }
+      }
     },
 
     // Execute Shell Commands.
@@ -186,6 +245,7 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks( 'grunt-contrib-concat' );
   grunt.loadNpmTasks( 'grunt-contrib-clean' );
   grunt.loadNpmTasks( 'grunt-markdown' );
+  grunt.loadNpmTasks( 'grunt-git' );
   grunt.loadNpmTasks( 'grunt-shell' );
 
   // Register NPM Tasks.
@@ -193,6 +253,12 @@ module.exports = function( grunt ) {
 
   // Prepare for Distribution.
   grunt.registerTask( 'make-distribution', [ 'markdown', 'less', 'yuidoc', 'uglify' ] );
+
+  // Prepare and Push to Git.
+  grunt.registerTask( 'push', [ 'clean:temp', 'markdown', 'less', 'yuidoc', 'uglify', 'gitcommit:development', 'gitpush:development'  ] );
+
+  // Prepare and Push to Git master.
+  grunt.registerTask( 'push-master', [ 'clean:temp', 'markdown', 'less', 'yuidoc', 'uglify', 'gitcommit:master', 'gitpush:master'  ] );
 
   // Development Mode.
   grunt.registerTask( 'dev', [ 'symlink:dev', 'watch' ] );
