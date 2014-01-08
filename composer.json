@@ -34,10 +34,8 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=5.3",
-    "tecnick.com/tcpdf": "dev-master",
     "datatables/datatables": "dev-master",
     "jms/serializer": "0.14.*@dev",
-    "zend/gdata": "dev-master",
     "natxet/CssMin": "dev-master",
     "linkorb/jsmin-php": "dev-master",
     "wordpress/meta-box": "master",
