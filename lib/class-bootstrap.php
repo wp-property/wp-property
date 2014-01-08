@@ -2,7 +2,7 @@
 /**
  * UsabilityDynamics\WPP Bootstrap
  *
- * @verison 0.4.1
+ * @verison 2.0.0
  * @author potanin@UD
  * @namespace UsabilityDynamics\WPP
  */
