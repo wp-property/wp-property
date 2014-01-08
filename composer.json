@@ -69,6 +69,7 @@
       "lib/class-list-table.php",
       "lib/class-mail.php",
       "lib/class-module.php",
+      "lib/class-meta-box.php",
       "lib/class-object-list-table.php",
       "lib/class-shortcode.php",
       "lib/class-settings.php",
