@@ -161,8 +161,8 @@ namespace UsabilityDynamics\WPP {
         ));
 
         // Load Default API and Template Functions.
-        Utility::load_template( 'default-api.php' );
-        Utility::load_template( 'template-functions.php' );
+        Template::load( 'default-api.php' );
+        Template::load( 'template-functions.php' );
 
         // Register activation hook -> has to be in the main plugin file
         register_activation_hook( __FILE__, array( &$this, 'activation' ) );
@@ -188,6 +188,40 @@ namespace UsabilityDynamics\WPP {
         // Modify request to change feed
         add_filter( 'request', array( &$this, 'property_feed' ) );
 
+      }
+
+      /**
+       * Get Setting.
+       *
+       *    // Get Setting
+       *    $wpp::get( 'my_key' )
+       *
+       * @method get
+       *
+       * @for Bootstrap
+       * @author potanin@UD
+       * @since 0.1.1
+       */
+      public function get( $key, $default = null ) {
+        return self::$instance->_settings ? self::$instance->_settings->get( $key, $default ) : null;
+      }
+
+      /**
+       * Set Setting.
+       *
+       * @usage
+       *
+       *    // Set Setting
+       *    $wpp::set( 'my_key', 'my-value' )
+       *
+       * @method get
+       * @for Bootstrap
+       *
+       * @author potanin@UD
+       * @since 0.1.1
+       */
+      public function set( $key, $value = null ) {
+        return self::$instance->_settings ? self::$instance->_settings->set( $key, $value ) : null;
       }
 
       /**
@@ -277,8 +311,6 @@ namespace UsabilityDynamics\WPP {
         do_action( 'wpp:init:pre', $this );
 
         add_theme_support( 'post-thumbnails' );
-
-        //include( '/Users/potanin/Sites/corporate.network.veneer.io/modules/wp-property/vendor/wordpress/meta-box/inc/meta-box.php' );
 
       }
 
@@ -395,8 +427,6 @@ namespace UsabilityDynamics\WPP {
        */
       public function init_lower() {
         global $wp_properties;
-
-
 
         /** Ajax functions */
         add_action( 'wp_ajax_wpp_ajax_max_set_property_type', create_function( "", ' die(Utility::mass_set_property_type($_REQUEST["property_type"]));' ) );
@@ -1008,39 +1038,39 @@ namespace UsabilityDynamics\WPP {
             //** Get width of overview table thumbnail, and set css */
             $thumbnail_attribs = Utility::image_sizes( $wp_properties[ 'configuration' ][ 'admin_ui' ][ 'overview_table_thumbnail_size' ] );
             $thumbnail_width   = ( !empty( $thumbnail_attribs[ 'width' ] ) ? $thumbnail_attribs[ 'width' ] : false );
-            if( $thumbnail_width ) {
-              ?>
+
+            if( $thumbnail_width ) { ?>
               <style typ="text/css">
-            #wp-list-table.wp-list-table .column-thumbnail {
-              width: <?php echo $thumbnail_width + 20; ?>px;
-            }
+                #wp-list-table.wp-list-table .column-thumbnail {
+                  width: <?php echo $thumbnail_width + 20; ?>px;
+                }
 
-            #wp-list-table.wp-list-table td.column-thumbnail {
-              text-align: right;
-            }
+                #wp-list-table.wp-list-table td.column-thumbnail {
+                  text-align: right;
+                }
 
-            #wp-list-table.wp-list-table .column-type {
-              width: 90px;
-            }
+                #wp-list-table.wp-list-table .column-type {
+                  width: 90px;
+                }
 
-            #wp-list-table.wp-list-table .column-menu_order {
-              width: 50px;
-            }
+                #wp-list-table.wp-list-table .column-menu_order {
+                  width: 50px;
+                }
 
-            #wp-list-table.wp-list-table td.column-menu_order {
-              text-align: center;
-            }
+                #wp-list-table.wp-list-table td.column-menu_order {
+                  text-align: center;
+                }
 
-            #wp-list-table.wp-list-table .column-featured {
-              width: 100px;
-            }
+                #wp-list-table.wp-list-table .column-featured {
+                  width: 100px;
+                }
 
-            #wp-list-table.wp-list-table .check-column {
-              width: 26px;
-            }
-          </style>
-            <?php
-            }
+                #wp-list-table.wp-list-table .check-column {
+                  width: 26px;
+                }
+              </style>
+            <?php }
+
             break;
 
           //** Settings Page */
@@ -1064,7 +1094,7 @@ namespace UsabilityDynamics\WPP {
             wp_enqueue_script( 'jquery-ui-tabs' );
             wp_enqueue_style( 'jquery-ui' );
             wp_enqueue_script( 'wp-property-admin-widgets' );
-            break;
+          break;
 
         }
 
@@ -1611,40 +1641,6 @@ namespace UsabilityDynamics\WPP {
 
         return apply_filters( 'wpp::get_instance', $data );
 
-      }
-
-      /**
-       * Get Setting.
-       *
-       *    // Get Setting
-       *    $wpp::get( 'my_key' )
-       *
-       * @method get
-       *
-       * @for Bootstrap
-       * @author potanin@UD
-       * @since 0.1.1
-       */
-      public function get( $key, $default = null ) {
-        return self::$instance->_settings ? self::$instance->_settings->get( $key, $default ) : null;
-      }
-
-      /**
-       * Set Setting.
-       *
-       * @usage
-       *
-       *    // Set Setting
-       *    $wpp::set( 'my_key', 'my-value' )
-       *
-       * @method get
-       * @for Bootstrap
-       *
-       * @author potanin@UD
-       * @since 0.1.1
-       */
-      public function set( $key, $value = null ) {
-        return self::$instance->_settings ? self::$instance->_settings->set( $key, $value ) : null;
       }
 
       /**

@@ -16,81 +16,6 @@ namespace UsabilityDynamics\WPP {
     class Utility extends \UsabilityDynamics\Utility {
 
       /**
-       * Find and Load Template
-       *
-       * @author potanin@UD
-       * @since 2.0.0
-       *
-       * @param       $name
-       * @param array $args
-       *
-       * @internal param bool $once
-       *
-       * @return mixed
-       */
-      static function load_template( $name, $args = array() ) {
-
-        $args = (object) wp_parse_args( $args, array(
-          'once'   => false,
-          'prefix' => 'property-',
-        ) );
-
-        // Add prefix if not already there.
-        if( strpos( $name, $args->prefix ) !== 0 ) {
-          $name = $args->prefix . $name;
-        }
-
-        if( $_path = self::locate_template( $name ) ) {
-
-          if( $args->once ) {
-            return include_once( $_path );
-          }
-
-          return include( $_path );
-
-        }
-
-        return false;
-
-      }
-
-      /**
-       * Locate template by checking known locations
-       *
-       * @author potanin@UD
-       * @since 2.0.0
-       *
-       * @param bool $name
-       *
-       * @return bool
-       */
-      static function locate_template( $name = false ) {
-
-        if( !$name || !defined( 'WPP_Path' ) || !WPP_Path ) {
-          return false;
-        }
-
-        $_paths = apply_filters( 'wpp:template_paths', array(
-          trailingslashit( get_template_directory() ) . 'wpp/',
-          trailingslashit( get_template_directory() ),
-          trailingslashit( get_stylesheet_directory() ) . 'wpp/',
-          trailingslashit( get_stylesheet_directory() ),
-          WPP_Path . 'templates/'
-        ) );
-
-        foreach( (array) $_paths as $path ) {
-
-          if( file_exists( $path ) ) {
-            return $path;
-          }
-
-        }
-
-        return false;
-
-      }
-
-      /**
        * Returns location information from Google Maps API call.
        *
        * From version 1.2.0, the geohash is generated automatically.
@@ -2659,7 +2584,7 @@ namespace UsabilityDynamics\WPP {
        * @author peshkov@UD
        * @since 1.38.3
        */
-      function save_settings() {
+      public function save_settings() {
         global $wp_properties;
 
         $data = self::parse_str( $_REQUEST[ 'data' ] );
