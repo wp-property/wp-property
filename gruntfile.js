@@ -180,7 +180,6 @@ module.exports = function( grunt ) {
           '*.*'
         ]
       }
-
     },
 
     // Pust to Git.
@@ -234,10 +233,10 @@ module.exports = function( grunt ) {
   grunt.registerTask( 'make-distribution', [ 'markdown', 'less', 'yuidoc', 'uglify' ] );
 
   // Prepare and Push to Git.
-  grunt.registerTask( 'push', [ 'clean:temp', 'markdown', 'less', 'yuidoc', 'uglify', 'gitcommit', 'gitpush:development'  ] );
+  grunt.registerTask( 'commit', [ 'clean:temp', 'markdown', 'less', 'yuidoc', 'uglify', 'gitcommit', 'gitpush:development'  ] );
 
   // Prepare and Push to Git master.
-  grunt.registerTask( 'push-master', [ 'clean:temp', 'markdown', 'less', 'yuidoc', 'uglify', 'gitcommit', 'gitpush:master'  ] );
+  grunt.registerTask( 'commit-master', [ 'clean:temp', 'markdown', 'less', 'yuidoc', 'uglify', 'gitcommit', 'gitpush:master'  ] );
 
   // Development Mode.
   grunt.registerTask( 'dev', [ 'symlink:dev', 'watch' ] );
