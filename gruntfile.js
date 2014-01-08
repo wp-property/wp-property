@@ -164,44 +164,23 @@ module.exports = function( grunt ) {
 
     // Commit to Git.
     gitcommit: {
-      development: {
-        options: {
-          message: 'Automatic push.',
-          branch: 'development'
-        },
-        files: {
-          src: [
-            'images/*.*',
-            'languages/*.*',
-            'lib/*.*',
-            'scripts/*.*',
-            'static/*.*',
-            'styles/*.*',
-            'templates/*.*',
-            '*.*'
-          ]
-        }
-
+      options: {
+        message: 'Automatic push.',
+        ignoreEmpty: true
       },
-      master: {
-        options: {
-          message: 'Automatic push.',
-          branch: 'master'
-        },
-        files: {
-          src: [
-            'images/*.*',
-            'languages/*.*',
-            'lib/*.*',
-            'scripts/*.*',
-            'static/*.*',
-            'styles/*.*',
-            'templates/*.*',
-            '*.*'
-          ]
-        }
-
+      files: {
+        src: [
+          'images/*.*',
+          'languages/*.*',
+          'lib/*.*',
+          'scripts/*.*',
+          'static/*.*',
+          'styles/*.*',
+          'templates/*.*',
+          '*.*'
+        ]
       }
+
     },
 
     // Pust to Git.
