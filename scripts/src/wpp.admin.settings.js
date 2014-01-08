@@ -1,9 +1,11 @@
 /**
  * WP-Property Admin Settings
  *
+ * require( ['wpp.admin.settings'] )
+ *
  */
 define( 'wpp.admin.settings', function( require, exports, module ) {
-  console.log( module.id, 'loaded' );
+  console.log( 'module', module.id, 'loaded' );
 
   var wpp = wpp || {};
 

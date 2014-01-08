@@ -134,6 +134,7 @@ namespace UsabilityDynamics\WPP {
         $this->define_constants();
 
 
+
         // property_meta
         // location_matters
         // searchable_property_types
@@ -145,6 +146,8 @@ namespace UsabilityDynamics\WPP {
         // property_stats
         // property_types
         // property_inheritance
+
+        $this->_utility   = new Utility;
 
         // Instantiate and load settings.
         $this->_settings  = new Settings(array(
@@ -200,7 +203,11 @@ namespace UsabilityDynamics\WPP {
         if( !is_file( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'vendor/autoload.php' ) ) {
           self::fail( 'WP-Property vendor directory missing; attempted to find it in: ' . dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'vendor/autoload.php' );
         }
+
         include_once( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'vendor/autoload.php' );
+
+        // Legacy Support.
+        include_once( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'lib/legacy.php' );
 
       }
 
@@ -437,29 +444,30 @@ namespace UsabilityDynamics\WPP {
         add_action( "post_submitbox_misc_actions", array( &$this, "post_submitbox_misc_actions" ) );
         add_action( 'save_post', array( &$this, 'save_property' ) );
 
-        add_action( 'before_delete_post', array( 'WPP_F', 'before_delete_post' ) );
-        add_filter( 'post_updated_messages', array( 'WPP_Core', 'property_updated_messages' ), 5 );
+        add_action( 'before_delete_post', array( 'UsabilityDynamics\WPP\Utility', 'before_delete_post' ) );
+        add_filter( 'post_updated_messages', array( &$this, 'property_updated_messages' ), 5 );
 
         /** Fix toggale row actions -> get rid of "Quick Edit" on property rows */
-        add_filter( 'page_row_actions', array( 'WPP_Core', 'property_row_actions' ), 0, 2 );
+        add_filter( 'page_row_actions', array( &$this, 'property_row_actions' ), 0, 2 );
 
         /** Disables meta cache for property obejcts if enabled */
-        add_action( 'pre_get_posts', array( 'WPP_F', 'pre_get_posts' ) );
+        add_action( 'pre_get_posts', array( 'UsabilityDynamics\WPP\Utility', 'pre_get_posts' ) );
 
         /** Fix 404 errors */
-        add_filter( "parse_request", array( $this, "parse_request" ) );
+        add_filter( "parse_request", array( &$this, "parse_request" ) );
 
         //** Determines if current request is for a child property */
-        add_filter( "posts_results", array( 'WPP_F', "posts_results" ) );
+        //add_filter( "posts_results", array( $this->_utility, "posts_results" ) );
+        add_filter( "posts_results", array( 'UsabilityDynamics\WPP\Utility', "posts_results" ) );
 
         //** Hack. Used to avoid issues of some WPP capabilities */
-        add_filter( 'current_screen', array( $this, 'current_screen' ) );
+        add_filter( 'current_screen', array(  &$this, 'current_screen' ) );
 
         //** Load admin header scripts */
-        add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+        add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ) );
 
         //** Check premium feature availability */
-        add_action( 'wpp_premium_feature_check', array( 'WPP_F', 'feature_check' ) );
+        add_action( 'wpp_premium_feature_check', array( &$this, 'feature_check' ) );
 
         //** Contextual Help */
         add_action( 'wpp_contextual_help', array( $this, 'wpp_contextual_help' ) );
@@ -547,10 +555,10 @@ namespace UsabilityDynamics\WPP {
         }
 
         //** Modify admin body class */
-        add_filter( 'admin_body_class', array( 'WPP_Core', 'admin_body_class' ), 5 );
+        add_filter( 'admin_body_class', array( &$this, 'admin_body_class' ), 5 );
 
         //** Modify Front-end property body class */
-        add_filter( 'body_class', array( 'WPP_Core', 'properties_body_class' ) );
+        add_filter( 'body_class', array( &$this, 'properties_body_class' ) );
 
         add_filter( 'wp_get_attachment_link', array( 'WPP_F', 'wp_get_attachment_link' ), 10, 6 );
 
@@ -793,7 +801,7 @@ namespace UsabilityDynamics\WPP {
         Utility::fix_screen_options();
 
         // Plug page actions -> Add Settings Link to plugin overview page
-        add_filter( 'plugin_action_links', array( 'WPP_Core', 'plugin_action_links' ), 10, 2 );
+        add_filter( 'plugin_action_links', array( &$this, 'plugin_action_links' ), 10, 2 );
 
         //* Adds metabox 'General Information' to Property Edit Page */
         add_meta_box( 'wpp_property_meta', __( 'General Information', 'wpp' ), array( 'WPP_UI', 'metabox_meta' ), 'property', 'normal', 'high' );
@@ -1193,7 +1201,7 @@ namespace UsabilityDynamics\WPP {
           wp_enqueue_script( $current_screen->id . '-js', WPP_URL . "scripts/{$current_screen->id}.js", array( 'jquery' ), WPP_Version, 'wp-property-backend-global' );
         }
 
-        //** Enqueue CSS styles on all pages */
+        // Enqueue Admin CSS on all backend pages.
         if( file_exists( WPP_Path . 'styles/wpp-admin.css' ) ) {
           wp_enqueue_style( 'wpp-admin', WPP_URL . 'styles/wpp-admin.css' );
         }
@@ -1384,14 +1392,14 @@ namespace UsabilityDynamics\WPP {
         if( !$wp_query->wpp_search_page && $wp_query->wpp_root_property_page && $wp_properties[ 'configuration' ][ 'automatically_insert_overview' ] == 'true' ) {
           Utility::console_log( 'Automatically inserted property overview shortcode into page content.' );
 
-          return WPP_Core::shortcode_property_overview();
+          return self::shortcode_property_overview();
         }
 
         //** Handle automatic PO inserting for search pages */
         if( $wp_query->wpp_search_page && $wp_properties[ 'configuration' ][ 'do_not_override_search_result_page' ] != 'true' ) {
           Utility::console_log( 'Automatically inserted property overview shortcode into search page content.' );
 
-          return WPP_Core::shortcode_property_overview();
+          return self::shortcode_property_overview();
         }
 
         return $content;

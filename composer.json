@@ -63,6 +63,7 @@
   "autoload": {
     "classmap": [
       "lib/class-bootstrap.php",
+      "lib/class-exception.php",
       "lib/class-formatting.php",
       "lib/class-list-table.php",
       "lib/class-mail.php",
@@ -73,7 +74,8 @@
       "lib/class-template.php",
       "lib/class-ui.php",
       "lib/class-utility.php",
-      "lib/class-widget.php"
+      "lib/class-widget.php",
+      "lib/class-wp-error.php"
     ]
   }
 }

@@ -229,7 +229,10 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks( 'grunt-shell' );
 
   // Register NPM Tasks.
-  grunt.registerTask( 'default', [ 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
+  grunt.registerTask( 'default', [ 'markdown', 'less', 'yuidoc', 'uglify' ] );
+
+  // Install Library.
+  grunt.registerTask( 'install', [ 'markdown', 'less', 'yuidoc', 'uglify' ] );
 
   // Prepare for Distribution.
   grunt.registerTask( 'make-distribution', [ 'markdown', 'less', 'yuidoc', 'uglify' ] );

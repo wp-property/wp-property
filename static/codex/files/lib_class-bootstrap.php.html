@@ -1289,7 +1289,7 @@ namespace UsabilityDynamics\WPP {
           wp_enqueue_script( $current_screen-&gt;id . &#x27;-js&#x27;, WPP_URL . &quot;scripts/{$current_screen-&gt;id}.js&quot;, array( &#x27;jquery&#x27; ), WPP_Version, &#x27;wp-property-backend-global&#x27; );
         }
 
-        //** Enqueue CSS styles on all pages */
+        // Enqueue Admin CSS on all backend pages.
         if( file_exists( WPP_Path . &#x27;styles/wpp-admin.css&#x27; ) ) {
           wp_enqueue_style( &#x27;wpp-admin&#x27;, WPP_URL . &#x27;styles/wpp-admin.css&#x27; );
         }
