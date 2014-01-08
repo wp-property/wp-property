@@ -182,6 +182,25 @@ module.exports = function( grunt ) {
           ]
         }
 
+      },
+      master: {
+        options: {
+          message: 'Automatic push.',
+          branch: 'master'
+        },
+        files: {
+          src: [
+            'images/*.*',
+            'languages/*.*',
+            'lib/*.*',
+            'scripts/*.*',
+            'static/*.*',
+            'styles/*.*',
+            'templates/*.*',
+            '*.*'
+          ]
+        }
+
       }
     },
 
