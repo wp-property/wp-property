@@ -155,10 +155,7 @@ namespace UsabilityDynamics\WPP {
         ));
 
         // Instantiate and load Settings.
-        $this->_requires  = new \UsabilityDynamics\Requires(array(
-
-
-        ));
+        $this->_requires  = new \UsabilityDynamics\Requires;
 
         // Load Default API and Template Functions.
         Template::load( 'default-api.php' );
@@ -498,8 +495,7 @@ namespace UsabilityDynamics\WPP {
           add_image_size( $image_name, $image_sizes[ 'width' ], $image_sizes[ 'height' ], true );
         }
 
-        //** Determine if we are secure */
-        $scheme = ( is_ssl() && !is_admin() ? 'https' : 'http' );
+        $this->_requires->add( 'wpp-md5', WPP_URL . 'third-party/md5.js', array( 'wpp.localization' ) );
 
         // Load UDX Library Loader.
         wp_register_script( 'wpp.requires', '//cdn.udx.io/requires.js', array( 'jquery' ) );
@@ -524,7 +520,7 @@ namespace UsabilityDynamics\WPP {
         wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'scripts/jquery.number.format.js', array( 'jquery', 'wpp.localization' ) );
         wp_register_script( 'wpp-jquery-data-tables', WPP_URL . "third-party/dataTables/jquery.dataTables.js", array( 'jquery', 'wpp.localization' ) );
         wp_register_script( 'jquery-cookie', WPP_URL . 'scripts/jquery.smookie.js', array( 'jquery', 'wpp.localization' ), '1.7.3' );
-        wp_register_script( 'google-maps', $scheme . '://maps.google.com/maps/api/js?sensor=true' );
+        wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?sensor=true' );
 
         wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'third-party/fancybox/jquery.fancybox-1.3.4.css' );
         wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'third-party/colorpicker/colorpicker.css' );
@@ -566,8 +562,8 @@ namespace UsabilityDynamics\WPP {
         //** Modify admin body class */
         add_filter( 'admin_body_class', array( &$this, 'admin_body_class' ), 5 );
 
-        //** Modify Front-end property body class */
-        add_filter( 'body_class', array( &$this, 'properties_body_class' ) );
+        // Frontend Body Class.
+        add_filter( 'body_class', array( 'UsabilityDynamics\WPP\Theme', 'body_class' ) );
 
         add_filter( 'wp_get_attachment_link', array( 'UsabilityDynamics\WPP\Utility', 'wp_get_attachment_link' ), 10, 6 );
 
@@ -578,8 +574,8 @@ namespace UsabilityDynamics\WPP {
           }
         }
 
-        //** Post-init action hook */
-        do_action( 'wpp_post_init' );
+        // Post Init Action.
+        do_action( 'wpp:init:post', $this );
 
       }
 
@@ -1452,21 +1448,6 @@ namespace UsabilityDynamics\WPP {
         $columns = apply_filters( 'wpp_admin_sortable_columns', $columns );
 
         return $columns;
-      }
-
-      /**
-       * Adds wp-property-listing class in search results and property_overview pages
-       *
-       * @since 0.7260
-       */
-      public function properties_body_class( $classes ) {
-        global $post, $wp_properties;
-
-        if( strpos( $post->post_content, "property_overview" ) || ( is_search() && isset( $_REQUEST[ 'wpp_search' ] ) ) || ( $wp_properties[ 'configuration' ][ 'base_slug' ] == $post->post_name ) ) {
-          $classes[ ] = 'wp-property-listing';
-        }
-
-        return $classes;
       }
 
       /**

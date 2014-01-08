@@ -6,6 +6,10 @@
  *
  */
 
+add_action( 'wpp:init:post', function( $context ) {
+  do_action( 'wpp_post_init', $context );
+});
+
 add_action( 'wpp:init:pre', function( $context ) {
   do_action( 'wpp_pre_init', $context );
 });
