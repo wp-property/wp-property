@@ -193,7 +193,7 @@ namespace UsabilityDynamics\WPP {
 
         $content = do_shortcode( html_entity_decode( $content ) );
 
-        $content = str_replace( "\n", "", nl2br( WPP_F::cleanup_extra_whitespace( $content ) ) );
+        $content = str_replace( "\n", "", nl2br( Utility::cleanup_extra_whitespace( $content ) ) );
 
         return $content;
 
@@ -286,7 +286,7 @@ namespace UsabilityDynamics\WPP {
         $property = (array) $args[ 'property' ];
 
         if( is_string( $property ) ) {
-          $property = WPP_F::get_property( $property );
+          $property = Utility::get_property( $property );
         }
 
         if( empty( $property ) ) return $content;
@@ -325,7 +325,7 @@ namespace UsabilityDynamics\WPP {
        */
       static function formatting_attribute_link_human( $content, $args = false ) {
 
-        if( WPP_F::isURL( $content ) ) {
+        if( Utility::isURL( $content ) ) {
           $content = str_replace( '&ndash;', '-', $content );
           $content = "<a href='{$content}'>{$content}</a>";
         }
@@ -357,7 +357,7 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties;
 
         if( (int) $content === strtotime( date( 'c', (int) $content ) ) ) {
-          $content = WPP_F::nice_time( (int) $content, array( 'format' => 'date' ) );
+          $content = Utility::nice_time( (int) $content, array( 'format' => 'date' ) );
         }
 
         return $content;
@@ -398,7 +398,7 @@ namespace UsabilityDynamics\WPP {
        */
       static function formatting_attribute_boolean_human( $content, $args = false ) {
 
-        $content = WPP_F::from_boolean( $content );
+        $content = Utility::from_boolean( $content );
 
         return $content;
       }
@@ -410,7 +410,7 @@ namespace UsabilityDynamics\WPP {
        */
       static function formatting_attribute_boolean_system( $content, $args = false ) {
 
-        $content = WPP_F::to_boolean( $content ) ? 'true' : 'false';
+        $content = Utility::to_boolean( $content ) ? 'true' : 'false';
 
         return $content;
       }
@@ -422,7 +422,7 @@ namespace UsabilityDynamics\WPP {
        */
       static function formatting_attribute_boolean_edit( $content, $args = false ) {
 
-        $content = WPP_F::to_boolean( $content ) ? 'true' : 'false';
+        $content = Utility::to_boolean( $content ) ? 'true' : 'false';
 
         return $content;
       }

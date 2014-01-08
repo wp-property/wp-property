@@ -8,7 +8,7 @@ class LatestPropertiesWidget extends WP_Widget {
    * constructor
    */
   function LatestPropertiesWidget() {
-    parent::WP_Widget( false, $name = sprintf( __( 'Latest %1s', 'wpp' ), WPP_F::property_label( 'plural' ) ), array( 'description' => sprintf(__( 'List of the latest %1s created on this site', 'wpp' ), WPP_F::property_label( 'plural' ) ) ) );
+    parent::WP_Widget( false, $name = sprintf( __( 'Latest %1s', 'wpp' ), Utility::property_label( 'plural' ) ), array( 'description' => sprintf(__( 'List of the latest %1s created on this site', 'wpp' ), Utility::property_label( 'plural' ) ) ) );
   }
 
   /**
@@ -34,11 +34,11 @@ class LatestPropertiesWidget extends WP_Widget {
     if ( !$image_type ) {
       $image_type = '';
     } else {
-      $image_size = WPP_F::image_sizes( $image_type );
+      $image_size = Utility::image_sizes( $image_type );
     }
 
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
-      $property_stats[ 'property_type' ] = sprintf(__( '%1s Type', 'wpp' ), WPP_F::property_label( 'singular' ) );
+      $property_stats[ 'property_type' ] = sprintf(__( '%1s Type', 'wpp' ), Utility::property_label( 'singular' ) );
     }
 
     $arg = array(
@@ -60,7 +60,7 @@ class LatestPropertiesWidget extends WP_Widget {
     }
 
     foreach ( $postslist as $post ) {
-      $this_property = WPP_F::get_property( $post->ID, 'return_object=true' );
+      $this_property = Utility::get_property( $post->ID, 'return_object=true' );
       $image = wpp_get_image_link( $this_property->featured_image, $image_type, array( 'return' => 'array' ) );
       $width = ( !empty( $image_size[ 'width' ] ) ? $image_size[ 'width' ] : ( !empty( $image[ 'width' ] ) ? $image[ 'width' ] : '' ) );
       $height = ( !empty( $image_size[ 'height' ] ) ? $image_size[ 'height' ] : ( !empty( $image[ 'height' ] ) ? $image[ 'height' ] : '' ) );
@@ -147,7 +147,7 @@ class LatestPropertiesWidget extends WP_Widget {
     }
 
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
-      $property_stats[ 'property_type' ] = sprintf(__( '%1s Type', 'wpp' ), WPP_F::property_label( 'singular' ) );
+      $property_stats[ 'property_type' ] = sprintf(__( '%1s Type', 'wpp' ), Utility::property_label( 'singular' ) );
     }
     ?>
     <script type="text/javascript">
@@ -166,7 +166,7 @@ class LatestPropertiesWidget extends WP_Widget {
       <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'wpp' ); ?>
         <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
           name="<?php echo $this->get_field_name( 'title' ); ?>" type="text"
-          value="<?php echo ( !empty( $title ) ) ? $title : sprintf( __( 'Latest %1s', 'wpp' ), WPP_F::property_label( 'plural' ) ); ?>"/>
+          value="<?php echo ( !empty( $title ) ) ? $title : sprintf( __( 'Latest %1s', 'wpp' ), Utility::property_label( 'plural' ) ); ?>"/>
       </label>
     </p>
     <p>
@@ -179,7 +179,7 @@ class LatestPropertiesWidget extends WP_Widget {
     </p>
     <p id="choose_thumb" <?php echo( $hide_image !== 'on' ? 'style="display:block;"' : 'style="display:none;"' ); ?>>
       <label for="<?php echo $this->get_field_id( 'image_type' ); ?>"><?php _e( 'Image Size:', 'wpp' ); ?>
-        <?php WPP_F::image_sizes_dropdown( "name=" . $this->get_field_name( 'image_type' ) . "&selected=" . $image_type ); ?>
+        <?php Utility::image_sizes_dropdown( "name=" . $this->get_field_name( 'image_type' ) . "&selected=" . $image_type ); ?>
       </label>
     </p>
     <p>

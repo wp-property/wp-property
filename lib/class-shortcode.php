@@ -19,7 +19,7 @@ namespace UsabilityDynamics\WPP {
       /**
        * Declare and Add Shortcodes
        *
-       * @todo Integrate with WPP_F::export_listings();
+       * @todo Integrate with Utility::export_listings();
        * @since 2.0
        */
       static function initialize() {
@@ -135,7 +135,7 @@ namespace UsabilityDynamics\WPP {
       static function featured_properties( $atts = false, $content = '' ) {
         global $wp_properties, $wpp_query, $post;
 
-        $default_property_type = WPP_F::get_most_common_property_type();
+        $default_property_type = Utility::get_most_common_property_type();
 
         if( !$atts ) {
           $atts = array();
@@ -269,7 +269,7 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties, $property;
 
         if( is_admin() && !DOING_AJAX ) {
-          return sprintf( __( '%1$s Attributes', 'wpp' ), WPP_F::property_label( 'singular' ) );
+          return sprintf( __( '%1$s Attributes', 'wpp' ), Utility::property_label( 'singular' ) );
         }
 
         $atts = shortcode_atts( array(
@@ -295,7 +295,7 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties, $post, $property;
 
         if( is_admin() && !DOING_AJAX ) {
-          return sprintf( __( '%1$s Taxonomy Terms', 'wpp' ), WPP_F::property_label( 'singular' ) );
+          return sprintf( __( '%1$s Taxonomy Terms', 'wpp' ), Utility::property_label( 'singular' ) );
         }
 
         $atts = shortcode_atts( array(
@@ -339,7 +339,7 @@ namespace UsabilityDynamics\WPP {
         global $post, $property;
 
         if( is_admin() && !DOING_AJAX ) {
-          return sprintf( __( '%1$s Attribute', 'wpp' ), WPP_F::property_label( 'singular' ) );
+          return sprintf( __( '%1$s Attribute', 'wpp' ), Utility::property_label( 'singular' ) );
         }
 
         $this_property = $property;
@@ -370,7 +370,7 @@ namespace UsabilityDynamics\WPP {
 
         if( $args[ 'property_id' ] != $this_property[ 'ID' ] ) {
 
-          $this_property = WPP_F::get_property( $args[ 'property_id' ] );
+          $this_property = Utility::get_property( $args[ 'property_id' ] );
 
           if( $args[ 'do_not_format' ] != "true" ) {
             $this_property = prepare_property_for_display( $this_property );
@@ -447,7 +447,7 @@ namespace UsabilityDynamics\WPP {
         $_property = $property;
 
         if( is_admin() && !DOING_AJAX ) {
-          return sprintf( __( '%1$s Map', 'wpp' ), WPP_F::property_label( 'singular' ) );
+          return sprintf( __( '%1$s Map', 'wpp' ), Utility::property_label( 'singular' ) );
         }
 
         $atts = shortcode_atts( array(
@@ -460,7 +460,7 @@ namespace UsabilityDynamics\WPP {
 
         /** Try to get property if an ID is passed */
         if( is_numeric( $atts[ 'property_id' ] ) ) {
-          $property = WPP_F::get_property( $atts[ 'property_id' ] );
+          $property = Utility::get_property( $atts[ 'property_id' ] );
         }
 
         /** Load into $property object */
@@ -476,7 +476,7 @@ namespace UsabilityDynamics\WPP {
         $hide_infobox = ( $atts[ 'hide_infobox' ] == 'true' ? true : false );
 
         /** Find most appropriate template */
-        $template_found = WPP_F::get_template_part( array(
+        $template_found = Utility::get_template_part( array(
           'content-single-property-map',
           'property-map'
         ), array( WPP_Templates ) );
@@ -660,7 +660,7 @@ namespace UsabilityDynamics\WPP {
               $this_before_item = str_replace( '>', ' class="' . implode( ' ', $container_classes ) . '">', $atts[ 'before_item' ] );
             }
 
-            $echo_size = ( ( $showsize ) ? ' <span class="attachment-size">' . WPP_F::get_filesize( str_replace( $upload_dir[ 'baseurl' ], $upload_dir[ 'basedir' ], $attlink ) ) . '</span>' : '' );
+            $echo_size = ( ( $showsize ) ? ' <span class="attachment-size">' . Utility::get_filesize( str_replace( $upload_dir[ 'baseurl' ], $upload_dir[ 'basedir' ], $attlink ) ) . '</span>' : '' );
 
             if( !empty( $atts[ 'groupby' ] ) && $current_group != $att->$grouper ) {
               if( $open ) {

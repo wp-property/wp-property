@@ -66,7 +66,7 @@ namespace UsabilityDynamics\WPP {
 
         if( $args[ 'property_id' ] != $this_property[ 'ID' ] ) {
 
-          $this_property = WPP_F::get_property( $args[ 'property_id' ] );
+          $this_property = Utility::get_property( $args[ 'property_id' ] );
 
           if( $args[ 'do_not_format' ] != "true" ) {
             $this_property = prepare_property_for_display( $this_property );

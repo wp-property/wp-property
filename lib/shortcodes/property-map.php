@@ -50,7 +50,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Try to get property if an ID is passed */
         if( is_numeric( $args[ 'property_id' ] ) ) {
-          $property = WPP_F::get_property( $args[ 'property_id' ] );
+          $property = Utility::get_property( $args[ 'property_id' ] );
         }
 
         //** Load into $property object */
@@ -69,7 +69,7 @@ namespace UsabilityDynamics\WPP {
         $hide_infobox = ( $args[ 'hide_infobox' ] == 'true' ? true : false );
 
         //** Find most appropriate template */
-        $template_found = WPP_F::get_template_part( array( "content-single-property-map", "property-map" ), array( WPP_Templates ) );
+        $template_found = Utility::get_template_part( array( "content-single-property-map", "property-map" ), array( WPP_Templates ) );
         if( !$template_found ) {
           return false;
         }

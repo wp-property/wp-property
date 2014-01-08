@@ -205,7 +205,7 @@ class wpp_default_api {
           $this_before_item = str_replace( '>', ' class="' . implode( ' ', $container_classes ) . '">', $atts[ 'before_item' ] );
         }
 
-        $echo_size = ( ( $showsize ) ? ' <span class="attachment-size">' . WPP_F::get_filesize( str_replace( $upload_dir[ 'baseurl' ], $upload_dir[ 'basedir' ], $attlink ) ) . '</span>' : '' );
+        $echo_size = ( ( $showsize ) ? ' <span class="attachment-size">' . Utility::get_filesize( str_replace( $upload_dir[ 'baseurl' ], $upload_dir[ 'basedir' ], $attlink ) ) . '</span>' : '' );
 
         if( !empty( $atts[ 'groupby' ] ) && $current_group != $att->$grouper ) {
           if( $open ) {
@@ -310,7 +310,7 @@ add_action( 'wpp_settings_page_property_page', 'add_format_phone_number_checkbox
 function wpp_unique_key_labels( $stats ) {
 
   if( empty( $stats[ 'property_type' ] ) ) {
-    $stats[ 'property_type' ] = sprintf( __( '%1s Type', 'wpp' ), WPP_F::property_label( 'singular' ) );
+    $stats[ 'property_type' ] = sprintf( __( '%1s Type', 'wpp' ), Utility::property_label( 'singular' ) );
   }
 
   if( empty( $stats[ 'city' ] ) ) {
@@ -359,7 +359,7 @@ function wpp_format_address_attribute( $data, $property = false, $format = "[str
   //** If the currently requested properties address has not been formatted, and on-the-fly geo-lookup has not been disabled, try to look up now */
   if( !$property->address_is_formatted && $wp_properties[ 'configuration' ][ 'do_not_automatically_geo_validate_on_property_view' ] != 'true' ) {
     //** Silently attempt to validate address, right now */
-    $geo_data = WPP_F::revalidate_all_addresses( array( 'property_ids' => array( $property->ID ), 'echo_result' => false, 'return_geo_data' => true ) );
+    $geo_data = Utility::revalidate_all_addresses( array( 'property_ids' => array( $property->ID ), 'echo_result' => false, 'return_geo_data' => true ) );
 
     if( $this_geo_data = $geo_data[ 'geo_data' ][ $property->ID ] ) {
 
@@ -518,7 +518,7 @@ function wpp_property_stats_input_address( $content, $slug, $object ) {
  * @param integer $post_id
  *
  * @return null
- * @used WPP_F::save_property();
+ * @used Utility::save_property();
  * @author peshkov@UD
  */
 function wpp_save_property_aggregated_data( $post_id ) {
@@ -545,7 +545,7 @@ function wpp_save_property_aggregated_data( $post_id ) {
     //** Cycle through children and get necessary variables */
     foreach( $children as $child_id ) {
 
-      $child_object = WPP_F::get_property( $child_id, "load_parent=false" );
+      $child_object = Utility::get_property( $child_id, "load_parent=false" );
 
       //** Exclude variables from searchable attributes (to prevent ranges) */
       $excluded_attributes    = $wp_properties[ 'geo_type_attributes' ];
@@ -553,7 +553,7 @@ function wpp_save_property_aggregated_data( $post_id ) {
 
       foreach( $wp_properties[ 'searchable_attributes' ] as $searchable_attribute ) {
 
-        $attribute_data = WPP_F::get_attribute_data( $searchable_attribute );
+        $attribute_data = Utility::get_attribute_data( $searchable_attribute );
 
         if( $attribute_data[ 'numeric' ] || $attribute_data[ 'currency' ] ) {
           if( !empty( $child_object[ $searchable_attribute ] ) && !in_array( $searchable_attribute, $excluded_attributes ) ) {
@@ -638,7 +638,7 @@ function format_phone_number( $phone_number ) {
  */
 function add_format_phone_number_checkbox() {
   global $wp_properties;
-  echo '<li>' . WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][format_phone_number]&label=" . __( 'Format phone number.', 'wpp' ), $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_phone_number' ] ) . '</li>';
+  echo '<li>' . Utility::checkbox( "name=wpp_settings[configuration][property_overview][format_phone_number]&label=" . __( 'Format phone number.', 'wpp' ), $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_phone_number' ] ) . '</li>';
 }
 
 /**
@@ -649,13 +649,13 @@ function add_format_phone_number_checkbox() {
  */
 function add_format_true_checkbox() {
   global $wp_properties;
-  echo '<li>' . WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][format_true_checkbox]&label=" . __( 'Convert "Yes" and "True" values to checked icons on the front-end.', 'wpp' ), $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_true_checkbox' ] ) . '</li>';
+  echo '<li>' . Utility::checkbox( "name=wpp_settings[configuration][property_overview][format_true_checkbox]&label=" . __( 'Convert "Yes" and "True" values to checked icons on the front-end.', 'wpp' ), $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_true_checkbox' ] ) . '</li>';
 }
 
 /**
  * Add "city" as an inheritable attribute for city property_type
  *
- * Modifies $wp_properties['property_inheritance'] in WPP_F::settings_action(), overriding database settings
+ * Modifies $wp_properties['property_inheritance'] in Utility::settings_action(), overriding database settings
  *
  * @since 1.0
  *
@@ -673,7 +673,7 @@ function add_city_to_inheritance( $property_inheritance ) {
 /**
  * Adds city to searchable
  *
- * Modifies $wp_properties['searchable_attributes'] in WPP_F::settings_action(), overriding database settings
+ * Modifies $wp_properties['searchable_attributes'] in Utility::settings_action(), overriding database settings
  *
  * @since 1.0
  *
@@ -715,7 +715,7 @@ function add_square_foot( $area ) {
  * Demonstrates how to add a new attribute to the property class
  *
  * @since 1.08
- * @uses WPP_F::get_coordinates() Creates an array from string $args.
+ * @uses Utility::get_coordinates() Creates an array from string $args.
  *
  * @param $property
  *
@@ -841,7 +841,7 @@ function add_display_address( $property ) {
  * Demonstrates how to add dollar signs before all prices and deposits
  *
  * @since 1.15.3
- * @uses WPP_F::get_coordinates() Creates an array from string $args.
+ * @uses Utility::get_coordinates() Creates an array from string $args.
  *
  * @param $content
  *
@@ -863,7 +863,7 @@ function add_dollar_sign( $content ) {
       'return add_dollar_sign( $matches[0] );'
     ), $content );
   } else {
-    return ( $currency_symbol_placement == 'before' ? $currency_symbol : '' ) . WPP_F::format_numeric( $content ) . ( $currency_symbol_placement == 'after' ? $currency_symbol : '' );
+    return ( $currency_symbol_placement == 'before' ? $currency_symbol : '' ) . Utility::format_numeric( $content ) . ( $currency_symbol_placement == 'after' ? $currency_symbol : '' );
   }
 }
 
@@ -873,7 +873,7 @@ function add_dollar_sign( $content ) {
  * Echos html content to be displayed after location attribute on property edit page
  *
  * @since 1.0
- * @uses WPP_F::get_coordinates() Creates an array from string $args.
+ * @uses Utility::get_coordinates() Creates an array from string $args.
  *
  * @param bool|string $listing_id Listing ID must be passed
  */
@@ -883,7 +883,7 @@ function wpp_show_coords( $listing_id = false ) {
     return;
 
   // If latitude and logitude meta isn't set, returns false
-  $coords = WPP_F::get_coordinates( $listing_id );
+  $coords = Utility::get_coordinates( $listing_id );
 
   echo "<span class='description'>";
   if( $coords ) {

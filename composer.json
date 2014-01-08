@@ -49,6 +49,9 @@
   },
   "require-dev": {
     "usabilitydynamics/wp-property-admin-tools": "master",
+    "usabilitydynamics/wp-property-exporter": "master",
+    "usabilitydynamics/wp-property-facebook-tabs": "master",
+    "usabilitydynamics/wp-property-enterprise": "master",
     "usabilitydynamics/wp-property-feps": "master",
     "usabilitydynamics/wp-property-agents": "master",
     "usabilitydynamics/wp-property-pdf": "master",
@@ -58,6 +61,18 @@
     "usabilitydynamics/wp-property-power-tools": "master"
   },
   "autoload": {
-    "classmap": [ "lib" ]
+    "classmap": [
+      "lib/class-bootstrap.php",
+      "lib/class-formatting.php",
+      "lib/class-list-table.php",
+      "lib/class-mail.php",
+      "lib/class-module.php",
+      "lib/class-object-list-table.php",
+      "lib/class-shortcode.php",
+      "lib/class-template.php",
+      "lib/class-ui.php",
+      "lib/class-utility.php",
+      "lib/class-widget.php"
+    ]
   }
 }

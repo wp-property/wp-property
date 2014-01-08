@@ -14,11 +14,11 @@ class Property_Attributes_Widget extends WP_Widget {
    */
   function __construct() {
 
-    $property_label = strtolower( WPP_F::property_label() );
+    $property_label = strtolower( Utility::property_label() );
 
     parent::__construct(
       'wpp_property_attributes',
-      sprintf( __( '%1s Attributes', 'wpp' ), WPP_F::property_label() ),
+      sprintf( __( '%1s Attributes', 'wpp' ), Utility::property_label() ),
       array(
         'classname'   => 'wpp_property_attributes',
         'description' => sprintf( __( 'Display a list of selected %1s attributes when loaded on a single %2s page.', 'wpp' ), $property_label, $property_label )
@@ -81,7 +81,7 @@ class Property_Attributes_Widget extends WP_Widget {
       }
 
       if( $show_labels ) {
-        $attribute = WPP_F::get_attribute_data( $slug );
+        $attribute = Utility::get_attribute_data( $slug );
       }
 
       $attributes[ ] = '<li class="' . $slug . '">' . ( $show_labels ? '<span class="attribute">' . $attribute[ 'label' ] . '<span class="separator">:</span> </span>' : '' ) . '</span><span class="value">' . $value . '</span></li>';
@@ -115,8 +115,8 @@ class Property_Attributes_Widget extends WP_Widget {
     $main_options   = array();
     $widget_options = ( is_array( $instance ) ? $instance : array() );
 
-    foreach( WPP_F::get_total_attribute_array() as $slug => $label ) {
-      $main_options[ $slug ] = WPP_F::get_attribute_data( $slug );
+    foreach( Utility::get_total_attribute_array() as $slug => $label ) {
+      $main_options[ $slug ] = Utility::get_attribute_data( $slug );
     }
 
     //** We don't want to mix in the title into our array */

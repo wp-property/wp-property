@@ -6,11 +6,11 @@ class OtherPropertiesWidget extends WP_Widget {
 
   function OtherPropertiesWidget() {
 
-    $property_label = strtolower( WPP_F::property_label( 'plural' ) );
+    $property_label = strtolower( Utility::property_label( 'plural' ) );
 
     parent::__construct(
       false,
-      sprintf( __( 'Other %1s', 'wpp' ), WPP_F::property_label( 'plural' ) ),
+      sprintf( __( 'Other %1s', 'wpp' ), Utility::property_label( 'plural' ) ),
       array(
         'description' => sprintf( __( 'Display a list of %1s that share a parent with the currently displayed property.', 'wpp' ), $property_label )
       ),
@@ -61,7 +61,7 @@ class OtherPropertiesWidget extends WP_Widget {
         'exclude' => $post->ID
       ) );
     } else {
-      $properties = WPP_F::get_properties( "property_type={$this_property['property_type']}&pagi=0--$amount_items" );
+      $properties = Utility::get_properties( "property_type={$this_property['property_type']}&pagi=0--$amount_items" );
     }
 
     if ( empty( $properties ) ) {
@@ -86,7 +86,7 @@ class OtherPropertiesWidget extends WP_Widget {
 
       $property_id = is_object( $single ) ? $single->ID : $single;
 
-      $this_property = WPP_F::get_property( $property_id, 'return_object=true' );
+      $this_property = Utility::get_property( $property_id, 'return_object=true' );
 
       $this_property = prepare_property_for_display( $this_property );
 
@@ -214,7 +214,7 @@ class OtherPropertiesWidget extends WP_Widget {
     <p
       class="choose_thumb_other" <?php echo ( $hide_image !== 'on' ) ? 'style="display:block;"' : 'style="display:none;"'; ?>>
       <label for="<?php echo $this->get_field_id( 'image_type' ); ?>"><?php _e( 'Image Size:', 'wpp' ); ?></label>
-      <?php WPP_F::image_sizes_dropdown( "name=" . $this->get_field_name( 'image_type' ) . "&selected=" . $image_type ); ?>
+      <?php Utility::image_sizes_dropdown( "name=" . $this->get_field_name( 'image_type' ) . "&selected=" . $image_type ); ?>
     </p>
 
     <p>

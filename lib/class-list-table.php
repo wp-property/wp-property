@@ -241,7 +241,7 @@ namespace UsabilityDynamics\WPP {
         if( !$ajax ) $this->all_items = array();
 
         if( !isset( $this->all_items ) ) {
-          $this->all_items = WPP_F::get_properties( $wpp_search );
+          $this->all_items = Utility::get_properties( $wpp_search );
         }
 
         //** Do pagination  */

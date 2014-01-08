@@ -9,7 +9,7 @@ class FeaturedPropertiesWidget extends WP_Widget {
    * constructor
    */
   function FeaturedPropertiesWidget() {
-    parent::WP_Widget( false, $name = sprintf( __( 'Featured %1s', 'wpp' ), WPP_F::property_label( 'plural' ) ), array( 'description' => sprintf( __( 'List of %1s that were marked as Featured', 'wpp' ), WPP_F::property_label( 'plural' ) ) ) );
+    parent::WP_Widget( false, $name = sprintf( __( 'Featured %1s', 'wpp' ), Utility::property_label( 'plural' ) ), array( 'description' => sprintf( __( 'List of %1s that were marked as Featured', 'wpp' ), Utility::property_label( 'plural' ) ) ) );
   }
 
   /**
@@ -41,15 +41,15 @@ class FeaturedPropertiesWidget extends WP_Widget {
     if ( !$image_type ) {
       $image_type = '';
     } else {
-      $image_size = WPP_F::image_sizes( $image_type );
+      $image_size = Utility::image_sizes( $image_type );
     }
 
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
-      $property_stats[ 'property_type' ] = sprintf(__( '%1s Type', 'wpp' ), WPP_F::property_label( 'singular' ) );
+      $property_stats[ 'property_type' ] = sprintf(__( '%1s Type', 'wpp' ), Utility::property_label( 'singular' ) );
     }
 
     $random_sort = $random_items == 1 ? '&sort_by=random' : '';
-    $all_featured = WPP_F::get_properties( "featured=true&property_type=all&pagi=0--{$amount_items}{$random_sort}" );
+    $all_featured = Utility::get_properties( "featured=true&property_type=all&pagi=0--{$amount_items}{$random_sort}" );
 
     /** Bail out if no children */
     if ( !$all_featured ) {
@@ -76,7 +76,7 @@ class FeaturedPropertiesWidget extends WP_Widget {
         continue;
       }
       $count++;
-      $this_property = WPP_F::get_property( $featured, 'return_object=true' );
+      $this_property = Utility::get_property( $featured, 'return_object=true' );
       $image = wpp_get_image_link( $this_property->featured_image, $image_type, array( 'return' => 'array' ) );
       $width = ( !empty( $image_size[ 'width' ] ) ? $image_size[ 'width' ] : ( !empty( $image[ 'width' ] ) ? $image[ 'width' ] : '' ) );
       $height = ( !empty( $image_size[ 'height' ] ) ? $image_size[ 'height' ] : ( !empty( $image[ 'height' ] ) ? $image[ 'height' ] : '' ) );
@@ -162,7 +162,7 @@ class FeaturedPropertiesWidget extends WP_Widget {
     }
 
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
-      $property_stats[ 'property_type' ] = sprintf( __( '%1s Type', 'wpp' ), WPP_F::property_label( 'singular' ) );
+      $property_stats[ 'property_type' ] = sprintf( __( '%1s Type', 'wpp' ), Utility::property_label( 'singular' ) );
     }
     ?>
     <script type="text/javascript">
@@ -194,7 +194,7 @@ class FeaturedPropertiesWidget extends WP_Widget {
     <p
       id="choose_thumb_featured" <?php echo( $hide_image !== 'on' ? 'style="display:block;"' : 'style="display:none;"' ); ?>>
       <label for="<?php echo $this->get_field_id( 'image_type' ); ?>"><?php _e( 'Image Size:', 'wpp' ); ?>
-        <?php WPP_F::image_sizes_dropdown( "name=" . $this->get_field_name( 'image_type' ) . "&selected=" . $image_type ); ?>
+        <?php Utility::image_sizes_dropdown( "name=" . $this->get_field_name( 'image_type' ) . "&selected=" . $image_type ); ?>
       </label>
     </p>
     <p>

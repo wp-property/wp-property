@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "cda64a268673f5b3f5ef4d80d5c5efda",
+    "hash": "45730a2cc41db04ad0249522fb78bfad",
     "packages": [
         {
             "name": "datatables/datatables",
@@ -675,7 +675,7 @@
                     "lib"
                 ]
             },
-            "time": "2014-01-06 13:19:47"
+            "time": "2014-01-07 20:32:19"
         },
         {
             "name": "usabilitydynamics/lib-settings",
@@ -782,7 +782,7 @@
             "keywords": [
                 "api"
             ],
-            "time": "2014-01-06 12:57:35"
+            "time": "2014-01-06 20:37:11"
         },
         {
             "name": "usabilitydynamics/lib-utility",
@@ -852,7 +852,226 @@
         }
     ],
     "packages-dev": [
-
+        {
+            "name": "usabilitydynamics/wp-property-admin-tools",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-admin-tools",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-admin-tools/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "time": "2014-01-06 17:40:45"
+        },
+        {
+            "name": "usabilitydynamics/wp-property-agents",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-agents",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-agents/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "time": "2014-01-06 17:27:39"
+        },
+        {
+            "name": "usabilitydynamics/wp-property-enterprise",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-enterprise",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-enterprise/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "time": "2014-01-07 23:32:35"
+        },
+        {
+            "name": "usabilitydynamics/wp-property-export",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-export",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-export/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "time": "2014-01-07 23:31:40"
+        },
+        {
+            "name": "usabilitydynamics/wp-property-facebook-tabs",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-facebook-tabs",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-facebook-tabs/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "time": "2014-01-06 18:11:04"
+        },
+        {
+            "name": "usabilitydynamics/wp-property-feps",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-feps",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-feps/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "time": "2014-01-08 00:12:41"
+        },
+        {
+            "name": "usabilitydynamics/wp-property-importer",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-importer",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-importer/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "time": "2014-01-07 23:37:16"
+        },
+        {
+            "name": "usabilitydynamics/wp-property-pdf",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-pdf",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-pdf/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "time": "2014-01-06 17:37:38"
+        },
+        {
+            "name": "usabilitydynamics/wp-property-power-tools",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-power-tools",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-power-tools/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "time": "2014-01-06 17:37:53"
+        },
+        {
+            "name": "usabilitydynamics/wp-property-slideshow",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-slideshow",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-slideshow/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "time": "2014-01-06 17:38:06"
+        },
+        {
+            "name": "usabilitydynamics/wp-property-supermap",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-supermap",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-supermap/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "time": "2014-01-06 17:28:01"
+        }
     ],
     "aliases": [
 

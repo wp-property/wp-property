@@ -7,13 +7,13 @@
  * @since 2.0
  * @author team@ud
  * @package WP-Property
- * @subpackage Templates
+ * @subpackage Template
  */
 namespace UsabilityDynamics\WPP {
 
-  if( !class_exists( 'UsabilityDynamics\WPP\Templates' ) ) {
+  if( !class_exists( 'UsabilityDynamics\WPP\Template' ) ) {
 
-    class Templates {
+    class Template {
 
       /**
        * Hooks Setter

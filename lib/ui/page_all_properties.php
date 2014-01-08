@@ -14,7 +14,7 @@
   <h2><?php echo $wp_properties['labels']['all_items']; ?> <a href="<?php echo admin_url('post-new.php?post_type=property'); ?>" class="button add-new-h2"><?php echo $wp_properties['labels']['add_new_item']; ?></a></h2>
 
   <form id="<?php echo $wp_list_table->table_scope; ?>-filter" action="#" method="POST">
-    <?php if(!WPP_F::is_older_wp_version('3.4')) : ?>
+    <?php if(!Utility::is_older_wp_version('3.4')) : ?>
     <div id="poststuff" class="crm-wp-v34">
       <div id="post-body" class="metabox-holder <?php echo 2 == $screen_layout_columns ? 'columns-2' : 'columns-1'; ?>">
         <div id="post-body-content">

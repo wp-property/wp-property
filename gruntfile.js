@@ -63,8 +63,12 @@ module.exports = function( grunt ) {
         version: '<%= pkg.version %>',
         url: '<%= pkg.homepage %>',
         options: {
-          paths: 'core',
-          outdir: 'static/codex/'
+          extension: '.js,.php',
+          outdir: 'static/codex/',
+          "paths": [
+            "./lib",
+            "./js"
+          ]
         }
       }
     },

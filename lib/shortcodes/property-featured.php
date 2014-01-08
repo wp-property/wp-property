@@ -14,7 +14,7 @@
  * @internal param string $listing_id Listing ID must be passed
  *
  * @return string
- * @uses WPP_F::get_properties()
+ * @uses Utility::get_properties()
  */
 
 namespace UsabilityDynamics\WPP {
@@ -40,7 +40,7 @@ namespace UsabilityDynamics\WPP {
       static function shortcode_featured_properties( $atts = false ) {
         global $wp_properties, $wpp_query, $post;
 
-        $default_property_type = WPP_F::get_most_common_property_type();
+        $default_property_type = Utility::get_most_common_property_type();
 
         if( !$atts ) {
           $atts = array();

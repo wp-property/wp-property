@@ -76,7 +76,7 @@ namespace UsabilityDynamics\WPP {
 
         $ID = (int) $ID;
 
-        $post = WPP_F::get_property( $ID );
+        $post = Utility::get_property( $ID );
 
         $post = (object) $post;
 

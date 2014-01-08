@@ -49,7 +49,7 @@ namespace UsabilityDynamics\WPP {
 
         // Check for errors
         if( is_wp_error( $response ) ) {
-          WPP_F::log( 'API Check Error: ' . $response->get_error_message() );
+          Utility::log( 'API Check Error: ' . $response->get_error_message() );
 
           return false;
         }
@@ -67,7 +67,7 @@ namespace UsabilityDynamics\WPP {
           if( $args[ 'return' ] ) {
             return $response[ 'body' ];
           } else {
-            WPP_F::log( "API Check Error: " . sprintf( __( 'An error occurred during API key request: <b>%s</b>.', 'wpp' ), $response[ 'body' ] ) );
+            Utility::log( "API Check Error: " . sprintf( __( 'An error occurred during API key request: <b>%s</b>.', 'wpp' ), $response[ 'body' ] ) );
 
             return false;
           }
@@ -128,7 +128,7 @@ namespace UsabilityDynamics\WPP {
 
         $template = apply_filters( "ud::template_part::{$opts['instance']}", $template, array( 'name' => $name, 'path' => $path, 'opts' => $opts ) );
 
-        WPP_F::console_log( $template, $instance );
+        Utility::console_log( $template, $instance );
 
         return !empty( $template ) ? $template : false;
       }
@@ -547,7 +547,7 @@ namespace UsabilityDynamics\WPP {
         if( !$match || $result[ 'response' ][ 'code' ] != 200 ) {
 
           if( $wp_properties[ 'configuration' ][ 'developer_mode' ] == 'true' ) {
-            WPP_F::console_log( "Remote asset ($url) could not be loaded, content type returned: " . $result[ 'headers' ][ 'content-type' ] );
+            Utility::console_log( "Remote asset ($url) could not be loaded, content type returned: " . $result[ 'headers' ][ 'content-type' ] );
           }
 
           return false;
@@ -657,7 +657,7 @@ namespace UsabilityDynamics\WPP {
           $json = preg_replace( '/[^(\x20-\x7F)]*/', '', $json );
         }
 
-        $json = WPP_F::strip_invalid_xml( $json );
+        $json = Utility::strip_invalid_xml( $json );
 
         $data = json_decode( $json, true );
 
@@ -778,7 +778,7 @@ namespace UsabilityDynamics\WPP {
         unlink( $temp_file );
 
         //** Get it into XML (We want to use json_to_xml because it does all the cleansing of weird characters) */
-        $xml = WPP_F::json_to_xml( json_encode( $csv ) );
+        $xml = Utility::json_to_xml( json_encode( $csv ) );
 
         return $xml;
 
@@ -831,7 +831,7 @@ namespace UsabilityDynamics\WPP {
           return false;
         }
 
-        return sprintf( __( 'Set %1s %4s to "%2s" %3s type', 'wpp' ), count( $success ), WPP_F::property_label( 'plural' ), $property_type, WPP_F::property_label( 'singular' ) );
+        return sprintf( __( 'Set %1s %4s to "%2s" %3s type', 'wpp' ), count( $success ), Utility::property_label( 'plural' ), $property_type, Utility::property_label( 'singular' ) );
 
       }
 
@@ -1062,7 +1062,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         if( empty( $return[ 'title' ] ) ) {
-          $return[ 'title' ] = WPP_F::de_slug( $return[ 'slug' ] );
+          $return[ 'title' ] = Utility::de_slug( $return[ 'slug' ] );
         }
 
         $return[ 'ui_class' ] = implode( ' wpp_', $ui_class );
@@ -1444,7 +1444,7 @@ namespace UsabilityDynamics\WPP {
         if( $post_type == 'property' ) {
 
           //** Get Property Images */
-          $property = WPP_F::get_property( $requested_id );
+          $property = Utility::get_property( $requested_id );
 
           echo 'Requested Property: ' . $property[ 'post_title' ];
           $data = get_children( array( 'post_parent' => $requested_id, 'post_type' => 'attachment', 'post_mime_type' => 'image', 'orderby' => 'menu_order ASC, ID', 'order' => 'DESC' ) );
@@ -1710,14 +1710,14 @@ namespace UsabilityDynamics\WPP {
 
         $return[ 'updated' ] = $return[ 'failed' ] = $return[ 'over_query_limit' ] = $return[ 'over_query_limit' ] = array();
 
-        $google_map_localizations = WPP_F::draw_localization_dropdown( 'return_array=true' );
+        $google_map_localizations = Utility::draw_localization_dropdown( 'return_array=true' );
 
         foreach( (array) $all_properties as $post_id ) {
           if( $delay ) {
             sleep( $delay );
           }
 
-          $result = WPP_F::revalidate_address( $post_id, array( 'skip_existing' => $skip_existing, 'return_geo_data' => $return_geo_data ) );
+          $result = Utility::revalidate_address( $post_id, array( 'skip_existing' => $skip_existing, 'return_geo_data' => $return_geo_data ) );
 
           $return[ $result[ 'status' ] ][ ] = $post_id;
 
@@ -1751,18 +1751,18 @@ namespace UsabilityDynamics\WPP {
         }
 
         $return[ 'success' ] = 'true';
-        $return[ 'message' ] = sprintf( __( 'Updated %1$d %2$s using the %3$s localization.', 'wpp' ), ( $echo_result == 'true' ) ? $return[ 'updated' ] : count( $return[ 'updated' ] ), WPP_F::property_label( 'plural' ), $google_map_localizations[ $wp_properties[ 'configuration' ][ 'google_maps_localization' ] ] );
+        $return[ 'message' ] = sprintf( __( 'Updated %1$d %2$s using the %3$s localization.', 'wpp' ), ( $echo_result == 'true' ) ? $return[ 'updated' ] : count( $return[ 'updated' ] ), Utility::property_label( 'plural' ), $google_map_localizations[ $wp_properties[ 'configuration' ][ 'google_maps_localization' ] ] );
 
         if( $return[ 'empty_address' ] ) {
-          $return[ 'message' ] .= "<br />" . sprintf( __( '%1$d %2$s has empty address.', 'wpp' ), ( $echo_result == 'true' ) ? $return[ 'empty_address' ] : count( $return[ 'empty_address' ] ), WPP_F::property_label( 'plural' ) );
+          $return[ 'message' ] .= "<br />" . sprintf( __( '%1$d %2$s has empty address.', 'wpp' ), ( $echo_result == 'true' ) ? $return[ 'empty_address' ] : count( $return[ 'empty_address' ] ), Utility::property_label( 'plural' ) );
         }
 
         if( $return[ 'failed' ] ) {
-          $return[ 'message' ] .= "<br />" . sprintf( __( '%1$d %2$s could not be updated.', 'wpp' ), ( $echo_result == 'true' ) ? $return[ 'failed' ] : count( $return[ 'failed' ] ), WPP_F::property_label( 'plural' ) );
+          $return[ 'message' ] .= "<br />" . sprintf( __( '%1$d %2$s could not be updated.', 'wpp' ), ( $echo_result == 'true' ) ? $return[ 'failed' ] : count( $return[ 'failed' ] ), Utility::property_label( 'plural' ) );
         }
 
         if( $return[ 'over_query_limit' ] ) {
-          $return[ 'message' ] .= "<br />" . sprintf( __( '%1$d %2$s was ignored because query limit was exceeded.', 'wpp' ), ( $echo_result == 'true' ) ? $return[ 'over_query_limit' ] : count( $return[ 'over_query_limit' ] ), WPP_F::property_label( 'plural' ) );
+          $return[ 'message' ] .= "<br />" . sprintf( __( '%1$d %2$s was ignored because query limit was exceeded.', 'wpp' ), ( $echo_result == 'true' ) ? $return[ 'over_query_limit' ] : count( $return[ 'over_query_limit' ] ), Utility::property_label( 'plural' ) );
         }
 
         //** Warning Silincer */
@@ -1830,11 +1830,11 @@ namespace UsabilityDynamics\WPP {
           $address_by_coordinates = !empty( $coordinates ) && $manual_coordinates && empty( $address );
 
           if( !empty( $address ) ) {
-            $geo_data = WPP_F::geo_locate_address( $address, $wp_properties[ 'configuration' ][ 'google_maps_localization' ], true );
+            $geo_data = Utility::geo_locate_address( $address, $wp_properties[ 'configuration' ][ 'google_maps_localization' ], true );
           }
 
           if( !empty( $coordinates ) && $manual_coordinates ) {
-            $geo_data_coordinates = WPP_F::geo_locate_address( $address, $wp_properties[ 'configuration' ][ 'google_maps_localization' ], true, $coordinates );
+            $geo_data_coordinates = Utility::geo_locate_address( $address, $wp_properties[ 'configuration' ][ 'google_maps_localization' ], true, $coordinates );
           }
 
           /** if Address was invalid or empty but we have valid $coordinates we use them */
@@ -1859,12 +1859,12 @@ namespace UsabilityDynamics\WPP {
           update_post_meta( $post_id, 'address_is_formatted', true );
 
           if( !empty( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) && ( !$manual_coordinates || $address_by_coordinates ) ) {
-            update_post_meta( $post_id, $wp_properties[ 'configuration' ][ 'address_attribute' ], WPP_F::encode_mysql_input( $geo_data->formatted_address, $wp_properties[ 'configuration' ][ 'address_attribute' ] ) );
+            update_post_meta( $post_id, $wp_properties[ 'configuration' ][ 'address_attribute' ], Utility::encode_mysql_input( $geo_data->formatted_address, $wp_properties[ 'configuration' ][ 'address_attribute' ] ) );
           }
 
           foreach( $geo_data as $geo_type => $this_data ) {
             if( in_array( $geo_type, (array) $wp_properties[ 'geo_type_attributes' ] ) && !in_array( $geo_type, array( 'latitude', 'longitude' ) ) ) {
-              update_post_meta( $post_id, $geo_type, WPP_F::encode_mysql_input( $this_data, $geo_type ) );
+              update_post_meta( $post_id, $geo_type, Utility::encode_mysql_input( $this_data, $geo_type ) );
             }
           }
 
@@ -1995,7 +1995,7 @@ namespace UsabilityDynamics\WPP {
        *
        */
       static function get_image_dimensions( $type = false ) {
-        return WPP_F::image_sizes( $type );
+        return Utility::image_sizes( $type );
       }
 
       /**
@@ -2342,7 +2342,7 @@ namespace UsabilityDynamics\WPP {
           $wpp_version = get_option( "wpp_version" );
 
           //** Get API key - force API key update just in case */
-          $api_key = WPP_F::get_api_key( array( 'force_check' => true, 'return' => true ) );
+          $api_key = Utility::get_api_key( array( 'force_check' => true, 'return' => true ) );
 
           if( !$api_key || empty( $api_key ) ) {
             throw new Exception( __( 'The API key could not be generated.', 'wpp' ) );
@@ -2375,7 +2375,7 @@ namespace UsabilityDynamics\WPP {
           }
 
           if( is_object( $r->available_features ) ) {
-            $r->available_features = WPP_F::objectToArray( $r->available_features );
+            $r->available_features = Utility::objectToArray( $r->available_features );
             //** Update WP-Property settings */
             $wpp_settings                         = get_option( 'wpp_settings' );
             $wpp_settings[ 'available_features' ] = $r->available_features;
@@ -2431,7 +2431,7 @@ namespace UsabilityDynamics\WPP {
                     $res = sprintf( __( '<b>%s</b> %s has been installed.', 'wpp' ), $code->name, $version );
                   }
                   if( !empty( $res ) ) {
-                    WPP_F::log( sprintf( __( 'WP-Property Premium Feature: %s', 'wpp' ), $res ) );
+                    Utility::log( sprintf( __( 'WP-Property Premium Feature: %s', 'wpp' ), $res ) );
                     $updates[ ] = $res;
                   }
                 } else {
@@ -2445,11 +2445,11 @@ namespace UsabilityDynamics\WPP {
           }
 
           //** Update settings */
-          WPP_F::settings_action( true );
+          Utility::settings_action( true );
 
         } catch( Exception $e ) {
 
-          WPP_F::log( "Feature Update Error: " . $e->getMessage() );
+          Utility::log( "Feature Update Error: " . $e->getMessage() );
 
           return new WP_Error( 'error', $e->getMessage() );
 
@@ -2576,7 +2576,7 @@ namespace UsabilityDynamics\WPP {
       <option value=""><?php echo $blank_selection_label; ?></option>
           <?php
           foreach( $image_array as $name ) {
-            $sizes = WPP_F::image_sizes( $name );
+            $sizes = Utility::image_sizes( $name );
 
             if( !$sizes ) {
               continue;
@@ -2964,7 +2964,7 @@ namespace UsabilityDynamics\WPP {
       static function check_plugin_updates() {
         global $wp_properties;
 
-        $result = WPP_F::feature_check();
+        $result = Utility::feature_check();
 
         if( is_wp_error( $result ) ) {
           printf( __( 'An error occurred during premium feature check: <b> %s </b>.', 'wpp' ), $result->get_error_message() );
@@ -2973,22 +2973,6 @@ namespace UsabilityDynamics\WPP {
         }
 
         return null;
-      }
-
-      /**
-       * Run on plugin activation.
-       *
-       * As of WP 3.1 this is not ran on automatic update.
-       *
-       * @since 1.10
-       *
-       */
-      static function activation() {
-        global $wp_rewrite;
-        // Do close to nothing because only ran on activation, not updates, as of 3.1
-        // Now handled by WPP_F::manual_activation().
-
-        $wp_rewrite->flush_rules();
       }
 
       /**
@@ -3024,7 +3008,7 @@ namespace UsabilityDynamics\WPP {
           update_option( "wpp_version", $wpp_version );
 
           // Get premium features on activation
-          @WPP_F::feature_check();
+          @Utility::feature_check();
 
         }
 
@@ -3064,16 +3048,6 @@ namespace UsabilityDynamics\WPP {
 
       }
 
-      static function deactivation() {
-        global $wp_rewrite;
-        $timestamp = wp_next_scheduled( 'wpp_premium_feature_check' );
-        wp_unschedule_event( $timestamp, 'wpp_premium_feature_check' );
-        wp_clear_scheduled_hook( 'wpp_premium_feature_check' );
-
-        $wp_rewrite->flush_rules();
-
-      }
-
       /**
        * Returns array of searchable property IDs
        *
@@ -3093,7 +3067,7 @@ namespace UsabilityDynamics\WPP {
         // Get IDs of all property types
         foreach( $wp_properties[ 'searchable_property_types' ] as $property_type ) {
 
-          $this_type_properties = WPP_F::get_properties( "property_type=$property_type" );
+          $this_type_properties = Utility::get_properties( "property_type=$property_type" );
 
           if( is_array( $this_type_properties ) && is_array( $searchable_properties ) )
             $searchable_properties = array_merge( $searchable_properties, $this_type_properties );
@@ -3193,7 +3167,7 @@ namespace UsabilityDynamics\WPP {
             }
 
             //** Load attribute data */
-            $attribute_data = WPP_F::get_attribute_data( $searchable_attribute );
+            $attribute_data = Utility::get_attribute_data( $searchable_attribute );
 
             if( $attribute_data[ 'numeric' ] || $attribute_data[ 'currency' ] ) {
               $is_numeric = true;
@@ -3261,7 +3235,7 @@ namespace UsabilityDynamics\WPP {
               $original_value = $value;
 
               // Clean up values if a conversion exists
-              $value = WPP_F::do_search_conversion( $searchable_attribute, trim( $value ) );
+              $value = Utility::do_search_conversion( $searchable_attribute, trim( $value ) );
 
               // Fix value with special chars. Disabled here, should only be done in final templating stage.
               // $value = htmlspecialchars($value, ENT_QUOTES);
@@ -3361,7 +3335,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Prints args to firebug if debug mode is enabled */
         $log = is_array( $args ) ? urldecode( http_build_query( $args ) ) : $args;
-        WPP_F::console_log( "get_properties() args: {$log}" );
+        Utility::console_log( "get_properties() args: {$log}" );
 
         //** The function can be overwritten using the filter below. */
         $response = apply_filters( 'wpp::get_properties::custom', null, $args, $total );
@@ -3514,7 +3488,7 @@ namespace UsabilityDynamics\WPP {
         foreach( (array) $query as $meta_key => $criteria ) {
 
           $specific = '';
-          $criteria = WPP_F::encode_mysql_input( $criteria, $meta_key );
+          $criteria = Utility::encode_mysql_input( $criteria, $meta_key );
 
           // Stop filtering ( loop ) because no IDs left
           if( isset( $matching_ids ) && empty( $matching_ids ) ) {
@@ -4099,7 +4073,7 @@ namespace UsabilityDynamics\WPP {
 
           $return[ 'is_child' ] = true;
 
-          $parent_object = WPP_F::get_property( $post[ 'post_parent' ], array( 'load_gallery' => $load_gallery, 'get_children' => false ) );
+          $parent_object = Utility::get_property( $post[ 'post_parent' ], array( 'load_gallery' => $load_gallery, 'get_children' => false ) );
 
           $return[ 'parent_id' ]    = $post[ 'post_parent' ];
           $return[ 'parent_link' ]  = $parent_object[ 'permalink' ];
@@ -4130,7 +4104,7 @@ namespace UsabilityDynamics\WPP {
             //** Cycle through children and get necessary variables */
             foreach( $children as $child_id ) {
 
-              $child_object                      = WPP_F::get_property( $child_id, array( 'load_gallery' => $load_gallery, 'load_parent' => false ) );
+              $child_object                      = Utility::get_property( $child_id, array( 'load_gallery' => $load_gallery, 'load_parent' => false ) );
               $return[ 'children' ][ $child_id ] = $child_object;
 
               //** Save child image URLs into one array for quick access */
@@ -4144,7 +4118,7 @@ namespace UsabilityDynamics\WPP {
 
               foreach( $wp_properties[ 'searchable_attributes' ] as $searchable_attribute ) {
 
-                $attribute_data = WPP_F::get_attribute_data( $searchable_attribute );
+                $attribute_data = Utility::get_attribute_data( $searchable_attribute );
 
                 if( $attribute_data[ 'numeric' ] || $attribute_data[ 'currency' ] ) {
 
@@ -4210,7 +4184,7 @@ namespace UsabilityDynamics\WPP {
           $return[ 'address' ] = $return[ 'location' ];
         }
 
-        $return[ 'wpp_gpid' ]  = WPP_F::maybe_set_gpid( $id );
+        $return[ 'wpp_gpid' ]  = Utility::maybe_set_gpid( $id );
         $return[ 'permalink' ] = get_permalink( $id );
 
         //** Make sure property_type stays as slug, or it will break many things:  (widgets, class names, etc)  */
@@ -4252,7 +4226,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Convert to object */
         if( $return_object == 'true' ) {
-          $return = WPP_F::array_to_object( $return );
+          $return = Utility::array_to_object( $return );
         }
 
         wp_cache_add( $id . $args, $return );
@@ -4496,7 +4470,7 @@ namespace UsabilityDynamics\WPP {
           $property_stats[ $attribute ] = $wp_properties[ 'property_stats' ][ $attribute ];
         }
 
-        $property_stats = WPP_F::get_stat_values_and_labels( $property, array(
+        $property_stats = Utility::get_stat_values_and_labels( $property, array(
           'property_stats' => $property_stats
         ) );
 
@@ -4549,7 +4523,7 @@ namespace UsabilityDynamics\WPP {
               foreach( $property_stats as $attribute_label => $value ) {
 
                 $attribute_slug = $labels_to_keys[ $attribute_label ];
-                $attribute_data = WPP_F::get_attribute_data( $attribute_slug );
+                $attribute_data = Utility::get_attribute_data( $attribute_slug );
 
                 if( empty( $value ) ) {
                   continue;
@@ -4632,7 +4606,7 @@ namespace UsabilityDynamics\WPP {
           $wpdb->query( "UPDATE {$wpdb->posts} SET post_parent=0 WHERE ID={$post_id}" );
         }
 
-        update_post_meta( $post_id, 'parent_gpid', WPP_F::maybe_set_gpid( $parent_id ) );
+        update_post_meta( $post_id, 'parent_gpid', Utility::maybe_set_gpid( $parent_id ) );
 
         return $parent_id;
       }
@@ -4761,7 +4735,7 @@ namespace UsabilityDynamics\WPP {
           return $exists;
         }
 
-        $gpid = WPP_F::get_gpid( $property_id, true );
+        $gpid = Utility::get_gpid( $property_id, true );
 
         update_post_meta( $property_id, 'wpp_gpid', $gpid );
 
@@ -5050,12 +5024,12 @@ namespace UsabilityDynamics\WPP {
                     default:
                       $label = strtoupper( substr( $attr, 0, 1 ) ) . substr( $attr, 1, strlen( $attr ) );
                   }
-                  $attrs[ $attr ] = $label . ' (' . WPP_F::format_numeric( $count ) . ')';
+                  $attrs[ $attr ] = $label . ' (' . Utility::format_numeric( $count ) . ')';
                   $all += $count;
                 }
               }
 
-              $attrs[ 'all' ] = __( 'All', 'wpp' ) . ' (' . WPP_F::format_numeric( $all ) . ')';
+              $attrs[ 'all' ] = __( 'All', 'wpp' ) . ' (' . Utility::format_numeric( $all ) . ')';
               $attr_values    = $attrs;
 
               ksort( $attr_values );

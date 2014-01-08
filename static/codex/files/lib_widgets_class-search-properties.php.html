@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib/widgets/class-search-properties.php - usabilitydynamics/wp-property</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="usabilitydynamics/wp-property"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 2.0.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/UsabilityDynamics\WPP.Bootstrap.html">UsabilityDynamics\WPP.Bootstrap</a></li>
+            
+                <li><a href="../classes/UsabilityDynamics\WPP.Loader.html">UsabilityDynamics\WPP.Loader</a></li>
+            
+                <li><a href="../classes/UsabilityDynamics\WPP.WPP.html">UsabilityDynamics\WPP.WPP</a></li>
+            
+                <li><a href="../classes/wpp.html">wpp</a></li>
+            
+                <li><a href="../classes/wpp.overview.html">wpp.overview</a></li>
+            
+                <li><a href="../classes/wpp.ui.agents.html">wpp.ui.agents</a></li>
+            
+                <li><a href="../classes/wpp.ui.feps.html">wpp.ui.feps</a></li>
+            
+                <li><a href="../classes/wpp.ui.settings.html">wpp.ui.settings</a></li>
+            
+                <li><a href="../classes/wpp.xmli.html">wpp.xmli</a></li>
+            
+                <li><a href="../classes/wpp_default_api.html">wpp_default_api</a></li>
+            
+                <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: lib/widgets/class-search-properties.php</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&lt;?php
+/**
+ * Property Search Widget
+ */
+class SearchPropertiesWidget extends WP_Widget {
+  var $id = false;
+
+  /** constructor */
+  function SearchPropertiesWidget() {
+
+    $property_label = strtolower( Utility::property_label() );
+
+    parent::__construct(
+      false,
+      sprintf( __( &#x27;%1s Search&#x27;, &#x27;wpp&#x27; ), Utility::property_label() ),
+      array(
+        &#x27;classname&#x27; =&gt; &#x27;wpp_property_attributes&#x27;,
+        &#x27;description&#x27; =&gt; sprintf( __( &#x27;Display a highly customizable  %1s search form.&#x27;, &#x27;wpp&#x27; ), $property_label )
+      ),
+      array(
+        &#x27;width&#x27; =&gt; 300
+      )
+    );
+
+  }
+
+  /** @see WP_Widget::widget */
+  function widget( $args, $instance ) {
+
+    global $wp_properties;
+    $before_widget = &#x27;&#x27;;
+    $before_title = &#x27;&#x27;;
+    $after_title = &#x27;&#x27;;
+    $after_widget = &#x27;&#x27;;
+    $widget_id = &#x27;&#x27;;
+    extract( $args );
+    $title = apply_filters( &#x27;widget_title&#x27;, $instance[ &#x27;title&#x27; ] );
+
+    $instance = apply_filters( &#x27;SearchPropertiesWidget&#x27;, $instance );
+    $search_attributes = $instance[ &#x27;searchable_attributes&#x27; ];
+    $sort_by = $instance[ &#x27;sort_by&#x27; ];
+    $sort_order = $instance[ &#x27;sort_order&#x27; ];
+    $searchable_property_types = $instance[ &#x27;searchable_property_types&#x27; ];
+    $grouped_searchable_attributes = $instance[ &#x27;grouped_searchable_attributes&#x27; ];
+
+    if ( !is_array( $search_attributes ) ) {
+      return;
+    }
+
+    if ( !function_exists( &#x27;draw_property_search_form&#x27; ) ) {
+      return;
+    }
+
+    //** The current widget can be used on the page twice. So ID of the current DOM element (widget) has to be unique */
+    /*
+          Removed since this will cause problems with jQuery Tabs in Denali.
+          $before_widget = preg_replace(&#x27;/id=&quot;([^\s]*)&quot;/&#x27;, &#x27;id=&quot;$1_&#x27;.rand().&#x27;&quot;&#x27;, $before_widget);
+        */
+
+    echo $before_widget;
+
+    echo &#x27;&lt;div class=&quot;wpp_search_properties_widget&quot;&gt;&#x27;;
+
+    if ( $title ) {
+      echo $before_title . $title . $after_title;
+    } else {
+      echo &#x27;&lt;span class=&quot;wpp_widget_no_title&quot;&gt;&lt;/span&gt;&#x27;;
+    }
+
+    //** Load different attribute list depending on group selection */
+    if ( $instance[ &#x27;group_attributes&#x27; ] == &#x27;true&#x27; ) {
+      $search_args[ &#x27;group_attributes&#x27; ] = true;
+      $search_args[ &#x27;search_attributes&#x27; ] = $instance[ &#x27;grouped_searchable_attributes&#x27; ];
+    } else {
+      $search_args[ &#x27;search_attributes&#x27; ] = $search_attributes;
+    }
+
+    //* Clean searchable attributes: remove unavailable ones */
+    $all_searchable_attributes = array_unique( $wp_properties[ &#x27;searchable_attributes&#x27; ] );
+    foreach ( $search_args[ &#x27;search_attributes&#x27; ] as $k =&gt; $v ) {
+      if ( !in_array( $v, $all_searchable_attributes ) ) {
+        //* Don&#x27;t remove hardcoded attributes (property_type,city) */
+        if ( $v != &#x27;property_type&#x27; &amp;&amp; $v != &#x27;city&#x27; ) {
+          unset( $search_args[ &#x27;search_attributes&#x27; ][ $k ] );
+        }
+      }
+    }
+
+    $search_args[ &#x27;searchable_property_types&#x27; ] = $searchable_property_types;
+
+    if ( isset( $instance[ &#x27;use_pagi&#x27; ] ) &amp;&amp; $instance[ &#x27;use_pagi&#x27; ] == &#x27;on&#x27; ) {
+
+      if ( empty( $instance[ &#x27;per_page&#x27; ] ) ) {
+        $instance[ &#x27;per_page&#x27; ] = 10;
+      }
+
+      $search_args[ &#x27;per_page&#x27; ] = $instance[ &#x27;per_page&#x27; ];
+      $search_args[ &#x27;use_pagination&#x27; ] = &#x27;on&#x27;;
+    } else {
+      $search_args[ &#x27;use_pagination&#x27; ] = &#x27;off&#x27;;
+      $search_args[ &#x27;per_page&#x27; ] = $instance[ &#x27;per_page&#x27; ];
+    }
+
+    $search_args[ &#x27;instance_id&#x27; ] = $widget_id;
+    $search_args[ &#x27;sort_by&#x27; ] = $sort_by;
+    $search_args[ &#x27;sort_order&#x27; ] = $sort_order;
+
+    draw_property_search_form( $search_args );
+
+    echo &quot;&lt;div class=&#x27;cboth&#x27;&gt;&lt;/div&gt;&lt;/div&gt;&quot;;
+
+    echo $after_widget;
+  }
+
+  /** @see WP_Widget::update */
+  function update( $new_instance, $old_instance ) {
+    //Recache searchable values for search widget form
+    $searchable_attributes = $new_instance[ &#x27;searchable_attributes&#x27; ];
+    $grouped_searchable_attributes = $new_instance[ &#x27;grouped_searchable_attributes&#x27; ];
+    $searchable_property_types = $new_instance[ &#x27;searchable_property_types&#x27; ];
+    $group_attributes = $new_instance[ &#x27;group_attributes&#x27; ];
+
+
+    if ( $group_attributes == &#x27;true&#x27; ) {
+
+      Utility::get_search_values( $grouped_searchable_attributes, $searchable_property_types, false, $this-&gt;id );
+    } else {
+      Utility::get_search_values( $searchable_attributes, $searchable_property_types, false, $this-&gt;id );
+    }
+
+    return $new_instance;
+  }
+
+  /**
+   *
+   * Renders back-end property search widget tools.
+   *
+   * @complexity 8
+   * @author potanin@UD
+   *
+   */
+  function form( $instance ) {
+    global $wp_properties;
+
+    //** Get widget-specific data */
+    $title = ( $instance[ &#x27;title&#x27; ] );
+    $searchable_attributes = $instance[ &#x27;searchable_attributes&#x27; ];
+    $grouped_searchable_attributes = $instance[ &#x27;grouped_searchable_attributes&#x27; ];
+    $use_pagi = $instance[ &#x27;use_pagi&#x27; ];
+    $per_page = $instance[ &#x27;per_page&#x27; ];
+    $sort_by = $instance[ &#x27;sort_by&#x27; ];
+    $sort_order = $instance[ &#x27;sort_order&#x27; ];
+    $group_attributes = $instance[ &#x27;group_attributes&#x27; ];
+    $searchable_property_types = $instance[ &#x27;searchable_property_types&#x27; ];
+    $property_stats = $wp_properties[ &#x27;property_stats&#x27; ];
+
+    //** Get WPP data */
+    $all_searchable_property_types = array_unique( $wp_properties[ &#x27;searchable_property_types&#x27; ] );
+    $all_searchable_attributes = array_unique( $wp_properties[ &#x27;searchable_attributes&#x27; ] );
+    $groups = $wp_properties[ &#x27;property_groups&#x27; ];
+    $main_stats_group = $wp_properties[ &#x27;configuration&#x27; ][ &#x27;main_stats_group&#x27; ];
+
+
+    if ( !is_array( $all_searchable_property_types ) ) {
+      $error[ &#x27;no_searchable_types&#x27; ] = true;
+    }
+
+    if ( !is_array( $all_searchable_property_types ) ) {
+      $error[ &#x27;no_searchable_attributes&#x27; ] = true;
+    }
+
+    /** Set label for list below only */
+    if ( !isset( $property_stats[ &#x27;property_type&#x27; ] ) ) {
+      $property_stats[ &#x27;property_type&#x27; ] = sprintf(__( &#x27;%1s Type&#x27;, &#x27;wpp&#x27; ), Utility::property_label( &#x27;singular&#x27; ) );
+    }
+
+    if ( is_array( $all_searchable_property_types ) &amp;&amp; count( $all_searchable_property_types ) &gt; 1 ) {
+
+      //** Add property type to the beginning of the attribute list, even though it&#x27;s not a typical attribute */
+      array_unshift( $all_searchable_attributes, &#x27;property_type&#x27; );
+    }
+
+    //** Find the difference between selected attributes and all attributes, i.e. unselected attributes */
+    if ( is_array( $searchable_attributes ) &amp;&amp; is_array( $all_searchable_attributes ) ) {
+      $unselected_attributes = array_diff( $all_searchable_attributes, $searchable_attributes );
+
+      //* Clean searchable attributes: remove unavailable ones */
+      foreach ( $searchable_attributes as $k =&gt; $v ) {
+        if ( !in_array( $v, $all_searchable_attributes ) ) {
+          //* Don&#x27;t remove hardcoded attributes (property_type,city) */
+          if ( $v != &#x27;property_type&#x27; &amp;&amp; $v != &#x27;city&#x27; ) {
+            unset( $searchable_attributes[ $k ] );
+          }
+        }
+      }
+
+      // Build new array beginning with selected attributes, in order, follow by all other attributes
+      $ungrouped_searchable_attributes = array_merge( $searchable_attributes, $unselected_attributes );
+
+    } else {
+      $ungrouped_searchable_attributes = $all_searchable_attributes;
+    }
+
+    $ungrouped_searchable_attributes = array_unique( $ungrouped_searchable_attributes );
+
+    //* Perpare $all_searchable_attributes for using by sort function */
+    $temp_attrs = array();
+
+    foreach ( $all_searchable_attributes as $slug ) {
+      $attribute_label = $property_stats[ &#x27;property_stats&#x27; ][ $slug ];
+
+      if ( empty( $attribute_label ) ) {
+        $attribute_label = Utility::de_slug( $slug );
+      }
+
+      $temp_attrs[ $attribute_label ] = $slug;
+    }
+
+    //* Sort stats by groups */
+    $stats_by_groups = sort_stats_by_groups( $temp_attrs );
+
+    //** If the search widget cannot be created without some data, we bail */
+    if ( $error ) {
+      echo &#x27;&lt;p&gt;&#x27; . _e( &#x27;No searchable property types were found.&#x27;, &#x27;wpp&#x27; ) . &#x27;&lt;/p&gt;&#x27;;
+      return;
+    }
+
+    ?&gt;
+
+    &lt;ul data-widget_number=&quot;&lt;?php echo $this-&gt;number; ?&gt;&quot; data-widget=&quot;search_properties_widget&quot;
+      class=&quot;wpp_widget wpp_property_search_wrapper&quot;&gt;
+
+      &lt;li class=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;title&#x27; ); ?&gt;&quot;&gt;
+        &lt;label for=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;title&#x27; ); ?&gt;&quot;&gt;&lt;?php _e( &#x27;Title:&#x27;, &#x27;wpp&#x27; ); ?&gt;
+          &lt;input class=&quot;widefat&quot; id=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;title&#x27; ); ?&gt;&quot;
+            name=&quot;&lt;?php echo $this-&gt;get_field_name( &#x27;title&#x27; ); ?&gt;&quot; type=&quot;text&quot; value=&quot;&lt;?php echo $title; ?&gt;&quot;/&gt;
+        &lt;/label&gt;
+      &lt;/li&gt;
+
+      &lt;li class=&quot;wpp_property_types&quot;&gt;
+        &lt;p&gt;&lt;?php _e( &#x27;Property types to search:&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/p&gt;
+        &lt;ul&gt;
+          &lt;?php foreach ( $all_searchable_property_types as $property_type ) { ?&gt;
+            &lt;li&gt;
+              &lt;label
+                for=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;searchable_property_types&#x27; ); ?&gt;_&lt;?php echo $property_type; ?&gt;&quot;&gt;
+                &lt;input class=&quot;wpp_property_types&quot;
+                  id=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;searchable_property_types&#x27; ); ?&gt;_&lt;?php echo $property_type; ?&gt;&quot;
+                  name=&quot;&lt;?php echo $this-&gt;get_field_name( &#x27;searchable_property_types&#x27; ); ?&gt;[]&quot;
+                  type=&quot;checkbox&quot; &lt;?php if ( empty( $searchable_property_types ) ) {
+                  echo &#x27;checked=&quot;checked&quot;&#x27;;
+                } ?&gt;
+                  value=&quot;&lt;?php echo $property_type; ?&gt;&quot; &lt;?php if ( is_array( $searchable_property_types ) &amp;&amp; in_array( $property_type, $searchable_property_types ) ) {
+                  echo &quot; checked &quot;;
+                } ?&gt; /&gt;
+                &lt;?php echo( !empty( $wp_properties[ &#x27;property_types&#x27; ][ $property_type ] ) ? $wp_properties[ &#x27;property_types&#x27; ][ $property_type ] : ucwords( $property_type ) ); ?&gt;
+              &lt;/label&gt;
+            &lt;/li&gt;
+          &lt;?php } ?&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+
+      &lt;li class=&quot;wpp_attribute_selection&quot;&gt;
+        &lt;p&gt;&lt;?php _e( &#x27;Select the attributes you want to search.&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/p&gt;
+
+        &lt;div class=&quot;wpp_search_widget_tab wpp_subtle_tabs &quot;&gt;
+
+          &lt;ul class=&quot;wpp_section_tabs  tabs&quot;&gt;
+            &lt;li&gt;&lt;a href=&quot;#all_atributes_&lt;?php echo $this-&gt;id; ?&gt;&quot;&gt;&lt;?php _e( &#x27;All Attributes&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/a&gt;&lt;/li&gt;
+
+            &lt;?php if ( $stats_by_groups ) { ?&gt;
+              &lt;li&gt;&lt;a href=&quot;#grouped_attributes_&lt;?php echo $this-&gt;id; ?&gt;&quot;&gt;&lt;?php _e( &#x27;Grouped Attributes&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/a&gt;
+              &lt;/li&gt;
+            &lt;?php } ?&gt;
+          &lt;/ul&gt;
+
+          &lt;div id=&quot;all_atributes_&lt;?php echo $this-&gt;id; ?&gt;&quot; class=&quot;wp-tab-panel wpp_all_attributes&quot;&gt;
+            &lt;ul class=&quot;wpp_sortable_attributes&quot;&gt;
+              &lt;?php foreach ( $ungrouped_searchable_attributes as $attribute ) { ?&gt;
+
+                &lt;li class=&quot;wpp_attribute_wrapper &lt;?php echo $attribute; ?&gt;&quot;&gt;
+                  &lt;input id=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;searchable_attributes&#x27; ); ?&gt;_&lt;?php echo $attribute; ?&gt;&quot;
+                    name=&quot;&lt;?php echo $this-&gt;get_field_name( &#x27;searchable_attributes&#x27; ); ?&gt;[]&quot;
+                    type=&quot;checkbox&quot; &lt;?php if ( empty( $searchable_attributes ) ) {
+                    echo &#x27;checked=&quot;checked&quot;&#x27;;
+                  } ?&gt;
+                    value=&quot;&lt;?php echo $attribute; ?&gt;&quot; &lt;?php echo( ( is_array( $searchable_attributes ) &amp;&amp; in_array( $attribute, $searchable_attributes ) ) ? &quot; checked &quot; : &quot;&quot; ); ?&gt; /&gt;
+                  &lt;label
+                    for=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;searchable_attributes&#x27; ); ?&gt;_&lt;?php echo $attribute; ?&gt;&quot;&gt;&lt;?php echo( !empty( $property_stats[ $attribute ] ) ? $property_stats[ $attribute ] : ucwords( $attribute ) ); ?&gt;&lt;/label&gt;
+                &lt;/li&gt;
+              &lt;?php } ?&gt;
+            &lt;/ul&gt;
+          &lt;/div&gt;&lt;?php /* end all (ungrouped) attribute selection */ ?&gt;
+
+          &lt;?php if ( $stats_by_groups ) { ?&gt;
+            &lt;div id=&quot;grouped_attributes_&lt;?php echo $this-&gt;id; ?&gt;&quot; class=&quot;wpp_grouped_attributes_container wp-tab-panel&quot;&gt;
+
+              &lt;?php foreach ( $stats_by_groups as $gslug =&gt; $gstats ) { ?&gt;
+                &lt;?php if ( $main_stats_group != $gslug || !key_exists( $gslug, $groups ) ) { ?&gt;
+                  &lt;?php $group_name = ( key_exists( $gslug, $groups ) ? $groups[ $gslug ][ &#x27;name&#x27; ] : &quot;&lt;span style=\&quot;color:#8C8989\&quot;&gt;&quot; . __( &#x27;Ungrouped&#x27;, &#x27;wpp&#x27; ) . &quot;&lt;/span&gt;&quot; ); ?&gt;
+                  &lt;h2 class=&quot;wpp_stats_group&quot;&gt;&lt;?php echo $group_name; ?&gt;&lt;/h2&gt;
+                &lt;?php } ?&gt;
+                &lt;ul&gt;
+                  &lt;?php foreach ( $gstats as $attribute ) { ?&gt;
+                    &lt;li&gt;
+                      &lt;input
+                        id=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;grouped_searchable_attributes&#x27; ); ?&gt;_&lt;?php echo $attribute; ?&gt;&quot;
+                        name=&quot;&lt;?php echo $this-&gt;get_field_name( &#x27;grouped_searchable_attributes&#x27; ); ?&gt;[]&quot;
+                        type=&quot;checkbox&quot; &lt;?php if ( empty( $grouped_searchable_attributes ) ) {
+                        echo &#x27;checked=&quot;checked&quot;&#x27;;
+                      } ?&gt;
+                        value=&quot;&lt;?php echo $attribute; ?&gt;&quot; &lt;?php echo( ( is_array( $grouped_searchable_attributes ) &amp;&amp; in_array( $attribute, $grouped_searchable_attributes ) ) ? &quot; checked &quot; : &quot;&quot; ); ?&gt; /&gt;
+                      &lt;label
+                        for=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;grouped_searchable_attributes&#x27; ); ?&gt;_&lt;?php echo $attribute; ?&gt;&quot;&gt;&lt;?php echo( !empty( $property_stats[ $attribute ] ) ? $property_stats[ $attribute ] : ucwords( $attribute ) ); ?&gt;&lt;/label&gt;
+                    &lt;/li&gt;
+                  &lt;?php } ?&gt;
+                &lt;/ul&gt;
+              &lt;?php } /* End cycle through $stats_by_groups */ ?&gt;
+            &lt;/div&gt;
+          &lt;?php } ?&gt;
+
+        &lt;/div&gt;
+
+      &lt;/li&gt;
+
+      &lt;li&gt;
+
+        &lt;?php if ($stats_by_groups) { ?&gt;
+        &lt;div&gt;
+          &lt;input id=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;group_attributes&#x27; ); ?&gt;&quot; class=&quot;wpp_toggle_attribute_grouping&quot;
+            type=&quot;checkbox&quot; value=&quot;true&quot;
+            name=&quot;&lt;?php echo $this-&gt;get_field_name( &#x27;group_attributes&#x27; ); ?&gt;&quot; &lt;?php checked( $group_attributes, &#x27;true&#x27; ); ?&gt; /&gt;
+          &lt;label
+            for=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;group_attributes&#x27; ); ?&gt;&quot;&gt;&lt;?php _e( &#x27;Group attributes together.&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/label&gt;
+        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;?php } ?&gt;
+
+      &lt;li&gt;
+
+        &lt;div class=&quot;wpp_something_advanced_wrapper&quot; style=&quot;margin-top: 10px;&quot;&gt;
+          &lt;ul&gt;
+
+            &lt;?php if ( is_array( $wp_properties[ &#x27;sortable_attributes&#x27; ] ) ) { ?&gt;
+              &lt;li class=&quot;wpp_development_advanced_option&quot;&gt;
+                &lt;div&gt;&lt;label
+                    for=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;sort_by&#x27; ); ?&gt;&quot;&gt;&lt;?php _e( &#x27;Default Sort Order&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/label&gt;
+                &lt;/div&gt;
+                &lt;select id=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;sort_by&#x27; ); ?&gt;&quot;
+                  name=&quot;&lt;?php echo $this-&gt;get_field_name( &#x27;sort_by&#x27; ); ?&gt;&quot;&gt;
+                  &lt;option&gt;&lt;/option&gt;
+                  &lt;?php foreach ( $wp_properties[ &#x27;sortable_attributes&#x27; ] as $attribute ) { ?&gt;
+                    &lt;option
+                      value=&quot;&lt;?php echo esc_attr( $attribute ); ?&gt;&quot;  &lt;?php selected( $sort_by, $attribute ); ?&gt; &gt;&lt;?php echo $property_stats[ $attribute ]; ?&gt;&lt;/option&gt;
+                  &lt;?php } ?&gt;
+                &lt;/select&gt;
+
+                &lt;select id=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;sort_order&#x27; ); ?&gt;&quot;
+                  name=&quot;&lt;?php echo $this-&gt;get_field_name( &#x27;sort_order&#x27; ); ?&gt;&quot;&gt;
+                  &lt;option&gt;&lt;/option&gt;
+                  &lt;option value=&quot;DESC&quot;  &lt;?php selected( $sort_order, &#x27;DESC&#x27; ); ?&gt; &gt;&lt;?php _e( &#x27;Descending&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/option&gt;
+                  &lt;option value=&quot;ASC&quot;  &lt;?php selected( $sort_order, &#x27;ASC&#x27; ); ?&gt; &gt;&lt;?php _e( &#x27;Acending&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/option&gt;
+                &lt;/select&gt;
+
+              &lt;/li&gt;
+            &lt;?php } ?&gt;
+            &lt;li class=&quot;wpp_development_advanced_option&quot;&gt;
+              &lt;label for=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;use_pagi&#x27; ); ?&gt;&quot;&gt;
+                &lt;input id=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;use_pagi&#x27; ); ?&gt;&quot;
+                  name=&quot;&lt;?php echo $this-&gt;get_field_name( &#x27;use_pagi&#x27; ); ?&gt;&quot; type=&quot;checkbox&quot;
+                  value=&quot;on&quot; &lt;?php if ( $use_pagi == &#x27;on&#x27; ) echo &quot; checked=&#x27;checked&#x27;;&quot;; ?&gt; /&gt;
+                &lt;?php _e( &#x27;Use pagination&#x27;, &#x27;wpp&#x27; ); ?&gt;
+              &lt;/label&gt;
+            &lt;/li&gt;
+
+            &lt;li class=&quot;wpp_development_advanced_option&quot;&gt;
+              &lt;label for=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;per_page&#x27; ); ?&gt;&quot;&gt;&lt;?php _e( &#x27;Items per page&#x27;, &#x27;wpp&#x27; ); ?&gt;
+                &lt;input style=&quot;width:30px&quot; id=&quot;&lt;?php echo $this-&gt;get_field_id( &#x27;per_page&#x27; ); ?&gt;&quot;
+                  name=&quot;&lt;?php echo $this-&gt;get_field_name( &#x27;per_page&#x27; ); ?&gt;&quot; type=&quot;text&quot;
+                  value=&quot;&lt;?php echo $per_page; ?&gt;&quot;/&gt;
+              &lt;/label&gt;
+            &lt;/li&gt;
+
+            &lt;li&gt;
+              &lt;span class=&quot;wpp_show_advanced&quot;&gt;&lt;?php _e( &#x27;Toggle Advanced Search Options&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/span&gt;
+            &lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;?php
+
+  }
+
+}
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
