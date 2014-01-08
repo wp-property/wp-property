@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>wpp - usabilitydynamics/wp-property</title>
+    <title>WPP - usabilitydynamics/wp-property</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -41,23 +41,13 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
+                <li><a href="../classes/Bootstrap.html">Bootstrap</a></li>
+            
                 <li><a href="../classes/UsabilityDynamics\WPP.Bootstrap.html">UsabilityDynamics\WPP.Bootstrap</a></li>
             
                 <li><a href="../classes/UsabilityDynamics\WPP.Loader.html">UsabilityDynamics\WPP.Loader</a></li>
             
-                <li><a href="../classes/UsabilityDynamics\WPP.WPP.html">UsabilityDynamics\WPP.WPP</a></li>
-            
-                <li><a href="../classes/wpp.html">wpp</a></li>
-            
-                <li><a href="../classes/wpp.overview.html">wpp.overview</a></li>
-            
-                <li><a href="../classes/wpp.ui.agents.html">wpp.ui.agents</a></li>
-            
-                <li><a href="../classes/wpp.ui.feps.html">wpp.ui.feps</a></li>
-            
-                <li><a href="../classes/wpp.ui.settings.html">wpp.ui.settings</a></li>
-            
-                <li><a href="../classes/wpp.xmli.html">wpp.xmli</a></li>
+                <li><a href="../classes/WPP.html">WPP</a></li>
             
                 <li><a href="../classes/wpp_default_api.html">wpp_default_api</a></li>
             
@@ -102,7 +92,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>wpp Class</h1>
+                        <h1>WPP Class</h1>
 <div class="box meta">
     
 
@@ -146,15 +136,10 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_commas">commas</a>
+                                <a href="#method_get_instance">get_instance</a>
 
                                 
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_debug">debug</a>
-
+                                    <span class="flag static">static</span>
                                 
                                 
                             </li>
@@ -175,63 +160,8 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_commas" class="method item">
-    <h3 class="name"><code>commas</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/js_src_wpp.global.js.html#l101"><code>js&#x2F;src&#x2F;wpp.global.js:101</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Add Commas</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_debug" class="method item">
-    <h3 class="name"><code>debug</code></h3>
+                    <div id="method_get_instance" class="method item">
+    <h3 class="name"><code>get_instance</code></h3>
 
     
         <span class="paren">()</span>
@@ -239,7 +169,7 @@
 
     
         <span class="returns-inline">
-            <span class="type">Data</span>
+            <span class="type"></span>
         </span>
     
 
@@ -250,6 +180,8 @@
     
 
     
+        <span class="flag static">static</span>
+    
 
     
 
@@ -266,7 +198,7 @@
             
         
         
-        <a href="../files/js_src_wpp.global.js.html#l30"><code>js&#x2F;src&#x2F;wpp.global.js:30</code></a>
+        <a href="../files/lib_class-bootstrap.php.html#l1581"><code>lib&#x2F;class-bootstrap.php:1581</code></a>
         
         </p>
 
@@ -277,9 +209,8 @@
     </div>
 
     <div class="description">
-        <p>Global Debug Logger</p>
-<p>Accepts any number of arguments and passes them to console.log, if available.
-Returns the first argument.</p>
+        <p>Get the WPP Singleton</p>
+<p>Concept based on the CodeIgniter get_instance() concept.</p>
 
     </div>
 
@@ -292,15 +223,23 @@ Returns the first argument.</p>
             <div class="returns-description">
                 
                     
-                        <span class="type">Data</span>:
-                    
-                    <p>Returns first argument.</p>
+                    <p>object</p>
 
                 
             </div>
         </div>
     
 
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> var settings = WPP::get_instance()-&gt;Settings;
+ var api = WPP::$instance()-&gt;API;</code></pre>
+
+            </div>
+        </div>
     
 </div>
 
