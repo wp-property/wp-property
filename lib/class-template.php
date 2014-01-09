@@ -32,7 +32,7 @@ namespace UsabilityDynamics\WPP {
 
         $args = (object) wp_parse_args( $args, array(
           'once'   => false,
-          'prefix' => 'property-',
+          'prefix' => '',
         ) );
 
         // Add prefix if not already there.
@@ -71,17 +71,17 @@ namespace UsabilityDynamics\WPP {
         }
 
         $_paths = apply_filters( 'wpp:template_paths', array(
-          trailingslashit( get_template_directory() ) . 'wpp/',
+          trailingslashit( get_template_directory() ) . 'wpp',
           trailingslashit( get_template_directory() ),
-          trailingslashit( get_stylesheet_directory() ) . 'wpp/',
+          trailingslashit( get_stylesheet_directory() ) . 'wpp',
           trailingslashit( get_stylesheet_directory() ),
-          WPP_Path . 'templates/'
-        ) );
+          WPP_Path . 'templates'
+        ));
 
         foreach( (array) $_paths as $path ) {
 
-          if( file_exists( $path ) ) {
-            return $path;
+          if( file_exists( trailingslashit( $path ) . $name ) ) {
+            return trailingslashit( $path ) . $name;
           }
 
         }
@@ -98,7 +98,7 @@ namespace UsabilityDynamics\WPP {
        */
       static function initialize() {
 
-        //** Property template hook */
+        // Property template hook
         add_action( 'wpp::tmpl::property::bottom', array( __CLASS__, 'wpp_tmpl_property_bottom' ) );
 
       }
@@ -110,10 +110,13 @@ namespace UsabilityDynamics\WPP {
        * @author peshkov@UD
        */
       static function wpp_tmpl_property_bottom() {
-        if( get_template() == 'suffusion' ) {
-        }
+
+        if( get_template() == 'suffusion' ) {}
+
       }
 
     }
+
   }
+
 }

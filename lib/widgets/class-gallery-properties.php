@@ -6,7 +6,11 @@ class GalleryPropertiesWidget extends WP_Widget {
 
   /** constructor */
   function GalleryPropertiesWidget() {
-    parent::WP_Widget( false, $name = sprintf( __( '%1s Gallery', 'wpp' ), \UsabilityDynamics\WPP\Utility::property_label() ), array( 'description' => sprintf(__( 'List of all images attached to the current %1s', 'wpp' ), \UsabilityDynamics\WPP\Utility::property_label( 'singular' ) ) ) );
+
+    parent::WP_Widget( false, $name = sprintf( __( '%1s Gallery', 'wpp' ), \UsabilityDynamics\WPP\Utility::property_label() ), array(
+      'description' => sprintf(__( 'List of all images attached to the current %1s', 'wpp' ), \UsabilityDynamics\WPP\Utility::property_label( 'singular' ) )
+    ));
+
   }
 
   /** @see WP_Widget::widget */

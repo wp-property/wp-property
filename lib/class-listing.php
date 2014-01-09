@@ -203,7 +203,7 @@ namespace UsabilityDynamics\WPP {
           $_REQUEST[ 'parent_id' ] = self::update_parent_id( $_REQUEST[ 'parent_id' ], $id );
         }
 
-        self::geolocate($id);
+        self::geolocate( $id );
 
         do_action( 'wpp:save_property', $id, $this );
 
@@ -434,6 +434,330 @@ namespace UsabilityDynamics\WPP {
         update_post_meta( $id, 'wpp_gpid', $gpid );
 
         return $gpid;
+
+      }
+
+      /**
+       * Load property information into an array or an object
+       *
+       * @version 1.11 Added support for multiple meta values for a given key
+       *
+       * @since 1.11
+       * @version 1.14 - fixed problem with drafts
+       * @todo Code pertaining to displaying data should be migrated to prepare_property_for_display() like :$real_value = nl2br($real_value);
+       * @todo Fix the long dashes - when in latitude or longitude it breaks it when using static map
+       *
+       */
+      static function load( $id, $args = false ) {
+        global $wp_properties, $wpdb;
+
+        $id = trim( $id );
+
+        extract( wp_parse_args( $args, array(
+          'get_children'          => 'true',
+          'return_object'         => 'false',
+          'load_gallery'          => 'true',
+          'load_thumbnail'        => 'true',
+          'allow_multiple_values' => 'false',
+          'load_parent'           => 'true'
+        )), EXTR_SKIP );
+
+        $get_children          = isset( $get_children ) ? $get_children : 'true';
+        $return_object         = isset( $return_object ) ? $return_object : 'false';
+        $load_gallery          = isset( $load_gallery ) ? $load_gallery : 'true';
+        $load_thumbnail        = isset( $load_thumbnail ) ? $load_thumbnail : 'true';
+        $allow_multiple_values = isset( $allow_multiple_values ) ? $allow_multiple_values : 'false';
+        $load_parent           = isset( $load_parent ) ? $load_parent : 'true';
+
+        $args = is_array( $args ) ? http_build_query( $args ) : (string) $args;
+
+        if( $return = wp_cache_get( $id . $args ) ) {
+          return $return;
+        }
+
+        $post = get_post( $id, ARRAY_A );
+
+        if( $post[ 'post_type' ] != 'property' ) {
+          return false;
+        }
+
+        //** Figure out what all the editable attributes are, and get their keys */
+        $wp_properties[ 'property_meta' ]  = ( is_array( $wp_properties[ 'property_meta' ] ) ? $wp_properties[ 'property_meta' ] : array() );
+        $wp_properties[ 'property_stats' ] = ( is_array( $wp_properties[ 'property_stats' ] ) ? $wp_properties[ 'property_stats' ] : array() );
+        $editable_keys                     = array_keys( array_merge( $wp_properties[ 'property_meta' ], $wp_properties[ 'property_stats' ] ) );
+
+        $return = array();
+
+        //** Load all meta keys for this object */
+        if( $keys = get_post_custom( $id ) ) {
+          foreach( $keys as $key => $value ) {
+
+            if( $allow_multiple_values == 'false' ) {
+              $value = $value[ 0 ];
+            }
+
+            $keyt = trim( $key );
+
+            //** If has _ prefix it's a built-in WP key */
+            if( '_' == $keyt{0} ) {
+              continue;
+            }
+
+            // Fix for boolean values
+            switch( $value ) {
+
+              case 'true':
+                $real_value = true; //** Converts all "true" to 1 */
+                break;
+
+              case 'false':
+                $real_value = false;
+                break;
+
+              default:
+                $real_value = $value;
+                break;
+
+            }
+
+            // Handle keys with multiple values
+            if( count( $value ) > 1 ) {
+              $return[ $key ] = $value;
+            } else {
+              $return[ $key ] = $real_value;
+            }
+
+          }
+        }
+
+        $return = array_merge( $return, $post );
+
+        //** Make sure certain keys were not messed up by custom attributes */
+        $return[ 'system' ]  = array();
+        $return[ 'gallery' ] = array();
+
+        // Figure out what the thumbnail is, and load all sizes
+        if( $load_thumbnail == 'true' ) {
+
+          $wp_image_sizes = \get_intermediate_image_sizes();
+
+          $thumbnail_id = \get_post_meta( $id, '_thumbnail_id', true );
+          $attachments  = \get_children( array( 'post_parent' => $id, 'post_type' => 'attachment', 'post_mime_type' => 'image', 'orderby' => 'menu_order ASC, ID', 'order' => 'DESC' ) );
+
+          if( $thumbnail_id ) {
+            foreach( $wp_image_sizes as $image_name ) {
+              $this_url                          = wp_get_attachment_image_src( $thumbnail_id, $image_name, true );
+              $return[ 'images' ][ $image_name ] = $this_url[ 0 ];
+            }
+
+            $featured_image_id = $thumbnail_id;
+
+          } elseif( $attachments ) {
+            foreach( $attachments as $attachment_id => $attachment ) {
+
+              foreach( $wp_image_sizes as $image_name ) {
+                $this_url                          = wp_get_attachment_image_src( $attachment_id, $image_name, true );
+                $return[ 'images' ][ $image_name ] = $this_url[ 0 ];
+              }
+
+              $featured_image_id = $attachment_id;
+              break;
+            }
+          }
+
+          if( $featured_image_id ) {
+            $return[ 'featured_image' ] = $featured_image_id;
+
+            $image_title = $wpdb->get_var( "SELECT post_title  FROM {$wpdb->prefix}posts WHERE ID = '{$featured_image_id}' " );
+
+            $return[ 'featured_image_title' ] = $image_title;
+            $return[ 'featured_image_url' ]   = wp_get_attachment_url( $featured_image_id );
+          }
+
+        }
+
+        // Load all attached images and their sizes
+        if( $load_gallery == 'true' ) {
+
+          // Get gallery images
+          if( $attachments ) {
+            foreach( $attachments as $attachment_id => $attachment ) {
+              $return[ 'gallery' ][ $attachment->post_name ][ 'post_title' ]    = $attachment->post_title;
+              $return[ 'gallery' ][ $attachment->post_name ][ 'post_excerpt' ]  = $attachment->post_excerpt;
+              $return[ 'gallery' ][ $attachment->post_name ][ 'post_content' ]  = $attachment->post_content;
+              $return[ 'gallery' ][ $attachment->post_name ][ 'attachment_id' ] = $attachment_id;
+              foreach( $wp_image_sizes as $image_name ) {
+                $this_url                                                     = wp_get_attachment_image_src( $attachment_id, $image_name, true );
+                $return[ 'gallery' ][ $attachment->post_name ][ $image_name ] = $this_url[ 0 ];
+              }
+            }
+          } else {
+            $return[ 'gallery' ] = false;
+          }
+        }
+
+        // Load parent if exists and inherit Parent's atttributes.
+        if( $load_parent == 'true' && $post[ 'post_parent' ] ) {
+
+          $return[ 'is_child' ] = true;
+
+          $parent_object = self::load( $post[ 'post_parent' ], array( 'load_gallery' => $load_gallery, 'get_children' => false ) );
+
+          $return[ 'parent_id' ]    = $post[ 'post_parent' ];
+          $return[ 'parent_link' ]  = $parent_object[ 'permalink' ];
+          $return[ 'parent_title' ] = $parent_object[ 'post_title' ];
+
+          // Inherit things
+          if( is_array( $wp_properties[ 'property_inheritance' ][ $return[ 'property_type' ] ] ) ) {
+            foreach( $wp_properties[ 'property_inheritance' ][ $return[ 'property_type' ] ] as $inherit_attrib ) {
+              if( !empty( $parent_object[ $inherit_attrib ] ) && empty( $return[ $inherit_attrib ] ) ) {
+                $return[ $inherit_attrib ] = $parent_object[ $inherit_attrib ];
+              }
+            }
+          }
+        }
+
+        // Load Children and their attributes
+        if( $get_children == 'true' ) {
+
+          //** Calculate variables if based off children if children exist */
+          $children = $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE  post_type = 'property' AND post_status = 'publish' AND post_parent = '{$id}' ORDER BY menu_order ASC " );
+
+          if( count( $children ) > 0 ) {
+
+            //** Cycle through children and get necessary variables */
+            foreach( $children as $child_id ) {
+
+              $child_object                      = self::load( $child_id, array( 'load_gallery' => $load_gallery, 'load_parent' => false ) );
+              $return[ 'children' ][ $child_id ] = $child_object;
+
+              //** Save child image URLs into one array for quick access */
+              if( !empty( $child_object[ 'featured_image_url' ] ) ) {
+                $return[ 'system' ][ 'child_images' ][ $child_id ] = $child_object[ 'featured_image_url' ];
+              }
+
+              //** Exclude variables from searchable attributes (to prevent ranges) */
+              $excluded_attributes    = $wp_properties[ 'geo_type_attributes' ];
+              $excluded_attributes[ ] = $wp_properties[ 'configuration' ][ 'address_attribute' ];
+
+              foreach( $wp_properties[ 'searchable_attributes' ] as $searchable_attribute ) {
+
+                $attribute_data = Utility::get_attribute_data( $searchable_attribute );
+
+                if( $attribute_data[ 'numeric' ] || $attribute_data[ 'currency' ] ) {
+
+                  if( !empty( $child_object[ $searchable_attribute ] ) && !in_array( $searchable_attribute, $excluded_attributes ) ) {
+                    $range[ $searchable_attribute ][ ] = $child_object[ $searchable_attribute ];
+                  }
+
+                }
+              }
+            }
+
+            //* Cycle through every type of range (i.e. price, deposit, bathroom, etc) and fix-up the respective data arrays */
+            foreach( (array) $range as $range_attribute => $range_values ) {
+
+              //* Cycle through all values of this range (attribute), and fix any ranges that use dashes */
+              foreach( $range_values as $key => $single_value ) {
+
+                //* Remove dollar signs */
+                $single_value = str_replace( "$", '', $single_value );
+
+                //* Fix ranges */
+                if( strpos( $single_value, '&ndash;' ) ) {
+
+                  $split = explode( '&ndash;', $single_value );
+
+                  foreach( $split as $new_single_value )
+
+                    if( !empty( $new_single_value ) ) {
+                      array_push( $range_values, trim( $new_single_value ) );
+                    }
+
+                  //* Unset original value with dash */
+                  unset( $range_values[ $key ] );
+
+                }
+              }
+
+              //* Remove duplicate values from this range */
+              $range[ $range_attribute ] = array_unique( $range_values );
+
+              //* Sort the values in this particular range */
+              sort( $range[ $range_attribute ] );
+
+              if( count( $range[ $range_attribute ] ) < 2 ) {
+                $return[ $range_attribute ] = $return[ $range_attribute ] . ' ( ' . $range[ $range_attribute ][ 0 ] . ' )';
+              }
+
+              if( count( $range[ $range_attribute ] ) > 1 ) {
+                $return[ $range_attribute ] = $return[ $range_attribute ] . ' ( ' . min( $range[ $range_attribute ] ) . " - " . max( $range[ $range_attribute ] ) . ' )';
+              }
+
+              //** If we end up with a range, we make a note of it */
+              if( !empty( $return[ $range_attribute ] ) ) {
+                $return[ 'system' ][ 'upwards_inherited_attributes' ][ ] = $range_attribute;
+              }
+
+            }
+
+          }
+        }
+
+        if( !empty( $return[ 'location' ] ) && !in_array( 'address', $editable_keys ) && !isset( $return[ 'address' ] ) ) {
+          $return[ 'address' ] = $return[ 'location' ];
+        }
+
+        $return[ 'wpp_gpid' ]  = self::maybe_set_gpid( $id );
+
+        $return[ 'permalink' ] = get_permalink( $id );
+
+        //** Make sure property_type stays as slug, or it will break many things:  (widgets, class names, etc)  */
+        $return[ 'property_type_label' ] = $wp_properties[ 'property_types' ][ $return[ 'property_type' ] ];
+
+        if( empty( $return[ 'property_type_label' ] ) ) {
+          foreach( $wp_properties[ 'property_types' ] as $pt_key => $pt_value ) {
+            if( strtolower( $pt_value ) == strtolower( $return[ 'property_type' ] ) ) {
+              $return[ 'property_type' ]       = $pt_key;
+              $return[ 'property_type_label' ] = $pt_value;
+            }
+          }
+        }
+
+        //** If phone number is not set but set globally, we load it into property array here */
+        if( empty( $return[ 'phone_number' ] ) && !empty( $wp_properties[ 'configuration' ][ 'phone_number' ] ) ) {
+          $return[ 'phone_number' ] = $wp_properties[ 'configuration' ][ 'phone_number' ];
+        }
+
+        if( is_array( $return ) ) {
+          ksort( $return );
+        }
+
+        $return = apply_filters( 'wpp_get_property', $return );
+        $return = apply_filters( 'wpp:get_property', $return );
+
+        //* Get rid of all empty values */
+        foreach( $return as $key => $item ) {
+
+          //** Don't blank keys starting w/ post_  - this should be converted to use get_attribute_data() to check where data is stored for better check - potanin@UD */
+          if( strpos( $key, 'post_' ) === 0 ) {
+            continue;
+          }
+
+          if( empty( $item ) ) {
+            unset( $return[ $key ] );
+          }
+
+        }
+
+        //** Convert to object */
+        if( $return_object == 'true' ) {
+          $return = Utility::array_to_object( $return );
+        }
+
+        wp_cache_add( $id . $args, $return );
+
+        return $return;
 
       }
 

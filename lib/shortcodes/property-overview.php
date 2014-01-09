@@ -304,7 +304,7 @@ namespace UsabilityDynamics\WPP {
 
         $params[ 'ajax_call' ] = true;
 
-        $data = WPP_Core::shortcode_property_overview( $params );
+        $data = self::shortcode_property_overview( $params );
 
         die( $data );
 

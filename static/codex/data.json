@@ -119,6 +119,15 @@
                 "UsabilityDynamics\\WPP": 1
             }
         },
+        "lib/class-exception.php": {
+            "name": "lib/class-exception.php",
+            "modules": {},
+            "classes": {
+                "Exception": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "lib/class-formatting.php": {
             "name": "lib/class-formatting.php",
             "modules": {},
@@ -128,6 +137,13 @@
         },
         "lib/class-list-table.php": {
             "name": "lib/class-list-table.php",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/class-listing.php": {
+            "name": "lib/class-listing.php",
             "modules": {},
             "classes": {},
             "fors": {},
@@ -182,6 +198,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "lib/class-theme.php": {
+            "name": "lib/class-theme.php",
+            "modules": {},
+            "classes": {
+                "Theme": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "lib/class-ui.php": {
             "name": "lib/class-ui.php",
             "modules": {},
@@ -202,6 +227,15 @@
             "name": "lib/class-widget.php",
             "modules": {},
             "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/class-wp-error.php": {
+            "name": "lib/class-wp-error.php",
+            "modules": {},
+            "classes": {
+                "WP_Error": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -268,6 +302,56 @@
             "plugin_for": [],
             "extension_for": [],
             "namespace": ""
+        },
+        "Exception": {
+            "name": "Exception",
+            "shortname": "Exception",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "",
+            "file": "lib/class-exception.php",
+            "line": 2,
+            "description": "Application Exception Handler",
+            "version": "1.0",
+            "author": "Usability Dynamics, Inc. <info@usabilitydynamics.com>",
+            "package": "WP-Property",
+            "since": "1.38"
+        },
+        "WP_Error": {
+            "name": "WP_Error",
+            "shortname": "WP_Error",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "",
+            "file": "lib/class-wp-error.php",
+            "line": 2,
+            "description": "WordPress Error Handler",
+            "version": "1.0",
+            "author": "Usability Dynamics, Inc. <info@usabilitydynamics.com>",
+            "package": "WP-Property",
+            "since": "1.38"
+        },
+        "Theme": {
+            "name": "Theme",
+            "shortname": "Theme",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "",
+            "file": "lib/class-theme.php",
+            "line": 2,
+            "description": "Theme Functionality",
+            "author": "Usability Dynamics, Inc. <info@usabilitydynamics.com>",
+            "package": "WP-Property",
+            "since": "2.0.0"
         },
         "WPP_UI": {
             "name": "WPP_UI",
@@ -473,57 +557,71 @@
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 50,
+            "line": 49,
+            "description": "The Actual Shortcode",
+            "params": [
+                {
+                    "name": "string",
+                    "description": "$atts"
+                },
+                {
+                    "name": "string",
+                    "description": "$content"
+                }
+            ],
+            "return": {
+                "description": "mixed|string|void"
+            },
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 55,
+            "line": 68,
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 61,
+            "line": 73,
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 91,
+            "line": 79,
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 103,
+            "line": 109,
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 106,
+            "line": 121,
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 111,
+            "line": 124,
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 115,
+            "line": 129,
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 139,
+            "line": 133,
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 148,
+            "line": 157,
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 151,
+            "line": 166,
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
@@ -533,37 +631,32 @@
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 172,
+            "line": 187,
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 177,
+            "line": 190,
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 180,
+            "line": 195,
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 185,
+            "line": 198,
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 194,
+            "line": 203,
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 208,
-            "class": "UsabilityDynamics\\WPP.Bootstrap"
-        },
-        {
-            "file": "lib/shortcodes/property-overview.php",
-            "line": 214,
+            "line": 212,
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
@@ -573,12 +666,22 @@
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 229,
+            "line": 232,
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 271,
+            "line": 244,
+            "class": "UsabilityDynamics\\WPP.Bootstrap"
+        },
+        {
+            "file": "lib/shortcodes/property-overview.php",
+            "line": 247,
+            "class": "UsabilityDynamics\\WPP.Bootstrap"
+        },
+        {
+            "file": "lib/shortcodes/property-overview.php",
+            "line": 289,
             "description": "Return property overview data for AJAX calls",
             "since": "0.723",
             "uses": [
@@ -588,7 +691,7 @@
         },
         {
             "file": "lib/shortcodes/property-overview.php",
-            "line": 381,
+            "line": 399,
             "class": "UsabilityDynamics\\WPP.Bootstrap"
         },
         {
@@ -884,7 +987,7 @@
         {
             "file": "lib/class-bootstrap.php",
             "line": 2,
-            "description": "UsabilityDynamics\\WPP Bootstrap\n\nMigrated\n========\n\n- WPP_F::load_premium\n- WPP_F::check_premium\n- WPP_F::check_plugin_updates\n- WPP_F::manual_activation\n- upgrade",
+            "description": "UsabilityDynamics\\WPP Bootstrap\n\nMigrated\n========\n\n- WPP_F::load_modules\n- WPP_F::check_premium\n- WPP_F::check_plugin_updates\n- WPP_F::manual_activation\n- upgrade",
             "verison": "2.0.0",
             "author": "potanin@UD",
             "class": "UsabilityDynamics\\WPP.Bootstrap",
@@ -992,38 +1095,60 @@
         {
             "file": "lib/class-bootstrap.php",
             "line": 191,
-            "description": "Autoload Vendor Dependencies",
+            "description": "Get Setting.\n\n   // Get Setting\n   $wpp::get( 'my_key' )",
+            "itemtype": "method",
+            "name": "get",
             "author": "potanin@UD",
-            "since": "2.0.0",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "since": "0.1.1",
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
             "line": 207,
-            "description": "Define Plugin Constants",
+            "description": "Set Setting.",
+            "usage": "// Set Setting\n   $wpp::set( 'my_key', 'my-value' )",
+            "itemtype": "method",
+            "name": "get",
             "author": "potanin@UD",
-            "since": "2.0.0",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "since": "0.1.1",
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
             "line": 225,
+            "description": "Add 'property' to the list of RSSable post_types.",
+            "params": [
+                {
+                    "name": "string",
+                    "description": "$request"
+                }
+            ],
+            "return": {
+                "description": "string"
+            },
+            "author": "korotkov@ud",
+            "since": "1.36.2",
+            "class": "Bootstrap"
+        },
+        {
+            "file": "lib/class-bootstrap.php",
+            "line": 248,
             "description": "Run on plugin activation.\n\nAs of WP 3.1 this is not ran on automatic update.",
             "todo": [
                 "Add check for cron usage via XMLI or other since cron.php is removed."
             ],
             "since": "1.10",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 242,
+            "line": 265,
             "description": "Plugin Deactivation",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 256,
+            "line": 279,
             "description": "Renders a critical failure.",
             "example": [
                 "\n   self::fail( 'Critical plugin failure!' );"
@@ -1034,138 +1159,120 @@
                     "description": ""
                 }
             ],
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 268,
+            "line": 291,
             "description": "Adds thumbnail feature to WP-Property pages",
             "todo": [
                 "Make sure only ran on property pages"
             ],
             "since": "0.60",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 294,
+            "line": 315,
             "description": "Called on init, as early as possible.",
             "since": "1.11",
             "uses": [
                 "$wp_properties WP-Property configuration array"
             ],
             "access": "public",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 331,
+            "line": 354,
             "description": "Setup widgets and widget areas.",
             "since": "1.31.0",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 393,
+            "line": 416,
             "description": "Secondary WPP Initialization ran towards the end of init()\n\nLoads things that we want make accessible for modification via other plugins.",
             "since": "1.31.0",
             "uses": [
                 "$wp_properties WP-Property configuration array"
             ],
             "access": "public",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 406,
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "line": 429,
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 416,
-            "class": "UsabilityDynamics\\WPP.Loader"
-        },
-        {
-            "file": "lib/class-bootstrap.php",
-            "line": 420,
-            "class": "UsabilityDynamics\\WPP.Loader"
-        },
-        {
-            "file": "lib/class-bootstrap.php",
-            "line": 427,
-            "class": "UsabilityDynamics\\WPP.Loader"
-        },
-        {
-            "file": "lib/class-bootstrap.php",
-            "line": 432,
-            "class": "UsabilityDynamics\\WPP.Loader"
-        },
-        {
-            "file": "lib/class-bootstrap.php",
-            "line": 443,
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "line": 439,
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
             "line": 446,
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 449,
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "line": 451,
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 517,
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "line": 462,
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 557,
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "line": 465,
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 580,
+            "line": 468,
+            "class": "Bootstrap"
+        },
+        {
+            "file": "lib/class-bootstrap.php",
+            "line": 531,
+            "class": "Bootstrap"
+        },
+        {
+            "file": "lib/class-bootstrap.php",
+            "line": 583,
             "description": "Performs front-end pre-header functionality\n\nThis function is not called on amdin side\nLoads conditional CSS styles",
             "since": "1.11",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 782,
+            "line": 785,
             "description": "Runs pre-header functions on admin-side only\n\nChecks if plugin has been updated.",
             "since": "1.10",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 836,
+            "line": 839,
             "description": "Register metaboxes.",
             "global": "type $wpdb",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 851,
+            "line": 855,
             "description": "Check if WP-Property RaaS Active",
             "return": {
                 "description": "bool"
             },
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 860,
-            "description": "Check for premium features and load them",
-            "updated": "1.6",
-            "since": "0.624",
-            "class": "UsabilityDynamics\\WPP.Loader"
-        },
-        {
-            "file": "lib/class-bootstrap.php",
-            "line": 952,
+            "line": 864,
             "description": "Check if premium feature is installed or not",
             "params": [
                 {
@@ -1176,82 +1283,82 @@
             "return": {
                 "description": "boolean."
             },
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 983,
+            "line": 895,
             "description": "Checks updates for premium features by AJAX\nPrints results to body.",
             "global": "array $wp_properties",
             "return": {
                 "description": "null"
             },
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1004,
+            "line": 916,
             "description": "Run manually when a version mismatch is detected.\n\nHolds official current version designation.\nCalled in admin_init hook.",
             "since": "1.10",
             "version": "1.13",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1045,
+            "line": 957,
             "description": "Moved from WPP_Legacy",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1059,
+            "line": 971,
             "description": "Upgrade:\n- WPP postmeta data were saved to database with '&ndash;' instead of '-' in value. Function encode_sql_input was modified and it doesn't change '-' to '&ndash' anymore\nSo to prevent search result issues we need to update database data.\npeshkov@UD",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1077,
+            "line": 989,
             "description": "Adds \"Settings\" link to the plugin overview page\n\n *",
             "since": "0.60",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1094,
+            "line": 1006,
             "description": "Can enqueue scripts on specific pages, and print content into head",
             "uses": [
                 "$current_screen global variable"
             ],
             "since": "0.53",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1203,
+            "line": 1115,
             "description": "Sets up additional pages and loads their scripts",
             "since": "0.5",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1224,
+            "line": 1136,
             "description": "Next used to add custom submenu page 'All Properties' with Javascript dataTable",
             "author": "korotkov@UD",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1257,
+            "line": 1169,
             "description": "Modify admin body class on property pages for CSS",
             "todo": [
                 "$current_screen does not seem to work in 3.8."
             ],
             "since": "0.5",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1283,
+            "line": 1195,
             "description": "Fixed property pages being seen as 404 pages\n\nRan on parse_request;\n\nWP handle_404() function decides if current request should be a 404 page\nMarking the global variable $wp_query->is_search to true makes the function\nassume that the request is a search.",
             "params": [
                 {
@@ -1260,79 +1367,62 @@
                 }
             ],
             "since": "0.5",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
+        },
+        {
+            "file": "lib/class-bootstrap.php",
+            "line": 1257,
+            "class": "Bootstrap"
+        },
+        {
+            "file": "lib/class-bootstrap.php",
+            "line": 1282,
+            "description": "Modifies post content",
+            "since": "1.04",
+            "class": "Bootstrap"
+        },
+        {
+            "file": "lib/class-bootstrap.php",
+            "line": 1312,
+            "description": "Inserts content into the \"Publish\" metabox on property pages",
+            "since": "1.04",
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
             "line": 1345,
-            "class": "UsabilityDynamics\\WPP.Loader"
-        },
-        {
-            "file": "lib/class-bootstrap.php",
-            "line": 1370,
-            "description": "Modifies post content",
-            "since": "1.04",
-            "class": "UsabilityDynamics\\WPP.Loader"
-        },
-        {
-            "file": "lib/class-bootstrap.php",
-            "line": 1400,
-            "description": "Hooks into save_post function and saves additional property data",
-            "todo": [
-                "Add some sort of custom capability so not only admins can make properties as featured. i.e. Agents can make their own properties featured."
-            ],
-            "since": "1.04",
-            "class": "UsabilityDynamics\\WPP.Loader"
-        },
-        {
-            "file": "lib/class-bootstrap.php",
-            "line": 1511,
-            "description": "Inserts content into the \"Publish\" metabox on property pages",
-            "since": "1.04",
-            "class": "UsabilityDynamics\\WPP.Loader"
-        },
-        {
-            "file": "lib/class-bootstrap.php",
-            "line": 1544,
             "description": "Removes \"quick edit\" link on property type objects\n\nCalled in via page_row_actions filter",
             "since": "0.5",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1561,
+            "line": 1363,
             "description": "Adds property-relevant messages to the property post type object",
             "since": "0.5",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1594,
+            "line": 1396,
             "description": "Sets up property-type columns",
             "since": "0.54",
             "uses": [
                 "$wp_properties WP-Property configuration array"
             ],
             "access": "public",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1630,
+            "line": 1432,
             "description": "Sets up sortable columns columns",
             "since": "1.08",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1652,
-            "description": "Adds wp-property-listing class in search results and property_overview pages",
-            "since": "0.7260",
-            "class": "UsabilityDynamics\\WPP.Loader"
-        },
-        {
-            "file": "lib/class-bootstrap.php",
-            "line": 1667,
+            "line": 1454,
             "description": "Checks settings data on accord with existing wp_properties data ( before option updates )",
             "params": [
                 {
@@ -1347,37 +1437,37 @@
             "return": {
                 "description": "array $wpp_settings"
             },
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1692,
+            "line": 1479,
             "description": "Hack to avoid issues with capabilities and views.",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1712,
+            "line": 1499,
             "description": "Adds all WPP custom capabilities to administrator role.\nPremium feature capabilities are added by filter in this function, see below.",
             "author": "peshkov@UD",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1758,
+            "line": 1545,
             "description": "Generates javascript file with localization.\nAdds localization support to all WP-Property scripts.\nAccessible via wp-ajax.php calls.",
             "since": "1.37.3.2",
             "author": "peshkov@UD",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1773,
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "line": 1560,
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1789,
+            "line": 1576,
             "description": "WPP Contextual Help",
             "global": "$current_screen",
             "params": [
@@ -1387,43 +1477,22 @@
                 }
             ],
             "author": "korotkov@ud",
-            "class": "UsabilityDynamics\\WPP.Loader"
+            "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1811,
+            "line": 1598,
             "description": "Returns specific instance data which is used by javascript\nJavascript Reference: window.wpp.instance",
             "author": "peshkov@UD",
             "since": "1.38",
             "return": {
                 "description": "array"
             },
-            "class": "UsabilityDynamics\\WPP.Loader"
-        },
-        {
-            "file": "lib/class-bootstrap.php",
-            "line": 1841,
-            "description": "Get Setting.\n\n   // Get Setting\n   $wpp::get( 'my_key' )",
-            "itemtype": "method",
-            "name": "get",
-            "author": "potanin@UD",
-            "since": "0.1.1",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1857,
-            "description": "Set Setting.",
-            "usage": "// Set Setting\n   $wpp::set( 'my_key', 'my-value' )",
-            "itemtype": "method",
-            "name": "get",
-            "author": "potanin@UD",
-            "since": "0.1.1",
-            "class": "Bootstrap"
-        },
-        {
-            "file": "lib/class-bootstrap.php",
-            "line": 1875,
+            "line": 1628,
             "description": "Get the WPP Singleton\n\nConcept based on the CodeIgniter get_instance() concept.",
             "example": [
                 "\n\n     var settings = WPP::get_instance()->Settings;\n     var api = WPP::$instance()->API;"
@@ -1437,6 +1506,43 @@
             "class": "WPP"
         },
         {
+            "file": "lib/class-bootstrap.php",
+            "line": 1648,
+            "description": "Check for premium features and load them",
+            "updated": "1.6",
+            "since": "0.624",
+            "class": "WPP"
+        },
+        {
+            "file": "lib/class-bootstrap.php",
+            "line": 1740,
+            "description": "Autoload Vendor Dependencies",
+            "author": "potanin@UD",
+            "since": "2.0.0",
+            "class": "WPP"
+        },
+        {
+            "file": "lib/class-bootstrap.php",
+            "line": 1761,
+            "description": "Define Plugin Constants",
+            "author": "potanin@UD",
+            "since": "2.0.0",
+            "class": "WPP"
+        },
+        {
+            "file": "lib/class-bootstrap.php",
+            "line": 1779,
+            "description": "Registers post types and taxonomies.",
+            "since": "1.31.0",
+            "class": "WPP"
+        },
+        {
+            "file": "lib/class-bootstrap.php",
+            "line": 1894,
+            "description": "Initialize Shortcodes",
+            "class": "WPP"
+        },
+        {
             "file": "lib/class-formatting.php",
             "line": 2,
             "description": "WP-Property Formatting\n\nHandle value conversions, object normalization, schema mapping, etc.",
@@ -1444,13 +1550,13 @@
             "author": "team@ud",
             "package": "WP-Property",
             "subpackage": "Formatting",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
             "line": 18,
             "since": "unknown",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
@@ -1470,13 +1576,13 @@
                 "description": "array"
             },
             "author": "peshkov@UD",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
             "line": 121,
             "since": "unknown",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
@@ -1493,7 +1599,7 @@
                 "description": "string"
             },
             "author": "odokienko@UD",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
@@ -1501,19 +1607,19 @@
             "description": "Filters attribute's value based on classification",
             "since": "2.0",
             "author": "odokienko@UD",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
             "line": 187,
             "since": "unknown",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
             "line": 202,
             "since": "unknown",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
@@ -1521,14 +1627,14 @@
             "description": "Converts value to currency.",
             "updated": "1.37.0 - renamed from add_dollar_sign to currency_format and moved into the wpp_default_api class",
             "since": "1.15.3",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
             "line": 259,
             "since": "2.0",
             "author": "odokienko@UD",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
@@ -1536,62 +1642,62 @@
             "description": "Formats address on print.  If address it not formatted, makes an on-the-fly call to GMaps for validation.",
             "since": "1.04",
             "author": "odokienko@UD",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
             "line": 321,
             "since": "unknown",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
             "line": 337,
             "since": "unknown",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
             "line": 351,
             "since": "unknown",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
             "line": 366,
             "since": "unknown",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
             "line": 380,
             "since": "unknown",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
             "line": 394,
             "since": "2.0",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
             "line": 406,
             "since": "2.0",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
             "line": 418,
             "since": "2.0",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
             "line": 430,
             "description": "Formats areas on print.",
             "since": "1.04",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
@@ -1599,7 +1705,7 @@
             "description": "Add UI to add currency sign for currency fields on property editing page",
             "since": "2.0",
             "author": "odokienko@UD",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
@@ -1607,7 +1713,7 @@
             "description": "Add UI to add area units for area fields on property editing page",
             "since": "2.0",
             "author": "odokienko@UD",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-formatting.php",
@@ -1615,19 +1721,19 @@
             "description": "Add UI to set custom coordinates for location fields on property editing page",
             "since": "2.0",
             "author": "odokienko@UD",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-list-table.php",
             "line": 2,
             "description": "List Table",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-list-table.php",
             "line": 13,
             "description": "The current class is just wrapper.\nTo use dataTables Overview,\nYou should create child class",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-list-table.php",
@@ -1636,7 +1742,7 @@
             "todo": [
                 "Get list of displayed columns from options"
             ],
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-list-table.php",
@@ -1654,87 +1760,87 @@
                     "description": "$input_id The search input id"
                 }
             ],
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-list-table.php",
             "line": 84,
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-list-table.php",
             "line": 100,
             "description": "Whether the table has items to display or not",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-list-table.php",
             "line": 108,
             "description": "Initialize the DataTable View",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-list-table.php",
-            "line": 195,
+            "line": 199,
             "description": "Get a list of all, hidden and sortable columns, with filter applied",
             "since": "3.1.0",
             "access": "protected",
             "return": {
                 "description": "array"
             },
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-list-table.php",
-            "line": 236,
+            "line": 240,
             "description": "Get search results based on query.",
             "todo": [
                 "Needs to be updated to handle the AJAX requests."
             ],
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-list-table.php",
-            "line": 269,
+            "line": 273,
             "description": "Generate the table navigation above or below the table",
             "since": "3.1.0",
             "access": "protected",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-list-table.php",
-            "line": 299,
+            "line": 303,
             "description": "Display a monthly dropdown for filtering items",
             "since": "3.1.0",
             "access": "protected",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-list-table.php",
-            "line": 364,
+            "line": 368,
             "description": "Display the table",
             "since": "3.1.0",
             "access": "public",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-list-table.php",
-            "line": 396,
+            "line": 400,
             "description": "-",
             "return": {
                 "description": "array"
             },
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-list-table.php",
-            "line": 419,
+            "line": 423,
             "description": "Keep it simple here.  Mostly to be either replaced by child classes, or hook into",
-            "class": "WPP_UI"
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-list-table.php",
-            "line": 445,
+            "line": 449,
             "description": "Print column headers, accounting for hidden and sortable columns.",
             "since": "3.1.0",
             "access": "protected",
@@ -1744,7 +1850,213 @@
                     "description": "$with_id Whether to set the id attribute or not"
                 }
             ],
-            "class": "WPP_UI"
+            "class": "WP_Error"
+        },
+        {
+            "file": "lib/class-listing.php",
+            "line": 19,
+            "description": "Listing ID.",
+            "itemtype": "property",
+            "name": "$id",
+            "type": "String",
+            "class": "WP_Error"
+        },
+        {
+            "file": "lib/class-listing.php",
+            "line": 27,
+            "description": "Global Property ID.",
+            "itemtype": "property",
+            "name": "$gpid",
+            "type": "String",
+            "class": "WP_Error"
+        },
+        {
+            "file": "lib/class-listing.php",
+            "line": 35,
+            "description": "Listing Description.",
+            "itemtype": "property",
+            "name": "$content",
+            "type": "String",
+            "class": "WP_Error"
+        },
+        {
+            "file": "lib/class-listing.php",
+            "line": 44,
+            "description": "Content Title.",
+            "static": 1,
+            "itemtype": "property",
+            "name": "$title",
+            "type": "String",
+            "class": "WP_Error"
+        },
+        {
+            "file": "lib/class-listing.php",
+            "line": 53,
+            "description": "Listing Excerpt / Summary.",
+            "static": 1,
+            "itemtype": "property",
+            "name": "$excerpt",
+            "type": "String",
+            "class": "WP_Error"
+        },
+        {
+            "file": "lib/class-listing.php",
+            "line": 62,
+            "description": "Status.",
+            "static": 1,
+            "itemtype": "property",
+            "name": "$status",
+            "type": "String",
+            "class": "WP_Error"
+        },
+        {
+            "file": "lib/class-listing.php",
+            "line": 71,
+            "description": "Parent ID.",
+            "static": 1,
+            "itemtype": "property",
+            "name": "$parent",
+            "type": "Integer",
+            "class": "WP_Error"
+        },
+        {
+            "file": "lib/class-listing.php",
+            "line": 80,
+            "params": [
+                {
+                    "name": "string",
+                    "description": "$key"
+                },
+                {
+                    "name": "null",
+                    "description": "$default"
+                }
+            ],
+            "return": {
+                "description": "mixed"
+            },
+            "class": "WP_Error"
+        },
+        {
+            "file": "lib/class-listing.php",
+            "line": 90,
+            "params": [
+                {
+                    "name": "string",
+                    "description": "$key"
+                },
+                {
+                    "name": "string",
+                    "description": "$value"
+                }
+            ],
+            "internal": "param null $default",
+            "return": {
+                "description": "mixed"
+            },
+            "class": "WP_Error"
+        },
+        {
+            "file": "lib/class-listing.php",
+            "line": 102,
+            "description": "Hooks into save_post function and saves additional property data",
+            "todo": [
+                "Add some sort of custom capability so not only admins can make properties as featured. i.e. Agents can make their own properties featured."
+            ],
+            "since": "1.04",
+            "class": "WP_Error"
+        },
+        {
+            "file": "lib/class-listing.php",
+            "line": 214,
+            "description": "Address validation function\n\nSince 1.37.2 extracted from save_property and revalidate_all_addresses to make same functionality",
+            "global": "array  $wp_properties",
+            "params": [
+                {
+                    "name": "integer",
+                    "description": "$id"
+                },
+                {
+                    "name": "array",
+                    "description": "$args"
+                }
+            ],
+            "return": {
+                "description": "array"
+            },
+            "since": "1.37.2",
+            "author": "odokienko@UD",
+            "class": "WP_Error"
+        },
+        {
+            "file": "lib/class-listing.php",
+            "line": 275,
+            "class": "WP_Error"
+        },
+        {
+            "file": "lib/class-listing.php",
+            "line": 278,
+            "class": "WP_Error"
+        },
+        {
+            "file": "lib/class-listing.php",
+            "line": 347,
+            "description": "Updates parent ID.\nDetermines if parent exists and it doesn't have own parent.",
+            "params": [
+                {
+                    "name": "integer",
+                    "description": "$parent_id"
+                },
+                {
+                    "name": "integer",
+                    "description": "$id"
+                }
+            ],
+            "return": {
+                "description": "int"
+            },
+            "author": "peshkov@UD",
+            "since": "1.37.5",
+            "class": "WP_Error"
+        },
+        {
+            "file": "lib/class-listing.php",
+            "line": 384,
+            "description": "Generates Global Property ID for standard reference point during imports.\n\nProperty ID is currently not used.",
+            "return": {
+                "description": "integer. Global ID number"
+            },
+            "params": [
+                {
+                    "name": "bool|int",
+                    "description": "$id . Property ID."
+                },
+                {
+                    "name": "bool",
+                    "description": "$check_existance"
+                }
+            ],
+            "todo": [
+                "API call to UD server to verify there is no duplicates"
+            ],
+            "since": "1.6",
+            "class": "WP_Error"
+        },
+        {
+            "file": "lib/class-listing.php",
+            "line": 412,
+            "description": "Generates Global Property ID if it does not exist",
+            "params": [
+                {
+                    "name": "bool",
+                    "description": "$id"
+                }
+            ],
+            "return": {
+                "description": "string | Returns GPID"
+            },
+            "since": "1.6",
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-mail.php",
@@ -1754,7 +2066,7 @@
             "author": "Usability Dynamics, Inc. <info@usabilitydynamics.com>",
             "package": "WP-Property",
             "since": "1.38",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-mail.php",
@@ -1768,7 +2080,7 @@
             ],
             "author": "peshkov@UD",
             "since": "1.38",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-mail.php",
@@ -1776,21 +2088,21 @@
             "description": "Notification Template.",
             "author": "peshkov@UD",
             "since": "1.38",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-mail.php",
             "line": 47,
             "author": "peshkov@UD",
             "since": "1.38",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-mail.php",
             "line": 79,
             "author": "peshkov@UD",
             "since": "1.38",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-mail.php",
@@ -1808,14 +2120,14 @@
             ],
             "author": "peshkov@UD",
             "since": "1.38",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-mail.php",
             "line": 152,
             "author": "peshkov@UD",
             "since": "1.38",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-meta-box.php",
@@ -1825,20 +2137,20 @@
             "author": "Usability Dynamics, Inc. <info@usabilitydynamics.com>",
             "package": "WP-Property",
             "since": "1.38",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-module.php",
             "line": 2,
             "description": "Class Module",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-module.php",
             "line": 9,
             "description": "Feature Upgrader",
             "package": "UsabilityDynamics\\WPP",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-object-list-table.php",
@@ -1847,7 +2159,7 @@
             "package": "WP-Property",
             "since": "3.0",
             "access": "private",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-object-list-table.php",
@@ -1858,7 +2170,7 @@
                     "description": "$args"
                 }
             ],
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-object-list-table.php",
@@ -1869,7 +2181,7 @@
             "return": {
                 "description": "array"
             },
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-object-list-table.php",
@@ -1879,13 +2191,13 @@
             "return": {
                 "description": "array"
             },
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-object-list-table.php",
             "line": 69,
             "description": "Generate HTML for a single row on the users.php admin panel.",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-settings.php",
@@ -1894,7 +2206,7 @@
             "author": "Usability Dynamics, Inc. <info@usabilitydynamics.com>",
             "package": "WP-Property",
             "since": "2.0.0",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
@@ -1904,7 +2216,7 @@
             "version": "1.0.0",
             "package": "WP-Property",
             "subpackage": "Shortcodes",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
@@ -1914,22 +2226,22 @@
                 "Integrate with \\UsabilityDynamics\\WPP\\Utility::export_listings();"
             ],
             "since": "2.0",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
             "line": 50,
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
             "line": 55,
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
             "line": 60,
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
@@ -1937,7 +2249,7 @@
             "description": "{}",
             "since": "2.0",
             "author": "potanin@UD",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
@@ -1949,7 +2261,7 @@
                     "description": "$atts"
                 }
             ],
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
@@ -1960,7 +2272,7 @@
             ],
             "since": "2.0",
             "author": "potanin@UD",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
@@ -1984,29 +2296,29 @@
             "return": {
                 "description": "string"
             },
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
             "line": 162,
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
             "line": 167,
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
             "line": 206,
             "description": "Returns the property search widget",
             "since": "1.04",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
             "line": 224,
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
@@ -2020,7 +2332,7 @@
                 "draw_stats"
             ],
             "since": "1.35.0",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
@@ -2031,58 +2343,58 @@
                 "as well as some other shortcode-configured settings - potanin@UD 5/24/12"
             ],
             "since": "1.35.0",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
             "line": 333,
             "description": "Retrieve property attribute using shortcode.",
             "since": "1.26.0",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
             "line": 397,
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
             "line": 419,
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
             "line": 437,
             "description": "Displays a map for the current property.\nMust be used on a property page, or within a property loop where the global $post or $property variable is for a property object.",
             "since": "1.26.0",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
             "line": 461,
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
             "line": 466,
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
             "line": 471,
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
             "line": 478,
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-shortcode.php",
             "line": 501,
             "description": "Display list of attached files to a s post.\nFunction ported over from List Attachments Shortcode plugin.",
             "version": "1.25.0",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-template.php",
@@ -2093,25 +2405,71 @@
             "author": "team@ud",
             "package": "WP-Property",
             "subpackage": "Template",
-            "class": "WPP_UI"
+            "class": "Theme"
         },
         {
             "file": "lib/class-template.php",
             "line": 18,
-            "description": "Hooks Setter",
-            "action": "after_setup_theme (10)",
-            "author": "peshkov@UD",
-            "class": "WPP_UI"
+            "description": "Find and Load Template",
+            "author": "potanin@UD",
+            "since": "2.0.0",
+            "params": [
+                {
+                    "name": "$name",
+                    "description": ""
+                },
+                {
+                    "name": "array",
+                    "description": "$args"
+                }
+            ],
+            "internal": "param bool $once",
+            "return": {
+                "description": "mixed"
+            },
+            "class": "Theme"
         },
         {
             "file": "lib/class-template.php",
-            "line": 31,
+            "line": 57,
+            "description": "Locate template by checking known locations",
+            "author": "potanin@UD",
+            "since": "2.0.0",
+            "params": [
+                {
+                    "name": "bool",
+                    "description": "$name"
+                }
+            ],
+            "return": {
+                "description": "bool"
+            },
+            "class": "Theme"
+        },
+        {
+            "file": "lib/class-template.php",
+            "line": 93,
+            "description": "Hooks Setter",
+            "action": "after_setup_theme (10)",
+            "author": "peshkov@UD",
+            "class": "Theme"
+        },
+        {
+            "file": "lib/class-template.php",
+            "line": 106,
             "description": "Property template hook",
             "see": [
                 "templates/property.php"
             ],
             "author": "peshkov@UD",
-            "class": "WPP_UI"
+            "class": "Theme"
+        },
+        {
+            "file": "lib/class-theme.php",
+            "line": 16,
+            "description": "Adds wp-property-listing class in search results and property_overview pages",
+            "since": "0.7260",
+            "class": "Theme"
         },
         {
             "file": "lib/class-ui.php",
@@ -2182,50 +2540,11 @@
             "author": "Andy Potanin <andy.potanin@twincitiestech.com>",
             "package": "WP-Property",
             "subpackage": "Functions",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
             "line": 18,
-            "description": "Find and Load Template",
-            "author": "potanin@UD",
-            "since": "2.0.0",
-            "params": [
-                {
-                    "name": "$name",
-                    "description": ""
-                },
-                {
-                    "name": "array",
-                    "description": "$args"
-                }
-            ],
-            "internal": "param bool $once",
-            "return": {
-                "description": "mixed"
-            },
-            "class": ""
-        },
-        {
-            "file": "lib/class-utility.php",
-            "line": 57,
-            "description": "Locate template by checking known locations",
-            "author": "potanin@UD",
-            "since": "2.0.0",
-            "params": [
-                {
-                    "name": "bool",
-                    "description": "$name"
-                }
-            ],
-            "return": {
-                "description": "bool"
-            },
-            "class": ""
-        },
-        {
-            "file": "lib/class-utility.php",
-            "line": 92,
             "description": "Returns location information from Google Maps API call.\n\nFrom version 1.2.0, the geohash is generated automatically.",
             "version": "1.2.0",
             "since": "1.0.0",
@@ -2250,11 +2569,11 @@
             "return": {
                 "description": "object"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 264,
+            "line": 190,
             "description": "Returns avaliability of Google's Geocoding Service based on time of last returned status OVER_QUERY_LIMIT",
             "uses": [
                 "const self::blocking_for_new_validation_interval",
@@ -2270,18 +2589,18 @@
                 "description": "boolean"
             },
             "author": "odokienko@UD",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 294,
+            "line": 220,
             "description": "This function grabs the API key from UD's servers",
             "updated": "1.36.0",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 360,
+            "line": 286,
             "description": "Determine if any requested template exists and return path to it.\n\nMigrated from UD_API",
             "todo": [
                 "Merge with x_get_template_part() to support $slug and $name",
@@ -2308,17 +2627,17 @@
             "path": "array $path [optional]. Method tries to find template in theme, but also it can be found in given list of pathes.",
             "author": "peshkov@UD",
             "version": "1.0",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 381,
+            "line": 307,
             "description": "Set default instance.\nTemplate can depend on instance. For example: facebook, PDF, etc.",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 412,
+            "line": 338,
             "description": "Wrapper function to send notification with WP-CRM or without one\n\nMigrated out of UD_API",
             "params": [
                 {
@@ -2334,11 +2653,11 @@
                 "description": "boolean false if notification was not sent successfully"
             },
             "autor": "odokienko@UD",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 473,
+            "line": 399,
             "description": "Wrapper for the UD_API::log() function that includes the prefix automatically.",
             "see": [
                 "UD_API::log()"
@@ -2365,147 +2684,140 @@
             "return": {
                 "description": "boolean"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 496,
+            "line": 422,
             "description": "Get the label for \"Property\"",
             "since": "1.10",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 515,
-            "description": "Registers post types and taxonomies.",
-            "since": "1.31.0",
-            "class": ""
-        },
-        {
-            "file": "lib/class-utility.php",
-            "line": 630,
+            "line": 441,
             "description": "Loads applicable WP-Properrty scripts and styles",
             "since": "1.10",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 672,
+            "line": 483,
             "description": "Checks if script or style have been loaded.",
             "todo": [
                 "Add handler for styles."
             ],
             "since": "Denali 3.0",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 699,
+            "line": 510,
             "description": "PHP function to echoing a message to JS console",
             "since": "1.32.0",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 727,
+            "line": 538,
             "description": "Tests if remote script or CSS file can be opened prior to sending it to browser",
             "todo": [
                 "Add cache/transient storage to avoid multiple lookups."
             ],
             "version": "1.26.0",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 776,
+            "line": 587,
             "description": "Tests if remote image can be loaded, before sending to browser or TCPDF",
             "version": "1.26.0",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 799,
+            "line": 610,
             "description": "Remove non-XML characters",
             "version": "1.30.2",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 838,
+            "line": 649,
             "description": "Convert JSON data to XML if it is in JSON",
             "version": "1.26.0",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 901,
+            "line": 712,
             "description": "Convert CSV to XML\n\nFunction ported over from List Attachments Shortcode plugin.",
             "version": "1.32.0",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 934,
+            "line": 745,
             "description": "Convert CSV to XML\n\nFunction ported over from List Attachments Shortcode plugin.",
             "version": "1.32.0",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 982,
-            "class": ""
+            "line": 793,
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1003,
+            "line": 814,
             "description": "Get filesize of a file.\n\nFunction ported over from List Attachments Shortcode plugin.",
             "version": "1.25.0",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1018,
+            "line": 829,
             "description": "Set all existing property objects' property type",
             "todo": [
                 "Add regex to check for opening and closing bracket."
             ],
             "version": "1.23.1",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1054,
+            "line": 865,
             "description": "Attempts to detect if current page has a given shortcode",
             "todo": [
                 "Add regex to check for opening and closing bracket."
             ],
             "version": "1.23.1",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1077,
+            "line": 888,
             "description": "Reassemble address from parts",
             "version": "1.23.0",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1106,
+            "line": 917,
             "description": "Creates a nonce, similar to wp_create_nonce() but does not depend on user being logged in",
             "version": "1.17.3",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1127,
+            "line": 938,
             "description": "Verifies nonce.",
             "version": "1.17.3",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1155,
+            "line": 966,
             "description": "Returns attribute information.\n\nChecks $wp_properties and returns a concise array of array-specific settings and attributes",
             "todo": [
                 "Consider putting this into settings action",
@@ -2514,18 +2826,18 @@
                 "or adding caching"
             ],
             "version": "1.17.3",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1294,
+            "line": 1105,
             "description": "Makes sure the script is loaded, otherwise loads it",
             "version": "1.17.3",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1326,
+            "line": 1137,
             "description": "Makes sure the style is loaded, otherwise loads it",
             "params": [
                 {
@@ -2537,49 +2849,49 @@
                 "description": "bool"
             },
             "author": "Maxim Peshkov",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1356,
+            "line": 1167,
             "description": "Returns an array of all keys that can be queried using property_overview",
             "version": "1.17.3",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1388,
+            "line": 1199,
             "description": "Returns array of sortable attributes if set, or default",
             "version": "1.17.2",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1420,
+            "line": 1231,
             "description": "Pre post query - for now mostly to disable caching\n\nCalled in &get_posts() in query.php",
             "todo": [
                 "This function is a hack. Need to use post_type rewrites better. - potanin@UD"
             ],
             "version": "1.26.0",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1451,
+            "line": 1262,
             "description": "Pre post query - for now mostly to disable caching",
             "version": "1.17.2",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1469,
+            "line": 1280,
             "description": "Format a number as numeric",
             "version": "1.16.3",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1490,
+            "line": 1301,
             "description": "Determine if variable is decimal",
             "params": [
                 {
@@ -2591,44 +2903,44 @@
                 "description": "bool"
             },
             "author": "peshkov@UD",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1502,
+            "line": 1313,
             "description": "Checks if an file exists in the uploads directory from a URL\n\nOnly works for files in uploads folder.",
             "todo": [
                 "update to handle images outside the uploads folder"
             ],
             "version": "1.16.3",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1528,
+            "line": 1339,
             "description": "Setup default property page.",
             "version": "1.16.3",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1581,
+            "line": 1392,
             "description": "Perform WPP related things when a post is being deleted\n\nMakes sure all attached files and images get deleted.",
             "version": "1.16.1",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1632,
+            "line": 1443,
             "description": "Get advanced details about an image (mostly for troubleshooting)",
             "todo": [
                 "add some sort of light validating that the the passed item here is in fact an image"
             ],
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1704,
+            "line": 1515,
             "description": "Resizes (generate) image.",
             "todo": [
                 "add some sort of light validating that the the passed item here is in fact an image\n\nIf image has no meta data (for instance",
@@ -2650,71 +2962,39 @@
                 "description": "array. Image data for first image size (if multiple provided). Or FALSE if file could not be generated."
             },
             "since": "1.6",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1816,
+            "line": 1627,
             "description": "Check if theme-specific stylesheet exists.\n\nget_option('template') seems better choice than get_option('stylesheet'), which returns the current theme's slug\nwhich is a problem when a child theme is used. We want the parent theme's slug.",
             "since": "1.6",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1837,
+            "line": 1648,
             "description": "Check permissions and ownership of premium folder.",
             "since": "1.13",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1882,
+            "line": 1693,
             "description": "Revalidate all addresses\n\nRevalidates addresses of all publishd properties.\nIf Google daily addres lookup is exceeded, breaks the function and notifies the user.",
             "since": "1.05",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 1995,
-            "description": "Address validation function\n\nSince 1.37.2 extracted from save_property and revalidate_all_addresses to make same functionality",
-            "global": "array  $wp_properties",
-            "params": [
-                {
-                    "name": "integer",
-                    "description": "$post_id"
-                },
-                {
-                    "name": "array",
-                    "description": "$args"
-                }
-            ],
-            "return": {
-                "description": "array"
-            },
-            "since": "1.37.2",
-            "author": "odokienko@UD",
-            "class": ""
-        },
-        {
-            "file": "lib/class-utility.php",
-            "line": 2056,
-            "class": ""
-        },
-        {
-            "file": "lib/class-utility.php",
-            "line": 2059,
-            "class": ""
-        },
-        {
-            "file": "lib/class-utility.php",
-            "line": 2127,
+            "line": 1806,
             "description": "Minify JavaScript\n\nUses third-party JSMin if class isn't declared.\nIf WP3 is detected, class not loaded to avoid footer warning error.\nIf for some reason W3_Plugin is active, but JSMin is not found,\nwe load ours to avoid breaking property maps.",
             "since": "1.06",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2160,
+            "line": 1839,
             "description": "Minify CSS",
             "todo": [
                 "Replace third-party CssMin with a Vendor library. - potanin@UD\n\nSyntax:\nstring CssMin::minify(string $source [",
@@ -2727,32 +3007,32 @@
             ],
             "since": "1.37.3.2",
             "author": "odokienko@UD",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2207,
+            "line": 1886,
             "description": "Gets image dimensions for WP-Property images.\n\nThis function is no longer used, only here for legacy support.",
             "since": "1.0",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2219,
+            "line": 1898,
             "description": "Prevents all columns on the overview page from being enabled if nothing is configured",
             "since": "0.721",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2253,
+            "line": 1932,
             "description": "Determines most common property type (used for defaults when needed)",
             "since": "0.55",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2286,
+            "line": 1965,
             "description": "Splits a query string properly, using preg_split to avoid conflicts with dashes and other special chars.",
             "params": [
                 {
@@ -2763,17 +3043,17 @@
             "return": {
                 "description": "Array"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2294,
+            "line": 1973,
             "description": "Split the string properly, so no interference with &ndash; which is used in user input.",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2304,
+            "line": 1983,
             "description": "Handles user input, so a standard is created for supporting special characters.",
             "params": [
                 {
@@ -2788,11 +3068,11 @@
             "return": {
                 "description": "string   $result"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2326,
+            "line": 2005,
             "description": "Handles user input, so a standard is created for supporting special characters.",
             "params": [
                 {
@@ -2804,18 +3084,18 @@
             "return": {
                 "description": "string   $result"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2343,
+            "line": 2022,
             "description": "Determines if all of the arrays values are numeric",
             "since": "0.55",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2363,
+            "line": 2042,
             "params": [
                 {
                     "name": "string",
@@ -2825,11 +3105,11 @@
             "return": {
                 "description": "string"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2388,
+            "line": 2067,
             "params": [
                 {
                     "name": "string",
@@ -2839,23 +3119,23 @@
             "return": {
                 "description": "string"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2414,
+            "line": 2093,
             "description": "Return an array of all available attributes and meta keys",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2453,
+            "line": 2132,
             "description": "Render a dropdown of property attributes.",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2486,
+            "line": 2165,
             "params": [
                 {
                     "name": "string",
@@ -2865,11 +3145,11 @@
             "return": {
                 "description": "array|mixed|string|void"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2541,
+            "line": 2220,
             "description": "Removes all WPP cache files",
             "return": {
                 "description": "string Response"
@@ -2877,40 +3157,54 @@
             "version": "0.1",
             "since": "1.32.2",
             "author": "Maxim Peshkov",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2558,
+            "line": 2237,
             "description": "Checks for updates against TwinCitiesTech.com Server",
             "since": "0.55",
             "version": "1.13.1",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2707,
+            "line": 2386,
             "description": "Makes a given property featured, usuall called via ajax",
             "since": "0.721",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2735,
+            "line": 2414,
             "description": "Add or remove taxonomy columns",
             "since": "3.0",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2781,
+            "line": 2445,
+            "params": [
+                {
+                    "name": "$columns",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "mixed"
+            },
+            "class": "WP_Error"
+        },
+        {
+            "file": "lib/class-utility.php",
+            "line": 2465,
             "description": "Displays dropdown of available property size images",
             "since": "0.54",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2828,
+            "line": 2512,
             "description": "Returns image sizes for a passed image size slug\n\nLooks through all images sizes.",
             "since": "0.54",
             "params": [
@@ -2926,19 +3220,19 @@
             "return": {
                 "description": "array keys: 'width' and 'height' if image type sizes found."
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2896,
+            "line": 2580,
             "description": "AJAX Handler.\nSaves WPP Settings",
             "author": "peshkov@UD",
             "since": "1.38.3",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 2937,
+            "line": 2621,
             "description": "Loads settings into global variable\nAlso restores data from backup file.\n\nAttached to do_action_ref_array('the_post', array(&$post)); in setup_postdata()\n\nAs of 1.11 prevents removal of premium feature configurations that are not held in the settings page array\n\n1.12 - added taxonomies filter: wpp_taxonomies\n1.14 - added backup from text file",
             "params": [
                 {
@@ -2950,11 +3244,11 @@
                 "description": "array|$wp_properties"
             },
             "since": "1.12",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 3025,
+            "line": 2709,
             "description": "Utility to remove deleted image sizes.",
             "params": [
                 {
@@ -2965,28 +3259,28 @@
             "return": {
                 "description": "mixed"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 3045,
+            "line": 2729,
             "description": "Loads property values into global $post variables.\n\nAttached to do_action_ref_array('the_post', array(&$post)); in setup_postdata()\nRan after template_redirect.\n$property is loaded in WPP_Core::template_redirect();",
             "since": "0.54",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 3067,
+            "line": 2751,
             "description": "Returns array of searchable property IDs",
             "return": {
                 "description": "array|$wp_properties"
             },
             "since": "0.621",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 3099,
+            "line": 2783,
             "description": "Modifies value of specific property stat (property attribute)\n\nUsed by filter wpp_attribute_filter in WPP_Object_List_Table::single_row();",
             "params": [
                 {
@@ -3001,11 +3295,11 @@
             "return": {
                 "description": "mixed|string|void $value Modified value"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 3131,
+            "line": 2815,
             "description": "Returns array of searchable attributes and their ranges",
             "params": [
                 {
@@ -3029,17 +3323,17 @@
                 "description": "array|$range"
             },
             "since": "0.57",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 3294,
+            "line": 2978,
             "description": "Check if a search converstion exists for a attributes value",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 3326,
+            "line": 3010,
             "description": "Primary static function for queries properties  based on type and attributes",
             "todo": [
                 "There is a limitation when doing a search such as 4",
@@ -3059,22 +3353,22 @@
             "return": {
                 "description": "bool|mixed|void"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 3384,
+            "line": 3068,
             "description": "Specific meta data can contain value with commas. E.g. location field ( address_attribute )\nThe current list contains meta slugs which will be ignored for comma parsing. peshkov@UD",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 3489,
-            "class": ""
+            "line": 3173,
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 3775,
+            "line": 3459,
             "description": "Determine if property has children",
             "params": [
                 {
@@ -3087,11 +3381,11 @@
             },
             "author": "peshkov@UD",
             "since": "1.37.5",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 3798,
+            "line": 3482,
             "description": "Prepares Request params for get_properties() function",
             "params": [
                 {
@@ -3102,25 +3396,25 @@
             "return": {
                 "description": "array $attrs"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 3866,
+            "line": 3550,
             "description": "Returns array of all values for a particular attribute/meta_key",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 3884,
+            "line": 3568,
             "todo": [
                 "check if this condition is required - Anton Korotkov"
             ],
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 3918,
+            "line": 3602,
             "description": "Load property information into an array or an object",
             "version": "1.14 - fixed problem with drafts",
             "since": "1.11",
@@ -3128,37 +3422,37 @@
                 "Code pertaining to displaying data should be migrated to prepare_property_for_display() like :$real_value = nl2br($real_value);",
                 "Fix the long dashes - when in latitude or longitude it breaks it when using static map"
             ],
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 4254,
+            "line": 3938,
             "description": "Gets prefix to an attribute",
             "todo": [
                 "This should be obsolete",
                 "in any case we can't assume everyone uses USD - potanin@UD (11/22/11)"
             ],
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 4304,
-            "class": ""
+            "line": 3988,
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 4309,
-            "class": ""
+            "line": 3993,
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 4318,
+            "line": 4002,
             "description": "Validate if a URL is valid.",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 4325,
+            "line": 4009,
             "description": "Determine if a email is valid.",
             "params": [
                 {
@@ -3169,18 +3463,18 @@
             "return": {
                 "description": "boolean"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 4336,
+            "line": 4020,
             "description": "Returns an array of a property's stats and their values.\n\nQuery is array of variables to use load ours to avoid breaking property maps.",
             "since": "1.0",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 4413,
+            "line": 4097,
             "params": [
                 {
                     "name": "array",
@@ -3190,101 +3484,41 @@
             "return": {
                 "description": "object|stdClass"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 4432,
+            "line": 4116,
             "description": "Returns a minified Google Maps Infobox\n\nUsed in property map and supermap",
             "filter": "wpp_google_maps_infobox",
             "version": "1.11 - added return if $post or address attribute are not set to prevent fatal error",
             "since": "1.081",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 4598,
-            "description": "Updates parent ID.\nDetermines if parent exists and it doesn't have own parent.",
-            "params": [
-                {
-                    "name": "integer",
-                    "description": "$parent_id"
-                },
-                {
-                    "name": "integer",
-                    "description": "$post_id"
-                }
-            ],
-            "return": {
-                "description": "int"
-            },
-            "author": "peshkov@UD",
-            "since": "1.37.5",
-            "class": ""
-        },
-        {
-            "file": "lib/class-utility.php",
-            "line": 4635,
+            "line": 4282,
             "description": "Returns property object for displaying on map\n\nUsed for speeding up property queries, only returns:\nID, post_title, atitude, longitude, exclude_from_supermap, location, supermap display_attributes and featured image urls\n\n1.11: addded htmlspecialchars and addslashes to post_title",
             "since": "1.11",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 4711,
-            "description": "Generates Global Property ID for standard reference point during imports.\n\nProperty ID is currently not used.",
-            "return": {
-                "description": "integer. Global ID number"
-            },
-            "params": [
-                {
-                    "name": "bool|int",
-                    "description": "$property_id . Property ID."
-                },
-                {
-                    "name": "bool",
-                    "description": "$check_existance"
-                }
-            ],
-            "todo": [
-                "API call to UD server to verify there is no duplicates"
-            ],
-            "since": "1.6",
-            "class": ""
-        },
-        {
-            "file": "lib/class-utility.php",
-            "line": 4739,
-            "description": "Generates Global Property ID if it does not exist",
-            "params": [
-                {
-                    "name": "bool",
-                    "description": "$property_id"
-                }
-            ],
-            "return": {
-                "description": "string | Returns GPID"
-            },
-            "since": "1.6",
-            "class": ""
-        },
-        {
-            "file": "lib/class-utility.php",
-            "line": 4769,
+            "line": 4358,
             "description": "Returns post_id fro GPID if it exists",
             "since": "1.6",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 4791,
+            "line": 4380,
             "description": "This static function is not actually used, it's only use to hold some common translations that may be used by our themes.\n\nTranslations for Denali theme.",
             "since": "1.14",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 4826,
+            "line": 4415,
             "description": "Determine if all values of meta key have 'number type'\nIf yes, returns boolean true",
             "params": [
                 {
@@ -3301,28 +3535,28 @@
             },
             "since": "1.16.2",
             "author": "Maxim Peshkov",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 4875,
+            "line": 4464,
             "description": "Function for displaying WPP Data Table rows",
             "todo": [
                 "Verify this is used",
                 "or remove. - potanin@UD\n\nPorted from WP-CRM"
             ],
             "since": "3.0",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 4936,
+            "line": 4525,
             "description": "Get Search filter fields",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 5096,
+            "line": 4685,
             "description": "Returns users' ids of post type",
             "global": "object $wpdb",
             "params": [
@@ -3334,29 +3568,29 @@
             "return": {
                 "description": "array"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 5138,
+            "line": 4727,
             "description": "Process bulk actions",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 5181,
-            "class": ""
+            "line": 4770,
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 5195,
+            "line": 4784,
             "description": "Settings page load handler",
             "author": "korotkov@ud",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 5227,
+            "line": 4816,
             "description": "Returns custom default coordinates",
             "global": "array $wp_properties",
             "return": {
@@ -3364,11 +3598,11 @@
             },
             "author": "peshkov@UD",
             "since": "1.37.6",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 5251,
+            "line": 4840,
             "description": "Counts properties by post types",
             "global": "object $wpdb",
             "params": [
@@ -3380,21 +3614,21 @@
             "return": {
                 "description": "int"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 5276,
+            "line": 4865,
             "description": "Returns month periods of properties",
             "global": "object $wp_locale",
             "return": {
                 "description": "array"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 5311,
+            "line": 4900,
             "description": "Deletes directory recursively",
             "params": [
                 {
@@ -3406,18 +3640,18 @@
                 "description": "bool"
             },
             "author": "korotkov@ud",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 5344,
+            "line": 4933,
             "description": "Prevent Facebook integration if 'Facebook Tabs' did not installed.",
             "author": "korotkov@ud",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 5362,
+            "line": 4951,
             "description": "Formats phone number for display",
             "since": "1.36.0",
             "source": "WPP_F",
@@ -3430,11 +3664,11 @@
             "return": {
                 "description": "string $phone_number"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 5384,
+            "line": 4973,
             "description": "Shorthand function for drawing checkbox input fields.",
             "since": "1.36.0",
             "source": "WPP_F",
@@ -3451,11 +3685,11 @@
             "return": {
                 "description": "string Checkbox input field and hidden field with the opposive value"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 5508,
+            "line": 5097,
             "description": "Shorthand function for drawing a textarea",
             "since": "1.36.0",
             "source": "WPP_F",
@@ -3468,11 +3702,11 @@
             "return": {
                 "description": "string Input field and hidden field with the opposive value"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 5579,
+            "line": 5168,
             "description": "Shorthand function for drawing regular or hidden input fields.",
             "since": "1.36.0",
             "source": "WPP_F",
@@ -3489,27 +3723,27 @@
             "return": {
                 "description": "string Input field and hidden field with the opposive value"
             },
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 5624,
+            "line": 5213,
             "description": "Recursive conversion of an object into an array",
             "since": "1.36.0",
             "source": "WPP_F",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 5644,
+            "line": 5233,
             "description": "Get a URL of a page.",
             "since": "1.36.0",
             "source": "WPP_F",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 5701,
+            "line": 5290,
             "description": "Fixes images permalinks in [gallery] shortcode",
             "params": [
                 {
@@ -3542,21 +3776,21 @@
             },
             "author": "peshkov@UD",
             "since": "1.37.6",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
-            "line": 5731,
+            "line": 5320,
             "description": "Returns clear post status",
             "author": "peshkov@UD",
             "version": "0.1",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-widget.php",
             "line": 2,
             "description": "WP-Property Widget Class",
-            "class": ""
+            "class": "WP_Error"
         },
         {
             "file": "lib/legacy.php",
@@ -3620,26 +3854,6 @@
             "since": "1.32.2",
             "author": "peshkov@UD",
             "class": ""
-        },
-        {
-            "file": "lib/pluggable.php",
-            "line": 77,
-            "description": "Add 'property' to the list of RSSable post_types.",
-            "todo": [
-                "Why is this a stand-alone function?"
-            ],
-            "params": [
-                {
-                    "name": "string",
-                    "description": "$request"
-                }
-            ],
-            "return": {
-                "description": "string"
-            },
-            "author": "korotkov@ud",
-            "since": "1.36.2",
-            "class": ""
         }
     ],
     "warnings": [
@@ -3692,28 +3906,36 @@
             "line": " lib/class-bootstrap.php:54"
         },
         {
-            "message": "unknown tag: access",
-            "line": " lib/class-bootstrap.php:294"
+            "message": "unknown tag: usage",
+            "line": " lib/class-bootstrap.php:207"
         },
         {
             "message": "unknown tag: access",
-            "line": " lib/class-bootstrap.php:393"
+            "line": " lib/class-bootstrap.php:315"
         },
         {
-            "message": "unknown tag: updated",
-            "line": " lib/class-bootstrap.php:860"
+            "message": "unknown tag: access",
+            "line": " lib/class-bootstrap.php:416"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-bootstrap.php:1004"
+            "line": " lib/class-bootstrap.php:916"
         },
         {
             "message": "unknown tag: access",
-            "line": " lib/class-bootstrap.php:1594"
+            "line": " lib/class-bootstrap.php:1396"
         },
         {
-            "message": "unknown tag: usage",
-            "line": " lib/class-bootstrap.php:1857"
+            "message": "unknown tag: updated",
+            "line": " lib/class-bootstrap.php:1648"
+        },
+        {
+            "message": "unknown tag: version",
+            "line": " lib/class-exception.php:2"
+        },
+        {
+            "message": "unknown tag: package",
+            "line": " lib/class-exception.php:2"
         },
         {
             "message": "unknown tag: package",
@@ -3733,23 +3955,35 @@
         },
         {
             "message": "unknown tag: access",
-            "line": " lib/class-list-table.php:195"
+            "line": " lib/class-list-table.php:199"
         },
         {
             "message": "unknown tag: access",
-            "line": " lib/class-list-table.php:269"
+            "line": " lib/class-list-table.php:273"
         },
         {
             "message": "unknown tag: access",
-            "line": " lib/class-list-table.php:299"
+            "line": " lib/class-list-table.php:303"
         },
         {
             "message": "unknown tag: access",
-            "line": " lib/class-list-table.php:364"
+            "line": " lib/class-list-table.php:368"
         },
         {
             "message": "unknown tag: access",
-            "line": " lib/class-list-table.php:445"
+            "line": " lib/class-list-table.php:449"
+        },
+        {
+            "message": "unknown tag: version",
+            "line": " lib/class-listing.php:2"
+        },
+        {
+            "message": "unknown tag: package",
+            "line": " lib/class-listing.php:2"
+        },
+        {
+            "message": "unknown tag: internal",
+            "line": " lib/class-listing.php:90"
         },
         {
             "message": "unknown tag: version",
@@ -3820,8 +4054,16 @@
             "line": " lib/class-template.php:2"
         },
         {
-            "message": "unknown tag: action",
+            "message": "unknown tag: internal",
             "line": " lib/class-template.php:18"
+        },
+        {
+            "message": "unknown tag: action",
+            "line": " lib/class-template.php:93"
+        },
+        {
+            "message": "unknown tag: package",
+            "line": " lib/class-theme.php:2"
         },
         {
             "message": "unknown tag: version",
@@ -3852,180 +4094,184 @@
             "line": " lib/class-utility.php:2"
         },
         {
-            "message": "unknown tag: internal",
+            "message": "unknown tag: version",
             "line": " lib/class-utility.php:18"
         },
         {
-            "message": "unknown tag: version",
-            "line": " lib/class-utility.php:92"
-        },
-        {
             "message": "unknown tag: updated",
-            "line": " lib/class-utility.php:294"
+            "line": " lib/class-utility.php:220"
         },
         {
             "message": "unknown tag: internal",
-            "line": " lib/class-utility.php:360"
+            "line": " lib/class-utility.php:286"
         },
         {
             "message": "unknown tag: path",
-            "line": " lib/class-utility.php:360"
+            "line": " lib/class-utility.php:286"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:360"
+            "line": " lib/class-utility.php:286"
         },
         {
             "message": "unknown tag: autor",
-            "line": " lib/class-utility.php:412"
+            "line": " lib/class-utility.php:338"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:727"
+            "line": " lib/class-utility.php:538"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:776"
+            "line": " lib/class-utility.php:587"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:799"
+            "line": " lib/class-utility.php:610"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:838"
+            "line": " lib/class-utility.php:649"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:901"
+            "line": " lib/class-utility.php:712"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:934"
+            "line": " lib/class-utility.php:745"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:1003"
+            "line": " lib/class-utility.php:814"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:1018"
+            "line": " lib/class-utility.php:829"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:1054"
+            "line": " lib/class-utility.php:865"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:1077"
+            "line": " lib/class-utility.php:888"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:1106"
+            "line": " lib/class-utility.php:917"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:1127"
+            "line": " lib/class-utility.php:938"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:1155"
+            "line": " lib/class-utility.php:966"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:1294"
+            "line": " lib/class-utility.php:1105"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:1356"
+            "line": " lib/class-utility.php:1167"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:1388"
+            "line": " lib/class-utility.php:1199"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:1420"
+            "line": " lib/class-utility.php:1231"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:1451"
+            "line": " lib/class-utility.php:1262"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:1469"
+            "line": " lib/class-utility.php:1280"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:1502"
+            "line": " lib/class-utility.php:1313"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:1528"
+            "line": " lib/class-utility.php:1339"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:1581"
+            "line": " lib/class-utility.php:1392"
         },
         {
             "message": "unknown tag: internal",
-            "line": " lib/class-utility.php:2326"
+            "line": " lib/class-utility.php:2005"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:2541"
+            "line": " lib/class-utility.php:2220"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:2558"
+            "line": " lib/class-utility.php:2237"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/class-utility.php:2828"
+            "line": " lib/class-utility.php:2512"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:3918"
+            "line": " lib/class-utility.php:3602"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:3918"
+            "line": " lib/class-utility.php:3602"
         },
         {
             "message": "unknown tag: filter",
-            "line": " lib/class-utility.php:4432"
+            "line": " lib/class-utility.php:4116"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:4432"
+            "line": " lib/class-utility.php:4116"
         },
         {
             "message": "unknown tag: source",
-            "line": " lib/class-utility.php:5362"
+            "line": " lib/class-utility.php:4951"
         },
         {
             "message": "unknown tag: source",
-            "line": " lib/class-utility.php:5384"
+            "line": " lib/class-utility.php:4973"
         },
         {
             "message": "unknown tag: source",
-            "line": " lib/class-utility.php:5508"
+            "line": " lib/class-utility.php:5097"
         },
         {
             "message": "unknown tag: source",
-            "line": " lib/class-utility.php:5579"
+            "line": " lib/class-utility.php:5168"
         },
         {
             "message": "unknown tag: source",
-            "line": " lib/class-utility.php:5624"
+            "line": " lib/class-utility.php:5213"
         },
         {
             "message": "unknown tag: source",
-            "line": " lib/class-utility.php:5644"
+            "line": " lib/class-utility.php:5233"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-utility.php:5731"
+            "line": " lib/class-utility.php:5320"
+        },
+        {
+            "message": "unknown tag: version",
+            "line": " lib/class-wp-error.php:2"
+        },
+        {
+            "message": "unknown tag: package",
+            "line": " lib/class-wp-error.php:2"
         },
         {
             "message": "unknown tag: version",
@@ -4096,48 +4342,48 @@
             "line": " lib/shortcodes/property-overview.php:22"
         },
         {
-            "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:50"
+            "message": "Missing item type\nThe Actual Shortcode",
+            "line": " lib/shortcodes/property-overview.php:49"
         },
         {
             "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:55"
+            "line": " lib/shortcodes/property-overview.php:68"
         },
         {
             "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:61"
+            "line": " lib/shortcodes/property-overview.php:73"
         },
         {
             "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:91"
+            "line": " lib/shortcodes/property-overview.php:79"
         },
         {
             "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:103"
+            "line": " lib/shortcodes/property-overview.php:109"
         },
         {
             "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:106"
+            "line": " lib/shortcodes/property-overview.php:121"
         },
         {
             "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:111"
+            "line": " lib/shortcodes/property-overview.php:124"
         },
         {
             "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:115"
+            "line": " lib/shortcodes/property-overview.php:129"
         },
         {
             "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:139"
+            "line": " lib/shortcodes/property-overview.php:133"
         },
         {
             "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:148"
+            "line": " lib/shortcodes/property-overview.php:157"
         },
         {
             "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:151"
+            "line": " lib/shortcodes/property-overview.php:166"
         },
         {
             "message": "Missing item type",
@@ -4145,31 +4391,27 @@
         },
         {
             "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:172"
+            "line": " lib/shortcodes/property-overview.php:187"
         },
         {
             "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:177"
+            "line": " lib/shortcodes/property-overview.php:190"
         },
         {
             "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:180"
+            "line": " lib/shortcodes/property-overview.php:195"
         },
         {
             "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:185"
+            "line": " lib/shortcodes/property-overview.php:198"
         },
         {
             "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:194"
+            "line": " lib/shortcodes/property-overview.php:203"
         },
         {
             "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:208"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:214"
+            "line": " lib/shortcodes/property-overview.php:212"
         },
         {
             "message": "Missing item type",
@@ -4177,15 +4419,23 @@
         },
         {
             "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:229"
-        },
-        {
-            "message": "Missing item type\nReturn property overview data for AJAX calls",
-            "line": " lib/shortcodes/property-overview.php:271"
+            "line": " lib/shortcodes/property-overview.php:232"
         },
         {
             "message": "Missing item type",
-            "line": " lib/shortcodes/property-overview.php:381"
+            "line": " lib/shortcodes/property-overview.php:244"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/shortcodes/property-overview.php:247"
+        },
+        {
+            "message": "Missing item type\nReturn property overview data for AJAX calls",
+            "line": " lib/shortcodes/property-overview.php:289"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/shortcodes/property-overview.php:399"
         },
         {
             "message": "Missing item type\nReturns the property search widget",
@@ -4364,68 +4614,48 @@
             "line": " lib/widgets/class-search-properties.php:172"
         },
         {
-            "message": "Missing item type\nUsabilityDynamics\\WPP Bootstrap\n\nMigrated\n========\n\n- WPP_F::load_premium\n- WPP_F::check_premium\n- WPP_F::check_plugin_updates\n- WPP_F::manual_activation\n- upgrade",
+            "message": "Missing item type\nUsabilityDynamics\\WPP Bootstrap\n\nMigrated\n========\n\n- WPP_F::load_modules\n- WPP_F::check_premium\n- WPP_F::check_plugin_updates\n- WPP_F::manual_activation\n- upgrade",
             "line": " lib/class-bootstrap.php:2"
         },
         {
-            "message": "Missing item type\nAutoload Vendor Dependencies",
-            "line": " lib/class-bootstrap.php:191"
-        },
-        {
-            "message": "Missing item type\nDefine Plugin Constants",
-            "line": " lib/class-bootstrap.php:207"
-        },
-        {
-            "message": "Missing item type\nRun on plugin activation.\n\nAs of WP 3.1 this is not ran on automatic update.",
+            "message": "Missing item type\nAdd 'property' to the list of RSSable post_types.",
             "line": " lib/class-bootstrap.php:225"
         },
         {
+            "message": "Missing item type\nRun on plugin activation.\n\nAs of WP 3.1 this is not ran on automatic update.",
+            "line": " lib/class-bootstrap.php:248"
+        },
+        {
             "message": "Missing item type\nPlugin Deactivation",
-            "line": " lib/class-bootstrap.php:242"
+            "line": " lib/class-bootstrap.php:265"
         },
         {
             "message": "Missing item type\nRenders a critical failure.",
-            "line": " lib/class-bootstrap.php:256"
+            "line": " lib/class-bootstrap.php:279"
         },
         {
             "message": "Missing item type\nAdds thumbnail feature to WP-Property pages",
-            "line": " lib/class-bootstrap.php:268"
+            "line": " lib/class-bootstrap.php:291"
         },
         {
             "message": "Missing item type\nCalled on init, as early as possible.",
-            "line": " lib/class-bootstrap.php:294"
+            "line": " lib/class-bootstrap.php:315"
         },
         {
             "message": "Missing item type\nSetup widgets and widget areas.",
-            "line": " lib/class-bootstrap.php:331"
+            "line": " lib/class-bootstrap.php:354"
         },
         {
             "message": "Missing item type\nSecondary WPP Initialization ran towards the end of init()\n\nLoads things that we want make accessible for modification via other plugins.",
-            "line": " lib/class-bootstrap.php:393"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:406"
-        },
-        {
-            "message": "Missing item type",
             "line": " lib/class-bootstrap.php:416"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:420"
+            "line": " lib/class-bootstrap.php:429"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:427"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:432"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:443"
+            "line": " lib/class-bootstrap.php:439"
         },
         {
             "message": "Missing item type",
@@ -4433,143 +4663,159 @@
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:449"
+            "line": " lib/class-bootstrap.php:451"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:517"
+            "line": " lib/class-bootstrap.php:462"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:557"
+            "line": " lib/class-bootstrap.php:465"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/class-bootstrap.php:468"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/class-bootstrap.php:531"
         },
         {
             "message": "Missing item type\nPerforms front-end pre-header functionality\n\nThis function is not called on amdin side\nLoads conditional CSS styles",
-            "line": " lib/class-bootstrap.php:580"
+            "line": " lib/class-bootstrap.php:583"
         },
         {
             "message": "Missing item type\nRuns pre-header functions on admin-side only\n\nChecks if plugin has been updated.",
-            "line": " lib/class-bootstrap.php:782"
+            "line": " lib/class-bootstrap.php:785"
         },
         {
             "message": "Missing item type\nRegister metaboxes.",
-            "line": " lib/class-bootstrap.php:836"
+            "line": " lib/class-bootstrap.php:839"
         },
         {
             "message": "Missing item type\nCheck if WP-Property RaaS Active",
-            "line": " lib/class-bootstrap.php:851"
-        },
-        {
-            "message": "Missing item type\nCheck for premium features and load them",
-            "line": " lib/class-bootstrap.php:860"
+            "line": " lib/class-bootstrap.php:855"
         },
         {
             "message": "Missing item type\nCheck if premium feature is installed or not",
-            "line": " lib/class-bootstrap.php:952"
+            "line": " lib/class-bootstrap.php:864"
         },
         {
             "message": "Missing item type\nChecks updates for premium features by AJAX\nPrints results to body.",
-            "line": " lib/class-bootstrap.php:983"
+            "line": " lib/class-bootstrap.php:895"
         },
         {
             "message": "Missing item type\nRun manually when a version mismatch is detected.\n\nHolds official current version designation.\nCalled in admin_init hook.",
-            "line": " lib/class-bootstrap.php:1004"
+            "line": " lib/class-bootstrap.php:916"
         },
         {
             "message": "Missing item type\nMoved from WPP_Legacy",
-            "line": " lib/class-bootstrap.php:1045"
+            "line": " lib/class-bootstrap.php:957"
         },
         {
             "message": "Missing item type\nUpgrade:\n- WPP postmeta data were saved to database with '&ndash;' instead of '-' in value. Function encode_sql_input was modified and it doesn't change '-' to '&ndash' anymore\nSo to prevent search result issues we need to update database data.\npeshkov@UD",
-            "line": " lib/class-bootstrap.php:1059"
+            "line": " lib/class-bootstrap.php:971"
         },
         {
             "message": "Missing item type\nAdds \"Settings\" link to the plugin overview page\n\n *",
-            "line": " lib/class-bootstrap.php:1077"
+            "line": " lib/class-bootstrap.php:989"
         },
         {
             "message": "Missing item type\nCan enqueue scripts on specific pages, and print content into head",
-            "line": " lib/class-bootstrap.php:1094"
+            "line": " lib/class-bootstrap.php:1006"
         },
         {
             "message": "Missing item type\nSets up additional pages and loads their scripts",
-            "line": " lib/class-bootstrap.php:1203"
+            "line": " lib/class-bootstrap.php:1115"
         },
         {
             "message": "Missing item type\nNext used to add custom submenu page 'All Properties' with Javascript dataTable",
-            "line": " lib/class-bootstrap.php:1224"
+            "line": " lib/class-bootstrap.php:1136"
         },
         {
             "message": "Missing item type\nModify admin body class on property pages for CSS",
-            "line": " lib/class-bootstrap.php:1257"
+            "line": " lib/class-bootstrap.php:1169"
         },
         {
             "message": "Missing item type\nFixed property pages being seen as 404 pages\n\nRan on parse_request;\n\nWP handle_404() function decides if current request should be a 404 page\nMarking the global variable $wp_query->is_search to true makes the function\nassume that the request is a search.",
-            "line": " lib/class-bootstrap.php:1283"
+            "line": " lib/class-bootstrap.php:1195"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:1345"
+            "line": " lib/class-bootstrap.php:1257"
         },
         {
             "message": "Missing item type\nModifies post content",
-            "line": " lib/class-bootstrap.php:1370"
-        },
-        {
-            "message": "Missing item type\nHooks into save_post function and saves additional property data",
-            "line": " lib/class-bootstrap.php:1400"
+            "line": " lib/class-bootstrap.php:1282"
         },
         {
             "message": "Missing item type\nInserts content into the \"Publish\" metabox on property pages",
-            "line": " lib/class-bootstrap.php:1511"
+            "line": " lib/class-bootstrap.php:1312"
         },
         {
             "message": "Missing item type\nRemoves \"quick edit\" link on property type objects\n\nCalled in via page_row_actions filter",
-            "line": " lib/class-bootstrap.php:1544"
+            "line": " lib/class-bootstrap.php:1345"
         },
         {
             "message": "Missing item type\nAdds property-relevant messages to the property post type object",
-            "line": " lib/class-bootstrap.php:1561"
+            "line": " lib/class-bootstrap.php:1363"
         },
         {
             "message": "Missing item type\nSets up property-type columns",
-            "line": " lib/class-bootstrap.php:1594"
+            "line": " lib/class-bootstrap.php:1396"
         },
         {
             "message": "Missing item type\nSets up sortable columns columns",
-            "line": " lib/class-bootstrap.php:1630"
-        },
-        {
-            "message": "Missing item type\nAdds wp-property-listing class in search results and property_overview pages",
-            "line": " lib/class-bootstrap.php:1652"
+            "line": " lib/class-bootstrap.php:1432"
         },
         {
             "message": "Missing item type\nChecks settings data on accord with existing wp_properties data ( before option updates )",
-            "line": " lib/class-bootstrap.php:1667"
+            "line": " lib/class-bootstrap.php:1454"
         },
         {
             "message": "Missing item type\nHack to avoid issues with capabilities and views.",
-            "line": " lib/class-bootstrap.php:1692"
+            "line": " lib/class-bootstrap.php:1479"
         },
         {
             "message": "Missing item type\nAdds all WPP custom capabilities to administrator role.\nPremium feature capabilities are added by filter in this function, see below.",
-            "line": " lib/class-bootstrap.php:1712"
+            "line": " lib/class-bootstrap.php:1499"
         },
         {
             "message": "Missing item type\nGenerates javascript file with localization.\nAdds localization support to all WP-Property scripts.\nAccessible via wp-ajax.php calls.",
-            "line": " lib/class-bootstrap.php:1758"
+            "line": " lib/class-bootstrap.php:1545"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:1773"
+            "line": " lib/class-bootstrap.php:1560"
         },
         {
             "message": "Missing item type\nWPP Contextual Help",
-            "line": " lib/class-bootstrap.php:1789"
+            "line": " lib/class-bootstrap.php:1576"
         },
         {
             "message": "Missing item type\nReturns specific instance data which is used by javascript\nJavascript Reference: window.wpp.instance",
-            "line": " lib/class-bootstrap.php:1811"
+            "line": " lib/class-bootstrap.php:1598"
+        },
+        {
+            "message": "Missing item type\nCheck for premium features and load them",
+            "line": " lib/class-bootstrap.php:1648"
+        },
+        {
+            "message": "Missing item type\nAutoload Vendor Dependencies",
+            "line": " lib/class-bootstrap.php:1740"
+        },
+        {
+            "message": "Missing item type\nDefine Plugin Constants",
+            "line": " lib/class-bootstrap.php:1761"
+        },
+        {
+            "message": "Missing item type\nRegisters post types and taxonomies.",
+            "line": " lib/class-bootstrap.php:1779"
+        },
+        {
+            "message": "Missing item type\nInitialize Shortcodes",
+            "line": " lib/class-bootstrap.php:1894"
         },
         {
             "message": "Missing item type\nWP-Property Formatting\n\nHandle value conversions, object normalization, schema mapping, etc.",
@@ -4693,35 +4939,71 @@
         },
         {
             "message": "Missing item type\nGet a list of all, hidden and sortable columns, with filter applied",
-            "line": " lib/class-list-table.php:195"
+            "line": " lib/class-list-table.php:199"
         },
         {
             "message": "Missing item type\nGet search results based on query.",
-            "line": " lib/class-list-table.php:236"
+            "line": " lib/class-list-table.php:240"
         },
         {
             "message": "Missing item type\nGenerate the table navigation above or below the table",
-            "line": " lib/class-list-table.php:269"
+            "line": " lib/class-list-table.php:273"
         },
         {
             "message": "Missing item type\nDisplay a monthly dropdown for filtering items",
-            "line": " lib/class-list-table.php:299"
+            "line": " lib/class-list-table.php:303"
         },
         {
             "message": "Missing item type\nDisplay the table",
-            "line": " lib/class-list-table.php:364"
+            "line": " lib/class-list-table.php:368"
         },
         {
             "message": "Missing item type\n-",
-            "line": " lib/class-list-table.php:396"
+            "line": " lib/class-list-table.php:400"
         },
         {
             "message": "Missing item type\nKeep it simple here.  Mostly to be either replaced by child classes, or hook into",
-            "line": " lib/class-list-table.php:419"
+            "line": " lib/class-list-table.php:423"
         },
         {
             "message": "Missing item type\nPrint column headers, accounting for hidden and sortable columns.",
-            "line": " lib/class-list-table.php:445"
+            "line": " lib/class-list-table.php:449"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/class-listing.php:80"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/class-listing.php:90"
+        },
+        {
+            "message": "Missing item type\nHooks into save_post function and saves additional property data",
+            "line": " lib/class-listing.php:102"
+        },
+        {
+            "message": "Missing item type\nAddress validation function\n\nSince 1.37.2 extracted from save_property and revalidate_all_addresses to make same functionality",
+            "line": " lib/class-listing.php:214"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/class-listing.php:275"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/class-listing.php:278"
+        },
+        {
+            "message": "Missing item type\nUpdates parent ID.\nDetermines if parent exists and it doesn't have own parent.",
+            "line": " lib/class-listing.php:347"
+        },
+        {
+            "message": "Missing item type\nGenerates Global Property ID for standard reference point during imports.\n\nProperty ID is currently not used.",
+            "line": " lib/class-listing.php:384"
+        },
+        {
+            "message": "Missing item type\nGenerates Global Property ID if it does not exist",
+            "line": " lib/class-listing.php:412"
         },
         {
             "message": "Missing item type\nWP-Property Mail Notifications\nContains set of static methods for notifications",
@@ -4888,12 +5170,24 @@
             "line": " lib/class-template.php:2"
         },
         {
-            "message": "Missing item type\nHooks Setter",
+            "message": "Missing item type\nFind and Load Template",
             "line": " lib/class-template.php:18"
         },
         {
+            "message": "Missing item type\nLocate template by checking known locations",
+            "line": " lib/class-template.php:57"
+        },
+        {
+            "message": "Missing item type\nHooks Setter",
+            "line": " lib/class-template.php:93"
+        },
+        {
             "message": "Missing item type\nProperty template hook",
-            "line": " lib/class-template.php:31"
+            "line": " lib/class-template.php:106"
+        },
+        {
+            "message": "Missing item type\nAdds wp-property-listing class in search results and property_overview pages",
+            "line": " lib/class-theme.php:16"
         },
         {
             "message": "Missing item type\nDisplays the primary metabox on property editing page.",
@@ -4916,476 +5210,444 @@
             "line": " lib/class-utility.php:2"
         },
         {
-            "message": "Missing item type\nFind and Load Template",
+            "message": "Missing item type\nReturns location information from Google Maps API call.\n\nFrom version 1.2.0, the geohash is generated automatically.",
             "line": " lib/class-utility.php:18"
         },
         {
-            "message": "Missing item type\nLocate template by checking known locations",
-            "line": " lib/class-utility.php:57"
-        },
-        {
-            "message": "Missing item type\nReturns location information from Google Maps API call.\n\nFrom version 1.2.0, the geohash is generated automatically.",
-            "line": " lib/class-utility.php:92"
-        },
-        {
             "message": "Missing item type\nReturns avaliability of Google's Geocoding Service based on time of last returned status OVER_QUERY_LIMIT",
-            "line": " lib/class-utility.php:264"
+            "line": " lib/class-utility.php:190"
         },
         {
             "message": "Missing item type\nThis function grabs the API key from UD's servers",
-            "line": " lib/class-utility.php:294"
+            "line": " lib/class-utility.php:220"
         },
         {
             "message": "Missing item type\nDetermine if any requested template exists and return path to it.\n\nMigrated from UD_API",
-            "line": " lib/class-utility.php:360"
+            "line": " lib/class-utility.php:286"
         },
         {
             "message": "Missing item type\nSet default instance.\nTemplate can depend on instance. For example: facebook, PDF, etc.",
-            "line": " lib/class-utility.php:381"
+            "line": " lib/class-utility.php:307"
         },
         {
             "message": "Missing item type\nWrapper function to send notification with WP-CRM or without one\n\nMigrated out of UD_API",
-            "line": " lib/class-utility.php:412"
+            "line": " lib/class-utility.php:338"
         },
         {
             "message": "Missing item type\nWrapper for the UD_API::log() function that includes the prefix automatically.",
-            "line": " lib/class-utility.php:473"
+            "line": " lib/class-utility.php:399"
         },
         {
             "message": "Missing item type\nGet the label for \"Property\"",
-            "line": " lib/class-utility.php:496"
-        },
-        {
-            "message": "Missing item type\nRegisters post types and taxonomies.",
-            "line": " lib/class-utility.php:515"
+            "line": " lib/class-utility.php:422"
         },
         {
             "message": "Missing item type\nLoads applicable WP-Properrty scripts and styles",
-            "line": " lib/class-utility.php:630"
+            "line": " lib/class-utility.php:441"
         },
         {
             "message": "Missing item type\nChecks if script or style have been loaded.",
-            "line": " lib/class-utility.php:672"
+            "line": " lib/class-utility.php:483"
         },
         {
             "message": "Missing item type\nPHP function to echoing a message to JS console",
-            "line": " lib/class-utility.php:699"
+            "line": " lib/class-utility.php:510"
         },
         {
             "message": "Missing item type\nTests if remote script or CSS file can be opened prior to sending it to browser",
-            "line": " lib/class-utility.php:727"
+            "line": " lib/class-utility.php:538"
         },
         {
             "message": "Missing item type\nTests if remote image can be loaded, before sending to browser or TCPDF",
-            "line": " lib/class-utility.php:776"
+            "line": " lib/class-utility.php:587"
         },
         {
             "message": "Missing item type\nRemove non-XML characters",
-            "line": " lib/class-utility.php:799"
+            "line": " lib/class-utility.php:610"
         },
         {
             "message": "Missing item type\nConvert JSON data to XML if it is in JSON",
-            "line": " lib/class-utility.php:838"
+            "line": " lib/class-utility.php:649"
         },
         {
             "message": "Missing item type\nConvert CSV to XML\n\nFunction ported over from List Attachments Shortcode plugin.",
-            "line": " lib/class-utility.php:901"
+            "line": " lib/class-utility.php:712"
         },
         {
             "message": "Missing item type\nConvert CSV to XML\n\nFunction ported over from List Attachments Shortcode plugin.",
-            "line": " lib/class-utility.php:934"
+            "line": " lib/class-utility.php:745"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-utility.php:982"
+            "line": " lib/class-utility.php:793"
         },
         {
             "message": "Missing item type\nGet filesize of a file.\n\nFunction ported over from List Attachments Shortcode plugin.",
-            "line": " lib/class-utility.php:1003"
+            "line": " lib/class-utility.php:814"
         },
         {
             "message": "Missing item type\nSet all existing property objects' property type",
-            "line": " lib/class-utility.php:1018"
+            "line": " lib/class-utility.php:829"
         },
         {
             "message": "Missing item type\nAttempts to detect if current page has a given shortcode",
-            "line": " lib/class-utility.php:1054"
+            "line": " lib/class-utility.php:865"
         },
         {
             "message": "Missing item type\nReassemble address from parts",
-            "line": " lib/class-utility.php:1077"
+            "line": " lib/class-utility.php:888"
         },
         {
             "message": "Missing item type\nCreates a nonce, similar to wp_create_nonce() but does not depend on user being logged in",
-            "line": " lib/class-utility.php:1106"
+            "line": " lib/class-utility.php:917"
         },
         {
             "message": "Missing item type\nVerifies nonce.",
-            "line": " lib/class-utility.php:1127"
+            "line": " lib/class-utility.php:938"
         },
         {
             "message": "Missing item type\nReturns attribute information.\n\nChecks $wp_properties and returns a concise array of array-specific settings and attributes",
-            "line": " lib/class-utility.php:1155"
+            "line": " lib/class-utility.php:966"
         },
         {
             "message": "Missing item type\nMakes sure the script is loaded, otherwise loads it",
-            "line": " lib/class-utility.php:1294"
+            "line": " lib/class-utility.php:1105"
         },
         {
             "message": "Missing item type\nMakes sure the style is loaded, otherwise loads it",
-            "line": " lib/class-utility.php:1326"
+            "line": " lib/class-utility.php:1137"
         },
         {
             "message": "Missing item type\nReturns an array of all keys that can be queried using property_overview",
-            "line": " lib/class-utility.php:1356"
+            "line": " lib/class-utility.php:1167"
         },
         {
             "message": "Missing item type\nReturns array of sortable attributes if set, or default",
-            "line": " lib/class-utility.php:1388"
+            "line": " lib/class-utility.php:1199"
         },
         {
             "message": "Missing item type\nPre post query - for now mostly to disable caching\n\nCalled in &get_posts() in query.php",
-            "line": " lib/class-utility.php:1420"
+            "line": " lib/class-utility.php:1231"
         },
         {
             "message": "Missing item type\nPre post query - for now mostly to disable caching",
-            "line": " lib/class-utility.php:1451"
+            "line": " lib/class-utility.php:1262"
         },
         {
             "message": "Missing item type\nFormat a number as numeric",
-            "line": " lib/class-utility.php:1469"
+            "line": " lib/class-utility.php:1280"
         },
         {
             "message": "Missing item type\nDetermine if variable is decimal",
-            "line": " lib/class-utility.php:1490"
+            "line": " lib/class-utility.php:1301"
         },
         {
             "message": "Missing item type\nChecks if an file exists in the uploads directory from a URL\n\nOnly works for files in uploads folder.",
-            "line": " lib/class-utility.php:1502"
+            "line": " lib/class-utility.php:1313"
         },
         {
             "message": "Missing item type\nSetup default property page.",
-            "line": " lib/class-utility.php:1528"
+            "line": " lib/class-utility.php:1339"
         },
         {
             "message": "Missing item type\nPerform WPP related things when a post is being deleted\n\nMakes sure all attached files and images get deleted.",
-            "line": " lib/class-utility.php:1581"
+            "line": " lib/class-utility.php:1392"
         },
         {
             "message": "Missing item type\nGet advanced details about an image (mostly for troubleshooting)",
-            "line": " lib/class-utility.php:1632"
+            "line": " lib/class-utility.php:1443"
         },
         {
             "message": "Missing item type\nResizes (generate) image.",
-            "line": " lib/class-utility.php:1704"
+            "line": " lib/class-utility.php:1515"
         },
         {
             "message": "Missing item type\nCheck if theme-specific stylesheet exists.\n\nget_option('template') seems better choice than get_option('stylesheet'), which returns the current theme's slug\nwhich is a problem when a child theme is used. We want the parent theme's slug.",
-            "line": " lib/class-utility.php:1816"
+            "line": " lib/class-utility.php:1627"
         },
         {
             "message": "Missing item type\nCheck permissions and ownership of premium folder.",
-            "line": " lib/class-utility.php:1837"
+            "line": " lib/class-utility.php:1648"
         },
         {
             "message": "Missing item type\nRevalidate all addresses\n\nRevalidates addresses of all publishd properties.\nIf Google daily addres lookup is exceeded, breaks the function and notifies the user.",
-            "line": " lib/class-utility.php:1882"
-        },
-        {
-            "message": "Missing item type\nAddress validation function\n\nSince 1.37.2 extracted from save_property and revalidate_all_addresses to make same functionality",
-            "line": " lib/class-utility.php:1995"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/class-utility.php:2056"
-        },
-        {
-            "message": "Missing item type",
-            "line": " lib/class-utility.php:2059"
+            "line": " lib/class-utility.php:1693"
         },
         {
             "message": "Missing item type\nMinify JavaScript\n\nUses third-party JSMin if class isn't declared.\nIf WP3 is detected, class not loaded to avoid footer warning error.\nIf for some reason W3_Plugin is active, but JSMin is not found,\nwe load ours to avoid breaking property maps.",
-            "line": " lib/class-utility.php:2127"
+            "line": " lib/class-utility.php:1806"
         },
         {
             "message": "Missing item type\nMinify CSS",
-            "line": " lib/class-utility.php:2160"
+            "line": " lib/class-utility.php:1839"
         },
         {
             "message": "Missing item type\nGets image dimensions for WP-Property images.\n\nThis function is no longer used, only here for legacy support.",
-            "line": " lib/class-utility.php:2207"
+            "line": " lib/class-utility.php:1886"
         },
         {
             "message": "Missing item type\nPrevents all columns on the overview page from being enabled if nothing is configured",
-            "line": " lib/class-utility.php:2219"
+            "line": " lib/class-utility.php:1898"
         },
         {
             "message": "Missing item type\nDetermines most common property type (used for defaults when needed)",
-            "line": " lib/class-utility.php:2253"
+            "line": " lib/class-utility.php:1932"
         },
         {
             "message": "Missing item type\nSplits a query string properly, using preg_split to avoid conflicts with dashes and other special chars.",
-            "line": " lib/class-utility.php:2286"
+            "line": " lib/class-utility.php:1965"
         },
         {
             "message": "Missing item type\nSplit the string properly, so no interference with &ndash; which is used in user input.",
-            "line": " lib/class-utility.php:2294"
+            "line": " lib/class-utility.php:1973"
         },
         {
             "message": "Missing item type\nHandles user input, so a standard is created for supporting special characters.",
-            "line": " lib/class-utility.php:2304"
+            "line": " lib/class-utility.php:1983"
         },
         {
             "message": "Missing item type\nHandles user input, so a standard is created for supporting special characters.",
-            "line": " lib/class-utility.php:2326"
+            "line": " lib/class-utility.php:2005"
         },
         {
             "message": "Missing item type\nDetermines if all of the arrays values are numeric",
-            "line": " lib/class-utility.php:2343"
+            "line": " lib/class-utility.php:2022"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-utility.php:2363"
+            "line": " lib/class-utility.php:2042"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-utility.php:2388"
+            "line": " lib/class-utility.php:2067"
         },
         {
             "message": "Missing item type\nReturn an array of all available attributes and meta keys",
-            "line": " lib/class-utility.php:2414"
+            "line": " lib/class-utility.php:2093"
         },
         {
             "message": "Missing item type\nRender a dropdown of property attributes.",
-            "line": " lib/class-utility.php:2453"
+            "line": " lib/class-utility.php:2132"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-utility.php:2486"
+            "line": " lib/class-utility.php:2165"
         },
         {
             "message": "Missing item type\nRemoves all WPP cache files",
-            "line": " lib/class-utility.php:2541"
+            "line": " lib/class-utility.php:2220"
         },
         {
             "message": "Missing item type\nChecks for updates against TwinCitiesTech.com Server",
-            "line": " lib/class-utility.php:2558"
+            "line": " lib/class-utility.php:2237"
         },
         {
             "message": "Missing item type\nMakes a given property featured, usuall called via ajax",
-            "line": " lib/class-utility.php:2707"
+            "line": " lib/class-utility.php:2386"
         },
         {
             "message": "Missing item type\nAdd or remove taxonomy columns",
-            "line": " lib/class-utility.php:2735"
+            "line": " lib/class-utility.php:2414"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/class-utility.php:2445"
         },
         {
             "message": "Missing item type\nDisplays dropdown of available property size images",
-            "line": " lib/class-utility.php:2781"
+            "line": " lib/class-utility.php:2465"
         },
         {
             "message": "Missing item type\nReturns image sizes for a passed image size slug\n\nLooks through all images sizes.",
-            "line": " lib/class-utility.php:2828"
+            "line": " lib/class-utility.php:2512"
         },
         {
             "message": "Missing item type\nAJAX Handler.\nSaves WPP Settings",
-            "line": " lib/class-utility.php:2896"
+            "line": " lib/class-utility.php:2580"
         },
         {
             "message": "Missing item type\nLoads settings into global variable\nAlso restores data from backup file.\n\nAttached to do_action_ref_array('the_post', array(&$post)); in setup_postdata()\n\nAs of 1.11 prevents removal of premium feature configurations that are not held in the settings page array\n\n1.12 - added taxonomies filter: wpp_taxonomies\n1.14 - added backup from text file",
-            "line": " lib/class-utility.php:2937"
+            "line": " lib/class-utility.php:2621"
         },
         {
             "message": "Missing item type\nUtility to remove deleted image sizes.",
-            "line": " lib/class-utility.php:3025"
+            "line": " lib/class-utility.php:2709"
         },
         {
             "message": "Missing item type\nLoads property values into global $post variables.\n\nAttached to do_action_ref_array('the_post', array(&$post)); in setup_postdata()\nRan after template_redirect.\n$property is loaded in WPP_Core::template_redirect();",
-            "line": " lib/class-utility.php:3045"
+            "line": " lib/class-utility.php:2729"
         },
         {
             "message": "Missing item type\nReturns array of searchable property IDs",
-            "line": " lib/class-utility.php:3067"
+            "line": " lib/class-utility.php:2751"
         },
         {
             "message": "Missing item type\nModifies value of specific property stat (property attribute)\n\nUsed by filter wpp_attribute_filter in WPP_Object_List_Table::single_row();",
-            "line": " lib/class-utility.php:3099"
+            "line": " lib/class-utility.php:2783"
         },
         {
             "message": "Missing item type\nReturns array of searchable attributes and their ranges",
-            "line": " lib/class-utility.php:3131"
+            "line": " lib/class-utility.php:2815"
         },
         {
             "message": "Missing item type\nCheck if a search converstion exists for a attributes value",
-            "line": " lib/class-utility.php:3294"
+            "line": " lib/class-utility.php:2978"
         },
         {
             "message": "Missing item type\nPrimary static function for queries properties  based on type and attributes",
-            "line": " lib/class-utility.php:3326"
+            "line": " lib/class-utility.php:3010"
         },
         {
             "message": "Missing item type\nSpecific meta data can contain value with commas. E.g. location field ( address_attribute )\nThe current list contains meta slugs which will be ignored for comma parsing. peshkov@UD",
-            "line": " lib/class-utility.php:3384"
+            "line": " lib/class-utility.php:3068"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-utility.php:3489"
+            "line": " lib/class-utility.php:3173"
         },
         {
             "message": "Missing item type\nDetermine if property has children",
-            "line": " lib/class-utility.php:3775"
+            "line": " lib/class-utility.php:3459"
         },
         {
             "message": "Missing item type\nPrepares Request params for get_properties() function",
-            "line": " lib/class-utility.php:3798"
+            "line": " lib/class-utility.php:3482"
         },
         {
             "message": "Missing item type\nReturns array of all values for a particular attribute/meta_key",
-            "line": " lib/class-utility.php:3866"
+            "line": " lib/class-utility.php:3550"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-utility.php:3884"
+            "line": " lib/class-utility.php:3568"
         },
         {
             "message": "Missing item type\nLoad property information into an array or an object",
-            "line": " lib/class-utility.php:3918"
+            "line": " lib/class-utility.php:3602"
         },
         {
             "message": "Missing item type\nGets prefix to an attribute",
-            "line": " lib/class-utility.php:4254"
+            "line": " lib/class-utility.php:3938"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-utility.php:4304"
+            "line": " lib/class-utility.php:3988"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-utility.php:4309"
+            "line": " lib/class-utility.php:3993"
         },
         {
             "message": "Missing item type\nValidate if a URL is valid.",
-            "line": " lib/class-utility.php:4318"
+            "line": " lib/class-utility.php:4002"
         },
         {
             "message": "Missing item type\nDetermine if a email is valid.",
-            "line": " lib/class-utility.php:4325"
+            "line": " lib/class-utility.php:4009"
         },
         {
             "message": "Missing item type\nReturns an array of a property's stats and their values.\n\nQuery is array of variables to use load ours to avoid breaking property maps.",
-            "line": " lib/class-utility.php:4336"
+            "line": " lib/class-utility.php:4020"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-utility.php:4413"
+            "line": " lib/class-utility.php:4097"
         },
         {
             "message": "Missing item type\nReturns a minified Google Maps Infobox\n\nUsed in property map and supermap",
-            "line": " lib/class-utility.php:4432"
-        },
-        {
-            "message": "Missing item type\nUpdates parent ID.\nDetermines if parent exists and it doesn't have own parent.",
-            "line": " lib/class-utility.php:4598"
+            "line": " lib/class-utility.php:4116"
         },
         {
             "message": "Missing item type\nReturns property object for displaying on map\n\nUsed for speeding up property queries, only returns:\nID, post_title, atitude, longitude, exclude_from_supermap, location, supermap display_attributes and featured image urls\n\n1.11: addded htmlspecialchars and addslashes to post_title",
-            "line": " lib/class-utility.php:4635"
-        },
-        {
-            "message": "Missing item type\nGenerates Global Property ID for standard reference point during imports.\n\nProperty ID is currently not used.",
-            "line": " lib/class-utility.php:4711"
-        },
-        {
-            "message": "Missing item type\nGenerates Global Property ID if it does not exist",
-            "line": " lib/class-utility.php:4739"
+            "line": " lib/class-utility.php:4282"
         },
         {
             "message": "Missing item type\nReturns post_id fro GPID if it exists",
-            "line": " lib/class-utility.php:4769"
+            "line": " lib/class-utility.php:4358"
         },
         {
             "message": "Missing item type\nThis static function is not actually used, it's only use to hold some common translations that may be used by our themes.\n\nTranslations for Denali theme.",
-            "line": " lib/class-utility.php:4791"
+            "line": " lib/class-utility.php:4380"
         },
         {
             "message": "Missing item type\nDetermine if all values of meta key have 'number type'\nIf yes, returns boolean true",
-            "line": " lib/class-utility.php:4826"
+            "line": " lib/class-utility.php:4415"
         },
         {
             "message": "Missing item type\nFunction for displaying WPP Data Table rows",
-            "line": " lib/class-utility.php:4875"
+            "line": " lib/class-utility.php:4464"
         },
         {
             "message": "Missing item type\nGet Search filter fields",
-            "line": " lib/class-utility.php:4936"
+            "line": " lib/class-utility.php:4525"
         },
         {
             "message": "Missing item type\nReturns users' ids of post type",
-            "line": " lib/class-utility.php:5096"
+            "line": " lib/class-utility.php:4685"
         },
         {
             "message": "Missing item type\nProcess bulk actions",
-            "line": " lib/class-utility.php:5138"
+            "line": " lib/class-utility.php:4727"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-utility.php:5181"
+            "line": " lib/class-utility.php:4770"
         },
         {
             "message": "Missing item type\nSettings page load handler",
-            "line": " lib/class-utility.php:5195"
+            "line": " lib/class-utility.php:4784"
         },
         {
             "message": "Missing item type\nReturns custom default coordinates",
-            "line": " lib/class-utility.php:5227"
+            "line": " lib/class-utility.php:4816"
         },
         {
             "message": "Missing item type\nCounts properties by post types",
-            "line": " lib/class-utility.php:5251"
+            "line": " lib/class-utility.php:4840"
         },
         {
             "message": "Missing item type\nReturns month periods of properties",
-            "line": " lib/class-utility.php:5276"
+            "line": " lib/class-utility.php:4865"
         },
         {
             "message": "Missing item type\nDeletes directory recursively",
-            "line": " lib/class-utility.php:5311"
+            "line": " lib/class-utility.php:4900"
         },
         {
             "message": "Missing item type\nPrevent Facebook integration if 'Facebook Tabs' did not installed.",
-            "line": " lib/class-utility.php:5344"
+            "line": " lib/class-utility.php:4933"
         },
         {
             "message": "Missing item type\nFormats phone number for display",
-            "line": " lib/class-utility.php:5362"
+            "line": " lib/class-utility.php:4951"
         },
         {
             "message": "Missing item type\nShorthand function for drawing checkbox input fields.",
-            "line": " lib/class-utility.php:5384"
+            "line": " lib/class-utility.php:4973"
         },
         {
             "message": "Missing item type\nShorthand function for drawing a textarea",
-            "line": " lib/class-utility.php:5508"
+            "line": " lib/class-utility.php:5097"
         },
         {
             "message": "Missing item type\nShorthand function for drawing regular or hidden input fields.",
-            "line": " lib/class-utility.php:5579"
+            "line": " lib/class-utility.php:5168"
         },
         {
             "message": "Missing item type\nRecursive conversion of an object into an array",
-            "line": " lib/class-utility.php:5624"
+            "line": " lib/class-utility.php:5213"
         },
         {
             "message": "Missing item type\nGet a URL of a page.",
-            "line": " lib/class-utility.php:5644"
+            "line": " lib/class-utility.php:5233"
         },
         {
             "message": "Missing item type\nFixes images permalinks in [gallery] shortcode",
-            "line": " lib/class-utility.php:5701"
+            "line": " lib/class-utility.php:5290"
         },
         {
             "message": "Missing item type\nReturns clear post status",
-            "line": " lib/class-utility.php:5731"
+            "line": " lib/class-utility.php:5320"
         },
         {
             "message": "Missing item type\nWP-Property Widget Class",
@@ -5410,10 +5672,6 @@
         {
             "message": "Missing item type\nDelete a file or recursively delete a directory",
             "line": " lib/pluggable.php:49"
-        },
-        {
-            "message": "Missing item type\nAdd 'property' to the list of RSSable post_types.",
-            "line": " lib/pluggable.php:77"
         }
     ]
 }

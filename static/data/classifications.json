@@ -1,0 +1,263 @@
+{
+  "string": {
+    "label": "l10n.short_text",
+    "slug": "string",
+    "description": "l10n.used_for_short_desc",
+    "settings": {
+      "type": "string",
+      "indexable": true,
+      "searchable": true,
+      "editable": true,
+      "admin_only": false
+    },
+    "search": [
+      "input", "dropdown", "multi_checkbox"
+    ],
+    "admin": [
+      "input", "dropdown"
+    ]
+  },
+  "detail": {
+    "label": "Long Text",
+    "slug": "detail",
+    "description": "Not searchable, but can have an unlimited amount of content.",
+    "settings": {
+      "type": "string",
+      "indexable": false,
+      "searchable": true,
+      "editable": true,
+      "admin_only": false
+    },
+    "search": [
+      "input"
+    ],
+    "admin": [
+      "textarea"
+    ]
+  },
+  "currency": {
+    "label": "Currency",
+    "slug": "currency",
+    "description": "Similar to numeric values, but currency symbols will be applied.",
+    "settings": {
+      "type": "currency",
+      "indexable": true,
+      "searchable": true,
+      "editable": true,
+      "admin_only": false
+    },
+    "search": [
+      "input", "range_input", "range_dropdown", "dropdown", "multi_checkbox"
+    ],
+    "admin": [
+      "input", "dropdown"
+    ]
+  },
+  "location": {
+    "label": "Physical Address",
+    "slug": "location",
+    "description": "Will be geo-located. Main address can be chosen on Basic Settings tab or first address will be set as main autonatically.",
+    "settings": {
+      "type": "geo_location",
+      "indexable": true,
+      "searchable": true,
+      "editable": true,
+      "admin_only": false
+    },
+    "search": [
+      "input", "dropdown", "multi_checkbox"
+    ],
+    "admin": [
+      "input", "dropdown"
+    ]
+  },
+  "numeric": {
+    "label": "Numeric",
+    "slug": "numeric",
+    "description": "Searchable and sortable. Allows multi-selections and ranges.",
+    "settings": {
+      "searchable": true,
+      "editable": true,
+      "admin_only": false
+    },
+    "search": [
+      "input", "range_input", "range_dropdown", "dropdown", "multi_checkbox"
+    ],
+    "admin": [
+      "input", "dropdown"
+    ]
+  },
+  "timestamp": {
+    "label": "Date",
+    "slug": "timestamp",
+    "description": "A date or a time. Searchable.",
+    "settings": {
+      "searchable": true,
+      "editable": true,
+      "admin_only": false
+    },
+    "search": [
+      "date", "range_date"
+    ],
+    "admin": [
+      "date"
+    ]
+  },
+  "link": {
+    "label": "URL",
+    "slug": "link",
+    "description": "Put your URLs here. Searchable.",
+    "settings": {
+      "searchable": true,
+      "editable": true,
+      "admin_only": false
+    },
+    "search": [
+      "input", "dropdown", "multi_checkbox"
+    ],
+    "admin": [
+      "input", "dropdown"
+    ]
+  },
+  "agent_name": {
+    "label": "Person's Name",
+    "slug": "agent_name",
+    "description": "Person's or Real Estate Agent's name. Searchable.",
+    "settings": {
+      "searchable": true,
+      "editable": true,
+      "admin_only": false
+    },
+    "search": [
+      "input", "dropdown", "multi_checkbox"
+    ],
+    "admin": [
+      "input", "dropdown"
+    ]
+  },
+  "boolean": {
+    "label": "Yes / No",
+    "slug": "boolean",
+    "description": "A boolean value - meaning the value is either yes, or no.",
+    "settings": {
+      "searchable": true,
+      "editable": true,
+      "admin_only": false
+    },
+    "search": [
+      "checkbox"
+    ],
+    "admin": [
+      "checkbox"
+    ]
+  },
+  "area": {
+    "label": "Area",
+    "slug": "area",
+    "description": "Made for area attributes. Searchable.",
+    "settings": {
+      "searchable": true,
+      "editable": true,
+      "admin_only": false
+    },
+    "search": [
+      "input", "range_input", "range_dropdown", "dropdown", "multi_checkbox"
+    ],
+    "admin": [
+      "input", "dropdown"
+    ]
+  },
+  "email": {
+    "label": "Email Address",
+    "slug": "email",
+    "settings": {
+      "searchable": true,
+      "editable": true,
+      "admin_only": false
+    },
+    "search": [
+      "input", "dropdown", "multi_checkbox"
+    ],
+    "admin": [
+      "input", "dropdown"
+    ]
+  },
+  "phone_number": {
+    "label": "Phone / Fax",
+    "slug": "phone_number",
+    "settings": {
+      "searchable": true,
+      "editable": true,
+      "admin_only": false
+    },
+    "search": [
+      "input", "dropdown", "multi_checkbox"
+    ],
+    "admin": [
+      "input", "dropdown"
+    ]
+  },
+  "admin_note": {
+    "label": "Admin Note",
+    "slug": "admin_note",
+    "description": "Standard input box that is hidden from the front end.",
+    "settings": {
+      "searchable": false,
+      "editable": true,
+      "admin_only": true
+    },
+    "search": [],
+    "admin": [
+      "input"
+    ]
+  },
+  "geo": {
+    "label": "Geo Attribute",
+    "slug": "geo",
+    "description": "Geo Location specific attribute, which is used by Google Validator. The value can not be editable.",
+    "settings": {
+      "indexable": true,
+      "searchable": true,
+      "editable": false,
+      "admin_only": true
+    },
+    "search": [
+      "input", "dropdown", "multi_checkbox"
+    ],
+    "admin": []
+  },
+  "taxonomy": {
+    "label": "Taxonomy",
+    "slug": "taxonomy",
+    "description": "Registers custom taxonomy.",
+    "settings": {
+      "searchable": true,
+      "editable": false,
+      "admin_only": true,
+      "can_be_disabled": true
+    },
+    "search": [
+      "input", "multi_checkbox"
+    ],
+    "admin": []
+  },
+  "property_type": {
+    "label": "Property Type",
+    "slug": "property_type",
+    "description": "System Classification to handle property types functionality",
+    "settings": {
+      "searchable": true,
+      "editable": true,
+      "admin_only": true,
+      "system": true,
+      "admin_predefined_values": false,
+      "search_predefined_values": false
+    },
+    "search": [
+      "input", "dropdown", "multi_checkbox"
+    ],
+    "admin": [
+      "dropdown"
+    ]
+  }
+}

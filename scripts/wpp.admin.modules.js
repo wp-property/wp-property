@@ -1,1 +1,3 @@
-define("wpp.admin.modules",function(require,exports,module){console.log(module.id,"loaded")});
+define("wpp.admin.modules", function(require, exports, module) {
+    console.log(module.id, "loaded");
+});

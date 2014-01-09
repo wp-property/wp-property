@@ -43,9 +43,15 @@
             
                 <li><a href="../classes/Bootstrap.html">Bootstrap</a></li>
             
+                <li><a href="../classes/Exception.html">Exception</a></li>
+            
+                <li><a href="../classes/Theme.html">Theme</a></li>
+            
                 <li><a href="../classes/UsabilityDynamics\WPP.Bootstrap.html">UsabilityDynamics\WPP.Bootstrap</a></li>
             
                 <li><a href="../classes/UsabilityDynamics\WPP.Loader.html">UsabilityDynamics\WPP.Loader</a></li>
+            
+                <li><a href="../classes/WP_Error.html">WP_Error</a></li>
             
                 <li><a href="../classes/WPP.html">WPP</a></li>
             
@@ -110,80 +116,6 @@ namespace UsabilityDynamics\WPP {
   if( !class_exists( &#x27;UsabilityDynamics\WPP\Utility&#x27; ) ) {
 
     class Utility extends \UsabilityDynamics\Utility {
-
-      /**
-       * Find and Load Template
-       *
-       * @author potanin@UD
-       * @since 2.0.0
-       *
-       * @param       $name
-       * @param array $args
-       *
-       * @internal param bool $once
-       *
-       * @return mixed
-       */
-      static function load_template( $name, $args = array() ) {
-
-        $args = (object) wp_parse_args( $args, array(
-          &#x27;once&#x27; =&gt; false,
-          &#x27;prefix&#x27; =&gt; &#x27;property-&#x27;,
-        ));
-
-        // Add prefix if not already there.
-        if( strpos( $name, $args-&gt;prefix ) !== 0 ) {
-          $name = $args-&gt;prefix . $name;
-        }
-
-        if( $_path = self::locate_template( $name ) ) {
-
-          if( $args-&gt;once ) {
-            return include_once( $_path );
-          }
-
-          return include( $_path );
-
-        }
-
-        return false;
-
-      }
-
-      /**
-       * Locate template by checking known locations
-       *
-       * @author potanin@UD
-       * @since 2.0.0
-       *
-       * @param bool $name
-       * @return bool
-       */
-      static function locate_template( $name = false ) {
-
-        if( !$name || !defined( &#x27;WPP_Path&#x27; ) || !WPP_Path ) {
-          return false;
-        }
-
-        $_paths = apply_filters( &#x27;wpp:template_paths&#x27;, array(
-          trailingslashit( get_template_directory() ) . &#x27;wpp/&#x27;,
-          trailingslashit( get_template_directory() ),
-          trailingslashit( get_stylesheet_directory() ) . &#x27;wpp/&#x27;,
-          trailingslashit( get_stylesheet_directory() ),
-          WPP_Path . &#x27;templates/&#x27;
-        ) );
-
-        foreach( (array) $_paths as $path ) {
-
-          if( file_exists( $path ) ) {
-            return $path;
-          }
-
-        }
-
-        return false;
-
-      }
 
       /**
        * Returns location information from Google Maps API call.
@@ -421,7 +353,7 @@ namespace UsabilityDynamics\WPP {
 
         // Check for errors
         if( is_wp_error( $response ) ) {
-          \UsabilityDynamics\WPP\Utility::log( &#x27;API Check Error: &#x27; . $response-&gt;get_error_message() );
+          self::log( &#x27;API Check Error: &#x27; . $response-&gt;get_error_message() );
 
           return false;
         }
@@ -439,7 +371,7 @@ namespace UsabilityDynamics\WPP {
           if( $args[ &#x27;return&#x27; ] ) {
             return $response[ &#x27;body&#x27; ];
           } else {
-            \UsabilityDynamics\WPP\Utility::log( &quot;API Check Error: &quot; . sprintf( __( &#x27;An error occurred during API key request: &lt;b&gt;%s&lt;/b&gt;.&#x27;, &#x27;wpp&#x27; ), $response[ &#x27;body&#x27; ] ) );
+            self::log( &quot;API Check Error: &quot; . sprintf( __( &#x27;An error occurred during API key request: &lt;b&gt;%s&lt;/b&gt;.&#x27;, &#x27;wpp&#x27; ), $response[ &#x27;body&#x27; ] ) );
 
             return false;
           }
@@ -500,7 +432,7 @@ namespace UsabilityDynamics\WPP {
 
         $template = apply_filters( &quot;ud::template_part::{$opts[&#x27;instance&#x27;]}&quot;, $template, array( &#x27;name&#x27; =&gt; $name, &#x27;path&#x27; =&gt; $path, &#x27;opts&#x27; =&gt; $opts ) );
 
-        \UsabilityDynamics\WPP\Utility::console_log( $template, $instance );
+        self::console_log( $template, $instance );
 
         return !empty( $template ) ? $template : false;
       }
@@ -605,121 +537,6 @@ namespace UsabilityDynamics\WPP {
         if( $type == &#x27;singular&#x27; ) {
           return ( $wp_post_types[ &#x27;property&#x27; ]-&gt;labels-&gt;singular_name ? $wp_post_types[ &#x27;property&#x27; ]-&gt;labels-&gt;singular_name : __( &#x27;Property&#x27;, &#x27;wpp&#x27; ) );
         }
-
-      }
-
-      /**
-       * Registers post types and taxonomies.
-       *
-       * @since 1.31.0
-       *
-       */
-      static function register_post_type_and_taxonomies() {
-        global $wp_properties;
-
-        // Setup taxonomies
-        $wp_properties[ &#x27;taxonomies&#x27; ] = apply_filters( &#x27;wpp_taxonomies&#x27;, array(
-          &#x27;property_feature&#x27;  =&gt; array(
-            &#x27;hierarchical&#x27; =&gt; false,
-            &#x27;label&#x27;        =&gt; _x( &#x27;Features&#x27;, &#x27;taxonomy general name&#x27;, &#x27;wpp&#x27; ),
-            &#x27;labels&#x27;       =&gt; array(
-              &#x27;name&#x27;              =&gt; _x( &#x27;Features&#x27;, &#x27;taxonomy general name&#x27;, &#x27;wpp&#x27; ),
-              &#x27;singular_name&#x27;     =&gt; _x( &#x27;Feature&#x27;, &#x27;taxonomy singular name&#x27;, &#x27;wpp&#x27; ),
-              &#x27;search_items&#x27;      =&gt; __( &#x27;Search Features&#x27;, &#x27;wpp&#x27; ),
-              &#x27;all_items&#x27;         =&gt; __( &#x27;All Features&#x27;, &#x27;wpp&#x27; ),
-              &#x27;parent_item&#x27;       =&gt; __( &#x27;Parent Feature&#x27;, &#x27;wpp&#x27; ),
-              &#x27;parent_item_colon&#x27; =&gt; __( &#x27;Parent Feature:&#x27;, &#x27;wpp&#x27; ),
-              &#x27;edit_item&#x27;         =&gt; __( &#x27;Edit Feature&#x27;, &#x27;wpp&#x27; ),
-              &#x27;update_item&#x27;       =&gt; __( &#x27;Update Feature&#x27;, &#x27;wpp&#x27; ),
-              &#x27;add_new_item&#x27;      =&gt; __( &#x27;Add New Feature&#x27;, &#x27;wpp&#x27; ),
-              &#x27;new_item_name&#x27;     =&gt; __( &#x27;New Feature Name&#x27;, &#x27;wpp&#x27; ),
-              &#x27;menu_name&#x27;         =&gt; __( &#x27;Feature&#x27;, &#x27;wpp&#x27; )
-            ),
-            &#x27;query_var&#x27;    =&gt; &#x27;property_feature&#x27;,
-            &#x27;rewrite&#x27;      =&gt; array( &#x27;slug&#x27; =&gt; &#x27;feature&#x27; )
-          ),
-          &#x27;community_feature&#x27; =&gt; array(
-            &#x27;hierarchical&#x27; =&gt; false,
-            &#x27;label&#x27;        =&gt; _x( &#x27;Community Features&#x27;, &#x27;taxonomy general name&#x27;, &#x27;wpp&#x27; ),
-            &#x27;labels&#x27;       =&gt; array(
-              &#x27;name&#x27;              =&gt; _x( &#x27;Community Features&#x27;, &#x27;taxonomy general name&#x27;, &#x27;wpp&#x27; ),
-              &#x27;singular_name&#x27;     =&gt; _x( &#x27;Community Feature&#x27;, &#x27;taxonomy singular name&#x27;, &#x27;wpp&#x27; ),
-              &#x27;search_items&#x27;      =&gt; __( &#x27;Search Community Features&#x27;, &#x27;wpp&#x27; ),
-              &#x27;all_items&#x27;         =&gt; __( &#x27;All Community Features&#x27;, &#x27;wpp&#x27; ),
-              &#x27;parent_item&#x27;       =&gt; __( &#x27;Parent Community Feature&#x27;, &#x27;wpp&#x27; ),
-              &#x27;parent_item_colon&#x27; =&gt; __( &#x27;Parent Community Feature:&#x27;, &#x27;wpp&#x27; ),
-              &#x27;edit_item&#x27;         =&gt; __( &#x27;Edit Community Feature&#x27;, &#x27;wpp&#x27; ),
-              &#x27;update_item&#x27;       =&gt; __( &#x27;Update Community Feature&#x27;, &#x27;wpp&#x27; ),
-              &#x27;add_new_item&#x27;      =&gt; __( &#x27;Add New Community Feature&#x27;, &#x27;wpp&#x27; ),
-              &#x27;new_item_name&#x27;     =&gt; __( &#x27;New Community Feature Name&#x27;, &#x27;wpp&#x27; ),
-              &#x27;menu_name&#x27;         =&gt; __( &#x27;Community Feature&#x27;, &#x27;wpp&#x27; )
-            ),
-            &#x27;query_var&#x27;    =&gt; &#x27;community_feature&#x27;,
-            &#x27;rewrite&#x27;      =&gt; array( &#x27;slug&#x27; =&gt; &#x27;community_feature&#x27; )
-          )
-        ) );
-
-        $wp_properties[ &#x27;labels&#x27; ] = apply_filters( &#x27;wpp_object_labels&#x27;, array(
-          &#x27;name&#x27;               =&gt; __( &#x27;Properties&#x27;, &#x27;wpp&#x27; ),
-          &#x27;all_items&#x27;          =&gt; __( &#x27;All Properties&#x27;, &#x27;wpp&#x27; ),
-          &#x27;singular_name&#x27;      =&gt; __( &#x27;Property&#x27;, &#x27;wpp&#x27; ),
-          &#x27;add_new&#x27;            =&gt; __( &#x27;Add Property&#x27;, &#x27;wpp&#x27; ),
-          &#x27;add_new_item&#x27;       =&gt; __( &#x27;Add New Property&#x27;, &#x27;wpp&#x27; ),
-          &#x27;edit_item&#x27;          =&gt; __( &#x27;Edit Property&#x27;, &#x27;wpp&#x27; ),
-          &#x27;new_item&#x27;           =&gt; __( &#x27;New Property&#x27;, &#x27;wpp&#x27; ),
-          &#x27;view_item&#x27;          =&gt; __( &#x27;View Property&#x27;, &#x27;wpp&#x27; ),
-          &#x27;search_items&#x27;       =&gt; __( &#x27;Search Properties&#x27;, &#x27;wpp&#x27; ),
-          &#x27;not_found&#x27;          =&gt; __( &#x27;No properties found&#x27;, &#x27;wpp&#x27; ),
-          &#x27;not_found_in_trash&#x27; =&gt; __( &#x27;No properties found in Trash&#x27;, &#x27;wpp&#x27; ),
-          &#x27;parent_item_colon&#x27;  =&gt; &#x27;&#x27;
-        ) );
-
-        // Register custom post types
-        register_post_type( &#x27;property&#x27;, array(
-          &#x27;labels&#x27;              =&gt; $wp_properties[ &#x27;labels&#x27; ],
-          &#x27;public&#x27;              =&gt; true,
-          &#x27;exclude_from_search&#x27; =&gt; $wp_properties[ &#x27;configuration&#x27; ][ &#x27;include_in_regular_search_results&#x27; ] == &#x27;true&#x27; ? false : true,
-          &#x27;show_ui&#x27;             =&gt; true,
-          &#x27;_edit_link&#x27;          =&gt; &#x27;post.php?post=%d&#x27;,
-          &#x27;capability_type&#x27;     =&gt; array( &#x27;wpp_property&#x27;, &#x27;wpp_properties&#x27; ),
-          &#x27;hierarchical&#x27;        =&gt; true,
-          &#x27;rewrite&#x27;             =&gt; array(
-            &#x27;slug&#x27; =&gt; $wp_properties[ &#x27;configuration&#x27; ][ &#x27;base_slug&#x27; ]
-          ),
-          &#x27;query_var&#x27;           =&gt; $wp_properties[ &#x27;configuration&#x27; ][ &#x27;base_slug&#x27; ],
-          &#x27;supports&#x27;            =&gt; array( &#x27;title&#x27;, &#x27;editor&#x27;, &#x27;thumbnail&#x27;, &#x27;comments&#x27; ),
-          &#x27;menu_icon&#x27;           =&gt; WPP_URL . &#x27;images/pp_menu-1.6.png&#x27;
-        ) );
-
-        if( $wp_properties[ &#x27;taxonomies&#x27; ] ) {
-
-          foreach( $wp_properties[ &#x27;taxonomies&#x27; ] as $taxonomy =&gt; $taxonomy_data ) {
-
-            //** Check if taxonomy is disabled */
-            if( isset( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;disabled_taxonomies&#x27; ] ) &amp;&amp;
-              is_array( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;disabled_taxonomies&#x27; ] ) &amp;&amp;
-              in_array( $taxonomy, $wp_properties[ &#x27;configuration&#x27; ][ &#x27;disabled_taxonomies&#x27; ] )
-            ) {
-              continue;
-            }
-
-            register_taxonomy( $taxonomy, &#x27;property&#x27;, array(
-              &#x27;hierarchical&#x27; =&gt; $taxonomy_data[ &#x27;hierarchical&#x27; ],
-              &#x27;label&#x27;        =&gt; $taxonomy_data[ &#x27;label&#x27; ],
-              &#x27;labels&#x27;       =&gt; $taxonomy_data[ &#x27;labels&#x27; ],
-              &#x27;query_var&#x27;    =&gt; $taxonomy,
-              &#x27;rewrite&#x27;      =&gt; array( &#x27;slug&#x27; =&gt; $taxonomy ),
-              &#x27;capabilities&#x27; =&gt; array(
-                &#x27;manage_terms&#x27; =&gt; &#x27;manage_wpp_categories&#x27;,
-                &#x27;edit_terms&#x27;   =&gt; &#x27;manage_wpp_categories&#x27;,
-                &#x27;delete_terms&#x27; =&gt; &#x27;manage_wpp_categories&#x27;,
-                &#x27;assign_terms&#x27; =&gt; &#x27;manage_wpp_categories&#x27;
-              )
-            ) );
-          }
-        }
-
-        register_taxonomy_for_object_type( &#x27;property_features&#x27;, &#x27;property&#x27; );
 
       }
 
@@ -859,7 +676,7 @@ namespace UsabilityDynamics\WPP {
         if( !$match || $result[ &#x27;response&#x27; ][ &#x27;code&#x27; ] != 200 ) {
 
           if( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;developer_mode&#x27; ] == &#x27;true&#x27; ) {
-            \UsabilityDynamics\WPP\Utility::console_log( &quot;Remote asset ($url) could not be loaded, content type returned: &quot; . $result[ &#x27;headers&#x27; ][ &#x27;content-type&#x27; ] );
+            self::console_log( &quot;Remote asset ($url) could not be loaded, content type returned: &quot; . $result[ &#x27;headers&#x27; ][ &#x27;content-type&#x27; ] );
           }
 
           return false;
@@ -969,7 +786,7 @@ namespace UsabilityDynamics\WPP {
           $json = preg_replace( &#x27;/[^(\x20-\x7F)]*/&#x27;, &#x27;&#x27;, $json );
         }
 
-        $json = \UsabilityDynamics\WPP\Utility::strip_invalid_xml( $json );
+        $json = self::strip_invalid_xml( $json );
 
         $data = json_decode( $json, true );
 
@@ -1090,7 +907,7 @@ namespace UsabilityDynamics\WPP {
         unlink( $temp_file );
 
         //** Get it into XML (We want to use json_to_xml because it does all the cleansing of weird characters) */
-        $xml = \UsabilityDynamics\WPP\Utility::json_to_xml( json_encode( $csv ) );
+        $xml = self::json_to_xml( json_encode( $csv ) );
 
         return $xml;
 
@@ -1143,7 +960,7 @@ namespace UsabilityDynamics\WPP {
           return false;
         }
 
-        return sprintf( __( &#x27;Set %1s %4s to &quot;%2s&quot; %3s type&#x27;, &#x27;wpp&#x27; ), count( $success ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;plural&#x27; ), $property_type, \UsabilityDynamics\WPP\Utility::property_label( &#x27;singular&#x27; ) );
+        return sprintf( __( &#x27;Set %1s %4s to &quot;%2s&quot; %3s type&#x27;, &#x27;wpp&#x27; ), count( $success ), self::property_label( &#x27;plural&#x27; ), $property_type, self::property_label( &#x27;singular&#x27; ) );
 
       }
 
@@ -1374,7 +1191,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         if( empty( $return[ &#x27;title&#x27; ] ) ) {
-          $return[ &#x27;title&#x27; ] = \UsabilityDynamics\WPP\Utility::de_slug( $return[ &#x27;slug&#x27; ] );
+          $return[ &#x27;title&#x27; ] = self::de_slug( $return[ &#x27;slug&#x27; ] );
         }
 
         $return[ &#x27;ui_class&#x27; ] = implode( &#x27; wpp_&#x27;, $ui_class );
@@ -1756,7 +1573,7 @@ namespace UsabilityDynamics\WPP {
         if( $post_type == &#x27;property&#x27; ) {
 
           //** Get Property Images */
-          $property = \UsabilityDynamics\WPP\Utility::get_property( $requested_id );
+          $property = self::get_property( $requested_id );
 
           echo &#x27;Requested Property: &#x27; . $property[ &#x27;post_title&#x27; ];
           $data = get_children( array( &#x27;post_parent&#x27; =&gt; $requested_id, &#x27;post_type&#x27; =&gt; &#x27;attachment&#x27;, &#x27;post_mime_type&#x27; =&gt; &#x27;image&#x27;, &#x27;orderby&#x27; =&gt; &#x27;menu_order ASC, ID&#x27;, &#x27;order&#x27; =&gt; &#x27;DESC&#x27; ) );
@@ -2022,14 +1839,14 @@ namespace UsabilityDynamics\WPP {
 
         $return[ &#x27;updated&#x27; ] = $return[ &#x27;failed&#x27; ] = $return[ &#x27;over_query_limit&#x27; ] = $return[ &#x27;over_query_limit&#x27; ] = array();
 
-        $google_map_localizations = \UsabilityDynamics\WPP\Utility::draw_localization_dropdown( &#x27;return_array=true&#x27; );
+        $google_map_localizations = self::draw_localization_dropdown( &#x27;return_array=true&#x27; );
 
         foreach( (array) $all_properties as $post_id ) {
           if( $delay ) {
             sleep( $delay );
           }
 
-          $result = \UsabilityDynamics\WPP\Utility::revalidate_address( $post_id, array( &#x27;skip_existing&#x27; =&gt; $skip_existing, &#x27;return_geo_data&#x27; =&gt; $return_geo_data ) );
+          $result = Listing::revalidate_address( $post_id, array( &#x27;skip_existing&#x27; =&gt; $skip_existing, &#x27;return_geo_data&#x27; =&gt; $return_geo_data ) );
 
           $return[ $result[ &#x27;status&#x27; ] ][ ] = $post_id;
 
@@ -2063,18 +1880,18 @@ namespace UsabilityDynamics\WPP {
         }
 
         $return[ &#x27;success&#x27; ] = &#x27;true&#x27;;
-        $return[ &#x27;message&#x27; ] = sprintf( __( &#x27;Updated %1$d %2$s using the %3$s localization.&#x27;, &#x27;wpp&#x27; ), ( $echo_result == &#x27;true&#x27; ) ? $return[ &#x27;updated&#x27; ] : count( $return[ &#x27;updated&#x27; ] ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;plural&#x27; ), $google_map_localizations[ $wp_properties[ &#x27;configuration&#x27; ][ &#x27;google_maps_localization&#x27; ] ] );
+        $return[ &#x27;message&#x27; ] = sprintf( __( &#x27;Updated %1$d %2$s using the %3$s localization.&#x27;, &#x27;wpp&#x27; ), ( $echo_result == &#x27;true&#x27; ) ? $return[ &#x27;updated&#x27; ] : count( $return[ &#x27;updated&#x27; ] ), self::property_label( &#x27;plural&#x27; ), $google_map_localizations[ $wp_properties[ &#x27;configuration&#x27; ][ &#x27;google_maps_localization&#x27; ] ] );
 
         if( $return[ &#x27;empty_address&#x27; ] ) {
-          $return[ &#x27;message&#x27; ] .= &quot;&lt;br /&gt;&quot; . sprintf( __( &#x27;%1$d %2$s has empty address.&#x27;, &#x27;wpp&#x27; ), ( $echo_result == &#x27;true&#x27; ) ? $return[ &#x27;empty_address&#x27; ] : count( $return[ &#x27;empty_address&#x27; ] ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;plural&#x27; ) );
+          $return[ &#x27;message&#x27; ] .= &quot;&lt;br /&gt;&quot; . sprintf( __( &#x27;%1$d %2$s has empty address.&#x27;, &#x27;wpp&#x27; ), ( $echo_result == &#x27;true&#x27; ) ? $return[ &#x27;empty_address&#x27; ] : count( $return[ &#x27;empty_address&#x27; ] ), self::property_label( &#x27;plural&#x27; ) );
         }
 
         if( $return[ &#x27;failed&#x27; ] ) {
-          $return[ &#x27;message&#x27; ] .= &quot;&lt;br /&gt;&quot; . sprintf( __( &#x27;%1$d %2$s could not be updated.&#x27;, &#x27;wpp&#x27; ), ( $echo_result == &#x27;true&#x27; ) ? $return[ &#x27;failed&#x27; ] : count( $return[ &#x27;failed&#x27; ] ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;plural&#x27; ) );
+          $return[ &#x27;message&#x27; ] .= &quot;&lt;br /&gt;&quot; . sprintf( __( &#x27;%1$d %2$s could not be updated.&#x27;, &#x27;wpp&#x27; ), ( $echo_result == &#x27;true&#x27; ) ? $return[ &#x27;failed&#x27; ] : count( $return[ &#x27;failed&#x27; ] ), self::property_label( &#x27;plural&#x27; ) );
         }
 
         if( $return[ &#x27;over_query_limit&#x27; ] ) {
-          $return[ &#x27;message&#x27; ] .= &quot;&lt;br /&gt;&quot; . sprintf( __( &#x27;%1$d %2$s was ignored because query limit was exceeded.&#x27;, &#x27;wpp&#x27; ), ( $echo_result == &#x27;true&#x27; ) ? $return[ &#x27;over_query_limit&#x27; ] : count( $return[ &#x27;over_query_limit&#x27; ] ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;plural&#x27; ) );
+          $return[ &#x27;message&#x27; ] .= &quot;&lt;br /&gt;&quot; . sprintf( __( &#x27;%1$d %2$s was ignored because query limit was exceeded.&#x27;, &#x27;wpp&#x27; ), ( $echo_result == &#x27;true&#x27; ) ? $return[ &#x27;over_query_limit&#x27; ] : count( $return[ &#x27;over_query_limit&#x27; ] ), self::property_label( &#x27;plural&#x27; ) );
         }
 
         //** Warning Silincer */
@@ -2086,138 +1903,6 @@ namespace UsabilityDynamics\WPP {
           return $return;
         }
 
-      }
-
-      /**
-       * Address validation function
-       *
-       * Since 1.37.2 extracted from save_property and revalidate_all_addresses to make same functionality
-       *
-       * @global array  $wp_properties
-       *
-       * @param integer $post_id
-       * @param array   $args
-       *
-       * @return array
-       * @since 1.37.2
-       * @author odokienko@UD
-       */
-      static function revalidate_address( $post_id, $args = array() ) {
-        global $wp_properties;
-
-        $args = wp_parse_args( $args, array(
-          &#x27;skip_existing&#x27;   =&gt; &#x27;false&#x27;,
-          &#x27;return_geo_data&#x27; =&gt; false,
-        ) );
-
-        extract( $args, EXTR_SKIP );
-        $skip_existing   = isset( $skip_existing ) ? $skip_existing : &#x27;false&#x27;;
-        $return_geo_data = isset( $return_geo_data ) ? $return_geo_data : false;
-
-        $return = array();
-
-        $geo_data             = false;
-        $geo_data_coordinates = false;
-        $latitude             = get_post_meta( $post_id, &#x27;latitude&#x27;, true );
-        $longitude            = get_post_meta( $post_id, &#x27;longitude&#x27;, true );
-        $current_coordinates  = $latitude . $longitude;
-        $address_is_formatted = get_post_meta( $post_id, &#x27;address_is_formatted&#x27;, true );
-
-        $address = get_post_meta( $post_id, $wp_properties[ &#x27;configuration&#x27; ][ &#x27;address_attribute&#x27; ], true );
-
-        $coordinates = ( empty( $latitude ) || empty( $longitude ) ) ? &quot;&quot; : array( &#x27;lat&#x27; =&gt; get_post_meta( $post_id, &#x27;latitude&#x27;, true ), &#x27;lng&#x27; =&gt; get_post_meta( $post_id, &#x27;longitude&#x27;, true ) );
-
-        if( $skip_existing == &#x27;true&#x27; &amp;&amp; !empty( $current_coordinates ) &amp;&amp; in_array( $address_is_formatted, array( &#x27;1&#x27;, &#x27;true&#x27; ) ) ) {
-          $return[ &#x27;status&#x27; ] = &#x27;skipped&#x27;;
-
-          return $return;
-        }
-
-        if( !( empty( $coordinates ) &amp;&amp; empty( $address ) ) ) {
-
-          /* will be true if address is empty and used manual_coordinates and coordinates is not empty */
-          $manual_coordinates = get_post_meta( $post_id, &#x27;manual_coordinates&#x27;, true );
-          $manual_coordinates = ( $manual_coordinates != &#x27;true&#x27; &amp;&amp; $manual_coordinates != &#x27;1&#x27; ) ? false : true;
-
-          $address_by_coordinates = !empty( $coordinates ) &amp;&amp; $manual_coordinates &amp;&amp; empty( $address );
-
-          if( !empty( $address ) ) {
-            $geo_data = self::geo_locate_address( $address, $wp_properties[ &#x27;configuration&#x27; ][ &#x27;google_maps_localization&#x27; ], true );
-          }
-
-          if( !empty( $coordinates ) &amp;&amp; $manual_coordinates ) {
-            $geo_data_coordinates = self::geo_locate_address( $address, $wp_properties[ &#x27;configuration&#x27; ][ &#x27;google_maps_localization&#x27; ], true, $coordinates );
-          }
-
-          /** if Address was invalid or empty but we have valid $coordinates we use them */
-          if( !empty( $geo_data_coordinates-&gt;formatted_address ) &amp;&amp; ( $address_by_coordinates || empty( $geo_data-&gt;formatted_address ) ) ) {
-            $geo_data = $geo_data_coordinates;
-            /** clean up $address to remember that addres was empty or invalid*/
-            $address = &#x27;&#x27;;
-          }
-
-          if( empty( $geo_data ) ) {
-            $return[ &#x27;status&#x27; ] = &#x27;empty_address&#x27;;
-          }
-
-        }
-
-        if( !empty( $geo_data-&gt;formatted_address ) ) {
-
-          foreach( (array) $wp_properties[ &#x27;geo_type_attributes&#x27; ] + array( &#x27;display_address&#x27; ) as $meta_key ) {
-            delete_post_meta( $post_id, $meta_key );
-          }
-
-          update_post_meta( $post_id, &#x27;address_is_formatted&#x27;, true );
-
-          if( !empty( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;address_attribute&#x27; ] ) &amp;&amp; ( !$manual_coordinates || $address_by_coordinates ) ) {
-            update_post_meta( $post_id, $wp_properties[ &#x27;configuration&#x27; ][ &#x27;address_attribute&#x27; ], \UsabilityDynamics\WPP\Utility::encode_mysql_input( $geo_data-&gt;formatted_address, $wp_properties[ &#x27;configuration&#x27; ][ &#x27;address_attribute&#x27; ] ) );
-          }
-
-          foreach( $geo_data as $geo_type =&gt; $this_data ) {
-            if( in_array( $geo_type, (array) $wp_properties[ &#x27;geo_type_attributes&#x27; ] ) &amp;&amp; !in_array( $geo_type, array( &#x27;latitude&#x27;, &#x27;longitude&#x27; ) ) ) {
-              update_post_meta( $post_id, $geo_type, \UsabilityDynamics\WPP\Utility::encode_mysql_input( $this_data, $geo_type ) );
-            }
-          }
-
-          update_post_meta( $post_id, &#x27;wpp::last_address_validation&#x27;, time() );
-
-          update_post_meta( $post_id, &#x27;latitude&#x27;, $manual_coordinates ? $coordinates[ &#x27;lat&#x27; ] : $geo_data-&gt;latitude );
-          update_post_meta( $post_id, &#x27;longitude&#x27;, $manual_coordinates ? $coordinates[ &#x27;lng&#x27; ] : $geo_data-&gt;longitude );
-
-          if( $return_geo_data ) {
-            $return[ &#x27;geo_data&#x27; ] = $geo_data;
-          }
-
-          $return[ &#x27;status&#x27; ] = &#x27;updated&#x27;;
-
-        }
-
-        //** Logs the last validation status for better troubleshooting */
-        update_post_meta( $post_id, &#x27;wpp::google_validation_status&#x27;, $geo_data-&gt;status );
-
-        // Try to figure out what went wrong
-        if( !empty( $geo_data-&gt;status ) &amp;&amp; ( $geo_data-&gt;status == &#x27;OVER_QUERY_LIMIT&#x27; || $geo_data-&gt;status == &#x27;REQUEST_DENIED&#x27; ) ) {
-          $return[ &#x27;status&#x27; ] = &#x27;over_query_limit&#x27;;
-        } elseif( empty( $address ) &amp;&amp; empty( $geo_data ) ) {
-
-          foreach( (array) $wp_properties[ &#x27;geo_type_attributes&#x27; ] + array( &#x27;display_address&#x27; ) as $meta_key ) {
-            delete_post_meta( $post_id, $meta_key );
-          }
-
-          $return[ &#x27;status&#x27; ] = &#x27;empty_address&#x27;;
-          update_post_meta( $post_id, &#x27;address_is_formatted&#x27;, false );
-        } elseif( empty( $return[ &#x27;status&#x27; ] ) ) {
-          $return[ &#x27;status&#x27; ] = &#x27;failed&#x27;;
-          update_post_meta( $post_id, &#x27;address_is_formatted&#x27;, false );
-        }
-
-        //** Neccessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
-        if( !metadata_exists( &#x27;post&#x27;, $post_id, &#x27;exclude_from_supermap&#x27; ) ) {
-          add_post_meta( $post_id, &#x27;exclude_from_supermap&#x27;, &#x27;false&#x27; );
-        }
-
-        return $return;
       }
 
       /**
@@ -2309,7 +1994,7 @@ namespace UsabilityDynamics\WPP {
        *
        */
       static function get_image_dimensions( $type = false ) {
-        return \UsabilityDynamics\WPP\Utility::image_sizes( $type );
+        return self::image_sizes( $type );
       }
 
       /**
@@ -2671,7 +2356,7 @@ namespace UsabilityDynamics\WPP {
           $wpp_version = get_option( &quot;wpp_version&quot; );
 
           //** Get API key - force API key update just in case */
-          $api_key = \UsabilityDynamics\WPP\Utility::get_api_key( array( &#x27;force_check&#x27; =&gt; true, &#x27;return&#x27; =&gt; true ) );
+          $api_key = self::get_api_key( array( &#x27;force_check&#x27; =&gt; true, &#x27;return&#x27; =&gt; true ) );
 
           if( !$api_key || empty( $api_key ) ) {
             throw new Exception( __( &#x27;The API key could not be generated.&#x27;, &#x27;wpp&#x27; ) );
@@ -2704,7 +2389,7 @@ namespace UsabilityDynamics\WPP {
           }
 
           if( is_object( $r-&gt;available_features ) ) {
-            $r-&gt;available_features = \UsabilityDynamics\WPP\Utility::objectToArray( $r-&gt;available_features );
+            $r-&gt;available_features = self::objectToArray( $r-&gt;available_features );
             //** Update WP-Property settings */
             $wpp_settings                         = get_option( &#x27;wpp_settings&#x27; );
             $wpp_settings[ &#x27;available_features&#x27; ] = $r-&gt;available_features;
@@ -2760,7 +2445,7 @@ namespace UsabilityDynamics\WPP {
                     $res = sprintf( __( &#x27;&lt;b&gt;%s&lt;/b&gt; %s has been installed.&#x27;, &#x27;wpp&#x27; ), $code-&gt;name, $version );
                   }
                   if( !empty( $res ) ) {
-                    \UsabilityDynamics\WPP\Utility::log( sprintf( __( &#x27;WP-Property Premium Feature: %s&#x27;, &#x27;wpp&#x27; ), $res ) );
+                    self::log( sprintf( __( &#x27;WP-Property Premium Feature: %s&#x27;, &#x27;wpp&#x27; ), $res ) );
                     $updates[ ] = $res;
                   }
                 } else {
@@ -2774,11 +2459,11 @@ namespace UsabilityDynamics\WPP {
           }
 
           //** Update settings */
-          \UsabilityDynamics\WPP\Utility::settings_action( true );
+          self::settings_action( true );
 
         } catch( Exception $e ) {
 
-          \UsabilityDynamics\WPP\Utility::log( &quot;Feature Update Error: &quot; . $e-&gt;getMessage() );
+          self::log( &quot;Feature Update Error: &quot; . $e-&gt;getMessage() );
 
           return new WP_Error( &#x27;error&#x27;, $e-&gt;getMessage() );
 
@@ -2859,6 +2544,11 @@ namespace UsabilityDynamics\WPP {
 
       }
 
+      /**
+       * @param $columns
+       *
+       * @return mixed
+       */
       static function custom_attribute_columns( $columns ) {
         global $wp_properties;
 
@@ -2905,7 +2595,7 @@ namespace UsabilityDynamics\WPP {
       &lt;option value=&quot;&quot;&gt;&lt;?php echo $blank_selection_label; ?&gt;&lt;/option&gt;
           &lt;?php
           foreach( $image_array as $name ) {
-            $sizes = \UsabilityDynamics\WPP\Utility::image_sizes( $name );
+            $sizes = self::image_sizes( $name );
 
             if( !$sizes ) {
               continue;
@@ -2996,7 +2686,7 @@ namespace UsabilityDynamics\WPP {
        * @author peshkov@UD
        * @since 1.38.3
        */
-      function save_settings() {
+      public function save_settings() {
         global $wp_properties;
 
         $data = self::parse_str( $_REQUEST[ &#x27;data&#x27; ] );
@@ -3179,7 +2869,7 @@ namespace UsabilityDynamics\WPP {
         // Get IDs of all property types
         foreach( $wp_properties[ &#x27;searchable_property_types&#x27; ] as $property_type ) {
 
-          $this_type_properties = \UsabilityDynamics\WPP\Utility::get_properties( &quot;property_type=$property_type&quot; );
+          $this_type_properties = self::get_properties( &quot;property_type=$property_type&quot; );
 
           if( is_array( $this_type_properties ) &amp;&amp; is_array( $searchable_properties ) )
             $searchable_properties = array_merge( $searchable_properties, $this_type_properties );
@@ -3279,7 +2969,7 @@ namespace UsabilityDynamics\WPP {
             }
 
             //** Load attribute data */
-            $attribute_data = \UsabilityDynamics\WPP\Utility::get_attribute_data( $searchable_attribute );
+            $attribute_data = self::get_attribute_data( $searchable_attribute );
 
             if( $attribute_data[ &#x27;numeric&#x27; ] || $attribute_data[ &#x27;currency&#x27; ] ) {
               $is_numeric = true;
@@ -3347,7 +3037,7 @@ namespace UsabilityDynamics\WPP {
               $original_value = $value;
 
               // Clean up values if a conversion exists
-              $value = \UsabilityDynamics\WPP\Utility::do_search_conversion( $searchable_attribute, trim( $value ) );
+              $value = self::do_search_conversion( $searchable_attribute, trim( $value ) );
 
               // Fix value with special chars. Disabled here, should only be done in final templating stage.
               // $value = htmlspecialchars($value, ENT_QUOTES);
@@ -3447,7 +3137,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Prints args to firebug if debug mode is enabled */
         $log = is_array( $args ) ? urldecode( http_build_query( $args ) ) : $args;
-        \UsabilityDynamics\WPP\Utility::console_log( &quot;get_properties() args: {$log}&quot; );
+        self::console_log( &quot;get_properties() args: {$log}&quot; );
 
         //** The function can be overwritten using the filter below. */
         $response = apply_filters( &#x27;wpp::get_properties::custom&#x27;, null, $args, $total );
@@ -3600,7 +3290,7 @@ namespace UsabilityDynamics\WPP {
         foreach( (array) $query as $meta_key =&gt; $criteria ) {
 
           $specific = &#x27;&#x27;;
-          $criteria = \UsabilityDynamics\WPP\Utility::encode_mysql_input( $criteria, $meta_key );
+          $criteria = self::encode_mysql_input( $criteria, $meta_key );
 
           // Stop filtering ( loop ) because no IDs left
           if( isset( $matching_ids ) &amp;&amp; empty( $matching_ids ) ) {
@@ -4185,7 +3875,7 @@ namespace UsabilityDynamics\WPP {
 
           $return[ &#x27;is_child&#x27; ] = true;
 
-          $parent_object = \UsabilityDynamics\WPP\Utility::get_property( $post[ &#x27;post_parent&#x27; ], array( &#x27;load_gallery&#x27; =&gt; $load_gallery, &#x27;get_children&#x27; =&gt; false ) );
+          $parent_object = self::get_property( $post[ &#x27;post_parent&#x27; ], array( &#x27;load_gallery&#x27; =&gt; $load_gallery, &#x27;get_children&#x27; =&gt; false ) );
 
           $return[ &#x27;parent_id&#x27; ]    = $post[ &#x27;post_parent&#x27; ];
           $return[ &#x27;parent_link&#x27; ]  = $parent_object[ &#x27;permalink&#x27; ];
@@ -4216,7 +3906,7 @@ namespace UsabilityDynamics\WPP {
             //** Cycle through children and get necessary variables */
             foreach( $children as $child_id ) {
 
-              $child_object                      = \UsabilityDynamics\WPP\Utility::get_property( $child_id, array( &#x27;load_gallery&#x27; =&gt; $load_gallery, &#x27;load_parent&#x27; =&gt; false ) );
+              $child_object                      = self::get_property( $child_id, array( &#x27;load_gallery&#x27; =&gt; $load_gallery, &#x27;load_parent&#x27; =&gt; false ) );
               $return[ &#x27;children&#x27; ][ $child_id ] = $child_object;
 
               //** Save child image URLs into one array for quick access */
@@ -4230,7 +3920,7 @@ namespace UsabilityDynamics\WPP {
 
               foreach( $wp_properties[ &#x27;searchable_attributes&#x27; ] as $searchable_attribute ) {
 
-                $attribute_data = \UsabilityDynamics\WPP\Utility::get_attribute_data( $searchable_attribute );
+                $attribute_data = self::get_attribute_data( $searchable_attribute );
 
                 if( $attribute_data[ &#x27;numeric&#x27; ] || $attribute_data[ &#x27;currency&#x27; ] ) {
 
@@ -4296,7 +3986,7 @@ namespace UsabilityDynamics\WPP {
           $return[ &#x27;address&#x27; ] = $return[ &#x27;location&#x27; ];
         }
 
-        $return[ &#x27;wpp_gpid&#x27; ]  = \UsabilityDynamics\WPP\Utility::maybe_set_gpid( $id );
+        $return[ &#x27;wpp_gpid&#x27; ]  = Listing::maybe_set_gpid( $id );
         $return[ &#x27;permalink&#x27; ] = get_permalink( $id );
 
         //** Make sure property_type stays as slug, or it will break many things:  (widgets, class names, etc)  */
@@ -4338,7 +4028,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Convert to object */
         if( $return_object == &#x27;true&#x27; ) {
-          $return = \UsabilityDynamics\WPP\Utility::array_to_object( $return );
+          $return = self::array_to_object( $return );
         }
 
         wp_cache_add( $id . $args, $return );
@@ -4587,7 +4277,7 @@ namespace UsabilityDynamics\WPP {
           $property_stats[ $attribute ] = $wp_properties[ &#x27;property_stats&#x27; ][ $attribute ];
         }
 
-        $property_stats = \UsabilityDynamics\WPP\Utility::get_stat_values_and_labels( $property, array(
+        $property_stats = self::get_stat_values_and_labels( $property, array(
           &#x27;property_stats&#x27; =&gt; $property_stats
         ) );
 
@@ -4640,7 +4330,7 @@ namespace UsabilityDynamics\WPP {
               foreach( $property_stats as $attribute_label =&gt; $value ) {
 
                 $attribute_slug = $labels_to_keys[ $attribute_label ];
-                $attribute_data = \UsabilityDynamics\WPP\Utility::get_attribute_data( $attribute_slug );
+                $attribute_data = self::get_attribute_data( $attribute_slug );
 
                 if( empty( $value ) ) {
                   continue;
@@ -4689,43 +4379,6 @@ namespace UsabilityDynamics\WPP {
         $data = apply_filters( &#x27;wpp_google_maps_infobox&#x27;, $data, $post );
 
         return $data;
-      }
-
-      /**
-       * Updates parent ID.
-       * Determines if parent exists and it doesn&#x27;t have own parent.
-       *
-       * @param integer $parent_id
-       * @param integer $post_id
-       *
-       * @return int
-       * @author peshkov@UD
-       * @since 1.37.5
-       */
-      static function update_parent_id( $parent_id, $post_id ) {
-        global $wpdb, $wp_properties;
-
-        $parent_id = !empty( $parent_id ) ? $parent_id : 0;
-
-        $post = get_post( $_REQUEST[ &#x27;parent_id&#x27; ] );
-
-        if( !$post ) {
-          $parent_id = 0;
-        } else {
-          if( $post-&gt;post_parent &gt; 0 ) {
-            if( empty( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;allow_parent_deep_depth&#x27; ] ) || $wp_properties[ &#x27;configuration&#x27; ][ &#x27;allow_parent_deep_depth&#x27; ] != &#x27;true&#x27; ) {
-              $parent_id = 0;
-            }
-          }
-        }
-
-        if( $parent_id == 0 ) {
-          $wpdb-&gt;query( &quot;UPDATE {$wpdb-&gt;posts} SET post_parent=0 WHERE ID={$post_id}&quot; );
-        }
-
-        update_post_meta( $post_id, &#x27;parent_gpid&#x27;, \UsabilityDynamics\WPP\Utility::maybe_set_gpid( $parent_id ) );
-
-        return $parent_id;
       }
 
       /**
@@ -4801,64 +4454,6 @@ namespace UsabilityDynamics\WPP {
         }
 
         return $return;
-
-      }
-
-      /**
-       * Generates Global Property ID for standard reference point during imports.
-       *
-       * Property ID is currently not used.
-       *
-       * @return integer. Global ID number
-       *
-       * @param bool|int $property_id . Property ID.
-       *
-       * @param bool     $check_existance
-       *
-       * @todo API call to UD server to verify there is no duplicates
-       * @since 1.6
-       */
-      static function get_gpid( $property_id = false, $check_existance = false ) {
-
-        if( $check_existance &amp;&amp; $property_id ) {
-          $exists = get_post_meta( $property_id, &#x27;wpp_gpid&#x27;, true );
-
-          if( $exists ) {
-            return $exists;
-          }
-        }
-
-        return &#x27;gpid_&#x27; . rand( 1000000000, 9999999999 );
-
-      }
-
-      /**
-       * Generates Global Property ID if it does not exist
-       *
-       * @param bool $property_id
-       *
-       * @return string | Returns GPID
-       * @since 1.6
-       */
-      static function maybe_set_gpid( $property_id = false ) {
-
-        if( !$property_id ) {
-          return false;
-        }
-
-        $exists = get_post_meta( $property_id, &#x27;wpp_gpid&#x27;, true );
-
-        if( $exists ) {
-          return $exists;
-        }
-
-        $gpid = \UsabilityDynamics\WPP\Utility::get_gpid( $property_id, true );
-
-        update_post_meta( $property_id, &#x27;wpp_gpid&#x27;, $gpid );
-
-        return $gpid;
-
-        return false;
 
       }
 
@@ -4995,7 +4590,7 @@ namespace UsabilityDynamics\WPP {
         $sColumns = explode( &quot;,&quot;, $sColumns );
 
         //* Init table object */
-        $wp_list_table = new WPP_Object_List_Table( array(
+        $wp_list_table = new Object_List_Table( array(
           &quot;ajax&quot;           =&gt; true,
           &quot;per_page&quot;       =&gt; $per_page,
           &quot;iDisplayStart&quot;  =&gt; $iDisplayStart,
@@ -5139,12 +4734,12 @@ namespace UsabilityDynamics\WPP {
                     default:
                       $label = strtoupper( substr( $attr, 0, 1 ) ) . substr( $attr, 1, strlen( $attr ) );
                   }
-                  $attrs[ $attr ] = $label . &#x27; (&#x27; . \UsabilityDynamics\WPP\Utility::format_numeric( $count ) . &#x27;)&#x27;;
+                  $attrs[ $attr ] = $label . &#x27; (&#x27; . self::format_numeric( $count ) . &#x27;)&#x27;;
                   $all += $count;
                 }
               }
 
-              $attrs[ &#x27;all&#x27; ] = __( &#x27;All&#x27;, &#x27;wpp&#x27; ) . &#x27; (&#x27; . \UsabilityDynamics\WPP\Utility::format_numeric( $all ) . &#x27;)&#x27;;
+              $attrs[ &#x27;all&#x27; ] = __( &#x27;All&#x27;, &#x27;wpp&#x27; ) . &#x27; (&#x27; . self::format_numeric( $all ) . &#x27;)&#x27;;
               $attr_values    = $attrs;
 
               ksort( $attr_values );

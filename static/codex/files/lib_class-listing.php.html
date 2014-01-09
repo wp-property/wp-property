@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib/class-listing.php - usabilitydynamics/wp-property</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="usabilitydynamics/wp-property"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 2.0.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Bootstrap.html">Bootstrap</a></li>
+            
+                <li><a href="../classes/Exception.html">Exception</a></li>
+            
+                <li><a href="../classes/Theme.html">Theme</a></li>
+            
+                <li><a href="../classes/UsabilityDynamics\WPP.Bootstrap.html">UsabilityDynamics\WPP.Bootstrap</a></li>
+            
+                <li><a href="../classes/UsabilityDynamics\WPP.Loader.html">UsabilityDynamics\WPP.Loader</a></li>
+            
+                <li><a href="../classes/WP_Error.html">WP_Error</a></li>
+            
+                <li><a href="../classes/WPP.html">WPP</a></li>
+            
+                <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: lib/class-listing.php</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&lt;?php
+/**
+ * WP-Property Listing Object
+ *
+ * Currently not used.
+ *
+ * @class WP_Error
+ * @version 1.0
+ * @author Usability Dynamics, Inc. &lt;info@usabilitydynamics.com&gt;
+ * @package WP-Property
+ * @since 1.38
+ */
+namespace UsabilityDynamics\WPP {
+
+  if( !class_exists( &#x27;UsabilityDynamics\WPP\Listing&#x27; ) ) {
+
+    class Listing {
+
+      /**
+       * Listing ID.
+       *
+       * @property $id
+       * @type String
+       */
+      public $id;
+
+      /**
+       * Global Property ID.
+       *
+       * @property $gpid
+       * @type String
+       */
+      public $gpid = &#x27;&#x27;;
+
+      /**
+       * Listing Description.
+       *
+       *
+       * @property $content
+       * @type String
+       */
+      public $content = &#x27;&#x27;;
+
+      /**
+       * Content Title.
+       *
+       * @static
+       * @property $title
+       * @type String
+       */
+      public $title = &#x27;&#x27;;
+
+      /**
+       * Listing Excerpt / Summary.
+       *
+       * @static
+       * @property $excerpt
+       * @type String
+       */
+      public $excerpt = &#x27;&#x27;;
+
+      /**
+       * Status.
+       *
+       * @static
+       * @property $status
+       * @type String
+       */
+      public $status = &#x27;publish&#x27;;
+
+      /**
+       * Parent ID.
+       *
+       * @static
+       * @property $parent
+       * @type Integer
+       */
+      public $parent = 0;
+
+      /**
+       * @param string $key
+       * @param null   $default
+       *
+       * @return mixed
+       */
+      public function get( $key = &#x27;&#x27;, $default = null ) {
+        return get_post_meta( $this-&gt;id, $key );
+      }
+
+      /**
+       * @param string $key
+       * @param string $value
+       *
+       * @internal param null $default
+       *
+       * @return mixed
+       */
+      public function set( $key = &#x27;&#x27;, $value = null ) {
+        return update_post_meta( $this-&gt;id, $key, $value );
+      }
+
+      /**
+       * Hooks into save_post function and saves additional property data
+       *
+       * @todo Add some sort of custom capability so not only admins can make properties as featured. i.e. Agents can make their own properties featured.
+       *
+       * @since 1.04
+       */
+      public function save( $id ) {
+        global $wp_properties, $wp_version;
+
+        $_wpnonce = ( version_compare( $wp_version, &#x27;3.5&#x27;, &#x27;&gt;=&#x27; ) ? &#x27;update-post_&#x27; : &#x27;update-property_&#x27; ) . $id;
+
+        if( !wp_verify_nonce( $_POST[ &#x27;_wpnonce&#x27; ], $_wpnonce ) || $_POST[ &#x27;post_type&#x27; ] !== &#x27;property&#x27; ) {
+          return $id;
+        }
+
+        //* Delete cache files of search values for search widget&#x27;s form */
+        $directory = WPP_Path . &#x27;cache/searchwidget&#x27;;
+
+        if( is_dir( $directory ) ) {
+          $dir = opendir( $directory );
+          while( ( $cachefile = readdir( $dir ) ) ) {
+            if( is_file( $directory . &quot;/&quot; . $cachefile ) ) {
+              unlink( $directory . &quot;/&quot; . $cachefile );
+            }
+          }
+        }
+
+        if( defined( &#x27;DOING_AUTOSAVE&#x27; ) &amp;&amp; DOING_AUTOSAVE ) {
+          return $id;
+        }
+
+        $update_data = $_REQUEST[ &#x27;wpp_data&#x27; ][ &#x27;meta&#x27; ];
+
+        //** Neccessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
+        if( empty( $_REQUEST[ &#x27;exclude_from_supermap&#x27; ] ) ) {
+          if( !metadata_exists( &#x27;post&#x27;, $id, &#x27;exclude_from_supermap&#x27; ) ) {
+            $update_data[ &#x27;exclude_from_supermap&#x27; ] = &#x27;false&#x27;;
+          }
+        }
+
+        if( (float) $update_data[ &#x27;latitude&#x27; ] == 0 ) $update_data[ &#x27;latitude&#x27; ] = &#x27;&#x27;;
+        if( (float) $update_data[ &#x27;longitude&#x27; ] == 0 ) $update_data[ &#x27;longitude&#x27; ] = &#x27;&#x27;;
+
+        /* get old coordinates and location */
+        $old_lat  = get_post_meta( $id, &#x27;latitude&#x27;, true );
+        $old_lng  = get_post_meta( $id, &#x27;longitude&#x27;, true );
+        $geo_data = array(
+          &#x27;old_coordinates&#x27; =&gt; ( ( empty( $old_lat ) ) || ( empty( $old_lng ) ) ) ? &quot;&quot; : array( &#x27;lat&#x27; =&gt; $old_lat, &#x27;lng&#x27; =&gt; $old_lng ),
+          &#x27;old_location&#x27;    =&gt; ( !empty( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;address_attribute&#x27; ] ) ) ? get_post_meta( $id, $wp_properties[ &#x27;configuration&#x27; ][ &#x27;address_attribute&#x27; ], true ) : &#x27;&#x27;
+        );
+
+        foreach( (array) $update_data as $meta_key =&gt; $meta_value ) {
+          $attribute_data = Utility::get_attribute_data( $meta_key );
+
+          //* Cleans the user input */
+          $meta_value = Utility::encode_mysql_input( $meta_value, $meta_key );
+
+          //* Only admins can mark properties as featured. */
+          if( $meta_key == &#x27;featured&#x27; &amp;&amp; !current_user_can( &#x27;manage_options&#x27; ) ) {
+            //** But be sure that meta &#x27;featured&#x27; exists at all */
+            if( !metadata_exists( &#x27;post&#x27;, $id, $meta_key ) ) {
+              $meta_value = &#x27;false&#x27;;
+            } else {
+              continue;
+            }
+          }
+
+          //* Remove certain characters */
+
+          if( $attribute_data[ &#x27;currency&#x27; ] || $attribute_data[ &#x27;numeric&#x27; ] ) {
+            $meta_value = str_replace( array( &quot;$&quot;, &quot;,&quot; ), &#x27;&#x27;, $meta_value );
+          }
+
+          //* Overwrite old post meta allowing only one value */
+          delete_post_meta( $id, $meta_key );
+          add_post_meta( $id, $meta_key, $meta_value );
+        }
+
+        //* Check if property has children */
+        $children = get_children( &quot;post_parent=$id&amp;post_type=property&quot; );
+
+        //* Write any data to children properties that are supposed to inherit things */
+        if( count( $children ) &gt; 0 ) {
+          foreach( (array) $children as $child_id =&gt; $child_data ) {
+            //* Determine child property_type */
+            $child_property_type = get_post_meta( $child_id, &#x27;property_type&#x27;, true );
+            //* Check if child&#x27;s property type has inheritence rules, and if meta_key exists in inheritance array */
+            if( is_array( $wp_properties[ &#x27;property_inheritance&#x27; ][ $child_property_type ] ) ) {
+              foreach( (array) $wp_properties[ &#x27;property_inheritance&#x27; ][ $child_property_type ] as $i_meta_key ) {
+                $parent_meta_value = get_post_meta( $id, $i_meta_key, true );
+                //* inheritance rule exists for this property_type for this meta_key */
+                update_post_meta( $child_id, $i_meta_key, $parent_meta_value );
+              }
+            }
+          }
+        }
+
+        self::maybe_set_gpid( $id );
+
+        if( isset( $_REQUEST[ &#x27;parent_id&#x27; ] ) ) {
+          $_REQUEST[ &#x27;parent_id&#x27; ] = self::update_parent_id( $_REQUEST[ &#x27;parent_id&#x27; ], $id );
+        }
+
+        self::geolocate($id);
+
+        do_action( &#x27;wpp:save_property&#x27;, $id, $this );
+
+        return true;
+
+      }
+
+      /**
+       * Address validation function
+       *
+       * Since 1.37.2 extracted from save_property and revalidate_all_addresses to make same functionality
+       *
+       * @global array  $wp_properties
+       *
+       * @param integer $id
+       * @param array   $args
+       *
+       * @return array
+       * @since 1.37.2
+       * @author odokienko@UD
+       */
+      public static function geolocate( $id, $args = array() ) {
+        global $wp_properties;
+
+        $args = wp_parse_args( $args, array(
+          &#x27;skip_existing&#x27;   =&gt; &#x27;false&#x27;,
+          &#x27;return_geo_data&#x27; =&gt; false,
+        ) );
+
+        extract( $args, EXTR_SKIP );
+        $skip_existing   = isset( $skip_existing ) ? $skip_existing : &#x27;false&#x27;;
+        $return_geo_data = isset( $return_geo_data ) ? $return_geo_data : false;
+
+        $return = array();
+
+        $geo_data             = false;
+        $geo_data_coordinates = false;
+        $latitude             = get_post_meta( $id, &#x27;latitude&#x27;, true );
+        $longitude            = get_post_meta( $id, &#x27;longitude&#x27;, true );
+        $current_coordinates  = $latitude . $longitude;
+        $address_is_formatted = get_post_meta( $id, &#x27;address_is_formatted&#x27;, true );
+
+        $address = get_post_meta( $id, $wp_properties[ &#x27;configuration&#x27; ][ &#x27;address_attribute&#x27; ], true );
+
+        $coordinates = ( empty( $latitude ) || empty( $longitude ) ) ? &quot;&quot; : array( &#x27;lat&#x27; =&gt; get_post_meta( $id, &#x27;latitude&#x27;, true ), &#x27;lng&#x27; =&gt; get_post_meta( $id, &#x27;longitude&#x27;, true ) );
+
+        if( $skip_existing == &#x27;true&#x27; &amp;&amp; !empty( $current_coordinates ) &amp;&amp; in_array( $address_is_formatted, array( &#x27;1&#x27;, &#x27;true&#x27; ) ) ) {
+          $return[ &#x27;status&#x27; ] = &#x27;skipped&#x27;;
+
+          return $return;
+        }
+
+        if( !( empty( $coordinates ) &amp;&amp; empty( $address ) ) ) {
+
+          /* will be true if address is empty and used manual_coordinates and coordinates is not empty */
+          $manual_coordinates = get_post_meta( $id, &#x27;manual_coordinates&#x27;, true );
+          $manual_coordinates = ( $manual_coordinates != &#x27;true&#x27; &amp;&amp; $manual_coordinates != &#x27;1&#x27; ) ? false : true;
+
+          $address_by_coordinates = !empty( $coordinates ) &amp;&amp; $manual_coordinates &amp;&amp; empty( $address );
+
+          if( !empty( $address ) ) {
+            $geo_data = Utility::geo_locate_address( $address, $wp_properties[ &#x27;configuration&#x27; ][ &#x27;google_maps_localization&#x27; ], true );
+          }
+
+          if( !empty( $coordinates ) &amp;&amp; $manual_coordinates ) {
+            $geo_data_coordinates = Utility::geo_locate_address( $address, $wp_properties[ &#x27;configuration&#x27; ][ &#x27;google_maps_localization&#x27; ], true, $coordinates );
+          }
+
+          /** if Address was invalid or empty but we have valid $coordinates we use them */
+          if( !empty( $geo_data_coordinates-&gt;formatted_address ) &amp;&amp; ( $address_by_coordinates || empty( $geo_data-&gt;formatted_address ) ) ) {
+            $geo_data = $geo_data_coordinates;
+            /** clean up $address to remember that addres was empty or invalid*/
+            $address = &#x27;&#x27;;
+          }
+
+          if( empty( $geo_data ) ) {
+            $return[ &#x27;status&#x27; ] = &#x27;empty_address&#x27;;
+          }
+
+        }
+
+        if( !empty( $geo_data-&gt;formatted_address ) ) {
+
+          foreach( (array) $wp_properties[ &#x27;geo_type_attributes&#x27; ] + array( &#x27;display_address&#x27; ) as $meta_key ) {
+            delete_post_meta( $id, $meta_key );
+          }
+
+          update_post_meta( $id, &#x27;address_is_formatted&#x27;, true );
+
+          if( !empty( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;address_attribute&#x27; ] ) &amp;&amp; ( !$manual_coordinates || $address_by_coordinates ) ) {
+            update_post_meta( $id, $wp_properties[ &#x27;configuration&#x27; ][ &#x27;address_attribute&#x27; ], Utility::encode_mysql_input( $geo_data-&gt;formatted_address, $wp_properties[ &#x27;configuration&#x27; ][ &#x27;address_attribute&#x27; ] ) );
+          }
+
+          foreach( $geo_data as $geo_type =&gt; $this_data ) {
+            if( in_array( $geo_type, (array) $wp_properties[ &#x27;geo_type_attributes&#x27; ] ) &amp;&amp; !in_array( $geo_type, array( &#x27;latitude&#x27;, &#x27;longitude&#x27; ) ) ) {
+              update_post_meta( $id, $geo_type, Utility::encode_mysql_input( $this_data, $geo_type ) );
+            }
+          }
+
+          update_post_meta( $id, &#x27;wpp::last_address_validation&#x27;, time() );
+
+          update_post_meta( $id, &#x27;latitude&#x27;, $manual_coordinates ? $coordinates[ &#x27;lat&#x27; ] : $geo_data-&gt;latitude );
+          update_post_meta( $id, &#x27;longitude&#x27;, $manual_coordinates ? $coordinates[ &#x27;lng&#x27; ] : $geo_data-&gt;longitude );
+
+          if( $return_geo_data ) {
+            $return[ &#x27;geo_data&#x27; ] = $geo_data;
+          }
+
+          $return[ &#x27;status&#x27; ] = &#x27;updated&#x27;;
+
+        }
+
+        //** Logs the last validation status for better troubleshooting */
+        update_post_meta( $id, &#x27;wpp::google_validation_status&#x27;, $geo_data-&gt;status );
+
+        // Try to figure out what went wrong
+        if( !empty( $geo_data-&gt;status ) &amp;&amp; ( $geo_data-&gt;status == &#x27;OVER_QUERY_LIMIT&#x27; || $geo_data-&gt;status == &#x27;REQUEST_DENIED&#x27; ) ) {
+          $return[ &#x27;status&#x27; ] = &#x27;over_query_limit&#x27;;
+        } elseif( empty( $address ) &amp;&amp; empty( $geo_data ) ) {
+
+          foreach( (array) $wp_properties[ &#x27;geo_type_attributes&#x27; ] + array( &#x27;display_address&#x27; ) as $meta_key ) {
+            delete_post_meta( $id, $meta_key );
+          }
+
+          $return[ &#x27;status&#x27; ] = &#x27;empty_address&#x27;;
+          update_post_meta( $id, &#x27;address_is_formatted&#x27;, false );
+        } elseif( empty( $return[ &#x27;status&#x27; ] ) ) {
+          $return[ &#x27;status&#x27; ] = &#x27;failed&#x27;;
+          update_post_meta( $id, &#x27;address_is_formatted&#x27;, false );
+        }
+
+        //** Neccessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
+        if( !metadata_exists( &#x27;post&#x27;, $id, &#x27;exclude_from_supermap&#x27; ) ) {
+          add_post_meta( $id, &#x27;exclude_from_supermap&#x27;, &#x27;false&#x27; );
+        }
+
+        return $return;
+
+      }
+
+      /**
+       * Updates parent ID.
+       * Determines if parent exists and it doesn&#x27;t have own parent.
+       *
+       * @param integer $parent_id
+       * @param integer $id
+       *
+       * @return int
+       * @author peshkov@UD
+       * @since 1.37.5
+       */
+      public static function update_parent_id( $parent_id, $id ) {
+        global $wpdb, $wp_properties;
+
+        $parent_id = !empty( $parent_id ) ? $parent_id : 0;
+
+        $post = get_post( $_REQUEST[ &#x27;parent_id&#x27; ] );
+
+        if( !$post ) {
+          $parent_id = 0;
+        } else {
+          if( $post-&gt;post_parent &gt; 0 ) {
+            if( empty( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;allow_parent_deep_depth&#x27; ] ) || $wp_properties[ &#x27;configuration&#x27; ][ &#x27;allow_parent_deep_depth&#x27; ] != &#x27;true&#x27; ) {
+              $parent_id = 0;
+            }
+          }
+        }
+
+        if( $parent_id == 0 ) {
+          $wpdb-&gt;query( &quot;UPDATE {$wpdb-&gt;posts} SET post_parent=0 WHERE ID={$id}&quot; );
+        }
+
+        update_post_meta( $id, &#x27;parent_gpid&#x27;, self::maybe_set_gpid( $parent_id ) );
+
+        return $parent_id;
+      }
+
+      /**
+       * Generates Global Property ID for standard reference point during imports.
+       *
+       * Property ID is currently not used.
+       *
+       * @return integer. Global ID number
+       *
+       * @param bool|int $id . Property ID.
+       *
+       * @param bool     $check_existance
+       *
+       * @todo API call to UD server to verify there is no duplicates
+       * @since 1.6
+       */
+      public static function get_gpid( $id = false, $check_existance = false ) {
+
+        if( $check_existance &amp;&amp; $id ) {
+          $exists = get_post_meta( $id, &#x27;wpp_gpid&#x27;, true );
+
+          if( $exists ) {
+            return $exists;
+          }
+        }
+
+        return &#x27;gpid_&#x27; . rand( 1000000000, 9999999999 );
+
+      }
+
+      /**
+       * Generates Global Property ID if it does not exist
+       *
+       * @param bool $id
+       *
+       * @return string | Returns GPID
+       * @since 1.6
+       */
+      public static function maybe_set_gpid( $id = false ) {
+
+        if( !$id ) {
+          return false;
+        }
+
+        $exists = get_post_meta( $id, &#x27;wpp_gpid&#x27;, true );
+
+        if( $exists ) {
+          return $exists;
+        }
+
+        $gpid = self::get_gpid( $id, true );
+
+        update_post_meta( $id, &#x27;wpp_gpid&#x27;, $gpid );
+
+        return $gpid;
+
+      }
+
+    }
+
+  }
+
+}
+
+
+
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

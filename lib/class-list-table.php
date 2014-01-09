@@ -89,11 +89,10 @@ namespace UsabilityDynamics\WPP {
         $input_id = $input_id . '-search-input';
         ?>
         <p class="search-box">
-      <label class="screen-reader-text" for="<?php echo $input_id ?>"><?php echo $text; ?>:</label>
-      <input type="text" id="<?php echo $input_id ?>" name="wpp_search[post_title]"
-        value="<?php _admin_search_query(); ?>"/>
+          <label class="screen-reader-text" for="<?php echo $input_id ?>"><?php echo $text; ?>:</label>
+          <input type="text" id="<?php echo $input_id ?>" name="wpp_search[post_title]" value="<?php _admin_search_query(); ?>"/>
           <?php /* submit_button( $text, 'button', false, false, array('id' => 'search-submit')); */ ?>
-    </p>
+        </p>
       <?php
       }
 
@@ -109,88 +108,83 @@ namespace UsabilityDynamics\WPP {
        * Initialize the DataTable View
        *
        */
-      function data_tables_script( $args = '' ) {
-        ?>
+      function data_tables_script( $args = '' ) { ?>
         <script type="text/javascript">
-        var wp_list_table;
-        var wp_table_column_ids = {}
+          var wp_list_table;
+          var wp_table_column_ids = {}
 
-        <?php foreach($this->column_ids as $col_id => $col_slug) { ?>
-        wp_table_column_ids['<?php echo $col_slug; ?>'] = '<?php echo $col_id; ?>';
-        <?php } ?>
+          <?php foreach($this->column_ids as $col_id => $col_slug) { ?>
+          wp_table_column_ids['<?php echo $col_slug; ?>'] = '<?php echo $col_id; ?>';
+          <?php } ?>
 
-        jQuery( document ).ready( function() {
+          jQuery( document ).ready( function() {
 
-          wp_list_table = jQuery( "#wp-list-table" ).dataTable({
-            "sPaginationType": "full_numbers",
-            "sDom": 'prtpl',
-            "iDisplayLength": <?php echo $this->_args['per_page']; ?>,
-            "bAutoWidth": false,
-            "oLanguage": {
-              "sLengthMenu": wpp.strings.dtables.display + ' <select><option value="25">25 </option><option value="50">50 </option><option value="100">100</option><option value="-1">' + wpp.strings.dtables.all + ' </option></select> ' + wpp.strings.dtables.records,
-              "sProcessing": '<div class="ajax_loader_overview"></div>'
-            },
-            "iColumns": <?php echo count($this->aoColumnDefs); ?>,
-            "bProcessing": true,
-            "bServerSide": true,
-            "aoColumnDefs": [<?php echo implode(',', $this->aoColumnDefs); ?>],
-            "sAjaxSource": wpp.instance.ajax_url + '?&action=<?php echo $this->_args['ajax_action']; ?>',
-            "fnServerData": function( sSource, aoData, fnCallback ) {
+            wp_list_table = jQuery( "#wp-list-table" ).dataTable({
+              "sPaginationType": "full_numbers",
+              "sDom": 'prtpl',
+              "iDisplayLength": <?php echo $this->_args['per_page']; ?>,
+              "bAutoWidth": false,
+              "oLanguage": {
+                "sLengthMenu": wpp.strings.dtables.display + ' <select><option value="25">25 </option><option value="50">50 </option><option value="100">100</option><option value="-1">' + wpp.strings.dtables.all + ' </option></select> ' + wpp.strings.dtables.records,
+                "sProcessing": '<div class="ajax_loader_overview"></div>'
+              },
+              "iColumns": <?php echo count($this->aoColumnDefs); ?>,
+              "bProcessing": true,
+              "bServerSide": true,
+              "aoColumnDefs": [<?php echo implode(',', $this->aoColumnDefs); ?>],
+              "sAjaxSource": wpp.instance.ajax_url + '?&action=<?php echo $this->_args['ajax_action']; ?>',
+              "fnServerData": function( sSource, aoData, fnCallback ) {
 
-              if ( typeof aoData != 'object' ) {
-                aoData.push({
-                  name: 'wpp_filter_vars',
-                  value: jQuery( '#<?php echo $this->table_scope; ?>-filter' ).serialize()
+                if ( typeof aoData != 'object' ) {
+                  aoData.push({
+                    name: 'wpp_filter_vars',
+                    value: jQuery( '#<?php echo $this->table_scope; ?>-filter' ).serialize()
+                  });
+                } else {
+                  aoData.wpp_filter_vars = jQuery( '#<?php echo $this->table_scope; ?>-filter' ).serialize();
+                }
+
+                jQuery.ajax({
+                  "dataType": 'json',
+                  "type": "POST",
+                  "url": sSource,
+                  "data": aoData,
+                  "success": [ fnCallback, wpp.overview.initialize() ]
                 });
-              } else {
-                aoData.wpp_filter_vars = jQuery( '#<?php echo $this->table_scope; ?>-filter' ).serialize();
-              }
 
-              jQuery.ajax({
-                "dataType": 'json',
-                "type": "POST",
-                "url": sSource,
-                "data": aoData,
-                "success": [fnCallback, wpp.overview.initialize()]
-              });
+              },
+              "aoColumns": [ <?php echo implode(",", $this->aoColumns); ?> ],
+              "fnDrawCallback": wp_list_table_do_columns
+            });
 
-            },
-            "aoColumns": [<?php echo implode(",", $this->aoColumns); ?>],
-            "fnDrawCallback": function() {
-              wp_list_table_do_columns();
-            }
+            /* Search by Filter */
+            jQuery( "#<?php echo $this->table_scope; ?>-filter #search-submit" ).click( function( event ) {
+              event.preventDefault();
+              wp_list_table.fnDraw();
+              return false;
+            });
+
+            jQuery( '.metabox-prefs' ).change( wp_list_table_do_columns );
+
           });
 
-          /* Search by Filter */
-          jQuery( "#<?php echo $this->table_scope; ?>-filter #search-submit" ).click( function( event ) {
-            event.preventDefault();
-            wp_list_table.fnDraw();
-            return false;
-          });
+          //** Check which columns are hidden, and hide data table columns */
+          function wp_list_table_do_columns() {
+            // Hide any "hidden" columns from table
+            var visible_columns = jQuery( '.hide-column-tog' ).filter( ':checked' ).map( function() {
+              return jQuery( this ).val();
+            });
+            var hidden_columns = jQuery( '.hide-column-tog' ).filter( ':not(:checked)' ).map( function() {
+              return jQuery( this ).val();
+            });
 
-          jQuery( '.metabox-prefs' ).change( function() {
-            wp_list_table_do_columns();
-          });
-
-        });
-
-        //** Check which columns are hidden, and hide data table columns */
-        function wp_list_table_do_columns() {
-          // Hide any "hidden" columns from table
-          var visible_columns = jQuery( '.hide-column-tog' ).filter( ':checked' ).map( function() {
-            return jQuery( this ).val();
-          });
-          var hidden_columns = jQuery( '.hide-column-tog' ).filter( ':not(:checked)' ).map( function() {
-            return jQuery( this ).val();
-          });
-
-          jQuery.each( hidden_columns, function( key, row_class ) {
-            jQuery( '#wp-list-table .' + row_class ).hide();
-          });
-          jQuery.each( visible_columns, function( key, row_class ) {
-            jQuery( '#wp-list-table .' + row_class ).show();
-          });
-        }
+            jQuery.each( hidden_columns, function( key, row_class ) {
+              jQuery( '#wp-list-table .' + row_class ).hide();
+            });
+            jQuery.each( visible_columns, function( key, row_class ) {
+              jQuery( '#wp-list-table .' + row_class ).show();
+            });
+          }
 
         </script>
       <?php
@@ -376,8 +370,7 @@ namespace UsabilityDynamics\WPP {
         $this->display_tablenav( 'top', $args );
         ?>
         <div class="wpp_above_overview_table"></div>
-        <table id="wp-list-table" class="wp-list-table <?php echo implode( ' ', $this->get_table_classes() ); ?>"
-          cellspacing="0">
+        <table id="wp-list-table" class="wp-list-table <?php echo implode( ' ', $this->get_table_classes() ); ?>" cellspacing="0" data-requires="udx.ui.data-table">
       <thead>
       <tr>
         <?php $this->print_column_headers(); ?>

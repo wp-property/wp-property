@@ -101,7 +101,7 @@ namespace UsabilityDynamics\WPP {
         unset( $args[ 'image_type' ] );
         unset( $args[ 'type' ] );
 
-        $result = WPP_Core::shortcode_property_overview( $args );
+        $result = self::shortcode_property_overview( $args );
 
         return $result;
       }

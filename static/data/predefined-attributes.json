@@ -1,0 +1,136 @@
+{
+  "property_type": {
+    "label": "Property Type",
+    "slug": "property_type",
+    "description": "Determines the layout and attributes settings",
+    "classification": "property_type",
+    "meta": true
+  },
+  "source_id": {
+    "label": "ID",
+    "slug": "source_id",
+    "description": "Internal unique identifier of every listing",
+    "classification": "numeric",
+    "usage": "unique",
+    "frequency_weight": "1",
+    "analysis_weight": "1",
+    "variations": {
+      "name": "ID",
+      "type": "wordpress"
+    },
+    "meta": false
+  },
+  "modification_time": {
+    "label": "Date Modified",
+    "slug": "modification_time",
+    "classification": "timestamp",
+    "description": "Date and time stamp of last modification",
+    "searchable": true,
+    "variations": {
+      "name": "post_modified",
+      "type": "wordpress"
+    },
+    "meta": false
+  },
+  "publish_time": {
+    "label": "Date Listed",
+    "slug": "publish_time",
+    "classification": "timestamp",
+    "searchable": true,
+    "variations": {
+      "name": "post_date",
+      "type": "wordpress"
+    },
+    "meta": false
+  },
+  "public_visibility": {
+    "label": "Public Visibility",
+    "slug": "public_visibility",
+    "classification": "string",
+    "searchable": false,
+    "values": [
+      "Publish", "Trash"
+    ],
+    "variations": {
+      "name": "post_status",
+      "type": "wordpress"
+    },
+    "meta": false
+  },
+  "title": {
+    "label": "Title",
+    "slug": "title",
+    "classification": "string",
+    "variations": {
+      "name": "post_title",
+      "type": "wordpress"
+    },
+    "meta": false
+  },
+  "description": {
+    "label": "Detailed Description",
+    "slug": "description",
+    "classification": "detail",
+    "variations": {
+      "name": "post_content",
+      "type": "wordpress"
+    },
+    "meta": false
+  },
+  "county": {
+    "label": "County",
+    "slug": "county",
+    "description": "Geo Location. The value is been generating automatically by Google Address Validator.",
+    "classification": "geo",
+    "meta": true
+  },
+  "country_code": {
+    "label": "Country Code",
+    "slug": "country_code",
+    "description": "Geo Location. The value is been generating automatically by Google Address Validator.",
+    "classification": "geo",
+    "meta": true
+  },
+  "city": {
+    "label": "City",
+    "slug": "city",
+    "description": "Geo Location. The value is been generating automatically by Google Address Validator.",
+    "classification": "geo",
+    "meta": true
+  },
+  "state_code": {
+    "label": "State Code",
+    "slug": "state_code",
+    "description": "Geo Location. The value is been generating automatically by Google Address Validator.",
+    "classification": "geo",
+    "meta": true
+  },
+  "postal_code": {
+    "label": "Postal Code",
+    "slug": "postal_code",
+    "description": "Geo Location. The value is been generating automatically by Google Address Validator.",
+    "classification": "geo",
+    "meta": true
+  },
+  "district": {
+    "label": "District",
+    "slug": "district",
+    "description": "Geo Location. The value is been generating automatically by Google Address Validator.",
+    "classification": "geo",
+    "meta": true
+  },
+  "route": {
+    "label": "Route",
+    "slug": "route",
+    "description": "Geo Location. The value is been generating automatically by Google Address Validator.",
+    "classification": "geo",
+    "meta": true
+  },
+  "street_number": {
+    "label": "Street Number",
+    "slug": "street_number",
+    "description": "Geo Location. The value is been generating automatically by Google Address Validator.",
+    "classification": "geo",
+    "meta": true
+  }
+}

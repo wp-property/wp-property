@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "a5e168af1d8dc2c4886552e8cbcfbacc",
+    "hash": "c9cc99ffa4cd2101c7c7c907d8f4cc75",
     "packages": [
         {
             "name": "datatables/datatables",
@@ -568,6 +568,188 @@
             "time": "2013-12-22 19:01:07"
         },
         {
+            "name": "usabilitydynamics/lib-api",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/lib-api",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/lib-api/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "usabilitydynamics/lib-utility": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "time": "2014-01-02 08:46:27"
+        },
+        {
+            "name": "usabilitydynamics/lib-requires",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/lib-requires",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/lib-requires/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "usabilitydynamics/lib-utility": "master"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib"
+                ]
+            },
+            "time": "2014-01-08 07:21:00"
+        },
+        {
+            "name": "usabilitydynamics/lib-settings",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/lib-settings",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/lib-settings/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "justinrainbow/json-schema": "1.1.*",
+                "usabilitydynamics/lib-utility": "*"
+            },
+            "type": "library",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "scripts/settings.js"
+                    ],
+                    "templates": [
+                        "views/new-installation.xhtml"
+                    ],
+                    "files": [
+                        "schemas/settings.json"
+                    ]
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "lib"
+                ]
+            },
+            "homepage": "http://github.com/usabilitydynamics/lib-settings",
+            "time": "2014-01-08 12:48:39"
+        },
+        {
+            "name": "usabilitydynamics/lib-ui",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/lib-ui",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/lib-ui/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "usabilitydynamics/lib-utility": "master"
+            },
+            "type": "library",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "scripts/ui.js"
+                    ],
+                    "styles": [
+                        "styles/ui.css",
+                        "styles/ui.less"
+                    ]
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "lib"
+                ]
+            },
+            "keywords": [
+                "api"
+            ],
+            "time": "2014-01-08 11:14:06"
+        },
+        {
+            "name": "usabilitydynamics/lib-utility",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/lib-utility",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/lib-utility/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib"
+                ]
+            },
+            "time": "2014-01-08 12:49:26"
+        },
+        {
+            "name": "usabilitydynamics/meta-box",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/UsabilityDynamics/wp-meta-box",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/UsabilityDynamics/wp-meta-box/archive/3.4.6.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "inc/fields",
+                    "inc/common.php",
+                    "inc/field.php",
+                    "inc/helpers.php",
+                    "inc/meta-box.php"
+                ]
+            },
+            "time": "2013-12-27 01:23:13"
+        }
+    ],
+    "packages-dev": [
+        {
             "name": "tecnick.com/tcpdf",
             "version": "dev-master",
             "source": {
@@ -625,229 +807,6 @@
             "time": "2014-01-03 19:11:14"
         },
         {
-            "name": "usabilitydynamics/lib-api",
-            "version": "master",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:UsabilityDynamics/lib-api",
-                "reference": "master"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/usabilitydynamics/lib-api/archive/master.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "usabilitydynamics/lib-utility": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "lib"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "time": "2014-01-02 08:46:27"
-        },
-        {
-            "name": "usabilitydynamics/lib-requires",
-            "version": "master",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:UsabilityDynamics/lib-requires",
-                "reference": "master"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/usabilitydynamics/lib-requires/archive/master.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "usabilitydynamics/lib-utility": "master"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "lib"
-                ]
-            },
-            "time": "2014-01-08 06:00:07"
-        },
-        {
-            "name": "usabilitydynamics/lib-settings",
-            "version": "master",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:UsabilityDynamics/lib-settings",
-                "reference": "master"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/usabilitydynamics/lib-settings/archive/master.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "justinrainbow/json-schema": "1.1.*",
-                "usabilitydynamics/lib-utility": "*"
-            },
-            "type": "library",
-            "extra": {
-                "component": {
-                    "scripts": [
-                        "scripts/settings.js"
-                    ],
-                    "templates": [
-                        "views/new-installation.xhtml"
-                    ],
-                    "files": [
-                        "schemas/settings.json"
-                    ]
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "lib"
-                ]
-            },
-            "homepage": "http://github.com/usabilitydynamics/lib-settings",
-            "time": "2014-01-08 06:02:12"
-        },
-        {
-            "name": "usabilitydynamics/lib-ui",
-            "version": "master",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:UsabilityDynamics/lib-ui",
-                "reference": "master"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/usabilitydynamics/lib-ui/archive/master.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "usabilitydynamics/lib-utility": "master"
-            },
-            "type": "library",
-            "extra": {
-                "component": {
-                    "scripts": [
-                        "scripts/ui.js"
-                    ],
-                    "styles": [
-                        "styles/ui.css",
-                        "styles/ui.less"
-                    ]
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "lib"
-                ]
-            },
-            "keywords": [
-                "api"
-            ],
-            "time": "2014-01-08 03:06:55"
-        },
-        {
-            "name": "usabilitydynamics/lib-utility",
-            "version": "master",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:UsabilityDynamics/lib-utility",
-                "reference": "master"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/usabilitydynamics/lib-utility/archive/master.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "lib"
-                ]
-            },
-            "time": "2014-01-08 05:21:23"
-        },
-        {
-            "name": "wordpress/meta-box",
-            "version": "master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rilwis/meta-box",
-                "reference": "master"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/rilwis/meta-box/archive/3.4.6.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "inc/fields",
-                    "inc/common.php",
-                    "inc/field.php",
-                    "inc/helpers.php",
-                    "inc/meta-box.php"
-                ]
-            },
-            "time": "2013-12-27 01:23:13"
-        },
-        {
-            "name": "zend/gdata",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/alchemy-fr/gdata.git",
-                "reference": "4ae96d26cec159d74ced57c89ebdcde754ece35d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/alchemy-fr/gdata/zipball/4ae96d26cec159d74ced57c89ebdcde754ece35d",
-                "reference": "4ae96d26cec159d74ced57c89ebdcde754ece35d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">5.2.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Zend_": "library"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "New BSD"
-            ],
-            "authors": [
-                {
-                    "name": "Zend Contributors",
-                    "homepage": "http://framework.zend.com/community/contributors"
-                }
-            ],
-            "description": "The Google Data APIs are a set of web services for read/write access to applications hosted by Google",
-            "homepage": "http://framework.zend.com/download/webservices",
-            "keywords": [
-                "gdata",
-                "zend"
-            ],
-            "time": "2013-01-30 15:31:21"
-        }
-    ],
-    "packages-dev": [
-        {
             "name": "usabilitydynamics/wp-property-admin-tools",
             "version": "master",
             "source": {
@@ -865,7 +824,7 @@
                 "php": ">=5.3"
             },
             "type": "library",
-            "time": "2014-01-06 17:40:45"
+            "time": "2014-01-08 09:28:03"
         },
         {
             "name": "usabilitydynamics/wp-property-agents",
@@ -1066,6 +1025,47 @@
             },
             "type": "library",
             "time": "2014-01-06 17:28:01"
+        },
+        {
+            "name": "zend/gdata",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alchemy-fr/gdata.git",
+                "reference": "4ae96d26cec159d74ced57c89ebdcde754ece35d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alchemy-fr/gdata/zipball/4ae96d26cec159d74ced57c89ebdcde754ece35d",
+                "reference": "4ae96d26cec159d74ced57c89ebdcde754ece35d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">5.2.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Zend_": "library"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "New BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Zend Contributors",
+                    "homepage": "http://framework.zend.com/community/contributors"
+                }
+            ],
+            "description": "The Google Data APIs are a set of web services for read/write access to applications hosted by Google",
+            "homepage": "http://framework.zend.com/download/webservices",
+            "keywords": [
+                "gdata",
+                "zend"
+            ],
+            "time": "2013-01-30 15:31:21"
         }
     ],
     "aliases": [
@@ -1073,10 +1073,8 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "tecnick.com/tcpdf": 20,
         "datatables/datatables": 20,
         "jms/serializer": 20,
-        "zend/gdata": 20,
         "natxet/cssmin": 20,
         "linkorb/jsmin-php": 20
     },

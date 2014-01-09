@@ -43,9 +43,15 @@
             
                 <li><a href="../classes/Bootstrap.html">Bootstrap</a></li>
             
+                <li><a href="../classes/Exception.html">Exception</a></li>
+            
+                <li><a href="../classes/Theme.html">Theme</a></li>
+            
                 <li><a href="../classes/UsabilityDynamics\WPP.Bootstrap.html">UsabilityDynamics\WPP.Bootstrap</a></li>
             
                 <li><a href="../classes/UsabilityDynamics\WPP.Loader.html">UsabilityDynamics\WPP.Loader</a></li>
+            
+                <li><a href="../classes/WP_Error.html">WP_Error</a></li>
             
                 <li><a href="../classes/WPP.html">WPP</a></li>
             
@@ -170,32 +176,6 @@ if( !function_exists( &#x27;wpp_recursive_unlink&#x27; ) ) {
   }
 }
 
-/**
- * Add &#x27;property&#x27; to the list of RSSable post_types.
- *
- * @todo Why is this a stand-alone function?
- *
- * @param string $request
- *
- * @return string
- * @author korotkov@ud
- * @since 1.36.2
- */
-if( !function_exists( &#x27;property_feed&#x27; ) ) {
-  function property_feed( $qv ) {
-
-    if( isset( $qv[ &#x27;feed&#x27; ] ) &amp;&amp; !isset( $qv[ &#x27;post_type&#x27; ] ) ) {
-      $qv[ &#x27;post_type&#x27; ] = get_post_types( $args = array(
-        &#x27;public&#x27;   =&gt; true,
-        &#x27;_builtin&#x27; =&gt; false
-      ) );
-      array_push( $qv[ &#x27;post_type&#x27; ], &#x27;post&#x27; );
-    }
-
-    return $qv;
-
-  }
-}
 
     </pre>
 </div>

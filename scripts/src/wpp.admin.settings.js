@@ -8,6 +8,9 @@ define( 'wpp.admin.settings', function( require, exports, module ) {
   console.log( 'module', module.id, 'loaded' );
 
   var wpp = wpp || {};
+  // Initialize Overview.
+  jQuery( document ).ready( wpp.ui.settings.ready );
+
 
   jQuery.extend( wpp, {
     ui: {
@@ -218,9 +221,6 @@ define( 'wpp.admin.settings', function( require, exports, module ) {
       }
     }
   });
-
-  // Initialize Overview.
-  jQuery( document ).ready( wpp.ui.settings.ready );
 
 });
 

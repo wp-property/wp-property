@@ -43,9 +43,15 @@
             
                 <li><a href="../classes/Bootstrap.html">Bootstrap</a></li>
             
+                <li><a href="../classes/Exception.html">Exception</a></li>
+            
+                <li><a href="../classes/Theme.html">Theme</a></li>
+            
                 <li><a href="../classes/UsabilityDynamics\WPP.Bootstrap.html">UsabilityDynamics\WPP.Bootstrap</a></li>
             
                 <li><a href="../classes/UsabilityDynamics\WPP.Loader.html">UsabilityDynamics\WPP.Loader</a></li>
+            
+                <li><a href="../classes/WP_Error.html">WP_Error</a></li>
             
                 <li><a href="../classes/WPP.html">WPP</a></li>
             
@@ -132,7 +138,25 @@ namespace UsabilityDynamics\WPP {
      */
     class Property_Overview extends \UsabilityDynamics\WPP\Shortcode {
 
-      function __construct( $atts = &#x27;&#x27;, $content = &#x27;&#x27; ) {
+      function __construct( $atts = &#x27;&#x27; ) {
+
+        // Ajax pagination for property_overview
+        add_action( &quot;wp_ajax_wpp_property_overview_pagination&quot;, array( &amp;$this, &quot;ajax_property_overview&quot; ) );
+        add_action( &quot;wp_ajax_nopriv_wpp_property_overview_pagination&quot;, array( &amp;$this, &quot;ajax_property_overview&quot; ) );
+
+        add_shortcode( &#x27;property_overview&#x27;, array( &amp;$this, &#x27;shortcode_property_overview&#x27; ) );
+
+      }
+
+      /**
+       * The Actual Shortcode
+       *
+       * @param string $atts
+       * @param string $content
+       *
+       * @return mixed|string|void
+       */
+      public function shortcode( $atts = &#x27;&#x27;, $content = &#x27;&#x27; ) {
         global $wp_properties, $wpp_query, $property, $post, $wp_query;
 
         \UsabilityDynamics\WPP\Utility::wp_enqueue_script( &#x27;jquery-ui-widget&#x27; );

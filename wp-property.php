@@ -6,7 +6,7 @@
  * Author: Usability Dynamics, Inc.
  * Version: 2.0.0
  * Author URI: http://usabilitydynamics.com
- * Network: True
+ * Network: False
  *
  * Copyright 2012-2014  Usability Dynamics, Inc.   ( email : info@usabilitydynamics.com )
  *

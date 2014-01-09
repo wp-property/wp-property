@@ -27,7 +27,7 @@ add_action( 'wpp:save_property', function( $id, $context ) {
 });
 
 if( !class_exists( 'WPP_Core' ) ) {
-  class WPP_Core extends \UsabilityDynamics\WPP\Bootstrap {}
+  final class WPP_Core extends \UsabilityDynamics\WPP\Bootstrap {}
 }
 
 if( !class_exists( 'WPP_F' ) ) {

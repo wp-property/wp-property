@@ -43,9 +43,15 @@
             
                 <li><a href="../classes/Bootstrap.html">Bootstrap</a></li>
             
+                <li><a href="../classes/Exception.html">Exception</a></li>
+            
+                <li><a href="../classes/Theme.html">Theme</a></li>
+            
                 <li><a href="../classes/UsabilityDynamics\WPP.Bootstrap.html">UsabilityDynamics\WPP.Bootstrap</a></li>
             
                 <li><a href="../classes/UsabilityDynamics\WPP.Loader.html">UsabilityDynamics\WPP.Loader</a></li>
+            
+                <li><a href="../classes/WP_Error.html">WP_Error</a></li>
             
                 <li><a href="../classes/WPP.html">WPP</a></li>
             
@@ -233,10 +239,14 @@ namespace UsabilityDynamics\WPP {
             &quot;sAjaxSource&quot;: wpp.instance.ajax_url + &#x27;?&amp;action=&lt;?php echo $this-&gt;_args[&#x27;ajax_action&#x27;]; ?&gt;&#x27;,
             &quot;fnServerData&quot;: function( sSource, aoData, fnCallback ) {
 
-              aoData.push({
-                name: &#x27;wpp_filter_vars&#x27;,
-                value: jQuery( &#x27;#&lt;?php echo $this-&gt;table_scope; ?&gt;-filter&#x27; ).serialize()
-              });
+              if ( typeof aoData != &#x27;object&#x27; ) {
+                aoData.push({
+                  name: &#x27;wpp_filter_vars&#x27;,
+                  value: jQuery( &#x27;#&lt;?php echo $this-&gt;table_scope; ?&gt;-filter&#x27; ).serialize()
+                });
+              } else {
+                aoData.wpp_filter_vars = jQuery( &#x27;#&lt;?php echo $this-&gt;table_scope; ?&gt;-filter&#x27; ).serialize();
+              }
 
               jQuery.ajax({
                 &quot;dataType&quot;: &#x27;json&#x27;,

@@ -15,6 +15,67 @@ namespace UsabilityDynamics\WPP {
     class Mail {
 
       /**
+       * Wrapper function to send notification with WP-CRM or without one
+       *
+       * Migrated out of UD_API
+       *
+       * @param array|mixed $args ['message']          using in email notification
+       *
+       * @uses self::replace_data()
+       * @uses wp_crm_send_notification()
+       * @return boolean false if notification was not sent successfully
+       * @autor odokienko@UD
+       */
+      static function send_notification( $args = array() ) {
+
+        $args = wp_parse_args( $args, array(
+          'ignore_wp_crm'   => false,
+          'user'            => false,
+          'trigger_action'  => false,
+          'data'            => array(),
+          'message'         => '',
+          'subject'         => '',
+          'crm_log_message' => ''
+        ) );
+
+        if( is_numeric( $args[ 'user' ] ) ) {
+          $args[ 'user' ] = get_user_by( 'id', $args[ 'user' ] );
+        } elseif( filter_var( $args[ 'user' ], FILTER_VALIDATE_EMAIL ) ) {
+          $args[ 'user' ] = get_user_by( 'email', $args[ 'user' ] );
+        } elseif( is_string( $args[ 'user' ] ) ) {
+          $args[ 'user' ] = get_user_by( 'login', $args[ 'user' ] );
+        }
+
+        if( !is_object( $args[ 'user' ] ) || empty( $args[ 'user' ]->data->user_email ) ) {
+          return false;
+        }
+
+        if( function_exists( 'wp_crm_send_notification' ) &&
+          empty( $args[ 'ignore_wp_crm' ] )
+        ) {
+
+          if( !empty( $args[ 'crm_log_message' ] ) ) {
+            wp_crm_add_to_user_log( $args[ 'user' ]->ID, self::replace_data( $args[ 'crm_log_message' ], $args[ 'data' ] ) );
+          }
+
+          if( !empty( $args[ 'trigger_action' ] ) && is_callable( array( 'WP_CRM_N', 'get_trigger_action_notification' ) ) ) {
+            $notifications = WP_CRM_N::get_trigger_action_notification( $args[ 'trigger_action' ] );
+            if( !empty( $notifications ) ) {
+              return wp_crm_send_notification( $args[ 'trigger_action' ], $args[ 'data' ] );
+            }
+          }
+
+        }
+
+        if( empty( $args[ 'message' ] ) ) {
+          return false;
+        }
+
+        return wp_mail( $args[ 'user' ]->data->user_email, self::replace_data( $args[ 'subject' ], $args[ 'data' ] ), self::replace_data( $args[ 'message' ], $args[ 'data' ] ) );
+
+      }
+
+      /**
        * Send Notification
        *
        * @param type $notification

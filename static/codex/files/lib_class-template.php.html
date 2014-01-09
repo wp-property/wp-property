@@ -43,9 +43,15 @@
             
                 <li><a href="../classes/Bootstrap.html">Bootstrap</a></li>
             
+                <li><a href="../classes/Exception.html">Exception</a></li>
+            
+                <li><a href="../classes/Theme.html">Theme</a></li>
+            
                 <li><a href="../classes/UsabilityDynamics\WPP.Bootstrap.html">UsabilityDynamics\WPP.Bootstrap</a></li>
             
                 <li><a href="../classes/UsabilityDynamics\WPP.Loader.html">UsabilityDynamics\WPP.Loader</a></li>
+            
+                <li><a href="../classes/WP_Error.html">WP_Error</a></li>
             
                 <li><a href="../classes/WPP.html">WPP</a></li>
             
@@ -110,6 +116,81 @@ namespace UsabilityDynamics\WPP {
   if( !class_exists( &#x27;UsabilityDynamics\WPP\Template&#x27; ) ) {
 
     class Template {
+
+      /**
+       * Find and Load Template
+       *
+       * @author potanin@UD
+       * @since 2.0.0
+       *
+       * @param       $name
+       * @param array $args
+       *
+       * @internal param bool $once
+       *
+       * @return mixed
+       */
+      static function load( $name, $args = array() ) {
+
+        $args = (object) wp_parse_args( $args, array(
+          &#x27;once&#x27;   =&gt; false,
+          &#x27;prefix&#x27; =&gt; &#x27;property-&#x27;,
+        ) );
+
+        // Add prefix if not already there.
+        if( strpos( $name, $args-&gt;prefix ) !== 0 ) {
+          $name = $args-&gt;prefix . $name;
+        }
+
+        if( $_path = self::locate( $name ) ) {
+
+          if( $args-&gt;once ) {
+            return include_once( $_path );
+          }
+
+          return include( $_path );
+
+        }
+
+        return false;
+
+      }
+
+      /**
+       * Locate template by checking known locations
+       *
+       * @author potanin@UD
+       * @since 2.0.0
+       *
+       * @param bool $name
+       *
+       * @return bool
+       */
+      static function locate( $name = false ) {
+
+        if( !$name || !defined( &#x27;WPP_Path&#x27; ) || !WPP_Path ) {
+          return false;
+        }
+
+        $_paths = apply_filters( &#x27;wpp:template_paths&#x27;, array(
+          trailingslashit( get_template_directory() ) . &#x27;wpp/&#x27;,
+          trailingslashit( get_template_directory() ),
+          trailingslashit( get_stylesheet_directory() ) . &#x27;wpp/&#x27;,
+          trailingslashit( get_stylesheet_directory() ),
+          WPP_Path . &#x27;templates/&#x27;
+        ) );
+
+        foreach( (array) $_paths as $path ) {
+
+          if( file_exists( $path ) ) {
+            return $path;
+          }
+
+        }
+
+        return false;
+
+      }
 
       /**
        * Hooks Setter

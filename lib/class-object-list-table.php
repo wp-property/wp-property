@@ -215,7 +215,7 @@ namespace UsabilityDynamics\WPP {
                 $r .= '<ul class="wpp_overview_column_stats wpp_something_advanced_wrapper">' . implode( '', $display_stats ) . '</ul>';
               }
 
-              break;
+            break;
 
             case 'features':
               $features      = get_the_terms( $post->ID, "property_feature" );
@@ -237,29 +237,33 @@ namespace UsabilityDynamics\WPP {
                 $r .= implode( $features_html, ", " );
               }
 
-              break;
+            break;
 
+            /**
+             * Output Listing Thumbnail
+             *
+             * This used to utilize wpp_get_image_link() method but seemed unnecessary.
+             *
+             */
             case 'thumbnail':
 
               if( $post->featured_image ) {
 
                 $overview_thumb_type = $wp_properties[ 'configuration' ][ 'admin_ui' ][ 'overview_table_thumbnail_size' ];
 
-                if( empty( $overview_thumb_type ) ) {
-                  $overview_thumb_type = 'thumbnail';
-                }
-
-                $image_thumb_obj = \wpp_get_image_link( $post->featured_image, $overview_thumb_type, array( 'return' => 'array' ) );
+                $r .= wp_get_attachment_image( $post->featured_image, $overview_thumb_type ? $overview_thumb_type : 'thumbnail', false, array(
+                  "data-requires" => "udx.fancybox",
+                  "data-large-image-src" => reset( wp_get_attachment_image_src( $post->featured_image, 'large' ) ),
+                  "data-attachment-id" => $post->featured_image,
+                  "data-post-id" => $post->ID,
+                  "title" => $post->post_title,
+                  "rel" => "overview_group",
+                  "class" => "fancybox"
+                ));
 
               }
 
-              if( !empty( $image_thumb_obj ) ) {
-                $r .= '<a href="' . $post->images[ 'large' ] . '" class="fancybox" rel="overview_group" title="' . $post->post_title . '"><img src="' . $image_thumb_obj[ 'url' ] . '" width="' . $image_thumb_obj[ 'width' ] . '" height="' . $image_thumb_obj[ 'height' ] . '" /></a>';
-              } else {
-                $r .= " - ";
-              }
-
-              break;
+            break;
 
             case 'featured':
 
