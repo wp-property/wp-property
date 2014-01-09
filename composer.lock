@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "b04247eb979c5368916ad1aafe5051ee",
+    "hash": "541da7195ba00594161ae6cd2074d5f4",
     "packages": [
         {
             "name": "datatables/datatables",
@@ -566,6 +566,23 @@
                 "type"
             ],
             "time": "2013-12-22 19:01:07"
+        },
+        {
+            "name": "usabilitydynamics/js-colorpicker",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/js-colorpicker",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/UsabilityDynamics/js-colorpicker/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "component",
+            "time": "2014-01-09 15:36:27"
         },
         {
             "name": "usabilitydynamics/lib-api",
