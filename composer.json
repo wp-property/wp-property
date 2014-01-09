@@ -43,7 +43,8 @@
     "usabilitydynamics/lib-ui": "master",
     "usabilitydynamics/lib-settings": "master",
     "usabilitydynamics/lib-requires": "master",
-    "usabilitydynamics/lib-utility": "master"
+    "usabilitydynamics/lib-utility": "master",
+    "usabilitydynamics/js-colorpicker": "dev-master"
   },
   "require-dev": {
     "usabilitydynamics/wp-property-admin-tools": "master",
