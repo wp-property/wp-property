@@ -230,6 +230,13 @@
             "fors": {},
             "namespaces": {}
         },
+        "lib/class-upgrader-skin.php": {
+            "name": "lib/class-upgrader-skin.php",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "lib/class-utility.php": {
             "name": "lib/class-utility.php",
             "modules": {},
@@ -1262,6 +1269,17 @@
         {
             "file": "lib/class-bootstrap.php",
             "line": 118,
+            "description": "Vendor Path.",
+            "static": 1,
+            "itemtype": "property",
+            "name": "$_vendor",
+            "type": "{String}",
+            "class": "UsabilityDynamics\\WPP.Bootstrap",
+            "namespace": "UsabilityDynamics\\WPP"
+        },
+        {
+            "file": "lib/class-bootstrap.php",
+            "line": 127,
             "description": "URL to Base.",
             "static": 1,
             "itemtype": "property",
@@ -1272,7 +1290,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 127,
+            "line": 136,
             "description": "Constructor.\n\nUsabilityDynamics components should be avialable.\n- class_exists( '\\UsabilityDynamics\\API' );\n- class_exists( '\\UsabilityDynamics\\Utility' );",
             "itemtype": "method",
             "name": "__construct",
@@ -1280,21 +1298,22 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 226,
+            "line": 238,
             "description": "Load settings into $wp_properties and save settings if nonce exists",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 234,
-            "description": "Check for premium features and load them",
-            "updated": "1.6",
-            "since": "0.624",
+            "line": 246,
+            "description": "Load and Instantiate Available Modules",
+            "todo": [
+                "Add some logic to prevent broken libraries form being re-downloaded on every request by being disabled in settings on failure."
+            ],
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 326,
+            "line": 268,
             "description": "Autoload Vendor Dependencies",
             "author": "potanin@UD",
             "since": "2.0.0",
@@ -1302,7 +1321,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 347,
+            "line": 289,
             "description": "Define Plugin Constants",
             "author": "potanin@UD",
             "since": "2.0.0",
@@ -1310,51 +1329,51 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 367,
+            "line": 310,
             "description": "Register Taxonomies.",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 445,
+            "line": 388,
             "description": "Registers post types and taxonomies.",
             "since": "1.31.0",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 487,
+            "line": 430,
             "description": "Regiser CSS Assets.",
             "author": "potanin@UD",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 494,
+            "line": 437,
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 519,
+            "line": 462,
             "description": "Register JavaScript Libraries",
             "author": "potanin@UD",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 582,
+            "line": 525,
             "description": "Find and Load Widgets.",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 592,
+            "line": 535,
             "description": "Find and Load Shortcodes.",
             "class": "UsabilityDynamics\\WPP.Loader"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 615,
+            "line": 558,
             "description": "Get Setting.\n\n   // Get Setting\n   $wpp::get( 'my_key' )",
             "itemtype": "method",
             "name": "get",
@@ -1364,7 +1383,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 631,
+            "line": 574,
             "description": "Set Setting.",
             "usage": "// Set Setting\n   $wpp::set( 'my_key', 'my-value' )",
             "itemtype": "method",
@@ -1375,14 +1394,15 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 649,
+            "line": 592,
             "description": "Add 'property' to the list of RSSable post_types.",
             "params": [
                 {
-                    "name": "string",
-                    "description": "$request"
+                    "name": "$qv",
+                    "description": ""
                 }
             ],
+            "internal": "param string $request",
             "return": {
                 "description": "string"
             },
@@ -1392,7 +1412,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 672,
+            "line": 617,
             "description": "Run on plugin activation.\n\nAs of WP 3.1 this is not ran on automatic update.",
             "todo": [
                 "Add check for cron usage via XMLI or other since cron.php is removed."
@@ -1402,13 +1422,13 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 689,
+            "line": 634,
             "description": "Plugin Deactivation",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 703,
+            "line": 648,
             "description": "Renders a critical failure.",
             "example": [
                 "\n   self::fail( 'Critical plugin failure!' );"
@@ -1423,14 +1443,14 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 715,
+            "line": 660,
             "description": "Adds thumbnail feature to WP-Property pages\n\nThere is some weird issue with thie method.\nIf its named after_setup_theme and legacy.php extends Bootstrap with WPP_Core, this method loses context when triggered.",
             "since": "0.60",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 737,
+            "line": 682,
             "description": "Called on init, as early as possible.",
             "todo": [
                 "Ensure $this->settings_action() his is necessary."
@@ -1444,14 +1464,14 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 772,
+            "line": 717,
             "description": "Setup widgets and widget areas.",
             "since": "1.31.0",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 835,
+            "line": 780,
             "description": "Secondary WPP Initialization ran towards the end of init()\n\nLoads things that we want make accessible for modification via other plugins.",
             "since": "1.31.0",
             "uses": [
@@ -1462,63 +1482,63 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 848,
+            "line": 795,
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 858,
+            "line": 805,
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 865,
+            "line": 812,
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 870,
+            "line": 817,
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 880,
+            "line": 827,
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 883,
+            "line": 830,
+            "class": "Bootstrap"
+        },
+        {
+            "file": "lib/class-bootstrap.php",
+            "line": 833,
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
             "line": 886,
-            "class": "Bootstrap"
-        },
-        {
-            "file": "lib/class-bootstrap.php",
-            "line": 939,
             "description": "Performs front-end pre-header functionality\n\nThis function is not called on amdin side\nLoads conditional CSS styles",
             "since": "1.11",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1137,
+            "line": 1084,
             "description": "Runs pre-header functions on admin-side only\n\nChecks if plugin has been updated.",
             "since": "1.10",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1191,
+            "line": 1143,
             "description": "Register metaboxes.",
             "global": "type $wpdb",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1209,
+            "line": 1161,
             "description": "Check if WP-Property RaaS Active",
             "return": {
                 "description": "bool"
@@ -1527,22 +1547,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1218,
-            "description": "Check if premium feature is installed or not",
-            "params": [
-                {
-                    "name": "string",
-                    "description": "$slug . Slug of premium feature"
-                }
-            ],
-            "return": {
-                "description": "boolean."
-            },
-            "class": "Bootstrap"
-        },
-        {
-            "file": "lib/class-bootstrap.php",
-            "line": 1249,
+            "line": 1170,
             "description": "Checks updates for premium features by AJAX\nPrints results to body.",
             "global": "array $wp_properties",
             "return": {
@@ -1552,7 +1557,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1270,
+            "line": 1191,
             "description": "Run manually when a version mismatch is detected.\n\nHolds official current version designation.\nCalled in admin_init hook.",
             "since": "1.10",
             "version": "1.13",
@@ -1560,26 +1565,26 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1311,
+            "line": 1232,
             "description": "Moved from WPP_Legacy",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1325,
+            "line": 1246,
             "description": "Upgrade:\n- WPP postmeta data were saved to database with '&ndash;' instead of '-' in value. Function encode_sql_input was modified and it doesn't change '-' to '&ndash' anymore\nSo to prevent search result issues we need to update database data.\npeshkov@UD",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1343,
+            "line": 1264,
             "description": "Adds \"Settings\" link to the plugin overview page\n\n *",
             "since": "0.60",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1360,
+            "line": 1281,
             "description": "Can enqueue scripts on specific pages, and print content into head",
             "uses": [
                 "$current_screen global variable"
@@ -1589,21 +1594,21 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1471,
+            "line": 1392,
             "description": "Sets up additional pages and loads their scripts",
             "since": "0.5",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1492,
+            "line": 1413,
             "description": "Next used to add custom submenu page 'All Properties' with Javascript dataTable",
             "author": "korotkov@UD",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1525,
+            "line": 1446,
             "description": "Modify admin body class on property pages for CSS",
             "todo": [
                 "$current_screen does not seem to work in 3.8."
@@ -1613,7 +1618,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1551,
+            "line": 1472,
             "description": "Fixed property pages being seen as 404 pages\n\nRan on parse_request;\n\nWP handle_404() function decides if current request should be a 404 page\nMarking the global variable $wp_query->is_search to true makes the function\nassume that the request is a search.",
             "params": [
                 {
@@ -1626,40 +1631,40 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1613,
+            "line": 1534,
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1638,
+            "line": 1559,
             "description": "Modifies post content",
             "since": "1.04",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1668,
+            "line": 1589,
             "description": "Inserts content into the \"Publish\" metabox on property pages",
             "since": "1.04",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1701,
+            "line": 1622,
             "description": "Removes \"quick edit\" link on property type objects\n\nCalled in via page_row_actions filter",
             "since": "0.5",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1719,
+            "line": 1640,
             "description": "Adds property-relevant messages to the property post type object",
             "since": "0.5",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1752,
+            "line": 1673,
             "description": "Sets up property-type columns",
             "since": "0.54",
             "uses": [
@@ -1670,14 +1675,14 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1788,
+            "line": 1709,
             "description": "Sets up sortable columns columns",
             "since": "1.08",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1810,
+            "line": 1731,
             "description": "Checks settings data on accord with existing wp_properties data ( before option updates )",
             "params": [
                 {
@@ -1696,20 +1701,20 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1835,
+            "line": 1756,
             "description": "Hack to avoid issues with capabilities and views.",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1855,
+            "line": 1776,
             "description": "Adds all WPP custom capabilities to administrator role.\nPremium feature capabilities are added by filter in this function, see below.",
             "author": "peshkov@UD",
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1901,
+            "line": 1822,
             "description": "Generates javascript file with localization.\nAdds localization support to all WP-Property scripts.\nAccessible via wp-ajax.php calls.",
             "since": "1.37.3.2",
             "author": "peshkov@UD",
@@ -1717,12 +1722,12 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1916,
+            "line": 1837,
             "class": "Bootstrap"
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1932,
+            "line": 1853,
             "description": "WPP Contextual Help",
             "global": "$current_screen",
             "params": [
@@ -1736,7 +1741,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1954,
+            "line": 1898,
             "description": "Returns specific instance data which is used by javascript\nJavascript Reference: window.wpp.instance",
             "author": "peshkov@UD",
             "since": "1.38",
@@ -1747,7 +1752,7 @@
         },
         {
             "file": "lib/class-bootstrap.php",
-            "line": 1984,
+            "line": 1928,
             "description": "Get the WPP Singleton\n\nConcept based on the CodeIgniter get_instance() concept.",
             "example": [
                 "\n\n     var settings = WPP::get_instance()->Settings;\n     var api = WPP::$instance()->API;"
@@ -2416,44 +2421,125 @@
         },
         {
             "file": "lib/class-module.php",
-            "line": 9,
-            "description": "Feature Upgrader",
-            "package": "UsabilityDynamics\\WPP",
-            "class": "Theme"
-        },
-        {
-            "file": "lib/class-module.php",
-            "line": 16,
-            "description": "Headers Module.",
-            "static": 1,
-            "access": "private",
+            "line": 11,
+            "description": "Recognized Headers.",
             "var": "array",
             "class": "Theme"
         },
         {
             "file": "lib/class-module.php",
-            "line": 36,
-            "description": "Default themes.",
-            "static": 1,
-            "access": "private",
-            "var": "array",
+            "line": 27,
+            "description": "Module Declared Capabilities.",
             "class": "Theme"
         },
         {
             "file": "lib/class-module.php",
-            "line": 50,
-            "description": "Get a raw, unformatted theme header.\n\nThe header is sanitized, but is not translated, and is not marked up for display.\nTo get a theme header for display, use the display() method.\n\nUse the get_template() method, not the 'Template' header, for finding the template.\nThe 'Template' header is only good for what was written in the style.css, while\nget_template() takes into account where WordPress actually located the theme and\nwhether it is actually valid.",
-            "access": "public",
-            "since": "3.4.0",
+            "line": 33,
+            "description": "Module Settings Store.",
+            "class": "Theme"
+        },
+        {
+            "file": "lib/class-module.php",
+            "line": 39,
+            "description": "Get Setting.",
             "params": [
                 {
-                    "name": "string",
-                    "description": "$header Theme header. Name, Description, Author, Version, ThemeURI, AuthorURI, Status, Tags."
+                    "name": "$key",
+                    "description": ""
+                },
+                {
+                    "name": "$default",
+                    "description": ""
+                }
+            ],
+            "internal": "param $value",
+            "return": {
+                "description": "null"
+            },
+            "class": "Theme"
+        },
+        {
+            "file": "lib/class-module.php",
+            "line": 53,
+            "description": "Set Setting.",
+            "params": [
+                {
+                    "name": "$key",
+                    "description": ""
+                },
+                {
+                    "name": "$value",
+                    "description": ""
                 }
             ],
             "return": {
-                "description": "string String on success, false on failure."
+                "description": "null"
             },
+            "class": "Theme"
+        },
+        {
+            "file": "lib/class-module.php",
+            "line": 65,
+            "description": "Activate Module.",
+            "params": [
+                {
+                    "name": "null",
+                    "description": "$args"
+                }
+            ],
+            "internal": "param string $id",
+            "class": "Theme"
+        },
+        {
+            "file": "lib/class-module.php",
+            "line": 76,
+            "description": "Deactivate Module.",
+            "params": [
+                {
+                    "name": "null",
+                    "description": "$args"
+                }
+            ],
+            "internal": "param string $id",
+            "class": "Theme"
+        },
+        {
+            "file": "lib/class-module.php",
+            "line": 87,
+            "description": "Upgrade Installed Feature.",
+            "params": [
+                {
+                    "name": "null",
+                    "description": "$args"
+                }
+            ],
+            "internal": "param $id",
+            "return": {
+                "description": "bool|void"
+            },
+            "class": "Theme"
+        },
+        {
+            "file": "lib/class-module.php",
+            "line": 148,
+            "description": "Install Feature from Repository.",
+            "params": [
+                {
+                    "name": "null",
+                    "description": "$args"
+                }
+            ],
+            "internal": "param $id",
+            "return": {
+                "description": "bool|void"
+            },
+            "class": "Theme"
+        },
+        {
+            "file": "lib/class-module.php",
+            "line": 208,
+            "description": "Check for premium features and load them",
+            "since": "2.0.0",
             "class": "Theme"
         },
         {
@@ -2734,6 +2820,20 @@
                 }
             ],
             "class": "WPP_UI"
+        },
+        {
+            "file": "lib/class-upgrader-skin.php",
+            "line": 2,
+            "description": "Class Module",
+            "class": "WP_Error"
+        },
+        {
+            "file": "lib/class-upgrader-skin.php",
+            "line": 12,
+            "description": "Silent SKin",
+            "package": "WordPress",
+            "subpackage": "Upgrader_Skin",
+            "class": "WP_Error"
         },
         {
             "file": "lib/class-utility.php",
@@ -4123,28 +4223,28 @@
             "line": " lib/class-bootstrap.php:54"
         },
         {
-            "message": "unknown tag: updated",
-            "line": " lib/class-bootstrap.php:234"
-        },
-        {
             "message": "unknown tag: usage",
-            "line": " lib/class-bootstrap.php:631"
+            "line": " lib/class-bootstrap.php:574"
+        },
+        {
+            "message": "unknown tag: internal",
+            "line": " lib/class-bootstrap.php:592"
         },
         {
             "message": "unknown tag: access",
-            "line": " lib/class-bootstrap.php:737"
+            "line": " lib/class-bootstrap.php:682"
         },
         {
             "message": "unknown tag: access",
-            "line": " lib/class-bootstrap.php:835"
+            "line": " lib/class-bootstrap.php:780"
         },
         {
             "message": "unknown tag: version",
-            "line": " lib/class-bootstrap.php:1270"
+            "line": " lib/class-bootstrap.php:1191"
         },
         {
             "message": "unknown tag: access",
-            "line": " lib/class-bootstrap.php:1752"
+            "line": " lib/class-bootstrap.php:1673"
         },
         {
             "message": "unknown tag: version",
@@ -4235,28 +4335,32 @@
             "line": " lib/class-meta-box.php:25"
         },
         {
-            "message": "unknown tag: package",
-            "line": " lib/class-module.php:9"
-        },
-        {
-            "message": "unknown tag: access",
-            "line": " lib/class-module.php:16"
-        },
-        {
             "message": "unknown tag: var",
-            "line": " lib/class-module.php:16"
+            "line": " lib/class-module.php:11"
         },
         {
-            "message": "unknown tag: access",
-            "line": " lib/class-module.php:36"
+            "message": "unknown tag: internal",
+            "line": " lib/class-module.php:39"
         },
         {
-            "message": "unknown tag: var",
-            "line": " lib/class-module.php:36"
+            "message": "unknown tag: internal",
+            "line": " lib/class-module.php:65"
         },
         {
-            "message": "unknown tag: access",
-            "line": " lib/class-module.php:50"
+            "message": "unknown tag: internal",
+            "line": " lib/class-module.php:76"
+        },
+        {
+            "message": "unknown tag: internal",
+            "line": " lib/class-module.php:87"
+        },
+        {
+            "message": "unknown tag: internal",
+            "line": " lib/class-module.php:87"
+        },
+        {
+            "message": "unknown tag: internal",
+            "line": " lib/class-module.php:148"
         },
         {
             "message": "unknown tag: package",
@@ -4325,6 +4429,14 @@
         {
             "message": "unknown tag: package",
             "line": " lib/class-ui.php:42"
+        },
+        {
+            "message": "unknown tag: package",
+            "line": " lib/class-upgrader-skin.php:12"
+        },
+        {
+            "message": "unknown tag: subpackage",
+            "line": " lib/class-upgrader-skin.php:12"
         },
         {
             "message": "unknown tag: version",
@@ -4948,223 +5060,219 @@
         },
         {
             "message": "Missing item type\nLoad settings into $wp_properties and save settings if nonce exists",
-            "line": " lib/class-bootstrap.php:226"
+            "line": " lib/class-bootstrap.php:238"
         },
         {
-            "message": "Missing item type\nCheck for premium features and load them",
-            "line": " lib/class-bootstrap.php:234"
+            "message": "Missing item type\nLoad and Instantiate Available Modules",
+            "line": " lib/class-bootstrap.php:246"
         },
         {
             "message": "Missing item type\nAutoload Vendor Dependencies",
-            "line": " lib/class-bootstrap.php:326"
+            "line": " lib/class-bootstrap.php:268"
         },
         {
             "message": "Missing item type\nDefine Plugin Constants",
-            "line": " lib/class-bootstrap.php:347"
+            "line": " lib/class-bootstrap.php:289"
         },
         {
             "message": "Missing item type\nRegister Taxonomies.",
-            "line": " lib/class-bootstrap.php:367"
+            "line": " lib/class-bootstrap.php:310"
         },
         {
             "message": "Missing item type\nRegisters post types and taxonomies.",
-            "line": " lib/class-bootstrap.php:445"
+            "line": " lib/class-bootstrap.php:388"
         },
         {
             "message": "Missing item type\nRegiser CSS Assets.",
-            "line": " lib/class-bootstrap.php:487"
+            "line": " lib/class-bootstrap.php:430"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:494"
+            "line": " lib/class-bootstrap.php:437"
         },
         {
             "message": "Missing item type\nRegister JavaScript Libraries",
-            "line": " lib/class-bootstrap.php:519"
+            "line": " lib/class-bootstrap.php:462"
         },
         {
             "message": "Missing item type\nFind and Load Widgets.",
-            "line": " lib/class-bootstrap.php:582"
+            "line": " lib/class-bootstrap.php:525"
         },
         {
             "message": "Missing item type\nFind and Load Shortcodes.",
-            "line": " lib/class-bootstrap.php:592"
+            "line": " lib/class-bootstrap.php:535"
         },
         {
             "message": "Missing item type\nAdd 'property' to the list of RSSable post_types.",
-            "line": " lib/class-bootstrap.php:649"
+            "line": " lib/class-bootstrap.php:592"
         },
         {
             "message": "Missing item type\nRun on plugin activation.\n\nAs of WP 3.1 this is not ran on automatic update.",
-            "line": " lib/class-bootstrap.php:672"
+            "line": " lib/class-bootstrap.php:617"
         },
         {
             "message": "Missing item type\nPlugin Deactivation",
-            "line": " lib/class-bootstrap.php:689"
+            "line": " lib/class-bootstrap.php:634"
         },
         {
             "message": "Missing item type\nRenders a critical failure.",
-            "line": " lib/class-bootstrap.php:703"
+            "line": " lib/class-bootstrap.php:648"
         },
         {
             "message": "Missing item type\nAdds thumbnail feature to WP-Property pages\n\nThere is some weird issue with thie method.\nIf its named after_setup_theme and legacy.php extends Bootstrap with WPP_Core, this method loses context when triggered.",
-            "line": " lib/class-bootstrap.php:715"
+            "line": " lib/class-bootstrap.php:660"
         },
         {
             "message": "Missing item type\nCalled on init, as early as possible.",
-            "line": " lib/class-bootstrap.php:737"
+            "line": " lib/class-bootstrap.php:682"
         },
         {
             "message": "Missing item type\nSetup widgets and widget areas.",
-            "line": " lib/class-bootstrap.php:772"
+            "line": " lib/class-bootstrap.php:717"
         },
         {
             "message": "Missing item type\nSecondary WPP Initialization ran towards the end of init()\n\nLoads things that we want make accessible for modification via other plugins.",
-            "line": " lib/class-bootstrap.php:835"
+            "line": " lib/class-bootstrap.php:780"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:848"
+            "line": " lib/class-bootstrap.php:795"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:858"
+            "line": " lib/class-bootstrap.php:805"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:865"
+            "line": " lib/class-bootstrap.php:812"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:870"
+            "line": " lib/class-bootstrap.php:817"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:880"
+            "line": " lib/class-bootstrap.php:827"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:883"
+            "line": " lib/class-bootstrap.php:830"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:886"
+            "line": " lib/class-bootstrap.php:833"
         },
         {
             "message": "Missing item type\nPerforms front-end pre-header functionality\n\nThis function is not called on amdin side\nLoads conditional CSS styles",
-            "line": " lib/class-bootstrap.php:939"
+            "line": " lib/class-bootstrap.php:886"
         },
         {
             "message": "Missing item type\nRuns pre-header functions on admin-side only\n\nChecks if plugin has been updated.",
-            "line": " lib/class-bootstrap.php:1137"
+            "line": " lib/class-bootstrap.php:1084"
         },
         {
             "message": "Missing item type\nRegister metaboxes.",
-            "line": " lib/class-bootstrap.php:1191"
+            "line": " lib/class-bootstrap.php:1143"
         },
         {
             "message": "Missing item type\nCheck if WP-Property RaaS Active",
-            "line": " lib/class-bootstrap.php:1209"
-        },
-        {
-            "message": "Missing item type\nCheck if premium feature is installed or not",
-            "line": " lib/class-bootstrap.php:1218"
+            "line": " lib/class-bootstrap.php:1161"
         },
         {
             "message": "Missing item type\nChecks updates for premium features by AJAX\nPrints results to body.",
-            "line": " lib/class-bootstrap.php:1249"
+            "line": " lib/class-bootstrap.php:1170"
         },
         {
             "message": "Missing item type\nRun manually when a version mismatch is detected.\n\nHolds official current version designation.\nCalled in admin_init hook.",
-            "line": " lib/class-bootstrap.php:1270"
+            "line": " lib/class-bootstrap.php:1191"
         },
         {
             "message": "Missing item type\nMoved from WPP_Legacy",
-            "line": " lib/class-bootstrap.php:1311"
+            "line": " lib/class-bootstrap.php:1232"
         },
         {
             "message": "Missing item type\nUpgrade:\n- WPP postmeta data were saved to database with '&ndash;' instead of '-' in value. Function encode_sql_input was modified and it doesn't change '-' to '&ndash' anymore\nSo to prevent search result issues we need to update database data.\npeshkov@UD",
-            "line": " lib/class-bootstrap.php:1325"
+            "line": " lib/class-bootstrap.php:1246"
         },
         {
             "message": "Missing item type\nAdds \"Settings\" link to the plugin overview page\n\n *",
-            "line": " lib/class-bootstrap.php:1343"
+            "line": " lib/class-bootstrap.php:1264"
         },
         {
             "message": "Missing item type\nCan enqueue scripts on specific pages, and print content into head",
-            "line": " lib/class-bootstrap.php:1360"
+            "line": " lib/class-bootstrap.php:1281"
         },
         {
             "message": "Missing item type\nSets up additional pages and loads their scripts",
-            "line": " lib/class-bootstrap.php:1471"
+            "line": " lib/class-bootstrap.php:1392"
         },
         {
             "message": "Missing item type\nNext used to add custom submenu page 'All Properties' with Javascript dataTable",
-            "line": " lib/class-bootstrap.php:1492"
+            "line": " lib/class-bootstrap.php:1413"
         },
         {
             "message": "Missing item type\nModify admin body class on property pages for CSS",
-            "line": " lib/class-bootstrap.php:1525"
+            "line": " lib/class-bootstrap.php:1446"
         },
         {
             "message": "Missing item type\nFixed property pages being seen as 404 pages\n\nRan on parse_request;\n\nWP handle_404() function decides if current request should be a 404 page\nMarking the global variable $wp_query->is_search to true makes the function\nassume that the request is a search.",
-            "line": " lib/class-bootstrap.php:1551"
+            "line": " lib/class-bootstrap.php:1472"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:1613"
+            "line": " lib/class-bootstrap.php:1534"
         },
         {
             "message": "Missing item type\nModifies post content",
-            "line": " lib/class-bootstrap.php:1638"
+            "line": " lib/class-bootstrap.php:1559"
         },
         {
             "message": "Missing item type\nInserts content into the \"Publish\" metabox on property pages",
-            "line": " lib/class-bootstrap.php:1668"
+            "line": " lib/class-bootstrap.php:1589"
         },
         {
             "message": "Missing item type\nRemoves \"quick edit\" link on property type objects\n\nCalled in via page_row_actions filter",
-            "line": " lib/class-bootstrap.php:1701"
+            "line": " lib/class-bootstrap.php:1622"
         },
         {
             "message": "Missing item type\nAdds property-relevant messages to the property post type object",
-            "line": " lib/class-bootstrap.php:1719"
+            "line": " lib/class-bootstrap.php:1640"
         },
         {
             "message": "Missing item type\nSets up property-type columns",
-            "line": " lib/class-bootstrap.php:1752"
+            "line": " lib/class-bootstrap.php:1673"
         },
         {
             "message": "Missing item type\nSets up sortable columns columns",
-            "line": " lib/class-bootstrap.php:1788"
+            "line": " lib/class-bootstrap.php:1709"
         },
         {
             "message": "Missing item type\nChecks settings data on accord with existing wp_properties data ( before option updates )",
-            "line": " lib/class-bootstrap.php:1810"
+            "line": " lib/class-bootstrap.php:1731"
         },
         {
             "message": "Missing item type\nHack to avoid issues with capabilities and views.",
-            "line": " lib/class-bootstrap.php:1835"
+            "line": " lib/class-bootstrap.php:1756"
         },
         {
             "message": "Missing item type\nAdds all WPP custom capabilities to administrator role.\nPremium feature capabilities are added by filter in this function, see below.",
-            "line": " lib/class-bootstrap.php:1855"
+            "line": " lib/class-bootstrap.php:1776"
         },
         {
             "message": "Missing item type\nGenerates javascript file with localization.\nAdds localization support to all WP-Property scripts.\nAccessible via wp-ajax.php calls.",
-            "line": " lib/class-bootstrap.php:1901"
+            "line": " lib/class-bootstrap.php:1822"
         },
         {
             "message": "Missing item type",
-            "line": " lib/class-bootstrap.php:1916"
+            "line": " lib/class-bootstrap.php:1837"
         },
         {
             "message": "Missing item type\nWPP Contextual Help",
-            "line": " lib/class-bootstrap.php:1932"
+            "line": " lib/class-bootstrap.php:1853"
         },
         {
             "message": "Missing item type\nReturns specific instance data which is used by javascript\nJavascript Reference: window.wpp.instance",
-            "line": " lib/class-bootstrap.php:1954"
+            "line": " lib/class-bootstrap.php:1898"
         },
         {
             "message": "Missing item type\nWP-Property Formatting\n\nHandle value conversions, object normalization, schema mapping, etc.",
@@ -5407,20 +5515,44 @@
             "line": " lib/class-module.php:2"
         },
         {
-            "message": "Missing item type\nFeature Upgrader",
-            "line": " lib/class-module.php:9"
+            "message": "Missing item type\nRecognized Headers.",
+            "line": " lib/class-module.php:11"
         },
         {
-            "message": "Missing item type\nHeaders Module.",
-            "line": " lib/class-module.php:16"
+            "message": "Missing item type\nModule Declared Capabilities.",
+            "line": " lib/class-module.php:27"
         },
         {
-            "message": "Missing item type\nDefault themes.",
-            "line": " lib/class-module.php:36"
+            "message": "Missing item type\nModule Settings Store.",
+            "line": " lib/class-module.php:33"
         },
         {
-            "message": "Missing item type\nGet a raw, unformatted theme header.\n\nThe header is sanitized, but is not translated, and is not marked up for display.\nTo get a theme header for display, use the display() method.\n\nUse the get_template() method, not the 'Template' header, for finding the template.\nThe 'Template' header is only good for what was written in the style.css, while\nget_template() takes into account where WordPress actually located the theme and\nwhether it is actually valid.",
-            "line": " lib/class-module.php:50"
+            "message": "Missing item type\nGet Setting.",
+            "line": " lib/class-module.php:39"
+        },
+        {
+            "message": "Missing item type\nSet Setting.",
+            "line": " lib/class-module.php:53"
+        },
+        {
+            "message": "Missing item type\nActivate Module.",
+            "line": " lib/class-module.php:65"
+        },
+        {
+            "message": "Missing item type\nDeactivate Module.",
+            "line": " lib/class-module.php:76"
+        },
+        {
+            "message": "Missing item type\nUpgrade Installed Feature.",
+            "line": " lib/class-module.php:87"
+        },
+        {
+            "message": "Missing item type\nInstall Feature from Repository.",
+            "line": " lib/class-module.php:148"
+        },
+        {
+            "message": "Missing item type\nCheck for premium features and load them",
+            "line": " lib/class-module.php:208"
         },
         {
             "message": "Missing item type\nProperty List Table class.",
@@ -5537,6 +5669,14 @@
         {
             "message": "Missing item type\nProperty Type Selector",
             "line": " lib/class-ui.php:594"
+        },
+        {
+            "message": "Missing item type\nClass Module",
+            "line": " lib/class-upgrader-skin.php:2"
+        },
+        {
+            "message": "Missing item type\nSilent SKin",
+            "line": " lib/class-upgrader-skin.php:12"
         },
         {
             "message": "Missing item type\nWP-Property General Functions\n\nContains all the general functions used by the plugin.",

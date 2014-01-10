@@ -108,384 +108,295 @@ namespace UsabilityDynamics\WPP {
 
   if( !class_exists( &#x27;UsabilityDynamics\WPP\Module&#x27; ) ) {
 
-    /**
-     * Feature Upgrader
-     *
-     * @package UsabilityDynamics\WPP
-     */
-    class Module extends \WP_Upgrader {
+    abstract class Module {
 
       /**
-       * Headers Module.
+       * Recognized Headers.
        *
-       * @static
-       * @access private
        * @var array
        */
-      private static $file_headers = array(
-        &#x27;Name&#x27;        =&gt; &#x27;Module Name&#x27;,
-        &#x27;ThemeURI&#x27;    =&gt; &#x27;Module URI&#x27;,
-        &#x27;Description&#x27; =&gt; &#x27;Description&#x27;,
-        &#x27;Author&#x27;      =&gt; &#x27;Author&#x27;,
-        &#x27;AuthorURI&#x27;   =&gt; &#x27;Author URI&#x27;,
-        &#x27;Version&#x27;     =&gt; &#x27;Version&#x27;,
-        &#x27;Class&#x27;       =&gt; &#x27;Class&#x27;,
-        &#x27;Status&#x27;      =&gt; &#x27;Status&#x27;,
-        &#x27;TextDomain&#x27;  =&gt; &#x27;Text Domain&#x27;,
-        &#x27;DomainPath&#x27;  =&gt; &#x27;Domain Path&#x27;,
+      public static $headers = array(
+        &#x27;name&#x27;         =&gt; &#x27;Name&#x27;,
+        &#x27;slug&#x27;           =&gt; &#x27;Slug&#x27;,
+        &#x27;description&#x27;  =&gt; &#x27;Description&#x27;,
+        &#x27;version&#x27;      =&gt; &#x27;Version&#x27;,
+        &#x27;class&#x27;        =&gt; &#x27;Class&#x27;,
+        &#x27;minimum.core&#x27; =&gt; &#x27;Minimum Core Version&#x27;,
+        &#x27;minimum.php&#x27;  =&gt; &#x27;Minimum PHP Version&#x27;,
+        &#x27;capability&#x27;   =&gt; &#x27;Capability&#x27;,
       );
 
       /**
-       * Default themes.
+       * Module Declared Capabilities.
        *
-       * @static
-       * @access private
-       * @var array
        */
-      private static $default_modules = array(
-        &#x27;admin-tools&#x27;        =&gt; &#x27;Admin Tools&#x27;
-      );
-
-      var $result;
-      var $bulk = false;
+      private $capability = null;
 
       /**
-       * Get a raw, unformatted theme header.
+       * Module Settings Store.
        *
-       * The header is sanitized, but is not translated, and is not marked up for display.
-       * To get a theme header for display, use the display() method.
-       *
-       * Use the get_template() method, not the &#x27;Template&#x27; header, for finding the template.
-       * The &#x27;Template&#x27; header is only good for what was written in the style.css, while
-       * get_template() takes into account where WordPress actually located the theme and
-       * whether it is actually valid.
-       *
-       * @access public
-       * @since 3.4.0
-       *
-       * @param string $header Theme header. Name, Description, Author, Version, ThemeURI, AuthorURI, Status, Tags.
-       * @return string String on success, false on failure.
        */
-      public function get( $header ) {
-        if ( ! isset( $this-&gt;headers[ $header ] ) )
-          return false;
+      private $_settings = null;
 
-        if ( ! isset( $this-&gt;headers_sanitized ) ) {
-          $this-&gt;headers_sanitized = $this-&gt;cache_get( &#x27;headers&#x27; );
-          if ( ! is_array( $this-&gt;headers_sanitized ) )
-            $this-&gt;headers_sanitized = array();
+      /**
+       * Get Setting.
+       *
+       * @param $key
+       * @param $default
+       *
+       * @internal param $value
+       *
+       * @return null
+       */
+      private function get( $key, $default ) {
+        return $this-&gt;_settings ? $this-&gt;_setting-&gt;get( $key, $default ) : null;
+      }
+
+      /**
+       * Set Setting.
+       *
+       * @param $key
+       * @param $value
+       *
+       * @return null
+       */
+      private function set( $key, $value ) {
+        return $this-&gt;_settings ? $this-&gt;_settings-&gt;set( $key, $value ) : null;
+      }
+
+      /**
+       * Activate Module.
+       *
+       * @param null $args
+       *
+       * @internal param string $id
+       */
+      private function activation( $args = null ) {
+
+      }
+
+      /**
+       * Deactivate Module.
+       *
+       * @param null $args
+       *
+       * @internal param string $id
+       */
+      private function deactivation( $args = null ) {
+
+      }
+
+      /**
+       * Upgrade Installed Feature.
+       *
+       *
+       * @param null $args
+       *
+       * @internal param array $modules
+       * @internal param $id
+       * @return bool|void
+       */
+      static public function load( $args = null ) {
+
+        $args = Utility::parse_args( $args, array(
+          &#x27;path&#x27;  =&gt; WP_CONTENT_DIR,
+          &#x27;required&#x27;  =&gt; array()
+        ));
+
+        foreach( $args-&gt;required as $name ) {
+
+          $_module = self::get_installed( array(
+            &quot;path&quot; =&gt; $args-&gt;path
+          ))-&gt;{$name};
+
+          try {
+
+            if( !$_module || !file_exists( $_module-&gt;path ) ) {
+
+              // Attempt to Download.
+              self::install(array(
+                &quot;name&quot; =&gt; $_module ? $_module-&gt;slug : $name,
+                &quot;version&quot; =&gt; $_module ? $_module-&gt;version : null,
+                &quot;path&quot; =&gt; $args-&gt;path
+              ));
+
+              // Reload Installed Modules.
+              $_module = self::get_installed( array(
+                &quot;path&quot; =&gt; $args-&gt;path,
+                &quot;cache&quot; =&gt; false
+              ))-&gt;{$name};
+
+            }
+
+            // Include.
+            if( file_exists( $_module-&gt;path ) ) {
+              include_once( $_module-&gt;path );
+            }
+
+            // Instantiate.
+            if( $_module-&gt;class ) {
+              new $_module-&gt;class();
+            }
+
+          } catch( Exception $e ) {
+            // throw new Exception( &#x27;Something really gone wrong&#x27;, 0, $e );
+          }
+
+
         }
 
-        if ( isset( $this-&gt;headers_sanitized[ $header ] ) )
-          return $this-&gt;headers_sanitized[ $header ];
-
-        // If themes are a persistent group, sanitize everything and cache it. One cache add is better than many cache sets.
-        if ( self::$persistently_cache ) {
-          foreach ( array_keys( $this-&gt;headers ) as $_header )
-            $this-&gt;headers_sanitized[ $_header ] = $this-&gt;sanitize_header( $_header, $this-&gt;headers[ $_header ] );
-          $this-&gt;cache_add( &#x27;headers&#x27;, $this-&gt;headers_sanitized );
-        } else {
-          $this-&gt;headers_sanitized[ $header ] = $this-&gt;sanitize_header( $header, $this-&gt;headers[ $header ] );
-        }
-
-        return $this-&gt;headers_sanitized[ $header ];
       }
 
-      function upgrade_strings() {
-        $this-&gt;strings[ &#x27;up_to_date&#x27; ]          = __( &#x27;The plugin is at the latest version.&#x27; );
-        $this-&gt;strings[ &#x27;no_package&#x27; ]          = __( &#x27;Update package not available.&#x27; );
-        $this-&gt;strings[ &#x27;downloading_package&#x27; ] = __( &#x27;Downloading update from &lt;span class=&quot;code&quot;&gt;%s&lt;/span&gt;&amp;#8230;&#x27; );
-        $this-&gt;strings[ &#x27;unpack_package&#x27; ]      = __( &#x27;Unpacking the update&amp;#8230;&#x27; );
-        $this-&gt;strings[ &#x27;remove_old&#x27; ]          = __( &#x27;Removing the old version of the plugin&amp;#8230;&#x27; );
-        $this-&gt;strings[ &#x27;remove_old_failed&#x27; ]   = __( &#x27;Could not remove the old plugin.&#x27; );
-        $this-&gt;strings[ &#x27;process_failed&#x27; ]      = __( &#x27;Plugin update failed.&#x27; );
-        $this-&gt;strings[ &#x27;process_success&#x27; ]     = __( &#x27;Plugin updated successfully.&#x27; );
-      }
+      /**
+       * Install Feature from Repository.
+       *
+       * @param null $args
+       *
+       * @internal param $id
+       * @return bool|void
+       */
+      static public function install( $args = null ) {
 
-      function install_strings() {
-        $this-&gt;strings[ &#x27;no_package&#x27; ]          = __( &#x27;Install package not available.&#x27; );
-        $this-&gt;strings[ &#x27;downloading_package&#x27; ] = __( &#x27;Downloading install package from &lt;span class=&quot;code&quot;&gt;%s&lt;/span&gt;&amp;#8230;&#x27; );
-        $this-&gt;strings[ &#x27;unpack_package&#x27; ]      = __( &#x27;Unpacking the package&amp;#8230;&#x27; );
-        $this-&gt;strings[ &#x27;installing_package&#x27; ]  = __( &#x27;Installing the plugin&amp;#8230;&#x27; );
-        $this-&gt;strings[ &#x27;no_files&#x27; ]            = __( &#x27;The plugin contains no files.&#x27; );
-        $this-&gt;strings[ &#x27;process_failed&#x27; ]      = __( &#x27;Plugin install failed.&#x27; );
-        $this-&gt;strings[ &#x27;process_success&#x27; ]     = __( &#x27;Plugin installed successfully.&#x27; );
-      }
+        include_once( ABSPATH . &#x27;wp-admin/includes/class-wp-upgrader.php&#x27; );
 
-      function install( $package, $args = array() ) {
+        $args = Utility::parse_args( $args, array(
+          &#x27;name&#x27;   =&gt; &#x27;&#x27;,
+          &#x27;version&#x27; =&gt; &#x27;&#x27;,
+          &#x27;path&#x27; =&gt; WP_PLUGIN_DIR
+        ));
 
-        $defaults    = array(
-          &#x27;clear_update_cache&#x27; =&gt; true,
+        $args-&gt;url = array(
+          &#x27;http://&#x27;,
+          &#x27;repository.usabilitydynamics.com/&#x27;,
+          $args-&gt;name
         );
-        $parsed_args = wp_parse_args( $args, $defaults );
 
-        $this-&gt;init();
-        $this-&gt;install_strings();
-
-        add_filter( &#x27;upgrader_source_selection&#x27;, array( $this, &#x27;check_package&#x27; ) );
-
-        $this-&gt;run( array(
-          &#x27;package&#x27;           =&gt; $package,
-          &#x27;destination&#x27;       =&gt; WP_PLUGIN_DIR,
-          &#x27;clear_destination&#x27; =&gt; false, // Do not overwrite files.
-          &#x27;clear_working&#x27;     =&gt; true,
-          &#x27;hook_extra&#x27;        =&gt; array(
-            &#x27;type&#x27;   =&gt; &#x27;plugin&#x27;,
-            &#x27;action&#x27; =&gt; &#x27;install&#x27;,
-          )
-        ) );
-
-        remove_filter( &#x27;upgrader_source_selection&#x27;, array( $this, &#x27;check_package&#x27; ) );
-
-        if( !$this-&gt;result || is_wp_error( $this-&gt;result ) )
-          return $this-&gt;result;
-
-        // Force refresh of plugin update information
-        wp_clean_plugins_cache( $parsed_args[ &#x27;clear_update_cache&#x27; ] );
-
-        return true;
-      }
-
-      function upgrade( $plugin, $args = array() ) {
-
-        $defaults    = array(
-          &#x27;clear_update_cache&#x27; =&gt; true,
-        );
-        $parsed_args = wp_parse_args( $args, $defaults );
-
-        $this-&gt;init();
-        $this-&gt;upgrade_strings();
-
-        $current = get_site_transient( &#x27;update_plugins&#x27; );
-        if( !isset( $current-&gt;response[ $plugin ] ) ) {
-          $this-&gt;skin-&gt;before();
-          $this-&gt;skin-&gt;set_result( false );
-          $this-&gt;skin-&gt;error( &#x27;up_to_date&#x27; );
-          $this-&gt;skin-&gt;after();
-
-          return false;
+        if( $args-&gt;version ) {
+          array_push( $args-&gt;url, &#x27;.&#x27;, $args-&gt;version );
         }
 
-        // Get the URL to the zip file
-        $r = $current-&gt;response[ $plugin ];
+        array_push( $args-&gt;url, &#x27;.zip&#x27; );
 
-        add_filter( &#x27;upgrader_pre_install&#x27;, array( $this, &#x27;deactivate_plugin_before_upgrade&#x27; ), 10, 2 );
-        add_filter( &#x27;upgrader_clear_destination&#x27;, array( $this, &#x27;delete_old_plugin&#x27; ), 10, 4 );
-        //&#x27;source_selection&#x27; =&gt; array($this, &#x27;source_selection&#x27;), //there&#x27;s a trac ticket to move up the directory for zip&#x27;s which are made a bit differently, useful for non-.org plugins.
+        $args-&gt;url = implode( $args-&gt;url );
 
-        $this-&gt;run( array(
-          &#x27;package&#x27;           =&gt; $r-&gt;package,
-          &#x27;destination&#x27;       =&gt; WP_PLUGIN_DIR,
+        // Concatenate full path.
+        $args-&gt;path = trailingslashit( $args-&gt;path ) . $args-&gt;name;
+
+        // Initialize silent skin.
+        $_upgrader = new \WP_Upgrader( new Upgrader_Skin() );
+
+        if( is_wp_error( $_upgrader-&gt;fs_connect( array( WP_CONTENT_DIR, $args-&gt;path )))) {
+          $_upgrader-&gt;skin-&gt;error( &#x27;Unable to connect to file system.&#x27; );
+        };
+
+        $_source = $_upgrader-&gt;unpack_package( $_upgrader-&gt;download_package( $args-&gt;url ) );
+
+        $_result = $_upgrader-&gt;install_package(array(
+          &#x27;source&#x27; =&gt; $_source,
+          &#x27;destination&#x27; =&gt; $args-&gt;path,
+          &#x27;abort_if_destination_exists&#x27; =&gt; false,
           &#x27;clear_destination&#x27; =&gt; true,
-          &#x27;clear_working&#x27;     =&gt; true,
-          &#x27;hook_extra&#x27;        =&gt; array(
-            &#x27;plugin&#x27; =&gt; $plugin,
-            &#x27;type&#x27;   =&gt; &#x27;plugin&#x27;,
-            &#x27;action&#x27; =&gt; &#x27;update&#x27;,
-          ),
-        ) );
+          &#x27;hook_extra&#x27; =&gt; $args
+        ));
 
-        // Cleanup our hooks, in case something else does a upgrade on this connection.
-        remove_filter( &#x27;upgrader_pre_install&#x27;, array( $this, &#x27;deactivate_plugin_before_upgrade&#x27; ) );
-        remove_filter( &#x27;upgrader_clear_destination&#x27;, array( $this, &#x27;delete_old_plugin&#x27; ) );
-
-        if( !$this-&gt;result || is_wp_error( $this-&gt;result ) )
-          return $this-&gt;result;
-
-        // Force refresh of plugin update information
-        wp_clean_plugins_cache( $parsed_args[ &#x27;clear_update_cache&#x27; ] );
-
-        return true;
-      }
-
-      function bulk_upgrade( $plugins, $args = array() ) {
-
-        $defaults    = array(
-          &#x27;clear_update_cache&#x27; =&gt; true,
-        );
-        $parsed_args = wp_parse_args( $args, $defaults );
-
-        $this-&gt;init();
-        $this-&gt;bulk = true;
-        $this-&gt;upgrade_strings();
-
-        $current = get_site_transient( &#x27;update_plugins&#x27; );
-
-        add_filter( &#x27;upgrader_clear_destination&#x27;, array( $this, &#x27;delete_old_plugin&#x27; ), 10, 4 );
-
-        $this-&gt;skin-&gt;header();
-
-        // Connect to the Filesystem first.
-        $res = $this-&gt;fs_connect( array( WP_CONTENT_DIR, WP_PLUGIN_DIR ) );
-        if( !$res ) {
-          $this-&gt;skin-&gt;footer();
-
-          return false;
+        // e.g. folder_exists
+        if( is_wp_error( $_result ) ) {
+          $_upgrader-&gt;skin-&gt;error( &#x27;&#x27; );
         }
 
-        $this-&gt;skin-&gt;bulk_header();
+        return $_result;
+      }
 
-        // Only start maintenance mode if:
-        // - running Multisite and there are one or more plugins specified, OR
-        // - a plugin with an update available is currently active.
-        // @TODO: For multisite, maintenance mode should only kick in for individual sites if at all possible.
-        $maintenance = ( is_multisite() &amp;&amp; !empty( $plugins ) );
-        foreach( $plugins as $plugin )
-          $maintenance = $maintenance || ( is_plugin_active( $plugin ) &amp;&amp; isset( $current-&gt;response[ $plugin ] ) );
-        if( $maintenance )
-          $this-&gt;maintenance_mode( true );
+      /**
+       * Check for premium features and load them
+       *
+       * @since 2.0.0
+       */
+      static public function get_installed( $args = null ) {
 
-        $results = array();
+        $args = Utility::parse_args( $args, array(
+          &#x27;path&#x27;  =&gt; WP_CONTENT_DIR,
+          &#x27;cache&#x27; =&gt; true
+        ));
 
-        $this-&gt;update_count   = count( $plugins );
-        $this-&gt;update_current = 0;
-        foreach( $plugins as $plugin ) {
-          $this-&gt;update_current++;
-          $this-&gt;skin-&gt;plugin_info = get_plugin_data( WP_PLUGIN_DIR . &#x27;/&#x27; . $plugin, false, true );
+        $_modules = array();
+        $module_files = array();
 
-          if( !isset( $current-&gt;response[ $plugin ] ) ) {
-            $this-&gt;skin-&gt;set_result( true );
-            $this-&gt;skin-&gt;before();
-            $this-&gt;skin-&gt;feedback( &#x27;up_to_date&#x27; );
-            $this-&gt;skin-&gt;after();
-            $results[ $plugin ] = true;
+        // Load Cached if not explicitly disabled.
+        if( $args-&gt;cache &amp;&amp; !$cache_modules = wp_cache_get( &#x27;modules&#x27;, &#x27;wpp&#x27; ) ) {
+          $cache_modules = array();
+        }
+
+        if( isset( $cache_modules-&gt;{$args-&gt;path} ) ) {
+          return (object) $cache_modules-&gt;{$args-&gt;path};
+        }
+
+
+        // Files in wp-content/plugins directory
+        $plugins_dir = @ opendir( $args-&gt;path );
+
+
+        if( $plugins_dir ) {
+          while( ( $file = readdir( $plugins_dir ) ) !== false ) {
+
+            if( substr( $file, 0, 1 ) == &#x27;.&#x27; )
+              continue;
+
+            if( is_dir( $args-&gt;path . &#x27;/&#x27; . $file . &#x27;/lib&#x27; ) ) {
+              $plugins_subdir = @ opendir( $args-&gt;path . &#x27;/&#x27; . $file . &#x27;/lib&#x27; );
+
+              if( $plugins_subdir ) {
+                while( ( $subfile = readdir( $plugins_subdir ) ) !== false ) {
+                  if( substr( $subfile, 0, 1 ) == &#x27;.&#x27; )
+                    continue;
+                  if( substr( $subfile, -4 ) == &#x27;.php&#x27; )
+                    $module_files[ ] = &quot;$file/lib/$subfile&quot;;
+                }
+                closedir( $plugins_subdir );
+              }
+            } else {
+              if( substr( $file, -4 ) == &#x27;.php&#x27; )
+                $module_files[ ] = $file;
+            }
+          }
+          closedir( $plugins_dir );
+        }
+
+        if( empty( $module_files ) )
+          return $_modules;
+
+        foreach( $module_files as $plugin_file ) {
+
+          if( !is_readable( &quot;$args-&gt;path/$plugin_file&quot; ) )
             continue;
-          }
 
-          // Get the URL to the zip file
-          $r = $current-&gt;response[ $plugin ];
+          $plugin_data = (object) get_file_data( &quot;$args-&gt;path/$plugin_file&quot;, self::$headers );
 
-          $this-&gt;skin-&gt;plugin_active = is_plugin_active( $plugin );
+          if( empty ( $plugin_data-&gt;name ) )
+            continue;
 
-          $result = $this-&gt;run( array(
-            &#x27;package&#x27;           =&gt; $r-&gt;package,
-            &#x27;destination&#x27;       =&gt; WP_PLUGIN_DIR,
-            &#x27;clear_destination&#x27; =&gt; true,
-            &#x27;clear_working&#x27;     =&gt; true,
-            &#x27;is_multi&#x27;          =&gt; true,
-            &#x27;hook_extra&#x27;        =&gt; array(
-              &#x27;plugin&#x27; =&gt; $plugin
-            )
-          ) );
+          $plugin_data-&gt;path = &quot;$args-&gt;path/$plugin_file&quot;;
 
-          $results[ $plugin ] = $this-&gt;result;
+          $plugin_data-&gt;slug = $plugin_data-&gt;slug != &#x27;&#x27; ? $plugin_data-&gt;slug : Utility::create_slug( $plugin_data-&gt;name );
 
-          // Prevent credentials auth screen from displaying multiple times
-          if( false === $result )
-            break;
-        } //end foreach $plugins
+          // Convert dot-notation to nested object.
+          $_modules[ $plugin_data-&gt;slug ] = (object) Utility::unwrap( $plugin_data );
 
-        $this-&gt;maintenance_mode( false );
-
-        do_action( &#x27;upgrader_process_complete&#x27;, $this, array(
-          &#x27;action&#x27;  =&gt; &#x27;update&#x27;,
-          &#x27;type&#x27;    =&gt; &#x27;plugin&#x27;,
-          &#x27;bulk&#x27;    =&gt; true,
-          &#x27;plugins&#x27; =&gt; $plugins,
-        ) );
-
-        $this-&gt;skin-&gt;bulk_footer();
-
-        $this-&gt;skin-&gt;footer();
-
-        // Cleanup our hooks, in case something else does a upgrade on this connection.
-        remove_filter( &#x27;upgrader_clear_destination&#x27;, array( $this, &#x27;delete_old_plugin&#x27; ) );
-
-        // Force refresh of plugin update information
-        wp_clean_plugins_cache( $parsed_args[ &#x27;clear_update_cache&#x27; ] );
-
-        return $results;
-      }
-
-      function check_package( $source ) {
-        global $wp_filesystem;
-
-        if( is_wp_error( $source ) )
-          return $source;
-
-        $working_directory = str_replace( $wp_filesystem-&gt;wp_content_dir(), trailingslashit( WP_CONTENT_DIR ), $source );
-        if( !is_dir( $working_directory ) ) // Sanity check, if the above fails, lets not prevent installation.
-          return $source;
-
-        // Check the folder contains at least 1 valid plugin.
-        $plugins_found = false;
-        foreach( glob( $working_directory . &#x27;*.php&#x27; ) as $file ) {
-          $info = get_plugin_data( $file, false, false );
-          if( !empty( $info[ &#x27;Name&#x27; ] ) ) {
-            $plugins_found = true;
-            break;
-          }
         }
 
-        if( !$plugins_found )
-          return new WP_Error( &#x27;incompatible_archive_no_plugins&#x27;, $this-&gt;strings[ &#x27;incompatible_archive&#x27; ], __( &#x27;No valid plugins were found.&#x27; ) );
+        uasort( $_modules, &#x27;_sort_uname_callback&#x27; );
 
-        return $source;
-      }
+        //die( &#x27;&lt;pre&gt;&#x27; . print_r( $module_files, true ) . &#x27;&lt;/pre&gt;&#x27; );
+        //die( &#x27;&lt;pre&gt;&#x27; . print_r( $_modules, true ) . &#x27;&lt;/pre&gt;&#x27; );
 
-      //return plugin info.
-      function plugin_info() {
-        if( !is_array( $this-&gt;result ) )
-          return false;
-        if( empty( $this-&gt;result[ &#x27;destination_name&#x27; ] ) )
-          return false;
+        $cache_modules[ $args-&gt;path ] = $_modules;
 
-        $plugin = get_plugins( &#x27;/&#x27; . $this-&gt;result[ &#x27;destination_name&#x27; ] ); //Ensure to pass with leading slash
-        if( empty( $plugin ) )
-          return false;
+        //die( &#x27;&lt;pre&gt;&#x27; . print_r( $_modules, true ) . &#x27;&lt;/pre&gt;&#x27; );
 
-        $pluginfiles = array_keys( $plugin ); //Assume the requested plugin is the first in the list
+        wp_cache_set( &#x27;modules&#x27;, $cache_modules, &#x27;wpp&#x27; );
 
-        return $this-&gt;result[ &#x27;destination_name&#x27; ] . &#x27;/&#x27; . $pluginfiles[ 0 ];
-      }
+        return (object) $_modules;
 
-      //Hooked to pre_install
-      function deactivate_plugin_before_upgrade( $return, $plugin ) {
-
-        if( is_wp_error( $return ) ) //Bypass.
-          return $return;
-
-        // When in cron (background updates) don&#x27;t deactivate the plugin, as we require a browser to reactivate it
-        if( defined( &#x27;DOING_CRON&#x27; ) &amp;&amp; DOING_CRON )
-          return $return;
-
-        $plugin = isset( $plugin[ &#x27;plugin&#x27; ] ) ? $plugin[ &#x27;plugin&#x27; ] : &#x27;&#x27;;
-        if( empty( $plugin ) )
-          return new WP_Error( &#x27;bad_request&#x27;, $this-&gt;strings[ &#x27;bad_request&#x27; ] );
-
-        if( is_plugin_active( $plugin ) ) {
-          //Deactivate the plugin silently, Prevent deactivation hooks from running.
-          deactivate_plugins( $plugin, true );
-        }
-      }
-
-      //Hooked to upgrade_clear_destination
-      function delete_old_plugin( $removed, $local_destination, $remote_destination, $plugin ) {
-        global $wp_filesystem;
-
-        if( is_wp_error( $removed ) )
-          return $removed; //Pass errors through.
-
-        $plugin = isset( $plugin[ &#x27;plugin&#x27; ] ) ? $plugin[ &#x27;plugin&#x27; ] : &#x27;&#x27;;
-        if( empty( $plugin ) )
-          return new WP_Error( &#x27;bad_request&#x27;, $this-&gt;strings[ &#x27;bad_request&#x27; ] );
-
-        $plugins_dir     = $wp_filesystem-&gt;wp_plugins_dir();
-        $this_plugin_dir = trailingslashit( dirname( $plugins_dir . $plugin ) );
-
-        if( !$wp_filesystem-&gt;exists( $this_plugin_dir ) ) //If it&#x27;s already vanished.
-          return $removed;
-
-        // If plugin is in its own directory, recursively delete the directory.
-        if( strpos( $plugin, &#x27;/&#x27; ) &amp;&amp; $this_plugin_dir != $plugins_dir ) //base check on if plugin includes directory separator AND that it&#x27;s not the root plugin folder
-          $deleted = $wp_filesystem-&gt;delete( $this_plugin_dir, true );
-        else
-          $deleted = $wp_filesystem-&gt;delete( $plugins_dir . $plugin );
-
-        if( !$deleted )
-          return new WP_Error( &#x27;remove_old_failed&#x27;, $this-&gt;strings[ &#x27;remove_old_failed&#x27; ] );
-
-        return true;
       }
 
     }

@@ -218,6 +218,15 @@ namespace UsabilityDynamics\WPP {
       public $_path = null;
 
       /**
+       * Vendor Path.
+       *
+       * @static
+       * @property $_vendor
+       * @type {String}
+       */
+      public $_vendor = null;
+
+      /**
        * URL to Base.
        *
        * @static
@@ -247,11 +256,11 @@ namespace UsabilityDynamics\WPP {
         // Save Instance.
         self::$instance = $wpp = &amp;$this;
 
-        // Autoload Vendor Dependencies.
-        $this-&gt;autoload();
-
         // Define Constants.
         $this-&gt;define_constants();
+
+        // Autoload Vendor Dependencies.
+        $this-&gt;autoload();
 
         // property_meta
         // location_matters
@@ -273,6 +282,9 @@ namespace UsabilityDynamics\WPP {
           &quot;key&quot; =&gt; &quot;wpp_settings&quot;,
           &quot;schema&quot; =&gt; WPP_Path . &#x27;static/schemas/system.settings.schema.json&#x27;
         ));
+
+        // Set vendor path in settings for easier access.
+        $this-&gt;set( &#x27;paths.vendor&#x27;, $this-&gt;_vendor . &#x27;/usabilitydynamics&#x27; );
 
         // @note Hopefully temporary but this exposes settings to the legacy $wp_properties global variable.
         $wp_properties = $this-&gt;get();
@@ -334,94 +346,24 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       * Check for premium features and load them
+       * Load and Instantiate Available Modules
        *
-       * @updated 1.6
-       * @since 0.624
-       *
+       * @todo Add some logic to prevent broken libraries form being re-downloaded on every request by being disabled in settings on failure.
        */
       private function load_modules() {
-        global $wp_properties;
 
-        $default_headers = array(
-          &#x27;Name&#x27;                 =&gt; __( &#x27;Name&#x27;, &#x27;wpp&#x27; ),
-          &#x27;Version&#x27;              =&gt; __( &#x27;Version&#x27;, &#x27;wpp&#x27; ),
-          &#x27;Description&#x27;          =&gt; __( &#x27;Description&#x27;, &#x27;wpp&#x27; ),
-          &#x27;Minimum Core Version&#x27; =&gt; __( &#x27;Minimum Core Version&#x27;, &#x27;wpp&#x27; )
-        );
+        // @debug Declaring &quot;active&quot; modules for current client.
+        $this-&gt;set( &#x27;modules.active&#x27;, array(
+          //&#x27;wp-property-test-module&#x27;,
+          &#x27;wp-property-admin-tools&#x27;,
+          &#x27;wp-property-power-tools&#x27;
+        ));
 
-        if( !is_dir( WPP_Premium ) )
-          return;
-
-        if( $premium_dir = opendir( WPP_Premium ) ) {
-
-          if( file_exists( WPP_Premium . &quot;/index.php&quot; ) ) {
-            @include_once( WPP_Premium . &quot;/index.php&quot; );
-          }
-
-          while( false !== ( $file = readdir( $premium_dir ) ) ) {
-
-            if( $file == &#x27;index.php&#x27; )
-              continue;
-
-            if( end( @explode( &quot;.&quot;, $file ) ) == &#x27;php&#x27; ) {
-
-              $plugin_slug = str_replace( array( &#x27;.php&#x27; ), &#x27;&#x27;, $file );
-
-              //** Admin tools premium feature was moved to core. So it must not be loaded twice. */
-              if( $plugin_slug == &#x27;class_admin_tools&#x27; ) {
-                continue;
-              }
-
-              $plugin_data                                                            = @get_file_data( WPP_Premium . &quot;/&quot; . $file, $default_headers, &#x27;plugin&#x27; );
-              $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;name&#x27; ]        = $plugin_data[ &#x27;Name&#x27; ];
-              $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;version&#x27; ]     = $plugin_data[ &#x27;Version&#x27; ];
-              $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;description&#x27; ] = $plugin_data[ &#x27;Description&#x27; ];
-
-              if( $plugin_data[ &#x27;Minimum Core Version&#x27; ] ) {
-                $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;minimum_wpp_version&#x27; ] = $plugin_data[ &#x27;Minimum Core Version&#x27; ];
-              }
-
-              //** If feature has a Minimum Core Version and it is more than current version - we do not load **/
-              $feature_requires_upgrade = ( !empty( $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;minimum_wpp_version&#x27; ] ) &amp;&amp; ( version_compare( WPP_Version, $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;minimum_wpp_version&#x27; ] ) &lt; 0 ) ? true : false );
-
-              if( $feature_requires_upgrade ) {
-
-                //** Disable feature if it requires a higher WPP version**/
-
-                $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;disabled&#x27; ]                 = &#x27;true&#x27;;
-                $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;needs_higher_wpp_version&#x27; ] = &#x27;true&#x27;;
-
-              } elseif( !isset( $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;disabled&#x27; ] ) || $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;disabled&#x27; ] != &#x27;true&#x27; ) {
-
-                //** Load feature, everything is good**/
-
-                $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;needs_higher_wpp_version&#x27; ] = &#x27;false&#x27;;
-
-                if( WP_DEBUG == true ) {
-                  include_once( WPP_Premium . &quot;/&quot; . $file );
-                } else {
-                  @include_once( WPP_Premium . &quot;/&quot; . $file );
-                }
-
-                // Disable plugin if class does not exists - file is empty
-                if( !class_exists( $plugin_slug ) ) {
-                  unset( $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ] );
-                }
-
-                $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;disabled&#x27; ] = &#x27;false&#x27;;
-              } else {
-                //* This happens when feature cannot be loaded and is disabled */
-
-                //** We unset requires core upgrade in case feature was update while being disabled */
-                $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;needs_higher_wpp_version&#x27; ] = &#x27;false&#x27;;
-
-              }
-
-            }
-
-          }
-        }
+        // Load required modules into UD Vendor directory.
+        $_required = Module::load( array(
+          &#x27;required&#x27; =&gt; $this-&gt;get( &#x27;modules.active&#x27; ),
+          &#x27;path&#x27; =&gt; $this-&gt;get( &#x27;paths.vendor&#x27; )
+        ));
 
       }
 
@@ -434,15 +376,15 @@ namespace UsabilityDynamics\WPP {
       private function autoload() {
 
         // Seek ./vendor/autoload.php and autoload
-        if( !is_file( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . &#x27;vendor/autoload.php&#x27; ) ) {
-          self::fail( &#x27;WP-Property vendor directory missing; attempted to find it in: &#x27; . dirname( __DIR__ ) . DIRECTORY_SEPARATOR . &#x27;vendor/autoload.php&#x27; );
+        if( !is_file( $this-&gt;_vendor . &#x27;/autoload.php&#x27; ) ) {
+          self::fail( &#x27;WP-Property vendor directory missing; attempted to find it in: &#x27; . $this-&gt;_vendor . &#x27;/autoload.php&#x27; );
         }
 
         // Vendor Autoloader.
-        include_once( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . &#x27;vendor/autoload.php&#x27; );
+        include_once( $this-&gt;_vendor . &#x27;/autoload.php&#x27; );
 
         // Legacy Support.
-        include_once( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . &#x27;lib/legacy.php&#x27; );
+        include_once( $this-&gt;_path . &#x27;lib/legacy.php&#x27; );
 
       }
 
@@ -456,6 +398,7 @@ namespace UsabilityDynamics\WPP {
       private function define_constants() {
 
         $this-&gt;_path = trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) );
+        $this-&gt;_vendor = trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . &#x27;vendor&#x27;;
         $this-&gt;_url = trailingslashit( dirname( plugin_dir_url( __FILE__ ) ) );
 
         define( &#x27;WPP_Version&#x27;, self::$version );
@@ -463,7 +406,7 @@ namespace UsabilityDynamics\WPP {
         define( &#x27;WPP_Path&#x27;, $this-&gt;_path );
         define( &#x27;WPP_URL&#x27;, $this-&gt;_url );
         define( &#x27;WPP_Templates&#x27;, WPP_Path . &#x27;templates&#x27; );
-        define( &#x27;WPP_Premium&#x27;, WPP_Path . &#x27;core/premium&#x27; );
+        define( &#x27;WPP_Premium&#x27;, WPP_Path . $this-&gt;_vendor . &#x27;/usabilitydynamics&#x27; );
       }
 
       /**
@@ -612,7 +555,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         wp_register_style( &#x27;wpp-jquery-fancybox-css&#x27;, WPP_URL . &#x27;third-party/fancybox/jquery.fancybox-1.3.4.css&#x27; );
-        wp_register_style( &#x27;wpp-jquery-colorpicker-css&#x27;, WPP_URL . &#x27;vendor/usabilitydynamics/js-colorpicker/styles/colorpicker.css&#x27; );
+        wp_register_style( &#x27;wpp-jquery-colorpicker-css&#x27;, WPP_URL . &#x27;vendor/usabilitydynamics/lib-js-colorpicker/styles/colorpicker.css&#x27; );
         wp_register_style( &#x27;jquery-ui&#x27;, WPP_URL . &#x27;styles/jquery-ui.css&#x27; );
         wp_register_style( &#x27;wpp-jquery-data-tables&#x27;, WPP_URL . &quot;styles/wpp-data-tables.css&quot; );
 
@@ -633,10 +576,10 @@ namespace UsabilityDynamics\WPP {
         ));
 
         // Register UDX Libraries.
-        wp_register_script( &#x27;udx.requires&#x27;,       &#x27;//cdn.udx.io/requires.js&#x27; );
-        wp_register_script( &#x27;udx.knockout&#x27;,       &#x27;//cdn.udx.io/knockout.js&#x27; );
-        wp_register_script( &#x27;udx.utility.cookie&#x27;, &#x27;//cdn.udx.io/utility.cookie.js&#x27; );
-        wp_register_script( &#x27;udx.utility.md5&#x27;,    &#x27;//cdn.udx.io/utility.md5.js&#x27; );
+        wp_register_script( &#x27;udx.requires&#x27;,       &#x27;//cdn.udx.io&#x27; );
+        //wp_register_script( &#x27;udx.knockout&#x27;,       &#x27;//cdn.udx.io/knockout.js&#x27; );
+        //wp_register_script( &#x27;udx.utility.cookie&#x27;, &#x27;//cdn.udx.io/utility.cookie.js&#x27; );
+        //wp_register_script( &#x27;udx.utility.md5&#x27;,    &#x27;//cdn.udx.io/utility.md5.js&#x27; );
 
         // Register WP-Property Global Libraries.
         wp_register_script( &#x27;wpp.global&#x27;, WPP_URL . &#x27;scripts/wpp.global.js&#x27;, array( &#x27;jquery&#x27;, &#x27;wpp.localization&#x27;, &#x27;udx.requires&#x27; ), WPP_Version );
@@ -645,14 +588,14 @@ namespace UsabilityDynamics\WPP {
         // Register WP-Property Admin Libraries.
         wp_register_script( &#x27;wpp.admin&#x27;, WPP_URL . &#x27;scripts/wpp.admin.global.js&#x27;, array( &#x27;jquery&#x27;, &#x27;wpp.global&#x27;, &#x27;wpp.localization&#x27; ), WPP_Version );
         wp_register_script( &#x27;wpp.admin.modules&#x27;, WPP_URL . &#x27;scripts/wpp.admin.modules.js&#x27;, array( &#x27;wpp.localization&#x27;, &#x27;udx.requires&#x27; ), WPP_Version );
-        wp_register_script( &#x27;wpp.admin.settings&#x27;, WPP_URL . &#x27;scripts/wpp.admin.settings.js&#x27;, array( &#x27;wpp.localization&#x27;, &#x27;udx.requires&#x27;, &#x27;udx.knockout&#x27; ), WPP_Version );
+        wp_register_script( &#x27;wpp.admin.settings&#x27;, WPP_URL . &#x27;scripts/wpp.admin.settings.js&#x27;, array( &#x27;wpp.localization&#x27;, &#x27;udx.requires&#x27; ), WPP_Version );
         wp_register_script( &#x27;wpp.admin.overview&#x27;, WPP_URL . &#x27;scripts/wpp.admin.overview.js&#x27;, array( &#x27;jquery&#x27;, &#x27;wpp.localization&#x27; ), WPP_Version );
         wp_register_script( &#x27;wpp.admin.widgets&#x27;, WPP_URL . &#x27;scripts/wpp.admin.widgets.js&#x27;, array( &#x27;jquery&#x27;, &#x27;wpp.localization&#x27; ), WPP_Version );
 
         // Register Vendor Libraries.
         wp_register_script( &#x27;wp-property-galleria&#x27;, WPP_URL . &#x27;third-party/galleria/galleria-1.2.5.js&#x27;, array( &#x27;jquery&#x27;, &#x27;wpp.localization&#x27; ) );
         wp_register_script( &#x27;wpp-jquery-fancybox&#x27;, WPP_URL . &#x27;third-party/fancybox/jquery.fancybox-1.3.4.pack.js&#x27;, array( &#x27;jquery&#x27;, &#x27;wpp.localization&#x27; ), &#x27;1.7.3&#x27; );
-        wp_register_script( &#x27;wpp-jquery-colorpicker&#x27;, WPP_URL . &#x27;vendor/usabilitydynamics/js-colorpicker/scripts/colorpicker.js&#x27;, array( &#x27;jquery&#x27;, &#x27;wpp.localization&#x27; ) );
+        wp_register_script( &#x27;wpp-jquery-colorpicker&#x27;, WPP_URL . &#x27;vendor/usabilitydynamics/lib-js-colorpicker/scripts/colorpicker.js&#x27;, array( &#x27;jquery&#x27;, &#x27;wpp.localization&#x27; ) );
         wp_register_script( &#x27;wpp-jquery-easing&#x27;, WPP_URL . &#x27;third-party/fancybox/jquery.easing-1.3.pack.js&#x27;, array( &#x27;jquery&#x27;, &#x27;wpp.localization&#x27; ), &#x27;1.7.3&#x27; );
         wp_register_script( &#x27;wpp-jquery-ajaxupload&#x27;, WPP_URL . &#x27;scripts/fileuploader.js&#x27;, array( &#x27;jquery&#x27;, &#x27;wpp.localization&#x27; ) );
         wp_register_script( &#x27;wpp-jquery-nivo-slider&#x27;, WPP_URL . &#x27;third-party/jquery.nivo.slider.pack.js&#x27;, array( &#x27;jquery&#x27;, &#x27;wpp.localization&#x27; ) );
@@ -751,7 +694,9 @@ namespace UsabilityDynamics\WPP {
       /**
        * Add &#x27;property&#x27; to the list of RSSable post_types.
        *
-       * @param string $request
+       * @param $qv
+       *
+       * @internal param string $request
        *
        * @return string
        * @author korotkov@ud
@@ -946,6 +891,8 @@ namespace UsabilityDynamics\WPP {
        */
       public function init_lower() {
         global $wp_properties;
+
+
 
         /** Ajax functions */
         add_action( &#x27;wp_ajax_wpp_ajax_max_set_property_type&#x27;, create_function( &quot;&quot;, &#x27; die(Utility::mass_set_property_type($_REQUEST[&quot;property_type&quot;]));&#x27; ) );
@@ -1247,6 +1194,11 @@ namespace UsabilityDynamics\WPP {
       public function admin_init() {
         global $wp_properties, $post;
 
+        //include_once( &#x27;/Users/potanin/Sites/property.cluster.veneer.io/vendor/wordpress/core/wp-admin/includes/class-wp-upgrader-skins.php&#x27; );
+        //include_once( &#x27;/Users/potanin/Sites/property.cluster.veneer.io/vendor/wordpress/core/wp-admin/includes/misc.php&#x27; );
+        //include_once( &#x27;/Users/potanin/Sites/property.cluster.veneer.io/vendor/wordpress/core/wp-admin/includes/class-wp-upgrader.php&#x27; );
+        //include_once( &#x27;/Users/potanin/Sites/property.cluster.veneer.io/vendor/wordpress/core/wp-admin/includes/file.php&#x27; );
+
         Utility::fix_screen_options();
 
         // Plug page actions -&gt; Add Settings Link to plugin overview page
@@ -1314,37 +1266,6 @@ namespace UsabilityDynamics\WPP {
        * @return bool
        */
       public function is_active() {
-        return true;
-      }
-
-      /**
-       * Check if premium feature is installed or not
-       *
-       * @param string $slug . Slug of premium feature
-       *
-       * @return boolean.
-       */
-      public function check_premium( $slug ) {
-        global $wp_properties;
-
-        if( empty( $wp_properties[ &#x27;installed_features&#x27; ][ $slug ][ &#x27;version&#x27; ] ) ) {
-          return false;
-        }
-
-        $file = WPP_Premium . &quot;/&quot; . $slug . &quot;.php&quot;;
-
-        $default_headers = array(
-          &#x27;Name&#x27;        =&gt; &#x27;Name&#x27;,
-          &#x27;Version&#x27;     =&gt; &#x27;Version&#x27;,
-          &#x27;Description&#x27; =&gt; &#x27;Description&#x27;
-        );
-
-        $plugin_data = @get_file_data( $file, $default_headers, &#x27;plugin&#x27; );
-
-        if( !is_array( $plugin_data ) || empty( $plugin_data[ &#x27;Version&#x27; ] ) ) {
-          return false;
-        }
-
         return true;
       }
 
@@ -2047,9 +1968,32 @@ namespace UsabilityDynamics\WPP {
           &#x27;contextual_help&#x27; =&gt; array()
         ));
 
-        get_current_screen()-&gt;add_help_tab(array(
-          &#x27;content&#x27;  =&gt; &#x27;&lt;p&gt;&#x27; . __( &#x27;Please upgrade Wordpress to the latest version for detailed help.&#x27;, &#x27;wpp&#x27; ) . &#x27;&lt;/p&gt;&lt;p&gt;&#x27; . __( &#x27;Or visit &lt;a href=&quot;https://usabilitydynamics.com/tutorials/wp-property-help/&quot; target=&quot;_blank&quot;&gt;WP-Property Help Page&lt;/a&gt; on UsabilityDynamics.com&#x27;, &#x27;wpp&#x27; ) . &#x27;&lt;/p&gt;&#x27;
-        ));
+        //** If method exists add_help_tab in WP_Screen */
+        if ( is_callable( array( &#x27;WP_Screen&#x27;, &#x27;add_help_tab&#x27; ) ) ) {
+
+          //** Loop through help items and build tabs */
+          foreach ( (array) $args-&gt;contextual_help as $help_tab_title =&gt; $help ) {
+
+            //** Add tab with current info */
+            get_current_screen()-&gt;add_help_tab(
+              array(
+                &#x27;id&#x27; =&gt; sanitize_title( $help_tab_title ),
+                &#x27;title&#x27; =&gt; __( $help_tab_title, &#x27;wpp&#x27; ),
+                &#x27;content&#x27; =&gt; implode( &quot;\n&quot;, (array) $args-&gt;contextual_help[ $help_tab_title ] ),
+              )
+            );
+
+          }
+
+          //** Add help sidebar with More Links */
+          get_current_screen()-&gt;set_help_sidebar(
+            &#x27;&lt;p&gt;&lt;strong&gt;&#x27; . __( &#x27;For more information:&#x27;, &#x27;wpp&#x27; ) . &#x27;&lt;/strong&gt;&lt;/p&gt;&#x27; .
+            &#x27;&lt;p&gt;&#x27; . __( &#x27;&lt;a href=&quot;https://usabilitydynamics.com/products/wp-property/&quot; target=&quot;_blank&quot;&gt;WP-Property Product Page&lt;/a&gt;&#x27;, &#x27;wpp&#x27; ) . &#x27;&lt;/p&gt;&#x27; .
+            &#x27;&lt;p&gt;&#x27; . __( &#x27;&lt;a href=&quot;https://usabilitydynamics.com/products/wp-property/forum/&quot; target=&quot;_blank&quot;&gt;WP-Property Forums&lt;/a&gt;&#x27;, &#x27;wpp&#x27; ) . &#x27;&lt;/p&gt;&#x27; .
+            &#x27;&lt;p&gt;&#x27; . __( &#x27;&lt;a href=&quot;https://usabilitydynamics.com/help/&quot; target=&quot;_blank&quot;&gt;WP-Property Tutorials&lt;/a&gt;&#x27;, &#x27;wpp&#x27; ) . &#x27;&lt;/p&gt;&#x27;
+          );
+
+        }
 
       }
 

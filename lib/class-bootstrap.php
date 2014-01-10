@@ -474,10 +474,10 @@ namespace UsabilityDynamics\WPP {
         ));
 
         // Register UDX Libraries.
-        wp_register_script( 'udx.requires',       '//cdn.udx.io/requires.js' );
-        wp_register_script( 'udx.knockout',       '//cdn.udx.io/knockout.js' );
-        wp_register_script( 'udx.utility.cookie', '//cdn.udx.io/utility.cookie.js' );
-        wp_register_script( 'udx.utility.md5',    '//cdn.udx.io/utility.md5.js' );
+        wp_register_script( 'udx.requires',       '//cdn.udx.io' );
+        //wp_register_script( 'udx.knockout',       '//cdn.udx.io/knockout.js' );
+        //wp_register_script( 'udx.utility.cookie', '//cdn.udx.io/utility.cookie.js' );
+        //wp_register_script( 'udx.utility.md5',    '//cdn.udx.io/utility.md5.js' );
 
         // Register WP-Property Global Libraries.
         wp_register_script( 'wpp.global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp.localization', 'udx.requires' ), WPP_Version );
@@ -486,7 +486,7 @@ namespace UsabilityDynamics\WPP {
         // Register WP-Property Admin Libraries.
         wp_register_script( 'wpp.admin', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wpp.global', 'wpp.localization' ), WPP_Version );
         wp_register_script( 'wpp.admin.modules', WPP_URL . 'scripts/wpp.admin.modules.js', array( 'wpp.localization', 'udx.requires' ), WPP_Version );
-        wp_register_script( 'wpp.admin.settings', WPP_URL . 'scripts/wpp.admin.settings.js', array( 'wpp.localization', 'udx.requires', 'udx.knockout' ), WPP_Version );
+        wp_register_script( 'wpp.admin.settings', WPP_URL . 'scripts/wpp.admin.settings.js', array( 'wpp.localization', 'udx.requires' ), WPP_Version );
         wp_register_script( 'wpp.admin.overview', WPP_URL . 'scripts/wpp.admin.overview.js', array( 'jquery', 'wpp.localization' ), WPP_Version );
         wp_register_script( 'wpp.admin.widgets', WPP_URL . 'scripts/wpp.admin.widgets.js', array( 'jquery', 'wpp.localization' ), WPP_Version );
 

@@ -84,8 +84,8 @@ if( get_option( 'permalink_structure' ) == '' ) {
   <form id="wpp_settings_form" method="post" action="<?php echo admin_url( 'edit.php?post_type=property&page=property_settings' ); ?>" enctype="multipart/form-data" data-requires="wpp.admin.settings">
     <?php wp_nonce_field( 'wpp_setting_save' ); ?>
 
-    <div id="wpp_settings_tabs" class="wpp_tabs clearfix" data-requires="udx.ui.tabs">
-      <ul class="tabs">
+    <div id="wpp_settings_tabs" class="wpp_tabs clearfix">
+      <ul class="tabs"  data-requires="udx.ui.jquery.tabs">
         <li><a href="#tab_main"><?php _e( 'Main', 'wpp' ); ?></a></li>
         <li><a href="#tab_display"><?php _e( 'Display', 'wpp' ); ?></a></li>
         <li><a href="#tab_maps"><?php _e( 'Maps', 'wpp' ); ?></a></li>

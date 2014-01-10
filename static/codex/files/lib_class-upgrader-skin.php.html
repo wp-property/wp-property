@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>WPP - usabilitydynamics/wp-property</title>
+    <title>lib/class-upgrader-skin.php - usabilitydynamics/wp-property</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -96,167 +96,62 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>WPP Class</h1>
-<div class="box meta">
-    
+                        <h1 class="file-heading">File: lib/class-upgrader-skin.php</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+&lt;?php
+/**
+ * Class Module
+ *
+ */
+namespace UsabilityDynamics\WPP {
 
-    
+  include_once( ABSPATH . &#x27;wp-admin/includes/class-wp-upgrader.php&#x27; );
 
-    
+  if( !class_exists( &#x27;UsabilityDynamics\WPP\Upgrader_Skin&#x27; ) ) {
 
-    
-</div>
+    /**
+     * Silent SKin
+     *
+     * @package WordPress
+     * @subpackage Upgrader_Skin
+     */
+    class Upgrader_Skin extends \WP_Upgrader_Skin {
 
+      var $options = array();
 
+      function __construct( $args = array() ) {
 
-<div class="box intro">
-    
-</div>
+        parent::__construct( array(
+          &#x27;title&#x27; =&gt; __( &#x27;Update Module&#x27; ),
+        ));
 
+      }
 
+      function request_filesystem_credentials( $error = null ) {
+        include_once( ABSPATH . &#x27;wp-admin/includes/file.php&#x27; );
+        return parent::request_filesystem_credentials( $error );
+      }
 
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
+      function header() {}
 
-        
-            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-        
-        
-        
-        
-    </ul>
+      function footer() {}
 
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
+      function error( $error ) {}
 
-            
-                <div class="index-section methods">
-                    <h3>Methods</h3>
+      function feedback( $string ) {}
 
-                    <ul class="index-list methods">
-                        
-                            <li class="index-item method">
-                                <a href="#method_get_instance">get_instance</a>
+      function before() {}
 
-                                
-                                    <span class="flag static">static</span>
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
+      function after() {}
 
-            
+    }
 
-            
+  }
 
-            
-        </div>
-
-        
-            <div id="methods" class="api-class-tabpanel">
-                <h2 class="off-left">Methods</h2>
-
-                
-                    <div id="method_get_instance" class="method item">
-    <h3 class="name"><code>get_instance</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-        <span class="flag static">static</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_class-bootstrap.php.html#l1928"><code>lib&#x2F;class-bootstrap.php:1928</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Get the WPP Singleton</p>
-<p>Concept based on the CodeIgniter get_instance() concept.</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    <p>object</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code> var settings = WPP::get_instance()-&gt;Settings;
- var api = WPP::$instance()-&gt;API;</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-
-        
-    </div>
+}
+    </pre>
 </div>
 
                     </div>

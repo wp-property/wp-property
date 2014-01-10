@@ -186,8 +186,8 @@ if( get_option( &#x27;permalink_structure&#x27; ) == &#x27;&#x27; ) {
   &lt;form id=&quot;wpp_settings_form&quot; method=&quot;post&quot; action=&quot;&lt;?php echo admin_url( &#x27;edit.php?post_type=property&amp;page=property_settings&#x27; ); ?&gt;&quot; enctype=&quot;multipart/form-data&quot; data-requires=&quot;wpp.admin.settings&quot;&gt;
     &lt;?php wp_nonce_field( &#x27;wpp_setting_save&#x27; ); ?&gt;
 
-    &lt;div id=&quot;wpp_settings_tabs&quot; class=&quot;wpp_tabs clearfix&quot; data-requires=&quot;udx.ui.tabs&quot;&gt;
-      &lt;ul class=&quot;tabs&quot;&gt;
+    &lt;div id=&quot;wpp_settings_tabs&quot; class=&quot;wpp_tabs clearfix&quot;&gt;
+      &lt;ul class=&quot;tabs&quot;  data-requires=&quot;udx.ui.jquery.tabs&quot;&gt;
         &lt;li&gt;&lt;a href=&quot;#tab_main&quot;&gt;&lt;?php _e( &#x27;Main&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&quot;#tab_display&quot;&gt;&lt;?php _e( &#x27;Display&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href=&quot;#tab_maps&quot;&gt;&lt;?php _e( &#x27;Maps&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/a&gt;&lt;/li&gt;
