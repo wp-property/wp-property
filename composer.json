@@ -1,8 +1,10 @@
 {
   "name": "usabilitydynamics/wp-property",
-  "version": "2.0.0-beta1",
+  "version": "2.0.0",
   "type": "library",
-  "license": [ "GPL-3.0+" ],
+  "license": [
+    "GPL-3.0+"
+  ],
   "authors": [
     {
       "name": "Andy Potanin",
@@ -41,7 +43,8 @@
     "usabilitydynamics/lib-requires": "master",
     "usabilitydynamics/lib-utility": "master",
     "usabilitydynamics/lib-js-colorpicker": "master",
-    "usabilitydynamics/lib-wp-xmlrpc": "master"
+    "usabilitydynamics/lib-wp-xmlrpc": "master",
+    "usabilitydynamics/lib-wp-shortcode": "dev-master"
   },
   "require-dev": {
     "usabilitydynamics/wp-property-admin-tools": "master",
@@ -67,11 +70,9 @@
       "lib/class-module.php",
       "lib/class-meta-box.php",
       "lib/class-object-list-table.php",
-      "lib/class-shortcode.php",
       "lib/class-settings.php",
       "lib/class-theme.php",
       "lib/class-template.php",
-      "lib/class-upgrader-skin.php",
       "lib/class-ui.php",
       "lib/class-utility.php",
       "lib/class-widget.php",
