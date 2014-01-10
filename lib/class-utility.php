@@ -2275,6 +2275,9 @@ namespace UsabilityDynamics\WPP {
        */
       static function minify_js( $data ) {
 
+        //** Just wrap since will not be used anymore */
+        return $data;
+
         if( !class_exists( 'W3_Plugin' ) ) {
           include_once WPP_Path . 'third-party/jsmin.php';
         } elseif( file_exists( WP_PLUGIN_DIR . '/w3-total-cache/lib/Minify/JSMin.php' ) ) {
@@ -2325,6 +2328,9 @@ namespace UsabilityDynamics\WPP {
        * @author odokienko@UD
        */
       static function minify_css( $data ) {
+
+        //** Just wrap since will not be used anymore */
+        return $data;
 
         include_once WPP_Path . 'third-party/cssmin.php';
 

@@ -510,7 +510,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'third-party/fancybox/jquery.fancybox-1.3.4.css' );
-        wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'third-party/colorpicker/colorpicker.css' );
+        wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'vendor/usabilitydynamics/js-colorpicker/styles/colorpicker.css' );
         wp_register_style( 'jquery-ui', WPP_URL . 'styles/jquery-ui.css' );
         wp_register_style( 'wpp-jquery-data-tables', WPP_URL . "styles/wpp-data-tables.css" );
 
@@ -550,7 +550,7 @@ namespace UsabilityDynamics\WPP {
         // Register Vendor Libraries.
         wp_register_script( 'wp-property-galleria', WPP_URL . 'third-party/galleria/galleria-1.2.5.js', array( 'jquery', 'wpp.localization' ) );
         wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'third-party/fancybox/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp.localization' ), '1.7.3' );
-        wp_register_script( 'wpp-jquery-colorpicker', WPP_URL . 'third-party/colorpicker/colorpicker.js', array( 'jquery', 'wpp.localization' ) );
+        wp_register_script( 'wpp-jquery-colorpicker', WPP_URL . 'vendor/usabilitydynamics/js-colorpicker/scripts/colorpicker.js', array( 'jquery', 'wpp.localization' ) );
         wp_register_script( 'wpp-jquery-easing', WPP_URL . 'third-party/fancybox/jquery.easing-1.3.pack.js', array( 'jquery', 'wpp.localization' ), '1.7.3' );
         wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'scripts/fileuploader.js', array( 'jquery', 'wpp.localization' ) );
         wp_register_script( 'wpp-jquery-nivo-slider', WPP_URL . 'third-party/jquery.nivo.slider.pack.js', array( 'jquery', 'wpp.localization' ) );
@@ -600,9 +600,15 @@ namespace UsabilityDynamics\WPP {
         // add_shortcode( 'property_map', array( $this, 'shortcode_property_map' ) );
         // add_shortcode( 'property_attribute', array( $this, 'shortcode_property_attribute' ) );
 
-        if( !empty( $wp_properties[ 'alternative_shortcodes' ][ 'property_overview' ] ) ) {
-          add_shortcode( "{$wp_properties[ 'alternative_shortcodes' ]['property_overview']}", array( $this, 'shortcode_property_overview' ) );
-        }
+        // ? what is 'alternative_shortcodes'
+        //if( !empty( $wp_properties[ 'alternative_shortcodes' ][ 'property_overview' ] ) ) {
+          //add_shortcode( "{$wp_properties[ 'alternative_shortcodes' ]['property_overview']}", array( $this, 'shortcode_property_overview' ) );
+        //}
+
+        // Temp! It's just for testing
+        include dirname( dirname( __FILE__ ) ) . '/test/shortcode.php';
+
+        //global $_shortcodes; echo "<pre>"; print_r( $_shortcodes ); echo "</pre>"; die();
 
       }
 
@@ -1191,7 +1197,7 @@ namespace UsabilityDynamics\WPP {
       public function add_meta_boxes() {
         global $post, $wpdb;
 
-        include_once( WPP_Path . '/test/meta-box.php' );
+        //include_once( WPP_Path . '/test/meta-box.php' );
 
         //** Add metabox for child properties */
         if( $post->post_type == 'property' && $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_parent = '{$post->ID}' AND post_status = 'publish' " ) ) {

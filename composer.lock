@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "c9cc99ffa4cd2101c7c7c907d8f4cc75",
+    "hash": "541da7195ba00594161ae6cd2074d5f4",
     "packages": [
         {
             "name": "datatables/datatables",
@@ -250,12 +250,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "cf70eea85b616175c96c525dde977ed5dceef26c"
+                "reference": "84d6991eba8f1892a8783c7d4a8dd4cfd550d537"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/cf70eea85b616175c96c525dde977ed5dceef26c",
-                "reference": "cf70eea85b616175c96c525dde977ed5dceef26c",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/84d6991eba8f1892a8783c7d4a8dd4cfd550d537",
+                "reference": "84d6991eba8f1892a8783c7d4a8dd4cfd550d537",
                 "shasum": ""
             },
             "require": {
@@ -312,7 +312,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2013-12-28 12:57:12"
+            "time": "2014-01-09 11:03:01"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -568,6 +568,23 @@
             "time": "2013-12-22 19:01:07"
         },
         {
+            "name": "usabilitydynamics/js-colorpicker",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/js-colorpicker",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/UsabilityDynamics/js-colorpicker/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "component",
+            "time": "2014-01-09 15:36:27"
+        },
+        {
             "name": "usabilitydynamics/lib-api",
             "version": "master",
             "source": {
@@ -658,7 +675,7 @@
                 ]
             },
             "homepage": "http://github.com/usabilitydynamics/lib-settings",
-            "time": "2014-01-08 12:48:39"
+            "time": "2014-01-08 07:21:05"
         },
         {
             "name": "usabilitydynamics/lib-ui",
@@ -697,7 +714,7 @@
             "keywords": [
                 "api"
             ],
-            "time": "2014-01-08 11:14:06"
+            "time": "2014-01-08 03:06:55"
         },
         {
             "name": "usabilitydynamics/lib-utility",
@@ -719,19 +736,19 @@
                     "lib"
                 ]
             },
-            "time": "2014-01-08 12:49:26"
+            "time": "2014-01-08 07:21:09"
         },
         {
-            "name": "usabilitydynamics/meta-box",
+            "name": "wordpress/meta-box",
             "version": "master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/UsabilityDynamics/wp-meta-box",
+                "url": "https://github.com/rilwis/meta-box",
                 "reference": "master"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/UsabilityDynamics/wp-meta-box/archive/3.4.6.zip",
+                "url": "https://github.com/rilwis/meta-box/archive/3.4.6.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -749,63 +766,6 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "tecnick.com/tcpdf",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "git://git.code.sf.net/p/tcpdf/code",
-                "reference": "4a7678a1ad47724e466af71163e6f1bd02273c7c"
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "fonts",
-                    "config",
-                    "include",
-                    "tcpdf.php",
-                    "tcpdf_parser.php",
-                    "tcpdf_import.php",
-                    "tcpdf_barcodes_1d.php",
-                    "tcpdf_barcodes_2d.php",
-                    "include/tcpdf_colors.php",
-                    "include/tcpdf_filters.php",
-                    "include/tcpdf_font_data.php",
-                    "include/tcpdf_fonts.php",
-                    "include/tcpdf_images.php",
-                    "include/tcpdf_static.php",
-                    "include/barcodes/datamatrix.php",
-                    "include/barcodes/pdf417.php",
-                    "include/barcodes/qrcode.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPLv3"
-            ],
-            "authors": [
-                {
-                    "name": "Nicola Asuni",
-                    "email": "info@tecnick.com",
-                    "homepage": "http://nicolaasuni.tecnick.com"
-                }
-            ],
-            "description": "TCPDF is a PHP class for generating PDF documents.",
-            "homepage": "http://www.tcpdf.org/",
-            "keywords": [
-                "PDFD32000-2008",
-                "TCPDF",
-                "barcodes",
-                "datamatrix",
-                "pdf",
-                "pdf417",
-                "qrcode"
-            ],
-            "time": "2014-01-03 19:11:14"
-        },
         {
             "name": "usabilitydynamics/wp-property-admin-tools",
             "version": "master",
@@ -1025,47 +985,6 @@
             },
             "type": "library",
             "time": "2014-01-06 17:28:01"
-        },
-        {
-            "name": "zend/gdata",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/alchemy-fr/gdata.git",
-                "reference": "4ae96d26cec159d74ced57c89ebdcde754ece35d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/alchemy-fr/gdata/zipball/4ae96d26cec159d74ced57c89ebdcde754ece35d",
-                "reference": "4ae96d26cec159d74ced57c89ebdcde754ece35d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">5.2.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Zend_": "library"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "New BSD"
-            ],
-            "authors": [
-                {
-                    "name": "Zend Contributors",
-                    "homepage": "http://framework.zend.com/community/contributors"
-                }
-            ],
-            "description": "The Google Data APIs are a set of web services for read/write access to applications hosted by Google",
-            "homepage": "http://framework.zend.com/download/webservices",
-            "keywords": [
-                "gdata",
-                "zend"
-            ],
-            "time": "2013-01-30 15:31:21"
         }
     ],
     "aliases": [
