@@ -1945,9 +1945,32 @@ namespace UsabilityDynamics\WPP {
           'contextual_help' => array()
         ));
 
-        get_current_screen()->add_help_tab(array(
-          'content'  => '<p>' . __( 'Please upgrade Wordpress to the latest version for detailed help.', 'wpp' ) . '</p><p>' . __( 'Or visit <a href="https://usabilitydynamics.com/tutorials/wp-property-help/" target="_blank">WP-Property Help Page</a> on UsabilityDynamics.com', 'wpp' ) . '</p>'
-        ));
+        //** If method exists add_help_tab in WP_Screen */
+        if ( is_callable( array( 'WP_Screen', 'add_help_tab' ) ) ) {
+
+          //** Loop through help items and build tabs */
+          foreach ( (array) $args->contextual_help as $help_tab_title => $help ) {
+
+            //** Add tab with current info */
+            get_current_screen()->add_help_tab(
+              array(
+                'id' => sanitize_title( $help_tab_title ),
+                'title' => __( $help_tab_title, 'wpp' ),
+                'content' => implode( "\n", (array) $args->contextual_help[ $help_tab_title ] ),
+              )
+            );
+
+          }
+
+          //** Add help sidebar with More Links */
+          get_current_screen()->set_help_sidebar(
+            '<p><strong>' . __( 'For more information:', 'wpp' ) . '</strong></p>' .
+            '<p>' . __( '<a href="https://usabilitydynamics.com/products/wp-property/" target="_blank">WP-Property Product Page</a>', 'wpp' ) . '</p>' .
+            '<p>' . __( '<a href="https://usabilitydynamics.com/products/wp-property/forum/" target="_blank">WP-Property Forums</a>', 'wpp' ) . '</p>' .
+            '<p>' . __( '<a href="https://usabilitydynamics.com/help/" target="_blank">WP-Property Tutorials</a>', 'wpp' ) . '</p>'
+          );
+
+        }
 
       }
 
