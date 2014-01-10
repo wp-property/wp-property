@@ -116,6 +116,15 @@ namespace UsabilityDynamics\WPP {
       public $_path = null;
 
       /**
+       * Vendor Path.
+       *
+       * @static
+       * @property $_vendor
+       * @type {String}
+       */
+      public $_vendor = null;
+
+      /**
        * URL to Base.
        *
        * @static
@@ -145,11 +154,11 @@ namespace UsabilityDynamics\WPP {
         // Save Instance.
         self::$instance = $wpp = &$this;
 
-        // Autoload Vendor Dependencies.
-        $this->autoload();
-
         // Define Constants.
         $this->define_constants();
+
+        // Autoload Vendor Dependencies.
+        $this->autoload();
 
         // property_meta
         // location_matters
@@ -171,6 +180,9 @@ namespace UsabilityDynamics\WPP {
           "key" => "wpp_settings",
           "schema" => WPP_Path . 'static/schemas/system.settings.schema.json'
         ));
+
+        // Set vendor path in settings for easier access.
+        $this->set( 'paths.vendor', $this->_vendor . '/usabilitydynamics' );
 
         // @note Hopefully temporary but this exposes settings to the legacy $wp_properties global variable.
         $wp_properties = $this->get();
@@ -232,94 +244,24 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       * Check for premium features and load them
+       * Load and Instantiate Available Modules
        *
-       * @updated 1.6
-       * @since 0.624
-       *
+       * @todo Add some logic to prevent broken libraries form being re-downloaded on every request by being disabled in settings on failure.
        */
       private function load_modules() {
-        global $wp_properties;
 
-        $default_headers = array(
-          'Name'                 => __( 'Name', 'wpp' ),
-          'Version'              => __( 'Version', 'wpp' ),
-          'Description'          => __( 'Description', 'wpp' ),
-          'Minimum Core Version' => __( 'Minimum Core Version', 'wpp' )
-        );
+        // @debug Declaring "active" modules for current client.
+        $this->set( 'modules.active', array(
+          //'wp-property-test-module',
+          'wp-property-admin-tools',
+          'wp-property-power-tools'
+        ));
 
-        if( !is_dir( WPP_Premium ) )
-          return;
-
-        if( $premium_dir = opendir( WPP_Premium ) ) {
-
-          if( file_exists( WPP_Premium . "/index.php" ) ) {
-            @include_once( WPP_Premium . "/index.php" );
-          }
-
-          while( false !== ( $file = readdir( $premium_dir ) ) ) {
-
-            if( $file == 'index.php' )
-              continue;
-
-            if( end( @explode( ".", $file ) ) == 'php' ) {
-
-              $plugin_slug = str_replace( array( '.php' ), '', $file );
-
-              //** Admin tools premium feature was moved to core. So it must not be loaded twice. */
-              if( $plugin_slug == 'class_admin_tools' ) {
-                continue;
-              }
-
-              $plugin_data                                                            = @get_file_data( WPP_Premium . "/" . $file, $default_headers, 'plugin' );
-              $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'name' ]        = $plugin_data[ 'Name' ];
-              $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ]     = $plugin_data[ 'Version' ];
-              $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'description' ] = $plugin_data[ 'Description' ];
-
-              if( $plugin_data[ 'Minimum Core Version' ] ) {
-                $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'minimum_wpp_version' ] = $plugin_data[ 'Minimum Core Version' ];
-              }
-
-              //** If feature has a Minimum Core Version and it is more than current version - we do not load **/
-              $feature_requires_upgrade = ( !empty( $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'minimum_wpp_version' ] ) && ( version_compare( WPP_Version, $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'minimum_wpp_version' ] ) < 0 ) ? true : false );
-
-              if( $feature_requires_upgrade ) {
-
-                //** Disable feature if it requires a higher WPP version**/
-
-                $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ]                 = 'true';
-                $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'needs_higher_wpp_version' ] = 'true';
-
-              } elseif( !isset( $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ] ) || $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ] != 'true' ) {
-
-                //** Load feature, everything is good**/
-
-                $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'needs_higher_wpp_version' ] = 'false';
-
-                if( WP_DEBUG == true ) {
-                  include_once( WPP_Premium . "/" . $file );
-                } else {
-                  @include_once( WPP_Premium . "/" . $file );
-                }
-
-                // Disable plugin if class does not exists - file is empty
-                if( !class_exists( $plugin_slug ) ) {
-                  unset( $wp_properties[ 'installed_features' ][ $plugin_slug ] );
-                }
-
-                $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ] = 'false';
-              } else {
-                //* This happens when feature cannot be loaded and is disabled */
-
-                //** We unset requires core upgrade in case feature was update while being disabled */
-                $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'needs_higher_wpp_version' ] = 'false';
-
-              }
-
-            }
-
-          }
-        }
+        // Load required modules into UD Vendor directory.
+        $_required = Module::load( array(
+          'required' => $this->get( 'modules.active' ),
+          'path' => $this->get( 'paths.vendor' )
+        ));
 
       }
 
@@ -332,15 +274,15 @@ namespace UsabilityDynamics\WPP {
       private function autoload() {
 
         // Seek ./vendor/autoload.php and autoload
-        if( !is_file( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'vendor/autoload.php' ) ) {
-          self::fail( 'WP-Property vendor directory missing; attempted to find it in: ' . dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'vendor/autoload.php' );
+        if( !is_file( $this->_vendor . '/autoload.php' ) ) {
+          self::fail( 'WP-Property vendor directory missing; attempted to find it in: ' . $this->_vendor . '/autoload.php' );
         }
 
         // Vendor Autoloader.
-        include_once( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'vendor/autoload.php' );
+        include_once( $this->_vendor . '/autoload.php' );
 
         // Legacy Support.
-        include_once( dirname( __DIR__ ) . DIRECTORY_SEPARATOR . 'lib/legacy.php' );
+        include_once( $this->_path . 'lib/legacy.php' );
 
       }
 
@@ -354,6 +296,7 @@ namespace UsabilityDynamics\WPP {
       private function define_constants() {
 
         $this->_path = trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) );
+        $this->_vendor = trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'vendor';
         $this->_url = trailingslashit( dirname( plugin_dir_url( __FILE__ ) ) );
 
         define( 'WPP_Version', self::$version );
@@ -361,7 +304,7 @@ namespace UsabilityDynamics\WPP {
         define( 'WPP_Path', $this->_path );
         define( 'WPP_URL', $this->_url );
         define( 'WPP_Templates', WPP_Path . 'templates' );
-        define( 'WPP_Premium', WPP_Path . 'core/premium' );
+        define( 'WPP_Premium', WPP_Path . $this->_vendor . '/usabilitydynamics' );
       }
 
       /**
@@ -649,7 +592,9 @@ namespace UsabilityDynamics\WPP {
       /**
        * Add 'property' to the list of RSSable post_types.
        *
-       * @param string $request
+       * @param $qv
+       *
+       * @internal param string $request
        *
        * @return string
        * @author korotkov@ud
@@ -844,6 +789,8 @@ namespace UsabilityDynamics\WPP {
        */
       public function init_lower() {
         global $wp_properties;
+
+
 
         /** Ajax functions */
         add_action( 'wp_ajax_wpp_ajax_max_set_property_type', create_function( "", ' die(Utility::mass_set_property_type($_REQUEST["property_type"]));' ) );
@@ -1145,6 +1092,11 @@ namespace UsabilityDynamics\WPP {
       public function admin_init() {
         global $wp_properties, $post;
 
+        //include_once( '/Users/potanin/Sites/property.cluster.veneer.io/vendor/wordpress/core/wp-admin/includes/class-wp-upgrader-skins.php' );
+        //include_once( '/Users/potanin/Sites/property.cluster.veneer.io/vendor/wordpress/core/wp-admin/includes/misc.php' );
+        //include_once( '/Users/potanin/Sites/property.cluster.veneer.io/vendor/wordpress/core/wp-admin/includes/class-wp-upgrader.php' );
+        //include_once( '/Users/potanin/Sites/property.cluster.veneer.io/vendor/wordpress/core/wp-admin/includes/file.php' );
+
         Utility::fix_screen_options();
 
         // Plug page actions -> Add Settings Link to plugin overview page
@@ -1212,37 +1164,6 @@ namespace UsabilityDynamics\WPP {
        * @return bool
        */
       public function is_active() {
-        return true;
-      }
-
-      /**
-       * Check if premium feature is installed or not
-       *
-       * @param string $slug . Slug of premium feature
-       *
-       * @return boolean.
-       */
-      public function check_premium( $slug ) {
-        global $wp_properties;
-
-        if( empty( $wp_properties[ 'installed_features' ][ $slug ][ 'version' ] ) ) {
-          return false;
-        }
-
-        $file = WPP_Premium . "/" . $slug . ".php";
-
-        $default_headers = array(
-          'Name'        => 'Name',
-          'Version'     => 'Version',
-          'Description' => 'Description'
-        );
-
-        $plugin_data = @get_file_data( $file, $default_headers, 'plugin' );
-
-        if( !is_array( $plugin_data ) || empty( $plugin_data[ 'Version' ] ) ) {
-          return false;
-        }
-
         return true;
       }
 

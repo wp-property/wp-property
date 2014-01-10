@@ -70,6 +70,7 @@
       "lib/class-settings.php",
       "lib/class-theme.php",
       "lib/class-template.php",
+      "lib/class-upgrader-skin.php",
       "lib/class-ui.php",
       "lib/class-utility.php",
       "lib/class-widget.php",
