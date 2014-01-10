@@ -1,0 +1,14 @@
+{
+  "shortcode_property_map()": {
+    "function": "WPP_Core_Depreciated::shortcode_property_map",
+    "assert": [
+      "is_callable"
+    ]
+  },
+  "wpi_draw_pagination()": {
+    "function": "wpi_draw_dpagination",
+    "assert": [
+      "is_callable"
+    ]
+  }
+}
