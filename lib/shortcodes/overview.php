@@ -1,8 +1,63 @@
 <?php
+/**
+ * Name: Property Overview
+ * ID: property_overview
+ * Type: shortcode
+ * Group: WP-Property
+ * Class: UsabilityDynamics\WPP\Shortcode_Overview
+ * Version: 2.0.0
+ * Description: Property Overview shortcode is used to display a list of properties.  It returns all the published properties on your site
+ */
 namespace UsabilityDynamics\WPP {
 
   if( !class_exists( 'UsabilityDynamics\WPP\Shortcode_Overview' ) ) {
-    class Shortcode_Overview extends Shortcode {
+  
+    class Shortcode_Overview extends \UsabilityDynamics\Shortcode\Shortcode {
+    
+      public $id = 'property_overview';
+      
+      public $group = 'WP-Property';
+      
+      public function __construct( $options = array() ) {
+        $this->name = __( 'Property Overview', 'wpp' );
+        $this->description = __( 'Property Overview shortcode is used to display a list of properties.  It returns all the published properties on your site', 'wpp' );
+        $this->params = array(
+          'show_children' => array( 
+            'type' => 'boolean',
+            'description' => __( 'Switches children property displaying', 'wpp' ),
+            'default' => __( 'Property Settings configuration', 'wpp' ),
+          ),
+          'child_properties_title' => array( 
+            'description' => __( 'Renames child properties tittle', 'wpp' ),
+            'default' => __( 'Floor plans at location', 'wpp' ),
+          ),
+          'fancybox_preview' => array( 
+            'type' => 'boolean',
+            'description' => __( 'Switches fancybox preview', 'wpp' ),
+            'default' => __( 'Property Settings configuration', 'wpp' ),
+          ),
+          'bottom_pagination_flag' => array( 
+            'type' => 'boolean',
+            'description' => __( 'Switches bottom pagination flag', 'wpp' ),
+            'default' => __( 'Property Settings configuration', 'wpp' ),
+          ),
+          'thumbnail_size' => array(),
+          'sort_by_text ' => array(),
+          'sort_by' => array(),
+          'sort_order' => array(),
+          'template' => array(),
+          'sorter_type' => array(),
+          'pagination' => array(),
+          'per_page' => array(),
+          'starting_row' => array(),
+          'detail_button' => array(),
+          'hide_count' => array(),
+          'in_new_window ' => array(),
+          'strict_search' => array(),
+        );
+        
+        parent::__construct( $options );
+      }
 
       public function call( $atts = "" ) {
         global $wp_properties, $wpp_query, $property, $post, $wp_query;
@@ -271,46 +326,5 @@ namespace UsabilityDynamics\WPP {
     
     }
   }
-
-  new Shortcode_Overview( array(
-    'id' => 'property_overview',
-    'name' => __( 'Property Overview', 'wpp' ),
-    'description' => __( 'Property Overview shortcode is used to display a list of properties.  It returns all the published properties on your site', 'wpp' ),
-    'group' => 'WP-Property',
-    'params' => array(
-      'show_children' => array( 
-        'type' => 'boolean', // 'true', 'false'
-        'description' => __( 'Switches children property displaying', 'wpp' ),
-        'default' => __( 'Property Settings configuration', 'wpp' ),
-      ),
-      'child_properties_title' => array( 
-        'description' => __( 'Renames child properties tittle', 'wpp' ),
-        'default' => __( 'Floor plans at location', 'wpp' ),
-      ),
-      'fancybox_preview' => array( 
-        'type' => 'boolean', // 'true', 'false'
-        'description' => __( 'Switches fancybox preview', 'wpp' ),
-        'default' => __( 'Property Settings configuration', 'wpp' ),
-      ),
-      'bottom_pagination_flag' => array( 
-        'type' => 'boolean',
-        'description' => __( 'Switches bottom pagination flag', 'wpp' ),
-        'default' => __( 'Property Settings configuration', 'wpp' ),
-      ),
-      'thumbnail_size' => array(),
-      'sort_by_text ' => array(),
-      'sort_by' => array(),
-      'sort_order' => array(),
-      'template' => array(),
-      'sorter_type' => array(),
-      'pagination' => array(),
-      'per_page' => array(),
-      'starting_row' => array(),
-      'detail_button' => array(),
-      'hide_count' => array(),
-      'in_new_window ' => array(),
-      'strict_search' => array(),
-    )
-  ) );
 
 }
