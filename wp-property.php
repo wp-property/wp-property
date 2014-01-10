@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: WP-Property
+ * Plugin Name: WP-Property 2.0
  * Plugin URI: http://usabilitydynamics.com/products/wp-property/
  * Description: Property and Real Estate Management Plugin for WordPress. Create a directory of real estate / rental properties and integrate them into you WordPress CMS.
  * Author: Usability Dynamics, Inc.
- * Version: 2.0.0
+ * Version: 2.0.0-beta1
  * Author URI: http://usabilitydynamics.com
  * Network: False
  *
@@ -25,8 +25,10 @@
  *
  */
 
-// Include bootstrap.
-include_once( __DIR__ . '/lib/class-bootstrap.php' );
+// Include Vendor and Initialize.
+if( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+  include_once( __DIR__ . '/vendor/autoload.php' );
+  new UsabilityDynamics\WPP\Bootstrap();
+}
 
-// Initialize.
-new UsabilityDynamics\WPP\Bootstrap();
+

@@ -35,10 +35,9 @@
   "require": {
     "php": ">=5.3",
     "datatables/datatables": "dev-master",
-    "jms/serializer": "0.14.*@dev",
     "natxet/CssMin": "dev-master",
     "linkorb/jsmin-php": "dev-master",
-    "wordpress/meta-box": "master",
+    "usabilitydynamics/wp-meta-box": "master",
     "usabilitydynamics/lib-api": "master",
     "usabilitydynamics/lib-ui": "master",
     "usabilitydynamics/lib-settings": "master",

@@ -13,8 +13,81 @@ namespace UsabilityDynamics\WPP {
      */
     class Module extends \WP_Upgrader {
 
+      /**
+       * Headers Module.
+       *
+       * @static
+       * @access private
+       * @var array
+       */
+      private static $file_headers = array(
+        'Name'        => 'Module Name',
+        'ThemeURI'    => 'Module URI',
+        'Description' => 'Description',
+        'Author'      => 'Author',
+        'AuthorURI'   => 'Author URI',
+        'Version'     => 'Version',
+        'Class'       => 'Class',
+        'Status'      => 'Status',
+        'TextDomain'  => 'Text Domain',
+        'DomainPath'  => 'Domain Path',
+      );
+
+      /**
+       * Default themes.
+       *
+       * @static
+       * @access private
+       * @var array
+       */
+      private static $default_modules = array(
+        'admin-tools'        => 'Admin Tools'
+      );
+
       var $result;
       var $bulk = false;
+
+      /**
+       * Get a raw, unformatted theme header.
+       *
+       * The header is sanitized, but is not translated, and is not marked up for display.
+       * To get a theme header for display, use the display() method.
+       *
+       * Use the get_template() method, not the 'Template' header, for finding the template.
+       * The 'Template' header is only good for what was written in the style.css, while
+       * get_template() takes into account where WordPress actually located the theme and
+       * whether it is actually valid.
+       *
+       * @access public
+       * @since 3.4.0
+       *
+       * @param string $header Theme header. Name, Description, Author, Version, ThemeURI, AuthorURI, Status, Tags.
+       * @return string String on success, false on failure.
+       */
+      public function get( $header ) {
+        if ( ! isset( $this->headers[ $header ] ) )
+          return false;
+
+        if ( ! isset( $this->headers_sanitized ) ) {
+          $this->headers_sanitized = $this->cache_get( 'headers' );
+          if ( ! is_array( $this->headers_sanitized ) )
+            $this->headers_sanitized = array();
+        }
+
+        if ( isset( $this->headers_sanitized[ $header ] ) )
+          return $this->headers_sanitized[ $header ];
+
+        // If themes are a persistent group, sanitize everything and cache it. One cache add is better than many cache sets.
+        if ( self::$persistently_cache ) {
+          foreach ( array_keys( $this->headers ) as $_header )
+            $this->headers_sanitized[ $_header ] = $this->sanitize_header( $_header, $this->headers[ $_header ] );
+          $this->cache_add( 'headers', $this->headers_sanitized );
+        } else {
+          $this->headers_sanitized[ $header ] = $this->sanitize_header( $header, $this->headers[ $header ] );
+        }
+
+        return $this->headers_sanitized[ $header ];
+      }
 
       function upgrade_strings() {
         $this->strings[ 'up_to_date' ]          = __( 'The plugin is at the latest version.' );
