@@ -84,7 +84,7 @@ module.exports = function( grunt ) {
         tasks: [ 'less' ]
       },
       js: {
-        files: [ 'scripts/*' ],
+        files: [ 'scripts/src/*' ],
         tasks: [ 'uglify' ]
       }
     },

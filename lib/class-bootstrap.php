@@ -178,7 +178,7 @@ namespace UsabilityDynamics\WPP {
         $this->_settings  = new Settings(array(
           "store" => "options",
           "key" => "wpp_settings",
-          "schema" => WPP_Path . 'static/schemas/system.settings.schema.json'
+          "schema" => $this->_path . 'static/schemas/system.settings.schema.json'
         ));
 
         // Set vendor path in settings for easier access.
@@ -253,7 +253,7 @@ namespace UsabilityDynamics\WPP {
         // @debug Declaring "active" modules for current client.
         $this->set( 'modules.active', array(
           //'wp-property-test-module',
-          'wp-property-admin-tools',
+          //'wp-property-admin-tools',
           'wp-property-power-tools'
         ));
 
@@ -301,10 +301,10 @@ namespace UsabilityDynamics\WPP {
 
         define( 'WPP_Version', self::$version );
         define( 'WPP_Object', self::$object );
-        define( 'WPP_Path', $this->_path );
+        //define( 'WPP_Path', $this->_path );
         define( 'WPP_URL', $this->_url );
-        define( 'WPP_Templates', WPP_Path . 'templates' );
-        define( 'WPP_Premium', WPP_Path . $this->_vendor . '/usabilitydynamics' );
+        define( 'WPP_Templates', $this->_path . 'templates' );
+        define( 'WPP_Premium', $this->_path . $this->_vendor . '/usabilitydynamics' );
       }
 
       /**
@@ -474,12 +474,13 @@ namespace UsabilityDynamics\WPP {
         ));
 
         // Register UDX Libraries.
-        wp_register_script( 'udx.requires',       '//cdn.udx.io' );
+        wp_register_script( 'udx.requires',       '//cdn.udx.io/udx.requires.js' );
         //wp_register_script( 'udx.knockout',       '//cdn.udx.io/knockout.js' );
         //wp_register_script( 'udx.utility.cookie', '//cdn.udx.io/utility.cookie.js' );
         //wp_register_script( 'udx.utility.md5',    '//cdn.udx.io/utility.md5.js' );
 
         // Register WP-Property Global Libraries.
+        /*
         wp_register_script( 'wpp.global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp.localization', 'udx.requires' ), WPP_Version );
         wp_register_script( 'wpp.localization', get_bloginfo( 'wpurl' ) . '/wp-admin/admin-ajax.php?action=wpp_js_localization', array(), WPP_Version );
 
@@ -503,6 +504,7 @@ namespace UsabilityDynamics\WPP {
         wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'scripts/jquery.number.format.js', array( 'jquery', 'wpp.localization' ) );
         wp_register_script( 'wpp-jquery-data-tables', WPP_URL . "vendor/datatables/datatables/media/js/jquery.dataTables.js", array( 'jquery', 'wpp.localization' ) );
 
+        */
         // Find and Register client-side JavaScript Library.
         if( file_exists( STYLESHEETPATH . '/wp_properties.js' ) ) {
           wp_register_script( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
@@ -695,7 +697,7 @@ namespace UsabilityDynamics\WPP {
         do_action( 'wpp:init:pre', $this );
 
         //** Load languages */
-        load_plugin_textdomain( self::$text_domain, WPP_Path . false, 'wp-property/languages' );
+        load_plugin_textdomain( self::$text_domain, $this->_path . false, 'wp-property/languages' );
 
         // Register Property Post Type.
         $this->register_post_type();
@@ -724,13 +726,13 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties;
 
         // Loads Widgets.
-        include_once WPP_Path . 'core/widgets/class-child-properties.php';
-        include_once WPP_Path . 'core/widgets/class-featured-properties.php';
-        include_once WPP_Path . 'core/widgets/class-gallery.php';
-        include_once WPP_Path . 'core/widgets/class-latest-properties.php';
-        include_once WPP_Path . 'core/widgets/class-other-properties.php';
-        include_once WPP_Path . 'core/widgets/class-property-attributes.php';
-        include_once WPP_Path . 'core/widgets/class-search-properties.php';
+        include_once $this->_path . 'core/widgets/class-child-properties.php';
+        include_once $this->_path . 'core/widgets/class-featured-properties.php';
+        include_once $this->_path . 'core/widgets/class-gallery.php';
+        include_once $this->_path . 'core/widgets/class-latest-properties.php';
+        include_once $this->_path . 'core/widgets/class-other-properties.php';
+        include_once $this->_path . 'core/widgets/class-property-attributes.php';
+        include_once $this->_path . 'core/widgets/class-search-properties.php';
 
         if( class_exists( 'Property_Attributes_Widget' ) ) {
           register_widget( "Property_Attributes_Widget" );
@@ -1149,7 +1151,7 @@ namespace UsabilityDynamics\WPP {
       public function add_meta_boxes() {
         global $post, $wpdb;
 
-        //include_once( WPP_Path . '/test/meta-box.php' );
+        //include_once( $this->_path . '/test/meta-box.php' );
 
         //** Add metabox for child properties */
         if( $post->post_type == 'property' && $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_parent = '{$post->ID}' AND post_status = 'publish' " ) ) {
@@ -1297,18 +1299,18 @@ namespace UsabilityDynamics\WPP {
 
           //** Property Overview Page and Edit Property page */
           case 'property_page_all_properties':
-            wp_enqueue_script( 'wpp.admin' );
-            wp_enqueue_script( 'wpp.admin.overview' );
+            //wp_enqueue_script( 'wpp.admin' );
+            //wp_enqueue_script( 'wpp.admin.overview' );
 
           case 'property':
-            wp_enqueue_script( 'wpp.global' );
-            //** Enabldes fancybox js, css and loads overview scripts */
-            wp_enqueue_script( 'post' );
-            wp_enqueue_script( 'postbox' );
-            wp_enqueue_script( 'wpp-jquery-fancybox' );
-            wp_enqueue_script( 'wpp-jquery-data-tables' );
-            wp_enqueue_style( 'wpp-jquery-fancybox-css' );
-            wp_enqueue_style( 'wpp-jquery-data-tables' );
+            //wp_enqueue_script( 'wpp.global' );
+            //wp_enqueue_script( 'post' );
+            //wp_enqueue_script( 'postbox' );
+            //wp_enqueue_script( 'wpp-jquery-fancybox' );
+            //wp_enqueue_script( 'wpp-jquery-data-tables' );
+            //wp_enqueue_style( 'wpp-jquery-fancybox-css' );
+            //wp_enqueue_style( 'wpp-jquery-data-tables' );
+
             //** Get width of overview table thumbnail, and set css */
             $thumbnail_attribs = Utility::image_sizes( $wp_properties[ 'configuration' ][ 'admin_ui' ][ 'overview_table_thumbnail_size' ] );
             $thumbnail_width   = ( !empty( $thumbnail_attribs[ 'width' ] ) ? $thumbnail_attribs[ 'width' ] : false );
@@ -1349,41 +1351,41 @@ namespace UsabilityDynamics\WPP {
 
           //** Settings Page */
           case 'property_page_property_settings':
-            wp_enqueue_script( 'wpp.admin' );
-            wp_enqueue_script( 'wpp.global' );
-            wp_enqueue_script( 'jquery' );
-            wp_enqueue_script( 'jquery-ui-core' );
-            wp_enqueue_script( 'jquery-ui-sortable' );
-            wp_enqueue_script( 'wpp-jquery-colorpicker' );
-            wp_enqueue_script( 'wpp.admin.settings' );
-            wp_enqueue_style( 'wpp-jquery-colorpicker-css' );
-            break;
+            //wp_enqueue_script( 'wpp.admin' );
+            //wp_enqueue_script( 'wpp.global' );
+            //wp_enqueue_script( 'jquery' );
+            //wp_enqueue_script( 'jquery-ui-core' );
+            //wp_enqueue_script( 'jquery-ui-sortable' );
+            //wp_enqueue_script( 'wpp-jquery-colorpicker' );
+            //wp_enqueue_script( 'wpp.admin.settings' );
+            //wp_enqueue_style( 'wpp-jquery-colorpicker-css' );
+          break;
 
           //** Widgets Page */
           case 'widgets':
-            wp_enqueue_script( 'wpp.admin' );
-            wp_enqueue_script( 'wpp.global' );
-            wp_enqueue_script( 'jquery-ui-core' );
-            wp_enqueue_script( 'jquery-ui-sortable' );
-            wp_enqueue_script( 'jquery-ui-tabs' );
-            wp_enqueue_style( 'jquery-ui' );
-            wp_enqueue_script( 'wpp.admin.widgets' );
-            break;
+            //wp_enqueue_script( 'wpp.admin' );
+            //wp_enqueue_script( 'wpp.global' );
+            //wp_enqueue_script( 'wpp.admin.widgets' );
+            //wp_enqueue_script( 'jquery-ui-core' );
+            //wp_enqueue_script( 'jquery-ui-sortable' );
+            //wp_enqueue_script( 'jquery-ui-tabs' );
+            //wp_enqueue_style( 'jquery-ui' );
+          break;
 
         }
 
         //** Automatically insert styles sheet if one exists with $current_screen->ID name */
-        if( file_exists( WPP_Path . "/styles/{$current_screen->id}.css" ) ) {
-          wp_enqueue_style( $current_screen->id . '-style', WPP_URL . "/styles/{$current_screen->id}.css", array(), WPP_Version, 'screen' );
+        if( file_exists( $this->_path . "/styles/{$current_screen->id}.css" ) ) {
+          //wp_enqueue_style( $current_screen->id . '-style', WPP_URL . "/styles/{$current_screen->id}.css", array(), WPP_Version, 'screen' );
         }
 
         //** Automatically insert JS sheet if one exists with $current_screen->ID name */
-        if( file_exists( WPP_Path . "scripts/{$current_screen->id}.js" ) ) {
-          wp_enqueue_script( $current_screen->id . '-js', WPP_URL . "scripts/{$current_screen->id}.js", array( 'jquery' ), WPP_Version, 'wpp.admin' );
+        if( file_exists( $this->_path . "scripts/{$current_screen->id}.js" ) ) {
+          //wp_enqueue_script( $current_screen->id . '-js', WPP_URL . "scripts/{$current_screen->id}.js", array( 'jquery' ), WPP_Version, 'wpp.admin' );
         }
 
         // Enqueue Admin CSS on all backend pages.
-        if( file_exists( WPP_Path . 'styles/wpp-admin.css' ) ) {
+        if( file_exists( $this->_path . 'styles/wpp-admin.css' ) ) {
           wp_enqueue_style( 'wpp-admin', WPP_URL . 'styles/wpp-admin.css' );
         }
 
@@ -1437,9 +1439,9 @@ namespace UsabilityDynamics\WPP {
         do_action( 'wpp:admin_menu', $this );
 
         // Load jQuery UI Tabs and Cookie into settings page (settings_page_property_settings)
-        add_action( 'admin_print_scripts-' . $settings_page, create_function( '', "wp_enqueue_script('jquery-ui-tabs');wp_enqueue_script('jquery-cookie');" ) );
-        add_action( 'admin_print_scripts-' . $modules_page, create_function( '', "wp_enqueue_script('jquery-ui-tabs');wp_enqueue_script('jquery-cookie');" ) );
-        add_action( 'admin_print_scripts-' . $all_properties, create_function( '', "wp_enqueue_script('jquery-ui-tabs');wp_enqueue_script('jquery-cookie');" ) );
+        //add_action( 'admin_print_scripts-' . $settings_page, create_function( '', "wp_enqueue_script('jquery-ui-tabs');wp_enqueue_script('jquery-cookie');" ) );
+        //add_action( 'admin_print_scripts-' . $modules_page, create_function( '', "wp_enqueue_script('jquery-ui-tabs');wp_enqueue_script('jquery-cookie');" ) );
+        //add_action( 'admin_print_scripts-' . $all_properties, create_function( '', "wp_enqueue_script('jquery-ui-tabs');wp_enqueue_script('jquery-cookie');" ) );
 
       }
 
@@ -1832,7 +1834,7 @@ namespace UsabilityDynamics\WPP {
         $l10n = array();
 
         //** Include the list of translations */
-        include_once WPP_Path . 'l10n.php';
+        include_once $this->_path . 'l10n.php';
 
         /** All additional localizations must be added using the filter below. */
         $l10n = apply_filters( 'wpp::js::localization', $l10n );

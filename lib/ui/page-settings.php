@@ -60,7 +60,7 @@ if( get_option( 'permalink_structure' ) == '' ) {
 <div class="wrap <?php echo implode( ' ', $wrapper_classes ); ?>">
 
   <h2 class='wpp_settings_page_header'><?php echo $wp_properties[ 'labels' ][ 'name' ] . ' ' . __( 'Settings', 'wpp' ) ?>
-    <div class="wpp_fb_like" data-requires="udx.utility.facebook.like">
+    <div class="wpp_fb_like" data-requires="">
       <div class="fb-like" data-href="https://www.facebook.com/wpproperty" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
     </div>
   </h2>
@@ -85,7 +85,7 @@ if( get_option( 'permalink_structure' ) == '' ) {
     <?php wp_nonce_field( 'wpp_setting_save' ); ?>
 
     <div id="wpp_settings_tabs" class="wpp_tabs clearfix">
-      <ul class="tabs"  data-requires="udx.ui.jquery.tabs">
+      <ul class="tabs"  data-requires="">
         <li><a href="#tab_main"><?php _e( 'Main', 'wpp' ); ?></a></li>
         <li><a href="#tab_display"><?php _e( 'Display', 'wpp' ); ?></a></li>
         <li><a href="#tab_maps"><?php _e( 'Maps', 'wpp' ); ?></a></li>

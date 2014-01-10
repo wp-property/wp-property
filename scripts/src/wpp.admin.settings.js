@@ -4,10 +4,20 @@
  * require( ['wpp.admin.settings'] )
  *
  */
-define( 'wpp.admin.settings', function( require, exports, module ) {
-  console.log( 'module', module.id, 'loaded' );
+define( 'wpp.admin.settings', [ 'jquery', 'jquery.ui' ], function( jquery, ui ) {
+  console.log( 'module', 'loaded' );
 
   return function adminSettingsReady() {
+
+    var jQuery = require( 'jquery' );
+    var _api_url = '/manage/wp-ajax.php';
+    var _strings = {}
+
+    //console.log( "JQUERY DEBUG", typeof require( 'jquery' ).fn.tabs );
+    //console.log( "JQUERY ui", typeof jquery.fn.tabs );
+    console.log( "JQUERY ui", ui );
+
+    return;
 
     /**
      * Handles data saving.
@@ -22,7 +32,7 @@ define( 'wpp.admin.settings', function( require, exports, module ) {
         var data = jQuery( this ).serialize();
         jQuery.ajax( {
           type: 'POST',
-          url: wpp.instance.ajax_url,
+          url: _api_url,
           data: {
             action: 'wpp_save_settings',
             data: data
@@ -37,7 +47,7 @@ define( 'wpp.admin.settings', function( require, exports, module ) {
             }
           },
           error: function() {
-            alert( wpp.strings.undefined_error );
+            alert( _strings.undefined_error );
             btn.prop( 'disabled', false );
           }
         } );
@@ -46,18 +56,16 @@ define( 'wpp.admin.settings', function( require, exports, module ) {
     } );
 
     /* Tabs for various UI elements */
-    jQuery( '.wpp_subtle_tabs' ).tabs();
-
-    wpp.ui.settings.setup_default_property_page();
+    //jQuery( '.wpp_subtle_tabs' ).tabs();
 
     jQuery( "#wpp_settings_base_slug" ).change( function() {
-      wpp.ui.settings.setup_default_property_page();
+      //wpp.ui.settings.setup_default_property_page();
     } );
 
     if( document.location.hash != '' && jQuery( document.location.hash ).length > 0 ) {
-      jQuery( "#wpp_settings_tabs" ).tabs();
+      //jQuery( "#wpp_settings_tabs" ).tabs();
     } else {
-      jQuery( "#wpp_settings_tabs" ).tabs( { cookie: {  name: 'wpp_settings_tabs', expires: 30 } } );
+//      jQuery( "#wpp_settings_tabs" ).tabs( { cookie: {  name: 'wpp_settings_tabs', expires: 30 } } );
     }
 
     /* Show settings array */
@@ -87,7 +95,7 @@ define( 'wpp.admin.settings', function( require, exports, module ) {
     /* Check plugin updates */
     jQuery( "#wpp_ajax_check_plugin_updates" ).click( function() {
       jQuery( '.plugin_status' ).remove();
-      jQuery.post( wpp.instance.ajax_url, {
+      jQuery.post( _api_url, {
         action: 'wpp_ajax_check_plugin_updates'
       }, function( data ) {
         message = "<div class='plugin_status updated fade'><p>" + data + "</p></div>";
@@ -98,7 +106,7 @@ define( 'wpp.admin.settings', function( require, exports, module ) {
     /* Clear Cache */
     jQuery( "#wpp_clear_cache" ).click( function() {
       jQuery( '.clear_cache_status' ).remove();
-      jQuery.post( wpp.instance.ajax_url, {
+      jQuery.post( _api_url, {
         action: 'wpp_ajax_clear_cache'
       }, function( data ) {
         message = "<div class='clear_cache_status updated fade'><p>" + data + "</p></div>";
@@ -108,11 +116,11 @@ define( 'wpp.admin.settings', function( require, exports, module ) {
 
     /* Revalidate all addresses */
     jQuery( "#wpp_ajax_revalidate_all_addresses" ).click( function() {
-      jQuery( this ).val( wpp.strings.processing );
+      jQuery( this ).val( _strings.processing );
       jQuery( this ).attr( 'disabled', true );
       jQuery( '.address_revalidation_status' ).remove();
 
-      jQuery.post( wpp.instance.ajax_url, {
+      jQuery.post( _api_url, {
         action: 'wpp_ajax_revalidate_all_addresses'
       }, function( data ) {
         jQuery( "#wpp_ajax_revalidate_all_addresses" ).val( 'Revalidate again' );
@@ -132,7 +140,7 @@ define( 'wpp.admin.settings', function( require, exports, module ) {
       var property_id = jQuery( "#wpp_property_class_id" ).val();
       jQuery( "#wpp_ajax_property_result" ).html( "" );
 
-      jQuery.post( wpp.instance.ajax_url, {
+      jQuery.post( _api_url, {
         action: 'wpp_ajax_property_query',
         property_id: property_id
       }, function( data ) {
@@ -144,10 +152,10 @@ define( 'wpp.admin.settings', function( require, exports, module ) {
 
     //** Mass set property type */
     jQuery( "#wpp_ajax_max_set_property_type" ).click( function() {
-      if( !confirm( wpp.strings.set_property_type_confirmation ) ) {
+      if( !confirm( _strings.set_property_type_confirmation ) ) {
         return;
       }
-      jQuery.post( wpp.instance.ajax_url, {
+      jQuery.post( _api_url, {
         action: 'wpp_ajax_max_set_property_type',
         property_type: jQuery( "#wpp_ajax_max_set_property_type_type" ).val()
       }, function( data ) {
@@ -161,7 +169,7 @@ define( 'wpp.admin.settings', function( require, exports, module ) {
       var image_id = jQuery( "#wpp_image_id" ).val();
       jQuery( "#wpp_ajax_image_result" ).html( "" );
 
-      jQuery.post( wpp.instance.ajax_url, {
+      jQuery.post( _api_url, {
         action: 'wpp_ajax_image_query',
         image_id: image_id
       }, function( data ) {
@@ -174,10 +182,11 @@ define( 'wpp.admin.settings', function( require, exports, module ) {
     /** Show property query */
     jQuery( "#wpp_check_premium_updates" ).click( function() {
       jQuery( "#wpp_plugins_ajax_response" ).hide();
-      jQuery.post( wpp.instance.ajax_url, {
+      jQuery.post( _api_url, {
         action: 'wpp_ajax_check_plugin_updates'
       }, function( data ) {
         jQuery( "#wpp_plugins_ajax_response" ).show();
+
         jQuery( "#wpp_plugins_ajax_response" ).html( data );
       } );
     } );
