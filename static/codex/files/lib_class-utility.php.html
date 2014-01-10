@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 2.0.0</em>
+            <em>API Docs for: 2.0.0-beta1</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -116,6 +116,526 @@ namespace UsabilityDynamics\WPP {
   if( !class_exists( &#x27;UsabilityDynamics\WPP\Utility&#x27; ) ) {
 
     class Utility extends \UsabilityDynamics\Utility {
+
+      static function get_categorical_fields( $args = false ) {
+
+      }
+
+      /**
+       * Returns all neccessary data about the current instance ( page )
+       *
+       * @since 2.0
+       * @author potanin@UD
+       */
+      static function get_instance( $args = false ) {
+
+        global $wp_properties, $wpdb, $wp_scripts, $current_user, $wp_post_statuses;
+
+        //** Common Settings */
+        $data = array(
+          &#x27;request&#x27; =&gt; $_REQUEST,
+          &#x27;developer_mode&#x27; =&gt; $wp_properties[ &#x27;configuration&#x27; ][ &#x27;developer_mode&#x27; ] == &#x27;true&#x27; ? true : false,
+          &#x27;build_mode&#x27; =&gt; $wp_properties[ &#x27;configuration&#x27; ][ &#x27;build_mode&#x27; ] == &#x27;true&#x27; ? true : false,
+          &#x27;show_ud_log&#x27; =&gt; $wp_properties[ &#x27;configuration&#x27; ][ &#x27;show_ud_log&#x27; ] == &#x27;true&#x27; ? true : false,
+          &#x27;autoload_css&#x27; =&gt; $wp_properties[ &#x27;configuration&#x27; ][ &#x27;autoload_css&#x27; ] == &#x27;true&#x27; ? true : false,
+          &#x27;disable_automatic_feature_update&#x27; =&gt; $wp_properties[ &#x27;configuration&#x27; ][ &#x27;disable_automatic_feature_update&#x27; ] == &#x27;true&#x27; ? true : false,
+          &#x27;disable_wordpress_postmeta_cache&#x27; =&gt; $wp_properties[ &#x27;configuration&#x27; ][ &#x27;disable_wordpress_postmeta_cache&#x27; ] == &#x27;true&#x27; ? true : false,
+          &#x27;disable_legacy_detailed&#x27; =&gt; $wp_properties[ &#x27;configuration&#x27; ][ &#x27;disable_legacy_detailed&#x27; ] == &#x27;true&#x27; ? true : false,
+          &#x27;do_not_automatically_regenerate_thumbnails&#x27; =&gt; $wp_properties[ &#x27;configuration&#x27; ][ &#x27;do_not_automatically_regenerate_thumbnails&#x27; ] == &#x27;true&#x27; ? true : false,
+          &#x27;load_scripts_everywhere&#x27; =&gt; $wp_properties[ &#x27;configuration&#x27; ][ &#x27;load_scripts_everywhere&#x27; ] == &#x27;true&#x27; ? true : false,
+          &#x27;do_not_load_theme_specific_css&#x27; =&gt; $wp_properties[ &#x27;configuration&#x27; ][ &#x27;do_not_load_theme_specific_css&#x27; ] == &#x27;true&#x27; ? true : false,
+          &#x27;data_structure&#x27; =&gt; WPP_Config::get_data_structure(),
+          &#x27;current_user&#x27; =&gt; array(
+            &#x27;user_id&#x27; =&gt; $current_user-&gt;data-&gt;ID,
+            &#x27;display_name&#x27; =&gt; $current_user-&gt;data-&gt;display_name ),
+          &#x27;server&#x27; =&gt; self::get_server_capabilities(),
+          &#x27;wp_post_statuses&#x27; =&gt; $wp_post_statuses,
+          &#x27;image_sizes&#x27; =&gt; WPP_F::all_image_sizes(),
+          &#x27;editable_roles&#x27; =&gt; function_exists( &#x27;get_editable_roles&#x27; ) ? get_editable_roles() : null,
+          &#x27;main_stats_group&#x27; =&gt; WPP_Default_Group,
+          &#x27;show_true_as_image&#x27; =&gt; ( !empty( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;property_overview&#x27; ][ &#x27;show_true_as_image&#x27; ] ) &amp;&amp; $wp_properties[ &#x27;configuration&#x27; ][ &#x27;property_overview&#x27; ][ &#x27;show_true_as_image&#x27; ] == &#x27;true&#x27; ) ? true : false,
+          &#x27;_attribute_classifications&#x27; =&gt; $wp_properties[ &#x27;_attribute_classifications&#x27; ],
+          &#x27;_predefined_attributes&#x27; =&gt; $wp_properties[ &#x27;_predefined_attributes&#x27; ],
+          &#x27;_timestamp&#x27; =&gt; time(),
+          &#x27;_installed&#x27; =&gt; (int) get_option( &#x27;wpp::activation_time&#x27; ),
+          &#x27;_last_update&#x27; =&gt; (int) get_option( &#x27;wpp::activation_time&#x27; ),
+          &#x27;_models&#x27; =&gt; array(),
+          &#x27;_configuration&#x27; =&gt; $wp_properties,
+          &#x27;_instance&#x27; =&gt; array_filter( array(
+            &#x27;api_key&#x27; =&gt; self::get_key( &#x27;api_key&#x27; ),
+            &#x27;site_uid&#x27; =&gt; self::get_key( &#x27;site_uid&#x27; ),
+            &#x27;customer_key&#x27; =&gt; self::get_key( &#x27;customer_key&#x27; ),
+            &#x27;public_key&#x27; =&gt; self::get_key( &#x27;public_key&#x27; ),
+            &#x27;site_url&#x27; =&gt; site_url(),
+            &#x27;home&#x27; =&gt; home_url(),
+            &#x27;ajax&#x27; =&gt; admin_url( &#x27;wp-ajax.php&#x27; ),
+            &#x27;ip&#x27; =&gt; $_SERVER[ &#x27;SERVER_ADDR&#x27; ],
+            &#x27;site&#x27; =&gt; str_replace( array( &#x27;http://&#x27;, &#x27;https://&#x27; ), &#x27;&#x27;, get_bloginfo( &#x27;url&#x27; ) ) ) ),
+        );
+
+        $data = (array) apply_filters( &#x27;wpp::admin_js_object&#x27;, $data );
+
+        if ( ( $_new_install = get_option( &#x27;wpp::splash::new_installation&#x27; ) ) || ( $_upgrade = get_option( &#x27;wpp::splash::upgrade&#x27; ) ) ) {
+          $data[ &#x27;_splash&#x27; ] = array( &#x27;type&#x27; =&gt; $_new_install ? &#x27;new_installation&#x27; : &#x27;upgrade&#x27;,
+                                      &#x27;time&#x27; =&gt; intval( $_new_install ? $_new_install : $_upgrade ),
+                                      &#x27;time_ago&#x27; =&gt; human_time_diff( $_new_install ? $_new_install : $_upgrade ) . __( &#x27;ago&#x27; ) );
+        }
+
+        //** Requested Model */
+        foreach ( (array) $args[ &#x27;models&#x27; ] as $model ) {
+          if ( $_model = apply_filters( &quot;wpp::model::{$model}&quot;, array() ) ) {
+            $data[ &#x27;_models&#x27; ][ $model ] = $_model;
+          }
+        }
+
+        return $data;
+      }
+
+      /**
+       * Return array of WPP attributes, groups and types structure.
+       *
+       * @author potanin@UD
+       * @author peshkov@UD
+       */
+      static function get_data_structure( $args = false ) {
+        global $wpdb, $wp_properties;
+
+        $args = self::parse_args( $args, array(
+          &#x27;analyze_usage&#x27; =&gt; false,
+        ));
+
+        $default_attribute = array(
+          &#x27;label&#x27; =&gt; &#x27;&#x27;,
+          &#x27;slug&#x27; =&gt; &#x27;&#x27;,
+          &#x27;description&#x27; =&gt; &#x27;&#x27;,
+
+          // Classification
+          &#x27;classification&#x27; =&gt; null,
+          &#x27;classification_label&#x27; =&gt; null,
+          &#x27;classification_settings&#x27; =&gt; null,
+
+          // Specific Data
+          &#x27;type&#x27; =&gt; &#x27;meta&#x27;, // Available values: &#x27;post&#x27;, &#x27;meta&#x27;, &#x27;taxonomy&#x27;
+          &#x27;values&#x27; =&gt; false,
+          &#x27;group&#x27; =&gt; null,
+          &#x27;path&#x27; =&gt; false,
+          &#x27;reserved&#x27; =&gt; false,
+          &#x27;system&#x27; =&gt; false,
+          &#x27;admin_inputs&#x27; =&gt; array(),
+          &#x27;search_inputs&#x27; =&gt; array(),
+
+          // Settings
+          &#x27;searchable&#x27; =&gt; false,
+          &#x27;sortable&#x27; =&gt; false,
+          &#x27;in_overview&#x27; =&gt; false,
+          &#x27;disabled&#x27; =&gt; false,
+          &#x27;search_input_type&#x27; =&gt; false,
+          &#x27;admin_input_type&#x27; =&gt; false,
+          &#x27;search_predefined&#x27; =&gt; false,
+          &#x27;admin_predefined&#x27; =&gt; false,
+          &#x27;path&#x27; =&gt; false,
+        );
+
+        $default_group = array(
+          &#x27;label&#x27; =&gt; &#x27;&#x27;,
+          &#x27;slug&#x27; =&gt; &#x27;&#x27;,
+          &#x27;reserved&#x27; =&gt; false,
+        );
+
+        $return = array(
+          &#x27;attributes&#x27; =&gt; array(),
+          &#x27;groups&#x27; =&gt; array(),
+          &#x27;types&#x27; =&gt; array(),
+        );
+
+        $system_attributes = array();
+
+        //** Add to system attributes all specific WP data ( wp_posts columns ) */
+        $columns = $wpdb-&gt;get_results( &quot;SELECT DISTINCT( column_name ) FROM information_schema.columns WHERE table_name = &#x27;{$wpdb-&gt;posts}&#x27;&quot;, ARRAY_N );
+
+        foreach ( $columns as $column ) {
+          $system_attributes[ ] = $column[ 0 ];
+        }
+
+        //** STEP 3. Prepare the list of predefined attributes ( Taxonomies also are related to this list ). These attributes cannot be created by user. */
+
+        $predefined_attributes = !empty( $wp_properties[ &#x27;_predefined_attributes&#x27; ] ) ? $wp_properties[ &#x27;_predefined_attributes&#x27; ] : array();
+
+        foreach ( $predefined_attributes as $k =&gt; $v ) {
+          $predefined_attributes[ $k ][ &#x27;type&#x27; ] = in_array( $k, $system_attributes ) ? &#x27;post&#x27; : ( isset( $predefined_attributes[ $k ][ &#x27;meta&#x27; ] ) &amp;&amp; !$predefined_attributes[ $k ][ &#x27;meta&#x27; ] ? &#x27;post&#x27; : &#x27;meta&#x27; );
+          if ( isset( $v[ &#x27;classification&#x27; ] ) &amp;&amp; !empty( $wp_properties[ &#x27;_attribute_classifications&#x27; ][ $v[ &#x27;classification&#x27; ] ] ) ) {
+            $predefined_attributes[ $k ][ &#x27;classification_label&#x27; ] = $wp_properties[ &#x27;_attribute_classifications&#x27; ][ $v[ &#x27;classification&#x27; ] ][ &#x27;label&#x27; ];
+            $predefined_attributes[ $k ][ &#x27;classification_settings&#x27; ] = $wp_properties[ &#x27;_attribute_classifications&#x27; ][ $v[ &#x27;classification&#x27; ] ][ &#x27;settings&#x27; ];
+          }
+          $predefined_attributes[ $k ] = array_merge( $default_attribute, $predefined_attributes[ $k ] );
+        }
+
+        $taxonomies = !empty( $wp_properties[ &#x27;taxonomies&#x27; ] ) ? (array) $wp_properties[ &#x27;taxonomies&#x27; ] : array();
+        //** Add WP taxonomy &#x27;category&#x27; to the predefined list */
+        $taxonomies[ &#x27;category&#x27; ] = self::object_to_array( get_taxonomy( &#x27;category&#x27; ) );
+
+        //** Add other taxonomies to the predefined list */
+        foreach ( $taxonomies as $taxonomy =&gt; $taxonomy_data ) {
+          $predefined_attributes[ $taxonomy ] = array_merge( $default_attribute, array_filter( array(
+            &#x27;label&#x27; =&gt; $taxonomy_data[ &#x27;label&#x27; ],
+            &#x27;slug&#x27; =&gt; $taxonomy,
+            &#x27;type&#x27; =&gt; &#x27;taxonomy&#x27;,
+            &#x27;decription&#x27; =&gt; __( &#x27;The current attribute is just a link to the existing taxonomy.&#x27;, &#x27;wpp&#x27; ),
+            &#x27;classification&#x27; =&gt; !empty( $def_cl_tax ) ? $def_cl_tax_slug : false,
+            &#x27;classification_label&#x27; =&gt; !empty( $def_cl_tax ) ? $def_cl_tax[ &#x27;label&#x27; ] : false,
+            &#x27;classification_settings&#x27; =&gt; !empty( $def_cl_tax ) ? $def_cl_tax[ &#x27;settings&#x27; ] : false,
+          ) ) );
+        }
+
+        //** STEP 4. Get the main list of all property attributes and merge them with system and predefined attributes */
+
+        $attributes = self::get_attributes();
+
+        foreach ( $attributes as $meta_key =&gt; $label ) {
+          $_data = self::get_attribute( $meta_key );
+
+          $default = array_key_exists( $meta_key, $predefined_attributes ) ? $predefined_attributes[ $meta_key ] : $default_attribute;
+
+          $return[ &#x27;attributes&#x27; ][ $meta_key ] = self::extend( $default, array_filter( array(
+            &#x27;label&#x27; =&gt; $_data[ &#x27;label&#x27; ],
+            &#x27;slug&#x27; =&gt; $_data[ &#x27;slug&#x27; ],
+            &#x27;description&#x27; =&gt; isset( $_data[ &#x27;description&#x27; ] ) ? $_data[ &#x27;description&#x27; ] : false,
+            &#x27;values&#x27; =&gt; !empty( $_data[ &#x27;_values&#x27; ] ) ? $_data[ &#x27;_values&#x27; ] : false,
+            &#x27;group&#x27; =&gt; isset( $_data[ &#x27;group_key&#x27; ] ) ? $_data[ &#x27;group_key&#x27; ] : false,
+            &#x27;reserved&#x27; =&gt; array_key_exists( $meta_key, $predefined_attributes ) ? true : false,
+            &#x27;searchable&#x27; =&gt; isset( $_data[ &#x27;searchable&#x27; ] ) ? $_data[ &#x27;searchable&#x27; ] : false,
+            &#x27;sortable&#x27; =&gt; isset( $_data[ &#x27;sortable&#x27; ] ) ? $_data[ &#x27;sortable&#x27; ] : false,
+            &#x27;in_overview&#x27; =&gt; isset( $_data[ &#x27;in_overview&#x27; ] ) ? $_data[ &#x27;in_overview&#x27; ] : false,
+            &#x27;disabled&#x27; =&gt; isset( $_data[ &#x27;disabled&#x27; ] ) ? $_data[ &#x27;disabled&#x27; ] : false,
+            &#x27;search_input_type&#x27; =&gt; isset( $_data[ &#x27;input_type&#x27; ] ) ? $_data[ &#x27;input_type&#x27; ] : false,
+            &#x27;admin_input_type&#x27; =&gt; isset( $_data[ &#x27;data_input_type&#x27; ] ) ? $_data[ &#x27;data_input_type&#x27; ] : false,
+            &#x27;search_predefined&#x27; =&gt; isset( $_data[ &#x27;predefined_search_values&#x27; ] ) ? $_data[ &#x27;predefined_search_values&#x27; ] : false,
+            &#x27;admin_predefined&#x27; =&gt; isset( $_data[ &#x27;predefined_values&#x27; ] ) ? $_data[ &#x27;predefined_values&#x27; ] : false,
+            &#x27;path&#x27; =&gt; ( $_data[ &#x27;group_key&#x27; ] ? $_data[ &#x27;group_key&#x27; ] . &#x27;.&#x27; . $_data[ &#x27;slug&#x27; ] : false ),
+            &#x27;classification&#x27; =&gt; array_key_exists( $meta_key, $predefined_attributes ) ? $predefined_attributes[ $meta_key ][ &#x27;classification&#x27; ] : false,
+            &#x27;classification_label&#x27; =&gt; array_key_exists( $meta_key, $predefined_attributes ) ? $predefined_attributes[ $meta_key ][ &#x27;classification_label&#x27; ] : false,
+            &#x27;classification_settings&#x27; =&gt; array_key_exists( $meta_key, $predefined_attributes ) ? $predefined_attributes[ $meta_key ][ &#x27;classification_settings&#x27; ] : false,
+          ) ) );
+
+          //** Set specific data based on system and predefined attributes */
+          $return[ &#x27;attributes&#x27; ][ $meta_key ][ &#x27;type&#x27; ] = in_array( $meta_key, $system_attributes ) ? &#x27;post&#x27; : &#x27;meta&#x27;;
+          if ( array_key_exists( $meta_key, $predefined_attributes ) ) {
+            $return[ &#x27;attributes&#x27; ][ $meta_key ][ &#x27;type&#x27; ] = $predefined_attributes[ $meta_key ][ &#x27;type&#x27; ];
+          } else {
+            /* Check if the slug exists in classifications, if so, override classification&#x27;s settings */
+            $classification = !empty( $wp_properties[ &#x27;attribute_classification&#x27; ][ $meta_key ] ) ? $wp_properties[ &#x27;attribute_classification&#x27; ][ $meta_key ] : false;
+            if ( $classification &amp;&amp; isset( $wp_properties[ &#x27;_attribute_classifications&#x27; ][ $classification ] ) ) {
+              $return[ &#x27;attributes&#x27; ][ $meta_key ][ &#x27;classification&#x27; ] = $classification;
+              $return[ &#x27;attributes&#x27; ][ $meta_key ][ &#x27;classification_label&#x27; ] = $wp_properties[ &#x27;_attribute_classifications&#x27; ][ $classification ][ &#x27;label&#x27; ];
+              $return[ &#x27;attributes&#x27; ][ $meta_key ][ &#x27;classification_settings&#x27; ] = $wp_properties[ &#x27;_attribute_classifications&#x27; ][ $classification ][ &#x27;settings&#x27; ];
+            }
+          }
+        }
+
+        foreach ( $predefined_attributes as $k =&gt; $v ) {
+          if ( !array_key_exists( $k, $return[ &#x27;attributes&#x27; ] ) ) {
+            $return[ &#x27;attributes&#x27; ][ $k ] = $predefined_attributes[ $k ];
+          }
+        }
+
+        //** Set specific data based on classification and type, etc */
+        foreach ( $return[ &#x27;attributes&#x27; ] as $k =&gt; $v ) {
+          if ( $v[ &#x27;type&#x27; ] === &#x27;post&#x27; ) {
+            $return[ &#x27;attributes&#x27; ][ $k ][ &#x27;system&#x27; ] = true;
+            $return[ &#x27;attributes&#x27; ][ $k ][ &#x27;reserved&#x27; ] = true;
+          }
+          if ( array_key_exists( $k, $predefined_attributes ) ) {
+            $return[ &#x27;attributes&#x27; ][ $k ][ &#x27;reserved&#x27; ] = true;
+          }
+          if ( !empty( $wp_properties[ &#x27;_attribute_classifications&#x27; ][ $v[ &#x27;classification&#x27; ] ][ &#x27;admin&#x27; ] ) ) {
+            foreach ( (array) $wp_properties[ &#x27;_attribute_classifications&#x27; ][ $v[ &#x27;classification&#x27; ] ][ &#x27;admin&#x27; ] as $slug =&gt; $label ) {
+              $return[ &#x27;attributes&#x27; ][ $k ][ &#x27;admin_inputs&#x27; ][ ] = array( &#x27;slug&#x27; =&gt; $slug, &#x27;label&#x27; =&gt; $label );
+            }
+          }
+          if ( !empty( $wp_properties[ &#x27;_attribute_classifications&#x27; ][ $v[ &#x27;classification&#x27; ] ][ &#x27;search&#x27; ] ) ) {
+            foreach ( (array) $wp_properties[ &#x27;_attribute_classifications&#x27; ][ $v[ &#x27;classification&#x27; ] ][ &#x27;search&#x27; ] as $slug =&gt; $label ) {
+              $return[ &#x27;attributes&#x27; ][ $k ][ &#x27;search_inputs&#x27; ][ ] = array( &#x27;slug&#x27; =&gt; $slug, &#x27;label&#x27; =&gt; $label );
+            }
+          }
+        }
+
+        //** STEP 5. ANALYZE USAGE. If Analyze usage is needed we update attributes data based on type */
+
+        if ( $args-&gt;analyze_usage ) {
+          foreach ( $return[ &#x27;attributes&#x27; ] as $k =&gt; $v ) {
+            switch ( $v[ &#x27;type&#x27; ] ) {
+              case &#x27;post&#x27;:
+                //** Not sure what could be here. peshkov@UD */
+                break;
+              case &#x27;meta&#x27;:
+                $return[ &#x27;attributes&#x27; ][ $k ][ &#x27;total_usage&#x27; ] = ( int ) $wpdb-&gt;get_var( $wpdb-&gt;prepare( &quot;
+              SELECT COUNT( post_id )
+              FROM {$wpdb-&gt;postmeta}
+              WHERE meta_key = %s
+                AND meta_value != &#x27;&#x27;;
+            &quot;, $meta_key ) );
+                $return[ &#x27;attributes&#x27; ][ $k ][ &#x27;uniqueness&#x27; ] = ( int ) $wpdb-&gt;get_var( $wpdb-&gt;prepare( &quot;
+              SELECT COUNT(DISTINCT(meta_value ))
+              FROM {$wpdb-&gt;postmeta}
+              WHERE meta_key = %s
+                AND meta_value !=&#x27;&#x27;;
+            &quot;, $meta_key ) );
+                break;
+              case &#x27;taxonomy&#x27;:
+                $return[ &#x27;attributes&#x27; ][ $k ][ &#x27;values&#x27; ] = $wpdb-&gt;get_col( $wpdb-&gt;prepare( &quot;
+              SELECT name
+              FROM {$wpdb-&gt;terms} t
+                LEFT JOIN {$wpdb-&gt;term_taxonomy} tr ON t.term_id = tr.term_id
+              WHERE tr.taxonomy = %s;
+            &quot;, $k ) );
+                break;
+            }
+          }
+        }
+
+        //** STEP 6. Set property types and groups and return data */
+
+        foreach ( (array) $wp_properties[ &#x27;property_types&#x27; ] as $slug =&gt; $label ) {
+          $return[ &#x27;types&#x27; ][ $slug ] = array(
+            &#x27;label&#x27; =&gt; $label,
+            &#x27;slug&#x27; =&gt; $slug,
+            &#x27;meta&#x27; =&gt; $wp_properties[ &#x27;property_type_meta&#x27; ][ $slug ],
+            &#x27;settings&#x27; =&gt; array(
+              &#x27;geolocatable&#x27; =&gt; in_array( $slug, (array) $wp_properties[ &#x27;location_matters&#x27; ] ) ? true : false,
+              &#x27;searchable&#x27; =&gt; in_array( $slug, (array) $wp_properties[ &#x27;searchable_property_types&#x27; ] ) ? true : false,
+              &#x27;hierarchical&#x27; =&gt; in_array( $slug, (array) $wp_properties[ &#x27;hierarchical_property_types&#x27; ] ) ? true : false,
+            ),
+            &#x27;hidden_attributes&#x27; =&gt; (array) $wp_properties[ &#x27;hidden_attributes&#x27; ][ $slug ],
+            &#x27;property_inheritance&#x27; =&gt; (array) $wp_properties[ &#x27;property_inheritance&#x27; ][ $slug ],
+          );
+        }
+
+        $predefined_groups = !empty( $wp_properties[ &#x27;_predefined_groups&#x27; ] ) ? $wp_properties[ &#x27;_predefined_groups&#x27; ] : array();
+
+        if ( !empty( $wp_properties[ &#x27;property_groups&#x27; ] ) ) {
+          foreach ( (array) $wp_properties[ &#x27;property_groups&#x27; ] as $group_slug =&gt; $data ) {
+            $default = array_key_exists( $group_slug, $predefined_groups ) ? array_merge( $default_group, $predefined_groups[ $group_slug ] ) : $default_group;
+            $return[ &#x27;groups&#x27; ][ $group_slug ] = self::extend( $default, array_filter( array(
+              &#x27;label&#x27; =&gt; $data[ &#x27;name&#x27; ],
+              &#x27;slug&#x27; =&gt; $group_slug,
+            ) ) );
+          }
+        }
+
+        foreach ( array_reverse( $predefined_groups ) as $k =&gt; $v ) {
+          if ( !array_key_exists( $k, $return[ &#x27;groups&#x27; ] ) ) {
+            $return[ &#x27;groups&#x27; ] = array( $k =&gt; array_merge( $default_group, $predefined_groups[ $k ] ) ) + $return[ &#x27;groups&#x27; ];
+          }
+        }
+
+        //echo &quot;&lt;pre&gt;&quot;; print_r( $return ); echo &quot;&lt;/pre&gt;&quot;; die();
+
+        return self::array_filter_deep( (array) $return );
+
+      }
+
+      /**
+       * Return an array of all available attributes and meta keys
+       *
+       * @updated 1.36.1
+       */
+      static function _attributes( $args = &#x27;&#x27;, $extra_values = array() ) {
+        global $wp_properties, $wpdb;
+
+        $args = self::parse_args( $args, array(
+          &#x27;use_optgroups&#x27; =&gt; &#x27;false&#x27;
+        ));
+
+        $property_stats = $wp_properties[ &#x27;property_stats&#x27; ];
+        $property_groups = $wp_properties[ &#x27;property_groups&#x27; ];
+        $property_stats_groups = $wp_properties[ &#x27;property_stats_groups&#x27; ];
+
+        if ( $use_optgroups == &#x27;true&#x27; ) {
+
+          foreach ( (array) $property_stats as $key =&gt; $attribute_label ) {
+
+            if ( $property_stats_groups[ $key ] ) {
+              $_group_slug = $property_stats_groups[ $key ];
+              if ( isset( $property_groups[ $_group_slug ] ) ) {
+                $_group_label = $property_groups[ $_group_slug ][ &#x27;name&#x27; ];
+              }
+            }
+
+            $_group_label = $_group_label ? $_group_label : &#x27;Attributes&#x27;;
+            $attributes[ $_group_label ][ $key ] = $attribute_label;
+
+          }
+
+          $attributes[ &#x27;Other&#x27; ] = $extra_values;
+
+          $attributes = array_filter( (array) $attributes );
+
+          foreach ( (array) $attributes as $_group_label =&gt; $_attribute_data ) {
+            asort( $attributes[ $_group_label ] );
+          }
+
+        } else {
+          $attributes = (array) $property_stats + (array) $extra_values;
+        }
+
+        $attributes = apply_filters( &#x27;wpp_total_attribute_array&#x27;, $attributes );
+
+        if ( !is_array( $attributes ) ) {
+          $attributes = array();
+        }
+
+        return $attributes;
+
+      }
+
+      /**
+       * Returns attribute information.
+       * Checks $wp_properties and returns a concise array of array-specific settings and attributes
+       *
+       * @TODO: need to compare the current version with the previous one ( WPP 1.36.X ). peshkov@UD
+       *
+       * @updated 2.0
+       * @version 1.17.3
+       */
+      static function get_attribute( $attribute = false ) {
+        global $wpdb, $wp_properties;
+
+        $return = array();
+
+        if ( !$attribute ) {
+          return false;
+        }
+
+        if ( wp_cache_get( $attribute, &#x27;wpp_attribute_data&#x27; ) ) {
+          return wp_cache_get( $attribute, &#x27;wpp_attribute_data&#x27; );
+        }
+
+        //** Set post table keys ( wp_posts columns ) */
+        $post_table_keys = array();
+
+        $columns = $wpdb-&gt;get_results( &quot;SELECT DISTINCT( column_name ) FROM information_schema.columns WHERE table_name = &#x27;{$wpdb-&gt;prefix}posts&#x27;&quot;, ARRAY_N );
+
+        foreach ( $columns as $column ) {
+          $post_table_keys[ ] = $column[ 0 ];
+        }
+
+        $ui_class = array( $attribute );
+
+        $return[ &#x27;storage_type&#x27; ] = in_array( $attribute, (array) $post_table_keys ) ? &#x27;post_table&#x27; : &#x27;meta_key&#x27;;
+        $return[ &#x27;slug&#x27; ] = $attribute;
+
+        if ( isset( $wp_properties[ &#x27;property_stats_descriptions&#x27; ][ $attribute ] ) ) {
+          $return[ &#x27;description&#x27; ] = $wp_properties[ &#x27;property_stats_descriptions&#x27; ][ $attribute ];
+        }
+
+        if ( isset( $wp_properties[ &#x27;property_stats_groups&#x27; ][ $attribute ] ) ) {
+          $return[ &#x27;group_key&#x27; ] = $wp_properties[ &#x27;property_stats_groups&#x27; ][ $attribute ];
+          $return[ &#x27;group_label&#x27; ] = $wp_properties[ &#x27;property_groups&#x27; ][ $wp_properties[ &#x27;property_stats_groups&#x27; ][ $attribute ] ][ &#x27;name&#x27; ];
+        }
+
+        $return[ &#x27;label&#x27; ] = $wp_properties[ &#x27;property_stats&#x27; ][ $attribute ];
+        $return[ &#x27;classification&#x27; ] = !empty( $wp_properties[ &#x27;attribute_classification&#x27; ][ $attribute ] ) ? $wp_properties[ &#x27;attribute_classification&#x27; ][ $attribute ] : &#x27;string&#x27;;
+
+        $return[ &#x27;is_stat&#x27; ] = ( !empty( $wp_properties[ &#x27;_attribute_classifications&#x27; ][ $attribute ] ) &amp;&amp; $wp_properties[ &#x27;_attribute_classifications&#x27; ][ $attribute ] != &#x27;detail&#x27; ) ? &#x27;true&#x27; : &#x27;false&#x27;;
+
+        if ( $return[ &#x27;is_stat&#x27; ] == &#x27;detail&#x27; ) {
+          $return[ &#x27;input_type&#x27; ] = &#x27;textarea&#x27;;
+        }
+
+        $ui_class[ ] = &#x27;classification_&#x27; . $return[ &#x27;classification&#x27; ];
+
+        if ( isset( $wp_properties[ &#x27;searchable_attr_fields&#x27; ][ $attribute ] ) ) {
+          $return[ &#x27;input_type&#x27; ] = $wp_properties[ &#x27;searchable_attr_fields&#x27; ][ $attribute ];
+          $ui_class[ ] = &#x27;search_&#x27; . $return[ &#x27;input_type&#x27; ];
+        }
+
+        if ( is_admin() &amp;&amp; isset( $wp_properties[ &#x27;admin_attr_fields&#x27; ][ $attribute ] ) ) {
+          $return[ &#x27;data_input_type&#x27; ] = $wp_properties[ &#x27;admin_attr_fields&#x27; ][ $attribute ];
+          $ui_class[ ] = &#x27;admin_&#x27; . $return[ &#x27;data_input_type&#x27; ];
+        }
+
+        if ( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;address_attribute&#x27; ] == $attribute ) {
+          $return[ &#x27;is_address_attribute&#x27; ] = &#x27;true&#x27;;
+          $ui_class[ ] = &#x27;address_attribute&#x27;;
+        }
+
+        foreach ( (array) $wp_properties[ &#x27;property_inheritance&#x27; ] as $property_type =&gt; $type_data ) {
+          if ( in_array( $attribute, (array) $type_data ) ) {
+            $return[ &#x27;inheritance&#x27; ][ ] = $property_type;
+          }
+        }
+
+        $ui_class[ ] = $return[ &#x27;data_input_type&#x27; ];
+
+        if ( is_array( $wp_properties[ &#x27;predefined_values&#x27; ] ) &amp;&amp; ( $predefined_values = $wp_properties[ &#x27;predefined_values&#x27; ][ $attribute ] ) ) {
+          $return[ &#x27;predefined_values&#x27; ] = $predefined_values;
+          $return[ &#x27;_values&#x27; ] = (array) $return[ &#x27;_values&#x27; ] + explode( &#x27;,&#x27;, $predefined_values );
+        }
+
+        if ( is_array( $wp_properties[ &#x27;predefined_search_values&#x27; ] ) &amp;&amp; ( $predefined_values = $wp_properties[ &#x27;predefined_search_values&#x27; ][ $attribute ] ) ) {
+          $return[ &#x27;predefined_search_values&#x27; ] = $predefined_values;
+          $return[ &#x27;_values&#x27; ] = (array) $return[ &#x27;_values&#x27; ] + explode( &#x27;,&#x27;, $predefined_values );
+        }
+
+        if ( is_array( $wp_properties[ &#x27;sortable_attributes&#x27; ] ) &amp;&amp; in_array( $attribute, (array) $wp_properties[ &#x27;sortable_attributes&#x27; ] ) ) {
+          $return[ &#x27;sortable&#x27; ] = true;
+          $ui_class[ ] = &#x27;sortable&#x27;;
+        }
+
+        if ( is_array( $wp_properties[ &#x27;searchable_attributes&#x27; ] ) &amp;&amp; in_array( $attribute, (array) $wp_properties[ &#x27;searchable_attributes&#x27; ] ) ) {
+          $return[ &#x27;searchable&#x27; ] = true;
+          $ui_class[ ] = &#x27;searchable&#x27;;
+        }
+
+        if ( is_array( $wp_properties[ &#x27;column_attributes&#x27; ] ) &amp;&amp; in_array( $attribute, (array) $wp_properties[ &#x27;column_attributes&#x27; ] ) ) {
+          $return[ &#x27;in_overview&#x27; ] = true;
+          $ui_class[ ] = &#x27;in_overview&#x27;;
+        }
+
+        if ( is_array( $wp_properties[ &#x27;disabled_attributes&#x27; ] ) &amp;&amp; in_array( $attribute, (array) $wp_properties[ &#x27;disabled_attributes&#x27; ] ) ) {
+          $return[ &#x27;disabled&#x27; ] = true;
+          $ui_class[ ] = &#x27;disabled&#x27;;
+        }
+
+        //** Legacy. numeric, boolean and currency params should not be used anywhere more. peshkov@UD */
+        if ( $return[ &#x27;classification&#x27; ] == &#x27;admin_note&#x27; ) {
+          $return[ &#x27;hidden_frontend_attribute&#x27; ] = true;
+          $ui_class[ ] = &#x27;fe_hidden&#x27;;
+        } else if ( $return[ &#x27;classification&#x27; ] == &#x27;currency&#x27; ) {
+          $return[ &#x27;currency&#x27; ] = true;
+          $return[ &#x27;numeric&#x27; ] = true;
+        } else if ( $return[ &#x27;classification&#x27; ] == &#x27;area&#x27; ) {
+          $return[ &#x27;numeric&#x27; ] = true;
+        } else if ( $return[ &#x27;classification&#x27; ] == &#x27;boolean&#x27; ) {
+          $return[ &#x27;boolean&#x27; ] = true;
+        } else if ( $return[ &#x27;classification&#x27; ] == &#x27;numeric&#x27; ) {
+          $return[ &#x27;numeric&#x27; ] = true;
+        }
+
+        if ( in_array( $attribute, array_keys( (array) $wp_properties[ &#x27;_predefined_attributes&#x27; ] ) ) ) {
+          $return[ &#x27;standard&#x27; ] = true;
+          $ui_class[ ] = &#x27;standard_attribute&#x27;;
+        }
+
+        if ( empty( $return[ &#x27;title&#x27; ] ) ) {
+          $return[ &#x27;title&#x27; ] = self::de_slug( $return[ &#x27;slug&#x27; ] );
+        }
+
+        $ui_class = array_filter( array_unique( $ui_class ) );
+        $ui_class = array_map( create_function( &#x27;$class&#x27;, &#x27;return &quot;wpp_{$class}&quot;;&#x27; ), $ui_class );
+        $return[ &#x27;ui_class&#x27; ] = implode( &#x27; &#x27;, $ui_class );
+
+        if ( is_array( $return[ &#x27;_values&#x27; ] ) ) {
+          $return[ &#x27;_values&#x27; ] = array_unique( $return[ &#x27;_values&#x27; ] );
+        }
+
+        $return = apply_filters( &#x27;wpp_attribute_data&#x27;, array_filter( $return ) );
+
+        wp_cache_add( $attribute, $return, &#x27;wpp_attribute_data&#x27; );
+
+        return $return;
+
+      }
 
       /**
        * Returns location information from Google Maps API call.
@@ -435,67 +955,6 @@ namespace UsabilityDynamics\WPP {
         self::console_log( $template, $instance );
 
         return !empty( $template ) ? $template : false;
-      }
-
-      /**
-       * Wrapper function to send notification with WP-CRM or without one
-       *
-       * Migrated out of UD_API
-       *
-       * @param array|mixed $args [&#x27;message&#x27;]          using in email notification
-       *
-       * @uses self::replace_data()
-       * @uses wp_crm_send_notification()
-       * @return boolean false if notification was not sent successfully
-       * @autor odokienko@UD
-       */
-      static function send_notification( $args = array() ) {
-
-        $args = wp_parse_args( $args, array(
-          &#x27;ignore_wp_crm&#x27;   =&gt; false,
-          &#x27;user&#x27;            =&gt; false,
-          &#x27;trigger_action&#x27;  =&gt; false,
-          &#x27;data&#x27;            =&gt; array(),
-          &#x27;message&#x27;         =&gt; &#x27;&#x27;,
-          &#x27;subject&#x27;         =&gt; &#x27;&#x27;,
-          &#x27;crm_log_message&#x27; =&gt; &#x27;&#x27;
-        ) );
-
-        if( is_numeric( $args[ &#x27;user&#x27; ] ) ) {
-          $args[ &#x27;user&#x27; ] = get_user_by( &#x27;id&#x27;, $args[ &#x27;user&#x27; ] );
-        } elseif( filter_var( $args[ &#x27;user&#x27; ], FILTER_VALIDATE_EMAIL ) ) {
-          $args[ &#x27;user&#x27; ] = get_user_by( &#x27;email&#x27;, $args[ &#x27;user&#x27; ] );
-        } elseif( is_string( $args[ &#x27;user&#x27; ] ) ) {
-          $args[ &#x27;user&#x27; ] = get_user_by( &#x27;login&#x27;, $args[ &#x27;user&#x27; ] );
-        }
-
-        if( !is_object( $args[ &#x27;user&#x27; ] ) || empty( $args[ &#x27;user&#x27; ]-&gt;data-&gt;user_email ) ) {
-          return false;
-        }
-
-        if( function_exists( &#x27;wp_crm_send_notification&#x27; ) &amp;&amp;
-          empty( $args[ &#x27;ignore_wp_crm&#x27; ] )
-        ) {
-
-          if( !empty( $args[ &#x27;crm_log_message&#x27; ] ) ) {
-            wp_crm_add_to_user_log( $args[ &#x27;user&#x27; ]-&gt;ID, self::replace_data( $args[ &#x27;crm_log_message&#x27; ], $args[ &#x27;data&#x27; ] ) );
-          }
-
-          if( !empty( $args[ &#x27;trigger_action&#x27; ] ) &amp;&amp; is_callable( array( &#x27;WP_CRM_N&#x27;, &#x27;get_trigger_action_notification&#x27; ) ) ) {
-            $notifications = WP_CRM_N::get_trigger_action_notification( $args[ &#x27;trigger_action&#x27; ] );
-            if( !empty( $notifications ) ) {
-              return wp_crm_send_notification( $args[ &#x27;trigger_action&#x27; ], $args[ &#x27;data&#x27; ] );
-            }
-          }
-
-        }
-
-        if( empty( $args[ &#x27;message&#x27; ] ) ) {
-          return false;
-        }
-
-        return wp_mail( $args[ &#x27;user&#x27; ]-&gt;data-&gt;user_email, self::replace_data( $args[ &#x27;subject&#x27; ], $args[ &#x27;data&#x27; ] ), self::replace_data( $args[ &#x27;message&#x27; ], $args[ &#x27;data&#x27; ] ) );
-
       }
 
       /**
@@ -1918,6 +2377,9 @@ namespace UsabilityDynamics\WPP {
        */
       static function minify_js( $data ) {
 
+        //** Just wrap since will not be used anymore */
+        return $data;
+
         if( !class_exists( &#x27;W3_Plugin&#x27; ) ) {
           include_once WPP_Path . &#x27;third-party/jsmin.php&#x27;;
         } elseif( file_exists( WP_PLUGIN_DIR . &#x27;/w3-total-cache/lib/Minify/JSMin.php&#x27; ) ) {
@@ -1968,6 +2430,9 @@ namespace UsabilityDynamics\WPP {
        * @author odokienko@UD
        */
       static function minify_css( $data ) {
+
+        //** Just wrap since will not be used anymore */
+        return $data;
 
         include_once WPP_Path . &#x27;third-party/cssmin.php&#x27;;
 
@@ -2196,7 +2661,7 @@ namespace UsabilityDynamics\WPP {
        * Return an array of all available attributes and meta keys
        *
        */
-      static function get_total_attribute_array( $args = &#x27;&#x27;, $extra_values = false ) {
+      static function get_attributes( $args = &#x27;&#x27;, $extra_values = false ) {
         global $wp_properties, $wpdb;
 
         $defaults = array(
@@ -2480,7 +2945,7 @@ namespace UsabilityDynamics\WPP {
           $result .= &#x27;&lt;br/&gt;&#x27; . __( &#x27;You have the latest premium features versions.&#x27;, &#x27;wpp&#x27; );
         }
 
-        $result = apply_filters( &#x27;wpp::feature_check::result&#x27;, $result, $updates );
+        $result = apply_filters( &#x27;wpp:feature_check:result&#x27;, $result, $updates );
 
         return $result;
       }
@@ -2969,7 +3434,7 @@ namespace UsabilityDynamics\WPP {
             }
 
             //** Load attribute data */
-            $attribute_data = self::get_attribute_data( $searchable_attribute );
+            $attribute_data = self::get_attribute( $searchable_attribute );
 
             if( $attribute_data[ &#x27;numeric&#x27; ] || $attribute_data[ &#x27;currency&#x27; ] ) {
               $is_numeric = true;
@@ -3713,328 +4178,7 @@ namespace UsabilityDynamics\WPP {
        *
        */
       static function get_property( $id, $args = false ) {
-        global $wp_properties, $wpdb;
-
-        $id = trim( $id );
-
-        $defaults = array(
-          &#x27;get_children&#x27;          =&gt; &#x27;true&#x27;,
-          &#x27;return_object&#x27;         =&gt; &#x27;false&#x27;,
-          &#x27;load_gallery&#x27;          =&gt; &#x27;true&#x27;,
-          &#x27;load_thumbnail&#x27;        =&gt; &#x27;true&#x27;,
-          &#x27;allow_multiple_values&#x27; =&gt; &#x27;false&#x27;,
-          &#x27;load_parent&#x27;           =&gt; &#x27;true&#x27;
-        );
-
-        extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
-        $get_children          = isset( $get_children ) ? $get_children : &#x27;true&#x27;;
-        $return_object         = isset( $return_object ) ? $return_object : &#x27;false&#x27;;
-        $load_gallery          = isset( $load_gallery ) ? $load_gallery : &#x27;true&#x27;;
-        $load_thumbnail        = isset( $load_thumbnail ) ? $load_thumbnail : &#x27;true&#x27;;
-        $allow_multiple_values = isset( $allow_multiple_values ) ? $allow_multiple_values : &#x27;false&#x27;;
-        $load_parent           = isset( $load_parent ) ? $load_parent : &#x27;true&#x27;;
-
-        $args = is_array( $args ) ? http_build_query( $args ) : (string) $args;
-        if( $return = wp_cache_get( $id . $args ) ) {
-          return $return;
-        }
-
-        $post = get_post( $id, ARRAY_A );
-
-        if( $post[ &#x27;post_type&#x27; ] != &#x27;property&#x27; ) {
-          return false;
-        }
-
-        //** Figure out what all the editable attributes are, and get their keys */
-        $wp_properties[ &#x27;property_meta&#x27; ]  = ( is_array( $wp_properties[ &#x27;property_meta&#x27; ] ) ? $wp_properties[ &#x27;property_meta&#x27; ] : array() );
-        $wp_properties[ &#x27;property_stats&#x27; ] = ( is_array( $wp_properties[ &#x27;property_stats&#x27; ] ) ? $wp_properties[ &#x27;property_stats&#x27; ] : array() );
-        $editable_keys                     = array_keys( array_merge( $wp_properties[ &#x27;property_meta&#x27; ], $wp_properties[ &#x27;property_stats&#x27; ] ) );
-
-        $return = array();
-
-        //** Load all meta keys for this object */
-        if( $keys = get_post_custom( $id ) ) {
-          foreach( $keys as $key =&gt; $value ) {
-
-            if( $allow_multiple_values == &#x27;false&#x27; ) {
-              $value = $value[ 0 ];
-            }
-
-            $keyt = trim( $key );
-
-            //** If has _ prefix it&#x27;s a built-in WP key */
-            if( &#x27;_&#x27; == $keyt{0} ) {
-              continue;
-            }
-
-            // Fix for boolean values
-            switch( $value ) {
-
-              case &#x27;true&#x27;:
-                $real_value = true; //** Converts all &quot;true&quot; to 1 */
-                break;
-
-              case &#x27;false&#x27;:
-                $real_value = false;
-                break;
-
-              default:
-                $real_value = $value;
-                break;
-
-            }
-
-            // Handle keys with multiple values
-            if( count( $value ) &gt; 1 ) {
-              $return[ $key ] = $value;
-            } else {
-              $return[ $key ] = $real_value;
-            }
-
-          }
-        }
-
-        $return = array_merge( $return, $post );
-
-        //** Make sure certain keys were not messed up by custom attributes */
-        $return[ &#x27;system&#x27; ]  = array();
-        $return[ &#x27;gallery&#x27; ] = array();
-
-        /*
-     * Figure out what the thumbnail is, and load all sizes
-     */
-        if( $load_thumbnail == &#x27;true&#x27; ) {
-
-          $wp_image_sizes = get_intermediate_image_sizes();
-
-          $thumbnail_id = get_post_meta( $id, &#x27;_thumbnail_id&#x27;, true );
-          $attachments  = get_children( array( &#x27;post_parent&#x27; =&gt; $id, &#x27;post_type&#x27; =&gt; &#x27;attachment&#x27;, &#x27;post_mime_type&#x27; =&gt; &#x27;image&#x27;, &#x27;orderby&#x27; =&gt; &#x27;menu_order ASC, ID&#x27;, &#x27;order&#x27; =&gt; &#x27;DESC&#x27; ) );
-
-          if( $thumbnail_id ) {
-            foreach( $wp_image_sizes as $image_name ) {
-              $this_url                          = wp_get_attachment_image_src( $thumbnail_id, $image_name, true );
-              $return[ &#x27;images&#x27; ][ $image_name ] = $this_url[ 0 ];
-            }
-
-            $featured_image_id = $thumbnail_id;
-
-          } elseif( $attachments ) {
-            foreach( $attachments as $attachment_id =&gt; $attachment ) {
-
-              foreach( $wp_image_sizes as $image_name ) {
-                $this_url                          = wp_get_attachment_image_src( $attachment_id, $image_name, true );
-                $return[ &#x27;images&#x27; ][ $image_name ] = $this_url[ 0 ];
-              }
-
-              $featured_image_id = $attachment_id;
-              break;
-            }
-          }
-
-          if( $featured_image_id ) {
-            $return[ &#x27;featured_image&#x27; ] = $featured_image_id;
-
-            $image_title = $wpdb-&gt;get_var( &quot;SELECT post_title  FROM {$wpdb-&gt;prefix}posts WHERE ID = &#x27;{$featured_image_id}&#x27; &quot; );
-
-            $return[ &#x27;featured_image_title&#x27; ] = $image_title;
-            $return[ &#x27;featured_image_url&#x27; ]   = wp_get_attachment_url( $featured_image_id );
-          }
-
-        }
-
-        /*
-    *
-    * Load all attached images and their sizes
-    *
-     */
-        if( $load_gallery == &#x27;true&#x27; ) {
-
-          // Get gallery images
-          if( $attachments ) {
-            foreach( $attachments as $attachment_id =&gt; $attachment ) {
-              $return[ &#x27;gallery&#x27; ][ $attachment-&gt;post_name ][ &#x27;post_title&#x27; ]    = $attachment-&gt;post_title;
-              $return[ &#x27;gallery&#x27; ][ $attachment-&gt;post_name ][ &#x27;post_excerpt&#x27; ]  = $attachment-&gt;post_excerpt;
-              $return[ &#x27;gallery&#x27; ][ $attachment-&gt;post_name ][ &#x27;post_content&#x27; ]  = $attachment-&gt;post_content;
-              $return[ &#x27;gallery&#x27; ][ $attachment-&gt;post_name ][ &#x27;attachment_id&#x27; ] = $attachment_id;
-              foreach( $wp_image_sizes as $image_name ) {
-                $this_url                                                     = wp_get_attachment_image_src( $attachment_id, $image_name, true );
-                $return[ &#x27;gallery&#x27; ][ $attachment-&gt;post_name ][ $image_name ] = $this_url[ 0 ];
-              }
-            }
-          } else {
-            $return[ &#x27;gallery&#x27; ] = false;
-          }
-        }
-
-        /*
-    *
-    *  Load parent if exists and inherit Parent&#x27;s atttributes.
-    *
-    */
-        if( $load_parent == &#x27;true&#x27; &amp;&amp; $post[ &#x27;post_parent&#x27; ] ) {
-
-          $return[ &#x27;is_child&#x27; ] = true;
-
-          $parent_object = self::get_property( $post[ &#x27;post_parent&#x27; ], array( &#x27;load_gallery&#x27; =&gt; $load_gallery, &#x27;get_children&#x27; =&gt; false ) );
-
-          $return[ &#x27;parent_id&#x27; ]    = $post[ &#x27;post_parent&#x27; ];
-          $return[ &#x27;parent_link&#x27; ]  = $parent_object[ &#x27;permalink&#x27; ];
-          $return[ &#x27;parent_title&#x27; ] = $parent_object[ &#x27;post_title&#x27; ];
-
-          // Inherit things
-          if( is_array( $wp_properties[ &#x27;property_inheritance&#x27; ][ $return[ &#x27;property_type&#x27; ] ] ) ) {
-            foreach( $wp_properties[ &#x27;property_inheritance&#x27; ][ $return[ &#x27;property_type&#x27; ] ] as $inherit_attrib ) {
-              if( !empty( $parent_object[ $inherit_attrib ] ) &amp;&amp; empty( $return[ $inherit_attrib ] ) ) {
-                $return[ $inherit_attrib ] = $parent_object[ $inherit_attrib ];
-              }
-            }
-          }
-        }
-
-        /*
-    *
-    * Load Children and their attributes
-    *
-    */
-        if( $get_children == &#x27;true&#x27; ) {
-
-          //** Calculate variables if based off children if children exist */
-          $children = $wpdb-&gt;get_col( &quot;SELECT ID FROM {$wpdb-&gt;posts} WHERE  post_type = &#x27;property&#x27; AND post_status = &#x27;publish&#x27; AND post_parent = &#x27;{$id}&#x27; ORDER BY menu_order ASC &quot; );
-
-          if( count( $children ) &gt; 0 ) {
-
-            //** Cycle through children and get necessary variables */
-            foreach( $children as $child_id ) {
-
-              $child_object                      = self::get_property( $child_id, array( &#x27;load_gallery&#x27; =&gt; $load_gallery, &#x27;load_parent&#x27; =&gt; false ) );
-              $return[ &#x27;children&#x27; ][ $child_id ] = $child_object;
-
-              //** Save child image URLs into one array for quick access */
-              if( !empty( $child_object[ &#x27;featured_image_url&#x27; ] ) ) {
-                $return[ &#x27;system&#x27; ][ &#x27;child_images&#x27; ][ $child_id ] = $child_object[ &#x27;featured_image_url&#x27; ];
-              }
-
-              //** Exclude variables from searchable attributes (to prevent ranges) */
-              $excluded_attributes    = $wp_properties[ &#x27;geo_type_attributes&#x27; ];
-              $excluded_attributes[ ] = $wp_properties[ &#x27;configuration&#x27; ][ &#x27;address_attribute&#x27; ];
-
-              foreach( $wp_properties[ &#x27;searchable_attributes&#x27; ] as $searchable_attribute ) {
-
-                $attribute_data = self::get_attribute_data( $searchable_attribute );
-
-                if( $attribute_data[ &#x27;numeric&#x27; ] || $attribute_data[ &#x27;currency&#x27; ] ) {
-
-                  if( !empty( $child_object[ $searchable_attribute ] ) &amp;&amp; !in_array( $searchable_attribute, $excluded_attributes ) ) {
-                    $range[ $searchable_attribute ][ ] = $child_object[ $searchable_attribute ];
-                  }
-
-                }
-              }
-            }
-
-            //* Cycle through every type of range (i.e. price, deposit, bathroom, etc) and fix-up the respective data arrays */
-            foreach( (array) $range as $range_attribute =&gt; $range_values ) {
-
-              //* Cycle through all values of this range (attribute), and fix any ranges that use dashes */
-              foreach( $range_values as $key =&gt; $single_value ) {
-
-                //* Remove dollar signs */
-                $single_value = str_replace( &quot;$&quot;, &#x27;&#x27;, $single_value );
-
-                //* Fix ranges */
-                if( strpos( $single_value, &#x27;&amp;ndash;&#x27; ) ) {
-
-                  $split = explode( &#x27;&amp;ndash;&#x27;, $single_value );
-
-                  foreach( $split as $new_single_value )
-
-                    if( !empty( $new_single_value ) ) {
-                      array_push( $range_values, trim( $new_single_value ) );
-                    }
-
-                  //* Unset original value with dash */
-                  unset( $range_values[ $key ] );
-
-                }
-              }
-
-              //* Remove duplicate values from this range */
-              $range[ $range_attribute ] = array_unique( $range_values );
-
-              //* Sort the values in this particular range */
-              sort( $range[ $range_attribute ] );
-
-              if( count( $range[ $range_attribute ] ) &lt; 2 ) {
-                $return[ $range_attribute ] = $return[ $range_attribute ] . &#x27; ( &#x27; . $range[ $range_attribute ][ 0 ] . &#x27; )&#x27;;
-              }
-
-              if( count( $range[ $range_attribute ] ) &gt; 1 ) {
-                $return[ $range_attribute ] = $return[ $range_attribute ] . &#x27; ( &#x27; . min( $range[ $range_attribute ] ) . &quot; - &quot; . max( $range[ $range_attribute ] ) . &#x27; )&#x27;;
-              }
-
-              //** If we end up with a range, we make a note of it */
-              if( !empty( $return[ $range_attribute ] ) ) {
-                $return[ &#x27;system&#x27; ][ &#x27;upwards_inherited_attributes&#x27; ][ ] = $range_attribute;
-              }
-
-            }
-
-          }
-        }
-
-        if( !empty( $return[ &#x27;location&#x27; ] ) &amp;&amp; !in_array( &#x27;address&#x27;, $editable_keys ) &amp;&amp; !isset( $return[ &#x27;address&#x27; ] ) ) {
-          $return[ &#x27;address&#x27; ] = $return[ &#x27;location&#x27; ];
-        }
-
-        $return[ &#x27;wpp_gpid&#x27; ]  = Listing::maybe_set_gpid( $id );
-        $return[ &#x27;permalink&#x27; ] = get_permalink( $id );
-
-        //** Make sure property_type stays as slug, or it will break many things:  (widgets, class names, etc)  */
-        $return[ &#x27;property_type_label&#x27; ] = $wp_properties[ &#x27;property_types&#x27; ][ $return[ &#x27;property_type&#x27; ] ];
-
-        if( empty( $return[ &#x27;property_type_label&#x27; ] ) ) {
-          foreach( $wp_properties[ &#x27;property_types&#x27; ] as $pt_key =&gt; $pt_value ) {
-            if( strtolower( $pt_value ) == strtolower( $return[ &#x27;property_type&#x27; ] ) ) {
-              $return[ &#x27;property_type&#x27; ]       = $pt_key;
-              $return[ &#x27;property_type_label&#x27; ] = $pt_value;
-            }
-          }
-        }
-
-        //** If phone number is not set but set globally, we load it into property array here */
-        if( empty( $return[ &#x27;phone_number&#x27; ] ) &amp;&amp; !empty( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;phone_number&#x27; ] ) ) {
-          $return[ &#x27;phone_number&#x27; ] = $wp_properties[ &#x27;configuration&#x27; ][ &#x27;phone_number&#x27; ];
-        }
-
-        if( is_array( $return ) ) {
-          ksort( $return );
-        }
-
-        $return = apply_filters( &#x27;wpp_get_property&#x27;, $return );
-
-        //* Get rid of all empty values */
-        foreach( $return as $key =&gt; $item ) {
-
-          //** Don&#x27;t blank keys starting w/ post_  - this should be converted to use get_attribute_data() to check where data is stored for better check - potanin@UD */
-          if( strpos( $key, &#x27;post_&#x27; ) === 0 ) {
-            continue;
-          }
-
-          if( empty( $item ) ) {
-            unset( $return[ $key ] );
-          }
-
-        }
-
-        //** Convert to object */
-        if( $return_object == &#x27;true&#x27; ) {
-          $return = self::array_to_object( $return );
-        }
-
-        wp_cache_add( $id . $args, $return );
-
-        return $return;
-
+        return Listing::load( $id, $args );
       }
 
       /**
@@ -4330,7 +4474,7 @@ namespace UsabilityDynamics\WPP {
               foreach( $property_stats as $attribute_label =&gt; $value ) {
 
                 $attribute_slug = $labels_to_keys[ $attribute_label ];
-                $attribute_data = self::get_attribute_data( $attribute_slug );
+                $attribute_data = self::get_attribute( $attribute_slug );
 
                 if( empty( $value ) ) {
                   continue;
@@ -5030,24 +5174,6 @@ namespace UsabilityDynamics\WPP {
 
         return rmdir( $dirname );
 
-      }
-
-      /**
-       * Prevent Facebook integration if &#x27;Facebook Tabs&#x27; did not installed.
-       *
-       * @author korotkov@ud
-       */
-      static function check_facebook_tabs() {
-        //** Check if FB Tabs is not installed to prevent an ability to use WPP as Facebook App or Page Tab */
-        if( !class_exists( &#x27;class_wpp_facebook_tabs&#x27; ) ) {
-
-          //** If request goes really from Facebook */
-          if( !empty( $_REQUEST[ &#x27;signed_request&#x27; ] ) &amp;&amp; strstr( $_SERVER[ &#x27;HTTP_REFERER&#x27; ], &#x27;facebook.com&#x27; ) ) {
-
-            //** Show message */
-            die( sprintf( __( &#x27;You cannot use your site as Facebook Application. You should &lt;a href=&quot;%s&quot;&gt;purchase&lt;/a&gt; WP-Property Premium Feature &quot;Facebook Tabs&quot; to manage your Facebook Tabs.&#x27;, &#x27;wpp&#x27; ), &#x27;https://usabilitydynamics.com/products/wp-property/premium/&#x27; ) );
-          }
-        }
       }
 
       /**

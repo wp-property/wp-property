@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 2.0.0</em>
+            <em>API Docs for: 2.0.0-beta1</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -134,7 +134,7 @@ namespace UsabilityDynamics\WPP {
 
         $args = (object) wp_parse_args( $args, array(
           &#x27;once&#x27;   =&gt; false,
-          &#x27;prefix&#x27; =&gt; &#x27;property-&#x27;,
+          &#x27;prefix&#x27; =&gt; &#x27;&#x27;,
         ) );
 
         // Add prefix if not already there.
@@ -173,17 +173,17 @@ namespace UsabilityDynamics\WPP {
         }
 
         $_paths = apply_filters( &#x27;wpp:template_paths&#x27;, array(
-          trailingslashit( get_template_directory() ) . &#x27;wpp/&#x27;,
+          trailingslashit( get_template_directory() ) . &#x27;wpp&#x27;,
           trailingslashit( get_template_directory() ),
-          trailingslashit( get_stylesheet_directory() ) . &#x27;wpp/&#x27;,
+          trailingslashit( get_stylesheet_directory() ) . &#x27;wpp&#x27;,
           trailingslashit( get_stylesheet_directory() ),
-          WPP_Path . &#x27;templates/&#x27;
-        ) );
+          WPP_Path . &#x27;templates&#x27;
+        ));
 
         foreach( (array) $_paths as $path ) {
 
-          if( file_exists( $path ) ) {
-            return $path;
+          if( file_exists( trailingslashit( $path ) . $name ) ) {
+            return trailingslashit( $path ) . $name;
           }
 
         }
@@ -200,7 +200,7 @@ namespace UsabilityDynamics\WPP {
        */
       static function initialize() {
 
-        //** Property template hook */
+        // Property template hook
         add_action( &#x27;wpp::tmpl::property::bottom&#x27;, array( __CLASS__, &#x27;wpp_tmpl_property_bottom&#x27; ) );
 
       }
@@ -212,12 +212,15 @@ namespace UsabilityDynamics\WPP {
        * @author peshkov@UD
        */
       static function wpp_tmpl_property_bottom() {
-        if( get_template() == &#x27;suffusion&#x27; ) {
-        }
+
+        if( get_template() == &#x27;suffusion&#x27; ) {}
+
       }
 
     }
+
   }
+
 }
 
     </pre>

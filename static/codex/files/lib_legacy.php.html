@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 2.0.0</em>
+            <em>API Docs for: 2.0.0-beta1</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -129,7 +129,7 @@ add_action( &#x27;wpp:save_property&#x27;, function( $id, $context ) {
 });
 
 if( !class_exists( &#x27;WPP_Core&#x27; ) ) {
-  class WPP_Core extends \UsabilityDynamics\WPP\Bootstrap {}
+  final class WPP_Core extends \UsabilityDynamics\WPP\Bootstrap {}
 }
 
 if( !class_exists( &#x27;WPP_F&#x27; ) ) {

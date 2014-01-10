@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>WP_Error - usabilitydynamics/wp-property</title>
+    <title>UsabilityDynamics\WPP.Bootstrap - usabilitydynamics/wp-property</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -96,7 +96,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>WP_Error Class</h1>
+                        <h1>UsabilityDynamics\WPP.Bootstrap Class</h1>
 <div class="box meta">
     
 
@@ -104,21 +104,20 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/lib_class-wp-error.php.html#l2"><code>lib&#x2F;class-wp-error.php:2</code></a>
+            Defined in: <a href="../files/lib_class-bootstrap.php.html#l22"><code>lib&#x2F;class-bootstrap.php:22</code></a>
         </div>
     
 
     
 
     
-        <p>Available since 1.38</p>
-    
 </div>
 
 
 
 <div class="box intro">
-    <p>WordPress Error Handler</p>
+    <p>WP-Property Bootstrap</p>
+<p>Contains primary functions for setting up the framework of the plugin.</p>
 
 </div>
 
@@ -149,14 +148,7 @@
                     <ul class="index-list properties">
                         
                             <li class="index-item property">
-                                <a href="#property_$content">$content</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_$excerpt">$excerpt</a>
+                                <a href="#property_$_api">$_api</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -165,21 +157,7 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_$gpid">$gpid</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_$id">$id</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_$parent">$parent</a>
+                                <a href="#property_$_path">$_path</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -188,7 +166,7 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_$status">$status</a>
+                                <a href="#property_$_settings">$_settings</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -197,10 +175,62 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_$title">$title</a>
+                                <a href="#property_$_theme">$_theme</a>
 
                                 
                                     <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_$_ui">$_ui</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_$_url">$_url</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property public">
+                                <a href="#property_$instance">$instance</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_$object">$object</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_$version">$version</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property public">
+                                <a href="#property_text_domain">text_domain</a>
+
                                 
                                 
                             </li>
@@ -221,9 +251,9 @@
                 <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="property_$content" class="property item">
-    <h3 class="name"><code>$content</code></h3>
-    <span class="type">String</span>
+                    <div id="property_$_api" class="property item">
+    <h3 class="name"><code>$_api</code></h3>
+    <span class="type">Object</span>
 
     
 
@@ -231,6 +261,8 @@
 
     
 
+    
+        <span class="flag static">static</span>
     
 
     <div class="meta">
@@ -244,7 +276,7 @@
             
         
         
-        <a href="../files/lib_class-listing.php.html#l35"><code>lib&#x2F;class-listing.php:35</code></a>
+        <a href="../files/lib_class-bootstrap.php.html#l91"><code>lib&#x2F;class-bootstrap.php:91</code></a>
         
         </p>
 
@@ -254,7 +286,7 @@
     </div>
 
     <div class="description">
-        <p>Listing Description.</p>
+        <p>API Instance.</p>
 
     </div>
 
@@ -266,8 +298,8 @@
 </div>
 
                 
-                    <div id="property_$excerpt" class="property item">
-    <h3 class="name"><code>$excerpt</code></h3>
+                    <div id="property_$_path" class="property item">
+    <h3 class="name"><code>$_path</code></h3>
     <span class="type">String</span>
 
     
@@ -291,7 +323,7 @@
             
         
         
-        <a href="../files/lib_class-listing.php.html#l53"><code>lib&#x2F;class-listing.php:53</code></a>
+        <a href="../files/lib_class-bootstrap.php.html#l109"><code>lib&#x2F;class-bootstrap.php:109</code></a>
         
         </p>
 
@@ -301,7 +333,7 @@
     </div>
 
     <div class="description">
-        <p>Listing Excerpt / Summary.</p>
+        <p>File Path</p>
 
     </div>
 
@@ -313,99 +345,9 @@
 </div>
 
                 
-                    <div id="property_$gpid" class="property item">
-    <h3 class="name"><code>$gpid</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_class-listing.php.html#l27"><code>lib&#x2F;class-listing.php:27</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Global Property ID.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_$id" class="property item">
-    <h3 class="name"><code>$id</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_class-listing.php.html#l19"><code>lib&#x2F;class-listing.php:19</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Listing ID.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_$parent" class="property item">
-    <h3 class="name"><code>$parent</code></h3>
-    <span class="type">Integer</span>
+                    <div id="property_$_settings" class="property item">
+    <h3 class="name"><code>$_settings</code></h3>
+    <span class="type">Object</span>
 
     
 
@@ -428,7 +370,7 @@
             
         
         
-        <a href="../files/lib_class-listing.php.html#l71"><code>lib&#x2F;class-listing.php:71</code></a>
+        <a href="../files/lib_class-bootstrap.php.html#l73"><code>lib&#x2F;class-bootstrap.php:73</code></a>
         
         </p>
 
@@ -438,7 +380,7 @@
     </div>
 
     <div class="description">
-        <p>Parent ID.</p>
+        <p>Settings Instance.</p>
 
     </div>
 
@@ -450,8 +392,198 @@
 </div>
 
                 
-                    <div id="property_$status" class="property item">
-    <h3 class="name"><code>$status</code></h3>
+                    <div id="property_$_theme" class="property item">
+    <h3 class="name"><code>$_theme</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_class-bootstrap.php.html#l100"><code>lib&#x2F;class-bootstrap.php:100</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Current Theme.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_$_ui" class="property item">
+    <h3 class="name"><code>$_ui</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_class-bootstrap.php.html#l82"><code>lib&#x2F;class-bootstrap.php:82</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>UI Instance.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_$_url" class="property item">
+    <h3 class="name"><code>$_url</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_class-bootstrap.php.html#l118"><code>lib&#x2F;class-bootstrap.php:118</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>URL to Base.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_$instance" class="property item public">
+    <h3 class="name"><code>$instance</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_class-bootstrap.php.html#l63"><code>lib&#x2F;class-bootstrap.php:63</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Singleton Instance Reference.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_$object" class="property item">
+    <h3 class="name"><code>$object</code></h3>
     <span class="type">String</span>
 
     
@@ -475,7 +607,7 @@
             
         
         
-        <a href="../files/lib_class-listing.php.html#l62"><code>lib&#x2F;class-listing.php:62</code></a>
+        <a href="../files/lib_class-bootstrap.php.html#l45"><code>lib&#x2F;class-bootstrap.php:45</code></a>
         
         </p>
 
@@ -485,7 +617,7 @@
     </div>
 
     <div class="description">
-        <p>Status.</p>
+        <p>Name of Primary Object.</p>
 
     </div>
 
@@ -497,8 +629,8 @@
 </div>
 
                 
-                    <div id="property_$title" class="property item">
-    <h3 class="name"><code>$title</code></h3>
+                    <div id="property_$version" class="property item">
+    <h3 class="name"><code>$version</code></h3>
     <span class="type">String</span>
 
     
@@ -522,7 +654,7 @@
             
         
         
-        <a href="../files/lib_class-listing.php.html#l44"><code>lib&#x2F;class-listing.php:44</code></a>
+        <a href="../files/lib_class-bootstrap.php.html#l36"><code>lib&#x2F;class-bootstrap.php:36</code></a>
         
         </p>
 
@@ -532,7 +664,54 @@
     </div>
 
     <div class="description">
-        <p>Content Title.</p>
+        <p>Plugin Version.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_text_domain" class="property item public">
+    <h3 class="name"><code>text_domain</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_class-bootstrap.php.html#l54"><code>lib&#x2F;class-bootstrap.php:54</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Textdomain String</p>
 
     </div>
 

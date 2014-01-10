@@ -2,9 +2,7 @@
   "name": "usabilitydynamics/wp-property",
   "version": "2.0.0-beta1",
   "type": "library",
-  "license": [
-    "GPL-3.0+"
-  ],
+  "license": [ "GPL-3.0+" ],
   "authors": [
     {
       "name": "Andy Potanin",
@@ -35,9 +33,8 @@
   "require": {
     "php": ">=5.3",
     "datatables/datatables": "dev-master",
-    "natxet/CssMin": "dev-master",
-    "linkorb/jsmin-php": "dev-master",
     "usabilitydynamics/wp-meta-box": "master",
+    "usabilitydynamics/lib-nivo-slider": "3.2",
     "usabilitydynamics/lib-api": "master",
     "usabilitydynamics/lib-ui": "master",
     "usabilitydynamics/lib-settings": "master",

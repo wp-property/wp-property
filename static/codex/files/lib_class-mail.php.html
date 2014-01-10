@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 2.0.0</em>
+            <em>API Docs for: 2.0.0-beta1</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -115,6 +115,67 @@ namespace UsabilityDynamics\WPP {
   if( !class_exists( &#x27;UsabilityDynamics\WPP\Mail&#x27; ) ) {
 
     class Mail {
+
+      /**
+       * Wrapper function to send notification with WP-CRM or without one
+       *
+       * Migrated out of UD_API
+       *
+       * @param array|mixed $args [&#x27;message&#x27;]          using in email notification
+       *
+       * @uses self::replace_data()
+       * @uses wp_crm_send_notification()
+       * @return boolean false if notification was not sent successfully
+       * @autor odokienko@UD
+       */
+      static function send_notification( $args = array() ) {
+
+        $args = wp_parse_args( $args, array(
+          &#x27;ignore_wp_crm&#x27;   =&gt; false,
+          &#x27;user&#x27;            =&gt; false,
+          &#x27;trigger_action&#x27;  =&gt; false,
+          &#x27;data&#x27;            =&gt; array(),
+          &#x27;message&#x27;         =&gt; &#x27;&#x27;,
+          &#x27;subject&#x27;         =&gt; &#x27;&#x27;,
+          &#x27;crm_log_message&#x27; =&gt; &#x27;&#x27;
+        ) );
+
+        if( is_numeric( $args[ &#x27;user&#x27; ] ) ) {
+          $args[ &#x27;user&#x27; ] = get_user_by( &#x27;id&#x27;, $args[ &#x27;user&#x27; ] );
+        } elseif( filter_var( $args[ &#x27;user&#x27; ], FILTER_VALIDATE_EMAIL ) ) {
+          $args[ &#x27;user&#x27; ] = get_user_by( &#x27;email&#x27;, $args[ &#x27;user&#x27; ] );
+        } elseif( is_string( $args[ &#x27;user&#x27; ] ) ) {
+          $args[ &#x27;user&#x27; ] = get_user_by( &#x27;login&#x27;, $args[ &#x27;user&#x27; ] );
+        }
+
+        if( !is_object( $args[ &#x27;user&#x27; ] ) || empty( $args[ &#x27;user&#x27; ]-&gt;data-&gt;user_email ) ) {
+          return false;
+        }
+
+        if( function_exists( &#x27;wp_crm_send_notification&#x27; ) &amp;&amp;
+          empty( $args[ &#x27;ignore_wp_crm&#x27; ] )
+        ) {
+
+          if( !empty( $args[ &#x27;crm_log_message&#x27; ] ) ) {
+            wp_crm_add_to_user_log( $args[ &#x27;user&#x27; ]-&gt;ID, self::replace_data( $args[ &#x27;crm_log_message&#x27; ], $args[ &#x27;data&#x27; ] ) );
+          }
+
+          if( !empty( $args[ &#x27;trigger_action&#x27; ] ) &amp;&amp; is_callable( array( &#x27;WP_CRM_N&#x27;, &#x27;get_trigger_action_notification&#x27; ) ) ) {
+            $notifications = WP_CRM_N::get_trigger_action_notification( $args[ &#x27;trigger_action&#x27; ] );
+            if( !empty( $notifications ) ) {
+              return wp_crm_send_notification( $args[ &#x27;trigger_action&#x27; ], $args[ &#x27;data&#x27; ] );
+            }
+          }
+
+        }
+
+        if( empty( $args[ &#x27;message&#x27; ] ) ) {
+          return false;
+        }
+
+        return wp_mail( $args[ &#x27;user&#x27; ]-&gt;data-&gt;user_email, self::replace_data( $args[ &#x27;subject&#x27; ], $args[ &#x27;data&#x27; ] ), self::replace_data( $args[ &#x27;message&#x27; ], $args[ &#x27;data&#x27; ] ) );
+
+      }
 
       /**
        * Send Notification

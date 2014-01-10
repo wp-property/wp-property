@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 2.0.0</em>
+            <em>API Docs for: 2.0.0-beta1</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -317,7 +317,7 @@ namespace UsabilityDynamics\WPP {
                 $r .= &#x27;&lt;ul class=&quot;wpp_overview_column_stats wpp_something_advanced_wrapper&quot;&gt;&#x27; . implode( &#x27;&#x27;, $display_stats ) . &#x27;&lt;/ul&gt;&#x27;;
               }
 
-              break;
+            break;
 
             case &#x27;features&#x27;:
               $features      = get_the_terms( $post-&gt;ID, &quot;property_feature&quot; );
@@ -339,29 +339,33 @@ namespace UsabilityDynamics\WPP {
                 $r .= implode( $features_html, &quot;, &quot; );
               }
 
-              break;
+            break;
 
+            /**
+             * Output Listing Thumbnail
+             *
+             * This used to utilize wpp_get_image_link() method but seemed unnecessary.
+             *
+             */
             case &#x27;thumbnail&#x27;:
 
               if( $post-&gt;featured_image ) {
 
                 $overview_thumb_type = $wp_properties[ &#x27;configuration&#x27; ][ &#x27;admin_ui&#x27; ][ &#x27;overview_table_thumbnail_size&#x27; ];
 
-                if( empty( $overview_thumb_type ) ) {
-                  $overview_thumb_type = &#x27;thumbnail&#x27;;
-                }
-
-                $image_thumb_obj = \wpp_get_image_link( $post-&gt;featured_image, $overview_thumb_type, array( &#x27;return&#x27; =&gt; &#x27;array&#x27; ) );
+                $r .= wp_get_attachment_image( $post-&gt;featured_image, $overview_thumb_type ? $overview_thumb_type : &#x27;thumbnail&#x27;, false, array(
+                  &quot;data-requires&quot; =&gt; &quot;udx.fancybox&quot;,
+                  &quot;data-large-image-src&quot; =&gt; reset( wp_get_attachment_image_src( $post-&gt;featured_image, &#x27;large&#x27; ) ),
+                  &quot;data-attachment-id&quot; =&gt; $post-&gt;featured_image,
+                  &quot;data-post-id&quot; =&gt; $post-&gt;ID,
+                  &quot;title&quot; =&gt; $post-&gt;post_title,
+                  &quot;rel&quot; =&gt; &quot;overview_group&quot;,
+                  &quot;class&quot; =&gt; &quot;fancybox&quot;
+                ));
 
               }
 
-              if( !empty( $image_thumb_obj ) ) {
-                $r .= &#x27;&lt;a href=&quot;&#x27; . $post-&gt;images[ &#x27;large&#x27; ] . &#x27;&quot; class=&quot;fancybox&quot; rel=&quot;overview_group&quot; title=&quot;&#x27; . $post-&gt;post_title . &#x27;&quot;&gt;&lt;img src=&quot;&#x27; . $image_thumb_obj[ &#x27;url&#x27; ] . &#x27;&quot; width=&quot;&#x27; . $image_thumb_obj[ &#x27;width&#x27; ] . &#x27;&quot; height=&quot;&#x27; . $image_thumb_obj[ &#x27;height&#x27; ] . &#x27;&quot; /&gt;&lt;/a&gt;&#x27;;
-              } else {
-                $r .= &quot; - &quot;;
-              }
-
-              break;
+            break;
 
             case &#x27;featured&#x27;:
 

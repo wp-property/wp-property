@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib/class-meta-box.php - usabilitydynamics/wp-property</title>
+    <title>UsabilityDynamics\WPP.Loader - usabilitydynamics/wp-property</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -96,101 +96,141 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib/class-meta-box.php</h1>
+                        <h1>UsabilityDynamics\WPP.Loader Class</h1>
+<div class="box meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-&lt;?php
-/**
- * WP-Property Mail Notifications
- * Contains set of static methods for notifications
- *
- * @version 1.0
- * @author Usability Dynamics, Inc. &lt;info@usabilitydynamics.com&gt;
- * @package WP-Property
- * @since 1.38
- */
-namespace UsabilityDynamics\WPP {
+    
 
-  if( !class_exists( &#x27;UsabilityDynamics\WPP\Meta_Box&#x27; ) ) {
+    
 
-    if( !defined( &#x27;RWMB_URL&#x27; ) ) {
-      define( &#x27;RWMB_URL&#x27;, WPP_URL . &#x27;vendor/usabilitydynamics/meta-box/&#x27; );
-      define( &#x27;RWMB_DIR&#x27;, WPP_Path. &#x27;vendor/usabilitydynamics/meta-box/&#x27; );
-      define( &#x27;RWMB_VER&#x27;, &#x27;4.3.4&#x27; );
-      define( &#x27;RWMB_JS_URL&#x27;, trailingslashit( RWMB_URL . &#x27;js&#x27; ) );
-      define( &#x27;RWMB_CSS_URL&#x27;, trailingslashit( RWMB_URL . &#x27;css&#x27; ) );
-      define( &#x27;RWMB_INC_DIR&#x27;, trailingslashit( RWMB_DIR . &#x27;inc&#x27; ) );
-      define( &#x27;RWMB_FIELDS_DIR&#x27;, trailingslashit( RWMB_INC_DIR . &#x27;fields&#x27; ) );
-    }
+    
 
-    /**
-     * Class Meta_Box
-     *
-     * @package UsabilityDynamics\WPP
-     */
-    class Meta_Box extends \RW_Meta_Box {
-
-      /**
-       * Instantiate New Meta Box
-       *
-       * ## Options
-       * - size
-       * - class
-       * - multiple
-       * - clone
-       * - std
-       * - desc
-       * - format
-       * - before
-       * - after
-       * - afterfield_name
-       * - required
-       * - placeholder
-       * - context
-       * - priority
-       * - pages
-       * - autosave
-       * - default_hidden
-       *
-       * @param array $args
-       */
-      function __construct( $args ) {
-
-        $args = Utility::parse_args( $args, array(
-          &#x27;context&#x27;  =&gt; &#x27;normal&#x27;,
-          &#x27;priority&#x27; =&gt; &#x27;normal&#x27;,
-          &#x27;pages&#x27;    =&gt; array( &#x27;property&#x27; ),
-          &#x27;autosave&#x27; =&gt; true,
-          //&#x27;default_hidden&#x27; =&gt; false,
-          //&#x27;size&#x27;          =&gt; 30,
-          //&#x27;class&#x27;         =&gt; &#x27;my-class&#x27;,
-          //&#x27;multiple&#x27;      =&gt; false,
-          //&#x27;clone&#x27;         =&gt; false,
-          //&#x27;std&#x27;           =&gt; &#x27;&#x27;,
-          //&#x27;desc&#x27;          =&gt; &#x27;&#x27;,
-          //&#x27;format&#x27;        =&gt; &#x27;&#x27;,
-          //&#x27;before&#x27;        =&gt; &#x27;before&#x27;,
-          //&#x27;after&#x27;         =&gt; &#x27;after&#x27;,
-          //&#x27;field_name&#x27;    =&gt; isset( $field[&#x27;id&#x27;] ) ? $field[&#x27;id&#x27;] : &#x27;&#x27;,
-          //&#x27;required&#x27;      =&gt; false,
-          //&#x27;placeholder&#x27;   =&gt; &#x27;&#x27;,
-        ));
-
-        parent::__construct( (array) $args );
-
-      }
-
-    }
-
-  }
-
-}
+    
+</div>
 
 
 
+<div class="box intro">
+    
+</div>
 
-    </pre>
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method">
+                                <a href="#method___construct">__construct</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method___construct" class="method item">
+    <h3 class="name"><code>__construct</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_class-bootstrap.php.html#l127"><code>lib&#x2F;class-bootstrap.php:127</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Constructor.</p>
+<p>UsabilityDynamics components should be avialable.</p>
+<ul>
+<li>class_exists( &#39;\UsabilityDynamics\API&#39; );</li>
+<li>class_exists( &#39;\UsabilityDynamics\Utility&#39; );</li>
+</ul>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+
+        
+    </div>
 </div>
 
                     </div>

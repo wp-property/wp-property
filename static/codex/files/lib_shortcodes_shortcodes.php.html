@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib/shortcodes/shortcodes.php - usabilitydynamics/wp-property</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="usabilitydynamics/wp-property"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 2.0.0-beta1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Bootstrap.html">Bootstrap</a></li>
+            
+                <li><a href="../classes/Exception.html">Exception</a></li>
+            
+                <li><a href="../classes/Theme.html">Theme</a></li>
+            
+                <li><a href="../classes/UsabilityDynamics\WPP.Bootstrap.html">UsabilityDynamics\WPP.Bootstrap</a></li>
+            
+                <li><a href="../classes/UsabilityDynamics\WPP.Loader.html">UsabilityDynamics\WPP.Loader</a></li>
+            
+                <li><a href="../classes/WP_Error.html">WP_Error</a></li>
+            
+                <li><a href="../classes/WPP.html">WPP</a></li>
+            
+                <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: lib/shortcodes/shortcodes.php</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&lt;?php
+
+/**
+ * Return primary image for a listing.
+ *
+ * @param string $atts
+ */
+static function property_primary_image( $atts = &#x27;&#x27; ) {
+
+}
+
+/**
+ * Section that is inserted into the_content area on single listing pages.
+ * This element replicates a large part what the legacy property.php template did.
+ * This is a very basic example, this shortcode would need to assume a lot of defaults to assist with providing the children shortcodes with enough arguments.
+ * This could be called on a single listing page, but also within a search result loop.
+ *
+ * @todo Will need to add classes wrapping the individual elements here.
+ * @since 2.0
+ * @author potanin@UD
+ */
+static function property_body( $atts, $content = &#x27;&#x27; ) {
+
+  $parts = array();
+
+  $parts[ ] = do_shortcode( &#x27;[property_image]&#x27; );
+
+  $parts[ ] = do_shortcode( &#x27;[property_attributes]&#x27; );
+
+  $parts[ ] = do_shortcode( &#x27;[property_taxonomy_terms]&#x27; );
+
+  $parts[ ] = do_shortcode( &#x27;[property_map]&#x27; );
+
+  return implode( &#x27;&#x27;, $parts );
+
+}
+
+/**
+ * Displays featured properties
+ * Performs searching/filtering functions, provides template with $properties file
+ * Returns html content to be displayed after location attribute on property edit page
+ *
+ * @todo     Consider making this function depend on shortcode_property_overview() more so pagination and sorting functions work.
+ * @since    0.60
+ *
+ * @param bool   $atts
+ *
+ * @param string $content
+ *
+ * @internal param string $listing_id Listing ID must be passed
+ * @return string
+ */
+static function featured_properties( $atts = false, $content = &#x27;&#x27; ) {
+  global $wp_properties, $wpp_query, $post;
+
+  $default_property_type = \UsabilityDynamics\WPP\Utility::get_most_common_property_type();
+
+  if( !$atts ) {
+    $atts = array();
+  }
+
+  $defaults = array(
+    &#x27;property_type&#x27;          =&gt; &#x27;&#x27;,
+    &#x27;type&#x27;                   =&gt; &#x27;&#x27;,
+    &#x27;class&#x27;                  =&gt; &#x27;shortcode_featured_properties&#x27;,
+    &#x27;per_page&#x27;               =&gt; &#x27;6&#x27;,
+    &#x27;sorter_type&#x27;            =&gt; &#x27;none&#x27;,
+    &#x27;show_children&#x27;          =&gt; &#x27;false&#x27;,
+    &#x27;hide_count&#x27;             =&gt; true,
+    &#x27;fancybox_preview&#x27;       =&gt; &#x27;false&#x27;,
+    &#x27;bottom_pagination_flag&#x27; =&gt; &#x27;false&#x27;,
+    &#x27;pagination&#x27;             =&gt; &#x27;off&#x27;,
+    &#x27;stats&#x27;                  =&gt; &#x27;&#x27;,
+    &#x27;image_type&#x27;             =&gt; &#x27;thumbnail&#x27;,
+    &#x27;thumbnail_size&#x27;         =&gt; &#x27;thumbnail&#x27;
+  );
+
+  $args = wp_parse_args( $atts, $defaults );
+
+  /** Using &quot;image_type&quot; is obsolete */
+  if( empty( $args[ &#x27;thumbnail_size&#x27; ] ) &amp;&amp; !empty( $args[ &#x27;image_type&#x27; ] ) ) {
+    $args[ &#x27;thumbnail_size&#x27; ] = $args[ &#x27;image_type&#x27; ];
+  }
+
+  /** Using &quot;type&quot; is obsolete. If property_type is not set, but type is, we set property_type from type */
+  if( !empty( $args[ &#x27;type&#x27; ] ) &amp;&amp; empty( $args[ &#x27;property_type&#x27; ] ) ) {
+    $args[ &#x27;property_type&#x27; ] = $args[ &#x27;type&#x27; ];
+  }
+
+  if( empty( $args[ &#x27;property_type&#x27; ] ) ) {
+    $args[ &#x27;property_type&#x27; ] = $default_property_type;
+  }
+
+  // Convert shortcode multi-property-type string to array
+  if( !empty( $args[ &#x27;stats&#x27; ] ) ) {
+
+    if( strpos( $args[ &#x27;stats&#x27; ], &quot;,&quot; ) ) {
+      $args[ &#x27;stats&#x27; ] = explode( &quot;,&quot;, $args[ &#x27;stats&#x27; ] );
+    }
+
+    if( !is_array( $args[ &#x27;stats&#x27; ] ) ) {
+      $args[ &#x27;stats&#x27; ] = array( $args[ &#x27;stats&#x27; ] );
+    }
+
+    foreach( (array) $args[ &#x27;stats&#x27; ] as $key =&gt; $stat ) {
+      $args[ &#x27;stats&#x27; ][ $key ] = trim( $stat );
+    }
+
+  }
+
+  $args[ &#x27;thumbnail_size&#x27; ]  = $args[ &#x27;image_type&#x27; ];
+  $args[ &#x27;disable_wrapper&#x27; ] = &#x27;true&#x27;;
+  $args[ &#x27;featured&#x27; ]        = &#x27;true&#x27;;
+  $args[ &#x27;template&#x27; ]        = &#x27;featured-shortcode&#x27;;
+
+  unset( $args[ &#x27;image_type&#x27; ] );
+  unset( $args[ &#x27;type&#x27; ] );
+
+  $result = self::property_overview( $args );
+
+  return $result;
+}
+
+/**
+ * Returns the property search widget
+ *
+ * @since 1.04
+ */
+static function property_search( $atts = &quot;&quot; ) {
+  global $post, $wp_properties;
+
+  extract( shortcode_atts( array(
+    &#x27;searchable_attributes&#x27;     =&gt; &#x27;&#x27;,
+    &#x27;searchable_property_types&#x27; =&gt; &#x27;&#x27;,
+    &#x27;pagination&#x27;                =&gt; &#x27;on&#x27;,
+    &#x27;group_attributes&#x27;          =&gt; &#x27;off&#x27;,
+    &#x27;per_page&#x27;                  =&gt; &#x27;10&#x27;
+  ), $atts ) );
+
+  if( empty( $searchable_attributes ) ) {
+
+    /** get first 3 attributes to prevent people from accidentally loading them all ( long query ) */
+    $searchable_attributes = array_slice( (array) $wp_properties[ &#x27;searchable_attributes&#x27; ], 0, 5 );
+
+  } elseif( is_string( $searchable_attributes ) ) {
+    $searchable_attributes = explode( &quot;,&quot;, $searchable_attributes );
+  }
+
+  $searchable_attributes = array_unique( (array) $searchable_attributes );
+
+  if( empty( $searchable_property_types ) ) {
+    $searchable_property_types = $wp_properties[ &#x27;searchable_property_types&#x27; ];
+  } elseif( is_string( $searchable_property_types ) ) {
+    $searchable_property_types = explode( &quot;,&quot;, $searchable_property_types );
+  }
+
+  $widget_id = $post-&gt;ID . &quot;_search&quot;;
+
+  $search_args[ &#x27;searchable_attributes&#x27; ]     = $searchable_attributes;
+  $search_args[ &#x27;searchable_property_types&#x27; ] = $searchable_property_types;
+  $search_args[ &#x27;group_attributes&#x27; ]          = ( $group_attributes == &#x27;on&#x27; || $group_attributes == &#x27;true&#x27; ? true : false );
+  $search_args[ &#x27;per_page&#x27; ]                  = $per_page;
+  $search_args[ &#x27;pagination&#x27; ]                = $pagination;
+  $search_args[ &#x27;instance_id&#x27; ]               = $widget_id;
+
+  $content = array( &#x27;&lt;div class=&quot;wpp_shortcode_search&quot;&gt;&#x27; );
+
+  ob_start();
+  draw_property_search_form( $search_args );
+  $content[ ] = ob_get_clean();
+
+  $content[ ] = &#x27;&lt;/div&gt;&#x27;;
+
+  return implode( &#x27;&#x27;, $content );
+
+}
+
+/**
+ * Get terms from all property taxonomies, grouped by taxonomy
+ *
+ * @todo Make sure the label/title is rendered correctly when grouped and ungrouped. - potanin@UD
+ * @todo Improve so shortcode arguments are passed to draw_stats - potanin@UD 5/24/12
+ * @uses draw_stats
+ * @since 1.35.0
+ */
+static function property_attributes( $atts = false ) {
+  global $wp_properties, $property;
+
+  if( is_admin() &amp;&amp; !DOING_AJAX ) {
+    return sprintf( __( &#x27;%1$s Attributes&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;singular&#x27; ) );
+  }
+
+  $atts = shortcode_atts( array(
+    &#x27;property_id&#x27;    =&gt; $property[ &#x27;ID&#x27; ],
+    &#x27;title&#x27;          =&gt; false,
+    &#x27;group&#x27;          =&gt; false,
+    &#x27;sort_by_groups&#x27; =&gt; !empty( $wp_properties[ &#x27;property_groups&#x27; ] ) &amp;&amp; $wp_properties[ &#x27;configuration&#x27; ][ &#x27;property_overview&#x27; ][ &#x27;sort_stats_by_groups&#x27; ] == &#x27;true&#x27; ? true : false
+  ), $atts );
+
+  $html[ ] = draw_stats( &quot;return=true&amp;make_link=true&amp;group={$atts[group]}&amp;title={$atts[&#x27;title&#x27;]}&amp;sort_by_groups={$atts[&#x27;sort_by_groups&#x27;]}&quot;, $property );
+
+  return implode( &#x27;&#x27;, (array) $html );
+
+}
+
+/**
+ * Get terms from all property taxonomies, grouped by taxonomy
+ *
+ * @todo Add support to recognize requested taxonomy and default to all, as well as some other shortcode-configured settings - potanin@UD 5/24/12
+ * @since 1.35.0
+ */
+static function taxonomy_terms( $atts = false ) {
+  global $wp_properties, $post, $property;
+
+  if( is_admin() &amp;&amp; !DOING_AJAX ) {
+    return sprintf( __( &#x27;%1$s Taxonomy Terms&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;singular&#x27; ) );
+  }
+
+  $atts = shortcode_atts( array(
+    &#x27;property_id&#x27; =&gt; $property[ &#x27;ID&#x27; ],
+    &#x27;title&#x27;       =&gt; false,
+    &#x27;taxonomy&#x27;    =&gt; &#x27;&#x27;
+  ), $atts );
+
+  foreach( (array) $wp_properties[ &#x27;taxonomies&#x27; ] as $tax_slug =&gt; $tax_data ) {
+
+    $terms = get_features( &quot;property_id={$atts[&#x27;property_id&#x27;]}&amp;type={$tax_slug}&amp;format=list&amp;links=true&amp;return=true&quot; );
+
+    if( !empty( $terms ) ) {
+
+      $html[ ] = &#x27;&lt;div class=&quot;&#x27; . wpp_css( &#x27;attribute_list::list_item&#x27;, &#x27;wpp_attributes&#x27;, true ) . &#x27;&quot;&gt;&#x27;;
+
+      if( $atts[ &#x27;title&#x27; ] ) {
+        $html[ ] = &#x27;&lt;h2 class=&quot;wpp_list_title&quot;&gt;&#x27; . $tax_data[ &#x27;labels&#x27; ][ &#x27;name&#x27; ] . &#x27;&lt;/h2&gt;&#x27;;
+      }
+
+      $html[ ] = &#x27;&lt;ul class=&quot;&#x27; . wpp_css( &#x27;attribute_list::list_item&#x27;, &#x27;wpp_feature_list wpp_attribute_list wpp_taxonomy_terms&#x27;, true ) . &#x27;&quot;&gt;&#x27;;
+      $html[ ] = $terms;
+      $html[ ] = &#x27;&lt;/ul&gt;&#x27;;
+
+      $html[ ] = &#x27;&lt;/div&gt;&#x27;; /* .wpp_attributes */
+
+    }
+
+  }
+
+  return implode( &#x27;&#x27;, (array) $html );
+
+}
+
+/**
+ * Retrieve property attribute using shortcode.
+ *
+ * @since 1.26.0
+ */
+static function property_attribute( $atts = array() ) {
+  global $post, $property;
+
+  if( is_admin() &amp;&amp; !DOING_AJAX ) {
+    return sprintf( __( &#x27;%1$s Attribute&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;singular&#x27; ) );
+  }
+
+  $this_property = $property;
+
+  if( empty( $this_property ) &amp;&amp; $post-&gt;post_type == WPP_Object ) {
+    $this_property = $post;
+  }
+
+  $this_property = (array) $this_property;
+
+  $args = shortcode_atts( array(
+    &#x27;property_id&#x27;      =&gt; $this_property[ &#x27;ID&#x27; ],
+    &#x27;attribute&#x27;        =&gt; &#x27;&#x27;,
+    &#x27;before&#x27;           =&gt; &#x27;&#x27;,
+    &#x27;after&#x27;            =&gt; &#x27;&#x27;,
+    &#x27;if_empty&#x27;         =&gt; &#x27;&#x27;,
+    &#x27;do_not_format&#x27;    =&gt; &#x27;&#x27;,
+    &#x27;make_terms_links&#x27; =&gt; &#x27;false&#x27;,
+    &#x27;separator&#x27;        =&gt; &#x27; &#x27;,
+    &#x27;strip_tags&#x27;       =&gt; &#x27;&#x27;
+  ), $atts );
+
+  if( empty( $args[ &#x27;attribute&#x27; ] ) ) {
+    return false;
+  }
+
+  $attribute = $args[ &#x27;attribute&#x27; ];
+
+  if( $args[ &#x27;property_id&#x27; ] != $this_property[ &#x27;ID&#x27; ] ) {
+
+    $this_property = \UsabilityDynamics\WPP\Utility::get_property( $args[ &#x27;property_id&#x27; ] );
+
+    if( $args[ &#x27;do_not_format&#x27; ] != &quot;true&quot; ) {
+      $this_property = prepare_property_for_display( $this_property );
+    }
+
+  }
+
+  if( is_object_in_taxonomy( WPP_Object, $attribute ) &amp;&amp; taxonomy_exists( $attribute ) ) {
+    foreach( (array) wp_get_object_terms( $this_property[ &#x27;ID&#x27; ], $attribute ) as $term_data ) {
+
+      if( $args[ &#x27;make_terms_links&#x27; ] == &#x27;true&#x27; ) {
+        $terms[ ] = &#x27;&lt;a class=&quot;wpp_term_link&quot; href=&quot;&#x27; . get_term_link( $term_data, $attribute ) . &#x27;&quot;&gt;&lt;span class=&quot;wpp_term&quot;&gt;&#x27; . $term_data-&gt;name . &#x27;&lt;/span&gt;&lt;/a&gt;&#x27;;
+      } else {
+        $terms[ ] = &#x27;&lt;span class=&quot;wpp_term&quot;&gt;&#x27; . $term_data-&gt;name . &#x27;&lt;/span&gt;&#x27;;
+      }
+    }
+
+    if( is_array( $terms ) &amp;&amp; !empty( $terms ) ) {
+      $value = implode( $args[ &#x27;separator&#x27; ], $terms );
+    }
+
+  }
+
+  /** Try to get value using get get_attribute() function */
+  if( !$value &amp;&amp; function_exists( &#x27;get_attribute&#x27; ) ) {
+    $value = get_attribute( $attribute, array(
+      &#x27;return&#x27;          =&gt; &#x27;true&#x27;,
+      &#x27;property_object&#x27; =&gt; $this_property
+    ) );
+  }
+
+  if( !empty( $args[ &#x27;before&#x27; ] ) ) {
+    $return[ &#x27;before&#x27; ] = html_entity_decode( $args[ &#x27;before&#x27; ] );
+  }
+
+  $return[ &#x27;value&#x27; ] = apply_filters( &#x27;wpp_property_attribute_shortcode&#x27;, $value, $the_property );
+
+  if( $args[ &#x27;strip_tags&#x27; ] == &quot;true&quot; &amp;&amp; !empty( $return[ &#x27;value&#x27; ] ) ) {
+    $return[ &#x27;value&#x27; ] = strip_tags( $return[ &#x27;value&#x27; ] );
+  }
+
+  if( !empty( $args[ &#x27;after&#x27; ] ) ) {
+    $return[ &#x27;after&#x27; ] = html_entity_decode( $args[ &#x27;after&#x27; ] );
+  }
+
+  /** When no value is found */
+  if( empty( $value[ &#x27;value&#x27; ] ) ) {
+
+    if( !empty( $args[ &#x27;if_empty&#x27; ] ) ) {
+      return $args[ &#x27;if_empty&#x27; ];
+    } else {
+      return false;
+    }
+  }
+
+  if( is_array( $return ) ) {
+    return implode( &#x27;&#x27;, $return );
+  }
+
+  return false;
+
+}
+
+/**
+ * Displays a map for the current property.
+ * Must be used on a property page, or within a property loop where the global $post or $property variable is for a property object.
+ *
+ * @since 1.26.0
+ */
+static function property_map( $atts = false ) {
+  global $post, $property;
+
+  //** backup of global $property */
+  $_property = $property;
+
+  if( is_admin() &amp;&amp; !DOING_AJAX ) {
+    return sprintf( __( &#x27;%1$s Map&#x27;, &#x27;wpp&#x27; ), \UsabilityDynamics\WPP\Utility::property_label( &#x27;singular&#x27; ) );
+  }
+
+  $atts = shortcode_atts( array(
+    &#x27;width&#x27;        =&gt; &#x27;100%&#x27;,
+    &#x27;height&#x27;       =&gt; &#x27;450px&#x27;,
+    &#x27;zoom_level&#x27;   =&gt; &#x27;13&#x27;,
+    &#x27;hide_infobox&#x27; =&gt; &#x27;false&#x27;,
+    &#x27;property_id&#x27;  =&gt; $property-&gt;ID
+  ), $atts );
+
+  /** Try to get property if an ID is passed */
+  if( is_numeric( $atts[ &#x27;property_id&#x27; ] ) ) {
+    $property = \UsabilityDynamics\WPP\Utility::get_property( $atts[ &#x27;property_id&#x27; ] );
+  }
+
+  /** Load into $property object */
+  if( !isset( $property ) ) {
+    $property = (array) $post;
+  }
+
+  /** Force map to be enabled here */
+  $skip_default_google_map_check = true;
+
+  $map_width    = $atts[ &#x27;width&#x27; ];
+  $map_height   = $atts[ &#x27;height&#x27; ];
+  $hide_infobox = ( $atts[ &#x27;hide_infobox&#x27; ] == &#x27;true&#x27; ? true : false );
+
+  /** Find most appropriate template */
+  $template_found = \UsabilityDynamics\WPP\Utility::get_template_part( array(
+    &#x27;content-single-property-map&#x27;,
+    &#x27;property-map&#x27;
+  ), array( WPP_Templates ) );
+
+  if( !$template_found ) {
+    return false;
+  }
+
+  ob_start();
+  include $template_found;
+  $html = ob_get_contents();
+  ob_end_clean();
+
+  $html = apply_filters( &#x27;wpp::property_map_content&#x27;, $html, $atts );
+
+  //** restore of global $property */
+  $property = $_property;
+
+  return $html;
+}
+
+/**
+ * Display list of attached files to a s post.
+ * Function ported over from List Attachments Shortcode plugin.
+ *
+ * @version 1.25.0
+ */
+static function list_attachments( $atts = array() ) {
+  global $post, $wp_query;
+
+  $r = &#x27;&#x27;;
+
+  $atts = shortcode_atts( array(
+    &#x27;type&#x27;                 =&gt; NULL,
+    &#x27;orderby&#x27;              =&gt; NULL,
+    &#x27;groupby&#x27;              =&gt; NULL,
+    &#x27;order&#x27;                =&gt; NULL,
+    &#x27;post_id&#x27;              =&gt; false,
+    &#x27;before_list&#x27;          =&gt; &#x27;&#x27;,
+    &#x27;after_list&#x27;           =&gt; &#x27;&#x27;,
+    &#x27;opening&#x27;              =&gt; &#x27;&lt;ul class=&quot;attachment-list wpp_attachment_list&quot;&gt;&#x27;,
+    &#x27;closing&#x27;              =&gt; &#x27;&lt;/ul&gt;&#x27;,
+    &#x27;before_item&#x27;          =&gt; &#x27;&lt;li&gt;&#x27;,
+    &#x27;after_item&#x27;           =&gt; &#x27;&lt;/li&gt;&#x27;,
+    &#x27;show_descriptions&#x27;    =&gt; true,
+    &#x27;include_icon_classes&#x27; =&gt; true,
+    &#x27;showsize&#x27;             =&gt; false
+  ), $atts );
+
+  if( isset( $atts[ &#x27;post_id&#x27; ] ) &amp;&amp; is_numeric( $atts[ &#x27;post_id&#x27; ] ) ) {
+    $post = get_post( $atts[ &#x27;post_id&#x27; ] );
+  }
+
+  if( !$post ) {
+    return;
+  }
+
+  if( !empty( $atts[ &#x27;type&#x27; ] ) ) {
+    $types = explode( &#x27;,&#x27;, str_replace( &#x27; &#x27;, &#x27;&#x27;, $atts[ &#x27;type&#x27; ] ) );
+  } else {
+    $types = array();
+  }
+
+  $showsize   = ( $atts[ &#x27;showsize&#x27; ] == true || $atts[ &#x27;showsize&#x27; ] == &#x27;true&#x27; || $atts[ &#x27;showsize&#x27; ] == 1 ) ? true : false;
+  $upload_dir = wp_upload_dir();
+
+  $op = clone $post;
+  $oq = clone $wp_query;
+
+  foreach( array( &#x27;before_list&#x27;, &#x27;after_list&#x27;, &#x27;opening&#x27;, &#x27;closing&#x27;, &#x27;before_item&#x27;, &#x27;after_item&#x27; ) as $htmlItem ) {
+    $atts[ $htmlItem ] = str_replace( array( &#x27;&amp;lt;&#x27;, &#x27;&amp;gt;&#x27; ), array( &#x27;&lt;&#x27;, &#x27;&gt;&#x27; ), $atts[ $htmlItem ] );
+  }
+
+  $args = array(
+    &#x27;post_type&#x27;   =&gt; &#x27;attachment&#x27;,
+    &#x27;numberposts&#x27; =&gt; -1,
+    &#x27;post_status&#x27; =&gt; null,
+    &#x27;post_parent&#x27; =&gt; $post-&gt;ID,
+  );
+
+  if( !empty( $atts[ &#x27;orderby&#x27; ] ) ) {
+    $args[ &#x27;orderby&#x27; ] = $atts[ &#x27;orderby&#x27; ];
+  }
+  if( !empty( $atts[ &#x27;order&#x27; ] ) ) {
+    $atts[ &#x27;order&#x27; ] = ( in_array( $atts[ &#x27;order&#x27; ], array( &#x27;a&#x27;, &#x27;asc&#x27;, &#x27;ascending&#x27; ) ) ) ? &#x27;asc&#x27; : &#x27;desc&#x27;;
+    $args[ &#x27;order&#x27; ] = $atts[ &#x27;order&#x27; ];
+  }
+  if( !empty( $atts[ &#x27;groupby&#x27; ] ) ) {
+    $args[ &#x27;orderby&#x27; ] = $atts[ &#x27;groupby&#x27; ];
+  }
+
+  $attachments = get_posts( $args );
+
+  if( !empty( $attachments ) ) {
+    $grouper = $atts[ &#x27;groupby&#x27; ];
+    $test    = $attachments;
+    $test    = array_shift( $test );
+    if( !property_exists( $test, $grouper ) ) {
+      $grouper = &#x27;post_&#x27; . $grouper;
+    }
+
+    $attlist = array();
+
+    foreach( $attachments as $att ) {
+      $key = ( !empty( $atts[ &#x27;groupby&#x27; ] ) ) ? $att-&gt;$grouper : $att-&gt;ID;
+      $key .= ( !empty( $atts[ &#x27;orderby&#x27; ] ) ) ? $att-&gt;$atts[ &#x27;orderby&#x27; ] : &#x27;&#x27;;
+
+      $attlink = wp_get_attachment_url( $att-&gt;ID );
+
+      if( !empty( $types ) &amp;&amp; is_array( $types ) ) {
+        foreach( $types as $t ) {
+          if( substr( $attlink, ( 0 - strlen( &#x27;.&#x27; . $t ) ) ) == &#x27;.&#x27; . $t ) {
+            $attlist[ $key ]          = clone $att;
+            $attlist[ $key ]-&gt;attlink = $attlink;
+          }
+        }
+      } else {
+        $attlist[ $key ]          = clone $att;
+        $attlist[ $key ]-&gt;attlink = $attlink;
+      }
+    }
+    if( $atts[ &#x27;groupby&#x27; ] ) {
+      if( $atts[ &#x27;order&#x27; ] == &#x27;asc&#x27; ) {
+        ksort( $attlist );
+      } else {
+        krsort( $attlist );
+      }
+    }
+  }
+
+  if( !empty( $attlist ) &amp;&amp; is_array( $attlist ) ) {
+    $open = false;
+    $r    = $atts[ &#x27;before_list&#x27; ] . $atts[ &#x27;opening&#x27; ];
+    foreach( $attlist as $att ) {
+
+      $container_classes = array( &#x27;attachment_container&#x27; );
+
+      //** Determine class to display for this file type */
+      if( $atts[ &#x27;include_icon_classes&#x27; ] ) {
+
+        switch( $att-&gt;post_mime_type ) {
+
+          case &#x27;application/zip&#x27;:
+            $class = &#x27;zip&#x27;;
+            break;
+
+          case &#x27;vnd.ms-excel&#x27;:
+            $class = &#x27;excel&#x27;;
+            break;
+
+          case &#x27;image/jpeg&#x27;:
+          case &#x27;image/png&#x27;:
+          case &#x27;image/gif&#x27;:
+          case &#x27;image/bmp&#x27;:
+            $class = &#x27;image&#x27;;
+            break;
+
+          default:
+            $class = &#x27;default&#x27;;
+            break;
+        }
+      }
+
+      $icon_class = ( $class ? &#x27;wpp_attachment_icon file-&#x27; . $class : false );
+
+      //** Determine if description shuold be displayed, and if it is not empty */
+      $echo_description = ( $atts[ &#x27;show_descriptions&#x27; ] &amp;&amp; !empty( $att-&gt;post_content ) ? &#x27; &lt;span class=&quot;attachment_description&quot;&gt; &#x27; . $att-&gt;post_content . &#x27; &lt;/span&gt; &#x27; : false );
+
+      $echo_title = ( $att-&gt;post_excerpt ? $att-&gt;post_excerpt : __( &#x27;View &#x27;, &#x27;wpp&#x27; ) . apply_filters( &#x27;the_title_attribute&#x27;, $att-&gt;post_title ) );
+
+      if( $icon_class ) {
+        $container_classes[ ] = &#x27;has_icon&#x27;;
+      }
+
+      if( !empty( $echo_description ) ) {
+        $container_classes[ ] = &#x27;has_description&#x27;;
+      }
+
+      //** Add conditional classes if class is not already passed into container */
+      if( !strpos( $atts[ &#x27;before_item&#x27; ], &#x27;class&#x27; ) ) {
+        $this_before_item = str_replace( &#x27;&gt;&#x27;, &#x27; class=&quot;&#x27; . implode( &#x27; &#x27;, $container_classes ) . &#x27;&quot;&gt;&#x27;, $atts[ &#x27;before_item&#x27; ] );
+      }
+
+      $echo_size = ( ( $showsize ) ? &#x27; &lt;span class=&quot;attachment-size&quot;&gt;&#x27; . \UsabilityDynamics\WPP\Utility::get_filesize( str_replace( $upload_dir[ &#x27;baseurl&#x27; ], $upload_dir[ &#x27;basedir&#x27; ], $attlink ) ) . &#x27;&lt;/span&gt;&#x27; : &#x27;&#x27; );
+
+      if( !empty( $atts[ &#x27;groupby&#x27; ] ) &amp;&amp; $current_group != $att-&gt;$grouper ) {
+        if( $open ) {
+          $r .= $atts[ &#x27;closing&#x27; ] . $atts[ &#x27;after_item&#x27; ];
+          $open = false;
+        }
+        $r .= $atts[ &#x27;before_item&#x27; ] . &#x27;&lt;h3&gt;&#x27; . $att-&gt;$grouper . &#x27;&lt;/h3&gt;&#x27; . $atts[ &#x27;opening&#x27; ];
+        $open          = true;
+        $current_group = $att-&gt;$grouper;
+      }
+      $attlink = $att-&gt;attlink;
+      $r .= $this_before_item . &#x27;&lt;a href=&quot;&#x27; . $attlink . &#x27;&quot; title=&quot;&#x27; . $echo_title . &#x27;&quot; class=&quot;wpp_attachment &#x27; . $icon_class . &#x27;&quot;&gt;&#x27; . apply_filters( &#x27;the_title&#x27;, $att-&gt;post_title ) . &#x27;&lt;/a&gt;&#x27; . $echo_size . $echo_description . $atts[ &#x27;after_item&#x27; ];
+    }
+    if( $open ) {
+      $r .= $atts[ &#x27;closing&#x27; ] . $atts[ &#x27;after_item&#x27; ];
+    }
+    $r .= $atts[ &#x27;closing&#x27; ] . $atts[ &#x27;after_list&#x27; ];
+  }
+
+  $wp_query = clone $oq;
+  $post     = clone $op;
+
+  return $r;
+
+}
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

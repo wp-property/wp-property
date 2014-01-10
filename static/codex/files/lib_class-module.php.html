@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 2.0.0</em>
+            <em>API Docs for: 2.0.0-beta1</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -115,8 +115,81 @@ namespace UsabilityDynamics\WPP {
      */
     class Module extends \WP_Upgrader {
 
+      /**
+       * Headers Module.
+       *
+       * @static
+       * @access private
+       * @var array
+       */
+      private static $file_headers = array(
+        &#x27;Name&#x27;        =&gt; &#x27;Module Name&#x27;,
+        &#x27;ThemeURI&#x27;    =&gt; &#x27;Module URI&#x27;,
+        &#x27;Description&#x27; =&gt; &#x27;Description&#x27;,
+        &#x27;Author&#x27;      =&gt; &#x27;Author&#x27;,
+        &#x27;AuthorURI&#x27;   =&gt; &#x27;Author URI&#x27;,
+        &#x27;Version&#x27;     =&gt; &#x27;Version&#x27;,
+        &#x27;Class&#x27;       =&gt; &#x27;Class&#x27;,
+        &#x27;Status&#x27;      =&gt; &#x27;Status&#x27;,
+        &#x27;TextDomain&#x27;  =&gt; &#x27;Text Domain&#x27;,
+        &#x27;DomainPath&#x27;  =&gt; &#x27;Domain Path&#x27;,
+      );
+
+      /**
+       * Default themes.
+       *
+       * @static
+       * @access private
+       * @var array
+       */
+      private static $default_modules = array(
+        &#x27;admin-tools&#x27;        =&gt; &#x27;Admin Tools&#x27;
+      );
+
       var $result;
       var $bulk = false;
+
+      /**
+       * Get a raw, unformatted theme header.
+       *
+       * The header is sanitized, but is not translated, and is not marked up for display.
+       * To get a theme header for display, use the display() method.
+       *
+       * Use the get_template() method, not the &#x27;Template&#x27; header, for finding the template.
+       * The &#x27;Template&#x27; header is only good for what was written in the style.css, while
+       * get_template() takes into account where WordPress actually located the theme and
+       * whether it is actually valid.
+       *
+       * @access public
+       * @since 3.4.0
+       *
+       * @param string $header Theme header. Name, Description, Author, Version, ThemeURI, AuthorURI, Status, Tags.
+       * @return string String on success, false on failure.
+       */
+      public function get( $header ) {
+        if ( ! isset( $this-&gt;headers[ $header ] ) )
+          return false;
+
+        if ( ! isset( $this-&gt;headers_sanitized ) ) {
+          $this-&gt;headers_sanitized = $this-&gt;cache_get( &#x27;headers&#x27; );
+          if ( ! is_array( $this-&gt;headers_sanitized ) )
+            $this-&gt;headers_sanitized = array();
+        }
+
+        if ( isset( $this-&gt;headers_sanitized[ $header ] ) )
+          return $this-&gt;headers_sanitized[ $header ];
+
+        // If themes are a persistent group, sanitize everything and cache it. One cache add is better than many cache sets.
+        if ( self::$persistently_cache ) {
+          foreach ( array_keys( $this-&gt;headers ) as $_header )
+            $this-&gt;headers_sanitized[ $_header ] = $this-&gt;sanitize_header( $_header, $this-&gt;headers[ $_header ] );
+          $this-&gt;cache_add( &#x27;headers&#x27;, $this-&gt;headers_sanitized );
+        } else {
+          $this-&gt;headers_sanitized[ $header ] = $this-&gt;sanitize_header( $header, $this-&gt;headers[ $header ] );
+        }
+
+        return $this-&gt;headers_sanitized[ $header ];
+      }
 
       function upgrade_strings() {
         $this-&gt;strings[ &#x27;up_to_date&#x27; ]          = __( &#x27;The plugin is at the latest version.&#x27; );
