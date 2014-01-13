@@ -283,6 +283,7 @@ namespace UsabilityDynamics\WPP {
 
         // Legacy Support.
         include_once( $this->_path . 'lib/legacy.php' );
+        include_once( $this->_path . 'templates/template-functions.php' );
 
       }
 
@@ -540,20 +541,10 @@ namespace UsabilityDynamics\WPP {
        */
       private function load_shortcodes() {
 
-        // add_shortcode( 'property_search', array( $this, 'shortcode_property_search' ) );
-        // add_shortcode( 'featured_properties', array( $this, 'shortcode_featured_properties' ) );
-        // add_shortcode( 'property_map', array( $this, 'shortcode_property_map' ) );
-        // add_shortcode( 'property_attribute', array( $this, 'shortcode_property_attribute' ) );
-
-        // ? what is 'alternative_shortcodes'
-        //if( !empty( $wp_properties[ 'alternative_shortcodes' ][ 'property_overview' ] ) ) {
-          //add_shortcode( "{$wp_properties[ 'alternative_shortcodes' ]['property_overview']}", array( $this, 'shortcode_property_overview' ) );
-        //}
-
-        // Temp! It's just for testing
-        include dirname( dirname( __FILE__ ) ) . '/test/shortcode.php';
-
-        //global $_shortcodes; echo "<pre>"; print_r( $_shortcodes ); echo "</pre>"; die();
+        // Inits shortcodes
+        \UsabilityDynamics\Shortcode\Utility::maybe_load_shortcodes( $this->_path . 'lib/shortcodes' );
+        
+        //echo "<pre>"; print_r( \UsabilityDynamics\Shortcode\Manager::get() ); echo "</pre>"; die();
 
       }
 

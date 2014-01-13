@@ -44,7 +44,7 @@
     "usabilitydynamics/lib-utility": "master",
     "usabilitydynamics/lib-js-colorpicker": "master",
     "usabilitydynamics/lib-wp-xmlrpc": "master",
-    "usabilitydynamics/lib-wp-shortcode": "dev-master"
+    "usabilitydynamics/lib-wp-shortcode": "master"
   },
   "require-dev": {
     "usabilitydynamics/wp-property-admin-tools": "master",
