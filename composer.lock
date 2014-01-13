@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "3ad88e647d2c5d092d3f46f9ef8bf268",
+    "hash": "140625ff7d32ff5b72d32ca60f775c5c",
     "packages": [
         {
             "name": "datatables/datatables",
@@ -162,7 +162,7 @@
                     "lib"
                 ]
             },
-            "time": "2014-01-10 09:08:26"
+            "time": "2014-01-10 16:31:22"
         },
         {
             "name": "usabilitydynamics/lib-settings",
@@ -198,7 +198,7 @@
                     "lib"
                 ]
             },
-            "time": "2014-01-08 12:48:39"
+            "time": "2014-01-10 16:31:16"
         },
         {
             "name": "usabilitydynamics/lib-ui",
@@ -236,7 +236,7 @@
                     "lib"
                 ]
             },
-            "time": "2014-01-10 15:36:05"
+            "time": "2014-01-10 16:31:18"
         },
         {
             "name": "usabilitydynamics/lib-utility",
@@ -258,7 +258,29 @@
                     "lib"
                 ]
             },
-            "time": "2014-01-10 14:08:58"
+            "time": "2014-01-10 16:26:12"
+        },
+        {
+            "name": "usabilitydynamics/lib-wp-shortcode",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/lib-wp-shortcode",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/UsabilityDynamics/lib-wp-shortcode/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "component",
+            "autoload": {
+                "classmap": [
+                    "lib"
+                ]
+            },
+            "time": "2014-01-10 15:55:30"
         },
         {
             "name": "usabilitydynamics/lib-wp-xmlrpc",
@@ -348,7 +370,7 @@
             ],
             "authors": [
                 {
-                    "name": "Jonathan H. Wage",
+                    "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
                     "homepage": "http://www.jwage.com/",
                     "role": "Creator"
@@ -367,7 +389,7 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -427,7 +449,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -532,12 +554,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "3f411c4aef20c485a073b4aa7e055b1ccef05202"
+                "reference": "39de7a50bbf8ab91b2a3d6a51a645d105dc191f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/3f411c4aef20c485a073b4aa7e055b1ccef05202",
-                "reference": "3f411c4aef20c485a073b4aa7e055b1ccef05202",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/39de7a50bbf8ab91b2a3d6a51a645d105dc191f7",
+                "reference": "39de7a50bbf8ab91b2a3d6a51a645d105dc191f7",
                 "shasum": ""
             },
             "require": {
@@ -594,7 +616,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2014-01-10 11:07:09"
+            "time": "2014-01-13 10:33:23"
         },
         {
             "name": "phpcollection/phpcollection",

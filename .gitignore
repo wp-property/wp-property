@@ -20,3 +20,4 @@ core/premium
 *.out
 *.pid
 *.gz
+/static/codex

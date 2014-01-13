@@ -269,6 +269,7 @@ namespace UsabilityDynamics\WPP {
 
         // Legacy Support.
         include_once( $this->_path . 'lib/legacy.php' );
+        include_once( $this->_path . 'templates/template-functions.php' );
 
       }
 
@@ -418,6 +419,126 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Regiser CSS Assets.
+       *
+       * @author potanin@UD
+       */
+      private function register_styles() {
+
+        /** Find and register stylesheet  */
+        if( file_exists( STYLESHEETPATH . '/wp-properties.css' ) ) {
+          wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp-properties.css', array(), WPP_Version );
+        } elseif( file_exists( STYLESHEETPATH . '/wp_properties.css' ) ) {
+          wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.css', array(), WPP_Version );
+        } elseif( file_exists( TEMPLATEPATH . '/wp-properties.css' ) ) {
+          wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp-properties.css', array(), WPP_Version );
+        } elseif( file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
+          wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), WPP_Version );
+        } elseif( file_exists( WPP_Templates . '/wp_properties.css' ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
+          wp_register_style( 'wp-property-frontend', WPP_URL . 'templates/wp_properties.css', array(), WPP_Version );
+
+          //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
+          if( $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] != 'true' && Utility::has_theme_specific_stylesheet() ) {
+            wp_register_style( 'wp-property-theme-specific', WPP_URL . "templates/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), WPP_Version );
+          }
+        }
+
+        wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'third-party/fancybox/jquery.fancybox-1.3.4.css' );
+        wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'vendor/usabilitydynamics/lib-js-colorpicker/styles/colorpicker.css' );
+        wp_register_style( 'jquery-ui', WPP_URL . 'styles/jquery-ui.css' );
+        wp_register_style( 'wpp-jquery-data-tables', WPP_URL . "styles/wpp-data-tables.css" );
+
+      }
+
+      /**
+       * Register JavaScript Libraries
+       *
+       * @author potanin@UD
+       */
+      private function register_libraries() {
+
+        // Instantiate UDX Library Manager.
+        new \UsabilityDynamics\Requires(array(
+          'paths' => '/scripts/app.state.js',
+          'scopes' => array( 'admin' ),
+          'debug' => true
+        ));
+
+        // Register UDX Libraries.
+        wp_register_script( 'udx.requires',       '//cdn.udx.io/udx.requires.js' );
+        //wp_register_script( 'udx.knockout',       '//cdn.udx.io/knockout.js' );
+        //wp_register_script( 'udx.utility.cookie', '//cdn.udx.io/utility.cookie.js' );
+        //wp_register_script( 'udx.utility.md5',    '//cdn.udx.io/utility.md5.js' );
+
+        // Register WP-Property Global Libraries.
+        /*
+        wp_register_script( 'wpp.global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp.localization', 'udx.requires' ), WPP_Version );
+        wp_register_script( 'wpp.localization', get_bloginfo( 'wpurl' ) . '/wp-admin/admin-ajax.php?action=wpp_js_localization', array(), WPP_Version );
+
+        // Register WP-Property Admin Libraries.
+        wp_register_script( 'wpp.admin', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wpp.global', 'wpp.localization' ), WPP_Version );
+        wp_register_script( 'wpp.admin.modules', WPP_URL . 'scripts/wpp.admin.modules.js', array( 'wpp.localization', 'udx.requires' ), WPP_Version );
+        wp_register_script( 'wpp.admin.settings', WPP_URL . 'scripts/wpp.admin.settings.js', array( 'wpp.localization', 'udx.requires' ), WPP_Version );
+        wp_register_script( 'wpp.admin.overview', WPP_URL . 'scripts/wpp.admin.overview.js', array( 'jquery', 'wpp.localization' ), WPP_Version );
+        wp_register_script( 'wpp.admin.widgets', WPP_URL . 'scripts/wpp.admin.widgets.js', array( 'jquery', 'wpp.localization' ), WPP_Version );
+
+        // Register Vendor Libraries.
+        wp_register_script( 'wp-property-galleria', WPP_URL . 'third-party/galleria/galleria-1.2.5.js', array( 'jquery', 'wpp.localization' ) );
+        wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'third-party/fancybox/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp.localization' ), '1.7.3' );
+        wp_register_script( 'wpp-jquery-colorpicker', WPP_URL . 'vendor/usabilitydynamics/lib-js-colorpicker/scripts/colorpicker.js', array( 'jquery', 'wpp.localization' ) );
+        wp_register_script( 'wpp-jquery-easing', WPP_URL . 'third-party/fancybox/jquery.easing-1.3.pack.js', array( 'jquery', 'wpp.localization' ), '1.7.3' );
+        wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'scripts/fileuploader.js', array( 'jquery', 'wpp.localization' ) );
+        wp_register_script( 'wpp-jquery-nivo-slider', WPP_URL . 'third-party/jquery.nivo.slider.pack.js', array( 'jquery', 'wpp.localization' ) );
+        wp_register_script( 'wpp-jquery-address', WPP_URL . 'scripts/jquery.address-1.5.js', array( 'jquery', 'wpp.localization' ) );
+        wp_register_script( 'wpp-jquery-scrollTo', WPP_URL . 'scripts/jquery.scrollTo-min.js', array( 'jquery', 'wpp.localization' ) );
+        wp_register_script( 'wpp-jquery-validate', WPP_URL . 'scripts/jquery.validate.js', array( 'jquery', 'wpp.localization' ) );
+        wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'scripts/jquery.number.format.js', array( 'jquery', 'wpp.localization' ) );
+        wp_register_script( 'wpp-jquery-data-tables', WPP_URL . "vendor/datatables/datatables/media/js/jquery.dataTables.js", array( 'jquery', 'wpp.localization' ) );
+
+        */
+        // Find and Register client-side JavaScript Library.
+        if( file_exists( STYLESHEETPATH . '/wp_properties.js' ) ) {
+          wp_register_script( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
+        } elseif( file_exists( TEMPLATEPATH . '/wp_properties.js' ) ) {
+          wp_register_script( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
+        } elseif( file_exists( WPP_Templates . '/wp_properties.js' ) ) {
+          wp_register_script( 'wp-property-frontend', WPP_URL . 'templates/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
+        }
+
+        // Legacy Scripts for reference.
+        // wp_register_script( 'jquery-cookie', WPP_URL . 'scripts/jquery.smookie.js', array( 'jquery', 'wpp.localization' ), '1.7.3' );
+        // wp_register_script( 'wpp-md5', WPP_URL . 'third-party/md5.js', array( 'wpp.localization' ), WPP_Version );
+        // wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?sensor=true' );
+        // wp_register_script( 'wpp-jquery-gmaps', WPP_URL . 'scripts/jquery.ui.map.min.js', array( 'google-maps', 'jquery-ui-core', 'jquery-ui-widget', 'wpp.localization' ) );
+
+        //global $wp_scripts;
+        //die( '<pre>' . print_r( $wp_scripts, true ) . '</pre>' );
+      }
+
+      /**
+       * Find and Load Widgets.
+       *
+       */
+      private function load_widgets() {
+
+        add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
+
+      }
+
+      /**
+       * Find and Load Shortcodes.
+       *
+       */
+      private function load_shortcodes() {
+
+        // Inits shortcodes
+        \UsabilityDynamics\Shortcode\Utility::maybe_load_shortcodes( $this->_path . 'lib/shortcodes' );
+
+        //echo "<pre>"; print_r( \UsabilityDynamics\Shortcode\Manager::get() ); echo "</pre>"; die();
+
+      }
+
+      /**
        * Get Setting.
        *
        *    // Get Setting
@@ -537,7 +658,7 @@ namespace UsabilityDynamics\WPP {
         // Pre-init action hook
         do_action( 'wpp:setup_theme', $this );
 
-        // add_theme_support( 'post-thumbnails' );
+        add_theme_support( 'post-thumbnails' );
 
       }
 
@@ -651,6 +772,8 @@ namespace UsabilityDynamics\WPP {
        */
       public function init_lower() {
         global $wp_properties;
+
+
 
         /** Ajax functions */
         add_action( 'wp_ajax_wpp_ajax_max_set_property_type', create_function( "", ' die(Utility::mass_set_property_type($_REQUEST["property_type"]));' ) );
@@ -1187,7 +1310,9 @@ namespace UsabilityDynamics\WPP {
       public function admin_enqueue_scripts( $hook ) {
         global $current_screen, $wp_properties, $wpdb;
 
-        //wp_localize_script( 'wpp.localization', 'wpp', array( 'instance' => $this->locale_instance() ));
+        wp_localize_script( 'wpp.localization', 'wpp', array(
+          'instance' => $this->locale_instance()
+        ));
 
         switch( $current_screen->id ) {
 
@@ -1253,7 +1378,7 @@ namespace UsabilityDynamics\WPP {
             //wp_enqueue_script( 'wpp-jquery-colorpicker' );
             //wp_enqueue_script( 'wpp.admin.settings' );
             //wp_enqueue_style( 'wpp-jquery-colorpicker-css' );
-          break;
+            break;
 
           //** Widgets Page */
           case 'widgets':
@@ -1264,7 +1389,7 @@ namespace UsabilityDynamics\WPP {
             //wp_enqueue_script( 'jquery-ui-sortable' );
             //wp_enqueue_script( 'jquery-ui-tabs' );
             //wp_enqueue_style( 'jquery-ui' );
-          break;
+            break;
 
         }
 
