@@ -31,8 +31,8 @@ namespace UsabilityDynamics\WPP {
       public $group = 'WP-Property';
       
       public function __construct( $options = array() ) {
-        $this->name = __( 'Property Overview', 'wpp' );
-        $this->description = __( 'Property Overview shortcode is used to display a list of properties.  It returns all the published properties on your site', 'wpp' );
+        $this->name = sprintf( __( '%1$s Overview', 'wpp' ), Utility::property_label( 'singular' ) );
+        $this->description = sprintf( __( '%1$s Overview shortcode is used to display a list of %2$s.  It returns all the published %2$s on your site', 'wpp' ), Utility::property_label( 'singular' ), Utility::property_label( 'plural' ) );
         $this->params = array(
           'show_children' => array( 
             'type' => 'boolean',
