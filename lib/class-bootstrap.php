@@ -5,7 +5,7 @@
  * Migrated
  * ========
  *
- * - WPP_F::load_modules
+ * - WPP_F::_modules
  * - WPP_F::check_premium
  * - WPP_F::check_plugin_updates
  * - WPP_F::manual_activation
@@ -77,34 +77,25 @@ namespace UsabilityDynamics\WPP {
        * @property $_settings
        * @type {Object}
        */
-      public $_settings = false;
+      public $_settings = array();
 
       /**
        * UI Instance.
        *
        * @static
-       * @property $_ui
+       * @property $_modules
        * @type {Object}
        */
-      public $_ui = false;
+      public $_modules = array();
 
       /**
-       * API Instance.
+       * Requires.
        *
        * @static
-       * @property $_api
+       * @property $_requires
        * @type {Object}
        */
-      public $_api = false;
-
-      /**
-       * Current Theme.
-       *
-       * @static
-       * @property $_theme
-       * @type {Object}
-       */
-      public $_theme = false;
+      public $_requires = array();
 
       /**
        * File Path
@@ -151,45 +142,11 @@ namespace UsabilityDynamics\WPP {
           return self::$instance;
         }
 
-        // Save Instance.
-        self::$instance = $wpp = &$this;
-
         // Define Constants.
-        $this->define_constants();
+        $this->constants();
 
         // Autoload Vendor Dependencies.
         $this->autoload();
-
-        // property_meta
-        // location_matters
-        // searchable_property_types
-        // searchable_attributes
-        // search_conversions
-        // image_sizes
-        // configuration.google_maps.infobox_attributes
-        // hidden_attributes
-        // property_stats
-        // property_types
-        // property_inheritance
-
-        $this->_utility   = new Utility;
-
-        // Instantiate and load settings.
-        $this->_settings  = new Settings(array(
-          "store" => "options",
-          "key" => "wpp_settings",
-          "schema" => $this->_path . 'static/schemas/system.settings.schema.json'
-        ));
-
-        // Set vendor path in settings for easier access.
-        $this->set( 'paths.vendor', $this->_vendor . '/usabilitydynamics' );
-
-        // @note Hopefully temporary but this exposes settings to the legacy $wp_properties global variable.
-        $wp_properties = $this->get();
-
-        // Load Default API and Template Functions.
-        Template::load( 'default-api.php' );
-        Template::load( 'template-functions.php' );
 
         // Register activation hook -> has to be in the main plugin file
         register_activation_hook( __FILE__, array( &$this, 'activation' ) );
@@ -207,7 +164,7 @@ namespace UsabilityDynamics\WPP {
         add_action( 'init', array( &$this, 'init_lower' ), 100 );
 
         // Setup Template Redirection.
-        add_action( "template_redirect", array( &$this, 'template_redirect' ) );
+        add_action( 'template_redirect', array( &$this, 'template_redirect' ) );
 
         // Check settings data on accord with existing wp_properties data before option updates
         add_filter( 'wpp_settings_save', array( &$this, 'check_wp_settings_data' ), 0, 2 );
@@ -215,53 +172,82 @@ namespace UsabilityDynamics\WPP {
         // Modify request to change feed
         add_filter( 'request', array( &$this, 'property_feed' ) );
 
-        // Load Modules.
-        $this->load_modules();
+        // Initialize Widgets.
+        add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
 
-        // Initialize Shortcodes.
-        $this->load_shortcodes();
+        // Instantiate Settings.
+        $this->_settings = Settings::define(array(
+          "store" => "options",
+          "key" => "wpp_settings",
+          "schema" => $this->_path . 'static/schemas/system.settings.schema.json'
+        ));
 
-        // Find and Initialize Widgets.
-        $this->load_widgets();
-
-        // Settings Action.
-        $this->settings_action();
-
-        // Register JavaScript Libraries.
-        $this->register_libraries();
-
-        // Register CSS Assets.
-        $this->register_styles();
-
-      }
-
-      /**
-       * Load settings into $wp_properties and save settings if nonce exists
-       *
-       */
-      private function settings_action() {
-        return Utility::settings_action();
-      }
-
-      /**
-       * Load and Instantiate Available Modules
-       *
-       * @todo Add some logic to prevent broken libraries form being re-downloaded on every request by being disabled in settings on failure.
-       */
-      private function load_modules() {
 
         // @debug Declaring "active" modules for current client.
-        $this->set( 'modules.active', array(
-          //'wp-property-test-module',
-          //'wp-property-admin-tools',
-          'wp-property-power-tools'
-        ));
 
-        // Load required modules into UD Vendor directory.
-        $_required = Module::load( array(
-          'required' => $this->get( 'modules.active' ),
+        // Load Modules.
+        $this->_modules  = Module::load(array(
+          'required' => array(
+            //'wp-property-test-module',
+            'wp-property-admin-tools',
+            'wp-property-power-tools'
+          ),
           'path' => $this->get( 'paths.vendor' )
         ));
+
+        // Instantiate UDX Library Manager.
+        $this->_requires = Requires::define( array(
+          'name'  => 'wpp',
+          'path'  => '/model/wpp.js',
+          "cache" => "public, max-age: 3000",
+          "vary"  => "user-agent, x-client-type",
+          "paths" => array(
+            'api' => admin_url( 'admin-ajax.php' ),
+            'home' => home_url(),
+            //'model' =>
+          ),
+          "data" => apply_filters( 'wpp::get_instance', array(
+            'iframe_enabled' => isset( $data[ 'request' ][ 'wp_customize' ] ) && $data[ 'request' ][ 'wp_customize' ] == 'on' ? true : false
+          ))
+        ));
+
+        // Declare WP-Property Locale.
+        $this->_locale = Requires::define( array(
+          'name'  => 'wpp.locale',
+          'path'  => '/model/wpp.locale.js',
+          "cache" => "public, max-age: 30000",
+          "vary"  => "user-locale",
+          "data" => apply_filters( 'wpp::js::localization', include_once $this->_path . 'l10n.php' )
+        ));
+
+        // @test - Extend model.
+        $this->_requires->data( array( 'aasdfsadfasd' => 'asdfasdf' ));
+        $this->_requires->data( 'asdfasdf', array( 'aasdfsadfasd' => 'asdfasdf' ));
+        $this->_requires->data( 'asd.fasdf', array( 'aasdfsadfasd' => 'asdfasdf' ));
+
+        $this->_locale->data( 'property', __( 'Property' ) );
+        $this->_locale->data( 'my.stuff', __( 'My Stuff' ) );
+        $this->_locale->data( 'xmli.request_error', __( 'la la la' ) );
+
+        // @test - Add another instance
+        Requires::define( array(
+          'name'  => 'wpi',
+          'path'  => '/model/wpi.js',
+          "args" => array(
+            "wpi-arg" => "sdfa"
+          ),
+
+          "paths" => array(
+            'quickbooks.api' => 'http://api.quickbooks.io',
+            'api' => admin_url( 'admin-ajax.php' ),
+            'home' => home_url(),
+          ),
+          "data" => apply_filters( 'wpp::get_instance', array(
+            'iframe_enabled' => isset( $data[ 'request' ][ 'wp_customize' ] ) && $data[ 'request' ][ 'wp_customize' ] == 'on' ? true : false
+          ))
+        ));
+
+
 
       }
 
@@ -293,7 +279,11 @@ namespace UsabilityDynamics\WPP {
        * @author potanin@UD
        * @since 2.0.0
        */
-      private function define_constants() {
+      private function constants() {
+        global $wpp;
+
+        // Save Instance.
+        self::$instance = $wpp = &$this;
 
         $this->_path = trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) );
         $this->_vendor = trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'vendor';
@@ -428,136 +418,6 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       * Regiser CSS Assets.
-       *
-       * @author potanin@UD
-       */
-      private function register_styles() {
-
-        /** Find and register stylesheet  */
-        if( file_exists( STYLESHEETPATH . '/wp-properties.css' ) ) {
-          wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp-properties.css', array(), WPP_Version );
-        } elseif( file_exists( STYLESHEETPATH . '/wp_properties.css' ) ) {
-          wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.css', array(), WPP_Version );
-        } elseif( file_exists( TEMPLATEPATH . '/wp-properties.css' ) ) {
-          wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp-properties.css', array(), WPP_Version );
-        } elseif( file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
-          wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), WPP_Version );
-        } elseif( file_exists( WPP_Templates . '/wp_properties.css' ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-          wp_register_style( 'wp-property-frontend', WPP_URL . 'templates/wp_properties.css', array(), WPP_Version );
-
-          //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
-          if( $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] != 'true' && Utility::has_theme_specific_stylesheet() ) {
-            wp_register_style( 'wp-property-theme-specific', WPP_URL . "templates/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), WPP_Version );
-          }
-        }
-
-        wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'third-party/fancybox/jquery.fancybox-1.3.4.css' );
-        wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'vendor/usabilitydynamics/lib-js-colorpicker/styles/colorpicker.css' );
-        wp_register_style( 'jquery-ui', WPP_URL . 'styles/jquery-ui.css' );
-        wp_register_style( 'wpp-jquery-data-tables', WPP_URL . "styles/wpp-data-tables.css" );
-
-      }
-
-      /**
-       * Register JavaScript Libraries
-       *
-       * @author potanin@UD
-       */
-      private function register_libraries() {
-
-        // Instantiate UDX Library Manager.
-        new \UsabilityDynamics\Requires(array(
-          'paths' => '/scripts/app.state.js',
-          'scopes' => array( 'admin' ),
-          'debug' => true
-        ));
-
-        // Register UDX Libraries.
-        wp_register_script( 'udx.requires',       '//cdn.udx.io/udx.requires.js' );
-        //wp_register_script( 'udx.knockout',       '//cdn.udx.io/knockout.js' );
-        //wp_register_script( 'udx.utility.cookie', '//cdn.udx.io/utility.cookie.js' );
-        //wp_register_script( 'udx.utility.md5',    '//cdn.udx.io/utility.md5.js' );
-
-        // Register WP-Property Global Libraries.
-        /*
-        wp_register_script( 'wpp.global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp.localization', 'udx.requires' ), WPP_Version );
-        wp_register_script( 'wpp.localization', get_bloginfo( 'wpurl' ) . '/wp-admin/admin-ajax.php?action=wpp_js_localization', array(), WPP_Version );
-
-        // Register WP-Property Admin Libraries.
-        wp_register_script( 'wpp.admin', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wpp.global', 'wpp.localization' ), WPP_Version );
-        wp_register_script( 'wpp.admin.modules', WPP_URL . 'scripts/wpp.admin.modules.js', array( 'wpp.localization', 'udx.requires' ), WPP_Version );
-        wp_register_script( 'wpp.admin.settings', WPP_URL . 'scripts/wpp.admin.settings.js', array( 'wpp.localization', 'udx.requires' ), WPP_Version );
-        wp_register_script( 'wpp.admin.overview', WPP_URL . 'scripts/wpp.admin.overview.js', array( 'jquery', 'wpp.localization' ), WPP_Version );
-        wp_register_script( 'wpp.admin.widgets', WPP_URL . 'scripts/wpp.admin.widgets.js', array( 'jquery', 'wpp.localization' ), WPP_Version );
-
-        // Register Vendor Libraries.
-        wp_register_script( 'wp-property-galleria', WPP_URL . 'third-party/galleria/galleria-1.2.5.js', array( 'jquery', 'wpp.localization' ) );
-        wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'third-party/fancybox/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp.localization' ), '1.7.3' );
-        wp_register_script( 'wpp-jquery-colorpicker', WPP_URL . 'vendor/usabilitydynamics/lib-js-colorpicker/scripts/colorpicker.js', array( 'jquery', 'wpp.localization' ) );
-        wp_register_script( 'wpp-jquery-easing', WPP_URL . 'third-party/fancybox/jquery.easing-1.3.pack.js', array( 'jquery', 'wpp.localization' ), '1.7.3' );
-        wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'scripts/fileuploader.js', array( 'jquery', 'wpp.localization' ) );
-        wp_register_script( 'wpp-jquery-nivo-slider', WPP_URL . 'third-party/jquery.nivo.slider.pack.js', array( 'jquery', 'wpp.localization' ) );
-        wp_register_script( 'wpp-jquery-address', WPP_URL . 'scripts/jquery.address-1.5.js', array( 'jquery', 'wpp.localization' ) );
-        wp_register_script( 'wpp-jquery-scrollTo', WPP_URL . 'scripts/jquery.scrollTo-min.js', array( 'jquery', 'wpp.localization' ) );
-        wp_register_script( 'wpp-jquery-validate', WPP_URL . 'scripts/jquery.validate.js', array( 'jquery', 'wpp.localization' ) );
-        wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'scripts/jquery.number.format.js', array( 'jquery', 'wpp.localization' ) );
-        wp_register_script( 'wpp-jquery-data-tables', WPP_URL . "vendor/datatables/datatables/media/js/jquery.dataTables.js", array( 'jquery', 'wpp.localization' ) );
-
-        */
-        // Find and Register client-side JavaScript Library.
-        if( file_exists( STYLESHEETPATH . '/wp_properties.js' ) ) {
-          wp_register_script( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
-        } elseif( file_exists( TEMPLATEPATH . '/wp_properties.js' ) ) {
-          wp_register_script( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
-        } elseif( file_exists( WPP_Templates . '/wp_properties.js' ) ) {
-          wp_register_script( 'wp-property-frontend', WPP_URL . 'templates/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
-        }
-
-        // Legacy Scripts for reference.
-        // wp_register_script( 'jquery-cookie', WPP_URL . 'scripts/jquery.smookie.js', array( 'jquery', 'wpp.localization' ), '1.7.3' );
-        // wp_register_script( 'wpp-md5', WPP_URL . 'third-party/md5.js', array( 'wpp.localization' ), WPP_Version );
-        // wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?sensor=true' );
-        // wp_register_script( 'wpp-jquery-gmaps', WPP_URL . 'scripts/jquery.ui.map.min.js', array( 'google-maps', 'jquery-ui-core', 'jquery-ui-widget', 'wpp.localization' ) );
-
-        //global $wp_scripts;
-        //die( '<pre>' . print_r( $wp_scripts, true ) . '</pre>' );
-      }
-
-      /**
-       * Find and Load Widgets.
-       *
-       */
-      private function load_widgets() {
-
-        add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
-
-      }
-
-      /**
-       * Find and Load Shortcodes.
-       *
-       */
-      private function load_shortcodes() {
-
-        // add_shortcode( 'property_search', array( $this, 'shortcode_property_search' ) );
-        // add_shortcode( 'featured_properties', array( $this, 'shortcode_featured_properties' ) );
-        // add_shortcode( 'property_map', array( $this, 'shortcode_property_map' ) );
-        // add_shortcode( 'property_attribute', array( $this, 'shortcode_property_attribute' ) );
-
-        // ? what is 'alternative_shortcodes'
-        //if( !empty( $wp_properties[ 'alternative_shortcodes' ][ 'property_overview' ] ) ) {
-          //add_shortcode( "{$wp_properties[ 'alternative_shortcodes' ]['property_overview']}", array( $this, 'shortcode_property_overview' ) );
-        //}
-
-        // Temp! It's just for testing
-        include dirname( dirname( __FILE__ ) ) . '/test/shortcode.php';
-
-        //global $_shortcodes; echo "<pre>"; print_r( $_shortcodes ); echo "</pre>"; die();
-
-      }
-
-      /**
        * Get Setting.
        *
        *    // Get Setting
@@ -677,7 +537,7 @@ namespace UsabilityDynamics\WPP {
         // Pre-init action hook
         do_action( 'wpp:setup_theme', $this );
 
-        add_theme_support( 'post-thumbnails' );
+        // add_theme_support( 'post-thumbnails' );
 
       }
 
@@ -792,8 +652,6 @@ namespace UsabilityDynamics\WPP {
       public function init_lower() {
         global $wp_properties;
 
-
-
         /** Ajax functions */
         add_action( 'wp_ajax_wpp_ajax_max_set_property_type', create_function( "", ' die(Utility::mass_set_property_type($_REQUEST["property_type"]));' ) );
         add_action( 'wp_ajax_wpp_ajax_property_query', create_function( "", ' $class = Utility::get_property(trim($_REQUEST["property_id"])); if($class) { echo "Utility::get_property() output: \n\n"; print_r($class); echo "\nAfter prepare_property_for_display() filter:\n\n"; print_r(prepare_property_for_display($class));  } else { echo sprintf(__("No %1s found.","wpp"), Utility::property_label( "singular" ) );; } die();' ) );
@@ -805,8 +663,8 @@ namespace UsabilityDynamics\WPP {
         add_action( 'wp_ajax_wpp_save_settings', create_function( "", ' die(Utility::save_settings());' ) );
 
         /** Localization */
-        add_action( "wp_ajax_wpp_js_localization", array( &$this, "localize_scripts" ) );
-        add_action( "wp_ajax_nopriv_wpp_js_localization", array( &$this, "localize_scripts" ) );
+        //add_action( "wp_ajax_wpp_js_localization", array( &$this, "localize_scripts" ) );
+        //add_action( "wp_ajax_nopriv_wpp_js_localization", array( &$this, "localize_scripts" ) );
 
         add_filter( "manage_edit-property_sortable_columns", array( &$this, "sortable_columns" ) );
         add_filter( "manage_edit-property_columns", array( &$this, "edit_columns" ) );
@@ -871,7 +729,7 @@ namespace UsabilityDynamics\WPP {
         add_filter( 'admin_body_class', array( &$this, 'admin_body_class' ), 5 );
 
         // Frontend Body Class.
-        add_filter( 'body_class', array( 'UsabilityDynamics\WPP\Theme', 'body_class' ) );
+        add_filter( 'body_class', array( 'UsabilityDynamics\WPP\Utility', 'body_class' ) );
 
         add_filter( 'wp_get_attachment_link', array( 'UsabilityDynamics\WPP\Utility', 'wp_get_attachment_link' ), 10, 6 );
 
@@ -896,7 +754,45 @@ namespace UsabilityDynamics\WPP {
       public function template_redirect() {
         global $post, $property, $wp_query, $wp_properties, $wp_styles, $wpp_query, $wp_taxonomies;
 
-        wp_localize_script( 'wpp.localization', 'wpp', array( 'instance' => $this->locale_instance() ) );
+        // Load Default API.
+        Template::load( 'default-api.php' );
+
+        // Load Template Functions.
+        Template::load( 'template-functions.php' );
+
+        /** Find and register stylesheet  */
+        if( file_exists( STYLESHEETPATH . '/wp-properties.css' ) ) {
+          wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp-properties.css', array(), WPP_Version );
+        } elseif( file_exists( STYLESHEETPATH . '/wp_properties.css' ) ) {
+          wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.css', array(), WPP_Version );
+        } elseif( file_exists( TEMPLATEPATH . '/wp-properties.css' ) ) {
+          wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp-properties.css', array(), WPP_Version );
+        } elseif( file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
+          wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), WPP_Version );
+        } elseif( file_exists( WPP_Templates . '/wp_properties.css' ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
+          wp_register_style( 'wp-property-frontend', WPP_URL . 'templates/wp_properties.css', array(), WPP_Version );
+
+          //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
+          if( $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] != 'true' && Utility::has_theme_specific_stylesheet() ) {
+            wp_register_style( 'wp-property-theme-specific', WPP_URL . "templates/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), WPP_Version );
+          }
+        }
+
+        // Find and Register client-side JavaScript Library.
+        if( file_exists( STYLESHEETPATH . '/wp_properties.js' ) ) {
+          wp_register_script( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
+        } elseif( file_exists( TEMPLATEPATH . '/wp_properties.js' ) ) {
+          wp_register_script( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
+        } elseif( file_exists( WPP_Templates . '/wp_properties.js' ) ) {
+          wp_register_script( 'wp-property-frontend', WPP_URL . 'templates/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
+        }
+
+        wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'third-party/fancybox/jquery.fancybox-1.3.4.css' );
+        wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'vendor/usabilitydynamics/lib-js-colorpicker/styles/colorpicker.css' );
+        wp_register_style( 'jquery-ui', WPP_URL . 'styles/jquery-ui.css' );
+        wp_register_style( 'wpp-jquery-data-tables', WPP_URL . "styles/wpp-data-tables.css" );
+
+        // wp_localize_script( 'wpp.localization', 'wpp', array( 'instance' => $this->locale_instance() ) );
 
         //** Load global wp-property script on all frontend pages */
         wp_enqueue_script( 'wpp.global' );
@@ -1223,7 +1119,7 @@ namespace UsabilityDynamics\WPP {
           update_option( "wpp_version", $wpp_version );
 
           // Get premium features on activation
-          @Utility::feature_check();
+          //@Utility::feature_check();
 
         }
 
@@ -1291,9 +1187,7 @@ namespace UsabilityDynamics\WPP {
       public function admin_enqueue_scripts( $hook ) {
         global $current_screen, $wp_properties, $wpdb;
 
-        wp_localize_script( 'wpp.localization', 'wpp', array(
-          'instance' => $this->locale_instance()
-        ));
+        //wp_localize_script( 'wpp.localization', 'wpp', array( 'instance' => $this->locale_instance() ));
 
         switch( $current_screen->id ) {
 
@@ -1374,20 +1268,8 @@ namespace UsabilityDynamics\WPP {
 
         }
 
-        //** Automatically insert styles sheet if one exists with $current_screen->ID name */
-        if( file_exists( $this->_path . "/styles/{$current_screen->id}.css" ) ) {
-          //wp_enqueue_style( $current_screen->id . '-style', WPP_URL . "/styles/{$current_screen->id}.css", array(), WPP_Version, 'screen' );
-        }
-
-        //** Automatically insert JS sheet if one exists with $current_screen->ID name */
-        if( file_exists( $this->_path . "scripts/{$current_screen->id}.js" ) ) {
-          //wp_enqueue_script( $current_screen->id . '-js', WPP_URL . "scripts/{$current_screen->id}.js", array( 'jquery' ), WPP_Version, 'wpp.admin' );
-        }
-
         // Enqueue Admin CSS on all backend pages.
-        if( file_exists( $this->_path . 'styles/wpp-admin.css' ) ) {
-          wp_enqueue_style( 'wpp-admin', WPP_URL . 'styles/wpp-admin.css' );
-        }
+        wp_enqueue_style( 'wpp.admin', WPP_URL . 'styles/wpp-admin.css' );
 
       }
 
@@ -1894,36 +1776,6 @@ namespace UsabilityDynamics\WPP {
           );
 
         }
-
-      }
-
-      /**
-       * Returns specific instance data which is used by javascript
-       * Javascript Reference: window.wpp.instance
-       *
-       * @author peshkov@UD
-       * @since 1.38
-       * @return array
-       */
-      public function locale_instance() {
-        global $wp_properties;
-
-        $data = array(
-          'request'        => $_REQUEST,
-          'get'            => $_GET,
-          'post'           => $_POST,
-          'iframe_enabled' => false,
-          'ajax_url'       => admin_url( 'admin-ajax.php' ),
-          'home_url'       => home_url(),
-          'user_logged_in' => is_user_logged_in() ? 'true' : 'false',
-          'settings'       => $wp_properties,
-        );
-
-        if( isset( $data[ 'request' ][ 'wp_customize' ] ) && $data[ 'request' ][ 'wp_customize' ] == 'on' ) {
-          $data[ 'iframe_enabled' ] = true;
-        }
-
-        return apply_filters( 'wpp::get_instance', $data );
 
       }
 

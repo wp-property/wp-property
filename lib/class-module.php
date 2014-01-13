@@ -184,7 +184,7 @@ namespace UsabilityDynamics\WPP {
         $_upgrader = new \WP_Upgrader( new Upgrader_Skin() );
 
         if( is_wp_error( $_upgrader->fs_connect( array( WP_CONTENT_DIR, $args->path )))) {
-          $_upgrader->skin->error( 'Unable to connect to file system.' );
+          $_upgrader->skin->error( new WP_Error( 'Unable to connect to file system.' ) );
         };
 
         $_source = $_upgrader->unpack_package( $_upgrader->download_package( $args->url ) );

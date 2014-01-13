@@ -8,7 +8,7 @@
  * @package WP-Property
  */
 
-$l10n = array(
+return $l10n = array(
 
   //** Admin Overview page */
   'show'                            => __( 'Show', 'wpp' ),
