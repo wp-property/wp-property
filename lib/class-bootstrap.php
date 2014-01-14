@@ -566,26 +566,28 @@ namespace UsabilityDynamics\WPP {
           'id'      => 'wpp.model',
           'cache'   => 'private',
           'vary'    => 'user-agent, x-client-type',
+          'base'    => home_url(),
           'data'    => $this->get_model(),
           'paths'   => array(
-            'wpp' => $this->get( '_computed.url.template' ) . '/wpp.js',
-            'wpp.admin' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.js',
-            'wpp.admin.agent' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.agent.js',
-            'wpp.admin.feps' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.feps.js',
-            'wpp.admin.overview' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.overview.js',
-            'wpp.admin.settings' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.settings.js',
-            'wpp.admin.widgets' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.widgets.js',
-            'wpp.admin.modules' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.modules.js',
-            'wpp.admin.tools' => $this->get( '_computed.url.modules' ) . '/wp-property-admin-tools/scripts/wpp.admin.tools.js',
-            'wpp.admin.exporter' => $this->get( '_computed.url.modules' ) . '/wp-property-exporter/scripts/wpp.admin.exporter.js',
-            'wpp.admin.importer' => $this->get( '_computed.url.modules' ) . '/wp-property-importer/scripts/wpp.admin.importer.js',
-            'wpp.feps.checkout' => $this->get( '_computed.url.modules' ) . '/wp-property-exporter/scripts/wpp.admin.exporter.js',
+            'wpp' => $this->get( '_computed.url.scripts' ) . '/wpp',
+            'wpp.admin' => $this->get( '_computed.url.scripts' ) . '/wpp.admin',
+            'wpp.admin.agent' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.agent',
+            'wpp.admin.feps' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.feps',
+            'wpp.admin.overview' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.overview',
+            'wpp.admin.settings' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.settings',
+            'wpp.admin.widgets' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.widgets',
+            'wpp.admin.modules' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.modules',
+            'wpp.admin.tools' => $this->get( '_computed.url.modules' ) . '/wp-property-admin-tools/scripts/wpp.admin.tools',
+            'wpp.admin.exporter' => $this->get( '_computed.url.modules' ) . '/wp-property-exporter/scripts/wpp.admin.exporter',
+            'wpp.admin.importer' => $this->get( '_computed.url.modules' ) . '/wp-property-importer/scripts/wpp.admin.importer',
+            'wpp.feps.checkout' => $this->get( '_computed.url.modules' ) . '/wp-property-exporter/scripts/wpp.admin.exporter',
           )
         ));
 
         // Register WP-Property locale.
         $this->locale = Requires::define(array(
           'id'      => 'wpp.locale',
+          'base'    => home_url(),
           'cache'   => 'public, max-age: 30000',
           'vary'    => 'x-user',
           'data'    => $this->getlocale()
