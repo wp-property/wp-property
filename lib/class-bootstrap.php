@@ -258,7 +258,7 @@ namespace UsabilityDynamics\WPP {
 
         // Seek ./vendor/autoload.php and autoload
         if( !is_file( $this->_vendor . '/autoload.php' ) ) {
-          self::fail( 'WP-Property vendor directory missing; attempted to find it in: ' . $this->_vendor . '/autoload.php' );
+          self::fatal_error( 'WP-Property vendor directory missing; attempted to find it in: ' . $this->_vendor . '/autoload.php' );
         }
 
         // Vendor Autoloader.
@@ -432,18 +432,18 @@ namespace UsabilityDynamics\WPP {
         } elseif( file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
           wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), WPP_Version );
         } elseif( file_exists( WPP_Templates . '/wp_properties.css' ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-          wp_register_style( 'wp-property-frontend', WPP_URL . 'templates/wp_properties.css', array(), WPP_Version );
+          wp_register_style( 'wp-property-frontend', $this->get( '_computed.url.styles' ) . '/templates/wp_properties.css', array(), WPP_Version );
 
           //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
           if( $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] != 'true' && Utility::has_theme_specific_stylesheet() ) {
-            wp_register_style( 'wp-property-theme-specific', WPP_URL . "templates/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), WPP_Version );
+            wp_register_style( 'wp-property-theme-specific', $this->get( '_computed.url.templates' ) . "/templates/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), WPP_Version );
           }
         }
 
-        wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'third-party/fancybox/jquery.fancybox-1.3.4.css' );
-        wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'vendor/usabilitydynamics/lib-js-colorpicker/styles/colorpicker.css' );
-        wp_register_style( 'jquery-ui', WPP_URL . 'styles/jquery-ui.css' );
-        wp_register_style( 'wpp-jquery-data-tables', WPP_URL . "styles/wpp-data-tables.css" );
+        //wp_register_style( 'wpp-jquery-fancybox-css', $this->get( '_computed.url.styles' ) . 'third-party/fancybox/jquery.fancybox-1.3.4.css' );
+        wp_register_style( 'wpp.jquery.colorpicker', $this->get( '_computed.url.module' ) . '/lib-js-colorpicker/styles/colorpicker.css' );
+        wp_register_style( 'wpp.jquery.ui', $this->get( '_computed.url.styles' ) . '/styles/wpp.jquery.ui.css' );
+        wp_register_style( 'wpp.data.tables', $this->get( '_computed.url.styles' ) . "/styles/wpp.data.tables.css" );
 
       }
 
@@ -498,8 +498,8 @@ namespace UsabilityDynamics\WPP {
           wp_register_script( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
         } elseif( file_exists( TEMPLATEPATH . '/wp_properties.js' ) ) {
           wp_register_script( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
-        } elseif( file_exists( WPP_Templates . '/wp_properties.js' ) ) {
-          wp_register_script( 'wp-property-frontend', WPP_URL . 'templates/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
+        } elseif( file_exists( WPP_Templates . '/wpp.js' ) ) {
+          wp_register_script( 'wp-property-frontend', $this->get( '_computed.url.templates' ) . '/wpp.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
         }
 
         // Legacy Scripts for reference.
@@ -629,11 +629,11 @@ namespace UsabilityDynamics\WPP {
        * Renders a critical failure.
        *
        * @example
-       *    self::fail( 'Critical plugin failure!' );
+       *    self::fatal_error( 'Critical plugin failure!' );
        *
        * @param $data
        */
-      public function fail( $data ) {
+      public function fatal_error( $data ) {
         wp_die( '<h1>' . __( 'WP-Property Failure', 'wpp' ) . '</h1><p>' . $data . '</p>' );
       }
 
@@ -889,12 +889,12 @@ namespace UsabilityDynamics\WPP {
           wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp-properties.css', array(), WPP_Version );
         } elseif( file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
           wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), WPP_Version );
-        } elseif( file_exists( WPP_Templates . '/wp_properties.css' ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-          wp_register_style( 'wp-property-frontend', WPP_URL . 'templates/wp_properties.css', array(), WPP_Version );
+        } elseif( file_exists( WPP_Templates . '/wpp.css' ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
+          wp_register_style( 'wp-property-frontend', $this->get( '_computed.url.templates' ) . '/wpp.css', array(), WPP_Version );
 
           //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
           if( $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] != 'true' && Utility::has_theme_specific_stylesheet() ) {
-            wp_register_style( 'wp-property-theme-specific', WPP_URL . "templates/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), WPP_Version );
+            wp_register_style( 'wp-property-theme-specific', $this->get( '_computed.url.templates' ) . "/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), WPP_Version );
           }
         }
 
@@ -903,14 +903,14 @@ namespace UsabilityDynamics\WPP {
           wp_register_script( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
         } elseif( file_exists( TEMPLATEPATH . '/wp_properties.js' ) ) {
           wp_register_script( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
-        } elseif( file_exists( WPP_Templates . '/wp_properties.js' ) ) {
-          wp_register_script( 'wp-property-frontend', WPP_URL . 'templates/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
+        } elseif( file_exists( $this->get( '_computed.path.templates' ) . '/wp_properties.js' ) ) {
+          wp_register_script( 'wp-property-frontend', $this->get( '_computed.url.templates' ) . '/wpp.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
         }
 
-        wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'third-party/fancybox/jquery.fancybox-1.3.4.css' );
-        wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'vendor/usabilitydynamics/lib-js-colorpicker/styles/colorpicker.css' );
-        wp_register_style( 'jquery-ui', WPP_URL . 'styles/jquery-ui.css' );
-        wp_register_style( 'wpp-jquery-data-tables', WPP_URL . "styles/wpp-data-tables.css" );
+        //wp_register_style( 'wpp.jquery.fancybox', $this->get( '_computed.url.styles' ) . 'third-party/fancybox/jquery.fancybox-1.3.4.css' );
+        wp_register_style( 'wpp.jquery.colorpicker', $this->get( '_computed.url.modules' ) . '/lib-js-colorpicker/styles/colorpicker.css' );
+        wp_register_style( 'wpp.jquery.ui', $this->get( '_computed.url.styles' ) . '/styles/wpp.jquery.ui.css' );
+        wp_register_style( 'wpp.data.tables', $this->get( '_computed.url.styles' ) . "/styles/wpp.data.tables.css" );
 
         // wp_localize_script( 'wpp.localization', 'wpp', array( 'instance' => $this->locale_instance() ) );
 
@@ -993,8 +993,8 @@ namespace UsabilityDynamics\WPP {
               wp_register_style( 'wp-property-frontend-' . $url_slug, get_bloginfo( 'stylesheet_directory' ) . "/wp_properties-{$url_slug}.css", array( 'wp-property-frontend' ), '1.13' );
             } elseif( file_exists( TEMPLATEPATH . "/wp_properties-{$url_slug}.css" ) ) {
               wp_register_style( 'wp-property-frontend-' . $url_slug, get_bloginfo( 'template_url' ) . "/wp_properties-{$url_slug}.css", array( 'wp-property-frontend' ), '1.13' );
-            } elseif( file_exists( WPP_Templates . "/wp_properties-{$url_slug}.css" ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-              wp_register_style( 'wp-property-frontend-' . $url_slug, WPP_URL . "templates/wp_properties-{$url_slug}.css", array( 'wp-property-frontend' ), WPP_Version );
+            } elseif( file_exists( $this->get( '_computed.path.templates' ) . "/wpp.{$url_slug}.css" ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
+              wp_register_style( 'wp-property-frontend-' . $url_slug, $this->get( '_computed.url.templates' ) . "/templates/wpp.{$url_slug}.css", array( 'wp-property-frontend' ), WPP_Version );
             }
             // Mark every style as conditional
             $wp_styles->add_data( 'wp-property-frontend-' . $url_slug, 'conditional', $type );
@@ -1314,7 +1314,8 @@ namespace UsabilityDynamics\WPP {
         // wp_localize_script( 'wpp.localization', 'wpp', array( 'instance' => $this->locale_instance() ));
 
         // Enqueue Admin CSS on all backend pages.
-        wp_enqueue_style( 'wpp.admin', WPP_URL . 'styles/wpp.admin.css' );
+        wp_enqueue_script( 'wpp.admin', $this->get( '_computed.url.scripts' ) . '/wpp.admin.js' );
+        wp_enqueue_style( 'wpp.admin', $this->get( '_computed.url.styles' ) . '/wpp.admin.css' );
 
       }
 
