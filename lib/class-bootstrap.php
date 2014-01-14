@@ -147,9 +147,6 @@ namespace UsabilityDynamics\WPP {
 
         // Metabox Handler.
         add_action( 'add_meta_boxes', array( &$this, 'add_meta_boxes' ) );
-        
-        // Loads and adds shortcodes to WP
-        $this->load_shortcodes();
 
         // Instantiate Settings.
         $this->_settings = Settings::define(array(
@@ -548,6 +545,9 @@ namespace UsabilityDynamics\WPP {
 
         // Register CSS Styles.
         $this->register_styles();
+
+        // Loads and adds shortcodes to WP
+        $this->load_shortcodes();
 
         // Register primary WP-Property Settings model.
         $this->requires = Requires::define( array(
