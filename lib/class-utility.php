@@ -15,7 +15,6 @@ namespace UsabilityDynamics\WPP {
 
     class Utility extends \UsabilityDynamics\Utility {
 
-
       /**
        * Adds wp-property-listing class in search results and property_overview pages
        *
@@ -31,7 +30,12 @@ namespace UsabilityDynamics\WPP {
         return $classes;
       }
 
-
+      /**
+       * Identify Categorical Attribute Fields
+       *
+       * @since 2.0.0
+       * @param bool $args
+       */
       static function get_categorical_fields( $args = false ) {
 
       }
@@ -930,6 +934,7 @@ namespace UsabilityDynamics\WPP {
         add_action( 'wp_enqueue_scripts', create_function( '', "wp_enqueue_script('wpp-jquery-address');" ) );
         add_action( 'wp_enqueue_scripts', create_function( '', "wp_enqueue_script('wpp-jquery-scrollTo');" ) );
         add_action( 'wp_enqueue_scripts', create_function( '', "wp_enqueue_script('wp-property-frontend');" ) );
+
         wp_enqueue_style( 'wpp-jquery-fancybox-css' );
         wp_enqueue_style( 'jquery-ui' );
 

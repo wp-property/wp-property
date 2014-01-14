@@ -12,15 +12,42 @@ namespace UsabilityDynamics\WPP {
 
     class Settings extends \UsabilityDynamics\Settings {
 
-      static function define( $args ) {
+      /**
+       * Create Settings Instance
+       *
+       * @author potanin@UD
+       * @since 2.0.0
+       */
+      static function define( $args = array() ) {
         global $wp_properties;
 
-        $_instance = new Settings( $args );
+        // Instantiate Settings.
+        $_instance = new Settings( (array) $args );
+
+        // Compute Settings.
+        $_instance->set( '_computed', array(
+          'path' => array(
+            'root' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ),
+            'vendor' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'vendor',
+            'templates' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'templates',
+            'scripts' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'scripts',
+            'styles' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'styles',
+            'modules' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'vendor/usabilitydynamics'
+          ),
+          "url" => array(
+            'root' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ),
+            'vendor' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'vendor',
+            'templates' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'templates',
+            'scripts' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'scripts',
+            'styles' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'styles',
+            'modules' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'vendor/usabilitydynamics'
+          )
+        ));
 
         // @note Hopefully temporary but this exposes settings to the legacy $wp_properties global variable.
-        $wp_properties = $_instance ->get();
+        $wp_properties = $_instance->get();
 
-        self::settings_action();
+        // self::settings_action();
 
         return $_instance;
 
@@ -113,9 +140,6 @@ namespace UsabilityDynamics\WPP {
         return $wp_properties;
 
       }
-
-
-
 
     }
 

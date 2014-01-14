@@ -176,27 +176,26 @@ namespace UsabilityDynamics\WPP {
         add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
 
         // Instantiate Settings.
-        $this->_settings = Settings::define(array(
+        $this->_settings  = Settings::define(array(
           "store" => "options",
           "key" => "wpp_settings",
           "schema" => $this->_path . 'static/schemas/system.settings.schema.json'
         ));
 
-
-        // @debug Declaring "active" modules for current client.
+        // die( '<pre>' . print_r( $wp_properties, true ) . '</pre>' );
 
         // Load Modules.
-        $this->_modules  = Module::load(array(
+        $this->_modules   = Module::load(array(
+          'path' => $this->get( '_computed.path.modules' ),
           'required' => array(
-            //'wp-property-test-module',
+            'wp-property-test-module',
             'wp-property-admin-tools',
-            'wp-property-power-tools'
-          ),
-          'path' => $this->get( 'paths.vendor' )
+            //'wp-property-power-tools'
+          )
         ));
 
         // Instantiate UDX Library Manager.
-        $this->_requires = Requires::define( array(
+        $this->_requires  = Requires::define( array(
           'name'  => 'wpp',
           'path'  => '/model/wpp.js',
           "cache" => "public, max-age: 3000",
@@ -212,11 +211,11 @@ namespace UsabilityDynamics\WPP {
         ));
 
         // Declare WP-Property Locale.
-        $this->_locale = Requires::define( array(
+        $this->_locale    = Requires::define(array(
           'name'  => 'wpp.locale',
           'path'  => '/model/wpp.locale.js',
           "cache" => "public, max-age: 30000",
-          "vary"  => "user-locale",
+          "vary"  => "x-user",
           "data" => apply_filters( 'wpp::js::localization', include_once $this->_path . 'l10n.php' )
         ));
 
@@ -246,8 +245,6 @@ namespace UsabilityDynamics\WPP {
             'iframe_enabled' => isset( $data[ 'request' ][ 'wp_customize' ] ) && $data[ 'request' ][ 'wp_customize' ] == 'on' ? true : false
           ))
         ));
-
-
 
       }
 
@@ -293,9 +290,9 @@ namespace UsabilityDynamics\WPP {
         define( 'WPP_Version', self::$version );
         define( 'WPP_Object', self::$object );
         //define( 'WPP_Path', $this->_path );
-        define( 'WPP_URL', $this->_url );
-        define( 'WPP_Templates', $this->_path . 'templates' );
-        define( 'WPP_Premium', $this->_path . $this->_vendor . '/usabilitydynamics' );
+        //define( 'WPP_URL', $this->_url );
+        //define( 'WPP_Templates', $this->_path . 'templates' );
+        //define( 'WPP_Premium', $this->_path . $this->_vendor . '/usabilitydynamics' );
       }
 
       /**
@@ -980,8 +977,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Scripts and styles to load on all overview and signle listing pages */
         if( $wp_query->single_property_page || $wp_query->is_property_overview ) {
-
-          Utility::console_log( 'Including scripts for all single and overview property pages.' );
+          // Utility::console_log( 'Including scripts for all single and overview property pages.' );
 
           Utility::load_assets( array( 'single', 'overview' ) );
 
@@ -1010,8 +1006,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Scripts loaded only on single property pages */
         if( $wp_query->single_property_page && !post_password_required( $post ) ) {
-
-          Utility::console_log( 'Including scripts for all single property pages.' );
+          // Utility::console_log( 'Including scripts for all single property pages.' );
 
           Utility::load_assets( array( 'single' ) );
 
@@ -1303,6 +1298,12 @@ namespace UsabilityDynamics\WPP {
        * Can enqueue scripts on specific pages, and print content into head
        *
        *
+       * In 2.0.0 removed
+       * - property_page_all_properties
+       * - property_page_property_settings
+       * - widgets
+       * - property
+       *
        * @uses $current_screen global variable
        * @since 0.53
        *
@@ -1310,91 +1311,10 @@ namespace UsabilityDynamics\WPP {
       public function admin_enqueue_scripts( $hook ) {
         global $current_screen, $wp_properties, $wpdb;
 
-        wp_localize_script( 'wpp.localization', 'wpp', array(
-          'instance' => $this->locale_instance()
-        ));
-
-        switch( $current_screen->id ) {
-
-          //** Property Overview Page and Edit Property page */
-          case 'property_page_all_properties':
-            //wp_enqueue_script( 'wpp.admin' );
-            //wp_enqueue_script( 'wpp.admin.overview' );
-
-          case 'property':
-            //wp_enqueue_script( 'wpp.global' );
-            //wp_enqueue_script( 'post' );
-            //wp_enqueue_script( 'postbox' );
-            //wp_enqueue_script( 'wpp-jquery-fancybox' );
-            //wp_enqueue_script( 'wpp-jquery-data-tables' );
-            //wp_enqueue_style( 'wpp-jquery-fancybox-css' );
-            //wp_enqueue_style( 'wpp-jquery-data-tables' );
-
-            //** Get width of overview table thumbnail, and set css */
-            $thumbnail_attribs = Utility::image_sizes( $wp_properties[ 'configuration' ][ 'admin_ui' ][ 'overview_table_thumbnail_size' ] );
-            $thumbnail_width   = ( !empty( $thumbnail_attribs[ 'width' ] ) ? $thumbnail_attribs[ 'width' ] : false );
-
-            if( $thumbnail_width ) { ?>
-              <style typ="text/css">
-                #wp-list-table.wp-list-table .column-thumbnail {
-                  width: <?php echo $thumbnail_width + 20; ?>px;
-                }
-
-                #wp-list-table.wp-list-table td.column-thumbnail {
-                  text-align: right;
-                }
-
-                #wp-list-table.wp-list-table .column-type {
-                  width: 90px;
-                }
-
-                #wp-list-table.wp-list-table .column-menu_order {
-                  width: 50px;
-                }
-
-                #wp-list-table.wp-list-table td.column-menu_order {
-                  text-align: center;
-                }
-
-                #wp-list-table.wp-list-table .column-featured {
-                  width: 100px;
-                }
-
-                #wp-list-table.wp-list-table .check-column {
-                  width: 26px;
-                }
-              </style>
-            <?php }
-
-            break;
-
-          //** Settings Page */
-          case 'property_page_property_settings':
-            //wp_enqueue_script( 'wpp.admin' );
-            //wp_enqueue_script( 'wpp.global' );
-            //wp_enqueue_script( 'jquery' );
-            //wp_enqueue_script( 'jquery-ui-core' );
-            //wp_enqueue_script( 'jquery-ui-sortable' );
-            //wp_enqueue_script( 'wpp-jquery-colorpicker' );
-            //wp_enqueue_script( 'wpp.admin.settings' );
-            //wp_enqueue_style( 'wpp-jquery-colorpicker-css' );
-            break;
-
-          //** Widgets Page */
-          case 'widgets':
-            //wp_enqueue_script( 'wpp.admin' );
-            //wp_enqueue_script( 'wpp.global' );
-            //wp_enqueue_script( 'wpp.admin.widgets' );
-            //wp_enqueue_script( 'jquery-ui-core' );
-            //wp_enqueue_script( 'jquery-ui-sortable' );
-            //wp_enqueue_script( 'jquery-ui-tabs' );
-            //wp_enqueue_style( 'jquery-ui' );
-            break;
-
-        }
+        // wp_localize_script( 'wpp.localization', 'wpp', array( 'instance' => $this->locale_instance() ));
 
         // Enqueue Admin CSS on all backend pages.
-        wp_enqueue_style( 'wpp.admin', WPP_URL . 'styles/wpp-admin.css' );
+        wp_enqueue_style( 'wpp.admin', WPP_URL . 'styles/wpp.admin.css' );
 
       }
 
