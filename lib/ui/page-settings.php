@@ -2,62 +2,31 @@
 /**
  * Page handles all the settings configuration for WP-Property. Premium features can hook into this page.
  *
- * Actions:
+ * ### Handled by Model
+ * - $object_label
+ * - $wp_messages
+ * - $geo_type_attrs
+ * - $this_domain
+ * - $using_custom_css
+ *
+ * ### Actions
  * - wpp_settings_page_property_page
  * - wpp_settings_help_tab
  * - wpp_settings_content_$slug
  *
- * Filters:
- *  - wpp_settings_nav
+ * ### Filters:
+ * - wpp_settings_nav
  *
  * @version 1.12
- * @package   WP-Property
- * @author     team@UD
- * @copyright  2012 Usability Dyanmics, Inc.
+ * @author potanin@UD
+ * @copyright  2012-2014 Usability Dyanmics, Inc.
  */
 
 $wpp_plugin_settings_nav = apply_filters( 'wpp_settings_nav', array() );
 
-//** Check if premium folder is writable */
-// $wp_messages = UsabilityDynamics\WPP\Utility::check_premium_folder_permissions();
-
-$object_label = array(
-  'singular' => UsabilityDynamics\WPP\Utility::property_label( 'singular' ),
-  'plural'   => UsabilityDynamics\WPP\Utility::property_label( 'plural' )
-);
-
-$wrapper_classes = array( 'wpp_settings_page' );
-
-if( isset( $_REQUEST[ 'message' ] ) ) {
-
-  switch( $_REQUEST[ 'message' ] ) {
-
-    case 'updated':
-      $wp_messages[ 'notice' ][ ] = __( "Settings updated.", 'wpp' );
-      break;
-
-  }
-}
-
-//** We have to update Rewrite rules here. peshkov@UD */ ... no we don't, should be done after settings updated only. -potanin@UD
-// flush_rewrite_rules();
-
-$parseUrl = parse_url( trim( get_bloginfo( 'url' ) ) );
-$this_domain = trim( $parseUrl[ 'host' ] ? $parseUrl[ 'host' ] : array_shift( explode( '/', $parseUrl[ 'path' ], 2 ) ) );
-
-/** Check if custom css exists */
-if( file_exists( STYLESHEETPATH . '/wp_properties.css' ) || file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
-  $using_custom_css = true;
-}
-
-if( get_option( 'permalink_structure' ) == '' ) {
-  $wrapper_classes[ ] = 'no_permalinks';
-} else {
-  $wrapper_classes[ ] = 'have_permalinks';
-}
 ?>
 
-<div class="wrap <?php echo implode( ' ', $wrapper_classes ); ?>">
+<div class="wrap">
 
   <h2 class='wpp_settings_page_header'><?php echo $wp_properties[ 'labels' ][ 'name' ] . ' ' . __( 'Settings', 'wpp' ) ?>
     <div class="wpp_fb_like" data-requires="">
@@ -84,25 +53,23 @@ if( get_option( 'permalink_structure' ) == '' ) {
   <form id="wpp_settings_form" method="post" action="<?php echo admin_url( 'edit.php?post_type=property&page=property_settings' ); ?>" enctype="multipart/form-data" data-requires="wpp.admin.settings">
     <?php wp_nonce_field( 'wpp_setting_save' ); ?>
 
-    <div id="wpp_settings_tabs" class="wpp_tabs clearfix">
-      <ul class="tabs"  data-requires="">
+    <div id="wpp_settings_tabs" class="wpp_tabs hidden" data-requires="udx.ui.jquery.tabs">
+      <ul class="tabs">
         <li><a href="#tab_main"><?php _e( 'Main', 'wpp' ); ?></a></li>
         <li><a href="#tab_display"><?php _e( 'Display', 'wpp' ); ?></a></li>
         <li><a href="#tab_maps"><?php _e( 'Maps', 'wpp' ); ?></a></li>
         <li><a href="#tab_images"><?php _e( 'Images', 'wpp' ); ?></a></li>
         <?php if( is_array( $wp_properties[ 'available_features' ] ) ) {
 
-          foreach( $wp_properties[ 'available_features' ] as $plugin ) {
+          foreach( (array) $wp_properties[ 'available_features' ] as $plugin ) {
             if( @$plugin[ 'status' ] == 'disabled' ) {
               unset( $wpp_plugin_settings_nav[ $plugin ] );
             }
           }
 
-          if( is_array( $wpp_plugin_settings_nav ) ) {
-            foreach( $wpp_plugin_settings_nav as $nav ) {
+            foreach( (array) $wpp_plugin_settings_nav as $nav ) {
               echo "<li><a href='#tab_{$nav['slug']}'>{$nav['title']}</a></li>\n";
             }
-          }
         } ?>
         <li><a href="#tab_troubleshooting"><?php _e( 'Help', 'wpp' ); ?></a></li>
       </ul>
@@ -461,8 +428,7 @@ if( get_option( 'permalink_structure' ) == '' ) {
           <div class="wpp_settings_block">
             <?php $google_map_localizations = UsabilityDynamics\WPP\Utility::draw_localization_dropdown( 'return_array=true' ); ?>
             <?php _e( 'Revalidate all addresses using', 'wpp' ); ?>
-            <b><?php echo $google_map_localizations[ $wp_properties[ 'configuration' ][ 'google_maps_localization' ] ]; ?></b> <?php _e( 'localization', 'wpp' ); ?>
-            .
+            <b><?php echo $google_map_localizations[ $wp_properties[ 'configuration' ][ 'google_maps_localization' ] ]; ?></b> <?php _e( 'localization', 'wpp' ); ?>.
              <input type="button" value="<?php _e( 'Revalidate', 'wpp' ); ?>" id="wpp_ajax_revalidate_all_addresses">
           </div>
 

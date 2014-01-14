@@ -1,23 +1,79 @@
 /**
  * WP-Property Admin Settings
  *
+ * jquery.ui has a shim which adds it to jQuery.ui
  * require( ['wpp.admin.settings'] )
  *
  */
-define( 'wpp.admin.settings', [ 'jquery', 'jquery.ui' ], function( jquery, ui ) {
-  console.log( 'module', 'loaded' );
+define( 'wpp.admin.settings', [ 'wpp.model', 'wpp.locale', 'jquery', 'knockout', 'knockout.mapping' ], function(  ) {
+  // console.log( 'wpp.admin.settings:ko', ko );
+  // console.log( 'wpp.admin.settings:jQuery', jQuery );
 
-  return function adminSettingsReady() {
+  // Add Mapping to Knockout Module.
+  require( 'knockout' ).mapping = require( 'knockout.mapping' );
 
-    var jQuery = require( 'jquery' );
+  /**
+   * Trigger on Document Ready
+   *
+   */
+  return function domReady() {
+
+    var jQuery  = require( 'jquery' );
+    var ko      = require( 'knockout' );
+    var model   = require( 'wpp.model' );
+    var locale  = require( 'wpp.locale' );
+
+    console.log( 'wpp.admin.settings:model', model );
+    console.log( 'wpp.admin.settings:locale', locale );
+
+    return;
+
+    // console.log( 'wpp.admin.settings:ko', ko );
+    // console.log( 'wpp.admin.settings:ko.mapping', ko.mapping );
+    // console.log( 'wpp.admin.settings:jQuery', jQuery );
+
     var _api_url = '/manage/wp-ajax.php';
-    var _strings = {}
+    var _strings = {};
 
     //console.log( "JQUERY DEBUG", typeof require( 'jquery' ).fn.tabs );
     //console.log( "JQUERY ui", typeof jquery.fn.tabs );
-    console.log( "JQUERY ui", ui );
+    //console.log( "JQUERY ui", ui );
 
     return;
+
+    /**
+     * Handles form saving
+     * Do any validation/data work before the settings page form is submitted
+     * @author odokienko@UD
+     */
+    jQuery(".wpp_settings_page form").submit(function( form ) {
+      var error_field = {object:false,tab_index:false};
+
+      /* The next block make validation for required fields    */
+      jQuery("form #wpp_settings_tabs :input[validation_required=true],form #wpp_settings_tabs .wpp_required_field :input,form #wpp_settings_tabs :input[required],form #wpp_settings_tabs :input.slug_setter").each(function(){
+
+        /* we allow empty value if dynamic_table has only one row */
+        var dynamic_table_row_count = jQuery(this).closest('.wpp_dynamic_table_row').parent().children('tr.wpp_dynamic_table_row').length;
+
+        if (!jQuery(this).val() && dynamic_table_row_count!=1){
+          error_field.object = this;
+          error_field.tab_index = jQuery('#wpp_settings_tabs a[href="#' + jQuery( error_field.object ).closest( ".ui-tabs-panel" ).attr('id') + '"]').parent().index();
+          return false;
+        }
+      });
+
+      /* if error_field object is not empty then we've error found */
+      if (error_field.object != false ) {
+        /* do focus on tab with error field */
+        if(typeof error_field.tab_index !='undefined') {
+          jQuery('#wpp_settings_tabs').tabs('option', 'active', error_field.tab_index);
+        }
+        /* mark error field and remove mark on keyup */
+        jQuery(error_field.object).addClass('ui-state-error').one('keyup',function(){jQuery(this).removeClass('ui-state-error');});
+        jQuery(error_field.object).focus();
+        return false;
+      }
+    });
 
     /**
      * Handles data saving.
@@ -205,4 +261,3 @@ define( 'wpp.admin.settings', [ 'jquery', 'jquery.ui' ], function( jquery, ui ) 
   }
 
 });
-

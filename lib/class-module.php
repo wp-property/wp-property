@@ -37,6 +37,20 @@ namespace UsabilityDynamics\WPP {
       private $_settings = null;
 
       /**
+       * Initialize Module
+       *
+       */
+      function __construct() {
+
+        // Compute Dynamic Settings.
+        $this->set( '_computed', array(
+          'path' => '',
+          'url' => '',
+        ));
+
+      }
+
+      /**
        * Get Setting.
        *
        * @param $key
@@ -47,7 +61,7 @@ namespace UsabilityDynamics\WPP {
        * @return null
        */
       private function get( $key, $default ) {
-        return $this->_settings ? $this->_setting->get( $key, $default ) : null;
+        return $this->_settings ? $this->_settings->get( $key, $default ) : null;
       }
 
       /**
@@ -87,6 +101,7 @@ namespace UsabilityDynamics\WPP {
       /**
        * Upgrade Installed Feature.
        *
+       * @todo Ensure that
        *
        * @param null $args
        *
@@ -101,11 +116,14 @@ namespace UsabilityDynamics\WPP {
           'required'  => array()
         ));
 
-        foreach( $args->required as $name ) {
+        // Path not provided or not found.
+        if( !$args->path || !is_dir( $args->path ) ) {
+          return;
+        }
+        foreach( (array) $args->required as $name ) {
 
-          $_module = self::get_installed( array(
-            "path" => $args->path
-          ))->{$name};
+          // Load Module.
+          $_module = self::get_installed( array( 'path' => $args->path ) )->{$name};
 
           try {
 
@@ -184,7 +202,7 @@ namespace UsabilityDynamics\WPP {
         $_upgrader = new \WP_Upgrader( new Upgrader_Skin() );
 
         if( is_wp_error( $_upgrader->fs_connect( array( WP_CONTENT_DIR, $args->path )))) {
-          $_upgrader->skin->error( 'Unable to connect to file system.' );
+          $_upgrader->skin->error( new WP_Error( 'Unable to connect to file system.' ) );
         };
 
         $_source = $_upgrader->unpack_package( $_upgrader->download_package( $args->url ) );
@@ -199,7 +217,7 @@ namespace UsabilityDynamics\WPP {
 
         // e.g. folder_exists
         if( is_wp_error( $_result ) ) {
-          $_upgrader->skin->error( '' );
+          $_upgrader->skin->error( new WP_Error( 'Installation failed.' ) );
         }
 
         return $_result;
@@ -225,7 +243,7 @@ namespace UsabilityDynamics\WPP {
           $cache_modules = array();
         }
 
-        if( isset( $cache_modules->{$args->path} ) ) {
+        if( isset( $cache_modules ) && isset( $cache_modules->{$args->path} ) ) {
           return (object) $cache_modules->{$args->path};
         }
 
@@ -260,10 +278,11 @@ namespace UsabilityDynamics\WPP {
           closedir( $plugins_dir );
         }
 
-        if( empty( $module_files ) )
+        if( empty( $module_files ) ) {
           return $_modules;
+        }
 
-        foreach( $module_files as $plugin_file ) {
+        foreach( (array) $module_files as $plugin_file ) {
 
           if( !is_readable( "$args->path/$plugin_file" ) )
             continue;

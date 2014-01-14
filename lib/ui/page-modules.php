@@ -1,3 +1,5 @@
+<?php $installed = UsabilityDynamics\WPP\Bootstrap::get( 'modules.installed' ); ?>
+
 <div class="wrap" id="wpp-settings">
 
   <div id="wpp-header"<?php if( $is_connected ) : ?> class="small"<?php endif; ?>>
@@ -69,7 +71,6 @@
         <input type="hidden" name="wpp_settings[available_features][<?php echo $plugin_slug; ?>][image]" value="<?php echo $plugin_data[ 'image' ]; ?>"/>
         <input type="hidden" name="wpp_settings[available_features][<?php echo $plugin_slug; ?>][description]" value="<?php echo $plugin_data[ 'description' ]; ?>"/>
 
-        <?php $installed = UsabilityDynamics\WPP\Utility::check_premium( $plugin_slug ); ?>
         <?php $active = ( @$wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ] != 'false' ? true : false ); ?>
 
         <?php if ( $installed ): ?>

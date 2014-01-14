@@ -21,12 +21,12 @@ module.exports = function( grunt ) {
           relativeUrls: true
         },
         files: {
-          'styles/wpp-data-tables.css': [ 'styles/src/wpp-data-tables.less' ],
-          'styles/wpp-admin.css': [ 'styles/src/admin.all.less' ],
-          'styles/jquery-ui.css': [ 'styles/src/jquery-ui.less' ],
-          'templates/wp_properties.css': [ 'styles/src/wp_properties.less' ],
-          'templates/wp_properties-ie_7.css': [ 'styles/src/wp_properties-ie_7.less' ],
-          'templates/wp_properties-msie.css': [ 'styles/src/wp_properties-msie.less' ],
+          'styles/wpp.admin.data.tables.css': [ 'styles/src/wpp.admin.data.tables.less' ],
+          'styles/wpp.admin.css': [ 'styles/src/wpp.admin.less' ],
+          'styles/wpp.jquery.ui.css': [ 'styles/src/wpp.jquery.ui.less' ],
+          'templates/wpp.css': [ 'styles/src/wpp.less' ],
+          'templates/wpp.msie.css': [ 'styles/src/wpp.msie.less' ],
+          'templates/wpp.msie.7.css': [ 'styles/src/wpp.msie.7.less' ],
           'templates/theme-specific/denali.css': [ 'templates/theme-specific/src/denali.less' ],
           'templates/theme-specific/fb_properties.css': [ 'templates/theme-specific/src/fb_properties.less' ],
           'templates/theme-specific/twentyeleven.css': [ 'templates/theme-specific/src/twentyeleven.less' ],
@@ -40,12 +40,12 @@ module.exports = function( grunt ) {
           relativeUrls: true
         },
         files: {
-          'styles/wpp-data-tables.dev.css': [ 'styles/src/wpp-data-tables.less' ],
-          'styles/wpp-admin.dev.css': [ 'styles/src/admin.all.less' ],
-          'styles/jquery-ui.dev.css': [ 'styles/src/jquery-ui.less' ],
-          'templates/wp_properties.dev.css': [ 'styles/src/wp_properties.less' ],
-          'templates/wp_properties-ie_7.dev.css': [ 'styles/src/wp_properties-ie_7.less' ],
-          'templates/wp_properties-msie.dev.css': [ 'styles/src/wp_properties-msie.less' ],
+          'styles/wpp.admin.data.tables.dev.css': [ 'styles/src/wpp.admin.data.tables.less' ],
+          'styles/wpp.admin.dev.css': [ 'styles/src/wpp.admin.less' ],
+          'styles/wpp.jquery.ui.dev.css': [ 'styles/src/wpp.jquery.ui.less' ],
+          'templates/wpp.css': [ 'styles/src/wpp.less' ],
+          'templates/wpp.msie.css': [ 'styles/src/wpp.msie.less' ],
+          'templates/wpp.msie.7.css': [ 'styles/src/wpp.msie.7.less' ],
           'templates/theme-specific/denali.dev.css': [ 'templates/theme-specific/src/denali.less' ],
           'templates/theme-specific/fb_properties.dev.css': [ 'templates/theme-specific/src/fb_properties.less' ],
           'templates/theme-specific/twentyeleven.dev.css': [ 'templates/theme-specific/src/twentyeleven.less' ],
@@ -81,11 +81,11 @@ module.exports = function( grunt ) {
       },
       less: {
         files: [ 'styles/src/*.less' ],
-        tasks: [ 'less' ]
+        tasks: [ 'less:production' ]
       },
       js: {
         files: [ 'scripts/src/*' ],
-        tasks: [ 'uglify' ]
+        tasks: [ 'uglify:production' ]
       }
     },
 
@@ -98,7 +98,7 @@ module.exports = function( grunt ) {
         },
         files: [
           {
-            'templates/wp_properties.js': [ 'scripts/src/wp_properties.js' ]
+            'templates/wpp.js': [ 'scripts/src/wpp.js' ]
           },
           {
             expand: true,
@@ -115,7 +115,7 @@ module.exports = function( grunt ) {
         },
         files: [
           {
-            'templates/wp_properties.dev.js': [ 'scripts/src/wp_properties.js' ]
+            'templates/wpp.dev.js': [ 'scripts/src/wpp.js' ]
           },
           {
             expand: true,
@@ -229,19 +229,19 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks( 'grunt-shell' );
 
   // Register NPM Tasks.
-  grunt.registerTask( 'default', [ 'markdown', 'less', 'yuidoc', 'uglify' ] );
+  grunt.registerTask( 'default', [ 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
 
   // Install Library.
-  grunt.registerTask( 'install', [ 'markdown', 'less', 'yuidoc', 'uglify' ] );
+  grunt.registerTask( 'install', [ 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
 
   // Prepare for Distribution.
-  grunt.registerTask( 'make-distribution', [ 'markdown', 'less', 'yuidoc', 'uglify' ] );
+  grunt.registerTask( 'make-distribution', [ 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
 
   // Prepare and Push to Git.
-  grunt.registerTask( 'commit', [ 'clean:temp', 'markdown', 'less', 'yuidoc', 'uglify', 'gitcommit', 'gitpush:development'  ] );
+  grunt.registerTask( 'commit', [ 'clean:temp', 'markdown', 'less:production', 'yuidoc', 'uglify:production', 'gitcommit', 'gitpush:development'  ] );
 
   // Prepare and Push to Git master.
-  grunt.registerTask( 'commit-master', [ 'clean:temp', 'markdown', 'less', 'yuidoc', 'uglify', 'gitcommit', 'gitpush:master'  ] );
+  grunt.registerTask( 'commit-master', [ 'clean:temp', 'markdown', 'less:production', 'yuidoc', 'uglify:production', 'gitcommit', 'gitpush:master'  ] );
 
   // Development Mode.
   grunt.registerTask( 'dev', [ 'symlink:dev', 'watch' ] );
