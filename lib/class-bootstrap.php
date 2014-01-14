@@ -596,7 +596,7 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties;
 
         // Load and register widgets
-        Utility::maybe_load_widgets( $this->_path . 'lib/widgets' );
+        Utility::maybe_load_widgets( $this->get( '_computed.path.root' ) . '/lib/widgets' );
 
         //** Register a sidebar for each property type */
         if( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] != 'true' ) {
