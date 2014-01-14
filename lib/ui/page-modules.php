@@ -1,4 +1,7 @@
-<?php $installed = UsabilityDynamics\WPP\Bootstrap::get( 'modules.installed' ); ?>
+<?php 
+global $wpp;
+$installed = $wpp->get( 'modules.installed' ); 
+?>
 
 <div class="wrap" id="wpp-settings">
 

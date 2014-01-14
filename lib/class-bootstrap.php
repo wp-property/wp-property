@@ -80,40 +80,43 @@ namespace UsabilityDynamics\WPP {
       public $locale = array();
 
       /**
-       * Settings Instance.
+       * Singleton Instance.
        *
        * @static
-       * @property $_settings
+       * @property $_instance
        * @type {Object}
        */
-      static public $instance = false;
+      protected static $_instance;
 
       /**
-       * UI Instance.
+       * Modules.
        *
-       * @static
        * @property $_modules
        * @type {Object}
        */
-      public $_modules = array();
+      public $_modules;
+      
+      /**
+       * Settings.
+       *
+       * @property $_settings
+       * @type {Object}
+       */
+      public $_settings;
 
       /**
        * Constructor.
+       * Must not be called directly. Use get_singleton() instead.
        *
-       * UsabilityDynamics components should be avialable.
+       * UsabilityDynamics components should be available.
        * - class_exists( '\UsabilityDynamics\API' );
        * - class_exists( '\UsabilityDynamics\Utility' );
        *
        * @for Loader
        * @method __construct
        */
-      public function __construct() {
+      private function __construct() {
         global $wpdb, $wpp, $wp_properties;
-
-        // Return Singleton Instance.
-        if( self::$instance ) {
-          return self::$instance;
-        }
 
         // Autoload Vendor Dependencies.
         $this->autoload();
@@ -163,8 +166,6 @@ namespace UsabilityDynamics\WPP {
           )
         ));
 
-        return $this;
-
         // @test - Extend model.
         // $this->requires->data( array( 'aasdfsadfasd' => 'asdfasdf' ));
         // $this->requires->data( 'asdfasdf', array( 'aasdfsadfasd' => 'asdfasdf' ));
@@ -183,10 +184,6 @@ namespace UsabilityDynamics\WPP {
        * @since 2.0.0
        */
       private function autoload() {
-        global $wpp;
-
-        // Save Instance.
-        self::$instance = $wpp = &$this;
 
         $_path  = trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) );
         $_url   = trailingslashit( dirname( plugin_dir_url( __FILE__ ) ) );
@@ -402,7 +399,7 @@ namespace UsabilityDynamics\WPP {
        * @since 0.1.1
        */
       public function get( $key, $default = null ) {
-        return self::$instance->_settings ? self::$instance->_settings->get( $key, $default ) : null;
+        return is_object( $this->_settings ) ? $this->_settings->get( $key, $default ) : null;
       }
 
       /**
@@ -420,7 +417,7 @@ namespace UsabilityDynamics\WPP {
        * @since 0.1.1
        */
       public function set( $key, $value = null ) {
-        return self::$instance->_settings ? self::$instance->_settings->set( $key, $value ) : null;
+        return is_object( $this->_settings ) ? $this->_settings->set( $key, $value ) : null;
       }
 
       /**
@@ -596,7 +593,7 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties;
 
         // Load and register widgets
-        Utility::maybe_load_widgets( $this->_path . 'lib/widgets' );
+        Utility::maybe_load_widgets( $this->get( '_computed.path.root' ) . '/lib/widgets' );
 
         //** Register a sidebar for each property type */
         if( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] != 'true' ) {
@@ -1682,8 +1679,7 @@ namespace UsabilityDynamics\WPP {
        *
        * @example
        *
-       *      var settings = WPP::get_instance()->Settings;
-       *      var api = WPP::$instance()->API;
+       * var settings = \UsabilityDynamics\WPP\Bootstrap::get_instance()->_settings;
        *
        * @static
        * @return object
@@ -1691,8 +1687,13 @@ namespace UsabilityDynamics\WPP {
        * @method get_instance
        * @for WPP
        */
-      public function &get_instance() {
-        return self::$instance;
+      public static function get_instance() {
+        // Determine if instance already exists
+        if ( null === self::$_instance ) {
+            // Inits new instance
+            self::$_instance = new self();
+        }
+        return self::$_instance;
       }
 
     }
