@@ -74,19 +74,19 @@ namespace UsabilityDynamics\WPP {
        * Requires.
        *
        * @static
-       * @property $_requires
+       * @property $requires
        * @type {Object}
        */
-      public $_requires = array();
+      public $requires = array();
 
       /**
        * Locale.
        *
        * @static
-       * @property $_locale
+       * @property $locale
        * @type {Object}
        */
-      public $_locale = array();
+      public $locale = array();
 
       /**
        * Settings Instance.
@@ -95,7 +95,10 @@ namespace UsabilityDynamics\WPP {
        * @property $_settings
        * @type {Object}
        */
-      public $_settings = array();
+      public $_settings = array(
+        '_settings' => array(),
+        '_modules' => array()
+      );
 
       /**
        * UI Instance.
@@ -154,14 +157,17 @@ namespace UsabilityDynamics\WPP {
         // Initialize Widgets.
         add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
 
+        // Metabox Handler.
+        add_action( 'add_meta_boxes', array( &$this, 'add_meta_boxes' ) );
+
         // Instantiate Settings.
-        $this->_settings  = Settings::define(array(
+        $this->_settings = Settings::define(array(
           "store" => "options",
           "key" => "wpp_settings"
         ));
 
         // Load Modules.
-        $this->_modules   = Module::load(array(
+        $this->_modules = Module::load(array(
           'path' => $this->get( '_computed.path.modules' ),
           'required' => array(
             'wp-property-test-module',
@@ -169,25 +175,16 @@ namespace UsabilityDynamics\WPP {
           )
         ));
 
-        // Find and Register client-side JavaScript Library.
-        if( file_exists( STYLESHEETPATH . '/wp_properties.js' ) ) {
-          wp_register_script( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.locale' ), self::$version, true );
-        } elseif( file_exists( TEMPLATEPATH . '/wp_properties.js' ) ) {
-          wp_register_script( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.locale' ), self::$version, true );
-        } elseif( file_exists( $this->get( '_computed.path.templates' ) . '/wpp.js' ) ) {
-          wp_register_script( 'wp-property-frontend', $this->get( '_computed.url.templates' ) . '/wpp.js', array( 'jquery-ui-core', 'wpp.locale' ), self::$version, true );
-        }
-
         return $this;
 
         // @test - Extend model.
-        // $this->_requires->data( array( 'aasdfsadfasd' => 'asdfasdf' ));
-        // $this->_requires->data( 'asdfasdf', array( 'aasdfsadfasd' => 'asdfasdf' ));
-        // $this->_requires->data( 'asd.fasdf', array( 'aasdfsadfasd' => 'asdfasdf' ));
+        // $this->requires->data( array( 'aasdfsadfasd' => 'asdfasdf' ));
+        // $this->requires->data( 'asdfasdf', array( 'aasdfsadfasd' => 'asdfasdf' ));
+        // $this->requires->data( 'asd.fasdf', array( 'aasdfsadfasd' => 'asdfasdf' ));
 
-        // $this->_locale->data( 'property', __( 'Property' ) );
-        // $this->_locale->data( 'my.stuff', __( 'My Stuff' ) );
-        // $this->_locale->data( 'xmli.request_error', __( 'la la la' ) );
+        // $this->locale->data( 'property', __( 'Property' ) );
+        // $this->locale->data( 'my.stuff', __( 'My Stuff' ) );
+        // $this->locale->data( 'xmli.request_error', __( 'la la la' ) );
 
       }
 
@@ -381,12 +378,17 @@ namespace UsabilityDynamics\WPP {
        * @author potanin@UD
        */
       private function register_libraries() {
+
+        // Static Scripts.
         wp_register_script( 'udx.requires',       '//cdn.udx.io/udx.requires.js',     array(), '1.0.0', true );
         wp_register_script( 'udx.knockout',       '//cdn.udx.io/knockout.js',         array( 'udx.requires' ), '1.0.0', true );
         wp_register_script( 'udx.utility.cookie', '//cdn.udx.io/utility.cookie.js',   array( 'udx.requires' ), '1.0.0', true );
         wp_register_script( 'udx.utility.md5',    '//cdn.udx.io/utility.md5.js',      array( 'udx.requires' ), '1.0.0', true );
+
+        // Dynamic Scripts.
         wp_register_script( 'wpp.locale',         admin_url( 'admin-ajax.php?action=wpp.locale' ),  array( 'udx.requires' ), self::$version, true );
         wp_register_script( 'wpp.model',          admin_url( 'admin-ajax.php?action=wpp.model' ),   array( 'udx.requires' ), self::$version, true );
+
       }
 
       /**
@@ -560,7 +562,7 @@ namespace UsabilityDynamics\WPP {
         $this->register_styles();
 
         // Register primary WP-Property Settings model.
-        $this->_requires = Requires::define( array(
+        $this->requires = Requires::define( array(
           'id'      => 'wpp.model',
           'cache'   => 'private',
           'vary'    => 'user-agent, x-client-type',
@@ -568,26 +570,26 @@ namespace UsabilityDynamics\WPP {
           'paths'   => array(
             'wpp' => $this->get( '_computed.url.template' ) . '/wpp.js',
             'wpp.admin' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.js',
+            'wpp.admin.agent' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.agent.js',
+            'wpp.admin.feps' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.feps.js',
             'wpp.admin.overview' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.overview.js',
             'wpp.admin.settings' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.settings.js',
-            'wpp.admin.widgets' => $this->get( '_computed.url.scripts' ) . '/wp-property-exporter/scripts/wpp.admin.widgets.js',
-            'wpp.admin.modules' => $this->get( '_computed.url.scripts' ) . '/wp-property-exporter/scripts/wpp.admin.modules.js',
+            'wpp.admin.widgets' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.widgets.js',
+            'wpp.admin.modules' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.modules.js',
             'wpp.admin.tools' => $this->get( '_computed.url.modules' ) . '/wp-property-admin-tools/scripts/wpp.admin.tools.js',
             'wpp.admin.exporter' => $this->get( '_computed.url.modules' ) . '/wp-property-exporter/scripts/wpp.admin.exporter.js',
-            'wpp.admin.importer' => $this->get( '_computed.url.modules' ) . '/wp-property-importer/scripts/wpp.admin.importer.js'
+            'wpp.admin.importer' => $this->get( '_computed.url.modules' ) . '/wp-property-importer/scripts/wpp.admin.importer.js',
+            'wpp.feps.checkout' => $this->get( '_computed.url.modules' ) . '/wp-property-exporter/scripts/wpp.admin.exporter.js',
           )
         ));
 
         // Register WP-Property locale.
-        $this->_locale = Requires::define(array(
+        $this->locale = Requires::define(array(
           'id'      => 'wpp.locale',
           'cache'   => 'public, max-age: 30000',
           'vary'    => 'x-user',
-          'data'    => $this->get_locale()
+          'data'    => $this->getlocale()
         ));
-
-        //** Add metaboxes hook */
-        add_action( 'add_meta_boxes', array( &$this, 'add_meta_boxes' ) );
 
         // Initializer.
         do_action( 'wpp:init', $this );
@@ -1651,23 +1653,23 @@ namespace UsabilityDynamics\WPP {
        * @since 1.37.3.2
        * @author peshkov@UD
        */
-      private function get_locale() {
+      private function getlocale() {
 
         // Include Translation File.
-        $_locale = include_once $this->get( '_computed.path.root' ) . '/l10n.php';
+        $locale = include_once $this->get( '_computed.path.root' ) . '/l10n.php';
 
         // Noramlize HTML Strings.
-        foreach( (array) $_locale as $key => $value ) {
+        foreach( (array) $locale as $key => $value ) {
 
           if( !is_scalar( $value ) ) {
             continue;
           }
 
-          $_locale[ $key ] = html_entity_decode( (string) $value, ENT_QUOTES, 'UTF-8' );
+          $locale[ $key ] = html_entity_decode( (string) $value, ENT_QUOTES, 'UTF-8' );
 
         }
 
-        return (array) apply_filters( 'wpp::locale', $_locale );
+        return (array) apply_filters( 'wpp::locale', $locale );
 
       }
 
