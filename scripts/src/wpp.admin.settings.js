@@ -25,6 +25,9 @@ define( 'wpp.admin.settings', [ 'wpp.model', 'wpp.locale', 'jquery', 'knockout',
 
     console.log( 'wpp.admin.settings:model', model );
     console.log( 'wpp.admin.settings:locale', locale );
+
+    return;
+
     // console.log( 'wpp.admin.settings:ko', ko );
     // console.log( 'wpp.admin.settings:ko.mapping', ko.mapping );
     // console.log( 'wpp.admin.settings:jQuery', jQuery );

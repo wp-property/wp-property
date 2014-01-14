@@ -348,7 +348,14 @@ namespace UsabilityDynamics\WPP {
       private function register_styles() {
         global $wp_properties;
 
-        /** Find and register stylesheet  */
+        // Register Common Styles.
+        wp_register_style( 'wpp.admin',               $this->get( '_computed.url.styles' ) . '/wpp.admin.css' );
+        wp_register_style( 'wpp.admin.data.tables',   $this->get( '_computed.url.styles' ) . '/wpp.admin.data.tables.css' );
+        wp_register_style( 'wpp.jquery.ui',           $this->get( '_computed.url.styles' ) . '/wpp.jquery.ui.css' );
+        wp_register_style( 'wpp.jquery.colorpicker',  $this->get( '_computed.url.module' ) . '/lib-js-colorpicker/styles/colorpicker.css' );
+        wp_register_style( 'wpp.jquery.fancybox',     $this->get( '_computed.url.module' ) . '/lib-fancybox/styles/jquery.fancybox-1.3.4.css' );
+
+        // Find and Register Frontend CSS.
         if( file_exists( STYLESHEETPATH . '/wp-properties.css' ) ) {
           wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp-properties.css', array(), self::$version );
         } elseif( file_exists( STYLESHEETPATH . '/wp_properties.css' ) ) {
@@ -366,12 +373,6 @@ namespace UsabilityDynamics\WPP {
           }
         }
 
-        wp_register_style( 'wpp.admin',               $this->get( '_computed.url.styles' ) . '/wpp.admin.css' );
-        wp_register_style( 'wpp.admin.data.tables',   $this->get( '_computed.url.styles' ) . '/wpp.admin.data.tables.css' );
-        wp_register_style( 'wpp.jquery.ui',           $this->get( '_computed.url.styles' ) . '/wpp.jquery.ui.css' );
-        wp_register_style( 'wpp.jquery.colorpicker',  $this->get( '_computed.url.module' ) . '/lib-js-colorpicker/styles/colorpicker.css' );
-        wp_register_style( 'wpp.jquery.fancybox',     $this->get( '_computed.url.module' ) . '/lib-fancybox/styles/jquery.fancybox-1.3.4.css' );
-
       }
 
       /**
@@ -386,16 +387,6 @@ namespace UsabilityDynamics\WPP {
         wp_register_script( 'udx.utility.md5',    '//cdn.udx.io/utility.md5.js',      array( 'udx.requires' ), '1.0.0', true );
         wp_register_script( 'wpp.locale',         admin_url( 'admin-ajax.php?action=wpp.locale' ),  array( 'udx.requires' ), self::$version, true );
         wp_register_script( 'wpp.model',          admin_url( 'admin-ajax.php?action=wpp.model' ),   array( 'udx.requires' ), self::$version, true );
-      }
-
-      /**
-       * Find and Load Widgets.
-       *
-       */
-      private function load_widgets() {
-
-        add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
-
       }
 
       /**
@@ -570,18 +561,29 @@ namespace UsabilityDynamics\WPP {
 
         // Register primary WP-Property Settings model.
         $this->_requires = Requires::define( array(
-          'id'     => 'wpp.model',
-          'cache'  => 'private',
-          'vary'   => 'user-agent, x-client-type',
-          'data'   => $this->get_model()
+          'id'      => 'wpp.model',
+          'cache'   => 'private',
+          'vary'    => 'user-agent, x-client-type',
+          'data'    => $this->get_model(),
+          'paths'   => array(
+            'wpp' => $this->get( '_computed.url.template' ) . '/wpp.js',
+            'wpp.admin' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.js',
+            'wpp.admin.overview' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.overview.js',
+            'wpp.admin.settings' => $this->get( '_computed.url.scripts' ) . '/wpp.admin.settings.js',
+            'wpp.admin.widgets' => $this->get( '_computed.url.scripts' ) . '/wp-property-exporter/scripts/wpp.admin.widgets.js',
+            'wpp.admin.modules' => $this->get( '_computed.url.scripts' ) . '/wp-property-exporter/scripts/wpp.admin.modules.js',
+            'wpp.admin.tools' => $this->get( '_computed.url.modules' ) . '/wp-property-admin-tools/scripts/wpp.admin.tools.js',
+            'wpp.admin.exporter' => $this->get( '_computed.url.modules' ) . '/wp-property-exporter/scripts/wpp.admin.exporter.js',
+            'wpp.admin.importer' => $this->get( '_computed.url.modules' ) . '/wp-property-importer/scripts/wpp.admin.importer.js'
+          )
         ));
 
         // Register WP-Property locale.
         $this->_locale = Requires::define(array(
-          'id'     => 'wpp.locale',
-          'cache'  => 'public, max-age: 30000',
-          'vary'   => 'x-user',
-          'data'   => $this->get_locale()
+          'id'      => 'wpp.locale',
+          'cache'   => 'public, max-age: 30000',
+          'vary'    => 'x-user',
+          'data'    => $this->get_locale()
         ));
 
         //** Add metaboxes hook */
@@ -776,7 +778,7 @@ namespace UsabilityDynamics\WPP {
         Template::load( 'template-functions.php' );
 
         //** Load global wp-property script on all frontend pages */
-        wp_enqueue_script( 'wpp.global' );
+        wp_enqueue_script( 'wpp' );
 
         //** Load essential styles that are used in widgets */
         wp_enqueue_style( 'wp-property-frontend' );
