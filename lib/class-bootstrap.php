@@ -60,7 +60,6 @@ namespace UsabilityDynamics\WPP {
        */
       public static $text_domain = 'wpp';
 
-
       /**
        * Requires.
        *
