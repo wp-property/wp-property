@@ -50,7 +50,7 @@ $wpp_plugin_settings_nav = apply_filters( 'wpp_settings_nav', array() );
     </div>
   <?php endif; ?>
 
-  <form id="wpp_settings_form" method="post" action="<?php echo admin_url( 'edit.php?post_type=property&page=property_settings' ); ?>" enctype="multipart/form-data" data-requires="wpp.admin.settings">
+  <form id="wpp_settings_form" method="post" action="<?php echo admin_url( 'edit.php?post_type=property&page=property_settings' ); ?>" enctype="multipart/form-data" data-requires="wpp.admin.settings" data-settings="size: 10, enable: true" data-size="10">
     <?php wp_nonce_field( 'wpp_setting_save' ); ?>
 
     <div id="wpp_settings_tabs" class="wpp_tabs hidden" data-requires="udx.ui.jquery.tabs">

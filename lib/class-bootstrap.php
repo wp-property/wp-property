@@ -574,7 +574,7 @@ namespace UsabilityDynamics\WPP {
           'base'    => home_url(),
           'cache'   => 'public, max-age: 30000',
           'vary'    => 'x-user',
-          'data'    => $this->getlocale()
+          'data'    => $this->get_locale()
         ));
 
         // Initializer.
@@ -1606,7 +1606,7 @@ namespace UsabilityDynamics\WPP {
        * @since 1.37.3.2
        * @author peshkov@UD
        */
-      private function getlocale() {
+      private function get_locale() {
 
         // Include Translation File.
         $locale = include_once $this->get( '_computed.path.root' ) . '/l10n.php';

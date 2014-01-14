@@ -9,6 +9,8 @@ define( 'wpp.admin.settings', [ 'wpp.model', 'wpp.locale', 'jquery', 'knockout',
   // console.log( 'wpp.admin.settings:ko', ko );
   // console.log( 'wpp.admin.settings:jQuery', jQuery );
 
+  console.log( 'wpp.model', require( 'wpp.model' ));
+
   // Add Mapping to Knockout Module.
   require( 'knockout' ).mapping = require( 'knockout.mapping' );
 
