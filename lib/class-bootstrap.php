@@ -1584,6 +1584,7 @@ namespace UsabilityDynamics\WPP {
         $_home_url = parse_url( home_url() );
 
         return (array) apply_filters( 'wpp::model', array(
+          'ajax' => admin_url( 'admin-ajax.php' ),
           'modules' => array(
             'installed' => $this->get( 'installed_features' ),
             'available' => $this->get( 'available_features' )
