@@ -562,27 +562,27 @@ namespace UsabilityDynamics\WPP {
         // Define and Set WPP Capabilities.
         $this->set_capabilities();
 
-        // Instantiate UDX Library Manager.
-        $this->_requires = Requires::define( array(
-          'id'     => 'wpp.model',
-          "cache"  => 'private',
-          "vary"   => 'user-agent, x-client-type',
-          "data"   => $this->get_model()
-        ));
-
-        // Declare WP-Property Locale.
-        $this->_locale = Requires::define(array(
-          'id'     => 'wpp.locale',
-          "cache"  => 'public, max-age: 30000',
-          "vary"   => 'x-user',
-          "data"   => $this->get_locale()
-        ));
+        // Register JavaScript Libraries.
+        $this->register_libraries();
 
         // Register CSS Styles.
         $this->register_styles();
 
-        // Register JavaScript Libraries.
-        $this->register_libraries();
+        // Register primary WP-Property Settings model.
+        $this->_requires = Requires::define( array(
+          'id'     => 'wpp.model',
+          'cache'  => 'private',
+          'vary'   => 'user-agent, x-client-type',
+          'data'   => $this->get_model()
+        ));
+
+        // Register WP-Property locale.
+        $this->_locale = Requires::define(array(
+          'id'     => 'wpp.locale',
+          'cache'  => 'public, max-age: 30000',
+          'vary'   => 'x-user',
+          'data'   => $this->get_locale()
+        ));
 
         //** Add metaboxes hook */
         add_action( 'add_meta_boxes', array( &$this, 'add_meta_boxes' ) );
@@ -642,9 +642,9 @@ namespace UsabilityDynamics\WPP {
         if( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] != 'true' ) {
           foreach( (array) $wp_properties[ 'property_types' ] as $property_slug => $property_title ) {
             register_sidebar( array(
-              'name'          => sprintf( __( 'Property: %s', 'wpp' ), $property_title ),
+              'name'          => sprintf( __( 'Property: %s', self::$text_domain ), $property_title ),
               'id'            => "wpp_sidebar_{$property_slug}",
-              'description'   => sprintf( __( 'Sidebar located on the %s page.', 'wpp' ), $property_title ),
+              'description'   => sprintf( __( 'Sidebar located on the %s page.', self::$text_domain ), $property_title ),
               'before_widget' => '<li id="%1$s"  class="wpp_widget %2$s">',
               'after_widget'  => '</li>',
               'before_title'  => '<h3 class="widget-title">',
@@ -980,7 +980,7 @@ namespace UsabilityDynamics\WPP {
         add_filter( 'plugin_action_links', array( &$this, 'plugin_action_links' ), 10, 2 );
 
         //* Adds metabox 'General Information' to Property Edit Page */
-        add_meta_box( 'wpp_property_meta', __( 'General Information', 'wpp' ), array( '\UsabilityDynamics\WPP\UI', 'metabox_meta' ), 'property', 'normal', 'high' );
+        add_meta_box( 'wpp_property_meta', __( 'General Information', self::$text_domain ), array( '\UsabilityDynamics\WPP\UI', 'metabox_meta' ), 'property', 'normal', 'high' );
 
         //* Adds 'Group' metaboxes to Property Edit Page */
         if( !empty( $wp_properties[ 'property_groups' ] ) ) {
@@ -991,13 +991,13 @@ namespace UsabilityDynamics\WPP {
             }
             //* Determine if Group name is empty we add 'NO NAME', other way metabox will not be added */
             if( empty( $group[ 'name' ] ) ) {
-              $group[ 'name' ] = __( 'NO NAME', 'wpp' );
+              $group[ 'name' ] = __( 'NO NAME', self::$text_domain );
             }
-            add_meta_box( $slug, __( $group[ 'name' ], 'wpp' ), array( '\UsabilityDynamics\WPP\UI', 'metabox_meta' ), 'property', 'normal', 'high', array( 'group' => $slug ) );
+            add_meta_box( $slug, __( $group[ 'name' ], self::$text_domain ), array( '\UsabilityDynamics\WPP\UI', 'metabox_meta' ), 'property', 'normal', 'high', array( 'group' => $slug ) );
           }
         }
 
-        add_meta_box( 'propetry_filter', $wp_properties[ 'labels' ][ 'name' ] . ' ' . __( 'Search', 'wpp' ), array( 'UsabilityDynamics\WPP\UI', 'metabox_property_filter' ), 'property_page_all_properties', 'normal' );
+        add_meta_box( 'propetry_filter', $wp_properties[ 'labels' ][ 'name' ] . ' ' . __( 'Search', self::$text_domain ), array( 'UsabilityDynamics\WPP\UI', 'metabox_property_filter' ), 'property_page_all_properties', 'normal' );
 
         // Add Metaboxes.
         do_action( 'wpp:metaboxes', $this );
@@ -1030,7 +1030,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Add metabox for child properties */
         if( $post->post_type == 'property' && $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_parent = '{$post->ID}' AND post_status = 'publish' " ) ) {
-          add_meta_box( 'wpp_property_children', sprintf( __( 'Child %1s', 'wpp' ), Utility::property_label( 'plural' ) ), array( '\UsabilityDynamics\WPP\UI', 'child_properties' ), 'property', 'side', 'high' );
+          add_meta_box( 'wpp_property_children', sprintf( __( 'Child %1s', self::$text_domain ), Utility::property_label( 'plural' ) ), array( '\UsabilityDynamics\WPP\UI', 'child_properties' ), 'property', 'side', 'high' );
         }
 
       }
@@ -1057,7 +1057,7 @@ namespace UsabilityDynamics\WPP {
         $result = Utility::feature_check();
 
         if( is_wp_error( $result ) ) {
-          printf( __( 'An error occurred during premium feature check: <b> %s </b>.', 'wpp' ), $result->get_error_message() );
+          printf( __( 'An error occurred during premium feature check: <b> %s </b>.', self::$text_domain ), $result->get_error_message() );
         } else {
           echo $result;
         }
@@ -1146,7 +1146,7 @@ namespace UsabilityDynamics\WPP {
       public function plugin_action_links( $links, $file ) {
 
         if( $file == 'wp-property/wp-property.php' ) {
-          $settings_link = '<a href="' . admin_url( "edit.php?post_type=property&page=property_settings" ) . '">' . __( 'Settings', 'wpp' ) . '</a>';
+          $settings_link = '<a href="' . admin_url( "edit.php?post_type=property&page=property_settings" ) . '">' . __( 'Settings', self::$text_domain ) . '</a>';
           array_unshift( $links, $settings_link ); // before other links
         }
 
@@ -1194,13 +1194,13 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties, $submenu;
 
         // Dashboard Page.
-        // $dashboard_page   = add_submenu_page( 'edit.php?post_type=property', __( 'Dashboard', 'wpp' ), __( 'Dashboard', 'wpp' ), 'manage_wpp_dashboard', 'dashboard', create_function( '', 'global $wp_properties; include "ui/page-dashboard.php";' ) );
+        // $dashboard_page   = add_submenu_page( 'edit.php?post_type=property', __( 'Dashboard', self::$text_domain ), __( 'Dashboard', self::$text_domain ), 'manage_wpp_dashboard', 'dashboard', create_function( '', 'global $wp_properties; include "ui/page-dashboard.php";' ) );
 
         // Modules Page.
-        // $modules_page   = add_submenu_page( 'edit.php?post_type=property', __( 'Modules', 'wpp' ), __( 'Modules', 'wpp' ), 'manage_wpp_modules', 'modules', create_function( '', 'global $wp_properties; include "ui/page-modules.php";' ) );
+        // $modules_page   = add_submenu_page( 'edit.php?post_type=property', __( 'Modules', self::$text_domain ), __( 'Modules', self::$text_domain ), 'manage_wpp_modules', 'modules', create_function( '', 'global $wp_properties; include "ui/page-modules.php";' ) );
 
         // Settings Page.
-        $settings_page  = add_submenu_page( 'edit.php?post_type=property', __( 'Settings', 'wpp' ), __( 'Settings', 'wpp' ), 'manage_wpp_settings', 'property_settings', create_function( '', 'global $wp_properties; include "ui/page-settings.php";' ) );
+        $settings_page  = add_submenu_page( 'edit.php?post_type=property', __( 'Settings', self::$text_domain ), __( 'Settings', self::$text_domain ), 'manage_wpp_settings', 'property_settings', create_function( '', 'global $wp_properties; include "ui/page-settings.php";' ) );
 
         // All Properties Overview Page.
         $all_properties = add_submenu_page( 'edit.php?post_type=property', $wp_properties[ 'labels' ][ 'all_items' ], $wp_properties[ 'labels' ][ 'all_items' ], 'edit_wpp_properties', 'all_properties', create_function( '', 'global $wp_properties, $screen_layout_columns; include "ui/page-properties.php";' ) );
@@ -1396,10 +1396,10 @@ namespace UsabilityDynamics\WPP {
           <div class="misc-pub-section ">
 
         <ul>
-          <li><?php _e( 'Menu Sort Order:', 'wpp' ) ?> <?php echo Utility::input( "name=menu_order&special=size=4", $post->menu_order ); ?></li>
+          <li><?php _e( 'Menu Sort Order:', self::$text_domain ) ?> <?php echo Utility::input( "name=menu_order&special=size=4", $post->menu_order ); ?></li>
 
           <?php if( current_user_can( 'manage_options' ) && $wp_properties[ 'configuration' ][ 'do_not_use' ][ 'featured' ] != 'true' ) { ?>
-            <li><?php echo Utility::checkbox( "name=wpp_data[meta][featured]&label=" . __( 'Display in featured listings.', 'wpp' ), get_post_meta( $post->ID, 'featured', true ) ); ?></li>
+            <li><?php echo Utility::checkbox( "name=wpp_data[meta][featured]&label=" . __( 'Display in featured listings.', self::$text_domain ), get_post_meta( $post->ID, 'featured', true ) ); ?></li>
           <?php } ?>
 
           <?php do_action( 'wpp_publish_box_options' ); ?>
@@ -1444,20 +1444,20 @@ namespace UsabilityDynamics\WPP {
 
         $messages[ 'property' ] = array(
           0  => '', // Unused. Messages start at index 1.
-          1  => sprintf( __( '%2s updated. <a href="%s">view %1s</a>', 'wpp' ), Utility::property_label( 'singular' ), esc_url( get_permalink( $post_id ) ), Utility::property_label( 'singular' ) ),
-          2  => __( 'Custom field updated.', 'wpp' ),
-          3  => __( 'Custom field deleted.', 'wpp' ),
-          4  => sprintf( __( '%1s updated.', 'wpp' ), Utility::property_label( 'singular' ) ),
+          1  => sprintf( __( '%2s updated. <a href="%s">view %1s</a>', self::$text_domain ), Utility::property_label( 'singular' ), esc_url( get_permalink( $post_id ) ), Utility::property_label( 'singular' ) ),
+          2  => __( 'Custom field updated.', self::$text_domain ),
+          3  => __( 'Custom field deleted.', self::$text_domain ),
+          4  => sprintf( __( '%1s updated.', self::$text_domain ), Utility::property_label( 'singular' ) ),
           /* translators: %s: date and time of the revision */
-          5  => isset( $_GET[ 'revision' ] ) ? sprintf( __( '%1s restored to revision from %s', 'wpp' ), Utility::property_label( 'singular' ), wp_post_revision_title( (int) $_GET[ 'revision' ], false ) ) : false,
-          6  => sprintf( __( '%1s published. <a href="%s">View %2s</a>', 'wpp' ), Utility::property_label( 'singular' ), esc_url( get_permalink( $post_id ) ), Utility::property_label( 'singular' ) ),
-          7  => sprintf( __( '%1s saved.', 'wpp' ), Utility::property_label( 'singular' ) ),
-          8  => sprintf( __( '%1s submitted. <a target="_blank" href="%s">Preview %2s</a>', 'wpp' ), Utility::property_label( 'singular' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), Utility::property_label( 'singular' ) ),
-          9  => sprintf( __( '%1s scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview %2s</a>', 'wpp' ),
+          5  => isset( $_GET[ 'revision' ] ) ? sprintf( __( '%1s restored to revision from %s', self::$text_domain ), Utility::property_label( 'singular' ), wp_post_revision_title( (int) $_GET[ 'revision' ], false ) ) : false,
+          6  => sprintf( __( '%1s published. <a href="%s">View %2s</a>', self::$text_domain ), Utility::property_label( 'singular' ), esc_url( get_permalink( $post_id ) ), Utility::property_label( 'singular' ) ),
+          7  => sprintf( __( '%1s saved.', self::$text_domain ), Utility::property_label( 'singular' ) ),
+          8  => sprintf( __( '%1s submitted. <a target="_blank" href="%s">Preview %2s</a>', self::$text_domain ), Utility::property_label( 'singular' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), Utility::property_label( 'singular' ) ),
+          9  => sprintf( __( '%1s scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview %2s</a>', self::$text_domain ),
             // translators: Publish box date format, see http://php.net/date
             Utility::property_label( 'singular' ),
-            date_i18n( __( 'M j, Y @ G:i', 'wpp' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_id ) ), Utility::property_label( 'singular' ) ),
-          10 => sprintf( __( '%1s draft updated. <a target="_blank" href="%s">Preview %2s</a>', 'wpp' ), Utility::property_label( 'singular' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), Utility::property_label( 'singular' ) ),
+            date_i18n( __( 'M j, Y @ G:i', self::$text_domain ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_id ) ), Utility::property_label( 'singular' ) ),
+          10 => sprintf( __( '%1s draft updated. <a target="_blank" href="%s">Preview %2s</a>', self::$text_domain ), Utility::property_label( 'singular' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), Utility::property_label( 'singular' ) ),
         );
 
         $messages = apply_filters( 'wpp_updated_messages', $messages );
@@ -1479,8 +1479,8 @@ namespace UsabilityDynamics\WPP {
         unset( $columns );
 
         $columns[ 'cb' ]            = "<input type=\"checkbox\" />";
-        $columns[ 'title' ]         = __( 'Title', 'wpp' );
-        $columns[ 'property_type' ] = __( 'Type', 'wpp' );
+        $columns[ 'title' ]         = __( 'Title', self::$text_domain );
+        $columns[ 'property_type' ] = __( 'Type', self::$text_domain );
 
         if( is_array( $wp_properties[ 'property_stats' ] ) ) {
           foreach( (array) $wp_properties[ 'property_stats' ] as $slug => $title )
@@ -1489,11 +1489,11 @@ namespace UsabilityDynamics\WPP {
           $columns = $columns;
         }
 
-        $columns[ 'city' ]       = __( 'City', 'wpp' );
-        $columns[ 'overview' ]   = __( 'Overview', 'wpp' );
-        $columns[ 'featured' ]   = __( 'Featured', 'wpp' );
-        $columns[ 'menu_order' ] = __( 'Order', 'wpp' );
-        $columns[ 'thumbnail' ]  = __( 'Thumbnail', 'wpp' );
+        $columns[ 'city' ]       = __( 'City', self::$text_domain );
+        $columns[ 'overview' ]   = __( 'Overview', self::$text_domain );
+        $columns[ 'featured' ]   = __( 'Featured', self::$text_domain );
+        $columns[ 'menu_order' ] = __( 'Order', self::$text_domain );
+        $columns[ 'thumbnail' ]  = __( 'Thumbnail', self::$text_domain );
 
         $columns = apply_filters( 'wpp_admin_overview_columns', $columns );
 
@@ -1584,20 +1584,20 @@ namespace UsabilityDynamics\WPP {
         $wpp_capabilities = array(
 
           //* Manage WPP Properties Capabilities */
-          'edit_wpp_properties'        => sprintf( __( 'View %1s', 'wpp' ), Utility::property_label( 'plural' ) ),
-          'edit_wpp_property'          => sprintf( __( 'Add/Edit %1s', 'wpp' ), Utility::property_label( 'plural' ) ),
-          'edit_others_wpp_properties' => sprintf( __( 'Edit Other %1s', 'wpp' ), Utility::property_label( 'plural' ) ),
-          //'read_wpp_property' => __( 'Read Property', 'wpp' ),
-          'delete_wpp_property'        => sprintf( __( 'Delete %1s', 'wpp' ), Utility::property_label( 'plural' ) ),
-          'publish_wpp_properties'     => sprintf( __( 'Publish %1s', 'wpp' ), Utility::property_label( 'plural' ) ),
-          //'read_private_wpp_properties' => __( 'Read Private Properties', 'wpp' ),
+          'edit_wpp_properties'        => sprintf( __( 'View %1s', self::$text_domain ), Utility::property_label( 'plural' ) ),
+          'edit_wpp_property'          => sprintf( __( 'Add/Edit %1s', self::$text_domain ), Utility::property_label( 'plural' ) ),
+          'edit_others_wpp_properties' => sprintf( __( 'Edit Other %1s', self::$text_domain ), Utility::property_label( 'plural' ) ),
+          //'read_wpp_property' => __( 'Read Property', self::$text_domain ),
+          'delete_wpp_property'        => sprintf( __( 'Delete %1s', self::$text_domain ), Utility::property_label( 'plural' ) ),
+          'publish_wpp_properties'     => sprintf( __( 'Publish %1s', self::$text_domain ), Utility::property_label( 'plural' ) ),
+          //'read_private_wpp_properties' => __( 'Read Private Properties', self::$text_domain ),
 
           //* WPP Settings capability */
-          'manage_wpp_settings'        => __( 'Manage Settings', 'wpp' ),
-          'manage_wpp_modules'         => __( 'Manage Features', 'wpp' ),
+          'manage_wpp_settings'        => __( 'Manage Settings', self::$text_domain ),
+          'manage_wpp_modules'         => __( 'Manage Features', self::$text_domain ),
 
           //* WPP Taxonomies capability */
-          'manage_wpp_categories'      => __( 'Manage Taxonomies', 'wpp' )
+          'manage_wpp_categories'      => __( 'Manage Taxonomies', self::$text_domain )
         );
 
         //* Adds Premium Feature Capabilities */
@@ -1695,7 +1695,7 @@ namespace UsabilityDynamics\WPP {
             get_current_screen()->add_help_tab(
               array(
                 'id' => sanitize_title( $help_tab_title ),
-                'title' => __( $help_tab_title, 'wpp' ),
+                'title' => __( $help_tab_title, self::$text_domain ),
                 'content' => implode( "\n", (array) $args->contextual_help[ $help_tab_title ] ),
               )
             );
@@ -1704,10 +1704,10 @@ namespace UsabilityDynamics\WPP {
 
           //** Add help sidebar with More Links */
           get_current_screen()->set_help_sidebar(
-            '<p><strong>' . __( 'For more information:', 'wpp' ) . '</strong></p>' .
-            '<p>' . __( '<a href="https://usabilitydynamics.com/products/wp-property/" target="_blank">WP-Property Product Page</a>', 'wpp' ) . '</p>' .
-            '<p>' . __( '<a href="https://usabilitydynamics.com/products/wp-property/forum/" target="_blank">WP-Property Forums</a>', 'wpp' ) . '</p>' .
-            '<p>' . __( '<a href="https://usabilitydynamics.com/help/" target="_blank">WP-Property Tutorials</a>', 'wpp' ) . '</p>'
+            '<p><strong>' . __( 'For more information:', self::$text_domain ) . '</strong></p>' .
+            '<p>' . __( '<a href="https://usabilitydynamics.com/products/wp-property/" target="_blank">WP-Property Product Page</a>', self::$text_domain ) . '</p>' .
+            '<p>' . __( '<a href="https://usabilitydynamics.com/products/wp-property/forum/" target="_blank">WP-Property Forums</a>', self::$text_domain ) . '</p>' .
+            '<p>' . __( '<a href="https://usabilitydynamics.com/help/" target="_blank">WP-Property Tutorials</a>', self::$text_domain ) . '</p>'
           );
 
         }
