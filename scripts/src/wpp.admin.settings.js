@@ -1,21 +1,38 @@
 /**
  * WP-Property Admin Settings
  *
+ * jquery.ui has a shim which adds it to jQuery.ui
  * require( ['wpp.admin.settings'] )
  *
  */
-define( 'wpp.admin.settings', [ 'jquery', 'jquery.ui' ], function( jquery, ui ) {
-  console.log( 'module', 'loaded' );
+define( 'wpp.admin.settings', [ 'wpp.model', 'wpp.locale', 'jquery', 'knockout', 'knockout.mapping' ], function(  ) {
+  // console.log( 'wpp.admin.settings:ko', ko );
+  // console.log( 'wpp.admin.settings:jQuery', jQuery );
 
-  return function adminSettingsReady() {
+  // Add Mapping to Knockout Module.
+  require( 'knockout' ).mapping = require( 'knockout.mapping' );
 
-    var jQuery = require( 'jquery' );
+  /**
+   * Trigger on Document Ready
+   *
+   */
+  return function domReady() {
+
+    var jQuery  = require( 'jquery' );
+    var ko      = require( 'knockout' );
+    var model   = require( 'wpp.model' );
+
+    console.log( 'wpp.admin.settings:model', model );
+    // console.log( 'wpp.admin.settings:ko', ko );
+    // console.log( 'wpp.admin.settings:ko.mapping', ko.mapping );
+    // console.log( 'wpp.admin.settings:jQuery', jQuery );
+
     var _api_url = '/manage/wp-ajax.php';
-    var _strings = {}
+    var _strings = {};
 
     //console.log( "JQUERY DEBUG", typeof require( 'jquery' ).fn.tabs );
     //console.log( "JQUERY ui", typeof jquery.fn.tabs );
-    console.log( "JQUERY ui", ui );
+    //console.log( "JQUERY ui", ui );
 
     return;
 
@@ -239,4 +256,3 @@ define( 'wpp.admin.settings', [ 'jquery', 'jquery.ui' ], function( jquery, ui ) 
   }
 
 });
-
