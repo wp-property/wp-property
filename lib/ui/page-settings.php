@@ -59,18 +59,11 @@ $wpp_plugin_settings_nav = apply_filters( 'wpp_settings_nav', array() );
         <li><a href="#tab_display"><?php _e( 'Display', 'wpp' ); ?></a></li>
         <li><a href="#tab_maps"><?php _e( 'Maps', 'wpp' ); ?></a></li>
         <li><a href="#tab_images"><?php _e( 'Images', 'wpp' ); ?></a></li>
-        <?php if( is_array( $wp_properties[ 'available_features' ] ) ) {
-
-          foreach( (array) $wp_properties[ 'available_features' ] as $plugin ) {
-            if( @$plugin[ 'status' ] == 'disabled' ) {
-              unset( $wpp_plugin_settings_nav[ $plugin ] );
-            }
-          }
-
+        <?php
             foreach( (array) $wpp_plugin_settings_nav as $nav ) {
               echo "<li><a href='#tab_{$nav['slug']}'>{$nav['title']}</a></li>\n";
             }
-        } ?>
+        ?>
         <li><a href="#tab_troubleshooting"><?php _e( 'Help', 'wpp' ); ?></a></li>
       </ul>
 
