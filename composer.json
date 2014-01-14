@@ -78,7 +78,9 @@
       "lib/class-upgrader-skin.php",
       "lib/class-utility.php",
       "lib/class-widget.php",
-      "lib/class-wp-error.php"
+      "lib/class-wp-error.php",
+      "lib/class-upgrader-skin.php",
+      "lib/class-requires.php"
     ]
   }
 }
