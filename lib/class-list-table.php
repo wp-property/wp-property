@@ -169,7 +169,6 @@ namespace UsabilityDynamics\WPP {
 
           jQuery( '.metabox-prefs' ).change( wp_list_table_do_columns );
 
-
           //** Check which columns are hidden, and hide data table columns */
           function wp_list_table_do_columns() {
             // Hide any "hidden" columns from table
