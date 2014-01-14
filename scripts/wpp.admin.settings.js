@@ -1,1 +1,1 @@
-define("wpp.admin.settings",["jquery","jquery.ui"],function(jquery,ui){return console.log("module","loaded"),function(){require("jquery");return console.log("JQUERY ui",ui),void 0}});
+define("wpp.admin.settings",["wpp.model","wpp.locale","jquery","knockout","knockout.mapping"],function(){return require("knockout").mapping=require("knockout.mapping"),function(){var model=(require("jquery"),require("knockout"),require("wpp.model")),locale=require("wpp.locale");console.log("wpp.admin.settings:model",model),console.log("wpp.admin.settings:locale",locale);return}});

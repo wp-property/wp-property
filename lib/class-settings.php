@@ -32,6 +32,8 @@ namespace UsabilityDynamics\WPP {
             'templates' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'templates',
             'scripts' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'scripts',
             'styles' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'styles',
+            'schema' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'static/schemas',
+            'data' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'static/data',
             'modules' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'vendor/usabilitydynamics'
           ),
           "url" => array(
@@ -40,15 +42,21 @@ namespace UsabilityDynamics\WPP {
             'templates' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'templates',
             'scripts' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'scripts',
             'styles' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'styles',
+            'schema' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'static/schemas',
+            'data' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'static/data',
             'modules' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'vendor/usabilitydynamics'
           )
         ));
+
+        // Set Schema now that paths are computed.
+        $_instance->set_schema( $_instance->get( '_computed.path.schema' ), '/system.settings.schema.json' );
 
         // @note Hopefully temporary but this exposes settings to the legacy $wp_properties global variable.
         $wp_properties = $_instance->get();
 
         // self::settings_action();
 
+        // Return Instance.
         return $_instance;
 
       }

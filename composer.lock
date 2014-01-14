@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "140625ff7d32ff5b72d32ca60f775c5c",
+    "hash": "88e583910b7cf166c3c9755c87c011b6",
     "packages": [
         {
             "name": "datatables/datatables",
@@ -280,7 +280,7 @@
                     "lib"
                 ]
             },
-            "time": "2014-01-10 15:55:30"
+            "time": "2014-01-13 15:04:17"
         },
         {
             "name": "usabilitydynamics/lib-wp-xmlrpc",
@@ -309,7 +309,7 @@
             "version": "master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/UsabilityDynamics/wp-meta-box",
+                "url": "git@github.com:UsabilityDynamics/wp-meta-box",
                 "reference": "master"
             },
             "dist": {
@@ -735,7 +735,7 @@
                 "php": ">=5.3"
             },
             "type": "library",
-            "time": "2014-01-10 15:42:04"
+            "time": "2014-01-14 06:32:24"
         },
         {
             "name": "usabilitydynamics/wp-property-agents",
@@ -861,7 +861,7 @@
                     "lib"
                 ]
             },
-            "time": "2014-01-10 15:42:13"
+            "time": "2014-01-14 06:28:18"
         },
         {
             "name": "usabilitydynamics/wp-property-pdf",

@@ -23,6 +23,7 @@ module.exports = function( grunt ) {
         files: {
           'styles/wpp.admin.data.tables.css': [ 'styles/src/wpp.admin.data.tables.less' ],
           'styles/wpp.admin.css': [ 'styles/src/wpp.admin.less' ],
+          'styles/wpp.jquery.ui.css': [ 'styles/src/wpp.jquery.ui.less' ],
           'templates/wpp.css': [ 'styles/src/wpp.less' ],
           'templates/wpp.msie.css': [ 'styles/src/wpp.msie.less' ],
           'templates/wpp.msie.7.css': [ 'styles/src/wpp.msie.7.less' ],
@@ -39,8 +40,9 @@ module.exports = function( grunt ) {
           relativeUrls: true
         },
         files: {
-          'styles/wpp.admin.data.tables.css': [ 'styles/src/wpp.admin.data.tables.less' ],
-          'styles/wpp.admin.css': [ 'styles/src/wpp.admin.less' ],
+          'styles/wpp.admin.data.tables.dev.css': [ 'styles/src/wpp.admin.data.tables.less' ],
+          'styles/wpp.admin.dev.css': [ 'styles/src/wpp.admin.less' ],
+          'styles/wpp.jquery.ui.dev.css': [ 'styles/src/wpp.jquery.ui.less' ],
           'templates/wpp.css': [ 'styles/src/wpp.less' ],
           'templates/wpp.msie.css': [ 'styles/src/wpp.msie.less' ],
           'templates/wpp.msie.7.css': [ 'styles/src/wpp.msie.7.less' ],

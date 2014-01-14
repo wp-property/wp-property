@@ -71,6 +71,24 @@ namespace UsabilityDynamics\WPP {
       public static $instance = false;
 
       /**
+       * Requires.
+       *
+       * @static
+       * @property $_requires
+       * @type {Object}
+       */
+      public $_requires = array();
+
+      /**
+       * Locale.
+       *
+       * @static
+       * @property $_locale
+       * @type {Object}
+       */
+      public $_locale = array();
+
+      /**
        * Settings Instance.
        *
        * @static
@@ -89,42 +107,6 @@ namespace UsabilityDynamics\WPP {
       public $_modules = array();
 
       /**
-       * Requires.
-       *
-       * @static
-       * @property $_requires
-       * @type {Object}
-       */
-      public $_requires = array();
-
-      /**
-       * File Path
-       *
-       * @static
-       * @property $_path
-       * @type {String}
-       */
-      public $_path = null;
-
-      /**
-       * Vendor Path.
-       *
-       * @static
-       * @property $_vendor
-       * @type {String}
-       */
-      public $_vendor = null;
-
-      /**
-       * URL to Base.
-       *
-       * @static
-       * @property $_url
-       * @type {Object}
-       */
-      public $_url = null;
-
-      /**
        * Constructor.
        *
        * UsabilityDynamics components should be avialable.
@@ -141,9 +123,6 @@ namespace UsabilityDynamics\WPP {
         if( self::$instance ) {
           return self::$instance;
         }
-
-        // Define Constants.
-        $this->constants();
 
         // Autoload Vendor Dependencies.
         $this->autoload();
@@ -178,73 +157,37 @@ namespace UsabilityDynamics\WPP {
         // Instantiate Settings.
         $this->_settings  = Settings::define(array(
           "store" => "options",
-          "key" => "wpp_settings",
-          "schema" => $this->_path . 'static/schemas/system.settings.schema.json'
+          "key" => "wpp_settings"
         ));
-
-        // die( '<pre>' . print_r( $wp_properties, true ) . '</pre>' );
 
         // Load Modules.
         $this->_modules   = Module::load(array(
           'path' => $this->get( '_computed.path.modules' ),
           'required' => array(
             'wp-property-test-module',
-            'wp-property-admin-tools',
-            //'wp-property-power-tools'
+            'wp-property-admin-tools'
           )
         ));
 
-        // Instantiate UDX Library Manager.
-        $this->_requires  = Requires::define( array(
-          'name'  => 'wpp',
-          'path'  => '/model/wpp.js',
-          "cache" => "public, max-age: 3000",
-          "vary"  => "user-agent, x-client-type",
-          "paths" => array(
-            'api' => admin_url( 'admin-ajax.php' ),
-            'home' => home_url(),
-            //'model' =>
-          ),
-          "data" => apply_filters( 'wpp::get_instance', array(
-            'iframe_enabled' => isset( $data[ 'request' ][ 'wp_customize' ] ) && $data[ 'request' ][ 'wp_customize' ] == 'on' ? true : false
-          ))
-        ));
+        // Find and Register client-side JavaScript Library.
+        if( file_exists( STYLESHEETPATH . '/wp_properties.js' ) ) {
+          wp_register_script( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.locale' ), self::$version, true );
+        } elseif( file_exists( TEMPLATEPATH . '/wp_properties.js' ) ) {
+          wp_register_script( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.locale' ), self::$version, true );
+        } elseif( file_exists( $this->get( '_computed.path.templates' ) . '/wpp.js' ) ) {
+          wp_register_script( 'wp-property-frontend', $this->get( '_computed.url.templates' ) . '/wpp.js', array( 'jquery-ui-core', 'wpp.locale' ), self::$version, true );
+        }
 
-        // Declare WP-Property Locale.
-        $this->_locale    = Requires::define(array(
-          'name'  => 'wpp.locale',
-          'path'  => '/model/wpp.locale.js',
-          "cache" => "public, max-age: 30000",
-          "vary"  => "x-user",
-          "data" => apply_filters( 'wpp::js::localization', include_once $this->_path . 'l10n.php' )
-        ));
+        return $this;
 
         // @test - Extend model.
-        $this->_requires->data( array( 'aasdfsadfasd' => 'asdfasdf' ));
-        $this->_requires->data( 'asdfasdf', array( 'aasdfsadfasd' => 'asdfasdf' ));
-        $this->_requires->data( 'asd.fasdf', array( 'aasdfsadfasd' => 'asdfasdf' ));
+        // $this->_requires->data( array( 'aasdfsadfasd' => 'asdfasdf' ));
+        // $this->_requires->data( 'asdfasdf', array( 'aasdfsadfasd' => 'asdfasdf' ));
+        // $this->_requires->data( 'asd.fasdf', array( 'aasdfsadfasd' => 'asdfasdf' ));
 
-        $this->_locale->data( 'property', __( 'Property' ) );
-        $this->_locale->data( 'my.stuff', __( 'My Stuff' ) );
-        $this->_locale->data( 'xmli.request_error', __( 'la la la' ) );
-
-        // @test - Add another instance
-        Requires::define( array(
-          'name'  => 'wpi',
-          'path'  => '/model/wpi.js',
-          "args" => array(
-            "wpi-arg" => "sdfa"
-          ),
-
-          "paths" => array(
-            'quickbooks.api' => 'http://api.quickbooks.io',
-            'api' => admin_url( 'admin-ajax.php' ),
-            'home' => home_url(),
-          ),
-          "data" => apply_filters( 'wpp::get_instance', array(
-            'iframe_enabled' => isset( $data[ 'request' ][ 'wp_customize' ] ) && $data[ 'request' ][ 'wp_customize' ] == 'on' ? true : false
-          ))
-        ));
+        // $this->_locale->data( 'property', __( 'Property' ) );
+        // $this->_locale->data( 'my.stuff', __( 'My Stuff' ) );
+        // $this->_locale->data( 'xmli.request_error', __( 'la la la' ) );
 
       }
 
@@ -255,44 +198,26 @@ namespace UsabilityDynamics\WPP {
        * @since 2.0.0
        */
       private function autoload() {
-
-        // Seek ./vendor/autoload.php and autoload
-        if( !is_file( $this->_vendor . '/autoload.php' ) ) {
-          self::fatal_error( 'WP-Property vendor directory missing; attempted to find it in: ' . $this->_vendor . '/autoload.php' );
-        }
-
-        // Vendor Autoloader.
-        include_once( $this->_vendor . '/autoload.php' );
-
-        // Legacy Support.
-        include_once( $this->_path . 'lib/legacy.php' );
-        include_once( $this->_path . 'templates/template-functions.php' );
-
-      }
-
-      /**
-       * Define Plugin Constants
-       *
-       *
-       * @author potanin@UD
-       * @since 2.0.0
-       */
-      private function constants() {
         global $wpp;
 
         // Save Instance.
         self::$instance = $wpp = &$this;
 
-        $this->_path = trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) );
-        $this->_vendor = trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'vendor';
-        $this->_url = trailingslashit( dirname( plugin_dir_url( __FILE__ ) ) );
+        $_path  = trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) );
+        $_url   = trailingslashit( dirname( plugin_dir_url( __FILE__ ) ) );
 
-        define( 'WPP_Version', self::$version );
-        define( 'WPP_Object', self::$object );
-        //define( 'WPP_Path', $this->_path );
-        //define( 'WPP_URL', $this->_url );
-        //define( 'WPP_Templates', $this->_path . 'templates' );
-        //define( 'WPP_Premium', $this->_path . $this->_vendor . '/usabilitydynamics' );
+        // Seek ./vendor/autoload.php and autoload
+        if( !is_file( $_path . '/vendor/autoload.php' ) ) {
+          self::fatal_error( 'WP-Property vendor directory missing; attempted to find it in: ' . '/vendor/autoload.php' );
+        }
+
+        // Vendor Autoloader.
+        include_once( $_path . '/vendor/autoload.php' );
+
+        // Legacy Support.
+        include_once( $_path . '/lib/legacy.php' );
+        include_once( $_path . '/templates/template-functions.php' );
+
       }
 
       /**
@@ -378,7 +303,7 @@ namespace UsabilityDynamics\WPP {
        *
        * @since 1.31.0
        */
-      private function register_post_type() {
+      private function register_types() {
         global $wp_properties;
 
         $wp_properties[ 'labels' ] = apply_filters( 'wpp_object_labels', array(
@@ -421,95 +346,46 @@ namespace UsabilityDynamics\WPP {
        * @author potanin@UD
        */
       private function register_styles() {
+        global $wp_properties;
 
         /** Find and register stylesheet  */
         if( file_exists( STYLESHEETPATH . '/wp-properties.css' ) ) {
-          wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp-properties.css', array(), WPP_Version );
+          wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp-properties.css', array(), self::$version );
         } elseif( file_exists( STYLESHEETPATH . '/wp_properties.css' ) ) {
-          wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.css', array(), WPP_Version );
+          wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.css', array(), self::$version );
         } elseif( file_exists( TEMPLATEPATH . '/wp-properties.css' ) ) {
-          wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp-properties.css', array(), WPP_Version );
+          wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp-properties.css', array(), self::$version );
         } elseif( file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
-          wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), WPP_Version );
+          wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), self::$version );
         } elseif( file_exists( WPP_Templates . '/wp_properties.css' ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-          wp_register_style( 'wp-property-frontend', $this->get( '_computed.url.styles' ) . '/templates/wp_properties.css', array(), WPP_Version );
+          wp_register_style( 'wp-property-frontend', $this->get( '_computed.url.styles' ) . '/templates/wp_properties.css', array(), self::$version );
 
           //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
           if( $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] != 'true' && Utility::has_theme_specific_stylesheet() ) {
-            wp_register_style( 'wp-property-theme-specific', $this->get( '_computed.url.templates' ) . "/templates/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), WPP_Version );
+            wp_register_style( 'wp-property-theme-specific', $this->get( '_computed.url.templates' ) . "/templates/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), self::$version );
           }
         }
 
-        //wp_register_style( 'wpp-jquery-fancybox-css', $this->get( '_computed.url.styles' ) . 'third-party/fancybox/jquery.fancybox-1.3.4.css' );
-        wp_register_style( 'wpp.jquery.colorpicker', $this->get( '_computed.url.module' ) . '/lib-js-colorpicker/styles/colorpicker.css' );
-        wp_register_style( 'wpp.jquery.ui', $this->get( '_computed.url.styles' ) . '/styles/wpp.jquery.ui.css' );
-        wp_register_style( 'wpp.data.tables', $this->get( '_computed.url.styles' ) . "/styles/wpp.data.tables.css" );
+        wp_register_style( 'wpp.admin',               $this->get( '_computed.url.styles' ) . '/wpp.admin.css' );
+        wp_register_style( 'wpp.admin.data.tables',   $this->get( '_computed.url.styles' ) . '/wpp.admin.data.tables.css' );
+        wp_register_style( 'wpp.jquery.ui',           $this->get( '_computed.url.styles' ) . '/wpp.jquery.ui.css' );
+        wp_register_style( 'wpp.jquery.colorpicker',  $this->get( '_computed.url.module' ) . '/lib-js-colorpicker/styles/colorpicker.css' );
+        wp_register_style( 'wpp.jquery.fancybox',     $this->get( '_computed.url.module' ) . '/lib-fancybox/styles/jquery.fancybox-1.3.4.css' );
 
       }
 
       /**
-       * Register JavaScript Libraries
+       * Register UDX and Core Libraries.
        *
        * @author potanin@UD
        */
       private function register_libraries() {
-
-        // Instantiate UDX Library Manager.
-        new \UsabilityDynamics\Requires(array(
-          'paths' => '/scripts/app.state.js',
-          'scopes' => array( 'admin' ),
-          'debug' => true
-        ));
-
-        // Register UDX Libraries.
-        wp_register_script( 'udx.requires',       '//cdn.udx.io/udx.requires.js' );
-        //wp_register_script( 'udx.knockout',       '//cdn.udx.io/knockout.js' );
-        //wp_register_script( 'udx.utility.cookie', '//cdn.udx.io/utility.cookie.js' );
-        //wp_register_script( 'udx.utility.md5',    '//cdn.udx.io/utility.md5.js' );
-
-        // Register WP-Property Global Libraries.
-        /*
-        wp_register_script( 'wpp.global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp.localization', 'udx.requires' ), WPP_Version );
-        wp_register_script( 'wpp.localization', get_bloginfo( 'wpurl' ) . '/wp-admin/admin-ajax.php?action=wpp_js_localization', array(), WPP_Version );
-
-        // Register WP-Property Admin Libraries.
-        wp_register_script( 'wpp.admin', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wpp.global', 'wpp.localization' ), WPP_Version );
-        wp_register_script( 'wpp.admin.modules', WPP_URL . 'scripts/wpp.admin.modules.js', array( 'wpp.localization', 'udx.requires' ), WPP_Version );
-        wp_register_script( 'wpp.admin.settings', WPP_URL . 'scripts/wpp.admin.settings.js', array( 'wpp.localization', 'udx.requires' ), WPP_Version );
-        wp_register_script( 'wpp.admin.overview', WPP_URL . 'scripts/wpp.admin.overview.js', array( 'jquery', 'wpp.localization' ), WPP_Version );
-        wp_register_script( 'wpp.admin.widgets', WPP_URL . 'scripts/wpp.admin.widgets.js', array( 'jquery', 'wpp.localization' ), WPP_Version );
-
-        // Register Vendor Libraries.
-        wp_register_script( 'wp-property-galleria', WPP_URL . 'third-party/galleria/galleria-1.2.5.js', array( 'jquery', 'wpp.localization' ) );
-        wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'third-party/fancybox/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp.localization' ), '1.7.3' );
-        wp_register_script( 'wpp-jquery-colorpicker', WPP_URL . 'vendor/usabilitydynamics/lib-js-colorpicker/scripts/colorpicker.js', array( 'jquery', 'wpp.localization' ) );
-        wp_register_script( 'wpp-jquery-easing', WPP_URL . 'third-party/fancybox/jquery.easing-1.3.pack.js', array( 'jquery', 'wpp.localization' ), '1.7.3' );
-        wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'scripts/fileuploader.js', array( 'jquery', 'wpp.localization' ) );
-        wp_register_script( 'wpp-jquery-nivo-slider', WPP_URL . 'third-party/jquery.nivo.slider.pack.js', array( 'jquery', 'wpp.localization' ) );
-        wp_register_script( 'wpp-jquery-address', WPP_URL . 'scripts/jquery.address-1.5.js', array( 'jquery', 'wpp.localization' ) );
-        wp_register_script( 'wpp-jquery-scrollTo', WPP_URL . 'scripts/jquery.scrollTo-min.js', array( 'jquery', 'wpp.localization' ) );
-        wp_register_script( 'wpp-jquery-validate', WPP_URL . 'scripts/jquery.validate.js', array( 'jquery', 'wpp.localization' ) );
-        wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'scripts/jquery.number.format.js', array( 'jquery', 'wpp.localization' ) );
-        wp_register_script( 'wpp-jquery-data-tables', WPP_URL . "vendor/datatables/datatables/media/js/jquery.dataTables.js", array( 'jquery', 'wpp.localization' ) );
-
-        */
-        // Find and Register client-side JavaScript Library.
-        if( file_exists( STYLESHEETPATH . '/wp_properties.js' ) ) {
-          wp_register_script( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
-        } elseif( file_exists( TEMPLATEPATH . '/wp_properties.js' ) ) {
-          wp_register_script( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
-        } elseif( file_exists( WPP_Templates . '/wpp.js' ) ) {
-          wp_register_script( 'wp-property-frontend', $this->get( '_computed.url.templates' ) . '/wpp.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
-        }
-
-        // Legacy Scripts for reference.
-        // wp_register_script( 'jquery-cookie', WPP_URL . 'scripts/jquery.smookie.js', array( 'jquery', 'wpp.localization' ), '1.7.3' );
-        // wp_register_script( 'wpp-md5', WPP_URL . 'third-party/md5.js', array( 'wpp.localization' ), WPP_Version );
-        // wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?sensor=true' );
-        // wp_register_script( 'wpp-jquery-gmaps', WPP_URL . 'scripts/jquery.ui.map.min.js', array( 'google-maps', 'jquery-ui-core', 'jquery-ui-widget', 'wpp.localization' ) );
-
-        //global $wp_scripts;
-        //die( '<pre>' . print_r( $wp_scripts, true ) . '</pre>' );
+        wp_register_script( 'udx.requires',       '//cdn.udx.io/udx.requires.js',     array(), '1.0.0', true );
+        wp_register_script( 'udx.knockout',       '//cdn.udx.io/knockout.js',         array( 'udx.requires' ), '1.0.0', true );
+        wp_register_script( 'udx.utility.cookie', '//cdn.udx.io/utility.cookie.js',   array( 'udx.requires' ), '1.0.0', true );
+        wp_register_script( 'udx.utility.md5',    '//cdn.udx.io/utility.md5.js',      array( 'udx.requires' ), '1.0.0', true );
+        wp_register_script( 'wpp.locale',         admin_url( 'admin-ajax.php?action=wpp.locale' ),  array( 'udx.requires' ), self::$version, true );
+        wp_register_script( 'wpp.model',          admin_url( 'admin-ajax.php?action=wpp.model' ),   array( 'udx.requires' ), self::$version, true );
       }
 
       /**
@@ -529,7 +405,7 @@ namespace UsabilityDynamics\WPP {
       private function load_shortcodes() {
 
         // Inits shortcodes
-        \UsabilityDynamics\Shortcode\Utility::maybe_load_shortcodes( $this->_path . 'lib/shortcodes' );
+        \UsabilityDynamics\Shortcode\Utility::maybe_load_shortcodes( $this->get( '_computed.path.root' ) . '/lib/shortcodes' );
 
         //echo "<pre>"; print_r( \UsabilityDynamics\Shortcode\Manager::get() ); echo "</pre>"; die();
 
@@ -675,16 +551,38 @@ namespace UsabilityDynamics\WPP {
         do_action( 'wpp:init:pre', $this );
 
         //** Load languages */
-        load_plugin_textdomain( self::$text_domain, $this->_path . false, 'wp-property/languages' );
+        load_plugin_textdomain( self::$text_domain, false, $this->get( '_computed.path.root' ) . '/languages' );
 
         // Register Property Post Type.
-        $this->register_post_type();
+        $this->register_types();
 
         // Register Taxonomies.
         $this->register_taxonomies();
 
         // Define and Set WPP Capabilities.
         $this->set_capabilities();
+
+        // Register JavaScript Libraries.
+        $this->register_libraries();
+
+        // Register CSS Styles.
+        $this->register_styles();
+
+        // Register primary WP-Property Settings model.
+        $this->_requires = Requires::define( array(
+          'id'     => 'wpp.model',
+          'cache'  => 'private',
+          'vary'   => 'user-agent, x-client-type',
+          'data'   => $this->get_model()
+        ));
+
+        // Register WP-Property locale.
+        $this->_locale = Requires::define(array(
+          'id'     => 'wpp.locale',
+          'cache'  => 'public, max-age: 30000',
+          'vary'   => 'x-user',
+          'data'   => $this->get_locale()
+        ));
 
         //** Add metaboxes hook */
         add_action( 'add_meta_boxes', array( &$this, 'add_meta_boxes' ) );
@@ -704,13 +602,13 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties;
 
         // Loads Widgets.
-        include_once $this->_path . 'core/widgets/class-child-properties.php';
-        include_once $this->_path . 'core/widgets/class-featured-properties.php';
-        include_once $this->_path . 'core/widgets/class-gallery.php';
-        include_once $this->_path . 'core/widgets/class-latest-properties.php';
-        include_once $this->_path . 'core/widgets/class-other-properties.php';
-        include_once $this->_path . 'core/widgets/class-property-attributes.php';
-        include_once $this->_path . 'core/widgets/class-search-properties.php';
+        include_once $this->get( '_computed.path.root' ) . '/lib/widgets/class-child-properties.php';
+        include_once $this->get( '_computed.path.root' ) . '/lib/widgets/class-featured-properties.php';
+        include_once $this->get( '_computed.path.root' ) . '/lib/widgets/class-gallery.php';
+        include_once $this->get( '_computed.path.root' ) . '/lib/widgets/class-latest-properties.php';
+        include_once $this->get( '_computed.path.root' ) . '/lib/widgets/class-other-properties.php';
+        include_once $this->get( '_computed.path.root' ) . '/lib/widgets/class-property-attributes.php';
+        include_once $this->get( '_computed.path.root' ) . '/lib/widgets/class-search-properties.php';
 
         if( class_exists( 'Property_Attributes_Widget' ) ) {
           register_widget( "Property_Attributes_Widget" );
@@ -744,9 +642,9 @@ namespace UsabilityDynamics\WPP {
         if( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] != 'true' ) {
           foreach( (array) $wp_properties[ 'property_types' ] as $property_slug => $property_title ) {
             register_sidebar( array(
-              'name'          => sprintf( __( 'Property: %s', 'wpp' ), $property_title ),
+              'name'          => sprintf( __( 'Property: %s', self::$text_domain ), $property_title ),
               'id'            => "wpp_sidebar_{$property_slug}",
-              'description'   => sprintf( __( 'Sidebar located on the %s page.', 'wpp' ), $property_title ),
+              'description'   => sprintf( __( 'Sidebar located on the %s page.', self::$text_domain ), $property_title ),
               'before_widget' => '<li id="%1$s"  class="wpp_widget %2$s">',
               'after_widget'  => '</li>',
               'before_title'  => '<h3 class="widget-title">',
@@ -770,8 +668,6 @@ namespace UsabilityDynamics\WPP {
       public function init_lower() {
         global $wp_properties;
 
-
-
         /** Ajax functions */
         add_action( 'wp_ajax_wpp_ajax_max_set_property_type', create_function( "", ' die(Utility::mass_set_property_type($_REQUEST["property_type"]));' ) );
         add_action( 'wp_ajax_wpp_ajax_property_query', create_function( "", ' $class = Utility::get_property(trim($_REQUEST["property_id"])); if($class) { echo "Utility::get_property() output: \n\n"; print_r($class); echo "\nAfter prepare_property_for_display() filter:\n\n"; print_r(prepare_property_for_display($class));  } else { echo sprintf(__("No %1s found.","wpp"), Utility::property_label( "singular" ) );; } die();' ) );
@@ -783,8 +679,6 @@ namespace UsabilityDynamics\WPP {
         add_action( 'wp_ajax_wpp_save_settings', create_function( "", ' die(Utility::save_settings());' ) );
 
         /** Localization */
-        //add_action( "wp_ajax_wpp_js_localization", array( &$this, "localize_scripts" ) );
-        //add_action( "wp_ajax_nopriv_wpp_js_localization", array( &$this, "localize_scripts" ) );
 
         add_filter( "manage_edit-property_sortable_columns", array( &$this, "sortable_columns" ) );
         add_filter( "manage_edit-property_columns", array( &$this, "edit_columns" ) );
@@ -792,11 +686,11 @@ namespace UsabilityDynamics\WPP {
         /** Called in setup_postdata().  We add property values here to make available in global $post variable on frontend */
         add_action( 'the_post', array( 'UsabilityDynamics\WPP\Utility', 'the_post' ) );
 
-        add_action( "the_content", array( &$this, "the_content" ) );
+        add_action( 'the_content', array( &$this, "the_content" ) );
 
         /** Admin interface init */
-        add_action( "admin_init", array( &$this, "admin_init" ) );
-        add_action( "admin_menu", array( &$this, 'admin_menu' ) );
+        add_action( 'admin_init', array( &$this, "admin_init" ) );
+        add_action( 'admin_menu', array( &$this, 'admin_menu' ) );
 
         add_action( "post_submitbox_misc_actions", array( &$this, "post_submitbox_misc_actions" ) );
         add_action( 'save_post', array( 'UsabilityDynamics\WPP\Listing', 'save' ) );
@@ -820,7 +714,8 @@ namespace UsabilityDynamics\WPP {
         add_filter( 'current_screen', array(  &$this, 'current_screen' ) );
 
         //** Load admin header scripts */
-        add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ) );
+        add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ), 200, 0 );
+        add_action( 'admin_enqueue_footer_scripts', array( &$this, 'admin_enqueue_footer_scripts' ), 200, 0 );
 
         //** Check premium feature availability */
         add_action( 'wpp_premium_feature_check', array( &$this, 'feature_check' ) );
@@ -879,40 +774,6 @@ namespace UsabilityDynamics\WPP {
 
         // Load Template Functions.
         Template::load( 'template-functions.php' );
-
-        /** Find and register stylesheet  */
-        if( file_exists( STYLESHEETPATH . '/wp-properties.css' ) ) {
-          wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp-properties.css', array(), WPP_Version );
-        } elseif( file_exists( STYLESHEETPATH . '/wp_properties.css' ) ) {
-          wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.css', array(), WPP_Version );
-        } elseif( file_exists( TEMPLATEPATH . '/wp-properties.css' ) ) {
-          wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp-properties.css', array(), WPP_Version );
-        } elseif( file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
-          wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), WPP_Version );
-        } elseif( file_exists( WPP_Templates . '/wpp.css' ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-          wp_register_style( 'wp-property-frontend', $this->get( '_computed.url.templates' ) . '/wpp.css', array(), WPP_Version );
-
-          //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
-          if( $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] != 'true' && Utility::has_theme_specific_stylesheet() ) {
-            wp_register_style( 'wp-property-theme-specific', $this->get( '_computed.url.templates' ) . "/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), WPP_Version );
-          }
-        }
-
-        // Find and Register client-side JavaScript Library.
-        if( file_exists( STYLESHEETPATH . '/wp_properties.js' ) ) {
-          wp_register_script( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
-        } elseif( file_exists( TEMPLATEPATH . '/wp_properties.js' ) ) {
-          wp_register_script( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
-        } elseif( file_exists( $this->get( '_computed.path.templates' ) . '/wp_properties.js' ) ) {
-          wp_register_script( 'wp-property-frontend', $this->get( '_computed.url.templates' ) . '/wpp.js', array( 'jquery-ui-core', 'wpp.localization' ), WPP_Version, true );
-        }
-
-        //wp_register_style( 'wpp.jquery.fancybox', $this->get( '_computed.url.styles' ) . 'third-party/fancybox/jquery.fancybox-1.3.4.css' );
-        wp_register_style( 'wpp.jquery.colorpicker', $this->get( '_computed.url.modules' ) . '/lib-js-colorpicker/styles/colorpicker.css' );
-        wp_register_style( 'wpp.jquery.ui', $this->get( '_computed.url.styles' ) . '/styles/wpp.jquery.ui.css' );
-        wp_register_style( 'wpp.data.tables', $this->get( '_computed.url.styles' ) . "/styles/wpp.data.tables.css" );
-
-        // wp_localize_script( 'wpp.localization', 'wpp', array( 'instance' => $this->locale_instance() ) );
 
         //** Load global wp-property script on all frontend pages */
         wp_enqueue_script( 'wpp.global' );
@@ -994,7 +855,7 @@ namespace UsabilityDynamics\WPP {
             } elseif( file_exists( TEMPLATEPATH . "/wp_properties-{$url_slug}.css" ) ) {
               wp_register_style( 'wp-property-frontend-' . $url_slug, get_bloginfo( 'template_url' ) . "/wp_properties-{$url_slug}.css", array( 'wp-property-frontend' ), '1.13' );
             } elseif( file_exists( $this->get( '_computed.path.templates' ) . "/wpp.{$url_slug}.css" ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-              wp_register_style( 'wp-property-frontend-' . $url_slug, $this->get( '_computed.url.templates' ) . "/templates/wpp.{$url_slug}.css", array( 'wp-property-frontend' ), WPP_Version );
+              wp_register_style( 'wp-property-frontend-' . $url_slug, $this->get( '_computed.url.templates' ) . "/templates/wpp.{$url_slug}.css", array( 'wp-property-frontend' ), self::$version );
             }
             // Mark every style as conditional
             $wp_styles->add_data( 'wp-property-frontend-' . $url_slug, 'conditional', $type );
@@ -1034,7 +895,7 @@ namespace UsabilityDynamics\WPP {
           $template_found = Utility::get_template_part( array(
             "property-{$type}",
             "property",
-          ), array( WPP_Templates ) );
+          ), array( $this->get( '_computed.path.templates' ) ) );
 
           //** Load the first found template */
           if( $template_found ) {
@@ -1080,7 +941,7 @@ namespace UsabilityDynamics\WPP {
             $template_found = Utility::get_template_part( array(
               "property-search-result",
               "property-overview-page",
-            ), array( WPP_Templates ) );
+            ), array( $this->get( '_computed.path.templates' ) ) );
 
             //** Load the first found template */
             if( $template_found ) {
@@ -1119,7 +980,7 @@ namespace UsabilityDynamics\WPP {
         add_filter( 'plugin_action_links', array( &$this, 'plugin_action_links' ), 10, 2 );
 
         //* Adds metabox 'General Information' to Property Edit Page */
-        add_meta_box( 'wpp_property_meta', __( 'General Information', 'wpp' ), array( '\UsabilityDynamics\WPP\UI', 'metabox_meta' ), 'property', 'normal', 'high' );
+        add_meta_box( 'wpp_property_meta', __( 'General Information', self::$text_domain ), array( '\UsabilityDynamics\WPP\UI', 'metabox_meta' ), 'property', 'normal', 'high' );
 
         //* Adds 'Group' metaboxes to Property Edit Page */
         if( !empty( $wp_properties[ 'property_groups' ] ) ) {
@@ -1130,13 +991,13 @@ namespace UsabilityDynamics\WPP {
             }
             //* Determine if Group name is empty we add 'NO NAME', other way metabox will not be added */
             if( empty( $group[ 'name' ] ) ) {
-              $group[ 'name' ] = __( 'NO NAME', 'wpp' );
+              $group[ 'name' ] = __( 'NO NAME', self::$text_domain );
             }
-            add_meta_box( $slug, __( $group[ 'name' ], 'wpp' ), array( '\UsabilityDynamics\WPP\UI', 'metabox_meta' ), 'property', 'normal', 'high', array( 'group' => $slug ) );
+            add_meta_box( $slug, __( $group[ 'name' ], self::$text_domain ), array( '\UsabilityDynamics\WPP\UI', 'metabox_meta' ), 'property', 'normal', 'high', array( 'group' => $slug ) );
           }
         }
 
-        add_meta_box( 'propetry_filter', $wp_properties[ 'labels' ][ 'name' ] . ' ' . __( 'Search', 'wpp' ), array( 'UsabilityDynamics\WPP\UI', 'metabox_property_filter' ), 'property_page_all_properties', 'normal' );
+        add_meta_box( 'propetry_filter', $wp_properties[ 'labels' ][ 'name' ] . ' ' . __( 'Search', self::$text_domain ), array( 'UsabilityDynamics\WPP\UI', 'metabox_property_filter' ), 'property_page_all_properties', 'normal' );
 
         // Add Metaboxes.
         do_action( 'wpp:metaboxes', $this );
@@ -1169,7 +1030,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Add metabox for child properties */
         if( $post->post_type == 'property' && $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_parent = '{$post->ID}' AND post_status = 'publish' " ) ) {
-          add_meta_box( 'wpp_property_children', sprintf( __( 'Child %1s', 'wpp' ), Utility::property_label( 'plural' ) ), array( '\UsabilityDynamics\WPP\UI', 'child_properties' ), 'property', 'side', 'high' );
+          add_meta_box( 'wpp_property_children', sprintf( __( 'Child %1s', self::$text_domain ), Utility::property_label( 'plural' ) ), array( '\UsabilityDynamics\WPP\UI', 'child_properties' ), 'property', 'side', 'high' );
         }
 
       }
@@ -1196,7 +1057,7 @@ namespace UsabilityDynamics\WPP {
         $result = Utility::feature_check();
 
         if( is_wp_error( $result ) ) {
-          printf( __( 'An error occurred during premium feature check: <b> %s </b>.', 'wpp' ), $result->get_error_message() );
+          printf( __( 'An error occurred during premium feature check: <b> %s </b>.', self::$text_domain ), $result->get_error_message() );
         } else {
           echo $result;
         }
@@ -1217,7 +1078,7 @@ namespace UsabilityDynamics\WPP {
       public function manual_activation() {
 
         $installed_ver = get_option( "wpp_version", 0 );
-        $wpp_version   = WPP_Version;
+        $wpp_version   = self::$version;
 
         if( @version_compare( $installed_ver, $wpp_version ) == '-1' ) {
           // We are upgrading.
@@ -1253,9 +1114,9 @@ namespace UsabilityDynamics\WPP {
         global $wpdb;
 
         $installed_ver = get_option( "wpp_version", 0 );
-        $wpp_version   = WPP_Version;
+        $wpp_version   = self::$version;
 
-        if( @version_compare( $installed_ver, WPP_Version ) == '-1' ) {
+        if( @version_compare( $installed_ver, self::$version ) == '-1' ) {
 
           switch( $installed_ver ) {
 
@@ -1280,18 +1141,26 @@ namespace UsabilityDynamics\WPP {
       /**
        * Adds "Settings" link to the plugin overview page
        *
-       *  *
        * @since 0.60
-       *
        */
       public function plugin_action_links( $links, $file ) {
 
         if( $file == 'wp-property/wp-property.php' ) {
-          $settings_link = '<a href="' . admin_url( "edit.php?post_type=property&page=property_settings" ) . '">' . __( 'Settings', 'wpp' ) . '</a>';
+          $settings_link = '<a href="' . admin_url( "edit.php?post_type=property&page=property_settings" ) . '">' . __( 'Settings', self::$text_domain ) . '</a>';
           array_unshift( $links, $settings_link ); // before other links
         }
 
         return $links;
+      }
+
+      /**
+       * Enqueue Admin Styles.
+       *
+       * @since 2.0.0
+       */
+      public function admin_enqueue_scripts() {
+        wp_enqueue_style( 'wpp.admin' );
+        wp_enqueue_style( 'wpp.jquery.ui' );
       }
 
       /**
@@ -1306,17 +1175,13 @@ namespace UsabilityDynamics\WPP {
        *
        * @uses $current_screen global variable
        * @since 0.53
-       *
        */
-      public function admin_enqueue_scripts( $hook ) {
-        global $current_screen, $wp_properties, $wpdb;
-
-        // wp_localize_script( 'wpp.localization', 'wpp', array( 'instance' => $this->locale_instance() ));
-
-        // Enqueue Admin CSS on all backend pages.
-        wp_enqueue_script( 'wpp.admin', $this->get( '_computed.url.scripts' ) . '/wpp.admin.js' );
-        wp_enqueue_style( 'wpp.admin', $this->get( '_computed.url.styles' ) . '/wpp.admin.css' );
-
+      public function admin_enqueue_footer_scripts() {
+        wp_enqueue_script( 'wpp.admin',           $this->get( '_computed.url.scripts' ) . '/wpp.admin.js',            array( 'udx.requires' ) );
+        wp_enqueue_script( 'wpp.admin.modules',   $this->get( '_computed.url.scripts' ) . '/wpp.admin.modules.js',    array( 'wpp.locale', 'udx.requires' ), self::$version );
+        wp_enqueue_script( 'wpp.admin.settings',  $this->get( '_computed.url.scripts' ) . '/wpp.admin.settings.js',   array( 'wpp.locale', 'udx.requires' ), self::$version );
+        wp_enqueue_script( 'wpp.admin.overview',  $this->get( '_computed.url.scripts' ) . '/wpp.admin.overview.js',   array( 'jquery', 'wpp.locale' ), self::$version );
+        wp_enqueue_script( 'wpp.admin.widgets',   $this->get( '_computed.url.scripts' ) . '/wpp.admin.widgets.js',    array( 'jquery', 'wpp.locale' ), self::$version );
       }
 
       /**
@@ -1329,13 +1194,13 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties, $submenu;
 
         // Dashboard Page.
-        // $dashboard_page   = add_submenu_page( 'edit.php?post_type=property', __( 'Dashboard', 'wpp' ), __( 'Dashboard', 'wpp' ), 'manage_wpp_dashboard', 'dashboard', create_function( '', 'global $wp_properties; include "ui/page-dashboard.php";' ) );
+        // $dashboard_page   = add_submenu_page( 'edit.php?post_type=property', __( 'Dashboard', self::$text_domain ), __( 'Dashboard', self::$text_domain ), 'manage_wpp_dashboard', 'dashboard', create_function( '', 'global $wp_properties; include "ui/page-dashboard.php";' ) );
 
         // Modules Page.
-        $modules_page   = add_submenu_page( 'edit.php?post_type=property', __( 'Modules', 'wpp' ), __( 'Modules', 'wpp' ), 'manage_wpp_modules', 'modules', create_function( '', 'global $wp_properties; include "ui/page-modules.php";' ) );
+        // $modules_page   = add_submenu_page( 'edit.php?post_type=property', __( 'Modules', self::$text_domain ), __( 'Modules', self::$text_domain ), 'manage_wpp_modules', 'modules', create_function( '', 'global $wp_properties; include "ui/page-modules.php";' ) );
 
         // Settings Page.
-        $settings_page  = add_submenu_page( 'edit.php?post_type=property', __( 'Settings', 'wpp' ), __( 'Settings', 'wpp' ), 'manage_wpp_settings', 'property_settings', create_function( '', 'global $wp_properties; include "ui/page-settings.php";' ) );
+        $settings_page  = add_submenu_page( 'edit.php?post_type=property', __( 'Settings', self::$text_domain ), __( 'Settings', self::$text_domain ), 'manage_wpp_settings', 'property_settings', create_function( '', 'global $wp_properties; include "ui/page-settings.php";' ) );
 
         // All Properties Overview Page.
         $all_properties = add_submenu_page( 'edit.php?post_type=property', $wp_properties[ 'labels' ][ 'all_items' ], $wp_properties[ 'labels' ][ 'all_items' ], 'edit_wpp_properties', 'all_properties', create_function( '', 'global $wp_properties, $screen_layout_columns; include "ui/page-properties.php";' ) );
@@ -1531,10 +1396,10 @@ namespace UsabilityDynamics\WPP {
           <div class="misc-pub-section ">
 
         <ul>
-          <li><?php _e( 'Menu Sort Order:', 'wpp' ) ?> <?php echo Utility::input( "name=menu_order&special=size=4", $post->menu_order ); ?></li>
+          <li><?php _e( 'Menu Sort Order:', self::$text_domain ) ?> <?php echo Utility::input( "name=menu_order&special=size=4", $post->menu_order ); ?></li>
 
           <?php if( current_user_can( 'manage_options' ) && $wp_properties[ 'configuration' ][ 'do_not_use' ][ 'featured' ] != 'true' ) { ?>
-            <li><?php echo Utility::checkbox( "name=wpp_data[meta][featured]&label=" . __( 'Display in featured listings.', 'wpp' ), get_post_meta( $post->ID, 'featured', true ) ); ?></li>
+            <li><?php echo Utility::checkbox( "name=wpp_data[meta][featured]&label=" . __( 'Display in featured listings.', self::$text_domain ), get_post_meta( $post->ID, 'featured', true ) ); ?></li>
           <?php } ?>
 
           <?php do_action( 'wpp_publish_box_options' ); ?>
@@ -1579,20 +1444,20 @@ namespace UsabilityDynamics\WPP {
 
         $messages[ 'property' ] = array(
           0  => '', // Unused. Messages start at index 1.
-          1  => sprintf( __( '%2s updated. <a href="%s">view %1s</a>', 'wpp' ), Utility::property_label( 'singular' ), esc_url( get_permalink( $post_id ) ), Utility::property_label( 'singular' ) ),
-          2  => __( 'Custom field updated.', 'wpp' ),
-          3  => __( 'Custom field deleted.', 'wpp' ),
-          4  => sprintf( __( '%1s updated.', 'wpp' ), Utility::property_label( 'singular' ) ),
+          1  => sprintf( __( '%2s updated. <a href="%s">view %1s</a>', self::$text_domain ), Utility::property_label( 'singular' ), esc_url( get_permalink( $post_id ) ), Utility::property_label( 'singular' ) ),
+          2  => __( 'Custom field updated.', self::$text_domain ),
+          3  => __( 'Custom field deleted.', self::$text_domain ),
+          4  => sprintf( __( '%1s updated.', self::$text_domain ), Utility::property_label( 'singular' ) ),
           /* translators: %s: date and time of the revision */
-          5  => isset( $_GET[ 'revision' ] ) ? sprintf( __( '%1s restored to revision from %s', 'wpp' ), Utility::property_label( 'singular' ), wp_post_revision_title( (int) $_GET[ 'revision' ], false ) ) : false,
-          6  => sprintf( __( '%1s published. <a href="%s">View %2s</a>', 'wpp' ), Utility::property_label( 'singular' ), esc_url( get_permalink( $post_id ) ), Utility::property_label( 'singular' ) ),
-          7  => sprintf( __( '%1s saved.', 'wpp' ), Utility::property_label( 'singular' ) ),
-          8  => sprintf( __( '%1s submitted. <a target="_blank" href="%s">Preview %2s</a>', 'wpp' ), Utility::property_label( 'singular' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), Utility::property_label( 'singular' ) ),
-          9  => sprintf( __( '%1s scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview %2s</a>', 'wpp' ),
+          5  => isset( $_GET[ 'revision' ] ) ? sprintf( __( '%1s restored to revision from %s', self::$text_domain ), Utility::property_label( 'singular' ), wp_post_revision_title( (int) $_GET[ 'revision' ], false ) ) : false,
+          6  => sprintf( __( '%1s published. <a href="%s">View %2s</a>', self::$text_domain ), Utility::property_label( 'singular' ), esc_url( get_permalink( $post_id ) ), Utility::property_label( 'singular' ) ),
+          7  => sprintf( __( '%1s saved.', self::$text_domain ), Utility::property_label( 'singular' ) ),
+          8  => sprintf( __( '%1s submitted. <a target="_blank" href="%s">Preview %2s</a>', self::$text_domain ), Utility::property_label( 'singular' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), Utility::property_label( 'singular' ) ),
+          9  => sprintf( __( '%1s scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview %2s</a>', self::$text_domain ),
             // translators: Publish box date format, see http://php.net/date
             Utility::property_label( 'singular' ),
-            date_i18n( __( 'M j, Y @ G:i', 'wpp' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_id ) ), Utility::property_label( 'singular' ) ),
-          10 => sprintf( __( '%1s draft updated. <a target="_blank" href="%s">Preview %2s</a>', 'wpp' ), Utility::property_label( 'singular' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), Utility::property_label( 'singular' ) ),
+            date_i18n( __( 'M j, Y @ G:i', self::$text_domain ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_id ) ), Utility::property_label( 'singular' ) ),
+          10 => sprintf( __( '%1s draft updated. <a target="_blank" href="%s">Preview %2s</a>', self::$text_domain ), Utility::property_label( 'singular' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), Utility::property_label( 'singular' ) ),
         );
 
         $messages = apply_filters( 'wpp_updated_messages', $messages );
@@ -1614,8 +1479,8 @@ namespace UsabilityDynamics\WPP {
         unset( $columns );
 
         $columns[ 'cb' ]            = "<input type=\"checkbox\" />";
-        $columns[ 'title' ]         = __( 'Title', 'wpp' );
-        $columns[ 'property_type' ] = __( 'Type', 'wpp' );
+        $columns[ 'title' ]         = __( 'Title', self::$text_domain );
+        $columns[ 'property_type' ] = __( 'Type', self::$text_domain );
 
         if( is_array( $wp_properties[ 'property_stats' ] ) ) {
           foreach( (array) $wp_properties[ 'property_stats' ] as $slug => $title )
@@ -1624,11 +1489,11 @@ namespace UsabilityDynamics\WPP {
           $columns = $columns;
         }
 
-        $columns[ 'city' ]       = __( 'City', 'wpp' );
-        $columns[ 'overview' ]   = __( 'Overview', 'wpp' );
-        $columns[ 'featured' ]   = __( 'Featured', 'wpp' );
-        $columns[ 'menu_order' ] = __( 'Order', 'wpp' );
-        $columns[ 'thumbnail' ]  = __( 'Thumbnail', 'wpp' );
+        $columns[ 'city' ]       = __( 'City', self::$text_domain );
+        $columns[ 'overview' ]   = __( 'Overview', self::$text_domain );
+        $columns[ 'featured' ]   = __( 'Featured', self::$text_domain );
+        $columns[ 'menu_order' ] = __( 'Order', self::$text_domain );
+        $columns[ 'thumbnail' ]  = __( 'Thumbnail', self::$text_domain );
 
         $columns = apply_filters( 'wpp_admin_overview_columns', $columns );
 
@@ -1719,20 +1584,20 @@ namespace UsabilityDynamics\WPP {
         $wpp_capabilities = array(
 
           //* Manage WPP Properties Capabilities */
-          'edit_wpp_properties'        => sprintf( __( 'View %1s', 'wpp' ), Utility::property_label( 'plural' ) ),
-          'edit_wpp_property'          => sprintf( __( 'Add/Edit %1s', 'wpp' ), Utility::property_label( 'plural' ) ),
-          'edit_others_wpp_properties' => sprintf( __( 'Edit Other %1s', 'wpp' ), Utility::property_label( 'plural' ) ),
-          //'read_wpp_property' => __( 'Read Property', 'wpp' ),
-          'delete_wpp_property'        => sprintf( __( 'Delete %1s', 'wpp' ), Utility::property_label( 'plural' ) ),
-          'publish_wpp_properties'     => sprintf( __( 'Publish %1s', 'wpp' ), Utility::property_label( 'plural' ) ),
-          //'read_private_wpp_properties' => __( 'Read Private Properties', 'wpp' ),
+          'edit_wpp_properties'        => sprintf( __( 'View %1s', self::$text_domain ), Utility::property_label( 'plural' ) ),
+          'edit_wpp_property'          => sprintf( __( 'Add/Edit %1s', self::$text_domain ), Utility::property_label( 'plural' ) ),
+          'edit_others_wpp_properties' => sprintf( __( 'Edit Other %1s', self::$text_domain ), Utility::property_label( 'plural' ) ),
+          //'read_wpp_property' => __( 'Read Property', self::$text_domain ),
+          'delete_wpp_property'        => sprintf( __( 'Delete %1s', self::$text_domain ), Utility::property_label( 'plural' ) ),
+          'publish_wpp_properties'     => sprintf( __( 'Publish %1s', self::$text_domain ), Utility::property_label( 'plural' ) ),
+          //'read_private_wpp_properties' => __( 'Read Private Properties', self::$text_domain ),
 
           //* WPP Settings capability */
-          'manage_wpp_settings'        => __( 'Manage Settings', 'wpp' ),
-          'manage_wpp_modules'         => __( 'Manage Features', 'wpp' ),
+          'manage_wpp_settings'        => __( 'Manage Settings', self::$text_domain ),
+          'manage_wpp_modules'         => __( 'Manage Features', self::$text_domain ),
 
           //* WPP Taxonomies capability */
-          'manage_wpp_categories'      => __( 'Manage Taxonomies', 'wpp' )
+          'manage_wpp_categories'      => __( 'Manage Taxonomies', self::$text_domain )
         );
 
         //* Adds Premium Feature Capabilities */
@@ -1750,6 +1615,33 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Compute Settings Model
+       *
+       * @return array
+       */
+      private function get_model() {
+
+        $_home_url = parse_url( home_url() );
+
+        return (array) apply_filters( 'wpp::model', array(
+          'modules' => array(
+            'installed' => $this->get( 'installed_features' ),
+            'available' => $this->get( 'available_features' )
+          ),
+          'geo_attributes' => $this->get( 'geo_type_attributes' ),
+          'domain' => trim( $_home_url[ 'host' ] ? $_home_url[ 'host' ] : array_shift( explode( '/', $_home_url[ 'path' ], 2 ) ) ),
+          'iframe' => $_REQUEST[ 'wp_customize' ] && $_REQUEST[ 'request' ][ 'wp_customize' ] == 'on' ? true : false,
+          'permalinks' => get_option( 'permalink_structure' ) == '' ? false : true,
+          'custom_css' => file_exists( STYLESHEETPATH . '/wp_properties.css' ) || file_exists( TEMPLATEPATH . '/wp_properties.css' ) ? true : false,
+          'labels' => array(
+            'singular' => Utility::property_label( 'singular' ),
+            'plural' => Utility::property_label( 'plural' )
+          )
+        ));
+
+      }
+
+      /**
        * Generates javascript file with localization.
        * Adds localization support to all WP-Property scripts.
        * Accessible via wp-ajax.php calls.
@@ -1757,26 +1649,23 @@ namespace UsabilityDynamics\WPP {
        * @since 1.37.3.2
        * @author peshkov@UD
        */
-      public function localize_scripts() {
+      private function get_locale() {
 
-        $l10n = array();
+        // Include Translation File.
+        $_locale = include_once $this->get( '_computed.path.root' ) . '/l10n.php';
 
-        //** Include the list of translations */
-        include_once $this->_path . 'l10n.php';
+        // Noramlize HTML Strings.
+        foreach( (array) $_locale as $key => $value ) {
 
-        /** All additional localizations must be added using the filter below. */
-        $l10n = apply_filters( 'wpp::js::localization', $l10n );
-
-        foreach( (array) $l10n as $key => $value ) {
           if( !is_scalar( $value ) ) {
             continue;
           }
-          $l10n[ $key ] = html_entity_decode( (string) $value, ENT_QUOTES, 'UTF-8' );
+
+          $_locale[ $key ] = html_entity_decode( (string) $value, ENT_QUOTES, 'UTF-8' );
+
         }
 
-        header( 'Content-type: application/x-javascript' );
-
-        die( "var wpp = ( typeof wpp === 'object' ) ? wpp : {}; wpp.strings = " . json_encode( $l10n ) . ';' );
+        return (array) apply_filters( 'wpp::locale', $_locale );
 
       }
 
@@ -1806,7 +1695,7 @@ namespace UsabilityDynamics\WPP {
             get_current_screen()->add_help_tab(
               array(
                 'id' => sanitize_title( $help_tab_title ),
-                'title' => __( $help_tab_title, 'wpp' ),
+                'title' => __( $help_tab_title, self::$text_domain ),
                 'content' => implode( "\n", (array) $args->contextual_help[ $help_tab_title ] ),
               )
             );
@@ -1815,10 +1704,10 @@ namespace UsabilityDynamics\WPP {
 
           //** Add help sidebar with More Links */
           get_current_screen()->set_help_sidebar(
-            '<p><strong>' . __( 'For more information:', 'wpp' ) . '</strong></p>' .
-            '<p>' . __( '<a href="https://usabilitydynamics.com/products/wp-property/" target="_blank">WP-Property Product Page</a>', 'wpp' ) . '</p>' .
-            '<p>' . __( '<a href="https://usabilitydynamics.com/products/wp-property/forum/" target="_blank">WP-Property Forums</a>', 'wpp' ) . '</p>' .
-            '<p>' . __( '<a href="https://usabilitydynamics.com/help/" target="_blank">WP-Property Tutorials</a>', 'wpp' ) . '</p>'
+            '<p><strong>' . __( 'For more information:', self::$text_domain ) . '</strong></p>' .
+            '<p>' . __( '<a href="https://usabilitydynamics.com/products/wp-property/" target="_blank">WP-Property Product Page</a>', self::$text_domain ) . '</p>' .
+            '<p>' . __( '<a href="https://usabilitydynamics.com/products/wp-property/forum/" target="_blank">WP-Property Forums</a>', self::$text_domain ) . '</p>' .
+            '<p>' . __( '<a href="https://usabilitydynamics.com/help/" target="_blank">WP-Property Tutorials</a>', self::$text_domain ) . '</p>'
           );
 
         }
