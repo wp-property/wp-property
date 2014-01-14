@@ -217,6 +217,7 @@ namespace UsabilityDynamics\WPP {
         // Legacy Support.
         include_once( $_path . '/lib/legacy.php' );
         include_once( $_path . '/templates/template-functions.php' );
+        include_once( $_path . '/templates/property-default-api.php' );
 
       }
 
