@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "140625ff7d32ff5b72d32ca60f775c5c",
+    "hash": "b18f2fceed47a9fe7bdbec80ffb6687b",
     "packages": [
         {
             "name": "datatables/datatables",
@@ -281,6 +281,28 @@
                 ]
             },
             "time": "2014-01-10 15:55:30"
+        },
+        {
+            "name": "usabilitydynamics/lib-wp-widget",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/lib-wp-widget",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/UsabilityDynamics/lib-wp-widget/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "component",
+            "autoload": {
+                "classmap": [
+                    "lib"
+                ]
+            },
+            "time": "2014-01-13 16:58:15"
         },
         {
             "name": "usabilitydynamics/lib-wp-xmlrpc",

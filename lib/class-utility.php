@@ -2559,7 +2559,7 @@ namespace UsabilityDynamics\WPP {
        * Return an array of all available attributes and meta keys
        *
        */
-      static function get_attributes( $args = '', $extra_values = false ) {
+      static function get_total_attribute_array( $args = '', $extra_values = false ) {
         global $wp_properties, $wpdb;
 
         $defaults = array(
@@ -2581,9 +2581,9 @@ namespace UsabilityDynamics\WPP {
           $attributes[ 'Meta' ]       = $property_meta;
           $attributes[ 'Other' ]      = $extra_values;
         } else {
-          $attributes = $property_stats + $property_meta + $extra_values;
+          $attributes = (array)$property_stats + (array)$property_meta + (array)$extra_values;
         }
-
+        
         $attributes = apply_filters( 'wpp_total_attribute_array', $attributes );
 
         if( !is_array( $attributes ) ) {

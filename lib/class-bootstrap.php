@@ -530,9 +530,7 @@ namespace UsabilityDynamics\WPP {
        *
        */
       private function load_widgets() {
-
         add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
-
       }
 
       /**
@@ -540,12 +538,7 @@ namespace UsabilityDynamics\WPP {
        *
        */
       private function load_shortcodes() {
-
-        // Inits shortcodes
         \UsabilityDynamics\Shortcode\Utility::maybe_load_shortcodes( $this->_path . 'lib/shortcodes' );
-        
-        //echo "<pre>"; print_r( \UsabilityDynamics\Shortcode\Manager::get() ); echo "</pre>"; die();
-
       }
 
       /**
@@ -708,52 +701,17 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       * Setup widgets and widget areas.
+       * Load and register widgets
+       * Setup widget areas.
        *
        * @since 1.31.0
        *
        */
       public function widgets_init() {
         global $wp_properties;
-
-        // Loads Widgets.
-        include_once $this->_path . 'core/widgets/class-child-properties.php';
-        include_once $this->_path . 'core/widgets/class-featured-properties.php';
-        include_once $this->_path . 'core/widgets/class-gallery.php';
-        include_once $this->_path . 'core/widgets/class-latest-properties.php';
-        include_once $this->_path . 'core/widgets/class-other-properties.php';
-        include_once $this->_path . 'core/widgets/class-property-attributes.php';
-        include_once $this->_path . 'core/widgets/class-search-properties.php';
-
-        if( class_exists( 'Property_Attributes_Widget' ) ) {
-          register_widget( "Property_Attributes_Widget" );
-        }
-
-        if( class_exists( 'ChildPropertiesWidget' ) ) {
-          register_widget( 'ChildPropertiesWidget' );
-        }
-
-        if( class_exists( 'SearchPropertiesWidget' ) ) {
-          register_widget( "SearchPropertiesWidget" );
-        }
-
-        if( class_exists( 'FeaturedPropertiesWidget' ) ) {
-          register_widget( "FeaturedPropertiesWidget" );
-        }
-
-        if( class_exists( 'GalleryPropertiesWidget' ) ) {
-          register_widget( "GalleryPropertiesWidget" );
-        }
-
-        if( class_exists( 'LatestPropertiesWidget' ) ) {
-          register_widget( "LatestPropertiesWidget" );
-        }
-
-        if( class_exists( 'OtherPropertiesWidget' ) ) {
-          register_widget( "OtherPropertiesWidget" );
-        }
-
-        //** Register a sidebar for each property type */
+        // Load and register widgets
+        \UsabilityDynamics\Utility::maybe_load_widgets( $this->_path . 'lib/widgets' );
+        // Register a sidebar for each property type
         if( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] != 'true' ) {
           foreach( (array) $wp_properties[ 'property_types' ] as $property_slug => $property_title ) {
             register_sidebar( array(
@@ -767,7 +725,6 @@ namespace UsabilityDynamics\WPP {
             ));
           }
         }
-
       }
 
       /**
