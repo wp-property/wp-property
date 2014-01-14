@@ -60,15 +60,6 @@ namespace UsabilityDynamics\WPP {
        */
       public static $text_domain = 'wpp';
 
-      /**
-       * Singleton Instance Reference.
-       *
-       * @public
-       * @static
-       * @property $instance
-       * @type {Object}
-       */
-      public static $instance = false;
 
       /**
        * Requires.
@@ -95,10 +86,7 @@ namespace UsabilityDynamics\WPP {
        * @property $_settings
        * @type {Object}
        */
-      public $_settings = array(
-        '_settings' => array(),
-        '_modules' => array()
-      );
+      static public $instance = false;
 
       /**
        * UI Instance.
@@ -173,7 +161,7 @@ namespace UsabilityDynamics\WPP {
         $this->_modules = Module::load(array(
           'path' => $this->get( '_computed.path.modules' ),
           'required' => array(
-            'wp-property-test-module',
+            //'wp-property-test-module',
             'wp-property-admin-tools'
           )
         ));
@@ -606,8 +594,10 @@ namespace UsabilityDynamics\WPP {
        */
       public function widgets_init() {
         global $wp_properties;
+
         // Load and register widgets
-        \UsabilityDynamics\Utility::maybe_load_widgets( $this->_path . 'lib/widgets' );
+        Utility::maybe_load_widgets( $this->_path . 'lib/widgets' );
+
         //** Register a sidebar for each property type */
         if( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] != 'true' ) {
           foreach( (array) $wp_properties[ 'property_types' ] as $property_slug => $property_title ) {
