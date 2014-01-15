@@ -40,7 +40,7 @@ namespace UsabilityDynamics\WPP {
        * @property $version
        * @type String
        */
-      public static $version = '2.0.0';
+      public $version;
 
       /**
        * Name of Primary Object.
@@ -117,6 +117,10 @@ namespace UsabilityDynamics\WPP {
       private function __construct() {
         global $wpdb, $wpp, $wp_properties;
 
+        // Get information about plugin
+        $_plugin_info = get_file_data( dirname( __DIR__ ) . '/wp-property.php', array( 'version' => 'Version' ) );
+        $this->version = $_plugin_info[ 'version' ];
+        
         // Autoload Vendor Dependencies.
         $this->autoload();
 
@@ -151,10 +155,7 @@ namespace UsabilityDynamics\WPP {
         add_action( 'add_meta_boxes', array( &$this, 'add_meta_boxes' ) );
 
         // Instantiate Settings.
-        $this->_settings = Settings::define(array(
-          "store" => "options",
-          "key" => "wpp_settings"
-        ));
+        $this->_settings = Settings::define();
 
         // Load Modules.
         $this->_modules = Module::load(array(
@@ -339,19 +340,19 @@ namespace UsabilityDynamics\WPP {
 
         // Find and Register Frontend CSS.
         if( file_exists( STYLESHEETPATH . '/wp-properties.css' ) ) {
-          wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp-properties.css', array(), self::$version );
+          wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp-properties.css', array(), $this->version );
         } elseif( file_exists( STYLESHEETPATH . '/wp_properties.css' ) ) {
-          wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.css', array(), self::$version );
+          wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.css', array(), $this->version );
         } elseif( file_exists( TEMPLATEPATH . '/wp-properties.css' ) ) {
-          wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp-properties.css', array(), self::$version );
+          wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp-properties.css', array(), $this->version );
         } elseif( file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
-          wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), self::$version );
+          wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), $this->version );
         } elseif( file_exists( WPP_Templates . '/wp_properties.css' ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-          wp_register_style( 'wp-property-frontend', $this->get( '_computed.url.styles' ) . '/templates/wp_properties.css', array(), self::$version );
+          wp_register_style( 'wp-property-frontend', $this->get( '_computed.url.styles' ) . '/templates/wp_properties.css', array(), $this->version );
 
           //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
           if( $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] != 'true' && Utility::has_theme_specific_stylesheet() ) {
-            wp_register_style( 'wp-property-theme-specific', $this->get( '_computed.url.templates' ) . "/templates/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), self::$version );
+            wp_register_style( 'wp-property-theme-specific', $this->get( '_computed.url.templates' ) . "/templates/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), $this->version );
           }
         }
 
@@ -371,8 +372,8 @@ namespace UsabilityDynamics\WPP {
         wp_register_script( 'udx.utility.md5',    '//cdn.udx.io/utility.md5.js',      array( 'udx.requires' ), '1.0.0', true );
 
         // Dynamic Scripts.
-        wp_register_script( 'wpp.locale',         admin_url( 'admin-ajax.php?action=wpp.locale' ),  array( 'udx.requires' ), self::$version, true );
-        wp_register_script( 'wpp.model',          admin_url( 'admin-ajax.php?action=wpp.model' ),   array( 'udx.requires' ), self::$version, true );
+        wp_register_script( 'wpp.locale',         admin_url( 'admin-ajax.php?action=wpp.locale' ),  array( 'udx.requires' ), $this->version, true );
+        wp_register_script( 'wpp.model',          admin_url( 'admin-ajax.php?action=wpp.model' ),   array( 'udx.requires' ), $this->version, true );
 
       }
 
@@ -811,7 +812,7 @@ namespace UsabilityDynamics\WPP {
             } elseif( file_exists( TEMPLATEPATH . "/wp_properties-{$url_slug}.css" ) ) {
               wp_register_style( 'wp-property-frontend-' . $url_slug, get_bloginfo( 'template_url' ) . "/wp_properties-{$url_slug}.css", array( 'wp-property-frontend' ), '1.13' );
             } elseif( file_exists( $this->get( '_computed.path.templates' ) . "/wpp.{$url_slug}.css" ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-              wp_register_style( 'wp-property-frontend-' . $url_slug, $this->get( '_computed.url.templates' ) . "/templates/wpp.{$url_slug}.css", array( 'wp-property-frontend' ), self::$version );
+              wp_register_style( 'wp-property-frontend-' . $url_slug, $this->get( '_computed.url.templates' ) . "/templates/wpp.{$url_slug}.css", array( 'wp-property-frontend' ), $this->version );
             }
             // Mark every style as conditional
             $wp_styles->add_data( 'wp-property-frontend-' . $url_slug, 'conditional', $type );
@@ -1034,9 +1035,8 @@ namespace UsabilityDynamics\WPP {
       public function manual_activation() {
 
         $installed_ver = get_option( "wpp_version", 0 );
-        $wpp_version   = self::$version;
 
-        if( @version_compare( $installed_ver, $wpp_version ) == '-1' ) {
+        if( @version_compare( $installed_ver, $this->version ) == '-1' ) {
           // We are upgrading.
 
           // Unschedule event
@@ -1051,7 +1051,7 @@ namespace UsabilityDynamics\WPP {
           self::upgrade();
 
           // Update option to latest version so this isn't run on next admin page load
-          update_option( "wpp_version", $wpp_version );
+          update_option( "wpp_version", $this->version );
 
           // Get premium features on activation
           //@Utility::feature_check();
@@ -1070,9 +1070,8 @@ namespace UsabilityDynamics\WPP {
         global $wpdb;
 
         $installed_ver = get_option( "wpp_version", 0 );
-        $wpp_version   = self::$version;
 
-        if( @version_compare( $installed_ver, self::$version ) == '-1' ) {
+        if( @version_compare( $installed_ver, $this->version ) == '-1' ) {
 
           switch( $installed_ver ) {
 
@@ -1134,10 +1133,10 @@ namespace UsabilityDynamics\WPP {
        */
       public function admin_enqueue_footer_scripts() {
         wp_enqueue_script( 'wpp.admin',           $this->get( '_computed.url.scripts' ) . '/wpp.admin.js',            array( 'udx.requires' ) );
-        wp_enqueue_script( 'wpp.admin.modules',   $this->get( '_computed.url.scripts' ) . '/wpp.admin.modules.js',    array( 'wpp.locale', 'udx.requires' ), self::$version );
-        wp_enqueue_script( 'wpp.admin.settings',  $this->get( '_computed.url.scripts' ) . '/wpp.admin.settings.js',   array( 'wpp.locale', 'udx.requires' ), self::$version );
-        wp_enqueue_script( 'wpp.admin.overview',  $this->get( '_computed.url.scripts' ) . '/wpp.admin.overview.js',   array( 'jquery', 'wpp.locale' ), self::$version );
-        wp_enqueue_script( 'wpp.admin.widgets',   $this->get( '_computed.url.scripts' ) . '/wpp.admin.widgets.js',    array( 'jquery', 'wpp.locale' ), self::$version );
+        wp_enqueue_script( 'wpp.admin.modules',   $this->get( '_computed.url.scripts' ) . '/wpp.admin.modules.js',    array( 'wpp.locale', 'udx.requires' ), $this->version );
+        wp_enqueue_script( 'wpp.admin.settings',  $this->get( '_computed.url.scripts' ) . '/wpp.admin.settings.js',   array( 'wpp.locale', 'udx.requires' ), $this->version );
+        wp_enqueue_script( 'wpp.admin.overview',  $this->get( '_computed.url.scripts' ) . '/wpp.admin.overview.js',   array( 'jquery', 'wpp.locale' ), $this->version );
+        wp_enqueue_script( 'wpp.admin.widgets',   $this->get( '_computed.url.scripts' ) . '/wpp.admin.widgets.js',    array( 'jquery', 'wpp.locale' ), $this->version );
       }
 
       /**
