@@ -69,7 +69,7 @@ namespace UsabilityDynamics\WPP {
           )
         ));
         
-        //$_instance->set( '_data_structure', $_instance->get_data_structure() );
+        $_instance->set( '_data_structure', $_instance->get_data_structure() );
         
         // Set Schema now that paths are computed.
         $_instance->set_schema( $_instance->get( '_computed.path.schema' ), '/system.settings.schema.json' );
@@ -106,7 +106,9 @@ namespace UsabilityDynamics\WPP {
        * @author peshkov@UD
        */
       protected function get_data_structure( ) {
-        global $wpdb, $wp_properties;
+        global $wpdb;
+        
+        $wp_properties = $this->get();
 
         //** STEP 1. Init all neccessary variables before continue. */
 
@@ -192,7 +194,7 @@ namespace UsabilityDynamics\WPP {
             'label' => $taxonomy_data[ 'label' ],
             'slug' => $taxonomy,
             'type' => 'taxonomy',
-            'decription' => __( 'The current attribute is just a link to the existing taxonomy.', 'wpp' ),
+            'description' => __( 'The current attribute is just a link to the existing taxonomy.', 'wpp' ),
             'classification' => !empty( $def_cl_tax ) ? $def_cl_tax_slug : false,
             'classification_label' => !empty( $def_cl_tax ) ? $def_cl_tax[ 'label' ] : false,
             'classification_settings' => !empty( $def_cl_tax ) ? $def_cl_tax[ 'settings' ] : false,
@@ -201,10 +203,10 @@ namespace UsabilityDynamics\WPP {
 
         //** STEP 4. Get the main list of all property attributes and merge them with system and predefined attributes */
 
-        $attributes = self::get_total_attribute_array();
+        $attributes = $this->get_attributes();
 
         foreach ( $attributes as $meta_key => $label ) {
-          $_data = self::get_attribute_data( $meta_key );
+          $_data = $this->get_attribute( $meta_key );
 
           $default = array_key_exists( $meta_key, $predefined_attributes ) ? $predefined_attributes[ $meta_key ] : $default_attribute;
 
@@ -305,6 +307,192 @@ namespace UsabilityDynamics\WPP {
         }
 
         return \UsabilityDynamics\Utility::array_filter_deep( (array) $return );
+
+      }
+      
+      /**
+       * Returns an array of all available attributes and meta keys
+       *
+       */
+      public function get_attributes( $args = '', $extra_values = false ) {
+        global $wpdb;
+
+        $defaults = array(
+          'use_optgroups' => 'false'
+        );
+
+        extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
+        $use_optgroups = isset( $use_optgroups ) ? $use_optgroups : 'false';
+
+        $property_stats = $this->get( 'property_stats' );
+        $property_meta  = $this->get( 'property_meta' );
+        
+        $property_stats = is_array( $property_stats ) ? $property_stats : array();
+        $property_meta = is_array( $property_meta ) ? $property_meta : array();
+        $extra_values = is_array( $extra_values ) ? $extra_values : array();
+
+        if( $use_optgroups == 'true' ) {
+          $attributes[ 'Attributes' ] = $property_stats;
+          $attributes[ 'Meta' ]       = $property_meta;
+          $attributes[ 'Other' ]      = $extra_values;
+        } else {
+          $attributes = $property_stats + $property_meta + $extra_values;
+        }
+        
+        $attributes = apply_filters( 'wpp_total_attribute_array', $attributes );
+
+        if( !is_array( $attributes ) ) {
+          $attributes = array();
+        }
+
+        return $attributes;
+
+      }
+      
+      /**
+       * Returns attribute information.
+       * Checks wpp settings and returns a concise array of array-specific settings and attributes
+       *
+       * @updated 2.0
+       * @version 1.17.3
+       */
+      public function get_attribute( $attribute = false ) {
+        global $wpdb;
+        
+        $wp_properties = $this->get();
+
+        $return = array();
+
+        if ( !$attribute ) {
+          return false;
+        }
+
+        if ( wp_cache_get( $attribute, 'wpp_attribute_data' ) ) {
+          return wp_cache_get( $attribute, 'wpp_attribute_data' );
+        }
+
+        //** Set post table keys ( wp_posts columns ) */
+        $post_table_keys = array();
+        $columns = $wpdb->get_results( "SELECT DISTINCT( column_name ) FROM information_schema.columns WHERE table_name = '{$wpdb->prefix}posts'", ARRAY_N );
+        foreach ( $columns as $column ) {
+          $post_table_keys[ ] = $column[ 0 ];
+        }
+
+        $ui_class = array( $attribute );
+
+        $return[ 'storage_type' ] = in_array( $attribute, (array) $post_table_keys ) ? 'post_table' : 'meta_key';
+        $return[ 'slug' ] = $attribute;
+
+        if ( isset( $wp_properties[ 'property_stats_descriptions' ][ $attribute ] ) ) {
+          $return[ 'description' ] = $wp_properties[ 'property_stats_descriptions' ][ $attribute ];
+        }
+
+        if ( isset( $wp_properties[ 'property_stats_groups' ][ $attribute ] ) ) {
+          $return[ 'group_key' ] = $wp_properties[ 'property_stats_groups' ][ $attribute ];
+          $return[ 'group_label' ] = $wp_properties[ 'property_groups' ][ $wp_properties[ 'property_stats_groups' ][ $attribute ] ][ 'name' ];
+        }
+
+        $return[ 'label' ] = $wp_properties[ 'property_stats' ][ $attribute ];
+        $return[ 'classification' ] = !empty( $wp_properties[ 'attribute_classification' ][ $attribute ] ) ? $wp_properties[ 'attribute_classification' ][ $attribute ] : 'string';
+
+        $return[ 'is_stat' ] = ( !empty( $wp_properties[ '_attribute_classifications' ][ $attribute ] ) && $wp_properties[ '_attribute_classifications' ][ $attribute ] != 'detail' ) ? 'true' : 'false';
+
+        if ( $return[ 'is_stat' ] == 'detail' ) {
+          $return[ 'input_type' ] = 'textarea';
+        }
+
+        $ui_class[ ] = 'classification_' . $return[ 'classification' ];
+
+        if ( isset( $wp_properties[ 'searchable_attr_fields' ][ $attribute ] ) ) {
+          $return[ 'input_type' ] = $wp_properties[ 'searchable_attr_fields' ][ $attribute ];
+          $ui_class[ ] = 'search_' . $return[ 'input_type' ];
+        }
+
+        if ( is_admin() && isset( $wp_properties[ 'admin_attr_fields' ][ $attribute ] ) ) {
+          $return[ 'data_input_type' ] = $wp_properties[ 'admin_attr_fields' ][ $attribute ];
+          $ui_class[ ] = 'admin_' . $return[ 'data_input_type' ];
+        }
+
+        if ( $wp_properties[ 'configuration' ][ 'address_attribute' ] == $attribute ) {
+          $return[ 'is_address_attribute' ] = 'true';
+          $ui_class[ ] = 'address_attribute';
+        }
+
+        foreach ( (array) $wp_properties[ 'property_inheritance' ] as $property_type => $type_data ) {
+          if ( in_array( $attribute, (array) $type_data ) ) {
+            $return[ 'inheritance' ][ ] = $property_type;
+          }
+        }
+
+        $ui_class[ ] = $return[ 'data_input_type' ];
+
+        if ( is_array( $wp_properties[ 'predefined_values' ] ) && ( $predefined_values = $wp_properties[ 'predefined_values' ][ $attribute ] ) ) {
+          $return[ 'predefined_values' ] = $predefined_values;
+          $return[ '_values' ] = (array) $return[ '_values' ] + explode( ',', $predefined_values );
+        }
+
+        if ( is_array( $wp_properties[ 'predefined_search_values' ] ) && ( $predefined_values = $wp_properties[ 'predefined_search_values' ][ $attribute ] ) ) {
+          $return[ 'predefined_search_values' ] = $predefined_values;
+          $return[ '_values' ] = (array) $return[ '_values' ] + explode( ',', $predefined_values );
+        }
+
+        if ( is_array( $wp_properties[ 'sortable_attributes' ] ) && in_array( $attribute, (array) $wp_properties[ 'sortable_attributes' ] ) ) {
+          $return[ 'sortable' ] = true;
+          $ui_class[ ] = 'sortable';
+        }
+
+        if ( is_array( $wp_properties[ 'searchable_attributes' ] ) && in_array( $attribute, (array) $wp_properties[ 'searchable_attributes' ] ) ) {
+          $return[ 'searchable' ] = true;
+          $ui_class[ ] = 'searchable';
+        }
+
+        if ( is_array( $wp_properties[ 'column_attributes' ] ) && in_array( $attribute, (array) $wp_properties[ 'column_attributes' ] ) ) {
+          $return[ 'in_overview' ] = true;
+          $ui_class[ ] = 'in_overview';
+        }
+
+        if ( is_array( $wp_properties[ 'disabled_attributes' ] ) && in_array( $attribute, (array) $wp_properties[ 'disabled_attributes' ] ) ) {
+          $return[ 'disabled' ] = true;
+          $ui_class[ ] = 'disabled';
+        }
+
+        //** Legacy. numeric, boolean and currency params should not be used anywhere more. peshkov@UD */
+        if ( $return[ 'classification' ] == 'admin_note' ) {
+          $return[ 'hidden_frontend_attribute' ] = true;
+          $ui_class[ ] = 'fe_hidden';
+        } else if ( $return[ 'classification' ] == 'currency' ) {
+          $return[ 'currency' ] = true;
+          $return[ 'numeric' ] = true;
+        } else if ( $return[ 'classification' ] == 'area' ) {
+          $return[ 'numeric' ] = true;
+        } else if ( $return[ 'classification' ] == 'boolean' ) {
+          $return[ 'boolean' ] = true;
+        } else if ( $return[ 'classification' ] == 'numeric' ) {
+          $return[ 'numeric' ] = true;
+        }
+
+        if ( in_array( $attribute, array_keys( (array) $wp_properties[ '_predefined_attributes' ] ) ) ) {
+          $return[ 'standard' ] = true;
+          $ui_class[ ] = 'standard_attribute';
+        }
+
+        if ( empty( $return[ 'title' ] ) ) {
+          $return[ 'title' ] = \UsabilityDynamics\Utility::de_slug( $return[ 'slug' ] );
+        }
+
+        $ui_class = array_filter( array_unique( $ui_class ) );
+        $ui_class = array_map( create_function( '$class', 'return "wpp_{$class}";' ), $ui_class );
+        $return[ 'ui_class' ] = implode( ' ', $ui_class );
+
+        if ( is_array( $return[ '_values' ] ) ) {
+          $return[ '_values' ] = array_unique( $return[ '_values' ] );
+        }
+
+        $return = apply_filters( 'wpp_attribute_data', array_filter( $return ) );
+
+        wp_cache_add( $attribute, $return, 'wpp_attribute_data' );
+
+        return $return;
 
       }
 
