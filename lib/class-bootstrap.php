@@ -1593,7 +1593,8 @@ namespace UsabilityDynamics\WPP {
           'labels' => array(
             'singular' => Utility::property_label( 'singular' ),
             'plural' => Utility::property_label( 'plural' )
-          )
+          ),
+          'settings' => $this->_settings->get(),
         ));
 
       }
