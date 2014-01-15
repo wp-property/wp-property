@@ -17,6 +17,8 @@ namespace UsabilityDynamics\WPP {
        * It must be used for \UsabilityDynamics\WPP\Settings::commit
        */
       private $_db_data;
+      
+      private $_schemas_path;
     
       /**
        * Create Settings Instance
@@ -33,10 +35,17 @@ namespace UsabilityDynamics\WPP {
           "key" => "wpp_settings"
         ) );
         
+        $_instance->_schemas_path = trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'static/schemas';
+        
         // STEP 2. Prepare default data which is used for storing in DB.
         
-        // Set Build Mode value
         $_data = $_instance->get();
+        
+        if( empty( $_data ) ) {
+          $_instance->set( $_instance->_get_default_settings() );
+        }
+        
+        // Set Build Mode value
         $build_mode = isset( $_data[ 'configuration' ][ 'build_mode' ] ) ? $_data[ 'configuration' ][ 'build_mode' ] : false;
         $build_mode = ( $build_mode == 'true' ) ? true : false;
         $_instance->set( 'configuration.build_mode', $build_mode );
@@ -51,39 +60,15 @@ namespace UsabilityDynamics\WPP {
           $_instance->set( 'configuration.build_mode', true );
         }
         
-        // Compute Settings.
-        $_instance->set( '_computed', array(
-          'path' => array(
-            'root' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ),
-            'vendor' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'vendor',
-            'templates' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'templates',
-            'scripts' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'scripts',
-            'styles' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'styles',
-            'schema' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'static/schemas',
-            'data' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'static/data',
-            'modules' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'vendor/usabilitydynamics'
-          ),
-          "url" => array(
-            'root' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ),
-            'vendor' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'vendor',
-            'templates' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'templates',
-            'scripts' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'scripts',
-            'styles' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'styles',
-            'schema' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'static/schemas',
-            'data' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'static/data',
-            'modules' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'vendor/usabilitydynamics'
-          )
-        ));
-        
         // Set Schema now that paths are computed.
-        $_instance->set_schema( $_instance->get( '_computed.path.schema' ), '/system.settings.schema.json' );
+        $_instance->set_schema( $_instance->_schemas_path, '/system.settings.schema.json' );
         
         $_instance->set( $_instance->get_sync_data() );
         
         // @note Hopefully temporary but this exposes settings to the legacy $wp_properties global variable.
         $wp_properties = $_instance->get();
         
-        //echo "<pre>"; print_r( $wp_properties ); echo "</pre>";die();
+        echo "<pre>"; print_r( $wp_properties ); echo "</pre>";die();
 
         // Return Instance.
         return $_instance;
@@ -112,7 +97,7 @@ namespace UsabilityDynamics\WPP {
         if ( !empty( $trns ) && !in_array( $trns, array( '[]', 'null' ) ) ) {
           $system_settings = json_decode( $trns, true );
         } else {
-          $system_settings = $this->_localize( json_decode( file_get_contents( $this->get( '_computed.path.schema' ) . '/system.settings.json' ), true ) );
+          $system_settings = $this->_localize( json_decode( file_get_contents( $this->_schemas_path . '/system.settings.json' ), true ) );
           set_transient( 'wpp::system_settings', json_encode( $system_settings ), ( 60 * 60 * 24 ) );
         }
         
@@ -152,9 +137,8 @@ namespace UsabilityDynamics\WPP {
         $_data[ 'property_inheritance' ] = apply_filters( 'wpp_property_inheritance', (array) ( !empty( $_data[ 'property_inheritance' ] ) ? $_data[ 'property_inheritance' ] : array() ) );
         $_data[ '_attribute_classifications' ] = apply_filters( 'wpp_attribute_classifications', (array) ( !empty( $_data[ '_attribute_classifications' ] ) ? $_data[ '_attribute_classifications' ] : array() ) );
         
-        // Extend computed settings into WPP
-        $_computed = $this->_get_computed( array( 'recompute' => $args[ 'recompute' ] ) );
-        $_data[ '_computed' ] = \UsabilityDynamics\Utility::extend( $_computed, $_data[ '_computed' ] );
+        // Compute Settings
+        $_data[ '_computed' ] = $this->_get_computed( array( 'recompute' => $args[ 'recompute' ] ) );
 
         if ( $args[ 'stripslashes' ] ) {
           $_data = stripslashes_deep( $_data );
@@ -677,6 +661,7 @@ namespace UsabilityDynamics\WPP {
         $_computed = array(
           'created' => time(),
           'data_structure' => $this->get_data_structure(),
+          'searchable_geo_parts' => $this->get_searchable_geo_parts(),
           'primary_keys' => array(
             'post_title' => sprintf( __( '%1$s Title', 'wpp' ), ucfirst( Utility::property_label( 'singular' ) ) ),
             'post_type' => __( 'Post Type' ),
@@ -692,7 +677,26 @@ namespace UsabilityDynamics\WPP {
             'comment_status' => '',
             'post_password' => ''
           ),
-          'searchable_geo_parts' => $this->get_searchable_geo_parts(),
+          'path' => array(
+            'root' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ),
+            'vendor' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'vendor',
+            'templates' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'templates',
+            'scripts' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'scripts',
+            'styles' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'styles',
+            'schema' => $this->_schemas_path,
+            'data' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'static/data',
+            'modules' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'vendor/usabilitydynamics'
+          ),
+          'url' => array(
+            'root' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ),
+            'vendor' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'vendor',
+            'templates' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'templates',
+            'scripts' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'scripts',
+            'styles' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'styles',
+            'schema' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'static/schemas',
+            'data' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'static/data',
+            'modules' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'vendor/usabilitydynamics'
+          ),
         );
 
         $_computed = (array) apply_filters( 'wpp::computed', $_computed );
@@ -798,6 +802,204 @@ namespace UsabilityDynamics\WPP {
         }
 
         return $data;
+      }
+      
+      /**
+       * Returns default settings based on system ( schema/system.settings.json ) settings and on user choice ( default schema/default.settings.json )
+       *
+       * @param array settings. Schema
+       *
+       * @author peshkov@UD
+       */
+      private function _get_default_settings( $settings = false ) {
+
+        //** STEP 1. Get default Settings from schema */
+        $settings = $this->_localize( json_decode( file_get_contents( $this->_schemas_path . '/default.settings.json' ), true ) );
+
+        //** STEP 2. Create the data based on system settings */
+
+        $system = self::_localize( json_decode( file_get_contents( $this->_schemas_path . '/system.settings.json' ), true ) );
+
+        $_data = array(
+          'configuration' => $system[ 'configuration' ],
+          'property_stats' => array(),
+          'attribute_classification' => array(),
+          'property_stats_descriptions' => array(),
+
+          'admin_attr_fields' => array(),
+          'searchable_attr_fields' => array(),
+          'sortable_attributes' => array(),
+          'searchable_attributes' => array(),
+          'column_attributes' => array(),
+          'predefined_values' => array(),
+          'predefined_search_values' => array(),
+
+          'property_types' => array(),
+          'searchable_property_types' => array(),
+          'location_matters' => array(),
+
+          'property_groups' => array(),
+          'property_stats_groups' => array(),
+        );
+
+        //** Set default groups */
+        foreach ( (array) $system[ '_predefined_groups' ] as $k => $v ) {
+          $_data[ 'property_groups' ][ $v[ 'slug' ] ] = array(
+            'name' => $v[ 'label' ]
+          );
+        }
+
+        //** Begin to set default property attributes here */
+        $predefined_attributes = (array) $system[ '_predefined_attributes' ];
+
+        //** Add WP taxonomy 'category' to the predefined list */
+        $taxonomies = array_merge( (array) $system[ 'taxonomies' ], array( 'category' => Utility::object_to_array( get_taxonomy( 'category' ) ) ) );
+
+        //** Add other taxonomies to the predefined list */
+        foreach ( $taxonomies as $taxonomy => $taxonomy_data ) {
+          $predefined_attributes[ $taxonomy ] = array(
+            'label' => $taxonomy_data[ 'label' ],
+            'slug' => $taxonomy,
+            'classification' => 'taxonomy',
+            'description' => __( 'The current attribute is just a link to the existing taxonomy.', 'wpp' ),
+            'meta' => true,
+          );
+        }
+
+        foreach ( $predefined_attributes as $k => $v ) {
+          if ( isset( $v[ 'meta' ] ) && $v[ 'meta' ] ) {
+            $_data[ 'property_stats' ][ $v[ 'slug' ] ] = $v[ 'label' ];
+            $_data[ 'attribute_classification' ][ $v[ 'slug' ] ] = $v[ 'classification' ];
+            $_data[ 'property_stats_descriptions' ][ $v[ 'slug' ] ] = $v[ 'description' ];
+
+            if ( !empty( $_data[ 'property_groups' ] ) ) {
+              $_data[ 'property_stats_groups' ][ $v[ 'slug' ] ] = array_shift( array_keys( $_data[ 'property_groups' ] ) );
+            }
+
+            $clsf = !empty( $system[ '_attribute_classifications' ][ $v[ 'classification' ] ] ) ? $system[ '_attribute_classifications' ][ $v[ 'classification' ] ] : $system[ '_attribute_classifications' ][ 'string' ];
+
+            $_data[ 'attribute_classification' ][ $v[ 'slug' ] ] = $clsf[ 'slug' ];
+
+            if ( isset( $clsf[ 'settings' ][ 'editable' ] ) && $clsf[ 'settings' ][ 'editable' ] && !empty( $clsf[ 'admin' ] ) ) {
+              $_data[ 'admin_attr_fields' ][ $v[ 'slug' ] ] = array_shift( array_keys( $clsf[ 'admin' ] ) );
+            }
+
+            if ( isset( $clsf[ 'settings' ][ 'searchable' ] ) && $clsf[ 'settings' ][ 'searchable' ] && !empty( $clsf[ 'search' ] ) ) {
+              $_data[ 'searchable_attr_fields' ][ $v[ 'slug' ] ] = array_shift( array_keys( $clsf[ 'search' ] ) );
+            }
+          }
+        }
+
+        //** STEP 3. Merge with 'custom default' settings which can be got from specific json schema */
+
+        //** Set Configuration */
+        if ( isset( $settings[ 'configuration' ] ) ) {
+          $_data[ 'configuration' ] = \UsabilityDynamics\Utility::extend( $_data[ 'configuration' ], (array) $settings[ 'configuration' ] );
+        }
+
+        //** Set Property types */
+        if ( isset( $settings[ 'types' ] ) ) {
+
+          $default_type = array(
+            'slug' => '',
+            'label' => '',
+            'description' => '',
+            'searchable' => false,
+            'location_matters' => false,
+          );
+
+          foreach ( (array) $settings[ 'types' ] as $k => $v ) {
+            $v = \UsabilityDynamics\Utility::extend( $default_type, $v );
+
+            $_data[ 'property_types' ][ $v[ 'slug' ] ] = $v[ 'label' ];
+
+            if ( $v[ 'searchable' ] ) {
+              $_data[ 'searchable_property_types' ][ ] = $v[ 'slug' ];
+            }
+
+            if ( $v[ 'location_matters' ] ) {
+              $_data[ 'location_matters' ][ ] = $v[ 'slug' ];
+            }
+          }
+        }
+
+        //** Set Groups */
+        if ( isset( $settings[ 'groups' ] ) ) {
+          $default_group = array(
+            'slug' => '',
+            'label' => '',
+          );
+
+          foreach ( $settings[ 'groups' ] as $k => $v ) {
+            $v = \UsabilityDynamics\Utility::extend( $default_group, ( isset( $_data[ '_predefined_groups' ][ $v[ 'slug' ] ] ) ? $_data[ '_predefined_groups' ][ $v[ 'slug' ] ] : array() ), $v );
+            $_data[ 'property_groups' ][ $v[ 'slug' ] ] = array(
+              'name' => $v[ 'label' ],
+            );
+          }
+        }
+
+        //** Set attributes */
+        if ( isset( $settings[ 'attributes' ] ) ) {
+
+          $default_attribute = array(
+            'slug' => '',
+            'label' => '',
+            'description' => '',
+            'classification' => 'string',
+            'searchable' => false,
+            'sortable' => false,
+            'in_overview' => false,
+            'search_input_type' => 'input',
+            'admin_input_type' => 'input',
+            'group' => !empty( $_data[ 'property_groups' ] ) ? array_shift( array_keys( (array) $_data[ 'property_groups' ] ) ) : false,
+          );
+
+          foreach ( (array) $settings[ 'attributes' ] as $k => $v ) {
+            $v = \UsabilityDynamics\Utility::extend( $default_attribute, ( isset( $predefined_attributes[ $v[ 'slug' ] ] ) ? $predefined_attributes[ $v[ 'slug' ] ] : array() ), $v );
+
+            if ( !empty( $v[ 'slug' ] ) && !empty( $v[ 'label' ] ) ) {
+
+              $_data[ 'property_stats' ][ $v[ 'slug' ] ] = $v[ 'label' ];
+              $_data[ 'attribute_classification' ][ $v[ 'slug' ] ] = $v[ 'classification' ];
+              $_data[ 'property_stats_descriptions' ][ $v[ 'slug' ] ] = $v[ 'description' ];
+
+              if ( !empty( $v[ 'group' ] ) ) {
+                $v[ 'group' ] = key_exists( $v[ 'group' ], $_data[ 'property_groups' ] ) ? $v[ 'group' ] : array_shift( array_keys( $_data[ 'property_groups' ] ) );
+                $_data[ 'property_stats_groups' ][ $v[ 'slug' ] ] = $v[ 'group' ];
+              }
+
+              if ( $v[ 'searchable' ] && !in_array( $v[ 'slug' ], $_data[ 'searchable_attributes' ] ) ) {
+                $_data[ 'searchable_attributes' ][ ] = $v[ 'slug' ];
+              }
+
+              if ( $v[ 'sortable' ] && !in_array( $v[ 'slug' ], $_data[ 'sortable_attributes' ] ) ) {
+                $_data[ 'sortable_attributes' ][ ] = $v[ 'slug' ];
+              }
+
+              if ( $v[ 'in_overview' ] && !in_array( $v[ 'slug' ], $_data[ 'column_attributes' ] ) ) {
+                $_data[ 'column_attributes' ][ ] = $v[ 'slug' ];
+              }
+
+              $clsf = !empty( $system[ '_attribute_classifications' ][ $v[ 'classification' ] ] ) ? $system[ '_attribute_classifications' ][ $v[ 'classification' ] ] : $system[ '_attribute_classifications' ][ 'string' ];
+
+              $_data[ 'attribute_classification' ][ $v[ 'slug' ] ] = $clsf[ 'slug' ];
+
+              if ( isset( $clsf[ 'settings' ][ 'editable' ] ) && $clsf[ 'settings' ][ 'editable' ] && !empty( $clsf[ 'admin' ] ) ) {
+                $v[ 'admin_input_type' ] = !empty( $v[ 'admin_input_type' ] ) && key_exists( $v[ 'admin_input_type' ], $clsf[ 'admin' ] ) ? $v[ 'admin_input_type' ] : array_shift( array_keys( $clsf[ 'admin' ] ) );
+                $_data[ 'admin_attr_fields' ][ $v[ 'slug' ] ] = $v[ 'admin_input_type' ];
+              }
+
+              if ( isset( $clsf[ 'settings' ][ 'searchable' ] ) && $clsf[ 'settings' ][ 'searchable' ] && !empty( $clsf[ 'search' ] ) ) {
+                $v[ 'search_input_type' ] = !empty( $v[ 'search_input_type' ] ) && key_exists( $v[ 'search_input_type' ], $clsf[ 'search' ] ) ? $v[ 'search_input_type' ] : array_shift( array_keys( $clsf[ 'search' ] ) );
+                $_data[ 'searchable_attr_fields' ][ $v[ 'slug' ] ] = $v[ 'search_input_type' ];
+              }
+
+            }
+          }
+        }
+
+        return $_data;
+
       }
       
       /**
