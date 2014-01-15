@@ -46,6 +46,11 @@ namespace UsabilityDynamics\WPP {
         
         // STEP 3. Update ( Upgrade ) Settings data with dynamic and computed values.
         
+        if ( defined( 'WPP_DEBUG' ) && WPP_DEBUG ) {
+          $_instance->set( 'configuration.developer_mode', 'true' );
+          $_instance->set( 'configuration.build_mode', true );
+        }
+        
         // Compute Settings.
         $_instance->set( '_computed', array(
           'path' => array(
@@ -104,10 +109,10 @@ namespace UsabilityDynamics\WPP {
         // System Settings
         $system_settings = array();
         $trns = !$args[ 'recompute' ] ? get_transient( 'wpp::system_settings' ) : false;
-        if ( !empty( $trns ) && $trns != '[]' ) {
+        if ( !empty( $trns ) && !in_array( $trns, array( '[]', 'null' ) ) ) {
           $system_settings = json_decode( $trns, true );
         } else {
-          $system_settings = $this->_localize( json_decode( $this->get( '_computed.path.schema' ), '/system.settings.json', true ) );
+          $system_settings = $this->_localize( json_decode( file_get_contents( $this->get( '_computed.path.schema' ) . '/system.settings.json' ), true ) );
           set_transient( 'wpp::system_settings', json_encode( $system_settings ), ( 60 * 60 * 24 ) );
         }
         
@@ -146,9 +151,10 @@ namespace UsabilityDynamics\WPP {
         $_data[ 'search_conversions' ] = apply_filters( 'wpp_search_conversions', (array) ( !empty( $_data[ 'search_conversions' ] ) ? $_data[ 'search_conversions' ] : array() ) );
         $_data[ 'property_inheritance' ] = apply_filters( 'wpp_property_inheritance', (array) ( !empty( $_data[ 'property_inheritance' ] ) ? $_data[ 'property_inheritance' ] : array() ) );
         $_data[ '_attribute_classifications' ] = apply_filters( 'wpp_attribute_classifications', (array) ( !empty( $_data[ '_attribute_classifications' ] ) ? $_data[ '_attribute_classifications' ] : array() ) );
-
+        
         // Extend computed settings into WPP
-        $_data = \UsabilityDynamics\Utility::extend( $this->_get_computed( array( 'recompute' => $args[ 'recompute' ] ) ), $_data );
+        $_computed = $this->_get_computed( array( 'recompute' => $args[ 'recompute' ] ) );
+        $_data[ '_computed' ] = \UsabilityDynamics\Utility::extend( $_computed, $_data[ '_computed' ] );
 
         if ( $args[ 'stripslashes' ] ) {
           $_data = stripslashes_deep( $_data );
@@ -160,10 +166,6 @@ namespace UsabilityDynamics\WPP {
 
         if ( $args[ 'strip_protected_keys' ] ) {
           $_data = \UsabilityDynamics\Utility::strip_protected_keys( $_data );
-        }
-
-        if ( defined( 'WPP_DEBUG' ) && WPP_DEBUG ) {
-          $_data[ 'configuration' ][ 'developer_mode' ] = 'true';
         }
 
         //** Get rid of disabled attributes */
@@ -421,7 +423,7 @@ namespace UsabilityDynamics\WPP {
             $return[ 'groups' ] = array( $k => array_merge( $default_group, $predefined_groups[ $k ] ) ) + $return[ 'groups' ];
           }
         }
-
+        
         return \UsabilityDynamics\Utility::array_filter_deep( (array) $return );
 
       }
