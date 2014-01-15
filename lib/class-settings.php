@@ -13,38 +13,39 @@ namespace UsabilityDynamics\WPP {
     class Settings extends \UsabilityDynamics\Settings {
     
       /**
+       * Default stored data.
+       * It must be used for \UsabilityDynamics\WPP\Settings::commit
+       */
+      private $_db_data;
+    
+      /**
        * Create Settings Instance
        *
        * @author potanin@UD
        * @since 2.0.0
        */
-      static function define( $args = array() ) {
+      static function define( ) {
         global $wp_properties;
 
-        // Instantiate Settings.
-        $_instance = new Settings( (array) $args );
-        
-        // Default settings.
-        $_instance->set( array(
-          'property_stats' => array(),
-          'attribute_classification' => array(),
-          'property_stats_descriptions' => array(),
-          'admin_attr_fields' => array(),
-          'searchable_attr_fields' => array(),
-          'sortable_attributes' => array(),
-          'searchable_attributes' => array(),
-          'predefined_values' => array(),
-          'predefined_search_values' => array(),
-          'property_types' => array(),
-          'property_groups' => array(),
-          'property_stats_groups' => array(),
-          'searchable_property_types' => array(),
-          'hidden_attributes' => array(),
-          'property_meta' => array(), // Depreciated element. It has not been used since 2.0 version
-          'property_inheritance' => array(),
-          'image_sizes' => array(),
+        // STEP 1. Instantiate Settings object
+        $_instance = new Settings( array(
+          "store" => "options",
+          "key" => "wpp_settings"
         ) );
-
+        
+        // STEP 2. Prepare default data which is used for storing in DB.
+        
+        // Set Build Mode value
+        $_data = $_instance->get();
+        $build_mode = isset( $_data[ 'configuration' ][ 'build_mode' ] ) ? $_data[ 'configuration' ][ 'build_mode' ] : false;
+        $build_mode = ( $build_mode == 'true' ) ? true : false;
+        $_instance->set( 'configuration.build_mode', $build_mode );
+        
+        // Default stored data.
+        $_instance->_db_data = $_instance->get();
+        
+        // STEP 3. Update ( Upgrade ) Settings data with dynamic and computed values.
+        
         // Compute Settings.
         $_instance->set( '_computed', array(
           'path' => array(
@@ -69,17 +70,15 @@ namespace UsabilityDynamics\WPP {
           )
         ));
         
-        $_instance->set( '_data_structure', $_instance->get_data_structure() );
-        
         // Set Schema now that paths are computed.
         $_instance->set_schema( $_instance->get( '_computed.path.schema' ), '/system.settings.schema.json' );
-
+        
+        $_instance->set( $_instance->get_sync_data() );
+        
         // @note Hopefully temporary but this exposes settings to the legacy $wp_properties global variable.
         $wp_properties = $_instance->get();
         
         //echo "<pre>"; print_r( $wp_properties ); echo "</pre>";die();
-
-        // self::settings_action();
 
         // Return Instance.
         return $_instance;
@@ -87,15 +86,132 @@ namespace UsabilityDynamics\WPP {
       }
       
       /**
-       * Just return data.
+       * Update ( Upgrade ) Settings data with dynamic and computed values
        *
-       * @param      $data
-       * @param bool $format
-       *
-       * @return array|mixed|string|void
+       * @since 2.0
        */
-      public function _output( $data, $format = false ) {
-        return $data;
+      public function get_sync_data( $args = array() ) {
+      
+        $_data = $this->get();
+      
+        $args = wp_parse_args( $args, array(
+          'strip_protected_keys' => false,
+          'stripslashes' => false,
+          'sort' => false,
+          'recompute' => ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ? false : $this->get( 'configuration.build_mode' ),
+        ) );
+        
+        // System Settings
+        $system_settings = array();
+        $trns = !$args[ 'recompute' ] ? get_transient( 'wpp::system_settings' ) : false;
+        if ( !empty( $trns ) && $trns != '[]' ) {
+          $system_settings = json_decode( $trns, true );
+        } else {
+          $system_settings = $this->_localize( json_decode( $this->get( '_computed.path.schema' ), '/system.settings.json', true ) );
+          set_transient( 'wpp::system_settings', json_encode( $system_settings ), ( 60 * 60 * 24 ) );
+        }
+        
+        // Default settings.
+        $_data = \UsabilityDynamics\Utility::extend( array(
+          'property_stats' => array(),
+          'attribute_classification' => array(),
+          'property_stats_descriptions' => array(),
+          'admin_attr_fields' => array(),
+          'searchable_attr_fields' => array(),
+          'sortable_attributes' => array(),
+          'searchable_attributes' => array(),
+          'predefined_values' => array(),
+          'predefined_search_values' => array(),
+          'property_types' => array(),
+          'property_groups' => array(),
+          'property_stats_groups' => array(),
+          'searchable_property_types' => array(),
+          'hidden_attributes' => array(),
+          'property_meta' => array(), // Depreciated element. It has not been used since 2.0 version
+          'property_inheritance' => array(),
+          'image_sizes' => array(),
+        ), $system_settings, $_data );
+        
+        // Filters are applied
+        $_data[ 'configuration' ] = apply_filters( 'wpp_configuration', (array) ( !empty( $_data[ 'configuration' ] ) ? $_data[ 'configuration' ] : array() ) );
+        $_data[ 'taxonomies' ] = apply_filters( 'wpp_taxonomies', ( !empty( $_data[ 'taxonomies' ] ) ? (array) $_data[ 'taxonomies' ] : array() ) );
+        $_data[ 'property_stats_descriptions' ] = apply_filters( 'wpp_label_descriptions', (array) ( !empty( $_data[ 'property_stats_descriptions' ] ) ? $_data[ 'property_stats_descriptions' ] : array() ) );
+        $_data[ 'location_matters' ] = apply_filters( 'wpp_location_matters', (array) ( !empty( $_data[ 'location_matters' ] ) ? $_data[ 'location_matters' ] : array() ) );
+        $_data[ 'hidden_attributes' ] = apply_filters( 'wpp_hidden_attributes', (array) ( !empty( $_data[ 'hidden_attributes' ] ) ? $_data[ 'hidden_attributes' ] : array() ) );
+        $_data[ 'image_sizes' ] = apply_filters( 'wpp_image_sizes', (array) ( !empty( $_data[ 'image_sizes' ] ) ? $_data[ 'image_sizes' ] : array() ) );
+        $_data[ 'searchable_attributes' ] = apply_filters( 'wpp_searchable_attributes', (array) ( !empty( $_data[ 'searchable_attributes' ] ) ? $_data[ 'searchable_attributes' ] : array() ) );
+        $_data[ 'searchable_property_types' ] = apply_filters( 'wpp_searchable_property_types', (array) ( !empty( $_data[ 'searchable_property_types' ] ) ? $_data[ 'searchable_property_types' ] : array() ) );
+        $_data[ 'property_stats' ] = apply_filters( 'wpp_property_stats', (array) ( !empty( $_data[ 'property_stats' ] ) ? $_data[ 'property_stats' ] : array() ) );
+        $_data[ 'property_types' ] = apply_filters( 'wpp_property_types', (array) ( !empty( $_data[ 'property_types' ] ) ? $_data[ 'property_types' ] : array() ) );
+        $_data[ 'search_conversions' ] = apply_filters( 'wpp_search_conversions', (array) ( !empty( $_data[ 'search_conversions' ] ) ? $_data[ 'search_conversions' ] : array() ) );
+        $_data[ 'property_inheritance' ] = apply_filters( 'wpp_property_inheritance', (array) ( !empty( $_data[ 'property_inheritance' ] ) ? $_data[ 'property_inheritance' ] : array() ) );
+        $_data[ '_attribute_classifications' ] = apply_filters( 'wpp_attribute_classifications', (array) ( !empty( $_data[ '_attribute_classifications' ] ) ? $_data[ '_attribute_classifications' ] : array() ) );
+
+        // Extend computed settings into WPP
+        $_data = \UsabilityDynamics\Utility::extend( $this->_get_computed( array( 'recompute' => $args[ 'recompute' ] ) ), $_data );
+
+        if ( $args[ 'stripslashes' ] ) {
+          $_data = stripslashes_deep( $_data );
+        }
+
+        if ( $args[ 'sort' ] ) {
+          ksort( $_data );
+        }
+
+        if ( $args[ 'strip_protected_keys' ] ) {
+          $_data = \UsabilityDynamics\Utility::strip_protected_keys( $_data );
+        }
+
+        if ( defined( 'WPP_DEBUG' ) && WPP_DEBUG ) {
+          $_data[ 'configuration' ][ 'developer_mode' ] = 'true';
+        }
+
+        //** Get rid of disabled attributes */
+        if ( is_array( $_data[ 'disabled_attributes' ] ) ) {
+          foreach ( $_data[ 'disabled_attributes' ] as $attribute ) {
+            if ( array_key_exists( $attribute, $_data[ 'property_stats' ] ) ) {
+              if ( isset( $_data[ 'property_stats' ][ $attribute ] ) ) {
+                unset( $_data[ 'property_stats' ][ $attribute ] );
+              }
+              if ( isset( $_data[ 'attribute_classification' ][ $attribute ] ) ) {
+                unset( $_data[ 'property_stats' ][ $attribute ] );
+              }
+              if ( isset( $_data[ 'property_stats_groups' ][ $attribute ] ) ) {
+                unset( $_data[ 'property_stats_groups' ][ $attribute ] );
+              }
+              if ( isset( $_data[ 'property_stats_descriptions' ][ $attribute ] ) ) {
+                unset( $_data[ 'property_stats_descriptions' ][ $attribute ] );
+              }
+              if ( isset( $_data[ 'searchable_attr_fields' ][ $attribute ] ) ) {
+                unset( $_data[ 'searchable_attr_fields' ][ $attribute ] );
+              }
+              if ( isset( $_data[ 'admin_attr_fields' ][ $attribute ] ) ) {
+                unset( $_data[ 'admin_attr_fields' ][ $attribute ] );
+              }
+              if ( isset( $_data[ 'predefined_values' ][ $attribute ] ) ) {
+                unset( $_data[ 'predefined_values' ][ $attribute ] );
+              }
+              if ( isset( $_data[ 'predefined_search_values' ][ $attribute ] ) ) {
+                unset( $_data[ 'predefined_search_values' ][ $attribute ] );
+              }
+            }
+          }
+        }
+
+        //** Set the list of frontend attributes */
+        $_data[ 'frontend_property_stats' ] = $_data[ 'property_stats' ];
+        //* System ( admin only ) attributes should not be showed. So we remove them from settings */
+        foreach ( $_data[ 'frontend_property_stats' ] as $i => $stat ) {
+          if ( isset( $_data[ 'attribute_classification' ][ $i ] ) ) {
+            $classification = $_data[ '_attribute_classifications' ][ $_data[ 'attribute_classification' ][ $i ] ];
+            if ( isset( $classification[ 'settings' ][ 'admin_only' ] ) && $classification[ 'settings' ][ 'admin_only' ] ) {
+              unset( $_data[ 'frontend_property_stats' ][ $i ] );
+            }
+          }
+        }
+
+        return $_data;
+        
       }
       
       /**
@@ -105,7 +221,7 @@ namespace UsabilityDynamics\WPP {
        * @author potanin@UD
        * @author peshkov@UD
        */
-      protected function get_data_structure( ) {
+      public function get_data_structure() {
         global $wpdb;
         
         $wp_properties = $this->get();
@@ -496,6 +612,192 @@ namespace UsabilityDynamics\WPP {
 
       }
 
+      /**
+       * Returns the list of attributes belonging to geo classification which are searchable
+       *
+       * @return array
+       * @author peshkov@UD
+       */
+      public function get_searchable_geo_parts() {
+        $result = array();
+        $_data = $this->get_data_structure();
+        foreach ( (array) $_data[ 'attributes' ] as $k => $v ) {
+          if ( $v[ 'classification' ] == 'geo' && isset( $v[ 'searchable' ] ) && $v[ 'searchable' ] ) {
+            $result[ $k ] = $v[ 'label' ];
+          }
+        }
+        return $result;
+      }
+      
+      /**
+       * Commit Settings to Storage.
+       *
+       * @TODO: implement saving data to storage.
+       */
+      public function commit() {
+        // Convert to JSON String.
+        //$_value = json_encode( $this->_data, JSON_FORCE_OBJECT );
+        //$_value = \update_option( $this->_key, $_value );
+        return $this;
+      }
+      
+      /**
+       * Just return data.
+       *
+       * @param      $data
+       * @param bool $format
+       *
+       * @return array|mixed|string|void
+       */
+      public function _output( $data, $format = false ) {
+        return $data;
+      }
+      
+      /**
+       * Generates Computed Settings, saves to transient, and returns.
+       * By default recomputing is disabled on AJAX requests.
+       *
+       * @author potanin@UD
+       * @author peshkov@UD
+       */
+      private function _get_computed( $args = array() ) {
+
+        $args = wp_parse_args( $args, array(
+          'recompute' => ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ? false : $this->get( 'configuration.build_mode' ),
+        ) );
+
+        $trns = !$args[ 'recompute' ] ? get_transient( 'wpp::computed' ) : false;
+        if ( !empty( $trns ) && $trns != '[]' ) {
+          return json_decode( $trns, true );
+        }
+
+        /* Setup structure for system generated / API provided data */
+        $_computed = array(
+          'created' => time(),
+          'data_structure' => $this->get_data_structure(),
+          'primary_keys' => array(
+            'post_title' => sprintf( __( '%1$s Title', 'wpp' ), ucfirst( Utility::property_label( 'singular' ) ) ),
+            'post_type' => __( 'Post Type' ),
+            "post_content" => sprintf( __( '%1$s Content', 'wpp' ), ucfirst( Utility::property_label( 'singular' ) ) ),
+            'post_excerpt' => sprintf( __( '%1$s Excerpt', 'wpp' ), ucfirst( Utility::property_label( 'singular' ) ) ),
+            'post_status' => sprintf( __( '%1$s Status', 'wpp' ), ucfirst( Utility::property_label( 'singular' ) ) ),
+            'menu_order' => sprintf( __( '%1$s Order', 'wpp' ), ucfirst( Utility::property_label( 'singular' ) ) ),
+            'post_date' => sprintf( __( '%1$s Date', 'wpp' ), ucfirst( Utility::property_label( "singular" ) ) ),
+            'post_author' => sprintf( __( '%1$s Author', 'wpp' ), ucfirst( Utility::property_label( "singular" ) ) ),
+            'post_date_gmt' => '',
+            'post_parent' => '',
+            'ping_status' => '',
+            'comment_status' => '',
+            'post_password' => ''
+          ),
+          'searchable_geo_parts' => $this->get_searchable_geo_parts(),
+        );
+
+        $_computed = (array) apply_filters( 'wpp::computed', $_computed );
+
+        set_transient( 'wpp::computed', json_encode( $_computed ), ( 60 * 60 * 24 ) );
+
+        return $_computed;
+
+      }
+      
+      /**
+       * Localization functionality.
+       * Replaces array's l10n data.
+       * Helpful for localization of data which is stored in JSON files ( see /schemas )
+       *
+       * @param type $data
+       *
+       * @return type
+       * @since 2.0
+       * @author peshkov@UD
+       */
+      private function _localize( $data ) {
+
+        if ( !is_array( $data ) ) return $data;
+
+        //** The Localization's list. */
+        $l10n = apply_filters( 'wpp::config::l10n', array(
+          //** System (wp_posts) data */
+          'post_title' => sprintf( __( '%1$s Title', 'wpp' ), ucfirst( Utility::property_label( 'singular' ) ) ),
+          'post_type' => __( 'Post Type' ),
+          'post_content' => sprintf( __( '%1$s Content', 'wpp' ), ucfirst( Utility::property_label( 'singular' ) ) ),
+          'post_excerpt' => sprintf( __( '%1$s Excerpt', 'wpp' ), ucfirst( Utility::property_label( 'singular' ) ) ),
+          'post_status' => sprintf( __( '%1$s Status', 'wpp' ), ucfirst( Utility::property_label( 'singular' ) ) ),
+          'menu_order' => sprintf( __( '%1$s Order', 'wpp' ), ucfirst( Utility::property_label( 'singular' ) ) ),
+          'post_date' => sprintf( __( '%1$s Date', 'wpp' ), ucfirst( Utility::property_label( "singular" ) ) ),
+          'post_author' => sprintf( __( '%1$s Author', 'wpp' ), ucfirst( Utility::property_label( "singular" ) ) ),
+          'post_date_gmt' => sprintf( __( '%1$s Date GMT', 'wpp' ), ucfirst( Utility::property_label( "singular" ) ) ),
+          'post_parent' => sprintf( __( '%1$s Parent', 'wpp' ), ucfirst( Utility::property_label( "singular" ) ) ),
+          'ping_status' => __( 'Ping Status', 'wpp' ),
+          'comment_status' => __( 'Comment\'s Status', 'wpp' ),
+          'post_password' => __( 'Password', 'wpp' ),
+
+          //** Attributes Groups */
+          'main' => __( 'General Information', 'wpp' ),
+
+          //** Attributes and their descriptions */
+          'price' => __( 'Price', 'wpp' ),
+          'price_desc' => __( 'Numbers only', 'wpp' ),
+          'bedrooms' => __( 'Bedrooms', 'wpp' ),
+          'bedrooms_desc' => __( 'Numbers only', 'wpp' ),
+          'bathrooms' => __( 'Bathrooms', 'wpp' ),
+          'bathrooms_desc' => __( 'Numbers only', 'wpp' ),
+          'phone_number' => __( 'Phone Number', 'wpp' ),
+          'phone_number_desc' => __( '', 'wpp' ),
+          'address' => __( 'Address', 'wpp' ),
+          'address_desc' => __( 'Used by google validator', 'wpp' ),
+          'area' => __( 'Area', 'wpp' ),
+          'area_desc' => __( 'Numbers only', 'wpp' ),
+          'deposit' => __( 'Deposit', 'wpp' ),
+          'deposit_desc' => __( 'Numbers only', 'wpp' ),
+          'geo_location' => __( 'Geo Location', 'wpp' ),
+          'taxonomy' => __( 'Taxonomy', 'wpp' ),
+
+          //** Property Types */
+          'single_family_home' => __( 'Single Family Home', 'wpp' ),
+          'building' => __( 'Building', 'wpp' ),
+          'floorplan' => __( 'Floorplan', 'wpp' ),
+          'farm' => __( 'Farm', 'wpp' ),
+
+          //** Input types */
+          'field_input' => __( 'Free Text', 'wpp' ),
+          'field_dropdown' => __( 'Dropdown Selection', 'wpp' ),
+          'field_textarea' => __( 'Textarea', 'wpp' ),
+          'field_checkbox' => __( 'Checkbox', 'wpp' ),
+          'field_multi_checkbox' => __( 'Multi-Checkbox', 'wpp' ),
+          'field_range_input' => __( 'Text Input Range', 'wpp' ),
+          'field_range_dropdown' => __( 'Range Dropdown', 'wpp' ),
+          'field_date' => __( 'Date Picker', 'wpp' ),
+          'range_date' => __( 'Range Date Picker', 'wpp' ),
+
+          //** Attributes Classifications */
+          'short_text' => __( 'Short Text', 'wpp' ),
+          'used_for_short_desc' => __( 'Best used for short phrases and descriptions', 'wpp' ),
+
+        ));
+
+        //** Replace l10n entries */
+        foreach ( $data as $k => $v ) {
+          if ( is_array( $v ) ) {
+            $data[ $k ] = self::_localize( $v );
+          } elseif ( is_string( $v ) ) {
+            if ( strpos( $v, 'l10n' ) !== false ) {
+              preg_match_all( '/l10n\.([^\s]*)/', $v, $matches );
+              if ( !empty( $matches[ 1 ] ) ) {
+                foreach ( $matches[ 1 ] as $i => $m ) {
+                  if ( key_exists( $m, $l10n ) ) {
+                    $data[ $k ] = str_replace( $matches[ 0 ][ $i ], $l10n[ $m ], $data[ $k ] );
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        return $data;
+      }
+      
       /**
        * Loads settings into global variable
        * Also restores data from backup file.
