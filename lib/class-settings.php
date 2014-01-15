@@ -68,7 +68,7 @@ namespace UsabilityDynamics\WPP {
         // @note Hopefully temporary but this exposes settings to the legacy $wp_properties global variable.
         $wp_properties = $_instance->get();
         
-        echo "<pre>"; print_r( $wp_properties ); echo "</pre>";die();
+        //echo "<pre>"; print_r( $wp_properties ); echo "</pre>";die();
 
         // Return Instance.
         return $_instance;
