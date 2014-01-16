@@ -63,12 +63,12 @@ namespace UsabilityDynamics\WPP {
         // Set Schema now that paths are computed.
         $_instance->set_schema( $_instance->_schemas_path, '/system.settings.schema.json' );
         
-        $_instance->set( $_instance->get_sync_data() );
+        $_instance->_sync_data();
         
         // @note Hopefully temporary but this exposes settings to the legacy $wp_properties global variable.
         $wp_properties = $_instance->get();
         
-        //echo "<pre>"; print_r( $wp_properties ); echo "</pre>";die();
+        echo "<pre>"; print_r( $wp_properties ); echo "</pre>";die();
 
         // Return Instance.
         return $_instance;
@@ -80,7 +80,7 @@ namespace UsabilityDynamics\WPP {
        *
        * @since 2.0
        */
-      public function get_sync_data( $args = array() ) {
+      private function _sync_data( $args = array() ) {
       
         $_data = $this->get();
       
@@ -137,9 +137,6 @@ namespace UsabilityDynamics\WPP {
         $_data[ 'property_inheritance' ] = apply_filters( 'wpp_property_inheritance', (array) ( !empty( $_data[ 'property_inheritance' ] ) ? $_data[ 'property_inheritance' ] : array() ) );
         $_data[ '_attribute_classifications' ] = apply_filters( 'wpp_attribute_classifications', (array) ( !empty( $_data[ '_attribute_classifications' ] ) ? $_data[ '_attribute_classifications' ] : array() ) );
         
-        // Compute Settings
-        $_data[ '_computed' ] = $this->_get_computed( array( 'recompute' => $args[ 'recompute' ] ) );
-
         if ( $args[ 'stripslashes' ] ) {
           $_data = stripslashes_deep( $_data );
         }
@@ -195,8 +192,14 @@ namespace UsabilityDynamics\WPP {
             }
           }
         }
+        
+        // Update data
+        $this->set( $_data );
+        
+        // Compute Settings
+        $this->set( '_computed', $this->_get_computed( array( 'recompute' => $args[ 'recompute' ] ) ) );
 
-        return $_data;
+        return $this->_data;
         
       }
       
@@ -210,19 +213,19 @@ namespace UsabilityDynamics\WPP {
       public function get_data_structure() {
         global $wpdb;
         
-        $wp_properties = $this->get();
+        $_data = $this->get();
 
         //** STEP 1. Init all neccessary variables before continue. */
 
         //** Default classification */
         $def_cl_slug = 'string';
-        $def_cl = !empty( $wp_properties[ '_attribute_classifications' ][ $def_cl_slug ] ) ? $wp_properties[ '_attribute_classifications' ][ $def_cl_slug ] : false;
+        $def_cl = !empty( $_data[ '_attribute_classifications' ][ $def_cl_slug ] ) ? $_data[ '_attribute_classifications' ][ $def_cl_slug ] : false;
         //** Classification Taxonomy */
         $def_cl_tax_slug = 'taxonomy';
-        $def_cl_tax = !empty( $wp_properties[ '_attribute_classifications' ][ $def_cl_tax_slug ] ) ? $wp_properties[ '_attribute_classifications' ][ $def_cl_tax_slug ] : false;
+        $def_cl_tax = !empty( $_data[ '_attribute_classifications' ][ $def_cl_tax_slug ] ) ? $_data[ '_attribute_classifications' ][ $def_cl_tax_slug ] : false;
         //** Default group */
         $def_group_slug = 'wpp_main';
-        $def_group = !empty( $wp_properties[ '_predefined_groups' ][ $def_group_slug ] ) ? $wp_properties[ '_predefined_groups' ][ $def_group_slug ] : false;
+        $def_group = !empty( $_data[ '_predefined_groups' ][ $def_group_slug ] ) ? $_data[ '_predefined_groups' ][ $def_group_slug ] : false;
 
         $default_attribute = array(
           'label' => '',
@@ -252,7 +255,7 @@ namespace UsabilityDynamics\WPP {
           'admin_predefined' => false,
           'path' => false,
         );
-
+        
         $default_group = array(
           'label' => '',
           'slug' => '',
@@ -275,18 +278,18 @@ namespace UsabilityDynamics\WPP {
 
         //** STEP 3. Prepare the list of predefined attributes ( Taxonomies also are related to this list ). These attributes cannot be created by user. */
 
-        $predefined_attributes = !empty( $wp_properties[ '_predefined_attributes' ] ) ? $wp_properties[ '_predefined_attributes' ] : array();
+        $predefined_attributes = !empty( $_data[ '_predefined_attributes' ] ) ? $_data[ '_predefined_attributes' ] : array();
 
         foreach ( $predefined_attributes as $k => $v ) {
           $predefined_attributes[ $k ][ 'type' ] = in_array( $k, $system_attributes ) ? 'post' : ( isset( $predefined_attributes[ $k ][ 'meta' ] ) && !$predefined_attributes[ $k ][ 'meta' ] ? 'post' : 'meta' );
-          if ( isset( $v[ 'classification' ] ) && !empty( $wp_properties[ '_attribute_classifications' ][ $v[ 'classification' ] ] ) ) {
-            $predefined_attributes[ $k ][ 'classification_label' ] = $wp_properties[ '_attribute_classifications' ][ $v[ 'classification' ] ][ 'label' ];
-            $predefined_attributes[ $k ][ 'classification_settings' ] = $wp_properties[ '_attribute_classifications' ][ $v[ 'classification' ] ][ 'settings' ];
+          if ( isset( $v[ 'classification' ] ) && !empty( $_data[ '_attribute_classifications' ][ $v[ 'classification' ] ] ) ) {
+            $predefined_attributes[ $k ][ 'classification_label' ] = $_data[ '_attribute_classifications' ][ $v[ 'classification' ] ][ 'label' ];
+            $predefined_attributes[ $k ][ 'classification_settings' ] = $_data[ '_attribute_classifications' ][ $v[ 'classification' ] ][ 'settings' ];
           }
           $predefined_attributes[ $k ] = array_merge( $default_attribute, $predefined_attributes[ $k ] );
         }
 
-        $taxonomies = !empty( $wp_properties[ 'taxonomies' ] ) ? (array) $wp_properties[ 'taxonomies' ] : array();
+        $taxonomies = !empty( $_data[ 'taxonomies' ] ) ? (array) $_data[ 'taxonomies' ] : array();
         //** Add WP taxonomy 'category' to the predefined list */
         $taxonomies[ 'category' ] = \UsabilityDynamics\Utility::object_to_array( get_taxonomy( 'category' ) );
 
@@ -339,11 +342,11 @@ namespace UsabilityDynamics\WPP {
             $return[ 'attributes' ][ $meta_key ][ 'type' ] = $predefined_attributes[ $meta_key ][ 'type' ];
           } else {
             /* Check if the slug exists in classifications, if so, override classification's settings */
-            $classification = !empty( $wp_properties[ 'attribute_classification' ][ $meta_key ] ) ? $wp_properties[ 'attribute_classification' ][ $meta_key ] : false;
-            if ( $classification && isset( $wp_properties[ '_attribute_classifications' ][ $classification ] ) ) {
+            $classification = !empty( $_data[ 'attribute_classification' ][ $meta_key ] ) ? $_data[ 'attribute_classification' ][ $meta_key ] : false;
+            if ( $classification && isset( $_data[ '_attribute_classifications' ][ $classification ] ) ) {
               $return[ 'attributes' ][ $meta_key ][ 'classification' ] = $classification;
-              $return[ 'attributes' ][ $meta_key ][ 'classification_label' ] = $wp_properties[ '_attribute_classifications' ][ $classification ][ 'label' ];
-              $return[ 'attributes' ][ $meta_key ][ 'classification_settings' ] = $wp_properties[ '_attribute_classifications' ][ $classification ][ 'settings' ];
+              $return[ 'attributes' ][ $meta_key ][ 'classification_label' ] = $_data[ '_attribute_classifications' ][ $classification ][ 'label' ];
+              $return[ 'attributes' ][ $meta_key ][ 'classification_settings' ] = $_data[ '_attribute_classifications' ][ $classification ][ 'settings' ];
             }
           }
         }
@@ -363,13 +366,13 @@ namespace UsabilityDynamics\WPP {
           if ( array_key_exists( $k, $predefined_attributes ) ) {
             $return[ 'attributes' ][ $k ][ 'reserved' ] = true;
           }
-          if ( !empty( $wp_properties[ '_attribute_classifications' ][ $v[ 'classification' ] ][ 'admin' ] ) ) {
-            foreach ( (array) $wp_properties[ '_attribute_classifications' ][ $v[ 'classification' ] ][ 'admin' ] as $slug => $label ) {
+          if ( !empty( $_data[ '_attribute_classifications' ][ $v[ 'classification' ] ][ 'admin' ] ) ) {
+            foreach ( (array) $_data[ '_attribute_classifications' ][ $v[ 'classification' ] ][ 'admin' ] as $slug => $label ) {
               $return[ 'attributes' ][ $k ][ 'admin_inputs' ][ ] = array( 'slug' => $slug, 'label' => $label );
             }
           }
-          if ( !empty( $wp_properties[ '_attribute_classifications' ][ $v[ 'classification' ] ][ 'search' ] ) ) {
-            foreach ( (array) $wp_properties[ '_attribute_classifications' ][ $v[ 'classification' ] ][ 'search' ] as $slug => $label ) {
+          if ( !empty( $_data[ '_attribute_classifications' ][ $v[ 'classification' ] ][ 'search' ] ) ) {
+            foreach ( (array) $_data[ '_attribute_classifications' ][ $v[ 'classification' ] ][ 'search' ] as $slug => $label ) {
               $return[ 'attributes' ][ $k ][ 'search_inputs' ][ ] = array( 'slug' => $slug, 'label' => $label );
             }
           }
@@ -377,24 +380,24 @@ namespace UsabilityDynamics\WPP {
 
         //** STEP 5. Set property types and groups and return data */
 
-        foreach ( (array) $wp_properties[ 'property_types' ] as $slug => $label ) {
+        foreach ( (array) $_data[ 'property_types' ] as $slug => $label ) {
           $return[ 'types' ][ $slug ] = array(
             'label' => $label,
             'slug' => $slug,
-            'meta' => $wp_properties[ 'property_type_meta' ][ $slug ],
+            'meta' => $_data[ 'property_type_meta' ][ $slug ],
             'settings' => array(
-              'geolocatable' => in_array( $slug, (array) $wp_properties[ 'location_matters' ] ) ? true : false,
-              'searchable' => in_array( $slug, (array) $wp_properties[ 'searchable_property_types' ] ) ? true : false,
-              'hierarchical' => in_array( $slug, (array) $wp_properties[ 'hierarchical_property_types' ] ) ? true : false,
+              'geolocatable' => in_array( $slug, (array) $_data[ 'location_matters' ] ) ? true : false,
+              'searchable' => in_array( $slug, (array) $_data[ 'searchable_property_types' ] ) ? true : false,
+              'hierarchical' => in_array( $slug, (array) $_data[ 'hierarchical_property_types' ] ) ? true : false,
             ),
-            'hidden_attributes' => (array) $wp_properties[ 'hidden_attributes' ][ $slug ],
-            'property_inheritance' => (array) $wp_properties[ 'property_inheritance' ][ $slug ],
+            'hidden_attributes' => (array) $_data[ 'hidden_attributes' ][ $slug ],
+            'property_inheritance' => (array) $_data[ 'property_inheritance' ][ $slug ],
           );
         }
 
-        $predefined_groups = !empty( $wp_properties[ '_predefined_groups' ] ) ? $wp_properties[ '_predefined_groups' ] : array();
-        if ( !empty( $wp_properties[ 'property_groups' ] ) ) {
-          foreach ( (array) $wp_properties[ 'property_groups' ] as $group_slug => $data ) {
+        $predefined_groups = !empty( $_data[ '_predefined_groups' ] ) ? $_data[ '_predefined_groups' ] : array();
+        if ( !empty( $_data[ 'property_groups' ] ) ) {
+          foreach ( (array) $_data[ 'property_groups' ] as $group_slug => $data ) {
             $default = array_key_exists( $group_slug, $predefined_groups ) ? array_merge( $default_group, $predefined_groups[ $group_slug ] ) : $default_group;
             $return[ 'groups' ][ $group_slug ] = \UsabilityDynamics\Utility::extend( $default, array_filter( array(
               'label' => $data[ 'name' ],
@@ -461,7 +464,7 @@ namespace UsabilityDynamics\WPP {
       public function get_attribute( $attribute = false ) {
         global $wpdb;
         
-        $wp_properties = $this->get();
+        $_data = $this->get();
 
         $return = array();
 
@@ -485,19 +488,19 @@ namespace UsabilityDynamics\WPP {
         $return[ 'storage_type' ] = in_array( $attribute, (array) $post_table_keys ) ? 'post_table' : 'meta_key';
         $return[ 'slug' ] = $attribute;
 
-        if ( isset( $wp_properties[ 'property_stats_descriptions' ][ $attribute ] ) ) {
-          $return[ 'description' ] = $wp_properties[ 'property_stats_descriptions' ][ $attribute ];
+        if ( isset( $_data[ 'property_stats_descriptions' ][ $attribute ] ) ) {
+          $return[ 'description' ] = $_data[ 'property_stats_descriptions' ][ $attribute ];
         }
 
-        if ( isset( $wp_properties[ 'property_stats_groups' ][ $attribute ] ) ) {
-          $return[ 'group_key' ] = $wp_properties[ 'property_stats_groups' ][ $attribute ];
-          $return[ 'group_label' ] = $wp_properties[ 'property_groups' ][ $wp_properties[ 'property_stats_groups' ][ $attribute ] ][ 'name' ];
+        if ( isset( $_data[ 'property_stats_groups' ][ $attribute ] ) ) {
+          $return[ 'group_key' ] = $_data[ 'property_stats_groups' ][ $attribute ];
+          $return[ 'group_label' ] = $_data[ 'property_groups' ][ $_data[ 'property_stats_groups' ][ $attribute ] ][ 'name' ];
         }
 
-        $return[ 'label' ] = $wp_properties[ 'property_stats' ][ $attribute ];
-        $return[ 'classification' ] = !empty( $wp_properties[ 'attribute_classification' ][ $attribute ] ) ? $wp_properties[ 'attribute_classification' ][ $attribute ] : 'string';
+        $return[ 'label' ] = $_data[ 'property_stats' ][ $attribute ];
+        $return[ 'classification' ] = !empty( $_data[ 'attribute_classification' ][ $attribute ] ) ? $_data[ 'attribute_classification' ][ $attribute ] : 'string';
 
-        $return[ 'is_stat' ] = ( !empty( $wp_properties[ '_attribute_classifications' ][ $attribute ] ) && $wp_properties[ '_attribute_classifications' ][ $attribute ] != 'detail' ) ? 'true' : 'false';
+        $return[ 'is_stat' ] = ( !empty( $_data[ '_attribute_classifications' ][ $attribute ] ) && $_data[ '_attribute_classifications' ][ $attribute ] != 'detail' ) ? 'true' : 'false';
 
         if ( $return[ 'is_stat' ] == 'detail' ) {
           $return[ 'input_type' ] = 'textarea';
@@ -505,22 +508,22 @@ namespace UsabilityDynamics\WPP {
 
         $ui_class[ ] = 'classification_' . $return[ 'classification' ];
 
-        if ( isset( $wp_properties[ 'searchable_attr_fields' ][ $attribute ] ) ) {
-          $return[ 'input_type' ] = $wp_properties[ 'searchable_attr_fields' ][ $attribute ];
+        if ( isset( $_data[ 'searchable_attr_fields' ][ $attribute ] ) ) {
+          $return[ 'input_type' ] = $_data[ 'searchable_attr_fields' ][ $attribute ];
           $ui_class[ ] = 'search_' . $return[ 'input_type' ];
         }
 
-        if ( is_admin() && isset( $wp_properties[ 'admin_attr_fields' ][ $attribute ] ) ) {
-          $return[ 'data_input_type' ] = $wp_properties[ 'admin_attr_fields' ][ $attribute ];
+        if ( is_admin() && isset( $_data[ 'admin_attr_fields' ][ $attribute ] ) ) {
+          $return[ 'data_input_type' ] = $_data[ 'admin_attr_fields' ][ $attribute ];
           $ui_class[ ] = 'admin_' . $return[ 'data_input_type' ];
         }
 
-        if ( $wp_properties[ 'configuration' ][ 'address_attribute' ] == $attribute ) {
+        if ( $_data[ 'configuration' ][ 'address_attribute' ] == $attribute ) {
           $return[ 'is_address_attribute' ] = 'true';
           $ui_class[ ] = 'address_attribute';
         }
 
-        foreach ( (array) $wp_properties[ 'property_inheritance' ] as $property_type => $type_data ) {
+        foreach ( (array) $_data[ 'property_inheritance' ] as $property_type => $type_data ) {
           if ( in_array( $attribute, (array) $type_data ) ) {
             $return[ 'inheritance' ][ ] = $property_type;
           }
@@ -528,32 +531,32 @@ namespace UsabilityDynamics\WPP {
 
         $ui_class[ ] = $return[ 'data_input_type' ];
 
-        if ( is_array( $wp_properties[ 'predefined_values' ] ) && ( $predefined_values = $wp_properties[ 'predefined_values' ][ $attribute ] ) ) {
+        if ( is_array( $_data[ 'predefined_values' ] ) && ( $predefined_values = $_data[ 'predefined_values' ][ $attribute ] ) ) {
           $return[ 'predefined_values' ] = $predefined_values;
           $return[ '_values' ] = (array) $return[ '_values' ] + explode( ',', $predefined_values );
         }
 
-        if ( is_array( $wp_properties[ 'predefined_search_values' ] ) && ( $predefined_values = $wp_properties[ 'predefined_search_values' ][ $attribute ] ) ) {
+        if ( is_array( $_data[ 'predefined_search_values' ] ) && ( $predefined_values = $_data[ 'predefined_search_values' ][ $attribute ] ) ) {
           $return[ 'predefined_search_values' ] = $predefined_values;
           $return[ '_values' ] = (array) $return[ '_values' ] + explode( ',', $predefined_values );
         }
 
-        if ( is_array( $wp_properties[ 'sortable_attributes' ] ) && in_array( $attribute, (array) $wp_properties[ 'sortable_attributes' ] ) ) {
+        if ( is_array( $_data[ 'sortable_attributes' ] ) && in_array( $attribute, (array) $_data[ 'sortable_attributes' ] ) ) {
           $return[ 'sortable' ] = true;
           $ui_class[ ] = 'sortable';
         }
 
-        if ( is_array( $wp_properties[ 'searchable_attributes' ] ) && in_array( $attribute, (array) $wp_properties[ 'searchable_attributes' ] ) ) {
+        if ( is_array( $_data[ 'searchable_attributes' ] ) && in_array( $attribute, (array) $_data[ 'searchable_attributes' ] ) ) {
           $return[ 'searchable' ] = true;
           $ui_class[ ] = 'searchable';
         }
 
-        if ( is_array( $wp_properties[ 'column_attributes' ] ) && in_array( $attribute, (array) $wp_properties[ 'column_attributes' ] ) ) {
+        if ( is_array( $_data[ 'column_attributes' ] ) && in_array( $attribute, (array) $_data[ 'column_attributes' ] ) ) {
           $return[ 'in_overview' ] = true;
           $ui_class[ ] = 'in_overview';
         }
 
-        if ( is_array( $wp_properties[ 'disabled_attributes' ] ) && in_array( $attribute, (array) $wp_properties[ 'disabled_attributes' ] ) ) {
+        if ( is_array( $_data[ 'disabled_attributes' ] ) && in_array( $attribute, (array) $_data[ 'disabled_attributes' ] ) ) {
           $return[ 'disabled' ] = true;
           $ui_class[ ] = 'disabled';
         }
@@ -573,7 +576,7 @@ namespace UsabilityDynamics\WPP {
           $return[ 'numeric' ] = true;
         }
 
-        if ( in_array( $attribute, array_keys( (array) $wp_properties[ '_predefined_attributes' ] ) ) ) {
+        if ( in_array( $attribute, array_keys( (array) $_data[ '_predefined_attributes' ] ) ) ) {
           $return[ 'standard' ] = true;
           $ui_class[ ] = 'standard_attribute';
         }
