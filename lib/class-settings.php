@@ -18,6 +18,9 @@ namespace UsabilityDynamics\WPP {
        */
       private $_db_data;
       
+      /**
+       * Path to json schemas.
+       */
       private $_schemas_path;
     
       /**
@@ -73,134 +76,6 @@ namespace UsabilityDynamics\WPP {
         // Return Instance.
         return $_instance;
 
-      }
-      
-      /**
-       * Update ( Upgrade ) Settings data with dynamic and computed values
-       *
-       * @since 2.0
-       */
-      private function _sync_data( $args = array() ) {
-      
-        $_data = $this->get();
-      
-        $args = wp_parse_args( $args, array(
-          'strip_protected_keys' => false,
-          'stripslashes' => false,
-          'sort' => false,
-          'recompute' => ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ? false : $this->get( 'configuration.build_mode' ),
-        ) );
-        
-        // System Settings
-        $system_settings = array();
-        $trns = !$args[ 'recompute' ] ? get_transient( 'wpp::system_settings' ) : false;
-        if ( !empty( $trns ) && !in_array( $trns, array( '[]', 'null' ) ) ) {
-          $system_settings = json_decode( $trns, true );
-        } else {
-          $system_settings = $this->_localize( json_decode( file_get_contents( $this->_schemas_path . '/system.settings.json' ), true ) );
-          set_transient( 'wpp::system_settings', json_encode( $system_settings ), ( 60 * 60 * 24 ) );
-        }
-        
-        // Default settings.
-        $_data = \UsabilityDynamics\Utility::extend( array(
-          'property_stats' => array(),
-          'attribute_classification' => array(),
-          'property_stats_descriptions' => array(),
-          'admin_attr_fields' => array(),
-          'searchable_attr_fields' => array(),
-          'sortable_attributes' => array(),
-          'searchable_attributes' => array(),
-          'predefined_values' => array(),
-          'predefined_search_values' => array(),
-          'property_types' => array(),
-          'property_groups' => array(),
-          'property_stats_groups' => array(),
-          'searchable_property_types' => array(),
-          'hidden_attributes' => array(),
-          'property_meta' => array(), // Depreciated element. It has not been used since 2.0 version
-          'property_inheritance' => array(),
-          'image_sizes' => array(),
-        ), $system_settings, $_data );
-        
-        // Filters are applied
-        $_data[ 'configuration' ] = apply_filters( 'wpp_configuration', (array) ( !empty( $_data[ 'configuration' ] ) ? $_data[ 'configuration' ] : array() ) );
-        $_data[ 'taxonomies' ] = apply_filters( 'wpp_taxonomies', ( !empty( $_data[ 'taxonomies' ] ) ? (array) $_data[ 'taxonomies' ] : array() ) );
-        $_data[ 'property_stats_descriptions' ] = apply_filters( 'wpp_label_descriptions', (array) ( !empty( $_data[ 'property_stats_descriptions' ] ) ? $_data[ 'property_stats_descriptions' ] : array() ) );
-        $_data[ 'location_matters' ] = apply_filters( 'wpp_location_matters', (array) ( !empty( $_data[ 'location_matters' ] ) ? $_data[ 'location_matters' ] : array() ) );
-        $_data[ 'hidden_attributes' ] = apply_filters( 'wpp_hidden_attributes', (array) ( !empty( $_data[ 'hidden_attributes' ] ) ? $_data[ 'hidden_attributes' ] : array() ) );
-        $_data[ 'image_sizes' ] = apply_filters( 'wpp_image_sizes', (array) ( !empty( $_data[ 'image_sizes' ] ) ? $_data[ 'image_sizes' ] : array() ) );
-        $_data[ 'searchable_attributes' ] = apply_filters( 'wpp_searchable_attributes', (array) ( !empty( $_data[ 'searchable_attributes' ] ) ? $_data[ 'searchable_attributes' ] : array() ) );
-        $_data[ 'searchable_property_types' ] = apply_filters( 'wpp_searchable_property_types', (array) ( !empty( $_data[ 'searchable_property_types' ] ) ? $_data[ 'searchable_property_types' ] : array() ) );
-        $_data[ 'property_stats' ] = apply_filters( 'wpp_property_stats', (array) ( !empty( $_data[ 'property_stats' ] ) ? $_data[ 'property_stats' ] : array() ) );
-        $_data[ 'property_types' ] = apply_filters( 'wpp_property_types', (array) ( !empty( $_data[ 'property_types' ] ) ? $_data[ 'property_types' ] : array() ) );
-        $_data[ 'search_conversions' ] = apply_filters( 'wpp_search_conversions', (array) ( !empty( $_data[ 'search_conversions' ] ) ? $_data[ 'search_conversions' ] : array() ) );
-        $_data[ 'property_inheritance' ] = apply_filters( 'wpp_property_inheritance', (array) ( !empty( $_data[ 'property_inheritance' ] ) ? $_data[ 'property_inheritance' ] : array() ) );
-        $_data[ '_attribute_classifications' ] = apply_filters( 'wpp_attribute_classifications', (array) ( !empty( $_data[ '_attribute_classifications' ] ) ? $_data[ '_attribute_classifications' ] : array() ) );
-        
-        if ( $args[ 'stripslashes' ] ) {
-          $_data = stripslashes_deep( $_data );
-        }
-
-        if ( $args[ 'sort' ] ) {
-          ksort( $_data );
-        }
-
-        if ( $args[ 'strip_protected_keys' ] ) {
-          $_data = \UsabilityDynamics\Utility::strip_protected_keys( $_data );
-        }
-
-        //** Get rid of disabled attributes */
-        if ( is_array( $_data[ 'disabled_attributes' ] ) ) {
-          foreach ( $_data[ 'disabled_attributes' ] as $attribute ) {
-            if ( array_key_exists( $attribute, $_data[ 'property_stats' ] ) ) {
-              if ( isset( $_data[ 'property_stats' ][ $attribute ] ) ) {
-                unset( $_data[ 'property_stats' ][ $attribute ] );
-              }
-              if ( isset( $_data[ 'attribute_classification' ][ $attribute ] ) ) {
-                unset( $_data[ 'property_stats' ][ $attribute ] );
-              }
-              if ( isset( $_data[ 'property_stats_groups' ][ $attribute ] ) ) {
-                unset( $_data[ 'property_stats_groups' ][ $attribute ] );
-              }
-              if ( isset( $_data[ 'property_stats_descriptions' ][ $attribute ] ) ) {
-                unset( $_data[ 'property_stats_descriptions' ][ $attribute ] );
-              }
-              if ( isset( $_data[ 'searchable_attr_fields' ][ $attribute ] ) ) {
-                unset( $_data[ 'searchable_attr_fields' ][ $attribute ] );
-              }
-              if ( isset( $_data[ 'admin_attr_fields' ][ $attribute ] ) ) {
-                unset( $_data[ 'admin_attr_fields' ][ $attribute ] );
-              }
-              if ( isset( $_data[ 'predefined_values' ][ $attribute ] ) ) {
-                unset( $_data[ 'predefined_values' ][ $attribute ] );
-              }
-              if ( isset( $_data[ 'predefined_search_values' ][ $attribute ] ) ) {
-                unset( $_data[ 'predefined_search_values' ][ $attribute ] );
-              }
-            }
-          }
-        }
-
-        //** Set the list of frontend attributes */
-        $_data[ 'frontend_property_stats' ] = $_data[ 'property_stats' ];
-        //* System ( admin only ) attributes should not be showed. So we remove them from settings */
-        foreach ( $_data[ 'frontend_property_stats' ] as $i => $stat ) {
-          if ( isset( $_data[ 'attribute_classification' ][ $i ] ) ) {
-            $classification = $_data[ '_attribute_classifications' ][ $_data[ 'attribute_classification' ][ $i ] ];
-            if ( isset( $classification[ 'settings' ][ 'admin_only' ] ) && $classification[ 'settings' ][ 'admin_only' ] ) {
-              unset( $_data[ 'frontend_property_stats' ][ $i ] );
-            }
-          }
-        }
-        
-        // Update data
-        $this->set( $_data );
-        
-        // Compute Settings
-        $this->set( '_computed', $this->_get_computed( array( 'recompute' => $args[ 'recompute' ] ) ) );
-
-        return $this->_data;
-        
       }
       
       /**
@@ -643,6 +518,140 @@ namespace UsabilityDynamics\WPP {
       }
       
       /**
+       * Update ( Upgrade ) Settings data with dynamic and computed values
+       *
+       * @since 2.0
+       */
+      private function _sync_data( $args = array() ) {
+      
+        $_data = $this->get();
+      
+        $args = wp_parse_args( $args, array(
+          'strip_protected_keys' => false,
+          'stripslashes' => false,
+          'sort' => false,
+          'recompute' => ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ? false : $this->get( 'configuration.build_mode' ),
+        ) );
+        
+        // System Settings
+        $system_settings = array();
+        $trns = !$args[ 'recompute' ] ? get_transient( 'wpp::system_settings' ) : false;
+        if ( !empty( $trns ) && !in_array( $trns, array( '[]', 'null' ) ) ) {
+          $system_settings = json_decode( $trns, true );
+        } else {
+          $system_settings = $this->_localize( json_decode( file_get_contents( $this->_schemas_path . '/system.settings.json' ), true ) );
+          set_transient( 'wpp::system_settings', json_encode( $system_settings ), ( 60 * 60 * 24 ) );
+        }
+        
+        // Default settings.
+        $_data = \UsabilityDynamics\Utility::extend( array(
+          'property_stats' => array(),
+          'attribute_classification' => array(),
+          'property_stats_descriptions' => array(),
+          'admin_attr_fields' => array(),
+          'searchable_attr_fields' => array(),
+          'sortable_attributes' => array(),
+          'searchable_attributes' => array(),
+          'predefined_values' => array(),
+          'predefined_search_values' => array(),
+          'property_types' => array(),
+          'property_groups' => array(),
+          'property_stats_groups' => array(),
+          'searchable_property_types' => array(),
+          'hidden_attributes' => array(),
+          'property_meta' => array(), // Depreciated element. It has not been used since 2.0 version
+          'property_inheritance' => array(),
+          'image_sizes' => array(),
+        ), $system_settings, $_data );
+        
+        // Filters are applied
+        $_data[ 'configuration' ] = apply_filters( 'wpp_configuration', (array) ( !empty( $_data[ 'configuration' ] ) ? $_data[ 'configuration' ] : array() ) );
+        $_data[ 'taxonomies' ] = apply_filters( 'wpp_taxonomies', ( !empty( $_data[ 'taxonomies' ] ) ? (array) $_data[ 'taxonomies' ] : array() ) );
+        $_data[ 'property_stats_descriptions' ] = apply_filters( 'wpp_label_descriptions', (array) ( !empty( $_data[ 'property_stats_descriptions' ] ) ? $_data[ 'property_stats_descriptions' ] : array() ) );
+        $_data[ 'location_matters' ] = apply_filters( 'wpp_location_matters', (array) ( !empty( $_data[ 'location_matters' ] ) ? $_data[ 'location_matters' ] : array() ) );
+        $_data[ 'hidden_attributes' ] = apply_filters( 'wpp_hidden_attributes', (array) ( !empty( $_data[ 'hidden_attributes' ] ) ? $_data[ 'hidden_attributes' ] : array() ) );
+        $_data[ 'image_sizes' ] = apply_filters( 'wpp_image_sizes', (array) ( !empty( $_data[ 'image_sizes' ] ) ? $_data[ 'image_sizes' ] : array() ) );
+        $_data[ 'searchable_attributes' ] = apply_filters( 'wpp_searchable_attributes', (array) ( !empty( $_data[ 'searchable_attributes' ] ) ? $_data[ 'searchable_attributes' ] : array() ) );
+        $_data[ 'searchable_property_types' ] = apply_filters( 'wpp_searchable_property_types', (array) ( !empty( $_data[ 'searchable_property_types' ] ) ? $_data[ 'searchable_property_types' ] : array() ) );
+        $_data[ 'property_stats' ] = apply_filters( 'wpp_property_stats', (array) ( !empty( $_data[ 'property_stats' ] ) ? $_data[ 'property_stats' ] : array() ) );
+        $_data[ 'property_types' ] = apply_filters( 'wpp_property_types', (array) ( !empty( $_data[ 'property_types' ] ) ? $_data[ 'property_types' ] : array() ) );
+        $_data[ 'search_conversions' ] = apply_filters( 'wpp_search_conversions', (array) ( !empty( $_data[ 'search_conversions' ] ) ? $_data[ 'search_conversions' ] : array() ) );
+        $_data[ 'property_inheritance' ] = apply_filters( 'wpp_property_inheritance', (array) ( !empty( $_data[ 'property_inheritance' ] ) ? $_data[ 'property_inheritance' ] : array() ) );
+        $_data[ '_attribute_classifications' ] = apply_filters( 'wpp_attribute_classifications', (array) ( !empty( $_data[ '_attribute_classifications' ] ) ? $_data[ '_attribute_classifications' ] : array() ) );
+        
+        if ( $args[ 'stripslashes' ] ) {
+          $_data = stripslashes_deep( $_data );
+        }
+
+        if ( $args[ 'sort' ] ) {
+          ksort( $_data );
+        }
+
+        if ( $args[ 'strip_protected_keys' ] ) {
+          $_data = \UsabilityDynamics\Utility::strip_protected_keys( $_data );
+        }
+
+        //** Get rid of disabled attributes */
+        if ( is_array( $_data[ 'disabled_attributes' ] ) ) {
+          foreach ( $_data[ 'disabled_attributes' ] as $attribute ) {
+            if ( array_key_exists( $attribute, $_data[ 'property_stats' ] ) ) {
+              if ( isset( $_data[ 'property_stats' ][ $attribute ] ) ) {
+                unset( $_data[ 'property_stats' ][ $attribute ] );
+              }
+              if ( isset( $_data[ 'attribute_classification' ][ $attribute ] ) ) {
+                unset( $_data[ 'property_stats' ][ $attribute ] );
+              }
+              if ( isset( $_data[ 'property_stats_groups' ][ $attribute ] ) ) {
+                unset( $_data[ 'property_stats_groups' ][ $attribute ] );
+              }
+              if ( isset( $_data[ 'property_stats_descriptions' ][ $attribute ] ) ) {
+                unset( $_data[ 'property_stats_descriptions' ][ $attribute ] );
+              }
+              if ( isset( $_data[ 'searchable_attr_fields' ][ $attribute ] ) ) {
+                unset( $_data[ 'searchable_attr_fields' ][ $attribute ] );
+              }
+              if ( isset( $_data[ 'admin_attr_fields' ][ $attribute ] ) ) {
+                unset( $_data[ 'admin_attr_fields' ][ $attribute ] );
+              }
+              if ( isset( $_data[ 'predefined_values' ][ $attribute ] ) ) {
+                unset( $_data[ 'predefined_values' ][ $attribute ] );
+              }
+              if ( isset( $_data[ 'predefined_search_values' ][ $attribute ] ) ) {
+                unset( $_data[ 'predefined_search_values' ][ $attribute ] );
+              }
+            }
+          }
+        }
+
+        //** Set the list of frontend attributes */
+        $_data[ 'frontend_property_stats' ] = $_data[ 'property_stats' ];
+        //* System ( admin only ) attributes should not be showed. So we remove them from settings */
+        foreach ( $_data[ 'frontend_property_stats' ] as $i => $stat ) {
+          if ( isset( $_data[ 'attribute_classification' ][ $i ] ) ) {
+            $classification = $_data[ '_attribute_classifications' ][ $_data[ 'attribute_classification' ][ $i ] ];
+            if ( isset( $classification[ 'settings' ][ 'admin_only' ] ) && $classification[ 'settings' ][ 'admin_only' ] ) {
+              unset( $_data[ 'frontend_property_stats' ][ $i ] );
+            }
+          }
+        }
+        
+        // Update data
+        $this->set( $_data );
+        
+        // Merges classifications with default settings
+        $this->_update_attribute_classifications();
+        
+        // Adds taxonomies based on property attributes
+        $this->_update_taxonomies();
+        
+        // Compute Settings
+        $this->set( '_computed', $this->_get_computed( array( 'recompute' => $args[ 'recompute' ] ) ) );
+
+        return $this->_data;
+        
+      }
+      
+      /**
        * Generates Computed Settings, saves to transient, and returns.
        * By default recomputing is disabled on AJAX requests.
        *
@@ -1006,6 +1015,90 @@ namespace UsabilityDynamics\WPP {
       }
       
       /**
+       * Merges classifications with default settings
+       * Updates search/admin input data
+       *
+       * @uses UsabilityDynamics\WPP\Settings::_update_input_types()
+       *
+       * @param array $classifications
+       * @return array
+       * @author peshkov@UD
+       * @since 2.0
+       */
+      private function _update_attribute_classifications() {
+        $_data = $this->get( '_attribute_classifications' );
+        if ( !is_array( $_data ) ) {
+          $this->set( '_attribute_classifications', array() );
+          return false;
+        };
+        foreach ( $_data as $k => $v ) {
+          $v[ 'settings' ] = \UsabilityDynamics\Utility::extend( array(
+            'searchable' => true,
+            'editable' => true,
+            'admin_only' => false,
+            'system' => false,
+            'can_be_disabled' => false,
+            'admin_predefined_values' => true,
+            'search_predefined_values' => true,
+          ), $v[ 'settings' ] );
+
+          // Update input types data
+          if ( isset( $v[ 'search' ] ) ) {
+            $v[ 'search' ] = $this->_update_input_types( $v[ 'search' ] );
+          }
+          if ( isset( $v[ 'admin' ] ) ) {
+            $v[ 'admin' ] = $this->_update_input_types( $v[ 'admin' ] );
+          }
+          $this->set( "_attribute_classifications.{$k}", $v );
+        }
+        return true;
+      }
+      
+      /**
+       * Updates search/admin input types data.
+       *
+       * @param array $types
+       * @return array
+       * @author peshkov@UD
+       * @since 2.0
+       */
+      private function _update_input_types( $types ) {
+        $_data = $this->get( '_input_types' );
+        if ( !empty( $_data ) && is_array( $types ) ) {
+          $arr = array();
+          foreach ( $types as $i => $label ) {
+            if ( is_numeric( $i ) && key_exists( $label, (array)$_data ) ) {
+              $arr[ $label ] = $_data[ $label ];
+            } else {
+              $arr[ $i ] = $label;
+            }
+          }
+          $types = $arr;
+        }
+        return $types;
+      }
+      
+      /**
+       * Adds taxonomies based on property attributes ( where classification is taxonomy )
+       *
+       * @since 2.0
+       * @author peshkov@UD
+       */
+      private function _update_taxonomies() {
+        foreach ( $this->get( 'attribute_classification' ) as $k => $v ) {
+          if ( $v === 'taxonomy' && !$this->get( "taxonomies.{$k}" ) ) {
+            $this->set( "taxonomies.{$k}", array(
+              'label' => $this->get( "property_stats.{$k}" ),
+            ) );
+          }
+        }
+      }
+      
+      /**
+       * Deprecated.
+       * Commit must be used instead.
+       * @TODO: remove before release.
+       *
        * Loads settings into global variable
        * Also restores data from backup file.
        *
