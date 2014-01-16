@@ -166,7 +166,7 @@ namespace UsabilityDynamics\WPP {
 
         $taxonomies = !empty( $_data[ 'taxonomies' ] ) ? (array) $_data[ 'taxonomies' ] : array();
         //** Add WP taxonomy 'category' to the predefined list */
-        $taxonomies[ 'category' ] = \UsabilityDynamics\Utility::object_to_array( get_taxonomy( 'category' ) );
+        $taxonomies[ 'category' ] = Utility::object_to_array( get_taxonomy( 'category' ) );
 
         //** Add other taxonomies to the predefined list */
         foreach ( $taxonomies as $taxonomy => $taxonomy_data ) {
@@ -828,6 +828,8 @@ namespace UsabilityDynamics\WPP {
         //** STEP 1. Get default Settings from schema */
         $settings = $this->_localize( json_decode( file_get_contents( $this->_schemas_path . '/default.settings.json' ), true ) );
 
+        //echo "<pre>"; print_r( $settings ); echo "</pre>";die();
+        
         //** STEP 2. Create the data based on system settings */
 
         $system = self::_localize( json_decode( file_get_contents( $this->_schemas_path . '/system.settings.json' ), true ) );
@@ -866,7 +868,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Add WP taxonomy 'category' to the predefined list */
         $taxonomies = array_merge( (array) $system[ 'taxonomies' ], array( 'category' => Utility::object_to_array( get_taxonomy( 'category' ) ) ) );
-
+        
         //** Add other taxonomies to the predefined list */
         foreach ( $taxonomies as $taxonomy => $taxonomy_data ) {
           $predefined_attributes[ $taxonomy ] = array(

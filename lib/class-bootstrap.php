@@ -125,46 +125,40 @@ namespace UsabilityDynamics\WPP {
         $this->autoload();
 
         // Register activation hook -> has to be in the main plugin file
-        register_activation_hook( __FILE__, array( &$this, 'activation' ) );
+        register_activation_hook( __FILE__, array( $this, 'activation' ) );
 
         // Register activation hook -> has to be in the main plugin file
-        register_deactivation_hook( __FILE__, array( &$this, 'deactivation' ) );
+        register_deactivation_hook( __FILE__, array( $this, 'deactivation' ) );
 
-        // Initiate the plugin
-        add_action( 'after_setup_theme', array( &$this, 'setup_theme' ), 10 );
+        /**
+         * Initiates the plugin.
+         *
+         * It does the following: 
+         * - loads WPP Settings
+         * - loads Modules
+         */
+        add_action( 'after_setup_theme', array( $this, 'setup_theme' ), 10 );
 
         // Hook in upper init
-        add_action( 'init', array( &$this, 'init_upper' ), 0 );
+        add_action( 'init', array( $this, 'init_upper' ), 0 );
 
         // Hook in lower init
-        add_action( 'init', array( &$this, 'init_lower' ), 100 );
+        add_action( 'init', array( $this, 'init_lower' ), 100 );
 
         // Setup Template Redirection.
-        add_action( 'template_redirect', array( &$this, 'template_redirect' ) );
+        add_action( 'template_redirect', array( $this, 'template_redirect' ) );
 
         // Check settings data on accord with existing wp_properties data before option updates
-        add_filter( 'wpp_settings_save', array( &$this, 'check_wp_settings_data' ), 0, 2 );
+        add_filter( 'wpp_settings_save', array( $this, 'check_wp_settings_data' ), 0, 2 );
 
         // Modify request to change feed
-        add_filter( 'request', array( &$this, 'property_feed' ) );
+        add_filter( 'request', array( $this, 'property_feed' ) );
 
         // Initialize Widgets.
-        add_action( 'widgets_init', array( &$this, 'widgets_init' ) );
+        add_action( 'widgets_init', array( $this, 'widgets_init' ) );
 
         // Metabox Handler.
-        add_action( 'add_meta_boxes', array( &$this, 'add_meta_boxes' ) );
-
-        // Instantiate Settings.
-        $this->_settings = Settings::define();
-
-        // Load Modules.
-        $this->_modules = Module::load(array(
-          'path' => $this->get( '_computed.path.modules' ),
-          'required' => array(
-            //'wp-property-test-module',
-            'wp-property-admin-tools'
-          )
-        ));
+        add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 
         // @test - Extend model.
         // $this->requires->data( array( 'aasdfsadfasd' => 'asdfasdf' ));
@@ -287,39 +281,63 @@ namespace UsabilityDynamics\WPP {
        * @since 1.31.0
        */
       private function register_types() {
-        global $wp_properties;
-
-        $wp_properties[ 'labels' ] = apply_filters( 'wpp_object_labels', array(
-          'name'               => __( 'Properties', 'wpp' ),
-          'all_items'          => __( 'All Properties', 'wpp' ),
-          'singular_name'      => __( 'Property', 'wpp' ),
-          'add_new'            => __( 'Add Property', 'wpp' ),
-          'add_new_item'       => __( 'Add New Property', 'wpp' ),
-          'edit_item'          => __( 'Edit Property', 'wpp' ),
-          'new_item'           => __( 'New Property', 'wpp' ),
-          'view_item'          => __( 'View Property', 'wpp' ),
-          'search_items'       => __( 'Search Properties', 'wpp' ),
-          'not_found'          => __( 'No properties found', 'wpp' ),
-          'not_found_in_trash' => __( 'No properties found in Trash', 'wpp' ),
-          'parent_item_colon'  => ''
+        
+        $labels = apply_filters( 'wpp_object_labels', array(
+          'name'                => Utility::property_label( 'plural' ),
+          'all_items'           => sprintf( __( 'All %1$s', 'wpp' ), Utility::property_label( 'plural' ) ),
+          'singular_name'       => Utility::property_label( 'singular' ),
+          'add_new'             => sprintf( __( 'Add %1$s', 'wpp' ), Utility::property_label( 'singular' ) ),
+          'add_new_item'        => sprintf( __( 'Add New %1$s', 'wpp' ), Utility::property_label( 'singular' ) ),
+          'edit_item'           => sprintf( __( 'Edit %1$s', 'wpp' ), Utility::property_label( 'singular' ) ),
+          'new_item'            => sprintf( __( 'New %1$s', 'wpp' ), Utility::property_label( 'singular' ) ),
+          'view_item'           => sprintf( __( 'View %1$s', 'wpp' ), Utility::property_label( 'singular' ) ),
+          'search_items'        => sprintf( __( 'Search %1$s', 'wpp' ), Utility::property_label( 'plural' ) ),
+          'not_found'           => sprintf( __( 'No %1$s found', 'wpp' ), Utility::property_label( 'plural' ) ),
+          'not_found_in_trash'  => sprintf( __( 'No %1$s found in Trash', 'wpp' ), Utility::property_label( 'plural' ) ),
+          'parent_item_colon'   => ''
         ) );
 
         // Register custom post types
         register_post_type( 'property', array(
-          'labels'              => $wp_properties[ 'labels' ],
+          'labels'              => $labels,
           'public'              => true,
-          'exclude_from_search' => $wp_properties[ 'configuration' ][ 'include_in_regular_search_results' ] == 'true' ? false : true,
+          'exclude_from_search' => $this->get( 'configuration.include_in_regular_search_results' ) == 'true' ? false : true,
           'show_ui'             => true,
           '_edit_link'          => 'post.php?post=%d',
           'capability_type'     => array( 'wpp_property', 'wpp_properties' ),
           'hierarchical'        => true,
           'rewrite'             => array(
-            'slug' => $wp_properties[ 'configuration' ][ 'base_slug' ]
+            'slug' => $this->get( 'configuration.base_slug' ),
           ),
-          'query_var'           => $wp_properties[ 'configuration' ][ 'base_slug' ],
+          'query_var'           => $this->get( 'configuration.base_slug' ),
           'supports'            => array( 'title', 'editor', 'thumbnail', 'comments' )
           //'menu_icon'           => WPP_URL . 'images/pp_menu-1.6.png'
         ));
+        
+        /**
+         * Register Taxonomies, excluding explicitly disabled ones
+         */
+        foreach ( (array)$this->get( 'taxonomies' ) as $taxonomy => $taxonomy_data ) {
+
+          // Determine if taxonomy is disabled we don't register it
+          if ( in_array( $taxonomy, (array) $this->get( 'disabled_attributes' ) ) ) {
+            continue;
+          }
+          
+          register_taxonomy( $taxonomy, 'property', array(
+            'hierarchical' => $taxonomy_data[ 'hierarchical' ],
+            'label' => $taxonomy_data[ 'label' ],
+            'labels' => $taxonomy_data[ 'labels' ],
+            'query_var' => isset( $taxonomy_data[ 'query_var' ] ) ? $taxonomy_data[ 'query_var' ] : $taxonomy,
+            'rewrite' => array(
+              'slug' => isset( $taxonomy_data[ 'rewrite' ][ 'slug' ] ) ? $taxonomy_data[ 'rewrite' ][ 'slug' ] : str_replace( '_', '-', $taxonomy )
+            ),
+            'capabilities' => array(
+              'manage_terms' => 'manage_wpp_categories'
+            )
+          ) );
+
+        }
 
       }
 
@@ -497,6 +515,18 @@ namespace UsabilityDynamics\WPP {
        * @since 0.60
        */
       public function setup_theme() {
+      
+        // Instantiate Settings.
+        $this->_settings = Settings::define();
+
+        // Load Modules.
+        $this->_modules = Module::load(array(
+          'path' => $this->get( '_computed.path.modules' ),
+          'required' => array(
+            //'wp-property-test-module',
+            'wp-property-admin-tools'
+          )
+        ));
 
         // Determine if memory limit is low and increase it
         if( (int) ini_get( 'memory_limit' ) < 128 ) {
@@ -637,48 +667,48 @@ namespace UsabilityDynamics\WPP {
 
         /** Localization */
 
-        add_filter( "manage_edit-property_sortable_columns", array( &$this, "sortable_columns" ) );
-        add_filter( "manage_edit-property_columns", array( &$this, "edit_columns" ) );
+        add_filter( "manage_edit-property_sortable_columns", array( $this, "sortable_columns" ) );
+        add_filter( "manage_edit-property_columns", array( $this, "edit_columns" ) );
 
         /** Called in setup_postdata().  We add property values here to make available in global $post variable on frontend */
         add_action( 'the_post', array( 'UsabilityDynamics\WPP\Utility', 'the_post' ) );
 
-        add_action( 'the_content', array( &$this, "the_content" ) );
+        add_action( 'the_content', array( $this, "the_content" ) );
 
         /** Admin interface init */
-        add_action( 'admin_init', array( &$this, "admin_init" ) );
-        add_action( 'admin_menu', array( &$this, 'admin_menu' ) );
+        add_action( 'admin_init', array( $this, "admin_init" ) );
+        add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 
-        add_action( "post_submitbox_misc_actions", array( &$this, "post_submitbox_misc_actions" ) );
+        add_action( "post_submitbox_misc_actions", array( $this, "post_submitbox_misc_actions" ) );
         add_action( 'save_post', array( 'UsabilityDynamics\WPP\Listing', 'save' ) );
 
         add_action( 'before_delete_post', array( 'UsabilityDynamics\WPP\Utility', 'before_delete_post' ) );
-        add_filter( 'post_updated_messages', array( &$this, 'property_updated_messages' ), 5 );
+        add_filter( 'post_updated_messages', array( $this, 'property_updated_messages' ), 5 );
 
         /** Fix toggale row actions -> get rid of "Quick Edit" on property rows */
-        add_filter( 'page_row_actions', array( &$this, 'property_row_actions' ), 0, 2 );
+        add_filter( 'page_row_actions', array( $this, 'property_row_actions' ), 0, 2 );
 
         /** Disables meta cache for property obejcts if enabled */
         add_action( 'pre_get_posts', array( 'UsabilityDynamics\WPP\Utility', 'pre_get_posts' ) );
 
         /** Fix 404 errors */
-        add_filter( "parse_request", array( &$this, "parse_request" ) );
+        add_filter( "parse_request", array( $this, "parse_request" ) );
 
         //** Determines if current request is for a child property */
         add_filter( "posts_results", array( 'UsabilityDynamics\WPP\Utility', "posts_results" ) );
 
         //** Hack. Used to avoid issues of some WPP capabilities */
-        add_filter( 'current_screen', array(  &$this, 'current_screen' ) );
+        add_filter( 'current_screen', array(  $this, 'current_screen' ) );
 
         //** Load admin header scripts */
-        add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ), 200, 0 );
-        add_action( 'admin_enqueue_footer_scripts', array( &$this, 'admin_enqueue_footer_scripts' ), 200, 0 );
+        add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 200, 0 );
+        add_action( 'admin_enqueue_footer_scripts', array( $this, 'admin_enqueue_footer_scripts' ), 200, 0 );
 
         //** Check premium feature availability */
-        add_action( 'wpp_premium_feature_check', array( &$this, 'feature_check' ) );
+        add_action( 'wpp_premium_feature_check', array( $this, 'feature_check' ) );
 
         //** Contextual Help */
-        add_action( 'wpp_contextual_help', array( &$this, 'wpp_contextual_help' ) );
+        add_action( 'wpp_contextual_help', array( $this, 'wpp_contextual_help' ) );
 
         //** Page loading handlers */
         add_action( 'load-property_page_all_properties', array( 'UsabilityDynamics\WPP\Utility', 'property_page_all_properties_load' ) );
@@ -698,7 +728,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         //** Modify admin body class */
-        add_filter( 'admin_body_class', array( &$this, 'admin_body_class' ), 5 );
+        add_filter( 'admin_body_class', array( $this, 'admin_body_class' ), 5 );
 
         // Frontend Body Class.
         add_filter( 'body_class', array( 'UsabilityDynamics\WPP\Utility', 'body_class' ) );
@@ -934,7 +964,7 @@ namespace UsabilityDynamics\WPP {
         Utility::fix_screen_options();
 
         // Plug page actions -> Add Settings Link to plugin overview page
-        add_filter( 'plugin_action_links', array( &$this, 'plugin_action_links' ), 10, 2 );
+        add_filter( 'plugin_action_links', array( $this, 'plugin_action_links' ), 10, 2 );
 
         //* Adds metabox 'General Information' to Property Edit Page */
         add_meta_box( 'wpp_property_meta', __( 'General Information', self::$text_domain ), array( '\UsabilityDynamics\WPP\UI', 'metabox_meta' ), 'property', 'normal', 'high' );
