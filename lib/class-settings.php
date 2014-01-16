@@ -311,26 +311,26 @@ namespace UsabilityDynamics\WPP {
         $attributes = $this->get_attributes();
 
         foreach ( $attributes as $meta_key => $label ) {
-          $_data = $this->get_attribute( $meta_key );
+          $_attribute = $this->get_attribute( $meta_key );
 
           $default = array_key_exists( $meta_key, $predefined_attributes ) ? $predefined_attributes[ $meta_key ] : $default_attribute;
 
           $return[ 'attributes' ][ $meta_key ] = \UsabilityDynamics\Utility::extend( $default, array_filter( array(
-            'label' => $_data[ 'label' ],
-            'slug' => $_data[ 'slug' ],
-            'description' => isset( $_data[ 'description' ] ) ? $_data[ 'description' ] : false,
-            'values' => !empty( $_data[ '_values' ] ) ? $_data[ '_values' ] : false,
-            'group' => isset( $_data[ 'group_key' ] ) ? $_data[ 'group_key' ] : false,
+            'label' => $_attribute[ 'label' ],
+            'slug' => $_attribute[ 'slug' ],
+            'description' => isset( $_attribute[ 'description' ] ) ? $_attribute[ 'description' ] : false,
+            'values' => !empty( $_attribute[ '_values' ] ) ? $_attribute[ '_values' ] : false,
+            'group' => isset( $_attribute[ 'group_key' ] ) ? $_attribute[ 'group_key' ] : false,
             'reserved' => array_key_exists( $meta_key, $predefined_attributes ) ? true : false,
-            'searchable' => isset( $_data[ 'searchable' ] ) ? $_data[ 'searchable' ] : false,
-            'sortable' => isset( $_data[ 'sortable' ] ) ? $_data[ 'sortable' ] : false,
-            'in_overview' => isset( $_data[ 'in_overview' ] ) ? $_data[ 'in_overview' ] : false,
-            'disabled' => isset( $_data[ 'disabled' ] ) ? $_data[ 'disabled' ] : false,
-            'search_input_type' => isset( $_data[ 'input_type' ] ) ? $_data[ 'input_type' ] : false,
-            'admin_input_type' => isset( $_data[ 'data_input_type' ] ) ? $_data[ 'data_input_type' ] : false,
-            'search_predefined' => isset( $_data[ 'predefined_search_values' ] ) ? $_data[ 'predefined_search_values' ] : false,
-            'admin_predefined' => isset( $_data[ 'predefined_values' ] ) ? $_data[ 'predefined_values' ] : false,
-            'path' => ( $_data[ 'group_key' ] ? $_data[ 'group_key' ] . '.' . $_data[ 'slug' ] : false ),
+            'searchable' => isset( $_attribute[ 'searchable' ] ) ? $_attribute[ 'searchable' ] : false,
+            'sortable' => isset( $_attribute[ 'sortable' ] ) ? $_attribute[ 'sortable' ] : false,
+            'in_overview' => isset( $_attribute[ 'in_overview' ] ) ? $_attribute[ 'in_overview' ] : false,
+            'disabled' => isset( $_attribute[ 'disabled' ] ) ? $_attribute[ 'disabled' ] : false,
+            'search_input_type' => isset( $_attribute[ 'input_type' ] ) ? $_attribute[ 'input_type' ] : false,
+            'admin_input_type' => isset( $_attribute[ 'data_input_type' ] ) ? $_attribute[ 'data_input_type' ] : false,
+            'search_predefined' => isset( $_attribute[ 'predefined_search_values' ] ) ? $_attribute[ 'predefined_search_values' ] : false,
+            'admin_predefined' => isset( $_attribute[ 'predefined_values' ] ) ? $_attribute[ 'predefined_values' ] : false,
+            'path' => ( $_attribute[ 'group_key' ] ? $_attribute[ 'group_key' ] . '.' . $_attribute[ 'slug' ] : false ),
             'classification' => array_key_exists( $meta_key, $predefined_attributes ) ? $predefined_attributes[ $meta_key ][ 'classification' ] : false,
             'classification_label' => array_key_exists( $meta_key, $predefined_attributes ) ? $predefined_attributes[ $meta_key ][ 'classification_label' ] : false,
             'classification_settings' => array_key_exists( $meta_key, $predefined_attributes ) ? $predefined_attributes[ $meta_key ][ 'classification_settings' ] : false,
