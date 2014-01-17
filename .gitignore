@@ -20,3 +20,4 @@ core/premium
 *.gz
 
 node_modules
+static/codex
