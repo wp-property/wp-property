@@ -192,17 +192,6 @@ class WPP_F extends UD_API {
           'update_item' => __( 'Update Feature', 'wpp' ),
           'add_new_item' => __( 'Add New Feature', 'wpp' ),
           'new_item_name' => __( 'New Feature Name', 'wpp' ),
-          'menu_name' => __( 'Features', 'wpp' ),
-          'name' => _x( 'Features', 'taxonomy general name', 'wpp' ),
-          'singular_name' => _x( 'Feature', 'taxonomy singular name', 'wpp' ),
-          'search_items' => __( 'Search Features', 'wpp' ),
-          'all_items' => __( 'All Features', 'wpp' ),
-          'parent_item' => __( 'Parent Feature', 'wpp' ),
-          'parent_item_colon' => __( 'Parent Feature:', 'wpp' ),
-          'edit_item' => __( 'Edit Feature', 'wpp' ),
-          'update_item' => __( 'Update Feature', 'wpp' ),
-          'add_new_item' => __( 'Add New Feature', 'wpp' ),
-          'new_item_name' => __( 'New Feature Name', 'wpp' ),
           'menu_name' => __( 'Feature', 'wpp' )
         ),
         'query_var' => 'property_feature',
@@ -212,17 +201,6 @@ class WPP_F extends UD_API {
         'hierarchical' => false,
         'label' => _x( 'Community Features', 'taxonomy general name', 'wpp' ),
         'labels' => array(
-          'name' => _x( 'Community Features', 'taxonomy general name', 'wpp' ),
-          'singular_name' => _x( 'Community Feature', 'taxonomy singular name', 'wpp' ),
-          'search_items' => __( 'Search Community Features', 'wpp' ),
-          'all_items' => __( 'All Community Features', 'wpp' ),
-          'parent_item' => __( 'Parent Community Feature', 'wpp' ),
-          'parent_item_colon' => __( 'Parent Community Feature:', 'wpp' ),
-          'edit_item' => __( 'Edit Community Feature', 'wpp' ),
-          'update_item' => __( 'Update Community Feature', 'wpp' ),
-          'add_new_item' => __( 'Add New Community Feature', 'wpp' ),
-          'new_item_name' => __( 'New Community Feature Name', 'wpp' ),
-          'menu_name' => __( 'Community Features', 'wpp' ),
           'name' => _x( 'Community Features', 'taxonomy general name', 'wpp' ),
           'singular_name' => _x( 'Community Feature', 'taxonomy singular name', 'wpp' ),
           'search_items' => __( 'Search Community Features', 'wpp' ),
@@ -2727,10 +2705,18 @@ class WPP_F extends UD_API {
     global $wp_properties;
 
     $default_headers = array(
-      'Name' => __( 'Name', 'wpp' ),
-      'Version' => __( 'Version', 'wpp' ),
-      'Description' => __( 'Description', 'wpp' ),
-      'Minimum Core Version' => __( 'Minimum Core Version', 'wpp' )
+      //'Name' => __( 'Name', 'wpp' ),
+      //'Version' => __( 'Version', 'wpp' ),
+      //'Description' => __( 'Description', 'wpp' ),
+      //'Minimum PHP Version' => __( 'Minimum PHP Version', 'wpp' ),
+      //'Minimum Core Version' => __( 'Minimum Core Version', 'wpp' ),
+      'name'         => 'Name',
+      'version'      => 'Version',
+      'description'  => 'Description',
+      'class'        => 'Class',
+      'minimum.core' => 'Minimum Core Version',
+      'minimum.php'  => 'Minimum PHP Version',
+      'capability'   => 'Capability'
     );
 
     if ( !is_dir( WPP_Premium ) )
@@ -2757,16 +2743,18 @@ class WPP_F extends UD_API {
           }
 
           $plugin_data = @get_file_data( WPP_Premium . "/" . $file, $default_headers, 'plugin' );
-          $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'name' ] = $plugin_data[ 'Name' ];
-          $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ] = $plugin_data[ 'Version' ];
-          $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'description' ] = $plugin_data[ 'Description' ];
 
-          if ( $plugin_data[ 'Minimum Core Version' ] ) {
-            $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'minimum_wpp_version' ] = $plugin_data[ 'Minimum Core Version' ];
+          $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'name' ] = $plugin_data[ 'name' ];
+          $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ] = $plugin_data[ 'version' ];
+          $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'description' ] = $plugin_data[ 'description' ];
+          $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'class' ] = $plugin_data[ 'class' ] ? $plugin_data[ 'class' ] : $plugin_slug;
+
+          if ( $plugin_data[ 'minimum.core' ] ) {
+            $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'minimum.core' ] = $plugin_data[ 'minimum.core' ];
           }
 
-          //** If feature has a Minimum Core Version and it is more than current version - we do not load **/
-          $feature_requires_upgrade = ( !empty( $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'minimum_wpp_version' ] ) && ( version_compare( WPP_Version, $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'minimum_wpp_version' ] ) < 0 ) ? true : false );
+          // If feature has a Minimum Core Version and it is more than current version - we do not load
+          $feature_requires_upgrade = ( !empty( $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'minimum.core' ] ) && ( version_compare( WPP_Version, $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'minimum.core' ] ) < 0 ) ? true : false );
 
           if ( $feature_requires_upgrade ) {
 
@@ -2777,22 +2765,32 @@ class WPP_F extends UD_API {
 
           } elseif ( !isset( $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ] ) || $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ] != 'true' ) {
 
-            //** Load feature, everything is good**/
-
+            // Continue with loading feature...
             $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'needs_higher_wpp_version' ] = 'false';
 
-            if ( WP_DEBUG == true ) {
-              include_once( WPP_Premium . "/" . $file );
-            } else {
-              @include_once( WPP_Premium . "/" . $file );
+            // Module requires a higher version of PHP than is available.
+            if( !$plugin_data[ 'minimum.php' ] || version_compare( PHP_VERSION, $plugin_data[ 'minimum.php' ] ) > 0 ) {
+
+              if ( WP_DEBUG == true ) {
+                include_once( WPP_Premium . "/" . $file );
+              } else {
+                @include_once( WPP_Premium . "/" . $file );
+              }
+
+              // Initialize Module that declare a class.
+              if( $plugin_data[ 'class' ] && class_exists( $_class = $plugin_data[ 'class' ] ) ) {
+                new $_class( $wp_properties );
+              }
+
             }
 
             // Disable plugin if class does not exists - file is empty
-            if ( !class_exists( $plugin_slug ) ) {
+            if( !$_class && !class_exists( $plugin_slug ) ) {
               unset( $wp_properties[ 'installed_features' ][ $plugin_slug ] );
             }
 
             $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ] = 'false';
+
           } else {
             //* This happens when feature cannot be loaded and is disabled */
 

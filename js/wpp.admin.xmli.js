@@ -3,7 +3,7 @@
  *
  *
  *
- *
+ * @version 4.0.3
  * @author: potanin@UD
  * @date: 8/19/13
  */
@@ -189,6 +189,23 @@ wpp.xmli = jQuery.extend({
 
       if ( import_hash != "" ) {
         window.open( wpp.instance.home_url + "/?wpp_schedule_import=" + import_hash + "&echo_log=true", 'wpp_i_do_full_import' );
+      } else {
+        wpp.xmli.actions_bar_message( wpp.strings.xmli.please_save, "bad", 7000 );
+      }
+
+    });
+
+    /**
+     * Media Import Starter
+     *
+     * @since 4.0.3
+     */
+    jQuery( "#wpp_i_do_media_import" ).live( "click", function () {
+
+      var import_hash = jQuery( "#import_hash" ).val();
+
+      if ( import_hash != "" ) {
+        window.open( wpp.instance.home_url + "/?wpp_manage_pending_images=" + import_hash + "&echo_log=true", 'wpp_manage_pending_images' );
       } else {
         wpp.xmli.actions_bar_message( wpp.strings.xmli.please_save, "bad", 7000 );
       }
