@@ -1,0 +1,1004 @@
+/**
+ * XML Importer
+ *
+ *
+ */
+
+
+.wpxi_editor_wrapper {
+
+  .wpp_actions_bar {
+
+    // Line up "Save Schedule" button with left side of menu
+    .wpp_save_wrapper {
+      padding-left: 11px !important;
+
+      .wpxi_sidebar_response {
+        padding: 0px;
+        display: block;
+        position: relative;
+        top: 10px;
+        clear: both;
+      }
+
+    }
+
+  }
+
+}
+
+
+
+// Integrated button. Important.
+div.wpp_input_wrapper .wpp_input_button .wpp_input_icon.wpp_label {
+  border: 0 !important;
+  line-height: 10px !important;
+}
+
+.wpp_input_button.wpxi_source_validation[disabled="disabled"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+
+  span {
+    cursor: not-allowed;
+  }
+
+}
+
+.wpxi_editor_wrapper  {
+
+  // Shows up on XMLI Editor when SaaS connection disappears.
+  .wpp_notice {
+    color: white;
+    background-color: #B86262;
+    padding: 7px 10px;
+    border-style: solid;
+  }
+
+}
+
+#wpxi_editor_interface {
+  .wpp_side_load {
+
+
+    div.wpp_vertical_tabs_wrapper {
+      width: 200px !important;
+      background-color: transparent;
+      display: table-cell !important;
+      margin: 0 0 0 -200px !important;
+      padding: 0 !important;
+
+      .ui-tabs-active {
+
+        .wpp_side_tab {
+          background-color: #4E4E4E;
+        }
+      }
+
+      a.wpp_side_tab {
+        display: block;
+        padding: 10px;
+        color: #FFF;
+        text-align: center;
+        text-decoration: none;
+      }
+    }
+
+    .wpp_tab_panel_wrapper {
+      border-radius: 0 !important;
+      -moz-radius: 0 !important;
+      -wekit-border-radius: 0 !important;
+      display: table !important;
+      background-color: transparent;
+      width: 100%;
+
+      .wpp_tab_panel {
+        border-radius: 0 !important;
+        -moz-radius: 0 !important;
+        -wekit-border-radius: 0 !important;
+        background: #EBEBEB;
+        padding: 15px;
+      }
+    }
+
+  }
+
+}
+
+/* Added by SaaS */
+.wpxi_contextual.wpp_large_guide {
+
+  background-color: #d6d6d6;
+  padding: 15px 20px 15px 20px;
+  margin: 15px 0;
+  border-radius: 5px;
+
+  &.wpp_loading {
+    //background: url("@{wpp_url}/contextual-gear.gif") 35px 35px no-repeat #d6d6d6;
+    min-height: 155px;
+    padding-left: 180px;
+  }
+
+  &.wpp_help_icon {
+   // background: url("@{wpp_url}/contextual-info.png") 25px 30px no-repeat #E3E6E4;
+    min-height: 150px;
+    padding-left: 180px;
+  }
+
+  p {
+    font-size: 1.1em;
+    padding: 0;
+    color: #000;
+    margin: 10px 0 10px 0;
+    line-height: 1.4em;
+
+    strong {
+      font-size: 1.4em;
+      font-weight: normal;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+  }
+
+  ul.wpp_dynamic_content {
+
+    li {
+      line-height: 1.7em;
+    }
+
+  }
+
+}
+
+.wpp_sidebar_wrapper {
+
+  .wpp_sidebar_options ul.wpp_settings li {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    border-bottom: 1px dashed #CFCFCF;
+    padding: 10px;
+    margin-bottom: 0;
+  }
+
+}
+
+.wpp_ui_wrapper .wpp_class_pre {
+  background-color: #dadada;
+  border: 5px solid rgba(0, 0, 0, 0.39);
+  color: white;
+  margin-top: 0.75em;
+  max-height: 400px;
+  max-width: 100%;
+  overflow: auto;
+  margin-bottom: 0;
+  ul.logs {
+    padding: 10px;
+    li {
+      color: #333;
+      line-height: normal;
+      font-weight: 100;
+      font-size: 15px;
+      //text-shadow: 0 0 5px black;
+      &:hover {
+        background-color: transparent !important;
+      }
+      b {
+        font-size: 12px;
+        font-weight: 400;
+
+
+      }
+    }
+  }
+}
+
+dl.wpxi_schedule_attributes {
+  margin: 0 0 10px 0;
+  padding: 0 10px;
+}
+
+dl.wpxi_schedule_attributes dt {
+  float: left;
+  font-weight: bold;
+  margin-right: 10px;
+  width: 80px;
+}
+
+.wpp_ui_wrapper .wpxi_editor_wrapper  .wpp_option_table {
+  margin-bottom: 100px
+}
+
+.wpp_option_table td.wpp_ui_sidebar {
+  padding-left: 15px;
+  width: 200px;
+}
+
+.wpp_ui_sidebar {
+  width: 200px;
+}
+
+.wpp_ui_sidebar .wpp_sidebar_options,
+.wpp_ui_sidebar .wpxi_schedule_attributes {
+  /*border-bottom: 1px solid #DFDFDF;*/
+  margin-bottom: 10px;
+}
+
+td.wpp_ui_sidebar .wpp_sidebar_options,
+td.wpp_ui_sidebar .wpp_actions_bar {
+  padding: 0 5px 10px 5px;
+  width: 200px;
+}
+
+.wpp_sidebar_options {
+
+}
+
+.wpp_sidebar_options ul.wpp_settings > li {
+  padding: 5px 10px
+}
+
+.wpp_sidebar_options ul.wpp_settings > li .wpp_link {
+  color: #000;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.wpp_sidebar_options ul.wpp_settings > li .wpp_link.wpp_active {
+  color: #DD4B39;
+  font-weight: bold;
+}
+
+td.wpp_ui_sidebar .wpp_actions_bar {
+  position: relative;
+}
+
+.wpp_ui_wrapper tr.wpxi-ui[data-wpxi-ui="import_actions"],
+.wpp_ui_wrapper tr.wpxi-ui[data-wpxi-ui="import_actions"] .wpp_actions_bar {
+  display: none;
+}
+
+.wpp_ui_wrapper .wpxi_editor_wrapper  .wpp_option_table tr.wpxi-ui {
+  border-bottom: 1px dashed #DEDEDE;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+}
+
+.wpp_ui_wrapper .wpp_button.wpp_disabled > .wpp_label,
+.wpp_ui_wrapper .wpp_button.wpp_disabled {
+  display: none
+}
+
+.wpp_ui_wrapper .wpp_button.wpp_subtle > .wpp_label,
+.wpp_ui_wrapper .wpp_button.wpp_subtle {
+  opacity: 0.7
+}
+
+.wpp_ui_wrapper .wpp_button.wpp_subtle:hover > .wpp_label,
+.wpp_ui_wrapper .wpp_button.wpp_subtle:hover {
+  opacity: 1
+}
+
+.wpp_ui_wrapper .wpxi_contextual {
+  clear: both
+}
+
+.wpp_ui_wrapper .wpp_actions_bar .wpp_save_wrapper {
+  /* border-top: 1px solid #ECECEC; */
+  /* margin-top: 20px; */
+  //padding: 10px;
+  //background-color: #F5F5F5;
+  overflow: hidden;
+}
+
+.wpp_ui_wrapper .wpp_actions_bar .wpxi_sidebar_response {
+  color: #6F6F6F
+}
+
+.wpp_ui_wrapper tr.wpxi-ui[data-wpxi-ui="import_actions"] > td,
+.wpp_ui_wrapper tr.wpxi-ui[data-wpxi-ui="import_actions"] > th {
+  background-color: #F5F5F5;
+  padding: 10px 10px 10px 0px;
+}
+
+.wpp_ui_wrapper .wpxi_contextual.wpp_success {
+  color: #5C6F5C;
+  line-height: 33px;
+}
+
+.wpp_ui_wrapper .wpxi_contextual.wpp_error {
+  color: #AD5E5C
+}
+
+.wpp_ui_wrapper .wpxi-ui.wpp_error td.wpp_ajax_response {
+  background: none repeat scroll 0 0 #AD5E5C;
+  border-bottom: 2px solid #593534;
+  color: #FFFFFF;
+}
+
+.wpp_button.wpxi_save_schedule .wpp_label {
+  min-width: 110px
+}
+
+.wpxi-ajax-container {
+  width: 100%;
+}
+
+.wpp-ui-wrap table.ud_ui_dynamic_table tfoot td {
+  background-color: #EDEDED;
+  padding-left: 15px;
+  padding-right: 5px;
+}
+
+.wpp-ui-wrap table.ud_ui_dynamic_table tfoot td .wpp_button {
+  margin-left: 0;
+  margin-right: 4px;
+}
+
+.wrap.wpp-ui-wrap .updated,
+.wrap.wpp-ui-wrap .error {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.wpp-ui-wrap .wpp-ui-header:hover h2 {
+  -moz-transition: color 6000ms linear;
+  -ms-transition: color 6000ms linear;
+  -o-transition: color 6000ms linear;
+  -webkit-transition: color 6000ms linear;
+  color: #D14836;
+  text-shadow: 2px 2px 2px rgba(204, 204, 204, 0.44);
+  transition: color 6000ms linear;
+}
+
+.wpp-ui-wrap .wpp-ui-header h2.wpp-title span.wpxi-status {
+  font-size: 18px;
+  margin-left: 10px;
+  opacity: 0.3;
+  text-transform: uppercase;
+}
+
+.wpp-ui-wrap div.icon32-posts-property {
+  -moz-transition: opacity 4000ms linear;
+  -ms-transition: opacity 4000ms linear;
+  -o-transition: opacity 4000ms linear;
+  -webkit-transition: opacity 4000ms linear;
+  display: inline;
+  left: -9px;
+  margin: 0;
+  opacity: 0.8;
+  top: -2px;
+  transition: opacity 4000ms linear;
+}
+
+.wpp-ui-wrap .wpp-ui-header:hover .icon32-posts-property {
+  -moz-transition: opacity 6000ms linear;
+  -ms-transition: opacity 6000ms linear;
+  -o-transition: opacity 6000ms linear;
+  -webkit-transition: opacity 6000ms linear;
+  opacity: 1;
+  transition: opacity 6000ms linear;
+}
+
+.wpp-ui-wrap .wpp-ui-header .wpxi_header_actions.alignright {
+  height: 40px;
+  position: relative;
+  right: 17px;
+  top: -3px;
+  width: 350px;
+}
+
+.wpxi_chart_wrapper {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  background-color: #d0e3f8;
+  border: 5px solid #d0e3f8;
+  border-radius: 3px;
+  margin: 0 5px 10px;
+  margin-bottom: 10px;
+}
+
+.wpxi_primary_actions {
+  background: transparent;
+  border-color: transparent;
+  margin-bottom: 10px;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+}
+
+div.wpxi_saved_schedules_wrapper {
+  /* border-bottom: 1px dashed #DEDEDE; */
+  margin: 5px 5px 50px;
+}
+
+table.wpxi_saved_schedules {
+  border-bottom: 5px solid #F2F2F2
+}
+
+table.wpxi_saved_schedules .wpxi_primary_column {
+  padding: 10px 5px;
+  width: 420px;
+}
+
+table.wpxi_saved_schedules .wpxi_schedule_status {
+
+}
+
+table.wpxi_saved_schedules .wpxi_schedule_status ul {
+  width: 100%;
+  height: 100px;
+  overflow: auto;
+}
+
+table.wpxi_saved_schedules .wpxi_icon_column {
+  padding: 0;
+  width: 35px;
+}
+
+.wpxi_attribute_mapper .wpxi_attribute_dropdown {
+  width: 150px;
+}
+
+.wpxi_attribute_mapper .wpxi_xpath_rule {
+  padding-right: 10px;
+  width: auto;
+}
+
+.wpxi_attribute_mapper .wpxi_xpath_rule input.wpxi_xpath_rule {
+  font-size: 14px
+}
+
+.wpxi_attribute_mapper .wpxi_attribute_format {
+  border-right: 1px solid #EDEDED;
+  padding-right: 11px;
+  width: 125px;
+}
+
+div.wpp_ui_wrapper select option {
+  margin-right: 3px
+}
+
+.wpp_ui_wrapper select.wpxi_verified,
+.wpp_ui_wrapper input[type=text].wpxi_verified {
+  background-color: #F9FFFA;
+  border-color: #B3C1B5;
+  color: #244F29;
+}
+
+.wpp_ui_wrapper {
+
+  // Emulate regular text input field
+  div.wpxi_schedule_url_wrapper {
+    clear: both;
+    border: 1px solid #DFDFDF;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+
+    // Actual input field within wrapper
+    input[type=text].wpp_major.wpxi_schedule_url {
+      height: 33px;
+      line-height: 30px;
+      margin-left: 0;
+      width: 100%;
+      border-color: transparent;
+      padding-right: 120px; // Must match the width of the button
+    }
+
+    // Input button in the far right side
+    .wpp_input_button {}
+
+  }
+
+}
+
+.wpp_ui_wrapper input[type=text].wpxi_schedule_name {
+  font-size: 1.5em;
+  line-height: 100%;
+  outline: 0 none;
+  padding: 3px 8px;
+  width: 100%;
+  width: 100%;
+}
+
+.wpp_ui_wrapper input[type=text].wpp_major.wpxi_root_element {
+  margin-bottom: 5px;
+  width: 515px;
+}
+
+.wpxi_listing_preview_response.wpxi_loader {
+  height: 80px;
+  margin: 0 auto;
+}
+
+.wpxi_listing_preview_response p.wpxi_ajax_message {
+  padding-top: 0
+}
+
+.wpxi_listing_preview_response a.wpxi_listing_preview {
+  background-color: #F4F4F4;
+  display: block;
+  margin-bottom: 8px;
+  overflow: hidden;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.wpxi_listing_preview_response a.wpxi_listing_preview > span.post_thumbnail {
+  background-color: #E9E9E9;
+  border: 1px solid lightGrey;
+  display: block;
+  float: left;
+  height: 100px;
+  margin-right: 10px;
+  width: 150px;
+}
+
+.wpxi_listing_preview_response a.wpxi_listing_preview > span.post_thumbnail img.post_thumbnail {
+  height: auto;
+  max-height: 100px;
+  width: 100%;
+}
+
+.wpxi_listing_preview_response a.wpxi_listing_preview > span.post_title {
+  text-decoration: underline
+}
+
+.wpxi_editor_wrapper  tr td.wpp_remove_row {
+  padding-left: 0px;
+}
+
+.wpxi_editor_wrapper  tr:hover > td.wpp_remove_row {
+  background-position: -4px center;
+}
+
+table.wpxi_attribute_mapper {
+  background-color: #F7F7F7;
+  width: 100%;
+}
+
+table.wpxi_attribute_mapper tr.wpp_dynamic_table_row > td {
+  -moz-transition: background-color 1000ms linear;
+  -ms-transition: background-color 1000ms linear;
+  -o-transition: background-color 1000ms linear;
+  -webkit-transition: background-color 1000ms linear;
+  /* background-color: transparent; */
+  transition: background-color 1000ms linear;
+}
+
+table.wpxi_attribute_mapper tr.wpp_dynamic_table_row:hover > td {
+  background-color: #FFFFE0
+}
+
+.wpp_sorted {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAADCAYAAACwAX77AAAAF0lEQVR42mOorKz8jw0zgABWQRhAFwQAJuYc+dCeVDIAAAAASUVORK5CYII=") no-repeat scroll 0 0 transparent;
+  display: inline-block;
+  height: 3px;
+  left: 2px;
+  margin: 5px 0 0 4px;
+  overflow: hidden;
+  position: relative;
+  top: 3px;
+  vertical-align: top;
+  width: 6px;
+}
+
+.wpxi_pre_container,
+.wpxi_xml_analysis_tools {
+  /* float: right; */
+  /* width: 620px; */
+}
+
+.wpxi_xml_analysis_tools {
+  background: none repeat scroll 0 0 #F5F5F5;
+  border-top: 1px solid #D9D9D9;
+  clear: both;
+  display: block;
+  height: 35px;
+  overflow: hidden;
+  padding: 5px 5px;
+}
+
+.wpxi_pre_container {
+  border-bottom: 5px solid #F5F5F5;
+  border-left: 5px solid #F5F5F5;
+  border-right: 5px solid #F5F5F5;
+  overflow: auto;
+  padding: 0px;
+}
+
+.wpxi_pre_container .snippet-wrap {
+  border: 1px solid #DEDEDE;
+  margin: 0;
+}
+
+.wpxi_pre_container.wpxi_collapsed {
+  max-height: 320px
+}
+
+.wpp_ui_wrapper .wpp_option_table > tbody > tr > .wpxi_xml_analysis {
+  padding: 10px 0px
+}
+
+.wpp_ui_wrapper .wpp_option_table > tbody > tr > .wpxi_xml_analysis .snippet-wrap.xmli ol.snippet-num {
+  margin: 0
+}
+
+.wpp_ui_wrapper .wpp_option_table > tbody > tr > .wpxi_xml_analysis .snippet-wrap.xmli .snippet-num li {
+  padding-left: 0
+}
+
+.wpp_ajax_response .snippet-wrap.xmli .snippet-no-num {
+  padding: 5px 10px
+}
+
+.wpp_ajax_response .wpxi_xml_analysis .snippet-wrap pre.sh_sourceCode {
+  /*white-space: pre-wrap;*/
+  background-color: #FCFCFC;
+  border-radius: 0 0 0 0;
+  box-shadow: none;
+  font-size: 12px;
+  line-height: 17px;
+  margin: 0;
+  padding: 0;
+}
+
+.wpp_ajax_response.wpxi_xml_analysis .snippet-wrap.xmli pre.sh_sourceCode {
+  background-color: #F9F9F9;
+  border: 1px solid #E5E5E5;
+}
+
+.wpp_option_table .snippet-container ul li {
+  line-height: 1.3em;
+}
+
+.wpxi_xml_analysis > .snippet-container > .sh_golden > .sh_xml {
+  background-color: #282828
+}
+
+.wpxi_xml_analysis li {
+  margin: 0;
+  padding: 0;
+}
+
+.wpxi_xml_analysis span.sh_keyword {
+  /* text-transform: lowercase; */
+  color: #B13B3B;
+}
+
+.wpp_imported_property .misc-pub-section.curtime.misc-pub-section-last {
+  border-bottom-width: 1px;
+  display: none;
+}
+
+.wpp_imported_property .wpxi_time_stamp {
+  //background: url("@{wpp_url}/date-button.gif") no-repeat  top left;
+  background-repeat: no-repeat;
+  padding-left: 18px;
+}
+
+.wpxi_schedule_row input.wpxi_cron_command {
+  width: 300px
+}
+
+.wpxi_schedule_row[data-post-status=draft] .wpp_ddm {
+  opacity: 0.2
+}
+
+.wpxi_schedule_row[data-post-status=publish] .wpxi_post_status {
+  display: none
+}
+
+.wpxi_schedule_row[data-post-status=importing] .wpxi_inline_actions {
+
+}
+
+.wpxi_schedule_row .wpp_ddm {
+  float: left;
+  left: 10px;
+  padding: 0;
+  position: relative;
+  top: 11px;
+}
+
+.wpxi_schedule_row ul {
+  margin: 0
+}
+
+.wpxi_schedule_row span.wpxi-advanced,
+.wpxi_schedule_row li.wpxi-advanced,
+.wpxi_schedule_row a.wpxi-advanced {
+  display: none
+}
+
+.wpxi_schedule_row li.wpxi_primary_action .wpxi_edit_schedule {
+  color: #2388cc;
+  font-size: 14px;
+  //font-weight: bold;
+  text-decoration: none;
+}
+
+.wpxi_schedule_row li.wpxi_primary_action a.wpxi_edit_schedule:hover {
+  color: #21759B;
+  text-decoration: underline;
+}
+
+.wpxi_schedule_row li.wpxi_primary_action span.wpxi_post_status {
+  color: #878787;
+  font-size: 16px;
+}
+
+.wpxi_schedule_row .wpxi_overview_special_data {
+  -moz-transition: color 1000ms linear;
+  -ms-transition: color 1000ms linear;
+  -o-transition: color 1000ms linear;
+  -webkit-transition: color 1000ms linear;
+  color: #515151;
+  transition: color 1000ms linear;
+}
+
+.wpxi_schedule_row:hover .wpxi_overview_special_data {
+  color: #000
+}
+
+#wpcontent select.wpp_import_attribute_dropdown > optgroup > option {
+  padding-left: 10px
+}
+
+.wpp_ui_wrapper .wpxi_source_option_preview_wrapper {
+  background: none repeat scroll 0 0 #FBFBFB;
+  border-bottom: 1px solid #DDDBDB;
+  margin-bottom: 5px;
+  padding: 6px 8px;
+}
+
+.wpp_ui_wrapper .wpxi_source_advanced {
+  display: none
+}
+
+.wpp_ui_wrapper .wpxi_advanced_source_settings {
+  display: none
+}
+
+.wpxi_loader {
+  //background: url("@{cdn_url}/ud.spinner.red_circle.gif") no-repeat scroll center center transparent;
+  min-height: 40px;
+  min-width: 40px;
+}
+
+.wpxi_header_actions .wpxi_loader {
+  display: none;
+  float: right;
+  margin-left: 12px;
+  position: relative;
+  right: 30px;
+}
+
+.wpp_ui_wrapper .wpxi_advanced_option_counter {
+  color: #CB5E30;
+  margin-left: 2px;
+}
+
+.wpp_ui_wrapper ul.wpp_settings > li {
+  padding: 2px 5px;
+}
+
+.wpp_ui_wrapper tr.wpxi-advanced {
+  display: none
+}
+
+.wpp_ui_wrapper li.wpxi-advanced {
+    background: none repeat scroll 0 0 #FBFBFB;
+    border: 1px solid #F4F4F4;
+    padding: 4px 0 4px 7px;
+    margin-bottom: 6px;
+}
+
+.wpp_ui_wrapper li.wpxi-advanced,
+.wpp_ui_wrapper li.wpxi-advanced label {
+  color: #545454
+}
+
+.wpp_ui_wrapper li.wpxi-advanced:hover,
+.wpp_ui_wrapper li.wpxi-advanced:hover label {
+  color: #090807
+}
+
+.wpp_ui_wrapper li.wpxi-advanced.wpxi_enabled_row {
+  background: none repeat scroll 0 0 #FFEEDD;
+  border-left: 5px solid #F1A063;
+  margin-left: -4px;
+  padding-left: 5px;
+}
+
+.wpp_ui_wrapper li.wpxi-advanced input[type="checkbox"] {
+  margin-right: 5px
+}
+
+.wpp_ui_wrapper form.wpp_ui_wrapper .wpxi_preview_raw_data_result {
+  margin-left: 8px
+}
+
+.wpp_ui_wrapper form.wpp_ui_wrapper .wpxi_error_text {
+  background: none repeat scroll 0 0 #924848;
+  border-radius: 3px 3px 3px 3px;
+  color: #FFFCFC;
+  max-width: none;
+  padding: 2px 7px;
+}
+
+.wpp_ui_wrapper form.wpp_ui_wrapper .wpxi_ajax_message.wpxi_error_text {
+  margin-top: 2px
+}
+
+.wpp_ui_wrapper form.wpp_ui_wrapper .wpxi_close_preview.wpp_link {
+  float: right;
+  line-height: 30px;
+  margin-right: 7px;
+}
+
+.wpxi-ui-server_query_actions{
+  overflow : hidden;
+  padding : 5px;
+  background-color: #EDEDED;
+  padding-left: 15px;
+  padding-right: 5px;
+}
+
+.wpxi-ui-server_query_actions .alignleft,
+.wpxi-ui-server_query_actions .alignright{
+  width : auto;
+  overflow : hidden;
+}
+
+.wpxi_server_query_range_values{
+  overflow: hidden;
+  padding-left: 2em;
+}
+
+.wpxi_server_query_range_values .wpxi_server_query_range_item,
+.wpxi_server_query_range_values .wpxi_server_query_range_delim
+{
+  float:left;
+  width: auto;
+}
+
+.wpxi_server_query_range_values .wpxi_server_query_range_delim{
+  line-height: 33px;
+  display: inline-block;
+  margin-right: 0.5em;
+}
+
+.ui-dform-div.wpxi_server_query_range_item label.ui-dform-label{
+  width: auto;
+}
+
+.ui-dform-div.wpxi_server_query_range_item input,
+.ui-dform-div.wpxi_server_query_range_item select
+{
+  width: 6em;
+  margin: 5px;
+}
+
+.wpxi-ui-server_query_contextual{
+  height: 33px;
+  vertical-align: middle;
+}
+
+.wpxi-ui-server_query_form.ui-dform-div{
+  width: 100%;
+  background-color: rgba(245, 245, 245, 0.94);
+  border: 1px solid #EBEBEB;
+}
+
+
+.ui-dform-div.wpxi_server_query_filter{
+  padding : 5px;
+  border-top: 1px solid #EBEBEB;
+}
+
+.ui-dform-div.wpxi_server_query_filter.wpxi_categorical_classification{
+  border: 1px solid #EBEBEB;
+  margin:10px;
+  background-color: #EDEDED;
+}
+
+label.ui-dform-checkbox, label.ui-dform-radio {
+  display: inline !important;
+}
+
+.ui-dform-submit, .ui-dform-span, .ui-dform-label, .ui-dform-tabs {
+  margin: 3px 0;
+}
+
+.ui-dform-submit {
+  display: block;
+}
+
+.ui-tabs-nav .ui-dform-label {
+  margin: 0;
+}
+
+.ui-tabs-panel blockquote {
+  margin: 0;
+}
+
+label.ui-accordion-header {
+  margin: 0;
+}
+
+.ui-dform-elements {
+  display: block;
+}
+
+.ui-dform-elements label {
+  display: inline-block;
+  color: #202020;
+  width: 16em;
+  text-align: right;
+  padding-right: 8px;
+}
+
+div.ui-dform-elements input {
+  display: inline-block;
+}
+
+div.ui-dform-radiobuttons, div.ui-dform-checkboxes, div.wpxi_server_query_range_values {
+  display: inline-block;
+}
+
+div.ui-dform-radiobuttons input, div.ui-dform-checkboxes input {
+  display: block;
+  float:left;
+  width:auto;
+  height:20px;
+  margin-right: 5px;
+}
+
+div.ui-dform-radiobuttons label, div.ui-dform-checkboxes label {
+  width: auto;
+  text-align: left;
+  padding-left: 18px;
+  padding-right: 8px;
+  display: block;
+}
+
+div.ui-dform-checkboxes label:after,
+div.ui-dform-radiobuttons label:after
+{
+  content:".";
+  clear: both;
+  display: block;
+  height: 0;
+  line-height: 0;
+  visibility: hidden;
+}
+
+* html div.ui-dform-radiobuttons label {
+  height: 1%
+}
+
+.ui-dform-elements  > .ui-dform-label,
+div.ui-dform-elements  > div.ui-dform-radiobuttons,
+div.ui-dform-elements  > div.ui-dform-checkboxes
+{
+  padding: 5px;
+  vertical-align: top;
+}
+
+div.ui-dform-elements > input,
+div.ui-dform-elements > select{
+  margin: 5px;
+}
+
+.ui-dform-div.wpxi_server_query_filter:nth-child(1) > .ui-dform-label,
+.ui-dform-div.wpxi_server_query_filter:nth-child(1) > div.ui-dform-radiobuttons,
+.ui-dform-div.wpxi_server_query_filter:nth-child(1) > div.ui-dform-checkboxes {
+  padding-top: 10px;
+}
+
+.ui-dform-div.wpxi_server_query_filter:nth-child(1) > input,
+.ui-dform-div.wpxi_server_query_filter:nth-child(1) > select {
+  margin-top: 10px;
+  max-width: 25em;
+}
