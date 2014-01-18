@@ -1,4 +1,64 @@
+// UI Layout with Sidebar on Left.
+.wpp-ui-panel-left {
+  margin-left: 300px;
+  margin-top: 23px;
+  overflow: auto;
 
+  .wpp-ui-sidebar {
+    display: inline;
+    width: 281px;
+    margin-left: -300px;
+    clear: both;
+    float: left;
+    padding-top: 0;
+  }
+
+  .wpp-ui-outer {
+    float: left;
+    min-width: 100%;
+    margin-top: 3px;
+
+    .wpp-ui-inner {
+      position: relative;
+      margin-right: 20px;
+      margin-top: -3px;
+      width: 100%;
+    }
+
+  }
+
+}
+
+// UI Layout with Sidebar on Right.
+.wpp-ui-panel-right {
+  margin-right: 300px;
+  outline: 0;
+  padding: 0;
+  display: block;
+
+  .wpp-ui-outer {
+    float: left;
+    margin-top: 3px;
+
+    .wpp-ui-inner {
+      position: relative;
+      margin-right: 20px;
+      margin-top: -3px;
+      width: 100%;
+    }
+
+  }
+
+  .wpp-ui-sidebar {
+    float: right;
+    width: 281px;
+    margin-right: -300px;
+    display: block;
+    outline: 0;
+  }
+
+
+}
 
 body.property_page_wpp_property_import #wpp_property_import_step {
   background: none repeat scroll 0 0 #FFFADE;
