@@ -301,14 +301,7 @@ namespace UsabilityDynamics\WPP {
 
         }
 
-        uasort( $_modules, '_sort_uname_callback' );
-
-        //die( '<pre>' . print_r( $module_files, true ) . '</pre>' );
-        //die( '<pre>' . print_r( $_modules, true ) . '</pre>' );
-
         $cache_modules[ $args->path ] = $_modules;
-
-        //die( '<pre>' . print_r( $_modules, true ) . '</pre>' );
 
         wp_cache_set( 'modules', $cache_modules, 'wpp' );
 

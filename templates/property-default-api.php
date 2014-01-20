@@ -12,9 +12,6 @@ add_filter( "wpp_stat_filter_{$wp_properties[ 'configuration' ]['address_attribu
 // Add additional Google Maps localizations
 add_filter( "wpp_google_maps_localizations", "wpp_add_additional_google_maps_localizations" );
 
-// Add post-thumbnails support
-add_action( "after_setup_theme", array( 'WPP_Core', "after_setup_theme" ) );
-
 // Add some default actions
 //add_filter("wpp_stat_filter_price", 'add_dollar_sign');
 //add_filter("wpp_stat_filter_deposit", 'add_dollar_sign');

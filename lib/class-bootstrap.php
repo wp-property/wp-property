@@ -157,9 +157,6 @@ namespace UsabilityDynamics\WPP {
         // Initialize Widgets.
         add_action( 'widgets_init', array( $this, 'widgets_init' ) );
 
-        // Metabox Handler.
-        add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
-
       }
 
       /**
@@ -512,8 +509,6 @@ namespace UsabilityDynamics\WPP {
         // Pre Initialization.
         do_action( 'wpp:init:pre', $this );
         
-        //include_once( $this->get( '_computed.path.root' ) . '/test/meta-box.php' );
-
         //** Load languages */
         load_plugin_textdomain( $this->text_domain, false, $this->get( '_computed.path.root' ) . '/languages' );
 
@@ -635,7 +630,6 @@ namespace UsabilityDynamics\WPP {
         add_action( 'admin_init', array( $this, "admin_init" ) );
         add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 
-        add_action( "post_submitbox_misc_actions", array( $this, "post_submitbox_misc_actions" ) );
         add_action( 'save_post', array( 'UsabilityDynamics\WPP\Listing', 'save' ) );
 
         add_action( 'before_delete_post', array( 'UsabilityDynamics\WPP\Utility', 'before_delete_post' ) );
@@ -902,39 +896,14 @@ namespace UsabilityDynamics\WPP {
       public function admin_init() {
         global $wp_properties, $post;
 
-        //include_once( '/Users/potanin/Sites/property.cluster.veneer.io/vendor/wordpress/core/wp-admin/includes/class-wp-upgrader-skins.php' );
-        //include_once( '/Users/potanin/Sites/property.cluster.veneer.io/vendor/wordpress/core/wp-admin/includes/misc.php' );
-        //include_once( '/Users/potanin/Sites/property.cluster.veneer.io/vendor/wordpress/core/wp-admin/includes/class-wp-upgrader.php' );
-        //include_once( '/Users/potanin/Sites/property.cluster.veneer.io/vendor/wordpress/core/wp-admin/includes/file.php' );
-
         Utility::fix_screen_options();
 
         // Plug page actions -> Add Settings Link to plugin overview page
         add_filter( 'plugin_action_links', array( $this, 'plugin_action_links' ), 10, 2 );
 
-        //* Adds metabox 'General Information' to Property Edit Page */
-        add_meta_box( 'wpp_property_meta', __( 'General Information', $this->text_domain ), array( '\UsabilityDynamics\WPP\UI', 'metabox_meta' ), 'property', 'normal', 'high' );
-
-        //* Adds 'Group' metaboxes to Property Edit Page */
-        if( !empty( $wp_properties[ 'property_groups' ] ) ) {
-          foreach( (array) $wp_properties[ 'property_groups' ] as $slug => $group ) {
-            //* There is no sense to add metabox if no one attribute assigned to group */
-            if( !in_array( $slug, $wp_properties[ 'property_stats_groups' ] ) ) {
-              continue;
-            }
-            //* Determine if Group name is empty we add 'NO NAME', other way metabox will not be added */
-            if( empty( $group[ 'name' ] ) ) {
-              $group[ 'name' ] = __( 'NO NAME', $this->text_domain );
-            }
-            add_meta_box( $slug, __( $group[ 'name' ], $this->text_domain ), array( '\UsabilityDynamics\WPP\UI', 'metabox_meta' ), 'property', 'normal', 'high', array( 'group' => $slug ) );
-          }
-        }
-
-        add_meta_box( 'propetry_filter', $wp_properties[ 'labels' ][ 'name' ] . ' ' . __( 'Search', $this->text_domain ), array( 'UsabilityDynamics\WPP\UI', 'metabox_property_filter' ), 'property_page_all_properties', 'normal' );
-
-        // Add Metaboxes.
-        do_action( 'wpp:metaboxes', $this );
-
+        // Adds metaboxes on Property Edit page
+        $this->metaboxes = Meta_Box::define();
+        
         self::manual_activation();
 
         // Handle Settings Download.
@@ -946,24 +915,6 @@ namespace UsabilityDynamics\WPP {
             "charset" => get_option( 'blog_charset' )
           ));
 
-        }
-
-      }
-
-      /**
-       * Register metaboxes.
-       *
-       * @global type $post
-       * @global type $wpdb
-       */
-      public function add_meta_boxes() {
-        global $post, $wpdb;
-
-        //include_once( $this->_path . '/test/meta-box.php' );
-
-        //** Add metabox for child properties */
-        if( $post->post_type == 'property' && $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_parent = '{$post->ID}' AND post_status = 'publish' " ) ) {
-          add_meta_box( 'wpp_property_children', sprintf( __( 'Child %1s', $this->text_domain ), Utility::property_label( 'plural' ) ), array( '\UsabilityDynamics\WPP\UI', 'child_properties' ), 'property', 'side', 'high' );
         }
 
       }
@@ -1289,39 +1240,6 @@ namespace UsabilityDynamics\WPP {
         }
 
         return $content;
-      }
-
-      /**
-       * Inserts content into the "Publish" metabox on property pages
-       *
-       * @since 1.04
-       *
-       */
-      public function post_submitbox_misc_actions() {
-        global $post, $wp_properties;
-
-        if( $post->post_type == 'property' ) {
-
-          ?>
-          <div class="misc-pub-section ">
-
-        <ul>
-          <li><?php _e( 'Menu Sort Order:', $this->text_domain ) ?> <?php echo Utility::input( "name=menu_order&special=size=4", $post->menu_order ); ?></li>
-
-          <?php if( current_user_can( 'manage_options' ) && $wp_properties[ 'configuration' ][ 'do_not_use' ][ 'featured' ] != 'true' ) { ?>
-            <li><?php echo Utility::checkbox( "name=wpp_data[meta][featured]&label=" . __( 'Display in featured listings.', $this->text_domain ), get_post_meta( $post->ID, 'featured', true ) ); ?></li>
-          <?php } ?>
-
-          <?php do_action( 'wpp_publish_box_options' ); ?>
-        </ul>
-
-      </div>
-        <?php
-
-        }
-
-        return;
-
       }
 
       /**

@@ -2580,7 +2580,7 @@ namespace UsabilityDynamics\WPP {
        *
        * Attached to do_action_ref_array('the_post', array(&$post)); in setup_postdata()
        * Ran after template_redirect.
-       * $property is loaded in WPP_Core::template_redirect();
+       * $property is loaded in UsabilityDynamics\WPP\Bootstrap::template_redirect();
        *
        * @since 0.54
        *
