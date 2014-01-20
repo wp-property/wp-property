@@ -430,6 +430,12 @@ div.wpp_option_table {
     .wpp_tab_panel_wrapper {
         width: 100%;
         float: right;
+        > div {
+          border: none;
+        }
+        .wpp_classifications {
+          position: relative;
+        }
     }
     .wpp_vertical_tabs_wrapper {
       float: left;
@@ -468,7 +474,6 @@ div.wpp_option_table {
           border-bottom-left-radius: 4px;
           .wpp_ddm {
             float: right;
-            margin-top: 9px;
             display: none;
           }
           &:hover {
