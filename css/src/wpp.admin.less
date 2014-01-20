@@ -78,12 +78,12 @@
 }
 
 // Expandable Item Rows.
-.wpp-expandable-item {
+.wpp-expandable {
   background: #fafafa;
   color: #222;
   border: 1px solid #dfdfdf;
   position: relative;
-  padding: 10px 15px;
+  padding: 0;
   height: auto;
   line-height: 30px;
   overflow: hidden;
@@ -96,6 +96,7 @@
     line-height: 20px;
     display: block;
     margin-right: 13em;
+    padding: 10px 15px;
   }
 
   .item-edit {
@@ -105,7 +106,7 @@
     display: block;
     width: 30px;
     height: 40px;
-    margin-right: 0!important;
+    margin-right: 0 !important;
     text-indent: 100%;
     outline: 0;
     overflow: hidden;
@@ -115,7 +116,6 @@
   .item-edit:before {
     top: 10px;
     right: 0;
-    content: '\f140';
     border: 0;
     background: 0 0;
     font: 400 20px/1 dashicons;
@@ -127,13 +127,92 @@
     position: relative;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-decoration: none!important;
+    text-decoration: none !important;
+  }
+
+  &.wpp-active {
+
+    .item-edit {
+      white-space: nowrap;
+    }
+
+    // Collapse Active Section.
+    .item-edit:before {
+      content: '\f142';
+    }
+
+  }
+
+  &.wpp-inactive {
+
+    .item-edit {
+      white-space: nowrap;
+    }
+
+    // Expand Inactive Section.
+    .item-edit:before {
+      content: '\f140';
+    }
+
+  }
+
+  div.major-publishing-actions {
+    border-bottom: 1px solid #dfdfdf;
+    padding: 5px 10px 5px;
+
+    // Readonly Section Title
+    input.regular-text[readonly="readonly"] {
+      width: 100%;
+      box-shadow: none;
+      border: 0;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 20px;
+      background: transparent;
+    }
+
+    .publishing-action {
+      float: right;
+    }
+
+  }
+
+  div.major-publishing-actions {
+    border-top: 1px solid #dfdfdf;
+  }
+
+  .wpp.post-body {
+    background: #fff;
+    padding: 0 10px 10px;
+
   }
 
 }
 
 // WP-Property Importer.
 body.property_page_wpp_property_import {
+
+  .wpp-importer-editor {
+  }
+
+  .wpp-description {
+    padding: 0.5em 1em;
+    opacity: 0.6;
+    transition: opacity .6s ease-in-out;
+    -moz-transition: opacity .6s ease-in-out;
+    -webkit-transition: opacity .6s ease-in-out;
+    line-height: 1.5em;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+  }
+
+  .wpp-active-process {
+    height: 1em;
+    background-color: rgb(219, 219, 219);
+  }
 
   #wpp_property_import_unique_id option {
     margin-right: 3px;
