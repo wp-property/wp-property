@@ -282,24 +282,9 @@ namespace UsabilityDynamics\WPP {
        */
       private function register_types() {
         
-        $labels = apply_filters( 'wpp_object_labels', array(
-          'name'                => Utility::property_label( 'plural' ),
-          'all_items'           => sprintf( __( 'All %1$s', 'wpp' ), Utility::property_label( 'plural' ) ),
-          'singular_name'       => Utility::property_label( 'singular' ),
-          'add_new'             => sprintf( __( 'Add %1$s', 'wpp' ), Utility::property_label( 'singular' ) ),
-          'add_new_item'        => sprintf( __( 'Add New %1$s', 'wpp' ), Utility::property_label( 'singular' ) ),
-          'edit_item'           => sprintf( __( 'Edit %1$s', 'wpp' ), Utility::property_label( 'singular' ) ),
-          'new_item'            => sprintf( __( 'New %1$s', 'wpp' ), Utility::property_label( 'singular' ) ),
-          'view_item'           => sprintf( __( 'View %1$s', 'wpp' ), Utility::property_label( 'singular' ) ),
-          'search_items'        => sprintf( __( 'Search %1$s', 'wpp' ), Utility::property_label( 'plural' ) ),
-          'not_found'           => sprintf( __( 'No %1$s found', 'wpp' ), Utility::property_label( 'plural' ) ),
-          'not_found_in_trash'  => sprintf( __( 'No %1$s found in Trash', 'wpp' ), Utility::property_label( 'plural' ) ),
-          'parent_item_colon'   => ''
-        ) );
-
         // Register custom post types
         register_post_type( 'property', array(
-          'labels'              => $labels,
+          'labels'              => $this->get( '_computed.labels' ),
           'public'              => true,
           'exclude_from_search' => $this->get( 'configuration.include_in_regular_search_results' ) == 'true' ? false : true,
           'show_ui'             => true,
@@ -373,25 +358,6 @@ namespace UsabilityDynamics\WPP {
             wp_register_style( 'wp-property-theme-specific', $this->get( '_computed.url.templates' ) . "/templates/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), $this->version );
           }
         }
-
-      }
-
-      /**
-       * Register UDX and Core Libraries.
-       *
-       * @author potanin@UD
-       */
-      private function register_libraries() {
-
-        // Static Scripts.
-        wp_register_script( 'udx.requires',       '//cdn.udx.io/udx.requires.js',     array(), '1.0.0', true );
-        wp_register_script( 'udx.knockout',       '//cdn.udx.io/knockout.js',         array( 'udx.requires' ), '1.0.0', true );
-        wp_register_script( 'udx.utility.cookie', '//cdn.udx.io/utility.cookie.js',   array( 'udx.requires' ), '1.0.0', true );
-        wp_register_script( 'udx.utility.md5',    '//cdn.udx.io/utility.md5.js',      array( 'udx.requires' ), '1.0.0', true );
-
-        // Dynamic Scripts.
-        wp_register_script( 'wpp.locale',         admin_url( 'admin-ajax.php?action=wpp.locale' ),  array( 'udx.requires' ), $this->version, true );
-        wp_register_script( 'wpp.model',          admin_url( 'admin-ajax.php?action=wpp.model' ),   array( 'udx.requires' ), $this->version, true );
 
       }
 
@@ -567,9 +533,6 @@ namespace UsabilityDynamics\WPP {
         // Define and Set WPP Capabilities.
         $this->set_capabilities();
 
-        // Register JavaScript Libraries.
-        $this->register_libraries();
-
         // Register CSS Styles.
         $this->register_styles();
 
@@ -702,7 +665,6 @@ namespace UsabilityDynamics\WPP {
 
         //** Load admin header scripts */
         add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 200, 0 );
-        add_action( 'admin_enqueue_footer_scripts', array( $this, 'admin_enqueue_footer_scripts' ), 200, 0 );
 
         //** Check premium feature availability */
         add_action( 'wpp_premium_feature_check', array( $this, 'feature_check' ) );
@@ -755,15 +717,6 @@ namespace UsabilityDynamics\WPP {
        */
       public function template_redirect() {
         global $post, $property, $wp_query, $wp_properties, $wp_styles, $wpp_query, $wp_taxonomies;
-
-        // Load Default API.
-        Template::load( 'default-api.php' );
-
-        // Load Template Functions.
-        Template::load( 'template-functions.php' );
-
-        //** Load global wp-property script on all frontend pages */
-        wp_enqueue_script( 'wpp' );
 
         //** Load essential styles that are used in widgets */
         wp_enqueue_style( 'wp-property-frontend' );
@@ -1149,34 +1102,13 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       * Can enqueue scripts on specific pages, and print content into head
-       *
-       *
-       * In 2.0.0 removed
-       * - property_page_all_properties
-       * - property_page_property_settings
-       * - widgets
-       * - property
-       *
-       * @uses $current_screen global variable
-       * @since 0.53
-       */
-      public function admin_enqueue_footer_scripts() {
-        wp_enqueue_script( 'wpp.admin',           $this->get( '_computed.url.scripts' ) . '/wpp.admin.js',            array( 'udx.requires' ) );
-        wp_enqueue_script( 'wpp.admin.modules',   $this->get( '_computed.url.scripts' ) . '/wpp.admin.modules.js',    array( 'wpp.locale', 'udx.requires' ), $this->version );
-        wp_enqueue_script( 'wpp.admin.settings',  $this->get( '_computed.url.scripts' ) . '/wpp.admin.settings.js',   array( 'wpp.locale', 'udx.requires' ), $this->version );
-        wp_enqueue_script( 'wpp.admin.overview',  $this->get( '_computed.url.scripts' ) . '/wpp.admin.overview.js',   array( 'jquery', 'wpp.locale' ), $this->version );
-        wp_enqueue_script( 'wpp.admin.widgets',   $this->get( '_computed.url.scripts' ) . '/wpp.admin.widgets.js',    array( 'jquery', 'wpp.locale' ), $this->version );
-      }
-
-      /**
        * Sets up additional pages and loads their scripts
        *
        * @since 0.5
        *
        */
       public function admin_menu() {
-        global $wp_properties, $submenu;
+        global $submenu;
 
         // Dashboard Page.
         // $dashboard_page   = add_submenu_page( 'edit.php?post_type=property', __( 'Dashboard', self::$text_domain ), __( 'Dashboard', self::$text_domain ), 'manage_wpp_dashboard', 'dashboard', create_function( '', 'global $wp_properties; include "ui/page-dashboard.php";' ) );
@@ -1188,7 +1120,7 @@ namespace UsabilityDynamics\WPP {
         $settings_page  = add_submenu_page( 'edit.php?post_type=property', __( 'Settings', self::$text_domain ), __( 'Settings', self::$text_domain ), 'manage_wpp_settings', 'property_settings', create_function( '', 'global $wp_properties; include "ui/page-settings.php";' ) );
 
         // All Properties Overview Page.
-        $all_properties = add_submenu_page( 'edit.php?post_type=property', $wp_properties[ 'labels' ][ 'all_items' ], $wp_properties[ 'labels' ][ 'all_items' ], 'edit_wpp_properties', 'all_properties', create_function( '', 'global $wp_properties, $screen_layout_columns; include "ui/page-properties.php";' ) );
+        $all_properties = add_submenu_page( 'edit.php?post_type=property', $this->get( '_computed.labels.all_items' ), $this->get( '_computed.labels.all_items' ), 'edit_wpp_properties', 'all_properties', create_function( '', 'global $wp_properties, $screen_layout_columns; include "ui/page-properties.php";' ) );
 
         /**
          * Next used to add custom submenu page 'All Properties' with Javascript dataTable

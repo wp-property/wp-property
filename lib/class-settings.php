@@ -675,14 +675,14 @@ namespace UsabilityDynamics\WPP {
           'data_structure' => $this->get_data_structure(),
           'searchable_geo_parts' => $this->get_searchable_geo_parts(),
           'primary_keys' => array(
-            'post_title' => sprintf( __( '%1$s Title', 'wpp' ), ucfirst( Utility::property_label( 'singular' ) ) ),
+            'post_title' => sprintf( __( '%1$s Title', 'wpp' ), Utility::property_label( 'singular' ) ),
             'post_type' => __( 'Post Type' ),
-            "post_content" => sprintf( __( '%1$s Content', 'wpp' ), ucfirst( Utility::property_label( 'singular' ) ) ),
-            'post_excerpt' => sprintf( __( '%1$s Excerpt', 'wpp' ), ucfirst( Utility::property_label( 'singular' ) ) ),
-            'post_status' => sprintf( __( '%1$s Status', 'wpp' ), ucfirst( Utility::property_label( 'singular' ) ) ),
-            'menu_order' => sprintf( __( '%1$s Order', 'wpp' ), ucfirst( Utility::property_label( 'singular' ) ) ),
-            'post_date' => sprintf( __( '%1$s Date', 'wpp' ), ucfirst( Utility::property_label( "singular" ) ) ),
-            'post_author' => sprintf( __( '%1$s Author', 'wpp' ), ucfirst( Utility::property_label( "singular" ) ) ),
+            "post_content" => sprintf( __( '%1$s Content', 'wpp' ), Utility::property_label( 'singular' ) ),
+            'post_excerpt' => sprintf( __( '%1$s Excerpt', 'wpp' ), Utility::property_label( 'singular' ) ),
+            'post_status' => sprintf( __( '%1$s Status', 'wpp' ), Utility::property_label( 'singular' ) ),
+            'menu_order' => sprintf( __( '%1$s Order', 'wpp' ), Utility::property_label( 'singular' ) ),
+            'post_date' => sprintf( __( '%1$s Date', 'wpp' ), Utility::property_label( "singular" ) ),
+            'post_author' => sprintf( __( '%1$s Author', 'wpp' ), Utility::property_label( "singular" ) ),
             'post_date_gmt' => '',
             'post_parent' => '',
             'ping_status' => '',
@@ -709,6 +709,20 @@ namespace UsabilityDynamics\WPP {
             'data' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'static/data',
             'modules' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'vendor/usabilitydynamics'
           ),
+          'labels' => apply_filters( 'wpp_object_labels', array(
+            'name'                => Utility::property_label( 'plural' ),
+            'all_items'           => sprintf( __( 'All %1$s', 'wpp' ), Utility::property_label( 'plural' ) ),
+            'singular_name'       => Utility::property_label( 'singular' ),
+            'add_new'             => sprintf( __( 'Add %1$s', 'wpp' ), Utility::property_label( 'singular' ) ),
+            'add_new_item'        => sprintf( __( 'Add New %1$s', 'wpp' ), Utility::property_label( 'singular' ) ),
+            'edit_item'           => sprintf( __( 'Edit %1$s', 'wpp' ), Utility::property_label( 'singular' ) ),
+            'new_item'            => sprintf( __( 'New %1$s', 'wpp' ), Utility::property_label( 'singular' ) ),
+            'view_item'           => sprintf( __( 'View %1$s', 'wpp' ), Utility::property_label( 'singular' ) ),
+            'search_items'        => sprintf( __( 'Search %1$s', 'wpp' ), Utility::property_label( 'plural' ) ),
+            'not_found'           => sprintf( __( 'No %1$s found', 'wpp' ), Utility::property_label( 'plural' ) ),
+            'not_found_in_trash'  => sprintf( __( 'No %1$s found in Trash', 'wpp' ), Utility::property_label( 'plural' ) ),
+            'parent_item_colon'   => ''
+          ) ),
         );
 
         $_computed = (array) apply_filters( 'wpp::computed', $_computed );
