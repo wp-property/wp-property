@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "88e583910b7cf166c3c9755c87c011b6",
+    "hash": "2038fad41888f343ec31e5c6211ad404",
     "packages": [
         {
             "name": "datatables/datatables",
@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DataTables/DataTables.git",
-                "reference": "2891978fd15297a05aa4f11b02579a16cdef182d"
+                "reference": "246eb5584928f359eee6ca29f52f9cbaf4409cd9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DataTables/DataTables/zipball/2891978fd15297a05aa4f11b02579a16cdef182d",
-                "reference": "2891978fd15297a05aa4f11b02579a16cdef182d",
+                "url": "https://api.github.com/repos/DataTables/DataTables/zipball/246eb5584928f359eee6ca29f52f9cbaf4409cd9",
+                "reference": "246eb5584928f359eee6ca29f52f9cbaf4409cd9",
                 "shasum": ""
             },
             "type": "library",
@@ -26,7 +26,7 @@
             ],
             "description": "DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, which will add advanced interaction controls to any HTML table.",
             "homepage": "http://www.datatables.net/",
-            "time": "2014-01-05 11:18:42"
+            "time": "2014-01-17 16:45:14"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -162,7 +162,7 @@
                     "lib"
                 ]
             },
-            "time": "2014-01-10 16:31:22"
+            "time": "2014-01-18 12:27:45"
         },
         {
             "name": "usabilitydynamics/lib-settings",
@@ -198,7 +198,7 @@
                     "lib"
                 ]
             },
-            "time": "2014-01-10 16:31:16"
+            "time": "2014-01-18 04:35:07"
         },
         {
             "name": "usabilitydynamics/lib-ui",
@@ -236,7 +236,7 @@
                     "lib"
                 ]
             },
-            "time": "2014-01-10 16:31:18"
+            "time": "2014-01-18 04:35:09"
         },
         {
             "name": "usabilitydynamics/lib-utility",
@@ -258,7 +258,7 @@
                     "lib"
                 ]
             },
-            "time": "2014-01-10 16:26:12"
+            "time": "2014-01-18 12:27:50"
         },
         {
             "name": "usabilitydynamics/lib-wp-shortcode",
@@ -370,7 +370,7 @@
             ],
             "authors": [
                 {
-                    "name": "Jonathan Wage",
+                    "name": "Jonathan H. Wage",
                     "email": "jonwage@gmail.com",
                     "homepage": "http://www.jwage.com/",
                     "role": "Creator"
@@ -389,7 +389,7 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -554,12 +554,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "39de7a50bbf8ab91b2a3d6a51a645d105dc191f7"
+                "reference": "03842eee9e942796f05365913655a6afddef613e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/39de7a50bbf8ab91b2a3d6a51a645d105dc191f7",
-                "reference": "39de7a50bbf8ab91b2a3d6a51a645d105dc191f7",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/03842eee9e942796f05365913655a6afddef613e",
+                "reference": "03842eee9e942796f05365913655a6afddef613e",
                 "shasum": ""
             },
             "require": {
@@ -616,7 +616,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2014-01-13 10:33:23"
+            "time": "2014-01-15 06:20:40"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -670,7 +670,7 @@
         },
         {
             "name": "phpoption/phpoption",
-            "version": "dev-master",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/php-option.git",
@@ -735,7 +735,7 @@
                 "php": ">=5.3"
             },
             "type": "library",
-            "time": "2014-01-14 06:32:24"
+            "time": "2014-01-20 11:25:00"
         },
         {
             "name": "usabilitydynamics/wp-property-agents",
@@ -861,7 +861,7 @@
                     "lib"
                 ]
             },
-            "time": "2014-01-14 06:28:18"
+            "time": "2014-01-18 18:37:43"
         },
         {
             "name": "usabilitydynamics/wp-property-pdf",
@@ -881,7 +881,7 @@
                 "php": ">=5.3"
             },
             "type": "library",
-            "time": "2014-01-10 15:42:14"
+            "time": "2014-01-18 12:28:13"
         },
         {
             "name": "usabilitydynamics/wp-property-power-tools",
@@ -921,7 +921,7 @@
                 "php": ">=5.3"
             },
             "type": "library",
-            "time": "2014-01-10 15:42:17"
+            "time": "2014-01-18 12:28:15"
         },
         {
             "name": "usabilitydynamics/wp-property-supermap",
@@ -941,7 +941,7 @@
                 "php": ">=5.3"
             },
             "type": "library",
-            "time": "2014-01-10 15:42:19"
+            "time": "2014-01-18 12:28:17"
         }
     ],
     "aliases": [

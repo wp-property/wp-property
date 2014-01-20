@@ -12,10 +12,13 @@
         "admin_only": false
       },
       "search": [
-        "input", "dropdown", "multi_checkbox"
+        "input",
+        "dropdown",
+        "multi_checkbox"
       ],
       "admin": [
-        "input", "dropdown"
+        "input",
+        "dropdown"
       ]
     },
     "detail": {
@@ -48,10 +51,15 @@
         "admin_only": false
       },
       "search": [
-        "input", "range_input", "range_dropdown", "dropdown", "multi_checkbox"
+        "input",
+        "range_input",
+        "range_dropdown",
+        "dropdown",
+        "multi_checkbox"
       ],
       "admin": [
-        "input", "dropdown"
+        "input",
+        "dropdown"
       ]
     },
     "location": {
@@ -66,10 +74,13 @@
         "admin_only": false
       },
       "search": [
-        "input", "dropdown", "multi_checkbox"
+        "input",
+        "dropdown",
+        "multi_checkbox"
       ],
       "admin": [
-        "input", "dropdown"
+        "input",
+        "dropdown"
       ]
     },
     "numeric": {
@@ -82,10 +93,15 @@
         "admin_only": false
       },
       "search": [
-        "input", "range_input", "range_dropdown", "dropdown", "multi_checkbox"
+        "input",
+        "range_input",
+        "range_dropdown",
+        "dropdown",
+        "multi_checkbox"
       ],
       "admin": [
-        "input", "dropdown"
+        "input",
+        "dropdown"
       ]
     },
     "timestamp": {
@@ -98,7 +114,8 @@
         "admin_only": false
       },
       "search": [
-        "date", "range_date"
+        "date",
+        "range_date"
       ],
       "admin": [
         "date"
@@ -114,10 +131,13 @@
         "admin_only": false
       },
       "search": [
-        "input", "dropdown", "multi_checkbox"
+        "input",
+        "dropdown",
+        "multi_checkbox"
       ],
       "admin": [
-        "input", "dropdown"
+        "input",
+        "dropdown"
       ]
     },
     "agent_name": {
@@ -130,10 +150,13 @@
         "admin_only": false
       },
       "search": [
-        "input", "dropdown", "multi_checkbox"
+        "input",
+        "dropdown",
+        "multi_checkbox"
       ],
       "admin": [
-        "input", "dropdown"
+        "input",
+        "dropdown"
       ]
     },
     "boolean": {
@@ -162,10 +185,15 @@
         "admin_only": false
       },
       "search": [
-        "input", "range_input", "range_dropdown", "dropdown", "multi_checkbox"
+        "input",
+        "range_input",
+        "range_dropdown",
+        "dropdown",
+        "multi_checkbox"
       ],
       "admin": [
-        "input", "dropdown"
+        "input",
+        "dropdown"
       ]
     },
     "email": {
@@ -177,10 +205,13 @@
         "admin_only": false
       },
       "search": [
-        "input", "dropdown", "multi_checkbox"
+        "input",
+        "dropdown",
+        "multi_checkbox"
       ],
       "admin": [
-        "input", "dropdown"
+        "input",
+        "dropdown"
       ]
     },
     "phone_number": {
@@ -192,10 +223,13 @@
         "admin_only": false
       },
       "search": [
-        "input", "dropdown", "multi_checkbox"
+        "input",
+        "dropdown",
+        "multi_checkbox"
       ],
       "admin": [
-        "input", "dropdown"
+        "input",
+        "dropdown"
       ]
     },
     "admin_note": {
@@ -223,7 +257,9 @@
         "admin_only": true
       },
       "search": [
-        "input", "dropdown", "multi_checkbox"
+        "input",
+        "dropdown",
+        "multi_checkbox"
       ],
       "admin": []
     },
@@ -238,7 +274,8 @@
         "can_be_disabled": true
       },
       "search": [
-        "input", "multi_checkbox"
+        "input",
+        "multi_checkbox"
       ],
       "admin": []
     },
@@ -255,101 +292,31 @@
         "search_predefined_values": false
       },
       "search": [
-        "input", "dropdown", "multi_checkbox"
+        "input",
+        "dropdown",
+        "multi_checkbox"
       ],
       "admin": [
         "dropdown"
       ]
     }
   },
-  "_constants": {
-    "WPP_Debug": "Toggles debug / developer mode.",
-    "WPP_Version": "Current WPP version."
-  },
-  "_content_modules": {
-    "gallery": {
-      "description": "Image gallery for a single listing.",
-      "nestable": true,
-      "requires": "property",
-      "properties": {
-        "title": {
-          "description": "Title of module.",
-          "type": "string"
-        },
-        "image_type": {
-          "type": "string",
-          "description": "Size of thumbnail image.",
-          "values": "{$image_sizes}"
-        },
-        "big_image_type": {
-          "type": "string",
-          "description": "Size of full-size image.",
-          "values": "{$image_sizes}"
-        },
-        "gallery_count": {
-          "type": "integer",
-          "description": "Maximum number of images."
-        },
-        "show_caption": {
-          "type": "boolean",
-          "description": "Display capations for gallery items."
-        },
-        "show_description": {
-          "type": "boolean",
-          "description": "Display descriptions for gallery items."
-        },
-        "property_id": {
-          "type": "integer",
-          "description": "ID of property to get images for.",
-          "default": "property.ID",
-          "required": true
-        }
-      }
-    },
-    "property_slideshow": {},
-    "global_slideshow": {},
-    "property_gallery": {},
-    "property_map": {
-      "nestable": true,
-      "requires": "property"
-    },
-    "property_attribute": {
-      "nestable": true,
-      "requires": "property"
-    },
-    "property_attributes": {},
-    "list_attachments": {},
-    "taxonomy_terms": {},
-    "property_search": {},
-    "property_overview": {},
-    "featured_properties": {
-      "type": "array"
-    },
-    "other_properties": {
-      "type": "array"
-    },
-    "child_properties": {
-      "type": "type"
-    },
-    "latest_properties": {
-      "loop": true
-    },
-    "featured-properties": {
-      "loop": true
-    },
-    "google_maps_infobox": {},
-    "property_flyer": {},
-    "wpp_pdf_list": {},
-    "supermap": {},
-    "agent_card": {}
-  },
-  "_core_features": {
-    "locations": true,
-    "featured": true
-  },
   "_geo_attributes": [
-    "formatted_address", "street_number", "route", "district", "city", "county", "state", "state_code", "country",
-    "country_code", "postal_code", "latitude", "longitude", "_wpp::geo_hash", "_wpp::location_type"
+    "formatted_address",
+    "street_number",
+    "route",
+    "district",
+    "city",
+    "county",
+    "state",
+    "state_code",
+    "country",
+    "country_code",
+    "postal_code",
+    "latitude",
+    "longitude",
+    "_wpp::geo_hash",
+    "_wpp::location_type"
   ],
   "_input_types": {
     "input": "l10n.field_input",
@@ -413,7 +380,8 @@
       "classification": "string",
       "searchable": false,
       "values": [
-        "Publish", "Trash"
+        "Publish",
+        "Trash"
       ],
       "variations": {
         "name": "post_status",
@@ -526,9 +494,6 @@
     "mysql_date": "%\\d{1,2}/\\d{1,2}/\\d{4}%i",
     "get_script_url": "#^(.*/)?([^/]+)$#"
   },
-  "_rewrite_rules": {
-    "%property_type%/(.+?)/?$": "index.php?property_type=$matches[1]&pagename=$matches[2]"
-  },
   "configuration": {
     "admin_ui": {
       "overview_table_thumbnail_size": "thumbnail"
@@ -581,9 +546,6 @@
   "default_coords": {
     "latitude": "",
     "longitude": ""
-  },
-  "descriptions": {
-    "property_type": "The property type will determine the layout."
   },
   "location_matters": [],
   "taxonomies": {
