@@ -305,7 +305,7 @@ namespace UsabilityDynamics\WPP {
 
     foreach( $property_stats as $slug => $label ) {
 
-      $attribute_data = Utility::get_attribute( $slug );
+      $attribute_data = Utility::get_attribute_data( $slug );
 
       $attribute_description = array();
 
@@ -599,7 +599,7 @@ namespace UsabilityDynamics\WPP {
       function property_type_selector( $property ) {
         global $wp_properties;
 
-        $attribute = Utility::get_attribute( 'property_type' );
+        $attribute = Utility::get_attribute_data( 'property_type' );
 
         $type_label = ( $attribute[ 'label' ] ? $attribute[ 'label' ] : sprintf( __( '%1s Type', 'wpp' ), Utility::property_label() ) );
 

@@ -160,15 +160,6 @@ namespace UsabilityDynamics\WPP {
         // Metabox Handler.
         add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 
-        // @test - Extend model.
-        // $this->requires->data( array( 'aasdfsadfasd' => 'asdfasdf' ));
-        // $this->requires->data( 'asdfasdf', array( 'aasdfsadfasd' => 'asdfasdf' ));
-        // $this->requires->data( 'asd.fasdf', array( 'aasdfsadfasd' => 'asdfasdf' ));
-
-        // $this->locale->data( 'property', __( 'Property' ) );
-        // $this->locale->data( 'my.stuff', __( 'My Stuff' ) );
-        // $this->locale->data( 'xmli.request_error', __( 'la la la' ) );
-
       }
 
       /**
@@ -520,6 +511,8 @@ namespace UsabilityDynamics\WPP {
 
         // Pre Initialization.
         do_action( 'wpp:init:pre', $this );
+        
+        //include_once( $this->get( '_computed.path.root' ) . '/test/meta-box.php' );
 
         //** Load languages */
         load_plugin_textdomain( $this->text_domain, false, $this->get( '_computed.path.root' ) . '/languages' );

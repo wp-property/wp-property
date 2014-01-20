@@ -11,17 +11,7 @@
 namespace UsabilityDynamics\WPP {
 
   if( !class_exists( 'UsabilityDynamics\WPP\Meta_Box' ) ) {
-
-    if( !defined( 'RWMB_URL' ) ) {
-      define( 'RWMB_URL', WPP_URL . 'vendor/usabilitydynamics/meta-box/' );
-      define( 'RWMB_DIR', WPP_Path. 'vendor/usabilitydynamics/meta-box/' );
-      define( 'RWMB_VER', '4.3.4' );
-      define( 'RWMB_JS_URL', trailingslashit( RWMB_URL . 'js' ) );
-      define( 'RWMB_CSS_URL', trailingslashit( RWMB_URL . 'css' ) );
-      define( 'RWMB_INC_DIR', trailingslashit( RWMB_DIR . 'inc' ) );
-      define( 'RWMB_FIELDS_DIR', trailingslashit( RWMB_INC_DIR . 'fields' ) );
-    }
-
+  
     /**
      * Class Meta_Box
      *
@@ -54,11 +44,22 @@ namespace UsabilityDynamics\WPP {
        * @param array $args
        */
       function __construct( $args ) {
+        global $wpp;
+      
+        if( !defined( 'RWMB_URL' ) ) {
+          define( 'RWMB_URL', $wpp->get( '_computed.url.modules' ) . '/wp-meta-box/' );
+          define( 'RWMB_DIR', $wpp->get( '_computed.path.modules' ) . '/wp-meta-box/' );
+          define( 'RWMB_VER', '4.3.4' );
+          define( 'RWMB_JS_URL', trailingslashit( RWMB_URL . 'js' ) );
+          define( 'RWMB_CSS_URL', trailingslashit( RWMB_URL . 'css' ) );
+          define( 'RWMB_INC_DIR', trailingslashit( RWMB_DIR . 'inc' ) );
+          define( 'RWMB_FIELDS_DIR', trailingslashit( RWMB_INC_DIR . 'fields' ) );
+        }
 
         $args = Utility::parse_args( $args, array(
           'context'  => 'normal',
           'priority' => 'normal',
-          'pages'    => array( 'property' ),
+          'pages'    => array( 'property', 'post' ),
           'autosave' => true,
           //'default_hidden' => false,
           //'size'          => 30,
