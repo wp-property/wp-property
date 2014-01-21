@@ -551,6 +551,12 @@ namespace UsabilityDynamics\WPP {
         ));
 
         // Register WP-Property locale.
+        /**
+         * @todo: it doesn't work as it's required. wpp.locale is undefined in wpp.model requires.
+         * locale has been added to self::get_model() method. So it's defined as wpp.model.locale now.
+         * The current commented implementation should be fixed or removed from released version. peshkov@UD
+         */
+        /*
         $this->locale = Requires::define(array(
           'id'      => 'wpp.locale',
           'base'    => home_url(),
@@ -558,6 +564,7 @@ namespace UsabilityDynamics\WPP {
           'vary'    => 'x-user',
           'data'    => $this->get_locale()
         ));
+        */
 
         // Initializer.
         do_action( 'wpp:init', $this );
@@ -1457,7 +1464,6 @@ namespace UsabilityDynamics\WPP {
             'installed' => $this->get( 'installed_features' ),
             'available' => $this->get( 'available_features' )
           ),
-          'geo_attributes' => $this->get( 'geo_type_attributes' ),
           'domain' => trim( $_home_url[ 'host' ] ? $_home_url[ 'host' ] : array_shift( explode( '/', $_home_url[ 'path' ], 2 ) ) ),
           'iframe' => $_REQUEST[ 'wp_customize' ] && $_REQUEST[ 'request' ][ 'wp_customize' ] == 'on' ? true : false,
           'permalinks' => get_option( 'permalink_structure' ) == '' ? false : true,
@@ -1467,6 +1473,7 @@ namespace UsabilityDynamics\WPP {
             'plural' => Utility::property_label( 'plural' )
           ),
           'settings' => $this->_settings->get(),
+          'locale' => $this->get_locale(),
         ));
 
       }
