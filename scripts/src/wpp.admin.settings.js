@@ -233,6 +233,8 @@ define( 'wpp.admin.settings', [ 'wpp.model', 'knockout', 'knockout.mapping' ], f
         jQuery( "#wpp_plugins_ajax_response" ).html( data );
       } );
     } );
+    
+    jQuery( "input[type='submit']" ).prop( 'disabled', false );
 
   }
 
