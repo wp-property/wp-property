@@ -539,7 +539,6 @@ if( !class_exists( 'phRETS' ) ) {
 
       $search_arguments[ 'StandardNames' ] = empty( $optional_params[ 'StandardNames' ] ) ? 0 : $optional_params[ 'StandardNames' ];
 
-      //die( '<pre>' . print_r( $search_arguments, true ) . '</pre>' );
       $continue_searching = true; // Keep searching if MAX ROWS is reached and offset_support is true
       while( $continue_searching ) {
 

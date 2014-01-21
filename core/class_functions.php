@@ -181,7 +181,7 @@ class WPP_F extends UD_API {
    * @since 1.31.0
    *
    */
-  function register_post_type_and_taxonomies() {
+  static function register_post_type_and_taxonomies() {
     global $wp_properties;
 
     // Setup taxonomies
@@ -2721,9 +2721,8 @@ class WPP_F extends UD_API {
   /**
    * Check for premium features and load them
    *
-   * @updated 1.6
+   * @updated 1.39.0
    * @since 0.624
-   *
    */
   static function load_premium() {
     global $wp_properties;
@@ -2733,6 +2732,7 @@ class WPP_F extends UD_API {
       'version'      => 'Version',
       'description'  => 'Description',
       'class'        => 'Class',
+      'slug'         => 'Slug',
       'minimum.core' => 'Minimum Core Version',
       'minimum.php'  => 'Minimum PHP Version',
       'capability'   => 'Capability'
@@ -2747,6 +2747,8 @@ class WPP_F extends UD_API {
         @include_once( WPP_Premium . "/index.php" );
       }
 
+      $_verified = array();
+
       while( false !== ( $file = readdir( $premium_dir ) ) ) {
 
         if( $file == 'index.php' )
@@ -2754,19 +2756,31 @@ class WPP_F extends UD_API {
 
         if( end( @explode( ".", $file ) ) == 'php' ) {
 
-          $plugin_slug = str_replace( array( '.php' ), '', $file );
+          $_upgraed = false;
 
-          //** Admin tools premium feature was moved to core. So it must not be loaded twice. */
+          $plugin_data = @get_file_data( WPP_Premium . "/" . $file, $default_headers, 'plugin' );
+
+          $plugin_slug = $plugin_data[ 'slug' ] ? $plugin_data[ 'slug' ] : str_replace( array( '.php' ), '', $file );
+
+          // Admin tools premium feature was moved to core. So it must not be loaded twice.
           if( $plugin_slug == 'class_admin_tools' ) {
             continue;
           }
 
-          $plugin_data = @get_file_data( WPP_Premium . "/" . $file, $default_headers, 'plugin' );
+          if( is_array( $wp_properties[ 'installed_features' ][ $plugin_slug ] ) && $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ] ) {
+
+            if( version_compare( $plugin_data[ 'version' ], $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ] ) > 0 ) {
+              $_upgraed = true;
+            }
+
+          }
 
           $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'name' ]        = $plugin_data[ 'name' ];
           $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ]     = $plugin_data[ 'version' ];
           $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'description' ] = $plugin_data[ 'description' ];
           $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'class' ]       = $plugin_data[ 'class' ] ? $plugin_data[ 'class' ] : $plugin_slug;
+
+          $_verified[] = $plugin_slug;
 
           if( $plugin_data[ 'minimum.core' ] ) {
             $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'minimum.core' ] = $plugin_data[ 'minimum.core' ];
@@ -2791,14 +2805,20 @@ class WPP_F extends UD_API {
             if( !$plugin_data[ 'minimum.php' ] || version_compare( PHP_VERSION, $plugin_data[ 'minimum.php' ] ) > 0 ) {
 
               if( WP_DEBUG == true ) {
-                include_once( WPP_Premium . "/" . $file );
+                include_once( trailingslashit( WPP_Premium ) . $file );
               } else {
-                @include_once( WPP_Premium . "/" . $file );
+                @include_once( trailingslashit( WPP_Premium ) . $file );
               }
 
               // Initialize Module that declare a class.
               if( $plugin_data[ 'class' ] && class_exists( $_class = $plugin_data[ 'class' ] ) ) {
-                new $_class( $wp_properties, $plugin_data );
+                $_instance = new $_class( $wp_properties, $plugin_data );
+
+                // Call Upgrade Method, if exists.
+                if( $_upgraed && is_callable( array( $_instance, 'upgrade' ) ) ) {
+                  $_instance->upgrade( $wp_properties );
+                }
+
               }
 
             }
@@ -2821,7 +2841,18 @@ class WPP_F extends UD_API {
         }
 
       }
+
+      // Remove features that are not found on disk
+      foreach( (array) $wp_properties[ 'installed_features' ] as $_slug => $data ) {
+
+        if( !in_array( $_slug, $_verified ) ) {
+          unset( $wp_properties[ 'installed_features' ][ $_slug ] );
+        }
+
+      }
+
     }
+
 
   }
 
