@@ -2068,6 +2068,7 @@ class WPP_F extends UD_API {
     );
 
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
+
     $use_optgroups = isset( $use_optgroups ) ? $use_optgroups : 'false';
 
     $property_stats = $wp_properties[ 'property_stats' ];
