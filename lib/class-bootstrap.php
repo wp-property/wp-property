@@ -1452,13 +1452,26 @@ namespace UsabilityDynamics\WPP {
       /**
        * Compute Settings Model
        *
+       * @todo: Attention! Returned data is available on frontend. We must not include secure information such as passwords here.
+       *
        * @return array
        */
       private function get_model() {
 
         $_home_url = parse_url( home_url() );
+        
+        $settings = $this->_settings->get();
 
-        return (array) apply_filters( 'wpp::model', array(
+        /** 
+         * If we're not on an admin, we should remove the XMLI info 
+         *
+         * @todo: must be another way to clean up settings for preventing secure issues. peshkov@UD
+         */
+        if( !( is_admin() && current_user_can( 'manage_options' ) ) && isset( $settings[ 'configuration' ][ 'feature_settings' ][ 'property_import' ] ) ){
+          unset( $settings[ 'configuration' ][ 'feature_settings' ][ 'property_import' ] );
+        }
+        
+        $model = (array) apply_filters( 'wpp::model', array(
           'ajax' => admin_url( 'admin-ajax.php' ),
           'modules' => array(
             'installed' => $this->get( 'installed_features' ),
@@ -1472,9 +1485,11 @@ namespace UsabilityDynamics\WPP {
             'singular' => Utility::property_label( 'singular' ),
             'plural' => Utility::property_label( 'plural' )
           ),
-          'settings' => $this->_settings->get(),
+          'settings' => $settings,
           'locale' => $this->get_locale(),
         ));
+        
+        return $model;
 
       }
 

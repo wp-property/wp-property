@@ -3,8 +3,8 @@ Contributors:  usability_dynamics, Anton Korotkoff, andypotanin
 Donate link: http://usabilitydynamics.com/products/wp-property/
 Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 3.4.2
-Tested up to: 3.6.1
-Stable tag: 1.38.3.2
+Tested up to: 3.8
+Stable tag: 1.38.4
 
 
 == Description ==
@@ -239,6 +239,9 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Added unminified JavaScript asset sources and Grunt task to build.
 * Cleaned up PHPDoc tags in code fixed overall code formatting.
 * Added proper composer.json with valid dependencies.
+
+= 1.38.4 =
+* Fixed secure issues.
 
 = 1.38.3.2 =
 * Fixed fatal error related to redeclaration of class.
