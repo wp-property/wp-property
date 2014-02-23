@@ -981,7 +981,7 @@ class WPP_Core {
       $template_found = WPP_F::get_template_part( array(
         "property-{$type}",
         "property",
-      ), array( WPP_Templates ) );
+      ), apply_filters( 'wpp_possible_template_paths', array( WPP_Templates ) ) );
 
       //** Load the first found template */
       if ( $template_found ) {
@@ -1027,7 +1027,7 @@ class WPP_Core {
         $template_found = WPP_F::get_template_part( array(
           "property-search-result",
           "property-overview-page",
-        ), array( WPP_Templates ) );
+        ), apply_filters( 'wpp_possible_template_paths', array( WPP_Templates ) ) );
 
         //** Load the first found template */
         if ( $template_found ) {
@@ -1480,7 +1480,7 @@ class WPP_Core {
       "property-overview-{$property_type}",
       "property-{$template}",
       "property-overview",
-    ), array( WPP_Templates ) );
+    ), apply_filters( 'wpp_possible_template_paths', array( WPP_Templates ) ) );
 
     if ( $template_found ) {
       include $template_found;
@@ -1683,7 +1683,7 @@ class WPP_Core {
     $hide_infobox = ( $args[ 'hide_infobox' ] == 'true' ? true : false );
 
     //** Find most appropriate template */
-    $template_found = WPP_F::get_template_part( array( "content-single-property-map", "property-map" ), array( WPP_Templates ) );
+    $template_found = WPP_F::get_template_part( array( "content-single-property-map", "property-map" ), apply_filters( 'wpp_possible_template_paths', array( WPP_Templates ) ) );
     if ( !$template_found ) {
       return false;
     }

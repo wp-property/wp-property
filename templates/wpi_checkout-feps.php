@@ -49,7 +49,7 @@
         "{$gateway_key}-checkout-{$template}.tpl",
         "{$gateway_key}-checkout",
         "{$gateway_key}-checkout.tpl",
-      ), array( WPP_Templates , WPI_Gateways_Path . '/templates' ) );
+      ), apply_filters( 'wpp_possible_template_paths', array( WPP_Templates , WPI_Gateways_Path . '/templates' ) ) );
 
       if( $template_found ) {
         include $template_found;
