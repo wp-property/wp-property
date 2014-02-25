@@ -299,6 +299,11 @@ class WPP_UI {
     $upwards_inherited_attributes = is_array( $property[ 'system' ][ 'upwards_inherited_attributes' ] ) ? $property[ 'system' ][ 'upwards_inherited_attributes' ] : array();
 
     foreach ( $property_stats as $slug => $label ) {
+      
+      //** Show ( or not ) attribute field on Edit property page for current Property. */
+      if( !apply_filters( 'wpp::metabox::attribute::show', true, $slug, $object->ID ) ) {
+        continue;
+      }
 
       $attribute_data = WPP_F::get_attribute_data( $slug );
 
@@ -464,6 +469,12 @@ class WPP_UI {
     <?php if ( $instance == 'wpp_property_meta' ) : ?>
       <?php $property_meta = $wp_properties[ 'property_meta' ]; ?>
       <?php foreach ( $property_meta as $slug => $label ): ?>
+        <?php 
+        //** Show ( or not ) attribute field on Edit property page for current Property. */
+        if( !apply_filters( 'wpp::metabox::attribute::show', true, $slug, $object->ID ) ) {
+          continue;
+        }
+        ?>
         <tr
           class="wpp_attribute_row wpp_attribute_row_<?php echo $slug; ?> <?php if ( is_array( $wp_properties[ 'hidden_attributes' ][ $property[ 'property_type' ] ] ) && in_array( 'parent', $wp_properties[ 'hidden_attributes' ][ $property[ 'property_type' ] ] ) ) echo 'disabled_row;'; ?>">
           <th><label for="wpp_data_meta_<?php echo $slug; ?>"><?php echo $label; ?></label></th>
