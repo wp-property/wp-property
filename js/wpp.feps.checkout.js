@@ -56,8 +56,8 @@ jQuery(document).ready(function(){
         jQuery('.wpp_feps_message').addClass( 'error' );
         break;
       case 'wpi_spc_success':
-        jQuery( target ).parents( '.wpp_feps_checkout_wrapper' ).remove();
-        jQuery( '.wpp_feps_change_subscription_plan' ).remove();
+        jQuery( target ).parents( '.wpp_feps_checkout_wrapper' ).hide();
+        jQuery( '.wpp_feps_change_subscription_plan' ).hide();
         message = result.message;
         break;
     }
