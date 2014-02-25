@@ -107,6 +107,6 @@
 <div class="wpp_feps_checkout_wrapper">
   <?php if( !is_user_logged_in() || $credits < $plan['price'] ) : ?>
     <?php $fixed_email = !empty( $feps_user_email ) ? "user_email='{$feps_user_email}'" : ''; ?>
-    <?php echo do_shortcode("[wpi_checkout template='feps' custom_amount='true' amount='{$plan['price']}' hidden_attributes='" . FEPS_META_PLAN . "={$plan_slug},wpp::feps::property_id={$property_id}' {$fixed_email} callback_function='wpi_add_feps_credits' title='FEPS Credits']"); ?>
+    <?php echo do_shortcode("[wpi_checkout template='feps' custom_amount='true' amount='{$plan['price']}' hidden_attributes='" . FEPS_META_PLAN . "={$plan_slug},wpp::feps::property_id={$property_id}' {$fixed_email} callback_function='wpp_add_feps_credits' title='FEPS Credits']"); ?>
   <?php endif; ?>
 </div>
