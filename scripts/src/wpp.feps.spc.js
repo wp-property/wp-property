@@ -34,7 +34,7 @@ jQuery(document).ready(function(){
         jQuery('.wpp_feps_message').addClass( 'error' );
         break;
       case 'wpi_spc_success':
-        scp_wrapper.remove();
+        scp_wrapper.hide();
         message = result.message;
         break;
     }
