@@ -577,9 +577,10 @@ class UD_API {
 
     $opts = wp_parse_args( $opts, array(
       'instance' => $instance,
+      'load' => false,
     ) );
     
-    //** Allows to add/change templates storage directory. @since 1.39.0 */
+    //** Allows to add/change templates storage directory. */
     $path = apply_filters( "ud::template_part::path", $path, $name, $opts );
 
     foreach ( $name as $n ) {
@@ -597,8 +598,13 @@ class UD_API {
     }
 
     $template = apply_filters( "ud::template_part::{$opts['instance']}", $template, array( 'name' => $name, 'path' => $path, 'opts' => $opts ) );
-
-    WPP_F::console_log( $template, $instance );
+    
+    //** If match and load was requested, get template and return */
+    if( !empty( $template ) && $opts[ 'load' ] == true ) {
+      ob_start();
+      load_template( $template, false );
+      return ob_get_clean();
+    }
 
     return !empty( $template ) ? $template : false;
   }
