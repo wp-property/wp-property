@@ -578,6 +578,9 @@ class UD_API {
     $opts = wp_parse_args( $opts, array(
       'instance' => $instance,
     ) );
+    
+    //** Allows to add/change templates storage directory. @since 1.39.0 */
+    $path = apply_filters( "ud::template_part::path", $path, $name, $opts );
 
     foreach ( $name as $n ) {
       $n = "{$n}.php";
