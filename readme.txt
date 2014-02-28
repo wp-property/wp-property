@@ -234,6 +234,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Fixed fatal error on notification sending when WP-CRM plugin is installed and activated.
 * Fixed attributes by groups sorting on single property page.
 * Fixed Address Validation functionality.
+* Fix to base_url for obfuscated Wordpress structure.
 * White Label fixes.
 
 
