@@ -63,3 +63,7 @@ if ( !class_exists( 'UD_F' ) ) {
   }
 }
 
+if ( !class_exists( 'WPP_RETS' ) ) {
+  class WPP_RETS extends phRETS {
+  }
+}
