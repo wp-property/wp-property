@@ -1247,7 +1247,22 @@ if ( !function_exists( 'sort_stats_by_groups' ) ):
         unset( $filtered_stats[ $key ] );
       }
     }
-
+    
+    //** Sort by saved groups order. */
+    $main_ordered = array();
+    $ordered = array();
+    foreach( $group_keys as $key ) {
+      if( array_key_exists( $key, $filtered_stats ) ) {
+        if( $key == $main_stats_group ) {
+          $main_ordered[$key] = $filtered_stats[$key];
+        } else {
+          $ordered[$key] = $filtered_stats[$key];
+        } 
+        unset( $filtered_stats[$key] );
+      }
+    }
+    $filtered_stats = $main_ordered + $ordered + $filtered_stats;
+    
     //echo "<pre>";print_r($filtered_stats);echo "</pre>";
     return $filtered_stats;
   }
