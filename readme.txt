@@ -232,6 +232,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Fixed the bug with redirecting to Paypol on checkout (FEPS) related to Mozilla browser.
 * Fixed the bug with listing publishing after successful processed checkout on sponsored listings form (FEPS).
 * Fixed fatal error on notification sending when WP-CRM plugin is installed and activated.
+* Fixed attributes by groups sorting on single property page.
 
 
 = 1.38.4 =
