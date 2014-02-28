@@ -20,9 +20,6 @@ if (empty($argv[0])) {
   exit(1);
 }
 
-//** Enable/disable debug mode. debug_mode argv must be passed to enable it. */
-define( 'WPP_DEBUG_MODE', ( !empty( $argv[3] ) && $argv[3] == 'debug_mode' ? true : false ) );
-
 $cron_action = $argv[1];
 $schedule_hash = $argv[2];
 $ms_url = (!empty($argv[3])) ? $argv[3] : '';
@@ -64,6 +61,11 @@ if(!file_exists($wp_load_path)) {
   // Load WordPress - intentionally using an absolute URL due to issues with relative paths on the CLI.
   include $wp_load_path;
 
+}
+
+//** Enable/disable debug mode. debug_mode argv must be passed to enable it. */
+if( !defined( 'WPP_DEBUG_MODE' ) ) {
+  define( 'WPP_DEBUG_MODE', ( !empty( $argv[3] ) && $argv[3] == 'debug_mode' ? true : false ) );
 }
 
 //** Ensure file was loaded and procesed */
