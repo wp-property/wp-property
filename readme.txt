@@ -231,13 +231,15 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Added filter ud::template_part::path which allows to add/change templates storage directory.
 * Added improvements to Front End Property Submissions (FEPS) premium feature.
 * Added improvements to property search form.
+* Added ability to filter properties by ID or property_id attribute for shortcode [property_overview]. Example: [property_overview ID="777"].
 * Improved init of WPP_DEBUG_MODE for cron job.
 * Fixed the bug with redirecting to PayPal on checkout related to Mozilla browser (FEPS).
 * Fixed the bug with listing publishing after successful processed checkout on sponsored listings form (FEPS).
 * Fixed fatal error on notification sending when WP-CRM plugin is installed and activated.
 * Fixed attributes by groups sorting on single property page.
 * Fixed Address Validation functionality.
-* Fixed pagination issue of [property_overview] shortcode
+* Fixed the issue with '+' symbol in values on settings saving.
+* Fixed pagination issue of [property_overview] shortcode.
 * Fix to base_url for obfuscated WordPress structure.
 * White Label fixes.
 * Updated Portuguese (BR) Localization.

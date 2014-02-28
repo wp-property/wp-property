@@ -1030,10 +1030,12 @@ class WPP_F extends UD_API {
       }
     }
 
+    $keys[ ] = 'id';
+    $keys[ ] = 'property_id';
+    $keys[ ] = 'post_id';
     $keys[ ] = 'post_author';
     $keys[ ] = 'post_title';
     $keys[ ] = 'post_date';
-    $keys[ ] = 'post_id';
     $keys[ ] = 'post_parent';
     $keys[ ] = 'property_type';
     $keys[ ] = 'featured';
@@ -3237,6 +3239,17 @@ class WPP_F extends UD_API {
   static function get_properties( $args = "", $total = false ) {
     global $wpdb, $wp_properties, $wpp_query;
 
+    //** Cleanup (fix) ID argument if it's passed */
+    $args = wp_parse_args( $args );
+    if( isset( $args[ 'id' ] ) ) {
+      $args[ 'ID' ] = $args[ 'id' ];
+      unset( $args[ 'id' ] );
+    }
+    if( isset( $args[ 'property_id' ] ) ) {
+      $args[ 'ID' ] = $args[ 'property_id' ];
+      unset( $args[ 'property_id' ] );
+    }
+    
     //** Prints args to firebug if debug mode is enabled */
     $log = is_array( $args ) ? urldecode( http_build_query( $args ) ) : $args;
     WPP_F::console_log( "get_properties() args: {$log}" );

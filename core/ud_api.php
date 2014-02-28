@@ -112,7 +112,10 @@ class UD_API {
    * @author peshkov@UD
    */
   function parse_str( $request, $data = array() ) {
+    $hash = md5( '%2B' );
+    $request = str_replace( '%2B', $hash, $_REQUEST[ 'data' ] );
     $request = urldecode( $request );
+    $request = str_replace( $hash, '%2B', $request );
     $tokens = explode( "&", $request );
     foreach ( $tokens as $token ) {
       $arr = array();
