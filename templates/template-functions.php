@@ -1344,9 +1344,7 @@ if ( !function_exists( 'draw_property_search_form' ) ):
       <?php
       //** If no property_type passed in search_attributes, we get defaults */
       if ( is_array( $searchable_property_types ) && !array_key_exists( 'property_type', array_fill_keys( $search_attributes, 1 ) ) ) {
-        foreach ( $searchable_property_types as $property ) {
-          echo '<input type="hidden" name="wpp_search[property_type][]" value="' . $property . '" />';
-        }
+        echo '<input type="hidden" name="wpp_search[property_type]" value="' . implode( ',', $searchable_property_types ) . '" />';
       }
       ?>
       <ul class="wpp_search_elements">

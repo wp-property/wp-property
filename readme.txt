@@ -230,6 +230,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 = 1.39.0 =
 * Added filter ud::template_part::path which allows to add/change templates storage directory.
 * Added improvements to Front End Property Submissions (FEPS) premium feature.
+* Added improvements to property search form.
 * Fixed the bug with redirecting to PayPal on checkout related to Mozilla browser (FEPS).
 * Fixed the bug with listing publishing after successful processed checkout on sponsored listings form (FEPS).
 * Fixed fatal error on notification sending when WP-CRM plugin is installed and activated.
