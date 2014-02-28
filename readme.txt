@@ -237,7 +237,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Fixed Address Validation functionality.
 * Fix to base_url for obfuscated WordPress structure.
 * White Label fixes.
-
+* Updated Portuguese (BR) Localization.
 
 = 1.38.4 =
 * Fixed secure issues.
