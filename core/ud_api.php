@@ -102,7 +102,25 @@ class UD_API {
     }
 
   }
-
+  
+  /**
+   * Parses Query.
+   * HACK. The current logic solves the issue of max_input_vars in the case if query is huge.
+   * 
+   * @see parse_str() Default PHP function
+   * @version 1.0
+   * @author peshkov@UD
+   */
+  function parse_str( $request, $data = array() ) {
+    $request = urldecode( $request );
+    $tokens = explode( "&", $request );
+    foreach ( $tokens as $token ) {
+      $arr = array();
+      parse_str( $token, $arr );
+      $data = self::extend( $data, $arr );
+    }
+    return $data;
+  }
 
   /**
    * Port of jQuery.extend() function.
