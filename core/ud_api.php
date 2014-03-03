@@ -24,16 +24,6 @@ define( 'UD_API_Transdomain', 'UD_API_Transdomain' );
 class UD_API {
 
   /**
-   * PHP4 style Constructor - Calls PHP5 Style Constructor
-   *
-   * @since 1.0.0
-   * @return WP_Http
-   */
-  function UD_API() {
-    $this->__construct();
-  }
-
-  /**
    * Generate prefix based on class calling a function. Requires PHP >=  5.3
    *
    * Examples:
