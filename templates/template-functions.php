@@ -1449,7 +1449,8 @@ if ( !function_exists( 'wpp_render_search_input' ) ):
       'search_values' => false,
       'attrib' => false,
       'random_element_id' => 'wpp_search_element_' . rand( 1000, 9999 ),
-      'value' => false
+      'value' => false,
+      'placeholder' => false
     );
     extract( wp_parse_args( $args, $defaults ) );
     $attribute_data = WPP_F::get_attribute_data( $attrib );
@@ -1461,14 +1462,14 @@ if ( !function_exists( 'wpp_render_search_input' ) ):
       switch ( $use_input_type ) {
         case 'input':
           ?>
-          <input id="<?php echo $random_element_id; ?>" class="<?php echo $attribute_data[ 'ui_class' ]; ?>" name="wpp_search[<?php echo $attrib; ?>]" value="<?php echo $value; ?>" type="text"/>
+          <input id="<?php echo $random_element_id; ?>" class="<?php echo $attribute_data[ 'ui_class' ]; ?>" name="wpp_search[<?php echo $attrib; ?>]" value="<?php echo $value; ?>" placeholder="<?php echo $placeholder; ?>" type="text" />
           <?php
           break;
         case 'range_input':
           ?>
-          <input id="<?php echo $random_element_id; ?>" class="wpp_search_input_field_min wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" type="text" name="wpp_search[<?php echo $attrib; ?>][min]" value="<?php echo $value[ 'min' ]; ?>"/>
+          <input id="<?php echo $random_element_id; ?>" class="wpp_search_input_field_min wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" type="text" name="wpp_search[<?php echo $attrib; ?>][min]" value="<?php echo $value[ 'min' ]; ?>" placeholder="<?php echo $placeholder[ 'min' ]; ?>"/>
           <span class="wpp_dash">-</span>
-          <input class="wpp_search_input_field_max wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" type="text" name="wpp_search[<?php echo $attrib; ?>][max]" value="<?php echo $value[ 'max' ]; ?>"/>
+          <input class="wpp_search_input_field_max wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" type="text" name="wpp_search[<?php echo $attrib; ?>][max]" value="<?php echo $value[ 'max' ]; ?>" placeholder="<?php echo $placeholder[ 'max' ]; ?>"/>
           <?php
           break;
         case 'range_dropdown':
