@@ -1184,7 +1184,7 @@ if ( !function_exists( 'sort_stats_by_groups' ) ):
     }
 
     //** Convert regular stat array to array with values as keys */
-    if ( $args[ 'fix_stats_array' ] = true ) {
+    if ( $args[ 'fix_stats_array' ] == true ) {
       foreach ( (array) $stats as $meta_key ) {
         $attribute_label = $wpp_property_stat_labels[ $meta_key ];
         $fixed_stats[ $attribute_label ] = $meta_key;
