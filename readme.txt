@@ -228,10 +228,11 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 == Changelog ==
 
 = 1.40.0 =
+* Added 'Automatic Renew Subscription Plan' option for Front End Properties submissions (FEPS) premium feature.
 * Added improvements and fixes to Twentytwelve theme's styles.
 * Refactored CSS files. Added LESS implementation.
 * Fixed view styles on premium features settings pages. Compatibility with WordPress 3.8 and higher.
-* Fixed condition in sort_stats_by_groups function
+* Fixed condition in sort_stats_by_groups function.
 
 
 = 1.39.0 =
