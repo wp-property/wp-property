@@ -227,9 +227,10 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 
 == Changelog ==
 
-= 1.39.1 =
+= 1.40.0 =
+* Added improvements and fixes to Twentytwelve theme's styles.
+* Refactored CSS files. Added LESS implementation.
 * Fixed view styles on premium features settings pages. Compatibility with WordPress 3.8 and higher.
-
 
 = 1.39.0 =
 * Added filter ud::template_part::path which allows to add/change templates storage directory.
