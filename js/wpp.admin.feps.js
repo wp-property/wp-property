@@ -1,7 +1,5 @@
 /**
- * WP-Property FEPS Page ( Property Forms )
- *
- * This file is included on Edit Agent page.
+ * WP-Property FEPS settings Page ( Property Forms )
  *
  * @author peshkov@UD
  */
@@ -148,10 +146,10 @@ jQuery.extend( wpp = wpp || {}, { ui: { feps: {
     jQuery('ul.tabs li.ui-state-default:not(:first):not(:has(a.remove-tab))')
       .append('<a href="javascript:void(0);" class="remove-tab">x</a>')
       .mouseenter(function(){
-        jQuery('a.remove-tab', this).show('fast');
+        jQuery('a.remove-tab', this).show();
       })
       .mouseleave(function(){
-        jQuery('a.remove-tab', this).hide('fast');
+        jQuery('a.remove-tab', this).hide();
       });
     // On remove tab button click
     jQuery('ul.tabs li a.remove-tab').unbind('click');

@@ -79,6 +79,10 @@ $l10n = array(
     'form_could_not_be_removed_1'   => __( 'Form could not be removed because of some server error.', 'wpp' ),
     'form_could_not_be_removed_2'   => __( 'Form could not be removed because form ID is undefined.', 'wpp' ),
   ),
+  
+  'fbtabs' => array(
+    'unnamed_canvas'                  => __( 'Unnamed Canvas', 'wpp' ),
+  ),
 
 );
 

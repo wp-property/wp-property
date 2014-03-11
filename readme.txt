@@ -227,6 +227,10 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 
 == Changelog ==
 
+= 1.39.1 =
+* Fixed view styles on premium features settings pages. Compatibility with WordPress 3.8 and higher.
+
+
 = 1.39.0 =
 * Added filter ud::template_part::path which allows to add/change templates storage directory.
 * Added improvements to Front End Property Submissions (FEPS) premium feature.

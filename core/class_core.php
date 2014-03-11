@@ -1915,6 +1915,7 @@ class WPP_Core {
       'ajax_url' => admin_url('admin-ajax.php'),
       'home_url' => home_url(),
       'user_logged_in' => is_user_logged_in() ? 'true' : 'false',
+      'is_permalink' => ( get_option( 'permalink_structure' ) !== '' ? true : false ),
       'settings' => $wp_properties,
     );
 
@@ -1924,7 +1925,7 @@ class WPP_Core {
 
     $data = apply_filters( 'wpp::get_instance', $data );
     
-    /** If we're not on an admin, we should remove the XMLI info */
+    /** Security: If we're not on an admin, we should remove the XMLI info */
     if( !( is_admin() && current_user_can( 'manage_options' ) ) && isset( $data[ 'settings' ][ 'configuration' ][ 'feature_settings' ][ 'property_import' ] ) ){
       unset( $data[ 'settings' ][ 'configuration' ][ 'feature_settings' ][ 'property_import' ] );
     }
