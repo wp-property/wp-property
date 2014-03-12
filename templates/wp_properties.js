@@ -20,7 +20,7 @@ jQuery( document ).ready( function () {
   jQuery( "a.fancybox_image img" ).click( function ( e ) {
     /* Do nothing in FancyBox is set */
     if ( typeof jQuery.fn.fancybox === 'function' ) {
-      return;
+      return null;
     }
     /* Fancybox is not set as expected, do not open the image URL */
     e.preventDefault();
@@ -30,8 +30,9 @@ jQuery( document ).ready( function () {
   jQuery( document ).bind( 'wpp_pagination_change', function ( e, data ) {
     var overview_id = data.overview_id;
     var position = jQuery( "#wpp_shortcode_" + overview_id ).offset();
-    jQuery.scrollTo( position.top - 40 + 'px', 1500 );
-
+    if( typeof jQuery.scrollTo !== 'undefined' ) {
+      jQuery.scrollTo( position.top - 40 + 'px', 1500 );
+    }
   } );
 
   jQuery( ".ui-tabs" ).bind( "tabsshow", function ( event, ui ) {

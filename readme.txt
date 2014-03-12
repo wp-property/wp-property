@@ -237,6 +237,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Fixed condition in sort_stats_by_groups function.
 * Fixed wrong condition in get_properties function for value which contains '-' symbol in it ( e.g. 'New-York' ).
 * Fixed draw_stats function.
+* Removed deprecated option "Load WP-Property scripts on all front-end pages".
 
 = 1.39.0 =
 * Added filter ud::template_part::path which allows to add/change templates storage directory.

@@ -868,12 +868,6 @@ class WPP_Core {
       wp_enqueue_style( 'wp-property-theme-specific' );
     }
 
-    //** Load non-essential scripts and styles if option is enabled to load them globally */
-    if ( $wp_properties[ 'configuration' ][ 'load_scripts_everywhere' ] == 'true' ) {
-      WPP_F::console_log( 'Loading WP-Property scripts globally.' );
-      WPP_F::load_assets( array( 'single', 'overview' ) );
-    }
-
     if ( $wp_properties[ 'configuration' ][ 'do_not_enable_text_widget_shortcodes' ] != 'true' ) {
       add_filter( 'widget_text', 'do_shortcode' );
     }
