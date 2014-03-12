@@ -229,13 +229,14 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 
 = 1.40.0 =
 * Added 'Automatic Renew Subscription Plan' option for Front End Properties submissions (FEPS) premium feature.
+* Added 'Featured' information to subscription plans in Front End Properties submissions (FEPS) premium feature.
 * Added improvements and fixes to Twentytwelve theme's styles.
-* Added hook to wpp_render_search_input() for ability to add field with custom type.
+* Added hook to wpp_render_search_input function for ability to add field with custom type.
 * Refactored CSS files. Added LESS implementation.
 * Fixed view styles on premium features settings pages. Compatibility with WordPress 3.8 and higher.
 * Fixed condition in sort_stats_by_groups function.
-* Fixed wrong condition in get_properties() for value which contains '-' in it ( e.g. 'New-York' ).
-
+* Fixed wrong condition in get_properties function for value which contains '-' symbol in it ( e.g. 'New-York' ).
+* Fixed draw_stats function.
 
 = 1.39.0 =
 * Added filter ud::template_part::path which allows to add/change templates storage directory.

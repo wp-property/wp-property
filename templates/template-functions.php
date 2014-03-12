@@ -1017,6 +1017,9 @@ if ( !function_exists( 'draw_stats' ) ):
     }
 
     if ( $display == 'array' ) {
+      if( $sort_by_groups == 'true' && is_array( $groups ) ) {
+        $stats = sort_stats_by_groups( $stats, array( 'includes_values' => true ) );
+      }
       return $stats;
     }
 
