@@ -3189,7 +3189,12 @@ class WPP_F extends UD_API {
       }
     }
 
-    return $result;
+    return apply_filters( 'wpp::get_search_values', $result, array(
+      'search_attributes' => $search_attributes, 
+      'searchable_property_types' => $searchable_property_types, 
+      'cache' => $cache, 
+      'instance_id' => $instance_id,
+    ) );
   }
 
   /**
@@ -3415,12 +3420,9 @@ class WPP_F extends UD_API {
       $numeric = in_array( $meta_key, (array) $wp_properties[ 'numeric_attributes' ] ) ? true : false;
 
       if( !in_array( $meta_key, (array) $commas_ignore ) && substr_count( $criteria, ',' ) || ( substr_count( $criteria, '-' ) && $numeric ) || substr_count( $criteria, '--' ) ) {
-        if( substr_count( $criteria, ',' ) && !substr_count( $criteria, '-' ) ) {
-          $comma_and = explode( ',', $criteria );
-        }
+      
         if( substr_count( $criteria, '-' ) && !substr_count( $criteria, ',' ) ) {
           $cr = explode( '-', $criteria );
-
           // Check pieces of criteria. Array should contains 2 int's elements
           // In other way, it's just value of meta_key
           if( count( $cr ) > 2 || ( (int ) $cr[ 0 ] == 0 && ( int ) $cr[ 1 ] == 0 ) ) {
@@ -3433,6 +3435,11 @@ class WPP_F extends UD_API {
             }
           }
         }
+        
+        if ( substr_count( $criteria, ',' ) ) {
+          $comma_and = explode( ',', $criteria );
+        }
+        
       } else {
         $specific = $criteria;
       }

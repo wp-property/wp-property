@@ -53,7 +53,7 @@ $renew_plan = !empty( $renew_plan ) && $renew_plan == 'true' ? 'checked' : '';
     <?php $checked=true; endforeach; ?>
   </ul><br/>
   <h3><?php _e( 'Subscription Plan Options', 'wpp' ); ?>:</h3>
-  <ul class="<?php wpp_css("feps-default-template::fields-wrapper",""); ?>">
+  <ul class="<?php wpp_css("feps-default-template::fields-wrapper","wpp_feps_plan_options"); ?>">
     <li>
       <div class="<?php wpp_css("feps-default-template::input-wrapper","wpp_feps_input_wrapper"); ?>">
         <div class="<?php wpp_css("feps-default-template::input-content","wpp_feps_input_content"); ?>">
