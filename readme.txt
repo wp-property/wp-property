@@ -232,6 +232,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Added 'Featured' information to subscription plans in Front End Properties submissions (FEPS) premium feature.
 * Added improvements and fixes to Twentytwelve theme's styles.
 * Added hook to wpp_render_search_input function for ability to add field with custom type.
+* Improved file caching.
 * Refactored CSS files. Added LESS implementation.
 * Fixed view styles on premium features settings pages. Compatibility with WordPress 3.8 and higher.
 * Fixed condition in sort_stats_by_groups function.

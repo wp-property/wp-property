@@ -1826,19 +1826,21 @@ class WPP_Core {
    */
   static function localize_scripts() {
 
-    $l10n = array();
-
-    //** Include the list of translations */
-    include_once WPP_Path . 'l10n.php';
-
-    /** All additional localizations must be added using the filter below. */
-    $l10n = apply_filters( 'wpp::js::localization', $l10n );
-
-    foreach ( (array) $l10n as $key => $value ) {
-      if ( !is_scalar( $value ) ) {
-        continue;
+    $l10n = WPP_F::get_cache( 'localize_scripts' );
+  
+    if( !$l10n ) {
+      $l10n = array();
+      //** Include the list of translations */
+      include_once WPP_Path . 'l10n.php';
+      /** All additional localizations must be added using the filter below. */
+      $l10n = apply_filters( 'wpp::js::localization', $l10n );
+      foreach ( (array) $l10n as $key => $value ) {
+        if ( !is_scalar( $value ) ) {
+          continue;
+        }
+        $l10n[ $key ] = html_entity_decode( (string) $value, ENT_QUOTES, 'UTF-8' );
       }
-      $l10n[ $key ] = html_entity_decode( (string) $value, ENT_QUOTES, 'UTF-8' );
+      WPP_F::set_cache( 'localize_scripts', $l10n );
     }
 
     header( 'Content-type: application/x-javascript' );

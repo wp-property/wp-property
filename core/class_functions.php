@@ -2183,6 +2183,42 @@ class WPP_F extends UD_API {
   }
 
   /**
+   * Maybe add cache file
+   *
+   * @version 0.1
+   * @since 1.40.0
+   * @author peshkov@UD
+   */
+  static function set_cache( $name, $data ) {
+    $dir = WPP_Path . 'cache/';
+    $file = $dir . MD5( $name ) . '.res';
+    //** Try to create directory if it doesn't exist */
+    if( !is_dir( $dir ) ) {
+      @mkdir( $dir, 0755 );
+    }
+    if( is_dir( $dir ) && @file_put_contents( $file, maybe_serialize( $data ) ) ) {
+      return true;
+    }
+    return false;
+  }
+  
+  /**
+   * Maybe get data from cache file
+   *
+   * @version 0.1
+   * @since 1.40.0
+   * @author peshkov@UD
+   */
+  static function get_cache( $name, $live = 3600 ) {
+    $dir = WPP_Path . 'cache/';
+    $file = $dir . MD5( $name ) . '.res';
+    if( is_file( $file ) && time() - filemtime( $file ) < $live ) {
+      return maybe_unserialize( file_get_contents( $file ) );
+    }
+    return false;
+  }
+  
+  /**
    * Removes all WPP cache files
    *
    * @return string Response
@@ -3056,12 +3092,7 @@ class WPP_F extends UD_API {
     );
 
     if( $instance_id ) {
-      //** Load value array from cache if it exists (search widget creates it on update */
-      $cachefile = WPP_Path . 'cache/searchwidget/' . $instance_id . '.values.res';
-
-      if( $cache && is_file( $cachefile ) && time() - filemtime( $cachefile ) < 3600 ) {
-        $result = unserialize( file_get_contents( $cachefile ) );
-      }
+      $result = WPP_F::get_cache( $instance_id );
     }
 
     if( !$result ) {
@@ -3179,14 +3210,7 @@ class WPP_F extends UD_API {
 
       $result = $range;
 
-      if( $cachefile ) {
-        $cachedir = dirname( $cachefile );
-        if( !is_dir( $cachedir ) ) {
-          wp_mkdir_p( $cachedir );
-        }
-
-        @file_put_contents( $cachefile, serialize( $result ) );
-      }
+      WPP_F::set_cache( $instance_id, $result );
     }
 
     return apply_filters( 'wpp::get_search_values', $result, array(
