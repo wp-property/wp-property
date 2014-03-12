@@ -202,10 +202,16 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     </tr>
 
     <tr>
-      <th><?php _e( 'Styles and Scripts', 'wpp' ); ?></th>
+      <?php if ( apply_filters( 'ud::custom_styles', false ) === false ) : ?>
+        <th><?php _e( 'Styles and Scripts', 'wpp' ); ?></th>
+      <?php else : ?>
+        <th><?php _e( 'Scripts', 'wpp' ); ?></th>
+      <?php endif; ?>
       <td>
         <ul>
-          <li><?php echo $using_custom_css ? WPP_F::checkbox( "name=wpp_settings[configuration][autoload_css]&label=" . __( 'Load default CSS. If unchecked, the wp-properties.css in your theme folder will not be loaded.', 'wpp' ), $wp_properties[ 'configuration' ][ 'autoload_css' ] ) : WPP_F::checkbox( "name=wpp_settings[configuration][autoload_css]&label=" . __( 'Load default CSS.', 'wpp' ), $wp_properties[ 'configuration' ][ 'autoload_css' ] ); ?></li>
+          <?php if ( apply_filters( 'ud::custom_styles', false ) === false ) : ?>
+            <li><?php echo $using_custom_css ? WPP_F::checkbox( "name=wpp_settings[configuration][autoload_css]&label=" . __( 'Load default CSS. If unchecked, the wp-properties.css in your theme folder will not be loaded.', 'wpp' ), $wp_properties[ 'configuration' ][ 'autoload_css' ] ) : WPP_F::checkbox( "name=wpp_settings[configuration][autoload_css]&label=" . __( 'Load default CSS.', 'wpp' ), $wp_properties[ 'configuration' ][ 'autoload_css' ] ); ?></li>
+          <?php endif; ?>
 
           <?php if ( WPP_F::has_theme_specific_stylesheet() ) { ?>
             <li>

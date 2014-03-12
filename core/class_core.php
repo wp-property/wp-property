@@ -858,8 +858,12 @@ class WPP_Core {
     //** Load global wp-property script on all frontend pages */
     wp_enqueue_script( 'wp-property-global' );
 
-    //** Load essential styles that are used in widgets */
-    wp_enqueue_style( 'wp-property-frontend' );
+    //** Possibly load essential styles that are used in widgets */
+    if ( apply_filters( 'ud::custom_styles', false ) === false ) {
+        wp_enqueue_style( 'wp-property-frontend' );
+    }
+
+    //** Possibly load theme specific styles */
     wp_enqueue_style( 'wp-property-theme-specific' );
 
     //** Load non-essential scripts and styles if option is enabled to load them globally */
