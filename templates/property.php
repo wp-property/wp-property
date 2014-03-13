@@ -140,6 +140,9 @@
         <?php endif; ?>
 
       </div><!-- .entry-content -->
+      
+      <?php comments_template(); ?>
+      
     </div><!-- #post-## -->
 
     </div><!-- #content -->

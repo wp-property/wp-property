@@ -240,6 +240,12 @@ class WPP_F extends UD_API {
       'not_found_in_trash' => __( 'No properties found in Trash', 'wpp' ),
       'parent_item_colon'  => ''
     ) );
+    
+    //** Add support for property */
+    $supports = array( 'title', 'editor', 'thumbnail' );
+    if( isset( $wp_properties[ 'configuration' ][ 'enable_comments' ] ) && $wp_properties[ 'configuration' ][ 'enable_comments' ] == 'true' ) {
+      array_push( $supports, 'comments' );
+    }
 
     // Register custom post types
     register_post_type( 'property', array(
@@ -254,7 +260,7 @@ class WPP_F extends UD_API {
         'slug' => $wp_properties[ 'configuration' ][ 'base_slug' ]
       ),
       'query_var'           => $wp_properties[ 'configuration' ][ 'base_slug' ],
-      'supports'            => array( 'title', 'editor', 'thumbnail' ),
+      'supports'            => $supports,
       'menu_icon'           => WPP_URL . 'images/pp_menu-1.6.png'
     ) );
 

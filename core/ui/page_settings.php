@@ -147,6 +147,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       <th><?php _e( 'Options', 'wpp' ); ?></th>
       <td>
         <ul>
+          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][enable_comments]&label=" . __( 'Enable comments.', 'wpp' ), $wp_properties[ 'configuration' ][ 'enable_comments' ] ); ?></li>
           <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][exclude_from_regular_search_results]&label=" . sprintf( __( 'Exclude %1s from regular search results.', 'wpp' ), $object_label[ 'plural' ] ), $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] ); ?></li>
           <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_automatically_regenerate_thumbnails]&label=" . __( 'Disable "on-the-fly" image regeneration.', 'wpp' ), $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] ); ?></li>
           <?php /* <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][do_not_automatically_geo_validate_on_property_view]&label=" . __('Disable front-end "on-the-fly" address validation.', 'wpp'), $wp_properties['configuration']['do_not_automatically_geo_validate_on_property_view']); ?></li> */ ?>
