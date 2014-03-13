@@ -240,6 +240,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Fixed draw_stats function.
 * Fixed 'Show XML Import History' and 'Delete Unattached Files' functionality on Help Tab in Settings.
 * Fixed showing attributes' values of draft properties in dropdown list of the search form.
+* Fixed showing Logs data when option 'Show Log' is enabled.
 * Removed deprecated option "Load WP-Property scripts on all front-end pages".
 
 = 1.39.0 =

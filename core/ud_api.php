@@ -956,6 +956,7 @@ if ( !class_exists( 'UD_API' ) ) {
         'type' => 'default',
         'object' => false,
         'prefix' => 'ud',
+        'instance' => 'UD',
       ) );
       extract( $args );
       $log = "{$prefix}_log";
@@ -977,7 +978,8 @@ if ( !class_exists( 'UD_API' ) ) {
           'time' => time(),
           'message' => __( 'Log Started.', UD_API_Transdomain ),
           'user' => $current_user->ID,
-          'type' => $type
+          'type' => $type,
+          'instance' => $instance,
         );
 
       }
@@ -989,7 +991,8 @@ if ( !class_exists( 'UD_API' ) ) {
           'message' => $message,
           'user' => $type == 'system' ? 'system' : $current_user->ID,
           'type' => $type,
-          'object' => $object
+          'object' => $object,
+          'instance' => $instance,
         );
 
       }
@@ -1113,6 +1116,7 @@ if ( !class_exists( 'UD_API' ) ) {
       $output[ ] = '<table class="widefat"><thead><tr>';
       $output[ ] = '<th style="width: 150px">' . __( 'Timestamp', UD_API_Transdomain ) . '</th>';
       $output[ ] = '<th>' . __( 'Type', UD_API_Transdomain ) . '</th>';
+      $output[ ] = '<th>' . __( 'Instance', UD_API_Transdomain ) . '</th>';
       $output[ ] = '<th>' . __( 'Event', UD_API_Transdomain ) . '</th>';
       $output[ ] = '<th>' . __( 'User', UD_API_Transdomain ) . '</th>';
       $output[ ] = '<th>' . __( 'Related Object', UD_API_Transdomain ) . '</th>';
@@ -1124,6 +1128,7 @@ if ( !class_exists( 'UD_API' ) ) {
         $output[ ] = '<tr class="ud_event_row">';
         $output[ ] = '<td>' . self::nice_time( $event[ 'time' ] ) . '</td>';
         $output[ ] = '<td>' . $event[ 'type' ] . '</td>';
+        $output[ ] = '<td>' . ( isset( $event[ 'instance' ] ) ? $event[ 'instance' ] : '' ) . '</td>';
         $output[ ] = '<td>' . $event[ 'message' ] . '</td>';
         $output[ ] = '<td>' . ( is_numeric( $event[ 'user' ] ) ? get_userdata( $event[ 'user' ] )->display_name : __( 'None' ) ) . '</td>';
         $output[ ] = '<td>' . $event[ 'object' ] . '</td>';

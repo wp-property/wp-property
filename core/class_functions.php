@@ -94,7 +94,7 @@ class WPP_F extends UD_API {
     $args = wp_parse_args( (array) $args, array(
       'type'   => $type,
       'object' => $object,
-      'prefix' => 'wpp',
+      'instance' => 'WP-Property',
     ) );
 
     return parent::log( $message, $args );
