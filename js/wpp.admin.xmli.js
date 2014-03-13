@@ -31,39 +31,6 @@ wpp.xmli = jQuery.extend({
 
     wpp.xmli.refresh_dom();
 
-    jQuery( ".wppi_delete_all_orphan_attachments" ).click( function ( e ) {
-
-      var notice_container = jQuery( '.wppi_delete_all_orphan_attachments_result' ).show();
-
-      jQuery( notice_container ).html( "Deleting all unattached images. You can close your browser, the operation will continue until completion." );
-
-      jQuery.post( wpp.instance.ajax_url, {
-        action: 'wpp_property_import_handler',
-        wpp_action: 'delete_all_orphan_attachments'
-      }, function ( result ) {
-        if ( result && result.success ) {
-          jQuery( notice_container ).html( result.ui );
-        } else {
-          jQuery( notice_container ).html( 'An error occured.' );
-        }
-
-      }, 'json' );
-
-    });
-
-    jQuery( "#wpp_ajax_show_xml_imort_history" ).click( function () {
-
-      jQuery( ".wpp_ajax_show_xml_imort_history_result" ).html( "" );
-
-      jQuery.post( wpp.instance.ajax_url, {
-        action: 'wpp_ajax_show_xml_imort_history'
-      }, function ( data ) {
-        jQuery( ".wpp_ajax_show_xml_imort_history_result" ).show();
-        jQuery( ".wpp_ajax_show_xml_imort_history_result" ).html( data );
-
-      });
-    });
-
     jQuery( ".wpp_xi_sort_rules" ).live( "click", function () {
 
       var list_wrapper = jQuery( "#wpp_property_import_attribute_mapper" );
