@@ -102,10 +102,6 @@ class WPP_Export {
         throw new Exception( __( 'XML_Serializer could not be loaded.', 'pea' ) );
       }
 
-      if( !class_exists( 'XML_Serializer' ) ) {
-        return;
-      }
-
       $Serializer = new XML_Serializer( $options );
 
       $status = $Serializer->serialize( $data );
