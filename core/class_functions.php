@@ -3090,8 +3090,8 @@ class WPP_F extends UD_API {
       'ID'        => 'equal',
       'post_date' => 'date'
     );
-
-    if( $instance_id ) {
+    
+    if( $instance_id && $cache ) {
       $result = WPP_F::get_cache( $instance_id );
     }
 
@@ -3151,7 +3151,9 @@ class WPP_F extends UD_API {
             SELECT DISTINCT(" . ( $type == 'data' ? "DATE_FORMAT(p1.{$searchable_attribute}, '%Y%m')" : "p1.{$searchable_attribute}" ) . ")
             FROM {$wpdb->posts} p1
             LEFT JOIN {$wpdb->postmeta} pm2 ON p1.ID = pm2.post_id
-            WHERE pm2.meta_key = 'property_type' $searchable_property_types_sql
+            WHERE pm2.meta_key = 'property_type' 
+              AND p1.post_status = 'publish'
+              $searchable_property_types_sql
             order by p1.{$searchable_attribute}
           " );
 
@@ -3163,11 +3165,14 @@ class WPP_F extends UD_API {
           //** No predefined value exist */
           $db_values = $wpdb->get_col( "
             SELECT DISTINCT(pm1.meta_value)
-            FROM {$wpdb->postmeta} pm1
+            FROM {$wpdb->posts} p1
+            LEFT JOIN {$wpdb->postmeta} pm1 ON p1.ID = pm1.post_id
             LEFT JOIN {$wpdb->postmeta} pm2 ON pm1.post_id = pm2.post_id
-            WHERE pm1.meta_key = '{$searchable_attribute}' AND pm2.meta_key = 'property_type'
-            $searchable_property_types_sql
-            AND pm1.meta_value != ''
+            WHERE pm1.meta_key = '{$searchable_attribute}' 
+              AND pm2.meta_key = 'property_type'
+              AND pm1.meta_value != ''
+              AND p1.post_status = 'publish'
+              $searchable_property_types_sql
             ORDER BY " . ( $is_numeric ? 'ABS(' : '' ) . "pm1.meta_value" . ( $is_numeric ? ')' : '' ) . " ASC
           " );
 
@@ -3210,7 +3215,9 @@ class WPP_F extends UD_API {
 
       $result = $range;
 
-      WPP_F::set_cache( $instance_id, $result );
+      if( $instance_id && $cache ) {
+        WPP_F::set_cache( $instance_id, $result );
+      }
     }
 
     return apply_filters( 'wpp::get_search_values', $result, array(
