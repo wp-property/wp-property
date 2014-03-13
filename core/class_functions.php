@@ -245,7 +245,7 @@ class WPP_F extends UD_API {
     register_post_type( 'property', array(
       'labels'              => $wp_properties[ 'labels' ],
       'public'              => true,
-      'exclude_from_search' => $wp_properties[ 'configuration' ][ 'include_in_regular_search_results' ] == 'true' ? false : true,
+      'exclude_from_search' => $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] == 'true' ? true : false,
       'show_ui'             => true,
       '_edit_link'          => 'post.php?post=%d',
       'capability_type'     => array( 'wpp_property', 'wpp_properties' ),
