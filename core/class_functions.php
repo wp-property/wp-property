@@ -160,7 +160,10 @@ class WPP_F extends UD_API {
     }
 
     //** Register a sidebar for each property type */
-    if( isset( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] ) && $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] != 'true' ) {
+    if( 
+      !isset( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] ) ||
+      ( isset( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] ) && $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] != 'true' )
+      ) {
       foreach( (array)$wp_properties[ 'property_types' ] as $property_slug => $property_title ) {
         register_sidebar( array(
           'name'          => sprintf( __( 'Property: %s', 'wpp' ), $property_title ),
