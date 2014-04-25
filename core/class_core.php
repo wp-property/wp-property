@@ -509,8 +509,8 @@ class WPP_Core {
     if ( is_array( $_REQUEST[ 'wpp_search' ] ) ) {
 
       if ( isset( $_POST[ 'wpp_search' ] ) ) {
-        $query = '?' . http_build_query( array( 'wpp_search' => $_REQUEST[ 'wpp_search' ] ), '', '&' );
-        wp_redirect( WPP_F::base_url( $wp_properties[ 'configuration' ][ 'base_slug' ] ) . $query );
+        $_query = '?' . http_build_query( array( 'wpp_search' => $_REQUEST[ 'wpp_search' ] ), '', '&' );
+        wp_redirect( WPP_F::base_url( $wp_properties[ 'configuration' ][ 'base_slug' ] ) . $_query );
         die();
       }
 
@@ -568,7 +568,39 @@ class WPP_Core {
     if ( is_array( $wpp_pages ) ) {
       WPP_F::console_log( 'WPP_F::parse_request() ran, determined that request is for: ' . implode( ', ', $wpp_pages ) );
     }
-
+    
+    if( !is_admin() ) {
+      /**
+       * HACK.
+       * 
+       * The issue:
+       * When parent page is set as 'Default Properties Page',
+       * child page will be rendered as 'property' page. 
+       * So Wordpress thinks that it's not a page and uses single template instead of page template.
+       *
+       * Tablet:
+       * We determine if current post is 'page' but uses incorrect post_type 'property'
+       * and fix it to valid post_type.
+       *
+       * @todo it's rough way to fix the problem, should be another one.
+       * @author peshkov@UD
+       */
+      if( 
+        isset( $query->query_vars[ 'post_type' ] ) && 
+        $query->query_vars[ 'post_type' ] == 'property' && 
+        isset( $query->query_vars[ $wp_properties[ 'configuration' ][ 'base_slug' ] ] 
+      ) ) {
+        $posts = get_posts( array( 
+          'name' => $query->query_vars[ $wp_properties[ 'configuration' ][ 'base_slug' ] ],
+          'post_type' => 'page',
+        ) );
+        if( !empty( $posts ) && count( $posts ) == 1 ) {
+          $query->query_vars[ 'post_type' ] = 'page';
+        }
+      }
+    }
+    
+    return $query;
   }
 
   /**
@@ -859,7 +891,7 @@ class WPP_Core {
    */
   function template_redirect() {
     global $post, $property, $wp_query, $wp_properties, $wp_styles, $wpp_query, $wp_taxonomies;
-
+    
     wp_localize_script( 'wpp-localization', 'wpp', array( 'instance' => $this->get_instance() ) );
     
     //** Load global wp-property script on all frontend pages */

@@ -3322,7 +3322,7 @@ class WPP_F extends UD_API {
       'post_title'  => 'like',
       'post_status' => 'equal',
       'post_author' => 'equal',
-      'ID'          => 'equal',
+      'ID'          => 'or',
       'post_parent' => 'equal',
       'post_date'   => 'date'
     );
@@ -3411,10 +3411,18 @@ class WPP_F extends UD_API {
         if( $condition == 'like' ) {
           $additional_sql .= " AND p.$field LIKE '%{$query[$field]}%' ";
         }
-        if( $condition == 'equal' ) {
+        else if( $condition == 'equal' ) {
           $additional_sql .= " AND p.$field = '{$query[$field]}' ";
         }
-        if( $condition == 'date' ) {
+        else if( $condition == 'or' ) {
+          $f = '';
+          $d = !is_array( $query[ $field ] ) ? explode( ',', $query[ $field ] ) : $query[ $field ];
+          foreach( $d as $k => $v ) {
+            $f .= ( !empty( $f ) ? ",'" . trim($v) . "'" : "'" . trim($v) . "'" );
+          }
+          $additional_sql .= " AND p.$field IN ({$f}) ";
+        }
+        else if( $condition == 'date' ) {
           $additional_sql .= " AND YEAR( p.$field ) = " . substr( $query[ $field ], 0, 4 ) . " AND MONTH( p.$field ) = " . substr( $query[ $field ], 4, 2 ) . " ";
         }
         unset( $query[ $field ] );

@@ -1332,9 +1332,10 @@ if ( !function_exists( 'draw_property_search_form' ) ):
       }
     } ?>
     <form action="<?php echo WPP_F::base_url( $wp_properties[ 'configuration' ][ 'base_slug' ] ); ?>" method="post">
-    <?php if ( $sort_order ) { ?>
-      <input type="hidden" name="wpp_search[sort_order]" value="<?php echo esc_attr( $sort_order ); ?>"/>
-    <?php } ?>
+      <?php do_action( "draw_property_search_form", $args ); ?>
+      <?php if ( $sort_order ) { ?>
+        <input type="hidden" name="wpp_search[sort_order]" value="<?php echo esc_attr( $sort_order ); ?>"/>
+      <?php } ?>
       <?php if ( $sort_by ) { ?>
         <input type="hidden" name="wpp_search[sort_by]" value="<?php echo esc_attr( $sort_by ); ?>"/>
       <?php } ?>
