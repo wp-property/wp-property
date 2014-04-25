@@ -583,6 +583,7 @@ class WPP_Core {
        * and fix it to valid post_type.
        *
        * @todo it's rough way to fix the problem, should be another one.
+       * @see self::template_redirect(). hack is used there.
        * @author peshkov@UD
        */
       if( 
@@ -596,6 +597,7 @@ class WPP_Core {
         ) );
         if( !empty( $posts ) && count( $posts ) == 1 ) {
           $query->query_vars[ 'post_type' ] = 'page';
+          $query->query_vars[ '_fix_to_page_template' ] = true;
         }
       }
     }
@@ -891,6 +893,16 @@ class WPP_Core {
    */
   function template_redirect() {
     global $post, $property, $wp_query, $wp_properties, $wp_styles, $wpp_query, $wp_taxonomies;
+    
+    /**
+     * HACK.
+     * @see self::parse_request();
+     * @author peshkov@UD
+     */
+    if( get_query_var( '_fix_to_page_template' ) ) {
+      $wp_query->is_single = false;
+      $wp_query->is_page = true;
+    }
     
     wp_localize_script( 'wpp-localization', 'wpp', array( 'instance' => $this->get_instance() ) );
     
