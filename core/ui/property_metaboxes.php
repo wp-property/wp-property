@@ -18,7 +18,8 @@ class WPP_UI {
 
     $children = get_posts( array(
       'post_parent' => $post->ID,
-      'post_type' => 'property'
+      'post_type' => 'property',
+      'numberposts' => -1,
     ) );
 
     ?>
