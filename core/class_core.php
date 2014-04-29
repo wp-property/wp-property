@@ -1172,14 +1172,12 @@ class WPP_Core {
   function shortcode_featured_properties( $atts = false ) {
     global $wp_properties, $wpp_query, $post;
 
-    $default_property_type = WPP_F::get_most_common_property_type();
-
     if ( !$atts ) {
       $atts = array();
     }
     $hide_count = '';
     $defaults = array(
-      'property_type' => '',
+      'property_type' => 'all',
       'type' => '',
       'class' => 'shortcode_featured_properties',
       'per_page' => '6',
@@ -1193,8 +1191,8 @@ class WPP_Core {
       'thumbnail_size' => 'thumbnail'
     );
 
-    $args = array_merge( $defaults, $atts );
-
+    $args = shortcode_atts( $defaults, $atts );
+    
     //** Using "image_type" is obsolete */
     if ( $args[ 'thumbnail_size' ] == $defaults[ 'thumbnail_size' ] && !empty( $args[ 'image_type' ] ) ) {
       $args[ 'thumbnail_size' ] = $args[ 'image_type' ];
@@ -1203,10 +1201,6 @@ class WPP_Core {
     //** Using "type" is obsolete. If property_type is not set, but type is, we set property_type from type */
     if ( !empty( $args[ 'type' ] ) && empty( $args[ 'property_type' ] ) ) {
       $args[ 'property_type' ] = $args[ 'type' ];
-    }
-
-    if ( empty( $args[ 'property_type' ] ) ) {
-      $args[ 'property_type' ] = $default_property_type;
     }
 
     // Convert shortcode multi-property-type string to array
