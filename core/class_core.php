@@ -1362,7 +1362,7 @@ class WPP_Core {
     $defaults[ 'stats' ] = '';
     $defaults[ 'class' ] = 'wpp_property_overview_shortcode';
     $defaults[ 'in_new_window' ] = false;
-
+    
     $defaults = apply_filters( 'shortcode_property_overview_allowed_args', $defaults, $atts );
 
     //** We add # to value which says that we don't want to use LIKE in SQL query for searching this value. */
@@ -1380,7 +1380,7 @@ class WPP_Core {
     }
     
     //* Determine if we should disable sorter */
-    if( isset( $atts[ 'sorter' ] ) && !in_array( $atts[ 'sorter' ], array( 'on', 'true', 'yes' ) ) ) {
+    if( isset( $atts[ 'sorter' ] ) && in_array( $atts[ 'sorter' ], array( 'off', 'false' ) ) ) {
       $atts[ 'sorter' ] = false;
       $atts[ 'sorter_type' ] = 'none';
     }
