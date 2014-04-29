@@ -1352,6 +1352,7 @@ class WPP_Core {
     $defaults[ 'ajax_call' ] = false;
     $defaults[ 'disable_wrapper' ] = false;
     $defaults[ 'sorter_type' ] = 'buttons';
+    $defaults[ 'sorter' ] = 'on';
     $defaults[ 'pagination' ] = 'on';
     $defaults[ 'hide_count' ] = false;
     $defaults[ 'per_page' ] = 10;
@@ -1376,6 +1377,12 @@ class WPP_Core {
         }
         $atts[ $key ] = '#' . $val . '#';
       }
+    }
+    
+    //* Determine if we should disable sorter */
+    if( isset( $atts[ 'sorter' ] ) && !in_array( $atts[ 'sorter' ], array( 'on', 'true', 'yes' ) ) ) {
+      $atts[ 'sorter' ] = false;
+      $atts[ 'sorter_type' ] = 'none';
     }
 
     if ( !empty( $atts[ 'ajax_call' ] ) ) {
