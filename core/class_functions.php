@@ -3290,7 +3290,8 @@ class WPP_F extends UD_API {
       $args[ 'ID' ] = $args[ 'id' ];
       unset( $args[ 'id' ] );
     }
-    if( isset( $args[ 'property_id' ] ) ) {
+    //** property_id is replaced with ID only if Property Attribute with slug 'property_id' does not exist */
+    if( isset( $args[ 'property_id' ] ) && !key_exists( 'property_id', $wp_properties[ 'property_stats' ] ) ) {
       $args[ 'ID' ] = $args[ 'property_id' ];
       unset( $args[ 'property_id' ] );
     }
