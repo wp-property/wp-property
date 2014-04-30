@@ -2,9 +2,9 @@
 Contributors: usability_dynamics, andypotanin, jbrw1984, maxim.peshkov, anton-korotkoff, ideric
 Donate link: http://usabilitydynamics.com/products/wp-property/
 Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
-Requires at least: 3.4.2
-Tested up to: 3.8.1
-Stable tag: 1.40.1
+Requires at least: 3.6
+Tested up to: 3.9
+Stable tag: 1.41.0
 
 
 == Description ==
@@ -226,6 +226,17 @@ We are moving out of beta stages, but you may still experience bugs now and then
 We are still in early stages, so updates will be coming out routinely.  Please do not hesitate to send us feedback and suggestions.
 
 == Changelog ==
+
+= 1.41.0 =
+* Added hook to property_search form to have ability to add any custom fields.
+* Improved [featured_properties] shortcode.
+* Fixed search by more than one property ID ( e.g. [property_overview ID='1,2,3'] ).
+* Fixed search by 'property_id' if attribute with the same slug exists.
+* Fixed bug with child pages of default properties page: pages have been rendered by wordpress as property posts.
+* Fixed bug with cookie file generating on connection to RETS servers.
+* Fixed 'range input text' fields rendering for property search form.
+* Fixed attribute 'sorter' in [property_overview] shortcode. To disable sorter, use [property_overview sorter=off] or [property_overview sorter=false].
+* Removed limit (5) of shown children in 'Child Properties' metabox on Edit Property page.
 
 = 1.40.1 =
 * Reverted back Sidebar areas which have been removed in 1.40.0 release.
