@@ -1,7 +1,7 @@
 <?php
 
 if( !class_exists( 'phRETS' ) ) {
-  include_once( dirname( __DIR__ ) . '/third-party/phrets.php' );
+  include_once( dirname( dirname( __FILE__ ) ) . '/third-party/phrets.php' );
 }
 
 if( !class_exists( 'WPP_phRETS' ) ) {
