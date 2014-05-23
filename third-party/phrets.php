@@ -1361,7 +1361,8 @@ if( !class_exists( 'phRETS' ) ) {
       }
 
       if( empty( $this->cookie_file ) ) {
-        $this->cookie_file = tempnam( "", "phrets" );
+        $tempdir = defined( 'WPP_XMLI_COOKIE_DIR' ) ? untrailingslashit( WPP_XMLI_COOKIE_DIR ) : sys_get_temp_dir();
+        $this->cookie_file = tempnam( $tempdir, "phrets" );
       }
 
       @touch( $this->cookie_file );
