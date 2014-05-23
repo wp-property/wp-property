@@ -4,7 +4,7 @@ Donate link: http://usabilitydynamics.com/products/wp-property/
 Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 3.6
 Tested up to: 3.9
-Stable tag: 1.41.1
+Stable tag: 1.41.2
 
 
 == Description ==
@@ -226,6 +226,10 @@ We are moving out of beta stages, but you may still experience bugs now and then
 We are still in early stages, so updates will be coming out routinely.  Please do not hesitate to send us feedback and suggestions.
 
 == Changelog ==
+
+= 1.41.2 =
+* Fixed issue with phRETS cookie file generating on connection to RETS servers.
+* Added cleaner of old phRETS cookie files for temp dir.
 
 = 1.41.1 =
 * Fixed fatal error related to including phrets library on servers with PHP 5.2.X.

@@ -16,7 +16,7 @@ if( !class_exists( 'WPP_RETS' ) ) {
      */
     public function __construct() {
       parent::phRETS();
-      /** Probably remove old cookie files. */
+      /** Probably remove old cookie files. Runs once per 7 days. */
       $this->maybe_flush_tempdir();
     }
     
@@ -27,7 +27,7 @@ if( !class_exists( 'WPP_RETS' ) ) {
      */
     public function maybe_flush_tempdir() {
       $time = get_option( 'phrets_flush_tempdir' );
-      if( !$time || time() - $time >= 86400 ) {
+      if( !$time || time() - $time >= 604800 ) {
         $tempdir = defined( 'WPP_XMLI_COOKIE_DIR' ) ? untrailingslashit( WPP_XMLI_COOKIE_DIR ) : sys_get_temp_dir();
         if ( !empty( $tempdir ) && is_dir( $tempdir ) ) {
           if ( $dh = opendir( $tempdir ) ) {
