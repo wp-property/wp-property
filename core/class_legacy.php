@@ -62,8 +62,3 @@ if ( !class_exists( 'UD_F' ) ) {
   class UD_F extends WPP_F {
   }
 }
-
-if ( !class_exists( 'WPP_RETS' ) ) {
-  class WPP_RETS extends phRETS {
-  }
-}
