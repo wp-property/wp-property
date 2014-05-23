@@ -25,12 +25,8 @@
  *
  */
 
-global $wpp;
- 
-// Include Vendor and Initialize.
-if( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
-  include_once( __DIR__ . '/vendor/autoload.php' );
-  $wpp = \UsabilityDynamics\WPP\Bootstrap::get_instance();
+if( file_exists( __DIR__ . '/lib/class-bootstrap.php' ) ) {
+  new UsabilityDynamics\WPP\Bootstrap;
 }
 
 

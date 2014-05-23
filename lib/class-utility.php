@@ -516,6 +516,9 @@ namespace UsabilityDynamics\WPP {
       static function property_label( $type = 'singular' ) {
         global $wp_post_types;
 
+        if( !isset( $wp_post_types[ 'property' ] ) ) {
+          return;
+        }
         if( $type == 'plural' ) {
           return ( $wp_post_types[ 'property' ]->labels->name ? $wp_post_types[ 'property' ]->labels->name : __( 'Properties', 'wpp' ) );
         }

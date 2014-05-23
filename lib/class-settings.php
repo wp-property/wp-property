@@ -592,7 +592,8 @@ namespace UsabilityDynamics\WPP {
         }
 
         //** Get rid of disabled attributes */
-        if ( is_array( $_data[ 'disabled_attributes' ] ) ) {
+        if ( isset( $_data[ 'disabled_attributes' ] ) && is_array( $_data[ 'disabled_attributes' ] ) ) {
+
           foreach ( $_data[ 'disabled_attributes' ] as $attribute ) {
             if ( array_key_exists( $attribute, $_data[ 'property_stats' ] ) ) {
               if ( isset( $_data[ 'property_stats' ][ $attribute ] ) ) {
@@ -647,7 +648,7 @@ namespace UsabilityDynamics\WPP {
         // Compute Settings
         $this->set( '_computed', $this->_get_computed( array( 'recompute' => $args[ 'recompute' ] ) ) );
 
-        return $this->_data;
+        return $this->get();
         
       }
       
@@ -665,6 +666,7 @@ namespace UsabilityDynamics\WPP {
         ) );
 
         $trns = !$args[ 'recompute' ] ? get_transient( 'wpp::computed' ) : false;
+
         if ( !empty( $trns ) && $trns != '[]' ) {
           return json_decode( $trns, true );
         }
@@ -700,7 +702,7 @@ namespace UsabilityDynamics\WPP {
             'modules' => trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) ) . 'vendor/usabilitydynamics'
           ),
           'url' => array(
-            'root' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ),
+            'root' => trailingslashit( plugin_dir_url( __FILE__ ) ) ,
             'vendor' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'vendor',
             'templates' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'templates',
             'scripts' => trailingslashit( plugin_dir_url( plugin_dir_path( __FILE__ ) ) ) . 'scripts',
@@ -829,12 +831,15 @@ namespace UsabilityDynamics\WPP {
 
         return $data;
       }
-      
+
       /**
        * Returns default settings based on system ( schema/system.settings.json ) settings and on user choice ( default schema/default.settings.json )
        *
-       * @param array settings. Schema
+       * @param bool $settings
        *
+       * @internal param \UsabilityDynamics\WPP\settings $array . Schema
+       *
+       * @return array
        * @author peshkov@UD
        */
       private function _get_default_settings( $settings = false ) {

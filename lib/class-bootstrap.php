@@ -114,15 +114,37 @@ namespace UsabilityDynamics\WPP {
        * @for Loader
        * @method __construct
        */
-      private function __construct() {
+      public function __construct() {
         global $wpdb, $wpp, $wp_properties;
 
+        // Inc
         // Get information about plugin
         $_plugin_info = get_file_data( dirname( __DIR__ ) . '/wp-property.php', array( 'version' => 'Version' ) );
+
         $this->version = $_plugin_info[ 'version' ];
-        
+
         // Autoload Vendor Dependencies.
         $this->autoload();
+
+      }
+
+      /**
+       * Autoload Vendor Dependencies
+       *
+       * @author potanin@UD
+       * @since 2.0.0
+       */
+      public function autoload() {
+
+        // Attepmt to findUp.
+        if( class_exists( 'Utility' ) ) {
+          Utility::findUp( 'vendor/libraries/autoload.php', __DIR__ );
+        }
+
+        // Call Self Later.
+        if( !did_action( 'plugins_loaded' ) ) {
+          return add_action( 'plugins_loaded', array( $this, 'autoload' ) );
+        }
 
         // Register activation hook -> has to be in the main plugin file
         register_activation_hook( __FILE__, array( $this, 'activation' ) );
@@ -133,7 +155,7 @@ namespace UsabilityDynamics\WPP {
         /**
          * Initiates the plugin.
          *
-         * It does the following: 
+         * It does the following:
          * - loads WPP Settings
          * - loads Modules
          */
@@ -157,31 +179,21 @@ namespace UsabilityDynamics\WPP {
         // Initialize Widgets.
         add_action( 'widgets_init', array( $this, 'widgets_init' ) );
 
-      }
-
-      /**
-       * Autoload Vendor Dependencies
-       *
-       * @author potanin@UD
-       * @since 2.0.0
-       */
-      private function autoload() {
-
         $_path  = trailingslashit( dirname( plugin_dir_path( __FILE__ ) ) );
         $_url   = trailingslashit( dirname( plugin_dir_url( __FILE__ ) ) );
 
         // Seek ./vendor/autoload.php and autoload
-        if( !is_file( $_path . '/vendor/autoload.php' ) ) {
-          self::fatal_error( 'WP-Property vendor directory missing; attempted to find it in: ' . '/vendor/autoload.php' );
+        if( is_file( $_path . '/vendor/autoload.php' ) ) {
+          include_once( $_path . '/vendor/autoload.php' );
         }
 
-        // Vendor Autoloader.
-        include_once( $_path . '/vendor/autoload.php' );
-
         // Legacy Support.
-        include_once( $_path . '/lib/legacy.php' );
         include_once( $_path . '/templates/template-functions.php' );
-        include_once( $_path . '/templates/property-default-api.php' );
+
+        if( isset( $wp_properties ) ) {
+          include_once( $_path . '/templates/property-default-api.php' );
+          include_once( $_path . '/lib/legacy.php' );
+        }
 
       }
 
@@ -279,9 +291,7 @@ namespace UsabilityDynamics\WPP {
           '_edit_link'          => 'post.php?post=%d',
           'capability_type'     => array( 'wpp_property', 'wpp_properties' ),
           'hierarchical'        => true,
-          'rewrite'             => array(
-            'slug' => $this->get( 'configuration.base_slug' ),
-          ),
+          'rewrite'             => array( 'slug' => $this->get( 'configuration.base_slug' ), ),
           'query_var'           => $this->get( 'configuration.base_slug' ),
           'supports'            => array( 'title', 'editor', 'thumbnail', 'comments' )
           //'menu_icon'           => WPP_URL . 'images/pp_menu-1.6.png'
@@ -296,11 +306,12 @@ namespace UsabilityDynamics\WPP {
           if ( in_array( $taxonomy, (array) $this->get( 'disabled_attributes' ) ) ) {
             continue;
           }
-          
+
+
           register_taxonomy( $taxonomy, 'property', array(
-            'hierarchical' => $taxonomy_data[ 'hierarchical' ],
-            'label' => $taxonomy_data[ 'label' ],
-            'labels' => $taxonomy_data[ 'labels' ],
+            'hierarchical' => isset( $taxonomy_data[ 'hierarchical' ] ) ? $taxonomy_data[ 'hierarchical' ] : false,
+            'label' => isset( $taxonomy_data[ 'hierarchical' ] ) ? $taxonomy_data[ 'label' ] : false,
+            'labels' => isset( $taxonomy_data[ 'hierarchical' ] ) ? $taxonomy_data[ 'labels' ] : false,
             'query_var' => isset( $taxonomy_data[ 'query_var' ] ) ? $taxonomy_data[ 'query_var' ] : $taxonomy,
             'rewrite' => array(
               'slug' => isset( $taxonomy_data[ 'rewrite' ][ 'slug' ] ) ? $taxonomy_data[ 'rewrite' ][ 'slug' ] : str_replace( '_', '-', $taxonomy )
@@ -338,7 +349,7 @@ namespace UsabilityDynamics\WPP {
           wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp-properties.css', array(), $this->version );
         } elseif( file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
           wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), $this->version );
-        } elseif( file_exists( WPP_Templates . '/wp_properties.css' ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
+        } elseif( defined( 'WPP_Templates' ) && file_exists( WPP_Templates . '/wp_properties.css' ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
           wp_register_style( 'wp-property-frontend', $this->get( '_computed.url.styles' ) . '/templates/wp_properties.css', array(), $this->version );
 
           //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
@@ -505,7 +516,6 @@ namespace UsabilityDynamics\WPP {
        */
       public function init_upper() {
         global $wp_properties;
-
         // Pre Initialization.
         do_action( 'wpp:init:pre', $this );
         
@@ -914,7 +924,7 @@ namespace UsabilityDynamics\WPP {
         self::manual_activation();
 
         // Handle Settings Download.
-        if( $_REQUEST[ 'page' ] == 'property_settings' && $_REQUEST[ 'wpp_action' ] == 'download-wpp-backup' && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'download-wpp-backup' ) ) {
+        if( isset( $_REQUEST[ 'page' ] ) && $_REQUEST[ 'page' ] == 'property_settings' && $_REQUEST[ 'wpp_action' ] == 'download-wpp-backup' && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'download-wpp-backup' ) ) {
 
           $this->_settings->file_transfer(array(
             "format" => "json",
@@ -1478,7 +1488,7 @@ namespace UsabilityDynamics\WPP {
             'available' => $this->get( 'available_features' )
           ),
           'domain' => trim( $_home_url[ 'host' ] ? $_home_url[ 'host' ] : array_shift( explode( '/', $_home_url[ 'path' ], 2 ) ) ),
-          'iframe' => $_REQUEST[ 'wp_customize' ] && $_REQUEST[ 'request' ][ 'wp_customize' ] == 'on' ? true : false,
+          'iframe' => isset( $_REQUEST[ 'wp_customize' ] ) && $_REQUEST[ 'request' ][ 'wp_customize' ] == 'on' ? true : false,
           'permalinks' => get_option( 'permalink_structure' ) == '' ? false : true,
           'custom_css' => file_exists( STYLESHEETPATH . '/wp_properties.css' ) || file_exists( TEMPLATEPATH . '/wp_properties.css' ) ? true : false,
           'labels' => array(
