@@ -3,9 +3,9 @@
  *
  *
  *
- * @version 4.0.3
+ * @version 4.0.4
  * @author: potanin@UD
- * @date: 8/19/13
+ * @date: 27/05/14
  */
 
 
@@ -1204,6 +1204,13 @@ wpp.xmli = jQuery.extend({
       wpp.xmli.disable_advanced_option( '#wpp_property_import_remove_non_existant_properties' );
     } else {
       wpp.xmli.enable_advanced_option( '#wpp_property_import_remove_non_existant_properties' );
+    }
+    
+    /* Special Rules: Disable remove images option if skip images enabled */
+    if ( jQuery( '#wpp_property_skip_images' ).is( ':checked' ) ) {
+      wpp.xmli.disable_advanced_option( 'input[name="wpp_property_import[remove_images]"]' );
+    } else {
+      wpp.xmli.enable_advanced_option( 'input[name="wpp_property_import[remove_images]"]' );
     }
 
     /* Special Rules: Enable SQL Query option when Advanced Logging is on */
