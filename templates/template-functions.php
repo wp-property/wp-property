@@ -201,19 +201,31 @@ if ( !function_exists( 'wpp_draw_pagination' ) ):
       'sort_by_text' => isset( $wpp_query[ 'sort_by_text' ] ) ? $wpp_query[ 'sort_by_text' ] : '',
       'javascript' => true
     ) );
-
-    if ( is_array( $wpp_query ) || is_object( $wpp_query ) ) {
-      extract( $wpp_query );
-    }
-
+    
     //** Do not show pagination on ajax requests */
     if ( $wpp_query[ 'ajax_call' ] ) {
-      return;
+      return null;
     }
 
     if ( $pagination == 'off' && $hide_count ) {
-      return;
+      return null;
     }
+    
+    /** Maybe use custom pagination/sorter instead of default one */
+    $custom = apply_filters( 'wpp:property_overview:custom_pagination', '', $settings );
+    if( !empty( $custom ) ) {
+      if ( $settings[ 'return' ] == 'true' ) {
+        return $custom;
+      } else {
+        echo $custom;
+        return null;
+      }
+    }
+    
+    if ( is_array( $wpp_query ) || is_object( $wpp_query ) ) {
+      extract( $wpp_query );
+    }
+    
     if ( $properties[ 'total' ] > $per_page && $pagination != 'off' ) {
       $use_pagination = true;
     }
