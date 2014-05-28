@@ -2602,11 +2602,14 @@ class WPP_F extends UD_API {
     );
 
     try {
+
       if( empty( $data[ 'wpp_settings' ] ) || !wp_verify_nonce( $data[ '_wpnonce' ], 'wpp_setting_save' ) ) {
         throw new Exception( __( 'Request can not be verified.', 'wpp' ) );
       }
+
       //** Allow features to preserve their settings that are not configured on the settings page */
       $wpp_settings = apply_filters( 'wpp_settings_save', $data[ 'wpp_settings' ], $wp_properties );
+
       //** Prevent removal of featured settings configurations if they are not present */
       if( !empty( $wp_properties[ 'configuration' ][ 'feature_settings' ] ) ) {
         foreach( $wp_properties[ 'configuration' ][ 'feature_settings' ] as $feature_type => $preserved_settings ) {
@@ -2615,7 +2618,9 @@ class WPP_F extends UD_API {
           }
         }
       }
+
       update_option( 'wpp_settings', $wpp_settings );
+
     } catch( Exception $e ) {
       $return[ 'success' ] = false;
       $return[ 'message' ] = $e->getMessage();
