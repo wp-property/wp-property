@@ -40,7 +40,7 @@ define( 'WPP_URL', plugin_dir_url( __FILE__ ) );
 define( 'WPP_Templates', WPP_Path . 'templates' );
 
 /** Directory path for includes of template files  */
-define( 'WPP_Premium', WPP_Path . 'core/premium' );
+define( 'WPP_Premium', WPP_Path . 'modules' );
 
 //** Global Usability Dynamics functions */
 include_once WPP_Path . 'core/ud_api.php';

@@ -30,10 +30,7 @@ class WPP_Core {
 
     // Load Modules.
     self::$features = WPP_F::load_premium( array(
-      'location' => array(
-        defined( 'WPP_Premium' ) ? WPP_Premium : null,
-        defined( 'WPP_Modules' ) ? WPP_Modules : null
-      ),
+      'location' => array( defined( 'WPP_Premium' ) ? WPP_Premium : null ),
       'headers'  => array(
         '_id'          => 'Feature ID',
         'name'         => 'Name',
@@ -46,15 +43,15 @@ class WPP_Core {
         'capability'   => 'Capability'
       ),
       'main_map' => array(
-        'wp-property-admin-tools'   => array( 'wp-property-admin-tools/lib/class-admin-tools.php' ),
-        'wp-property-agents'        => array( 'wp-property-agents/lib/class_agents.php' ),
-        'wp-property-feps'          => array( 'wp-property-feps/lib/class-feps.php' ),
-        'wp-property-power-tools'   => array( 'wp-property-power-tools/lib/class-power-tools.php' ),
-        'wp-property-facebook-tabs' => array( 'wp-property-facebook-tabs/lib/class-facebook-tabs.php' ),
-        'wp-property-pdf'           => array( 'wp-property-pdf/lib/class-pdf.php' ),
-        'wp-property-slideshow'     => array( 'wp-property-slideshow/lib/class-slideshow.php' ),
-        'wp-property-importer'      => array( 'wp-property-importer/lib/class_wpp_property_import.php' ),
-        'wp-property-exporter'      => array( 'wp-property-exporter/lib/class-property-exporter.php' )
+        'admin-tools'   => array( 'admin-tools/lib/class-admin-tools.php' ),
+        'agents'        => array( 'agents/lib/class_agents.php' ),
+        'feps'          => array( 'feps/lib/class-feps.php' ),
+        'power-tools'   => array( 'power-tools/lib/class-power-tools.php' ),
+        'facebook-tabs' => array( 'facebook-tabs/lib/class-facebook-tabs.php' ),
+        'pdf'           => array( 'pdf/lib/class-pdf.php' ),
+        'slideshow'     => array( 'slideshow/lib/class-slideshow.php' ),
+        'importer'      => array( 'importer/lib/class_wpp_property_import.php' ),
+        'exporter'      => array( 'exporter/lib/class-property-exporter.php' )
       )
     ));
 
