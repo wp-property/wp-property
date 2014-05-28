@@ -516,7 +516,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
                 <div class="alignleft">
                 <?php
 
-                if ( $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'needs_higher_wpp_version' ] == 'true' ) {
+                if ( $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'needs_upgrade' ] == 'true' ) {
                   printf( __( 'This feature is disabled because it requires WP-Property %1$s or higher.' ), $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'minimum_wpp_version' ] );
                 } else {
                   echo WPP_F::checkbox( "name=wpp_settings[installed_features][$plugin_slug][disabled]&label=" . __( 'Disable plugin.', 'wpp' ), $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ] );

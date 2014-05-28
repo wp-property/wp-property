@@ -2776,28 +2776,23 @@ class WPP_F extends UD_API {
       ),
       'main_map' => array(),
       'headers' => array(
-        'name'         => 'Name',
-        'version'      => 'Version',
-        'description'  => 'Description',
-        'class'        => 'Class',
-        'slug'         => 'Slug',
-        'minimum.core' => 'Minimum Core Version',
-        'minimum.php'  => 'Minimum PHP Version',
-        'capability'   => 'Capability'
+        '_id'           => 'Feature ID',
+        '_type'         => 'Feature Type',
+        'name'          => 'Name',
+        'version'       => 'Version',
+        'description'   => 'Description',
+        'class'         => 'Class',
+        'slug'          => 'Slug',
+        'screen.id'     => 'Screen ID',
+        'minimum.core'  => 'Minimum Core Version',
+        'minimum.php'   => 'Minimum PHP Version',
+        'capability'    => 'Capability'
       )
     ));
 
     $args->location = array_filter( $args->location );
 
-    if( !is_dir( WPP_Premium ) ) {
-      return (array) $wp_properties[ 'installed_features' ];
-    }
-
-    if( $premium_dir = opendir( WPP_Premium ) ) {
-
-      if( file_exists( WPP_Premium . "/index.php" ) ) {
-        @include_once( WPP_Premium . "/index.php" );
-      }
+    if( defined( 'WPP_Premium' ) && is_dir( WPP_Premium ) && $premium_dir = opendir( WPP_Premium ) ) {
 
       $_verified = array();
 
@@ -2826,21 +2821,48 @@ class WPP_F extends UD_API {
 
         if( isset( $file ) && is_file( WPP_Premium . DIRECTORY_SEPARATOR . $file ) && end( @explode( ".", $file ) ) == 'php' ) {
 
-          $_upgraed = false;
+          $_upgraed         = false;
+          $_absolute_path   = trailingslashit( WPP_Premium ) . $file;
+          $_basename        = basename( $file );
+          $plugin_slug      = str_replace( array( '.php' ), '', $_basename );
 
-          $_absolute_path = trailingslashit( WPP_Premium ) . $file;
-          $_basename = basename( $file );
+          $plugin_data = wp_parse_args( get_file_data( $_absolute_path, $args->headers, 'plugin' ), array(
+            '_id' => null,
+            '_type' => 'module',
+            '_key' => null,
+            'name' => $plugin_slug,
+            'description' => null,
+            'version' => null,
+            'capability' => null,
 
-          $plugin_data = @get_file_data( $_absolute_path, $args->headers, 'plugin' );
+            'minimum.core' => null,
+            'minimum.wp' => null,
+            'minimum.php' => null,
 
-          $plugin_slug = $plugin_data[ 'slug' ] ? $plugin_data[ 'slug' ] : str_replace( array( '.php' ), '', $_basename );
+            // System
+            'slug' => $plugin_slug,
+            'class' => $plugin_slug,
 
-          // Admin tools premium feature was moved to core. So it must not be loaded twice.
-          if( $plugin_slug == 'class_admin_tools' ) {
-            continue;
-          }
+            // Locked. (non-dynamic, renaming will break model)
+            'disabled' => null,
+            '$system' => array(
+              'uid' => $plugin_slug,
+              'path' => $_absolute_path,
+              'requires_upgrade' => null
+            )
 
-          if( is_array( $wp_properties[ 'installed_features' ][ $plugin_slug ] ) && $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ] ) {
+          ));
+
+          // ID is numeric.
+          $plugin_data[ '_id' ] = isset( $plugin_data[ '_id' ] ) ? intval( $plugin_data[ '_id' ] ) : $plugin_data[ '_id' ];
+
+          // Key is Lowercased.
+          $plugin_data[ '_key' ] = isset( $plugin_data[ '_key' ] ) ? $plugin_data[ '_key' ] : str_replace( array( 'wpp-', 'wpp_', 'class_', 'class-', '_' ), array( '', '', '', '', '-' ), $plugin_slug );
+
+          // Force lowercase.
+          $plugin_slug =  strtolower( str_replace( '-', '_', isset( $plugin_data[ 'slug' ] ) ? $plugin_data[ 'slug' ] : $plugin_slug ) );
+
+          if( isset( $wp_properties[ 'installed_features' ][ $plugin_slug ] ) &&  is_array( $wp_properties[ 'installed_features' ][ $plugin_slug ] ) && $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ] ) {
 
             if( version_compare( $plugin_data[ 'version' ], $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ] ) > 0 ) {
               $_upgraed = true;
@@ -2848,10 +2870,7 @@ class WPP_F extends UD_API {
 
           }
 
-          $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'name' ]        = $plugin_data[ 'name' ];
-          $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ]     = $plugin_data[ 'version' ];
-          $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'description' ] = $plugin_data[ 'description' ];
-          $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'class' ]       = $plugin_data[ 'class' ] ? $plugin_data[ 'class' ] : $plugin_slug;
+          $wp_properties[ 'installed_features' ][ $plugin_slug ] =( $plugin_data );
 
           $_verified[] = $plugin_slug;
 
@@ -2863,16 +2882,13 @@ class WPP_F extends UD_API {
           $feature_requires_upgrade = ( !empty( $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'minimum.core' ] ) && ( version_compare( WPP_Version, $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'minimum.core' ] ) < 0 ) ? true : false );
 
           if( $feature_requires_upgrade ) {
-
-            //** Disable feature if it requires a higher WPP version**/
-
-            $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ]                 = 'true';
-            $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'needs_higher_wpp_version' ] = 'true';
-
+            // Disable feature if it requires a higher WPP version
+            $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ]  = 'true';
+            $wp_properties[ 'installed_features' ][ $plugin_slug ][ '$system' ][ 'requires_upgrade' ] = 'true';
           } elseif( !isset( $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ] ) || $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ] != 'true' ) {
 
             // Continue with loading feature...
-            $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'needs_higher_wpp_version' ] = 'false';
+            $wp_properties[ 'installed_features' ][ $plugin_slug ][ '$system' ][ 'requires_upgrade' ] = 'false';
 
             // Module requires a higher version of PHP than is available.
             if( !$plugin_data[ 'minimum.php' ] || version_compare( PHP_VERSION, $plugin_data[ 'minimum.php' ] ) > 0 ) {
@@ -2904,10 +2920,9 @@ class WPP_F extends UD_API {
             $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ] = 'false';
 
           } else {
-            //* This happens when feature cannot be loaded and is disabled */
 
             //** We unset requires core upgrade in case feature was update while being disabled */
-            $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'needs_higher_wpp_version' ] = 'false';
+            $wp_properties[ 'installed_features' ][ $plugin_slug ][ '$system' ][ 'requires_upgrade' ] = 'false';
 
           }
 
@@ -2926,7 +2941,10 @@ class WPP_F extends UD_API {
 
     }
 
-    return (array) $wp_properties[ 'installed_features' ];
+    return array(
+      'installed' =>  $wp_properties[ 'installed_features' ],
+      'available' =>  $wp_properties[ 'available_features' ]
+    );
 
   }
 
