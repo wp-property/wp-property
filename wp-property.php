@@ -25,7 +25,7 @@
  */
 
 /** This Version  */
-define( 'WPP_Version', '1.41.2' );
+define( 'WPP_Version', '1.42.0' );
 
 /** Get Directory - not always wp-property */
 define( 'WPP_Directory', dirname( plugin_basename( __FILE__ ) ) );

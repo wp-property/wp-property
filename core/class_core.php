@@ -11,6 +11,7 @@
  */
 class WPP_Core {
 
+  static public $features  = array();
 
   /**
    * Highest-level function initialized on plugin load
@@ -26,8 +27,31 @@ class WPP_Core {
       ini_set( 'memory_limit', '128M' );
     }
 
-    //** Load premium features */
-    WPP_F::load_premium();
+    // Load Modules.
+    self::$features = WPP_F::load_premium( array(
+      'location' => array(
+        defined( 'WPP_Premium' ) ? WPP_Premium : null,
+        defined( 'WPP_Modules' ) ? WPP_Modules : null
+      ),
+      'headers' => array(
+        'name'         => 'Name',
+        'version'      => 'Version',
+        'description'  => 'Description',
+        'class'        => 'Class',
+        'slug'         => 'Slug',
+        'minimum.core' => 'Minimum Core Version',
+        'minimum.php'  => 'Minimum PHP Version',
+        'capability'   => 'Capability'
+      ),
+      'main_map' => array(
+        'wp-property-admin-tools'   => array( 'wp-property-admin-tools/lib/class-admin-tools.php' ),
+        'wp-property-agents'        => array( 'wp-property-agents/lib/class_agents.php' ),
+        'wp-property-power-tools'   => array( 'wp-property-power-tools/lib/class-power-tools.php' ),
+        'wp-property-slideshow'     => array( 'wp-property-slideshow/lib/class-slideshow.php' ),
+        'wp-property-importer'      => array( 'wp-property-importer/lib/class_wpp_property_import.php' ),
+        'wp-property-exporter'      => array( 'wp-property-exporter/lib/class-exporter.php' )
+      )
+    ));
 
     //** Modify request to change feed */
     add_filter( 'request', 'property_feed' );

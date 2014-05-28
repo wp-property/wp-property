@@ -2755,27 +2755,43 @@ class WPP_F extends UD_API {
   }
 
   /**
-   * Check for premium features and load them
+   * Check for Modules and Features.
    *
-   * @updated 1.39.0
+   * @updated 1.42.0
    * @since 0.624
+   *
+   * @param $args             {Array}
+   * @param $args.locations   {Array}
+   * @param $args.main_map    {Array}
+   * @param $args.headers     {Array}
+   *
+   * @return array
    */
-  static function load_premium() {
+  static function load_premium( $args = array() ) {
     global $wp_properties;
 
-    $default_headers = array(
-      'name'         => 'Name',
-      'version'      => 'Version',
-      'description'  => 'Description',
-      'class'        => 'Class',
-      'slug'         => 'Slug',
-      'minimum.core' => 'Minimum Core Version',
-      'minimum.php'  => 'Minimum PHP Version',
-      'capability'   => 'Capability'
-    );
+    $args = (object) wp_parse_args( $args, array(
+      'location' => array(
+        defined( 'WPP_Premium' ) ? WPP_Premium : null
+      ),
+      'main_map' => array(),
+      'headers' => array(
+        'name'         => 'Name',
+        'version'      => 'Version',
+        'description'  => 'Description',
+        'class'        => 'Class',
+        'slug'         => 'Slug',
+        'minimum.core' => 'Minimum Core Version',
+        'minimum.php'  => 'Minimum PHP Version',
+        'capability'   => 'Capability'
+      )
+    ));
 
-    if( !is_dir( WPP_Premium ) )
-      return;
+    $args->location = array_filter( $args->location );
+
+    if( !is_dir( WPP_Premium ) ) {
+      return (array) $wp_properties[ 'installed_features' ];
+    }
 
     if( $premium_dir = opendir( WPP_Premium ) ) {
 
@@ -2787,16 +2803,37 @@ class WPP_F extends UD_API {
 
       while( false !== ( $file = readdir( $premium_dir ) ) ) {
 
-        if( $file == 'index.php' )
+        if( $file == 'index.php' || $file == '.' || $file == '..' ) {
           continue;
+        }
 
-        if( end( @explode( ".", $file ) ) == 'php' ) {
+        // Load files in nested module directories. @since 1.42.0
+        if( is_dir( trailingslashit( WPP_Premium ) . $file ) ) {
+
+          $_locations = isset( $args->main_map[ $file ] ) ? (array) $args->main_map[ $file ] : array();
+
+          foreach( $_locations as $_relative_path ) {
+
+            $file = str_replace( $file, $_relative_path, $file );
+
+            if( is_file( WPP_Premium . DIRECTORY_SEPARATOR . $file ) ) {
+              continue;
+            };
+
+          }
+
+        }
+
+        if( isset( $file ) && is_file( WPP_Premium . DIRECTORY_SEPARATOR . $file ) && end( @explode( ".", $file ) ) == 'php' ) {
 
           $_upgraed = false;
 
-          $plugin_data = @get_file_data( WPP_Premium . "/" . $file, $default_headers, 'plugin' );
+          $_absolute_path = trailingslashit( WPP_Premium ) . $file;
+          $_basename = basename( $file );
 
-          $plugin_slug = $plugin_data[ 'slug' ] ? $plugin_data[ 'slug' ] : str_replace( array( '.php' ), '', $file );
+          $plugin_data = @get_file_data( $_absolute_path, $args->headers, 'plugin' );
+
+          $plugin_slug = $plugin_data[ 'slug' ] ? $plugin_data[ 'slug' ] : str_replace( array( '.php' ), '', $_basename );
 
           // Admin tools premium feature was moved to core. So it must not be loaded twice.
           if( $plugin_slug == 'class_admin_tools' ) {
@@ -2818,7 +2855,7 @@ class WPP_F extends UD_API {
 
           $_verified[] = $plugin_slug;
 
-          if( $plugin_data[ 'minimum.core' ] ) {
+          if( isset( $plugin_data[ 'minimum.core' ] ) && $plugin_data[ 'minimum.core' ] ) {
             $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'minimum.core' ] = $plugin_data[ 'minimum.core' ];
           }
 
@@ -2841,9 +2878,9 @@ class WPP_F extends UD_API {
             if( !$plugin_data[ 'minimum.php' ] || version_compare( PHP_VERSION, $plugin_data[ 'minimum.php' ] ) > 0 ) {
 
               if( WP_DEBUG == true ) {
-                include_once( trailingslashit( WPP_Premium ) . $file );
+                include_once( $_absolute_path );
               } else {
-                @include_once( trailingslashit( WPP_Premium ) . $file );
+                @include_once( $_absolute_path );
               }
 
               // Initialize Module that declare a class.
@@ -2889,6 +2926,7 @@ class WPP_F extends UD_API {
 
     }
 
+    return (array) $wp_properties[ 'installed_features' ];
 
   }
 
