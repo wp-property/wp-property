@@ -2947,8 +2947,8 @@ class WPP_F extends UD_API {
     }
 
     return array(
-      'installed' =>  $wp_properties[ 'installed_features' ],
-      'available' =>  $wp_properties[ 'available_features' ]
+      'installed' =>  isset( $wp_properties[ 'installed_features' ] ) ? $wp_properties[ 'installed_features' ] : array(),
+      'available' =>  isset( $wp_properties[ 'available_features' ] ) ? $wp_properties[ 'available_features' ] : array()
     );
 
   }
