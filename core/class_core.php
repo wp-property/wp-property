@@ -56,7 +56,7 @@ class WPP_Core {
         'wp-property-importer'      => array( 'wp-property-importer/lib/class_wpp_property_import.php' ),
         'wp-property-exporter'      => array( 'wp-property-exporter/lib/class-property-exporter.php' )
       )
-    ) );
+    ));
 
     //** Modify request to change feed */
     add_filter( 'request', 'property_feed' );
