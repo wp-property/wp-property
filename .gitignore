@@ -19,5 +19,6 @@ core/premium
 *.pid
 *.gz
 
+modules/**
 node_modules
 static/codex
