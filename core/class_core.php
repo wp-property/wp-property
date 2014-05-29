@@ -549,7 +549,7 @@ class WPP_Core {
     }
 
     //** If we are displaying search results, we can assume this is the default property page */
-    if( is_array( $_REQUEST[ 'wpp_search' ] ) ) {
+    if( isset( $_REQUEST[ 'wpp_search' ] ) && is_array( $_REQUEST[ 'wpp_search' ] ) ) {
 
       if( isset( $_POST[ 'wpp_search' ] ) ) {
         $_query = '?' . http_build_query( array( 'wpp_search' => $_REQUEST[ 'wpp_search' ] ), '', '&' );
@@ -584,7 +584,7 @@ class WPP_Core {
     }
 
     //** If this is a the root property page, and the Dynamic Default Property page is used */
-    if( $wp_query->wpp_root_property_page && $wp_properties[ 'configuration' ][ 'base_slug' ] == 'property' ) {
+    if( isset( $wp_query->wpp_root_property_page ) && $wp_query->wpp_root_property_page && $wp_properties[ 'configuration' ][ 'base_slug' ] == 'property' ) {
       $wp_query->wpp_default_property_page = true;
 
       WPP_F::console_log( 'Overriding default 404 page status.' );
@@ -596,19 +596,19 @@ class WPP_Core {
       add_action( 'template_redirect', create_function( '', ' global $wp_query; $wp_query->is_404 = false;' ), 0, 10 );
     }
 
-    if( $wp_query->wpp_search_page ) {
+    if( isset( $wp_query->wpp_search_page ) && $wp_query->wpp_search_page ) {
       $wpp_pages[ ] = 'Search Page';
     }
 
-    if( $wp_query->wpp_default_property_page ) {
+    if( isset( $wp_query->wpp_default_property_page ) && $wp_query->wpp_default_property_page ) {
       $wpp_pages[ ] = 'Default Property Page';
     }
 
-    if( $wp_query->wpp_root_property_page ) {
+    if( isset( $wp_query->wpp_root_property_page ) && $wp_query->wpp_root_property_page ) {
       $wpp_pages[ ] = 'Root Property Page.';
     }
 
-    if( is_array( $wpp_pages ) ) {
+    if( isset( $wpp_pages ) && is_array( $wpp_pages ) ) {
       WPP_F::console_log( 'WPP_F::parse_request() ran, determined that request is for: ' . implode( ', ', $wpp_pages ) );
     }
 
@@ -691,7 +691,7 @@ class WPP_Core {
     global $wp_properties, $wp_version;
 
     $_wpnonce = ( version_compare( $wp_version, '3.5', '>=' ) ? 'update-post_' : 'update-property_' ) . $post_id;
-    if( !wp_verify_nonce( $_POST[ '_wpnonce' ], $_wpnonce ) || $_POST[ 'post_type' ] !== 'property' ) {
+    if( isset( $_POST[ '_wpnonce' ] ) && ( !wp_verify_nonce( $_POST[ '_wpnonce' ], $_wpnonce ) || $_POST[ 'post_type' ] !== 'property' ) ) {
       return $post_id;
     }
 
@@ -963,7 +963,7 @@ class WPP_Core {
       wp_enqueue_style( 'wp-property-theme-specific' );
     }
 
-    if( $wp_properties[ 'configuration' ][ 'do_not_enable_text_widget_shortcodes' ] != 'true' ) {
+    if( isset( $wp_properties[ 'configuration' ][ 'do_not_enable_text_widget_shortcodes' ] ) && $wp_properties[ 'configuration' ][ 'do_not_enable_text_widget_shortcodes' ] != 'true' ) {
       add_filter( 'widget_text', 'do_shortcode' );
     }
 
