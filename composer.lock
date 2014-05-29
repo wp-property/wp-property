@@ -1,0 +1,221 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "69cc11f643a221e15b12d51d6414a107",
+    "packages": [
+        {
+            "name": "composer/installers",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/installers.git",
+                "reference": "eb9b5b6f59fbaaa6aa7c8fabd2d66e60f376eaa2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/installers/zipball/eb9b5b6f59fbaaa6aa7c8fabd2d66e60f376eaa2",
+                "reference": "eb9b5b6f59fbaaa6aa7c8fabd2d66e60f376eaa2",
+                "shasum": ""
+            },
+            "replace": {
+                "roundcube/plugin-installer": "*",
+                "shama/baton": "*"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*@dev",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "composer-installer",
+            "extra": {
+                "class": "Composer\\Installers\\Installer",
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Composer\\Installers\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kyle Robinson Young",
+                    "email": "kyle@dontkry.com",
+                    "homepage": "http://dontkry.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A multi-framework Composer library installer",
+            "homepage": "http://composer.github.com/installers/",
+            "keywords": [
+                "Craft",
+                "Hurad",
+                "MODX Evo",
+                "OXID",
+                "WolfCMS",
+                "agl",
+                "annotatecms",
+                "cakephp",
+                "codeigniter",
+                "concrete5",
+                "croogo",
+                "drupal",
+                "elgg",
+                "fuelphp",
+                "installer",
+                "joomla",
+                "kohana",
+                "laravel",
+                "lithium",
+                "magento",
+                "mako",
+                "mediawiki",
+                "modulework",
+                "phpbb",
+                "piwik",
+                "ppi",
+                "roundcube",
+                "shopware",
+                "silverstripe",
+                "symfony",
+                "typo3",
+                "wordpress",
+                "zend",
+                "zikula"
+            ],
+            "time": "2014-05-07 15:43:15"
+        },
+        {
+            "name": "usabilitydynamics/lib-installer",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/lib-installer",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/lib-installer/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer-plugin-api": "1.0.0",
+                "composer/installers": "~1.0",
+                "php": ">=5.3"
+            },
+            "type": "composer-installer",
+            "extra": {
+                "class": [
+                    "UsabilityDynamics\\Installers\\ProductModule"
+                ],
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "UsabilityDynamics\\Installers\\": "lib/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "time": "2014-05-29 01:03:19"
+        },
+        {
+            "name": "wp-property/admin-tools",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-admin-tools",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-admin-tools/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "master",
+                "php": ">=5.3",
+                "usabilitydynamics/lib-installer": "master"
+            },
+            "type": "wordpress-module",
+            "extra": {
+                "installer-name": "admin-tools"
+            },
+            "time": "2014-05-29 01:02:05"
+        },
+        {
+            "name": "wp-property/exporter",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-exporter",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-exporter/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3",
+                "usabilitydynamics/lib-installer": "master"
+            },
+            "type": "wordpress-module",
+            "extra": {
+                "installer-name": "exporter"
+            },
+            "time": "2014-05-28 16:10:40"
+        }
+    ],
+    "packages-dev": [
+        {
+            "name": "wp-property/importer",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-importer",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-importer/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3",
+                "usabilitydynamics/lib-installer": "master"
+            },
+            "type": "wordpress-module",
+            "extra": {
+                "installer-name": "importer"
+            },
+            "time": "2014-05-29 08:02:05"
+        }
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": [
+
+    ],
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}

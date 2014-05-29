@@ -22,3 +22,6 @@ core/premium
 modules/**
 node_modules
 static/codex
+vendor/modules
+vendor/libraries
+vendor/themes
