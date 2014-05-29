@@ -1,16 +1,19 @@
 {
-  "name": "usabilitydynamics/wp-realty",
-  "version": "1.38.2",
+  "name": "usabilitydynamics/wp-property",
+  "version": "1.42.0",
   "type": "wordpress-plugin",
+  "homepage": "http://github.com/UsabilityDynamics/wp-property",
+  "keywords": [
+    "real-estate",
+    "wp-property"
+  ],
   "extra": {
     "installer-name": "wp-property",
     "installer-paths": {
       "vendor/modules/{$name}":       [ "type:wordpress-module" ],
-      "vendor/libraries/{$name}":     [ "type:wordpress-library" ],
-      "vendor/themes/{$name}":        [ "type:wordpress-theme" ]
+      "vendor/libraries/{$name}":     [ "type:wordpress-library" ]
     }
   },
-  "homepage": "http://github.com/UsabilityDynamics/wp-property",
   "authors": [
     {
       "name": "Andy Potanin",
@@ -39,16 +42,13 @@
     "vendor-dir": "vendor/libraries",
     "bin-dir": "vendor/bin",
     "optimize-autoloader": true,
-    "autoloader-suffix": "VendorPackages",
-    "component-dir": "js/vendor"
+    "autoloader-suffix": "VendorPackages"
   },
   "require": {
+    "usabilitydynamics/lib-api": "master",
     "usabilitydynamics/lib-installer": "master",
+    "usabilitydynamics/lib-model": "master",
     "wp-property/admin-tools": "master",
     "wp-property/exporter": "master"
-  },
-  "require-dev": {
-    "wp-property/importer": "master"
-  },
-  "minimum-stability": "dev"
+  }
 }
