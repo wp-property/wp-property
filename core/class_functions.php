@@ -2769,6 +2769,7 @@ class WPP_F extends UD_API {
    * @param $args.main_map    {Array}
    * @param $args.headers     {Array}
    *
+   * @todo: move the current function to lib-installer. peshkov@UD
    * @return array
    */
   static function load_premium( $args = array() ) {
