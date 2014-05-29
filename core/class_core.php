@@ -50,7 +50,10 @@ class WPP_Core {
         'facebook-tabs' => array( 'facebook-tabs/lib/class-facebook-tabs.php' ),
         'pdf'           => array( 'pdf/lib/class-pdf.php' ),
         'slideshow'     => array( 'slideshow/lib/class-slideshow.php' ),
-        'importer'      => array( 'importer/lib/class_wpp_property_import.php' ),
+        'importer'      => array(
+          'importer/lib/class_wpp_property_import.php',
+          'importer/lib/class-importer.php'
+        ),
         'exporter'      => array( 'exporter/lib/class-property-exporter.php' )
       )
     ));

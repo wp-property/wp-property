@@ -1527,7 +1527,6 @@ class WPP_F extends UD_API {
       if( $writable_issue )
         $wp_messages[ 'error' ][ ] = __( 'If you have problems automatically downloading premium features, it may be due to PHP not having ownership issues over the premium feature folder.', 'wpp' );
     }
-
     // Attempt to take ownership -> most likely will not work
     if( $ownership_issue ) {
       if( @chown( WPP_Premium, posix_getuid() ) ) {
