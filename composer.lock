@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "69cc11f643a221e15b12d51d6414a107",
+    "hash": "269b6a342aba5675f92737fd8ea0e363",
     "packages": [
         {
             "name": "composer/installers",
@@ -92,6 +92,34 @@
             "time": "2014-05-07 15:43:15"
         },
         {
+            "name": "usabilitydynamics/lib-api",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/lib-api",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/lib-api/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "usabilitydynamics/lib-utility": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "time": "2014-05-27 22:27:49"
+        },
+        {
             "name": "usabilitydynamics/lib-installer",
             "version": "master",
             "source": {
@@ -130,6 +158,98 @@
             "time": "2014-05-29 01:03:19"
         },
         {
+            "name": "usabilitydynamics/lib-meta-box",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-meta-box",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/UsabilityDynamics/wp-meta-box/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "installer-name": "lib-meta-box"
+            },
+            "autoload": {
+                "classmap": [
+                    "inc/fields",
+                    "inc/common.php",
+                    "inc/field.php",
+                    "inc/helpers.php",
+                    "inc/meta-box.php"
+                ]
+            },
+            "time": "2014-05-10 01:10:30"
+        },
+        {
+            "name": "usabilitydynamics/lib-model",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/lib-model",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/lib-model/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "usabilitydynamics/lib-meta-box": "*",
+                "usabilitydynamics/lib-utility": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib"
+                ]
+            },
+            "time": "2014-05-22 23:52:01"
+        },
+        {
+            "name": "usabilitydynamics/lib-utility",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/lib-utility",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/lib-utility/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "library",
+            "extra": {
+                "installer-name": "lib-utility",
+                "component": {
+                    "name": "utility",
+                    "scripts": [
+                        "scripts/*.js"
+                    ]
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "lib"
+                ]
+            },
+            "time": "2014-05-22 14:36:23"
+        },
+        {
             "name": "wp-property/admin-tools",
             "version": "master",
             "source": {
@@ -152,7 +272,7 @@
             "extra": {
                 "installer-name": "admin-tools"
             },
-            "time": "2014-05-29 01:02:05"
+            "time": "2014-05-29 13:36:56"
         },
         {
             "name": "wp-property/exporter",
@@ -181,6 +301,94 @@
     ],
     "packages-dev": [
         {
+            "name": "wp-property/api-manager",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-api-manager",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-api-manager/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3",
+                "usabilitydynamics/lib-installer": "master"
+            },
+            "type": "wordpress-module",
+            "extra": {
+                "installer-name": "api-manager"
+            },
+            "time": "2014-05-29 08:07:57"
+        },
+        {
+            "name": "wp-property/enterprise",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-enterprise",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-enterprise/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "wordpress-module",
+            "time": "2014-01-10 15:42:07"
+        },
+        {
+            "name": "wp-property/facebook-tabs",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-facebook-tabs",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-facebook-tabs/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "wordpress-module",
+            "time": "2014-05-28 14:16:37"
+        },
+        {
+            "name": "wp-property/feps",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-feps",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-feps/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3",
+                "usabilitydynamics/lib-installer": "master"
+            },
+            "type": "wordpress-module",
+            "extra": {
+                "installer-name": "feps"
+            },
+            "time": "2014-05-29 08:01:55"
+        },
+        {
             "name": "wp-property/importer",
             "version": "master",
             "source": {
@@ -203,6 +411,66 @@
                 "installer-name": "importer"
             },
             "time": "2014-05-29 08:02:05"
+        },
+        {
+            "name": "wp-property/pdf",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-pdf",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-pdf/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "wordpress-module",
+            "time": "2014-05-28 16:26:46"
+        },
+        {
+            "name": "wp-property/power-tools",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-power-tools",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-power-tools/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "wordpress-module",
+            "time": "2014-05-28 14:36:27"
+        },
+        {
+            "name": "wp-property/supermap",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-supermap",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-supermap/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "wordpress-module",
+            "time": "2014-03-18 16:22:40"
         }
     ],
     "aliases": [

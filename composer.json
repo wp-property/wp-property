@@ -50,5 +50,16 @@
     "usabilitydynamics/lib-model": "master",
     "wp-property/admin-tools": "master",
     "wp-property/exporter": "master"
-  }
+  },
+  "require-dev": {
+    "wp-property/supermap": "master",
+    "wp-property/enterprise": "master",
+    "wp-property/api-manager": "master",
+    "wp-property/pdf": "master",
+    "wp-property/power-tools": "master",
+    "wp-property/facebook-tabs": "master",
+    "wp-property/importer": "master",
+    "wp-property/feps": "master"
+  },
+  "minimum-stability": "dev"
 }
