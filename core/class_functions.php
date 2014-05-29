@@ -106,7 +106,7 @@ class WPP_F extends UD_API {
    * @since 1.10
    *
    */
-  function property_label( $type = 'singular' ) {
+  static public function property_label( $type = 'singular' ) {
     global $wp_post_types;
 
     if( $type == 'plural' ) {
@@ -254,7 +254,7 @@ class WPP_F extends UD_API {
     register_post_type( 'property', array(
       'labels'              => $wp_properties[ 'labels' ],
       'public'              => true,
-      'exclude_from_search' => $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] == 'true' ? true : false,
+      'exclude_from_search' => ( isset( $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] ) && $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] == 'true' ? true : false ),
       'show_ui'             => true,
       '_edit_link'          => 'post.php?post=%d',
       'capability_type'     => array( 'wpp_property', 'wpp_properties' ),

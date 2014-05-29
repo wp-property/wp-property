@@ -343,7 +343,7 @@ class WPP_Core {
    * @since 0.60
    *
    */
-  function plugin_action_links( $links, $file ) {
+  static public function plugin_action_links( $links, $file ) {
 
     if( $file == 'wp-property/wp-property.php' ) {
       $settings_link = '<a href="' . admin_url( "edit.php?post_type=property&page=property_settings" ) . '">' . __( 'Settings', 'wpp' ) . '</a>';
@@ -1882,7 +1882,7 @@ class WPP_Core {
     global $wpp_capabilities;
 
     //* Get Administrator role for adding custom capabilities */
-    $role =& get_role( 'administrator' );
+    $role = get_role( 'administrator' );
 
     //* General WPP capabilities */
     $wpp_capabilities = array(
