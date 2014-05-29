@@ -1,9 +1,26 @@
 {
   "name": "WP-Property",
-  "version": "1.38.2",
+  "version": "1.42.0",
   "type": "wordpress-plugin",
   "homepage": "http://github.com/UsabilityDynamics/wp-property",
+  "keywords": [
+    "real-estate",
+    "wp-property"
+  ],
+  "extra": {
+    "id": "wp-property",
+    "text_domain": "wp-property",
+    "installer-name": "wp-property",
+    "installer-paths": {
+      "vendor/modules/{$name}":       [ "type:wordpress-module" ],
+      "vendor/libraries/{$name}":     [ "type:wordpress-library" ]
+    }
+  },
   "authors": [
+    {
+      "name": "Andy Potanin",
+      "homepage": "http://usabilitydynamics.com"
+    },
     {
       "name": "Maxim Peshkov",
       "email": "maxim.peshkov@usabilitydynamics.com",
@@ -19,25 +36,20 @@
   ],
   "repositories": [
     {
-      "type": "package",
-      "package": {
-        "name": "usabilitydynamics/vendor",
-        "version": "0.1.0",
-        "dist": {
-          "url": "https://github.com/UsabilityDynamics/vendor/master.zip",
-          "type": "zip"
-        }
-      }
+      "type": "composer",
+      "url": "http://repository.usabilitydynamics.com"
     }
   ],
   "config": {
-    "vendor-dir": "vendor",
-    "component-dir": "js/vendor"
+    "vendor-dir": "vendor/libraries",
+    "bin-dir": "vendor/bin",
+    "optimize-autoloader": true,
+    "autoloader-suffix": "VendorPackages"
   },
   "require": {
-    "usabilitydynamics/vendor": "*",
-    "linkorb/jsmin-php": "*",
-    "lampjunkie/php-datatables": "*",
-    "tecnick.com/tcpdf": "*"
+    "usabilitydynamics/lib-api": "master",
+    "usabilitydynamics/lib-installer": "master",
+    "usabilitydynamics/lib-model": "master",
+    "wp-property/admin-tools": "master"
   }
 }
