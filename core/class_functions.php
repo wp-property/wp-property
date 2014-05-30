@@ -1111,7 +1111,7 @@ class WPP_F extends UD_API {
     }
 
     //** Look for regular pages that are placed under base slug */
-    if( $wp_query->query_vars[ 'post_type' ] == 'property' && count( $wpdb->get_row( "SELECT * FROM {$wpdb->posts} WHERE post_name = '{$wp_query->query_vars['name']}' AND post_type = 'property'  LIMIT 0, 1" ) ) == 0 ) {
+    if( isset( $wp_query->query_vars[ 'post_type' ] ) && $wp_query->query_vars[ 'post_type' ] == 'property' && count( $wpdb->get_row( "SELECT * FROM {$wpdb->posts} WHERE post_name = '{$wp_query->query_vars['name']}' AND post_type = 'property'  LIMIT 0, 1" ) ) == 0 ) {
       $posts[ ] = $wpdb->get_row( "SELECT * FROM {$wpdb->posts} WHERE post_name = '{$wp_query->query_vars['name']}' AND post_type = 'page'  LIMIT 0, 1" );
     }
 
