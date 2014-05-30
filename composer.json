@@ -47,6 +47,7 @@
   "require": {
     "usabilitydynamics/lib-api": "master",
     "usabilitydynamics/lib-installer": "master",
+    "usabilitydynamics/lib-module": "master",
     "usabilitydynamics/lib-model": "master",
     "wp-property/admin-tools": "master",
     "wp-property/exporter": "master"
