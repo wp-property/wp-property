@@ -264,7 +264,7 @@ class WPP_F extends UD_API {
       ),
       'query_var'           => $wp_properties[ 'configuration' ][ 'base_slug' ],
       'supports'            => $supports,
-      'menu_icon'           => WPP_URL . 'images/pp_menu-1.6.png'
+      'menu_icon'           => WPP_URL . 'static/images/pp_menu-1.6.png'
     ) );
 
     if( $wp_properties[ 'taxonomies' ] ) {

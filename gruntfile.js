@@ -11,7 +11,22 @@ module.exports = function( grunt ) {
   grunt.initConfig({
 
     // Get Package.
-    pkg: grunt.file.readJSON( 'composer.json' ),
+    settings: grunt.file.readJSON( 'composer.json' ),
+
+    // Locale.
+    pot: {
+      options:{
+        package_name: 'wp-property',
+        package_version: '<%= package.version %>',
+        text_domain: 'wp-property',
+        dest: 'static/languages/',
+        keywords: [ 'gettext', 'ngettext:1,2' ]
+      },
+      files:{
+        src:  [ '**/*.php', 'core/*.php' ],
+        expand: true
+      }
+    },
 
     // Compile Core and Template Styles.
     less: {
@@ -21,13 +36,13 @@ module.exports = function( grunt ) {
           relativeUrls: true
         },
         files: {
-          'css/wpp.admin.css': [ 'css/src/wpp.admin.less' ],
-          'css/wpp.admin.data.tables.css': [ 'css/src/wpp.admin.data.tables.less' ],
-          'css/wpp.admin.jquery.ui.css': [ 'css/src/wpp.admin.jquery.ui.less' ],
+          'static/styles/wpp.admin.css': [ 'static/styles/src/wpp.admin.less' ],
+          'static/styles/wpp.admin.data.tables.css': [ 'static/styles/src/wpp.admin.data.tables.less' ],
+          'static/styles/wpp.admin.jquery.ui.css': [ 'static/styles/src/wpp.admin.jquery.ui.less' ],
           
-          'templates/wp_properties.css': [ 'css/src/wp_properties.less' ],
-          'templates/wp_properties-ie_7.css': [ 'css/src/wp_properties-ie_7.less' ],
-          'templates/wp_properties-msie.css': [ 'css/src/wp_properties-msie.less' ],
+          'templates/wp_properties.css': [ 'static/styles/src/wp_properties.less' ],
+          'templates/wp_properties-ie_7.css': [ 'static/styles/src/wp_properties-ie_7.less' ],
+          'templates/wp_properties-msie.css': [ 'static/styles/src/wp_properties-msie.less' ],
           
           'templates/theme-specific/denali.css': [ 'templates/theme-specific/src/denali.less' ],
           'templates/theme-specific/fb_properties.css': [ 'templates/theme-specific/src/fb_properties.less' ],
@@ -42,13 +57,13 @@ module.exports = function( grunt ) {
           relativeUrls: true
         },
         files: {
-          'css/wpp.admin.dev.css': [ 'css/src/wpp.admin.less' ],
-          'css/wpp.admin.data.tables.dev.css': [ 'css/src/wpp.admin.data.tables.less' ],
-          'css/wpp.admin.jquery.ui.dev.css': [ 'css/src/wpp.admin.jquery.ui.less' ],
+          'static/styles/wpp.admin.dev.css': [ 'static/styles/src/wpp.admin.less' ],
+          'static/styles/wpp.admin.data.tables.dev.css': [ 'static/styles/src/wpp.admin.data.tables.less' ],
+          'static/styles/wpp.admin.jquery.ui.dev.css': [ 'static/styles/src/wpp.admin.jquery.ui.less' ],
           
-          'templates/wp_properties.dev.css': [ 'css/src/wp_properties.less' ],
-          'templates/wp_properties-ie_7.dev.css': [ 'css/src/wp_properties-ie_7.less' ],
-          'templates/wp_properties-msie.dev.css': [ 'css/src/wp_properties-msie.less' ],
+          'templates/wp_properties.dev.css': [ 'static/styles/src/wp_properties.less' ],
+          'templates/wp_properties-ie_7.dev.css': [ 'static/styles/src/wp_properties-ie_7.less' ],
+          'templates/wp_properties-msie.dev.css': [ 'static/styles/src/wp_properties-msie.less' ],
           
           'templates/theme-specific/denali.dev.css': [ 'templates/theme-specific/src/denali.less' ],
           'templates/theme-specific/fb_properties.dev.css': [ 'templates/theme-specific/src/fb_properties.less' ],
@@ -62,16 +77,16 @@ module.exports = function( grunt ) {
     // Generate YUIDoc documentation.
     yuidoc: {
       compile: {
-        name: '<%= pkg.name %>',
-        description: '<%= pkg.description %>',
-        version: '<%= pkg.version %>',
-        url: '<%= pkg.homepage %>',
+        name: '<%= settings.name %>',
+        description: '<%= settings.description %>',
+        version: '<%= settings.version %>',
+        url: '<%= settings.homepage %>',
         options: {
           extension: '.js,.php',
           outdir: 'static/codex/',
           "paths": [
             "./core",
-            "./js"
+            "./static/scripts"
           ]
         }
       }
@@ -84,11 +99,11 @@ module.exports = function( grunt ) {
         debounceDelay: 500
       },
       less: {
-        files: [ 'css/src/*.less' ],
+        files: [ 'static/styles/src/*.less' ],
         tasks: [ 'less:production' ]
       },
-      js: {
-        files: [ 'css/src/*' ],
+      scripts: {
+        files: [ 'static/scripts/src/*' ],
         tasks: [ 'uglify:production' ]
       }
     },
@@ -103,9 +118,9 @@ module.exports = function( grunt ) {
         files: [
           {
             expand: true,
-            cwd: 'js/src',
+            cwd: 'static/scripts/src',
             src: [ '*.js' ],
-            dest: 'js'
+            dest: 'static/scripts'
           }
         ]
       },
@@ -117,9 +132,9 @@ module.exports = function( grunt ) {
         files: [
           {
             expand: true,
-            cwd: 'js/src',
+            cwd: 'static/scripts/src',
             src: [ '*.js' ],
-            dest: 'js'
+            dest: 'static/scripts'
           }
         ]
       }
@@ -160,42 +175,6 @@ module.exports = function( grunt ) {
       ]
     },
 
-    // Commit to Git.
-    gitcommit: {
-      options: {
-        message: 'Automatic push.',
-        ignoreEmpty: true
-      },
-      files: {
-        src: [
-          'images/*.*',
-          'languages/*.*',
-          'lib/*.*',
-          'js/*.*',
-          'static/*.*',
-          'static/codex/*.*',
-          'static/codex/files/*.*',
-          'styles/*.*',
-          'templates/*.*',
-          '*.*'
-        ]
-      }
-    },
-
-    // Pust to Git.
-    gitpush: {
-      development: {
-        options: {
-          branch: 'development'
-        }
-      },
-      master: {
-        options: {
-          branch: 'master'
-        }
-      }
-    },
-
     // Execute Shell Commands.
     shell: {
       install: {
@@ -225,6 +204,7 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks( 'grunt-markdown' );
   grunt.loadNpmTasks( 'grunt-git' );
   grunt.loadNpmTasks( 'grunt-shell' );
+  grunt.loadNpmTasks( 'grunt-pot' );
 
   // Register NPM Tasks.
   grunt.registerTask( 'default', [ 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
@@ -236,10 +216,10 @@ module.exports = function( grunt ) {
   grunt.registerTask( 'make-distribution', [ 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
 
   // Prepare and Push to Git.
-  grunt.registerTask( 'commit', [ 'clean:temp', 'markdown', 'less:production', 'yuidoc', 'uglify:production', 'gitcommit', 'gitpush:development'  ] );
+  grunt.registerTask( 'commit', [ 'clean:temp', 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
 
   // Prepare and Push to Git master.
-  grunt.registerTask( 'commit-master', [ 'clean:temp', 'markdown', 'less:production', 'yuidoc', 'uglify:production', 'gitcommit', 'gitpush:master'  ] );
+  grunt.registerTask( 'commit-master', [ 'clean:temp', 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
 
   // Development Mode.
   grunt.registerTask( 'dev', [ 'symlink:dev', 'watch' ] );

@@ -170,7 +170,7 @@
   );
 
   // Image URLs.
-  $wp_properties['images']['map_icon_shadow'] = WPP_URL . "images/map_icon_shadow.png";
+  $wp_properties['images']['map_icon_shadow'] = WPP_URL . "static/images/map_icon_shadow.png";
 
   if( !isset( $wp_properties_db['configuration']['google_maps']['infobox_attributes'] ) || !is_array($wp_properties_db['configuration']['google_maps']['infobox_attributes'] ) )
     $wp_properties['configuration']['google_maps']['infobox_attributes'] = array(

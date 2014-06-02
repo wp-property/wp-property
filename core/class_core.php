@@ -43,18 +43,38 @@ class WPP_Core {
         'capability'   => 'Capability'
       ),
       'main_map' => array(
-        'admin-tools'   => array( 'admin-tools/lib/class-admin-tools.php' ),
-        'agents'        => array( 'agents/lib/class_agents.php' ),
-        'feps'          => array( 'feps/lib/class-feps.php' ),
-        'power-tools'   => array( 'power-tools/lib/class-power-tools.php' ),
-        'facebook-tabs' => array( 'facebook-tabs/lib/class-facebook-tabs.php' ),
-        'pdf'           => array( 'pdf/lib/class-pdf.php' ),
-        'slideshow'     => array( 'slideshow/lib/class-slideshow.php' ),
+        'admin-tools'   => array(
+          'admin-tools/lib/class-admin-tools.php'
+        ),
+        'agents'        => array(
+          'agents/lib/class-agents.php',
+          'agents/lib/class_agents.php'
+        ),
+        'feps'          => array(
+          'feps/lib/class-feps.php'
+        ),
+        'power-tools'   => array(
+          'power-tools/lib/class-power-tools.php'
+        ),
+        'facebook-tabs' => array(
+          'facebook-tabs/lib/class-facebook-tabs.php'
+        ),
+        'pdf'           => array(
+          'pdf/lib/class-pdf.php'
+        ),
+        'slideshow'     => array(
+          'slideshow/lib/class-slideshow.php'
+        ),
+        'term-editor'     => array(
+          'term-editor/lib/class-term-editor.php'
+        ),
         'importer'      => array(
           'importer/lib/class_wpp_property_import.php',
           'importer/lib/class-importer.php'
         ),
-        'exporter'      => array( 'exporter/lib/class-property-exporter.php' )
+        'exporter'      => array(
+          'exporter/lib/class-property-exporter.php'
+        )
       )
     ));
 
@@ -218,32 +238,32 @@ class WPP_Core {
     wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'third-party/fancybox/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
     wp_register_script( 'wpp-jquery-colorpicker', WPP_URL . 'third-party/colorpicker/colorpicker.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-easing', WPP_URL . 'third-party/fancybox/jquery.easing-1.3.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
-    wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'js/fileuploader.js', array( 'jquery', 'wpp-localization' ) );
-    wp_register_script( 'wp-property-admin-overview', WPP_URL . 'js/wpp.admin.overview.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-admin-widgets', WPP_URL . 'js/wpp.admin.widgets.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-admin-settings', WPP_URL . 'js/wpp.admin.settings.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-backend-global', WPP_URL . 'js/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-global', WPP_URL . 'js/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable' ), WPP_Version );
-    wp_register_script( 'jquery-cookie', WPP_URL . 'js/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
+    wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'static/scripts/fileuploader.js', array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'wp-property-admin-overview', WPP_URL . 'static/scripts/wpp.admin.overview.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-admin-widgets', WPP_URL . 'static/scripts/wpp.admin.widgets.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-admin-settings', WPP_URL . 'static/scripts/wpp.admin.settings.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-backend-global', WPP_URL . 'static/scripts/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-global', WPP_URL . 'static/scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable' ), WPP_Version );
+    wp_register_script( 'jquery-cookie', WPP_URL . 'static/scripts/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
 
     if( WPP_F::can_get_script( $scheme . '://maps.google.com/maps/api/js?sensor=true' ) ) {
       wp_register_script( 'google-maps', $scheme . '://maps.google.com/maps/api/js?sensor=true' );
     }
 
     wp_register_script( 'wpp-md5', WPP_URL . 'third-party/md5.js', array( 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wpp-jquery-gmaps', WPP_URL . 'js/jquery.ui.map.min.js', array( 'google-maps', 'jquery-ui-core', 'jquery-ui-widget', 'wpp-localization' ) );
+    wp_register_script( 'wpp-jquery-gmaps', WPP_URL . 'static/scripts/jquery.ui.map.min.js', array( 'google-maps', 'jquery-ui-core', 'jquery-ui-widget', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-nivo-slider', WPP_URL . 'third-party/jquery.nivo.slider.pack.js', array( 'jquery', 'wpp-localization' ) );
-    wp_register_script( 'wpp-jquery-address', WPP_URL . 'js/jquery.address-1.5.js', array( 'jquery', 'wpp-localization' ) );
-    wp_register_script( 'wpp-jquery-scrollTo', WPP_URL . 'js/jquery.scrollTo-min.js', array( 'jquery', 'wpp-localization' ) );
-    wp_register_script( 'wpp-jquery-validate', WPP_URL . 'js/jquery.validate.js', array( 'jquery', 'wpp-localization' ) );
-    wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'js/jquery.number.format.js', array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'wpp-jquery-address', WPP_URL . 'static/scripts/jquery.address-1.5.js', array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'wpp-jquery-scrollTo', WPP_URL . 'static/scripts/jquery.scrollTo-min.js', array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'wpp-jquery-validate', WPP_URL . 'static/scripts/jquery.validate.js', array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'static/scripts/jquery.number.format.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-data-tables', WPP_URL . "third-party/dataTables/jquery.dataTables.js", array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wp-property-galleria', WPP_URL . 'third-party/galleria/galleria-1.2.5.js', array( 'jquery', 'wpp-localization' ) );
 
     wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'third-party/fancybox/jquery.fancybox-1.3.4.css' );
     wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'third-party/colorpicker/colorpicker.css' );
-    wp_register_style( 'jquery-ui', WPP_URL . 'css/wpp.admin.jquery.ui.css' );
-    wp_register_style( 'wpp-jquery-data-tables', WPP_URL . "css/wpp.admin.data.tables.css" );
+    wp_register_style( 'jquery-ui', WPP_URL . 'static/styles/wpp.admin.jquery.ui.css' );
+    wp_register_style( 'wpp-jquery-data-tables', WPP_URL . "static/styles/wpp.admin.data.tables.css" );
 
     /** Find and register stylesheet  */
     if( file_exists( STYLESHEETPATH . '/wp-properties.css' ) ) {
@@ -449,18 +469,18 @@ class WPP_Core {
     }
 
     //** Automatically insert styles sheet if one exists with $current_screen->ID name */
-    if( file_exists( WPP_Path . "/css/{$current_screen->id}.css" ) ) {
-      wp_enqueue_style( $current_screen->id . '-style', WPP_URL . "/css/{$current_screen->id}.css", array(), WPP_Version, 'screen' );
+    if( file_exists( WPP_Path . "/static/styles/{$current_screen->id}.css" ) ) {
+      wp_enqueue_style( $current_screen->id . '-style', WPP_URL . "/static/styles/{$current_screen->id}.css", array(), WPP_Version, 'screen' );
     }
 
     //** Automatically insert JS sheet if one exists with $current_screen->ID name */
-    if( file_exists( WPP_Path . "js/{$current_screen->id}.js" ) ) {
-      wp_enqueue_script( $current_screen->id . '-js', WPP_URL . "js/{$current_screen->id}.js", array( 'jquery' ), WPP_Version, 'wp-property-backend-global' );
+    if( file_exists( WPP_Path . "static/scripts/{$current_screen->id}.js" ) ) {
+      wp_enqueue_script( $current_screen->id . '-js', WPP_URL . "static/scripts/{$current_screen->id}.js", array( 'jquery' ), WPP_Version, 'wp-property-backend-global' );
     }
 
     //** Enqueue CSS styles on all pages */
-    if( file_exists( WPP_Path . 'css/wpp.admin.css' ) ) {
-      wp_register_style( 'wpp-admin-styles', WPP_URL . 'css/wpp.admin.css' );
+    if( file_exists( WPP_Path . 'static/styles/wpp.admin.css' ) ) {
+      wp_register_style( 'wpp-admin-styles', WPP_URL . 'static/styles/wpp.admin.css' );
       wp_enqueue_style( 'wpp-admin-styles' );
     }
 
