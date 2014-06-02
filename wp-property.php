@@ -25,22 +25,34 @@
  */
 
 /** This Version  */
-define( 'WPP_Version', '1.42.0' );
+if( !defined( 'WPP_Version' ) ) {
+  define( 'WPP_Version', '1.42.0' );
+}
 
 /** Get Directory - not always wp-property */
-define( 'WPP_Directory', dirname( plugin_basename( __FILE__ ) ) );
+if( !defined( 'WPP_Directory' ) ) {
+  define( 'WPP_Directory', dirname( plugin_basename( __FILE__ ) ) );
+}
 
 /** Path for Includes */
-define( 'WPP_Path', plugin_dir_path( __FILE__ ) );
+if( !defined( 'WPP_Path' ) ) {
+  define( 'WPP_Path', plugin_dir_path( __FILE__ ) );
+}
 
 /** Path for front-end links */
-define( 'WPP_URL', plugin_dir_url( __FILE__ ) );
+if( !defined( 'WPP_URL' ) ) {
+  define( 'WPP_URL', plugin_dir_url( __FILE__ ) );
+}
 
 /** Directory path for includes of template files  */
-define( 'WPP_Templates', WPP_Path . 'templates' );
+if( !defined( 'WPP_Templates' ) ) {
+  define( 'WPP_Templates', WPP_Path . 'templates' );
+}
 
 /** Directory path for includes of template files  */
-define( 'WPP_Premium', WPP_Path . 'vendor/modules' );
+if( !defined( 'WPP_Premium' ) ) {
+  define( 'WPP_Premium', WPP_Path . 'vendor/modules' );
+}
 
 //** Global Usability Dynamics functions */
 include_once WPP_Path . 'core/ud_api.php';
@@ -70,10 +82,10 @@ include_once WPP_Path . 'core/class_mail.php';
 include_once WPP_Path . 'core/class_legacy.php';
 
 // Register activation hook -> has to be in the main plugin file
-register_activation_hook( __FILE__,array( 'WPP_F', 'activation' ) );
+register_activation_hook( __FILE__, array( 'WPP_F', 'activation' ) );
 
 // Register activation hook -> has to be in the main plugin file
-register_deactivation_hook( __FILE__,array( 'WPP_F', 'deactivation' ) );
+register_deactivation_hook( __FILE__, array( 'WPP_F', 'deactivation' ) );
 
 // Initiate the plugin
 add_action( "after_setup_theme", create_function( '', 'new WPP_Core;' ) );
