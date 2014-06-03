@@ -59,7 +59,7 @@ function wpp_add_row(element) {
 }
 
 function wpp_toggle_contextual_help(element) {
-    var el = jQuery(element), screen_meta = jQuery("#screen-meta"), panel = jQuery("#contextual-help-wrap"), help_link = jQuery("#contextual-help-link"), scroll_to = el.attr("wpp_scroll_to") && jQuery(el.attr("wpp_scroll_to")).length ? jQuery(el.attr("wpp_scroll_to")) : !1;
+    var el = jQuery(element), screen_meta = jQuery("#screen-meta"), panel = jQuery("#contextual-help-wrap"), help_link = jQuery("#contextual-help-link"), scroll_to = el.attr("data-scroll-to") && jQuery(el.attr("data-scroll-to")).length ? jQuery(el.attr("data-scroll-to")) : !1;
     return help_link.hasClass("screen-meta-active") ? (help_link.removeClass("screen-meta-active"), 
     panel.slideUp("fast", function() {
         panel.hide(), screen_meta.hide(), jQuery(".screen-meta-toggle").css("visibility", "");

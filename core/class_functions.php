@@ -91,13 +91,15 @@ class WPP_F extends UD_API {
    * @return boolean
    */
   public static function log( $message = false, $type = 'default', $object = false, $args = array() ) {
+
     $args = wp_parse_args( (array) $args, array(
       'type'   => $type,
       'object' => $object,
       'instance' => 'WP-Property',
-    ) );
+    ));
 
     return parent::log( $message, $args );
+
   }
 
   /**
@@ -312,6 +314,7 @@ class WPP_F extends UD_API {
     add_action( 'wp_enqueue_scripts', create_function( '', "wp_enqueue_script('wpp-jquery-address');" ) );
     add_action( 'wp_enqueue_scripts', create_function( '', "wp_enqueue_script('wpp-jquery-scrollTo');" ) );
     add_action( 'wp_enqueue_scripts', create_function( '', "wp_enqueue_script('wp-property-frontend');" ) );
+
     wp_enqueue_style( 'wpp-jquery-fancybox-css' );
     wp_enqueue_style( 'jquery-ui' );
 
@@ -326,7 +329,8 @@ class WPP_F extends UD_API {
           }
 
           add_action( 'wp_enqueue_scripts', create_function( '', "wp_enqueue_script('jquery-ui-mouse');" ) );
-          break;
+
+        break;
 
         case 'overview':
 
@@ -1512,41 +1516,15 @@ class WPP_F extends UD_API {
    * @since 1.13
    *
    */
-  public static function check_premium_folder_permissions() {
-    global $wp_messages;
+  public static function check_directory_permissions() {
 
-    // If folder is writable, it's all good
-    if( !is_writable( WPP_Premium . "/" ) )
-      $writable_issue = true;
-    else
-      return;
-
-    // If not writable, check if this is an ownerhsip issue
-    if( function_exists( 'posix_getuid' ) ) {
-      if( fileowner( WPP_Path ) != posix_getuid() )
-        $ownership_issue = true;
-    } else {
-      if( $writable_issue )
-        $wp_messages[ 'error' ][ ] = __( 'If you have problems automatically downloading premium features, it may be due to PHP not having ownership issues over the premium feature folder.', 'wpp' );
-    }
-    // Attempt to take ownership -> most likely will not work
-    if( $ownership_issue ) {
-      if( @chown( WPP_Premium, posix_getuid() ) ) {
-        //$wp_messages['error'][] = __('Succesfully took permission over premium folder.','wpp');
-        return;
-      } else {
-        $wp_messages[ 'error' ][ ] = __( 'There is an ownership issue with the premium folder, which means your site cannot download WP-Property premium features and receive updates.  Please contact your host to fix this - PHP needs ownership over the <b>wp-content/plugins/wp-property/core/premium</b> folder.  Be advised: changing the file permissions will not fix this.', 'wpp' );
-      }
-
+    if( !is_writable( trailingslashit( WPP_Premium ) ) ) {
+      add_settings_error( 'wpp', 'writability', __( 'One of the folders that is necessary for downloading additional features for the WP-Property plugin is not writable.  This means features cannot be downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-property/core/premium</b> permissions to 0755.', 'wpp' ) );
     }
 
-    if( !$ownership_issue && $writable_issue )
-      $wp_messages[ 'error' ][ ] = __( 'One of the folders that is necessary for downloading additional features for the WP-Property plugin is not writable.  This means features cannot be downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-property/core/premium</b> permissions to 0755.', 'wpp' );
-
-    if( $wp_messages )
-      return $wp_messages;
-
-    return false;
+    if( function_exists( 'posix_getuid' ) && fileowner( WPP_Path ) != posix_getuid() ) {
+      add_settings_error( 'wpp', 'ownership', __( 'One of the folders that is necessary for downloading additional features for the WP-Property plugin is not writable.  This means features cannot be downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-property/core/premium</b> permissions to 0755.', 'wpp' ) );
+    }
 
   }
 
@@ -4895,10 +4873,9 @@ class WPP_F extends UD_API {
   /**
    * Function for displaying WPP Data Table rows
    *
-   * Ported from WP-CRM
+   * @todo Add output buffer wiping.
    *
-   * @since 3.0
-   *
+   * @since 1.0.0
    */
   public static function list_table() {
     global $current_screen, $wp_registered_widgets, $wp_registered_widget_controls, $wp_registered_widget_updates, $_wp_deprecated_widgets_callbacks;

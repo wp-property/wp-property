@@ -15,6 +15,8 @@ class WPP_Core {
   static public $path = null;
   static public $features = array();
 
+  private $pages = array();
+
   /**
    * Highest-level function initialized on plugin load
    *
@@ -186,7 +188,7 @@ class WPP_Core {
     /** Admin interface init */
     add_action( "admin_init", array( &$this, "admin_init" ) );
 
-    add_action( "admin_menu", array( &$this, 'admin_menu' ) );
+    add_action( "admin_menu", array( $this, 'admin_menu' ) );
 
     add_action( "post_submitbox_misc_actions", array( &$this, "post_submitbox_misc_actions" ) );
     add_action( 'save_post', array( $this, 'save_property' ) );
@@ -212,8 +214,10 @@ class WPP_Core {
     //** Hack. Used to avoid issues of some WPP capabilities */
     add_filter( 'current_screen', array( $this, 'current_screen' ) );
 
-    //** Load admin header scripts */
-    add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+    // Enqueue Sccripts.
+    add_action( 'admin_enqueue_scripts',  array( $this, '_enqueue_scripts' ) );
+    add_action( 'login_enqueue_scripts',  array( $this, '_enqueue_scripts' ) );
+    add_action( 'wp_enqueue_scripts',     array( $this, '_enqueue_scripts' ) );
 
     //** Check premium feature availability */
     add_action( 'wpp_premium_feature_check', array( 'WPP_F', 'feature_check' ) );
@@ -394,110 +398,129 @@ class WPP_Core {
   /**
    * Can enqueue scripts on specific pages, and print content into head
    *
-   *
-   * @uses $current_screen global variable
-   * @since 0.53
-   *
+   * @author potanin@UD
+   * @method _enqueue_scripts
+   * @since 1.40.0
    */
-  function admin_enqueue_scripts( $hook ) {
-    global $current_screen, $wp_properties, $wpdb;
+  public function _enqueue_scripts( $hook = false ) {
+    global $wp_properties, $wpdb;
+
+    $_parse_url = parse_url( trim( get_bloginfo( 'url' ) ) );
 
     wp_register_script( 'udx-requires', 'http://cdn.udx.io/udx.requires.js', array(), null, true );
-    wp_localize_script( 'wpp-localization', 'wpp', array( 'instance' => $this->get_instance() ) );
 
-    switch( $current_screen->id ) {
+    // Locale Model.
+    wp_localize_script( 'wpp-localization', 'wpp', array(
+      'instance' => $this->get_instance()
+    ));
 
-      //** Property Overview Page and Edit Property page */
-      case 'property_page_all_properties':
-        wp_enqueue_script( 'wp-property-backend-global' );
-        wp_enqueue_script( 'wp-property-admin-overview' );
+    // Admin Scripts.
+    if( current_action() === 'admin_enqueue_scripts' ) {
 
-      case 'property':
-        wp_enqueue_script( 'wp-property-global' );
-        //** Enabldes fancybox js, css and loads overview scripts */
-        wp_enqueue_script( 'post' );
-        wp_enqueue_script( 'postbox' );
-        wp_enqueue_script( 'wpp-jquery-fancybox' );
-        wp_enqueue_script( 'wpp-jquery-data-tables' );
-        wp_enqueue_style( 'wpp-jquery-fancybox-css' );
-        wp_enqueue_style( 'wpp-jquery-data-tables' );
-        //** Get width of overview table thumbnail, and set css */
-        $thumbnail_attribs = WPP_F::image_sizes( $wp_properties[ 'configuration' ][ 'admin_ui' ][ 'overview_table_thumbnail_size' ] );
-        $thumbnail_width   = ( !empty( $thumbnail_attribs[ 'width' ] ) ? $thumbnail_attribs[ 'width' ] : false );
-        if( $thumbnail_width ) {
-          ?>
-          <style typ="text/css">
-            #wp-list-table.wp-list-table .column-thumbnail {
-              width: <?php echo $thumbnail_width + 20; ?>px;
-            }
+      $_screen = get_current_screen();
 
-            #wp-list-table.wp-list-table td.column-thumbnail {
-              text-align: right;
-            }
+      switch( $_screen->id ) {
 
-            #wp-list-table.wp-list-table .column-type {
-              width: 90px;
-            }
-
-            #wp-list-table.wp-list-table .column-menu_order {
-              width: 50px;
-            }
-
-            #wp-list-table.wp-list-table td.column-menu_order {
-              text-align: center;
-            }
-
-            #wp-list-table.wp-list-table .column-featured {
-              width: 100px;
-            }
-
-            #wp-list-table.wp-list-table .check-column {
-              width: 26px;
-            }
-          </style>
-        <?php
-        }
+        // Overview Page
+        case 'property_page_all_properties':
+          wp_enqueue_script( 'wp-property-global' );
+          wp_enqueue_script( 'wp-property-backend-global' );
+          wp_enqueue_script( 'wp-property-admin-overview' );
+          wp_enqueue_script( 'wpp-jquery-fancybox' );
+          wp_enqueue_script( 'wpp-jquery-data-tables' );
+          wp_enqueue_style( 'wpp-jquery-fancybox-css' );
+          wp_enqueue_style( 'wpp-jquery-data-tables' );
         break;
 
-      //** Settings Page */
-      case 'property_page_property_settings':
-        wp_enqueue_script( 'wp-property-backend-global' );
-        wp_enqueue_script( 'wp-property-global' );
-        wp_enqueue_script( 'jquery' );
-        wp_enqueue_script( 'jquery-ui-core' );
-        wp_enqueue_script( 'jquery-ui-sortable' );
-        wp_enqueue_script( 'wpp-jquery-colorpicker' );
-        wp_enqueue_script( 'wp-property-admin-settings' );
-        wp_enqueue_style( 'wpp-jquery-colorpicker-css' );
+        // Single Property Page.
+        case 'property':
+          wp_enqueue_script( 'wp-property-global' );
+          wp_enqueue_script( 'post' );
+          wp_enqueue_script( 'postbox' );
+          wp_enqueue_script( 'wpp-jquery-fancybox' );
+          wp_enqueue_script( 'wpp-jquery-data-tables' );
+          wp_enqueue_style( 'wpp-jquery-fancybox-css' );
+          wp_enqueue_style( 'wpp-jquery-data-tables' );
+
+          //** Get width of overview table thumbnail, and set css */
+          $thumbnail_attribs = WPP_F::image_sizes( $wp_properties[ 'configuration' ][ 'admin_ui' ][ 'overview_table_thumbnail_size' ] );
+          $thumbnail_width   = ( !empty( $thumbnail_attribs[ 'width' ] ) ? $thumbnail_attribs[ 'width' ] : false );
+          if( $thumbnail_width ) { ?>
+            <style type="text/css">#wp-list-table.wp-list-table .column-thumbnail { width: <?php echo $thumbnail_width + 20; ?>px; }</style>
+          <?php
+          }
         break;
 
-      //** Widgets Page */
-      case 'widgets':
-        wp_enqueue_script( 'wp-property-backend-global' );
-        wp_enqueue_script( 'wp-property-global' );
-        wp_enqueue_script( 'jquery-ui-core' );
-        wp_enqueue_script( 'jquery-ui-sortable' );
-        wp_enqueue_script( 'jquery-ui-tabs' );
-        wp_enqueue_style( 'jquery-ui' );
-        wp_enqueue_script( 'wp-property-admin-widgets' );
+        // Settings Page
+        case 'property_page_property_settings':
+          wp_enqueue_script( 'wp-property-backend-global' );
+          wp_enqueue_script( 'wp-property-global' );
+          wp_enqueue_script( 'jquery' );
+          wp_enqueue_script( 'jquery-ui-core' );
+          wp_enqueue_script( 'jquery-ui-sortable' );
+          wp_enqueue_script( 'wpp-jquery-colorpicker' );
+          wp_enqueue_script( 'wp-property-admin-settings' );
+          wp_enqueue_style( 'wpp-jquery-colorpicker-css' );
         break;
+
+        // Widgets Page
+        case 'widgets':
+          wp_enqueue_script( 'wp-property-backend-global' );
+          wp_enqueue_script( 'wp-property-global' );
+          wp_enqueue_script( 'jquery-ui-core' );
+          wp_enqueue_script( 'jquery-ui-sortable' );
+          wp_enqueue_script( 'jquery-ui-tabs' );
+          wp_enqueue_style( 'jquery-ui' );
+          wp_enqueue_script( 'wp-property-admin-widgets' );
+        break;
+
+      }
+
+      //** Automatically insert styles sheet if one exists with $current_screen->ID name */
+      if( file_exists( WPP_Path . "/static/styles/{$_screen->id}.css" ) ) {
+        wp_enqueue_style( $_screen->id . '-style', WPP_URL . "/static/styles/{$_screen->id}.css", array(), WPP_Version, 'screen' );
+      }
+
+      //** Automatically insert JS sheet if one exists with $_screen->ID name */
+      if( file_exists( WPP_Path . "static/scripts/{$_screen->id}.js" ) ) {
+        wp_enqueue_script( $_screen->id . '-js', WPP_URL . "static/scripts/{$_screen->id}.js", array( 'jquery' ), WPP_Version, 'wp-property-backend-global' );
+      }
+
+      //** Enqueue CSS styles on all pages */
+      if( file_exists( WPP_Path . 'static/styles/wpp.admin.css' ) ) {
+        wp_register_style( 'wpp-admin-styles', WPP_URL . 'static/styles/wpp.admin.css' );
+        wp_enqueue_style( 'wpp-admin-styles' );
+      }
+
+      // General Administrative Model.
+      wp_localize_script( 'wpp-admin', 'wpp_admin', array(
+        'labels'          => array(
+          'singular' => WPP_F::property_label( 'singular' ),
+          'plural'   => WPP_F::property_label( 'plural' )
+        ),
+        'parsedUrl'       => $_parse_url,
+        'ajax_url'        => admin_url( 'admin-ajax.php' ),
+        'home_url'        => home_url(),
+        'user_logged_in'  => is_user_logged_in() ? 'true' : 'false',
+        'this_domain'     => trim( $_parse_url[ 'host' ] ? $_parse_url[ 'host' ] : array_shift( explode( '/', $_parse_url[ 'path' ], 2 ) ) ),
+        'custom_css'      => ( file_exists( STYLESHEETPATH . '/wp_properties.css' ) || file_exists( TEMPLATEPATH . '/wp_properties.css' ) ),
+        'settings_nav'    => apply_filters( 'wpp_settings_nav', array() ),
+        'errors'          => get_settings_errors( 'wpp' ),
+        'conditionals'    => array(
+          get_option( 'permalink_structure' ) == '' ? 'no_permalinks' : 'have_permalinks'
+        )
+      ));
 
     }
 
-    //** Automatically insert styles sheet if one exists with $current_screen->ID name */
-    if( file_exists( WPP_Path . "/static/styles/{$current_screen->id}.css" ) ) {
-      wp_enqueue_style( $current_screen->id . '-style', WPP_URL . "/static/styles/{$current_screen->id}.css", array(), WPP_Version, 'screen' );
+    // Login Scripts.
+    if( current_action() === 'login_enqueue_scripts' ) {
+      wp_enqueue_script( 'wp-property-global' );
     }
 
-    //** Automatically insert JS sheet if one exists with $current_screen->ID name */
-    if( file_exists( WPP_Path . "static/scripts/{$current_screen->id}.js" ) ) {
-      wp_enqueue_script( $current_screen->id . '-js', WPP_URL . "static/scripts/{$current_screen->id}.js", array( 'jquery' ), WPP_Version, 'wp-property-backend-global' );
-    }
-
-    //** Enqueue CSS styles on all pages */
-    if( file_exists( WPP_Path . 'static/styles/wpp.admin.css' ) ) {
-      wp_register_style( 'wpp-admin-styles', WPP_URL . 'static/styles/wpp.admin.css' );
-      wp_enqueue_style( 'wpp-admin-styles' );
+    // Frontend Scripts.
+    if( current_action() === 'wp_enqueue_scripts' ) {
+      wp_enqueue_script( 'wp-property-global' );
     }
 
   }
@@ -508,12 +531,12 @@ class WPP_Core {
    * @since 0.5
    *
    */
-  function admin_menu() {
+  public function admin_menu() {
     global $wp_properties, $submenu;
 
     // Create property settings page
-    $settings_page  = add_submenu_page( 'edit.php?post_type=property', __( 'Settings', 'wpp' ), __( 'Settings', 'wpp' ), 'manage_wpp_settings', 'property_settings', create_function( '', 'global $wp_properties; include "ui/page_settings.php";' ) );
-    $all_properties = add_submenu_page( 'edit.php?post_type=property', $wp_properties[ 'labels' ][ 'all_items' ], $wp_properties[ 'labels' ][ 'all_items' ], 'edit_wpp_properties', 'all_properties', create_function( '', 'global $wp_properties, $screen_layout_columns; include "ui/page_all_properties.php";' ) );
+    $this->pages[ 'settings' ] = add_submenu_page( 'edit.php?post_type=property', __( 'Settings', 'wpp' ), __( 'Settings', 'wpp' ), 'manage_wpp_settings', 'property_settings', create_function( '', 'global $wp_properties; include "ui/page_settings.php";' ) );
+    $this->pages[ 'overview' ] = add_submenu_page( 'edit.php?post_type=property', $wp_properties[ 'labels' ][ 'all_items' ], $wp_properties[ 'labels' ][ 'all_items' ], 'edit_wpp_properties', 'all_properties', create_function( '', 'global $wp_properties, $screen_layout_columns; include "ui/page_all_properties.php";' ) );
 
     /**
      * Next used to add custom submenu page 'All Properties' with Javascript dataTable
@@ -536,12 +559,78 @@ class WPP_Core {
           }
         }
       }
+
     }
 
-    do_action( 'wpp_admin_menu' );
+    add_action( "load-{$this->pages['settings']}",  array( $this, '_admin_load' ) );
+    add_action( "load-{$this->pages['overview']}}", array( $this, '_admin_load' ) );
 
-    // Load jQuery UI Tabs and Cookie into settings page (settings_page_property_settings)
-    add_action( 'admin_print_scripts-' . $settings_page, create_function( '', "wp_enqueue_script('jquery-ui-tabs');wp_enqueue_script('jquery-cookie');" ) );
+    do_action( 'wpp_admin_menu', $this );
+
+  }
+
+  /**
+   *
+   *
+   * @todo Use add_settings_field();
+   * @todo Use submit_button();
+   * @todo Use add_settings_error();
+   * @todo Use get_settings_errors();
+   *
+   * @param $hook
+   *
+   */
+  public function _admin_load( $hook ) {
+    global $wp_properties, $wp_settings_fields;
+
+    $screen = get_current_screen();
+
+    switch( $screen->id ) {
+
+      // Settings Page.
+      case 'property_page_property_settings':
+
+        // Stores any errors in $wp_settings_errors via add_settings_error()
+        WPP_F::check_directory_permissions();
+
+        // Enqueue UDX Requires for ViewModel loading.
+        wp_enqueue_script( 'udx-requires' );
+
+        // Column Options.
+        add_screen_option( 'layout_columns', array(
+          'max' => 2,
+          'default' => 2
+        ));
+
+        if( !class_exists( 'UsabilityDynamics\UI\Panel' ) ) {
+          add_settings_error( 'wpp', 'missin-dependency', __('Missing UsabilityDynamics\UI\Panel class..'), 'error' );
+          return;
+        }
+
+        $_panels = (object) array(
+          'main'      => new UsabilityDynamics\UI\Panel( 'settings-main',       array( 'paths' => trailingslashit( WPP_Path ) . 'static/views' )),
+          'display'   => new UsabilityDynamics\UI\Panel( 'settings-display',    array( 'paths' => trailingslashit( WPP_Path ) . 'static/views' )),
+          'help'      => new UsabilityDynamics\UI\Panel( 'settings-help',       array( 'paths' => trailingslashit( WPP_Path ) . 'static/views' )),
+          'modules'   => new UsabilityDynamics\UI\Panel( 'settings-modules',    array( 'paths' => trailingslashit( WPP_Path ) . 'static/views' ))
+        );
+
+        // Overview & Editor Metaboxes.
+        add_meta_box( 'wpp-settings-main',      __( 'Main', 'wpp' ),      array( $_panels->main,    'render' ), $screen->id, 'main', 'default',   $wp_properties );
+        add_meta_box( 'wpp-settings-display',   __( 'Display', 'wpp' ),   array( $_panels->display, 'render' ), $screen->id, 'main', 'default',   $wp_properties );
+        add_meta_box( 'wpp-settings-modules',   __( 'Modules', 'wpp' ),   array( $_panels->modules, 'render' ), $screen->id, 'main', 'default',   $wp_properties );
+        add_meta_box( 'wpp-settings-help',      __( 'Help', 'wpp' ),      array( $_panels->help,    'render' ), $screen->id, 'main', 'low',       $wp_properties );
+
+        // add_settings_field( 'my-setting', 'My Setting', function( $args) { echo 'my setting'; print_r($args); }, get_current_screen()->id, 'main-section', array( 'blah' => 'hello' ));
+        // $screen->add_help_tab( array( 'id'      => 'wpp-settings-feedback', 'title'   => __('Feedback', 'wpp'), 'content' => '<p>Providing feedback...</p>', ));
+        // if( get_settings_errors( 'wpp' ) ) {}
+        // add_settings_error( 'wpp', 'updated', __('Settings saved.'), 'updated' );
+        // add_settings_error( 'wpp', 'updated', __('Settings saved.'), 'notice' );
+        // add_settings_error( 'wpp', 'updated', __('Settings saved.'), 'whatever' );
+        // add_settings_error( 'wpp', 'test', __('Test settings error.'), 'error' );
+
+      break;
+
+    }
 
   }
 
@@ -971,6 +1060,8 @@ class WPP_Core {
    * This function is not called on amdin side
    * Loads conditional CSS styles
    *
+   * @todo Should migrate wp_enqueue_style and
+   *
    * @since 1.11
    */
   function template_redirect() {
@@ -986,11 +1077,6 @@ class WPP_Core {
       $wp_query->is_single = false;
       $wp_query->is_page   = true;
     }
-
-    wp_localize_script( 'wpp-localization', 'wpp', array( 'instance' => $this->get_instance() ) );
-
-    //** Load global wp-property script on all frontend pages */
-    wp_enqueue_script( 'wp-property-global' );
 
     if( apply_filters( 'wpp::custom_styles', false ) === false ) {
       //** Possibly load essential styles that are used in widgets */
@@ -1997,11 +2083,9 @@ class WPP_Core {
   function wpp_contextual_help( $args = array() ) {
     global $contextual_help;
 
-    $defaults = array(
+    extract( wp_parse_args( $args, array(
       'contextual_help' => array()
-    );
-
-    extract( wp_parse_args( $args, $defaults ) );
+    ) ) );
 
     //** If method exists add_help_tab in WP_Screen */
     if( is_callable( array( 'WP_Screen', 'add_help_tab' ) ) ) {
@@ -2028,9 +2112,6 @@ class WPP_Core {
         '<p>' . __( '<a href="https://usabilitydynamics.com/help/" target="_blank">WP-Property Tutorials</a>', 'wpp' ) . '</p>'
       );
 
-    } else {
-      global $current_screen;
-      add_contextual_help( $current_screen->id, '<p>' . __( 'Please upgrade Wordpress to the latest version for detailed help.', 'wpp' ) . '</p><p>' . __( 'Or visit <a href="https://usabilitydynamics.com/tutorials/wp-property-help/" target="_blank">WP-Property Help Page</a> on UsabilityDynamics.com', 'wpp' ) . '</p>' );
     }
   }
 
@@ -2038,6 +2119,7 @@ class WPP_Core {
    * Returns specific instance data which is used by javascript
    * Javascript Reference: window.wpp.instance
    *
+   * @todo Merge into _enqueue_scripts if only invoked from there. - potanin@UD
    * @author peshkov@UD
    * @since 1.38
    * @return array

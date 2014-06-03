@@ -537,7 +537,7 @@ function wpp_add_row(element) {
 
 /**
  * Slides down WP contextual help,
- * and if 'wpp_scroll_to' attribute exists, scroll to it.
+ * and if 'data-scroll-to' attribute exists, scroll to it.
  *
  * @param element
  */
@@ -546,7 +546,7 @@ function wpp_toggle_contextual_help( element, event ) {
   var screen_meta = jQuery("#screen-meta");
   var panel = jQuery("#contextual-help-wrap");
   var help_link = jQuery("#contextual-help-link");
-  var scroll_to = el.attr('wpp_scroll_to') && jQuery( el.attr('wpp_scroll_to') ).length ? jQuery( el.attr('wpp_scroll_to') ) : false;
+  var scroll_to = el.attr('data-scroll-to') && jQuery( el.attr('data-scroll-to') ).length ? jQuery( el.attr('data-scroll-to') ) : false;
 
   /* If Already Open - we close Help */
   if ( help_link.hasClass( 'screen-meta-active' ) ) {

@@ -7,12 +7,38 @@
     "real-estate",
     "wp-property"
   ],
-  "extra": {
-    "installer-name": "wp-property",
-    "installer-paths": {
-      "vendor/modules/{$name}":       [ "type:wordpress-module" ],
-      "vendor/libraries/{$name}":     [ "type:wordpress-library" ]
+  "minimum-stability": "dev",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://repository.usabilitydynamics.com"
     }
+  ],
+  "require": {
+    "usabilitydynamics/lib-api": "master",
+    "usabilitydynamics/lib-ui": "master",
+    "usabilitydynamics/lib-installer": "master",
+    "usabilitydynamics/lib-module": "master",
+    "usabilitydynamics/lib-model": "master"
+  },
+  "require-dev": {
+    "wp-property/admin-tools": "master",
+    "wp-property/agents": "master",
+    "wp-property/api-manager": "master",
+    "wp-property/editor": "master",
+    "wp-property/enterprise": "master",
+    "wp-property/exporter": "master",
+    "wp-property/facebook-tabs": "master",
+    "wp-property/feps": "master",
+    "wp-property/importer": "master",
+    "wp-property/pdf": "master",
+    "wp-property/power-tools": "master",
+    "wp-property/slideshow": "master",
+    "wp-property/supermap": "master",
+    "wp-property/term-editor": "master"
+  },
+  "autoload": {
+    "classmap": [ "lib" ]
   },
   "authors": [
     {
@@ -32,35 +58,22 @@
       "role": "Developer"
     }
   ],
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "http://repository.usabilitydynamics.com"
-    }
-  ],
   "config": {
     "vendor-dir": "vendor/libraries",
     "bin-dir": "vendor/bin",
     "optimize-autoloader": true,
     "autoloader-suffix": "VendorPackages"
   },
-  "require": {
-    "usabilitydynamics/lib-api": "master",
-    "usabilitydynamics/lib-installer": "master",
-    "usabilitydynamics/lib-module": "master",
-    "usabilitydynamics/lib-model": "master",
-    "wp-property/admin-tools": "master",
-    "wp-property/exporter": "master"
+  "extra": {
+    "installer-name": "wp-property",
+    "text_domain": "wpp",
+    "main-file": "wp-property.php",
+    "class": "UsabilityDynamics\\WPP",
+    "installer-paths": {
+      "vendor/modules/{$name}":       [ "type:wordpress-module" ],
+      "vendor/libraries/{$name}":     [ "type:wordpress-library" ],
+      "vendor/themes/{$name}":        [ "type:wordpress-theme" ]
+    }
   },
-  "require-dev": {
-    "wp-property/supermap": "master",
-    "wp-property/enterprise": "master",
-    "wp-property/api-manager": "master",
-    "wp-property/pdf": "master",
-    "wp-property/power-tools": "master",
-    "wp-property/facebook-tabs": "master",
-    "wp-property/importer": "master",
-    "wp-property/feps": "master"
-  },
-  "minimum-stability": "dev"
+  "license": "GNU"
 }

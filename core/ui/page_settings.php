@@ -17,18 +17,12 @@
  */
 
 //** Check if premium folder is writable */
-$wp_messages = WPP_F::check_premium_folder_permissions();
+$wp_messages = WPP_F::check_directory_permissions();
 
 $object_label = array(
   'singular' => WPP_F::property_label( 'singular' ),
   'plural'   => WPP_F::property_label( 'plural' )
 );
-
-// Enqueue UDX Requires for ViewModel loading.
-wp_enqueue_script( 'udx-requires' );
-
-// Needed to prevent WP from loading editor-related dependencies since this page is technically an "editor.php" page.
-// set_current_screen( 'wpp-settings' );
 
 $wrapper_classes = array( 'wpp_settings_page' );
 
@@ -62,27 +56,32 @@ if( get_option( 'permalink_structure' ) == '' ) {
   $wrapper_classes[ ] = 'have_permalinks';
 }
 
+// do_settings_fields( get_current_screen()->id, 'main-section' );
+// settings_errors( 'wpp' );
+
 ?>
-
-<div class="wrap" data-requires="<?php echo plugins_url( 'static/scripts/src/wpp.admin.settings.vm.js', WPP_Core::$path ); ?>">
-
+<div class="wrap wpp_settings_page" data-requires="<?php echo plugins_url( 'static/scripts/src/wpp.admin.settings.vm.js', WPP_Core::$path ); ?>">
   <h2 class="nav-tab-wrapper">
-    <a href="#schedules" class="nav-tab nav-tab-active"><?php _e( 'Schedules', 'wpp' ); ?></a>
-    <a href="#settings" class="nav-tab"><?php _e( 'Settings', 'wpp' ); ?></a>
-    <a href="#add-schedule" class="add-new-h2"><?php _e( 'Add New', 'wpp' ); ?></a>
+    <a href="#schedules" class="nav-tab nav-tab-active"><?php _e( 'Main', 'wpp' ); ?></a>
+    <a href="#settings" class="nav-tab"><?php _e( 'Display', 'wpp' ); ?></a>
+    <a href="#settings" class="nav-tab"><?php _e( 'Features', 'wpp' ); ?></a>
+    <a href="#settings" class="nav-tab"><?php _e( 'Help', 'wpp' ); ?></a>
+    <a href="#add-schedule" class="add-new-h2"><?php _e( 'Setup Wizard', 'wpp' ); ?></a>
   </h2>
+  <?php settings_errors( 'wpp' ); ?>
+  <form id="wpp_settings_form" method="post" action="<?php echo admin_url( 'edit.php?post_type=property&page=property_settings' ); ?>" enctype="multipart/form-data">
 
-  <div class="wpp-ui-panel-right">
-    <div class="wpp-ui-outer">
-      <div class="wpp-ui-inner">Tab Content</div>
+    <?php wp_nonce_field( 'wpp_setting_save' ); ?>
+
+    <div class="wpp-ui-panel-right">
+      <div class="wpp-ui-outer"><div class="wpp-ui-inner"><?php do_accordion_sections( get_current_screen()->id, 'main', $wp_properties ); ?></div></div>
+      <div class="wpp-ui-sidebar"><?php do_accordion_sections( get_current_screen()->id, 'side', $wp_properties ); ?></div>
     </div>
-    <div class="wpp-ui-sidebar">
-      <?php do_accordion_sections( get_current_screen()->id, 'side', null ); ?>
-    </div>
-  </div>
+
+  </form>
 </div>
 
-<div class="wrap <?php echo implode( ' ', $wrapper_classes ); ?>">
+<div class="wrap wpp_settings_page hidden">
 
   <h2 class='wpp_settings_page_header'><?php echo $wp_properties[ 'labels' ][ 'name' ] . ' ' . __( 'Settings', 'wpp' ) ?>
     <div class="wpp_fb_like"><div class="fb-like" data-href="https://www.facebook.com/wpproperty" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div></div>
@@ -148,15 +147,6 @@ if( get_option( 'permalink_structure' ) == '' ) {
               <?php _e( 'to download, or update, all premium features purchased for this domain.', 'wpp' ); ?>
             </div>
 
-            <?php /* if( get_option('ud_api_key') ) { ?>
-            <div class="wpp_settings_block">
-              <label><?php _e('If a feature or service requires an API Key, you may change it here:','wpp');?>
-              <input size="70" type="text" readonly="true" value="<?php echo get_option('ud_api_key'); ?>" />
-              </label>
-            </div>
-            <?php } */
-            ?>
-
           </td>
         </tr>
 
@@ -183,7 +173,7 @@ if( get_option( 'permalink_structure' ) == '' ) {
                   <option <?php selected( $wp_properties[ 'configuration' ][ 'base_slug' ], $page->post_name ); ?> value="<?php echo $page->post_name; ?>"><?php echo $page->post_title; ?></option>
                 <?php endforeach; ?>
               </select>
-              <span wpp_scroll_to="h3.default_property_page" class="wpp_link wpp_toggle_contextual_help"><?php _e( 'What is this?', 'wpp' ); ?></span>
+              <span data-scroll-to="h3.default_property_page" class="wpp_link wpp_toggle_contextual_help"><?php _e( 'What is this?', 'wpp' ); ?></span>
             </div>
 
             <div class="must_not_have_permalinks">
@@ -229,7 +219,7 @@ if( get_option( 'permalink_structure' ) == '' ) {
                   <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_load_theme_specific_css]&label=" . __( 'Do not load theme-specific stylesheet.', 'wpp' ), $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] ); ?>
                   <div class="description"><?php _e( 'This version of WP-Property has a stylesheet made specifically for the theme you are using.', 'wpp' ); ?></div>
                 </li>
-              <?php endif; /* WPP_F::has_theme_specific_stylesheet() */ ?>
+              <?php endif; ?>
             </ul>
           </td>
         </tr>
@@ -430,8 +420,7 @@ if( get_option( 'permalink_structure' ) == '' ) {
                   <option value=""> - </option>
                   <option value="before" <?php selected( $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ], 'before' ); ?>><?php _e( 'Before number', 'wpp' ); ?></option>
                   <option value="after" <?php selected( $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ], 'after' ); ?>><?php _e( 'After number', 'wpp' ); ?></option>
-                 </select>
-
+                </select>
               </li>
 
               <li>
@@ -614,15 +603,6 @@ if( get_option( 'permalink_structure' ) == '' ) {
   </p>
 
 </form>
+<div id="fb-root"></div>
 </div>
 
-<div id="fb-root"></div>
-<script type="text/javascript">(function( d, s, id ) {
-    var js, fjs = d.getElementsByTagName( s )[0];
-    if( d.getElementById( id ) ) return;
-    js = d.createElement( s );
-    js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=373515126019844";
-    fjs.parentNode.insertBefore( js, fjs );
-  }( document, 'script', 'facebook-jssdk' ));
-</script>
