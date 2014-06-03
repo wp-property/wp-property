@@ -81,4 +81,6 @@ $_model = array(
   </form>
 </div>
 
-<?php // do_meta_boxes( get_current_screen()->id, 'templates', $_model ); ?>
+<script type="text/html" id="wpp.settings.mesage">
+  <div data-bind="">Update Message Template</div>
+</script>
