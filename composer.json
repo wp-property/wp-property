@@ -15,9 +15,11 @@
     }
   ],
   "require": {
+    "php": ">=5.3",
+    "datatables/datatables": "dev-master",
+    "usabilitydynamics/lib-installer": "master",
     "usabilitydynamics/lib-api": "master",
     "usabilitydynamics/lib-ui": "master",
-    "usabilitydynamics/lib-installer": "master",
     "usabilitydynamics/lib-module": "master",
     "usabilitydynamics/lib-model": "master"
   },
