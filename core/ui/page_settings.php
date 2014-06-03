@@ -27,12 +27,45 @@ $_model = array(
 );
 
 ?>
+<script>
+
+  // Ghetto hack to accordion module.
+  jQuery( document ).ready( function () {
+    jQuery( '.nav-tab-wrapper .accordion-section-title' ).on( 'click', function( event ) {
+      jQuery( '.accordion-section-title', document.getElementById( event.target.getAttribute( 'data-box-id' ) ) ).trigger( 'click' );
+    });
+  });
+
+</script>
+<style type="text/css">
+
+  .wpp-ui-panel-right .wpp-ui-outer {
+    margin-top: 0;
+  }
+
+  .accordion-section {
+    border-bottom: 0;
+  }
+
+  .accordion-section.open {
+    border-bottom: 1px solid #dfdfdf;
+  }
+
+  .wpp-ui-inner .accordion-section-title {
+
+  }
+
+  .wpp-ui-inner .accordion-section-content {
+    background: transparent;
+    padding-top: 0;
+    padding-left: 10px;
+  }
+
+</style>
 <div class="wrap wpp_settings_page" data-requires="<?php echo plugins_url( 'static/scripts/src/wpp.admin.settings.vm.js', WPP_Core::$path ); ?>">
 
-  <h2 class="nav-tab-wrapper hidden">
-    <a href="#main" class="nav-tab nav-tab-active"><?php _e( 'Main', 'wpp' ); ?></a>
-    <a href="#modules" class="nav-tab"><?php _e( 'Modules', 'wpp' ); ?></a>
-    <a href="#tools" class="nav-tab"><?php _e( 'Tools', 'wpp' ); ?></a>
+  <h2 class="nav-tab-wrapper">
+    <?php UsabilityDynamics\UI::do_tabs( null, 'main' ); ?>
     <a href="#add-schedule" class="add-new-h2"><?php _e( 'Setup Wizard', 'wpp' ); ?></a>
   </h2>
 
@@ -41,8 +74,8 @@ $_model = array(
   <form id="wpp_settings_form" method="post" action="<?php echo admin_url( 'edit.php?post_type=property&page=property_settings' ); ?>" enctype="multipart/form-data">
 
     <div class="wpp-ui-panel-right">
-      <div class="wpp-ui-outer"><div class="wpp-ui-inner"><?php do_accordion_sections( get_current_screen()->id, 'main', $_model ); ?></div></div>
-      <div class="wpp-ui-sidebar"><?php do_accordion_sections( get_current_screen()->id, 'side', $_model ); ?></div>
+      <div class="wpp-ui-outer"><div class="wpp-ui-inner"><?php UsabilityDynamics\UI::do_sections( null, 'main', $_model ); ?></div></div>
+      <div class="wpp-ui-sidebar"><?php UsabilityDynamics\UI::do_accordion_sections( null, 'side', $_model ); ?></div>
     </div>
 
   </form>
