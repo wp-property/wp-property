@@ -502,7 +502,7 @@ class WPP_Core {
         'ajax_url'        => admin_url( 'admin-ajax.php' ),
         'home_url'        => home_url(),
         'user_logged_in'  => is_user_logged_in() ? 'true' : 'false',
-        'this_domain'     => trim( $_parse_url[ 'host' ] ? $_parse_url[ 'host' ] : array_shift( explode( '/', $_parse_url[ 'path' ], 2 ) ) ),
+        'site_domain'     => WPP_F::site_domain(),
         'custom_css'      => ( file_exists( STYLESHEETPATH . '/wp_properties.css' ) || file_exists( TEMPLATEPATH . '/wp_properties.css' ) ),
         'settings_nav'    => apply_filters( 'wpp_settings_nav', array() ),
         'errors'          => get_settings_errors( 'wpp' ),
@@ -572,8 +572,6 @@ class WPP_Core {
   /**
    *
    *
-   * @todo Use add_settings_field();
-   * @todo Use submit_button();
    * @todo Use add_settings_error();
    * @todo Use get_settings_errors();
    *
@@ -591,7 +589,7 @@ class WPP_Core {
       case 'property_page_property_settings':
 
         // Stores any errors in $wp_settings_errors via add_settings_error()
-        WPP_F::check_directory_permissions();
+        WPP_F::check_system_permissions();
 
         // Enqueue UDX Requires for ViewModel loading.
         wp_enqueue_script( 'udx-requires' );
@@ -607,22 +605,53 @@ class WPP_Core {
           return;
         }
 
-        $_panels = (object) array(
-          'main'      => new UsabilityDynamics\UI\Panel( 'settings-main',       array( 'paths' => trailingslashit( WPP_Path ) . 'static/views' )),
-          'display'   => new UsabilityDynamics\UI\Panel( 'settings-display',    array( 'paths' => trailingslashit( WPP_Path ) . 'static/views' )),
-          'help'      => new UsabilityDynamics\UI\Panel( 'settings-help',       array( 'paths' => trailingslashit( WPP_Path ) . 'static/views' )),
-          'modules'   => new UsabilityDynamics\UI\Panel( 'settings-modules',    array( 'paths' => trailingslashit( WPP_Path ) . 'static/views' ))
+        $_section = (object) array(
+          'main'      => new UsabilityDynamics\UI\Panel( 'section-main',      array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' )),
+          'display'   => new UsabilityDynamics\UI\Panel( 'section-display',   array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' )),
+          'tools'     => new UsabilityDynamics\UI\Panel( 'section-tools',     array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' )),
+          'modules'   => new UsabilityDynamics\UI\Panel( 'section-modules',   array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' )),
+          'services'  => new UsabilityDynamics\UI\Panel( 'section-modules',   array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' ))
         );
 
-        // Overview & Editor Metaboxes.
-        add_meta_box( 'wpp-settings-main',      __( 'Main', 'wpp' ),      array( $_panels->main,    'render' ), $screen->id, 'main', 'default',   $wp_properties );
-        add_meta_box( 'wpp-settings-display',   __( 'Display', 'wpp' ),   array( $_panels->display, 'render' ), $screen->id, 'main', 'default',   $wp_properties );
-        add_meta_box( 'wpp-settings-modules',   __( 'Modules', 'wpp' ),   array( $_panels->modules, 'render' ), $screen->id, 'main', 'default',   $wp_properties );
-        add_meta_box( 'wpp-settings-help',      __( 'Help', 'wpp' ),      array( $_panels->help,    'render' ), $screen->id, 'main', 'low',       $wp_properties );
+        $_aside = (object) array(
+          'actions'   => new UsabilityDynamics\UI\Panel( 'aside-actions',     array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' )),
+          'help'      => new UsabilityDynamics\UI\Panel( 'aside-help',        array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' )),
+          'feedback'  => new UsabilityDynamics\UI\Panel( 'aside-feedback',    array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' )),
+        );
+
+        $_panel = (object) array(
+          'update'    => new UsabilityDynamics\UI\Panel( 'panel-update',     array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' )),
+          'backup'    => new UsabilityDynamics\UI\Panel( 'panel-backup',     array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' ))
+        );
+
+        foreach( (array) apply_filters( 'wpp_settings_nav', array() ) as $_module ) {
+
+          // @todo Hide disabled features' settings.
+          // if( isset( $_module[ 'status' ] ) && $_module[ 'status' ] == 'disabled' ) { unset( $wpp_plugin_settings_nav[ $plugin ] ); }
+
+          // @todo Render settings content action. (Should be replaced with add_settings_section()/do_settings_sections/do_settings_fields()
+          // do_action( "wpp_settings_content_{$nav['slug']}" );
+
+        }
+
+        // Sections.
+        add_meta_box( 'wpp-settings-main',      __( 'Main', 'wpp' ),      array( $_section->main,     'section' ),  $screen->id, 'main', 'default' );
+        add_meta_box( 'wpp-settings-display',   __( 'Display', 'wpp' ),   array( $_section->display,  'section' ),  $screen->id, 'main', 'default' );
+        add_meta_box( 'wpp-settings-modules',   __( 'Modules', 'wpp' ),   array( $_section->modules,  'section' ),  $screen->id, 'main', 'default' );
+        add_meta_box( 'wpp-settings-tools',     __( 'Tools', 'wpp' ),     array( $_section->tools,    'section' ),  $screen->id, 'main', 'default' );
+        add_meta_box( 'wpp-settings-services',  __( 'Services', 'wpp' ),  array( $_section->services, 'section' ),  $screen->id, 'main', 'none' );
+
+        // Asides.
+        add_meta_box( 'wpp-settings-actions',   __( 'Actions', 'wpp' ),   array( $_aside->actions,    'aside' ),    $screen->id, 'side', 'default' );
+        add_meta_box( 'wpp-settings-help',      __( 'Help', 'wpp' ),      array( $_aside->help,       'aside' ),    $screen->id, 'side', 'low' );
+        add_meta_box( 'wpp-settings-feedback',  __( 'Feedback', 'wpp' ),  array( $_aside->feedback,   'aside' ),    $screen->id, 'side', 'low' );
+
+        // Modals.
+        add_meta_box( 'wpp-settings-backup',    __( 'Update', 'wpp' ),    array( $_aside->actions,    'modal' ),    $screen->id, 'templates' );
+        add_meta_box( 'wpp-settings-update',    __( 'Backup', 'wpp' ),    array( $_aside->help,       'modal' ),    $screen->id, 'templates' );
 
         // add_settings_field( 'my-setting', 'My Setting', function( $args) { echo 'my setting'; print_r($args); }, get_current_screen()->id, 'main-section', array( 'blah' => 'hello' ));
         // $screen->add_help_tab( array( 'id'      => 'wpp-settings-feedback', 'title'   => __('Feedback', 'wpp'), 'content' => '<p>Providing feedback...</p>', ));
-        // if( get_settings_errors( 'wpp' ) ) {}
         // add_settings_error( 'wpp', 'updated', __('Settings saved.'), 'updated' );
         // add_settings_error( 'wpp', 'updated', __('Settings saved.'), 'notice' );
         // add_settings_error( 'wpp', 'updated', __('Settings saved.'), 'whatever' );

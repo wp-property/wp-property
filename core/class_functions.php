@@ -12,6 +12,21 @@
 class WPP_F extends UD_API {
 
   /**
+   * Get Site Domain
+   *
+   * @author potanin@UD
+   * @since 1.42.0
+   *
+   * @param null $url
+   *
+   * @return string
+   */
+  public static function site_domain( $url = null ) {
+    $_parse_url = parse_url( trim( $url ? $url : get_bloginfo( 'url' ) ) );
+    return trim( $_parse_url[ 'host' ] ? $_parse_url[ 'host' ] : array_shift( explode( '/', $_parse_url[ 'path' ], 2 ) ) );
+  }
+
+  /**
    * This function grabs the API key from UD's servers
    *
    * @updated 1.36.0
@@ -1514,9 +1529,9 @@ class WPP_F extends UD_API {
    * Check permissions and ownership of premium folder.
    *
    * @since 1.13
-   *
+   * @method check_system_permissions
    */
-  public static function check_directory_permissions() {
+  public static function check_system_permissions() {
 
     if( !is_writable( trailingslashit( WPP_Premium ) ) ) {
       add_settings_error( 'wpp', 'writability', __( 'One of the folders that is necessary for downloading additional features for the WP-Property plugin is not writable.  This means features cannot be downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-property/core/premium</b> permissions to 0755.', 'wpp' ) );
@@ -2600,6 +2615,8 @@ class WPP_F extends UD_API {
 
       update_option( 'wpp_settings', $wpp_settings );
 
+      flush_rewrite_rules();
+
     } catch( Exception $e ) {
       $return[ 'success' ] = false;
       $return[ 'message' ] = $e->getMessage();
@@ -2628,10 +2645,7 @@ class WPP_F extends UD_API {
     global $wp_properties;
 
     //** Handle backup */
-    if( isset( $_REQUEST[ 'wpp_settings' ] ) &&
-      wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'wpp_setting_save' ) &&
-      !empty( $_FILES[ 'wpp_settings' ][ 'tmp_name' ][ 'settings_from_backup' ] )
-    ) {
+    if( isset( $_REQUEST[ 'wpp_settings' ] ) && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'wpp_setting_save' ) && !empty( $_FILES[ 'wpp_settings' ][ 'tmp_name' ][ 'settings_from_backup' ] ) ) {
       $backup_file     = $_FILES[ 'wpp_settings' ][ 'tmp_name' ][ 'settings_from_backup' ];
       $backup_contents = file_get_contents( $backup_file );
       if( !empty( $backup_contents ) ) {
@@ -2640,6 +2654,7 @@ class WPP_F extends UD_API {
       if( !empty( $decoded_settings ) ) {
         //** Allow features to preserve their settings that are not configured on the settings page */
         $wpp_settings = apply_filters( 'wpp_settings_save', $decoded_settings, $wp_properties );
+
         //** Prevent removal of featured settings configurations if they are not present */
         if( !empty( $wp_properties[ 'configuration' ][ 'feature_settings' ] ) ) {
           foreach( $wp_properties[ 'configuration' ][ 'feature_settings' ] as $feature_type => $preserved_settings ) {
@@ -2648,11 +2663,17 @@ class WPP_F extends UD_API {
             }
           }
         }
+
         update_option( 'wpp_settings', $wpp_settings );
+
+        flush_rewrite_rules();
+
         //** Load settings out of database to overwrite defaults from action_hooks. */
         $wp_properties_db = get_option( 'wpp_settings' );
+
         //** Overwrite $wp_properties with database setting */
         $wp_properties = array_merge( $wp_properties, $wp_properties_db );
+
         //** Reload page to make sure higher-end functions take affect of new settings */
         //** The filters below will be ran on reload, but the saving functions won't */
         if( $_REQUEST[ 'page' ] == 'property_settings' ) {
@@ -2660,6 +2681,7 @@ class WPP_F extends UD_API {
           wp_redirect( admin_url( "edit.php?post_type=property&page=property_settings&message=updated" ) );
           exit;
         }
+
       }
     }
 
