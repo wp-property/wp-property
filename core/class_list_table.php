@@ -105,18 +105,17 @@ class WPP_List_Table extends WP_List_Table {
    * Initialize the DataTable View
    *
    */
-  function data_tables_script( $args = '' ) {
-    ?>
+  function data_tables_script( $args = '' ) { ?>
     <script type="text/javascript">
       var wp_list_table;
-      var wp_table_column_ids = {}
-      <?php foreach($this->column_ids as $col_id => $col_slug) : ?>
+      var wp_table_column_ids = {};
+
+      <?php foreach( (array) $this->column_ids as $col_id => $col_slug) : ?>
       wp_table_column_ids['<?php echo $col_slug; ?>'] = '<?php echo $col_id; ?>';
       <?php endforeach; ?>
 
       jQuery( document ).ready( function () {
-        /* Initialize the dataTable */
-        //return;
+
         wp_list_table = jQuery( "#wp-list-table" ).dataTable( {
           "sPaginationType": "full_numbers",
           "sDom": 'prtpl',
@@ -146,39 +145,31 @@ class WPP_List_Table extends WP_List_Table {
           },
           "aoColumns": [<?php echo implode(",", $this->aoColumns); ?>],
           "fnDrawCallback": function () {
-            wp_list_table_do_columns();
+
+            if( 'function' === typeof wp_list_table_do_columns ) {
+              wp_list_table_do_columns();
+            }
+
           }
-        } );
+        });
 
         /* Search by Filter */
         jQuery( "#<?php echo $this->table_scope; ?>-filter #search-submit" ).click( function ( event ) {
           event.preventDefault();
           wp_list_table.fnDraw();
           return false;
-        } );
+        });
 
         jQuery( '.metabox-prefs' ).change( function () {
-          wp_list_table_do_columns();
-        } );
-      } );
 
-      //** Check which columns are hidden, and hide data table columns */
-      function wp_list_table_do_columns () {
-        // Hide any "hidden" columns from table
-        var visible_columns = jQuery( '.hide-column-tog' ).filter( ':checked' ).map( function () {
-          return jQuery( this ).val();
-        } );
-        var hidden_columns = jQuery( '.hide-column-tog' ).filter( ':not(:checked)' ).map( function () {
-          return jQuery( this ).val();
-        } );
+          if( 'function' === typeof wp_list_table_do_columns ) {
+            wp_list_table_do_columns();
+          }
 
-        jQuery.each( hidden_columns, function ( key, row_class ) {
-          jQuery( '#wp-list-table .' + row_class ).hide();
-        } );
-        jQuery.each( visible_columns, function ( key, row_class ) {
-          jQuery( '#wp-list-table .' + row_class ).show();
-        } );
-      }
+        });
+
+      });
+
     </script>
   <?php
   }
@@ -241,12 +232,12 @@ class WPP_List_Table extends WP_List_Table {
 
     //** Do pagination  */
     if ( !empty( $this->all_items ) && $this->_args[ 'per_page' ] != -1 ) {
-      $this->item_pages = array_chunk( $this->all_items, $this->_args[ 'per_page' ] );
+      $this->item_pages = array_chunk( $this->all_items, isset( $this->_args[ 'per_page' ] ) ? $this->_args[ 'per_page' ] : 20 );
 
       $total_chunks = count( $this->item_pages );
 
       //** figure out what page chunk we are on based on iDisplayStart
-      $this_chunk = ( $this->_args[ 'iDisplayStart' ] / $this->_args[ 'per_page' ] );
+      $this_chunk = @( $this->_args[ 'iDisplayStart' ] / ( isset( $this->_args[ 'per_page' ] ) && $this->_args[ 'per_page' ] > 0 ? $this->_args[ 'per_page' ] : 20 ) );
 
       //** Get page items */
       $this->items = $this->item_pages[ $this_chunk ];

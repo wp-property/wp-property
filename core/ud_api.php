@@ -8,7 +8,6 @@
  *
  * @version 1.1
  */
-
 if ( !class_exists( 'UD_API' ) ) {
 
   define( 'UD_API_Transdomain', 'UD_API_Transdomain' );
@@ -34,7 +33,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @for UD_API
      * @since 1.0.1
      */
-    static function prefixed( $annex = '' ) {
+    public static function prefixed( $annex = '' ) {
 
       if ( version_compare( phpversion(), 5.3 ) < 0 || !function_exists( 'get_called_class' ) ) {
         foreach ( debug_backtrace() as $step ) {
@@ -57,7 +56,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @since 1.0.0
      * @author potanin@UD
      */
-    static function get_service( $args = '' ) {
+    public static function get_service( $args = '' ) {
 
       $args = wp_parse_args( $args, array(
         'service' => false,
@@ -99,7 +98,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @version 1.0
      * @author peshkov@UD
      */
-    function parse_str( $request, $data = array() ) {
+    public static function parse_str( $request, $data = array() ) {
       $hash = md5( '%2B' );
       $request = str_replace( '%2B', $hash, $_REQUEST[ 'data' ] );
       $request = urldecode( $request );
@@ -119,7 +118,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @since 1.0.3
      * @version 0.1
      */
-    static function extend() {
+    public static function extend() {
       //$arrays = array_reverse( func_get_args() );
       $arrays = func_get_args();
       $base = array_shift( $arrays );
@@ -143,7 +142,6 @@ if ( !class_exists( 'UD_API' ) ) {
       return $base;
     }
 
-
     /**
      * Converts slashes for Windows paths.
      *
@@ -151,7 +149,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @source Flawless
      * @author potanin@UD
      */
-    static function fix_path( $path ) {
+    public static function fix_path( $path ) {
       return str_replace( '\\', '/', $path );
     }
 
@@ -161,7 +159,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @source WP-Property
      * @since 0.6.0
      */
-    static function trim_array( $array = array() ) {
+    public static function trim_array( $array = array() ) {
 
       foreach ( (array)$array as $key => $value ) {
         $array[ $key ] = trim( $value );
@@ -176,9 +174,13 @@ if ( !class_exists( 'UD_API' ) ) {
      *
      * @source WP-Property
      * @since 0.5.4
+     *
+     * @param bool   $type
+     * @param string $args
+     *
      * @returns array keys: 'width' and 'height' if image type sizes found.
      */
-    static function image_sizes( $type = false, $args = '' ) {
+    public static function image_sizes( $type = false, $args = '' ) {
       global $_wp_additional_image_sizes;
 
       $image_sizes = (array)$_wp_additional_image_sizes;
@@ -212,7 +214,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @source http://stackoverflow.com/questions/6501845/php-need-help-inserting-arrays-into-associative-arrays-at-given-keys
      * @author potanin@UD
      */
-    static function array_insert_before( $array, $key, $new ) {
+    public static function array_insert_before( $array, $key, $new ) {
       $array = (array)$array;
       $keys = array_keys( $array );
       $pos = (int)array_search( $key, $keys );
@@ -229,7 +231,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @source http://stackoverflow.com/questions/6501845/php-need-help-inserting-arrays-into-associative-arrays-at-given-keys
      * @author potanin@UD
      */
-    static function array_insert_after( $array, $key, $new ) {
+    public static function array_insert_after( $array, $key, $new ) {
       $array = (array)$array;
       $keys = array_keys( $array );
       $pos = (int)array_search( $key, $keys ) + 1;
@@ -247,7 +249,7 @@ if ( !class_exists( 'UD_API' ) ) {
      *
      * @author potanin@UD
      */
-    static function ud_graceful_death( $message, $title = '', $args = array() ) {
+    public static function ud_graceful_death( $message, $title = '', $args = array() ) {
       $defaults = array( 'response' => 500 );
       $r = wp_parse_args( $args, $defaults );
       $backtrace = debug_backtrace();
@@ -301,7 +303,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @todo API Service Candidate since we ideally need a dictionary reference.
      * @author potanin@UD
      */
-    static function depluralize( $word ) {
+    public static function depluralize( $word ) {
       $rules = array( 'ss' => false, 'os' => 'o', 'ies' => 'y', 'xes' => 'x', 'oes' => 'o', 'ies' => 'y', 'ves' => 'f', 's' => '' );
 
       foreach ( array_keys( $rules ) as $key ) {
@@ -327,7 +329,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @since 1.0.0
      * @author potanin@UD
      */
-    static function format_bytes( $bytes, $precision = 2 ) {
+    public static function format_bytes( $bytes, $precision = 2 ) {
       $kilobyte = 1024;
       $megabyte = $kilobyte * 1024;
       $gigabyte = $megabyte * 1024;
@@ -362,7 +364,7 @@ if ( !class_exists( 'UD_API' ) ) {
      *
      * @since 0.1.0
      */
-    static function sql_log( $action = 'attach_filter' ) {
+    public static function sql_log( $action = 'attach_filter' ) {
       global $wpdb;
 
       if ( !in_array( $action, array( 'enable', 'disable', 'print_log' ) ) ) {
@@ -394,7 +396,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @since 1.0.0
      * @author potanin@UD
      */
-    static function _backtrace_function( $function = false ) {
+    public static function _backtrace_function( $function = false ) {
 
       foreach ( debug_backtrace() as $step ) {
         if ( $function && $step[ 'function' ] == $function ) {
@@ -410,7 +412,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @since 1.0.0
      * @author potanin@UD
      */
-    static function _backtrace_file( $file = false ) {
+    public static function _backtrace_file( $file = false ) {
 
       foreach ( debug_backtrace() as $step ) {
         if ( $file && basename( $step[ 'file' ] ) == $file ) {
@@ -425,7 +427,7 @@ if ( !class_exists( 'UD_API' ) ) {
      *
      * @author potanin@UD
      */
-    static function parse_readme( $readme_file = false ) {
+    public static function parse_readme( $readme_file = false ) {
 
       if ( !$readme_file || !is_file( $readme_file ) ) {
         return false;
@@ -451,7 +453,7 @@ if ( !class_exists( 'UD_API' ) ) {
      *
      * @source http://shauninman.com/archive/2008/01/08/recovering_truncated_php_serialized_arrays
      */
-    static function repair_serialized_array( $serialized ) {
+    public static function repair_serialized_array( $serialized ) {
       $tmp = preg_replace( '/^a:\d+:\{/', '', $serialized );
       return self::repair_serialized_array_callback( $tmp ); // operates on and whittles down the actual argument
     }
@@ -461,7 +463,7 @@ if ( !class_exists( 'UD_API' ) ) {
      *
      *
      */
-    static function repair_serialized_array_callback( &$broken ) {
+    public static function repair_serialized_array_callback( &$broken ) {
 
       $data = array();
       $index = null;
@@ -542,7 +544,7 @@ if ( !class_exists( 'UD_API' ) ) {
      *
      * @since 0.5.0
      */
-    static function checked_in_array( $item, $array ) {
+    public static function checked_in_array( $item, $array ) {
 
       if ( is_array( $array ) && in_array( $item, $array ) ) {
         echo ' checked="checked" ';
@@ -556,7 +558,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @since 1.0.0
      * @author peshkov@UD
      */
-    static function is_older_wp_version( $version = '' ) {
+    public static function is_older_wp_version( $version = '' ) {
       if ( empty( $version ) || (float)$version == 0 ) return false;
       $current_version = get_bloginfo( 'version' );
       /** Clear version numbers */
@@ -588,7 +590,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @author peshkov@UD
      * @version 1.1
      */
-    static function get_template_part( $name, $path = array(), $opts = array() ) {
+    public static function get_template_part( $name, $path = array(), $opts = array() ) {
       $name = (array)$name;
       $template = "";
 
@@ -650,7 +652,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @author peshkov@UD
      * @version 0.1
      */
-    static function get_css_classes( $args = array() ) {
+    public static function get_css_classes( $args = array() ) {
       $classes = '';
       $instance = '';
       $element = '';
@@ -691,7 +693,7 @@ if ( !class_exists( 'UD_API' ) ) {
      *
      * @version 0.6
      */
-    static function get_column_names( $table ) {
+    public static function get_column_names( $table ) {
 
       global $wpdb;
 
@@ -719,7 +721,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @author potanin@UD
      * @version 0.6
      */
-    static function update_qa_table( $table_name = false, $args = false ) {
+    public static function update_qa_table( $table_name = false, $args = false ) {
       global $wpdb;
 
       $args = array_filter( wp_parse_args( $args, array(
@@ -816,7 +818,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @author potanin@UD
      * @version 0.6
      */
-    static function update_qa_table_item( $post_id = false, $args ) {
+    public static function update_qa_table_item( $post_id = false, $args ) {
       global $wpdb;
 
       $types = array();
@@ -890,7 +892,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @source http://us3.php.net/array_merge_recursive
      * @version 0.4
      */
-    static function array_merge_recursive_distinct() {
+    public static function array_merge_recursive_distinct() {
       $arrays = func_get_args();
       $base = array_shift( $arrays );
       if ( !is_array( $base ) ) $base = empty( $base ) ? array() : array( $base );
@@ -922,7 +924,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @param string $title A page title, although ID integer can be passed as well
      * @return string The page's URL if found, otherwise the general blog URL
      */
-    static function post_link( $title = false ) {
+    public static function post_link( $title = false ) {
       global $wpdb;
 
       if ( !$title )
@@ -948,7 +950,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * self::log( "Settings updated" );
      *
      */
-    static function log( $message = false, $args = array() ) {
+    public static function log( $message = false, $args = array() ) {
       $prefix = '';
       $type = '';
       $object = '';
@@ -1027,7 +1029,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @return array Using the get_option function returns the contents of the log.
      *
      */
-    static function get_log( $args = false ) {
+    public static function get_log( $args = false ) {
       $prefix = '';
       $args = wp_parse_args( $args, array(
         'limit' => 20,
@@ -1057,7 +1059,7 @@ if ( !class_exists( 'UD_API' ) ) {
      *
      * @uses update_option()
      */
-    static function delete_log( $args = array() ) {
+    public static function delete_log( $args = array() ) {
       $prefix = '';
       $args = wp_parse_args( $args, array(
         'prefix' => 'ud'
@@ -1077,7 +1079,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @since 1.0
      * @uses add_action() Calls 'admin_menu' hook with an anonymous ( lambda-style ) function which uses add_menu_page to create a UI Log page
      */
-    static function add_log_page() {
+    public static function add_log_page() {
 
       if ( did_action( 'admin_menu' ) ) {
         _doing_it_wrong( __FUNCTION__, sprintf( __( 'You cannot call UD_API::add_log_page() after the %1$s hook.' ), 'init' ), '3.4' );
@@ -1097,7 +1099,7 @@ if ( !class_exists( 'UD_API' ) ) {
      *
      * @since 1.0.0
      */
-    static function show_log_page() {
+    public static function show_log_page() {
 
       if ( $_REQUEST[ 'ud_action' ] == 'clear_log' ) {
         self::delete_log();
@@ -1154,7 +1156,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @uses add_action() Calls 'admin_menu' hook with an anonymous (lambda-style) function which uses add_menu_page to create a UI Log page
      * @return string
      */
-    static function create_slug( $content, $args = false ) {
+    public static function create_slug( $content, $args = false ) {
       $separator = '';
       $defaults = array(
         'separator' => '-',
@@ -1178,7 +1180,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @since 1.3
      * @return string
      */
-    static function de_slug( $string ) {
+    public static function de_slug( $string ) {
       return ucwords( str_replace( "_", " ", $string ) );
     }
 
@@ -1189,7 +1191,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @since 1.0.0
      * @return object
      */
-    static function geo_locate_address( $address = false, $localization = "en", $return_obj_on_fail = false, $latlng = false ) {
+    public static function geo_locate_address( $address = false, $localization = "en", $return_obj_on_fail = false, $latlng = false ) {
 
       if ( !$address && !$latlng ) {
         return false;
@@ -1296,7 +1298,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @return boolean
      * @author odokienko@UD
      */
-    static function available_address_validation( $update = false ) {
+    public static function available_address_validation( $update = false ) {
       global $wpdb;
 
       if ( empty( $update ) ) {
@@ -1337,7 +1339,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @return string|bool Returns formatted date or time, or false if no time passed.
      * @updated 3.0
      */
-    static function nice_time( $time = false, $args = false ) {
+    public static function nice_time( $time = false, $args = false ) {
 
       $args = wp_parse_args( $args, array(
         'format' => 'date_and_time'
@@ -1369,7 +1371,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @deprecated 3.4.0
      * @author potanin@UD
      */
-    static function days_since( $from, $to = false ) {
+    public static function days_since( $from, $to = false ) {
       _deprecated_function( __FUNCTION__, '3.4', 'human_time_diff' );
       human_time_diff( $from, $to );
     }
@@ -1380,7 +1382,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @deprecated 3.4.0
      * @author potanin@UD
      */
-    static function is_url( $url ) {
+    public static function is_url( $url ) {
       _deprecated_function( __FUNCTION__, '3.4', 'esc_url' );
       return preg_match( '|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $url );
     }
@@ -1398,7 +1400,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @return boolean false if notification was not sent successfully
      * @autor odokienko@UD
      */
-    static function send_notification( $args = array() ) {
+    public static function send_notification( $args = array() ) {
 
       $args = wp_parse_args( $args, array(
         'ignore_wp_crm' => false,
@@ -1457,7 +1459,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @return string|array
      * @author odokienko@UD
      */
-    static function replace_data( $str = '', $values = array(), $brackets = array( 'left' => '[', 'right' => ']' ) ) {
+    public static function replace_data( $str = '', $values = array(), $brackets = array( 'left' => '[', 'right' => ']' ) ) {
       $values = (array)$values;
       $replacements = array_keys( $values );
       array_walk( $replacements, create_function( '&$val', '$val = "' . $brackets[ 'left' ] . '".$val."' . $brackets[ 'right' ] . '";' ) );
@@ -1471,7 +1473,7 @@ if ( !class_exists( 'UD_API' ) ) {
      *
      * @author odokienko@UD
      */
-    static function cleanup_extra_whitespace( $content ) {
+    public static function cleanup_extra_whitespace( $content ) {
 
       $content = preg_replace_callback( '~<(?:table|ul|ol )[^>]*>.*?<\/( ?:table|ul|ol )>~ims', create_function( '$matches', 'return preg_replace(\'~>[\s]+<((?:t[rdh]|li|\/tr|/table|/ul ))~ims\',\'><$1\',$matches[0]);' ), $content );
 
@@ -1486,7 +1488,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @return JSON
      * @author peshkov@UD
      */
-    function json_encode( $arr ) {
+    public static function json_encode( $arr ) {
       // convmap since 0x80 char codes so it takes all multibyte codes (above ASCII 127). So such characters are being "hidden" from normal json_encoding
       array_walk_recursive( $arr, create_function( '&$item, $key', 'if (is_string($item)) $item = mb_encode_numericentity($item, array (0x80, 0xffff, 0, 0xffff), "UTF-8");' ) );
       return mb_decode_numericentity( json_encode( $arr ), array( 0x80, 0xffff, 0, 0xffff ), 'UTF-8' );

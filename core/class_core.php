@@ -116,7 +116,7 @@ class WPP_Core {
     do_action( 'wpp_init' );
 
     //** Load languages */
-    load_plugin_textdomain( 'wpp', WPP_Path . false, 'wp-property/langs' );
+    load_plugin_textdomain( 'wpp', WPP_Path . false, 'wp-property/static/languages' );
 
     /** Making template-functions global but load after the premium features, giving the premium features priority. */
     include_once WPP_Templates . '/template-functions.php';
@@ -254,7 +254,7 @@ class WPP_Core {
     wp_register_script( 'wpp-jquery-gmaps', WPP_URL . 'static/scripts/jquery.ui.map.min.js', array( 'google-maps', 'jquery-ui-core', 'jquery-ui-widget', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-nivo-slider', WPP_URL . 'third-party/jquery.nivo.slider.pack.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-address', WPP_URL . 'static/scripts/jquery.address-1.5.js', array( 'jquery', 'wpp-localization' ) );
-    wp_register_script( 'wpp-jquery-scrollTo', WPP_URL . 'static/scripts/jquery.scrollTo-min.js', array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'wpp-jquery-scrollTo', WPP_URL . 'static/scripts/jquery.scrollTo.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-validate', WPP_URL . 'static/scripts/jquery.validate.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'static/scripts/jquery.number.format.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-data-tables', WPP_URL . "third-party/dataTables/jquery.dataTables.js", array( 'jquery', 'wpp-localization' ) );

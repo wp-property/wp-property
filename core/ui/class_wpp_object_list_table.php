@@ -1,15 +1,15 @@
 <?php
 /**
- * Invoice List Table class.
+ * Property List Table
  *
- * @package WP-Invoice
- * @since 3.0
- * @access private
  */
 require_once( WPP_Path . 'core/class_list_table.php' );
 
 class WPP_Object_List_Table extends WPP_List_Table {
 
+  /**
+   * @param string $args
+   */
   function __construct( $args = '' ) {
     $args = wp_parse_args( $args, array(
       'plural' => '',
@@ -105,7 +105,7 @@ class WPP_Object_List_Table extends WPP_List_Table {
         //** Adds ability to customize any column we want. peshkov@UD */
         case ( apply_filters( "wpp::single_row::{$column}", false, $post ) ):
           $r .= apply_filters( "wpp::single_row::{$column}::render", '', $post );
-          break;
+        break;
 
         case 'cb':
           if ( $can_edit_post ) {
@@ -153,8 +153,8 @@ class WPP_Object_List_Table extends WPP_List_Table {
 
         case 'property_type':
           $property_type = $post->property_type;
-          $r .= $wp_properties[ 'property_types' ][ $property_type ];
-          break;
+          $r .= isset( $wp_properties[ 'property_types' ][ $property_type ] ) ? $wp_properties[ 'property_types' ][ $property_type ] : $property_type;
+        break;
 
         case 'overview':
 
@@ -167,7 +167,8 @@ class WPP_Object_List_Table extends WPP_List_Table {
 
           $display_stats = array();
           foreach($overview_stats as $stat => $label) {
-            $values = $post->$stat;
+
+            $values = isset( $post->$stat ) ? $post->$stat : null;
 
             if ( !is_array( $values ) ) {
               $values = array( $values );
@@ -233,7 +234,7 @@ class WPP_Object_List_Table extends WPP_List_Table {
 
         case 'thumbnail':
 
-          if ( $post->featured_image ) {
+          if ( isset( $post->featured_image ) && $post->featured_image ) {
 
             $overview_thumb_type = $wp_properties[ 'configuration' ][ 'admin_ui' ][ 'overview_table_thumbnail_size' ];
 
@@ -256,12 +257,13 @@ class WPP_Object_List_Table extends WPP_List_Table {
         case 'featured':
 
           if ( current_user_can( 'manage_options' ) ) {
-            if ( $post->featured )
+            if ( isset( $post->featured ) && $post->featured )
               $r .= "<input type='button' id='wpp_feature_{$post->ID}' class='wpp_featured_toggle wpp_is_featured' nonce='" . wp_create_nonce( 'wpp_make_featured_' . $post->ID ) . "' value='" . __( 'Featured', 'wpp' ) . "' />";
             else
               $r .= "<input type='button' id='wpp_feature_{$post->ID}' class='wpp_featured_toggle' nonce='" . wp_create_nonce( 'wpp_make_featured_' . $post->ID ) . "'  value='" . __( 'Add to Featured', 'wpp' ) . "' />";
           } else {
-            if ( $post->featured )
+
+            if ( isset( $post->featured ) && $post->featured )
               $r .= __( 'Featured', 'wpp' );
             else
               $r .= "";
@@ -289,9 +291,9 @@ class WPP_Object_List_Table extends WPP_List_Table {
           $r .= $print_values;
 
           break;
+
       }
 
-      //** Need to insert some sort of space in there to avoid DataTable error that occures when "null" is returned */
       $ajax_cells[ ] = $r;
 
       $result .= $r;

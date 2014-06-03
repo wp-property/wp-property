@@ -7,23 +7,44 @@
  */
 module.exports = function( grunt ) {
 
+  // Require Utility Modules.
+  var joinPath      = require( 'path' ).join;
+  var resolvePath   = require( 'path' ).resolve;
+  var findup        = require( 'findup-sync' );
+
+  // Determine Paths.
+  var _paths = {
+    composer: findup( 'composer.json' ),
+    package: findup( 'package.json' ),
+    vendor: findup( 'vendor' ),
+    languages: findup( 'static/languages' ),
+    codex: findup( 'static/codex' ),
+    styles: findup( 'static/styles' ),
+    scripts: findup( 'static/scripts' ),
+    phpTests: findup( 'static/test/php' ),
+    jsTests: findup( 'static/test/js' )
+  };
+
   // Build Configuration.
   grunt.initConfig({
 
+    // Ready Composer Meta.
+    meta: grunt.file.readJSON( 'composer.json' ),
+
     // Get Package.
-    settings: grunt.file.readJSON( 'composer.json' ),
+    settings: grunt.file.readJSON( 'composer.json' ).extra,
 
     // Locale.
     pot: {
       options:{
-        package_name: 'wp-property',
-        package_version: '<%= package.version %>',
-        text_domain: 'wp-property',
+        package_name: '<%= settings.name %>',
+        package_version: '<%= settings.version %>',
+        text_domain: '<%= settings.name %>',
         dest: 'static/languages/',
         keywords: [ 'gettext', 'ngettext:1,2' ]
       },
       files:{
-        src:  [ '**/*.php', 'core/*.php' ],
+        src:  [ 'lib/*.php' ],
         expand: true
       }
     },
@@ -100,11 +121,11 @@ module.exports = function( grunt ) {
       },
       less: {
         files: [ 'static/styles/src/*.less' ],
-        tasks: [ 'less:production' ]
+        tasks: [ 'less' ]
       },
       scripts: {
         files: [ 'static/scripts/src/*' ],
-        tasks: [ 'uglify:production' ]
+        tasks: [ 'uglify' ]
       }
     },
 
@@ -120,7 +141,10 @@ module.exports = function( grunt ) {
             expand: true,
             cwd: 'static/scripts/src',
             src: [ '*.js' ],
-            dest: 'static/scripts'
+            dest: 'static/scripts',
+            rename: function renameScript( dest, src ) {
+              return joinPath( dest, src.replace( '.js', '.js' ) );
+            }
           }
         ]
       },
@@ -134,7 +158,10 @@ module.exports = function( grunt ) {
             expand: true,
             cwd: 'static/scripts/src',
             src: [ '*.js' ],
-            dest: 'static/scripts'
+            dest: 'static/scripts',
+            rename: function renameScript( dest, src ) {
+              return joinPath( dest, src.replace( '.js', '.min.js' ) );
+            }
           }
         ]
       }
@@ -207,19 +234,19 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks( 'grunt-pot' );
 
   // Register NPM Tasks.
-  grunt.registerTask( 'default', [ 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
+  grunt.registerTask( 'default', [ 'markdown', 'less', 'yuidoc', 'uglify' ] );
 
   // Install Library.
-  grunt.registerTask( 'install', [ 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
+  grunt.registerTask( 'install', [ 'markdown', 'less', 'yuidoc', 'uglify' ] );
 
   // Prepare for Distribution.
-  grunt.registerTask( 'make-distribution', [ 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
+  grunt.registerTask( 'make-distribution', [ 'markdown', 'less', 'yuidoc', 'uglify' ] );
 
   // Prepare and Push to Git.
-  grunt.registerTask( 'commit', [ 'clean:temp', 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
+  grunt.registerTask( 'commit', [ 'clean:temp', 'markdown', 'less', 'yuidoc', 'uglify' ] );
 
   // Prepare and Push to Git master.
-  grunt.registerTask( 'commit-master', [ 'clean:temp', 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
+  grunt.registerTask( 'commit-master', [ 'clean:temp', 'markdown', 'less', 'yuidoc', 'uglify' ] );
 
   // Development Mode.
   grunt.registerTask( 'dev', [ 'symlink:dev', 'watch' ] );
