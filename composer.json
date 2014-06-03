@@ -27,6 +27,8 @@
     "wp-property/admin-tools": "master",
     "wp-property/agents": "master",
     "wp-property/api-manager": "master",
+    "wp-property/availability": "master",
+    "wp-property/bookings": "master",
     "wp-property/editor": "master",
     "wp-property/enterprise": "master",
     "wp-property/exporter": "master",

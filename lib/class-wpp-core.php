@@ -696,8 +696,8 @@ class WPP_Core {
         add_meta_box( 'wpp-settings-feedback',  __( 'Feedback', 'wpp' ),  array( $_aside->feedback,   'aside' ),    get_current_screen()->id, 'side', 'low' );
 
         // Modals.
-        add_meta_box( 'wpp-settings-backup',    __( 'Update', 'wpp' ),    array( $_aside->actions,    'modal' ),    get_current_screen()->id, 'templates' );
-        add_meta_box( 'wpp-settings-update',    __( 'Backup', 'wpp' ),    array( $_aside->help,       'modal' ),    get_current_screen()->id, 'templates' );
+        add_meta_box( 'wpp-settings-backup',    __( 'Update', 'wpp' ),    array( $_aside->actions,    'aside' ),    get_current_screen()->id, 'templates' );
+        add_meta_box( 'wpp-settings-update',    __( 'Backup', 'wpp' ),    array( $_aside->help,       'aside' ),    get_current_screen()->id, 'templates' );
 
         // add_settings_field( 'my-setting', 'My Setting', function( $args) { echo 'my setting'; print_r($args); }, get_current_screen()->id, 'main-section', array( 'blah' => 'hello' ));
         // get_current_screen()->add_help_tab( array( 'id'      => 'wpp-settings-feedback', 'title'   => __('Feedback', 'wpp'), 'content' => '<p>Providing feedback...</p>', ));
@@ -1179,7 +1179,7 @@ class WPP_Core {
       (count($wp_query->posts) < 2) added post 1.31.1 release to avoid
       taxonomy archives from being broken by single property pages
     */
-    if( count( $wp_query->posts ) < 2 && ( $post->post_type == "property" || $wp_query->is_child_property ) ) {
+    if( isset( $post->post_type ) && isset( $wp_query->posts ) && ( count( $wp_query->posts ) < 2 && ( $post->post_type == "property" || ( isset( $wp_query->is_child_property ) && $wp_query->is_child_property ) ) ) ) {
       $wp_query->single_property_page = true;
 
       //** This is a hack and should be done better */

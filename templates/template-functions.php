@@ -1607,7 +1607,9 @@ if ( !function_exists( 'wpp_get_image_link' ) ):
       $img_url = wp_get_attachment_url( $attachment_id );
       //** Filenme of image */
       $img_url_basename = wp_basename( $img_url );
-      if ( is_array( $image_meta ) && $image_meta[ 'sizes' ][ $size ][ 'file' ] ) {
+
+      if( is_array( $image_meta ) && isset( $image_meta[ 'sizes' ][ $size ] ) && $image_meta[ 'sizes' ][ $size ][ 'file' ] ) {
+
         //** Image image meta exists, we get the path and URL to the requested image size */
         $requested_size_filepath = str_replace( $img_url_basename, $image_meta[ 'sizes' ][ $size ][ 'file' ], $attachment_path );
         $requested_image_url = str_replace( $img_url_basename, $image_meta[ 'sizes' ][ $size ][ 'file' ], $img_url );
@@ -1617,7 +1619,7 @@ if ( !function_exists( 'wpp_get_image_link' ) ):
           $requested_image_exists = true;
         }
       }
-      if ( $requested_image_exists ) {
+      if ( isset( $requested_image_exists ) && $requested_image_exists ) {
         $i[ 0 ] = $requested_image_url;
       } else {
         //** Image with the current size doesn't exist. Try generate file */

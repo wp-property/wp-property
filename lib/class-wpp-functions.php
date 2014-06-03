@@ -146,7 +146,7 @@ class WPP_F extends UD_API {
     global $wp_properties;
 
     /** Loads widgets */
-    include_once WPP_Path . 'lib/class-wpp-widgets.php';
+    require_once( WPP_Path . 'lib/class-wpp-widgets.php' );
 
     if( class_exists( 'Property_Attributes_Widget' ) ) {
       register_widget( "Property_Attributes_Widget" );
@@ -195,6 +195,9 @@ class WPP_F extends UD_API {
   /**
    * Registers post types and taxonomies.
    *
+   *
+   * * query_var - Taken from "base_slug" page.
+   *
    * @since 1.31.0
    *
    */
@@ -241,7 +244,7 @@ class WPP_F extends UD_API {
         'query_var'    => 'community_feature',
         'rewrite'      => array( 'slug' => 'community_feature' )
       )
-    ) );
+    ));
 
     $wp_properties[ 'labels' ] = apply_filters( 'wpp_object_labels', array(
       'name'               => __( 'Properties', 'wpp' ),
@@ -258,58 +261,50 @@ class WPP_F extends UD_API {
       'parent_item_colon'  => ''
     ) );
     
-    //** Add support for property */
-    $supports = array( 'title', 'editor', 'thumbnail' );
     if( isset( $wp_properties[ 'configuration' ][ 'enable_comments' ] ) && $wp_properties[ 'configuration' ][ 'enable_comments' ] == 'true' ) {
-      array_push( $supports, 'comments' );
+      add_filter( 'wpp:object:supports', function( $supports ) { return array_merge( array( 'comments' ), $supports ); });
     }
 
     // Register custom post types
     register_post_type( 'property', array(
       'labels'              => $wp_properties[ 'labels' ],
+      'description'         => __( 'WP-Property primary object type.', 'wpp' ),
       'public'              => true,
-      'exclude_from_search' => ( isset( $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] ) && $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] == 'true' ? true : false ),
       'show_ui'             => true,
       '_edit_link'          => 'post.php?post=%d',
       'capability_type'     => array( 'wpp_property', 'wpp_properties' ),
       'hierarchical'        => true,
-      'rewrite'             => array(
-        'slug' => $wp_properties[ 'configuration' ][ 'base_slug' ]
-      ),
-      'query_var'           => $wp_properties[ 'configuration' ][ 'base_slug' ],
-      'supports'            => $supports,
-      'menu_icon'           => WPP_URL . 'static/images/pp_menu-1.6.png'
-    ) );
+      'has_archive'         => apply_filters( 'wpp:object:has_archive', false ),
+      'publicly_queryable'  => apply_filters( 'wpp:object:queryable', true ),
+      'exclude_from_search' => apply_filters( 'wpp:object:searchable',( isset( $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] ) && $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] == 'true' ? true : false ) ),
+      'rewrite'             => apply_filters( 'wpp:object:rewrite', array( 'slug' => $wp_properties[ 'configuration' ][ 'base_slug' ] ) ),
+      'query_var'           => apply_filters( 'wpp:object:var', $wp_properties[ 'configuration' ][ 'base_slug' ] ),
+      'supports'            => apply_filters( 'wpp:object:supports',  array( 'title', 'editor', 'thumbnail' ) ),
+      'menu_icon'           => apply_filters( 'wpp:object:icon', WPP_URL . 'static/images/pp_menu-1.6.png' )
+    ));
 
-    if( $wp_properties[ 'taxonomies' ] ) {
+    foreach( (array) $wp_properties[ 'taxonomies' ] as $taxonomy => $taxonomy_data ) {
 
-      foreach( $wp_properties[ 'taxonomies' ] as $taxonomy => $taxonomy_data ) {
-
-        //** Check if taxonomy is disabled */
-        if( isset( $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] ) &&
-          is_array( $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] ) &&
-          in_array( $taxonomy, $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] )
-        ) {
-          continue;
-        }
-
-        register_taxonomy( $taxonomy, 'property', array(
-          'hierarchical' => $taxonomy_data[ 'hierarchical' ],
-          'label'        => $taxonomy_data[ 'label' ],
-          'labels'       => $taxonomy_data[ 'labels' ],
-          'query_var'    => $taxonomy,
-          'rewrite'      => array( 'slug' => $taxonomy ),
-          'capabilities' => array(
-            'manage_terms' => 'manage_wpp_categories',
-            'edit_terms'   => 'manage_wpp_categories',
-            'delete_terms' => 'manage_wpp_categories',
-            'assign_terms' => 'manage_wpp_categories'
-          )
-        ) );
+      // Check if taxonomy disables.
+      if( isset( $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] ) && is_array( $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] ) && in_array( $taxonomy, $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] ) ) {
+        continue;
       }
-    }
 
-    register_taxonomy_for_object_type( 'property_features', 'property' );
+      register_taxonomy( $taxonomy, 'property', array(
+        'hierarchical' => $taxonomy_data[ 'hierarchical' ],
+        'label'        => $taxonomy_data[ 'label' ],
+        'labels'       => $taxonomy_data[ 'labels' ],
+        'query_var'    => $taxonomy,
+        'rewrite'      => array( 'slug' => $taxonomy ),
+        'capabilities' => array(
+          'manage_terms' => 'manage_wpp_categories',
+          'edit_terms'   => 'manage_wpp_categories',
+          'delete_terms' => 'manage_wpp_categories',
+          'assign_terms' => 'manage_wpp_categories'
+        )
+      ));
+
+    }
 
   }
 
@@ -4521,7 +4516,7 @@ class WPP_F extends UD_API {
       $imageHTML = "<img width=\"{$image['width']}\" height=\"{$image['height']}\" src=\"{$image['link']}\" alt=\"" . addslashes( $post->post_title ) . "\" />";
     }
 
-    if( @$wp_properties[ 'configuration' ][ 'property_overview' ][ 'fancybox_preview' ] == 'true' && !empty( $property[ 'featured_image_url' ] ) ) {
+    if( isset( $imageHTML ) && @$wp_properties[ 'configuration' ][ 'property_overview' ][ 'fancybox_preview' ] == 'true' && !empty( $property[ 'featured_image_url' ] ) ) {
       $imageHTML = "<a href=\"{$property['featured_image_url']}\" class=\"fancybox_image thumbnail\">{$imageHTML}</a>";
     }
 

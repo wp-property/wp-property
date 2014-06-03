@@ -97,7 +97,6 @@
         <h3 class="entry-subtitle"><?php the_tagline(); ?></h3>
       </div>
 
-
       <div class="<?php wpp_css('property::entry_content', "entry-content"); ?>">
         <div class="<?php wpp_css('property::the_content', "wpp_the_content"); ?>"><?php @the_content(); ?></div>
 
