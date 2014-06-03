@@ -12,6 +12,7 @@
  */
 class WPP_Core {
 
+  static public $path = null;
   static public $features = array();
 
   /**
@@ -27,6 +28,8 @@ class WPP_Core {
     if( (int) ini_get( 'memory_limit' ) < 128 ) {
       ini_set( 'memory_limit', '128M' );
     }
+
+    self::$path = dirname( __DIR__ );
 
     // Load Modules.
     self::$features = WPP_F::load_premium( array(
@@ -89,6 +92,9 @@ class WPP_Core {
 
     //** Hook in lower init */
     add_action( 'init', array( $this, 'init_lower' ), 100 );
+
+    // Post initialization.
+    add_action( 'wp_loaded', array( $this, 'wp_loaded' ), 10 );
 
     //** Setup template_redirect */
     add_action( "template_redirect", array( $this, 'template_redirect' ) );
@@ -229,12 +235,55 @@ class WPP_Core {
       add_image_size( $image_name, $image_sizes[ 'width' ], $image_sizes[ 'height' ], true );
     }
 
+    //** Add troubleshoot log page */
+    if( isset( $wp_properties[ 'configuration' ][ 'show_ud_log' ] ) && $wp_properties[ 'configuration' ][ 'show_ud_log' ] == 'true' ) {
+      WPP_F::add_log_page();
+    }
+
+    //** Modify admin body class */
+    add_filter( 'admin_body_class', array( 'WPP_Core', 'admin_body_class' ), 5 );
+
+    //** Modify Front-end property body class */
+    add_filter( 'body_class', array( 'WPP_Core', 'properties_body_class' ) );
+
+    add_filter( 'wp_get_attachment_link', array( 'WPP_F', 'wp_get_attachment_link' ), 10, 6 );
+
+    /** Load all shortcodes */
+    add_shortcode( 'property_overview', array( $this, 'shortcode_property_overview' ) );
+    add_shortcode( 'property_search', array( $this, 'shortcode_property_search' ) );
+    add_shortcode( 'featured_properties', array( $this, 'shortcode_featured_properties' ) );
+    add_shortcode( 'property_map', array( $this, 'shortcode_property_map' ) );
+    add_shortcode( 'property_attribute', array( $this, 'shortcode_property_attribute' ) );
+
+    if( !empty( $wp_properties[ 'alternative_shortcodes' ][ 'property_overview' ] ) ) {
+      add_shortcode( "{$wp_properties[ 'alternative_shortcodes' ]['property_overview']}", array( $this, 'shortcode_property_overview' ) );
+    }
+
+    //** Make Property Featured Via AJAX */
+    if( isset( $_REQUEST[ '_wpnonce' ] ) && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], "wpp_make_featured_" . $_REQUEST[ 'post_id' ] ) ) {
+      add_action( 'wp_ajax_wpp_make_featured', create_function( "", '  $post_id = $_REQUEST[post_id]; echo WPP_F::toggle_featured($post_id); die();' ) );
+    }
+
+    //** Post-init action hook */
+    do_action( 'wpp_post_init' );
+
+  }
+
+  /**
+   * Script and Style Registraiton
+   *
+   * Must occur after "init".
+   *
+   * @since 1.42.0
+   */
+  public function wp_loaded() {
+    global $wp_properties;
+
     //** Determine if we are secure */
     $scheme = ( is_ssl() && !is_admin() ? 'https' : 'http' );
 
     //** Load early so plugins can use them as well */
     wp_register_script( 'wpp-localization', get_bloginfo( 'wpurl' ) . '/wp-admin/admin-ajax.php?action=wpp_js_localization', array(), WPP_Version );
-
     wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'third-party/fancybox/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
     wp_register_script( 'wpp-jquery-colorpicker', WPP_URL . 'third-party/colorpicker/colorpicker.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-easing', WPP_URL . 'third-party/fancybox/jquery.easing-1.3.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
@@ -296,40 +345,6 @@ class WPP_Core {
       wp_register_script( 'wp-property-frontend', WPP_URL . 'templates/wp_properties.js', array( 'jquery-ui-core', 'wpp-localization' ), WPP_Version, true );
     }
 
-    //** Add troubleshoot log page */
-    if( isset( $wp_properties[ 'configuration' ][ 'show_ud_log' ] ) && $wp_properties[ 'configuration' ][ 'show_ud_log' ] == 'true' ) {
-      WPP_F::add_log_page();
-    }
-
-    //** Modify admin body class */
-    add_filter( 'admin_body_class', array( 'WPP_Core', 'admin_body_class' ), 5 );
-
-    //** Modify Front-end property body class */
-    add_filter( 'body_class', array( 'WPP_Core', 'properties_body_class' ) );
-
-    add_filter( 'wp_get_attachment_link', array( 'WPP_F', 'wp_get_attachment_link' ), 10, 6 );
-
-    /** Load all shortcodes */
-    add_shortcode( 'property_overview', array( $this, 'shortcode_property_overview' ) );
-    add_shortcode( 'property_search', array( $this, 'shortcode_property_search' ) );
-    add_shortcode( 'featured_properties', array( $this, 'shortcode_featured_properties' ) );
-    add_shortcode( 'property_map', array( $this, 'shortcode_property_map' ) );
-    add_shortcode( 'property_attribute', array( $this, 'shortcode_property_attribute' ) );
-
-    if( !empty( $wp_properties[ 'alternative_shortcodes' ][ 'property_overview' ] ) ) {
-      add_shortcode( "{$wp_properties[ 'alternative_shortcodes' ]['property_overview']}", array( $this, 'shortcode_property_overview' ) );
-    }
-
-    //** Make Property Featured Via AJAX */
-    if( isset( $_REQUEST[ '_wpnonce' ] ) ) {
-      if( wp_verify_nonce( $_REQUEST[ '_wpnonce' ], "wpp_make_featured_" . $_REQUEST[ 'post_id' ] ) ) {
-        add_action( 'wp_ajax_wpp_make_featured', create_function( "", '  $post_id = $_REQUEST[post_id]; echo WPP_F::toggle_featured($post_id); die();' ) );
-      }
-    }
-
-    //** Post-init action hook */
-    do_action( 'wpp_post_init' );
-
   }
 
   /**
@@ -387,6 +402,7 @@ class WPP_Core {
   function admin_enqueue_scripts( $hook ) {
     global $current_screen, $wp_properties, $wpdb;
 
+    wp_register_script( 'udx-requires', 'http://cdn.udx.io/udx.requires.js', array(), null, true );
     wp_localize_script( 'wpp-localization', 'wpp', array( 'instance' => $this->get_instance() ) );
 
     switch( $current_screen->id ) {

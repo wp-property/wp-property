@@ -160,7 +160,7 @@ module.exports = function( grunt ) {
             src: [ '*.js' ],
             dest: 'static/scripts',
             rename: function renameScript( dest, src ) {
-              return joinPath( dest, src.replace( '.js', '.min.js' ) );
+              return joinPath( dest, src.replace( '.js', '.dev.js' ) );
             }
           }
         ]

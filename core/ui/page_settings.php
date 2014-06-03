@@ -24,6 +24,9 @@ $object_label = array(
   'plural'   => WPP_F::property_label( 'plural' )
 );
 
+// Enqueue UDX Requires for ViewModel loading.
+wp_enqueue_script( 'udx-requires' );
+
 // Needed to prevent WP from loading editor-related dependencies since this page is technically an "editor.php" page.
 // set_current_screen( 'wpp-settings' );
 
@@ -61,7 +64,7 @@ if( get_option( 'permalink_structure' ) == '' ) {
 
 ?>
 
-<div class="wrap" data-requires="<?php echo plugins_url( 'static/scripts/src/wpp.importer.overview.js', UsabilityDynamics\WPP\Importer::$path ); ?>">
+<div class="wrap" data-requires="<?php echo plugins_url( 'static/scripts/src/wpp.admin.settings.vm.js', WPP_Core::$path ); ?>">
 
   <h2 class="nav-tab-wrapper">
     <a href="#schedules" class="nav-tab nav-tab-active"><?php _e( 'Schedules', 'wpp' ); ?></a>
