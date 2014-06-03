@@ -25,6 +25,7 @@
   },
   "require-dev": {
     "wp-property/admin-tools": "master",
+    "wp-property/advanced-rewrites": "master",
     "wp-property/agents": "master",
     "wp-property/api-manager": "master",
     "wp-property/availability": "master",

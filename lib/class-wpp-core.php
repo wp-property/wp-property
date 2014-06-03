@@ -70,8 +70,7 @@ class WPP_Core {
           'admin-tools/lib/class-admin-tools.php'
         ),
         'agents'        => array(
-          'agents/lib/class-agents.php',
-          'agents/lib/class_agents.php'
+          'agents/lib/class-agents.php'
         ),
         'feps'          => array(
           'feps/lib/class-feps.php'
