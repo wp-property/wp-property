@@ -12,9 +12,25 @@
  */
 class WPP_Core {
 
+  /**
+   * Base Path.
+   *
+   * @var null|string
+   */
   static public $path = null;
-  static public $features = array();
 
+  /**
+   * Modules.
+   * 
+   * @var array
+   */
+  static public $modules = array();
+
+  /**
+   * Admin Pages.
+   *
+   * @var array
+   */
   private $pages = array();
 
   /**
@@ -34,7 +50,7 @@ class WPP_Core {
     self::$path = dirname( __DIR__ );
 
     // Load Modules.
-    self::$features = WPP_F::load_premium( array(
+    self::$modules = WPP_F::load_premium( array(
       'location' => array( defined( 'WPP_Premium' ) ? WPP_Premium : null ),
       'headers'  => array(
         '_id'          => 'Feature ID',
@@ -570,20 +586,24 @@ class WPP_Core {
   }
 
   /**
-   *
+   * Admin Controller.
    *
    * @todo Use add_settings_error();
    * @todo Use get_settings_errors();
    *
    * @param $hook
    *
+   * @return bool
    */
   public function _admin_load( $hook ) {
     global $wp_properties, $wp_settings_fields;
 
-    $screen = get_current_screen();
+    // Not sure if this should ever happen on admin.
+    if( !get_current_screen() || !get_current_screen()->id ) {
+      return false;
+    }
 
-    switch( $screen->id ) {
+    switch( get_current_screen()->id ) {
 
       // Settings Page.
       case 'property_page_property_settings':
@@ -635,23 +655,23 @@ class WPP_Core {
         }
 
         // Sections.
-        add_meta_box( 'wpp-settings-main',      __( 'Main', 'wpp' ),      array( $_section->main,     'section' ),  $screen->id, 'main', 'default' );
-        add_meta_box( 'wpp-settings-display',   __( 'Display', 'wpp' ),   array( $_section->display,  'section' ),  $screen->id, 'main', 'default' );
-        add_meta_box( 'wpp-settings-modules',   __( 'Modules', 'wpp' ),   array( $_section->modules,  'section' ),  $screen->id, 'main', 'default' );
-        add_meta_box( 'wpp-settings-tools',     __( 'Tools', 'wpp' ),     array( $_section->tools,    'section' ),  $screen->id, 'main', 'default' );
-        add_meta_box( 'wpp-settings-services',  __( 'Services', 'wpp' ),  array( $_section->services, 'section' ),  $screen->id, 'main', 'none' );
+        add_meta_box( 'wpp-settings-main',      __( 'Main', 'wpp' ),      array( $_section->main,     'section' ),  get_current_screen()->id, 'main', 'default' );
+        add_meta_box( 'wpp-settings-display',   __( 'Display', 'wpp' ),   array( $_section->display,  'section' ),  get_current_screen()->id, 'main', 'default' );
+        add_meta_box( 'wpp-settings-modules',   __( 'Modules', 'wpp' ),   array( $_section->modules,  'section' ),  get_current_screen()->id, 'main', 'default' );
+        add_meta_box( 'wpp-settings-tools',     __( 'Tools', 'wpp' ),     array( $_section->tools,    'section' ),  get_current_screen()->id, 'main', 'default' );
+        add_meta_box( 'wpp-settings-services',  __( 'Services', 'wpp' ),  array( $_section->services, 'section' ),  get_current_screen()->id, 'main', 'none' );
 
         // Asides.
-        add_meta_box( 'wpp-settings-actions',   __( 'Actions', 'wpp' ),   array( $_aside->actions,    'aside' ),    $screen->id, 'side', 'default' );
-        add_meta_box( 'wpp-settings-help',      __( 'Help', 'wpp' ),      array( $_aside->help,       'aside' ),    $screen->id, 'side', 'low' );
-        add_meta_box( 'wpp-settings-feedback',  __( 'Feedback', 'wpp' ),  array( $_aside->feedback,   'aside' ),    $screen->id, 'side', 'low' );
+        add_meta_box( 'wpp-settings-actions',   __( 'Actions', 'wpp' ),   array( $_aside->actions,    'aside' ),    get_current_screen()->id, 'side', 'default' );
+        add_meta_box( 'wpp-settings-help',      __( 'Help', 'wpp' ),      array( $_aside->help,       'aside' ),    get_current_screen()->id, 'side', 'low' );
+        add_meta_box( 'wpp-settings-feedback',  __( 'Feedback', 'wpp' ),  array( $_aside->feedback,   'aside' ),    get_current_screen()->id, 'side', 'low' );
 
         // Modals.
-        add_meta_box( 'wpp-settings-backup',    __( 'Update', 'wpp' ),    array( $_aside->actions,    'modal' ),    $screen->id, 'templates' );
-        add_meta_box( 'wpp-settings-update',    __( 'Backup', 'wpp' ),    array( $_aside->help,       'modal' ),    $screen->id, 'templates' );
+        add_meta_box( 'wpp-settings-backup',    __( 'Update', 'wpp' ),    array( $_aside->actions,    'modal' ),    get_current_screen()->id, 'templates' );
+        add_meta_box( 'wpp-settings-update',    __( 'Backup', 'wpp' ),    array( $_aside->help,       'modal' ),    get_current_screen()->id, 'templates' );
 
         // add_settings_field( 'my-setting', 'My Setting', function( $args) { echo 'my setting'; print_r($args); }, get_current_screen()->id, 'main-section', array( 'blah' => 'hello' ));
-        // $screen->add_help_tab( array( 'id'      => 'wpp-settings-feedback', 'title'   => __('Feedback', 'wpp'), 'content' => '<p>Providing feedback...</p>', ));
+        // get_current_screen()->add_help_tab( array( 'id'      => 'wpp-settings-feedback', 'title'   => __('Feedback', 'wpp'), 'content' => '<p>Providing feedback...</p>', ));
         // add_settings_error( 'wpp', 'updated', __('Settings saved.'), 'updated' );
         // add_settings_error( 'wpp', 'updated', __('Settings saved.'), 'notice' );
         // add_settings_error( 'wpp', 'updated', __('Settings saved.'), 'whatever' );
@@ -661,6 +681,8 @@ class WPP_Core {
 
     }
 
+    return true;
+
   }
 
   /**
@@ -668,7 +690,7 @@ class WPP_Core {
    *
    * @since 0.5
    */
-  function admin_body_class( $content ) {
+  public function admin_body_class( $content ) {
     global $current_screen;
 
     if( $current_screen->id == 'edit-property' ) {
