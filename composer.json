@@ -37,9 +37,6 @@
     "wp-property/supermap": "master",
     "wp-property/term-editor": "master"
   },
-  "autoload": {
-    "classmap": [ "lib" ]
-  },
   "authors": [
     {
       "name": "Andy Potanin",
