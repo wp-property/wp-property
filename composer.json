@@ -59,7 +59,7 @@
     "vendor-dir": "vendor/libraries",
     "bin-dir": "vendor/bin",
     "optimize-autoloader": true,
-    "autoloader-suffix": "VendorPackages"
+    "autoloader-suffix": "VendorWPP"
   },
   "extra": {
     "installer-name": "wp-property",

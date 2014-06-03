@@ -55,7 +55,7 @@ if( !defined( 'WPP_Premium' ) ) {
 }
 
 //** Global Usability Dynamics functions */
-include_once WPP_Path . 'core/ud_api.php';
+include_once WPP_Path . 'lib/class-ud-api.php';
 
 /** Loads built-in plugin metadata and allows for third-party modification to hook into the filters. Has to be included here to run after template functions.php */
 include_once WPP_Path . 'action_hooks.php';
@@ -64,22 +64,22 @@ include_once WPP_Path . 'action_hooks.php';
 include_once WPP_Path . 'default_api.php';
 
 /** Loads general functions used by WP-Property */
-include_once WPP_Path . 'core/class_functions.php';
+include_once WPP_Path . 'lib/class-wpp-functions.php';
 
 /** Loads all the metaboxes for the property page */
-include_once WPP_Path . 'core/ui/property_metaboxes.php';
+include_once WPP_Path . 'lib/class-wpp-ui.php';
 
 /** Loads all the metaboxes for the property page */
-include_once WPP_Path . 'core/class_core.php';
+include_once WPP_Path . 'lib/class-wpp-core.php';
 
 /** Bring in the RETS library */
-include_once WPP_Path . 'core/class_rets.php';
+include_once WPP_Path . 'lib/class-wpp-rets.php';
 
 /** Load set of static methods for mail notifications */
-include_once WPP_Path . 'core/class_mail.php';
+include_once WPP_Path . 'lib/class-wpp-mail.php';
 
 /** Load in hooks that deal with legacy and backwards-compat issues */
-include_once WPP_Path . 'core/class_legacy.php';
+include_once WPP_Path . 'lib/class-wpp-legacy.php';
 
 // Register activation hook -> has to be in the main plugin file
 register_activation_hook( __FILE__, array( 'WPP_F', 'activation' ) );

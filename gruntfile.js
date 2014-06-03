@@ -106,7 +106,7 @@ module.exports = function( grunt ) {
           extension: '.js,.php',
           outdir: 'static/codex/',
           "paths": [
-            "./core",
+            "./lib",
             "./static/scripts"
           ]
         }
