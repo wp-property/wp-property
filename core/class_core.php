@@ -469,11 +469,9 @@ class WPP_Core {
 
         // Settings Page
         case 'property_page_property_settings':
+          wp_enqueue_script( 'udx-requires' );
           wp_enqueue_script( 'wp-property-backend-global' );
           wp_enqueue_script( 'wp-property-global' );
-          wp_enqueue_script( 'jquery' );
-          wp_enqueue_script( 'jquery-ui-core' );
-          wp_enqueue_script( 'jquery-ui-sortable' );
           wp_enqueue_script( 'wpp-jquery-colorpicker' );
           wp_enqueue_script( 'wp-property-admin-settings' );
           wp_enqueue_style( 'wpp-jquery-colorpicker-css' );
@@ -610,9 +608,6 @@ class WPP_Core {
 
         // Stores any errors in $wp_settings_errors via add_settings_error()
         WPP_F::check_system_permissions();
-
-        // Enqueue UDX Requires for ViewModel loading.
-        wp_enqueue_script( 'udx-requires' );
 
         // Column Options.
         add_screen_option( 'layout_columns', array(

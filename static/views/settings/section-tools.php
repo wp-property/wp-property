@@ -7,7 +7,7 @@
 ?>
 <div class="wpp_settings_block">
   <label>
-  <?php _e( 'If prompted for your domain name during a premium feature purchase, enter as appears here:', 'wpp' ); ?>
+    <?php _e( 'If prompted for your domain name during a premium feature purchase, enter as appears here:', 'wpp' ); ?>
     <input type="text" readonly="true" value="<?php echo $site_domain; ?>" size="<?php echo strlen( $site_domain ) + 10; ?>"/>
   </label>
 </div>

@@ -29,7 +29,7 @@ $_model = array(
 ?>
 <div class="wrap wpp_settings_page" data-requires="<?php echo plugins_url( 'static/scripts/src/wpp.admin.settings.vm.js', WPP_Core::$path ); ?>">
 
-  <h2 class="nav-tab-wrapper">
+  <h2 class="nav-tab-wrapper hidden">
     <a href="#main" class="nav-tab nav-tab-active"><?php _e( 'Main', 'wpp' ); ?></a>
     <a href="#modules" class="nav-tab"><?php _e( 'Modules', 'wpp' ); ?></a>
     <a href="#tools" class="nav-tab"><?php _e( 'Tools', 'wpp' ); ?></a>
