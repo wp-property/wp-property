@@ -913,12 +913,12 @@ class WPP_F extends UD_API {
       $ui_class[ ]            = $return[ 'input_type' ];
     }
 
-    if( $wp_properties[ 'admin_attr_fields' ][ $attribute ] ) {
+    if( isset( $wp_properties[ 'admin_attr_fields' ][ $attribute ] ) && $wp_properties[ 'admin_attr_fields' ][ $attribute ] ) {
       $return[ 'data_input_type' ] = $wp_properties[ 'admin_attr_fields' ][ $attribute ];
       $ui_class[ ]                 = $return[ 'data_input_type' ];
     }
 
-    if( $wp_properties[ 'configuration' ][ 'address_attribute' ] == $attribute ) {
+    if( isset( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) && $wp_properties[ 'configuration' ][ 'address_attribute' ] == $attribute ) {
       $return[ 'is_address_attribute' ] = 'true';
       $ui_class[ ]                      = 'address_attribute';
     }
@@ -931,35 +931,35 @@ class WPP_F extends UD_API {
       }
     }
 
-    if( is_array( $wp_properties[ 'predefined_values' ] ) && ( $predefined_values = $wp_properties[ 'predefined_values' ][ $attribute ] ) ) {
+    if( isset( $wp_properties[ 'predefined_values' ] ) && is_array( $wp_properties[ 'predefined_values' ] ) && ( $predefined_values = $wp_properties[ 'predefined_values' ][ $attribute ] ) ) {
       $return[ 'predefined_values' ] = $predefined_values;
     }
 
-    if( is_array( $wp_properties[ 'predefined_search_values' ] ) && ( $predefined_values = $wp_properties[ 'predefined_search_values' ][ $attribute ] ) ) {
+    if( isset( $wp_properties[ 'predefined_search_values' ] ) && is_array( $wp_properties[ 'predefined_search_values' ] ) && ( $predefined_values = $wp_properties[ 'predefined_search_values' ][ $attribute ] ) ) {
       $return[ 'predefined_search_values' ] = $predefined_values;
     }
 
-    if( is_array( $wp_properties[ 'sortable_attributes' ] ) && in_array( $attribute, $wp_properties[ 'sortable_attributes' ] ) ) {
+    if( isset( $wp_properties[ 'sortable_attributes' ] ) && is_array( $wp_properties[ 'sortable_attributes' ] ) && in_array( $attribute, $wp_properties[ 'sortable_attributes' ] ) ) {
       $return[ 'sortable' ] = true;
       $ui_class[ ]          = 'sortable';
     }
 
-    if( is_array( $wp_properties[ 'hidden_frontend_attributes' ] ) && in_array( $attribute, $wp_properties[ 'hidden_frontend_attributes' ] ) ) {
+    if( isset( $wp_properties[ 'hidden_frontend_attributes' ] ) && is_array( $wp_properties[ 'hidden_frontend_attributes' ] ) && in_array( $attribute, $wp_properties[ 'hidden_frontend_attributes' ] ) ) {
       $return[ 'hidden_frontend_attribute' ] = true;
       $ui_class[ ]                           = 'fe_hidden';
     }
 
-    if( is_array( $wp_properties[ 'currency_attributes' ] ) && in_array( $attribute, $wp_properties[ 'currency_attributes' ] ) ) {
+    if( isset( $wp_properties[ 'currency_attributes' ] ) && is_array( $wp_properties[ 'currency_attributes' ] ) && in_array( $attribute, $wp_properties[ 'currency_attributes' ] ) ) {
       $return[ 'currency' ] = true;
       $ui_class[ ]          = 'currency';
     }
 
-    if( is_array( $wp_properties[ 'numeric_attributes' ] ) && in_array( $attribute, $wp_properties[ 'numeric_attributes' ] ) ) {
+    if( isset( $wp_properties[ 'numeric_attributes' ] ) && is_array( $wp_properties[ 'numeric_attributes' ] ) && in_array( $attribute, $wp_properties[ 'numeric_attributes' ] ) ) {
       $return[ 'numeric' ] = true;
       $ui_class[ ]         = 'numeric';
     }
 
-    if( is_array( $wp_properties[ 'searchable_attributes' ] ) && in_array( $attribute, $wp_properties[ 'searchable_attributes' ] ) ) {
+    if( isset( $wp_properties[ 'searchable_attributes' ] ) && is_array( $wp_properties[ 'searchable_attributes' ] ) && in_array( $attribute, $wp_properties[ 'searchable_attributes' ] ) ) {
       $return[ 'searchable' ] = true;
       $ui_class[ ]            = 'searchable';
     }
@@ -4387,7 +4387,7 @@ class WPP_F extends UD_API {
     foreach( $property_stats as $slug => $label ) {
 
       // Determine if it's frontend and the attribute is hidden for frontend
-      if( in_array( $slug, (array) $wp_properties[ 'hidden_frontend_attributes' ] ) && !current_user_can( 'manage_options' ) ) {
+      if( isset( $wp_properties[ 'hidden_frontend_attributes' ] ) && in_array( $slug, (array) $wp_properties[ 'hidden_frontend_attributes' ] ) && !current_user_can( 'manage_options' ) ) {
         continue;
       }
 
@@ -4484,7 +4484,7 @@ class WPP_F extends UD_API {
     ) );
 
     //** Check if we have children */
-    if( count( $property[ 'children' ] ) > 0 && $wp_properties[ 'configuration' ][ 'google_maps' ][ 'infobox_settings' ][ 'do_not_show_child_properties' ] != 'true' ) {
+    if( isset( $property[ 'children' ] ) && count( $property[ 'children' ] ) > 0 && $wp_properties[ 'configuration' ][ 'google_maps' ][ 'infobox_settings' ][ 'do_not_show_child_properties' ] != 'true' ) {
       foreach( $property[ 'children' ] as $child_property ) {
         $child_property           = (array) $child_property;
         $html_child_properties[ ] = '<li class="infobox_child_property"><a href="' . $child_property[ 'permalink' ] . '">' . $child_property[ 'post_title' ] . '</a></li>';
@@ -4515,9 +4515,12 @@ class WPP_F extends UD_API {
       'property_stats' => $property_stats
     ) );
 
-    $image = wpp_get_image_link( $property[ 'featured_image' ], $map_image_type, array( 'return' => 'array' ) );
+    $image = isset( $property[ 'featured_image' ] ) ? wpp_get_image_link( $property[ 'featured_image' ], $map_image_type, array( 'return' => 'array' ) ) : false;
 
-    $imageHTML = "<img width=\"{$image['width']}\" height=\"{$image['height']}\" src=\"{$image['link']}\" alt=\"" . addslashes( $post->post_title ) . "\" />";
+    if( $image ) {
+      $imageHTML = "<img width=\"{$image['width']}\" height=\"{$image['height']}\" src=\"{$image['link']}\" alt=\"" . addslashes( $post->post_title ) . "\" />";
+    }
+
     if( @$wp_properties[ 'configuration' ][ 'property_overview' ][ 'fancybox_preview' ] == 'true' && !empty( $property[ 'featured_image_url' ] ) ) {
       $imageHTML = "<a href=\"{$property['featured_image_url']}\" class=\"fancybox_image thumbnail\">{$imageHTML}</a>";
     }
@@ -4533,7 +4536,7 @@ class WPP_F extends UD_API {
 
       <table cellpadding="0" cellspacing="0" class="wpp_google_maps_infobox_table" style="">
         <tr>
-          <?php if( $image[ 'link' ] ) { ?>
+          <?php if( isset( $image ) && $image[ 'link' ] ) { ?>
             <td class="wpp_google_maps_left_col" style=" width: <?php echo $image[ 'width' ]; ?>px">
               <?php echo $imageHTML; ?>
               <?php if( $infobox_settings[ 'show_direction_link' ] == 'true' ): ?>
@@ -4547,7 +4550,7 @@ class WPP_F extends UD_API {
           <?php } ?>
 
           <td class="wpp_google_maps_right_col" vertical-align="top" style="vertical-align: top;">
-            <?php if( !$image[ 'link' ] && $infobox_settings[ 'show_direction_link' ] == 'true' ) { ?>
+            <?php if( !isset( $image ) || !$image[ 'link' ] && $infobox_settings[ 'show_direction_link' ] == 'true' ) { ?>
               <div class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_directions_link">
                 <a target="_blank"
                   href="http://maps.google.com/maps?gl=us&daddr=<?php echo addslashes( str_replace( ' ', '+', $property[ 'formatted_address' ] ) ); ?>"
@@ -4570,7 +4573,7 @@ class WPP_F extends UD_API {
                   continue;
                 }
 
-                if( ( $attribute_data[ 'data_input_type' ] == 'checkbox' && ( $value == 'true' || $value == 1 ) ) ) {
+                if( isset( $attribute_data[ 'data_input_type' ] ) && ( $attribute_data[ 'data_input_type' ] == 'checkbox' && ( $value == 'true' || $value == 1 ) ) ) {
                   if( $wp_properties[ 'configuration' ][ 'google_maps' ][ 'show_true_as_image' ] == 'true' ) {
                     $value = '<div class="true-checkbox-image"></div>';
                   } else {

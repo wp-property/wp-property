@@ -40,6 +40,10 @@ $_model = array(
 </script>
 <style type="text/css">
 
+  .wpp-devel-only {
+    display: none;
+  }
+
   .wpp-ui-panel-right .wpp-ui-outer {
     margin-top: 0;
   }
@@ -68,7 +72,7 @@ $_model = array(
 
   <h2 class="nav-tab-wrapper">
     <?php UsabilityDynamics\UI::do_tabs( get_current_screen()->id, 'main' ); ?>
-    <a href="#add-schedule" class="add-new-h2"><?php _e( 'Setup Wizard', 'wpp' ); ?></a>
+    <a href="#add-schedule" class="add-new-h2 wpp-devel-only"><?php _e( 'Setup Wizard', 'wpp' ); ?></a>
   </h2>
 
   <?php settings_errors( 'wpp' ); ?>

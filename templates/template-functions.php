@@ -741,7 +741,7 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
     }
 
     //** Check if this function has already been done */
-    if ( is_array( $property ) && $property[ 'system' ][ 'prepared_for_display' ] ) {
+    if ( is_array( $property ) && isset( $property[ 'system' ] ) && $property[ 'system' ][ 'prepared_for_display' ] ) {
       return $property;
     }
 
@@ -857,7 +857,7 @@ if ( !function_exists( 'the_tagline' ) ):
   function the_tagline( $before = '', $after = '', $echo = true ) {
     global $post;
 
-    $content = $post->tagline;
+    $content = isset( $post->tagline ) ? $post->tagline : '';
 
     if ( strlen( $content ) == 0 ) {
       return;
@@ -950,7 +950,7 @@ if ( !function_exists( 'draw_stats' ) ):
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
     $property_stats = array();
-    $groups = $wp_properties[ 'property_groups' ];
+    $groups = isset( $wp_properties[ 'property_groups' ] ) ? $wp_properties[ 'property_groups' ] : array();
 
     /**
      * Determine if we should draw meta data.
@@ -1002,7 +1002,7 @@ if ( !function_exists( 'draw_stats' ) ):
       $value = html_entity_decode( $value );
 
       //** Single "true" is converted to 1 by get_properties() we check 1 as well, as long as it isn't a numeric attribute */
-      if ( ( $attribute_data[ 'data_input_type' ] == 'checkbox' && in_array( strtolower( $value ), array( 'true', '1', 'yes' ) ) ) ) {
+      if( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'checkbox' && in_array( strtolower( $value ), array( 'true', '1', 'yes' ) ) ) {
         if ( $show_true_as_image == 'true' ) {
           $value = '<div class="true-checkbox-image"></div>';
         } else {

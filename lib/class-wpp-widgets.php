@@ -1680,12 +1680,12 @@ class GalleryPropertiesWidget extends WP_Widget {
     $image_type = esc_attr( $instance[ 'image_type' ] );
     $big_image_type = esc_attr( $instance[ 'big_image_type' ] );
     $gallery_count = esc_attr( $instance[ 'gallery_count' ] );
-    $show_caption = esc_attr( $instance[ 'show_caption' ] );
-    $show_description = esc_attr( $instance[ 'show_description' ] );
-    $gallery = (array)( ( $post->gallery ) ? $post->gallery : $property[ 'gallery' ] );
+    $show_caption = esc_attr( isset( $instance[ 'show_caption' ] ) ? $instance[ 'show_caption' ] : '' );
+    $show_description = esc_attr( isset( $instance[ 'show_description' ] ) ? $instance[ 'show_description' ] : '' );
+    $gallery = (array) ( isset( $post->gallery ) && $post->gallery ? $post->gallery : ( isset( $property[ 'gallery' ] ) && $property[ 'gallery' ] ? $property[ 'gallery' ] : array() ) );
 
-    $slideshow_order = maybe_unserialize( ( $post->slideshow_images ) ? $post->slideshow_images : $property[ 'slideshow_images' ] );
-    $gallery_order = maybe_unserialize( ( $post->gallery_images ) ? $post->gallery_images : $property[ 'gallery_images' ] );
+    $slideshow_order = maybe_unserialize( isset( $post->slideshow_images ) ? $post->slideshow_images : ( isset( $property[ 'slideshow_images' ] ) ? $property[ 'slideshow_images' ] : array() ) );
+    $gallery_order = maybe_unserialize( isset( $post->gallery_images ) ? $post->gallery_images : ( isset( $property[ 'gallery_images' ] ) ? $property[ 'gallery_images' ] : array() ) );
 
     //** Calculate order of images */
     if ( is_array( $slideshow_order ) && is_array( $gallery_order ) ) {

@@ -1196,7 +1196,7 @@ class WPP_Core {
     }
 
     //** If viewing root property page that is the default dynamic page. */
-    if( $wp_query->wpp_default_property_page ) {
+    if( isset( $wp_query->wpp_default_property_page ) && $wp_query->wpp_default_property_page ) {
       $wp_query->is_property_overview = true;
     }
 
@@ -1206,17 +1206,17 @@ class WPP_Core {
     }
 
     //** If this is the root page and the shortcode is automatically inserted */
-    if( $wp_query->wpp_root_property_page && $wp_properties[ 'configuration' ][ 'automatically_insert_overview' ] == 'true' ) {
+    if( isset( $wp_query->wpp_root_property_page ) && $wp_query->wpp_root_property_page && $wp_properties[ 'configuration' ][ 'automatically_insert_overview' ] == 'true' ) {
       $wp_query->is_property_overview = true;
     }
 
     //** If search result page, and system not explicitly configured to not include PO on search result page automatically */
-    if( $wp_query->wpp_search_page && $wp_properties[ 'configuration' ][ 'do_not_override_search_result_page' ] != 'true' ) {
+    if( isset( $wp_query->wpp_search_page ) && $wp_query->wpp_search_page && $wp_properties[ 'configuration' ][ 'do_not_override_search_result_page' ] != 'true' ) {
       $wp_query->is_property_overview = true;
     }
 
     //** Scripts and styles to load on all overview and signle listing pages */
-    if( $wp_query->single_property_page || $wp_query->is_property_overview ) {
+    if( ( isset( $wp_query->single_property_page ) && $wp_query->single_property_page ) || ( isset( $wp_query->is_property_overview ) && $wp_query->is_property_overview ) ) {
 
       WPP_F::console_log( 'Including scripts for all single and overview property pages.' );
 
@@ -1246,7 +1246,7 @@ class WPP_Core {
     }
 
     //** Scripts loaded only on single property pages */
-    if( $wp_query->single_property_page && !post_password_required( $post ) ) {
+    if( ( isset( $wp_query->single_property_page ) && $wp_query->single_property_page ) && !post_password_required( $post ) ) {
 
       WPP_F::console_log( 'Including scripts for all single property pages.' );
 
