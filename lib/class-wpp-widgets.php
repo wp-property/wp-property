@@ -156,7 +156,7 @@ class Property_Attributes_Widget extends WP_Widget {
           <?php foreach ( $widget_options as $slug => $data ) { ?>
             <li class="wpp_attribute_wrapper">
               <input type="hidden" name="<?php echo $this->get_field_name( $slug ); ?>" value="false"/>
-              <input class="checkbox" type="checkbox" <?php checked( $instance[ $slug ], 'true' ) ?>
+              <input class="checkbox" type="checkbox" <?php checked( isset( $instance[ $slug ] ) && $instance[ $slug ], 'true' ) ?>
                      id="<?php echo $this->get_field_id( $slug ); ?>"
                      name="<?php echo $this->get_field_name( $slug ); ?>" value="true"/>
               <label for="<?php echo $this->get_field_id( $slug ); ?>"><?php echo $data[ 'label' ]; ?></label>

@@ -1287,7 +1287,7 @@ class WPP_Core {
     }
 
     //** Current requests includes a property overview.  PO may be via shortcode, search result, or due to this being the Default Dynamic Property page */
-    if( $wp_query->is_property_overview ) {
+    if( isset( $wp_query->is_property_overview ) && $wp_query->is_property_overview ) {
 
       WPP_F::console_log( 'Including scripts for all property overview pages.' );
 
