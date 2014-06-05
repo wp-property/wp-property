@@ -1,5 +1,4 @@
 <?php
-
 /**
  * WP-Property Core Framework
  *
@@ -39,17 +38,87 @@ class WPP_Core {
    * @since 1.11
    *
    */
-  function WPP_Core() {
-    global $wp_properties;
+  public function __construct( $args = array() ) {
 
     // Determine if memory limit is low and increase it
     if( (int) ini_get( 'memory_limit' ) < 128 ) {
       ini_set( 'memory_limit', '128M' );
     }
 
+    $this->libraries();
+
+    $this->modules();
+
+    // Register activation hook -> has to be in the main plugin file
+    register_activation_hook( $args['id'], array( 'WPP_F', 'activation' ) );
+
+    // Register activation hook -> has to be in the main plugin file
+    register_deactivation_hook( $args['id'], array( 'WPP_F', 'deactivation' ) );
+
+    //** Modify request to change feed */
+    add_filter( 'request', 'property_feed' );
+
+    //** Hook in upper init */
+    add_action( 'init', array( $this, 'init_upper' ), 0 );
+
+    //** Hook in lower init */
+    add_action( 'init', array( $this, 'init_lower' ), 100 );
+
+    // Post initialization.
+    add_action( 'wp_loaded', array( $this, 'wp_loaded' ), 10 );
+
+    //** Setup template_redirect */
+    add_action( "template_redirect", array( $this, 'template_redirect' ) );
+
+    //** Pre-init action hook */
+    do_action( 'wpp_pre_init', $this );
+
+    // Check settings data on accord with existing wp_properties data before option updates
+    add_filter( 'wpp_settings_save', array( $this, 'check_wp_settings_data' ), 0, 2 );
+
+    //** Check if Facebook tries to request site */
+    add_action( 'init', array( 'WPP_F', 'check_facebook_tabs' ) );
+
+  }
+
+  /**
+   * Autoload Dependencies.
+   *
+   * @return bool
+   */
+  private function libraries() {
+
     self::$path = dirname( __DIR__ );
 
-    $this->autoload();
+    try {
+
+      if( !class_exists( 'composerRequireVendorWPP' ) && file_exists( wp_normalize_path( self::$path . '/vendor/libraries/autoload.php' ) ) ) {
+        require_once( wp_normalize_path( self::$path . '/vendor/libraries/autoload.php' ) );
+      }
+
+      if( !class_exists( 'UsabilityDynamics\Utility' ) ) {
+        require_once( wp_normalize_path( self::$path . '/vendor/libraries/usabilitydynamics/lib-utility/class-utility.php' ) );
+      }
+
+      if( !class_exists( 'UsabilityDynamics\UI\Panel' ) ) {
+        require_once( wp_normalize_path( self::$path . '/vendor/libraries/usabilitydynamics/lib-ui/class-panel.php' ) );
+      }
+
+      if( !class_exists( 'UsabilityDynamics\API' ) ) {
+        require_once( wp_normalize_path( self::$path . '/vendor/libraries/usabilitydynamics/lib-api/class-api.php' ) );
+      }
+
+    } catch( Exception $error ) {
+      trigger_error( $error->getMessage() );
+    }
+
+  }
+
+  /**
+   * Get Modules
+   *
+   */
+  private function modules() {
 
     // Load Modules.
     self::$modules = WPP_F::load_premium( array(
@@ -98,62 +167,20 @@ class WPP_Core {
           'exporter/lib/class-property-exporter.php'
         )
       )
-    ) );
-
-    //** Modify request to change feed */
-    add_filter( 'request', 'property_feed' );
-
-    //** Check if Facebook tries to request site */
-    add_action( 'init', array( 'WPP_F', 'check_facebook_tabs' ) );
-
-    //** Hook in upper init */
-    add_action( 'init', array( $this, 'init_upper' ), 0 );
-
-    //** Hook in lower init */
-    add_action( 'init', array( $this, 'init_lower' ), 100 );
-
-    // Post initialization.
-    add_action( 'wp_loaded', array( $this, 'wp_loaded' ), 10 );
-
-    //** Setup template_redirect */
-    add_action( "template_redirect", array( $this, 'template_redirect' ) );
-
-    //** Pre-init action hook */
-    do_action( 'wpp_pre_init' );
-
-    // Check settings data on accord with existing wp_properties data before option updates
-    add_filter( 'wpp_settings_save', array( 'WPP_Core', 'check_wp_settings_data' ), 0, 2 );
+    ));
 
   }
 
   /**
-   * Autoload Dependencies.
+   * Core API Calback.
    *
-   * @return bool
+   * * Adds thumbnail feature to WP-Property pages
+   *
+   * @since 0.60
    */
-  private function autoload() {
+  public function after_setup_theme() {
 
-    try {
-
-      if( !class_exists( 'composerRequireVendorWPP' ) && file_exists( wp_normalize_path( self::$path . '/vendor/libraries/autoload.php' ) ) ) {
-        require_once( wp_normalize_path( self::$path . '/vendor/libraries/autoload.php' ) );
-      }
-
-      if( !class_exists( 'UsabilityDynamics\Utility' ) ) {
-        require_once( wp_normalize_path( self::$path . '/vendor/libraries/usabilitydynamics/lib-utility/class-utility.php' ) );
-      }
-
-      if( !class_exists( 'UsabilityDynamics\UI\Panel' ) ) {
-        require_once( wp_normalize_path( self::$path . '/vendor/libraries/usabilitydynamics/lib-ui/class-panel.php' ) );
-      }
-
-      if( !class_exists( 'UsabilityDynamics\API' ) ) {
-        require_once( wp_normalize_path( self::$path . '/vendor/libraries/usabilitydynamics/lib-api/class-api.php' ) );
-      }
-
-    } catch( Exception $error ) {
-      trigger_error( $error->getMessage() );
-    }
+    add_theme_support( 'post-thumbnails' );
 
   }
 
@@ -398,18 +425,6 @@ class WPP_Core {
     if( $post->post_type == 'property' && $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_parent = '{$post->ID}' AND post_status = 'publish' " ) ) {
       add_meta_box( 'wpp_property_children', __( 'Child Properties', 'wpp' ), array( 'WPP_UI', 'child_properties' ), 'property', 'side', 'high' );
     }
-  }
-
-  /**
-   * Adds thumbnail feature to WP-Property pages
-   *
-   *
-   * @todo Make sure only ran on property pages
-   * @since 0.60
-   *
-   */
-  static function after_setup_theme() {
-    add_theme_support( 'post-thumbnails' );
   }
 
   /**
@@ -2122,7 +2137,7 @@ class WPP_Core {
    * @since 1.37.3.2
    * @author peshkov@UD
    */
-  static function localize_scripts() {
+  public function localize_scripts() {
 
     $l10n = WPP_F::get_cache( 'localize_scripts' );
 
@@ -2156,7 +2171,7 @@ class WPP_Core {
    *
    * @author korotkov@ud
    */
-  function wpp_contextual_help( $args = array() ) {
+  public function wpp_contextual_help( $args = array() ) {
     global $contextual_help;
 
     extract( wp_parse_args( $args, array(
@@ -2200,7 +2215,7 @@ class WPP_Core {
    * @since 1.38
    * @return array
    */
-  function get_instance() {
+  public function get_instance() {
     global $wp_properties;
 
     $data = array(

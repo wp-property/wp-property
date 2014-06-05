@@ -46,7 +46,7 @@ if( !defined( 'WPP_URL' ) ) {
 
 /** Directory path for includes of template files  */
 if( !defined( 'WPP_Templates' ) ) {
-  define( 'WPP_Templates', WPP_Path . 'templates' );
+  define( 'WPP_Templates', WPP_Path . 'vendor/themes/default-theme' );
 }
 
 /** Directory path for includes of template files  */
@@ -81,11 +81,11 @@ include_once WPP_Path . 'lib/class-wpp-mail.php';
 /** Load in hooks that deal with legacy and backwards-compat issues */
 include_once WPP_Path . 'lib/class-wpp-legacy.php';
 
-// Register activation hook -> has to be in the main plugin file
-register_activation_hook( __FILE__, array( 'WPP_F', 'activation' ) );
-
-// Register activation hook -> has to be in the main plugin file
-register_deactivation_hook( __FILE__, array( 'WPP_F', 'deactivation' ) );
-
 // Initiate the plugin
-add_action( "after_setup_theme", create_function( '', 'new WPP_Core;' ) );
+new WPP_Core(array(
+  'id' => __FILE__,
+  'root' => __DIR__,
+  'basename' => plugin_basename( __FILE__ ),
+  'directory' => dirname( plugin_basename( __FILE__ ) )
+));
+

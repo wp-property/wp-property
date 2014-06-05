@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Default API Usage Examples
  *
