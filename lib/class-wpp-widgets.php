@@ -1252,20 +1252,33 @@ class SearchPropertiesWidget extends WP_Widget {
   }
 
   /** @see WP_Widget::widget */
-  function widget( $args, $instance ) {
-
+  function widget( $args, $instance = array()) {
     global $wp_properties;
+
+    // Set defaults.
+    $instance = wp_parse_args( $instance, array(
+      'title' => 'asd',
+      'searchable_property_types' => array(),
+      'searchable_attributes' => array(),
+      'grouped_searchable_attributes' => array(),
+      'group_attributes' => 'false',
+      'per_page' => null,
+      'sort_order' => null,
+      'sort_by' => null
+    ));
+
     $before_widget = '';
     $before_title = '';
     $after_title = '';
     $after_widget = '';
     $widget_id = '';
     extract( $args );
-    $title = apply_filters( 'widget_title', $instance[ 'title' ] );
 
+    $title = apply_filters( 'widget_title', $instance[ 'title' ] );
     $instance = apply_filters( 'SearchPropertiesWidget', $instance );
+
     $search_attributes = $instance[ 'searchable_attributes' ];
-    $sort_by = $instance[ 'sort_by' ];
+    $sort_by = isset( $instance[ 'sort_by' ] ) ? $instance[ 'sort_by' ] : null;
     $sort_order = $instance[ 'sort_order' ];
     $searchable_property_types = $instance[ 'searchable_property_types' ];
     $grouped_searchable_attributes = $instance[ 'grouped_searchable_attributes' ];
@@ -1621,7 +1634,15 @@ class SearchPropertiesWidget extends WP_Widget {
 
 }
 
-// Default function to use in template directly
+/**
+ *
+ * Default function to use in template directly
+ *
+ * @todo Migrate into template functions, ensure not used anywhere in core outside of templates.
+ *
+ * @param bool $args
+ * @param bool $custom
+ */
 function wpp_search_widget( $args = false, $custom = false ) {
   global $wp_properties;
 
