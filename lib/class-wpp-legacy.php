@@ -6,40 +6,42 @@
  *
  * @package WP-Property
  */
-class WPP_Legacy {
+if( !class_exists( 'WPP_Legacy' ) ) {
+  class WPP_Legacy {
 
-  /**
-   * Adds compatibility with legacy functionality on WP-Property upgrade
-   *
-   */
-  static function upgrade() {
-    global $wpdb;
+    /**
+     * Adds compatibility with legacy functionality on WP-Property upgrade
+     *
+     */
+    static function upgrade() {
+      global $wpdb;
 
-    $installed_ver = get_option( "wpp_version", 0 );
-    $wpp_version = WPP_Version;
+      $installed_ver = get_option( "wpp_version", 0 );
+      $wpp_version = WPP_Version;
 
-    if ( @version_compare( $installed_ver, WPP_Version ) == '-1' ) {
+      if ( @version_compare( $installed_ver, WPP_Version ) == '-1' ) {
 
-      switch ( $installed_ver ) {
+        switch ( $installed_ver ) {
 
-        /**
-         * Upgrade:
-         * - WPP postmeta data were saved to database with '&ndash;' instead of '-' in value. Function encode_sql_input was modified and it doesn't change '-' to '&ndash' anymore
-         * So to prevent search result issues we need to update database data.
-         * peshkov@UD
-         */
-        case ( version_compare( $installed_ver, '1.37.4' ) == '-1' ):
+          /**
+           * Upgrade:
+           * - WPP postmeta data were saved to database with '&ndash;' instead of '-' in value. Function encode_sql_input was modified and it doesn't change '-' to '&ndash' anymore
+           * So to prevent search result issues we need to update database data.
+           * peshkov@UD
+           */
+          case ( version_compare( $installed_ver, '1.37.4' ) == '-1' ):
 
-          $wpdb->query( "UPDATE {$wpdb->postmeta} SET meta_value = REPLACE( meta_value, '&ndash;', '-')" );
+            $wpdb->query( "UPDATE {$wpdb->postmeta} SET meta_value = REPLACE( meta_value, '&ndash;', '-')" );
 
-          break;
+            break;
+
+        }
 
       }
 
     }
 
   }
-
 }
 
 //** Support for legacy UD Classes - extend WPP_F, which in turn extends UD_API */

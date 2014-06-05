@@ -1200,7 +1200,7 @@ class WPP_Core {
     }
 
     //** If this is the root page with a manually inserted shortcode, or any page with a PO shortcode */
-    if( strpos( $post->post_content, "property_overview" ) ) {
+    if( isset( $post->post_content ) && strpos( $post->post_content, "property_overview" ) ) {
       $wp_query->is_property_overview = true;
     }
 
@@ -2026,7 +2026,11 @@ class WPP_Core {
   function properties_body_class( $classes ) {
     global $post, $wp_properties;
 
-    if( strpos( $post->post_content, "property_overview" ) || ( is_search() && isset( $_REQUEST[ 'wpp_search' ] ) ) || ( $wp_properties[ 'configuration' ][ 'base_slug' ] == $post->post_name ) ) {
+    if( !isset( $post ) ) {
+      return $classes;
+    }
+
+    if( isset( $post->post_content ) && strpos( $post->post_content, "property_overview" ) || ( is_search() && isset( $_REQUEST[ 'wpp_search' ] ) ) || ( isset( $wp_properties[ 'configuration' ][ 'base_slug' ] ) && $wp_properties[ 'configuration' ][ 'base_slug' ] == $post->post_name ) ) {
       $classes[ ] = 'wp-property-listing';
     }
 
