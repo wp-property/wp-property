@@ -21,7 +21,7 @@ class WPP_Core {
 
   /**
    * Modules.
-   * 
+   *
    * @var array
    */
   static public $modules = array();
@@ -87,7 +87,7 @@ class WPP_Core {
         'slideshow'     => array(
           'slideshow/lib/class-slideshow.php'
         ),
-        'term-editor'     => array(
+        'term-editor'   => array(
           'term-editor/lib/class-term-editor.php'
         ),
         'importer'      => array(
@@ -98,7 +98,7 @@ class WPP_Core {
           'exporter/lib/class-property-exporter.php'
         )
       )
-    ));
+    ) );
 
     //** Modify request to change feed */
     add_filter( 'request', 'property_feed' );
@@ -150,7 +150,6 @@ class WPP_Core {
       if( !class_exists( 'UsabilityDynamics\API' ) ) {
         require_once( wp_normalize_path( self::$path . '/vendor/libraries/usabilitydynamics/lib-api/class-api.php' ) );
       }
-
 
     } catch( Exception $error ) {
       trigger_error( $error->getMessage() );
@@ -257,9 +256,9 @@ class WPP_Core {
     add_filter( 'current_screen', array( $this, 'current_screen' ) );
 
     // Enqueue Sccripts.
-    add_action( 'admin_enqueue_scripts',  array( $this, '_enqueue_scripts' ) );
-    add_action( 'login_enqueue_scripts',  array( $this, '_enqueue_scripts' ) );
-    add_action( 'wp_enqueue_scripts',     array( $this, '_enqueue_scripts' ) );
+    add_action( 'admin_enqueue_scripts', array( $this, '_enqueue_scripts' ) );
+    add_action( 'login_enqueue_scripts', array( $this, '_enqueue_scripts' ) );
+    add_action( 'wp_enqueue_scripts', array( $this, '_enqueue_scripts' ) );
 
     //** Check premium feature availability */
     add_action( 'wpp_premium_feature_check', array( 'WPP_F', 'feature_check' ) );
@@ -454,7 +453,7 @@ class WPP_Core {
     // Locale Model.
     wp_localize_script( 'wpp-localization', 'wpp', array(
       'instance' => $this->get_instance()
-    ));
+    ) );
 
     // Admin Scripts.
     if( current_action() === 'admin_enqueue_scripts' ) {
@@ -472,7 +471,7 @@ class WPP_Core {
           wp_enqueue_script( 'wpp-jquery-data-tables' );
           wp_enqueue_style( 'wpp-jquery-fancybox-css' );
           wp_enqueue_style( 'wpp-jquery-data-tables' );
-        break;
+          break;
 
         // Single Property Page.
         case 'property':
@@ -487,11 +486,14 @@ class WPP_Core {
           //** Get width of overview table thumbnail, and set css */
           $thumbnail_attribs = WPP_F::image_sizes( $wp_properties[ 'configuration' ][ 'admin_ui' ][ 'overview_table_thumbnail_size' ] );
           $thumbnail_width   = ( !empty( $thumbnail_attribs[ 'width' ] ) ? $thumbnail_attribs[ 'width' ] : false );
-          if( $thumbnail_width ) { ?>
-            <style type="text/css">#wp-list-table.wp-list-table .column-thumbnail { width: <?php echo $thumbnail_width + 20; ?>px; }</style>
+          if( $thumbnail_width ) {
+            ?>
+            <style type="text/css">#wp-list-table.wp-list-table .column-thumbnail {
+                width: <?php echo $thumbnail_width + 20; ?>px;
+              }</style>
           <?php
           }
-        break;
+          break;
 
         // Settings Page
         case 'property_page_property_settings':
@@ -501,7 +503,7 @@ class WPP_Core {
           wp_enqueue_script( 'wpp-jquery-colorpicker' );
           wp_enqueue_script( 'wp-property-admin-settings' );
           wp_enqueue_style( 'wpp-jquery-colorpicker-css' );
-        break;
+          break;
 
         // Widgets Page
         case 'widgets':
@@ -512,7 +514,7 @@ class WPP_Core {
           wp_enqueue_script( 'jquery-ui-tabs' );
           wp_enqueue_style( 'jquery-ui' );
           wp_enqueue_script( 'wp-property-admin-widgets' );
-        break;
+          break;
 
       }
 
@@ -534,22 +536,22 @@ class WPP_Core {
 
       // General Administrative Model.
       wp_localize_script( 'wpp-admin', 'wpp_admin', array(
-        'labels'          => array(
+        'labels'         => array(
           'singular' => WPP_F::property_label( 'singular' ),
           'plural'   => WPP_F::property_label( 'plural' )
         ),
-        'parsedUrl'       => $_parse_url,
-        'ajax_url'        => admin_url( 'admin-ajax.php' ),
-        'home_url'        => home_url(),
-        'user_logged_in'  => is_user_logged_in() ? 'true' : 'false',
-        'site_domain'     => WPP_F::site_domain(),
-        'custom_css'      => ( file_exists( STYLESHEETPATH . '/wp_properties.css' ) || file_exists( TEMPLATEPATH . '/wp_properties.css' ) ),
-        'settings_nav'    => apply_filters( 'wpp_settings_nav', array() ),
-        'errors'          => get_settings_errors( 'wpp' ),
-        'conditionals'    => array(
+        'parsedUrl'      => $_parse_url,
+        'ajax_url'       => admin_url( 'admin-ajax.php' ),
+        'home_url'       => home_url(),
+        'user_logged_in' => is_user_logged_in() ? 'true' : 'false',
+        'site_domain'    => WPP_F::site_domain(),
+        'custom_css'     => ( file_exists( STYLESHEETPATH . '/wp_properties.css' ) || file_exists( TEMPLATEPATH . '/wp_properties.css' ) ),
+        'settings_nav'   => apply_filters( 'wpp_settings_nav', array() ),
+        'errors'         => get_settings_errors( 'wpp' ),
+        'conditionals'   => array(
           get_option( 'permalink_structure' ) == '' ? 'no_permalinks' : 'have_permalinks'
         )
-      ));
+      ) );
 
     }
 
@@ -574,11 +576,10 @@ class WPP_Core {
   public function admin_menu() {
     global $wp_properties, $submenu;
 
-
     $_page = (object) array(
-      'dashboard'   => new UsabilityDynamics\UI\Panel( 'page-dashboard',  array( 'paths' => trailingslashit( WPP_Path ) . 'static/views' )),
-      'settings'    => new UsabilityDynamics\UI\Panel( 'page-settings',   array( 'paths' => trailingslashit( WPP_Path ) . 'static/views' )),
-      'overview'    => new UsabilityDynamics\UI\Panel( 'page-overview',   array( 'paths' => trailingslashit( WPP_Path ) . 'static/views' ))
+      'dashboard' => new UsabilityDynamics\UI\Panel( 'page-dashboard', array( 'paths' => trailingslashit( WPP_Path ) . 'static/views' ) ),
+      'settings'  => new UsabilityDynamics\UI\Panel( 'page-settings', array( 'paths' => trailingslashit( WPP_Path ) . 'static/views' ) ),
+      'overview'  => new UsabilityDynamics\UI\Panel( 'page-overview', array( 'paths' => trailingslashit( WPP_Path ) . 'static/views' ) )
     );
 
     // Create property settings page
@@ -609,7 +610,7 @@ class WPP_Core {
 
     }
 
-    add_action( "load-{$this->pages['settings']}",  array( $this, '_admin_load' ) );
+    add_action( "load-{$this->pages['settings']}", array( $this, '_admin_load' ) );
     add_action( "load-{$this->pages['overview']}}", array( $this, '_admin_load' ) );
 
     do_action( 'wpp_admin_menu', $this );
@@ -644,32 +645,33 @@ class WPP_Core {
 
         // Column Options.
         add_screen_option( 'layout_columns', array(
-          'max' => 2,
+          'max'     => 2,
           'default' => 2
-        ));
+        ) );
 
         if( !class_exists( 'UsabilityDynamics\UI\Panel' ) ) {
-          add_settings_error( 'wpp', 'missin-dependency', __('Missing UsabilityDynamics\UI\Panel class..'), 'error' );
+          add_settings_error( 'wpp', 'missin-dependency', __( 'Missing UsabilityDynamics\UI\Panel class..' ), 'error' );
+
           return;
         }
 
         $_section = (object) array(
-          'main'      => new UsabilityDynamics\UI\Panel( 'section-main',      array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' )),
-          'display'   => new UsabilityDynamics\UI\Panel( 'section-display',   array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' )),
-          'tools'     => new UsabilityDynamics\UI\Panel( 'section-tools',     array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' )),
-          'modules'   => new UsabilityDynamics\UI\Panel( 'section-modules',   array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' )),
-          'services'  => new UsabilityDynamics\UI\Panel( 'section-modules',   array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' ))
+          'main'     => new UsabilityDynamics\UI\Panel( 'section-main', array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' ) ),
+          'display'  => new UsabilityDynamics\UI\Panel( 'section-display', array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' ) ),
+          'tools'    => new UsabilityDynamics\UI\Panel( 'section-tools', array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' ) ),
+          'modules'  => new UsabilityDynamics\UI\Panel( 'section-modules', array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' ) ),
+          'services' => new UsabilityDynamics\UI\Panel( 'section-modules', array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' ) )
         );
 
         $_aside = (object) array(
-          'actions'   => new UsabilityDynamics\UI\Panel( 'aside-actions',     array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' )),
-          'help'      => new UsabilityDynamics\UI\Panel( 'aside-help',        array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' )),
-          'feedback'  => new UsabilityDynamics\UI\Panel( 'aside-feedback',    array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' )),
+          'actions'  => new UsabilityDynamics\UI\Panel( 'aside-actions', array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' ) ),
+          'help'     => new UsabilityDynamics\UI\Panel( 'aside-help', array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' ) ),
+          'feedback' => new UsabilityDynamics\UI\Panel( 'aside-feedback', array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' ) ),
         );
 
         $_panel = (object) array(
-          'update'    => new UsabilityDynamics\UI\Panel( 'panel-update',     array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' )),
-          'backup'    => new UsabilityDynamics\UI\Panel( 'panel-backup',     array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' ))
+          'update' => new UsabilityDynamics\UI\Panel( 'panel-update', array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' ) ),
+          'backup' => new UsabilityDynamics\UI\Panel( 'panel-backup', array( 'paths' => trailingslashit( WPP_Path ) . 'static/views/settings' ) )
         );
 
         foreach( (array) apply_filters( 'wpp_settings_nav', array() ) as $_module ) {
@@ -683,20 +685,20 @@ class WPP_Core {
         }
 
         // Sections.
-        add_meta_box( 'wpp-settings-main',      __( 'Main', 'wpp' ),      array( $_section->main,     'section' ),  get_current_screen()->id, 'main', 'default' );
-        add_meta_box( 'wpp-settings-display',   __( 'Display', 'wpp' ),   array( $_section->display,  'section' ),  get_current_screen()->id, 'main', 'default' );
-        add_meta_box( 'wpp-settings-modules',   __( 'Modules', 'wpp' ),   array( $_section->modules,  'section' ),  get_current_screen()->id, 'main', 'default' );
-        add_meta_box( 'wpp-settings-tools',     __( 'Tools', 'wpp' ),     array( $_section->tools,    'section' ),  get_current_screen()->id, 'main', 'default' );
-        add_meta_box( 'wpp-settings-services',  __( 'Services', 'wpp' ),  array( $_section->services, 'section' ),  get_current_screen()->id, 'main', 'none' );
+        add_meta_box( 'wpp-settings-main', __( 'Main', 'wpp' ), array( $_section->main, 'section' ), get_current_screen()->id, 'main', 'default' );
+        add_meta_box( 'wpp-settings-display', __( 'Display', 'wpp' ), array( $_section->display, 'section' ), get_current_screen()->id, 'main', 'default' );
+        add_meta_box( 'wpp-settings-modules', __( 'Modules', 'wpp' ), array( $_section->modules, 'section' ), get_current_screen()->id, 'main', 'default' );
+        add_meta_box( 'wpp-settings-tools', __( 'Tools', 'wpp' ), array( $_section->tools, 'section' ), get_current_screen()->id, 'main', 'default' );
+        add_meta_box( 'wpp-settings-services', __( 'Services', 'wpp' ), array( $_section->services, 'section' ), get_current_screen()->id, 'main', 'none' );
 
         // Asides.
-        add_meta_box( 'wpp-settings-actions',   __( 'Actions', 'wpp' ),   array( $_aside->actions,    'aside' ),    get_current_screen()->id, 'side', 'default' );
-        add_meta_box( 'wpp-settings-help',      __( 'Help', 'wpp' ),      array( $_aside->help,       'aside' ),    get_current_screen()->id, 'side', 'low' );
-        add_meta_box( 'wpp-settings-feedback',  __( 'Feedback', 'wpp' ),  array( $_aside->feedback,   'aside' ),    get_current_screen()->id, 'side', 'low' );
+        add_meta_box( 'wpp-settings-actions', __( 'Actions', 'wpp' ), array( $_aside->actions, 'aside' ), get_current_screen()->id, 'side', 'default' );
+        add_meta_box( 'wpp-settings-help', __( 'Help', 'wpp' ), array( $_aside->help, 'aside' ), get_current_screen()->id, 'side', 'low' );
+        add_meta_box( 'wpp-settings-feedback', __( 'Feedback', 'wpp' ), array( $_aside->feedback, 'aside' ), get_current_screen()->id, 'side', 'low' );
 
         // Modals.
-        add_meta_box( 'wpp-settings-backup',    __( 'Update', 'wpp' ),    array( $_aside->actions,    'aside' ),    get_current_screen()->id, 'templates' );
-        add_meta_box( 'wpp-settings-update',    __( 'Backup', 'wpp' ),    array( $_aside->help,       'aside' ),    get_current_screen()->id, 'templates' );
+        add_meta_box( 'wpp-settings-backup', __( 'Update', 'wpp' ), array( $_aside->actions, 'aside' ), get_current_screen()->id, 'templates' );
+        add_meta_box( 'wpp-settings-update', __( 'Backup', 'wpp' ), array( $_aside->help, 'aside' ), get_current_screen()->id, 'templates' );
 
         // add_settings_field( 'my-setting', 'My Setting', function( $args) { echo 'my setting'; print_r($args); }, get_current_screen()->id, 'main-section', array( 'blah' => 'hello' ));
         // get_current_screen()->add_help_tab( array( 'id'      => 'wpp-settings-feedback', 'title'   => __('Feedback', 'wpp'), 'content' => '<p>Providing feedback...</p>', ));
@@ -705,7 +707,7 @@ class WPP_Core {
         // add_settings_error( 'wpp', 'updated', __('Settings saved.'), 'whatever' );
         // add_settings_error( 'wpp', 'test', __('Test settings error.'), 'error' );
 
-      break;
+        break;
 
     }
 
@@ -1002,13 +1004,14 @@ class WPP_Core {
   public function post_submitbox_misc_actions() {
     global $post, $wp_properties;
 
-    if( isset( $post->post_type ) && $post->post_type == 'property' ) { ?>
+    if( isset( $post->post_type ) && $post->post_type == 'property' ) {
+      ?>
       <div class="misc-pub-section ">
 
         <ul>
           <li><?php _e( 'Menu Sort Order:', 'wpp' ) ?> <?php echo WPP_F::input( "name=menu_order&special=size=4", $post->menu_order ); ?></li>
 
-          <?php if( current_user_can( 'manage_options' ) && ( !isset(  $wp_properties[ 'configuration' ][ 'do_not_use' ] ) || $wp_properties[ 'configuration' ][ 'do_not_use' ][ 'featured' ] != 'true' ) ) { ?>
+          <?php if( current_user_can( 'manage_options' ) && ( !isset( $wp_properties[ 'configuration' ][ 'do_not_use' ] ) || $wp_properties[ 'configuration' ][ 'do_not_use' ][ 'featured' ] != 'true' ) ) { ?>
             <li><?php echo WPP_F::checkbox( "name=wpp_data[meta][featured]&label=" . __( 'Display in featured listings.', 'wpp' ), get_post_meta( $post->ID, 'featured', true ) ); ?></li>
           <?php } ?>
 
@@ -2071,7 +2074,7 @@ class WPP_Core {
     switch( $screen->id ) {
       case "edit-property":
         exit( wp_redirect( 'edit.php?post_type=property&page=all_properties' ) );
-      break;
+        break;
     }
 
     return $screen;
