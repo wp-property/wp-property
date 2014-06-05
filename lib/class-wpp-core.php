@@ -305,7 +305,7 @@ class WPP_Core {
     }
 
     //** Make Property Featured Via AJAX */
-    if( isset( $_REQUEST[ '_wpnonce' ] ) && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], "wpp_make_featured_" . $_REQUEST[ 'post_id' ] ) ) {
+    if( isset( $_REQUEST[ '_wpnonce' ] ) && isset( $_REQUEST[ 'post_id' ] ) && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], "wpp_make_featured_" . $_REQUEST[ 'post_id' ] ) ) {
       add_action( 'wp_ajax_wpp_make_featured', create_function( "", '  $post_id = $_REQUEST[post_id]; echo WPP_F::toggle_featured($post_id); die();' ) );
     }
 
