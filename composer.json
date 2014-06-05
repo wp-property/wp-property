@@ -17,22 +17,27 @@
   "require": {
     "php": ">=5.3",
     "datatables/datatables": "dev-master",
+    "tecnick.com/tcpdf": "dev-master",
+    "nitra/php-min": "dev-master",
+    "uran1980/fancybox-bundle": "dev-master",
     "usabilitydynamics/lib-installer": "master",
     "usabilitydynamics/lib-api": "master",
     "usabilitydynamics/lib-ui": "master",
     "usabilitydynamics/lib-module": "master",
-    "usabilitydynamics/lib-model": "master"
+    "usabilitydynamics/lib-model": "master",
+    "wp-property/editor": "master",
+    "wp-property/admin-tools": "master",
+    "wp-property/exporter": "master",
+    "wp-property/default-theme": "master"
   },
   "require-dev": {
-    "wp-property/admin-tools": "master",
     "wp-property/advanced-rewrites": "master",
     "wp-property/agents": "master",
     "wp-property/api-manager": "master",
     "wp-property/availability": "master",
     "wp-property/bookings": "master",
-    "wp-property/editor": "master",
+    "wp-property/dynamic-templates": "master",
     "wp-property/enterprise": "master",
-    "wp-property/exporter": "master",
     "wp-property/facebook-tabs": "master",
     "wp-property/feps": "master",
     "wp-property/importer": "master",
@@ -45,11 +50,19 @@
   "authors": [
     {
       "name": "Andy Potanin",
-      "homepage": "http://usabilitydynamics.com"
+      "email": "andy.potanin@usabilitydynamics.com",
+      "homepage": "http://usabilitydynamics.com",
+      "role": "Developer"
     },
     {
       "name": "Maxim Peshkov",
       "email": "maxim.peshkov@usabilitydynamics.com",
+      "homepage": "http://usabilitydynamics.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Reid Williams",
+      "email": "reid.williams@usabilitydynamics.com",
       "homepage": "http://usabilitydynamics.com",
       "role": "Developer"
     },

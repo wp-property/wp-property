@@ -324,9 +324,6 @@ class WPP_Core {
   public function wp_loaded() {
     global $wp_properties;
 
-    //** Determine if we are secure */
-    $scheme = ( is_ssl() && !is_admin() ? 'https' : 'http' );
-
     //** Load early so plugins can use them as well */
     wp_register_script( 'wpp-localization', get_bloginfo( 'wpurl' ) . '/wp-admin/admin-ajax.php?action=wpp_js_localization', array(), WPP_Version );
     wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'third-party/fancybox/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
@@ -339,11 +336,7 @@ class WPP_Core {
     wp_register_script( 'wp-property-backend-global', WPP_URL . 'static/scripts/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-global', WPP_URL . 'static/scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable' ), WPP_Version );
     wp_register_script( 'jquery-cookie', WPP_URL . 'static/scripts/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
-
-    if( WPP_F::can_get_script( $scheme . '://maps.google.com/maps/api/js?sensor=true' ) ) {
-      wp_register_script( 'google-maps', $scheme . '://maps.google.com/maps/api/js?sensor=true' );
-    }
-
+    wp_register_script( 'google-maps', '//maps.google.com/maps/api/js?sensor=true' );
     wp_register_script( 'wpp-md5', WPP_URL . 'third-party/md5.js', array( 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wpp-jquery-gmaps', WPP_URL . 'static/scripts/jquery.ui.map.min.js', array( 'google-maps', 'jquery-ui-core', 'jquery-ui-widget', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-nivo-slider', WPP_URL . 'third-party/jquery.nivo.slider.pack.js', array( 'jquery', 'wpp-localization' ) );

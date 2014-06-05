@@ -408,53 +408,6 @@ class WPP_F extends UD_API {
   }
 
   /**
-   * Tests if remote script or CSS file can be opened prior to sending it to browser
-   *
-   *
-   * @version 1.26.0
-   */
-  public static function can_get_script( $url = false, $args = array() ) {
-    global $wp_properties;
-
-    if( empty( $url ) ) {
-      return false;
-    }
-
-    $match = false;
-
-    if( empty( $args ) ) {
-      $args[ 'timeout' ] = 10;
-    }
-
-    $result = wp_remote_get( $url, $args );
-    if( is_wp_error( $result ) ) {
-      return false;
-    }
-
-    $type = $result[ 'headers' ][ 'content-type' ];
-
-    if( strpos( $type, 'javascript' ) !== false ) {
-      $match = true;
-    }
-
-    if( strpos( $type, 'css' ) !== false ) {
-      $match = true;
-    }
-
-    if( !$match || $result[ 'response' ][ 'code' ] != 200 ) {
-
-      if( $wp_properties[ 'configuration' ][ 'developer_mode' ] == 'true' ) {
-        WPP_F::console_log( "Remote asset ($url) could not be loaded, content type returned: " . $result[ 'headers' ][ 'content-type' ] );
-      }
-
-      return false;
-    }
-
-    return true;
-
-  }
-
-  /**
    * Tests if remote image can be loaded, before sending to browser or TCPDF
    *
    * @version 1.26.0
@@ -1529,11 +1482,11 @@ class WPP_F extends UD_API {
   public static function check_system_permissions() {
 
     if( !is_writable( trailingslashit( WPP_Premium ) ) ) {
-      add_settings_error( 'wpp', 'writability', __( 'One of the folders that is necessary for downloading additional features for the WP-Property plugin is not writable.  This means features cannot be downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-property/lib/premium</b> permissions to 0755.', 'wpp' ) );
+      add_settings_error( 'wpp', 'writability', __( 'One of the folders that is necessary for downloading additional features for the WP-Property plugin is not writable.  This means features cannot be downloaded.  To fix this, you need to set the <code>wp-property/vendor/modules</code> permissions to <code>0755</code>.', 'wpp' ) );
     }
 
     if( function_exists( 'posix_getuid' ) && fileowner( WPP_Path ) != posix_getuid() ) {
-      add_settings_error( 'wpp', 'ownership', __( 'One of the folders that is necessary for downloading additional features for the WP-Property plugin is not writable.  This means features cannot be downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-property/lib/premium</b> permissions to 0755.', 'wpp' ) );
+      add_settings_error( 'wpp', 'ownership', __( 'One of the folders that is necessary for downloading additional features for the WP-Property plugin is not writable.  This means features cannot be downloaded.  To fix this, you need to set the <code>wp-property/vendor/modules</code> permissions to <code>0755</code>.', 'wpp' ) );
     }
 
   }
@@ -5782,6 +5735,54 @@ class WPP_F extends UD_API {
         break;
     }
     return ( $ucfirst ? ucfirst( $post_status ) : $post_status );
+  }
+
+  /**
+   * Tests if remote script or CSS file can be opened prior to sending it to browser
+   *
+   * @todo Add _doing_it_wrong - potanin@UD
+   * @depreciated
+   * @version 1.26.0
+   */
+  public static function can_get_script( $url = false, $args = array() ) {
+    global $wp_properties;
+
+    if( empty( $url ) ) {
+      return false;
+    }
+
+    $match = false;
+
+    if( empty( $args ) ) {
+      $args[ 'timeout' ] = 10;
+    }
+
+    $result = wp_remote_get( $url, $args );
+    if( is_wp_error( $result ) ) {
+      return false;
+    }
+
+    $type = $result[ 'headers' ][ 'content-type' ];
+
+    if( strpos( $type, 'javascript' ) !== false ) {
+      $match = true;
+    }
+
+    if( strpos( $type, 'css' ) !== false ) {
+      $match = true;
+    }
+
+    if( !$match || $result[ 'response' ][ 'code' ] != 200 ) {
+
+      if( $wp_properties[ 'configuration' ][ 'developer_mode' ] == 'true' ) {
+        WPP_F::console_log( "Remote asset ($url) could not be loaded, content type returned: " . $result[ 'headers' ][ 'content-type' ] );
+      }
+
+      return false;
+    }
+
+    return true;
+
   }
 
 }
