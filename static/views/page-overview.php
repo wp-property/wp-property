@@ -6,20 +6,17 @@
  *
  * @copyright  2012-2014 Usability Dyanmics, Inc.
  */
-
 global $wp_properties, $screen_layout_columns;
 
-if( !class_exists( 'WPP_Object_List_Table' ) ) {
-  require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
-  require_once( WPP_Path . 'lib/class-wpp-list-table.php' );
-  require_once( WPP_Path . 'lib/class-wpp-object-list-table.php' );
+if( class_exists( 'UsabilityDynamics\WPP\List_Tables\Data_Table' ) ) {
+  $wp_list_table = new UsabilityDynamics\WPP\List_Tables\Property_Table("per_page=25");
+  $wp_list_table->prepare_items(false, false);
+  $wp_list_table->data_tables_script();
+} else {
+  require_once( ABSPATH . 'wp-admin/includes/class-wp-posts-list-table.php' );
+  $wp_list_table = new WP_Posts_List_Table();
+  $wp_list_table->prepare_items(false, false);
 }
-
-$wp_list_table = new WPP_Object_List_Table("per_page=25");
-
-$wp_list_table->prepare_items(false, false);
-
-$wp_list_table->data_tables_script();
 
 ?>
 <div class="wp_wpp_overview_wrapper wrap">

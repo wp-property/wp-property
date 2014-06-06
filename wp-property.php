@@ -24,59 +24,23 @@
  *
  */
 
-/** This Version  */
-if( !defined( 'WPP_Version' ) ) {
-  define( 'WPP_Version', '1.42.0' );
-}
-
-/** Get Directory - not always wp-property */
-if( !defined( 'WPP_Directory' ) ) {
-  define( 'WPP_Directory', dirname( plugin_basename( __FILE__ ) ) );
-}
-
-/** Path for Includes */
-if( !defined( 'WPP_Path' ) ) {
-  define( 'WPP_Path', plugin_dir_path( __FILE__ ) );
-}
-
-/** Path for front-end links */
-if( !defined( 'WPP_URL' ) ) {
-  define( 'WPP_URL', plugin_dir_url( __FILE__ ) );
-}
-
-/** Directory path for includes of template files  */
-if( !defined( 'WPP_Templates' ) ) {
-  define( 'WPP_Templates', WPP_Path . 'vendor/themes/default-theme' );
-}
-
-/** Directory path for includes of template files  */
-if( !defined( 'WPP_Premium' ) ) {
-  define( 'WPP_Premium', WPP_Path . 'vendor/modules' );
-}
-
 //** Global Usability Dynamics functions */
-include_once WPP_Path . 'lib/class-ud-api.php';
-
-/** Loads built-in plugin metadata and allows for third-party modification to hook into the filters. Has to be included here to run after template functions.php */
-include_once WPP_Path . 'action_hooks.php';
-
-/** Defaults filters and hooks */
-include_once WPP_Path . 'default_api.php';
+include_once 'lib/class-ud-api.php';
 
 /** Loads general functions used by WP-Property */
-include_once WPP_Path . 'lib/class-wpp-functions.php';
+include_once 'lib/class-wpp-functions.php';
 
 /** Loads all the metaboxes for the property page */
-include_once WPP_Path . 'lib/class-wpp-ui.php';
+include_once 'lib/class-wpp-ui.php';
 
 /** Loads all the metaboxes for the property page */
-include_once WPP_Path . 'lib/class-wpp-core.php';
+include_once 'lib/class-wpp-core.php';
 
 /** Load set of static methods for mail notifications */
-include_once WPP_Path . 'lib/class-wpp-mail.php';
+include_once 'lib/class-wpp-mail.php';
 
 /** Load in hooks that deal with legacy and backwards-compat issues */
-include_once WPP_Path . 'lib/class-wpp-legacy.php';
+include_once 'lib/class-wpp-legacy.php';
 
 // Initiate the plugin
 new WPP_Core(array(

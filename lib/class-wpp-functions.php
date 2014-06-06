@@ -2840,7 +2840,7 @@ class WPP_F extends UD_API {
 
               try {
 
-                if( WP_DEBUG == true ) {
+                if( defined( 'WP_DEBUG' ) && WP_DEBUG  ) {
                   include_once( $_absolute_path );
                 } else {
                   @include_once( $_absolute_path );
@@ -2848,19 +2848,24 @@ class WPP_F extends UD_API {
 
                 if( $plugin_data[ 'class' ] && class_exists( $_class = $plugin_data[ 'class' ] ) ) {
 
-                    // Invoke Module.
-                  $_instance = new $_class( $wp_properties, $plugin_data );
-
                   // Call Upgrade Method, if exists.
-                  if( $_upgraed && is_callable( array( $_instance, 'upgrade' ) ) ) {
-                    $_instance->upgrade( $wp_properties );
+                  if( $_upgraed && method_exists( $_class, 'upgrade' ) ) {
+                    $_class::upgrade( $wp_properties, $plugin_data );
                   }
+
+                  // Invoke Module.
+                  $_instance = new $_class( $wp_properties, $plugin_data );
 
                 }
 
-              } catch( Exception $e ) {
+              } catch( Exception $error ) {
 
                 // @todo Record inability to invoke module properly, disable.
+
+                // In development mode fail on module failures if administrator.
+                if( defined( 'WP_DEBUG' ) && WP_DEBUG && is_admin() ) {
+                  wp_die( '<h2>WP-Property Module Failure</h2><p>' . $error->getMessage() . '</p><pre>' . print_r( $plugin_data, true ) . '</pre>' );
+                }
 
               }
 
@@ -3232,7 +3237,7 @@ class WPP_F extends UD_API {
 
       } //** End single attribute data gather */
 
-      $result = $range;
+      $result = isset( $range ) ? $range : null;
 
       if( $instance_id && $cache ) {
         WPP_F::set_cache( $instance_id, $result );
@@ -4860,62 +4865,6 @@ class WPP_F extends UD_API {
       ));
 
     }
-
-    //** Get the paramters we care about */
-    $sEcho         = isset( $_REQUEST[ 'sEcho' ] ) ? $_REQUEST[ 'sEcho' ] : null;
-    $per_page      = isset( $_REQUEST[ 'iDisplayLength' ] ) ? $_REQUEST[ 'iDisplayLength' ] : null;
-    $iDisplayStart = isset( $_REQUEST[ 'iDisplayStart' ] ) ? $_REQUEST[ 'iDisplayStart' ] : null;
-    $iColumns      = isset( $_REQUEST[ 'iColumns' ] ) ? $_REQUEST[ 'iColumns' ] : null;
-    $sColumns      = isset( $_REQUEST[ 'sColumns' ] ) ? $_REQUEST[ 'sColumns' ] : null;
-    $order_by      = isset( $_REQUEST[ 'iSortCol_0' ] ) ? $_REQUEST[ 'iSortCol_0' ] : null;
-    $sort_dir      = isset( $_REQUEST[ 'sSortDir_0' ] ) ? $_REQUEST[ 'sSortDir_0' ] : null;
-
-    //$current_screen = $wpi_settings['pages']['main'];
-
-    //** Parse the serialized filters array */
-    parse_str( isset( $_REQUEST[ 'wpp_filter_vars' ] ) ? $_REQUEST[ 'wpp_filter_vars' ] : '', $wpp_filter_vars );
-
-    $wpp_search = isset( $wpp_filter_vars[ 'wpp_search' ] ) ? $wpp_filter_vars[ 'wpp_search' ] : array();
-
-    $sColumns = explode( ",", $sColumns );
-
-    //* Init table object */
-    $wp_list_table = new UsabilityDynamics\WPP\List_Tables\Property_Table( array(
-      "ajax"           => true,
-      "per_page"       => $per_page,
-      "iDisplayStart"  => $iDisplayStart,
-      "iColumns"       => $iColumns,
-      "current_screen" => 'property_page_all_properties'
-    ));
-
-    if( isset( $sColumns[ $order_by ] ) && in_array( $sColumns[ $order_by ], $wp_list_table->get_sortable_columns() ) ) {
-      $wpp_search[ 'sorting' ] = array(
-        'order_by' => $sColumns[ $order_by ],
-        'sort_dir' => $sort_dir
-      );
-    }
-
-    $wp_list_table->prepare_items( $wpp_search );
-
-    //print_r( $wp_list_table ); die();
-
-    if( $wp_list_table->has_items() ) {
-      foreach( $wp_list_table->items as $count => $item ) {
-        $data[ ] = $wp_list_table->single_row( $item );
-      }
-    } else {
-      $data[ ] = $wp_list_table->no_items();
-    }
-
-    //print_r( $data );
-
-    return json_encode( array(
-      'sEcho'                => $sEcho,
-      'iTotalRecords'        => count( $wp_list_table->all_items ),
-      // @TODO: Why iTotalDisplayRecords has $wp_list_table->all_items value ? Maxim Peshkov
-      'iTotalDisplayRecords' => count( $wp_list_table->all_items ),
-      'aaData'               => $data
-    ));
 
   }
 

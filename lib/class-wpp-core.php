@@ -40,14 +40,20 @@ class WPP_Core {
    */
   public function __construct( $args = array() ) {
 
-    // Determine if memory limit is low and increase it
-    if( (int) ini_get( 'memory_limit' ) < 128 ) {
-      ini_set( 'memory_limit', '128M' );
-    }
+    // Set Constants.
+    $this->constants();
 
-    $this->libraries();
+    // Load Essential Libraries.
+    $this->autoload();
 
+    // Apply Early Hooks.
+    $this->hooks();
+
+    // Enable / Update Modules.
     $this->modules();
+
+    // Locate / Verify Templates.
+    $this->templates();
 
     // Register activation hook -> has to be in the main plugin file
     register_activation_hook( $args['id'], array( 'WPP_F', 'activation' ) );
@@ -85,6 +91,59 @@ class WPP_Core {
     //** Add metaboxes hook */
     add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 
+    // Determine if memory limit is low and increase it
+    if( (int) ini_get( 'memory_limit' ) < 128 ) {
+      ini_set( 'memory_limit', '128M' );
+    }
+
+  }
+
+  /**
+   * Set Constants
+   *
+   */
+  private function constants() {
+
+    /** This Version  */
+    if( !defined( 'WPP_Version' ) ) {
+      define( 'WPP_Version', '1.42.0' );
+    }
+
+    /** Get Directory - not always wp-property */
+    if( !defined( 'WPP_Directory' ) ) {
+      define( 'WPP_Directory', dirname( plugin_basename( __DIR__ ) ) );
+    }
+
+    /** Path for Includes */
+    if( !defined( 'WPP_Path' ) ) {
+      define( 'WPP_Path', plugin_dir_path( __DIR__ ) );
+    }
+
+    /** Path for front-end links */
+    if( !defined( 'WPP_URL' ) ) {
+      define( 'WPP_URL', plugin_dir_url( __DIR__ ) );
+    }
+
+    /** Directory path for includes of template files  */
+    if( !defined( 'WPP_Templates' ) ) {
+
+      // Check if default theme exists.
+      if( is_dir( WPP_Path . 'vendor/themes/default-theme' ) ) {
+        define( 'WPP_Templates', WPP_Path . 'vendor/themes/default-theme' );
+      }
+
+      // Check themes directory for theme.
+      if( !defined( 'WPP_Templates' ) && is_dir( get_theme_root() . '/wp-property-default-theme' ) ) {
+        define( 'WPP_Templates', get_theme_root() . '/wp-property-default-theme'  );
+      }
+
+    }
+
+    /** Directory path for includes of template files  */
+    if( !defined( 'WPP_Premium' ) ) {
+      define( 'WPP_Premium', WPP_Path . 'vendor/modules' );
+    }
+
   }
 
   /**
@@ -92,7 +151,7 @@ class WPP_Core {
    *
    * @return bool
    */
-  private function libraries() {
+  private function autoload() {
 
     self::$path = dirname( __DIR__ );
 
@@ -160,7 +219,7 @@ class WPP_Core {
           'pdf/lib/class-wpp-pdf.php'
         ),
         'list-tables'           => array(
-          'list-tables/lib/class-list-tables.php'
+          'list-tables/lib/class-wpp-list-tables.php'
         ),
         'advanced-rewrites'           => array(
           'pdf/lib/class-wpp-advanced-rewrites.php'
@@ -181,6 +240,80 @@ class WPP_Core {
       )
     ));
 
+  }
+
+  /**
+   * Invoke Pluggable Hooks
+   */
+  private function hooks() {
+    global $wp_properties;
+
+    /** Loads built-in plugin metadata and allows for third-party modification to hook into the filters. Has to be included here to run after template functions.php */
+    if( file_exists( self::$path . '/action_hooks.php' ) ) {
+      include_once( self::$path . '/action_hooks.php' );
+    }
+
+    /** Defaults filters and hooks */
+    if( file_exists( self::$path . '/default_api.php' ) ) {
+      include_once( self::$path . '/default_api.php' );
+    }
+
+
+  }
+
+  /**
+   * Validate / Shim Template Files.
+   *
+   */
+  private function templates() {
+
+    if( !defined( 'WPP_Templates' ) ) {
+      // @todo Not sure hwo to handle this..
+    }
+
+
+  }
+
+  /**
+   * Adds all WPP custom capabilities to administrator role.
+   * Premium feature capabilities are added by filter in this function, see below.
+   *
+   * @author peshkov@UD
+   */
+  private function set_capabilities() {
+    global $wpp_capabilities;
+
+    //* Get Administrator role for adding custom capabilities */
+    $role = get_role( 'administrator' );
+
+    //* General WPP capabilities */
+    $wpp_capabilities = array(
+      //* Manage WPP Properties Capabilities */
+      'edit_wpp_properties'        => __( 'View Properties', 'wpp' ),
+      'edit_wpp_property'          => __( 'Add/Edit Properties', 'wpp' ),
+      'edit_others_wpp_properties' => __( 'Edit Other Properties', 'wpp' ),
+      //'read_wpp_property' => __( 'Read Property', 'wpp' ),
+      'delete_wpp_property'        => __( 'Delete Properties', 'wpp' ),
+      'publish_wpp_properties'     => __( 'Publish Properties', 'wpp' ),
+      //'read_private_wpp_properties' => __( 'Read Private Properties', 'wpp' ),
+      //* WPP Settings capability */
+      'manage_wpp_settings'        => __( 'Manage Settings', 'wpp' ),
+      //* WPP Taxonomies capability */
+      'manage_wpp_categories'      => __( 'Manage Taxonomies', 'wpp' )
+    );
+
+    //* Adds Premium Feature Capabilities */
+    $wpp_capabilities = apply_filters( 'wpp_capabilities', $wpp_capabilities );
+
+    if( !is_object( $role ) ) {
+      return;
+    }
+
+    foreach( $wpp_capabilities as $cap => $value ) {
+      if( empty( $role->capabilities[ $cap ] ) ) {
+        $role->add_cap( $cap );
+      }
+    }
   }
 
   /**
@@ -249,7 +382,6 @@ class WPP_Core {
     add_action( 'wp_ajax_wpp_ajax_check_plugin_updates', create_function( "", '  echo WPP_F::check_plugin_updates(); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_clear_cache', create_function( "", '  echo WPP_F::clear_cache(); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_revalidate_all_addresses', create_function( "", '  echo WPP_F::revalidate_all_addresses(); die();' ) );
-    add_action( 'wp_ajax_wpp_ajax_list_table', create_function( "", ' die(WPP_F::list_table());' ) );
     add_action( 'wp_ajax_wpp_save_settings', create_function( "", ' die(WPP_F::save_settings());' ) );
 
     /** Ajax pagination for property_overview */
@@ -257,11 +389,14 @@ class WPP_Core {
     add_action( "wp_ajax_nopriv_wpp_property_overview_pagination", array( $this, "ajax_property_overview" ) );
 
     /** Localization */
-    add_action( "wp_ajax_wpp_js_localization", array( __CLASS__, "localize_scripts" ) );
-    add_action( "wp_ajax_nopriv_wpp_js_localization", array( __CLASS__, "localize_scripts" ) );
+    add_action( "wp_ajax_wpp_js_localization", array( $this, "localize_scripts" ) );
+    add_action( "wp_ajax_nopriv_wpp_js_localization", array( $this, "localize_scripts" ) );
 
     add_filter( "manage_edit-property_sortable_columns", array( $this, "sortable_columns" ) );
     add_filter( "manage_edit-property_columns", array( $this, "edit_columns" ) );
+    add_filter( "manage_property_page_all_properties_columns", array( 'WPP_F', 'overview_columns' ) );
+
+    add_filter( "wpp_overview_columns", array( 'WPP_F', 'custom_attribute_columns' ) );
 
     /** Called in setup_postdata().  We add property values here to make available in global $post variable on frontend */
     add_action( 'the_post', array( 'WPP_F', 'the_post' ) );
@@ -304,9 +439,6 @@ class WPP_Core {
     //** Page loading handlers */
     add_action( 'load-property_page_all_properties', array( 'WPP_F', 'property_page_all_properties_load' ) );
     add_action( 'load-property_page_property_settings', array( 'WPP_F', 'property_page_property_settings_load' ) );
-
-    add_filter( "manage_property_page_all_properties_columns", array( 'WPP_F', 'overview_columns' ) );
-    add_filter( "wpp_overview_columns", array( 'WPP_F', 'custom_attribute_columns' ) );
 
     add_filter( "wpp_attribute_filter", array( 'WPP_F', 'attribute_filter' ), 10, 2 );
 
@@ -352,6 +484,8 @@ class WPP_Core {
   /**
    * Script and Style Registraiton
    *
+   *
+   * @todo Replace all WPP_URL usage with plugins_url().
    * Must occur after "init".
    *
    * @since 1.42.0
@@ -360,7 +494,7 @@ class WPP_Core {
     global $wp_properties;
 
     //** Load early so plugins can use them as well */
-    wp_register_script( 'wpp-localization', get_bloginfo( 'admin-ajax' ) . '?action=wpp_js_localization', array(), WPP_Version );
+    wp_register_script( 'wpp-localization', admin_url( 'admin-ajax.php' ) . '?action=wpp_js_localization', array(), WPP_Version );
 
     wp_register_script( 'wpp-jquery-fancybox', plugins_url( 'static/scripts/jquery.fancybox-1.3.4.pack.js', WPP_Core::$path ), array( 'jquery', 'wpp-localization' ) );
 
@@ -395,7 +529,7 @@ class WPP_Core {
     } elseif( file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
       wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), WPP_Version );
     } elseif( file_exists( WPP_Templates . '/wp_properties.css' ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-      wp_register_style( 'wp-property-frontend', WPP_URL . 'templates/wp_properties.css', array(), WPP_Version );
+      wp_register_style( 'wp-property-frontend', plugins_url( '/wp_properties.css', WPP_Templates ), array(), WPP_Version );
 
       //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
       if(
@@ -413,7 +547,7 @@ class WPP_Core {
     } elseif( file_exists( TEMPLATEPATH . '/wp_properties.js' ) ) {
       wp_register_script( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp-localization' ), WPP_Version, true );
     } elseif( file_exists( WPP_Templates . '/wp_properties.js' ) ) {
-      wp_register_script( 'wp-property-frontend', WPP_URL . 'templates/wp_properties.js', array( 'jquery-ui-core', 'wpp-localization' ), WPP_Version, true );
+      wp_register_script( 'wp-property-frontend', plugins_url( '/wp_properties.css', WPP_Templates ), array( 'jquery-ui-core', 'wpp-localization' ), WPP_Version, true );
     }
 
   }
@@ -482,9 +616,7 @@ class WPP_Core {
           wp_enqueue_script( 'wp-property-backend-global' );
           wp_enqueue_script( 'wp-property-admin-overview' );
           wp_enqueue_script( 'wpp-jquery-fancybox' );
-          wp_enqueue_script( 'wpp-jquery-data-tables' );
           wp_enqueue_style( 'wpp-jquery-fancybox-css' );
-          wp_enqueue_style( 'wpp-jquery-data-tables' );
           break;
 
         // Single Property Page.
@@ -1237,9 +1369,7 @@ class WPP_Core {
       WPP_F::load_assets( array( 'single', 'overview' ) );
 
       // Check for and load conditional browser styles
-      $conditional_styles = apply_filters( 'wpp_conditional_style_slugs', array( 'IE', 'IE 7', 'msie' ) );
-
-      foreach( $conditional_styles as $type ) {
+      foreach( (array) apply_filters( 'wpp_conditional_style_slugs', array( 'IE', 'IE 7', 'msie' ) ) as $type ) {
 
         // Fix slug for URL
         $url_slug = strtolower( str_replace( " ", "_", $type ) );
@@ -1249,7 +1379,7 @@ class WPP_Core {
         } elseif( file_exists( TEMPLATEPATH . "/wp_properties-{$url_slug}.css" ) ) {
           wp_register_style( 'wp-property-frontend-' . $url_slug, get_bloginfo( 'template_url' ) . "/wp_properties-{$url_slug}.css", array( 'wp-property-frontend' ), '1.13' );
         } elseif( file_exists( WPP_Templates . "/wp_properties-{$url_slug}.css" ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-          wp_register_style( 'wp-property-frontend-' . $url_slug, WPP_URL . "templates/wp_properties-{$url_slug}.css", array( 'wp-property-frontend' ), WPP_Version );
+          wp_register_style( 'wp-property-frontend-' . $url_slug, plugins_url( "/wp_properties-{$url_slug}.css", WPP_Templates ), array( 'wp-property-frontend' ), WPP_Version );
         }
         // Mark every style as conditional
         $wp_styles->add_data( 'wp-property-frontend-' . $url_slug, 'conditional', $type );
@@ -2090,48 +2220,6 @@ class WPP_Core {
     }
 
     return $screen;
-  }
-
-  /**
-   * Adds all WPP custom capabilities to administrator role.
-   * Premium feature capabilities are added by filter in this function, see below.
-   *
-   * @author peshkov@UD
-   */
-  private function set_capabilities() {
-    global $wpp_capabilities;
-
-    //* Get Administrator role for adding custom capabilities */
-    $role = get_role( 'administrator' );
-
-    //* General WPP capabilities */
-    $wpp_capabilities = array(
-      //* Manage WPP Properties Capabilities */
-      'edit_wpp_properties'        => __( 'View Properties', 'wpp' ),
-      'edit_wpp_property'          => __( 'Add/Edit Properties', 'wpp' ),
-      'edit_others_wpp_properties' => __( 'Edit Other Properties', 'wpp' ),
-      //'read_wpp_property' => __( 'Read Property', 'wpp' ),
-      'delete_wpp_property'        => __( 'Delete Properties', 'wpp' ),
-      'publish_wpp_properties'     => __( 'Publish Properties', 'wpp' ),
-      //'read_private_wpp_properties' => __( 'Read Private Properties', 'wpp' ),
-      //* WPP Settings capability */
-      'manage_wpp_settings'        => __( 'Manage Settings', 'wpp' ),
-      //* WPP Taxonomies capability */
-      'manage_wpp_categories'      => __( 'Manage Taxonomies', 'wpp' )
-    );
-
-    //* Adds Premium Feature Capabilities */
-    $wpp_capabilities = apply_filters( 'wpp_capabilities', $wpp_capabilities );
-
-    if( !is_object( $role ) ) {
-      return;
-    }
-
-    foreach( $wpp_capabilities as $cap => $value ) {
-      if( empty( $role->capabilities[ $cap ] ) ) {
-        $role->add_cap( $cap );
-      }
-    }
   }
 
   /**
