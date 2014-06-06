@@ -57,8 +57,8 @@ class WPP_Core {
       // Locate / Verify Templates.
       $this->templates();
 
-    } catch( Exception $e ) {
-      return;
+    } catch( Exception $error ) {
+      return $this->activation_error( $error );
     }
 
     // Register activation hook -> has to be in the main plugin file
@@ -104,6 +104,30 @@ class WPP_Core {
 
   }
 
+  /**
+   * Show Error on Plugin Activation Page
+   *
+   * @param $error
+   *
+   * @return $this
+   */
+  private function activation_error( $error ) {
+    global $wp_settings_errors;
+
+    $wp_settings_errors[] = array(
+      'setting' => 'wpp',
+      'code' => 'error',
+      'message' => 'WP-Property Activation Failure. ' . $error->getMessage(),
+      'type' => 'error'
+    );
+
+    add_action( 'pre_current_active_plugins', function( $active ) {
+      settings_errors( 'wpp' );
+    });
+
+    return $this;
+
+  }
   /**
    * Set Constants
    *
@@ -1504,7 +1528,13 @@ class WPP_Core {
 
     WPP_F::fix_screen_options();
 
+    // add_settings_section( 'wpp', 'wpp settings', array( $this, 'settings' ), $this->pages[ 'settings' ] );
+    // add_settings_field( 'wpp-info', 'desc of wpp-info', 'eg_setting_callback_function', $this->pages[ 'settings' ] );
+    // register_setting( 'wpp', 'wpp-info' );
+    // do_settings_sections();
+
     // Plug page actions -> Add Settings Link to plugin overview page
+    add_filter( 'plugin_action_links', array( 'WPP_Core', 'plugin_action_links' ), 10, 2 );
     add_filter( 'plugin_action_links', array( 'WPP_Core', 'plugin_action_links' ), 10, 2 );
 
     //* Adds metabox 'General Information' to Property Edit Page */
