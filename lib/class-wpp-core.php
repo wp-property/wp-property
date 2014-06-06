@@ -495,13 +495,10 @@ class WPP_Core {
 
     //** Load early so plugins can use them as well */
     wp_register_script( 'wpp-localization', admin_url( 'admin-ajax.php' ) . '?action=wpp_js_localization', array(), WPP_Version );
-
     wp_register_script( 'wpp-jquery-fancybox', plugins_url( 'static/scripts/jquery.fancybox-1.3.4.pack.js', WPP_Core::$path ), array( 'jquery', 'wpp-localization' ) );
-
     wp_register_script( 'wpp-jquery-easing', WPP_URL . 'static/scripts/jquery.easing-1.3.pack.js', array( 'jquery', 'wpp-localization' ), '1.3' );
     wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'static/scripts/fileuploader.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-md5', WPP_URL . 'static/scripts/wpp.md5.js', array( 'wpp-localization' ), WPP_Version );
-
     wp_register_script( 'wpp-jquery-gmaps', WPP_URL . 'static/scripts/jquery.ui.map.min.js', array( 'google-maps', 'jquery-ui-core', 'jquery-ui-widget', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-address', WPP_URL . 'static/scripts/jquery.address-1.5.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-scrollTo', WPP_URL . 'static/scripts/jquery.scrollTo.js', array( 'jquery', 'wpp-localization' ) );
@@ -512,7 +509,6 @@ class WPP_Core {
     wp_register_script( 'wp-property-admin-settings', WPP_URL . 'static/scripts/wpp.admin.settings.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-backend-global', WPP_URL . 'static/scripts/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-global', WPP_URL . 'static/scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable' ), WPP_Version );
-
     wp_register_script( 'jquery-cookie', WPP_URL . 'static/scripts/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
     wp_register_script( 'google-maps', '//maps.google.com/maps/api/js?sensor=true' );
 
@@ -537,7 +533,7 @@ class WPP_Core {
         $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] != 'true' &&
         WPP_F::has_theme_specific_stylesheet()
       ) {
-        wp_register_style( 'wp-property-theme-specific', WPP_URL . "templates/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), WPP_Version );
+        wp_register_style( 'wp-property-theme-specific', plugins_url( "theme-specific/" . get_option( 'template' ) . ".css", WPP_Templates ), array( 'wp-property-frontend' ), WPP_Version );
       }
     }
 
@@ -617,7 +613,7 @@ class WPP_Core {
           wp_enqueue_script( 'wp-property-admin-overview' );
           wp_enqueue_script( 'wpp-jquery-fancybox' );
           wp_enqueue_style( 'wpp-jquery-fancybox-css' );
-          break;
+        break;
 
         // Single Property Page.
         case 'property':
@@ -643,11 +639,12 @@ class WPP_Core {
 
         // Settings Page
         case 'property_page_property_settings':
+
           wp_enqueue_script( 'udx-requires' );
           wp_enqueue_script( 'wp-property-backend-global' );
           wp_enqueue_script( 'wp-property-global' );
           wp_enqueue_script( 'wp-property-admin-settings' );
-          break;
+        break;
 
         // Widgets Page
         case 'widgets':
@@ -658,13 +655,13 @@ class WPP_Core {
           wp_enqueue_script( 'jquery-ui-tabs' );
           wp_enqueue_style( 'jquery-ui' );
           wp_enqueue_script( 'wp-property-admin-widgets' );
-          break;
+        break;
 
       }
 
       //** Automatically insert styles sheet if one exists with $current_screen->ID name */
       if( file_exists( WPP_Path . "/static/styles/{$_screen->id}.css" ) ) {
-        wp_enqueue_style( $_screen->id . '-style', WPP_URL . "/static/styles/{$_screen->id}.css", array(), WPP_Version, 'screen' );
+        wp_enqueue_style( $_screen->id . '-style', WPP_URL . "static/styles/{$_screen->id}.css", array(), WPP_Version, 'screen' );
       }
 
       //** Automatically insert JS sheet if one exists with $_screen->ID name */

@@ -443,6 +443,8 @@ function wpp_create_slug(slug) {
  * @return
  */
 function wpp_add_row(element) {
+  console.debug( 'wpp_add_row' );
+
   var auto_increment = false;
   var table = jQuery(element).parents('.ud_ui_dynamic_table');
   var table_id = jQuery(table).attr("id");
@@ -463,7 +465,6 @@ function wpp_add_row(element) {
   //* Set unique 'id's and 'for's for elements of the new row */
   var unique = Math.floor(Math.random()*1000);
   wpp_set_unique_ids(cloned, unique);
-
 
   //* Increment name value automatically */
   if(auto_increment) {
@@ -528,7 +529,7 @@ function wpp_add_row(element) {
   //* Fire Event after Row added to the Table */
   added_row.trigger('added');
 
-  if (callback_function = jQuery(element).attr("callback_function")) {
+  if ( callback_function = jQuery(element).attr("callback_function")) {
     wpp_call_function(callback_function, window, added_row);
   }
 
@@ -672,8 +673,6 @@ jQuery(document).ready(function() {
 
   // Bind (Set) ColorPicker
   bindColorPicker();
-
-  // Add row to UD UI Dynamic Table
   jQuery(".wpp_add_row").live("click" , function() {
     wpp_add_row(this);
   });
