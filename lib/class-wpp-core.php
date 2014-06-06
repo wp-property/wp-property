@@ -121,13 +121,10 @@ class WPP_Core {
       'type' => 'error'
     );
 
-    add_action( 'pre_current_active_plugins', function( $active ) {
-      settings_errors( 'wpp' );
-    });
-
     return $this;
 
   }
+
   /**
    * Set Constants
    *
@@ -200,6 +197,10 @@ class WPP_Core {
    */
   private function modules() {
 
+    add_action( 'pre_current_active_plugins', function( $active ) {
+      settings_errors( 'wpp.modules' );
+    });
+
     // Load Modules.
     self::$modules = WPP_F::load_premium( array(
       'location' => array( defined( 'WPP_Premium' ) ? WPP_Premium : null ),
@@ -264,15 +265,14 @@ class WPP_Core {
     global $wp_properties;
 
     /** Loads built-in plugin metadata and allows for third-party modification to hook into the filters. Has to be included here to run after template functions.php */
-    if( file_exists( self::$path . '/action_hooks.php' ) ) {
-      include_once( self::$path . '/action_hooks.php' );
+    if( file_exists( self::$path . '/api/action-hooks.php' ) ) {
+      include_once( self::$path . '/api/action-hooks.php' );
     }
 
     /** Defaults filters and hooks */
-    if( file_exists( self::$path . '/default_api.php' ) ) {
-      include_once( self::$path . '/default_api.php' );
+    if( file_exists( self::$path . '/api/default-api.php' ) ) {
+      include_once( self::$path . '/api/default-api.php' );
     }
-
 
   }
 

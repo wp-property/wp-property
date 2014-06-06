@@ -2713,7 +2713,7 @@ class WPP_F extends UD_API {
    * @return array
    */
   public static function load_premium( $args = array() ) {
-    global $wp_properties;
+    global $wp_properties, $wp_settings_errors;
 
     $args = (object) wp_parse_args( $args, array(
       'location' => array(
@@ -2860,11 +2860,15 @@ class WPP_F extends UD_API {
 
               } catch( Exception $error ) {
 
-                // @todo Record inability to invoke module properly, disable.
+                if( is_admin() ) {
 
-                // In development mode fail on module failures if administrator.
-                if( defined( 'WP_DEBUG' ) && WP_DEBUG && is_admin() ) {
-                  wp_die( '<h2>WP-Property Module Failure</h2><p>' . $error->getMessage() . '</p><pre>' . print_r( $plugin_data, true ) . '</pre>' );
+                  $wp_settings_errors[] = array(
+                    'setting' => 'wpp.modules',
+                    'code' => 'module-error',
+                    'message' => 'WP-Property Activation Failure. ' . $error->getMessage(),
+                    'type' => 'error'
+                  );
+
                 }
 
               }
