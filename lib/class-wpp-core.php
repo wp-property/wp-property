@@ -443,7 +443,7 @@ class WPP_Core {
 
     /** Admin interface init */
     add_action( "admin_init", array( $this, "admin_init" ) );
-    add_action( "admin_menu", array( $this, 'admin_menu' ) );
+    add_action( "admin_menu", array( $this, 'admin_menu' ), 20 );
 
     add_action( "post_submitbox_misc_actions", array( $this, "post_submitbox_misc_actions" ) );
     add_action( 'save_post', array( $this, 'save_property' ) );
