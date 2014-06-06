@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "d18e78f513cc61b7da2a7e4bccb1f27b",
+    "hash": "6ef026e70447dcf2f7edae2c3dc4dcce",
     "packages": [
         {
             "name": "composer/installers",
@@ -1491,6 +1491,31 @@
             "time": "2014-06-02 12:50:32"
         },
         {
+            "name": "wp-property/admin-tools",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-admin-tools",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-admin-tools/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "master",
+                "php": ">=5.3",
+                "usabilitydynamics/lib-installer": "master"
+            },
+            "type": "wordpress-module",
+            "extra": {
+                "installer-name": "admin-tools"
+            },
+            "time": "2014-06-05 14:23:11"
+        },
+        {
             "name": "wp-property/default-theme",
             "version": "master",
             "source": {
@@ -1516,34 +1541,163 @@
                 "GPL-2.0"
             ],
             "description": "-",
-            "time": "2014-06-05 22:03:38"
-        }
-    ],
-    "packages-dev": [
+            "time": "2014-06-05 22:46:20"
+        },
         {
-            "name": "wp-property/admin-tools",
+            "name": "wp-property/editor",
             "version": "master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:UsabilityDynamics/wp-property-admin-tools",
+                "url": "git@github.com:UsabilityDynamics/wp-property-editor",
                 "reference": "master"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/usabilitydynamics/wp-property-admin-tools/archive/master.zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-editor/archive/master.zip",
                 "reference": null,
                 "shasum": null
             },
             "require": {
-                "composer/installers": "master",
                 "php": ">=5.3",
                 "usabilitydynamics/lib-installer": "master"
             },
             "type": "wordpress-module",
             "extra": {
-                "installer-name": "admin-tools"
+                "installer-name": "editor"
             },
-            "time": "2014-06-05 14:23:11"
+            "time": "2014-05-28 06:34:32"
+        },
+        {
+            "name": "wp-property/exporter",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-exporter",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-exporter/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3",
+                "usabilitydynamics/lib-installer": "master"
+            },
+            "type": "wordpress-module",
+            "extra": {
+                "installer-name": "exporter"
+            },
+            "time": "2014-06-02 21:49:45"
+        },
+        {
+            "name": "wp-property/list-tables",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-list-tables",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-list-tables/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3",
+                "usabilitydynamics/lib-installer": "master"
+            },
+            "type": "wordpress-module",
+            "extra": {
+                "installer-name": "list-tables"
+            },
+            "time": "2014-06-05 22:51:42"
+        },
+        {
+            "name": "wp-property/sample-module",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/wp-property-sample-module",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-sample-module/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3",
+                "usabilitydynamics/lib-installer": "master"
+            },
+            "type": "wordpress-module",
+            "extra": {
+                "installer-name": "sample-module"
+            },
+            "time": "2014-06-05 22:44:53"
+        }
+    ],
+    "packages-dev": [
+        {
+            "name": "siteorigin/panels",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:UsabilityDynamics/siteorigin-panels",
+                "reference": "master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/UsabilityDynamics/siteorigin-panels/archive/master.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "php": ">=5.3"
+            },
+            "type": "wordpress-plugin",
+            "extra": {
+                "installer-name": "siteorigin-panels",
+                "main-file": "siteorigin-panels.php",
+                "text_domain": "siteorigin-panels"
+            },
+            "autoload": {
+                "classmap": [
+                    "widgets/basic.php",
+                    "widgets/widgets/testimonial/testimonial.php",
+                    "widgets/widgets/price-box/price-box.php",
+                    "widgets/widgets/list/list.php",
+                    "widgets/widgets/call-to-action/call-to-action.php",
+                    "widgets/widgets/button/button.php",
+                    "widgets/widgets/animated-image/animated-image.php",
+                    "widgets/lib/color.php"
+                ]
+            },
+            "license": [
+                "GPLv2"
+            ],
+            "authors": [
+                {
+                    "name": "Greg Priday",
+                    "email": "support@siteorigin.com",
+                    "homepage": "http://siteorigin.com/",
+                    "role": "WordPress Developer"
+                }
+            ],
+            "description": "Build responsive page layouts using the widgets you know and love using this simple drag and drop page builder.",
+            "homepage": "http://siteorigin.com/page-builder/",
+            "keywords": [
+                "admin",
+                "builder",
+                "page-builder",
+                "responsive",
+                "wordpress"
+            ],
+            "time": "2014-06-04 16:34:03"
         },
         {
             "name": "wp-property/advanced-rewrites",
@@ -1672,28 +1826,30 @@
             "time": "2014-06-03 19:58:37"
         },
         {
-            "name": "wp-property/editor",
+            "name": "wp-property/dynamic-templates",
             "version": "master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:UsabilityDynamics/wp-property-editor",
+                "url": "git@github.com:UsabilityDynamics/wp-property-dynamic-templates",
                 "reference": "master"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/usabilitydynamics/wp-property-editor/archive/master.zip",
+                "url": "https://github.com/usabilitydynamics/wp-property-dynamic-templates/archive/master.zip",
                 "reference": null,
                 "shasum": null
             },
             "require": {
                 "php": ">=5.3",
+                "siteorigin/panels": "master",
                 "usabilitydynamics/lib-installer": "master"
             },
             "type": "wordpress-module",
             "extra": {
-                "installer-name": "editor"
+                "installer-name": "dynamic-templates",
+                "description": "Template Editor."
             },
-            "time": "2014-05-28 06:34:32"
+            "time": "2014-06-04 07:38:54"
         },
         {
             "name": "wp-property/enterprise",
@@ -1714,30 +1870,6 @@
             },
             "type": "wordpress-module",
             "time": "2014-01-10 15:42:07"
-        },
-        {
-            "name": "wp-property/exporter",
-            "version": "master",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:UsabilityDynamics/wp-property-exporter",
-                "reference": "master"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/usabilitydynamics/wp-property-exporter/archive/master.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "php": ">=5.3",
-                "usabilitydynamics/lib-installer": "master"
-            },
-            "type": "wordpress-module",
-            "extra": {
-                "installer-name": "exporter"
-            },
-            "time": "2014-06-02 21:49:45"
         },
         {
             "name": "wp-property/facebook-tabs",

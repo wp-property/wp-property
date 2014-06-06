@@ -16,10 +16,7 @@
   ],
   "require": {
     "php": ">=5.3",
-    "datatables/datatables": "dev-master",
-    "tecnick.com/tcpdf": "dev-master",
     "nitra/php-min": "dev-master",
-    "uran1980/fancybox-bundle": "dev-master",
     "usabilitydynamics/lib-installer": "master",
     "usabilitydynamics/lib-api": "master",
     "usabilitydynamics/lib-ui": "master",
@@ -28,7 +25,9 @@
     "wp-property/editor": "master",
     "wp-property/admin-tools": "master",
     "wp-property/exporter": "master",
-    "wp-property/default-theme": "master"
+    "wp-property/default-theme": "master",
+    "wp-property/list-tables": "master",
+    "wp-property/sample-module": "master"
   },
   "require-dev": {
     "wp-property/advanced-rewrites": "master",
@@ -83,9 +82,11 @@
     "installer-name": "wp-property",
     "text_domain": "wpp",
     "main-file": "wp-property.php",
+    "namespace": "UsabilityDynamics\\WPP",
     "class": "UsabilityDynamics\\WPP",
     "installer-paths": {
       "vendor/modules/{$name}":       [ "type:wordpress-module" ],
+      "vendor/plugins/{$name}":       [ "type:wordpress-plugins" ],
       "vendor/libraries/{$name}":     [ "type:wordpress-library" ],
       "vendor/themes/{$name}":        [ "type:wordpress-theme" ]
     }

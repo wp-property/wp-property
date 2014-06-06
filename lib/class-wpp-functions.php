@@ -491,14 +491,9 @@ class WPP_F extends UD_API {
       return false;
     }
 
-    if( !class_exists( 'XML_Serializer' ) ) {
-      set_include_path( get_include_path() . PATH_SEPARATOR . WPP_Path . 'third-party/XML/' );
-      @require_once 'Serializer.php';
-    }
-
     //** If class still doesn't exist, for whatever reason, we fail */
     if( !class_exists( 'XML_Serializer' ) ) {
-      return false;
+      return '<errors><error>Unable to generate XML, missing XML_Serializer.</error></errors>';
     }
 
     $encoding = function_exists( 'mb_detect_encoding' ) ? mb_detect_encoding( $json ) : 'UTF-8';
@@ -1739,7 +1734,6 @@ class WPP_F extends UD_API {
   /**
    * Minify JavaScript
    *
-   * Uses third-party JSMin if class isn't declared.
    * If WP3 is detected, class not loaded to avoid footer warning error.
    * If for some reason W3_Plugin is active, but JSMin is not found,
    * we load ours to avoid breaking property maps.
@@ -1748,20 +1742,14 @@ class WPP_F extends UD_API {
    */
   public static function minify_js( $data ) {
 
-    if( !class_exists( 'W3_Plugin' ) ) {
-      include_once WPP_Path . 'third-party/jsmin.php';
-    } elseif( file_exists( WP_PLUGIN_DIR . '/w3-total-cache/lib/Minify/JSMin.php' ) ) {
-      include_once WP_PLUGIN_DIR . '/w3-total-cache/lib/Minify/JSMin.php';
-    } else {
-      include_once WPP_Path . 'third-party/jsmin.php';
+    if( !class_exists( 'JSMin' ) ) {
+      return $data;
     }
 
-    if( class_exists( 'JSMin' ) ) {
-      try {
-        $data = JSMin::minify( $data );
-      } catch( Exception $e ) {
-        return $data;
-      }
+    try {
+      $data = JSMin::minify( $data );
+    } catch( Exception $e ) {
+      return $data;
     }
 
     return $data;
@@ -1797,7 +1785,9 @@ class WPP_F extends UD_API {
    */
   public static function minify_css( $data ) {
 
-    include_once WPP_Path . 'third-party/cssmin.php';
+    if( !class_exists( 'CssMin' ) ) {
+      return $data;
+    }
 
     if( class_exists( 'CssMin' ) ) {
       try {
@@ -2848,22 +2838,32 @@ class WPP_F extends UD_API {
             // Module requires a higher version of PHP than is available.
             if( !$plugin_data[ 'minimum.php' ] || version_compare( PHP_VERSION, $plugin_data[ 'minimum.php' ] ) > 0 ) {
 
-              if( WP_DEBUG == true ) {
-                include_once( $_absolute_path );
-              } else {
-                @include_once( $_absolute_path );
-              }
+              try {
 
-              // Initialize Module that declare a class.
-              if( $plugin_data[ 'class' ] && class_exists( $_class = $plugin_data[ 'class' ] ) ) {
-                $_instance = new $_class( $wp_properties, $plugin_data );
-
-                // Call Upgrade Method, if exists.
-                if( $_upgraed && is_callable( array( $_instance, 'upgrade' ) ) ) {
-                  $_instance->upgrade( $wp_properties );
+                if( WP_DEBUG == true ) {
+                  include_once( $_absolute_path );
+                } else {
+                  @include_once( $_absolute_path );
                 }
 
+                if( $plugin_data[ 'class' ] && class_exists( $_class = $plugin_data[ 'class' ] ) ) {
+
+                    // Invoke Module.
+                  $_instance = new $_class( $wp_properties, $plugin_data );
+
+                  // Call Upgrade Method, if exists.
+                  if( $_upgraed && is_callable( array( $_instance, 'upgrade' ) ) ) {
+                    $_instance->upgrade( $wp_properties );
+                  }
+
+                }
+
+              } catch( Exception $e ) {
+
+                // @todo Record inability to invoke module properly, disable.
+
               }
+
 
             }
 
@@ -3061,7 +3061,6 @@ class WPP_F extends UD_API {
   /**
    * Modifies value of specific property stat (property attribute)
    *
-   * Used by filter wpp_attribute_filter in WPP_Object_List_Table::single_row();
    *
    * @param $value
    * @param $slug
@@ -4853,9 +4852,14 @@ class WPP_F extends UD_API {
   public static function list_table() {
     global $current_screen, $wp_registered_widgets, $wp_registered_widget_controls, $wp_registered_widget_updates, $_wp_deprecated_widgets_callbacks;
 
-    require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
-    require_once( WPP_Path . 'lib/class-wpp-list-table.php' );
-    require_once( WPP_Path . 'lib/class-wpp-object-list-table.php' );
+    if( !class_exists( 'UsabilityDynamics\WPP\List_Tables\Data_Table' ) ) {
+
+      wp_send_json(array(
+        "ok" => false,
+        "error" => __( 'Missing UsabilityDynamics\WPP\Object_List_Table class. Verify ListTable module installed.' )
+      ));
+
+    }
 
     //** Get the paramters we care about */
     $sEcho         = isset( $_REQUEST[ 'sEcho' ] ) ? $_REQUEST[ 'sEcho' ] : null;
@@ -4876,13 +4880,13 @@ class WPP_F extends UD_API {
     $sColumns = explode( ",", $sColumns );
 
     //* Init table object */
-    $wp_list_table = new WPP_Object_List_Table( array(
+    $wp_list_table = new UsabilityDynamics\WPP\List_Tables\Property_Table( array(
       "ajax"           => true,
       "per_page"       => $per_page,
       "iDisplayStart"  => $iDisplayStart,
       "iColumns"       => $iColumns,
       "current_screen" => 'property_page_all_properties'
-    ) );
+    ));
 
     if( isset( $sColumns[ $order_by ] ) && in_array( $sColumns[ $order_by ], $wp_list_table->get_sortable_columns() ) ) {
       $wpp_search[ 'sorting' ] = array(

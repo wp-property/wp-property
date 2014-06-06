@@ -72,9 +72,6 @@ include_once WPP_Path . 'lib/class-wpp-ui.php';
 /** Loads all the metaboxes for the property page */
 include_once WPP_Path . 'lib/class-wpp-core.php';
 
-/** Bring in the RETS library */
-include_once WPP_Path . 'lib/class-wpp-rets.php';
-
 /** Load set of static methods for mail notifications */
 include_once WPP_Path . 'lib/class-wpp-mail.php';
 
