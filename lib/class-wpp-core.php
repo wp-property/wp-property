@@ -40,20 +40,26 @@ class WPP_Core {
    */
   public function __construct( $args = array() ) {
 
-    // Set Constants.
-    $this->constants();
+    try {
 
-    // Load Essential Libraries.
-    $this->autoload();
+      // Set Constants.
+      $this->identify();
 
-    // Apply Early Hooks.
-    $this->hooks();
+      // Load Essential Libraries.
+      $this->autoload();
 
-    // Enable / Update Modules.
-    $this->modules();
+      // Apply Early Hooks.
+      $this->hooks();
 
-    // Locate / Verify Templates.
-    $this->templates();
+      // Enable / Update Modules.
+      $this->modules();
+
+      // Locate / Verify Templates.
+      $this->templates();
+
+    } catch( Exception $e ) {
+      return;
+    }
 
     // Register activation hook -> has to be in the main plugin file
     register_activation_hook( $args['id'], array( 'WPP_F', 'activation' ) );
@@ -102,7 +108,7 @@ class WPP_Core {
    * Set Constants
    *
    */
-  private function constants() {
+  private function identify() {
 
     /** This Version  */
     if( !defined( 'WPP_Version' ) ) {
@@ -122,21 +128,6 @@ class WPP_Core {
     /** Path for front-end links */
     if( !defined( 'WPP_URL' ) ) {
       define( 'WPP_URL', plugin_dir_url( __DIR__ ) );
-    }
-
-    /** Directory path for includes of template files  */
-    if( !defined( 'WPP_Templates' ) ) {
-
-      // Check if default theme exists.
-      if( is_dir( WPP_Path . 'vendor/themes/default-theme' ) ) {
-        define( 'WPP_Templates', WPP_Path . 'vendor/themes/default-theme' );
-      }
-
-      // Check themes directory for theme.
-      if( !defined( 'WPP_Templates' ) && is_dir( get_theme_root() . '/wp-property-default-theme' ) ) {
-        define( 'WPP_Templates', get_theme_root() . '/wp-property-default-theme'  );
-      }
-
     }
 
     /** Directory path for includes of template files  */
@@ -267,8 +258,28 @@ class WPP_Core {
    */
   private function templates() {
 
+    /** Directory path for includes of template files  */
     if( !defined( 'WPP_Templates' ) ) {
-      // @todo Not sure hwo to handle this..
+
+      // Check if default theme exists.
+      if( is_dir( WPP_Path . 'vendor/themes/default-theme' ) ) {
+        define( 'WPP_Templates', WPP_Path . 'vendor/themes/default-theme' );
+      }
+
+      // Check themes directory for theme.
+      if( !defined( 'WPP_Templates' ) && is_dir( get_theme_root() . '/wp-property-default-theme' ) ) {
+        define( 'WPP_Templates', get_theme_root() . '/wp-property-default-theme'  );
+      }
+
+      // Check themes directory for theme.
+      if( !defined( 'WPP_Templates' ) && is_dir( get_theme_root() . '/default-theme' ) ) {
+        define( 'WPP_Templates', get_theme_root() . '/default-theme'  );
+      }
+
+    }
+
+    if( !defined( 'WPP_Templates' ) ) {
+      throw new Exception( 'No defined templates found.' );
     }
 
 

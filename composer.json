@@ -86,7 +86,7 @@
     "class": "UsabilityDynamics\\WPP",
     "installer-paths": {
       "vendor/modules/{$name}":       [ "type:wordpress-module" ],
-      "vendor/plugins/{$name}":       [ "type:wordpress-plugins" ],
+      "vendor/plugins/{$name}":       [ "type:wordpress-plugin" ],
       "vendor/libraries/{$name}":     [ "type:wordpress-library" ],
       "vendor/themes/{$name}":        [ "type:wordpress-theme" ]
     }
