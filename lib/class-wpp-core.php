@@ -282,6 +282,10 @@ class WPP_Core {
    */
   private function templates() {
 
+    add_action( 'pre_current_active_plugins', function( $active ) {
+      settings_errors( 'wpp.themes' );
+    });
+
     /** Directory path for includes of template files  */
     if( !defined( 'WPP_Templates' ) ) {
 

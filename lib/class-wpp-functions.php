@@ -2873,7 +2873,6 @@ class WPP_F extends UD_API {
 
               }
 
-
             }
 
             // Disable plugin if class does not exists - file is empty
