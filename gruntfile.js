@@ -58,18 +58,17 @@ module.exports = function( grunt ) {
         },
         files: {
           'static/styles/wpp.admin.css': [ 'static/styles/src/wpp.admin.less' ],
-          'static/styles/wpp.admin.data.tables.css': [ 'static/styles/src/wpp.admin.data.tables.less' ],
           'static/styles/wpp.admin.jquery.ui.css': [ 'static/styles/src/wpp.admin.jquery.ui.less' ],
           
-          'templates/wp_properties.css': [ 'static/styles/src/wp_properties.less' ],
-          'templates/wp_properties-ie_7.css': [ 'static/styles/src/wp_properties-ie_7.less' ],
-          'templates/wp_properties-msie.css': [ 'static/styles/src/wp_properties-msie.less' ],
+          'static/styles/wp_properties.css': [ 'static/styles/src/wp_properties.less' ],
+          'static/styles/wp_properties-ie_7.css': [ 'static/styles/src/wp_properties-ie_7.less' ],
+          'static/styles/wp_properties-msie.css': [ 'static/styles/src/wp_properties-msie.less' ],
           
-          'templates/theme-specific/denali.css': [ 'templates/theme-specific/src/denali.less' ],
-          'templates/theme-specific/fb_properties.css': [ 'templates/theme-specific/src/fb_properties.less' ],
-          'templates/theme-specific/twentyeleven.css': [ 'templates/theme-specific/src/twentyeleven.less' ],
-          'templates/theme-specific/twentyten.css': [ 'templates/theme-specific/src/twentyten.less' ],
-          'templates/theme-specific/twentytwelve.css': [ 'templates/theme-specific/src/twentytwelve.less' ]
+          'static/styles/theme-specific/denali.css': [ 'templates/theme-specific/src/denali.less' ],
+          'static/styles/theme-specific/fb_properties.css': [ 'templates/theme-specific/src/fb_properties.less' ],
+          'static/styles/theme-specific/twentyeleven.css': [ 'templates/theme-specific/src/twentyeleven.less' ],
+          'static/styles/theme-specific/twentyten.css': [ 'templates/theme-specific/src/twentyten.less' ],
+          'static/styles/theme-specific/twentytwelve.css': [ 'templates/theme-specific/src/twentytwelve.less' ]
         }
       },
       development: {
@@ -82,15 +81,15 @@ module.exports = function( grunt ) {
           'static/styles/wpp.admin.data.tables.dev.css': [ 'static/styles/src/wpp.admin.data.tables.less' ],
           'static/styles/wpp.admin.jquery.ui.dev.css': [ 'static/styles/src/wpp.admin.jquery.ui.less' ],
           
-          'templates/wp_properties.dev.css': [ 'static/styles/src/wp_properties.less' ],
-          'templates/wp_properties-ie_7.dev.css': [ 'static/styles/src/wp_properties-ie_7.less' ],
-          'templates/wp_properties-msie.dev.css': [ 'static/styles/src/wp_properties-msie.less' ],
+          'static/styles/wp_properties.dev.css': [ 'static/styles/src/wp_properties.less' ],
+          'static/styles/wp_properties-ie_7.dev.css': [ 'static/styles/src/wp_properties-ie_7.less' ],
+          'static/styles/wp_properties-msie.dev.css': [ 'static/styles/src/wp_properties-msie.less' ],
           
-          'templates/theme-specific/denali.dev.css': [ 'templates/theme-specific/src/denali.less' ],
-          'templates/theme-specific/fb_properties.dev.css': [ 'templates/theme-specific/src/fb_properties.less' ],
-          'templates/theme-specific/twentyeleven.dev.css': [ 'templates/theme-specific/src/twentyeleven.less' ],
-          'templates/theme-specific/twentyten.dev.css': [ 'templates/theme-specific/src/twentyten.less' ],
-          'templates/theme-specific/twentytwelve.dev.css': [ 'templates/theme-specific/src/twentytwelve.less' ]
+          'static/styles/theme-specific/denali.dev.css': [ 'templates/theme-specific/src/denali.less' ],
+          'static/styles/theme-specific/fb_properties.dev.css': [ 'templates/theme-specific/src/fb_properties.less' ],
+          'static/styles/theme-specific/twentyeleven.dev.css': [ 'templates/theme-specific/src/twentyeleven.less' ],
+          'static/styles/theme-specific/twentyten.dev.css': [ 'templates/theme-specific/src/twentyten.less' ],
+          'static/styles/theme-specific/twentytwelve.dev.css': [ 'templates/theme-specific/src/twentytwelve.less' ]
         }
       }
     },

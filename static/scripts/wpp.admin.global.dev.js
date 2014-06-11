@@ -28,6 +28,7 @@ function wpp_create_slug(slug) {
 }
 
 function wpp_add_row(element) {
+    console.debug("wpp_add_row");
     {
         var auto_increment = !1, table = jQuery(element).parents(".ud_ui_dynamic_table");
         jQuery(table).attr("id");

@@ -138,12 +138,12 @@ class WPP_Core {
 
     /** Get Directory - not always wp-property */
     if( !defined( 'WPP_Directory' ) ) {
-      define( 'WPP_Directory', dirname( plugin_basename( __DIR__ ) ) );
+      define( 'WPP_Directory', wp_normalize_path( dirname( plugin_basename( __DIR__ ) ) ) );
     }
 
     /** Path for Includes */
     if( !defined( 'WPP_Path' ) ) {
-      define( 'WPP_Path', plugin_dir_path( __DIR__ ) );
+      define( 'WPP_Path', wp_normalize_path( plugin_dir_path( __DIR__ ) ) );
     }
 
     /** Path for front-end links */
@@ -530,7 +530,7 @@ class WPP_Core {
 
     //** Load early so plugins can use them as well */
     wp_register_script( 'wpp-localization', admin_url( 'admin-ajax.php' ) . '?action=wpp_js_localization', array(), WPP_Version );
-    wp_register_script( 'wpp-jquery-fancybox', plugins_url( 'static/scripts/jquery.fancybox-1.3.4.pack.js', WPP_Core::$path ), array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'static/scripts/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-easing', WPP_URL . 'static/scripts/jquery.easing-1.3.pack.js', array( 'jquery', 'wpp-localization' ), '1.3' );
     wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'static/scripts/fileuploader.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-md5', WPP_URL . 'static/scripts/wpp.md5.js', array( 'wpp-localization' ), WPP_Version );
@@ -547,7 +547,7 @@ class WPP_Core {
     wp_register_script( 'jquery-cookie', WPP_URL . 'static/scripts/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
     wp_register_script( 'google-maps', '//maps.google.com/maps/api/js?sensor=true' );
 
-    wp_register_style( 'wpp-jquery-fancybox-css', plugins_url( 'static/styles/jquery.fancybox-1.3.4.css', WPP_Core::$path ), '1.3.4' );
+    wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'static/styles/jquery.fancybox-1.3.4.css', '1.3.4' );
     wp_register_style( 'jquery-ui', WPP_URL . 'static/styles/wpp.admin.jquery.ui.css' );
 
     /** Find and register stylesheet  */
@@ -559,8 +559,8 @@ class WPP_Core {
       wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp-properties.css', array(), WPP_Version );
     } elseif( file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
       wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), WPP_Version );
-    } elseif( file_exists( WPP_Templates . '/wp_properties.css' ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-      wp_register_style( 'wp-property-frontend', plugins_url( '/wp_properties.css', WPP_Templates ), array(), WPP_Version );
+    } elseif( file_exists( WPP_Templates . '/styles/wp_properties.css' ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
+      wp_register_style( 'wp-property-frontend', plugins_url( '/styles/wp_properties.css', WPP_Templates . '/wp_properties.css' ), array(), WPP_Version );
 
       //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
       if(
@@ -577,8 +577,8 @@ class WPP_Core {
       wp_register_script( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp-localization' ), WPP_Version, true );
     } elseif( file_exists( TEMPLATEPATH . '/wp_properties.js' ) ) {
       wp_register_script( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp-localization' ), WPP_Version, true );
-    } elseif( file_exists( WPP_Templates . '/wp_properties.js' ) ) {
-      wp_register_script( 'wp-property-frontend', plugins_url( '/wp_properties.css', WPP_Templates ), array( 'jquery-ui-core', 'wpp-localization' ), WPP_Version, true );
+    } elseif( file_exists( WPP_Templates . '/scripts/wp_properties.js' ) ) {
+      wp_register_script( 'wp-property-frontend', plugins_url( '/scripts/wp_properties.js', WPP_Templates . '/wp_properties.js' ), array( 'jquery-ui-core', 'wpp-localization' ), WPP_Version, true );
     }
 
   }

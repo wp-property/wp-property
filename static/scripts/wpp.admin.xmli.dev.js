@@ -29,7 +29,7 @@ wpp.strings = wpp.strings || {}, wpp.xmli = jQuery.extend({
         }), jQuery(".wpp_property_toggle_import_settings").live("click", function() {
             jQuery(".wpp_property_import_settings").toggle(), wpp.xmli.advanced_option_counter();
         }), jQuery(".wpp_import_delete_row").live("click", function() {
-            return jQuery('input[name^="wpp_property_import[map]"]:checkbox:checked').length && confirm("Are you sure you want remove these items?") ? (jQuery('input[name^="wpp_property_import[map]"]:checkbox').each(function() {
+            return jQuery('input[name^="wpp_property_import[map]"]:checkbox:checked').length ? confirm("Are you sure you want remove these items?") ? (jQuery('input[name^="wpp_property_import[map]"]:checkbox').each(function() {
                 this.checked && (1 == jQuery("#wpp_property_import_attribute_mapper .wpp_dynamic_table_row").length && jQuery(".wpp_add_row").click(), 
                 jQuery(this).parents(".wpp_dynamic_table_row").remove());
             }), jQuery(jQuery('[name^="wpp_property_import[map]"]:checkbox').parents(".wpp_dynamic_table_row").get().reverse()).each(function(index) {
@@ -39,7 +39,7 @@ wpp.strings = wpp.strings || {}, wpp.xmli = jQuery.extend({
                     var new_name = old_name.replace("[" + old_count + "]", "[" + new_count + "]");
                     jQuery(this).attr("name", new_name);
                 });
-            }), void wpp.xmli.import_build_unique_id_selector()) : !1;
+            }), void wpp.xmli.import_build_unique_id_selector()) : !1 : !1;
         }), jQuery("#check_all").live("click", function() {
             this.checked ? jQuery('[name^="wpp_property_import[map]"]:checkbox').attr("checked", "checked") : jQuery('[name^="wpp_property_import[map]"]:checkbox').attr("checked", "");
         }), jQuery("#wpp_i_do_full_import").live("click", function() {

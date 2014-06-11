@@ -68,7 +68,7 @@ $_model = array(
 
 </style>
 
-<div class="wrap wpp_settings_page" data-requires="<?php echo plugins_url( 'static/scripts/src/wpp.admin.settings.vm.js', WPP_Core::$path ); ?>">
+<div class="wrap wpp_settings_page" data-requires="<?php echo plugins_url( 'static/scripts/src/wpp.admin.settings.vm.js', WPP_Core::$path . '/wpp.admin.settings.vm.js' ); ?>">
 
   <h2 class="nav-tab-wrapper">
     <?php UsabilityDynamics\UI::do_tabs( get_current_screen()->id, 'main' ); ?>
