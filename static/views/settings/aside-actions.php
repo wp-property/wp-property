@@ -17,9 +17,4 @@
 
   <p id="wpp_plugins_ajax_response" class="hidden"></p>
 
-  <p>
-    <input type="button" value="<?php _e( 'Check Updates', 'wpp' ); ?>" id="wpp_ajax_check_plugin_updates"/><?php _e( 'to download, or update, all premium features purchased for this domain.', 'wpp' ); ?>
-  </p>
-
-
 </ul>

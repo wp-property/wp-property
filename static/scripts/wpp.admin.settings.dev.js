@@ -39,12 +39,6 @@ jQuery.extend(wpp = wpp || {}, {
                     jQuery("#wpp_ajax_property_result").hide(), jQuery(this).hide();
                 }), jQuery("#wpp_ajax_image_query_cancel").click(function() {
                     jQuery("#wpp_ajax_image_result").hide(), jQuery(this).hide();
-                }), jQuery("#wpp_ajax_check_plugin_updates").click(function() {
-                    jQuery(".plugin_status").remove(), jQuery.post(wpp.instance.ajax_url, {
-                        action: "wpp_ajax_check_plugin_updates"
-                    }, function(data) {
-                        message = "<div class='plugin_status updated fade'><p>" + data + "</p></div>", jQuery(message).insertAfter("h2");
-                    });
                 }), jQuery("#wpp_clear_cache").click(function() {
                     jQuery(".clear_cache_status").remove(), jQuery.post(wpp.instance.ajax_url, {
                         action: "wpp_ajax_clear_cache"

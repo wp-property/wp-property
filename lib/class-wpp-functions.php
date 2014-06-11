@@ -2177,156 +2177,6 @@ class WPP_F extends UD_API {
   }
 
   /**
-   * Checks for updates against UsabilityDynamics Updates Server
-   *
-   * @method feature_check
-   * @since 0.55
-   * @version 1.13.1
-   */
-  public static function feature_check() {
-    global $wp_properties;
-
-    $updates = array();
-
-    try {
-
-      $blogname    = get_bloginfo( 'url' );
-      $blogname    = urlencode( str_replace( array( 'http://', 'https://' ), '', $blogname ) );
-      $system      = 'wpp';
-      $wpp_version = get_option( "wpp_version" );
-
-      //** Get API key - force API key update just in case */
-      $api_key = WPP_F::get_api_key( array( 'force_check' => true, 'return' => true ) );
-
-      if( !$api_key || empty( $api_key ) ) {
-        throw new Exception( __( 'The API key could not be generated.', 'wpp' ) );
-      }
-
-      if( strlen( $api_key ) != 40 ) {
-        throw new Exception( sprintf( __( 'An error occurred during premium feature check. API Key \'<b>%s</b>\' is incorrect.', 'wpp' ), $api_key ) );
-      }
-
-      $check_url = "http://updates.usabilitydynamics.com/?system={$system}&site={$blogname}&system_version={$wpp_version}&api_key={$api_key}";
-
-      $response = @wp_remote_get( $check_url, array( 'timeout' => 30 ) );
-
-      if( empty( $response ) ) {
-        throw new Exception( __( 'Could not do remote request.', 'wpp' ) );
-      }
-
-      if( is_wp_error( $response ) ) {
-        throw new Exception( $response->get_error_message() );
-      }
-
-      if( $response[ 'response' ][ 'code' ] != '200' ) {
-        throw new Exception( sprintf( __( 'Response code from requested server is %s.', 'wpp' ), $response[ 'response' ][ 'code' ] ) );
-      }
-
-      $r = @json_decode( $response[ 'body' ] );
-
-      if( empty( $r ) ) {
-        throw new Exception( __( 'Requested server returned empty result or timeout was exceeded. Please, try again later.', 'wpp' ) );
-      }
-
-      if( is_object( $r->available_features ) ) {
-        $r->available_features = WPP_F::objectToArray( $r->available_features );
-        //** Update WP-Property settings */
-        $wpp_settings                         = get_option( 'wpp_settings' );
-        $wpp_settings[ 'available_features' ] = $r->available_features;
-        update_option( 'wpp_settings', $wpp_settings );
-      } // available_features
-
-      if( $r->features != 'eligible' ) {
-        throw new Exception( __( 'There are no available premium features.', 'wpp' ) );
-      }
-
-      if( $wp_properties[ 'configuration' ][ 'disable_automatic_feature_update' ] == 'true' ) {
-        throw new Exception( __( 'No premium features were downloaded because the setting is disabled. Enable in the "Developer" tab.', 'wpp' ) );
-      }
-
-      //** Try to create directory if it doesn't exist */
-      if( !is_dir( WPP_Premium ) ) {
-        @mkdir( WPP_Premium, 0755 );
-      }
-
-      // If didn't work, we quit
-      if( !is_dir( WPP_Premium ) ) {
-        throw new Exception( __( 'Specific directory for uploading premium features can not be created.', 'wpp' ) );
-      }
-
-      //** Save code */
-      if( is_object( $r->code ) ) {
-
-        foreach( $r->code as $code ) {
-
-          $filename = $code->filename;
-          $php_code = $code->code;
-          $version  = $code->version;
-
-          //** Check version */
-          $default_headers = array(
-            'Name'        => 'Feature Name',
-            'Version'     => 'Version',
-            'Description' => 'Description',
-          );
-
-          $current_file = @get_file_data( WPP_Premium . "/" . $filename, $default_headers, 'plugin' );
-
-          if( @version_compare( $current_file[ 'Version' ], $version ) == '-1' ) {
-            $this_file = WPP_Premium . "/" . $filename;
-            $fh        = @fopen( $this_file, 'w' );
-            if( $fh ) {
-              fwrite( $fh, $php_code );
-              fclose( $fh );
-              $res = '';
-              if( $current_file[ 'Version' ] ) {
-                $res = sprintf( __( '<b>%s</b> updated from version %s to %s .', 'wpp' ), $code->name, $current_file[ 'Version' ], $version );
-              } else {
-                $res = sprintf( __( '<b>%s</b> %s has been installed.', 'wpp' ), $code->name, $version );
-              }
-              if( !empty( $res ) ) {
-                WPP_F::log( sprintf( __( 'WP-Property Premium Feature: %s', 'wpp' ), $res ) );
-                $updates[ ] = $res;
-              }
-            } else {
-              throw new Exception( __( 'There are no file permissions to upload or update premium features.', 'wpp' ) );
-            }
-          }
-
-        }
-
-      } else {
-        throw new Exception( __( 'There are no available premium features. Check your licenses for the current domain', 'wpp' ) );
-      }
-
-      //** Update settings */
-      WPP_F::settings_action( true );
-
-    } catch( Exception $e ) {
-
-      WPP_F::log( "Feature Update Error: " . $e->getMessage() );
-
-      return new WP_Error( 'error', $e->getMessage() );
-
-    }
-
-    $result = __( 'Update ran successfully.', 'wpp' );
-    if( !empty( $updates ) ) {
-      $result .= '<ul>';
-      foreach( $updates as $update ) {
-        $result .= "<li>{$update}</li>";
-      }
-      $result .= '</ul>';
-    } else {
-      $result .= '<br/>' . __( 'You have the latest premium features versions.', 'wpp' );
-    }
-
-    $result = apply_filters( 'wpp::feature_check::result', $result, $updates );
-
-    return $result;
-  }
-
-  /**
    * Makes a given property featured, usuall called via ajax
    *
    * @since 0.721
@@ -2943,27 +2793,6 @@ class WPP_F extends UD_API {
   }
 
   /**
-   * Checks updates for premium features by AJAX
-   * Prints results to body.
-   *
-   * @global array $wp_properties
-   * @return null
-   */
-  public static function check_plugin_updates() {
-    global $wp_properties;
-
-    $result = WPP_F::feature_check();
-
-    if( is_wp_error( $result ) ) {
-      printf( __( 'An error occurred during premium feature check: <b> %s </b>.', 'wpp' ), $result->get_error_message() );
-    } else {
-      echo $result;
-    }
-
-    return null;
-  }
-
-  /**
    * Run on plugin activation.
    *
    * As of WP 3.1 this is not ran on automatic update.
@@ -2997,23 +2826,11 @@ class WPP_F extends UD_API {
     if( @version_compare( $installed_ver, $wpp_version ) == '-1' ) {
       // We are upgrading.
 
-      // Unschedule event
-      $timestamp = wp_next_scheduled( 'wpp_premium_feature_check' );
-      wp_unschedule_event( $timestamp, 'wpp_premium_feature_check' );
-      wp_clear_scheduled_hook( 'wpp_premium_feature_check' );
-
-      // Schedule event
-      wp_schedule_event( time(), 'daily', 'wpp_premium_feature_check' );
-
       //** Upgrade data if needed */
       WPP_Legacy::upgrade();
 
       // Update option to latest version so this isn't run on next admin page load
       update_option( "wpp_version", $wpp_version );
-
-      // Get premium features on activation
-      @WPP_F::feature_check();
-
     }
 
     return;
@@ -3026,12 +2843,8 @@ class WPP_F extends UD_API {
    */
   public static function deactivation() {
     global $wp_rewrite;
-    $timestamp = wp_next_scheduled( 'wpp_premium_feature_check' );
-    wp_unschedule_event( $timestamp, 'wpp_premium_feature_check' );
-    wp_clear_scheduled_hook( 'wpp_premium_feature_check' );
-
+    
     $wp_rewrite->flush_rules();
-
   }
 
   /**

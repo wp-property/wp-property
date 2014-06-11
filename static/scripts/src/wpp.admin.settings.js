@@ -87,17 +87,6 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
       jQuery( this ).hide();
     } );
 
-    /* Check plugin updates */
-    jQuery( "#wpp_ajax_check_plugin_updates" ).click( function () {
-      jQuery( '.plugin_status' ).remove();
-      jQuery.post( wpp.instance.ajax_url, {
-        action: 'wpp_ajax_check_plugin_updates'
-      }, function ( data ) {
-        message = "<div class='plugin_status updated fade'><p>" + data + "</p></div>";
-        jQuery( message ).insertAfter( "h2" );
-      } );
-    } );
-
     /* Clear Cache */
     jQuery( "#wpp_clear_cache" ).click( function () {
       jQuery( '.clear_cache_status' ).remove();
