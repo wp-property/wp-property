@@ -3508,8 +3508,10 @@ class WPP_F extends UD_API {
 
       } else {
 
-        //** Determine if all values of meta_key are numbers we use CAST in SQL query to avoid sort issues */
-        if( self::meta_has_number_data_type( $matching_ids, $sql_sort_by ) ) {
+        //** Determine if attribute has numeric format or all values of meta_key are numbers we use CAST in SQL query to avoid sort issues */
+        if( ( isset( $wp_properties[ 'numeric_attributes' ] ) && in_array( $sql_sort_by, $wp_properties[ 'numeric_attributes' ] ) ) || 
+            self::meta_has_number_data_type( $matching_ids, $sql_sort_by )
+        ) {
           $meta_value = "CAST( meta_value AS DECIMAL(20,3 ))";
         } else {
           $meta_value = "meta_value";
