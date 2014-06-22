@@ -29,7 +29,7 @@
     "wp-property/list-tables": "master",
     "wp-property/sample-module": "master"
   },
-  "require-dev": {
+  "available-modules": {
     "wp-property/advanced-rewrites": "master",
     "wp-property/agents": "master",
     "wp-property/api-manager": "master",
