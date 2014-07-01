@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/usabilitydynamics/wp-property.png?label=ready&title=Ready)](https://waffle.io/usabilitydynamics/wp-property)
 Developed by the same people who brought you [WP-Invoice](http://wordpress.org/extend/plugins/wp-invoice/), comes WP-Property. As always, integration is seamless, the system is expandable and customizable, functionality is rich, and we are here to support it.
 
 [vimeo http://vimeo.com/14280748]
