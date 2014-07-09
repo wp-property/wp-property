@@ -3,8 +3,8 @@ Contributors: usability_dynamics, andypotanin, jbrw1984, maxim.peshkov, anton-ko
 Donate link: http://usabilitydynamics.com/products/wp-property/
 Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 3.6
-Tested up to: 3.9
-Stable tag: 1.41.3
+Tested up to: 3.9.1
+Stable tag: 1.41.4
 
 
 == Description ==
@@ -229,6 +229,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 
 = 1.41.4 =
 * Added hooks to get_sortable_keys and get_properties functions.
+* Fixed bug with sorting and pagination for [featured_properties] shortcode.
 
 = 1.41.3 =
 * Fixed issue with not matching up properties types on XML import.
