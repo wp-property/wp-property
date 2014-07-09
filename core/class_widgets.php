@@ -724,12 +724,15 @@ class FeaturedPropertiesWidget extends WP_Widget {
    *
    */
   function widget( $args, $instance ) {
+    global $wp_properties;
+    
     $before_widget = '';
     $before_title = '';
     $after_title = '';
     $after_widget = '';
-    global $wp_properties;
+    
     extract( $args );
+    
     $title = apply_filters( 'widget_title', $instance[ 'title' ] );
     $instance = apply_filters( 'FeaturedPropertiesWidget', $instance );
     $show_title = $instance[ 'show_title' ];
@@ -809,12 +812,17 @@ class FeaturedPropertiesWidget extends WP_Widget {
         <ul class="wpp_widget_attribute_list">
           <?php if ( is_array( $stats ) ): ?>
             <?php foreach ( $stats as $stat ):
-              $pstat = $stat;
-              /** Determine if stat is property_type we switch it to property_type_label */
-              if ( $pstat == 'property_type' ) {
-                $pstat = 'property_type_label';
+              switch( true ) {
+                case ( !empty( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) && $wp_properties[ 'configuration' ][ 'address_attribute' ] == $stat ):
+                  $content = wpp_format_address_attribute( $this_property->$stat, $this_property, $address_format );
+                  break;
+                case ( $stat == 'property_type' ):
+                  $content = nl2br( apply_filters( "wpp_stat_filter_property_type_label", $this_property->property_type_label ) );
+                  break;
+                default:
+                  $content = nl2br( apply_filters( "wpp_stat_filter_{$stat}", $this_property->$stat ) );
+                  break;
               }
-              $content = nl2br( apply_filters( "wpp_stat_filter_{$pstat}", $this_property->$pstat ) );
               if ( empty( $content ) ) {
                 continue;
               }

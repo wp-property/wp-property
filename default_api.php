@@ -397,15 +397,13 @@ function wpp_format_address_attribute( $data, $property = false, $format = "[str
   $display_address = str_replace( "[zip]", "$postal_code", $display_address );
   $display_address = str_replace( "[postal_code]", "$postal_code", $display_address );
   $display_address = preg_replace( '/^\n+|^[\t\s]*\n+/m', "", $display_address );
-
-  if ( str_replace( ' ', ',', '', $display_address ) == '' ) {
-
+  
+  if ( str_replace( array( ' ', ',' ), '', $display_address ) == '' ) {
     if ( !empty( $currenty_address ) ) {
       return $currenty_address;
     } else {
       return;
     }
-
   }
 
   // Remove empty lines

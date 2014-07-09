@@ -231,6 +231,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Added hooks to get_sortable_keys and get_properties functions.
 * Fixed bug with sorting and pagination for [featured_properties] shortcode.
 * Fixed issue with searching decimal numeric values on property search.
+* Fixed address format option for Featured Properties widget.
 
 = 1.41.3 =
 * Fixed issue with not matching up properties types on XML import.
