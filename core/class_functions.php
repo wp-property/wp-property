@@ -3474,7 +3474,7 @@ class WPP_F extends UD_API {
           $cr = explode( '-', $criteria );
           // Check pieces of criteria. Array should contains 2 int's elements
           // In other way, it's just value of meta_key
-          if( count( $cr ) > 2 || ( (int ) $cr[ 0 ] == 0 && ( int ) $cr[ 1 ] == 0 ) ) {
+          if( count( $cr ) > 2 || ( ( float ) $cr[ 0 ] == 0 && ( float ) $cr[ 1 ] == 0 ) ) {
             $specific = $criteria;
           } else {
             $hyphen_between = $cr;
