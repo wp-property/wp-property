@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>core/class_legacy.php - WP-Property</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="http://a3d72a45d111006ec192-ec5b80a12b0b09b4d52373336afb4254.r80.cf1.rackcdn.com/usability-dynamics.png" title="WP-Property"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.38.2</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/wpp.html">wpp</a></li>
+            
+                <li><a href="../classes/wpp.overview.html">wpp.overview</a></li>
+            
+                <li><a href="../classes/wpp.xmli.html">wpp.xmli</a></li>
+            
+                <li><a href="../classes/WPP_RETS.html">WPP_RETS</a></li>
+            
+                <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: core/class_legacy.php</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&lt;?php
+/**
+ * Legacy Support
+ *
+ * This file deals with upgrading and backwards compatability issues.
+ *
+ * @package WP-Property
+ */
+class WPP_Legacy {
+
+  /**
+   * Adds compatibility with legacy functionality on WP-Property upgrade
+   *
+   */
+  static function upgrade() {
+    global $wpdb;
+
+    $installed_ver = get_option( &quot;wpp_version&quot;, 0 );
+    $wpp_version = WPP_Version;
+
+    if ( @version_compare( $installed_ver, WPP_Version ) == &#x27;-1&#x27; ) {
+
+      switch ( $installed_ver ) {
+
+        /**
+         * Upgrade:
+         * - WPP postmeta data were saved to database with &#x27;&amp;ndash;&#x27; instead of &#x27;-&#x27; in value. Function encode_sql_input was modified and it doesn&#x27;t change &#x27;-&#x27; to &#x27;&amp;ndash&#x27; anymore
+         * So to prevent search result issues we need to update database data.
+         * peshkov@UD
+         */
+        case ( version_compare( $installed_ver, &#x27;1.37.4&#x27; ) == &#x27;-1&#x27; ):
+
+          $wpdb-&gt;query( &quot;UPDATE {$wpdb-&gt;prefix}postmeta SET meta_value = REPLACE( meta_value, &#x27;&amp;ndash;&#x27;, &#x27;-&#x27;)&quot; );
+
+          break;
+
+      }
+
+    }
+
+  }
+
+}
+
+//** Support for legacy UD Classes - extend WPP_F, which in turn extends UD_API */
+if ( !class_exists( &#x27;WPP_UD_F&#x27; ) ) {
+  class WPP_UD_F extends WPP_F {
+  }
+}
+
+if ( !class_exists( &#x27;WPP_UD_UI&#x27; ) ) {
+  class WPP_UD_UI extends WPP_F {
+  }
+}
+
+if ( !class_exists( &#x27;UD_UI&#x27; ) ) {
+  class UD_UI extends WPP_F {
+  }
+}
+
+if ( !class_exists( &#x27;UD_F&#x27; ) ) {
+  class UD_F extends WPP_F {
+  }
+}
+
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

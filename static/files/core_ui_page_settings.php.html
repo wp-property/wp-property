@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>core/ui/page_settings.php - WP-Property</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="http://a3d72a45d111006ec192-ec5b80a12b0b09b4d52373336afb4254.r80.cf1.rackcdn.com/usability-dynamics.png" title="WP-Property"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.38.2</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/wpp.html">wpp</a></li>
+            
+                <li><a href="../classes/wpp.overview.html">wpp.overview</a></li>
+            
+                <li><a href="../classes/wpp.xmli.html">wpp.xmli</a></li>
+            
+                <li><a href="../classes/WPP_RETS.html">WPP_RETS</a></li>
+            
+                <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: core/ui/page_settings.php</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&lt;?php
+/**
+ * Page handles all the settings configuration for WP-Property. Premium features can hook into this page.
+ *
+ * Actions:
+ * - wpp_settings_page_property_page
+ * - wpp_settings_help_tab
+ * - wpp_settings_content_$slug
+ *
+ * Filters:
+ *  - wpp_settings_nav
+ *
+ * @version 1.12
+ * @package   WP-Property
+ * @author     team@UD
+ * @copyright  2012 Usability Dyanmics, Inc.
+ */
+
+//** Check if premium folder is writable */
+$wp_messages = WPP_F::check_premium_folder_permissions();
+
+$object_label = array(
+  &#x27;singular&#x27; =&gt; WPP_F::property_label( &#x27;singular&#x27; ),
+  &#x27;plural&#x27; =&gt; WPP_F::property_label( &#x27;plural&#x27; )
+);
+
+$wrapper_classes = array( &#x27;wpp_settings_page&#x27; );
+
+if ( isset( $_REQUEST[ &#x27;message&#x27; ] ) ) {
+
+  switch ( $_REQUEST[ &#x27;message&#x27; ] ) {
+
+    case &#x27;updated&#x27;:
+      $wp_messages[ &#x27;notice&#x27; ][ ] = __( &quot;Settings updated.&quot;, &#x27;wpp&#x27; );
+      break;
+
+  }
+}
+
+//** We have to update Rewrite rules here. peshkov@UD */
+flush_rewrite_rules();
+
+$parseUrl = parse_url( trim( get_bloginfo( &#x27;url&#x27; ) ) );
+$this_domain = trim( $parseUrl[ &#x27;host&#x27; ] ? $parseUrl[ &#x27;host&#x27; ] : array_shift( explode( &#x27;/&#x27;, $parseUrl[ &#x27;path&#x27; ], 2 ) ) );
+
+/** Check if custom css exists */
+if ( file_exists( STYLESHEETPATH . &#x27;/wp_properties.css&#x27; ) || file_exists( TEMPLATEPATH . &#x27;/wp_properties.css&#x27; ) ) {
+  $using_custom_css = true;
+}
+
+
+if ( get_option( &#x27;permalink_structure&#x27; ) == &#x27;&#x27; ) {
+  $wrapper_classes[ ] = &#x27;no_permalinks&#x27;;
+} else {
+  $wrapper_classes[ ] = &#x27;have_permalinks&#x27;;
+}
+
+?&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+  jQuery( document ).ready( function () {
+
+    //* Tabs for various UI elements */
+    jQuery( &#x27;.wpp_subtle_tabs&#x27; ).tabs();
+
+    wpp_setup_default_property_page();
+
+    jQuery( &quot;#wpp_settings_base_slug&quot; ).change( function () {
+      wpp_setup_default_property_page();
+    } );
+
+    if ( document.location.hash != &#x27;&#x27; &amp;&amp; jQuery( document.location.hash ).length &gt; 0 ) {
+      jQuery( &quot;#wpp_settings_tabs&quot; ).tabs();
+    } else {
+      jQuery( &quot;#wpp_settings_tabs&quot; ).tabs( { cookie: {  name: &#x27;wpp_settings_tabs&#x27;, expires: 30 } } );
+    }
+
+    // Show settings array
+    jQuery( &quot;#wpp_show_settings_array&quot; ).click( function () {
+      jQuery( &quot;#wpp_show_settings_array_cancel&quot; ).show();
+      jQuery( &quot;#wpp_show_settings_array_result&quot; ).show();
+    } );
+
+    // Hide settings array
+    jQuery( &quot;#wpp_show_settings_array_cancel&quot; ).click( function () {
+      jQuery( &quot;#wpp_show_settings_array_result&quot; ).hide();
+      jQuery( this ).hide();
+    } );
+
+    // Hide property query
+    jQuery( &quot;#wpp_ajax_property_query_cancel&quot; ).click( function () {
+      jQuery( &quot;#wpp_ajax_property_result&quot; ).hide();
+      jQuery( this ).hide();
+    } );
+
+    // Hide image query
+    jQuery( &quot;#wpp_ajax_image_query_cancel&quot; ).click( function () {
+      jQuery( &quot;#wpp_ajax_image_result&quot; ).hide();
+      jQuery( this ).hide();
+    } );
+
+    // Check plugin updates
+    jQuery( &quot;#wpp_ajax_check_plugin_updates&quot; ).click( function () {
+      jQuery( &#x27;.plugin_status&#x27; ).remove();
+      jQuery.post( ajaxurl, {
+        action: &#x27;wpp_ajax_check_plugin_updates&#x27;
+      }, function ( data ) {
+        message = &quot;&lt;div class=&#x27;plugin_status updated fade&#x27;&gt;&lt;p&gt;&quot; + data + &quot;&lt;/p&gt;&lt;/div&gt;&quot;;
+        jQuery( message ).insertAfter( &quot;h2&quot; );
+      } );
+    } );
+
+    /** Clear Cache */
+    jQuery( &quot;#wpp_clear_cache&quot; ).click( function () {
+      jQuery( &#x27;.clear_cache_status&#x27; ).remove();
+      jQuery.post( ajaxurl, {
+        action: &#x27;wpp_ajax_clear_cache&#x27;
+      }, function ( data ) {
+        message = &quot;&lt;div class=&#x27;clear_cache_status updated fade&#x27;&gt;&lt;p&gt;&quot; + data + &quot;&lt;/p&gt;&lt;/div&gt;&quot;;
+        jQuery( message ).insertAfter( &quot;h2&quot; );
+      } );
+    } );
+
+    // Revalidate all addresses
+    jQuery( &quot;#wpp_ajax_revalidate_all_addresses&quot; ).click( function () {
+
+      jQuery( this ).val( &#x27;Processing...&#x27; );
+      jQuery( this ).attr( &#x27;disabled&#x27;, true );
+      jQuery( &#x27;.address_revalidation_status&#x27; ).remove();
+
+      jQuery.post( ajaxurl, {
+        action: &#x27;wpp_ajax_revalidate_all_addresses&#x27;
+      }, function ( data ) {
+
+        jQuery( &quot;#wpp_ajax_revalidate_all_addresses&quot; ).val( &#x27;Revalidate again&#x27; );
+        jQuery( &quot;#wpp_ajax_revalidate_all_addresses&quot; ).attr( &#x27;disabled&#x27;, false );
+
+        if ( data.success == &#x27;true&#x27; )
+          message = &quot;&lt;div class=&#x27;address_revalidation_status updated fade&#x27;&gt;&lt;p&gt;&quot; + data.message + &quot;&lt;/p&gt;&lt;/div&gt;&quot;; else
+          message = &quot;&lt;div class=&#x27;address_revalidation_status error fade&#x27;&gt;&lt;p&gt;&quot; + data.message + &quot;&lt;/p&gt;&lt;/div&gt;&quot;;
+
+        jQuery( message ).insertAfter( &quot;h2&quot; );
+      }, &#x27;json&#x27; );
+    } );
+
+    // Show property query
+    jQuery( &quot;#wpp_ajax_property_query&quot; ).click( function () {
+
+      var property_id = jQuery( &quot;#wpp_property_class_id&quot; ).val();
+
+      jQuery( &quot;#wpp_ajax_property_result&quot; ).html( &quot;&quot; );
+
+      jQuery.post( ajaxurl, {
+        action: &#x27;wpp_ajax_property_query&#x27;,
+        property_id: property_id
+      }, function ( data ) {
+        jQuery( &quot;#wpp_ajax_property_result&quot; ).show();
+        jQuery( &quot;#wpp_ajax_property_result&quot; ).html( data );
+        jQuery( &quot;#wpp_ajax_property_query_cancel&quot; ).show();
+
+      } );
+
+    } );
+
+    //** Mass set property type */
+    jQuery( &quot;#wpp_ajax_max_set_property_type&quot; ).click( function () {
+
+      if ( !confirm( &quot;&lt;?php _e(&#x27;You are about to set ALL your properties to the selected property type. Are you sure?&#x27;, &#x27;wpp&#x27;); ?&gt;&quot; ) ) {
+        return;
+      }
+
+      var property_type = jQuery( &quot;#wpp_ajax_max_set_property_type_type&quot; ).val();
+
+      jQuery.post( ajaxurl, {
+        action: &#x27;wpp_ajax_max_set_property_type&#x27;,
+        property_type: property_type
+      }, function ( data ) {
+        jQuery( &quot;#wpp_ajax_max_set_property_type_result&quot; ).show();
+        jQuery( &quot;#wpp_ajax_max_set_property_type_result&quot; ).html( data );
+      } );
+
+    } );
+
+    // Show image data
+    jQuery( &quot;#wpp_ajax_image_query&quot; ).click( function () {
+
+      var image_id = jQuery( &quot;#wpp_image_id&quot; ).val();
+
+      jQuery( &quot;#wpp_ajax_image_result&quot; ).html( &quot;&quot; );
+
+      jQuery.post( ajaxurl, {
+        action: &#x27;wpp_ajax_image_query&#x27;,
+        image_id: image_id
+      }, function ( data ) {
+        jQuery( &quot;#wpp_ajax_image_result&quot; ).show();
+        jQuery( &quot;#wpp_ajax_image_result&quot; ).html( data );
+        jQuery( &quot;#wpp_ajax_image_query_cancel&quot; ).show();
+
+      } );
+
+    } );
+
+    /** Show property query */
+    jQuery( &quot;#wpp_check_premium_updates&quot; ).click( function () {
+      jQuery( &quot;#wpp_plugins_ajax_response&quot; ).hide();
+      jQuery.post( ajaxurl, {
+        action: &#x27;wpp_ajax_check_plugin_updates&#x27;
+      }, function ( data ) {
+        jQuery( &quot;#wpp_plugins_ajax_response&quot; ).show();
+        jQuery( &quot;#wpp_plugins_ajax_response&quot; ).html( data );
+      } );
+    } );
+
+  } );
+
+  /* Modifies UI to reflect Default Property Page selection */
+  function wpp_setup_default_property_page () {
+    var selection = jQuery( &quot;#wpp_settings_base_slug&quot; ).val();
+
+    /* Default Property Page is dynamic. */
+    if ( selection == &quot;property&quot; ) {
+      jQuery( &quot;.wpp_non_property_page_settings&quot; ).hide();
+      jQuery( &quot;.wpp_non_property_page_settings input[type=checkbox]&quot; ).attr( &quot;checked&quot;, false );
+      jQuery( &quot;.wpp_non_property_page_settings input[type=checkbox]&quot; ).attr( &quot;disabled&quot;, true );
+    } else {
+      jQuery( &quot;.wpp_non_property_page_settings&quot; ).show();
+      jQuery( &quot;.wpp_non_property_page_settings input[type=checkbox]&quot; ).attr( &quot;disabled&quot;, false );
+    }
+
+  }
+ &lt;/script&gt;
+
+&lt;div class=&quot;wrap &lt;?php echo implode( &#x27; &#x27;, $wrapper_classes ); ?&gt;&quot;&gt;
+&lt;?php screen_icon(); ?&gt;
+&lt;h2 class=&#x27;wpp_settings_page_header&#x27;&gt;&lt;?php echo $wp_properties[ &#x27;labels&#x27; ][ &#x27;name&#x27; ] . &#x27; &#x27; . __( &#x27;Settings&#x27;, &#x27;wpp&#x27; ) ?&gt;
+  &lt;div class=&quot;wpp_fb_like&quot;&gt;
+  &lt;div class=&quot;fb-like&quot; data-href=&quot;https://www.facebook.com/wpproperty&quot; data-send=&quot;false&quot; data-layout=&quot;button_count&quot; data-width=&quot;90&quot; data-show-faces=&quot;false&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/h2&gt;
+
+&lt;?php if ( isset( $wp_messages[ &#x27;error&#x27; ] ) &amp;&amp; $wp_messages[ &#x27;error&#x27; ] ): ?&gt;
+  &lt;div class=&quot;error&quot;&gt;
+  &lt;?php foreach ($wp_messages[ &#x27;error&#x27; ] as $error_message): ?&gt;
+    &lt;p&gt;&lt;?php echo $error_message; ?&gt;
+      &lt;?php endforeach; ?&gt;
+&lt;/div&gt;
+&lt;?php endif; ?&gt;
+
+&lt;?php if ( isset( $wp_messages[ &#x27;notice&#x27; ] ) &amp;&amp; $wp_messages[ &#x27;notice&#x27; ] ): ?&gt;
+  &lt;div class=&quot;updated fade&quot;&gt;
+  &lt;?php foreach ($wp_messages[ &#x27;notice&#x27; ] as $notice_message): ?&gt;
+    &lt;p&gt;&lt;?php echo $notice_message; ?&gt;
+      &lt;?php endforeach; ?&gt;
+&lt;/div&gt;
+&lt;?php endif; ?&gt;
+
+&lt;form method=&quot;post&quot; action=&quot;&lt;?php echo admin_url( &#x27;edit.php?post_type=property&amp;page=property_settings&#x27; ); ?&gt;&quot; enctype=&quot;multipart/form-data&quot;/&gt;
+&lt;?php wp_nonce_field( &#x27;wpp_setting_save&#x27; ); ?&gt;
+
+&lt;div id=&quot;wpp_settings_tabs&quot; class=&quot;wpp_tabs clearfix&quot;&gt;
+  &lt;ul class=&quot;tabs&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;#tab_main&quot;&gt;&lt;?php _e( &#x27;Main&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#tab_display&quot;&gt;&lt;?php _e( &#x27;Display&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;?php
+    if ( is_array( $wp_properties[ &#x27;available_features&#x27; ] ) ) {
+
+      $wpp_plugin_settings_nav = apply_filters( &#x27;wpp_settings_nav&#x27;, array() );
+
+      foreach ( $wp_properties[ &#x27;available_features&#x27; ] as $plugin ) {
+        if ( @$plugin[ &#x27;status&#x27; ] == &#x27;disabled&#x27; ) {
+          unset( $wpp_plugin_settings_nav[ $plugin ] );
+        }
+      }
+
+      if ( is_array( $wpp_plugin_settings_nav ) ) {
+        foreach ( $wpp_plugin_settings_nav as $nav ) {
+          echo &quot;&lt;li&gt;&lt;a href=&#x27;#tab_{$nav[&#x27;slug&#x27;]}&#x27;&gt;{$nav[&#x27;title&#x27;]}&lt;/a&gt;&lt;/li&gt;\n&quot;;
+        }
+      }
+    }
+    ?&gt;
+
+    &lt;?php if ( count( $wp_properties[ &#x27;available_features&#x27; ] ) &gt; 0 ): ?&gt;
+      &lt;li&gt;&lt;a href=&quot;#tab_plugins&quot;&gt;&lt;?php _e( &#x27;Premium Features&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;?php endif; ?&gt;
+    &lt;li&gt;&lt;a href=&quot;#tab_troubleshooting&quot;&gt;&lt;?php _e( &#x27;Help&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/a&gt;&lt;/li&gt;
+
+
+  &lt;/ul&gt;
+
+  &lt;div id=&quot;tab_main&quot;&gt;
+
+    &lt;?php do_action( &#x27;wpp_settings_main_top&#x27;, $wp_properties ); ?&gt;
+
+    &lt;table class=&quot;form-table&quot;&gt;
+
+    &lt;tr&gt;
+      &lt;th&gt;&lt;?php _e( &#x27;Feature Updates&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/th&gt;
+      &lt;td&gt;
+
+        &lt;p id=&quot;wpp_plugins_ajax_response&quot; class=&quot;hidden&quot;&gt;&lt;/p&gt;
+
+        &lt;div class=&quot;wpp_settings_block&quot;&gt;
+          &lt;input type=&quot;button&quot; value=&quot;&lt;?php _e( &#x27;Check Updates&#x27;, &#x27;wpp&#x27; ); ?&gt;&quot; id=&quot;wpp_ajax_check_plugin_updates&quot;/&gt;
+          &lt;?php _e( &#x27;to download, or update, all premium features purchased for this domain.&#x27;, &#x27;wpp&#x27; ); ?&gt;
+        &lt;/div&gt;
+
+        &lt;?php /* if( get_option(&#x27;ud_api_key&#x27;) ) { ?&gt;
+        &lt;div class=&quot;wpp_settings_block&quot;&gt;
+          &lt;label&gt;&lt;?php _e(&#x27;If a feature or service requires an API Key, you may change it here:&#x27;,&#x27;wpp&#x27;);?&gt;
+          &lt;input size=&quot;70&quot; type=&quot;text&quot; readonly=&quot;true&quot; value=&quot;&lt;?php echo get_option(&#x27;ud_api_key&#x27;); ?&gt;&quot; /&gt;
+          &lt;/label&gt;
+        &lt;/div&gt;
+        &lt;?php } */
+        ?&gt;
+
+      &lt;/td&gt;
+    &lt;/tr&gt;
+
+      &lt;tr&gt;
+      &lt;th&gt;&lt;?php _e( &#x27;Options&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/th&gt;
+      &lt;td&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;?php echo WPP_F::checkbox( &quot;name=wpp_settings[configuration][include_in_regular_search_results]&amp;label=&quot; . sprintf( __( &#x27;Include %1s in regular search results.&#x27;, &#x27;wpp&#x27; ), $object_label[ &#x27;plural&#x27; ] ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;include_in_regular_search_results&#x27; ] ); ?&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;?php echo WPP_F::checkbox( &quot;name=wpp_settings[configuration][do_not_automatically_regenerate_thumbnails]&amp;label=&quot; . __( &#x27;Disable &quot;on-the-fly&quot; image regeneration.&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;do_not_automatically_regenerate_thumbnails&#x27; ] ); ?&gt;&lt;/li&gt;
+          &lt;?php /* &lt;li&gt;&lt;?php echo WPP_F::checkbox(&quot;name=wpp_settings[configuration][do_not_automatically_geo_validate_on_property_view]&amp;label=&quot; . __(&#x27;Disable front-end &quot;on-the-fly&quot; address validation.&#x27;, &#x27;wpp&#x27;), $wp_properties[&#x27;configuration&#x27;][&#x27;do_not_automatically_geo_validate_on_property_view&#x27;]); ?&gt;&lt;/li&gt; */ ?&gt;
+          &lt;li&gt;&lt;?php echo WPP_F::checkbox( &quot;name=wpp_settings[configuration][auto_delete_attachments]&amp;label=&quot; . __( &#x27;Automatically delete all property images and attachments when a property is deleted.&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;auto_delete_attachments&#x27; ] ); ?&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+      &lt;th&gt;&lt;?php printf( __( &#x27;Default %1s Page&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;labels&#x27; ][ &#x27;name&#x27; ] ); ?&gt;&lt;/th&gt;
+      &lt;td&gt;
+
+        &lt;div class=&quot;must_have_permalinks&quot;&gt;
+          &lt;select name=&quot;wpp_settings[configuration][base_slug]&quot; id=&quot;wpp_settings_base_slug&quot;&gt;
+            &lt;option &lt;?php selected( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;base_slug&#x27; ], &#x27;property&#x27; ); ?&gt; value=&quot;property&quot;&gt;&lt;?php _e( &#x27;Property (Default)&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/option&gt;
+            &lt;?php foreach ( get_pages() as $page ): ?&gt;
+              &lt;option &lt;?php selected( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;base_slug&#x27; ], $page-&gt;post_name ); ?&gt; value=&quot;&lt;?php echo $page-&gt;post_name; ?&gt;&quot;&gt;&lt;?php echo $page-&gt;post_title; ?&gt;&lt;/option&gt;
+            &lt;?php endforeach; ?&gt;
+          &lt;/select&gt;
+          &lt;span wpp_scroll_to=&quot;h3.default_property_page&quot; class=&quot;wpp_link wpp_toggle_contextual_help&quot;&gt;&lt;?php _e( &#x27;What is this?&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;must_not_have_permalinks&quot;&gt;
+          &lt;p class=&quot;description&quot;&gt;&lt;?php printf( __( &#x27;You must have permalinks enabled to change the Default %1s page.&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;labels&#x27; ][ &#x27;name&#x27; ] ); ?&gt;&lt;/p&gt;
+        &lt;/div&gt;
+
+      &lt;/td&gt;
+    &lt;/tr&gt;
+
+
+    &lt;tr class=&quot;wpp_non_property_page_settings hidden&quot;&gt;
+      &lt;th&gt;&amp;nbsp;&lt;/th&gt;
+      &lt;td&gt;
+        &lt;ul&gt;
+          &lt;li&gt;
+            &lt;?php echo WPP_F::checkbox( &#x27;name=wpp_settings[configuration][automatically_insert_overview]&amp;label=&#x27; . __( &#x27;Automatically overwrite this page\&#x27;s content with [property_overview].&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;automatically_insert_overview&#x27; ] ); ?&gt;
+          &lt;/li&gt;
+          &lt;li class=&quot;wpp_wpp_settings_configuration_do_not_override_search_result_page_row &lt;?php if ( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;automatically_insert_overview&#x27; ] == &#x27;true&#x27; ) echo &quot; hidden &quot;; ?&gt;&quot;&gt;
+            &lt;?php echo WPP_F::checkbox( &quot;name=wpp_settings[configuration][do_not_override_search_result_page]&amp;label=&quot; . __( &#x27;When showing property search results, don\&#x27;t override the page content with [property_overview].&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;do_not_override_search_result_page&#x27; ] ); ?&gt;
+            &lt;div class=&quot;description&quot;&gt;&lt;?php _e( &#x27;If checked, be sure to include [property_overview] somewhere in the content, or no properties will be displayed.&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/div&gt;
+          &lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+      &lt;th&gt;&lt;?php printf( __( &#x27;Automatic Geolocation&#x27;, &#x27;wpp&#x27; ), WPP_F::property_label() ); ?&gt;&lt;/th&gt;
+      &lt;td&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;?php _e( &#x27;Attribute to use for physical addresses:&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;?php echo WPP_F::draw_attribute_dropdown( &quot;name=wpp_settings[configuration][address_attribute]&amp;selected={$wp_properties[ &#x27;configuration&#x27; ][&#x27;address_attribute&#x27;]}&quot; ); ?&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;?php _e( &#x27;Localize addresses in:&#x27;, &#x27;wpp&#x27; ); ?&gt; &lt;?php echo WPP_F::draw_localization_dropdown( &quot;name=wpp_settings[configuration][google_maps_localization]&amp;selected={$wp_properties[ &#x27;configuration&#x27; ][&#x27;google_maps_localization&#x27;]}&quot; ); ?&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+      &lt;th&gt;&lt;?php _e( &#x27;Styles and Scripts&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/th&gt;
+      &lt;td&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;?php echo $using_custom_css ? WPP_F::checkbox( &quot;name=wpp_settings[configuration][autoload_css]&amp;label=&quot; . __( &#x27;Load default CSS. If unchecked, the wp-properties.css in your theme folder will not be loaded.&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;autoload_css&#x27; ] ) : WPP_F::checkbox( &quot;name=wpp_settings[configuration][autoload_css]&amp;label=&quot; . __( &#x27;Load default CSS.&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;autoload_css&#x27; ] ); ?&gt;&lt;/li&gt;
+
+          &lt;?php if ( WPP_F::has_theme_specific_stylesheet() ) { ?&gt;
+            &lt;li&gt;
+                 &lt;?php echo WPP_F::checkbox( &quot;name=wpp_settings[configuration][do_not_load_theme_specific_css]&amp;label=&quot; . __( &#x27;Do not load theme-specific stylesheet.&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;do_not_load_theme_specific_css&#x27; ] ); ?&gt;
+              &lt;div class=&quot;description&quot;&gt;&lt;?php _e( &#x27;This version of WP-Property has a stylesheet made specifically for the theme you are using.&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/div&gt;
+                 &lt;/li&gt;
+            &lt;/li&gt;
+          &lt;?php } /* WPP_F::has_theme_specific_stylesheet() */ ?&gt;
+
+          &lt;li&gt;&lt;?php echo WPP_F::checkbox( &quot;name=wpp_settings[configuration][load_scripts_everywhere]&amp;label=&quot; . __( &#x27;Load WP-Property scripts on all front-end pages.&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;load_scripts_everywhere&#x27; ] ); ?&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+
+      &lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+      &lt;th&gt;&lt;?php _e( &#x27;Default Phone Number&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/th&gt;
+      &lt;td&gt;&lt;?php echo WPP_F::input( &quot;name=phone_number&amp;label=&quot; . __( &#x27;Phone number to use when a property-specific phone number is not specified.&#x27;, &#x27;wpp&#x27; ) . &quot;&amp;group=wpp_settings[configuration]&amp;style=width: 200px;&quot;, $wp_properties[ &#x27;configuration&#x27; ][ &#x27;phone_number&#x27; ] ); ?&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+
+
+      &lt;?php do_action( &#x27;wpp_settings_main_tab_bottom&#x27;, $wp_properties ); ?&gt;
+    &lt;/table&gt;
+
+
+  &lt;/div&gt;
+
+  &lt;div id=&quot;tab_display&quot;&gt;
+
+    &lt;table class=&quot;form-table&quot;&gt;
+
+    &lt;tr&gt;
+      &lt;th&gt;&lt;?php _e( &#x27;Image Sizes&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/th&gt;
+      &lt;td&gt;
+        &lt;p&gt;&lt;?php _e( &#x27;Image sizes used throughout the plugin.&#x27;, &#x27;wpp&#x27; ); ?&gt; &lt;/p&gt;
+
+          &lt;table id=&quot;wpp_image_sizes&quot; class=&quot;ud_ui_dynamic_table widefat&quot;&gt;
+            &lt;thead&gt;
+              &lt;tr&gt;
+                &lt;th&gt;&lt;?php _e( &#x27;Slug&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/th&gt;
+                &lt;th&gt;&lt;?php _e( &#x27;Width&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/th&gt;
+                &lt;th&gt;&lt;?php _e( &#x27;Height&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/th&gt;
+                &lt;th&gt;&amp;nbsp;&lt;/th&gt;
+              &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+          &lt;?php
+          $wpp_image_sizes = $wp_properties[ &#x27;image_sizes&#x27; ];
+
+          foreach ( get_intermediate_image_sizes() as $slug ):
+
+            $slug = trim( $slug );
+
+            // We return all, including images with zero sizes, to avoid default data overriding what we save
+            $image_dimensions = WPP_F::image_sizes( $slug, &quot;return_all=true&quot; );
+
+            // Skip images w/o dimensions
+            if ( !$image_dimensions )
+              continue;
+
+            // Disable if WP not a WPP image size
+            if ( @!is_array( $wpp_image_sizes[ $slug ] ) )
+              $disabled = true;
+            else
+              $disabled = false;
+
+            if ( !$disabled ):
+              ?&gt;
+              &lt;tr class=&quot;wpp_dynamic_table_row&quot; slug=&quot;&lt;?php echo $slug; ?&gt;&quot;&gt;
+              &lt;td class=&quot;wpp_slug&quot;&gt;
+                &lt;input class=&quot;slug_setter slug wpp_slug_can_be_empty&quot; type=&quot;text&quot; value=&quot;&lt;?php echo $slug; ?&gt;&quot;/&gt;
+              &lt;/td&gt;
+              &lt;td class=&quot;wpp_width&quot;&gt;
+                &lt;input type=&quot;text&quot; name=&quot;wpp_settings[image_sizes][&lt;?php echo $slug; ?&gt;][width]&quot; value=&quot;&lt;?php echo $image_dimensions[ &#x27;width&#x27; ]; ?&gt;&quot;/&gt;
+              &lt;/td&gt;
+              &lt;td class=&quot;wpp_height&quot;&gt;
+                &lt;input type=&quot;text&quot; name=&quot;wpp_settings[image_sizes][&lt;?php echo $slug; ?&gt;][height]&quot; value=&quot;&lt;?php echo $image_dimensions[ &#x27;height&#x27; ]; ?&gt;&quot;/&gt;
+              &lt;/td&gt;
+              &lt;td&gt;&lt;span class=&quot;wpp_delete_row wpp_link&quot;&gt;&lt;?php _e( &#x27;Delete&#x27;, &#x27;wpp&#x27; ) ?&gt;&lt;/span&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+
+            &lt;?php else: ?&gt;
+              &lt;tr&gt;
+              &lt;td&gt;
+                &lt;div class=&quot;wpp_permanent_image&quot;&gt;&lt;?php echo $slug; ?&gt;&lt;/div&gt;
+              &lt;/td&gt;
+              &lt;td&gt;
+                &lt;div class=&quot;wpp_permanent_image&quot;&gt;&lt;?php echo $image_dimensions[ &#x27;width&#x27; ]; ?&gt;&lt;/div&gt;
+              &lt;/td&gt;
+              &lt;td&gt;
+                &lt;div class=&quot;wpp_permanent_image&quot;&gt;&lt;?php echo $image_dimensions[ &#x27;height&#x27; ]; ?&gt;&lt;/div&gt;
+              &lt;/td&gt;
+              &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+            &lt;/tr&gt;
+
+            &lt;?php endif; ?&gt;
+
+
+          &lt;?php endforeach; ?&gt;
+
+            &lt;/tbody&gt;
+            &lt;tfoot&gt;
+              &lt;tr&gt;
+                &lt;td colspan=&#x27;4&#x27;&gt;&lt;input type=&quot;button&quot; class=&quot;wpp_add_row button-secondary&quot; value=&quot;&lt;?php _e( &#x27;Add Row&#x27;, &#x27;wpp&#x27; ) ?&gt;&quot;/&gt;&lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/tfoot&gt;
+          &lt;/table&gt;
+
+
+       &lt;/td&gt;
+    &lt;/tr&gt;
+
+
+
+
+    &lt;tr&gt;
+      &lt;th&gt;&lt;?php _e( &#x27;Overview Shortcode&#x27;, &#x27;wpp&#x27; ) ?&gt;&lt;/th&gt;
+      &lt;td&gt;
+        &lt;p&gt;
+        &lt;?php _e( &#x27;These are the settings for the [property_overview] shortcode.  The shortcode displays a list of all building / root properties.&lt;br /&gt;The display settings may be edited further by customizing the &lt;b&gt;wp-content/plugins/wp-properties/templates/property-overview.php&lt;/b&gt; file.  To avoid losing your changes during updates, create a &lt;b&gt;property-overview.php&lt;/b&gt; file in your template directory, which will be automatically loaded.&#x27;, &#x27;wpp&#x27; ) ?&gt;
+        &lt;/p&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;?php _e( &#x27;Thumbnail size:&#x27;, &#x27;wpp&#x27; ) ?&gt; &lt;?php WPP_F::image_sizes_dropdown( &quot;name=wpp_settings[configuration][property_overview][thumbnail_size]&amp;selected=&quot; . $wp_properties[ &#x27;configuration&#x27; ][ &#x27;property_overview&#x27; ][ &#x27;thumbnail_size&#x27; ] ); ?&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;?php echo WPP_F::checkbox( &#x27;name=wpp_settings[configuration][property_overview][show_children]&amp;label=&#x27; . __( &#x27;Show children properties.&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;property_overview&#x27; ][ &#x27;show_children&#x27; ] ); ?&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;?php echo WPP_F::checkbox( &#x27;name=wpp_settings[configuration][property_overview][fancybox_preview]&amp;label=&#x27; . __( &#x27;Show larger image of property when image is clicked using fancybox.&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;property_overview&#x27; ][ &#x27;fancybox_preview&#x27; ] ); ?&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;?php echo WPP_F::checkbox( &quot;name=wpp_settings[configuration][bottom_insert_pagenation]&amp;label=&quot; . __( &#x27;Show pagination on bottom of results.&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;bottom_insert_pagenation&#x27; ] ); ?&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;?php echo WPP_F::checkbox( &quot;name=wpp_settings[configuration][property_overview][add_sort_by_title]&amp;label=&quot; . __( &#x27;Add sorting by property\&#x27;s title.&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;property_overview&#x27; ][ &#x27;add_sort_by_title&#x27; ] ); ?&gt;&lt;/li&gt;
+          &lt;?php do_action( &#x27;wpp::settings::display::overview_shortcode&#x27; ); ?&gt;
+        &lt;/ul&gt;
+
+      &lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+      &lt;th&gt;&lt;?php _e( &#x27;Property Page&#x27;, &#x27;wpp&#x27; ) ?&gt;&lt;/th&gt;
+      &lt;td&gt;
+        &lt;p&gt;&lt;?php _e( &#x27;These are the settings for the [property_overview] shortcode.  The shortcode displays a list of all building / root properties.&lt;br /&gt; The display settings may be edited further by customizing the &lt;b&gt;wp-content/plugins/wp-properties/templates/property.php&lt;/b&gt; file.  To avoid losing your changes during updates, create a &lt;b&gt;property.php&lt;/b&gt; file in your template directory, which will be automatically loaded.&#x27;, &#x27;wpp&#x27; ) ?&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;?php echo WPP_F::checkbox( &quot;name=wpp_settings[configuration][property_overview][sort_stats_by_groups]&amp;label=&quot; . __( &#x27;Sort property stats by groups.&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;property_overview&#x27; ][ &#x27;sort_stats_by_groups&#x27; ] ); ?&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;?php echo WPP_F::checkbox( &quot;name=wpp_settings[configuration][property_overview][show_true_as_image]&amp;label=&quot; . sprintf( __( &#x27;Show Checkboxed Image instead of &quot;%s&quot; and hide &quot;%s&quot; for %s/%s values&#x27;, &#x27;wpp&#x27; ), __( &#x27;Yes&#x27;, &#x27;wpp&#x27; ), __( &#x27;No&#x27;, &#x27;wpp&#x27; ), __( &#x27;Yes&#x27;, &#x27;wpp&#x27; ), __( &#x27;No&#x27;, &#x27;wpp&#x27; ) ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;property_overview&#x27; ][ &#x27;show_true_as_image&#x27; ] ); ?&gt;&lt;/li&gt;
+          &lt;?php do_action( &#x27;wpp_settings_page_property_page&#x27; ); ?&gt;
+        &lt;/ul&gt;
+
+      &lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+      &lt;th&gt;&lt;?php _e( &#x27;Google Maps&#x27;, &#x27;wpp&#x27; ) ?&gt;&lt;/th&gt;
+      &lt;td&gt;
+
+        &lt;ul&gt;
+          &lt;li&gt;&lt;?php _e( &#x27;Map Thumbnail Size:&#x27;, &#x27;wpp&#x27; ); ?&gt; &lt;?php WPP_F::image_sizes_dropdown( &quot;name=wpp_settings[configuration][single_property_view][map_image_type]&amp;selected=&quot; . $wp_properties[ &#x27;configuration&#x27; ][ &#x27;single_property_view&#x27; ][ &#x27;map_image_type&#x27; ] ); ?&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;?php _e( &#x27;Map Zoom Level:&#x27;, &#x27;wpp&#x27; ); ?&gt; &lt;?php echo WPP_F::input( &quot;name=wpp_settings[configuration][gm_zoom_level]&amp;style=width: 30px;&quot;, $wp_properties[ &#x27;configuration&#x27; ][ &#x27;gm_zoom_level&#x27; ] ); ?&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;?php _e( &#x27;Custom Latitude Coordinate&#x27;, &#x27;wpp&#x27; ); ?&gt;
+            : &lt;?php echo WPP_F::input( &quot;name=wpp_settings[custom_coords][latitude]&amp;style=width: 100px;&quot;, $wp_properties[ &#x27;custom_coords&#x27; ][ &#x27;latitude&#x27; ] ); ?&gt;
+            &lt;span class=&quot;description&quot;&gt;&lt;?php printf( __( &#x27;Default is &quot;%s&quot;&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;default_coords&#x27; ][ &#x27;latitude&#x27; ] ); ?&gt;&lt;/span&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;?php _e( &#x27;Custom Longitude Coordinate&#x27;, &#x27;wpp&#x27; ); ?&gt;
+            : &lt;?php echo WPP_F::input( &quot;name=wpp_settings[custom_coords][longitude]&amp;style=width: 100px;&quot;, $wp_properties[ &#x27;custom_coords&#x27; ][ &#x27;longitude&#x27; ] ); ?&gt;
+            &lt;span class=&quot;description&quot;&gt;&lt;?php printf( __( &#x27;Default is &quot;%s&quot;&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;default_coords&#x27; ][ &#x27;longitude&#x27; ] ); ?&gt;&lt;/span&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;?php echo WPP_F::checkbox( &quot;name=wpp_settings[configuration][google_maps][show_true_as_image]&amp;label=&quot; . sprintf( __( &#x27;Show Checkboxed Image instead of &quot;%s&quot; and hide &quot;%s&quot; for %s/%s values&#x27;, &#x27;wpp&#x27; ), __( &#x27;Yes&#x27;, &#x27;wpp&#x27; ), __( &#x27;No&#x27;, &#x27;wpp&#x27; ), __( &#x27;Yes&#x27;, &#x27;wpp&#x27; ), __( &#x27;No&#x27;, &#x27;wpp&#x27; ) ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;google_maps&#x27; ][ &#x27;show_true_as_image&#x27; ] ); ?&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;p&gt;&lt;?php _e( &#x27;Attributes to display in popup after a property on a map is clicked.&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/p&gt;
+        &lt;div class=&quot;wp-tab-panel&quot;&gt;
+        &lt;ul&gt;
+
+          &lt;li&gt;&lt;?php echo WPP_F::checkbox( &quot;name=wpp_settings[configuration][google_maps][infobox_settings][show_property_title]&amp;label=&quot; . __( &#x27;Show Property Title&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;google_maps&#x27; ][ &#x27;infobox_settings&#x27; ][ &#x27;show_property_title&#x27; ] ); ?&gt;&lt;/li&gt;
+
+          &lt;?php foreach ( $wp_properties[ &#x27;property_stats&#x27; ] as $attrib_slug =&gt; $attrib_title ): ?&gt;
+            &lt;li&gt;&lt;?php
+              $checked = ( in_array( $attrib_slug, $wp_properties[ &#x27;configuration&#x27; ][ &#x27;google_maps&#x27; ][ &#x27;infobox_attributes&#x27; ] ) ? true : false );
+              echo WPP_F::checkbox( &quot;id=google_maps_attributes_{$attrib_title}&amp;name=wpp_settings[configuration][google_maps][infobox_attributes][]&amp;label=$attrib_title&amp;value={$attrib_slug}&quot;, $checked );
+              ?&gt;&lt;/li&gt;
+          &lt;?php endforeach; ?&gt;
+
+          &lt;li&gt;&lt;?php echo WPP_F::checkbox( &quot;name=wpp_settings[configuration][google_maps][infobox_settings][show_direction_link]&amp;label=&quot; . __( &#x27;Show Directions Link&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;google_maps&#x27; ][ &#x27;infobox_settings&#x27; ][ &#x27;show_direction_link&#x27; ] ); ?&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;?php echo WPP_F::checkbox( &quot;name=wpp_settings[configuration][google_maps][infobox_settings][do_not_show_child_properties]&amp;label=&quot; . __( &#x27;Do not show a list of child properties in Infobox. &#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;google_maps&#x27; ][ &#x27;infobox_settings&#x27; ][ &#x27;do_not_show_child_properties&#x27; ] ); ?&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+      &lt;th&gt;&lt;?php _e( &#x27;Address Display&#x27;, &#x27;wpp&#x27; ) ?&gt;&lt;/th&gt;
+      &lt;td&gt;
+
+
+        &lt;textarea name=&quot;wpp_settings[configuration][display_address_format]&quot; style=&quot;width: 70%;&quot;&gt;&lt;?php echo $wp_properties[ &#x27;configuration&#x27; ][ &#x27;display_address_format&#x27; ]; ?&gt;&lt;/textarea&gt;
+        &lt;br/&gt;
+        &lt;span class=&quot;description&quot;&gt;
+               &lt;?php _e( &#x27;Available tags:&#x27;, &#x27;wpp&#x27; ) ?&gt; [street_number] [street_name], [city], [state], [state_code], [county],  [country], [zip_code].
+        &lt;/span&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+      &lt;th&gt;&lt;?php _e( &#x27;Currency &amp; Numbers&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/th&gt;
+      &lt;td&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;?php echo WPP_F::input( &quot;name=currency_symbol&amp;label=&quot; . __( &#x27;Currency symbol.&#x27;, &#x27;wpp&#x27; ) . &quot;&amp;group=wpp_settings[configuration]&amp;style=width: 50px;&quot;, $wp_properties[ &#x27;configuration&#x27; ][ &#x27;currency_symbol&#x27; ] ); ?&gt;&lt;/li&gt;
+          &lt;li&gt;
+            &lt;?php _e( &#x27;Thousands separator symbol:&#x27;, &#x27;wpp&#x27; ); ?&gt;
+            &lt;select name=&quot;wpp_settings[configuration][thousands_sep]&quot;&gt;
+              &lt;option value=&quot;&quot;&gt; - &lt;/option&gt;
+              &lt;option value=&quot;.&quot; &lt;?php selected( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;thousands_sep&#x27; ], &#x27;.&#x27; ); ?&gt;&gt;&lt;?php _e( &#x27;. (period)&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/option&gt;
+              &lt;option value=&quot;,&quot; &lt;?php selected( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;thousands_sep&#x27; ], &#x27;,&#x27; ); ?&gt;&gt;&lt;?php _e( &#x27;, (comma)&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/option&gt;
+             &lt;/select&gt;
+             &lt;span class=&quot;description&quot;&gt;&lt;?php _e( &#x27;The character separating the 1 and the 5: $1&lt;b&gt;,&lt;/b&gt;500&#x27; ); ?&gt;&lt;/span&gt;
+
+          &lt;/li&gt;
+
+          &lt;li&gt;
+            &lt;?php _e( &#x27;Currency symbol placement:&#x27;, &#x27;wpp&#x27; ); ?&gt;
+            &lt;select name=&quot;wpp_settings[configuration][currency_symbol_placement]&quot;&gt;
+              &lt;option value=&quot;&quot;&gt; - &lt;/option&gt;
+              &lt;option value=&quot;before&quot; &lt;?php selected( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;currency_symbol_placement&#x27; ], &#x27;before&#x27; ); ?&gt;&gt;&lt;?php _e( &#x27;Before number&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/option&gt;
+              &lt;option value=&quot;after&quot; &lt;?php selected( $wp_properties[ &#x27;configuration&#x27; ][ &#x27;currency_symbol_placement&#x27; ], &#x27;after&#x27; ); ?&gt;&gt;&lt;?php _e( &#x27;After number&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/option&gt;
+             &lt;/select&gt;
+
+          &lt;/li&gt;
+
+          &lt;li&gt;
+            &lt;?php echo WPP_F::checkbox( &quot;name=wpp_settings[configuration][show_aggregated_value_as_average]&amp;label=&quot; . __( &#x27;Parent property\&#x27;s aggregated value should be set as average of children values. If not, - the aggregated value will be set as sum of children values.&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;show_aggregated_value_as_average&#x27; ] ); ?&gt;
+            &lt;br/&gt;&lt;span class=&quot;description&quot;&gt;&lt;?php _e( &#x27;Aggregated value is set only for numeric and currency attributes and can be updated ( set ) only on child property\&#x27;s saving.&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/span&gt;
+          &lt;/li&gt;
+
+       &lt;/ul&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+
+
+    &lt;tr&gt;
+      &lt;th&gt;
+        &lt;?php _e( &#x27;Admin Settings&#x27;, &#x27;wpp&#x27; ) ?&gt;
+      &lt;/th&gt;
+        &lt;td&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;?php _e( &#x27;Thumbnail size for property images displayed on Properties page: &#x27;, &#x27;wpp&#x27; ) ?&gt; &lt;?php WPP_F::image_sizes_dropdown( &quot;name=wpp_settings[configuration][admin_ui][overview_table_thumbnail_size]&amp;selected=&quot; . $wp_properties[ &#x27;configuration&#x27; ][ &#x27;admin_ui&#x27; ][ &#x27;overview_table_thumbnail_size&#x27; ] ); ?&gt;&lt;/li&gt;
+          &lt;li&gt;
+          &lt;?php echo WPP_F::checkbox( &quot;name=wpp_settings[configuration][completely_hide_hidden_attributes_in_admin_ui]&amp;label=&quot; . __( &#x27;Completely hide hidden attributes when editing properties.&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;configuration&#x27; ][ &#x27;completely_hide_hidden_attributes_in_admin_ui&#x27; ] ); ?&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;?php do_action( &#x27;wpp_settings_display_tab_bottom&#x27; ); ?&gt;
+
+    &lt;/table&gt;
+  &lt;/div&gt;
+
+
+
+  &lt;?php
+
+  foreach ( (array) $wpp_plugin_settings_nav as $nav ) {
+    echo &quot;&lt;div id=&#x27;tab_{$nav[&#x27;slug&#x27;]}&#x27;&gt;&quot;;
+    do_action( &quot;wpp_settings_content_{$nav[&#x27;slug&#x27;]}&quot; );
+    echo &quot;&lt;/div&gt;&quot;;
+  }
+
+  ?&gt;
+
+
+  &lt;?php if ( count( $wp_properties[ &#x27;available_features&#x27; ] ) &gt; 0 ): ?&gt;
+    &lt;div id=&quot;tab_plugins&quot;&gt;
+
+      &lt;table id=&quot;wpp_premium_feature_table&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;
+      &lt;?php foreach ( $wp_properties[ &#x27;available_features&#x27; ] as $plugin_slug =&gt; $plugin_data ): ?&gt;
+
+        &lt;input type=&quot;hidden&quot; name=&quot;wpp_settings[available_features][&lt;?php echo $plugin_slug; ?&gt;][title]&quot; value=&quot;&lt;?php echo $plugin_data[ &#x27;title&#x27; ]; ?&gt;&quot;/&gt;
+        &lt;input type=&quot;hidden&quot; name=&quot;wpp_settings[available_features][&lt;?php echo $plugin_slug; ?&gt;][tagline]&quot; value=&quot;&lt;?php echo $plugin_data[ &#x27;tagline&#x27; ]; ?&gt;&quot;/&gt;
+        &lt;input type=&quot;hidden&quot; name=&quot;wpp_settings[available_features][&lt;?php echo $plugin_slug; ?&gt;][image]&quot; value=&quot;&lt;?php echo $plugin_data[ &#x27;image&#x27; ]; ?&gt;&quot;/&gt;
+        &lt;input type=&quot;hidden&quot; name=&quot;wpp_settings[available_features][&lt;?php echo $plugin_slug; ?&gt;][description]&quot; value=&quot;&lt;?php echo $plugin_data[ &#x27;description&#x27; ]; ?&gt;&quot;/&gt;
+
+        &lt;?php $installed = WPP_F::check_premium( $plugin_slug ); ?&gt;
+        &lt;?php $active = ( @$wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;disabled&#x27; ] != &#x27;false&#x27; ? true : false ); ?&gt;
+
+        &lt;?php if ( $installed ): ?&gt;
+          &lt;?php /* Do this to preserve settings after page save. */ ?&gt;
+          &lt;input type=&quot;hidden&quot; name=&quot;wpp_settings[installed_features][&lt;?php echo $plugin_slug; ?&gt;][disabled]&quot; value=&quot;&lt;?php echo $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;disabled&#x27; ]; ?&gt;&quot;/&gt;
+          &lt;input type=&quot;hidden&quot; name=&quot;wpp_settings[installed_features][&lt;?php echo $plugin_slug; ?&gt;][name]&quot; value=&quot;&lt;?php echo $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;name&#x27; ]; ?&gt;&quot;/&gt;
+          &lt;input type=&quot;hidden&quot; name=&quot;wpp_settings[installed_features][&lt;?php echo $plugin_slug; ?&gt;][version]&quot; value=&quot;&lt;?php echo $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;version&#x27; ]; ?&gt;&quot;/&gt;
+          &lt;input type=&quot;hidden&quot; name=&quot;wpp_settings[installed_features][&lt;?php echo $plugin_slug; ?&gt;][description]&quot; value=&quot;&lt;?php echo $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;description&#x27; ]; ?&gt;&quot;/&gt;
+        &lt;?php endif; ?&gt;
+
+
+        &lt;tr class=&quot;wpp_premium_feature_block&quot;&gt;
+
+          &lt;td valign=&quot;top&quot; class=&quot;wpp_premium_feature_image&quot;&gt;
+            &lt;a href=&quot;http://usabilitydynamics.com/products/wp-property/&quot;&gt;&lt;img src=&quot;&lt;?php echo $plugin_data[ &#x27;image&#x27; ]; ?&gt;&quot;/&gt;&lt;/a&gt;
+          &lt;/td&gt;
+
+          &lt;td valign=&quot;top&quot;&gt;
+            &lt;div class=&quot;wpp_box&quot;&gt;
+            &lt;div class=&quot;wpp_box_header&quot;&gt;
+              &lt;strong&gt;&lt;?php echo $plugin_data[ &#x27;title&#x27; ]; ?&gt;&lt;/strong&gt;
+              &lt;p&gt;&lt;?php echo $plugin_data[ &#x27;tagline&#x27; ]; ?&gt;
+                &lt;a href=&quot;https://usabilitydynamics.com/products/wp-property/premium/?wp_checkout_payment_domain=&lt;?php echo $this_domain; ?&gt;&quot;&gt;&lt;?php _e( &#x27;[purchase feature]&#x27;, &#x27;wpp&#x27; ) ?&gt;&lt;/a&gt;
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;wpp_box_content&quot;&gt;
+              &lt;p&gt;&lt;?php echo $plugin_data[ &#x27;description&#x27; ]; ?&gt;&lt;/p&gt;
+
+            &lt;/div&gt;
+
+            &lt;div class=&quot;wpp_box_footer clearfix&quot;&gt;
+              &lt;?php if ( $installed ) { ?&gt;
+
+                &lt;div class=&quot;alignleft&quot;&gt;
+                &lt;?php
+
+                if ( $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;needs_higher_wpp_version&#x27; ] == &#x27;true&#x27; ) {
+                  printf( __( &#x27;This feature is disabled because it requires WP-Property %1$s or higher.&#x27; ), $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;minimum_wpp_version&#x27; ] );
+                } else {
+                  echo WPP_F::checkbox( &quot;name=wpp_settings[installed_features][$plugin_slug][disabled]&amp;label=&quot; . __( &#x27;Disable plugin.&#x27;, &#x27;wpp&#x27; ), $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;disabled&#x27; ] );
+
+                  ?&gt;
+                  &lt;/div&gt;
+                  &lt;div class=&quot;alignright&quot;&gt;&lt;?php _e( &#x27;Feature installed, using version&#x27;, &#x27;wpp&#x27; ) ?&gt; &lt;?php echo $wp_properties[ &#x27;installed_features&#x27; ][ $plugin_slug ][ &#x27;version&#x27; ]; ?&gt;
+                    .&lt;/div&gt;
+                &lt;?php
+                }
+              } else {
+                $pr_link = &#x27;https://usabilitydynamics.com/products/wp-property/premium/&#x27;;
+                echo sprintf( __( &#x27;Please visit &lt;a href=&quot;%s&quot;&gt;UsabilityDynamics.com&lt;/a&gt; to purchase this feature.&#x27;, &#x27;wpp&#x27; ), $pr_link );
+              } ?&gt;
+            &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;?php endforeach; ?&gt;
+      &lt;/table&gt;
+
+  &lt;/div&gt;
+  &lt;?php endif; ?&gt;
+
+  &lt;div id=&quot;tab_troubleshooting&quot;&gt;
+    &lt;div class=&quot;wpp_inner_tab&quot;&gt;
+
+      &lt;div class=&quot;wpp_settings_block&quot;&gt;
+        &lt;label&gt;
+        &lt;?php _e( &#x27;If prompted for your domain name during a premium feature purchase, enter as appears here:&#x27;, &#x27;wpp&#x27; ); ?&gt;
+          &lt;input type=&quot;text&quot; readonly=&quot;true&quot; value=&quot;&lt;?php echo $this_domain; ?&gt;&quot; size=&quot;&lt;?php echo strlen( $this_domain ) + 10; ?&gt;&quot;/&gt;
+        &lt;/label&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;wpp_settings_block&quot;&gt;
+        &lt;?php _e( &quot;Restore Backup of WP-Property Configuration&quot;, &#x27;wpp&#x27; ); ?&gt;
+        : &lt;input name=&quot;wpp_settings[settings_from_backup]&quot; type=&quot;file&quot;/&gt;
+        &lt;a href=&quot;&lt;?php echo wp_nonce_url( &quot;edit.php?post_type=property&amp;page=property_settings&amp;wpp_action=download-wpp-backup&quot;, &#x27;download-wpp-backup&#x27; ); ?&gt;&quot;&gt;&lt;?php _e( &#x27;Download Backup of Current WP-Property Configuration.&#x27;, &#x27;wpp&#x27; ); ?&gt;&lt;/a&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;wpp_settings_block&quot;&gt;
+        &lt;?php $google_map_localizations = WPP_F::draw_localization_dropdown( &#x27;return_array=true&#x27; ); ?&gt;
+        &lt;?php _e( &#x27;Revalidate all addresses using&#x27;, &#x27;wpp&#x27; ); ?&gt;
+        &lt;b&gt;&lt;?php echo $google_map_localizations[ $wp_properties[ &#x27;configuration&#x27; ][ &#x27;google_maps_localization&#x27; ] ]; ?&gt;&lt;/b&gt; &lt;?php _e( &#x27;localization&#x27;, &#x27;wpp&#x27; ); ?&gt;
+        .
+         &lt;input type=&quot;button&quot; value=&quot;&lt;?php _e( &#x27;Revalidate&#x27;, &#x27;wpp&#x27; ); ?&gt;&quot; id=&quot;wpp_ajax_revalidate_all_addresses&quot;&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;wpp_settings_block&quot;&gt;&lt;?php _e( &#x27;Enter in the ID of the property you want to look up, and the class will be displayed below.&#x27;, &#x27;wpp&#x27; ) ?&gt;
+        &lt;input type=&quot;text&quot; id=&quot;wpp_property_class_id&quot;/&gt;
+        &lt;input type=&quot;button&quot; value=&quot;&lt;?php _e( &#x27;Lookup&#x27;, &#x27;wpp&#x27; ) ?&gt;&quot; id=&quot;wpp_ajax_property_query&quot;&gt; &lt;span id=&quot;wpp_ajax_property_query_cancel&quot; class=&quot;wpp_link hidden&quot;&gt;&lt;?php _e( &#x27;Cancel&#x27;, &#x27;wpp&#x27; ) ?&gt;&lt;/span&gt;
+        &lt;pre id=&quot;wpp_ajax_property_result&quot; class=&quot;wpp_class_pre hidden&quot;&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;wpp_settings_block&quot;&gt;&lt;?php _e( &#x27;Get property image data.&#x27;, &#x27;wpp&#x27; ) ?&gt;
+        &lt;label for=&quot;wpp_image_id&quot;&gt;&lt;?php _e( &#x27;Property ID:&#x27;, &#x27;wpp&#x27; ) ?&gt;&lt;/label&gt;
+        &lt;input type=&quot;text&quot; id=&quot;wpp_image_id&quot;/&gt;
+        &lt;input type=&quot;button&quot; value=&quot;&lt;?php _e( &#x27;Lookup&#x27;, &#x27;wpp&#x27; ) ?&gt;&quot; id=&quot;wpp_ajax_image_query&quot;&gt; &lt;span id=&quot;wpp_ajax_image_query_cancel&quot; class=&quot;wpp_link hidden&quot;&gt;&lt;?php _e( &#x27;Cancel&#x27;, &#x27;wpp&#x27; ) ?&gt;&lt;/span&gt;
+        &lt;pre id=&quot;wpp_ajax_image_result&quot; class=&quot;wpp_class_pre hidden&quot;&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;wpp_settings_block&quot;&gt;
+        &lt;?php _e( &#x27;Look up the &lt;b&gt;$wp_properties&lt;/b&gt; global settings array.  This array stores all the default settings, which are overwritten by database settings, and custom filters.&#x27;, &#x27;wpp&#x27; ) ?&gt;
+        &lt;input type=&quot;button&quot; value=&quot;&lt;?php _e( &#x27;Show $wp_properties&#x27;, &#x27;wpp&#x27; ) ?&gt;&quot; id=&quot;wpp_show_settings_array&quot;&gt; &lt;span id=&quot;wpp_show_settings_array_cancel&quot; class=&quot;wpp_link hidden&quot;&gt;&lt;?php _e( &#x27;Cancel&#x27;, &#x27;wpp&#x27; ) ?&gt;&lt;/span&gt;
+        &lt;pre id=&quot;wpp_show_settings_array_result&quot; class=&quot;wpp_class_pre hidden&quot;&gt;&lt;?php print_r( $wp_properties ); ?&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;wpp_settings_block&quot;&gt;
+        &lt;?php _e( &#x27;Clear WPP Cache. Some shortcodes and widgets use cache, so the good practice is clear it after widget, shortcode changes.&#x27;, &#x27;wpp&#x27; ) ?&gt;
+        &lt;input type=&quot;button&quot; value=&quot;&lt;?php _e( &#x27;Clear Cache&#x27;, &#x27;wpp&#x27; ) ?&gt;&quot; id=&quot;wpp_clear_cache&quot;&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;wpp_settings_block&quot;&gt;&lt;?php _e( &#x27;Set all properties to same property type:&#x27;, &#x27;wpp&#x27; ) ?&gt;
+        &lt;select id=&quot;wpp_ajax_max_set_property_type_type&quot;&gt;
+        &lt;?php foreach ( $wp_properties[ &#x27;property_types&#x27; ] as $p_slug =&gt; $p_label ) { ?&gt;
+          &lt;option value=&quot;&lt;?php echo $p_slug; ?&gt;&quot;&gt;&lt;?php echo $p_label; ?&gt;&lt;/option&gt;
+        &lt;?php } ?&gt;
+          &lt;input type=&quot;button&quot; value=&quot;&lt;?php _e( &#x27;Set&#x27;, &#x27;wpp&#x27; ) ?&gt;&quot; id=&quot;wpp_ajax_max_set_property_type&quot;&gt;
+        &lt;pre id=&quot;wpp_ajax_max_set_property_type_result&quot; class=&quot;wpp_class_pre hidden&quot;&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;wpp_settings_block&quot;&gt;
+        &lt;?php if ( function_exists( &#x27;memory_get_usage&#x27; ) ): ?&gt;
+          &lt;?php _e( &#x27;Memory Usage:&#x27;, &#x27;wpp&#x27; ); ?&gt; &lt;?php echo round( ( memory_get_usage() / 1048576 ), 2 ); ?&gt; megabytes.
+        &lt;?php endif; ?&gt;
+        &lt;?php if ( function_exists( &#x27;memory_get_peak_usage&#x27; ) ): ?&gt;
+          &lt;?php _e( &#x27;Peak Memory Usage:&#x27;, &#x27;wpp&#x27; ); ?&gt; &lt;?php echo round( ( memory_get_peak_usage() / 1048576 ), 2 ); ?&gt; megabytes.
+        &lt;?php endif; ?&gt;
+      &lt;/div&gt;
+
+      &lt;?php do_action( &#x27;wpp_settings_help_tab&#x27; ); ?&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+
+&lt;br class=&quot;cb&quot;/&gt;
+
+&lt;p class=&quot;wpp_save_changes_row&quot;&gt;
+&lt;input type=&quot;submit&quot; value=&quot;&lt;?php _e( &#x27;Save Changes&#x27;, &#x27;wpp&#x27; ); ?&gt;&quot; class=&quot;button-primary btn&quot; name=&quot;Submit&quot;&gt;
+ &lt;/p&gt;
+
+
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--fb--&gt;
+&lt;div id=&quot;fb-root&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;(function ( d, s, id ) {
+    var js, fjs = d.getElementsByTagName( s )[0];
+    if ( d.getElementById( id ) ) return;
+    js = d.createElement( s );
+    js.id = id;
+    js.src = &quot;//connect.facebook.net/en_US/all.js#xfbml=1&amp;appId=373515126019844&quot;;
+    fjs.parentNode.insertBefore( js, fjs );
+  }( document, &#x27;script&#x27;, &#x27;facebook-jssdk&#x27; ));&lt;/script&gt;
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{
+  "name": "WP-Property",
+  "version": "1.38.2",
+  "type": "wordpress-plugin",
+  "homepage": "http://github.com/UsabilityDynamics/wp-property",
+  "authors": [
+    {
+      "name": "Maxim Peshkov",
+      "email": "maxim.peshkov@usabilitydynamics.com",
+      "homepage": "http://usabilitydynamics.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Anton Korotkov",
+      "email": "anton.korotkov@usabilitydynamics.com",
+      "homepage": "http://usabilitydynamics.com",
+      "role": "Developer"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "usabilitydynamics/vendor",
+        "version": "0.1.0",
+        "dist": {
+          "url": "https://github.com/UsabilityDynamics/vendor/master.zip",
+          "type": "zip"
+        }
+      }
+    }
+  ],
+  "config": {
+    "vendor-dir": "vendor",
+    "component-dir": "js/vendor"
+  },
+  "require": {
+    "usabilitydynamics/vendor": "*",
+    "linkorb/jsmin-php": "*",
+    "lampjunkie/php-datatables": "*",
+    "tecnick.com/tcpdf": "*"
+  }
+}

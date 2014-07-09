@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>js/wpp.xmli.js - WP-Property</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="http://a3d72a45d111006ec192-ec5b80a12b0b09b4d52373336afb4254.r80.cf1.rackcdn.com/usability-dynamics.png" title="WP-Property"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.38.2</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/wpp.html">wpp</a></li>
+            
+                <li><a href="../classes/wpp.overview.html">wpp.overview</a></li>
+            
+                <li><a href="../classes/wpp.xmli.html">wpp.xmli</a></li>
+            
+                <li><a href="../classes/WPP_RETS.html">WPP_RETS</a></li>
+            
+                <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: js/wpp.xmli.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * XMLI Scripts
+ *
+ *
+ *
+ *
+ * @author: potanin@UD
+ * @date: 8/19/13
+ */
+
+
+// Ensure XMLI string object exist.
+wpp.strings = wpp.strings || {};
+
+// XMLI Instance Object.
+wpp.xmli = jQuery.extend({
+
+  settings: {
+    debug: true
+  },
+
+  /**
+   * Initializer.
+   *
+   */
+  ready: function ready() {
+    wpp.xmli.debug( &#x27;wpp.xmli.ready()&#x27; );
+
+    var import_hash = false;
+    var schedule_id;
+
+    wpp.xmli.refresh_dom();
+
+    jQuery( &quot;.wppi_delete_all_orphan_attachments&quot; ).click( function ( e ) {
+
+      var notice_container = jQuery( &#x27;.wppi_delete_all_orphan_attachments_result&#x27; ).show();
+
+      jQuery( notice_container ).html( &quot;Deleting all unattached images. You can close your browser, the operation will continue until completion.&quot; );
+
+      jQuery.post( ajaxurl, {
+        action: &#x27;wpp_property_import_handler&#x27;,
+        wpp_action: &#x27;delete_all_orphan_attachments&#x27;
+      }, function ( result ) {
+        if ( result &amp;&amp; result.success ) {
+          jQuery( notice_container ).html( result.ui );
+        } else {
+          jQuery( notice_container ).html( &#x27;An error occured.&#x27; );
+        }
+
+      }, &#x27;json&#x27; );
+
+    });
+
+    jQuery( &quot;#wpp_ajax_show_xml_imort_history&quot; ).click( function () {
+
+      jQuery( &quot;.wpp_ajax_show_xml_imort_history_result&quot; ).html( &quot;&quot; );
+
+      jQuery.post( ajaxurl, {
+        action: &#x27;wpp_ajax_show_xml_imort_history&#x27;
+      }, function ( data ) {
+        jQuery( &quot;.wpp_ajax_show_xml_imort_history_result&quot; ).show();
+        jQuery( &quot;.wpp_ajax_show_xml_imort_history_result&quot; ).html( data );
+
+      });
+    });
+
+    jQuery( &quot;.wpp_xi_sort_rules&quot; ).live( &quot;click&quot;, function () {
+
+      var list_wrapper = jQuery( &quot;#wpp_property_import_attribute_mapper&quot; );
+      var listitems = jQuery( &quot;.wpp_dynamic_table_row&quot;, list_wrapper ).get();
+
+      listitems.sort( function ( a, b ) {
+
+        var compA = jQuery( &quot;select.wpp_import_attribute_dropdown option:selected&quot;, a ).text();
+        var compB = jQuery( &quot;select.wpp_import_attribute_dropdown option:selected&quot;, b ).text();
+
+        if ( compA === undefined ) {
+          compA = 0;
+        } else {
+          compA = compA;
+        }
+
+        if ( compB === undefined ) {
+          compB = 0;
+        } else {
+          compB = compB;
+        }
+
+        var index = ( compA &lt; compB ) ? -1 : ( compA &gt; compB ) ? 1 : 0;
+        console.log( compA + &#x27; - &#x27; + compB + &#x27;: &#x27; + index );
+
+        return index;
+
+      } )
+
+      jQuery.each( listitems, function ( idx, itm ) {
+        list_wrapper.append( itm );
+      });
+
+    });
+
+    jQuery( &quot;#wpp_property_import_choose_root_element&quot; ).live( &quot;change&quot;, function () {
+      var value = jQuery( this ).val();
+      var fixed_value = value.replace( /&#x27;/g, &#x27;&quot;&#x27; );
+      jQuery( this ).val( fixed_value );
+    });
+
+    jQuery( &quot;.wpp_xi_advanced_setting input[type=checkbox]&quot; ).live( &quot;change&quot;, function () {
+      var wrapper = jQuery( this ).closest( &quot;.wpp_xi_advanced_setting&quot; );
+      if ( jQuery( this ).is( &quot;:checked&quot; ) ) {
+        jQuery( wrapper ).addClass( &quot;wpp_xi_enabld_row&quot; );
+      } else {
+        jQuery( wrapper ).removeClass( &quot;wpp_xi_enabld_row&quot; );
+      }
+
+      wpp.xmli.advanced_option_counter();
+
+    });
+
+    jQuery( &quot;.wpp_xi_advanced_setting input[type=text]&quot; ).live( &quot;change&quot;, function () {
+      var wrapper = jQuery( this ).closest( &quot;.wpp_xi_advanced_setting&quot; );
+      var value = jQuery( this ).val();
+
+      if ( value === &quot;&quot; || value === &#x27;0&#x27; ) {
+
+        /* If 0 blank out this value */
+        jQuery( this ).val( &#x27;&#x27; );
+
+        /* Check if all inputs are empty */
+        if ( jQuery( &quot;input:text[value != &#x27;&#x27; ]&quot;, wrapper ).length == 0 ) {
+          jQuery( wrapper ).removeClass( &#x27;wpp_xi_enabld_row&#x27; );
+        }
+
+      } else {
+        jQuery( wrapper ).addClass( &#x27;wpp_xi_enabld_row&#x27; );
+      }
+
+      wpp.xmli.advanced_option_counter();
+
+    });
+
+    jQuery( &#x27;.wpp_property_toggle_import_settings&#x27; ).live( &quot;click&quot;, function () {
+      jQuery( &quot;.wpp_property_import_settings&quot; ).toggle();
+      wpp.xmli.advanced_option_counter();
+    });
+
+    jQuery( &quot;.wpp_import_delete_row&quot; ).live( &quot;click&quot;, function () {
+      if ( !jQuery( &#x27;input[name^=&quot;wpp_property_import[map]&quot;]:checkbox:checked&#x27; ).length ) return false;
+      if ( !confirm( &#x27;Are you sure you want remove these items?&#x27; ) ) return false;
+      jQuery( &#x27;input[name^=&quot;wpp_property_import[map]&quot;]:checkbox&#x27; ).each( function () {
+        if ( this.checked ) {
+          if ( jQuery( &#x27;#wpp_property_import_attribute_mapper .wpp_dynamic_table_row&#x27; ).length == 1 )
+            jQuery( &quot;.wpp_add_row&quot; ).click();
+          jQuery( this ).parents( &#x27;.wpp_dynamic_table_row&#x27; ).remove();
+
+        }
+      } )
+      jQuery( jQuery( &#x27;[name^=&quot;wpp_property_import[map]&quot;]:checkbox&#x27; ).parents( &#x27;.wpp_dynamic_table_row&#x27; ).get().reverse() ).each( function ( index ) {
+        jQuery( this ).find( &#x27;input,select&#x27; ).each( function () {
+          var old_name = jQuery( this ).attr( &#x27;name&#x27; );
+          var matches = old_name.match( /\[( \d{1,2} )\]/ );
+          if ( matches ) {
+            old_count = parseInt( matches[1] );
+            new_count = ( index + 1 );
+          }
+          var new_name = old_name.replace( &#x27;[&#x27; + old_count + &#x27;]&#x27;, &#x27;[&#x27; + new_count + &#x27;]&#x27; );
+          jQuery( this ).attr( &#x27;name&#x27;, new_name );
+        });
+      } )
+
+//** Create unique ID selected  **/
+      wpp.xmli.import_build_unique_id_selector();
+    } )
+
+    jQuery( &#x27;#check_all&#x27; ).live( &#x27;click&#x27;, function () {
+      if ( this.checked ) {
+        jQuery( &#x27;[name^=&quot;wpp_property_import[map]&quot;]:checkbox&#x27; ).attr( &#x27;checked&#x27;, &#x27;checked&#x27; );
+      } else {
+        jQuery( &#x27;[name^=&quot;wpp_property_import[map]&quot;]:checkbox&#x27; ).attr( &#x27;checked&#x27;, &#x27;&#x27; );
+      }
+    } )
+
+    jQuery( &quot;#wpp_i_do_full_import&quot; ).live( &quot;click&quot;, function () {
+
+      /* Blank out preview result since it will be deleted after completion of import */
+      jQuery( &quot;wpp_i_preview_raw_data_result&quot; ).html( &quot;&quot; );
+
+      var import_hash = jQuery( &quot;#import_hash&quot; ).val();
+
+      if ( import_hash != &quot;&quot; ) {
+        window.open( wpp.home_url + &quot;/?wpp_schedule_import=&quot; + import_hash + &quot;&amp;echo_log=true&quot;, &#x27;wpp_i_do_full_import&#x27; );
+      } else {
+        wpp.xmli.actions_bar_message( wpp.strings.xmli.please_save, &quot;bad&quot;, 7000 );
+      }
+
+    });
+
+    jQuery( &quot;#wpp_i_preview_action&quot; ).live( &quot;click&quot;, function () {
+
+      var source_type = jQuery( &quot;#wpp_property_import_source_type option:selected&quot; ).val();
+
+      jQuery( &quot;#wpp_i_preview_action&quot; ).val( &#x27;Loading...&#x27; );
+
+      /*jQuery( &quot;#wpp_i_preview_action&quot; ).attr( &#x27;disabled&#x27;, true ); */
+
+      jQuery( &quot;#wpp_import_object_preview&quot; ).html( &quot;&lt;pre class=\&quot;wpp_class_pre\&quot;&gt;&lt;/pre&gt;&quot; );
+
+      var params = {
+        action: &#x27;wpp_property_import_handler&#x27;,
+        wpp_action: &#x27;execute_schedule_import&#x27;,
+        preview: &#x27;true&#x27;,
+        data: jQuery( &quot;#wpp_property_import_setup&quot; ).serialize()
+      }
+
+      if ( schedule_id !== undefined ) {
+        params.schedule_id = schedule_id;
+      }
+
+      if ( source_type !== undefined ) {
+        params.source_type = source_type;
+      }
+
+      jQuery.post( ajaxurl, params,function ( result ) {
+        jQuery( &quot;#wpp_i_preview_action&quot; ).attr( &#x27;disabled&#x27;, false );
+        jQuery( &quot;#wpp_i_preview_action&quot; ).val( &#x27;Preview Again&#x27; );
+
+        if ( result.success == &#x27;true&#x27; ) {
+          wpp.xmli.actions_bar_message();
+          jQuery( &quot;#wpp_import_object_preview&quot; ).show();
+          jQuery( &quot;#wpp_import_object_preview&quot; ).html( &quot;&lt;pre class=\&quot;wpp_class_pre\&quot;&gt;&quot; + result.ui + &quot;&lt;/pre&gt;&quot; );
+        } else {
+          alert( result.message );
+        }
+
+      }, &#x27;json&#x27; ).success(function () {
+        } ).error( function ( result ) {
+          if ( result.status == 500 ) {
+            wpp.xmli.actions_bar_message( wpp.strings.xmli.out_of_memory, &#x27;bad&#x27; );
+            jQuery( &quot;#wpp_i_preview_action&quot; ).val( &#x27;Preview Again&#x27; );
+          }
+        });
+    });
+
+    jQuery( &quot;.wpp_i_close_preview&quot; ).live( &quot;click&quot;, function () {
+      jQuery( &quot;#wpp_i_preview_raw_data&quot; ).val( &#x27;Preview Raw Data&#x27; );
+      jQuery( &quot;.wpp_i_close_preview&quot; ).hide();
+      jQuery( &quot;.wppi_raw_preview_result&quot; ).hide();
+      jQuery( &quot;.wppi_raw_preview_result&quot; ).html( &quot;&quot; );
+    });
+
+    jQuery( &quot;#wpp_i_preview_raw_data&quot; ).live( &quot;click&quot;, function () {
+
+      var source_type = jQuery( &quot;#wpp_property_import_source_type option:selected&quot; ).val();
+
+      if ( !wpp.xmli.validate_source_info( source_type ) ) {
+        return false;
+      }
+
+      if ( source_type == &quot;&quot; ) {
+        jQuery( &quot;#wpp_property_import_source_type&quot; ).addClass( &#x27;wpp_error&#x27; );
+        return;
+      } else {
+        jQuery( &quot;#wpp_property_import_source_type&quot; ).removeClass( &#x27;wpp_error&#x27; );
+      }
+
+      wpp.xmli.preview_raw_preview_result( wpp.strings.xmli.loading );
+
+      jQuery( &quot;#wpp_i_preview_raw_data&quot; ).attr( &#x27;disabled&#x27;, true );
+
+      var params = {
+        action: &#x27;wpp_property_import_handler&#x27;,
+        wpp_action: &#x27;execute_schedule_import&#x27;,
+        raw_preview: &#x27;true&#x27;,
+        data: jQuery( &quot;#wpp_property_import_setup&quot; ).serialize()
+      }
+
+      if ( schedule_id !== undefined ) {
+        params.schedule_id = schedule_id;
+      }
+
+      if ( source_type !== undefined ) {
+        params.source_type = source_type;
+      }
+
+      wpp.xmli.loading_show();
+
+      jQuery.post( ajaxurl, params,function ( result ) {
+
+        wpp.xmli.loading_hide();
+
+        jQuery( &quot;#wpp_i_preview_raw_data&quot; ).attr( &#x27;disabled&#x27;, false );
+        jQuery( &quot;#wpp_i_preview_raw_data&quot; ).val( &#x27;Preview Again&#x27; );
+
+        if ( result.success === true || result.success === &#x27;true&#x27; ) {
+
+          wpp.xmli.preview_raw_preview_result( result.preview_bar_message );
+
+          /* Should always return a schedule ID */
+          wpp.xmli.set_schedule_id( result.schedule_id );
+
+          jQuery( &quot;.wpp_i_close_preview&quot; ).show();
+          jQuery( &quot;.wppi_raw_preview_result&quot; ).show();
+          jQuery( &quot;.wppi_raw_preview_result&quot; ).html( &quot;&lt;pre class=\&quot;wpp_class_pre\&quot;&gt;&quot; + result.ui + &quot;&lt;/pre&gt;&quot; );
+        } else {
+          wpp.xmli.preview_raw_preview_result( result.message, &quot;bad&quot; );
+        }
+
+        wpp.xmli.loading_hide();
+
+      }, &#x27;json&#x27; ).success(function () {
+        } ).error( function ( result ) {
+
+          jQuery( &quot;#wpp_i_preview_raw_data&quot; ).attr( &#x27;disabled&#x27;, false );
+
+          if ( result.status == 500 ) {
+            wpp.xmli.preview_raw_preview_result( wpp.strings.xmli.out_of_memory, &#x27;bad&#x27; );
+            jQuery( &quot;#wpp_i_preview_raw_data&quot; ).val( &#x27;Preview Raw Data&#x27; );
+          }
+
+          wpp.xmli.preview_raw_preview_result( result.responseText, &quot;bad&quot; );
+
+          wpp.xmli.loading_hide();
+
+        });
+
+
+    });
+
+    //** Update to get matched tags from array. */
+    jQuery( &quot;#wpp_import_auto_match&quot; ).live( &quot;click&quot;, function () {
+      wpp.xmli.perform_auto_matching();
+    });
+
+    jQuery( &quot;#wpp_property_import_save&quot; ).live( &quot;click&quot;, function ( e ) {
+
+      e.preventDefault();
+
+      var this_button = this;
+      var original_text = wpp.strings.xmli.save;
+
+      wpp.xmli.actions_bar_message( wpp.strings.xmli.saving );
+
+      jQuery( this_button ).val( wpp.strings.xmli.processing );
+
+
+      var params = {
+        action: &#x27;wpp_property_import_handler&#x27;,
+        wpp_action: &#x27;save_new_schedule&#x27;,
+        data: jQuery( &quot;#wpp_property_import_setup&quot; ).serialize()
+      }
+
+      /* schedule_id may have been created during a preview or source eval */
+      if ( schedule_id !== undefined ) {
+        params.schedule_id = schedule_id;
+      }
+
+      jQuery.post( ajaxurl, params, function ( result ) {
+        if ( result.success == &#x27;true&#x27; ) {
+          wpp.xmli.actions_bar_message( wpp.strings.xmli.saved, &quot;good&quot;, 7000 );
+          wpp.xmli.set_schedule_id( result.schedule_id );
+          wpp.xmli.set_schedule_hash( result.hash );
+          jQuery( this_button ).val( original_text );
+
+        } else {
+          wpp.xmli.actions_bar_message( result.message, &#x27;error&#x27; );
+        }
+      }, &#x27;json&#x27; );
+    });
+
+    jQuery( &quot;#wpp_property_import_update&quot; ).live( &quot;click&quot;, function ( e ) {
+
+      e.preventDefault();
+
+      var this_button = this;
+      var original_text = wpp.strings.xmli.save;
+
+      wpp.xmli.actions_bar_message( wpp.strings.xmli.updating );
+
+      jQuery( this_button ).val( wpp.strings.xmli.processing );
+
+      schedule_id = jQuery( this ).attr( &#x27;schedule_id&#x27; );
+
+      jQuery.post( ajaxurl, {
+        action: &#x27;wpp_property_import_handler&#x27;,
+        wpp_action: &#x27;update_schedule&#x27;,
+        schedule_id: schedule_id,
+        data: jQuery( &quot;#wpp_property_import_setup&quot; ).serialize()
+      }, function ( result ) {
+
+        if ( typeof result === &#x27;object&#x27; &amp;&amp; result.success === &#x27;true&#x27; ) {
+          wpp.xmli.set_schedule_id( result.schedule_id );
+          wpp.xmli.set_schedule_hash( result.hash );
+          wpp.xmli.actions_bar_message( wpp.strings.xmli.updated, &quot;good&quot;, 7000 );
+
+          jQuery( this_button ).val( original_text );
+
+        } else {
+          wpp.xmli.actions_bar_message( result.message, &#x27;error&#x27; );
+        }
+
+      }, &#x27;json&#x27; );
+    });
+
+    /* Activated when &quot;Add New&quot; buttin is clicked */
+    jQuery( &quot;#wpp_property_import_add_import&quot; ).click( function () {
+      jQuery( &quot;.updated&quot; ).remove();
+      wpp.xmli.show_schedule_editor_ui();
+    });
+
+    jQuery( &quot;.wpp_property_import_edit_report&quot; ).click( function ( e ) {
+      var schedule_id = jQuery( this ).attr( &#x27;schedule_id&#x27; );
+      wpp.xmli.show_schedule_editor_ui( schedule_id );
+    });
+
+    /* Sort schedules on overview page */
+    jQuery( &quot;.wpp_i_sort_schedules&quot; ).click( function ( e ) {
+
+      e.preventDefault();
+
+      jQuery( &quot;.wpp_i_sort_schedules a&quot; ).removeClass( &quot;current&quot; );
+
+      jQuery( &quot;a&quot;, this ).addClass( &quot;current&quot; );
+
+      var sort_by = jQuery( this ).attr( &quot;sort_by&quot; );
+      var sort_direction = jQuery( this ).attr( &quot;sort_direction&quot; );
+      var mylist = jQuery( &#x27;#wpp_property_import_overview tbody&#x27; );
+      var listitems = mylist.children( &#x27;tr&#x27; ).get();
+
+      listitems.sort( function ( a, b ) {
+
+        var compA = jQuery( a ).attr( sort_by );
+        var compB = jQuery( b ).attr( sort_by );
+
+        if ( compA === undefined ) {
+          compA = 0;
+        } else {
+          compA = parseInt( compA );
+        }
+
+        if ( compB === undefined ) {
+          compB = 0;
+        } else {
+          compB = parseInt( compB );
+        }
+
+        if ( sort_direction == &quot;DESC&quot; ) {
+          var index = ( compA &lt; compB ) ? -1 : ( compA &gt; compB ) ? 1 : 0;
+        } else {
+          var index = ( compA &gt; compB ) ? -1 : ( compA &lt; compB ) ? 1 : 0;
+        }
+
+
+        return index;
+
+      } )
+
+//** Switch sorting direction */
+      if ( sort_direction == &quot;DESC&quot; ) {
+        jQuery( this ).attr( &quot;sort_direction&quot;, &quot;ASC&quot; )
+      } else {
+        jQuery( this ).attr( &quot;sort_direction&quot;, &quot;DESC&quot; )
+      }
+
+      jQuery.each( listitems, function ( idx, itm ) {
+        mylist.append( itm );
+      });
+
+
+    });
+
+    jQuery( &quot;.wppi_delete_all_feed_properties&quot; ).click( function ( e ) {
+
+      e.preventDefault();
+
+      var verify_response;
+      var row = jQuery( this ).parents( &quot;.wpp_i_schedule_row&quot; );
+      var total_properties = jQuery( row ).attr( &quot;total_properties&quot; );
+      var schedule_id = jQuery( row ).attr( &quot;schedule_id&quot; );
+      var import_title = jQuery( row ).attr( &quot;import_title&quot; );
+
+      verify_response = prompt( &quot;Confirm that you want to delete all &quot; + total_properties + &quot; properties from this feed by typing in in &#x27;delete&#x27; below, or press &#x27;Cancel&#x27; to cancel.&quot; );
+
+      if ( verify_response == &quot;delete&quot; ) {
+
+        jQuery( &quot;#wpp_property_import_ajax&quot; ).show();
+        jQuery( &quot;#wpp_property_import_ajax&quot; ).html( &quot;&lt;div class=&#x27;updated below-h2&#x27;&gt;&lt;p&gt;Deleting all properties from &quot; + import_title + &quot;. You can close your browser, the operation will continue until completion.&lt;/p&gt;&lt;/div&gt;&quot; );
+
+        jQuery.post( ajaxurl, {
+          action: &#x27;wpp_property_import_handler&#x27;,
+          schedule_id: schedule_id,
+          wpp_action: &#x27;delete_all_schedule_properties&#x27;
+        }, function ( result ) {
+          if ( result.success == &#x27;true&#x27; ) {
+            jQuery( &quot;#wpp_property_import_ajax&quot; ).html( &quot;&lt;div class=&#x27;updated below-h2&#x27;&gt;&lt;p&gt;&quot; + result.ui + &quot;&lt;/p&gt;&lt;/div&gt;&quot; );
+          } else {
+            jQuery( &quot;#wpp_property_import_ajax&quot; ).html( &quot;&lt;div class=&#x27;updated below-h2&#x27;&gt;&lt;p&gt;&quot; + wpp.strings.xmli.error_occured + &quot;&lt;/p&gt;&lt;/div&gt;&quot; );
+          }
+        }, &#x27;json&#x27; );
+
+      } else {
+        return;
+      }
+
+    });
+
+    jQuery( &quot;.wpp_property_import_delete_report&quot; ).click( function ( e ) {
+      e.preventDefault();
+
+      if ( !confirm( wpp.strings.xmli.are_you_sure ) )
+        return;
+
+      var schedule_id = jQuery( this ).attr( &#x27;schedule_id&#x27; );
+      var rmel = jQuery( this ).parents( &#x27;tr&#x27; );
+
+      jQuery.post( ajaxurl, {
+        action: &#x27;wpp_property_import_handler&#x27;,
+        schedule_id: schedule_id,
+        wpp_action: &#x27;delete_schedule&#x27;
+      }, function ( result ) {
+        if ( result.success == &#x27;true&#x27; ) {
+          jQuery( rmel ).remove();
+          if ( jQuery( &#x27;#wpp_property_import_overview tr&#x27; ).length == 1 )
+            jQuery( &#x27;#wpp_property_import_overview&#x27; ).remove();
+        }
+      }, &#x27;json&#x27; );
+    });
+
+    /* Vlidate source and get info when one of the source-related fields is updated. */
+    jQuery( &quot;#wpp_property_import_remote_url, #wpp_property_import_username, #wpp_property_import_password&quot; ).live( &quot;change&quot;, function () {
+      wpp.xmli.determine_settings( {} );
+    });
+
+    /* If source is selected, remove error and determine settings */
+    jQuery( &quot;#wpp_property_import_source_type&quot; ).live( &quot;change&quot;, wpp.xmli.source_changed );
+
+    /* Vlidate source when &quot;Source is Good&quot; label is pressed. Third argument forces cache refresh. */
+    jQuery( &#x27;#wpp_property_import_source_status&#x27; ).live( &#x27;click&#x27;, function () {
+      wpp.xmli.evaluate_source( this, false, true );
+    });
+
+    jQuery( &quot;#wpp_property_import_unique_id&quot; ).live( &#x27;change&#x27;, function () {
+      wpp.xmli.import_build_unique_id_selector();
+    });
+
+    jQuery( &#x27;select[name^=&quot;wpp_property_import[map]&quot;]&#x27; ).live( &#x27;change&#x27;, function () {
+      wpp.xmli.import_build_unique_id_selector();
+    });
+
+  },
+
+  /**
+   * Source Changed.
+   *
+   */
+  source_changed: function source_changed() {
+    wpp.xmli.debug( &#x27;wpp.xmli.source_changed()&#x27; )
+
+    wpp.xmli.determine_settings( {} );
+
+    jQuery( &quot;#wpp_property_import_source_type&quot; ).removeClass( &#x27;wpp_error&#x27; );
+
+  },
+
+  /**
+   * XMLI Logger.
+   *
+   * @usage
+   *    wpp.xmli.debug( &#x27;My message.&#x27; );
+   *
+   * @for wpp.xmli
+   * @method log
+   * @author potanin@UD
+   */
+  debug: function debug() {
+
+    // Ignore if debugging is not enabled.
+    if( !wpp.xmli.settings.debug ) {
+      return;
+    }
+
+    if( &#x27;function&#x27; === typeof console.log ) {
+      console.log.apply( console, arguments );
+    }
+
+  },
+
+  /**
+   * Toggle loading icon at the top of the page.
+   *
+   */
+  loading_show: function loading_show () {
+    jQuery( &quot;.wpp_xi_loader&quot; ).css( &quot;display&quot;, &quot;inline-block&quot; );
+  },
+
+  /**
+   * Toggle loading icon at the top of the page.
+   *
+   */
+  loading_hide: function loading_hide () {
+    jQuery( &quot;.wpp_xi_loader&quot; ).hide();
+  },
+
+  /**
+   * Rebuild unique ID dropdown
+   *
+   */
+  import_build_unique_id_selector: function import_build_unique_id_selector () {
+
+    var uid_container = jQuery( &quot;.wpp_i_unique_id_wrapper&quot; );
+    var uid_select_element = jQuery( &quot;#wpp_property_import_unique_id&quot; );
+
+    /* Get current UID */
+    var selected_id = uid_select_element.val();
+
+    var selected_attributes = jQuery( &quot;select[name^=&#x27;wpp_property_import[map]&#x27;] option:selected[value!=&#x27;&#x27;]&quot; ).length;
+
+    /* Blank out dropdown eleemnt */
+    uid_select_element.html( &#x27;&#x27; );
+
+    uid_select_element.append( &#x27;&lt;option value=&quot;&quot;&gt; - &lt;/option&gt;&#x27; );
+
+    jQuery( &#x27;select[name^=&quot;wpp_property_import[map]&quot;] option:selected&#x27; ).each( function () {
+
+      var attribute_slug = jQuery( this ).val();
+
+      var cur = jQuery( &#x27;select#wpp_property_import_unique_id option[value=&quot;&#x27; + attribute_slug + &#x27;&quot;]&#x27; );
+
+      /* Make sure that the attribute isn&#x27;t already added to the UID dropdown and a value exists  */
+      if ( cur.length == 0 &amp;&amp; cur.val() != &quot;&quot; ) {
+
+        var title = jQuery( this ).html();
+        uid_select_element.append( &#x27;&lt;option value=&quot;&#x27; + attribute_slug + &#x27;&quot;&gt;&#x27; + title + &#x27;&lt;/option&gt;&#x27; );
+      }
+
+      if ( selected_id != &quot;&quot; &amp;&amp; selected_id != null ) {
+        uid_select_element.val( selected_id );
+      }
+
+    });
+
+    //* No attribute found, nothing to display in UID dropdown */
+    if ( selected_attributes == 0 ) {
+      jQuery( &#x27;.wpp_i_unique_id_wrapper&#x27; ).hide();
+    } else {
+      jQuery( &#x27;.wpp_i_unique_id_wrapper&#x27; ).show();
+
+      if ( selected_id == &quot;&quot; ) {
+        jQuery( &quot;span.description&quot;, uid_container ).html( wpp.strings.xmli.select_unique_id );
+      } else {
+        jQuery( &quot;span.description&quot;, uid_container ).html( wpp.strings.xmli.unique_id_attribute );
+      }
+    }
+
+
+  },
+
+  /**
+   * Add attribute and xPath rows based on matched tags from XML feed and avaialble attributes.
+   *
+   */
+  perform_auto_matching: function perform_auto_matching () {
+    wpp.xmli.debug( &#x27;wpp.xmli.perform_auto_matching()&#x27; );
+
+    var wpp_all_importable_attributes = new Array();
+    var wpp_all_importable_attributes_labels = new Array();
+
+    var wpp_successful_matches = 0;
+
+    var source_type = jQuery( &quot;#wpp_property_import_source_type&quot; ).val();
+
+    jQuery( &quot;#wpp_import_auto_match&quot; ).attr( &#x27;disabled&#x27;, false );
+
+    jQuery( &quot;#wpp_import_auto_match&quot; ).val( &#x27;Automatically Match&#x27; );
+
+    //** If tags are not defined, attempt to reload */
+    if ( wpp_auto_matched_tags === undefined ) {
+
+      //** Disable button and start auto import */
+      jQuery( &quot;#wpp_import_auto_match&quot; ).val( &#x27;Reloading XML...&#x27; );
+      jQuery( &quot;#wpp_import_auto_match&quot; ).attr( &#x27;disabled&#x27;, true );
+
+      wpp.xmli.evaluate_source( false, wpp.xmli.perform_auto_matching );
+
+      return;
+
+    }
+
+    /* Get all WPP tags from first dropdown */
+    jQuery( &quot;#wpp_property_import_attribute_mapper .wpp_dynamic_table_row option&quot; ).each( function () {
+
+      var meta_key = jQuery( this ).val();
+      var label = jQuery( this ).text();
+
+      /* Add to importable attributes array if key is not blank, and not already in there. Note: inArray() returns -1 one when no match is found. */
+      if ( meta_key != &quot;&quot; &amp;&amp; !jQuery.inArray( meta_key, wpp_all_importable_attributes ) != -1 ) {
+        wpp_all_importable_attributes.push( meta_key );
+      }
+
+      /* Add to importable attribute labels as well. */
+      if ( label != &quot;&quot; &amp;&amp; !jQuery.inArray( label, wpp_all_importable_attributes_labels ) != -1 ) {
+        wpp_all_importable_attributes_labels.push( label );
+      }
+
+    });
+
+
+    /* Cycle through auto-matched tags, and attempt to match them with WPP tags */
+    jQuery.each( wpp_auto_matched_tags, function () {
+
+      /* Get key from XML source */
+      var xml_tag = String( this );
+
+      /* We convert to lower case for comparison because WPP attribute slugs are always lower case . */
+      var wpp_like_xml_tag = wpp_create_slug( xml_tag );
+
+      /* console.log( xml_tag + &quot; slugged to: &quot; + wpp_like_xml_tag ); */
+
+      /* Do special functions if this is WPP Import */
+      if ( source_type == &#x27;wpp&#x27; ) {
+
+        // Do not load images this way, the real images are in the &#x27;gallery&#x27; key in WPP exports
+        if ( wpp_like_xml_tag == &#x27;images&#x27; ) {
+          return true;
+        }
+      }
+
+      /* Check if current xml_tag ( from auto_matched array from XML source exists in importable attributes array. */
+      if ( jQuery.inArray( wpp_like_xml_tag, wpp_all_importable_attributes ) != -1 ) {
+
+        /* We have a match for this attribute */
+
+      } else {
+
+        /* Try matching based on label if nothing is found in keys */
+        if ( jQuery.inArray( wpp_like_xml_tag, wpp_all_importable_attributes_labels ) != -1 ) {
+
+        } else {
+          return;
+        }
+
+        return;
+      }
+
+      /* If this attribute already appears to be mapped over, we skip. */
+      if ( jQuery( &#x27;#wpp_property_import_attribute_mapper .wpp_dynamic_table_row option[value=&#x27; + wpp_like_xml_tag + &#x27;]:selected&#x27; ).length &gt; 0 ) {
+        return true;
+      }
+
+      /* Add row to table, and enter xpath rule */
+      var added_row = wpp_add_row( jQuery( &#x27;.wpp_add_row&#x27; ) );
+
+      jQuery( &#x27;.wpp_import_attribute_dropdown&#x27;, added_row ).val( wpp_like_xml_tag );
+
+      jQuery( &#x27;.xpath_rule&#x27;, added_row ).val( xml_tag );
+
+      wpp_successful_matches++;
+
+
+    });
+
+    //** Handle special WPP attributes **/
+    if ( source_type == &#x27;wpp&#x27; ) {
+
+      if ( jQuery( &#x27;#wpp_property_import_attribute_mapper .wpp_dynamic_table_row option[value=images]:selected&#x27; ).length &lt; 1 ) {
+        var added_row = wpp_add_row( jQuery( &#x27;.wpp_add_row&#x27; ) );
+        jQuery( &#x27;.wpp_import_attribute_dropdown&#x27;, added_row ).val( &#x27;images&#x27; );
+        jQuery( &#x27;.xpath_rule&#x27;, added_row ).val( &#x27;gallery/*/large&#x27; );
+        wpp_successful_matches++;
+      }
+    }
+
+    if ( source_type == &#x27;rets&#x27; ) {
+
+      /*
+       console.log( &#x27;trying to add rets image&#x27; );
+       console.log( jQuery( &#x27;#wpp_property_import_attribute_mapper .wpp_dynamic_table_row option[value=images]:selected&#x27; ).length );
+       */
+
+      if ( jQuery( &#x27;#wpp_property_import_attribute_mapper .wpp_dynamic_table_row option[value=images]:selected&#x27; ).length &lt; 1 ) {
+        var added_row = wpp_add_row( jQuery( &#x27;.wpp_add_row&#x27; ) );
+        jQuery( &#x27;.wpp_import_attribute_dropdown&#x27;, added_row ).val( &#x27;images&#x27; );
+        jQuery( &#x27;.xpath_rule&#x27;, added_row ).val( &#x27;wpp_gallery/*/path&#x27; );
+        wpp_successful_matches++;
+      }
+    }
+
+    /* alert( wpp_successful_matches ); Should do something with the result, although it is clearly visual. */
+
+    //** Clean up table **/
+    wpp.xmli.rule_table_remove_blank_rows();
+
+    //** Create unique ID selected  **/
+    wpp.xmli.import_build_unique_id_selector();
+
+    //** Select WPP Unique ID  **/
+    if ( source_type == &#x27;wpp&#x27; ) {
+      jQuery( &quot;#wpp_property_import_unique_id&quot; ).val( &#x27;wpp_gpid&#x27; );
+    }
+
+  },
+
+  /**
+   * Remove any blank rows from table.
+   *
+   */
+  rule_table_remove_blank_rows: function rule_table_remove_blank_rows () {
+
+    if ( jQuery( &quot;#wpp_property_import_attribute_mapper .wpp_dynamic_table_row&quot; ).length &lt; 2 ) {
+      return;
+    }
+
+    jQuery( &quot;#wpp_property_import_attribute_mapper .wpp_dynamic_table_row&quot; ).each( function () {
+
+      var wpp_import_attribute_dropdown = jQuery( &#x27;.wpp_import_attribute_dropdown option:selected&#x27;, this ).val();
+
+      var xpath_rule = jQuery( &#x27;.xpath_rule&#x27;, this ).val();
+
+      /* console.log( wpp_import_attribute_dropdown + &#x27; xpath_rule &#x27; + xpath_rule ); */
+
+      if ( xpath_rule == &#x27;&#x27; &amp;&amp; wpp_import_attribute_dropdown == &#x27;&#x27; ) {
+        jQuery( this ).remove();
+      }
+
+    });
+
+
+  },
+
+  /**
+   * Ran when any information regarding the source URL, type, or login information is chaged.
+   *
+   * Verifies source can be loaded and is valid.
+   * Returns matched_tags and stored in wpp_auto_matched_tags
+   */
+  evaluate_source: function evaluate_source ( object, callback_func, do_not_use_cache ) {
+    wpp.xmli.debug( &#x27;wpp.xmli.evaluate_source()&#x27; );
+
+    /* Be default we do not re-cache */
+    if ( !do_not_use_cache ) {
+      do_not_use_cache = false;
+    }
+
+    var remote_url = jQuery( &quot;#wpp_property_import_remote_url&quot; ).val();
+    var import_type = jQuery( &quot;#wpp_property_import_source_type option:selected&quot; ).val();
+
+    if ( !remote_url.length || import_type == &quot;&quot; ) {
+      return;
+    }
+
+    jQuery( &quot;.wpp_i_source_feedback&quot; ).hide();
+
+    //** Set root element query based on source type, and show/hide other items */
+    jQuery( &#x27;.wpp_property_import_gs_options .wpp_i_advanced_source_settings, .wpp_property_import_rets_options .wpp_i_advanced_source_settings&#x27; ).hide();
+
+    if ( import_type == &quot;wpp&quot; ) {
+      jQuery( &quot;#wpp_property_import_choose_root_element&quot; ).val( &#x27;/objects/object&#x27; );
+    } else if ( import_type == &quot;gs&quot; ) {
+      jQuery( &quot;#wpp_property_import_choose_root_element&quot; ).val( &#x27;ROW&#x27; );
+      jQuery( &#x27;.wpp_property_import_gs_options .wpp_i_advanced_source_settings&#x27; ).show();
+    } else if ( import_type == &quot;rets&quot; ) {
+      jQuery( &quot;#wpp_property_import_choose_root_element&quot; ).val( &#x27;/ROWS/ROW&#x27; );
+      jQuery( &#x27;.wpp_property_import_rets_options .wpp_i_advanced_source_settings&#x27; ).show();
+    }
+
+    //** If currently edited element is the remote URL, try to guess the source type */
+    if ( jQuery( object ).attr( &#x27;id&#x27; ) == &#x27;wpp_property_import_remote_url&#x27; ) {
+
+      //** Set Import Type to WPP if source appears to be a WPP export */
+      if ( remote_url.search( &quot;action=wpp_export_properties&quot; ) &gt; 0 ) {
+        //** Set source type to WPP */
+        jQuery( &quot;#wpp_property_import_source_type&quot; ).val( &#x27;wpp&#x27; );
+
+      } else if ( remote_url.search( &quot;spreadsheets.google.com&quot; ) &gt; 0 ) {
+        //** Set source type to Google Spreadsheet */
+        jQuery( &quot;#wpp_property_import_source_type&quot; ).val( &#x27;gs&#x27; );
+
+      }
+
+    }
+
+    /** If we&#x27;re RETS or Google, and we don&#x27;t have a user/pass, we return */
+    if ( import_type == &quot;rets&quot; || import_type == &quot;gs&quot; ) {
+      if ( import_type == &quot;gs&quot; &amp;&amp; ( jQuery( &quot;#wpp_property_import_username&quot; ).val() == &quot;&quot; || jQuery( &quot;#wpp_property_import_password&quot; ).val() == &quot;&quot; ) ) {
+        alert( &quot;Please fill out all required fields, check the advanced properties if you&#x27;re unsure of where to look.&quot; );
+        return false;
+      }
+      if ( import_type == &quot;rets&quot; &amp;&amp; ( jQuery( &quot;#wpp_property_import_rets_username&quot; ).val() == &quot;&quot; || jQuery( &quot;#wpp_property_import_rets_password&quot; ).val() == &quot;&quot; || jQuery( &quot;#wpp_property_import_rets_class&quot; ).val() == &quot;&quot; ) ) {
+        alert( &quot;Please fill out all required fields, check the advanced properties if you&#x27;re unsure of where to look.&quot; );
+        return false;
+      }
+    }
+
+    wpp.xmli.loading_show();
+
+    wpp.xmli.source_status( &#x27;processing&#x27; );
+
+    var params = {
+      action: &#x27;wpp_property_import_handler&#x27;,
+      wpp_action: &#x27;execute_schedule_import&#x27;,
+      wpp_action_type: &#x27;source_evaluation&#x27;,
+      source_type: jQuery( &quot;#wpp_property_import_source_type option:selected&quot; ).val(),
+      data: jQuery( &quot;#wpp_property_import_setup&quot; ).serialize()
+    }
+
+    if ( do_not_use_cache ) {
+      params.do_not_use_cache = true;
+    }
+
+    //** If we have a schedule_id, we pass it into source eval */
+    if ( schedule_id !== undefined ) {
+      params.schedule_id = schedule_id;
+    }
+
+    jQuery.post( ajaxurl, params,function ( result ) {
+
+      wpp.xmli.loading_hide();
+
+      /* Should always return a schedule ID */
+      wpp.xmli.set_schedule_id( result.schedule_id );
+      wpp.xmli.set_schedule_hash( result.hash );
+
+      //** Load auto matched tags into global variable */
+      wpp_auto_matched_tags = result.auto_matched_tags;
+
+      //** Enable the Automatically Match button */
+      jQuery( &quot;#wpp_import_auto_match&quot; ).val( wpp.strings.xmli.automatically_match );
+      jQuery( &quot;#wpp_import_auto_match&quot; ).attr( &quot;disabled&quot;, false );
+
+      if ( result.success == &#x27;true&#x27; ) {
+        wpp.xmli.source_status( &#x27;good&#x27; );
+
+        /* Callback a function, most likely wpp.xmli.perform_auto_matching() to finish matching */
+        if ( callback_func &amp;&amp; typeof( callback_func ) === &quot;function&quot; ) {
+          callback_func();
+        }
+
+      } else {
+        wpp.xmli.source_status( &#x27;bad&#x27; );
+        wpp.xmli.source_check_result( result.message, &#x27;bad&#x27; );
+      }
+
+    }, &#x27;json&#x27; ).success(function () {
+      } ).error( function ( result ) {
+
+        wpp.xmli.loading_hide();
+
+        if ( result.status == 500 ) {
+          wpp.xmli.source_status( &#x27;server_error&#x27; );
+          wpp.xmli.source_check_result( wpp.strings.xmli.evaluation_500_error, &#x27;bad&#x27; );
+          return;
+        }
+
+        /* Proper result not returned, and not a specific error */
+        wpp.xmli.source_status( &#x27;bad&#x27; );
+        wpp.xmli.source_check_result( wpp.strings.xmli.request_error + &quot; &quot; + result.responseText, &#x27;bad&#x27; );
+        return;
+
+      });
+
+  },
+
+  /**
+   * Sets schedule_id for current DOM
+   *
+   */
+  set_schedule_id: function set_schedule_id ( schedule_id ) {
+
+    /* Set URL hash */
+    window.location.hash = schedule_id;
+
+    /* Return for good measure */
+    return schedule_id;
+
+  },
+
+  /**
+   * Sets schedule_id for current DOM
+   *
+   */
+  set_schedule_hash: function set_schedule_hash ( schedule_hash ) {
+
+    /* Set global variable */
+    import_hash = schedule_hash;
+
+    /* Set DOM element */
+    jQuery( &quot;#import_hash&quot; ).val( import_hash );
+
+    /* Return for good measure */
+    return schedule_hash;
+
+  },
+
+  /**
+   * Display a message in the &quot;Action Bar&quot;, below the Attribute Map
+   *
+   */
+  actions_bar_message: function actions_bar_message ( message, type, delay ) {
+    var error_class = false;
+    var element = jQuery( &quot;.wpp_i_import_actions_bar .wpp_i_ajax_message&quot; );
+
+    /* Remove all classes */
+    element.removeClass( &quot;wpp_i_error_text&quot; );
+
+    if ( type !== undefined &amp;&amp; type != &quot;&quot; ) {
+
+      if ( type == &#x27;bad&#x27; ) {
+        var add_class = &#x27;wpp_i_error_text&#x27;
+      } else if ( type == &#x27;good&#x27; ) {
+        var add_class = &#x27;&#x27;
+      } else {
+        var add_class = type;
+      }
+
+    }
+
+    //* If no message passed, just hide the element and bail */
+
+    if ( message == &quot;&quot; || message == undefined ) {
+
+      if ( delay != undefined ) {
+        element.delay( delay ).fadeOut( &quot;slow&quot; );
+      } else {
+        element.hide();
+      }
+
+      return;
+    }
+
+    /* If we are adding a class */
+    if ( add_class ) {
+
+
+      //* Add default class back on if one was passd */
+      element.addClass( &#x27;wpp_i_ajax_message&#x27; );
+
+      /* Add custom class */
+      element.addClass( add_class );
+    }
+
+    element.show();
+
+    element.html( message );
+
+    if ( delay != undefined ) {
+      element.delay( delay ).fadeOut( &quot;slow&quot; );
+    }
+
+  },
+
+  /**
+   * Display a message in the &quot;Raw Preview&quot; message section
+   *
+   */
+  source_check_result: function source_check_result ( message, type ) {
+    var element = jQuery( &quot;li.wpp_i_source_feedback&quot; );
+
+    element.show();
+    element.removeClass( &#x27;wpp_i_error_text&#x27; );
+
+    if ( message === undefined ) {
+      element.html( &#x27;&#x27; );
+      element.hide( &#x27;&#x27; );
+      return;
+    }
+
+    if ( type == &#x27;bad&#x27; ) {
+      element.addClass( &#x27;wpp_i_error_text&#x27; );
+    }
+
+    element.html( message );
+
+  },
+
+  /**
+   * Display a message in the &quot;Raw Preview&quot; message section
+   *
+   */
+  preview_raw_preview_result: function preview_raw_preview_result ( message, type ) {
+
+    var element = jQuery( &quot;span.wpp_i_preview_raw_data_result&quot; );
+
+    element.removeClass( &#x27;wpp_i_error_text&#x27; );
+
+    if ( message === undefined ) {
+      element.html( &#x27;&#x27; );
+      return;
+    }
+
+    if ( type == &#x27;bad&#x27; ) {
+      element.addClass( &#x27;wpp_i_error_text&#x27; );
+    }
+
+    element.html( message );
+
+  },
+
+  /**
+   * Sets the status of the source URL in UI
+   *
+   */
+  source_status: function source_status ( status ) {
+    wpp.xmli.debug( &#x27;wpp.xmli.source_status()&#x27; );
+
+    jQuery( &quot;#wpp_property_import_source_status&quot; ).removeClass();
+
+    if ( status == &#x27;&#x27; ) {
+      jQuery( &quot;#wpp_property_import_source_status&quot; ).hide();
+      return;
+    }
+
+    jQuery( &quot;#wpp_property_import_source_status&quot; ).show();
+
+    if ( status == &#x27;ready_to_check&#x27; ) {
+      jQuery( &quot;#wpp_property_import_source_status&quot; ).text( &#x27;Check Source&#x27; );
+    }
+
+    if ( status == &#x27;processing&#x27; ) {
+      jQuery( &quot;#wpp_property_import_source_status&quot; ).addClass( &#x27;wpp_import_source_processing&#x27; );
+      jQuery( &quot;#wpp_property_import_source_status&quot; ).text( wpp.strings.xmli.source_is_good );
+    }
+
+    if ( status == &#x27;good&#x27; ) {
+      jQuery( &quot;#wpp_property_import_source_status&quot; ).addClass( &#x27;wpp_import_source_good&#x27; );
+      jQuery( &quot;#wpp_property_import_source_status&quot; ).text( wpp.strings.xmli.source_is_good );
+    }
+
+    if ( status == &#x27;bad&#x27; ) {
+      jQuery( &quot;#wpp_property_import_source_status&quot; ).addClass( &#x27;wpp_import_source_bad&#x27; );
+      jQuery( &quot;#wpp_property_import_source_status&quot; ).text( wpp.strings.xmli.cannot_reload_source );
+    }
+
+    if ( status == &#x27;server_error&#x27; ) {
+      jQuery( &quot;#wpp_property_import_source_status&quot; ).addClass( &#x27;wpp_import_source_bad&#x27; );
+      jQuery( &quot;#wpp_property_import_source_status&quot; ).text( wpp.strings.xmli.internal_server_error );
+    }
+
+  },
+
+  /**
+   * Ensure all necessary data for given source is filled in
+   *
+   * @param type
+   * @returns {boolean}
+   */
+  validate_source_info: function validate_source_info ( type ) {
+    wpp.xmli.debug( &#x27;wpp.xmli.validate_source_info()&#x27; );
+
+    var required_fields = jQuery( &quot;input.wpp_required&quot;, &quot;[wpp_i_source_type=&quot; + type + &quot;]&quot; );
+    var success = true;
+
+    if ( required_fields.length &lt; 1 ) {
+      return true;
+    }
+
+    jQuery( required_fields ).each( function () {
+      var value = jQuery.trim( jQuery( this ).val() );
+
+      if ( value == &quot;&quot; ) {
+        jQuery( this ).addClass( &quot;wpp_error&quot; );
+        success = false;
+      } else {
+        jQuery( this ).val( value );
+        jQuery( this ).removeClass( &quot;wpp_error&quot; );
+      }
+
+    });
+
+    return success;
+  },
+
+  /**
+   * Displays editor UI
+   *
+   * @param passed_schedule_id
+   */
+  show_schedule_editor_ui: function show_schedule_editor_ui ( passed_schedule_id ) {
+
+    wpp.xmli.loading_show();
+
+    jQuery( &quot;.updated&quot; ).remove();
+
+    if ( passed_schedule_id == &quot;&quot; ) {
+      var new_import = true;
+    }
+
+    schedule_id = passed_schedule_id;
+
+    params = {
+      action: &#x27;wpp_property_import_handler&#x27;,
+      wpp_action: &#x27;add_edit_schedule&#x27;
+    }
+
+    if ( !new_import ) {
+      params.schedule_id = schedule_id;
+    }
+
+    jQuery.post( ajaxurl, params, function ( result ) {
+      if ( result.success == &#x27;true&#x27; ) {
+        jQuery( &quot;.wpp_import_overview_page_element&quot; ).hide();
+        jQuery( &quot;#wpp_property_import_ajax&quot; ).html( result.ui ).show();
+        jQuery( &quot;#wpp_property_import_name&quot; ).focus();
+
+        wpp.xmli.loading_hide();
+
+        wpp.xmli.run_on_import_ui_display( result );
+
+      }
+    }, &#x27;json&#x27; );
+
+  },
+
+  /**
+   * Handles functions and UI configurations when a major DOM change is made
+   *
+   */
+  advanced_option_counter: function advanced_option_counter () {
+
+    /* Special Rules: Limits cannot be used with property deletion */
+    if ( jQuery( &#x27;#wpp_property_limit_properties&#x27; ).val() || jQuery( &#x27;#wpp_property_limit_scanned_properties&#x27; ).val() ) {
+      wpp.xmli.disable_advanced_option( &#x27;#wpp_property_import_remove_non_existant_properties&#x27; );
+    } else {
+      wpp.xmli.enable_advanced_option( &#x27;#wpp_property_import_remove_non_existant_properties&#x27; );
+    }
+
+    /* Special Rules: Enable SQL Query option when Advanced Logging is on */
+    if ( jQuery( &#x27;#wpp_import_log_detail&#x27; ).is( &#x27;:checked&#x27; ) ) {
+      wpp.xmli.enable_advanced_option( &#x27;input[name=&quot;wpp_property_import[show_sql_queries]&quot;]&#x27; );
+    } else {
+      wpp.xmli.disable_advanced_option( &#x27;input[name=&quot;wpp_property_import[show_sql_queries]&quot;]&#x27; );
+    }
+
+    /* Special Rules: If set to remove all properties from this feed only, option of removing all properties not available */
+    if ( jQuery( &#x27;input[name=&quot;wpp_property_import[remove_all_from_this_source]&quot;]&#x27; ).is( &#x27;:checked&#x27; ) ) {
+      wpp.xmli.disable_advanced_option( &#x27;input[name=&quot;wpp_property_import[remove_all_before_import]&quot;]&#x27; );
+    } else {
+      wpp.xmli.enable_advanced_option( &#x27;input[name=&quot;wpp_property_import[remove_all_before_import]&quot;]&#x27; );
+    }
+
+    var count = jQuery( &quot;.wpp_xi_advanced_setting.wpp_xi_enabld_row&quot; ).length;
+
+    if ( jQuery( &quot;.wpp_property_import_settings&quot; ).is( &quot;:visible&quot; ) || count == 0 ) {
+      jQuery( &quot;span.wpp.xmli.advanced_option_counter&quot; ).html( &#x27;&#x27; );
+      return;
+    }
+
+    jQuery( &quot;span.wpp.xmli.advanced_option_counter&quot; ).html( &quot;( &quot; + count + &quot; &quot; + wpp.strings.xmli.enabled_options + &quot;)&quot; );
+
+  },
+
+  /**
+   * Disables, resets, and grays out an option
+   *
+   * @param element
+   */
+  disable_advanced_option: function disable_advanced_option ( element ) {
+    jQuery( element ).prop( &#x27;disabled&#x27;, true );
+    jQuery( element ).prop( &#x27;checked&#x27;, false );
+    jQuery( element ).closest( &#x27;li.wpp_xi_advanced_setting&#x27; ).css( &#x27;opacity&#x27;, 0.3 ).removeClass( &#x27;.wpp_xi_enabld_row&#x27; );
+  },
+
+  /**
+   * Enables an option
+   *
+   * @param element
+   */
+  enable_advanced_option: function enable_advanced_option ( element ) {
+    jQuery( element ).prop( &#x27;disabled&#x27;, false );
+    jQuery( element ).closest( &#x27;li.wpp_xi_advanced_setting&#x27; ).css( &#x27;opacity&#x27;, 1 );
+  },
+
+  /**
+   * Handles functions and UI configurations when a major DOM change is made
+   *
+   */
+  refresh_dom: function refresh_dom () {
+    wpp.xmli.debug( &#x27;wpp.xmli.refresh_dom()&#x27; );
+
+    var current_page = false;
+
+    if ( window.location.hash ) {
+
+      if ( window.location.hash.length == 11 ) {
+        var hash = window.location.hash.replace( &quot;#&quot;, &quot;&quot; );
+        wpp.xmli.show_schedule_editor_ui( hash );
+        current_page = &#x27;schedule_editor&#x27;;
+      } else if ( window.location.hash == &quot;#add_new_schedule&quot; ) {
+        wpp.xmli.show_schedule_editor_ui( hash );
+        current_page = &#x27;add_new_schedule&#x27;;
+      } else {
+        current_page = &#x27;overview&#x27;;
+      }
+
+    }
+  },
+
+  /**
+   * Determine if &quot;Toggle Advanced Settings&quot; link should be displayed for this source type
+   *
+   * @param response
+   */
+  determine_settings: function determine_settings ( response ) {
+    wpp.xmli.debug( &#x27;wpp.xmli.determine_settings()&#x27; );
+
+    var source_type = jQuery( &quot;#wpp_property_import_source_type option:selected&quot; ).val();
+    var source_label = jQuery( &quot;#wpp_property_import_source_type option:selected&quot; ).html();
+    var source_url = jQuery( &quot;#wpp_property_import_remote_url&quot; ).val();
+
+    if ( source_url != &quot;&quot; &amp;&amp; source_type != &quot;&quot; ) {
+      wpp.xmli.source_status( &#x27;ready_to_check&#x27; );
+    } else {
+      wpp.xmli.source_status( &#x27;&#x27; );
+    }
+
+    /* Hide all non-import-type-specific advanced options */
+    jQuery( &quot;.wpp_i_advanced_source_settings&quot; ).hide();
+
+    /* Hide all configuration not related to this type */
+    jQuery( &quot;.wpp_something_advanced_wrapper.wppi_source_option_preview_wrapper .wpp_i_source_specific&quot; ).hide();
+    jQuery( &quot;.wpp_something_advanced_wrapper.wppi_source_option_preview_wrapper .wpp_i_source_specific[wpp_i_source_type = &quot; + source_type + &quot; ]&quot; ).not( &quot;.wpp_i_advanced_source_settings&quot; ).show();
+
+    /* Check if this source type has any advance settings, and then dispaly the link if appropriate */
+    if ( jQuery( &quot;li.wpp_i_advanced_source_settings[wpp_i_source_type=&#x27;&quot; + source_type + &quot;&#x27;]&quot; ).length ) {
+      jQuery( &quot;.wppi_source_option_preview_wrapper.wpp_something_advanced_wrapper&quot; ).show();
+      jQuery( &quot;.wppi_source_option_preview_wrapper.wpp_something_advanced_wrapper .wpp_show_advanced&quot; ).text( wpp.strings.xmli.toggle_advanced + &quot; &quot; + source_label + &quot; &quot; + wpp.strings.xmli.settings );
+    } else {
+      jQuery( &quot;.wppi_source_option_preview_wrapper.wpp_something_advanced_wrapper&quot; ).hide();
+    }
+
+    /* Check to see if any of our fields need to be update automatically */
+    if ( !response.schedule_exists ) {
+      if ( source_type == &quot;rets&quot; || source_type == &quot;gs&quot; ) {
+        jQuery( &quot;#wpp_property_import_choose_root_element&quot; ).val( &quot;//ROW&quot; );
+      }
+
+      if ( source_type == &quot;csv&quot; ) {
+        jQuery( &quot;#wpp_property_import_choose_root_element&quot; ).val( &quot;//object&quot; );
+      }
+    }
+
+  },
+
+  /**
+   * Ran after the import editor screen is displayed
+   *
+   * @param response
+   */
+  run_on_import_ui_display: function run_on_import_ui_display ( response ) {
+    wpp.xmli.debug( &#x27;wpp.xmli.run_on_import_ui_display()&#x27; );
+
+    wpp.xmli.determine_settings( response );
+    wpp.xmli.import_build_unique_id_selector();
+
+    jQuery( &quot;.wpp_xi_advanced_setting input[type=checkbox]&quot; ).each( function () {
+      var wrapper = jQuery( this ).closest( &quot;li.wpp_xi_advanced_setting&quot; );
+      if ( jQuery( this ).is( &quot;:checked&quot; ) ) {
+        jQuery( wrapper ).addClass( &#x27;wpp_xi_enabld_row&#x27; );
+      } else {
+        jQuery( wrapper ).removeClass( &#x27;wpp_xi_enabld_row&#x27; );
+      }
+    });
+
+    jQuery( &quot;.wpp_xi_advanced_setting input[type=text]&quot; ).each( function () {
+      var wrapper = jQuery( this ).closest( &quot;li.wpp_xi_advanced_setting&quot; );
+
+      if ( jQuery( this ).val() != &quot;&quot; &amp;&amp; jQuery( this ).val() != &quot;0&quot; ) {
+        jQuery( wrapper ).addClass( &#x27;wpp_xi_enabld_row&#x27; );
+        return;
+      } else {
+
+        /* Clear out zeroes */
+        jQuery( this ).val( &#x27;&#x27; );
+
+        jQuery( wrapper ).removeClass( &#x27;wpp_xi_enabld_row&#x27; );
+      }
+    });
+
+    wpp.xmli.advanced_option_counter();
+
+  }
+
+}, wpp.xmli || {} );
+
+// Bind XMLI initializer.
+jQuery( document ).ready( wpp.xmli.ready );
+
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>core/class_rets.php - WP-Property</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="http://a3d72a45d111006ec192-ec5b80a12b0b09b4d52373336afb4254.r80.cf1.rackcdn.com/usability-dynamics.png" title="WP-Property"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.38.2</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/wpp.html">wpp</a></li>
+            
+                <li><a href="../classes/wpp.overview.html">wpp.overview</a></li>
+            
+                <li><a href="../classes/wpp.xmli.html">wpp.xmli</a></li>
+            
+                <li><a href="../classes/WPP_RETS.html">WPP_RETS</a></li>
+            
+                <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: core/class_rets.php</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&lt;?php
+/**
+ * WP-Property Customized version of PHRETS
+ *
+ * @original https://github.com/troydavisson/PHRETS
+ * @class WPP_RETS
+ */
+class WPP_RETS {
+
+  public $err;
+  public $capability_url = array();
+  private $ch;
+  private $server_hostname;
+  private $server_port;
+  private $server_protocol;
+  private $server_version;
+  private $server_software;
+  private $static_headers = array();
+  private $server_information = array();
+  private $cookie_file = &quot;&quot;;
+  private $debug_file = &quot;rets_debug.txt&quot;;
+  private $debug_mode;
+  private $allowed_capabilities = array(
+    &quot;Action&quot; =&gt; 1,
+    &quot;ChangePassword&quot; =&gt; 1,
+    &quot;GetObject&quot; =&gt; 1,
+    &quot;Login&quot; =&gt; 1,
+    &quot;LoginComplete&quot; =&gt; 1,
+    &quot;Logout&quot; =&gt; 1,
+    &quot;Search&quot; =&gt; 1,
+    &quot;GetMetadata&quot; =&gt; 1,
+    &quot;ServerInformation&quot; =&gt; 1,
+    &quot;Update&quot; =&gt; 1
+  );
+  private $last_request = array();
+  private $auth_support_basic = false;
+  private $auth_support_digest = false;
+  private $last_response_headers = array();
+  private $last_response_headers_raw = &quot;&quot;;
+  private $compression_enabled = false;
+  private $ua_pwd = &quot;&quot;;
+  private $ua_auth = false;
+  private $request_id = &quot;&quot;;
+  private $disable_follow_location = false;
+  private $force_basic_authentication = false;
+  private $use_interealty_ua_auth = false;
+  private $int_result_pointer = 0;
+  public $error_info = array();
+  private $last_request_url;
+  private $last_server_response;
+  private $session_id;
+  private $catch_last_response = false;
+  private $disable_encoding_fix = false;
+  private $offset_support = false;
+  private $override_offset_protection = false;
+
+  public function WPP_RETS() {
+  }
+
+  public function GetLastServerResponse() {
+    return $this-&gt;last_server_response;
+  }
+
+  public function FirewallTest() {
+    $google = $this-&gt;FirewallTestConn( &quot;google.com&quot;, 80 );
+    $crt80 = $this-&gt;FirewallTestConn( &quot;demo.crt.realtors.org&quot;, 80 );
+    $crt6103 = $this-&gt;FirewallTestConn( &quot;demo.crt.realtors.org&quot;, 6103 );
+    $flexmls80 = $this-&gt;FirewallTestConn( &quot;retsgw.flexmls.com&quot;, 80 );
+    $flexmls6103 = $this-&gt;FirewallTestConn( &quot;retsgw.flexmls.com&quot;, 6103 );
+
+    if ( !$google &amp;&amp; !$crt80 &amp;&amp; !$crt6103 &amp;&amp; !$flexmls80 &amp;&amp; !$flexmls6103 ) {
+      echo &quot;Firewall Result: All tests failed.  Possible causes:&quot;;
+      echo &quot;&lt;ol&gt;&quot;;
+      echo &quot;&lt;li&gt;Firewall is blocking your outbound connections&lt;/li&gt;&quot;;
+      echo &quot;&lt;li&gt;You aren&#x27;t connected to the internet&lt;/li&gt;&quot;;
+      echo &quot;&lt;/ol&gt;&quot;;
+      return false;
+    }
+
+    if ( !$crt6103 &amp;&amp; !$flexmls6103 ) {
+      echo &quot;Firewall Result: All port 6103 tests failed.  &quot;;
+      echo &quot;Likely cause: Firewall is blocking your outbound connections on port 6103.&quot;;
+      return false;
+    }
+
+    if ( $google &amp;&amp; $crt6103 &amp;&amp; $crt80 &amp;&amp; $flexmls6103 &amp;&amp; $flexmls80 ) {
+      echo &quot;Firewall Result: All tests passed.&quot;;
+      return true;
+    }
+
+    if ( ( $crt6103 &amp;&amp; !$flexmls6103 ) || ( !$crt6103 &amp;&amp; $flexmls6103 ) ) {
+      echo &quot;Firewall Result: At least one port 6103 test passed.  &quot;;
+      echo &quot;Likely cause: One of the test servers might be down but connections on port 80 and port 6103 should work.&quot;;
+      return true;
+    }
+
+    if ( !$google || !$crt80 || !$flexmls80 ) {
+      echo &quot;Firewall Result: At least one port 80 test failed.  &quot;;
+      echo &quot;Likely cause: One of the test servers might be down.&quot;;
+      return true;
+    }
+
+    echo &quot;Firewall Results: Unable to guess the issue.  See individual test results above.&quot;;
+    return false;
+
+  }
+
+  private function FirewallTestConn( $hostname, $port = 6103 ) {
+    $fp = @fsockopen( $hostname, $port, $errno, $errstr, 5 );
+
+    if ( !$fp ) {
+      echo &quot;Firewall Test: {$hostname}:{$port} FAILED&lt;br&gt;\n&quot;;
+      return false;
+    } else {
+      @fclose( $fp );
+      echo &quot;Firewall Test: {$hostname}:{$port} GOOD&lt;br&gt;\n&quot;;
+      return true;
+    }
+
+  }
+
+  public function GetObject( $resource, $type, $id, $photo_number = &#x27;*&#x27;, $location = 0 ) {
+    $this-&gt;reset_error_info();
+    $return_photos = array();
+
+    if ( empty( $resource ) ) {
+      die( &quot;Resource parameter is required for GetObject() request.&quot; );
+    }
+    if ( empty( $type ) ) {
+      die( &quot;Type parameter is required for GetObject() request.&quot; );
+    }
+    if ( empty( $id ) ) {
+      die( &quot;ID parameter is required for GetObject() request.&quot; );
+    }
+    if ( empty( $this-&gt;capability_url[ &#x27;GetObject&#x27; ] ) ) {
+      die( &quot;GetObject() called but unable to find GetObject location.  Failed login?\n&quot; );
+    }
+
+    $send_id = &quot;&quot;;
+    $send_numb = &quot;&quot;;
+
+    // check if $photo_number needs fixing
+    if ( preg_match( &#x27;/\,/&#x27;, $photo_number ) ) {
+      // change the commas to colons for the request
+      $photo_number = preg_replace( &#x27;/\,/&#x27;, &#x27;:&#x27;, $photo_number );
+    }
+
+    if ( preg_match( &#x27;/\:/&#x27;, $photo_number ) ) {
+      // photo number contains multiple objects
+      // chopping and cleaning
+      $requested_numbers = explode( &quot;:&quot;, $photo_number );
+      if ( is_array( $requested_numbers ) ) {
+        foreach ( $requested_numbers as $numb ) {
+          $numb = trim( $numb );
+          if ( !empty( $numb ) || $numb == &quot;0&quot; ) {
+            $send_numb .= &quot;{$numb}:&quot;;
+          }
+        }
+      }
+      $send_numb = preg_replace( &#x27;/\:$/&#x27;, &#x27;&#x27;, $send_numb );
+    } else {
+      $send_numb = trim( $photo_number );
+    }
+
+    if ( preg_match( &#x27;/\,/&#x27;, $id ) ) {
+      // id contains multiple objects.
+      // chopping and combining with photo_number
+      $requested_ids = explode( &quot;,&quot;, $id );
+      if ( is_array( $requested_ids ) ) {
+        foreach ( $requested_ids as $req_id ) {
+          $req_id = trim( $req_id );
+          if ( !empty( $req_id ) &amp;&amp; $req_id != &quot;0&quot; ) {
+            $send_id .= &quot;{$req_id}:{$send_numb},&quot;;
+          }
+        }
+      }
+      $send_id = preg_replace( &#x27;/\,$/&#x27;, &#x27;&#x27;, $send_id );
+    } else {
+      $send_id = trim( $id ) . &#x27;:&#x27; . $send_numb;
+    }
+
+    // make request
+    $result = $this-&gt;RETSRequest( $this-&gt;capability_url[ &#x27;GetObject&#x27; ], array( &#x27;Resource&#x27; =&gt; $resource, &#x27;Type&#x27; =&gt; $type, &#x27;ID&#x27; =&gt; $send_id, &#x27;Location&#x27; =&gt; $location ) );
+    if ( !$result ) {
+      return false;
+    }
+    list( $headers, $body ) = $result;
+
+    // fix case issue if exists
+    if ( isset( $this-&gt;last_response_headers[ &#x27;Content-type&#x27; ] ) &amp;&amp; !isset( $this-&gt;last_response_headers[ &#x27;Content-Type&#x27; ] ) ) {
+      $this-&gt;last_response_headers[ &#x27;Content-Type&#x27; ] = $this-&gt;last_response_headers[ &#x27;Content-type&#x27; ];
+    }
+
+    if ( !isset( $this-&gt;last_response_headers[ &#x27;Content-Type&#x27; ] ) ) {
+      $this-&gt;last_response_headers[ &#x27;Content-Type&#x27; ] = &quot;&quot;;
+    }
+
+    // check what type of response came back
+    if ( preg_match( &#x27;/multipart/&#x27;, $this-&gt;last_response_headers[ &#x27;Content-Type&#x27; ] ) ) {
+
+      // help bad responses be more multipart compliant
+      $body = &quot;\r\n{$body}\r\n&quot;;
+
+      // multipart
+      preg_match( &#x27;/boundary\=\&quot;(.*?)\&quot;/&#x27;, $this-&gt;last_response_headers[ &#x27;Content-Type&#x27; ], $matches );
+      if ( isset( $matches[ 1 ] ) ) {
+        $boundary = $matches[ 1 ];
+      } else {
+        preg_match( &#x27;/boundary\=(.*?)(\s|$|\;)/&#x27;, $this-&gt;last_response_headers[ &#x27;Content-Type&#x27; ], $matches );
+        $boundary = $matches[ 1 ];
+      }
+      // strip quotes off of the boundary
+      $boundary = preg_replace( &#x27;/^\&quot;(.*?)\&quot;$/&#x27;, &#x27;\1&#x27;, $boundary );
+
+      // clean up the body to remove a reamble and epilogue
+      $body = preg_replace( &#x27;/^(.*?)\r\n--&#x27; . $boundary . &#x27;\r\n/&#x27;, &quot;\r\n--{$boundary}\r\n&quot;, $body );
+      // make the last one look like the rest for easier parsing
+      $body = preg_replace( &#x27;/\r\n--&#x27; . $boundary . &#x27;--/&#x27;, &quot;\r\n--{$boundary}\r\n&quot;, $body );
+
+      // cut up the message
+      $multi_parts = array();
+      $multi_parts = explode( &quot;\r\n--{$boundary}\r\n&quot;, $body );
+      // take off anything that happens before the first boundary (the preamble)
+      array_shift( $multi_parts );
+      // take off anything after the last boundary (the epilogue)
+      array_pop( $multi_parts );
+
+      // go through each part of the multipart message
+      foreach ( $multi_parts as $part ) {
+        // default to processing headers
+        $on_headers = true;
+        $on_body = false;
+        $first_body_found = false;
+        $this_photo = array();
+
+        // go through the multipart chunk line-by-line
+        $body_parts = array();
+        $body_parts = explode( &quot;\r\n&quot;, $part );
+        $this_photo[ &#x27;Data&#x27; ] = &quot;&quot;;
+        foreach ( $body_parts as $line ) {
+          if ( empty( $line ) &amp;&amp; $on_headers == true ) {
+            // blank line.  switching to processing a body and moving on
+            $on_headers = false;
+            $on_body = true;
+            continue;
+          }
+          if ( $on_headers == true ) {
+            // non blank line and we&#x27;re processing headers so save the header
+            @list( $header, $value ) = explode( &#x27;:&#x27;, $line, 2 );
+            $header = trim( $header );
+            $value = trim( $value );
+            if ( !empty( $header ) ) {
+              if ( $header == &quot;Description&quot; ) {
+                // for servers where the implementors didn&#x27;t read the next word in the RETS spec.
+                // &#x27;Description&#x27; is the BNF term. Content-Description is the correct header.
+                // fixing for sanity
+                $header = &quot;Content-Description&quot;;
+              }
+              // fix case issue if exists
+              if ( $header == &quot;Content-type&quot; ) {
+                $header = &quot;Content-Type&quot;;
+              }
+              $this_photo[ $header ] = $value;
+            }
+          }
+          if ( $on_body == true ) {
+            if ( $first_body_found == true ) {
+              // here again because a linebreak in the body section which was cut out in the explode
+              // add the CRLF back
+              $this_photo[ &#x27;Data&#x27; ] .= &quot;\r\n&quot;;
+            }
+            // non blank line and we&#x27;re processing a body so save the line as part of Data
+            $first_body_found = true;
+            $this_photo[ &#x27;Data&#x27; ] .= $line;
+          }
+        }
+        // done with parsing out the multipart response
+        // check for errors and finish up
+
+        $this_photo[ &#x27;Success&#x27; ] = true; // assuming for now
+
+        if ( preg_match( &#x27;/xml/&#x27;, $this_photo[ &#x27;Content-Type&#x27; ] ) ) {
+          // this multipart might include a RETS error
+          $xml = $this-&gt;ParseXMLResponse( $this_photo[ &#x27;Data&#x27; ] );
+
+          if ( $xml[ &#x27;ReplyCode&#x27; ] == 0 || empty( $this_photo[ &#x27;Data&#x27; ] ) ) {
+            // success but no body
+            $this_photo[ &#x27;Success&#x27; ] = true;
+          } else {
+            // RETS error in this multipart section
+            $this_photo[ &#x27;Success&#x27; ] = false;
+            $this_photo[ &#x27;ReplyCode&#x27; ] = &quot;{$xml[&#x27;ReplyCode&#x27;]}&quot;;
+            $this_photo[ &#x27;ReplyText&#x27; ] = &quot;{$xml[&#x27;ReplyText&#x27;]}&quot;;
+          }
+        }
+
+        // add information about this multipart to the returned array
+        $return_photos[ ] = $this_photo;
+      }
+    } else {
+      // all we know is that the response wasn&#x27;t a multipart so it&#x27;s either a single photo or error
+      $this_photo = array();
+
+      $this_photo[ &#x27;Success&#x27; ] = true; // assuming for now
+      if ( isset( $this-&gt;last_response_headers[ &#x27;Content-ID&#x27; ] ) ) {
+        $this_photo[ &#x27;Content-ID&#x27; ] = $this-&gt;last_response_headers[ &#x27;Content-ID&#x27; ];
+      }
+      if ( isset( $this-&gt;last_response_headers[ &#x27;Object-ID&#x27; ] ) ) {
+        $this_photo[ &#x27;Object-ID&#x27; ] = $this-&gt;last_response_headers[ &#x27;Object-ID&#x27; ];
+      }
+      if ( isset( $this-&gt;last_response_headers[ &#x27;Content-Type&#x27; ] ) ) {
+        $this_photo[ &#x27;Content-Type&#x27; ] = $this-&gt;last_response_headers[ &#x27;Content-Type&#x27; ];
+      }
+      if ( isset( $this-&gt;last_response_headers[ &#x27;MIME-Version&#x27; ] ) ) {
+        $this_photo[ &#x27;MIME-Version&#x27; ] = $this-&gt;last_response_headers[ &#x27;MIME-Version&#x27; ];
+      }
+      if ( isset( $this-&gt;last_response_headers[ &#x27;Location&#x27; ] ) ) {
+        $this_photo[ &#x27;Location&#x27; ] = $this-&gt;last_response_headers[ &#x27;Location&#x27; ];
+      }
+      if ( isset( $this-&gt;last_response_headers[ &#x27;Preferred&#x27; ] ) ) {
+        $this_photo[ &#x27;Preferred&#x27; ] = $this-&gt;last_response_headers[ &#x27;Preferred&#x27; ];
+      }
+
+      if ( isset( $this-&gt;last_response_headers[ &#x27;Description&#x27; ] ) ) {
+        if ( !empty( $this-&gt;last_response_headers[ &#x27;Description&#x27; ] ) ) {
+          // for servers where the implementors didn&#x27;t read the next word in the RETS spec.
+          // &#x27;Description&#x27; is the BNF term. Content-Description is the correct header.
+          // fixing for sanity
+          $this_photo[ &#x27;Content-Description&#x27; ] = $this-&gt;last_response_headers[ &#x27;Description&#x27; ];
+        }
+      }
+      if ( isset( $this-&gt;last_response_headers[ &#x27;Content-Description&#x27; ] ) ) {
+        $this_photo[ &#x27;Content-Description&#x27; ] = $this-&gt;last_response_headers[ &#x27;Content-Description&#x27; ];
+      }
+
+      $this_photo[ &#x27;Length&#x27; ] = strlen( $body );
+      $this_photo[ &#x27;Data&#x27; ] = $body;
+
+      if ( isset( $this-&gt;last_response_headers[ &#x27;Content-Type&#x27; ] ) ) {
+        if ( preg_match( &#x27;/xml/&#x27;, $this-&gt;last_response_headers[ &#x27;Content-Type&#x27; ] ) ) {
+          // RETS error maybe?
+          $xml = $this-&gt;ParseXMLResponse( $body );
+
+          if ( $xml[ &#x27;ReplyCode&#x27; ] == 0 || empty( $body ) ) {
+            // false alarm.  we&#x27;re good
+            $this_photo[ &#x27;Success&#x27; ] = true;
+          } else {
+            // yes, RETS error
+            $this-&gt;last_request[ &#x27;ReplyCode&#x27; ] = &quot;{$xml[&#x27;ReplyCode&#x27;]}&quot;;
+            $this-&gt;last_request[ &#x27;ReplyText&#x27; ] = &quot;{$xml[&#x27;ReplyText&#x27;]}&quot;;
+            $this_photo[ &#x27;ReplyCode&#x27; ] = &quot;{$xml[&#x27;ReplyCode&#x27;]}&quot;;
+            $this_photo[ &#x27;ReplyText&#x27; ] = &quot;{$xml[&#x27;ReplyText&#x27;]}&quot;;
+            $this_photo[ &#x27;Success&#x27; ] = false;
+          }
+        }
+      }
+
+      // add information about this photo to the returned array
+      $return_photos[ ] = $this_photo;
+    }
+
+    // return everything
+    return $return_photos;
+  }
+
+  public function IsMaxrowsReached( $pointer_id = &quot;&quot; ) {
+    if ( empty( $pointer_id ) ) {
+      $pointer_id = $this-&gt;int_result_pointer;
+    }
+    return $this-&gt;search_data[ $pointer_id ][ &#x27;maxrows_reached&#x27; ];
+  }
+
+  public function TotalRecordsFound( $pointer_id = &quot;&quot; ) {
+    if ( empty( $pointer_id ) ) {
+      $pointer_id = $this-&gt;int_result_pointer;
+    }
+    return $this-&gt;search_data[ $pointer_id ][ &#x27;total_records_found&#x27; ];
+  }
+
+  public function NumRows( $pointer_id = &quot;&quot; ) {
+    if ( empty( $pointer_id ) ) {
+      $pointer_id = $this-&gt;int_result_pointer;
+    }
+    return $this-&gt;search_data[ $pointer_id ][ &#x27;last_search_returned&#x27; ];
+  }
+
+  public function SearchGetFields( $pointer_id ) {
+    if ( !empty( $pointer_id ) ) {
+      return $this-&gt;search_data[ $pointer_id ][ &#x27;column_names&#x27; ];
+    } else {
+      return false;
+    }
+  }
+
+  public function FreeResult( $pointer_id ) {
+    if ( !empty( $pointer_id ) ) {
+      unset( $this-&gt;search_data[ $pointer_id ][ &#x27;data&#x27; ] );
+      unset( $this-&gt;search_data[ $pointer_id ][ &#x27;delimiter_character&#x27; ] );
+      unset( $this-&gt;search_data[ $pointer_id ][ &#x27;column_names&#x27; ] );
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function FetchRow( $pointer_id ) {
+
+    $this_row = false;
+
+    if ( !empty( $pointer_id ) ) {
+
+      if ( isset( $this-&gt;search_data[ $pointer_id ][ &#x27;data&#x27; ] ) ) {
+        $field_data = current( $this-&gt;search_data[ $pointer_id ][ &#x27;data&#x27; ] );
+        next( $this-&gt;search_data[ $pointer_id ][ &#x27;data&#x27; ] );
+      }
+
+      if ( !empty( $field_data ) ) {
+        $this_row = array();
+
+        // split up DATA row on delimiter found earlier
+        $field_data = preg_replace( &quot;/^{$this-&gt;search_data[ $pointer_id ][&#x27;delimiter_character&#x27;]}/&quot;, &quot;&quot;, $field_data );
+        $field_data = preg_replace( &quot;/{$this-&gt;search_data[ $pointer_id ][&#x27;delimiter_character&#x27;]}\$/&quot;, &quot;&quot;, $field_data );
+        $field_data = explode( $this-&gt;search_data[ $pointer_id ][ &#x27;delimiter_character&#x27; ], $field_data );
+
+        foreach ( $this-&gt;search_data[ $pointer_id ][ &#x27;column_names&#x27; ] as $key =&gt; $name ) {
+          // assign each value to it&#x27;s name retrieved in the COLUMNS earlier
+          $this_row[ $name ] = $field_data[ $key ];
+        }
+      }
+    }
+
+    return $this_row;
+
+  }
+
+  public function SearchQuery( $resource, $class, $query = &quot;&quot;, $optional_params = array() ) {
+    $this-&gt;reset_error_info();
+
+    if ( empty( $resource ) ) {
+      die( &quot;Resource parameter is required in SearchQuery() request.&quot; );
+    }
+    if ( empty( $class ) ) {
+      die( &quot;Class parameter is required in SearchQuery() request.&quot; );
+    }
+    if ( empty( $this-&gt;capability_url[ &#x27;Search&#x27; ] ) ) {
+      die( &quot;SearchQuery() called but unable to find Search location.  Failed login?\n&quot; );
+    }
+
+    $this-&gt;int_result_pointer++;
+    $this-&gt;search_data[ $this-&gt;int_result_pointer ][ &#x27;last_search_returned&#x27; ] = 0;
+    $this-&gt;search_data[ $this-&gt;int_result_pointer ][ &#x27;total_records_found&#x27; ] = 0;
+    $this-&gt;search_data[ $this-&gt;int_result_pointer ][ &#x27;column_names&#x27; ] = &quot;&quot;;
+    $this-&gt;search_data[ $this-&gt;int_result_pointer ][ &#x27;delimiter_character&#x27; ] = &quot;&quot;;
+    $this-&gt;search_data[ $this-&gt;int_result_pointer ][ &#x27;search_requests&#x27; ] = 0;
+
+    // setup request arguments
+    $search_arguments = array();
+
+    $search_arguments[ &#x27;SearchType&#x27; ] = $resource;
+    $search_arguments[ &#x27;Class&#x27; ] = $class;
+
+    // due to a lack of forward-thinking, reversing a previous decision
+    // check if the query passed is missing the outer parenthesis
+    // if so, add them
+    if ( empty( $query ) ) {
+      // do nothing.  http://retsdoc.onconfluence.com/display/rcpcenter/RCP+80+-+Optional+Query
+    } elseif ( $query == &quot;*&quot; || preg_match( &#x27;/^\((.*)\)$/&#x27;, $query ) ) {
+      $search_arguments[ &#x27;Query&#x27; ] = $query;
+    } else {
+      $search_arguments[ &#x27;Query&#x27; ] = &#x27;(&#x27; . $query . &#x27;)&#x27;;
+    }
+
+    if ( isset( $search_arguments[ &#x27;Query&#x27; ] ) ) {
+      $search_arguments[ &#x27;QueryType&#x27; ] = &quot;DMQL2&quot;;
+    }
+
+    // setup additional, optional request arguments
+    $search_arguments[ &#x27;Count&#x27; ] = empty( $optional_params[ &#x27;Count&#x27; ] ) ? 1 : $optional_params[ &#x27;Count&#x27; ];
+    $search_arguments[ &#x27;Format&#x27; ] = empty( $optional_params[ &#x27;Format&#x27; ] ) ? &quot;COMPACT-DECODED&quot; : $optional_params[ &#x27;Format&#x27; ];
+    $search_arguments[ &#x27;Limit&#x27; ] = empty( $optional_params[ &#x27;Limit&#x27; ] ) ? 99999999 : $optional_params[ &#x27;Limit&#x27; ];
+
+    if ( !empty( $optional_params[ &#x27;Offset&#x27; ] ) ) {
+      $search_arguments[ &#x27;Offset&#x27; ] = $optional_params[ &#x27;Offset&#x27; ];
+    } elseif ( $this-&gt;offset_support &amp;&amp; empty( $optional_params[ &#x27;Offset&#x27; ] ) ) {
+      // start auto-offset looping with Offset at 1
+      $search_arguments[ &#x27;Offset&#x27; ] = 1;
+    } else {
+    }
+
+    if ( !empty( $optional_params[ &#x27;Select&#x27; ] ) ) {
+      $search_arguments[ &#x27;Select&#x27; ] = $optional_params[ &#x27;Select&#x27; ];
+    }
+    if ( !empty( $optional_params[ &#x27;RestrictedIndicator&#x27; ] ) ) {
+      $search_arguments[ &#x27;RestrictedIndicator&#x27; ] = $optional_params[ &#x27;RestrictedIndicator&#x27; ];
+    }
+
+    $search_arguments[ &#x27;StandardNames&#x27; ] = empty( $optional_params[ &#x27;StandardNames&#x27; ] ) ? 0 : $optional_params[ &#x27;StandardNames&#x27; ];
+
+    $continue_searching = true; // Keep searching if MAX ROWS is reached and offset_support is true
+    while ( $continue_searching ) {
+
+      $this-&gt;search_data[ $this-&gt;int_result_pointer ][ &#x27;maxrows_reached&#x27; ] = false;
+      $this-&gt;search_data[ $this-&gt;int_result_pointer ][ &#x27;search_requests&#x27; ]++;
+
+      if ( $this-&gt;search_data[ $this-&gt;int_result_pointer ][ &#x27;search_requests&#x27; ] == 300 &amp;&amp; !$this-&gt;override_offset_protection ) {
+        // this call for SearchQuery() has resulted in X number of search requests
+        // which is considered excessive.  stopping the process in order to prevent
+        // abuse against the server.  almost ALWAYS happens when the user thinks Offset
+        // is supported by the server when it&#x27;s actually NOT supported
+        $this-&gt;set_error_info( &quot;phrets&quot;, -1, &quot;Last SearchQuery() has resulted in 300+ requests to the server.  Stopping to prevent abuse&quot; );
+        return false;
+      }
+
+      // make request
+      $result = $this-&gt;RETSRequest( $this-&gt;capability_url[ &#x27;Search&#x27; ], $search_arguments );
+      if ( !$result ) {
+        return false;
+      }
+      list( $headers, $body ) = $result;
+
+      $body = $this-&gt;fix_encoding( $body );
+
+      $xml = $this-&gt;ParseXMLResponse( $body );
+      if ( !$xml ) {
+        return false;
+      }
+
+      // log replycode and replytext for reference later
+      $this-&gt;last_request[ &#x27;ReplyCode&#x27; ] = &quot;{$xml[&#x27;ReplyCode&#x27;]}&quot;;
+      $this-&gt;last_request[ &#x27;ReplyText&#x27; ] = &quot;{$xml[&#x27;ReplyText&#x27;]}&quot;;
+
+      if ( $xml[ &#x27;ReplyCode&#x27; ] != 0 ) {
+        $this-&gt;set_error_info( &quot;rets&quot;, &quot;{$xml[&#x27;ReplyCode&#x27;]}&quot;, &quot;{$xml[&#x27;ReplyText&#x27;]}&quot; );
+        return false;
+      }
+
+      if ( isset( $xml-&gt;DELIMITER ) ) {
+        // delimiter found so we have at least a COLUMNS row to parse
+        $delimiter_character = chr( &quot;{$xml-&gt;DELIMITER-&gt;attributes()-&gt;value}&quot; );
+        $this-&gt;search_data[ $this-&gt;int_result_pointer ][ &#x27;delimiter_character&#x27; ] = $delimiter_character;
+        $column_names = &quot;{$xml-&gt;COLUMNS[0]}&quot;;
+        $column_names = preg_replace( &quot;/^{$delimiter_character}/&quot;, &quot;&quot;, $column_names );
+        $column_names = preg_replace( &quot;/{$delimiter_character}\$/&quot;, &quot;&quot;, $column_names );
+        $this-&gt;search_data[ $this-&gt;int_result_pointer ][ &#x27;column_names&#x27; ] = explode( $delimiter_character, $column_names );
+      }
+
+      if ( isset( $xml-&gt;DATA ) ) {
+        foreach ( $xml-&gt;DATA as $key ) {
+          $field_data = &quot;{$key}&quot;;
+          // split up DATA row on delimiter found earlier
+          $this-&gt;search_data[ $this-&gt;int_result_pointer ][ &#x27;data&#x27; ][ ] = $field_data;
+          $this-&gt;search_data[ $this-&gt;int_result_pointer ][ &#x27;last_search_returned&#x27; ]++;
+        }
+      }
+
+      if ( isset( $xml-&gt;MAXROWS ) ) {
+        // MAXROWS tag found.  the RETS server withheld records.
+        // if the server supports Offset, more requests can be sent to page through results
+        // until this tag isn&#x27;t found anymore.
+        $this-&gt;search_data[ $this-&gt;int_result_pointer ][ &#x27;maxrows_reached&#x27; ] = true;
+      }
+
+      if ( isset( $xml-&gt;COUNT ) ) {
+        // found the record count returned.  save it
+        $this-&gt;search_data[ $this-&gt;int_result_pointer ][ &#x27;total_records_found&#x27; ] = &quot;{$xml-&gt;COUNT-&gt;attributes()-&gt;Records}&quot;;
+      }
+
+      if ( isset( $xml ) ) {
+        unset( $xml );
+      }
+
+      if ( $this-&gt;IsMaxrowsReached( $this-&gt;int_result_pointer ) &amp;&amp; $this-&gt;offset_support ) {
+        $continue_searching = true;
+        $search_arguments[ &#x27;Offset&#x27; ] = $this-&gt;NumRows( $this-&gt;int_result_pointer ) + 1;
+      } else {
+        $continue_searching = false;
+      }
+    }
+
+    return $this-&gt;int_result_pointer;
+  }
+
+  public function Search( $resource, $class, $query = &quot;&quot;, $optional_params = array() ) {
+    $data_table = array();
+
+    $int_result_pointer = $this-&gt;SearchQuery( $resource, $class, $query, $optional_params );
+
+    while ( $row = $this-&gt;FetchRow( $int_result_pointer ) ) {
+      $data_table[ ] = $row;
+    }
+
+    return $data_table;
+  }
+
+  public function GetAllLookupValues( $resource ) {
+    $this-&gt;reset_error_info();
+
+    if ( empty( $resource ) ) {
+      die( &quot;Resource parameter is required in GetAllLookupValues() request.&quot; );
+    }
+    if ( empty( $this-&gt;capability_url[ &#x27;GetMetadata&#x27; ] ) ) {
+      die( &quot;GetAllLookupValues() called but unable to find GetMetadata location.  Failed login?\n&quot; );
+    }
+
+    // make request
+    $result = $this-&gt;RETSRequest( $this-&gt;capability_url[ &#x27;GetMetadata&#x27; ], array( &#x27;Type&#x27; =&gt; &#x27;METADATA-LOOKUP_TYPE&#x27;, &#x27;ID&#x27; =&gt; $resource . &#x27;:*&#x27;, &#x27;Format&#x27; =&gt; &#x27;STANDARD-XML&#x27; ) );
+    if ( !$result ) {
+      return false;
+    }
+    list( $headers, $body ) = $result;
+
+    $xml = $this-&gt;ParseXMLResponse( $body );
+    if ( !$xml ) {
+      return false;
+    }
+
+    if ( $xml[ &#x27;ReplyCode&#x27; ] != 0 ) {
+      $this-&gt;set_error_info( &quot;rets&quot;, &quot;{$xml[&#x27;ReplyCode&#x27;]}&quot;, &quot;{$xml[&#x27;ReplyText&#x27;]}&quot; );
+      return false;
+    }
+
+    $this_table = array();
+
+    // parse XML into a nice array
+    if ( $xml-&gt;METADATA ) {
+
+      foreach ( $xml-&gt;METADATA-&gt;{&#x27;METADATA-LOOKUP_TYPE&#x27;} as $key ) {
+        if ( !empty( $key-&gt;attributes()-&gt;Lookup ) ) {
+          $this_lookup = array();
+
+          $lookup_xml_array = array();
+          if ( $this-&gt;server_version == &quot;RETS/1.7.2&quot; ) {
+            $lookup_xml_array = $key-&gt;LookupType;
+          } else {
+            $lookup_xml_array = $key-&gt;Lookup;
+          }
+
+          foreach ( $lookup_xml_array as $look ) {
+            $metadataentryid = isset( $look-&gt;MetadataEntryID ) ? &quot;{$look-&gt;MetadataEntryID}&quot; : &quot;&quot;;
+            $value = isset( $look-&gt;Value ) ? &quot;{$look-&gt;Value}&quot; : &quot;&quot;;
+            $shortvalue = isset( $look-&gt;ShortValue ) ? &quot;{$look-&gt;ShortValue}&quot; : &quot;&quot;;
+            $longvalue = isset( $look-&gt;LongValue ) ? &quot;{$look-&gt;LongValue}&quot; : &quot;&quot;;
+
+            $this_lookup[ ] = array( &#x27;MetadataEntryID&#x27; =&gt; $metadataentryid, &#x27;Value&#x27; =&gt; $value, &#x27;ShortValue&#x27; =&gt; $shortvalue,
+              &#x27;LongValue&#x27; =&gt; $longvalue );
+          }
+          $this_table[ ] = array( &#x27;Lookup&#x27; =&gt; &quot;{$key-&gt;attributes()-&gt;Lookup}&quot;, &#x27;Values&#x27; =&gt; $this_lookup );
+        }
+      }
+    }
+
+    // return the big array
+    return $this_table;
+  }
+
+  public function GetLookupValues( $resource, $lookupname ) {
+    $this-&gt;reset_error_info();
+
+    if ( empty( $resource ) ) {
+      die( &quot;Resource parameter is required in GetLookupValues() request.&quot; );
+    }
+    if ( empty( $lookupname ) ) {
+      die( &quot;Lookup Name parameter is required in GetLookupValues() request.&quot; );
+    }
+    if ( empty( $this-&gt;capability_url[ &#x27;GetMetadata&#x27; ] ) ) {
+      die( &quot;GetLookupValues() called but unable to find GetMetadata location.  Failed login?\n&quot; );
+    }
+
+    // make request
+    $result = $this-&gt;RETSRequest( $this-&gt;capability_url[ &#x27;GetMetadata&#x27; ], array( &#x27;Type&#x27; =&gt; &#x27;METADATA-LOOKUP_TYPE&#x27;, &#x27;ID&#x27; =&gt; $resource . &#x27;:&#x27; . $lookupname, &#x27;Format&#x27; =&gt; &#x27;STANDARD-XML&#x27; ) );
+    if ( !$result ) {
+      return false;
+    }
+    list( $headers, $body ) = $result;
+
+    $xml = $this-&gt;ParseXMLResponse( $body );
+    if ( !$xml ) {
+      return false;
+    }
+
+    if ( $xml[ &#x27;ReplyCode&#x27; ] != 0 ) {
+      $this-&gt;set_error_info( &quot;rets&quot;, &quot;{$xml[&#x27;ReplyCode&#x27;]}&quot;, &quot;{$xml[&#x27;ReplyText&#x27;]}&quot; );
+      return false;
+    }
+
+    $this_table = array();
+
+    // parse XML into a nice array
+    if ( $xml-&gt;METADATA ) {
+
+      $lookup_xml_array = array();
+      if ( $this-&gt;server_version == &quot;RETS/1.7.2&quot; ) {
+        $lookup_xml_array = $xml-&gt;METADATA-&gt;{&#x27;METADATA-LOOKUP_TYPE&#x27;}-&gt;LookupType;
+      } else {
+        $lookup_xml_array = $xml-&gt;METADATA-&gt;{&#x27;METADATA-LOOKUP_TYPE&#x27;}-&gt;Lookup;
+      }
+
+      foreach ( $lookup_xml_array as $key ) {
+        if ( isset( $key-&gt;Value ) ) {
+
+          $metadataentryid = isset( $key-&gt;MetadataEntryID ) ? &quot;{$key-&gt;MetadataEntryID}&quot; : &quot;&quot;;
+          $value = isset( $key-&gt;Value ) ? &quot;{$key-&gt;Value}&quot; : &quot;&quot;;
+          $shortvalue = isset( $key-&gt;ShortValue ) ? &quot;{$key-&gt;ShortValue}&quot; : &quot;&quot;;
+          $longvalue = isset( $key-&gt;LongValue ) ? &quot;{$key-&gt;LongValue}&quot; : &quot;&quot;;
+
+          $this_table[ ] = array( &#x27;MetadataEntryID&#x27; =&gt; $metadataentryid, &#x27;Value&#x27; =&gt; $value, &#x27;ShortValue&#x27; =&gt; $shortvalue,
+            &#x27;LongValue&#x27; =&gt; $longvalue );
+        }
+      }
+    }
+
+    // return the big array
+    return $this_table;
+  }
+
+  public function GetMetadataResources( $id = 0 ) {
+    $this-&gt;reset_error_info();
+
+    if ( empty( $this-&gt;capability_url[ &#x27;GetMetadata&#x27; ] ) ) {
+      die( &quot;GetMetadataResources() called but unable to find GetMetadata location.  Failed login?\n&quot; );
+    }
+
+    // make request
+    $result = $this-&gt;RETSRequest( $this-&gt;capability_url[ &#x27;GetMetadata&#x27; ], array( &#x27;Type&#x27; =&gt; &#x27;METADATA-RESOURCE&#x27;, &#x27;ID&#x27; =&gt; $id, &#x27;Format&#x27; =&gt; &#x27;STANDARD-XML&#x27; ) );
+    if ( !$result ) {
+      return false;
+    }
+    list( $headers, $body ) = $result;
+
+    $xml = $this-&gt;ParseXMLResponse( $body );
+    if ( !$xml ) {
+      return false;
+    }
+
+    if ( $xml[ &#x27;ReplyCode&#x27; ] != 0 ) {
+      $this-&gt;set_error_info( &quot;rets&quot;, &quot;{$xml[&#x27;ReplyCode&#x27;]}&quot;, &quot;{$xml[&#x27;ReplyText&#x27;]}&quot; );
+      return false;
+    }
+
+    $this_resource = array();
+
+    // parse XML into a nice array
+    if ( $xml-&gt;METADATA ) {
+      foreach ( $xml-&gt;METADATA-&gt;{&#x27;METADATA-RESOURCE&#x27;}-&gt;Resource as $key =&gt; $value ) {
+        $this_resource[ &quot;{$value-&gt;ResourceID}&quot; ] = array( &#x27;ResourceID&#x27; =&gt; &quot;{$value-&gt;ResourceID}&quot;, &#x27;StandardName&#x27; =&gt; &quot;{$value-&gt;StandardName}&quot;, &#x27;VisibleName&#x27; =&gt; &quot;{$value-&gt;VisibleName}&quot;,
+          &#x27;Description&#x27; =&gt; &quot;{$value-&gt;Description}&quot;, &#x27;KeyField&#x27; =&gt; &quot;{$value-&gt;KeyField}&quot;, &#x27;ClassCount&#x27; =&gt; &quot;{$value-&gt;ClassCount}&quot;,
+          &#x27;ClassVersion&#x27; =&gt; &quot;{$value-&gt;ClassVersion}&quot;, &#x27;ClassDate&#x27; =&gt; &quot;{$value-&gt;ClassDate}&quot;, &#x27;ObjectVersion&#x27; =&gt; &quot;{$value-&gt;ObjectVersion}&quot;,
+          &#x27;ObjectDate&#x27; =&gt; &quot;{$value-&gt;ObjectDate}&quot;, &#x27;SearchHelpVersion&#x27; =&gt; &quot;{$value-&gt;SearchHelpVersion}&quot;,
+          &#x27;SearchHelpDate&#x27; =&gt; &quot;{$value-&gt;SearchHelpDate}&quot;, &#x27;EditMaskVersion&#x27; =&gt; &quot;{$value-&gt;EditMaskVersion}&quot;,
+          &#x27;EditMaskDate&#x27; =&gt; &quot;{$value-&gt;EditMaskDate}&quot;, &#x27;LookupVersion&#x27; =&gt; &quot;{$value-&gt;LookupVersion}&quot;, &#x27;LookupDate&#x27; =&gt; &quot;{$value-&gt;LookupDate}&quot;,
+          &#x27;UpdateHelpVersion&#x27; =&gt; &quot;{$value-&gt;UpdateHelpVersion}&quot;, &#x27;UpdateHelpDate&#x27; =&gt; &quot;{$value-&gt;UpdateHelpDate}&quot;,
+          &#x27;ValidationExpressionVersion&#x27; =&gt; &quot;{$value-&gt;ValidationExpressionVersion}&quot;, &#x27;ValidationExpressionDate&#x27; =&gt; &quot;{$value-&gt;ValidationExpressionDate}&quot;,
+          &#x27;ValidationLookupVersion&#x27; =&gt; &quot;{$value-&gt;ValidationLookupVersion}&quot;, &#x27;ValidationLookupDate&#x27; =&gt; &quot;{$value-&gt;ValidationLookupDate}&quot;,
+          &#x27;ValidationExternalVersion&#x27; =&gt; &quot;{$value-&gt;ValidationExternalVersion}&quot;, &#x27;ValidationExternalDate&#x27; =&gt; &quot;{$value-&gt;ValidationExternalDate}&quot; );
+      }
+    }
+
+    // send back array
+    return $this_resource;
+  }
+
+  public function GetMetadataInfo( $id = 0 ) {
+    if ( empty( $this-&gt;capability_url[ &#x27;GetMetadata&#x27; ] ) ) {
+      die( &quot;GetMetadataInfo() called but unable to find GetMetadata location.  Failed login?\n&quot; );
+    }
+    return $this-&gt;GetMetadataResources( $id );
+  }
+
+  public function GetMetadataTable( $resource, $class ) {
+    $this-&gt;reset_error_info();
+
+    $id = $resource . &#x27;:&#x27; . $class;
+    if ( empty( $resource ) ) {
+      die( &quot;Resource parameter is required in GetMetadata() request.&quot; );
+    }
+    if ( empty( $class ) ) {
+      die( &quot;Class parameter is required in GetMetadata() request.&quot; );
+    }
+    if ( empty( $this-&gt;capability_url[ &#x27;GetMetadata&#x27; ] ) ) {
+      die( &quot;GetMetadataTable() called but unable to find GetMetadata location.  Failed login?\n&quot; );
+    }
+
+    // request specific metadata
+    $result = $this-&gt;RETSRequest( $this-&gt;capability_url[ &#x27;GetMetadata&#x27; ], array( &#x27;Type&#x27; =&gt; &#x27;METADATA-TABLE&#x27;, &#x27;ID&#x27; =&gt; $id, &#x27;Format&#x27; =&gt; &#x27;STANDARD-XML&#x27; ) );
+    if ( !$result ) {
+      return false;
+    }
+    list( $headers, $body ) = $result;
+
+    $xml = $this-&gt;ParseXMLResponse( $body );
+    if ( !$xml ) {
+      return false;
+    }
+
+    // log replycode and replytext for reference later
+    $this-&gt;last_request[ &#x27;ReplyCode&#x27; ] = &quot;{$xml[&#x27;ReplyCode&#x27;]}&quot;;
+    $this-&gt;last_request[ &#x27;ReplyText&#x27; ] = &quot;{$xml[&#x27;ReplyText&#x27;]}&quot;;
+
+    if ( $xml[ &#x27;ReplyCode&#x27; ] != 0 ) {
+      $this-&gt;set_error_info( &quot;rets&quot;, &quot;{$xml[&#x27;ReplyCode&#x27;]}&quot;, &quot;{$xml[&#x27;ReplyText&#x27;]}&quot; );
+      return false;
+    }
+
+    $this_table = array();
+
+    // parse XML into a nice array
+    if ( $xml-&gt;METADATA ) {
+      foreach ( $xml-&gt;METADATA-&gt;{&#x27;METADATA-TABLE&#x27;}-&gt;Field as $key ) {
+        $this_table[ ] = array( &#x27;SystemName&#x27; =&gt; &quot;{$key-&gt;SystemName}&quot;, &#x27;StandardName&#x27; =&gt; &quot;{$key-&gt;StandardName}&quot;, &#x27;LongName&#x27; =&gt; &quot;{$key-&gt;LongName}&quot;, &#x27;DBName&#x27; =&gt; &quot;{$key-&gt;DBName}&quot;,
+          &#x27;ShortName&#x27; =&gt; &quot;{$key-&gt;ShortName}&quot;, &#x27;MaximumLength&#x27; =&gt; &quot;{$key-&gt;MaximumLength}&quot;, &#x27;DataType&#x27; =&gt; &quot;{$key-&gt;DataType}&quot;, &#x27;Precision&#x27; =&gt; &quot;{$key-&gt;Precision}&quot;,
+          &#x27;Searchable&#x27; =&gt; &quot;{$key-&gt;Searchable}&quot;, &#x27;Interpretation&#x27; =&gt; &quot;{$key-&gt;Interpretation}&quot;, &#x27;Alignment&#x27; =&gt; &quot;{$key-&gt;Alignment}&quot;,
+          &#x27;UseSeparator&#x27; =&gt; &quot;{$key-&gt;UseSeparator}&quot;, &#x27;EditMaskID&#x27; =&gt; &quot;{$key-&gt;EditMaskID}&quot;, &#x27;LookupName&#x27; =&gt; &quot;{$key-&gt;LookupName}&quot;,
+          &#x27;MaxSelect&#x27; =&gt; &quot;{$key-&gt;MaxSelect}&quot;, &#x27;Units&#x27; =&gt; &quot;{$key-&gt;Units}&quot;, &#x27;Index&#x27; =&gt; &quot;{$key-&gt;Index}&quot;, &#x27;Minimum&#x27; =&gt; &quot;{$key-&gt;Minimum}&quot;,
+          &#x27;Maximum&#x27; =&gt; &quot;{$key-&gt;Maximum}&quot;, &#x27;Default&#x27; =&gt; &quot;{$key-&gt;Default}&quot;, &#x27;Required&#x27; =&gt; &quot;{$key-&gt;Required}&quot;, &#x27;SearchHelpID&#x27; =&gt; &quot;{$key-&gt;SearchHelpID}&quot;,
+          &#x27;Unique&#x27; =&gt; &quot;{$key-&gt;Unique}&quot;, &#x27;MetadataEntryID&#x27; =&gt; &quot;{$key-&gt;MetadataEntryID}&quot;, &#x27;ModTimeStamp&#x27; =&gt; &quot;{$key-&gt;ModTimeStamp}&quot;,
+          &#x27;ForeignKeyName&#x27; =&gt; &quot;{$key-&gt;ForiengKeyName}&quot;, &#x27;ForeignField&#x27; =&gt; &quot;{$key-&gt;ForeignField}&quot;, &#x27;InKeyIndex&#x27; =&gt; &quot;{$key-&gt;InKeyIndex}&quot; );
+      }
+    }
+
+    // return the big array
+    return $this_table;
+  }
+
+  public function GetMetadata( $resource, $class ) {
+    if ( empty( $this-&gt;capability_url[ &#x27;GetMetadata&#x27; ] ) ) {
+      die( &quot;GetMetadata() called but unable to find GetMetadata location.  Failed login?\n&quot; );
+    }
+    return $this-&gt;GetMetadataTable( $resource, $class );
+  }
+
+  public function GetMetadataObjects( $id ) {
+    $this-&gt;reset_error_info();
+
+    if ( empty( $id ) ) {
+      die( &quot;ID parameter is required in GetMetadataObjects() request.&quot; );
+    }
+    if ( empty( $this-&gt;capability_url[ &#x27;GetMetadata&#x27; ] ) ) {
+      die( &quot;GetMetadataObjects() called but unable to find GetMetadata location.  Failed login?\n&quot; );
+    }
+
+    // request basic metadata information
+    $result = $this-&gt;RETSRequest( $this-&gt;capability_url[ &#x27;GetMetadata&#x27; ], array( &#x27;Type&#x27; =&gt; &#x27;METADATA-OBJECT&#x27;, &#x27;ID&#x27; =&gt; $id, &#x27;Format&#x27; =&gt; &#x27;STANDARD-XML&#x27; ) );
+    if ( !$result ) {
+      return false;
+    }
+    list( $headers, $body ) = $result;
+
+    $xml = $this-&gt;ParseXMLResponse( $body );
+    if ( !$xml ) {
+      return false;
+    }
+
+    // log replycode and replytext for reference later
+    $this-&gt;last_request[ &#x27;ReplyCode&#x27; ] = &quot;{$xml[&#x27;ReplyCode&#x27;]}&quot;;
+    $this-&gt;last_request[ &#x27;ReplyText&#x27; ] = &quot;{$xml[&#x27;ReplyText&#x27;]}&quot;;
+
+    if ( $xml[ &#x27;ReplyCode&#x27; ] != 0 ) {
+      $this-&gt;set_error_info( &quot;rets&quot;, &quot;{$xml[&#x27;ReplyCode&#x27;]}&quot;, &quot;{$xml[&#x27;ReplyText&#x27;]}&quot; );
+      return false;
+    }
+
+    $return_data = array();
+
+    if ( isset( $xml-&gt;METADATA-&gt;{&#x27;METADATA-OBJECT&#x27;} ) ) {
+      // parse XML into a nice array
+      foreach ( $xml-&gt;METADATA-&gt;{&#x27;METADATA-OBJECT&#x27;} as $key =&gt; $value ) {
+        foreach ( $value-&gt;Object as $key ) {
+          if ( !empty( $key-&gt;ObjectType ) ) {
+            $return_data[ ] = array( &#x27;MetadataEntryID&#x27; =&gt; &quot;{$key-&gt;MetadataEntryID}&quot;, &#x27;VisibleName&#x27; =&gt; &quot;{$key-&gt;VisibleName}&quot;, &#x27;ObjectTimeStamp&#x27; =&gt; &quot;{$key-&gt;ObjectTimeStamp}&quot;,
+              &#x27;ObjectCount&#x27; =&gt; &quot;{$key-&gt;ObjectCount}&quot;, &#x27;ObjectType&#x27; =&gt; &quot;{$key-&gt;ObjectType}&quot;, &#x27;StandardName&#x27; =&gt; &quot;{$key-&gt;StandardName}&quot;,
+              &#x27;MimeType&#x27; =&gt; &quot;{$key-&gt;MimeType}&quot;, &#x27;Description&#x27; =&gt; &quot;{$key-&gt;Description}&quot; );
+          }
+        }
+      }
+    }
+
+    // send back array
+    return $return_data;
+  }
+
+  public function GetMetadataClasses( $id ) {
+    $this-&gt;reset_error_info();
+
+    if ( empty( $id ) ) {
+      die( &quot;ID parameter is required in GetMetadataClasses() request.&quot; );
+    }
+    if ( empty( $this-&gt;capability_url[ &#x27;GetMetadata&#x27; ] ) ) {
+      die( &quot;GetMetadataClasses() called but unable to find GetMetadata location.  Failed login?\n&quot; );
+    }
+
+    // request basic metadata information
+    $result = $this-&gt;RETSRequest( $this-&gt;capability_url[ &#x27;GetMetadata&#x27; ], array( &#x27;Type&#x27; =&gt; &#x27;METADATA-CLASS&#x27;, &#x27;ID&#x27; =&gt; $id, &#x27;Format&#x27; =&gt; &#x27;STANDARD-XML&#x27; ) );
+    if ( !$result ) {
+      return false;
+    }
+    list( $headers, $body ) = $result;
+
+    $xml = $this-&gt;ParseXMLResponse( $body );
+    if ( !$xml ) {
+      return false;
+    }
+
+    // log replycode and replytext for reference later
+    $this-&gt;last_request[ &#x27;ReplyCode&#x27; ] = &quot;{$xml[&#x27;ReplyCode&#x27;]}&quot;;
+    $this-&gt;last_request[ &#x27;ReplyText&#x27; ] = &quot;{$xml[&#x27;ReplyText&#x27;]}&quot;;
+
+    if ( $xml[ &#x27;ReplyCode&#x27; ] != 0 ) {
+      $this-&gt;set_error_info( &quot;rets&quot;, &quot;{$xml[&#x27;ReplyCode&#x27;]}&quot;, &quot;{$xml[&#x27;ReplyText&#x27;]}&quot; );
+      return false;
+    }
+
+    $return_data = array();
+
+    // parse XML into a nice array
+    if ( $xml-&gt;METADATA ) {
+      foreach ( $xml-&gt;METADATA-&gt;{&#x27;METADATA-CLASS&#x27;} as $key =&gt; $value ) {
+        foreach ( $value-&gt;Class as $key ) {
+          if ( !empty( $key-&gt;ClassName ) ) {
+            $return_data[ ] = array( &#x27;ClassName&#x27; =&gt; &quot;{$key-&gt;ClassName}&quot;, &#x27;VisibleName&#x27; =&gt; &quot;{$key-&gt;VisibleName}&quot;, &#x27;StandardName&#x27; =&gt; &quot;{$key-&gt;StandardName}&quot;,
+              &#x27;Description&#x27; =&gt; &quot;{$key-&gt;Description}&quot;, &#x27;TableVersion&#x27; =&gt; &quot;{$key-&gt;TableVersion}&quot;, &#x27;TableDate&#x27; =&gt; &quot;{$key-&gt;TableDate}&quot;,
+              &#x27;UpdateVersion&#x27; =&gt; &quot;{$key-&gt;UpdateVersion}&quot;, &#x27;UpdateDate&#x27; =&gt; &quot;{$key-&gt;UpdateDate}&quot;, &#x27;ClassTimeStamp&#x27; =&gt; &quot;{$key-&gt;ClassTimeStamp}&quot;,
+              &#x27;DeletedFlagField&#x27; =&gt; &quot;{$key-&gt;DeletedFlagField}&quot;, &#x27;DeletedFlagValue&#x27; =&gt; &quot;{$key-&gt;DeletedFlagValue}&quot;,
+              &#x27;HasKeyIndex&#x27; =&gt; &quot;{$key-&gt;HasKeyIndex}&quot; );
+          }
+        }
+      }
+    }
+
+    // send back array
+    return $return_data;
+  }
+
+  public function GetMetadataTypes( $id = 0 ) {
+    $this-&gt;reset_error_info();
+
+    if ( empty( $this-&gt;capability_url[ &#x27;GetMetadata&#x27; ] ) ) {
+      die( &quot;GetMetadataTypes() called but unable to find GetMetadata location.  Failed login?\n&quot; );
+    }
+
+    // request basic metadata information
+    $result = $this-&gt;RETSRequest( $this-&gt;capability_url[ &#x27;GetMetadata&#x27; ], array( &#x27;Type&#x27; =&gt; &#x27;METADATA-CLASS&#x27;, &#x27;ID&#x27; =&gt; $id, &#x27;Format&#x27; =&gt; &#x27;STANDARD-XML&#x27; ) );
+    if ( !$result ) {
+      return false;
+    }
+    list( $headers, $body ) = $result;
+    $xml = $this-&gt;ParseXMLResponse( $body );
+    if ( !$xml ) {
+      return false;
+    }
+
+    // log replycode and replytext for reference later
+    $this-&gt;last_request[ &#x27;ReplyCode&#x27; ] = &quot;{$xml[&#x27;ReplyCode&#x27;]}&quot;;
+    $this-&gt;last_request[ &#x27;ReplyText&#x27; ] = &quot;{$xml[&#x27;ReplyText&#x27;]}&quot;;
+
+    if ( $xml[ &#x27;ReplyCode&#x27; ] != 0 ) {
+      $this-&gt;set_error_info( &quot;rets&quot;, &quot;{$xml[&#x27;ReplyCode&#x27;]}&quot;, &quot;{$xml[&#x27;ReplyText&#x27;]}&quot; );
+      return false;
+    }
+
+    $return_data = array();
+
+    // parse XML into a nice array
+    if ( $xml-&gt;METADATA ) {
+      foreach ( $xml-&gt;METADATA-&gt;{&#x27;METADATA-CLASS&#x27;} as $key =&gt; $value ) {
+        $resource = $value[ &#x27;Resource&#x27; ];
+        $this_resource = array();
+        foreach ( $value-&gt;Class as $key ) {
+          if ( !empty( $key-&gt;ClassName ) ) {
+            $this_resource[ ] = array( &#x27;ClassName&#x27; =&gt; &quot;{$key-&gt;ClassName}&quot;, &#x27;VisibleName&#x27; =&gt; &quot;{$key-&gt;VisibleName}&quot;, &#x27;StandardName&#x27; =&gt; &quot;{$key-&gt;StandardName}&quot;,
+              &#x27;Description&#x27; =&gt; &quot;{$key-&gt;Description}&quot;, &#x27;TableVersion&#x27; =&gt; &quot;{$key-&gt;TableVersion}&quot;, &#x27;TableDate&#x27; =&gt; &quot;{$key-&gt;TableDate}&quot;,
+              &#x27;UpdateVersion&#x27; =&gt; &quot;{$key-&gt;UpdateVersion}&quot;, &#x27;UpdateDate&#x27; =&gt; &quot;{$key-&gt;UpdateDate}&quot; );
+          }
+        }
+
+        // prepare 2-deep array
+        $return_data[ ] = array( &#x27;Resource&#x27; =&gt; &quot;{$resource}&quot;, &#x27;Data&#x27; =&gt; $this_resource );
+      }
+    }
+
+    // send back array
+    return $return_data;
+  }
+
+  public function GetServerSoftware() {
+    return $this-&gt;server_software;
+  }
+
+  public function GetServerVersion() {
+    return $this-&gt;server_version;
+  }
+
+  public function CheckAuthSupport( $type = &quot;&quot; ) {
+    if ( $type == &quot;basic&quot; ) {
+      return $this-&gt;auth_support_basic;
+    }
+    if ( $type == &quot;digest&quot; ) {
+      return $this-&gt;auth_support_digest;
+    }
+    $this-&gt;set_error_info( &quot;phrets&quot;, -1, &quot;Unknown auth type requested.&quot; );
+    return false;
+  }
+
+  public function GetAllTransactions() {
+    // read through capability_urls read during the Login and return
+    $transactions = array();
+    if ( is_array( $this-&gt;capability_url ) ) {
+      foreach ( $this-&gt;capability_url as $key =&gt; $value ) {
+        $transactions[ ] = $key;
+      }
+    }
+    return $transactions;
+  }
+
+  public function LastRequestURL() {
+    return $this-&gt;last_request_url;
+  }
+
+  public function GetLoginURL() {
+    // see if the saved Login URL has a hostname included.
+    // if not, make it based on the URL given in the Connect() call
+    $parse_results = parse_url( $this-&gt;capability_url[ &#x27;Login&#x27; ], PHP_URL_HOST );
+    if ( empty( $parse_results ) ) {
+      // login transaction gave a relative path for this action
+      $request_url = $this-&gt;server_protocol . &#x27;://&#x27; . $this-&gt;server_hostname . &#x27;:&#x27; . $this-&gt;server_port . &#x27;&#x27; . $this-&gt;capability_url[ &#x27;Login&#x27; ];
+    } else {
+      // login transaction gave an absolute path for this action
+      $request_url = $this-&gt;capability_url[ &#x27;Login&#x27; ];
+    }
+    if ( empty( $request_url ) ) {
+      $this-&gt;set_error_info( &quot;phrets&quot;, -1, &quot;Unable to find a login URL.  Did initial login fail?&quot; );
+      return false;
+    }
+    return $request_url;
+  }
+
+  public function GetServerInformation() {
+    $this-&gt;reset_error_info();
+
+    if ( empty( $this-&gt;capability_url[ &#x27;GetMetadata&#x27; ] ) ) {
+      die( &quot;GetServerInformation() called but unable to find GetMetadata location.  Failed login?\n&quot; );
+    }
+
+    // request server information
+    $result = $this-&gt;RETSRequest( $this-&gt;capability_url[ &#x27;GetMetadata&#x27; ], array( &#x27;Type&#x27; =&gt; &#x27;METADATA-SYSTEM&#x27;, &#x27;ID&#x27; =&gt; 0, &#x27;Format&#x27; =&gt; &#x27;STANDARD-XML&#x27; ) );
+    if ( !$result ) {
+      return false;
+    }
+    list( $headers, $body ) = $result;
+
+    $xml = $this-&gt;ParseXMLResponse( $body );
+    if ( !$xml ) {
+      return false;
+    }
+
+    if ( $xml[ &#x27;ReplyCode&#x27; ] != 0 ) {
+      $this-&gt;set_error_info( &quot;rets&quot;, &quot;{$xml[&#x27;ReplyCode&#x27;]}&quot;, &quot;{$xml[&#x27;ReplyText&#x27;]}&quot; );
+      return false;
+    }
+
+    if ( $this-&gt;is_server_version( &quot;1_5_or_below&quot; ) ) {
+      $system_id = isset( $xml-&gt;METADATA-&gt;{&#x27;METADATA-SYSTEM&#x27;}-&gt;System-&gt;SystemID ) ? &quot;{$xml-&gt;METADATA-&gt;{&#x27;METADATA-SYSTEM&#x27;}-&gt;System-&gt;SystemID}&quot; : &quot;&quot;;
+      $system_description = isset( $xml-&gt;METADATA-&gt;{&#x27;METADATA-SYSTEM&#x27;}-&gt;System-&gt;SystemDescription ) ? &quot;{$xml-&gt;METADATA-&gt;{&#x27;METADATA-SYSTEM&#x27;}-&gt;System-&gt;SystemDescription}&quot; : &quot;&quot;;
+      $timezone_offset = &quot;&quot;;
+    } else {
+      $system_id = isset( $xml-&gt;METADATA-&gt;{&#x27;METADATA-SYSTEM&#x27;}-&gt;SYSTEM-&gt;attributes()-&gt;SystemID ) ? &quot;{$xml-&gt;METADATA-&gt;{&#x27;METADATA-SYSTEM&#x27;}-&gt;SYSTEM-&gt;attributes()-&gt;SystemID}&quot; : &quot;&quot;;
+      $system_description = isset( $xml-&gt;METADATA-&gt;{&#x27;METADATA-SYSTEM&#x27;}-&gt;SYSTEM-&gt;attributes()-&gt;SystemDescription ) ? &quot;{$xml-&gt;METADATA-&gt;{&#x27;METADATA-SYSTEM&#x27;}-&gt;SYSTEM-&gt;attributes()-&gt;SystemDescription}&quot; : &quot;&quot;;
+      $timezone_offset = isset( $xml-&gt;METADATA-&gt;{&#x27;METADATA-SYSTEM&#x27;}-&gt;SYSTEM-&gt;attributes()-&gt;TimeZoneOffset ) ? &quot;{$xml-&gt;METADATA-&gt;{&#x27;METADATA-SYSTEM&#x27;}-&gt;SYSTEM-&gt;attributes()-&gt;TimeZoneOffset}&quot; : &quot;&quot;;
+    }
+
+    $system_comments = isset( $xml-&gt;METADATA-&gt;{&#x27;METADATA-SYSTEM&#x27;}-&gt;SYSTEM-&gt;Comments ) ? &quot;{$xml-&gt;METADATA-&gt;{&#x27;METADATA-SYSTEM&#x27;}-&gt;SYSTEM-&gt;Comments}&quot; : &quot;&quot;;
+
+    return array( &#x27;SystemID&#x27; =&gt; $system_id, &#x27;SystemDescription&#x27; =&gt; $system_description, &#x27;TimeZoneOffset&#x27; =&gt; $timezone_offset, &#x27;Comments&#x27; =&gt; $system_comments );
+  }
+
+  public function Disconnect() {
+    $this-&gt;reset_error_info();
+
+    if ( empty( $this-&gt;capability_url[ &#x27;Logout&#x27; ] ) ) {
+      die( &quot;Disconnect() called but unable to find Logout location.  Failed login?\n&quot; );
+    }
+
+    // make request
+    $result = $this-&gt;RETSRequest( $this-&gt;capability_url[ &#x27;Logout&#x27; ] );
+    if ( !$result ) {
+      return false;
+    }
+    list( $headers, $body ) = $result;
+
+    // close cURL connection
+    curl_close( $this-&gt;ch );
+
+    if ( $this-&gt;debug_mode == true ) {
+      // close cURL debug log file handler
+      fclose( $this-&gt;debug_log );
+    }
+
+    if ( file_exists( $this-&gt;cookie_file ) ) {
+      @unlink( $this-&gt;cookie_file );
+    }
+
+    return true;
+
+  }
+
+  public function Connect( $login_url, $username, $password, $ua_pwd = &quot;&quot; ) {
+    $this-&gt;reset_error_info();
+
+    if ( empty( $login_url ) ) {
+      die( &quot;PHRETS: Login URL missing from Connect()&quot; );
+    }
+    if ( empty( $username ) ) {
+      die( &quot;PHRETS: Username missing from Connect()&quot; );
+    }
+    if ( empty( $password ) ) {
+      die( &quot;PHRETS: Password missing from Connect()&quot; );
+    }
+    if ( empty( $this-&gt;static_headers[ &#x27;RETS-Version&#x27; ] ) ) {
+      $this-&gt;AddHeader( &quot;RETS-Version&quot;, &quot;RETS/1.5&quot; );
+    }
+    if ( empty( $this-&gt;static_headers[ &#x27;User-Agent&#x27; ] ) ) {
+      $this-&gt;AddHeader( &quot;User-Agent&quot;, &quot;PHRETS/1.0&quot; );
+    }
+    if ( empty( $this-&gt;static_headers[ &#x27;Accept&#x27; ] ) &amp;&amp; $this-&gt;static_headers[ &#x27;RETS-Version&#x27; ] == &quot;RETS/1.5&quot; ) {
+      $this-&gt;AddHeader( &quot;Accept&quot;, &quot;*/*&quot; );
+    }
+
+    // chop up Login URL to use for later requests
+    $url_parts = parse_url( $login_url );
+    $this-&gt;server_hostname = $url_parts[ &#x27;host&#x27; ];
+    $this-&gt;server_port = ( empty( $url_parts[ &#x27;port&#x27; ] ) ) ? 80 : $url_parts[ &#x27;port&#x27; ];
+    $this-&gt;server_protocol = $url_parts[ &#x27;scheme&#x27; ];
+
+    $this-&gt;capability_url[ &#x27;Login&#x27; ] = $url_parts[ &#x27;path&#x27; ];
+
+    if ( isset( $url_parts[ &#x27;query&#x27; ] ) &amp;&amp; !empty( $url_parts[ &#x27;query&#x27; ] ) ) {
+      $this-&gt;capability_url[ &#x27;Login&#x27; ] .= &quot;?{$url_parts[&#x27;query&#x27;]}&quot;;
+    }
+
+    $this-&gt;username = $username;
+    $this-&gt;password = $password;
+
+    if ( !empty( $ua_pwd ) ) {
+      // force use of RETS 1.7 User-Agent Authentication
+      $this-&gt;ua_auth = true;
+      $this-&gt;ua_pwd = $ua_pwd;
+    }
+
+    if ( empty( $this-&gt;cookie_file ) ) {
+      $this-&gt;cookie_file = tempnam( sys_get_temp_dir(), &quot;phrets&quot; );
+    }
+
+    @touch( $this-&gt;cookie_file );
+
+    if ( !is_writable( $this-&gt;cookie_file ) ) {
+      $this-&gt;set_error_info( &quot;phrets&quot;, -1, &quot;Cookie file \&quot;{$this-&gt;cookie_file}\&quot; cannot be written to.  Must be an absolute path and must be writable&quot; );
+      return false;
+    }
+
+    // start cURL magic
+    $this-&gt;ch = curl_init();
+    curl_setopt( $this-&gt;ch, CURLOPT_HEADERFUNCTION, array( &amp;$this, &#x27;read_custom_curl_headers&#x27; ) );
+    if ( $this-&gt;debug_mode == true ) {
+      // open file handler to be used by cURL debug log
+      $this-&gt;debug_log = fopen( $this-&gt;debug_file, &#x27;a&#x27; );
+
+      curl_setopt( $this-&gt;ch, CURLOPT_VERBOSE, 1 );
+      curl_setopt( $this-&gt;ch, CURLOPT_STDERR, $this-&gt;debug_log );
+    }
+    curl_setopt( $this-&gt;ch, CURLOPT_HEADER, false );
+    if ( $this-&gt;force_basic_authentication == true ) {
+      curl_setopt( $this-&gt;ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC );
+    } else {
+      curl_setopt( $this-&gt;ch, CURLOPT_HTTPAUTH, CURLAUTH_DIGEST | CURLAUTH_BASIC );
+    }
+    if ( $this-&gt;disable_follow_location != true ) {
+      curl_setopt( $this-&gt;ch, CURLOPT_FOLLOWLOCATION, 1 );
+    }
+    curl_setopt( $this-&gt;ch, CURLOPT_USERPWD, $this-&gt;username . &quot;:&quot; . $this-&gt;password );
+    curl_setopt( $this-&gt;ch, CURLOPT_RETURNTRANSFER, true );
+    curl_setopt( $this-&gt;ch, CURLOPT_COOKIEFILE, $this-&gt;cookie_file );
+
+    // make request to Login transaction
+    $result = $this-&gt;RETSRequest( $this-&gt;capability_url[ &#x27;Login&#x27; ] );
+    if ( !$result ) {
+      return false;
+    }
+
+    list( $headers, $body ) = $result;
+
+    // parse body response
+    $xml = $this-&gt;ParseXMLResponse( $body );
+    if ( !$xml ) {
+      return false;
+    }
+
+    // log replycode and replytext for reference later
+    $this-&gt;last_request[ &#x27;ReplyCode&#x27; ] = &quot;{$xml[&#x27;ReplyCode&#x27;]}&quot;;
+    $this-&gt;last_request[ &#x27;ReplyText&#x27; ] = &quot;{$xml[&#x27;ReplyText&#x27;]}&quot;;
+
+    // chop up login response
+    // if multiple parts of the login response aren&#x27;t found splitting on \r\n, redo using just \n
+    $login_response = array();
+
+    if ( $this-&gt;server_version == &quot;RETS/1.0&quot; ) {
+      if ( isset( $xml ) ) {
+        $login_response = explode( &quot;\r\n&quot;, $xml );
+        if ( empty( $login_response[ 3 ] ) ) {
+          $login_response = explode( &quot;\n&quot;, $xml );
+        }
+      }
+    } else {
+      if ( isset( $xml-&gt;{&#x27;RETS-RESPONSE&#x27;} ) ) {
+        $login_response = explode( &quot;\r\n&quot;, $xml-&gt;{&#x27;RETS-RESPONSE&#x27;} );
+        if ( empty( $login_response[ 3 ] ) ) {
+          $login_response = explode( &quot;\n&quot;, $xml-&gt;{&#x27;RETS-RESPONSE&#x27;} );
+        }
+      }
+    }
+
+    // parse login response.  grab all capability URLs known and ones that begin with X-
+    // otherwise, it&#x27;s a piece of server information to save for reference
+    foreach ( $login_response as $line ) {
+      @list( $name, $value ) = @explode( &quot;=&quot;, $line, 2 );
+      $name = trim( $name );
+      $value = trim( $value );
+      if ( !empty( $name ) &amp;&amp; !empty( $value ) ) {
+        if ( isset( $this-&gt;allowed_capabilities[ $name ] ) || preg_match( &#x27;/^X\-/&#x27;, $name ) == true ) {
+          $this-&gt;capability_url[ $name ] = $value;
+        } else {
+          $this-&gt;server_information[ $name ] = $value;
+        }
+      }
+    }
+
+    // if &#x27;Action&#x27; capability URL is provided, we MUST request it following the successful Login
+    if ( isset( $this-&gt;capability_url[ &#x27;Action&#x27; ] ) &amp;&amp; !empty( $this-&gt;capability_url[ &#x27;Action&#x27; ] ) ) {
+      $result = $this-&gt;RETSRequest( $this-&gt;capability_url[ &#x27;Action&#x27; ] );
+      if ( !$result ) {
+        return false;
+      }
+      list( $headers, $body ) = $result;
+    }
+
+    if ( $this-&gt;compression_enabled == true ) {
+      curl_setopt( $this-&gt;ch, CURLOPT_ENCODING, &quot;gzip&quot; );
+    }
+
+    if ( $this-&gt;last_request[ &#x27;ReplyCode&#x27; ] == 0 ) {
+      return true;
+    } else {
+      $this-&gt;set_error_info( &quot;rets&quot;, $this-&gt;last_request[ &#x27;ReplyCode&#x27; ], $this-&gt;last_request[ &#x27;ReplyText&#x27; ] );
+      return false;
+    }
+
+  }
+
+  public function LastRequest() {
+    // return replycode and replytext from last request
+    return $this-&gt;last_request;
+  }
+
+  public function AddHeader( $name, $value ) {
+    // add static header for cURL requests
+    $this-&gt;static_headers[ $name ] = $value;
+    return true;
+  }
+
+  public function DeleteHeader( $name ) {
+    // delete static header from cURL requests
+    unset( $this-&gt;static_headers[ $name ] );
+    return true;
+  }
+
+  public function ParseXMLResponse( $data = &quot;&quot; ) {
+    $this-&gt;reset_error_info();
+
+    if ( !empty( $data ) ) {
+      // parse XML function.  ability to replace SimpleXML with something later fairly easily
+      $xml = @simplexml_load_string( $data );
+      if ( !is_object( $xml ) ) {
+        $this-&gt;set_error_info( &quot;xml&quot;, -1, &quot;XML parsing error: {$data}&quot; );
+        $this-&gt;err = &quot;XML Parsing error: {$data}&quot;;
+        return false;
+      }
+      return $xml;
+    } else {
+      $this-&gt;set_error_info( &quot;xml&quot;, -1, &quot;XML parsing error.  No data to parse&quot; );
+      return false;
+    }
+  }
+
+  public function RETSRequest( $action, $parameters = &quot;&quot; ) {
+    $this-&gt;reset_error_info();
+
+    $this-&gt;err = &quot;&quot;;
+    $this-&gt;last_response_headers = array();
+    $this-&gt;last_response_headers_raw = &quot;&quot;;
+    // exposed raw RETS request function.  used internally and externally
+
+    if ( empty( $action ) ) {
+      die ( &quot;RETSRequest called but Action passed has no value.  Failed login?\n&quot; );
+    }
+
+    $parse_results = parse_url( $action, PHP_URL_HOST );
+    if ( empty( $parse_results ) ) {
+      // login transaction gave a relative path for this action
+      $request_url = $this-&gt;server_protocol . &#x27;://&#x27; . $this-&gt;server_hostname . &#x27;:&#x27; . $this-&gt;server_port . &#x27;&#x27; . $action;
+    } else {
+      // login transaction gave an absolute path for this action
+      $request_url = $action;
+    }
+
+    // build query string from arguments
+    $request_arguments = &quot;&quot;;
+    if ( is_array( $parameters ) ) {
+      $request_arguments .= &quot;?&quot;;
+      foreach ( $parameters as $key =&gt; $value ) {
+        $request_arguments .= &quot;{$key}=&quot; . urlencode( $value ) . &quot;&amp;&quot;;
+      }
+      $request_arguments = preg_replace( &#x27;/\&amp;$/&#x27;, &#x27;&#x27;, $request_arguments );
+    }
+
+    // build entire URL
+    $request_url = $request_url . $request_arguments;
+
+    // build headers to pass in cURL
+    $request_headers = &quot;&quot;;
+    if ( is_array( $this-&gt;static_headers ) ) {
+      foreach ( $this-&gt;static_headers as $key =&gt; $value ) {
+        $request_headers .= &quot;{$key}: {$value}\r\n&quot;;
+      }
+    }
+
+    if ( $this-&gt;ua_auth == true ) {
+      $session_id_to_calculate_with = &quot;&quot;;
+
+      // calculate RETS-UA-Authorization header
+      $ua_a1 = md5( $this-&gt;static_headers[ &#x27;User-Agent&#x27; ] . &#x27;:&#x27; . $this-&gt;ua_pwd );
+      $session_id_to_calculate_with = ( $this-&gt;use_interealty_ua_auth == true ) ? &quot;&quot; : $this-&gt;session_id;
+      $ua_dig_resp = md5( trim( $ua_a1 ) . &#x27;:&#x27; . trim( $this-&gt;request_id ) . &#x27;:&#x27; . trim( $session_id_to_calculate_with ) . &#x27;:&#x27; . trim( $this-&gt;static_headers[ &#x27;RETS-Version&#x27; ] ) );
+      $request_headers .= &quot;RETS-UA-Authorization: Digest {$ua_dig_resp}\r\n&quot;;
+    }
+
+    $this-&gt;last_request_url = $request_url;
+    curl_setopt( $this-&gt;ch, CURLOPT_URL, $request_url );
+
+    curl_setopt( $this-&gt;ch, CURLOPT_HTTPHEADER, array( $request_headers ) );
+
+    // do it
+    $response_body = curl_exec( $this-&gt;ch );
+
+    if ( $response_body === false ) {
+      $response_body = &#x27;Curl error: &#x27; . curl_error( $this-&gt;ch );
+    }
+
+    $response_code = curl_getinfo( $this-&gt;ch, CURLINFO_HTTP_CODE );
+
+    if ( $this-&gt;debug_mode == true ) {
+      fwrite( $this-&gt;debug_log, $response_body . &quot;\n&quot; );
+    }
+
+    if ( $this-&gt;catch_last_response == true ) {
+      $this-&gt;last_server_response = $this-&gt;last_response_headers_raw . $response_body;
+    }
+
+    if ( isset( $this-&gt;last_response_headers[ &#x27;WWW-Authenticate&#x27; ] ) ) {
+      if ( preg_match( &#x27;/Basic/&#x27;, $this-&gt;last_response_headers[ &#x27;WWW-Authenticate&#x27; ] ) ) {
+        $this-&gt;auth_support_basic = true;
+      }
+      if ( preg_match( &#x27;/Digest/&#x27;, $this-&gt;last_response_headers[ &#x27;WWW-Authenticate&#x27; ] ) ) {
+        $this-&gt;auth_support_digest = true;
+      }
+    }
+
+    if ( isset( $this-&gt;last_response_headers[ &#x27;RETS-Version&#x27; ] ) ) {
+      $this-&gt;server_version = $this-&gt;last_response_headers[ &#x27;RETS-Version&#x27; ];
+    }
+
+    if ( isset( $this-&gt;last_response_headers[ &#x27;Server&#x27; ] ) ) {
+      $this-&gt;server_software = $this-&gt;last_response_headers[ &#x27;Server&#x27; ];
+    }
+
+    if ( isset( $this-&gt;last_response_headers[ &#x27;Set-Cookie&#x27; ] ) ) {
+      if ( preg_match( &#x27;/RETS-Session-ID\=(.*?)(\;|\s+|$)/&#x27;, $this-&gt;last_response_headers[ &#x27;Set-Cookie&#x27; ], $matches ) ) {
+        $this-&gt;session_id = $matches[ 1 ];
+      }
+    }
+
+    if ( $response_code != 200 ) {
+      $this-&gt;set_error_info( &quot;http&quot;, $response_code, $response_body );
+      return false;
+    }
+
+    // return raw headers and body
+    return array( $this-&gt;last_response_headers_raw, $response_body );
+  }
+
+  private function read_custom_curl_headers( $handle, $call_string ) {
+    static $last_remembered_header;
+    $this-&gt;last_response_headers_raw .= $call_string;
+    $header = &quot;&quot;;
+    $value = &quot;&quot;;
+    @list( $header, $value ) = explode( &#x27;: &#x27;, $call_string, 2 );
+    $header = trim( $header );
+    $value = trim( $value );
+    if ( !empty( $header ) ) {
+      // new header
+      $this-&gt;last_response_headers[ $header ] = $value;
+      $last_remembered_header = $header;
+    } else {
+      // continuation of last header.  append to previous
+      $this-&gt;last_response_headers[ $last_remembered_header ] .= $call_string;
+    }
+
+    return strlen( $call_string );
+  }
+
+  public function Error() {
+    if ( isset( $this-&gt;error_info[ &#x27;type&#x27; ] ) &amp;&amp; !empty( $this-&gt;error_info[ &#x27;type&#x27; ] ) ) {
+      return $this-&gt;error_info;
+    } else {
+      return false;
+    }
+  }
+
+  private function set_error_info( $type, $code, $text ) {
+    $this-&gt;error_info[ &#x27;type&#x27; ] = $type;
+    $this-&gt;error_info[ &#x27;code&#x27; ] = $code;
+    $this-&gt;error_info[ &#x27;text&#x27; ] = $text;
+    return true;
+  }
+
+  private function reset_error_info() {
+    $this-&gt;error_info[ &#x27;type&#x27; ] = &quot;&quot;;
+    $this-&gt;error_info[ &#x27;code&#x27; ] = &quot;&quot;;
+    $this-&gt;error_info[ &#x27;text&#x27; ] = &quot;&quot;;
+    return true;
+  }
+
+  private function is_server_version( $check_version ) {
+    if ( $check_version == &quot;1_5_or_below&quot; ) {
+      if ( $this-&gt;GetServerVersion() == &quot;RETS/1.5&quot; || $this-&gt;GetServerVersion() == &quot;RETS/1.0&quot; ) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    if ( $check_version == &quot;1_7_or_higher&quot; ) {
+      if ( $this-&gt;GetServerVersion() == &quot;RETS/1.7&quot; || $this-&gt;GetServerVersion() == &quot;RETS/1.7.1&quot; || $this-&gt;GetServerVersion() == &quot;RETS/1.7.2&quot; ) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    return false;
+  }
+
+  private function fix_encoding( $in_str ) {
+    if ( $this-&gt;disable_encoding_fix == true ) {
+      return $in_str;
+    }
+
+    $in_str = preg_replace( &#x27;/\&amp;\s/&#x27;, &#x27;&amp;amp; &#x27;, $in_str );
+    $cur_encoding = mb_detect_encoding( $in_str );
+    if ( $cur_encoding == &quot;UTF-8&quot; &amp;&amp; mb_check_encoding( $in_str, &quot;UTF-8&quot; ) ) {
+      return $in_str;
+    } else {
+      return utf8_encode( $in_str );
+    }
+  }
+
+  public function ServerDetail( $detail ) {
+    if ( isset( $this-&gt;server_information[ $detail ] ) ) {
+      return $this-&gt;server_information[ $detail ];
+    } else {
+      return &quot;&quot;;
+    }
+  }
+
+  public function SetParam( $name, $value ) {
+    switch ( $name ) {
+      case &quot;cookie_file&quot;:
+        $this-&gt;cookie_file = $value;
+        break;
+      case &quot;debug_file&quot;:
+        $this-&gt;debug_file = $value;
+        break;
+      case &quot;debug_mode&quot;:
+        $this-&gt;debug_mode = $value;
+        break;
+      case &quot;compression_enabled&quot;:
+        $this-&gt;compression_enabled = $value;
+        break;
+      case &quot;force_ua_authentication&quot;:
+        $this-&gt;ua_auth = $value;
+        break;
+      case &quot;disable_follow_location&quot;:
+        $this-&gt;disable_follow_location = $value;
+        break;
+      case &quot;force_basic_authentication&quot;:
+        $this-&gt;force_basic_authentication = $value;
+        break;
+      case &quot;use_interealty_ua_auth&quot;:
+        $this-&gt;use_interealty_ua_auth = $value;
+        break;
+      case &quot;catch_last_response&quot;:
+        $this-&gt;catch_last_response = $value;
+        break;
+      case &quot;disable_encoding_fix&quot;:
+        $this-&gt;disable_encoding_fix = $value;
+        break;
+      case &quot;offset_support&quot;:
+        $this-&gt;offset_support = $value;
+        break;
+      case &quot;override_offset_protection&quot;:
+        $this-&gt;override_offset_protection = $value;
+        break;
+      default:
+        return false;
+    }
+
+    return true;
+  }
+
+}
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

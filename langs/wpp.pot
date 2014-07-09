@@ -1,0 +1,6321 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-02 12:33+0200\n"
+"PO-Revision-Date: 2013-08-02 12:34+0200\n"
+"Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
+"Language-Team: Usability Dynamics, Inc\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_x;_n\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+
+#: ../action_hooks.php:60
+msgid "Building"
+msgstr ""
+
+#: ../action_hooks.php:61
+msgid "Floorplan"
+msgstr ""
+
+#: ../action_hooks.php:62
+msgid "Single Family Home"
+msgstr ""
+
+#: ../action_hooks.php:75 ../core/premium/class_wpp_property_import.php:2344
+msgid "Address"
+msgstr ""
+
+#: ../action_hooks.php:76 ../core/premium/class_wpp_feps.php:3962
+msgid "Price"
+msgstr ""
+
+#: ../action_hooks.php:77
+msgid "Bedrooms"
+msgstr ""
+
+#: ../action_hooks.php:78
+msgid "Bathrooms"
+msgstr ""
+
+#: ../action_hooks.php:79 ../action_hooks.php:82
+msgid "Deposit"
+msgstr ""
+
+#: ../action_hooks.php:80
+msgid "Area"
+msgstr ""
+
+#: ../action_hooks.php:81 ../core/class_functions.php:4654
+msgid "Phone Number"
+msgstr ""
+
+#: ../action_hooks.php:88
+msgid "Lease Terms"
+msgstr ""
+
+#: ../action_hooks.php:89
+msgid "Pet Policy"
+msgstr ""
+
+#: ../action_hooks.php:90
+msgid "School"
+msgstr ""
+
+#: ../action_hooks.php:91 ../core/premium/class_wpp_pdf_flyer.php:1121
+msgid "Tagline"
+msgstr ""
+
+#: ../action_hooks.php:137
+msgid "Studio"
+msgstr ""
+
+#: ../action_hooks.php:191
+msgid "The property type will determine the layout."
+msgstr ""
+
+#: ../action_hooks.php:192
+msgid ""
+"Customize what appears in search results in the attribute section.  For "
+"example: 1bed, 2baths, area varies slightly."
+msgstr ""
+
+#: ../action_hooks.php:193
+msgid "Will appear on overview pages and on top of every listing page."
+msgstr ""
+
+#: ../default_api.php:22
+msgid "Sorry, invalid request."
+msgstr ""
+
+#: ../default_api.php:242 ../core/premium/class_wpp_power_tools.php:410
+msgid "View "
+msgstr ""
+
+#: ../default_api.php:355 ../core/class_widgets.php:706
+#: ../core/class_widgets.php:816 ../core/class_widgets.php:957
+#: ../core/class_widgets.php:1062 ../core/class_widgets.php:1303
+#: ../core/premium/class_wpp_pdf_flyer.php:1091
+#: ../core/premium/class_wpp_property_import.php:2357
+#: ../templates/template-functions.php:1284
+msgid "Property Type"
+msgstr ""
+
+#: ../default_api.php:359 ../core/class_core.php:824
+#: ../core/class_functions.php:4649
+#: ../core/premium/class_wpp_property_import.php:2347
+msgid "City"
+msgstr ""
+
+#: ../default_api.php:479
+msgid "For Sale"
+msgstr ""
+
+#: ../default_api.php:480
+msgid "For Rent"
+msgstr ""
+
+#: ../default_api.php:488
+msgid "This is a rental property."
+msgstr ""
+
+#: ../default_api.php:494
+msgid "This property is for sale."
+msgstr ""
+
+#: ../default_api.php:512
+msgid "Set Coordinates Manually."
+msgstr ""
+
+#: ../default_api.php:517 ../core/premium/class_wpp_property_import.php:2352
+msgid "Latitude"
+msgstr ""
+
+#: ../default_api.php:522 ../core/premium/class_wpp_property_import.php:2353
+msgid "Longitude"
+msgstr ""
+
+#: ../default_api.php:652 ../default_api.php:658
+#: ../core/class_functions.php:2982 ../core/class_functions.php:4403
+#: ../core/premium/class_wpp_feps.php:306
+#: ../core/premium/class_wpp_feps.php:727
+#: ../core/premium/class_wpp_supermap.php:1053
+#: ../core/premium/class_wpp_supermap.php:1633
+#: ../core/ui/page_settings.php:527 ../core/ui/page_settings.php:543
+#: ../templates/template-functions.php:990
+msgid "Yes"
+msgstr ""
+
+#: ../default_api.php:693
+msgid "Format phone number."
+msgstr ""
+
+#: ../default_api.php:705
+msgid "Convert \"Yes\" and \"True\" values to checked icons on the front-end."
+msgstr ""
+
+#: ../default_api.php:759
+msgid " sq. ft."
+msgstr ""
+
+#: ../default_api.php:935
+msgid "Address was validated by Google Maps."
+msgstr ""
+
+#: ../default_api.php:937
+msgid ""
+"Address has not yet been validated, should be formatted as: street, city, "
+"state, postal code, country. Locations are validated through Google Maps."
+msgstr ""
+
+#: ../l10n.php:14 ../core/ui/property_metaboxes.php:486
+msgid "Show"
+msgstr ""
+
+#: ../l10n.php:15 ../core/ui/property_metaboxes.php:486
+msgid "Hide"
+msgstr ""
+
+#: ../l10n.php:16 ../core/class_core.php:826 ../core/class_functions.php:2442
+#: ../core/class_functions.php:4805
+#: ../core/ui/class_wpp_object_list_table.php:262
+#: ../core/ui/class_wpp_object_list_table.php:267
+msgid "Featured"
+msgstr ""
+
+#: ../l10n.php:17 ../core/ui/class_wpp_object_list_table.php:264
+msgid "Add to Featured"
+msgstr ""
+
+#: ../l10n.php:20
+msgid "Uploading"
+msgstr ""
+
+#: ../l10n.php:21
+msgid "Drop files here to upload"
+msgstr ""
+
+#: ../l10n.php:22 ../core/premium/class_wpp_feps.php:3430
+msgid "Upload Image"
+msgstr ""
+
+#: ../l10n.php:23 ../core/ui/page_settings.php:738
+#: ../core/ui/page_settings.php:745 ../core/ui/page_settings.php:751
+msgid "Cancel"
+msgstr ""
+
+#: ../l10n.php:24
+msgid "Failed"
+msgstr ""
+
+#: ../core/class_core.php:301
+msgid "Child Properties"
+msgstr ""
+
+#: ../core/class_core.php:327 ../core/class_core.php:433
+#: ../core/premium/class_admin_tools.php:384
+#: ../core/premium/class_admin_tools.php:528
+#: ../core/premium/class_admin_tools.php:587
+#: ../core/premium/class_wpp_pdf_flyer.php:1053
+#: ../core/premium/class_wpp_property_import.php:3273
+#: ../core/premium/class_wpp_slideshow.php:1139
+#: ../core/ui/page_settings.php:240
+msgid "Settings"
+msgstr ""
+
+#: ../core/class_core.php:731
+msgid "Menu Sort Order:"
+msgstr ""
+
+#: ../core/class_core.php:734
+msgid "Display in featured listings."
+msgstr ""
+
+#: ../core/class_core.php:780
+#, php-format
+msgid "Property updated. <a href=\"%s\">view property</a>"
+msgstr ""
+
+#: ../core/class_core.php:781
+msgid "Custom field updated."
+msgstr ""
+
+#: ../core/class_core.php:782
+msgid "Custom field deleted."
+msgstr ""
+
+#: ../core/class_core.php:783
+msgid "Property updated."
+msgstr ""
+
+#: ../core/class_core.php:785
+#, php-format
+msgid "Property restored to revision from %s"
+msgstr ""
+
+#: ../core/class_core.php:786
+#, php-format
+msgid "Property published. <a href=\"%s\">View property</a>"
+msgstr ""
+
+#: ../core/class_core.php:787
+msgid "Property saved."
+msgstr ""
+
+#: ../core/class_core.php:788
+#, php-format
+msgid ""
+"Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+msgstr ""
+
+#: ../core/class_core.php:789
+#, php-format
+msgid ""
+"Property scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href="
+"\"%2$s\">Preview property</a>"
+msgstr ""
+
+#: ../core/class_core.php:791
+#: ../core/premium/class_wpp_property_import.php:301
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: ../core/class_core.php:792
+#, php-format
+msgid ""
+"Property draft updated. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+msgstr ""
+
+#: ../core/class_core.php:814 ../core/class_functions.php:1102
+#: ../core/class_functions.php:2438 ../core/class_widgets.php:409
+#: ../core/class_widgets.php:627 ../core/class_widgets.php:862
+#: ../core/class_widgets.php:1102 ../core/premium/class_wpp_feps.php:3036
+#: ../core/premium/class_wpp_feps.php:3071
+msgid "Title"
+msgstr ""
+
+#: ../core/class_core.php:815 ../core/class_functions.php:2439
+#: ../core/class_functions.php:4801 ../core/ud_api.php:1004
+#: ../core/premium/class_admin_tools.php:585
+#: ../core/premium/class_wpp_facebook_tabs.php:1278
+msgid "Type"
+msgstr ""
+
+#: ../core/class_core.php:825 ../core/class_functions.php:2440
+msgid "Overview"
+msgstr ""
+
+#: ../core/class_core.php:827 ../core/ui/property_metaboxes.php:66
+#: ../core/ui/property_metaboxes.php:67
+msgid "Order"
+msgstr ""
+
+#: ../core/class_core.php:828 ../core/class_functions.php:2449
+#: ../core/premium/class_wpp_pdf_flyer.php:836
+msgid "Thumbnail"
+msgstr ""
+
+#: ../core/class_core.php:1077 ../core/premium/class_wpp_feps.php:461
+msgid "General Information"
+msgstr ""
+
+#: ../core/class_core.php:1087
+msgid "NO NAME"
+msgstr ""
+
+#: ../core/class_core.php:1093 ../templates/template-functions.php:1401
+msgid "Search"
+msgstr ""
+
+#: ../core/class_core.php:1308
+msgid "Floor plans at location:"
+msgstr ""
+
+#: ../core/class_core.php:1312
+msgid "Sort By:"
+msgstr ""
+
+#: ../core/class_core.php:1805 ../core/premium/class_wpp_power_tools.php:164
+msgid "View Properties"
+msgstr ""
+
+#: ../core/class_core.php:1806 ../core/premium/class_wpp_power_tools.php:168
+msgid "Add/Edit Properties"
+msgstr ""
+
+#: ../core/class_core.php:1807 ../core/premium/class_wpp_power_tools.php:170
+msgid "Edit Other Properties"
+msgstr ""
+
+#: ../core/class_core.php:1809 ../core/premium/class_wpp_power_tools.php:172
+msgid "Delete Properties"
+msgstr ""
+
+#: ../core/class_core.php:1810 ../core/premium/class_wpp_power_tools.php:176
+msgid "Publish Properties"
+msgstr ""
+
+#: ../core/class_core.php:1813 ../core/premium/class_wpp_power_tools.php:178
+msgid "Manage Settings"
+msgstr ""
+
+#: ../core/class_core.php:1815 ../core/premium/class_wpp_power_tools.php:180
+msgid "Manage Taxonomies"
+msgstr ""
+
+#: ../core/class_core.php:1898
+msgid "For more information:"
+msgstr ""
+
+#: ../core/class_core.php:1899
+msgid ""
+"<a href=\"https://usabilitydynamics.com/products/wp-property/\" target="
+"\"_blank\">WP-Property Product Page</a>"
+msgstr ""
+
+#: ../core/class_core.php:1900
+msgid ""
+"<a href=\"https://usabilitydynamics.com/products/wp-property/forum/\" target="
+"\"_blank\">WP-Property Forums</a>"
+msgstr ""
+
+#: ../core/class_core.php:1901
+msgid ""
+"<a href=\"https://usabilitydynamics.com/help/\" target=\"_blank\">WP-"
+"Property Tutorials</a>"
+msgstr ""
+
+#: ../core/class_core.php:1907
+msgid "Please upgrade Wordpress to the latest version for detailed help."
+msgstr ""
+
+#: ../core/class_core.php:1907
+msgid ""
+"Or visit <a href=\"https://usabilitydynamics.com/tutorials/wp-property-help/"
+"\" target=\"_blank\">WP-Property Help Page</a> on UsabilityDynamics.com"
+msgstr ""
+
+#: ../core/class_functions.php:67
+#, php-format
+msgid "An error occurred during API key request: <b>%s</b>."
+msgstr ""
+
+#: ../core/class_functions.php:109 ../core/class_functions.php:251
+#: ../core/class_functions.php:1252
+#: ../core/premium/class_wpp_power_tools.php:382
+msgid "Properties"
+msgstr ""
+
+#: ../core/class_functions.php:113 ../core/class_functions.php:253
+msgid "Property"
+msgstr ""
+
+#: ../core/class_functions.php:163
+#, php-format
+msgid "Property: %s"
+msgstr ""
+
+#: ../core/class_functions.php:165
+#, php-format
+msgid "Sidebar located on the %s page."
+msgstr ""
+
+#: ../core/class_functions.php:190 ../core/class_functions.php:192
+#: ../core/class_functions.php:202 ../core/class_functions.php:203
+#: ../core/class_functions.php:2441
+msgid "Features"
+msgstr ""
+
+#: ../core/class_functions.php:193 ../core/class_functions.php:204
+#: ../core/class_functions.php:213
+msgid "Feature"
+msgstr ""
+
+#: ../core/class_functions.php:194 ../core/class_functions.php:205
+msgid "Search Features"
+msgstr ""
+
+#: ../core/class_functions.php:195 ../core/class_functions.php:206
+msgid "All Features"
+msgstr ""
+
+#: ../core/class_functions.php:196 ../core/class_functions.php:207
+msgid "Parent Feature"
+msgstr ""
+
+#: ../core/class_functions.php:197 ../core/class_functions.php:208
+msgid "Parent Feature:"
+msgstr ""
+
+#: ../core/class_functions.php:198 ../core/class_functions.php:209
+msgid "Edit Feature"
+msgstr ""
+
+#: ../core/class_functions.php:199 ../core/class_functions.php:210
+msgid "Update Feature"
+msgstr ""
+
+#: ../core/class_functions.php:200 ../core/class_functions.php:211
+msgid "Add New Feature"
+msgstr ""
+
+#: ../core/class_functions.php:201 ../core/class_functions.php:212
+msgid "New Feature Name"
+msgstr ""
+
+#: ../core/class_functions.php:220 ../core/class_functions.php:222
+#: ../core/class_functions.php:232 ../core/class_functions.php:233
+msgid "Community Features"
+msgstr ""
+
+#: ../core/class_functions.php:223 ../core/class_functions.php:234
+#: ../core/class_functions.php:243
+msgid "Community Feature"
+msgstr ""
+
+#: ../core/class_functions.php:224 ../core/class_functions.php:235
+msgid "Search Community Features"
+msgstr ""
+
+#: ../core/class_functions.php:225 ../core/class_functions.php:236
+msgid "All Community Features"
+msgstr ""
+
+#: ../core/class_functions.php:226 ../core/class_functions.php:237
+msgid "Parent Community Feature"
+msgstr ""
+
+#: ../core/class_functions.php:227 ../core/class_functions.php:238
+msgid "Parent Community Feature:"
+msgstr ""
+
+#: ../core/class_functions.php:228 ../core/class_functions.php:239
+msgid "Edit Community Feature"
+msgstr ""
+
+#: ../core/class_functions.php:229 ../core/class_functions.php:240
+msgid "Update Community Feature"
+msgstr ""
+
+#: ../core/class_functions.php:230 ../core/class_functions.php:241
+msgid "Add New Community Feature"
+msgstr ""
+
+#: ../core/class_functions.php:231 ../core/class_functions.php:242
+msgid "New Community Feature Name"
+msgstr ""
+
+#: ../core/class_functions.php:252
+msgid "All Properties"
+msgstr ""
+
+#: ../core/class_functions.php:254
+msgid "Add Property"
+msgstr ""
+
+#: ../core/class_functions.php:255
+msgid "Add New Property"
+msgstr ""
+
+#: ../core/class_functions.php:256
+msgid "Edit Property"
+msgstr ""
+
+#: ../core/class_functions.php:257
+msgid "New Property"
+msgstr ""
+
+#: ../core/class_functions.php:258 ../core/premium/class_wpp_supermap.php:1069
+#: ../core/premium/class_wpp_supermap.php:1648
+msgid "View Property"
+msgstr ""
+
+#: ../core/class_functions.php:259
+msgid "Search Properties"
+msgstr ""
+
+#: ../core/class_functions.php:260
+msgid "No properties found"
+msgstr ""
+
+#: ../core/class_functions.php:261
+msgid "No properties found in Trash"
+msgstr ""
+
+#: ../core/class_functions.php:626
+msgid "Could not detect."
+msgstr ""
+
+#: ../core/class_functions.php:746
+#, php-format
+msgid "Set %1s properties to \"%2s\" property type"
+msgstr ""
+
+#: ../core/class_functions.php:1115
+msgid "Default"
+msgstr ""
+
+#: ../core/class_functions.php:1566
+msgid ""
+"If you have problems automatically downloading premium features, it may be "
+"due to PHP not having ownership issues over the premium feature folder."
+msgstr ""
+
+#: ../core/class_functions.php:1576
+msgid ""
+"There is an ownership issue with the premium folder, which means your site "
+"cannot download WP-Property premium features and receive updates.  Please "
+"contact your host to fix this - PHP needs ownership over the <b>wp-content/"
+"plugins/wp-property/core/premium</b> folder.  Be advised: changing the file "
+"permissions will not fix this."
+msgstr ""
+
+#: ../core/class_functions.php:1583
+msgid ""
+"One of the folders that is necessary for downloading additional features for "
+"the WP-Property plugin is not writable.  This means features cannot be "
+"downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-"
+"property/core/premium</b> permissions to 0755."
+msgstr ""
+
+#: ../core/class_functions.php:1677
+#, php-format
+msgid "Updated %1$d %2$s using the %3$s localization."
+msgstr ""
+
+#: ../core/class_functions.php:1680
+#, php-format
+msgid "%1$d %2$s has empty address."
+msgstr ""
+
+#: ../core/class_functions.php:1684
+#, php-format
+msgid "%1$d %2$s could not be updated."
+msgstr ""
+
+#: ../core/class_functions.php:1688
+#, php-format
+msgid "%1$d %2$s was ignored because query limit was exceeded."
+msgstr ""
+
+#: ../core/class_functions.php:2246
+msgid "Cache was successfully cleared"
+msgstr ""
+
+#: ../core/class_functions.php:2273
+msgid "The API key could not be generated."
+msgstr ""
+
+#: ../core/class_functions.php:2277
+#, php-format
+msgid ""
+"An error occurred during premium feature check. API Key '<b>%s</b>' is "
+"incorrect."
+msgstr ""
+
+#: ../core/class_functions.php:2285
+msgid "Could not do remote request."
+msgstr ""
+
+#: ../core/class_functions.php:2293
+#, php-format
+msgid "Response code from requested server is %s."
+msgstr ""
+
+#: ../core/class_functions.php:2299
+msgid ""
+"Requested server returned empty result or timeout was exceeded. Please, try "
+"again later."
+msgstr ""
+
+#: ../core/class_functions.php:2311
+msgid "There are no available premium features."
+msgstr ""
+
+#: ../core/class_functions.php:2315
+msgid ""
+"No premium features were downloaded because the setting is disabled. Enable "
+"in the \"Developer\" tab."
+msgstr ""
+
+#: ../core/class_functions.php:2325
+msgid "Specific directory for uploading premium features can not be created."
+msgstr ""
+
+#: ../core/class_functions.php:2354
+#, php-format
+msgid "<b>%s</b> updated from version %s to %s ."
+msgstr ""
+
+#: ../core/class_functions.php:2356
+#, php-format
+msgid "<b>%s</b> %s has been installed."
+msgstr ""
+
+#: ../core/class_functions.php:2359
+#, php-format
+msgid "WP-Property Premium Feature: %s"
+msgstr ""
+
+#: ../core/class_functions.php:2363
+msgid "There are no file permissions to upload or update premium features."
+msgstr ""
+
+#: ../core/class_functions.php:2369
+msgid ""
+"There are no available premium features. Check your licenses for the current "
+"domain"
+msgstr ""
+
+#: ../core/class_functions.php:2383
+msgid "Update ran successfully."
+msgstr ""
+
+#: ../core/class_functions.php:2391
+msgid "You have the latest premium features versions."
+msgstr ""
+
+#: ../core/class_functions.php:2735 ../core/class_functions.php:4655
+#: ../core/premium/class_agents.php:1673
+#: ../core/premium/class_wpp_feps.php:3961
+#: ../core/premium/class_wpp_supermap.php:200
+#: ../core/premium/class_wpp_supermap.php:342
+#: ../templates/template-functions.php:1645
+msgid "Name"
+msgstr ""
+
+#: ../core/class_functions.php:2736
+msgid "Version"
+msgstr ""
+
+#: ../core/class_functions.php:2737 ../core/premium/class_wpp_feps.php:3020
+#: ../core/premium/class_wpp_feps.php:3965
+#: ../core/premium/class_wpp_pdf_flyer.php:1326
+msgid "Description"
+msgstr ""
+
+#: ../core/class_functions.php:2738
+msgid "Minimum Core Version"
+msgstr ""
+
+#: ../core/class_functions.php:2855
+#, php-format
+msgid "An error occurred during premium feature check: <b> %s </b>."
+msgstr ""
+
+#: ../core/class_functions.php:2984 ../core/premium/class_wpp_feps.php:306
+#: ../core/premium/class_wpp_feps.php:727 ../core/ui/page_settings.php:527
+#: ../core/ui/page_settings.php:543 ../templates/template-functions.php:995
+msgid "No"
+msgstr ""
+
+#: ../core/class_functions.php:4133
+msgid " sq ft."
+msgstr ""
+
+#: ../core/class_functions.php:4371 ../core/class_functions.php:4380
+msgid "Get Directions"
+msgstr ""
+
+#: ../core/class_functions.php:4646
+#: ../core/premium/class_wpp_pdf_flyer.php:142
+msgid "General Settings"
+msgstr ""
+
+#: ../core/class_functions.php:4647
+msgid "Find your property"
+msgstr ""
+
+#: ../core/class_functions.php:4648 ../core/premium/class_agents.php:447
+#: ../core/premium/class_wpp_property_import.php:3984
+#: ../core/ui/class_wpp_object_list_table.php:130
+#: ../templates/feps-purchase-template.php:26
+#: ../templates/property-overview-my-feps.php:56
+msgid "Edit"
+msgstr ""
+
+#: ../core/class_functions.php:4650
+msgid "Contact us"
+msgstr ""
+
+#: ../core/class_functions.php:4651
+msgid "Login"
+msgstr ""
+
+#: ../core/class_functions.php:4652
+msgid "Explore"
+msgstr ""
+
+#: ../core/class_functions.php:4653
+msgid "Message"
+msgstr ""
+
+#: ../core/class_functions.php:4656
+msgid "E-mail"
+msgstr ""
+
+#: ../core/class_functions.php:4657
+msgid "Send Message"
+msgstr ""
+
+#: ../core/class_functions.php:4658
+msgid "Submit Inquiry"
+msgstr ""
+
+#: ../core/class_functions.php:4659
+msgid "Inquiry"
+msgstr ""
+
+#: ../core/class_functions.php:4660
+msgid "Comment About"
+msgstr ""
+
+#: ../core/class_functions.php:4661
+msgid "Inquire About"
+msgstr ""
+
+#: ../core/class_functions.php:4662
+msgid "Inquiry About:"
+msgstr ""
+
+#: ../core/class_functions.php:4663
+msgid "Inquiry message:"
+msgstr ""
+
+#: ../core/class_functions.php:4664
+msgid "You forgot to enter your e-mail."
+msgstr ""
+
+#: ../core/class_functions.php:4665
+msgid "You forgot to enter a message."
+msgstr ""
+
+#: ../core/class_functions.php:4666
+msgid "You forgot to enter your  name."
+msgstr ""
+
+#: ../core/class_functions.php:4667
+msgid "Error with sending message. Please contact site administrator."
+msgstr ""
+
+#: ../core/class_functions.php:4668
+msgid "Thank you for your message."
+msgstr ""
+
+#: ../core/class_functions.php:4810
+#: ../templates/property-overview-my-feps.php:41
+msgid "Status"
+msgstr ""
+
+#: ../core/class_functions.php:4815 ../core/premium/class_wpp_feps.php:297
+#: ../core/premium/class_wpp_feps.php:715
+msgid "Author"
+msgstr ""
+
+#: ../core/class_functions.php:4820
+msgid "Date"
+msgstr ""
+
+#: ../core/class_functions.php:4889 ../core/premium/class_wpp_feps.php:2367
+#: ../core/premium/class_wpp_feps.php:3190
+msgid "All"
+msgstr ""
+
+#: ../core/class_functions.php:4899 ../core/premium/class_agents.php:1974
+#: ../templates/template-functions.php:1450
+#: ../templates/template-functions.php:1462
+#: ../templates/template-functions.php:1499
+msgid "Any"
+msgstr ""
+
+#: ../core/class_functions.php:4908 ../core/class_list_table.php:306
+msgid "Show all dates"
+msgstr ""
+
+#: ../core/class_functions.php:5021
+msgid "General Help"
+msgstr ""
+
+#: ../core/class_functions.php:5022
+msgid "Comming soon..."
+msgstr ""
+
+#: ../core/class_functions.php:5039
+msgid "Default Properties Page"
+msgstr ""
+
+#: ../core/class_functions.php:5040
+msgid ""
+"The default <b>property page</b> will be used to display property search "
+"results, as well as be the base for property URLs. "
+msgstr ""
+
+#: ../core/class_functions.php:5041
+msgid ""
+"By default, the <b>Default Properties Page</b> is set to <b>properties</b>, "
+"which is a dynamically created page used for displaying property search "
+"results. "
+msgstr ""
+
+#: ../core/class_functions.php:5042
+msgid ""
+"We recommend you create an actual WordPress page to be used as the "
+"<b>Default Properties Page</b>. For example, you may create a root page "
+"called \"Real Estate\" - the URL of the default property page will be "
+msgstr ""
+
+#: ../core/class_functions.php:5044 ../core/ui/page_settings.php:268
+msgid "Display"
+msgstr ""
+
+#: ../core/class_functions.php:5045
+msgid ""
+"This tab allows you to do many things. Make custom picture sizes that will "
+"let you to make posting pictures easier. Change the way you view property "
+"photos with the use of Fancy Box, Choose  to use pagination on the bottom of "
+"property pages and whether or not to show child properties. Manage Google "
+"map attributes and map thumbnail sizes. Select here which attributes you "
+"want to show once a property is pin pointed on your map. Change your "
+"currency and placement of symbols."
+msgstr ""
+
+#: ../core/class_functions.php:5047 ../core/ui/page_settings.php:289
+msgid "Premium Features"
+msgstr ""
+
+#: ../core/class_functions.php:5048
+msgid "Tab allows you to manage your WP-Property Premium Features"
+msgstr ""
+
+#: ../core/class_functions.php:5050 ../core/ui/page_settings.php:291
+msgid "Help"
+msgstr ""
+
+#: ../core/class_functions.php:5051
+msgid ""
+"This tab will help you troubleshoot your plugin, do exports and check for "
+"updates for Premium Features"
+msgstr ""
+
+#: ../core/class_functions.php:5056
+msgid "More Help"
+msgstr ""
+
+#: ../core/class_functions.php:5057
+msgid ""
+"Visit <a target=\"_blank\" href=\"https://usabilitydynamics.com/products/wp-"
+"property/\">WP-Property Help Page</a> on UsabilityDynamics.com for more help."
+msgstr ""
+
+#: ../core/class_functions.php:5191
+#, php-format
+msgid ""
+"You cannot use your site as Facebook Application. You should <a href=\"%s"
+"\">purchase</a> WP-Property Premium Feature \"Facebook Tabs\" to manage your "
+"Facebook Tabs."
+msgstr ""
+
+#: ../core/class_functions.php:5554
+msgid "published"
+msgstr ""
+
+#: ../core/class_functions.php:5557
+msgid "pending"
+msgstr ""
+
+#: ../core/class_functions.php:5560
+msgid "trashed"
+msgstr ""
+
+#: ../core/class_functions.php:5563
+msgid "inherited"
+msgstr ""
+
+#: ../core/class_functions.php:5566
+msgid "drafted"
+msgstr ""
+
+#: ../core/class_list_table.php:378
+msgid "Nothing found."
+msgstr ""
+
+#: ../core/class_mail.php:36
+msgid "No Subject"
+msgstr ""
+
+#: ../core/class_mail.php:57
+msgid "Account Created"
+msgstr ""
+
+#: ../core/class_mail.php:58
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sYour account on [site_url] has been created and "
+"is waiting for activation.%1$s%1$sClick this link to activate your account:"
+"%1$s[activation_link]%1$s%1$sAccess data:%1$s[user_login] / [user_password]"
+msgstr ""
+
+#: ../core/class_mail.php:59
+msgid "New User account created."
+msgstr ""
+
+#: ../core/class_mail.php:61
+msgid "User Account Created"
+msgstr ""
+
+#: ../core/class_mail.php:93 ../core/class_mail.php:97
+msgid "Submission Approved"
+msgstr ""
+
+#: ../core/class_mail.php:94
+#, php-format
+msgid ""
+"Hello.%1$s%1$sYour %2$s has been published.%1$s%1$sYou can view it using "
+"this URL: %1$s[property_link]"
+msgstr ""
+
+#: ../core/class_mail.php:95
+#, php-format
+msgid "User-submitted %1$s ([property_title]) approved and published."
+msgstr ""
+
+#: ../core/class_mail.php:130 ../core/class_mail.php:134
+msgid "Status Updated"
+msgstr ""
+
+#: ../core/class_mail.php:131
+#, php-format
+msgid ""
+"Hello.%1$s%1$sYour %2$s status has been updated.%1$s%1$sYou can view it "
+"using this URL: %1$s[property_link]"
+msgstr ""
+
+#: ../core/class_mail.php:132
+#, php-format
+msgid "FEPS %1$s ([property_title]) status has been changed."
+msgstr ""
+
+#: ../core/class_mail.php:167 ../core/class_mail.php:171
+msgid "Submission Received"
+msgstr ""
+
+#: ../core/class_mail.php:168
+#, php-format
+msgid ""
+"Hello.%1$s%1$sYour %2$s has been received.%1$s%1$sYou can view it using this "
+"URL:%1$s[pending_url]"
+msgstr ""
+
+#: ../core/class_mail.php:169
+#, php-format
+msgid "User submitted %1$s ([property_title]) using FEPS."
+msgstr ""
+
+#: ../core/class_property_export.php:33
+msgid "Feed URL:"
+msgstr ""
+
+#: ../core/class_property_export.php:35
+msgid "Open"
+msgstr ""
+
+#: ../core/class_property_export.php:37
+msgid "You may append the export URL with the following arguments:"
+msgstr ""
+
+#: ../core/class_property_export.php:44
+msgid "Slug for the property type."
+msgstr ""
+
+#: ../core/class_property_export.php:45
+msgid "or"
+msgstr ""
+
+#: ../core/class_property_export.php:59
+msgid "There has been an error retreiving your API key."
+msgstr ""
+
+#: ../core/class_property_export.php:95
+msgid "Invalid API key."
+msgstr ""
+
+#: ../core/class_property_export.php:135
+msgid "No published properties."
+msgstr ""
+
+#: ../core/class_widgets.php:40 ../core/premium/class_admin_tools.php:300
+#, php-format
+msgid "%1s Attributes"
+msgstr ""
+
+#: ../core/class_widgets.php:43
+#, php-format
+msgid ""
+"Display a list of selected %1s attributes when loaded on a single %2s page."
+msgstr ""
+
+#: ../core/class_widgets.php:164 ../core/class_widgets.php:385
+#: ../core/class_widgets.php:592 ../core/class_widgets.php:832
+#: ../core/class_widgets.php:1078 ../core/class_widgets.php:1362
+#: ../core/class_widgets.php:1660 ../core/premium/class_agents.php:2148
+#: ../core/premium/class_wpp_feps.php:4628
+msgid "Title:"
+msgstr ""
+
+#: ../core/class_widgets.php:167
+msgid "Attributes to Display:"
+msgstr ""
+
+#: ../core/class_widgets.php:182
+msgid "Display attributes labels."
+msgstr ""
+
+#: ../core/class_widgets.php:204
+#, php-format
+msgid "Other %1s"
+msgstr ""
+
+#: ../core/class_widgets.php:206
+#, php-format
+msgid ""
+"Display a list of %1s that share a parent with the currently displayed "
+"property."
+msgstr ""
+
+#: ../core/class_widgets.php:287 ../core/class_widgets.php:520
+#: ../core/class_widgets.php:745 ../core/class_widgets.php:988
+#, php-format
+msgid "%s at %s for %s"
+msgstr ""
+
+#: ../core/class_widgets.php:318 ../core/class_widgets.php:540
+#: ../core/class_widgets.php:773 ../core/class_widgets.php:1017
+msgid "More"
+msgstr ""
+
+#: ../core/class_widgets.php:331 ../core/class_widgets.php:548
+#: ../core/class_widgets.php:780 ../core/class_widgets.php:1026
+msgid "View All"
+msgstr ""
+
+#: ../core/class_widgets.php:382
+msgid ""
+"The widget will show other properties that share a parent with the currently "
+"displayed property."
+msgstr ""
+
+#: ../core/class_widgets.php:391
+msgid "Hide images."
+msgstr ""
+
+#: ../core/class_widgets.php:395 ../core/class_widgets.php:610
+#: ../core/class_widgets.php:843 ../core/class_widgets.php:1089
+msgid "Image Size:"
+msgstr ""
+
+#: ../core/class_widgets.php:400 ../core/class_widgets.php:615
+#: ../core/class_widgets.php:848 ../core/class_widgets.php:1094
+msgid "Listings to display?"
+msgstr ""
+
+#: ../core/class_widgets.php:404
+msgid "Select the attributes you want to display: "
+msgstr ""
+
+#: ../core/class_widgets.php:422 ../core/class_widgets.php:641
+#: ../core/class_widgets.php:874 ../core/class_widgets.php:1114
+msgid "Address Format:"
+msgstr ""
+
+#: ../core/class_widgets.php:430 ../core/class_widgets.php:648
+#: ../core/class_widgets.php:881 ../core/class_widgets.php:1121
+msgid "Show \"More\" link?"
+msgstr ""
+
+#: ../core/class_widgets.php:434 ../core/class_widgets.php:655
+#: ../core/class_widgets.php:887 ../core/class_widgets.php:1127
+msgid "Show \"View All\" link?"
+msgstr ""
+
+#: ../core/class_widgets.php:438
+msgid "If property has no parent, show other properties of same type."
+msgstr ""
+
+#: ../core/class_widgets.php:442
+msgid "Randomize order of displayed properties."
+msgstr ""
+
+#: ../core/class_widgets.php:459
+#, php-format
+msgid "Child %1s"
+msgstr ""
+
+#: ../core/class_widgets.php:459
+msgid "Show child properties (if any) for currently displayed property"
+msgstr ""
+
+#: ../core/class_widgets.php:590
+msgid ""
+"The widget will not be displayed if the currently viewed property has no "
+"children."
+msgstr ""
+
+#: ../core/class_widgets.php:601 ../core/class_widgets.php:839
+#: ../core/class_widgets.php:1085
+msgid "Hide Images?"
+msgstr ""
+
+#: ../core/class_widgets.php:623 ../core/class_widgets.php:858
+msgid "Select the stats you want to display"
+msgstr ""
+
+#: ../core/class_widgets.php:674
+#, php-format
+msgid "Featured %1s"
+msgstr ""
+
+#: ../core/class_widgets.php:674
+msgid "List of properties that were marked as Featured"
+msgstr ""
+
+#: ../core/class_widgets.php:855
+msgid "Display properties in random order?"
+msgstr ""
+
+#: ../core/class_widgets.php:911
+msgid "Featured Properies"
+msgstr ""
+
+#: ../core/class_widgets.php:930
+#, php-format
+msgid "Latest %1s"
+msgstr ""
+
+#: ../core/class_widgets.php:930
+msgid "List of the latest properties created on this site"
+msgstr ""
+
+#: ../core/class_widgets.php:1079
+msgid "Latest Properties"
+msgstr ""
+
+#: ../core/class_widgets.php:1098
+msgid "Select stats you want to display"
+msgstr ""
+
+#: ../core/class_widgets.php:1148
+#, php-format
+msgid "%1s Search"
+msgstr ""
+
+#: ../core/class_widgets.php:1151
+#, php-format
+msgid "Display a highly customizable  %1s search form."
+msgstr ""
+
+#: ../core/class_widgets.php:1353
+msgid "No searchable property types were found."
+msgstr ""
+
+#: ../core/class_widgets.php:1368
+msgid "Property types to search:"
+msgstr ""
+
+#: ../core/class_widgets.php:1382
+msgid "Select the attributes you want to search."
+msgstr ""
+
+#: ../core/class_widgets.php:1386
+msgid "All Attributes"
+msgstr ""
+
+#: ../core/class_widgets.php:1389
+msgid "Grouped Attributes"
+msgstr ""
+
+#: ../core/class_widgets.php:1410
+msgid "Ungrouped"
+msgstr ""
+
+#: ../core/class_widgets.php:1434
+msgid "Group attributes together."
+msgstr ""
+
+#: ../core/class_widgets.php:1446
+msgid "Default Sort Order"
+msgstr ""
+
+#: ../core/class_widgets.php:1456
+msgid "Descending"
+msgstr ""
+
+#: ../core/class_widgets.php:1457
+msgid "Acending"
+msgstr ""
+
+#: ../core/class_widgets.php:1465
+msgid "Use pagination"
+msgstr ""
+
+#: ../core/class_widgets.php:1470
+msgid "Items per page"
+msgstr ""
+
+#: ../core/class_widgets.php:1476
+msgid "Toggle Advanced Search Options"
+msgstr ""
+
+#: ../core/class_widgets.php:1506
+msgid "Search Properies"
+msgstr ""
+
+#: ../core/class_widgets.php:1530
+#, php-format
+msgid "%1s Gallery"
+msgstr ""
+
+#: ../core/class_widgets.php:1530
+msgid "List of all images attached to the current property"
+msgstr ""
+
+#: ../core/class_widgets.php:1665
+msgid "Regular Size:"
+msgstr ""
+
+#: ../core/class_widgets.php:1670
+msgid "Large Image Size:"
+msgstr ""
+
+#: ../core/class_widgets.php:1677
+#, php-format
+msgid "Show %s Images"
+msgstr ""
+
+#: ../core/class_widgets.php:1682
+msgid "Show Image Captions"
+msgstr ""
+
+#: ../core/class_widgets.php:1687
+msgid "Show Image Descriptions."
+msgstr ""
+
+#: ../core/ud_api.php:53
+msgid "API service not specified."
+msgstr ""
+
+#: ../core/ud_api.php:71
+#, php-format
+msgid "API Failure: %1s."
+msgstr ""
+
+#: ../core/ud_api.php:761
+msgid "Unknown error."
+msgstr ""
+
+#: ../core/ud_api.php:849
+#, php-format
+msgid ""
+"You cannot call UD_API::log() before the %1$s hook, since the current user "
+"is not yet known."
+msgstr ""
+
+#: ../core/ud_api.php:863
+msgid "Log Started."
+msgstr ""
+
+#: ../core/ud_api.php:968
+#, php-format
+msgid "You cannot call UD_API::add_log_page() after the %1$s hook."
+msgstr ""
+
+#: ../core/ud_api.php:997
+msgid "Log Page for"
+msgstr ""
+
+#: ../core/ud_api.php:998
+msgid "Clear Log"
+msgstr ""
+
+#: ../core/ud_api.php:1003
+msgid "Timestamp"
+msgstr ""
+
+#: ../core/ud_api.php:1005
+msgid "Event"
+msgstr ""
+
+#: ../core/ud_api.php:1006
+msgid "User"
+msgstr ""
+
+#: ../core/ud_api.php:1007
+msgid "Related Object"
+msgstr ""
+
+#: ../core/ud_api.php:1017 ../templates/template-functions.php:616
+msgid "None"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:68
+msgid "Manage Admin Tools"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:82
+#: ../core/premium/class_admin_tools.php:109
+msgid "Developer"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:83
+msgid ""
+"The <b>slug</b> is automatically created from the title and is used in the "
+"back-end.  It is also used for template selection, example: floorplan will "
+"look for a template called property-floorplan.php in your theme folder, or "
+"default to property.php if nothing is found."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:84
+msgid ""
+"If <b>Searchable</b> is checked then the property will be loaded for search, "
+"and available on the property search widget."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:85
+msgid ""
+"If <b>Location Matters</b> is checked, then an address field will be "
+"displayed for the property, and validated against Google Maps API.  "
+"Additionally, the property will be displayed on the SuperMap, if the feature "
+"is installed."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:86
+msgid ""
+"<b>Hidden Attributes</b> determine which attributes are not applicable to "
+"the given property type, and will be grayed out in the back-end."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:87
+msgid ""
+"<b>Inheritance</b> determines which attributes should be automatically "
+"inherited from the parent property"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:88
+msgid ""
+"Property attributes are meant to be short entries that can be searchable, on "
+"the back-end attributes will be displayed as single-line input boxes. On the "
+"front-end they are displayed using a definitions list."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:89
+msgid ""
+"Making an attribute as \"searchable\" will list it as one of the searchable "
+"options in the Property Search widget settings."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:90
+msgid ""
+"Be advised, attributes added via add_filter() function supercede the "
+"settings on this page."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:91
+msgid ""
+"<b>Search Input:</b> Select and input type and enter comma-separated values "
+"that you would like to be used in property search, on the front-end."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:92
+msgid ""
+"<b>Data Entry:</b> Enter comma-separated values that you would like to use "
+"on the back-end when editing properties."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:235
+#: ../core/premium/class_admin_tools.php:410
+msgid ""
+"Attention! This attribute (slug) is used by Google Validator and Address "
+"Display functionality. It is set automaticaly and can not be edited on "
+"Property Adding/Updating page."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:303
+msgid "Advanced Stats Settings:"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:304
+msgid "expand all"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:305
+msgid "collapse all"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:306
+msgid "Sort Stats by Groups"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:318
+msgid "Group Name"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:319
+#: ../core/premium/class_admin_tools.php:586
+#: ../core/premium/class_agents.php:722
+#: ../core/premium/class_wpp_supermap.php:201 ../core/ui/page_settings.php:426
+msgid "Slug"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:320
+#: ../core/premium/class_wpp_feps.php:3019 ../core/ui/page_settings.php:267
+msgid "Main"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:321
+msgid "Group Color"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:340
+msgid "Assign"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:356
+#: ../core/premium/class_agents.php:448 ../core/premium/class_agents.php:731
+#: ../core/premium/class_wpp_feps.php:3990
+#: ../core/premium/class_wpp_pdf_flyer.php:1186
+#: ../core/premium/class_wpp_property_import.php:3985
+#: ../core/premium/class_wpp_supermap.php:228
+#: ../core/premium/class_wpp_supermap.php:375
+#: ../core/ui/class_wpp_object_list_table.php:56
+#: ../core/ui/page_settings.php:466
+msgid "Delete"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:365
+msgid "Add Group"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:366
+msgid "Unassign from Group"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:369
+msgid "Apply"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:382
+#: ../core/premium/class_admin_tools.php:526
+msgid "Attribute Name"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:383
+msgid "Group"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:385
+msgid "Search Input"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:386
+msgid "Data Entry"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:416
+#: ../core/premium/class_wpp_feps.php:3040
+#: ../core/premium/class_wpp_feps.php:3082
+msgid "Toggle Advanced Settings"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:431
+msgid "Sortable."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:437
+msgid "Searchable."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:443
+msgid "Admin Only."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:449
+msgid "Format: numeric."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:455
+msgid "Format: currency."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:461
+msgid "Show in \"All Properties\" table."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:466
+msgid "Delete Attribute"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:476
+#: ../core/premium/class_admin_tools.php:495
+msgid "Free Text"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:477
+msgid "Text Input Range"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:478
+msgid "Range Dropdown"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:479
+#: ../core/premium/class_admin_tools.php:496
+msgid "Dropdown Selection"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:480
+#: ../core/premium/class_admin_tools.php:497
+msgid "Single Checkbox"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:481
+msgid "Multi-Checkbox"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:512
+#: ../core/premium/class_admin_tools.php:570
+#: ../core/premium/class_admin_tools.php:684
+#: ../core/premium/class_agents.php:737
+#: ../core/premium/class_wpp_feps.php:3098
+#: ../core/premium/class_wpp_property_import.php:2375
+#: ../core/premium/class_wpp_supermap.php:383 ../core/ui/page_settings.php:491
+msgid "Add Row"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:519
+#, php-format
+msgid "%1s Meta"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:520
+msgid ""
+"Meta is used for descriptions,  on the back-end  meta fields will be "
+"displayed as textareas.  On the front-end they will be displayed as "
+"individual sections."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:527
+msgid "Attribute Slug"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:554
+msgid "Show in Admin Only"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:560
+msgid "Delete Meta Attribute"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:581
+#, php-format
+msgid "%1s Types"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:588
+msgid "Hidden Attributes"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:589
+msgid "Inherit from Parent"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:609
+msgid "Searchable"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:616
+msgid "Location Matters"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:631
+#: ../core/premium/class_admin_tools.php:663
+msgid "Toggle Attributes Selection"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:654
+msgid "Parent Selection"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:696
+#: ../core/premium/class_wpp_property_import.php:2157
+msgid "Advanced Options"
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:699
+msgid "Show Log."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:700
+msgid ""
+"The log is always active, but the UI is hidden.  If enabled, it will be "
+"visible in the admin sidebar."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:703
+msgid "Enable 'Falls Under' deep depth."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:704
+msgid "Allows to set child property as parent."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:707
+msgid "Disable automatic feature updates."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:708
+msgid "If disabled, feature updates will not be downloaded automatically."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:711
+msgid "Disable WordPress update_post_caches() function."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:712
+msgid "This may solve Out of Memory issues if you have a lot of properties."
+msgstr ""
+
+#: ../core/premium/class_admin_tools.php:715
+msgid ""
+"Enable developer mode - some extra information displayed via Firebug console."
+msgstr ""
+
+#: ../core/premium/class_agents.php:154
+msgid "Agent Shortcodes"
+msgstr ""
+
+#: ../core/premium/class_agents.php:155
+msgid "Show agent information:"
+msgstr ""
+
+#: ../core/premium/class_agents.php:155
+msgid ", or you can specify which fields to show:"
+msgstr ""
+
+#: ../core/premium/class_agents.php:156
+msgid "To query agent properties:"
+msgstr ""
+
+#: ../core/premium/class_agents.php:158
+msgid "Shortcode Attribute Fields"
+msgstr ""
+
+#: ../core/premium/class_agents.php:159
+msgid "The following attributes can be used in the [agent_card] shortcode."
+msgstr ""
+
+#: ../core/premium/class_agents.php:177
+msgid "Example Using All Available Fields"
+msgstr ""
+
+#: ../core/premium/class_agents.php:205
+msgid "Manage Real Estate Agents"
+msgstr ""
+
+#: ../core/premium/class_agents.php:252
+#, php-format
+msgid "%1$s <span class=\"count\">(%2$s)</span>"
+msgstr ""
+
+#: ../core/premium/class_agents.php:279
+msgid "Match the \"Property Agent\" attribute to "
+msgstr ""
+
+#: ../core/premium/class_agents.php:285
+msgid " field, when it is found, and associate with agent."
+msgstr ""
+
+#: ../core/premium/class_agents.php:350
+msgid "Agent Image Size"
+msgstr ""
+
+#: ../core/premium/class_agents.php:376
+msgid "Agent Information"
+msgstr ""
+
+#: ../core/premium/class_agents.php:425 ../core/premium/class_agents.php:1968
+msgid "Agent"
+msgstr ""
+
+#: ../core/premium/class_agents.php:521
+msgid "No Properties."
+msgstr ""
+
+#: ../core/premium/class_agents.php:543
+msgid "Create Agent"
+msgstr ""
+
+#: ../core/premium/class_agents.php:543
+msgid "Update Agent"
+msgstr ""
+
+#: ../core/premium/class_agents.php:559 ../core/premium/class_agents.php:2136
+msgid "Display Name"
+msgstr ""
+
+#: ../core/premium/class_agents.php:564
+msgid "Username"
+msgstr ""
+
+#: ../core/premium/class_agents.php:567
+msgid "Usernames cannot be changed."
+msgstr ""
+
+#: ../core/premium/class_agents.php:572
+msgid "E-Mail"
+msgstr ""
+
+#: ../core/premium/class_agents.php:578
+msgid "Widget Bio"
+msgstr ""
+
+#: ../core/premium/class_agents.php:582
+msgid "Content that is displayed in the agent widget."
+msgstr ""
+
+#: ../core/premium/class_agents.php:588
+#: ../core/premium/class_wpp_pdf_flyer.php:1054
+#: ../core/premium/class_wpp_pdf_flyer.php:1515
+#: ../core/premium/class_wpp_supermap.php:829
+#: ../core/premium/class_wpp_supermap.php:1168
+#: ../core/ui/page_settings.php:325
+msgid "Options"
+msgstr ""
+
+#: ../core/premium/class_agents.php:594
+msgid "Allow property inquiries to be sent directly to agent."
+msgstr ""
+
+#: ../core/premium/class_agents.php:602 ../core/premium/class_agents.php:2139
+msgid "Full Bio"
+msgstr ""
+
+#: ../core/premium/class_agents.php:606
+msgid "Content that can be displayed in the shortcode."
+msgstr ""
+
+#: ../core/premium/class_agents.php:631
+msgid "Primary"
+msgstr ""
+
+#: ../core/premium/class_agents.php:632
+msgid "Save"
+msgstr ""
+
+#: ../core/premium/class_agents.php:633
+msgid "Associated Properties"
+msgstr ""
+
+#: ../core/premium/class_agents.php:634
+msgid "Images"
+msgstr ""
+
+#: ../core/premium/class_agents.php:655 ../core/premium/class_agents.php:831
+#: ../core/premium/class_agents.php:870
+msgid "Agents"
+msgstr ""
+
+#: ../core/premium/class_agents.php:694
+msgid "Agent Roles"
+msgstr ""
+
+#: ../core/premium/class_agents.php:695
+msgid "User roles that can be associated with properties as agents."
+msgstr ""
+
+#: ../core/premium/class_agents.php:712
+msgid "Agent Fields"
+msgstr ""
+
+#: ../core/premium/class_agents.php:713
+msgid "Extra data fields to be used for agent profiles."
+msgstr ""
+
+#: ../core/premium/class_agents.php:716
+msgid ""
+"Custom fields may be used to adapt the information about agents to suit your "
+"needs."
+msgstr ""
+
+#: ../core/premium/class_agents.php:721
+msgid "Field name"
+msgstr ""
+
+#: ../core/premium/class_agents.php:870
+#: ../core/premium/class_wpp_facebook_tabs.php:1213
+#: ../core/premium/class_wpp_feps.php:2885
+#: ../core/premium/class_wpp_property_import.php:3892
+msgid "Add New"
+msgstr ""
+
+#: ../core/premium/class_agents.php:892
+msgid "User removed."
+msgstr ""
+
+#: ../core/premium/class_agents.php:957
+msgid "Please enter a valid e-mail."
+msgstr ""
+
+#: ../core/premium/class_agents.php:967
+msgid "Agent updated."
+msgstr ""
+
+#: ../core/premium/class_agents.php:970
+msgid "Agent created."
+msgstr ""
+
+#: ../core/premium/class_agents.php:973
+msgid "Edit Agent"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1042
+msgid "Associated Agents"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1107
+#, php-format
+msgid "You can add fields on the <a href=\"%s\">settings page</a>."
+msgstr ""
+
+#: ../core/premium/class_agents.php:1112
+msgid "Flyer Writeup"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1115
+msgid "Please enter a writeup for flyers."
+msgstr ""
+
+#: ../core/premium/class_agents.php:1185
+#: ../core/premium/class_wpp_supermap.php:495
+msgid "File should be an image"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1187
+msgid "Agent ID is not set"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1218
+#: ../core/premium/class_wpp_supermap.php:548
+msgid "Looks like, Image can not be uploaded."
+msgstr ""
+
+#: ../core/premium/class_agents.php:1222
+msgid "Image of Real Estate Agent #"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1223
+msgid "Image for User #"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1259
+msgid "Please save first to add images."
+msgstr ""
+
+#: ../core/premium/class_agents.php:1266
+msgid "No images found."
+msgstr ""
+
+#: ../core/premium/class_agents.php:1276 ../core/premium/class_agents.php:1322
+#: ../templates/property-overview-my-feps.php:59
+msgid "Remove"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1285
+msgid "Please enable JavaScript to use file uploader"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1289
+msgid "Add Image"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1544
+msgid "Moderate comments"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1545
+msgid "Manage categories"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1546
+msgid "Manage links"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1547
+msgid "Upload files"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1548
+msgid "Edit posts"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1549
+msgid "Edit other's posts"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1550
+msgid "Edit published posts"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1551
+msgid "Publish posts"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1552
+msgid "Edit pages"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1553
+msgid "Read"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1554
+msgid "Edit other's pages"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1555
+msgid "Edit published pages"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1556
+msgid "Publish pages"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1557
+msgid "Delete pages"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1558
+msgid "Delete other's pages"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1559
+msgid "Delete published pages"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1560
+msgid "Delete posts"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1561
+msgid "Delete other's posts"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1562
+msgid "Delete published posts"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1563
+msgid "Delete private posts"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1564
+msgid "Edit private posts"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1565
+msgid "Read private posts"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1566
+msgid "Delete private pages"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1567
+msgid "Edit private pages"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1568
+msgid "Read private pages"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1672
+#: ../templates/template-functions.php:1647
+msgid "Email"
+msgstr ""
+
+#: ../core/premium/class_agents.php:1781
+msgid ""
+"Agent can see only the properties which are assigned to him. Agent will be "
+"automaticly assigned to the property which he will create."
+msgstr ""
+
+#: ../core/premium/class_agents.php:2137
+#: ../core/premium/class_wpp_supermap.php:199
+msgid "Image"
+msgstr ""
+
+#: ../core/premium/class_agents.php:2138
+msgid "Widget Text"
+msgstr ""
+
+#: ../core/premium/class_agents.php:2145
+msgid "Email Address"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:146
+#: ../core/premium/class_wpp_facebook_tabs.php:211
+#: ../core/premium/class_wpp_facebook_tabs.php:1212
+msgid "Facebook Tabs"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:212
+msgid ""
+"Feature allows you to create Facebook Canvases for Tabs or Applications."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:213
+msgid ""
+"Note that SSL support for your page tab app has been mandatory since October "
+"1, 2011."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:215
+msgid "<b>Name</b><br />"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:216
+msgid "General name of your Canvas."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:217
+msgid "Name is used for canvas links generation. See Facebook App Setup tab."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:218
+msgid ""
+"Links use sanitized name of your Canvas' name. So they will be recreated "
+"every time you change the name."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:219
+msgid "Make sure you do not have Canvases with the same slugs."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:221
+msgid "<b>Page Settings</b><br/>"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:222
+msgid ""
+"<b>Type</b><br />The list of available post types. Available pages depend on "
+"the selected type."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:223
+msgid ""
+"<b>Page</b><br />The page of your site which has the content which you need "
+"to display in your Facebook Tab or Application."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:224
+msgid ""
+"<b>Hide the selected page from Regular WordPress</b><br />Hidden pages will "
+"not be accessible in Regular Wordpress and in other Premium Features too. "
+"The current option is only related to pages."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:226
+msgid "<b>Template Settings</b><br/>"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:227
+msgid ""
+"<b>Template</b><br />Specify one of existing templates for displaying Page "
+"content. Default are <code>templates/fb-tab-page.php</code> and "
+"<code>templates/fb-tab-property.php</code>.<br/>"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:228
+msgid ""
+"You can add your own templates named like <code>fb-tab-{your name}.php</"
+"code> in your theme folder and with the comment inside like:"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:229
+msgid ""
+"<pre><code>/**<br/>&nbsp;* Template Name: {your name}<br/>&nbsp;* Type: "
+"{page|property}<br/>&nbsp*/</code></pre>Use Default template as a base for "
+"your own."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:230
+msgid ""
+"<b>Enable theme's template parts</b><br />Canvas uses default WP-Property "
+"template parts by default ( e.g. <code>templates/property_overview.php</"
+"code> , <code>templates/property_search.php</code> ).<br/>If enabled "
+"(checked), application will load template parts from your theme's folder if "
+"they exist. <b>But, remember, custom template parts can be incompatible with "
+"default CSS styles.</b>"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:231
+msgid ""
+"<b>Open links in new window</b><br />Check this option if you need to open "
+"EACH link of your WP-Property Facebook Tab in new window."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:232
+msgid ""
+"<b>Open forms in new window</b><br />The same as <b>Open links in new "
+"window</b> but for forms. Every form will be submitted in new window."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:233
+msgid ""
+"<b>Disable default CSS</b><br/>Canvases use default specific CSS styles "
+"which can be disabled if this option is checked."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:234
+msgid ""
+"<b>Allow inline CSS</b><br/>Enables to add specific CSS styles to the "
+"current canvas. Toggles <b>Inline CSS</b> textarea for adding CSS styles."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:235
+msgid ""
+"<b>Custom CSS and Javascript files</b><br/>You can create custom CSS and "
+"Javascript files which will be loaded on all your canvases.<br/>"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:236
+msgid ""
+"To add custom CSS or JS file, you need to create css or js file in your "
+"theme folder like <code>fb-tab-{specific_name}.{css|js}</code>."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:239
+msgid "<b>Facebook Application Setup</b><br/>"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:240
+msgid ""
+"<a href=\"https://developers.facebook.com/docs/guides/canvas/\" target="
+"\"_blank\">How to create Facebook Application</a>"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:241
+msgid ""
+"<b>App ID</b><br />App ID is your application's App ID/API Key which you can "
+"get from Application Settings page."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:242
+msgid ""
+"<b>Secret</b><br />Secret is long hashed string associated with your "
+"application. You can get it from Application Settings page."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:243
+msgid ""
+"<b>Canvas URL</b><br />Copy the current URL to your facebook application "
+"settings."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:244
+msgid ""
+"<b>Secure Canvas URL</b><br />Copy the current URL to your facebook "
+"application settings."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:245
+msgid ""
+"<b>Debug URL</b><br />This link can be used for troubleshooting the issues "
+"directly."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:354
+msgid "Requested Canvas does not exist."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:361
+msgid "Canvas settings are invalid. Check \"Secret\" field."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:366
+msgid "You did not specify Facebook Template for requested Canvas"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:418
+msgid "You did not specify the page for requested Canvas"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:471
+msgid "Can't find proper Facebook Template file \""
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:600
+msgid "Manage Facebook Tabs"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:993
+msgid "Facebook Tabs updated."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1107
+msgid "Unnamed Canvas"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1216
+msgid ""
+"Apps on Facebook are web apps that are loaded in the context of Facebook in "
+"what we refer to as a Canvas Page."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1254
+msgid "Name:"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1257
+msgid ""
+"Note that Name is used for canvas link generation ( see Facebook Application "
+"Setup options below )."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1268
+msgid "Page:"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1271
+msgid ""
+"Set the page which will be shown in your Facebook Application/Tab canvas."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1280
+#: ../core/premium/class_wpp_facebook_tabs.php:1286
+msgid "Page"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1281
+#, php-format
+msgid "%1$s"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1283
+msgid "Note: Select the type to determine the available pages below."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1293
+msgid "Search..."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1298
+msgid "Hide the selected page from Regular WordPress."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1299
+msgid "Note: Hidden page will not be accessible in other Premium Features too."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1306
+msgid "Template Settings:"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1309
+msgid ""
+"Set the template, CSS and other options for your Facebook Application/Tab "
+"canvas."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1316
+msgid "Template:"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1329
+msgid ""
+"Note: The list of available templates depends on selected page type. You can "
+"add your own templates. See help link above."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1332
+msgid "Enable theme's template parts."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1333
+msgid ""
+"Note: canvas uses default WP-Property template parts by default. If enabled, "
+"application will try to load parts from theme folder. But custom part "
+"templates can be incompatible with default CSS styles."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1336
+msgid "Open links in new window."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1339
+msgid "Open forms in new window."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1342
+msgid "Disable default CSS."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1346
+msgid "Allow inline CSS."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1349
+msgid "Inline CSS:"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1357
+msgid "Facebook Application Setup:"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1359
+msgid "Applicable for both Application and Page Tab"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1360
+msgid ""
+"You will need to create an app using your Facebook account.  Once the app is "
+"created, you will be able to add it to one of your pages."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1360
+msgid "Create Facebook App."
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1366
+msgid "App ID:"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1368
+msgid "Add to Facebook"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1371
+msgid "Secret:"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1377
+msgid "Canvas URL:"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1382
+msgid "Secure Canvas URL:"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1386
+msgid "Debug URL:"
+msgstr ""
+
+#: ../core/premium/class_wpp_facebook_tabs.php:1401
+#: ../core/premium/class_wpp_feps.php:3115 ../core/ui/page_settings.php:788
+msgid "Save Changes"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:261
+msgid "FEPS Details"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:284
+#: ../core/premium/class_wpp_feps.php:311
+#: ../core/premium/class_wpp_feps.php:692
+#: ../core/premium/class_wpp_feps.php:740
+#: ../templates/property-overview-my-feps.php:46
+msgid "Not set"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:293
+#: ../core/premium/class_wpp_feps.php:711
+msgid "Property Form"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:305
+#: ../core/premium/class_wpp_feps.php:726
+msgid "Sponsored"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:310
+#: ../core/premium/class_wpp_feps.php:735
+#: ../templates/feps-purchase-template.php:35
+#: ../templates/feps-tabs-template.php:4
+msgid "Subscription Plan"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:315
+#: ../core/premium/class_wpp_feps.php:730
+msgid "Expired date"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:339
+#: ../core/premium/class_wpp_feps.php:506
+msgid "FEPS"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:362
+#: ../core/premium/class_wpp_feps.php:515
+msgid "Property Forms"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:364
+#, php-format
+msgid "<a href=\"%s\">Manage %s Forms"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:368
+#: ../core/premium/class_wpp_feps.php:518
+#: ../core/premium/class_wpp_feps.php:4593
+msgid "FEPS Menu"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:371
+#, php-format
+msgid ""
+"It is neccessary block menu which contains user's specific data and links to "
+"submitted %s via FEPS frontend forms."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:372
+#, php-format
+msgid ""
+"Menu can be added to your site via <b>FEPS Menu</b> <a href=\"%s\">widget</"
+"a> or <b>%s</b> shortcode."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:373
+#: ../core/premium/class_wpp_feps.php:520
+msgid "Note, menu is shown only for logged in users."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:377
+msgid "\"Add Credits to Balance\" custom label"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:379
+#, php-format
+msgid "\"Add New %s\" custom label"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:380
+#, php-format
+msgid "Disable Menu if there are no %s and no credits on Balance"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:385
+#: ../core/premium/class_wpp_feps.php:533
+msgid "Specific Pages"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:388
+#, php-format
+msgid ""
+"The feature has specific pages. The links below can be added directly to "
+"your <a href=\"%s\">Menus</a> or wherever else, i.e. if you don't want to "
+"use FEPS menu."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:389
+msgid ""
+"But note, that the current pages are available only for logged in users."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:392
+#: ../core/premium/class_wpp_feps.php:541
+msgid "Templates"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:394
+#: ../core/premium/class_wpp_feps.php:537
+msgid "Overview Page"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:405
+#: ../core/premium/class_wpp_feps.php:420
+#: ../core/premium/class_wpp_feps.php:539
+msgid "Add Credits Page"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:415
+#: ../core/premium/class_wpp_feps.php:543
+msgid "Links"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:416
+#, php-format
+msgid "Overview Page ( All %s )"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:417
+#, php-format
+msgid "Overview Page ( Published %s )"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:418
+#, php-format
+msgid "Overview Page ( Pending %s )"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:426
+#: ../core/premium/class_wpp_feps.php:547
+msgid "Administration"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:432
+#, php-format
+msgid "Enable Column <b>FEPS Details</b> on <a href='%s'>All %s</a> page."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:439
+msgid "Notifications"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:441
+#, php-format
+msgid ""
+"All FEPS notifications can be customized via <a href=\"%s\">WP-CRM</a> "
+"plugin. For more details, look through <b>FEPS -> Integration with other "
+"UsabilityDynamics plugins</b> section in Help tab above."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:462
+msgid "Form Name"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:463
+msgid "Shortcode"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:464
+msgid "General Options"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:465
+msgid "Subscriptions Plans"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:466
+msgid "Propery Attributes"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:473
+msgid "Front End Property Submissions (FEPS)"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:474
+msgid ""
+"Front End Property Submission (FEPS) lets you create forms and display them "
+"on the front-end of the website. The forms may be used by visitors to submit "
+"properties for free or for credits."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:480
+msgid "Available shortcode attributes"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:511
+#, php-format
+msgid "Front End %s Submissions (FEPS)"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:512
+#, php-format
+msgid ""
+"Front End %1$s Submission (FEPS) allows you to create multiple forms using "
+"the interface found under %2$s -> %1$s Forms. Multiple forms can be used to "
+"setup targeted pages that limit the number of images for the form, direct "
+"all submissions into a certain %1$s type, or %1$s status."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:513
+#, php-format
+msgid ""
+"It also allows to create forms for sponsored listings if you have installed "
+"<a href=\"%s\">WP-Invoice</a> plugin and <a href=\"%s\">Single Page "
+"Checkout</a> premium feature."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:516
+#, php-format
+msgid ""
+"Detailed information can be found on <a href=\"%s\">%s Forms</a> page in "
+"Help tab."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:519
+msgid ""
+"It's a block menu which contains some specific information and FEPS tools "
+"for management."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:521
+#, php-format
+msgid ""
+"Menu can be added to frontend pages via <b>FEPS Menu</b> widget or <b>%s</b> "
+"shortcode"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:522
+#, php-format
+msgid "<b>%s</b> shortcode has the following available attributes:"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:524
+#, php-format
+msgid ""
+"Shows title of menu if attribute is passed. Default is empty. Example, <b>"
+"%s</b>."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:525
+#, php-format
+msgid ""
+"Shows %s overview links by %s statuses. Available values are <b>true</b>|"
+"<b>false</b>. Default is false. Example, <b>%s</b>\"."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:526
+#, php-format
+msgid ""
+"If set, shows the link to FEPS %s Form page. Default is empty. Example, <b>"
+"%s</b>\"."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:527
+#, php-format
+msgid ""
+"Shows user's current credits balance. Available values are <b>true</b>|"
+"<b>false</b>. Default is true. Example, <b>%s</b>."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:528
+#: ../core/premium/class_wpp_feps.php:530
+msgid ""
+"Note, to use this attribute, WP-Invoice plugin and Single Page Checkout "
+"premium feature must be installed."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:529
+#, php-format
+msgid ""
+"Shows the link to Add Credits page. Available values are <b>true</b>|"
+"<b>false</b>. Default is true. Example, <b>%s</b>."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:534
+#, php-format
+msgid ""
+"FEPS premium feature adds specific <b>frontend</b> user's pages which are "
+"created on a fly, so they are not available in your existing <a href=\"%s"
+"\">Pages</a>."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:535
+msgid ""
+"The links to these pages are added to FEPS Menu. Note, these pages are "
+"available only for logged in users."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:536
+msgid "The specific FEPS pages are the following"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:537
+#, php-format
+msgid ""
+"The current one shows the list of already submitted via FEPS forms %1$s by "
+"current logged in user. If %2$s Form, used for submission, allows to edit "
+"%2$s, it also shows the links \"Edit\" and \"Remove\" for the current %2$s."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:538
+#, php-format
+msgid ""
+"Also, FEPS allows to show %s on the current page by statuses. See <b>FEPS "
+"Menu</b> and <b>Links</b> section in the current Help tab for details."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:539
+#, php-format
+msgid ""
+"On the current page logged in user can add credits to their FEPS balance. "
+"The current page is available only if <a href=\"%s\">WP-Invoice</a> plugin "
+"and <a href=\"%s\">Single Page Checkout</a> premium feature are installed."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:540
+#, php-format
+msgid "Edit %s Page"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:540
+#, php-format
+msgid ""
+"Here user can edit the %1$s added via FEPS %1$s form. There are different "
+"links for every %1$s, so the link can not be provided. Note, the form, used "
+"for submission, must exist and must be enabled option which allows to edit "
+"and remove %2$s. "
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:542
+#, php-format
+msgid ""
+"You can set custom available template for FEPS pages. More information you "
+"can find <a href=\"%s\">here</a>."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:544
+#, php-format
+msgid ""
+"You can use given links to FEPS pages, for example, for adding custom menu "
+"in <a href=\"%s\">Menus</a> or wherever else."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:545
+msgid ""
+"Note, that FEPS pages are available only for logged in users. In other case "
+"user will be redirected to home page."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:548
+#, php-format
+msgid ""
+"Specific column \"FEPS details\" can be added to the table on <a href=\"%s"
+"\">All %s </a>page."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:549
+msgid ""
+"To add this column, you should check the option. Column contains detailed "
+"FEPS information about the current property, which can be helpful for "
+"management."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:550
+msgid ""
+"Note, if the option is enabled but you don't see the column, you should "
+"check \"<i>Screen Option</i>\" settings."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:552
+msgid "Integration with other UsabilityDynamics plugins"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:553
+#, php-format
+msgid ""
+"Functionality of FEPS premium feature can increased via other following "
+"wordpress plugins developed by <a href=\"%s\">UsabilityDynamics, Inc</a>:"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:554
+#, php-format
+msgid "<a href=\"%s\">WP-Invoice</a>"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:555
+#, php-format
+msgid "<a href=\"%s\">WP-CRM</a>"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:556
+msgid "WP-Invoice"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:557
+#, php-format
+msgid ""
+"To add aditional functionality to FEPS premium feature, <a href=\"%s"
+"\">Single Page Checkout</a> premium feature must be installed and activated."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:558
+#, php-format
+msgid ""
+"It allows you to use FEPS %s Forms as billable service where users have to "
+"pay for publishing %s on your site."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:559
+#, php-format
+msgid ""
+"Billable service is called Sponsored listings. Sponsored listings allows you "
+"to set different Subscription plans where you are able to set expired dates "
+"and images limit for submitted %s."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:560
+msgid "WP-CRM"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:561
+msgid ""
+"If WP-Invoice plugin is installed you are able to see all user's completed "
+"transactions on CRM User Edit page."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:562
+msgid ""
+"Also, you have ability to manage FEPS notifications using WP-CRM plugin."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:563
+#, php-format
+msgid ""
+"For your notifications on any of this Trigger actions - <i>FEPS: Pending "
+"Approval</i>, <i>FEPS: %s Submitted</i>, <i>FEPS: User Account Approved</i>, "
+"<i>FEPS: User Account Created</i> &mdash; you can use the following "
+"shortcodes"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:565
+msgid ""
+"For Trigger action <i>FEPS: Pending Approval</i> - you can use the following "
+"shortcodes"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:567
+#, php-format
+msgid ""
+"For Trigger action <i>FEPS: %s Submitted</i> - you can use the following "
+"shortcodes"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:569
+msgid ""
+"For Trigger action <i>FEPS: User Account Approved</i> - you can use the "
+"following shortcodes"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:571
+msgid ""
+"For Trigger action <i>FEPS: User Account Created</i> - you can use this "
+"shortcodes"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:698
+#, php-format
+msgid "Price: <b>%01.2f</b> credits"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:699
+#: ../core/premium/class_wpp_feps.php:3963
+msgid "Duration"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:700
+#: ../core/premium/class_wpp_feps.php:3964
+msgid "Images Limit"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:705
+msgid "Click to toggle"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:706
+msgid "Front End Property Submission (FEPS) Details"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:719
+#, php-format
+msgid "The user has <b>%01.2f</b> credits on the balance"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:773
+msgid "FEPS Subscription Plan"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:789
+#: ../templates/feps-purchase-template.php:42
+#: ../templates/feps-subplans-template.php:31
+msgid "Price:"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:790
+#, php-format
+msgid "<b>%01.2f</b> credits"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:793
+#: ../templates/feps-purchase-template.php:46
+#: ../templates/feps-subplans-template.php:35
+msgid "Duration:"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:798
+#: ../templates/feps-purchase-template.php:51
+#: ../templates/feps-subplans-template.php:39
+msgid "Images:"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1026
+msgid "Publish Time Has Expired"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1027
+msgid "Publish time has expired for [property_title]."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1030
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sPublish time for Your %3$s [property_title] has "
+"expired.%1$s%1$sYou have [days] %2$s to choose new subscription for your "
+"%3$s.%1$s%1$sClick this link to view all your [status] %4$s:%1$s[url]"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1030
+msgid "day"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1033
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sPublish time for Your %2$s [property_title] has "
+"expired.%1$s%1$sIf You wish you could choose new subscription for your %2$s."
+"%1$s%1$sClick this link to view all your [status] %3$s:%1$s[url]"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1036
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sYour %2$s [property_title] status has been "
+"changed from Published to Pending. Click this link to view all your [status] "
+"%3$s:%1$s[url]"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1039
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sYour %2$s [property_title] has been restored. "
+"The current status is [status]. Click this link to view all your [status] "
+"%3$s:%1$s[url]"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1063
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sPending time for Your %2$s [property_title] was "
+"over and it had been removed.%1$s%1$sYou still able to make a new %2$s "
+"Submission if you need. Please visit our site:%1$s[site_url]"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1065
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sYour %2$s [property_title] has been removed.%1$s"
+"%1$sYou still able to make a new %2$s Submission if you need. Please visit "
+"our site:%1$s[site_url]"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1068
+#, php-format
+msgid "%1$s was deleted"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1070
+#, php-format
+msgid "%1$s [property_title] was deleted ."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1166
+msgid "Manage FEPS"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1321
+msgid " (Pending Approval)"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1461
+msgid "created"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1468
+msgid "Submitting data is incorrect"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1475
+#, php-format
+msgid "%s submitting is prohibited"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1500
+#: ../core/premium/class_wpp_feps.php:1583
+#: ../core/premium/class_wpp_feps.php:1649
+msgid "An error occurred, the form could not be found"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1508
+#, php-format
+msgid "Your submission was not successful: %s"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1532
+msgid "updated"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1535
+#, php-format
+msgid "You must be logged in to edit %s"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1557
+#, php-format
+msgid "Your %s has been successfully %s."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1559
+#, php-format
+msgid ""
+"Your %s and Account have been successfully %s. Check your e-mail to activate "
+"account and log in for continuing."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1775
+#, php-format
+msgid "Upgraded FEPS to version %1s."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1955
+msgid "This listing is pending your approval."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:1960
+msgid "Publish Now"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2026
+#, php-format
+msgid "<tr><td>%1$s</td><td>%2$d %3$s;</td></tr>"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2030
+#, php-format
+msgid ""
+"<div class=\"updated\">After upgrade version of FEPS Premium Feature there "
+"are number of FEPS %3$s has been left out and could not be linked to any of "
+"%2$s forms. Here's an overview:<br><br><table class='widefat'><tr><th>%2$s "
+"Type</th><th>Issues count</th></tr>%1$s</table><br>Please, create a new %2$s "
+"form for each listed %2$s types to solve this issue. </div> "
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2067
+msgid ""
+"Form can not be removed because it has Properties which were added using "
+"this form. You have to remove all related Properties before."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2070
+msgid "Form ID is undefined."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2148
+#: ../core/premium/class_wpp_feps.php:2218
+#, php-format
+msgid "%1$s Forms"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2230
+#, php-format
+msgid "%1$s Form"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2237
+#, php-format
+msgid ""
+"Show <span title=\"Front End %2$s Submissions\">FEPS</span> column in All "
+"%1$s Page."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2282
+#: ../core/premium/class_wpp_feps.php:3902
+msgid "Add Credits to Balance"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2287
+#, php-format
+msgid "Add New %s"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2346
+msgid "My Balance"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2348
+msgid "credit"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2348
+#: ../templates/feps-purchase-template.php:67
+msgid "credits"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2364
+#: ../core/premium/class_wpp_feps.php:2378
+#, php-format
+msgid "My %s"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2407
+msgid "Requested FEPS form not found."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2452
+msgid "The requested form does not have any fields."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2552
+#, php-format
+msgid "Requested %1$s not found."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2556
+#, php-format
+msgid "It's not FEPS's %1$s"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2565
+msgid "Wrong FEPS form used"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2648
+msgid "FEPS forms updated."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2655
+#, php-format
+msgid "%1$s Content"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2658
+#: ../core/premium/class_wpp_feps.php:3597
+msgid "Image Upload"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2712
+msgid "Unnamed Form"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2811
+msgid "Form could not be removed because of some server error."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2815
+msgid "Form could not be removed because form ID is undefined."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2884
+#, php-format
+msgid "Front End %1$s Submissions"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2927
+msgid "Form Name:"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2932
+msgid ""
+"Enter form name. Form slug will be generated using form name. Note that Form "
+"Name is used for internal reference."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2939
+msgid "Shortcode:"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2944
+msgid "Copy and paste this shortcode into any page or post to display the form"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2951
+msgid "General Options:"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2959
+#, php-format
+msgid "%1$s Status:"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2967
+#, php-format
+msgid "%1$s Type:"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2975
+msgid ""
+"Automatically remove FEPS of the currrent Form with 'Pending' status to "
+"trash in"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2977
+msgid "days."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2978
+msgid "Note: If value is 0 or empty, FEPS will not be removed."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2981
+msgid "Preview Thumbnail Size:"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2985
+msgid "Image Upload Limit:"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2989
+msgid "New User Role:"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2997
+msgid "Allow user to edit and remove his FEPS."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:2998
+msgid "Note: on remove FEPS will be just moved to trash."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3002
+msgid "Disable new user account creation notification."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3006
+msgid "Notify user on update status of his FEPS."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3014
+#, php-format
+msgid "%1$s Attributes"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3029
+#: ../core/premium/class_wpp_feps.php:3058
+msgid "Attribute"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3032
+#: ../core/premium/class_wpp_pdf_flyer.php:829
+#, php-format
+msgid "%1$s Title"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3076
+msgid "Required"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3202
+msgid "My FEPS Listings"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3276
+msgid "Editing"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3442
+#, php-format
+msgid "No more than %1d image(s). Click image to delete it."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3784
+msgid "<strong>ERROR</strong>: Account is not approved."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3801
+msgid ""
+"There is a JavaScript error on this page preventing it from displaying the "
+"dynamic map."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3829
+msgid "Your location has been successfully found by Google Maps."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3832
+msgid "Your address could not be found, please try again."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3932
+msgid "Days"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3933
+msgid "Weeks"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3934
+msgid "Months"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3935
+msgid "Years"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3938
+msgid "Basic"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3942
+msgid "Default One-Day Subscription Plan"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3956
+msgid "Subscription Plans"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3966
+msgid "Actions"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:3997
+msgid "Add Subscription Plan"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4056
+#: ../core/premium/class_wpp_feps.php:4074
+msgid "This is Sponsored Listing"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4303
+msgid "User Account Approved"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4311
+msgid "Account Approved"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4312
+#, php-format
+msgid ""
+"Hello [display_name]%1$s%1$sYour account on [site_url] has been approved.%1$s"
+"%1$sClick this link to visit site:%1$s[site_url]"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4314
+msgid "User Account Approved."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4317
+#, php-format
+msgid ""
+"Thank you! Your account has been activated. <a href=\"%s\">Back to the site!"
+"</a>"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4317
+msgid "Account has been activated"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4384
+msgid "Something went wrong. Please, try again later. [Error 001]"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4389
+msgid "Something went wrong. Please, try again later. [Error 002]"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4395
+msgid "Something went wrong. Please, try again later. [Error 003]"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4399
+msgid "Something went wrong. Please, try again later. [Error 004]"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4412
+msgid "Thank you! Your payment has been successfully made."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4414
+#, php-format
+msgid "<a href=\"%s\">View %s</a>"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4420
+msgid "Something went wrong. Please, try again. [Error 005]"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4423
+msgid "Not enough credits."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4427
+msgid "You must be logged in to be able to do this action."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4431
+msgid "Something went wrong. Please, try again. [Error 006]"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4447
+msgid "Front End Property Submissions (FEPS)."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4451
+msgid "Available Credits (Balance)"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4459
+#: ../templates/feps-purchase-template.php:43
+#, php-format
+msgid "%s%01.2f = %01.2f credit"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4495
+msgid "Validation error. Check form fields"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4496
+#: ../templates/feps-default-template.php:200
+msgid "Please type in your e-mail address."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4497
+#: ../templates/feps-default-template.php:210
+msgid "Checking if account exists."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4498
+#: ../templates/feps-default-template.php:213
+msgid "Checking your credentials."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4499
+#: ../templates/feps-default-template.php:228
+msgid "Your credentials have been verified."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4500
+#: ../templates/feps-default-template.php:235
+msgid "Your login credentials are not correct."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4501
+#: ../templates/feps-default-template.php:240
+msgid "Account found, please type in your password."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4502
+#: ../templates/feps-default-template.php:246
+msgid "Your account has been created. Check your e-mail to activate account."
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4570
+#: ../templates/feps-default-template.php:132
+#: ../templates/feps-subplans-template.php:57
+#: ../templates/template-functions.php:649
+msgid "Next"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4574
+#: ../templates/feps-default-template.php:136
+msgid "Update"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4578
+#: ../templates/feps-default-template.php:140
+msgid "Publish"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4578
+#: ../templates/feps-default-template.php:140
+#: ../templates/feps-submit-template.php:95
+msgid "Submit"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4593
+msgid "Show FEPS Menu. It's available only for logged in users"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4635
+msgid "Don't show Funds Balance"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4641
+msgid "Don't show 'Add Credits to Balance' link "
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4648
+#, php-format
+msgid "Show Filter by Statuses instead of default link to 'My %s' page"
+msgstr ""
+
+#: ../core/premium/class_wpp_feps.php:4653
+#, php-format
+msgid "'Add New %s' link to page:"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:111
+msgid "Manage PDF Flyer"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:143
+msgid ""
+"Unless <b>Don't make accessible for public</b> is checked for a list, it "
+"will be accessible by anybody who visits your website, provided they have a "
+"link to the list.  The lists are stored in your uploads folder, but to the "
+"users they appear to be below your main <b>Property Page</b>.  In other "
+"words, if your default property page is 'all-properties', all your lists "
+"will have urls that will go something like: http://website.com/all-"
+"properties/the-list-filename.pdf"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:144
+msgid ""
+"By default, the PDF lists are generated every time you save this page, and "
+"when any property is updated or created.  You may select <b>Regenerate list "
+"every time it is opened</b> to have the list generated every time it is "
+"opened in a browser, however, this may cause some unnecessary strain on your "
+"server."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:145
+#: ../core/premium/class_wpp_pdf_flyer.php:1136
+msgid "Advanced Query"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:146
+msgid ""
+"The advanced query can be used just like the [property_overview] shortcode. "
+"For example, if you wanted the list to only show two bedroom properties, "
+"your query would simply be: <b>[property_overview bedrooms=2]</b>."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:147
+msgid ""
+"You could make these as complex as you would like. If you wanted to query "
+"all apartments between $400 and $700 dollars in St. Paul, you would use: <b>"
+"[property_overview property_type=apartment price=400-700 city='St. Paul' "
+"sort_by=route limit_query=10]</b>."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:148
+msgid "List Creation"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:149
+msgid ""
+"PDF Lists are deleted every time a change is made to this page, and may "
+"either be regenerated by clicking the Regenerate button below, or by trying "
+"to open the list on the front-end."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:150
+msgid ""
+"When a single property is updated, the list(s) it is included on are deleted "
+"as well.  It is up to you if you want to regenerate the lists manually, or "
+"wait for a visitor to attempt to open a list, at which point it will be "
+"regenerated automatically."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:165
+msgid "PDF Flyer Options"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:177
+msgid "Exclude property from PDF Lists"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:810
+#: ../core/premium/class_wpp_pdf_flyer.php:1029
+msgid "PDF Lists"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:835
+msgid "Full Description"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:872
+msgid "List settings updated and old lists have been deleted. "
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:911
+msgid "Sample PDF List"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1003
+msgid ""
+"Regenerating PDF Lists. If you have a lot of properties this process may "
+"take a while, please do not close this browser window until it is complete."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1007
+#: ../core/premium/class_wpp_pdf_flyer.php:1760
+msgid "Finished."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1055
+#: ../core/premium/class_wpp_property_import.php:2339
+msgid "Attributes"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1068
+msgid "List Name:"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1073
+msgid "File Name:"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1078
+msgid "Actions:"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1079
+msgid "View PDF"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1090
+msgid "Group by:"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1095
+msgid "Properties per page:"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1105
+msgid "Show child properties."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1110
+msgid "Don't make accessible for public."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1115
+msgid "Regenerate list every time it is opened."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1128
+msgid "Contact Information"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1131
+msgid "Contact Information will be shown on every page"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1139
+msgid ""
+"You may use WPP Query arguments here to perform a more advanced queryies, "
+"and limits. Wrap your query into [property_overview] as with a regular "
+"shortcode."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1145
+msgid "Font:"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1147
+msgid ""
+"The default font is Helvetica. If you have any problems with current font "
+"try choosing another one from the list."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1151
+msgid "Header & Footer background color:"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1156
+msgid "Header & Footer text color:"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1161
+msgid "Text color:"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1197
+msgid "Add List"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1198
+msgid "Save Lists"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1206
+msgid ""
+"Regenerate all PDF Lists.  This will create, or recreate, all your lists."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1208
+msgid "Refresh Page"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1213
+msgid "Shortcode examples:"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1215
+msgid "Returns a formatted HTML link to the PDF List."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1216
+msgid "Returns a html link to the PDF List with custom title."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1217
+msgid "Returns the raw URL to the PDF List (for use in custom html)."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1218
+msgid "For use with a custom CSS class."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1219
+msgid "Returns url_to_custom_image with a link to the PDF List."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1279
+msgid "PDF Flyer"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1314
+#: ../core/premium/class_wpp_pdf_flyer.php:1566
+msgid "Details"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1342
+msgid "Location"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1458
+#, php-format
+msgid ", or <a href=\"%s\" target=\"_blank\">view flyer</a>."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1472
+msgid "PDF"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1509
+#, php-format
+msgid "Warning: <b>%s</b> is not writable, PDF flyer cannot be created."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1521
+msgid "Show panel that allows you to create PDF property lists."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1526
+msgid ""
+"Generate property flyers automatically when somebody tries to view them for "
+"the first time."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1531
+msgid "Generate QR Code."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1536
+msgid ""
+"Truncate the Description when it's displayed in Flyer (It can be helpful, "
+"when the data can not be placed on one page)."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1544
+msgid "Flyer Display"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1549
+msgid "Title (Header)"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1554
+msgid "Tagline under Title (Header)"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1559
+msgid "QR Code's note (a note explaining what a QR Code is, if it exists)"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1602
+msgid "Description (if exists)"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1607
+msgid "Location on Map (if exists)"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1612
+msgid "Features (if exists)"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1617
+msgid "Agent Information (if exists)"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1624
+msgid "Primary Photo Size"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1630
+msgid "Font"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1633
+msgid ""
+"The default font is Helvetica. If you have any problems with the current "
+"font try choosing another one from the list."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1637
+msgid "Secondary Images"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1644
+#, php-format
+msgid "Show %1$s images."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1650
+msgid "Logo URL"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1653
+msgid "Use JPEG and GIF images only."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1669
+#: ../core/premium/class_wpp_pdf_flyer.php:1672
+msgid "Header color"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1677
+msgid "Section background color"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1694
+msgid "Shortcode examples:<br />"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1695
+msgid ""
+"<strong>[property_flyer]</strong> - Returns a html link to the PDF Flyer<br /"
+">"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1696
+msgid ""
+"<strong>[property_flyer title='PDF Flyer']</strong> - Returns a html link to "
+"the PDF Flyer with custom title.<br />"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1697
+msgid ""
+"<strong>[property_flyer urlonly='yes']</strong> -  Returns the raw URL to "
+"the PDF Flyer (for use in custom html).<br />"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1698
+msgid ""
+"<strong>[property_flyer class='custom_css_class']</strong> - For use with a "
+"custom CSS class.<br />"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1699
+msgid ""
+"<strong>[property_flyer image='url_to_custom_image']</strong> - Returns "
+"url_to_custom_image with a link to the PDF Flyer."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1706
+msgid ""
+"You can regenerate all your PDF flyers, but depending on your server, it can "
+"be very time consuming if you have many properties."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1707
+msgid "Regenerate all Flyers"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1708
+msgid "Close Result's Logs"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1726
+msgid "PDF Flyer for property \""
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1726
+msgid "\" is generated."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1728
+msgid "<b>Error. PDF Flyer for property \""
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1728
+msgid "\" could not be generated.</b>"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1731
+msgid "Could not regenerate PDF Flyer for property \""
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1731
+msgid "\". Looks like, something caused error on server."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1756
+msgid "Property List is got. Start generate PDF Flyers..."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1766
+msgid "There are no any property to generate PDF Flyer for."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1771
+msgid ""
+"Looks like, something caused error on server. Please, try to regenerate PDF "
+"Flyers later."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1860
+#, php-format
+msgid "Could not find a PDF flyer for %1s."
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:1965
+#: ../core/premium/class_wpp_pdf_flyer.php:2202
+#: ../core/premium/class_wpp_pdf_flyer.php:2394
+#: ../core/premium/class_wpp_pdf_flyer.php:2534
+msgid "Flyer"
+msgstr ""
+
+#: ../core/premium/class_wpp_pdf_flyer.php:2216
+msgid "PDF flyer for "
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:117
+msgid "Manage Capabilities"
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:118
+msgid "Manage White Label"
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:163
+#: ../core/premium/class_wpp_power_tools.php:200
+#: ../core/premium/class_wpp_power_tools.php:223
+msgid "Capabilities"
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:165
+msgid ""
+"Adds Properties menu and user can see the list of all available properties."
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:166
+msgid ""
+"It is required capability to manage WP-Property. All capabilities depend on "
+"this one."
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:167
+msgid ""
+"For example, user can not edit property if he has capability 'Add/Edit "
+"Property', but doesn't have 'View Properties' capability."
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:169
+msgid ""
+"Allows to add new property and edit properties where user is author. To edit "
+"properties where user is not author ( which he didn't create ), user must "
+"have 'Edit Other Properties' ( see below )."
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:171
+msgid ""
+"Allows to edit properties where user is not author ( which he didn't create )"
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:173
+msgid ""
+"Allows user to delete properties. This capability depends on 'Add/Edit "
+"Properties' and 'Edit Other Properties'."
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:174
+msgid ""
+"User can delete properties where he is author if he has 'Add/Edit "
+"Properties' capability"
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:175
+msgid ""
+"User can delete properties where he is not author if he has 'Edit Other "
+"Properties' capability"
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:177
+msgid "Allows user to publish properties."
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:179
+msgid ""
+"Allows user to manage WP-Property settings. Adds 'Settings' page to menu."
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:181
+msgid ""
+"Allows user to manage taxonomies such as <b>Feature</b> and <b>Community "
+"Feature</b>"
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:182
+msgid "Other manage capabilities"
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:183
+msgid ""
+"Other capabilities belong to premium features settings and functionality. "
+"User who has no capability to manage specific premium feature will not be "
+"able to manage it."
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:217
+msgid "WP Property Capabilities"
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:218
+#, php-format
+msgid ""
+"User Roles capabilities management. See more details what every capability "
+"does %shere%s."
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:222
+msgid "Role"
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:235
+msgid "Administrator has all capabilities which can not be managed."
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:295
+#: ../core/premium/class_wpp_property_import.php:2334
+msgid "Taxonomies"
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:299
+#, php-format
+msgid "Disable %1$s taxonomy."
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:326
+msgid "White Label"
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:331
+msgid "Labels"
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:332
+msgid "Contextual Menus"
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:338
+msgid ""
+"Use this menu to rename WP-Property components, for example if you are "
+"listing \"Real Estate\", or \"Vehicles\"."
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:342
+msgid "Singular Property:"
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:344
+msgid "Default is \"Property\", will change the label in the navigation menus."
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:348
+msgid "Plural Property:"
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:350
+msgid ""
+"Default is \"Properties\", will change the label in the navigation menus."
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:357
+msgid ""
+"Contextual menus are displayed when a user clicks the \"Help\" tab in the "
+"top right corner of a page."
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:362
+msgid "Overview Page Contextual Help:"
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:406
+msgid "Add "
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:407
+msgid "Add New "
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:408
+msgid "Edit "
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:409
+msgid "New "
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:422
+msgid "All "
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:423
+msgid "Search "
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:424
+msgid "No "
+msgstr ""
+
+#: ../core/premium/class_wpp_power_tools.php:424
+#: ../templates/template-functions.php:617
+msgid " found."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:78
+msgid "Property Title"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:79
+msgid "Property Content"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:80
+msgid "Property Excerpt"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:81
+msgid "Property Status"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:82
+msgid "Property Order"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:83
+msgid "Property Date"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:84
+msgid "Property Author"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:177
+#, php-format
+msgid ""
+"Starting Browser-Initiated Import: %1s. Using XML Importer %2s and WP-"
+"Property %3s."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:248
+msgid "Manage XML Importer"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:305
+#, php-format
+msgid "Imported on: <b>%1$s</b> <a href=\"%2$s\" title=\"%3$s\">Importer</a>"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:411
+msgid "ago"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:420
+msgid "Last Import"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:465
+#: ../core/premium/class_wpp_property_import.php:470
+#: ../core/premium/class_wpp_property_import.php:493
+#: ../core/premium/class_wpp_property_import.php:495
+msgid "Time: "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:558
+#: ../core/premium/class_wpp_property_import.php:3044
+msgid "An error occured."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:583
+#, php-format
+msgid ""
+"There are (%1s) unattached files related to listings that were imported "
+"using the XML Importer."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:584
+msgid "Delete Unattached Files"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:590
+msgid "Look up XML import history."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:591
+msgid "Show XML Import History"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:593
+msgid "Show last 500 imported items in descending order."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:673
+msgid "( Imported )"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:682
+msgid "Schedule coult not be imported."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:734
+msgid "Importer"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:816
+#, php-format
+msgid ""
+"Starting Cron-Initiated Import: %1s. Using XML Importer %2s and WP-Property "
+"%3s."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:878
+msgid "XML Importer Help"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:879
+msgid ""
+"By default, xPath are executed in the xPath input boxes. <a target=\"_blank"
+"\" href=\"http://www.w3schools.com/xpath/xpath_syntax.asp\">W3 Schools XPath "
+"Syntax</a>. "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:880
+msgid ""
+"Example: get all the option values that have a label for \"height\": "
+"<b>options/option[label = \"Height\"]/value </b>"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:882
+msgid ""
+"<b>Property Resource Class:</b> Typically this is used to specify the type "
+"of property listing, such as Commercial or Residential, the naming "
+"convention varies depending on RETS provider. Use <a href=\"http://rets."
+"usabilitydynamics.com/\" target=\"_blank\">rets.usabilitydynamics.com</a> to "
+"determine. "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:884
+msgid "XPath Query to Property Elements"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:885
+msgid ""
+"In order to begin importing data, you must first identify what the "
+"\"repeating property element\" is in the XML file.  Typically this would be "
+"something like <b>property</b> or <b>object</b>, where the corresponding "
+"XPath rules would be <b>//property</b> or <b>//object</b>, respectively. The "
+"easiest way to identify it is to look through the feed for a repeating "
+"pattern. The query must select the elements in order to cycle through them "
+"and apply the XPath Rules in the Attribute Map section. "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:887
+msgid "Import Limits"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:888
+msgid ""
+"There are two type of limits - the first limit will stop the import after a "
+"certain number of objects have been processed before they are checked for "
+"quality, while the second limit will stop only after the specified number of "
+"objects has actually passsed quality inspection, and have been saved to the "
+"database."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:889
+msgid ""
+"Limiting imports works well when you are running incremental imports.  A "
+"limit of <b>10</b> will stop after 10 properties have been created.  The "
+"importer does not count properties that were skipped during import or that "
+"already exist in the system - properties that already exist will be marked "
+"as updated."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:891
+msgid "Running the Import"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:892
+msgid ""
+"There are two ways to process an import, using the browser, or by setting up "
+"a cron job.  Using the browser is easy, and viable when you have a small "
+"feed, or a very good server. "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:893
+msgid ""
+"When working with larger feeds, or for the purposes of automation, it is "
+"advisable to execute your import script using a cron job.  For every "
+"\"Import Schedule\" you create, a <b>Cron Command</b> field will be "
+"displayed, followed by the command you would need to enter into the cron job "
+"builder, for the import schedule to be executed."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:895
+msgid "Function: free_text"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:896
+msgid ""
+"To insert some common text, use the <b>free_text</b> command, like so: "
+"<b>free_text: Imported from Some List</b> and the text will be kept as is."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:898
+msgid "Function: uppercase"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:899
+msgid ""
+"To convert all alphabetic characters to uppercase, use the <b>uppercase</b> "
+"command, like so: <b>uppercase: {xpath}</b>."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:901
+msgid "Function: concat"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:902
+msgid ""
+"You can also combine free text wtih xPath rule results using <b>concat</b>, "
+"example: <b>concat:http://sourcesite.com/images/'Photo7'</b> will result in "
+"the text between the quotes being executed as xPath rules, while text "
+"outside of quotes being inserted as it is."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:903
+msgid ""
+"You can also use concat to combine multiple xPath rules together, for "
+"example you can create the Property Title from a few XML attributes: "
+"<b>concat:'bedrooms' bedroom house in 'location/city'</b>"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:905
+msgid "Function: concat_list"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:906
+msgid ""
+"Example: <b>concat_list root_path=\"options/option\" label_path=\"label\" "
+"value_path=\"value\" concat_character=\":\" paste_together=\",\"</b>  will "
+"look for options/option path, then grab child \"value\" and \"label\" paths "
+"and import them as a single line. If \"paste_together\" specified then all "
+"collected \"label / value\" pairs will be joined in single-line value using "
+"\"paste_together\"."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:949
+#, php-format
+msgid "Found %1s properties from database that were imported from this feed."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:963
+#, php-format
+msgid "Property ID %1s has been deleted. Total deleted so far: %2s"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1219
+#, php-format
+msgid ""
+"Deleted %1s unattached property files that were created from an XML import."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1227
+msgid "Something went wrong, did not delete any unattached images."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1265
+#, php-format
+msgid "All %1$s properties have been deleted in %2$s seconds."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1267
+#, php-format
+msgid ""
+"Although %1$s properties were found, only %2$s have been deleted in %3$s "
+"seconds."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1273
+msgid "Something went wrong, no properties were found to delete."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1361
+#, php-format
+msgid "Created temporary directory for import: %1$s."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1394
+#, php-format
+msgid "Could not load XML Object from raw data: %1s."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1396
+msgid ""
+"Could not load XML Object from raw data - empty result returned. Check your "
+"settings."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1398
+msgid ""
+"Could not load XML Object from raw data. Looks like data has errors and can "
+"not be converted to XML Object."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1439
+msgid "Data loaded from cache."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1445
+msgid " object(s) found with XPath Rule: "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1446
+#, php-format
+msgid ""
+"%1s objects identified: <a href=\"%2s\" target=\"_blank\">download processed "
+"XML file</a> ( %3s )."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1448
+msgid "Root Element XPath Rule: "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1452
+msgid "No Root Element XPath Rule, displaying most root elements."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1456
+msgid "No objects found."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1463
+#, php-format
+msgid "Preview truncated: showing: %1s of full feed:"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1468
+#, php-format
+msgid "Available tags in source: %1s"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1725
+#, php-format
+msgid "XPath rules for object #%1d processed with %2d extracted attributes."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1731
+#, php-format
+msgid "Stopping import due to specified pre-QC limit of %1d."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1752
+#, php-format
+msgid "Importing %1s"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1793
+#: ../core/premium/class_wpp_property_import.php:1794
+#, php-format
+msgid "Deleted all ( %1s ) properties that originated from this feed."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1796
+#: ../core/premium/class_wpp_property_import.php:1878
+msgid ""
+"Did not find any properties that have been imported from this feed to remove."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1803
+msgid "Did not remove any old properties."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1816
+#, php-format
+msgid "Stopping import due to specified post-QC limit of %1d."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1864
+#, php-format
+msgid "Object cycle done. Completed %1d cycles."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1875
+#: ../core/premium/class_wpp_property_import.php:1876
+#, php-format
+msgid "Deleted ( %1s ) properties that are no longer in the feed."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1906
+msgid "Deleted the import temporary directory."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1908
+msgid "Import temporary directory is not been created"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:1908
+msgid "Unable to delete the import temporary directory"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2005
+msgid "Import name"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2014
+msgid "Source"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2019
+msgid "URL"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2022
+msgid "Type:"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2025
+msgid "XML / JSON"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2026
+msgid "CSV"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2027
+msgid "Google Spreadsheet"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2028
+msgid "WP-Property Feed"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2029
+msgid "RETS"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2040
+msgid "Send GET variables as POST data."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2050
+msgid "Google Username"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2054
+msgid "Google Password"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2058
+msgid "Google Extra Query Vars"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2059
+msgid ""
+"See the <a href=\"http://code.google.com/apis/spreadsheets/data/3.0/"
+"reference.html#ListParameters\" target=\"_blank\">Google Spreadsheet API "
+"docs</a> for the format of this field ( should be name value pairs, without "
+"the beginning \"?\" )"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2063
+msgid "RETS Username."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2067
+msgid "RETS Password."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2071
+msgid "Property Resource."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2071
+msgid "Default is \"Property\""
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2075
+msgid "Property Resource Class."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2079
+msgid "Primary Key for Resource."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2079
+msgid "Also referred to as \"Key Field\". Default is \"ListingKey\""
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2083
+msgid "Photo Object."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2083
+msgid "Default is \"Photo\""
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2087
+msgid "User-Agent String."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2087
+#: ../core/premium/class_wpp_property_import.php:2091
+msgid "May be required by your RETS"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2091
+msgid "User-Agent Password."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2100
+msgid "RETS Version."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2100
+msgid "Version is set by your RETS provider."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2104
+msgid "Property Query."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2104
+msgid ""
+"Accepts <a href=\"https://www.flexmls.com/support/rets/tutorials/dmql/\" "
+"target=\"_blank\">DMQL</a> - Default is \"(ListingStatus=|Active)\""
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2108
+msgid "Toggle Advanced Source Options"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2114
+msgid "Root XPath Query:"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2116
+#: ../core/ui/page_settings.php:347
+msgid "What is this?"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2124
+#: ../core/premium/class_wpp_property_import.php:2785
+#: ../core/premium/class_wpp_property_import.php:2858
+msgid "Preview Raw Data"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2126
+msgid "Close Preview"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2142
+msgid "Default Property Type"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2150
+msgid "Will be defaulted to if no xPath rule exists for the \"Property Type\"."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2166
+msgid "<b>Pre-QC Limit:</b> Limit import to the first"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2168
+msgid "properties in the feed."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2169
+msgid "More about limits."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2173
+msgid "<b>Post-QC Limit:</b> Limit import to the first"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2175
+msgid "created properties that have passed quality standards."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2181
+#, php-format
+msgid "Only import images that are over %1spx in width, and %2spx in height."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2186
+msgid "Minimum sizes are ignored if blank."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2190
+msgid "Imported properties must have at least "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2191
+msgid ", but no more than "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2193
+msgid " valid images."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2198
+msgid "Do not import properties that have been imported less than "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2200
+msgid "hour(s) ago."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2207
+msgid "Automatically set the first image as the thumbnail."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2214
+msgid ""
+"Remove properties that are no longer in source XML from this site's "
+"database. This can now be done if the the import configuration does not have "
+"a Pre-QC or Post-QC Limit."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2220
+msgid ""
+"When updating an existing property, remove all old images before downloading "
+"new ones."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2226
+#, php-format
+msgid ""
+"Send email updates to the site admin e-mail address ( %1s ) when import "
+"schedules are executed and completed."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2233
+msgid ""
+"Remove all properties that were originally imported from this feed on import."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2240
+msgid "Completely remove <b>all</b> existing properties prior to import."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2247
+msgid "Fix strings that are in all caps."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2254
+msgid "Scan for any formatting tags and strip them out."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2262
+msgid "Automatically load imported images into property slideshow."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2270
+msgid "Geolocate imported listings."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2276
+msgid "Enable detailed logging to assist with troubleshooting."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2282
+msgid "Show SQL Queries and errors."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2289
+msgid "Toggle Advanced Options"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2296
+msgid "Automatic Matching"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2298
+#: ../core/premium/class_wpp_property_import.php:3667
+msgid "Automatically Match"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2299
+msgid ""
+"This will work for WP-Property exports and imports, but will have mixed "
+"results with uniquely formatted feeds."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2304
+msgid "Attribute Map"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2307
+msgid ""
+"Use XPath rules to setup the paths to the individual XML attributes to match "
+"them up with WP-Property attributes."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2308
+msgid "Sort Attribute Rules"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2314
+msgid "WP-Property Attribute"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2315
+msgid "XPath Rule"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2327
+msgid "WordPress Attributes"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2345
+msgid "Street Number"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2346
+msgid "Street"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2348
+msgid "County"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2349
+msgid "State"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2350
+msgid "Country"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2351
+msgid "Postal Code"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2356
+msgid "WP-Property Attributes"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2359
+msgid "Property Agent"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2361
+msgid "Global Property ID"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2362
+msgid "Display Address"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2374
+msgid "Delete Selected"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2393
+#: ../core/premium/class_wpp_property_import.php:2882
+#: ../core/premium/class_wpp_property_import.php:2918
+msgid "Save Configuration"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2409
+msgid "Preview Import"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2410
+msgid "Process Full Import"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2535
+msgid "Schedule imported from file."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2730
+msgid "Please save schedule first."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2777
+#: ../core/premium/class_wpp_property_import.php:2857
+msgid ""
+"500 Internal Server Error! Your hosting account is most likely running out "
+"of memory."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2806
+#: ../core/premium/class_wpp_slideshow.php:1448
+#: ../core/premium/class_wpp_supermap.php:1673
+#: ../templates/feps-paynow-template.php:23
+msgid "Loading..."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2832
+msgid "Preview Again"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2884
+msgid "Saving the XML Importer schedule, please wait..."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2886
+#: ../core/premium/class_wpp_property_import.php:2922
+#: ../core/premium/class_wpp_property_import.php:3867
+msgid "Processing..."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2902
+msgid "Schedule has been saved."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2920
+msgid "Updating the XML Importer schedule, please wait..."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:2937
+msgid "Schedule has been updated."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3028
+msgid "Confirm that you want to delete all "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3028
+msgid ""
+" properties from this feed by typing in in 'delete' below, or press 'Cancel' "
+"to cancel."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3059
+#: ../templates/property-overview-my-feps.php:59
+msgid "Are you sure?"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3206
+msgid "Enabled Options"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3273
+msgid "Toggle Advanced"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3389
+msgid "Select a unique ID attribute."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3391
+msgid "Unique ID attribute."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3691
+msgid "The source evaluation resulted in an Internal Server Error!"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3697
+msgid "Request error:"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3862
+msgid "Check Source"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3872
+msgid "Source is Good: Reload."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3877
+msgid "Cannot Load Source: Reload."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3882
+msgid "Internal Server Error!"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3891
+msgid "Property Importer"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3920
+msgid "Sort by:"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3921
+msgid "Last Run"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3922
+msgid "Created Properties"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3923
+msgid "Updated Properties"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3924
+msgid "Total Properties"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3925
+msgid "Limit"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3933
+msgid "Saved Import Schedules"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3946
+msgid "Last run "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3946
+msgid " ago."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3951
+msgid "Updated "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3951
+#: ../core/premium/class_wpp_property_import.php:3956
+#: ../core/premium/class_wpp_property_import.php:3961
+msgid " objects."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3956
+msgid "Created "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3961
+msgid "Limited to "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3966
+msgid "Total Properties: "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3978
+msgid "Source URL:"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3979
+msgid "Cron Command:"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3986
+msgid "Run Import in Browser"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3987
+msgid "Save to File"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:3989
+msgid "Delete All Properties"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4001
+msgid "You do not have any saved schedules. Create one now."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4010
+msgid "Import Schedule"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4012
+msgid "Upload File"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4112
+msgid "Updating existing listing."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4131
+msgid ""
+"Attempted to update property, but wp_update_post() did not return an ID. "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4156
+msgid "Skipping property, last import "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4156
+msgid " ago"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4172
+msgid "Creating new listing."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4194
+#, php-format
+msgid "Object import failed. Error: %1s."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4198
+msgid ""
+"Object import failed - no Property Title detected or set, a requirement to "
+"creating a property."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4202
+msgid ""
+"Object import failed.  Post cold not be created nor updated, and post_id was "
+"not found or created."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4240
+#, php-format
+msgid ""
+"Attachment referenced in database not found on disk: (%1s), removing "
+"reference from DB."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4253
+#, php-format
+msgid "Duplicate attachment file found (%1s) and deleted."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4553
+msgid ""
+"After import property has less than the required amount of images - deleting "
+"property as configured."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4556
+msgid ""
+"After import property has no images, but was unable to delete the property."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4561
+#, php-format
+msgid "After import property has a total of %1s images."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4851
+#, php-format
+msgid "Image directory %1s could not be created."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4885
+msgid "Could not save image saved image - empty file returned by server."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4902
+#, php-format
+msgid "Image %1s downloaded, but appears corrupt - deleting."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4920
+#: ../core/premium/class_wpp_property_import.php:5233
+#, php-format
+msgid ""
+"Image %1s downloaded, but image size failed quality standards - deleting."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:4951
+#, php-format
+msgid "Downloaded %1s image(s) for %2s #%3s."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:5179
+msgid "on disk using file_get_contents()"
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:5184
+msgid "Attempting to get image  ( "
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:5198
+#, php-format
+msgid "Unable to get image %1s using the %2s method."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:5214
+#, php-format
+msgid "Image %1s corrupted - skipped."
+msgstr ""
+
+#: ../core/premium/class_wpp_property_import.php:5253
+#, php-format
+msgid "Unable to save image %1s."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:93
+msgid "Manage Slideshow"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:249
+msgid "Display as carousel gallery."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:253
+msgid "Gallery transition type:"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:255
+msgid "Crossfade betweens images"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:256
+msgid "Fade into background color"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:257
+msgid "Pulse"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:258
+msgid "Slide"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:259
+msgid "Fadeslide"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:265
+msgid "Crop images."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:270
+msgid "Enforce minimum image width."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:274
+msgid "Carousel Thumbnail Size:"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:477
+msgid "Slideshow Options"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:799
+#: ../core/premium/class_wpp_slideshow.php:1544
+msgid "Slideshow Images:"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:821
+#: ../core/premium/class_wpp_slideshow.php:1558
+msgid "All Images:"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:892
+msgid "Image is too small."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:962
+#: ../core/premium/class_wpp_slideshow.php:978
+msgid "Slideshow"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1036
+#: ../core/premium/class_wpp_slideshow.php:1220
+#: ../core/premium/class_wpp_slideshow.php:1506
+msgid "Global Slideshow"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1041
+msgid "Clicking on an image will open up the property its attached to."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1045
+msgid "Show property title and tagline in slideshow."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1049
+msgid "Slideshow Size: "
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1070
+#, php-format
+msgid ""
+"The global slideshow will look for all images that are over the specified "
+"size.  Add images to the global slideshow <a href=\"%1$s\">here</a>. The "
+"built-in sizes, such as <b>medium</b> and <b>large</b> may not work because "
+"WordPress does not crop them during resizing, resulting in artbitrary "
+"heights. "
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1080
+msgid "Display in Global Slideshow Caption:"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1084
+msgid "Title."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1085
+msgid "Excerpt."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1086
+msgid "Tagline."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1092
+msgid "Single Listing Slideshow"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1115
+msgid "Slideshow image size to be used for single property pages."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1119
+msgid "Show pagination buttons in slideshow."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1128
+msgid "Thumbnail Size"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1133
+msgid ""
+"This width is used on \"Slideshow\" page on the Property editing page to "
+"display available images, this setting <b>does not</b> affect the actual "
+"slideshow on the front-end."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1144
+msgid "Effect:"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1150
+msgid "Effect that will be used to change from one image to the next."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1154
+msgid "Slices:"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1160
+msgid ""
+"If the transition includes slices, this number determines how many slices to "
+"cut the image up into during transitions."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1164
+msgid "Animation Speed:"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1170
+msgid "How quickly the transition should happen, in miliseconds."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1174
+msgid "Pause Time:"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1180
+msgid "The pause time between transitions."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1266
+msgid "Slideshow selection and order saved."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1523
+msgid "WP-Property Slideshow"
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1524
+msgid ""
+"This slideshow can be integrated into your front-end pages by either using "
+"the shortcode, or pasting PHP code into your theme."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1527
+msgid ""
+"Drag images from selection on the left to the selection on the right, and "
+"then click save."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1528
+#, php-format
+msgid ""
+"This list gets all images from your media library that are over %s pixels "
+"wide and %s pixels tall."
+msgstr ""
+
+#: ../core/premium/class_wpp_slideshow.php:1535
+msgid "Save Selection and Order"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:78
+msgid "Manage Supermap"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:92
+msgid "Supermap"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:158
+msgid "Sidebar Attributes"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:160
+msgid ""
+"Select the attributes you want to display in the left sidebar on the "
+"supermap."
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:174
+msgid ""
+"Display \"View Property\" link in the left sidebar. It directs user to "
+"Property Page."
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:180
+msgid "Supermap Sidebar Thumbnail:"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:185
+msgid "Do not show a property thumbnail in sidebar."
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:188
+msgid ""
+"If you create a new image size, please be sure to regenerate all thumbnails. "
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:193
+msgid "Map Markers:"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:236
+msgid "Add Marker"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:336
+msgid "Map Areas:"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:338
+msgid ""
+"<p>Map areas let you draw our areas on the map, such as neighborhoods.</"
+"p><p>Just add to shortcode attribute <b>show_areas=all</b> to draw all areas "
+"on the map. Also You can use area's slugs to show them on the map, like as "
+"<b>show_areas=new_york,washington</b>. Please, use coordinates in this "
+"format: <b>(82.72, -37.79)(69.54, -57.48)(68.93, -18.63).</b></p><p><i>This "
+"is an experimental feature, you may not want to use it on a live site.  "
+"We're eager to hear your feedback regarding this feature and the "
+"capabilities that would be useful to you.</i></p>"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:343
+msgid "Coordinates"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:344
+msgid "Fill Color"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:345
+msgid "Opacity"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:346
+msgid "Stoke Color"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:347
+msgid "Hover Color"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:426
+#: ../core/premium/class_wpp_supermap.php:677
+msgid "Map Marker"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:428
+#: ../core/premium/class_wpp_supermap.php:679
+msgid "Default by Google"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:626
+msgid "Supermap Options"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:639
+msgid "Exclude property from Supermap"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:841
+#, php-format
+msgid "Element cannot be rendered, missing %1s script."
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:1129
+msgid "No results found."
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:1672
+msgid "Show More"
+msgstr ""
+
+#: ../core/premium/class_wpp_supermap.php:1752
+msgid "Loading"
+msgstr ""
+
+#: ../core/ui/class_wpp_object_list_table.php:55
+#: ../core/ui/class_wpp_object_list_table.php:137
+msgid "Restore"
+msgstr ""
+
+#: ../core/ui/class_wpp_object_list_table.php:122
+#, php-format
+msgid "Edit &#8220;%s&#8221;"
+msgstr ""
+
+#: ../core/ui/class_wpp_object_list_table.php:130
+msgid "Edit this item"
+msgstr ""
+
+#: ../core/ui/class_wpp_object_list_table.php:137
+msgid "Restore this item from the Trash"
+msgstr ""
+
+#: ../core/ui/class_wpp_object_list_table.php:139
+msgid "Move this item to the Trash"
+msgstr ""
+
+#: ../core/ui/class_wpp_object_list_table.php:139
+msgid "Trash"
+msgstr ""
+
+#: ../core/ui/class_wpp_object_list_table.php:143
+msgid "Delete this item permanently"
+msgstr ""
+
+#: ../core/ui/class_wpp_object_list_table.php:143
+msgid "Delete Permanently"
+msgstr ""
+
+#: ../core/ui/class_wpp_object_list_table.php:148
+#, php-format
+msgid "View &#8220;%s&#8221;"
+msgstr ""
+
+#: ../core/ui/class_wpp_object_list_table.php:148
+msgid "View"
+msgstr ""
+
+#: ../core/ui/class_wpp_object_list_table.php:205
+#, php-format
+msgid "Toggle %1s more."
+msgstr ""
+
+#: ../core/ui/page_settings.php:35
+msgid "Settings updated."
+msgstr ""
+
+#: ../core/ui/page_settings.php:173
+msgid ""
+"You are about to set ALL your properties to the selected property type. Are "
+"you sure?"
+msgstr ""
+
+#: ../core/ui/page_settings.php:303
+msgid "Feature Updates"
+msgstr ""
+
+#: ../core/ui/page_settings.php:309
+msgid "Check Updates"
+msgstr ""
+
+#: ../core/ui/page_settings.php:310
+msgid "to download, or update, all premium features purchased for this domain."
+msgstr ""
+
+#: ../core/ui/page_settings.php:328
+#, php-format
+msgid "Include %1s in regular search results."
+msgstr ""
+
+#: ../core/ui/page_settings.php:329
+msgid "Disable \"on-the-fly\" image regeneration."
+msgstr ""
+
+#: ../core/ui/page_settings.php:331
+msgid ""
+"Automatically delete all property images and attachments when a property is "
+"deleted."
+msgstr ""
+
+#: ../core/ui/page_settings.php:337
+#, php-format
+msgid "Default %1s Page"
+msgstr ""
+
+#: ../core/ui/page_settings.php:342
+msgid "Property (Default)"
+msgstr ""
+
+#: ../core/ui/page_settings.php:350
+#, php-format
+msgid "You must have permalinks enabled to change the Default %1s page."
+msgstr ""
+
+#: ../core/ui/page_settings.php:362
+msgid "Automatically overwrite this page's content with [property_overview]."
+msgstr ""
+
+#: ../core/ui/page_settings.php:365
+msgid ""
+"When showing property search results, don't override the page content with "
+"[property_overview]."
+msgstr ""
+
+#: ../core/ui/page_settings.php:366
+msgid ""
+"If checked, be sure to include [property_overview] somewhere in the content, "
+"or no properties will be displayed."
+msgstr ""
+
+#: ../core/ui/page_settings.php:373
+msgid "Automatic Geolocation"
+msgstr ""
+
+#: ../core/ui/page_settings.php:376
+msgid "Attribute to use for physical addresses:"
+msgstr ""
+
+#: ../core/ui/page_settings.php:377
+msgid "Localize addresses in:"
+msgstr ""
+
+#: ../core/ui/page_settings.php:383
+msgid "Styles and Scripts"
+msgstr ""
+
+#: ../core/ui/page_settings.php:386
+msgid ""
+"Load default CSS. If unchecked, the wp-properties.css in your theme folder "
+"will not be loaded."
+msgstr ""
+
+#: ../core/ui/page_settings.php:386
+msgid "Load default CSS."
+msgstr ""
+
+#: ../core/ui/page_settings.php:390
+msgid "Do not load theme-specific stylesheet."
+msgstr ""
+
+#: ../core/ui/page_settings.php:391
+msgid ""
+"This version of WP-Property has a stylesheet made specifically for the theme "
+"you are using."
+msgstr ""
+
+#: ../core/ui/page_settings.php:396
+msgid "Load WP-Property scripts on all front-end pages."
+msgstr ""
+
+#: ../core/ui/page_settings.php:403
+msgid "Default Phone Number"
+msgstr ""
+
+#: ../core/ui/page_settings.php:404
+msgid ""
+"Phone number to use when a property-specific phone number is not specified."
+msgstr ""
+
+#: ../core/ui/page_settings.php:419
+msgid "Image Sizes"
+msgstr ""
+
+#: ../core/ui/page_settings.php:421
+msgid "Image sizes used throughout the plugin."
+msgstr ""
+
+#: ../core/ui/page_settings.php:427
+msgid "Width"
+msgstr ""
+
+#: ../core/ui/page_settings.php:428
+msgid "Height"
+msgstr ""
+
+#: ../core/ui/page_settings.php:504
+msgid "Overview Shortcode"
+msgstr ""
+
+#: ../core/ui/page_settings.php:507
+msgid ""
+"These are the settings for the [property_overview] shortcode.  The shortcode "
+"displays a list of all building / root properties.<br />The display settings "
+"may be edited further by customizing the <b>wp-content/plugins/wp-properties/"
+"templates/property-overview.php</b> file.  To avoid losing your changes "
+"during updates, create a <b>property-overview.php</b> file in your template "
+"directory, which will be automatically loaded."
+msgstr ""
+
+#: ../core/ui/page_settings.php:510
+msgid "Thumbnail size:"
+msgstr ""
+
+#: ../core/ui/page_settings.php:511
+msgid "Show children properties."
+msgstr ""
+
+#: ../core/ui/page_settings.php:512
+msgid "Show larger image of property when image is clicked using fancybox."
+msgstr ""
+
+#: ../core/ui/page_settings.php:513
+msgid "Show pagination on bottom of results."
+msgstr ""
+
+#: ../core/ui/page_settings.php:514
+msgid "Add sorting by property's title."
+msgstr ""
+
+#: ../core/ui/page_settings.php:522
+msgid "Property Page"
+msgstr ""
+
+#: ../core/ui/page_settings.php:524
+msgid ""
+"These are the settings for the [property_overview] shortcode.  The shortcode "
+"displays a list of all building / root properties.<br /> The display "
+"settings may be edited further by customizing the <b>wp-content/plugins/wp-"
+"properties/templates/property.php</b> file.  To avoid losing your changes "
+"during updates, create a <b>property.php</b> file in your template "
+"directory, which will be automatically loaded."
+msgstr ""
+
+#: ../core/ui/page_settings.php:526
+msgid "Sort property stats by groups."
+msgstr ""
+
+#: ../core/ui/page_settings.php:527 ../core/ui/page_settings.php:543
+#, php-format
+msgid ""
+"Show Checkboxed Image instead of \"%s\" and hide \"%s\" for %s/%s values"
+msgstr ""
+
+#: ../core/ui/page_settings.php:535
+msgid "Google Maps"
+msgstr ""
+
+#: ../core/ui/page_settings.php:539
+msgid "Map Thumbnail Size:"
+msgstr ""
+
+#: ../core/ui/page_settings.php:540
+msgid "Map Zoom Level:"
+msgstr ""
+
+#: ../core/ui/page_settings.php:541
+msgid "Custom Latitude Coordinate"
+msgstr ""
+
+#: ../core/ui/page_settings.php:541 ../core/ui/page_settings.php:542
+#, php-format
+msgid "Default is \"%s\""
+msgstr ""
+
+#: ../core/ui/page_settings.php:542
+msgid "Custom Longitude Coordinate"
+msgstr ""
+
+#: ../core/ui/page_settings.php:546
+msgid "Attributes to display in popup after a property on a map is clicked."
+msgstr ""
+
+#: ../core/ui/page_settings.php:550
+msgid "Show Property Title"
+msgstr ""
+
+#: ../core/ui/page_settings.php:559
+msgid "Show Directions Link"
+msgstr ""
+
+#: ../core/ui/page_settings.php:560
+msgid "Do not show a list of child properties in Infobox. "
+msgstr ""
+
+#: ../core/ui/page_settings.php:567
+msgid "Address Display"
+msgstr ""
+
+#: ../core/ui/page_settings.php:574
+msgid "Available tags:"
+msgstr ""
+
+#: ../core/ui/page_settings.php:580
+msgid "Currency & Numbers"
+msgstr ""
+
+#: ../core/ui/page_settings.php:583
+msgid "Currency symbol."
+msgstr ""
+
+#: ../core/ui/page_settings.php:585
+msgid "Thousands separator symbol:"
+msgstr ""
+
+#: ../core/ui/page_settings.php:588
+msgid ". (period)"
+msgstr ""
+
+#: ../core/ui/page_settings.php:589
+msgid ", (comma)"
+msgstr ""
+
+#: ../core/ui/page_settings.php:591
+msgid "The character separating the 1 and the 5: $1<b>,</b>500"
+msgstr ""
+
+#: ../core/ui/page_settings.php:596
+msgid "Currency symbol placement:"
+msgstr ""
+
+#: ../core/ui/page_settings.php:599
+msgid "Before number"
+msgstr ""
+
+#: ../core/ui/page_settings.php:600
+msgid "After number"
+msgstr ""
+
+#: ../core/ui/page_settings.php:606
+msgid ""
+"Parent property's aggregated value should be set as average of children "
+"values. If not, - the aggregated value will be set as sum of children values."
+msgstr ""
+
+#: ../core/ui/page_settings.php:607
+msgid ""
+"Aggregated value is set only for numeric and currency attributes and can be "
+"updated ( set ) only on child property's saving."
+msgstr ""
+
+#: ../core/ui/page_settings.php:617
+msgid "Admin Settings"
+msgstr ""
+
+#: ../core/ui/page_settings.php:621
+msgid "Thumbnail size for property images displayed on Properties page: "
+msgstr ""
+
+#: ../core/ui/page_settings.php:623
+msgid "Completely hide hidden attributes when editing properties."
+msgstr ""
+
+#: ../core/ui/page_settings.php:679
+msgid "[purchase feature]"
+msgstr ""
+
+#: ../core/ui/page_settings.php:694
+#, php-format
+msgid ""
+"This feature is disabled because it requires WP-Property %1$s or higher."
+msgstr ""
+
+#: ../core/ui/page_settings.php:696
+msgid "Disable plugin."
+msgstr ""
+
+#: ../core/ui/page_settings.php:700
+msgid "Feature installed, using version"
+msgstr ""
+
+#: ../core/ui/page_settings.php:703
+#, php-format
+msgid ""
+"Please visit <a href=\"%s\">UsabilityDynamics.com</a> to purchase this "
+"feature."
+msgstr ""
+
+#: ../core/ui/page_settings.php:720
+msgid ""
+"If prompted for your domain name during a premium feature purchase, enter as "
+"appears here:"
+msgstr ""
+
+#: ../core/ui/page_settings.php:726
+msgid "Restore Backup of WP-Property Configuration"
+msgstr ""
+
+#: ../core/ui/page_settings.php:727
+msgid "Download Backup of Current WP-Property Configuration."
+msgstr ""
+
+#: ../core/ui/page_settings.php:732
+msgid "Revalidate all addresses using"
+msgstr ""
+
+#: ../core/ui/page_settings.php:732
+msgid "localization"
+msgstr ""
+
+#: ../core/ui/page_settings.php:733
+msgid "Revalidate"
+msgstr ""
+
+#: ../core/ui/page_settings.php:736
+msgid ""
+"Enter in the ID of the property you want to look up, and the class will be "
+"displayed below."
+msgstr ""
+
+#: ../core/ui/page_settings.php:738 ../core/ui/page_settings.php:745
+msgid "Lookup"
+msgstr ""
+
+#: ../core/ui/page_settings.php:742
+msgid "Get property image data."
+msgstr ""
+
+#: ../core/ui/page_settings.php:743
+msgid "Property ID:"
+msgstr ""
+
+#: ../core/ui/page_settings.php:750
+msgid ""
+"Look up the <b>$wp_properties</b> global settings array.  This array stores "
+"all the default settings, which are overwritten by database settings, and "
+"custom filters."
+msgstr ""
+
+#: ../core/ui/page_settings.php:751
+msgid "Show $wp_properties"
+msgstr ""
+
+#: ../core/ui/page_settings.php:756
+msgid ""
+"Clear WPP Cache. Some shortcodes and widgets use cache, so the good practice "
+"is clear it after widget, shortcode changes."
+msgstr ""
+
+#: ../core/ui/page_settings.php:757
+msgid "Clear Cache"
+msgstr ""
+
+#: ../core/ui/page_settings.php:760
+msgid "Set all properties to same property type:"
+msgstr ""
+
+#: ../core/ui/page_settings.php:765
+msgid "Set"
+msgstr ""
+
+#: ../core/ui/page_settings.php:771
+msgid "Memory Usage:"
+msgstr ""
+
+#: ../core/ui/page_settings.php:774
+msgid "Peak Memory Usage:"
+msgstr ""
+
+#: ../core/ui/property_metaboxes.php:48 ../core/ui/property_metaboxes.php:245
+msgid "(no parent)"
+msgstr ""
+
+#: ../core/ui/property_metaboxes.php:51 ../core/ui/property_metaboxes.php:52
+msgid "Parent"
+msgstr ""
+
+#: ../core/ui/property_metaboxes.php:60
+msgid "Template"
+msgstr ""
+
+#: ../core/ui/property_metaboxes.php:61
+msgid "Page Template"
+msgstr ""
+
+#: ../core/ui/property_metaboxes.php:62
+msgid "Default Template"
+msgstr ""
+
+#: ../core/ui/property_metaboxes.php:69
+msgid "Need help? Use the Help tab in the upper right of your screen."
+msgstr ""
+
+#: ../core/ui/property_metaboxes.php:110
+#, php-format
+msgid "<strong>Warning!</strong> The %1s property type has been deleted."
+msgstr ""
+
+#: ../core/ui/property_metaboxes.php:257 ../core/ui/property_metaboxes.php:263
+msgid "Falls Under"
+msgstr ""
+
+#: ../core/ui/property_metaboxes.php:266
+msgid "ID of parent property"
+msgstr ""
+
+#: ../core/ui/property_metaboxes.php:285
+msgid "Numbers only."
+msgstr ""
+
+#: ../core/ui/property_metaboxes.php:303
+msgid "Values aggregated from child properties."
+msgstr ""
+
+#: ../core/ui/property_metaboxes.php:379 ../core/ui/property_metaboxes.php:449
+#, php-format
+msgid "Editing %s is disabled, it may be inherited."
+msgstr ""
+
+#: ../core/ui/property_metaboxes.php:404
+msgid "Enable."
+msgstr ""
+
+#: ../core/ui/property_metaboxes.php:543
+msgid "Filter Results"
+msgstr ""
+
+#: ../core/ui/property_metaboxes.php:557
+#, php-format
+msgid "%1s Type"
+msgstr ""
+
+#: ../templates/fb-tab-property.php:81 ../templates/property.php:139
+msgid "Interested?"
+msgstr ""
+
+#: ../templates/fb-tab-property.php:87 ../templates/property.php:145
+msgid "Return to building page."
+msgstr ""
+
+#: ../templates/feps-default-template.php:100
+#: ../templates/feps-submit-template.php:72
+msgid "Your e-mail:"
+msgstr ""
+
+#: ../templates/feps-default-template.php:111
+#: ../templates/feps-submit-template.php:83
+msgid "Your Password:"
+msgstr ""
+
+#: ../templates/feps-paynow-template.php:42
+#, php-format
+msgid ""
+"Current submission requires <strong>%s</strong> credits. You can use your "
+"balance for purchasing. Also, you are able to increase your balance using "
+"form below."
+msgstr ""
+
+#: ../templates/feps-paynow-template.php:47
+#, php-format
+msgid ""
+"<label>Balance</label><span class=\"devider\">:</span> <span class=\"value\">"
+"%s</span> <span class=\"currency\">%s</span>"
+msgstr ""
+
+#: ../templates/feps-paynow-template.php:50
+#, php-format
+msgid ""
+"<label>Price</label><span class=\"devider\">:</span> <span class=\"value\">"
+"%s</span> <span class=\"currency\">%s</span>"
+msgstr ""
+
+#: ../templates/feps-paynow-template.php:60
+#, php-format
+msgid ""
+"<label>Pay Now</label> <span class=\"value\">%s</span> <span class=\"currency"
+"\">%s</span>"
+msgstr ""
+
+#: ../templates/feps-purchase-template.php:27
+#, php-format
+msgid "You can modify the current %s anytime."
+msgstr ""
+
+#: ../templates/feps-purchase-template.php:39
+msgid "Change"
+msgstr ""
+
+#: ../templates/feps-purchase-template.php:63
+msgid "Current Balance"
+msgstr ""
+
+#: ../templates/feps-purchase-template.php:84
+#, php-format
+msgid "Publish the current %s"
+msgstr ""
+
+#: ../templates/feps-purchase-template.php:87
+#, php-format
+msgid "<strong>%01.2f</strong> credits will be withdrawn from your balance."
+msgstr ""
+
+#: ../templates/feps-purchase-template.php:95
+msgid "Add Credits"
+msgstr ""
+
+#: ../templates/feps-purchase-template.php:98
+#, php-format
+msgid ""
+"You don't have enough credits on your balance. Current submission requires "
+"<strong>%01.2f</strong> credits. After credits will be added, the current %s "
+"will be automatically published."
+msgstr ""
+
+#: ../templates/feps-subplans-template.php:41
+msgid "The available amount of images which can be uploaded for the property"
+msgstr ""
+
+#: ../templates/feps-subplans-template.php:53
+msgid "Back"
+msgstr ""
+
+#: ../templates/feps-tabs-template.php:3
+msgid "Information"
+msgstr ""
+
+#: ../templates/feps-tabs-template.php:5
+msgid "Checkout"
+msgstr ""
+
+#: ../templates/property-overview-my-feps.php:48
+msgid "Expiry Date"
+msgstr ""
+
+#: ../templates/property-overview-page.php:19
+msgid ""
+"Sorry, we could not find what you were looking for.  Since you are here, "
+"take a look at some of our properties."
+msgstr ""
+
+#: ../templates/property-overview.php:103
+#, php-format
+msgid ""
+"Sorry, no properties found - try expanding your search, or <a href=\"%s"
+"\">view all</a>."
+msgstr ""
+
+#: ../templates/template-functions.php:136
+msgid " of "
+msgstr ""
+
+#: ../templates/template-functions.php:622
+msgid "Viewing page"
+msgstr ""
+
+#: ../templates/template-functions.php:622
+#: ../templates/wpi_authorize-checkout-feps.php:83
+#: ../templates/wpi_paypal-checkout-feps.php:137
+msgid "of"
+msgstr ""
+
+#: ../templates/template-functions.php:648
+msgid "Prev"
+msgstr ""
+
+#: ../templates/template-functions.php:682
+msgid ""
+"Conditional query tags do not work before the query is run. Before then, "
+"they always return false."
+msgstr ""
+
+#: ../templates/template-functions.php:1066
+msgid "Other"
+msgstr ""
+
+#: ../templates/template-functions.php:1649
+msgid "Website"
+msgstr ""
+
+#: ../templates/template-functions.php:1652
+#, php-format
+msgid "Required fields are marked %s"
+msgstr ""
+
+#: ../templates/template-functions.php:1655
+msgid "Comment"
+msgstr ""
+
+#: ../templates/template-functions.php:1656
+#, php-format
+msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
+msgstr ""
+
+#: ../templates/template-functions.php:1657
+#, php-format
+msgid ""
+"Logged in as <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\" title=\"Log out of "
+"this account\">Log out?</a>"
+msgstr ""
+
+#: ../templates/template-functions.php:1658
+msgid "Your email address will not be published."
+msgstr ""
+
+#: ../templates/template-functions.php:1659
+#, php-format
+msgid ""
+"You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags "
+"and attributes: %s"
+msgstr ""
+
+#: ../templates/template-functions.php:1662
+msgid "Leave a Reply"
+msgstr ""
+
+#: ../templates/template-functions.php:1663
+#, php-format
+msgid "Leave a Reply to %s"
+msgstr ""
+
+#: ../templates/template-functions.php:1664
+msgid "Cancel reply"
+msgstr ""
+
+#: ../templates/template-functions.php:1665
+msgid "Post Comment"
+msgstr ""
+
+#: ../templates/wpi_authorize-checkout-feps.php:60
+#: ../templates/wpi_paypal-checkout-feps.php:114
+msgid "Agreement"
+msgstr ""
+
+#: ../templates/wpi_authorize-checkout-feps.php:82
+#: ../templates/wpi_paypal-checkout-feps.php:136
+msgid "Process Payment"
+msgstr ""
+
+#: ../templates/wpi_checkout-feps.php:9
+msgid "Payment Method"
+msgstr ""
+
+#: ../templates/wpi_checkout-feps.php:14
+msgid "Method"
+msgstr ""
+
+#: ../templates/wpi_checkout-feps.php:62
+msgid "Specified gateways are not available"
+msgstr ""
+
+#: ../templates/wpi_paypal-checkout-feps.php:84
+msgid "Custom Amount"
+msgstr ""
+
+#: ../templates/wpi_paypal-checkout-feps.php:88
+msgid "Your Amount"
+msgstr ""
+
+#: ../templates/wpi_paypal-checkout-feps.php:103
+msgid "Enter Amount"
+msgstr ""

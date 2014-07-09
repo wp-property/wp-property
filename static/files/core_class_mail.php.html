@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>core/class_mail.php - WP-Property</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="http://a3d72a45d111006ec192-ec5b80a12b0b09b4d52373336afb4254.r80.cf1.rackcdn.com/usability-dynamics.png" title="WP-Property"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.38.2</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/wpp.html">wpp</a></li>
+            
+                <li><a href="../classes/wpp.overview.html">wpp.overview</a></li>
+            
+                <li><a href="../classes/wpp.xmli.html">wpp.xmli</a></li>
+            
+                <li><a href="../classes/WPP_RETS.html">WPP_RETS</a></li>
+            
+                <li><a href="../classes/WPP_UI.html">WPP_UI</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: core/class_mail.php</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&lt;?php
+/**
+ * WP-Property Mail Notifications
+ * Contains set of static methods for notifications
+ *
+ * @version 1.0
+ * @author Usability Dynamics, Inc. &lt;info@usabilitydynamics.com&gt;
+ * @package WP-Property
+ * @since 1.38
+ */
+class WPP_Mail {
+
+  /**
+   *
+   * @param type $notification
+   *
+   * @author peshkov@UD
+   * @since 1.38
+   */
+  function _send_notification( $notification ) {
+    $notification = apply_filters( &#x27;wpp::send_notification&#x27;, $notification );
+    UD_API::send_notification( $notification );
+  }
+
+  /**
+   *
+   * @author peshkov@UD
+   * @since 1.38
+   */
+  function _notification_template() {
+    return apply_filters( &#x27;wpp::mail::template&#x27;, array(
+      &#x27;trigger_action&#x27; =&gt; &#x27;wpp_default_action&#x27;,
+      &#x27;data&#x27; =&gt; array(),
+      &#x27;user&#x27; =&gt; false,
+      &#x27;subject&#x27; =&gt; __( &#x27;No Subject&#x27;, &#x27;wpp&#x27; ),
+      &#x27;message&#x27; =&gt; &#x27;&#x27;,
+      &#x27;crm_log_message&#x27; =&gt; &#x27;&#x27;,
+    ) );
+  }
+
+  /**
+   *
+   * @author peshkov@UD
+   * @since 1.38
+   */
+  function user_created( $user_id, $new_user, $args = array() ) {
+    $notification = self::_notification_template();
+
+    $user_data = get_userdata( $user_id );
+
+    $activation_link = get_bloginfo( &#x27;home&#x27; ) . &#x27;?wpp_user=&#x27; . $user_id . &#x27;&amp;wpp_user_activation=&#x27; . md5( $user_id . $user_data-&gt;data-&gt;user_email . SECURE_AUTH_SALT );
+
+    $notification[ &#x27;trigger_action&#x27; ] = &#x27;feps_use_account_created&#x27;;
+    $notification[ &#x27;user&#x27; ] = $user_id;
+    $notification[ &#x27;subject&#x27; ] = __( &#x27;Account Created&#x27;, &#x27;wpp&#x27; );
+    $notification[ &#x27;message&#x27; ] = sprintf( __( &#x27;Hello [display_name]%1$s%1$sYour account on [site_url] has been created and is waiting for activation.%1$s%1$sClick this link to activate your account:%1$s[activation_link]%1$s%1$sAccess data:%1$s[user_login] / [user_password]&#x27;, &#x27;wpp&#x27; ), PHP_EOL );
+    $notification[ &#x27;crm_log_message&#x27; ] = __( &#x27;New User account created.&#x27;, &#x27;wpp&#x27; );
+
+    $notification[ &#x27;data&#x27; ][ &#x27;notification_type&#x27; ] = __( &#x27;User Account Created&#x27;, &#x27;wpp&#x27; );
+    $notification[ &#x27;data&#x27; ][ &#x27;user_email&#x27; ] = $user_data-&gt;data-&gt;user_email;
+    $notification[ &#x27;data&#x27; ][ &#x27;display_name&#x27; ] = $user_data-&gt;data-&gt;display_name;
+    $notification[ &#x27;data&#x27; ][ &#x27;user_login&#x27; ] = $new_user[ &#x27;user_login&#x27; ];
+    $notification[ &#x27;data&#x27; ][ &#x27;user_password&#x27; ] = $new_user[ &#x27;user_pass&#x27; ];
+    $notification[ &#x27;data&#x27; ][ &#x27;site_url&#x27; ] = site_url();
+    $notification[ &#x27;data&#x27; ][ &#x27;activation_link&#x27; ] = $activation_link;
+    $notification[ &#x27;data&#x27; ][ &#x27;system_message&#x27; ] = $notification[ &#x27;message&#x27; ];
+
+    $notification = UD_API::array_merge_recursive_distinct( $notification, $args );
+
+    self::_send_notification( $notification );
+  }
+
+  /**
+   *
+   * @author peshkov@UD
+   * @since 1.38
+   */
+  function feps_post_approved( $post_id, $args = array() ) {
+    global $wp_post_statuses;
+
+    $notification = self::_notification_template();
+
+    $_property = WPP_F::get_property( $post_id, array( &#x27;get_children&#x27; =&gt; &#x27;false&#x27; ) );
+
+    $user_id = $_property[ &#x27;post_author&#x27; ];
+    $user = get_user_by( &#x27;id&#x27;, $user_id );
+
+    $notification[ &#x27;trigger_action&#x27; ] = &#x27;pending_property_approve&#x27;;
+    $notification[ &#x27;user&#x27; ] = $user;
+    $notification[ &#x27;subject&#x27; ] = __( &#x27;Submission Approved&#x27;, &#x27;wpp&#x27; );
+    $notification[ &#x27;message&#x27; ] = sprintf( __( &#x27;Hello.%1$s%1$sYour %2$s has been published.%1$s%1$sYou can view it using this URL: %1$s[property_link]&#x27;, &#x27;wpp&#x27; ), PHP_EOL, WPP_F::property_label( &#x27;singular&#x27; ) );
+    $notification[ &#x27;crm_log_message&#x27; ] = sprintf( __( &#x27;User-submitted %1$s ([property_title]) approved and published.&#x27;, &#x27;wpp&#x27; ), WPP_F::property_label( &#x27;singular&#x27; ) );
+
+    $notification[ &#x27;data&#x27; ][ &#x27;notification_type&#x27; ] = __( &#x27;Submission Approved&#x27;, &#x27;wpp&#x27; );
+    $notification[ &#x27;data&#x27; ][ &#x27;user_email&#x27; ] = $user-&gt;data-&gt;user_email;
+    $notification[ &#x27;data&#x27; ][ &#x27;display_name&#x27; ] = $user-&gt;data-&gt;display_name;
+    $notification[ &#x27;data&#x27; ][ &#x27;site_url&#x27; ] = site_url();
+    $notification[ &#x27;data&#x27; ][ &#x27;url&#x27; ] = $notification[ &#x27;data&#x27; ][ &#x27;property_link&#x27; ] = class_wpp_feps::get_feps_permalink( $_property, false );
+    $notification[ &#x27;data&#x27; ][ &#x27;title&#x27; ] = $notification[ &#x27;data&#x27; ][ &#x27;property_title&#x27; ] = $post-&gt;post_title;
+    $notification[ &#x27;data&#x27; ][ &#x27;status&#x27; ] = @$wp_post_statuses[ get_post_status( $post_id ) ]-&gt;label;
+
+    $notification = UD_API::array_merge_recursive_distinct( $notification, $args );
+
+    self::_send_notification( $notification );
+  }
+
+  /**
+   * Should be called on FEPS property status update
+   *
+   * @param int $post_id
+   * @param array $args
+   *
+   * @author peshkov@UD
+   * @since 1.38
+   */
+  function feps_post_status_updated( $post_id, $args = array() ) {
+    global $wp_post_statuses;
+
+    $notification = self::_notification_template();
+
+    $_property = WPP_F::get_property( $post_id, array( &#x27;get_children&#x27; =&gt; &#x27;false&#x27; ) );
+
+    $user = get_userdata( $_property[ &#x27;post_author&#x27; ] );
+
+    $notification[ &#x27;trigger_action&#x27; ] = &#x27;feps_status_updated&#x27;;
+    $notification[ &#x27;user&#x27; ] = $user;
+    $notification[ &#x27;subject&#x27; ] = __( &#x27;Status Updated&#x27;, &#x27;wpp&#x27; );
+    $notification[ &#x27;message&#x27; ] = sprintf( __( &#x27;Hello.%1$s%1$sYour %2$s status has been updated.%1$s%1$sYou can view it using this URL: %1$s[property_link]&#x27;, &#x27;wpp&#x27; ), PHP_EOL, WPP_F::property_label( &#x27;singular&#x27; ) );
+    $notification[ &#x27;crm_log_message&#x27; ] = sprintf( __( &#x27;FEPS %1$s ([property_title]) status has been changed.&#x27;, &#x27;wpp&#x27; ), WPP_F::property_label( &#x27;singular&#x27; ) );
+
+    $notification[ &#x27;data&#x27; ][ &#x27;notification_type&#x27; ] = __( &#x27;Status Updated&#x27;, &#x27;wpp&#x27; );
+    $notification[ &#x27;data&#x27; ][ &#x27;site_url&#x27; ] = site_url();
+    $notification[ &#x27;data&#x27; ][ &#x27;user_email&#x27; ] = $user-&gt;data-&gt;user_email;
+    $notification[ &#x27;data&#x27; ][ &#x27;display_name&#x27; ] = $user-&gt;data-&gt;display_name;
+    $notification[ &#x27;data&#x27; ][ &#x27;user_login&#x27; ] = $user-&gt;data-&gt;user_login;
+    $notification[ &#x27;data&#x27; ][ &#x27;user_password&#x27; ] = $user-&gt;data-&gt;user_pass;
+    $notification[ &#x27;data&#x27; ][ &#x27;title&#x27; ] = $notification[ &#x27;data&#x27; ][ &#x27;property_title&#x27; ] = $post_after-&gt;post_title;
+    $notification[ &#x27;data&#x27; ][ &#x27;url&#x27; ] = $notification[ &#x27;data&#x27; ][ &#x27;property_link&#x27; ] = class_wpp_feps::get_feps_permalink( $_property, false );
+    $notification[ &#x27;data&#x27; ][ &#x27;status&#x27; ] = @$wp_post_statuses[ $_property[ &#x27;post_status&#x27; ] ]-&gt;label;
+
+    $notification = UD_API::array_merge_recursive_distinct( $notification, $args );
+
+    self::_send_notification( $notification );
+  }
+
+  /**
+   *
+   * @author peshkov@UD
+   * @since 1.38
+   */
+  function feps_post_created( $post_id, $args = array() ) {
+    global $wp_post_statuses;
+
+    $notification = self::_notification_template();
+
+    $_property = WPP_F::get_property( $post_id, array( &#x27;get_children&#x27; =&gt; &#x27;false&#x27; ) );
+
+    $user_id = $_property[ &#x27;post_author&#x27; ];
+    $user = get_user_by( &#x27;id&#x27;, $user_id );
+
+    $notification[ &#x27;trigger_action&#x27; ] = &#x27;pending_property_added&#x27;;
+    $notification[ &#x27;user&#x27; ] = $user;
+    $notification[ &#x27;subject&#x27; ] = __( &#x27;Submission Received&#x27;, &#x27;wpp&#x27; );
+    $notification[ &#x27;message&#x27; ] = sprintf( __( &#x27;Hello.%1$s%1$sYour %2$s has been received.%1$s%1$sYou can view it using this URL:%1$s[pending_url]&#x27;, &#x27;wpp&#x27; ), PHP_EOL, WPP_F::property_label( &#x27;singular&#x27; ) );
+    $notification[ &#x27;crm_log_message&#x27; ] = sprintf( __( &#x27;User submitted %1$s ([property_title]) using FEPS.&#x27;, &#x27;wpp&#x27; ), WPP_F::property_label( &#x27;singular&#x27; ) );
+
+    $notification[ &#x27;data&#x27; ][ &#x27;notification_type&#x27; ] = __( &#x27;Submission Received&#x27;, &#x27;wpp&#x27; );
+    $notification[ &#x27;data&#x27; ][ &#x27;display_name&#x27; ] = $user-&gt;data-&gt;display_name;
+    $notification[ &#x27;data&#x27; ][ &#x27;user_email&#x27; ] = $user-&gt;data-&gt;user_email;
+    $notification[ &#x27;data&#x27; ][ &#x27;site_url&#x27; ] = site_url();
+    $notification[ &#x27;data&#x27; ][ &#x27;pending_url&#x27; ] = class_wpp_feps::get_feps_permalink( $_property, false );
+    $notification[ &#x27;data&#x27; ][ &#x27;title&#x27; ] = $notification[ &#x27;data&#x27; ][ &#x27;property_title&#x27; ] = $_property[ &#x27;post_title&#x27; ];
+    $notification[ &#x27;data&#x27; ][ &#x27;status&#x27; ] = @$wp_post_statuses[ $_property[ &#x27;post_status&#x27; ] ]-&gt;label;
+
+    $notification = UD_API::array_merge_recursive_distinct( $notification, $args );
+
+    self::_send_notification( $notification );
+  }
+
+}
+
+
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
