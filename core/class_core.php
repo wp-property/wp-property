@@ -1664,7 +1664,7 @@ class WPP_Core {
       $return[ 'before' ] = html_entity_decode( $args[ 'before' ] );
     }
 
-    $return[ 'value' ] = apply_filters( 'wpp_property_attribute_shortcode', $value, $this_property );
+    $return[ 'value' ] = apply_filters( 'wpp_property_attribute_shortcode', $value, $this_property, $attribute );
 
     if ( $args[ 'strip_tags' ] == "true" && !empty( $return[ 'value' ] ) ) {
       $return[ 'value' ] = strip_tags( $return[ 'value' ] );
