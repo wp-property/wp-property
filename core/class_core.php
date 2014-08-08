@@ -118,7 +118,7 @@ class WPP_Core {
     add_action( "wp_ajax_wpp_property_overview_pagination", array( $this, "ajax_property_overview" ) );
     add_action( "wp_ajax_nopriv_wpp_property_overview_pagination", array( $this, "ajax_property_overview" ) );
 
-    /** Localization */
+    /** Localization. Deprecated way! Now static l10n file is used. */
     add_action( "wp_ajax_wpp_js_localization", array( __CLASS__, "localize_scripts" ) );
     add_action( "wp_ajax_nopriv_wpp_js_localization", array( __CLASS__, "localize_scripts" ) );
 
@@ -185,9 +185,15 @@ class WPP_Core {
     //** Determine if we are secure */
     $scheme = ( is_ssl() && !is_admin() ? 'https' : 'http' );
 
-    //** Load early so plugins can use them as well */
-    wp_register_script( 'wpp-localization', get_bloginfo( 'wpurl' ) . '/wp-admin/admin-ajax.php?action=wpp_js_localization', array(), WPP_Version );
-
+    //** Load Localization early so plugins can use them as well */
+    //** Try to generate static localization script. It can be flushed on Clear Cache! */
+    if( $this->maybe_generate_l10n_script() ) {
+      wp_register_script( 'wpp-localization', WPP_URL . 'cache/l10n.js', array(), WPP_Version );
+    } else {
+      //** This is old way of getting localization for WPP scripts. Deprecated way! */
+      wp_register_script( 'wpp-localization', get_bloginfo( 'wpurl' ) . '/wp-admin/admin-ajax.php?action=wpp_js_localization', array(), WPP_Version );
+    }
+    
     wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'third-party/fancybox/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
     wp_register_script( 'wpp-jquery-colorpicker', WPP_URL . 'third-party/colorpicker/colorpicker.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-easing', WPP_URL . 'third-party/fancybox/jquery.easing-1.3.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
@@ -1664,7 +1670,7 @@ class WPP_Core {
       $return[ 'before' ] = html_entity_decode( $args[ 'before' ] );
     }
 
-    $return[ 'value' ] = apply_filters( 'wpp_property_attribute_shortcode', $value, $this_property, $attribute );
+    $return[ 'value' ] = apply_filters( 'wpp_property_attribute_shortcode', $value, $this_property );
 
     if ( $args[ 'strip_tags' ] == "true" && !empty( $return[ 'value' ] ) ) {
       $return[ 'value' ] = strip_tags( $return[ 'value' ] );
@@ -1871,18 +1877,17 @@ class WPP_Core {
       }
     }
   }
-
+  
   /**
    * Generates javascript file with localization.
    * Adds localization support to all WP-Property scripts.
    *
+   * @todo deprecated way of loading localization data. See self::maybe_generate_l10n_script()
    * @since 1.37.3.2
    * @author peshkov@UD
    */
   static function localize_scripts() {
-
     $l10n = WPP_F::get_cache( 'localize_scripts' );
-  
     if( !$l10n ) {
       $l10n = array();
       //** Include the list of translations */
@@ -1897,11 +1902,44 @@ class WPP_Core {
       }
       WPP_F::set_cache( 'localize_scripts', $l10n );
     }
-
     header( 'Content-type: application/x-javascript' );
-
     die( "var wpp = ( typeof wpp === 'object' ) ? wpp : {}; wpp.strings = " . json_encode( $l10n ) . ';' );
+  }
 
+  /**
+   * Generates javascript file with localization.
+   * Adds localization support to all WP-Property scripts.
+   *
+   * @since 1.41.5
+   * @author peshkov@UD
+   */
+  static function maybe_generate_l10n_script() {
+    $dir = WPP_Path . 'cache/';
+    $file = $dir . 'l10n.js';
+    //** File already created! */
+    if( file_exists( $file ) ){
+      return true;
+    }
+    //** Try to create directory if it doesn't exist */
+    if( !is_dir( $dir ) && !wp_mkdir_p( $dir ) ) {
+      return false;
+    }
+    $l10n = array();
+    //** Include the list of translations */
+    include_once WPP_Path . 'l10n.php';
+    /** All additional localizations must be added using the filter below. */
+    $l10n = apply_filters( 'wpp::js::localization', $l10n );
+    foreach ( (array) $l10n as $key => $value ) {
+      if ( !is_scalar( $value ) ) {
+        continue;
+      }
+      $l10n[ $key ] = html_entity_decode( (string) $value, ENT_QUOTES, 'UTF-8' );
+    }
+    //** Save file */
+    if( @file_put_contents( $file, 'var wpp = ( typeof wpp === \'object\' ) ? wpp : {}; wpp.strings = ' . json_encode( $l10n ) . ';' ) ) {
+      return false;
+    }
+    return true;
   }
 
   /**
