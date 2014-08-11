@@ -268,7 +268,7 @@ class WPP_F extends UD_API {
     ) );
 
     if( $wp_properties[ 'taxonomies' ] ) {
-
+    
       foreach( $wp_properties[ 'taxonomies' ] as $taxonomy => $taxonomy_data ) {
 
         //** Check if taxonomy is disabled */
@@ -285,6 +285,7 @@ class WPP_F extends UD_API {
           'labels'       => $taxonomy_data[ 'labels' ],
           'query_var'    => $taxonomy,
           'rewrite'      => array( 'slug' => $taxonomy ),
+          'show_ui'      => ( current_user_can( 'manage_wpp_categories' ) ? true : false ),
           'capabilities' => array(
             'manage_terms' => 'manage_wpp_categories',
             'edit_terms'   => 'manage_wpp_categories',
@@ -294,8 +295,6 @@ class WPP_F extends UD_API {
         ) );
       }
     }
-
-    register_taxonomy_for_object_type( 'property_features', 'property' );
 
   }
 
@@ -2222,7 +2221,10 @@ class WPP_F extends UD_API {
     $dir = WPP_Path . 'cache/';
     $file = $dir . MD5( $name ) . '.res';
     if( is_file( $file ) && time() - filemtime( $file ) < $live ) {
-      return maybe_unserialize( file_get_contents( $file ) );
+      $handle = fopen( $file, "r" );
+      $content = fread( $handle, filesize( $file ) );
+      fclose( $handle );
+      return maybe_unserialize( $content );
     }
     return false;
   }
