@@ -997,8 +997,9 @@ if ( !function_exists( 'draw_stats' ) ):
           $value = __( 'Yes', 'wpp' );
         }
       } else if ( $value == 'false' ) {
-        if ( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_true_as_image' ] == 'true' )
+        if ( $show_true_as_image == 'true' ) {
           continue;
+        }
         $value = __( 'No', 'wpp' );
       }
 
