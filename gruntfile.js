@@ -7,11 +7,18 @@
  */
 module.exports = function( grunt ) {
 
+  // Automatically Load Tasks.
+  require( 'load-grunt-tasks' )( grunt, {
+    pattern: 'grunt-*',
+    config: './package.json',
+    scope: 'devDependencies'
+  });
+
   // Build Configuration.
   grunt.initConfig({
 
     // Get Package.
-    pkg: grunt.file.readJSON( 'composer.json' ),
+    package: grunt.file.readJSON( 'composer.json' ),
 
     // Compile Core and Template Styles.
     less: {
@@ -160,42 +167,6 @@ module.exports = function( grunt ) {
       ]
     },
 
-    // Commit to Git.
-    gitcommit: {
-      options: {
-        message: 'Automatic push.',
-        ignoreEmpty: true
-      },
-      files: {
-        src: [
-          'images/*.*',
-          'languages/*.*',
-          'lib/*.*',
-          'js/*.*',
-          'static/*.*',
-          'static/codex/*.*',
-          'static/codex/files/*.*',
-          'styles/*.*',
-          'templates/*.*',
-          '*.*'
-        ]
-      }
-    },
-
-    // Pust to Git.
-    gitpush: {
-      development: {
-        options: {
-          branch: 'development'
-        }
-      },
-      master: {
-        options: {
-          branch: 'master'
-        }
-      }
-    },
-
     // Execute Shell Commands.
     shell: {
       install: {
@@ -214,18 +185,6 @@ module.exports = function( grunt ) {
 
   });
 
-  // Load NPM Tasks.
-  grunt.loadNpmTasks( 'grunt-contrib-symlink' );
-  grunt.loadNpmTasks( 'grunt-contrib-yuidoc' );
-  grunt.loadNpmTasks( 'grunt-contrib-uglify' );
-  grunt.loadNpmTasks( 'grunt-contrib-watch' );
-  grunt.loadNpmTasks( 'grunt-contrib-less' );
-  grunt.loadNpmTasks( 'grunt-contrib-concat' );
-  grunt.loadNpmTasks( 'grunt-contrib-clean' );
-  grunt.loadNpmTasks( 'grunt-markdown' );
-  grunt.loadNpmTasks( 'grunt-git' );
-  grunt.loadNpmTasks( 'grunt-shell' );
-
   // Register NPM Tasks.
   grunt.registerTask( 'default', [ 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
 
@@ -234,14 +193,5 @@ module.exports = function( grunt ) {
 
   // Prepare for Distribution.
   grunt.registerTask( 'make-distribution', [ 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
-
-  // Prepare and Push to Git.
-  grunt.registerTask( 'commit', [ 'clean:temp', 'markdown', 'less:production', 'yuidoc', 'uglify:production', 'gitcommit', 'gitpush:development'  ] );
-
-  // Prepare and Push to Git master.
-  grunt.registerTask( 'commit-master', [ 'clean:temp', 'markdown', 'less:production', 'yuidoc', 'uglify:production', 'gitcommit', 'gitpush:master'  ] );
-
-  // Development Mode.
-  grunt.registerTask( 'dev', [ 'symlink:dev', 'watch' ] );
 
 };

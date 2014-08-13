@@ -16,7 +16,7 @@ foreach ($wpp_property_stats as $key => $value) {
     unset($list_data['attributes'][$key]);
   }
 }
-$property_stats = @draw_stats( 'exclude=' . implode(',', $exclude_property_stats) . '&display=array', $property );
+$property_stats = @draw_stats( 'show_true_as_image=false&sort_by_groups=false&display=array&exclude=' . implode(',', $exclude_property_stats), $property );
 if(!empty($property_stats)) {
   foreach ($property_stats as $label => $value) {
     $info .= '<br/>'. $label .': '. $value;

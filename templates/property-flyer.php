@@ -1,7 +1,7 @@
 <?php
 /**
  * PDF Flyer default template
- */
+ */ 
 ?>
 <html>
     <head>
@@ -111,31 +111,20 @@
                             <td width="15">&nbsp;
                             </td>
                             <td width=""><table cellspacing="0" cellpadding="0" width="100%">
-                                <?php if ( is_array( $property[ 'gallery' ] ) && !empty( $property[ 'gallery' ] ) ) : ?>
-                                  <?php $counter = 0; ?>
-                                  <?php foreach ( $property[ 'gallery' ] as $image ) : ?>
-                                    <?php if ( $counter == $wpp_pdf_flyer[ 'num_pictures' ] ) break; ?>
-                                    <?php if ( empty( $image[ $wpp_pdf_flyer[ 'secondary_photos' ] ] ) ) continue; ?>
-                                    <?php
-                                    $counter++;
-                                    $this_image = wpp_get_image_link( $image[ 'attachment_id' ], $wpp_pdf_flyer[ 'secondary_photos' ], array( 'return' => 'array' ) );
-
-                                    ?>
-                                    <tr>
-                                            <td><table cellspacing="0" cellpadding="10" border="0" class="bg-section">
-                                                <tr>
-                                                    <td><img width="<?php echo( $this_image[ 'width' ] - 20 ); ?>" src="<?php echo $this_image[ 'link' ]; ?>" alt=""/>
-                                                    </td>
-                                                </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    <tr>
-                                            <td height="15">&nbsp;
-                                            </td>
-                                        </tr>
-                                  <?php endforeach; ?>
-                                <?php endif; ?>
+                                <?php foreach ( $wpp_pdf_flyer[ 'images' ] as $image ) : ?>
+                                  <tr>
+                                    <td><table cellspacing="0" cellpadding="10" border="0" class="bg-section">
+                                      <tr>
+                                        <td><img width="<?php echo( $image[ 'width' ] - 20 ); ?>" src="<?php echo $image[ 'link' ]; ?>" alt=""/>
+                                        </td>
+                                      </tr>
+                                    </table></td>
+                                  </tr>
+                                  <tr>
+                                    <td height="15">&nbsp;
+                                    </td>
+                                  </tr>
+                                <?php endforeach; ?>
                                 <?php do_action( 'wpp_flyer_right_column', $property, $wpp_pdf_flyer ); ?>
                                 <tr>
                                   <td width="15">&nbsp;
