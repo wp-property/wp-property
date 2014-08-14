@@ -100,14 +100,12 @@ if ( !class_exists( 'UD_API' ) ) {
      * @author peshkov@UD
      */
     function parse_str( $request, $data = array() ) {
-      $hash = md5( '%2B' );
-      $request = str_replace( '%2B', $hash, $_REQUEST[ 'data' ] );
-      $request = urldecode( $request );
-      $request = str_replace( $hash, '%2B', $request );
-      $tokens = explode( "&", $request );
+      $tokens = explode( "&", $_REQUEST[ 'data' ] );
       foreach ( $tokens as $token ) {
+        $token = str_replace( '%2B', md5( '%2B' ), $token );
         $arr = array();
         parse_str( $token, $arr );
+        array_walk_recursive( $arr, create_function( '&$value,$key', '$value = str_replace( md5( "%2B" ), "+", $value );' ) );
         $data = self::extend( $data, $arr );
       }
       return $data;
