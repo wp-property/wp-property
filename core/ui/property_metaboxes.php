@@ -440,7 +440,7 @@ class WPP_UI {
                 break;
 
               default:
-                $html_input = "<input type='text' id='wpp_meta_{$slug}' name='wpp_data[meta][{$slug}]' class='text-input {$attribute_data['ui_class']}' value=\"{$value}\" />";
+                $html_input = "<input type='text' id='wpp_meta_{$slug}' name='wpp_data[meta][{$slug}]' class='text-input {$attribute_data['ui_class']}' value=\"" . esc_html( $value ) . "\" />";
                 $html_input = apply_filters( 'wpp::metabox::attribute::html_input', $html_input, $slug, $value );
                 break;
 

@@ -9,8 +9,8 @@
  * @package WP-Property
  * @subpackage Main
  */
-class WPP_Core {
 
+class WPP_Core {
 
   /**
    * Highest-level function initialized on plugin load
@@ -691,13 +691,13 @@ class WPP_Core {
       'old_coordinates' => ( ( empty( $old_lat ) ) || ( empty( $old_lng ) ) ) ? "" : array( 'lat' => $old_lat, 'lng' => $old_lng ),
       'old_location' => ( !empty( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) ) ? get_post_meta( $post_id, $wp_properties[ 'configuration' ][ 'address_attribute' ], true ) : ''
     );
-
+    
     foreach ( $update_data as $meta_key => $meta_value ) {
       $attribute_data = WPP_F::get_attribute_data( $meta_key );
-
-      //* Cleans the user input */
-      $meta_value = WPP_F::encode_mysql_input( $meta_value, $meta_key );
-
+      
+      $meta_value = html_entity_decode( $meta_value );
+      $meta_value = stripslashes( $meta_value );
+      
       //* Only admins can mark properties as featured. */
       if ( $meta_key == 'featured' && !current_user_can( 'manage_options' ) ) {
         //** But be sure that meta 'featured' exists at all */
@@ -709,7 +709,6 @@ class WPP_Core {
       }
 
       //* Remove certain characters */
-
       if ( $attribute_data[ 'currency' ] || $attribute_data[ 'numeric' ] ) {
         $meta_value = str_replace( array( "$", "," ), '', $meta_value );
       }

@@ -1744,12 +1744,12 @@ class WPP_F extends UD_API {
       update_post_meta( $post_id, 'address_is_formatted', true );
 
       if( !empty( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) && ( !$manual_coordinates || $address_by_coordinates ) ) {
-        update_post_meta( $post_id, $wp_properties[ 'configuration' ][ 'address_attribute' ], WPP_F::encode_mysql_input( $geo_data->formatted_address, $wp_properties[ 'configuration' ][ 'address_attribute' ] ) );
+        update_post_meta( $post_id, $wp_properties[ 'configuration' ][ 'address_attribute' ], $geo_data->formatted_address );
       }
 
       foreach( $geo_data as $geo_type => $this_data ) {
         if( in_array( $geo_type, (array) $wp_properties[ 'geo_type_attributes' ] ) && !in_array( $geo_type, array( 'latitude', 'longitude' ) ) ) {
-          update_post_meta( $post_id, $geo_type, WPP_F::encode_mysql_input( $this_data, $geo_type ) );
+          update_post_meta( $post_id, $geo_type, $this_data );
         }
       }
 
@@ -1965,45 +1965,6 @@ class WPP_F extends UD_API {
     $data = preg_split( "/&(?!([a-zA-Z]+|#[0-9]+|#x[0-9a-fA-F]+);)/", $query );
 
     return $data;
-  }
-
-  /**
-   * Handles user input, so a standard is created for supporting special characters.
-   *
-   *
-   * @param  string $input to be converted
-   *
-   * @param bool    $meta_key
-   *
-   * @return   string   $result
-   */
-  static function encode_mysql_input( $input, $meta_key = false ) {
-
-    if( $meta_key == 'latitude' || $meta_key == 'longitude' ) {
-      return (float) $input;
-    }
-
-    /* Uses WPs built in esc_html, works like a charm. */
-    $input = esc_html( $input );
-
-    return $input;
-  }
-
-  /**
-   * Handles user input, so a standard is created for supporting special characters.
-   *
-   * @param $output
-   *
-   * @internal param string $string to be converted
-   *
-   * @return   string   $result
-   */
-  static function decode_mysql_output( $output ) {
-
-    $result = html_entity_decode( $output );
-
-    return $result;
-
   }
 
   /**
@@ -3461,7 +3422,6 @@ class WPP_F extends UD_API {
     foreach( (array) $query as $meta_key => $criteria ) {
 
       $specific = '';
-      $criteria = WPP_F::encode_mysql_input( $criteria, $meta_key );
 
       // Stop filtering ( loop ) because no IDs left
       if( isset( $matching_ids ) && empty( $matching_ids ) ) {

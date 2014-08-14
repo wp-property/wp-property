@@ -1540,7 +1540,7 @@ if ( !function_exists( 'wpp_render_search_input' ) ):
         <option value="<?php echo( ( $attrib == 'property_type' && is_array( $search_values[ $attrib ] ) ) ? implode( ',', ( array_flip( $search_values[ $attrib ] ) ) ) : '-1' ); ?>"><?php _e( 'Any', 'wpp' ) ?></option>
           <?php foreach ( $search_values[ $attrib ] as $key => $v ) : ?>
             <option value='<?php echo( ( $attrib == 'property_type' ) ? $key : $v ); ?>' <?php if ( $value == ( ( $attrib == 'property_type' ) ? $key : $v ) ) echo " selected='true' "; ?>>
-          <?php echo WPP_F::decode_mysql_output( apply_filters( "wpp_stat_filter_{$attrib}", $v ) ); ?>
+          <?php echo apply_filters( "wpp_stat_filter_{$attrib}", $v ); ?>
           </option>
           <?php endforeach; ?>
         </select>
