@@ -96,11 +96,13 @@ if ( !class_exists( 'UD_API' ) ) {
      * HACK. The current logic solves the issue of max_input_vars in the case if query is huge.
      * 
      * @see parse_str() Default PHP function
+     * @param mixed $request
      * @version 1.0
      * @author peshkov@UD
      */
-    function parse_str( $request, $data = array() ) {
-      $tokens = explode( "&", $_REQUEST[ 'data' ] );
+    static function parse_str( $request ) {
+      $data = array();
+      $tokens = explode( "&", $request );
       foreach ( $tokens as $token ) {
         $token = str_replace( '%2B', md5( '%2B' ), $token );
         $arr = array();
