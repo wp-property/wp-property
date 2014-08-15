@@ -419,6 +419,29 @@ if ( !class_exists( 'UD_API' ) ) {
       }
 
     }
+    
+    /**
+     * Adds logs to file in uploads directory if constant UD_FILE_DEBUG_LOG defined
+     *
+     * peshkov@UD
+     */
+    static public function maybe_debug_log( $message, $instance = '' ) {
+      if( defined( 'UD_FILE_DEBUG_LOG' ) && UD_FILE_DEBUG_LOG ) {
+        $uploads_dir = wp_upload_dir();
+        $logdir = $uploads_dir[ 'basedir' ] . '/logs';
+        $logfile = $logdir . '/ud_debug ' . ( !empty( $instance ) ? '_' . $instance : '' ) . '.log';
+        if( !is_dir( $logdir ) ) {
+          if( !wp_mkdir_p( $logdir ) ) {
+            return false;
+          }
+        }
+        $message = date( '[d M H:i:s]' ) . ' : ' . $message . PHP_EOL;
+        if( error_log( $message, 3, $logfile ) ) {
+          return true;
+        }
+      }
+      return false;
+    }
 
     /**
      * Parse standard WordPress readme file
