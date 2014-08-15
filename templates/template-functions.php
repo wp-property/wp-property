@@ -1290,6 +1290,7 @@ if ( !function_exists( 'draw_property_search_form' ) ):
       'use_pagination' => 'on',
       'per_page' => '10',
       'group_attributes' => false,
+      'strict_search' => false,
       'instance_id' => false,
       'sort_order' => false,
       'cache' => true
@@ -1345,6 +1346,9 @@ if ( !function_exists( 'draw_property_search_form' ) ):
       <?php } ?>
       <?php if ( $per_page ) { ?>
         <input type="hidden" name="wpp_search[per_page]" value="<?php echo $per_page; ?>"/>
+      <?php } ?>
+      <?php if ( $strict_search ) { ?>
+        <input type="hidden" name="wpp_search[strict_search]" value="<?php echo esc_attr( $strict_search ); ?>"/>
       <?php } ?>
       <?php
       //** If no property_type passed in search_attributes, we get defaults */

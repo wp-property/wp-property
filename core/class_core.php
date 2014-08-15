@@ -1260,7 +1260,8 @@ class WPP_Core {
       'searchable_property_types' => '',
       'pagination' => 'on',
       'group_attributes' => 'off',
-      'per_page' => '10'
+      'per_page' => '10',
+      'strict_search' => 'false',
     ), $atts ) );
 
     if ( empty( $searchable_attributes ) ) {
@@ -1291,6 +1292,7 @@ class WPP_Core {
     $search_args[ 'per_page' ] = $per_page;
     $search_args[ 'pagination' ] = $pagination;
     $search_args[ 'instance_id' ] = $widget_id;
+    $search_args[ 'strict_search' ] = $strict_search;
 
     draw_property_search_form( $search_args );
 
@@ -1321,9 +1323,9 @@ class WPP_Core {
     global $wp_properties, $wpp_query, $property, $post, $wp_query;
 
     $atts = wp_parse_args( $atts, array(
-      'strict_search' => 'false'
+      'strict_search' => 'false',
     ) );
-
+    
     WPP_F::force_script_inclusion( 'jquery-ui-widget' );
     WPP_F::force_script_inclusion( 'jquery-ui-mouse' );
     WPP_F::force_script_inclusion( 'jquery-ui-slider' );
@@ -1370,20 +1372,6 @@ class WPP_Core {
     
     $defaults = apply_filters( 'shortcode_property_overview_allowed_args', $defaults, $atts );
 
-    //** We add # to value which says that we don't want to use LIKE in SQL query for searching this value. */
-    $required_strict_search = apply_filters( 'wpp::required_strict_search', array( 'wpp_agents' ) );
-    foreach ( $atts as $key => $val ) {
-      if ( ( ( $atts[ 'strict_search' ] == 'true' && isset( $wp_properties[ 'property_stats' ][ $key ] ) ) ||
-           in_array( $key, $required_strict_search ) ) &&
-           !key_exists( $key, $defaults ) && $key != 'property_type'
-      ) {
-        if ( substr_count( $val, ',' ) || substr_count( $val, '&ndash;' ) || substr_count( $val, '--' ) ) {
-          continue;
-        }
-        $atts[ $key ] = '#' . $val . '#';
-      }
-    }
-    
     //* Determine if we should disable sorter */
     if( isset( $atts[ 'sorter' ] ) && in_array( $atts[ 'sorter' ], array( 'off', 'false' ) ) ) {
       $atts[ 'sorter' ] = false;
@@ -1418,8 +1406,8 @@ class WPP_Core {
       $wpp_query[ 'query' ] = shortcode_atts( $queryable_keys, $atts );
 
       //** Handle search */
-      if ( $wpp_search = $_REQUEST[ 'wpp_search' ] ) {
-        $wpp_query[ 'query' ] = shortcode_atts( $wpp_query[ 'query' ], $wpp_search );
+      if ( !empty( $_REQUEST[ 'wpp_search' ] ) ) {
+        $wpp_query[ 'query' ] = shortcode_atts( $wpp_query[ 'query' ], $_REQUEST[ 'wpp_search' ] );
         $wpp_query[ 'query' ] = WPP_F::prepare_search_attributes( $wpp_query[ 'query' ] );
 
         if ( isset( $_REQUEST[ 'wpp_search' ][ 'sort_by' ] ) ) {
@@ -1436,6 +1424,10 @@ class WPP_Core {
 
         if ( isset( $_REQUEST[ 'wpp_search' ][ 'per_page' ] ) ) {
           $wpp_query[ 'per_page' ] = $_REQUEST[ 'wpp_search' ][ 'per_page' ];
+        }
+        
+        if ( isset( $_REQUEST[ 'wpp_search' ][ 'strict_search' ] ) ) {
+          $wpp_query[ 'strict_search' ] = $_REQUEST[ 'wpp_search' ][ 'strict_search' ];
         }
       }
 
@@ -1477,11 +1469,25 @@ class WPP_Core {
     //** Remove all blank values */
     $wpp_query[ 'query' ] = array_filter( $wpp_query[ 'query' ] );
 
+    //** We add # to value which says that we don't want to use LIKE in SQL query for searching this value. */
+    $required_strict_search = apply_filters( 'wpp::required_strict_search', array( 'wpp_agents' ) );
+    foreach ( $wpp_query[ 'query' ] as $key => $val ) {
+      if ( ( ( $wpp_query[ 'strict_search' ] == 'true' && isset( $wp_properties[ 'property_stats' ][ $key ] ) ) ||
+           in_array( $key, $required_strict_search ) ) &&
+           !key_exists( $key, $defaults ) && $key != 'property_type'
+      ) {
+        if ( substr_count( $val, ',' ) || substr_count( $val, '&ndash;' ) || substr_count( $val, '--' ) ) {
+          continue;
+        }
+        $wpp_query[ 'query' ][ $key ] = '#' . $val . '#';
+      }
+    }
+    
     //** Unset this because it gets passed with query (for back-button support) but not used by get_properties() */
     unset( $wpp_query[ 'query' ][ 'per_page' ] );
     unset( $wpp_query[ 'query' ][ 'pagination' ] );
     unset( $wpp_query[ 'query' ][ 'requested_page' ] );
-
+    
     //** Load the results */
     $wpp_query[ 'properties' ] = WPP_F::get_properties( $wpp_query[ 'query' ], true );
 

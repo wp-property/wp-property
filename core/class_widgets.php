@@ -1339,6 +1339,7 @@ class SearchPropertiesWidget extends WP_Widget {
     $search_args[ 'instance_id' ] = $widget_id;
     $search_args[ 'sort_by' ] = $sort_by;
     $search_args[ 'sort_order' ] = $sort_order;
+    $search_args[ 'strict_search' ] = ( !empty( $instance[ 'strict_search' ] ) && $instance[ 'strict_search' ] == 'on' ? 'true' : 'false' ) ;
 
     draw_property_search_form( $search_args );
 
@@ -1383,6 +1384,7 @@ class SearchPropertiesWidget extends WP_Widget {
     $grouped_searchable_attributes = $instance[ 'grouped_searchable_attributes' ];
     $use_pagi = $instance[ 'use_pagi' ];
     $per_page = $instance[ 'per_page' ];
+    $strict_search = $instance[ 'strict_search' ];
     $sort_by = $instance[ 'sort_by' ];
     $sort_order = $instance[ 'sort_order' ];
     $group_attributes = $instance[ 'group_attributes' ];
@@ -1482,9 +1484,7 @@ class SearchPropertiesWidget extends WP_Widget {
                 <input class="wpp_property_types"
                        id="<?php echo $this->get_field_id( 'searchable_property_types' ); ?>_<?php echo $property_type; ?>"
                        name="<?php echo $this->get_field_name( 'searchable_property_types' ); ?>[]"
-                       type="checkbox" <?php if ( empty( $searchable_property_types ) ) {
-                  echo 'checked="checked"';
-                } ?>
+                       type="checkbox" <?php if ( empty( $searchable_property_types ) ) { echo 'checked="checked"'; } ?>
                        value="<?php echo $property_type; ?>" <?php if ( is_array( $searchable_property_types ) && in_array( $property_type, $searchable_property_types ) ) {
                   echo " checked ";
                 } ?> />
@@ -1576,7 +1576,7 @@ class SearchPropertiesWidget extends WP_Widget {
         <div class="wpp_something_advanced_wrapper" style="margin-top: 10px;">
           <ul>
 
-            <?php if ( is_array( $wp_properties[ 'sortable_attributes' ] ) ) { ?>
+            <?php if ( is_array( $wp_properties[ 'sortable_attributes' ] ) ) : ?>
               <li class="wpp_development_advanced_option">
                 <div><label
                     for="<?php echo $this->get_field_id( 'sort_by' ); ?>"><?php _e( 'Default Sort Order', 'wpp' ); ?></label>
@@ -1598,7 +1598,8 @@ class SearchPropertiesWidget extends WP_Widget {
                 </select>
 
               </li>
-            <?php } ?>
+            <?php endif; ?>
+            
             <li class="wpp_development_advanced_option">
               <label for="<?php echo $this->get_field_id( 'use_pagi' ); ?>">
                 <input id="<?php echo $this->get_field_id( 'use_pagi' ); ?>"
@@ -1608,6 +1609,15 @@ class SearchPropertiesWidget extends WP_Widget {
               </label>
             </li>
 
+            <li class="wpp_development_advanced_option">
+              <label for="<?php echo $this->get_field_id( 'strict_search' ); ?>">
+                <input id="<?php echo $this->get_field_id( 'strict_search' ); ?>"
+                       name="<?php echo $this->get_field_name( 'strict_search' ); ?>" type="checkbox"
+                       value="on" <?php if ( $strict_search == 'on' ) echo " checked='checked';"; ?> />
+                <?php _e( 'Strict Search', 'wpp' ); ?>
+              </label>
+            </li>
+            
             <li class="wpp_development_advanced_option">
               <label for="<?php echo $this->get_field_id( 'per_page' ); ?>"><?php _e( 'Items per page', 'wpp' ); ?>
                 <input style="width:30px" id="<?php echo $this->get_field_id( 'per_page' ); ?>"
