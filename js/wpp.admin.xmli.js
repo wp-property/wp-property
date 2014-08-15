@@ -1309,6 +1309,19 @@ wpp.xmli = jQuery.extend({
     } else {
       jQuery( ".wppi_source_option_preview_wrapper.wpp_something_advanced_wrapper" ).hide();
     }
+    
+    /* Exclude specific advanced settings for specific sources  */
+    jQuery( 'li.wpp_xi_advanced_setting' ).each( function( i, e ) {
+      jQuery( e ).show();
+      var exclude = typeof jQuery( e ).data( 'exclude_type' ) !== 'undefined' ? jQuery( e ).data( 'exclude_type' ) : '';
+      exclude = exclude.split( ',' );
+      jQuery.each( exclude, function( k, a ) {
+        if( a.length > 0 && source_type == a ) {
+          jQuery( e ).hide();
+          return NULL;
+        }
+      } );
+    } );
 
     /* Check to see if any of our fields need to be update automatically */
     if ( !response.schedule_exists ) {

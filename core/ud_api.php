@@ -100,7 +100,7 @@ if ( !class_exists( 'UD_API' ) ) {
      * @version 1.0
      * @author peshkov@UD
      */
-    static function parse_str( $request ) {
+    static public function parse_str( $request ) {
       $data = array();
       $tokens = explode( "&", $request );
       foreach ( $tokens as $token ) {
