@@ -3343,7 +3343,9 @@ class WPP_F extends UD_API {
     }
 
     $defaults = array(
-      'property_type' => 'all'
+      'property_type' => 'all',
+      'pagi' => false,
+      'sort_by' => false,
     );
 
     $query      = wp_parse_args( $args, $defaults );
@@ -3458,7 +3460,7 @@ class WPP_F extends UD_API {
         $specific = $criteria;
       }
 
-      if( !$limit_query ) {
+      if( !isset( $limit_query ) ) {
         $limit_query = '';
       }
 

@@ -14,7 +14,7 @@ class WPP_UI {
    * @author Andy Potanin <andy.potanin@twincitiestech.com>
    * @package WP-Property
    */
-  function child_properties( $post ) {
+  static public function child_properties( $post ) {
 
     $children = get_posts( array(
       'post_parent' => $post->ID,
@@ -45,7 +45,7 @@ class WPP_UI {
    * @package WP-Property
    *
    */
-  function page_attributes_meta_box( $post ) {
+  static public function page_attributes_meta_box( $post ) {
 
     $post_type_object = get_post_type_object( $post->post_type );
     if ( $post_type_object->hierarchical ) {
@@ -88,7 +88,7 @@ class WPP_UI {
    * @param object $object. Property
    * @param array $attrs. Metabox attributes
    */
-  function metabox_meta( $object, $attrs ) {
+  static public function metabox_meta( $object, $attrs ) {
     global $wp_properties, $wpdb;
     static $loaded = false;
 
@@ -504,7 +504,7 @@ class WPP_UI {
    *
    * @param type $wp_list_table
    */
-  function metabox_property_filter( $wp_list_table ) {
+  static public function metabox_property_filter( $wp_list_table ) {
 
     $wp_list_table->search_box( 'Search', 'property' );
 
@@ -603,7 +603,7 @@ class WPP_UI {
    *
    * @param $property
    */
-  function property_type_selector( $property ) {
+  static public function property_type_selector( $property ) {
     global $wp_properties;
 
     $attribute = WPP_F::get_attribute_data( 'property_type' );

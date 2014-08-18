@@ -61,7 +61,7 @@ include_once WPP_Path . 'core/class_admin_tools.php';
 include_once WPP_Path . 'core/class_property_export.php';
 
 /** Loads all the metaboxes for the property page */
-include_once WPP_Path . 'core/ui/property_metaboxes.php';
+include_once WPP_Path . 'core/ui/class_ui.php';
 
 /** Loads all the metaboxes for the property page */
 include_once WPP_Path . 'core/class_core.php';

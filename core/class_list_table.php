@@ -23,7 +23,7 @@ class WPP_List_Table extends WP_List_Table {
    *
    */
   function __construct( $args = '' ) {
-
+  
     $args = wp_parse_args( $args, array(
       'plural' => '',
       'iColumns' => 3,
@@ -35,6 +35,10 @@ class WPP_List_Table extends WP_List_Table {
       'singular' => '',
       'ajax' => false
     ) );
+    
+    if( !$args[ 'ajax' ] ) {
+      parent::__construct();
+    }
 
     $this->_args = $args;
 

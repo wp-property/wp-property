@@ -145,7 +145,7 @@ class WPP_Core {
     add_filter( 'post_updated_messages', array( 'WPP_Core', 'property_updated_messages' ), 5 );
 
     /** Fix toggale row actions -> get rid of "Quick Edit" on property rows */
-    add_filter( 'page_row_actions', array( 'WPP_Core', 'property_row_actions' ), 0, 2 );
+    add_filter( 'page_row_actions', array( &$this, 'property_row_actions' ), 0, 2 );
 
     /** Disables meta cache for property obejcts if enabled */
     add_action( 'pre_get_posts', array( 'WPP_F', 'pre_get_posts' ) );
@@ -316,7 +316,7 @@ class WPP_Core {
    * @since 0.60
    *
    */
-  static function after_setup_theme() {
+  static public function after_setup_theme() {
     add_theme_support( 'post-thumbnails' );
   }
 
@@ -329,7 +329,7 @@ class WPP_Core {
    * @since 0.60
    *
    */
-  function plugin_action_links( $links, $file ) {
+  public function plugin_action_links( $links, $file ) {
 
     if ( $file == 'wp-property/wp-property.php' ) {
       $settings_link = '<a href="' . admin_url( "edit.php?post_type=property&page=property_settings" ) . '">' . __( 'Settings', 'wpp' ) . '</a>';
@@ -347,7 +347,7 @@ class WPP_Core {
    * @since 0.53
    *
    */
-  function admin_enqueue_scripts( $hook ) {
+  public function admin_enqueue_scripts( $hook ) {
     global $current_screen, $wp_properties, $wpdb;
     
     wp_localize_script( 'wpp-localization', 'wpp', array( 'instance' => $this->get_instance() ) );
@@ -1105,13 +1105,13 @@ class WPP_Core {
    * @since 1.10
    *
    */
-  function admin_init() {
+  public function admin_init() {
     global $wp_properties, $post;
 
     WPP_F::fix_screen_options();
 
     // Plug page actions -> Add Settings Link to plugin overview page
-    add_filter( 'plugin_action_links', array( 'WPP_Core', 'plugin_action_links' ), 10, 2 );
+    add_filter( 'plugin_action_links', array( $this, 'plugin_action_links' ), 10, 2 );
 
     //* Adds metabox 'General Information' to Property Edit Page */
     add_meta_box( 'wpp_property_meta', __( 'General Information', 'wpp' ), array( 'WPP_UI', 'metabox_meta' ), 'property', 'normal', 'high' );
@@ -1137,13 +1137,15 @@ class WPP_Core {
 
     WPP_F::manual_activation();
 
-    // Download backup of configuration
-    if ( $_REQUEST[ 'page' ] == 'property_settings'
+    //** Download backup of configuration */
+    if (
+      isset( $_REQUEST[ 'page' ] )
+      && $_REQUEST[ 'page' ] == 'property_settings'
+      && isset( $_REQUEST[ 'wpp_action' ] )
       && $_REQUEST[ 'wpp_action' ] == 'download-wpp-backup'
+      && isset( $_REQUEST[ '_wpnonce' ] )
       && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'download-wpp-backup' )
     ) {
-      global $wp_properties;
-
       $sitename = sanitize_key( get_bloginfo( 'name' ) );
       $filename = $sitename . '-wp-property.' . date( 'Y-m-d' ) . '.txt';
 

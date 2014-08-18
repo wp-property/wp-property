@@ -272,7 +272,7 @@ if ( isset( $wp_properties[ 'numeric_attributes' ] ) && is_array( $wp_properties
   if ( isset( $wp_properties['searchable_attr_fields'] ) && is_array( $wp_properties['searchable_attr_fields'] ) ) {
     foreach( $wp_properties['searchable_attr_fields'] as $key => $value ) {
       if ( $value == 'checkbox' ) {
-        add_filter("wpp_stat_filter_$key", create_function(' $value ', ' return $value == "0" ? __("No", WPP) : __("Yes", WPP); '));
+        add_filter("wpp_stat_filter_$key", create_function(' $value ', ' return $value == "0" ? __( "No", "wpp" ) : __( "Yes", "wpp" ); '));
       }
     }
   }
@@ -356,7 +356,10 @@ function wpp_format_address_attribute( $data, $property = false, $format = "[str
   $currenty_address = $property->$wp_properties[ 'configuration' ][ 'address_attribute' ];
 
   //** If the currently requested properties address has not been formatted, and on-the-fly geo-lookup has not been disabled, try to look up now */
-  if ( !$property->address_is_formatted && $wp_properties[ 'configuration' ][ 'do_not_automatically_geo_validate_on_property_view' ] != 'true' ) {
+  if ( 
+    ( !isset( $property->address_is_formatted ) || !$property->address_is_formatted ) 
+    && $wp_properties[ 'configuration' ][ 'do_not_automatically_geo_validate_on_property_view' ] != 'true' 
+  ) {
     //** Silently attempt to validate address, right now */
     $geo_data = WPP_F::revalidate_all_addresses( array( 'property_ids' => array( $property->ID ), 'echo_result' => false, 'return_geo_data' => true ) );
 
@@ -759,7 +762,7 @@ function add_display_address( $property ) {
   } else {
 
     // Verify that address has been converted via Google Maps API
-    if ( $property[ 'address_is_formatted' ] ) {
+    if ( isset( $property[ 'address_is_formatted' ] ) && $property[ 'address_is_formatted' ] ) {
 
       $street_number = $property[ 'street_number' ];
       $route = $property[ 'route' ];
