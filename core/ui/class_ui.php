@@ -310,7 +310,7 @@ class WPP_UI {
 
       $attribute_description = array();
 
-      $attribute_description[ ] = ( $attribute_data[ 'numeric' ] || $attribute_data[ 'currency' ] ? __( 'Numbers only.', 'wpp' ) : '' );
+      $attribute_description[ ] = ( isset( $attribute_data[ 'numeric' ] ) || isset( $attribute_data[ 'currency' ] ) ? __( 'Numbers only.', 'wpp' ) : '' );
       $attribute_description[ ] = ( !empty( $wp_properties[ 'descriptions' ][ $slug ] ) ? $wp_properties[ 'descriptions' ][ $slug ] : '' );
 
       //* Setup row classes */
@@ -320,7 +320,7 @@ class WPP_UI {
       if ( is_array( $wp_properties[ 'hidden_attributes' ][ $property[ 'property_type' ] ] ) && in_array( 'parent', $wp_properties[ 'hidden_attributes' ][ $property[ 'property_type' ] ] ) ) {
         $row_classes[ ] = 'disabled_row';
       }
-      if ( in_array( $slug, (array) $wp_properties[ 'hidden_frontend_attributes' ] ) ) {
+      if ( isset( $wp_properties[ 'hidden_frontend_attributes' ] ) && in_array( $slug, (array) $wp_properties[ 'hidden_frontend_attributes' ] ) ) {
         $row_classes[ ] = 'wpp_hidden_frontend_attribute';
       }
 
@@ -331,7 +331,11 @@ class WPP_UI {
         $attribute_description = array( __( 'Values aggregated from child properties.', 'wpp' ) );
       }
 
-      if ( $wp_properties[ 'configuration' ][ 'allow_multiple_attribute_values' ] == 'true' && !in_array( $slug, apply_filters( 'wpp_single_value_attributes', array( 'property_type' ) ) ) ) {
+      if ( 
+        isset( $wp_properties[ 'configuration' ][ 'allow_multiple_attribute_values' ] ) 
+        && $wp_properties[ 'configuration' ][ 'allow_multiple_attribute_values' ] == 'true' 
+        && !in_array( $slug, apply_filters( 'wpp_single_value_attributes', array( 'property_type' ) ) ) 
+      ) {
         $row_classes[ ] = 'wpp_allow_multiple';
       }
 
@@ -406,14 +410,14 @@ class WPP_UI {
           <span
             class="disabled_message"><?php echo sprintf( __( 'Editing %s is disabled, it may be inherited.', 'wpp' ), $label ); ?></span>
 
-          <?php if ( $attribute_data[ 'currency' ] && $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ] == 'before' ) { ?>
+          <?php if ( isset( $attribute_data[ 'currency' ] ) && $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ] == 'before' ) { ?>
             <span class="currency"><?php echo $wp_properties[ 'configuration' ][ 'currency_symbol' ]; ?></span>
           <?php } ?>
 
 
           <?php
 
-          $value = $property[ $slug ];
+          $value = isset( $property[ $slug ] ) ? $property[ $slug ] : '';
 
           if ( $value === true ) {
             $value = 'true';
@@ -429,7 +433,7 @@ class WPP_UI {
 
               case 'checkbox':
                 $value = in_array( strtolower( $value ), array( 'true', '1', 'yes' ) ) ? 'true' : $value;
-                $html_input = "<input type='hidden' name='wpp_data[meta][{$slug}]' value='false' /><input " . checked( $value, 'true', false ) . "type='checkbox' id='wpp_meta_{$slug}' name='wpp_data[meta][{$slug}]' value='true' {$disabled} /> <label for='wpp_meta_{$slug}'>" . __( 'Enable.', 'wpp' ) . "</label>";
+                $html_input = "<input type='hidden' name='wpp_data[meta][{$slug}]' value='false' /><input " . checked( $value, 'true', false ) . "type='checkbox' id='wpp_meta_{$slug}' name='wpp_data[meta][{$slug}]' value='true' /> <label for='wpp_meta_{$slug}'>" . __( 'Enable.', 'wpp' ) . "</label>";
                 break;
 
               case 'dropdown':
@@ -450,16 +454,18 @@ class WPP_UI {
 
           echo apply_filters( "wpp_property_stats_input_$slug", $html_input, $slug, $property );
 
-
-          if ( $attribute_data[ 'currency' ] && $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ] == 'after' ) {
+          if ( 
+            isset( $attribute_data[ 'currency' ] ) 
+            && isset( $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ] ) 
+            && $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ] == 'after' 
+          ) {
             echo $wp_properties[ 'configuration' ][ 'currency_symbol' ];
           }
 
           ?>
-
           <span class="description">
-              <?php echo implode( '', $attribute_description ); ?>
-            </span>
+            <?php echo implode( '', $attribute_description ); ?>
+          </span>
 
           <?php do_action( 'wpp_ui_after_attribute_' . $slug, $object->ID ); ?>
 

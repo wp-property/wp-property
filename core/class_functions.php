@@ -913,35 +913,35 @@ class WPP_F extends UD_API {
       }
     }
 
-    if( is_array( $wp_properties[ 'predefined_values' ] ) && ( $predefined_values = $wp_properties[ 'predefined_values' ][ $attribute ] ) ) {
-      $return[ 'predefined_values' ] = $predefined_values;
+    if( isset( $wp_properties[ 'predefined_values' ][ $attribute ] ) ) {
+      $return[ 'predefined_values' ] = $wp_properties[ 'predefined_values' ][ $attribute ];
     }
 
-    if( is_array( $wp_properties[ 'predefined_search_values' ] ) && ( $predefined_values = $wp_properties[ 'predefined_search_values' ][ $attribute ] ) ) {
-      $return[ 'predefined_search_values' ] = $predefined_values;
+    if( isset( $wp_properties[ 'predefined_search_values' ][ $attribute ] ) ) {
+      $return[ 'predefined_search_values' ] = $wp_properties[ 'predefined_search_values' ][ $attribute ];
     }
 
-    if( is_array( $wp_properties[ 'sortable_attributes' ] ) && in_array( $attribute, $wp_properties[ 'sortable_attributes' ] ) ) {
+    if( isset( $wp_properties[ 'sortable_attributes' ] ) && in_array( $attribute, (array)$wp_properties[ 'sortable_attributes' ] ) ) {
       $return[ 'sortable' ] = true;
       $ui_class[ ]          = 'sortable';
     }
 
-    if( is_array( $wp_properties[ 'hidden_frontend_attributes' ] ) && in_array( $attribute, $wp_properties[ 'hidden_frontend_attributes' ] ) ) {
+    if( isset( $wp_properties[ 'hidden_frontend_attributes' ] ) && in_array( $attribute, (array)$wp_properties[ 'hidden_frontend_attributes' ] ) ) {
       $return[ 'hidden_frontend_attribute' ] = true;
       $ui_class[ ]                           = 'fe_hidden';
     }
 
-    if( is_array( $wp_properties[ 'currency_attributes' ] ) && in_array( $attribute, $wp_properties[ 'currency_attributes' ] ) ) {
+    if( isset( $wp_properties[ 'currency_attributes' ] ) && in_array( $attribute, (array)$wp_properties[ 'currency_attributes' ] ) ) {
       $return[ 'currency' ] = true;
       $ui_class[ ]          = 'currency';
     }
 
-    if( is_array( $wp_properties[ 'numeric_attributes' ] ) && in_array( $attribute, $wp_properties[ 'numeric_attributes' ] ) ) {
+    if( isset( $wp_properties[ 'numeric_attributes' ] ) && in_array( $attribute, (array)$wp_properties[ 'numeric_attributes' ] ) ) {
       $return[ 'numeric' ] = true;
       $ui_class[ ]         = 'numeric';
     }
 
-    if( is_array( $wp_properties[ 'searchable_attributes' ] ) && in_array( $attribute, $wp_properties[ 'searchable_attributes' ] ) ) {
+    if( isset( $wp_properties[ 'searchable_attributes' ] ) && in_array( $attribute, (array)$wp_properties[ 'searchable_attributes' ] ) ) {
       $return[ 'searchable' ] = true;
       $ui_class[ ]            = 'searchable';
     }
@@ -1767,7 +1767,7 @@ class WPP_F extends UD_API {
     }
 
     //** Logs the last validation status for better troubleshooting */
-    update_post_meta( $post_id, 'wpp::google_validation_status', $geo_data->status );
+    update_post_meta( $post_id, 'wpp::google_validation_status', ( isset( $geo_data->status ) ? $geo_data->status : 'success' ) );
 
     // Try to figure out what went wrong
     if( !empty( $geo_data->status ) && ( $geo_data->status == 'OVER_QUERY_LIMIT' || $geo_data->status == 'REQUEST_DENIED' ) ) {

@@ -280,10 +280,12 @@ class WPP_Core {
     }
 
     //** Make Property Featured Via AJAX */
-    if ( isset( $_REQUEST[ '_wpnonce' ] ) ) {
-      if ( wp_verify_nonce( $_REQUEST[ '_wpnonce' ], "wpp_make_featured_" . $_REQUEST[ 'post_id' ] ) ) {
-        add_action( 'wp_ajax_wpp_make_featured', create_function( "", '  $post_id = $_REQUEST[post_id]; echo WPP_F::toggle_featured($post_id); die();' ) );
-      }
+    if ( 
+      isset( $_REQUEST[ 'post_id' ] ) 
+      && isset( $_REQUEST[ '_wpnonce' ] ) 
+      && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], "wpp_make_featured_" . $_REQUEST[ 'post_id' ] ) 
+    ) {
+      add_action( 'wp_ajax_wpp_make_featured', create_function( "", '  $post_id = $_REQUEST[post_id]; echo WPP_F::toggle_featured($post_id); die();' ) );
     }
 
     //** Post-init action hook */
@@ -709,7 +711,7 @@ class WPP_Core {
       }
 
       //* Remove certain characters */
-      if ( $attribute_data[ 'currency' ] || $attribute_data[ 'numeric' ] ) {
+      if ( isset( $attribute_data[ 'currency' ] ) || isset( $attribute_data[ 'numeric' ] ) ) {
         $meta_value = str_replace( array( "$", "," ), '', $meta_value );
       }
 

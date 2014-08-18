@@ -461,7 +461,7 @@ function wpp_property_stats_input_address( $content, $slug, $object ) {
           <?php echo $content; ?>
     <div class="wpp_attribute_row_address_options">
           <input type="hidden" name="wpp_data[meta][manual_coordinates]" value="false"/>
-          <input type="checkbox" id="wpp_manual_coordinates" name="wpp_data[meta][manual_coordinates]" value="true" <?php checked( $object[ 'manual_coordinates' ], 1 ); ?> />
+          <input type="checkbox" id="wpp_manual_coordinates" name="wpp_data[meta][manual_coordinates]" value="true" <?php isset( $object[ 'manual_coordinates' ] ) ? checked( $object[ 'manual_coordinates' ], 1 ) : ''; ?> />
           <label for="wpp_manual_coordinates"><?php echo __( 'Set Coordinates Manually.', 'wpp' ); ?></label>
           <div id="wpp_coordinates" style="<?php if ( !$object[ 'manual_coordinates' ] ) { ?>display:none;<?php } ?>">
             <ul>
