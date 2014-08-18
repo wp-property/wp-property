@@ -142,7 +142,7 @@ class WPP_Core {
     add_action( 'save_property', create_function( '$post_id', 'WPP_F::revalidate_address($post_id);' ) );
 
     add_action( 'before_delete_post', array( 'WPP_F', 'before_delete_post' ) );
-    add_filter( 'post_updated_messages', array( 'WPP_Core', 'property_updated_messages' ), 5 );
+    add_filter( 'post_updated_messages', array( $this, 'property_updated_messages' ), 5 );
 
     /** Fix toggale row actions -> get rid of "Quick Edit" on property rows */
     add_filter( 'page_row_actions', array( &$this, 'property_row_actions' ), 0, 2 );
@@ -766,7 +766,7 @@ class WPP_Core {
         <ul>
           <li><?php _e( 'Menu Sort Order:', 'wpp' ) ?> <?php echo WPP_F::input( "name=menu_order&special=size=4", $post->menu_order ); ?></li>
 
-          <?php if ( current_user_can( 'manage_options' ) && $wp_properties[ 'configuration' ][ 'do_not_use' ][ 'featured' ] != 'true' ) { ?>
+          <?php if ( current_user_can( 'manage_options' ) && isset( $wp_properties[ 'configuration' ][ 'do_not_use' ][ 'featured' ] ) && $wp_properties[ 'configuration' ][ 'do_not_use' ][ 'featured' ] != 'true' ) { ?>
             <li><?php echo WPP_F::checkbox( "name=wpp_data[meta][featured]&label=" . __( 'Display in featured listings.', 'wpp' ), get_post_meta( $post->ID, 'featured', true ) ); ?></li>
           <?php } ?>
 

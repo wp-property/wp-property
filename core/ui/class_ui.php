@@ -297,7 +297,7 @@ class WPP_UI {
     <?php
 
     //** Detect attributes that were taken from a range of child properties. */
-    $upwards_inherited_attributes = is_array( $property[ 'system' ][ 'upwards_inherited_attributes' ] ) ? $property[ 'system' ][ 'upwards_inherited_attributes' ] : array();
+    $upwards_inherited_attributes = !empty( $property[ 'system' ][ 'upwards_inherited_attributes' ] ) ? (array)$property[ 'system' ][ 'upwards_inherited_attributes' ] : array();
 
     foreach ( $property_stats as $slug => $label ) {
       

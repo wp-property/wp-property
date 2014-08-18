@@ -876,13 +876,13 @@ class WPP_F extends UD_API {
 
     $return[ 'slug' ] = $attribute;
 
-    if( $wp_properties[ 'property_stats' ][ $attribute ] ) {
+    if( isset( $wp_properties[ 'property_stats' ][ $attribute ] ) ) {
       $return[ 'is_stat' ]      = 'true';
       $return[ 'storage_type' ] = 'meta_key';
       $return[ 'label' ]        = $wp_properties[ 'property_stats' ][ $attribute ];
     }
 
-    if( $wp_properties[ 'property_meta' ][ $attribute ] ) {
+    if( isset( $wp_properties[ 'property_meta' ][ $attribute ] ) ) {
       $return[ 'is_meta' ]         = 'true';
       $return[ 'storage_type' ]    = 'meta_key';
       $return[ 'label' ]           = $wp_properties[ 'property_meta' ][ $attribute ];
@@ -890,22 +890,22 @@ class WPP_F extends UD_API {
       $return[ 'data_input_type' ] = 'textarea';
     }
 
-    if( $wp_properties[ 'searchable_attr_fields' ][ $attribute ] ) {
+    if( isset( $wp_properties[ 'searchable_attr_fields' ][ $attribute ] ) ) {
       $return[ 'input_type' ] = $wp_properties[ 'searchable_attr_fields' ][ $attribute ];
       $ui_class[ ]            = $return[ 'input_type' ];
     }
 
-    if( $wp_properties[ 'admin_attr_fields' ][ $attribute ] ) {
+    if( isset( $wp_properties[ 'admin_attr_fields' ][ $attribute ] ) ) {
       $return[ 'data_input_type' ] = $wp_properties[ 'admin_attr_fields' ][ $attribute ];
       $ui_class[ ]                 = $return[ 'data_input_type' ];
     }
 
-    if( $wp_properties[ 'configuration' ][ 'address_attribute' ] == $attribute ) {
+    if( isset( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) && $wp_properties[ 'configuration' ][ 'address_attribute' ] == $attribute ) {
       $return[ 'is_address_attribute' ] = 'true';
       $ui_class[ ]                      = 'address_attribute';
     }
 
-    if( is_array( $wp_properties[ 'property_inheritance' ] ) ) {
+    if( isset( $wp_properties[ 'property_inheritance' ] ) && is_array( $wp_properties[ 'property_inheritance' ] ) ) {
       foreach( $wp_properties[ 'property_inheritance' ] as $property_type => $type_data ) {
         if( in_array( $attribute, $type_data ) ) {
           $return[ 'inheritance' ][ ] = $property_type;
@@ -3986,7 +3986,7 @@ class WPP_F extends UD_API {
         }
       }
 
-      if( $featured_image_id ) {
+      if( !empty( $featured_image_id ) ) {
         $return[ 'featured_image' ] = $featured_image_id;
 
         $image_title = $wpdb->get_var( "SELECT post_title  FROM {$wpdb->prefix}posts WHERE ID = '{$featured_image_id}' " );
@@ -4145,8 +4145,7 @@ class WPP_F extends UD_API {
     $return[ 'permalink' ] = get_permalink( $id );
 
     //** Make sure property_type stays as slug, or it will break many things:  (widgets, class names, etc)  */
-    $return[ 'property_type_label' ] = $wp_properties[ 'property_types' ][ $return[ 'property_type' ] ];
-
+    $return[ 'property_type_label' ] = isset( $wp_properties[ 'property_types' ][ $return[ 'property_type' ] ]) ? $wp_properties[ 'property_types' ][ $return[ 'property_type' ] ] : false;
     if( empty( $return[ 'property_type_label' ] ) ) {
       foreach( $wp_properties[ 'property_types' ] as $pt_key => $pt_value ) {
         if( strtolower( $pt_value ) == strtolower( $return[ 'property_type' ] ) ) {

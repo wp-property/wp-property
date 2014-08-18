@@ -764,14 +764,14 @@ function add_display_address( $property ) {
     // Verify that address has been converted via Google Maps API
     if ( isset( $property[ 'address_is_formatted' ] ) && $property[ 'address_is_formatted' ] ) {
 
-      $street_number = $property[ 'street_number' ];
-      $route = $property[ 'route' ];
-      $city = $property[ 'city' ];
-      $state = $property[ 'state' ];
-      $state_code = $property[ 'state_code' ];
-      $country = $property[ 'country' ];
-      $postal_code = $property[ 'postal_code' ];
-      $county = $property[ 'county' ];
+      $street_number = isset( $property[ 'street_number' ] ) ? $property[ 'street_number' ] : '';
+      $route = isset( $property[ 'route' ] ) ? $property[ 'route' ] : '';
+      $city = isset( $property[ 'city' ] ) ? $property[ 'city' ] : '';
+      $state = isset( $property[ 'state' ] ) ? $property[ 'state' ] : '';
+      $state_code = isset( $property[ 'state_code' ] ) ? $property[ 'state_code' ] : '';
+      $country = isset( $property[ 'country' ] ) ? $property[ 'country' ] : '';
+      $postal_code = isset( $property[ 'postal_code' ] ) ? $property[ 'postal_code' ] : '';
+      $county = isset( $property[ 'county' ] ) ? $property[ 'county' ] : '';
 
       $display_address = str_replace( "[street_number]", $street_number, $display_address );
       $display_address = str_replace( "[street_name]", $route, $display_address );

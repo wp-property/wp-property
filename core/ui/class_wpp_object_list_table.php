@@ -153,7 +153,7 @@ class WPP_Object_List_Table extends WPP_List_Table {
 
         case 'property_type':
           $property_type = $post->property_type;
-          $r .= $wp_properties[ 'property_types' ][ $property_type ];
+          $r .= ( isset( $wp_properties[ 'property_types' ][ $property_type ] ) ? $wp_properties[ 'property_types' ][ $property_type ] : '' );
           break;
 
         case 'overview':
@@ -233,7 +233,7 @@ class WPP_Object_List_Table extends WPP_List_Table {
 
         case 'thumbnail':
 
-          if ( $post->featured_image ) {
+          if ( isset( $post->featured_image ) && $post->featured_image ) {
 
             $overview_thumb_type = $wp_properties[ 'configuration' ][ 'admin_ui' ][ 'overview_table_thumbnail_size' ];
 
