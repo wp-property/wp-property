@@ -1706,19 +1706,18 @@ class GalleryPropertiesWidget extends WP_Widget {
     $gallery_order = maybe_unserialize( ( $post->gallery_images ) ? $post->gallery_images : $property[ 'gallery_images' ] );
 
     //** Calculate order of images */
-    if ( is_array( $slideshow_order ) && is_array( $gallery_order ) ) {
-      $order = array_merge( $slideshow_order, $gallery_order );
+    if ( is_array( $slideshow_order ) || is_array( $gallery_order ) ) {
+      $order = array_unique( array_merge( (array) $slideshow_order, (array) $gallery_order ) );
       $prepared_gallery_images = array();
-
       //** Get images from the list of images by order */
       foreach ( $order as $order_id ) {
         foreach ( $gallery as $image_slug => $gallery_image_data ) {
           if ( $gallery_image_data[ 'attachment_id' ] == $order_id ) {
             $prepared_gallery_images[ $image_slug ] = $gallery_image_data;
+            unset( $gallery[ $image_slug ] );
           }
         }
       }
-
       //** Be sure we show ALL property images in gallery */
       $gallery = array_merge( $prepared_gallery_images, $gallery );
     }
@@ -1728,16 +1727,16 @@ class GalleryPropertiesWidget extends WP_Widget {
     }
 
     if ( !is_array( $gallery ) ) {
-      return;
+      return NULL;
     }
-
+    
     $thumbnail_dimensions = WPP_F::image_sizes( $image_type );
 
     //** The current widget can be used on the page twice. So ID of the current DOM element (widget) has to be unique */
     /*
-        Removed since this will cause problems with jQuery Tabs in Denali.
-        $before_widget = preg_replace('/id="([^\s]*)"/', 'id="$1_'.rand().'"', $before_widget);
-      */
+      Removed since this will cause problems with jQuery Tabs in Denali.
+      $before_widget = preg_replace('/id="([^\s]*)"/', 'id="$1_'.rand().'"', $before_widget);
+    */
 
     $html[ ] = $before_widget;
     $html[ ] = "<div class='wpp_gallery_widget'>";
