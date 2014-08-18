@@ -1851,7 +1851,7 @@ class WPP_Core {
     global $wpp_capabilities;
 
     //* Get Administrator role for adding custom capabilities */
-    $role =& get_role( 'administrator' );
+    $role = get_role( 'administrator' );
 
     //* General WPP capabilities */
     $wpp_capabilities = array(

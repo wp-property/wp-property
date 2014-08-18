@@ -35,7 +35,7 @@ class Property_Attributes_Widget extends WP_Widget {
    *
    * @since 1.31.0
    */
-  function update( $new_instance ) {
+  function update( $new_instance, $old_instance ) {
     return $new_instance;
   }
 
@@ -180,7 +180,7 @@ class Property_Attributes_Widget extends WP_Widget {
 }
 
 /**
-Other Properties Widget
+ * Other Properties Widget
  */
 class OtherPropertiesWidget extends WP_Widget {
 
@@ -339,7 +339,7 @@ class OtherPropertiesWidget extends WP_Widget {
   }
 
   /** @see WP_Widget::update */
-  function update( $new_instance ) {
+  function update( $new_instance, $old_instance ) {
     return $new_instance;
   }
 
@@ -1809,7 +1809,7 @@ class GalleryPropertiesWidget extends WP_Widget {
   }
 
   /** @see WP_Widget::update */
-  function update( $new_instance ) {
+  function update( $new_instance, $old_instance ) {
     return $new_instance;
   }
 
