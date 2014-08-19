@@ -307,7 +307,7 @@ class WPP_UI {
       }
 
       $attribute_data = WPP_F::get_attribute_data( $slug );
-
+      
       $attribute_description = array();
 
       $attribute_description[ ] = ( isset( $attribute_data[ 'numeric' ] ) || isset( $attribute_data[ 'currency' ] ) ? __( 'Numbers only.', 'wpp' ) : '' );

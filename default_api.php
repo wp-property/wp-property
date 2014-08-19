@@ -463,15 +463,15 @@ function wpp_property_stats_input_address( $content, $slug, $object ) {
           <input type="hidden" name="wpp_data[meta][manual_coordinates]" value="false"/>
           <input type="checkbox" id="wpp_manual_coordinates" name="wpp_data[meta][manual_coordinates]" value="true" <?php isset( $object[ 'manual_coordinates' ] ) ? checked( $object[ 'manual_coordinates' ], 1 ) : ''; ?> />
           <label for="wpp_manual_coordinates"><?php echo __( 'Set Coordinates Manually.', 'wpp' ); ?></label>
-          <div id="wpp_coordinates" style="<?php if ( !$object[ 'manual_coordinates' ] ) { ?>display:none;<?php } ?>">
+          <div id="wpp_coordinates" style="<?php echo !isset( $object[ 'manual_coordinates' ] ) ? 'display:none;' : ''; ?>">
             <ul>
               <li>
-                  <input type="text" id="wpp_meta_latitude" name="wpp_data[meta][latitude]" value="<?php echo $object[ 'latitude' ]; ?>"/>
+                  <input type="text" id="wpp_meta_latitude" name="wpp_data[meta][latitude]" value="<?php echo isset( $object[ 'latitude' ] ) ? $object[ 'latitude' ] : ''; ?>"/>
                   <label><?php echo __( 'Latitude', 'wpp' ) ?></label>
                   <div class="wpp_clear"></div>
                 </li>
                 <li>
-                  <input type="text" id="wpp_meta_longitude" name="wpp_data[meta][longitude]" value="<?php echo $object[ 'longitude' ]; ?>"/>
+                  <input type="text" id="wpp_meta_longitude" name="wpp_data[meta][longitude]" value="<?php echo isset( $object[ 'longitude' ] ) ? $object[ 'longitude' ] : ''; ?>"/>
                   <label><?php echo __( 'Longitude', 'wpp' ) ?></label>
                   <div class="wpp_clear"></div>
                 </li>

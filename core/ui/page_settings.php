@@ -44,10 +44,7 @@ $parseUrl = parse_url( trim( get_bloginfo( 'url' ) ) );
 $this_domain = trim( $parseUrl[ 'host' ] ? $parseUrl[ 'host' ] : array_shift( explode( '/', $parseUrl[ 'path' ], 2 ) ) );
 
 /** Check if custom css exists */
-if ( file_exists( STYLESHEETPATH . '/wp_properties.css' ) || file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
-  $using_custom_css = true;
-}
-
+$using_custom_css = ( file_exists( STYLESHEETPATH . '/wp_properties.css' ) || file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) ? true : false;
 
 if ( get_option( 'permalink_structure' ) == '' ) {
   $wrapper_classes[ ] = 'no_permalinks';

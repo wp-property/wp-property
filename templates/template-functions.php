@@ -1610,7 +1610,7 @@ if ( !function_exists( 'wpp_get_image_link' ) ):
           $requested_image_exists = true;
         }
       }
-      if ( $requested_image_exists ) {
+      if ( isset( $requested_image_exists ) && $requested_image_exists ) {
         $i[ 0 ] = $requested_image_url;
       } else {
         //** Image with the current size doesn't exist. Try generate file */

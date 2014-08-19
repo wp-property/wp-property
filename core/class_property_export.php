@@ -21,7 +21,7 @@ class WPP_Export {
   /**
    * This function shows help stuff on the properties settings help tab
    */
-  function help_tab() {
+  static public function help_tab() {
     $export_url = WPP_Export::get_property_export_url();
 
     if ( !$export_url ) {
@@ -55,7 +55,7 @@ class WPP_Export {
    *
    * @returns string URL to site's export feed
    */
-  function get_property_export_url() {
+  static public function get_property_export_url() {
     if ( $apikey = WPP_F::get_api_key() ) {
       if ( empty( $apikey ) )
         return __( "There has been an error retreiving your API key.", "wpp" );
@@ -77,7 +77,7 @@ class WPP_Export {
    * @return array|string|\WP_Error
    * @author peshkov@UD
    */
-  function convert_to_xml( $data, $options ) {
+  static public function convert_to_xml( $data, $options ) {
 
     //** An array of serializer options */
     $options = wp_parse_args( $options, array(
@@ -125,7 +125,7 @@ class WPP_Export {
    * @todo Improve efficiency of function, times out quickly for feeds of 500 properties. memory_limit and set_time_limit should be removed once efficiency is improved
    *
    */
-  function wpp_export_properties() {
+  static public function wpp_export_properties() {
     global $wp_properties;
 
     ini_set( 'memory_limit', -1 );

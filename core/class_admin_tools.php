@@ -349,7 +349,7 @@ if( !class_exists( 'class_admin_tools' ) ) {
                       <input type="text" class="slug" readonly='readonly' value="<?php echo $slug; ?>"/>
                     </td>
                     <td class="wpp_group_main_col">
-                      <input type="radio" class="wpp_no_change_name" name="wpp_settings[configuration][main_stats_group]" <?php echo( $wp_properties[ 'configuration' ][ 'main_stats_group' ] == $slug ? "checked=\"checked\"" : "" ); ?> value="<?php echo $slug; ?>"/>
+                      <input type="radio" class="wpp_no_change_name" name="wpp_settings[configuration][main_stats_group]" <?php echo( isset( $wp_properties[ 'configuration' ][ 'main_stats_group' ] ) && $wp_properties[ 'configuration' ][ 'main_stats_group' ] == $slug ? "checked=\"checked\"" : "" ); ?> value="<?php echo $slug; ?>"/>
                     </td>
                     <td class="wpp_group_color_col">
                       <input type="text" class="wpp_input_colorpicker" name="wpp_settings[property_groups][<?php echo $slug; ?>][color]" value="<?php echo $group[ 'color' ]; ?>"/>
@@ -435,31 +435,31 @@ if( !class_exists( 'class_admin_tools' ) ) {
                 </li>
                 <li>
                   <label>
-                    <input <?php if( is_array( $wp_properties[ 'searchable_attributes' ] ) && in_array( $slug, $wp_properties[ 'searchable_attributes' ] ) ) echo " CHECKED "; ?> type="checkbox" class="slug" name="wpp_settings[searchable_attributes][]" value="<?php echo $slug; ?>"/>
+                    <input <?php echo ( isset( $wp_properties[ 'searchable_attributes' ] ) && is_array( $wp_properties[ 'searchable_attributes' ] ) && in_array( $slug, $wp_properties[ 'searchable_attributes' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug" name="wpp_settings[searchable_attributes][]" value="<?php echo $slug; ?>"/>
                     <?php _e( 'Searchable.', 'wpp' ); ?>
                   </label>
                 </li>
                 <li class="wpp_development_advanced_option">
                   <label>
-                    <input <?php if( is_array( $wp_properties[ 'hidden_frontend_attributes' ] ) && in_array( $slug, $wp_properties[ 'hidden_frontend_attributes' ] ) ) echo " CHECKED "; ?> type="checkbox" class="slug" name="wpp_settings[hidden_frontend_attributes][]" value="<?php echo $slug; ?>"/>
+                    <input <?php echo ( isset( $wp_properties[ 'hidden_frontend_attributes' ] ) && is_array( $wp_properties[ 'hidden_frontend_attributes' ] ) && in_array( $slug, $wp_properties[ 'hidden_frontend_attributes' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug" name="wpp_settings[hidden_frontend_attributes][]" value="<?php echo $slug; ?>"/>
                     <?php _e( 'Admin Only.', 'wpp' ); ?>
                   </label>
                 </li>
                 <li class="wpp_development_advanced_option">
                   <label>
-                    <input <?php if( is_array( $wp_properties[ 'numeric_attributes' ] ) && in_array( $slug, $wp_properties[ 'numeric_attributes' ] ) ) echo " CHECKED "; ?> type="checkbox" class="slug" name="wpp_settings[numeric_attributes][]" value="<?php echo $slug; ?>"/>
+                    <input <?php echo ( isset( $wp_properties[ 'numeric_attributes' ] ) && is_array( $wp_properties[ 'numeric_attributes' ] ) && in_array( $slug, $wp_properties[ 'numeric_attributes' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug" name="wpp_settings[numeric_attributes][]" value="<?php echo $slug; ?>"/>
                     <?php _e( 'Format: numeric.', 'wpp' ); ?>
                   </label>
                 </li>
                 <li class="wpp_development_advanced_option">
                   <label>
-                    <input <?php if( is_array( $wp_properties[ 'currency_attributes' ] ) && in_array( $slug, $wp_properties[ 'currency_attributes' ] ) ) echo " CHECKED "; ?> type="checkbox" class="slug" name="wpp_settings[currency_attributes][]" value="<?php echo $slug; ?>"/>
+                    <input <?php echo ( isset( $wp_properties[ 'currency_attributes' ] ) && is_array( $wp_properties[ 'currency_attributes' ] ) && in_array( $slug, $wp_properties[ 'currency_attributes' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug" name="wpp_settings[currency_attributes][]" value="<?php echo $slug; ?>"/>
                     <?php _e( 'Format: currency.', 'wpp' ); ?>
                   </label>
                 </li>
                 <li class="wpp_development_advanced_option">
                   <label>
-                    <input <?php if( is_array( $wp_properties[ 'column_attributes' ] ) && in_array( $slug, $wp_properties[ 'column_attributes' ] ) ) echo " CHECKED "; ?> type="checkbox" class="slug" name="wpp_settings[column_attributes][]" value="<?php echo $slug; ?>"/>
+                    <input <?php echo ( isset( $wp_properties[ 'column_attributes' ] ) && is_array( $wp_properties[ 'column_attributes' ] ) && in_array( $slug, $wp_properties[ 'column_attributes' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug" name="wpp_settings[column_attributes][]" value="<?php echo $slug; ?>"/>
                     <?php _e( 'Show in "All Properties" table.', 'wpp' ); ?>
                   </label>
                 </li>
@@ -554,7 +554,7 @@ if( !class_exists( 'class_admin_tools' ) ) {
             <td>
               <ul>
                 </li>
-                <input <?php if( is_array( $wp_properties[ 'hidden_frontend_attributes' ] ) && in_array( $slug, $wp_properties[ 'hidden_frontend_attributes' ] ) ) echo " CHECKED "; ?> type="checkbox" class="slug" name="wpp_settings[hidden_frontend_attributes][]" value="<?php echo $slug; ?>"/>
+                <input <?php echo ( isset( $wp_properties[ 'hidden_frontend_attributes' ] ) && is_array( $wp_properties[ 'hidden_frontend_attributes' ] ) && in_array( $slug, $wp_properties[ 'hidden_frontend_attributes' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug" name="wpp_settings[hidden_frontend_attributes][]" value="<?php echo $slug; ?>"/>
                 <label><?php _e( 'Show in Admin Only', 'wpp' ); ?></label>
                 </li>
               </ul>
@@ -634,30 +634,30 @@ if( !class_exists( 'class_admin_tools' ) ) {
 
               <li class="wpp_show_advanced" wrapper="wpp_something_advanced_wrapper"><?php _e( 'Toggle Attributes Selection', 'wpp' ); ?></li>
 
-                <?php foreach( $wp_properties[ 'property_stats' ] as $property_stat_slug => $property_stat_label ) { ?>
+                <?php foreach( $wp_properties[ 'property_stats' ] as $property_stat_slug => $property_stat_label ) : ?>
                   <li class="wpp_development_advanced_option">
-                <input id="<?php echo $property_slug . "_" . $property_stat_slug; ?>_hidden_attributes" <?php if( isset( $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) && in_array( $property_stat_slug, $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[hidden_attributes][<?php echo $property_slug; ?>][]" value="<?php echo $property_stat_slug; ?>"/>
-                <label for="<?php echo $property_slug . "_" . $property_stat_slug; ?>_hidden_attributes">
-                  <?php echo $property_stat_label; ?>
-                </label>
-              </li>
-                <?php } ?>
+                    <input id="<?php echo $property_slug . "_" . $property_stat_slug; ?>_hidden_attributes" <?php if( isset( $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) && in_array( $property_stat_slug, $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[hidden_attributes][<?php echo $property_slug; ?>][]" value="<?php echo $property_stat_slug; ?>"/>
+                    <label for="<?php echo $property_slug . "_" . $property_stat_slug; ?>_hidden_attributes">
+                      <?php echo $property_stat_label; ?>
+                    </label>
+                  </li>
+                <?php endforeach; ?>
 
-                <?php foreach( $wp_properties[ 'property_meta' ] as $property_meta_slug => $property_meta_label ) { ?>
+                <?php foreach( $wp_properties[ 'property_meta' ] as $property_meta_slug => $property_meta_label ) : ?>
                   <li class="wpp_development_advanced_option">
-                <input id="<?php echo $property_slug . "_" . $property_meta_slug; ?>_hidden_attributes" <?php if( isset( $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) && in_array( $property_meta_slug, $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[hidden_attributes][<?php echo $property_slug; ?>][]" value="<?php echo $property_meta_slug; ?>"/>
-                <label for="<?php echo $property_slug . "_" . $property_meta_slug; ?>_hidden_attributes">
-                  <?php echo $property_meta_label; ?>
-                </label>
-              </li>
-                <?php } ?>
+                    <input id="<?php echo $property_slug . "_" . $property_meta_slug; ?>_hidden_attributes" <?php if( isset( $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) && in_array( $property_meta_slug, $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[hidden_attributes][<?php echo $property_slug; ?>][]" value="<?php echo $property_meta_slug; ?>"/>
+                    <label for="<?php echo $property_slug . "_" . $property_meta_slug; ?>_hidden_attributes">
+                      <?php echo $property_meta_label; ?>
+                    </label>
+                  </li>
+                <?php endforeach; ?>
 
-                <?php if( !$wp_properties[ 'property_stats' ][ 'parent' ] ) { ?>
+                <?php if( empty( $wp_properties[ 'property_stats' ][ 'parent' ] ) ) : ?>
                   <li class="wpp_development_advanced_option">
-                <input id="<?php echo $property_slug; ?>parent_hidden_attributes" <?php if( isset( $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) && in_array( 'parent', $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[hidden_attributes][<?php echo $property_slug; ?>][]" value="parent"/>
-                <label for="<?php echo $property_slug; ?>parent_hidden_attributes"><?php _e( 'Parent Selection', 'wpp' ); ?></label>
-              </li>
-                <?php } ?>
+                    <input id="<?php echo $property_slug; ?>parent_hidden_attributes" <?php if( isset( $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) && in_array( 'parent', $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[hidden_attributes][<?php echo $property_slug; ?>][]" value="parent"/>
+                    <label for="<?php echo $property_slug; ?>parent_hidden_attributes"><?php _e( 'Parent Selection', 'wpp' ); ?></label>
+                  </li>
+                <?php endif; ?>
 
               </ul>
             </td>
