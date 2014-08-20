@@ -250,7 +250,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
           <?php
           $wpp_image_sizes = $wp_properties[ 'image_sizes' ];
 
-          foreach ( get_intermediate_image_sizes() as $slug ):
+          foreach ( array_unique( (array) get_intermediate_image_sizes() ) as $slug ):
 
             $slug = trim( $slug );
 
@@ -285,13 +285,13 @@ if ( get_option( 'permalink_structure' ) == '' ) {
             <?php else: ?>
               <tr>
               <td>
-                <div class="wpp_permanent_image"><?php echo $slug; ?></div>
+                <input class="slug_setter slug wpp_slug_can_be_empty" type="text" disabled="disabled" value="<?php echo $slug; ?>"/>
               </td>
               <td>
-                <div class="wpp_permanent_image"><?php echo $image_dimensions[ 'width' ]; ?></div>
+                <input type="text" disabled="disabled" value="<?php echo $image_dimensions[ 'width' ]; ?>"/>
               </td>
               <td>
-                <div class="wpp_permanent_image"><?php echo $image_dimensions[ 'height' ]; ?></div>
+                <input type="text" disabled="disabled" value="<?php echo $image_dimensions[ 'height' ]; ?>"/>
               </td>
               <td>&nbsp;</td>
             </tr>

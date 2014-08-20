@@ -48,7 +48,7 @@ class WPP_Core {
     do_action( 'wpp_pre_init' );
 
     // Check settings data on accord with existing wp_properties data before option updates
-    add_filter( 'wpp_settings_save', array( 'WPP_Core', 'check_wp_settings_data' ), 0, 2 );
+    add_filter( 'wpp_settings_save', array( $this, 'check_wp_settings_data' ), 0, 2 );
 
   }
 
@@ -285,7 +285,7 @@ class WPP_Core {
       && isset( $_REQUEST[ '_wpnonce' ] ) 
       && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], "wpp_make_featured_" . $_REQUEST[ 'post_id' ] ) 
     ) {
-      add_action( 'wp_ajax_wpp_make_featured', create_function( "", '  $post_id = $_REQUEST[post_id]; echo WPP_F::toggle_featured($post_id); die();' ) );
+      add_action( 'wp_ajax_wpp_make_featured', create_function( "", '  $post_id = $_REQUEST[\'post_id\']; echo WPP_F::toggle_featured( $post_id ); die();' ) );
     }
 
     //** Post-init action hook */
