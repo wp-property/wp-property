@@ -146,7 +146,8 @@ class Property_Attributes_Widget extends WP_Widget {
         <label for="<?php echo $this->get_field_id( 'widget_title' ); ?>"><?php _e( 'Title:' ); ?>
           <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
                  name="<?php echo $this->get_field_name( 'title' ); ?>" type="text"
-                 value="<?php echo esc_attr( $instance[ 'title' ] ); ?>"/></label>
+                 value="<?php echo !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : ''; ?>"/>
+        </label>
       </p>
 
       <p><?php _e( 'Attributes to Display:', 'wpp' ); ?></p>
@@ -156,7 +157,7 @@ class Property_Attributes_Widget extends WP_Widget {
           <?php foreach ( $widget_options as $slug => $data ) { ?>
             <li class="wpp_attribute_wrapper">
               <input type="hidden" name="<?php echo $this->get_field_name( $slug ); ?>" value="false"/>
-              <input class="checkbox" type="checkbox" <?php checked( $instance[ $slug ], 'true' ) ?>
+              <input class="checkbox" type="checkbox" <?php if( isset( $instance[ $slug ] ) ) checked( $instance[ $slug ], 'true' ) ?>
                      id="<?php echo $this->get_field_id( $slug ); ?>"
                      name="<?php echo $this->get_field_name( $slug ); ?>" value="true"/>
               <label for="<?php echo $this->get_field_id( $slug ); ?>"><?php echo $data[ 'label' ]; ?></label>
@@ -166,7 +167,7 @@ class Property_Attributes_Widget extends WP_Widget {
       </div>
       <ul>
         <li>
-          <input class="checkbox" type="checkbox" <?php checked( $instance[ 'show_labels' ], 'true' ) ?>
+          <input class="checkbox" type="checkbox" <?php if( isset( $instance[ 'show_labels' ] ) ) checked( $instance[ 'show_labels' ], 'true' ) ?>
                  id="<?php echo $this->get_field_id( 'show_labels' ); ?>"
                  name="<?php echo $this->get_field_name( 'show_labels' ); ?>" value="true"/>
           <label
@@ -862,17 +863,17 @@ class FeaturedPropertiesWidget extends WP_Widget {
    */
   function form( $instance ) {
     global $wp_properties;
-    $title = esc_attr( $instance[ 'title' ] );
-    $image_type = esc_attr( $instance[ 'image_type' ] );
-    $amount_items = esc_attr( $instance[ 'amount_items' ] );
-    $instance_stats = $instance[ 'stats' ];
-    $show_title = $instance[ 'show_title' ];
-    $hide_image = $instance[ 'hide_image' ];
-    $address_format = esc_attr( $instance[ 'address_format' ] );
-    $enable_more = $instance[ 'enable_more' ];
-    $enable_view_all = $instance[ 'enable_view_all' ];
-    $random_items = $instance[ 'random_items' ];
-    $property_stats = $wp_properties[ 'property_stats' ];
+    $title = isset( $instance[ 'title' ] ) ? esc_attr( $instance[ 'title' ] ) : false;
+    $image_type = isset( $instance[ 'image_type' ] ) ? esc_attr( $instance[ 'image_type' ] ) : false;
+    $amount_items = isset( $instance[ 'amount_items' ] ) ? esc_attr( $instance[ 'amount_items' ] ) : false;
+    $instance_stats = isset( $instance[ 'stats' ] ) ? $instance[ 'stats' ] : false;
+    $show_title = isset( $instance[ 'show_title' ] ) ? $instance[ 'show_title' ] : false;
+    $hide_image = isset( $instance[ 'hide_image' ] ) ? $instance[ 'hide_image' ] : false;
+    $address_format = isset( $instance[ 'address_format' ] ) ? esc_attr( $instance[ 'address_format' ] ) : false;
+    $enable_more = isset( $instance[ 'enable_more' ] ) ? $instance[ 'enable_more' ] : false;
+    $enable_view_all = isset( $instance[ 'enable_view_all' ] ) ? $instance[ 'enable_view_all' ] : false;
+    $random_items = isset( $instance[ 'random_items' ] ) ? $instance[ 'random_items' ] : false;
+    $property_stats = isset( $wp_properties[ 'property_stats' ] ) ? $wp_properties[ 'property_stats' ] : false;
 
     if ( empty( $address_format ) ) {
       $address_format = "[street_number] [street_name],[city], [state]";
@@ -1381,25 +1382,26 @@ class SearchPropertiesWidget extends WP_Widget {
     global $wp_properties;
 
     //** Get widget-specific data */
-    $title = ( $instance[ 'title' ] );
-    $searchable_attributes = $instance[ 'searchable_attributes' ];
-    $grouped_searchable_attributes = $instance[ 'grouped_searchable_attributes' ];
-    $use_pagi = $instance[ 'use_pagi' ];
-    $per_page = $instance[ 'per_page' ];
-    $strict_search = $instance[ 'strict_search' ];
-    $sort_by = $instance[ 'sort_by' ];
-    $sort_order = $instance[ 'sort_order' ];
-    $group_attributes = $instance[ 'group_attributes' ];
-    $searchable_property_types = $instance[ 'searchable_property_types' ];
-    $property_stats = $wp_properties[ 'property_stats' ];
+    $title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : false;
+    $searchable_attributes = isset( $instance[ 'searchable_attributes' ] ) ? $instance[ 'searchable_attributes' ] : false;
+    $grouped_searchable_attributes = isset( $instance[ 'grouped_searchable_attributes' ] ) ? $instance[ 'grouped_searchable_attributes' ] : false;
+    $use_pagi = isset( $instance[ 'use_pagi' ] ) ? $instance[ 'use_pagi' ] : false;
+    $per_page = isset( $instance[ 'per_page' ] ) ? $instance[ 'per_page' ] : false;
+    $strict_search = isset( $instance[ 'strict_search' ] ) ? $instance[ 'strict_search' ] : false;
+    $sort_by = isset( $instance[ 'sort_by' ] ) ? $instance[ 'sort_by' ] : false;
+    $sort_order = isset( $instance[ 'sort_order' ] ) ? $instance[ 'sort_order' ] : false;
+    $group_attributes = isset( $instance[ 'group_attributes' ] ) ? $instance[ 'group_attributes' ] : false;
+    $searchable_property_types = isset( $instance[ 'searchable_property_types' ] ) ? $instance[ 'searchable_property_types' ] : false;
+    $property_stats = isset( $wp_properties[ 'property_stats' ] ) ? $wp_properties[ 'property_stats' ] : array();
 
     //** Get WPP data */
     $all_searchable_property_types = array_unique( $wp_properties[ 'searchable_property_types' ] );
     $all_searchable_attributes = array_unique( $wp_properties[ 'searchable_attributes' ] );
-    $groups = $wp_properties[ 'property_groups' ];
-    $main_stats_group = $wp_properties[ 'configuration' ][ 'main_stats_group' ];
+    $groups = isset( $wp_properties[ 'property_groups' ] ) ? $wp_properties[ 'property_groups' ] : false;
+    $main_stats_group = isset( $wp_properties[ 'configuration' ][ 'main_stats_group' ] ) ? $wp_properties[ 'configuration' ][ 'main_stats_group' ] : false;
 
-
+    $error = array();
+    
     if ( !is_array( $all_searchable_property_types ) ) {
       $error[ 'no_searchable_types' ] = true;
     }
@@ -1446,12 +1448,10 @@ class SearchPropertiesWidget extends WP_Widget {
     $temp_attrs = array();
 
     foreach ( $all_searchable_attributes as $slug ) {
-      $attribute_label = $property_stats[ 'property_stats' ][ $slug ];
-
+      $attribute_label = $property_stats[ $slug ];
       if ( empty( $attribute_label ) ) {
         $attribute_label = WPP_F::de_slug( $slug );
       }
-
       $temp_attrs[ $attribute_label ] = $slug;
     }
 
@@ -1459,7 +1459,7 @@ class SearchPropertiesWidget extends WP_Widget {
     $stats_by_groups = sort_stats_by_groups( $temp_attrs );
 
     //** If the search widget cannot be created without some data, we bail */
-    if ( $error ) {
+    if ( !empty( $error ) ) {
       echo '<p>' . _e( 'No searchable property types were found.', 'wpp' ) . '</p>';
       return;
     }
