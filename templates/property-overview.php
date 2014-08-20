@@ -45,34 +45,34 @@
             <ul class="<?php wpp_css('property_overview::data', "wpp_overview_data"); ?>">
                 <li class="property_title">
                     <a <?php echo $in_new_window; ?> href="<?php echo $property['permalink']; ?>"><?php echo $property['post_title']; ?></a>
-                    <?php if($property['is_child']): ?>
+                    <?php if( !empty( $property['is_child'] ) ): ?>
                         of <a <?php echo $in_new_window; ?> href='<?php echo $property['parent_link']; ?>'><?php echo $property['parent_title']; ?></a>
                     <?php endif; ?>
                 </li>
 
-            <?php if($property['custom_attribute_overview'] || $property['tagline']): ?>
+            <?php if( !empty( $property['custom_attribute_overview'] ) || !empty( $property['tagline'] ) ): ?>
                 <li class="property_tagline">
-                    <?php if($property['custom_attribute_overview']): ?>
+                    <?php if( $property['custom_attribute_overview'] ): ?>
                         <?php echo $property['custom_attribute_overview']; ?>
-                    <?php elseif($property['tagline']): ?>
+                    <?php elseif( $property['tagline'] ): ?>
                         <?php echo $property['tagline']; ?>
                     <?php endif; ?>
                 </li>
             <?php endif; ?>
 
-            <?php if($property['phone_number']): ?>
+            <?php if( !empty( $property['phone_number'] ) ): ?>
                 <li class="property_phone_number"><?php echo $property['phone_number']; ?></li>
             <?php endif; ?>
 
-            <?php if($property['display_address']): ?>
+            <?php if( !empty( $property['display_address'] ) ): ?>
                 <li class="property_address"><a href="<?php echo $property['permalink']; ?>#property_map"><?php echo $property['display_address']; ?></a></li>
             <?php endif; ?>
 
-            <?php if($property['price']): ?>
+            <?php if( !empty( $property['price'] ) ): ?>
                 <li class="property_price"><?php echo $property['price']; ?></li>
             <?php endif; ?>
 
-            <?php if($show_children && $property['children']): ?>
+            <?php if( $show_children && !empty( $property['children'] ) ): ?>
             <li class="child_properties">
                 <div class="wpd_floorplans_title"><?php echo $child_properties_title; ?></div>
                 <table class="wpp_overview_child_properties_table">

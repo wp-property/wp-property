@@ -735,15 +735,15 @@ class FeaturedPropertiesWidget extends WP_Widget {
     
     $title = apply_filters( 'widget_title', $instance[ 'title' ] );
     $instance = apply_filters( 'FeaturedPropertiesWidget', $instance );
-    $show_title = $instance[ 'show_title' ];
-    $image_type = $instance[ 'image_type' ];
-    $amount_items = $instance[ 'amount_items' ];
-    $stats = $instance[ 'stats' ];
-    $address_format = $instance[ 'address_format' ];
-    $hide_image = $instance[ 'hide_image' ];
-    $amount_items = $instance[ 'amount_items' ];
-    $random_items = $instance[ 'random_items' ];
-    $property_stats = $wp_properties[ 'property_stats' ];
+    $show_title = isset( $instance[ 'show_title' ] ) ? $instance[ 'show_title' ] : false;
+    $image_type = isset( $instance[ 'image_type' ] ) ? $instance[ 'image_type' ] : false;
+    $amount_items = isset( $instance[ 'amount_items' ] ) ? $instance[ 'amount_items' ] : false;
+    $stats = isset( $instance[ 'stats' ] ) ? $instance[ 'stats' ] : false;
+    $address_format = isset( $instance[ 'address_format' ] ) ? $instance[ 'address_format' ] : false;
+    $hide_image = isset( $instance[ 'hide_image' ] ) ? $instance[ 'hide_image' ] : false;
+    $amount_items = isset( $instance[ 'amount_items' ] ) ? $instance[ 'amount_items' ] : false;
+    $random_items = isset( $instance[ 'random_items' ] ) ? $instance[ 'random_items' ] : false;
+    $property_stats = isset( $wp_properties[ 'property_stats' ] ) ? $wp_properties[ 'property_stats' ] : array();
 
     if ( empty( $address_format ) ) {
       $address_format = "[street_number] [street_name], [city], [state]";
@@ -812,6 +812,9 @@ class FeaturedPropertiesWidget extends WP_Widget {
         <ul class="wpp_widget_attribute_list">
           <?php if ( is_array( $stats ) ): ?>
             <?php foreach ( $stats as $stat ):
+              if( !isset( $this_property->$stat ) ) {
+                continue;
+              }
               switch( true ) {
                 case ( !empty( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) && $wp_properties[ 'configuration' ][ 'address_attribute' ] == $stat ):
                   $content = wpp_format_address_attribute( $this_property->$stat, $this_property, $address_format );
@@ -832,15 +835,14 @@ class FeaturedPropertiesWidget extends WP_Widget {
             <?php endforeach; ?>
           <?php endif; ?>
         </ul>
-        <?php if ( $instance[ 'enable_more' ] == 'on' ) : ?>
-          <p class="more"><a href="<?php echo $this_property->permalink; ?>"
-                             class="btn btn-info"><?php _e( 'More', 'wpp' ); ?></a></p>
+        <?php if ( isset( $instance[ 'enable_more' ] ) && $instance[ 'enable_more' ] == 'on' ) : ?>
+          <p class="more"><a href="<?php echo $this_property->permalink; ?>" class="btn btn-info"><?php _e( 'More', 'wpp' ); ?></a></p>
         <?php endif; ?>
       </div>
       <?php
       unset( $this_property );
     }
-    if ( $instance[ 'enable_view_all' ] == 'on' ) {
+    if ( isset( $instance[ 'enable_view_all' ] ) && $instance[ 'enable_view_all' ] == 'on' ) {
       echo '<p class="view-all"><a href="' . site_url() . '/' . $wp_properties[ 'configuration' ][ 'base_slug' ] . '" class="btn btn-large">' . __( 'View All', 'wpp' ) . '</a></p>';
     }
     echo '<div class="clear"></div>';
@@ -1303,7 +1305,7 @@ class SearchPropertiesWidget extends WP_Widget {
     }
 
     //** Load different attribute list depending on group selection */
-    if ( $instance[ 'group_attributes' ] == 'true' ) {
+    if ( isset( $instance[ 'group_attributes' ] ) && $instance[ 'group_attributes' ] == 'true' ) {
       $search_args[ 'group_attributes' ] = true;
       $search_args[ 'search_attributes' ] = $instance[ 'grouped_searchable_attributes' ];
     } else {

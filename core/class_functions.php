@@ -3101,7 +3101,7 @@ class WPP_F extends UD_API {
         //** Load attribute data */
         $attribute_data = WPP_F::get_attribute_data( $searchable_attribute );
 
-        if( $attribute_data[ 'numeric' ] || $attribute_data[ 'currency' ] ) {
+        if( isset( $attribute_data[ 'numeric' ] ) || isset( $attribute_data[ 'currency' ] ) ) {
           $is_numeric = true;
         } else {
           $is_numeric = false;
@@ -3213,6 +3213,10 @@ class WPP_F extends UD_API {
   static public function do_search_conversion( $attribute, $value, $reverse = false ) {
     global $wp_properties;
 
+    if( !isset( $wp_properties[ 'search_conversions' ][ $attribute ] ) ) {
+      return $value;
+    }
+    
     // First, check if any conversions exists for this attribute, if not, return value
     if( count( $wp_properties[ 'search_conversions' ][ $attribute ] ) < 1 ) {
       return $value;
@@ -3522,7 +3526,7 @@ class WPP_F extends UD_API {
         default:
 
           // Get all properties for that meta_key
-          if( $specific == 'all' && !$comma_and && !$hyphen_between ) {
+          if( $specific == 'all' && empty( $comma_and ) && empty( $hyphen_between ) ) {
 
             if( isset( $matching_ids ) ) {
               $matching_id_filter = implode( "' OR post_id ='", $matching_ids );
@@ -3534,12 +3538,12 @@ class WPP_F extends UD_API {
 
           } else {
 
-            if( $comma_and ) {
+            if( !empty( $comma_and ) ) {
               $where_and = "( meta_value ='" . implode( "' OR meta_value ='", $comma_and ) . "')";
               $specific  = $where_and;
             }
 
-            if( $hyphen_between ) {
+            if( !empty( $hyphen_between ) ) {
               // We are going to see if we are looking at some sort of date, in which case we have a special MySQL modifier
               $adate = false;
               if( preg_match( '%\\d{1,2}/\\d{1,2}/\\d{4}%i', $hyphen_between[ 0 ] ) ) $adate = true;
@@ -3744,7 +3748,6 @@ class WPP_F extends UD_API {
    * Prepares Request params for get_properties() function
    *
    * @param array $attrs
-   *
    * @return array $attrs
    */
   static public function prepare_search_attributes( $attrs ) {
@@ -3759,7 +3762,8 @@ class WPP_F extends UD_API {
       //** Fix search form passed paramters to be usable by get_properties();
       if( is_array( $search_query ) ) {
         //** Array variables are either option lists or minimum and maxim variables
-        if( is_numeric( array_shift( array_keys( $search_query ) ) ) ) {
+        $stack = array_keys( $search_query );
+        if( is_numeric( array_shift( $stack ) ) ) {
           //** get regular arrays (non associative) */
           $search_query = implode( ',', $search_query );
         } elseif( is_array( $search_query[ 'options' ] ) ) {
@@ -4306,7 +4310,11 @@ class WPP_F extends UD_API {
     foreach( $property_stats as $slug => $label ) {
 
       // Determine if it's frontend and the attribute is hidden for frontend
-      if( in_array( $slug, (array) $wp_properties[ 'hidden_frontend_attributes' ] ) && !current_user_can( 'manage_options' ) ) {
+      if( 
+        isset( $wp_properties[ 'hidden_frontend_attributes' ] ) 
+        && in_array( $slug, (array) $wp_properties[ 'hidden_frontend_attributes' ] ) 
+        && !current_user_can( 'manage_options' ) 
+      ) {
         continue;
       }
 
@@ -4403,7 +4411,11 @@ class WPP_F extends UD_API {
     ) );
 
     //** Check if we have children */
-    if( count( $property[ 'children' ] ) > 0 && $wp_properties[ 'configuration' ][ 'google_maps' ][ 'infobox_settings' ][ 'do_not_show_child_properties' ] != 'true' ) {
+    if( 
+      !empty( $property[ 'children' ] ) 
+      && ( !isset( $wp_properties[ 'configuration' ][ 'google_maps' ][ 'infobox_settings' ][ 'do_not_show_child_properties' ] )
+      || $wp_properties[ 'configuration' ][ 'google_maps' ][ 'infobox_settings' ][ 'do_not_show_child_properties' ] != 'true' )
+    ) {
       foreach( $property[ 'children' ] as $child_property ) {
         $child_property           = (array) $child_property;
         $html_child_properties[ ] = '<li class="infobox_child_property"><a href="' . $child_property[ 'permalink' ] . '">' . $child_property[ 'post_title' ] . '</a></li>';
