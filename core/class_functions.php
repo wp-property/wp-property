@@ -4292,7 +4292,9 @@ class WPP_F extends UD_API {
   static public function get_stat_values_and_labels( $property_object, $args = false ) {
     global $wp_properties;
 
-    $defaults = array();
+    $defaults = array(
+      'label_as_key' => 'true',
+    );
 
     if( is_array( $property_object ) ) {
       $property_object = (object) $property_object;
@@ -4306,6 +4308,8 @@ class WPP_F extends UD_API {
     if( empty( $property_stats ) ) {
       $property_stats = $wp_properties[ 'property_stats' ];
     }
+    
+    $return = array();
 
     foreach( $property_stats as $slug => $label ) {
 
@@ -4341,14 +4345,16 @@ class WPP_F extends UD_API {
       // Include only passed variables
       if( is_array( $include ) && in_array( $slug, $include ) ) {
         if( !empty( $value ) ) {
-          $return[ $label ] = $value;
+          if( $label_as_key == 'true' ) $return[ $label ] = $value;
+          else $return[ $slug ] = array( 'label' => $label, 'value' => $value );
         }
         continue;
       }
 
       if( !is_array( $include ) ) {
         if( !empty( $value ) ) {
-          $return[ $label ] = $value;
+          if( $label_as_key == 'true' ) $return[ $label ] = $value;
+          else $return[ $slug ] = array( 'label' => $label, 'value' => $value );
         }
       }
 

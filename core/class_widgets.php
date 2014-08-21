@@ -1452,11 +1452,7 @@ class SearchPropertiesWidget extends WP_Widget {
     $temp_attrs = array();
 
     foreach ( $all_searchable_attributes as $slug ) {
-      $attribute_label = $property_stats[ $slug ];
-      if ( empty( $attribute_label ) ) {
-        $attribute_label = WPP_F::de_slug( $slug );
-      }
-      $temp_attrs[ $attribute_label ] = $slug;
+      $temp_attrs[ $slug ] = $slug;
     }
 
     //* Sort stats by groups */

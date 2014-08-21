@@ -930,8 +930,8 @@ if ( !function_exists( 'draw_stats' ) ):
       'stats_prefix' => sanitize_key( WPP_F::property_label( 'singular' ) )
     );
 
-    extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
-
+    extract( $args = wp_parse_args( $args, $defaults ), EXTR_SKIP );
+    
     $property_stats = array();
     $groups = $wp_properties[ 'property_groups' ];
 
@@ -947,28 +947,29 @@ if ( !function_exists( 'draw_stats' ) ):
           continue;
         }
         if ( !empty( $property->$k ) ) {
-          $property_stats[ $v ] = $property->$k;
+          $property_stats[ $k ] = array( 'label' => $v, 'value' => $property->$k );
         }
       }
     } else {
-      $property_stats = WPP_F::get_stat_values_and_labels( $property, $args );
+      $property_stats = WPP_F::get_stat_values_and_labels( $property, array( 'label_as_key' => 'false' ) );
     }
 
     if ( empty( $property_stats ) ) {
-      return;
+      return false;
     }
+    
+    //echo "<pre>"; print_r( $property_stats ); echo "</pre>";
 
     //* Prepare values before display */
     $stats = array();
-    $labels_to_keys = array_flip( $wp_properties[ 'property_stats' ] );
 
-    foreach ( $property_stats as $attribute_label => $value ) {
+    foreach ( $property_stats as $tag => $data ) {
 
-      $tag = $labels_to_keys[ $attribute_label ];
-
-      if ( empty( $value ) ) {
+      if ( empty( $data[ 'value' ] ) ) {
         continue;
       }
+      
+      $value = $data[ 'value' ];
 
       $attribute_data = WPP_F::get_attribute_data( $tag );
 
@@ -1009,12 +1010,17 @@ if ( !function_exists( 'draw_stats' ) ):
         $value = "<a href='mailto:{$value}'>{$value}</a>";
       }
 
-      $stats[ $attribute_label ] = $value;
+      $data[ 'value' ] = $value;
+      $stats[ $tag ] = $data;
+    }
+    
+    if( empty( $stats ) ) {
+      return false;
     }
 
     if ( $display == 'array' ) {
       if( $sort_by_groups == 'true' && is_array( $groups ) ) {
-        $stats = sort_stats_by_groups( $stats, array( 'includes_values' => true ) );
+        $stats = sort_stats_by_groups( $stats );
       }
       return $stats;
     }
@@ -1024,10 +1030,12 @@ if ( !function_exists( 'draw_stats' ) ):
     //** Disable regular list if groups are NOT enabled, or if groups is not an array */
     if ( $sort_by_groups != 'true' || !is_array( $groups ) ) {
 
-      foreach ( $stats as $label => $value ) {
-        $tag = $labels_to_keys[ $label ];
-
+      foreach ( $stats as $tag => $data ) {
+        
+        $label = $data[ 'label' ];
+        $value = $data[ 'value' ];
         $alt = ( $alt == "alt" ) ? "" : "alt";
+        
         switch ( $display ) {
           case 'dl_list':
             ?>
@@ -1062,9 +1070,8 @@ if ( !function_exists( 'draw_stats' ) ):
       }
     } else {
 
-      $stats_by_groups = sort_stats_by_groups( $stats, array( 'includes_values' => true ) );
+      $stats_by_groups = sort_stats_by_groups( $stats );
       $main_stats_group = $wp_properties[ 'configuration' ][ 'main_stats_group' ];
-      $labels_to_keys = array_flip( $wp_properties[ 'property_stats' ] );
 
       foreach ( $stats_by_groups as $gslug => $gstats ) {
         ?>
@@ -1081,9 +1088,10 @@ if ( !function_exists( 'draw_stats' ) ):
           case 'dl_list':
             ?>
             <dl class="wpp_property_stats overview_stats">
-            <?php foreach ( $gstats as $label => $value ) : ?>
+            <?php foreach ( $gstats as $tag => $data ) : ?>
               <?php
-              $tag = $labels_to_keys[ $label ];
+              $label = $data[ 'label' ];
+              $value = $data[ 'value' ];
               ?>
               <?php $alt = ( $alt == "alt" ) ? "" : "alt"; ?>
               <dt class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_dt_<?php echo $tag; ?>"><?php echo $label; ?></dt>
@@ -1096,9 +1104,10 @@ if ( !function_exists( 'draw_stats' ) ):
           case 'list':
             ?>
             <ul class="overview_stats wpp_property_stats list">
-            <?php foreach ( $gstats as $label => $value ) : ?>
+            <?php foreach ( $gstats as $tag => $data ) : ?>
               <?php
-              $tag = $labels_to_keys[ $label ];
+              $label = $data[ 'label' ];
+              $value = $data[ 'value' ];
               $alt = ( $alt == "alt" ) ? "" : "alt";
               ?>
               <li class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_plain_list_<?php echo $tag; ?> <?php echo $alt; ?>">
@@ -1110,8 +1119,9 @@ if ( !function_exists( 'draw_stats' ) ):
             <?php
             break;
           case 'plain_list':
-            foreach ( $gstats as $label => $value ) {
-              $tag = $labels_to_keys[ $label ];
+            foreach ( $gstats as $tag => $data ) {
+              $label = $data[ 'label' ];
+              $value = $data[ 'value' ];
               ?>
               <span class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> attribute"><?php echo $label; ?>:</span>
               <span class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> value"><?php echo $value; ?>&nbsp;</span>
@@ -1141,57 +1151,22 @@ endif;
  * @author Maxim Peshkov
  */
 if ( !function_exists( 'sort_stats_by_groups' ) ):
-  function sort_stats_by_groups( $stats = false, $args = '' ) {
+  function sort_stats_by_groups( $stats = false ) {
     global $wp_properties;
 
-    if ( !$stats ) {
+    if ( empty( $stats ) || !is_array( $stats ) ) {
       return false;
     }
 
-    $original_stats = $stats;
-
     //** Get group deta */
     $groups = $wp_properties[ 'property_groups' ];
-
     /** Get attribute-group association */
     $stats_groups = $wp_properties[ 'property_stats_groups' ];
 
     if ( !is_array( $groups ) || !is_array( $stats_groups ) ) {
-      return;
+      return false;
     }
-
-    $defaults = array(
-      'includes_values' => false,
-      'fix_stats_array' => false
-    );
-
-    $args = wp_parse_args( $args, $defaults );
-
-    $wpp_property_stat_labels = apply_filters( 'wpp_property_stat_labels', $wp_properties[ 'property_stats' ] );
-
-    $wpp_property_stat_labels_flip = array_flip( (array) $wpp_property_stat_labels );
-
-    $fixed_stats = array();
-
-    if ( $args[ 'includes_values' ] == true ) {
-      //** Fix data when an array is passed with actual values, such as from draw_stats() */
-      foreach ( (array) $stats as $meta_label => $real_value ) {
-        $meta_key = $wpp_property_stat_labels_flip[ $meta_label ];
-        //echo "$meta_key - $attribute_label <br />";
-        $fixed_stats[ $meta_label ] = $meta_key;
-      }
-    }
-
-    //** Convert regular stat array to array with values as keys */
-    if ( $args[ 'fix_stats_array' ] == true ) {
-      foreach ( (array) $stats as $meta_key ) {
-        $attribute_label = $wpp_property_stat_labels[ $meta_key ];
-        $fixed_stats[ $attribute_label ] = $meta_key;
-      }
-      $stats = $fixed_stats;
-    }
-
-    $labels_to_keys = array_flip( (array) $wp_properties[ 'property_stats' ] );
+    
     $group_keys = array_keys( (array) $wp_properties[ 'property_groups' ] );
 
     //** Get group from settings, or set to first group as default */
@@ -1201,16 +1176,13 @@ if ( !function_exists( 'sort_stats_by_groups' ) ):
 
     $ungrouped_stats = array();
 
-    foreach ( (array) $stats as $label => $value ) {
-
-      $slug = $labels_to_keys[ $label ];
+    foreach ( (array) $stats as $slug => $data ) {
 
       $g_slug = !empty( $stats_groups[ $slug ] ) ? $stats_groups[ $slug ] : false;
 
       //** Handle adding special attributes to groups automatically - only if they do not have groups set. */
       if ( !$g_slug ) {
-
-        switch ( $value ) {
+        switch ( $slug ) {
           case 'property_type':
             $g_slug = $main_stats_group;
             break;
@@ -1223,20 +1195,11 @@ if ( !function_exists( 'sort_stats_by_groups' ) ):
       }
 
       if ( $g_slug && !key_exists( $g_slug, $groups ) ) {
-        $g_slug = false;
-      }
-      if ( $args[ 'includes_values' ] == true ) {
-        $value = $original_stats[ $label ];
-      }
-      if ( empty( $value ) ) {
-        continue;
-      }
-      if ( $g_slug ) {
-        //** Build array of attributes in groups */
-        $filtered_stats[ $g_slug ][ $label ] = $value;
-      } else {
         //** Build array of attributes WITHOUT groups */
-        $filtered_stats[ 0 ][ $label ] = $value;
+        $filtered_stats[ 0 ][ $slug ] = $data;
+      } else {
+        //** Build array of attributes in groups */
+        $filtered_stats[ $g_slug ][ $slug ] = $data;
       }
     }
 
@@ -1353,11 +1316,16 @@ if ( !function_exists( 'draw_property_search_form' ) ):
       ?>
       <ul class="wpp_search_elements">
     <?php
+    
     if ( $group_attributes ) {
       //** Get group data */
       $groups = $wp_properties[ 'property_groups' ];
-      //** Group  selected searchable attributes */
-      $search_groups = sort_stats_by_groups( $search_attributes, array( 'fix_stats_array' => true ) );
+      $_search_attributes = array();
+      foreach( $search_attributes as $attr ) {
+        $_search_attributes[ $attr ] = $attr; 
+      }      
+      $search_groups = sort_stats_by_groups( $_search_attributes );
+      unset( $_search_attributes );
     } else {
       //** Create an ad-hoc group */
       $search_groups[ 'ungrouped' ] = $search_attributes;
