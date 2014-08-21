@@ -3420,7 +3420,7 @@ class WPP_F extends UD_API {
     /** Handles the sort_by parameter in the Short Code */
     if( $query[ 'sort_by' ] ) {
       $sql_sort_by    = $query[ 'sort_by' ];
-      $sql_sort_order = ( $query[ 'sort_order' ] ) ? strtoupper( $query[ 'sort_order' ] ) : 'ASC';
+      $sql_sort_order = isset( $query[ 'sort_order' ] ) ? strtoupper( $query[ 'sort_order' ] ) : 'ASC';
     } else {
       $sql_sort_by    = 'post_date';
       $sql_sort_order = 'ASC';

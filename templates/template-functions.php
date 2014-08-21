@@ -52,7 +52,7 @@ if ( !function_exists( 'get_attribute' ) ) {
     }
 
     //** Check if a property_id was passed */
-    if ( !$this_property && !empty( $args[ 'property_id' ] ) ) {
+    if ( !isset( $this_property ) && !empty( $args[ 'property_id' ] ) ) {
 
       $this_property = WPP_F::get_property( $args[ 'property_id' ] );
 
@@ -62,13 +62,8 @@ if ( !function_exists( 'get_attribute' ) ) {
     }
 
     //** If no property data passed, get from global variable */
-    if ( !$this_property ) {
-
-      if ( is_object( $property ) ) {
-        $this_property = (array) $property;
-      } else {
-        $this_property = $property;
-      }
+    if ( !isset( $this_property ) ) {
+      $this_property = (array) $property;
     }
 
     switch ( $attribute ) {
@@ -78,7 +73,7 @@ if ( !function_exists( 'get_attribute' ) ) {
         break;
 
       default:
-        $value = $this_property[ $attribute ];
+        $value = isset( $this_property[ $attribute ] ) ? $this_property[ $attribute ] : false;
         break;
 
     }

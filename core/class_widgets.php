@@ -49,6 +49,7 @@ class Property_Attributes_Widget extends WP_Widget {
     $before_title = '';
     $after_title = '';
     $after_widget = '';
+    $html = array();
     extract( $args );
 
     if ( empty( $instance ) ) {
@@ -57,13 +58,11 @@ class Property_Attributes_Widget extends WP_Widget {
 
     $html[ ] = $before_widget;
 
-    if ( $instance[ 'title' ] ) {
+    if ( !empty( $instance[ 'title' ] ) ) {
       $html[ ] = $before_title . $instance[ 'title' ] . $after_title;
     }
 
-    if ( $instance[ 'show_labels' ] == 'true' ) {
-      $show_labels = true;
-    }
+    $show_labels = ( isset( $instance[ 'show_labels' ] ) && $instance[ 'show_labels' ] == 'true' ) ? true : false;
 
     unset( $instance[ 'show_labels' ] );
     unset( $instance[ 'title' ] );
@@ -211,31 +210,26 @@ class OtherPropertiesWidget extends WP_Widget {
     $after_widget = '';
     extract( $args );
 
-    $title = apply_filters( 'widget_title', $instance[ 'title' ] );
     $instance = apply_filters( 'OtherPropertiesWidget', $instance );
-    $show_title = $instance[ 'show_title' ];
-    $image_type = $instance[ 'image_type' ];
-    $hide_image = $instance[ 'hide_image' ];
-    $stats = $instance[ 'stats' ];
-    $address_format = $instance[ 'address_format' ];
-    $amount_items = $instance[ 'amount_items' ];
-    $show_properties_of_type = $instance[ 'show_properties_of_type' ];
-    $shuffle_order = $instance[ 'shuffle_order' ];
+    $title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : '';
+    $show_title = isset( $instance[ 'show_title' ] ) ? $instance[ 'show_title' ] : false;
+    $image_type = isset( $instance[ 'image_type' ] ) ? $instance[ 'image_type' ] : false;
+    $hide_image = isset( $instance[ 'hide_image' ] ) ? $instance[ 'hide_image' ] : false;
+    $stats = isset( $instance[ 'stats' ] ) ? $instance[ 'stats' ] : false;
+    $address_format = isset( $instance[ 'address_format' ] ) ? $instance[ 'address_format' ] : '';
+    $amount_items = !empty( $instance[ 'amount_items' ] ) ? $instance[ 'amount_items' ] : 0;
+    $show_properties_of_type = isset( $instance[ 'show_properties_of_type' ] ) ? $instance[ 'show_properties_of_type' ] : false;
+    $shuffle_order = isset( $instance[ 'shuffle_order' ] ) ? $instance[ 'shuffle_order' ] : false;
 
     if ( !isset( $post->ID ) || ( $post->post_parent == 0 && $show_properties_of_type != 'on' ) ) {
       return;
     }
 
-
-    if ( is_object( $property ) ) {
-      $this_property = (array)$property;
-    } else {
-      $this_property = $property;
-    }
+    $this_property = (array)$property;
 
     if ( $post->post_parent ) {
       $properties = get_posts( array(
-        'numberposts' => !empty( $amount_items ) ? $amount_items : 0,
+        'numberposts' => $amount_items,
         'post_type' => 'property',
         'post_status' => 'publish',
         'post_parent' => $post->post_parent,
@@ -271,19 +265,15 @@ class OtherPropertiesWidget extends WP_Widget {
 
       $this_property = prepare_property_for_display( $this_property );
 
-      $image = wpp_get_image_link( $this_property->featured_image, $image_type, array( 'return' => 'array' ) );
+      $image = ( isset( $this_property->featured_image ) && !empty( $image_type ) ) ? wpp_get_image_link( $this_property->featured_image, $image_type, array( 'return' => 'array' ) ) : false;
 
       ?>
-      <div class="property_widget_block apartment_entry clearfix"
-           style="<?php echo( $image[ 'width' ] ? 'width: ' . ( $image[ 'width' ] + 5 ) . 'px;' : '' ); ?>">
-
-        <?php if ( $hide_image !== 'on' && !empty( $image ) ) { ?>
+      <div class="property_widget_block apartment_entry clearfix" style="<?php echo( !empty( $image[ 'width' ] ) ? 'width: ' . ( $image[ 'width' ] + 5 ) . 'px;' : '' ); ?>">
+        <?php if ( $hide_image !== 'on' && !empty( $image ) ) : ?>
           <a class="sidebar_property_thumbnail thumbnail" href="<?php echo $this_property->permalink; ?>">
-            <img width="<?php echo $image[ 'width' ]; ?>" height="<?php echo $image[ 'height' ]; ?>"
-                 src="<?php echo $image[ 'link' ]; ?>"
-                 alt="<?php echo sprintf( __( '%s at %s for %s', 'wpp' ), $this_property->post_title, $this_property->location, $this_property->price ); ?>"/>
+            <img width="<?php echo $image[ 'width' ]; ?>" height="<?php echo $image[ 'height' ]; ?>" src="<?php echo $image[ 'link' ]; ?>" alt=""/>
           </a>
-        <?php } ?>
+        <?php endif; ?>
 
         <?php if ( $show_title == 'on' ) { ?>
           <p class="title"><a
@@ -292,16 +282,25 @@ class OtherPropertiesWidget extends WP_Widget {
 
         <ul class="wpp_widget_attribute_list">
           <?php
-
           if ( is_array( $stats ) ) {
             foreach ( $stats as $stat ) {
-
-              $content = $this_property->$stat;
-
+              if( !isset( $this_property->$stat ) ) {
+                continue;
+              }
+              switch( true ) {
+                case ( !empty( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) && $wp_properties[ 'configuration' ][ 'address_attribute' ] == $stat ):
+                  $content = wpp_format_address_attribute( $this_property->$stat, $this_property, $address_format );
+                  break;
+                case ( $stat == 'property_type' ):
+                  $content = nl2br( apply_filters( "wpp_stat_filter_property_type_label", $this_property->property_type_label ) );
+                  break;
+                default:
+                  $content = nl2br( apply_filters( "wpp_stat_filter_{$stat}", $this_property->$stat ) );
+                  break;
+              }
               if ( empty( $content ) ) {
                 continue;
               }
-
               ?>
               <li class="<?php echo $stat ?>">
                 <span class="attribute"><?php echo $wp_properties[ 'property_stats' ][ $stat ]; ?>:</span>
@@ -348,21 +347,19 @@ class OtherPropertiesWidget extends WP_Widget {
   function form( $instance ) {
 
     global $wp_properties;
-    $title = esc_attr( $instance[ 'title' ] );
-    $show_title = $instance[ 'show_title' ];
-    $amount_items = esc_attr( $instance[ 'amount_items' ] );
-    $address_format = esc_attr( $instance[ 'address_format' ] );
-    $image_type = esc_attr( $instance[ 'image_type' ] );
-    $property_stats = $instance[ 'stats' ];
-    $hide_image = $instance[ 'hide_image' ];
-    $enable_more = $instance[ 'enable_more' ];
-    $enable_view_all = $instance[ 'enable_view_all' ];
-    $show_properties_of_type = $instance[ 'show_properties_of_type' ];
-    $shuffle_order = $instance[ 'shuffle_order' ];
-    $address_format = !empty( $address_format ) ? $address_format : '[street_number] [street_name], [city], [state]';
+    $title = isset( $instance[ 'title' ] ) ? esc_attr( $instance[ 'title' ] ) : '';
+    $show_title = isset( $instance[ 'show_title' ] ) ? $instance[ 'show_title' ] : false;
+    $amount_items = empty( $instance[ 'amount_items' ] ) ? $instance[ 'amount_items' ] : 5;
+    $address_format = !empty( $instance[ 'address_format' ] ) ? $instance[ 'address_format' ] : '[street_number] [street_name], [city], [state]';
+    $image_type = isset( $instance[ 'image_type' ] ) ? esc_attr( $instance[ 'image_type' ] ) : false;
+    $property_stats = isset( $instance[ 'stats' ] ) ? $instance[ 'stats' ] : array();
+    $hide_image = isset( $instance[ 'hide_image' ] ) ? $instance[ 'hide_image' ] : false;
+    $enable_more = isset( $instance[ 'enable_more' ] ) ? $instance[ 'enable_more' ] : false;
+    $enable_view_all = isset( $instance[ 'enable_view_all' ] ) ? $instance[ 'enable_view_all' ] : false;
+    $show_properties_of_type = isset( $instance[ 'show_properties_of_type' ] ) ? $instance[ 'show_properties_of_type' ] : false;
+    $shuffle_order = isset( $instance[ 'shuffle_order' ] ) ? $instance[ 'shuffle_order' ] : false;
 
     ?>
-
     <script type="text/javascript">
 
       jQuery( document ).ready( function ( $ ) {
@@ -403,7 +400,7 @@ class OtherPropertiesWidget extends WP_Widget {
         for="<?php echo $this->get_field_id( 'amount_items' ); ?>"><?php _e( 'Listings to display?', 'wpp' ); ?></label>
       <input style="width:30px" id="<?php echo $this->get_field_id( 'amount_items' ); ?>"
              name="<?php echo $this->get_field_name( 'amount_items' ); ?>" type="text"
-             value="<?php echo ( empty( $amount_items ) ) ? 5 : $amount_items; ?>"/>
+             value="<?php echo $amount_items; ?>"/>
     </p>
 
     <p><?php _e( 'Select the attributes you want to display: ', 'wpp' ); ?></p>
@@ -486,39 +483,36 @@ class ChildPropertiesWidget extends WP_Widget {
    */
   function widget( $args, $instance ) {
     global $post, $wp_properties;
+    
+    if ( !isset( $post->ID ) ) {
+      return;
+    }
+    
     $before_widget = '';
     $before_title = '';
     $after_title = '';
     $after_widget = '';
     extract( $args );
 
-    $title = apply_filters( 'widget_title', $instance[ 'title' ] );
     $instance = apply_filters( 'ChildPropertiesWidget', $instance );
-    $show_title = $instance[ 'show_title' ];
-    $image_type = $instance[ 'image_type' ];
-    $hide_image = $instance[ 'hide_image' ];
-    $stats = $instance[ 'stats' ];
-    $address_format = $instance[ 'address_format' ];
-    $amount_items = $instance[ 'amount_items' ];
+    $title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : '';
+    $show_title = isset( $instance[ 'show_title' ] ) ? $instance[ 'show_title' ] : false;
+    $image_type = isset( $instance[ 'image_type' ] ) ? $instance[ 'image_type' ] : '';
+    $hide_image = isset( $instance[ 'hide_image' ] ) ? $instance[ 'hide_image' ] : false;
+    $stats = isset( $instance[ 'stats' ] ) ? $instance[ 'stats' ] : array();
+    $address_format = isset( $instance[ 'address_format' ] ) ? $instance[ 'address_format' ] : '';
+    $amount_items = !empty( $instance[ 'amount_items' ] ) ? $instance[ 'amount_items' ] : 5;
 
-    if ( !isset( $post->ID ) ) {
-      return;
-    }
-
-    if ( !$image_type ) {
-      $image_type = '';
-    } else {
+    if ( !empty( $image_type ) ) {
       $image_size = WPP_F::image_sizes( $image_type );
     }
 
-    $argus = array(
+    $attachments = get_posts( array(
       'post_type' => 'property',
       'numberposts' => $amount_items,
       'post_status' => 'publish',
       'post_parent' => $post->ID,
-    );
-
-    $attachments = get_posts( $argus );
+    ) );
 
     // Bail out if no children
     if ( count( $attachments ) < 1 ) {
@@ -534,7 +528,7 @@ class ChildPropertiesWidget extends WP_Widget {
 
     foreach ( $attachments as $attached ) {
       $this_property = WPP_F::get_property( $attached->ID, 'return_object=true' );
-      $image = wpp_get_image_link( $this_property->featured_image, $image_type, array( 'return' => 'array' ) );
+      $image = isset( $this_property->featured_image ) ? wpp_get_image_link( $this_property->featured_image, $image_type, array( 'return' => 'array' ) ) : false;
       $width = ( !empty( $image_size[ 'width' ] ) ? $image_size[ 'width' ] : ( !empty( $image[ 'width' ] ) ? $image[ 'width' ] : '' ) );
       $height = ( !empty( $image_size[ 'height' ] ) ? $image_size[ 'height' ] : ( !empty( $image[ 'height' ] ) ? $image[ 'height' ] : '' ) );
       ?>
@@ -558,11 +552,26 @@ class ChildPropertiesWidget extends WP_Widget {
         <ul class="wpp_widget_attribute_list">
           <?php if ( is_array( $stats ) ): ?>
             <?php foreach ( $stats as $stat ): ?>
-              <?php $content = nl2br( apply_filters( "wpp_stat_filter_{$stat}", $this_property->$stat ) ); ?>
-              <?php if ( empty( $content ) ) continue; ?>
-              <li class="<?php echo $stat ?>"><span
-                  class='attribute'><?php echo $wp_properties[ 'property_stats' ][ $stat ]; ?>:</span> <span
-                  class='value'><?php echo $content; ?></span></li>
+              <?php 
+              if( !isset( $this_property->$stat ) ) {
+                continue;
+              }
+              switch( true ) {
+                case ( !empty( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) && $wp_properties[ 'configuration' ][ 'address_attribute' ] == $stat ):
+                  $content = wpp_format_address_attribute( $this_property->$stat, $this_property, $address_format );
+                  break;
+                case ( $stat == 'property_type' ):
+                  $content = nl2br( apply_filters( "wpp_stat_filter_property_type_label", $this_property->property_type_label ) );
+                  break;
+                default:
+                  $content = nl2br( apply_filters( "wpp_stat_filter_{$stat}", $this_property->$stat ) );
+                  break;
+              }
+              if ( empty( $content ) ) {
+                continue;
+              }
+              ?>
+              <li class="<?php echo $stat ?>"><span class='attribute'><?php echo $wp_properties[ 'property_stats' ][ $stat ]; ?>:</span> <span class='value'><?php echo $content; ?></span></li>
             <?php endforeach; ?>
           <?php endif; ?>
         </ul>
@@ -592,19 +601,15 @@ class ChildPropertiesWidget extends WP_Widget {
   /** @see WP_Widget::form */
   function form( $instance ) {
     global $wp_properties;
-    $title = esc_attr( $instance[ 'title' ] );
-    $show_title = $instance[ 'show_title' ];
-    $address_format = esc_attr( $instance[ 'address_format' ] );
-    $image_type = esc_attr( $instance[ 'image_type' ] );
-    $amount_items = esc_attr( $instance[ 'amount_items' ] );
-    $property_stats = $instance[ 'stats' ];
-    $hide_image = $instance[ 'hide_image' ];
-    $enable_more = $instance[ 'enable_more' ];
-    $enable_view_all = $instance[ 'enable_view_all' ];
-
-
-    if ( empty( $address_format ) )
-      $address_format = "[street_number] [street_name], [city], [state]";
+    $title = isset( $instance[ 'title' ] ) ? esc_attr( $instance[ 'title' ] ) : '';
+    $show_title = isset( $instance[ 'show_title' ] ) ? $instance[ 'show_title' ] : false;
+    $address_format = !empty( $instance[ 'address_format' ] ) ? esc_attr( $instance[ 'address_format' ] ) : "[street_number] [street_name], [city], [state]";
+    $image_type = isset( $instance[ 'image_type' ] ) ? esc_attr( $instance[ 'image_type' ] ) : false;
+    $amount_items = empty( $instance[ 'amount_items' ] ) ? esc_attr( $instance[ 'amount_items' ] ) : 5;
+    $property_stats = isset( $instance[ 'stats' ] ) ? $instance[ 'stats' ] : array();
+    $hide_image = isset( $instance[ 'hide_image' ] ) ? $instance[ 'hide_image' ] : false;
+    $enable_more = isset( $instance[ 'enable_more' ] ) ? $instance[ 'enable_more' ] : false;
+    $enable_view_all = isset( $instance[ 'enable_view_all' ] ) ? $instance[ 'enable_view_all' ] : false;
 
     ?>
     <script type="text/javascript">
@@ -650,7 +655,7 @@ class ChildPropertiesWidget extends WP_Widget {
       <label for="<?php echo $this->get_field_id( 'amount_items' ); ?>"><?php _e( 'Listings to display?', 'wpp' ); ?>
         <input style="width:30px" id="<?php echo $this->get_field_id( 'amount_items' ); ?>"
                name="<?php echo $this->get_field_name( 'amount_items' ); ?>" type="text"
-               value="<?php echo ( empty( $amount_items ) ) ? 5 : $amount_items; ?>"/>
+               value="<?php echo $amount_items; ?>"/>
       </label>
     </p>
 
@@ -1025,18 +1030,16 @@ class LatestPropertiesWidget extends WP_Widget {
     $after_widget = '';
     extract( $args );
 
-    $title = apply_filters( 'widget_title', $instance[ 'title' ] );
     $instance = apply_filters( 'LatestPropertiesWidget', $instance );
-    $stats = $instance[ 'stats' ];
-    $image_type = $instance[ 'image_type' ];
-    $hide_image = $instance[ 'hide_image' ];
-    $show_title = $instance[ 'show_title' ];
-    $address_format = $instance[ 'address_format' ];
-    $property_stats = $wp_properties[ 'property_stats' ];
+    $title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : '';
+    $stats = isset( $instance[ 'stats' ] ) ? $instance[ 'stats' ] : array();
+    $image_type = !empty( $instance[ 'image_type' ] ) ? $instance[ 'image_type' ] : '';
+    $hide_image = isset( $instance[ 'hide_image' ] ) ? $instance[ 'hide_image' ] : false;
+    $show_title = isset( $instance[ 'show_title' ] ) ? $instance[ 'show_title' ] : false;
+    $address_format = isset( $instance[ 'address_format' ] ) ? $instance[ 'address_format' ] : '';
+    $property_stats = isset( $wp_properties[ 'property_stats' ] ) ? $wp_properties[ 'property_stats' ] : array();
 
-    if ( !$image_type ) {
-      $image_type = '';
-    } else {
+    if ( !empty( $image_type ) ) {
       $image_size = WPP_F::image_sizes( $image_type );
     }
 
@@ -1046,7 +1049,7 @@ class LatestPropertiesWidget extends WP_Widget {
 
     $arg = array(
       'post_type' => 'property',
-      'numberposts' => $instance[ 'amount_items' ],
+      'numberposts' => ( !empty( $instance[ 'amount_items' ] ) ? $instance[ 'amount_items' ] : 5 ),
       'post_status' => 'publish',
       'post_parent' => null, // any parent
       'order' => 'DESC',
@@ -1064,7 +1067,7 @@ class LatestPropertiesWidget extends WP_Widget {
 
     foreach ( $postslist as $post ) {
       $this_property = WPP_F::get_property( $post->ID, 'return_object=true' );
-      $image = wpp_get_image_link( $this_property->featured_image, $image_type, array( 'return' => 'array' ) );
+      $image = isset( $this_property->featured_image ) ? wpp_get_image_link( $this_property->featured_image, $image_type, array( 'return' => 'array' ) ) : false;
       $width = ( !empty( $image_size[ 'width' ] ) ? $image_size[ 'width' ] : ( !empty( $image[ 'width' ] ) ? $image[ 'width' ] : '' ) );
       $height = ( !empty( $image_size[ 'height' ] ) ? $image_size[ 'height' ] : ( !empty( $image[ 'height' ] ) ? $image[ 'height' ] : '' ) );
       ?>
@@ -1090,12 +1093,20 @@ class LatestPropertiesWidget extends WP_Widget {
         echo '<ul class="wpp_widget_attribute_list">';
         if ( is_array( $stats ) ) {
           foreach ( $stats as $stat ) {
-            $pstat = $stat;
-            /** Determine if stat is property_type we switch it to property_type_label */
-            if ( $pstat == 'property_type' ) {
-              $pstat = 'property_type_label';
+            if( !isset( $this_property->$stat ) ) {
+              continue;
             }
-            $content = nl2br( apply_filters( "wpp_stat_filter_{$pstat}", $this_property->$pstat ) );
+            switch( true ) {
+              case ( !empty( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) && $wp_properties[ 'configuration' ][ 'address_attribute' ] == $stat ):
+                $content = wpp_format_address_attribute( $this_property->$stat, $this_property, $address_format );
+                break;
+              case ( $stat == 'property_type' ):
+                $content = nl2br( apply_filters( "wpp_stat_filter_property_type_label", $this_property->property_type_label ) );
+                break;
+              default:
+                $content = nl2br( apply_filters( "wpp_stat_filter_{$stat}", $this_property->$stat ) );
+                break;
+            }
             if ( empty( $content ) ) {
               continue;
             }
@@ -1104,7 +1115,7 @@ class LatestPropertiesWidget extends WP_Widget {
         }
         echo '</ul>';
 
-        if ( $instance[ 'enable_more' ] == 'on' ) {
+        if ( isset( $instance[ 'enable_more' ] ) && $instance[ 'enable_more' ] == 'on' ) {
           echo '<p class="more"><a href="' . $this_property->permalink . '" class="btn btn-info">' . __( 'More', 'wpp' ) . '</a></p>';
         }
         ?>
@@ -1113,7 +1124,7 @@ class LatestPropertiesWidget extends WP_Widget {
       unset( $this_property );
     }
 
-    if ( $instance[ 'enable_view_all' ] == 'on' ) {
+    if ( isset( $instance[ 'enable_view_all' ] ) && $instance[ 'enable_view_all' ] == 'on' ) {
       echo '<p class="view-all"><a href="' . site_url() . '/' . $wp_properties[ 'configuration' ][ 'base_slug' ] . '" class="btn btn-large">' . __( 'View All', 'wpp' ) . '</a></p>';
     }
     echo '<div class="clear"></div>';
@@ -1134,20 +1145,16 @@ class LatestPropertiesWidget extends WP_Widget {
   function form( $instance ) {
     global $wp_properties;
 
-    $title = esc_attr( $instance[ 'title' ] );
-    $amount_items = esc_attr( $instance[ 'amount_items' ] );
-    $address_format = esc_attr( $instance[ 'address_format' ] );
-    $instance_stats = $instance[ 'stats' ];
-    $image_type = esc_attr( $instance[ 'image_type' ] );
-    $hide_image = $instance[ 'hide_image' ];
-    $show_title = $instance[ 'show_title' ];
-    $enable_more = $instance[ 'enable_more' ];
-    $enable_view_all = $instance[ 'enable_view_all' ];
-    $property_stats = $wp_properties[ 'property_stats' ];
-
-    if ( empty( $address_format ) ) {
-      $address_format = "[street_number] [street_name],[city], [state]";
-    }
+    $title = isset( $instance[ 'title' ] ) ? esc_attr( $instance[ 'title' ] ) : '';
+    $amount_items = isset( $instance[ 'amount_items' ] ) ? esc_attr( $instance[ 'amount_items' ] ) : false;
+    $address_format = !empty( $instance[ 'address_format' ] ) ? $instance[ 'address_format' ] : "[street_number] [street_name],[city], [state]";
+    $instance_stats = isset( $instance[ 'stats' ] ) ? $instance[ 'stats' ] : array();
+    $image_type = isset( $instance[ 'image_type' ] ) ? esc_attr( $instance[ 'image_type' ] ) : false;
+    $hide_image = isset( $instance[ 'hide_image' ] ) ? $instance[ 'hide_image' ] : false;
+    $show_title = isset( $instance[ 'show_title' ] ) ? $instance[ 'show_title' ] : false;
+    $enable_more = isset( $instance[ 'enable_more' ] ) ? $instance[ 'enable_more' ] : false;
+    $enable_view_all = isset( $instance[ 'enable_view_all' ] ) ? $instance[ 'enable_view_all' ] : false;
+    $property_stats = isset( $wp_properties[ 'property_stats' ] ) ? $wp_properties[ 'property_stats' ] : array();
 
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
       $property_stats[ 'property_type' ] = __( 'Property Type', 'wpp' );
@@ -1595,8 +1602,8 @@ class SearchPropertiesWidget extends WP_Widget {
                 <select id="<?php echo $this->get_field_id( 'sort_order' ); ?>"
                         name="<?php echo $this->get_field_name( 'sort_order' ); ?>">
                   <option></option>
-                  <option value="DESC"  <?php selected( $sort_order, 'DESC' ); ?> ><?php _e( 'Descending' ); ?></option>
-                  <option value="ASC"  <?php selected( $sort_order, 'ASC' ); ?> ><?php _e( 'Acending' ); ?></option>
+                  <option value="DESC"  <?php selected( $sort_order, 'DESC' ); ?> ><?php _e( 'Descending', 'wpp' ); ?></option>
+                  <option value="ASC"  <?php selected( $sort_order, 'ASC' ); ?> ><?php _e( 'Ascending', 'wpp' ); ?></option>
                 </select>
 
               </li>
@@ -1696,13 +1703,13 @@ class GalleryPropertiesWidget extends WP_Widget {
     $after_widget = '';
     extract( $args );
 
-    $title = apply_filters( 'widget_title', $instance[ 'title' ] );
-    $image_type = esc_attr( $instance[ 'image_type' ] );
-    $big_image_type = esc_attr( $instance[ 'big_image_type' ] );
-    $gallery_count = esc_attr( $instance[ 'gallery_count' ] );
-    $show_caption = esc_attr( $instance[ 'show_caption' ] );
-    $show_description = esc_attr( $instance[ 'show_description' ] );
-    $gallery = (array)( ( $post->gallery ) ? $post->gallery : $property[ 'gallery' ] );
+    $title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : '';
+    $image_type = !empty( $instance[ 'image_type' ] ) ? $instance[ 'image_type' ] : 'thumbnail';
+    $big_image_type = isset( $instance[ 'big_image_type' ] ) ? $instance[ 'big_image_type' ] : false;
+    $gallery_count = isset( $instance[ 'gallery_count' ] ) ? $instance[ 'gallery_count' ] : false;
+    $show_caption = isset( $instance[ 'show_caption' ] ) ? $instance[ 'show_caption' ] : false;
+    $show_description = isset( $instance[ 'show_description' ] ) ? $instance[ 'show_description' ] : false;
+    $gallery = isset( $post->gallery ) ? (array)$post->gallery : ( isset( $property[ 'gallery' ] ) ? (array)$property[ 'gallery' ] : array() );
 
     $slideshow_order = maybe_unserialize( ( $post->slideshow_images ) ? $post->slideshow_images : $property[ 'slideshow_images' ] );
     $gallery_order = maybe_unserialize( ( $post->gallery_images ) ? $post->gallery_images : $property[ 'gallery_images' ] );
@@ -1722,10 +1729,6 @@ class GalleryPropertiesWidget extends WP_Widget {
       }
       //** Be sure we show ALL property images in gallery */
       $gallery = array_merge( $prepared_gallery_images, $gallery );
-    }
-
-    if ( empty( $image_type ) ) {
-      $image_type = 'thumbnail';
     }
 
     if ( !is_array( $gallery ) ) {
@@ -1819,13 +1822,14 @@ class GalleryPropertiesWidget extends WP_Widget {
   function form( $instance ) {
 
     global $wp_properties;
-    $title = esc_attr( $instance[ 'title' ] );
-    $image_type = $instance[ 'image_type' ];
-    $big_image_type = $instance[ 'big_image_type' ];
-    $show_caption = $instance[ 'show_caption' ];
-    $show_description = $instance[ 'show_description' ];
-    $gallery_count = $instance[ 'gallery_count' ]; ?>
-
+    $title = isset( $instance[ 'title' ] ) ? esc_attr( $instance[ 'title' ] ) : '';
+    $image_type = isset( $instance[ 'image_type' ] ) ? $instance[ 'image_type' ] : false;
+    $big_image_type = isset( $instance[ 'big_image_type' ] ) ? $instance[ 'big_image_type' ] : false;
+    $show_caption = isset( $instance[ 'show_caption' ] ) ? $instance[ 'show_caption' ] : false;
+    $show_description = isset( $instance[ 'show_description' ] ) ? $instance[ 'show_description' ] : false;
+    $gallery_count = isset( $instance[ 'gallery_count' ] ) ? $instance[ 'gallery_count' ] : false; 
+    
+    ?>
     <p>
       <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
       <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
