@@ -3234,7 +3234,7 @@ class WPP_F extends UD_API {
 
     }
     // Need to $conversion == '0' or else studios will not work, since they have 0 bedrooms
-    $conversion = $wp_properties[ 'search_conversions' ][ $attribute ][ $value ];
+    $conversion = isset( $wp_properties[ 'search_conversions' ][ $attribute ][ $value ] ) ? $wp_properties[ 'search_conversions' ][ $attribute ][ $value ] : false;
     if( $conversion == '0' || !empty( $conversion ) )
       return $conversion;
 

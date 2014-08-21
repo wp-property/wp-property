@@ -1531,8 +1531,8 @@ if ( !function_exists( 'wpp_render_search_input' ) ):
         <input id="<?php echo $random_element_id; ?>" class="wpp_search_input_field_<?php echo $attrib; ?>" name="wpp_search[<?php echo $attrib; ?>]" value="<?php echo $value; ?>" type="text"/>
         <?php //* Determine if attribute is a numeric range */ ?>
       <?php elseif ( WPP_F::is_numeric_range( $search_values[ $attrib ] ) ) : ?>
-        <input class="wpp_search_input_field_min wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" type="text" name="wpp_search[<?php echo $attrib; ?>][min]" value="<?php echo $value[ 'min' ]; ?>"/> -
-        <input class="wpp_search_input_field_max wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" type="text" name="wpp_search[<?php echo $attrib; ?>][max]" value="<?php echo $value[ 'max' ]; ?>"/>
+        <input class="wpp_search_input_field_min wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" type="text" name="wpp_search[<?php echo $attrib; ?>][min]" value="<?php echo isset( $value[ 'min' ] ) ? $value[ 'min' ] : ''; ?>"/> -
+        <input class="wpp_search_input_field_max wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" type="text" name="wpp_search[<?php echo $attrib; ?>][max]" value="<?php echo isset( $value[ 'max' ] ) ? $value[ 'max' ] : ''; ?>"/>
       <?php else : ?>
         <?php /* Not a numeric range */ ?>
         <select id="<?php echo $random_element_id; ?>" class="wpp_search_select_field wpp_search_select_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" name="wpp_search[<?php echo $attrib; ?>]">
@@ -1595,7 +1595,7 @@ if ( !function_exists( 'wpp_get_image_link' ) ):
       $img_url = wp_get_attachment_url( $attachment_id );
       //** Filenme of image */
       $img_url_basename = wp_basename( $img_url );
-      if ( is_array( $image_meta ) && $image_meta[ 'sizes' ][ $size ][ 'file' ] ) {
+      if ( !empty( $image_meta[ 'sizes' ][ $size ][ 'file' ] ) ) {
         //** Image image meta exists, we get the path and URL to the requested image size */
         $requested_size_filepath = str_replace( $img_url_basename, $image_meta[ 'sizes' ][ $size ][ 'file' ], $attachment_path );
         $requested_image_url = str_replace( $img_url_basename, $image_meta[ 'sizes' ][ $size ][ 'file' ], $img_url );

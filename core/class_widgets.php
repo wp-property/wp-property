@@ -797,14 +797,11 @@ class FeaturedPropertiesWidget extends WP_Widget {
       $width = ( !empty( $image_size[ 'width' ] ) ? $image_size[ 'width' ] : ( !empty( $image[ 'width' ] ) ? $image[ 'width' ] : '' ) );
       $height = ( !empty( $image_size[ 'height' ] ) ? $image_size[ 'height' ] : ( !empty( $image[ 'height' ] ) ? $image[ 'height' ] : '' ) );
       ?>
-      <div class="property_widget_block  clearfix"
-           style="<?php echo( $width ? 'width: ' . ( $width + 5 ) . 'px;' : '' ); ?> min-height: <?php echo $height; ?>px;">
-        <?php if ( $hide_image !== 'on' ): ?>
+      <div class="property_widget_block clearfix" style="<?php echo( $width ? 'width: ' . ( $width + 5 ) . 'px;' : '' ); ?> min-height: <?php echo $height; ?>px;">
+        <?php if ( $hide_image !== 'on' ) : ?>
           <?php if ( !empty( $image ) ) : ?>
-            <a class="sidebar_property_thumbnail thumbnail" href="<?php echo $this_property->permalink; ?>"><img
-                width="<?php echo $image[ 'width' ]; ?>" height="<?php echo $image[ 'height' ]; ?>"
-                src="<?php echo $image[ 'link' ]; ?>"
-                alt="<?php echo sprintf( __( '%s at %s for %s', 'wpp' ), $this_property->post_title, $this_property->location, $this_property->price ); ?>"/></a>
+            <a class="sidebar_property_thumbnail thumbnail" href="<?php echo $this_property->permalink; ?>">
+              <img width="<?php echo $image[ 'width' ]; ?>" height="<?php echo $image[ 'height' ]; ?>" src="<?php echo $image[ 'link' ]; ?>" alt=""/></a>
           <?php else : ?>
             <div class="wpp_no_image" style="width:<?php echo $width; ?>px;height:<?php echo $height; ?>px;"></div>
           <?php endif; ?>
