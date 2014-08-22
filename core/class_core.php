@@ -73,15 +73,15 @@ class WPP_Core {
     /** Making template-functions global but load after the premium features, giving the premium features priority. */
     include_once WPP_Templates . '/template-functions.php';
 
-    //** Load settings into $wp_properties and save settings if nonce exists */
-    WPP_F::settings_action();
-
+    //* set WPP capabilities */
+    $this->set_capabilities();
+    
     //** Set up our custom object and taxonomyies */
     WPP_F::register_post_type_and_taxonomies();
     
-    //* set WPP capabilities */
-    $this->set_capabilities();
-
+    //** Load settings into $wp_properties and save settings if nonce exists */
+    WPP_F::settings_action();
+    
     //** Load all widgets and register widget areas */
     add_action( 'widgets_init', array( 'WPP_F', 'widgets_init' ) );
 
