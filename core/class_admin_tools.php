@@ -475,17 +475,17 @@ if( !class_exists( 'class_admin_tools' ) ) {
                 <li>
                   <select name="wpp_settings[searchable_attr_fields][<?php echo $slug; ?>]" class="wpp_pre_defined_value_setter wpp_searchable_attr_fields">
                     <option value=""> - </option>
-                    <option value="input" <?php selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'input' ); ?>><?php _e( 'Free Text', 'wpp' ) ?></option>
-                    <option value="range_input" <?php selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'range_input' ); ?>><?php _e( 'Text Input Range', 'wpp' ) ?></option>
-                    <option value="range_dropdown" <?php selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'range_dropdown' ); ?>><?php _e( 'Range Dropdown', 'wpp' ) ?></option>
-                    <option value="dropdown" <?php selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'dropdown' ); ?>><?php _e( 'Dropdown Selection', 'wpp' ) ?></option>
-                    <option value="checkbox" <?php selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'checkbox' ); ?>><?php _e( 'Single Checkbox', 'wpp' ) ?></option>
-                    <option value="multi_checkbox" <?php selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'multi_checkbox' ); ?>><?php _e( 'Multi-Checkbox', 'wpp' ) ?></option>
+                    <option value="input" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'input' ); ?>><?php _e( 'Free Text', 'wpp' ) ?></option>
+                    <option value="range_input" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'range_input' ); ?>><?php _e( 'Text Input Range', 'wpp' ) ?></option>
+                    <option value="range_dropdown" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'range_dropdown' ); ?>><?php _e( 'Range Dropdown', 'wpp' ) ?></option>
+                    <option value="dropdown" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'dropdown' ); ?>><?php _e( 'Dropdown Selection', 'wpp' ) ?></option>
+                    <option value="checkbox" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'checkbox' ); ?>><?php _e( 'Single Checkbox', 'wpp' ) ?></option>
+                    <option value="multi_checkbox" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'multi_checkbox' ); ?>><?php _e( 'Multi-Checkbox', 'wpp' ) ?></option>
                     <?php do_action( 'wpp::property_attributes::searchable_attr_field', $slug ); ?>
                   </select>
                 </li>
                 <li>
-                  <textarea class="wpp_attribute_pre_defined_values" name="wpp_settings[predefined_search_values][<?php echo $slug; ?>]"><?php echo $wp_properties[ 'predefined_search_values' ][ $slug ]; ?></textarea>
+                  <textarea class="wpp_attribute_pre_defined_values" name="wpp_settings[predefined_search_values][<?php echo $slug; ?>]"><?php echo isset( $wp_properties[ 'predefined_search_values' ][ $slug ] ) ? $wp_properties[ 'predefined_search_values' ][ $slug ] : ''; ?></textarea>
                 </li>
               </ul>
             </td>
@@ -495,14 +495,14 @@ if( !class_exists( 'class_admin_tools' ) ) {
                 <li>
                   <select name="wpp_settings[admin_attr_fields][<?php echo $slug; ?>]" class="wpp_pre_defined_value_setter wpp_searchable_attr_fields">
                     <option value=""> - </option>
-                    <option value="input" <?php selected( $wp_properties[ 'admin_attr_fields' ][ $slug ], 'input' ); ?>><?php _e( 'Free Text', 'wpp' ) ?></option>
-                    <option value="dropdown" <?php selected( $wp_properties[ 'admin_attr_fields' ][ $slug ], 'dropdown' ); ?>><?php _e( 'Dropdown Selection', 'wpp' ) ?></option>
-                    <option value="checkbox" <?php selected( $wp_properties[ 'admin_attr_fields' ][ $slug ], 'checkbox' ); ?>><?php _e( 'Single Checkbox', 'wpp' ) ?></option>
+                    <option value="input" <?php if( isset( $wp_properties[ 'admin_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'admin_attr_fields' ][ $slug ], 'input' ); ?>><?php _e( 'Free Text', 'wpp' ) ?></option>
+                    <option value="dropdown" <?php if( isset( $wp_properties[ 'admin_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'admin_attr_fields' ][ $slug ], 'dropdown' ); ?>><?php _e( 'Dropdown Selection', 'wpp' ) ?></option>
+                    <option value="checkbox" <?php if( isset( $wp_properties[ 'admin_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'admin_attr_fields' ][ $slug ], 'checkbox' ); ?>><?php _e( 'Single Checkbox', 'wpp' ) ?></option>
                     <?php do_action( 'wpp::property_attributes::admin_attr_field', $slug ); ?>
                   </select>
                 </li>
                 <li>
-                  <textarea class="wpp_attribute_pre_defined_values" name="wpp_settings[predefined_values][<?php echo $slug; ?>]"><?php echo $wp_properties[ 'predefined_values' ][ $slug ]; ?></textarea>
+                  <textarea class="wpp_attribute_pre_defined_values" name="wpp_settings[predefined_values][<?php echo $slug; ?>]"><?php echo isset( $wp_properties[ 'predefined_values' ][ $slug ] ) ? $wp_properties[ 'predefined_values' ][ $slug ] : ''; ?></textarea>
                 </li>
               </ul>
             </td>
@@ -554,7 +554,7 @@ if( !class_exists( 'class_admin_tools' ) ) {
             <td>
               <ul>
                 </li>
-                <input <?php echo ( isset( $wp_properties[ 'hidden_frontend_attributes' ] ) && is_array( $wp_properties[ 'hidden_frontend_attributes' ] ) && in_array( $slug, $wp_properties[ 'hidden_frontend_attributes' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug" name="wpp_settings[hidden_frontend_attributes][]" value="<?php echo $slug; ?>"/>
+                <input <?php echo ( isset( $wp_properties[ 'hidden_frontend_attributes' ] ) && in_array( $slug, (array)$wp_properties[ 'hidden_frontend_attributes' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug" name="wpp_settings[hidden_frontend_attributes][]" value="<?php echo $slug; ?>"/>
                 <label><?php _e( 'Show in Admin Only', 'wpp' ); ?></label>
                 </li>
               </ul>
@@ -700,27 +700,27 @@ if( !class_exists( 'class_admin_tools' ) ) {
           <h3><?php _e( 'Advanced Options', 'wpp' ); ?></h3>
           <ul>
             <li>
-              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][show_ud_log]&label=" . __( 'Show Log.', 'wpp' ), $wp_properties[ 'configuration' ][ 'show_ud_log' ] ); ?>
+              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][show_ud_log]&label=" . __( 'Show Log.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'show_ud_log' ] ) ? $wp_properties[ 'configuration' ][ 'show_ud_log' ] : false ) ); ?>
               <br/>
               <span class="description"><?php _e( 'The log is always active, but the UI is hidden.  If enabled, it will be visible in the admin sidebar.', 'wpp' ); ?></span>
             </li>
             <li>
-              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][allow_parent_deep_depth]&label=" . __( 'Enable \'Falls Under\' deep depth.', 'wpp' ), $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] ); ?>
+              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][allow_parent_deep_depth]&label=" . __( 'Enable \'Falls Under\' deep depth.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] ) ? $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] : false ) ); ?>
               <br/>
               <span class="description"><?php printf( __( 'Allows to set child %1s as parent.', 'wpp' ), WPP_F::property_label( 'singular' ) )  ?></span>
             </li>
             <li>
-              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][disable_automatic_feature_update]&label=" . __( 'Disable automatic feature updates.', 'wpp' ), $wp_properties[ 'configuration' ][ 'disable_automatic_feature_update' ] ); ?>
+              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][disable_automatic_feature_update]&label=" . __( 'Disable automatic feature updates.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'disable_automatic_feature_update' ] ) ? $wp_properties[ 'configuration' ][ 'disable_automatic_feature_update' ] : false ) ); ?>
               <br/>
               <span class="description"><?php _e( 'If disabled, feature updates will not be downloaded automatically.', 'wpp' ); ?></span>
             </li>
             <li>
-              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][disable_wordpress_postmeta_cache]&label=" . __( 'Disable WordPress update_post_caches() function.', 'wpp' ), $wp_properties[ 'configuration' ][ 'disable_wordpress_postmeta_cache' ] ); ?>
+              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][disable_wordpress_postmeta_cache]&label=" . __( 'Disable WordPress update_post_caches() function.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'disable_wordpress_postmeta_cache' ] ) ? $wp_properties[ 'configuration' ][ 'disable_wordpress_postmeta_cache' ] : false ) ); ?>
               <br/>
               <span class="description"><?php printf( __('This may solve Out of Memory issues if you have a lot of %1s.','wpp'), WPP_F::property_label( 'plural' )); ?></span>
             </li>
             <li>
-              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][developer_mode]&label=" . __( 'Enable developer mode - some extra information displayed via Firebug console.', 'wpp' ), $wp_properties[ 'configuration' ][ 'developer_mode' ] ); ?>
+              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][developer_mode]&label=" . __( 'Enable developer mode - some extra information displayed via Firebug console.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'developer_mode' ] ) ? $wp_properties[ 'configuration' ][ 'developer_mode' ] : false ) ); ?>
               <br/>
             </li>
 

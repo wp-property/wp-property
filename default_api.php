@@ -635,7 +635,7 @@ function format_phone_number( $phone_number ) {
  */
 function add_format_phone_number_checkbox() {
   global $wp_properties;
-  echo '<li>' . WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][format_phone_number]&label=" . __( 'Format phone number.', 'wpp' ), $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_phone_number' ] ) . '</li>';
+  echo '<li>' . WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][format_phone_number]&label=" . __( 'Format phone number.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_phone_number' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_phone_number' ] : false ) ) . '</li>';
 }
 
 /**
@@ -646,7 +646,7 @@ function add_format_phone_number_checkbox() {
  */
 function add_format_true_checkbox() {
   global $wp_properties;
-  echo '<li>' . WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][format_true_checkbox]&label=" . __( 'Convert "Yes" and "True" values to checked icons on the front-end.', 'wpp' ), $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_true_checkbox' ] ) . '</li>';
+  echo '<li>' . WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][format_true_checkbox]&label=" . __( 'Convert "Yes" and "True" values to checked icons on the front-end.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_true_checkbox' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_true_checkbox' ] : false ) ) . '</li>';
 }
 
 /**
