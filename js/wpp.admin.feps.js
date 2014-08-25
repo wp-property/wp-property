@@ -79,13 +79,16 @@ jQuery.extend( wpp = wpp || {}, { ui: { feps: {
     jQuery(".wpp_dynamic_table_row").each(function() {
       /* A bit of  hack, but we want users to be able to change rows around as much as they need */
       jQuery(this).attr("new_row", "true");
+      /* Maybe hide 'Required' option */
+      wpp.ui.feps.is_active_required_option( jQuery(this) );
     });
 
     jQuery(".wpp_feps_new_attribute").live("change", function() {
       var parent = jQuery(this).parents(".wpp_dynamic_table_row");
       var title = jQuery("option:selected", this).text();
       jQuery("input.title", parent).val(title);
-
+      /* Maybe hide 'Required' option */
+      wpp.ui.feps.is_active_required_option( parent );
     });
 
     /* On form name change */
@@ -132,6 +135,20 @@ jQuery.extend( wpp = wpp || {}, { ui: { feps: {
     });
 
     wpp.ui.feps.update_dom();
+  },
+  
+  
+  /**
+   * Enable/disable 'Required' option for some specific attributes
+   */
+  is_active_required_option: function( e ) {
+    var attribute = e.find( '.wpp_feps_new_attribute' ).val();
+    var req_option_wrap = e.find( '.is_required' );
+    if( jQuery.inArray( attribute, [ "image_upload" ] ) >= 0 ) {
+      req_option_wrap.css( 'visibility', 'hidden' ).find( 'input' ).prop( 'disabled', true );
+    } else {
+      req_option_wrap.css( 'visibility', 'visible' ).find( 'input' ).prop( 'disabled', false );
+    }
   },
 
 
