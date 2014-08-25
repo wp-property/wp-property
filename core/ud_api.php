@@ -984,40 +984,34 @@ if ( !class_exists( 'UD_API' ) ) {
       extract( $args );
       $log = "{$prefix}_log";
 
-      if ( !did_action( 'init' ) ) {
-        _doing_it_wrong( __FUNCTION__, sprintf( __( 'You cannot call UD_API::log() before the %1$s hook, since the current user is not yet known.' ), 'init' ), '3.4' );
-        return false;
+      $user_id = '';
+      if ( did_action( 'init' ) ) {
+        $current_user = wp_get_current_user();
+        $user_id = $current_user->ID;
       }
-
-      $current_user = wp_get_current_user();
 
       $this_log = get_option( $log );
 
       if ( empty( $this_log ) ) {
-
         $this_log = array();
-
         $entry = array(
           'time' => time(),
           'message' => __( 'Log Started.', UD_API_Transdomain ),
-          'user' => $current_user->ID,
+          'user' => $user_id,
           'type' => $type,
           'instance' => $instance,
         );
-
       }
 
       if ( $message ) {
-
         $entry = array(
           'time' => time(),
           'message' => $message,
-          'user' => $type == 'system' ? 'system' : $current_user->ID,
+          'user' => $type == 'system' ? 'system' : $user_id,
           'type' => $type,
           'object' => $object,
           'instance' => $instance,
         );
-
       }
 
       if ( !is_array( $entry ) ) {
@@ -1031,7 +1025,6 @@ if ( !class_exists( 'UD_API' ) ) {
       update_option( $log, $this_log );
 
       return true;
-
     }
 
     /**

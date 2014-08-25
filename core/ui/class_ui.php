@@ -108,13 +108,6 @@ class WPP_UI {
       $property_type_in_attributes = false;
     }
 
-    $this_property_type = $property[ 'property_type' ];
-
-    //* Set default property type */
-    if ( empty( $this_property_type ) && empty( $property[ 'post_name' ] ) ) {
-      $this_property_type = WPP_F::get_most_common_property_type();
-    }
-
     //** Check for current property type if it is deleted */
     if ( is_array( $wp_properties[ 'property_types' ] ) && isset( $property[ 'property_type' ] ) && !in_array( $property[ 'property_type' ], array_keys( $wp_properties[ 'property_types' ] ) ) ) {
       $wp_properties[ 'property_types' ][ $property[ 'property_type' ] ] = WPP_F::de_slug( $property[ 'property_type' ] );
@@ -317,9 +310,14 @@ class WPP_UI {
       $row_classes = array( 'wpp_attribute_row' );
       $row_classes[ ] = "wpp_attribute_row_{$slug}";
 
-      if ( is_array( $wp_properties[ 'hidden_attributes' ][ $property[ 'property_type' ] ] ) && in_array( 'parent', $wp_properties[ 'hidden_attributes' ][ $property[ 'property_type' ] ] ) ) {
+      if ( 
+        !empty( $property[ 'property_type' ] ) 
+        && !empty( $wp_properties[ 'hidden_attributes' ][ $property[ 'property_type' ] ] ) 
+        && in_array( 'parent', (array)$wp_properties[ 'hidden_attributes' ][ $property[ 'property_type' ] ] ) 
+      ) {
         $row_classes[ ] = 'disabled_row';
       }
+      
       if ( isset( $wp_properties[ 'hidden_frontend_attributes' ] ) && in_array( $slug, (array) $wp_properties[ 'hidden_frontend_attributes' ] ) ) {
         $row_classes[ ] = 'wpp_hidden_frontend_attribute';
       }
@@ -375,7 +373,7 @@ class WPP_UI {
       }
 
       //** Check input type */
-      $input_type = $wp_properties[ 'admin_attr_fields' ][ $slug ];
+      $input_type = isset( $wp_properties[ 'admin_attr_fields' ][ $slug ] ) ? $wp_properties[ 'admin_attr_fields' ][ $slug ] : false;
 
       if ( $input_type == 'checkbox' ) {
         $predefined_values = array( 'true,false' );
@@ -614,7 +612,7 @@ class WPP_UI {
 
     $attribute = WPP_F::get_attribute_data( 'property_type' );
 
-    $type_label = ( $attribute[ 'label' ] ? $attribute[ 'label' ] : sprintf( __( '%1s Type', 'wpp' ), WPP_F::property_label() ) );
+    $type_label = ( !empty( $attribute[ 'label' ] ) ? $attribute[ 'label' ] : sprintf( __( '%1s Type', 'wpp' ), WPP_F::property_label() ) );
 
     $property_type_slugs = array_keys( (array) $wp_properties[ 'property_types' ] );
 
@@ -628,7 +626,7 @@ class WPP_UI {
           <select id="wpp_meta_property_type" name="wpp_data[meta][property_type]" id="property_type">
             <option value=""></option>
             <?php foreach ( $wp_properties[ 'property_types' ] as $slug => $label ) { ?>
-              <option <?php selected( strtolower( $property[ 'property_type' ] ), strtolower( $slug ) ); ?>
+              <option <?php if( !empty( $property[ 'property_type' ] ) ) selected( strtolower( $property[ 'property_type' ] ), strtolower( $slug ) ); ?>
                 value="<?php echo $slug; ?>"><?php echo $label; ?></option>
             <?php } ?>
           </select>

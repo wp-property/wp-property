@@ -375,12 +375,12 @@ class WPP_F extends UD_API {
   static public function console_log( $text = false ) {
     global $wp_properties;
 
-    if( $wp_properties[ 'configuration' ][ 'developer_mode' ] != 'true' ) {
-      return;
+    if( !isset( $wp_properties[ 'configuration' ][ 'developer_mode' ] ) || $wp_properties[ 'configuration' ][ 'developer_mode' ] != 'true' ) {
+      return false;
     }
 
     if( empty( $text ) ) {
-      return;
+      return false;
     }
 
     if( is_array( $text ) || is_object( $text ) ) {
@@ -393,6 +393,7 @@ class WPP_F extends UD_API {
     add_filter( 'wp_footer', create_function( '$nothing,$echo_text = "' . $text . '"', 'echo \'<script type="text/javascript">if(typeof console == "object"){console.log("\' . $echo_text . \'");}</script>\'; ' ) );
     add_filter( 'admin_footer', create_function( '$nothing,$echo_text = "' . $text . '"', 'echo \'<script type="text/javascript">if(typeof console == "object"){console.log("\' . $echo_text . \'");}</script>\'; ' ) );
 
+    return true;
   }
 
   /**
@@ -1129,7 +1130,7 @@ class WPP_F extends UD_API {
   static public function pre_get_posts( $query ) {
     global $wp_properties;
 
-    if( $wp_properties[ 'configuration' ][ 'disable_wordpress_postmeta_cache' ] != 'true' ) {
+    if( !isset( $wp_properties[ 'configuration' ][ 'disable_wordpress_postmeta_cache' ] ) || $wp_properties[ 'configuration' ][ 'disable_wordpress_postmeta_cache' ] != 'true' ) {
       return;
     }
 
@@ -2762,7 +2763,7 @@ class WPP_F extends UD_API {
 
         if( end( @explode( ".", $file ) ) == 'php' ) {
 
-          $_upgraed = false;
+          $_upgraded = false;
 
           $plugin_data = @get_file_data( WPP_Premium . "/" . $file, $default_headers, 'plugin' );
 
@@ -2772,13 +2773,16 @@ class WPP_F extends UD_API {
           if( $plugin_slug == 'class_admin_tools' ) {
             continue;
           }
+          
+          if( !isset( $wp_properties[ 'installed_features' ][ $plugin_slug ] ) ) {
+            $wp_properties[ 'installed_features' ][ $plugin_slug ] = array();
+          }
 
-          if( is_array( $wp_properties[ 'installed_features' ][ $plugin_slug ] ) && $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ] ) {
-
-            if( version_compare( $plugin_data[ 'version' ], $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ] ) > 0 ) {
-              $_upgraed = true;
-            }
-
+          if( 
+            !empty( $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ] ) 
+            && version_compare( $plugin_data[ 'version' ], $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ] ) > 0 
+          ) {
+            $_upgraded = true;
           }
 
           $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'name' ]        = $plugin_data[ 'name' ];
@@ -2821,7 +2825,7 @@ class WPP_F extends UD_API {
                 $_instance = new $_class( $wp_properties, $plugin_data );
 
                 // Call Upgrade Method, if exists.
-                if( $_upgraed && is_callable( array( $_instance, 'upgrade' ) ) ) {
+                if( $_upgraded && is_callable( array( $_instance, 'upgrade' ) ) ) {
                   $_instance->upgrade( $wp_properties );
                 }
 
@@ -3441,7 +3445,7 @@ class WPP_F extends UD_API {
         break;
       }
 
-      $numeric = in_array( $meta_key, (array) $wp_properties[ 'numeric_attributes' ] ) ? true : false;
+      $numeric = ( isset( $wp_properties[ 'numeric_attributes' ] ) && in_array( $meta_key, (array) $wp_properties[ 'numeric_attributes' ] ) ) ? true : false;
 
       if( !in_array( $meta_key, (array) $commas_ignore ) && substr_count( $criteria, ',' ) || ( substr_count( $criteria, '-' ) && $numeric ) || substr_count( $criteria, '--' ) ) {
       
@@ -4153,12 +4157,14 @@ class WPP_F extends UD_API {
     $return[ 'permalink' ] = get_permalink( $id );
 
     //** Make sure property_type stays as slug, or it will break many things:  (widgets, class names, etc)  */
-    $return[ 'property_type_label' ] = isset( $wp_properties[ 'property_types' ][ $return[ 'property_type' ] ]) ? $wp_properties[ 'property_types' ][ $return[ 'property_type' ] ] : false;
-    if( empty( $return[ 'property_type_label' ] ) ) {
-      foreach( $wp_properties[ 'property_types' ] as $pt_key => $pt_value ) {
-        if( strtolower( $pt_value ) == strtolower( $return[ 'property_type' ] ) ) {
-          $return[ 'property_type' ]       = $pt_key;
-          $return[ 'property_type_label' ] = $pt_value;
+    if( !empty( $return[ 'property_type' ] ) ) {
+      $return[ 'property_type_label' ] = isset( $wp_properties[ 'property_types' ][ $return[ 'property_type' ] ]) ? $wp_properties[ 'property_types' ][ $return[ 'property_type' ] ] : false;
+      if( empty( $return[ 'property_type_label' ] ) ) {
+        foreach( $wp_properties[ 'property_types' ] as $pt_key => $pt_value ) {
+          if( strtolower( $pt_value ) == strtolower( $return[ 'property_type' ] ) ) {
+            $return[ 'property_type' ]       = $pt_key;
+            $return[ 'property_type_label' ] = $pt_value;
+          }
         }
       }
     }
