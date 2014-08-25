@@ -131,8 +131,8 @@ if ( !class_exists( 'UD_API' ) ) {
           $base[ $key ] = $append[ $key ];
           continue;
           }
-          if( @is_array( $value ) or @is_array( $base[ $key ] ) ) {
-          $base[ $key ] = self::extend( $base[ $key ], $append[ $key ] );
+          if( @is_array( $value ) or ( isset( $base[ $key ] ) && @is_array( $base[ $key ] ) ) ) {
+            $base[ $key ] = self::extend( @$base[ $key ], @$append[ $key ] );
           } else if( is_numeric( $key ) ) {
           if( !in_array( $value, $base ) ) $base[] = $value;
           } else {
@@ -142,7 +142,24 @@ if ( !class_exists( 'UD_API' ) ) {
       }
       return $base;
     }
-
+    
+    /**
+     * Sanitizes data.
+     * Prevents shortcodes and XSS adding!
+     *
+     * @author peshkov@UD
+     */
+    static public function sanitize_request( $data ) {
+      if( is_array( $data ) ) {
+        foreach( $data as $k => $v ) {
+          $data[ $k ] = self::sanitize_request( $v );
+        }
+      } else {
+        $data = strip_shortcodes( $data );
+        $data = filter_var( $data, FILTER_SANITIZE_STRING );
+      }
+      return $data;
+    }
 
     /**
      * Converts slashes for Windows paths.

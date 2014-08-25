@@ -152,8 +152,10 @@ class WPP_Object_List_Table extends WPP_List_Table {
           break;
 
         case 'property_type':
-          $property_type = $post->property_type;
-          $r .= ( isset( $wp_properties[ 'property_types' ][ $property_type ] ) ? $wp_properties[ 'property_types' ][ $property_type ] : '' );
+          $property_type = !empty( $post->property_type ) ? $post->property_type : false;
+          if( !empty( $property_type ) ) {
+            $r .= ( isset( $wp_properties[ 'property_types' ][ $property_type ] ) ? $wp_properties[ 'property_types' ][ $property_type ] : '' );
+          }
           break;
 
         case 'overview':

@@ -1069,9 +1069,9 @@ class WPP_F extends UD_API {
       $sortable_attrs[ 'post_title' ] = __( 'Title', 'wpp' );
     }
 
-    if( !empty( $wp_properties[ 'property_stats' ] ) && $wp_properties[ 'sortable_attributes' ] ) {
-      foreach( $wp_properties[ 'property_stats' ] as $slug => $label ) {
-        if( in_array( $slug, $wp_properties[ 'sortable_attributes' ] ) ) {
+    if( !empty( $wp_properties[ 'property_stats' ] ) && !empty( $wp_properties[ 'sortable_attributes' ] ) ) {
+      foreach( (array)$wp_properties[ 'property_stats' ] as $slug => $label ) {
+        if( in_array( $slug, (array)$wp_properties[ 'sortable_attributes' ] ) ) {
           $sortable_attrs[ $slug ] = $label;
         }
       }
@@ -3337,7 +3337,7 @@ class WPP_F extends UD_API {
 
         $original_value = $value;
 
-        $numeric = in_array( $thing, (array) $wp_properties[ 'numeric_attributes' ] ) ? true : false;
+        $numeric = !empty( $wp_properties[ 'numeric_attributes' ] ) && in_array( $thing, (array) $wp_properties[ 'numeric_attributes' ] ) ? true : false;
 
         //** If not CSV and last character is a +, we look for open-ended ranges, i.e. bedrooms: 5+
         if( substr( $original_value, -1, 1 ) == '+' && !strpos( $original_value, ',' ) && $numeric ) {
