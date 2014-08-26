@@ -1279,11 +1279,11 @@ class SearchPropertiesWidget extends WP_Widget {
     $title = apply_filters( 'widget_title', $instance[ 'title' ] );
 
     $instance = apply_filters( 'SearchPropertiesWidget', $instance );
-    $search_attributes = $instance[ 'searchable_attributes' ];
-    $sort_by = $instance[ 'sort_by' ];
-    $sort_order = $instance[ 'sort_order' ];
-    $searchable_property_types = $instance[ 'searchable_property_types' ];
-    $grouped_searchable_attributes = $instance[ 'grouped_searchable_attributes' ];
+    $search_attributes = isset( $instance[ 'searchable_attributes' ] ) ? $instance[ 'searchable_attributes' ] : false;
+    $sort_by = isset( $instance[ 'sort_by' ] ) ? $instance[ 'sort_by' ] : false;
+    $sort_order = isset( $instance[ 'sort_order' ] ) ? $instance[ 'sort_order' ] : false;
+    $searchable_property_types = isset( $instance[ 'searchable_property_types' ] ) ? $instance[ 'searchable_property_types' ] : array();
+    $grouped_searchable_attributes = isset( $instance[ 'grouped_searchable_attributes' ] ) ? $instance[ 'grouped_searchable_attributes' ] : array();
 
     if ( !is_array( $search_attributes ) ) {
       return;
@@ -1312,7 +1312,7 @@ class SearchPropertiesWidget extends WP_Widget {
     //** Load different attribute list depending on group selection */
     if ( isset( $instance[ 'group_attributes' ] ) && $instance[ 'group_attributes' ] == 'true' ) {
       $search_args[ 'group_attributes' ] = true;
-      $search_args[ 'search_attributes' ] = $instance[ 'grouped_searchable_attributes' ];
+      $search_args[ 'search_attributes' ] = $grouped_searchable_attributes;
     } else {
       $search_args[ 'search_attributes' ] = $search_attributes;
     }
@@ -1578,7 +1578,7 @@ class SearchPropertiesWidget extends WP_Widget {
         <div class="wpp_something_advanced_wrapper" style="margin-top: 10px;">
           <ul>
 
-            <?php if ( isset( $wp_properties[ 'sortable_attributes' ] ) && is_array( $wp_properties[ 'sortable_attributes' ] ) ) : ?>
+            <?php if ( !empty( $wp_properties[ 'sortable_attributes' ] ) && is_array( $wp_properties[ 'sortable_attributes' ] ) ) : ?>
               <li class="wpp_development_advanced_option">
                 <div><label
                     for="<?php echo $this->get_field_id( 'sort_by' ); ?>"><?php _e( 'Default Sort Order', 'wpp' ); ?></label>

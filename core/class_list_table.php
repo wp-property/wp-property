@@ -40,14 +40,12 @@ class WPP_List_Table extends WP_List_Table {
       parent::__construct();
     }
 
-    $this->_args = $args;
-
-    if ( empty( $this->_args[ 'current_screen' ] ) ) {
-      if ( $this->_args[ 'ajax' ] != true ) {
-        $screen = get_current_screen();
-        $this->_args[ 'current_screen' ] = $screen->id;
-      }
+    if ( empty( $args[ 'current_screen' ] ) && $args[ 'ajax' ] != true ) {
+      $screen = get_current_screen();
+      $args[ 'current_screen' ] = !empty( $screen->id ) ? $screen->id : false;
     }
+    
+    $this->_args = $args;
 
     //* Returns columns, hidden, sortable */
     list( $columns, $hidden ) = $this->get_column_info();
@@ -113,8 +111,8 @@ class WPP_List_Table extends WP_List_Table {
     ?>
     <script type="text/javascript">
       var wp_list_table;
-      var wp_table_column_ids = {}
-      <?php foreach($this->column_ids as $col_id => $col_slug) : ?>
+      var wp_table_column_ids = {};
+      <?php if( is_array( $this->column_ids ) ) foreach($this->column_ids as $col_id => $col_slug) : ?>
       wp_table_column_ids['<?php echo $col_slug; ?>'] = '<?php echo $col_id; ?>';
       <?php endforeach; ?>
 
@@ -130,10 +128,10 @@ class WPP_List_Table extends WP_List_Table {
             "sLengthMenu": wpp.strings.dtables.display + ' <select><option value="25">25 </option><option value="50">50 </option><option value="100">100</option><option value="-1">' + wpp.strings.dtables.all + ' </option></select> ' + wpp.strings.dtables.records,
             "sProcessing": '<div class="ajax_loader_overview"></div>'
           },
-          "iColumns": <?php echo count($this->aoColumnDefs); ?>,
+          "iColumns": <?php echo isset( $this->aoColumnDefs ) ? count( $this->aoColumnDefs ) : 0; ?>,
           "bProcessing": true,
           "bServerSide": true,
-          "aoColumnDefs": [<?php echo implode(',', $this->aoColumnDefs); ?>],
+          "aoColumnDefs": [<?php echo is_array( $this->aoColumnDefs ) ? implode( ',', $this->aoColumnDefs) : ''; ?>],
           "sAjaxSource": wpp.instance.ajax_url + '?&action=<?php echo $this->_args['ajax_action']; ?>',
           "fnServerData": function ( sSource, aoData, fnCallback ) {
             aoData.push( {

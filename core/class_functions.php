@@ -3113,7 +3113,8 @@ class WPP_F extends UD_API {
 
         //** Check to see if this attribute has predefined values or if we have to get them from DB */
         //** If the attributes has predefind values, we use them */
-        if( $predefined_search_values = $wp_properties[ 'predefined_search_values' ][ $searchable_attribute ] ) {
+        if( !empty( $wp_properties[ 'predefined_search_values' ][ $searchable_attribute ] ) ) {
+          $predefined_search_values = $wp_properties[ 'predefined_search_values' ][ $searchable_attribute ];
           $predefined_search_values = str_replace( array( ', ', ' ,' ), array( ',', ',' ), trim( $predefined_search_values ) );
           $predefined_search_values = explode( ',', $predefined_search_values );
 

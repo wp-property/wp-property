@@ -1384,7 +1384,7 @@ if ( !function_exists( 'draw_property_search_form' ) ):
           ) );
           $this_field = ob_get_contents();
           ob_end_clean();
-          echo apply_filters( 'wpp_search_form_field_' . $attrib, $this_field, $attrib, $label, $value, $wp_properties[ 'searchable_attr_fields' ][ $attrib ], $random_element_id ); ?>
+          echo apply_filters( 'wpp_search_form_field_' . $attrib, $this_field, $attrib, $label, $value, ( isset( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] ) ? $wp_properties[ 'searchable_attr_fields' ][ $attrib ] : false ), $random_element_id ); ?>
           </div>
           <div class="clear"></div>
           </li>
@@ -1426,7 +1426,7 @@ if ( !function_exists( 'wpp_render_search_input' ) ):
     );
     extract( $args = wp_parse_args( $args, $defaults ) );
     $attribute_data = WPP_F::get_attribute_data( $attrib );
-    $use_input_type = $wp_properties[ 'searchable_attr_fields' ][ $attrib ];
+    $use_input_type = isset( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] ) ? $wp_properties[ 'searchable_attr_fields' ][ $attrib ] : false;
     if ( !empty( $input_type ) ) {
       $use_input_type = $input_type;
     }
