@@ -456,7 +456,7 @@ if ( !function_exists( 'wpp_draw_pagination' ) ):
               /* Total properties count may change depending on sorting (if sorted by an attribute that all properties do not have) */
               /* It seems issue mentioned above are fexed so nex line unneeded, commented odokienko@UD */
               // jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_property_results").text(result_data.wpp_query.properties?result_data.wpp_query.properties.total:0);
-              <?php if($use_pagination) { ?>
+              <?php if( isset( $use_pagination ) && $use_pagination ) { ?>
               /* Update max page in slider and in display */
               jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider" ).slider( "option", "max", result_data.wpp_query.pages );
               jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_total_page_count" ).text( result_data.wpp_query.pages );
@@ -561,7 +561,7 @@ if ( !function_exists( 'wpp_draw_pagination' ) ):
               wpp_query_<?php echo $unique_hash; ?> = changeAddressValue( 1, wpp_query_<?php echo $unique_hash; ?> );
             } );
           }
-          <?php if($use_pagination) { ?>
+          <?php if( isset( $use_pagination ) && $use_pagination ) { ?>
           jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider_wrapper" ).each( function () {
             var this_parent = this;
             /* Slider */
@@ -840,7 +840,7 @@ if ( !function_exists( 'the_tagline' ) ):
   function the_tagline( $before = '', $after = '', $echo = true ) {
     global $post;
 
-    $content = $post->tagline;
+    $content = isset( $post->tagline ) ? $post->tagline : '';
 
     if ( strlen( $content ) == 0 ) {
       return;

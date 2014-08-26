@@ -782,7 +782,7 @@ class WPP_F extends UD_API {
 
     $user = wp_get_current_user();
 
-    $uid = (int) $user->id;
+    $uid = (int) $user->ID;
 
     if( empty( $uid ) ) {
       $uid = $_SERVER[ 'REMOTE_ADDR' ];
@@ -802,7 +802,7 @@ class WPP_F extends UD_API {
   static public function verify_nonce( $nonce, $action = false ) {
 
     $user = wp_get_current_user();
-    $uid  = (int) $user->id;
+    $uid  = (int) $user->ID;
 
     if( empty( $uid ) ) {
       $uid = $_SERVER[ 'REMOTE_ADDR' ];

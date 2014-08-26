@@ -19,7 +19,7 @@
   <input type="hidden" name="wpp_feps_data[form_id]" value="<?php echo esc_attr(md5($args['form_id'])); ?>" />
   <input type="hidden" name="wpp_feps_data[this_session]" value="<?php echo esc_attr($this_session); ?>" />
 
-  <?php if ($parent_id) : ?>
+  <?php if ( !empty( $parent_id ) ) : ?>
     <input type="hidden" name="wpp_feps_data[parent_id]" value="<?php echo esc_attr($args['parent_id']); ?>" />
   <?php endif; ?>
   <?php if (!empty($property['ID'])) : ?>
@@ -48,7 +48,7 @@
               'att_data' => $att_data,
               'row_id' => $row_id,
               'args' => $args,
-              'property' => $property,
+              'property' => ( isset( $property ) ? $property : false ),
               'images_limit' => abs( (int) $images_limit )
             ) );
             ?></div>
@@ -91,11 +91,11 @@
       </li>
     <?php endif; ?>
       
-    <?php do_action( 'wpp::feps::edit_property', $property ); ?>
+    <?php do_action( 'wpp::feps::edit_property', ( isset( $property ) ? $property : false ) ); ?>
     
     <li class="<?php wpp_css("feps-default-template::input-wrapper","wpp_feps_input_wrapper submit_action"); ?> ">
       <span class="<?php wpp_css("feps-default-template::ajax-message","wpp_feps_ajax_message"); ?>"></span>
-      <input tabindex="<?php echo $tabindex; ?>" type="submit" class="<?php wpp_css("feps-default-template::submit","wpp_feps_submit_form btn feps_action_btn"); ?>" value="<?php echo apply_filters( 'feps::template::submit::btn', __('Submit', 'wpp'), $property, $form ); ?>" />
+      <input tabindex="<?php echo $tabindex; ?>" type="submit" class="<?php wpp_css("feps-default-template::submit","wpp_feps_submit_form btn feps_action_btn"); ?>" value="<?php echo apply_filters( 'feps::template::submit::btn', __('Submit', 'wpp'), ( isset( $property ) ? $property : false ), $form ); ?>" />
     </li>
   </ul>
 

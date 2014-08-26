@@ -17,7 +17,7 @@ class WPP_Mail {
    * @author peshkov@UD
    * @since 1.38
    */
-  function _send_notification( $notification ) {
+  static public function _send_notification( $notification ) {
     $notification = apply_filters( 'wpp::send_notification', $notification );
     UD_API::send_notification( $notification );
   }
@@ -27,7 +27,7 @@ class WPP_Mail {
    * @author peshkov@UD
    * @since 1.38
    */
-  function _notification_template() {
+  static public function _notification_template() {
     return apply_filters( 'wpp::mail::template', array(
       'trigger_action' => 'wpp_default_action',
       'data' => array(),
@@ -43,7 +43,7 @@ class WPP_Mail {
    * @author peshkov@UD
    * @since 1.38
    */
-  function user_created( $user_id, $new_user, $args = array() ) {
+  static public function user_created( $user_id, $new_user, $args = array() ) {
     $notification = self::_notification_template();
 
     $user_data = get_userdata( $user_id );
@@ -75,7 +75,7 @@ class WPP_Mail {
    * @author peshkov@UD
    * @since 1.38
    */
-  function feps_post_approved( $post_id, $args = array() ) {
+  static public function feps_post_approved( $post_id, $args = array() ) {
     global $wp_post_statuses;
 
     $notification = self::_notification_template();
@@ -113,7 +113,7 @@ class WPP_Mail {
    * @author peshkov@UD
    * @since 1.38
    */
-  function feps_post_status_updated( $post_id, $args = array() ) {
+  static public function feps_post_status_updated( $post_id, $args = array() ) {
     global $wp_post_statuses;
 
     $notification = self::_notification_template();
@@ -148,7 +148,7 @@ class WPP_Mail {
    * @author peshkov@UD
    * @since 1.38
    */
-  function feps_post_created( $post_id, $args = array() ) {
+  static public function feps_post_created( $post_id, $args = array() ) {
     global $wp_post_statuses;
 
     $notification = self::_notification_template();

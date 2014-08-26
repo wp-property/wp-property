@@ -146,7 +146,7 @@ class WPP_List_Table extends WP_List_Table {
               "success": [fnCallback, wpp.overview.initialize()]
             } );
           },
-          "aoColumns": [<?php echo implode(",", $this->aoColumns); ?>],
+          "aoColumns": [<?php echo is_array( $this->aoColumns ) ? implode( ',', $this->aoColumns) : ''; ?>],
           "fnDrawCallback": function () {
             wp_list_table_do_columns();
           }
