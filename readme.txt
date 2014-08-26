@@ -3,8 +3,8 @@ Contributors: usability_dynamics, andypotanin, jbrw1984, maxim.peshkov, anton-ko
 Donate link: http://usabilitydynamics.com/products/wp-property/
 Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 3.6
-Tested up to: 3.9.1
-Stable tag: 1.41.4
+Tested up to: 3.9.2
+Stable tag: 1.42.0
 
 
 == Description ==
@@ -226,6 +226,36 @@ We are moving out of beta stages, but you may still experience bugs now and then
 We are still in early stages, so updates will be coming out routinely.  Please do not hesitate to send us feedback and suggestions.
 
 == Changelog ==
+
+= 1.42.0 =
+* Added strict search option for [property_search] shortcode and 'Property Search' widget.
+* Removed taxonomies metaboxes on edit property page for users who do not have capabilities.
+* Removed deprecated encode/decode mysql output functionality on post meta saving/getting.
+* Improved [property_attribute] shortcode.
+* Improved l10n (localization) script implementation, which reduces load time.
+* Fixed bug with saving shortcode with single quotes values in meta attribute's field.
+* Fixed reversed order of images for 'Property Gallery' widget.
+* Fixed duplicated images sizes issue.
+* Fixed address format display for 'Child Properties', 'Other Properties' and 'Latest Properties' widgets.
+* Fixed bug related to displaying attributes with the same labels.
+* Fixed capabilities issue.
+* XML Importer. Added debug log functionality for better troubleshooting issues.
+* XML Importer. Improved schedule's advanced options.
+* XML Importer. Fixed issue related to saving schedule with 50 and more xpath map's attributes.
+* XML Importer. Fixed importing empty values with line breaks.
+* PDF Flyer. Added paragraphs for description in PDF Flyer.
+* PDF Flyer. Refactored PDF Flyer generation.
+* PDF Flyer. Fixed the issue with primary and secondary images duplication.
+* PDF Flyer. Fixed values for checkbox attributes when enabled 'Show Checkboxed Image' option.
+* PDF Flyer. Fixed bug with getting an old PDF Flyer file instead of new one.
+* PDF Flyer. Fixed PDF List attributes view bug.
+* Slideshow. Fixed slideshow images management on edit property page.
+* Slideshow. Fixed the bug with reset global slideshow images on saving second time.
+* FEPS. Disabled 'required' option for 'images upload' attribute on FEPS form.
+* FEPS. Fixed bug with reset slideshow images on property update.
+* FEPS. Fixed bug with image removing.
+* Updated localization files.
+* Fixed Warnings and Notices.
 
 = 1.41.4 =
 * Added hooks to get_sortable_keys and get_properties functions.

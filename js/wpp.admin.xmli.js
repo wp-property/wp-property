@@ -1318,7 +1318,7 @@ wpp.xmli = jQuery.extend({
       jQuery.each( exclude, function( k, a ) {
         if( a.length > 0 && source_type == a ) {
           jQuery( e ).hide();
-          return NULL;
+          return;
         }
       } );
     } );
