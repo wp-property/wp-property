@@ -362,9 +362,7 @@ function wpp_format_address_attribute( $data, $property = false, $format = "[str
   ) {
     //** Silently attempt to validate address, right now */
     $geo_data = WPP_F::revalidate_all_addresses( array( 'property_ids' => array( $property->ID ), 'echo_result' => false, 'return_geo_data' => true ) );
-
     if ( $this_geo_data = $geo_data[ 'geo_data' ][ $property->ID ] ) {
-
       $street_number = $this_geo_data->street_number;
       $route = $this_geo_data->route;
       $city = $this_geo_data->city;
@@ -374,17 +372,15 @@ function wpp_format_address_attribute( $data, $property = false, $format = "[str
       $country = $this_geo_data->country;
       $postal_code = $this_geo_data->postal_code;
     }
-
   } else {
-
-    $street_number = $property->street_number;
-    $route = $property->route;
-    $city = $property->city;
-    $state = $property->state;
-    $state_code = $property->state_code;
-    $county = $property->county;
-    $country = $property->country;
-    $postal_code = $property->postal_code;
+    $street_number = isset( $property->street_number ) ? $property->street_number : false;
+    $route = isset( $property->route ) ? $property->route : false;
+    $city = isset( $property->city ) ? $property->city : false;
+    $state = isset( $property->state ) ? $property->state : false;
+    $state_code = isset( $property->state_code ) ? $property->state_code : false;
+    $county = isset( $property->county ) ? $property->county : false;
+    $country = isset( $property->country ) ? $property->country : false;
+    $postal_code = isset( $property->postal_code ) ? $property->postal_code : false;
   }
 
   $display_address = $format;
@@ -730,9 +726,10 @@ function add_display_address( $property ) {
   $display_address_code = $display_address;
 
   // Check if property is supposed to inehrit the address
-  if ( isset( $property[ 'parent_id' ] )
-    && is_array( $wp_properties[ 'property_inheritance' ][ $property[ 'property_type' ] ] )
-    && in_array( $wp_properties[ 'configuration' ][ 'address_attribute' ], $wp_properties[ 'property_inheritance' ][ $property[ 'property_type' ] ] )
+  if ( 
+    isset( $property[ 'parent_id' ] )
+    && isset( $wp_properties[ 'property_inheritance' ][ $property[ 'property_type' ] ] )
+    && in_array( $wp_properties[ 'configuration' ][ 'address_attribute' ], (array)$wp_properties[ 'property_inheritance' ][ $property[ 'property_type' ] ] )
   ) {
 
     if ( get_post_meta( $property[ 'parent_id' ], 'address_is_formatted', true ) ) {

@@ -1362,7 +1362,7 @@ class WPP_Core {
     $defaults[ 'show_children' ] = ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_children' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_children' ] : 'true' );
     $defaults[ 'child_properties_title' ] = __( 'Floor plans at location:', 'wpp' );
     $defaults[ 'fancybox_preview' ] = $wp_properties[ 'configuration' ][ 'property_overview' ][ 'fancybox_preview' ];
-    $defaults[ 'bottom_pagination_flag' ] = ( $wp_properties[ 'configuration' ][ 'bottom_insert_pagenation' ] == 'true' ? true : false );
+    $defaults[ 'bottom_pagination_flag' ] = ( isset( $wp_properties[ 'configuration' ][ 'bottom_insert_pagenation' ] ) && $wp_properties[ 'configuration' ][ 'bottom_insert_pagenation' ] == 'true' ? true : false );
     $defaults[ 'thumbnail_size' ] = $wp_properties[ 'configuration' ][ 'property_overview' ][ 'thumbnail_size' ];
     $defaults[ 'sort_by_text' ] = __( 'Sort By:', 'wpp' );
     $defaults[ 'sort_by' ] = 'post_date';
@@ -1523,7 +1523,7 @@ class WPP_Core {
     $thumbnail_size = $wpp_query[ 'thumbnail_size' ];
 
     //* Debugger */
-    if ( $wp_properties[ 'configuration' ][ 'developer_mode' ] == 'true' && !$wpp_query[ 'ajax_call' ] ) {
+    if ( isset( $wp_properties[ 'configuration' ][ 'developer_mode' ] ) && $wp_properties[ 'configuration' ][ 'developer_mode' ] == 'true' && !$wpp_query[ 'ajax_call' ] ) {
       echo '<script type="text/javascript">console.log( ' . json_encode( $wpp_query ) . ' ); </script>';
     }
 

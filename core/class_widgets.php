@@ -605,7 +605,7 @@ class ChildPropertiesWidget extends WP_Widget {
     $show_title = isset( $instance[ 'show_title' ] ) ? $instance[ 'show_title' ] : false;
     $address_format = !empty( $instance[ 'address_format' ] ) ? esc_attr( $instance[ 'address_format' ] ) : "[street_number] [street_name], [city], [state]";
     $image_type = isset( $instance[ 'image_type' ] ) ? esc_attr( $instance[ 'image_type' ] ) : false;
-    $amount_items = empty( $instance[ 'amount_items' ] ) ? esc_attr( $instance[ 'amount_items' ] ) : 5;
+    $amount_items = !empty( $instance[ 'amount_items' ] ) ? $instance[ 'amount_items' ] : 5;
     $property_stats = isset( $instance[ 'stats' ] ) ? $instance[ 'stats' ] : array();
     $hide_image = isset( $instance[ 'hide_image' ] ) ? $instance[ 'hide_image' ] : false;
     $enable_more = isset( $instance[ 'enable_more' ] ) ? $instance[ 'enable_more' ] : false;
@@ -793,9 +793,13 @@ class FeaturedPropertiesWidget extends WP_Widget {
       }
       $count++;
       $this_property = WPP_F::get_property( $featured, 'return_object=true' );
-      $image = wpp_get_image_link( $this_property->featured_image, $image_type, array( 'return' => 'array' ) );
-      $width = ( !empty( $image_size[ 'width' ] ) ? $image_size[ 'width' ] : ( !empty( $image[ 'width' ] ) ? $image[ 'width' ] : '' ) );
-      $height = ( !empty( $image_size[ 'height' ] ) ? $image_size[ 'height' ] : ( !empty( $image[ 'height' ] ) ? $image[ 'height' ] : '' ) );
+      
+      if( !empty( $this_property->featured_image ) ) {
+        $image = wpp_get_image_link( $this_property->featured_image, $image_type, array( 'return' => 'array' ) );
+        $width = ( !empty( $image_size[ 'width' ] ) ? $image_size[ 'width' ] : ( !empty( $image[ 'width' ] ) ? $image[ 'width' ] : '' ) );
+        $height = ( !empty( $image_size[ 'height' ] ) ? $image_size[ 'height' ] : ( !empty( $image[ 'height' ] ) ? $image[ 'height' ] : '' ) );
+      }
+      
       ?>
       <div class="property_widget_block clearfix" style="<?php echo( $width ? 'width: ' . ( $width + 5 ) . 'px;' : '' ); ?> min-height: <?php echo $height; ?>px;">
         <?php if ( $hide_image !== 'on' ) : ?>

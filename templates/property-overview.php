@@ -79,7 +79,7 @@
                     <?php foreach($property['children'] as $child): ?>
                     <tr class="property_child_row">
                         <th class="property_child_title"><a href="<?php echo $child['permalink']; ?>"><?php echo $child['post_title']; ?></a></th>
-                        <td class="property_child_price"><?php echo $child['price']; ?></td>
+                        <td class="property_child_price"><?php echo isset( $child['price'] ) ? $child['price'] : ''; ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </table>

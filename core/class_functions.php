@@ -3078,7 +3078,7 @@ class WPP_F extends UD_API {
       $result = WPP_F::get_cache( $instance_id );
     }
 
-    if( !$result ) {
+    if( empty( $result ) ) {
       $query_attributes = "";
       $query_types      = "";
 
@@ -4050,8 +4050,8 @@ class WPP_F extends UD_API {
       $return[ 'parent_title' ] = $parent_object[ 'post_title' ];
 
       // Inherit things
-      if( is_array( $wp_properties[ 'property_inheritance' ][ $return[ 'property_type' ] ] ) ) {
-        foreach( $wp_properties[ 'property_inheritance' ][ $return[ 'property_type' ] ] as $inherit_attrib ) {
+      if( !empty( $wp_properties[ 'property_inheritance' ][ $return[ 'property_type' ] ] ) ) {
+        foreach( (array)$wp_properties[ 'property_inheritance' ][ $return[ 'property_type' ] ] as $inherit_attrib ) {
           if( !empty( $parent_object[ $inherit_attrib ] ) && empty( $return[ $inherit_attrib ] ) ) {
             $return[ $inherit_attrib ] = $parent_object[ $inherit_attrib ];
           }
@@ -4071,6 +4071,8 @@ class WPP_F extends UD_API {
 
       if( count( $children ) > 0 ) {
 
+        $range = array();
+      
         //** Cycle through children and get necessary variables */
         foreach( $children as $child_id ) {
 
@@ -4090,7 +4092,7 @@ class WPP_F extends UD_API {
 
             $attribute_data = WPP_F::get_attribute_data( $searchable_attribute );
 
-            if( $attribute_data[ 'numeric' ] || $attribute_data[ 'currency' ] ) {
+            if( !empty( $attribute_data[ 'numeric' ] ) || !empty( $attribute_data[ 'currency' ] ) ) {
 
               if( !empty( $child_object[ $searchable_attribute ] ) && !in_array( $searchable_attribute, $excluded_attributes ) ) {
                 $range[ $searchable_attribute ][ ] = $child_object[ $searchable_attribute ];
@@ -4459,11 +4461,14 @@ class WPP_F extends UD_API {
       'property_stats' => $property_stats
     ) );
 
-    $image = wpp_get_image_link( $property[ 'featured_image' ], $map_image_type, array( 'return' => 'array' ) );
-
-    $imageHTML = "<img width=\"{$image['width']}\" height=\"{$image['height']}\" src=\"{$image['link']}\" alt=\"" . addslashes( $post->post_title ) . "\" />";
-    if( @$wp_properties[ 'configuration' ][ 'property_overview' ][ 'fancybox_preview' ] == 'true' && !empty( $property[ 'featured_image_url' ] ) ) {
-      $imageHTML = "<a href=\"{$property['featured_image_url']}\" class=\"fancybox_image thumbnail\">{$imageHTML}</a>";
+    if( !empty( $property[ 'featured_image' ] ) ) {
+      $image = wpp_get_image_link( $property[ 'featured_image' ], $map_image_type, array( 'return' => 'array' ) );
+      if( !empty( $image ) && is_array( $image ) ) {
+        $imageHTML = "<img width=\"{$image['width']}\" height=\"{$image['height']}\" src=\"{$image['link']}\" alt=\"" . addslashes( $post->post_title ) . "\" />";
+        if( @$wp_properties[ 'configuration' ][ 'property_overview' ][ 'fancybox_preview' ] == 'true' && !empty( $property[ 'featured_image_url' ] ) ) {
+          $imageHTML = "<a href=\"{$property['featured_image_url']}\" class=\"fancybox_image thumbnail\">{$imageHTML}</a>";
+        }
+      }
     }
 
     ob_start(); ?>
@@ -4477,7 +4482,7 @@ class WPP_F extends UD_API {
 
       <table cellpadding="0" cellspacing="0" class="wpp_google_maps_infobox_table" style="">
         <tr>
-          <?php if( $image[ 'link' ] ) { ?>
+          <?php if( !empty( $imageHTML ) ) { ?>
             <td class="wpp_google_maps_left_col" style=" width: <?php echo $image[ 'width' ]; ?>px">
               <?php echo $imageHTML; ?>
               <?php if( $infobox_settings[ 'show_direction_link' ] == 'true' ): ?>
@@ -4491,7 +4496,7 @@ class WPP_F extends UD_API {
           <?php } ?>
 
           <td class="wpp_google_maps_right_col" vertical-align="top" style="vertical-align: top;">
-            <?php if( !$image[ 'link' ] && $infobox_settings[ 'show_direction_link' ] == 'true' ) { ?>
+            <?php if( !empty( $imageHTML ) && $infobox_settings[ 'show_direction_link' ] == 'true' ) { ?>
               <div class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_directions_link">
                 <a target="_blank"
                   href="http://maps.google.com/maps?gl=us&daddr=<?php echo addslashes( str_replace( ' ', '+', $property[ 'formatted_address' ] ) ); ?>"

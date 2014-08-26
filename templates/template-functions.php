@@ -1542,7 +1542,10 @@ if ( !function_exists( 'wpp_get_image_link' ) ):
       'return' => 'string'
     );
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
-    if ( $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] == 'true' ) {
+    if ( 
+      isset( $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] ) 
+      && $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] == 'true' 
+    ) {
       //* If on-the-fly image generation is specifically disabled, we simply return the default URL */
       $default_return = wp_get_attachment_image_src( $attachment_id, $size, true );
       $i[ 0 ] = $default_return[ 0 ];
