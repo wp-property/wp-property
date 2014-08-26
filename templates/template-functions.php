@@ -1159,9 +1159,9 @@ if ( !function_exists( 'sort_stats_by_groups' ) ):
     }
 
     //** Get group deta */
-    $groups = $wp_properties[ 'property_groups' ];
+    $groups = isset( $wp_properties[ 'property_groups' ] ) ? $wp_properties[ 'property_groups' ] : false;
     /** Get attribute-group association */
-    $stats_groups = $wp_properties[ 'property_stats_groups' ];
+    $stats_groups = isset( $wp_properties[ 'property_stats_groups' ] ) ? $wp_properties[ 'property_stats_groups' ] : false;
 
     if ( !is_array( $groups ) || !is_array( $stats_groups ) ) {
       return false;

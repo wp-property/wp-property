@@ -1578,7 +1578,7 @@ class SearchPropertiesWidget extends WP_Widget {
         <div class="wpp_something_advanced_wrapper" style="margin-top: 10px;">
           <ul>
 
-            <?php if ( is_array( $wp_properties[ 'sortable_attributes' ] ) ) : ?>
+            <?php if ( isset( $wp_properties[ 'sortable_attributes' ] ) && is_array( $wp_properties[ 'sortable_attributes' ] ) ) : ?>
               <li class="wpp_development_advanced_option">
                 <div><label
                     for="<?php echo $this->get_field_id( 'sort_by' ); ?>"><?php _e( 'Default Sort Order', 'wpp' ); ?></label>
