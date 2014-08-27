@@ -480,7 +480,7 @@ if ( !function_exists( 'wpp_draw_pagination' ) ):
             return null;
           }
           document_ready = true;
-          max_slider_pos_<?php echo $unique_hash; ?> = <?php echo ($pages ? $pages : 'null'); ?>;
+          max_slider_pos_<?php echo $unique_hash; ?> = <?php echo !empty( $pages ) ? $pages : 'null'; ?>;
           //** Do not assign click event again */
           if ( !jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_back' ).data( 'events' ) ) {
             jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_back' ).click( function () {

@@ -3772,7 +3772,7 @@ class WPP_F extends UD_API {
         if( is_numeric( array_shift( $stack ) ) ) {
           //** get regular arrays (non associative) */
           $search_query = implode( ',', $search_query );
-        } elseif( is_array( $search_query[ 'options' ] ) ) {
+        } elseif( isset( $search_query[ 'options' ] ) && is_array( $search_query[ 'options' ] ) ) {
           //** Get queries with options */
           $search_query = implode( ',', $search_query[ 'options' ] );
         } elseif( in_array( 'min', array_keys( $search_query ) ) ||
