@@ -149,7 +149,7 @@
   </div><!-- #container -->
 <?php
   // Primary property-type sidebar.
-  if ( is_active_sidebar( "wpp_sidebar_" . $post->property_type ) ) : ?>
+  if ( isset( $post->property_type ) && is_active_sidebar( "wpp_sidebar_" . $post->property_type ) ) : ?>
 
     <div id="primary" class="<?php wpp_css('property::primary', "widget-area wpp_sidebar_{$post->property_type}"); ?>" role="complementary">
       <ul class="xoxo">

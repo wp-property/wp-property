@@ -1029,8 +1029,6 @@ class WPP_Core {
 
       $property = prepare_property_for_display( $property );
 
-      $type = $property[ 'property_type' ];
-
       //** Make certain variables available to be used within the single listing page */
       $single_page_vars = apply_filters( 'wpp_property_page_vars', array(
         'property' => $property,
@@ -1042,10 +1040,10 @@ class WPP_Core {
         $wp_query->query_vars = array_merge( $wp_query->query_vars, $single_page_vars );
       }
 
-      $template_found = WPP_F::get_template_part( array(
-        "property-{$type}",
+      $template_found = WPP_F::get_template_part( array_filter( array(
+        ( !empty( $property[ 'property_type' ] ) ? "property-{$property[ 'property_type' ]}" : false ),
         "property",
-      ), array( WPP_Templates ) );
+      ) ), array( WPP_Templates ) );
 
       //** Load the first found template */
       if ( $template_found ) {
