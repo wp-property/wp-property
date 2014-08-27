@@ -3073,8 +3073,6 @@ class WPP_F extends UD_API {
       'post_date' => 'date'
     );
     
-    $cache = false;
-    
     if( $instance_id && $cache ) {
       $result = WPP_F::get_cache( $instance_id );
     }
