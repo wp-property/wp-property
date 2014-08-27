@@ -5730,6 +5730,25 @@ class WPP_F extends UD_API {
     }
     return ( $ucfirst ? ucfirst( $post_status ) : $post_status );
   }
+  
+  /**
+   * Sanitizes data.
+   * Prevents shortcodes and XSS adding!
+   *
+   * @todo: remove the method since it's added in utility library.
+   * @author peshkov@UD
+   */
+  static public function sanitize_request( $data ) {
+    if( is_array( $data ) ) {
+      foreach( $data as $k => $v ) {
+        $data[ $k ] = self::sanitize_request( $v );
+      }
+    } else {
+      $data = strip_shortcodes( $data );
+      $data = filter_var( $data, FILTER_SANITIZE_STRING );
+    }
+    return $data;
+  }
 
 }
 

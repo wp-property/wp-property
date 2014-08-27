@@ -1,6 +1,6 @@
 {
   "name": "WP-Property",
-  "version": "1.38.2",
+  "version": "1.42.0",
   "type": "wordpress-plugin",
   "homepage": "http://github.com/UsabilityDynamics/wp-property",
   "authors": [
@@ -19,25 +19,14 @@
   ],
   "repositories": [
     {
-      "type": "package",
-      "package": {
-        "name": "usabilitydynamics/vendor",
-        "version": "0.1.0",
-        "dist": {
-          "url": "https://github.com/UsabilityDynamics/vendor/master.zip",
-          "type": "zip"
-        }
-      }
+      "type": "composer",
+      "url": "http://repository.usabilitydynamics.com"
     }
   ],
-  "config": {
-    "vendor-dir": "vendor",
-    "component-dir": "js/vendor"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UsabilityDynamics/wp-property.git"
   },
   "require": {
-    "usabilitydynamics/vendor": "*",
-    "linkorb/jsmin-php": "*",
-    "lampjunkie/php-datatables": "*",
-    "tecnick.com/tcpdf": "*"
   }
 }
