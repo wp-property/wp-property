@@ -13,11 +13,10 @@ class WPP_Object_List_Table extends WPP_List_Table {
   function __construct( $args = '' ) {
     $args = wp_parse_args( $args, array(
       'plural' => '',
-      'iColumns' => 3,
       'per_page' => 20,
       'iDisplayStart' => 0,
       'ajax_action' => 'wpp_ajax_list_table',
-      'current_screen' => '',
+      'screen' => '',
       'table_scope' => 'wpp_overview',
       'singular' => '',
       'ajax' => false

@@ -14,6 +14,12 @@ require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
  */
 class WPP_List_Table extends WP_List_Table {
 
+  public $aoColumns = array();
+  
+  public $aoColumnDefs = array();
+  
+  public $column_ids = array();
+
   public $table_scope;
 
   /**
@@ -26,7 +32,6 @@ class WPP_List_Table extends WP_List_Table {
   
     $args = wp_parse_args( $args, array(
       'plural' => '',
-      'iColumns' => 3,
       'per_page' => 20,
       'iDisplayStart' => 0,
       'ajax_action' => 'wpp_list_table', // Should be set in child class!
@@ -65,7 +70,6 @@ class WPP_List_Table extends WP_List_Table {
       $column_count++;
     }
 
-    $this->_args[ 'iColumns' ] = count( $this->aoColumns );
     $this->table_scope = $this->_args[ 'table_scope' ];
   }
 
@@ -395,8 +399,8 @@ class WPP_List_Table extends WP_List_Table {
     $result[ 0 ] = '';
     $result[ 1 ] = __( 'Nothing found.' );
 
-    if ( count( $result ) < $this->_args[ 'iColumns' ] ) {
-      $add_columns = ( $this->_args[ 'iColumns' ] - count( $result ) );
+    if ( count( $result ) < count( $this->aoColumns ) ) {
+      $add_columns = ( count( $this->aoColumns ) - count( $result ) );
       //** Add some blank rows to not break json result array */
       $i = 1;
       while ( $i <= $add_columns ) {
