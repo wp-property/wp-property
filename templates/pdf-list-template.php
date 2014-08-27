@@ -17,9 +17,10 @@ foreach ($wpp_property_stats as $key => $value) {
   }
 }
 $property_stats = @draw_stats( 'show_true_as_image=false&sort_by_groups=false&display=array&exclude=' . implode(',', $exclude_property_stats), $property );
-if(!empty($property_stats)) {
-  foreach ($property_stats as $label => $value) {
-    $info .= '<br/>'. $label .': '. $value;
+
+if(!empty( $property_stats ) && is_array( $property_stats ) ) {
+  foreach ($property_stats as $i => $d ) {
+    $info .= '<br/>'. $d[ 'label' ] .': '. $d[ 'value' ];
   }
 }
 
@@ -84,7 +85,7 @@ if (!empty($image)) {
   echo '<td width="2%">$nbsp;</td>';
   echo '<td width="25%"><b>'. $title .'</b>'.$info . '</td>';
   echo '<td width="2%">$nbsp;</td>';
-  echo '<td width="54%">'. $tagline . $descr .'</td>';
+  echo '<td width="54%">'. ( isset( $tagline ) ? $tagline : '' ) . $descr .'</td>';
   echo '<td width="2%">$nbsp;</td>';
   echo '</tr><tr>';
   echo '<td colspan="7" style="font-size:8px;height:8px;line-height:8px;">$nbsp;</td>';
@@ -96,7 +97,7 @@ if (!empty($image)) {
   echo '<td width="2%">$nbsp;</td>';
   echo '<td width="39%"><b>'. $title .'</b>'.$info . '</td>';
   echo '<td width="2%">$nbsp;</td>';
-  echo '<td width="54%">'. $tagline . $descr .'</td>';
+  echo '<td width="54%">'. ( isset( $tagline ) ? $tagline : '' ) . $descr .'</td>';
   echo '<td width="2%">$nbsp;</td>';
   echo '</tr><tr>';
   echo '<td colspan="5" style="font-size:8px;height:8px;line-height:8px;">$nbsp;</td>';

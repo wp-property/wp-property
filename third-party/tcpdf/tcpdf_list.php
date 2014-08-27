@@ -179,7 +179,7 @@ class TCPDF_List extends WPP_TCPDF {
    *
    */
   public function HexToRGB($hex) {
-    $hex = ereg_replace("#", "", $hex);
+    $hex = str_replace("#", "", $hex);
     $color = array();
 
     if(strlen($hex) == 3) {

@@ -246,6 +246,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * XML Importer. Fixed issue related to saving schedule with 50 and more xpath map's attributes.
 * XML Importer. Fixed importing empty values with line breaks.
 * PDF Flyer. Added paragraphs for description in PDF Flyer.
+* PDF Flyer. Improved PDF Lists management.
 * PDF Flyer. Refactored PDF Flyer generation.
 * PDF Flyer. Fixed the issue with primary and secondary images duplication.
 * PDF Flyer. Fixed values for checkbox attributes when enabled 'Show Checkboxed Image' option.
