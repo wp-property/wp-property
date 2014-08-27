@@ -1461,11 +1461,11 @@ class WPP_Core {
     //** Replace dynamic field values */
 
     //** Detect currently property for conditional in-shortcode usage that will be replaced from values */
-    if ( isset( $post ) ) {
+    if ( isset( $post ) && is_object( $post ) ) {
 
-      $dynamic_fields[ 'post_id' ] = $post->ID;
-      $dynamic_fields[ 'post_parent' ] = $post->parent_id;
-      $dynamic_fields[ 'property_type' ] = $post->property_type;
+      $dynamic_fields[ 'post_id' ] = isset( $post->ID ) ? $post->ID : 0;
+      $dynamic_fields[ 'post_parent' ] = isset( $post->parent_id ) ? $post->parent_id : 0;
+      $dynamic_fields[ 'property_type' ] = isset( $post->property_type ) ? $post->property_type : false;
 
       $dynamic_fields = apply_filters( 'shortcode_property_overview_dynamic_fields', $dynamic_fields );
 
@@ -1803,8 +1803,16 @@ class WPP_Core {
    */
   function properties_body_class( $classes ) {
     global $post, $wp_properties;
-
-    if ( strpos( $post->post_content, "property_overview" ) || ( is_search() && isset( $_REQUEST[ 'wpp_search' ] ) ) || ( $wp_properties[ 'configuration' ][ 'base_slug' ] == $post->post_name ) ) {
+    
+    if( !is_object( $post ) ) {
+      return $classes;
+    }
+    
+    if ( 
+      strpos( $post->post_content, "property_overview" ) 
+      || ( is_search() && isset( $_REQUEST[ 'wpp_search' ] ) ) 
+      || ( $wp_properties[ 'configuration' ][ 'base_slug' ] == $post->post_name ) 
+    ) {
       $classes[ ] = 'wp-property-listing';
     }
     return $classes;

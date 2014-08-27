@@ -3493,7 +3493,7 @@ class WPP_F extends UD_API {
           }
 
           //** If comma_and is set, $criteria is ignored, otherwise $criteria is used */
-          $property_type_array = is_array( $comma_and ) ? $comma_and : array( $specific );
+          $property_type_array = isset( $comma_and ) && is_array( $comma_and ) ? $comma_and : array( $specific );
 
           //** Make sure property type is in slug format */
           foreach( $property_type_array as $key => $this_property_type ) {
@@ -3504,7 +3504,7 @@ class WPP_F extends UD_API {
             }
           }
 
-          if( $comma_and ) {
+          if( !empty( $property_type_array ) ) {
             //** Multiple types passed */
             $where_string = implode( "' OR meta_value ='", $property_type_array );
           } else {

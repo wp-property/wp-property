@@ -349,7 +349,7 @@ class OtherPropertiesWidget extends WP_Widget {
     global $wp_properties;
     $title = isset( $instance[ 'title' ] ) ? esc_attr( $instance[ 'title' ] ) : '';
     $show_title = isset( $instance[ 'show_title' ] ) ? $instance[ 'show_title' ] : false;
-    $amount_items = empty( $instance[ 'amount_items' ] ) ? $instance[ 'amount_items' ] : 5;
+    $amount_items = !empty( $instance[ 'amount_items' ] ) ? $instance[ 'amount_items' ] : 5;
     $address_format = !empty( $instance[ 'address_format' ] ) ? $instance[ 'address_format' ] : '[street_number] [street_name], [city], [state]';
     $image_type = isset( $instance[ 'image_type' ] ) ? esc_attr( $instance[ 'image_type' ] ) : false;
     $property_stats = isset( $instance[ 'stats' ] ) ? $instance[ 'stats' ] : array();
@@ -1709,7 +1709,7 @@ class GalleryPropertiesWidget extends WP_Widget {
     $gallery = isset( $post->gallery ) ? (array)$post->gallery : ( isset( $property[ 'gallery' ] ) ? (array)$property[ 'gallery' ] : array() );
 
     $slideshow_order = maybe_unserialize( ( $post->slideshow_images ) ? $post->slideshow_images : $property[ 'slideshow_images' ] );
-    $gallery_order = maybe_unserialize( ( $post->gallery_images ) ? $post->gallery_images : $property[ 'gallery_images' ] );
+    $gallery_order = maybe_unserialize( !empty( $post->gallery_images ) ? $post->gallery_images : ( !empty( $property[ 'gallery_images' ] ) ? $property[ 'gallery_images' ] : false ) );
 
     //** Calculate order of images */
     if ( is_array( $slideshow_order ) || is_array( $gallery_order ) ) {

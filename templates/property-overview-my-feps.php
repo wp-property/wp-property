@@ -21,7 +21,7 @@ $thumbnail_dimentions = WPP_F::get_image_dimensions($wpp_query['thumbnail_size']
 
   <div class="<?php wpp_css('property_overview::row_view', 'wpp_row_view wpp_feps_row' ); ?>">
 
-  <?php foreach ( (array)returned_properties( 'load_gallery=false' ) as $property ): the_post(); ?>
+  <?php foreach ( (array)returned_properties( 'load_gallery=false' ) as $property ): /* the_post(); */ ?>
     <div class="<?php wpp_css('property_overview::property_div', 'property_div' ); ?>">
       <div class="<?php wpp_css('property_overview::left_column', 'wpp_overview_left_column' ); ?> " style="width:<?php echo $thumbnail_dimentions['width']+12; /* 12 is boubled image border */?>px; float:left; ">
         <?php property_overview_image(); ?>
