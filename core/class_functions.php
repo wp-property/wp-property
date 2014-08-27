@@ -1293,12 +1293,11 @@ class WPP_F extends UD_API {
       }
     }
 
-    if( is_array( $attachment_directories ) ) {
+    if( isset( $attachment_directories ) && is_array( $attachment_directories ) ) {
       $attachment_directories = array_unique( $attachment_directories );
       foreach( $attachment_directories as $dir ) {
         @rmdir( $dir );
       }
-
     }
 
   }
