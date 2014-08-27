@@ -3074,6 +3074,8 @@ class WPP_F extends UD_API {
       'post_date' => 'date'
     );
     
+    $cache = false;
+    
     if( $instance_id && $cache ) {
       $result = WPP_F::get_cache( $instance_id );
     }
@@ -3110,7 +3112,7 @@ class WPP_F extends UD_API {
         } else {
           $is_numeric = false;
         }
-
+        
         //** Check to see if this attribute has predefined values or if we have to get them from DB */
         //** If the attributes has predefind values, we use them */
         if( !empty( $wp_properties[ 'predefined_search_values' ][ $searchable_attribute ] ) ) {
@@ -3178,7 +3180,7 @@ class WPP_F extends UD_API {
 
           // Clean up values if a conversion exists
           $value = WPP_F::do_search_conversion( $searchable_attribute, trim( $value ) );
-
+          
           // Fix value with special chars. Disabled here, should only be done in final templating stage.
           // $value = htmlspecialchars($value, ENT_QUOTES);
 
@@ -3191,7 +3193,7 @@ class WPP_F extends UD_API {
           $range[ $searchable_attribute ][ $key ] = $value;
 
         }
-
+        
         //** Sort values */
         sort( $range[ $searchable_attribute ], SORT_REGULAR );
 
@@ -3240,7 +3242,7 @@ class WPP_F extends UD_API {
     }
     // Need to $conversion == '0' or else studios will not work, since they have 0 bedrooms
     $conversion = isset( $wp_properties[ 'search_conversions' ][ $attribute ][ $value ] ) ? $wp_properties[ 'search_conversions' ][ $attribute ][ $value ] : false;
-    if( $conversion == '0' || !empty( $conversion ) )
+    if( $conversion === '0' || !empty( $conversion ) )
       return $conversion;
 
     // Return value in case something messed up
