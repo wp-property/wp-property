@@ -233,12 +233,14 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Removed deprecated encode/decode mysql output functionality on post meta saving/getting.
 * Improved [property_attribute] shortcode.
 * Improved l10n (localization) script implementation, which reduces load time.
+* Updated localization files.
 * Fixed bug with saving shortcode with single quotes values in meta attribute's field.
 * Fixed reversed order of images for 'Property Gallery' widget.
 * Fixed duplicated images sizes issue.
 * Fixed address format display for 'Child Properties', 'Other Properties' and 'Latest Properties' widgets.
 * Fixed bug related to displaying attributes with the same labels.
 * Fixed capabilities issue.
+* Fixed Warnings and Notices.
 * XML Importer. Added debug log functionality for better troubleshooting issues.
 * XML Importer. Improved schedule's advanced options.
 * XML Importer. Fixed issue related to saving schedule with 50 and more xpath map's attributes.
@@ -254,8 +256,6 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * FEPS. Disabled 'required' option for 'images upload' attribute on FEPS form.
 * FEPS. Fixed bug with reset slideshow images on property update.
 * FEPS. Fixed bug with image removing.
-* Updated localization files.
-* Fixed Warnings and Notices.
 
 = 1.41.4 =
 * Added hooks to get_sortable_keys and get_properties functions.
