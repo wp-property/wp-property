@@ -54,7 +54,7 @@
                 <td><table cellspacing="0" cellpadding="10" border="0" class="bg-header" style="text-align:left;" width="100%">
                         <tr>
                             <td><span style="font-size:<?php echo $wpp_pdf_flyer[ 'font_size_header' ]; ?>px;"><b><?php echo $property[ 'post_title' ]; ?></b></span>
-                              <?php $tagline = $property[ 'tagline' ]; ?>
+                              <?php $tagline = isset( $property[ 'tagline' ] ) ? $property[ 'tagline' ] : ''; ?>
                               <?php if ( !empty( $wpp_pdf_flyer[ 'pr_tagline' ] ) && !empty( $tagline ) ) : ?>
                                 <br/>
                                 <span style="font-size:<?php echo $wpp_pdf_flyer[ 'font_size_content' ]; ?>px;color:#797979;"><?php echo $tagline ?></span>

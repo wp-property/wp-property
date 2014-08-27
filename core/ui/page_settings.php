@@ -207,7 +207,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
           <li><?php echo $using_custom_css ? WPP_F::checkbox( "name=wpp_settings[configuration][autoload_css]&label=" . __( 'Load default CSS. If unchecked, the wp-properties.css in your theme folder will not be loaded.', 'wpp' ), $wp_properties[ 'configuration' ][ 'autoload_css' ] ) : WPP_F::checkbox( "name=wpp_settings[configuration][autoload_css]&label=" . __( 'Load default CSS.', 'wpp' ), $wp_properties[ 'configuration' ][ 'autoload_css' ] ); ?></li>
           <?php if ( WPP_F::has_theme_specific_stylesheet() ) : ?>
             <li>
-              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_load_theme_specific_css]&label=" . __( 'Do not load theme-specific stylesheet.', 'wpp' ), $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] ); ?>
+              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_load_theme_specific_css]&label=" . __( 'Do not load theme-specific stylesheet.', 'wpp' ), isset( $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] ) ? $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] : false ); ?>
               <div class="description"><?php _e( 'This version of WP-Property has a stylesheet made specifically for the theme you are using.', 'wpp' ); ?></div>
             </li>
           <?php endif; /* WPP_F::has_theme_specific_stylesheet() */ ?>

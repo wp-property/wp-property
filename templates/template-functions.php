@@ -1566,7 +1566,7 @@ if ( !function_exists( 'wpp_get_image_link' ) ):
       $img_url = wp_get_attachment_url( $attachment_id );
       //** Filenme of image */
       $img_url_basename = wp_basename( $img_url );
-      if ( !empty( $image_meta[ 'sizes' ][ $size ][ 'file' ] ) ) {
+      if ( isset( $image_meta[ 'sizes' ][ $size ] ) && !empty( $image_meta[ 'sizes' ][ $size ][ 'file' ] ) ) {
         //** Image image meta exists, we get the path and URL to the requested image size */
         $requested_size_filepath = str_replace( $img_url_basename, $image_meta[ 'sizes' ][ $size ][ 'file' ], $attachment_path );
         $requested_image_url = str_replace( $img_url_basename, $image_meta[ 'sizes' ][ $size ][ 'file' ], $img_url );
