@@ -2851,13 +2851,13 @@ class WPP_F extends UD_API {
 
       }
 
-      // Remove features that are not found on disk
-      foreach( (array) $wp_properties[ 'installed_features' ] as $_slug => $data ) {
-
-        if( !in_array( $_slug, $_verified ) ) {
-          unset( $wp_properties[ 'installed_features' ][ $_slug ] );
+      //** Remove features that are not found on disk */
+      if( isset( $wp_properties[ 'installed_features' ] ) ) {
+        foreach( (array) $wp_properties[ 'installed_features' ] as $_slug => $data ) {
+          if( !in_array( $_slug, $_verified ) ) {
+            unset( $wp_properties[ 'installed_features' ][ $_slug ] );
+          }
         }
-
       }
 
     }
