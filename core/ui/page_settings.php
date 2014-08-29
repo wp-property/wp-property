@@ -85,25 +85,24 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <li><a href="#tab_main"><?php _e( 'Main', 'wpp' ); ?></a></li>
     <li><a href="#tab_display"><?php _e( 'Display', 'wpp' ); ?></a></li>
     <?php
-    if ( is_array( $wp_properties[ 'available_features' ] ) ) {
+    $wpp_plugin_settings_nav = apply_filters( 'wpp_settings_nav', array() );
 
-      $wpp_plugin_settings_nav = apply_filters( 'wpp_settings_nav', array() );
-
+    if( isset( $wp_properties[ 'available_features' ] ) && is_array( $wp_properties[ 'available_features' ] ) ) {
       foreach ( $wp_properties[ 'available_features' ] as $plugin ) {
         if ( @$plugin[ 'status' ] == 'disabled' ) {
           unset( $wpp_plugin_settings_nav[ $plugin ] );
         }
       }
+    }
 
-      if ( is_array( $wpp_plugin_settings_nav ) ) {
-        foreach ( $wpp_plugin_settings_nav as $nav ) {
-          echo "<li><a href='#tab_{$nav['slug']}'>{$nav['title']}</a></li>\n";
-        }
+    if ( is_array( $wpp_plugin_settings_nav ) ) {
+      foreach ( $wpp_plugin_settings_nav as $nav ) {
+        echo "<li><a href='#tab_{$nav['slug']}'>{$nav['title']}</a></li>\n";
       }
     }
     ?>
 
-    <?php if ( count( $wp_properties[ 'available_features' ] ) > 0 ): ?>
+    <?php if ( isset( $wp_properties[ 'available_features' ] ) && count( $wp_properties[ 'available_features' ] ) > 0 ): ?>
       <li><a href="#tab_plugins"><?php _e( 'Premium Features', 'wpp' ); ?></a></li>
     <?php endif; ?>
     <li><a href="#tab_troubleshooting"><?php _e( 'Help', 'wpp' ); ?></a></li>
@@ -451,20 +450,17 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     </table>
   </div>
 
-
-
   <?php
-
-  foreach ( (array) $wpp_plugin_settings_nav as $nav ) {
-    echo "<div id='tab_{$nav['slug']}'>";
-    do_action( "wpp_settings_content_{$nav['slug']}" );
-    echo "</div>";
+  if( isset( $wpp_plugin_settings_nav ) ) {
+    foreach ( (array) $wpp_plugin_settings_nav as $nav ) {
+      echo "<div id='tab_{$nav['slug']}'>";
+      do_action( "wpp_settings_content_{$nav['slug']}" );
+      echo "</div>";
+    }
   }
-
   ?>
 
-
-  <?php if ( count( $wp_properties[ 'available_features' ] ) > 0 ): ?>
+  <?php if ( isset( $wp_properties[ 'available_features' ] ) && count( $wp_properties[ 'available_features' ] ) > 0 ): ?>
     <div id="tab_plugins">
 
       <table id="wpp_premium_feature_table" cellpadding="0" cellspacing="0">
