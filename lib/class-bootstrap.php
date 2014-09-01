@@ -8,7 +8,7 @@ namespace UsabilityDynamics\WPP {
 
   if( !class_exists( 'UsabilityDynamics\WPP\Bootstrap' ) ) {
 
-    class Bootstrap extends UsabilityDynamics\WP\Bootstrap {
+    class Bootstrap extends \UsabilityDynamics\WP\Bootstrap {
     
       /**
        * Core object
@@ -25,7 +25,8 @@ namespace UsabilityDynamics\WPP {
        *
        * @todo: get rid of includes, - move to autoload. peshkov@UD
        */
-      private function init() {
+      public function init() {
+        global $wp_properties;
       
         $plugin_file = dirname( __DIR__ ) . '/wp-property.php';
         $plugin_data = get_file_data( $plugin_file, array(
@@ -36,8 +37,16 @@ namespace UsabilityDynamics\WPP {
         $this->version  = trim( $plugin_data[ 'Version' ] );
         $this->domain   = trim( $plugin_data[ 'TextDomain' ] );
         
-        /** Loads built-in plugin metadata and allows for third-party modification to hook into the filters. Has to be included here to run after template functions.php */
-        include_once WPP_Path . 'action_hooks.php';
+        //** Init Settings */
+        $this->settings = new Settings( array(
+          'key'  => 'wpp_settings',
+          'store'  => 'options',
+          'data' => array(
+            'version' => $this->version,
+            'domain' => $this->domain,
+          )
+        ));
+        
         /** Defaults filters and hooks */
         include_once WPP_Path . 'default_api.php';
         /** Loads general functions used by WP-Property */
@@ -57,16 +66,6 @@ namespace UsabilityDynamics\WPP {
         /** Load in hooks that deal with legacy and backwards-compat issues */
         include_once WPP_Path . 'core/class_legacy.php';
 
-        //** Init Settings */
-        $this->settings = new Settings( array(
-          'key'  => 'wpp_settings',
-          'store'  => 'options',
-          'data' => array(
-            'version' => $this->version,
-            'domain' => $this->domain,
-          )
-        ));
-        
         //** Register activation hook */
         register_activation_hook( $plugin_file, array( $this, 'activate' ) );
 
@@ -84,9 +83,9 @@ namespace UsabilityDynamics\WPP {
        * @action after_setup_theme
        * @author peshkov@UD
        */
-      private function after_setup_theme() {
+      public function after_setup_theme() {
         //** */
-        $this->core = new WPP_Core();
+        $this->core = new \WPP_Core();
       }
       
       /**

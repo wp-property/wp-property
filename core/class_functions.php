@@ -1508,51 +1508,6 @@ class WPP_F extends UsabilityDynamics\Utility {
   }
 
   /**
-   * Check permissions and ownership of premium folder.
-   *
-   * @since 1.13
-   *
-   */
-  static public function check_premium_folder_permissions() {
-    global $wp_messages;
-
-    // If folder is writable, it's all good
-    if( !is_writable( WPP_Premium . "/" ) )
-      $writable_issue = true;
-    else
-      return;
-
-    // If not writable, check if this is an ownerhsip issue
-    if( function_exists( 'posix_getuid' ) ) {
-      if( fileowner( WPP_Path ) != posix_getuid() )
-        $ownership_issue = true;
-    } else {
-      if( $writable_issue )
-        $wp_messages[ 'error' ][ ] = __( 'If you have problems automatically downloading premium features, it may be due to PHP not having ownership issues over the premium feature folder.', 'wpp' );
-    }
-
-    // Attempt to take ownership -> most likely will not work
-    if( $ownership_issue ) {
-      if( @chown( WPP_Premium, posix_getuid() ) ) {
-        //$wp_messages['error'][] = __('Succesfully took permission over premium folder.','wpp');
-        return;
-      } else {
-        $wp_messages[ 'error' ][ ] = __( 'There is an ownership issue with the premium folder, which means your site cannot download WP-Property premium features and receive updates.  Please contact your host to fix this - PHP needs ownership over the <b>wp-content/plugins/wp-property/core/premium</b> folder.  Be advised: changing the file permissions will not fix this.', 'wpp' );
-      }
-
-    }
-
-    if( !$ownership_issue && $writable_issue )
-      $wp_messages[ 'error' ][ ] = __( 'One of the folders that is necessary for downloading additional features for the WP-Property plugin is not writable.  This means features cannot be downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-property/core/premium</b> permissions to 0755.', 'wpp' );
-
-    if( $wp_messages )
-      return $wp_messages;
-
-    return false;
-
-  }
-
-  /**
    * Revalidate all addresses
    *
    * Revalidates addresses of all publishd properties.
@@ -1795,6 +1750,150 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     return $return;
+  }
+  
+  /**
+   * Returns location information from Google Maps API call
+   *
+   * @version 1.1
+   * @since 1.0.0
+   * @return object
+   */
+  static public function geo_locate_address( $address = false, $localization = "en", $return_obj_on_fail = false, $latlng = false ) {
+
+    if ( !$address && !$latlng ) {
+      return false;
+    }
+
+    if ( is_array( $address ) ) {
+      return false;
+    }
+
+    $return = new stdClass();
+
+    $address = urlencode( $address );
+
+    $url = str_replace( " ", "+", "http://maps.google.com/maps/api/geocode/json?" . ( ( is_array( $latlng ) ) ? "latlng={$latlng['lat']},{$latlng['lng']}" : "address={$address}" ) . "&sensor=true&language={$localization}" );
+
+    $obj = ( json_decode( wp_remote_fopen( $url ) ) );
+
+    if ( $obj->status != "OK" ) {
+
+      // Return Google result if needed instead of just false
+      if ( $return_obj_on_fail ) {
+        return $obj;
+      }
+
+      return false;
+
+    }
+
+    $results = $obj->results;
+    $results_object = $results[ 0 ];
+    $geometry = $results_object->geometry;
+
+    $return->formatted_address = $results_object->formatted_address;
+    $return->latitude = $geometry->location->lat;
+    $return->longitude = $geometry->location->lng;
+
+    // Cycle through address component objects picking out the needed elements, if they exist
+    foreach ( (array)$results_object->address_components as $ac ) {
+
+      // types is returned as an array, look through all of them
+      foreach ( (array)$ac->types as $type ) {
+        switch ( $type ) {
+
+          case 'street_number':
+            $return->street_number = $ac->long_name;
+            break;
+
+          case 'route':
+            $return->route = $ac->long_name;
+            break;
+
+          case 'locality':
+            $return->city = $ac->long_name;
+            break;
+
+          case 'administrative_area_level_3':
+            if ( empty( $return->city ) )
+              $return->city = $ac->long_name;
+            break;
+
+          case 'administrative_area_level_2':
+            $return->county = $ac->long_name;
+            break;
+
+          case 'administrative_area_level_1':
+            $return->state = $ac->long_name;
+            $return->state_code = $ac->short_name;
+            break;
+
+          case 'country':
+            $return->country = $ac->long_name;
+            $return->country_code = $ac->short_name;
+            break;
+
+          case 'postal_code':
+            $return->postal_code = $ac->long_name;
+            break;
+
+          case 'sublocality':
+            $return->district = $ac->long_name;
+            break;
+
+        }
+      }
+    }
+
+    //** API Callback */
+    $return = apply_filters( 'ud::geo_locate_address', $return, $results_object, $address, $localization );
+
+    //** API Callback (Legacy) - If no actions have been registered for the new hook, we support the old one. */
+    if ( !has_action( 'ud::geo_locate_address' ) ) {
+      $return = apply_filters( 'geo_locate_address', $return, $results_object, $address, $localization );
+    }
+
+    return $return;
+
+  }
+
+  /**
+   * Returns avaliability of Google's Geocoding Service based on time of last returned status OVER_QUERY_LIMIT
+   * @uses const self::blocking_for_new_validation_interval
+   * @uses option ud::geo_locate_address_last_OVER_QUERY_LIMIT
+   * @param type $update used to set option value in time()
+   * @return boolean
+   * @author odokienko@UD
+   */
+  static public function available_address_validation( $update = false ) {
+    global $wpdb;
+
+    if ( empty( $update ) ) {
+
+      $last_error = (int)get_option( 'ud::geo_locate_address_last_OVER_QUERY_LIMIT' );
+      if ( !empty( $last_error ) && ( time() - (int)$last_error ) < 2 ) {
+        sleep( 1 );
+      }
+      /*if (!empty($last_error) && (((int)$last_error + self::blocking_for_new_validation_interval ) > time()) ){
+        sleep(1);
+        //return false;
+      }else{
+        //** if last success validation was less than a seccond ago we will wait for 1 seccond
+        $last = $wpdb->get_var("
+          SELECT if(DATE_ADD(FROM_UNIXTIME(pm.meta_value), INTERVAL 1 SECOND) < NOW(), 0, UNIX_TIMESTAMP()-pm.meta_value) LAST
+          FROM {$wpdb->postmeta} pm
+          WHERE pm.meta_key='wpp::last_address_validation'
+          LIMIT 1
+        ");
+        usleep((int)$last);
+      }*/
+    } else {
+      update_option( 'ud::geo_locate_address_last_OVER_QUERY_LIMIT', time() );
+      return false;
+    }
+
+    return true;
   }
 
   /**

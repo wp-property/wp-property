@@ -685,8 +685,8 @@ class WPP_Core {
       }
     }
 
-    if ( (float) $update_data[ 'latitude' ] == 0 ) $update_data[ 'latitude' ] = '';
-    if ( (float) $update_data[ 'longitude' ] == 0 ) $update_data[ 'longitude' ] = '';
+    if ( !isset( $update_data[ 'latitude' ] ) || (float) $update_data[ 'latitude' ] == 0 ) $update_data[ 'latitude' ] = '';
+    if ( !isset( $update_data[ 'longitude' ] ) || (float) $update_data[ 'longitude' ] == 0 ) $update_data[ 'longitude' ] = '';
 
     /* get old coordinates and location */
     $old_lat = get_post_meta( $post_id, 'latitude', true );

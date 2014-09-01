@@ -1,25 +1,13 @@
 {
   "name": "WP-Property",
   "version": "2.0.0",
-  "type": "wordpress-plugin",
+  "type": "library",
+  "minimum-stability": "dev",
   "homepage": "http://github.com/UsabilityDynamics/wp-property",
-  "authors": [
-    {
-      "name": "Maxim Peshkov",
-      "email": "maxim.peshkov@usabilitydynamics.com",
-      "homepage": "http://usabilitydynamics.com"
-    },
-    {
-      "name": "Anton Korotkov",
-      "email": "anton.korotkov@usabilitydynamics.com",
-      "homepage": "http://usabilitydynamics.com"
-    },
-    {
-      "name": "Andy Potanin",
-      "email": "andy.potanin@usabilitydynamics.com",
-      "homepage": "http://usabilitydynamics.com"
-    },
-  ],
+  "author": {
+    "name": "UsabilityDynamics, Inc.",
+    "url": "https://usabilitydynamics.com/"
+  },
   "repositories": [
     {
       "type": "composer",
@@ -31,9 +19,10 @@
     "url": "https://github.com/UsabilityDynamics/wp-property.git"
   },
   "require": {
+    "php": ">=5.3",
     "usabilitydynamics/lib-settings": "master",
-    "UsabilityDynamics/lib-wp-bootstrap": "master",
-    "UsabilityDynamics/lib-ud-api-client": "master"
+    "usabilitydynamics/lib-wp-bootstrap": "master",
+    "usabilitydynamics/lib-ud-api-client": "master"
   },
   "autoload": {
     "classmap": [ "lib" ]

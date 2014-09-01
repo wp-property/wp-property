@@ -16,9 +16,6 @@
  * @copyright  2012 Usability Dyanmics, Inc.
  */
 
-//** Check if premium folder is writable */
-$wp_messages = WPP_F::check_premium_folder_permissions();
-
 $object_label = array(
   'singular' => WPP_F::property_label( 'singular' ),
   'plural' => WPP_F::property_label( 'plural' )
@@ -27,13 +24,11 @@ $object_label = array(
 $wrapper_classes = array( 'wpp_settings_page' );
 
 if ( isset( $_REQUEST[ 'message' ] ) ) {
-
+  $wp_messages = array();
   switch ( $_REQUEST[ 'message' ] ) {
-
     case 'updated':
       $wp_messages[ 'notice' ][ ] = __( "Settings updated.", 'wpp' );
       break;
-
   }
 }
 
@@ -86,28 +81,13 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <li><a href="#tab_display"><?php _e( 'Display', 'wpp' ); ?></a></li>
     <?php
     $wpp_plugin_settings_nav = apply_filters( 'wpp_settings_nav', array() );
-
-    if( isset( $wp_properties[ 'available_features' ] ) && is_array( $wp_properties[ 'available_features' ] ) ) {
-      foreach ( $wp_properties[ 'available_features' ] as $plugin ) {
-        if ( @$plugin[ 'status' ] == 'disabled' ) {
-          unset( $wpp_plugin_settings_nav[ $plugin ] );
-        }
-      }
-    }
-
     if ( is_array( $wpp_plugin_settings_nav ) ) {
       foreach ( $wpp_plugin_settings_nav as $nav ) {
         echo "<li><a href='#tab_{$nav['slug']}'>{$nav['title']}</a></li>\n";
       }
     }
     ?>
-
-    <?php if ( isset( $wp_properties[ 'available_features' ] ) && count( $wp_properties[ 'available_features' ] ) > 0 ): ?>
-      <li><a href="#tab_plugins"><?php _e( 'Premium Features', 'wpp' ); ?></a></li>
-    <?php endif; ?>
     <li><a href="#tab_troubleshooting"><?php _e( 'Help', 'wpp' ); ?></a></li>
-
-
   </ul>
 
   <div id="tab_main">
@@ -436,80 +416,6 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     }
   }
   ?>
-
-  <?php if ( isset( $wp_properties[ 'available_features' ] ) && count( $wp_properties[ 'available_features' ] ) > 0 ): ?>
-    <div id="tab_plugins">
-
-      <table id="wpp_premium_feature_table" cellpadding="0" cellspacing="0">
-      <?php foreach ( $wp_properties[ 'available_features' ] as $plugin_slug => $plugin_data ): ?>
-        <?php if( $plugin_slug == 'class_admin_tools' ) continue; ?>
-
-        <input type="hidden" name="wpp_settings[available_features][<?php echo $plugin_slug; ?>][title]" value="<?php echo $plugin_data[ 'title' ]; ?>"/>
-        <input type="hidden" name="wpp_settings[available_features][<?php echo $plugin_slug; ?>][tagline]" value="<?php echo $plugin_data[ 'tagline' ]; ?>"/>
-        <input type="hidden" name="wpp_settings[available_features][<?php echo $plugin_slug; ?>][image]" value="<?php echo $plugin_data[ 'image' ]; ?>"/>
-        <input type="hidden" name="wpp_settings[available_features][<?php echo $plugin_slug; ?>][description]" value="<?php echo $plugin_data[ 'description' ]; ?>"/>
-
-        <?php $installed = WPP_F::check_premium( $plugin_slug ); ?>
-        <?php $active = ( @$wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ] != 'false' ? true : false ); ?>
-
-        <?php if ( $installed ): ?>
-          <?php /* Do this to preserve settings after page save. */ ?>
-          <input type="hidden" name="wpp_settings[installed_features][<?php echo $plugin_slug; ?>][disabled]" value="<?php echo $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ]; ?>"/>
-          <input type="hidden" name="wpp_settings[installed_features][<?php echo $plugin_slug; ?>][name]" value="<?php echo $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'name' ]; ?>"/>
-          <input type="hidden" name="wpp_settings[installed_features][<?php echo $plugin_slug; ?>][version]" value="<?php echo $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ]; ?>"/>
-          <input type="hidden" name="wpp_settings[installed_features][<?php echo $plugin_slug; ?>][description]" value="<?php echo $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'description' ]; ?>"/>
-        <?php endif; ?>
-
-
-        <tr class="wpp_premium_feature_block">
-
-          <td valign="top" class="wpp_premium_feature_image">
-            <a href="http://usabilitydynamics.com/products/wp-property/"><img src="<?php echo $plugin_data[ 'image' ]; ?>"/></a>
-          </td>
-
-          <td valign="top">
-            <div class="wpp_box">
-            <div class="wpp_box_header">
-              <strong><?php echo $plugin_data[ 'title' ]; ?></strong>
-              <p><?php echo $plugin_data[ 'tagline' ]; ?>
-                <a href="https://usabilitydynamics.com/products/wp-property/premium/?wp_checkout_payment_domain=<?php echo $this_domain; ?>"><?php _e( '[purchase feature]', 'wpp' ) ?></a>
-              </p>
-            </div>
-            <div class="wpp_box_content">
-              <p><?php echo $plugin_data[ 'description' ]; ?></p>
-
-            </div>
-
-            <div class="wpp_box_footer clearfix">
-              <?php if ( $installed ) { ?>
-
-                <div class="alignleft">
-                <?php
-
-                if ( $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'needs_higher_wpp_version' ] == 'true' ) {
-                  printf( __( 'This feature is disabled because it requires WP-Property %1$s or higher.' ), $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'minimum_wpp_version' ] );
-                } else {
-                  echo WPP_F::checkbox( "name=wpp_settings[installed_features][$plugin_slug][disabled]&label=" . __( 'Disable plugin.', 'wpp' ), $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ] );
-
-                  ?>
-                  </div>
-                  <div class="alignright"><?php _e( 'Feature installed, using version', 'wpp' ) ?> <?php echo $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ]; ?>
-                    .</div>
-                <?php
-                }
-              } else {
-                $pr_link = 'https://usabilitydynamics.com/products/wp-property/premium/';
-                echo sprintf( __( 'Please visit <a href="%s">UsabilityDynamics.com</a> to purchase this feature.', 'wpp' ), $pr_link );
-              } ?>
-            </div>
-            </div>
-          </td>
-        </tr>
-      <?php endforeach; ?>
-      </table>
-
-  </div>
-  <?php endif; ?>
 
   <div id="tab_troubleshooting">
     <div class="wpp_inner_tab">
