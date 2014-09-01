@@ -9,7 +9,7 @@
  * @package WP-Property
  * @subpackage Functions
  */
-class WPP_F extends UD_API {
+class WPP_F extends UsabilityDynamics\Utility {
 
   /**
    * This function grabs the API key from UD's servers

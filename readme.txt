@@ -227,6 +227,12 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 
 == Changelog ==
 
+= 2.0.0 =
+* Added new plugin loader.
+* Added Composer dependency manager.
+* Moved premium features to separate plugins.
+* Refactored plugin's structure.
+
 = 1.42.0 =
 * Added strict search option for [property_search] shortcode and 'Property Search' widget.
 * Removed taxonomies metaboxes on edit property page for users who do not have capabilities.
