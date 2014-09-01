@@ -31,7 +31,9 @@
     "url": "https://github.com/UsabilityDynamics/wp-property.git"
   },
   "require": {
-    "usabilitydynamics/lib-settings": "master"
+    "usabilitydynamics/lib-settings": "master",
+    "UsabilityDynamics/lib-wp-bootstrap": "master",
+    "UsabilityDynamics/lib-ud-api-client": "master"
   },
   "autoload": {
     "classmap": [ "lib" ]

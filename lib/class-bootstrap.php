@@ -8,52 +8,24 @@ namespace UsabilityDynamics\WPP {
 
   if( !class_exists( 'UsabilityDynamics\WPP\Bootstrap' ) ) {
 
-    class Bootstrap {
+    class Bootstrap extends UsabilityDynamics\WP\Bootstrap {
     
       /**
-       * Core version.
-       *
-       * @static
-       * @property $version
-       * @type {Object}
-       */
-      public $version = false;
-
-      /**
-       * Textdomain String
-       *
-       * @public
-       * @property domain
-       * @var string
-       */
-      public $domain = false;
-
-      /**
-       * Singleton Instance Reference.
-       *
-       * @private
-       * @static
-       * @property $instance
-       * @type \UsabilityDynamics\WPP\Bootstrap object
-       */
-      private static $instance = null;
-
-      /**
-       * Singleton Instance Reference.
+       * Core object
        *
        * @private
        * @static
        * @property $settings
-       * @type \UsabilityDynamics\Settings object
+       * @type WPP_Core object
        */
-      private $settings = null;
-      
+      private $core = null;
+    
       /**
        * Instantaite class.
        *
        * @todo: get rid of includes, - move to autoload. peshkov@UD
        */
-      private function __construct() {
+      private function init() {
       
         $plugin_file = dirname( __DIR__ ) . '/wp-property.php';
         $plugin_data = get_file_data( $plugin_file, array(
@@ -96,13 +68,13 @@ namespace UsabilityDynamics\WPP {
         ));
         
         //** Register activation hook */
-        register_activation_hook( $plugin_file, array( 'WPP_F', 'activation' ) );
+        register_activation_hook( $plugin_file, array( $this, 'activate' ) );
 
         //** Register activation hook */
-        register_deactivation_hook( $plugin_file, array( 'WPP_F', 'deactivation' ) );
+        register_deactivation_hook( $plugin_file, array( $this, 'deactivate' ) );
 
         //** Initiate the plugin */
-        add_action( "after_setup_theme", array( $this, 'load' ) );
+        add_action( "after_setup_theme", array( $this, 'after_setup_theme' ) );
         
       }
       
@@ -112,40 +84,29 @@ namespace UsabilityDynamics\WPP {
        * @action after_setup_theme
        * @author peshkov@UD
        */
-      private function load() {
+      private function after_setup_theme() {
         //** */
-        new WPP_Core();
+        $this->core = new WPP_Core();
       }
       
       /**
-       * Determine if instance already exists and Return Instance
+       * Plugin Activation
        *
        */
-      public static function get_instance( $args = array() ) {
-        if( null === self::$instance ) {
-          self::$instance = new self();
-        }
-        return self::$instance;
+      public function activate() {
+        global $wp_rewrite;
+        //** Do close to nothing because only ran on activation, not updates, as of 3.1 */
+        //** Handled by WPP_F::manual_activation(). */
+        $wp_rewrite->flush_rules();
       }
       
       /**
-       * @param string $key
-       * @param mixed $value
+       * Plugin Deactivation
        *
-       * @return \UsabilityDynamics\Settings
        */
-      public function set( $key = null, $value = null ) {
-        return $this->settings->set( $key, $value );
-      }
-
-      /**
-       * @param string $key
-       * @param mixed $default
-       *
-       * @return \UsabilityDynamics\type
-       */
-      public function get( $key = null, $default = null ) {
-        return $this->settings->get( $key, $default );
+      public function deactivate() {
+        global $wp_rewrite;
+        $wp_rewrite->flush_rules();
       }
 
     }

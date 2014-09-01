@@ -108,7 +108,6 @@ class WPP_Core {
     add_action( 'wp_ajax_wpp_ajax_max_set_property_type', create_function( "", ' die(WPP_F::mass_set_property_type($_REQUEST["property_type"]));' ) );
     add_action( 'wp_ajax_wpp_ajax_property_query', create_function( "", ' $class = WPP_F::get_property(trim($_REQUEST["property_id"])); if($class) { echo "WPP_F::get_property() output: \n\n"; print_r($class); echo "\nAfter prepare_property_for_display() filter:\n\n"; print_r(prepare_property_for_display($class));  } else { echo __("No property found.","wpp"); } die();' ) );
     add_action( 'wp_ajax_wpp_ajax_image_query', create_function( "", ' $class = WPP_F::get_property_image_data($_REQUEST["image_id"]); if($class)  print_r($class); else echo __("No image found.","wpp"); die();' ) );
-    add_action( 'wp_ajax_wpp_ajax_check_plugin_updates', create_function( "", '  echo WPP_F::check_plugin_updates(); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_clear_cache', create_function( "", '  echo WPP_F::clear_cache(); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_revalidate_all_addresses', create_function( "", '  echo WPP_F::revalidate_all_addresses(); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_list_table', create_function( "", ' die(WPP_F::list_table());' ) );
@@ -161,9 +160,6 @@ class WPP_Core {
 
     //** Load admin header scripts */
     add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
-
-    //** Check premium feature availability */
-    add_action( 'wpp_premium_feature_check', array( 'WPP_F', 'feature_check' ) );
 
     //** Contextual Help */
     add_action( 'wpp_contextual_help', array( $this, 'wpp_contextual_help' ) );

@@ -116,29 +116,6 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
     <table class="form-table">
 
-    <tr>
-      <th><?php _e( 'Feature Updates', 'wpp' ); ?></th>
-      <td>
-
-        <p id="wpp_plugins_ajax_response" class="hidden"></p>
-
-        <div class="wpp_settings_block">
-          <input type="button" value="<?php _e( 'Check Updates', 'wpp' ); ?>" id="wpp_ajax_check_plugin_updates"/>
-          <?php _e( 'to download, or update, all premium features purchased for this domain.', 'wpp' ); ?>
-        </div>
-
-        <?php /* if( get_option('ud_api_key') ) { ?>
-        <div class="wpp_settings_block">
-          <label><?php _e('If a feature or service requires an API Key, you may change it here:','wpp');?>
-          <input size="70" type="text" readonly="true" value="<?php echo get_option('ud_api_key'); ?>" />
-          </label>
-        </div>
-        <?php } */
-        ?>
-
-      </td>
-    </tr>
-
       <tr>
       <th><?php _e( 'Options', 'wpp' ); ?></th>
       <td>

@@ -1,0 +1,8 @@
+{
+  "usabilitydynamics/lib-ui": {
+    "UsabilityDynamics\\UI\\Settings": "0.1.2"
+  },
+  "usabilitydynamics/lib-model": {
+    "UsabilityDynamics\\Model": "0.3.4"
+  }
+}
