@@ -228,10 +228,12 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 == Changelog ==
 
 = 2.0.0 =
-* Added new plugin loader.
-* Added Composer dependency manager.
+* Changed plugin initialization functionality.
+* Added Composer ( dependency manager ) modules and moved some functionality to composer modules ( vendors ).
 * Moved premium features to separate plugins.
-* Refactored plugin's structure.
+* Cleaned up functionality of plugin.
+* Refactored file structure of plugin.
+* Fixed Warnings and Notices.
 
 = 1.42.0 =
 * Added strict search option for [property_search] shortcode and 'Property Search' widget.
