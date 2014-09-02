@@ -1,0 +1,12 @@
+[
+  {
+    "name": "WP-Invoice",
+    "slug": "wp-invoice",
+    "required": true
+  },
+  {
+    "name": "WP-CRM",
+    "slug": "wp-crm",
+    "required": true
+  }
+]

@@ -47,6 +47,7 @@ namespace UsabilityDynamics\WPP {
             'key'  => 'wpp_settings',
             'store'  => 'options',
             'data' => array(
+              'name' => $this->name,
               'version' => $this->version,
               'domain' => $this->domain,
             )
@@ -91,7 +92,10 @@ namespace UsabilityDynamics\WPP {
       public function define_schemas() {
         $path = WPP_Path . 'static/schemas/';
         $this->schemas = array(
+          //** Autoload Classes versions dependencies for Composer Modules */
           'dependencies' => $path . 'schema.dependencies.json',
+          //** Plugins Requirements */
+          'plugins' => $path . 'schema.plugins.json',
         );
       }
       

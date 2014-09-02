@@ -22,8 +22,7 @@
     "php": ">=5.3",
     "usabilitydynamics/lib-settings": "master",
     "usabilitydynamics/lib-wp-bootstrap": "master",
-    "usabilitydynamics/lib-ud-api-client": "master",
-    "tgm/plugin-activation": "2.4.0"
+    "usabilitydynamics/lib-ud-api-client": "master"
   },
   "autoload": {
     "classmap": [ "lib/classes" ]
