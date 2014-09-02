@@ -79,7 +79,7 @@ namespace UsabilityDynamics\WPP {
           register_deactivation_hook( $plugin_file, array( $this, 'deactivate' ) );
 
           //** Initiate the plugin */
-          add_action( "after_setup_theme", array( $this, 'after_setup_theme' ) );
+          $this->core = new \WPP_Core();
         
         }
         
@@ -97,17 +97,6 @@ namespace UsabilityDynamics\WPP {
           //** Plugins Requirements */
           'plugins' => $path . 'schema.plugins.json',
         );
-      }
-      
-      /**
-       * Loads Plugin's functionality
-       *
-       * @action after_setup_theme
-       * @author peshkov@UD
-       */
-      public function after_setup_theme() {
-        //** */
-        $this->core = new \WPP_Core();
       }
       
       /**
