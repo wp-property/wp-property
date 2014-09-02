@@ -1,6 +1,6 @@
 <?php
   global $current_screen;
-  include WPP_Path . 'core/ui/class_wpp_object_list_table.php';
+  include WPP_Path . 'lib/ui/class_wpp_object_list_table.php';
 
   $wp_list_table = new WPP_Object_List_Table("per_page=25");
 

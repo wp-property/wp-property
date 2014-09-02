@@ -129,7 +129,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     global $wp_properties;
 
     /** Loads widgets */
-    include_once WPP_Path . 'core/class_widgets.php';
+    include_once WPP_Path . 'lib/class_widgets.php';
 
     if( class_exists( 'Property_Attributes_Widget' ) ) {
       register_widget( "Property_Attributes_Widget" );
@@ -2265,7 +2265,7 @@ class WPP_F extends UsabilityDynamics\Utility {
    * @author peshkov@UD
    */
   static public function set_cache( $name, $data ) {
-    $dir = WPP_Path . 'cache/';
+    $dir = WPP_Path . 'static/cache/';
     $file = $dir . MD5( $name ) . '.res';
     //** Try to create directory if it doesn't exist */
     if( !is_dir( $dir ) ) {
@@ -2285,7 +2285,7 @@ class WPP_F extends UsabilityDynamics\Utility {
    * @author peshkov@UD
    */
   static public function get_cache( $name, $live = 3600 ) {
-    $dir = WPP_Path . 'cache/';
+    $dir = WPP_Path . 'static/cache/';
     $file = $dir . MD5( $name ) . '.res';
     if( is_file( $file ) && time() - filemtime( $file ) < $live ) {
       $handle = fopen( $file, "r" );
@@ -2305,7 +2305,7 @@ class WPP_F extends UsabilityDynamics\Utility {
    * @author Maxim Peshkov
    */
   static public function clear_cache() {
-    $cache_dir = WPP_Path . 'cache/';
+    $cache_dir = WPP_Path . 'static/cache/';
     if( file_exists( $cache_dir ) ) {
       wpp_recursive_unlink( $cache_dir );
     }
@@ -2671,178 +2671,6 @@ class WPP_F extends UsabilityDynamics\Utility {
     //** Update global $post object to include property specific attributes */
     $post = (object) ( (array) $post + (array) $property );
 
-  }
-
-  /**
-   * Check for premium features and load them
-   *
-   * @updated 1.39.0
-   * @since 0.624
-   */
-  static public function load_premium() {
-    global $wp_properties;
-
-    $default_headers = array(
-      'name'         => 'Name',
-      'version'      => 'Version',
-      'description'  => 'Description',
-      'class'        => 'Class',
-      'slug'         => 'Slug',
-      'minimum.core' => 'Minimum Core Version',
-      'minimum.php'  => 'Minimum PHP Version',
-      'capability'   => 'Capability'
-    );
-
-    if( !is_dir( WPP_Premium ) )
-      return;
-
-    if( $premium_dir = opendir( WPP_Premium ) ) {
-
-      if( file_exists( WPP_Premium . "/index.php" ) ) {
-        @include_once( WPP_Premium . "/index.php" );
-      }
-
-      $_verified = array();
-
-      while( false !== ( $file = readdir( $premium_dir ) ) ) {
-
-        if( $file == 'index.php' )
-          continue;
-
-        if( end( @explode( ".", $file ) ) == 'php' ) {
-
-          $_upgraded = false;
-
-          $plugin_data = @get_file_data( WPP_Premium . "/" . $file, $default_headers, 'plugin' );
-
-          $plugin_slug = $plugin_data[ 'slug' ] ? $plugin_data[ 'slug' ] : str_replace( array( '.php' ), '', $file );
-
-          // Admin tools premium feature was moved to core. So it must not be loaded twice.
-          if( $plugin_slug == 'class_admin_tools' ) {
-            continue;
-          }
-          
-          if( !isset( $wp_properties[ 'installed_features' ][ $plugin_slug ] ) ) {
-            $wp_properties[ 'installed_features' ][ $plugin_slug ] = array();
-          }
-
-          if( 
-            !empty( $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ] ) 
-            && version_compare( $plugin_data[ 'version' ], $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ] ) > 0 
-          ) {
-            $_upgraded = true;
-          }
-
-          $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'name' ]        = $plugin_data[ 'name' ];
-          $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'version' ]     = $plugin_data[ 'version' ];
-          $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'description' ] = $plugin_data[ 'description' ];
-          $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'class' ]       = $plugin_data[ 'class' ] ? $plugin_data[ 'class' ] : $plugin_slug;
-
-          $_verified[] = $plugin_slug;
-
-          if( $plugin_data[ 'minimum.core' ] ) {
-            $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'minimum.core' ] = $plugin_data[ 'minimum.core' ];
-          }
-
-          // If feature has a Minimum Core Version and it is more than current version - we do not load
-          $feature_requires_upgrade = ( !empty( $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'minimum.core' ] ) && ( version_compare( WPP_Version, $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'minimum.core' ] ) < 0 ) ? true : false );
-
-          if( $feature_requires_upgrade ) {
-
-            //** Disable feature if it requires a higher WPP version**/
-
-            $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ]                 = 'true';
-            $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'needs_higher_wpp_version' ] = 'true';
-
-          } elseif( !isset( $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ] ) || $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ] != 'true' ) {
-
-            // Continue with loading feature...
-            $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'needs_higher_wpp_version' ] = 'false';
-
-            // Module requires a higher version of PHP than is available.
-            if( !$plugin_data[ 'minimum.php' ] || version_compare( PHP_VERSION, $plugin_data[ 'minimum.php' ] ) > 0 ) {
-
-              if( WP_DEBUG == true ) {
-                include_once( trailingslashit( WPP_Premium ) . $file );
-              } else {
-                @include_once( trailingslashit( WPP_Premium ) . $file );
-              }
-
-              // Initialize Module that declare a class.
-              if( $plugin_data[ 'class' ] && class_exists( $_class = $plugin_data[ 'class' ] ) ) {
-                $_instance = new $_class( $wp_properties, $plugin_data );
-
-                // Call Upgrade Method, if exists.
-                if( $_upgraded && is_callable( array( $_instance, 'upgrade' ) ) ) {
-                  $_instance->upgrade( $wp_properties );
-                }
-
-              }
-
-            }
-
-            // Disable plugin if class does not exists - file is empty
-            if( !$_class && !class_exists( $plugin_slug ) ) {
-              unset( $wp_properties[ 'installed_features' ][ $plugin_slug ] );
-            }
-
-            $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'disabled' ] = 'false';
-
-          } else {
-            //* This happens when feature cannot be loaded and is disabled */
-
-            //** We unset requires core upgrade in case feature was update while being disabled */
-            $wp_properties[ 'installed_features' ][ $plugin_slug ][ 'needs_higher_wpp_version' ] = 'false';
-
-          }
-
-        }
-
-      }
-
-      //** Remove features that are not found on disk */
-      if( isset( $wp_properties[ 'installed_features' ] ) ) {
-        foreach( (array) $wp_properties[ 'installed_features' ] as $_slug => $data ) {
-          if( !in_array( $_slug, $_verified ) ) {
-            unset( $wp_properties[ 'installed_features' ][ $_slug ] );
-          }
-        }
-      }
-
-    }
-
-
-  }
-
-  /**
-   * Check if premium feature is installed or not
-   *
-   * @param string $slug . Slug of premium feature
-   *
-   * @return boolean.
-   */
-  static public function check_premium( $slug ) {
-    global $wp_properties;
-
-    if( empty( $wp_properties[ 'installed_features' ][ $slug ][ 'version' ] ) ) {
-      return false;
-    }
-
-    $file = WPP_Premium . "/" . $slug . ".php";
-
-    $default_headers = array(
-      'Name'        => 'Name',
-      'Version'     => 'Version',
-      'Description' => 'Description'
-    );
-
-    $plugin_data = @get_file_data( $file, $default_headers, 'plugin' );
-
-    if( !is_array( $plugin_data ) || empty( $plugin_data[ 'Version' ] ) ) {
-      return false;
-    }
-
-    return true;
   }
 
   /**
@@ -4730,7 +4558,7 @@ class WPP_F extends UsabilityDynamics\Utility {
   static public function list_table() {
     global $current_screen;
 
-    include WPP_Path . 'core/ui/class_wpp_object_list_table.php';
+    include WPP_Path . 'lib/ui/class_wpp_object_list_table.php';
 
     //** Get the paramters we care about */
     $sEcho         = $_REQUEST[ 'sEcho' ];

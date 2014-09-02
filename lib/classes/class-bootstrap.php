@@ -28,7 +28,7 @@ namespace UsabilityDynamics\WPP {
       public function init() {
         global $wp_properties;
       
-        $plugin_file = dirname( __DIR__ ) . '/wp-property.php';
+        $plugin_file = dirname( dirname( __DIR__ ) ) . '/wp-property.php';
         $plugin_data = get_file_data( $plugin_file, array(
           'Version' => 'Version',
           'TextDomain' => 'Text Domain',
@@ -50,21 +50,21 @@ namespace UsabilityDynamics\WPP {
         /** Defaults filters and hooks */
         include_once WPP_Path . 'default_api.php';
         /** Loads general functions used by WP-Property */
-        include_once WPP_Path . 'core/class_functions.php';
+        include_once WPP_Path . 'lib/class_functions.php';
         /** Loads Admin Tools feature */
-        include_once WPP_Path . 'core/class_admin_tools.php';
+        include_once WPP_Path . 'lib/class_admin_tools.php';
         /** Loads export functionality */
-        include_once WPP_Path . 'core/class_property_export.php';
+        include_once WPP_Path . 'lib/class_property_export.php';
         /** Loads all the metaboxes for the property page */
-        include_once WPP_Path . 'core/ui/class_ui.php';
+        include_once WPP_Path . 'lib/ui/class_ui.php';
         /** Loads all the metaboxes for the property page */
-        include_once WPP_Path . 'core/class_core.php';
+        include_once WPP_Path . 'lib/class_core.php';
         /** Bring in the RETS library */
-        include_once WPP_Path . 'core/class_rets.php';
+        include_once WPP_Path . 'lib/class_rets.php';
         /** Load set of static methods for mail notifications */
-        include_once WPP_Path . 'core/class_mail.php';
+        include_once WPP_Path . 'lib/class_mail.php';
         /** Load in hooks that deal with legacy and backwards-compat issues */
-        include_once WPP_Path . 'core/class_legacy.php';
+        include_once WPP_Path . 'lib/class_legacy.php';
 
         //** Register activation hook */
         register_activation_hook( $plugin_file, array( $this, 'activate' ) );

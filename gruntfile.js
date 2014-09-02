@@ -28,19 +28,19 @@ module.exports = function( grunt ) {
           relativeUrls: true
         },
         files: {
-          'css/wpp.admin.css': [ 'css/src/wpp.admin.less' ],
-          'css/wpp.admin.data.tables.css': [ 'css/src/wpp.admin.data.tables.less' ],
-          'css/wpp.admin.jquery.ui.css': [ 'css/src/wpp.admin.jquery.ui.less' ],
+          'static/css/wpp.admin.css': [ 'static/css/src/wpp.admin.less' ],
+          'static/css/wpp.admin.data.tables.css': [ 'static/css/src/wpp.admin.data.tables.less' ],
+          'static/css/wpp.admin.jquery.ui.css': [ 'static/css/src/wpp.admin.jquery.ui.less' ],
           
-          'templates/wp_properties.css': [ 'css/src/wp_properties.less' ],
-          'templates/wp_properties-ie_7.css': [ 'css/src/wp_properties-ie_7.less' ],
-          'templates/wp_properties-msie.css': [ 'css/src/wp_properties-msie.less' ],
+          'static/templates/wp_properties.css': [ 'static/css/src/wp_properties.less' ],
+          'static/templates/wp_properties-ie_7.css': [ 'static/css/src/wp_properties-ie_7.less' ],
+          'static/templates/wp_properties-msie.css': [ 'static/css/src/wp_properties-msie.less' ],
           
-          'templates/theme-specific/denali.css': [ 'templates/theme-specific/src/denali.less' ],
-          'templates/theme-specific/fb_properties.css': [ 'templates/theme-specific/src/fb_properties.less' ],
-          'templates/theme-specific/twentyeleven.css': [ 'templates/theme-specific/src/twentyeleven.less' ],
-          'templates/theme-specific/twentyten.css': [ 'templates/theme-specific/src/twentyten.less' ],
-          'templates/theme-specific/twentytwelve.css': [ 'templates/theme-specific/src/twentytwelve.less' ]
+          'static/templates/theme-specific/denali.css': [ 'static/templates/theme-specific/src/denali.less' ],
+          'static/templates/theme-specific/fb_properties.css': [ 'static/templates/theme-specific/src/fb_properties.less' ],
+          'static/templates/theme-specific/twentyeleven.css': [ 'static/templates/theme-specific/src/twentyeleven.less' ],
+          'static/templates/theme-specific/twentyten.css': [ 'static/templates/theme-specific/src/twentyten.less' ],
+          'static/templates/theme-specific/twentytwelve.css': [ 'static/templates/theme-specific/src/twentytwelve.less' ]
         }
       },
       development: {
@@ -49,19 +49,19 @@ module.exports = function( grunt ) {
           relativeUrls: true
         },
         files: {
-          'css/wpp.admin.dev.css': [ 'css/src/wpp.admin.less' ],
-          'css/wpp.admin.data.tables.dev.css': [ 'css/src/wpp.admin.data.tables.less' ],
-          'css/wpp.admin.jquery.ui.dev.css': [ 'css/src/wpp.admin.jquery.ui.less' ],
+          'static/css/wpp.admin.dev.css': [ 'static/css/src/wpp.admin.less' ],
+          'static/css/wpp.admin.data.tables.dev.css': [ 'static/css/src/wpp.admin.data.tables.less' ],
+          'static/css/wpp.admin.jquery.ui.dev.css': [ 'static/css/src/wpp.admin.jquery.ui.less' ],
           
-          'templates/wp_properties.dev.css': [ 'css/src/wp_properties.less' ],
-          'templates/wp_properties-ie_7.dev.css': [ 'css/src/wp_properties-ie_7.less' ],
-          'templates/wp_properties-msie.dev.css': [ 'css/src/wp_properties-msie.less' ],
+          'static/templates/wp_properties.dev.css': [ 'static/css/src/wp_properties.less' ],
+          'static/templates/wp_properties-ie_7.dev.css': [ 'static/css/src/wp_properties-ie_7.less' ],
+          'static/templates/wp_properties-msie.dev.css': [ 'static/css/src/wp_properties-msie.less' ],
           
-          'templates/theme-specific/denali.dev.css': [ 'templates/theme-specific/src/denali.less' ],
-          'templates/theme-specific/fb_properties.dev.css': [ 'templates/theme-specific/src/fb_properties.less' ],
-          'templates/theme-specific/twentyeleven.dev.css': [ 'templates/theme-specific/src/twentyeleven.less' ],
-          'templates/theme-specific/twentyten.dev.css': [ 'templates/theme-specific/src/twentyten.less' ],
-          'templates/theme-specific/twentytwelve.dev.css': [ 'templates/theme-specific/src/twentytwelve.less' ]
+          'static/templates/theme-specific/denali.dev.css': [ 'static/templates/theme-specific/src/denali.less' ],
+          'static/templates/theme-specific/fb_properties.dev.css': [ 'static/templates/theme-specific/src/fb_properties.less' ],
+          'static/templates/theme-specific/twentyeleven.dev.css': [ 'static/templates/theme-specific/src/twentyeleven.less' ],
+          'static/templates/theme-specific/twentyten.dev.css': [ 'static/templates/theme-specific/src/twentyten.less' ],
+          'static/templates/theme-specific/twentytwelve.dev.css': [ 'static/templates/theme-specific/src/twentytwelve.less' ]
         }
       }
     },
@@ -77,8 +77,8 @@ module.exports = function( grunt ) {
           extension: '.js,.php',
           outdir: 'static/codex/',
           "paths": [
-            "./core",
-            "./js"
+            "./lib",
+            "./static/js"
           ]
         }
       }
@@ -91,11 +91,11 @@ module.exports = function( grunt ) {
         debounceDelay: 500
       },
       less: {
-        files: [ 'css/src/*.less' ],
+        files: [ 'static/css/src/*.less' ],
         tasks: [ 'less:production' ]
       },
       js: {
-        files: [ 'css/src/*' ],
+        files: [ 'static/css/src/*' ],
         tasks: [ 'uglify:production' ]
       }
     },
@@ -110,7 +110,7 @@ module.exports = function( grunt ) {
         files: [
           {
             expand: true,
-            cwd: 'js/src',
+            cwd: 'static/js/src',
             src: [ '*.js' ],
             dest: 'js'
           }
@@ -124,7 +124,7 @@ module.exports = function( grunt ) {
         files: [
           {
             expand: true,
-            cwd: 'js/src',
+            cwd: 'static/js/src',
             src: [ '*.js' ],
             dest: 'js'
           }
@@ -139,7 +139,7 @@ module.exports = function( grunt ) {
           {
             expand: true,
             src: 'readme.md',
-            dest: 'static/',
+            dest: 'static/codex',
             ext: '.html'
           }
         ],
@@ -158,10 +158,10 @@ module.exports = function( grunt ) {
     // Clean Directories.
     clean: {
       temp: [
-        "cache"
+        "static/cache"
       ],
       all: [
-        "cache",
+        "static/cache",
         "vendor",
         "composer.lock"
       ]

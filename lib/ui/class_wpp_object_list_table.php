@@ -6,7 +6,7 @@
  * @since 3.0
  * @access private
  */
-require_once( WPP_Path . 'core/class_list_table.php' );
+require_once( WPP_Path . 'lib/class_list_table.php' );
 
 class WPP_Object_List_Table extends WPP_List_Table {
 

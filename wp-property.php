@@ -37,11 +37,9 @@ if( !function_exists( 'get_wp_property' ) ) {
   /** Path for Includes */
   define( 'WPP_Path', plugin_dir_path( __FILE__ ) );
   /** Path for front-end links */
-  define( 'WPP_URL', plugin_dir_url( __FILE__ ) );
+  define( 'WPP_URL', plugin_dir_url( __FILE__ ) . 'static/' );
   /** Directory path for includes of template files  */
-  define( 'WPP_Templates', WPP_Path . 'templates' );
-  /** Directory path for includes of template files  */
-  define( 'WPP_Premium', WPP_Path . 'core/premium' );
+  define( 'WPP_Templates', WPP_Path . 'static/templates' );
 
   /**
    * Returns WP_Property object
