@@ -27,20 +27,9 @@ namespace UsabilityDynamics\WPP {
        */
       public function init() {
         global $wp_properties;
-      
-        $plugin_file = dirname( dirname( __DIR__ ) ) . '/wp-property.php';
-        $plugin_data = get_file_data( $plugin_file, array(
-          'Name' => 'Plugin Name',
-          'Version' => 'Version',
-          'TextDomain' => 'Text Domain',
-        ), 'plugin' );
-
-        $this->name  = trim( $plugin_data[ 'Name' ] );
-        $this->version  = trim( $plugin_data[ 'Version' ] );
-        $this->domain   = trim( $plugin_data[ 'TextDomain' ] );
         
         //** Be sure we do not have errors. Do not initialize plugin if we have them. */
-        if( empty( $this->errors ) ) {
+        if( !$this->has_errors() ) {
         
           //** Init Settings */
           $this->settings = new Settings( array(
@@ -71,13 +60,7 @@ namespace UsabilityDynamics\WPP {
           include_once WPP_Path . 'lib/class_mail.php';
           /** Load in hooks that deal with legacy and backwards-compat issues */
           include_once WPP_Path . 'lib/class_legacy.php';
-
-          //** Register activation hook */
-          register_activation_hook( $plugin_file, array( $this, 'activate' ) );
-
-          //** Register activation hook */
-          register_deactivation_hook( $plugin_file, array( $this, 'deactivate' ) );
-
+          
           //** Initiate the plugin */
           $this->core = new \WPP_Core();
         
@@ -86,7 +69,7 @@ namespace UsabilityDynamics\WPP {
       }
       
       /**
-       * Define schemas here since we can set correct paths directly in property
+       * Define property $schemas here since we can not set correct paths directly in property
        *
        */
       public function define_schemas() {
