@@ -32,15 +32,29 @@ if( !function_exists( 'ud_get_wp_property' ) ) {
   }
 
   /** This Version  */
-  define( 'WPP_Version', '2.0.0' );
+  if( !defined( 'WPP_Version' ) ) {
+    define( 'WPP_Version', '2.0.0' );
+  }
+
   /** Get Directory - not always wp-property */
-  define( 'WPP_Directory', dirname( plugin_basename( __FILE__ ) ) );
+  if( !defined( 'WPP_Directory' ) ) {
+    define( 'WPP_Directory', dirname( plugin_basename( __FILE__ ) ) );
+  }
+
   /** Path for Includes */
-  define( 'WPP_Path', plugin_dir_path( __FILE__ ) );
+  if( !defined( 'WPP_Path' ) ) {
+    define( 'WPP_Path', plugin_dir_path( __FILE__ ) );
+  }
+
   /** Path for front-end links */
-  define( 'WPP_URL', plugin_dir_url( __FILE__ ) . 'static/' );
+  if( !defined( 'WPP_URL' ) ) {
+    define( 'WPP_URL', plugin_dir_url( __FILE__ ) . 'static/' );
+  }
+
   /** Directory path for includes of template files  */
-  define( 'WPP_Templates', WPP_Path . 'static/templates' );
+  if( !defined( 'WPP_Templates' ) ) {
+    define( 'WPP_Templates', WPP_Path . 'static/templates' );
+  }
 
   /**
    * Returns WP_Property object
