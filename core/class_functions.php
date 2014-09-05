@@ -1134,7 +1134,7 @@ class WPP_F extends UD_API {
       return;
     }
 
-    if( $query->query_vars[ 'post_type' ] == 'property' ) {
+    if( isset( $query->query_vars[ 'post_type' ] ) && $query->query_vars[ 'post_type' ] == 'property' ) {
       $query->query_vars[ 'cache_results' ] = false;
     }
 
