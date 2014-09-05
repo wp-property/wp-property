@@ -2293,7 +2293,7 @@ class WPP_F extends UD_API {
       }
 
       //** Save code */
-      if( is_object( $r->code ) ) {
+      if( isset( $r ) && isset( $r->code ) && is_object( $r->code ) ) {
 
         foreach( $r->code as $code ) {
 
