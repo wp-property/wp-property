@@ -1,14 +1,14 @@
-Developed by the same people who brought you [WP-Invoice](http://wordpress.org/extend/plugins/wp-invoice/), comes WP-Property. As always, integration is seamless, the system is expandable and customizable, functionality is rich, and we are here to support it.
+### Composer Install
 
-[vimeo http://vimeo.com/14280748]
+To add WP-Property via ComposerJS to an existing project:
+```
+composer require usabilitydynamics/wp-property dev-master
+```
 
-This is not a "collection" of plugins, but one full suite. You will not have to download and match together a plethora of other plugins, in the hopes of them working well together, to have all the features you need.
-
-http://www.vimeo.com/14473894
-
-Check out our [premium WordPress real estate theme](https://usabilitydynamics.com/products/wp-property/the-denali-premium-theme/).
-
-Be sure to check out the  [WP-Property Forum](http://usabilitydynamics.com/products/wp-property/forum/) if you need help.
+For development, use following to checkout WP-Property and build:
+```
+composer create-project --stability=dev usabilitydynamics/wp-property
+```
 
 ### Features
 * New shortcode: [property_attribute] to pull a single attribute without using PHP. Example: [property_attribute attribute=bedrooms] will return the number of bedrooms for current property. [property_attribute property_id=4 attribute=bathrooms] will return the number of bathrooms for property with ID of 5.
