@@ -25,7 +25,7 @@
  *
  */
 
-if( !function_exists( 'get_wp_property' ) ) {
+if( !function_exists( 'ud_get_wp_property' ) ) {
 
   if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
     require_once ( __DIR__ . '/vendor/autoload.php' );
@@ -48,7 +48,7 @@ if( !function_exists( 'get_wp_property' ) ) {
    * @author peshkov@UD
    * @since 2.0.0
    */
-  function get_wp_property( $key = false, $default = null ) {
+  function ud_get_wp_property( $key = false, $default = null ) {
     if( class_exists( '\UsabilityDynamics\WPP\Bootstrap' ) ) {
       $instance = \UsabilityDynamics\WPP\Bootstrap::get_instance();
       return $key ? $instance->get( $key, $default ) : $instance;
@@ -59,4 +59,4 @@ if( !function_exists( 'get_wp_property' ) ) {
 }
 
 //** Initialize. */
-get_wp_property();
+ud_get_wp_property();

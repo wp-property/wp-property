@@ -8,7 +8,17 @@ namespace UsabilityDynamics\WPP {
 
   if( !class_exists( 'UsabilityDynamics\WPP\Bootstrap' ) ) {
 
-    class Bootstrap extends \UsabilityDynamics\WP\Bootstrap {
+    final class Bootstrap extends \UsabilityDynamics\WP\Bootstrap {
+    
+      /**
+       * Singleton Instance Reference.
+       *
+       * @protected
+       * @static
+       * @property $instance
+       * @type \UsabilityDynamics\WPP\Bootstrap object
+       */
+      protected static $instance = null;
     
       /**
        * Core object
@@ -30,7 +40,7 @@ namespace UsabilityDynamics\WPP {
         
         //** Be sure we do not have errors. Do not initialize plugin if we have them. */
         if( !$this->has_errors() ) {
-        
+          
           //** Init Settings */
           $this->settings = new Settings( array(
             'key'  => 'wpp_settings',
@@ -79,6 +89,8 @@ namespace UsabilityDynamics\WPP {
           'dependencies' => $path . 'schema.dependencies.json',
           //** Plugins Requirements */
           'plugins' => $path . 'schema.plugins.json',
+          //** Licenses */
+          'licenses' => $path . 'schema.licenses.json',
         );
       }
       
