@@ -31,21 +31,28 @@ namespace UsabilityDynamics\WPP {
       private $core = null;
       
       /**
+       * Constructor.
+       * MUST NOT BE CALLED DIRECTLY.
+       */
+      public function __construct( $args ) {
+        global $_ud_license_updater;
+        //** PARENT CONSTRCUTOR MUST BE CALL THE FIRST! */
+        parent::__construct( $args );
+        //** Licenses Manager */
+        $this->client = new \UsabilityDynamics\UD_API\Bootstrap( $this->args );
+      }
+      
+      /**
        * Instantaite class.
        *
        * @todo: get rid of includes, - move to autoload. peshkov@UD
        */
       public function init() {
         global $wp_properties;
-        global $_ud_license_updater;
         
         //** Be sure we do not have errors. Do not initialize plugin if we have them. */
         if( !$this->has_errors() ) {
         
-          //** Licenses Manager */
-          $this->client = new \UsabilityDynamics\UD_API\Bootstrap( $this->args );
-          $_ud_license_updater[ $this->plugin ] = $this->client;
-          
           //echo "<pre>"; print_r( $this ); echo "</pre>"; die();
           
           //** Init Settings */
