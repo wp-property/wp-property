@@ -69,10 +69,10 @@ module.exports = function( grunt ) {
     // Generate YUIDoc documentation.
     yuidoc: {
       compile: {
-        name: '<%= pkg.name %>',
-        description: '<%= pkg.description %>',
-        version: '<%= pkg.version %>',
-        url: '<%= pkg.homepage %>',
+        name: '<%= package.name %>',
+        description: '<%= package.description %>',
+        version: '<%= package.version %>',
+        url: '<%= package.homepage %>',
         options: {
           extension: '.js,.php',
           outdir: 'static/codex/',
@@ -162,7 +162,9 @@ module.exports = function( grunt ) {
       ],
       all: [
         "static/cache",
+        "cache",
         "vendor",
+        "node_modules",
         "composer.lock"
       ]
     },

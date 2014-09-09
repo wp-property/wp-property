@@ -26,5 +26,21 @@
   },
   "autoload": {
     "classmap": [ "lib/classes" ]
+  },
+  "scripts": {
+    "pre-install-cmd": [
+      "NODE_ENV=development npm install"
+    ]
+  },
+  "archive": {
+    "exclude": [
+      "node_modules",
+      ".gitignore",
+      "test",
+      "circle.yml",
+      "composer.lock",
+      "gruntfile.js",
+      "package.json"
+    ]
   }
 }

@@ -2,6 +2,10 @@
   "name": "wp-property",
   "version": "1.41.4",
   "description": "wp-property plugin",
+  "scripts": {
+    "test": "echo 'Tests not implemented.",
+    "install": "grunt install"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/UsabilityDynamics/wp-property"
