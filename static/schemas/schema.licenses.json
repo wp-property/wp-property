@@ -1,1 +1,6 @@
-{}
+{
+  "screen": {
+    "parent": "edit.php?post_type=property",
+    "title": "l10n.licenses"
+  }
+}

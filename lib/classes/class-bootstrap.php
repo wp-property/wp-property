@@ -31,18 +31,6 @@ namespace UsabilityDynamics\WPP {
       private $core = null;
       
       /**
-       * Constructor.
-       * MUST NOT BE CALLED DIRECTLY.
-       */
-      public function __construct( $args ) {
-        global $_ud_license_updater;
-        //** PARENT CONSTRCUTOR MUST BE CALL THE FIRST! */
-        parent::__construct( $args );
-        //** Licenses Manager */
-        $this->client = new \UsabilityDynamics\UD_API\Bootstrap( $this->args );
-      }
-      
-      /**
        * Instantaite class.
        *
        * @todo: get rid of includes, - move to autoload. peshkov@UD
@@ -106,6 +94,18 @@ namespace UsabilityDynamics\WPP {
           //** Licenses */
           'licenses' => $path . 'schema.licenses.json',
         );
+      }
+      
+      /**
+       * Return localization's list.
+       *
+       * @author peshkov@UD
+       * @return array
+       */
+      public function get_localization() {
+        return apply_filters( 'wpp::get_localization', array(
+          'licenses' => __( 'Licenses', $this->domain ),
+        ) );
       }
       
       /**
