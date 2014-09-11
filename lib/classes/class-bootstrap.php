@@ -104,7 +104,8 @@ namespace UsabilityDynamics\WPP {
        */
       public function get_localization() {
         return apply_filters( 'wpp::get_localization', array(
-          'licenses' => __( 'Licenses', $this->domain ),
+          'licenses_menu_title' => __( 'Licenses', $this->domain ),
+          'licenses_page_title' => __( 'WP-Property Licenses Manager', $this->domain ),
         ) );
       }
       

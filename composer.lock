@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e7dc810cd5ae79d9636145213c5ad402",
+    "hash": "2af6b5f054b69e79a685e2dc491f9b98",
     "packages": [
         {
             "name": "usabilitydynamics/lib-settings",
@@ -46,15 +46,15 @@
         },
         {
             "name": "usabilitydynamics/lib-ud-api-client",
-            "version": "master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:UsabilityDynamics/lib-ud-api-client",
-                "reference": "master"
+                "reference": "1.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/UsabilityDynamics/lib-ud-api-client/archive/master.zip",
+                "url": "https://github.com/UsabilityDynamics/lib-ud-api-client/archive/1.0.0.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -64,7 +64,7 @@
             "type": "library",
             "autoload": {
                 "classmap": [
-                    "lib"
+                    "lib/classes"
                 ]
             },
             "license": [
@@ -78,8 +78,7 @@
                 "licenses",
                 "plugins",
                 "wordpress"
-            ],
-            "time": "2014-09-05 16:55:34"
+            ]
         },
         {
             "name": "usabilitydynamics/lib-utility",
@@ -113,19 +112,19 @@
                     "lib"
                 ]
             },
-            "time": "2014-08-18 15:06:59"
+            "time": "2014-09-06 09:50:48"
         },
         {
             "name": "usabilitydynamics/lib-wp-bootstrap",
-            "version": "master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:UsabilityDynamics/lib-wp-bootstrap",
-                "reference": "master"
+                "reference": "1.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/master.zip",
+                "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.0.0.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -146,25 +145,16 @@
             "homepage": "https://github.com/UsabilityDynamics/lib-wp-bootstrap",
             "keywords": [
                 "wordpress"
-            ],
-            "time": "2014-09-05 13:58:48"
+            ]
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [
-
-    ],
+    "stability-flags": [],
     "prefer-stable": false,
     "platform": {
         "php": ">=5.3"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }

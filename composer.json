@@ -21,16 +21,11 @@
   "require": {
     "php": ">=5.3",
     "usabilitydynamics/lib-settings": "master",
-    "usabilitydynamics/lib-wp-bootstrap": "master",
-    "usabilitydynamics/lib-ud-api-client": "master"
+    "usabilitydynamics/lib-wp-bootstrap": "1.0.0",
+    "usabilitydynamics/lib-ud-api-client": "1.0.0"
   },
   "autoload": {
     "classmap": [ "lib/classes" ]
-  },
-  "scripts": {
-    "pre-install-cmd": [
-      "NODE_ENV=development npm install"
-    ]
   },
   "archive": {
     "exclude": [

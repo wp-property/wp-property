@@ -1,6 +1,7 @@
 {
   "screen": {
     "parent": "edit.php?post_type=property",
-    "title": "l10n.licenses"
+    "page_title": "l10n.licenses_page_title",
+    "menu_title": "l10n.licenses_menu_title"
   }
 }
