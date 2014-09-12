@@ -1414,7 +1414,7 @@ class WPP_Core {
       //** Merge defaults with passed arguments */
       $wpp_query = shortcode_atts( $defaults, $atts );
       $wpp_query[ 'query' ] = shortcode_atts( $queryable_keys, $atts );
-
+      
       //** Handle search */
       if ( !empty( $_REQUEST[ 'wpp_search' ] ) ) {
         $wpp_query[ 'query' ] = shortcode_atts( $wpp_query[ 'query' ], $_REQUEST[ 'wpp_search' ] );
@@ -1479,13 +1479,37 @@ class WPP_Core {
     //** Remove all blank values */
     $wpp_query[ 'query' ] = array_filter( $wpp_query[ 'query' ] );
 
+    //echo "<pre>"; print_r( $wpp_query ); echo "</pre>";
+    
     //** We add # to value which says that we don't want to use LIKE in SQL query for searching this value. */
     $required_strict_search = apply_filters( 'wpp::required_strict_search', array( 'wpp_agents' ) );
-    if( ( in_array( $wpp_query[ 'strict_search' ], array( 'true', 'on' ) ) && isset( $wp_properties[ 'property_stats' ][ $key ] ) ) || in_array( $key, $required_strict_search ) ) {
-      foreach ( $wpp_query[ 'query' ] as $key => $val ) {
-        if ( !key_exists( $key, $defaults ) && $key != 'property_type' ) {
-          if ( substr_count( $val, ',' ) || substr_count( $val, '&ndash;' ) || substr_count( $val, '--' ) ) {
+    $ignored_strict_search_field_types = apply_filters( 'wpp:ignored_strict_search_field_types', array( 'range_dropdown', 'range_input' ) );
+    foreach ( $wpp_query[ 'query' ] as $key => $val ) {
+      if ( !key_exists( $key, $defaults ) && $key != 'property_type' ) {
+        //** Be sure that the attribute exists of parameter is required for strict search */
+        if( 
+          ( in_array( $wpp_query[ 'strict_search' ], array( 'true', 'on' ) ) && isset( $wp_properties[ 'property_stats' ][ $key ] ) ) 
+          || in_array( $key, $required_strict_search ) 
+        ) {
+          /** 
+           * Ignore specific search attribute fields for strict search. 
+           * For example, range values must not be included to strict search. 
+           * Also, be sure to ignore list of values
+           */
+          if(
+            ( isset( $wp_properties[ 'searchable_attr_fields' ][ $key ] ) && in_array( $wp_properties[ 'searchable_attr_fields' ][ $key ], (array)$ignored_strict_search_field_types ) )
+            || substr_count( $val, ',' ) 
+            || substr_count( $val, '&ndash;' ) 
+            || substr_count( $val, '--' )
+          ) {
             continue;
+          } 
+          //** Determine if value contains range of numeric values, and ignore it, if so. */
+          elseif ( substr_count( $val, '-' ) ) {
+            $_val = explode( '-', $val );
+            if( count( $_val ) == 2 && is_numeric( $_val[0] ) && is_numeric( $_val[1] ) ) {
+              continue;
+            }
           }
           $wpp_query[ 'query' ][ $key ] = '#' . $val . '#';
         }
@@ -1496,6 +1520,8 @@ class WPP_Core {
     unset( $wpp_query[ 'query' ][ 'per_page' ] );
     unset( $wpp_query[ 'query' ][ 'pagination' ] );
     unset( $wpp_query[ 'query' ][ 'requested_page' ] );
+    
+    //echo "<pre>"; print_r( $wpp_query[ 'query' ] ); echo "</pre>"; die();
     
     //** Load the results */
     $wpp_query[ 'properties' ] = WPP_F::get_properties( $wpp_query[ 'query' ], true );

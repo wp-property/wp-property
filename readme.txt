@@ -3,8 +3,8 @@ Contributors: usability_dynamics, andypotanin, jbrw1984, maxim.peshkov, anton-ko
 Donate link: http://usabilitydynamics.com/products/wp-property/
 Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 3.6
-Tested up to: 3.9.2
-Stable tag: 1.42.0
+Tested up to: 4.0
+Stable tag: 1.42.1
 
 
 == Description ==
@@ -226,6 +226,9 @@ We are moving out of beta stages, but you may still experience bugs now and then
 We are still in early stages, so updates will be coming out routinely.  Please do not hesitate to send us feedback and suggestions.
 
 == Changelog ==
+
+= 1.42.1 =
+* Fixed property search for range input and range dropdown fields types.
 
 = 1.42.0 =
 * Added strict search option for [property_search] shortcode and 'Property Search' widget.
