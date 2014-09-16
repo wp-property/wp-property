@@ -81,22 +81,6 @@ namespace UsabilityDynamics\WPP {
       }
       
       /**
-       * Define property $schemas here since we can not set correct paths directly in property
-       *
-       */
-      public function define_schemas() {
-        $path = WPP_Path . 'static/schemas/';
-        $this->schemas = array(
-          //** Autoload Classes versions dependencies for Composer Modules */
-          'dependencies' => $path . 'schema.dependencies.json',
-          //** Plugins Requirements */
-          'plugins' => $path . 'schema.plugins.json',
-          //** Licenses */
-          'licenses' => $path . 'schema.licenses.json',
-        );
-      }
-      
-      /**
        * Return localization's list.
        *
        * @author peshkov@UD

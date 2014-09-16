@@ -180,35 +180,35 @@ class WPP_Core {
       wp_register_script( 'wpp-localization', WPP_URL . 'cache/l10n.js', array(), WPP_Version );
     }
     
-    wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'js/fancybox/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
-    wp_register_script( 'wpp-jquery-colorpicker', WPP_URL . 'js/colorpicker/colorpicker.js', array( 'jquery', 'wpp-localization' ) );
-    wp_register_script( 'wpp-jquery-easing', WPP_URL . 'js/fancybox/jquery.easing-1.3.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
-    wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'js/fileuploader.js', array( 'jquery', 'wpp-localization' ) );
-    wp_register_script( 'wp-property-admin-overview', WPP_URL . 'js/wpp.admin.overview.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-admin-widgets', WPP_URL . 'js/wpp.admin.widgets.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-admin-settings', WPP_URL . 'js/wpp.admin.settings.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-backend-global', WPP_URL . 'js/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-global', WPP_URL . 'js/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable' ), WPP_Version );
-    wp_register_script( 'jquery-cookie', WPP_URL . 'js/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
+    wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
+    wp_register_script( 'wpp-jquery-colorpicker', WPP_URL . 'scripts/colorpicker/colorpicker.js', array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'wpp-jquery-easing', WPP_URL . 'scripts/fancybox/jquery.easing-1.3.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
+    wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'scripts/fileuploader.js', array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'wp-property-admin-overview', WPP_URL . 'scripts/wpp.admin.overview.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-admin-widgets', WPP_URL . 'scripts/wpp.admin.widgets.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-admin-settings', WPP_URL . 'scripts/wpp.admin.settings.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-backend-global', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable' ), WPP_Version );
+    wp_register_script( 'jquery-cookie', WPP_URL . 'scripts/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
 
     if ( WPP_F::can_get_script( $scheme . '://maps.google.com/maps/api/js?sensor=true' ) ) {
       wp_register_script( 'google-maps', $scheme . '://maps.google.com/maps/api/js?sensor=true' );
     }
 
-    wp_register_script( 'wpp-md5', WPP_URL . 'js/md5.js', array( 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wpp-jquery-gmaps', WPP_URL . 'js/jquery.ui.map.min.js', array( 'google-maps', 'jquery-ui-core', 'jquery-ui-widget', 'wpp-localization' ) );
-    wp_register_script( 'wpp-jquery-nivo-slider', WPP_URL . 'js/jquery.nivo.slider.pack.js', array( 'jquery', 'wpp-localization' ) );
-    wp_register_script( 'wpp-jquery-address', WPP_URL . 'js/jquery.address-1.5.js', array( 'jquery', 'wpp-localization' ) );
-    wp_register_script( 'wpp-jquery-scrollTo', WPP_URL . 'js/jquery.scrollTo-min.js', array( 'jquery', 'wpp-localization' ) );
-    wp_register_script( 'wpp-jquery-validate', WPP_URL . 'js/jquery.validate.js', array( 'jquery', 'wpp-localization' ) );
-    wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'js/jquery.number.format.js', array( 'jquery', 'wpp-localization' ) );
-    wp_register_script( 'wpp-jquery-data-tables', WPP_URL . "js/dataTables/jquery.dataTables.js", array( 'jquery', 'wpp-localization' ) );
-    wp_register_script( 'wp-property-galleria', WPP_URL . 'js/galleria/galleria-1.2.5.js', array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'wpp-md5', WPP_URL . 'scripts/md5.js', array( 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wpp-jquery-gmaps', WPP_URL . 'scripts/jquery.ui.map.min.js', array( 'google-maps', 'jquery-ui-core', 'jquery-ui-widget', 'wpp-localization' ) );
+    wp_register_script( 'wpp-jquery-nivo-slider', WPP_URL . 'scripts/jquery.nivo.slider.pack.js', array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'wpp-jquery-address', WPP_URL . 'scripts/jquery.address-1.5.js', array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'wpp-jquery-scrollTo', WPP_URL . 'scripts/jquery.scrollTo-min.js', array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'wpp-jquery-validate', WPP_URL . 'scripts/jquery.validate.js', array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'scripts/jquery.number.format.js', array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'wpp-jquery-data-tables', WPP_URL . "scripts/dataTables/jquery.dataTables.js", array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'wp-property-galleria', WPP_URL . 'scripts/galleria/galleria-1.2.5.js', array( 'jquery', 'wpp-localization' ) );
 
-    wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'js/fancybox/jquery.fancybox-1.3.4.css' );
-    wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'js/colorpicker/colorpicker.css' );
-    wp_register_style( 'jquery-ui', WPP_URL . 'css/wpp.admin.jquery.ui.css' );
-    wp_register_style( 'wpp-jquery-data-tables', WPP_URL . "css/wpp.admin.data.tables.css" );
+    wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.css' );
+    wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'scripts/colorpicker/colorpicker.css' );
+    wp_register_style( 'jquery-ui', WPP_URL . 'styles/wpp.admin.jquery.ui.css' );
+    wp_register_style( 'wpp-jquery-data-tables', WPP_URL . "styles/wpp.admin.data.tables.css" );
 
     /** Find and register stylesheet  */
     if ( file_exists( STYLESHEETPATH . '/wp-properties.css' ) ) {
@@ -220,7 +220,7 @@ class WPP_Core {
     } elseif ( file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
       wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), WPP_Version );
     } elseif ( file_exists( WPP_Templates . '/wp_properties.css' ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-      wp_register_style( 'wp-property-frontend', WPP_URL . 'templates/wp_properties.css', array(), WPP_Version );
+      wp_register_style( 'wp-property-frontend', WPP_Templates . '/wp_properties.css', array(), WPP_Version );
 
       //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
       if ( 
@@ -228,7 +228,7 @@ class WPP_Core {
         $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] != 'true' && 
         WPP_F::has_theme_specific_stylesheet() 
       ) {
-        wp_register_style( 'wp-property-theme-specific', WPP_URL . "templates/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), WPP_Version );
+        wp_register_style( 'wp-property-theme-specific', WPP_Templates . "/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), WPP_Version );
       }
     }
 
@@ -238,7 +238,7 @@ class WPP_Core {
     } elseif ( file_exists( TEMPLATEPATH . '/wp_properties.js' ) ) {
       wp_register_script( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp-localization' ), WPP_Version, true );
     } elseif ( file_exists( WPP_Templates . '/wp_properties.js' ) ) {
-      wp_register_script( 'wp-property-frontend', WPP_URL . 'templates/wp_properties.js', array( 'jquery-ui-core', 'wpp-localization' ), WPP_Version, true );
+      wp_register_script( 'wp-property-frontend', WPP_Templates . '/wp_properties.js', array( 'jquery-ui-core', 'wpp-localization' ), WPP_Version, true );
     }
 
     //** Add troubleshoot log page */
@@ -400,18 +400,18 @@ class WPP_Core {
     }
 
     //** Automatically insert styles sheet if one exists with $current_screen->ID name */
-    if ( file_exists( WPP_Path . "static/css/{$current_screen->id}.css" ) ) {
-      wp_enqueue_style( $current_screen->id . '-style', WPP_URL . "/css/{$current_screen->id}.css", array(), WPP_Version, 'screen' );
+    if ( file_exists( WPP_Path . "static/styles/{$current_screen->id}.css" ) ) {
+      wp_enqueue_style( $current_screen->id . '-style', WPP_URL . "/styles/{$current_screen->id}.css", array(), WPP_Version, 'screen' );
     }
 
     //** Automatically insert JS sheet if one exists with $current_screen->ID name */
-    if ( file_exists( WPP_Path . "static/js/{$current_screen->id}.js" ) ) {
-      wp_enqueue_script( $current_screen->id . '-js', WPP_URL . "js/{$current_screen->id}.js", array( 'jquery' ), WPP_Version, 'wp-property-backend-global' );
+    if ( file_exists( WPP_Path . "static/scripts/{$current_screen->id}.js" ) ) {
+      wp_enqueue_script( $current_screen->id . '-js', WPP_URL . "scripts/{$current_screen->id}.js", array( 'jquery' ), WPP_Version, 'wp-property-backend-global' );
     }
 
     //** Enqueue CSS styles on all pages */
-    if ( file_exists( WPP_Path . 'static/css/wpp.admin.css' ) ) {
-      wp_register_style( 'wpp-admin-styles', WPP_URL . 'css/wpp.admin.css' );
+    if ( file_exists( WPP_Path . 'static/styles/wpp.admin.css' ) ) {
+      wp_register_style( 'wpp-admin-styles', WPP_URL . 'styles/wpp.admin.css' );
       wp_enqueue_style( 'wpp-admin-styles' );
     }
 
@@ -990,7 +990,7 @@ class WPP_Core {
         } elseif ( file_exists( TEMPLATEPATH . "/wp_properties-{$url_slug}.css" ) ) {
           wp_register_style( 'wp-property-frontend-' . $url_slug, get_bloginfo( 'template_url' ) . "/wp_properties-{$url_slug}.css", array( 'wp-property-frontend' ), '1.13' );
         } elseif ( file_exists( WPP_Templates . "/wp_properties-{$url_slug}.css" ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-          wp_register_style( 'wp-property-frontend-' . $url_slug, WPP_URL . "templates/wp_properties-{$url_slug}.css", array( 'wp-property-frontend' ), WPP_Version );
+          wp_register_style( 'wp-property-frontend-' . $url_slug, WPP_URL . "views/wp_properties-{$url_slug}.css", array( 'wp-property-frontend' ), WPP_Version );
         }
         // Mark every style as conditional
         $wp_styles->add_data( 'wp-property-frontend-' . $url_slug, 'conditional', $type );

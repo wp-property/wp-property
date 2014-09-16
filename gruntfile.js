@@ -20,6 +20,35 @@ module.exports = function( grunt ) {
     // Get Package.
     package: grunt.file.readJSON( 'composer.json' ),
 
+    // Locale.
+    pot: {
+      options:{
+        package_name: '{%= name %}',
+        package_version: '<%= package.version %>',
+        text_domain: '{%= text_domain %}',
+        dest: 'static/languages/',
+        keywords: [ 'gettext', 'ngettext:1,2' ]
+      },
+      files:{
+        src:  [ '**/*.php', 'lib/*.php' ],
+        expand: true
+      }
+    },
+    
+    // Documentation.
+    yuidoc: {
+      compile: {
+        name: '<%= package.name %>',
+        description: '<%= package.description %>',
+        version: '<%= package.version %>',
+        url: '<%= package.homepage %>',
+        options: {
+          paths: 'lib',
+          outdir: 'static/codex/'
+        }
+      }
+    },
+    
     // Compile Core and Template Styles.
     less: {
       production: {
@@ -28,19 +57,19 @@ module.exports = function( grunt ) {
           relativeUrls: true
         },
         files: {
-          'static/css/wpp.admin.css': [ 'static/css/src/wpp.admin.less' ],
-          'static/css/wpp.admin.data.tables.css': [ 'static/css/src/wpp.admin.data.tables.less' ],
-          'static/css/wpp.admin.jquery.ui.css': [ 'static/css/src/wpp.admin.jquery.ui.less' ],
+          'static/styles/wpp.admin.css': [ 'static/styles/src/wpp.admin.less' ],
+          'static/styles/wpp.admin.data.tables.css': [ 'static/styles/src/wpp.admin.data.tables.less' ],
+          'static/styles/wpp.admin.jquery.ui.css': [ 'static/styles/src/wpp.admin.jquery.ui.less' ],
           
-          'static/templates/wp_properties.css': [ 'static/css/src/wp_properties.less' ],
-          'static/templates/wp_properties-ie_7.css': [ 'static/css/src/wp_properties-ie_7.less' ],
-          'static/templates/wp_properties-msie.css': [ 'static/css/src/wp_properties-msie.less' ],
+          'static/views/wp_properties.css': [ 'static/styles/src/wp_properties.less' ],
+          'static/views/wp_properties-ie_7.css': [ 'static/styles/src/wp_properties-ie_7.less' ],
+          'static/views/wp_properties-msie.css': [ 'static/styles/src/wp_properties-msie.less' ],
           
-          'static/templates/theme-specific/denali.css': [ 'static/templates/theme-specific/src/denali.less' ],
-          'static/templates/theme-specific/fb_properties.css': [ 'static/templates/theme-specific/src/fb_properties.less' ],
-          'static/templates/theme-specific/twentyeleven.css': [ 'static/templates/theme-specific/src/twentyeleven.less' ],
-          'static/templates/theme-specific/twentyten.css': [ 'static/templates/theme-specific/src/twentyten.less' ],
-          'static/templates/theme-specific/twentytwelve.css': [ 'static/templates/theme-specific/src/twentytwelve.less' ]
+          'static/views/theme-specific/denali.css': [ 'static/views/theme-specific/src/denali.less' ],
+          'static/views/theme-specific/fb_properties.css': [ 'static/views/theme-specific/src/fb_properties.less' ],
+          'static/views/theme-specific/twentyeleven.css': [ 'static/views/theme-specific/src/twentyeleven.less' ],
+          'static/views/theme-specific/twentyten.css': [ 'static/views/theme-specific/src/twentyten.less' ],
+          'static/views/theme-specific/twentytwelve.css': [ 'static/views/theme-specific/src/twentytwelve.less' ]
         }
       },
       development: {
@@ -49,37 +78,19 @@ module.exports = function( grunt ) {
           relativeUrls: true
         },
         files: {
-          'static/css/wpp.admin.dev.css': [ 'static/css/src/wpp.admin.less' ],
-          'static/css/wpp.admin.data.tables.dev.css': [ 'static/css/src/wpp.admin.data.tables.less' ],
-          'static/css/wpp.admin.jquery.ui.dev.css': [ 'static/css/src/wpp.admin.jquery.ui.less' ],
+          'static/styles/wpp.admin.dev.css': [ 'static/styles/src/wpp.admin.less' ],
+          'static/styles/wpp.admin.data.tables.dev.css': [ 'static/styles/src/wpp.admin.data.tables.less' ],
+          'static/styles/wpp.admin.jquery.ui.dev.css': [ 'static/styles/src/wpp.admin.jquery.ui.less' ],
           
-          'static/templates/wp_properties.dev.css': [ 'static/css/src/wp_properties.less' ],
-          'static/templates/wp_properties-ie_7.dev.css': [ 'static/css/src/wp_properties-ie_7.less' ],
-          'static/templates/wp_properties-msie.dev.css': [ 'static/css/src/wp_properties-msie.less' ],
+          'static/views/wp_properties.dev.css': [ 'static/styles/src/wp_properties.less' ],
+          'static/views/wp_properties-ie_7.dev.css': [ 'static/styles/src/wp_properties-ie_7.less' ],
+          'static/views/wp_properties-msie.dev.css': [ 'static/styles/src/wp_properties-msie.less' ],
           
-          'static/templates/theme-specific/denali.dev.css': [ 'static/templates/theme-specific/src/denali.less' ],
-          'static/templates/theme-specific/fb_properties.dev.css': [ 'static/templates/theme-specific/src/fb_properties.less' ],
-          'static/templates/theme-specific/twentyeleven.dev.css': [ 'static/templates/theme-specific/src/twentyeleven.less' ],
-          'static/templates/theme-specific/twentyten.dev.css': [ 'static/templates/theme-specific/src/twentyten.less' ],
-          'static/templates/theme-specific/twentytwelve.dev.css': [ 'static/templates/theme-specific/src/twentytwelve.less' ]
-        }
-      }
-    },
-
-    // Generate YUIDoc documentation.
-    yuidoc: {
-      compile: {
-        name: '<%= package.name %>',
-        description: '<%= package.description %>',
-        version: '<%= package.version %>',
-        url: '<%= package.homepage %>',
-        options: {
-          extension: '.js,.php',
-          outdir: 'static/codex/',
-          "paths": [
-            "./lib",
-            "./static/js"
-          ]
+          'static/views/theme-specific/denali.dev.css': [ 'static/views/theme-specific/src/denali.less' ],
+          'static/views/theme-specific/fb_properties.dev.css': [ 'static/views/theme-specific/src/fb_properties.less' ],
+          'static/views/theme-specific/twentyeleven.dev.css': [ 'static/views/theme-specific/src/twentyeleven.less' ],
+          'static/views/theme-specific/twentyten.dev.css': [ 'static/views/theme-specific/src/twentyten.less' ],
+          'static/views/theme-specific/twentytwelve.dev.css': [ 'static/views/theme-specific/src/twentytwelve.less' ]
         }
       }
     },
@@ -91,11 +102,11 @@ module.exports = function( grunt ) {
         debounceDelay: 500
       },
       less: {
-        files: [ 'static/css/src/*.less' ],
+        files: [ 'static/styles/src/*.less' ],
         tasks: [ 'less:production' ]
       },
       js: {
-        files: [ 'static/css/src/*' ],
+        files: [ 'static/scripts/src/*' ],
         tasks: [ 'uglify:production' ]
       }
     },
@@ -110,9 +121,9 @@ module.exports = function( grunt ) {
         files: [
           {
             expand: true,
-            cwd: 'static/js/src',
+            cwd: 'static/scripts/src',
             src: [ '*.js' ],
-            dest: 'js'
+            dest: 'static/scripts'
           }
         ]
       },
@@ -124,9 +135,9 @@ module.exports = function( grunt ) {
         files: [
           {
             expand: true,
-            cwd: 'static/js/src',
+            cwd: 'static/scripts/src',
             src: [ '*.js' ],
-            dest: 'js'
+            dest: 'static/scripts'
           }
         ]
       }
@@ -158,30 +169,79 @@ module.exports = function( grunt ) {
     // Clean Directories.
     clean: {
       temp: [
-        "static/cache"
+        "static/cache",
+        "cache"
       ],
       all: [
         "static/cache",
         "cache",
-        "vendor",
-        "node_modules",
         "composer.lock"
       ]
     },
 
     // Execute Shell Commands.
     shell: {
-      install: {
-        command: 'composer install',
+      /**
+       * Build project
+       */
+      build: {
+        command: function( tag, build_type ) {
+          return [
+            'sh build.sh ' + tag + ' ' + build_type
+          ].join( ' && ' );
+        },
         options: {
+          encoding: 'utf8',
+          stderr: true,
           stdout: true
         }
       },
-      update: {
-        command: 'composer update',
+      /**
+       * Runs PHPUnit test, creates code coverage and sends it to Scrutinizer
+       */
+      coverageScrutinizer: {
+        command: [
+          'grunt phpunit:circleci --coverage-clover=coverage.clover',
+          'wget https://scrutinizer-ci.com/ocular.phar',
+          'php ocular.phar code-coverage:upload --format=php-clover coverage.clover'
+        ].join( ' && ' ),
         options: {
+          encoding: 'utf8',
+          stderr: true,
           stdout: true
         }
+      },
+      /**
+       * Runs PHPUnit test, creates code coverage and sends it to Code Climate
+       */
+      coverageCodeClimate: {
+        command: [
+          'grunt phpunit:circleci --coverage-clover build/logs/clover.xml',
+          'CODECLIMATE_REPO_TOKEN='+ process.env.CODECLIMATE_REPO_TOKEN + ' ./vendor/bin/test-reporter'
+        ].join( ' && ' ),
+        options: {
+          encoding: 'utf8',
+          stderr: true,
+          stdout: true
+        }
+      },
+      /**
+       * Composer Install
+       */
+      install: {
+        options: {
+          stdout: true
+        },
+        command: 'composer install --no-dev'
+      },
+      /**
+       * Composer Update
+       */
+      update: {
+        options: {
+          stdout: true
+        },
+        command: 'composer update --no-dev --prefer-source'
       }
     }
 

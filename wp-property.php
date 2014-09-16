@@ -53,7 +53,7 @@ if( !function_exists( 'ud_get_wp_property' ) ) {
 
   /** Directory path for includes of template files  */
   if( !defined( 'WPP_Templates' ) ) {
-    define( 'WPP_Templates', WPP_Path . 'static/templates' );
+    define( 'WPP_Templates', WPP_Path . 'static/views' );
   }
 
   /**

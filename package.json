@@ -2,22 +2,23 @@
   "name": "wp-property",
   "version": "1.41.4",
   "description": "wp-property plugin",
-  "scripts": {
-    "test": "echo 'Tests not implemented.",
-    "install": "grunt install"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/UsabilityDynamics/wp-property"
+  },
+  "homepage": "https://usabilitydynamics.com",
+  "author": {
+    "name": "UsabilityDynamics, Inc.",
+    "url": "https://usabilitydynamics.com"
   },
   "engines": {
     "node": ">= 0.10.0"
   },
   "dependencies": {
-    "load-grunt-tasks": "^0.6.0"
+    "load-grunt-tasks": "^0.6.0",
+    "grunt": "^0.4.5"
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-less": "~0.8.3",

@@ -24,6 +24,10 @@
     "usabilitydynamics/lib-wp-bootstrap": "1.0.0",
     "usabilitydynamics/lib-ud-api-client": "1.0.0"
   },
+  "require-dev": {
+    "usabilitydynamics/lib-wp-phpunit": "master",
+    "codeclimate/php-test-reporter": "dev-master"
+  },
   "autoload": {
     "classmap": [ "lib/classes" ]
   },
@@ -37,5 +41,30 @@
       "gruntfile.js",
       "package.json"
     ]
+  },
+  "extra": {
+    "schemas": {
+      "dependencies" : {
+        "modules": {
+          "usabilitydynamics/lib-utility": {
+            "\\UsabilityDynamics\\Utility": "0.3.4"
+          },
+          "usabilitydynamics/lib-settings": {
+            "\\UsabilityDynamics\\Settings": "0.2.2"
+          }
+        },
+        "plugins": []
+      },
+      "licenses" : {
+        "client" : {
+          "screen": {
+            "parent": "edit.php?post_type=property",
+            "page_title": "l10n.licenses_page_title",
+            "menu_title": "l10n.licenses_menu_title"
+          }
+        },
+        "product" : false
+      }
+    }
   }
 }
