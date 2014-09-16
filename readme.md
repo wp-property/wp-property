@@ -1,3 +1,19 @@
+### WP-Property Plugin
+
+Property and Real Estate Management Plugin for WordPress.  Create a directory of real estate / rental properties and integrate them into you WordPress CMS.
+
+***
+[![Issues - Bug](https://badge.waffle.io/usabilitydynamics/wp-property.png?label=bug&title=Bugs)](http://waffle.io/usabilitydynamics/wp-property)
+[![Issues - Backlog](https://badge.waffle.io/usabilitydynamics/wp-property.png?label=backlog&title=Backlog)](http://waffle.io/usabilitydynamics/wp-property/)
+[![Issues - Active](https://badge.waffle.io/usabilitydynamics/wp-property.png?label=in progress&title=Active)](http://waffle.io/usabilitydynamics/wp-property/)
+***
+[![Dependency Status](https://gemnasium.com/usabilitydynamics/wp-property.svg)](https://gemnasium.com/usabilitydynamics/wp-property)
+[![Scrutinizer Quality](http://img.shields.io/scrutinizer/g/usabilitydynamics/wp-property.svg)](https://scrutinizer-ci.com/g/usabilitydynamics/wp-property)
+[![Scrutinizer Coverage](http://img.shields.io/scrutinizer/coverage/g/usabilitydynamics/wp-property.svg)](https://scrutinizer-ci.com/g/usabilitydynamics/wp-property)
+[![Packagist Vesion](http://img.shields.io/packagist/v/usabilitydynamics/wp-property.svg)](https://packagist.org/packages/usabilitydynamics/wp-property)
+[![CircleCI](https://circleci.com/gh/usabilitydynamics/wp-property.png)](https://circleci.com/gh/usabilitydynamics/wp-property)
+***
+
 ### Installing via ComposerJS
 
 To add WP-Property via ComposerJS to an existing project:
