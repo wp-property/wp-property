@@ -4,7 +4,7 @@ Donate link: http://usabilitydynamics.com/products/wp-property/
 Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 3.6
 Tested up to: 3.9.2
-Stable tag: 1.42.0
+Stable tag: 1.42.1
 
 
 == Description ==
@@ -230,9 +230,15 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 = 2.0.0 =
 * Changed plugin initialization functionality.
 * Added Composer ( dependency manager ) modules and moved some functionality to composer modules ( vendors ).
+* Added PHP Unit, coverage and code quality tests.
+* Added distribution builder.
 * Moved premium features to separate plugins.
 * Cleaned up functionality of plugin.
 * Refactored file structure of plugin.
+* Fixed Warnings and Notices.
+
+= 1.42.1 =
+* Fixed property search for range input and range dropdown fields types.
 * Fixed Warnings and Notices.
 
 = 1.42.0 =

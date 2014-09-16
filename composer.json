@@ -1,12 +1,23 @@
 {
   "name": "usabilitydynamics/wp-property",
+  "description": "Property and Real Estate Management Plugin for WordPress.  Create a directory of real estate / rental properties and integrate them into you WordPress CMS.",
   "version": "2.0.0",
   "type": "plugin",
+  "license": "GPL2",
   "minimum-stability": "dev",
   "homepage": "http://github.com/UsabilityDynamics/wp-property",
   "author": {
     "name": "UsabilityDynamics, Inc.",
     "url": "https://usabilitydynamics.com/"
+  },
+  "keywords": [
+    "wordpress",
+    "realty",
+    "real estate"
+  ],
+  "support": {
+    "issues": "https://github.com/UsabilityDynamics/wp-property/issues",
+    "forum": "http://UsabilityDynamics/forum"
   },
   "repositories": [
     {
@@ -20,8 +31,9 @@
   },
   "require": {
     "php": ">=5.3",
+    "composer/installers": "~1.0",
     "usabilitydynamics/lib-settings": "master",
-    "usabilitydynamics/lib-wp-bootstrap": "1.0.0",
+    "usabilitydynamics/lib-wp-bootstrap": "1.0.1",
     "usabilitydynamics/lib-ud-api-client": "1.0.0"
   },
   "require-dev": {
