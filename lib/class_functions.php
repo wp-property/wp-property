@@ -528,7 +528,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     if( !class_exists( 'XML_Serializer' ) ) {
-      set_include_path( get_include_path() . PATH_SEPARATOR . WPP_Path . 'third-party/XML/' );
+      set_include_path( get_include_path() . PATH_SEPARATOR . WPP_Path . 'lib/third-party/XML/' );
       @require_once 'Serializer.php';
     }
 
@@ -1909,11 +1909,11 @@ class WPP_F extends UsabilityDynamics\Utility {
   static public function minify_js( $data ) {
 
     if( !class_exists( 'W3_Plugin' ) ) {
-      include_once WPP_Path . 'third-party/jsmin.php';
+      include_once WPP_Path . 'lib/third-party/jsmin.php';
     } elseif( file_exists( WP_PLUGIN_DIR . '/w3-total-cache/lib/Minify/JSMin.php' ) ) {
       include_once WP_PLUGIN_DIR . '/w3-total-cache/lib/Minify/JSMin.php';
     } else {
-      include_once WPP_Path . 'third-party/jsmin.php';
+      include_once WPP_Path . 'lib/third-party/jsmin.php';
     }
 
     if( class_exists( 'JSMin' ) ) {
@@ -1957,7 +1957,7 @@ class WPP_F extends UsabilityDynamics\Utility {
    */
   static public function minify_css( $data ) {
 
-    include_once WPP_Path . 'third-party/cssmin.php';
+    include_once WPP_Path . 'lib/third-party/cssmin.php';
 
     if( class_exists( 'CssMin' ) ) {
       try {

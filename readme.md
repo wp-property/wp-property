@@ -24,7 +24,7 @@ composer require usabilitydynamics/wp-property dev-master
 For development, use following to checkout WP-Property and build:
 ```
 composer create-project --stability=dev usabilitydynamics/wp-property
-``
+```
 
 ### Features
 * New shortcode: [property_attribute] to pull a single attribute without using PHP. Example: [property_attribute attribute=bedrooms] will return the number of bedrooms for current property. [property_attribute property_id=4 attribute=bathrooms] will return the number of bathrooms for property with ID of 5.

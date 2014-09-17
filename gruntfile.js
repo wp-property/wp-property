@@ -1,11 +1,11 @@
 /**
- * Build Plugin.
+ * Build Plugin
  *
- * @author potanin@UD
- * @version 1.2.1
+ * @author Usability Dynamics, Inc.
+ * @version 2.0.0
  * @param grunt
  */
-module.exports = function( grunt ) {
+module.exports = function build( grunt ) {
 
   // Automatically Load Tasks.
   require( 'load-grunt-tasks' )( grunt, {
@@ -14,42 +14,33 @@ module.exports = function( grunt ) {
     scope: 'devDependencies'
   });
 
-  // Build Configuration.
-  grunt.initConfig({
+  grunt.initConfig( {
 
-    // Get Package.
     package: grunt.file.readJSON( 'composer.json' ),
-
-    // Locale.
-    pot: {
-      options:{
-        package_name: '{%= name %}',
-        package_version: '<%= package.version %>',
-        text_domain: '{%= text_domain %}',
-        dest: 'static/languages/',
-        keywords: [ 'gettext', 'ngettext:1,2' ]
-      },
-      files:{
-        src:  [ '**/*.php', 'lib/*.php' ],
-        expand: true
-      }
-    },
     
-    // Documentation.
-    yuidoc: {
-      compile: {
-        name: '<%= package.name %>',
-        description: '<%= package.description %>',
-        version: '<%= package.version %>',
-        url: '<%= package.homepage %>',
+    markdown: {
+      all: {
+        files: [
+          {
+            expand: true,
+            src: 'readme.md',
+            dest: 'static/',
+            ext: '.html'
+          }
+        ],
         options: {
-          paths: 'lib',
-          outdir: 'static/codex/'
+          markdownOptions: {
+            gfm: true,
+            codeLines: {
+              before: '<span>',
+              after: '</span>'
+            }
+          }
         }
       }
     },
-    
-    // Compile Core and Template Styles.
+
+    // Compile LESS
     less: {
       production: {
         options: {
@@ -74,7 +65,6 @@ module.exports = function( grunt ) {
       },
       development: {
         options: {
-          yuicompress: false,
           relativeUrls: true
         },
         files: {
@@ -95,23 +85,25 @@ module.exports = function( grunt ) {
       }
     },
 
-    // Watch for Development.
     watch: {
       options: {
         interval: 100,
         debounceDelay: 500
       },
       less: {
-        files: [ 'static/styles/src/*.less' ],
-        tasks: [ 'less:production' ]
+        files: [
+          'static/styles/src/*.*'
+        ],
+        tasks: [ 'less' ]
       },
       js: {
-        files: [ 'static/scripts/src/*' ],
-        tasks: [ 'uglify:production' ]
+        files: [
+          'static/scripts/src/*.*'
+        ],
+        tasks: [ 'uglify' ]
       }
     },
 
-    // Minify Core and Template Scripts.
     uglify: {
       production: {
         options: {
@@ -127,7 +119,7 @@ module.exports = function( grunt ) {
           }
         ]
       },
-      development: {
+      staging: {
         options: {
           mangle: false,
           beautify: true
@@ -143,46 +135,19 @@ module.exports = function( grunt ) {
       }
     },
 
-    // Generate Markdown Documentation.
-    markdown: {
-      all: {
-        files: [
-          {
-            expand: true,
-            src: 'readme.md',
-            dest: 'static/codex',
-            ext: '.html'
-          }
-        ],
-        options: {
-          markdownOptions: {
-            gfm: true,
-            codeLines: {
-              before: '<span>',
-              after: '</span>'
-            }
-          }
-        }
-      }
-    },
-
-    // Clean Directories.
     clean: {
-      temp: [
-        "static/cache",
-        "cache"
+      update: [
+        "composer.lock"
       ],
       all: [
-        "static/cache",
-        "cache",
+        "vendor",
         "composer.lock"
       ]
     },
 
-    // Execute Shell Commands.
     shell: {
       /**
-       * Build project
+       * Build Distribution
        */
       build: {
         command: function( tag, build_type ) {
@@ -243,17 +208,47 @@ module.exports = function( grunt ) {
         },
         command: 'composer update --no-dev --prefer-source'
       }
+    },
+    
+    // Runs PHPUnit Tests
+    phpunit: {
+      classes: {},
+      options: {
+        bin: './vendor/bin/phpunit',
+      },
+      local: {
+        configuration: './test/php/phpunit.xml'
+      },
+      circleci: {
+        configuration: './test/php/phpunit-circle.xml'
+      }
     }
 
   });
 
-  // Register NPM Tasks.
-  grunt.registerTask( 'default', [ 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
+  // Register tasks
+  grunt.registerTask( 'default', [ 'markdown', 'less' , 'uglify' ] );
+  
+  // Build Distribution
+  grunt.registerTask( 'distribution', [ 'markdown' ] );
 
-  // Install Library.
-  grunt.registerTask( 'install', [ 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
-
-  // Prepare for Distribution.
-  grunt.registerTask( 'make-distribution', [ 'markdown', 'less:production', 'yuidoc', 'uglify:production' ] );
+  // Install|Update Environment
+  grunt.registerTask( 'install', [ "clean:all", "shell:install" ] );
+  grunt.registerTask( 'update', [ "clean:update", "shell:update" ] );
+  
+  // Run coverage tests
+  grunt.registerTask( 'testscrutinizer', [ 'shell:coverageScrutinizer' ] );
+  grunt.registerTask( 'testcodeclimate', [ 'shell:coverageCodeClimate' ] );
+  
+  // Test and Build
+  grunt.registerTask( 'localtest', [ 'phpunit:local' ] );
+  grunt.registerTask( 'test', [ 'phpunit:circleci' ] );
+  
+  // Build project
+  grunt.registerTask( 'build', 'Run all my build tasks.', function( tag, build_type ) {
+    if ( tag == null ) grunt.warn( 'Build tag must be specified, like build:1.0.0' );
+    if( build_type == null ) build_type = 'production';
+    grunt.task.run( 'shell:build:' + tag + ':' + build_type );
+  });
 
 };
