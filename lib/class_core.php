@@ -64,9 +64,6 @@ class WPP_Core {
     //** Init action hook */
     do_action( 'wpp_init' );
 
-    //** Load languages */
-    load_plugin_textdomain( 'wpp', false, basename( WPP_Path ) . '/static/languages' );
-
     /** Making template-functions global but load after the premium features, giving the premium features priority. */
     include_once WPP_Templates . '/template-functions.php';
 
