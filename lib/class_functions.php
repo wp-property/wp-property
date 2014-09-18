@@ -5455,6 +5455,14 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
     return $data;
   }
+  
+  /**
+   * @todo remove in future releases
+   * @deprecated
+   */
+  static public function feature_check() {
+    return false;
+  }
 
 }
 

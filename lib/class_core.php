@@ -748,29 +748,19 @@ class WPP_Core {
    */
   function post_submitbox_misc_actions() {
     global $post, $wp_properties;
-
     if ( $post->post_type == 'property' ) {
-
       ?>
       <div class="misc-pub-section ">
-
         <ul>
           <li><?php _e( 'Menu Sort Order:', 'wpp' ) ?> <?php echo WPP_F::input( "name=menu_order&special=size=4", $post->menu_order ); ?></li>
-
-          <?php if ( current_user_can( 'manage_options' ) && isset( $wp_properties[ 'configuration' ][ 'do_not_use' ][ 'featured' ] ) && $wp_properties[ 'configuration' ][ 'do_not_use' ][ 'featured' ] != 'true' ) { ?>
+          <?php if ( current_user_can( 'manage_options' ) ) { ?>
             <li><?php echo WPP_F::checkbox( "name=wpp_data[meta][featured]&label=" . __( 'Display in featured listings.', 'wpp' ), get_post_meta( $post->ID, 'featured', true ) ); ?></li>
           <?php } ?>
-
           <?php do_action( 'wpp_publish_box_options' ); ?>
         </ul>
-
       </div>
-    <?php
-
+      <?php
     }
-
-    return;
-
   }
 
   /**

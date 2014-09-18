@@ -57,7 +57,6 @@ module.exports = function build( grunt ) {
           'static/views/wp_properties-msie.css': [ 'static/styles/src/wp_properties-msie.less' ],
           
           'static/views/theme-specific/denali.css': [ 'static/views/theme-specific/src/denali.less' ],
-          'static/views/theme-specific/fb_properties.css': [ 'static/views/theme-specific/src/fb_properties.less' ],
           'static/views/theme-specific/twentyeleven.css': [ 'static/views/theme-specific/src/twentyeleven.less' ],
           'static/views/theme-specific/twentyten.css': [ 'static/views/theme-specific/src/twentyten.less' ],
           'static/views/theme-specific/twentytwelve.css': [ 'static/views/theme-specific/src/twentytwelve.less' ]
@@ -77,7 +76,6 @@ module.exports = function build( grunt ) {
           'static/views/wp_properties-msie.dev.css': [ 'static/styles/src/wp_properties-msie.less' ],
           
           'static/views/theme-specific/denali.dev.css': [ 'static/views/theme-specific/src/denali.less' ],
-          'static/views/theme-specific/fb_properties.dev.css': [ 'static/views/theme-specific/src/fb_properties.less' ],
           'static/views/theme-specific/twentyeleven.dev.css': [ 'static/views/theme-specific/src/twentyeleven.less' ],
           'static/views/theme-specific/twentyten.dev.css': [ 'static/views/theme-specific/src/twentyten.less' ],
           'static/views/theme-specific/twentytwelve.dev.css': [ 'static/views/theme-specific/src/twentytwelve.less' ]
