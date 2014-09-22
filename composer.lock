@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c347211eaf3b407089ce0bde8aaa8ce2",
+    "hash": "74eadc55b7baa300debd9631796add34",
     "packages": [
         {
             "name": "usabilitydynamics/lib-settings",
@@ -79,7 +79,7 @@
                 "plugins",
                 "wordpress"
             ],
-            "time": "2014-09-11 15:55:32"
+            "time": "2014-09-18 16:54:11"
         },
         {
             "name": "usabilitydynamics/lib-utility",
@@ -113,7 +113,7 @@
                     "lib"
                 ]
             },
-            "time": "2014-09-06 09:50:48"
+            "time": "2014-09-18 13:23:04"
         },
         {
             "name": "usabilitydynamics/lib-wp-bootstrap",
@@ -147,7 +147,7 @@
             "keywords": [
                 "wordpress"
             ],
-            "time": "2014-09-17 14:20:19"
+            "time": "2014-09-19 11:29:19"
         }
     ],
     "packages-dev": null,
