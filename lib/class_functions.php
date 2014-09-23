@@ -1499,7 +1499,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     $theme_slug = get_option( 'template' );
 
-    if( file_exists( WPP_Templates . "/theme-specific/{$theme_slug}.css" ) ) {
+    if( file_exists( WPP_Path . "static/styles/theme-specific/{$theme_slug}.css" ) ) {
       return true;
     }
 

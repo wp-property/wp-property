@@ -43,7 +43,7 @@ namespace UsabilityDynamics\WPP {
         ));
       
         /** Defaults filters and hooks */
-        include_once WPP_Path . 'default_api.php';
+        include_once WPP_Path . 'lib/default_api.php';
         /** Loads general functions used by WP-Property */
         include_once WPP_Path . 'lib/class_functions.php';
         /** Loads Admin Tools feature */
