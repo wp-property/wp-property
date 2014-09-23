@@ -4,7 +4,7 @@ Donate link: http://usabilitydynamics.com/products/wp-property/
 Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 3.6
 Tested up to: 3.9.2
-Stable tag: 1.42.1
+Stable tag: 2.0.0
 
 
 == Description ==
@@ -235,6 +235,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Moved premium features to separate plugins.
 * Cleaned up functionality of plugin.
 * Refactored file structure of plugin.
+* Fixed option 'Display in featured listings' on edit property page.
 * Fixed Warnings and Notices.
 
 = 1.42.1 =
