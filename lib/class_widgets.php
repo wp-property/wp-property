@@ -1344,7 +1344,7 @@ class SearchPropertiesWidget extends WP_Widget {
       $search_args[ 'use_pagination' ] = 'on';
     } else {
       $search_args[ 'use_pagination' ] = 'off';
-      $search_args[ 'per_page' ] = $instance[ 'per_page' ];
+      $search_args[ 'per_page' ] = isset( $instance[ 'per_page' ] ) ? $instance[ 'per_page' ] : false;
     }
 
     $search_args[ 'instance_id' ] = $widget_id;

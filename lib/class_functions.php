@@ -2479,7 +2479,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     }
 
-    if( !is_array( $return ) ) {
+    if( !isset( $return ) || !is_array( $return ) ) {
       return;
     }
 
