@@ -1,0 +1,149 @@
+[
+    {
+        "name": "usabilitydynamics/lib-utility",
+        "version": "master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-utility",
+            "reference": "master"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/usabilitydynamics/lib-utility/archive/master.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.1.*"
+        },
+        "type": "library",
+        "extra": {
+            "installer-name": "lib-utility",
+            "component": {
+                "name": "utility",
+                "scripts": [
+                    "scripts/*.js"
+                ]
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "lib"
+            ]
+        }
+    },
+    {
+        "name": "usabilitydynamics/lib-settings",
+        "version": "master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-settings",
+            "reference": "master"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/usabilitydynamics/lib-settings/archive/master.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "require": {
+            "usabilitydynamics/lib-utility": "*"
+        },
+        "require-dev": {
+            "justinrainbow/json-schema": "1.1.*"
+        },
+        "type": "library",
+        "extra": {
+            "component": {
+                "scripts": [
+                    "scripts/settings.js"
+                ],
+                "templates": [
+                    "views/new-installation.xhtml"
+                ]
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "lib"
+            ]
+        }
+    },
+    {
+        "name": "usabilitydynamics/lib-wp-bootstrap",
+        "version": "master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-wp-bootstrap",
+            "reference": "master"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/master.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "require": {
+            "php": ">=5.3",
+            "usabilitydynamics/lib-utility": "master"
+        },
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "lib/classes"
+            ]
+        },
+        "license": [
+            "GPLv2"
+        ],
+        "description": "Wordpress bootstrap library created by UsabilityDynamics",
+        "homepage": "https://github.com/UsabilityDynamics/lib-wp-bootstrap",
+        "keywords": [
+            "wordpress"
+        ]
+    },
+    {
+        "name": "usabilitydynamics/lib-ud-api-client",
+        "version": "master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-ud-api-client",
+            "reference": "master"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-ud-api-client/archive/master.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "require": {
+            "php": ">=5.3"
+        },
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "lib/classes"
+            ]
+        },
+        "license": [
+            "GPLv2"
+        ],
+        "description": "UD API Client for WooCommerce API Manager",
+        "homepage": "https://github.com/UsabilityDynamics/lib-ud-api-client",
+        "keywords": [
+            "api",
+            "client",
+            "licenses",
+            "plugins",
+            "wordpress"
+        ]
+    }
+]
