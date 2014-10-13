@@ -703,6 +703,8 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
       return;
     }
 
+    $_args = is_array( $args ) ? http_build_query( $args ) : (string) $args;
+    
     /* Used to apply different filters depending on where the attribute is displayed. i.e. google_map_infobox  */
     $attribute_scope = ( !empty( $args[ 'scope' ] ) ) ? $args[ 'scope' ] : false;
 
@@ -727,11 +729,11 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
     if ( is_array( $property ) && isset( $property[ 'system' ][ 'prepared_for_display' ] ) ) {
       return $property;
     }
-
+    
     //** Load property from cache, or function, if not passed */
     if ( !is_array( $property ) ) {
-
-      if ( $cache_property = wp_cache_get( 'property_for_display_' . $property_id ) ) {
+    
+      if ( $cache_property = wp_cache_get( md5( 'display_' . $property_id . $_args ) ) ) {
         return $cache_property;
       }
 
@@ -771,7 +773,7 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
 
     $property[ 'system' ][ 'prepared_for_display' ] = true;
 
-    wp_cache_add( 'property_for_display_' . $property_id, $property );
+    wp_cache_add( md5( 'display_' . $property_id . $_args ) );
 
     if ( $return_type == 'object' ) {
       return (object) $property;
