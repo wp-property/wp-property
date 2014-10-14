@@ -6,6 +6,8 @@
  */
 jQuery.extend( wpp = wpp || {}, { overview: {
 
+  initialized: false,
+
   /**
    * Initialize DOM.
    *
@@ -77,7 +79,6 @@ jQuery.extend( wpp = wpp || {}, { overview: {
    * @method initialize
    */
   initialize: function initialize() {
-
     /* Load fancybox if it exists */
     if ( jQuery.fn.fancybox && typeof jQuery.fn.fancybox == 'function' ) {
       jQuery( ".fancybox" ).fancybox( {
@@ -88,12 +89,13 @@ jQuery.extend( wpp = wpp || {}, { overview: {
         'overlayShow': false
       });
     }
-
+    
     // Toggle Featured Setting
-    if ( jQuery.fn.live && typeof jQuery.fn.live == 'function' ) {
+    if ( jQuery.fn.live && typeof jQuery.fn.live == 'function' && !wpp.overview.initialized ) {
       jQuery( ".wpp_featured_toggle" ).live( 'click', wpp.overview.toggle_featured );
     }
-
+    
+    wpp.overview.initialized = true;
   }
 
 }});
