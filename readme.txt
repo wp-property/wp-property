@@ -230,6 +230,8 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 = 1.42.2 =
 * Fixed 'exclude' parameter for draw_stats function. The issue also was related to showing specific property attributes in PDF Flyer.
 * Fixed property object caching.
+* Fixed bug on clicking 'Add to Featured' on 'All Properties' page.
+* Warnings and Notices fixes.
 
 = 1.42.1 =
 * Fixed property search for range input and range dropdown fields types.
