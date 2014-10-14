@@ -926,6 +926,7 @@ if ( !function_exists( 'draw_stats' ) ):
       'hide_false' => 'false',
       'first_alt' => 'false',
       'return_blank' => 'false',
+      'exclude' => '',
       //** Args below are related to WPP 2.0. but it's needed to have the compatibility with new Denali versions */
       'include_clsf' => 'all', // The list of classifications separated by commas or array which should be included. Enabled values: all|[classification,classification2]
       'title' => 'true',
@@ -954,6 +955,16 @@ if ( !function_exists( 'draw_stats' ) ):
       }
     } else {
       $property_stats = WPP_F::get_stat_values_and_labels( $property, array( 'label_as_key' => 'false' ) );
+    }
+    
+    /** Exclude specific attributes from list */
+    if( !empty( $exclude ) ) {
+      $exclude = !is_array( $exclude ) ? explode( ',', $exclude ) : $exclude; 
+      foreach( $exclude as $k ) {
+        if( isset( $property_stats[ $k ] ) ) {
+          unset( $property_stats[ $k ] );
+        }
+      }
     }
 
     if ( empty( $property_stats ) ) {
