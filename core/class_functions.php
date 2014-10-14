@@ -2530,7 +2530,7 @@ class WPP_F extends UD_API {
 
     }
 
-    if( !is_array( $return ) ) {
+    if( !isset( $return ) || !is_array( $return ) ) {
       return;
     }
 

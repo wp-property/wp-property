@@ -126,7 +126,7 @@ if ( !function_exists( 'property_overview_image' ) ) {
       ob_start();
       ?>
       <div class="property_image">
-        <a href="<?php echo $thumbnail_link; ?>" title="<?php echo $property[ 'post_title' ] . ( $property[ 'parent_title' ] ? __( ' of ', 'wpp' ) . $property[ 'parent_title' ] : "" ); ?>" class="property_overview_thumb property_overview_thumb_<?php echo $thumbnail_size; ?> <?php echo $link_class; ?> thumbnail" rel="properties">
+        <a href="<?php echo $thumbnail_link; ?>" title="<?php echo $property[ 'post_title' ] . ( !empty( $property[ 'parent_title' ] ) ? __( ' of ', 'wpp' ) . $property[ 'parent_title' ] : "" ); ?>" class="property_overview_thumb property_overview_thumb_<?php echo $thumbnail_size; ?> <?php echo $link_class; ?> thumbnail" rel="properties">
           <img width="<?php echo $image[ 'width' ]; ?>" height="<?php echo $image[ 'height' ]; ?>" src="<?php echo $image[ 'link' ]; ?>" alt="<?php echo $property[ 'post_title' ]; ?>" style="width:<?php echo $image[ 'width' ]; ?>px;height:<?php echo $image[ 'height' ]; ?>px;"/>
         </a>
       </div>
@@ -679,7 +679,7 @@ if ( !function_exists( 'is_property_overview_page' ) ):
       _doing_it_wrong( __FUNCTION__, __( 'Conditional query tags do not work before the query is run. Before then, they always return false.' ), '3.1' );
       return false;
     }
-    return $wp_query->is_property_overview;
+    return isset( $wp_query->is_property_overview ) ? $wp_query->is_property_overview : false;
   }
 endif;
 
