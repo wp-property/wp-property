@@ -78,9 +78,8 @@ class WPP_F extends UsabilityDynamics\Utility {
   }
 
   /**
-   *  Wrapper for the UD_API::log() function that includes the prefix automatically.
+   * Wrapper for the UD_API::log() function that includes the prefix automatically.
    *
-   * @see UD_API::log()
    * @author peshkov@UD
    *
    * @param bool   $message

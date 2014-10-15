@@ -19,7 +19,7 @@ class WPP_Mail {
    */
   static public function _send_notification( $notification ) {
     $notification = apply_filters( 'wpp::send_notification', $notification );
-    UD_API::send_notification( $notification );
+    WPP_F::send_notification( $notification );
   }
 
   /**
@@ -65,7 +65,7 @@ class WPP_Mail {
     $notification[ 'data' ][ 'activation_link' ] = $activation_link;
     $notification[ 'data' ][ 'system_message' ] = $notification[ 'message' ];
 
-    $notification = UD_API::array_merge_recursive_distinct( $notification, $args );
+    $notification = WPP_F::array_merge_recursive_distinct( $notification, $args );
 
     self::_send_notification( $notification );
   }
@@ -99,7 +99,7 @@ class WPP_Mail {
     $notification[ 'data' ][ 'title' ] = $notification[ 'data' ][ 'property_title' ] = $_property['post_title'];
     $notification[ 'data' ][ 'status' ] = @$wp_post_statuses[ get_post_status( $post_id ) ]->label;
 
-    $notification = UD_API::array_merge_recursive_distinct( $notification, $args );
+    $notification = WPP_F::array_merge_recursive_distinct( $notification, $args );
 
     self::_send_notification( $notification );
   }
@@ -138,7 +138,7 @@ class WPP_Mail {
     $notification[ 'data' ][ 'url' ] = $notification[ 'data' ][ 'property_link' ] = class_wpp_feps::get_feps_permalink( $_property, false );
     $notification[ 'data' ][ 'status' ] = @$wp_post_statuses[ $_property[ 'post_status' ] ]->label;
 
-    $notification = UD_API::array_merge_recursive_distinct( $notification, $args );
+    $notification = WPP_F::array_merge_recursive_distinct( $notification, $args );
 
     self::_send_notification( $notification );
   }
@@ -172,7 +172,7 @@ class WPP_Mail {
     $notification[ 'data' ][ 'title' ] = $notification[ 'data' ][ 'property_title' ] = $_property[ 'post_title' ];
     $notification[ 'data' ][ 'status' ] = @$wp_post_statuses[ $_property[ 'post_status' ] ]->label;
 
-    $notification = UD_API::array_merge_recursive_distinct( $notification, $args );
+    $notification = WPP_F::array_merge_recursive_distinct( $notification, $args );
 
     self::_send_notification( $notification );
   }
