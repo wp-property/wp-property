@@ -773,7 +773,7 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
 
     $property[ 'system' ][ 'prepared_for_display' ] = true;
 
-    wp_cache_add( md5( 'display_' . $property_id . $_args ) );
+    wp_cache_add( md5( 'display_' . $property_id . $_args ), $property );
 
     if ( $return_type == 'object' ) {
       return (object) $property;
