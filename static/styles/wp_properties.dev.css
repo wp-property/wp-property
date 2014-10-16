@@ -151,7 +151,7 @@ body.idevice .wpp_sidebar_listing .sidebar_gallery_item {
   padding: 3px 0 3px 18px;
   border: none;
   border-radius: 0;
-  background: transparent url("../templates/images/arrows_right.png") 0 -291px no-repeat;
+  background: transparent url("images/arrows_right.png") 0 -291px no-repeat;
 }
 .wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li span {
   padding: 3px 5px;
@@ -173,7 +173,7 @@ body.idevice .wpp_sidebar_listing .sidebar_gallery_item {
   box-shadow: -2px 0 3px rgba(0, 0, 0, 0.15);
 }
 .wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li.active span.wpp_feps_arrow {
-  background: transparent url("../templates/images/arrows_right.png") 0 0 no-repeat;
+  background: transparent url("images/arrows_right.png") 0 0 no-repeat;
 }
 .wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li.active span {
   font-weight: bold;
