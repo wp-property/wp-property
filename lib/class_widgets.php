@@ -1708,7 +1708,8 @@ class GalleryPropertiesWidget extends WP_Widget {
     $show_description = isset( $instance[ 'show_description' ] ) ? $instance[ 'show_description' ] : false;
     $gallery = isset( $post->gallery ) ? (array)$post->gallery : ( isset( $property[ 'gallery' ] ) ? (array)$property[ 'gallery' ] : array() );
 
-    $slideshow_order = maybe_unserialize( ( $post->slideshow_images ) ? $post->slideshow_images : $property[ 'slideshow_images' ] );
+    $slideshow_images = !empty( $post->slideshow_images ) ? $post->slideshow_images : ( !empty( $property[ 'slideshow_images' ] ) ? $property[ 'slideshow_images' ] : false );
+    $slideshow_order = maybe_unserialize( $slideshow_images );
     $gallery_order = maybe_unserialize( !empty( $post->gallery_images ) ? $post->gallery_images : ( !empty( $property[ 'gallery_images' ] ) ? $property[ 'gallery_images' ] : false ) );
 
     //** Calculate order of images */

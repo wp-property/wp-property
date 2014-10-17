@@ -926,6 +926,7 @@ if ( !function_exists( 'draw_stats' ) ):
       'hide_false' => 'false',
       'first_alt' => 'false',
       'return_blank' => 'false',
+      'include' => '',
       'exclude' => '',
       //** Args below are related to WPP 2.0. but it's needed to have the compatibility with new Denali versions */
       'include_clsf' => 'all', // The list of classifications separated by commas or array which should be included. Enabled values: all|[classification,classification2]
@@ -957,6 +958,16 @@ if ( !function_exists( 'draw_stats' ) ):
       $property_stats = WPP_F::get_stat_values_and_labels( $property, array( 'label_as_key' => 'false' ) );
     }
     
+    /** Include only passed attributes */
+    if( !empty( $include ) ) {
+      $include = !is_array( $include ) ? explode( ',', $include ) : $include; 
+      foreach( $property_stats as $k => $v ) {
+        if( !in_array( $k, $include ) ) {
+          unset( $property_stats[ $k ] );
+        }
+      }
+    }
+    
     /** Exclude specific attributes from list */
     if( !empty( $exclude ) ) {
       $exclude = !is_array( $exclude ) ? explode( ',', $exclude ) : $exclude; 
@@ -971,7 +982,7 @@ if ( !function_exists( 'draw_stats' ) ):
       return false;
     }
     
-    //echo "<pre>"; print_r( $property_stats ); echo "</pre>";
+    //echo "<pre>"; print_r( $property_stats ); echo "</pre>"; die();
 
     //* Prepare values before display */
     $stats = array();
@@ -1465,13 +1476,13 @@ if ( !function_exists( 'wpp_render_search_input' ) ):
           ?>
           <?php $grouped_values = group_search_values( $search_values[ $attrib ] ); ?>
           <select id="<?php echo $random_element_id; ?>" class="wpp_search_select_field wpp_search_select_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" name="wpp_search[<?php echo $attrib; ?>][min]">
-        <option value="-1"><?php _e( 'Any', 'wpp' ) ?></option>
-            <?php foreach ( $grouped_values as $v ) : ?>
-              <option value='<?php echo (int) $v; ?>' <?php if ( $value[ 'min' ] == $v ) echo " selected='true' "; ?>>
-          <?php echo apply_filters( "wpp_stat_filter_{$attrib}", $v ); ?> +
-          </option>
+              <option value="-1"><?php _e( 'Any', 'wpp' ) ?></option>
+              <?php foreach ( $grouped_values as $v ) : ?>
+                <option value='<?php echo (int) $v; ?>' <?php if ( isset( $value[ 'min' ] ) && $value[ 'min' ] == $v ) echo " selected='true' "; ?>>
+              <?php echo apply_filters( "wpp_stat_filter_{$attrib}", $v ); ?> +
+              </option>
             <?php endforeach; ?>
-        </select>
+          </select>
           <?php
           break;
         case 'dropdown':
