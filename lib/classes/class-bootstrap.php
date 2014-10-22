@@ -26,11 +26,6 @@ namespace UsabilityDynamics\WPP {
       public function init() {
         global $wp_properties;
         
-        //** Be sure we do not have errors. Do not initialize plugin if we have them. */
-        if( $this->has_errors() ) {
-          return null;
-        }
-        
         //** Init Settings */
         $this->settings = new Settings( array(
           'key'  => 'wpp_settings',
