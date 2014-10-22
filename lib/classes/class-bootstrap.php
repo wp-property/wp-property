@@ -8,7 +8,7 @@ namespace UsabilityDynamics\WPP {
 
   if( !class_exists( 'UsabilityDynamics\WPP\Bootstrap' ) ) {
 
-    final class Bootstrap extends \UsabilityDynamics\WP\Bootstrap {
+    final class Bootstrap extends \UsabilityDynamics\WP\Bootstrap_Plugin {
       
       /**
        * Singleton Instance Reference.

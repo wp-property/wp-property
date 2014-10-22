@@ -612,7 +612,10 @@ function wpp_stat_filter_for_sale_fix( $value ) {
 function format_phone_number( $phone_number ) {
   global $wp_properties;
 
-  if ( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_phone_number' ] == 'true' ) {
+  if ( 
+    isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_phone_number' ] ) && 
+    $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_phone_number' ] == 'true' 
+  ) {
     $phone_number = preg_replace( "[^0-9]", '', $phone_number );
     if ( strlen( $phone_number ) != 10 ) {
       return $phone_number;
