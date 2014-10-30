@@ -230,8 +230,6 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 = 2.0.0 =
 * Changed plugin initialization functionality.
 * Added Composer ( dependency manager ) modules and moved some functionality to composer modules ( vendors ).
-* Added PHP Unit, coverage and code quality tests.
-* Added distribution builder.
 * Moved premium features to separate plugins.
 * Cleaned up functionality of plugin.
 * Refactored file structure of plugin.
