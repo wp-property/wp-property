@@ -20,9 +20,9 @@
   },
   "require": {
     "php": ">=5.3",
-    "usabilitydynamics/lib-settings": "master",
-    "usabilitydynamics/lib-wp-bootstrap": "master",
-    "usabilitydynamics/lib-ud-api-client": "master"
+    "usabilitydynamics/lib-settings": "*",
+    "usabilitydynamics/lib-wp-bootstrap": "*",
+    "usabilitydynamics/lib-ud-api-client": "*"
   },
   "require-dev": {
     "usabilitydynamics/lib-wp-phpunit": "master",

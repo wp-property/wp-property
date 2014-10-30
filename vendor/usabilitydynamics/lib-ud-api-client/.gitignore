@@ -1,12 +1,9 @@
 temp
 node_modules
-static/cache
-static/codex
 npm-debug.log
-wp-test-config.php
-composer.lock
 
-.git
+wp-test-config.php
+
 .svn
 .idea
 .idea/workspace.xml
@@ -15,6 +12,7 @@ composer.lock
 .Trashes
 *.sublime-project
 *.sublime-workspace
+._*
 
 *.seed
 *.log

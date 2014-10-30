@@ -11,7 +11,6 @@
 # - clones git repository there
 # - creates temp branch
 # - installs composer and nodes dependencies
-# - runs grunt install ( if available )
 # - adds vendor directory ( composer dependencies ) to commit
 # - clears out build
 # - commits build to temp branch
@@ -22,32 +21,27 @@
 ############################################################################################
 #
 # Options:
-# - $1 ( $RELEASE_VERSION ) - Optional. Tag version which will be created for current build
-# - $2 ( $BUILD_TYPE ) - Optional. Default 'production'. If build type is 'production'
-# script creates temp directory and does production build there from scratch. Use it to have 
-# Production distributive. On any other value script prepares current build, but ignores 
-# dependencies installation ( it does not call composer install, npm install ).
+# - $1 ( $RELEASE_VERSION ) - Required. Tag version which will be created for current build
 #
 ############################################################################################
 #
 # Features:
 # - The current script generates new Tag on GitHub for your build (Distributive).
-# - It can use the latest commit log for creating new tag. Log message should 
-# contain [release:{tag}] shortcode
-# - circleci compatible.
+# - circleci compatible. It can use the latest commit log for creating new tag via CircleCI. 
+# Log message should contain [release:{tag}] shortcode
 #
 ############################################################################################
 #
 # Examples:
 #
 # Run remote sh file:
-# curl -s https://url-to-build-sh-file.sh | RELEASE_VERSION=1.2.3 BUILD_TYPE=production  sh
+# curl -s https://url-to-release-sh-file.sh | RELEASE_VERSION=1.2.3 sh
 #
 # Run local sh file
-# sh build.sh 1.2.3 production
+# sh build.sh 1.2.3
 #
 # Run grunt task ( see information about gruntfile.js below )
-# grunt build:1.2.3
+# grunt release:1.2.3
 #
 ############################################################################################
 #
@@ -59,9 +53,10 @@
 #   production:
 #     branch: master
 #       commands:
-#         - sh <(curl -s https://url-do-a-gist-file-with-sh-commands.sh)
+#         - sh build.sh
 #
 # Notes: 
+# - Log ( commit ) message should contain [release:{tag}] shortcode for running script.
 # - script will be triggered only on successful (green) build for 'master' branch in 
 # current example.
 # - in random cases gist file is not available on curl request, I suggest to 
@@ -74,14 +69,14 @@
 #
 # Gruntfile.js
 #
-# module.exports = function build( grunt ) {
+# module.exports = function release( grunt ) {
 #
 #  grunt.initConfig( {
 #
 #    shell: {
-#      build: {
-#        command: function( tag, build_type ) {
-#          return 'sh build.sh ' + tag + ' ' + build_type;
+#      release: {
+#        command: function( tag ) {
+#          return 'sh build.sh ' + tag;
 #        },
 #        options: {
 #          encoding: 'utf8',
@@ -93,10 +88,9 @@
 #     
 #   } );
 #
-#   grunt.registerTask( 'build', 'Run Build tasks.', function( tag, build_type ) {
-#     if ( tag == null ) grunt.warn( 'Build tag must be specified, like build:1.0.0' );
-#     if( build_type == null ) build_type = 'production';
-#     grunt.task.run( 'shell:build:' + tag + ':' + build_type );
+#   grunt.registerTask( 'release', 'Run release tasks.', function( tag ) {
+#     if ( tag == null ) grunt.warn( 'Release tag must be specified, like release:1.0.0' );
+#     grunt.task.run( 'shell:release:' + tag );
 #   });
 #
 # }
@@ -126,16 +120,6 @@ else
  
 fi
 
-# Set BUILD_TYPE env
-# It's being used to determine if we should create production build.
-if [ -z $BUILD_TYPE ] ; then
-  if [ -z $2 ] ; then
-    BUILD_TYPE=production
-  else
-    BUILD_TYPE=$2
-  fi
-fi
-echo "Build type is "$BUILD_TYPE
 echo "---"
 
 if [ -z $RELEASE_VERSION ] ; then
@@ -152,36 +136,31 @@ else
   fi
   echo $CIRCLE_BRANCH
   echo "---"
-
-  # Determine if we need to do production release.
-  if [ $BUILD_TYPE = "production" ]; then
     
-    # Remove temp directory if it already exists to prevent issues before proceed
-    if [ -d temp-build-$RELEASE_VERSION ]; then
-      rm -rf temp-build-$RELEASE_VERSION
-    fi
-    
-    echo "Create temp directory"
-    mkdir temp-build-$RELEASE_VERSION
-    cd temp-build-$RELEASE_VERSION
-    
-    echo "Do production build from scratch to temp directory"
-    ORIGIN_URL="$( git config --get remote.origin.url )"
-    git clone $ORIGIN_URL
-    cd "$( basename `git rev-parse --show-toplevel` )"
-    # Be sure we are on the same branch
-    git checkout $CIRCLE_BRANCH
-    echo "---"
-    
-    echo "Install dependencies:"
-    echo "Running: npm install --production"
-    npm config set loglevel silent
-    npm install --production
-    echo "Running: composer install --no-dev --no-interaction"
-    composer install --no-dev --no-interaction --quiet
-  	echo "---"
-  	
+  # Remove temp directory if it already exists to prevent issues before proceed
+  if [ -d temp-build-$RELEASE_VERSION ]; then
+    rm -rf temp-build-$RELEASE_VERSION
   fi
+  
+  echo "Create temp directory"
+  mkdir temp-build-$RELEASE_VERSION
+  cd temp-build-$RELEASE_VERSION
+  
+  echo "Do production build from scratch to temp directory"
+  ORIGIN_URL="$( git config --get remote.origin.url )"
+  git clone $ORIGIN_URL
+  cd "$( basename `git rev-parse --show-toplevel` )"
+  # Be sure we are on the same branch
+  git checkout $CIRCLE_BRANCH
+  echo "---"
+  
+  #echo "Clean up structure ( remove composer relations )"
+  #rm -rf composer.lock
+  #rm -rf vendor
+  
+  #echo "Running: composer install --no-dev --no-interaction"
+  #composer install --no-dev --no-interaction --quiet
+  #echo "---"
   
   echo "Create local and remote temp branch temp-automatic-branch-"$RELEASE_VERSION
   git checkout -b temp-branch-$RELEASE_VERSION
@@ -189,24 +168,34 @@ else
   git branch --set-upstream-to=origin/temp-branch-$RELEASE_VERSION temp-branch-$RELEASE_VERSION
   echo "---"
 
-  echo "Set configuration to proceed"
-  git config --global push.default simple
-  git config --global user.email "$( git log -1 --pretty=%an )"
-  git config --global user.name "$( git log -1 --pretty=%ae )"
-  echo "---"
+  # It's used only by CircleCi. Should not be called directly.
+  #
+  #echo "Set configuration to proceed"
+  #git config --global push.default simple
+  #git config --global user.email "$( git log -1 --pretty=%an )"
+  #git config --global user.name "$( git log -1 --pretty=%ae )"
+  #echo "---"
 
-  echo "Add/remove files"
-  git add --all
-  echo "Exclude circleci specific files and logs if they exist"
-  git rm --cached coverage.clover
-  git rm --cached ocular.phar
-  git rm -r --cached build
-  echo "Be sure we do not add node files"
-  git rm -r --cached node_modules
+  echo "Be sure we do not add node and other specific files needed only for development"
+  rm -rf vendor/composer/installers
+  rm -rf coverage.clover
+  rm -rf ocular.phar
+  rm -rf build
+  rm -rf node_modules
+  rm -rf composer.lock
+  rm -rf .scrutinizer.yml
+  rm -rf circle.yml
+  rm -rf build.sh
+  rm -rf gruntfile.js
+  rm -rf makefile
+  rm -rf package.json
+  rm -rf test
   echo "Be sure we do not add .git directories"
   find ./vendor -name .git -exec rm -rf '{}' \;
   echo "Be sure we do not add .svn directories"
   find ./vendor -name .svn -exec rm -rf '{}' \;
+  echo "Git Add"
+  git add --all
   echo "Be sure we added vendor directory"
   git add -f vendor
   echo "---"
@@ -229,12 +218,10 @@ else
   echo "---"
   
   # Remove temp directory.
-  if [ $BUILD_TYPE = "production" ]; then
-    echo "Remove temp directory"
-    cd ../..
-    rm -rf temp-build-$RELEASE_VERSION
-    echo "---"
-  fi
+  echo "Remove temp directory"
+  cd ../..
+  rm -rf temp-build-$RELEASE_VERSION
+  echo "---"
   
   echo "Done"
 
