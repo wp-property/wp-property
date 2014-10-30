@@ -1,7 +1,6 @@
 {
   "name": "usabilitydynamics/wp-property",
-  "version": "2.0.0",
-  "type": "plugin",
+  "type": "wordpress-plugin",
   "minimum-stability": "dev",
   "homepage": "http://github.com/usabilitydynamics/wp-property",
   "author": {
