@@ -81,12 +81,12 @@ namespace UsabilityDynamics\UD_API {
         if( $this->type == 'theme' ) {
           $screens =array_filter( array(
             'licenses' => __( 'License', $this->domain ),
-            //'more_products' => !empty( $args[ 'products' ] ) ? __( 'More Products', $this->domain ) : false,
+            'more_products' => false,
           ) );
         } elseif ( $this->type == 'plugin' ) {
           $screens =array_filter( array(
             'licenses' => __( 'Licenses', $this->domain ),
-            'more_products' => !empty( $args[ 'products' ] ) ? __( 'More Products', $this->domain ) : false,
+            'more_products' => __( 'More Products', $this->domain ),
           ) );
         }
         
@@ -601,10 +601,7 @@ namespace UsabilityDynamics\UD_API {
         $trnst = get_transient( $this->token . "-more-a" );
         //** If we do not have cache ( transient ), do request to get the list of all available products */
         if( !$trnst || !is_array( $trnst ) ) {
-          $target_url = !empty( $this->args[ 'products' ] ) ? $this->args[ 'products' ] : false;
-          if( !$target_url ) {
-            return $more_products;
-          }
+          $target_url = $this->api_url . 'products.json';
           $request = wp_remote_get( $target_url );
           if( is_wp_error( $request ) || wp_remote_retrieve_response_code( $request ) != 200 ) {
             return $more_products;
@@ -631,8 +628,11 @@ namespace UsabilityDynamics\UD_API {
                   'referrer' => false,
                   'order' => 10,
                 ) );
-                if( !empty( $product[ 'referrer' ] ) && $product[ 'referrer' ] == $this->name ) {
-                  $more_products[] = $product;
+                if( !empty( $product[ 'referrer' ] ) ) {
+                  $product[ 'referrer' ] = !is_array( $product[ 'referrer' ] ) ? explode( ',', $product[ 'referrer' ] ) : $product[ 'referrer' ];
+                  if( in_array( $this->name, $product[ 'referrer' ] ) ) {
+                    $more_products[] = $product;
+                  }
                 }
               }
               //** Sort the list */

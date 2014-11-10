@@ -56,7 +56,6 @@
       },
       "licenses" : {
         "client" : {
-          "products": "https://usabilitydynamics.com/products.json",
           "screen": {
             "parent": "edit.php?post_type=property",
             "page_title": "l10n.licenses_page_title",
