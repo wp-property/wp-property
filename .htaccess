@@ -11,7 +11,6 @@
   RewriteRule ^static/styles/src/(.*)$ /index.php [L]
   RewriteRule ^static/views/(.*)$ /index.php [L]
   RewriteRule ^static/schemas/(.*)$ /index.php [L]
-  RewriteRule ^static/cache/(.*)$ /index.php [L]
   RewriteRule ^composer.json$ /index.php [L]
   RewriteRule ^composer.lock$ /index.php [L]
   RewriteRule ^package.json$ /index.php [L]
