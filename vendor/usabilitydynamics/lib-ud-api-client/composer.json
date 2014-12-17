@@ -1,7 +1,6 @@
 {
   "name": "usabilitydynamics/lib-ud-api-client",
   "description": "UD API Client for WooCommerce API Manager",
-  "version": "0.1.0",
   "type": "library",
   "minimum-stability": "dev",
   "repository": {
