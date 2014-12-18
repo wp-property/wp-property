@@ -1,5 +1,46 @@
 [
     {
+        "name": "usabilitydynamics/lib-ud-api-client",
+        "version": "1.0.3",
+        "version_normalized": "1.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-ud-api-client",
+            "reference": "1.0.3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-ud-api-client/archive/1.0.3.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "require": {
+            "php": ">=5.3"
+        },
+        "type": "library",
+        "extra": {
+            "installer-name": "lib-ud-api-client"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib/classes"
+            ]
+        },
+        "license": [
+            "GPLv2"
+        ],
+        "description": "UD API Client for WooCommerce API Manager",
+        "homepage": "https://github.com/UsabilityDynamics/lib-ud-api-client",
+        "keywords": [
+            "api",
+            "client",
+            "licenses",
+            "plugins",
+            "wordpress"
+        ]
+    },
+    {
         "name": "usabilitydynamics/lib-utility",
         "version": "0.3.6",
         "version_normalized": "0.3.6.0",
@@ -27,7 +68,7 @@
                 ]
             }
         },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "classmap": [
                 "lib"
@@ -95,8 +136,7 @@
                 "files": [
                     "static/schemas/settings.json"
                 ]
-            },
-            "installer-name": "lib-settings"
+            }
         },
         "installation-source": "source",
         "autoload": {
@@ -152,9 +192,6 @@
             "usabilitydynamics/lib-utility": "~0.3"
         },
         "type": "library",
-        "extra": {
-            "installer-name": "lib-wp-bootstrap"
-        },
         "installation-source": "source",
         "autoload": {
             "classmap": [
@@ -167,47 +204,6 @@
         "description": "Wordpress bootstrap library created by UsabilityDynamics",
         "homepage": "https://github.com/usabilitydynamics/lib-wp-bootstrap",
         "keywords": [
-            "wordpress"
-        ]
-    },
-    {
-        "name": "usabilitydynamics/lib-ud-api-client",
-        "version": "master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:usabilitydynamics/lib-ud-api-client",
-            "reference": "master"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/usabilitydynamics/lib-ud-api-client/archive/master.zip",
-            "reference": null,
-            "shasum": null
-        },
-        "require": {
-            "php": ">=5.3"
-        },
-        "type": "library",
-        "extra": {
-            "installer-name": "lib-ud-api-client"
-        },
-        "installation-source": "source",
-        "autoload": {
-            "classmap": [
-                "lib/classes"
-            ]
-        },
-        "license": [
-            "GPLv2"
-        ],
-        "description": "UD API Client for WooCommerce API Manager",
-        "homepage": "https://github.com/usabilitydynamics/lib-ud-api-client",
-        "keywords": [
-            "api",
-            "client",
-            "licenses",
-            "plugins",
             "wordpress"
         ]
     }

@@ -2,7 +2,7 @@
 
 <div id="col-container" class="<?php //about-wrap ?>">
   <?php
-  echo '<div class="licenses-notice">' . wpautop( sprintf( __( 'See below for a list of %s Plugins active on %s. You can %s, as well as our %s on how this works. %s', $this->domain ), $this->name, get_bloginfo( 'name' ), '<a target="_blank" href="'. trailingslashit( $this->api_url ) .'account">view your licenses here</a>', '<a target="_blank" href="https://www.usabilitydynamics.com/products-installation/">documentation</a>', '&nbsp;&nbsp;<a href="' . esc_url( admin_url( 'update-core.php' ) ) . '" class="button">' . __( 'Check for Updates', $this->domain ) . '</a>' ) ) . '</div>' . "\n";
+  echo '<div class="licenses-notice">' . wpautop( sprintf( __( 'See below for a list of %s Plugins active on %s. You can %s, as well as our %s on how this works. %s', $this->domain ), $this->name, get_bloginfo( 'name' ), '<a target="_blank" href="'. trailingslashit( $this->api_url ) .'account">view your licenses here</a>', '<a target="_blank" href="https://www.usabilitydynamics.com/docs/products-installation/">documentation</a>', '&nbsp;&nbsp;<a href="' . esc_url( admin_url( 'update-core.php' ) ) . '" class="button">' . __( 'Check for Updates', $this->domain ) . '</a>' ) ) . '</div>' . "\n";
   ?>
   <div>
     <form id="activate-products" method="post" action="" class="validate">

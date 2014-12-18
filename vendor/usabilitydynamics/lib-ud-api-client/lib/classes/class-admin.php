@@ -120,8 +120,7 @@ namespace UsabilityDynamics\UD_API {
         }
         
         //** Add Licenses page */
-        $menu_hook = is_multisite() ? 'network_admin_menu' : 'admin_menu';
-        add_action( $menu_hook, array( $this, 'register_licenses_screen' ), 100 );
+        add_action( 'admin_menu', array( $this, 'register_licenses_screen' ), 100 );
         
         //** Admin Notices Filter */
         add_filter( 'ud:errors:admin_notices', array( $this, 'maybe_remove_notices' ) );
@@ -160,7 +159,7 @@ namespace UsabilityDynamics\UD_API {
         $licenses_link = isset( $screen[ 'parent' ] ) && ( strpos( $screen[ 'parent' ], '?' ) !== false || strpos( $screen[ 'parent' ], '.php' ) !== false ) ? $screen[ 'parent' ] : 'admin.php';
         $licenses_link = add_query_arg( array(
           'page' => $this->menu_slug,
-        ), network_admin_url( $licenses_link ) );
+        ), admin_url( $licenses_link ) );
         
         update_option( $this->token . '-url', $licenses_link );
         
@@ -230,8 +229,7 @@ namespace UsabilityDynamics\UD_API {
        */
       public function process_request () {
       
-        $notices_hook = is_multisite() ? 'network_admin_notices' : 'admin_notices';
-        add_action( $notices_hook, array( $this, 'admin_notices' ) );
+        add_action( 'admin_notices', array( $this, 'admin_notices' ) );
       
         $supported_actions = array( 'activate-products', 'deactivate-product' );
         if ( !isset( $_REQUEST['action'] ) || !in_array( $_REQUEST['action'], $supported_actions ) || !check_admin_referer( 'bulk-' . 'licenses' ) ) {
@@ -626,6 +624,8 @@ namespace UsabilityDynamics\UD_API {
                   'type' => 'plugin',
                   'product_id' => '',
                   'referrer' => false,
+                  'requires' => false,
+                  'tested' => false,
                   'order' => 10,
                 ) );
                 if( !empty( $product[ 'referrer' ] ) ) {

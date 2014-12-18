@@ -116,17 +116,17 @@ namespace UsabilityDynamics\UD_API {
 
           $action_links = array();
           if( !empty( $product['url'] ) ) {
-            $action_links[] = '<a class="install-now button" href="' . $product['url'] . '" aria-label="' . __( 'More Details' ) . '">' . __( 'More Details' ) . '</a>';
+            $action_links[] = '<a target="_blank" class="install-now button" href="' . $product['url'] . '" aria-label="' . __( 'More Details' ) . '">' . __( 'More Details' ) . '</a>';
           }
           
           ?>
           <div class="plugin-card">
             <div class="plugin-card-top" style="min-height:200px;">
               <?php if( !empty( $product[ 'icon' ] ) ) { ?>
-                <a href="<?php echo esc_url( $product['url'] ); ?>" class="thickbox plugin-icon"><img src="<?php echo esc_attr( $product[ 'icon' ] ) ?>" /></a>
+                <a target="_blank" href="<?php echo esc_url( $product['url'] ); ?>" class="thickbox plugin-icon"><img src="<?php echo esc_attr( $product[ 'icon' ] ) ?>" /></a>
               <?php } ?>
               <div class="name column-name">
-                <h4><a href="<?php echo esc_url( $product['url'] ); ?>" class="thickbox"><?php echo $product[ 'name' ]; ?></a></h4>
+                <h4><a target="_blank" href="<?php echo esc_url( $product['url'] ); ?>" class="thickbox"><?php echo $product[ 'name' ]; ?></a></h4>
               </div>
               <div class="action-links">
                 <?php
