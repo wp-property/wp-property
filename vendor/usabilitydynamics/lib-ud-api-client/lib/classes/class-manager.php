@@ -57,7 +57,6 @@ namespace UsabilityDynamics\UD_API {
         
         $product                  = new \stdClass();
         $product->type            = $this->type;
-        $product->file            = plugin_basename( $this->boot_file );
         $product->product_id      = $this->product_id;
         $product->instance_key    = $this->instance_key;
         $product->errors_callback = $this->errors_callback;
@@ -65,6 +64,7 @@ namespace UsabilityDynamics\UD_API {
         $_ud_queued_updates = isset( $_ud_queued_updates ) ? $_ud_queued_updates : array();
         //** Add theme */
         if( $product->type === 'theme' ) {
+          $product->file = $this->boot_file;
           //** Must be only one theme in the list! */
           if( !empty( $_ud_queued_updates[ '_theme_' ] ) ) {
             //** WTF? How it could be? */
@@ -75,6 +75,7 @@ namespace UsabilityDynamics\UD_API {
         } 
         //** Add plugin */
         elseif ( $product->type === 'plugin' ) {
+          $product->file = plugin_basename( $this->boot_file );
           if( !$this->referrer ) {
             //** WTF? How it could be? */
             wp_die( 'Are you cheating?' );

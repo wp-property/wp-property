@@ -21,7 +21,7 @@
     "php": ">=5.3",
     "usabilitydynamics/lib-settings": "*",
     "usabilitydynamics/lib-wp-bootstrap": "*",
-    "usabilitydynamics/lib-ud-api-client": "*"
+    "usabilitydynamics/lib-ud-api-client": "1.0.3"
   },
   "require-dev": {
     "usabilitydynamics/lib-wp-phpunit": "master",
