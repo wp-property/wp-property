@@ -201,8 +201,8 @@ module.exports = function build( grunt ) {
             return [
               "composer install --no-dev",
               "rm -rf ./vendor/composer/installers",
-              "find ./vendor -name .git -exec rm -rf '{}' \;",
-              "find ./vendor -name .svn -exec rm -rf '{}' \;",
+              "find ./vendor -name .git -exec rm -rf '{}' \\;",
+              "find ./vendor -name .svn -exec rm -rf '{}' \\;",
             ].join( ' && ' );
           }
         },

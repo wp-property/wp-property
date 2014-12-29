@@ -1,9 +1,9 @@
 === WP-Property - WordPress Powered Real Estate and Property Management ===
 Contributors: usability_dynamics, andypotanin, jbrw1984, maxim.peshkov, anton-korotkoff, ideric
-Donate link: http://usabilitydynamics.com/products/wp-property/
+Donate link: http://usabilitydynamics.com/product/wp-property/
 Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 3.6
-Tested up to: 4.0
+Tested up to: 4.1
 Stable tag: 2.0.0
 
 
@@ -77,17 +77,9 @@ Usage of custom attributes added in the Developer tab for queries, example:
 * Property types follow a hierarchical format, having the ability of inheriting settings - i.e. buildings (or communities) will automatically calculate the price range of all floor-plans below them.
 * Free!
 
-= Premium features =
+= Add-ons =
 
- Learn more about the [WP-Property Premium Features](https://usabilitydynamics.com/products/wp-property/premium-features/).
-
-* Supermap - an overview map of all your listings.
-* Slideshow - home page slideshow and property specific slideshow.
-* Agent Module - Create agents and assign them to properties. Create agent-specific listing pages by using [property_overview wpp_agents=1] where 1 is the agent ID.
-* PDF Flyer - Instantly generate PDF flyers of your properties for printing.
-* XML Import - Map XML files to your WPP attributes, setup schedules, and import third-party listings.
-* Power Tools with Capability Management Price - Extra functionality which includes capability management, white labeling the control panel, and changes menu titles.
-
+ Learn more about the [WP-Property Add-ons](https://usabilitydynamics.com/products/).
 
 = Translations =
 
