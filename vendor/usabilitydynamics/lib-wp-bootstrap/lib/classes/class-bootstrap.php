@@ -235,7 +235,7 @@ namespace UsabilityDynamics\WP {
         
         $page = false;
         //** Determine what to show depending on version installed */
-        $version = get_option( $this->key . '-splash-version', 0 );
+        $version = get_option( $this->slug . '-splash-version', 0 );
         
         //** Just installed */
         if ( !$version ) {
@@ -263,7 +263,7 @@ namespace UsabilityDynamics\WP {
         //** If empty - create */
         if ( !$_current_pages_to_show ) {
           set_transient( Dashboard::get_instance()->transient_key, array(
-            $this->key => array(
+            $this->slug => array(
               'name' => $this->name,
               'content' => $content,
               'version' => $this->args['version']
@@ -272,7 +272,7 @@ namespace UsabilityDynamics\WP {
         } 
         //** If not empty - update */
         else {
-          $_current_pages_to_show[$this->key] = array(
+          $_current_pages_to_show[$this->slug] = array(
             'name' => $this->name,
             'content' => $content,
             'version' => $this->args['version']

@@ -42,6 +42,9 @@
     ]
   },
   "extra": {
+    "splashes": {
+      "install": "static/splashes/install.php"
+    },
     "schemas": {
       "dependencies" : {
         "modules": {
