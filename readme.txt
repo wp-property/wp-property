@@ -17,13 +17,13 @@ This is not a "collection" of plugins, but one full suite. You will not have to 
 
 http://www.vimeo.com/14473894
 
-Check out our [premium WordPress real estate theme](https://usabilitydynamics.com/products/wp-property/the-denali-premium-theme/).
+Check out our [premium WordPress real estate theme](https://www.usabilitydynamics.com/products/the-denali-premium-theme/).
 
 Be sure to check out the  [WP-Property Forum](http://usabilitydynamics.com/products/wp-property/forum/) if you need help.
 
 = Common Shortcodes =
 
-We have setup a  ["Shortcode Cheatsheet" page](http://usabilitydynamics.com/help/wp-property-help/wp-property-shortcode-cheat-sheet/) for your convenience.
+We have setup a  ["Shortcode Cheatsheet" page](https://www.usabilitydynamics.com/tutorials/wp-property-help/wp-property-shortcode-cheat-sheet/) for your convenience.
 
 Include search form into page/post content.
 
@@ -79,7 +79,7 @@ Usage of custom attributes added in the Developer tab for queries, example:
 
 = Premium features =
 
- Learn more about the [WP-Property Premium Features](https://usabilitydynamics.com/products/wp-property/premium/).
+ Learn more about the [WP-Property Premium Features](https://www.usabilitydynamics.com/products/wp-property/premium-features/).
 
 * Supermap - an overview map of all your listings.
 * Slideshow - home page slideshow and property specific slideshow.
