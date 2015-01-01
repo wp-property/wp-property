@@ -15,12 +15,12 @@ default:
 install:
 	echo Install $(NAME).
 	make default
-  grunt install
+	grunt install
 
 # Creates Release with Build Distribution
 # Example: 
 # make TAG=1.0.0 release
 release:
 	@echo Releasing $(NAME).
-  make default
-  sh build.sh $(TAG)
+	make default
+	sh build.sh $(TAG)

@@ -32,7 +32,7 @@ namespace UsabilityDynamics\WPP {
           'store'  => 'options',
           'data' => array(
             'name' => $this->name,
-            'version' => $this->version,
+            'version' => $this->args[ 'version' ],
             'domain' => $this->domain,
           )
         ));

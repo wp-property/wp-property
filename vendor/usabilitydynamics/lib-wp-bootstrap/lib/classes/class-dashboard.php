@@ -91,7 +91,7 @@ namespace UsabilityDynamics\WP {
         $updates = get_transient( $this->transient_key );
         ?>
         <div class="wrap about-wrap">
-          <h1><?php _e( 'Usability Dynamics, Inc. Dashboard', $this->domain ) ?></h1>
+          <h1><?php _e( 'Usability Dynamics, Inc.', $this->domain ) ?></h1>
           <div class="about-text"><?php _e( 'Thank you for using our products.', $this->domain ) ?></div>
           <div class="wp-badge ud-badge"></div>
           <?php
@@ -110,11 +110,6 @@ namespace UsabilityDynamics\WP {
             }
           ?>
         </div>
-        <style>
-          .ud-badge {
-              background: url("https://usabilitydynamics.com/production/wp-content/uploads/2012/03/usability-dynamics-logo2.png") no-repeat scroll center 62px / 80% #F4F4F4;
-          }
-        </style>
         <?php
       }
       

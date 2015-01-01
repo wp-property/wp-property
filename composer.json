@@ -1,8 +1,8 @@
 {
-  "name": "usabilitydynamics/wp-property",
+  "name": "wp-property/wp-property",
   "type": "wordpress-plugin",
   "minimum-stability": "dev",
-  "homepage": "http://github.com/usabilitydynamics/wp-property",
+  "homepage": "https://www.usabilitydynamics/product/wp-property",
   "author": {
     "name": "UsabilityDynamics, Inc.",
     "url": "https://usabilitydynamics.com"
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/usabilitydynamics/wp-property.git"
+    "url": "https://github.com/wp-property/wp-property.git"
   },
   "require": {
     "php": ">=5.3",
@@ -42,6 +42,9 @@
     ]
   },
   "extra": {
+    "splashes": {
+      "install": "static/splashes/install.php"
+    },
     "schemas": {
       "dependencies" : {
         "modules": {
