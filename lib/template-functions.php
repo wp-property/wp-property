@@ -1637,8 +1637,15 @@ if ( !function_exists( 'wpp_get_image_link' ) ):
         }
       }
     }
+
+    // Must check that $image_path exists, for remotely stored images this will be empty and will cause an an error within getimagesize.
+    if( isset( $image_path ) && $image_path ) {
+      $getimagesize = @getimagesize( $image_path );
+    } else {
+      $getimagesize = array( '', '' );
+    }
+
     //** Get true image dimensions or returned URL */
-    $getimagesize = @getimagesize( $image_path );
     $i[ 1 ] = $getimagesize[ 0 ];
     $i[ 2 ] = $getimagesize[ 1 ];
     //** Return image data as requested */
