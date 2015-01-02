@@ -193,9 +193,10 @@ if ( !function_exists( 'wpp_draw_pagination' ) ):
       'class' => '',
       'sorter_type' => 'none',
       'hide_count' => false,
-      'sort_by_text' => isset( $wpp_query[ 'sort_by_text' ] ) ? $wpp_query[ 'sort_by_text' ] : '',
-      'javascript' => true
+      'sort_by_text' => isset( $wpp_query[ 'sort_by_text' ] ) ? $wpp_query[ 'sort_by_text' ] : ''
     ) );
+
+    $settings = apply_filters( 'wpp:draw_pagination:settings', $settings, $wpp_query, $wp_properties );
 
     //** Do not show pagination on ajax requests */
     if ( $wpp_query[ 'ajax_call' ] ) {
@@ -207,7 +208,8 @@ if ( !function_exists( 'wpp_draw_pagination' ) ):
     }
     
     /** Maybe use custom pagination/sorter instead of default one */
-    $custom = apply_filters( 'wpp:property_overview:custom_pagination', '', $settings );
+    $custom = apply_filters( 'wpp:property_overview:custom_pagination', false, $settings, $wpp_query, $wp_properties );
+
     if( !empty( $custom ) ) {
       if ( $settings[ 'return' ] == 'true' ) {
         return $custom;
