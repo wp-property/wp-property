@@ -209,6 +209,19 @@ if ( !function_exists( 'wpp_draw_pagination' ) ):
     if ( $pagination == 'off' && $hide_count ) {
       return;
     }
+
+    // Allow for pagination override.
+    $_custom_pagination = apply_filters( 'wpp:property_overview:custom_pagination', false, $settings, $wpp_query );
+
+    if( $_custom_pagination && !empty( $_custom_pagination ) ) {
+      if ( $settings[ 'return' ] == 'true' ) {
+        return $_custom_pagination;
+      } else {
+        echo $_custom_pagination;
+        return null;
+      }
+    }
+
     if ( $properties[ 'total' ] > $per_page && $pagination != 'off' ) {
       $use_pagination = true;
     }
