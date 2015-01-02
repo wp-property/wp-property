@@ -1475,7 +1475,7 @@ class WPP_Core {
     $required_strict_search = apply_filters( 'wpp::required_strict_search', array( 'wpp_agents' ) );
     $ignored_strict_search_field_types = apply_filters( 'wpp:ignored_strict_search_field_types', array( 'range_dropdown', 'range_input' ) );
     foreach ( $wpp_query[ 'query' ] as $key => $val ) {
-      if ( !key_exists( $key, $defaults ) && $key != 'property_type' ) {
+      if ( !array_key_exists( $key, $defaults ) && $key != 'property_type' ) {
         //** Be sure that the attribute exists of parameter is required for strict search */
         if( 
           ( in_array( $wpp_query[ 'strict_search' ], array( 'true', 'on' ) ) && isset( $wp_properties[ 'property_stats' ][ $key ] ) ) 
@@ -1583,7 +1583,7 @@ class WPP_Core {
 
     // Initialize result (content which will be shown) and open wrap (div) with unique id
     if ( $wpp_query[ 'disable_wrapper' ] != 'true' ) {
-      $result[ 'top' ] = '<div id="wpp_shortcode_' . $defaults[ 'unique_hash' ] . '" class="wpp_ui ' . $wpp_query[ 'class' ] . '">';
+      $result[ 'top' ] = '<div id="wpp_shortcode_' . $defaults[ 'unique_hash' ] . '" class="wpp_ui ' . $wpp_query[ 'class' ] . '" data-property-list-hash="' . $defaults[ 'unique_hash' ] . '">';
     }
 
     $result[ 'top_pagination' ] = wpp_draw_pagination( array(
@@ -1671,7 +1671,7 @@ class WPP_Core {
       $this_property = $this_property;
     }
 
-    if ( is_taxonomy( $attribute ) && is_object_in_taxonomy( 'property', $attribute ) ) {
+    if ( taxonomy_exists( $attribute ) && is_object_in_taxonomy( 'property', $attribute ) ) {
       foreach ( wp_get_object_terms( $this_property[ 'ID' ], $attribute ) as $term_data ) {
 
         if ( $args[ 'make_terms_links' ] == 'true' ) {
