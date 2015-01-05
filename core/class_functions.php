@@ -2753,6 +2753,10 @@ class WPP_F extends UD_API {
         @include_once( WPP_Premium . "/index.php" );
       }
 
+      if( $_GET[ 'test' ] == 'wpp-load' ) {
+        die( '<pre>' . print_r( $default_headers, true ) . '</pre>' );
+      }
+
       $_verified = array();
 
       while( false !== ( $file = readdir( $premium_dir ) ) ) {
