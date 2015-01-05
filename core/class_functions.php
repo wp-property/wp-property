@@ -2753,24 +2753,34 @@ class WPP_F extends UD_API {
         @include_once( WPP_Premium . "/index.php" );
       }
 
-      if( $_GET[ 'test' ] == 'wpp-load' ) {
-        die( '<pre>' . print_r( $default_headers, true ) . '</pre>' );
-      }
-
       $_verified = array();
 
       while( false !== ( $file = readdir( $premium_dir ) ) ) {
 
-        if( $file == 'index.php' )
+        $_path = wp_normalize_path( WPP_Premium . "/" . $file );
+
+        if( $file == '.' )
           continue;
 
-        if( end( @explode( ".", $file ) ) == 'php' ) {
+        if( $file == '..' ) {
+          continue;
+        }
+
+        if( $file == 'index.php' ) {
+          continue;
+        }
+
+        if( is_dir( $_path ) && is_file( $_mainFile = wp_normalize_path( $_path . '/' . $file . '.php' ) ) ) {
+          $_path = $_mainFile;
+        }
+
+        if( end( @explode( ".", $_path ) ) == 'php' ) {
 
           $_upgraded = false;
 
-          $plugin_data = @get_file_data( WPP_Premium . "/" . $file, $default_headers, 'plugin' );
+          $plugin_data = @get_file_data( $_path, $default_headers, 'plugin' );
 
-          $plugin_slug = $plugin_data[ 'slug' ] ? $plugin_data[ 'slug' ] : str_replace( array( '.php' ), '', $file );
+          $plugin_slug = $plugin_data[ 'slug' ] ? $plugin_data[ 'slug' ] : str_replace( array( '.php' ), '', $_path );
 
           // Admin tools premium feature was moved to core. So it must not be loaded twice.
           if( $plugin_slug == 'class_admin_tools' ) {
@@ -2818,9 +2828,9 @@ class WPP_F extends UD_API {
             if( !$plugin_data[ 'minimum.php' ] || version_compare( PHP_VERSION, $plugin_data[ 'minimum.php' ] ) > 0 ) {
 
               if( WP_DEBUG == true ) {
-                include_once( trailingslashit( WPP_Premium ) . $file );
+                include_once( $_path );
               } else {
-                @include_once( trailingslashit( WPP_Premium ) . $file );
+                @include_once( $_path );
               }
 
               // Initialize Module that declare a class.
