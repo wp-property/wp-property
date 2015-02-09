@@ -68,7 +68,11 @@ class WPP_Object_List_Table extends WPP_List_Table {
 
     $ID = (int) $ID;
 
-    $post = WPP_F::get_property( $ID );
+    $post = WPP_F::get_property( $ID, array(
+      'get_children' => 'false',
+      'load_gallery' => 'false',
+      'load_parent' => 'false'
+    ) );
 
     $post = (object) $post;
 

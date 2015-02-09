@@ -4593,8 +4593,6 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     $wp_list_table->prepare_items( $wpp_search );
 
-    //print_r( $wp_list_table ); die();
-
     if( $wp_list_table->has_items() ) {
       foreach( $wp_list_table->items as $count => $item ) {
         $data[ ] = $wp_list_table->single_row( $item );
@@ -4602,8 +4600,6 @@ class WPP_F extends UsabilityDynamics\Utility {
     } else {
       $data[ ] = $wp_list_table->no_items();
     }
-
-    //print_r( $data );
 
     return json_encode( array(
       'sEcho'                => $sEcho,
