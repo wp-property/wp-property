@@ -5,6 +5,7 @@ static/codex
 npm-debug.log
 wp-test-config.php
 composer.lock
+./cache
 
 .git
 .svn
