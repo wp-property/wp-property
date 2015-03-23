@@ -59,11 +59,12 @@ namespace UsabilityDynamics\WP {
        */
       public function maybe_ud_splash_page() {
         //** If there is something to show */
-        if ( get_transient( $this->need_splash_key ) ) {
-          //** Redirect to UD splash page */
-          wp_redirect( admin_url( 'index.php?page='.$this->page_slug ) );
+        if ( get_transient( $this->need_splash_key ) && ( !isset( $_REQUEST['page'] ) || $_REQUEST['page'] !== $this->page_slug ) ) {
           //** Do not redirect anymore */
           delete_transient( $this->need_splash_key );
+          //** Redirect to UD splash page */
+          wp_redirect( admin_url( 'index.php?page='.$this->page_slug ) );
+          exit;
         }
       }
       
