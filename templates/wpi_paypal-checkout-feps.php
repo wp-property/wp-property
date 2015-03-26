@@ -1,6 +1,17 @@
 <?php $i = 1; $custom = array('obj' => 'spc'); ?>
 <!-- PAYPAL -->
-<form class="<?php echo apply_filters('wpi_spc::form_class', "wpi_checkout_feps wpi_checkout {$gateway_key}"); ?>" action="<?php echo $wpi_settings['billing'][$gateway_key]['settings']['test_mode']['value']; ?>" <?php echo $display ? '' : 'style="display:none;"'; ?>>
+
+<?php
+/**
+ * Temp fix to get correct PayPal API URL
+ */
+
+$paypal_api_url = (!empty( $wpi_settings['billing']['wpi_paypal']['settings']['test_mode']['value'] ) && $wpi_settings['billing']['wpi_paypal']['settings']['test_mode']['value'] == 'Y') 
+      ? apply_filters( 'wpi_paypal_demo_url', 'https://www.sandbox.paypal.com/cgi-bin/webscr' )
+      : ( strlen($wpi_settings['billing']['wpi_paypal']['settings']['test_mode']['value'])>1 ? $wpi_settings['billing']['wpi_paypal']['settings']['test_mode']['value'] : apply_filters( 'wpi_paypal_live_url', 'https://www.paypal.com/cgi-bin/webscr' ) );
+?>
+
+<form class="<?php echo apply_filters('wpi_spc::form_class', "wpi_checkout_feps wpi_checkout {$gateway_key}"); ?>" action="<?php echo $paypal_api_url; ?>" <?php echo $display ? '' : 'style="display:none;"'; ?>>
   <?php do_action( 'wpi::spc::payment_form_top', $atts); ?>
   <input type="hidden" name="wpi_checkout[payment_method]" value="wpi_paypal" />
   <?php if ( !empty( $atts['items'] ) ): ?>

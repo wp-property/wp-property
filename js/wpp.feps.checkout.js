@@ -58,12 +58,17 @@ jQuery(document).ready(function(){
         error = true;
         break;
       case 'wpi_spc_success':
-        jQuery( target ).parents( '.wpp_feps_checkout_wrapper' ).remove();
-        jQuery( '.wpp_feps_change_subscription_plan' ).remove();
+        jQuery( target ).parents( '.wpp_feps_checkout_wrapper' ).hide();
+        jQuery( '.wpp_feps_change_subscription_plan' ).hide();
         message = result.message;
         break;
     }
-    var property_id = typeof result.callback.post_data['wpp::feps::property_id'][0] !== 'undefined' ? result.callback.post_data['wpp::feps::property_id'][0] : null;
+    
+    var property_id = null;
+    if( typeof result.callback != 'undefined' ) {
+      property_id = typeof result.callback.post_data['wpp::feps::property_id'][0] !== 'undefined' ? result.callback.post_data['wpp::feps::property_id'][0] : null;
+    }
+    
     wpp_feps_checkout_message( message, property_id, error );
   }
   
