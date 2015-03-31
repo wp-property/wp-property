@@ -1,0 +1,65 @@
+{
+  "name": "wp-property/wp-property",
+  "type": "wordpress-plugin",
+  "minimum-stability": "dev",
+  "homepage": "https://www.usabilitydynamics/product/wp-property",
+  "author": {
+    "name": "UsabilityDynamics, Inc.",
+    "url": "https://usabilitydynamics.com"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://repository.usabilitydynamics.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wp-property/wp-property.git"
+  },
+  "require": {
+    "php": ">=5.3",
+    "usabilitydynamics/lib-settings": "*",
+    "usabilitydynamics/lib-wp-bootstrap": "*",
+    "usabilitydynamics/lib-ud-api-client": "1.0.3"
+  },
+  "require-dev": {
+    "usabilitydynamics/lib-wp-phpunit": "master",
+    "codeclimate/php-test-reporter": "dev-master"
+  },
+  "autoload": {
+    "classmap": [ "lib/classes" ]
+  },
+  "archive": {
+    "exclude": [
+      "node_modules",
+      ".gitignore",
+      "test",
+      "circle.yml",
+      "composer.lock",
+      "gruntfile.js",
+      "package.json"
+    ]
+  },
+  "extra": {
+    "splashes": {
+      "install": "static/splashes/install.php"
+    },
+    "schemas": {
+      "dependencies" : {
+        "modules": {},
+        "plugins": []
+      },
+      "licenses" : {
+        "client" : {
+          "screen": {
+            "parent": "edit.php?post_type=property",
+            "page_title": "l10n.licenses_page_title",
+            "menu_title": "l10n.licenses_menu_title"
+          }
+        },
+        "product" : false
+      }
+    }
+  }
+}
