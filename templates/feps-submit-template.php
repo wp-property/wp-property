@@ -73,7 +73,7 @@
         </div>
         <div class="<?php wpp_css("feps-default-template::input-wrapper","wpp_feps_input_wrapper"); ?>">
           <div class="<?php wpp_css("feps-default-template::input-content","wpp_feps_input_content"); ?>">
-            <input tabindex="<?php echo $tabindex; ?>" type="text" id="<?php echo $form_id; ?>_user_email" name="wpp_feps_data[user_email]" class="<?php wpp_css("feps-default-template::input-class","wpp_feps_user_email"); ?>" value="<?php echo $current_user->data->user_email; ?>" />
+            <input autocomplete="off" tabindex="<?php echo $tabindex; ?>" type="text" id="<?php echo $form_id; ?>_user_email" name="wpp_feps_data[user_email]" class="<?php wpp_css("feps-default-template::input-class","wpp_feps_user_email"); ?>" value="<?php echo $current_user->data->user_email; ?>" />
           </div>
         </div>
         <div class="<?php wpp_css("feps-default-template::clear","clear"); ?>"></div>
@@ -84,7 +84,7 @@
         </div>
         <div class="<?php wpp_css("feps-default-template::input-wrapper","wpp_feps_input_wrapper"); ?>">
           <div class="<?php wpp_css("feps-default-template::input-content","wpp_feps_input_content"); ?>">
-            <input tabindex="<?php echo $tabindex; ?>" type="password" id="<?php echo $form_id; ?>_user_password" name="wpp_feps_data[user_password]"  class="<?php wpp_css("feps-default-template::input-class","wpp_feps_user_password"); ?>" />
+            <input autocomplete="off" tabindex="<?php echo $tabindex; ?>" type="password" id="<?php echo $form_id; ?>_user_password" name="wpp_feps_data[user_password]"  class="<?php wpp_css("feps-default-template::input-class","wpp_feps_user_password"); ?>" />
           </div>
         </div>
         <div class="<?php wpp_css("feps-default-template::clear","clear"); ?>"></div>
