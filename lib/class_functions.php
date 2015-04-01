@@ -296,6 +296,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       register_taxonomy( $taxonomy, 'property', $wp_properties[ 'taxonomies' ][ $taxonomy ] );
     }
 
+    //die( '<pre>' . print_r( $wp_properties, true ) . '</pre>' );
   }
 
   /**
@@ -2572,6 +2573,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       if( !empty( $backup_contents ) ) {
         $decoded_settings = json_decode( $backup_contents, true );
       }
+
       if( !empty( $decoded_settings ) ) {
         //** Allow features to preserve their settings that are not configured on the settings page */
         $wpp_settings = apply_filters( 'wpp_settings_save', $decoded_settings, $wp_properties );
@@ -2608,6 +2610,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     }
 
+    //die('lalks' . time());
     add_filter( 'wpp_image_sizes', array( 'WPP_F', 'remove_deleted_image_sizes' ) );
 
     // Filers are applied
