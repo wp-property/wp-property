@@ -30,7 +30,7 @@ class WPP_Core {
     add_filter( 'request', 'property_feed' );
 
     //** Check if Facebook tries to request site */
-    //add_action( 'init', array( 'WPP_F', 'check_facebook_tabs' ) );
+    add_action( 'init', array( 'WPP_F', 'check_facebook_tabs' ) );
 
     //** Hook in upper init */
     add_action( 'init', array( $this, 'init_upper' ), 0 );
