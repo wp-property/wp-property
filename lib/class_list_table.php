@@ -26,7 +26,7 @@ class WPP_List_Table extends WP_List_Table {
    * Setup options mostly.
    *
    * @todo Get list of displayed columns from options
-   *
+   * @param string $args
    */
   function __construct( $args = '' ) {
   
@@ -109,9 +109,8 @@ class WPP_List_Table extends WP_List_Table {
 
   /**
    * Initialize the DataTable View
-   *
    */
-  function data_tables_script( $args = '' ) {
+  function data_tables_script() {
     ?>
     <script type="text/javascript">
       var wp_list_table;
@@ -233,7 +232,8 @@ class WPP_List_Table extends WP_List_Table {
    * Get search results based on query.
    *
    * @todo Needs to be updated to handle the AJAX requests.
-   *
+   * @param bool $wpp_search
+   * @param bool $ajax
    */
   function prepare_items( $wpp_search = false, $ajax = true ) {
 
@@ -267,6 +267,7 @@ class WPP_List_Table extends WP_List_Table {
    *
    * @since 3.1.0
    * @access protected
+   * @param string $which
    */
   function display_tablenav( $which ) {
     if ( 'top' == $which ) {
@@ -297,6 +298,10 @@ class WPP_List_Table extends WP_List_Table {
    *
    * @since 3.1.0
    * @access protected
+   * @param string $post_type
+   * @param string $field_name
+   * @param bool $return
+   * @return string|void
    */
   function months_dropdown( $post_type, $field_name = 'm', $return = false ) {
     global $wpdb, $wp_locale;
@@ -362,12 +367,12 @@ class WPP_List_Table extends WP_List_Table {
    *
    * @since 3.1.0
    * @access public
+   * @param string $args
    */
   function display( $args = '' ) {
     /* Display Bulk Actions if exist */
-    $this->display_tablenav( 'top', $args );
-    ?>
-    <div class="wpp_above_overview_table"></div>
+    $this->display_tablenav( 'top', $args ); ?>
+    <div class="wpp_above_overview_table"<?php do_action( 'wpp:above_overview_table', $this ); ?>></div>
     <table id="wp-list-table" class="wp-list-table <?php echo implode( ' ', $this->get_table_classes() ); ?>"
       cellspacing="0">
       <thead>
@@ -413,7 +418,10 @@ class WPP_List_Table extends WP_List_Table {
 
   /**
    * Keep it simple here.  Mostly to be either replaced by child classes, or hook into
-   *
+   * @param $full_column_name
+   * @param $object
+   * @param $object_id
+   * @return mixed|void
    */
   function single_cell( $full_column_name, $object, $object_id ) {
     global $wpi;
