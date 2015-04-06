@@ -143,6 +143,12 @@
   background: #fff;
   padding: 0 10px 10px;
 }
+#wpp_inquiry_attribute_fields tbody tr {
+  cursor: move;
+}
+#wpp_inquiry_meta_fields tbody tr {
+  cursor: move;
+}
 body.property_page_wpp_property_import .wpp-description {
   padding: 0.5em 1em;
   opacity: 0.6;

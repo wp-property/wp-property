@@ -8,22 +8,6 @@ global $wpdb, $wp_properties;
 $wpp_inheritable_attributes = $wp_properties[ 'property_stats' ];
 
 ?>
-
-<script type="text/javascript">
-  //var geo_type_attrs = <?php echo json_encode((array)$wp_properties['geo_type_attributes']); ?>
-
-</script>
-<style type="style/text">
-  #wpp_inquiry_attribute_fields tbody tr {
-    cursor: move;
-  }
-
-  #wpp_inquiry_meta_fields tbody tr {
-    cursor: move;
-  }
-</style>
-
-
 <table class="form-table">
 
   <tr>
