@@ -418,7 +418,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
   ?>
 
   <div id="tab_troubleshooting">
-    <div class="wpp_inner_tab">
+    <div class="wpp_inner_tab wp-core-ui">
 
       <div class="wpp_settings_block">
         <label>
@@ -438,31 +438,31 @@ if ( get_option( 'permalink_structure' ) == '' ) {
         <?php _e( 'Revalidate all addresses using', 'wpp' ); ?>
         <b><?php echo $google_map_localizations[ $wp_properties[ 'configuration' ][ 'google_maps_localization' ] ]; ?></b> <?php _e( 'localization', 'wpp' ); ?>
         .
-         <input type="button" value="<?php _e( 'Revalidate', 'wpp' ); ?>" id="wpp_ajax_revalidate_all_addresses">
+         <input type="button" value="<?php _e( 'Revalidate', 'wpp' ); ?>" id="wpp_ajax_revalidate_all_addresses" class="button">
       </div>
 
       <div class="wpp_settings_block"><?php printf(__( 'Enter in the ID of the %1s you want to look up, and the class will be displayed below.', 'wpp' ), WPP_F::property_label( 'singular' )) ?>
         <input type="text" id="wpp_property_class_id"/>
-        <input type="button" value="<?php _e( 'Lookup', 'wpp' ) ?>" id="wpp_ajax_property_query"> <span id="wpp_ajax_property_query_cancel" class="wpp_link hidden"><?php _e( 'Cancel', 'wpp' ) ?></span>
+        <input type="button" class="button" value="<?php _e( 'Lookup', 'wpp' ) ?>" id="wpp_ajax_property_query"> <span id="wpp_ajax_property_query_cancel" class="wpp_link hidden"><?php _e( 'Cancel', 'wpp' ) ?></span>
         <pre id="wpp_ajax_property_result" class="wpp_class_pre hidden"></pre>
       </div>
 
       <div class="wpp_settings_block"><?php printf(__( 'Get %1s image data.', 'wpp' ), WPP_F::property_label( 'singular' )) ?>
         <label for="wpp_image_id"><?php printf(__( '%1s ID:', 'wpp' ), WPP_F::property_label( 'singular' )) ?></label>
         <input type="text" id="wpp_image_id"/>
-        <input type="button" value="<?php _e( 'Lookup', 'wpp' ) ?>" id="wpp_ajax_image_query"> <span id="wpp_ajax_image_query_cancel" class="wpp_link hidden"><?php _e( 'Cancel', 'wpp' ) ?></span>
+        <input type="button" class="button" value="<?php _e( 'Lookup', 'wpp' ) ?>" id="wpp_ajax_image_query"> <span id="wpp_ajax_image_query_cancel" class="wpp_link hidden"><?php _e( 'Cancel', 'wpp' ) ?></span>
         <pre id="wpp_ajax_image_result" class="wpp_class_pre hidden"></pre>
       </div>
 
       <div class="wpp_settings_block">
         <?php _e( 'Look up the <b>$wp_properties</b> global settings array.  This array stores all the default settings, which are overwritten by database settings, and custom filters.', 'wpp' ) ?>
-        <input type="button" value="<?php _e( 'Show $wp_properties', 'wpp' ) ?>" id="wpp_show_settings_array"> <span id="wpp_show_settings_array_cancel" class="wpp_link hidden"><?php _e( 'Cancel', 'wpp' ) ?></span>
+        <input type="button" class="button" value="<?php _e( 'Show $wp_properties', 'wpp' ) ?>" id="wpp_show_settings_array"> <span id="wpp_show_settings_array_cancel" class="wpp_link hidden"><?php _e( 'Cancel', 'wpp' ) ?></span>
         <pre id="wpp_show_settings_array_result" class="wpp_class_pre hidden"><?php print_r( $wp_properties ); ?></pre>
       </div>
 
       <div class="wpp_settings_block">
         <?php _e( 'Clear WPP Cache. Some shortcodes and widgets use cache, so the good practice is clear it after widget, shortcode changes.', 'wpp' ) ?>
-        <input type="button" value="<?php _e( 'Clear Cache', 'wpp' ) ?>" id="wpp_clear_cache">
+        <input type="button" class="button" value="<?php _e( 'Clear Cache', 'wpp' ) ?>" id="wpp_clear_cache">
       </div>
 
       <div class="wpp_settings_block"><?php printf(__( 'Set all %1s to same %2s type:', 'wpp' ), WPP_F::property_label( 'plural' ), WPP_F::property_label( 'singular' )) ?>
@@ -470,7 +470,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
         <?php foreach ( $wp_properties[ 'property_types' ] as $p_slug => $p_label ) { ?>
           <option value="<?php echo $p_slug; ?>"><?php echo $p_label; ?></option>
         <?php } ?>
-          <input type="button" value="<?php _e( 'Set', 'wpp' ) ?>" id="wpp_ajax_max_set_property_type">
+          <input type="button" class="button" value="<?php _e( 'Set', 'wpp' ) ?>" id="wpp_ajax_max_set_property_type">
         <pre id="wpp_ajax_max_set_property_type_result" class="wpp_class_pre hidden"></pre>
       </div>
 
