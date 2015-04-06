@@ -429,7 +429,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
       <div class="wpp_settings_block">
         <?php _e( "Restore Backup of WP-Property Configuration", 'wpp' ); ?>
-        : <input name="wpp_settings[settings_from_backup]" id="wpp_backup_file" type="file"/>
+        : <input name="wpp_settings[settings_from_backup]" class="" id="wpp_backup_file" type="file"/>
         <a href="<?php echo wp_nonce_url( "edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup", 'download-wpp-backup' ); ?>"><?php _e( 'Download Backup of Current WP-Property Configuration.', 'wpp' ); ?></a>
       </div>
 
@@ -437,7 +437,6 @@ if ( get_option( 'permalink_structure' ) == '' ) {
         <?php $google_map_localizations = WPP_F::draw_localization_dropdown( 'return_array=true' ); ?>
         <?php _e( 'Revalidate all addresses using', 'wpp' ); ?>
         <b><?php echo $google_map_localizations[ $wp_properties[ 'configuration' ][ 'google_maps_localization' ] ]; ?></b> <?php _e( 'localization', 'wpp' ); ?>
-        .
          <input type="button" value="<?php _e( 'Revalidate', 'wpp' ); ?>" id="wpp_ajax_revalidate_all_addresses" class="button">
       </div>
 

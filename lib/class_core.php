@@ -174,7 +174,7 @@ class WPP_Core {
     //** Load Localization early so plugins can use them as well */
     //** Try to generate static localization script. It can be flushed on Clear Cache! */
     if( $this->maybe_generate_l10n_script() ) {
-      wp_register_script( 'wpp-localization', WPP_URL . 'cache/l10n.js', array(), WPP_Version );
+      wp_register_script( 'wpp-localization', ud_get_wp_property()->path( 'static/cache/l10n.js', 'url' ), array(), WPP_Version );
     }
     
     wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
@@ -1904,7 +1904,7 @@ class WPP_Core {
    * @author peshkov@UD
    */
   static function maybe_generate_l10n_script() {
-    $dir = WPP_Path . 'static/cache/';
+    $dir = ud_get_wp_property()->path( 'static/cache/', 'dir' );
     $file = $dir . 'l10n.js';
     //** File already created! */
     if( file_exists( $file ) ){
@@ -1916,7 +1916,8 @@ class WPP_Core {
     }
     $l10n = array();
     //** Include the list of translations */
-    include_once WPP_Path . 'l10n.php';
+    $l10n_dir = ud_get_wp_property()->path( 'l10n.php', 'dir' );
+    include_once( $l10n_dir );
     /** All additional localizations must be added using the filter below. */
     $l10n = apply_filters( 'wpp::js::localization', $l10n );
     foreach ( (array) $l10n as $key => $value ) {

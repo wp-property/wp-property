@@ -20,6 +20,7 @@ $l10n = array(
   'undefined_error'                 => __( 'Undefined Error.', 'wpp' ),
   'set_property_type_confirmation'  => __( 'You are about to set ALL your properties to the selected property type. Are you sure?', 'wpp' ),
   'processing'                      => __( 'Processing...', 'wpp' ),
+  'geo_attribute_usage'             => __( 'Attention! This attribute (slug) is used by Google Validator and Address Display functionality. It is set automatically and can not be edited on Property Adding/Updating page.','wpp' ),
 
   //** Ajaxupload */
   'uploading'                       => __( 'Uploading', 'wpp' ),
