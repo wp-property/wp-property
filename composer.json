@@ -2,10 +2,10 @@
   "name": "wp-property/wp-property",
   "type": "wordpress-plugin",
   "minimum-stability": "dev",
-  "homepage": "https://www.usabilitydynamics/product/wp-property",
+  "homepage": "https://www.usabilitydynamics.com/product/wp-property",
   "author": {
     "name": "UsabilityDynamics, Inc.",
-    "url": "https://usabilitydynamics.com"
+    "url": "https://www.usabilitydynamics.com"
   },
   "repositories": [
     {
@@ -21,7 +21,7 @@
     "php": ">=5.3",
     "usabilitydynamics/lib-settings": "*",
     "usabilitydynamics/lib-wp-bootstrap": "*",
-    "usabilitydynamics/lib-ud-api-client": "1.0.3"
+    "usabilitydynamics/lib-ud-api-client": "*"
   },
   "require-dev": {
     "usabilitydynamics/lib-wp-phpunit": "master",
