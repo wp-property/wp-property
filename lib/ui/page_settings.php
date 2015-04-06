@@ -218,7 +218,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
               continue;
 
             // Disable if WP not a WPP image size
-            if ( @!is_array( $wpp_image_sizes[ $slug ] ) )
+            if ( !isset( $wpp_image_sizes[ $slug ] ) || !is_array( $wpp_image_sizes[ $slug ] ) )
               $disabled = true;
             else
               $disabled = false;
