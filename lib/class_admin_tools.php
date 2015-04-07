@@ -94,7 +94,7 @@ if( !class_exists( 'class_admin_tools' ) ) {
     }
 
     /**
-     * Adds admin tools manu to settings page navigation
+     * Adds admin tools menu to settings page navigation
      *
      * @version 1.0
      * Copyright 2010 Andy Potanin, TwinCitiesTech.com, Inc.  <andy.potanin@twincitiestech.com>
@@ -112,11 +112,35 @@ if( !class_exists( 'class_admin_tools' ) ) {
     /**
      * Displays advanced management page
      *
-     *
-     * @version 1.0
-     * Copyright 2010 Andy Potanin, TwinCitiesTech.com, Inc.  <andy.potanin@twincitiestech.com>
+     * @version 2.0
      */
     static function settings_page() {
+
+      $tabs = apply_filters( 'wpp::settings_developer::tabs', array(
+        'attributes' => array(
+          'label' => __( 'Attributes', ud_get_wp_property()->domain ),
+          'template' => ud_get_wp_property()->path( 'static/views/admin/settings-developer-attributes.php', 'dir' ),
+          'order' => 10
+        ),
+        'meta' => array(
+          'label' => __( 'Meta', ud_get_wp_property()->domain ),
+          'template' => ud_get_wp_property()->path( 'static/views/admin/settings-developer-meta.php', 'dir' ),
+          'order' => 20
+        ),
+        'types' => array(
+          'label' => __( 'Types', ud_get_wp_property()->domain ),
+          'template' => ud_get_wp_property()->path( 'static/views/admin/settings-developer-types.php', 'dir' ),
+          'order' => 30
+        ),
+        'advanced' => array(
+          'label' => __( 'Advanced', ud_get_wp_property()->domain ),
+          'template' => ud_get_wp_property()->path( 'static/views/admin/settings-developer-advanced.php', 'dir' ),
+          'order' => 40
+        ),
+      ) );
+
+      /* Sort Tabs by 'order' */
+      uasort( $tabs, create_function( '$a,$b', 'if ($a[\'order\'] == $b[\'order\']) { return 0; } return ($a[\'order\'] > $b[\'order\']) ? 1 : -1;' ) );
 
       $template = ud_get_wp_property()->path( 'static/views/admin/settings-developer.php', 'dir' );
       include( $template );

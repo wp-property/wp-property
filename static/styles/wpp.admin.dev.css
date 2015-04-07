@@ -59,6 +59,44 @@
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 }
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav.tabs {
+  float: left;
+  height: auto;
+  position: relative;
+  width: 10% !important;
+  z-index: 1;
+  border: none;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav.tabs li {
+  border: 1px solid #d0d0d0;
+  border-right: none;
+  height: auto !important;
+  margin: 10px -1px 0 0;
+  padding: 0;
+  width: 100%;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav.tabs li a {
+  display: block;
+  padding: 5px 10px;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav.tabs li.ui-tabs-active {
+  background-color: #f1f1f1;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-panel {
+  width: 85%;
+  position: relative;
+  border-right: none;
+  border-bottom: none;
+  border-left: 1px solid #d0d0d0;
+  clear: none;
+  float: left;
+  padding-left: 20px;
+  min-height: 300px;
+}
+/* Settings Developer Tab */
+#wpp_developer_tab {
+  padding-top: 20px;
+}
 .wpp-expandable {
   background: #fafafa;
   color: #222;
@@ -354,14 +392,10 @@ select.wpp_error {
 }
 .wpp_property_stat_functions {
   float: right;
-  color: #7E7E7E;
+  margin-top: 1em;
 }
 .wpp_property_stat_functions .wpp_all_advanced_settings {
-  color: #C27818;
   cursor: pointer;
-}
-.wpp_property_stat_functions #sort_stats_by_groups {
-  margin-left: 10px;
 }
 #wpcontent .widget-content select {
   max-width: 100%;
@@ -621,6 +655,9 @@ body.property_page_show_agents .wp-list-table .column-id {
   /* CSS3 - Text module (Candidate Recommendation) http://www.w3.org/TR/css3-text/#white-space */
   word-wrap: break-word;
   /* IE 5.5+ */
+}
+.wpp_attribute_name_col {
+  width: 240px;
 }
 .wpp_attribute_name_col input {
   width: 226px;
@@ -1013,7 +1050,7 @@ input.wpp_featured_toggle {
   box-shadow: none;
 }
 .wpp_tabs ul.tabs li a:hover {
-  color: #9D611D;
+  color: #45bbe6;
 }
 .wpp_tabs ul.tabs li.ui-tabs-selected,
 .wpp_tabs ul.tabs li.ui-state-active {

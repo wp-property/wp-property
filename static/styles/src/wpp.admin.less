@@ -77,6 +77,58 @@
 
 }
 
+// UI Layout with Tabs Sidebar on Left.
+.ui-tabs.ui-tabs-vertical {
+
+  .ui-tabs-nav.tabs {
+    float: left;
+    height: auto;
+    position: relative;
+    width: 10% !important;
+    z-index:1;
+    border: none;
+
+    li {
+      border: 1px solid #d0d0d0;
+      border-right: none;
+      height: auto !important;
+      margin: 10px -1px 0 0;
+      padding: 0;
+      width: 100%;
+
+      a {
+        display: block;
+        padding: 5px 10px;
+      }
+
+      &.ui-tabs-active {
+        background-color: #f1f1f1;
+      }
+
+    }
+
+  }
+
+  .ui-tabs-panel {
+    width: 85%;
+    position: relative;
+    border-bottom: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: 1px solid #d0d0d0;
+    clear: none;
+    float: left;
+    padding-left: 20px;
+    min-height: 300px;
+  }
+
+}
+
+/* Settings Developer Tab */
+#wpp_developer_tab {
+  padding-top: 20px;
+}
+
 // Expandable Item Rows.
 .wpp-expandable {
   background: #fafafa;
@@ -461,16 +513,15 @@ select.wpp_error {
 
 .wpp_property_stat_functions {
   float: right;
-  color: #7E7E7E;
+  margin-top: 1em;
 }
 
 .wpp_property_stat_functions .wpp_all_advanced_settings {
-  color: #C27818;
   cursor: pointer;
 }
 
 .wpp_property_stat_functions #sort_stats_by_groups {
-  margin-left: 10px;
+
 }
 
 #wpcontent .widget-content select {
@@ -804,8 +855,13 @@ body.property_page_show_agents .wp-list-table .column-id {
   word-wrap: break-word; /* IE 5.5+ */
 }
 
-.wpp_attribute_name_col input {
-  width: 226px;
+.wpp_attribute_name_col {
+  width: 240px;
+  
+  input {
+    width: 226px;
+  }
+
 }
 
 .wpp_attribute_name_col input.slug_setter {
@@ -1278,7 +1334,7 @@ input.wpp_featured_toggle {
 }
 
 .wpp_tabs ul.tabs li a:hover {
-  color: #9D611D;
+  color: #45bbe6;
 }
 
 .wpp_tabs ul.tabs li.ui-tabs-selected,
@@ -1876,11 +1932,11 @@ p.pad10 {
   .wpp_plan_price_col,
   .wpp_plan_duration_col,
   .wpp_plan_images_limit_col {
-  
+
     input[type="text"] {
       width: 50px;
     }
-  
+
   }
 
 }
@@ -1892,15 +1948,15 @@ p.pad10 {
 .property_page_wpp_property_pdf_lists {
 
   .form-table {
-    
+
     th {
       padding: 20px 10px;
     }
-    
+
     td {
       vertical-align: baseline;
     }
-    
+
   }
 
 }
