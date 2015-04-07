@@ -670,10 +670,10 @@ body.property_page_show_agents .wp-list-table .column-id {
 }
 #wpp_inquiry_attribute_fields .wpp_admin_input_col,
 #wpp_inquiry_attribute_fields .wpp_search_input_col {
-  width: 160px;
+  width: 200px;
 }
 #wpp_inquiry_attribute_fields .wpp_settings_input_col {
-  width: 150px;
+  width: 220px;
 }
 .wpp_search_input_col select,
 .wpp_search_input_col textarea,
@@ -815,7 +815,11 @@ td.wpp_draggable_handle {
 /* SETTINGS ATTRS GROUP */
 th.wpp_attribute_group_col,
 td.wpp_attribute_group_col {
-  width: 20px !important;
+  width: 140px;
+}
+th.wpp_attribute_group_col input,
+td.wpp_attribute_group_col input {
+  width: 120px;
 }
 div.wpp_attribute_group {
   cursor: pointer;
