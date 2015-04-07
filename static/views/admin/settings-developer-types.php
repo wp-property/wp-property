@@ -4,6 +4,10 @@
  * Section 'Types'
  */
 
+global $wp_properties;
+
+$wpp_inheritable_attributes = $wp_properties[ 'property_stats' ];
+
 ?>
 <h3><?php printf( __( '%1s Types', 'wpp' ), WPP_F::property_label() ); ?></h3>
 <table id="wpp_inquiry_property_types" class="ud_ui_dynamic_table widefat" allow_random_slug="true">

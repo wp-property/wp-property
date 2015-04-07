@@ -189,7 +189,11 @@ class WPP_F extends UsabilityDynamics\Utility {
     // Setup taxonomies
     $wp_properties[ 'taxonomies' ] = apply_filters( 'wpp_taxonomies', array(
       'property_feature'  => array(
-        'hierarchical' => false,
+        'hierarchical'        => false,
+        'public'              => true,
+        'show_ui'             => true,
+        'show_in_nav_menus'   => true,
+        'show_tagcloud'       => true,
         'label'        => _x( 'Features', 'taxonomy general name', 'wpp' ),
         'labels'       => array(
           'name'              => _x( 'Features', 'taxonomy general name', 'wpp' ),
@@ -209,6 +213,10 @@ class WPP_F extends UsabilityDynamics\Utility {
       ),
       'community_feature' => array(
         'hierarchical' => false,
+        'public'              => true,
+        'show_ui'             => true,
+        'show_in_nav_menus'   => true,
+        'show_tagcloud'       => true,
         'label'        => _x( 'Community Features', 'taxonomy general name', 'wpp' ),
         'labels'       => array(
           'name'              => _x( 'Community Features', 'taxonomy general name', 'wpp' ),
@@ -266,7 +274,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       'menu_icon'           => WPP_URL . 'images/pp_menu-1.6.png'
     ) );
 
-    if( $wp_properties[ 'taxonomies' ] ) {
+    if( !empty( $wp_properties[ 'taxonomies' ] ) && is_array( $wp_properties[ 'taxonomies' ] ) ) {
     
       foreach( $wp_properties[ 'taxonomies' ] as $taxonomy => $taxonomy_data ) {
 
@@ -278,20 +286,23 @@ class WPP_F extends UsabilityDynamics\Utility {
           continue;
         }
 
-        register_taxonomy( $taxonomy, 'property', array(
-          'hierarchical' => $taxonomy_data[ 'hierarchical' ],
-          'label'        => $taxonomy_data[ 'label' ],
-          'labels'       => $taxonomy_data[ 'labels' ],
-          'query_var'    => $taxonomy,
-          'rewrite'      => array( 'slug' => $taxonomy ),
-          'show_ui'      => ( current_user_can( 'manage_wpp_categories' ) ? true : false ),
+        register_taxonomy( $taxonomy, 'property', apply_filters( 'wpp::register_taxonomy', array(
+          'hierarchical'      => isset( $taxonomy_data[ 'hierarchical' ] ) ? $taxonomy_data[ 'hierarchical' ] : false,
+          'label'             => isset( $taxonomy_data[ 'label' ] ) ? $taxonomy_data[ 'label' ] : $taxonomy,
+          'labels'            => isset( $taxonomy_data[ 'labels' ] ) ? $taxonomy_data[ 'labels' ] : array(),
+          'query_var'         => $taxonomy,
+          'rewrite'           => array( 'slug' => $taxonomy ),
+          'public'            => isset( $taxonomy_data[ 'public' ] ) ? $taxonomy_data[ 'public' ] : true,
+          'show_ui'           => isset( $taxonomy_data[ 'show_ui' ] ) ? $taxonomy_data[ 'show_ui' ] : true,
+          'show_in_nav_menus' => isset( $taxonomy_data[ 'show_in_nav_menus' ] ) ? $taxonomy_data[ 'show_in_nav_menus' ] : true,
+          'show_tagcloud'     => isset( $taxonomy_data[ 'show_tagcloud' ] ) ? $taxonomy_data[ 'show_tagcloud' ] : true,
           'capabilities' => array(
             'manage_terms' => 'manage_wpp_categories',
             'edit_terms'   => 'manage_wpp_categories',
             'delete_terms' => 'manage_wpp_categories',
             'assign_terms' => 'manage_wpp_categories'
           )
-        ) );
+        ), $taxonomy ) );
       }
     }
 
@@ -2534,6 +2545,7 @@ class WPP_F extends UsabilityDynamics\Utility {
         }
       }
       update_option( 'wpp_settings', $wpp_settings );
+      do_action( 'wpp::save_settings', $data );
     } catch( Exception $e ) {
       $return[ 'success' ] = false;
       $return[ 'message' ] = $e->getMessage();

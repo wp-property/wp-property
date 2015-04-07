@@ -4,6 +4,8 @@
  * Section 'Advanced'
  */
 
+global $wp_properties;
+
 ?>
 <h3><?php _e( 'Advanced Options', 'wpp' ); ?></h3>
 <ul>

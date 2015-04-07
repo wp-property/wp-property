@@ -4,6 +4,8 @@
  * Section 'Meta'
  */
 
+global $wp_properties;
+
 ?>
 <h3><?php printf( __( '%1s Meta', 'wpp' ), WPP_F::property_label() ); ?></h3>
 <p><?php _e( 'Meta is used for descriptions,  on the back-end  meta fields will be displayed as textareas.  On the front-end they will be displayed as individual sections.', 'wpp' ) ?></p>

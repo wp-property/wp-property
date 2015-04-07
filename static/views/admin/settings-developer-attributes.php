@@ -4,6 +4,8 @@
  * Section 'Attributes'
  */
 
+global $wp_properties;
+
 ?>
 <div>
   <h3 style="float:left;"><?php printf( __( '%1s Attributes', 'wpp' ), WPP_F::property_label() ); ?></h3>

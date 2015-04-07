@@ -587,6 +587,9 @@ body #normal-sortables .inside table.property_meta {
   display: none;
 }
 /* WordPress 3.2 Compatibility End */
+.wpp_dynamic_table_row[new_row="true"] .hide-on-new-row {
+  display: none;
+}
 #property_meta .inside .widefat .wpp_hidden_frontend_attribute th,
 .inside table.property_meta.widefat .wpp_hidden_frontend_attribute th {
   background: #F5F8DA;
