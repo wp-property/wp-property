@@ -63,7 +63,7 @@
   float: left;
   height: auto;
   position: relative;
-  width: 10% !important;
+  width: 15% !important;
   z-index: 1;
   border: none;
 }
@@ -83,7 +83,7 @@
   background-color: #f1f1f1;
 }
 .ui-tabs.ui-tabs-vertical .ui-tabs-panel {
-  width: 85%;
+  width: 80%;
   position: relative;
   border-right: none;
   border-bottom: none;
