@@ -7,6 +7,13 @@
     "name": "UsabilityDynamics, Inc.",
     "url": "https://www.usabilitydynamics.com"
   },
+  "config": {
+    "preferred-install": "dist",
+    "github-protocols": [ "ssh" ],
+    "vendor-dir": "vendor/libraries",
+    "bin-dir": "vendor/bin",
+    "optimize-autoloader": true
+  },
   "repositories": [
     {
       "type": "composer",
@@ -21,14 +28,17 @@
     "php": ">=5.3",
     "usabilitydynamics/lib-settings": "*",
     "usabilitydynamics/lib-wp-bootstrap": "*",
-    "usabilitydynamics/lib-ud-api-client": "*"
+    "usabilitydynamics/lib-ud-api-client": "*",
+    "usabilitydynamics/wp-meta-box": "4.4.3.2"
   },
   "require-dev": {
     "usabilitydynamics/lib-wp-phpunit": "master",
     "codeclimate/php-test-reporter": "dev-master"
   },
   "autoload": {
-    "classmap": [ "lib/classes" ]
+    "classmap": [
+      "lib/classes"
+    ]
   },
   "archive": {
     "exclude": [
@@ -42,6 +52,17 @@
     ]
   },
   "extra": {
+    "installer-paths": {
+      "vendor/plugins/{$name}": [
+        "type:wordpress-muplugin",
+        "type:wordpress-module",
+        "type:wordpress-plugin",
+        "type:wpackagist-plugin"
+      ],
+      "vendor/libraries/{$vendor}/{$name}": [
+        "type:wordpress-library"
+      ]
+    },
     "splashes": {
       "install": "static/splashes/install.php"
     },
@@ -52,6 +73,7 @@
       },
       "licenses" : {
         "client" : {
+          "slug": "wp-property/wp-property",
           "screen": {
             "parent": "edit.php?post_type=property",
             "page_title": "l10n.licenses_page_title",
