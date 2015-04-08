@@ -58,7 +58,7 @@ namespace UsabilityDynamics\WPP {
         $this->core = new \WPP_Core();
 
         //** Initiate Meta Box Handler */
-        //new Meta_Box();
+        new Meta_Box();
       }
       
       /**

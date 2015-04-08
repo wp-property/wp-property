@@ -1097,7 +1097,7 @@ class WPP_Core {
 
     //* Adds metabox 'General Information' to Property Edit Page */
 
-    //*
+    /*
     add_meta_box( 'wpp_property_meta', __( 'General Information', 'wpp' ), array( 'WPP_UI', 'metabox_meta' ), 'property', 'normal', 'high' );
     // Adds 'Group' metaboxes to Property Edit Page
     if ( !empty( $wp_properties[ 'property_groups' ] ) ) {
