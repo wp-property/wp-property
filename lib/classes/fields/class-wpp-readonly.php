@@ -2,20 +2,10 @@
 // Prevent loading this file directly
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'RWMB_Custom_Readonly_Field' ) )
+if ( ! class_exists( 'RWMB_Wpp_Readonly_Field' ) )
 {
-  class RWMB_Custom_Readonly_Field extends RWMB_Text_Field
+  class RWMB_Wpp_Readonly_Field extends RWMB_Text_Field
   {
-
-    /**
-     * Enqueue scripts and styles
-     *
-     * @return void
-     */
-    static function admin_enqueue_scripts()
-    {
-      wp_enqueue_style( 'rwmb-text', RWMB_CSS_URL . 'text.css', array(), RWMB_VER );
-    }
 
     /**
      * Get field HTML

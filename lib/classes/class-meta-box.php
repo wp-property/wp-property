@@ -197,23 +197,38 @@ namespace UsabilityDynamics\WPP {
           $description[ ] = ( !empty( $descriptions[ $slug ] ) ? $descriptions[ $slug ] : '' );
 
           /**
-           * Prepare Input Type
+           * PREPARE INPUT TYPE
+           * May be convert input_type to valid type.
            */
           $input_type = !empty( $input_types[ $slug ] ) ? $input_types[ $slug ] : 'text';
-          //* May be convert input_type to valid type. */
+
+          //* Geo Attributes */
           if( in_array( $slug, $geo_type_attributes ) ) {
-            $input_type = 'custom_readonly';
+            $input_type = 'wpp_readonly';
             $description[] = __( 'The value is being generated automatically on Google Address Validation.', ud_get_wp_property()->domain );
           }
+
+          //* Legacy compatibility */
           if( in_array( $input_type, array( 'input' ) ) ) {
             $input_type = 'text';
           }
+
+          //* Legacy compatibility */
           if( in_array( $input_type, array( 'dropdown' ) ) ) {
             $input_type = 'select';
           }
+
+          //* Legacy compatibility */
           if( in_array( $input_type, array( 'checkbox' ) ) ) {
-            $input_type = 'custom_checkbox';
+            $input_type = 'wpp_checkbox';
           }
+
+          //** Determine if current attribute is used by Google Address Validator. */
+          if( ud_get_wp_property( 'configuration.address_attribute' ) == $slug ) {
+            $input_type = 'wpp_address';
+            $description[] = __( 'The value is being used by Google Address Validator to determine and prepare address to valid format. However you can set coordinates manually.', ud_get_wp_property()->domain );
+          }
+
           //* Is current attribute inherited from parent? If so, set it as readonly!. */
           if(
             isset( $post->post_parent ) &&
@@ -222,12 +237,13 @@ namespace UsabilityDynamics\WPP {
             !empty( $inherited_attributes[ $post->property_type ] ) &&
             in_array( $slug, $inherited_attributes[ $post->property_type ] )
           ) {
-            $input_type = 'custom_readonly';
+            $input_type = 'wpp_readonly';
             $description[] = sprintf( __( 'The value is inherited from Parent %s.', ud_get_wp_property()->domain ), \WPP_F::property_label() );
           }
+
           //** Is current attribute's value aggregated from child properties? If so, set it as readonly! */
           if( !empty( $aggregated_attributes ) && in_array( $slug, $aggregated_attributes ) ) {
-            $input_type = 'custom_readonly';
+            $input_type = 'wpp_readonly';
             $description[] = sprintf( __( 'The value is aggregated from Child %s.', ud_get_wp_property()->domain ), \WPP_F::property_label( 'plural' ) );
           }
 
@@ -249,15 +265,13 @@ namespace UsabilityDynamics\WPP {
           /**
            * Well, init field now.
            */
-          $field = array_filter( array(
+          $fields[] = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
             'id' => $slug,
             'name' => $label,
             'type' => $input_type,
             'desc' => implode( ' ', $description ),
             'options' => $options,
-          ) );
-
-          $fields[] = $field;
+          ) ), $slug, $post );
 
         }
 
