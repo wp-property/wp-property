@@ -258,7 +258,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     // Register custom post types
-    register_post_type( 'property', array(
+    register_post_type( 'property', apply_filters( 'wpp_post_type', array(
       'labels'              => $wp_properties[ 'labels' ],
       'public'              => true,
       'exclude_from_search' => ( isset( $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] ) && $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] == 'true' ? true : false ),
@@ -271,12 +271,31 @@ class WPP_F extends UsabilityDynamics\Utility {
       ),
       'query_var'           => $wp_properties[ 'configuration' ][ 'base_slug' ],
       'supports'            => $supports,
-      'menu_icon'           => WPP_URL . 'images/pp_menu-1.6.png'
-    ) );
+      'menu_icon'           => 'dashicons-admin-home'
+    ) ) );
 
     if( !empty( $wp_properties[ 'taxonomies' ] ) && is_array( $wp_properties[ 'taxonomies' ] ) ) {
 
       foreach( $wp_properties[ 'taxonomies' ] as $taxonomy => $taxonomy_data ) {
+
+      if( !isset( $taxonomy_data[ 'show_ui' ] ) ) {
+        $taxonomy_data[ 'show_ui' ] = ( current_user_can( 'manage_wpp_categories' ) ? true : false );
+      }
+
+      $wp_properties[ 'taxonomies' ][ $taxonomy ] = wp_parse_args( $taxonomy_data, array(
+        'hierarchical' => $taxonomy_data[ 'hierarchical' ],
+        'label'        => $taxonomy_data[ 'label' ],
+        'labels'       => $taxonomy_data[ 'labels' ],
+        'query_var'    => $taxonomy,
+        'show_ui'      => false,
+        'rewrite'      => array( 'slug' => $taxonomy ),
+        'capabilities' => array(
+          'manage_terms' => 'manage_wpp_categories',
+          'edit_terms'   => 'manage_wpp_categories',
+          'delete_terms' => 'manage_wpp_categories',
+          'assign_terms' => 'manage_wpp_categories'
+        )
+      ) );
 
         //** Check if taxonomy is disabled */
         if( isset( $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] ) &&
@@ -2583,6 +2602,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       if( !empty( $backup_contents ) ) {
         $decoded_settings = json_decode( $backup_contents, true );
       }
+
       if( !empty( $decoded_settings ) ) {
         //** Allow features to preserve their settings that are not configured on the settings page */
         $wpp_settings = apply_filters( 'wpp_settings_save', $decoded_settings, $wp_properties );
@@ -4448,8 +4468,6 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     return $gpid;
 
-    return false;
-
   }
 
   /**
@@ -4534,8 +4552,8 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     $values = $wpdb->get_col( "
       SELECT pm.meta_value
-      FROM {$wpdb->prefix}posts AS p
-      JOIN {$wpdb->prefix}postmeta AS pm ON pm.post_id = p.ID
+      FROM {$wpdb->posts} AS p
+      JOIN {$wpdb->postmeta} AS pm ON pm.post_id = p.ID
         WHERE p.ID IN (" . $property_ids . ")
           AND p.post_status = 'publish'
           AND pm.meta_key = '$meta_key'
