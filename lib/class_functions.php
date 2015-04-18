@@ -4552,8 +4552,8 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     $values = $wpdb->get_col( "
       SELECT pm.meta_value
-      FROM {$wpdb->posts} AS p
-      JOIN {$wpdb->postmeta} AS pm ON pm.post_id = p.ID
+      FROM {$wpdb->prefix}posts AS p
+      JOIN {$wpdb->prefix}postmeta AS pm ON pm.post_id = p.ID
         WHERE p.ID IN (" . $property_ids . ")
           AND p.post_status = 'publish'
           AND pm.meta_key = '$meta_key'
