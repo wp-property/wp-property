@@ -159,10 +159,10 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     //** Register a sidebar for each property type */
-    if( 
+    if(
       !isset( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] ) ||
       ( isset( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] ) && $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] != 'true' )
-      ) {
+    ) {
       foreach( (array)$wp_properties[ 'property_types' ] as $property_slug => $property_title ) {
         register_sidebar( array(
           'name'          => sprintf( __( 'Property: %s', 'wpp' ), $property_title ),
@@ -189,7 +189,11 @@ class WPP_F extends UsabilityDynamics\Utility {
     // Setup taxonomies
     $wp_properties[ 'taxonomies' ] = apply_filters( 'wpp_taxonomies', array(
       'property_feature'  => array(
-        'hierarchical' => false,
+        'hierarchical'        => false,
+        'public'              => true,
+        'show_ui'             => true,
+        'show_in_nav_menus'   => true,
+        'show_tagcloud'       => true,
         'label'        => _x( 'Features', 'taxonomy general name', 'wpp' ),
         'labels'       => array(
           'name'              => _x( 'Features', 'taxonomy general name', 'wpp' ),
@@ -209,6 +213,10 @@ class WPP_F extends UsabilityDynamics\Utility {
       ),
       'community_feature' => array(
         'hierarchical' => false,
+        'public'              => true,
+        'show_ui'             => true,
+        'show_in_nav_menus'   => true,
+        'show_tagcloud'       => true,
         'label'        => _x( 'Community Features', 'taxonomy general name', 'wpp' ),
         'labels'       => array(
           'name'              => _x( 'Community Features', 'taxonomy general name', 'wpp' ),
@@ -242,7 +250,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       'not_found_in_trash' => __( 'No properties found in Trash', 'wpp' ),
       'parent_item_colon'  => ''
     ) );
-    
+
     //** Add support for property */
     $supports = array( 'title', 'editor', 'thumbnail' );
     if( isset( $wp_properties[ 'configuration' ][ 'enable_comments' ] ) && $wp_properties[ 'configuration' ][ 'enable_comments' ] == 'true' ) {
@@ -250,7 +258,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     // Register custom post types
-    register_post_type( 'property', apply_filters( 'wpp_post_type', array(
+    register_post_type( 'property', array(
       'labels'              => $wp_properties[ 'labels' ],
       'public'              => true,
       'exclude_from_search' => ( isset( $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] ) && $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] == 'true' ? true : false ),
@@ -258,45 +266,46 @@ class WPP_F extends UsabilityDynamics\Utility {
       '_edit_link'          => 'post.php?post=%d',
       'capability_type'     => array( 'wpp_property', 'wpp_properties' ),
       'hierarchical'        => true,
-      'rewrite'             => array( 'slug' => $wp_properties[ 'configuration' ][ 'base_slug' ] ),
+      'rewrite'             => array(
+        'slug' => $wp_properties[ 'configuration' ][ 'base_slug' ]
+      ),
       'query_var'           => $wp_properties[ 'configuration' ][ 'base_slug' ],
       'supports'            => $supports,
-      'menu_icon'           => 'dashicons-admin-home'
-    ) ) );
+      'menu_icon'           => WPP_URL . 'images/pp_menu-1.6.png'
+    ) );
 
-    foreach( (array) $wp_properties[ 'taxonomies' ] as $taxonomy => $taxonomy_data ) {
+    if( !empty( $wp_properties[ 'taxonomies' ] ) && is_array( $wp_properties[ 'taxonomies' ] ) ) {
 
-      if( !isset( $taxonomy_data[ 'show_ui' ] ) ) {
-        $taxonomy_data[ 'show_ui' ] = ( current_user_can( 'manage_wpp_categories' ) ? true : false );
+      foreach( $wp_properties[ 'taxonomies' ] as $taxonomy => $taxonomy_data ) {
+
+        //** Check if taxonomy is disabled */
+        if( isset( $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] ) &&
+          is_array( $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] ) &&
+          in_array( $taxonomy, $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] )
+        ) {
+          continue;
+        }
+
+        register_taxonomy( $taxonomy, 'property', apply_filters( 'wpp::register_taxonomy', array(
+          'hierarchical'      => isset( $taxonomy_data[ 'hierarchical' ] ) ? $taxonomy_data[ 'hierarchical' ] : false,
+          'label'             => isset( $taxonomy_data[ 'label' ] ) ? $taxonomy_data[ 'label' ] : $taxonomy,
+          'labels'            => isset( $taxonomy_data[ 'labels' ] ) ? $taxonomy_data[ 'labels' ] : array(),
+          'query_var'         => $taxonomy,
+          'rewrite'           => array( 'slug' => $taxonomy ),
+          'public'            => isset( $taxonomy_data[ 'public' ] ) ? $taxonomy_data[ 'public' ] : true,
+          'show_ui'           => isset( $taxonomy_data[ 'show_ui' ] ) ? $taxonomy_data[ 'show_ui' ] : true,
+          'show_in_nav_menus' => isset( $taxonomy_data[ 'show_in_nav_menus' ] ) ? $taxonomy_data[ 'show_in_nav_menus' ] : true,
+          'show_tagcloud'     => isset( $taxonomy_data[ 'show_tagcloud' ] ) ? $taxonomy_data[ 'show_tagcloud' ] : true,
+          'capabilities' => array(
+            'manage_terms' => 'manage_wpp_categories',
+            'edit_terms'   => 'manage_wpp_categories',
+            'delete_terms' => 'manage_wpp_categories',
+            'assign_terms' => 'manage_wpp_categories'
+          )
+        ), $taxonomy ) );
       }
-
-      $wp_properties[ 'taxonomies' ][ $taxonomy ] = wp_parse_args( $taxonomy_data, array(
-        'hierarchical' => $taxonomy_data[ 'hierarchical' ],
-        'label'        => $taxonomy_data[ 'label' ],
-        'labels'       => $taxonomy_data[ 'labels' ],
-        'query_var'    => $taxonomy,
-        'show_ui'      => false,
-        'rewrite'      => array( 'slug' => $taxonomy ),
-        'capabilities' => array(
-          'manage_terms' => 'manage_wpp_categories',
-          'edit_terms'   => 'manage_wpp_categories',
-          'delete_terms' => 'manage_wpp_categories',
-          'assign_terms' => 'manage_wpp_categories'
-        )
-      ) );
-
-      //** Check if taxonomy is disabled */
-      if( isset( $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] ) &&
-        is_array( $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] ) &&
-        in_array( $taxonomy, $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] )
-      ) {
-        continue;
-      }
-
-      register_taxonomy( $taxonomy, 'property', $wp_properties[ 'taxonomies' ][ $taxonomy ] );
     }
 
-    //die( '<pre>' . print_r( $wp_properties, true ) . '</pre>' );
   }
 
   /**
@@ -1084,7 +1093,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     $sortable_attrs = apply_filters( 'wpp::get_sortable_keys', $sortable_attrs );
-    
+
     return $sortable_attrs;
   }
 
@@ -1112,10 +1121,10 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     //** Look for regular pages that are placed under base slug */
-    if( 
+    if(
       isset( $wp_query->query_vars[ 'post_type' ] )
-      && $wp_query->query_vars[ 'post_type' ] == 'property' 
-      && count( $wpdb->get_row( "SELECT * FROM {$wpdb->posts} WHERE post_name = '{$wp_query->query_vars['name']}' AND post_type = 'property'  LIMIT 0, 1" ) ) == 0 
+      && $wp_query->query_vars[ 'post_type' ] == 'property'
+      && count( $wpdb->get_row( "SELECT * FROM {$wpdb->posts} WHERE post_name = '{$wp_query->query_vars['name']}' AND post_type = 'property'  LIMIT 0, 1" ) ) == 0
     ) {
       $posts[] = $wpdb->get_row( "SELECT * FROM {$wpdb->posts} WHERE post_name = '{$wp_query->query_vars['name']}' AND post_type = 'page'  LIMIT 0, 1" );
     }
@@ -1576,11 +1585,11 @@ class WPP_F extends UsabilityDynamics\Utility {
     if ( !empty( $return[ 'over_query_limit' ] ) && $max_attempts >= $attempt && $delay < 2 ) {
 
       $_args = array(
-        'property_ids' => $return[ 'over_query_limit' ],
-        'echo_result' => false,
-        'attempt' => $attempt + 1,
-        'delay' => $delay + $increase_delay_by,
-      ) + $args;
+          'property_ids' => $return[ 'over_query_limit' ],
+          'echo_result' => false,
+          'attempt' => $attempt + 1,
+          'delay' => $delay + $increase_delay_by,
+        ) + $args;
 
       $rerevalidate_result = self::revalidate_all_addresses( $_args );
 
@@ -1752,7 +1761,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     return $return;
   }
-  
+
   /**
    * Returns location information from Google Maps API call
    *
@@ -2277,7 +2286,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
     return false;
   }
-  
+
   /**
    * Maybe get data from cache file
    *
@@ -2296,7 +2305,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
     return false;
   }
-  
+
   /**
    * Removes all WPP cache files
    *
@@ -2536,6 +2545,7 @@ class WPP_F extends UsabilityDynamics\Utility {
         }
       }
       update_option( 'wpp_settings', $wpp_settings );
+      do_action( 'wpp::save_settings', $data );
     } catch( Exception $e ) {
       $return[ 'success' ] = false;
       $return[ 'message' ] = $e->getMessage();
@@ -2573,7 +2583,6 @@ class WPP_F extends UsabilityDynamics\Utility {
       if( !empty( $backup_contents ) ) {
         $decoded_settings = json_decode( $backup_contents, true );
       }
-
       if( !empty( $decoded_settings ) ) {
         //** Allow features to preserve their settings that are not configured on the settings page */
         $wpp_settings = apply_filters( 'wpp_settings_save', $decoded_settings, $wp_properties );
@@ -2610,7 +2619,6 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     }
 
-    //die('lalks' . time());
     add_filter( 'wpp_image_sizes', array( 'WPP_F', 'remove_deleted_image_sizes' ) );
 
     // Filers are applied
@@ -2629,7 +2637,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     $wp_properties[ 'taxonomies' ]                = apply_filters( 'wpp_taxonomies', ( isset( $wp_properties[ 'taxonomies' ] ) ? $wp_properties[ 'taxonomies' ] : array() ) );
 
     $wp_properties = stripslashes_deep( $wp_properties );
-    
+
     return $wp_properties;
 
   }
@@ -2782,7 +2790,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       'ID'        => 'equal',
       'post_date' => 'date'
     );
-    
+
     if( $instance_id && $cache ) {
       $result = WPP_F::get_cache( $instance_id );
     }
@@ -2819,7 +2827,7 @@ class WPP_F extends UsabilityDynamics\Utility {
         } else {
           $is_numeric = false;
         }
-        
+
         //** Check to see if this attribute has predefined values or if we have to get them from DB */
         //** If the attributes has predefind values, we use them */
         if( !empty( $wp_properties[ 'predefined_search_values' ][ $searchable_attribute ] ) ) {
@@ -2887,7 +2895,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
           // Clean up values if a conversion exists
           $value = WPP_F::do_search_conversion( $searchable_attribute, trim( $value ) );
-          
+
           // Fix value with special chars. Disabled here, should only be done in final templating stage.
           // $value = htmlspecialchars($value, ENT_QUOTES);
 
@@ -2900,7 +2908,7 @@ class WPP_F extends UsabilityDynamics\Utility {
           $range[ $searchable_attribute ][ $key ] = $value;
 
         }
-        
+
         //** Sort values */
         sort( $range[ $searchable_attribute ], SORT_REGULAR );
 
@@ -2914,9 +2922,9 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     return apply_filters( 'wpp::get_search_values', $result, array(
-      'search_attributes' => $search_attributes, 
-      'searchable_property_types' => $searchable_property_types, 
-      'cache' => $cache, 
+      'search_attributes' => $search_attributes,
+      'searchable_property_types' => $searchable_property_types,
+      'cache' => $cache,
       'instance_id' => $instance_id,
     ) );
   }
@@ -2930,7 +2938,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     if( !isset( $wp_properties[ 'search_conversions' ][ $attribute ] ) ) {
       return $value;
     }
-    
+
     // First, check if any conversions exists for this attribute, if not, return value
     if( count( $wp_properties[ 'search_conversions' ][ $attribute ] ) < 1 ) {
       return $value;
@@ -2983,7 +2991,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       $args[ 'ID' ] = $args[ 'property_id' ];
       unset( $args[ 'property_id' ] );
     }
-    
+
     //** Prints args to firebug if debug mode is enabled */
     $log = is_array( $args ) ? urldecode( http_build_query( $args ) ) : $args;
     WPP_F::console_log( "get_properties() args: {$log}" );
@@ -3158,7 +3166,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       $numeric = ( isset( $wp_properties[ 'numeric_attributes' ] ) && in_array( $meta_key, (array) $wp_properties[ 'numeric_attributes' ] ) ) ? true : false;
 
       if( !in_array( $meta_key, (array) $commas_ignore ) && substr_count( $criteria, ',' ) || ( substr_count( $criteria, '-' ) && $numeric ) || substr_count( $criteria, '--' ) ) {
-      
+
         if( substr_count( $criteria, '-' ) && !substr_count( $criteria, ',' ) ) {
           $cr = explode( '-', $criteria );
           // Check pieces of criteria. Array should contains 2 int's elements
@@ -3173,11 +3181,11 @@ class WPP_F extends UsabilityDynamics\Utility {
             }
           }
         }
-        
+
         if ( substr_count( $criteria, ',' ) ) {
           $comma_and = explode( ',', $criteria );
         }
-        
+
       } else {
         $specific = $criteria;
       }
@@ -3344,11 +3352,11 @@ class WPP_F extends UsabilityDynamics\Utility {
     // Remove duplicates
     $matching_ids = array_unique( $matching_ids );
 
-    $matching_ids = apply_filters( 'wpp::get_properties::matching_ids', $matching_ids, array_merge( (array) $query, array( 
-      'additional_sql'  => $additional_sql, 
+    $matching_ids = apply_filters( 'wpp::get_properties::matching_ids', $matching_ids, array_merge( (array) $query, array(
+      'additional_sql'  => $additional_sql,
       'total'           => $total,
     ) ) );
-    
+
     $result = apply_filters( 'wpp::get_properties::custom_sort', false, array(
       'matching_ids'    => $matching_ids,
       'additional_sql'  => $additional_sql,
@@ -3356,16 +3364,16 @@ class WPP_F extends UsabilityDynamics\Utility {
       'sort_order'      => $sql_sort_order,
       'limit_query'     => $limit_query,
     ) );
-    
+
     if( !$result ) {
-    
+
       // Sorts the returned Properties by the selected sort order
       if( $sql_sort_by &&
         $sql_sort_by != 'menu_order' &&
         $sql_sort_by != 'post_date' &&
         $sql_sort_by != 'post_title'
       ) {
-      
+
         //** Sorts properties in random order. */
         if( $sql_sort_by === 'random' ) {
 
@@ -3379,8 +3387,8 @@ class WPP_F extends UsabilityDynamics\Utility {
         } else {
 
           //** Determine if attribute has numeric format or all values of meta_key are numbers we use CAST in SQL query to avoid sort issues */
-          if( ( isset( $wp_properties[ 'numeric_attributes' ] ) && in_array( $sql_sort_by, $wp_properties[ 'numeric_attributes' ] ) ) || 
-              self::meta_has_number_data_type( $matching_ids, $sql_sort_by )
+          if( ( isset( $wp_properties[ 'numeric_attributes' ] ) && in_array( $sql_sort_by, $wp_properties[ 'numeric_attributes' ] ) ) ||
+            self::meta_has_number_data_type( $matching_ids, $sql_sort_by )
           ) {
             $meta_value = "CAST( meta_value AS DECIMAL(20,3 ))";
           } else {
@@ -3407,7 +3415,7 @@ class WPP_F extends UsabilityDynamics\Utility {
           $limit_query" );
 
       }
-    
+
     }
 
     // Stores the total Properties returned
@@ -3781,7 +3789,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       if( count( $children ) > 0 ) {
 
         $range = array();
-      
+
         //** Cycle through children and get necessary variables */
         foreach( $children as $child_id ) {
 
@@ -4026,16 +4034,16 @@ class WPP_F extends UsabilityDynamics\Utility {
     if( empty( $property_stats ) ) {
       $property_stats = $wp_properties[ 'property_stats' ];
     }
-    
+
     $return = array();
 
     foreach( $property_stats as $slug => $label ) {
 
       // Determine if it's frontend and the attribute is hidden for frontend
-      if( 
-        isset( $wp_properties[ 'hidden_frontend_attributes' ] ) 
-        && in_array( $slug, (array) $wp_properties[ 'hidden_frontend_attributes' ] ) 
-        && !current_user_can( 'manage_options' ) 
+      if(
+        isset( $wp_properties[ 'hidden_frontend_attributes' ] )
+        && in_array( $slug, (array) $wp_properties[ 'hidden_frontend_attributes' ] )
+        && !current_user_can( 'manage_options' )
       ) {
         continue;
       }
@@ -4135,10 +4143,10 @@ class WPP_F extends UsabilityDynamics\Utility {
     ) );
 
     //** Check if we have children */
-    if( 
-      !empty( $property[ 'children' ] ) 
+    if(
+      !empty( $property[ 'children' ] )
       && ( !isset( $wp_properties[ 'configuration' ][ 'google_maps' ][ 'infobox_settings' ][ 'do_not_show_child_properties' ] )
-      || $wp_properties[ 'configuration' ][ 'google_maps' ][ 'infobox_settings' ][ 'do_not_show_child_properties' ] != 'true' )
+        || $wp_properties[ 'configuration' ][ 'google_maps' ][ 'infobox_settings' ][ 'do_not_show_child_properties' ] != 'true' )
     ) {
       foreach( $property[ 'children' ] as $child_property ) {
         $child_property           = (array) $child_property;
@@ -4197,8 +4205,8 @@ class WPP_F extends UsabilityDynamics\Utility {
               <?php if( $infobox_settings[ 'show_direction_link' ] == 'true' ): ?>
                 <div class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_directions_link">
                   <a target="_blank"
-                    href="http://maps.google.com/maps?gl=us&daddr=<?php echo addslashes( str_replace( ' ', '+', $property[ 'formatted_address' ] ) ); ?>"
-                    class="btn btn-info"><?php _e( 'Get Directions', 'wpp' ) ?></a>
+                     href="http://maps.google.com/maps?gl=us&daddr=<?php echo addslashes( str_replace( ' ', '+', $property[ 'formatted_address' ] ) ); ?>"
+                     class="btn btn-info"><?php _e( 'Get Directions', 'wpp' ) ?></a>
                 </div>
               <?php endif; ?>
             </td>
@@ -4208,8 +4216,8 @@ class WPP_F extends UsabilityDynamics\Utility {
             <?php if( !empty( $imageHTML ) && $infobox_settings[ 'show_direction_link' ] == 'true' ) { ?>
               <div class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_directions_link">
                 <a target="_blank"
-                  href="http://maps.google.com/maps?gl=us&daddr=<?php echo addslashes( str_replace( ' ', '+', $property[ 'formatted_address' ] ) ); ?>"
-                  class="btn btn-info"><?php _e( 'Get Directions', 'wpp' ) ?></a>
+                   href="http://maps.google.com/maps?gl=us&daddr=<?php echo addslashes( str_replace( ' ', '+', $property[ 'formatted_address' ] ) ); ?>"
+                   class="btn btn-info"><?php _e( 'Get Directions', 'wpp' ) ?></a>
               </div>
             <?php
             }
@@ -4440,6 +4448,8 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     return $gpid;
 
+    return false;
+
   }
 
   /**
@@ -4524,8 +4534,8 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     $values = $wpdb->get_col( "
       SELECT pm.meta_value
-      FROM {$wpdb->posts} AS p
-      JOIN {$wpdb->postmeta} AS pm ON pm.post_id = p.ID
+      FROM {$wpdb->prefix}posts AS p
+      JOIN {$wpdb->prefix}postmeta AS pm ON pm.post_id = p.ID
         WHERE p.ID IN (" . $property_ids . ")
           AND p.post_status = 'publish'
           AND pm.meta_key = '$meta_key'
@@ -5433,7 +5443,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
     return ( $ucfirst ? ucfirst( $post_status ) : $post_status );
   }
-  
+
   /**
    * Sanitizes data.
    * Prevents shortcodes and XSS adding!
@@ -5452,7 +5462,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
     return $data;
   }
-  
+
   /**
    * @todo remove in future releases
    * @deprecated

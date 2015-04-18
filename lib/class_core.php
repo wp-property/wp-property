@@ -174,7 +174,7 @@ class WPP_Core {
     //** Load Localization early so plugins can use them as well */
     //** Try to generate static localization script. It can be flushed on Clear Cache! */
     if( $this->maybe_generate_l10n_script() ) {
-      wp_register_script( 'wpp-localization', WPP_URL . 'cache/l10n.js', array(), WPP_Version );
+      wp_register_script( 'wpp-localization', ud_get_wp_property()->path( 'static/cache/l10n.js', 'url' ), array(), WPP_Version );
     }
     
     wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
@@ -1096,23 +1096,26 @@ class WPP_Core {
     add_filter( 'plugin_action_links', array( $this, 'plugin_action_links' ), 10, 2 );
 
     //* Adds metabox 'General Information' to Property Edit Page */
+
+    /*
     add_meta_box( 'wpp_property_meta', __( 'General Information', 'wpp' ), array( 'WPP_UI', 'metabox_meta' ), 'property', 'normal', 'high' );
-    //* Adds 'Group' metaboxes to Property Edit Page */
+    // Adds 'Group' metaboxes to Property Edit Page
     if ( !empty( $wp_properties[ 'property_groups' ] ) ) {
       foreach ( $wp_properties[ 'property_groups' ] as $slug => $group ) {
-        //* There is no sense to add metabox if no one attribute assigned to group */
+        // There is no sense to add metabox if no one attribute assigned to group
         if ( !in_array( $slug, $wp_properties[ 'property_stats_groups' ] ) ) {
           continue;
         }
-        //* Determine if Group name is empty we add 'NO NAME', other way metabox will not be added */
+        // Determine if Group name is empty we add 'NO NAME', other way metabox will not be added
         if ( empty( $group[ 'name' ] ) ) {
           $group[ 'name' ] = __( 'NO NAME', 'wpp' );
         }
         add_meta_box( $slug, __( $group[ 'name' ], 'wpp' ), array( 'WPP_UI', 'metabox_meta' ), 'property', 'normal', 'high', array( 'group' => $slug ) );
       }
     }
+    //*/
 
-    add_meta_box( 'propetry_filter', $wp_properties[ 'labels' ][ 'name' ] . ' ' . __( 'Search', 'wpp' ), array( 'WPP_UI', 'metabox_property_filter' ), 'property_page_all_properties', 'normal' );
+    add_meta_box( 'property_filter', $wp_properties[ 'labels' ][ 'name' ] . ' ' . __( 'Search', 'wpp' ), array( 'WPP_UI', 'metabox_property_filter' ), 'property_page_all_properties', 'normal' );
 
     // Add metaboxes
     do_action( 'wpp_metaboxes' );
@@ -1904,7 +1907,7 @@ class WPP_Core {
    * @author peshkov@UD
    */
   static function maybe_generate_l10n_script() {
-    $dir = WPP_Path . 'static/cache/';
+    $dir = ud_get_wp_property()->path( 'static/cache/', 'dir' );
     $file = $dir . 'l10n.js';
     //** File already created! */
     if( file_exists( $file ) ){
@@ -1916,7 +1919,8 @@ class WPP_Core {
     }
     $l10n = array();
     //** Include the list of translations */
-    include_once WPP_Path . 'l10n.php';
+    $l10n_dir = ud_get_wp_property()->path( 'l10n.php', 'dir' );
+    include_once( $l10n_dir );
     /** All additional localizations must be added using the filter below. */
     $l10n = apply_filters( 'wpp::js::localization', $l10n );
     foreach ( (array) $l10n as $key => $value ) {

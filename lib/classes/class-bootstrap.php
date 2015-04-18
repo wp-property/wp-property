@@ -38,24 +38,27 @@ namespace UsabilityDynamics\WPP {
         ));
       
         /** Defaults filters and hooks */
-        include_once WPP_Path . 'lib/default_api.php';
+        include_once $this->path( 'lib/default_api.php', 'dir' );
         /** Loads general functions used by WP-Property */
-        include_once WPP_Path . 'lib/class_functions.php';
+        include_once $this->path( 'lib/class_functions.php', 'dir' );
         /** Loads Admin Tools feature */
-        include_once WPP_Path . 'lib/class_admin_tools.php';
+        include_once $this->path( 'lib/class_admin_tools.php', 'dir' );
         /** Loads export functionality */
-        include_once WPP_Path . 'lib/class_property_export.php';
+        include_once $this->path( 'lib/class_property_export.php', 'dir' );
         /** Loads all the metaboxes for the property page */
-        include_once WPP_Path . 'lib/ui/class_ui.php';
+        include_once $this->path( 'lib/ui/class_ui.php', 'dir' );
         /** Loads all the metaboxes for the property page */
-        include_once WPP_Path . 'lib/class_core.php';
+        include_once $this->path( 'lib/class_core.php', 'dir' );
         /** Load set of static methods for mail notifications */
-        include_once WPP_Path . 'lib/class_mail.php';
+        include_once $this->path( 'lib/class_mail.php', 'dir' );
         /** Load in hooks that deal with legacy and backwards-compat issues */
-        include_once WPP_Path . 'lib/class_legacy.php';
+        include_once $this->path( 'lib/class_legacy.php', 'dir' );
         
         //** Initiate the plugin */
         $this->core = new \WPP_Core();
+
+        //** Initiate Meta Box Handler */
+        new Meta_Box();
       }
       
       /**

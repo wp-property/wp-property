@@ -34,18 +34,18 @@ td.wp_crm_user_card ul li.primary {
   margin-bottom: 50px;
 }
 .dataTables_processing {
-  position: absolute;
-  top: 200px;
-  left: 50%;
-  width: 250px;
-  height: 30px;
-  margin-left: -125px;
-  padding: 14px 0 2px 0;
-  border: 1px solid #ddd;
-  text-align: center;
-  color: #999;
-  font-size: 14px;
-  background: #ffffff url(../scripts/dataTables/images/horizontal-ajax-loader.gif) no-repeat center center;
+  position: absolute !important;
+  top: 200px !important;
+  left: 50% !important;
+  width: 250px !important;
+  height: 30px !important;
+  margin-left: -125px !important;
+  padding: 14px 0 2px 0 !important;
+  border: 1px solid #ddd !important;
+  text-align: center !important;
+  color: #999 !important;
+  font-size: 14px !important;
+  background: #ffffff url(../scripts/dataTables/images/horizontal-ajax-loader.gif) no-repeat center center !important;
 }
 .dataTables_length {
   width: 40%;

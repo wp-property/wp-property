@@ -78,10 +78,10 @@ if( !function_exists( 'ud_check_wp_property' ) ) {
         }
       }
       //** Be sure vendor autoloader exists */
-      if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
-        require_once ( dirname( __FILE__ ) . '/vendor/autoload.php' );
+      if ( file_exists( dirname( __FILE__ ) . '/vendor/libraries/autoload.php' ) ) {
+        require_once ( dirname( __FILE__ ) . '/vendor/libraries/autoload.php' );
       } else {
-        throw new Exception( sprintf( __( 'Distributive is broken. %s file is missed. Try to remove and upload plugin again.', 'wpp' ), dirname( __FILE__ ) . '/vendor/autoload.php' ) );
+        throw new Exception( sprintf( __( 'Distributive is broken. %s file is missed. Try to remove and upload plugin again.', 'wpp' ), dirname( __FILE__ ) . '/vendor/libraries/autoload.php' ) );
       }
       //** Be sure our Bootstrap class exists */
       if( !class_exists( '\UsabilityDynamics\WPP\Bootstrap' ) ) {

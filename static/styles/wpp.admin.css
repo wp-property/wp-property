@@ -59,6 +59,44 @@
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 }
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav.tabs {
+  float: left;
+  height: auto;
+  position: relative;
+  width: 15% !important;
+  z-index: 1;
+  border: none;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav.tabs li {
+  border: 1px solid #d0d0d0;
+  border-right: none;
+  height: auto !important;
+  margin: 10px -1px 0 0;
+  padding: 0;
+  width: 100%;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav.tabs li a {
+  display: block;
+  padding: 5px 10px;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-nav.tabs li.ui-tabs-active {
+  background-color: #f1f1f1;
+}
+.ui-tabs.ui-tabs-vertical .ui-tabs-panel {
+  width: 80%;
+  position: relative;
+  border-right: none;
+  border-bottom: none;
+  border-left: 1px solid #d0d0d0;
+  clear: none;
+  float: left;
+  padding-left: 20px;
+  min-height: 300px;
+}
+/* Settings Developer Tab */
+#wpp_developer_tab {
+  padding-top: 20px;
+}
 .wpp-expandable {
   background: #fafafa;
   color: #222;
@@ -142,6 +180,12 @@
 .wpp-expandable .wpp.post-body {
   background: #fff;
   padding: 0 10px 10px;
+}
+#wpp_inquiry_attribute_fields tbody tr {
+  cursor: move;
+}
+#wpp_inquiry_meta_fields tbody tr {
+  cursor: move;
 }
 body.property_page_wpp_property_import .wpp-description {
   padding: 0.5em 1em;
@@ -348,14 +392,10 @@ select.wpp_error {
 }
 .wpp_property_stat_functions {
   float: right;
-  color: #7E7E7E;
+  margin-top: 1em;
 }
 .wpp_property_stat_functions .wpp_all_advanced_settings {
-  color: #C27818;
   cursor: pointer;
-}
-.wpp_property_stat_functions #sort_stats_by_groups {
-  margin-left: 10px;
 }
 #wpcontent .widget-content select {
   max-width: 100%;
@@ -547,6 +587,9 @@ body #normal-sortables .inside table.property_meta {
   display: none;
 }
 /* WordPress 3.2 Compatibility End */
+.wpp_dynamic_table_row[new_row="true"] .hide-on-new-row {
+  display: none;
+}
 #property_meta .inside .widefat .wpp_hidden_frontend_attribute th,
 .inside table.property_meta.widefat .wpp_hidden_frontend_attribute th {
   background: #F5F8DA;
@@ -616,6 +659,9 @@ body.property_page_show_agents .wp-list-table .column-id {
   word-wrap: break-word;
   /* IE 5.5+ */
 }
+.wpp_attribute_name_col {
+  width: 240px;
+}
 .wpp_attribute_name_col input {
   width: 226px;
 }
@@ -627,10 +673,10 @@ body.property_page_show_agents .wp-list-table .column-id {
 }
 #wpp_inquiry_attribute_fields .wpp_admin_input_col,
 #wpp_inquiry_attribute_fields .wpp_search_input_col {
-  width: 160px;
+  width: 200px;
 }
 #wpp_inquiry_attribute_fields .wpp_settings_input_col {
-  width: 150px;
+  width: 220px;
 }
 .wpp_search_input_col select,
 .wpp_search_input_col textarea,
@@ -772,7 +818,11 @@ td.wpp_draggable_handle {
 /* SETTINGS ATTRS GROUP */
 th.wpp_attribute_group_col,
 td.wpp_attribute_group_col {
-  width: 20px !important;
+  width: 140px;
+}
+th.wpp_attribute_group_col input,
+td.wpp_attribute_group_col input {
+  width: 120px;
 }
 div.wpp_attribute_group {
   cursor: pointer;
@@ -898,6 +948,7 @@ table.ud_ui_dynamic_table tfoot td {
 }
 table.ud_ui_dynamic_table {
   margin: 0;
+  background-color: #f9f9f9;
 }
 .wpp_overview .tablenav select[name=m] {
   display: none;
@@ -959,6 +1010,9 @@ input.wpp_featured_toggle {
   overflow: auto;
   padding: 5px 10px;
 }
+.wpp_tabs .wp-core-ui div.wpp_settings_block {
+  line-height: 27px;
+}
 .wpp_tabs .form-table p,
 .wpp_tabs .form-table h3 {
   margin-top: 0;
@@ -969,44 +1023,46 @@ input.wpp_featured_toggle {
 .wpp_tabs ul.tabs {
   border-bottom: 1px solid #CBCBCB;
   float: left;
-  height: 33px;
+  height: auto;
   list-style: none;
   margin: 0;
   background: transparent;
-  border: none;
   padding: 0;
   width: 100%;
+  border-bottom: 1px solid #d0d0d0;
 }
 .wpp_tabs ul.tabs li {
   -moz-border-radius-topleft: 5px;
   -moz-border-radius-topright: 5px;
   -webkit-border-top-left-radius: 5px;
   -webkit-border-top-right-radius: 5px;
-  background: none repeat scroll 0 0 #F4F4F4;
   border-color: #D0D0D0;
   border-style: solid solid none;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
   border-width: 1px 1px 0;
   float: left;
-  margin: 0 10px -1px 0;
+  margin: 0 0 -1px 10px;
   overflow: hidden;
   position: relative;
 }
 .wpp_tabs ul.tabs li a {
+  display: inline-block;
   color: #000000;
   line-height: 32px;
   outline: medium none;
-  padding: 7px 10px;
+  padding: 2px 15px;
   text-decoration: none;
+  font-size: 14px;
+}
+.wpp_tabs ul.tabs li a:focus {
+  box-shadow: none;
 }
 .wpp_tabs ul.tabs li a:hover {
-  color: #9D611D;
+  color: #45bbe6;
 }
 .wpp_tabs ul.tabs li.ui-tabs-selected,
 .wpp_tabs ul.tabs li.ui-state-active {
-  background: none repeat scroll 0 0 #FFFFFF;
-  border-bottom: 1px solid #FFFFFF;
+  background-color: #f1f1f1;
+  padding-bottom: 1px;
 }
 .wpp_tabs ul.tabs li.ui-tabs-selected a:hover {
   background: #FFFFFF;
@@ -1027,11 +1083,7 @@ html .wpp_tabs ul.tabs li.active a:hover {
   -moz-border-radius-bottomright: 5px;
   -webkit-border-bottom-left-radius: 5px;
   -webkit-border-bottom-right-radius: 5px;
-  background: none repeat scroll 0 0 #FFFFFF;
-  border-color: #DEDEDE;
-  border-right: 1px solid #DEDEDE;
-  border-style: solid;
-  border-width: 1px;
+  border: none;
   clear: both;
   float: left;
   padding: 0 0 20px;
