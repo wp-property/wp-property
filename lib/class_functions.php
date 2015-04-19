@@ -285,7 +285,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       $wp_properties[ 'taxonomies' ][ $taxonomy ] = wp_parse_args( $taxonomy_data, array(
         'hierarchical' => $taxonomy_data[ 'hierarchical' ],
         'label'        => $taxonomy_data[ 'label' ],
-        'labels'       => $taxonomy_data[ 'labels' ],
+        'labels'       => isset( $taxonomy_data[ 'labels' ] ) ? $taxonomy_data[ 'labels' ] : array(),
         'query_var'    => $taxonomy,
         'show_ui'      => false,
         'rewrite'      => array( 'slug' => $taxonomy ),
