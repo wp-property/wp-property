@@ -372,7 +372,7 @@ class WPP_List_Table extends WP_List_Table {
   function display( $args = '' ) {
     /* Display Bulk Actions if exist */
     $this->display_tablenav( 'top', $args ); ?>
-    <div class="wpp_above_overview_table"<?php do_action( 'wpp:above_overview_table', $this ); ?>></div>
+    <div class="wpp_above_overview_table"><?php do_action( 'wpp:above_overview_table', $this ); ?></div>
     <table id="wp-list-table" class="wp-list-table <?php echo implode( ' ', $this->get_table_classes() ); ?>"
       cellspacing="0">
       <thead>
