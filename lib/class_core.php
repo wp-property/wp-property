@@ -1681,11 +1681,9 @@ class WPP_Core {
         $this_property = prepare_property_for_display( $this_property );
       }
 
-    } else {
-      $this_property = $this_property;
     }
 
-    if( is_taxonomy( $attribute ) && is_object_in_taxonomy( 'property', $attribute ) ) {
+    if( taxonomy_exists( $attribute ) && is_object_in_taxonomy( 'property', $attribute ) ) {
       foreach( wp_get_object_terms( $this_property[ 'ID' ], $attribute ) as $term_data ) {
 
         if( $args[ 'make_terms_links' ] == 'true' ) {
@@ -1695,7 +1693,7 @@ class WPP_Core {
         }
       }
 
-      if( is_array( $terms ) && !empty( $terms ) ) {
+      if( isset( $terms ) && is_array( $terms ) && !empty( $terms ) ) {
         $value = implode( $args[ 'separator' ], $terms );
       }
 
