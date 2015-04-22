@@ -96,6 +96,16 @@ jQuery.extend( wpp = wpp || {}, { overview: {
     }
     
     wpp.overview.initialized = true;
+  },
+
+  filterEvent: function filterEvent( event ) {
+    // console.log( 'filterEvent' );
+
+    if( 'object' === typeof wp_list_table ) {
+      event.preventDefault();
+      wp_list_table.fnDraw();
+    }
+
   }
 
 }});

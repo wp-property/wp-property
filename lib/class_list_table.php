@@ -156,11 +156,8 @@ class WPP_List_Table extends WP_List_Table {
         } );
 
         /* Search by Filter */
-        jQuery( "#<?php echo $this->table_scope; ?>-filter #search-submit" ).click( function ( event ) {
-          event.preventDefault();
-          wp_list_table.fnDraw();
-          return false;
-        } );
+        jQuery( "#<?php echo $this->table_scope; ?>-filter #search-submit" ).click( wpp.overview.filterEvent );
+        jQuery( "#<?php echo $this->table_scope; ?>-filter" ).submit( wpp.overview.filterEvent );
 
         jQuery( '.metabox-prefs' ).change( function () {
           wp_list_table_do_columns();

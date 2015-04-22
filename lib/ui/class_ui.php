@@ -554,9 +554,7 @@ class WPP_UI {
                 case 'dropdown':
                   $unique_id = rand( 10000, 99999 );
                   ?>
-                  <select id="wpp_attribute_dropdown_<?php echo $unique_id; ?>"
-                    class="wpp_search_select_field wpp_search_select_field_<?php echo $key; ?>"
-                    name="wpp_search[<?php echo $key; ?>]">
+                  <select id="wpp_attribute_dropdown_<?php echo $unique_id; ?>"  class="wpp_search_select_field wpp_search_select_field_<?php echo $key; ?>"  name="wpp_search[<?php echo $key; ?>]">
                     <?php foreach ( $filter[ 'values' ] as $value => $label ) : ?>
                       <option
                         value="<?php echo esc_attr( $value ); ?>" <?php echo $value == $filter[ 'default' ] ? 'selected="selected"' : '' ?> >
