@@ -1163,7 +1163,7 @@ class WPP_Core {
       && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'download-wpp-backup' )
     ) {
       $sitename = sanitize_key( get_bloginfo( 'name' ) );
-      $filename = $sitename . '-wp-property.' . date( 'Y-m-d' ) . '.txt';
+      $filename = $sitename . '-wp-property.' . date( 'Y-m-d' ) . '.json';
 
       header( "Cache-Control: public" );
       header( "Content-Description: File Transfer" );
@@ -1171,7 +1171,7 @@ class WPP_Core {
       header( "Content-Transfer-Encoding: binary" );
       header( 'Content-Type: text/plain; charset=' . get_option( 'blog_charset' ), true );
 
-      echo json_encode( $wp_properties );
+      echo json_encode( $wp_properties, JSON_PRETTY_PRINT );
 
       die();
     }
@@ -1191,6 +1191,7 @@ class WPP_Core {
    *
    * @uses WPP_F::get_properties()
    *
+   * @return string
    */
   static public function shortcode_featured_properties( $atts = false ) {
     global $wp_properties, $wpp_query, $post;
