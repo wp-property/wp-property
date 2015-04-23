@@ -285,7 +285,7 @@ class WPP_Core {
     global $post, $wpdb;
 
     //** Add metabox for child properties */
-    if( $post->post_type == 'property' && $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_parent = '{$post->ID}' AND post_status = 'publish' " ) ) {
+    if( isset( $post ) && $post->post_type == 'property' && $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_parent = '{$post->ID}' AND post_status = 'publish' " ) ) {
       add_meta_box( 'wpp_property_children', __( 'Child Properties', 'wpp' ), array( 'WPP_UI', 'child_properties' ), 'property', 'side', 'high' );
     }
   }
