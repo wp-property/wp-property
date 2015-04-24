@@ -92,6 +92,11 @@ namespace UsabilityDynamics\WPP {
         }
 
         /**
+         * Allow to customize our meta boxes via external add-ons ( modules, or whatever else ).
+         */
+        $_meta_boxes = apply_filters( 'wpp::meta_boxes', $_meta_boxes );
+
+        /**
          *  Probably convert Meta Boxes to single one with tabs
          */
         $_meta_boxes = $this->maybe_convert_to_tabs( $_meta_boxes );
@@ -127,10 +132,9 @@ namespace UsabilityDynamics\WPP {
           'fields' => array(),
         );
 
-        $icons = array(
+        $icons = apply_filters( 'wpp::meta_boxes::icons', array(
           '_general' => 'dashicons-admin-home',
-          '_terms' => 'dashicons-search',
-        );
+        ) );
 
         foreach( $meta_boxes as $b ) {
 
