@@ -22,6 +22,12 @@ class WPP_List_Table extends WP_List_Table {
 
   public $table_scope;
 
+  public $all_items = array();
+
+  public $items = array();
+
+  public $item_pages = array();
+
   /**
    * Setup options mostly.
    *
@@ -238,7 +244,7 @@ class WPP_List_Table extends WP_List_Table {
 
     if ( !$ajax ) $this->all_items = array();
 
-    if ( !isset( $this->all_items ) ) {
+    if ( empty( $this->all_items ) ) {
       $this->all_items = WPP_F::get_properties( $wpp_search );
     }
 

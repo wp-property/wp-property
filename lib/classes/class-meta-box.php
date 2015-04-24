@@ -48,6 +48,7 @@ namespace UsabilityDynamics\WPP {
        *
        */
       public function register_meta_boxes( $meta_boxes ) {
+        $_meta_boxes = array();
 
         /* May be determine property_type to know which attributes should be hidden and which ones just readable. */
         $post = new \WP_Post( new \stdClass );
@@ -66,14 +67,15 @@ namespace UsabilityDynamics\WPP {
 
         /* Register 'General Information' metabox for Edit Property page */
         $meta_box = $this->get_property_meta_box( array(
-          'name' => __( 'General Information', ud_get_wp_property()->domain ),
+          'name' => __( 'General', ud_get_wp_property()->domain ),
         ), $post );
-        if( $meta_box ) {
-          $meta_boxes[] = $meta_box;
-        }
 
         $groups = ud_get_wp_property( 'property_groups', array() );
         $property_stats_groups = ud_get_wp_property( 'property_stats_groups', array() );
+
+        if( $meta_box ) {
+          $_meta_boxes[] = $meta_box;
+        }
 
         /* Register Meta Box for every Attributes Group separately */
         if ( !empty( $groups) && !empty( $property_stats_groups ) ) {
@@ -84,12 +86,72 @@ namespace UsabilityDynamics\WPP {
             }
             $meta_box = $this->get_property_meta_box( array_filter( array_merge( $group, array( 'id' => $slug ) ) ), $post );
             if( $meta_box ) {
-              $meta_boxes[] = $meta_box;
+              $_meta_boxes[] = $meta_box;
             }
           }
         }
 
+        /**
+         *  Probably convert Meta Boxes to single one with tabs
+         */
+        $_meta_boxes = $this->maybe_convert_to_tabs( $_meta_boxes );
+        if( is_array( $meta_boxes ) ) {
+          $meta_boxes = $meta_boxes + $_meta_boxes;
+        }
+
         return $meta_boxes;
+      }
+
+      /**
+       * @param $meta_boxes
+       * @return array
+       */
+      public function maybe_convert_to_tabs( $meta_boxes ) {
+
+        if( ud_get_wp_property( 'configuration.disable_meta_box_tabs', false ) ) {
+          return $meta_boxes;
+        }
+
+        if( count( $meta_boxes ) <= 1 ) {
+          return $meta_boxes;
+        }
+
+        $meta_box = array(
+          'id' => '_general',
+          'title' => sprintf( __( '%s Details', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
+          'pages' => array( 'property' ),
+          'context' => 'advanced',
+          'priority' => 'low',
+          'tab_style' => 'left',
+          'tabs' => array(),
+          'fields' => array(),
+        );
+
+        $icons = array(
+          '_general' => 'dashicons-admin-home',
+          '_terms' => 'dashicons-search',
+        );
+
+        foreach( $meta_boxes as $b ) {
+
+          if( !isset( $meta_box['tabs'][ $b['id'] ] ) ) {
+            $meta_box['tabs'][ $b['id'] ] = array(
+              'label' => $b['title'],
+              'icon' => array_key_exists($b['id'], $icons) ? $icons[$b['id']] : 'dashicons-admin-page',
+            );
+          }
+
+          if( !empty( $b['fields'] ) && is_array( $b['fields'] ) ) {
+            foreach( $b['fields'] as $field ) {
+              array_push( $meta_box[ 'fields' ], array_merge( $field, array(
+                'tab' => $b['id'],
+              ) ) );
+            }
+          }
+
+        }
+
+        return array($meta_box);
       }
 
       /**
@@ -280,7 +342,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         $meta_box = apply_filters( 'wpp::rwmb_meta_box', array(
-          'id'       => $group['id'],
+          'id'       => !empty( $group['id'] ) ? $group['id'] : '_general',
           'title'    => $group['name'],
           'pages'    => array( 'property' ),
           'context'  => 'normal',
@@ -296,9 +358,14 @@ namespace UsabilityDynamics\WPP {
        */
       public function get_parent_property_field( $post ) {
 
+        $field = array(
+          'name' => __('Falls Under', ud_get_wp_property()->domain),
+          'id' => 'property_id',
+          'type' => 'autocomplete',
+          'options' => admin_url( 'admin-ajax.php?action=wpp_autocomplete_property' ),
+        );
 
-
-        return false;
+        return $field;
       }
 
       /**

@@ -1,0 +1,32 @@
+{
+  "name": "usabilitydynamics/wp-meta-box-utilities",
+  "type": "wordpress-plugin",
+  "keywords": [
+    "wordpress",
+    "ui",
+    "select2",
+    "wp-admin",
+    "meta-box",
+    "wordpress-plugin"
+  ],
+  "description": "Set of Utilities to extend default Meta Box plugin functionality in WordPress.",
+  "minimum-stability": "dev",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://repository.usabilitydynamics.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/usabilitydynamics/wp-meta-box-utilities.git"
+  },
+  "require": {
+    "composer/installers": "~1.0"
+  },
+  "autoload": {
+    "files": [
+      "wp-meta-box-utilities.php"
+    ]
+  }
+}

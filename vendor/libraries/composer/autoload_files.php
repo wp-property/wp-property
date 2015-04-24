@@ -7,4 +7,5 @@ $baseDir = dirname(dirname($vendorDir));
 
 return array(
     $baseDir . '/vendor/plugins/wp-meta-box/meta-box-loader.php',
+    $baseDir . '/vendor/plugins/wp-meta-box-utilities/wp-meta-box-utilities.php',
 );

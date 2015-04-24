@@ -29,7 +29,8 @@
     "usabilitydynamics/lib-settings": "*",
     "usabilitydynamics/lib-wp-bootstrap": "*",
     "usabilitydynamics/lib-ud-api-client": "*",
-    "usabilitydynamics/wp-meta-box": "4.4.3.2"
+    "usabilitydynamics/wp-meta-box": "4.4.3.2",
+    "usabilitydynamics/wp-meta-box-utilities": "1.0.1"
   },
   "require-dev": {
     "usabilitydynamics/lib-wp-phpunit": "master",
