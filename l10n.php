@@ -10,6 +10,9 @@
 
 $l10n = array(
 
+  //** Edit Property page */
+  'clone_property'                  => sprintf( __( 'Clone %s', 'wpp' ), WPP_F::property_label() ),
+
   //** Admin Overview page */
   'show'                            => __( 'Show', 'wpp' ),
   'hide'                            => __( 'Hide', 'wpp' ),

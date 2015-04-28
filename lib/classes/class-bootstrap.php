@@ -9,7 +9,9 @@ namespace UsabilityDynamics\WPP {
   if( !class_exists( 'UsabilityDynamics\WPP\Bootstrap' ) ) {
 
     final class Bootstrap extends \UsabilityDynamics\WP\Bootstrap_Plugin {
-      
+
+      public $core;
+
       /**
        * Singleton Instance Reference.
        *
@@ -57,10 +59,15 @@ namespace UsabilityDynamics\WPP {
         //** Initiate the plugin */
         $this->core = new \WPP_Core();
 
-        //** Initiate Meta Box Handler */
-        new Meta_Box();
         //** Initiate AJAX Handler */
         new Ajax();
+
+        //** Initiate Admin UI */
+        if( is_admin() ) {
+          new Admin();
+          //** Initiate Meta Box Handler */
+          new Meta_Box();
+        }
       }
       
       /**

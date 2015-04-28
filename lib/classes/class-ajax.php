@@ -7,6 +7,8 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use MatthiasMullie\Minify\Exception;
+
   if( !class_exists( 'UsabilityDynamics\WPP\Ajax' ) ) {
 
     final class Ajax extends Scaffold {
@@ -17,6 +19,7 @@ namespace UsabilityDynamics\WPP {
        * @var array
        */
       var $actions = array(
+        'wpp_clone_property',
         'wpp_autocomplete_property',
       );
 
@@ -105,6 +108,80 @@ namespace UsabilityDynamics\WPP {
         } else {
           die;
         }
+      }
+
+      /**
+       * Creates new property based on existing one (clones).
+       *
+       * @param $args
+       * @return array
+       * @throws \Exception
+       */
+      public function action_wpp_clone_property( $args ) {
+
+        if( empty($args['post_id']) || !is_numeric($args['post_id']) ) {
+          throw new \Exception( __( 'Invalid Post ID', ud_get_wp_property('domain') ) );
+        }
+
+        if( get_post_type($args['post_id']) !== 'property' ) {
+          throw new \Exception( __( 'Invalid Post ID. It does not belong to Property.', ud_get_wp_property('domain') ) );
+        }
+
+        $post = get_post( $args['post_id'], ARRAY_A );
+
+        /* Clone Property */
+
+        $postmap = array(
+          'post_title',
+          'post_content',
+          'post_excerpt',
+          'ping_status',
+          'comment_status',
+          'post_type',
+          'post_status',
+          'comment_status',
+          'post_parent',
+        );
+
+        $_post = array();
+        foreach( $post as $k => $v ) {
+          if( in_array( $k, $postmap ) ) {
+            switch( $k ){
+              case 'post_title':
+                $v .= ' (' . __( 'Clone', ud_get_wp_property('domain') ) . ')';
+              default:
+                $_post[$k] = $v;
+                break;
+            }
+          }
+        }
+
+        $post_id = wp_insert_post($_post);
+
+        /* Clone Property Attributes and Meta */
+
+        if(is_wp_error($post_id) || !$post_id) {
+          throw new \Exception( __( 'Could not create new Post.', ud_get_wp_property('domain') ) );
+        }
+
+        $meta = array_unique( array_merge(
+          array( 'property_type' ),
+          array_keys( ud_get_wp_property('property_stats',array()) ),
+          array_keys( ud_get_wp_property('property_meta', array()) )
+        ) );
+
+        foreach( $meta as $key ) {
+          $v = get_post_meta( $post['ID'], $key, true );
+          add_post_meta( $post_id, $key, $v );
+        }
+
+        /* Probably add custom actions ( e.g. by Add-on ) */
+        do_action( 'wpp::clone_property::action', $post, $post_id );
+
+        return array(
+          'post_id' => $post_id,
+          'redirect' => admin_url( 'post.php?post=' . $post_id . '&action=edit' ),
+        );
       }
 
       /**
