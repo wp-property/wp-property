@@ -60,7 +60,7 @@ namespace UsabilityDynamics\WPP {
         //** Initiate Meta Box Handler */
         new Meta_Box();
         //** Initiate AJAX Handler */
-        //new Ajax();
+        new Ajax();
       }
       
       /**
