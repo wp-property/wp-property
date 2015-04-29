@@ -154,20 +154,8 @@ global $wp_properties;
           </li>
           <li class="wpp_development_advanced_option">
             <label>
-              <input <?php echo ( isset( $wp_properties[ 'numeric_attributes' ] ) && is_array( $wp_properties[ 'numeric_attributes' ] ) && in_array( $slug, $wp_properties[ 'numeric_attributes' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug" name="wpp_settings[numeric_attributes][]" value="<?php echo $slug; ?>"/>
-              <?php _e( 'Format: numeric.', 'wpp' ); ?>
-            </label>
-          </li>
-          <li class="wpp_development_advanced_option">
-            <label>
-              <input <?php echo ( isset( $wp_properties[ 'currency_attributes' ] ) && is_array( $wp_properties[ 'currency_attributes' ] ) && in_array( $slug, $wp_properties[ 'currency_attributes' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug" name="wpp_settings[currency_attributes][]" value="<?php echo $slug; ?>"/>
-              <?php _e( 'Format: currency.', 'wpp' ); ?>
-            </label>
-          </li>
-          <li class="wpp_development_advanced_option">
-            <label>
               <input <?php echo ( isset( $wp_properties[ 'column_attributes' ] ) && is_array( $wp_properties[ 'column_attributes' ] ) && in_array( $slug, $wp_properties[ 'column_attributes' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug" name="wpp_settings[column_attributes][]" value="<?php echo $slug; ?>"/>
-              <?php _e( 'Show in "All Properties" table.', 'wpp' ); ?>
+              <?php _e( 'Add Column on "All Properties" page.', 'wpp' ); ?>
             </label>
           </li>
           <?php do_action( 'wpp::property_attributes::settings', $slug ); ?>

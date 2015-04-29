@@ -222,9 +222,12 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 = 2.0.0 =
 * Changed plugin initialization functionality.
 * Added Composer ( dependency manager ) modules and moved some functionality to composer modules ( vendors ).
+* Added Clone Property button on Edit Property page.
 * Moved premium features to separate plugins.
 * Cleaned up functionality of plugin.
 * Refactored file structure of plugin.
+* Refactored attributes and meta management and added new attribute types.
+* Refactored 'All Properties' page.
 * Fixed option 'Display in featured listings' on edit property page.
 * Fixed Warnings and Notices.
 
