@@ -55,19 +55,20 @@ namespace UsabilityDynamics\WPP {
         include_once $this->path( 'lib/class_mail.php', 'dir' );
         /** Load in hooks that deal with legacy and backwards-compat issues */
         include_once $this->path( 'lib/class_legacy.php', 'dir' );
-        
-        //** Initiate the plugin */
-        $this->core = new \WPP_Core();
 
         //** Initiate AJAX Handler */
         new Ajax();
-
+        //** Initiate Attributes Handler */
+        new Attributes();
         //** Initiate Admin UI */
         if( is_admin() ) {
           new Admin();
           //** Initiate Meta Box Handler */
           new Meta_Box();
         }
+
+        //** Initiate the plugin */
+        $this->core = new \WPP_Core();
       }
       
       /**

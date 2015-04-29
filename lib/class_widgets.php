@@ -80,7 +80,7 @@ class Property_Attributes_Widget extends WP_Widget {
       }
 
       if ( $show_labels ) {
-        $attribute = WPP_F::get_attribute_data( $slug );
+        $attribute = UsabilityDynamics\WPP\Attributes::get_attribute_data( $slug );
       }
 
       $attributes[ ] = '<li class="' . $slug . '">' . ( $show_labels ? '<span class="attribute">' . $attribute[ 'label' ] . '<span class="separator">:</span> </span>' : '' ) . '</span><span class="value">' . $value . '</span></li>';
@@ -116,7 +116,7 @@ class Property_Attributes_Widget extends WP_Widget {
     $widget_options = ( is_array( $instance ) ? $instance : array() );
 
     foreach ( WPP_F::get_total_attribute_array() as $slug => $label ) {
-      $main_options[ $slug ] = WPP_F::get_attribute_data( $slug );
+      $main_options[ $slug ] = UsabilityDynamics\WPP\Attributes::get_attribute_data( $slug );
     }
 
     //** We don't want to mix in the title into our array */

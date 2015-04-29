@@ -520,7 +520,7 @@ class WPP_Core {
     );
 
     foreach( $update_data as $meta_key => $meta_value ) {
-      $attribute_data = WPP_F::get_attribute_data( $meta_key );
+      $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $meta_key );
 
       $meta_value = html_entity_decode( $meta_value );
       $meta_value = stripslashes( $meta_value );

@@ -132,6 +132,7 @@ return array(
     'UsabilityDynamics\\Utility\\Guid_Fix' => $vendorDir . '/usabilitydynamics/lib-utility/lib/class-guid-fix.php',
     'UsabilityDynamics\\WPP\\Admin' => $baseDir . '/lib/classes/class-admin.php',
     'UsabilityDynamics\\WPP\\Ajax' => $baseDir . '/lib/classes/class-ajax.php',
+    'UsabilityDynamics\\WPP\\Attributes' => $baseDir . '/lib/classes/class-attributes.php',
     'UsabilityDynamics\\WPP\\Bootstrap' => $baseDir . '/lib/classes/class-bootstrap.php',
     'UsabilityDynamics\\WPP\\Meta_Box' => $baseDir . '/lib/classes/class-meta-box.php',
     'UsabilityDynamics\\WPP\\Scaffold' => $baseDir . '/lib/classes/class-scaffold.php',

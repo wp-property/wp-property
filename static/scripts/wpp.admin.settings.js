@@ -306,26 +306,17 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
 
     switch( setting ) {
 
-      case 'input':
-        jQuery( value_field ).hide();
-        break;
-
-      case 'range_input':
-        jQuery( value_field ).hide();
-        break;
-
       case 'dropdown':
-        jQuery( value_field ).show();
-        break;
-
-      case 'checkbox':
-        jQuery( value_field ).hide();
-        break;
-
+      case 'select_advanced':
       case 'multi_checkbox':
+      case 'radio':
         jQuery( value_field ).show();
         break;
 
+      case 'input':
+      case 'text':
+      case 'range_input':
+      case 'checkbox':
       default:
         jQuery( value_field ).hide();
 

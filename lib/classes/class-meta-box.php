@@ -22,25 +22,7 @@ namespace UsabilityDynamics\WPP {
         /* Register all RWMB meta boxes */
         add_action( 'rwmb_meta_boxes', array( $this, 'register_meta_boxes' ) );
 
-        /** Add Meta Box Fields */
-        ud_get_wp_property()->set( 'meta_box.fields', array(
-          'checkbox' => __( 'Checkbox', ud_get_wp_property('domain') ),
-          'checkbox_list' => __( 'List of checkboxes', ud_get_wp_property('domain') ),
-          'color' => __( 'Color picker', ud_get_wp_property('domain') ),
-          'date' => __( 'Date picker', ud_get_wp_property('domain') ),
-          'datetime' => __( 'Date and time picker', ud_get_wp_property('domain') ),
-          'file' => __( 'Simple file upload', ud_get_wp_property('domain') ),
-          'file_advanced' => __( 'Advanced file upload', ud_get_wp_property('domain') ),
-          'file_input' => __( 'File URL', ud_get_wp_property('domain') ),
-          'image' => __( 'Simple Image upload', ud_get_wp_property('domain') ),
-          'image_advanced' => __( 'Advanced Image upload', ud_get_wp_property('domain') ),
-          'plupload_image' => __( '', ud_get_wp_property('domain') ),
-          'image_select' => __( 'Image Select', ud_get_wp_property('domain') ),
-          'map' => __( 'Google maps field', ud_get_wp_property('domain') ),
-          'number' => __( 'Number', ud_get_wp_property('domain') ),
-          'oembed' => __( 'Oembed', ud_get_wp_property('domain') ),
-          'checkbox' => __( '', ud_get_wp_property('domain') ),
-        ) );
+
       }
 
       /**
@@ -276,7 +258,7 @@ namespace UsabilityDynamics\WPP {
             continue;
           }
 
-          $attribute = \WPP_F::get_attribute_data( $slug );
+          $attribute = Attributes::get_attribute_data( $slug );
 
           $description = array();
           $description[ ] = ( isset( $attribute[ 'numeric' ] ) || isset( $attribute[ 'currency' ] ) ? __( 'Numbers only.', ud_get_wp_property()->domain ) : '' );
@@ -307,6 +289,12 @@ namespace UsabilityDynamics\WPP {
           //* Legacy compatibility */
           if( in_array( $input_type, array( 'checkbox' ) ) ) {
             $input_type = 'wpp_checkbox';
+          }
+
+          //* Fix currency */
+          if( $input_type == 'currency' ) {
+            $input_type = 'number';
+            $description[] =  __( 'Currency.', ud_get_wp_property('domain') );
           }
 
           //** Determine if current attribute is used by Google Address Validator. */

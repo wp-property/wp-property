@@ -1017,7 +1017,7 @@ if ( !function_exists( 'draw_stats' ) ):
       
       $value = $data[ 'value' ];
 
-      $attribute_data = WPP_F::get_attribute_data( $tag );
+      $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $tag );
 
       //** Do not show attributes that have value of 'value' if enabled */
       if ( $hide_false == 'true' && $value == 'false' ) {
@@ -1471,7 +1471,7 @@ if ( !function_exists( 'wpp_render_search_input' ) ):
       'placeholder' => false
     );
     extract( $args = wp_parse_args( $args, $defaults ) );
-    $attribute_data = WPP_F::get_attribute_data( $attrib );
+    $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $attrib );
     $use_input_type = isset( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] ) ? $wp_properties[ 'searchable_attr_fields' ][ $attrib ] : false;
     if ( !empty( $input_type ) ) {
       $use_input_type = $input_type;

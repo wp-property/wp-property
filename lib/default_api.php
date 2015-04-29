@@ -583,7 +583,7 @@ function wpp_save_property_aggregated_data( $post_id ) {
 
       foreach ( $wp_properties[ 'searchable_attributes' ] as $searchable_attribute ) {
 
-        $attribute_data = WPP_F::get_attribute_data( $searchable_attribute );
+        $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $searchable_attribute );
 
         if ( !empty( $attribute_data[ 'numeric' ] ) || !empty( $attribute_data[ 'currency' ] ) ) {
           if ( !empty( $child_object[ $searchable_attribute ] ) && !in_array( $searchable_attribute, $excluded_attributes ) ) {

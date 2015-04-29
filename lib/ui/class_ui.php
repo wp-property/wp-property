@@ -299,7 +299,7 @@ class WPP_UI {
         continue;
       }
 
-      $attribute_data = WPP_F::get_attribute_data( $slug );
+      $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $slug );
       
       $attribute_description = array();
 
@@ -608,7 +608,7 @@ class WPP_UI {
   static public function property_type_selector( $property ) {
     global $wp_properties;
 
-    $attribute = WPP_F::get_attribute_data( 'property_type' );
+    $attribute = UsabilityDynamics\WPP\Attributes::get_attribute_data( 'property_type' );
 
     $type_label = ( !empty( $attribute[ 'label' ] ) ? $attribute[ 'label' ] : sprintf( __( '%1s Type', 'wpp' ), WPP_F::property_label() ) );
 

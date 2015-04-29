@@ -852,145 +852,6 @@ class WPP_F extends UsabilityDynamics\Utility {
   }
 
   /**
-   * Returns attribute information.
-   *
-   * Checks $wp_properties and returns a concise array of array-specific settings and attributes
-   *
-   * @todo Consider putting this into settings action, or somewhere, so it its only ran once, or adding caching
-   * @version 1.17.3
-   */
-  static public function get_attribute_data( $attribute = false ) {
-    global $wp_properties;
-
-    if( !$attribute ) {
-      return;
-    }
-
-    if( wp_cache_get( $attribute, 'wpp_attribute_data' ) ) {
-      return wp_cache_get( $attribute, 'wpp_attribute_data' );
-    }
-
-    $post_table_keys = array(
-      'post_author',
-      'post_date',
-      'post_date_gmt',
-      'post_content',
-      'post_title',
-      'post_excerpt',
-      'post_status',
-      'comment_status',
-      'ping_status',
-      'post_password',
-      'post_name',
-      'to_ping',
-      'pinged',
-      'post_modified',
-      'post_modified_gmt',
-      'post_content_filtered',
-      'post_parent',
-      'guid',
-      'menu_order',
-      'post_type',
-      'post_mime_type',
-      'comment_count' );
-
-    if( !$attribute ) {
-      return;
-    }
-
-    $ui_class = array( $attribute );
-
-    if( in_array( $attribute, $post_table_keys ) ) {
-      $return[ 'storage_type' ] = 'post_table';
-    }
-
-    $return[ 'slug' ] = $attribute;
-
-    if( isset( $wp_properties[ 'property_stats' ][ $attribute ] ) ) {
-      $return[ 'is_stat' ]      = 'true';
-      $return[ 'storage_type' ] = 'meta_key';
-      $return[ 'label' ]        = $wp_properties[ 'property_stats' ][ $attribute ];
-    }
-
-    if( isset( $wp_properties[ 'property_meta' ][ $attribute ] ) ) {
-      $return[ 'is_meta' ]         = 'true';
-      $return[ 'storage_type' ]    = 'meta_key';
-      $return[ 'label' ]           = $wp_properties[ 'property_meta' ][ $attribute ];
-      $return[ 'input_type' ]      = 'textarea';
-      $return[ 'data_input_type' ] = 'textarea';
-    }
-
-    if( isset( $wp_properties[ 'searchable_attr_fields' ][ $attribute ] ) ) {
-      $return[ 'input_type' ] = $wp_properties[ 'searchable_attr_fields' ][ $attribute ];
-      $ui_class[ ]            = $return[ 'input_type' ];
-    }
-
-    if( isset( $wp_properties[ 'admin_attr_fields' ][ $attribute ] ) ) {
-      $return[ 'data_input_type' ] = $wp_properties[ 'admin_attr_fields' ][ $attribute ];
-      $ui_class[ ]                 = $return[ 'data_input_type' ];
-    }
-
-    if( isset( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) && $wp_properties[ 'configuration' ][ 'address_attribute' ] == $attribute ) {
-      $return[ 'is_address_attribute' ] = 'true';
-      $ui_class[ ]                      = 'address_attribute';
-    }
-
-    if( isset( $wp_properties[ 'property_inheritance' ] ) && is_array( $wp_properties[ 'property_inheritance' ] ) ) {
-      foreach( $wp_properties[ 'property_inheritance' ] as $property_type => $type_data ) {
-        if( in_array( $attribute, $type_data ) ) {
-          $return[ 'inheritance' ][ ] = $property_type;
-        }
-      }
-    }
-
-    if( isset( $wp_properties[ 'predefined_values' ][ $attribute ] ) ) {
-      $return[ 'predefined_values' ] = $wp_properties[ 'predefined_values' ][ $attribute ];
-    }
-
-    if( isset( $wp_properties[ 'predefined_search_values' ][ $attribute ] ) ) {
-      $return[ 'predefined_search_values' ] = $wp_properties[ 'predefined_search_values' ][ $attribute ];
-    }
-
-    if( isset( $wp_properties[ 'sortable_attributes' ] ) && in_array( $attribute, (array)$wp_properties[ 'sortable_attributes' ] ) ) {
-      $return[ 'sortable' ] = true;
-      $ui_class[ ]          = 'sortable';
-    }
-
-    if( isset( $wp_properties[ 'hidden_frontend_attributes' ] ) && in_array( $attribute, (array)$wp_properties[ 'hidden_frontend_attributes' ] ) ) {
-      $return[ 'hidden_frontend_attribute' ] = true;
-      $ui_class[ ]                           = 'fe_hidden';
-    }
-
-    if( isset( $wp_properties[ 'currency_attributes' ] ) && in_array( $attribute, (array)$wp_properties[ 'currency_attributes' ] ) ) {
-      $return[ 'currency' ] = true;
-      $ui_class[ ]          = 'currency';
-    }
-
-    if( isset( $wp_properties[ 'numeric_attributes' ] ) && in_array( $attribute, (array)$wp_properties[ 'numeric_attributes' ] ) ) {
-      $return[ 'numeric' ] = true;
-      $ui_class[ ]         = 'numeric';
-    }
-
-    if( isset( $wp_properties[ 'searchable_attributes' ] ) && in_array( $attribute, (array)$wp_properties[ 'searchable_attributes' ] ) ) {
-      $return[ 'searchable' ] = true;
-      $ui_class[ ]            = 'searchable';
-    }
-
-    if( empty( $return[ 'title' ] ) ) {
-      $return[ 'title' ] = WPP_F::de_slug( $return[ 'slug' ] );
-    }
-
-    $return[ 'ui_class' ] = implode( ' wpp_', $ui_class );
-
-    $return = apply_filters( 'wpp_attribute_data', $return );
-
-    wp_cache_add( $attribute, $return, 'wpp_attribute_data' );
-
-    return $return;
-
-  }
-
-  /**
    * Makes sure the script is loaded, otherwise loads it
    *
    * @version 1.17.3
@@ -2840,7 +2701,7 @@ class WPP_F extends UsabilityDynamics\Utility {
         }
 
         //** Load attribute data */
-        $attribute_data = WPP_F::get_attribute_data( $searchable_attribute );
+        $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $searchable_attribute );
 
         if( isset( $attribute_data[ 'numeric' ] ) || isset( $attribute_data[ 'currency' ] ) ) {
           $is_numeric = true;
@@ -3827,7 +3688,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
           foreach( $wp_properties[ 'searchable_attributes' ] as $searchable_attribute ) {
 
-            $attribute_data = WPP_F::get_attribute_data( $searchable_attribute );
+            $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $searchable_attribute );
 
             if( !empty( $attribute_data[ 'numeric' ] ) || !empty( $attribute_data[ 'currency' ] ) ) {
 
@@ -4250,7 +4111,7 @@ class WPP_F extends UsabilityDynamics\Utility {
               foreach( $property_stats as $attribute_label => $value ) {
 
                 $attribute_slug = $labels_to_keys[ $attribute_label ];
-                $attribute_data = WPP_F::get_attribute_data( $attribute_slug );
+                $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $attribute_slug );
 
                 if( empty( $value ) ) {
                   continue;
