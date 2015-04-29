@@ -372,8 +372,8 @@ namespace UsabilityDynamics\WPP {
 
         $field = array(
           'name' => __('Falls Under', ud_get_wp_property()->domain),
-          'id' => 'property_id',
-          'type' => 'autocomplete',
+          'id' => 'parent_id',
+          'type' => 'wpp_parent',
           'options' => admin_url( 'admin-ajax.php?action=wpp_autocomplete_property' ),
         );
 
