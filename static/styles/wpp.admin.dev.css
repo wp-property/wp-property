@@ -1386,7 +1386,9 @@ td.wpp_premium_feature_image {
 }
 .wpp_overview_filters .wpp_checkbox_filter {
   display: none;
-  padding: 0px 10px;
+  padding: 0 10px;
+  max-height: 300px;
+  overflow: auto;
 }
 .wpp_overview_filters .wpp_checkbox_filter label {
   margin-left: 1px;

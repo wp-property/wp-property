@@ -22,7 +22,7 @@ namespace UsabilityDynamics\WPP {
         /* Register all RWMB meta boxes */
         add_action( 'rwmb_meta_boxes', array( $this, 'register_meta_boxes' ) );
 
-
+        add_action( 'wpp::field::parent::label', array( $this, 'prepare_parent_label' ) );
       }
 
       /**
@@ -374,7 +374,7 @@ namespace UsabilityDynamics\WPP {
           'name' => __('Falls Under', ud_get_wp_property()->domain),
           'id' => 'parent_id',
           'type' => 'wpp_parent',
-          'options' => admin_url( 'admin-ajax.php?action=wpp_autocomplete_property' ),
+          'options' => admin_url( 'admin-ajax.php?action=wpp_autocomplete_property_parent' ),
         );
 
         return $field;

@@ -4163,43 +4163,6 @@ class WPP_F extends UsabilityDynamics\Utility {
   }
 
   /**
-   * Updates parent ID.
-   * Determines if parent exists and it doesn't have own parent.
-   *
-   * @param integer $parent_id
-   * @param integer $post_id
-   *
-   * @return int
-   * @author peshkov@UD
-   * @since 1.37.5
-   */
-  static public function update_parent_id( $parent_id, $post_id ) {
-    global $wpdb, $wp_properties;
-
-    $parent_id = !empty( $parent_id ) ? $parent_id : 0;
-
-    $post = get_post( $_REQUEST[ 'parent_id' ] );
-
-    if( !$post ) {
-      $parent_id = 0;
-    } else {
-      if( $post->post_parent > 0 ) {
-        if( empty( $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] ) || $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] != 'true' ) {
-          $parent_id = 0;
-        }
-      }
-    }
-
-    if( $parent_id == 0 ) {
-      $wpdb->query( "UPDATE {$wpdb->posts} SET post_parent=0 WHERE ID={$post_id}" );
-    }
-
-    update_post_meta( $post_id, 'parent_gpid', WPP_F::maybe_set_gpid( $parent_id ) );
-
-    return $parent_id;
-  }
-
-  /**
    * Returns property object for displaying on map
    *
    * Used for speeding up property queries, only returns:

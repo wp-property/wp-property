@@ -20,7 +20,7 @@ namespace UsabilityDynamics\WPP {
        */
       var $actions = array(
         'wpp_clone_property',
-        'wpp_autocomplete_property',
+        'wpp_autocomplete_property_parent',
       );
 
       /**
@@ -189,12 +189,15 @@ namespace UsabilityDynamics\WPP {
        *
        * @author peshkov@UD
        */
-      public function action_wpp_autocomplete_property( $args ) {
+      public function action_wpp_autocomplete_property_parent( $args ) {
         $args = wp_parse_args( $args, array(
           'term' => '',
         ) );
 
         $response = $this->get_autocomplete_post( $args[ 'term' ], 'property' );
+        foreach($response as $i => $p) {
+          $response[$i]['excerpt'] = RWMB_Wpp_Parent_Field::prepare_parent_label($p['excerpt']);
+        }
         $this->send_json( $response );
       }
 
@@ -215,7 +218,8 @@ namespace UsabilityDynamics\WPP {
           foreach( $posts as $post ) {
             array_push( $response, array(
               'value' => $post->ID,
-              'label' => $post->post_title . ' ( ID #' . $post->ID . ' )'
+              'label' => $post->post_title . ' ( ID #' . $post->ID . ' )',
+              'excerpt' => $post->ID,
             ) );
           }
 

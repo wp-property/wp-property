@@ -567,10 +567,6 @@ class WPP_Core {
 
     WPP_F::maybe_set_gpid( $post_id );
 
-    if( isset( $_REQUEST[ 'parent_id' ] ) ) {
-      $_REQUEST[ 'parent_id' ] = WPP_F::update_parent_id( $_REQUEST[ 'parent_id' ], $post_id );
-    }
-
     do_action( 'save_property', $post_id );
 
     return true;

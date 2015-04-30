@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'RWMB_Wpp_Parent_Field' ) ) {
-  class RWMB_Wpp_Parent_Field extends RWMB_Autocomplete_Field {
+  class RWMB_Wpp_Parent_Field extends RWMB_Field {
 
     /**
      * Enqueue scripts and styles
@@ -11,8 +11,8 @@ if ( ! class_exists( 'RWMB_Wpp_Parent_Field' ) ) {
      * @return void
      */
     static function admin_enqueue_scripts() {
-      parent::admin_enqueue_scripts();
-      wp_enqueue_script( 'field-wpp-parent', ud_get_wp_property()->path( 'static/scripts/fields/wpp-parent.js' ), array( 'jquery-ui-autocomplete' ), ud_get_wp_property('version'), true );
+      wp_enqueue_style( 'field-wpp-parent', ud_get_wp_property()->path( 'static/styles/fields/wpp-parent.css' ), array('wp-admin'), ud_get_wp_property('version') );
+      wp_enqueue_script( 'field-wpp-parent', ud_get_wp_property()->path( 'static/scripts/fields/wpp-parent.js' ), array( 'jquery-ui-autocomplete', 'wpp-localization' ), ud_get_wp_property('version'), true );
     }
 
     /**
@@ -66,7 +66,7 @@ if ( ! class_exists( 'RWMB_Wpp_Parent_Field' ) ) {
 			';
 
       if( $post->post_parent > 0 ) {
-        $label = apply_filters( 'rwmb_autocomplete_result_label', $post->post_parent, $field );
+        $label = self::prepare_parent_label($post->post_parent);
         $html .= sprintf(
           $tpl,
           $label,
@@ -93,7 +93,75 @@ if ( ! class_exists( 'RWMB_Wpp_Parent_Field' ) ) {
      * @param $post_id
      * @param $field
      */
-    static function save( $new, $old, $post_id, $field ) {}
+    static function save( $new, $old, $post_id, $field ) {
+      self::update_parent_id( $new, $post_id );
+    }
+
+    /**
+     * Updates parent ID.
+     * Determines if parent exists and it doesn't have own parent.
+     *
+     * @param integer $parent_id
+     * @param integer $post_id
+     *
+     * @return int
+     * @author peshkov@UD
+     * @since 1.37.5
+     */
+    static public function update_parent_id( $parent_id, $post_id ) {
+      global $wpdb, $wp_properties;
+
+      $parent_id = !empty( $parent_id ) ? $parent_id : 0;
+
+      $post = get_post( $parent_id );
+
+      if( !$post ) {
+        $parent_id = 0;
+      } else {
+        if( $post->post_parent > 0 ) {
+          if( empty( $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] ) || $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] != 'true' ) {
+            $parent_id = 0;
+          }
+        }
+      }
+
+      if( $parent_id == 0 ) {
+        $wpdb->query( "UPDATE {$wpdb->posts} SET post_parent=0 WHERE ID={$post_id}" );
+      }
+
+      update_post_meta( $post_id, 'parent_gpid', WPP_F::maybe_set_gpid( $parent_id ) );
+
+      return $parent_id;
+    }
+
+    /**
+     * Normalize parameters for field
+     *
+     * @param array $field
+     *
+     * @return array
+     */
+    static function normalize_field( $field ) {
+      $field = wp_parse_args( $field, array(
+        'size' => 30,
+      ) );
+      return $field;
+    }
+
+    /**
+     * Maybe prepare parent label for showing it on Meta Box.
+     */
+    static public function prepare_parent_label( $label ) {
+      if( is_numeric( $label ) ) {
+        $post = get_post( $label );
+        if( !empty( $post ) ) {
+          $label = '<span class="wpp-parent-label-wprapper"><i class="dashicons-admin-home dashicons"></i>';
+          $label .= '<a class="wpp-parent-label" href="' . admin_url( "post.php?post={$post->ID}&action=edit" ) . '">' . $post->post_title . '</a>';
+          $label .= '</span>';
+        }
+      }
+      return $label;
+    }
 
   }
 }

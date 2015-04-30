@@ -12,6 +12,7 @@ $l10n = array(
 
   //** Edit Property page */
   'clone_property'                  => sprintf( __( 'Clone %s', 'wpp' ), WPP_F::property_label() ),
+  'delete'                            => __( 'Delete', 'wpp' ),
 
   //** Admin Overview page */
   'show'                            => __( 'Show', 'wpp' ),

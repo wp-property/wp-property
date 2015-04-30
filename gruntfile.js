@@ -59,7 +59,9 @@ module.exports = function build( grunt ) {
           'static/styles/theme-specific/denali.css': [ 'static/styles/src/theme-specific/denali.less' ],
           'static/styles/theme-specific/twentyeleven.css': [ 'static/styles/src/theme-specific/twentyeleven.less' ],
           'static/styles/theme-specific/twentyten.css': [ 'static/styles/src/theme-specific/twentyten.less' ],
-          'static/styles/theme-specific/twentytwelve.css': [ 'static/styles/src/theme-specific/twentytwelve.less' ]
+          'static/styles/theme-specific/twentytwelve.css': [ 'static/styles/src/theme-specific/twentytwelve.less' ],
+
+          'static/styles/fields/wpp-parent.css': [ 'static/styles/src/fields/wpp-parent.less' ]
         }
       },
       development: {
@@ -78,7 +80,9 @@ module.exports = function build( grunt ) {
           'static/styles/theme-specific/denali.dev.css': [ 'static/styles/src/theme-specific/denali.less' ],
           'static/styles/theme-specific/twentyeleven.dev.css': [ 'static/styles/src/theme-specific/twentyeleven.less' ],
           'static/styles/theme-specific/twentyten.dev.css': [ 'static/styles/src/theme-specific/twentyten.less' ],
-          'static/styles/theme-specific/twentytwelve.dev.css': [ 'static/styles/src/theme-specific/twentytwelve.less' ]
+          'static/styles/theme-specific/twentytwelve.dev.css': [ 'static/styles/src/theme-specific/twentytwelve.less' ],
+
+          'static/styles/fields/wpp-parent.dev.css': [ 'static/styles/src/fields/wpp-parent.less' ]
         }
       }
     },
@@ -90,7 +94,9 @@ module.exports = function build( grunt ) {
       },
       less: {
         files: [
-          'static/styles/src/*.*'
+          'static/styles/src/*.*',
+          'static/styles/src/fields/*.*',
+          'static/styles/src/theme-specific/*.*'
         ],
         tasks: [ 'less' ]
       },
