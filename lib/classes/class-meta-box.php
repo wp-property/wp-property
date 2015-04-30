@@ -21,8 +21,6 @@ namespace UsabilityDynamics\WPP {
         add_action( 'admin_init', array( $this, 'load_files' ), 1 );
         /* Register all RWMB meta boxes */
         add_action( 'rwmb_meta_boxes', array( $this, 'register_meta_boxes' ) );
-
-        add_action( 'wpp::field::parent::label', array( $this, 'prepare_parent_label' ) );
       }
 
       /**

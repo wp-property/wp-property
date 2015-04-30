@@ -196,7 +196,7 @@ namespace UsabilityDynamics\WPP {
 
         $response = $this->get_autocomplete_post( $args[ 'term' ], 'property' );
         foreach($response as $i => $p) {
-          $response[$i]['excerpt'] = RWMB_Wpp_Parent_Field::prepare_parent_label($p['excerpt']);
+          $response[$i]['excerpt'] = \RWMB_Wpp_Parent_Field::prepare_parent_label($p['excerpt']);
         }
         $this->send_json( $response );
       }
