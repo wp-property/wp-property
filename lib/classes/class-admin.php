@@ -167,26 +167,6 @@ namespace UsabilityDynamics\WPP {
 
         \WPP_F::fix_screen_options();
 
-        //* Adds metabox 'General Information' to Property Edit Page */
-
-        /*
-        add_meta_box( 'wpp_property_meta', __( 'General Information', 'wpp' ), array( 'WPP_UI', 'metabox_meta' ), 'property', 'normal', 'high' );
-        // Adds 'Group' metaboxes to Property Edit Page
-        if ( !empty( $wp_properties[ 'property_groups' ] ) ) {
-          foreach ( $wp_properties[ 'property_groups' ] as $slug => $group ) {
-            // There is no sense to add metabox if no one attribute assigned to group
-            if ( !in_array( $slug, $wp_properties[ 'property_stats_groups' ] ) ) {
-              continue;
-            }
-            // Determine if Group name is empty we add 'NO NAME', other way metabox will not be added
-            if ( empty( $group[ 'name' ] ) ) {
-              $group[ 'name' ] = __( 'NO NAME', 'wpp' );
-            }
-            add_meta_box( $slug, __( $group[ 'name' ], 'wpp' ), array( 'WPP_UI', 'metabox_meta' ), 'property', 'normal', 'high', array( 'group' => $slug ) );
-          }
-        }
-        //*/
-
         add_meta_box( 'property_filter', $wp_properties[ 'labels' ][ 'name' ] . ' ' . __( 'Search', 'wpp' ), array( 'WPP_UI', 'metabox_property_filter' ), 'property_page_all_properties', 'normal' );
 
         // Add metaboxes
