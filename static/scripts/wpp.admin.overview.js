@@ -28,14 +28,10 @@ jQuery.extend( wpp = wpp || {}, { overview: {
       });
     });
 
-    // DataTable check all checkbox
-    jQuery( "input.check-all", "#wp-list-table" ).click( function ( e ) {
-      if ( e.target.checked ) {
-        jQuery( "#the-list td.cb input:checkbox" ).attr( 'checked', 'checked' );
-      } else {
-        jQuery( "#the-list td.cb input:checkbox" ).removeAttr( 'checked' );
-      }
+    jQuery(document).on('wplt-after-update', function(){
+      wpp.overview.initialize();
     });
+    wpp.overview.initialize();
 
   },
 

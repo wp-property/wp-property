@@ -133,13 +133,13 @@ namespace UsabilityDynamics\WPP {
             $count = \WPP_F::get_properties_quantity( array( $attr ) );
             switch( $attr ) {
               case 'publish':
-                $label = __( 'Published', 'wpp' );
+                $label = __( 'Published', $this->get('domain') );
                 break;
               case 'pending':
-                $label = __( 'Pending', 'wpp' );
+                $label = __( 'Pending', $this->get('domain') );
                 break;
               case 'trash':
-                $label = __( 'Trashed', 'wpp' );
+                $label = __( 'Trashed', $this->get('domain') );
                 break;
               default:
                 $label = strtoupper( substr( $attr, 0, 1 ) ) . substr( $attr, 1, strlen( $attr ) );

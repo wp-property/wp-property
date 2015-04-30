@@ -108,8 +108,8 @@ class WPP_Core {
     add_action( "wp_ajax_wpp_property_overview_pagination", array( $this, "ajax_property_overview" ) );
     add_action( "wp_ajax_nopriv_wpp_property_overview_pagination", array( $this, "ajax_property_overview" ) );
 
-    add_filter( "manage_edit-property_sortable_columns", array( &$this, "sortable_columns" ) );
-    add_filter( "manage_edit-property_columns", array( &$this, "edit_columns" ) );
+    //add_filter( "manage_edit-property_sortable_columns", array( &$this, "sortable_columns" ) );
+    //add_filter( "manage_edit-property_columns", array( &$this, "edit_columns" ) );
 
     /** Called in setup_postdata().  We add property values here to make available in global $post variable on frontend */
     add_action( 'the_post', array( 'WPP_F', 'the_post' ) );
@@ -144,13 +144,12 @@ class WPP_Core {
     add_action( 'wpp_contextual_help', array( $this, 'wpp_contextual_help' ) );
 
     //** Page loading handlers */
-    add_action( 'load-property_page_all_properties', array( 'WPP_F', 'property_page_all_properties_load' ) );
     add_action( 'load-property_page_property_settings', array( 'WPP_F', 'property_page_property_settings_load' ) );
 
-    add_filter( "manage_property_page_all_properties_columns", array( 'WPP_F', 'overview_columns' ) );
-    add_filter( "wpp_overview_columns", array( 'WPP_F', 'custom_attribute_columns' ) );
+    //add_filter( "manage_property_page_all_properties_columns", array( 'WPP_F', 'overview_columns' ) );
+    //add_filter( "wpp_overview_columns", array( 'WPP_F', 'custom_attribute_columns' ) );
 
-    add_filter( "wpp_attribute_filter", array( 'WPP_F', 'attribute_filter' ), 10, 2 );
+    //add_filter( "wpp_attribute_filter", array( 'WPP_F', 'attribute_filter' ), 10, 2 );
 
     //** Add custom image sizes */
     foreach( $wp_properties[ 'image_sizes' ] as $image_name => $image_sizes ) {

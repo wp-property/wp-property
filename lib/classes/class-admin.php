@@ -29,9 +29,6 @@ namespace UsabilityDynamics\WPP {
         /** Admin interface init */
         add_action( "admin_init", array( $this, "admin_init" ) );
         add_action( "admin_menu", array( $this, 'admin_menu_settings' ), 50 );
-
-        /** Plug page actions -> Add Settings Link to plugin overview page */
-        add_filter( 'plugin_action_links', array( $this, 'plugin_action_links' ), 10, 2 );
       }
 
       /**
@@ -51,6 +48,8 @@ namespace UsabilityDynamics\WPP {
 
           //** Property Overview Page and Edit Property page */
           case 'property_page_all_properties':
+            wp_enqueue_script( 'wp-property-backend-global' );
+            wp_enqueue_script( 'wp-property-admin-overview' );
             break;
 
           case 'property':
@@ -125,8 +124,6 @@ namespace UsabilityDynamics\WPP {
       public function admin_init() {
         global $wp_properties;
 
-        \WPP_F::fix_screen_options();
-
         // Add metaboxes
         do_action( 'wpp_metaboxes' );
 
@@ -166,22 +163,6 @@ namespace UsabilityDynamics\WPP {
           include $this->instance->path( "lib/ui/page_settings.php", 'dir' );
         } );
 
-      }
-
-      /**
-       * Adds "Settings" link to the plugin overview page
-       *
-       *  *
-       * @since 0.60
-       *
-       */
-      public function plugin_action_links( $links, $file ) {
-
-        if( $file == 'wp-property/wp-property.php' ) {
-          $settings_link = '<a href="' . admin_url( "edit.php?post_type=property&page=property_settings" ) . '">' . __( 'Settings', ud_get_wp_property('domain') ) . '</a>';
-          array_unshift( $links, $settings_link ); // before other links
-        }
-        return $links;
       }
 
     }

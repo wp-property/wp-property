@@ -1876,40 +1876,6 @@ class WPP_F extends UsabilityDynamics\Utility {
   }
 
   /**
-   * Prevents all columns on the overview page from being enabled if nothing is configured
-   *
-   *
-   * @since 0.721
-   *
-   */
-  static public function fix_screen_options() {
-    global $current_user;
-
-    $user_id = $current_user->data->ID;
-
-    $current = get_user_meta( $user_id, 'manageedit-propertycolumnshidden', true );
-
-    $default_hidden[ ] = 'type';
-    $default_hidden[ ] = 'price';
-    $default_hidden[ ] = 'bedrooms';
-    $default_hidden[ ] = 'bathrooms';
-    $default_hidden[ ] = 'deposit';
-    $default_hidden[ ] = 'area';
-    $default_hidden[ ] = 'phone_number';
-    $default_hidden[ ] = 'purchase_price';
-    $default_hidden[ ] = 'for_sale';
-    $default_hidden[ ] = 'for_rent';
-    $default_hidden[ ] = 'city';
-    $default_hidden[ ] = 'featured';
-    $default_hidden[ ] = 'menu_order';
-
-    if( empty( $current ) ) {
-      update_user_meta( $user_id, 'manageedit-propertycolumnshidden', $default_hidden );
-    }
-
-  }
-
-  /**
    * Determines most common property type (used for defaults when needed)
    *
    *
@@ -4646,7 +4612,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     /** Screen Options */
-    add_screen_option( 'layout_columns', array( 'max' => 2, 'default' => 2 ) );
+    //add_screen_option( 'layout_columns', array( 'max' => 2, 'default' => 2 ) );
 
     //** Default Help items */
     $contextual_help[ 'General Help' ][ ] = '<h3>' . __( 'General Help', 'wpp' ) . '</h3>';
