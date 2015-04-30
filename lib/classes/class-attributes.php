@@ -55,12 +55,14 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties;
         $numeric_attributes = ud_get_wp_property( 'numeric_attributes', array() );
         $currency_attributes = ud_get_wp_property( 'currency_attributes', array() );
+
         foreach( ud_get_wp_property('admin_attr_fields', array()) as $key => $type ) {
-          switch( $key ){
+          switch( $type ){
             case 'number':
               array_push( $numeric_attributes, $key );
               break;
             case 'currency':
+              array_push( $numeric_attributes, $key );
               array_push( $currency_attributes, $key );
               break;
           }
