@@ -18,12 +18,16 @@ namespace UsabilityDynamics\WPP {
 
         parent::__construct();
 
+        /**
+         * Init 'All Properties' page.
+         */
+        new Admin_Overview();
+
         //** Load admin header scripts */
         add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
         /** Admin interface init */
         add_action( "admin_init", array( $this, "admin_init" ) );
-        add_action( "admin_menu", array( $this, 'admin_menu' ), 20 );
         add_action( "admin_menu", array( $this, 'admin_menu_settings' ), 50 );
 
         /** Plug page actions -> Add Settings Link to plugin overview page */
@@ -47,66 +51,22 @@ namespace UsabilityDynamics\WPP {
 
           //** Property Overview Page and Edit Property page */
           case 'property_page_all_properties':
-            wp_enqueue_script( 'wp-property-backend-global' );
-            wp_enqueue_script( 'wp-property-admin-overview' );
+            break;
 
           case 'property':
+            global $post;
 
-            /** Add 'Clone Property' button if user has permissions to create property. */
-            if( $current_screen->id == 'property' ) {
-              global $post;
-
-              $post_type_object = get_post_type_object('property');
-              if( current_user_can( $post_type_object->cap->create_posts ) ) {
-                wp_enqueue_script( 'wpp-clone-property', $this->instance->path( 'static/scripts/wpp.admin.clone.js', 'url' ), array( 'jquery', 'wp-property-global' ), $this->instance->get('version'), true );
-              }
+            $post_type_object = get_post_type_object('property');
+            if( current_user_can( $post_type_object->cap->create_posts ) ) {
+              wp_enqueue_script( 'wpp-clone-property', $this->instance->path( 'static/scripts/wpp.admin.clone.js', 'url' ), array( 'jquery', 'wp-property-global' ), $this->instance->get('version'), true );
             }
-
 
             wp_enqueue_script( 'wp-property-global' );
             //** Enabldes fancybox js, css and loads overview scripts */
             wp_enqueue_script( 'post' );
             wp_enqueue_script( 'postbox' );
             wp_enqueue_script( 'wpp-jquery-fancybox' );
-            wp_enqueue_script( 'wpp-jquery-data-tables' );
             wp_enqueue_style( 'wpp-jquery-fancybox-css' );
-            wp_enqueue_style( 'wpp-jquery-data-tables' );
-            //** Get width of overview table thumbnail, and set css */
-            $thumbnail_attribs = \WPP_F::image_sizes( $wp_properties[ 'configuration' ][ 'admin_ui' ][ 'overview_table_thumbnail_size' ] );
-            $thumbnail_width = ( !empty( $thumbnail_attribs[ 'width' ] ) ? $thumbnail_attribs[ 'width' ] : false );
-            if( $thumbnail_width ) {
-              ?>
-              <style typ="text/css">
-                #wp-list-table.wp-list-table .column-thumbnail {
-                  width: <?php echo $thumbnail_width + 20; ?>px;
-                }
-
-                #wp-list-table.wp-list-table td.column-thumbnail {
-                  text-align: right;
-                }
-
-                #wp-list-table.wp-list-table .column-type {
-                  width: 90px;
-                }
-
-                #wp-list-table.wp-list-table .column-menu_order {
-                  width: 50px;
-                }
-
-                #wp-list-table.wp-list-table td.column-menu_order {
-                  text-align: center;
-                }
-
-                #wp-list-table.wp-list-table .column-featured {
-                  width: 100px;
-                }
-
-                #wp-list-table.wp-list-table .check-column {
-                  width: 26px;
-                }
-              </style>
-            <?php
-            }
             break;
 
           //** Settings Page */
@@ -167,8 +127,6 @@ namespace UsabilityDynamics\WPP {
 
         \WPP_F::fix_screen_options();
 
-        add_meta_box( 'property_filter', $wp_properties[ 'labels' ][ 'name' ] . ' ' . __( 'Search', 'wpp' ), array( 'WPP_UI', 'metabox_property_filter' ), 'property_page_all_properties', 'normal' );
-
         // Add metaboxes
         do_action( 'wpp_metaboxes' );
 
@@ -196,48 +154,6 @@ namespace UsabilityDynamics\WPP {
 
           die();
         }
-      }
-
-      /**
-       * Sets up additional pages and loads their scripts
-       *
-       * @since 0.5
-       *
-       */
-      function admin_menu() {
-        global $wp_properties, $submenu;
-
-        // Create property settings page
-        add_submenu_page( 'edit.php?post_type=property', $wp_properties[ 'labels' ][ 'all_items' ], $wp_properties[ 'labels' ][ 'all_items' ], 'edit_wpp_properties', 'all_properties', function () {
-          global $wp_properties, $screen_layout_columns;
-          include $this->instance->path( "lib/ui/page_all_properties.php", 'dir' );
-        } );
-
-        /**
-         * Next used to add custom submenu page 'All Properties' with Javascript dataTable
-         *
-         * @author Anton K
-         */
-        if( !empty( $submenu[ 'edit.php?post_type=property' ] ) ) {
-
-          //** Comment next line if you want to get back old Property list page. */
-          array_shift( $submenu[ 'edit.php?post_type=property' ] );
-
-          foreach( $submenu[ 'edit.php?post_type=property' ] as $key => $page ) {
-            if( $page[ 2 ] == 'all_properties' ) {
-              unset( $submenu[ 'edit.php?post_type=property' ][ $key ] );
-              array_unshift( $submenu[ 'edit.php?post_type=property' ], $page );
-            } elseif( $page[ 2 ] == 'post-new.php?post_type=property' ) {
-              //** Removes 'Add Property' from menu if user can not edit properties. peshkov@UD */
-              if( !current_user_can( 'edit_wpp_property' ) ) {
-                unset( $submenu[ 'edit.php?post_type=property' ][ $key ] );
-              }
-            }
-          }
-        }
-
-        do_action( 'wpp_admin_menu' );
-
       }
 
       /**

@@ -236,7 +236,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       )
     ) );
 
-    $wp_properties[ 'labels' ] = apply_filters( 'wpp_object_labels', array(
+    ud_get_wp_property()->set( 'labels', apply_filters( 'wpp_object_labels', array(
       'name'               => __( 'Properties', 'wpp' ),
       'all_items'          => __( 'All Properties', 'wpp' ),
       'singular_name'      => __( 'Property', 'wpp' ),
@@ -249,7 +249,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       'not_found'          => __( 'No properties found', 'wpp' ),
       'not_found_in_trash' => __( 'No properties found in Trash', 'wpp' ),
       'parent_item_colon'  => ''
-    ) );
+    ) ) );
 
     //** Add support for property */
     $supports = array( 'title', 'editor', 'thumbnail' );
@@ -259,7 +259,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     // Register custom post types
     register_post_type( 'property', apply_filters( 'wpp_post_type', array(
-      'labels'              => $wp_properties[ 'labels' ],
+      'labels'              => ud_get_wp_property( 'labels' ),
       'public'              => true,
       'exclude_from_search' => ( isset( $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] ) && $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] == 'true' ? true : false ),
       'show_ui'             => true,
@@ -4398,70 +4398,6 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     return true;
-  }
-
-  /**
-   * Function for displaying WPP Data Table rows
-   *
-   * Ported from WP-CRM
-   *
-   * @since 3.0
-   *
-   */
-  static public function list_table() {
-    global $current_screen;
-
-    include WPP_Path . 'lib/ui/class_wpp_object_list_table.php';
-
-    //** Get the paramters we care about */
-    $sEcho         = $_REQUEST[ 'sEcho' ];
-    $per_page      = $_REQUEST[ 'iDisplayLength' ];
-    $iDisplayStart = $_REQUEST[ 'iDisplayStart' ];
-    $iColumns      = $_REQUEST[ 'iColumns' ];
-    $sColumns      = $_REQUEST[ 'sColumns' ];
-    $order_by      = $_REQUEST[ 'iSortCol_0' ];
-    $sort_dir      = $_REQUEST[ 'sSortDir_0' ];
-    //$current_screen = $wpi_settings['pages']['main'];
-
-    //** Parse the serialized filters array */
-    parse_str( $_REQUEST[ 'wpp_filter_vars' ], $wpp_filter_vars );
-    $wpp_search = $wpp_filter_vars[ 'wpp_search' ];
-
-    $sColumns = explode( ",", $sColumns );
-
-    //* Init table object */
-    $wp_list_table = new WPP_Object_List_Table( array(
-      "ajax"           => true,
-      "per_page"       => $per_page,
-      "iDisplayStart"  => $iDisplayStart,
-      "iColumns"       => $iColumns,
-      "current_screen" => 'property_page_all_properties'
-    ) );
-
-    if( in_array( $sColumns[ $order_by ], $wp_list_table->get_sortable_columns() ) ) {
-      $wpp_search[ 'sorting' ] = array(
-        'order_by' => $sColumns[ $order_by ],
-        'sort_dir' => $sort_dir
-      );
-    }
-
-    $wp_list_table->prepare_items( $wpp_search );
-
-    if( $wp_list_table->has_items() ) {
-      foreach( $wp_list_table->items as $count => $item ) {
-        $data[ ] = $wp_list_table->single_row( $item );
-      }
-    } else {
-      $data[ ] = $wp_list_table->no_items();
-    }
-
-    return json_encode( array(
-      'sEcho'                => $sEcho,
-      'iTotalRecords'        => count( $wp_list_table->all_items ),
-      // @TODO: Why iTotalDisplayRecords has $wp_list_table->all_items value ? Maxim Peshkov
-      'iTotalDisplayRecords' => count( $wp_list_table->all_items ),
-      'aaData'               => $data
-    ) );
   }
 
   /**

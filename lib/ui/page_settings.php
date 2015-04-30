@@ -50,7 +50,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 ?>
 <div class="wrap <?php echo implode( ' ', $wrapper_classes ); ?>">
 <?php screen_icon(); ?>
-<h2 class='wpp_settings_page_header'><?php echo $wp_properties[ 'labels' ][ 'name' ] . ' ' . __( 'Settings', 'wpp' ) ?>
+<h2 class='wpp_settings_page_header'><?php echo ud_get_wp_property( 'labels.name' ) . ' ' . __( 'Settings', 'wpp' ) ?>
   <div class="wpp_fb_like">
   <div class="fb-like" data-href="https://www.facebook.com/wpproperty" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
 </div>
@@ -110,7 +110,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     </tr>
 
     <tr>
-      <th><?php printf( __( 'Default %1s Page', 'wpp' ), $wp_properties[ 'labels' ][ 'name' ] ); ?></th>
+      <th><?php printf( __( 'Default %1s Page', 'wpp' ), ud_get_wp_property( 'labels.name' ) ); ?></th>
       <td>
 
         <div class="must_have_permalinks">
@@ -123,7 +123,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
           <span wpp_scroll_to="h3.default_property_page" class="wpp_link wpp_toggle_contextual_help"><?php _e( 'What is this?', 'wpp' ); ?></span>
         </div>
         <div class="must_not_have_permalinks">
-          <p class="description"><?php printf( __( 'You must have permalinks enabled to change the Default %1s page.', 'wpp' ), $wp_properties[ 'labels' ][ 'name' ] ); ?></p>
+          <p class="description"><?php printf( __( 'You must have permalinks enabled to change the Default %1s page.', 'wpp' ), ud_get_wp_property( 'labels.name' ) ); ?></p>
         </div>
 
       </td>
