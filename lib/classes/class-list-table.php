@@ -33,6 +33,9 @@ namespace UsabilityDynamics\WPP {
 
       }
 
+      /**
+       * @return mixed|void
+       */
       public function get_columns() {
         $columns = apply_filters( 'wpp_overview_columns', array(
           'cb'            => '<input type="checkbox" />',
@@ -66,9 +69,10 @@ namespace UsabilityDynamics\WPP {
       public function get_sortable_columns() {
         return array(
           'title'	 	=> array( 'title', false ),	//true means it's already sorted
-          'status'	 	=> array( 'status', false ),	//true means it's already sorted
-          'created'	 	=> array( 'date', false ),	//true means it's already sorted
-          'modified'	 	=> array( 'modified', false ),	//true means it's already sorted
+          'created'	 	=> array( 'date', false ),
+          'property_type' => array( 'property_type', false ),
+          'featured' => array( 'featured', false ),
+          'modified'	 	=> array( 'modified', false ),
         );
       }
 
@@ -206,7 +210,7 @@ namespace UsabilityDynamics\WPP {
       public function column_featured( $post ) {
         $data = '';
         $featured = get_post_meta( $post->ID, 'featured', true );
-        $featured = !empty( $featured ) && !in_array( $featured, array( '1', 'false' ) ) ? true : false;
+        $featured = !empty( $featured ) && !in_array( $featured, array( '0', 'false' ) ) ? true : false;
         if ( current_user_can( 'manage_options' ) ) {
           if ( $featured ) {
             $data .= "<input type='button' id='wpp_feature_{$post->ID}' class='wpp_featured_toggle wpp_is_featured' nonce='" . wp_create_nonce( 'wpp_make_featured_' . $post->ID ) . "' value='" . __( 'Featured', ud_get_wp_property('domain') ) . "' />";
