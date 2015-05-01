@@ -339,7 +339,7 @@ namespace UsabilityDynamics\WPP {
                 $post_id = (int) $post_id;
                 wp_untrash_post( $post_id );
               }
-              $this->message = sprintf( __( 'Selected %s have been successfully restored from Trash.' ), \WPP_F::property_label('plural') );
+              $this->message = sprintf( __( 'Selected %s have been successfully restored from Trash.', ud_get_wp_property('domain') ), \WPP_F::property_label('plural') );
               break;
 
             case 'delete':
