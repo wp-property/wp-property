@@ -37,6 +37,7 @@ namespace UsabilityDynamics\WPP {
         $columns = apply_filters( 'wpp_overview_columns', array(
           'cb'            => '<input type="checkbox" />',
           'title'         => __( 'Title', ud_get_wp_property('domain') ),
+          'status'         => __( 'Status', ud_get_wp_property('domain') ),
           'property_type' => __( 'Type', ud_get_wp_property('domain') ),
           'overview'      => __( 'Overview', ud_get_wp_property('domain') ),
           'created'         => __( 'Added', ud_get_wp_property('domain') ),
@@ -65,6 +66,7 @@ namespace UsabilityDynamics\WPP {
       public function get_sortable_columns() {
         return array(
           'title'	 	=> array( 'title', false ),	//true means it's already sorted
+          'status'	 	=> array( 'status', false ),	//true means it's already sorted
           'created'	 	=> array( 'date', false ),	//true means it's already sorted
           'modified'	 	=> array( 'modified', false ),	//true means it's already sorted
         );
@@ -87,6 +89,33 @@ namespace UsabilityDynamics\WPP {
               return '-';
             }
         }
+      }
+
+      /**
+       * Return Property Status
+       *
+       * @param $post
+       * @return string
+       */
+      public function column_status( $post ){
+        switch($post->post_status){
+          case 'publish':
+            $status = __( 'Published', ud_get_wp_property('domain') );
+            break;
+          case 'pending':
+            $status = __( 'Pending', ud_get_wp_property('domain') );
+            break;
+          case 'trash':
+            $status = __( 'Trashed', ud_get_wp_property('domain') );
+            break;
+          case 'auto-draft':
+            $status = __( 'Auto Draft', ud_get_wp_property('domain') );
+            break;
+          default:
+            $status = apply_filters( 'wpp::column_status::custom', $post->post_status );
+            break;
+        }
+        return $status;
       }
 
       /**

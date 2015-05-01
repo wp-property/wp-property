@@ -74,38 +74,63 @@ namespace UsabilityDynamics\WPP {
       public function preload(){
         $this->list_table = new List_Table( array(
           'filter' => array(
-            'fields' => array(
-              array(
-                'id' => 's',
-                'name' => __( 'Search', $this->get('domain') ),
-                'placeholder' => __( 'Search', $this->get('domain') ),
-                'type' => 'text',
-              ),
-              array(
-                'id' => 'post_status',
-                'name' => __( 'Status', $this->get('domain') ),
-                'type' => 'select_advanced',
-                'js_options' => array(
-                  'allowClear' => false,
-                ),
-                'options' => $this->get_post_statuses(),
-              ),
-            )
+            'fields' => $this->get_filter_fields(),
           )
         ) );
       }
 
       /**
+       * Prepare and return list of filter fields
        *
+       * @return array
        */
-      public function add_meta_boxes() {
-        $screen = get_current_screen();
-        add_meta_box( 'posts_list', __('Overview',ud_get_wp_sms_rentals()->domain), array($this, 'render_list_table'), $screen->id,'normal');
-        add_meta_box( 'posts_filter', __('Filter',ud_get_wp_sms_rentals()->domain), array($this, 'render_filter'), $screen->id,'side');
+      public function get_filter_fields() {
+        $fields = array(
+          array(
+            'id' => 's',
+            'name' => __( 'Global Search', $this->get('domain') ),
+            'placeholder' => __( 'Search', $this->get('domain') ),
+            'type' => 'text',
+          ),
+          array(
+            'id' => 'post_status',
+            'name' => __( 'Status', $this->get('domain') ),
+            'type' => 'select_advanced',
+            'js_options' => array(
+              'allowClear' => false,
+            ),
+            'options' => $this->get_post_statuses(),
+          ),
+          array(
+            'id' => 'property_type',
+            'name' => sprintf( __( '%s Type', $this->get('domain') ), \WPP_F::property_label( 'plural' ) ),
+            'type' => 'select_advanced',
+            'js_options' => array(
+              'allowClear' => true,
+            ),
+            'options' => array_merge( array( '' => '' ), ud_get_wp_property('property_types', array()) ),
+          ),
+          array(
+            'id' => 'featured',
+            'name' => __( 'Featured', $this->get('domain') ),
+            'type' => 'checkbox',
+          ),
+        );
+
+        return $fields;
       }
 
       /**
-       *
+       * Add Meta Boxes to All Properties page.
+       */
+      public function add_meta_boxes() {
+        $screen = get_current_screen();
+        add_meta_box( 'posts_list', __('Overview',ud_get_wp_property('domain')), array($this, 'render_list_table'), $screen->id,'normal');
+        add_meta_box( 'posts_filter', sprintf( __('%s Search',ud_get_wp_property('domain')), \WPP_F::property_label('plural') ), array($this, 'render_filter'), $screen->id,'side');
+      }
+
+      /**
+       * Render List Table in Overview Meta Box
        */
       public function render_list_table() {
         $this->list_table->prepare_items();
@@ -113,7 +138,7 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       *
+       * Render Search Filter
        */
       public function render_filter() {
         $this->list_table->filter();
@@ -150,7 +175,7 @@ namespace UsabilityDynamics\WPP {
         } else {
           return array();
         }
-        $attrs[ 'all' ] = __( 'All', 'wpp' ) . ' (' . \WPP_F::format_numeric( $all ) . ')';
+        $attrs[ 'all' ] = __( 'All', $this->get('domain') ) . ' (' . \WPP_F::format_numeric( $all ) . ')';
         ksort( $attrs );
         return $attrs;
       }
