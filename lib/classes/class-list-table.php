@@ -31,6 +31,21 @@ namespace UsabilityDynamics\WPP {
 
         add_filter( 'wplt_column_title_label', array( $this, 'get_column_title_label' ), 10, 2 );
 
+        /* Determine if column contains numeric values */
+        add_filter( 'wplt:orderby:is_numeric', array( $this, 'is_numeric_column' ), 10, 2 );
+
+      }
+
+      /**
+       * Determines if orderby values are numeric.
+       *
+       */
+      public function is_numeric_column( $bool, $column ) {
+        $types = ud_get_wp_property('admin_attr_fields', array());
+        if( !empty( $types[ $column ] ) && in_array( $types[ $column ], array( 'number', 'currency' ) ) ) {
+          return true;
+        }
+        return $bool;
       }
 
       /**
@@ -67,13 +82,24 @@ namespace UsabilityDynamics\WPP {
        * @return array An associative array containing all the columns that should be sortable: 'slugs'=>array('data_values',bool)
        */
       public function get_sortable_columns() {
-        return array(
+        $columns = array(
           'title'	 	=> array( 'title', false ),	//true means it's already sorted
           'created'	 	=> array( 'date', false ),
           'property_type' => array( 'property_type', false ),
           'featured' => array( 'featured', false ),
           'modified'	 	=> array( 'modified', false ),
         );
+
+        $sortable_attributes = ud_get_wp_property('sortable_attributes', array());
+        if( !empty($sortable_attributes) && is_array($sortable_attributes) ) {
+          foreach( $sortable_attributes as $attribute ) {
+            $columns[ $attribute ] = array( $attribute, false );
+          }
+        }
+
+        $columns = apply_filters( 'wpp::columns::sortable', $columns );
+
+        return $columns;
       }
 
       /**
