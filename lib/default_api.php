@@ -7,42 +7,6 @@
  */
 class wpp_default_api {
 
-  public static function taxonomy_filters( $filter ) {
-    global $wp_properties;
-
-    // die( '<pre>' . print_r( $filter, true ) . '</pre>' );
-
-
-    foreach( (array) $wp_properties[ 'taxonomies' ] as $id => $taxonomy ) {
-
-      $_values = array();
-
-      foreach( (array) get_terms( $id , array(
-        'orderby'           => 'name',
-        'order'             => 'ASC',
-        'hide_empty'        => true
-      )) as $_data )  {
-
-      $_values[ $_data->term_id ] = $_data->name;
-
-      }
-
-      // die( '<pre>' . print_r( $terms, true ) . '</pre>' );
-
-      $filter[ 'taxonomy:' . $id ] = array(
-        'type' => 'multi_checkbox',
-        'label' => $taxonomy[ 'labels' ][ 'name' ],
-        'values' => $_values
-      );
-
-    }
-
-    //die( '<pre>' . print_r( $filter, true ) . '</pre>' );
-
-    return $filter;
-
-  }
-
   /**
    * Loader for WPP API functions.
    *
@@ -271,7 +235,6 @@ class wpp_default_api {
 }
 
 // Initialize WPP Default API */
-add_filter( 'wpp_get_search_filters', array( 'wpp_default_api', 'taxonomy_filters' ), 0, 20 );
 add_filter( 'plugins_loaded', array( 'wpp_default_api', 'plugins_loaded' ), 0, 9 );
 
 // Widget address format

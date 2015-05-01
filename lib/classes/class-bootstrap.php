@@ -48,8 +48,6 @@ namespace UsabilityDynamics\WPP {
         /** Loads export functionality */
         include_once $this->path( 'lib/class_property_export.php', 'dir' );
         /** Loads all the metaboxes for the property page */
-        include_once $this->path( 'lib/ui/class_ui.php', 'dir' );
-        /** Loads all the metaboxes for the property page */
         include_once $this->path( 'lib/class_core.php', 'dir' );
         /** Load set of static methods for mail notifications */
         include_once $this->path( 'lib/class_mail.php', 'dir' );

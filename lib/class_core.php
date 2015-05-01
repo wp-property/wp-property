@@ -78,9 +78,6 @@ class WPP_Core {
     //** Load all widgets and register widget areas */
     add_action( 'widgets_init', array( 'WPP_F', 'widgets_init' ) );
 
-    //** Add metaboxes hook */
-    add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
-
   }
 
   /**
@@ -107,9 +104,6 @@ class WPP_Core {
     /** Ajax pagination for property_overview */
     add_action( "wp_ajax_wpp_property_overview_pagination", array( $this, "ajax_property_overview" ) );
     add_action( "wp_ajax_nopriv_wpp_property_overview_pagination", array( $this, "ajax_property_overview" ) );
-
-    //add_filter( "manage_edit-property_sortable_columns", array( &$this, "sortable_columns" ) );
-    //add_filter( "manage_edit-property_columns", array( &$this, "edit_columns" ) );
 
     /** Called in setup_postdata().  We add property values here to make available in global $post variable on frontend */
     add_action( 'the_post', array( 'WPP_F', 'the_post' ) );
@@ -145,11 +139,6 @@ class WPP_Core {
 
     //** Page loading handlers */
     add_action( 'load-property_page_property_settings', array( 'WPP_F', 'property_page_property_settings_load' ) );
-
-    //add_filter( "manage_property_page_all_properties_columns", array( 'WPP_F', 'overview_columns' ) );
-    //add_filter( "wpp_overview_columns", array( 'WPP_F', 'custom_attribute_columns' ) );
-
-    //add_filter( "wpp_attribute_filter", array( 'WPP_F', 'attribute_filter' ), 10, 2 );
 
     //** Add custom image sizes */
     foreach( $wp_properties[ 'image_sizes' ] as $image_name => $image_sizes ) {
@@ -260,21 +249,6 @@ class WPP_Core {
     //** Post-init action hook */
     do_action( 'wpp_post_init' );
 
-  }
-
-  /**
-   * Register metaboxes.
-   *
-   * @global type $post
-   * @global type $wpdb
-   */
-  function add_meta_boxes() {
-    global $post, $wpdb;
-
-    //** Add metabox for child properties */
-    if( isset( $post ) && $post->post_type == 'property' && $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_parent = '{$post->ID}' AND post_status = 'publish' " ) ) {
-      add_meta_box( 'wpp_property_children', __( 'Child Properties', 'wpp' ), array( 'WPP_UI', 'child_properties' ), 'property', 'side', 'high' );
-    }
   }
 
   /**
@@ -638,63 +612,6 @@ class WPP_Core {
     $messages = apply_filters( 'wpp_updated_messages', $messages );
 
     return $messages;
-  }
-
-  /**
-   * Sets up property-type columns
-   *
-   * @since 0.54
-   * @uses $wp_properties WP-Property configuration array
-   * @access public
-   *
-   */
-  function edit_columns( $columns ) {
-    global $wp_properties;
-
-    unset( $columns );
-
-    $columns[ 'cb' ] = "<input type=\"checkbox\" />";
-    $columns[ 'title' ] = __( 'Title', 'wpp' );
-    $columns[ 'property_type' ] = __( 'Type', 'wpp' );
-
-    if( is_array( $wp_properties[ 'property_stats' ] ) ) {
-      foreach( $wp_properties[ 'property_stats' ] as $slug => $title )
-        $columns[ $slug ] = $title;
-    } else {
-      $columns = $columns;
-    }
-
-    $columns[ 'city' ] = __( 'City', 'wpp' );
-    $columns[ 'overview' ] = __( 'Overview', 'wpp' );
-    $columns[ 'featured' ] = __( 'Featured', 'wpp' );
-    $columns[ 'menu_order' ] = __( 'Order', 'wpp' );
-    $columns[ 'thumbnail' ] = __( 'Thumbnail', 'wpp' );
-
-    $columns = apply_filters( 'wpp_admin_overview_columns', $columns );
-    //
-    return $columns;
-  }
-
-  /**
-   * Sets up sortable columns columns
-   *
-   * @since 1.08
-   *
-   */
-  function sortable_columns( $columns ) {
-    global $wp_properties;
-
-    $columns[ 'type' ] = 'type';
-    $columns[ 'featured' ] = 'featured';
-
-    if( is_array( $wp_properties[ 'property_stats' ] ) ) {
-      foreach( $wp_properties[ 'property_stats' ] as $slug => $title )
-        $columns[ $slug ] = $slug;
-    }
-
-    $columns = apply_filters( 'wpp_admin_sortable_columns', $columns );
-
-    return $columns;
   }
 
   /**

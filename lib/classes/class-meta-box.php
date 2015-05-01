@@ -21,6 +21,22 @@ namespace UsabilityDynamics\WPP {
         add_action( 'admin_init', array( $this, 'load_files' ), 1 );
         /* Register all RWMB meta boxes */
         add_action( 'rwmb_meta_boxes', array( $this, 'register_meta_boxes' ) );
+        //** Add metaboxes hook */
+        add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
+      }
+
+      /**
+       * Register metaboxes.
+       *
+       * @global type $post
+       * @global type $wpdb
+       */
+      function add_meta_boxes() {
+        global $post, $wpdb;
+        //** Add metabox for child properties */
+        if( isset( $post ) && $post->post_type == 'property' && $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_parent = '{$post->ID}' AND post_status = 'publish' " ) ) {
+          add_meta_box( 'wpp_property_children', __( 'Child Properties', 'wpp' ), array( $this, 'render_child_properties_meta_box' ), 'property', 'side', 'high' );
+        }
       }
 
       /**
@@ -41,6 +57,30 @@ namespace UsabilityDynamics\WPP {
           }
           include_once( $file );
         }
+      }
+
+      /**
+       * Loaded if this is a property page, and child properties exist.
+       *
+       * @version 1.26.0
+       * @author Andy Potanin <andy.potanin@twincitiestech.com>
+       * @package WP-Property
+       */
+      public function render_child_properties_meta_box( $post ) {
+        $children = get_posts( array(
+          'post_parent' => $post->ID,
+          'post_type' => 'property',
+          'numberposts' => -1,
+        ) );
+        ?>
+        <div class="wp-tab-panel">
+          <ul>
+            <?php  foreach ( $children as $child ) {
+              echo '<li><a href="' . get_edit_post_link( $child->ID ) . '">' . $child->post_title . '</a></li>';
+            } ?>
+          </ul>
+        </div>
+        <?php
       }
 
       /**
