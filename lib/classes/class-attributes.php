@@ -78,11 +78,13 @@ namespace UsabilityDynamics\WPP {
           ),
           'number' => array(
             'input',
+            'dropdown',
             'range_input',
             'range_dropdown',
           ),
           'currency' => array(
             'input',
+            'dropdown',
             'range_input',
             'range_dropdown',
           ),

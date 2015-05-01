@@ -123,17 +123,80 @@ namespace UsabilityDynamics\WPP {
         }
 
         /** Add to filter Searchable Attributes */
-        $attributes = ud_get_wp_property( 'searchable_attributes', array() );
+        $attributes = ud_get_wp_property( 'property_stats', array() );
+        $searchable_attributes = ud_get_wp_property( 'searchable_attributes', array() );
         $search_types = ud_get_wp_property( 'searchable_attr_fields', array() );
         $entry_types = ud_get_wp_property( 'admin_attr_fields', array() );
-        foreach( $attributes as $attribute ) {
+        $search_schema = ud_get_wp_property('attributes.searchable', array());
+        foreach( $searchable_attributes as $attribute ) {
           /** Ignore current attribute if field with the same name already exists */
           if( in_array( $attribute, $defined ) ) {
             continue;
           }
-          /** Determine if type is searchable */
+          /**
+           * Determine if type is searchable:
+           *
+           * Attribute must:
+           * - have 'Data Entry'
+           * - have 'Search Input'
+           * - be searchable
+           * - have valid 'Search Input'. See schema: ud_get_wp_property('attributes.searchable', array())
+           */
+          if(
+            empty( $entry_types[ $attribute ] ) ||
+            empty( $search_schema[ $entry_types[ $attribute ] ] ) ||
+            !in_array( $search_types[ $attribute ], $search_schema[ $entry_types[ $attribute ] ] )
+          ) {
+            continue;
+          }
 
-          // @TODO
+          $type = $search_types[ $attribute ];
+          $options = array();
+          $map = array();
+          /** Maybe Convert input types to valid ones and prepare options. */
+          switch($type) {
+            case 'input':
+              $type = 'text';
+              $map = array(
+                'compare' => 'LIKE',
+              );
+              break;
+            case 'range_input':
+              /** @TODO */
+              $values = \WPP_F::get_all_attribute_values( $attribute );
+              $type = 'select_advanced';
+              break;
+            case 'range_dropdown':
+              $values = \WPP_F::get_all_attribute_values( $attribute );
+              $type = 'select_advanced';
+              break;
+            case 'dropdown':
+              $values = \WPP_F::get_all_attribute_values( $attribute );
+              $type = 'select_advanced';
+              break;
+            case 'multi_checkbox':
+              $values = \WPP_F::get_all_attribute_values( $attribute );
+              $type = 'checkbox_list';
+              break;
+          }
+
+          if( !empty( $values ) ) {
+            $options = array( '' => '' );
+            foreach( $values as $value ) {
+              $options[$value] = $value;
+            }
+          }
+
+          array_push( $fields, array_filter( array(
+            'id' => $attribute,
+            'name' => $attributes[$attribute],
+            'type' => $type,
+            'js_options' => array(
+              'allowClear' => true,
+            ),
+            'options' => $options,
+            'map' => $map,
+          ) ) );
         }
 
         $fields = apply_filters( 'wpp::overview::filter::fields', $fields );

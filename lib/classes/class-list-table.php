@@ -302,14 +302,13 @@ namespace UsabilityDynamics\WPP {
 
         try {
 
-          if( empty($_REQUEST[ 'post_ids' ]) || !is_array( $_REQUEST[ 'post_ids' ] ) ) {
-            throw new \Exception( sprintf( __( 'Invalid request: no %s IDs provided.', ud_get_wp_property('domain') ), \WPP_F::property_label() ) );
-          }
-          $post_ids = $_REQUEST[ 'post_ids' ];
-
           switch( $this->current_action() ) {
 
             case 'untrash':
+              if( empty($_REQUEST[ 'post_ids' ]) || !is_array( $_REQUEST[ 'post_ids' ] ) ) {
+                throw new \Exception( sprintf( __( 'Invalid request: no %s IDs provided.', ud_get_wp_property('domain') ), \WPP_F::property_label() ) );
+              }
+              $post_ids = $_REQUEST[ 'post_ids' ];
               foreach( $post_ids as $post_id ) {
                 $post_id = (int) $post_id;
                 wp_untrash_post( $post_id );
@@ -318,6 +317,10 @@ namespace UsabilityDynamics\WPP {
               break;
 
             case 'delete':
+              if( empty($_REQUEST[ 'post_ids' ]) || !is_array( $_REQUEST[ 'post_ids' ] ) ) {
+                throw new \Exception( sprintf( __( 'Invalid request: no %s IDs provided.', ud_get_wp_property('domain') ), \WPP_F::property_label() ) );
+              }
+              $post_ids = $_REQUEST[ 'post_ids' ];
               $trashed = 0;
               $deleted = 0;
               foreach( $post_ids as $post_id ) {
