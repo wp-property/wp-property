@@ -280,6 +280,80 @@ namespace UsabilityDynamics\WPP {
         return $title;
       }
 
+      /**
+       * Add Bulk Actions
+       *
+       * @return array
+       */
+      public function get_bulk_actions() {
+        $actions = array();
+        if ( current_user_can( 'delete_wpp_property' ) ) {
+          $actions[ 'untrash' ] = __( 'Restore' );
+          $actions[ 'delete' ] = __( 'Delete' );
+        }
+        return apply_filters( 'wpp::all_properties::bulk_actions', $actions );
+      }
+
+      /**
+       * Handle Bulk Action's request
+       *
+       */
+      public function process_bulk_action() {
+
+        try {
+
+          if( empty($_REQUEST[ 'post_ids' ]) || !is_array( $_REQUEST[ 'post_ids' ] ) ) {
+            throw new \Exception( sprintf( __( 'Invalid request: no %s IDs provided.', ud_get_wp_property('domain') ), \WPP_F::property_label() ) );
+          }
+          $post_ids = $_REQUEST[ 'post_ids' ];
+
+          switch( $this->current_action() ) {
+
+            case 'untrash':
+              foreach( $post_ids as $post_id ) {
+                $post_id = (int) $post_id;
+                wp_untrash_post( $post_id );
+              }
+              $this->message = sprintf( __( 'Selected %s have been successfully restored from Trash.' ), \WPP_F::property_label('plural') );
+              break;
+
+            case 'delete':
+              $trashed = 0;
+              $deleted = 0;
+              foreach( $post_ids as $post_id ) {
+                $post_id = (int) $post_id;
+                if( get_post_status( $post_id ) == 'trash' ) {
+                  $deleted++;
+                  wp_delete_post( $post_id );
+                } else {
+                  $trashed++;
+                  wp_trash_post( $post_id );
+                }
+              }
+              if( $trashed > 0 && $deleted > 0 ) {
+                $this->message = sprintf( __( 'Selected %s have been successfully moved to Trash or deleted.', ud_get_wp_property('domain') ), \WPP_F::property_label('plural') );
+              } elseif ( $trashed > 0 ) {
+                $this->message = sprintf( __( 'Selected %s have been successfully moved to Trash.', ud_get_wp_property('domain') ), \WPP_F::property_label('plural') );
+              } elseif ( $deleted > 0 ) {
+                $this->message = sprintf( __( 'Selected %s have been successfully deleted.', ud_get_wp_property('domain') ), \WPP_F::property_label('plural') );
+              } else {
+                throw new \Exception( sprintf( __( 'No one %s was deleted.', ud_get_wp_property('domain') ), \WPP_F::property_label() ) );
+              }
+              break;
+
+            default:
+              //** Any custom action can be processed using action hook */
+              do_action( 'wpp::all_properties::process_bulk_action', $this->current_action() );
+              break;
+
+          }
+
+        } catch( \Exception $e ) {
+          $this->error = $e->getMessage();
+        }
+
+      }
+
     }
 
   }

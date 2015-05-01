@@ -291,8 +291,11 @@ namespace UsabilityDynamics\WPP {
 
           //* Fix currency */
           if( $input_type == 'currency' ) {
-            $input_type = 'number';
+            $input_type = 'text'; // HTML5 does not allow to use float, so we have to use default 'text' here
             $description[] =  __( 'Currency.', ud_get_wp_property('domain') );
+          }
+          if( $input_type == 'number' ) {
+            $input_type = 'text'; // HTML5 does not allow to use float, so we have to use default 'text' here
           }
 
           //** Determine if current attribute is used by Google Address Validator. */

@@ -18,9 +18,9 @@ namespace UsabilityDynamics\WPP {
       public function __construct() {
 
         /**
-         * Add Available Meta Box Fields
+         * Add Available Attribute Types ( Meta Box Fields )
          */
-        ud_get_wp_property()->set( 'meta_box.fields', array(
+        ud_get_wp_property()->set( 'attributes.types', array(
           'input' => __( 'Free Text', ud_get_wp_property('domain') ),
           'textarea' => __( 'Textarea', ud_get_wp_property('domain') ),
           'wysiwyg' => __( 'Text Editor', ud_get_wp_property('domain') ),
@@ -42,6 +42,54 @@ namespace UsabilityDynamics\WPP {
           'file_advanced' => __( 'Files upload', ud_get_wp_property('domain') ),
           'file_input' => __( 'File URL', ud_get_wp_property('domain') ),
         ) );
+
+        /**
+         * Set schema for searchable attributes types.
+         */
+        ud_get_wp_property()->set('attributes.searchable', array(
+          'input' => array(
+            'input'
+          ),
+          'textarea' => array(
+            'input'
+          ),
+          'wysiwyg' => array(
+            'input'
+          ),
+          'dropdown' => array(
+            'dropdown',
+            'multicheckbox',
+          ),
+          'select_advanced' => array(
+            'dropdown',
+            'multicheckbox',
+          ),
+          'checkbox' => array(
+            'checkbox',
+          ),
+          'multi_checkbox' => array(
+            'input',
+            'dropdown',
+            'multicheckbox',
+          ),
+          'radio' => array(
+            'dropdown',
+            'multicheckbox',
+          ),
+          'number' => array(
+            'input',
+            'range_input',
+            'range_dropdown',
+          ),
+          'currency' => array(
+            'input',
+            'range_input',
+            'range_dropdown',
+          ),
+          'url' => array(
+            'input'
+          ),
+        ));
 
         /** Fix numeric/currency logic */
         $this->fix_numeric_and_currency();

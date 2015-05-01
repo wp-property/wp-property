@@ -189,8 +189,7 @@ global $wp_properties;
         <ul>
           <li>
             <select name="wpp_settings[admin_attr_fields][<?php echo $slug; ?>]" class="wpp_pre_defined_value_setter wpp_searchable_attr_fields">
-              <option value=""> - </option>
-              <?php $meta_box_fields = ud_get_wp_property('meta_box.fields', array()); ?>
+              <?php $meta_box_fields = ud_get_wp_property('attributes.types', array()); ?>
               <?php if( !empty( $meta_box_fields ) ) foreach( $meta_box_fields as $key => $label ) :  ?>
                 <option value="<?php echo $key; ?>" <?php if( isset( $wp_properties[ 'admin_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'admin_attr_fields' ][ $slug ], $key ); ?>><?php echo $label; ?></option>
               <?php endforeach; ?>

@@ -117,6 +117,25 @@ namespace UsabilityDynamics\WPP {
           ),
         );
 
+        $defined = array();
+        foreach($fields as $field) {
+          array_push( $defined, $field['id'] );
+        }
+
+        /** Add to filter Searchable Attributes */
+        $attributes = ud_get_wp_property( 'searchable_attributes', array() );
+        $search_types = ud_get_wp_property( 'searchable_attr_fields', array() );
+        $entry_types = ud_get_wp_property( 'admin_attr_fields', array() );
+        foreach( $attributes as $attribute ) {
+          /** Ignore current attribute if field with the same name already exists */
+          if( in_array( $attribute, $defined ) ) {
+            continue;
+          }
+          /** Determine if type is searchable */
+
+          // @TODO
+        }
+
         $fields = apply_filters( 'wpp::overview::filter::fields', $fields );
 
         return $fields;
