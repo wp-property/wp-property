@@ -117,6 +117,8 @@ namespace UsabilityDynamics\WPP {
           ),
         );
 
+        $fields = apply_filters( 'wpp::overview::filter::fields', $fields );
+
         return $fields;
       }
 
