@@ -16,7 +16,7 @@ namespace UsabilityDynamics\WPP {
        * @protected
        * @static
        * @property $instance
-       * @type UsabilityDynamics\WPP\Bootstrap object
+       * @type \UsabilityDynamics\WPP\Bootstrap object
        */
       protected static $instance = null;
       

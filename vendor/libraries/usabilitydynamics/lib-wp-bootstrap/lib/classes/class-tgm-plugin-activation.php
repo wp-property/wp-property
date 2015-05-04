@@ -555,10 +555,8 @@ namespace UsabilityDynamics\WP {
                   $plugin['slug']   = $_GET['plugin'];
                   $plugin['source'] = $_GET['plugin_source'];
 
-                  $plugin_data = get_plugins( '/' . $plugin['slug'] ); // Retrieve all plugins.
-                  $plugin_file = array_keys( $plugin_data ); // Retrieve all plugin files from installed plugins.
-                  $plugin_to_activate = $plugin['slug'] . '/' . $plugin_file[0]; // Match plugin slug with appropriate plugin file.
-                  $activate = activate_plugin( $plugin_to_activate ); // Activate the plugin.
+                  $plugin_path = $this->_get_plugin_basename_from_slug($plugin['slug']); // Retrieve all plugins.
+                  $activate = activate_plugin( $plugin_path ); // Activate the plugin.
 
                   if ( is_wp_error( $activate ) ) {
                       echo '<div id="message" class="error"><p>' . $activate->get_error_message() . '</p></div>';
@@ -885,7 +883,7 @@ namespace UsabilityDynamics\WP {
               $keys = array_keys( get_plugins() );
 
               foreach ( $keys as $key ) {
-                  if ( preg_match( '|^' . $slug .'/|', $key ) ) {
+                  if ( preg_match( '|^' . $slug .'(-v[0-9\.]+)?/|', $key ) ) {
                       return $key;
                   }
               }

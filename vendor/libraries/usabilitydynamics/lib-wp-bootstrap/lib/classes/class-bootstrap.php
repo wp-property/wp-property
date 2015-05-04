@@ -348,13 +348,13 @@ namespace UsabilityDynamics\WP {
           return false;
         }
         $args = $this->args;
-        $args = array_merge( $args, $schema, array(
+        $args = array_merge( $args, array(
           'type' => $this->type,
           'name' => $this->name,
           'slug' => $this->slug,
           'domain' => $this->domain,
           'errors_callback' => array( $this->errors, 'add' ),
-        ) );
+        ), $schema );
         if( empty( $args[ 'screen' ] ) ) {
           $this->errors->add( __( 'Licenses client can not be activated due to invalid \'licenses\' schema.', $this->domain ) );
         }
