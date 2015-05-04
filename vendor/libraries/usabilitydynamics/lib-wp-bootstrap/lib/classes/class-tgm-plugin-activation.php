@@ -879,17 +879,23 @@ namespace UsabilityDynamics\WP {
            * @return string      Either file path for plugin if installed, or just the plugin slug.
            */
           protected function _get_plugin_basename_from_slug( $slug ) {
-
               $keys = array_keys( get_plugins() );
-
+              $_keys = array();
+              /** Try to get slug of activated plugin at first */
               foreach ( $keys as $key ) {
-                  if ( preg_match( '|^' . $slug .'(-v[0-9\.]+)?/|', $key ) ) {
-                      return $key;
+                  if ( preg_match( '|^' . $slug .'(-v?[0-9\.]+)?/|', $key )  ) {
+                      if( is_plugin_active( $key ) ) {
+                          return $key;
+                      } else {
+                          array_push( $_keys, $key );
+                      }
                   }
               }
-
+              /** Get key from any non activated but installed matched plugin */
+              if( !empty( $_keys ) ) {
+                return $_keys[0];
+              }
               return $slug;
-
           }
 
           /**
