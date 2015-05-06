@@ -37,6 +37,16 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Allows to modify WP_Query arguments
+       *
+       * @param array $args
+       * @return array
+       */
+      public function filter_wp_query( $args ) {
+        return apply_filters( 'wpp::all_properties::wp_query::args', $args );
+      }
+
+      /**
        * Determines if orderby values are numeric.
        *
        */
