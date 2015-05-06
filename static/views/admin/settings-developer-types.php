@@ -85,7 +85,7 @@ $wpp_inheritable_attributes = $wp_properties[ 'property_stats' ];
               <label for="<?php echo $property_slug; ?>parent_hidden_attributes"><?php _e( 'Parent Selection', 'wpp' ); ?></label>
             </li>
           <?php endif; ?>
-
+          <?php do_action( 'wpp::types::hidden_attributes', $property_slug ); ?>
         </ul>
       </td>
 
@@ -100,7 +100,7 @@ $wpp_inheritable_attributes = $wp_properties[ 'property_stats' ];
               </label>
             </li>
           <?php endforeach; ?>
-          <li>
+          <?php do_action( 'wpp::types::inherited_attributes', $property_slug ); ?>
         </ul>
       </td>
 
