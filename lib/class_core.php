@@ -111,7 +111,7 @@ class WPP_Core {
     add_action( "the_content", array( &$this, "the_content" ) );
 
     add_action( "post_submitbox_misc_actions", array( &$this, "post_submitbox_misc_actions" ) );
-    add_action( 'save_post', array( $this, 'save_property' ) );
+    add_action( 'save_post', array( $this, 'save_property' ), 11 );
 
     //** Address revalidation @since 1.37.2 @author odokienko@UD */
     add_action( 'save_property', create_function( '$post_id', 'WPP_F::revalidate_address($post_id);' ) );
@@ -440,7 +440,6 @@ class WPP_Core {
   /**
    * Hooks into save_post function and saves additional property data
    *
-   *
    * @todo Add some sort of custom capability so not only admins can make properties as featured. i.e. Agents can make their own properties featured.
    * @since 1.04
    *
@@ -538,8 +537,6 @@ class WPP_Core {
     WPP_F::maybe_set_gpid( $post_id );
 
     do_action( 'save_property', $post_id );
-
-    return true;
   }
 
   /**

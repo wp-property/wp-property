@@ -352,13 +352,13 @@ namespace UsabilityDynamics\WPP {
             !empty( $inherited_attributes[ $post->property_type ] ) &&
             in_array( $slug, $inherited_attributes[ $post->property_type ] )
           ) {
-            $input_type = 'wpp_readonly';
+            $input_type = 'wpp_inherited';
             $description[] = sprintf( __( 'The value is inherited from Parent %s.', ud_get_wp_property()->domain ), \WPP_F::property_label() );
           }
 
           //** Is current attribute's value aggregated from child properties? If so, set it as readonly! */
           if( !empty( $aggregated_attributes ) && in_array( $slug, $aggregated_attributes ) ) {
-            $input_type = 'wpp_readonly';
+            $input_type = 'wpp_aggregated';
             $description[] = sprintf( __( 'The value is aggregated from Child %s.', ud_get_wp_property()->domain ), \WPP_F::property_label( 'plural' ) );
           }
 
