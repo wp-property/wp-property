@@ -494,14 +494,18 @@ class WPP_Core {
       $meta_value = html_entity_decode( $meta_value );
       $meta_value = stripslashes( $meta_value );
 
-      //* Only admins can mark properties as featured. */
-      if( $meta_key == 'featured' && !current_user_can( 'manage_options' ) ) {
-        //** But be sure that meta 'featured' exists at all */
-        if( !metadata_exists( 'post', $post_id, $meta_key ) ) {
-          $meta_value = 'false';
-        } else {
-          continue;
+      /* Handle logic for featured property. */
+      if( $meta_key == 'featured' ) {
+        //* Only admins can mark properties as featured. */
+        if( !current_user_can( 'manage_options' ) ) {
+          //** But be sure that meta 'featured' exists at all */
+          if( !metadata_exists( 'post', $post_id, $meta_key ) ) {
+            $meta_value = 'false';
+          } else {
+            continue;
+          }
         }
+        do_action( 'wpp::toggle_featured', $meta_value, $post_id );
       }
 
       //* Remove certain characters */

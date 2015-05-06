@@ -73,6 +73,7 @@ namespace UsabilityDynamics\WPP {
        */
       public function preload(){
         $this->list_table = new List_Table( array(
+          'name' => 'wpp_overview',
           'filter' => array(
             'fields' => $this->get_filter_fields(),
           )

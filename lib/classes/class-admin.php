@@ -40,13 +40,13 @@ namespace UsabilityDynamics\WPP {
        *
        */
       public function enqueue_scripts() {
-        global $current_screen, $wp_properties;
+        global $current_screen;
 
         wp_localize_script( 'wpp-localization', 'wpp', array( 'instance' => $this->instance->core->get_instance() ) );
 
         switch( $current_screen->id ) {
 
-          //** Property Overview Page and Edit Property page */
+          //** Property Overview Page */
           case 'property_page_all_properties':
             wp_enqueue_script( 'wp-property-backend-global' );
             wp_enqueue_script( 'wp-property-admin-overview' );
@@ -54,6 +54,7 @@ namespace UsabilityDynamics\WPP {
             wp_enqueue_style( 'wpp-jquery-fancybox-css' );
             break;
 
+          //** Edit Property page */
           case 'property':
             global $post;
 

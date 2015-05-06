@@ -2187,12 +2187,16 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     // Check if already featured
     if( $featured == 'true' ) {
-      update_post_meta( $post_id, 'featured', 'false' );
+      $value = 'false';
       $status = 'not_featured';
     } else {
-      update_post_meta( $post_id, 'featured', 'true' );
+      $value = 'true';
       $status = 'featured';
     }
+
+    update_post_meta( $post_id, 'featured', $value );
+
+    do_action( 'wpp::toggle_featured', $value, $post_id );
 
     echo json_encode( array( 'success' => 'true', 'status' => $status, 'post_id' => $post_id ) );
   }

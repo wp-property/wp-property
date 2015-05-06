@@ -62,6 +62,8 @@ jQuery.extend( wpp = wpp || {}, { overview: {
           jQuery( button ).removeClass( 'wpp_is_featured' );
         }
 
+        jQuery(document).trigger( 'after-toggle-featured', [ data ] );
+
       }, 'json' );
 
   },
