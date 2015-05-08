@@ -152,7 +152,7 @@ namespace UsabilityDynamics\WPP {
             $status = __( 'Auto Draft', ud_get_wp_property('domain') );
             break;
           default:
-            $status = apply_filters( 'wpp::column_status::custom', $post->post_status );
+            $status = apply_filters( 'wpp::column_status::custom', ucfirst( $post->post_status ) );
             break;
         }
         return $status;

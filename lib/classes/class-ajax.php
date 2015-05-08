@@ -211,7 +211,7 @@ namespace UsabilityDynamics\WPP {
           's' => $s,
           'post_type' => $type,
           'numberposts' => 20,
-
+          'post_status' => apply_filters( 'wpp::autocomplete_post::status', 'any', $s, $type ),
         ) );
 
         if( !empty( $posts ) ) {
