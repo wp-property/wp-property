@@ -48,14 +48,14 @@ namespace UsabilityDynamics\WP {
        */
       protected function __construct( $args ) {
         parent::__construct( $args );
-        //** Maybe define license client */
-        $this->define_license_client();
         //** Load text domain */
         add_action( 'after_setup_theme', array( $this, 'load_textdomain' ), 1 );
         //** TGM Plugin activation. */
-        add_action( 'plugins_loaded', array( $this, 'check_plugins_requirements' ), 10 );
+        $this->check_plugins_requirements();
         //** May be initialize Licenses Manager. */
-        add_action( 'plugins_loaded', array( $this, 'define_license_manager' ), 10 );
+        $this->define_license_manager();
+        //** Maybe define license client */
+        $this->define_license_client();
         add_action( 'plugins_loaded', array( $this, 'pre_init' ), 100 );
         $this->boot();
       }

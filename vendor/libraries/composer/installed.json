@@ -161,16 +161,16 @@
     },
     {
         "name": "usabilitydynamics/lib-wp-bootstrap",
-        "version": "1.0.7",
-        "version_normalized": "1.0.7.0",
+        "version": "1.0.8",
+        "version_normalized": "1.0.8.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/lib-wp-bootstrap",
-            "reference": "1.0.7"
+            "reference": "1.0.8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.0.7.zip",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.0.8.zip",
             "reference": null,
             "shasum": null
         },
@@ -199,16 +199,16 @@
     },
     {
         "name": "usabilitydynamics/lib-ud-api-client",
-        "version": "1.0.4",
-        "version_normalized": "1.0.4.0",
+        "version": "1.0.5",
+        "version_normalized": "1.0.5.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/lib-ud-api-client",
-            "reference": "1.0.4"
+            "reference": "1.0.5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-ud-api-client/archive/1.0.4.zip",
+            "url": "https://github.com/UsabilityDynamics/lib-ud-api-client/archive/1.0.5.zip",
             "reference": null,
             "shasum": null
         },

@@ -27,8 +27,8 @@
   "require": {
     "php": ">=5.3",
     "usabilitydynamics/lib-settings": "*",
-    "usabilitydynamics/lib-wp-bootstrap": "1.0.7",
-    "usabilitydynamics/lib-ud-api-client": "1.0.4",
+    "usabilitydynamics/lib-wp-bootstrap": "1.0.8",
+    "usabilitydynamics/lib-ud-api-client": "1.0.5",
     "usabilitydynamics/wp-meta-box": "4.4.3.2",
     "usabilitydynamics/wp-meta-box-utilities": "1.0.1",
     "usabilitydynamics/lib-wp-list-table": "1.0.3"
