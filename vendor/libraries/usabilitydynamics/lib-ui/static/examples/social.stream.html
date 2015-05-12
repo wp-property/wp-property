@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Social Stream Example</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      .stream {
+        list-style: none;
+      }
+      .stream-item-wrapper {
+        border: 1px solid red;
+        width: 200px;
+        padding: 10px;
+        margin: 10px;
+        overflow: hidden;
+      }
+      .stream-item-wrapper.dcsns-youtube {
+        width: 400px;
+      }
+      .social-stream-image {
+        max-width: 100%;
+      }
+
+      .section-text img {
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Social Stream Example</h1>
+
+    <div
+      class="social-stream"
+      data-requires="udx.social.stream"
+      data-path="http://smftampa.com/vendor/usabilitydynamics/wp-festival"
+      data-callback="http://smftampa.com/manage/admin-ajax.php?action=social_stream_twitter&shortcode=aW9mSGthTUNDenhSMTJWdDl2VUwxZzpqeXpTbDR6ZzI2SGFCUDllZWZUV1pIam9qZ1dVTXhrN1hVeUo4SjNxaXFZOjEwMTQ4NTgwNC1zaEdYak4wRDQzdVU3Q3RDQkhhTUw1Szh1eWNIcWd2RU1kNWdIdHJZOg=="
+      data-wall="true"
+      data-rotate_direction="up"
+      data-limit="50"
+      data-remove=","
+      data-twitter_search_for="Zedd"
+      data-twitter_show_text="text"
+      data-instagram_search_for="!28855276"
+      data-instagram_client_id="ec4c95bf89754e1d8fd3581edba04808"
+      data-instagram_access_token="44220099.ec4c95b.d2c3acc28b1f432884be1ddcd8733499"
+      data-instagram_redirect_url=""
+      data-youtube_search_for="ZeddVideos"
+      data-facebook_search_for="107281645968137">Loading Social Stream</div>
+
+      <script src="http://cdn.udx.io/requires"></script>
+  </body>
+</html>

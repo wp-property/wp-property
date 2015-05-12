@@ -65,6 +65,11 @@ namespace UsabilityDynamics\WPP {
           new Meta_Box();
         }
 
+        /**
+         * Load WP List Table library.
+         */
+        new \UsabilityDynamics\WPLT\Bootstrap();
+
         //** Initiate the plugin */
         $this->core = new \WPP_Core();
       }

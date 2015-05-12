@@ -1,0 +1,449 @@
+/**
+ * Markdown
+ *
+ *
+ */
+body.udx-markdown {
+  background: #ffffff;
+  margin: 0px;
+  padding: 0px;
+  font-size: 12px;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-weight: normal;
+  color: #444444;
+  /*-----------------------------------------------------------------------------------*/
+
+  /*	Header CSS
+  /*-----------------------------------------------------------------------------------*/
+
+  /*-----------------------------------------------------------------------------------*/
+
+  /*	Content
+  /*-----------------------------------------------------------------------------------*/
+
+  /*-----------------------------------------------------------------------------------*/
+
+  /*	Swagger Explorer
+  /*-----------------------------------------------------------------------------------*/
+
+  /**
+   *  Very Small Screens (iPhone 3)
+   *
+   */
+
+  /**
+   * {description missing}
+   *
+   */
+
+  /*-----------------------------------------------------------------------------------*/
+
+  /*	Footer CSS
+  /*-----------------------------------------------------------------------------------*/
+
+  /**
+   * iPads, mid-size Tablets and iPhone 4, but not iPhone 3
+   *
+   */
+
+  /**
+   * iPads and mid-size Tablets and Phones
+   *
+   * Screens below this size have a collapsed Navbar.
+   *
+   */
+
+}
+body.udx-markdown .container {
+  width: 960px;
+  margin: 0px auto;
+}
+body.udx-markdown .slider-wrapper {
+  background: #FFF;
+  border-top: 1px solid #ededed;
+  border-bottom: 1px solid #ededed;
+}
+body.udx-markdown img {
+  border: 0;
+  outline: 0;
+}
+body.udx-markdown .clear {
+  clear: both;
+  height: 0 !important;
+}
+body.udx-markdown h1,
+body.udx-markdown h2,
+body.udx-markdown h3,
+body.udx-markdown h4,
+body.udx-markdown h5,
+body.udx-markdown h6 {
+  margin: 0px;
+}
+body.udx-markdown h1 {
+  font-size: 30px;
+  font-weight: normal;
+}
+body.udx-markdown h1.page-header {
+  border-top: 1px solid #EFEFEF;
+  border-bottom: 1px solid #EFEFEF;
+  padding: 20px 0px;
+  margin: 0 0 40px 0;
+  color: #555555;
+}
+body.udx-markdown h2 {
+  font-size: 28px;
+  font-weight: normal;
+  color: #ACB3BA;
+}
+body.udx-markdown h3 {
+  font-size: 24px;
+  font-weight: normal;
+  margin: 0 0 8px 0;
+}
+body.udx-markdown h4 {
+  font-size: 20px;
+  font-weight: bold;
+}
+body.udx-markdown h5 {
+  font-size: 18px;
+  font-weight: bold;
+}
+body.udx-markdown h6 {
+  font-size: 16px;
+  font-weight: bold;
+}
+body.udx-markdown a {
+  outline: none;
+  color: #429CB3;
+  text-decoration: none;
+}
+body.udx-markdown a:hover {
+  color: #f26535;
+}
+body.udx-markdown pre {
+  border: 1px solid #dddddd;
+  padding: 15px;
+  font-size: 10px;
+  margin: 0 0 20px 0;
+}
+body.udx-markdown blockquote {
+  padding: 15px;
+  border: 1px solid #dddddd;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: italic;
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  line-height: 34px;
+}
+body.udx-markdown blockquote span {
+  font-size: 34px;
+}
+body.udx-markdown p {
+  color: #777777;
+  line-height: 23px;
+  font-size: 13px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body.udx-markdown p strong {
+  color: #454545;
+}
+body.udx-markdown p.justify {
+  text-align: justify;
+}
+body.udx-markdown .grid p {
+  margin-bottom: 20px;
+}
+body.udx-markdown #header {
+  padding: 5px 0 5px 0;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  background: #F8F8F8;
+  height: 25px;
+}
+body.udx-markdown #header span.separator,
+body.udx-markdown #header a {
+  font-weight: normal;
+  color: #000;
+  opacity: 0.6;
+  float: right;
+  margin-left: 0.6em;
+}
+body.udx-markdown .header-right {
+  float: right;
+  width: 243px;
+  margin: 5px 0 0 0;
+}
+body.udx-markdown #bottom-content {
+  background-color: #F2F2F2;
+}
+body.udx-markdown .slide-break {
+  color: transparent;
+}
+body.udx-markdown .cloud-container {
+  width: 874px;
+  height: 318px;
+}
+body.udx-markdown .cloud-container .cloud-icons {
+  height: 318px;
+  position: absolute;
+  left: 0;
+  top: 30;
+  width: 580px;
+}
+body.udx-markdown .app-cloud {
+  margin-bottom: 50px;
+  z-index: 5;
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 318px;
+}
+body.udx-markdown #clouds-460 {
+  margin: 0 0 30px 0;
+}
+body.udx-markdown div.gist {
+  margin: 20px 0 25px 0 !important;
+}
+body.udx-markdown p.big,
+body.udx-markdown div.big p {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+body.udx-markdown span.weak {
+  color: #666666;
+}
+body.udx-markdown span.blank,
+body.udx-markdown span.empty {
+  color: #888888;
+  font-style: italic;
+}
+body.udx-markdown a {
+  color: #547f00;
+}
+body.udx-markdown strong {
+  font-family: "Droid Sans", sans-serif;
+  font-weight: bold;
+}
+body.udx-markdown .code {
+  font-family: "Anonymous Pro", "Menlo", "Consolas", "Bitstream Vera Sans Mono", "Courier New", monospace;
+}
+body.udx-markdown pre {
+  /* white-space: pre-line */
+  background-color: #fcf6db;
+  border: 1px solid black;
+  border-color: #e5e0c6;
+  font-family: "Anonymous Pro", "Menlo", "Consolas", "Bitstream Vera Sans Mono", "Courier New", monospace;
+  padding: 10px;
+}
+body.udx-markdown .required {
+  font-weight: bold;
+}
+body.udx-markdown table.fullwidth {
+  width: 100%;
+}
+body.udx-markdown form.form_box {
+  background-color: #ebf3f9;
+  border: 1px solid black;
+  border-color: #c3d9ec;
+  padding: 10px;
+}
+body.udx-markdown form.form_box input[type=submit] {
+  display: block;
+  padding: 10px;
+}
+body.udx-markdown form.form_box p.weak {
+  font-size: 0.8em;
+}
+body.udx-markdown form.form_box label {
+  color: #0f6ab4 !important;
+}
+body.udx-markdown form.form_box p {
+  color: #7e7b6d;
+  font-size: 0.9em;
+  padding: 0 0 15px 0;
+}
+body.udx-markdown form.form_box p strong {
+  color: #000000;
+}
+body.udx-markdown form.form_box p a {
+  color: #646257;
+}
+body.udx-markdown form.formtastic fieldset.inputs ol li p.inline-hints {
+  font-size: 0.9em;
+  font-style: italic;
+  margin: 0;
+  margin-left: 0;
+}
+body.udx-markdown form.formtastic fieldset.inputs ol li label {
+  clear: both;
+  color: #666666;
+  display: block;
+  padding: 0 0 3px 0;
+  width: auto;
+}
+body.udx-markdown form.formtastic fieldset.inputs ol li label abbr {
+  color: #888888;
+  padding-left: 3px;
+}
+body.udx-markdown form.formtastic fieldset.inputs ol li.required label {
+  color: #000000;
+}
+body.udx-markdown form.formtastic fieldset.inputs ol li.string input,
+body.udx-markdown form.formtastic fieldset.inputs ol li.url input,
+body.udx-markdown form.formtastic fieldset.inputs ol li.numeric input {
+  clear: both;
+  display: block;
+  padding: 4px;
+  width: auto;
+}
+body.udx-markdown form.formtastic fieldset.inputs ol li.string input.title,
+body.udx-markdown form.formtastic fieldset.inputs ol li.url input.title,
+body.udx-markdown form.formtastic fieldset.inputs ol li.numeric input.title {
+  font-size: 1.3em;
+}
+body.udx-markdown form.formtastic fieldset.inputs ol li.text textarea {
+  clear: both;
+  display: block;
+  font-family: "Droid Sans", sans-serif;
+  height: 250px;
+  padding: 4px;
+}
+body.udx-markdown form.formtastic fieldset.inputs ol li.select select {
+  clear: both;
+  display: block;
+}
+body.udx-markdown form.formtastic fieldset.inputs ol li.boolean {
+  clear: both;
+  display: block;
+  float: none;
+  overflow: hidden;
+}
+body.udx-markdown form.formtastic fieldset.inputs ol li.boolean label {
+  clear: none;
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+body.udx-markdown form.formtastic fieldset.inputs ol li.boolean input {
+  clear: none;
+  display: block;
+  float: left;
+  margin: 0 5px 0 0;
+}
+body.udx-markdown form.formtastic fieldset.buttons {
+  margin: 0;
+  padding: 0;
+}
+body.udx-markdown form.fullwidth ol li.string input,
+body.udx-markdown form.fullwidth ol li.url input,
+body.udx-markdown form.fullwidth ol li.text textarea,
+body.udx-markdown form.fullwidth ol li.numeric input {
+  width: 500px !important;
+}
+body.udx-markdown body {
+  font-family: "Droid Sans", sans-serif;
+}
+body.udx-markdown .swagger-ui-wrap {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 960px;
+}
+body.udx-markdown .icon-btn {
+  cursor: pointer;
+}
+body.udx-markdown #message-bar {
+  text-align: center;
+  margin-top: 20px;
+  border-radius: 10px;
+  line-height: 60px;
+}
+body.udx-markdown .message-success {
+  color: #89BF04;
+  background: rgba(0, 0, 0, 0.04);
+}
+body.udx-markdown .message-fail {
+  background: rgba(0, 0, 0, 0.04);
+  color: #cc0000;
+}
+body.udx-markdown .base_url {
+  display: none;
+}
+@media (max-width: 480px) {
+  body.udx-markdown .phone-only {
+    display: block;
+  }
+}
+@media (max-width: 767px) {
+  body.udx-markdown body {
+    padding: 10px;
+  }
+  body.udx-markdown body #header a#logo {
+    display: none;
+  }
+  body.udx-markdown body #header form#api_selector .input input#input_baseurl {
+    width: 250px;
+  }
+  body.udx-markdown #swagger-ui-container {
+    padding: 20px;
+  }
+  body.udx-markdown body ul#resources li.resource div.heading ul.options {
+    display: none;
+  }
+  body.udx-markdown .hidden-phone {
+    display: none;
+  }
+}
+body.udx-markdown #footer {
+  min-height: 120px;
+  padding: 20px 0 0 0;
+  color: #6F6F6F;
+  line-height: 24px;
+  background: #F2F2F2;
+  border-top: 1px solid #EDEDED;
+}
+body.udx-markdown #footer-right {
+  float: right;
+  text-align: right;
+  line-height: 26px;
+}
+body.udx-markdown #footer .social {
+  margin: 0 0 0 20px;
+}
+body.udx-markdown #logo.container {
+  padding: 100px 0 150px 0;
+}
+body.udx-markdown #logo .product {
+  display: block;
+  font: 400 60px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #353535;
+  width: 100%;
+}
+body.udx-markdown #logo .version {
+  font-style: italic;
+  font-weight: 100;
+  font-size: 50px;
+  color: #999;
+  margin-left: 5px;
+}
+body.udx-markdown #logo .description {
+  position: relative;
+  top: 15px;
+  font: 100 30px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #CECECE;
+  line-height: .75;
+  max-width: 600px;
+  display: block;
+}
+@media (min-width: 768px) and (max-width: 979px) {
+  body.udx-markdown .hidden-tablet {
+    display: none;
+  }
+}
+@media (max-width: 979px) {
+  body.udx-markdown .hidden-mobile {
+    display: none;
+  }
+}
