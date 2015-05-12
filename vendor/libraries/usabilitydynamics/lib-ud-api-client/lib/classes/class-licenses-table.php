@@ -21,6 +21,8 @@ namespace UsabilityDynamics\UD_API {
      */
     class Licenses_Table extends \WP_List_Table {
       
+      public $data;
+      public $found_data;
       public $name;
       public $domain;
       public $page;
