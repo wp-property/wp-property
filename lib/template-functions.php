@@ -1415,22 +1415,23 @@ if ( !function_exists( 'draw_property_search_form' ) ):
 
         ?>
         <li class="wpp_search_form_element seach_attribute_<?php echo $attrib; ?>  wpp_search_attribute_type_<?php echo isset( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] ) ? $wp_properties[ 'searchable_attr_fields' ][ $attrib ] : ''; ?> <?php echo( ( !empty( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] ) && $wp_properties[ 'searchable_attr_fields' ][ $attrib ] == 'checkbox' ) ? 'wpp-checkbox-el' : '' ); ?><?php echo( ( !empty( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] ) && ( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] == 'multi_checkbox' && count( $search_values[ $attrib ] ) == 1 ) || ( isset( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] ) && $wp_properties[ 'searchable_attr_fields' ][ $attrib ] == 'checkbox' ) ) ? ' single_checkbox' : '' ) ?>">
-          <?php ob_start(); ?>
           <?php $random_element_id = 'wpp_search_element_' . rand( 1000, 9999 ); ?>
           <label for="<?php echo $random_element_id; ?>" class="wpp_search_label wpp_search_label_<?php echo $attrib; ?>"><?php echo $label; ?>
             <span class="wpp_search_post_label_colon">:</span></label>
           <div class="wpp_search_attribute_wrap">
-          <?php
-          $value = isset( $_REQUEST[ 'wpp_search' ][ $attrib ] ) ? $_REQUEST[ 'wpp_search' ][ $attrib ] : '';
-          wpp_render_search_input( array(
-            'attrib' => $attrib,
-            'random_element_id' => $random_element_id,
-            'search_values' => $search_values,
-            'value' => $value
-          ) );
-          $this_field = ob_get_contents();
-          ob_end_clean();
-          echo apply_filters( 'wpp_search_form_field_' . $attrib, $this_field, $attrib, $label, $value, ( isset( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] ) ? $wp_properties[ 'searchable_attr_fields' ][ $attrib ] : false ), $random_element_id ); ?>
+            <?php
+            $value = isset( $_REQUEST[ 'wpp_search' ][ $attrib ] ) ? $_REQUEST[ 'wpp_search' ][ $attrib ] : '';
+            ob_start();
+            wpp_render_search_input( array(
+              'attrib' => $attrib,
+              'random_element_id' => $random_element_id,
+              'search_values' => $search_values,
+              'value' => $value
+            ) );
+            $this_field = ob_get_contents();
+            ob_end_clean();
+            echo apply_filters( 'wpp_search_form_field_' . $attrib, $this_field, $attrib, $label, $value, ( isset( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] ) ? $wp_properties[ 'searchable_attr_fields' ][ $attrib ] : false ), $random_element_id );
+            ?>
           </div>
           <div class="clear"></div>
           </li>
