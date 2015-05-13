@@ -92,8 +92,13 @@ namespace UsabilityDynamics\WPP {
 
         /* May be determine property_type to know which attributes should be hidden and which ones just readable. */
         $post = new \WP_Post( new \stdClass );
-        if( isset( $_REQUEST['post'] ) && is_numeric( $_REQUEST['post'] ) ) {
-          $p = get_property( $_REQUEST['post'], array(
+
+        $post_id = isset( $_REQUEST['post'] ) && is_numeric( $_REQUEST['post'] ) ? $_REQUEST['post'] : false;
+        if( !$post_id && !empty( $_REQUEST['post_ID'] ) && isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'editpost' ) {
+          $post_id = $_REQUEST['post_ID'];
+        }
+        if( $post_id ) {
+          $p = get_property( $post_id, array(
             'get_children'          => 'true',
             'return_object'         => 'true',
             'load_gallery'          => 'false',
@@ -338,11 +343,7 @@ namespace UsabilityDynamics\WPP {
             $input_type = 'text'; // HTML5 does not allow to use float, so we have to use default 'text' here
           }
 
-          //** Determine if current attribute is used by Google Address Validator. */
-          if( ud_get_wp_property( 'configuration.address_attribute' ) == $slug ) {
-            $input_type = 'wpp_address';
-            $description[] = __( 'The value is being used by Google Address Validator to determine and prepare address to valid format. However you can set coordinates manually.', ud_get_wp_property()->domain );
-          }
+
 
           //* Is current attribute inherited from parent? If so, set it as readonly!. */
           if(
@@ -360,6 +361,16 @@ namespace UsabilityDynamics\WPP {
           if( !empty( $aggregated_attributes ) && in_array( $slug, $aggregated_attributes ) ) {
             $input_type = 'wpp_aggregated';
             $description[] = sprintf( __( 'The value is aggregated from Child %s.', ud_get_wp_property()->domain ), \WPP_F::property_label( 'plural' ) );
+          }
+
+          //** Determine if current attribute is used by Google Address Validator. */
+          if( ud_get_wp_property( 'configuration.address_attribute' ) == $slug ) {
+            if( $input_type == 'wpp_inherited' ) {
+              $input_type = 'wpp_inherited_address';
+            } else {
+              $input_type = 'wpp_address';
+              $description[] = __( 'The value is being used by Google Address Validator to determine and prepare address to valid format. However you can set coordinates manually.', ud_get_wp_property()->domain );
+            }
           }
 
           /**

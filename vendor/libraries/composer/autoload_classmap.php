@@ -111,6 +111,7 @@ return array(
     'RWMB_Wpp_Address_Field' => $baseDir . '/lib/classes/fields/class-wpp-address.php',
     'RWMB_Wpp_Aggregated_Field' => $baseDir . '/lib/classes/fields/class-wpp-aggregated.php',
     'RWMB_Wpp_Checkbox_Field' => $baseDir . '/lib/classes/fields/class-wpp-checkbox.php',
+    'RWMB_Wpp_Inherited_Address_Field' => $baseDir . '/lib/classes/fields/class-wpp-inherited-address.php',
     'RWMB_Wpp_Inherited_Field' => $baseDir . '/lib/classes/fields/class-wpp-inherited.php',
     'RWMB_Wpp_Parent_Field' => $baseDir . '/lib/classes/fields/class-wpp-parent.php',
     'RWMB_Wpp_Readonly_Field' => $baseDir . '/lib/classes/fields/class-wpp-readonly.php',
