@@ -66,7 +66,7 @@
 
   <ul class="<?php wpp_css("feps-default-template::fields-wrapper","feps_user_input_fields"); ?>">
 
-    <?php if (empty($current_user->data)) : ?>
+    <?php if (empty($current_user->ID)) : ?>
       <li class="<?php wpp_css("feps-default-template::row-wrapper", array("wpp_feps_row_wrapper")); ?>">
         <div class="<?php wpp_css("feps-default-template::label-wrapper", array("wpp_feps_label_wrapper")); ?>">
           <label for="<?php echo $form_id; ?>_user_email"><span class="<?php wpp_css("feps-default-template::the_title","the_title"); ?>"><?php _e('Your e-mail:', 'wpp'); ?></span></label>
