@@ -185,12 +185,15 @@ namespace UsabilityDynamics\WPP {
        * @return mixed|string
        */
       public function column_property_type( $post ) {
-        $property_types = ud_get_wp_property('property_types');
+        $property_types = (array) ud_get_wp_property('property_types');
         $type = get_post_meta( $post->ID, 'property_type', true );
-        if( !empty( $type ) && isset( $property_types[ $type ] ) ) {
+
+        if( isset( $type ) && is_string( $type ) && is_array( $property_types ) ) {
           $type = $property_types[ $type ];
         }
+
         return !empty( $type ) ? $type : '-';
+
       }
 
       /**
