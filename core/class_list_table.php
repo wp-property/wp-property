@@ -22,6 +22,12 @@ class WPP_List_Table extends WP_List_Table {
 
   public $table_scope;
 
+  public $all_items = array();
+
+  public $items = array();
+
+  public $item_pages = array();
+
   /**
    * Setup options mostly.
    *
