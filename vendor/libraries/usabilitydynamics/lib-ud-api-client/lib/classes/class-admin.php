@@ -98,7 +98,7 @@ namespace UsabilityDynamics\UD_API {
         
         $path = wp_normalize_path( dirname( dirname( __DIR__ ) ) );
         $this->screens_path = trailingslashit( $path . '/static/templates' );
-        if( $this->type == 'theme' ) {
+        if( $this->type == 'theme' && strpos( $path, wp_normalize_path( WP_PLUGIN_DIR ) ) === false ) {
           $root_path = wp_normalize_path( get_template_directory() );
           $this->assets_url = trailingslashit( get_template_directory_uri() . str_replace( $root_path, '', $path ) . '/static' );
         } else {

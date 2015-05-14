@@ -56,19 +56,37 @@ namespace UsabilityDynamics\WP {
         $this->define_license_manager();
         //** Maybe define license client */
         $this->define_license_client();
-        //** Be sure we do not have errors. Do not initialize theme if we have anyone. */
+        add_action( 'after_setup_theme', array( $this, 'pre_init' ), 100 );
+        $this->boot();
+      }
+      
+      /**
+	     * Determine if we have errors before plugin initialization!
+	     *
+       * @since 1.0.6
+	     */
+      public function pre_init() {
+        //** Be sure we do not have errors. Do not initialize plugin if we have them. */
         if( $this->has_errors() ) {
           if( !is_admin() ) {
-            //** Show message about error on fornt end only if user administrator! */
+            //** Show message about error on front end only if user administrator! */
             if( current_user_can( 'manage_options' ) ) {
               _e( "Theme is activated with errors. Please, follow instructions on admin panel to solve the issue!", $this->domain );
             }
             die();
           }
         } else {
-          $this->init();
+          $this->init();  
         }
       }
+      
+      /**
+       * Called in the end of constructor.
+       * Redeclare the method in child class!
+       *
+       * @author peshkov@UD
+       */
+      public function boot() {}
       
       /**
        * Load Text Domain

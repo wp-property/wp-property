@@ -343,7 +343,11 @@ namespace UsabilityDynamics\WPP {
             $input_type = 'text'; // HTML5 does not allow to use float, so we have to use default 'text' here
           }
 
-
+          //** Determine if current attribute is used by Google Address Validator. */
+          if( ud_get_wp_property( 'configuration.address_attribute' ) == $slug ) {
+            $input_type = 'wpp_address';
+            $description[] = __( 'The value is being used by Google Address Validator to determine and prepare address to valid format. However you can set coordinates manually.', ud_get_wp_property()->domain );
+          }
 
           //* Is current attribute inherited from parent? If so, set it as readonly!. */
           if(

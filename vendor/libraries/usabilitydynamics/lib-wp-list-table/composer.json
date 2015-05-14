@@ -1,0 +1,22 @@
+{
+  "name": "usabilitydynamics/lib-wp-list-table",
+  "description": "Advanced Ajax List Table & Filter library for Wordpress",
+  "homepage": "https://github.com/UsabilityDynamics/lib-wp-list-table",
+  "keywords": [
+    "wordpress",
+    "wp-list-table",
+    "ajax",
+    "filter",
+    "search",
+    "library"
+  ],
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "require": {
+    "php": ">=5.3",
+    "usabilitydynamics/lib-ui": "0.3.0"
+  },
+  "autoload": {
+    "classmap": [ "lib/classes" ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "name": "usabilitydynamics/lib-ui",
+  "type": "library",
+  "homepage": "http://github.com/UsabilityDynamics/wp-ui",
+  "keywords": [
+    "ui",
+    "editor",
+    "css-editor",
+    "script-editor"
+  ],
+  "minimum-stability": "dev",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://repository.usabilitydynamics.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3",
+    "usabilitydynamics/lib-utility": "~0.3"
+  },
+  "require-dev": {},
+  "autoload": {
+    "classmap": [
+      "lib"
+    ]
+  },
+  "authors": [
+    {
+      "name": "Andy Potanin",
+      "email": "andy.potanin@usabilitydynamics.com",
+      "homepage": "http://usabilitydynamics.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Maxim Peshkov",
+      "email": "maxim.peshkov@usabilitydynamics.com",
+      "homepage": "http://usabilitydynamics.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Anton Korotkov",
+      "email": "anton.korotkov@usabilitydynamics.com",
+      "homepage": "http://usabilitydynamics.com",
+      "role": "Developer"
+    }
+  ],
+  "config": {},
+  "extra": {
+    "installer-name": "lib-ui",
+    "text_domain": "lib-ui",
+    "main-file": "lib/class-ui.php",
+    "class": "UsabilityDynamics\\UI",
+    "component": {
+      "scripts": [
+        "static/scripts/ui.js",
+        "static/scripts/ui.markdown.js",
+        "static/scripts/ui.jquery-tabs.js"
+      ],
+      "styles": [
+        "static/styles/ui.css",
+        "static/styles/ui.less"
+      ]
+    }
+  },
+  "license": "GNU"
+}
