@@ -27,10 +27,10 @@
   "require": {
     "php": ">=5.3",
     "usabilitydynamics/lib-settings": "*",
-    "usabilitydynamics/lib-wp-bootstrap": "1.0.9",
-    "usabilitydynamics/lib-ud-api-client": "1.0.5",
-    "usabilitydynamics/wp-meta-box": "4.4.3.2",
-    "usabilitydynamics/wp-meta-box-utilities": "1.0.1",
+    "usabilitydynamics/lib-wp-bootstrap": "~1.0",
+    "usabilitydynamics/lib-ud-api-client": "~1.0",
+    "usabilitydynamics/wp-meta-box": "~4.4",
+    "usabilitydynamics/wp-meta-box-utilities": "~1.0",
     "usabilitydynamics/lib-wp-list-table": "~1.0"
   },
   "require-dev": {
