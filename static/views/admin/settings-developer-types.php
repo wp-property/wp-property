@@ -97,7 +97,7 @@ global $wp_properties;
       <td>
         <ul class="wp-tab-panel wpp_inherited_property_attributes wpp_something_advanced_wrapper">
           <li class="wpp_show_advanced" wrapper="wpp_something_advanced_wrapper"><?php _e( 'Toggle Attributes Selection', 'wpp' ); ?></li>
-          <?php foreach( $wpp_inheritable_attributes as $property_stat_slug => $property_stat_label ): ?>
+          <?php foreach( $wp_properties[ 'property_stats' ] as $property_stat_slug => $property_stat_label ): ?>
             <li class="wpp_development_advanced_option">
               <input id="<?php echo $property_slug . "_" . $property_stat_slug; ?>_inheritance" <?php if( isset( $wp_properties[ 'property_inheritance' ][ $property_slug ] ) && in_array( $property_stat_slug, $wp_properties[ 'property_inheritance' ][ $property_slug ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[property_inheritance][<?php echo $property_slug; ?>][]" value="<?php echo $property_stat_slug; ?>"/>
               <label for="<?php echo $property_slug . "_" . $property_stat_slug; ?>_inheritance">
