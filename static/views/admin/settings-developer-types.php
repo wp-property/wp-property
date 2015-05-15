@@ -6,8 +6,6 @@
 
 global $wp_properties;
 
-$wpp_inheritable_attributes = $wp_properties[ 'property_stats' ];
-
 ?>
 <h3><?php printf( __( '%1s Types', 'wpp' ), WPP_F::property_label() ); ?></h3>
 <table id="wpp_inquiry_property_types" class="ud_ui_dynamic_table widefat" allow_random_slug="true">
@@ -45,6 +43,13 @@ $wpp_inheritable_attributes = $wp_properties[ 'property_stats' ];
             <label for="<?php echo $property_slug; ?>_location_matters">
               <input class="slug" id="<?php echo $property_slug; ?>_location_matters"  <?php if( in_array( $property_slug, $wp_properties[ 'location_matters' ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[location_matters][]" value="<?php echo $property_slug; ?>"/>
               <?php _e( 'Location Matters', 'wpp' ) ?>
+            </label>
+          </li>
+
+          <li>
+            <label>
+              <input class="slug" <?php if( isset( $wp_properties[ 'redirect_to_parent' ] ) && in_array( $property_slug, $wp_properties[ 'redirect_to_parent' ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[redirect_to_parent][]" value="<?php echo $property_slug; ?>"/>
+              <?php _e( 'Redirect single-view to parent.', 'wpp' ) ?>
             </label>
           </li>
           <?php $property_type_settings = apply_filters( 'wpp_property_type_settings', array(), $property_slug ); ?>

@@ -1,4 +1,5 @@
 #### 2.0.0
+* Added option to redirect certain property types to parent on front-end.
 * Changed the WPP settings export to use JSON extension.
 * Fixed property overview filter to work when pressing enter.
 * Added wpp_post_type filter.

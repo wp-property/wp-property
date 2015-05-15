@@ -744,7 +744,14 @@ class WPP_Core {
 
       add_action( 'wp_head', create_function( '', "do_action('wp_head_single_property'); " ) );
 
-      $property = WPP_F::get_property( $post->ID, "load_gallery=true" );
+      $property = (array) WPP_F::get_property( $post->ID, "load_gallery=true" );
+
+      $property_type = $property['property_type'];
+
+      // Redirect to parent if property type is non-public.
+      if( isset( $wp_properties[ 'redirect_to_parent' ] ) && is_array( $wp_properties[ 'redirect_to_parent' ] ) && in_array( $property_type, $wp_properties[ 'redirect_to_parent' ] ) && $property['post_parent'] ) {
+        die( wp_redirect( get_permalink( $property[ 'post_parent' ] )) );
+      }
 
       $property = prepare_property_for_display( $property );
 
