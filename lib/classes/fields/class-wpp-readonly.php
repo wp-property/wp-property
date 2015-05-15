@@ -18,8 +18,8 @@ if ( ! class_exists( 'RWMB_Wpp_Readonly_Field' ) )
     static function html( $meta, $field )
     {
       return sprintf(
-        '<input type="text" readonly="readonly" class="rwmb-text" name="%s" id="%s" value="%s" placeholder="%s" size="%s" %s>%s',
-        $field['field_name'],
+        '<input type="text" readonly="readonly" class="rwmb-text" id="%s" value="%s" placeholder="%s" size="%s" %s>%s',
+        // $field['field_name'],
         $field['id'],
         $meta,
         $field['placeholder'],
