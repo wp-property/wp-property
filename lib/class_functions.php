@@ -3381,7 +3381,8 @@ class WPP_F extends UsabilityDynamics\Utility {
       'load_gallery'          => 'true',
       'load_thumbnail'        => 'true',
       'allow_multiple_values' => 'false',
-      'load_parent'           => 'true'
+      'load_parent'           => 'true',
+      'cache'                 => 'true',
     );
 
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
@@ -3393,8 +3394,11 @@ class WPP_F extends UsabilityDynamics\Utility {
     $load_parent           = isset( $load_parent ) ? $load_parent : 'true';
 
     $args = is_array( $args ) ? http_build_query( $args ) : (string) $args;
-    if( $return = wp_cache_get( $id . $args ) ) {
-      return $return;
+
+    if( isset( $cache ) && $cache == 'true' ) {
+      if( $return = wp_cache_get( $id . $args ) ) {
+        return $return;
+      }
     }
 
     $post = get_post( $id, ARRAY_A );

@@ -103,7 +103,8 @@ namespace UsabilityDynamics\WPP {
             'return_object'         => 'true',
             'load_gallery'          => 'false',
             'load_thumbnail'        => 'false',
-            'load_parent'           => 'true'
+            'load_parent'           => 'true',
+            'cache'                 => 'false'
           ) );
           if( !empty($p) ) {
             $post = $p;
