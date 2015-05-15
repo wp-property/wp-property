@@ -38,6 +38,9 @@ namespace UsabilityDynamics\WPP {
             'domain' => $this->domain,
           )
         ));
+
+        //** Initiate Attributes Handler */
+        new Attributes();
       
         /** Defaults filters and hooks */
         include_once $this->path( 'lib/default_api.php', 'dir' );
@@ -56,8 +59,6 @@ namespace UsabilityDynamics\WPP {
 
         //** Initiate AJAX Handler */
         new Ajax();
-        //** Initiate Attributes Handler */
-        new Attributes();
         //** Initiate Admin UI */
         if( is_admin() ) {
           new Admin();

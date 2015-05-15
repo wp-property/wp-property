@@ -124,7 +124,7 @@ namespace UsabilityDynamics\WPP {
           default:
             //Show the whole array for troubleshooting purposes
             if (isset($item->{$column_name}) && is_string( $item->{$column_name} )) {
-              return $item->{$column_name};
+              return apply_filters( "wpp_stat_filter_{$column_name}", $item->{$column_name} );
             } else {
               return '-';
             }
