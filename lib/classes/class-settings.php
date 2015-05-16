@@ -98,13 +98,15 @@ namespace UsabilityDynamics\WPP {
         
         //** Setup default property types to be used. */
         $d = !$this->get( 'property_types', false );
-        if( !$d || !is_array( $d ) ) {
-          $this->set( 'property_types', array(
-            'building' => __( 'Building', 'wpp' ),
-            'floorplan' => __( 'Floorplan', 'wpp' ),
-            'single_family_home' => __( 'Single Family Home', 'wpp' )
-          ) );
-        }
+
+        // Should only be set on install, not added on every request. These literally can not be removed from settings... -potanin@UD
+        // if( !$d || !is_array( $d ) ) {
+        //   $this->set( 'property_types', array(
+        //     'building' => __( 'Building', 'wpp' ),
+        //     'floorplan' => __( 'Floorplan', 'wpp' ),
+        //     'single_family_home' => __( 'Single Family Home', 'wpp' )
+        //   ) );
+        // }
 
         //** Setup property types to be used. */
         $d = !$this->get( 'property_inheritance', false );

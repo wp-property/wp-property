@@ -1533,9 +1533,8 @@ class WPP_Core {
 
     switch( $screen->id ) {
       case "edit-property":
-        wp_redirect( 'edit.php?post_type=property&page=all_properties' );
-        exit();
-        break;
+        die( wp_redirect( add_query_arg( $_GET, 'edit.php?post_type=property&page=all_properties' ) ) );
+      break;
     }
 
     return $screen;

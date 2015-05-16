@@ -21,7 +21,7 @@ global $wp_properties;
   <tbody>
   <?php foreach( $wp_properties[ 'property_types' ] as $property_slug => $label ): ?>
 
-    <tr class="wpp_dynamic_table_row" slug="<?php echo $property_slug; ?>" new_row='false'>
+    <tr class="wpp_dynamic_table_row" slug="<?php echo $property_slug; ?>"  data-property-slug="<?php echo $property_slug; ?>" new_row='false'>
       <td>
         <input class="slug_setter" type="text" name="wpp_settings[property_types][<?php echo $property_slug; ?>]" value="<?php echo $label; ?>"/><br/>
         <span class="wpp_delete_row wpp_link">Delete</span>
@@ -46,12 +46,14 @@ global $wp_properties;
             </label>
           </li>
 
-          <li>
+          <?php /*
+          <li class="redirect_to_parent">
             <label>
               <input class="slug" <?php if( isset( $wp_properties[ 'redirect_to_parent' ] ) && in_array( $property_slug, $wp_properties[ 'redirect_to_parent' ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[redirect_to_parent][]" value="<?php echo $property_slug; ?>"/>
               <?php _e( 'Redirect single-view to parent.', 'wpp' ) ?>
             </label>
-          </li>
+          </li>*/ ?>
+          
           <?php $property_type_settings = apply_filters( 'wpp_property_type_settings', array(), $property_slug ); ?>
           <?php foreach( (array) $property_type_settings as $property_type_setting ) : ?>
             <li>
