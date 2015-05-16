@@ -1559,6 +1559,22 @@ p.pad10 {
 .property_page_wpp_property_pdf_lists .form-table td {
   vertical-align: baseline;
 }
+body.property_page_all_properties .uisf-taxonomy-wrapper .uisf-label {
+  opacity: 0;
+  display: none;
+}
+body.property_page_all_properties .uisf-text-wrapper {
+  position: relative;
+}
+body.property_page_all_properties .uisf-text-wrapper .uisf-label {
+  opacity: 0;
+  display: none;
+}
+body.property_page_all_properties .uisf-text-wrapper input.sui-text {
+  height: 0;
+  padding: 1.2em;
+  width: 100%;
+}
 body.post-type-property {
   /*
   .postarea {

@@ -39,9 +39,7 @@
     </div>
     
     <div class="col-2 last-feature">
-      
-      <br /><br /><br />
-      
+
       <h4><?php _e( 'Adding License Keys', ud_get_wp_property()->domain ); ?></h4>
       
       <p><?php _e( 'Click to activate plugin, you will see link to the Add-ons admin screen. On the Add-ons admin screen, you should see all your installed activated products, with an option to add your license key.', ud_get_wp_property()->domain ) ?></p>
@@ -57,5 +55,9 @@
     </div>
     
   </div>
-  
+
+  <div class="return-to-dashboard">
+    <a href="<?php echo esc_url( self_admin_url() ); ?>"><?php is_blog_admin() ? _e( 'Go to Dashboard &rarr; Home' ) : _e( 'Go to Dashboard' ); ?></a>
+	</div>
+
 </div>
