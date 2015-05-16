@@ -560,5 +560,39 @@
             "MIT"
         ],
         "description": "A multi-framework Composer library installer"
+    },
+    {
+        "name": "usabilitydynamics/wp-gallery-metabox",
+        "version": "dev-v2.0",
+        "version_normalized": "dev-v2.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/wp-gallery-metabox",
+            "reference": "v2.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/wp-gallery-metabox/archive/v2.0.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "require": {
+            "composer/installers": "~1.0",
+            "php": ">=5.3"
+        },
+        "require-dev": {
+            "codeclimate/php-test-reporter": "dev-master",
+            "usabilitydynamics/lib-wp-phpunit": "master"
+        },
+        "type": "wordpress-plugin",
+        "extra": {
+            "installer-name": "wp-gallery-metabox"
+        },
+        "installation-source": "dist",
+        "license": [
+            "MIT"
+        ],
+        "description": "WP Repository plugin.",
+        "homepage": "https://usabilitydynamics.com"
     }
 ]

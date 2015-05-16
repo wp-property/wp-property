@@ -1,0 +1,19 @@
+
+div#be_gallery_metabox div.be-image-wrapper span.be-image-remove {
+	cursor:pointer;
+	position:relative;
+	left:-10px;
+	bottom:-5px;
+}
+
+div#be_gallery_metabox .be-button {
+	margin:0 5px 0 0;
+	font-size: 12px;
+    line-height: 15px;
+    padding: 3px 10px;
+    white-space: nowrap;	
+}
+
+.wp-gallery-metabox-item {
+  padding: 0.5em;
+}

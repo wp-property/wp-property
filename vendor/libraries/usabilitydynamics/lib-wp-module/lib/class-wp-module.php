@@ -1,18 +1,20 @@
 <?php
 /**
  */
- namespace UsabilityDynamics {
+ namespace UsabilityDynamics\WP_Module {
 
-  if( !class_exists( 'UsabilityDynamics\WP\Module' ) ) {
+  if( !class_exists( 'UsabilityDynamics\WP_Module' ) ) {
 
     /**
      * Class Settings
      *
      * @package UsabilityDynamics
      */
-    class Module {
+    class WP_Module {
+
+
     }
     
-    }
+  }
     
-    }
+}

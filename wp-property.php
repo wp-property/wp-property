@@ -117,6 +117,7 @@ if( !function_exists( 'ud_my_wp_plugin_message' ) ) {
   add_action( 'admin_notices', 'ud_wp_property_message' );
 }
 
-
 //** Initialize. */
-ud_get_wp_property();
+if( ud_check_wp_property() ) {
+  ud_get_wp_property();
+}
