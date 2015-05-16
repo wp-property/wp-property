@@ -428,6 +428,10 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       </div>
 
       <div class="wpp_settings_block">
+      <?php include( ud_get_wp_property()->path( 'static/views/admin/settings-developer-advanced.php', 'dir' ) ); ?>
+      </div>
+
+      <div class="wpp_settings_block">
         <?php _e( "Restore Backup of WP-Property Configuration", 'wpp' ); ?>
         : <input name="wpp_settings[settings_from_backup]" class="" id="wpp_backup_file" type="file"/>
         <a href="<?php echo wp_nonce_url( "edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup", 'download-wpp-backup' ); ?>"><?php _e( 'Download Backup of Current WP-Property Configuration.', 'wpp' ); ?></a>

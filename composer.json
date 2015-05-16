@@ -40,9 +40,15 @@
   },
   "archive": {
     "exclude": [
+      "alpha.php",
+      "beta.php",
+      "build.sh",
+      "makefile",
       "node_modules",
       ".gitignore",
       "test",
+      "static/cache",
+      "static/wiki",
       "circle.yml",
       "composer.lock",
       "gruntfile.js",

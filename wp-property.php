@@ -8,9 +8,9 @@
  * Text Domain: wpp
  * Author URI: http://usabilitydynamics.com
  * Domain Path: /static/languages/
+ * Network: True
  * GitHub Plugin URI: wp-property/wp-property
  * GitHub Branch: v2.0
- * Network: True
  *
  * Copyright 2012 - 2015 Usability Dynamics, Inc.  ( email : info@usabilitydynamics.com )
  *
@@ -48,6 +48,9 @@ if( !function_exists( 'ud_get_wp_property' ) ) {
    *
    * @author Usability Dynamics, Inc.
    * @since 2.0.0
+   * @param bool $key
+   * @param null $default
+   * @return
    */
   function ud_get_wp_property( $key = false, $default = null ) {
     $instance = \UsabilityDynamics\WPP\Bootstrap::get_instance();
@@ -115,6 +118,15 @@ if( !function_exists( 'ud_my_wp_plugin_message' ) ) {
     }
   }
   add_action( 'admin_notices', 'ud_wp_property_message' );
+}
+
+// An alias for "ud_get_wp_property"
+if( !function_exists( 'wpp' ) ) {
+
+  function wpp( $key = false, $default = null ) {
+    return ud_get_wp_property($key, $default);
+  }
+
 }
 
 //** Initialize. */

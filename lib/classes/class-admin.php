@@ -7,6 +7,8 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use WPP_F;
+
   if (!class_exists('UsabilityDynamics\WPP\Admin')) {
 
     class Admin extends Scaffold {
@@ -28,7 +30,9 @@ namespace UsabilityDynamics\WPP {
 
         /** Admin interface init */
         add_action( "admin_init", array( $this, "admin_init" ) );
-        add_action( "admin_menu", array( $this, 'admin_menu_settings' ), 50 );
+
+        // @todo Move back to Settings -> Properties as it was years ago.
+        add_action( "admin_menu", array( $this, 'admin_menu' ), 150 );
       }
 
       /**
@@ -64,6 +68,7 @@ namespace UsabilityDynamics\WPP {
             }
 
             wp_enqueue_script( 'wp-property-global' );
+            wp_enqueue_script( 'wp-property-backend-editor' );
             //** Enabldes fancybox js, css and loads overview scripts */
             wp_enqueue_script( 'post' );
             wp_enqueue_script( 'postbox' );
@@ -130,7 +135,7 @@ namespace UsabilityDynamics\WPP {
         // Add metaboxes
         do_action( 'wpp_metaboxes' );
 
-        \WPP_F::manual_activation();
+        WPP_F::manual_activation();
 
         //** Download backup of configuration */
         if(
@@ -159,7 +164,7 @@ namespace UsabilityDynamics\WPP {
       /**
        *
        */
-      public function admin_menu_settings() {
+      public function admin_menu() {
 
         $settings_page = add_submenu_page( 'edit.php?post_type=property', __( 'Settings', 'wpp' ), __( 'Settings', 'wpp' ), 'manage_wpp_settings', 'property_settings', function () {
           global $wp_properties;

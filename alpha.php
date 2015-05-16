@@ -28,6 +28,7 @@ add_filter( '__update_postmeta', function( $value, $object_id, $meta_key, $singl
 
 });
 
+// Experimenting with hijacking post_meta queries and using terms instead (v1.0 -> v2.0 transofmation)
 add_filter( 'get_post_metadata', function( $value, $object_id, $meta_key, $single ) {
 
   if( $meta_key !== 'property_type' ) {

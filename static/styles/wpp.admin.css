@@ -1582,6 +1582,13 @@ body.post-type-property {
   }
   */
 }
+body.post-type-property.wpp-content-editor-hidden .wp-editor-tabs > .wp-switch-editor:not(.wpp-editor-toggler) {
+  display: none;
+}
+body.post-type-property.wpp-content-editor-hidden table#post-status-info,
+body.post-type-property.wpp-content-editor-hidden div.wp-editor-container {
+  display: none;
+}
 body.post-type-property input[type=text].rwmb-text {
   width: 30em;
   max-width: 90%;

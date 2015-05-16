@@ -2009,6 +2009,20 @@ body.property_page_all_properties {
 }
 body.post-type-property {
 
+
+  &.wpp-content-editor-hidden {
+
+    // hide all other buttons
+    .wp-editor-tabs > .wp-switch-editor:not(.wpp-editor-toggler) {
+      display: none;
+    }
+
+    table#post-status-info,
+    div.wp-editor-container {
+      display: none;
+    }
+  }
+
   /*
   .postarea {
     display: none;

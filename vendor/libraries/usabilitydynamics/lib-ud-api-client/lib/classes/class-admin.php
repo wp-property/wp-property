@@ -167,6 +167,7 @@ namespace UsabilityDynamics\UD_API {
         add_action( 'load-' . $this->hook, array( $this, 'process_request' ) );
         add_action( 'admin_print_styles-' . $this->hook, array( $this, 'enqueue_styles' ) );
         add_action( 'admin_print_scripts-' . $this->hook, array( $this, 'enqueue_scripts' ) );
+
       }
       
       /**

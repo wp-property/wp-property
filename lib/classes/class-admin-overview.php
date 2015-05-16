@@ -1,11 +1,9 @@
 <?php
-
 /**
  * Overview UI
  *
  * @author UsabilityDynamics, inc
  */
-
 namespace UsabilityDynamics\WPP {
 
   if (!class_exists('UsabilityDynamics\WPP\Admin_Overview')) {
