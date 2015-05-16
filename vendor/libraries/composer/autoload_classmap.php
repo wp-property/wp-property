@@ -119,6 +119,7 @@ return array(
     'RW_Meta_Box' => $baseDir . '/vendor/plugins/wp-meta-box/inc/meta-box.php',
     'UsabilityDynamics\\Job' => $vendorDir . '/usabilitydynamics/lib-utility/lib/class-job.php',
     'UsabilityDynamics\\Loader' => $vendorDir . '/usabilitydynamics/lib-utility/lib/class-loader.php',
+    'UsabilityDynamics\\Module' => $vendorDir . '/usabilitydynamics/lib-wp-module/lib/class-wp-module.php',
     'UsabilityDynamics\\Settings' => $vendorDir . '/usabilitydynamics/lib-settings/lib/class-settings.php',
     'UsabilityDynamics\\Structure' => $vendorDir . '/usabilitydynamics/lib-utility/lib/class-structure.php',
     'UsabilityDynamics\\Term' => $vendorDir . '/usabilitydynamics/lib-utility/lib/class-term.php',

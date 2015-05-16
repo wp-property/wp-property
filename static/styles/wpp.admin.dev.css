@@ -1559,3 +1559,14 @@ p.pad10 {
 .property_page_wpp_property_pdf_lists .form-table td {
   vertical-align: baseline;
 }
+body.post-type-property {
+  /*
+  .postarea {
+    display: none;
+  }
+  */
+}
+body.post-type-property input[type=text].rwmb-text {
+  width: 30em;
+  max-width: 90%;
+}

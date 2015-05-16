@@ -288,7 +288,7 @@ class WPP_F extends UsabilityDynamics\Utility {
         'labels'       => isset( $taxonomy_data[ 'labels' ] ) ? $taxonomy_data[ 'labels' ] : array(),
         'query_var'    => $taxonomy,
         'show_ui'      => false,
-        'rewrite'      => array( 'slug' => $taxonomy ),
+        'rewrite'      => isset( $taxonomy_data['rewrite'] ) ? null :  array( 'slug' => $taxonomy ),
         'capabilities' => array(
           'manage_terms' => 'manage_wpp_categories',
           'edit_terms'   => 'manage_wpp_categories',
@@ -310,7 +310,7 @@ class WPP_F extends UsabilityDynamics\Utility {
           'label'             => isset( $taxonomy_data[ 'label' ] ) ? $taxonomy_data[ 'label' ] : $taxonomy,
           'labels'            => isset( $taxonomy_data[ 'labels' ] ) ? $taxonomy_data[ 'labels' ] : array(),
           'query_var'         => $taxonomy,
-          'rewrite'           => array( 'slug' => $taxonomy ),
+          'rewrite'           => isset( $taxonomy_data[ 'rewrite'] ) ? $taxonomy_data[ 'rewrite'] : array( 'slug' => $taxonomy ),
           'public'            => isset( $taxonomy_data[ 'public' ] ) ? $taxonomy_data[ 'public' ] : true,
           'show_ui'           => isset( $taxonomy_data[ 'show_ui' ] ) ? $taxonomy_data[ 'show_ui' ] : true,
           'show_in_nav_menus' => isset( $taxonomy_data[ 'show_in_nav_menus' ] ) ? $taxonomy_data[ 'show_in_nav_menus' ] : true,
@@ -1529,9 +1529,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     $args = wp_parse_args( $args, array(
       'skip_existing'   => 'false',
-      'return_geo_data' => false,
-      'detail' => false,
-      'categorize'      => true
+      'return_geo_data' => false
     ) );
 
     extract( $args, EXTR_SKIP );

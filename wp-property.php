@@ -7,8 +7,12 @@
  * Version: 2.0.0
  * Text Domain: wpp
  * Author URI: http://usabilitydynamics.com
+ * Domain Path: /static/languages/
+ * GitHub Plugin URI: wp-property/wp-property
+ * GitHub Branch: v2.0
+ * Network: True
  *
- * Copyright 2012 - 2014 Usability Dynamics, Inc.  ( email : info@usabilitydynamics.com )
+ * Copyright 2012 - 2015 Usability Dynamics, Inc.  ( email : info@usabilitydynamics.com )
  *
  */
 
@@ -113,7 +117,6 @@ if( !function_exists( 'ud_my_wp_plugin_message' ) ) {
   add_action( 'admin_notices', 'ud_wp_property_message' );
 }
 
-if( ud_check_wp_property() ) {
-  //** Initialize. */
-  ud_get_wp_property();
-}
+
+//** Initialize. */
+ud_get_wp_property();

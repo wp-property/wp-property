@@ -521,5 +521,44 @@
             "wordpress",
             "wp-list-table"
         ]
+    },
+    {
+        "name": "usabilitydynamics/lib-wp-module",
+        "version": "dev-v1.0",
+        "version_normalized": "dev-v1.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-wp-module",
+            "reference": "v1.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-module/archive/v1.0.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "require": {
+            "composer-plugin-api": "1.0.0",
+            "composer/installers": "~1.0",
+            "php": ">=5.3"
+        },
+        "require-dev": {
+            "composer/composer": "1.0.*@dev",
+            "phpunit/phpunit": "3.7.*"
+        },
+        "type": "library",
+        "extra": {
+            "installer-name": "lib-wp-module"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "A multi-framework Composer library installer"
     }
 ]

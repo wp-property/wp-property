@@ -10,11 +10,6 @@ global $wp_properties;
 <h3><?php _e( 'Advanced Options', 'wpp' ); ?></h3>
 <ul>
   <li>
-    <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][show_ud_log]&label=" . __( 'Show Log.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'show_ud_log' ] ) ? $wp_properties[ 'configuration' ][ 'show_ud_log' ] : false ) ); ?>
-    <br/>
-    <span class="description"><?php _e( 'The log is always active, but the UI is hidden.  If enabled, it will be visible in the admin sidebar.', 'wpp' ); ?></span>
-  </li>
-  <li>
     <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][allow_parent_deep_depth]&label=" . __( 'Enable \'Falls Under\' deep depth.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] ) ? $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] : false ) ); ?>
     <br/>
     <span class="description"><?php printf( __( 'Allows to set child %1s as parent.', 'wpp' ), WPP_F::property_label( 'singular' ) )  ?></span>

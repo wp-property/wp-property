@@ -347,7 +347,9 @@ namespace UsabilityDynamics\WPP {
           //** Determine if current attribute is used by Google Address Validator. */
           if( ud_get_wp_property( 'configuration.address_attribute' ) == $slug ) {
             $input_type = 'wpp_address';
-            $description[] = __( 'The value is being used by Google Address Validator to determine and prepare address to valid format. However you can set coordinates manually.', ud_get_wp_property()->domain );
+
+            // Too obvious, I believe. -potanin@UD
+            // $description[] = __( 'The value is being used by Google Address Validator to determine and prepare address to valid format. However you can set coordinates manually.', ud_get_wp_property()->domain );
           }
 
           //* Is current attribute inherited from parent? If so, set it as readonly!. */
@@ -374,7 +376,7 @@ namespace UsabilityDynamics\WPP {
               $input_type = 'wpp_inherited_address';
             } else {
               $input_type = 'wpp_address';
-              $description[] = __( 'The value is being used by Google Address Validator to determine and prepare address to valid format. However you can set coordinates manually.', ud_get_wp_property()->domain );
+              //$description[] = __( 'The value is being used by Google Address Validator to determine and prepare address to valid format. However you can set coordinates manually.', ud_get_wp_property()->domain );
             }
           }
 
@@ -400,7 +402,7 @@ namespace UsabilityDynamics\WPP {
             'id' => $slug,
             'name' => $label,
             'type' => $input_type,
-            'desc' => implode( ' ', $description ),
+            'desc' => implode( ' ', (array) $description ),
             'options' => $options,
           ) ), $slug, $post );
 
@@ -454,7 +456,7 @@ namespace UsabilityDynamics\WPP {
           $field = array(
             'id' => 'property_type',
             'name' => sprintf( __( '%s Type', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
-            'desc' => sprintf( __( '%s Attributes are related to Property Type. They can be aggregated, inherited or hidden after updating the current type.', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
+            // 'desc' => sprintf( __( '%s Attributes are related to Property Type. They can be aggregated, inherited or hidden after updating the current type.', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
             'type' => 'select',
             'options' => $types,
           );
