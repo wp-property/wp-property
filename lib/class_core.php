@@ -38,6 +38,8 @@ class WPP_Core {
     //** Hook in lower init */
     add_action( 'init', array( $this, 'init_lower' ), 100 );
 
+    /// add_action( 'admin_init', array( $this, 'admin_init' ), 100 );
+
     //** Setup template_redirect */
     add_action( "template_redirect", array( $this, 'template_redirect' ) );
 
@@ -46,6 +48,27 @@ class WPP_Core {
 
     // Check settings data on accord with existing wp_properties data before option updates
     add_filter( 'wpp_settings_save', array( $this, 'check_wp_settings_data' ), 0, 2 );
+
+    // Do as early as possible
+    self::load_plugins();
+
+  }
+
+  public function load_plugins() {
+    global $wp_plugin_paths;
+
+    if( !is_plugin_active( 'wp-gallery-metabox/gallery-metabox.php' ) ) {
+
+      // claims "The plugin does not have a valid header." via error. Could be possible to work-around, but fails on first try.
+      // $result = activate_plugin( 'wp-property-v2.0/vendor/plugins/wp-gallery-metabox/gallery-metabox.php' );
+      // die( '<pre>' . print_r( $result, true ) . '</pre>' );
+
+
+      // nonetheless, we simply include it this way just like wp would in wp-settings...
+      include_once( WP_PLUGIN_DIR . '/wp-property-v2.0/vendor/plugins/wp-gallery-metabox/gallery-metabox.php' );
+
+    }
+
 
   }
 

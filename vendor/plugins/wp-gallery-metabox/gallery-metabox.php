@@ -60,7 +60,7 @@ if( !class_exists( 'BE_Gallery_Metabox' ) ) {
       // Filterable metabox settings.
       $post_types = apply_filters( 'be_gallery_metabox_post_types', array( 'post', 'page' ) );
       $context = apply_filters( 'be_gallery_metabox_context', 'normal' );
-      $priority = apply_filters( 'be_gallery_metabox_priority', 'high' );
+      $priority = apply_filters( 'be_gallery_metabox_priority', 'low' );
 
       // Loop through all post types
       foreach( $post_types as $post_type ) {
@@ -133,9 +133,10 @@ if( !class_exists( 'BE_Gallery_Metabox' ) ) {
      * Display setup for images, which include filters and AJAX return
      * @since 1.3
      *
-     * @param int $post_id
+     * @param $loop
      * @return string html output
      *
+     * @internal param int $post_id
      * @author Bill Erickson
      */
     public function gallery_display( $loop ) {

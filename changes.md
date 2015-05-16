@@ -1,4 +1,5 @@
 #### 2.0.0
+* Added ability to clone listings.
 * Moved "Advanced Settings" to the "Help" tab out of the "Developer" tab.
 * Added option to redirect certain property types to parent on front-end.
 * Changed the WPP settings export to use JSON extension.
