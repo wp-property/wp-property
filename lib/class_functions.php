@@ -1530,6 +1530,8 @@ class WPP_F extends UsabilityDynamics\Utility {
     $args = wp_parse_args( $args, array(
       'skip_existing'   => 'false',
       'return_geo_data' => false,
+      'detail' => false,
+      'categorize'      => true
     ) );
 
     extract( $args, EXTR_SKIP );
@@ -1736,13 +1738,16 @@ class WPP_F extends UsabilityDynamics\Utility {
       }
     }
 
-    //** API Callback */
+    // legacy filter
     $return = apply_filters( 'ud::geo_locate_address', $return, $results_object, $address, $localization );
 
     //** API Callback (Legacy) - If no actions have been registered for the new hook, we support the old one. */
     if ( !has_action( 'ud::geo_locate_address' ) ) {
       $return = apply_filters( 'geo_locate_address', $return, $results_object, $address, $localization );
     }
+
+    // modern filter
+    $return = apply_filters( 'wpp::geo_locate_address', $return, $results_object, $address, $localization );
 
     return $return;
 
