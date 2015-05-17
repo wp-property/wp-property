@@ -76,7 +76,7 @@ namespace UsabilityDynamics\WPP {
         <div class="wp-tab-panel">
           <ul>
             <?php  foreach ( $children as $child ) {
-              echo '<li><a href="' . get_edit_post_link( $child->ID ) . '">' . $child->post_title . '</a></li>';
+              echo '<li data-child-id="' . $child->ID .'"><a href="' . get_edit_post_link( $child->ID ) . '">' . $child->post_title . '</a> <span class="wpp-child-id">('. $child->ID .')</span></li>';
             } ?>
           </ul>
         </div>

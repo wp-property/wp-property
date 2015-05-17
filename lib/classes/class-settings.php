@@ -17,6 +17,7 @@ namespace UsabilityDynamics\WPP {
        *
        *
        * @todo For the love of god, only apply the defaults on installation. - potanin@UD
+       * @param bool $args
        */
       public function __construct( $args = false ) {
         global $wp_properties;
@@ -62,6 +63,7 @@ namespace UsabilityDynamics\WPP {
         $data['default_coords']['longitude'] = '12.0502107';
 
         //** Geo type attributes are predefined and should not be editable on property adding/updating */
+        // @notice All these fields are automatically added as post_meta on revalidation.
         $data['geo_type_attributes'] = array(
           'formatted_address',
           'street_number',
@@ -92,10 +94,21 @@ namespace UsabilityDynamics\WPP {
             'tagline' => __('Will appear on overview pages and on top of every listing page.','wpp')
           )
         );
-        
+
+
+        $_stored_settings = $this->get();
+
         //** Merge with default data. */
         $this->set( \UsabilityDynamics\Utility::extend( $data, $this->get() ) );
-        
+
+        // Check if settings have or have been upated. (we determine if configuration is good)
+        // @todo Add a better _version_ check.
+        if( isset( $_stored_settings[ '_updated' ] ) && isset( $_stored_settings[ 'version' ] ) && $_stored_settings[ 'version' ] === '2.0.0' ) {
+          return $wp_properties = $this->get();
+        }
+
+        // Continue on to load/enforce defaults.
+
         //** STEP 3. */
         
         //** Setup default property types to be used. */
@@ -124,8 +137,8 @@ namespace UsabilityDynamics\WPP {
           $this->set( 'property_stats', array(
             'location' => __('Address','wpp'),
             'price' => __('Price','wpp'),
-            'bedrooms' => __('Bedrooms','wpp'),
-            'bathrooms' => __('Bathrooms','wpp'),
+            //'bedrooms' => __('Bedrooms','wpp'),
+            //'bathrooms' => __('Bathrooms','wpp'),
             'deposit' => __('Deposit','wpp'),
             'area' => __('Area','wpp'),
             'phone_number' => __('Phone Number','wpp'),
@@ -156,8 +169,8 @@ namespace UsabilityDynamics\WPP {
         //** Determines property types that have addresses. */
         $d = $this->get( 'location_matters', false );
         if( !$d || !is_array( $d ) ) {
-          $this->set( 'location_matters', array( 
-            'building', 
+          $this->set( 'location_matters', array(
+            'building',
             'single_family_home' 
           ) );
         }
@@ -188,9 +201,7 @@ namespace UsabilityDynamics\WPP {
         $d = $this->get( 'search_conversions', false );
         if( !$d || !is_array( $d ) ) {
           $this->set( 'search_conversions', array(
-            'bedrooms' => array(
-              __( 'Studio', 'wpp' ) => '0.5'
-            )
+            'bedrooms' => array( __( 'Studio', 'wpp' ) => '0.5' )
           ) );
         }
 

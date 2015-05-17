@@ -96,11 +96,12 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
     <table class="form-table">
 
-      <tr>
+    <tr>
       <th><?php _e( 'Options', 'wpp' ); ?></th>
       <td>
         <ul>
           <li class="configuration_enable_comments"><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][enable_comments]&label=" . __( 'Enable comments.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'enable_comments' ] ) ? $wp_properties[ 'configuration' ][ 'enable_comments' ] : false ) ); ?></li>
+          <li class="configuration_enable_revisions" data-feature-since="2.0.0"><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][enable_revisions]&label=" . __( 'Enable revisions.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'enable_revisions' ] ) ? $wp_properties[ 'configuration' ][ 'enable_revisions' ] : false ) ); ?></li>
           <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][exclude_from_regular_search_results]&label=" . sprintf( __( 'Exclude %1s from regular search results.', 'wpp' ), $object_label[ 'plural' ] ), ( isset( $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] ) ? $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] : false ) ); ?></li>
           <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_automatically_regenerate_thumbnails]&label=" . __( 'Disable "on-the-fly" image regeneration.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] ) ? $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] : false ) ); ?></li>
           <?php /* <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][do_not_automatically_geo_validate_on_property_view]&label=" . __('Disable front-end "on-the-fly" address validation.', 'wpp'), $wp_properties['configuration']['do_not_automatically_geo_validate_on_property_view']); ?></li> */ ?>

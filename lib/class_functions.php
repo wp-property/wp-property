@@ -233,8 +233,32 @@ class WPP_F extends UsabilityDynamics\Utility {
         ),
         'query_var'    => 'community_feature',
         'rewrite'      => array( 'slug' => 'community_feature' )
+      ),
+      '_address_components'  => array(
+        'hierarchical'        => true,
+        'public'              => true,
+        'show_ui'             => false,
+        'show_in_nav_menus'   => false,
+        'show_tagcloud'       => false,
+        'label'        => _x( 'Location', 'taxonomy general name', 'wpp' ),
+        'labels'       => array( 'name'              => _x( 'Location', 'taxonomy general name', 'wpp' ),),
+        'query_var'    => 'location',
+        'rewrite'      => array( 'slug' => 'location' )
+      ),
+      '_geocoding_quality'  => array(
+        'hierarchical'        => false,
+        'public'              => false,
+        'show_ui'             => false,
+        'show_in_nav_menus'   => false,
+        'show_tagcloud'       => false,
+        '_options' => array(
+          'ROOFTOP' =>  'Precise',
+          'RANGE_INTERPOLATED' => 'RANGE_INTERPOLATED',
+          'GEOMETRIC_CENTER' => 'GEOMETRIC_CENTER',
+          'APPROXIMATE' => 'APPROXIMATE'
+        )
       )
-    ) );
+    ));
 
     ud_get_wp_property()->set( 'labels', apply_filters( 'wpp_object_labels', array(
       'name'               => __( 'Properties', 'wpp' ),
@@ -251,8 +275,12 @@ class WPP_F extends UsabilityDynamics\Utility {
       'parent_item_colon'  => ''
     ) ) );
 
-    //** Add support for property */
     $supports = array( 'title', 'editor', 'thumbnail' );
+
+    if( isset( $wp_properties[ 'configuration' ][ 'enable_revisions' ] ) && $wp_properties[ 'configuration' ][ 'enable_revisions' ] == 'true' ) {
+      array_push( $supports, 'revisions' );
+    }
+
     if( isset( $wp_properties[ 'configuration' ][ 'enable_comments' ] ) && $wp_properties[ 'configuration' ][ 'enable_comments' ] == 'true' ) {
       array_push( $supports, 'comments' );
     }
@@ -266,9 +294,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       '_edit_link'          => 'post.php?post=%d',
       'capability_type'     => array( 'wpp_property', 'wpp_properties' ),
       'hierarchical'        => true,
-      'rewrite'             => array(
-        'slug' => $wp_properties[ 'configuration' ][ 'base_slug' ]
-      ),
+      'rewrite'             => array( 'slug' => $wp_properties[ 'configuration' ][ 'base_slug' ] ),
       'query_var'           => $wp_properties[ 'configuration' ][ 'base_slug' ],
       'supports'            => $supports,
       'menu_icon'           => 'dashicons-admin-home'
@@ -353,7 +379,7 @@ class WPP_F extends UsabilityDynamics\Utility {
         case 'single':
 
           if( !isset( $wp_properties[ 'configuration' ][ 'do_not_use' ][ 'locations' ] ) || $wp_properties[ 'configuration' ][ 'do_not_use' ][ 'locations' ] != 'true' ) {
-            add_action( 'wp_enqueue_scripts', create_function( '', "wp_enqueue_script('google-maps');" ) );
+            //add_action( 'wp_enqueue_scripts', create_function( '', "wp_enqueue_script('google-maps');" ) );
           }
 
           add_action( 'wp_enqueue_scripts', create_function( '', "wp_enqueue_script('jquery-ui-mouse');" ) );

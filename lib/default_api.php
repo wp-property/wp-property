@@ -446,6 +446,7 @@ function wpp_property_stats_input_for_sale_make_checkbox( $content, $slug, $obje
 /**
  * Add UI to set custom coordinates on property editing page
  *
+ * @depreciated in 2.0
  * @since 1.04
  */
 function wpp_property_stats_input_address( $content, $slug, $object ) {
@@ -505,14 +506,17 @@ function wpp_property_stats_input_address( $content, $slug, $object ) {
   return $content;
 }
 
-
 /**
  * Updates numeric and currency attribute of parent property on child property saving.
  * Sets attribute's value based on children values ( sets aggregated value ).
  *
+ * * Tries to figure out which attributes can be handled as a "range". (legacy-logic)
+ * * Iterates over all children of the parent and writes any computed ranges directly to parents meta.
+ *
  * @param integer $post_id
  * @used WPP_F::save_property();
  * @author peshkov@UD
+ * @return null
  */
 function wpp_save_property_aggregated_data( $post_id ) {
   global $wpdb, $wp_properties;
@@ -521,7 +525,7 @@ function wpp_save_property_aggregated_data( $post_id ) {
     return null;
   }
 
-  //** Get children */
+  //** Get all children */
   $children = $wpdb->get_col( $wpdb->prepare( "
     SELECT ID
       FROM {$wpdb->posts}
@@ -559,13 +563,17 @@ function wpp_save_property_aggregated_data( $post_id ) {
     }
 
     foreach ( $range as $range_attribute => $range_values ) {
+
       //* Cycle through all values of this range (attribute), and fix any ranges that use dashes */
       foreach ( $range_values as $key => $single_value ) {
+
         //* Remove dollar signs */
         $single_value = str_replace( "$", '', $single_value );
+
         //* Fix ranges */
         if ( strpos( $single_value, '&ndash;' ) ) {
           $split = explode( '&ndash;', $single_value );
+
           foreach ( $split as $new_single_value ) {
             if ( !empty( $new_single_value ) ) {
               array_push( $range_values, trim( $new_single_value ) );
@@ -573,7 +581,9 @@ function wpp_save_property_aggregated_data( $post_id ) {
           }
           //* Unset original value with dash */
           unset( $range_values[ $key ] );
+
         }
+
       }
 
       $average = isset( $wp_properties[ 'configuration' ][ 'show_aggregated_value_as_average' ] ) ? $wp_properties[ 'configuration' ][ 'show_aggregated_value_as_average' ] : false;
