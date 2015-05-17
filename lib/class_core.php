@@ -38,6 +38,8 @@ class WPP_Core {
     //** Hook in lower init */
     add_action( 'init', array( $this, 'init_lower' ), 100 );
 
+    /// add_action( 'admin_init', array( $this, 'admin_init' ), 100 );
+
     //** Setup template_redirect */
     add_action( "template_redirect", array( $this, 'template_redirect' ) );
 
@@ -46,6 +48,27 @@ class WPP_Core {
 
     // Check settings data on accord with existing wp_properties data before option updates
     add_filter( 'wpp_settings_save', array( $this, 'check_wp_settings_data' ), 0, 2 );
+
+    // Do as early as possible
+    self::load_plugins();
+
+  }
+
+  public function load_plugins() {
+    global $wp_plugin_paths;
+
+    if( !is_plugin_active( 'wp-gallery-metabox/gallery-metabox.php' ) ) {
+
+      // claims "The plugin does not have a valid header." via error. Could be possible to work-around, but fails on first try.
+      // $result = activate_plugin( 'wp-property-v2.0/vendor/plugins/wp-gallery-metabox/gallery-metabox.php' );
+      // die( '<pre>' . print_r( $result, true ) . '</pre>' );
+
+
+      // nonetheless, we simply include it this way just like wp would in wp-settings...
+      include_once( WP_PLUGIN_DIR . '/wp-property-v2.0/vendor/plugins/wp-gallery-metabox/gallery-metabox.php' );
+
+    }
+
 
   }
 
@@ -162,6 +185,7 @@ class WPP_Core {
     wp_register_script( 'wp-property-admin-widgets', WPP_URL . 'scripts/wpp.admin.widgets.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-admin-settings', WPP_URL . 'scripts/wpp.admin.settings.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-backend-global', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-backend-editor', WPP_URL . 'scripts/wpp.admin.editor.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable' ), WPP_Version );
     wp_register_script( 'jquery-cookie', WPP_URL . 'scripts/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
 
@@ -214,10 +238,6 @@ class WPP_Core {
     }
 
     //** Add troubleshoot log page */
-    if( isset( $wp_properties[ 'configuration' ][ 'show_ud_log' ] ) && $wp_properties[ 'configuration' ][ 'show_ud_log' ] == 'true' ) {
-      WPP_F::add_log_page();
-    }
-
     //** Modify admin body class */
     add_filter( 'admin_body_class', array( $this, 'admin_body_class' ), 5 );
 
@@ -442,12 +462,17 @@ class WPP_Core {
    *
    * @todo Add some sort of custom capability so not only admins can make properties as featured. i.e. Agents can make their own properties featured.
    * @since 1.04
-   *
+   * @param null $post_id
+   * @return null
    */
-  function save_property( $post_id ) {
+  function save_property( $post_id = null ) {
     global $wp_properties, $wp_version;
 
+    //die( '<pre>' . print_r( debug_backtrace(), true ) . '</pre>' );
+    //die( '<pre>' . $post_id. print_r( $_POST, true ) . '</pre>' );
+    //die( '<pre>' . current_action() . print_r( $post_id, true ) . '</pre>' );
     $_wpnonce = ( version_compare( $wp_version, '3.5', '>=' ) ? 'update-post_' : 'update-property_' ) . $post_id;
+
     if( !isset( $_POST[ '_wpnonce' ] ) || !wp_verify_nonce( $_POST[ '_wpnonce' ], $_wpnonce ) || $_POST[ 'post_type' ] !== 'property' ) {
       return $post_id;
     }
@@ -483,11 +508,13 @@ class WPP_Core {
     /* get old coordinates and location */
     $old_lat = get_post_meta( $post_id, 'latitude', true );
     $old_lng = get_post_meta( $post_id, 'longitude', true );
+
     $geo_data = array(
       'old_coordinates' => ( ( empty( $old_lat ) ) || ( empty( $old_lng ) ) ) ? "" : array( 'lat' => $old_lat, 'lng' => $old_lng ),
       'old_location' => ( !empty( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) ) ? get_post_meta( $post_id, $wp_properties[ 'configuration' ][ 'address_attribute' ], true ) : ''
     );
 
+//    die( '<pre>' . $post_id . print_r( $update_data, true ) . '</pre>' );
     foreach( $update_data as $meta_key => $meta_value ) {
       $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $meta_key );
 
@@ -519,28 +546,37 @@ class WPP_Core {
     }
 
     //* Check if property has children */
-    $children = get_children( "post_parent=$post_id&post_type=property" );
+    $children = get_children( array(
+      'post_parent' => $post_id,
+      'post_type' => 'property'
+    ) );
 
     //* Write any data to children properties that are supposed to inherit things */
-    if( count( $children ) > 0 ) {
-      //* 1) Go through all children */
-      foreach( $children as $child_id => $child_data ) {
-        //* Determine child property_type */
-        $child_property_type = get_post_meta( $child_id, 'property_type', true );
-        //* Check if child's property type has inheritence rules, and if meta_key exists in inheritance array */
-        if( is_array( $wp_properties[ 'property_inheritance' ][ $child_property_type ] ) ) {
-          foreach( $wp_properties[ 'property_inheritance' ][ $child_property_type ] as $i_meta_key ) {
-            $parent_meta_value = get_post_meta( $post_id, $i_meta_key, true );
-            //* inheritance rule exists for this property_type for this meta_key */
-            update_post_meta( $child_id, $i_meta_key, $parent_meta_value );
-          }
+    //* 1) Go through all children */
+    foreach( (array) $children as $child_id => $child_data ) {
+
+      //* Determine child property_type */
+      $child_property_type = get_post_meta( $child_id, 'property_type', true );
+
+      //* Check if child's property type has inheritence rules, and if meta_key exists in inheritance array */
+      if( is_array( $wp_properties[ 'property_inheritance' ][ $child_property_type ] ) ) {
+        foreach( $wp_properties[ 'property_inheritance' ][ $child_property_type ] as $i_meta_key ) {
+          $parent_meta_value = get_post_meta( $post_id, $i_meta_key, true );
+          //* inheritance rule exists for this property_type for this meta_key */
+          update_post_meta( $child_id, $i_meta_key, $parent_meta_value );
         }
       }
     }
 
-    WPP_F::maybe_set_gpid( $post_id );
+    $_gpid = WPP_F::maybe_set_gpid( $post_id );
 
-    do_action( 'save_property', $post_id );
+    do_action( 'save_property', $post_id, array(
+      'children' => $children,
+      'gpid' => $_gpid,
+      'update_data' => $update_data,
+      'geo_data' => $geo_data
+    ));
+
   }
 
   /**
@@ -559,7 +595,7 @@ class WPP_Core {
           <?php if( current_user_can( 'manage_options' ) ) { ?>
             <li><?php echo WPP_F::checkbox( "name=wpp_data[meta][featured]&label=" . __( 'Display in featured listings.', 'wpp' ), get_post_meta( $post->ID, 'featured', true ) ); ?></li>
           <?php } ?>
-          <?php do_action( 'wpp_publish_box_options' ); ?>
+          <?php do_action( 'wpp_publish_box_options', $post ); ?>
         </ul>
       </div>
     <?php
@@ -572,7 +608,9 @@ class WPP_Core {
    * Called in via page_row_actions filter
    *
    * @since 0.5
-   *
+   * @param $actions
+   * @param $post
+   * @return
    */
   function property_row_actions( $actions, $post ) {
     if( $post->post_type != 'property' )

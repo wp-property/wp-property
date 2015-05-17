@@ -2,7 +2,7 @@
 // Prevent loading this file directly
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'RWMB_Wpp_Parent_Field' ) ) {
+if( !class_exists( 'RWMB_Wpp_Parent_Field' ) && class_exists( 'RWMB_Field' ) ) {
   class RWMB_Wpp_Parent_Field extends RWMB_Field {
 
     /**
@@ -11,8 +11,8 @@ if ( ! class_exists( 'RWMB_Wpp_Parent_Field' ) ) {
      * @return void
      */
     static function admin_enqueue_scripts() {
-      wp_enqueue_style( 'field-wpp-parent', ud_get_wp_property()->path( 'static/styles/fields/wpp-parent.css' ), array('wp-admin'), ud_get_wp_property('version') );
-      wp_enqueue_script( 'field-wpp-parent', ud_get_wp_property()->path( 'static/scripts/fields/wpp-parent.js' ), array( 'jquery-ui-autocomplete', 'wpp-localization' ), ud_get_wp_property('version'), true );
+      wp_enqueue_style( 'field-wpp-parent', ud_get_wp_property()->path( 'static/styles/fields/wpp-parent.css' ), array( 'wp-admin' ), ud_get_wp_property( 'version' ) );
+      wp_enqueue_script( 'field-wpp-parent', ud_get_wp_property()->path( 'static/scripts/fields/wpp-parent.js' ), array( 'jquery-ui-autocomplete', 'wpp-localization' ), ud_get_wp_property( 'version' ), true );
     }
 
     /**
@@ -26,15 +26,15 @@ if ( ! class_exists( 'RWMB_Wpp_Parent_Field' ) ) {
     static function html( $meta, $field ) {
       global $post;
 
-      if ( ! is_array( $meta ) )
+      if( !is_array( $meta ) )
         $meta = array( $meta );
 
-      if ( is_string( $field['options'] ) )  {
-        $options = $field['options'];
+      if( is_string( $field[ 'options' ] ) ) {
+        $options = $field[ 'options' ];
       } else {
         $options = array();
-        foreach ( $field['options'] as $value => $label ) {
-          $options[] = array(
+        foreach( $field[ 'options' ] as $value => $label ) {
+          $options[ ] = array(
             'value' => $value,
             'label' => $label,
           );
@@ -47,10 +47,10 @@ if ( ! class_exists( 'RWMB_Wpp_Parent_Field' ) ) {
       // The value(s) of the field is store in hidden input(s). See below.
       $html = sprintf(
         '<input type="text" class="rwmb-autocomplete" id="%s" data-name="%s" data-options="%s" size="%s">',
-        $field['id'],
-        $field['field_name'],
+        $field[ 'id' ],
+        $field[ 'field_name' ],
         esc_attr( $options ),
-        $field['size']
+        $field[ 'size' ]
       );
 
       $html .= '<div class="rwmb-autocomplete-results">';
@@ -66,12 +66,12 @@ if ( ! class_exists( 'RWMB_Wpp_Parent_Field' ) ) {
 			';
 
       if( $post->post_parent > 0 ) {
-        $label = self::prepare_parent_label($post->post_parent);
+        $label = self::prepare_parent_label( $post->post_parent );
         $html .= sprintf(
           $tpl,
           $label,
           __( 'Delete', 'meta-box' ),
-          $field['field_name'],
+          $field[ 'field_name' ],
           $post->post_parent
         );
       }

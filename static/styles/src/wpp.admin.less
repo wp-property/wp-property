@@ -1975,3 +1975,65 @@ p.pad10 {
   }
 
 }
+
+
+body.property_page_all_properties {
+
+  .uisf-taxonomy-wrapper {
+    .uisf-label {
+      opacity:0;
+      display: none;
+    }
+
+  }
+
+  .uisf-text-wrapper {
+    position: relative;
+
+    .uisf-label {
+      opacity:0;
+      display: none;
+    }
+
+    input.sui-text {
+      height: 0;
+      padding: 1.2em;
+      width: 100%;
+    }
+
+  }
+
+  .sui-text {
+
+  }
+}
+body.post-type-property {
+
+
+  &.wpp-content-editor-hidden {
+
+    // hide all other buttons
+    .wp-editor-tabs > .wp-switch-editor:not(.wpp-editor-toggler) {
+      display: none;
+    }
+
+    table#post-status-info,
+    div.wp-editor-container {
+      display: none;
+    }
+  }
+
+  /*
+  .postarea {
+    display: none;
+  }
+  */
+
+  .rwmb-wpp_address-wrapper {}
+
+  input[type=text].rwmb-text {
+    width: 30em;
+    max-width: 90%;
+
+  }
+}

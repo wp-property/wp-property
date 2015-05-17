@@ -1,11 +1,14 @@
 <?php
+/**
+ *
+ * Inherited means "delegated" from a parent listing down to a child listing.
+ *
+ */
 // Prevent loading this file directly
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'RWMB_Wpp_Inherited_Address_Field' ) )
-{
-  class RWMB_Wpp_Inherited_Address_Field extends RWMB_Text_Field
-  {
+if( !class_exists( 'RWMB_Wpp_Inherited_Address_Field' ) && class_exists( 'RWMB_Text_Field' ) ) {
+  class RWMB_Wpp_Inherited_Address_Field extends RWMB_Text_Field {
 
     static $map = array(
       'latitude',
@@ -15,7 +18,7 @@ if ( ! class_exists( 'RWMB_Wpp_Inherited_Address_Field' ) )
       'manual_coordinates',
     );
 
-    /**
+    /*
      * Get field HTML
      *
      * @param mixed $meta
@@ -26,13 +29,13 @@ if ( ! class_exists( 'RWMB_Wpp_Inherited_Address_Field' ) )
     static function html( $meta, $field ) {
 
       $html = sprintf(
-        '<input type="text" readonly="readonly" class="rwmb-text" name="%s" id="%s" value="%s" placeholder="%s" size="%s" %s>%s',
-        $field['field_name'],
-        $field['id'],
+        '<input type="text" data-field-type="wpp-inheriteed-address" readonly="readonly" class="rwmb-text" name="%s" id="%s" value="%s" placeholder="%s" size="%s" %s>%s',
+        $field[ 'field_name' ],
+        $field[ 'id' ],
         $meta[ 'value' ],
-        $field['placeholder'],
-        $field['size'],
-        $field['datalist'] ? "list='{$field['datalist']['id']}'" : '',
+        $field[ 'placeholder' ],
+        $field[ 'size' ],
+        $field[ 'datalist' ] ? "list='{$field['datalist']['id']}'" : '',
         self::datalist_html( $field )
       );
 
@@ -59,7 +62,7 @@ if ( ! class_exists( 'RWMB_Wpp_Inherited_Address_Field' ) )
      */
     static function save( $new, $old, $post_id, $field ) {
 
-      update_post_meta( $post_id, $field['id'], $new, $old );
+      update_post_meta( $post_id, $field[ 'id' ], $new, $old );
 
       $attributes = array_keys( ud_get_wp_property( 'property_stats', array() ) );
 
@@ -74,8 +77,8 @@ if ( ! class_exists( 'RWMB_Wpp_Inherited_Address_Field' ) )
     /**
      * Get meta value
      *
-     * @param int   $post_id
-     * @param bool  $saved
+     * @param int $post_id
+     * @param bool $saved
      * @param array $field
      *
      * @return mixed
@@ -86,7 +89,7 @@ if ( ! class_exists( 'RWMB_Wpp_Inherited_Address_Field' ) )
         'options' => array()
       );
 
-      if ( empty( $field['id'] ) || ud_get_wp_property('configuration.address_attribute') !== $field['id'] )
+      if( empty( $field[ 'id' ] ) || ud_get_wp_property( 'configuration.address_attribute' ) !== $field[ 'id' ] )
         return array();
 
       /**
@@ -94,12 +97,12 @@ if ( ! class_exists( 'RWMB_Wpp_Inherited_Address_Field' ) )
        */
       $post = get_post( $post_id );
       if( $post && $post->post_parent > 0 ) {
-        $property_inheritance = ud_get_wp_property('property_inheritance', array());
+        $property_inheritance = ud_get_wp_property( 'property_inheritance', array() );
         $type = get_post_meta( $post_id, 'property_type', true );
-        if( !isset( $property_inheritance[ $type ] ) || !in_array( $field['id'], $property_inheritance[ $type ] ) ) {
+        if( !isset( $property_inheritance[ $type ] ) || !in_array( $field[ 'id' ], $property_inheritance[ $type ] ) ) {
           return array();
         }
-        $meta[ 'value' ] = get_post_meta( $post->post_parent, $field['id'], true );
+        $meta[ 'value' ] = get_post_meta( $post->post_parent, $field[ 'id' ], true );
 
         $attributes = array_keys( ud_get_wp_property( 'property_stats', array() ) );
 

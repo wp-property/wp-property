@@ -15,6 +15,8 @@ namespace UsabilityDynamics\WPP {
        * Constructor
        * Sets default data.
        *
+       *
+       * @todo For the love of god, only apply the defaults on installation. - potanin@UD
        */
       public function __construct( $args = false ) {
         global $wp_properties;

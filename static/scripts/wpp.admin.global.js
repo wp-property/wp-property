@@ -5,6 +5,9 @@
  *
  */
 
+if( !wpp ) {
+}
+
 /**
  * Assign Property Stat to Group Functionality
  *

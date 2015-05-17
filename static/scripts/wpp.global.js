@@ -22,6 +22,10 @@ if ( top === self ) {
 
 jQuery.extend( wpp = wpp || {}, {
 
+  ui: {
+    editor: {}
+  },
+
   // Global Settings
   settings: {
     debug: false

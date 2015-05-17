@@ -2,10 +2,8 @@
 // Prevent loading this file directly
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'RWMB_Wpp_Checkbox_Field' ) )
-{
-  class RWMB_Wpp_Checkbox_Field extends RWMB_Checkbox_Field
-  {
+if( !class_exists( 'RWMB_Wpp_Checkbox_Field' ) && class_exists( 'RWMB_Checkbox_Field' ) ) {
+  class RWMB_Wpp_Checkbox_Field extends RWMB_Checkbox_Field {
 
     /**
      * Get field HTML
@@ -15,13 +13,12 @@ if ( ! class_exists( 'RWMB_Wpp_Checkbox_Field' ) )
      *
      * @return string
      */
-    static function html( $meta, $field )
-    {
-      $desc = $field['desc'] ? "<span id='{$field['id']}_description' class='description'>{$field['desc']}</span>" : '';
+    static function html( $meta, $field ) {
+      $desc = $field[ 'desc' ] ? "<span id='{$field['id']}_description' class='description'>{$field['desc']}</span>" : '';
       return sprintf(
         '<label><input type="checkbox" class="rwmb-checkbox" name="%s" id="%s" value="true" %s> %s</label>',
-        $field['field_name'],
-        $field['id'],
+        $field[ 'field_name' ],
+        $field[ 'id' ],
         checked( $meta, 'true', false ),
         $desc
       );
@@ -35,13 +32,12 @@ if ( ! class_exists( 'RWMB_Wpp_Checkbox_Field' ) )
      *
      * @param mixed $new
      * @param mixed $old
-     * @param int   $post_id
+     * @param int $post_id
      * @param array $field
      *
      * @return int
      */
-    static function value( $new, $old, $post_id, $field )
-    {
+    static function value( $new, $old, $post_id, $field ) {
       return $new == 'true' ? 'true' : 'false';
     }
 

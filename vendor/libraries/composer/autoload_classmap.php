@@ -174,4 +174,6 @@ return array(
     'UsabilityDynamics\\WP\\TGM_Bulk_Installer' => $vendorDir . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-tgm-bulk-installer.php',
     'UsabilityDynamics\\WP\\TGM_Bulk_Installer_Skin' => $vendorDir . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-tgm-bulk-installer.php',
     'UsabilityDynamics\\WP\\TGM_Plugin_Activation' => $vendorDir . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-tgm-plugin-activation.php',
+    'UsabilityDynamics\\WP_Module\\Bootstrap' => $vendorDir . '/usabilitydynamics/lib-wp-module/lib/class-bootstrap.php',
+    'UsabilityDynamics\\WP_Module\\WP_Module' => $vendorDir . '/usabilitydynamics/lib-wp-module/lib/class-wp-module.php',
 );

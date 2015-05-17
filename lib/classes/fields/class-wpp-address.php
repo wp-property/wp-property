@@ -2,10 +2,8 @@
 // Prevent loading this file directly
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'RWMB_Wpp_Address_Field' ) )
-{
-  class RWMB_Wpp_Address_Field extends RWMB_Text_Field
-  {
+if( !class_exists( 'RWMB_Wpp_Address_Field' ) && class_exists( 'RWMB_Text_Field' ) ) {
+  class RWMB_Wpp_Address_Field extends RWMB_Text_Field {
 
     /**
      * Enqueue scripts and styles
@@ -29,11 +27,11 @@ if ( ! class_exists( 'RWMB_Wpp_Address_Field' ) )
       global $post;
 
       $property = get_property( $post->ID, array(
-        'get_children'          => 'false',
-        'return_object'         => 'true',
-        'load_gallery'          => 'false',
-        'load_thumbnail'        => 'false',
-        'load_parent'           => 'false',
+        'get_children' => 'false',
+        'return_object' => 'true',
+        'load_gallery' => 'false',
+        'load_thumbnail' => 'false',
+        'load_parent' => 'false',
       ) );
 
       ob_start();
@@ -41,18 +39,18 @@ if ( ! class_exists( 'RWMB_Wpp_Address_Field' ) )
       <div class="wpp_attribute_row_address">
         <?php
         printf(
-          '<input type="text" class="rwmb-text" name="wpp_data[meta][%s]" id="%s" value="%s" placeholder="%s" size="%s" %s>',
-          $field['field_name'],
-          $field['id'],
+          '<input type="text" data-field-type="wpp-address" class="rwmb-text" name="wpp_data[meta][%s]" id="%s" value="%s" placeholder="%s" size="%s" %s>',
+          $field[ 'field_name' ],
+          $field[ 'id' ],
           $meta,
-          $field['placeholder'],
-          $field['size'],
-          $field['datalist'] ? "list='{$field['datalist']['id']}'" : ''
+          $field[ 'placeholder' ],
+          $field[ 'size' ],
+          $field[ 'datalist' ] ? "list='{$field['datalist']['id']}'" : ''
         );
-        echo $field['desc'] ? "<p id='{$field['id']}_description' class='description'>{$field['desc']}</p>" : '';
+        echo $field[ 'desc' ] ? "<p id='{$field['id']}_description' class='description'>{$field['desc']}</p>" : '';
         ?>
-        <?php if( !empty( $property ) ) : ?>
-          <div class="wpp_attribute_row_address_options">
+        <?php if( !empty( $property ) && current_user_can( 'manage_wpp_settings' ) ) : ?>
+          <div class="wpp_attribute_row_address_options hidden">
             <input type="hidden" name="wpp_data[meta][manual_coordinates]" value="false"/>
             <input type="checkbox" id="wpp_manual_coordinates" name="wpp_data[meta][manual_coordinates]" value="true" <?php echo isset( $property->manual_coordinates ) && in_array( $property->manual_coordinates, array( 'true', '1' ) ) ? 'checked="checked"' : ''; ?> />
             <label for="wpp_manual_coordinates"><?php _e( 'Set Coordinates Manually.', ud_get_wp_property()->domain ); ?></label>
@@ -89,7 +87,8 @@ if ( ! class_exists( 'RWMB_Wpp_Address_Field' ) )
      * @param $post_id
      * @param $field
      */
-    static function save( $new, $old, $post_id, $field ) {}
+    static function save( $new, $old, $post_id, $field ) {
+    }
 
     /**
      * Show end HTML markup for fields

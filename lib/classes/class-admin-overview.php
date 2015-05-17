@@ -1,11 +1,9 @@
 <?php
-
 /**
  * Overview UI
  *
  * @author UsabilityDynamics, inc
  */
-
 namespace UsabilityDynamics\WPP {
 
   if (!class_exists('UsabilityDynamics\WPP\Admin_Overview')) {
@@ -44,6 +42,7 @@ namespace UsabilityDynamics\WPP {
         add_action( 'add_meta_boxes_'.$this->page->screen_id, array( $this, 'add_meta_boxes' ) );
 
         add_filter( 'ud:ui:page:title', array( $this, 'render_page_title' ));
+        add_filter('set-screen-option', array( $this, 'set_per_page_option' ), 10, 3);
 
         /**
          * Next used to add custom submenu page 'All Properties' with Javascript dataTable
@@ -68,16 +67,47 @@ namespace UsabilityDynamics\WPP {
         do_action( 'wpp_admin_menu' );
       }
 
-      /**
+      public function set_per_page_option( $status, $option, $value ){
+
+        die( '<pre>' . $option . print_r( $value, true ) . '</pre>' );
+        if ( 'wpp_listings_per_page' == $option ) return $value;
+
+        return $status;
+
+      }
+
+        /**
        * Init our List Table before page loading
        */
       public function preload(){
+
+        $user = get_current_user_id();
+        $screen = get_current_screen();
+
+        add_screen_option( 'per_page', array(
+          'label' => __('Number of listings per page.'),
+          'default' => 50,
+          'option' => 'wpp_listings_per_page'
+        ) );
+
+
+        //$_key = $screen->get_option('wpp_listings_per_page', 'option');
+        //die( '<pre>' . print_r( $_key, true ) . '</pre>' );
+        //$per_page = get_user_meta( get_current_user_id(), $_key , true);
+
+        //die( '<pre>' . print_r( $per_page, true ) . '</pre>' );
+        if ( empty ( $per_page) || $per_page < 1 ) {
+          $per_page = 50;
+        }
+
         $this->list_table = new List_Table( array(
           'name' => 'wpp_overview',
+          'per_page' => $per_page,
           'filter' => array(
             'fields' => $this->get_filter_fields(),
           )
         ) );
+
       }
 
       /**
@@ -266,7 +296,8 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       *
+       * @param $title
+       * @return string
        */
       public function render_page_title( $title ) {
         $screen = get_current_screen();
