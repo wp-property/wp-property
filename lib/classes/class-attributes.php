@@ -130,6 +130,8 @@ namespace UsabilityDynamics\WPP {
        *
        * @todo Consider putting this into settings action, or somewhere, so it its only ran once, or adding caching
        * @version 1.17.3
+       * @param bool $attribute
+       * @return
        */
       static public function get_attribute_data( $attribute = false ) {
         $wp_properties = ud_get_wp_property()->get();

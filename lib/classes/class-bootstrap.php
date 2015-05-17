@@ -26,8 +26,7 @@ namespace UsabilityDynamics\WPP {
        * Instantaite class.
        */
       public function init() {
-        global $wp_properties;
-        
+
         //** Init Settings */
         $this->settings = new Settings( array(
           'key'  => 'wpp_settings',

@@ -188,11 +188,10 @@ class WPP_Core {
     wp_register_script( 'wp-property-backend-editor', WPP_URL . 'scripts/wpp.admin.editor.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable' ), WPP_Version );
     wp_register_script( 'jquery-cookie', WPP_URL . 'scripts/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
+    wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?sensor=true' );
 
     wp_register_script( 'wpp-md5', WPP_URL . 'scripts/md5.js', array( 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'google-maps', '//maps.google.com/maps/api/js?sensor=true' );
     wp_register_script( 'wpp-jquery-gmaps', WPP_URL . 'scripts/jquery.ui.map.min.js', array( 'google-maps', 'jquery-ui-core', 'jquery-ui-widget', 'wpp-localization' ) );
-
     wp_register_script( 'wpp-jquery-nivo-slider', WPP_URL . 'scripts/jquery.nivo.slider.pack.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-address', WPP_URL . 'scripts/jquery.address-1.5.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-scrollTo', WPP_URL . 'scripts/jquery.scrollTo-min.js', array( 'jquery', 'wpp-localization' ) );

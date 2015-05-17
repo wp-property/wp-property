@@ -1288,7 +1288,10 @@ endif;
 if ( !function_exists( 'draw_property_search_form' ) ):
   function draw_property_search_form( $args = false ) {
     global $wp_properties;
-    $defaults = array(
+
+    WPP_F::force_script_inclusion( 'wpp-jquery-number-format' );
+
+    $args = wp_parse_args( $args, array(
       'search_attributes' => false,
       'searchable_property_types' => false,
       'use_pagination' => 'on',
@@ -1298,10 +1301,9 @@ if ( !function_exists( 'draw_property_search_form' ) ):
       'instance_id' => false,
       'sort_order' => false,
       'cache' => true
-    );
+    ) );
 
-    WPP_F::force_script_inclusion( 'wpp-jquery-number-format' );
-    $args = wp_parse_args( $args, $defaults );
+
     if ( empty( $args[ 'search_attributes' ] ) && isset( $args[ 'searchable_attributes' ] ) ) {
       $args[ 'search_attributes' ] = $args[ 'searchable_attributes' ];
     }
@@ -1309,22 +1311,25 @@ if ( !function_exists( 'draw_property_search_form' ) ):
     extract( $args, EXTR_SKIP );
     $search_values = array();
     $property_type_flag = false;
+
     //** Bail if no search attributes passed */
-    if ( !is_array( $search_attributes ) ) {
+    if ( !is_array( $args['search_attributes'] ) ) {
       return;
     }
 
     $property_stats = $wp_properties[ 'property_stats' ];
 
-    die( '<pre>' . print_r( $property_stats, true ) . '</pre>' );
+
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
       $property_stats[ 'property_type' ] = __( 'Property Type', 'wpp' );
     }
 
     //** Load search values for attributes (from cache, or generate) */
     if ( !empty( $search_attributes ) && !empty( $searchable_property_types ) ) {
-      $search_values = WPP_F::get_search_values( $search_attributes, $searchable_property_types, $cache, $instance_id );
+      $search_values = WPP_F::get_search_values( $search_attributes, $searchable_property_types, $args['cache'], $args['instance_id'] );
     }
+
+
     //** This looks clumsy - potanin@UD */
     if ( array_key_exists( 'property_type', array_fill_keys( $search_attributes, 1 ) ) && is_array( $searchable_property_types ) && count( $searchable_property_types ) > 1 ) {
       $spt = array_fill_keys( $searchable_property_types, 1 );
@@ -1339,7 +1344,8 @@ if ( !function_exists( 'draw_property_search_form' ) ):
         }
       }
     } ?>
-    <form action="<?php echo WPP_F::base_url( $wp_properties[ 'configuration' ][ 'base_slug' ] ); ?>" method="post">
+
+    <form action="<?php echo WPP_F::base_url( $wp_properties[ 'configuration' ][ 'base_slug' ] ); ?>" method="post" class="wpp_shortcode_search_form">
       <?php do_action( "draw_property_search_form", $args ); ?>
       <?php if ( $sort_order ) { ?>
         <input type="hidden" name="wpp_search[sort_order]" value="<?php echo $sort_order; ?>"/>
@@ -1422,8 +1428,7 @@ if ( !function_exists( 'draw_property_search_form' ) ):
         <li class="wpp_search_form_element seach_attribute_<?php echo $attrib; ?>  wpp_search_attribute_type_<?php echo isset( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] ) ? $wp_properties[ 'searchable_attr_fields' ][ $attrib ] : $attrib; ?> <?php echo( ( !empty( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] ) && $wp_properties[ 'searchable_attr_fields' ][ $attrib ] == 'checkbox' ) ? 'wpp-checkbox-el' : '' ); ?><?php echo( ( !empty( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] ) && ( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] == 'multi_checkbox' && count( $search_values[ $attrib ] ) == 1 ) || ( isset( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] ) && $wp_properties[ 'searchable_attr_fields' ][ $attrib ] == 'checkbox' ) ) ? ' single_checkbox' : '' ) ?>">
           <?php $random_element_id = 'wpp_search_element_' . rand( 1000, 9999 ); ?>
 
-          <label for="<?php echo $random_element_id; ?>" class="wpp_search_label wpp_search_label_<?php echo $attrib; ?>"><?php echo $label; ?>
-            <span class="wpp_search_post_label_colon">:</span></label>
+          <label for="<?php echo $random_element_id; ?>" class="wpp_search_label wpp_search_label_<?php echo $attrib; ?>"><?php echo $label; ?><span class="wpp_search_post_label_colon">:</span></label>
 
           <div class="wpp_search_attribute_wrap">
             <?php
@@ -1470,7 +1475,7 @@ if ( !function_exists( 'wpp_render_search_input' ) ):
   function wpp_render_search_input( $args = false ) {
     global $wp_properties;
 
-    $defaults = array(
+    extract( $args = wp_parse_args( $args, array(
       'type' => 'input',
       'input_type' => false,
       'search_values' => false,
@@ -1478,16 +1483,17 @@ if ( !function_exists( 'wpp_render_search_input' ) ):
       'random_element_id' => 'wpp_search_element_' . rand( 1000, 9999 ),
       'value' => false,
       'placeholder' => false
-    );
+    ) ) );
 
-    extract( $args = wp_parse_args( $args, $defaults ) );
-    $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $attrib );
+    $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $args['attrib'] );
 
     ///die( '<pre>' . print_r( , true ) . '</pre>' );
     $use_input_type = isset( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] ) ? $wp_properties[ 'searchable_attr_fields' ][ $attrib ] : false;
-    if ( !empty( $input_type ) ) {
-      $use_input_type = $input_type;
+
+    if ( !empty( $args->input_type ) ) {
+      $use_input_type = $args->input_type;
     }
+
     if ( !empty( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] ) ) {
       switch ( $use_input_type ) {
         case 'input':

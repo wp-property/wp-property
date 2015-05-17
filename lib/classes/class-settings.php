@@ -95,7 +95,6 @@ namespace UsabilityDynamics\WPP {
           )
         );
 
-
         $_stored_settings = $this->get();
 
         //** Merge with default data. */

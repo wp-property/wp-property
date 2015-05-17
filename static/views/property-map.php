@@ -66,6 +66,7 @@ $this_map_dom_id = 'property_map_' . rand( 10000, 99999 );
       var myOptions = {
         zoom: <?php echo $zoom_level; ?>,
         center: these_coords,
+        "scroll wheel": false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
 

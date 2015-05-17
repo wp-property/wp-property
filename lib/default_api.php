@@ -238,7 +238,7 @@ class wpp_default_api {
 add_filter( 'plugins_loaded', array( 'wpp_default_api', 'plugins_loaded' ), 0, 9 );
 
 // Widget address format
-add_filter( "wpp_stat_filter_{$wp_properties[ 'configuration' ]['address_attribute']}", "wpp_format_address_attribute", 0, 3 );
+//add_filter( "wpp_stat_filter_{$wp_properties[ 'configuration' ]['address_attribute']}", "wpp_format_address_attribute", 0, 3 );
 
 // Add additional Google Maps localizations
 add_filter( "wpp_google_maps_localizations", "wpp_add_additional_google_maps_localizations" );
@@ -268,16 +268,16 @@ if ( isset( $wp_properties[ 'numeric_attributes' ] ) && is_array( $wp_properties
   }
 }
 
-  //** Format values for checkboxes */
-  if ( isset( $wp_properties['searchable_attr_fields'] ) && is_array( $wp_properties['searchable_attr_fields'] ) ) {
-    foreach( $wp_properties['searchable_attr_fields'] as $key => $value ) {
-      if ( $value == 'checkbox' ) {
-        add_filter("wpp_stat_filter_$key", create_function(' $value ', ' return $value == "0" ? __( "No", "wpp" ) : __( "Yes", "wpp" ); '));
-      }
+//** Format values for checkboxes */
+if ( isset( $wp_properties['searchable_attr_fields'] ) && is_array( $wp_properties['searchable_attr_fields'] ) ) {
+  foreach( $wp_properties['searchable_attr_fields'] as $key => $value ) {
+    if ( $value == 'checkbox' ) {
+      add_filter("wpp_stat_filter_$key", create_function(' $value ', ' return $value == "0" ? __( "No", "wpp" ) : __( "Yes", "wpp" ); '));
     }
   }
+}
 
-  add_filter("wpp_stat_filter_phone_number", 'format_phone_number');
+add_filter("wpp_stat_filter_phone_number", 'format_phone_number');
 
 // Exclude hidden attributes from frontend
 add_filter( 'wpp_get_property', 'wpp_exclude_hidden_attributes' );
@@ -289,12 +289,12 @@ add_filter( 'wpp_searchable_attributes', 'add_city_to_searchable' );
 
 add_filter( 'wpp_property_stat_labels', 'wpp_unique_key_labels', 20 );
 
-add_filter( 'the_password_form', 'wpp_password_protected_property_form' );
+// add_filter( 'the_password_form', 'wpp_password_protected_property_form' );
 
 // Coordinate manual override
-add_filter( 'wpp_property_stats_input_' . $wp_properties[ 'configuration' ][ 'address_attribute' ], 'wpp_property_stats_input_address', 0, 3 );
+// add_filter( 'wpp_property_stats_input_' . $wp_properties[ 'configuration' ][ 'address_attribute' ], 'wpp_property_stats_input_address', 0, 3 );
 
-  add_action('save_property', 'wpp_save_property_aggregated_data' );
+// add_action('save_property', 'wpp_save_property_aggregated_data' );
 
 //add_action("wpp_ui_after_attribute_{$wp_properties['configuration']['address_attribute']}", 'wpp_show_coords');
 add_action( 'wpp_ui_after_attribute_price', 'wpp_show_week_month_selection' );
@@ -446,7 +446,7 @@ function wpp_property_stats_input_for_sale_make_checkbox( $content, $slug, $obje
 /**
  * Add UI to set custom coordinates on property editing page
  *
- * @depreciated in 2.0
+ * @depreciated in
  * @since 1.04
  */
 function wpp_property_stats_input_address( $content, $slug, $object ) {

@@ -186,79 +186,63 @@ class WPP_F extends UsabilityDynamics\Utility {
   static public function register_post_type_and_taxonomies() {
     global $wp_properties;
 
+    // @note legacy taxonomies. (perhaps disable for new installers, but make available via some option)
+    add_filter( 'wpp_taxonomies', function() {
+
+      return array(
+        'property_feature'  => array(
+          'hierarchical'        => false,
+          'public'              => true,
+          'show_ui'             => true,
+          'show_in_nav_menus'   => true,
+          'show_tagcloud'       => true,
+          'label'        => _x( 'Features', 'taxonomy general name', 'wpp' ),
+          'labels'       => array(
+            'name'              => _x( 'Features', 'taxonomy general name', 'wpp' ),
+            'singular_name'     => _x( 'Feature', 'taxonomy singular name', 'wpp' ),
+            'search_items'      => __( 'Search Features', 'wpp' ),
+            'all_items'         => __( 'All Features', 'wpp' ),
+            'parent_item'       => __( 'Parent Feature', 'wpp' ),
+            'parent_item_colon' => __( 'Parent Feature:', 'wpp' ),
+            'edit_item'         => __( 'Edit Feature', 'wpp' ),
+            'update_item'       => __( 'Update Feature', 'wpp' ),
+            'add_new_item'      => __( 'Add New Feature', 'wpp' ),
+            'new_item_name'     => __( 'New Feature Name', 'wpp' ),
+            'menu_name'         => __( 'Feature', 'wpp' )
+          ),
+          'query_var'    => 'property_feature',
+          'rewrite'      => array( 'slug' => 'feature' )
+        ),
+        'community_feature' => array(
+          'hierarchical' => false,
+          'public'              => true,
+          'show_ui'             => true,
+          'show_in_nav_menus'   => true,
+          'show_tagcloud'       => true,
+          'label'        => _x( 'Community Features', 'taxonomy general name', 'wpp' ),
+          'labels'       => array(
+            'name'              => _x( 'Community Features', 'taxonomy general name', 'wpp' ),
+            'singular_name'     => _x( 'Community Feature', 'taxonomy singular name', 'wpp' ),
+            'search_items'      => __( 'Search Community Features', 'wpp' ),
+            'all_items'         => __( 'All Community Features', 'wpp' ),
+            'parent_item'       => __( 'Parent Community Feature', 'wpp' ),
+            'parent_item_colon' => __( 'Parent Community Feature:', 'wpp' ),
+            'edit_item'         => __( 'Edit Community Feature', 'wpp' ),
+            'update_item'       => __( 'Update Community Feature', 'wpp' ),
+            'add_new_item'      => __( 'Add New Community Feature', 'wpp' ),
+            'new_item_name'     => __( 'New Community Feature Name', 'wpp' ),
+            'menu_name'         => __( 'Community Feature', 'wpp' )
+          ),
+          'query_var'    => 'community_feature',
+          'rewrite'      => array( 'slug' => 'community_feature' )
+        ),
+      );
+
+    }, 4 );
+
+
     // Setup taxonomies
-    $wp_properties[ 'taxonomies' ] = apply_filters( 'wpp_taxonomies', array(
-      'property_feature'  => array(
-        'hierarchical'        => false,
-        'public'              => true,
-        'show_ui'             => true,
-        'show_in_nav_menus'   => true,
-        'show_tagcloud'       => true,
-        'label'        => _x( 'Features', 'taxonomy general name', 'wpp' ),
-        'labels'       => array(
-          'name'              => _x( 'Features', 'taxonomy general name', 'wpp' ),
-          'singular_name'     => _x( 'Feature', 'taxonomy singular name', 'wpp' ),
-          'search_items'      => __( 'Search Features', 'wpp' ),
-          'all_items'         => __( 'All Features', 'wpp' ),
-          'parent_item'       => __( 'Parent Feature', 'wpp' ),
-          'parent_item_colon' => __( 'Parent Feature:', 'wpp' ),
-          'edit_item'         => __( 'Edit Feature', 'wpp' ),
-          'update_item'       => __( 'Update Feature', 'wpp' ),
-          'add_new_item'      => __( 'Add New Feature', 'wpp' ),
-          'new_item_name'     => __( 'New Feature Name', 'wpp' ),
-          'menu_name'         => __( 'Feature', 'wpp' )
-        ),
-        'query_var'    => 'property_feature',
-        'rewrite'      => array( 'slug' => 'feature' )
-      ),
-      'community_feature' => array(
-        'hierarchical' => false,
-        'public'              => true,
-        'show_ui'             => true,
-        'show_in_nav_menus'   => true,
-        'show_tagcloud'       => true,
-        'label'        => _x( 'Community Features', 'taxonomy general name', 'wpp' ),
-        'labels'       => array(
-          'name'              => _x( 'Community Features', 'taxonomy general name', 'wpp' ),
-          'singular_name'     => _x( 'Community Feature', 'taxonomy singular name', 'wpp' ),
-          'search_items'      => __( 'Search Community Features', 'wpp' ),
-          'all_items'         => __( 'All Community Features', 'wpp' ),
-          'parent_item'       => __( 'Parent Community Feature', 'wpp' ),
-          'parent_item_colon' => __( 'Parent Community Feature:', 'wpp' ),
-          'edit_item'         => __( 'Edit Community Feature', 'wpp' ),
-          'update_item'       => __( 'Update Community Feature', 'wpp' ),
-          'add_new_item'      => __( 'Add New Community Feature', 'wpp' ),
-          'new_item_name'     => __( 'New Community Feature Name', 'wpp' ),
-          'menu_name'         => __( 'Community Feature', 'wpp' )
-        ),
-        'query_var'    => 'community_feature',
-        'rewrite'      => array( 'slug' => 'community_feature' )
-      ),
-      '_address_components'  => array(
-        'hierarchical'        => true,
-        'public'              => true,
-        'show_ui'             => false,
-        'show_in_nav_menus'   => false,
-        'show_tagcloud'       => false,
-        'label'        => _x( 'Location', 'taxonomy general name', 'wpp' ),
-        'labels'       => array( 'name'              => _x( 'Location', 'taxonomy general name', 'wpp' ),),
-        'query_var'    => 'location',
-        'rewrite'      => array( 'slug' => 'location' )
-      ),
-      '_geocoding_quality'  => array(
-        'hierarchical'        => false,
-        'public'              => false,
-        'show_ui'             => false,
-        'show_in_nav_menus'   => false,
-        'show_tagcloud'       => false,
-        '_options' => array(
-          'ROOFTOP' =>  'Precise',
-          'RANGE_INTERPOLATED' => 'RANGE_INTERPOLATED',
-          'GEOMETRIC_CENTER' => 'GEOMETRIC_CENTER',
-          'APPROXIMATE' => 'APPROXIMATE'
-        )
-      )
-    ));
+    $wp_properties[ 'taxonomies' ] = apply_filters( 'wpp_taxonomies', array() );
 
     ud_get_wp_property()->set( 'labels', apply_filters( 'wpp_object_labels', array(
       'name'               => __( 'Properties', 'wpp' ),
@@ -294,15 +278,14 @@ class WPP_F extends UsabilityDynamics\Utility {
       '_edit_link'          => 'post.php?post=%d',
       'capability_type'     => array( 'wpp_property', 'wpp_properties' ),
       'hierarchical'        => true,
-      'rewrite'             => array( 'slug' => $wp_properties[ 'configuration' ][ 'base_slug' ] ),
+      'rewrite'             => array( 'slug' => $wp_properties[ 'configuration' ][ 'base_slug' ]
+      ),
       'query_var'           => $wp_properties[ 'configuration' ][ 'base_slug' ],
       'supports'            => $supports,
       'menu_icon'           => 'dashicons-admin-home'
     ) ) );
 
-    if( !empty( $wp_properties[ 'taxonomies' ] ) && is_array( $wp_properties[ 'taxonomies' ] ) ) {
-
-      foreach( $wp_properties[ 'taxonomies' ] as $taxonomy => $taxonomy_data ) {
+    foreach( (array) $wp_properties[ 'taxonomies' ] as $taxonomy => $taxonomy_data ) {
 
       if( !isset( $taxonomy_data[ 'show_ui' ] ) ) {
         $taxonomy_data[ 'show_ui' ] = ( current_user_can( 'manage_wpp_categories' ) ? true : false );
@@ -323,35 +306,33 @@ class WPP_F extends UsabilityDynamics\Utility {
         )
       ) );
 
-        //** Check if taxonomy is disabled */
-        if( isset( $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] ) &&
-          is_array( $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] ) &&
-          in_array( $taxonomy, $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ] )
-        ) {
-          continue;
-        }
+      // @depreciated
+      // $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ]
 
-        register_taxonomy( $taxonomy, 'property', apply_filters( 'wpp::register_taxonomy', array(
-          'hierarchical'      => isset( $taxonomy_data[ 'hierarchical' ] ) ? $taxonomy_data[ 'hierarchical' ] : false,
-          'label'             => isset( $taxonomy_data[ 'label' ] ) ? $taxonomy_data[ 'label' ] : $taxonomy,
-          'labels'            => isset( $taxonomy_data[ 'labels' ] ) ? $taxonomy_data[ 'labels' ] : array(),
-          'query_var'         => $taxonomy,
-          'rewrite'           => isset( $taxonomy_data[ 'rewrite'] ) ? $taxonomy_data[ 'rewrite'] : array( 'slug' => $taxonomy ),
-          'public'            => isset( $taxonomy_data[ 'public' ] ) ? $taxonomy_data[ 'public' ] : true,
-          'show_ui'           => isset( $taxonomy_data[ 'show_ui' ] ) ? $taxonomy_data[ 'show_ui' ] : true,
-          'show_in_nav_menus' => isset( $taxonomy_data[ 'show_in_nav_menus' ] ) ? $taxonomy_data[ 'show_in_nav_menus' ] : true,
-          'show_tagcloud'     => isset( $taxonomy_data[ 'show_tagcloud' ] ) ? $taxonomy_data[ 'show_tagcloud' ] : true,
-          'capabilities' => array(
-            'manage_terms' => 'manage_wpp_categories',
-            'edit_terms'   => 'manage_wpp_categories',
-            'delete_terms' => 'manage_wpp_categories',
-            'assign_terms' => 'manage_wpp_categories'
-          )
-        ), $taxonomy ) );
-      }
+      register_taxonomy( $taxonomy, 'property', $_taxonomy_args = apply_filters( 'wpp::register_taxonomy', array(
+        'hierarchical'      => isset( $taxonomy_data[ 'hierarchical' ] ) ? $taxonomy_data[ 'hierarchical' ] : false,
+        'label'             => isset( $taxonomy_data[ 'label' ] ) ? $taxonomy_data[ 'label' ] : $taxonomy,
+        'labels'            => isset( $taxonomy_data[ 'labels' ] ) ? $taxonomy_data[ 'labels' ] : array(),
+        'query_var'         => $taxonomy,
+        'rewrite'           => isset( $taxonomy_data[ 'rewrite'] ) ? $taxonomy_data[ 'rewrite'] : array( 'slug' => $taxonomy ),
+        'public'            => isset( $taxonomy_data[ 'public' ] ) ? $taxonomy_data[ 'public' ] : true,
+        'show_ui'           => isset( $taxonomy_data[ 'show_ui' ] ) ? $taxonomy_data[ 'show_ui' ] : true,
+        'show_in_nav_menus' => isset( $taxonomy_data[ 'show_in_nav_menus' ] ) ? $taxonomy_data[ 'show_in_nav_menus' ] : true,
+        'show_tagcloud'     => isset( $taxonomy_data[ 'show_tagcloud' ] ) ? $taxonomy_data[ 'show_tagcloud' ] : true,
+        'capabilities' => array(
+          'manage_terms' => 'manage_wpp_categories',
+          'edit_terms'   => 'manage_wpp_categories',
+          'delete_terms' => 'manage_wpp_categories',
+          'assign_terms' => 'manage_wpp_categories'
+        )
+      ), $taxonomy ) );
+
+      // die( '<pre>' . print_r( $_taxonomy_args, true ) . '</pre>' );
+
     }
 
   }
+
 
   /**
    * Loads applicable WP-Properrty scripts and styles
@@ -379,7 +360,7 @@ class WPP_F extends UsabilityDynamics\Utility {
         case 'single':
 
           if( !isset( $wp_properties[ 'configuration' ][ 'do_not_use' ][ 'locations' ] ) || $wp_properties[ 'configuration' ][ 'do_not_use' ][ 'locations' ] != 'true' ) {
-            //add_action( 'wp_enqueue_scripts', create_function( '', "wp_enqueue_script('google-maps');" ) );
+            add_action( 'wp_enqueue_scripts', create_function( '', "wp_enqueue_script('google-maps');" ) );
           }
 
           add_action( 'wp_enqueue_scripts', create_function( '', "wp_enqueue_script('jquery-ui-mouse');" ) );
@@ -2149,36 +2130,30 @@ class WPP_F extends UsabilityDynamics\Utility {
    * @since 1.40.0
    * @author peshkov@UD
    */
-  static public function set_cache( $name, $data ) {
-    $dir = WPP_Path . 'static/cache/';
-    $file = $dir . MD5( $name ) . '.res';
-    //** Try to create directory if it doesn't exist */
-    if( !is_dir( $dir ) ) {
-      @mkdir( $dir, 0755 );
-    }
-    if( is_dir( $dir ) && @file_put_contents( $file, maybe_serialize( $data ) ) ) {
-      return true;
-    }
-    return false;
+  static public function set_cache( $key, $data, $live = 3600 ) {
+
+    return wp_cache_set( $key, $data, 'wpp', $live );
+
   }
 
   /**
    * Maybe get data from cache file
    *
+   *
+   * @todo Convert to use WP Object Cache like everything else. -potanin@UD.
+   *
    * @version 0.1
    * @since 1.40.0
    * @author peshkov@UD
    */
-  static public function get_cache( $name, $live = 3600 ) {
-    $dir = WPP_Path . 'static/cache/';
-    $file = $dir . MD5( $name ) . '.res';
-    if( is_file( $file ) && time() - filemtime( $file ) < $live ) {
-      $handle = fopen( $file, "r" );
-      $content = fread( $handle, filesize( $file ) );
-      fclose( $handle );
-      return maybe_unserialize( $content );
+  static public function get_cache( $key, $live = 3600 ) {
+
+    if( $_cache = wp_cache_get( $key, 'wpp' ) ) {
+      return $_cache;
     }
+
     return false;
+
   }
 
   /**
