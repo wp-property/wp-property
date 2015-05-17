@@ -1529,13 +1529,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     $args = wp_parse_args( $args, array(
       'skip_existing'   => 'false',
-<<<<<<< HEAD
-      'return_geo_data' => false,
-      'detail' => false,
-      'categorize'      => true
-=======
       'return_geo_data' => false
->>>>>>> origin/staging
     ) );
 
     extract( $args, EXTR_SKIP );
