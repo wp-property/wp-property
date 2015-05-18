@@ -1670,7 +1670,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     $address = urlencode( $address );
 
-    $url = str_replace( " ", "+", "http://maps.google.com/maps/api/geocode/json?" . ( ( is_array( $latlng ) ) ? "latlng={$latlng['lat']},{$latlng['lng']}" : "address={$address}" ) . "&sensor=true&language={$localization}" );
+    $url = str_replace( " ", "+", "https://maps.googleapis.com/maps/api/geocode/json?" . ( ( is_array( $latlng ) ) ? "latlng={$latlng['lat']},{$latlng['lng']}" : "address={$address}" ) . "&sensor=true&language={$localization}" );
 
     $obj = ( json_decode( wp_remote_fopen( $url ) ) );
 
@@ -3377,9 +3377,13 @@ class WPP_F extends UsabilityDynamics\Utility {
   static public function get_property( $id, $args = false ) {
     global $wp_properties, $wpdb;
 
+    if( is_object( $id ) && isset( $id->ID ) ) {
+      $id = $id->ID;
+    }
+
     $id = trim( $id );
 
-    $defaults = array(
+    extract( wp_parse_args( $args, array(
       'get_children'          => 'true',
       'return_object'         => 'false',
       'load_gallery'          => 'true',
@@ -3387,9 +3391,9 @@ class WPP_F extends UsabilityDynamics\Utility {
       'allow_multiple_values' => 'false',
       'load_parent'           => 'true',
       'cache'                 => 'true',
-    );
+    ) ), EXTR_SKIP );
 
-    extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
+
     $get_children          = isset( $get_children ) ? $get_children : 'true';
     $return_object         = isset( $return_object ) ? $return_object : 'false';
     $load_gallery          = isset( $load_gallery ) ? $load_gallery : 'true';

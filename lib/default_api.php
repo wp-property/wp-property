@@ -238,7 +238,7 @@ class wpp_default_api {
 add_filter( 'plugins_loaded', array( 'wpp_default_api', 'plugins_loaded' ), 0, 9 );
 
 // Widget address format
-//add_filter( "wpp_stat_filter_{$wp_properties[ 'configuration' ]['address_attribute']}", "wpp_format_address_attribute", 0, 3 );
+add_filter( "wpp_stat_filter_{$wp_properties[ 'configuration' ]['address_attribute']}", "wpp_format_address_attribute", 0, 3 );
 
 // Add additional Google Maps localizations
 add_filter( "wpp_google_maps_localizations", "wpp_add_additional_google_maps_localizations" );
@@ -289,12 +289,12 @@ add_filter( 'wpp_searchable_attributes', 'add_city_to_searchable' );
 
 add_filter( 'wpp_property_stat_labels', 'wpp_unique_key_labels', 20 );
 
-// add_filter( 'the_password_form', 'wpp_password_protected_property_form' );
+add_filter( 'the_password_form', 'wpp_password_protected_property_form' );
 
 // Coordinate manual override
-// add_filter( 'wpp_property_stats_input_' . $wp_properties[ 'configuration' ][ 'address_attribute' ], 'wpp_property_stats_input_address', 0, 3 );
+add_filter( 'wpp_property_stats_input_' . $wp_properties[ 'configuration' ][ 'address_attribute' ], 'wpp_property_stats_input_address', 0, 3 );
 
-// add_action('save_property', 'wpp_save_property_aggregated_data' );
+  add_action('save_property', 'wpp_save_property_aggregated_data' );
 
 //add_action("wpp_ui_after_attribute_{$wp_properties['configuration']['address_attribute']}", 'wpp_show_coords');
 add_action( 'wpp_ui_after_attribute_price', 'wpp_show_week_month_selection' );
