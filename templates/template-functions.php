@@ -620,6 +620,7 @@ if ( !function_exists( 'wpp_draw_pagination' ) ):
             $wpp_property_results = '<span class="wpp_property_results">';
             $wpp_property_results .= ( $properties[ 'total' ] > 0 ? WPP_F::format_numeric( $properties[ 'total' ] ) : __( 'None', 'wpp' ) );
             $wpp_property_results .= __( ' found.', 'wpp' );
+            $wpp_property_results .= '</span>';
             echo apply_filters( 'wpp::wpp_draw_pagination::wpp_property_results', $wpp_property_results, array( 'properties' => $properties, 'settings' => $settings ) );
             ?>
           <?php } ?>
