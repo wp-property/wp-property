@@ -3204,7 +3204,8 @@ class WPP_F extends UsabilityDynamics\Utility {
           {$additional_sql}" ) );
     }
 
-    if( !empty( $result ) ) {
+    WPP_F::console_log( "get_properties() total: $total" );
+     if( !empty( $result ) ) {
       $return = array();
       if( !empty( $total ) ) {
         $return[ 'total' ]   = $total;
@@ -3382,6 +3383,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     $id = trim( $id );
+
 
     extract( wp_parse_args( $args, array(
       'get_children'          => 'true',

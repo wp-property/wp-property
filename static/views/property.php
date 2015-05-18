@@ -58,7 +58,7 @@
       zoom: <?php echo (!empty($wp_properties['configuration']['gm_zoom_level']) ? $wp_properties['configuration']['gm_zoom_level'] : 13); ?>,
       center: myLatlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
+    };
 
     map = new google.maps.Map(document.getElementById("property_map"), myOptions);
 
