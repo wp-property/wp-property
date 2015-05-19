@@ -203,6 +203,10 @@ if ( !function_exists( 'wpp_draw_pagination' ) ):
       return null;
     }
 
+    if ( is_array( $wpp_query ) || is_object( $wpp_query ) ) {
+      extract( $wpp_query );
+    }
+
     if ( $pagination == 'off' && $hide_count ) {
       return null;
     }
