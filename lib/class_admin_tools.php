@@ -133,12 +133,6 @@ if( !class_exists( 'class_admin_tools' ) ) {
           'template' => ud_get_wp_property()->path( 'static/views/admin/settings-developer-types.php', 'dir' ),
           'order' => 30
         ),
-        // @note Disabled for now since this section is all about schema/mapping configuraion now.
-        //'advanced' => array(
-        //  'label' => __( 'Advanced', ud_get_wp_property()->domain ),
-        //  'template' => ud_get_wp_property()->path( 'static/views/admin/settings-developer-advanced.php', 'dir' ),
-        //  'order' => 40
-        //),
       ) );
 
       /* Sort Tabs by 'order' */

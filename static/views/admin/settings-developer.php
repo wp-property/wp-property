@@ -27,4 +27,70 @@ global $wp_properties;
       </div>
     <?php endforeach; ?>
   <?php endif; ?>
+  <div id="wpp_dialog_wrapper_for_groups"></div>
+  <div id="wpp_attribute_groups">
+    <table cellpadding="0" cellspacing="0" allow_random_slug="true" class="ud_ui_dynamic_table widefat wpp_sortable">
+      <thead>
+      <tr>
+        <th class="wpp_group_assign_col">&nbsp;</th>
+        <th class='wpp_draggable_handle'>&nbsp;</th>
+        <th class="wpp_group_name_col"><?php _e( 'Group Name', 'wpp' ) ?></th>
+        <th class="wpp_group_slug_col"><?php _e( 'Slug', 'wpp' ) ?></th>
+        <th class='wpp_group_main_col'><?php _e( 'Main', 'wpp' ) ?></th>
+        <th class="wpp_group_color_col"><?php _e( 'Group Color', 'wpp' ) ?></th>
+        <th class="wpp_group_action_col">&nbsp;</th>
+      </tr>
+      </thead>
+      <tbody>
+      <?php
+      if( empty( $wp_properties[ 'property_groups' ] ) ) {
+        //* If there is no any group, we set default */
+        $wp_properties[ 'property_groups' ] = array(
+          'main' => array(
+            'name'  => 'Main',
+            'color' => '#bdd6ff'
+          )
+        );
+      }
+      ?>
+      <?php foreach( $wp_properties[ 'property_groups' ] as $slug => $group ): ?>
+        <tr class="wpp_dynamic_table_row" slug="<?php echo $slug; ?>" new_row='false'>
+          <td class="wpp_group_assign_col">
+            <input type="button" class="wpp_assign_to_group button-secondary" value="<?php _e( 'Assign', 'wpp' ) ?>"/>
+          </td>
+          <td class="wpp_draggable_handle">&nbsp;</td>
+          <td class="wpp_group_name_col">
+            <input class="slug_setter" type="text" name="wpp_settings[property_groups][<?php echo $slug; ?>][name]" value="<?php echo $group[ 'name' ]; ?>"/>
+          </td>
+          <td class="wpp_group_slug_col">
+            <input type="text" class="slug" readonly='readonly' value="<?php echo $slug; ?>"/>
+          </td>
+          <td class="wpp_group_main_col">
+            <input type="radio" class="wpp_no_change_name" name="wpp_settings[configuration][main_stats_group]" <?php echo( isset( $wp_properties[ 'configuration' ][ 'main_stats_group' ] ) && $wp_properties[ 'configuration' ][ 'main_stats_group' ] == $slug ? "checked=\"checked\"" : "" ); ?> value="<?php echo $slug; ?>"/>
+          </td>
+          <td class="wpp_group_color_col">
+            <input type="text" class="wpp_input_colorpicker" name="wpp_settings[property_groups][<?php echo $slug; ?>][color]" value="<?php echo $group[ 'color' ]; ?>"/>
+          </td>
+          <td class="wpp_group_action_col">
+            <span class="wpp_delete_row wpp_link"><?php _e( 'Delete', 'wpp' ) ?></span>
+          </td>
+        </tr>
+      <?php endforeach; ?>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan='7'>
+          <div style="float:left;text-align:left;">
+            <input type="button" class="wpp_add_row button-secondary" value="<?php _e( 'Add Group', 'wpp' ) ?>"/>
+            <input type="button" class="wpp_unassign_from_group button-secondary" value="<?php _e( 'Unassign from Group', 'wpp' ) ?>"/>
+          </div>
+          <div style="float:right;">
+            <input type="button" class="wpp_close_dialog button-secondary" value="<?php _e( 'Apply', 'wpp' ) ?>"/>
+          </div>
+          <div class="clear"></div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
 </div>
