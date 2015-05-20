@@ -25,7 +25,7 @@ jQuery.fn.wppGroups = function(opt) {
     assignButton: '.wpp_assign_to_group',
     unassignButton: '.wpp_unassign_from_group',
     removeButton: '.wpp_delete_row',
-    sortButton: "#sort_stats_by_groups"
+    sortButton: ".sort_stats_by_groups"
   };
 
   opt = jQuery.extend({}, defaults, opt);
@@ -37,9 +37,8 @@ jQuery.fn.wppGroups = function(opt) {
 
   var
   groupsBlock = jQuery(opt.groupsBox),
-  sortButton = jQuery(opt.sortButton),
   statsRow = instance.parent().parent(),
-  statsTable = instance.parents('#wpp_inquiry_attribute_fields'),
+  statsTable = instance.parents('.wpp_inquiry_attribute_fields'),
   close = jQuery(opt.closeButton, groupsBlock),
   assign = jQuery(opt.assignButton),
   unassign = jQuery(opt.unassignButton),
@@ -47,13 +46,13 @@ jQuery.fn.wppGroups = function(opt) {
   colorpicker = jQuery('input.wpp_input_colorpicker', groupsBlock),
   groupname = jQuery('input.slug_setter', groupsBlock),
   remove = jQuery(opt.removeButton, groupsBlock),
-  sortButton = jQuery(opt.sortButton),
+  sortButton = jQuery(opt.sortButton);
 
   //* Open Groups Block */
   showGroupBox = function() {
     groupsBlock.show(300);
     wrapper.css('display','block');
-  },
+  };
 
   //* Close Groups Block */
   closeGroupBox = function () {
@@ -184,16 +183,23 @@ jQuery.fn.wppGroups = function(opt) {
         }
       });
     });
+
     var sortlist = jQuery('tbody' , statsTable);
-    var listitems = sortlist.children('tr').get();
-    listitems.sort(function(a, b) {
+    sortlist.each( function( i, e ){
+      var currentlist = jQuery(e);
+      var listitems = currentlist.children('tr').get();
+      listitems.sort(function(a, b) {
         var compA = parseFloat(jQuery(a).attr('sortpos'));
         var compB = parseFloat(jQuery(b).attr('sortpos'));
         return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
-    });
-    jQuery.each(listitems, function(idx, itm) {
-      sortlist.append(itm);
-    });
+      });
+      jQuery.each(listitems, function(idx, itm) {
+        currentlist.append(itm);
+      });
+
+    } );
+
+
   });
 
   //* HACK FOR IE7 */

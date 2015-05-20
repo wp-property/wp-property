@@ -12,12 +12,12 @@ global $wp_properties;
   <div class="wpp_property_stat_functions">
     <input type="button" class="wpp_all_advanced_settings button-secondary" action="expand" value="<?php _e( 'Expand all', 'wpp' ) ?>" />
     <input type="button" class="wpp_all_advanced_settings button-secondary" action="collapse" value="<?php _e( 'Collapse all', 'wpp' ) ?>" />
-    <input type="button" id="sort_stats_by_groups" class="button-secondary" value="<?php _e( 'Sort Stats by Groups', 'wpp' ) ?>"/>
+    <input type="button" class="sort_stats_by_groups button-secondary" value="<?php _e( 'Sort by Groups', 'wpp' ) ?>"/>
   </div>
   <div class="clear"></div>
 </div>
 
-<table id="wpp_inquiry_attribute_fields" class="ud_ui_dynamic_table widefat" allow_random_slug="true">
+<table id="wpp_inquiry_attribute_fields" class="wpp_inquiry_attribute_fields ud_ui_dynamic_table widefat" allow_random_slug="true">
   <thead>
   <tr>
     <th class='wpp_draggable_handle'>&nbsp;</th>
@@ -61,7 +61,7 @@ global $wp_properties;
       </td>
 
       <td class="wpp_attribute_group_col">
-        <input type="text" class="wpp_attribute_group" value="<?php echo( !empty( $group[ 'name' ] ) ? $group[ 'name' ] : "" ); ?>"/>
+        <input type="text" class="wpp_attribute_group wpp_group" value="<?php echo( !empty( $group[ 'name' ] ) ? $group[ 'name' ] : "" ); ?>"/>
         <input type="hidden" class="wpp_group_slug" name="wpp_settings[property_stats_groups][<?php echo $slug; ?>]" value="<?php echo( !empty( $gslug ) ? $gslug : "" ); ?>">
       </td>
 

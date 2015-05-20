@@ -206,14 +206,14 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
       var action = jQuery( this ).attr( "action" );
 
       if( action == "expand" ) {
-        jQuery( "#wpp_inquiry_attribute_fields .wpp_development_advanced_option" ).show();
+        jQuery( this ).parents( '.developer-panel' ).find( ".wpp_development_advanced_option" ).show();
       }
 
       if( action == "collapse" ) {
-        jQuery( "#wpp_inquiry_attribute_fields .wpp_development_advanced_option" ).hide();
+        jQuery( this ).parents( '.developer-panel' ).find( ".wpp_development_advanced_option" ).hide();
       }
 
-    } )
+    } );
 
     //* Stats to group functionality */
     jQuery( '.wpp_attribute_group' ).wppGroups();
