@@ -1550,6 +1550,9 @@ body.property_page_all_properties #posts_list {
   background: none;
   border: 0;
 }
+body.property_page_all_properties #posts_list .notice {
+  padding: 12px;
+}
 body.property_page_all_properties #posts_list .handlediv,
 body.property_page_all_properties #posts_list h3.hndle {
   display: none;

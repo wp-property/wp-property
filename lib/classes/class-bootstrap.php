@@ -26,6 +26,7 @@ namespace UsabilityDynamics\WPP {
        * Instantaite class.
        */
       public function init() {
+        global $wp_properties;
 
         //** Init Settings */
         $this->settings = new Settings( array(
@@ -40,7 +41,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Initiate Attributes Handler */
         new Attributes();
-      
+
         /** Defaults filters and hooks */
         include_once $this->path( 'lib/default_api.php', 'dir' );
         /** Loads general functions used by WP-Property */
