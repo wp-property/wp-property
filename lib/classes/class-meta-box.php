@@ -126,10 +126,6 @@ namespace UsabilityDynamics\WPP {
         /* Register Meta Box for every Attributes Group separately */
         if ( !empty( $groups) && !empty( $property_stats_groups ) ) {
           foreach ( $groups as $slug => $group ) {
-            /* There is no sense to add metabox if no one attribute assigned to group */
-            if ( !in_array( $slug, $property_stats_groups ) ) {
-              continue;
-            }
             $meta_box = $this->get_property_meta_box( array_filter( array_merge( $group, array( 'id' => $slug ) ) ), $post );
             if( $meta_box ) {
               $_meta_boxes[] = $meta_box;
@@ -141,6 +137,17 @@ namespace UsabilityDynamics\WPP {
          * Allow to customize our meta boxes via external add-ons ( modules, or whatever else ).
          */
         $_meta_boxes = apply_filters( 'wpp::meta_boxes', $_meta_boxes );
+
+        if( !is_array( $_meta_boxes ) ) {
+          return $meta_boxes;
+        }
+
+        /** Get rid of meta box without fields data. */
+        foreach( $_meta_boxes as $k => $meta_box ) {
+          if( empty( $meta_box[ 'fields' ] ) ) {
+            unset( $_meta_boxes[ $k ] );
+          }
+        }
 
         /**
          *  Probably convert Meta Boxes to single one with tabs
@@ -406,10 +413,6 @@ namespace UsabilityDynamics\WPP {
             'options' => $options,
           ) ), $slug, $post );
 
-        }
-
-        if( empty( $fields ) ) {
-          return false;
         }
 
         $meta_box = apply_filters( 'wpp::rwmb_meta_box', array(
