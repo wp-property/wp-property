@@ -1742,26 +1742,6 @@ td.wpp_premium_feature_image {
   cursor: pointer;
 }
 
-.wpp_overview_filters {
-  clear: both;
-  margin: 5px 0 5px 0;
-}
-
-.wpp_overview_filters select {
-  width: 100%;
-}
-
-.wpp_overview_filters .wpp_checkbox_filter {
-  display: none;
-  padding: 0 10px;
-  max-height: 300px;
-  overflow: auto;
-}
-
-.wpp_overview_filters .wpp_checkbox_filter label {
-  margin-left: 1px;
-}
-
 .wpp_sidebar .subsubsub li {
   float: none;
   display: list-item;
@@ -1976,13 +1956,41 @@ p.pad10 {
 
 }
 
+/********************************
+ * All Properties page
+*********************************/
 
 body.property_page_all_properties {
 
-  .uisf-taxonomy-wrapper {
-    .uisf-label {
-      opacity:0;
-      display: none;
+  #posts_list {
+    background: none;
+    border: 0;
+
+    .handlediv,
+    h3.hndle {
+      display:none;
+    }
+
+    .inside {
+      margin: 0;
+      padding: 0;
+    }
+
+    .tablenav.top {
+      margin-top: 0;
+    }
+
+  }
+
+  .uisf-checkbox-wrapper {
+
+    .uisf-input {
+      float: left;
+    }
+
+    .uisf-label,
+    .uisf-input {
+      display: inline-block;
     }
 
   }
@@ -1990,25 +1998,28 @@ body.property_page_all_properties {
   .uisf-text-wrapper {
     position: relative;
 
-    .uisf-label {
-      opacity:0;
+    input.sui-text {
+      width: 100%;
+      border: 1px solid #aaa;
+    }
+
+  }
+
+  .select2 {
+
+    .select2-search__field {
       display: none;
     }
 
-    input.sui-text {
-      height: 0;
-      padding: 1.2em;
-      width: 100%;
-    }
-
   }
 
-  .sui-text {
-
-  }
 }
-body.post-type-property {
 
+/********************************
+ * Edit Property page
+*********************************/
+
+body.post-type-property {
 
   &.wpp-content-editor-hidden {
 
@@ -2022,14 +2033,6 @@ body.post-type-property {
       display: none;
     }
   }
-
-  /*
-  .postarea {
-    display: none;
-  }
-  */
-
-  .rwmb-wpp_address-wrapper {}
 
   input[type=text].rwmb-text {
     width: 30em;

@@ -296,6 +296,8 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Adds 'Add Property' button near page title
+       *
        * @param $title
        * @return string
        */

@@ -1377,22 +1377,6 @@ td.wpp_premium_feature_image {
   font-weight: bold;
   cursor: pointer;
 }
-.wpp_overview_filters {
-  clear: both;
-  margin: 5px 0 5px 0;
-}
-.wpp_overview_filters select {
-  width: 100%;
-}
-.wpp_overview_filters .wpp_checkbox_filter {
-  display: none;
-  padding: 0 10px;
-  max-height: 300px;
-  overflow: auto;
-}
-.wpp_overview_filters .wpp_checkbox_filter label {
-  margin-left: 1px;
-}
 .wpp_sidebar .subsubsub li {
   float: none;
   display: list-item;
@@ -1559,29 +1543,44 @@ p.pad10 {
 .property_page_wpp_property_pdf_lists .form-table td {
   vertical-align: baseline;
 }
-body.property_page_all_properties .uisf-taxonomy-wrapper .uisf-label {
-  opacity: 0;
+/********************************
+ * All Properties page
+*********************************/
+body.property_page_all_properties #posts_list {
+  background: none;
+  border: 0;
+}
+body.property_page_all_properties #posts_list .handlediv,
+body.property_page_all_properties #posts_list h3.hndle {
   display: none;
+}
+body.property_page_all_properties #posts_list .inside {
+  margin: 0;
+  padding: 0;
+}
+body.property_page_all_properties #posts_list .tablenav.top {
+  margin-top: 0;
+}
+body.property_page_all_properties .uisf-checkbox-wrapper .uisf-input {
+  float: left;
+}
+body.property_page_all_properties .uisf-checkbox-wrapper .uisf-label,
+body.property_page_all_properties .uisf-checkbox-wrapper .uisf-input {
+  display: inline-block;
 }
 body.property_page_all_properties .uisf-text-wrapper {
   position: relative;
 }
-body.property_page_all_properties .uisf-text-wrapper .uisf-label {
-  opacity: 0;
+body.property_page_all_properties .uisf-text-wrapper input.sui-text {
+  width: 100%;
+  border: 1px solid #aaa;
+}
+body.property_page_all_properties .select2 .select2-search__field {
   display: none;
 }
-body.property_page_all_properties .uisf-text-wrapper input.sui-text {
-  height: 0;
-  padding: 1.2em;
-  width: 100%;
-}
-body.post-type-property {
-  /*
-  .postarea {
-    display: none;
-  }
-  */
-}
+/********************************
+ * Edit Property page
+*********************************/
 body.post-type-property.wpp-content-editor-hidden .wp-editor-tabs > .wp-switch-editor:not(.wpp-editor-toggler) {
   display: none;
 }
