@@ -285,40 +285,25 @@ class WPP_F extends UsabilityDynamics\Utility {
       'menu_icon'           => 'dashicons-admin-home'
     ) ) );
 
-    foreach( (array) $wp_properties[ 'taxonomies' ] as $taxonomy => $taxonomy_data ) {
+    foreach( (array) $wp_properties[ 'taxonomies' ] as $taxonomy => $data ) {
 
-      if( !isset( $taxonomy_data[ 'show_ui' ] ) ) {
-        $taxonomy_data[ 'show_ui' ] = ( current_user_can( 'manage_wpp_categories' ) ? true : false );
+      if( !isset( $data[ 'show_ui' ] ) ) {
+        $data[ 'show_ui' ] = ( current_user_can( 'manage_wpp_categories' ) ? true : false );
       }
-
-      $wp_properties[ 'taxonomies' ][ $taxonomy ] = wp_parse_args( $taxonomy_data, array(
-        'hierarchical' => $taxonomy_data[ 'hierarchical' ],
-        'label'        => $taxonomy_data[ 'label' ],
-        'labels'       => isset( $taxonomy_data[ 'labels' ] ) ? $taxonomy_data[ 'labels' ] : array(),
-        'query_var'    => $taxonomy,
-        'show_ui'      => false,
-        'rewrite'      => isset( $taxonomy_data['rewrite'] ) ? null :  array( 'slug' => $taxonomy ),
-        'capabilities' => array(
-          'manage_terms' => 'manage_wpp_categories',
-          'edit_terms'   => 'manage_wpp_categories',
-          'delete_terms' => 'manage_wpp_categories',
-          'assign_terms' => 'manage_wpp_categories'
-        )
-      ) );
 
       // @depreciated
       // $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ]
 
-      register_taxonomy( $taxonomy, 'property', $_taxonomy_args = apply_filters( 'wpp::register_taxonomy', array(
-        'hierarchical'      => isset( $taxonomy_data[ 'hierarchical' ] ) ? $taxonomy_data[ 'hierarchical' ] : false,
-        'label'             => isset( $taxonomy_data[ 'label' ] ) ? $taxonomy_data[ 'label' ] : $taxonomy,
-        'labels'            => isset( $taxonomy_data[ 'labels' ] ) ? $taxonomy_data[ 'labels' ] : array(),
+      register_taxonomy( $taxonomy, 'property', $wp_properties[ 'taxonomies' ][ $taxonomy ] = apply_filters( 'wpp::register_taxonomy', array(
+        'hierarchical'      => isset( $data[ 'hierarchical' ] ) ? $data[ 'hierarchical' ] : false,
+        'label'             => isset( $data[ 'label' ] ) ? $data[ 'label' ] : $taxonomy,
+        'labels'            => isset( $data[ 'labels' ] ) ? $data[ 'labels' ] : array(),
         'query_var'         => $taxonomy,
-        'rewrite'           => isset( $taxonomy_data[ 'rewrite'] ) ? $taxonomy_data[ 'rewrite'] : array( 'slug' => $taxonomy ),
-        'public'            => isset( $taxonomy_data[ 'public' ] ) ? $taxonomy_data[ 'public' ] : true,
-        'show_ui'           => isset( $taxonomy_data[ 'show_ui' ] ) ? $taxonomy_data[ 'show_ui' ] : true,
-        'show_in_nav_menus' => isset( $taxonomy_data[ 'show_in_nav_menus' ] ) ? $taxonomy_data[ 'show_in_nav_menus' ] : true,
-        'show_tagcloud'     => isset( $taxonomy_data[ 'show_tagcloud' ] ) ? $taxonomy_data[ 'show_tagcloud' ] : true,
+        'rewrite'           => isset( $data[ 'rewrite'] ) ? $data[ 'rewrite'] : array( 'slug' => $taxonomy ),
+        'public'            => isset( $data[ 'public' ] ) ? $data[ 'public' ] : true,
+        'show_ui'           => isset( $data[ 'show_ui' ] ) ? $data[ 'show_ui' ] : true,
+        'show_in_nav_menus' => isset( $data[ 'show_in_nav_menus' ] ) ? $data[ 'show_in_nav_menus' ] : true,
+        'show_tagcloud'     => isset( $data[ 'show_tagcloud' ] ) ? $data[ 'show_tagcloud' ] : true,
         'capabilities' => array(
           'manage_terms' => 'manage_wpp_categories',
           'edit_terms'   => 'manage_wpp_categories',
@@ -374,6 +359,18 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     }
 
+  }
+
+  /**
+   * Returns attribute information.
+   *
+   * @see UsabilityDynamics\WPP\Attributes::get_attribute_data()
+   * @internal Probably will be removed in next releases.
+   * @param bool $attribute
+   * @return mixed
+   */
+  static function get_attribute_data( $attribute = false ) {
+    return UsabilityDynamics\WPP\Attributes::get_attribute_data();
   }
 
   /**

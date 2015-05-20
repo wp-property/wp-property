@@ -104,6 +104,7 @@ if ( !function_exists( 'property_overview_image' ) ) {
    */
   function property_overview_image( $args = '' ) {
     global $wpp_query, $property;
+
     $thumbnail_size = $wpp_query[ 'thumbnail_size' ];
 
     $defaults = array(
@@ -1602,6 +1603,7 @@ if ( !function_exists( 'wpp_get_image_link' ) ):
    */
   function wpp_get_image_link( $attachment_id, $size, $args = array() ) {
     global $wp_properties;
+
     if ( empty( $size ) || empty( $attachment_id ) ) {
       return false;
     }

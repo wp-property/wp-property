@@ -699,7 +699,7 @@ class WPP_Core {
       (count($wp_query->posts) < 2) added post 1.31.1 release to avoid
       taxonomy archives from being broken by single property pages
     */
-    if( count( $wp_query->posts ) < 2 && ( $post->post_type == "property" || isset( $wp_query->is_child_property ) ) ) {
+    if( isset( $post ) && count( $wp_query->posts ) < 2 && ( $post->post_type == "property" || isset( $wp_query->is_child_property ) ) ) {
       $wp_query->single_property_page = true;
 
       //** This is a hack and should be done better */
@@ -721,7 +721,7 @@ class WPP_Core {
     }
 
     //** If this is the root page with a manually inserted shortcode, or any page with a PO shortcode */
-    if( strpos( $post->post_content, "property_overview" ) ) {
+    if( isset( $post ) && strpos( $post->post_content, "property_overview" ) ) {
       $wp_query->is_property_overview = true;
     }
 
