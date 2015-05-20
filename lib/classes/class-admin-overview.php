@@ -23,6 +23,9 @@ namespace UsabilityDynamics\WPP {
       public function __construct() {
         parent::__construct();
 
+        /** Handle screen option 'per page' */
+        add_filter('set-screen-option', array( $this, 'set_per_page_option' ), 10, 3);
+
         /** Init Administration Menu */
         add_action( 'admin_menu', array( $this, 'admin_menu' ), 20 );
 
@@ -40,9 +43,7 @@ namespace UsabilityDynamics\WPP {
         add_action( 'load-' . $this->page->screen_id, array( $this, 'preload' ) );
         /* Register meta boxes */
         add_action( 'add_meta_boxes_'.$this->page->screen_id, array( $this, 'add_meta_boxes' ) );
-
         add_filter( 'ud:ui:page:title', array( $this, 'render_page_title' ));
-        add_filter('set-screen-option', array( $this, 'set_per_page_option' ), 10, 3);
 
         /**
          * Next used to add custom submenu page 'All Properties' with Javascript dataTable
@@ -67,13 +68,17 @@ namespace UsabilityDynamics\WPP {
         do_action( 'wpp_admin_menu' );
       }
 
+      /**
+       * Set our custom screen option 'per_page' ( 'wp_properties_per_page' )
+       *
+       * @param $status
+       * @param $option
+       * @param $value
+       * @return mixed
+       */
       public function set_per_page_option( $status, $option, $value ){
-
-        die( '<pre>' . $option . print_r( $value, true ) . '</pre>' );
-        if ( 'wpp_listings_per_page' == $option ) return $value;
-
+        if ( 'wp_properties_per_page' == $option ) return $value;
         return $status;
-
       }
 
         /**
@@ -81,24 +86,22 @@ namespace UsabilityDynamics\WPP {
        */
       public function preload(){
 
-        $user = get_current_user_id();
-        $screen = get_current_screen();
+        /** Add 'Per Page' screen option and retrieve the current user's value */
+
+        $per_page_default = 20;
 
         add_screen_option( 'per_page', array(
-          'label' => __('Number of listings per page.'),
-          'default' => 50,
-          'option' => 'wpp_listings_per_page'
+          'label' => __( 'Number of Rows per page.', ud_get_wp_property( 'domain' ) ),
+          'default' => $per_page_default,
+          'option' => 'wp_properties_per_page'
         ) );
 
-
-        //$_key = $screen->get_option('wpp_listings_per_page', 'option');
-        //die( '<pre>' . print_r( $_key, true ) . '</pre>' );
-        //$per_page = get_user_meta( get_current_user_id(), $_key , true);
-
-        //die( '<pre>' . print_r( $per_page, true ) . '</pre>' );
-        if ( empty ( $per_page) || $per_page < 1 ) {
-          $per_page = 50;
+        $per_page = get_user_meta( get_current_user_id(), 'wp_properties_per_page' , true );
+        if( empty( $per_page ) ) {
+          $per_page = $per_page_default;
         }
+
+        /** Init our List Table */
 
         $this->list_table = new List_Table( array(
           'name' => 'wpp_overview',
