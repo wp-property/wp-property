@@ -42,7 +42,7 @@ namespace UsabilityDynamics\WPP {
         //** Initiate Attributes Handler */
         new Attributes();
 
-        /** Defaults filters and hooks */
+        /** Legacy filters and hooks */
         include_once $this->path( 'lib/default_api.php', 'dir' );
         /** Loads general functions used by WP-Property */
         include_once $this->path( 'lib/class_functions.php', 'dir' );
@@ -59,17 +59,26 @@ namespace UsabilityDynamics\WPP {
 
         //** Initiate AJAX Handler */
         new Ajax();
+
         //** Initiate Admin UI */
         if( is_admin() ) {
+          //** Initiate Admin Handler */
           new Admin();
           //** Initiate Meta Box Handler */
           new Meta_Box();
+          //** Setup Gallery Meta Box ( wp-gallery-metabox ) */
+          add_action( 'be_gallery_metabox_post_types', function ( $post_types = array() ) { return array( 'property' ); } );
+          add_filter( 'be_gallery_metabox_remove', '__return_false' );
         }
 
         /**
          * Load WP List Table library.
          */
         new \UsabilityDynamics\WPLT\Bootstrap();
+
+        /**
+         *
+         */
 
         //** Initiate the plugin */
         $this->core = new \WPP_Core();

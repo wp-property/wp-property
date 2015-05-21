@@ -31,5 +31,10 @@
     "bin-dir": "vendor/bin",
     "optimize-autoloader": true
   },
-  "extra": {}
+  "extra": {},
+  "autoload": {
+    "files": [
+      "loader.php"
+    ]
+  }
 }

@@ -17,7 +17,6 @@ if( !class_exists( 'BE_Gallery_Metabox' ) ) {
      * @return BE_Gallery_Metabox
      */
     public function __construct() {
-
       add_action( 'init', array( $this, 'translations' ) );
       add_action( 'add_meta_boxes', array( $this, 'admin_scripts' ), 5 );
       add_action( 'add_meta_boxes', array( $this, 'metabox_add' ) );
@@ -60,7 +59,7 @@ if( !class_exists( 'BE_Gallery_Metabox' ) ) {
       // Filterable metabox settings.
       $post_types = apply_filters( 'be_gallery_metabox_post_types', array( 'post', 'page' ) );
       $context = apply_filters( 'be_gallery_metabox_context', 'normal' );
-      $priority = apply_filters( 'be_gallery_metabox_priority', 'low' );
+      $priority = apply_filters( 'be_gallery_metabox_priority', 'high' );
 
       // Loop through all post types
       foreach( $post_types as $post_type ) {
@@ -133,10 +132,9 @@ if( !class_exists( 'BE_Gallery_Metabox' ) ) {
      * Display setup for images, which include filters and AJAX return
      * @since 1.3
      *
-     * @param $loop
+     * @param int $post_id
      * @return string html output
      *
-     * @internal param int $post_id
      * @author Bill Erickson
      */
     public function gallery_display( $loop ) {

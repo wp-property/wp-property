@@ -922,25 +922,6 @@ namespace UsabilityDynamics\WPLT {
         return isset($this->properties[$name]) ? $this->properties[$name] : NULL;
       }
 
-      /**
-       * Send required variables to JavaScript land
-       *
-       * @access public
-       */
-      public function _js_vars() {
-        if( function_exists( 'get_current_screen' ) ) {
-          $screen = get_current_screen();
-        }
-        $args = array(
-          'class'  => get_class( $this ),
-          'screen' => array(
-            'id'   => isset( $screen ) && is_object( $screen ) ? $screen->id : $this->screen,
-            'base' => isset( $screen ) && is_object( $screen ) ? $screen->base : false,
-          )
-        );
-        printf( "<script type='text/javascript'>list_args = %s;</script>\n", wp_json_encode( $args ) );
-      }
-
     }
 
   }

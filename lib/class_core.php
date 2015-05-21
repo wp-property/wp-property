@@ -49,27 +49,6 @@ class WPP_Core {
     // Check settings data on accord with existing wp_properties data before option updates
     add_filter( 'wpp_settings_save', array( $this, 'check_wp_settings_data' ), 0, 2 );
 
-    // Do as early as possible
-    self::load_plugins();
-
-  }
-
-  public function load_plugins() {
-    global $wp_plugin_paths;
-
-    if( !is_plugin_active( 'wp-gallery-metabox/gallery-metabox.php' ) ) {
-
-      // claims "The plugin does not have a valid header." via error. Could be possible to work-around, but fails on first try.
-      // $result = activate_plugin( 'wp-property-v2.0/vendor/plugins/wp-gallery-metabox/gallery-metabox.php' );
-      // die( '<pre>' . print_r( $result, true ) . '</pre>' );
-
-
-      // nonetheless, we simply include it this way just like wp would in wp-settings...
-      include_once( WP_PLUGIN_DIR . '/wp-property-v2.0/vendor/plugins/wp-gallery-metabox/gallery-metabox.php' );
-
-    }
-
-
   }
 
   /**
@@ -556,7 +535,10 @@ class WPP_Core {
       $child_property_type = get_post_meta( $child_id, 'property_type', true );
 
       //* Check if child's property type has inheritence rules, and if meta_key exists in inheritance array */
-      if( is_array( $wp_properties[ 'property_inheritance' ][ $child_property_type ] ) ) {
+      if(
+        isset( $wp_properties[ 'property_inheritance' ][ $child_property_type ] ) &&
+        is_array( $wp_properties[ 'property_inheritance' ][ $child_property_type ] )
+      ) {
         foreach( $wp_properties[ 'property_inheritance' ][ $child_property_type ] as $i_meta_key ) {
           $parent_meta_value = get_post_meta( $post_id, $i_meta_key, true );
           //* inheritance rule exists for this property_type for this meta_key */
