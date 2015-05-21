@@ -14,6 +14,11 @@ namespace UsabilityDynamics\WPP {
        */
       public function __construct( $args = array() ) {
 
+        wp_enqueue_script( 'wp-property-backend-global' );
+        wp_enqueue_script( 'wp-property-admin-overview' );
+        wp_enqueue_script( 'wpp-jquery-fancybox' );
+        wp_enqueue_style( 'wpp-jquery-fancybox-css' );
+
         $this->args = wp_parse_args( $args, array(
           //singular name of the listed records
           'singular' => \WPP_F::property_label(),

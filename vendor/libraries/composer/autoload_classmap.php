@@ -160,6 +160,7 @@ return array(
     'UsabilityDynamics\\WPP\\Ajax' => $baseDir . '/lib/classes/class-ajax.php',
     'UsabilityDynamics\\WPP\\Attributes' => $baseDir . '/lib/classes/class-attributes.php',
     'UsabilityDynamics\\WPP\\Bootstrap' => $baseDir . '/lib/classes/class-bootstrap.php',
+    'UsabilityDynamics\\WPP\\Children_List_Table' => $baseDir . '/lib/classes/class-children-list-table.php',
     'UsabilityDynamics\\WPP\\List_Table' => $baseDir . '/lib/classes/class-list-table.php',
     'UsabilityDynamics\\WPP\\Meta_Box' => $baseDir . '/lib/classes/class-meta-box.php',
     'UsabilityDynamics\\WPP\\Scaffold' => $baseDir . '/lib/classes/class-scaffold.php',

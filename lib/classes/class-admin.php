@@ -50,14 +50,6 @@ namespace UsabilityDynamics\WPP {
 
         switch( $current_screen->id ) {
 
-          //** Property Overview Page */
-          case 'property_page_all_properties':
-            wp_enqueue_script( 'wp-property-backend-global' );
-            wp_enqueue_script( 'wp-property-admin-overview' );
-            wp_enqueue_script( 'wpp-jquery-fancybox' );
-            wp_enqueue_style( 'wpp-jquery-fancybox-css' );
-            break;
-
           //** Edit Property page */
           case 'property':
             global $post;

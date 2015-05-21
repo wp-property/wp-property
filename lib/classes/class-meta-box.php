@@ -33,9 +33,11 @@ namespace UsabilityDynamics\WPP {
        */
       function add_meta_boxes() {
         global $post, $wpdb;
-        //** Add metabox for child properties */
+        /**
+         * Add metabox for child properties
+         */
         if( isset( $post ) && $post->post_type == 'property' && $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_parent = '{$post->ID}' AND post_status = 'publish' " ) ) {
-          add_meta_box( 'wpp_property_children', __( 'Child Properties', 'wpp' ), array( $this, 'render_child_properties_meta_box' ), 'property', 'side', 'high' );
+          add_meta_box( 'wpp_property_children', sprintf( __( 'Child Properties', ud_get_wp_property('domain') ), \WPP_F::property_label( 'plural' ) ), array( $this, 'render_child_properties_meta_box' ), 'property', 'advanced', 'high' );
         }
       }
 
@@ -67,6 +69,16 @@ namespace UsabilityDynamics\WPP {
        * @package WP-Property
        */
       public function render_child_properties_meta_box( $post ) {
+
+        $list_table = new Children_List_Table( array(
+          'name' => 'wpp_edit_property_page',
+          'per_page' => 10,
+        ) );
+
+        $list_table->prepare_items();
+        $list_table->display();
+
+        /*
         $children = get_posts( array(
           'post_parent' => $post->ID,
           'post_type' => 'property',
@@ -81,6 +93,7 @@ namespace UsabilityDynamics\WPP {
           </ul>
         </div>
         <?php
+        */
       }
 
       /**
