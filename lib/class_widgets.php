@@ -1409,7 +1409,7 @@ class SearchPropertiesWidget extends WP_Widget {
     $main_stats_group = isset( $wp_properties[ 'configuration' ][ 'main_stats_group' ] ) ? $wp_properties[ 'configuration' ][ 'main_stats_group' ] : false;
 
     $error = array();
-    
+
     if ( !is_array( $all_searchable_property_types ) ) {
       $error[ 'no_searchable_types' ] = true;
     }
@@ -1527,7 +1527,7 @@ class SearchPropertiesWidget extends WP_Widget {
                   } ?>
                          value="<?php echo $attribute; ?>" <?php echo( ( is_array( $searchable_attributes ) && in_array( $attribute, $searchable_attributes ) ) ? " checked " : "" ); ?> />
                   <label
-                    for="<?php echo $this->get_field_id( 'searchable_attributes' ); ?>_<?php echo $attribute; ?>"><?php echo( !empty( $property_stats[ $attribute ] ) ? $property_stats[ $attribute ] : ucwords( $attribute ) ); ?></label>
+                    for="<?php echo $this->get_field_id( 'searchable_attributes' ); ?>_<?php echo $attribute; ?>"><?php echo apply_filters( 'wpp::search_attribute::label', ( empty( $property_stats[ $attribute ] ) ? WPP_F::de_slug( $attribute ) : $property_stats[ $attribute ] ), $attribute ); ?></label>
                 </li>
               <?php } ?>
             </ul>
@@ -1552,7 +1552,7 @@ class SearchPropertiesWidget extends WP_Widget {
                       } ?>
                         value="<?php echo $attribute; ?>" <?php echo( ( is_array( $grouped_searchable_attributes ) && in_array( $attribute, $grouped_searchable_attributes ) ) ? " checked " : "" ); ?> />
                       <label
-                        for="<?php echo $this->get_field_id( 'grouped_searchable_attributes' ); ?>_<?php echo $attribute; ?>"><?php echo( !empty( $property_stats[ $attribute ] ) ? $property_stats[ $attribute ] : ucwords( $attribute ) ); ?></label>
+                        for="<?php echo $this->get_field_id( 'grouped_searchable_attributes' ); ?>_<?php echo $attribute; ?>"><?php echo apply_filters( 'wpp::search_attribute::label', ( empty( $property_stats[ $attribute ] ) ? WPP_F::de_slug( $attribute ) : $property_stats[ $attribute ] ), $attribute ); ?></label>
                     </li>
                   <?php } ?>
                 </ul>

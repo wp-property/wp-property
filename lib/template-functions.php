@@ -1225,8 +1225,6 @@ if ( !function_exists( 'sort_stats_by_groups' ) ):
 
     $filtered_stats = array( $main_stats_group => array() );
 
-    $ungrouped_stats = array();
-
     foreach ( (array) $stats as $slug => $data ) {
 
       $g_slug = !empty( $stats_groups[ $slug ] ) ? $stats_groups[ $slug ] : false;
@@ -1245,7 +1243,7 @@ if ( !function_exists( 'sort_stats_by_groups' ) ):
         }
       }
 
-      if ( $g_slug && !key_exists( $g_slug, $groups ) ) {
+      if ( $g_slug && !array_key_exists( $g_slug, $groups ) ) {
         //** Build array of attributes WITHOUT groups */
         $filtered_stats[ 0 ][ $slug ] = $data;
       } else {
@@ -1276,7 +1274,7 @@ if ( !function_exists( 'sort_stats_by_groups' ) ):
     }
     $filtered_stats = $main_ordered + $ordered + $filtered_stats;
     
-    //echo "<pre>";print_r($filtered_stats);echo "</pre>";
+    //echo "<pre>";print_r($filtered_stats);echo "</pre>";die();
     return $filtered_stats;
   }
 endif;
