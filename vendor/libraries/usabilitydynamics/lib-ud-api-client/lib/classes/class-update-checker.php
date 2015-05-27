@@ -274,7 +274,11 @@ namespace UsabilityDynamics\UD_API {
             set_transient( md5( $target_url ), json_encode($response), HOUR_IN_SECONDS );
           }
         } else {
-          $response = json_decode( $response, false );
+          $r = json_decode( $response, true );
+          $response = new \stdClass();
+          foreach( $r as $k => $v ){
+            $response->{$k} = $v;
+          }
         }
 
         //echo "<pre>"; print_r( $response ); echo "</pre>";
@@ -294,7 +298,7 @@ namespace UsabilityDynamics\UD_API {
        * @return object $response or boolean false
        */
       public function request( $false, $action, $args ) {
-      
+
         //** Check if this plugins API is about this plugin */
         if ( isset( $args->slug ) ) {
           //** Check if this plugins API is about this plugin */
