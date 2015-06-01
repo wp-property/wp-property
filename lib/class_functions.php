@@ -2427,6 +2427,22 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     add_filter( 'wpp_image_sizes', array( 'WPP_F', 'remove_deleted_image_sizes' ) );
 
+    $wp_properties = wp_parse_args( $wp_properties, array(
+      'configuration' => array(),
+      'location_matters' => array(),
+      'hidden_attributes' => array(),
+      'descriptions' => array(),
+      'image_sizes' => array(),
+      'search_conversions' => array(),
+      'searchable_attributes' => array(),
+      'searchable_property_types' => array(),
+      'property_inheritance' => array(),
+      'property_meta' => array(),
+      'property_stats' => array(),
+      'property_types' => array(),
+      'taxonomies' => array(),
+    ) );
+
     // Filers are applied
     $wp_properties[ 'configuration' ]             = apply_filters( 'wpp_configuration', $wp_properties[ 'configuration' ] );
     $wp_properties[ 'location_matters' ]          = apply_filters( 'wpp_location_matters', $wp_properties[ 'location_matters' ] );
@@ -2440,7 +2456,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     $wp_properties[ 'property_meta' ]             = apply_filters( 'wpp_property_meta', $wp_properties[ 'property_meta' ] );
     $wp_properties[ 'property_stats' ]            = apply_filters( 'wpp_property_stats', $wp_properties[ 'property_stats' ] );
     $wp_properties[ 'property_types' ]            = apply_filters( 'wpp_property_types', $wp_properties[ 'property_types' ] );
-    $wp_properties[ 'taxonomies' ]                = apply_filters( 'wpp_taxonomies', ( isset( $wp_properties[ 'taxonomies' ] ) ? $wp_properties[ 'taxonomies' ] : array() ) );
+    $wp_properties[ 'taxonomies' ]                = apply_filters( 'wpp_taxonomies', $wp_properties[ 'taxonomies' ] );
 
     $wp_properties = stripslashes_deep( $wp_properties );
 
