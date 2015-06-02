@@ -71,7 +71,8 @@
       ]
     },
     "splashes": {
-      "install": "static/splashes/install.php"
+      "install": "static/splashes/install.php",
+      "upgrade": "static/splashes/upgrade.php"
     },
     "schemas": {
       "dependencies" : {
