@@ -130,7 +130,7 @@ namespace UsabilityDynamics\WP {
                             'width'     => '640',
                             'height'    => '500',
                         ),
-                        network_admin_url( 'plugin-install.php' )
+                        admin_url( 'plugin-install.php' )
                     );
 
                     $table_data[$i]['plugin'] = '<strong><a href="' . esc_url( $url ) . '" class="thickbox" title="' . $plugin['name'] . '">' . $plugin['name'] . '</a></strong>';
@@ -291,7 +291,7 @@ namespace UsabilityDynamics\WP {
                           'plugin_source' => $item['url'],
                           'tgmpa-install' => 'install-plugin',
                         ),
-                        network_admin_url( 'themes.php' )
+                        admin_url( 'themes.php' )
                       ),
                       'tgmpa-install'
                     ),
@@ -314,7 +314,7 @@ namespace UsabilityDynamics\WP {
                                 'tgmpa-activate'       => 'activate-plugin',
                                 'tgmpa-activate-nonce' => wp_create_nonce( 'tgmpa-activate' ),
                             ),
-                            network_admin_url( 'themes.php' )
+                            admin_url( 'themes.php' )
                         ),
                         $item['sanitized_plugin']
                     ),
@@ -361,7 +361,7 @@ namespace UsabilityDynamics\WP {
          */
         public function no_items() {
 
-            printf( __( 'No plugins to install or activate. <a href="%1$s" title="Return to the Dashboard">Return to the Dashboard</a>', 'tgmpa' ), network_admin_url() );
+            printf( __( 'No plugins to install or activate. <a href="%1$s" title="Return to the Dashboard">Return to the Dashboard</a>', 'tgmpa' ), admin_url() );
             echo '<style type="text/css">#adminmenu .wp-submenu li.current { display: none !important; }</style>';
 
         }
@@ -531,7 +531,7 @@ namespace UsabilityDynamics\WP {
                             'plugin_paths'  => urlencode( implode( ',', $plugin_paths ) ),
                             'plugin_names'  => urlencode( implode( ',', $plugin_names ) ),
                         ),
-                        network_admin_url( 'themes.php' )
+                        admin_url( 'themes.php' )
                     ),
                     'bulk-plugins'
                 );
@@ -574,7 +574,7 @@ namespace UsabilityDynamics\WP {
                 }
 
                 // Finally, all the data is prepared to be sent to the installer.
-                $url   = add_query_arg( array( 'page' => TGM_Plugin_Activation::$instance->menu ), network_admin_url( 'themes.php' ) );
+                $url   = add_query_arg( array( 'page' => TGM_Plugin_Activation::$instance->menu ), admin_url( 'themes.php' ) );
                 $nonce = 'bulk-plugins';
                 $names = $plugin_names;
                 

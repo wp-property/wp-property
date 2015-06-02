@@ -198,9 +198,10 @@ namespace UsabilityDynamics\UD_API {
       public function settings_screen () {
         
         $this->ui->get_header();
-
+        
         $screen = $this->ui->get_current_screen();
-
+        $this->ensure_keys_are_actually_active();
+        
         switch ( $screen ) {
           //** Products screen. */
           case 'more_products':
@@ -210,10 +211,12 @@ namespace UsabilityDynamics\UD_API {
           //** Licenses screen. */
           case 'licenses':
           default:
-            $this->ensure_keys_are_actually_active();
             $this->installed_products = $this->get_detected_products();
             $this->pending_products = $this->get_pending_products();
+            
             require_once( $this->screens_path . 'screen-manage-' . $this->type . '.php' );
+            
+            
           break;
         }
 
@@ -310,7 +313,7 @@ namespace UsabilityDynamics\UD_API {
         if ( 0 < count( $already_active ) ) {
           foreach ( $already_active as $k => $v ) {
             //** Only look through activated plugins */
-            if( !array_key_exists( $k, $products ) ) {
+            if( !key_exists( $k, $products ) ) {
               continue;
             }
             $deactivate = true;

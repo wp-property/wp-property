@@ -109,7 +109,14 @@ namespace UsabilityDynamics\WP {
                 }
               }
             }
+            
+            
           ?>
+          
+          <div class="return-to-dashboard">
+            <a href="<?php echo esc_url( self_admin_url() ); ?>"><?php is_blog_admin() ? _e( 'Go to Dashboard &rarr; Home' ) : _e( 'Go to Dashboard' ); ?></a>
+          </div>
+          
         </div>
         <?php
       }

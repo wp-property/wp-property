@@ -17,6 +17,7 @@ if( !class_exists( 'BE_Gallery_Metabox' ) ) {
      * @return BE_Gallery_Metabox
      */
     public function __construct() {
+
       add_action( 'init', array( $this, 'translations' ) );
       add_action( 'add_meta_boxes', array( $this, 'admin_scripts' ), 5 );
       add_action( 'add_meta_boxes', array( $this, 'metabox_add' ) );

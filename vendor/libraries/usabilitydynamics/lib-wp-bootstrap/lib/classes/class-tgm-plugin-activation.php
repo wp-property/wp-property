@@ -449,7 +449,7 @@ namespace UsabilityDynamics\WP {
                               'plugin_source' => $plugin['source'],
                               'tgmpa-install' => 'install-plugin',
                           ),
-                          network_admin_url( 'themes.php' )
+                          admin_url( 'themes.php' )
                       ),
                       'tgmpa-install'
                   );
@@ -513,7 +513,7 @@ namespace UsabilityDynamics\WP {
 
                       if ( is_wp_error( $activate ) ) {
                           echo '<div id="message" class="error"><p>' . $activate->get_error_message() . '</p></div>';
-                          echo '<p><a href="' . add_query_arg( 'page', $this->menu, network_admin_url( 'themes.php' ) ) . '" title="' . esc_attr( $this->strings['return'] ) . '" target="_parent">' . $this->strings['return'] . '</a></p>';
+                          echo '<p><a href="' . add_query_arg( 'page', $this->menu, admin_url( 'themes.php' ) ) . '" title="' . esc_attr( $this->strings['return'] ) . '" target="_parent">' . $this->strings['return'] . '</a></p>';
                           return true; // End it here if there is an error with automatic activation
                       }
                       else {
@@ -525,7 +525,7 @@ namespace UsabilityDynamics\WP {
                   $complete = array();
                   foreach ( $this->plugins as $plugin ) {
                       if ( ! is_plugin_active( $plugin['file_path'] ) ) {
-                          echo '<p><a href="' . add_query_arg( 'page', $this->menu, network_admin_url( 'themes.php' ) ) . '" title="' . esc_attr( $this->strings['return'] ) . '" target="_parent">' . $this->strings['return'] . '</a></p>';
+                          echo '<p><a href="' . add_query_arg( 'page', $this->menu, admin_url( 'themes.php' ) ) . '" title="' . esc_attr( $this->strings['return'] ) . '" target="_parent">' . $this->strings['return'] . '</a></p>';
                           $complete[] = $plugin;
                           break;
                       }
@@ -540,7 +540,7 @@ namespace UsabilityDynamics\WP {
 
                   // All plugins are active, so we display the complete string and hide the plugin menu.
                   if ( empty( $complete ) ) {
-                      echo '<p>' .  sprintf( $this->strings['complete'], '<a href="' . network_admin_url() . '" title="' . __( 'Return to the Dashboard', 'tgmpa' ) . '">' . __( 'Return to the Dashboard', 'tgmpa' ) . '</a>' ) . '</p>';
+                      echo '<p>' .  sprintf( $this->strings['complete'], '<a href="' . admin_url() . '" title="' . __( 'Return to the Dashboard', 'tgmpa' ) . '">' . __( 'Return to the Dashboard', 'tgmpa' ) . '</a>' ) . '</p>';
                       echo '<style type="text/css">#adminmenu .wp-submenu li.current { display: none !important; }</style>';
                   }
 
@@ -560,7 +560,7 @@ namespace UsabilityDynamics\WP {
 
                   if ( is_wp_error( $activate ) ) {
                       echo '<div id="message" class="error"><p>' . $activate->get_error_message() . '</p></div>';
-                      echo '<p><a href="' . add_query_arg( 'page', $this->menu, network_admin_url( 'themes.php' ) ) . '" title="' . esc_attr( $this->strings['return'] ) . '" target="_parent">' . $this->strings['return'] . '</a></p>';
+                      echo '<p><a href="' . add_query_arg( 'page', $this->menu, admin_url( 'themes.php' ) ) . '" title="' . esc_attr( $this->strings['return'] ) . '" target="_parent">' . $this->strings['return'] . '</a></p>';
                       return true; // End it here if there is an error with activation.
                   }
                   else {
@@ -644,7 +644,7 @@ namespace UsabilityDynamics\WP {
                   // Not installed.
                   if ( ! isset( $installed_plugins[$plugin['file_path']] ) ) {
                       if ( current_user_can( 'install_plugins' ) ) {
-                          if ( $plugin['required'] ) {
+                          if ( isset( $plugin['required'] ) && $plugin['required'] ) {
                             $e_install_link = true; // We need to display the 'install' action link.
                             $e_install_link_count++; // Increment the install link count.
                             $message['notice_can_install_required'][] = $plugin;
@@ -655,10 +655,18 @@ namespace UsabilityDynamics\WP {
                             $m_install_link_count++; // Increment the install link count.
                             $message['notice_can_install_recommended'][] = $plugin;
                           }
+                      } elseif( !is_user_logged_in() && isset( $plugin['required'] ) && $plugin['required'] ) {
+                          $message['notice_can_install_required'][] = $plugin;
                       }
                       // Need higher privileges to install the plugin.
                       else {
-                          $message['notice_cannot_install'][] = $plugin;
+                          if ( isset( $plugin['required'] ) && $plugin['required'] ) {
+                              $message['notice_can_install_required'][] = $plugin;
+                              $message['notice_cannot_activate'][] = $plugin;
+                          }
+                          else {
+                              $message['notice_cannot_activate'][] = $plugin;
+                          }
                       }
                   }
                   // Installed but not active.
@@ -675,10 +683,19 @@ namespace UsabilityDynamics\WP {
                             $m_activate_link_count++; // Increment the activate link count.
                             $message['notice_can_activate_recommended'][] = $plugin;
                           }
+                      } elseif( !is_user_logged_in() && isset( $plugin['required'] ) && $plugin['required'] ) {
+                          $message['notice_can_install_required'][] = $plugin;
                       }
                       // Need higher privileges to activate the plugin.
                       else {
-                          $message['notice_cannot_activate'][] = $plugin;
+                          if ( isset( $plugin['required'] ) && $plugin['required'] ) {
+                              $message['notice_can_install_required'][] = $plugin;
+                              $message['notice_cannot_activate'][] = $plugin;
+                          }
+                          else {
+                              $message['notice_cannot_activate'][] = $plugin;
+                          }
+
                       }
                   }
               }
@@ -716,7 +733,7 @@ namespace UsabilityDynamics\WP {
                                       'width'     => '640',
                                       'height'    => '500',
                                   ),
-                                  network_admin_url( 'plugin-install.php' )
+                                  admin_url( 'plugin-install.php' )
                               );
 
                               $linked_plugin_groups[] = '<a href="' . esc_url( $url ) . '" class="thickbox" title="' . $plugin_group_single_name . '">' . $plugin_group_single_name . '</a>';
@@ -741,11 +758,11 @@ namespace UsabilityDynamics\WP {
                   }
                   
                   //** Setup variables to determine if action links are needed. */
-                  $e_show_install_link  = $e_install_link ? '<a href="' . add_query_arg( 'page', $this->menu, network_admin_url( 'themes.php' ) ) . '">' . translate_nooped_plural( $this->strings['install_link'], $e_install_link_count, 'tgmpa' ) . '</a>' : '';
-                  $e_show_activate_link = $e_activate_link ? '<a href="' . add_query_arg( 'page', $this->menu, network_admin_url( 'themes.php' ) ) . '">' . translate_nooped_plural( $this->strings['activate_link'], $e_activate_link_count, 'tgmpa' ) . '</a>'  : '';
+                  $e_show_install_link  = $e_install_link ? '<a href="' . add_query_arg( 'page', $this->menu, admin_url( 'themes.php' ) ) . '">' . translate_nooped_plural( $this->strings['install_link'], $e_install_link_count, 'tgmpa' ) . '</a>' : '';
+                  $e_show_activate_link = $e_activate_link ? '<a href="' . add_query_arg( 'page', $this->menu, admin_url( 'themes.php' ) ) . '">' . translate_nooped_plural( $this->strings['activate_link'], $e_activate_link_count, 'tgmpa' ) . '</a>'  : '';
                   
-                  $m_show_install_link  = $m_install_link ? '<a href="' . add_query_arg( 'page', $this->menu, network_admin_url( 'themes.php' ) ) . '">' . translate_nooped_plural( $this->strings['install_link'], $m_install_link_count, 'tgmpa' ) . '</a>' : '';
-                  $m_show_activate_link = $m_activate_link ? '<a href="' . add_query_arg( 'page', $this->menu, network_admin_url( 'themes.php' ) ) . '">' . translate_nooped_plural( $this->strings['activate_link'], $m_activate_link_count, 'tgmpa' ) . '</a>'  : '';
+                  $m_show_install_link  = $m_install_link ? '<a href="' . add_query_arg( 'page', $this->menu, admin_url( 'themes.php' ) ) . '">' . translate_nooped_plural( $this->strings['install_link'], $m_install_link_count, 'tgmpa' ) . '</a>' : '';
+                  $m_show_activate_link = $m_activate_link ? '<a href="' . add_query_arg( 'page', $this->menu, admin_url( 'themes.php' ) ) . '">' . translate_nooped_plural( $this->strings['activate_link'], $m_activate_link_count, 'tgmpa' ) . '</a>'  : '';
                   
                   //** Define all of the action links. */
                   $prepared[ 'links' ] = array(
