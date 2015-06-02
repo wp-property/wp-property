@@ -210,14 +210,13 @@ namespace UsabilityDynamics\UD_API {
           'domain' => $this->blog,
           'software_version' => $this->software_version,
           'extra' => $this->extra,
-          //** Add nocache hack. We must be sure we do not get CACHE result. peshkov@UD */
-          'nocache' => rand( 10000, 99999 ),
         );
 
         //** Check for a plugin update */
         $response = $this->plugin_information( $args );
         //** Displays an admin error message in the WordPress dashboard */
         $this->check_response_for_errors( $response );
+
         //** Set version variables */
         if ( isset( $response ) && is_object( $response ) && $response !== false ) {
           //** New plugin version from the API */
@@ -259,13 +258,30 @@ namespace UsabilityDynamics\UD_API {
        */
       public function plugin_information( $args ) {
         $target_url = $this->create_upgrade_api_url( $args );
-        //echo "<pre>"; print_r( $target_url ); echo "</pre>"; die();
-        $request = wp_remote_get( $target_url );
-        if ( is_wp_error( $request ) || wp_remote_retrieve_response_code( $request ) != 200 ) {
-          return false;
+
+        //** Check licenses keys once per one hour! */
+        $response = get_transient( md5( $target_url ) );
+        if ( false === $response || empty( $response ) ) {
+          //** Add nocache hack. We must be sure we do not get CACHE result. peshkov@UD */
+          $_target_url = $target_url . '&' . http_build_query( array( 'nocache' => rand( 10000, 99999 ) ) );
+          $request = wp_remote_get( $_target_url, array( 'decompress' => false ) );
+          if ( is_wp_error( $request ) || wp_remote_retrieve_response_code( $request ) != 200 ) {
+            return false;
+          }
+          $response = unserialize( wp_remote_retrieve_body( $request ) );
+
+          if( is_object( $response ) ) {
+            set_transient( md5( $target_url ), json_encode($response), HOUR_IN_SECONDS );
+          }
+        } else {
+          $r = json_decode( $response, true );
+          $response = new \stdClass();
+          foreach( $r as $k => $v ){
+            $response->{$k} = $v;
+          }
         }
-        $response = unserialize( wp_remote_retrieve_body( $request ) );
-        //echo "<pre>"; print_r( $response ); echo "</pre>"; die();
+
+        //echo "<pre>"; print_r( $response ); echo "</pre>";
         if ( is_object( $response ) ) {
           return $response;
         } else {
@@ -305,8 +321,6 @@ namespace UsabilityDynamics\UD_API {
           'domain' =>	$this->blog,
           'software_version' => $this->software_version,
           'extra' => $this->extra,
-          //** Add nocache hack. We must be sure we do not get CACHE result. peshkov@UD */
-          'nocache' => rand( 10000, 99999 ),
         );
 
         $response = $this->plugin_information( $args );
