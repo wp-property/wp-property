@@ -119,6 +119,7 @@ namespace UsabilityDynamics\WP {
           
         </div>
         <?php
+        delete_transient( $this->need_splash_key );
       }
       
     }
