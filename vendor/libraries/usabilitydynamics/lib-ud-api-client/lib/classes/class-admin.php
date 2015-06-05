@@ -126,6 +126,13 @@ namespace UsabilityDynamics\UD_API {
         add_filter( 'ud:errors:admin_notices', array( $this, 'maybe_remove_notices' ) );
         add_filter( 'ud:messages:admin_notices', array( $this, 'maybe_remove_notices' ) );
         add_filter( 'ud:warnings:admin_notices', array( $this, 'maybe_remove_notices' ) );
+
+        /**
+         * May be add additional information about available add-ons
+         * for legacy users ( who purchased any deprecated premium feature )
+         */
+        add_action( 'ud::bootstrap::upgrade_notice::additional_info', array( $this, 'add_info_to_upgrade_notice' ) );
+
       }
       
       /**
@@ -736,6 +743,12 @@ namespace UsabilityDynamics\UD_API {
         if( !empty( $messages ) ) {
           $this->messages = $messages;
         }
+
+        /**
+         * We also ping UD server once per 24h
+         * for getting any specific information.
+         */
+        $this->maybe_ping_ud();
       }
       
       /**
@@ -834,6 +847,96 @@ namespace UsabilityDynamics\UD_API {
           }
         }        
         
+      }
+
+      /**
+       * May be add additional information about available add-ons
+       * for legacy users ( who purchased any deprecated premium feature )
+       * to Product's Upgrade Notice
+       *
+       */
+      public function add_info_to_upgrade_notice() {
+        $transient = sanitize_key( 'ud_legacy_features_' . $this->slug );
+        $response = get_transient( $transient );
+
+        if ( false === $response || empty( $response ) ) {
+
+          $response = $this->api->legacy_features( array(
+            'product_id' => $this->slug,
+          ) );
+
+          if ( false !== $response && empty( $response[ 'error' ] ) ) {
+            set_transient( $transient, json_encode($response), HOUR_IN_SECONDS );
+          }
+
+        } else {
+          $response = json_decode( $response, true );
+        }
+
+        if ( false !== $response && empty( $response[ 'error' ] ) ) {
+          ob_start();
+          require( dirname( dirname( __DIR__ ) ) . '/static/templates/legacy-features.php' );
+          $content = ob_get_clean();
+          echo apply_filters( 'ud::bootstrap::upgrade_notice::legacy_features::template', $content, $this->slug, $response );
+        }
+      }
+
+      /**
+       * Ping UD server once per 24h to get any specific information.
+       *
+       * Maybe render Admin Notice from UD server.
+       *
+       */
+      private function maybe_ping_ud() {
+
+        $cache = true;
+        $transient = sanitize_key( 'ud_ping_' . $this->slug );
+        $response = get_transient( $transient );
+
+        if ( false === $response || empty( $response ) ) {
+
+          $cache = false;
+
+          $response = $this->api->ping( array(
+            'product_id' => $this->slug
+          ) );
+
+          if ( false !== $response && empty( $response[ 'error' ] ) ) {
+            set_transient( $transient, json_encode($response), 24 * HOUR_IN_SECONDS );
+          }
+
+        } else {
+          $response = json_decode( $response, true );
+        }
+
+        if ( false !== $response && empty( $response[ 'error' ] ) ) {
+
+          /**
+           * Here we can take care about response.
+           *
+           * @param string $this->slug ( product_id )
+           * @param array $response
+           * @param bool $cache got from cache or not
+           */
+          $this->ping_response = apply_filters( 'ud::ping::response', $response, $this->slug, $cache );
+
+          /**
+           * Render Admin Notice from UD server.
+           */
+          if( !empty( $response[ 'admin_notice' ] ) ) {
+
+            add_action( 'admin_notices', function(){
+              $notice = @base64_decode( $this->ping_response[ 'admin_notice' ] );
+              $notice = apply_filters( 'ud::ping::response::admin_notice', $notice, $this->slug );
+              if( !empty( $notice ) ) {
+                echo $notice;
+              }
+            } );
+
+          }
+
+        }
+
       }
       
     }
