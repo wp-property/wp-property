@@ -131,7 +131,7 @@ namespace UsabilityDynamics\UD_API {
          * May be add additional information about available add-ons
          * for legacy users ( who purchased any deprecated premium feature )
          */
-        add_action( 'ud::bootstrap::upgrade_notice::additional_info', array( $this, 'add_info_to_upgrade_notice' ) );
+        add_action( 'ud::bootstrap::upgrade_notice::additional_info', array( $this, 'maybe_add_info_to_upgrade_notice' ) );
 
       }
       
@@ -855,15 +855,15 @@ namespace UsabilityDynamics\UD_API {
        * to Product's Upgrade Notice
        *
        */
-      public function add_info_to_upgrade_notice() {
+      public function maybe_add_info_to_upgrade_notice() {
         $transient = sanitize_key( 'ud_legacy_features_' . $this->slug );
         $response = get_transient( $transient );
 
         if ( false === $response || empty( $response ) ) {
 
-          $response = $this->api->legacy_features( array(
+          $response = $this->api->legacy_features( apply_filters( 'ud:legacy_features:request:args', array(
             'product_id' => $this->slug,
-          ) );
+          ), $this->slug ) );
 
           if ( false !== $response && empty( $response[ 'error' ] ) ) {
             set_transient( $transient, json_encode($response), HOUR_IN_SECONDS );
@@ -910,8 +910,20 @@ namespace UsabilityDynamics\UD_API {
 
           $cache = false;
 
+
+          $detected_products = array();
+
+          foreach( $this->get_detected_plugins() as $product ) {
+            $detected_products[ $product[ 'product_id' ] ] = array(
+              'version' => $product[ 'product_version' ],
+              'status' => $product[ 'product_status' ],
+              'product_id' => $product[ 'product_id' ],
+            );
+          }
+
           $response = $this->api->ping( array(
             'product_id' => $this->slug,
+            'detected_products' => base64_decode( json_encode( $detected_products ) ),
           ) );
 
           if ( false !== $response && empty( $response[ 'error' ] ) ) {
