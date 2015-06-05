@@ -889,16 +889,29 @@ namespace UsabilityDynamics\UD_API {
        */
       private function maybe_ping_ud() {
 
+        /**
+         * May be dismiss notice from UD server
+         */
+        if( !empty( $_REQUEST[ 'dismiss_ud_notice' ] ) ) {
+          set_transient( $_REQUEST[ 'dismiss_ud_notice' ], 1 );
+          if( !empty( $_SERVER[ 'HTTP_REFERER' ] ) ) {
+            wp_redirect( $_SERVER[ 'HTTP_REFERER' ] );
+          } else {
+            wp_redirect( admin_url( 'index.php' ) );
+          }
+          exit;
+        }
+
         $cache = true;
         $transient = sanitize_key( 'ud_ping_' . $this->slug );
         $response = get_transient( $transient );
 
-        if ( false === $response || empty( $response ) ) {
+        if ( true || false === $response || empty( $response ) ) {
 
           $cache = false;
 
           $response = $this->api->ping( array(
-            'product_id' => $this->slug
+            'product_id' => $this->slug,
           ) );
 
           if ( false !== $response && empty( $response[ 'error' ] ) ) {
@@ -924,17 +937,58 @@ namespace UsabilityDynamics\UD_API {
            * Render Admin Notice from UD server.
            */
           if( !empty( $response[ 'admin_notice' ] ) ) {
+            global $_ud_ping_notices;
 
-            add_action( 'admin_notices', function(){
-              $notice = @base64_decode( $this->ping_response[ 'admin_notice' ] );
-              $notice = apply_filters( 'ud::ping::response::admin_notice', $notice, $this->slug );
-              if( !empty( $notice ) ) {
-                echo $notice;
-              }
-            } );
+            if( !isset( $_ud_ping_notices ) || !is_array( $_ud_ping_notices ) ) {
+              $_ud_ping_notices = array();
+            }
+
+            $notice = $this->ping_response[ 'admin_notice' ];
+
+            /** Determine if notice dismissed */
+            if( get_transient( md5( $notice ) ) ) {
+              return;
+            }
+
+            if( in_array( $notice, $_ud_ping_notices ) ) {
+              return;
+            }
+
+            array_push( $_ud_ping_notices, $this->ping_response[ 'admin_notice' ] );
+
+            if( !has_action( 'admin_notices', array( __CLASS__, 'ping_admin_notices' ) ) ) {
+              add_action( 'admin_notices', array( __CLASS__, 'ping_admin_notices' ) );
+
+              add_filter( 'ud::ping::response::admin_notice::icon', function(){
+                return $this->assets_url . 'images/ud.png';
+              } );
+            }
 
           }
 
+        }
+
+      }
+
+      /**
+       * Render Notices from UD server
+       *
+       */
+      static public function ping_admin_notices() {
+        global $_ud_ping_notices;
+
+        if( !isset( $_ud_ping_notices ) || !is_array( $_ud_ping_notices ) ) {
+          return;
+        }
+
+        foreach( $_ud_ping_notices as $notice ) {
+          $dismiss_url = admin_url( 'index.php' ) . '?dismiss_ud_notice=' . md5( $notice );
+          $notice = @base64_decode( $notice );
+          $notice = apply_filters( 'ud::ping::response::admin_notice', $notice );
+          if( !empty( $notice ) ) {
+            $icon = apply_filters( 'ud::ping::response::admin_notice::icon', false );
+            require( dirname( dirname( __DIR__ ) ) . '/static/templates/admin-notice.php' );
+          }
         }
 
       }

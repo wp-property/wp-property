@@ -112,11 +112,11 @@ namespace UsabilityDynamics\UD_API {
           'request' 		=> '',
           'product_id' 	=> '',
           'instance' 		=> '',
-          'email'       => '',
+          //'email'       => '',
           'licence_key' => '',
           'platform' 	  => $this->blog,
           //** Add nocache hack. We must be sure we do not get CACHE result. peshkov@UD */
-          'nocache' => rand( 10000, 99999 ),
+          //'nocache' => rand( 10000, 99999 ),
         ) );
         $target_url = $this->create_software_api_url( $args );
         //echo "<pre>"; print_r( $target_url ); echo "</pre>"; die();
