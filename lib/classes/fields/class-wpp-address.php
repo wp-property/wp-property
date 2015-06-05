@@ -50,7 +50,7 @@ if( !class_exists( 'RWMB_Wpp_Address_Field' ) && class_exists( 'RWMB_Text_Field'
         echo $field[ 'desc' ] ? "<p id='{$field['id']}_description' class='description'>{$field['desc']}</p>" : '';
         ?>
         <?php if( !empty( $property ) && current_user_can( 'manage_wpp_settings' ) ) : ?>
-          <div class="wpp_attribute_row_address_options hidden">
+          <div class="wpp_attribute_row_address_options">
             <input type="hidden" name="wpp_data[meta][manual_coordinates]" value="false"/>
             <input type="checkbox" id="wpp_manual_coordinates" name="wpp_data[meta][manual_coordinates]" value="true" <?php echo isset( $property->manual_coordinates ) && in_array( $property->manual_coordinates, array( 'true', '1' ) ) ? 'checked="checked"' : ''; ?> />
             <label for="wpp_manual_coordinates"><?php _e( 'Set Coordinates Manually.', ud_get_wp_property()->domain ); ?></label>
