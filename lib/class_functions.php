@@ -1677,9 +1677,10 @@ class WPP_F extends UsabilityDynamics\Utility {
       "language" => $localization,
     )), "https://maps.googleapis.com/maps/api/geocode/json" );
 
-    $obj = json_decode( wp_remote_fopen( $url ) );
+    $obj = wp_remote_get( $url );
+    $body = json_decode( wp_remote_retrieve_body( $obj ) );
 
-    if ( $obj->status != "OK" ) {
+    if ( $body->status != "OK" ) {
 
       // Return Google result if needed instead of just false
       if ( $return_obj_on_fail ) {
@@ -1690,8 +1691,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     }
 
-    $results = $obj->results;
-    $results_object = $results[ 0 ];
+    $results_object = $body->results[ 0 ];
     $geometry = $results_object->geometry;
 
     $return->formatted_address = $results_object->formatted_address;
@@ -1699,7 +1699,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     $return->longitude = $geometry->location->lng;
 
     // Cycle through address component objects picking out the needed elements, if they exist
-    foreach ( (array)$results_object->address_components as $ac ) {
+    foreach ( (array) $results_object->address_components as $ac ) {
 
       // types is returned as an array, look through all of them
       foreach ( (array)$ac->types as $type ) {
@@ -1742,7 +1742,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
           case 'sublocality':
             $return->district = $ac->long_name;
-            break;
+          break;
 
         }
       }

@@ -119,6 +119,7 @@ if ( !function_exists( 'property_overview_image' ) ) {
       $link_class = "fancybox_image";
     } else {
       $thumbnail_link = $property[ 'permalink' ];
+      $link_class = '';
     }
 
     $image = !empty( $property[ 'featured_image' ] ) ? wpp_get_image_link( $property[ 'featured_image' ], $thumbnail_size, array( 'return' => 'array' ) ) : false;
