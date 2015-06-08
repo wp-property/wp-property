@@ -94,6 +94,22 @@
         return false;
       } );
 
+      this.$wpp_meta_latitude.on( 'change', function() {
+        var latLng = new google.maps.LatLng( that.$wpp_meta_latitude.val(), that.$wpp_meta_longitude.val() );
+
+        that.map.setCenter( latLng );
+        that.marker.setPosition( latLng );
+        that.updateCoordinate( latLng );
+      });
+
+      this.$wpp_meta_longitude.on( 'change', function() {
+        var latLng = new google.maps.LatLng( that.$wpp_meta_latitude.val(), that.$wpp_meta_longitude.val() );
+
+        that.map.setCenter( latLng );
+        that.marker.setPosition( latLng );
+        that.updateCoordinate( latLng );
+      });
+
       /**
        * Add a custom event that allows other scripts to refresh the maps when needed
        * For example: when maps is in tabs or hidden div (this is known issue of Google Maps)
