@@ -10,12 +10,14 @@
     background-color: #F8FFF2;
   }
   .ud-install-notice-content {
+    float: left;
+    width: 70%;
+  }
+  .ud-install-notice-content {
     font-size: 16px;
     line-height: 21px;
     font-weight: 400;
     margin-bottom: 36px;
-    float: left;
-    width: 70%;
   }
   .ud-install-notice-dismiss {
     position: absolute;

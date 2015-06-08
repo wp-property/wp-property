@@ -13,6 +13,10 @@ if( !class_exists( 'RWMB_Wpp_Address_Field' ) && class_exists( 'RWMB_Text_Field'
     static function admin_enqueue_scripts() {
       wp_enqueue_style( 'rwmb-text', RWMB_CSS_URL . 'text.css', array(), RWMB_VER );
       wp_enqueue_script( 'rwmb-wpp-address', ud_get_wp_property()->path( 'static/scripts/wpp.admin.fields.js' ), array( 'jquery' ) );
+
+      wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?sensor=false', array(), '', true );
+      wp_enqueue_style( 'rwmb-map', RWMB_CSS_URL . 'map.css' );
+      wp_enqueue_script( 'rwmb-map', RWMB_JS_URL . 'map.js', array( 'jquery-ui-autocomplete', 'google-maps' ), RWMB_VER, true );
     }
 
     /**
@@ -24,7 +28,7 @@ if( !class_exists( 'RWMB_Wpp_Address_Field' ) && class_exists( 'RWMB_Text_Field'
      * @return string
      */
     static function html( $meta, $field ) {
-      global $post;
+      global $post, $wp_properties;
 
       $property = get_property( $post->ID, array(
         'get_children' => 'false',
@@ -33,6 +37,23 @@ if( !class_exists( 'RWMB_Wpp_Address_Field' ) && class_exists( 'RWMB_Text_Field'
         'load_thumbnail' => 'false',
         'load_parent' => 'false',
       ) );
+
+      $html = '<div class="rwmb-map-field">';
+
+      $html .= sprintf(
+          '<button class="button rwmb-map-goto-address-button" value="%s">%s</button>',
+          $field[ 'field_name' ],
+          __( 'Show Address on Map', 'meta-box' )
+      );
+
+      $html .= sprintf(
+          '<div class="rwmb-map-canvas" data-default-loc="%s"></div>
+				<input type="hidden" name="wpp_data[meta][location_map_coordinates]" class="rwmb-map-coordinate" value="%s">',
+          esc_attr( implode( ',', $wp_properties['default_coords'] ) ),
+          esc_attr( $property->location_map_coordinates )
+      );
+
+      $html .= '</div>';
 
       ob_start();
       ?>
@@ -72,7 +93,7 @@ if( !class_exists( 'RWMB_Wpp_Address_Field' ) && class_exists( 'RWMB_Text_Field'
         <?php endif; ?>
       </div>
       <?php
-      return ob_get_clean();
+      return ob_get_clean() . $html;
     }
 
     /**

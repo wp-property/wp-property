@@ -232,7 +232,7 @@
         },
         "require": {
             "php": ">=5.3",
-            "usabilitydynamics/lib-utility": "*"
+            "usabilitydynamics/lib-utility": "~0.3"
         },
         "type": "library",
         "extra": {
@@ -413,16 +413,16 @@
     },
     {
         "name": "usabilitydynamics/wp-meta-box",
-        "version": "4.4.3.3",
-        "version_normalized": "4.4.3.3",
+        "version": "4.5.2",
+        "version_normalized": "4.5.2.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/wp-meta-box",
-            "reference": "4.4.3.3"
+            "reference": "4.5.2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/wp-meta-box/archive/4.4.3.3.zip",
+            "url": "https://github.com/UsabilityDynamics/wp-meta-box/archive/4.5.2.zip",
             "reference": null,
             "shasum": null
         },

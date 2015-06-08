@@ -1649,8 +1649,15 @@ class WPP_F extends UsabilityDynamics\Utility {
   /**
    * Returns location information from Google Maps API call
    *
-   * @version 1.1
+   *
+   * @version 2.0
    * @since 1.0.0
+   *
+   * @param bool $address
+   * @param string $localization
+   * @param bool $return_obj_on_fail
+   * @param bool $latlng
+   *
    * @return object
    */
   static public function geo_locate_address( $address = false, $localization = "en", $return_obj_on_fail = false, $latlng = false ) {
@@ -1665,13 +1672,15 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     $return = new stdClass();
 
-    $address = urlencode( $address );
+    $url = add_query_arg( apply_filters( 'wpp:geocoding_request', array(
+      "address" => rawurlencode( $address ),
+      "language" => $localization,
+    )), "https://maps.googleapis.com/maps/api/geocode/json" );
 
-    $url = str_replace( " ", "+", "https://maps.googleapis.com/maps/api/geocode/json?" . ( ( is_array( $latlng ) ) ? "latlng={$latlng['lat']},{$latlng['lng']}" : "address={$address}" ) . "&sensor=true&language={$localization}" );
+    $obj = wp_remote_get( $url );
+    $body = json_decode( wp_remote_retrieve_body( $obj ) );
 
-    $obj = ( json_decode( wp_remote_fopen( $url ) ) );
-
-    if ( $obj->status != "OK" ) {
+    if ( $body->status != "OK" ) {
 
       // Return Google result if needed instead of just false
       if ( $return_obj_on_fail ) {
@@ -1682,8 +1691,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     }
 
-    $results = $obj->results;
-    $results_object = $results[ 0 ];
+    $results_object = $body->results[ 0 ];
     $geometry = $results_object->geometry;
 
     $return->formatted_address = $results_object->formatted_address;
@@ -1691,7 +1699,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     $return->longitude = $geometry->location->lng;
 
     // Cycle through address component objects picking out the needed elements, if they exist
-    foreach ( (array)$results_object->address_components as $ac ) {
+    foreach ( (array) $results_object->address_components as $ac ) {
 
       // types is returned as an array, look through all of them
       foreach ( (array)$ac->types as $type ) {
@@ -1734,7 +1742,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
           case 'sublocality':
             $return->district = $ac->long_name;
-            break;
+          break;
 
         }
       }

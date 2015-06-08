@@ -1,5 +1,4 @@
 #post-body .rwmb-select-advanced {
 	height: auto;
-	width: 100%;
-  max-width: 100%;
+	min-width: 200px;
 }

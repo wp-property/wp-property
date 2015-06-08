@@ -6,17 +6,6 @@ if ( ! class_exists( 'RWMB_Text_Field' ) )
 {
 	class RWMB_Text_Field extends RWMB_Field
 	{
-
-    /**
-     * Enqueue scripts and styles
-     *
-     * @return void
-     */
-    static function admin_enqueue_scripts()
-    {
-      wp_enqueue_style( 'rwmb-text', RWMB_CSS_URL . 'text.css', array(), RWMB_VER );
-    }
-
 		/**
 		 * Get field HTML
 		 *
