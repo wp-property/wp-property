@@ -106,6 +106,7 @@
         if ( that.map )
         {
           google.maps.event.trigger( that.map, 'resize' );
+          that.initMarkerPosition();
         }
       } );
     },

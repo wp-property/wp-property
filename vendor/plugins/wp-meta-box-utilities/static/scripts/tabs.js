@@ -13,6 +13,7 @@ jQuery( function ( $ )
 
 		$li.addClass( 'rwmb-tab-active' ).siblings().removeClass( 'rwmb-tab-active' );
 		$panel.show().siblings().hide();
+    $( window ).trigger( 'rwmb_map_refresh' );
 	} );
 	$( '.rwmb-tab-active a' ).trigger( 'click' );
 } );
