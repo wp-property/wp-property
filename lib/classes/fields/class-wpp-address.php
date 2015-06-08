@@ -16,7 +16,7 @@ if( !class_exists( 'RWMB_Wpp_Address_Field' ) && class_exists( 'RWMB_Text_Field'
 
       wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?sensor=false', array(), '', true );
       wp_enqueue_style( 'rwmb-map', RWMB_CSS_URL . 'map.css' );
-      wp_enqueue_script( 'rwmb-map', RWMB_JS_URL . 'map.js', array( 'jquery-ui-autocomplete', 'google-maps' ), RWMB_VER, true );
+      wp_enqueue_script( 'rwmb-map', ud_get_wp_property()->path( 'static/scripts/fields/wpp-map-address.js' ), array( 'jquery-ui-autocomplete', 'google-maps' ), RWMB_VER, true );
     }
 
     /**
@@ -50,7 +50,7 @@ if( !class_exists( 'RWMB_Wpp_Address_Field' ) && class_exists( 'RWMB_Text_Field'
           '<div class="rwmb-map-canvas" data-default-loc="%s"></div>
 				<input type="hidden" name="wpp_data[meta][location_map_coordinates]" class="rwmb-map-coordinate" value="%s">',
           esc_attr( implode( ',', $wp_properties['default_coords'] ) ),
-          esc_attr( $property->location_map_coordinates )
+          esc_attr( $property->latitude.','.$property->longitude )
       );
 
       $html .= '</div>';
