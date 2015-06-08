@@ -266,7 +266,7 @@ namespace UsabilityDynamics\WP {
               if( !empty( $_SERVER[ 'HTTP_REFERER' ] ) ) {
                 wp_redirect( $_SERVER[ 'HTTP_REFERER' ] );
               } else {
-                wp_redirect( admin_url( 'index.php' ) );
+                wp_redirect( admin_url( 'plugins.php' ) );
               }
               exit;
 
@@ -303,7 +303,7 @@ namespace UsabilityDynamics\WP {
                 'dashboard_link' => admin_url( 'index.php?page='. Dashboard::get_instance()->page_slug . '&slug=' . $this->slug ),
                 'dismiss_link' => admin_url( 'index.php?page='. Dashboard::get_instance()->page_slug . '&slug=' . $this->slug . '&dismiss=1' ),
                 'home_link' => !empty( $this->schema[ 'homepage' ] ) ? $this->schema[ 'homepage' ] : false,
-              ), $this );
+              ) );
               extract( $vars );
               require( dirname( dirname( __DIR__ ) ) . '/static/views/install_notice.php' );
               $content = ob_get_clean();

@@ -65,10 +65,12 @@ if ( ! class_exists( 'RWMB_Field ' ) )
 			// Cloneable fields
 			if ( $field['clone'] )
 			{
-				$meta = (array) $meta;
-
 				$field_html = '';
 
+				/**
+				 * Note: $meta must contain value so that the foreach loop runs!
+				 * @see self::meta()
+				 */
 				foreach ( $meta as $index => $sub_meta )
 				{
 					$sub_field               = $field;
@@ -254,18 +256,33 @@ if ( ! class_exists( 'RWMB_Field ' ) )
 		{
 			/**
 			 * For special fields like 'divider', 'heading' which don't have ID, just return empty string
-			 * to prevent notice error when displayin fields
+			 * to prevent notice error when displaying fields
 			 */
 			if ( empty( $field['id'] ) )
 				return '';
 
-			$meta = get_post_meta( $post_id, $field['id'], ! $field['multiple'] );
+			$single = $field['clone'] || ! $field['multiple'];
+			$meta   = get_post_meta( $post_id, $field['id'], $single );
 
 			// Use $field['std'] only when the meta box hasn't been saved (i.e. the first time we run)
 			$meta = ( ! $saved && '' === $meta || array() === $meta ) ? $field['std'] : $meta;
 
 			// Escape attributes
 			$meta = call_user_func( array( RW_Meta_Box::get_class_name( $field ), 'esc_meta' ), $meta );
+
+			// Make sure meta value is an array for clonable and multiple fields
+			if ( $field['clone'] || $field['multiple'] )
+			{
+				if ( empty( $meta ) || ! is_array( $meta ) )
+				{
+					/**
+					 * Note: if field is clonable, $meta must be an array with values
+					 * so that the foreach loop in self::show() runs properly
+					 * @see self::show()
+					 */
+					$meta = $field['clone'] ? array( '' ) : array();
+				}
+			}
 
 			return $meta;
 		}
@@ -279,7 +296,12 @@ if ( ! class_exists( 'RWMB_Field ' ) )
 		 */
 		static function esc_meta( $meta )
 		{
-			return is_array( $meta ) ? array_map( 'esc_attr', $meta ) : esc_attr( $meta );
+			if ( is_array( $meta ) )
+			{
+				array_walk_recursive( $meta, 'esc_attr' );
+				return $meta;
+			}
+			return esc_attr( $meta );
 		}
 
 		/**
@@ -309,6 +331,7 @@ if ( ! class_exists( 'RWMB_Field ' ) )
 		{
 			$name = $field['id'];
 
+			// Remove post meta if it's empty
 			if ( '' === $new || array() === $new )
 			{
 				delete_post_meta( $post_id, $name );
@@ -316,6 +339,20 @@ if ( ! class_exists( 'RWMB_Field ' ) )
 				return;
 			}
 
+			// If field is cloneable, value is saved as a single entry in the database
+			if ( $field['clone'] )
+			{
+				$new = (array) $new;
+				foreach ( $new as $k => $v )
+				{
+					if ( '' === $v )
+						unset( $new[$k] );
+				}
+				update_post_meta( $post_id, $name, $new );
+				return;
+			}
+
+			// If field is multiple, value is saved as multiple entries in the database (WordPress behaviour)
 			if ( $field['multiple'] )
 			{
 				foreach ( $new as $new_value )
@@ -328,20 +365,11 @@ if ( ! class_exists( 'RWMB_Field ' ) )
 					if ( ! in_array( $old_value, $new ) )
 						delete_post_meta( $post_id, $name, $old_value );
 				}
+				return;
 			}
-			else
-			{
-				if ( $field['clone'] )
-				{
-					$new = (array) $new;
-					foreach ( $new as $k => $v )
-					{
-						if ( '' === $v )
-							unset( $new[$k] );
-					}
-				}
-				update_post_meta( $post_id, $name, $new );
-			}
+
+			// Default: just update post meta
+			update_post_meta( $post_id, $name, $new );
 		}
 
 		/**
@@ -388,7 +416,14 @@ if ( ! class_exists( 'RWMB_Field ' ) )
 			$value = '';
 			if ( ! empty( $field['id'] ) )
 			{
-				$value = get_post_meta( $post_id, $field['id'], ! $field['multiple'] );
+				$single = $field['clone'] || ! $field['multiple'];
+				$value  = get_post_meta( $post_id, $field['id'], $single );
+
+				// Make sure meta value is an array for clonable and multiple fields
+				if ( $field['clone'] || $field['multiple'] )
+				{
+					$value = is_array( $value ) && $value ? $value : array();
+				}
 			}
 
 			/**
