@@ -160,7 +160,7 @@ namespace UsabilityDynamics\WPP {
 
         $settings_page = add_submenu_page( 'edit.php?post_type=property', __( 'Settings', 'wpp' ), __( 'Settings', 'wpp' ), 'manage_wpp_settings', 'property_settings', function () {
           global $wp_properties;
-          include $this->instance->path( "static/views/admin/settings.php", 'dir' );
+          include ud_get_wp_property()->path( "static/views/admin/settings.php", 'dir' );
         } );
 
       }
