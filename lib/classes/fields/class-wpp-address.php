@@ -50,7 +50,7 @@ if( !class_exists( 'RWMB_Wpp_Address_Field' ) && class_exists( 'RWMB_Text_Field'
           '<div class="rwmb-map-canvas" data-default-loc="%s"></div>
 				<input type="hidden" name="wpp_data[meta][location_map_coordinates]" class="rwmb-map-coordinate" value="%s">',
           esc_attr( implode( ',', $wp_properties['default_coords'] ) ),
-          esc_attr( $property->latitude.','.$property->longitude )
+          esc_attr( !empty($property->latitude)?($property->latitude.','.$property->longitude):implode( ',', $wp_properties['default_coords'] ) )
       );
 
       $html .= '</div>';
