@@ -370,16 +370,16 @@
     },
     {
         "name": "usabilitydynamics/lib-wp-list-table",
-        "version": "1.0.4",
-        "version_normalized": "1.0.4.0",
+        "version": "1.0.5",
+        "version_normalized": "1.0.5.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/lib-wp-list-table",
-            "reference": "1.0.4"
+            "reference": "1.0.5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-wp-list-table/archive/1.0.4.zip",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-list-table/archive/1.0.5.zip",
             "reference": null,
             "shasum": null
         },
@@ -470,16 +470,16 @@
     },
     {
         "name": "usabilitydynamics/wp-meta-box-utilities",
-        "version": "1.0.1",
-        "version_normalized": "1.0.1.0",
+        "version": "1.0.2",
+        "version_normalized": "1.0.2.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/wp-meta-box-utilities",
-            "reference": "1.0.1"
+            "reference": "1.0.2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/wp-meta-box-utilities/archive/1.0.1.zip",
+            "url": "https://github.com/UsabilityDynamics/wp-meta-box-utilities/archive/1.0.2.zip",
             "reference": null,
             "shasum": null
         },

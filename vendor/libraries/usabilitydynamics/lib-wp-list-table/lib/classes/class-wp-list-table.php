@@ -545,6 +545,21 @@ namespace UsabilityDynamics\WPLT {
                 }
 
                 break;
+
+              case 'date_query':
+
+                if( !isset( $_query[ 'date_query' ] ) ) {
+                  $_query[ 'date_query' ] = array();
+                }
+
+                if ( !empty( $q['value'] ) ) {
+
+                  $_query['date_query'][0][$map['compare']] = $q['value'];
+
+                  $_query['date_query'][0]['inclusive'] = true;
+                }
+
+                break;
             }
           }
 

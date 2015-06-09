@@ -286,7 +286,29 @@ namespace UsabilityDynamics\WP {
           }
 
           if( !get_transient( $transient ) ) {
-            add_action( 'admin_notices',  array( $this, 'admin_upgrade_notice' ), 1 );
+            add_action( 'admin_notices',  function() {
+
+              if( $this->type == 'theme' ) {
+                $icon = file_exists( get_template_directory() . '/static/images/icon.png' ) ? get_template_directory_uri() . '/static/images/icon.png' : false;
+              } else {
+                $icon = file_exists( $this->path( 'static/images/icon.png', 'dir' ) ) ? $this->path( 'static/images/icon.png', 'url' ) : false;
+              }
+
+              ob_start();
+              $vars = apply_filters( 'ud::bootstrap::upgrade_notice::vars', array(
+                'content' => false,
+                'icon' => $icon,
+                'name' => $this->name,
+                'type' => $this->type,
+                'dashboard_link' => admin_url( 'index.php?page='. Dashboard::get_instance()->page_slug . '&slug=' . $this->slug ),
+                'dismiss_link' => admin_url( 'index.php?page='. Dashboard::get_instance()->page_slug . '&slug=' . $this->slug . '&dismiss=1' ),
+                'home_link' => !empty( $this->schema[ 'homepage' ] ) ? $this->schema[ 'homepage' ] : false,
+              ) );
+              extract( $vars );
+              require( dirname( dirname( __DIR__ ) ) . '/static/views/install_notice.php' );
+              $content = ob_get_clean();
+              echo apply_filters( 'ud::bootstrap::upgrade_notice::template', $content, $this->slug, $vars );
+            }, 1 );
           }
 
           if( empty( $page ) ) {
@@ -327,34 +349,6 @@ namespace UsabilityDynamics\WP {
 
         set_transient( Dashboard::get_instance()->need_splash_key, Dashboard::get_instance()->transient_key, 30 );
 
-      }
-
-      /**
-       * Renders Notice with information about installed or upgraded plugin / theme
-       *
-       */
-      public function admin_upgrade_notice() {
-
-        if( $this->type == 'theme' ) {
-          $icon = file_exists( get_template_directory() . '/static/images/icon.png' ) ? get_template_directory_uri() . '/static/images/icon.png' : false;
-        } else {
-          $icon = file_exists( $this->path( 'static/images/icon.png', 'dir' ) ) ? $this->path( 'static/images/icon.png', 'url' ) : false;
-        }
-
-        ob_start();
-        $vars = apply_filters( 'ud::bootstrap::upgrade_notice::vars', array(
-          'content' => false,
-          'icon' => $icon,
-          'name' => $this->name,
-          'type' => $this->type,
-          'dashboard_link' => admin_url( 'index.php?page='. Dashboard::get_instance()->page_slug . '&slug=' . $this->slug ),
-          'dismiss_link' => admin_url( 'index.php?page='. Dashboard::get_instance()->page_slug . '&slug=' . $this->slug . '&dismiss=1' ),
-          'home_link' => !empty( $this->schema[ 'homepage' ] ) ? $this->schema[ 'homepage' ] : false,
-        ) );
-        extract( $vars );
-        require( dirname( dirname( __DIR__ ) ) . '/static/views/install_notice.php' );
-        $content = ob_get_clean();
-        echo apply_filters( 'ud::bootstrap::upgrade_notice::template', $content, $this->slug, $vars );
       }
 
       /**
