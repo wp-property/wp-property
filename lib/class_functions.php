@@ -370,7 +370,7 @@ class WPP_F extends UsabilityDynamics\Utility {
    * @return mixed
    */
   static function get_attribute_data( $attribute = false ) {
-    return UsabilityDynamics\WPP\Attributes::get_attribute_data();
+    return UsabilityDynamics\WPP\Attributes::get_attribute_data($attribute);
   }
 
   /**
