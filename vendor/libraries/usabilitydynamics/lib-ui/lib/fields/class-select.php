@@ -108,7 +108,7 @@ namespace UsabilityDynamics\UI {
 					$html .= sprintf(
 						$option,
 						$value,
-						selected(in_array($value, (array)$meta), true, false),
+						selected( $value == $field->value, true, false),
 						$label
 					);
 				}

@@ -248,6 +248,8 @@
 				$( 'select', filter).on('change', function(e) {
 					list.change_filter();
 				});
+
+        $(document).trigger( 'wplt_initialized', [filter, list] );
 			},
 
 			/**
