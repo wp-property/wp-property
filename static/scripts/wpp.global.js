@@ -20,7 +20,7 @@ if ( top === self ) {
   }
 }
 
-jQuery.extend( wpp = wpp || {}, {
+jQuery.extend( true, wpp = wpp || {}, {
 
   ui: {
     editor: {}
