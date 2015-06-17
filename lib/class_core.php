@@ -1164,8 +1164,9 @@ class WPP_Core {
     //** We add # to value which says that we don't want to use LIKE in SQL query for searching this value. */
     $required_strict_search = apply_filters( 'wpp::required_strict_search', array( 'wpp_agents' ) );
     $ignored_strict_search_field_types = apply_filters( 'wpp:ignored_strict_search_field_types', array( 'range_dropdown', 'range_input' ) );
+
     foreach( $wpp_query[ 'query' ] as $key => $val ) {
-      if( !key_exists( $key, $defaults ) && $key != 'property_type' ) {
+      if( !array_key_exists( $key, $defaults ) && $key != 'property_type' ) {
         //** Be sure that the attribute exists of parameter is required for strict search */
         if(
           ( in_array( $wpp_query[ 'strict_search' ], array( 'true', 'on' ) ) && isset( $wp_properties[ 'property_stats' ][ $key ] ) )
@@ -1190,7 +1191,7 @@ class WPP_Core {
               continue;
             }
           }
-          $wpp_query[ 'query' ][ $key ] = '#' . $val . '#';
+          $wpp_query[ 'query' ][ $key ] = '#' . trim( $val, '#' ) . '#';
         }
       }
     }
