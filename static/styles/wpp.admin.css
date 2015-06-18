@@ -1595,3 +1595,6 @@ body.post-type-property input[type=text].rwmb-text {
   width: 30em;
   max-width: 90%;
 }
+body.post-type-property .uisf-date {
+  width: 100%;
+}

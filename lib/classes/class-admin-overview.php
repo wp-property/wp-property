@@ -149,6 +149,30 @@ namespace UsabilityDynamics\WPP {
             'name' => __( 'Featured', $this->get('domain') ),
             'type' => 'checkbox',
           ),
+          array(
+            'id' => 'post_date_min',
+            'name' => __( 'Added Date from', ud_get_wp_property()->domain ),
+            'type' => 'date',
+            'js_options' => array(
+              'allowClear' => true,
+            ),
+            'map' => array(
+              'class' => 'date_query',
+              'compare' => 'after'
+            )
+          ),
+          array(
+            'id' => 'post_date_max',
+            'name' => __( 'Added Date to', ud_get_wp_property()->domain ),
+            'type' => 'date',
+            'js_options' => array(
+              'allowClear' => true,
+            ),
+            'map' => array(
+              'class' => 'date_query',
+              'compare' => 'before'
+            )
+          )
         );
 
         $defined = array();
