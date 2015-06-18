@@ -317,7 +317,7 @@ namespace UsabilityDynamics\WPP {
         } else {
           return array();
         }
-        $attrs[ 'all' ] = __( 'All', $this->get('domain') ) . ' (' . \WPP_F::format_numeric( $all ) . ')';
+        $attrs[ 'any' ] = __( 'All', $this->get('domain') ) . ' (' . \WPP_F::format_numeric( $all ) . ')';
         ksort( $attrs );
         return $attrs;
       }
