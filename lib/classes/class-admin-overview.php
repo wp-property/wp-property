@@ -136,6 +136,18 @@ namespace UsabilityDynamics\WPP {
             'options' => $this->get_post_statuses(),
           ),
           array(
+            'id' => 'author',
+            'name' => __( 'Author', $this->get('domain') ),
+            'type' => 'select_advanced',
+            'js_options' => array(
+                'allowClear' => true,
+            ),
+            'map' => array(
+              'class' => 'post'
+            ),
+            'options' => array( 0 => __( 'All', ud_get_wp_property()->domain ) ) + \WPP_F::get_users_of_post_type('property'),
+          ),
+          array(
             'id' => 'property_type',
             'name' => sprintf( __( '%s Type', $this->get('domain') ), \WPP_F::property_label( 'plural' ) ),
             'type' => 'select_advanced',
