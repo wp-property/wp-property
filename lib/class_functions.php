@@ -3979,7 +3979,9 @@ class WPP_F extends UsabilityDynamics\Utility {
     $infobox_style = ( !empty( $infobox_settings[ 'minimum_box_width' ] ) ) ? 'style="min-width: ' . $infobox_settings[ 'minimum_box_width' ] . 'px;"' : '';
 
     foreach( $infobox_attributes as $attribute ) {
-      $property_stats[ $attribute ] = $wp_properties[ 'property_stats' ][ $attribute ];
+      if ( !empty( $wp_properties[ 'property_stats' ][ $attribute ] ) ) {
+        $property_stats[$attribute] = $wp_properties['property_stats'][$attribute];
+      }
     }
 
     $property_stats = WPP_F::get_stat_values_and_labels( $property, array(
@@ -4044,7 +4046,7 @@ class WPP_F extends UsabilityDynamics\Utility {
                   continue;
                 }
 
-                if( ( $attribute_data[ 'data_input_type' ] == 'checkbox' && ( $value == 'true' || $value == 1 ) ) ) {
+                if( ( !empty($attribute_data[ 'data_input_type' ]) && $attribute_data[ 'data_input_type' ] == 'checkbox' && ( $value == 'true' || $value == 1 ) ) ) {
                   if( $wp_properties[ 'configuration' ][ 'google_maps' ][ 'show_true_as_image' ] == 'true' ) {
                     $value = '<div class="true-checkbox-image"></div>';
                   } else {
