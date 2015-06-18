@@ -132,13 +132,11 @@ namespace UsabilityDynamics\WPP {
         }
           
         //** Property stats. Can be searchable, displayed as input boxes on editing page. */
-        $d = !$this->get( 'property_stats', false );
+        $d = $this->get( 'property_stats', false );
         if( !$d || !is_array( $d ) ) {
           $this->set( 'property_stats', array(
             'location' => __('Address','wpp'),
             'price' => __('Price','wpp'),
-            //'bedrooms' => __('Bedrooms','wpp'),
-            //'bathrooms' => __('Bathrooms','wpp'),
             'deposit' => __('Deposit','wpp'),
             'area' => __('Area','wpp'),
             'phone_number' => __('Phone Number','wpp'),
