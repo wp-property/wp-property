@@ -7,11 +7,6 @@
   .ud-install-notice.updated {
     padding: 11px;
     position: relative;
-    background-color: #F8FFF2;
-  }
-  .ud-install-notice-content {
-    float: left;
-    width: 70%;
   }
   .ud-install-notice-content {
     font-size: 16px;
@@ -22,17 +17,20 @@
   .ud-install-notice-dismiss {
     position: absolute;
     bottom: 11px;
-    left: 11px;
+    left: 95px;
     font-size: 14px;
   }
   .ud-install-notice-icon {
-    float: right;
-    text-align: right;
-    width: 30%;
+    float: left;
+    text-align: left;
+    max-width: 75px;
+    margin-right: 10px;
   }
-  .ud-install-notice-icon img {
-    max-width: 100px;
-    max-height: 100px;
+  .ud-install-notice-icon.<?php echo $this->slug; ?> {
+    background: url( "<?php echo $icon; ?>" ) center center no-repeat;
+    background-size: cover;
+    width: 75px;
+    height: 75px;
     display: inline-block;
   }
   .ud-install-notice-clear {
@@ -46,6 +44,9 @@
   }
 </style>
 <div class="<?php echo $this->slug; ?> ud-install-notice updated fade">
+  <?php if( !empty( $icon ) ) : ?>
+    <div class="ud-install-notice-icon <?php echo $this->slug; ?>"></div>
+  <?php endif; ?>
   <div class="ud-install-notice-content">
     <?php
     if( !empty( $content ) ) {
@@ -67,10 +68,5 @@
       <?php endif; ?>
     </div>
   </div>
-  <?php if( !empty( $icon ) ) : ?>
-    <div class="ud-install-notice-icon">
-      <img src="<?php echo $icon ?>" alt="" />
-    </div>
-  <?php endif; ?>
   <div class="ud-install-notice-clear"></div>
 </div>
