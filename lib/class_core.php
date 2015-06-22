@@ -1374,7 +1374,7 @@ class WPP_Core {
     }
 
     //** Try to get value using get get_attribute() function */
-    if( !$value && function_exists( 'get_attribute' ) ) {
+    if( !isset( $value ) || !$value && function_exists( 'get_attribute' ) ) {
       $value = get_attribute( $attribute, array(
         'return' => 'true',
         'property_object' => $this_property
