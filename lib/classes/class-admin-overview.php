@@ -145,7 +145,7 @@ namespace UsabilityDynamics\WPP {
             'map' => array(
               'class' => 'post'
             ),
-            'options' => array( 0 => __( 'All', ud_get_wp_property()->domain ) ) + \WPP_F::get_users_of_post_type('property'),
+            'options' => array( 0 => __( 'All', ud_get_wp_property()->domain ) ) + (array)\WPP_F::get_users_of_post_type('property')
           ),
           array(
             'id' => 'property_type',
