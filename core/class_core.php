@@ -1531,6 +1531,9 @@ class WPP_Core {
               continue;
             }
           }
+          /* To avoid double # check if ajax_call then try to strip already existing # */
+          if ( $wpp_query[ 'ajax_call' ] )
+            $val = trim ($val , '#' );
           $wpp_query[ 'query' ][ $key ] = '#' . $val . '#';
         }
       }
