@@ -242,9 +242,26 @@ class WPP_Core {
       add_action( 'wp_ajax_wpp_make_featured', create_function( "", '  $post_id = $_REQUEST[\'post_id\']; echo WPP_F::toggle_featured( $post_id ); die();' ) );
     }
 
+    add_filter( 'wpp::draw_stats::attributes', array( __CLASS__, 'make_attributes_hidden' ), 10, 2 );
+
     //** Post-init action hook */
     do_action( 'wpp_post_init' );
 
+  }
+
+  static public function make_attributes_hidden( $attributes, $property ) {
+    global $wp_properties;
+
+    if ( !empty( $attributes ) && !empty( $wp_properties['hidden_attributes'][$property->property_type] )
+    && is_array( $attributes ) && is_array( $wp_properties['hidden_attributes'][$property->property_type] ) ) {
+      foreach( $attributes as $slug => $attr ) {
+        if ( in_array( $slug, $wp_properties['hidden_attributes'][$property->property_type] ) ) {
+          unset($attributes[$slug]);
+        }
+      }
+    }
+
+    return $attributes;
   }
 
   /**

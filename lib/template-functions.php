@@ -1013,6 +1013,7 @@ if ( !function_exists( 'draw_stats' ) ):
     //echo "<pre>"; print_r( $property_stats ); echo "</pre>"; die();
 
     //* Prepare values before display */
+    $property_stats = apply_filters( 'wpp::draw_stats::attributes', $property_stats, $property );
     $stats = array();
 
     foreach ( $property_stats as $tag => $data ) {
