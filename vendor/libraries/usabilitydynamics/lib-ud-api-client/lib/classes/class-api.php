@@ -64,6 +64,33 @@ namespace UsabilityDynamics\UD_API {
         $args[ 'request' ] = 'status';
         return $this->request( $args, $product, $error_log );
       }
+
+      /**
+       * Pings remote server to maybe get specific information
+       * @param  array $args
+       * @param bool $error_log
+       * @return array
+       */
+      public function ping( $args = array(), $error_log = false ) {
+        $args[ 'request' ] = 'ping';
+        return $this->request( $args, array(), $error_log );
+      }
+
+      /**
+       * May be get information about available add-ons
+       * if user purchased legacy premium features
+       * COMPATIBILITY WITH OLD PRODUCTS
+       *
+       * @param  array $args
+       * @param bool $error_log
+       * @return array
+       */
+      public function legacy_features( $args = array(), $error_log = false ) {
+        $args[ 'request' ] = 'legacy_features';
+        /* DEPRECATED API KEY FOR OLD PLUGINS COMPATIBILITY */
+        $args[ 'legacy_key' ] = get_option( 'ud_api_key', '' );
+        return $this->request( $args, array(), $error_log );
+      }
       
       /**
        * API Key URL
@@ -85,15 +112,21 @@ namespace UsabilityDynamics\UD_API {
           'request' 		=> '',
           'product_id' 	=> '',
           'instance' 		=> '',
-          'email'       => '',
+          //'email'       => '',
           'licence_key' => '',
           'platform' 	  => $this->blog,
           //** Add nocache hack. We must be sure we do not get CACHE result. peshkov@UD */
-          'nocache' => rand( 10000, 99999 ),
+          //'nocache' => rand( 10000, 99999 ),
         ) );
         $target_url = $this->create_software_api_url( $args );
         //echo "<pre>"; print_r( $target_url ); echo "</pre>"; die();
-        $request = wp_remote_get( $target_url, array( 'timeout' => 15 ) );
+        $request = wp_remote_get( $target_url, array( 'timeout' => 15, 'sslverify' => false, 'headers' => array(
+          'x-ud-api-request' => $args[ 'request' ],
+          'x-ud-api-product-id' => $args[ 'product_id' ],
+          'x-ud-api-instance' => $args[ 'instance' ],
+          'x-ud-api-licence-key' => $args[ 'licence_key' ],
+          'x-ud-api-platform' => $args[ 'platform' ],
+        ) ) );
         //echo "<pre>"; print_r( $request ); echo "</pre>"; die();
         if( is_wp_error( $request ) || wp_remote_retrieve_response_code( $request ) != 200 ) {
           if( $error_log ) $this->log_request_error( sprintf( __( 'There was an error making %s request for %s. Could not do request to UsabilityDynamics.', $this->domain ), $args[ 'request' ], $product[ 'product_name' ] ) );
