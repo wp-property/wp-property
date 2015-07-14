@@ -11,7 +11,7 @@ if( !class_exists( 'RWMB_Wpp_Address_Field' ) && class_exists( 'RWMB_Text_Field'
      * @return void
      */
     static function admin_enqueue_scripts() {
-      wp_enqueue_style( 'rwmb-text', RWMB_CSS_URL . 'text.css', array(), RWMB_VER );
+      // wp_enqueue_style( 'rwmb-text', RWMB_CSS_URL . 'text.css', array(), RWMB_VER );
       wp_enqueue_script( 'rwmb-wpp-address', ud_get_wp_property()->path( 'static/scripts/wpp.admin.fields.js' ), array( 'jquery' ) );
 
       wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?sensor=false', array(), '', true );
