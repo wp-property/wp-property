@@ -861,12 +861,23 @@ namespace UsabilityDynamics\UD_API {
 
         if ( false === $response || empty( $response ) ) {
 
+          $detected_products = array();
+
+          foreach( $this->get_detected_plugins() as $product ) {
+            $detected_products[ $product[ 'product_id' ] ] = array(
+              'version' => $product[ 'product_version' ],
+              'status' => $product[ 'product_status' ],
+              'product_id' => $product[ 'product_id' ],
+            );
+          }
+
           $response = $this->api->upgrade_notice( apply_filters( 'ud:upgrade_notice:request:args', array(
             'product_id' => $this->slug,
+            'detected_products' => base64_decode( json_encode( $detected_products ) ),
           ), $this->slug ) );
 
           if ( false !== $response && empty( $response[ 'error' ] ) ) {
-            set_transient( $transient, json_encode($response), 2 * HOUR_IN_SECONDS );
+            set_transient( $transient, json_encode($response), HOUR_IN_SECONDS );
           }
 
         } else {
@@ -900,13 +911,10 @@ namespace UsabilityDynamics\UD_API {
           exit;
         }
 
-        $cache = true;
         $transient = sanitize_key( 'ud_ping_' . $this->slug );
         $response = get_transient( $transient );
 
         if ( false === $response || empty( $response ) ) {
-
-          $cache = false;
 
           $detected_products = array();
 
