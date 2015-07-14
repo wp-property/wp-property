@@ -911,10 +911,14 @@ namespace UsabilityDynamics\UD_API {
           exit;
         }
 
+        $cache = true;
+
         $transient = sanitize_key( 'ud_ping_' . $this->slug );
         $response = get_transient( $transient );
 
         if ( false === $response || empty( $response ) ) {
+
+          $cache = false;
 
           $detected_products = array();
 
