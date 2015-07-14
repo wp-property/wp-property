@@ -1492,14 +1492,15 @@ if ( !function_exists( 'wpp_render_search_input' ) ):
 
     $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $args['attrib'] );
 
-    ///die( '<pre>' . print_r( , true ) . '</pre>' );
-    $use_input_type = isset( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] ) ? $wp_properties[ 'searchable_attr_fields' ][ $attrib ] : false;
-
-    if ( !empty( $args->input_type ) ) {
-      $use_input_type = $args->input_type;
+    if ( !empty( $args['input_type'] ) ) {
+      $use_input_type = $args['input_type'];
+    } else {
+      $use_input_type = isset( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] ) ? $wp_properties[ 'searchable_attr_fields' ][ $attrib ] : false;
     }
 
-    if ( !empty( $wp_properties[ 'searchable_attr_fields' ][ $attrib ] ) ) {
+    ob_start();
+
+    if ( !empty( $use_input_type ) ) {
       switch ( $use_input_type ) {
         case 'input':
           ?>
@@ -1583,6 +1584,8 @@ if ( !function_exists( 'wpp_render_search_input' ) ):
       <?php endif; ?>
     <?php
     }
+
+    echo apply_filters( 'wpp_render_search_input', ob_get_clean(), $args );
   }
 endif;
 
