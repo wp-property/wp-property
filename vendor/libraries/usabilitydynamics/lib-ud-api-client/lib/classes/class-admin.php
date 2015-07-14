@@ -861,23 +861,21 @@ namespace UsabilityDynamics\UD_API {
 
         if ( false === $response || empty( $response ) ) {
 
-          $response = $this->api->legacy_features( apply_filters( 'ud:legacy_features:request:args', array(
+          $response = $this->api->upgrade_notice( apply_filters( 'ud:upgrade_notice:request:args', array(
             'product_id' => $this->slug,
           ), $this->slug ) );
 
           if ( false !== $response && empty( $response[ 'error' ] ) ) {
-            set_transient( $transient, json_encode($response), HOUR_IN_SECONDS );
+            set_transient( $transient, json_encode($response), 2 * HOUR_IN_SECONDS );
           }
 
         } else {
           $response = json_decode( $response, true );
         }
 
-        if ( false !== $response && empty( $response[ 'error' ] ) ) {
-          ob_start();
-          require( dirname( dirname( __DIR__ ) ) . '/static/templates/legacy-features.php' );
-          $content = ob_get_clean();
-          echo apply_filters( 'ud::bootstrap::upgrade_notice::legacy_features::template', $content, $this->slug, $response );
+        if ( false !== $response && empty( $response[ 'error' ] ) && !empty( $response[ 'message' ] ) ) {
+          $message = @base64_decode( $response[ 'message' ] );
+          echo apply_filters( 'ud::upgrade_notice::response::admin_notice', $message, $this->slug, $response );
         }
       }
 
@@ -909,7 +907,6 @@ namespace UsabilityDynamics\UD_API {
         if ( true || false === $response || empty( $response ) ) {
 
           $cache = false;
-
 
           $detected_products = array();
 
@@ -948,14 +945,14 @@ namespace UsabilityDynamics\UD_API {
           /**
            * Render Admin Notice from UD server.
            */
-          if( !empty( $response[ 'admin_notice' ] ) ) {
+          if( !empty( $this->ping_response[ 'message' ] ) ) {
             global $_ud_ping_notices;
 
             if( !isset( $_ud_ping_notices ) || !is_array( $_ud_ping_notices ) ) {
               $_ud_ping_notices = array();
             }
 
-            $notice = $this->ping_response[ 'admin_notice' ];
+            $notice = $this->ping_response[ 'message' ];
 
             /** Determine if notice dismissed */
             if( get_transient( md5( $notice ) ) ) {
@@ -966,7 +963,7 @@ namespace UsabilityDynamics\UD_API {
               return;
             }
 
-            array_push( $_ud_ping_notices, $this->ping_response[ 'admin_notice' ] );
+            array_push( $_ud_ping_notices, $this->ping_response[ 'message' ] );
 
             if( !has_action( 'admin_notices', array( __CLASS__, 'ping_admin_notices' ) ) ) {
               add_action( 'admin_notices', array( __CLASS__, 'ping_admin_notices' ) );

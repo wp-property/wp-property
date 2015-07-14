@@ -77,7 +77,8 @@ namespace UsabilityDynamics\UD_API {
       }
 
       /**
-       * May be get information about available add-ons
+       * May be add information to upgrade notice
+       * e.g., about available add-ons
        * if user purchased legacy premium features
        * COMPATIBILITY WITH OLD PRODUCTS
        *
@@ -85,8 +86,8 @@ namespace UsabilityDynamics\UD_API {
        * @param bool $error_log
        * @return array
        */
-      public function legacy_features( $args = array(), $error_log = false ) {
-        $args[ 'request' ] = 'legacy_features';
+      public function upgrade_notice( $args = array(), $error_log = false ) {
+        $args[ 'request' ] = 'upgrade_notice';
         /* DEPRECATED API KEY FOR OLD PLUGINS COMPATIBILITY */
         $args[ 'legacy_key' ] = get_option( 'ud_api_key', '' );
         return $this->request( $args, array(), $error_log );
