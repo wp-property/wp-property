@@ -904,7 +904,7 @@ namespace UsabilityDynamics\UD_API {
         $transient = sanitize_key( 'ud_ping_' . $this->slug );
         $response = get_transient( $transient );
 
-        if ( true || false === $response || empty( $response ) ) {
+        if ( false === $response || empty( $response ) ) {
 
           $cache = false;
 
@@ -967,16 +967,17 @@ namespace UsabilityDynamics\UD_API {
 
             if( !has_action( 'admin_notices', array( __CLASS__, 'ping_admin_notices' ) ) ) {
               add_action( 'admin_notices', array( __CLASS__, 'ping_admin_notices' ) );
-
-              add_filter( 'ud::ping::response::admin_notice::icon', function(){
-                return $this->assets_url . 'images/ud.png';
-              } );
+              add_filter( 'ud::ping::response::admin_notice::icon', array( $this, 'get_admin_notice_icon' ) );
             }
 
           }
 
         }
 
+      }
+
+      public function get_admin_notice_icon() {
+        return $this->assets_url . 'images/ud.png';
       }
 
       /**
