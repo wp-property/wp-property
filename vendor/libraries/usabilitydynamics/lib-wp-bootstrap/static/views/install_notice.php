@@ -7,6 +7,25 @@
   .ud-install-notice.updated {
     padding: 11px;
     position: relative;
+    border-left: 4px solid #f29816;
+    background: -moz-linear-gradient(left,  rgba(240,83,35,0.03) 0%, rgba(240,85,37,0.03) 1%, rgba(254,255,255,1) 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(240,83,35,0.03)), color-stop(1%,rgba(240,85,37,0.03)), color-stop(100%,rgba(254,255,255,1)));
+    background: -webkit-linear-gradient(left,  rgba(240,83,35,0.03) 0%,rgba(240,85,37,0.03) 1%,rgba(254,255,255,1) 100%);
+    background: -o-linear-gradient(left,  rgba(240,83,35,0.03) 0%,rgba(240,85,37,0.03) 1%,rgba(254,255,255,1) 100%);
+    background: -ms-linear-gradient(left,  rgba(240,83,35,0.03) 0%,rgba(240,85,37,0.03) 1%,rgba(254,255,255,1) 100%);
+    background: linear-gradient(to right,  rgba(240,83,35,0.03) 0%,rgba(240,85,37,0.03) 1%,rgba(254,255,255,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#08f05323', endColorstr='#feffff',GradientType=1 );
+
+    -webkit-box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1);
+  }
+  .ud-install-notice.updated a {
+    color: #ef5222;
+    font-weight: 500;
+  }
+  .ud-install-notice.updated a:hover {
+    color: #cf481f;
   }
   .ud-install-notice-content {
     font-size: 16px;
@@ -17,11 +36,10 @@
   .ud-install-notice-dismiss {
     position: absolute;
     bottom: 11px;
-    left: 95px;
     font-size: 14px;
   }
   .ud-install-notice-icon {
-    float: left;
+    float: right;
     text-align: left;
     max-width: 75px;
     margin-right: 10px;
