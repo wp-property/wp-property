@@ -138,7 +138,11 @@ namespace UsabilityDynamics\WPLT {
           $this->name = $this->post_type . '_' . rand( 1001, 9999 );
         }
 
-        wp_enqueue_script( 'list-table-ajax', Utility::path( 'static/scripts/wp-list-table.js', 'url' ), array('jquery'), rand(10001,99999) );
+        wp_enqueue_style( 'list-table-ajax', Utility::path( 'static/styles/wp-list-table.css', 'url' ) );
+        wp_enqueue_script( 'list-table-ajax', Utility::path( 'static/scripts/wp-list-table.js', 'url' ), array('jquery') );
+        wp_localize_script( 'list-table-ajax', '__wplt', array(
+          'spinner_url' => Utility::path( 'static/images/ajax-loader.gif', 'url' ),
+        ) );
 
       }
 

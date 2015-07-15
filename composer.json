@@ -22,7 +22,7 @@
   ],
   "require": {
     "php": ">=5.3",
-    "usabilitydynamics/lib-ui": "0.3.2",
+    "usabilitydynamics/lib-ui": "0.3.3",
     "usabilitydynamics/lib-utility": "0.3.6",
     "usabilitydynamics/lib-settings": "0.2.3",
     "usabilitydynamics/lib-wp-bootstrap": "1.1.2",
