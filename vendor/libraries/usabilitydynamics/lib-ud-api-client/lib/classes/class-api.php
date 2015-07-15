@@ -120,7 +120,7 @@ namespace UsabilityDynamics\UD_API {
           'nocache' => rand( 10000, 99999 ),
         ) );
         $target_url = $this->create_software_api_url( $args );
-        //echo "<pre>"; print_r( $target_url ); echo "</pre>"; die();
+        //echo "<pre>"; print_r( $target_url ); echo "</pre>"; //die();
         $request = wp_remote_get( $target_url, array( 'timeout' => 15, 'sslverify' => false, 'headers' => array(
           'x-ud-api-request' => $args[ 'request' ],
           'x-ud-api-product-id' => $args[ 'product_id' ],
