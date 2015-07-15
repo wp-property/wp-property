@@ -14,12 +14,12 @@ namespace UsabilityDynamics\UI {
 			static public function admin_enqueue_scripts() {
 
 				//wp_enqueue_style('select2', Utility::path( 'static/styles/fields/select2/select2.css', 'url' ), array(), '3.2');
-				wp_enqueue_style('select2', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-rc.2/css/select2.min.css', array(), false);
+				wp_enqueue_style('uisf-select2', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-rc.2/css/select2.min.css', array(), false);
 				wp_enqueue_style('uisf-select-advanced', Utility::path( 'static/styles/fields/select-advanced.css', 'url' ), array(), false);
 
-				wp_register_script('select2', Utility::path( 'static/scripts/fields/select2/select2.js', 'url' ), array(), false, true);
+				wp_register_script('uisf-select2', Utility::path( 'static/scripts/fields/select2/select2.js', 'url' ), array(), false, true);
 				//wp_register_script('select2', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-rc.2/js/select2.js', array('jquery'), false, true);
-				wp_enqueue_script('uisf-select-advanced', Utility::path( 'static/scripts/fields/select-advanced.js', 'url' ), array('select2'), false, true);
+				wp_enqueue_script('uisf-select-advanced', Utility::path( 'static/scripts/fields/select-advanced.js', 'url' ), array('uisf-select2'), false, true);
 			}
 
 			/**

@@ -255,16 +255,16 @@
     },
     {
         "name": "usabilitydynamics/lib-ud-api-client",
-        "version": "1.0.6",
-        "version_normalized": "1.0.6.0",
+        "version": "1.0.7",
+        "version_normalized": "1.0.7.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/lib-ud-api-client",
-            "reference": "1.0.6"
+            "reference": "1.0.7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-ud-api-client/archive/1.0.6.zip",
+            "url": "https://github.com/UsabilityDynamics/lib-ud-api-client/archive/1.0.7.zip",
             "reference": null,
             "shasum": null
         },
@@ -296,16 +296,16 @@
     },
     {
         "name": "usabilitydynamics/lib-ui",
-        "version": "0.3.2",
-        "version_normalized": "0.3.2.0",
+        "version": "0.3.3",
+        "version_normalized": "0.3.3.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/lib-ui",
-            "reference": "0.3.2"
+            "reference": "0.3.3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-ui/archive/0.3.2.zip",
+            "url": "https://github.com/UsabilityDynamics/lib-ui/archive/0.3.3.zip",
             "reference": null,
             "shasum": null
         },
@@ -370,16 +370,16 @@
     },
     {
         "name": "usabilitydynamics/lib-wp-list-table",
-        "version": "1.0.6",
-        "version_normalized": "1.0.6.0",
+        "version": "1.0.7",
+        "version_normalized": "1.0.7.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/lib-wp-list-table",
-            "reference": "1.0.6"
+            "reference": "1.0.7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-wp-list-table/archive/1.0.6.zip",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-list-table/archive/1.0.7.zip",
             "reference": null,
             "shasum": null
         },
