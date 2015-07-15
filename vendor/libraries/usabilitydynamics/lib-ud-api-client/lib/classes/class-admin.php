@@ -131,7 +131,7 @@ namespace UsabilityDynamics\UD_API {
          * May be add additional information about available add-ons
          * for legacy users ( who purchased any deprecated premium feature )
          */
-        add_action( 'ud::bootstrap::upgrade_notice::additional_info', array( $this, 'maybe_add_info_to_upgrade_notice' ) );
+        add_action( 'ud::bootstrap::upgrade_notice::additional_info', array( $this, 'maybe_add_info_to_upgrade_notice' ), 10, 2 );
 
       }
       
@@ -858,8 +858,14 @@ namespace UsabilityDynamics\UD_API {
        * for legacy users ( who purchased any deprecated premium feature )
        * to Product's Upgrade Notice
        *
+       * @param string $referrer
+       * @param array $vars
        */
-      public function maybe_add_info_to_upgrade_notice() {
+      public function maybe_add_info_to_upgrade_notice( $referrer, $vars ) {
+        if( $referrer->slug != $this->referrer_slug ) {
+          return;
+        }
+
         $transient = sanitize_key( 'ud_legacy_features_' . $this->slug );
         $response = get_transient( $transient );
 

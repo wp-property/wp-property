@@ -20,6 +20,7 @@ namespace UsabilityDynamics\UD_API {
       public $blog;
       public $name;
       public $slug;
+      public $referrer_slug;
       public $domain;
       
       /** 
@@ -49,6 +50,7 @@ namespace UsabilityDynamics\UD_API {
         $this->activation_email = isset( $args[ 'activation_email' ] ) && $args[ 'activation_email' ] ? true : false;
         $this->name = isset( $args[ 'name' ] ) ? trim( $args[ 'name' ] ) : false;
         $this->slug = isset( $args[ 'slug' ] ) ? trim( $args[ 'slug' ] ) : sanitize_key( $this->name );
+        $this->referrer_slug = isset( $args[ 'referrer_slug' ] ) ? $args[ 'referrer_slug' ] : false;
         $this->domain = isset( $args[ 'domain' ] ) ? trim( $args[ 'domain' ] ) : false;
         
         /**

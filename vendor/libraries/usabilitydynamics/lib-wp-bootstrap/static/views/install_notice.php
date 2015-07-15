@@ -77,7 +77,7 @@
         $dashboard_link
       );
     }
-    do_action( 'ud::bootstrap::upgrade_notice::additional_info', $this->slug, $vars );
+    do_action( 'ud::bootstrap::upgrade_notice::additional_info', $this, $vars );
     ?>
     <div class="ud-install-notice-dismiss">
       <?php printf( __( '<a href="%s" class="">Dismiss this notice</a>' ), $dismiss_link ); ?>

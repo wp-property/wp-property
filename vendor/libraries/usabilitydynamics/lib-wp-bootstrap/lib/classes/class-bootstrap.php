@@ -334,6 +334,7 @@ namespace UsabilityDynamics\WP {
        *
        */
       public function render_upgrade_notice() {
+
         if( $this->type == 'theme' ) {
           $icon = file_exists( get_template_directory() . '/static/images/icon.png' ) ? get_template_directory_uri() . '/static/images/icon.png' : false;
         } else {
@@ -456,6 +457,7 @@ namespace UsabilityDynamics\WP {
           'type' => $this->type,
           'name' => $this->name,
           'slug' => $this->slug,
+          'referrer_slug' => $this->slug,
           'domain' => $this->domain,
           'errors_callback' => array( $this->errors, 'add' ),
         ), $schema );
