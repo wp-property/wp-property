@@ -654,8 +654,12 @@ namespace UsabilityDynamics\UD_API {
         //** There is not check condition for 'theme' */
         if( !empty( $more_products ) ) {
           $reference_list = $this->get_product_reference_list();
-          if( !empty( $reference_list ) && is_array( $reference_list ) ) {
-            foreach( $more_products as $k => $product ) {
+          foreach( $more_products as $k => $product ) {
+            if( $this->slug == $product[ 'product_id' ] ) {
+              unset( $more_products[ $k ] );
+              continue;
+            }
+            if( !empty( $reference_list ) && is_array( $reference_list ) ) {
               foreach( $reference_list as $reference ) {
                 if( $reference[ 'product_id' ] == $product[ 'product_id' ] ) {
                   unset( $more_products[ $k ] );
