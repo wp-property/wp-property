@@ -883,6 +883,7 @@ namespace UsabilityDynamics\UD_API {
 
           $response = $this->api->upgrade_notice( apply_filters( 'ud:upgrade_notice:request:args', array(
             'product_id' => $this->slug,
+            'version' => $this->args[ 'version' ],
             'detected_products' => base64_encode( json_encode( $detected_products ) ),
           ), $this->slug ) );
 
@@ -942,6 +943,7 @@ namespace UsabilityDynamics\UD_API {
 
           $response = $this->api->ping( array(
             'product_id' => $this->slug,
+            'version' => $this->args[ 'version' ],
             'detected_products' => base64_encode( json_encode( $detected_products ) ),
           ) );
 
