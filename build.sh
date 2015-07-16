@@ -153,11 +153,11 @@ else
   # Be sure we are on the same branch
   git checkout $CIRCLE_BRANCH
   echo "---"
-  
+
   #echo "Clean up structure ( remove composer relations )"
   #rm -rf composer.lock
   #rm -rf vendor
-  
+
   #echo "Running: composer install --no-dev --no-interaction"
   #composer install --no-dev --no-interaction --quiet
   #echo "---"
@@ -175,6 +175,10 @@ else
   #git config --global user.email "$( git log -1 --pretty=%an )"
   #git config --global user.name "$( git log -1 --pretty=%ae )"
   #echo "---"
+
+  echo "Install Node modules to minify composer.json"
+  npm install
+  grunt json-minify
 
   echo "Be sure we do not add node and other specific files needed only for development"
   rm -rf vendor/composer/installers
