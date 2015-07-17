@@ -1,4 +1,4 @@
-### 2.0.0
+#### 2.0.0
 * Changed plugin initialization functionality.
 * Added Composer ( dependency manager ) modules and moved some functionality to composer modules ( vendors ).
 * Added ability to clone listings.

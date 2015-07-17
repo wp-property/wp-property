@@ -5,6 +5,8 @@
  * Description: Property and Real Estate Management Plugin for WordPress.  Create a directory of real estate / rental properties and integrate them into you WordPress CMS.
  * Author: Usability Dynamics, Inc.
  * Version: 2.0.0
+ * Requires at least: 4.0
+ * Tested up to: 4.2.2
  * Text Domain: wpp
  * Author URI: http://usabilitydynamics.com
  * Domain Path: /static/languages/
