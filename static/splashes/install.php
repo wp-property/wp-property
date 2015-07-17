@@ -20,6 +20,12 @@
     <p><i><?php _e( 'WP-Property is the leading WordPress plugin for creating and managing highly customizable real estate, property management, and completely custom listing showcase websites. Packed full of features, it gives you possibilities that no other real estate system for WordPress does.', ud_get_wp_property()->domain ); ?></i></p>
     
     <p><i><?php printf( __( 'In addition to the default functions WP-Property can be extended with a <a href="%s">set of add-ons</a>. They may help you manage your business more effectively.', ud_get_wp_property()->domain ), 'https://www.usabilitydynamics.com/products' ); ?></i></p>
+
+    <?php $s = ud_get_wp_property(); if( isset( $s->uservoice_url ) ) : ?>
+      <hr />
+      <p><?php printf( __( 'Do you want to help us to improve %s? Or do you have any idea? We are waiting <a href="%s" target="_blank">feedback</a> from you!', ud_get_wp_property()->domain ), ud_get_wp_property()->name, $s->uservoice_url  ); ?></p>
+    <?php endif; ?>
+
   </div>
   
   <hr />

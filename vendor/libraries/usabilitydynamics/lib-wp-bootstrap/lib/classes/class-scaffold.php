@@ -63,6 +63,15 @@ namespace UsabilityDynamics\WP {
        * @var string
        */
       public $root_url = false;
+
+      /**
+       * UserVoice URL
+       *
+       * @public
+       * @property uservoice_url
+       * @var string
+       */
+      public $uservoice_url = false;
       
       /**
        * Storage for dynamic properties

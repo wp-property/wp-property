@@ -10,6 +10,7 @@
  * Domain Path: /static/languages/
  * GitHub Plugin URI: wp-property/wp-property
  * GitHub Branch: v2.0
+ * UserVoice: http://feedback.usabilitydynamics.com/forums/95259-wp-property
  *
  * Copyright 2012 - 2015 Usability Dynamics, Inc.  ( email : info@usabilitydynamics.com )
  *

@@ -128,6 +128,7 @@ namespace UsabilityDynamics\WP {
               'name' => 'Plugin Name',
               'version' => 'Version',
               'domain' => 'Text Domain',
+              'uservoice_url' => 'UserVoice',
             ), 'plugin' );
             $args = array_merge( (array)$pd, (array)$args, array(
               'root_path' => dirname( $dbt[0]['file'] ),

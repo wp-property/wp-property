@@ -115,8 +115,22 @@ namespace UsabilityDynamics\WP {
           exit( "Property \$instance must be <b>static</b> for {$class}" );
         }
         if( null === $class::$instance ) {
+
+          //** Get custom ( undefined ) Headers from style.css */
+          global $wp_theme_directories;
+          $stylesheet = get_stylesheet();
+          $theme_root = get_raw_theme_root($stylesheet);
+          if (false === $theme_root) {
+            $theme_root = WP_CONTENT_DIR . '/themes';
+          } elseif (!in_array($theme_root, (array)$wp_theme_directories)) {
+            $theme_root = WP_CONTENT_DIR . $theme_root;
+          }
+          $data = get_file_data( $theme_root . '/' . get_stylesheet() . '/style.css', array(
+            'uservoice_url' => 'UserVoice',
+          ) );
+
           $t = wp_get_theme();
-          $args = array_merge( (array)$args, array(
+          $args = array_merge( (array)$args, $data, array(
             'name' => $t->get( 'Name' ),
             'version' => $t->get( 'Version' ),
             'template' => $t->get( 'Template' ),
