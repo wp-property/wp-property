@@ -381,7 +381,7 @@ class WPP_F extends UsabilityDynamics\Utility {
    *
    */
   static public function is_asset_loaded( $handle = false ) {
-    global $wp_properties, $wp_scripts;
+    global $wp_scripts;
 
     if( empty( $handle ) ) {
       return;
@@ -389,8 +389,9 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     $footer = (array) $wp_scripts->in_footer;
     $done   = (array) $wp_scripts->done;
+    $queue   = (array) $wp_scripts->queue;
 
-    $accepted = array_merge( $footer, $done );
+    $accepted = array_merge( $footer, $done, $queue );
 
     if( !in_array( $handle, $accepted ) ) {
       return false;
