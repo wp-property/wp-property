@@ -1,4 +1,14 @@
-<style>
+<?php
+/**
+ * Welcome (Install) WP-Property page
+ */
+
+//** flush Rewrite Rules */
+flush_rewrite_rules();
+//** flush Object Cache */
+wp_cache_flush();
+
+?><style>
   .ud-badge {
     background: url( "<?php echo ud_get_wp_property()->path( '/static/images/icon.png', 'url' ); ?>" ) no-repeat center !important;
     background-size: 150px 150px !important;

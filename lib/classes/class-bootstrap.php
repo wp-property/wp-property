@@ -102,10 +102,10 @@ namespace UsabilityDynamics\WPP {
        *
        */
       public function activate() {
-        global $wp_rewrite;
-        //** Do close to nothing because only ran on activation, not updates, as of 3.1 */
-        //** Handled by WPP_F::manual_activation(). */
-        $wp_rewrite->flush_rules();
+        //** flush Rewrite Rules */
+        flush_rewrite_rules();
+        //** flush Object Cache */
+        wp_cache_flush();
       }
       
       /**
@@ -113,8 +113,10 @@ namespace UsabilityDynamics\WPP {
        *
        */
       public function deactivate() {
-        global $wp_rewrite;
-        $wp_rewrite->flush_rules();
+        //** flush Rewrite Rules */
+        flush_rewrite_rules();
+        //** flush Object Cache */
+        wp_cache_flush();
       }
 
     }
