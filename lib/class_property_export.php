@@ -176,8 +176,8 @@ class WPP_Export {
     }
 
     $wpp_query[ 'query' ][ 'pagi' ] = $starting_row . '--' . $per_page;
-    $wpp_query[ 'query' ][ 'sort_by' ] = ( $_REQUEST[ 'sort_by' ] ? $_REQUEST[ 'sort_by' ] : 'post_date' );
-    $wpp_query[ 'query' ][ 'sort_order' ] = ( $_REQUEST[ 'sort_order' ] ? $_REQUEST[ 'sort_order' ] : 'ASC' );
+    $wpp_query[ 'query' ][ 'sort_by' ] = ( isset( $_REQUEST[ 'sort_by' ] ) ? $_REQUEST[ 'sort_by' ] : 'post_date' );
+    $wpp_query[ 'query' ][ 'sort_order' ] = ( isset( $_REQUEST[ 'sort_order' ] ) ? $_REQUEST[ 'sort_order' ] : 'ASC' );
     $wpp_query[ 'query' ][ 'property_type' ] = $property_type;
 
     $wpp_query[ 'query' ] = apply_filters( 'wpp::xml::export::query', $wpp_query[ 'query' ] );
