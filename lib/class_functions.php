@@ -4012,10 +4012,10 @@ class WPP_F extends UsabilityDynamics\Utility {
           <?php if( !empty( $imageHTML ) ) { ?>
             <td class="wpp_google_maps_left_col" style=" width: <?php echo $image[ 'width' ]; ?>px">
               <?php echo $imageHTML; ?>
-              <?php if( $infobox_settings[ 'show_direction_link' ] == 'true' ): ?>
+              <?php if( $infobox_settings[ 'show_direction_link' ] == 'true' && !empty( $property[ 'latitude' ] ) && !empty( $property[ 'longitude' ] ) ): ?>
                 <div class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_directions_link">
                   <a target="_blank"
-                     href="http://maps.google.com/maps?gl=us&daddr=<?php echo addslashes( str_replace( ' ', '+', $property[ 'formatted_address' ] ) ); ?>"
+                     href="http://maps.google.com/maps?gl=us&daddr=<?php echo $property[ 'latitude' ] ?>,<?php  echo $property[ 'longitude' ]; ?>"
                      class="btn btn-info"><?php _e( 'Get Directions', 'wpp' ) ?></a>
                 </div>
               <?php endif; ?>
@@ -4023,10 +4023,10 @@ class WPP_F extends UsabilityDynamics\Utility {
           <?php } ?>
 
           <td class="wpp_google_maps_right_col" vertical-align="top" style="vertical-align: top;">
-            <?php if( !empty( $imageHTML ) && $infobox_settings[ 'show_direction_link' ] == 'true' ) { ?>
+            <?php if( !empty( $imageHTML ) && $infobox_settings[ 'show_direction_link' ] == 'true' && !empty( $property[ 'latitude' ] ) && !empty( $property[ 'longitude' ] ) ) { ?>
               <div class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_directions_link">
                 <a target="_blank"
-                   href="http://maps.google.com/maps?gl=us&daddr=<?php echo addslashes( str_replace( ' ', '+', $property[ 'formatted_address' ] ) ); ?>"
+                   href="http://maps.google.com/maps?gl=us&daddr=<?php echo $property[ 'latitude' ] ?>,<?php  echo $property[ 'longitude' ]; ?>"
                    class="btn btn-info"><?php _e( 'Get Directions', 'wpp' ) ?></a>
               </div>
             <?php

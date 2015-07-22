@@ -14,6 +14,7 @@
 * Refactored attributes and meta management and added new attribute types.
 * Refactored 'All Properties' page.
 * Changed settings export to use JSON extension.
+* Fixed 'Get Direction' link on Google Map for properties which have manual coordinates.
 * Fixed pagination bug related to sorting properties by prices with the same price value.
 * Fixed double sharp for strict search in field's value.
 * Fixed option 'Display in featured listings' on edit property page.
