@@ -222,6 +222,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Refactored attributes and meta management and added new attribute types.
 * Refactored 'All Properties' page.
 * Changed settings export to use JSON extension.
+* Fixed double sharp for strict search in field's value.
 * Fixed option 'Display in featured listings' on edit property page.
 * Fixed Warnings and Notices.
 * Depreciated / removed legacy UD log.

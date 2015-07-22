@@ -9,6 +9,7 @@ global $wp_properties;
 ?>
 <h3><?php printf( __( '%1s Meta', 'wpp' ), WPP_F::property_label() ); ?></h3>
 <p><?php _e( 'Meta is used for descriptions,  on the back-end  meta fields will be displayed as textareas.  On the front-end they will be displayed as individual sections.', 'wpp' ) ?></p>
+<p><i><?php _e( '<b>Note!</b> Meta is deprecated from WP-Property 2.0. You can continue using it, however we recommend you to use Attribute with Data Entry \'Textarea\' or \'Text Editor\' instead of new meta fields.', 'wpp' ) ?></i></p>
 
 <table id="wpp_inquiry_meta_fields" class="ud_ui_dynamic_table widefat">
   <thead>

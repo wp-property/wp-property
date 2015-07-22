@@ -78,22 +78,6 @@ namespace UsabilityDynamics\WPP {
         $list_table->prepare_items();
         $list_table->display();
 
-        /*
-        $children = get_posts( array(
-          'post_parent' => $post->ID,
-          'post_type' => 'property',
-          'numberposts' => -1,
-        ) );
-        ?>
-        <div class="wp-tab-panel">
-          <ul>
-            <?php  foreach ( $children as $child ) {
-              echo '<li data-child-id="' . $child->ID .'"><a href="' . get_edit_post_link( $child->ID ) . '">' . $child->post_title . '</a> <span class="wpp-child-id">('. $child->ID .')</span></li>';
-            } ?>
-          </ul>
-        </div>
-        <?php
-        */
       }
 
       /**
@@ -269,6 +253,18 @@ namespace UsabilityDynamics\WPP {
           /* May be add Property Type field. */
           if( !array_key_exists( 'property_type', $attributes ) ) {
             $field = $this->get_property_type_field( $post );
+            if( $field ) {
+              $fields[] = $field;
+            }
+          }
+          /* May be add Meta fields */
+          foreach( ud_get_wp_property()->get( 'property_meta', array() ) as $slug => $label ) {
+            $field = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
+              'id' => $slug,
+              'name' => $label,
+              'type' => 'textarea',
+              'desc' => __( 'Meta description.', ud_get_wp_property()->domain ),
+            ) ), $slug, $post );
             if( $field ) {
               $fields[] = $field;
             }

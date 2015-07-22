@@ -5,6 +5,7 @@
 * Added more flexibility over adding and customizing taxonomies. See free WP-Property Terms Add-on.
 * Added optional revision control for properties.
 * Added option to redirect certain property types to parent on front-end.
+* Added ability to save float numbers for numeric attributes.
 * Moved premium features to separate plugins.
 * Changed Licenses management.
 * Moved 'Advanced Settings' to the 'Help' tab out of the 'Developer' tab on Settings page
@@ -13,6 +14,7 @@
 * Refactored attributes and meta management and added new attribute types.
 * Refactored 'All Properties' page.
 * Changed settings export to use JSON extension.
+* Fixed double sharp for strict search in field's value.
 * Fixed option 'Display in featured listings' on edit property page.
 * Fixed Warnings and Notices.
 * Depreciated / removed legacy UD log.
