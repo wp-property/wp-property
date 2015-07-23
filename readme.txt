@@ -1,7 +1,7 @@
 === WP-Property - WordPress Powered Real Estate and Property Management ===
 Contributors: usability_dynamics, andypotanin, jbrw1984, maxim.peshkov, anton-korotkoff, ideric
 Donate link: http://usabilitydynamics.com/product/wp-property/
-Tags: property management, real estate, listings, properties, property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
+Tags: property management, real estate, listings, properties, property, wp-property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 4.0
 Tested up to: 4.2.2
 Stable tag: 2.0.0
@@ -210,6 +210,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 
 = 2.0.0 =
 * Changed plugin initialization functionality.
+* Added 'Advanced Range Dropdown' Search Input field which renders min and max select boxes. Feedback: http://feedback.usabilitydynamics.com/forums/95259-wp-property/suggestions/3557341-price-min-and-max-select-boxes-instead-of-text-inp
 * Added Composer ( dependency manager ) modules and moved some functionality to composer modules ( vendors ).
 * Added ability to clone listings.
 * Added more flexibility over adding and customizing taxonomies. See free WP-Property Terms Add-on.

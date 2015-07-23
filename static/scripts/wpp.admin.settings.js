@@ -307,6 +307,7 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
     switch( setting ) {
 
       case 'dropdown':
+      case 'advanced_range_dropdown':
       case 'select_advanced':
       case 'multi_checkbox':
       case 'radio':

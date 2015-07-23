@@ -1,5 +1,6 @@
 #### 2.0.0
 * Changed plugin initialization functionality.
+* Added 'Advanced Range Dropdown' Search Input field which renders min and max select boxes. Feedback: http://feedback.usabilitydynamics.com/forums/95259-wp-property/suggestions/3557341-price-min-and-max-select-boxes-instead-of-text-inp
 * Added Composer ( dependency manager ) modules and moved some functionality to composer modules ( vendors ).
 * Added ability to clone listings.
 * Added more flexibility over adding and customizing taxonomies. See free WP-Property Terms Add-on.

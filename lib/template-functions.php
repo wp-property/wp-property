@@ -1531,6 +1531,28 @@ if ( !function_exists( 'wpp_render_search_input' ) ):
           </select>
           <?php
           break;
+        case 'advanced_range_dropdown':
+          ?>
+          <?php $grouped_values = !empty( $search_values[ $attrib ] ) ? $search_values[ $attrib ] : group_search_values( $search_values[ $attrib ] ); ?>
+          <select id="<?php echo $random_element_id; ?>" class="wpp_search_select_field wpp_search_select_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" name="wpp_search[<?php echo $attrib; ?>][min]">
+            <option value=""><?php _e( 'Min', 'wpp' ) ?></option>
+            <?php foreach ( $grouped_values as $v ) : ?>
+              <option value='<?php echo (int) $v; ?>' <?php if ( isset( $value[ 'min' ] ) && $value[ 'min' ] == $v ) echo " selected='true' "; ?>>
+                <?php echo apply_filters( "wpp_stat_filter_{$attrib}", $v ); ?>
+              </option>
+            <?php endforeach; ?>
+          </select>
+          <span class="delimiter">-</span>
+          <select id="<?php echo $random_element_id; ?>" class="wpp_search_select_field wpp_search_select_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" name="wpp_search[<?php echo $attrib; ?>][max]">
+            <option value=""><?php _e( 'Max', 'wpp' ) ?></option>
+            <?php foreach ( $grouped_values as $v ) : ?>
+              <option value='<?php echo (int) $v; ?>' <?php if ( isset( $value[ 'min' ] ) && $value[ 'min' ] == $v ) echo " selected='true' "; ?>>
+                <?php echo apply_filters( "wpp_stat_filter_{$attrib}", $v ); ?>
+              </option>
+            <?php endforeach; ?>
+          </select>
+          <?php
+          break;
         case 'dropdown':
           ?>
           <select id="<?php echo $random_element_id; ?>" class="wpp_search_select_field wpp_search_select_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" name="wpp_search[<?php echo $attrib; ?>]">
