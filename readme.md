@@ -3,14 +3,13 @@
 WP-Property is the leading WordPress plugin for creating and managing highly customizable real estate, property management, and completely custom listing showcase websites. Packed full of features, it gives you possibilities that no other real estate system for WordPress does. Try it out, you will be impressed.
 
 ***
-[![Issues - Bug](https://badge.waffle.io/usabilitydynamics/wp-property.png?label=bug&title=Bugs)](http://waffle.io/wp-property/wp-property)
-[![Issues - Backlog](https://badge.waffle.io/usabilitydynamics/wp-property.png?label=backlog&title=Backlog)](http://waffle.io/wp-property/wp-property/)
-[![Issues - Active](https://badge.waffle.io/usabilitydynamics/wp-property.png?label=in progress&title=Active)](http://waffle.io/wp-property/wp-property/)
+[![Issues - Bug](https://badge.waffle.io/wp-property/wp-property.png?label=bug&title=Bugs)](http://waffle.io/wp-property/wp-property)
+[![Issues - Backlog](https://badge.waffle.io/wp-property/wp-property.png?label=backlog&title=Backlog)](http://waffle.io/wp-property/wp-property/)
+[![Issues - Active](https://badge.waffle.io/wp-property/wp-property.png?label=in progress&title=Active)](http://waffle.io/wp-property/wp-property/)
 ***
 [![Dependency Status](https://gemnasium.com/wp-property/wp-property.svg)](https://gemnasium.com/wp-property/wp-property)
 [![Scrutinizer Quality](http://img.shields.io/scrutinizer/g/wp-property/wp-property.svg)](https://scrutinizer-ci.com/g/wp-property/wp-property)
 [![Scrutinizer Coverage](http://img.shields.io/scrutinizer/coverage/g/wp-property/wp-property.svg)](https://scrutinizer-ci.com/g/wp-property/wp-property)
-[![Packagist Vesion](http://img.shields.io/packagist/v/wp-property/wp-property.svg)](https://packagist.org/packages/wp-property/wp-property)
 [![CircleCI](https://circleci.com/gh/wp-property/wp-property.png)](https://circleci.com/gh/wp-property/wp-property)
 ***
 
