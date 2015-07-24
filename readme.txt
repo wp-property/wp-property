@@ -36,6 +36,8 @@ Although WP-Property is the highest rated and most downloaded WordPress real est
 * Smooth operation, user friendly interface, comes with its own vast collection of property listing functionality and compatible premium features.
 * Expandable, customizable and fully supported by us!
 
+> See us on [GitHub](https://github.com/wp-property/wp-property)
+
 <strong>Powerful Core Features!</strong><br>
 * WP-Property comes with a numerous array of features, like custom property types, shortcodes, automatic image resizing, instant Google map insertion in your property details page with just an address and so on.
 * Set select properties to a ‘Featured’ status with a Featured Properties Widget.
