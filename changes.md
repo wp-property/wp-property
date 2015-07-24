@@ -7,13 +7,15 @@
 * Added optional revision control for properties.
 * Added option to redirect certain property types to parent on front-end.
 * Added ability to save float numbers for numeric attributes.
-* Moved premium features to separate plugins.
+* Added Gallery Images meta box on Edit Property page got better images management.
+* Added smart Manual Coordinates option. Now you can set coordinates directly on map.
+* Moved premium features to separate plugins (Add-ons).
 * Changed Licenses management.
 * Moved 'Advanced Settings' to the 'Help' tab out of the 'Developer' tab on Settings page
 * Cleaned up functionality of plugin.
 * Refactored file structure of plugin.
 * Refactored attributes and meta management and added new attribute types.
-* Refactored 'All Properties' page.
+* Refactored 'All Properties' page and added smart filter on it.
 * Changed settings export to use JSON extension.
 * Fixed 'Get Direction' link on Google Map for properties which have manual coordinates.
 * Fixed pagination bug related to sorting properties by prices with the same price value.

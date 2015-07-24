@@ -174,12 +174,6 @@ Due to contributions from the plugin users we currently have it in Danish, Germa
 = Side Bar disappears =
 This is a theme issue. Once again you can customize your own theme, email us and we can give you a quote or you can purchase the Denali premium theme.
 
-= How do stylesheets work? =
-The plugin uses your theme's stylesheet, but also has its own. Inside the plugin folder (wp-content/plugins/wp-property/templates) there is a file called "wp_properties.css". Copy that file to your template directory, and the plugin will automatically switch to using the settings in that file, and will not load the default one anymore. That way when you upgrade the plugin, your custom CSS will not be overwritten. Same goes for all the other template files.
-
-= How do I upload property images? =
-You would do it the same way as if you were editing a post or a page.  On the property editing page, click the Image icon above the content area, and upload images into the media library.  If you want the images to show up on the front-end, you may want to visit Appearance -> Widgets and setup the Property Gallery widget to show up on the property page.
-
 = How do I suggest an idea? =
 You can send us a message via our website, or, preferably, visit our [feedback.usabilitydynamics.com](http://feedback.usabilitydynamics.com/forums/95259-wp-property) page to submit new, and vote on existing, ideas.
 
@@ -261,12 +255,16 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Added more flexibility over adding and customizing taxonomies. See free WP-Property Terms Add-on.
 * Added optional revision control for properties.
 * Added option to redirect certain property types to parent on front-end.
-* Moved premium features to separate plugins.
+* Added ability to save float numbers for numeric attributes.
+* Added Gallery Images meta box on Edit Property page got better images management.
+* Added smart Manual Coordinates option. Now you can set coordinates directly on map.
+* Moved premium features to separate plugins (Add-ons).
+* Changed Licenses management.
 * Moved 'Advanced Settings' to the 'Help' tab out of the 'Developer' tab on Settings page
 * Cleaned up functionality of plugin.
 * Refactored file structure of plugin.
 * Refactored attributes and meta management and added new attribute types.
-* Refactored 'All Properties' page.
+* Refactored 'All Properties' page and added smart filter on it.
 * Changed settings export to use JSON extension.
 * Fixed 'Get Direction' link on Google Map for properties which have manual coordinates.
 * Fixed pagination bug related to sorting properties by prices with the same price value.

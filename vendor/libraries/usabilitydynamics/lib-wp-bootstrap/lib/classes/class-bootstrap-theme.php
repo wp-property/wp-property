@@ -127,6 +127,7 @@ namespace UsabilityDynamics\WP {
           }
           $data = get_file_data( $theme_root . '/' . get_stylesheet() . '/style.css', array(
             'uservoice_url' => 'UserVoice',
+            'support_url' => 'Support',
           ) );
 
           $t = wp_get_theme();

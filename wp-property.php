@@ -8,10 +8,11 @@
  * Requires at least: 4.0
  * Tested up to: 4.2.3
  * Text Domain: wpp
- * Author URI: http://usabilitydynamics.com
  * Domain Path: /static/languages/
+ * Author URI: http://usabilitydynamics.com
  * GitHub Plugin URI: wp-property/wp-property
  * GitHub Branch: v2.0
+ * Support: https://wordpress.org/support/plugin/wp-property
  * UserVoice: http://feedback.usabilitydynamics.com/forums/95259-wp-property
  *
  * Copyright 2012 - 2015 Usability Dynamics, Inc.  ( email : info@usabilitydynamics.com )

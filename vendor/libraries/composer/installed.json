@@ -160,62 +160,6 @@
         ]
     },
     {
-        "name": "usabilitydynamics/lib-settings",
-        "version": "0.2.3",
-        "version_normalized": "0.2.3.0",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:usabilitydynamics/lib-settings",
-            "reference": "0.2.3"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/usabilitydynamics/lib-settings/archive/0.2.3.zip",
-            "reference": null,
-            "shasum": null
-        },
-        "require": {
-            "usabilitydynamics/lib-utility": "~0.3"
-        },
-        "require-dev": {
-            "justinrainbow/json-schema": "1.1.*"
-        },
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "lib"
-            ]
-        },
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Andy Potanin",
-                "email": "andy.potanin@usabilitydynamics.com",
-                "homepage": "http://usabilitydynamics.com",
-                "role": "Developer"
-            },
-            {
-                "name": "Maxim Peshkov",
-                "email": "maxim.peshkov@usabilitydynamics.com",
-                "homepage": "http://usabilitydynamics.com",
-                "role": "Developer"
-            },
-            {
-                "name": "Anton Korotkov",
-                "email": "anton.korotkov@usabilitydynamics.com",
-                "homepage": "http://usabilitydynamics.com",
-                "role": "Developer"
-            }
-        ],
-        "homepage": "http://github.com/usabilitydynamics/lib-settings",
-        "keywords": [
-            "settings"
-        ]
-    },
-    {
         "name": "usabilitydynamics/lib-wp-bootstrap",
         "version": "1.1.2",
         "version_normalized": "1.1.2.0",
@@ -547,5 +491,61 @@
         ],
         "description": "WP Repository plugin.",
         "homepage": "https://usabilitydynamics.com"
+    },
+    {
+        "name": "usabilitydynamics/lib-settings",
+        "version": "0.2.3",
+        "version_normalized": "0.2.3.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:usabilitydynamics/lib-settings",
+            "reference": "0.2.3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/usabilitydynamics/lib-settings/archive/0.2.3.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "require": {
+            "usabilitydynamics/lib-utility": "~0.3"
+        },
+        "require-dev": {
+            "justinrainbow/json-schema": "1.1.*"
+        },
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Andy Potanin",
+                "email": "andy.potanin@usabilitydynamics.com",
+                "homepage": "http://usabilitydynamics.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Maxim Peshkov",
+                "email": "maxim.peshkov@usabilitydynamics.com",
+                "homepage": "http://usabilitydynamics.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Anton Korotkov",
+                "email": "anton.korotkov@usabilitydynamics.com",
+                "homepage": "http://usabilitydynamics.com",
+                "role": "Developer"
+            }
+        ],
+        "homepage": "http://github.com/usabilitydynamics/lib-settings",
+        "keywords": [
+            "settings"
+        ]
     }
 ]

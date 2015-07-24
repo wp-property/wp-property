@@ -84,6 +84,9 @@
       <?php if( !empty( $home_link ) ) : ?>
         | <?php printf( __( '<a href="%s" target="_blank" class="">%s\'s Home page</a>' ), $home_link, ucfirst( $type ) ); ?>
       <?php endif; ?>
+      <?php if( !empty( $this->support_url ) ) : ?>
+        | <a href="<?php echo $this->support_url ?>" target="_blank" ><?php _e( 'Support' ) ?></a>
+      <?php endif; ?>
       <?php if( !empty( $this->uservoice_url ) ) : ?>
         | <a href="<?php echo $this->uservoice_url ?>" target="_blank" ><?php _e( 'Post your idea' ) ?></a>
       <?php endif; ?>
