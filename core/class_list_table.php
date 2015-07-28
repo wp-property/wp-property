@@ -245,9 +245,9 @@ class WPP_List_Table extends WP_List_Table {
 
     $wpp_search = apply_filters( 'prepare_wpp_properties_search', $wpp_search );
 
-    if ( !$ajax ) $this->all_items = array();
-
-    if ( !isset( $this->all_items ) ) {
+    if ( !$ajax ) {
+      $this->all_items = array();
+    } else  {
       $this->all_items = WPP_F::get_properties( $wpp_search );
     }
 
