@@ -1324,7 +1324,6 @@ if ( !function_exists( 'draw_property_search_form' ) ):
 
     $property_stats = $wp_properties[ 'property_stats' ];
 
-
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
       $property_stats[ 'property_type' ] = __( 'Property Type', 'wpp' );
     }
@@ -1333,7 +1332,6 @@ if ( !function_exists( 'draw_property_search_form' ) ):
     if ( !empty( $search_attributes ) && !empty( $searchable_property_types ) ) {
       $search_values = WPP_F::get_search_values( $search_attributes, $searchable_property_types, $args['cache'], $args['instance_id'] );
     }
-
 
     //** This looks clumsy - potanin@UD */
     if ( array_key_exists( 'property_type', array_fill_keys( $search_attributes, 1 ) ) && is_array( $searchable_property_types ) && count( $searchable_property_types ) > 1 ) {
@@ -1424,7 +1422,7 @@ if ( !function_exists( 'draw_property_search_form' ) ):
           }
         }
         //** Don't display search attributes that have no values */
-        if ( !isset( $search_values[ $attrib ] ) ) {
+        if ( !apply_filters( 'wpp::show_search_field_with_no_values', isset( $search_values[ $attrib ] ), $attrib ) ) {
           continue;
         }
         $label = apply_filters( 'wpp::search_attribute::label', ( empty( $property_stats[ $attrib ] ) ? WPP_F::de_slug( $attrib ) : $property_stats[ $attrib ] ), $attrib );

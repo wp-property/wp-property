@@ -11,7 +11,7 @@ Stable tag: 2.0.0
 
 WP-Property is the leading WordPress plugin for creating and managing highly customizable real estate, property management, and completely custom listing showcase websites. Packed full of features, it gives you possibilities that no other real estate system for WordPress does. Try it out, you will be impressed.
 
-Although WP-Property is the highest rated and most downloaded WordPress real estate plugin, it can handle so much more than real estate. Showcase any kind of entity you want, from livestock, golf carts, to properties and products, experiencing unparalleled ease of use and flexibility on the way.
+Although WP-Property is the most downloaded WordPress real estate plugin, it can handle so much more than real estate. Showcase any kind of entity you want, from livestock, golf carts, to properties and products, experiencing unparalleled ease of use and flexibility on the way.
 
 > Do you want to see the plugin in action? Just proceed to our <a href="http://madison.ci.usabilitydynamics.com/">Madison</a> and <a href="http://denali.ci.usabilitydynamics.com/">Denali</a> Demo sites.
 
@@ -36,7 +36,7 @@ Although WP-Property is the highest rated and most downloaded WordPress real est
 * Smooth operation, user friendly interface, comes with its own vast collection of property listing functionality and compatible premium features.
 * Expandable, customizable and fully supported by us!
 
-> See us on [GitHub](https://github.com/wp-property/wp-property)
+> See the plugin on [GitHub](https://github.com/wp-property/wp-property)
 
 **Features**
 * Flexible Extendable Filter on All Properties page.
