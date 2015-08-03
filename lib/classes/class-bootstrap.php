@@ -168,6 +168,7 @@ namespace UsabilityDynamics\WPP {
 
           if( !empty( $upload ) && empty( $upload[ 'error' ] ) ) {
             if( isset( $upload[ 'error' ] ) ) unset( $upload[ 'error' ] );
+            $upload[ 'version' ] = $this->old_version;
             $upload[ 'time' ] = time();
             update_option( 'wpp_backup', $upload );
           }

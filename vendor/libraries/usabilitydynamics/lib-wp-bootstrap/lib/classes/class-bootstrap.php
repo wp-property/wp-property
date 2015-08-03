@@ -201,6 +201,7 @@ namespace UsabilityDynamics\WP {
       protected function maybe_run_upgrade_process() {
         //** Determine what to show depending on version installed */
         $version = get_option($this->slug . '-current-version', 0);
+        $this->old_version = $version;
         //** Just installed */
         if (!$version) {
           add_action( 'plugins_loaded', array( $this, 'run_install_process' ), 0 );
@@ -209,6 +210,7 @@ namespace UsabilityDynamics\WP {
         elseif (version_compare($version, $this->args['version']) == -1) {
           add_action( 'plugins_loaded', array( $this, 'run_upgrade_process' ), 0 );
         }
+        update_option( $this->slug . '-current-version', $this->args['version'] );
       }
 
       /**
@@ -216,18 +218,14 @@ namespace UsabilityDynamics\WP {
        *
        * Re-define the function in child.
        */
-      public function run_install_process() {
-        update_option( $this->slug . '-current-version', $this->args['version'] );
-      }
+      public function run_install_process() {}
 
       /**
        * Run Upgrade Process.
        *
        * Re-define the function in child.
        */
-      public function run_upgrade_process() {
-        update_option( $this->slug . '-current-version', $this->args['version'] );
-      }
+      public function run_upgrade_process() {}
 
       /**
        * Define splash pages for plugins if needed
