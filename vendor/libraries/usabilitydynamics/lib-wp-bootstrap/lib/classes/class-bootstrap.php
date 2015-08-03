@@ -78,6 +78,8 @@ namespace UsabilityDynamics\WP {
         $this->composer_dependencies();
         //** Determine if plugin/theme requires or recommends another plugin(s) */
         $this->plugins_dependencies();
+        // Maybe run install or upgrade processes.
+        $this->maybe_run_upgrade_process();
         //** Set install/upgrade pages if needed */
         $this->define_splash_pages();
         //** Maybe need to show UD splash page. Used static functions intentionaly. */
@@ -188,6 +190,43 @@ namespace UsabilityDynamics\WP {
        */
       public function get_localization() {
         return array();
+      }
+
+      /**
+       * Determine if product is just installed or upgraded
+       * and run install/upgrade processes
+       *
+       * @author peshkov@UD
+       */
+      protected function maybe_run_upgrade_process() {
+        //** Determine what to show depending on version installed */
+        $version = get_option($this->slug . '-current-version', 0);
+        //** Just installed */
+        if (!$version) {
+          add_action( 'plugins_loaded', array( $this, 'run_install_process' ), 0 );
+        }
+        //** Upgraded */
+        elseif (version_compare($version, $this->args['version']) == -1) {
+          add_action( 'plugins_loaded', array( $this, 'run_upgrade_process' ), 0 );
+        }
+      }
+
+      /**
+       * Run Install Process.
+       *
+       * Re-define the function in child.
+       */
+      public function run_install_process() {
+        update_option( $this->slug . '-current-version', $this->args['version'] );
+      }
+
+      /**
+       * Run Upgrade Process.
+       *
+       * Re-define the function in child.
+       */
+      public function run_upgrade_process() {
+        update_option( $this->slug . '-current-version', $this->args['version'] );
       }
 
       /**

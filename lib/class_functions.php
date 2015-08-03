@@ -2516,28 +2516,6 @@ class WPP_F extends UsabilityDynamics\Utility {
   }
 
   /**
-   * Run manually when a version mismatch is detected.
-   *
-   * Holds official current version designation.
-   * Called in admin_init hook.
-   *
-   * @since 1.10
-   * @version 1.13
-   *
-   */
-  static public function manual_activation() {
-    $installed_ver = get_option( "wpp_version", 0 );
-    $wpp_version   = WPP_Version;
-    if( @version_compare( $installed_ver, $wpp_version ) == '-1' ) {
-      //** Upgrade data if needed */
-      WPP_Legacy::upgrade();
-      //** Update option to latest version so this isn't run on next admin page load */
-      update_option( "wpp_version", $wpp_version );
-    }
-    return;
-  }
-
-  /**
    * Returns array of searchable property IDs
    *
    *

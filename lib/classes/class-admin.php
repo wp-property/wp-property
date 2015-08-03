@@ -127,8 +127,6 @@ namespace UsabilityDynamics\WPP {
         // Add metaboxes
         do_action( 'wpp_metaboxes' );
 
-        WPP_F::manual_activation();
-
         //** Download backup of configuration */
         if(
           isset( $_REQUEST[ 'page' ] )

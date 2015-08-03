@@ -19,11 +19,6 @@
  *
  */
 
-/** This Version  */
-if( !defined( 'WPP_Version' ) ) {
-  define( 'WPP_Version', '2.0.0' );
-}
-
 /** Get Directory - not always wp-property */
 if( !defined( 'WPP_Directory' ) ) {
   define( 'WPP_Directory', dirname( plugin_basename( __FILE__ ) ) );

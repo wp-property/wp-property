@@ -28,6 +28,11 @@ namespace UsabilityDynamics\WPP {
       public function init() {
         global $wp_properties;
 
+        /** This Version  */
+        if( !defined( 'WPP_Version' ) ) {
+          define( 'WPP_Version', $this->args[ 'version' ] );
+        }
+
         //** Init Settings */
         $this->settings = new Settings( array(
           'key'  => 'wpp_settings',
@@ -117,6 +122,65 @@ namespace UsabilityDynamics\WPP {
         flush_rewrite_rules();
         //** flush Object Cache */
         wp_cache_flush();
+      }
+
+      /**
+       * Run Install Process.
+       *
+       * @param string $old_version Old version.
+       * @author peshkov@UD
+       */
+      public function run_install_process() {
+        /* Compatibility with WP-Property 1.42.4 and less versions */
+        $old_version = get_option( 'wpp_version' );
+        if( $old_version ) {
+          $this->run_upgrade_process();
+        }
+      }
+
+      /**
+       * Run Upgrade Process:
+       * - do WP-Property settings backup.
+       *
+       * @author peshkov@UD
+       */
+      public function run_upgrade_process() {
+        /* Do automatic Settings backup! */
+        $settings = get_option( 'wpp_settings' );
+
+        if( !empty( $settings ) ) {
+
+          /**
+           * Fixes allowed mime types for adding download files on Edit Product page.
+           *
+           * @see https://wordpress.org/support/topic/2310-download-file_type-missing-in-variations-filters-exe?replies=5
+           * @author peshkov@UD
+           */
+          add_filter( 'upload_mimes', function( $t ){
+            if( !isset( $t['json'] ) ) {
+              $t['json'] = 'application/json';
+            }
+            return $t;
+          }, 99 );
+
+          $filename = md5( 'wpp_settings_backup' ) . '.json';
+          $upload = wp_upload_bits( $filename, null, json_encode( $settings ) );
+
+          if( !empty( $upload ) && empty( $upload[ 'error' ] ) ) {
+            if( isset( $upload[ 'error' ] ) ) unset( $upload[ 'error' ] );
+            $upload[ 'time' ] = time();
+            update_option( 'wpp_backup', $upload );
+          }
+
+        }
+
+        /**
+         * WP-Property 1.42.4 and less compatibility
+         */
+        WPP_Legacy::upgrade();
+        update_option( "wpp_version", $this->args['version'] );
+
+        do_action( $this->slug . '::upgrade', $this->old_version, $this->args[ 'version' ], $this );
       }
 
     }
