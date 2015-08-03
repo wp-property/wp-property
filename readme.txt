@@ -268,6 +268,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 * Fixed pagination bug related to sorting properties by prices with the same price value.
 * Fixed double sharp for strict search in field's value.
 * Fixed option 'Display in featured listings' on edit property page.
+* Fixed "Add Row" issue for WP-Property Settings and WP-Property: Importer schedule mapping.
 * Fixed Warnings and Notices.
 * Depreciated / removed legacy UD log.
 
