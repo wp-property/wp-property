@@ -9,7 +9,7 @@
 * Added ability to save float numbers for numeric attributes.
 * Added Gallery Images meta box on Edit Property page got better images management.
 * Added smart Manual Coordinates option. Now you can set coordinates directly on map.
-* Added doing WP-Property Settings backup on upgrade to new version. Get information about backup: get_option('wpp_backup');
+* Added doing WP-Property Settings backup on upgrade to new version. Get information about backup: get_option('wpp_settings_backup');
 * Moved premium features to separate plugins (Add-ons).
 * Changed Licenses management.
 * Moved 'Advanced Settings' to the 'Help' tab out of the 'Developer' tab on Settings page
