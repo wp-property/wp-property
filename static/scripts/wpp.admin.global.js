@@ -220,7 +220,7 @@ jQuery.fn.wppGroups = function(opt) {
  * @return boolean. Returns true if email address is successfully validated.
  */
 function wpp_validate_email(address) {
-  var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,40})$/;
 
   if(reg.test(address) == false) {
     return false;
@@ -479,7 +479,7 @@ function wpp_add_row(element) {
     //* Cycle through all child elements and fix names */
     jQuery('input,select,textarea', cloned).each(function(element) {
       var old_name = jQuery(this).attr('name');
-      var matches = old_name.match(/\[(\d{1,2})\]/);
+      var matches = old_name.match(/\[(\d{1,4})\]/);
       if (matches) {
         old_count = parseInt(matches[1]);
         new_count = (old_count + 1);
