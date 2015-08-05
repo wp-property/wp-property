@@ -77,6 +77,7 @@ return array(
     'RWMB_Divider_Field' => $baseDir . '/vendor/plugins/wp-meta-box/inc/fields/divider.php',
     'RWMB_Email_Field' => $baseDir . '/vendor/plugins/wp-meta-box/inc/fields/email.php',
     'RWMB_Field' => $baseDir . '/vendor/plugins/wp-meta-box/inc/field.php',
+    'RWMB_Field_Multiple_Values' => $baseDir . '/vendor/plugins/wp-meta-box/inc/field-multiple-values.php',
     'RWMB_Fieldset_Text_Field' => $baseDir . '/vendor/plugins/wp-meta-box/inc/fields/fieldset-text.php',
     'RWMB_File_Advanced_Field' => $baseDir . '/vendor/plugins/wp-meta-box/inc/fields/file-advanced.php',
     'RWMB_File_Field' => $baseDir . '/vendor/plugins/wp-meta-box/inc/fields/file.php',
