@@ -351,6 +351,11 @@ namespace UsabilityDynamics\WPP {
             $input_type = 'wpp_checkbox';
           }
 
+          //* Legacy compatibility */
+          if( in_array( $input_type, array( 'multi_checkbox' ) ) ) {
+            $input_type = 'checkbox_list';
+          }
+
           //* Fix currency */
           if( $input_type == 'currency' ) {
             $input_type = 'text'; // HTML5 does not allow to use float, so we have to use default 'text' here

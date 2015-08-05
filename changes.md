@@ -1,3 +1,6 @@
+#### 2.0.1
+* Fixed showing Attribute on Edit Property page which has 'Multi-Checkbox' Data Entry.
+
 #### 2.0.0
 * Changed plugin initialization functionality.
 * Added 'Advanced Range Dropdown' Search Input field which renders min and max select boxes. Feedback: http://feedback.usabilitydynamics.com/forums/95259-wp-property/suggestions/3557341-price-min-and-max-select-boxes-instead-of-text-inp
