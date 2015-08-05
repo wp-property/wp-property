@@ -154,6 +154,9 @@ class WPP_Core {
     //** Try to generate static localization script. It can be flushed on Clear Cache! */
     if( $this->maybe_generate_l10n_script() ) {
       wp_register_script( 'wpp-localization', ud_get_wp_property()->path( 'static/cache/l10n.js', 'url' ), array(), WPP_Version );
+    } else {
+      wp_register_script( 'wpp-localization', ud_get_wp_property()->path( 'static/scripts/l10n.js', 'url' ), array(), WPP_Version );
+      wp_localize_script( 'wpp-localization', 'wpp_l10n', $this->get_l10n_data() );
     }
 
     wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
@@ -1624,7 +1627,7 @@ class WPP_Core {
    * @since 1.41.5
    * @author peshkov@UD
    */
-  static function maybe_generate_l10n_script() {
+  public function maybe_generate_l10n_script() {
     $dir = ud_get_wp_property()->path( 'static/cache/', 'dir' );
     $file = $dir . 'l10n.js';
     //** File already created! */
@@ -1635,10 +1638,21 @@ class WPP_Core {
     if( !is_dir( $dir ) && !wp_mkdir_p( $dir ) ) {
       return false;
     }
+    //** Save file */
+    if( @file_put_contents( $file, 'var wpp = ( typeof wpp === \'object\' ) ? wpp : {}; wpp.strings = ' . json_encode( $this->get_l10n_data() ) . ';' ) ) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   *
+   */
+  public function get_l10n_data() {
     $l10n = array();
     //** Include the list of translations */
     $l10n_dir = ud_get_wp_property()->path( 'l10n.php', 'dir' );
-    include_once( $l10n_dir );
+    include( $l10n_dir );
     /** All additional localizations must be added using the filter below. */
     $l10n = apply_filters( 'wpp::js::localization', $l10n );
     foreach( (array)$l10n as $key => $value ) {
@@ -1647,11 +1661,7 @@ class WPP_Core {
       }
       $l10n[ $key ] = html_entity_decode( (string)$value, ENT_QUOTES, 'UTF-8' );
     }
-    //** Save file */
-    if( @file_put_contents( $file, 'var wpp = ( typeof wpp === \'object\' ) ? wpp : {}; wpp.strings = ' . json_encode( $l10n ) . ';' ) ) {
-      return false;
-    }
-    return true;
+    return $l10n;
   }
 
   /**

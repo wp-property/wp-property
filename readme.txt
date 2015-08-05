@@ -246,6 +246,7 @@ We are still in early stages, so updates will be coming out routinely.  Please d
 
 = 2.0.1 =
 * Fixed showing Attribute on Edit Property page which has 'Multi-Checkbox' Data Entry.
+* Fixed registration of javascript files which might break logic in some cases in multiple places on back end and front end.
 
 = 2.0.0 =
 * Changed plugin initialization functionality.
