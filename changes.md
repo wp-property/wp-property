@@ -2,6 +2,9 @@
 * Fixed showing Attribute on Edit Property page which has 'Multi-Checkbox' Data Entry.
 * Fixed registration of javascript files which might break logic in some cases in multiple places on back end and front end.
 * Fixed Fatal Error which did occur when class 'RWMB_Field_Multiple_Values' was called too early.
+* Fixed bug which broke sort order for properties in 2.0.0 version.
+* Fixed typos 'YEs' in value for single checkbox attribute.
+* Warnings and Notices fixes.
 
 #### 2.0.0
 * Changed plugin initialization functionality.

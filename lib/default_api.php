@@ -276,7 +276,7 @@ if ( isset( $wp_properties['searchable_attr_fields'] ) && is_array( $wp_properti
         if( empty( $value ) || in_array( $value, array( '0', 'false' ) ) ) {
           $value = __( 'No', ud_get_wp_property('domain') );
         } else {
-          $value = __( 'YEs', ud_get_wp_property('domain') );
+          $value = __( 'Yes', ud_get_wp_property('domain') );
         }
         return $value;
       } );

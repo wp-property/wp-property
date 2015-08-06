@@ -3177,7 +3177,7 @@ class WPP_F extends UsabilityDynamics\Utility {
               FROM {$wpdb->posts} AS p
               WHERE p.ID IN ( " . implode( ",", $matching_ids ) . ")
               {$additional_sql}
-              ORDER BY {$meta_value}, p.ID {$sql_sort_order}
+              ORDER BY {$meta_value} {$sql_sort_order}
               {$limit_query}" );
 
         }
@@ -3188,8 +3188,11 @@ class WPP_F extends UsabilityDynamics\Utility {
           SELECT ID FROM {$wpdb->posts } AS p
           WHERE ID IN (" . implode( ",", $matching_ids ) . ")
           $additional_sql
-          ORDER BY $sql_sort_by, ID $sql_sort_order
+          ORDER BY $sql_sort_by $sql_sort_order
           $limit_query" );
+
+
+
 
       }
 

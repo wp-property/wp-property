@@ -4,7 +4,7 @@ Donate link: http://usabilitydynamics.com/product/wp-property/
 Tags: property management, real estate, listings, properties, property, wp-property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 4.0
 Tested up to: 4.2.3
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 
 
 == Description ==
@@ -38,7 +38,7 @@ Although WP-Property is the most downloaded WordPress real estate plugin, it can
 
 > See the plugin on [GitHub](https://github.com/wp-property/wp-property)
 
-**Features**
+= Features =
 * Flexible Extendable Filter on All Properties page.
 * Fields such as price, bathrooms, bedrooms, features, address, work out of the box.
 * Any amount of custom attributes (fields) and property types.
@@ -59,7 +59,7 @@ Although WP-Property is the most downloaded WordPress real estate plugin, it can
 * Property types follow a hierarchical format, having the ability of inheriting settings - i.e. buildings (or communities) will automatically calculate the price range of all floor-plans below them.
 * Free!
 
-**Widgets**
+= Widgets =
 * Child Properties. Show child properties (if any) for currently displayed property
 * Featured Properties. List of properties that were marked as Featured
 * Latest Properties. List of the latest properties created on this site.
@@ -68,7 +68,7 @@ Although WP-Property is the most downloaded WordPress real estate plugin, it can
 * Property Search. Display a highly customizable property search form.
 * Property Gallery. List of all images attached to the current property
 
-**Shortcodes**
+= Shortcodes =
 We have setup a ["Shortcode Cheatsheet" page](https://www.usabilitydynamics.com/tutorials/wp-property-help/wp-property-shortcode-cheat-sheet/) for your convenience.
 
 * [property_overview]
@@ -80,6 +80,7 @@ We have setup a ["Shortcode Cheatsheet" page](https://www.usabilitydynamics.com/
 
 <strong>[property_overview]</strong><br>
 Property Overview Shortcode. It is used to display a list of properties.  In it's most basic form, it will return all the published properties on your site.<br>
+
 * [property_overview pagination=on] Show all properties and enable pagination.
 * [property_overview sorter=on] Will list all properties with sorting.
 * [property_overview per_page=5] Show 5 properties on a page (10 properties is the default). If you use this shortcode - you don't need to use 'pagination=on'.
@@ -88,6 +89,7 @@ Property Overview Shortcode. It is used to display a list of properties.  In it'
 * [property_overview sorter=on sort_by=price sort_order=DESC pagination=on] Will list all properties sorted by price in DESC order (attribute "Price" should be checked as sorted in Properties->Settings->Developer page ) and paginate.
 
 Usage of custom attributes added in the Developer tab for queries, example:<br>
+
 * [property_overview house_color=blue,green] List all blue and green properties.
 * [property_overview type=single_family_home year_built=1995-2010] List all single family homes built between 1995 and 2010.
 * [property_overview type=apartment pets_allowed=yes] All apartments where "Pets Allowed" attribute is set to "yes".
@@ -95,6 +97,7 @@ Usage of custom attributes added in the Developer tab for queries, example:<br>
 
 <strong>[property_search]</strong><br>
 Property Search. This shortcode renders a search form, much like the Property Search widget. In it's most basic form it will display the first 5 attributes that you have selected as being searchable in the Developer tab.
+
 * [property_search searchable_attributes=bedrooms,bathrooms searchable_property_types=single_family_home per_page=10] A more complex example showing search options for bedrooms and bathrooms, return only Single Family Homes and limiting the search results to 10 per page.
 * [property_search do_not_use_cache=true searchable_attributes=bedrooms,bathrooms] By default the search widget, and the search shortcode, cache the values used in dropdowns.  You can force the shortcode to avoid getting the values from cache and force it to generate the values on-the-fly when the page is opened.  This is generally not recommended because it slows down the page load-time, but may be useful when troubleshooting.
 If you want to use address attributes in [property_search] you will have to add them using the Developer tab.  Watch screencast on adding address attributes to property_search shortcode.
@@ -104,6 +107,7 @@ Single Property Map. This shortcode displays property maps from single property 
 
 <strong>[property_attribute]</strong><br>
 Property Attribute. Property Attribute Shortcodes return the value of an attribute for a specific property. The current property is targeted by default. Properties other than the current one can be specified using their property ID number, as shown below.
+
 * [property_attribute attribute=bedrooms] Get the number of bedrooms for current property.
 * [property_attribute property_id=5 attribute=bathrooms] Get the number of bathrooms for a property with an ID of 5.
 * [property_attribute attribute=status] Shows status for current property.
@@ -111,6 +115,7 @@ Property Attribute. Property Attribute Shortcodes return the value of an attribu
 
 <strong>[featured_properties]</strong><br>
 Featured Property. This shortcode queries only those properties that have been given Featured status.
+
 * [featured_properties type='all' stats='price'] Shows all featured properties, and display their prices.
 
 <strong>[list_attachments]</strong><br>
@@ -157,8 +162,7 @@ http://vimeo.com/14473894
 2. Editing Property
 3. Customize Front-end with Property Widgets
 4. Property Listings
-5. A Building  Page
-6. Image from gallery enlarged
+5. A Property Page
 
 == Frequently Asked Questions ==
 
@@ -191,63 +195,15 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 = 1.35.1 =
 * Security fixes
 
-= 1.31.1 =
-* "Area" attribute will only be appended with " sq ft." if it is set as numeric in the Developer tab.
-
-= 1.24.0 =
-* Changed property export function to export in JSON format.
-
-= 1.20.0 =
-* Major changes to the way pagination is handled.  Pagination is no longer loaded from a file but from wpp_draw_pagination().
-
-= 1.17.2 =
-* draw_property_search_form() has been changed where arguments passed to it are in array format.
-
-= 1.15.7 =
-* "For Sale" and "For Rent" attributes have been removed form the API.  These programmatically added attributes were causing some confusion amongst users.  If you need these attributes, add them using the Developer tab.
-
-= 1.15 =
-* Default property-pagination.php template is updated to reflect the below-the-content pagination.
-
-= 1.14.3 =
-* Fixed bug with Google Map zoom level not saving.
-* Updated search widget query to only include published properties in value calculation
-* Fixed bug with Google Map values not being mapped correctly to WPP attributes.
-
-= 1.14.2 =
-* Important change to 'wpp_property_stats_input_' filter, it no longer passed the $post object, but the $property array. Default API functions have been updated to reflect, but any custom functions will need to be updated.
-
-= 1.08 =
-* Some CSS changes to the default style sheet
-
-= 1.06 =
-* The default front-end CSS file has had a number of changes relating to pagination and sorting elements. #properties_pagination, #ajax_loader and #properties_sorter have been changed to .properties_pagination, .ajax_loader and .properties_sorter to allow multiple instances on a single page.
-
-= 1.01 =
-* Improved caching.
-
-= 1.00 =
-* Search form shortcode.
-
-= 0.7261 =
-* Improvements to the search widget.
-
-= 0.7260 =
-* Properties settings page moved under Properties menu
-* Sorting has been added - be sure to check attributes as sortable in Developer tab
-
-= 0.6.0 =
-We are moving out of beta stages, but you may still experience bugs now and then.  We welcome all feedback.
-
-= 0.5.3 =
-We are still in early stages, so updates will be coming out routinely.  Please do not hesitate to send us feedback and suggestions.
-
 == Changelog ==
 
 = 2.0.1 =
 * Fixed showing Attribute on Edit Property page which has 'Multi-Checkbox' Data Entry.
 * Fixed registration of javascript files which might break logic in some cases in multiple places on back end and front end.
 * Fixed Fatal Error which did occur when class 'RWMB_Field_Multiple_Values' was called too early.
+* Fixed bug which broke sort order for properties in 2.0.0 version.
+* Fixed typos 'YEs' in value for single checkbox attribute.
+* Warnings and Notices fixes.
 
 = 2.0.0 =
 * Changed plugin initialization functionality.

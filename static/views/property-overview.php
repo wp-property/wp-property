@@ -51,13 +51,13 @@
                 </li>
 
             <?php if( !empty( $property['custom_attribute_overview'] ) || !empty( $property['tagline'] ) ): ?>
-                <li class="property_tagline">
-                    <?php if( $property['custom_attribute_overview'] ): ?>
-                        <?php echo $property['custom_attribute_overview']; ?>
-                    <?php elseif( $property['tagline'] ): ?>
-                        <?php echo $property['tagline']; ?>
-                    <?php endif; ?>
-                </li>
+              <li class="property_tagline">
+                <?php if( isset($property['custom_attribute_overview']) && $property['custom_attribute_overview'] ): ?>
+                  <?php echo $property['custom_attribute_overview']; ?>
+                <?php elseif( $property['tagline'] ): ?>
+                  <?php echo $property['tagline']; ?>
+                <?php endif; ?>
+              </li>
             <?php endif; ?>
 
             <?php if( !empty( $property['phone_number'] ) ): ?>
