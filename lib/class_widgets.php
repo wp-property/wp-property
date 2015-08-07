@@ -16,6 +16,8 @@ class Property_Attributes_Widget extends WP_Widget {
 
     $property_label = strtolower( WPP_F::property_label() );
 
+    add_filter('wpp_get_attribute', array( $this, 'property_type_handler' ), 10, 2);
+
     parent::__construct(
       'wpp_property_attributes',
       sprintf( __( '%1s Attributes', 'wpp' ), WPP_F::property_label() ),
@@ -28,6 +30,18 @@ class Property_Attributes_Widget extends WP_Widget {
       )
     );
 
+  }
+
+  /**
+   * @param $val
+   * @param $args
+   * @return mixed
+   */
+  function property_type_handler( $val, $args ) {
+    if ( $args['attribute'] == 'property_type' ) {
+      return $args['property']['property_type_label'];
+    }
+    return $val;
   }
 
   /**
@@ -85,7 +99,6 @@ class Property_Attributes_Widget extends WP_Widget {
 
       $attributes[ ] = '<li class="' . $slug . '">' . ( $show_labels ? '<span class="attribute">' . $attribute[ 'label' ] . '<span class="separator">:</span> </span>' : '' ) . '</span><span class="value">' . $value . '</span></li>';
     }
-
 
     if ( !empty( $attributes ) ) {
       $html[ 'attributes' ] = '<ul class="wpp_widget_attribute_list">' . implode( '', $attributes ) . '</ul>';
