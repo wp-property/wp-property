@@ -3148,6 +3148,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       if( $sql_sort_by &&
         $sql_sort_by != 'menu_order' &&
         $sql_sort_by != 'post_date' &&
+        $sql_sort_by != 'post_modified' &&
         $sql_sort_by != 'post_title'
       ) {
 

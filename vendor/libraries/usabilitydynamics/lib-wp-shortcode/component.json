@@ -1,0 +1,20 @@
+{
+  "name": "usabilitydynamics/lib-wp-shortcode",
+  "version": "0.1.0",
+  "description": "Improves Shortcode implemetation in Wordpres and adds Shortcode UI",
+  "homepage": "http://github.com/UsabilityDynamics/lib-wp-shortcode",
+  "dependencies": {},
+  "scripts": [
+    "./scripts"
+  ],
+  "templates": [
+    "./templates"
+  ],
+  "styles": [
+    "./styles"
+  ],
+  "files": [
+    "./lib"
+  ],
+  "license": "MIT"
+}

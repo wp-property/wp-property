@@ -102,12 +102,12 @@
         "version_normalized": "0.3.6.0",
         "source": {
             "type": "git",
-            "url": "git@github.com:usabilitydynamics/lib-utility",
+            "url": "git@github.com:UsabilityDynamics/lib-utility",
             "reference": "0.3.6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/usabilitydynamics/lib-utility/archive/0.3.6.zip",
+            "url": "https://github.com/UsabilityDynamics/lib-utility/archive/0.3.6.zip",
             "reference": null,
             "shasum": null
         },
@@ -157,6 +157,76 @@
             "job",
             "process",
             "utility"
+        ]
+    },
+    {
+        "name": "usabilitydynamics/lib-settings",
+        "version": "0.2.3",
+        "version_normalized": "0.2.3.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-settings",
+            "reference": "0.2.3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-settings/archive/0.2.3.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "require": {
+            "usabilitydynamics/lib-utility": "~0.3"
+        },
+        "require-dev": {
+            "justinrainbow/json-schema": "1.1.*"
+        },
+        "type": "library",
+        "extra": {
+            "component": {
+                "scripts": [
+                    "static/scripts/settings.js"
+                ],
+                "templates": [
+                    "static/views/new-installation.xhtml"
+                ],
+                "files": [
+                    "static/schemas/settings.json"
+                ]
+            },
+            "installer-name": "lib-settings"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Andy Potanin",
+                "email": "andy.potanin@usabilitydynamics.com",
+                "homepage": "http://usabilitydynamics.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Maxim Peshkov",
+                "email": "maxim.peshkov@usabilitydynamics.com",
+                "homepage": "http://usabilitydynamics.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Anton Korotkov",
+                "email": "anton.korotkov@usabilitydynamics.com",
+                "homepage": "http://usabilitydynamics.com",
+                "role": "Developer"
+            }
+        ],
+        "homepage": "http://github.com/usabilitydynamics/lib-settings",
+        "keywords": [
+            "settings"
         ]
     },
     {
@@ -356,17 +426,71 @@
         ]
     },
     {
-        "name": "usabilitydynamics/wp-meta-box",
-        "version": "4.5.2",
-        "version_normalized": "4.5.2.0",
+        "name": "usabilitydynamics/lib-wp-shortcode",
+        "version": "0.1.1",
+        "version_normalized": "0.1.1.0",
         "source": {
             "type": "git",
-            "url": "git@github.com:UsabilityDynamics/wp-meta-box",
-            "reference": "4.5.2"
+            "url": "git@github.com:UsabilityDynamics/lib-wp-shortcode",
+            "reference": "0.1.1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/wp-meta-box/archive/4.5.2.zip",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-shortcode/archive/0.1.1.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "type": "library",
+        "extra": {
+            "component": {
+                "name": "usabilitydynamics/lib-wp-shortcode",
+                "version": "0.1.0",
+                "description": "Improves Shortcode implemetation in Wordpres and adds Shortcode UI",
+                "homepage": "http://github.com/UsabilityDynamics/lib-wp-shortcode",
+                "dependencies": [],
+                "scripts": [
+                    "./scripts"
+                ],
+                "templates": [
+                    "./templates"
+                ],
+                "styles": [
+                    "./styles"
+                ],
+                "files": [
+                    "./lib"
+                ],
+                "license": "MIT"
+            },
+            "installer-name": "lib-wp-shortcode"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "Improves Shortcode implementation in Wordpress and adds Shortcode UI",
+        "homepage": "http://github.com/UsabilityDynamics/lib-wp-shortcode",
+        "support": {
+            "issues": "http://github.com/UsabilityDynamics/lib-wp-shortcode/issues"
+        }
+    },
+    {
+        "name": "usabilitydynamics/wp-meta-box",
+        "version": "4.5.2.1",
+        "version_normalized": "4.5.2.1",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/wp-meta-box",
+            "reference": "4.5.2.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/wp-meta-box/archive/4.5.2.1.zip",
             "reference": null,
             "shasum": null
         },
@@ -386,6 +510,7 @@
                 "inc/fields",
                 "inc/common.php",
                 "inc/field.php",
+                "inc/field-multiple-values.php",
                 "inc/helpers.php",
                 "inc/meta-box.php"
             ]
@@ -491,61 +616,5 @@
         ],
         "description": "WP Repository plugin.",
         "homepage": "https://usabilitydynamics.com"
-    },
-    {
-        "name": "usabilitydynamics/lib-settings",
-        "version": "0.2.3",
-        "version_normalized": "0.2.3.0",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:usabilitydynamics/lib-settings",
-            "reference": "0.2.3"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/usabilitydynamics/lib-settings/archive/0.2.3.zip",
-            "reference": null,
-            "shasum": null
-        },
-        "require": {
-            "usabilitydynamics/lib-utility": "~0.3"
-        },
-        "require-dev": {
-            "justinrainbow/json-schema": "1.1.*"
-        },
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "lib"
-            ]
-        },
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Andy Potanin",
-                "email": "andy.potanin@usabilitydynamics.com",
-                "homepage": "http://usabilitydynamics.com",
-                "role": "Developer"
-            },
-            {
-                "name": "Maxim Peshkov",
-                "email": "maxim.peshkov@usabilitydynamics.com",
-                "homepage": "http://usabilitydynamics.com",
-                "role": "Developer"
-            },
-            {
-                "name": "Anton Korotkov",
-                "email": "anton.korotkov@usabilitydynamics.com",
-                "homepage": "http://usabilitydynamics.com",
-                "role": "Developer"
-            }
-        ],
-        "homepage": "http://github.com/usabilitydynamics/lib-settings",
-        "keywords": [
-            "settings"
-        ]
     }
 ]

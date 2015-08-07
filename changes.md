@@ -1,3 +1,7 @@
+#### 2.0.2
+* Added Shortcodes UI library for providing better shortcodes UI management in future releases.
+* Added ability to sort properties on Front End by date modified. Example: [property_overview sort_by=post_modified]
+
 #### 2.0.1
 * Fixed showing Attribute on Edit Property page which has 'Multi-Checkbox' Data Entry.
 * Fixed registration of javascript files which might break logic in some cases in multiple places on back end and front end.
