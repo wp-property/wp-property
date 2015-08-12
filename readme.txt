@@ -200,6 +200,7 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 = 2.0.2 =
 * Added Shortcodes UI library for providing better shortcodes UI management in future releases.
 * Added ability to sort properties on Front End by modified date. Example: [property_overview sort_by=post_modified]
+* Fixed Warnings on Edit Property page when property attributes with Data Entry "Dropdown Selection" do not have any predefined value.
 
 = 2.0.1 =
 * Fixed showing Attribute on Edit Property page which has 'Multi-Checkbox' Data Entry.

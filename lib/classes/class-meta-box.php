@@ -405,11 +405,11 @@ namespace UsabilityDynamics\WPP {
            * Check for pre-defined values
            */
           $options = array();
+          if( $input_type == 'select' ) {
+            $options[''] = __( 'Not Selected', ud_get_wp_property()->domain );
+          }
           if ( !empty( $predefined_values[ $slug ] ) && is_string( $predefined_values[ $slug ] ) ) {
             $_options = explode( ',', trim( $predefined_values[ $slug ] ) );
-            if( $input_type == 'select' ) {
-              $options[''] = __( 'Not Selected', ud_get_wp_property()->domain );
-            }
             foreach( $_options as $option ) {
               $option = trim( preg_replace( "/\r|\n/", "", $option ) );
               $options[ esc_attr( $option ) ] = apply_filters( 'wpp_stat_filter_' . $slug, $option );
