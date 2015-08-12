@@ -28,6 +28,17 @@ namespace UsabilityDynamics\WPP {
       public function init() {
         global $wp_properties;
 
+        /**
+         * Duplicates UsabilityDynamics\WP\Bootstrap_Plugin::load_textdomain();
+         *
+         * There is a bug with localisation in lib-wp-bootstrap 1.1.3 and lower.
+         * So we load textdomain here again, in case old version lib-wp-bootstrap is being loaded
+         * by another plugin.
+         *
+         * @since 2.0.2
+         */
+        load_plugin_textdomain( $this->domain, false, dirname( plugin_basename( $this->boot_file ) ) . '/static/languages/' );
+
         /** This Version  */
         if( !defined( 'WPP_Version' ) ) {
           define( 'WPP_Version', $this->args[ 'version' ] );

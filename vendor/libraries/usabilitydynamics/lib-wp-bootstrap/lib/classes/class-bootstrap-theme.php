@@ -94,7 +94,7 @@ namespace UsabilityDynamics\WP {
        * @author peshkov@UD
        */
       public function load_textdomain() {
-        load_theme_textdomain( $this->domain, $this->root_path . 'static/languages/' );
+        load_theme_textdomain( $this->domain, get_template_directory() . '/static/languages/' );
       }
       
       /**
