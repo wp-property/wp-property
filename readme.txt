@@ -3,7 +3,7 @@ Contributors: usability_dynamics, andypotanin, jbrw1984, maxim.peshkov, Anton Ko
 Donate link: http://usabilitydynamics.com/product/wp-property/
 Tags: property management, real estate, listings, properties, property, wp-property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 4.0
-Tested up to: 4.3
+Tested up to: 4.3-RC2
 Stable tag: 2.0.2
 
 
@@ -16,6 +16,7 @@ Although WP-Property is the most downloaded WordPress real estate plugin, it can
 > Do you want to see the plugin in action? Just proceed to our <a href="http://madison.ci.usabilitydynamics.com/">Madison</a> and <a href="http://denali.ci.usabilitydynamics.com/">Denali</a> Demo sites.
 
 <strong>Dynamic Property Listings - No Coding Required!</strong><br>
+
 * WP-Property seamlessly integrates with WordPress websites, no coding required!
 * Specify search criteria and quickly sort results with a single click.
 * Any custom attributes at your fingertips.
@@ -24,6 +25,7 @@ Although WP-Property is the most downloaded WordPress real estate plugin, it can
 [vimeo http://vimeo.com/14280748]
 
 <strong>Unparalleled Flexibility – List ANY Product or Service!</strong><br>
+
 * Built for real estate, useful for everything.
 * Extremely flexible interface which lets you list products of any kind.
 * List vehicles, hotel reservations, farm animals and much more.
@@ -32,6 +34,7 @@ Although WP-Property is the most downloaded WordPress real estate plugin, it can
 [vimeo http://www.vimeo.com/14473894]
 
 <strong>More than a Plugin - A Real Estate Management System!</strong><br>
+
 * Not just a mere plugin, but a whole real estate management system at your fingertips!
 * Smooth operation, user friendly interface, comes with its own vast collection of property listing functionality and compatible premium features.
 * Expandable, customizable and fully supported by us!

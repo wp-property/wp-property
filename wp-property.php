@@ -6,7 +6,7 @@
  * Author: Usability Dynamics, Inc.
  * Version: 2.0.2
  * Requires at least: 4.0
- * Tested up to: 4.3
+ * Tested up to: 4.3-RC2
  * Text Domain: wpp
  * Domain Path: /static/languages/
  * Author URI: https://www.usabilitydynamics.com
