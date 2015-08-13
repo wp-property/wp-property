@@ -1535,7 +1535,7 @@ if ( !function_exists( 'wpp_render_search_input' ) ):
           <select id="<?php echo $random_element_id; ?>" class="wpp_search_select_field wpp_search_select_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" name="wpp_search[<?php echo $attrib; ?>][min]">
             <option value=""><?php _e( 'Min', 'wpp' ) ?></option>
             <?php foreach ( $grouped_values as $v ) : ?>
-              <option value='<?php echo (int) $v; ?>' <?php if ( isset( $value[ 'min' ] ) && $value[ 'min' ] == $v ) echo " selected='true' "; ?>>
+              <option value='<?php echo (int) $v; ?>' <?php if ( isset( $value[ 'min' ] ) && $value[ 'min' ] == (int) $v ) echo " selected='selected' "; ?>>
                 <?php echo apply_filters( "wpp_stat_filter_{$attrib}", $v ); ?>
               </option>
             <?php endforeach; ?>
@@ -1544,7 +1544,7 @@ if ( !function_exists( 'wpp_render_search_input' ) ):
           <select id="<?php echo $random_element_id; ?>" class="wpp_search_select_field wpp_search_select_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" name="wpp_search[<?php echo $attrib; ?>][max]">
             <option value=""><?php _e( 'Max', 'wpp' ) ?></option>
             <?php foreach ( $grouped_values as $v ) : ?>
-              <option value='<?php echo (int) $v; ?>' <?php if ( isset( $value[ 'min' ] ) && $value[ 'min' ] == $v ) echo " selected='true' "; ?>>
+              <option value='<?php echo (int) $v; ?>' <?php if ( isset( $value[ 'max' ] ) && $value[ 'max' ] == (int) $v ) echo " selected='selected' "; ?>>
                 <?php echo apply_filters( "wpp_stat_filter_{$attrib}", $v ); ?>
               </option>
             <?php endforeach; ?>

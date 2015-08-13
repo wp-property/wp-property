@@ -81,12 +81,14 @@ namespace UsabilityDynamics\WPP {
             'dropdown',
             'range_input',
             'range_dropdown',
+            'advanced_range_dropdown',
           ),
           'currency' => array(
             'input',
             'dropdown',
             'range_input',
             'range_dropdown',
+            'advanced_range_dropdown',
           ),
           'url' => array(
             'input'

@@ -3,8 +3,8 @@ Contributors: usability_dynamics, andypotanin, jbrw1984, maxim.peshkov, Anton Ko
 Donate link: http://usabilitydynamics.com/product/wp-property/
 Tags: property management, real estate, listings, properties, property, wp-property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 4.0
-Tested up to: 4.2.3
-Stable tag: 2.0.1
+Tested up to: 4.3
+Stable tag: 2.0.2
 
 
 == Description ==
@@ -200,10 +200,12 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 = 2.0.2 =
 * Added Shortcodes UI library for providing better shortcodes UI management in future releases.
 * Added ability to sort properties on Front End by modified date. Example: [property_overview sort_by=post_modified]
+* Added ability to filter properties by custom attribute on 'All Properties' page ( Back End ) when it has Search Input 'Advanced Range Dropdown'.
 * Fixed loading of localisation files. The bug persists in 2.0.0 and 2.0.1 versions.
 * Fixed Warnings on Edit Property page when property attributes with Data Entry "Dropdown Selection" do not have any predefined value.
 * Fixed Warnings on sending notification to user about created account.
 * Fixed incorrect status information on "Revalidate all addresses using English localization" process in case query limit was exceeded.
+* Fixed defined min and max values of 'Advanced Range Dropdown' fields on Property Search form.
 
 = 2.0.1 =
 * Fixed showing Attribute on Edit Property page which has 'Multi-Checkbox' Data Entry.

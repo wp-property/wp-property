@@ -232,14 +232,8 @@ namespace UsabilityDynamics\WPP {
               );
               break;
             case 'range_input':
-              /** @TODO */
-              $values = \WPP_F::get_all_attribute_values( $attribute );
-              $type = 'select_advanced';
-              break;
             case 'range_dropdown':
-              $values = \WPP_F::get_all_attribute_values( $attribute );
-              $type = 'select_advanced';
-              break;
+            case 'advanced_range_dropdown':
             case 'dropdown':
               $values = \WPP_F::get_all_attribute_values( $attribute );
               $type = 'select_advanced';
