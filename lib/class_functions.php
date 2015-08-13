@@ -1467,6 +1467,8 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     $return[ 'attempt' ] = $attempt;
+
+    /* // Instead of re-revalidate, must be overwritten UI: to dp separate AJAX request for every property and output results dynamicly.
     if ( !empty( $return[ 'over_query_limit' ] ) && $max_attempts >= $attempt && $delay < 2 ) {
 
       $_args = array(
@@ -1484,6 +1486,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
       $return[ 'attempt' ] = $rerevalidate_result[ 'attempt' ];
     }
+    //*/
 
     foreach( array( 'updated', 'over_query_limit', 'failed', 'empty_address' ) as $status ) {
       $return[ $status ] = ( $echo_result == 'true' ) ? count( array_unique( (array) $return[ $status ] ) ) : array_unique( (array) $return[ $status ] );
@@ -1568,12 +1571,10 @@ class WPP_F extends UsabilityDynamics\Utility {
 
       $address_by_coordinates = !empty( $coordinates ) && $manual_coordinates && empty( $address );
 
-      if( !empty( $address ) ) {
-        $geo_data = WPP_F::geo_locate_address( $address, $wp_properties[ 'configuration' ][ 'google_maps_localization' ], true );
-      }
-
       if( !empty( $coordinates ) && $manual_coordinates ) {
         $geo_data_coordinates = WPP_F::geo_locate_address( $address, $wp_properties[ 'configuration' ][ 'google_maps_localization' ], true, $coordinates );
+      } elseif( !empty( $address ) ) {
+        $geo_data = WPP_F::geo_locate_address( $address, $wp_properties[ 'configuration' ][ 'google_maps_localization' ], true );
       }
 
       /** if Address was invalid or empty but we have valid $coordinates we use them */
@@ -1685,7 +1686,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
       // Return Google result if needed instead of just false
       if ( $return_obj_on_fail ) {
-        return $obj;
+        return $body;
       }
 
       return false;
@@ -2575,6 +2576,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     if( empty( $result ) ) {
       $query_attributes = "";
       $query_types      = "";
+      $range = array();
 
       //** Use the requested attributes, or all searchable */
       if( !is_array( $search_attributes ) ) {
