@@ -3,6 +3,7 @@
 * Added ability to sort properties on Front End by modified date. Example: [property_overview sort_by=post_modified]
 * Fixed Warnings on Edit Property page when property attributes with Data Entry "Dropdown Selection" do not have any predefined value.
 * Fixed loading of localisation files. The bug persists in 2.0.0 and 2.0.1 versions.
+* Fixed Warnings on sending notification to user about created account.
 
 #### 2.0.1
 * Fixed showing Attribute on Edit Property page which has 'Multi-Checkbox' Data Entry.

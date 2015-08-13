@@ -48,7 +48,7 @@ class WPP_Mail {
 
     $user_data = get_userdata( $user_id );
 
-    $activation_link = get_bloginfo( 'home' ) . '?wpp_user=' . $user_id . '&wpp_user_activation=' . md5( $user_id . $user_data->data->user_email . SECURE_AUTH_SALT );
+    $activation_link = home_url() . '?wpp_user=' . $user_id . '&wpp_user_activation=' . md5( $user_id . $user_data->data->user_email . SECURE_AUTH_SALT );
 
     $notification[ 'trigger_action' ] = 'feps_use_account_created';
     $notification[ 'user' ] = $user_id;
