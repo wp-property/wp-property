@@ -1,4 +1,6 @@
-#### 2.0.2
+#### 2.0.3
+
+#### 2.0.2 ( August 13, 2015 )
 * Added Shortcodes UI library for providing better shortcodes UI management in future releases.
 * Added ability to sort properties on Front End by modified date. Example: [property_overview sort_by=post_modified]
 * Added ability to filter properties by custom attribute on 'All Properties' page ( Back End ) when it has Search Input 'Advanced Range Dropdown'.
@@ -8,7 +10,7 @@
 * Fixed incorrect status information on "Revalidate all addresses using English localization" process in case query limit was exceeded.
 * Fixed defined min and max values of 'Advanced Range Dropdown' fields on Property Search form.
 
-#### 2.0.1
+#### 2.0.1 ( August 6, 2015 )
 * Fixed showing Attribute on Edit Property page which has 'Multi-Checkbox' Data Entry.
 * Fixed registration of javascript files which might break logic in some cases in multiple places on back end and front end.
 * Fixed Fatal Error which did occur when class 'RWMB_Field_Multiple_Values' was called too early.
@@ -16,7 +18,7 @@
 * Fixed typos 'YEs' in value for single checkbox attribute.
 * Warnings and Notices fixes.
 
-#### 2.0.0
+#### 2.0.0 ( August 3, 2015 )
 * Changed plugin initialization functionality.
 * Added 'Advanced Range Dropdown' Search Input field which renders min and max select boxes. Feedback: http://feedback.usabilitydynamics.com/forums/95259-wp-property/suggestions/3557341-price-min-and-max-select-boxes-instead-of-text-inp
 * Added Composer ( dependency manager ) modules and moved some functionality to composer modules ( vendors ).

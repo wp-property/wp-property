@@ -98,7 +98,12 @@ namespace UsabilityDynamics\UD_API {
        */
       protected function create_software_api_url( $args ) {
         $api_url = add_query_arg( 'wc-api', 'am-software-api', $this->api_url );
-        return $api_url . '&' . http_build_query( $args );
+        //return $api_url . '&' . http_build_query( $args );
+        $api_url .= '&';
+        foreach ($args AS $key=>$value)
+          $api_url .= $key.'='.urlencode($value).'&';
+        $api_url = rtrim($api_url, '&');
+        return $api_url;
       }
       
       /**
