@@ -120,7 +120,7 @@ namespace UsabilityDynamics\UD_API {
         }
         
         //** Add Licenses page */
-        add_action( 'admin_menu', array( $this, 'register_licenses_screen' ), 100 );
+        add_action( 'admin_menu', array( $this, 'register_licenses_screen' ), 999 );
         
         //** Admin Notices Filter */
         add_filter( 'ud:errors:admin_notices', array( $this, 'maybe_remove_notices' ) );

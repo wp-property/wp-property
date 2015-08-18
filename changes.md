@@ -1,4 +1,5 @@
 #### 2.0.3
+* Fixed Warning on properties overview's default template.
 
 #### 2.0.2 ( August 13, 2015 )
 * Added Shortcodes UI library for providing better shortcodes UI management in future releases.

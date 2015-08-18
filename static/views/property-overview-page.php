@@ -19,7 +19,7 @@ get_header(); ?>
         <p><?php _e('Sorry, we could not find what you were looking for.  Since you are here, take a look at some of our properties.','wpp') ?></p>
         <?php endif; ?>
         <?php
-        if($wp_properties[configuration][do_not_override_search_result_page] == 'true')
+        if(isset( $wp_properties['configuration']['do_not_override_search_result_page'] ) && $wp_properties['configuration']['do_not_override_search_result_page'] == 'true')
           echo $content = apply_filters('the_content', $post->post_content);
         ?>
         <div class="<?php wpp_css('property_overview_page::all_properties', "all-properties"); ?>">
