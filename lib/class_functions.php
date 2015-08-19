@@ -479,7 +479,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
   /**
    * Tests if remote image can be loaded, before sending to browser or TCPDF
-   *
+   * @todo Does not work with self-signed SSL and with allow_url_fopen = Off
    * @version 1.26.0
    */
   static public function can_get_image( $url = false ) {
@@ -498,6 +498,17 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     return true;
 
+  }
+
+  /**
+   * @param string $url
+   * @return int
+   * @since 2.0.3
+   *
+   * Checks if URL is valid
+   */
+  static public function is_valid_url( $url = '' ) {
+    return preg_match('@^(https?|ftp)://[^\s/$.?#].[^\s]*$@iS', $url);
   }
 
   /**
