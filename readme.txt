@@ -3,8 +3,8 @@ Contributors: usability_dynamics, andypotanin, jbrw1984, maxim.peshkov, Anton Ko
 Donate link: http://usabilitydynamics.com/product/wp-property/
 Tags: property management, real estate, listings, properties, property, wp-property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 4.0
-Tested up to: 4.3-RC2
-Stable tag: 2.0.2
+Tested up to: 4.3
+Stable tag: 2.0.3
 
 
 == Description ==
@@ -201,7 +201,9 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 == Changelog ==
 
 = 2.0.3 =
+* Fixed the way of widgets initialization. Compatibility with WordPress 4.3 and higher.
 * Fixed Warning on properties overview's default template.
+* Fixed incorrect behaviour on custom 'Install Plugins' page after depended plugins ( Add-ons ) activation.
 
 = 2.0.2 =
 * Added Shortcodes UI library for providing better shortcodes UI management in future releases.

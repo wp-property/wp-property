@@ -1,5 +1,7 @@
-#### 2.0.3
+#### 2.0.3 ( August 21, 2015 )
+* Fixed the way of widgets initialization. Compatibility with WordPress 4.3 and higher.
 * Fixed Warning on properties overview's default template.
+* Fixed incorrect behaviour on custom 'Install Plugins' page after depended plugins ( Add-ons ) activation.
 
 #### 2.0.2 ( August 13, 2015 )
 * Added Shortcodes UI library for providing better shortcodes UI management in future releases.

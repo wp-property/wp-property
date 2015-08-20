@@ -139,7 +139,6 @@ module.exports = function( grunt ) {
       ]
     },
 
-    // Execute Shell Commands.
     shell: {
       install: {
         command: 'composer install',

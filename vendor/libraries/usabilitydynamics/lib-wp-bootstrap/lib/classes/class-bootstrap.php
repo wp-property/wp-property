@@ -456,6 +456,17 @@ namespace UsabilityDynamics\WP {
        * @author peshkov@UD
        */
       private function plugins_dependencies() {
+        /** 
+         * Dependencies must be checked before plugins_loaded hook to prevent issues!
+         * 
+         * The current condition fixes incorrect behaviour on custom 'Install Plugins' page
+         * after activation plugin which has own dependencies.
+         * 
+         * The condition belongs to WordPress 4.3 and higher.
+         */
+        if( did_action( 'plugins_loaded' ) ) {
+          return;
+        }
         $plugins = $this->get_schema( 'extra.schemas.dependencies.plugins' );
         if( !empty( $plugins ) && is_array( $plugins ) ) {
           $tgma = TGM_Plugin_Activation::get_instance();
