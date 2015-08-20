@@ -384,16 +384,16 @@
     },
     {
         "name": "usabilitydynamics/lib-wp-list-table",
-        "version": "1.0.7",
-        "version_normalized": "1.0.7.0",
+        "version": "1.0.8",
+        "version_normalized": "1.0.8.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/lib-wp-list-table",
-            "reference": "1.0.7"
+            "reference": "1.0.8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-wp-list-table/archive/1.0.7.zip",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-list-table/archive/1.0.8.zip",
             "reference": null,
             "shasum": null
         },

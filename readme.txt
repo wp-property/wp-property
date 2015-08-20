@@ -201,7 +201,9 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 == Changelog ==
 
 = 2.0.3 =
+* Added ability to set Google Maps API key on WP-Property Settings page to fix google validation limits.
 * Fixed the way of widgets initialization. Compatibility with WordPress 4.3 and higher.
+* Fixed Warnings and issues with hidden Title and Checkbox columns on All Properties page for WordPress 4.3 and higher.
 * Fixed Warning on properties overview's default template.
 * Fixed incorrect behaviour on custom 'Install Plugins' page after depended plugins ( Add-ons ) activation.
 

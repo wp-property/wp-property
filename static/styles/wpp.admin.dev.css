@@ -1,3 +1,6 @@
+#wpp_settings_form .google-maps-api-section input {
+  width: 350px;
+}
 .wpp-ui-panel-left {
   margin-left: 300px;
   margin-top: 23px;

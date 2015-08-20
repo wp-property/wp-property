@@ -179,7 +179,6 @@ namespace UsabilityDynamics\WPP {
        * @return string
        */
       public function column_modified( $post ) {
-        ;
         return get_post_modified_time( get_option( 'date_format' ), null, $post, true );
       }
 

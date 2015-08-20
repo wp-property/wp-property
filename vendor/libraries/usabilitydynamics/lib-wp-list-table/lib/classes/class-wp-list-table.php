@@ -108,6 +108,9 @@ namespace UsabilityDynamics\WPLT {
             $args[ $k ] = $_REQUEST[ $k ];
           }
           switch( $k ) {
+            case 'screen':
+              // Do Nothing!
+              break;
             case 'options':
               $this->options = wp_parse_args($args['options'], array(
                 'show_filter' => false,
@@ -306,7 +309,7 @@ namespace UsabilityDynamics\WPLT {
          * used to build the value for our _column_headers property.
          */
         $columns = $this->get_columns();
-        $hidden = !empty( $this->screen ) ? get_hidden_columns( $this->screen ) : array();
+        $hidden = $this->get_hidden_columns();
         $sortable = $this->get_sortable_columns();
 
         /**
@@ -353,6 +356,54 @@ namespace UsabilityDynamics\WPLT {
         ) );
 
         wp_reset_query();
+      }
+
+      /**
+       * Wrapper for get_hidden_columns() function.
+       * It determines if 'Checkbox' or 'Primary' column were added to 'hidden columns' list by accident
+       * and removes them from the list.
+       *
+       * @return array
+       */
+      private function get_hidden_columns() {
+        $hidden = !empty( $this->screen ) ? get_hidden_columns( $this->screen ) : array();
+
+        if( !empty( $hidden ) ) {
+
+          $hidden = array_unique( $hidden );
+
+          $primary_column = false;
+
+          if( is_callable( array( $this, 'get_primary_column_name' ) ) ) {
+
+            $primary_column = $this->get_primary_column_name();
+
+          } else {
+
+            $columns = $this->get_columns();
+            // We need a primary defined so responsive views show something,
+            // so let's fall back to the first non-checkbox column.
+            foreach( $columns as $col => $column_name ) {
+              if ( 'cb' === $col ) {
+                continue;
+              }
+              $primary_column = $col;
+              break;
+            }
+
+          }
+
+          if( !empty( $primary_column ) ) {
+            foreach( $hidden as $k => $v ) {
+              if( $v == $primary_column || $v == 'cb' ) {
+                unset( $hidden[ $k ] );
+              }
+            }
+          }
+
+        }
+
+        return $hidden;
       }
 
       /**
@@ -633,7 +684,8 @@ namespace UsabilityDynamics\WPLT {
            *
            * @param array $actions An array of the available bulk actions.
            */
-          $this->_actions = apply_filters( "bulk_actions-{$this->screen}", $this->_actions );
+          $screen = is_object( $this->screen ) ? $this->screen->id : $this->screen;
+          $this->_actions = apply_filters( "bulk_actions-{$screen}", $this->_actions );
           $this->_actions = array_intersect_assoc( $this->_actions, $no_new_actions );
           $two = '';
         } else {
@@ -826,7 +878,7 @@ namespace UsabilityDynamics\WPLT {
                 'class': '" . urlencode( get_class( $this ) ) . "',
                 'per_page': '{$this->per_page}',
                 'post_type': '{$this->post_type}',
-                'screen': '{$this->screen}',
+                'screen': '" . ( is_object( $this->screen ) ? $this->screen->id : $this->screen ) . "',
                 'post_status': " . ( is_array( $this->post_status ) ? json_encode( $this->post_status ) : "'" . $this->post_status . "'" ) .  ",
                 'extra': " . ( is_array( $this->extra ) ? json_encode( $this->extra ) : '{}' ) . ",
                 'query': " . ( is_array( $this->query ) ? json_encode( $this->query ) : '{}' ) . "
