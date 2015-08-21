@@ -307,23 +307,28 @@ namespace UsabilityDynamics\WPP {
             switch( $attr ) {
               case 'publish':
                 $label = __( 'Published', $this->get('domain') );
+                $all += $count;
                 break;
               case 'pending':
                 $label = __( 'Pending', $this->get('domain') );
+                $all += $count;
                 break;
               case 'trash':
                 $label = __( 'Trashed', $this->get('domain') );
                 break;
+              case 'auto-draft':
+                $label = __( 'Auto-Draft', $this->get('domain') );
+                break;
               default:
                 $label = strtoupper( substr( $attr, 0, 1 ) ) . substr( $attr, 1, strlen( $attr ) );
+                $all += $count;
             }
             $attrs[ $attr ] = $label . ' (' . \WPP_F::format_numeric( $count ) . ')';
-            $all += $count;
           }
         } else {
           return array();
         }
-        $attrs[ 'any' ] = __( 'All', $this->get('domain') ) . ' (' . \WPP_F::format_numeric( $all ) . ')';
+        $attrs[ 'any' ] = __( 'Any', $this->get('domain') ) . ' (' . \WPP_F::format_numeric( $all ) . ')';
         ksort( $attrs );
         return $attrs;
       }

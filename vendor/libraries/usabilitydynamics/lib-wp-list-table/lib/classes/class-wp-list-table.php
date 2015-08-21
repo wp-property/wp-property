@@ -374,7 +374,7 @@ namespace UsabilityDynamics\WPLT {
 
           $primary_column = false;
 
-          if( is_callable( array( $this, 'get_primary_column_name' ) ) ) {
+          if( method_exists( $this, 'get_primary_column_name' ) ) {
 
             $primary_column = $this->get_primary_column_name();
 
@@ -920,9 +920,6 @@ namespace UsabilityDynamics\WPLT {
 
         $this->prepare_items();
 
-        extract( $this->_args );
-        extract( $this->_pagination_args, EXTR_SKIP );
-
         ob_start();
         if ( ! empty( $_REQUEST['no_placeholder'] ) )
           $this->display_rows();
@@ -949,14 +946,6 @@ namespace UsabilityDynamics\WPLT {
         ob_start();
         $this->pagination('bottom');
         $response['pagination']['bottom'] = ob_get_clean();
-
-        if ( isset( $total_items ) )
-          $response['total_items_i18n'] = sprintf( _n( '1 item', '%s items', $total_items ), number_format_i18n( $total_items ) );
-
-        if ( isset( $total_pages ) ) {
-          $response['total_pages'] = $total_pages;
-          $response['total_pages_i18n'] = number_format_i18n( $total_pages );
-        }
 
         $response = apply_filters( 'wplt::ajax_response', $response );
 
