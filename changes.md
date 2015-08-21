@@ -1,5 +1,5 @@
 #### 2.0.3 ( August 21, 2015 )
-* Added ability to set Google Maps API key on WP-Property Settings page to fix google validation limits.
+* Added ability to set Google Maps API key on WP-Property Settings page. Using of Google Maps API key increases google validation limits.
 * Fixed the way of widgets initialization. Compatibility with WordPress 4.3 and higher.
 * Fixed Warnings and issues with hidden Title and Checkbox columns on All Properties page for WordPress 4.3 and higher.
 * Fixed Warnings which were breaking ajax request on pagination and filtering items on All Properties page for PHP 5.6.
