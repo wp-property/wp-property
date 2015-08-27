@@ -4,7 +4,7 @@ Donate link: http://usabilitydynamics.com/product/wp-property/
 Tags: property management, real estate, listings, properties, property, wp-property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 4.0
 Tested up to: 4.3
-Stable tag: 2.0.3
+Stable tag: 2.0.4
 
 
 == Description ==
