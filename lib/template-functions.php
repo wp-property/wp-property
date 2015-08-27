@@ -786,8 +786,10 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
 
         $attribute_value = str_replace( "\n", "", nl2br( $attribute_value ) );
 
-        $property[ $meta_key ] = apply_filters( "wpp_stat_filter_{$meta_key}", $attribute_value, $attribute_scope );
       }
+
+      $attribute_value = apply_filters( "wpp::attribute::display", $attribute_value, $meta_key );
+      $property[ $meta_key ] = apply_filters( "wpp_stat_filter_{$meta_key}", $attribute_value, $attribute_scope );
 
     }
 

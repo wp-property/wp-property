@@ -1,3 +1,6 @@
+#### 2.0.4
+* Fixed showing values for Multi Checkbox attributes on All Properties page ( Admin Panel ) and on Front End.
+
 #### 2.0.3 ( August 21, 2015 )
 * Added ability to set Google Maps API key on WP-Property Settings page. Using of Google Maps API key increases google validation limits.
 * Fixed the way of widgets initialization. Compatibility with WordPress 4.3 and higher.

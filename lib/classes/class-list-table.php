@@ -126,13 +126,28 @@ namespace UsabilityDynamics\WPP {
       public function column_default( $item, $column_name ) {
         switch( $column_name ) {
           default:
-            //Show the whole array for troubleshooting purposes
-            if( isset( $item->{$column_name} ) && is_string( $item->{$column_name} ) ) {
-              return apply_filters( "wpp_stat_filter_{$column_name}", $item->{$column_name} );
+            $attributes = ud_get_wp_property( 'property_stats' );
+            if( array_key_exists( $column_name, $attributes ) ) {
+              $value = get_post_meta( $item->ID, $column_name );
+              $attribute = Attributes::get_attribute_data( $column_name );
+              if( !$attribute[ 'multiple' ] ) {
+                $value = $value[ 0 ];
+              } else {
+                $value = implode( '<br/>', $value );
+              }
+              $value = apply_filters( "wpp::attribute::display", $value, $column_name );
+              $value = apply_filters( "wpp_stat_filter_{$column_name}", $value );
+              if( !empty( $value ) ) {
+                return $value;
+              }
             } else {
-              return '-';
+              //Show the whole array for troubleshooting purposes
+              if( isset( $item->{$column_name} ) && is_string( $item->{$column_name} ) ) {
+                return apply_filters( "wpp_stat_filter_{$column_name}", $item->{$column_name} );
+              }
             }
         }
+        return '-';
       }
 
       /**
@@ -213,26 +228,28 @@ namespace UsabilityDynamics\WPP {
         $hidden_count = 0;
         $display_stats = array();
 
-        foreach( $attributes as $stat => $label ) {
-          $values = isset( $post->$stat ) ? $post->$stat : array( '' );
-          if( !is_array( $values ) ) {
-            $values = array( $values );
+        $meta = get_post_custom( $post->ID );
+        foreach( $meta as $k => $value ) {
+          if( !array_key_exists( $k, $attributes ) ) {
+            continue;
           }
-          foreach( $values as $value ) {
-            $print_values = array();
-            if( empty( $value ) || strlen( $value ) > 15 ) {
-              continue;
-            }
-            $print_values[ ] = apply_filters( "wpp_stat_filter_{$stat}", $value );
-            $print_values = implode( '<br />', $print_values );
-            $stat_count++;
-            $stat_row_class = '';
-            if( $stat_count > 5 ) {
-              $stat_row_class = 'hidden wpp_overview_hidden_stats';
-              $hidden_count++;
-            }
-            $display_stats[ $stat ] = '<li class="' . $stat_row_class . '"><span class="wpp_label">' . $label . ':</span> <span class="wpp_value">' . $print_values . '</span></li>';
+          //** If has _ prefix it's a built-in WP key */
+          if( '_' == $k{0} ) {
+            continue;
           }
+          $attribute = Attributes::get_attribute_data( $k );
+          if( !$attribute[ 'multiple' ] ) {
+            $value = $value[ 0 ];
+          }
+          $value = apply_filters( "wpp::attribute::display", $value, $k );
+          $value = apply_filters( "wpp_stat_filter_{$k}", $value );
+          $stat_count++;
+          $stat_row_class = '';
+          if( $stat_count > 5 ) {
+            $stat_row_class = 'hidden wpp_overview_hidden_stats';
+            $hidden_count++;
+          }
+          $display_stats[ $k ] = '<li class="' . $stat_row_class . '"><span class="wpp_label">' . $attributes[$k] . ':</span> <span class="wpp_value">' . $value . '</span></li>';
         }
 
         if( is_array( $display_stats ) && count( $display_stats ) > 0 ) {

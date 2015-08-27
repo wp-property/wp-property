@@ -3407,7 +3407,6 @@ class WPP_F extends UsabilityDynamics\Utility {
       'return_object'         => 'false',
       'load_gallery'          => 'true',
       'load_thumbnail'        => 'true',
-      'allow_multiple_values' => 'false',
       'load_parent'           => 'true',
       'cache'                 => 'true',
     ) ), EXTR_SKIP );
@@ -3417,7 +3416,6 @@ class WPP_F extends UsabilityDynamics\Utility {
     $return_object         = isset( $return_object ) ? $return_object : 'false';
     $load_gallery          = isset( $load_gallery ) ? $load_gallery : 'true';
     $load_thumbnail        = isset( $load_thumbnail ) ? $load_thumbnail : 'true';
-    $allow_multiple_values = isset( $allow_multiple_values ) ? $allow_multiple_values : 'false';
     $load_parent           = isset( $load_parent ) ? $load_parent : 'true';
 
     $args = is_array( $args ) ? http_build_query( $args ) : (string) $args;
@@ -3443,9 +3441,12 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     //** Load all meta keys for this object */
     if( $keys = get_post_custom( $id ) ) {
+
       foreach( $keys as $key => $value ) {
 
-        if( $allow_multiple_values == 'false' ) {
+        $attribute = WPP_F::get_attribute_data( $key );
+
+        if( !$attribute[ 'multiple' ] ) {
           $value = $value[ 0 ];
         }
 
