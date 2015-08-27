@@ -50,6 +50,27 @@ namespace UsabilityDynamics\UD_API {
         if ( is_admin() ) {
           $this->admin = new Admin( $args );          
         }
+        
+        /**
+         * HACK.
+         * Filter the whitelist of hosts to redirect to.
+         * It adds Admin URL ( in case it's different with home or site urls )
+         * to allowed list.
+         *
+         * @param array       $hosts An array of allowed hosts.
+         * @param bool|string $host  The parsed host; empty if not isset.
+         */
+        add_filter( 'allowed_redirect_hosts', function( $hosts, $host ) {
+          if( !is_array( $hosts ) ) {
+            $hosts = array();
+          }
+          $schema = parse_url( admin_url() );
+          if( isset( $schema[ 'host' ] ) ) {
+            array_push( $hosts, $schema[ 'host' ] );
+            $hosts = array_unique( $hosts );
+          }
+          return $hosts;
+        }, 99, 2 );
       }
       
       /**

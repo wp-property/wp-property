@@ -1,4 +1,5 @@
 #### 2.0.4
+* Added filter which adds admin domain to the whitelist of hosts to redirect to, in case, admin and site domains are different.
 * Fixed showing values for Multi Checkbox attributes on All Properties page ( Admin Panel ) and on Front End.
 
 #### 2.0.3 ( August 21, 2015 )
