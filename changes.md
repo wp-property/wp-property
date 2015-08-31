@@ -1,6 +1,7 @@
-#### 2.0.4
+#### 2.0.4 ( September 3, 2015 )
 * Added filter which adds admin domain to the whitelist of hosts to redirect to, in case, admin and site domains are different.
 * Fixed showing values for Multi Checkbox attributes on All Properties page ( Admin Panel ) and on Front End.
+* Fixed warnings on Property saving process which prevent loading page.
 
 #### 2.0.3 ( August 21, 2015 )
 * Added ability to set Google Maps API key on WP-Property Settings page. Using of Google Maps API key increases google validation limits.

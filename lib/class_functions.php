@@ -1566,7 +1566,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     $address = get_post_meta( $post_id, $wp_properties[ 'configuration' ][ 'address_attribute' ], true );
 
-    $coordinates = ( empty( $latitude ) || empty( $longitude ) ) ? "" : array( 'lat' => get_post_meta( $post_id, 'latitude', true ), 'lng' => get_post_meta( $post_id, 'longitude', true ) );
+    $coordinates = ( empty( $latitude ) || empty( $longitude ) ) ? false : array( 'lat' => get_post_meta( $post_id, 'latitude', true ), 'lng' => get_post_meta( $post_id, 'longitude', true ) );
 
     if( $skip_existing == 'true' && !empty( $current_coordinates ) && in_array( $address_is_formatted, array( '1', 'true' ) ) ) {
       $return[ 'status' ] = 'skipped';
@@ -1621,8 +1621,16 @@ class WPP_F extends UsabilityDynamics\Utility {
 
       update_post_meta( $post_id, 'wpp::last_address_validation', time() );
 
-      update_post_meta( $post_id, 'latitude', $manual_coordinates ? $coordinates[ 'lat' ] : $geo_data->latitude );
-      update_post_meta( $post_id, 'longitude', $manual_coordinates ? $coordinates[ 'lng' ] : $geo_data->longitude );
+      if( $manual_coordinates ) {
+        $lat = !empty( $coordinates[ 'lat' ] ) ? $coordinates[ 'lat' ] : 0;
+        $lng = !empty( $coordinates[ 'lng' ] ) ? $coordinates[ 'lng' ] : 0;
+      } else {
+        $lat = $geo_data->latitude;
+        $lng = $geo_data->longitude;
+      }
+
+      update_post_meta( $post_id, 'latitude', $lat );
+      update_post_meta( $post_id, 'longitude', $lng );
 
       if( $return_geo_data ) {
         $return[ 'geo_data' ] = $geo_data;
