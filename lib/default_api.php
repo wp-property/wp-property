@@ -240,9 +240,6 @@ add_filter( 'plugins_loaded', array( 'wpp_default_api', 'plugins_loaded' ), 0, 9
 // Widget address format
 // add_filter( "wpp_stat_filter_{$wp_properties[ 'configuration' ]['address_attribute']}", "wpp_format_address_attribute", 0, 3 );
 
-// Add additional Google Maps localizations
-add_filter( "wpp_google_maps_localizations", "wpp_add_additional_google_maps_localizations" );
-
 // Add post-thumbnails support
 add_action( "after_setup_theme", array( 'WPP_Core', "after_setup_theme" ) );
 
@@ -335,16 +332,6 @@ function wpp_password_protected_property_form( $output ) {
     return $output;
 
   return str_replace( "This post is password protected", "This property is password protected", $output );
-}
-
-/**
- * Example of how to add a new language to Google Maps localization
- *
- * @since 1.04
- */
-function wpp_add_additional_google_maps_localizations( $attributes ) {
-  $attributes[ 'fi' ] = "Finnish";
-  return $attributes;
 }
 
 /**

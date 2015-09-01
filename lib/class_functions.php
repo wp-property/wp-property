@@ -2113,24 +2113,27 @@ class WPP_F extends UsabilityDynamics\Utility {
       'ar'    => 'Arabic',
       'bg'    => 'Bulgarian',
       'cs'    => 'Czech',
+      'da'    => 'Danish',
+      'nl'    => 'Dutch',
       'de'    => 'German',
+      'zh-TW' => 'Chinese',
       'el'    => 'Greek',
-      'es'    => 'Spanish',
+      'fi'    => 'Finnish',
       'fr'    => 'French',
       'hu'    => 'Hungarian',
       'it'    => 'Italian',
       'ja'    => 'Japanese',
       'ko'    => 'Korean',
-      'da'    => 'Danish',
-      'nl'    => 'Dutch',
       'no'    => 'Norwegian',
       'pt'    => 'Portuguese',
       'pt-BR' => 'Portuguese (Brazil)',
       'pt-PT' => 'Portuguese (Portugal)',
       'ru'    => 'Russian',
+      'es'    => 'Spanish',
       'sv'    => 'Swedish',
       'th'    => 'Thai',
-      'uk'    => 'Ukranian' );
+      'uk'    => 'Ukrainian'
+    );
 
     $attributes = apply_filters( "wpp_google_maps_localizations", $attributes );
 

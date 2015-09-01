@@ -205,6 +205,7 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 
 = 2.0.4 =
 * Added filter which adds admin domain to the whitelist of hosts to redirect to, in case, admin and site domains are different.
+* Added Chinese language to available address localizations.
 * Fixed showing values for Multi Checkbox attributes on All Properties page ( Admin Panel ) and on Front End.
 * Fixed warnings on Property saving process which prevent loading page.
 * Fixed the bug when UsabilityDynamics Admin Notices could not be dismissed.
