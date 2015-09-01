@@ -913,7 +913,13 @@ namespace UsabilityDynamics\UD_API {
          * May be dismiss notice from UD server
          */
         if( !empty( $_REQUEST[ 'dismiss_ud_notice' ] ) ) {
-          set_transient( $_REQUEST[ 'dismiss_ud_notice' ], 1 );
+          $notices = get_option( 'dismissed_ud_notices' );
+          if( !is_array( $notices ) ) {
+            $notices = array();
+          }
+          array_push( $notices, $_REQUEST[ 'dismiss_ud_notice' ] );
+          $notices = array_unique( $notices );
+          update_option( 'dismissed_ud_notices', $notices );
           if( !empty( $_SERVER[ 'HTTP_REFERER' ] ) ) {
             wp_redirect( $_SERVER[ 'HTTP_REFERER' ] );
           } else {
@@ -924,10 +930,15 @@ namespace UsabilityDynamics\UD_API {
 
         $cache = true;
 
-        $transient = sanitize_key( 'ud_ping_' . $this->slug );
-        $response = get_transient( $transient );
+        $option = sanitize_key( 'ud_ping_' . sanitize_key( $this->slug ) );
+        $response = get_option( $option );
 
-        if ( false === $response || empty( $response ) ) {
+        if (
+          false === $response ||
+          empty( $response ) ||
+          empty( $response[ 'time' ] ) ||
+          ( time() - $response[ 'time' ] ) >= DAY_IN_SECONDS
+        ) {
 
           $cache = false;
 
@@ -948,11 +959,17 @@ namespace UsabilityDynamics\UD_API {
           ) );
 
           if ( false !== $response && empty( $response[ 'error' ] ) ) {
-            set_transient( $transient, json_encode($response), 24 * HOUR_IN_SECONDS );
+            update_option( 'ud_ping_' . sanitize_key( $this->slug ), array(
+              'time' => time(),
+              'data' => $response
+            ) );
           }
 
         } else {
-          $response = json_decode( $response, true );
+          if( empty( $response[ 'data' ] ) ) {
+            return;
+          }
+          $response = $response[ 'data' ];
         }
 
         if ( false !== $response && empty( $response[ 'error' ] ) ) {
@@ -979,7 +996,9 @@ namespace UsabilityDynamics\UD_API {
             $notice = $this->ping_response[ 'message' ];
 
             /** Determine if notice dismissed */
-            if( get_transient( md5( $notice ) ) ) {
+            $dismissed = get_option( 'dismissed_ud_notices' );
+            $dismissed = is_array( $dismissed ) ? $dismissed : array();
+            if( in_array( md5( $notice ), $dismissed ) ) {
               return;
             }
 
@@ -1015,7 +1034,7 @@ namespace UsabilityDynamics\UD_API {
           return;
         }
 
-        foreach( $_ud_ping_notices as $notice ) {
+        foreach( array_unique( $_ud_ping_notices ) as $notice ) {
           $dismiss_url = admin_url( 'index.php' ) . '?dismiss_ud_notice=' . md5( $notice );
           $notice = @base64_decode( $notice );
           $notice = apply_filters( 'ud::ping::response::admin_notice', $notice );

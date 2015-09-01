@@ -269,16 +269,16 @@
     },
     {
         "name": "usabilitydynamics/lib-ud-api-client",
-        "version": "1.1.0",
-        "version_normalized": "1.1.0.0",
+        "version": "1.1.1",
+        "version_normalized": "1.1.1.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/lib-ud-api-client",
-            "reference": "1.1.0"
+            "reference": "1.1.1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-ud-api-client/archive/1.1.0.zip",
+            "url": "https://github.com/UsabilityDynamics/lib-ud-api-client/archive/1.1.1.zip",
             "reference": null,
             "shasum": null
         },
