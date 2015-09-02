@@ -47,6 +47,21 @@ namespace UsabilityDynamics\WPP {
        * @return array
        */
       public function filter_wp_query( $args ) {
+        /**
+         * We switch 'any' with all possible statuses.
+         * Because in some cases 'any' includes 'trash' and 'auto-draft' statuses
+         * e.g. when custom post status registered it breaks 'exclude_from_search' for 'trash' status.
+         */
+        if( !empty( $args[ 'post_status' ] ) && is_string( $args[ 'post_status' ] ) && $args[ 'post_status' ] == 'any' ) {
+          $args[ 'post_status' ] = array(
+            'publish',
+            'pending',
+            'draft',
+            'future',
+            'private',
+            'inherit'
+          );
+        }
         return apply_filters( 'wpp::all_properties::wp_query::args', $args );
       }
 
@@ -131,7 +146,7 @@ namespace UsabilityDynamics\WPP {
               $value = get_post_meta( $item->ID, $column_name );
               $attribute = Attributes::get_attribute_data( $column_name );
               if( !$attribute[ 'multiple' ] ) {
-                $value = $value[ 0 ];
+                $value = !empty( $value[ 0 ] ) ? $value[ 0 ] : "-";
               } else {
                 $value = implode( '<br/>', $value );
               }
