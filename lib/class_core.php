@@ -49,6 +49,19 @@ class WPP_Core {
     // Check settings data on accord with existing wp_properties data before option updates
     add_filter( 'wpp_settings_save', array( $this, 'check_wp_settings_data' ), 0, 2 );
 
+    /**
+     * May be provide Google Maps API key on address validation request.
+     *
+     * @since 2.0.5
+     */
+    add_filter( 'wpp:geocoding_request', function( $args ){
+      $key = ud_get_wp_property( 'configuration.google_maps_api' );
+      if( !empty( $key ) ) {
+        $args[ 'key' ] = $key;
+      }
+      return $args;
+    } );
+
   }
 
   /**

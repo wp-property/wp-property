@@ -1,3 +1,6 @@
+#### 2.0.5
+* Fixed address validation by provided Google Maps API key.
+
 #### 2.0.4 ( September 2, 2015 )
 * Added filter which adds admin domain to the whitelist of hosts to redirect to, in case, admin and site domains are different.
 * Added Chinese language to available address localizations.
