@@ -101,17 +101,15 @@
       <div class="<?php wpp_css('property::entry_content', "entry-content"); ?>">
         <div class="<?php wpp_css('property::the_content', "wpp_the_content"); ?>"><?php @the_content(); ?></div>
 
-        <?php /*if ( empty($wp_properties['property_groups']) || $wp_properties['configuration']['property_overview']['sort_stats_by_groups'] != 'true' ) : ?>
+        <?php if ( empty($wp_properties['property_groups']) || $wp_properties['configuration']['property_overview']['sort_stats_by_groups'] != 'true' ) : ?>
           <ul id="property_stats" class="<?php wpp_css('property::property_stats', "property_stats overview_stats list"); ?>">
             <?php @draw_stats("display=list&make_link=true"); ?>
           </ul>
         <?php else: ?>
           <?php @draw_stats("display=list&make_link=true"); ?>
-        <?php endif;*/ ?>
+        <?php endif; ?>
 
-        <?php echo do_shortcode('[property_attributes]'); ?>
-
-        <?php if(!empty($wp_properties['taxonomies'])) foreach($wp_properties['taxonomies'] as $tax_slug => $tax_data): ?>
+        <?php /*if(!empty($wp_properties['taxonomies'])) foreach($wp_properties['taxonomies'] as $tax_slug => $tax_data): ?>
           <?php if(get_features("type={$tax_slug}&format=count")):  ?>
           <div class="<?php echo $tax_slug; ?>_list">
           <h2><?php echo $tax_data['label']; ?></h2>
@@ -120,7 +118,9 @@
           </ul>
           </div>
           <?php endif; ?>
-        <?php endforeach; ?>
+        <?php endforeach;*/ ?>
+
+        <?php echo do_shortcode('[property_taxonomies]'); ?>
 
         <?php if(is_array($wp_properties['property_meta'])): ?>
         <?php foreach($wp_properties['property_meta'] as $meta_slug => $meta_title):
