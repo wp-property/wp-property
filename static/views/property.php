@@ -109,7 +109,7 @@
           <?php @draw_stats("display=list&make_link=true"); ?>
         <?php endif; ?>
 
-        <?php /*if(!empty($wp_properties['taxonomies'])) foreach($wp_properties['taxonomies'] as $tax_slug => $tax_data): ?>
+        <?php if(!empty($wp_properties['taxonomies'])) foreach($wp_properties['taxonomies'] as $tax_slug => $tax_data): ?>
           <?php if(get_features("type={$tax_slug}&format=count")):  ?>
           <div class="<?php echo $tax_slug; ?>_list">
           <h2><?php echo $tax_data['label']; ?></h2>
@@ -118,9 +118,7 @@
           </ul>
           </div>
           <?php endif; ?>
-        <?php endforeach;*/ ?>
-
-        <?php echo do_shortcode('[property_taxonomies]'); ?>
+        <?php endforeach; ?>
 
         <?php if(is_array($wp_properties['property_meta'])): ?>
         <?php foreach($wp_properties['property_meta'] as $meta_slug => $meta_title):

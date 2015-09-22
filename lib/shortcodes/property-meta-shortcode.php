@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Shortcode: [property_taxonomies]
+ * Shortcode: [property_meta]
  *
  * @since 2.0.5
  */
 namespace UsabilityDynamics\WPP {
 
-  if( !class_exists( 'UsabilityDynamics\WPP\Property_Taxonomies_Shortcode' ) ) {
+  if( !class_exists( 'UsabilityDynamics\WPP\Property_Meta_Shortcode' ) ) {
 
-    class Property_Taxonomies_Shortcode extends WPP_Shortcode {
+    class Property_Meta_Shortcode extends WPP_Shortcode {
 
       /**
        * init
@@ -17,17 +17,8 @@ namespace UsabilityDynamics\WPP {
       public function __construct() {
 
         $options = array(
-            'id' => 'property_taxonomies',
-            'params' => array(
-              'format' => array(
-                'name' => __( 'Output format', ud_get_wp_property()->domain ),
-                'description' => __( 'Set format for terms output.', ud_get_wp_property()->domain ),
-              ),
-              'links' => array(
-                'name' => __( 'Links', ud_get_wp_property()->domain ),
-                'description' => __( 'Make links of terms or not.', ud_get_wp_property()->domain ),
-              )
-            ),
+            'id' => 'property_meta',
+            'params' => array(),
             'description' => __( 'Renders Property Taxonomy Terms' ),
             'group' => 'WP-Property'
         );

@@ -13,12 +13,27 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * init
+       *
+       * @todo: Describe params
        */
       public function __construct() {
 
         $options = array(
             'id' => 'property_attributes',
-            'params' => array(),
+            'params' => array(
+              'sort_by_groups' => array(),
+              'display' => array(),
+              'show_true_as_image' => array(),
+              'make_link' => array(),
+              'hide_false' => array(),
+              'first_alt' => array(),
+              'return_blank' => array(),
+              'include' => array(),
+              'exclude' => array(),
+              'include_clsf' => array(),
+              'title' => array(),
+              'stats_prefix' => array()
+            ),
             'description' => __( 'Renders Property Attributes' ),
             'group' => 'WP-Property'
         );
