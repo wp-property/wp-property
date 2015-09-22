@@ -93,10 +93,11 @@ namespace UsabilityDynamics\WPP {
         new \UsabilityDynamics\WPLT\Bootstrap();
 
         /**
-         * May be load Shortcodes
+         * May be load Shortcodes and Widgets
          */
         if( class_exists( '\UsabilityDynamics\Shortcode\Shortcode' ) ) {
           $this->load_files( $this->path('lib/shortcodes', 'dir') );
+          $this->load_files( $this->path('lib/widgets', 'dir') );
         }
 
         /**
