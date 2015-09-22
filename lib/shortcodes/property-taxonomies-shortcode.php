@@ -40,7 +40,7 @@ namespace UsabilityDynamics\WPP {
                 )
               )
             ),
-            'description' => __( 'Renders Property Taxonomy Terms' ),
+            'description' => __( 'Renders Property Taxonomy Terms', ud_get_wp_property()->domain ),
             'group' => 'WP-Property'
         );
 

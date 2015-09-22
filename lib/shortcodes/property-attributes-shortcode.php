@@ -116,7 +116,7 @@ namespace UsabilityDynamics\WPP {
                 'type' => 'text'
               )
             ),
-            'description' => __( 'Renders Property Attributes' ),
+            'description' => __( 'Renders Property Attributes', ud_get_wp_property()->domain ),
             'group' => 'WP-Property'
         );
 

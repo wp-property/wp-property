@@ -19,7 +19,7 @@ namespace UsabilityDynamics\WPP {
         $options = array(
             'id' => 'property_description',
             'params' => array(),
-            'description' => __( 'Renders Property Description' ),
+            'description' => __( 'Renders Property Description', ud_get_wp_property()->domain ),
             'group' => 'WP-Property'
         );
 

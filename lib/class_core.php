@@ -1452,7 +1452,6 @@ class WPP_Core {
    * Must be used on a property page, or within a property loop where the global $post or $property variable is for a property object.
    *
    * @since 1.26.0
-   *
    */
   static public function shortcode_property_map( $atts = false ) {
     global $post, $property;
