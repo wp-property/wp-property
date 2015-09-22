@@ -21,18 +21,100 @@ namespace UsabilityDynamics\WPP {
         $options = array(
             'id' => 'property_attributes',
             'params' => array(
-              'sort_by_groups' => array(),
-              'display' => array(),
-              'show_true_as_image' => array(),
-              'make_link' => array(),
-              'hide_false' => array(),
-              'first_alt' => array(),
-              'return_blank' => array(),
-              'include' => array(),
-              'exclude' => array(),
-              'include_clsf' => array(),
-              'title' => array(),
-              'stats_prefix' => array()
+              'sort_by_groups' => array(
+                'name' => __( 'Sort by groups', ud_get_wp_property()->domain ),
+                'description' => __( 'Sort attributes by groups or not', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
+                  'false' => __( 'No', ud_get_wp_property()->domain )
+                )
+              ),
+              'display' => array(
+                'name' => __( 'Display', ud_get_wp_property()->domain ),
+                'description' => __( 'The way of displaying attributes', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'dl_list' => __( 'Definitions List', ud_get_wp_property()->domain ),
+                  'list' => __( 'Simple List', ud_get_wp_property()->domain ),
+                  'plain_list' => __( 'Plain List', ud_get_wp_property()->domain ),
+                  'detail' => __( 'Detailed List', ud_get_wp_property()->domain )
+                )
+              ),
+              'show_true_as_image' => array(
+                'name' => __( 'Show "True" as image', ud_get_wp_property()->domain ),
+                'description' => __( 'Display boolean attributes like checkbox or not.', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
+                  'false' => __( 'No', ud_get_wp_property()->domain )
+                )
+              ),
+              'make_link' => array(
+                'name' => __( 'Make link', ud_get_wp_property()->domain ),
+                'description' => __( 'Make links of attribute terms', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
+                  'false' => __( 'No', ud_get_wp_property()->domain )
+                )
+              ),
+              'hide_false' => array(
+                'name' => __( 'Hide false', ud_get_wp_property()->domain ),
+                'description' => __( 'Hide attributes with false value', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
+                  'false' => __( 'No', ud_get_wp_property()->domain )
+                )
+              ),
+              'first_alt' => array(
+                'name' => __( 'First Alt', ud_get_wp_property()->domain ),
+                'description' => __( 'Make first attribute to be alt one.', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
+                  'false' => __( 'No', ud_get_wp_property()->domain )
+                )
+              ),
+              'return_blank' => array(
+                'name' => __( 'Return Blank', ud_get_wp_property()->domain ),
+                'description' => __( 'Omit blank values or not.', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
+                  'false' => __( 'No', ud_get_wp_property()->domain )
+                )
+              ),
+              'include' => array(
+                'name' => __( 'Include', ud_get_wp_property()->domain ),
+                'description' => __( 'CSV of attribute slugs to be included.', ud_get_wp_property()->domain ),
+                'type' => 'text'
+              ),
+              'exclude' => array(
+                'name' => __( 'Exclude', ud_get_wp_property()->domain ),
+                'description' => __( 'CSV of attribute slugs to be excluded.', ud_get_wp_property()->domain ),
+                'type' => 'text'
+              ),
+              'include_clsf' => array(
+                'name' => __( 'Include Classifications', ud_get_wp_property()->domain ),
+                'description' => __( 'CSV of classifications to be included.', ud_get_wp_property()->domain ),
+                'type' => 'text'
+              ),
+              'title' => array(
+                'name' => __( 'Title', ud_get_wp_property()->domain ),
+                'description' => __( 'Title.', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
+                  'false' => __( 'No', ud_get_wp_property()->domain )
+                )
+              ),
+              'stats_prefix' => array(
+                'name' => __( 'Stats Prefix', ud_get_wp_property()->domain ),
+                'description' => __( 'Class prefix for stats items', ud_get_wp_property()->domain ),
+                'type' => 'text'
+              )
             ),
             'description' => __( 'Renders Property Attributes' ),
             'group' => 'WP-Property'

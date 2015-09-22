@@ -32,13 +32,7 @@ namespace UsabilityDynamics\WPP {
        */
       public function call( $atts = "" ) {
 
-        $data = shortcode_atts( array(
-          'type' => 'property_feature',
-          'format' => 'comma',
-          'links' => true ),
-        $atts );
-
-        return $this->get_template( 'property_taxonomies', $data, false );
+        return $this->get_template( 'property_meta', array(), false );
 
       }
 
@@ -47,7 +41,7 @@ namespace UsabilityDynamics\WPP {
     /**
      * Register
      */
-    new Property_Taxonomies_Shortcode();
+    new Property_Meta_Shortcode();
 
   }
 

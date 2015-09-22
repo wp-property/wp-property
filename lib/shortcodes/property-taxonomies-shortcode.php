@@ -22,10 +22,22 @@ namespace UsabilityDynamics\WPP {
               'format' => array(
                 'name' => __( 'Output format', ud_get_wp_property()->domain ),
                 'description' => __( 'Set format for terms output.', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'comma' => __( 'Comma Separated', ud_get_wp_property()->domain ),
+                  'array' => __( 'Array', ud_get_wp_property()->domain ),
+                  'count' => __( 'Return count only', ud_get_wp_property()->domain ),
+                  'list' => __( 'List', ud_get_wp_property()->domain )
+                )
               ),
               'links' => array(
                 'name' => __( 'Links', ud_get_wp_property()->domain ),
                 'description' => __( 'Make links of terms or not.', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
+                  'false' => __( 'No', ud_get_wp_property()->domain )
+                )
               )
             ),
             'description' => __( 'Renders Property Taxonomy Terms' ),
