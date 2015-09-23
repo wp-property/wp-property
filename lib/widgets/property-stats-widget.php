@@ -10,7 +10,12 @@ namespace UsabilityDynamics\WPP\Widgets {
    *
    * @package UsabilityDynamics\WPP\Widgets
    */
-  class PropertyStatsWidget extends \WP_Widget {
+  class PropertyStatsWidget extends \UsabilityDynamics\WPP\Widget {
+
+    /**
+     * @var string
+     */
+    public $shortcode_id = 'property_attributes';
 
     /**
      * Init
@@ -24,35 +29,18 @@ namespace UsabilityDynamics\WPP\Widgets {
      *
      * @param array $args
      * @param array $instance
-     *
-     * @todo: Consider widget options
      */
     public function widget( $args, $instance ) {
-      echo do_shortcode( '[property_attributes]' );
-    }
 
-    /**
-     * Form handler
-     *
-     * @param array $instance
-     * @return bool
-     *
-     * @todo: Do options form
-     */
-    public function form($instance) {
+      $args = array();
 
-      $_shortcode = \UsabilityDynamics\Shortcode\Manager::get_by( 'id', 'property_attributes' );
-
-      if ( is_object( $_shortcode ) && !empty( $_shortcode->params ) ) {
-
-        echo '<pre>';
-        print_r( $_shortcode->params );
-        echo '</pre>';
-
-      } else {
-        _e( '<p>No options available.</p>', ud_get_wp_property()->domain );
+      if ( !empty( $instance ) && is_array( $instance ) ) {
+        foreach( $instance as $attr_name => $attr_value ) {
+          $args[] = $attr_name . '="'.$attr_value.'"';
+        }
       }
 
+      echo do_shortcode( '[property_attributes '.implode( ' ', $args ).']' );
     }
 
     /**
