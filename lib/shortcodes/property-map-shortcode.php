@@ -22,18 +22,21 @@ namespace UsabilityDynamics\WPP {
               'width' => array(
                 'name' => __( 'Width', ud_get_wp_property()->domain ),
                 'description' => __( 'Set width of map. (e.g. 100%, 500px)', ud_get_wp_property()->domain ),
-                'type' => 'text'
+                'type' => 'text',
+                'default' => '100%'
               ),
               'height' => array(
                 'name' => __( 'Height', ud_get_wp_property()->domain ),
                 'description' => __( 'Set height of map. (e.g. 500px)', ud_get_wp_property()->domain ),
-                'type' => 'text'
+                'type' => 'text',
+                'default' => '450px'
               ),
               'zoom_level' => array(
                 'name' => __( 'Zoom Level', ud_get_wp_property()->domain ),
                 'description' => __( 'Set level of map zoom', ud_get_wp_property()->domain ),
                 'type' => 'number',
-                'min' => 1
+                'min' => '1',
+                'default' => '13'
               ),
               'hide_infobox' => array(
                 'name' => __( 'Hide Infobox', ud_get_wp_property()->domain ),
@@ -42,7 +45,8 @@ namespace UsabilityDynamics\WPP {
                 'options' => array(
                     'true' => __( 'Yes', ud_get_wp_property()->domain ),
                     'false' => __( 'No', ud_get_wp_property()->domain )
-                )
+                ),
+                'default' => 'false'
               )
             ),
             'description' => __( 'Renders Property Map', ud_get_wp_property()->domain ),
