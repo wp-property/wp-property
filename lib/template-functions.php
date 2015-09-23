@@ -1132,8 +1132,8 @@ if ( !function_exists( 'draw_stats' ) ):
         ?>
         <div class="wpp_feature_list">
         <?php
-        if ( $main_stats_group != $gslug || !@key_exists( $gslug, $groups ) ) {
-          $group_name = ( @key_exists( $gslug, $groups ) ? $groups[ $gslug ][ 'name' ] : __( 'Other', 'wpp' ) );
+        if ( $main_stats_group != $gslug || !@array_key_exists( $gslug, $groups ) ) {
+          $group_name = ( @array_key_exists( $gslug, $groups ) ? $groups[ $gslug ][ 'name' ] : __( 'Other', 'wpp' ) );
           ?>
           <h2 class="wpp_stats_group"><?php echo $group_name; ?></h2>
         <?php
