@@ -6,9 +6,9 @@
  */
 namespace UsabilityDynamics\WPP {
 
-  if (!class_exists('UsabilityDynamics\WPP\WPP_Shortcode')) {
+  if (!class_exists('UsabilityDynamics\WPP\Shortcode')) {
 
-    class WPP_Shortcode extends \UsabilityDynamics\Shortcode\Shortcode {
+    class Shortcode extends \UsabilityDynamics\Shortcode\Shortcode {
 
       /**
        * Determines template and renders it

@@ -9,7 +9,7 @@ namespace UsabilityDynamics\WPP {
 
   if( !class_exists( 'UsabilityDynamics\WPP\Property_Meta_Shortcode' ) ) {
 
-    class Property_Meta_Shortcode extends WPP_Shortcode {
+    class Property_Meta_Shortcode extends Shortcode {
 
       /**
        * init

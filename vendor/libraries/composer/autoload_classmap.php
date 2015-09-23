@@ -174,6 +174,7 @@ return array(
     'UsabilityDynamics\\WPP\\Meta_Box' => $baseDir . '/lib/classes/class-meta-box.php',
     'UsabilityDynamics\\WPP\\Scaffold' => $baseDir . '/lib/classes/class-scaffold.php',
     'UsabilityDynamics\\WPP\\Settings' => $baseDir . '/lib/classes/class-settings.php',
+    'UsabilityDynamics\\WPP\\Shortcode' => $baseDir . '/lib/classes/class-shortcode.php',
     'UsabilityDynamics\\WP\\Bootstrap' => $vendorDir . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap.php',
     'UsabilityDynamics\\WP\\Bootstrap_Plugin' => $vendorDir . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php',
     'UsabilityDynamics\\WP\\Bootstrap_Theme' => $vendorDir . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap-theme.php',
