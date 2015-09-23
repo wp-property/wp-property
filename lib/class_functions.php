@@ -127,9 +127,6 @@ class WPP_F extends UsabilityDynamics\Utility {
   static public function widgets_init() {
     global $wp_properties;
 
-    /** Loads widgets */
-    include_once WPP_Path . 'lib/class_widgets.php';
-
     if( class_exists( 'Property_Attributes_Widget' ) ) {
       register_widget( "Property_Attributes_Widget" );
     }

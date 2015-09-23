@@ -1,10 +1,7 @@
 <?php
 
 /**
- * Property Attributes widget.
- *
- * @author potanin@UD
- * @since 1.32.0
+ * Class Property_Attributes_Widget
  */
 class Property_Attributes_Widget extends WP_Widget {
 
@@ -34,6 +31,8 @@ class Property_Attributes_Widget extends WP_Widget {
   }
 
   /**
+   * Property type
+   *
    * @param $val
    * @param $args
    * @return mixed
