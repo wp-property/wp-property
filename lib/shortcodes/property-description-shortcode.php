@@ -3,6 +3,8 @@
 /**
  * Shortcode: [property_description]
  *
+ * Temp solution. Not sure if this shortcode will work with builders.
+ *
  * @since 2.0.5
  */
 namespace UsabilityDynamics\WPP {

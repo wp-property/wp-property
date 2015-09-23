@@ -1,22 +1,22 @@
 <?php
 
 /**
- * Property Stats Widget
+ * Property Map Widget
  */
 namespace UsabilityDynamics\WPP\Widgets {
 
   /**
-   * Class PropertyStatsWidget
+   * Class PropertyMapWidget
    *
    * @package UsabilityDynamics\WPP\Widgets
    */
-  class PropertyStatsWidget extends \WP_Widget {
+  class PropertyMapWidget extends \WP_Widget {
 
     /**
      * Init
      */
     public function __construct() {
-      parent::__construct( 'wpp_property_stats', $name = sprintf( __( '%1s Stats', ud_get_wp_property()->domain ), \WPP_F::property_label( 'plural' ) ), array( 'description' => __( 'Widget for Single Property page that renders property attributes table.', ud_get_wp_property()->domain ) ) );
+      parent::__construct( 'wpp_property_map', $name = sprintf( __( '%1s Map', ud_get_wp_property()->domain ), \WPP_F::property_label( 'plural' ) ), array( 'description' => __( 'Widget for Single Property page that renders property address map.', ud_get_wp_property()->domain ) ) );
     }
 
     /**
@@ -28,7 +28,7 @@ namespace UsabilityDynamics\WPP\Widgets {
      * @todo: Consider widget options
      */
     public function widget( $args, $instance ) {
-      echo do_shortcode( '[property_attributes]' );
+      echo do_shortcode( '[property_address_map]' );
     }
 
     /**
@@ -41,7 +41,7 @@ namespace UsabilityDynamics\WPP\Widgets {
      */
     public function form($instance) {
 
-      $_shortcode = \UsabilityDynamics\Shortcode\Manager::get_by( 'id', 'property_attributes' );
+      $_shortcode = \UsabilityDynamics\Shortcode\Manager::get_by( 'id', 'property_address_map' );
 
       if ( is_object( $_shortcode ) && !empty( $_shortcode->params ) ) {
 
@@ -75,8 +75,8 @@ namespace UsabilityDynamics\WPP\Widgets {
     /**
      * Register if class exists
      */
-    if( class_exists( 'UsabilityDynamics\WPP\Widgets\PropertyStatsWidget' ) ) {
-      register_widget( 'UsabilityDynamics\WPP\Widgets\PropertyStatsWidget' );
+    if( class_exists( 'UsabilityDynamics\WPP\Widgets\PropertyMapWidget' ) ) {
+      register_widget( 'UsabilityDynamics\WPP\Widgets\PropertyMapWidget' );
     }
   });
 }
