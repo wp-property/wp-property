@@ -155,6 +155,8 @@ class WPP_F extends UsabilityDynamics\Utility {
       register_widget( "OtherPropertiesWidget" );
     }
 
+    do_action( 'wpp_register_widgets' );
+
     //** Register a sidebar for each property type */
     if(
       !isset( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] ) ||

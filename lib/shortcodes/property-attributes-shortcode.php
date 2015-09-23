@@ -12,9 +12,7 @@ namespace UsabilityDynamics\WPP {
     class Property_Attributes_Shortcode extends WPP_Shortcode {
 
       /**
-       * init
-       *
-       * @todo: Describe params
+       * Init
        */
       public function __construct() {
 
