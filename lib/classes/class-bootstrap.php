@@ -93,11 +93,37 @@ namespace UsabilityDynamics\WPP {
         new \UsabilityDynamics\WPLT\Bootstrap();
 
         /**
-         *
+         * May be load Shortcodes and Widgets
          */
+        if( class_exists( '\UsabilityDynamics\Shortcode\Shortcode' ) ) {
+          $this->load_files( $this->path('lib/shortcodes', 'dir') );
+          $this->load_files( $this->path('lib/widgets', 'dir') );
+        }
 
-        //** Initiate the plugin */
+        /**
+         * Initiate the plugin
+         */
         $this->core = new \WPP_Core();
+      }
+
+      /**
+       * Includes all PHP files from specific folder
+       *
+       * @param string $dir Directory's path
+       * @author peshkov@UD
+       */
+      public function load_files($dir = '') {
+        $dir = trailingslashit($dir);
+        if (!empty($dir) && is_dir($dir)) {
+          if ($dh = opendir($dir)) {
+            while (( $file = readdir($dh) ) !== false) {
+              if (!in_array($file, array('.', '..')) && is_file($dir . $file) && 'php' == pathinfo($dir . $file, PATHINFO_EXTENSION)) {
+                include_once( $dir . $file );
+              }
+            }
+            closedir($dh);
+          }
+        }
       }
       
       /**

@@ -130,7 +130,6 @@
         <?php endforeach; ?>
         <?php endif; ?>
 
-
         <?php if(WPP_F::get_coordinates()): ?>
           <div id="property_map" class="<?php wpp_css('property::property_map'); ?>" style="width:100%; height:450px"></div>
         <?php endif; ?>
