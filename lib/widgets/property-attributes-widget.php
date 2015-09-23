@@ -20,11 +20,11 @@ class Property_Attributes_Widget extends WP_Widget {
         'wpp_property_attributes',
         sprintf( __( '%1s Attributes', 'wpp' ), WPP_F::property_label() ),
         array(
-            'classname' => 'wpp_property_attributes',
-            'description' => sprintf( __( 'Display a list of selected %1s attributes when loaded on a single %2s page.', 'wpp' ), $property_label, $property_label )
+          'classname' => 'wpp_property_attributes',
+          'description' => sprintf( __( 'Display a list of selected %1s attributes when loaded on a single %2s page.', 'wpp' ), $property_label, $property_label )
         ),
         array(
-            'width' => 300
+          'width' => 300
         )
     );
 
