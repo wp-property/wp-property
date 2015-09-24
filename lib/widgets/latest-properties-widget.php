@@ -236,3 +236,12 @@ class LatestPropertiesWidget extends WP_Widget {
   }
 
 }
+
+/**
+ * Register widget
+ */
+add_action( 'widgets_init', function() {
+  if( class_exists( 'LatestPropertiesWidget' ) ) {
+    register_widget( "LatestPropertiesWidget" );
+  }
+});

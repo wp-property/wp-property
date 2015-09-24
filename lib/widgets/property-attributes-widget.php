@@ -191,3 +191,12 @@ class Property_Attributes_Widget extends WP_Widget {
   }
 
 }
+
+/**
+ * Register widget
+ */
+add_action( 'widgets_init', function() {
+  if( class_exists( 'Property_Attributes_Widget' ) ) {
+    register_widget( "Property_Attributes_Widget" );
+  }
+});

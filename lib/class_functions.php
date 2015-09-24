@@ -126,37 +126,7 @@ class WPP_F extends UsabilityDynamics\Utility {
    */
   static public function widgets_init() {
     global $wp_properties;
-
-    if( class_exists( 'Property_Attributes_Widget' ) ) {
-      register_widget( "Property_Attributes_Widget" );
-    }
-
-    if( class_exists( 'ChildPropertiesWidget' ) ) {
-      register_widget( "ChildPropertiesWidget" );
-    }
-
-    if( class_exists( 'SearchPropertiesWidget' ) ) {
-      register_widget( "SearchPropertiesWidget" );
-    }
-
-    if( class_exists( 'FeaturedPropertiesWidget' ) ) {
-      register_widget( "FeaturedPropertiesWidget" );
-    }
-
-    if( class_exists( 'GalleryPropertiesWidget' ) ) {
-      register_widget( "GalleryPropertiesWidget" );
-    }
-
-    if( class_exists( 'LatestPropertiesWidget' ) ) {
-      register_widget( "LatestPropertiesWidget" );
-    }
-
-    if( class_exists( 'OtherPropertiesWidget' ) ) {
-      register_widget( "OtherPropertiesWidget" );
-    }
-
-    do_action( 'wpp_register_widgets' );
-
+    
     //** Register a sidebar for each property type */
     if(
       !isset( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] ) ||

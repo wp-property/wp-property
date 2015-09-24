@@ -58,7 +58,7 @@ namespace UsabilityDynamics\WPP\Widgets {
   /**
    * Register this widget
    */
-  add_action( 'wpp_register_widgets', function() {
+  add_action( 'widgets_init', function() {
 
     /**
      * Register if class exists
