@@ -267,3 +267,12 @@ class FeaturedPropertiesWidget extends WP_Widget {
   }
 
 }
+
+/**
+ * Register widget
+ */
+add_action( 'widgets_init', function() {
+  if( class_exists( 'FeaturedPropertiesWidget' ) ) {
+    register_widget( "FeaturedPropertiesWidget" );
+  }
+});

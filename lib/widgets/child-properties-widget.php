@@ -48,7 +48,6 @@ class ChildPropertiesWidget extends WP_Widget {
         'post_parent' => $post->ID,
     ) );
 
-    // Bail out if no children
     if ( count( $attachments ) < 1 ) {
       return;
     }
@@ -127,12 +126,22 @@ class ChildPropertiesWidget extends WP_Widget {
     echo $after_widget;
   }
 
-  /** @see WP_Widget::update */
+  /**
+   * Update
+   *
+   * @param array $new_instance
+   * @param array $old_instance
+   * @return array
+   */
   function update( $new_instance, $old_instance ) {
     return $new_instance;
   }
 
-  /** @see WP_Widget::form */
+  /**
+   * Form
+   *
+   * @param array $instance
+   */
   function form( $instance ) {
     global $wp_properties;
     $title = isset( $instance[ 'title' ] ) ? esc_attr( $instance[ 'title' ] ) : '';
@@ -166,7 +175,6 @@ class ChildPropertiesWidget extends WP_Widget {
       </label>
     </p>
 
-
     <p>
       <label for="<?php echo $this->get_field_id( 'hide_image' ); ?>">
         <input id="<?php echo $this->get_field_id( 'hide_image' ); ?>" class="check_me_child"
@@ -193,9 +201,6 @@ class ChildPropertiesWidget extends WP_Widget {
       </label>
     </p>
 
-
-
-
     <p><?php _e( 'Select the stats you want to display', 'wpp' ); ?></p>
     <p>
       <label for="<?php echo $this->get_field_id( 'show_title' ); ?>">
@@ -214,7 +219,6 @@ class ChildPropertiesWidget extends WP_Widget {
         <?php echo $label; ?>
       </label><br/>
     <?php endforeach; ?>
-
 
     <p>
       <label for="<?php echo $this->get_field_id( 'address_format' ); ?>"><?php _e( 'Address Format:', 'wpp' ); ?>
@@ -240,9 +244,15 @@ class ChildPropertiesWidget extends WP_Widget {
       </label>
     </p>
 
-
-
   <?php
   }
-
 }
+
+/**
+ * Register widget
+ */
+add_action( 'widgets_init', function() {
+  if( class_exists( 'ChildPropertiesWidget' ) ) {
+    register_widget( "ChildPropertiesWidget" );
+  }
+});
