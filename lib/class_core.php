@@ -239,14 +239,9 @@ class WPP_Core {
     add_filter( 'wp_get_attachment_link', array( 'WPP_F', 'wp_get_attachment_link' ), 10, 6 );
 
     /** Load all shortcodes */
-    add_shortcode( 'property_overview', array( __CLASS__, 'shortcode_property_overview' ) );
     add_shortcode( 'property_search', array( __CLASS__, 'shortcode_property_search' ) );
     add_shortcode( 'featured_properties', array( __CLASS__, 'shortcode_featured_properties' ) );
     add_shortcode( 'property_attribute', array( __CLASS__, 'shortcode_property_attribute' ) );
-
-    if( !empty( $wp_properties[ 'alternative_shortcodes' ][ 'property_overview' ] ) ) {
-      add_shortcode( "{$wp_properties[ 'alternative_shortcodes' ]['property_overview']}", array( __CLASS__, 'shortcode_property_overview' ) );
-    }
 
     //** Make Property Featured Via AJAX */
     if(
