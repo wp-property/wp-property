@@ -128,6 +128,31 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       </td>
     </tr>
 
+    <tr>
+      <th><?php printf( __( 'Single %s Template', 'wpp' ), WPP_F::property_label() ); ?></th>
+      <td>
+        <ul>
+          <li>
+            <label><input type="radio" name="wpp_settings[configuration][single_property][template]" value="property" <?php echo empty( $wp_properties[ 'configuration' ][ 'single_property']['template' ] ) || $wp_properties[ 'configuration' ][ 'single_property']['template' ] == 'property' ? 'checked' : ''; ?> /> <?php printf( 'Default', ud_get_wp_property( 'domain' ) ); ?></label>
+          </li>
+          <li>
+            <label><input type="radio" name="wpp_settings[configuration][single_property][template]" value="single" <?php echo !empty( $wp_properties[ 'configuration' ][ 'single_property']['template' ] ) && $wp_properties[ 'configuration' ][ 'single_property']['template' ] == 'single' ? 'checked' : ''; ?> /> <?php printf( 'Single Post', ud_get_wp_property( 'domain' ) ); ?></label>
+          </li>
+          <li>
+            <label><input type="radio" name="wpp_settings[configuration][single_property][template]" value="page" <?php echo !empty( $wp_properties[ 'configuration' ][ 'single_property']['template' ] ) && $wp_properties[ 'configuration' ][ 'single_property']['template' ] == 'page' ? 'checked' : ''; ?> /> <?php printf( 'Page Template', ud_get_wp_property( 'domain' ) ); ?></label>
+            <div class="">
+              <label><?php printf( __( 'Select page template you want to be used on single %s page' ), ud_get_wp_property( 'domain' ) ); ?></label>
+              <select name="wpp_settings[configuration][single_property][page_template]">
+                <option value="default" ><?php _e( 'Default Template', ud_get_wp_property( 'domain' ) ); ?></option>
+                <?php foreach ( get_page_templates() as $title => $slug ) : ?>
+                  <option value="<?php echo $slug ?>" <?php echo !empty( $wp_properties[ 'configuration' ][ 'single_property']['page_template' ] ) && $wp_properties[ 'configuration' ][ 'single_property']['page_template' ] == $slug ? 'selected="selected"' : ''; ?> ><?php echo $title; ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          </li>
+        </ul>
+      </td>
+    </tr>
 
     <tr class="wpp_non_property_page_settings hidden">
       <th>&nbsp;</th>
@@ -294,9 +319,11 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     </tr>
 
     <tr>
-      <th><?php printf(__( '%1s Page', 'wpp' ), WPP_F::property_label( 'singular' ) ); ?></th>
+      <th><?php printf(__( '%1s Stats', 'wpp' ), WPP_F::property_label( 'singular' ) ); ?></th>
       <td>
+        <?php /* ?>
         <p><?php printf( __( 'The display settings may be edited further by customizing the <b>%s</b> file.  To avoid losing your changes during updates, create a <b>property.php</b> file in your template directory, which will be automatically loaded.', 'wpp' ), 'wp-content/plugins/wp-property/static/views/property.php' ) ?>
+        <?php //*/ ?>
         <ul>
           <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][sort_stats_by_groups]&label=" . sprintf(__( 'Sort %1s stats by groups.', 'wpp' ),  WPP_F::property_label( 'singular' )), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'sort_stats_by_groups' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'sort_stats_by_groups' ] : false ) ); ?></li>
           <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][show_true_as_image]&label=" . sprintf( __( 'Show Checkboxed Image instead of "%s" and hide "%s" for %s/%s values', 'wpp' ), __( 'Yes', 'wpp' ), __( 'No', 'wpp' ), __( 'Yes', 'wpp' ), __( 'No', 'wpp' ) ), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_true_as_image' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_true_as_image' ] : false ) ); ?></li>
