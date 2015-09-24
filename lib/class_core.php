@@ -43,6 +43,13 @@ class WPP_Core {
     //** Setup template_redirect */
     add_action( "template_redirect", array( $this, 'template_redirect' ) );
 
+    add_action( 'template_include', function( $template ){
+
+      // @TODO
+
+      return $template;
+    } );
+
     //** Pre-init action hook */
     do_action( 'wpp_pre_init' );
 
@@ -780,10 +787,6 @@ class WPP_Core {
     //** Scripts loaded only on single property pages */
     if( isset( $wp_query->single_property_page ) && !post_password_required( $post ) ) {
 
-      WPP_F::console_log( 'Including scripts for all single property pages.' );
-
-      WPP_F::load_assets( array( 'single' ) );
-
       do_action( 'template_redirect_single_property' );
 
       add_action( 'wp_head', create_function( '', "do_action('wp_head_single_property'); " ) );
@@ -810,17 +813,13 @@ class WPP_Core {
         $wp_query->query_vars = array_merge( $wp_query->query_vars, $single_page_vars );
       }
 
-      $template_found = WPP_F::get_template_part( array_filter( array(
-        ( !empty( $property[ 'property_type' ] ) ? "property-{$property[ 'property_type' ]}" : false ),
-        "property",
-      ) ), array( WPP_Templates ) );
-
-      //** Load the first found template */
-      if( $template_found ) {
-        WPP_F::console_log( 'Found single property page template:' . $template_found );
-        load_template( $template_found );
-        die();
-      }
+      /**
+       * Determine which template should be used for rendering property page
+       *
+       * @see Properties -> Settings -> Main tab -> Single Property Template Section on admin panel.
+       * @since 2.1.0
+       */
+      $this->prepare_single_property_template();
 
     }
 
@@ -873,6 +872,61 @@ class WPP_Core {
     }
 
     do_action( 'wpp_template_redirect_post_scripts' );
+
+  }
+
+  /**
+   * Determine which template should be used for rendering property page
+   *
+   * @see Properties -> Settings -> Main tab -> Single Property Template Section on admin panel.
+   * @since 2.1.0
+   * @author peshkov@UD
+   */
+  public function prepare_single_property_template() {
+    $config = ud_get_wp_property( 'configuration.single_property', array() );
+
+    if( !is_array( $config ) ) {
+      $config = array();
+    }
+
+    if( empty( $config[ 'template' ] ) ) {
+      $config[ 'template' ] = 'property';
+    }
+
+    /**
+     * If template is single or page, we do nothing here since
+     * WordPress will use native templates ( single.php ) for posts if 'single' is set
+     * and we redeclare template using user's settings if 'page' template is set
+     * ( see self::template_include() )
+     */
+    if( in_array( $config[ 'template' ],  array( 'single', 'page' ) ) ) {
+      return;
+    }
+
+    /**
+     * If template is property, we are rendering our
+     * predefined property.php template and exit.
+     *
+     * This logic is mostly legacy.
+     */
+    if( $config[ 'template' ] = 'property' ) {
+
+      WPP_F::console_log( 'Including scripts for all single property pages.' );
+      WPP_F::load_assets( array( 'single' ) );
+
+      $template_found = WPP_F::get_template_part( array_filter( array(
+        ( !empty( $property[ 'property_type' ] ) ? "property-{$property[ 'property_type' ]}" : false ),
+        "property",
+      ) ), array( WPP_Templates ) );
+
+      //** Load the first found template */
+      if( $template_found ) {
+        WPP_F::console_log( 'Found single property page template:' . $template_found );
+        load_template( $template_found );
+        die();
+      }
+
+    }
 
   }
 
