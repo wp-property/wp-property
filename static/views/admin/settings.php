@@ -279,7 +279,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       <th><?php _e( 'Overview Shortcode', 'wpp' ) ?></th>
       <td>
         <p>
-        <?php printf(__( 'These are the settings for the [property_overview] shortcode.  The shortcode displays a list of all building / root %1s.<br />The display settings may be edited further by customizing the <b>wp-content/plugins/wp-properties/templates/property-overview.php</b> file.  To avoid losing your changes during updates, create a <b>property-overview.php</b> file in your template directory, which will be automatically loaded.', 'wpp' ), WPP_F::property_label( 'plural' ) ); ?>
+        <?php printf( __( 'These are the settings for the <b>%s</b> shortcode. The shortcode displays a list of all %s.<br />The display settings may be edited further by customizing the <b>%s</b> file.  To avoid losing your changes during updates, copy <b>%s</b> file in your theme\'s root directory, which will be automatically loaded.', 'wpp' ), '[property_overview]', WPP_F::property_label( 'plural' ), 'wp-content/plugins/wp-property/static/views/property-overview.php', 'property-overview.php' ); ?>
         </p>
         <ul>
           <li><?php _e( 'Thumbnail size:', 'wpp' ) ?> <?php WPP_F::image_sizes_dropdown( "name=wpp_settings[configuration][property_overview][thumbnail_size]&selected=" . $wp_properties[ 'configuration' ][ 'property_overview' ][ 'thumbnail_size' ] ); ?></li>
@@ -296,7 +296,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <tr>
       <th><?php printf(__( '%1s Page', 'wpp' ), WPP_F::property_label( 'singular' ) ); ?></th>
       <td>
-        <p><?php _e( 'The display settings may be edited further by customizing the <b>wp-content/plugins/wp-properties/templates/property.php</b> file.  To avoid losing your changes during updates, create a <b>property.php</b> file in your template directory, which will be automatically loaded.', 'wpp' ) ?>
+        <p><?php printf( __( 'The display settings may be edited further by customizing the <b>%s</b> file.  To avoid losing your changes during updates, create a <b>property.php</b> file in your template directory, which will be automatically loaded.', 'wpp' ), 'wp-content/plugins/wp-property/static/views/property.php' ) ?>
         <ul>
           <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][sort_stats_by_groups]&label=" . sprintf(__( 'Sort %1s stats by groups.', 'wpp' ),  WPP_F::property_label( 'singular' )), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'sort_stats_by_groups' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'sort_stats_by_groups' ] : false ) ); ?></li>
           <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][show_true_as_image]&label=" . sprintf( __( 'Show Checkboxed Image instead of "%s" and hide "%s" for %s/%s values', 'wpp' ), __( 'Yes', 'wpp' ), __( 'No', 'wpp' ), __( 'Yes', 'wpp' ), __( 'No', 'wpp' ) ), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_true_as_image' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_true_as_image' ] : false ) ); ?></li>

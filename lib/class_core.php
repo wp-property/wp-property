@@ -668,7 +668,7 @@ class WPP_Core {
   /**
    * Performs front-end pre-header functionality
    *
-   * This function is not called on amdin side
+   * This function is not called on admin side
    * Loads conditional CSS styles
    *
    * @since 1.11

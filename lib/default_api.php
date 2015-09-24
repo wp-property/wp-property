@@ -281,8 +281,6 @@ if ( isset( $wp_properties['searchable_attr_fields'] ) && is_array( $wp_properti
   }
 }
 
-add_filter("wpp_stat_filter_phone_number", 'format_phone_number');
-
 // Exclude hidden attributes from frontend
 add_filter( 'wpp_get_property', 'wpp_exclude_hidden_attributes' );
 
@@ -302,9 +300,6 @@ add_filter( 'the_password_form', 'wpp_password_protected_property_form' );
 
 //add_action("wpp_ui_after_attribute_{$wp_properties['configuration']['address_attribute']}", 'wpp_show_coords');
 add_action( 'wpp_ui_after_attribute_price', 'wpp_show_week_month_selection' );
-
-//**  Adds additional settings for Property Page */
-add_action( 'wpp_settings_page_property_page', 'add_format_phone_number_checkbox' );
 
 /**
  * Add labels to system-generated attributes that do not have custom-set values
@@ -601,44 +596,6 @@ function wpp_stat_filter_for_rent_fix( $value ) {
 function wpp_stat_filter_for_sale_fix( $value ) {
   if ( $value == '1' )
     return __( 'Yes', 'wpp' );
-}
-
-/**
- * Formats phone number for display
- *
- *
- * @since 1.0
- *
- * @param string $phone_number
- *
- * @return string $phone_number
- */
-function format_phone_number( $phone_number ) {
-  global $wp_properties;
-
-  if ( 
-    isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_phone_number' ] ) && 
-    $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_phone_number' ] == 'true' 
-  ) {
-    $phone_number = preg_replace( "[^0-9]", '', $phone_number );
-    if ( strlen( $phone_number ) != 10 ) {
-      return $phone_number;
-    }
-    $sArea = substr( $phone_number, 0, 3 );
-    $sPrefix = substr( $phone_number, 3, 3 );
-    $sNumber = substr( $phone_number, 6, 4 );
-    $phone_number = "(" . $sArea . ") " . $sPrefix . "-" . $sNumber;
-  }
-
-  return $phone_number;
-}
-
-/**
- * Adds option 'format phone number' to settings of property page
- */
-function add_format_phone_number_checkbox() {
-  global $wp_properties;
-  echo '<li>' . WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][format_phone_number]&label=" . __( 'Format phone number.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_phone_number' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_phone_number' ] : false ) ) . '</li>';
 }
 
 /**
