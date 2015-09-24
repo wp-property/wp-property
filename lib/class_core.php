@@ -242,7 +242,6 @@ class WPP_Core {
     add_shortcode( 'property_overview', array( __CLASS__, 'shortcode_property_overview' ) );
     add_shortcode( 'property_search', array( __CLASS__, 'shortcode_property_search' ) );
     add_shortcode( 'featured_properties', array( __CLASS__, 'shortcode_featured_properties' ) );
-    add_shortcode( 'property_map', array( __CLASS__, 'shortcode_property_map' ) );
     add_shortcode( 'property_attribute', array( __CLASS__, 'shortcode_property_attribute' ) );
 
     if( !empty( $wp_properties[ 'alternative_shortcodes' ][ 'property_overview' ] ) ) {

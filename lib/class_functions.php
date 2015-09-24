@@ -126,7 +126,7 @@ class WPP_F extends UsabilityDynamics\Utility {
    */
   static public function widgets_init() {
     global $wp_properties;
-    
+
     //** Register a sidebar for each property type */
     if(
       !isset( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] ) ||

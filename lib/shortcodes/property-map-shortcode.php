@@ -17,7 +17,7 @@ namespace UsabilityDynamics\WPP {
       public function __construct() {
 
         $options = array(
-            'id' => 'property_address_map',
+            'id' => 'property_map',
             'params' => array(
               'width' => array(
                 'name' => __( 'Width', ud_get_wp_property()->domain ),

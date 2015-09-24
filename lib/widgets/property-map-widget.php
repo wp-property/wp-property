@@ -15,7 +15,7 @@ namespace UsabilityDynamics\WPP\Widgets {
     /**
      * @var string
      */
-    public $shortcode_id = 'property_address_map';
+    public $shortcode_id = 'property_map';
 
     /**
      * Init
@@ -42,7 +42,7 @@ namespace UsabilityDynamics\WPP\Widgets {
         }
       }
 
-      echo do_shortcode( '[property_address_map '.implode( ' ', $args ).']' );
+      echo do_shortcode( '[property_map '.implode( ' ', $args ).']' );
     }
 
     /**
