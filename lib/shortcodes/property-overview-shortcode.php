@@ -64,6 +64,145 @@ namespace UsabilityDynamics\WPP {
                   'false' => __( 'No', ud_get_wp_property()->domain )
                 ),
                 'default' => 'false'
+              ),
+              'thumbnail_size' => array(
+                'name' => __( 'Thumbnail Size', ud_get_wp_property()->domain ),
+                'description' => __( 'Thumbnail Size.', ud_get_wp_property()->domain ),
+                'type' => 'text',
+                'default' => ''
+              ),
+              'sort_by_text' => array(
+                'name' => __( 'Sort By Text', ud_get_wp_property()->domain ),
+                'description' => __( 'Sort By Text', ud_get_wp_property()->domain ),
+                'type' => 'text',
+                'default' => __( 'Sort By', ud_get_wp_property()->domain )
+              ),
+              'sort_by' => array(
+                'name' => __( 'Sort By', ud_get_wp_property()->domain ),
+                'description' => __( 'Sort By', ud_get_wp_property()->domain ),
+                'type' => 'text',
+                'default' => 'post_date'
+              ),
+              'sort_order' => array(
+                'name' => __( 'Sort Order', ud_get_wp_property()->domain ),
+                'description' => __( 'Sort Order', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'DESC' => 'DESC',
+                  'ASC'  => 'ASC'
+                ),
+                'default' => 'DESC'
+              ),
+              'template' => array(
+                'name' => __( 'Template', ud_get_wp_property()->domain ),
+                'description' => __( 'Template', ud_get_wp_property()->domain ),
+                'type' => 'text',
+                'default' => 'false'
+              ),
+              'ajax_call' => array(
+                'name' => __( 'Ajax Call', ud_get_wp_property()->domain ),
+                'description' => __( 'Ajax Call', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
+                  'false'  => __( 'No', ud_get_wp_property()->domain )
+                ),
+                'default' => 'false'
+              ),
+              'disable_wrapper' => array(
+                'name' => __( 'Disable Wrapper', ud_get_wp_property()->domain ),
+                'description' => __( 'Disable Wrapper', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
+                  'false'  => __( 'No', ud_get_wp_property()->domain )
+                ),
+                'default' => 'false'
+              ),
+              'sorter_type' => array(
+                'name' => __( 'Sorter Type', ud_get_wp_property()->domain ),
+                'description' => __( 'Sorter Type', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'none' => __( 'None', ud_get_wp_property()->domain ),
+                  'buttons'  => __( 'Buttons', ud_get_wp_property()->domain ),
+                  'dropdown'  => __( 'Dropdown', ud_get_wp_property()->domain )
+                ),
+                'default' => 'buttons'
+              ),
+              'sorter' => array(
+                'name' => __( 'Sorter', ud_get_wp_property()->domain ),
+                'description' => __( 'Sorter', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'on' => __( 'On', ud_get_wp_property()->domain ),
+                  'off'  => __( 'Off', ud_get_wp_property()->domain )
+                ),
+                'default' => 'on'
+              ),
+              'pagination' => array(
+                'name' => __( 'Pagination', ud_get_wp_property()->domain ),
+                'description' => __( 'Pagination', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'on' => __( 'On', ud_get_wp_property()->domain ),
+                  'off'  => __( 'Off', ud_get_wp_property()->domain )
+                ),
+                'default' => 'on'
+              ),
+              'hide_count' => array(
+                'name' => __( 'Hide Count', ud_get_wp_property()->domain ),
+                'description' => __( 'Hide Count', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
+                  'false'  => __( 'No', ud_get_wp_property()->domain )
+                ),
+                'default' => 'false'
+              ),
+              'per_page' => array(
+                'name' => __( 'Per Page', ud_get_wp_property()->domain ),
+                'description' => __( 'Per page', ud_get_wp_property()->domain ),
+                'type' => 'number',
+                'default' => 10
+              ),
+              'starting_row' => array(
+                'name' => __( 'Starting Row', ud_get_wp_property()->domain ),
+                'description' => __( 'Starting Row', ud_get_wp_property()->domain ),
+                'type' => 'number',
+                'default' => 0
+              ),
+              'detail_button' => array(
+                'name' => __( 'Detail Button', ud_get_wp_property()->domain ),
+                'description' => __( 'Detail Button', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
+                  'false'  => __( 'No', ud_get_wp_property()->domain )
+                ),
+                'default' => 'false'
+              ),
+              'stats' => array(
+                'name' => __( 'Stats', ud_get_wp_property()->domain ),
+                'description' => __( 'CSV stats', ud_get_wp_property()->domain ),
+                'type' => 'text',
+                'default' => ''
+              ),
+              'class' => array(
+                'name' => __( 'Class', ud_get_wp_property()->domain ),
+                'description' => __( 'CSS class', ud_get_wp_property()->domain ),
+                'type' => 'text',
+                'default' => 'wpp_property_overview_shortcode'
+              ),
+              'in_new_window' => array(
+                'name' => __( 'In new window?', ud_get_wp_property()->domain ),
+                'description' => __( 'Open links in new window.', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
+                  'false'  => __( 'No', ud_get_wp_property()->domain )
+                ),
+                'default' => 'false'
               )
             ),
             'description' => __( 'Renders Property Attributes', ud_get_wp_property()->domain ),
