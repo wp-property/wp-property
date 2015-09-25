@@ -22,7 +22,7 @@ namespace UsabilityDynamics\WPP {
         /* Register all RWMB meta boxes */
         add_action( 'rwmb_meta_boxes', array( $this, 'register_meta_boxes' ) );
         //** Add metaboxes hook */
-        add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
+        add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 );
       }
 
       /**
@@ -37,8 +37,10 @@ namespace UsabilityDynamics\WPP {
          * Add metabox for child properties
          */
         if( isset( $post ) && $post->post_type == 'property' && $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_parent = '{$post->ID}' AND post_status = 'publish' " ) ) {
-          add_meta_box( 'wpp_property_children', sprintf( __( 'Child Properties', ud_get_wp_property('domain') ), \WPP_F::property_label( 'plural' ) ), array( $this, 'render_child_properties_meta_box' ), 'property', 'advanced', 'high' );
+          add_meta_box( 'wpp_property_children', sprintf( __( 'Child %s', ud_get_wp_property('domain') ), \WPP_F::property_label( 'plural' ) ), array( $this, 'render_child_properties_meta_box' ), 'property', 'advanced', 'high' );
         }
+
+        add_meta_box( 'wpp_property_template', __( 'Template', ud_get_wp_property('domain') ), array( $this, 'render_template_meta_box' ), 'property', 'side', 'default' );
       }
 
       /**
@@ -77,6 +79,38 @@ namespace UsabilityDynamics\WPP {
 
         $list_table->prepare_items();
         $list_table->display();
+
+      }
+
+      /**
+       * Adds Template Manager for Property
+       *
+       * @since 2.1.0
+       * @author peshkov@UD
+       * @param $post
+       */
+      public function render_template_meta_box( $post ) {
+
+        $config = ud_get_wp_property( 'configuration.single_property', array() );
+        $redeclare = get_post_meta( $post->ID, '_wpp_redeclare_template', true );
+
+        if( !empty( $redeclare ) && $redeclare == 'true' ) {
+          $template = get_post_meta( $post->ID, '_wpp_template', true );
+          $page_template = get_post_meta( $post->ID, '_wpp_page_template', true );
+        }
+
+        if( empty( $template ) ) {
+          $template = !empty( $config[ 'template' ] ) ? $config[ 'template' ] : 'property';
+        }
+
+        if( empty( $page_template ) ) {
+          $page_template = !empty( $config[ 'page_template' ] ) ? $config[ 'page_template' ] : 'default';
+        }
+
+        $file = ud_get_wp_property()->path( 'static/views/admin/metabox-template.php', 'dir' );
+        if( file_exists( $file ) ) {
+          include( $file );
+        }
 
       }
 

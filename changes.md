@@ -1,4 +1,5 @@
-#### 2.0.5
+#### 2.1.0
+* Added ability to set Single or Page templates for rendering Single Property page instead of predefined property.php.
 * Fixed address validation by provided Google Maps API key.
 
 #### 2.0.4 ( September 2, 2015 )

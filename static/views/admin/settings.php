@@ -131,33 +131,36 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <tr>
       <th><?php printf( __( 'Single %s Template', 'wpp' ), WPP_F::property_label() ); ?></th>
       <td>
-        <p><?php printf( __( 'Note, you also can redeclare selected template below for specific %s on Edit %s page.', ud_get_wp_property( 'domain' ) ), WPP_F::property_label(), WPP_F::property_label() ); ?></p><br/>
+        <p><?php printf( __( 'Select template which will be used to render Single %s page.', ud_get_wp_property( 'domain' ) ), WPP_F::property_label() ); ?></p>
+        <p><?php printf( __( 'You also can redeclare selected template for specific %s on Edit %s page.', ud_get_wp_property( 'domain' ) ), WPP_F::property_label(), WPP_F::property_label() ); ?></p>
+        <p><?php printf( __( 'Note, you can use Single or Page templates for building your own layouts via %s or another Layouts Framework.', ud_get_wp_property( 'domain' ) ), '<a target="_blank" href="https://siteorigin.com/page-builder/">SiteOrigin Page Builder</a>' ); ?></p><br/>
         <ul>
           <li>
             <label><input type="radio" name="wpp_settings[configuration][single_property][template]" value="property" <?php echo empty( $wp_properties[ 'configuration' ][ 'single_property']['template' ] ) || $wp_properties[ 'configuration' ][ 'single_property']['template' ] == 'property' ? 'checked' : ''; ?> /> <?php printf( 'Default Property Template', ud_get_wp_property( 'domain' ) ); ?>.</label>
             <p><span class="description"><?php printf( __( 'By default, %s plugin uses custom <b>%s</b> template for rendering Single %s page.', ud_get_wp_property( 'domain' ) ), 'WP-Property', 'property.php', WPP_F::property_label() ); ?></span></p>
             <p><span class="description"><?php printf( __( 'The template contains predefined sections such as attributes list, map and registered sidebars areas.', ud_get_wp_property( 'domain' ) ) ); ?></span></p>
             <p><span class="description"><?php printf( __( 'The display settings may be edited further by customizing the <b>%s</b> file.', ud_get_wp_property( 'domain' ) ), 'wp-content/plugins/wp-property/static/views/property.php' ) ?></span></p>
-            <p><span class="description"><?php printf( __( 'To avoid losing your changes during updates, copy <b>%s</b> file to your template directory, which will be automatically loaded.', ud_get_wp_property( 'domain' ) ), 'property.php' ); ?></span></p>
+            <p><span class="description"><?php printf( __( 'To avoid losing your changes during updates, copy <b>%s</b> file to your template directory, which will be automatically loaded.', ud_get_wp_property( 'domain' ) ), 'property.php' ); ?></span></p><br/>
           </li>
           <li>
             <label><input type="radio" name="wpp_settings[configuration][single_property][template]" value="single" <?php echo !empty( $wp_properties[ 'configuration' ][ 'single_property']['template' ] ) && $wp_properties[ 'configuration' ][ 'single_property']['template' ] == 'single' ? 'checked' : ''; ?> /> <?php printf( 'Single Post Template', ud_get_wp_property( 'domain' ) ); ?>.</label>
             <p><span class="description"><?php printf( __( 'The single post template file <b>%s</b> in your theme will be used to render a Single %s page', ud_get_wp_property( 'domain' ) ), 'single.php', WPP_F::property_label() ); ?></span></p>
             <p><span class="description"><?php printf( __( 'You can create your own single post template file <b>%s</b> in your theme which will be used instead of <b>%s</b>. %sMore Details%s.', ud_get_wp_property( 'domain' ) ), 'single-property.php', 'single.php', '<a target="_blank" href="https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post">', '</a>' ); ?></span></p>
-            <p><span class="description"><?php printf( __( 'Note, registered <b>%s sidebars</b> are defined only in default <b>%s</b> template. You have to add them manually to your theme\'s template.', ud_get_wp_property( 'domain' ) ), 'WP-Property', 'property.php' ); ?></span></p>
+            <p><span class="description"><?php printf( __( 'Note, registered <b>%s sidebars</b> are defined only in default <b>%s</b> template. You have to add them manually to your theme\'s template.', ud_get_wp_property( 'domain' ) ), 'WP-Property', 'property.php' ); ?></span></p><br/>
           </li>
           <li>
             <label><input type="radio" name="wpp_settings[configuration][single_property][template]" value="page" <?php echo !empty( $wp_properties[ 'configuration' ][ 'single_property']['template' ] ) && $wp_properties[ 'configuration' ][ 'single_property']['template' ] == 'page' ? 'checked' : ''; ?> /> <?php printf( 'Page Template', ud_get_wp_property( 'domain' ) ); ?>.</label>
             <span>
               <label><?php printf( __( 'Select page template which you want to use on single %s page', ud_get_wp_property( 'domain' ) ), WPP_F::property_label() ); ?></label>
               <select name="wpp_settings[configuration][single_property][page_template]">
-                <option value="default" ><?php _e( 'Default Template', ud_get_wp_property( 'domain' ) ); ?></option>
+                <option value="default" <?php echo !empty( $wp_properties[ 'configuration' ][ 'single_property']['page_template' ] ) && $wp_properties[ 'configuration' ][ 'single_property']['page_template' ] == 'default' ? 'selected="selected"' : ''; ?> ><?php _e( 'Default Template', ud_get_wp_property( 'domain' ) ); ?></option>
                 <?php foreach ( get_page_templates() as $title => $slug ) : ?>
                   <option value="<?php echo $slug ?>" <?php echo !empty( $wp_properties[ 'configuration' ][ 'single_property']['page_template' ] ) && $wp_properties[ 'configuration' ][ 'single_property']['page_template' ] == $slug ? 'selected="selected"' : ''; ?> ><?php echo $title; ?></option>
                 <?php endforeach; ?>
               </select>
             </span>
-            <p><span class="description"><?php printf( __( 'Page template will be used to render a Single %s page. %sMore Details%s', ud_get_wp_property( 'domain' ) ), WPP_F::property_label(), '<a target="_blank" href="https://developer.wordpress.org/themes/template-files-section/page-template-files/page-templates/">', '</a>' ); ?></span></p>
+            <p><span class="description"><?php printf( __( 'Page template will be used to render a Single %s page. %sMore Details%s.', ud_get_wp_property( 'domain' ) ), WPP_F::property_label(), '<a target="_blank" href="https://developer.wordpress.org/themes/template-files-section/page-template-files/page-templates/">', '</a>' ); ?></span></p>
+            <p><span class="description"><?php printf( __( 'Note, registered <b>%s sidebars</b> are defined only in default <b>%s</b> template. You have to add them manually to your theme\'s template.', ud_get_wp_property( 'domain' ) ), 'WP-Property', 'property.php' ); ?></span></p>
           </li>
         </ul>
       </td>
