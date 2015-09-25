@@ -43,12 +43,7 @@ class WPP_Core {
     //** Setup template_redirect */
     add_action( "template_redirect", array( $this, 'template_redirect' ) );
 
-    add_action( 'template_include', function( $template ){
-
-      // @TODO
-
-      return $template;
-    } );
+    add_action( 'template_include', array( $this, 'template_include' ) );
 
     //** Pre-init action hook */
     do_action( 'wpp_pre_init' );
@@ -667,15 +662,97 @@ class WPP_Core {
   }
 
   /**
+   *
+   */
+  public function template_include( $template ) {
+    global $wp_query, $post;
+
+    /** SINGLE PROPERTY PAGE TEMPLATE */
+
+    if( isset( $wp_query->single_property_page ) ) {
+
+      $config = ud_get_wp_property( 'configuration.single_property', array() );
+
+      /*
+       * If template is not defined or it's 'property', we are using our
+       * predefined property.php template.
+       * This logic is mostly legacy.
+       */
+      if( !is_array( $config ) || empty( $config[ 'template' ] ) || $config[ 'template' ] == 'property' ) {
+
+        $_template = WPP_F::get_template_part( array_filter( array(
+          ( !empty( $property[ 'property_type' ] ) ? "property-{$property[ 'property_type' ]}" : false ),
+          "property",
+        ) ), array( WPP_Templates ) );
+
+        //** Load the first found template */
+        if( $_template ) {
+          WPP_F::console_log( 'Found single property page template:' . $_template );
+          return $_template;
+        }
+
+        return $template;
+      }
+      /*
+       * If template is 'page', we are using theme's page templates
+       * for rendering page.
+       */
+      elseif( !empty( $config[ 'template' ] ) && $config[ 'template' ] == 'page' ) {
+        $_template = false;
+        if( empty( $config[ 'page_template' ] ) || $config[ 'page_template' ] == 'default' ) {
+          $_template = locate_template( 'page.php' );
+        }
+        elseif( !empty( $config[ 'page_template' ] ) ) {
+          $_template = locate_template( $config[ 'page_template' ] );
+        }
+
+        if( !empty( $_template ) ) {
+          return $_template;
+        }
+
+      }
+
+      return $template;
+
+    }
+
+    /** PROPERTY OVERVIEW PAGE TEMPLATE */
+
+    /* Current requests includes a property overview.
+     * PO may be via shortcode, search result, or due to this being the Default Dynamic Property page.
+     * If using Dynamic Property Root page, we must load a template
+     */
+    if( isset( $wp_query->is_property_overview ) && isset( $wp_query->wpp_default_property_page ) ) {
+
+      //** Unset any post that may have been found based on query */
+      $post = false;
+
+      $template_found = WPP_F::get_template_part( array(
+        "property-search-result",
+        "property-overview-page",
+      ), array( WPP_Templates ) );
+
+      //** Load the first found template */
+      if( $template_found ) {
+        return $template_found;
+      }
+
+    }
+
+    return $template;
+  }
+
+  /**
    * Performs front-end pre-header functionality
    *
-   * This function is not called on admin side
-   * Loads conditional CSS styles
+   * - This function is not called on admin side.
+   * - Loads conditional CSS styles.
+   * - Determines if page is single property or property overview.
    *
    * @since 1.11
    */
-  function template_redirect() {
-    global $post, $property, $wp_query, $wp_properties, $wp_styles, $wpp_query, $wp_taxonomies;
+  public function template_redirect() {
+    global $post, $property, $wp_query, $wp_properties, $wp_styles, $wpp_query;
 
     /**
      * HACK.
@@ -711,10 +788,8 @@ class WPP_Core {
       die();
     }
 
-    /*
-      (count($wp_query->posts) < 2) added post 1.31.1 release to avoid
-      taxonomy archives from being broken by single property pages
-    */
+    /* (count($wp_query->posts) < 2) added post 1.31.1 release */
+    /* to avoid taxonomy archives from being broken by single property pages */
     if( isset( $post ) && count( $wp_query->posts ) < 2 && ( $post->post_type == "property" || isset( $wp_query->is_child_property ) ) ) {
       $wp_query->single_property_page = true;
 
@@ -724,11 +799,7 @@ class WPP_Core {
         $wp_query->posts[ 0 ] = $post;
         $wp_query->post = $post;
       }
-    }
 
-    //** Monitor taxonomy archive queries */
-    if( is_tax() && in_array( $wp_query->query_vars[ 'taxonomy' ], array_keys( (array)$wp_taxonomies ) ) ) {
-      //** Once get_properties(); can accept taxonomy searches, we can inject a search request in here */
     }
 
     //** If viewing root property page that is the default dynamic page. */
@@ -754,12 +825,8 @@ class WPP_Core {
       $wp_query->is_property_overview = true;
     }
 
-    //** Scripts and styles to load on all overview and signle listing pages */
+    //** Scripts and styles to load on all overview and single listing pages */
     if( isset( $wp_query->single_property_page ) || isset( $wp_query->is_property_overview ) ) {
-
-      WPP_F::console_log( 'Including scripts for all single and overview property pages.' );
-
-      WPP_F::load_assets( array( 'single', 'overview' ) );
 
       // Check for and load conditional browser styles
       $conditional_styles = apply_filters( 'wpp_conditional_style_slugs', array( 'IE', 'IE 7', 'msie' ) );
@@ -785,7 +852,11 @@ class WPP_Core {
     }
 
     //** Scripts loaded only on single property pages */
-    if( isset( $wp_query->single_property_page ) && !post_password_required( $post ) ) {
+    if( isset( $wp_query->single_property_page ) ) {
+
+      WPP_F::console_log( 'Including scripts for all single property pages.' );
+
+      WPP_F::load_assets( array( 'single' ) );
 
       do_action( 'template_redirect_single_property' );
 
@@ -813,20 +884,14 @@ class WPP_Core {
         $wp_query->query_vars = array_merge( $wp_query->query_vars, $single_page_vars );
       }
 
-      /**
-       * Determine which template should be used for rendering property page
-       *
-       * @see Properties -> Settings -> Main tab -> Single Property Template Section on admin panel.
-       * @since 2.1.0
-       */
-      $this->prepare_single_property_template();
-
     }
 
     //** Current requests includes a property overview.  PO may be via shortcode, search result, or due to this being the Default Dynamic Property page */
     if( isset( $wp_query->is_property_overview ) ) {
 
       WPP_F::console_log( 'Including scripts for all property overview pages.' );
+
+      WPP_F::load_assets( array( 'overview' ) );
 
       if( isset( $wp_query->wpp_default_property_page ) ) {
         WPP_F::console_log( 'Dynamic Default Property page detected, will load custom template.' );
@@ -849,84 +914,9 @@ class WPP_Core {
 
       add_action( 'wp_head', create_function( '', "do_action('wp_head_property_overview'); " ) );
 
-      //** If using Dynamic Property Root page, we must load a template */
-      if( isset( $wp_query->wpp_default_property_page ) ) {
-
-        //** Unset any post that may have been found based on query */
-        $post = false;
-
-        $template_found = WPP_F::get_template_part( array(
-          "property-search-result",
-          "property-overview-page",
-        ), array( WPP_Templates ) );
-
-        //** Load the first found template */
-        if( $template_found ) {
-          WPP_F::console_log( 'Found Default property overview page template:' . $template_found );
-          load_template( $template_found );
-          die();
-        }
-
-      }
-
     }
 
     do_action( 'wpp_template_redirect_post_scripts' );
-
-  }
-
-  /**
-   * Determine which template should be used for rendering property page
-   *
-   * @see Properties -> Settings -> Main tab -> Single Property Template Section on admin panel.
-   * @since 2.1.0
-   * @author peshkov@UD
-   */
-  public function prepare_single_property_template() {
-    $config = ud_get_wp_property( 'configuration.single_property', array() );
-
-    if( !is_array( $config ) ) {
-      $config = array();
-    }
-
-    if( empty( $config[ 'template' ] ) ) {
-      $config[ 'template' ] = 'property';
-    }
-
-    /**
-     * If template is single or page, we do nothing here since
-     * WordPress will use native templates ( single.php ) for posts if 'single' is set
-     * and we redeclare template using user's settings if 'page' template is set
-     * ( see self::template_include() )
-     */
-    if( in_array( $config[ 'template' ],  array( 'single', 'page' ) ) ) {
-      return;
-    }
-
-    /**
-     * If template is property, we are rendering our
-     * predefined property.php template and exit.
-     *
-     * This logic is mostly legacy.
-     */
-    if( $config[ 'template' ] = 'property' ) {
-
-      WPP_F::console_log( 'Including scripts for all single property pages.' );
-      WPP_F::load_assets( array( 'single' ) );
-
-      $template_found = WPP_F::get_template_part( array_filter( array(
-        ( !empty( $property[ 'property_type' ] ) ? "property-{$property[ 'property_type' ]}" : false ),
-        "property",
-      ) ), array( WPP_Templates ) );
-
-      //** Load the first found template */
-      if( $template_found ) {
-        WPP_F::console_log( 'Found single property page template:' . $template_found );
-        load_template( $template_found );
-        die();
-      }
-
-    }
 
   }
 
