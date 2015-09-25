@@ -672,16 +672,31 @@ class WPP_Core {
     if( isset( $wp_query->single_property_page ) ) {
 
       $config = ud_get_wp_property( 'configuration.single_property', array() );
+      $redeclare = get_post_meta( $post->ID, '_wpp_redeclare_template', true );
+      $property_type = get_post_meta( $post->ID, 'property_type', true );
+
+      if( !empty( $redeclare ) && $redeclare == 'true' ) {
+        $tmpl = get_post_meta( $post->ID, '_wpp_template', true );
+        $page_tmpl = get_post_meta( $post->ID, '_wpp_page_template', true );
+      }
+
+      if( empty( $tmpl ) ) {
+        $tmpl = !empty( $config[ 'template' ] ) ? $config[ 'template' ] : 'property';
+      }
+
+      if( empty( $page_tmpl ) ) {
+        $page_tmpl = !empty( $config[ 'page_template' ] ) ? $config[ 'page_template' ] : 'default';
+      }
 
       /*
        * If template is not defined or it's 'property', we are using our
        * predefined property.php template.
        * This logic is mostly legacy.
        */
-      if( !is_array( $config ) || empty( $config[ 'template' ] ) || $config[ 'template' ] == 'property' ) {
+      if( $tmpl == 'property' ) {
 
         $_template = WPP_F::get_template_part( array_filter( array(
-          ( !empty( $property[ 'property_type' ] ) ? "property-{$property[ 'property_type' ]}" : false ),
+          ( !empty( $property_type ) ? "property-{$property_type}" : false ),
           "property",
         ) ), array( WPP_Templates ) );
 
@@ -697,13 +712,12 @@ class WPP_Core {
        * If template is 'page', we are using theme's page templates
        * for rendering page.
        */
-      elseif( !empty( $config[ 'template' ] ) && $config[ 'template' ] == 'page' ) {
+      elseif( $tmpl == 'page' ) {
         $_template = false;
-        if( empty( $config[ 'page_template' ] ) || $config[ 'page_template' ] == 'default' ) {
+        if( $page_tmpl == 'default' ) {
           $_template = locate_template( 'page.php' );
-        }
-        elseif( !empty( $config[ 'page_template' ] ) ) {
-          $_template = locate_template( $config[ 'page_template' ] );
+        } else {
+          $_template = locate_template( $page_tmpl );
         }
 
         if( !empty( $_template ) ) {
@@ -727,14 +741,14 @@ class WPP_Core {
       //** Unset any post that may have been found based on query */
       $post = false;
 
-      $template_found = WPP_F::get_template_part( array(
+      $_template = WPP_F::get_template_part( array(
         "property-search-result",
         "property-overview-page",
       ), array( WPP_Templates ) );
 
       //** Load the first found template */
-      if( $template_found ) {
-        return $template_found;
+      if( $_template ) {
+        return $_template;
       }
 
     }
