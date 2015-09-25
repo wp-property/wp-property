@@ -31,16 +31,7 @@ namespace UsabilityDynamics\WPP\Widgets {
      * @param array $instance
      */
     public function widget( $args, $instance ) {
-
-      $args = array();
-
-      if ( !empty( $instance ) && is_array( $instance ) ) {
-        foreach( $instance as $attr_name => $attr_value ) {
-          $args[] = $attr_name . '="'.$attr_value.'"';
-        }
-      }
-
-      echo do_shortcode( '[property_attributes '.implode( ' ', $args ).']' );
+      echo do_shortcode( '[property_attributes '.$this->shortcode_args( $instance ).']' );
     }
 
     /**

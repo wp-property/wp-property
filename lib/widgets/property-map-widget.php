@@ -33,16 +33,7 @@ namespace UsabilityDynamics\WPP\Widgets {
      * @todo: Consider widget options
      */
     public function widget( $args, $instance ) {
-
-      $args = array();
-
-      if ( !empty( $instance ) && is_array( $instance ) ) {
-        foreach( $instance as $attr_name => $attr_value ) {
-          $args[] = $attr_name . '="'.$attr_value.'"';
-        }
-      }
-
-      echo do_shortcode( '[property_map '.implode( ' ', $args ).']' );
+      echo do_shortcode( '[property_map '.$this->shortcode_args( $instance ).']' );
     }
 
     /**

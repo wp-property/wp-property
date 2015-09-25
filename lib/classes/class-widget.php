@@ -11,6 +11,28 @@ namespace UsabilityDynamics\WPP {
     class Widget extends \WP_Widget {
 
       /**
+       * Prepare instance for shortcode
+       *
+       * @param $instance
+       * @return string
+       */
+      public function shortcode_args( $instance ) {
+
+        $args = array();
+
+        if ( !empty( $instance ) && is_array( $instance ) ) {
+          foreach( $instance as $attr_name => $attr_value ) {
+            if ( !is_array( $attr_value ) ) {
+              $args[] = $attr_name . '="' . $attr_value . '"';
+            }
+          }
+        }
+
+        return implode( ' ', $args );
+
+      }
+
+      /**
        * Form handler
        *
        * @param array $instance
