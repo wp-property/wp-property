@@ -32,7 +32,7 @@ namespace UsabilityDynamics\WPP {
        */
       public function call( $atts = "" ) {
 
-        return $this->get_template( 'property_meta', array(), false );
+        return $this->get_template( 'property-meta', array(), false );
 
       }
 
