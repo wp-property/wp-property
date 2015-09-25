@@ -1,5 +1,6 @@
 #### 2.1.0
 * Added ability to set Single or Page templates for rendering Single Property page instead of predefined property.php.
+* Added ability to disable WP-Property Widget Sidebars.
 * Added [property_attributes] shortcode and Property Stats widget which render the list of property attributes.
 * Added Property Map widget.
 * Added [property_meta] shortcode and Property Meta widget.
