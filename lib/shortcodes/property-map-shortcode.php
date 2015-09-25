@@ -69,7 +69,7 @@ namespace UsabilityDynamics\WPP {
           'hide_infobox' => 'false'
         ), $atts );
 
-        return $this->get_template( 'property_map', $data, false );
+        return $this->get_template( 'property-map', $data, false );
 
       }
 

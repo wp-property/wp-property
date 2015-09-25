@@ -59,7 +59,7 @@ namespace UsabilityDynamics\WPP {
           'links' => true ),
         $atts );
 
-        return $this->get_template( 'property_taxonomies', $data, false );
+        return $this->get_template( 'property-taxonomies', $data, false );
 
       }
 

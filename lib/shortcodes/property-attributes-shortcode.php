@@ -142,7 +142,7 @@ namespace UsabilityDynamics\WPP {
           'stats_prefix' => sanitize_key( \WPP_F::property_label( 'singular' ) )
         ), $atts );
 
-        return $this->get_template( 'property_attributes', $data, false );
+        return $this->get_template( 'property-attributes', $data, false );
 
       }
 
