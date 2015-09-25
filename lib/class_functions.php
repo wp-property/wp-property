@@ -133,15 +133,21 @@ class WPP_F extends UsabilityDynamics\Utility {
       ( isset( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] ) && $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] != 'true' )
     ) {
       foreach( (array)$wp_properties[ 'property_types' ] as $property_slug => $property_title ) {
-        register_sidebar( array(
-          'name'          => sprintf( __( 'Property: %s', 'wpp' ), $property_title ),
-          'id'            => "wpp_sidebar_{$property_slug}",
-          'description'   => sprintf( __( 'Sidebar located on the %s page.', 'wpp' ), $property_title ),
-          'before_widget' => '<li id="%1$s"  class="wpp_widget %2$s">',
-          'after_widget'  => '</li>',
-          'before_title'  => '<h3 class="widget-title">',
-          'after_title'   => '</h3>',
-        ) );
+
+        $disabled = ud_get_wp_property( 'configuration.disable_widgets.wpp_sidebar_' . $property_slug );
+
+        if( !$disabled || $disabled !== 'true' ) {
+          register_sidebar( array(
+            'name'          => sprintf( __( '%s: %s', 'wpp' ), WPP_F::property_label(), $property_title ),
+            'id'            => "wpp_sidebar_{$property_slug}",
+            'description'   => sprintf( __( 'Sidebar located on the %s page.', 'wpp' ), $property_title ),
+            'before_widget' => '<li id="%1$s"  class="wpp_widget %2$s">',
+            'after_widget'  => '</li>',
+            'before_title'  => '<h3 class="widget-title">',
+            'after_title'   => '</h3>',
+          ) );
+        }
+
       }
     }
   }

@@ -7,7 +7,7 @@
 ?>
 <div>
   <input type="hidden" name="wpp_data[meta][_wpp_redeclare_template]" value="false" checked />
-  <label><input type="checkbox" name="wpp_data[meta][_wpp_redeclare_template]" value="true" <?php echo $redeclare == 'true' ? 'checked' : ''; ?> /> <?php printf( 'Redeclare defined template for current property with selected one below.', ud_get_wp_property( 'domain' ) ); ?></label>
+  <label><input type="checkbox" name="wpp_data[meta][_wpp_redeclare_template]" value="true" <?php echo $redeclare == 'true' ? 'checked' : ''; ?> /> <?php printf( 'Override global template for current property with selected one below.', ud_get_wp_property( 'domain' ) ); ?></label>
 </div>
 <ul>
   <li>

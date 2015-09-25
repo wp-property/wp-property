@@ -166,6 +166,24 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       </td>
     </tr>
 
+    <?php if( !isset( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] ) || ( isset( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] ) && $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] != 'true' ) ) : ?>
+    <tr>
+      <th><?php printf( __( 'Widget Sidebars', 'wpp' ), WPP_F::property_label() ); ?></th>
+      <td>
+        <p><?php printf( __( 'By default, %s registers widget sidebars for <b>Single %s page</b> based on defined property types. But you can disable any of them here.', ud_get_wp_property( 'domain' ) ), 'WP-Property', WPP_F::property_label() ); ?></p>
+        <p><?php printf( __( 'Note, the following sidebar are added only on default <b>%s</b> ( Default %s Template ).', ud_get_wp_property( 'domain' ) ), 'property.php', WPP_F::property_label() ); ?></p><br/>
+        <ul>
+          <?php foreach( (array)$wp_properties[ 'property_types' ] as $slug => $title ) : ?>
+          <li>
+            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][disable_widgets][wpp_sidebar_{$slug}]&label=" . sprintf( __( 'Disable <b>%s</b> Sidebar.', ud_get_wp_property( 'domain' ) ), WPP_F::property_label() . ': ' . $title  ), ( isset( $wp_properties[ 'configuration' ]['disable_widgets']['wpp_sidebar_' . $slug ] ) ? $wp_properties[ 'configuration' ]['disable_widgets']['wpp_sidebar_' . $slug] : false )  ); ?>
+            <span class="description"><code>dynamic_sidebar( "wpp_sidebar_<?php echo $slug ?>" )</code></span>
+          </li>
+          <?php endforeach; ?>
+        </ul>
+      </td>
+    </tr>
+    <?php endif; ?>
+
     <tr class="wpp_non_property_page_settings hidden">
       <th>&nbsp;</th>
       <td>
