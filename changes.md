@@ -1,5 +1,11 @@
 #### 2.1.0
 * Added ability to set Single or Page templates for rendering Single Property page instead of predefined property.php.
+* Added [property_attributes] shortcode and Property Stats widget which render the list of property attributes.
+* Added Property Map widget.
+* Added [property_meta] shortcode and Property Meta widget.
+* Added [property_taxonomies] shortcode and Property Taxonomies widget.
+* Refactored widgets structure.
+* Refactored shortcodes structure and initialisation.
 * Fixed address validation by provided Google Maps API key.
 
 #### 2.0.4 ( September 2, 2015 )
