@@ -220,7 +220,7 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties;
 
         $data = shortcode_atts( array(
-          'strict_search' => 'false',
+          'strict_search' => false,
           'show_children' => ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_children' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_children' ] : 'true' ),
           'child_properties_title' => __( 'Floor plans at location:', ud_get_wp_property()->domain ),
           'fancybox_preview' => $wp_properties[ 'configuration' ][ 'property_overview' ][ 'fancybox_preview' ],
@@ -229,21 +229,20 @@ namespace UsabilityDynamics\WPP {
           'sort_by_text' => __( 'Sort By:', ud_get_wp_property()->domain ),
           'sort_by' => 'post_date',
           'sort_order' => 'DESC',
-          'template' => 'false',
-          'ajax_call' => 'false',
-          'disable_wrapper' => 'false',
+          'template' => false,
+          'disable_wrapper' => false,
+          'ajax_call' => false,
           'sorter_type' => 'buttons',
           'sorter' => 'on',
           'pagination' => 'on',
-          'hide_count' => 'false',
+          'hide_count' => false,
           'per_page' => 10,
           'starting_row' => 0,
           'unique_hash' => rand( 10000, 99900 ),
-          'detail_button' => 'false',
+          'detail_button' => false,
           'stats' => '',
           'class' => 'wpp_property_overview_shortcode',
-          'in_new_window' => 'false'
-
+          'in_new_window' => false
         ), $atts );
 
         return \WPP_Core::shortcode_property_overview( $data );
