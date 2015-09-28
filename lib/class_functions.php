@@ -2503,12 +2503,18 @@ class WPP_F extends UsabilityDynamics\Utility {
   static public function the_post( $post ) {
     global $post, $property;
 
-    if( $post->post_type != 'property' ) {
+    if( $post->post_type != 'property' || empty( $property ) ) {
+      return $post;
+    }
+
+    $_property = (array)$property;
+
+    if( $_property[ 'ID' ] !== $post->ID ) {
       return $post;
     }
 
     //** Update global $post object to include property specific attributes */
-    $post = (object) ( (array) $post + (array) $property );
+    $post = (object) ( (array) $post + $_property );
 
   }
 
