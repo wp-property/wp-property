@@ -240,9 +240,6 @@ class WPP_Core {
 
     add_filter( 'wp_get_attachment_link', array( 'WPP_F', 'wp_get_attachment_link' ), 10, 6 );
 
-    /** Load all shortcodes */
-    add_shortcode( 'property_attribute', array( __CLASS__, 'shortcode_property_attribute' ) );
-
     //** Make Property Featured Via AJAX */
     if(
       isset( $_REQUEST[ 'post_id' ] )
@@ -1386,114 +1383,6 @@ class WPP_Core {
     } else {
       return implode( '', $result );
     }
-  }
-
-  /**
-   * Retrevie property attribute using shortcode.
-   *
-   *
-   * @since 1.26.0
-   *
-   */
-  static public function shortcode_property_attribute( $atts = false ) {
-    global $post, $property;
-
-    $this_property = $property;
-
-    if( empty( $this_property ) && $post->post_type == 'property' ) {
-      $this_property = $post;
-    }
-
-    $this_property = (array)$this_property;
-
-    if( !$atts ) {
-      $atts = array();
-    }
-
-    $defaults = array(
-      'property_id' => $this_property[ 'ID' ],
-      'attribute' => '',
-      'before' => '',
-      'after' => '',
-      'if_empty' => '',
-      'do_not_format' => '',
-      'make_terms_links' => 'false',
-      'separator' => ' ',
-      'strip_tags' => ''
-    );
-
-    $args = array_merge( $defaults, $atts );
-
-    if( empty( $args[ 'attribute' ] ) ) {
-      return false;
-    }
-
-    $attribute = $args[ 'attribute' ];
-
-    if( $args[ 'property_id' ] != $this_property[ 'ID' ] ) {
-
-      $this_property = WPP_F::get_property( $args[ 'property_id' ] );
-
-      if( $args[ 'do_not_format' ] != "true" ) {
-        $this_property = prepare_property_for_display( $this_property );
-      }
-
-    }
-
-    if( taxonomy_exists( $attribute ) && is_object_in_taxonomy( 'property', $attribute ) ) {
-      foreach( wp_get_object_terms( $this_property[ 'ID' ], $attribute ) as $term_data ) {
-
-        if( $args[ 'make_terms_links' ] == 'true' ) {
-          $terms[ ] = '<a class="wpp_term_link" href="' . get_term_link( $term_data, $attribute ) . '"><span class="wpp_term">' . $term_data->name . '</span></a>';
-        } else {
-          $terms[ ] = '<span class="wpp_term">' . $term_data->name . '</span>';
-        }
-      }
-
-      if( isset( $terms ) && is_array( $terms ) && !empty( $terms ) ) {
-        $value = implode( $args[ 'separator' ], $terms );
-      }
-
-    }
-
-    //** Try to get value using get get_attribute() function */
-    if( !isset( $value ) || !$value && function_exists( 'get_attribute' ) ) {
-      $value = get_attribute( $attribute, array(
-        'return' => 'true',
-        'property_object' => $this_property
-      ) );
-    }
-
-    if( !empty( $args[ 'before' ] ) ) {
-      $return[ 'before' ] = html_entity_decode( $args[ 'before' ] );
-    }
-
-    $return[ 'value' ] = apply_filters( 'wpp_property_attribute_shortcode', $value, $this_property );
-
-    if( $args[ 'strip_tags' ] == "true" && !empty( $return[ 'value' ] ) ) {
-      $return[ 'value' ] = strip_tags( $return[ 'value' ] );
-    }
-
-    if( !empty( $args[ 'after' ] ) ) {
-      $return[ 'after' ] = html_entity_decode( $args[ 'after' ] );
-    }
-
-    //** When no value is found */
-    if( empty( $return[ 'value' ] ) ) {
-
-      if( !empty( $args[ 'if_empty' ] ) ) {
-        return $args[ 'if_empty' ];
-      } else {
-        return false;
-      }
-    }
-
-    if( is_array( $return ) ) {
-      return implode( '', $return );
-    }
-
-    return false;
-
   }
 
   /**

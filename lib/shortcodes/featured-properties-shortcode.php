@@ -117,7 +117,7 @@ namespace UsabilityDynamics\WPP {
                 'default' => 'thumbnail'
               )
             ),
-            'description' => __( 'Renders Property Search form', ud_get_wp_property()->domain ),
+            'description' => __( 'Renders Featured Properties', ud_get_wp_property()->domain ),
             'group' => 'WP-Property'
         );
 
