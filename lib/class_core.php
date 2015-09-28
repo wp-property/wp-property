@@ -241,7 +241,6 @@ class WPP_Core {
     add_filter( 'wp_get_attachment_link', array( 'WPP_F', 'wp_get_attachment_link' ), 10, 6 );
 
     /** Load all shortcodes */
-    add_shortcode( 'property_search', array( __CLASS__, 'shortcode_property_search' ) );
     add_shortcode( 'featured_properties', array( __CLASS__, 'shortcode_featured_properties' ) );
     add_shortcode( 'property_attribute', array( __CLASS__, 'shortcode_property_attribute' ) );
 
@@ -1037,7 +1036,7 @@ class WPP_Core {
       'pagination' => 'on',
       'group_attributes' => 'off',
       'per_page' => '10',
-      'strict_search' => 'false',
+      'strict_search' => 'false'
     ), $atts ) );
 
     if( empty( $searchable_attributes ) ) {
