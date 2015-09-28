@@ -128,6 +128,21 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       </td>
     </tr>
 
+    <tr class="wpp_non_property_page_settings hidden">
+      <th>&nbsp;</th>
+      <td>
+        <ul>
+          <li>
+            <?php echo WPP_F::checkbox( 'name=wpp_settings[configuration][automatically_insert_overview]&label=' . __( 'Automatically overwrite this page\'s content with [property_overview].', 'wpp' ), $wp_properties[ 'configuration' ][ 'automatically_insert_overview' ] ); ?>
+          </li>
+          <li class="wpp_wpp_settings_configuration_do_not_override_search_result_page_row <?php if ( $wp_properties[ 'configuration' ][ 'automatically_insert_overview' ] == 'true' ) echo " hidden "; ?>">
+            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_override_search_result_page]&label=" . __( 'When showing property search results, don\'t override the page content with [property_overview].', 'wpp' ), $wp_properties[ 'configuration' ][ 'do_not_override_search_result_page' ] ); ?>
+            <div class="description"><?php _e( 'If checked, be sure to include [property_overview] somewhere in the content, or no properties will be displayed.', 'wpp' ); ?></div>
+          </li>
+        </ul>
+      </td>
+    </tr>
+
     <tr>
       <th><?php printf( __( 'Single %s Template', 'wpp' ), WPP_F::property_label() ); ?></th>
       <td>
@@ -183,21 +198,6 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       </td>
     </tr>
     <?php endif; ?>
-
-    <tr class="wpp_non_property_page_settings hidden">
-      <th>&nbsp;</th>
-      <td>
-        <ul>
-          <li>
-            <?php echo WPP_F::checkbox( 'name=wpp_settings[configuration][automatically_insert_overview]&label=' . __( 'Automatically overwrite this page\'s content with [property_overview].', 'wpp' ), $wp_properties[ 'configuration' ][ 'automatically_insert_overview' ] ); ?>
-          </li>
-          <li class="wpp_wpp_settings_configuration_do_not_override_search_result_page_row <?php if ( $wp_properties[ 'configuration' ][ 'automatically_insert_overview' ] == 'true' ) echo " hidden "; ?>">
-            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_override_search_result_page]&label=" . __( 'When showing property search results, don\'t override the page content with [property_overview].', 'wpp' ), $wp_properties[ 'configuration' ][ 'do_not_override_search_result_page' ] ); ?>
-            <div class="description"><?php _e( 'If checked, be sure to include [property_overview] somewhere in the content, or no properties will be displayed.', 'wpp' ); ?></div>
-          </li>
-      </ul>
-      </td>
-    </tr>
 
     <tr>
       <th><?php printf( __( 'Automatic Geolocation', 'wpp' ), WPP_F::property_label() ); ?></th>
