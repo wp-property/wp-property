@@ -1,27 +1,27 @@
 <?php
 
 /**
- * Property Meta Widget
+ * Property Overview Widget
  */
 namespace UsabilityDynamics\WPP\Widgets {
 
   /**
-   * Class PropertyMetaWidget
+   * Class PropertyTaxonomiesWidget
    *
    * @package UsabilityDynamics\WPP\Widgets
    */
-  class PropertyMetaWidget extends \UsabilityDynamics\WPP\Widget {
+  class PropertyOverviewWidget extends \UsabilityDynamics\WPP\Widget {
 
     /**
      * @var string
      */
-    public $shortcode_id = 'property_meta';
+    public $shortcode_id = 'property_overview';
 
     /**
      * Init
      */
     public function __construct() {
-      parent::__construct( 'wpp_property_meta', $name = sprintf( __( '%1s Meta', ud_get_wp_property()->domain ), \WPP_F::property_label() ), array( 'description' => __( 'Widget for Single Property page that renders property meta.', ud_get_wp_property()->domain ) ) );
+      parent::__construct( 'wpp_property_overview', $name = sprintf( __( '%1s Overview', ud_get_wp_property()->domain ), \WPP_F::property_label( 'singular' ) ), array( 'description' => __( 'Property Overview Widget', ud_get_wp_property()->domain ) ) );
     }
 
     /**
@@ -31,7 +31,7 @@ namespace UsabilityDynamics\WPP\Widgets {
      * @param array $instance
      */
     public function widget( $args, $instance ) {
-      echo do_shortcode( '[property_meta '.$this->shortcode_args( $instance ).']' );
+      echo do_shortcode( '[property_overview '.$this->shortcode_args( $instance ).']' );
     }
 
     /**
@@ -54,8 +54,8 @@ namespace UsabilityDynamics\WPP\Widgets {
     /**
      * Register if class exists
      */
-    if( class_exists( 'UsabilityDynamics\WPP\Widgets\PropertyMetaWidget' ) ) {
-      register_widget( 'UsabilityDynamics\WPP\Widgets\PropertyMetaWidget' );
+    if( class_exists( 'UsabilityDynamics\WPP\Widgets\PropertyOverviewWidget' ) ) {
+      register_widget( 'UsabilityDynamics\WPP\Widgets\PropertyOverviewWidget' );
     }
   });
 }

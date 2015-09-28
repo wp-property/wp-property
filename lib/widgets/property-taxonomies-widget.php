@@ -21,7 +21,7 @@ namespace UsabilityDynamics\WPP\Widgets {
      * Init
      */
     public function __construct() {
-      parent::__construct( 'wpp_property_taxonomies', $name = sprintf( __( '%1s Taxonomies', ud_get_wp_property()->domain ), \WPP_F::property_label( 'plural' ) ), array( 'description' => __( 'Widget for Single Property page that renders property taxonomies.', ud_get_wp_property()->domain ) ) );
+      parent::__construct( 'wpp_property_taxonomies', $name = sprintf( __( '%1s Taxonomies', ud_get_wp_property()->domain ), \WPP_F::property_label() ), array( 'description' => __( 'Widget for Single Property page that renders property taxonomies.', ud_get_wp_property()->domain ) ) );
     }
 
     /**
