@@ -16,6 +16,8 @@ namespace UsabilityDynamics\WPP {
        */
       public function __construct() {
 
+        //$attributes = ud_get_wp_property();
+
         $options = array(
             'id' => 'property_attributes',
             'params' => array(
@@ -87,7 +89,9 @@ namespace UsabilityDynamics\WPP {
               'include' => array(
                 'name' => __( 'Include', ud_get_wp_property()->domain ),
                 'description' => __( 'CSV of attribute slugs to be included.', ud_get_wp_property()->domain ),
-                'type' => 'text'
+                'type' => 'text',
+                //'type' => 'multi_checkbox',
+                //'options' => $attributes,
               ),
               'exclude' => array(
                 'name' => __( 'Exclude', ud_get_wp_property()->domain ),
