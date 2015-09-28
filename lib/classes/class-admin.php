@@ -66,6 +66,12 @@ namespace UsabilityDynamics\WPP {
             wp_enqueue_script( 'postbox' );
             wp_enqueue_script( 'wpp-jquery-fancybox' );
             wp_enqueue_style( 'wpp-jquery-fancybox-css' );
+            wp_enqueue_script( 'wp-property-backend-global' );
+            wp_enqueue_script( 'jquery-ui-core' );
+            wp_enqueue_script( 'jquery-ui-sortable' );
+            wp_enqueue_script( 'jquery-ui-tabs' );
+            wp_enqueue_style( 'jquery-ui' );
+            wp_enqueue_script( 'wp-property-admin-widgets' );
             break;
 
           //** Settings Page */

@@ -87,7 +87,7 @@ wpp.widgets.run = function() {
   jQuery( '.wpp_widget' ).each( function( i, e ) {
     e = jQuery(e);
     /* Determine if element has number, if not it's not registered and we ignore it */
-    if( isNaN( parseInt( e.data( 'widget_number' ) ) ) ) return null;
+    //if( isNaN( parseInt( e.data( 'widget_number' ) ) ) ) return null;
     /* Ignore if we already called function for the current widget's element */
     if( e.hasClass( 'wpp_widget_loaded' ) ) return null;
     /* Be sure that we init it at once. */
@@ -117,7 +117,6 @@ jQuery( document ).ready( function() {
   /* */
   jQuery( 'div.widgets-sortables' ).on( 'sortstop', function( event, ui ) {
     setTimeout( function() { wpp.widgets.run() }, 100 );
-
   } );
 
   /* */

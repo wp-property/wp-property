@@ -126,7 +126,7 @@ class SearchPropertiesWidget extends WP_Widget {
     $searchable_attributes = $new_instance[ 'searchable_attributes' ];
     $grouped_searchable_attributes = $new_instance[ 'grouped_searchable_attributes' ];
     $searchable_property_types = $new_instance[ 'searchable_property_types' ];
-    $group_attributes = $new_instance[ 'group_attributes' ];
+    $group_attributes = !empty($new_instance[ 'group_attributes' ])?$new_instance[ 'group_attributes' ]:'false';
 
 
     if ( $group_attributes == 'true' ) {
