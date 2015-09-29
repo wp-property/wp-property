@@ -69,6 +69,8 @@ namespace UsabilityDynamics\WPP {
           'hide_infobox' => 'false'
         ), $atts );
 
+        wp_enqueue_script( 'google-maps' );
+
         return $this->get_template( 'property-map', $data, false );
 
       }

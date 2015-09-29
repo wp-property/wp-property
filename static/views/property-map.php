@@ -19,10 +19,9 @@ $this_map_dom_id = 'property_map_' . rand( 10000, 99999 );
 
 ?>
 
-
-  <div class="<?php wpp_css( 'property_map::wrapper', "property_map_wrapper" ); ?>">
-    <div id="<?php echo $this_map_dom_id; ?>" class="<?php wpp_css( 'property_map::dom_id' ); ?>" style="width:<?php echo $data['width'] ?>; height:<?php echo $data['height'] ?>"></div>
-  </div>
+<div class="<?php wpp_css( 'property_map::wrapper', "property_map_wrapper" ); ?>">
+  <div id="<?php echo $this_map_dom_id; ?>" class="<?php wpp_css( 'property_map::dom_id' ); ?>" style="width:<?php echo $data['width'] ?>; height:<?php echo $data['height'] ?>"></div>
+</div>
 
 <?php ob_start(); ?>
 
@@ -37,7 +36,7 @@ $this_map_dom_id = 'property_map_' . rand( 10000, 99999 );
         jQuery( "#<?php echo $this_map_dom_id; ?>" ).closest( ".property_map_wrapper" ).hide();
 
         if ( denali_config.developer ) {
-          console.log( "Google Maps not loaded - propety map removed." );
+          console.log( "Google Maps not loaded - property map removed." );
         }
       }
 
@@ -61,23 +60,25 @@ $this_map_dom_id = 'property_map_' . rand( 10000, 99999 );
           icon: '<?php echo apply_filters('wpp_supermap_marker', '', $this_property['ID']); ?>'
         } );
 
-        <?php if(!$data['hide_infobox'] != 'true' ) { ?>
-        var infowindow = new google.maps.InfoWindow( {
-          content: '<?php echo WPP_F::google_maps_infobox($this_property); ?>'
-        } );
+        <?php if($data['hide_infobox'] != 'true' ) { ?>
 
-        setTimeout( function () {
-          infowindow.open( map, marker );
-
-          google.maps.event.addListener( infowindow, 'domready', function () {
-            document.getElementById( 'infowindow' ).parentNode.style.overflow = 'hidden';
-            document.getElementById( 'infowindow' ).parentNode.parentNode.style.overflow = 'hidden';
+          var infowindow = new google.maps.InfoWindow( {
+            content: '<?php echo WPP_F::google_maps_infobox($this_property); ?>'
           } );
 
-          google.maps.event.addListener( marker, 'click', function () {
+          setTimeout( function () {
+
             infowindow.open( map, marker );
-          } );
-        }, 3000 );
+
+            google.maps.event.addListener( infowindow, 'domready', function () {
+              document.getElementById( 'infowindow' ).parentNode.style.overflow = 'hidden';
+              document.getElementById( 'infowindow' ).parentNode.parentNode.style.overflow = 'hidden';
+            } );
+
+            google.maps.event.addListener( marker, 'click', function () {
+              infowindow.open( map, marker );
+            } );
+          }, 3000 );
         <?php } ?>
 
       }
