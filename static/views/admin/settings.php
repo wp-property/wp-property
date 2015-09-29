@@ -156,6 +156,12 @@ if ( get_option( 'permalink_structure' ) == '' ) {
             <p><span class="description"><?php printf( __( 'The template contains predefined sections such as attributes list, map and registered sidebars areas.', ud_get_wp_property( 'domain' ) ) ); ?></span></p>
             <p><span class="description"><?php printf( __( 'The display settings may be edited further by customizing the <b>%s</b> file.', ud_get_wp_property( 'domain' ) ), 'wp-content/plugins/wp-property/static/views/property.php' ) ?></span></p>
             <p><span class="description"><?php printf( __( 'To avoid losing your changes during updates, copy <b>%s</b> file to your template directory, which will be automatically loaded.', ud_get_wp_property( 'domain' ) ), 'property.php' ); ?></span></p><br/>
+            <p><?php printf( __( 'Additional settings for Single %s Template', 'wpp' ), WPP_F::property_label() ); ?>:</p>
+            <ul>
+              <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][sort_stats_by_groups]&label=" . sprintf(__( 'Sort %1s stats by groups.', 'wpp' ),  WPP_F::property_label( 'singular' )), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'sort_stats_by_groups' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'sort_stats_by_groups' ] : false ) ); ?></li>
+              <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][show_true_as_image]&label=" . sprintf( __( 'Show Checkboxed Image instead of "%s" and hide "%s" for %s/%s values', 'wpp' ), __( 'Yes', 'wpp' ), __( 'No', 'wpp' ), __( 'Yes', 'wpp' ), __( 'No', 'wpp' ) ), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_true_as_image' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_true_as_image' ] : false ) ); ?></li>
+              <?php do_action( 'wpp_settings_page_property_page' ); ?>
+            </ul><br/>
           </li>
           <li>
             <label><input type="radio" name="wpp_settings[configuration][single_property][template]" value="single" <?php echo !empty( $wp_properties[ 'configuration' ][ 'single_property']['template' ] ) && $wp_properties[ 'configuration' ][ 'single_property']['template' ] == 'single' ? 'checked' : ''; ?> /> <?php printf( 'Single Post Template', ud_get_wp_property( 'domain' ) ); ?>.</label>
@@ -343,21 +349,6 @@ if ( get_option( 'permalink_structure' ) == '' ) {
           <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][bottom_insert_pagenation]&label=" . __( 'Show pagination on bottom of results.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'bottom_insert_pagenation' ] ) ? $wp_properties[ 'configuration' ][ 'bottom_insert_pagenation' ] : false ) ); ?></li>
           <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][add_sort_by_title]&label=" . sprintf(__( 'Add sorting by %1s\'s title.', 'wpp' ), $object_label[ 'singular' ]), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'add_sort_by_title' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'add_sort_by_title' ] : false ) ); ?></li>
           <?php do_action( 'wpp::settings::display::overview_shortcode' ); ?>
-        </ul>
-
-      </td>
-    </tr>
-
-    <tr>
-      <th><?php printf(__( '%1s Stats', 'wpp' ), WPP_F::property_label( 'singular' ) ); ?></th>
-      <td>
-        <?php /* ?>
-        <p><?php printf( __( 'The display settings may be edited further by customizing the <b>%s</b> file.  To avoid losing your changes during updates, create a <b>property.php</b> file in your template directory, which will be automatically loaded.', 'wpp' ), 'wp-content/plugins/wp-property/static/views/property.php' ) ?>
-        <?php //*/ ?>
-        <ul>
-          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][sort_stats_by_groups]&label=" . sprintf(__( 'Sort %1s stats by groups.', 'wpp' ),  WPP_F::property_label( 'singular' )), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'sort_stats_by_groups' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'sort_stats_by_groups' ] : false ) ); ?></li>
-          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][show_true_as_image]&label=" . sprintf( __( 'Show Checkboxed Image instead of "%s" and hide "%s" for %s/%s values', 'wpp' ), __( 'Yes', 'wpp' ), __( 'No', 'wpp' ), __( 'Yes', 'wpp' ), __( 'No', 'wpp' ) ), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_true_as_image' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_true_as_image' ] : false ) ); ?></li>
-          <?php do_action( 'wpp_settings_page_property_page' ); ?>
         </ul>
 
       </td>
