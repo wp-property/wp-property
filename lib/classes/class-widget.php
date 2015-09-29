@@ -22,9 +22,10 @@ namespace UsabilityDynamics\WPP {
 
         if ( !empty( $instance ) && is_array( $instance ) ) {
           foreach( $instance as $attr_name => $attr_value ) {
-            if ( !is_array( $attr_value ) ) {
-              $args[] = $attr_name . '="' . $attr_value . '"';
+            if ( is_array( $attr_value ) ) {
+              $attr_value = implode( ',', array_keys( $attr_value ) );
             }
+            $args[] = $attr_name . '="' . $attr_value . '"';
           }
         }
 
@@ -48,9 +49,9 @@ namespace UsabilityDynamics\WPP {
 
             <p>
               <label class="widefat" for="<?php echo $this->get_field_id( $param['id'] ); ?>"><?php echo $param['name']; ?></label>
-
               <?php
               switch( $param['type'] ) {
+
                 case 'text':
                   ?>
                   <input class="widefat" id="<?php echo $this->get_field_id( $param['id'] ); ?>"
@@ -58,6 +59,7 @@ namespace UsabilityDynamics\WPP {
                          value="<?php echo !empty( $instance[ $param['id'] ] ) ? $instance[ $param['id'] ] : $param['default']; ?>"/>
                   <?php
                   break;
+
                 case 'number':
                   ?>
                   <input class="widefat" id="<?php echo $this->get_field_id( $param['id'] ); ?>"
@@ -66,6 +68,7 @@ namespace UsabilityDynamics\WPP {
                          value="<?php echo !empty( $instance[ $param['id'] ] ) ? $instance[ $param['id'] ] : $param['default']; ?>"/>
                   <?php
                   break;
+
                 case 'select':
                   ?>
                   <select class="widefat" id="<?php echo $this->get_field_id( $param['id'] ); ?>"
@@ -82,8 +85,27 @@ namespace UsabilityDynamics\WPP {
                   </select>
                   <?php
                   break;
-                  ?>
-                <?php } ?>
+
+                case 'multi_checkbox':
+                  if ( !empty( $param['options'] ) && is_array( $param['options'] ) ) { ?>
+                  <ul class="wpp-multi-checkbox-wrapper">
+                    <?php foreach( $param['options'] as $opt_name => $opt_label ) { ?>
+                      <li><label><input type="checkbox"
+                          <?php echo ( !empty( $instance[ $param['id'] ][ $opt_name ] ) ) ? 'checked' : ''; ?>
+                          class="widefat"
+                          id="<?php echo $this->get_field_id( $param['id'] ) . '_' . $opt_name; ?>"
+                          name="<?php echo $this->get_field_name( $param['id'] ); ?>[<?php echo $opt_name; ?>]"> <?php echo $opt_label; ?></label>
+                      </li>
+                    <?php } ?>
+                  </ul>
+                  <?php }
+                  break;
+
+              } ?>
+
+              <?php if( !empty( $param[ 'description' ] ) ) : ?>
+                <span class="description"><?php echo $param[ 'description' ]; ?></span>
+              <?php endif; ?>
             </p>
 
           <?php endforeach;

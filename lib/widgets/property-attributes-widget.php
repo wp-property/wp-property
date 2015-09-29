@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Property Stats Widget
+ * Property Attributes ( Stats ) Widget
  */
 namespace UsabilityDynamics\WPP\Widgets {
 

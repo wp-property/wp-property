@@ -124,7 +124,7 @@
         <?php foreach($wp_properties['property_meta'] as $meta_slug => $meta_title):
           if(empty($post->$meta_slug) || $meta_slug == 'tagline')
             continue;
-        ?>
+          ?>
           <h2><?php echo $meta_title; ?></h2>
           <p><?php echo  do_shortcode(html_entity_decode($post->$meta_slug)); ?></p>
         <?php endforeach; ?>

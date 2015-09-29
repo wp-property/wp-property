@@ -950,9 +950,7 @@ if ( !function_exists( 'draw_stats' ) ):
       'return_blank' => 'false',
       'include' => '',
       'exclude' => '',
-      //** Args below are related to WPP 2.0. but it's needed to have the compatibility with new Denali versions */
-      'include_clsf' => 'all', // The list of classifications separated by commas or array which should be included. Enabled values: all|[classification,classification2]
-      'title' => 'true',
+      'include_clsf' => 'attribute', // Show attributes or meta ( details ). Available value: "detail"
       'stats_prefix' => sanitize_key( WPP_F::property_label( 'singular' ) )
     );
     

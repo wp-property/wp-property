@@ -2509,7 +2509,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     $_property = (array)$property;
 
-    if( $_property[ 'ID' ] !== $post->ID ) {
+    if( $_property[ 'ID' ] != $post->ID ) {
       return $post;
     }
 
