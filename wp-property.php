@@ -70,7 +70,7 @@ if( !function_exists( 'ud_check_wp_property' ) ) {
       //** Be sure composer.json exists */
       $file = dirname( __FILE__ ) . '/composer.json';
       if( !file_exists( $file ) ) {
-        throw new Exception( __( 'Distributive is broken. composer.json is missed. Try to remove and upload plugin again.', 'wpp' ) );
+        throw new Exception( __( 'Distributive is broken. composer.json is missed. Try to remove and upload plugin again.', ud_get_wp_property()->domain ) );
       }
       $data = json_decode( file_get_contents( $file ), true );
       //** Be sure PHP version is correct. */
@@ -78,7 +78,7 @@ if( !function_exists( 'ud_check_wp_property' ) ) {
         preg_match( '/^([><=]*)([0-9\.]*)$/', $data[ 'require' ][ 'php' ], $matches );
         if( !empty( $matches[1] ) && !empty( $matches[2] ) ) {
           if( !version_compare( PHP_VERSION, $matches[2], $matches[1] ) ) {
-            throw new Exception( sprintf( __( 'Plugin requires PHP %s or higher. Your current PHP version is %s', 'wpp' ), $matches[2], PHP_VERSION ) );
+            throw new Exception( sprintf( __( 'Plugin requires PHP %s or higher. Your current PHP version is %s', ud_get_wp_property()->domain ), $matches[2], PHP_VERSION ) );
           }
         }
       }
@@ -86,11 +86,11 @@ if( !function_exists( 'ud_check_wp_property' ) ) {
       if ( file_exists( dirname( __FILE__ ) . '/vendor/libraries/autoload.php' ) ) {
         require_once ( dirname( __FILE__ ) . '/vendor/libraries/autoload.php' );
       } else {
-        throw new Exception( sprintf( __( 'Distributive is broken. %s file is missed. Try to remove and upload plugin again.', 'wpp' ), dirname( __FILE__ ) . '/vendor/libraries/autoload.php' ) );
+        throw new Exception( sprintf( __( 'Distributive is broken. %s file is missed. Try to remove and upload plugin again.', ud_get_wp_property()->domain ), dirname( __FILE__ ) . '/vendor/libraries/autoload.php' ) );
       }
       //** Be sure our Bootstrap class exists */
       if( !class_exists( '\UsabilityDynamics\WPP\Bootstrap' ) ) {
-        throw new Exception( __( 'Distributive is broken. Plugin loader is not available. Try to remove and upload plugin again.', 'wpp' ) );
+        throw new Exception( __( 'Distributive is broken. Plugin loader is not available. Try to remove and upload plugin again.', ud_get_wp_property()->domain ) );
       }
     } catch( Exception $e ) {
       $_ud_wp_property_error = $e->getMessage();
@@ -111,7 +111,7 @@ if( !function_exists( 'ud_my_wp_plugin_message' ) ) {
   function ud_wp_property_message() {
     global $_ud_wp_property_error;
     if( !empty( $_ud_wp_property_error ) ) {
-      $message = sprintf( __( '<p><b>%s</b> can not be initialized. %s</p>', 'wpp' ), 'WP-Property', $_ud_wp_property_error );
+      $message = sprintf( __( '<p><b>%s</b> can not be initialized. %s</p>', ud_get_wp_property()->domain ), 'WP-Property', $_ud_wp_property_error );
       echo '<div class="error fade" style="padding:11px;">' . $message . '</div>';
     }
   }

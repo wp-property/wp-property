@@ -29,8 +29,6 @@ namespace UsabilityDynamics\WPP\Widgets {
      *
      * @param array $args
      * @param array $instance
-     *
-     * @todo: Consider widget options
      */
     public function widget( $args, $instance ) {
       echo do_shortcode( '[property_map '.$this->shortcode_args( $instance ).']' );

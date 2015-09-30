@@ -14,9 +14,9 @@ class OtherPropertiesWidget extends WP_Widget {
 
     parent::__construct(
         false,
-        sprintf( __( 'Other %1s', 'wpp' ), WPP_F::property_label( 'plural' ) ),
+        sprintf( __( 'Other %1s', ud_get_wp_property()->domain ), WPP_F::property_label( 'plural' ) ),
         array(
-            'description' => sprintf( __( 'Display a list of %1s that share a parent with the currently displayed property.', 'wpp' ), $property_label )
+            'description' => sprintf( __( 'Display a list of %1s that share a parent with the currently displayed property.', ud_get_wp_property()->domain ), $property_label )
         ),
         array(
             'width' => 300
@@ -141,7 +141,7 @@ class OtherPropertiesWidget extends WP_Widget {
         </ul>
 
         <?php if ( $instance[ 'enable_more' ] == 'on' ) {
-          echo '<p class="more"><a href="' . $this_property->permalink . '" class="btn btn-info">' . __( 'More', 'wpp' ) . '</a></p>';
+          echo '<p class="more"><a href="' . $this_property->permalink . '" class="btn btn-info">' . __( 'More', ud_get_wp_property()->domain ) . '</a></p>';
         } ?>
 
       </div>
@@ -154,7 +154,7 @@ class OtherPropertiesWidget extends WP_Widget {
     ob_end_clean();
 
     if ( $instance[ 'enable_view_all' ] == 'on' ) {
-      $html[ ] = '<p class="view-all"><a href="' . site_url() . '/' . $wp_properties[ 'configuration' ][ 'base_slug' ] . '" class="btn btn-large">' . __( 'View All', 'wpp' ) . '</a></p>';
+      $html[ ] = '<p class="view-all"><a href="' . site_url() . '/' . $wp_properties[ 'configuration' ][ 'base_slug' ] . '" class="btn btn-large">' . __( 'View All', ud_get_wp_property()->domain ) . '</a></p>';
     }
 
     $html[ ] = '</div>';
@@ -213,10 +213,10 @@ class OtherPropertiesWidget extends WP_Widget {
       } );
 
     </script>
-    <p><?php _e( 'The widget will show other properties that share a parent with the currently displayed property.', 'wpp' ); ?></p>
+    <p><?php _e( 'The widget will show other properties that share a parent with the currently displayed property.', ud_get_wp_property()->domain ); ?></p>
 
     <p>
-      <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'wpp' ); ?></label>
+      <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', ud_get_wp_property()->domain ); ?></label>
       <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
              name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>"/>
     </p>
@@ -225,31 +225,31 @@ class OtherPropertiesWidget extends WP_Widget {
       <input id="<?php echo $this->get_field_id( 'hide_image' ); ?>" class="check_me_other"
              name="<?php echo $this->get_field_name( 'hide_image' ); ?>" type="checkbox"
              value="on" <?php if ( $hide_image == 'on' ) echo "checked='checked'"; ?> />
-      <label for="<?php echo $this->get_field_id( 'hide_image' ); ?>"><?php _e( 'Hide images.', 'wpp' ); ?></label>
+      <label for="<?php echo $this->get_field_id( 'hide_image' ); ?>"><?php _e( 'Hide images.', ud_get_wp_property()->domain ); ?></label>
     </p>
 
     <p
         class="choose_thumb_other" <?php echo ( $hide_image !== 'on' ) ? 'style="display:block;"' : 'style="display:none;"'; ?>>
-      <label for="<?php echo $this->get_field_id( 'image_type' ); ?>"><?php _e( 'Image Size:', 'wpp' ); ?></label>
+      <label for="<?php echo $this->get_field_id( 'image_type' ); ?>"><?php _e( 'Image Size:', ud_get_wp_property()->domain ); ?></label>
       <?php WPP_F::image_sizes_dropdown( "name=" . $this->get_field_name( 'image_type' ) . "&selected=" . $image_type ); ?>
     </p>
 
     <p>
       <label
-          for="<?php echo $this->get_field_id( 'amount_items' ); ?>"><?php _e( 'Listings to display?', 'wpp' ); ?></label>
+          for="<?php echo $this->get_field_id( 'amount_items' ); ?>"><?php _e( 'Listings to display?', ud_get_wp_property()->domain ); ?></label>
       <input style="width:30px" id="<?php echo $this->get_field_id( 'amount_items' ); ?>"
              name="<?php echo $this->get_field_name( 'amount_items' ); ?>" type="text"
              value="<?php echo $amount_items; ?>"/>
     </p>
 
-    <p><?php _e( 'Select the attributes you want to display: ', 'wpp' ); ?></p>
+    <p><?php _e( 'Select the attributes you want to display: ', ud_get_wp_property()->domain ); ?></p>
 
     <ul class="wp-tab-panel">
       <li>
         <input id="<?php echo $this->get_field_id( 'show_title' ); ?>"
                name="<?php echo $this->get_field_name( 'show_title' ); ?>" type="checkbox"
                value="on" <?php if ( $show_title == 'on' ) echo " checked='checked';"; ?> />
-        <label for="<?php echo $this->get_field_id( 'show_title' ); ?>"><?php _e( 'Title', 'wpp' ); ?></label>
+        <label for="<?php echo $this->get_field_id( 'show_title' ); ?>"><?php _e( 'Title', ud_get_wp_property()->domain ); ?></label>
       </li>
 
       <?php foreach ( $wp_properties[ 'property_stats' ] as $stat => $label ) { ?>
@@ -264,7 +264,7 @@ class OtherPropertiesWidget extends WP_Widget {
     </ul>
 
     <div>
-      <label for="<?php echo $this->get_field_id( 'address_format' ); ?>"><?php _e( 'Address Format:', 'wpp' ); ?>
+      <label for="<?php echo $this->get_field_id( 'address_format' ); ?>"><?php _e( 'Address Format:', ud_get_wp_property()->domain ); ?>
         <textarea style="width: 100%" id="<?php echo $this->get_field_id( 'address_format' ); ?>"
                   name="<?php echo $this->get_field_name( 'address_format' ); ?>"><?php echo $address_format; ?></textarea>
       </label>
@@ -276,28 +276,28 @@ class OtherPropertiesWidget extends WP_Widget {
                name="<?php echo $this->get_field_name( 'enable_more' ); ?>" type="checkbox"
                value="on" <?php if ( $enable_more == 'on' ) echo " checked='checked';"; ?> />
         <label
-            for="<?php echo $this->get_field_id( 'enable_more' ); ?>"><?php _e( 'Show "More" link?', 'wpp' ); ?></label>
+            for="<?php echo $this->get_field_id( 'enable_more' ); ?>"><?php _e( 'Show "More" link?', ud_get_wp_property()->domain ); ?></label>
       </li>
       <li>
         <input id="<?php echo $this->get_field_id( 'enable_view_all' ); ?>"
                name="<?php echo $this->get_field_name( 'enable_view_all' ); ?>" type="checkbox"
                value="on" <?php if ( $enable_view_all == 'on' ) echo " checked='checked';"; ?> />
         <label
-            for="<?php echo $this->get_field_id( 'enable_view_all' ); ?>"><?php _e( 'Show "View All" link?', 'wpp' ); ?></label>
+            for="<?php echo $this->get_field_id( 'enable_view_all' ); ?>"><?php _e( 'Show "View All" link?', ud_get_wp_property()->domain ); ?></label>
       </li>
       <li>
         <input id="<?php echo $this->get_field_id( 'show_properties_of_type' ); ?>"
                name="<?php echo $this->get_field_name( 'show_properties_of_type' ); ?>" type="checkbox"
                value="on" <?php checked( 'on', $show_properties_of_type ); ?> />
         <label
-            for="<?php echo $this->get_field_id( 'show_properties_of_type' ); ?>"><?php _e( 'If property has no parent, show other properties of same type.', 'wpp' ); ?></label>
+            for="<?php echo $this->get_field_id( 'show_properties_of_type' ); ?>"><?php _e( 'If property has no parent, show other properties of same type.', ud_get_wp_property()->domain ); ?></label>
       </li>
       <li>
         <input id="<?php echo $this->get_field_id( 'shuffle_order' ); ?>"
                name="<?php echo $this->get_field_name( 'shuffle_order' ); ?>" type="checkbox"
                value="on" <?php checked( 'on', $shuffle_order ); ?> />
         <label
-            for="<?php echo $this->get_field_id( 'shuffle_order' ); ?>"><?php _e( 'Randomize order of displayed properties.', 'wpp' ); ?></label>
+            for="<?php echo $this->get_field_id( 'shuffle_order' ); ?>"><?php _e( 'Randomize order of displayed properties.', ud_get_wp_property()->domain ); ?></label>
       </li>
     </ul>
 
