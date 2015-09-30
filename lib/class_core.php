@@ -1351,7 +1351,7 @@ class WPP_Core {
 
     // Initialize result (content which will be shown) and open wrap (div) with unique id
     if( $wpp_query[ 'disable_wrapper' ] != 'true' ) {
-      $result[ 'top' ] = '<div id="wpp_shortcode_' . $defaults[ 'unique_hash' ] . '" class="wpp_ui ' . $wpp_query[ 'class' ] . '">';
+      $result[ 'top' ] = '<div id="wpp_shortcode_' . $wpp_query[ 'unique_hash' ] . '" class="wpp_ui ' . $wpp_query[ 'class' ] . '">';
     }
 
     $result[ 'top_pagination' ] = wpp_draw_pagination( array(
