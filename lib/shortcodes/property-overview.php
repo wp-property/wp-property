@@ -16,22 +16,14 @@ namespace UsabilityDynamics\WPP {
        */
       public function __construct() {
 
+        $custom_attributes = ud_get_wp_property( 'property_stats', array() );
+
         $options = array(
             'id' => 'property_overview',
             'params' => array(
-              'strict_search' => array(
-                'name' => __( 'Strict Search', ud_get_wp_property()->domain ),
-                'description' => __( 'Use strict search or not.', ud_get_wp_property()->domain ),
-                'type' => 'select',
-                'options' => array(
-                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
-                  'false' => __( 'No', ud_get_wp_property()->domain )
-                ),
-                'default' => 'false'
-              ),
               'show_children' => array(
                 'name' => __( 'Show Children', ud_get_wp_property()->domain ),
-                'description' => __( 'Show children or not.', ud_get_wp_property()->domain ),
+                'description' => __( 'Switches children property displaying.', ud_get_wp_property()->domain ),
                 'type' => 'select',
                 'options' => array(
                   'true' => __( 'Yes', ud_get_wp_property()->domain ),
@@ -57,7 +49,7 @@ namespace UsabilityDynamics\WPP {
               ),
               'bottom_pagination_flag' => array(
                 'name' => __( 'Bottom Pagination', ud_get_wp_property()->domain ),
-                'description' => __( 'Bottom Pagination.', ud_get_wp_property()->domain ),
+                'description' => __( 'Show Bottom Pagination.', ud_get_wp_property()->domain ),
                 'type' => 'select',
                 'options' => array(
                   'true' => __( 'Yes', ud_get_wp_property()->domain ),
@@ -67,19 +59,19 @@ namespace UsabilityDynamics\WPP {
               ),
               'thumbnail_size' => array(
                 'name' => __( 'Thumbnail Size', ud_get_wp_property()->domain ),
-                'description' => __( 'Thumbnail Size.', ud_get_wp_property()->domain ),
+                'description' => sprintf( __( 'Thumbnail Size. E.g.: %s', ud_get_wp_property()->domain ), "'thumbnail', ''medium', 'large'" ),
                 'type' => 'text',
                 'default' => ''
               ),
               'sort_by_text' => array(
                 'name' => __( 'Sort By Text', ud_get_wp_property()->domain ),
-                'description' => __( 'Sort By Text', ud_get_wp_property()->domain ),
+                'description' => __( 'Renames "Sort By:" text.', ud_get_wp_property()->domain ),
                 'type' => 'text',
                 'default' => __( 'Sort By', ud_get_wp_property()->domain )
               ),
               'sort_by' => array(
                 'name' => __( 'Sort By', ud_get_wp_property()->domain ),
-                'description' => __( 'Sort By', ud_get_wp_property()->domain ),
+                'description' => sprintf( __( 'Sets sorting by attribute or %s', ud_get_wp_property()->domain ), 'post_date, menu_order', 'ID' ),
                 'type' => 'text',
                 'default' => 'post_date'
               ),
@@ -95,28 +87,8 @@ namespace UsabilityDynamics\WPP {
               ),
               'template' => array(
                 'name' => __( 'Template', ud_get_wp_property()->domain ),
-                'description' => __( 'Template', ud_get_wp_property()->domain ),
+                'description' => __( 'Sets layout using PHP template name. ', ud_get_wp_property()->domain ),
                 'type' => 'text',
-                'default' => 'false'
-              ),
-              'ajax_call' => array(
-                'name' => __( 'Ajax Call', ud_get_wp_property()->domain ),
-                'description' => __( 'Ajax Call', ud_get_wp_property()->domain ),
-                'type' => 'select',
-                'options' => array(
-                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
-                  'false'  => __( 'No', ud_get_wp_property()->domain )
-                ),
-                'default' => 'false'
-              ),
-              'disable_wrapper' => array(
-                'name' => __( 'Disable Wrapper', ud_get_wp_property()->domain ),
-                'description' => __( 'Disable Wrapper', ud_get_wp_property()->domain ),
-                'type' => 'select',
-                'options' => array(
-                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
-                  'false'  => __( 'No', ud_get_wp_property()->domain )
-                ),
                 'default' => 'false'
               ),
               'sorter_type' => array(
@@ -132,7 +104,7 @@ namespace UsabilityDynamics\WPP {
               ),
               'sorter' => array(
                 'name' => __( 'Sorter', ud_get_wp_property()->domain ),
-                'description' => __( 'Sorter', ud_get_wp_property()->domain ),
+                'description' => __( 'Show Sort UI', ud_get_wp_property()->domain ),
                 'type' => 'select',
                 'options' => array(
                   'on' => __( 'On', ud_get_wp_property()->domain ),
@@ -142,7 +114,7 @@ namespace UsabilityDynamics\WPP {
               ),
               'pagination' => array(
                 'name' => __( 'Pagination', ud_get_wp_property()->domain ),
-                'description' => __( 'Pagination', ud_get_wp_property()->domain ),
+                'description' => __( 'Show Pagination', ud_get_wp_property()->domain ),
                 'type' => 'select',
                 'options' => array(
                   'on' => __( 'On', ud_get_wp_property()->domain ),
@@ -150,49 +122,32 @@ namespace UsabilityDynamics\WPP {
                 ),
                 'default' => 'on'
               ),
-              'hide_count' => array(
-                'name' => __( 'Hide Count', ud_get_wp_property()->domain ),
-                'description' => __( 'Hide Count', ud_get_wp_property()->domain ),
-                'type' => 'select',
-                'options' => array(
-                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
-                  'false'  => __( 'No', ud_get_wp_property()->domain )
-                ),
-                'default' => 'false'
-              ),
               'per_page' => array(
                 'name' => __( 'Per Page', ud_get_wp_property()->domain ),
-                'description' => __( 'Per page', ud_get_wp_property()->domain ),
+                'description' => __( 'Property quantity per page.', ud_get_wp_property()->domain ),
                 'type' => 'number',
                 'default' => 10
               ),
               'starting_row' => array(
                 'name' => __( 'Starting Row', ud_get_wp_property()->domain ),
-                'description' => __( 'Starting Row', ud_get_wp_property()->domain ),
+                'description' => __( 'Sets starting row.', ud_get_wp_property()->domain ),
                 'type' => 'number',
                 'default' => 0
               ),
               'detail_button' => array(
                 'name' => __( 'Detail Button', ud_get_wp_property()->domain ),
-                'description' => __( 'Detail Button', ud_get_wp_property()->domain ),
+                'description' => __( 'Name of Detail Button. Button will not be shown if the value is empty.', ud_get_wp_property()->domain ),
+                'type' => 'text',
+              ),
+              'hide_count' => array(
+                'name' => __( 'Hide Count', ud_get_wp_property()->domain ),
+                'description' => __( 'Hide the “10 found.” text.', ud_get_wp_property()->domain ),
                 'type' => 'select',
                 'options' => array(
                   'true' => __( 'Yes', ud_get_wp_property()->domain ),
                   'false'  => __( 'No', ud_get_wp_property()->domain )
                 ),
                 'default' => 'false'
-              ),
-              'stats' => array(
-                'name' => __( 'Stats', ud_get_wp_property()->domain ),
-                'description' => __( 'CSV stats', ud_get_wp_property()->domain ),
-                'type' => 'text',
-                'default' => ''
-              ),
-              'class' => array(
-                'name' => __( 'Class', ud_get_wp_property()->domain ),
-                'description' => __( 'CSS class', ud_get_wp_property()->domain ),
-                'type' => 'text',
-                'default' => 'wpp_property_overview_shortcode'
               ),
               'in_new_window' => array(
                 'name' => __( 'In new window?', ud_get_wp_property()->domain ),
@@ -203,7 +158,24 @@ namespace UsabilityDynamics\WPP {
                   'false'  => __( 'No', ud_get_wp_property()->domain )
                 ),
                 'default' => 'false'
-              )
+              ),
+              'strict_search' => array(
+                'name' => __( 'Strict Search', ud_get_wp_property()->domain ),
+                'description' => __( 'Provides strict search', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
+                  'false' => __( 'No', ud_get_wp_property()->domain )
+                ),
+                'default' => 'false'
+              ),
+              'custom_query' => array(
+                'name' => __( 'Additional Attributes', ud_get_wp_property()->domain ),
+                'description' => __( 'Setup your custom query.', ud_get_wp_property()->domain ),
+                'type' => 'custom_attributes',
+                'options' => $custom_attributes,
+              ),
+
             ),
             'description' => __( 'Renders Property Attributes', ud_get_wp_property()->domain ),
             'group' => 'WP-Property'
@@ -219,13 +191,13 @@ namespace UsabilityDynamics\WPP {
       public function call( $atts = "" ) {
         global $wp_properties;
 
-        $data = wp_parse_args( array(
+        $data = wp_parse_args( $atts, array(
           'strict_search' => false,
           'show_children' => ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_children' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_children' ] : 'true' ),
           'child_properties_title' => __( 'Floor plans at location:', ud_get_wp_property()->domain ),
-          'fancybox_preview' => $wp_properties[ 'configuration' ][ 'property_overview' ][ 'fancybox_preview' ],
+          'fancybox_preview' => ud_get_wp_property( 'configuration.property_overview.fancybox_preview' ),
           'bottom_pagination_flag' => ( isset( $wp_properties[ 'configuration' ][ 'bottom_insert_pagenation' ] ) && $wp_properties[ 'configuration' ][ 'bottom_insert_pagenation' ] == 'true' ? true : false ),
-          'thumbnail_size' => $wp_properties[ 'configuration' ][ 'property_overview' ][ 'thumbnail_size' ],
+          'thumbnail_size' => ud_get_wp_property( 'configuration.property_overview.thumbnail_size', 'thumbnail' ),
           'sort_by_text' => __( 'Sort By:', ud_get_wp_property()->domain ),
           'sort_by' => 'post_date',
           'sort_order' => 'DESC',
@@ -240,10 +212,39 @@ namespace UsabilityDynamics\WPP {
           'starting_row' => 0,
           'unique_hash' => rand( 10000, 99900 ),
           'detail_button' => false,
-          'stats' => '',
           'class' => 'wpp_property_overview_shortcode',
           'in_new_window' => false
-        ), $atts );
+        ) );
+
+        /* Fix boolean values */
+        $boolean_values_map = array(
+          'strict_search',
+          'template',
+          'disable_wrapper',
+          'ajax_call',
+          'hide_count',
+          'detail_button',
+          'in_new_window'
+        );
+        foreach( $data as $k => $v ) {
+          if( in_array( $k, $boolean_values_map ) && ( $v === 'false' || empty( $v ) ) ) {
+            $data[$k] = false;
+          }
+        }
+
+        if( !empty( $data[ 'custom_query' ] ) && is_array( $data[ 'custom_query' ] ) ) {
+          foreach( $data[ 'custom_query' ] as $k => $v ) {
+
+          }
+          unset( $data[ 'custom_query' ] );
+        }
+
+        /*
+        echo "<pre>";
+        print_r( $data );
+        echo "</pre>";
+        die();
+        */
 
         return \WPP_Core::shortcode_property_overview( $data );
 

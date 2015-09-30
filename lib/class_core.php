@@ -1222,7 +1222,7 @@ class WPP_Core {
     if( isset( $post ) && is_object( $post ) ) {
 
       $dynamic_fields[ 'post_id' ] = isset( $post->ID ) ? $post->ID : 0;
-      $dynamic_fields[ 'post_parent' ] = isset( $post->parent_id ) ? $post->parent_id : 0;
+      $dynamic_fields[ 'post_parent' ] = isset( $post->post_parent ) ? $post->post_parent : 0;
       $dynamic_fields[ 'property_type' ] = isset( $post->property_type ) ? $post->property_type : false;
 
       $dynamic_fields = apply_filters( 'shortcode_property_overview_dynamic_fields', $dynamic_fields );
