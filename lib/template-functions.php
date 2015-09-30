@@ -768,12 +768,19 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
       }
     }
 
-    foreach ( $property as $meta_key => $attribute_value ) {
+    if ( empty( $args[ 'do_not_execute_shortcodes' ] ) || $args[ 'do_not_execute_shortcodes' ] !== 'true' ) {
 
-      //** Only executed shortcodes if the value isn't an array */
-      if ( !is_array( $attribute_value ) ) {
+      $attributes = ud_get_wp_property( 'property_stats', array() );
 
-        if ( ( !empty( $args[ 'do_not_execute_shortcodes' ] ) && $args[ 'do_not_execute_shortcodes' ] == 'true' ) || $meta_key == 'post_content' ) {
+      foreach ( $property as $meta_key => $attribute_value ) {
+
+        //** Only executed shortcodes if the value isn't an array */
+        if ( is_array( $attribute_value ) ) {
+          continue;
+        }
+
+        //** Only execute shortcodes for defined property attributes to prevent different issues */
+        if ( !in_array( $meta_key, (array)$attributes ) ) {
           continue;
         }
 
@@ -786,10 +793,10 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
 
         $attribute_value = str_replace( "\n", "", nl2br( $attribute_value ) );
 
-      }
+        $attribute_value = apply_filters( "wpp::attribute::display", $attribute_value, $meta_key );
+        $property[ $meta_key ] = apply_filters( "wpp_stat_filter_{$meta_key}", $attribute_value, $attribute_scope );
 
-      $attribute_value = apply_filters( "wpp::attribute::display", $attribute_value, $meta_key );
-      $property[ $meta_key ] = apply_filters( "wpp_stat_filter_{$meta_key}", $attribute_value, $attribute_scope );
+      }
 
     }
 
