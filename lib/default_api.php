@@ -190,7 +190,7 @@ class wpp_default_api {
         //** Determine if description shuold be displayed, and if it is not empty */
         $echo_description = ( $atts[ 'show_descriptions' ] && !empty( $att->post_content ) ? ' <span class="attachment_description"> ' . $att->post_content . ' </span> ' : false );
 
-        $echo_title = ( $att->post_excerpt ? $att->post_excerpt : __( 'View ', 'wpp' ) . apply_filters( 'the_title_attribute', $att->post_title ) );
+        $echo_title = ( $att->post_excerpt ? $att->post_excerpt : __( 'View ', ud_get_wp_property()->domain ) . apply_filters( 'the_title_attribute', $att->post_title ) );
 
         if ( $icon_class ) {
           $container_classes[ ] = 'has_icon';
@@ -309,11 +309,11 @@ add_action( 'wpp_ui_after_attribute_price', 'wpp_show_week_month_selection' );
 function wpp_unique_key_labels( $stats ) {
 
   if ( empty( $stats[ 'property_type' ] ) ) {
-    $stats[ 'property_type' ] = __( 'Property Type', 'wpp' );
+    $stats[ 'property_type' ] = __( 'Property Type', ud_get_wp_property()->domain );
   }
 
   if ( empty( $stats[ 'city' ] ) ) {
-    $stats[ 'city' ] = __( 'City', 'wpp' );
+    $stats[ 'city' ] = __( 'City', ud_get_wp_property()->domain );
   }
 
   return $stats;
@@ -416,20 +416,20 @@ function wpp_format_address_attribute( $data, $property = false, $format = "[str
 
 function wpp_property_stats_add_sold_or_rented( $property_stats ) {
 
-  $property_stats[ 'for_sale' ] = __( "For Sale", 'wpp' );
-  $property_stats[ 'for_rent' ] = __( "For Rent", 'wpp' );
+  $property_stats[ 'for_sale' ] = __( "For Sale", ud_get_wp_property()->domain );
+  $property_stats[ 'for_rent' ] = __( "For Rent", ud_get_wp_property()->domain );
 
   return $property_stats;
 }
 
 function wpp_property_stats_input_for_rent_make_checkbox( $content, $slug, $object ) {
   $checked = ( $object[ $slug ] == 'true' ? ' checked="true" ' : false );
-  return "<input type='hidden' name='wpp_data[meta][{$slug}]'  value='false'  /><input type='checkbox' id='wpp_meta_{$slug}' name='wpp_data[meta][{$slug}]'  value='true' $checked /> <label for='wpp_meta_{$slug}'>" . __( 'This is a rental property.', 'wpp' ) . "</label>";
+  return "<input type='hidden' name='wpp_data[meta][{$slug}]'  value='false'  /><input type='checkbox' id='wpp_meta_{$slug}' name='wpp_data[meta][{$slug}]'  value='true' $checked /> <label for='wpp_meta_{$slug}'>" . __( 'This is a rental property.', ud_get_wp_property()->domain ) . "</label>";
 }
 
 function wpp_property_stats_input_for_sale_make_checkbox( $content, $slug, $object ) {
   $checked = ( $object[ $slug ] == 'true' ? ' checked="true" ' : false );
-  return "<input type='hidden'  name='wpp_data[meta][{$slug}]'  value='false' /><input type='checkbox' id='wpp_meta_{$slug}' name='wpp_data[meta][{$slug}]'  value='true' $checked /> <label for='wpp_meta_{$slug}'>" . __( 'This property is for sale.', 'wpp' ) . "</label>";
+  return "<input type='hidden'  name='wpp_data[meta][{$slug}]'  value='false' /><input type='checkbox' id='wpp_meta_{$slug}' name='wpp_data[meta][{$slug}]'  value='true' $checked /> <label for='wpp_meta_{$slug}'>" . __( 'This property is for sale.', ud_get_wp_property()->domain ) . "</label>";
 }
 
 /**
@@ -448,17 +448,17 @@ function wpp_property_stats_input_address( $content, $slug, $object ) {
     <div class="wpp_attribute_row_address_options">
           <input type="hidden" name="wpp_data[meta][manual_coordinates]" value="false"/>
           <input type="checkbox" id="wpp_manual_coordinates" name="wpp_data[meta][manual_coordinates]" value="true" <?php isset( $object[ 'manual_coordinates' ] ) ? checked( $object[ 'manual_coordinates' ], 1 ) : ''; ?> />
-          <label for="wpp_manual_coordinates"><?php echo __( 'Set Coordinates Manually.', 'wpp' ); ?></label>
+          <label for="wpp_manual_coordinates"><?php echo __( 'Set Coordinates Manually.', ud_get_wp_property()->domain ); ?></label>
           <div id="wpp_coordinates" style="<?php echo !isset( $object[ 'manual_coordinates' ] ) ? 'display:none;' : ''; ?>">
             <ul>
               <li>
                   <input type="text" id="wpp_meta_latitude" name="wpp_data[meta][latitude]" value="<?php echo isset( $object[ 'latitude' ] ) ? $object[ 'latitude' ] : ''; ?>"/>
-                  <label><?php echo __( 'Latitude', 'wpp' ) ?></label>
+                  <label><?php echo __( 'Latitude', ud_get_wp_property()->domain ) ?></label>
                   <div class="wpp_clear"></div>
                 </li>
                 <li>
                   <input type="text" id="wpp_meta_longitude" name="wpp_data[meta][longitude]" value="<?php echo isset( $object[ 'longitude' ] ) ? $object[ 'longitude' ] : ''; ?>"/>
-                  <label><?php echo __( 'Longitude', 'wpp' ) ?></label>
+                  <label><?php echo __( 'Longitude', ud_get_wp_property()->domain ) ?></label>
                   <div class="wpp_clear"></div>
                 </li>
               </ul>
@@ -590,12 +590,12 @@ function wpp_save_property_aggregated_data( $post_id ) {
 
 function wpp_stat_filter_for_rent_fix( $value ) {
   if ( $value == '1' )
-    return __( 'Yes', 'wpp' );
+    return __( 'Yes', ud_get_wp_property()->domain );
 }
 
 function wpp_stat_filter_for_sale_fix( $value ) {
   if ( $value == '1' )
-    return __( 'Yes', 'wpp' );
+    return __( 'Yes', ud_get_wp_property()->domain );
 }
 
 /**
@@ -606,7 +606,7 @@ function wpp_stat_filter_for_sale_fix( $value ) {
  */
 function add_format_true_checkbox() {
   global $wp_properties;
-  echo '<li>' . WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][format_true_checkbox]&label=" . __( 'Convert "Yes" and "True" values to checked icons on the front-end.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_true_checkbox' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_true_checkbox' ] : false ) ) . '</li>';
+  echo '<li>' . WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][format_true_checkbox]&label=" . __( 'Convert "Yes" and "True" values to checked icons on the front-end.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_true_checkbox' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'format_true_checkbox' ] : false ) ) . '</li>';
 }
 
 /**
@@ -663,7 +663,7 @@ function add_city_to_searchable( $array ) {
  * @return string $area
  */
 function add_square_foot( $area ) {
-  return $area . __( " sq. ft.", 'wpp' );
+  return $area . __( " sq. ft.", ud_get_wp_property()->domain );
 }
 
 /**
@@ -836,9 +836,9 @@ function wpp_show_coords( $listing_id = false ) {
 
   echo "<span class='description'>";
   if ( $coords ) {
-    _e( "Address was validated by Google Maps.", 'wpp' );
+    _e( "Address was validated by Google Maps.", ud_get_wp_property()->domain );
   } else {
-    _e( "Address has not yet been validated, should be formatted as: street, city, state, postal code, country. Locations are validated through Google Maps.", 'wpp' );
+    _e( "Address has not yet been validated, should be formatted as: street, city, state, postal code, country. Locations are validated through Google Maps.", ud_get_wp_property()->domain );
   }
   echo "</span>";
 

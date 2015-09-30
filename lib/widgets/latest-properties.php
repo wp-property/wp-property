@@ -150,7 +150,7 @@ class LatestPropertiesWidget extends WP_Widget {
     $property_stats = isset( $wp_properties[ 'property_stats' ] ) ? $wp_properties[ 'property_stats' ] : array();
 
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
-      $property_stats[ 'property_type' ] = __( 'Property Type', 'wpp' );
+      $property_stats[ 'property_type' ] = __( 'Property Type', ud_get_wp_property()->domain );
     }
     ?>
     <script type="text/javascript">

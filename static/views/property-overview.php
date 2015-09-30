@@ -100,6 +100,6 @@
 	</div><?php // .wpp_row_view ?>
 <?php } else {  ?>
 <div class="wpp_nothing_found">
-   <p><?php echo sprintf(__('Sorry, no properties found - try expanding your search, or <a href="%s">view all</a>.','wpp'), site_url().'/'.$wp_properties['configuration']['base_slug']); ?></p>
+   <p><?php echo sprintf(__('Sorry, no properties found - try expanding your search, or <a href="%s">view all</a>.',ud_get_wp_property()->domain), site_url().'/'.$wp_properties['configuration']['base_slug']); ?></p>
 </div>
 <?php } ?>

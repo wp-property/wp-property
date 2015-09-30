@@ -5,7 +5,7 @@
  */
 
 $label_matches = array(
-  'post_title' => __( 'Title', 'wpp' ),
+  'post_title' => __( 'Title', ud_get_wp_property()->domain ),
 ); 
  
 ?>

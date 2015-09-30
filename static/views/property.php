@@ -135,7 +135,7 @@
         <?php endif; ?>
 
         <?php if($post->post_parent): ?>
-          <a href="<?php echo $post->parent_link; ?>" class="<?php wpp_css('btn', "btn btn-return"); ?>"><?php _e('Return to building page.','wpp') ?></a>
+          <a href="<?php echo $post->parent_link; ?>" class="<?php wpp_css('btn', "btn btn-return"); ?>"><?php _e('Return to building page.',ud_get_wp_property()->domain) ?></a>
         <?php endif; ?>
 
       </div><!-- .entry-content -->

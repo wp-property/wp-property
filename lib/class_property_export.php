@@ -31,19 +31,19 @@ class WPP_Export {
     $export_url = $export_url . '&limit=10&format=json';
     ?>
     <div class="wpp_settings_block">
-      <label for="wpp_export_url"><?php _e( 'Feed URL:', 'wpp' ); ?></label>
+      <label for="wpp_export_url"><?php _e( 'Feed URL:', ud_get_wp_property()->domain ); ?></label>
       <input id="wpp_export_url" type="text" style="width: 70%" readonly="true" value="<?php echo esc_attr( $export_url ); ?>"/>
-      <a class="button" href="<?php echo $export_url; ?>"><?php _e( 'Open', 'wpp' ); ?></a>
+      <a class="button" href="<?php echo $export_url; ?>"><?php _e( 'Open', ud_get_wp_property()->domain ); ?></a>
       <br/><br/>
-      <?php _e( 'You may append the export URL with the following arguments:', 'wpp' ); ?>
+      <?php _e( 'You may append the export URL with the following arguments:', ud_get_wp_property()->domain ); ?>
       <ul style="margin: 15px 0 0 10px">
         <li><b>limit</b> - number</li>
         <li><b>per_page</b> - number</li>
         <li><b>starting_row</b> - number</li>
         <li><b>sort_order</b> - number</li>
         <li><b>sort_by</b> - number</li>
-        <li><b>property_type</b> - string - <?php _e( 'Slug for the property type.', 'wpp' ); ?></li>
-        <li><b>format</b> - string - "xml" <?php _e( 'or', 'wpp' ); ?> "json"</li>
+        <li><b>property_type</b> - string - <?php _e( 'Slug for the property type.', ud_get_wp_property()->domain ); ?></li>
+        <li><b>format</b> - string - "xml" <?php _e( 'or', ud_get_wp_property()->domain ); ?> "json"</li>
       </ul>
       </li>
       </ul>
@@ -147,7 +147,7 @@ class WPP_Export {
 
     // If the API key isn't valid, we quit
     if ( !isset( $_REQUEST[ 'api' ] ) || $_REQUEST[ 'api' ] != $api_key ) {
-      die( __( 'Invalid API key.', 'wpp' ) );
+      die( __( 'Invalid API key.', ud_get_wp_property()->domain ) );
     }
 
     if ( isset( $_REQUEST[ 'limit' ] ) ) {
@@ -187,7 +187,7 @@ class WPP_Export {
     $results = $wpp_query[ 'results' ];
 
     if ( count( $results ) == 0 ) {
-      die( __( 'No published properties.', 'wpp' ) );
+      die( __( 'No published properties.', ud_get_wp_property()->domain ) );
     }
 
     if ( $xml_format ) {
@@ -261,7 +261,7 @@ class WPP_Export {
       //*/
 
       if ( !$result ) {
-        die( __( 'There is an Error on trying to create XML feed.', 'wpp' ) );
+        die( __( 'There is an Error on trying to create XML feed.', ud_get_wp_property()->domain ) );
       }
       header( 'Content-type: text/xml' );
       header( 'Content-Disposition: inline; filename="wpp_xml_data.xml"' );
