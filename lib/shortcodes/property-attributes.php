@@ -17,12 +17,15 @@ namespace UsabilityDynamics\WPP {
       public function __construct() {
 
         $attributes = ud_get_wp_property( 'property_stats', array() );
+
+        /*
         $hidden_attributes = ud_get_wp_property( 'hidden_frontend_attributes', array() );
         foreach( $attributes as $k => $v ) {
           if( in_array( $k, $hidden_attributes ) ) {
             unset( $attributes[$k] );
           }
         }
+        //*/
 
         $options = array(
             'id' => 'property_attributes',

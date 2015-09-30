@@ -3648,10 +3648,16 @@ class WPP_F extends UsabilityDynamics\Utility {
           sort( $range[ $range_attribute ] );
 
           if( count( $range[ $range_attribute ] ) < 2 ) {
+            if( !isset( $return[ $range_attribute ] ) ) {
+              $return[ $range_attribute ] = '';
+            }
             $return[ $range_attribute ] = $return[ $range_attribute ] . ' ( ' . $range[ $range_attribute ][ 0 ] . ' )';
           }
 
           if( count( $range[ $range_attribute ] ) > 1 ) {
+            if( !isset( $return[ $range_attribute ] ) ) {
+              $return[ $range_attribute ] = '';
+            }
             $return[ $range_attribute ] = $return[ $range_attribute ] . ' ( ' . min( $range[ $range_attribute ] ) . " - " . max( $range[ $range_attribute ] ) . ' )';
           }
 

@@ -7,7 +7,7 @@
 
 ?>
 
-<?php if ( $data[ 'sort_by_groups' ] == 'true' ) : ?>
+<?php if ( $data[ 'display' ] == 'list' && $data[ 'sort_by_groups' ] != 'true' ) : ?>
   <ul id="property_stats" class="<?php wpp_css('property::property_stats', "property_stats overview_stats list"); ?>">
     <?php @draw_stats($data); ?>
   </ul>

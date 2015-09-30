@@ -219,7 +219,7 @@ namespace UsabilityDynamics\WPP {
       public function call( $atts = "" ) {
         global $wp_properties;
 
-        $data = shortcode_atts( array(
+        $data = wp_parse_args( array(
           'strict_search' => false,
           'show_children' => ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_children' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_children' ] : 'true' ),
           'child_properties_title' => __( 'Floor plans at location:', ud_get_wp_property()->domain ),
