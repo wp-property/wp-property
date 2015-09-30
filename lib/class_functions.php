@@ -63,7 +63,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       if( $args[ 'return' ] ) {
         return $response[ 'body' ];
       } else {
-        WPP_F::log( "API Check Error: " . sprintf( __( 'An error occurred during API key request: <b>%s</b>.', 'wpp' ), $response[ 'body' ] ) );
+        WPP_F::log( "API Check Error: " . sprintf( __( 'An error occurred during API key request: <b>%s</b>.', ud_get_wp_property()->domain ), $response[ 'body' ] ) );
 
         return false;
       }
@@ -138,9 +138,9 @@ class WPP_F extends UsabilityDynamics\Utility {
 
         if( !$disabled || $disabled !== 'true' ) {
           register_sidebar( array(
-            'name'          => sprintf( __( '%s: %s', 'wpp' ), WPP_F::property_label(), $property_title ),
+            'name'          => sprintf( __( '%s: %s', ud_get_wp_property()->domain ), WPP_F::property_label(), $property_title ),
             'id'            => "wpp_sidebar_{$property_slug}",
-            'description'   => sprintf( __( 'Sidebar located on the %s page.', 'wpp' ), $property_title ),
+            'description'   => sprintf( __( 'Sidebar located on the %s page.', ud_get_wp_property()->domain ), $property_title ),
             'before_widget' => '<li id="%1$s"  class="wpp_widget %2$s">',
             'after_widget'  => '</li>',
             'before_title'  => '<h3 class="widget-title">',
@@ -171,19 +171,19 @@ class WPP_F extends UsabilityDynamics\Utility {
           'show_ui'             => true,
           'show_in_nav_menus'   => true,
           'show_tagcloud'       => true,
-          'label'        => _x( 'Features', 'taxonomy general name', 'wpp' ),
+          'label'        => _x( 'Features', 'taxonomy general name', ud_get_wp_property()->domain ),
           'labels'       => array(
-            'name'              => _x( 'Features', 'taxonomy general name', 'wpp' ),
-            'singular_name'     => _x( 'Feature', 'taxonomy singular name', 'wpp' ),
-            'search_items'      => __( 'Search Features', 'wpp' ),
-            'all_items'         => __( 'All Features', 'wpp' ),
-            'parent_item'       => __( 'Parent Feature', 'wpp' ),
-            'parent_item_colon' => __( 'Parent Feature:', 'wpp' ),
-            'edit_item'         => __( 'Edit Feature', 'wpp' ),
-            'update_item'       => __( 'Update Feature', 'wpp' ),
-            'add_new_item'      => __( 'Add New Feature', 'wpp' ),
-            'new_item_name'     => __( 'New Feature Name', 'wpp' ),
-            'menu_name'         => __( 'Feature', 'wpp' )
+            'name'              => _x( 'Features', 'taxonomy general name', ud_get_wp_property()->domain ),
+            'singular_name'     => _x( 'Feature', 'taxonomy singular name', ud_get_wp_property()->domain ),
+            'search_items'      => __( 'Search Features', ud_get_wp_property()->domain ),
+            'all_items'         => __( 'All Features', ud_get_wp_property()->domain ),
+            'parent_item'       => __( 'Parent Feature', ud_get_wp_property()->domain ),
+            'parent_item_colon' => __( 'Parent Feature:', ud_get_wp_property()->domain ),
+            'edit_item'         => __( 'Edit Feature', ud_get_wp_property()->domain ),
+            'update_item'       => __( 'Update Feature', ud_get_wp_property()->domain ),
+            'add_new_item'      => __( 'Add New Feature', ud_get_wp_property()->domain ),
+            'new_item_name'     => __( 'New Feature Name', ud_get_wp_property()->domain ),
+            'menu_name'         => __( 'Feature', ud_get_wp_property()->domain )
           ),
           'query_var'    => 'property_feature',
           'rewrite'      => array( 'slug' => 'feature' )
@@ -194,19 +194,19 @@ class WPP_F extends UsabilityDynamics\Utility {
           'show_ui'             => true,
           'show_in_nav_menus'   => true,
           'show_tagcloud'       => true,
-          'label'        => _x( 'Community Features', 'taxonomy general name', 'wpp' ),
+          'label'        => _x( 'Community Features', 'taxonomy general name', ud_get_wp_property()->domain ),
           'labels'       => array(
-            'name'              => _x( 'Community Features', 'taxonomy general name', 'wpp' ),
-            'singular_name'     => _x( 'Community Feature', 'taxonomy singular name', 'wpp' ),
-            'search_items'      => __( 'Search Community Features', 'wpp' ),
-            'all_items'         => __( 'All Community Features', 'wpp' ),
-            'parent_item'       => __( 'Parent Community Feature', 'wpp' ),
-            'parent_item_colon' => __( 'Parent Community Feature:', 'wpp' ),
-            'edit_item'         => __( 'Edit Community Feature', 'wpp' ),
-            'update_item'       => __( 'Update Community Feature', 'wpp' ),
-            'add_new_item'      => __( 'Add New Community Feature', 'wpp' ),
-            'new_item_name'     => __( 'New Community Feature Name', 'wpp' ),
-            'menu_name'         => __( 'Community Feature', 'wpp' )
+            'name'              => _x( 'Community Features', 'taxonomy general name', ud_get_wp_property()->domain ),
+            'singular_name'     => _x( 'Community Feature', 'taxonomy singular name', ud_get_wp_property()->domain ),
+            'search_items'      => __( 'Search Community Features', ud_get_wp_property()->domain ),
+            'all_items'         => __( 'All Community Features', ud_get_wp_property()->domain ),
+            'parent_item'       => __( 'Parent Community Feature', ud_get_wp_property()->domain ),
+            'parent_item_colon' => __( 'Parent Community Feature:', ud_get_wp_property()->domain ),
+            'edit_item'         => __( 'Edit Community Feature', ud_get_wp_property()->domain ),
+            'update_item'       => __( 'Update Community Feature', ud_get_wp_property()->domain ),
+            'add_new_item'      => __( 'Add New Community Feature', ud_get_wp_property()->domain ),
+            'new_item_name'     => __( 'New Community Feature Name', ud_get_wp_property()->domain ),
+            'menu_name'         => __( 'Community Feature', ud_get_wp_property()->domain )
           ),
           'query_var'    => 'community_feature',
           'rewrite'      => array( 'slug' => 'community_feature' )
@@ -220,17 +220,17 @@ class WPP_F extends UsabilityDynamics\Utility {
     $wp_properties[ 'taxonomies' ] = apply_filters( 'wpp_taxonomies', array() );
 
     ud_get_wp_property()->set( 'labels', apply_filters( 'wpp_object_labels', array(
-      'name'               => __( 'Properties', 'wpp' ),
-      'all_items'          => __( 'All Properties', 'wpp' ),
-      'singular_name'      => __( 'Property', 'wpp' ),
-      'add_new'            => __( 'Add Property', 'wpp' ),
-      'add_new_item'       => __( 'Add New Property', 'wpp' ),
-      'edit_item'          => __( 'Edit Property', 'wpp' ),
-      'new_item'           => __( 'New Property', 'wpp' ),
-      'view_item'          => __( 'View Property', 'wpp' ),
-      'search_items'       => __( 'Search Properties', 'wpp' ),
-      'not_found'          => __( 'No properties found', 'wpp' ),
-      'not_found_in_trash' => __( 'No properties found in Trash', 'wpp' ),
+      'name'               => __( 'Properties', ud_get_wp_property()->domain ),
+      'all_items'          => __( 'All Properties', ud_get_wp_property()->domain ),
+      'singular_name'      => __( 'Property', ud_get_wp_property()->domain ),
+      'add_new'            => __( 'Add Property', ud_get_wp_property()->domain ),
+      'add_new_item'       => __( 'Add New Property', ud_get_wp_property()->domain ),
+      'edit_item'          => __( 'Edit Property', ud_get_wp_property()->domain ),
+      'new_item'           => __( 'New Property', ud_get_wp_property()->domain ),
+      'view_item'          => __( 'View Property', ud_get_wp_property()->domain ),
+      'search_items'       => __( 'Search Properties', ud_get_wp_property()->domain ),
+      'not_found'          => __( 'No properties found', ud_get_wp_property()->domain ),
+      'not_found_in_trash' => __( 'No properties found in Trash', ud_get_wp_property()->domain ),
       'parent_item_colon'  => ''
     ) ) );
 
@@ -616,7 +616,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       }
     }
 
-    return $matched ? $matched : new WP_Error( 'encoding_error', __( 'Could not detect.', 'wpp' ) );
+    return $matched ? $matched : new WP_Error( 'encoding_error', __( 'Could not detect.', ud_get_wp_property()->domain ) );
 
   }
 
@@ -736,7 +736,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       return false;
     }
 
-    return sprintf( __( 'Set %1s properties to "%2s" property type', 'wpp' ), count( $success ), $property_type );
+    return sprintf( __( 'Set %1s properties to "%2s" property type', ud_get_wp_property()->domain ), count( $success ), $property_type );
 
   }
 
@@ -946,7 +946,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     $sortable_attrs = array();
 
     if( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'add_sort_by_title' ] ) && $wp_properties[ 'configuration' ][ 'property_overview' ][ 'add_sort_by_title' ] != 'false' ) {
-      $sortable_attrs[ 'post_title' ] = __( 'Title', 'wpp' );
+      $sortable_attrs[ 'post_title' ] = __( 'Title', ud_get_wp_property()->domain );
     }
 
     if( !empty( $wp_properties[ 'property_stats' ] ) && !empty( $wp_properties[ 'sortable_attributes' ] ) ) {
@@ -959,7 +959,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     //* If not set, menu_order will not be used at all if any of the attributes are marked as searchable */
     if( empty( $sortable_attrs ) ) {
-      $sortable_attrs[ 'menu_order' ] = __( 'Default', 'wpp' );
+      $sortable_attrs[ 'menu_order' ] = __( 'Default', ud_get_wp_property()->domain );
     }
 
     $sortable_attrs = apply_filters( 'wpp::get_sortable_keys', $sortable_attrs );
@@ -1107,7 +1107,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     $property_page = array(
-      'post_title'   => __( 'Properties', 'wpp' ),
+      'post_title'   => __( 'Properties', ud_get_wp_property()->domain ),
       'post_content' => '[property_overview]',
       'post_name'    => 'properties',
       'post_type'    => 'page',
@@ -1478,18 +1478,18 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     $return[ 'success' ] = 'true';
-    $return[ 'message' ] = sprintf( __( 'Updated %1$d %2$s using the %3$s localization.', 'wpp' ), ( $echo_result == 'true' ) ? $return[ 'updated' ] : count( $return[ 'updated' ] ), WPP_F::property_label( 'plural' ), $google_map_localizations[ $wp_properties[ 'configuration' ][ 'google_maps_localization' ] ] );
+    $return[ 'message' ] = sprintf( __( 'Updated %1$d %2$s using the %3$s localization.', ud_get_wp_property()->domain ), ( $echo_result == 'true' ) ? $return[ 'updated' ] : count( $return[ 'updated' ] ), WPP_F::property_label( 'plural' ), $google_map_localizations[ $wp_properties[ 'configuration' ][ 'google_maps_localization' ] ] );
 
     if( $return[ 'empty_address' ] ) {
-      $return[ 'message' ] .= "<br />" . sprintf( __( '%1$d %2$s has empty address.', 'wpp' ), ( $echo_result == 'true' ) ? $return[ 'empty_address' ] : count( $return[ 'empty_address' ] ), WPP_F::property_label( 'plural' ) );
+      $return[ 'message' ] .= "<br />" . sprintf( __( '%1$d %2$s has empty address.', ud_get_wp_property()->domain ), ( $echo_result == 'true' ) ? $return[ 'empty_address' ] : count( $return[ 'empty_address' ] ), WPP_F::property_label( 'plural' ) );
     }
 
     if( $return[ 'failed' ] ) {
-      $return[ 'message' ] .= "<br />" . sprintf( __( '%1$d %2$s could not be updated.', 'wpp' ), ( $echo_result == 'true' ) ? $return[ 'failed' ] : count( $return[ 'failed' ] ), WPP_F::property_label( 'plural' ) );
+      $return[ 'message' ] .= "<br />" . sprintf( __( '%1$d %2$s could not be updated.', ud_get_wp_property()->domain ), ( $echo_result == 'true' ) ? $return[ 'failed' ] : count( $return[ 'failed' ] ), WPP_F::property_label( 'plural' ) );
     }
 
     if( $return[ 'over_query_limit' ] ) {
-      $return[ 'message' ] .= "<br />" . sprintf( __( '%1$d %2$s was ignored because query limit was exceeded.', 'wpp' ), ( $echo_result == 'true' ) ? $return[ 'over_query_limit' ] : count( $return[ 'over_query_limit' ] ), WPP_F::property_label( 'plural' ) );
+      $return[ 'message' ] .= "<br />" . sprintf( __( '%1$d %2$s was ignored because query limit was exceeded.', ud_get_wp_property()->domain ), ( $echo_result == 'true' ) ? $return[ 'over_query_limit' ] : count( $return[ 'over_query_limit' ] ), WPP_F::property_label( 'plural' ) );
     }
 
     //** Warning Silincer */
@@ -2173,7 +2173,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       wpp_recursive_unlink( $cache_dir );
     }
 
-    return __( 'Cache was successfully cleared', 'wpp' );
+    return __( 'Cache was successfully cleared', ud_get_wp_property()->domain );
   }
 
   /**
@@ -2343,7 +2343,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     try {
       if( empty( $data[ 'wpp_settings' ] ) || !wp_verify_nonce( $data[ '_wpnonce' ], 'wpp_setting_save' ) ) {
-        throw new Exception( __( 'Request can not be verified.', 'wpp' ) );
+        throw new Exception( __( 'Request can not be verified.', ud_get_wp_property()->domain ) );
       }
       //** Allow features to preserve their settings that are not configured on the settings page */
       $wpp_settings = apply_filters( 'wpp_settings_save', $data[ 'wpp_settings' ], $wp_properties );
@@ -3748,7 +3748,7 @@ class WPP_F extends UsabilityDynamics\Utility {
   static public function get_attrib_annex( $attrib ) {
 
     if( $attrib == 'area' ) {
-      return __( ' sq ft.', 'wpp' );
+      return __( ' sq ft.', ud_get_wp_property()->domain );
     }
 
   }
@@ -4004,7 +4004,7 @@ class WPP_F extends UsabilityDynamics\Utility {
                 <div class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_directions_link">
                   <a target="_blank"
                      href="http://maps.google.com/maps?gl=us&daddr=<?php echo $property[ 'latitude' ] ?>,<?php  echo $property[ 'longitude' ]; ?>"
-                     class="btn btn-info"><?php _e( 'Get Directions', 'wpp' ) ?></a>
+                     class="btn btn-info"><?php _e( 'Get Directions', ud_get_wp_property()->domain ) ?></a>
                 </div>
               <?php endif; ?>
             </td>
@@ -4015,7 +4015,7 @@ class WPP_F extends UsabilityDynamics\Utility {
               <div class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_directions_link">
                 <a target="_blank"
                    href="http://maps.google.com/maps?gl=us&daddr=<?php echo $property[ 'latitude' ] ?>,<?php  echo $property[ 'longitude' ]; ?>"
-                   class="btn btn-info"><?php _e( 'Get Directions', 'wpp' ) ?></a>
+                   class="btn btn-info"><?php _e( 'Get Directions', ud_get_wp_property()->domain ) ?></a>
               </div>
             <?php
             }
@@ -4038,7 +4038,7 @@ class WPP_F extends UsabilityDynamics\Utility {
                   if( $wp_properties[ 'configuration' ][ 'google_maps' ][ 'show_true_as_image' ] == 'true' ) {
                     $value = '<div class="true-checkbox-image"></div>';
                   } else {
-                    $value = __( 'Yes', 'wpp' );
+                    $value = __( 'Yes', ud_get_wp_property()->domain );
                   }
                 } elseif( $value == 'false' ) {
                   continue;
@@ -4243,29 +4243,29 @@ class WPP_F extends UsabilityDynamics\Utility {
    */
   static public function strings_for_translations() {
 
-    __( 'General Settings', 'wpp' );
-    __( 'Find your property', 'wpp' );
-    __( 'Edit', 'wpp' );
-    __( 'City', 'wpp' );
-    __( 'Contact us', 'wpp' );
-    __( 'Login', 'wpp' );
-    __( 'Explore', 'wpp' );
-    __( 'Message', 'wpp' );
-    __( 'Phone Number', 'wpp' );
-    __( 'Name', 'wpp' );
-    __( 'E-mail', 'wpp' );
-    __( 'Send Message', 'wpp' );
-    __( 'Submit Inquiry', 'wpp' );
-    __( 'Inquiry', 'wpp' );
-    __( 'Comment About', 'wpp' );
-    __( 'Inquire About', 'wpp' );
-    __( 'Inquiry About:', 'wpp' );
-    __( 'Inquiry message:', 'wpp' );
-    __( 'You forgot to enter your e-mail.', 'wpp' );
-    __( 'You forgot to enter a message.', 'wpp' );
-    __( 'You forgot to enter your  name.', 'wpp' );
-    __( 'Error with sending message. Please contact site administrator.', 'wpp' );
-    __( 'Thank you for your message.', 'wpp' );
+    __( 'General Settings', ud_get_wp_property()->domain );
+    __( 'Find your property', ud_get_wp_property()->domain );
+    __( 'Edit', ud_get_wp_property()->domain );
+    __( 'City', ud_get_wp_property()->domain );
+    __( 'Contact us', ud_get_wp_property()->domain );
+    __( 'Login', ud_get_wp_property()->domain );
+    __( 'Explore', ud_get_wp_property()->domain );
+    __( 'Message', ud_get_wp_property()->domain );
+    __( 'Phone Number', ud_get_wp_property()->domain );
+    __( 'Name', ud_get_wp_property()->domain );
+    __( 'E-mail', ud_get_wp_property()->domain );
+    __( 'Send Message', ud_get_wp_property()->domain );
+    __( 'Submit Inquiry', ud_get_wp_property()->domain );
+    __( 'Inquiry', ud_get_wp_property()->domain );
+    __( 'Comment About', ud_get_wp_property()->domain );
+    __( 'Inquire About', ud_get_wp_property()->domain );
+    __( 'Inquiry About:', ud_get_wp_property()->domain );
+    __( 'Inquiry message:', ud_get_wp_property()->domain );
+    __( 'You forgot to enter your e-mail.', ud_get_wp_property()->domain );
+    __( 'You forgot to enter a message.', ud_get_wp_property()->domain );
+    __( 'You forgot to enter your  name.', ud_get_wp_property()->domain );
+    __( 'Error with sending message. Please contact site administrator.', ud_get_wp_property()->domain );
+    __( 'Thank you for your message.', ud_get_wp_property()->domain );
   }
 
   /**
@@ -4367,25 +4367,25 @@ class WPP_F extends UsabilityDynamics\Utility {
   static public function property_page_property_settings_load() {
 
     //** Default Help items */
-    $contextual_help[ 'Main' ][ ] = '<h3>' . __( 'Default Properties Page', 'wpp' ) . '</h3>';
-    $contextual_help[ 'Main' ][ ] = '<p>' . __( 'The default <b>property page</b> will be used to display property search results, as well as be the base for property URLs. ', 'wpp' ) . '</p>';
-    $contextual_help[ 'Main' ][ ] = '<p>' . sprintf( __( 'By default, the <b>Default Properties Page</b> is set to <b>%s</b>, which is a dynamically created page used for displaying property search results. ', 'wpp' ), 'property' ) . '</p>';
-    $contextual_help[ 'Main' ][ ] = '<p>' . __( 'We recommend you create an actual WordPress page to be used as the <b>Default Properties Page</b>. For example, you may create a root page called "Real Estate" - the URL of the default property page will be ' . get_bloginfo( 'url' ) . '<b>/real_estate/</b>, and you properties will have the URLs of ' . get_bloginfo( 'url' ) . '/real_estate/<b>property_name</b>/', 'wpp' ) . '</p>';
+    $contextual_help[ 'Main' ][ ] = '<h3>' . __( 'Default Properties Page', ud_get_wp_property()->domain ) . '</h3>';
+    $contextual_help[ 'Main' ][ ] = '<p>' . __( 'The default <b>property page</b> will be used to display property search results, as well as be the base for property URLs. ', ud_get_wp_property()->domain ) . '</p>';
+    $contextual_help[ 'Main' ][ ] = '<p>' . sprintf( __( 'By default, the <b>Default Properties Page</b> is set to <b>%s</b>, which is a dynamically created page used for displaying property search results. ', ud_get_wp_property()->domain ), 'property' ) . '</p>';
+    $contextual_help[ 'Main' ][ ] = '<p>' . __( 'We recommend you create an actual WordPress page to be used as the <b>Default Properties Page</b>. For example, you may create a root page called "Real Estate" - the URL of the default property page will be ' . get_bloginfo( 'url' ) . '<b>/real_estate/</b>, and you properties will have the URLs of ' . get_bloginfo( 'url' ) . '/real_estate/<b>property_name</b>/', ud_get_wp_property()->domain ) . '</p>';
 
-    $contextual_help[ 'Display' ][ ] = '<h3>' . __( 'Display', 'wpp' ) . '</h3>';
-    $contextual_help[ 'Display' ][ ] = '<p>' . __( 'This tab allows you to do many things. Make custom picture sizes that will let you to make posting pictures easier. Change the way you view property photos with the use of Fancy Box, Choose  to use pagination on the bottom of property pages and whether or not to show child properties. Manage Google map attributes and map thumbnail sizes. Select here which attributes you want to show once a property is pin pointed on your map. Change your currency and placement of symbols.', 'wpp' ) . '</p>';
+    $contextual_help[ 'Display' ][ ] = '<h3>' . __( 'Display', ud_get_wp_property()->domain ) . '</h3>';
+    $contextual_help[ 'Display' ][ ] = '<p>' . __( 'This tab allows you to do many things. Make custom picture sizes that will let you to make posting pictures easier. Change the way you view property photos with the use of Fancy Box, Choose  to use pagination on the bottom of property pages and whether or not to show child properties. Manage Google map attributes and map thumbnail sizes. Select here which attributes you want to show once a property is pin pointed on your map. Change your currency and placement of symbols.', ud_get_wp_property()->domain ) . '</p>';
 
-    $contextual_help[ 'Premium Features' ][ ] = '<h3>' . __( 'Premium Features', 'wpp' ) . '</h3>';
-    $contextual_help[ 'Premium Features' ][ ] = '<p>' . __( 'Tab allows you to manage your WP-Property Premium Features', 'wpp' ) . '</p>';
+    $contextual_help[ 'Premium Features' ][ ] = '<h3>' . __( 'Premium Features', ud_get_wp_property()->domain ) . '</h3>';
+    $contextual_help[ 'Premium Features' ][ ] = '<p>' . __( 'Tab allows you to manage your WP-Property Premium Features', ud_get_wp_property()->domain ) . '</p>';
 
-    $contextual_help[ 'Help' ][ ] = '<h3>' . __( 'Help', 'wpp' ) . '</h3>';
-    $contextual_help[ 'Help' ][ ] = '<p>' . __( 'This tab will help you troubleshoot your plugin, do exports and check for updates for Premium Features', 'wpp' ) . '</p>';
+    $contextual_help[ 'Help' ][ ] = '<h3>' . __( 'Help', ud_get_wp_property()->domain ) . '</h3>';
+    $contextual_help[ 'Help' ][ ] = '<p>' . __( 'This tab will help you troubleshoot your plugin, do exports and check for updates for Premium Features', ud_get_wp_property()->domain ) . '</p>';
 
     //** Hook this action is you want to add info */
     $contextual_help = apply_filters( 'property_page_property_settings_help', $contextual_help );
 
-    $contextual_help[ 'More Help' ][ ] = '<h3>' . __( 'More Help', 'wpp' ) . '</h3>';
-    $contextual_help[ 'More Help' ][ ] = '<p>' . __( 'Visit <a target="_blank" href="https://usabilitydynamics.com/products/wp-property/">WP-Property Help Page</a> on UsabilityDynamics.com for more help.', 'wpp' ) . '</>';
+    $contextual_help[ 'More Help' ][ ] = '<h3>' . __( 'More Help', ud_get_wp_property()->domain ) . '</h3>';
+    $contextual_help[ 'More Help' ][ ] = '<p>' . __( 'Visit <a target="_blank" href="https://usabilitydynamics.com/products/wp-property/">WP-Property Help Page</a> on UsabilityDynamics.com for more help.', ud_get_wp_property()->domain ) . '</>';
 
     do_action( 'wpp_contextual_help', array( 'contextual_help' => $contextual_help ) );
 
@@ -4521,7 +4521,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       if( !empty( $_REQUEST[ 'signed_request' ] ) && strstr( $_SERVER[ 'HTTP_REFERER' ], 'facebook.com' ) ) {
 
         //** Show message */
-        die( sprintf( __( 'You cannot use your site as Facebook Application. You should <a href="%s">purchase</a> WP-Property Premium Feature "Facebook Tabs" to manage your Facebook Tabs.', 'wpp' ), 'https://usabilitydynamics.com/products/wp-property/premium/' ) );
+        die( sprintf( __( 'You cannot use your site as Facebook Application. You should <a href="%s">purchase</a> WP-Property Premium Feature "Facebook Tabs" to manage your Facebook Tabs.', ud_get_wp_property()->domain ), 'https://usabilitydynamics.com/products/wp-property/premium/' ) );
       }
     }
   }
@@ -4904,19 +4904,19 @@ class WPP_F extends UsabilityDynamics\Utility {
   static public function clear_post_status( $post_status = '', $ucfirst = true ) {
     switch( $post_status ) {
       case 'publish':
-        $post_status = __( 'published', 'wpp' );
+        $post_status = __( 'published', ud_get_wp_property()->domain );
         break;
       case 'pending':
-        $post_status = __( 'pending', 'wpp' );
+        $post_status = __( 'pending', ud_get_wp_property()->domain );
         break;
       case 'trash':
-        $post_status = __( 'trashed', 'wpp' );
+        $post_status = __( 'trashed', ud_get_wp_property()->domain );
         break;
       case 'inherit':
-        $post_status = __( 'inherited', 'wpp' );
+        $post_status = __( 'inherited', ud_get_wp_property()->domain );
         break;
       case 'auto-draft':
-        $post_status = __( 'drafted', 'wpp' );
+        $post_status = __( 'drafted', ud_get_wp_property()->domain );
         break;
     }
     return ( $ucfirst ? ucfirst( $post_status ) : $post_status );

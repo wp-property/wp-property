@@ -62,7 +62,7 @@ if( !class_exists( 'class_admin_tools' ) ) {
      */
     static function add_capability( $capabilities ) {
 
-      $capabilities[ self::$capability ] = __( 'Manage Admin Tools', 'wpp' );
+      $capabilities[ self::$capability ] = __( 'Manage Admin Tools', ud_get_wp_property()->domain );
 
       return $capabilities;
     }
@@ -77,18 +77,18 @@ if( !class_exists( 'class_admin_tools' ) ) {
      */
     static function wpp_contextual_help( $data ) {
 
-      $data[ 'Developer' ][ ] = '<h3>' . __( 'Developer', 'wpp' ) . '</h3>';
-      $data[ 'Developer' ][ ] = '<p>' . __( 'The <b>slug</b> is automatically created from the title and is used in the back-end.  It is also used for template selection, example: floorplan will look for a template called property-floorplan.php in your theme folder, or default to property.php if nothing is found.' ) . '</p>';
-      $data[ 'Developer' ][ ] = '<p>' . __( 'If <b>Searchable</b> is checked then the property will be loaded for search, and available on the property search widget.' ) . '</p>';
-      $data[ 'Developer' ][ ] = '<p>' . __( 'If <b>Location Matters</b> is checked, then an address field will be displayed for the property, and validated against Google Maps API.  Additionally, the property will be displayed on the SuperMap, if the feature is installed.' ) . '</p>';
-      $data[ 'Developer' ][ ] = '<p>' . __( 'If <b>Not Public</b> is checked, then listings of type will not be displayed on front-end.' ) . '</p>';
-      $data[ 'Developer' ][ ] = '<p>' . __( '<b>Hidden Attributes</b> determine which attributes are not applicable to the given property type, and will be grayed out in the back-end.' ) . '</p>';
-      $data[ 'Developer' ][ ] = '<p>' . __( '<b>Inheritance</b> determines which attributes should be automatically inherited from the parent property' ) . '</p>';
-      $data[ 'Developer' ][ ] = '<p>' . __( 'Property attributes are meant to be short entries that can be searchable, on the back-end attributes will be displayed as single-line input boxes. On the front-end they are displayed using a definitions list.' ) . '</p>';
-      $data[ 'Developer' ][ ] = '<p>' . __( 'Making an attribute as "searchable" will list it as one of the searchable options in the Property Search widget settings.' ) . '</p>';
-      $data[ 'Developer' ][ ] = '<p>' . __( 'Be advised, attributes added via add_filter() function supercede the settings on this page.' ) . '</p>';
-      $data[ 'Developer' ][ ] = '<p>' . __( '<b>Search Input:</b> Select and input type and enter comma-separated values that you would like to be used in property search, on the front-end.', 'wpp' ) . '</p>';
-      $data[ 'Developer' ][ ] = '<p>' . __( '<b>Data Entry:</b> Enter comma-separated values that you would like to use on the back-end when editing properties.', 'wpp' ) . '</p>';
+      $data[ 'Developer' ][ ] = '<h3>' . __( 'Developer', ud_get_wp_property()->domain ) . '</h3>';
+      $data[ 'Developer' ][ ] = '<p>' . __( 'The <b>slug</b> is automatically created from the title and is used in the back-end.  It is also used for template selection, example: floorplan will look for a template called property-floorplan.php in your theme folder, or default to property.php if nothing is found.', ud_get_wp_property()->domain ) . '</p>';
+      $data[ 'Developer' ][ ] = '<p>' . __( 'If <b>Searchable</b> is checked then the property will be loaded for search, and available on the property search widget.', ud_get_wp_property()->domain ) . '</p>';
+      $data[ 'Developer' ][ ] = '<p>' . __( 'If <b>Location Matters</b> is checked, then an address field will be displayed for the property, and validated against Google Maps API.  Additionally, the property will be displayed on the SuperMap, if the feature is installed.', ud_get_wp_property()->domain ) . '</p>';
+      $data[ 'Developer' ][ ] = '<p>' . __( 'If <b>Not Public</b> is checked, then listings of type will not be displayed on front-end.', ud_get_wp_property()->domain ) . '</p>';
+      $data[ 'Developer' ][ ] = '<p>' . __( '<b>Hidden Attributes</b> determine which attributes are not applicable to the given property type, and will be grayed out in the back-end.', ud_get_wp_property()->domain ) . '</p>';
+      $data[ 'Developer' ][ ] = '<p>' . __( '<b>Inheritance</b> determines which attributes should be automatically inherited from the parent property', ud_get_wp_property()->domain ) . '</p>';
+      $data[ 'Developer' ][ ] = '<p>' . __( 'Property attributes are meant to be short entries that can be searchable, on the back-end attributes will be displayed as single-line input boxes. On the front-end they are displayed using a definitions list.', ud_get_wp_property()->domain ) . '</p>';
+      $data[ 'Developer' ][ ] = '<p>' . __( 'Making an attribute as "searchable" will list it as one of the searchable options in the Property Search widget settings.', ud_get_wp_property()->domain ) . '</p>';
+      $data[ 'Developer' ][ ] = '<p>' . __( 'Be advised, attributes added via add_filter() function supercede the settings on this page.', ud_get_wp_property()->domain ) . '</p>';
+      $data[ 'Developer' ][ ] = '<p>' . __( '<b>Search Input:</b> Select and input type and enter comma-separated values that you would like to be used in property search, on the front-end.', ud_get_wp_property()->domain ) . '</p>';
+      $data[ 'Developer' ][ ] = '<p>' . __( '<b>Data Entry:</b> Enter comma-separated values that you would like to use on the back-end when editing properties.', ud_get_wp_property()->domain ) . '</p>';
 
       return $data;
 
@@ -104,7 +104,7 @@ if( !class_exists( 'class_admin_tools' ) ) {
 
       $tabs[ 'admin_tools' ] = array(
         'slug'  => 'admin_tools',
-        'title' => __( 'Developer', 'wpp' )
+        'title' => __( 'Developer', ud_get_wp_property()->domain )
       );
 
       return $tabs;
