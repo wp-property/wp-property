@@ -15,10 +15,10 @@ class SearchPropertiesWidget extends WP_Widget {
 
     parent::__construct(
         false,
-        sprintf( __( '%1s Search', 'wpp' ), WPP_F::property_label() ),
+        sprintf( __( '%1s Search', ud_get_wp_property()->domain ), WPP_F::property_label() ),
         array(
             'classname' => 'wpp_property_attributes',
-            'description' => sprintf( __( 'Display a highly customizable  %1s search form.', 'wpp' ), $property_label )
+            'description' => sprintf( __( 'Display a highly customizable  %1s search form.', ud_get_wp_property()->domain ), $property_label )
         ),
         array(
             'width' => 300
@@ -181,7 +181,7 @@ class SearchPropertiesWidget extends WP_Widget {
 
     /** Set label for list below only */
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
-      $property_stats[ 'property_type' ] = __( 'Property Type', 'wpp' );
+      $property_stats[ 'property_type' ] = __( 'Property Type', ud_get_wp_property()->domain );
     }
 
     if ( is_array( $all_searchable_property_types ) && count( $all_searchable_property_types ) > 1 ) {
@@ -225,7 +225,7 @@ class SearchPropertiesWidget extends WP_Widget {
 
     //** If the search widget cannot be created without some data, we bail */
     if ( !empty( $error ) ) {
-      echo '<p>' . _e( 'No searchable property types were found.', 'wpp' ) . '</p>';
+      echo '<p>' . _e( 'No searchable property types were found.', ud_get_wp_property()->domain ) . '</p>';
       return;
     }
 
@@ -235,14 +235,14 @@ class SearchPropertiesWidget extends WP_Widget {
         class="wpp_widget wpp_property_search_wrapper">
 
       <li class="<?php echo $this->get_field_id( 'title' ); ?>">
-        <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'wpp' ); ?>
+        <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', ud_get_wp_property()->domain ); ?>
           <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
                  name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>"/>
         </label>
       </li>
 
       <li class="wpp_property_types">
-        <p><?php _e( 'Property types to search:', 'wpp' ); ?></p>
+        <p><?php _e( 'Property types to search:', ud_get_wp_property()->domain ); ?></p>
         <ul>
           <?php foreach ( $all_searchable_property_types as $property_type ) { ?>
             <li>
@@ -263,15 +263,15 @@ class SearchPropertiesWidget extends WP_Widget {
       </li>
 
       <li class="wpp_attribute_selection">
-        <p><?php _e( 'Select the attributes you want to search.', 'wpp' ); ?></p>
+        <p><?php _e( 'Select the attributes you want to search.', ud_get_wp_property()->domain ); ?></p>
 
         <div class="wpp_search_widget_tab wpp_subtle_tabs ">
 
           <ul class="wpp_section_tabs  tabs">
-            <li><a href="#all_atributes_<?php echo $this->id; ?>"><?php _e( 'All Attributes', 'wpp' ); ?></a></li>
+            <li><a href="#all_atributes_<?php echo $this->id; ?>"><?php _e( 'All Attributes', ud_get_wp_property()->domain ); ?></a></li>
 
             <?php if ( $stats_by_groups ) { ?>
-              <li><a href="#grouped_attributes_<?php echo $this->id; ?>"><?php _e( 'Grouped Attributes', 'wpp' ); ?></a>
+              <li><a href="#grouped_attributes_<?php echo $this->id; ?>"><?php _e( 'Grouped Attributes', ud_get_wp_property()->domain ); ?></a>
               </li>
             <?php } ?>
           </ul>
@@ -299,7 +299,7 @@ class SearchPropertiesWidget extends WP_Widget {
 
               <?php foreach ( $stats_by_groups as $gslug => $gstats ) { ?>
                 <?php if ( $main_stats_group != $gslug || !key_exists( $gslug, $groups ) ) { ?>
-                  <?php $group_name = ( key_exists( $gslug, $groups ) ? $groups[ $gslug ][ 'name' ] : "<span style=\"color:#8C8989\">" . __( 'Ungrouped', 'wpp' ) . "</span>" ); ?>
+                  <?php $group_name = ( key_exists( $gslug, $groups ) ? $groups[ $gslug ][ 'name' ] : "<span style=\"color:#8C8989\">" . __( 'Ungrouped', ud_get_wp_property()->domain ) . "</span>" ); ?>
                   <h2 class="wpp_stats_group"><?php echo $group_name; ?></h2>
                 <?php } ?>
                 <ul>
@@ -346,7 +346,7 @@ class SearchPropertiesWidget extends WP_Widget {
             <?php if ( !empty( $wp_properties[ 'sortable_attributes' ] ) && is_array( $wp_properties[ 'sortable_attributes' ] ) ) : ?>
               <li class="wpp_development_advanced_option">
                 <div><label
-                      for="<?php echo $this->get_field_id( 'sort_by' ); ?>"><?php _e( 'Default Sort Order', 'wpp' ); ?></label>
+                      for="<?php echo $this->get_field_id( 'sort_by' ); ?>"><?php _e( 'Default Sort Order', ud_get_wp_property()->domain ); ?></label>
                 </div>
                 <select id="<?php echo $this->get_field_id( 'sort_by' ); ?>"
                         name="<?php echo $this->get_field_name( 'sort_by' ); ?>">
@@ -360,8 +360,8 @@ class SearchPropertiesWidget extends WP_Widget {
                 <select id="<?php echo $this->get_field_id( 'sort_order' ); ?>"
                         name="<?php echo $this->get_field_name( 'sort_order' ); ?>">
                   <option></option>
-                  <option value="DESC"  <?php selected( $sort_order, 'DESC' ); ?> ><?php _e( 'Descending', 'wpp' ); ?></option>
-                  <option value="ASC"  <?php selected( $sort_order, 'ASC' ); ?> ><?php _e( 'Ascending', 'wpp' ); ?></option>
+                  <option value="DESC"  <?php selected( $sort_order, 'DESC' ); ?> ><?php _e( 'Descending', ud_get_wp_property()->domain ); ?></option>
+                  <option value="ASC"  <?php selected( $sort_order, 'ASC' ); ?> ><?php _e( 'Ascending', ud_get_wp_property()->domain ); ?></option>
                 </select>
 
               </li>
@@ -372,7 +372,7 @@ class SearchPropertiesWidget extends WP_Widget {
                 <input id="<?php echo $this->get_field_id( 'use_pagi' ); ?>"
                        name="<?php echo $this->get_field_name( 'use_pagi' ); ?>" type="checkbox"
                        value="on" <?php if ( $use_pagi == 'on' ) echo " checked='checked';"; ?> />
-                <?php _e( 'Use pagination', 'wpp' ); ?>
+                <?php _e( 'Use pagination', ud_get_wp_property()->domain ); ?>
               </label>
             </li>
 
@@ -381,12 +381,12 @@ class SearchPropertiesWidget extends WP_Widget {
                 <input id="<?php echo $this->get_field_id( 'strict_search' ); ?>"
                        name="<?php echo $this->get_field_name( 'strict_search' ); ?>" type="checkbox"
                        value="on" <?php if ( $strict_search == 'on' ) echo " checked='checked';"; ?> />
-                <?php _e( 'Strict Search', 'wpp' ); ?>
+                <?php _e( 'Strict Search', ud_get_wp_property()->domain ); ?>
               </label>
             </li>
 
             <li class="wpp_development_advanced_option">
-              <label for="<?php echo $this->get_field_id( 'per_page' ); ?>"><?php _e( 'Items per page', 'wpp' ); ?>
+              <label for="<?php echo $this->get_field_id( 'per_page' ); ?>"><?php _e( 'Items per page', ud_get_wp_property()->domain ); ?>
                 <input style="width:30px" id="<?php echo $this->get_field_id( 'per_page' ); ?>"
                        name="<?php echo $this->get_field_name( 'per_page' ); ?>" type="text"
                        value="<?php echo $per_page; ?>"/>
@@ -394,7 +394,7 @@ class SearchPropertiesWidget extends WP_Widget {
             </li>
 
             <li>
-              <span class="wpp_show_advanced"><?php _e( 'Toggle Advanced Search Options', 'wpp' ); ?></span>
+              <span class="wpp_show_advanced"><?php _e( 'Toggle Advanced Search Options', ud_get_wp_property()->domain ); ?></span>
             </li>
           </ul>
         </div>

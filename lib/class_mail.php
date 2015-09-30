@@ -32,7 +32,7 @@ class WPP_Mail {
       'trigger_action' => 'wpp_default_action',
       'data' => array(),
       'user' => false,
-      'subject' => __( 'No Subject', 'wpp' ),
+      'subject' => __( 'No Subject', ud_get_wp_property()->domain ),
       'message' => '',
       'crm_log_message' => '',
     ) );
@@ -52,11 +52,11 @@ class WPP_Mail {
 
     $notification[ 'trigger_action' ] = 'feps_use_account_created';
     $notification[ 'user' ] = $user_id;
-    $notification[ 'subject' ] = __( 'Account Created', 'wpp' );
-    $notification[ 'message' ] = sprintf( __( 'Hello [display_name]%1$s%1$sYour account on [site_url] has been created and is waiting for activation.%1$s%1$sClick this link to activate your account:%1$s[activation_link]%1$s%1$sAccess data:%1$s[user_login] / [user_password]', 'wpp' ), PHP_EOL );
-    $notification[ 'crm_log_message' ] = __( 'New User account created.', 'wpp' );
+    $notification[ 'subject' ] = __( 'Account Created', ud_get_wp_property()->domain );
+    $notification[ 'message' ] = sprintf( __( 'Hello [display_name]%1$s%1$sYour account on [site_url] has been created and is waiting for activation.%1$s%1$sClick this link to activate your account:%1$s[activation_link]%1$s%1$sAccess data:%1$s[user_login] / [user_password]', ud_get_wp_property()->domain ), PHP_EOL );
+    $notification[ 'crm_log_message' ] = __( 'New User account created.', ud_get_wp_property()->domain );
 
-    $notification[ 'data' ][ 'notification_type' ] = __( 'User Account Created', 'wpp' );
+    $notification[ 'data' ][ 'notification_type' ] = __( 'User Account Created', ud_get_wp_property()->domain );
     $notification[ 'data' ][ 'user_email' ] = $user_data->data->user_email;
     $notification[ 'data' ][ 'display_name' ] = $user_data->data->display_name;
     $notification[ 'data' ][ 'user_login' ] = $new_user[ 'user_login' ];
@@ -87,11 +87,11 @@ class WPP_Mail {
 
     $notification[ 'trigger_action' ] = 'pending_property_approve';
     $notification[ 'user' ] = $user;
-    $notification[ 'subject' ] = __( 'Submission Approved', 'wpp' );
-    $notification[ 'message' ] = sprintf( __( 'Hello.%1$s%1$sYour %2$s has been published.%1$s%1$sYou can view it using this URL: %1$s[property_link]', 'wpp' ), PHP_EOL, WPP_F::property_label( 'singular' ) );
-    $notification[ 'crm_log_message' ] = sprintf( __( 'User-submitted %1$s ([property_title]) approved and published.', 'wpp' ), WPP_F::property_label( 'singular' ) );
+    $notification[ 'subject' ] = __( 'Submission Approved', ud_get_wp_property()->domain );
+    $notification[ 'message' ] = sprintf( __( 'Hello.%1$s%1$sYour %2$s has been published.%1$s%1$sYou can view it using this URL: %1$s[property_link]', ud_get_wp_property()->domain ), PHP_EOL, WPP_F::property_label( 'singular' ) );
+    $notification[ 'crm_log_message' ] = sprintf( __( 'User-submitted %1$s ([property_title]) approved and published.', ud_get_wp_property()->domain ), WPP_F::property_label( 'singular' ) );
 
-    $notification[ 'data' ][ 'notification_type' ] = __( 'Submission Approved', 'wpp' );
+    $notification[ 'data' ][ 'notification_type' ] = __( 'Submission Approved', ud_get_wp_property()->domain );
     $notification[ 'data' ][ 'user_email' ] = $user->data->user_email;
     $notification[ 'data' ][ 'display_name' ] = $user->data->display_name;
     $notification[ 'data' ][ 'site_url' ] = site_url();
@@ -124,11 +124,11 @@ class WPP_Mail {
 
     $notification[ 'trigger_action' ] = 'feps_status_updated';
     $notification[ 'user' ] = $user;
-    $notification[ 'subject' ] = __( 'Status Updated', 'wpp' );
-    $notification[ 'message' ] = sprintf( __( 'Hello.%1$s%1$sYour %2$s status has been updated.%1$s%1$sYou can view it using this URL: %1$s[property_link]', 'wpp' ), PHP_EOL, WPP_F::property_label( 'singular' ) );
-    $notification[ 'crm_log_message' ] = sprintf( __( 'FEPS %1$s ([property_title]) status has been changed.', 'wpp' ), WPP_F::property_label( 'singular' ) );
+    $notification[ 'subject' ] = __( 'Status Updated', ud_get_wp_property()->domain );
+    $notification[ 'message' ] = sprintf( __( 'Hello.%1$s%1$sYour %2$s status has been updated.%1$s%1$sYou can view it using this URL: %1$s[property_link]', ud_get_wp_property()->domain ), PHP_EOL, WPP_F::property_label( 'singular' ) );
+    $notification[ 'crm_log_message' ] = sprintf( __( 'FEPS %1$s ([property_title]) status has been changed.', ud_get_wp_property()->domain ), WPP_F::property_label( 'singular' ) );
 
-    $notification[ 'data' ][ 'notification_type' ] = __( 'Status Updated', 'wpp' );
+    $notification[ 'data' ][ 'notification_type' ] = __( 'Status Updated', ud_get_wp_property()->domain );
     $notification[ 'data' ][ 'site_url' ] = site_url();
     $notification[ 'data' ][ 'user_email' ] = $user->data->user_email;
     $notification[ 'data' ][ 'display_name' ] = $user->data->display_name;
@@ -160,11 +160,11 @@ class WPP_Mail {
 
     $notification[ 'trigger_action' ] = 'pending_property_added';
     $notification[ 'user' ] = $user;
-    $notification[ 'subject' ] = __( 'Submission Received', 'wpp' );
-    $notification[ 'message' ] = sprintf( __( 'Hello.%1$s%1$sYour %2$s has been received.%1$s%1$sYou can view it using this URL:%1$s[pending_url]', 'wpp' ), PHP_EOL, WPP_F::property_label( 'singular' ) );
-    $notification[ 'crm_log_message' ] = sprintf( __( 'User submitted %1$s ([property_title]) using FEPS.', 'wpp' ), WPP_F::property_label( 'singular' ) );
+    $notification[ 'subject' ] = __( 'Submission Received', ud_get_wp_property()->domain );
+    $notification[ 'message' ] = sprintf( __( 'Hello.%1$s%1$sYour %2$s has been received.%1$s%1$sYou can view it using this URL:%1$s[pending_url]', ud_get_wp_property()->domain ), PHP_EOL, WPP_F::property_label( 'singular' ) );
+    $notification[ 'crm_log_message' ] = sprintf( __( 'User submitted %1$s ([property_title]) using FEPS.', ud_get_wp_property()->domain ), WPP_F::property_label( 'singular' ) );
 
-    $notification[ 'data' ][ 'notification_type' ] = __( 'Submission Received', 'wpp' );
+    $notification[ 'data' ][ 'notification_type' ] = __( 'Submission Received', ud_get_wp_property()->domain );
     $notification[ 'data' ][ 'display_name' ] = $user->data->display_name;
     $notification[ 'data' ][ 'user_email' ] = $user->data->user_email;
     $notification[ 'data' ][ 'site_url' ] = site_url();

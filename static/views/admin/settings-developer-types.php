@@ -7,15 +7,15 @@
 global $wp_properties;
 
 ?>
-<h3><?php printf( __( '%1s Types', 'wpp' ), WPP_F::property_label() ); ?></h3>
+<h3><?php printf( __( '%1s Types', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></h3>
 <table id="wpp_inquiry_property_types" class="ud_ui_dynamic_table widefat" allow_random_slug="true">
   <thead>
   <tr>
-    <th><?php _e( 'Type', 'wpp' ) ?></th>
-    <th><?php _e( 'Slug', 'wpp' ) ?></th>
-    <th><?php _e( 'Settings', 'wpp' ) ?></th>
-    <th><?php _e( 'Hidden Attributes', 'wpp' ) ?></th>
-    <th><?php _e( 'Inherit from Parent', 'wpp' ) ?></th>
+    <th><?php _e( 'Type', ud_get_wp_property()->domain ) ?></th>
+    <th><?php _e( 'Slug', ud_get_wp_property()->domain ) ?></th>
+    <th><?php _e( 'Settings', ud_get_wp_property()->domain ) ?></th>
+    <th><?php _e( 'Hidden Attributes', ud_get_wp_property()->domain ) ?></th>
+    <th><?php _e( 'Inherit from Parent', ud_get_wp_property()->domain ) ?></th>
   </tr>
   </thead>
   <tbody>
@@ -35,24 +35,16 @@ global $wp_properties;
           <li>
             <label for="<?php echo $property_slug; ?>_searchable_property_types">
               <input class="slug" id="<?php echo $property_slug; ?>_searchable_property_types" <?php if( is_array( $wp_properties[ 'searchable_property_types' ] ) && in_array( $property_slug, $wp_properties[ 'searchable_property_types' ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[searchable_property_types][]" value="<?php echo $property_slug; ?>"/>
-              <?php _e( 'Searchable', 'wpp' ) ?>
+              <?php _e( 'Searchable', ud_get_wp_property()->domain ) ?>
             </label>
           </li>
 
           <li>
             <label for="<?php echo $property_slug; ?>_location_matters">
               <input class="slug" id="<?php echo $property_slug; ?>_location_matters"  <?php if( in_array( $property_slug, $wp_properties[ 'location_matters' ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[location_matters][]" value="<?php echo $property_slug; ?>"/>
-              <?php _e( 'Location Matters', 'wpp' ) ?>
+              <?php _e( 'Location Matters', ud_get_wp_property()->domain ) ?>
             </label>
           </li>
-
-          <?php /*
-          <li class="redirect_to_parent">
-            <label>
-              <input class="slug" <?php if( isset( $wp_properties[ 'redirect_to_parent' ] ) && in_array( $property_slug, $wp_properties[ 'redirect_to_parent' ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[redirect_to_parent][]" value="<?php echo $property_slug; ?>"/>
-              <?php _e( 'Redirect single-view to parent.', 'wpp' ) ?>
-            </label>
-          </li>*/ ?>
           
           <?php $property_type_settings = apply_filters( 'wpp_property_type_settings', array(), $property_slug ); ?>
           <?php foreach( (array) $property_type_settings as $property_type_setting ) : ?>
@@ -66,7 +58,7 @@ global $wp_properties;
       <td>
         <ul class="wp-tab-panel wpp_hidden_property_attributes wpp_something_advanced_wrapper">
 
-          <li class="wpp_show_advanced" wrapper="wpp_something_advanced_wrapper"><?php _e( 'Toggle Attributes Selection', 'wpp' ); ?></li>
+          <li class="wpp_show_advanced" wrapper="wpp_something_advanced_wrapper"><?php _e( 'Toggle Attributes Selection', ud_get_wp_property()->domain ); ?></li>
 
           <?php foreach( $wp_properties[ 'property_stats' ] as $property_stat_slug => $property_stat_label ) : ?>
             <li class="wpp_development_advanced_option">
@@ -89,7 +81,7 @@ global $wp_properties;
           <?php if( empty( $wp_properties[ 'property_stats' ][ 'parent' ] ) ) : ?>
             <li class="wpp_development_advanced_option">
               <input id="<?php echo $property_slug; ?>parent_hidden_attributes" <?php if( isset( $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) && in_array( 'parent', $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[hidden_attributes][<?php echo $property_slug; ?>][]" value="parent"/>
-              <label for="<?php echo $property_slug; ?>parent_hidden_attributes"><?php _e( 'Parent Selection', 'wpp' ); ?></label>
+              <label for="<?php echo $property_slug; ?>parent_hidden_attributes"><?php _e( 'Parent Selection', ud_get_wp_property()->domain ); ?></label>
             </li>
           <?php endif; ?>
           <?php do_action( 'wpp::types::hidden_attributes', $property_slug ); ?>
@@ -98,7 +90,7 @@ global $wp_properties;
 
       <td>
         <ul class="wp-tab-panel wpp_inherited_property_attributes wpp_something_advanced_wrapper">
-          <li class="wpp_show_advanced" wrapper="wpp_something_advanced_wrapper"><?php _e( 'Toggle Attributes Selection', 'wpp' ); ?></li>
+          <li class="wpp_show_advanced" wrapper="wpp_something_advanced_wrapper"><?php _e( 'Toggle Attributes Selection', ud_get_wp_property()->domain ); ?></li>
           <?php foreach( $wp_properties[ 'property_stats' ] as $property_stat_slug => $property_stat_label ): ?>
             <li class="wpp_development_advanced_option">
               <input id="<?php echo $property_slug . "_" . $property_stat_slug; ?>_inheritance" <?php if( isset( $wp_properties[ 'property_inheritance' ][ $property_slug ] ) && in_array( $property_stat_slug, $wp_properties[ 'property_inheritance' ][ $property_slug ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[property_inheritance][<?php echo $property_slug; ?>][]" value="<?php echo $property_stat_slug; ?>"/>
@@ -119,7 +111,7 @@ global $wp_properties;
   <tfoot>
   <tr>
     <td colspan='5'>
-      <input type="button" class="wpp_add_row button-secondary" value="<?php _e( 'Add Row', 'wpp' ) ?>"/>
+      <input type="button" class="wpp_add_row button-secondary" value="<?php _e( 'Add Row', ud_get_wp_property()->domain ) ?>"/>
     </td>
   </tr>
   </tfoot>

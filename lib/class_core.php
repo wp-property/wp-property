@@ -594,9 +594,9 @@ class WPP_Core {
       ?>
       <div class="misc-pub-section ">
         <ul>
-          <li><?php _e( 'Menu Sort Order:', 'wpp' ) ?> <?php echo WPP_F::input( "name=menu_order&special=size=4", $post->menu_order ); ?></li>
+          <li><?php _e( 'Menu Sort Order:', ud_get_wp_property()->domain ) ?> <?php echo WPP_F::input( "name=menu_order&special=size=4", $post->menu_order ); ?></li>
           <?php if( current_user_can( 'manage_options' ) ) { ?>
-            <li><?php echo WPP_F::checkbox( "name=wpp_data[meta][featured]&label=" . __( 'Display in featured listings.', 'wpp' ), get_post_meta( $post->ID, 'featured', true ) ); ?></li>
+            <li><?php echo WPP_F::checkbox( "name=wpp_data[meta][featured]&label=" . __( 'Display in featured listings.', ud_get_wp_property()->domain ), get_post_meta( $post->ID, 'featured', true ) ); ?></li>
           <?php } ?>
           <?php do_action( 'wpp_publish_box_options', $post ); ?>
         </ul>
@@ -636,19 +636,19 @@ class WPP_Core {
 
     $messages[ 'property' ] = array(
       0 => '', // Unused. Messages start at index 1.
-      1 => sprintf( __( 'Property updated. <a href="%s">view property</a>', 'wpp' ), esc_url( get_permalink( $post_id ) ) ),
-      2 => __( 'Custom field updated.', 'wpp' ),
-      3 => __( 'Custom field deleted.', 'wpp' ),
-      4 => __( 'Property updated.', 'wpp' ),
+      1 => sprintf( __( 'Property updated. <a href="%s">view property</a>', ud_get_wp_property()->domain ), esc_url( get_permalink( $post_id ) ) ),
+      2 => __( 'Custom field updated.', ud_get_wp_property()->domain ),
+      3 => __( 'Custom field deleted.', ud_get_wp_property()->domain ),
+      4 => __( 'Property updated.', ud_get_wp_property()->domain ),
       /* translators: %s: date and time of the revision */
-      5 => isset( $_GET[ 'revision' ] ) ? sprintf( __( 'Property restored to revision from %s', 'wpp' ), wp_post_revision_title( (int)$_GET[ 'revision' ], false ) ) : false,
-      6 => sprintf( __( 'Property published. <a href="%s">View property</a>', 'wpp' ), esc_url( get_permalink( $post_id ) ) ),
-      7 => __( 'Property saved.', 'wpp' ),
-      8 => sprintf( __( 'Property submitted. <a target="_blank" href="%s">Preview property</a>', 'wpp' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ) ),
-      9 => sprintf( __( 'Property scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview property</a>', 'wpp' ),
+      5 => isset( $_GET[ 'revision' ] ) ? sprintf( __( 'Property restored to revision from %s', ud_get_wp_property()->domain ), wp_post_revision_title( (int)$_GET[ 'revision' ], false ) ) : false,
+      6 => sprintf( __( 'Property published. <a href="%s">View property</a>', ud_get_wp_property()->domain ), esc_url( get_permalink( $post_id ) ) ),
+      7 => __( 'Property saved.', ud_get_wp_property()->domain ),
+      8 => sprintf( __( 'Property submitted. <a target="_blank" href="%s">Preview property</a>', ud_get_wp_property()->domain ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ) ),
+      9 => sprintf( __( 'Property scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview property</a>', ud_get_wp_property()->domain ),
         // translators: Publish box date format, see http://php.net/date
-        date_i18n( __( 'M j, Y @ G:i', 'wpp' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_id ) ) ),
-      10 => sprintf( __( 'Property draft updated. <a target="_blank" href="%s">Preview property</a>', 'wpp' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ) ),
+        date_i18n( __( 'M j, Y @ G:i', ud_get_wp_property()->domain ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_id ) ) ),
+      10 => sprintf( __( 'Property draft updated. <a target="_blank" href="%s">Preview property</a>', ud_get_wp_property()->domain ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ) ),
     );
 
     $messages = apply_filters( 'wpp_updated_messages', $messages );
@@ -1118,11 +1118,11 @@ class WPP_Core {
     //** Get ALL allowed attributes that may be passed via shortcode (to include property attributes) */
     $defaults[ 'strict_search' ] = false;
     $defaults[ 'show_children' ] = ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_children' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_children' ] : 'true' );
-    $defaults[ 'child_properties_title' ] = __( 'Floor plans at location:', 'wpp' );
+    $defaults[ 'child_properties_title' ] = __( 'Floor plans at location:', ud_get_wp_property()->domain );
     $defaults[ 'fancybox_preview' ] = $wp_properties[ 'configuration' ][ 'property_overview' ][ 'fancybox_preview' ];
     $defaults[ 'bottom_pagination_flag' ] = ( isset( $wp_properties[ 'configuration' ][ 'bottom_insert_pagenation' ] ) && $wp_properties[ 'configuration' ][ 'bottom_insert_pagenation' ] == 'true' ? true : false );
     $defaults[ 'thumbnail_size' ] = $wp_properties[ 'configuration' ][ 'property_overview' ][ 'thumbnail_size' ];
-    $defaults[ 'sort_by_text' ] = __( 'Sort By:', 'wpp' );
+    $defaults[ 'sort_by_text' ] = __( 'Sort By:', ud_get_wp_property()->domain );
     $defaults[ 'sort_by' ] = 'post_date';
     $defaults[ 'sort_order' ] = 'DESC';
     $defaults[ 'template' ] = false;
@@ -1544,17 +1544,15 @@ class WPP_Core {
     //* General WPP capabilities */
     $wpp_capabilities = array(
       //* Manage WPP Properties Capabilities */
-      'edit_wpp_properties' => __( 'View Properties', 'wpp' ),
-      'edit_wpp_property' => __( 'Add/Edit Properties', 'wpp' ),
-      'edit_others_wpp_properties' => __( 'Edit Other Properties', 'wpp' ),
-      //'read_wpp_property' => __( 'Read Property', 'wpp' ),
-      'delete_wpp_property' => __( 'Delete Properties', 'wpp' ),
-      'publish_wpp_properties' => __( 'Publish Properties', 'wpp' ),
-      //'read_private_wpp_properties' => __( 'Read Private Properties', 'wpp' ),
+      'edit_wpp_properties' => __( 'View Properties', ud_get_wp_property()->domain ),
+      'edit_wpp_property' => __( 'Add/Edit Properties', ud_get_wp_property()->domain ),
+      'edit_others_wpp_properties' => __( 'Edit Other Properties', ud_get_wp_property()->domain ),
+      'delete_wpp_property' => __( 'Delete Properties', ud_get_wp_property()->domain ),
+      'publish_wpp_properties' => __( 'Publish Properties', ud_get_wp_property()->domain ),
       //* WPP Settings capability */
-      'manage_wpp_settings' => __( 'Manage Settings', 'wpp' ),
+      'manage_wpp_settings' => __( 'Manage Settings', ud_get_wp_property()->domain ),
       //* WPP Taxonomies capability */
-      'manage_wpp_categories' => __( 'Manage Taxonomies', 'wpp' )
+      'manage_wpp_categories' => __( 'Manage Taxonomies', ud_get_wp_property()->domain )
     );
 
     //* Adds Premium Feature Capabilities */
@@ -1643,7 +1641,7 @@ class WPP_Core {
         get_current_screen()->add_help_tab(
           array(
             'id' => sanitize_title( $help_tab_title ),
-            'title' => __( $help_tab_title, 'wpp' ),
+            'title' => __( $help_tab_title, ud_get_wp_property()->domain ),
             'content' => implode( "\n", (array)$contextual_help[ $help_tab_title ] ),
           )
         );
@@ -1652,15 +1650,15 @@ class WPP_Core {
 
       //** Add help sidebar with More Links */
       get_current_screen()->set_help_sidebar(
-        '<p><strong>' . __( 'For more information:', 'wpp' ) . '</strong></p>' .
-        '<p>' . __( '<a href="https://usabilitydynamics.com/products/wp-property/" target="_blank">WP-Property Product Page</a>', 'wpp' ) . '</p>' .
-        '<p>' . __( '<a href="https://usabilitydynamics.com/products/wp-property/forum/" target="_blank">WP-Property Forums</a>', 'wpp' ) . '</p>' .
-        '<p>' . __( '<a href="https://usabilitydynamics.com/help/" target="_blank">WP-Property Tutorials</a>', 'wpp' ) . '</p>'
+        '<p><strong>' . __( 'For more information:', ud_get_wp_property()->domain ) . '</strong></p>' .
+        '<p>' . __( '<a href="https://usabilitydynamics.com/products/wp-property/" target="_blank">WP-Property Product Page</a>', ud_get_wp_property()->domain ) . '</p>' .
+        '<p>' . __( '<a href="https://usabilitydynamics.com/products/wp-property/forum/" target="_blank">WP-Property Forums</a>', ud_get_wp_property()->domain ) . '</p>' .
+        '<p>' . __( '<a href="https://usabilitydynamics.com/help/" target="_blank">WP-Property Tutorials</a>', ud_get_wp_property()->domain ) . '</p>'
       );
 
     } else {
       global $current_screen;
-      add_contextual_help( $current_screen->id, '<p>' . __( 'Please upgrade Wordpress to the latest version for detailed help.', 'wpp' ) . '</p><p>' . __( 'Or visit <a href="https://usabilitydynamics.com/tutorials/wp-property-help/" target="_blank">WP-Property Help Page</a> on UsabilityDynamics.com', 'wpp' ) . '</p>' );
+      add_contextual_help( $current_screen->id, '<p>' . __( 'Please upgrade Wordpress to the latest version for detailed help.', ud_get_wp_property()->domain ) . '</p><p>' . __( 'Or visit <a href="https://usabilitydynamics.com/tutorials/wp-property-help/" target="_blank">WP-Property Help Page</a> on UsabilityDynamics.com', ud_get_wp_property()->domain ) . '</p>' );
     }
   }
 

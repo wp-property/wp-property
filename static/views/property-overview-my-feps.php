@@ -38,14 +38,14 @@ $thumbnail_dimentions = WPP_F::get_image_dimensions($wpp_query['thumbnail_size']
       <div class="<?php wpp_css('property_overview::right_column', 'wpp_overview_feps_column' ); ?>" style="margin-left:<?php echo $thumbnail_dimentions['width']+12; /* 12 is boubled image border */?>px; ">
         <ul class="<?php wpp_css('property_overview::data', 'wpp_overview_data feps_action clearfix' ); ?>">
           <li class="<?php wpp_css('property_overview::post_status', 'post_status' ); ?>">
-            <span class="title"><?php _e('Status', 'wpp'); ?></span>
+            <span class="title"><?php _e('Status', ud_get_wp_property()->domain); ?></span>
             <span class="doubledot">:</span>
             <span class="value"><?php echo WPP_F::clear_post_status( $property['post_status'] ); ?></span>
           </li>
           <?php $class = !empty( $property[ FEPS_META_EXPIRED ] ) ? '' : 'empty'; ?>
-          <?php $expired_time = !empty( $property[ FEPS_META_EXPIRED ] ) ? WPP_F::nice_time( $property[ FEPS_META_EXPIRED ], array('format'=>'date') ) : __('Not set', 'wpp'); ?>
+          <?php $expired_time = !empty( $property[ FEPS_META_EXPIRED ] ) ? WPP_F::nice_time( $property[ FEPS_META_EXPIRED ], array('format'=>'date') ) : __('Not set', ud_get_wp_property()->domain); ?>
           <li class="<?php wpp_css('property_overview::expired_date', "expired_date {$class}" ); ?>">
-            <span class="title"><?php _e('Expiry Date', 'wpp'); ?></span>
+            <span class="title"><?php _e('Expiry Date', ud_get_wp_property()->domain); ?></span>
             <span class="doubledot">:</span>
             <span class="value"><?php echo $expired_time; ?></span>
           </li>
@@ -53,10 +53,10 @@ $thumbnail_dimentions = WPP_F::get_image_dimensions($wpp_query['thumbnail_size']
           <li class="<?php wpp_css('property_overview::actions', 'actions' ); ?>">
             <ul class="clearfix">
               <li>
-                <a class="<?php wpp_css('property_overview::button', 'button wpp_edit' ); ?>" href="<?php echo class_wpp_feps::get_edit_feps_permalink( $property['ID'], 'edit' ); ?>"><?php _e('Edit', 'wpp'); ?></a>
+                <a class="<?php wpp_css('property_overview::button', 'button wpp_edit' ); ?>" href="<?php echo class_wpp_feps::get_edit_feps_permalink( $property['ID'], 'edit' ); ?>"><?php _e('Edit', ud_get_wp_property()->domain); ?></a>
               </li>
               <li>
-                <a class="<?php wpp_css('property_overview::button', 'button' ); ?>" href="<?php echo WPP_F::base_url( FEPS_VIEW_PAGE, array( 'feps' => $property['ID'], 'hash' => $property['wpp::feps::pending_hash'], 'action' => 'remove' ) ); ?>" onclick="return confirm('<?php _e('Are you sure?', 'wpp'); ?>')"><?php _e('Remove', 'wpp'); ?></a>
+                <a class="<?php wpp_css('property_overview::button', 'button' ); ?>" href="<?php echo WPP_F::base_url( FEPS_VIEW_PAGE, array( 'feps' => $property['ID'], 'hash' => $property['wpp::feps::pending_hash'], 'action' => 'remove' ) ); ?>" onclick="return confirm('<?php _e('Are you sure?', ud_get_wp_property()->domain); ?>')"><?php _e('Remove', ud_get_wp_property()->domain); ?></a>
               </li>
             </ul>
           </li>

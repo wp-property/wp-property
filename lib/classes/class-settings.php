@@ -89,9 +89,9 @@ namespace UsabilityDynamics\WPP {
         //** Default attribute label descriptions for the back-end */
         $data[ 'descriptions' ] = array(
           'descriptions' => array(
-            'property_type' => __('The property type will determine the layout.','wpp'),
-            'custom_attribute_overview' => __('Customize what appears in search results in the attribute section.  For example: 1bed, 2baths, area varies slightly.','wpp'),
-            'tagline' => __('Will appear on overview pages and on top of every listing page.','wpp')
+            'property_type' => __('The property type will determine the layout.',ud_get_wp_property()->domain),
+            'custom_attribute_overview' => __('Customize what appears in search results in the attribute section.  For example: 1bed, 2baths, area varies slightly.',ud_get_wp_property()->domain),
+            'tagline' => __('Will appear on overview pages and on top of every listing page.',ud_get_wp_property()->domain)
           )
         );
 
@@ -117,9 +117,9 @@ namespace UsabilityDynamics\WPP {
         // It is adding these defaults only if types are empty (install) - korotkov@UD
         if( empty( $d ) || !is_array( $d ) ) {
           $this->set( 'property_types', array(
-            'building' => __( 'Building', 'wpp' ),
-            'floorplan' => __( 'Floorplan', 'wpp' ),
-            'single_family_home' => __( 'Single Family Home', 'wpp' )
+            'building' => __( 'Building', ud_get_wp_property()->domain ),
+            'floorplan' => __( 'Floorplan', ud_get_wp_property()->domain ),
+            'single_family_home' => __( 'Single Family Home', ud_get_wp_property()->domain )
           ) );
         }
 
@@ -135,11 +135,11 @@ namespace UsabilityDynamics\WPP {
         $d = $this->get( 'property_stats', false );
         if( !$d || !is_array( $d ) ) {
           $this->set( 'property_stats', array(
-            'location' => __('Address','wpp'),
-            'price' => __('Price','wpp'),
-            'deposit' => __('Deposit','wpp'),
-            'area' => __('Area','wpp'),
-            'phone_number' => __('Phone Number','wpp'),
+            'location' => __('Address',ud_get_wp_property()->domain),
+            'price' => __('Price',ud_get_wp_property()->domain),
+            'deposit' => __('Deposit',ud_get_wp_property()->domain),
+            'area' => __('Area',ud_get_wp_property()->domain),
+            'phone_number' => __('Phone Number',ud_get_wp_property()->domain),
           ) );
         }
 
@@ -147,10 +147,10 @@ namespace UsabilityDynamics\WPP {
         $d = $this->get( 'property_meta', false );
         if( !$d || !is_array( $d ) ) {
           $this->set( 'property_meta', array(
-            'lease_terms' => __('Lease Terms','wpp'),
-            'pet_policy' => __('Pet Policy','wpp'),
-            'school' => __('School','wpp'),
-            'tagline' => __('Tagline','wpp')
+            'lease_terms' => __('Lease Terms',ud_get_wp_property()->domain),
+            'pet_policy' => __('Pet Policy',ud_get_wp_property()->domain),
+            'school' => __('School',ud_get_wp_property()->domain),
+            'tagline' => __('Tagline',ud_get_wp_property()->domain)
           ) );
         }
 
@@ -199,7 +199,7 @@ namespace UsabilityDynamics\WPP {
         $d = $this->get( 'search_conversions', false );
         if( !$d || !is_array( $d ) ) {
           $this->set( 'search_conversions', array(
-            'bedrooms' => array( __( 'Studio', 'wpp' ) => '0.5' )
+            'bedrooms' => array( __( 'Studio', ud_get_wp_property()->domain ) => '0.5' )
           ) );
         }
 

@@ -27,7 +27,7 @@ if ( isset( $_REQUEST[ 'message' ] ) ) {
   $wp_messages = array();
   switch ( $_REQUEST[ 'message' ] ) {
     case 'updated':
-      $wp_messages[ 'notice' ][ ] = __( "Settings updated.", 'wpp' );
+      $wp_messages[ 'notice' ][ ] = __( "Settings updated.", ud_get_wp_property()->domain );
       break;
   }
 }
@@ -50,7 +50,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 ?>
 <div class="wrap <?php echo implode( ' ', $wrapper_classes ); ?>">
 <?php screen_icon(); ?>
-<h2 class='wpp_settings_page_header'><?php echo ud_get_wp_property( 'labels.name' ) . ' ' . __( 'Settings', 'wpp' ) ?>
+<h2 class='wpp_settings_page_header'><?php echo ud_get_wp_property( 'labels.name' ) . ' ' . __( 'Settings', ud_get_wp_property()->domain ) ?>
   <div class="wpp_fb_like">
   <div class="fb-like" data-href="https://www.facebook.com/wpproperty" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
 </div>
@@ -77,8 +77,8 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
 <div id="wpp_settings_tabs" class="wpp_tabs clearfix">
   <ul class="tabs">
-    <li><a href="#tab_main"><?php _e( 'Main', 'wpp' ); ?></a></li>
-    <li><a href="#tab_display"><?php _e( 'Display', 'wpp' ); ?></a></li>
+    <li><a href="#tab_main"><?php _e( 'Main', ud_get_wp_property()->domain ); ?></a></li>
+    <li><a href="#tab_display"><?php _e( 'Display', ud_get_wp_property()->domain ); ?></a></li>
     <?php
     $wpp_plugin_settings_nav = apply_filters( 'wpp_settings_nav', array() );
     if ( is_array( $wpp_plugin_settings_nav ) ) {
@@ -87,7 +87,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       }
     }
     ?>
-    <li><a href="#tab_troubleshooting"><?php _e( 'Help', 'wpp' ); ?></a></li>
+    <li><a href="#tab_troubleshooting"><?php _e( 'Help', ud_get_wp_property()->domain ); ?></a></li>
   </ul>
 
   <div id="tab_main">
@@ -97,32 +97,32 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <table class="form-table">
 
     <tr>
-      <th><?php _e( 'Options', 'wpp' ); ?></th>
+      <th><?php _e( 'Options', ud_get_wp_property()->domain ); ?></th>
       <td>
         <ul>
-          <li class="configuration_enable_comments"><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][enable_comments]&label=" . __( 'Enable comments.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'enable_comments' ] ) ? $wp_properties[ 'configuration' ][ 'enable_comments' ] : false ) ); ?></li>
-          <li class="configuration_enable_revisions" data-feature-since="2.0.0"><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][enable_revisions]&label=" . __( 'Enable revisions.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'enable_revisions' ] ) ? $wp_properties[ 'configuration' ][ 'enable_revisions' ] : false ) ); ?></li>
-          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][exclude_from_regular_search_results]&label=" . sprintf( __( 'Exclude %1s from regular search results.', 'wpp' ), $object_label[ 'plural' ] ), ( isset( $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] ) ? $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] : false ) ); ?></li>
-          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][auto_delete_attachments]&label=" . sprintf(__( 'Automatically delete all %1s images and attachments when a %2s is deleted.', 'wpp' ), $object_label[ 'singular' ], $object_label[ 'singular' ] ), ( isset( $wp_properties[ 'configuration' ][ 'auto_delete_attachments' ] ) ? $wp_properties[ 'configuration' ][ 'auto_delete_attachments' ] : false ) ); ?></li>
+          <li class="configuration_enable_comments"><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][enable_comments]&label=" . __( 'Enable comments.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'enable_comments' ] ) ? $wp_properties[ 'configuration' ][ 'enable_comments' ] : false ) ); ?></li>
+          <li class="configuration_enable_revisions" data-feature-since="2.0.0"><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][enable_revisions]&label=" . __( 'Enable revisions.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'enable_revisions' ] ) ? $wp_properties[ 'configuration' ][ 'enable_revisions' ] : false ) ); ?></li>
+          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][exclude_from_regular_search_results]&label=" . sprintf( __( 'Exclude %1s from regular search results.', ud_get_wp_property()->domain ), $object_label[ 'plural' ] ), ( isset( $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] ) ? $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] : false ) ); ?></li>
+          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][auto_delete_attachments]&label=" . sprintf(__( 'Automatically delete all %1s images and attachments when a %2s is deleted.', ud_get_wp_property()->domain ), $object_label[ 'singular' ], $object_label[ 'singular' ] ), ( isset( $wp_properties[ 'configuration' ][ 'auto_delete_attachments' ] ) ? $wp_properties[ 'configuration' ][ 'auto_delete_attachments' ] : false ) ); ?></li>
         </ul>
       </td>
     </tr>
 
     <tr>
-      <th><?php printf( __( 'Default %1s Page', 'wpp' ), ud_get_wp_property( 'labels.name' ) ); ?></th>
+      <th><?php printf( __( 'Default %1s Page', ud_get_wp_property()->domain ), ud_get_wp_property( 'labels.name' ) ); ?></th>
       <td>
 
         <div class="must_have_permalinks">
           <select name="wpp_settings[configuration][base_slug]" id="wpp_settings_base_slug">
-            <option <?php selected( $wp_properties[ 'configuration' ][ 'base_slug' ], 'property' ); ?> value="property"><?php _e( 'Property (Default)', 'wpp' ); ?></option>
+            <option <?php selected( $wp_properties[ 'configuration' ][ 'base_slug' ], 'property' ); ?> value="property"><?php _e( 'Property (Default)', ud_get_wp_property()->domain ); ?></option>
             <?php foreach ( get_pages() as $page ): ?>
               <option <?php selected( $wp_properties[ 'configuration' ][ 'base_slug' ], $page->post_name ); ?> value="<?php echo $page->post_name; ?>"><?php echo $page->post_title; ?></option>
             <?php endforeach; ?>
           </select>
-          <span wpp_scroll_to="h3.default_property_page" class="wpp_link wpp_toggle_contextual_help"><?php _e( 'What is this?', 'wpp' ); ?></span>
+          <span wpp_scroll_to="h3.default_property_page" class="wpp_link wpp_toggle_contextual_help"><?php _e( 'What is this?', ud_get_wp_property()->domain ); ?></span>
         </div>
         <div class="must_not_have_permalinks">
-          <p class="description"><?php printf( __( 'You must have permalinks enabled to change the Default %1s page.', 'wpp' ), ud_get_wp_property( 'labels.name' ) ); ?></p>
+          <p class="description"><?php printf( __( 'You must have permalinks enabled to change the Default %1s page.', ud_get_wp_property()->domain ), ud_get_wp_property( 'labels.name' ) ); ?></p>
         </div>
 
       </td>
@@ -133,18 +133,18 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       <td>
         <ul>
           <li>
-            <?php echo WPP_F::checkbox( 'name=wpp_settings[configuration][automatically_insert_overview]&label=' . __( 'Automatically overwrite this page\'s content with [property_overview].', 'wpp' ), $wp_properties[ 'configuration' ][ 'automatically_insert_overview' ] ); ?>
+            <?php echo WPP_F::checkbox( 'name=wpp_settings[configuration][automatically_insert_overview]&label=' . __( 'Automatically overwrite this page\'s content with [property_overview].', ud_get_wp_property()->domain ), $wp_properties[ 'configuration' ][ 'automatically_insert_overview' ] ); ?>
           </li>
           <li class="wpp_wpp_settings_configuration_do_not_override_search_result_page_row <?php if ( $wp_properties[ 'configuration' ][ 'automatically_insert_overview' ] == 'true' ) echo " hidden "; ?>">
-            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_override_search_result_page]&label=" . __( 'When showing property search results, don\'t override the page content with [property_overview].', 'wpp' ), $wp_properties[ 'configuration' ][ 'do_not_override_search_result_page' ] ); ?>
-            <div class="description"><?php _e( 'If checked, be sure to include [property_overview] somewhere in the content, or no properties will be displayed.', 'wpp' ); ?></div>
+            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_override_search_result_page]&label=" . __( 'When showing property search results, don\'t override the page content with [property_overview].', ud_get_wp_property()->domain ), $wp_properties[ 'configuration' ][ 'do_not_override_search_result_page' ] ); ?>
+            <div class="description"><?php _e( 'If checked, be sure to include [property_overview] somewhere in the content, or no properties will be displayed.', ud_get_wp_property()->domain ); ?></div>
           </li>
         </ul>
       </td>
     </tr>
 
     <tr>
-      <th><?php printf( __( 'Single %s Template', 'wpp' ), WPP_F::property_label() ); ?></th>
+      <th><?php printf( __( 'Single %s Template', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></th>
       <td>
         <p><?php printf( __( 'Select template which will be used to render Single %s page.', ud_get_wp_property( 'domain' ) ), WPP_F::property_label() ); ?></p>
         <p><?php printf( __( 'You also can redeclare selected template for specific %s on Edit %s page.', ud_get_wp_property( 'domain' ) ), WPP_F::property_label(), WPP_F::property_label() ); ?></p>
@@ -156,10 +156,10 @@ if ( get_option( 'permalink_structure' ) == '' ) {
             <p><span class="description"><?php printf( __( 'The template contains predefined sections such as attributes list, map and registered sidebars areas.', ud_get_wp_property( 'domain' ) ) ); ?></span></p>
             <p><span class="description"><?php printf( __( 'The display settings may be edited further by customizing the <b>%s</b> file.', ud_get_wp_property( 'domain' ) ), 'wp-content/plugins/wp-property/static/views/property.php' ) ?></span></p>
             <p><span class="description"><?php printf( __( 'To avoid losing your changes during updates, copy <b>%s</b> file to your template directory, which will be automatically loaded.', ud_get_wp_property( 'domain' ) ), 'property.php' ); ?></span></p><br/>
-            <p><?php printf( __( 'Additional settings for Single %s Template', 'wpp' ), WPP_F::property_label() ); ?>:</p>
+            <p><?php printf( __( 'Additional settings for Single %s Template', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?>:</p>
             <ul>
-              <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][sort_stats_by_groups]&label=" . sprintf(__( 'Sort %1s stats by groups.', 'wpp' ),  WPP_F::property_label( 'singular' )), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'sort_stats_by_groups' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'sort_stats_by_groups' ] : false ) ); ?></li>
-              <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][show_true_as_image]&label=" . sprintf( __( 'Show Checkboxed Image instead of "%s" and hide "%s" for %s/%s values', 'wpp' ), __( 'Yes', 'wpp' ), __( 'No', 'wpp' ), __( 'Yes', 'wpp' ), __( 'No', 'wpp' ) ), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_true_as_image' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_true_as_image' ] : false ) ); ?></li>
+              <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][sort_stats_by_groups]&label=" . sprintf(__( 'Sort %1s stats by groups.', ud_get_wp_property()->domain ),  WPP_F::property_label( 'singular' )), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'sort_stats_by_groups' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'sort_stats_by_groups' ] : false ) ); ?></li>
+              <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][show_true_as_image]&label=" . sprintf( __( 'Show Checkboxed Image instead of "%s" and hide "%s" for %s/%s values', ud_get_wp_property()->domain ), __( 'Yes', ud_get_wp_property()->domain ), __( 'No', ud_get_wp_property()->domain ), __( 'Yes', ud_get_wp_property()->domain ), __( 'No', ud_get_wp_property()->domain ) ), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_true_as_image' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_true_as_image' ] : false ) ); ?></li>
               <?php do_action( 'wpp_settings_page_property_page' ); ?>
             </ul><br/>
           </li>
@@ -189,7 +189,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
     <?php if( !isset( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] ) || ( isset( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] ) && $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] != 'true' ) ) : ?>
     <tr>
-      <th><?php printf( __( 'Widget Sidebars', 'wpp' ), WPP_F::property_label() ); ?></th>
+      <th><?php printf( __( 'Widget Sidebars', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></th>
       <td>
         <p><?php printf( __( 'By default, %s registers widget sidebars for <b>Single %s page</b> based on defined property types. But you can disable any of them here.', ud_get_wp_property( 'domain' ) ), 'WP-Property', WPP_F::property_label() ); ?></p>
         <p><?php printf( __( 'Note, the following sidebar are added only on default <b>%s</b> ( Default %s Template ).', ud_get_wp_property( 'domain' ) ), 'property.php', WPP_F::property_label() ); ?></p><br/>
@@ -206,7 +206,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <?php endif; ?>
 
     <tr>
-      <th><?php printf( __( 'Automatic Geolocation', 'wpp' ), WPP_F::property_label() ); ?></th>
+      <th><?php printf( __( 'Automatic Geolocation', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></th>
       <td>
         <ul>
           <li><?php _e( 'Attribute to use for physical addresses:', ud_get_wp_property('domain') ); ?><?php echo WPP_F::draw_attribute_dropdown( "name=wpp_settings[configuration][address_attribute]&selected={$wp_properties[ 'configuration' ]['address_attribute']}" ); ?></li>
@@ -221,14 +221,14 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
     <?php if ( apply_filters( 'wpp::custom_styles', false ) === false ) : ?>
     <tr>
-      <th><?php _e( 'Styles', 'wpp' ); ?></th>
+      <th><?php _e( 'Styles', ud_get_wp_property()->domain ); ?></th>
       <td>
         <ul>
-          <li><?php echo $using_custom_css ? WPP_F::checkbox( "name=wpp_settings[configuration][autoload_css]&label=" . __( 'Load default CSS. If unchecked, the wp-properties.css in your theme folder will not be loaded.', 'wpp' ), $wp_properties[ 'configuration' ][ 'autoload_css' ] ) : WPP_F::checkbox( "name=wpp_settings[configuration][autoload_css]&label=" . __( 'Load default CSS.', 'wpp' ), $wp_properties[ 'configuration' ][ 'autoload_css' ] ); ?></li>
+          <li><?php echo $using_custom_css ? WPP_F::checkbox( "name=wpp_settings[configuration][autoload_css]&label=" . __( 'Load default CSS. If unchecked, the wp-properties.css in your theme folder will not be loaded.', ud_get_wp_property()->domain ), $wp_properties[ 'configuration' ][ 'autoload_css' ] ) : WPP_F::checkbox( "name=wpp_settings[configuration][autoload_css]&label=" . __( 'Load default CSS.', ud_get_wp_property()->domain ), $wp_properties[ 'configuration' ][ 'autoload_css' ] ); ?></li>
           <?php if ( WPP_F::has_theme_specific_stylesheet() ) : ?>
             <li>
-              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_load_theme_specific_css]&label=" . __( 'Do not load theme-specific stylesheet.', 'wpp' ), isset( $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] ) ? $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] : false ); ?>
-              <div class="description"><?php _e( 'This version of WP-Property has a stylesheet made specifically for the theme you are using.', 'wpp' ); ?></div>
+              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_load_theme_specific_css]&label=" . __( 'Do not load theme-specific stylesheet.', ud_get_wp_property()->domain ), isset( $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] ) ? $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] : false ); ?>
+              <div class="description"><?php _e( 'This version of WP-Property has a stylesheet made specifically for the theme you are using.', ud_get_wp_property()->domain ); ?></div>
             </li>
           <?php endif; /* WPP_F::has_theme_specific_stylesheet() */ ?>
         </ul>
@@ -237,8 +237,8 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <?php endif; ?>
 
     <tr>
-      <th><?php _e( 'Default Phone Number', 'wpp' ); ?></th>
-      <td><?php echo WPP_F::input( "name=phone_number&label=" . sprintf(__( 'Phone number to use when a %1s-specific phone number is not specified.', 'wpp' ), WPP_F::property_label( 'singular' ) ) . "&group=wpp_settings[configuration]&style=width: 200px;", ( isset( $wp_properties[ 'configuration' ][ 'phone_number' ] ) ? $wp_properties[ 'configuration' ][ 'phone_number' ] : false ) ); ?></td>
+      <th><?php _e( 'Default Phone Number', ud_get_wp_property()->domain ); ?></th>
+      <td><?php echo WPP_F::input( "name=phone_number&label=" . sprintf(__( 'Phone number to use when a %1s-specific phone number is not specified.', ud_get_wp_property()->domain ), WPP_F::property_label( 'singular' ) ) . "&group=wpp_settings[configuration]&style=width: 200px;", ( isset( $wp_properties[ 'configuration' ][ 'phone_number' ] ) ? $wp_properties[ 'configuration' ][ 'phone_number' ] : false ) ); ?></td>
     </tr>
 
 
@@ -253,16 +253,16 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <table class="form-table">
 
     <tr>
-      <th><?php _e( 'Image Sizes', 'wpp' ); ?></th>
+      <th><?php _e( 'Image Sizes', ud_get_wp_property()->domain ); ?></th>
       <td>
-        <p><?php _e( 'Image sizes used throughout the plugin.', 'wpp' ); ?> </p>
+        <p><?php _e( 'Image sizes used throughout the plugin.', ud_get_wp_property()->domain ); ?> </p>
 
           <table id="wpp_image_sizes" class="ud_ui_dynamic_table widefat">
             <thead>
               <tr>
-                <th><?php _e( 'Slug', 'wpp' ); ?></th>
-                <th><?php _e( 'Width', 'wpp' ); ?></th>
-                <th><?php _e( 'Height', 'wpp' ); ?></th>
+                <th><?php _e( 'Slug', ud_get_wp_property()->domain ); ?></th>
+                <th><?php _e( 'Width', ud_get_wp_property()->domain ); ?></th>
+                <th><?php _e( 'Height', ud_get_wp_property()->domain ); ?></th>
                 <th>&nbsp;</th>
               </tr>
             </thead>
@@ -299,7 +299,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
               <td class="wpp_height">
                 <input type="text" name="wpp_settings[image_sizes][<?php echo $slug; ?>][height]" value="<?php echo $image_dimensions[ 'height' ]; ?>"/>
               </td>
-              <td><span class="wpp_delete_row wpp_link"><?php _e( 'Delete', 'wpp' ) ?></span></td>
+              <td><span class="wpp_delete_row wpp_link"><?php _e( 'Delete', ud_get_wp_property()->domain ) ?></span></td>
             </tr>
 
             <?php else: ?>
@@ -324,7 +324,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
             </tbody>
             <tfoot>
               <tr>
-                <td colspan='4'><input type="button" class="wpp_add_row button-secondary" value="<?php _e( 'Add Row', 'wpp' ) ?>"/></td>
+                <td colspan='4'><input type="button" class="wpp_add_row button-secondary" value="<?php _e( 'Add Row', ud_get_wp_property()->domain ) ?>"/></td>
               </tr>
             </tfoot>
           </table>
@@ -337,17 +337,17 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
 
     <tr>
-      <th><?php _e( 'Overview Shortcode', 'wpp' ) ?></th>
+      <th><?php _e( 'Overview Shortcode', ud_get_wp_property()->domain ) ?></th>
       <td>
         <p>
-        <?php printf( __( 'These are the settings for the <b>%s</b> shortcode. The shortcode displays a list of all %s.<br />The display settings may be edited further by customizing the <b>%s</b> file.  To avoid losing your changes during updates, copy <b>%s</b> file in your theme\'s root directory, which will be automatically loaded.', 'wpp' ), '[property_overview]', WPP_F::property_label( 'plural' ), 'wp-content/plugins/wp-property/static/views/property-overview.php', 'property-overview.php' ); ?>
+        <?php printf( __( 'These are the settings for the <b>%s</b> shortcode. The shortcode displays a list of all %s.<br />The display settings may be edited further by customizing the <b>%s</b> file.  To avoid losing your changes during updates, copy <b>%s</b> file in your theme\'s root directory, which will be automatically loaded.', ud_get_wp_property()->domain ), '[property_overview]', WPP_F::property_label( 'plural' ), 'wp-content/plugins/wp-property/static/views/property-overview.php', 'property-overview.php' ); ?>
         </p>
         <ul>
-          <li><?php _e( 'Thumbnail size:', 'wpp' ) ?> <?php WPP_F::image_sizes_dropdown( "name=wpp_settings[configuration][property_overview][thumbnail_size]&selected=" . $wp_properties[ 'configuration' ][ 'property_overview' ][ 'thumbnail_size' ] ); ?></li>
-          <li><?php echo WPP_F::checkbox( 'name=wpp_settings[configuration][property_overview][show_children]&label=' . sprintf(__( 'Show children %1s.', 'wpp' ), $object_label[ 'plural' ] ), $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_children' ] ); ?></li>
-          <li><?php echo WPP_F::checkbox( 'name=wpp_settings[configuration][property_overview][fancybox_preview]&label=' . sprintf(__( 'Show larger image of %1s when image is clicked using fancybox.', 'wpp' ), $object_label[ 'singular' ]), $wp_properties[ 'configuration' ][ 'property_overview' ][ 'fancybox_preview' ] ); ?></li>
-          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][bottom_insert_pagenation]&label=" . __( 'Show pagination on bottom of results.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'bottom_insert_pagenation' ] ) ? $wp_properties[ 'configuration' ][ 'bottom_insert_pagenation' ] : false ) ); ?></li>
-          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][add_sort_by_title]&label=" . sprintf(__( 'Add sorting by %1s\'s title.', 'wpp' ), $object_label[ 'singular' ]), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'add_sort_by_title' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'add_sort_by_title' ] : false ) ); ?></li>
+          <li><?php _e( 'Thumbnail size:', ud_get_wp_property()->domain ) ?> <?php WPP_F::image_sizes_dropdown( "name=wpp_settings[configuration][property_overview][thumbnail_size]&selected=" . $wp_properties[ 'configuration' ][ 'property_overview' ][ 'thumbnail_size' ] ); ?></li>
+          <li><?php echo WPP_F::checkbox( 'name=wpp_settings[configuration][property_overview][show_children]&label=' . sprintf(__( 'Show children %1s.', ud_get_wp_property()->domain ), $object_label[ 'plural' ] ), $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_children' ] ); ?></li>
+          <li><?php echo WPP_F::checkbox( 'name=wpp_settings[configuration][property_overview][fancybox_preview]&label=' . sprintf(__( 'Show larger image of %1s when image is clicked using fancybox.', ud_get_wp_property()->domain ), $object_label[ 'singular' ]), $wp_properties[ 'configuration' ][ 'property_overview' ][ 'fancybox_preview' ] ); ?></li>
+          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][bottom_insert_pagenation]&label=" . __( 'Show pagination on bottom of results.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'bottom_insert_pagenation' ] ) ? $wp_properties[ 'configuration' ][ 'bottom_insert_pagenation' ] : false ) ); ?></li>
+          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][property_overview][add_sort_by_title]&label=" . sprintf(__( 'Add sorting by %1s\'s title.', ud_get_wp_property()->domain ), $object_label[ 'singular' ]), ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'add_sort_by_title' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'add_sort_by_title' ] : false ) ); ?></li>
           <?php do_action( 'wpp::settings::display::overview_shortcode' ); ?>
         </ul>
 
@@ -355,26 +355,26 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     </tr>
 
     <tr>
-      <th><?php _e( 'Google Maps', 'wpp' ) ?></th>
+      <th><?php _e( 'Google Maps', ud_get_wp_property()->domain ) ?></th>
       <td>
 
         <ul>
-          <li><?php _e( 'Map Thumbnail Size:', 'wpp' ); ?> <?php WPP_F::image_sizes_dropdown( "name=wpp_settings[configuration][single_property_view][map_image_type]&selected=" . ( isset( $wp_properties[ 'configuration' ][ 'single_property_view' ][ 'map_image_type' ] ) ? $wp_properties[ 'configuration' ][ 'single_property_view' ][ 'map_image_type' ] : '' ) ); ?></li>
-          <li><?php _e( 'Map Zoom Level:', 'wpp' ); ?> <?php echo WPP_F::input( "name=wpp_settings[configuration][gm_zoom_level]&style=width: 30px;", ( isset( $wp_properties[ 'configuration' ][ 'gm_zoom_level' ] ) ? $wp_properties[ 'configuration' ][ 'gm_zoom_level' ] : false ) ); ?></li>
-          <li><?php _e( 'Custom Latitude Coordinate', 'wpp' ); ?>
+          <li><?php _e( 'Map Thumbnail Size:', ud_get_wp_property()->domain ); ?> <?php WPP_F::image_sizes_dropdown( "name=wpp_settings[configuration][single_property_view][map_image_type]&selected=" . ( isset( $wp_properties[ 'configuration' ][ 'single_property_view' ][ 'map_image_type' ] ) ? $wp_properties[ 'configuration' ][ 'single_property_view' ][ 'map_image_type' ] : '' ) ); ?></li>
+          <li><?php _e( 'Map Zoom Level:', ud_get_wp_property()->domain ); ?> <?php echo WPP_F::input( "name=wpp_settings[configuration][gm_zoom_level]&style=width: 30px;", ( isset( $wp_properties[ 'configuration' ][ 'gm_zoom_level' ] ) ? $wp_properties[ 'configuration' ][ 'gm_zoom_level' ] : false ) ); ?></li>
+          <li><?php _e( 'Custom Latitude Coordinate', ud_get_wp_property()->domain ); ?>
             : <?php echo WPP_F::input( "name=wpp_settings[custom_coords][latitude]&style=width: 100px;", ( isset( $wp_properties[ 'custom_coords' ][ 'latitude' ] ) ? $wp_properties[ 'custom_coords' ][ 'latitude' ] : false ) ); ?>
-            <span class="description"><?php printf( __( 'Default is "%s"', 'wpp' ), $wp_properties[ 'default_coords' ][ 'latitude' ] ); ?></span></li>
-          <li><?php _e( 'Custom Longitude Coordinate', 'wpp' ); ?>
+            <span class="description"><?php printf( __( 'Default is "%s"', ud_get_wp_property()->domain ), $wp_properties[ 'default_coords' ][ 'latitude' ] ); ?></span></li>
+          <li><?php _e( 'Custom Longitude Coordinate', ud_get_wp_property()->domain ); ?>
             : <?php echo WPP_F::input( "name=wpp_settings[custom_coords][longitude]&style=width: 100px;", ( isset( $wp_properties[ 'custom_coords' ][ 'longitude' ] ) ? $wp_properties[ 'custom_coords' ][ 'longitude' ] : false ) ); ?>
-            <span class="description"><?php printf( __( 'Default is "%s"', 'wpp' ), ( isset( $wp_properties[ 'default_coords' ][ 'longitude' ] ) ? $wp_properties[ 'default_coords' ][ 'longitude' ] : false ) ); ?></span></li>
-          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][google_maps][show_true_as_image]&label=" . sprintf( __( 'Show Checkboxed Image instead of "%s" and hide "%s" for %s/%s values', 'wpp' ), __( 'Yes', 'wpp' ), __( 'No', 'wpp' ), __( 'Yes', 'wpp' ), __( 'No', 'wpp' ) ), ( isset( $wp_properties[ 'configuration' ][ 'google_maps' ][ 'show_true_as_image' ] ) ? $wp_properties[ 'configuration' ][ 'google_maps' ][ 'show_true_as_image' ] : false ) ); ?></li>
+            <span class="description"><?php printf( __( 'Default is "%s"', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'default_coords' ][ 'longitude' ] ) ? $wp_properties[ 'default_coords' ][ 'longitude' ] : false ) ); ?></span></li>
+          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][google_maps][show_true_as_image]&label=" . sprintf( __( 'Show Checkboxed Image instead of "%s" and hide "%s" for %s/%s values', ud_get_wp_property()->domain ), __( 'Yes', ud_get_wp_property()->domain ), __( 'No', ud_get_wp_property()->domain ), __( 'Yes', ud_get_wp_property()->domain ), __( 'No', ud_get_wp_property()->domain ) ), ( isset( $wp_properties[ 'configuration' ][ 'google_maps' ][ 'show_true_as_image' ] ) ? $wp_properties[ 'configuration' ][ 'google_maps' ][ 'show_true_as_image' ] : false ) ); ?></li>
         </ul>
 
-        <p><?php printf(__( 'Attributes to display in popup after a %1s on a map is clicked.', 'wpp' ),  WPP_F::property_label( 'singular' )); ?></p>
+        <p><?php printf(__( 'Attributes to display in popup after a %1s on a map is clicked.', ud_get_wp_property()->domain ),  WPP_F::property_label( 'singular' )); ?></p>
         <div class="wp-tab-panel">
         <ul>
 
-          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][google_maps][infobox_settings][show_property_title]&label=" . sprintf(__( 'Show %1s Title', 'wpp' ),  WPP_F::property_label( 'singular' )), $wp_properties[ 'configuration' ][ 'google_maps' ][ 'infobox_settings' ][ 'show_property_title' ] ); ?></li>
+          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][google_maps][infobox_settings][show_property_title]&label=" . sprintf(__( 'Show %1s Title', ud_get_wp_property()->domain ),  WPP_F::property_label( 'singular' )), $wp_properties[ 'configuration' ][ 'google_maps' ][ 'infobox_settings' ][ 'show_property_title' ] ); ?></li>
 
           <?php foreach ( $wp_properties[ 'property_stats' ] as $attrib_slug => $attrib_title ): ?>
             <li><?php
@@ -383,55 +383,55 @@ if ( get_option( 'permalink_structure' ) == '' ) {
               ?></li>
           <?php endforeach; ?>
 
-          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][google_maps][infobox_settings][show_direction_link]&label=" . __( 'Show Directions Link', 'wpp' ), $wp_properties[ 'configuration' ][ 'google_maps' ][ 'infobox_settings' ][ 'show_direction_link' ] ); ?></li>
-          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][google_maps][infobox_settings][do_not_show_child_properties]&label=" . sprintf(__( 'Do not show a list of child %1s in Infobox. ', 'wpp' ),  WPP_F::property_label( 'plural' )), $wp_properties[ 'configuration' ][ 'google_maps' ][ 'infobox_settings' ][ 'do_not_show_child_properties' ] ); ?></li>
+          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][google_maps][infobox_settings][show_direction_link]&label=" . __( 'Show Directions Link', ud_get_wp_property()->domain ), $wp_properties[ 'configuration' ][ 'google_maps' ][ 'infobox_settings' ][ 'show_direction_link' ] ); ?></li>
+          <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][google_maps][infobox_settings][do_not_show_child_properties]&label=" . sprintf(__( 'Do not show a list of child %1s in Infobox. ', ud_get_wp_property()->domain ),  WPP_F::property_label( 'plural' )), $wp_properties[ 'configuration' ][ 'google_maps' ][ 'infobox_settings' ][ 'do_not_show_child_properties' ] ); ?></li>
         </ul>
         </div>
       </td>
     </tr>
 
     <tr>
-      <th><?php _e( 'Address Display', 'wpp' ) ?></th>
+      <th><?php _e( 'Address Display', ud_get_wp_property()->domain ) ?></th>
       <td>
 
 
         <textarea name="wpp_settings[configuration][display_address_format]" style="width: 70%;"><?php echo $wp_properties[ 'configuration' ][ 'display_address_format' ]; ?></textarea>
         <br/>
         <span class="description">
-               <?php _e( 'Available tags:', 'wpp' ) ?> [street_number] [street_name], [city], [state], [state_code], [county],  [country], [zip_code].
+               <?php _e( 'Available tags:', ud_get_wp_property()->domain ) ?> [street_number] [street_name], [city], [state], [state_code], [county],  [country], [zip_code].
         </span>
       </td>
     </tr>
 
     <tr>
-      <th><?php _e( 'Currency & Numbers', 'wpp' ); ?></th>
+      <th><?php _e( 'Currency & Numbers', ud_get_wp_property()->domain ); ?></th>
       <td>
         <ul>
-          <li><?php echo WPP_F::input( "name=currency_symbol&label=" . __( 'Currency symbol.', 'wpp' ) . "&group=wpp_settings[configuration]&style=width: 50px;", $wp_properties[ 'configuration' ][ 'currency_symbol' ] ); ?></li>
+          <li><?php echo WPP_F::input( "name=currency_symbol&label=" . __( 'Currency symbol.', ud_get_wp_property()->domain ) . "&group=wpp_settings[configuration]&style=width: 50px;", $wp_properties[ 'configuration' ][ 'currency_symbol' ] ); ?></li>
           <li>
-            <?php _e( 'Thousands separator symbol:', 'wpp' ); ?>
+            <?php _e( 'Thousands separator symbol:', ud_get_wp_property()->domain ); ?>
             <select name="wpp_settings[configuration][thousands_sep]">
               <option value=""> - </option>
-              <option value="." <?php if( isset( $wp_properties[ 'configuration' ][ 'thousands_sep' ] ) ) selected( $wp_properties[ 'configuration' ][ 'thousands_sep' ], '.' ); ?>><?php _e( '. (period)', 'wpp' ); ?></option>
-              <option value="," <?php if( isset( $wp_properties[ 'configuration' ][ 'thousands_sep' ] ) ) selected( $wp_properties[ 'configuration' ][ 'thousands_sep' ], ',' ); ?>><?php _e( ', (comma)', 'wpp' ); ?></option>
+              <option value="." <?php if( isset( $wp_properties[ 'configuration' ][ 'thousands_sep' ] ) ) selected( $wp_properties[ 'configuration' ][ 'thousands_sep' ], '.' ); ?>><?php _e( '. (period)', ud_get_wp_property()->domain ); ?></option>
+              <option value="," <?php if( isset( $wp_properties[ 'configuration' ][ 'thousands_sep' ] ) ) selected( $wp_properties[ 'configuration' ][ 'thousands_sep' ], ',' ); ?>><?php _e( ', (comma)', ud_get_wp_property()->domain ); ?></option>
              </select>
              <span class="description"><?php _e( 'The character separating the 1 and the 5: $1<b>,</b>500' ); ?></span>
 
           </li>
 
           <li>
-            <?php _e( 'Currency symbol placement:', 'wpp' ); ?>
+            <?php _e( 'Currency symbol placement:', ud_get_wp_property()->domain ); ?>
             <select name="wpp_settings[configuration][currency_symbol_placement]">
               <option value=""> - </option>
-              <option value="before" <?php if( isset( $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ] ) ) selected( $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ], 'before' ); ?>><?php _e( 'Before number', 'wpp' ); ?></option>
-              <option value="after" <?php if( isset( $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ] ) ) selected( $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ], 'after' ); ?>><?php _e( 'After number', 'wpp' ); ?></option>
+              <option value="before" <?php if( isset( $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ] ) ) selected( $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ], 'before' ); ?>><?php _e( 'Before number', ud_get_wp_property()->domain ); ?></option>
+              <option value="after" <?php if( isset( $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ] ) ) selected( $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ], 'after' ); ?>><?php _e( 'After number', ud_get_wp_property()->domain ); ?></option>
              </select>
 
           </li>
 
           <li>
-            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][show_aggregated_value_as_average]&label=" . __( 'Parent property\'s aggregated value should be set as average of children values. If not, - the aggregated value will be set as sum of children values.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'show_aggregated_value_as_average' ] ) ? $wp_properties[ 'configuration' ][ 'show_aggregated_value_as_average' ] : false ) ); ?>
-            <br/><span class="description"><?php printf(__( 'Aggregated value is set only for numeric and currency attributes and can be updated ( set ) only on child %1s\'s saving.', 'wpp' ), WPP_F::property_label( 'singular' ) ); ?></span>
+            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][show_aggregated_value_as_average]&label=" . __( 'Parent property\'s aggregated value should be set as average of children values. If not, - the aggregated value will be set as sum of children values.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'show_aggregated_value_as_average' ] ) ? $wp_properties[ 'configuration' ][ 'show_aggregated_value_as_average' ] : false ) ); ?>
+            <br/><span class="description"><?php printf(__( 'Aggregated value is set only for numeric and currency attributes and can be updated ( set ) only on child %1s\'s saving.', ud_get_wp_property()->domain ), WPP_F::property_label( 'singular' ) ); ?></span>
           </li>
 
        </ul>
@@ -441,13 +441,13 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
     <tr>
       <th>
-        <?php _e( 'Admin Settings', 'wpp' ) ?>
+        <?php _e( 'Admin Settings', ud_get_wp_property()->domain ) ?>
       </th>
         <td>
         <ul>
-          <li><?php printf(__( 'Thumbnail size for %1s images displayed on %2s page: ', 'wpp' ), WPP_F::property_label( 'singular' ), WPP_F::property_label( 'plural' ) ) ?> <?php WPP_F::image_sizes_dropdown( "name=wpp_settings[configuration][admin_ui][overview_table_thumbnail_size]&selected=" . ( isset( $wp_properties[ 'configuration' ][ 'admin_ui' ][ 'overview_table_thumbnail_size' ] ) ? $wp_properties[ 'configuration' ][ 'admin_ui' ][ 'overview_table_thumbnail_size' ] : false ) ); ?></li>
+          <li><?php printf(__( 'Thumbnail size for %1s images displayed on %2s page: ', ud_get_wp_property()->domain ), WPP_F::property_label( 'singular' ), WPP_F::property_label( 'plural' ) ) ?> <?php WPP_F::image_sizes_dropdown( "name=wpp_settings[configuration][admin_ui][overview_table_thumbnail_size]&selected=" . ( isset( $wp_properties[ 'configuration' ][ 'admin_ui' ][ 'overview_table_thumbnail_size' ] ) ? $wp_properties[ 'configuration' ][ 'admin_ui' ][ 'overview_table_thumbnail_size' ] : false ) ); ?></li>
           <li>
-          <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][completely_hide_hidden_attributes_in_admin_ui]&label=" . sprintf(__( 'Completely hide hidden attributes when editing %1s.', 'wpp' ), WPP_F::property_label( 'plural' ) ), ( isset( $wp_properties[ 'configuration' ][ 'completely_hide_hidden_attributes_in_admin_ui' ] ) ? $wp_properties[ 'configuration' ][ 'completely_hide_hidden_attributes_in_admin_ui' ] : false ) ); ?>
+          <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][completely_hide_hidden_attributes_in_admin_ui]&label=" . sprintf(__( 'Completely hide hidden attributes when editing %1s.', ud_get_wp_property()->domain ), WPP_F::property_label( 'plural' ) ), ( isset( $wp_properties[ 'configuration' ][ 'completely_hide_hidden_attributes_in_admin_ui' ] ) ? $wp_properties[ 'configuration' ][ 'completely_hide_hidden_attributes_in_admin_ui' ] : false ) ); ?>
           </li>
         </ul>
       </td>
@@ -473,90 +473,90 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
       <div class="wpp_settings_block">
         <label>
-        <?php _e( 'If prompted for your domain name during a premium feature purchase, enter as appears here:', 'wpp' ); ?>
+        <?php _e( 'If prompted for your domain name during a premium feature purchase, enter as appears here:', ud_get_wp_property()->domain ); ?>
           <input type="text" readonly="true" value="<?php echo $this_domain; ?>" size="<?php echo strlen( $this_domain ) + 10; ?>"/>
         </label>
       </div>
 
       <div class="wpp_settings_block">
-        <h3><?php _e( 'Advanced Options', 'wpp' ); ?></h3>
+        <h3><?php _e( 'Advanced Options', ud_get_wp_property()->domain ); ?></h3>
         <ul>
           <li>
-            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][allow_parent_deep_depth]&label=" . __( 'Enable \'Falls Under\' deep depth.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] ) ? $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] : false ) ); ?>
+            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][allow_parent_deep_depth]&label=" . __( 'Enable \'Falls Under\' deep depth.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] ) ? $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] : false ) ); ?>
             <br/>
-            <span class="description"><?php printf( __( 'Allows to set child %1s as parent.', 'wpp' ), WPP_F::property_label( 'singular' ) )  ?></span>
+            <span class="description"><?php printf( __( 'Allows to set child %1s as parent.', ud_get_wp_property()->domain ), WPP_F::property_label( 'singular' ) )  ?></span>
           </li>
           <li>
-            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][disable_wordpress_postmeta_cache]&label=" . __( 'Disable WordPress update_post_caches() function.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'disable_wordpress_postmeta_cache' ] ) ? $wp_properties[ 'configuration' ][ 'disable_wordpress_postmeta_cache' ] : false ) ); ?>
+            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][disable_wordpress_postmeta_cache]&label=" . __( 'Disable WordPress update_post_caches() function.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'disable_wordpress_postmeta_cache' ] ) ? $wp_properties[ 'configuration' ][ 'disable_wordpress_postmeta_cache' ] : false ) ); ?>
             <br/>
-            <span class="description"><?php printf( __('This may solve Out of Memory issues if you have a lot of %1s.','wpp'), WPP_F::property_label( 'plural' )); ?></span>
+            <span class="description"><?php printf( __('This may solve Out of Memory issues if you have a lot of %1s.',ud_get_wp_property()->domain), WPP_F::property_label( 'plural' )); ?></span>
           </li>
           <li>
-            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][developer_mode]&label=" . __( 'Enable developer mode - some extra information displayed via Firebug console.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'developer_mode' ] ) ? $wp_properties[ 'configuration' ][ 'developer_mode' ] : false ) ); ?>
+            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][developer_mode]&label=" . __( 'Enable developer mode - some extra information displayed via Firebug console.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'developer_mode' ] ) ? $wp_properties[ 'configuration' ][ 'developer_mode' ] : false ) ); ?>
             <br/>
           </li>
 
           <li>
-            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_automatically_regenerate_thumbnails]&label=" . __( 'Disable "on-the-fly" image regeneration.', 'wpp' ), ( isset( $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] ) ? $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] : true ) ); ?>
+            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_automatically_regenerate_thumbnails]&label=" . __( 'Disable "on-the-fly" image regeneration.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] ) ? $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] : true ) ); ?>
             <br/>
-            <span class="description"><?php _e('Enabling this option may cause performance issues.','wpp'); ?></span>
+            <span class="description"><?php _e('Enabling this option may cause performance issues.',ud_get_wp_property()->domain); ?></span>
           </li>
 
         </ul>
       </div>
 
       <div class="wpp_settings_block">
-        <?php _e( "Restore Backup of WP-Property Configuration", 'wpp' ); ?>
+        <?php _e( "Restore Backup of WP-Property Configuration", ud_get_wp_property()->domain ); ?>
         : <input name="wpp_settings[settings_from_backup]" class="" id="wpp_backup_file" type="file"/>
-        <a href="<?php echo wp_nonce_url( "edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup", 'download-wpp-backup' ); ?>"><?php _e( 'Download Backup of Current WP-Property Configuration.', 'wpp' ); ?></a>
+        <a href="<?php echo wp_nonce_url( "edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup", 'download-wpp-backup' ); ?>"><?php _e( 'Download Backup of Current WP-Property Configuration.', ud_get_wp_property()->domain ); ?></a>
       </div>
 
       <div class="wpp_settings_block">
         <?php $google_map_localizations = WPP_F::draw_localization_dropdown( 'return_array=true' ); ?>
-        <?php _e( 'Revalidate all addresses using', 'wpp' ); ?>
-        <b><?php echo $google_map_localizations[ $wp_properties[ 'configuration' ][ 'google_maps_localization' ] ]; ?></b> <?php _e( 'localization', 'wpp' ); ?>
-         <input type="button" value="<?php _e( 'Revalidate', 'wpp' ); ?>" id="wpp_ajax_revalidate_all_addresses" class="button">
+        <?php _e( 'Revalidate all addresses using', ud_get_wp_property()->domain ); ?>
+        <b><?php echo $google_map_localizations[ $wp_properties[ 'configuration' ][ 'google_maps_localization' ] ]; ?></b> <?php _e( 'localization', ud_get_wp_property()->domain ); ?>
+         <input type="button" value="<?php _e( 'Revalidate', ud_get_wp_property()->domain ); ?>" id="wpp_ajax_revalidate_all_addresses" class="button">
       </div>
 
-      <div class="wpp_settings_block"><?php printf(__( 'Enter in the ID of the %1s you want to look up, and the class will be displayed below.', 'wpp' ), WPP_F::property_label( 'singular' )) ?>
+      <div class="wpp_settings_block"><?php printf(__( 'Enter in the ID of the %1s you want to look up, and the class will be displayed below.', ud_get_wp_property()->domain ), WPP_F::property_label( 'singular' )) ?>
         <input type="text" id="wpp_property_class_id"/>
-        <input type="button" class="button" value="<?php _e( 'Lookup', 'wpp' ) ?>" id="wpp_ajax_property_query"> <span id="wpp_ajax_property_query_cancel" class="wpp_link hidden"><?php _e( 'Cancel', 'wpp' ) ?></span>
+        <input type="button" class="button" value="<?php _e( 'Lookup', ud_get_wp_property()->domain ) ?>" id="wpp_ajax_property_query"> <span id="wpp_ajax_property_query_cancel" class="wpp_link hidden"><?php _e( 'Cancel', ud_get_wp_property()->domain ) ?></span>
         <pre id="wpp_ajax_property_result" class="wpp_class_pre hidden"></pre>
       </div>
 
-      <div class="wpp_settings_block"><?php printf(__( 'Get %1s image data.', 'wpp' ), WPP_F::property_label( 'singular' )) ?>
-        <label for="wpp_image_id"><?php printf(__( '%1s ID:', 'wpp' ), WPP_F::property_label( 'singular' )) ?></label>
+      <div class="wpp_settings_block"><?php printf(__( 'Get %1s image data.', ud_get_wp_property()->domain ), WPP_F::property_label( 'singular' )) ?>
+        <label for="wpp_image_id"><?php printf(__( '%1s ID:', ud_get_wp_property()->domain ), WPP_F::property_label( 'singular' )) ?></label>
         <input type="text" id="wpp_image_id"/>
-        <input type="button" class="button" value="<?php _e( 'Lookup', 'wpp' ) ?>" id="wpp_ajax_image_query"> <span id="wpp_ajax_image_query_cancel" class="wpp_link hidden"><?php _e( 'Cancel', 'wpp' ) ?></span>
+        <input type="button" class="button" value="<?php _e( 'Lookup', ud_get_wp_property()->domain ) ?>" id="wpp_ajax_image_query"> <span id="wpp_ajax_image_query_cancel" class="wpp_link hidden"><?php _e( 'Cancel', ud_get_wp_property()->domain ) ?></span>
         <pre id="wpp_ajax_image_result" class="wpp_class_pre hidden"></pre>
       </div>
 
       <div class="wpp_settings_block">
-        <?php _e( 'Look up the <b>$wp_properties</b> global settings array.  This array stores all the default settings, which are overwritten by database settings, and custom filters.', 'wpp' ) ?>
-        <input type="button" class="button" value="<?php _e( 'Show $wp_properties', 'wpp' ) ?>" id="wpp_show_settings_array"> <span id="wpp_show_settings_array_cancel" class="wpp_link hidden"><?php _e( 'Cancel', 'wpp' ) ?></span>
+        <?php _e( 'Look up the <b>$wp_properties</b> global settings array.  This array stores all the default settings, which are overwritten by database settings, and custom filters.', ud_get_wp_property()->domain ) ?>
+        <input type="button" class="button" value="<?php _e( 'Show $wp_properties', ud_get_wp_property()->domain ) ?>" id="wpp_show_settings_array"> <span id="wpp_show_settings_array_cancel" class="wpp_link hidden"><?php _e( 'Cancel', ud_get_wp_property()->domain ) ?></span>
         <pre id="wpp_show_settings_array_result" class="wpp_class_pre hidden"><?php print_r( $wp_properties ); ?></pre>
       </div>
 
       <div class="wpp_settings_block">
-        <?php _e( 'Clear WPP Cache. Some shortcodes and widgets use cache, so the good practice is clear it after widget, shortcode changes.', 'wpp' ) ?>
-        <input type="button" class="button" value="<?php _e( 'Clear Cache', 'wpp' ) ?>" id="wpp_clear_cache">
+        <?php _e( 'Clear WPP Cache. Some shortcodes and widgets use cache, so the good practice is clear it after widget, shortcode changes.', ud_get_wp_property()->domain ) ?>
+        <input type="button" class="button" value="<?php _e( 'Clear Cache', ud_get_wp_property()->domain ) ?>" id="wpp_clear_cache">
       </div>
 
-      <div class="wpp_settings_block"><?php printf(__( 'Set all %1s to same %2s type:', 'wpp' ), WPP_F::property_label( 'plural' ), WPP_F::property_label( 'singular' )) ?>
+      <div class="wpp_settings_block"><?php printf(__( 'Set all %1s to same %2s type:', ud_get_wp_property()->domain ), WPP_F::property_label( 'plural' ), WPP_F::property_label( 'singular' )) ?>
         <select id="wpp_ajax_max_set_property_type_type">
         <?php foreach ( $wp_properties[ 'property_types' ] as $p_slug => $p_label ) { ?>
           <option value="<?php echo $p_slug; ?>"><?php echo $p_label; ?></option>
         <?php } ?>
-          <input type="button" class="button" value="<?php _e( 'Set', 'wpp' ) ?>" id="wpp_ajax_max_set_property_type">
+          <input type="button" class="button" value="<?php _e( 'Set', ud_get_wp_property()->domain ) ?>" id="wpp_ajax_max_set_property_type">
         <pre id="wpp_ajax_max_set_property_type_result" class="wpp_class_pre hidden"></pre>
       </div>
 
       <div class="wpp_settings_block">
         <?php if ( function_exists( 'memory_get_usage' ) ): ?>
-          <?php _e( 'Memory Usage:', 'wpp' ); ?> <?php echo round( ( memory_get_usage() / 1048576 ), 2 ); ?> megabytes.
+          <?php _e( 'Memory Usage:', ud_get_wp_property()->domain ); ?> <?php echo round( ( memory_get_usage() / 1048576 ), 2 ); ?> megabytes.
         <?php endif; ?>
         <?php if ( function_exists( 'memory_get_peak_usage' ) ): ?>
-          <?php _e( 'Peak Memory Usage:', 'wpp' ); ?> <?php echo round( ( memory_get_peak_usage() / 1048576 ), 2 ); ?> megabytes.
+          <?php _e( 'Peak Memory Usage:', ud_get_wp_property()->domain ); ?> <?php echo round( ( memory_get_peak_usage() / 1048576 ), 2 ); ?> megabytes.
         <?php endif; ?>
       </div>
 
@@ -570,7 +570,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 <br class="cb"/>
 
 <p class="wpp_save_changes_row">
-<input type="submit" value="<?php _e( 'Save Changes', 'wpp' ); ?>" class="button-primary btn" name="Submit">
+<input type="submit" value="<?php _e( 'Save Changes', ud_get_wp_property()->domain ); ?>" class="button-primary btn" name="Submit">
  </p>
 
 

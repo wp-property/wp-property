@@ -9,7 +9,7 @@ class GalleryPropertiesWidget extends WP_Widget {
    * Construct
    */
   function __construct() {
-    parent::__construct( false, $name = sprintf( __( '%1s Gallery', 'wpp' ), WPP_F::property_label() ), array( 'description' => __( 'List of all images attached to the current property', 'wpp' ) ) );
+    parent::__construct( false, $name = sprintf( __( '%1s Gallery', ud_get_wp_property()->domain ), WPP_F::property_label() ), array( 'description' => __( 'List of all images attached to the current property', ud_get_wp_property()->domain ) ) );
   }
 
   /**
@@ -172,7 +172,7 @@ class GalleryPropertiesWidget extends WP_Widget {
     <p>
       <label for="<?php echo $this->get_field_id( 'gallery_count' ) ?>"></label>
       <?php $number_of_images = '<input size="3" type="text" id="' . $this->get_field_id( 'gallery_count' ) . '" name="' . $this->get_field_name( 'gallery_count' ) . '" value="' . $gallery_count . '" />'; ?>
-      <?php echo sprintf( __( 'Show %s Images', 'wpp' ), $number_of_images ); ?>
+      <?php echo sprintf( __( 'Show %s Images', ud_get_wp_property()->domain ), $number_of_images ); ?>
     </p>
 
     <p>
@@ -180,7 +180,7 @@ class GalleryPropertiesWidget extends WP_Widget {
              id="<?php echo $this->get_field_id( 'show_caption' ) ?>"
              type="checkbox" <?php checked( 'on', $show_caption ); ?> value="on"/>
       <label
-          for="<?php echo $this->get_field_id( 'show_caption' ) ?>"><?php _e( 'Show Image Captions', 'wpp' ); ?></label>
+          for="<?php echo $this->get_field_id( 'show_caption' ) ?>"><?php _e( 'Show Image Captions', ud_get_wp_property()->domain ); ?></label>
     </p>
 
     <p class="wpp_gallery_show_description">
@@ -188,7 +188,7 @@ class GalleryPropertiesWidget extends WP_Widget {
              id="<?php echo $this->get_field_id( 'show_description' ) ?>"
              type="checkbox" <?php checked( 'on', $show_description ); ?> value="on"/>
       <label
-          for="<?php echo $this->get_field_id( 'show_description' ) ?>"><?php _e( 'Show Image Descriptions.', 'wpp' ); ?></label>
+          for="<?php echo $this->get_field_id( 'show_description' ) ?>"><?php _e( 'Show Image Descriptions.', ud_get_wp_property()->domain ); ?></label>
     </p>
 
     <?php do_action( 'wpp_widget_slideshow_bottom', array( 'this_object' => $this, 'instance' => $instance ) ); ?>

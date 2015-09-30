@@ -269,7 +269,7 @@ namespace UsabilityDynamics\WPP {
 
         if( is_array( $display_stats ) && count( $display_stats ) > 0 ) {
           if( $stat_count > 5 ) {
-            $display_stats[ 'toggle_advanced' ] = '<li class="wpp_show_advanced" advanced_option_class="wpp_overview_hidden_stats">' . sprintf( __( 'Toggle %1s more.', 'wpp' ), $hidden_count ) . '</li>';
+            $display_stats[ 'toggle_advanced' ] = '<li class="wpp_show_advanced" advanced_option_class="wpp_overview_hidden_stats">' . sprintf( __( 'Toggle %1s more.', ud_get_wp_property()->domain ), $hidden_count ) . '</li>';
           }
           $data = '<ul class="wpp_overview_column_stats wpp_something_advanced_wrapper">' . implode( '', $display_stats ) . '</ul>';
         }
