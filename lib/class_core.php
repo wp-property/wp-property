@@ -1091,7 +1091,9 @@ class WPP_Core {
    *
    */
   static public function shortcode_property_overview( $atts = "" ) {
-    global $wp_properties, $wpp_query, $property, $post, $wp_query;
+    global $wp_properties, $wpp_query, $post, $wp_query;
+
+    $wpp_query = array();
 
     $atts = wp_parse_args( $atts, array() );
 

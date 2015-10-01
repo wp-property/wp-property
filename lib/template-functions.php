@@ -154,6 +154,7 @@ if ( !function_exists( 'returned_properties' ) ) {
    */
   function returned_properties( $args = false ) {
     global $wpp_query;
+    $properties = array();
     foreach ( $wpp_query[ 'properties' ][ 'results' ] as $property_id ) {
       $properties[ ] = prepare_property_for_display( $property_id, $args );
     }
@@ -169,7 +170,7 @@ if ( !function_exists( 'have_properties' ) ) {
    */
   function have_properties() {
     global $wpp_query;
-    if ( $wpp_query[ 'properties' ] ) {
+    if ( !empty( $wpp_query[ 'properties' ] ) && is_array( $wpp_query[ 'properties' ] ) ) {
       return true;
     }
     return false;

@@ -5,7 +5,7 @@
  * To modify it, copy it to your theme's root.
  */
 
-global $post, $wp_properties;
+global $post, $property, $wp_properties;
 
 if ( !$coords = \WPP_F::get_coordinates() ) {
   return;
