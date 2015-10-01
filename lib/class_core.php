@@ -1091,8 +1091,9 @@ class WPP_Core {
    *
    */
   static public function shortcode_property_overview( $atts = "" ) {
-    global $wp_properties, $wpp_query, $post, $wp_query;
+    global $wp_properties, $wpp_query, $property, $post, $wp_query;
 
+    $_property = $property;
     $wpp_query = array();
 
     $atts = wp_parse_args( $atts, array() );
@@ -1379,6 +1380,9 @@ class WPP_Core {
     }
 
     $result = apply_filters( 'wpp_property_overview_render', $result );
+
+    /* Reset global property to default. */
+    $property = $_property;
 
     if( $wpp_query[ 'ajax_call' ] ) {
       return json_encode( array( 'wpp_query' => $wpp_query, 'display' => implode( '', $result ) ) );
