@@ -2,6 +2,7 @@
 * Added compatibility with Page Builder by SiteOrigin plugin.
 * Added ability to set Single or Page templates for rendering Single Property page instead of predefined property.php.
 * Added ability to disable WP-Property Widget Sidebars.
+* Added Dutch ( Netherlands ) localization.
 * Added Property Attributes widget which renders the list of property attributes.
 * Added Property Map widget.
 * Added [property_meta] shortcode and Property Meta widget.

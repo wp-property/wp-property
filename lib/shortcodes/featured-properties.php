@@ -125,12 +125,36 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       *
        * @param string $atts
        * @return string|void
        */
       public function call( $atts = "" ) {
+        return $this->render( $atts );
+      }
 
-        $data = shortcode_atts( array(
+      /**
+       * Displays featured properties
+       *
+       * Performs searching/filtering functions, provides template with $properties file
+       * Retirms html content to be displayed after location attribute on property edit page
+       *
+       * @since 0.60
+       *
+       * @param string $listing_id Listing ID must be passed
+       *
+       * @uses \WPP_F::get_properties()
+       *
+       * @return string
+       */
+      public function render( $atts = false ) {
+        global $wp_properties, $wpp_query, $post;
+
+        if( !$atts ) {
+          $atts = array();
+        }
+        $hide_count = '';
+        $defaults = array(
           'property_type' => 'all',
           'type' => '',
           'class' => 'shortcode_featured_properties',
@@ -143,11 +167,55 @@ namespace UsabilityDynamics\WPP {
           'pagination' => 'off',
           'stats' => '',
           'thumbnail_size' => 'thumbnail'
-        ), $atts );
+        );
 
-        return \WPP_Core::shortcode_featured_properties( $data );
+        $args = shortcode_atts( $defaults, $atts );
 
+        //** Using "image_type" is obsolete */
+        if( $args[ 'thumbnail_size' ] == $defaults[ 'thumbnail_size' ] && !empty( $args[ 'image_type' ] ) ) {
+          $args[ 'thumbnail_size' ] = $args[ 'image_type' ];
+        }
+
+        //** Using "type" is obsolete. If property_type is not set, but type is, we set property_type from type */
+        if( !empty( $args[ 'type' ] ) && empty( $args[ 'property_type' ] ) ) {
+          $args[ 'property_type' ] = $args[ 'type' ];
+        }
+
+        // Convert shortcode multi-property-type string to array
+        if( !empty( $args[ 'stats' ] ) ) {
+
+          if( strpos( $args[ 'stats' ], "," ) ) {
+            $args[ 'stats' ] = explode( ",", $args[ 'stats' ] );
+          }
+
+          if( !is_array( $args[ 'stats' ] ) ) {
+            $args[ 'stats' ] = array( $args[ 'stats' ] );
+          }
+
+          foreach( $args[ 'stats' ] as $key => $stat ) {
+            $args[ 'stats' ][ $key ] = trim( $stat );
+          }
+
+        }
+
+        /** We hide wrapper to use our custom one. */
+        $args[ 'disable_wrapper' ] = 'true';
+
+        $args[ 'featured' ] = 'true';
+        $args[ 'template' ] = 'featured-shortcode';
+        $args[ 'unique_hash' ] = rand( 10000, 99900 );
+
+        unset( $args[ 'image_type' ] );
+        unset( $args[ 'type' ] );
+
+        $result = \WPP_Core::shortcode_property_overview( $args );
+        if( !empty( $result ) ) {
+          $result = '<div id="wpp_shortcode_' . $args[ 'unique_hash' ] . '" class="' . $args[ 'class' ] . '">' . $result . '</div>';
+        }
+
+        return $result;
       }
+
 
     }
 
