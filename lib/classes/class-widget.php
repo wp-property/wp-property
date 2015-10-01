@@ -101,6 +101,22 @@ namespace UsabilityDynamics\WPP {
                   <?php }
                   break;
 
+                case 'custom_attributes':
+                  if ( !empty( $param['options'] ) && is_array( $param['options'] ) ) { ?>
+                  <ul class="wpp-multi-checkbox-wrapper">
+                    <?php foreach( $param['options'] as $opt_name => $opt_label ) { ?>
+                      <li><label><?php echo $opt_label; ?> <input type="text"
+                          value="<?php echo ( !empty( $instance[ $param['id'] ][ $opt_name ] ) ) ? $instance[ $param['id'] ][ $opt_name ] : ''; ?>"
+                          class="widefat"
+                          id="<?php echo $this->get_field_id( $param['id'] ) . '_' . $opt_name; ?>"
+                          name="<?php echo $this->get_field_name( $param['id'] ); ?>[<?php echo $opt_name; ?>]"></label>
+                      </li>
+                    <?php } ?>
+                  </ul>
+                  <?php }
+                  break;
+
+
               } ?>
 
               <?php if( !empty( $param[ 'description' ] ) ) : ?>

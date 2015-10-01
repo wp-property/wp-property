@@ -21,6 +21,30 @@ namespace UsabilityDynamics\WPP {
         $options = array(
             'id' => 'property_overview',
             'params' => array(
+              'property_id' => array(
+                'name' => __( 'Property ID', ud_get_wp_property()->domain ),
+                'description' => __( 'If not empty, result will show particular property, which ID is set.', ud_get_wp_property()->domain ),
+                'type' => 'text',
+                'default' => ''
+              ),
+              'post_parent' => array(
+                'name' => sprintf( __( 'Parent %s', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label() ),
+                'description' => sprintf( __( 'If not empty, result will show children of particular property, which ID is set. You can use dynamic attributes instead of ID such as %1$s or %2$s.<br/>%1$s - to list all the listings that are a child of the current %3$s.<br/>%2$s - to list all listings that are children of the same parent (i.e. siblings) of the current %3$s', ud_get_wp_property( 'domain' ) ), '<b>post_id</b>', '<b>post_parent</b>', \WPP_F::property_label() ),
+                'type' => 'text',
+                'default' => ''
+              ),
+              'property_type' => array(
+                'name' => sprintf( __( '%s Type', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label() ),
+                'description' => sprintf( __( 'The list of %s types to be included. If no type checked, all available %s will be shown.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label(), \WPP_F::property_label( 'plural' ) ),
+                'type' => 'multi_checkbox',
+                'options' => ud_get_wp_property( 'property_types' ),
+              ),
+              'custom_query' => array(
+                'name' => __( 'Custom Query by Attributes Values', ud_get_wp_property()->domain ),
+                'description' => sprintf( __( 'Setup your custom query by providing values for specific attributes. Empty values will be ignored. Example:<br/>- to list only %1$s which have minimum 2 and maximum 4 bedrooms, you should set <b>2-4</b> value for your Bedrooms attribute.<br/>- to list only %1$s which have 1 or 3 bathrooms, you should set <b>1,3</b> value for your Batrooms attribute.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label() ),
+                'type' => 'custom_attributes',
+                'options' => $custom_attributes,
+              ),
               'show_children' => array(
                 'name' => __( 'Show Children', ud_get_wp_property()->domain ),
                 'description' => __( 'Switches children property displaying.', ud_get_wp_property()->domain ),
@@ -87,9 +111,8 @@ namespace UsabilityDynamics\WPP {
               ),
               'template' => array(
                 'name' => __( 'Template', ud_get_wp_property()->domain ),
-                'description' => __( 'Sets layout using PHP template name. ', ud_get_wp_property()->domain ),
+                'description' => sprintf( __( 'Sets layout using PHP template name. Your custom template should be stored in your theme\'s root directory. Example:<br/>if your custom template is called %s, the value of template must be %s.', ud_get_wp_property( 'domain' ) ), '<b>property-overview-grid.php</b>', '<b>grid</b>' ),
                 'type' => 'text',
-                'default' => 'false'
               ),
               'sorter_type' => array(
                 'name' => __( 'Sorter Type', ud_get_wp_property()->domain ),
@@ -169,13 +192,6 @@ namespace UsabilityDynamics\WPP {
                 ),
                 'default' => 'false'
               ),
-              'custom_query' => array(
-                'name' => __( 'Additional Attributes', ud_get_wp_property()->domain ),
-                'description' => __( 'Setup your custom query.', ud_get_wp_property()->domain ),
-                'type' => 'custom_attributes',
-                'options' => $custom_attributes,
-              ),
-
             ),
             'description' => __( 'Renders Property Attributes', ud_get_wp_property()->domain ),
             'group' => 'WP-Property'

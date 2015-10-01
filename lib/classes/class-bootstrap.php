@@ -93,12 +93,19 @@ namespace UsabilityDynamics\WPP {
         new \UsabilityDynamics\WPLT\Bootstrap();
 
         /**
-         * May be load Shortcodes and Widgets
+         * May be load Shortcodes
          */
-        if( class_exists( '\UsabilityDynamics\Shortcode\Shortcode' ) ) {
-          $this->load_files( $this->path('lib/shortcodes', 'dir') );
-          $this->load_files( $this->path('lib/widgets', 'dir') );
-        }
+        add_action( 'init', function() {
+          ud_get_wp_property()->load_files( $this->path('lib/shortcodes', 'dir') );
+        }, 1 );
+
+
+        /**
+         * May be load Widgets
+         */
+        add_action( 'widgets_init', function() {
+          ud_get_wp_property()->load_files( $this->path('lib/widgets', 'dir') );
+        }, 1 );
 
         /**
          * Initiate the plugin
