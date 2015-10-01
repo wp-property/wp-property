@@ -3196,9 +3196,6 @@ class WPP_F extends UsabilityDynamics\Utility {
           ORDER BY $sql_sort_by $sql_sort_order
           $limit_query" );
 
-
-
-
       }
 
     }

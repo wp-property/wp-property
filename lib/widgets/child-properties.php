@@ -36,6 +36,8 @@ class ChildPropertiesWidget extends WP_Widget {
     $stats = isset( $instance[ 'stats' ] ) ? $instance[ 'stats' ] : array();
     $address_format = isset( $instance[ 'address_format' ] ) ? $instance[ 'address_format' ] : '';
     $amount_items = !empty( $instance[ 'amount_items' ] ) ? $instance[ 'amount_items' ] : 5;
+    $sort_by = isset( $instance[ 'sort_by' ] ) ? $instance[ 'sort_by' ] : 'date';
+    $sort_order = isset( $instance[ 'sort_order' ] ) ? $instance[ 'sort_order' ] : 'DESC';
 
     if ( !empty( $image_type ) ) {
       $image_size = WPP_F::image_sizes( $image_type );
@@ -46,6 +48,8 @@ class ChildPropertiesWidget extends WP_Widget {
         'numberposts' => $amount_items,
         'post_status' => 'publish',
         'post_parent' => $post->ID,
+        'orderby' => $sort_by,
+        'order' => $sort_order,
     ) );
 
     if ( count( $attachments ) < 1 ) {
@@ -153,7 +157,8 @@ class ChildPropertiesWidget extends WP_Widget {
     $hide_image = isset( $instance[ 'hide_image' ] ) ? $instance[ 'hide_image' ] : false;
     $enable_more = isset( $instance[ 'enable_more' ] ) ? $instance[ 'enable_more' ] : false;
     $enable_view_all = isset( $instance[ 'enable_view_all' ] ) ? $instance[ 'enable_view_all' ] : false;
-
+    $sort_by = isset( $instance[ 'sort_by' ] ) ? $instance[ 'sort_by' ] : false;
+    $sort_order = isset( $instance[ 'sort_order' ] ) ? $instance[ 'sort_order' ] : false;
     ?>
     <script type="text/javascript">
       //hide and show dropdown whith thumb settings
@@ -189,9 +194,9 @@ class ChildPropertiesWidget extends WP_Widget {
     else
       echo 'style="display:none;"';
     ?>>
-      <label for="<?php echo $this->get_field_id( 'image_type' ); ?>"><?php _e( 'Image Size:', ud_get_wp_property()->domain ); ?>
-        <?php WPP_F::image_sizes_dropdown( "name=" . $this->get_field_name( 'image_type' ) . "&selected=" . $image_type ); ?>
-      </label>
+    <label for="<?php echo $this->get_field_id( 'image_type' ); ?>"><?php _e( 'Image Size:', ud_get_wp_property()->domain ); ?>
+      <?php WPP_F::image_sizes_dropdown( "name=" . $this->get_field_name( 'image_type' ) . "&selected=" . $image_type ); ?>
+    </label>
 
     <p>
       <label for="<?php echo $this->get_field_id( 'amount_items' ); ?>"><?php _e( 'Listings to display?', ud_get_wp_property()->domain ); ?>
@@ -201,25 +206,45 @@ class ChildPropertiesWidget extends WP_Widget {
       </label>
     </p>
 
-    <p><?php _e( 'Select the stats you want to display', ud_get_wp_property()->domain ); ?></p>
     <p>
-      <label for="<?php echo $this->get_field_id( 'show_title' ); ?>">
-        <input id="<?php echo $this->get_field_id( 'show_title' ); ?>"
-               name="<?php echo $this->get_field_name( 'show_title' ); ?>" type="checkbox"
-               value="on" <?php if ( $show_title == 'on' ) echo " checked='checked';"; ?> />
-        <?php _e( 'Title', ud_get_wp_property()->domain ); ?>
+      <label for="<?php echo $this->get_field_id( 'sort_by' ); ?>"><?php _e( 'Sort By', ud_get_wp_property()->domain ); ?>
+      <input id="<?php echo $this->get_field_id( 'sort_by' ); ?>"
+             name="<?php echo $this->get_field_name( 'sort_by' ); ?>" type="text"
+             value="<?php echo $sort_by; ?>"/>
       </label>
     </p>
-    <?php foreach ( $wp_properties[ 'property_stats' ] as $stat => $label ): ?>
-      <label for="<?php echo $this->get_field_id( 'stats' ); ?>_<?php echo $stat; ?>">
-        <input id="<?php echo $this->get_field_id( 'stats' ); ?>_<?php echo $stat; ?>"
-               name="<?php echo $this->get_field_name( 'stats' ); ?>[]" type="checkbox" value="<?php echo $stat; ?>"
-            <?php if ( is_array( $property_stats ) && in_array( $stat, $property_stats ) ) echo " checked "; ?> />
 
-        <?php echo $label; ?>
-      </label><br/>
-    <?php endforeach; ?>
+    <p>
+      <label for="<?php echo $this->get_field_id( 'sort_order' ); ?>"><?php _e( 'Sort Order', ud_get_wp_property()->domain ); ?>
+        <select id="<?php echo $this->get_field_id( 'sort_order' ); ?>" name="<?php echo $this->get_field_name( 'sort_order' ); ?>">
+          <option value="ASC" <?php echo $sort_order == 'ASC' ? 'selected="selected"' : ''; ?>>ASC</option>
+          <option value="DESC" <?php echo $sort_order == 'DESC' ? 'selected="selected"' : ''; ?>>DESC</option>
+        </select>
+      </label>
+    </p>
 
+    <p><?php _e( 'Select the stats you want to display', ud_get_wp_property()->domain ); ?></p>
+    <ul class="wpp-multi-checkbox-wrapper">
+      <li>
+        <label for="<?php echo $this->get_field_id( 'show_title' ); ?>">
+          <input id="<?php echo $this->get_field_id( 'show_title' ); ?>"
+                 name="<?php echo $this->get_field_name( 'show_title' ); ?>" type="checkbox"
+                 value="on" <?php if ( $show_title == 'on' ) echo " checked='checked';"; ?> />
+          <?php _e( 'Title', ud_get_wp_property()->domain ); ?>
+        </label>
+      </li>
+      <?php foreach ( $wp_properties[ 'property_stats' ] as $stat => $label ): ?>
+        <li>
+          <label for="<?php echo $this->get_field_id( 'stats' ); ?>_<?php echo $stat; ?>">
+            <input id="<?php echo $this->get_field_id( 'stats' ); ?>_<?php echo $stat; ?>"
+                   name="<?php echo $this->get_field_name( 'stats' ); ?>[]" type="checkbox" value="<?php echo $stat; ?>"
+                <?php if ( is_array( $property_stats ) && in_array( $stat, $property_stats ) ) echo " checked "; ?> />
+
+            <?php echo $label; ?>
+          </label>
+        </li>
+      <?php endforeach; ?>
+    </ul>
     <p>
       <label for="<?php echo $this->get_field_id( 'address_format' ); ?>"><?php _e( 'Address Format:', ud_get_wp_property()->domain ); ?>
         <textarea style="width: 100%" id="<?php echo $this->get_field_id( 'address_format' ); ?>"

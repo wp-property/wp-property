@@ -3,11 +3,12 @@
 * Added ability to set Single or Page templates for rendering Single Property page instead of predefined property.php.
 * Added ability to disable WP-Property Widget Sidebars.
 * Added Dutch ( Netherlands ) localization.
-* Added Property Attributes widget which renders the list of property attributes.
-* Added Property Map widget.
+* Added Property Attributes Widget which renders the list of property attributes.
+* Added Property Map Widget.
 * Added [property_meta] shortcode and Property Meta widget.
-* Added [property_taxonomies] shortcode and Property Taxonomies widget.
-* Extended [property_attributes] shortcode.
+* Added [property_taxonomies] shortcode and Property Taxonomies Widget.
+* Added 'Sort By' and 'Sort Order' options for Child Properties Widget. 
+* Extended functionality of [property_attributes] shortcode.
 * Refactored widgets structure.
 * Refactored shortcodes structure and initialisation.
 * Fixed address validation by provided Google Maps API key.
