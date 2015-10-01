@@ -20,13 +20,52 @@ namespace UsabilityDynamics\WPP {
 
         $args = array();
 
-        if ( !empty( $instance ) && is_array( $instance ) ) {
-          foreach( $instance as $attr_name => $attr_value ) {
-            if ( is_array( $attr_value ) ) {
-              $attr_value = implode( ',', array_keys( $attr_value ) );
+        $_shortcode = \UsabilityDynamics\Shortcode\Manager::get_by( 'id', $this->shortcode_id );
+
+        if ( is_object( $_shortcode ) && !empty( $_shortcode->params ) && is_array( $_shortcode->params ) ) {
+
+          foreach( $_shortcode->params as $param ) {
+
+            if( !array_key_exists( $param['id'], $instance ) ) {
+              continue;
             }
-            $args[] = $attr_name . '="' . $attr_value . '"';
+
+            $value = $instance[ $param['id'] ];
+
+            switch( $param['type'] ) {
+
+              case 'custom_attributes':
+                if( is_array( $value ) ) {
+                  foreach( $value as $k => $v ) {
+                    if( !empty( $v ) && is_string( $v ) ) {
+                      $args[] = $k . '="' . $v . '"';
+                    }
+                  }
+                }
+
+                break;
+
+              default:
+                if ( is_array( $value ) ) {
+                  $value = implode( ',', array_keys( $value ) );
+                }
+                $args[] = $param['id'] . '="' . $value . '"';
+
+            }
+
           }
+
+        } else {
+
+          if ( !empty( $instance ) && is_array( $instance ) ) {
+            foreach( $instance as $name => $value ) {
+              if ( is_array( $value ) ) {
+                $value = implode( ',', array_keys( $value ) );
+              }
+              $args[] = $name . '="' . $value . '"';
+            }
+          }
+
         }
 
         return implode( ' ', $args );
@@ -126,8 +165,6 @@ namespace UsabilityDynamics\WPP {
 
           <?php endforeach;
 
-        } else {
-          _e( '<p>No options available.</p>', ud_get_wp_property()->domain );
         }
 
       }

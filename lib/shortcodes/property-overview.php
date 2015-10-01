@@ -248,20 +248,6 @@ namespace UsabilityDynamics\WPP {
           }
         }
 
-        if( !empty( $data[ 'custom_query' ] ) && is_array( $data[ 'custom_query' ] ) ) {
-          foreach( $data[ 'custom_query' ] as $k => $v ) {
-
-          }
-          unset( $data[ 'custom_query' ] );
-        }
-
-        /*
-        echo "<pre>";
-        print_r( $data );
-        echo "</pre>";
-        die();
-        */
-
         return \WPP_Core::shortcode_property_overview( $data );
 
       }
