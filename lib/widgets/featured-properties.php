@@ -26,7 +26,7 @@ class FeaturedPropertiesWidget extends WP_Widget {
 
     extract( $args );
 
-    $title = apply_filters( 'widget_title', $instance[ 'title' ] );
+    $title = apply_filters( 'widget_title', ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : '' ) );
     $instance = apply_filters( 'FeaturedPropertiesWidget', $instance );
     $show_title = isset( $instance[ 'show_title' ] ) ? $instance[ 'show_title' ] : false;
     $image_type = isset( $instance[ 'image_type' ] ) ? $instance[ 'image_type' ] : false;

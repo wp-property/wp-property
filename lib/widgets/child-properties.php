@@ -111,6 +111,7 @@ class ChildPropertiesWidget extends WP_Widget {
               <li class="<?php echo $stat ?>"><span class='attribute'><?php echo $wp_properties[ 'property_stats' ][ $stat ]; ?>:</span> <span class='value'><?php echo $content; ?></span></li>
             <?php endforeach; ?>
           <?php endif; ?>
+          <li><?php echo $this_property->menu_order;  ?></li>
         </ul>
 
         <?php if ( $instance[ 'enable_more' ] == 'on' ) : ?>

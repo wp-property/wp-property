@@ -196,6 +196,8 @@ namespace UsabilityDynamics\WPP {
             $args[ 'stats' ][ $key ] = trim( $stat );
           }
 
+          $args[ 'stats' ] = array_flip( $args[ 'stats' ] );
+
         }
 
         /** We hide wrapper to use our custom one. */
@@ -208,7 +210,9 @@ namespace UsabilityDynamics\WPP {
         unset( $args[ 'image_type' ] );
         unset( $args[ 'type' ] );
 
-        $result = \WPP_Core::shortcode_property_overview( $args );
+        $_args = \UsabilityDynamics\Shortcode\Utility::prepare_args( $args );
+        $result = do_shortcode( "[property_overview {$_args}]" );
+
         if( !empty( $result ) ) {
           $result = '<div id="wpp_shortcode_' . $args[ 'unique_hash' ] . '" class="' . $args[ 'class' ] . '">' . $result . '</div>';
         }

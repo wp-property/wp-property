@@ -72,6 +72,26 @@ namespace UsabilityDynamics\Shortcode {
         wp_cache_set( 'shortcodes', $_shortcodes, 'usabilitydynamics' );
         
       }
+      
+      /**
+       * Prepare arguments for shortcode
+       *
+       * @param $instance
+       * @return string
+       * @since 0.1.2
+       */
+      static public function prepare_args( $instance ) {
+        $args = array();
+        if ( !empty( $instance ) && is_array( $instance ) ) {
+          foreach( $instance as $name => $value ) {
+            if ( is_array( $value ) ) {
+              $value = implode( ',', array_keys( $value ) );
+            }
+            $args[] = $name . '="' . $value . '"';
+          }
+        }
+        return implode( ' ', $args );
+      }
     
     }
 

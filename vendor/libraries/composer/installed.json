@@ -427,16 +427,16 @@
     },
     {
         "name": "usabilitydynamics/lib-wp-shortcode",
-        "version": "0.1.1",
-        "version_normalized": "0.1.1.0",
+        "version": "0.1.2",
+        "version_normalized": "0.1.2.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/lib-wp-shortcode",
-            "reference": "0.1.1"
+            "reference": "0.1.2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-wp-shortcode/archive/0.1.1.zip",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-shortcode/archive/0.1.2.zip",
             "reference": null,
             "shasum": null
         },

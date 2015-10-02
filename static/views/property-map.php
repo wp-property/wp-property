@@ -5,22 +5,17 @@
  * To modify it, copy it to your theme's root.
  */
 
-global $post, $property, $wp_properties;
+global $wp_properties;
 
-if ( !$coords = \WPP_F::get_coordinates() ) {
+if ( !$coords = \WPP_F::get_coordinates( $property[ 'ID' ] ) ) {
   return;
 }
 
-$this_property = isset( $property ) ? $property : $post;
-
-$this_property = (array) $this_property;
-
-$this_map_dom_id = 'property_map_' . rand( 10000, 99999 );
+$unique_id = 'property_map_' . rand( 10000, 99999 );
 
 ?>
-
 <div class="<?php wpp_css( 'property_map::wrapper', "property_map_wrapper" ); ?>">
-  <div id="<?php echo $this_map_dom_id; ?>" class="<?php wpp_css( 'property_map::dom_id' ); ?>" style="width:<?php echo $data['width'] ?>; height:<?php echo $data['height'] ?>"></div>
+  <div id="<?php echo $unique_id; ?>" class="<?php wpp_css( 'property_map::dom_id' ); ?>" style="width:<?php echo $data['width'] ?>; height:<?php echo $data['height'] ?>"></div>
 </div>
 
 <?php ob_start(); ?>
@@ -32,8 +27,8 @@ $this_map_dom_id = 'property_map_' . rand( 10000, 99999 );
       if ( typeof google !== 'undefined' ) {
         init_this_map();
       } else {
-        jQuery( "#<?php echo $this_map_dom_id; ?>" ).hide();
-        jQuery( "#<?php echo $this_map_dom_id; ?>" ).closest( ".property_map_wrapper" ).hide();
+        jQuery( "#<?php echo $unique_id; ?>" ).hide();
+        jQuery( "#<?php echo $unique_id; ?>" ).closest( ".property_map_wrapper" ).hide();
 
         if ( denali_config.developer ) {
           console.log( "Google Maps not loaded - property map removed." );
@@ -51,19 +46,19 @@ $this_map_dom_id = 'property_map_' . rand( 10000, 99999 );
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
 
-        var map = new google.maps.Map( document.getElementById( "<?php echo $this_map_dom_id; ?>" ), myOptions );
+        var map = new google.maps.Map( document.getElementById( "<?php echo $unique_id; ?>" ), myOptions );
 
         var marker = new google.maps.Marker( {
           position: these_coords,
           map: map,
-          title: '<?php echo addslashes($this_property['post_title']); ?>',
-          icon: '<?php echo apply_filters('wpp_supermap_marker', '', $this_property['ID']); ?>'
+          title: '<?php echo addslashes($property['post_title']); ?>',
+          icon: '<?php echo apply_filters('wpp_supermap_marker', '', $property['ID']); ?>'
         } );
 
         <?php if($data['hide_infobox'] != 'true' ) { ?>
 
           var infowindow = new google.maps.InfoWindow( {
-            content: '<?php echo WPP_F::google_maps_infobox($this_property); ?>'
+            content: '<?php echo WPP_F::google_maps_infobox($property); ?>'
           } );
 
           setTimeout( function () {

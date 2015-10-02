@@ -19,6 +19,12 @@ namespace UsabilityDynamics\WPP {
         $options = array(
             'id' => 'property_map',
             'params' => array(
+              'property_id' => array(
+                'name' => sprintf( __( '%s ID', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label() ),
+                'description' => sprintf( __( 'If empty, current %s will be used.', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
+                'type' => 'text',
+                'default' => ''
+              ),
               'width' => array(
                 'name' => __( 'Width', ud_get_wp_property()->domain ),
                 'description' => __( 'Set width of map. (e.g. 100%, 500px)', ud_get_wp_property()->domain ),
@@ -66,8 +72,22 @@ namespace UsabilityDynamics\WPP {
           'width' => '100%',
           'height' => '450px',
           'zoom_level' => '13',
-          'hide_infobox' => 'false'
+          'hide_infobox' => 'false',
+          'property_id' => '',
         ), $atts );
+
+        if( !empty( $data[ 'property_id' ] ) && is_numeric( $data[ 'property_id' ] ) ) {
+          $data[ 'property' ] = get_property( $data[ 'property_id' ], array(
+            'get_children'          => 'false',
+            'return_object'         => 'false',
+            'load_gallery'          => 'false',
+            'load_thumbnail'        => 'false',
+            'load_parent'           => 'false',
+          ) );
+        } else {
+          global $post, $property;
+          $data[ 'property' ] = isset( $property ) ? (array)$property : (array)$post;
+        }
 
         wp_enqueue_script( 'google-maps' );
 

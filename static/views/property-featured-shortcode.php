@@ -6,7 +6,13 @@
 
 $label_matches = array(
   'post_title' => __( 'Title', ud_get_wp_property()->domain ),
-); 
+);
+
+if( !empty( $stats ) && !is_array( $stats ) ) {
+  $stats = explode( ',', $stats );
+  foreach( $stats as $k => $s )
+    $stats[$k] = trim($s);
+}
  
 ?>
 
@@ -28,7 +34,7 @@ $label_matches = array(
               ?>
               <li class="<?php echo $stat; ?>">
                 <dl>
-                  <dt><?php echo (empty($wp_properties['property_stats'][$stat]) ? ( key_exists( $stat, $label_matches ) ? $label_matches[ $stat ] : WPP_F::de_slug($stat) ) : $wp_properties['property_stats'][$stat]); ?>:</dt>
+                  <dt><?php echo (empty($wp_properties['property_stats'][$stat]) ? ( array_key_exists( $stat, $label_matches ) ? $label_matches[ $stat ] : WPP_F::de_slug($stat) ) : $wp_properties['property_stats'][$stat]); ?>:</dt>
                   <dd><?php echo $property[$stat];  ?></dd>
                 </dl>
               </li>

@@ -99,16 +99,16 @@ namespace UsabilityDynamics\Shortcode {
         try {
           //@TODO: check if class or base class of object is Shortcode.
           if( !is_object( $shortcode ) ) {
-            throw new Exception( __( 'Param is not an object or doesn\'t extend UsabilityDynamics\\Shortcode\\Shortcode class' ) );
+            throw new \Exception( __( 'Param is not an object or doesn\'t extend UsabilityDynamics\\Shortcode\\Shortcode class' ) );
           }
           if ( key_exists( $shortcode->id, self::$shortcodes ) ) {
-            throw new Exception( __( 'Shortcode is already added. It can not be added twice.' ) );
+            throw new \Exception( __( 'Shortcode is already added. It can not be added twice.' ) );
           }
           if ( shortcode_exists( $shortcode->id ) ) {
-            throw new Exception( __( 'Shortcode with provided tag is already registered in Wordpress. You must remove existing shortcode before adding new one.' ) );
+            throw new \Exception( __( 'Shortcode with provided tag is already registered in Wordpress. You must remove existing shortcode before adding new one.' ) );
           }
-        } catch ( Exception $e ) {
-          return new WP_Error( 'error', __( 'Shortcode can not be added' ) . ': ' . $e->getMessage() );
+        } catch ( \Exception $e ) {
+          return new \WP_Error( 'error', __( 'Shortcode can not be added' ) . ': ' . $e->getMessage() );
         }
         
         self::$shortcodes[ $shortcode->id ] = $shortcode;

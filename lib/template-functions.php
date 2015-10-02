@@ -69,7 +69,7 @@ if ( !function_exists( 'get_attribute' ) ) {
     switch ( $attribute ) {
 
       case 'map':
-        $value = WPP_Core::shortcode_property_map( array( 'property_id' => $this_property[ 'ID' ] ) );
+        $value = do_shortcode( "[property_map property_id={$this_property[ 'ID' ]}]" );
         break;
 
       default:

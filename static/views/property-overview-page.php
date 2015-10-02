@@ -23,7 +23,7 @@ get_header(); ?>
           echo $content = apply_filters('the_content', $post->post_content);
         ?>
         <div class="<?php wpp_css('property_overview_page::all_properties', "all-properties"); ?>">
-          <?php echo WPP_Core::shortcode_property_overview(); ?>
+          <?php echo do_shortcode( '[property_overview]' ); ?>
         </div>
       </div><!-- .entry-content -->
     </div><!-- #post-## -->
