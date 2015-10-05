@@ -70,8 +70,6 @@ namespace UsabilityDynamics\WPP {
         include_once $this->path( 'lib/class_core.php', 'dir' );
         /** Load set of static methods for mail notifications */
         include_once $this->path( 'lib/class_mail.php', 'dir' );
-        /** Load in hooks that deal with legacy and backwards-compat issues */
-        include_once $this->path( 'lib/class_legacy.php', 'dir' );
 
         //** Initiate AJAX Handler */
         new Ajax();

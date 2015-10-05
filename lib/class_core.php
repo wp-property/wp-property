@@ -1157,6 +1157,17 @@ class WPP_Core {
     return $data;
   }
 
+  /**
+   * Renders property overview.
+   * Deprecated. Use do_shortcode( '[property_overview]' ) instead.
+   *
+   * @deprecated 2.1.0
+   */
+  static function shortcode_property_overview( $atts ) {
+    _deprecated_function( __FUNCTION__, '2.1.0', 'do_shortcode([property_overview])' );
+    return UsabilityDynamics\WPP\Property_Overview_Shortcode::render( $atts );
+  }
+
 }
 
 

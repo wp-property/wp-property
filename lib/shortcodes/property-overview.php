@@ -252,7 +252,7 @@ namespace UsabilityDynamics\WPP {
           }
         }
 
-        return $this->render( $data );
+        return $this::render( $data );
 
       }
 
@@ -271,7 +271,7 @@ namespace UsabilityDynamics\WPP {
 
         $params[ 'ajax_call' ] = true;
 
-        $data = $this->render( $params );
+        $data = $this::render( $params );
 
         die( $data );
       }
@@ -291,7 +291,7 @@ namespace UsabilityDynamics\WPP {
        * @uses WPP_F::get_properties()
        *
        */
-      public function render( $atts = "" ) {
+      static public function render( $atts = "" ) {
         global $wp_properties, $wpp_query, $property, $post, $wp_query;
 
         $_property = $property;
