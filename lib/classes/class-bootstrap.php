@@ -94,7 +94,7 @@ namespace UsabilityDynamics\WPP {
          * May be load Shortcodes
          */
         add_action( 'init', function() {
-          ud_get_wp_property()->load_files( $this->path('lib/shortcodes', 'dir') );
+          ud_get_wp_property()->load_files( ud_get_wp_property()->path('lib/shortcodes', 'dir') );
         }, 1 );
 
 
@@ -102,7 +102,7 @@ namespace UsabilityDynamics\WPP {
          * May be load Widgets
          */
         add_action( 'widgets_init', function() {
-          ud_get_wp_property()->load_files( $this->path('lib/widgets', 'dir') );
+          ud_get_wp_property()->load_files( ud_get_wp_property()->path('lib/widgets', 'dir') );
         }, 1 );
 
         /**
