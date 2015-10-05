@@ -18,7 +18,7 @@ class WPP_Core {
    * @since 1.11
    *
    */
-  function WPP_Core() {
+  function __construct() {
     global $wp_properties;
 
     // Determine if memory limit is low and increase it
