@@ -869,7 +869,7 @@ class WPP_Core {
 
       $property = (array) WPP_F::get_property( $post->ID, "load_gallery=true" );
 
-      $property_type = $property['property_type'];
+      $property_type = !empty( $property['property_type'] ) ? $property['property_type'] : false;
 
       // Redirect to parent if property type is non-public.
       if( isset( $wp_properties[ 'redirect_to_parent' ] ) && is_array( $wp_properties[ 'redirect_to_parent' ] ) && in_array( $property_type, $wp_properties[ 'redirect_to_parent' ] ) && $property['post_parent'] ) {

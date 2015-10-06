@@ -206,6 +206,11 @@ namespace UsabilityDynamics\WPP {
 
         $return[ 'slug' ] = $attribute;
 
+        if( $attribute == 'property_type' ) {
+          $return[ 'storage_type' ] = 'meta_key';
+          $return[ 'label' ] = sprintf( __( '%s Type', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label() );
+        }
+
         if( isset( $wp_properties[ 'property_stats' ][ $attribute ] ) ) {
           $return[ 'is_stat' ]      = 'true';
           $return[ 'storage_type' ] = 'meta_key';

@@ -9,8 +9,10 @@
 * Added [property_taxonomies] shortcode and Property Taxonomies Widget.
 * Added 'Sort By' and 'Sort Order' options for Child Properties Widget. 
 * Extended functionality of [property_attributes] shortcode.
+* Updated plugin initialisation logic.
 * Refactored widgets structure.
 * Refactored shortcodes structure and initialisation.
+* Fixed the bug which prevented to update Add-ons via inline updater on Plugins page.
 * Fixed address validation by provided Google Maps API key.
 
 #### 2.0.4 ( September 2, 2015 )
