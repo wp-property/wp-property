@@ -81,12 +81,6 @@ namespace UsabilityDynamics\WPP\Widgets {
    * Register this widget
    */
   add_action( 'widgets_init', function() {
-
-    /**
-     * Register if class exists
-     */
-    if( class_exists( 'UsabilityDynamics\WPP\Widgets\PropertyMapWidget' ) ) {
-      register_widget( 'UsabilityDynamics\WPP\Widgets\PropertyMapWidget' );
-    }
+    register_widget( 'UsabilityDynamics\WPP\Widgets\PropertyMapWidget' );
   });
 }

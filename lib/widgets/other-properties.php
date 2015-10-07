@@ -310,7 +310,7 @@ class OtherPropertiesWidget extends WP_Widget {
  * Register widget
  */
 add_action( 'widgets_init', function() {
-  if( class_exists( 'OtherPropertiesWidget' ) ) {
-    register_widget( "OtherPropertiesWidget" );
+  if( ud_get_wp_property( 'configuration.enable_legacy_features' ) == 'true' ) {
+    register_widget("OtherPropertiesWidget");
   }
 });

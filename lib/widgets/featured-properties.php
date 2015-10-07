@@ -272,7 +272,7 @@ class FeaturedPropertiesWidget extends WP_Widget {
  * Register widget
  */
 add_action( 'widgets_init', function() {
-  if( class_exists( 'FeaturedPropertiesWidget' ) ) {
-    register_widget( "FeaturedPropertiesWidget" );
+  if( ud_get_wp_property( 'configuration.enable_legacy_features' ) == 'true' ) {
+    register_widget("FeaturedPropertiesWidget");
   }
 });
