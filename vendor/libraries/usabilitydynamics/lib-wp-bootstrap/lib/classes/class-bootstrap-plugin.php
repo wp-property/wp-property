@@ -18,7 +18,7 @@ namespace UsabilityDynamics\WP {
      */
     class Bootstrap_Plugin extends Bootstrap {
     
-      public static $version = '1.0.3';
+      public static $version = '1.0.4';
       
       public $type = 'plugin';
       
@@ -35,7 +35,7 @@ namespace UsabilityDynamics\WP {
         //** Load text domain */
         add_action( 'plugins_loaded', array( $this, 'load_textdomain' ), 1 );
         //** May be initialize Licenses Manager. */
-        add_action( 'plugins_loaded', array( $this, 'define_license_manager' ), 10 );
+        add_action( 'plugins_loaded', array( $this, 'define_license_manager' ), 1 );
         //** Initialize plugin here. All plugin actions must be added on this step */
         add_action( 'plugins_loaded', array( $this, 'pre_init' ), 100 );
         //** TGM Plugin activation. */
@@ -93,15 +93,6 @@ namespace UsabilityDynamics\WP {
        */
       public function load_textdomain() {
         load_plugin_textdomain( $this->domain, false, dirname( plugin_basename( $this->boot_file ) ) . '/static/languages/' );
-      }
-      
-      /**
-       * Go through additional conditions on 'plugins_loaded' action before we start plugin initialization
-       *
-       * @author peshkov@UD
-       */
-      public function plugins_loaded() {
-        $this->define_license_manager();
       }
       
       /**

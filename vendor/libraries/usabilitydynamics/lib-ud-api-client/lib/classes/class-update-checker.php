@@ -230,6 +230,9 @@ namespace UsabilityDynamics\UD_API {
         if ( isset( $new_ver ) && isset( $curr_ver ) ) {
           if ( $response !== false && version_compare( $new_ver, $curr_ver, '>' ) ) {
             if( $this->type == 'plugin' ) {
+              if( isset( $response->slug ) ) {
+                $response->slug = sanitize_title( $response->slug );  
+              }
               $transient->response[$this->file] = $response;
             } else {
               $theme = basename( dirname( $this->file ) );

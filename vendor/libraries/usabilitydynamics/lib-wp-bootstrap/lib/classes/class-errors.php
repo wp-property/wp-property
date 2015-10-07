@@ -185,9 +185,9 @@ namespace UsabilityDynamics\WP {
           echo '<div class="ud-admin-notice updated update-nag fade" style="padding:11px;">' . $message . '</div>';
         }
         
-        //** Determine if message has been dismissed ( for week! ) */
+        //** Determine if message has been dismissed ( for 4 weeks! ) */
         $dismiss_timer = get_user_meta( get_current_user_id(), ( 'dismissed_notice_' . sanitize_key( $this->name ) ), true );
-        if ( !$dismiss_timer || ( time() - (int)$dismiss_timer ) >= 604800 ) {
+        if ( !$dismiss_timer || ( time() - (int)$dismiss_timer ) >= ( 4 * WEEK_IN_SECONDS ) ) {
           //** Notices Block */
           if( !empty( $messages ) && is_array( $messages ) ) {
             $message = '<ul style="list-style:disc inside;"><li>' . implode( '</li><li>', $messages ) . '</li></ul>';

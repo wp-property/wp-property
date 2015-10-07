@@ -781,7 +781,7 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
         }
 
         //** Only execute shortcodes for defined property attributes to prevent different issues */
-        if ( !in_array( $meta_key, (array)$attributes ) ) {
+        if ( !array_key_exists( $meta_key, (array)$attributes ) ) {
           continue;
         }
 
@@ -795,6 +795,7 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
         $attribute_value = str_replace( "\n", "", nl2br( $attribute_value ) );
 
         $attribute_value = apply_filters( "wpp::attribute::display", $attribute_value, $meta_key );
+
         $property[ $meta_key ] = apply_filters( "wpp_stat_filter_{$meta_key}", $attribute_value, $attribute_scope );
 
       }
