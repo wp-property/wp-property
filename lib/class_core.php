@@ -268,18 +268,6 @@ class WPP_Core {
   }
 
   /**
-   * Adds thumbnail feature to WP-Property pages
-   *
-   *
-   * @todo Make sure only ran on property pages
-   * @since 0.60
-   *
-   */
-  static public function after_setup_theme() {
-    add_theme_support( 'post-thumbnails' );
-  }
-
-  /**
    * Modify admin body class on property pages for CSS
    *
    * @since 0.5

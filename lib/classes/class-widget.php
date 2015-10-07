@@ -65,7 +65,7 @@ namespace UsabilityDynamics\WPP {
                 if( is_array( $value ) ) {
                   foreach( $value as $k => $v ) {
                     if( !empty( $v ) && is_string( $v ) ) {
-                      $args[] = $k . '="' . $v . '"';
+                      $args[] = $k . '="' . esc_attr( $v ) . '"';
                     }
                   }
                 }
@@ -76,7 +76,7 @@ namespace UsabilityDynamics\WPP {
                 if ( is_array( $value ) ) {
                   $value = implode( ',', array_keys( $value ) );
                 }
-                $args[] = $param['id'] . '="' . $value . '"';
+                $args[] = $param['id'] . '="' . esc_attr( $value ) . '"';
 
             }
 
@@ -89,7 +89,7 @@ namespace UsabilityDynamics\WPP {
               if ( is_array( $value ) ) {
                 $value = implode( ',', array_keys( $value ) );
               }
-              $args[] = $name . '="' . $value . '"';
+              $args[] = $name . '="' . esc_attr( $value ) . '"';
             }
           }
 
@@ -122,7 +122,7 @@ namespace UsabilityDynamics\WPP {
                   ?>
                   <input class="widefat" id="<?php echo $this->get_field_id( $param['id'] ); ?>"
                          name="<?php echo $this->get_field_name( $param['id'] ); ?>" type="text"
-                         value="<?php echo !empty( $instance[ $param['id'] ] ) ? $instance[ $param['id'] ] : $param['default']; ?>"/>
+                         value="<?php echo esc_attr( !empty( $instance[ $param['id'] ] ) ? $instance[ $param['id'] ] : $param['default'] ); ?>"/>
                   <?php
                   break;
 
@@ -131,7 +131,7 @@ namespace UsabilityDynamics\WPP {
                   <input class="widefat" id="<?php echo $this->get_field_id( $param['id'] ); ?>"
                          min="<?php echo $param['min']; ?>"
                          name="<?php echo $this->get_field_name( $param['id'] ); ?>" type="number"
-                         value="<?php echo !empty( $instance[ $param['id'] ] ) ? $instance[ $param['id'] ] : $param['default']; ?>"/>
+                         value="<?php echo esc_attr( !empty( $instance[ $param['id'] ] ) ? $instance[ $param['id'] ] : $param['default'] ); ?>"/>
                   <?php
                   break;
 

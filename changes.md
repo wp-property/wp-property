@@ -6,6 +6,7 @@
 * Added Property Overview widget based on [property_overview] shortcode.
 * Added Property Attributes widget which renders the list of property attributes.
 * Added Property Map widget based on [property_map] shortcode.
+* Added List Attachments widget based on [list_attachments] shortcode.
 * Added [property_meta] shortcode and Property Meta widget.
 * Added [property_terms] shortcode and Property Terms widget.
 * Added 'Sort By' and 'Sort Order' options for Child Properties widget.

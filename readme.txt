@@ -69,7 +69,10 @@ Although WP-Property is the most downloaded WordPress real estate plugin, it can
 * Other Properties. Display a list of properties that share a parent with the currently displayed property.
 * Property Attributes. Display a list of selected property attributes when loaded on a single property page.
 * Property Search. Display a highly customizable property search form.
-* Property Gallery. List of all images attached to the current property
+* Property Gallery. List of all images attached to the current property.
+* Property Overview. Display a list of properties using flexible bunch of settings.
+* Property Map. Displays property map of current or particular property.
+* List Attachments. Displays attachments of current property.
 
 = Shortcodes =
 We have setup a ["Shortcode Cheatsheet" page](https://www.usabilitydynamics.com/tutorials/wp-property-help/wp-property-shortcode-cheat-sheet/) for your convenience.
@@ -78,6 +81,9 @@ We have setup a ["Shortcode Cheatsheet" page](https://www.usabilitydynamics.com/
 * [property_search]
 * [property_map]
 * [property_attribute]
+* [property_attributes]
+* [property_meta]
+* [property_terms]
 * [featured_properties]
 * [list_attachments]
 
@@ -115,6 +121,23 @@ Property Attribute. Property Attribute Shortcodes return the value of an attribu
 * [property_attribute property_id=5 attribute=bathrooms] Get the number of bathrooms for a property with an ID of 5.
 * [property_attribute attribute=status] Shows status for current property.
 * [property_attribute attribute=map] Shows map for current property
+
+<strong>[property_attributes]</strong><br>
+Property Attributes. Renders List of Property Attributes.
+
+* [property_attributes include=bedrooms,price] Renders only specified attributes: Bedrooms and Price
+* [property_attributes exclude=bedrooms,price] Renders all attributes except of Bedrooms and Price
+
+<strong>[property_meta]</strong><br>
+Property Meta. Renders List of Property Meta fields.
+
+* [property_meta] Renders all meta fields for current property.
+* [property_meta include=school] Renders only specified meta: School
+
+<strong>[property_terms]</strong><br>
+Property Terms. Renders List of property terms for specific taxonomy.
+
+* [property_terms taxonomy=features] Renders property terms for Features taxonomy.
 
 <strong>[featured_properties]</strong><br>
 Featured Property. This shortcode queries only those properties that have been given Featured status.
@@ -204,14 +227,23 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 == Changelog ==
 
 = 2.1.0 =
-* Added ability to set Single or Page templates for rendering Single Property page instead of predefined property.php.
+* Added compatibility with Page Builder by SiteOrigin plugin.
+* Added ability to set single or page templates of current theme for rendering Single Property page instead of predefined property.php.
 * Added ability to disable WP-Property Widget Sidebars.
-* Added [property_attributes] shortcode and Property Stats widget which render the list of property attributes.
-* Added Property Map widget.
+* Added Dutch ( Netherlands ) localization.
+* Added Property Overview widget based on [property_overview] shortcode.
+* Added Property Attributes widget which renders the list of property attributes.
+* Added Property Map widget based on [property_map] shortcode.
+* Added List Attachments widget based on [list_attachments] shortcode.
 * Added [property_meta] shortcode and Property Meta widget.
-* Added [property_taxonomies] shortcode and Property Taxonomies widget.
-* Refactored widgets structure.
+* Added [property_terms] shortcode and Property Terms widget.
+* Added 'Sort By' and 'Sort Order' options for Child Properties widget.
+* Extended functionality of [property_attributes] shortcode.
+* Updated plugin initialisation logic.
+* Refactored widgets structure and initialisation.
 * Refactored shortcodes structure and initialisation.
+* Child Properties, Featured Properties, Latest Properties and Other Properties widgets were deprecated and disabled on new plugin installation. But they still can be activated via Settings.
+* Fixed the bug which prevented to update Add-ons via inline updater on Plugins page.
 * Fixed address validation by provided Google Maps API key.
 
 = 2.0.4 =

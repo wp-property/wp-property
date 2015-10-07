@@ -76,9 +76,6 @@ namespace UsabilityDynamics\WPP {
 
     }
 
-    /**
-     * Register
-     */
     new Property_Terms_Shortcode();
 
   }

@@ -112,7 +112,7 @@ namespace UsabilityDynamics\Shortcode {
         }
         
         self::$shortcodes[ $shortcode->id ] = $shortcode;
-        
+
         // Now, we add shortcode to WP
         add_shortcode( $shortcode->id, array( $shortcode, 'call' ) );
         
