@@ -31,6 +31,21 @@ namespace UsabilityDynamics\WPP {
           $image_sizes[ $name ] = $name . ' (' . $sizes['width'] . 'x' . $sizes['height'] . 'px)';
         }
 
+        $sort_by = array(
+          'post_date' => sprintf( __( 'Date (%s)', ud_get_wp_property( 'domain' ) ), 'post_date' ),
+          'random' => sprintf( __( 'Random (%s)', ud_get_wp_property( 'domain' ) ), 'random' ),
+          'menu_order' => sprintf( __( 'Menu Order (%s)', ud_get_wp_property( 'domain' ) ), 'menu_order' ),
+        );
+
+        $sortable_atts = ud_get_wp_property( 'sortable_attributes', array() );
+        if( !empty( $sortable_atts ) && is_array( $sortable_atts ) ) {
+          foreach( $sortable_atts as $attr ) {
+            if( array_key_exists( $attr, $custom_attributes ) ) {
+              $sort_by[ $attr ] = $custom_attributes[ $attr ] . ' (' . $attr . ')' ;
+            }
+          }
+        }
+
         $options = array(
             'id' => 'property_overview',
             'params' => array(
@@ -113,8 +128,9 @@ namespace UsabilityDynamics\WPP {
               ),
               'sort_by' => array(
                 'name' => __( 'Sort By', ud_get_wp_property()->domain ),
-                'description' => sprintf( __( 'Sets sorting by attribute or %s<br/><b>%s</b> - display %s in random order.', ud_get_wp_property()->domain ), 'post_date, menu_order, random', 'random', \WPP_F::property_label( 'plural' ) ),
-                'type' => 'text',
+                'description' => sprintf( __( 'Sets sorting by sortable attribute or %s.', ud_get_wp_property()->domain ), 'post_date, menu_order, random' ),
+                'type' => 'select',
+                'options' => $sort_by,
                 'default' => 'post_date'
               ),
               'sort_order' => array(
