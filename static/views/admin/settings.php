@@ -219,26 +219,52 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       </td>
     </tr>
 
-    <?php if ( apply_filters( 'wpp::custom_styles', false ) === false ) : ?>
-    <tr>
-      <th><?php _e( 'Styles', ud_get_wp_property()->domain ); ?></th>
-      <td>
-        <ul>
-          <li><?php echo $using_custom_css ? WPP_F::checkbox( "name=wpp_settings[configuration][autoload_css]&label=" . __( 'Load default CSS. If unchecked, the wp-properties.css in your theme folder will not be loaded.', ud_get_wp_property()->domain ), $wp_properties[ 'configuration' ][ 'autoload_css' ] ) : WPP_F::checkbox( "name=wpp_settings[configuration][autoload_css]&label=" . __( 'Load default CSS.', ud_get_wp_property()->domain ), $wp_properties[ 'configuration' ][ 'autoload_css' ] ); ?></li>
-          <?php if ( WPP_F::has_theme_specific_stylesheet() ) : ?>
-            <li>
-              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_load_theme_specific_css]&label=" . __( 'Do not load theme-specific stylesheet.', ud_get_wp_property()->domain ), isset( $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] ) ? $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] : false ); ?>
-              <div class="description"><?php _e( 'This version of WP-Property has a stylesheet made specifically for the theme you are using.', ud_get_wp_property()->domain ); ?></div>
-            </li>
-          <?php endif; /* WPP_F::has_theme_specific_stylesheet() */ ?>
-        </ul>
-      </td>
-    </tr>
-    <?php endif; ?>
-
     <tr>
       <th><?php _e( 'Default Phone Number', ud_get_wp_property()->domain ); ?></th>
       <td><?php echo WPP_F::input( "name=phone_number&label=" . sprintf(__( 'Phone number to use when a %1s-specific phone number is not specified.', ud_get_wp_property()->domain ), WPP_F::property_label( 'singular' ) ) . "&group=wpp_settings[configuration]&style=width: 200px;", ( isset( $wp_properties[ 'configuration' ][ 'phone_number' ] ) ? $wp_properties[ 'configuration' ][ 'phone_number' ] : false ) ); ?></td>
+    </tr>
+
+    <tr>
+      <th><?php _e( 'Advanced Options', ud_get_wp_property()->domain ); ?></th>
+      <td>
+        <div class="wpp_settings_block">
+          <h3><?php _e( '', ud_get_wp_property()->domain ); ?></h3>
+          <ul>
+            <?php if ( apply_filters( 'wpp::custom_styles', false ) === false ) : ?>
+              <li>
+                <?php echo $using_custom_css ? WPP_F::checkbox( "name=wpp_settings[configuration][autoload_css]&label=" . __( 'Load default CSS.', ud_get_wp_property()->domain ), $wp_properties[ 'configuration' ][ 'autoload_css' ] ) : WPP_F::checkbox( "name=wpp_settings[configuration][autoload_css]&label=" . __( 'Load default CSS.', ud_get_wp_property()->domain ), $wp_properties[ 'configuration' ][ 'autoload_css' ] ); ?>
+                <span class="description"><?php printf( __( 'If unchecked, the %s in your theme folder will not be loaded.', ud_get_wp_property()->domain ), 'wp-properties.css' )  ?></span>
+              </li>
+              <?php if ( WPP_F::has_theme_specific_stylesheet() ) : ?>
+                <li>
+                  <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_load_theme_specific_css]&label=" . __( 'Do not load theme-specific stylesheet.', ud_get_wp_property()->domain ), isset( $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] ) ? $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] : false ); ?>
+                  <span class="description"><?php _e( 'This version of WP-Property has a stylesheet made specifically for the theme you are using.', ud_get_wp_property()->domain ); ?></span>
+                </li>
+              <?php endif; /* WPP_F::has_theme_specific_stylesheet() */ ?>
+            <?php endif; ?>
+            <li>
+              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][enable_legacy_features]&label=" . __( 'Enable Legacy Features.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'enable_legacy_features' ] ) ? $wp_properties[ 'configuration' ][ 'enable_legacy_features' ] : false ) ); ?>
+              <span class="description"><?php printf( __( 'If checked deprecated features will be enabled. E.g.: Child %1$s and Featured %1$s Widgets.', ud_get_wp_property()->domain ), WPP_F::property_label( 'plural' ) )  ?></span>
+            </li>
+            <li>
+              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][allow_parent_deep_depth]&label=" . __( 'Enable \'Falls Under\' deep depth.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] ) ? $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] : false ) ); ?>
+              <span class="description"><?php printf( __( 'Allows to set child %1s as parent.', ud_get_wp_property()->domain ), WPP_F::property_label( 'singular' ) )  ?></span>
+            </li>
+            <li>
+              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][disable_wordpress_postmeta_cache]&label=" . __( 'Disable WordPress update_post_caches() function.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'disable_wordpress_postmeta_cache' ] ) ? $wp_properties[ 'configuration' ][ 'disable_wordpress_postmeta_cache' ] : false ) ); ?>
+              <span class="description"><?php printf( __('This may solve Out of Memory issues if you have a lot of %1s.',ud_get_wp_property()->domain), WPP_F::property_label( 'plural' )); ?></span>
+            </li>
+            <li>
+              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][developer_mode]&label=" . __( 'Enable developer mode - some extra information displayed via Firebug console.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'developer_mode' ] ) ? $wp_properties[ 'configuration' ][ 'developer_mode' ] : false ) ); ?>
+              <br/>
+            </li>
+            <li>
+              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_automatically_regenerate_thumbnails]&label=" . __( 'Disable "on-the-fly" image regeneration.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] ) ? $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] : true ) ); ?>
+              <span class="description"><?php _e('Enabling this option may cause performance issues.',ud_get_wp_property()->domain); ?></span>
+            </li>
+          </ul>
+        </div>
+      </td>
     </tr>
 
 
@@ -476,33 +502,6 @@ if ( get_option( 'permalink_structure' ) == '' ) {
         <?php _e( 'If prompted for your domain name during a premium feature purchase, enter as appears here:', ud_get_wp_property()->domain ); ?>
           <input type="text" readonly="true" value="<?php echo $this_domain; ?>" size="<?php echo strlen( $this_domain ) + 10; ?>"/>
         </label>
-      </div>
-
-      <div class="wpp_settings_block">
-        <h3><?php _e( 'Advanced Options', ud_get_wp_property()->domain ); ?></h3>
-        <ul>
-          <li>
-            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][allow_parent_deep_depth]&label=" . __( 'Enable \'Falls Under\' deep depth.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] ) ? $wp_properties[ 'configuration' ][ 'allow_parent_deep_depth' ] : false ) ); ?>
-            <br/>
-            <span class="description"><?php printf( __( 'Allows to set child %1s as parent.', ud_get_wp_property()->domain ), WPP_F::property_label( 'singular' ) )  ?></span>
-          </li>
-          <li>
-            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][disable_wordpress_postmeta_cache]&label=" . __( 'Disable WordPress update_post_caches() function.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'disable_wordpress_postmeta_cache' ] ) ? $wp_properties[ 'configuration' ][ 'disable_wordpress_postmeta_cache' ] : false ) ); ?>
-            <br/>
-            <span class="description"><?php printf( __('This may solve Out of Memory issues if you have a lot of %1s.',ud_get_wp_property()->domain), WPP_F::property_label( 'plural' )); ?></span>
-          </li>
-          <li>
-            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][developer_mode]&label=" . __( 'Enable developer mode - some extra information displayed via Firebug console.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'developer_mode' ] ) ? $wp_properties[ 'configuration' ][ 'developer_mode' ] : false ) ); ?>
-            <br/>
-          </li>
-
-          <li>
-            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_automatically_regenerate_thumbnails]&label=" . __( 'Disable "on-the-fly" image regeneration.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] ) ? $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] : true ) ); ?>
-            <br/>
-            <span class="description"><?php _e('Enabling this option may cause performance issues.',ud_get_wp_property()->domain); ?></span>
-          </li>
-
-        </ul>
       </div>
 
       <div class="wpp_settings_block">
