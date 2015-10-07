@@ -97,7 +97,7 @@ namespace UsabilityDynamics\WPP {
          */
         add_action( 'init', function() {
           ud_get_wp_property()->load_files( ud_get_wp_property()->path('lib/shortcodes', 'dir') );
-        }, 1 );
+        }, 999 );
 
 
         /**

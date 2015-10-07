@@ -152,6 +152,16 @@ namespace UsabilityDynamics\WPP {
                   <?php
                   break;
 
+                case 'checkbox':
+                  ?>
+                  <input type="checkbox"
+                          <?php echo ( !empty( $instance[ $param['id'] ] ) ) ? 'checked' : ''; ?>
+                          id="<?php echo $this->get_field_id( $param['id'] ); ?>"
+                          value="true"
+                          name="<?php echo $this->get_field_name( $param['id'] ); ?>">
+                  <?php
+                  break;
+
                 case 'multi_checkbox':
                   if ( !empty( $param['options'] ) && is_array( $param['options'] ) ) { ?>
                   <ul class="wpp-multi-checkbox-wrapper">

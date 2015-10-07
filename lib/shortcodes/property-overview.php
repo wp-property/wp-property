@@ -22,6 +22,15 @@ namespace UsabilityDynamics\WPP {
 
         $custom_attributes = ud_get_wp_property( 'property_stats', array() );
 
+        $image_sizes = array( '' => __( 'No Image', ud_get_wp_property( 'domain' ) ) );
+        foreach( get_intermediate_image_sizes() as $name ) {
+          $sizes = \WPP_F::image_sizes($name);
+          if (!$sizes) {
+            continue;
+          }
+          $image_sizes[ $name ] = $name . ' (' . $sizes['width'] . 'x' . $sizes['height'] . 'px)';
+        }
+
         $options = array(
             'id' => 'property_overview',
             'params' => array(
@@ -42,6 +51,10 @@ namespace UsabilityDynamics\WPP {
                 'description' => sprintf( __( 'The list of %s types to be included. If no type checked, all available %s will be shown.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label(), \WPP_F::property_label( 'plural' ) ),
                 'type' => 'multi_checkbox',
                 'options' => ud_get_wp_property( 'property_types' ),
+              ),
+              'featured' => array(
+                'name' => sprintf( __( 'Show only Featured %s', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label( 'plural' ) ),
+                'type' => 'checkbox',
               ),
               'custom_query' => array(
                 'name' => __( 'Custom Query by Attributes Values', ud_get_wp_property()->domain ),
@@ -87,9 +100,10 @@ namespace UsabilityDynamics\WPP {
               ),
               'thumbnail_size' => array(
                 'name' => __( 'Thumbnail Size', ud_get_wp_property()->domain ),
-                'description' => sprintf( __( 'Thumbnail Size. E.g.: %s', ud_get_wp_property()->domain ), "'thumbnail', ''medium', 'large'" ),
-                'type' => 'text',
-                'default' => ''
+                'description' => __( 'Show image with specific image size', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => $image_sizes,
+                'default' => 'thumbnail'
               ),
               'sort_by_text' => array(
                 'name' => __( 'Sort By Text', ud_get_wp_property()->domain ),
@@ -99,7 +113,7 @@ namespace UsabilityDynamics\WPP {
               ),
               'sort_by' => array(
                 'name' => __( 'Sort By', ud_get_wp_property()->domain ),
-                'description' => sprintf( __( 'Sets sorting by attribute or %s', ud_get_wp_property()->domain ), 'post_date, menu_order', 'ID' ),
+                'description' => sprintf( __( 'Sets sorting by attribute or %s<br/><b>%s</b> - display %s in random order.', ud_get_wp_property()->domain ), 'post_date, menu_order, random', 'random', \WPP_F::property_label( 'plural' ) ),
                 'type' => 'text',
                 'default' => 'post_date'
               ),

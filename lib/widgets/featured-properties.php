@@ -2,6 +2,8 @@
 
 /**
  * Class FeaturedPropertiesWidget
+ *
+ * Deprecated Widget. Enable Legacy Features option on Settings page to activate it.
  */
 class FeaturedPropertiesWidget extends WP_Widget {
 

@@ -2,6 +2,8 @@
 
 /**
  * Class ChildPropertiesWidget
+ *
+ * Deprecated Widget. Enable Legacy Features option on Settings page to activate it.
  */
 class ChildPropertiesWidget extends \UsabilityDynamics\WPP\Widget {
 
