@@ -215,9 +215,9 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     }, 4 );
 
-
     // Setup taxonomies
     $wp_properties[ 'taxonomies' ] = apply_filters( 'wpp_taxonomies', array() );
+    ud_get_wp_property()->set( 'taxonomies', $wp_properties[ 'taxonomies' ] );
 
     ud_get_wp_property()->set( 'labels', apply_filters( 'wpp_object_labels', array(
       'name'               => __( 'Properties', ud_get_wp_property()->domain ),

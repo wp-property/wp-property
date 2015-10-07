@@ -1,17 +1,19 @@
 #### 2.1.0
 * Added compatibility with Page Builder by SiteOrigin plugin.
-* Added ability to set Single or Page templates for rendering Single Property page instead of predefined property.php.
+* Added ability to set single or page templates of current theme for rendering Single Property page instead of predefined property.php.
 * Added ability to disable WP-Property Widget Sidebars.
 * Added Dutch ( Netherlands ) localization.
-* Added Property Attributes Widget which renders the list of property attributes.
-* Added Property Map Widget.
+* Added Property Overview widget based on [property_overview] shortcode.
+* Added Property Attributes widget which renders the list of property attributes.
+* Added Property Map widget based on [property_map] shortcode.
 * Added [property_meta] shortcode and Property Meta widget.
-* Added [property_taxonomies] shortcode and Property Taxonomies Widget.
-* Added 'Sort By' and 'Sort Order' options for Child Properties Widget. 
+* Added [property_terms] shortcode and Property Terms widget.
+* Added 'Sort By' and 'Sort Order' options for Child Properties widget.
 * Extended functionality of [property_attributes] shortcode.
 * Updated plugin initialisation logic.
-* Refactored widgets structure.
+* Refactored widgets structure and initialisation.
 * Refactored shortcodes structure and initialisation.
+* Child Properties, Featured Properties, Latest Properties and Other Properties widgets were deprecated and disabled on new plugin installation. But they still can be activated via Settings.
 * Fixed the bug which prevented to update Add-ons via inline updater on Plugins page.
 * Fixed address validation by provided Google Maps API key.
 
