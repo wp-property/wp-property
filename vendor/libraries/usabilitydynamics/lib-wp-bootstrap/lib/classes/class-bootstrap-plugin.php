@@ -145,7 +145,10 @@ namespace UsabilityDynamics\WP {
        * Internal method. Use activate() instead
        */
       public function _activate() {
+        /* Delete 'Install/Upgrade' notice 'dismissed' information */
         delete_option( sanitize_key( 'dismiss_' . $this->slug . '_' . str_replace( '.', '_', $this->args['version'] ) . '_notice' ) );
+        /* Delete 'Bootstrap' notice 'dismissed' information */
+        delete_option( 'dismissed_notice_' . sanitize_key( $this->name ) );
         $this->activate();
       }
 
@@ -154,7 +157,10 @@ namespace UsabilityDynamics\WP {
        * Internal method. Use deactivate() instead
        */
       public function _deactivate() {
+        /* Delete 'Install/Upgrade' notice 'dismissed' information */
         delete_option( sanitize_key( 'dismiss_' . $this->slug . '_' . str_replace( '.', '_', $this->args['version'] ) . '_notice' ) );
+        /* Delete 'Bootstrap' notice 'dismissed' information */
+        delete_option( 'dismissed_notice_' . sanitize_key( $this->name ) );
         $this->deactivate();
       }
 

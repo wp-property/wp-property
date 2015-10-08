@@ -204,13 +204,39 @@ namespace UsabilityDynamics\WP {
         $this->old_version = $version;
         //** Just installed */
         if (!$version) {
-          add_action( 'plugins_loaded', array( $this, 'run_install_process' ), 0 );
+          /* Run Install handlers */
+          add_action( 'plugins_loaded', array( $this, '_run_install_process' ), 0 );
         }
         //** Upgraded */
         elseif (version_compare($version, $this->args['version']) == -1) {
-          add_action( 'plugins_loaded', array( $this, 'run_upgrade_process' ), 0 );
+          /* Run Upgrade handlers */
+          add_action( 'plugins_loaded', array( $this, '_run_upgrade_process' ), 0 );
         }
         update_option( $this->slug . '-current-version', $this->args['version'] );
+      }
+
+      /**
+       * Installation Handler
+       * Internal method. Use run_install_process() instead
+       */
+      public function _run_install_process() {
+        /* Delete 'Install/Upgrade' notice 'dismissed' information */
+        delete_option( sanitize_key( 'dismiss_' . $this->slug . '_' . str_replace( '.', '_', $this->args['version'] ) . '_notice' ) );
+        /* Delete 'Bootstrap' notice 'dismissed' information */
+        delete_option( 'dismissed_notice_' . sanitize_key( $this->name ) );
+        $this->run_install_process();
+      }
+
+      /**
+       * Upgrade Handler
+       * Internal method. Use run_upgrade_process() instead
+       */
+      public function _run_upgrade_process() {
+        /* Delete 'Install/Upgrade' notice 'dismissed' information */
+        delete_option( sanitize_key( 'dismiss_' . $this->slug . '_' . str_replace( '.', '_', $this->args['version'] ) . '_notice' ) );
+        /* Delete 'Bootstrap' notice 'dismissed' information */
+        delete_option( 'dismissed_notice_' . sanitize_key( $this->name ) );
+        $this->run_upgrade_process();
       }
 
       /**
@@ -322,7 +348,11 @@ namespace UsabilityDynamics\WP {
 
           }
 
-          if( !get_option( $option ) ) {
+          if ( ! function_exists( 'wp_get_current_user' ) ) {
+            require_once( ABSPATH . 'wp-includes/pluggable.php' );
+          }
+
+          if( !get_option( $option ) && current_user_can( 'activate_plugins' ) ) {
             add_action( 'admin_notices',  array( $this, 'render_upgrade_notice' ), 1 );
           }
 
@@ -541,7 +571,7 @@ namespace UsabilityDynamics\WP {
         ) );
         //** Licenses Manager */
         if( !class_exists( '\UsabilityDynamics\UD_API\Manager' ) ) {
-          $this->errors->add( __( 'Class \UsabilityDynamics\UD_API\Manager does not exist. Be sure all required plugins installed and activated.', $this->domain ), 'message' );
+          //$this->errors->add( __( 'Class \UsabilityDynamics\UD_API\Manager does not exist. Be sure all required plugins installed and activated.', $this->domain ), 'message' );
           return false;
         }
         $this->license_manager = new \UsabilityDynamics\UD_API\Manager( $schema );

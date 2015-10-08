@@ -132,7 +132,7 @@ namespace UsabilityDynamics\WP {
        */
       public function dismiss() {
         if ( isset( $_GET[ 'udan-dismiss-' . sanitize_key( $this->name ) ] ) ) {
-          update_user_meta( get_current_user_id(), ( 'dismissed_notice_' . sanitize_key( $this->name ) ), time() );
+          update_option( ( 'dismissed_notice_' . sanitize_key( $this->name ) ), time() );
         }
       }
       
@@ -143,11 +143,15 @@ namespace UsabilityDynamics\WP {
        */
       public function admin_notices() {
         global $wp_version;
-        
-        //** Don't show the message if the user isn't an administrator. */
-        if ( ! current_user_can( 'manage_options' ) ) { 
+
+        //** Don't show the message if the user has no 'activate plugins' permission. */
+        if ( ! function_exists( 'wp_get_current_user' ) ) {
+          require_once( ABSPATH . 'wp-includes/pluggable.php' );
+        }
+        if( !current_user_can( 'activate_plugins' ) ) {
           return;
         }
+
         //** Don't show the message if on a multisite and the user isn't a super user. */
         if ( is_multisite() && ! is_super_admin() ) {
           return;
@@ -185,9 +189,9 @@ namespace UsabilityDynamics\WP {
           echo '<div class="ud-admin-notice updated update-nag fade" style="padding:11px;">' . $message . '</div>';
         }
         
-        //** Determine if message has been dismissed ( for 4 weeks! ) */
-        $dismiss_timer = get_user_meta( get_current_user_id(), ( 'dismissed_notice_' . sanitize_key( $this->name ) ), true );
-        if ( !$dismiss_timer || ( time() - (int)$dismiss_timer ) >= ( 4 * WEEK_IN_SECONDS ) ) {
+        //** Determine if message has been dismissed */
+        $dismissed = get_option( ( 'dismissed_notice_' . sanitize_key( $this->name ) ) );
+        if ( empty( $dismissed ) ) {
           //** Notices Block */
           if( !empty( $messages ) && is_array( $messages ) ) {
             $message = '<ul style="list-style:disc inside;"><li>' . implode( '</li><li>', $messages ) . '</li></ul>';

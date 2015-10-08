@@ -995,6 +995,14 @@ namespace UsabilityDynamics\UD_API {
 
             $notice = $this->ping_response[ 'message' ];
 
+            /** Determine if user has permissions to see plugin notices */
+            if ( ! function_exists( 'wp_get_current_user' ) ) {
+              require_once( ABSPATH . 'wp-includes/pluggable.php' );
+            }
+            if( !current_user_can( 'activate_plugins' ) ) {
+              return;
+            }
+
             /** Determine if notice dismissed */
             $dismissed = get_option( 'dismissed_ud_notices' );
             $dismissed = is_array( $dismissed ) ? $dismissed : array();

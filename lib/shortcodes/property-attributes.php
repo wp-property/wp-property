@@ -77,15 +77,6 @@ namespace UsabilityDynamics\WPP {
                   'true' => __( 'Yes', ud_get_wp_property()->domain ),
                 )
               ),
-              'first_alt' => array(
-                'name' => __( 'First Alt', ud_get_wp_property()->domain ),
-                'description' => __( 'Make first row of attributes list to be alt one.', ud_get_wp_property()->domain ),
-                'type' => 'select',
-                'options' => array(
-                  'false' => __( 'No', ud_get_wp_property()->domain ),
-                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
-                )
-              ),
               'return_blank' => array(
                 'name' => __( 'Return Blank', ud_get_wp_property()->domain ),
                 'description' => __( 'Omit blank values or not.', ud_get_wp_property()->domain ),
