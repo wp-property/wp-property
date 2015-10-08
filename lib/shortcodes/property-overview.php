@@ -239,51 +239,7 @@ namespace UsabilityDynamics\WPP {
        * @return string|void
        */
       public function call( $atts = "" ) {
-        global $wp_properties;
-
-        $data = wp_parse_args( $atts, array(
-          'strict_search' => false,
-          'show_children' => ( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_children' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'show_children' ] : 'true' ),
-          'child_properties_title' => __( 'Floor plans at location:', ud_get_wp_property()->domain ),
-          'fancybox_preview' => ud_get_wp_property( 'configuration.property_overview.fancybox_preview' ),
-          'bottom_pagination_flag' => ( isset( $wp_properties[ 'configuration' ][ 'bottom_insert_pagenation' ] ) && $wp_properties[ 'configuration' ][ 'bottom_insert_pagenation' ] == 'true' ? true : false ),
-          'thumbnail_size' => ud_get_wp_property( 'configuration.property_overview.thumbnail_size', 'thumbnail' ),
-          'sort_by_text' => __( 'Sort By:', ud_get_wp_property()->domain ),
-          'sort_by' => 'post_date',
-          'sort_order' => 'DESC',
-          'template' => false,
-          'disable_wrapper' => false,
-          'ajax_call' => false,
-          'sorter_type' => 'buttons',
-          'sorter' => 'on',
-          'pagination' => 'on',
-          'hide_count' => false,
-          'per_page' => 10,
-          'starting_row' => 0,
-          'unique_hash' => rand( 10000, 99900 ),
-          'detail_button' => false,
-          'class' => 'wpp_property_overview_shortcode',
-          'in_new_window' => false
-        ) );
-
-        /* Fix boolean values */
-        $boolean_values_map = array(
-          'strict_search',
-          'template',
-          'disable_wrapper',
-          'ajax_call',
-          'hide_count',
-          'detail_button',
-          'in_new_window'
-        );
-        foreach( $data as $k => $v ) {
-          if( in_array( $k, $boolean_values_map ) && ( $v === 'false' || empty( $v ) ) ) {
-            $data[$k] = false;
-          }
-        }
-
-        return $this::render( $data );
-
+        return $this::render( $atts );
       }
 
       /**
