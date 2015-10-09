@@ -1,5 +1,6 @@
 ### 2.1.1
 * Added function get_property_type() which returns label of property type for current or particular property.
+* Added WP and plugin cache flushing on plugin settings updates.
 * Fixed 'Property/Properties' white labels.
 
 ### 2.1.0 ( October 8, 2015 )
