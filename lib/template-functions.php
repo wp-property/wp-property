@@ -882,7 +882,7 @@ if ( !function_exists( 'property_slideshow' ) ):
   }
 endif; // property_slideshow
 
-if ( !function_exists( 'get_property' ) ):
+if ( !function_exists( 'get_property' ) ) {
   /**
    *
    * Extends get_post by dumping all metadata into array
@@ -892,32 +892,31 @@ if ( !function_exists( 'get_property' ) ):
    *
    * @return bool|mixed|object|stdClass|void
    */
-function get_property( $id, $args = "" ) {
-    if ( $id && is_numeric( $id ) )
-      return WPP_F::get_property( $id, $args );
+  function get_property($id, $args = "") {
+    return \UsabilityDynamics\WPP\Property_Factory::get( $id, $args );
   }
-endif;
+}
 
-if ( !function_exists( 'the_tagline' ) ):
-  function the_tagline( $before = '', $after = '', $echo = true ) {
+if ( !function_exists( 'the_tagline' ) ) {
+  function the_tagline($before = '', $after = '', $echo = true) {
     global $post;
 
-    $content = isset( $post->tagline ) ? $post->tagline : '';
+    $content = isset($post->tagline) ? $post->tagline : '';
 
-    if ( strlen( $content ) == 0 ) {
+    if (strlen($content) == 0) {
       return;
     }
 
     $content = $before . $content . $after;
 
-    if ( $echo ) {
+    if ($echo) {
       echo $content;
     } else {
       return $content;
     }
 
   }
-endif;
+}
 
 if ( !function_exists( 'get_features' ) ) {
   function get_features( $args = '', $property = false ) {
