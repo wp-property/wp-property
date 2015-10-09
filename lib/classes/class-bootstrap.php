@@ -189,14 +189,7 @@ namespace UsabilityDynamics\WPP {
        * @author peshkov@UD
        */
       public function run_upgrade_process() {
-
-
-        /**
-         * WP-Property 1.42.4 and less compatibility
-         */
-        update_option( "wpp_version", $this->args['version'] );
-
-        do_action( $this->slug . '::upgrade', $this->old_version, $this->args[ 'version' ], $this );
+        Upgrade::run();
       }
 
     }

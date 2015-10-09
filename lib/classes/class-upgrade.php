@@ -31,7 +31,7 @@ namespace UsabilityDynamics\WPP {
          */
         switch( true ) {
 
-          case ( version_compare( $old_version, '2.1.0', '<' ) ):
+          case ( version_compare( $old_version, '2.1.1', '<' ) ):
             /*
              * Enable Legacy Features
              */
