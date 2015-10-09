@@ -89,7 +89,7 @@ namespace UsabilityDynamics\WPP {
         //** Default attribute label descriptions for the back-end */
         $data[ 'descriptions' ] = array(
           'descriptions' => array(
-            'property_type' => __('The property type will determine the layout.',ud_get_wp_property()->domain),
+            'property_type' => sprintf( __('The %s type will determine the layout.',ud_get_wp_property()->domain), \WPP_F::property_label() ),
             'custom_attribute_overview' => __('Customize what appears in search results in the attribute section.  For example: 1bed, 2baths, area varies slightly.',ud_get_wp_property()->domain),
             'tagline' => __('Will appear on overview pages and on top of every listing page.',ud_get_wp_property()->domain)
           )

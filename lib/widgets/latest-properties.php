@@ -39,7 +39,7 @@ class LatestPropertiesWidget extends WP_Widget {
     }
 
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
-      $property_stats[ 'property_type' ] = __( 'Property Type', ud_get_wp_property()->domain );
+      $property_stats[ 'property_type' ] = sprintf( __( '%s Type', ud_get_wp_property()->domain ), WPP_F::property_label() );
     }
 
     $arg = array(
@@ -152,7 +152,7 @@ class LatestPropertiesWidget extends WP_Widget {
     $property_stats = isset( $wp_properties[ 'property_stats' ] ) ? $wp_properties[ 'property_stats' ] : array();
 
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
-      $property_stats[ 'property_type' ] = __( 'Property Type', ud_get_wp_property()->domain );
+      $property_stats[ 'property_type' ] = sprintf( __( '%s Type', ud_get_wp_property()->domain ), WPP_F::property_label() );
     }
     ?>
     <script type="text/javascript">

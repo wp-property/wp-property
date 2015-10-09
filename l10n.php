@@ -22,7 +22,7 @@ $l10n = array(
 
   //** Admin Settings page */
   'undefined_error'                 => __( 'Undefined Error.', ud_get_wp_property()->domain ),
-  'set_property_type_confirmation'  => __( 'You are about to set ALL your properties to the selected property type. Are you sure?', ud_get_wp_property()->domain ),
+  'set_property_type_confirmation'  => sprintf( __( 'You are about to set ALL your %s to the selected %s type. Are you sure?', ud_get_wp_property()->domain ), WPP_F::property_label( 'plural' ), WPP_F::property_label() ),
   'processing'                      => __( 'Processing...', ud_get_wp_property()->domain ),
   'geo_attribute_usage'             => __( 'Attention! This attribute (slug) is used by Google Validator and Address Display functionality. It is set automatically and can not be edited on Property Adding/Updating page.',ud_get_wp_property()->domain ),
 

@@ -736,7 +736,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       return false;
     }
 
-    return sprintf( __( 'Set %1s properties to "%2s" property type', ud_get_wp_property()->domain ), count( $success ), $property_type );
+    return sprintf( __( 'Set %s %s to "%s" %s type', ud_get_wp_property()->domain ), count( $success ), WPP_F::property_label( 'plural' ), WPP_F::property_label(), $property_type );
 
   }
 

@@ -191,7 +191,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <tr>
       <th><?php printf( __( 'Widget Sidebars', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></th>
       <td>
-        <p><?php printf( __( 'By default, %s registers widget sidebars for <b>Single %s page</b> based on defined property types. But you can disable any of them here.', ud_get_wp_property( 'domain' ) ), 'WP-Property', WPP_F::property_label() ); ?></p>
+        <p><?php printf( __( 'By default, %1$s registers widget sidebars for <b>Single %2$s page</b> based on defined %2$s types. But you can disable any of them here.', ud_get_wp_property( 'domain' ) ), 'WP-Property', WPP_F::property_label() ); ?></p>
         <p><?php printf( __( 'Note, the following sidebar are added only on default <b>%s</b> ( Default %s Template ).', ud_get_wp_property( 'domain' ) ), 'property.php', WPP_F::property_label() ); ?></p><br/>
         <ul>
           <?php foreach( (array)$wp_properties[ 'property_types' ] as $slug => $title ) : ?>

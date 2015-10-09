@@ -42,7 +42,7 @@ class WPP_Export {
         <li><b>starting_row</b> - number</li>
         <li><b>sort_order</b> - number</li>
         <li><b>sort_by</b> - number</li>
-        <li><b>property_type</b> - string - <?php _e( 'Slug for the property type.', ud_get_wp_property()->domain ); ?></li>
+        <li><b>property_type</b> - string - <?php printf( __( 'Slug for the %s type.', ud_get_wp_property()->domain ), \WPP_F::property_label() ); ?></li>
         <li><b>format</b> - string - "xml" <?php _e( 'or', ud_get_wp_property()->domain ); ?> "json"</li>
       </ul>
       </li>

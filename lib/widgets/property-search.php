@@ -181,7 +181,7 @@ class SearchPropertiesWidget extends WP_Widget {
 
     /** Set label for list below only */
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
-      $property_stats[ 'property_type' ] = __( 'Property Type', ud_get_wp_property()->domain );
+      $property_stats[ 'property_type' ] = sprintf( __( '%s Type', ud_get_wp_property()->domain ), WPP_F::property_label() );
     }
 
     if ( is_array( $all_searchable_property_types ) && count( $all_searchable_property_types ) > 1 ) {
@@ -225,7 +225,7 @@ class SearchPropertiesWidget extends WP_Widget {
 
     //** If the search widget cannot be created without some data, we bail */
     if ( !empty( $error ) ) {
-      echo '<p>' . _e( 'No searchable property types were found.', ud_get_wp_property()->domain ) . '</p>';
+      echo '<p>' . printf( __( 'No searchable %s types were found.', ud_get_wp_property()->domain ), WPP_F::property_label() ). '</p>';
       return;
     }
 
@@ -242,7 +242,7 @@ class SearchPropertiesWidget extends WP_Widget {
       </li>
 
       <li class="wpp_property_types">
-        <p><?php _e( 'Property types to search:', ud_get_wp_property()->domain ); ?></p>
+        <p><?php printf( __( '%s types to search:', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></p>
         <ul>
           <?php foreach ( $all_searchable_property_types as $property_type ) { ?>
             <li>

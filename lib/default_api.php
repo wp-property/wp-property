@@ -73,7 +73,7 @@ add_action( 'wpp_ui_after_attribute_price', 'wpp_show_week_month_selection' );
 function wpp_unique_key_labels( $stats ) {
 
   if ( empty( $stats[ 'property_type' ] ) ) {
-    $stats[ 'property_type' ] = __( 'Property Type', ud_get_wp_property()->domain );
+    $stats[ 'property_type' ] = sprintf( __( '%s Type', ud_get_wp_property()->domain ), \WPP_F::property_label() );
   }
 
   if ( empty( $stats[ 'city' ] ) ) {

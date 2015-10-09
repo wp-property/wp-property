@@ -20,8 +20,8 @@ namespace UsabilityDynamics\WPP {
             'id' => 'featured_properties',
             'params' => array(
               'property_type' => array(
-                'name' => __( 'Property Type', ud_get_wp_property()->domain ),
-                'description' => __( 'Property Type', ud_get_wp_property()->domain ),
+                'name' => sprintf( __( '%s Type', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
+                'description' => sprintf( __( '%s Type', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
                 'type' => 'text',
                 'default' => 'all'
               ),

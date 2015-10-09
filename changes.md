@@ -1,3 +1,6 @@
+### 2.1.1
+* Fixed 'Property/Properties' white labels.
+
 ### 2.1.0 ( October 8, 2015 )
 * Added compatibility with Page Builder by SiteOrigin plugin.
 * Added ability to set single or page templates of current theme for rendering Single Property page instead of predefined property.php.

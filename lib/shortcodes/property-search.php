@@ -26,7 +26,7 @@ namespace UsabilityDynamics\WPP {
                 'default' => ''
               ),
               'searchable_property_types' => array(
-                'name' => __( 'Searchable Property Types', ud_get_wp_property()->domain ),
+                'name' => sprintf( __( 'Searchable %s Types', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
                 'description' => __( 'CSV types list', ud_get_wp_property()->domain ),
                 'type' => 'text',
                 'default' => ''

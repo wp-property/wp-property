@@ -1334,7 +1334,7 @@ if ( !function_exists( 'draw_property_search_form' ) ):
     $property_stats = $wp_properties[ 'property_stats' ];
 
     if ( !isset( $property_stats[ 'property_type' ] ) ) {
-      $property_stats[ 'property_type' ] = __( 'Property Type', ud_get_wp_property()->domain );
+      $property_stats[ 'property_type' ] = sprintf( __( '%s Type', ud_get_wp_property()->domain ), WPP_F::property_label() );
     }
 
     //** Load search values for attributes (from cache, or generate) */
