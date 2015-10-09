@@ -58,7 +58,7 @@ namespace UsabilityDynamics\WPP {
           'taxonomy' => '',
         ), $atts );
 
-        if( empty( $data['taxonomy'] ) ) {
+        if( empty( $data['taxonomy'] ) || !taxonomy_exists( $data['taxonomy'] ) ) {
           return;
         }
 

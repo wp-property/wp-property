@@ -44,20 +44,6 @@ namespace UsabilityDynamics\WPP {
           define( 'WPP_Version', $this->args[ 'version' ] );
         }
 
-        //** Init Settings */
-        $this->settings = new Settings( array(
-          'key'  => 'wpp_settings',
-          'store'  => 'options',
-          'data' => array(
-            'name' => $this->name,
-            'version' => $this->args[ 'version' ],
-            'domain' => $this->domain,
-          )
-        ));
-
-        //** Initiate Attributes Handler */
-        new Attributes();
-
         /** Legacy filters and hooks */
         include_once $this->path( 'lib/default_api.php', 'dir' );
         /** Loads general functions used by WP-Property */
@@ -72,6 +58,20 @@ namespace UsabilityDynamics\WPP {
         include_once $this->path( 'lib/class_mail.php', 'dir' );
         /** Load in hooks that deal with legacy and backwards-compat issues */
         include_once $this->path( 'lib/class_legacy.php', 'dir' );
+
+        //** Init Settings */
+        $this->settings = new Settings( array(
+          'key'  => 'wpp_settings',
+          'store'  => 'options',
+          'data' => array(
+            'name' => $this->name,
+            'version' => $this->args[ 'version' ],
+            'domain' => $this->domain,
+          )
+        ));
+
+        //** Initiate Attributes Handler */
+        new Attributes();
 
         //** Initiate AJAX Handler */
         new Ajax();

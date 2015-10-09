@@ -28,6 +28,35 @@ if ( !function_exists( 'wpp_alternating_row' ) ) {
   }
 }
 
+if ( !function_exists( 'get_property_type' ) ) {
+  /**
+   * Return Label of Property Type for current or particular property
+   *
+   * @param mixed $post_id Property ID.
+   * @return string
+   */
+  function get_property_type( $post_id = false ) {
+    global $post;
+
+    if( !is_numeric( $post_id ) ) {
+      if ( isset( $post->ID ) ) {
+        $post_id = $post->ID;
+      } else {
+        return '';
+      }
+    }
+
+    $property_types = (array)ud_get_wp_property('property_types');
+    $type = (string)get_post_meta($post_id, 'property_type', true);
+
+    if (array_key_exists( $type, $property_types )) {
+      return $property_types[$type];
+    } else {
+      return '';
+    }
+  }
+}
+
 if ( !function_exists( 'get_attribute' ) ) {
   /**
    * Get an attribute for the property

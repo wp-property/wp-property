@@ -109,11 +109,11 @@ class WPP_F extends UsabilityDynamics\Utility {
     global $wp_post_types;
 
     if( $type == 'plural' ) {
-      return ( $wp_post_types[ 'property' ]->labels->name ? $wp_post_types[ 'property' ]->labels->name : __( 'Properties' ) );
+      return ( !empty( $wp_post_types[ 'property' ]->labels->name ) ? $wp_post_types[ 'property' ]->labels->name : __( 'Properties' ) );
     }
 
     if( $type == 'singular' ) {
-      return ( $wp_post_types[ 'property' ]->labels->singular_name ? $wp_post_types[ 'property' ]->labels->singular_name : __( 'Property' ) );
+      return ( !empty( $wp_post_types[ 'property' ]->labels->singular_name ) ? $wp_post_types[ 'property' ]->labels->singular_name : __( 'Property' ) );
     }
 
   }
