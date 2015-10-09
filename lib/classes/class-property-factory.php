@@ -43,11 +43,12 @@ namespace UsabilityDynamics\WPP {
         $load_gallery          = isset( $load_gallery ) ? $load_gallery : 'true';
         $load_thumbnail        = isset( $load_thumbnail ) ? $load_thumbnail : 'true';
         $load_parent           = isset( $load_parent ) ? $load_parent : 'true';
+        $cache                 = isset( $cache ) && $cache === 'true' ? true : false;
 
         $args = is_array( $args ) ? http_build_query( $args ) : (string) $args;
 
-        if( isset( $cache ) && $cache == 'true' ) {
-          if( $return = wp_cache_get( $id, 'wpp_' . md5($args) ) ) {
+        if( $cache ) {
+          if( $return = wp_cache_get( $id . $args ) ) {
             return $return;
           }
         }
@@ -120,14 +121,14 @@ namespace UsabilityDynamics\WPP {
          * Figure out what the thumbnail is, and load all sizes
          */
         if( $load_thumbnail == 'true' ) {
-          $return = array_merge( $return, self::get_thumbnail( $id ) );
+          $return = array_merge( $return, self::get_thumbnail( $id, $cache ) );
         }
 
         /*
          * Load all attached images and their sizes
          */
         if( $load_gallery == 'true' ) {
-          $gallery = self::get_images( $id );
+          $gallery = self::get_images( $id, $cache );
           $return[ 'gallery' ] = !empty( $gallery ) ? $gallery : false;
         }
 
@@ -158,105 +159,11 @@ namespace UsabilityDynamics\WPP {
         }
 
         /*
-        *
-        * Load Children and their attributes
-        *
-        */
+         * Load Children and their attributes
+         */
         if( $get_children == 'true' ) {
-
-          //** Calculate variables if based off children if children exist */
-          $children = $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE  post_type = 'property' AND post_status = 'publish' AND post_parent = '{$id}' ORDER BY menu_order ASC " );
-
-          if( count( $children ) > 0 ) {
-
-            $range = array();
-
-            //** Cycle through children and get necessary variables */
-            foreach( $children as $child_id ) {
-
-              $child_object = self::get( $child_id, array(
-                'load_gallery' => $load_gallery,
-                'load_parent' => false
-              ) );
-              $return[ 'children' ][ $child_id ] = $child_object;
-
-              //** Save child image URLs into one array for quick access */
-              if( !empty( $child_object[ 'featured_image_url' ] ) ) {
-                $return[ 'system' ][ 'child_images' ][ $child_id ] = $child_object[ 'featured_image_url' ];
-              }
-
-              //** Exclude variables from searchable attributes (to prevent ranges) */
-              $excluded_attributes    = $wp_properties[ 'geo_type_attributes' ];
-              $excluded_attributes[ ] = $wp_properties[ 'configuration' ][ 'address_attribute' ];
-
-              foreach( $wp_properties[ 'searchable_attributes' ] as $searchable_attribute ) {
-
-                $attribute_data = Attributes::get_attribute_data( $searchable_attribute );
-
-                if( !empty( $attribute_data[ 'numeric' ] ) || !empty( $attribute_data[ 'currency' ] ) ) {
-
-                  if( !empty( $child_object[ $searchable_attribute ] ) && !in_array( $searchable_attribute, $excluded_attributes ) ) {
-                    $range[ $searchable_attribute ][ ] = $child_object[ $searchable_attribute ];
-                  }
-
-                }
-              }
-            }
-
-            //* Cycle through every type of range (i.e. price, deposit, bathroom, etc) and fix-up the respective data arrays */
-            foreach( (array) $range as $range_attribute => $range_values ) {
-
-              //* Cycle through all values of this range (attribute), and fix any ranges that use dashes */
-              foreach( $range_values as $key => $single_value ) {
-
-                //* Remove dollar signs */
-                $single_value = str_replace( "$", '', $single_value );
-
-                //* Fix ranges */
-                if( strpos( $single_value, '&ndash;' ) ) {
-
-                  $split = explode( '&ndash;', $single_value );
-
-                  foreach( $split as $new_single_value )
-
-                    if( !empty( $new_single_value ) ) {
-                      array_push( $range_values, trim( $new_single_value ) );
-                    }
-
-                  //* Unset original value with dash */
-                  unset( $range_values[ $key ] );
-
-                }
-              }
-
-              //* Remove duplicate values from this range */
-              $range[ $range_attribute ] = array_unique( $range_values );
-
-              //* Sort the values in this particular range */
-              sort( $range[ $range_attribute ] );
-
-              if( count( $range[ $range_attribute ] ) < 2 ) {
-                if( !isset( $return[ $range_attribute ] ) ) {
-                  $return[ $range_attribute ] = '';
-                }
-                $return[ $range_attribute ] = $return[ $range_attribute ] . ' ( ' . $range[ $range_attribute ][ 0 ] . ' )';
-              }
-
-              if( count( $range[ $range_attribute ] ) > 1 ) {
-                if( !isset( $return[ $range_attribute ] ) ) {
-                  $return[ $range_attribute ] = '';
-                }
-                $return[ $range_attribute ] = $return[ $range_attribute ] . ' ( ' . min( $range[ $range_attribute ] ) . " - " . max( $range[ $range_attribute ] ) . ' )';
-              }
-
-              //** If we end up with a range, we make a note of it */
-              if( !empty( $return[ $range_attribute ] ) ) {
-                $return[ 'system' ][ 'upwards_inherited_attributes' ][ ] = $range_attribute;
-              }
-
-            }
-
-          }
+          // @todo: move to filter
+          $return = self::extend_property_with_children( $return, $args, $cache );
         }
 
         if( !empty( $return[ 'location' ] ) && !in_array( 'address', $editable_keys ) && !isset( $return[ 'address' ] ) ) {
@@ -309,19 +216,137 @@ namespace UsabilityDynamics\WPP {
           $return = \WPP_F::array_to_object( $return );
         }
 
-        wp_cache_add( $id, $return, 'wpp_' . md5($args) );
+        wp_cache_add( $id . $args, $return );
 
         return $return;
 
       }
 
       /**
-       * Returns thumbnail's data
+       * Extends particular property with children data.
+       * Internal method! Do not use it directly.
        *
-       * @param $id
+       * @param $property
+       * @param $args
+       * @param bool $cache
        * @return array
        */
-      static function get_thumbnail( $id ) {
+      static function extend_property_with_children( $property, $args, $cache = true ) {
+        global $wpdb, $wp_properties;
+
+        if( empty( $property['ID'] ) ) {
+          return $property;
+        }
+
+        $data = array();
+
+        //** Calculate variables if based off children if children exist */
+        $children = $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE  post_type = 'property' AND post_status = 'publish' AND post_parent = '{$property['ID']}' ORDER BY menu_order ASC " );
+
+        if( count( $children ) > 0 ) {
+
+          $range = array();
+
+          //** Cycle through children and get necessary variables */
+          foreach( $children as $child_id ) {
+
+            $child_object = self::get( $child_id, array(
+              'load_gallery' => $args[ 'load_gallery' ],
+              'load_parent' => false
+            ) );
+            $data[ 'children' ][ $child_id ] = $child_object;
+
+            //** Save child image URLs into one array for quick access */
+            if( !empty( $child_object[ 'featured_image_url' ] ) ) {
+              $data[ 'system' ][ 'child_images' ][ $child_id ] = $child_object[ 'featured_image_url' ];
+            }
+
+            //** Exclude variables from searchable attributes (to prevent ranges) */
+            $excluded_attributes    = $wp_properties[ 'geo_type_attributes' ];
+            $excluded_attributes[ ] = $wp_properties[ 'configuration' ][ 'address_attribute' ];
+
+            foreach( $wp_properties[ 'searchable_attributes' ] as $searchable_attribute ) {
+
+              $attribute_data = Attributes::get_attribute_data( $searchable_attribute );
+
+              if( !empty( $attribute_data[ 'numeric' ] ) || !empty( $attribute_data[ 'currency' ] ) ) {
+
+                if( !empty( $child_object[ $searchable_attribute ] ) && !in_array( $searchable_attribute, $excluded_attributes ) ) {
+                  $range[ $searchable_attribute ][ ] = $child_object[ $searchable_attribute ];
+                }
+
+              }
+            }
+          }
+
+          //* Cycle through every type of range (i.e. price, deposit, bathroom, etc) and fix-up the respective data arrays */
+          foreach( (array) $range as $range_attribute => $range_values ) {
+
+            //* Cycle through all values of this range (attribute), and fix any ranges that use dashes */
+            foreach( $range_values as $key => $single_value ) {
+
+              //* Remove dollar signs */
+              $single_value = str_replace( "$", '', $single_value );
+
+              //* Fix ranges */
+              if( strpos( $single_value, '&ndash;' ) ) {
+
+                $split = explode( '&ndash;', $single_value );
+
+                foreach( $split as $new_single_value )
+
+                  if( !empty( $new_single_value ) ) {
+                    array_push( $range_values, trim( $new_single_value ) );
+                  }
+
+                //* Unset original value with dash */
+                unset( $range_values[ $key ] );
+
+              }
+            }
+
+            //* Remove duplicate values from this range */
+            $range[ $range_attribute ] = array_unique( $range_values );
+
+            //* Sort the values in this particular range */
+            sort( $range[ $range_attribute ] );
+
+            if( count( $range[ $range_attribute ] ) < 2 ) {
+              if( !isset( $return[ $range_attribute ] ) ) {
+                $data[ $range_attribute ] = '';
+              }
+              $data[ $range_attribute ] = $return[ $range_attribute ] . ' ( ' . $range[ $range_attribute ][ 0 ] . ' )';
+            }
+
+            if( count( $range[ $range_attribute ] ) > 1 ) {
+              if( !isset( $return[ $range_attribute ] ) ) {
+                $data[ $range_attribute ] = '';
+              }
+              $data[ $range_attribute ] = $return[ $range_attribute ] . ' ( ' . min( $range[ $range_attribute ] ) . " - " . max( $range[ $range_attribute ] ) . ' )';
+            }
+
+            //** If we end up with a range, we make a note of it */
+            if( !empty( $data[ $range_attribute ] ) ) {
+              $data[ 'system' ][ 'upwards_inherited_attributes' ][ ] = $range_attribute;
+            }
+
+          }
+
+        }
+
+        $property = array_merge( $property, $data );
+
+        return $property;
+      }
+
+      /**
+       * Returns thumbnail's data
+       *
+       * @param int $id
+       * @param bool $cache
+       * @return array
+       */
+      static function get_thumbnail( $id, $cache = true ) {
         global $wpdb;
 
         $data = array();
@@ -371,9 +396,10 @@ namespace UsabilityDynamics\WPP {
        * Returns images data for particular property
        *
        * @param $id
+       * @param bool $cache
        * @return array
        */
-      static function get_images( $id ) {
+      static function get_images( $id, $cache = true ) {
 
         $data = array();
 
