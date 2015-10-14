@@ -8,6 +8,7 @@
 * Refactored get_property function.
 * Fixed 'Property/Properties' white labels.
 * Fixed plugin's upgrade process.
+* Fixed rewrite rules breaking on plugin activation which has caused 404 errors on single property pages.
 
 ### 2.1.0 ( October 8, 2015 )
 * Added compatibility with Page Builder by SiteOrigin plugin.

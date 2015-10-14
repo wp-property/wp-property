@@ -161,8 +161,6 @@ namespace UsabilityDynamics\WPP {
        *
        */
       public function activate() {
-        //** flush Rewrite Rules */
-        flush_rewrite_rules();
         //** flush Object Cache */
         wp_cache_flush();
         //** set transient to flush WP-Property cache */
@@ -174,8 +172,6 @@ namespace UsabilityDynamics\WPP {
        *
        */
       public function deactivate() {
-        //** flush Rewrite Rules */
-        flush_rewrite_rules();
         //** flush Object Cache */
         wp_cache_flush();
       }
