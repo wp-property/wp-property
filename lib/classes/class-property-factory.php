@@ -117,15 +117,7 @@ namespace UsabilityDynamics\WPP {
 
           //** Make sure property_type stays as slug, or it will break many things:  (widgets, class names, etc)  */
           if( !empty( $property[ 'property_type' ] ) ) {
-            $property[ 'property_type_label' ] = isset( $wp_properties[ 'property_types' ][ $property[ 'property_type' ] ]) ? $wp_properties[ 'property_types' ][ $property[ 'property_type' ] ] : false;
-            if( empty( $property[ 'property_type_label' ] ) ) {
-              foreach( $wp_properties[ 'property_types' ] as $pt_key => $pt_value ) {
-                if( strtolower( $pt_value ) == strtolower( $property[ 'property_type' ] ) ) {
-                  $property[ 'property_type' ]       = $pt_key;
-                  $property[ 'property_type_label' ] = $pt_value;
-                }
-              }
-            }
+            $property[ 'property_type_label' ] = get_property_type( $id );
           }
 
           //** If phone number is not set but set globally, we load it into property array here */

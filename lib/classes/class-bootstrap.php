@@ -57,6 +57,8 @@ namespace UsabilityDynamics\WPP {
         /** Load in hooks that deal with legacy and backwards-compat issues */
         include_once $this->path( 'lib/class_legacy.php', 'dir' );
 
+        $upload_dir = wp_upload_dir();
+
         //** Init Settings */
         $this->settings = new Settings( array(
           'key'  => 'wpp_settings',
@@ -65,6 +67,8 @@ namespace UsabilityDynamics\WPP {
             'name' => $this->name,
             'version' => $this->args[ 'version' ],
             'domain' => $this->domain,
+            'cache_dir' => $upload_dir[ 'basedir' ] . '/wpp_cache',
+            'cache_url' => $upload_dir[ 'baseurl' ] . '/wpp_cache',
           )
         ));
 

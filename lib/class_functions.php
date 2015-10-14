@@ -2168,11 +2168,10 @@ class WPP_F extends UsabilityDynamics\Utility {
    * @author Maxim Peshkov
    */
   static public function clear_cache() {
-    $cache_dir = WPP_Path . 'static/cache/';
+    $cache_dir = trailingslashit( ud_get_wp_property( 'cache_dir' ) );
     if( file_exists( $cache_dir ) ) {
       wpp_recursive_unlink( $cache_dir );
     }
-
     return __( 'Cache was successfully cleared', ud_get_wp_property()->domain );
   }
 

@@ -163,8 +163,8 @@ class WPP_Core {
 
     //** Load Localization early so plugins can use them as well */
     //** Try to generate static localization script. It can be flushed on Clear Cache! */
-    if( $this->maybe_generate_l10n_script() ) {
-      wp_register_script( 'wpp-localization', ud_get_wp_property()->path( 'static/cache/l10n.js', 'url' ), array(), WPP_Version );
+    if( $l10n_url = $this->maybe_generate_l10n_script() ) {
+      wp_register_script( 'wpp-localization', $l10n_url, array(), WPP_Version );
     } else {
       wp_register_script( 'wpp-localization', ud_get_wp_property()->path( 'static/scripts/l10n.js', 'url' ), array(), WPP_Version );
       wp_localize_script( 'wpp-localization', 'wpp_l10n', $this->get_l10n_data() );
@@ -458,18 +458,6 @@ class WPP_Core {
       return $post_id;
     }
 
-    //* Delete cache files of search values for search widget's form */
-    $directory = WPP_Path . 'static/cache/searchwidget';
-
-    if( is_dir( $directory ) ) {
-      $dir = opendir( $directory );
-      while( ( $cachefile = readdir( $dir ) ) ) {
-        if( is_file( $directory . "/" . $cachefile ) ) {
-          unlink( $directory . "/" . $cachefile );
-        }
-      }
-    }
-
     if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
       return $post_id;
     }
@@ -565,6 +553,10 @@ class WPP_Core {
      * Flush all object caches related to current property
      */
     \UsabilityDynamics\WPP\Property_Factory::flush_cache( $post_id );
+    /**
+     * Flush WP-Property caches
+     */
+    \WPP_F::clear_cache();
 
   }
 
@@ -1025,11 +1017,12 @@ class WPP_Core {
    * @author peshkov@UD
    */
   public function maybe_generate_l10n_script() {
-    $dir = ud_get_wp_property()->path( 'static/cache/', 'dir' );
-    $file = $dir . 'l10n.js';
+    $dir = untrailingslashit( ud_get_wp_property( 'cache_dir' ) );
+    $file = $dir . '/l10n.js';
+    $url = untrailingslashit( ud_get_wp_property( 'cache_url' ) ) . '/l10n.js';
     //** File already created! */
     if( file_exists( $file ) ) {
-      return true;
+      return $url;
     }
     //** Try to create directory if it doesn't exist */
     if( !is_dir( $dir ) && !wp_mkdir_p( $dir ) ) {
@@ -1039,7 +1032,7 @@ class WPP_Core {
     if( @file_put_contents( $file, 'var wpp = ( typeof wpp === \'object\' ) ? wpp : {}; wpp.strings = ' . json_encode( $this->get_l10n_data() ) . ';' ) ) {
       return false;
     }
-    return true;
+    return $url;
   }
 
   /**
