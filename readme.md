@@ -64,7 +64,10 @@ Although WP-Property is the highest rated and most downloaded WordPress real est
 * Other Properties. Display a list of properties that share a parent with the currently displayed property.
 * Property Attributes. Display a list of selected property attributes when loaded on a single property page.
 * Property Search. Display a highly customizable property search form.
-* Property Gallery. List of all images attached to the current property
+* Property Gallery. List of all images attached to the current property.
+* Property Overview. Display a list of properties using flexible bunch of settings.
+* Property Map. Displays property map of current or particular property.
+* List Attachments. Displays attachments of current property.
 
 #### Shortcodes
 We have setup a ["Shortcode Cheatsheet" page](https://www.usabilitydynamics.com/tutorials/wp-property-help/wp-property-shortcode-cheat-sheet/) for your convenience.
@@ -107,6 +110,19 @@ Property Attribute. Property Attribute Shortcodes return the value of an attribu
 * [property_attribute attribute=status] Shows status for current property.
 * [property_attribute attribute=map] Shows map for current property
 
+##### [property_attributes]
+Property Attributes. Renders List of Property Attributes.
+* [property_attributes include=bedrooms,price] Renders only specified attributes: Bedrooms and Price
+* [property_attributes exclude=bedrooms,price] Renders all attributes except of Bedrooms and Price
+
+##### [property_meta]
+Property Meta. Renders List of Property Meta fields.
+* [property_meta] Renders all meta fields for current property.
+* [property_meta include=school] Renders only specified meta: School
+
+##### [property_terms]
+Property Terms. Renders List of property terms for specific taxonomy.
+
 ##### [featured_properties]
 Featured Property. This shortcode queries only those properties that have been given Featured status.
 * [featured_properties type='all' stats='price'] Shows all featured properties, and display their prices.
@@ -124,6 +140,7 @@ Learn more about the [WP-Property Add-ons and themes](https://www.usabilitydynam
 * English (UK)
 * French (FR)
 * Danish (DK)
+* Dutch ( NL )
 * German (DE)
 * Italian (IT)
 * Portuguese (BR)
