@@ -198,7 +198,7 @@ namespace UsabilityDynamics\WPP {
               ),
               'hide_count' => array(
                 'name' => __( 'Hide Count', ud_get_wp_property()->domain ),
-                'description' => __( 'Hide the “10 found.” text.', ud_get_wp_property()->domain ),
+                'description' => __( 'Hide the "10 found." text.', ud_get_wp_property()->domain ),
                 'type' => 'select',
                 'options' => array(
                   'true' => __( 'Yes', ud_get_wp_property()->domain ),

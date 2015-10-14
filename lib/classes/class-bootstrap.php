@@ -44,8 +44,6 @@ namespace UsabilityDynamics\WPP {
           define( 'WPP_Version', $this->args[ 'version' ] );
         }
 
-        /** Legacy filters and hooks */
-        include_once $this->path( 'lib/default_api.php', 'dir' );
         /** Loads general functions used by WP-Property */
         include_once $this->path( 'lib/class_functions.php', 'dir' );
         /** Loads Admin Tools feature */
@@ -106,6 +104,9 @@ namespace UsabilityDynamics\WPP {
         add_action( 'widgets_init', function() {
           ud_get_wp_property()->load_files( ud_get_wp_property()->path('lib/widgets', 'dir') );
         }, 1 );
+
+        /** Legacy filters and hooks */
+        include_once $this->path( 'lib/default_api.php', 'dir' );
 
         /**
          * Initiate the plugin

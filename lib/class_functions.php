@@ -3377,9 +3377,13 @@ class WPP_F extends UsabilityDynamics\Utility {
 
   /**
    * Load property information into an array or an object
-   * Deprecated.
+   * Deprecated since 2.1.1
+   *
+   * @param mix ID or post object
+   * @param array $args
+   * @return mix array or object
    */
-  static public function get_property( $id, $args = false ) {
+  static public function get_property( $id, $args = array() ) {
     return \UsabilityDynamics\WPP\Property_Factory::get( $id, $args );
   }
 

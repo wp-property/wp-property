@@ -227,8 +227,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <tr>
       <th><?php _e( 'Advanced Options', ud_get_wp_property()->domain ); ?></th>
       <td>
-        <div class="wpp_settings_block">
-          <h3><?php _e( '', ud_get_wp_property()->domain ); ?></h3>
+        <div class="wpp_settings_block"><br/>
           <ul>
             <?php if ( apply_filters( 'wpp::custom_styles', false ) === false ) : ?>
               <li>

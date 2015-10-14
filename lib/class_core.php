@@ -452,9 +452,6 @@ class WPP_Core {
   function save_property( $post_id = null ) {
     global $wp_properties, $wp_version;
 
-    //die( '<pre>' . print_r( debug_backtrace(), true ) . '</pre>' );
-    //die( '<pre>' . $post_id. print_r( $_POST, true ) . '</pre>' );
-    //die( '<pre>' . current_action() . print_r( $post_id, true ) . '</pre>' );
     $_wpnonce = ( version_compare( $wp_version, '3.5', '>=' ) ? 'update-post_' : 'update-property_' ) . $post_id;
 
     if( !isset( $_POST[ '_wpnonce' ] ) || !wp_verify_nonce( $_POST[ '_wpnonce' ], $_wpnonce ) || $_POST[ 'post_type' ] !== 'property' ) {
@@ -563,6 +560,11 @@ class WPP_Core {
       'update_data' => $update_data,
       'geo_data' => $geo_data
     ));
+
+    /**
+     * Flush all object caches related to current property
+     */
+    \UsabilityDynamics\WPP\Property_Factory::flush_cache( $post_id );
 
   }
 
@@ -1152,7 +1154,7 @@ class WPP_Core {
    * @deprecated 2.1.0
    */
   static function shortcode_property_overview( $atts = '' ) {
-    _deprecated_function( __FUNCTION__, '2.1.0', 'do_shortcode([property_overview])' );
+    //_deprecated_function( __FUNCTION__, '2.1.0', 'do_shortcode([property_overview])' );
     return UsabilityDynamics\WPP\Property_Overview_Shortcode::render( $atts );
   }
 
