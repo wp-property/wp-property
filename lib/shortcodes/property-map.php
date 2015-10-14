@@ -55,7 +55,7 @@ namespace UsabilityDynamics\WPP {
                 'default' => 'false'
               )
             ),
-            'description' => __( 'Renders Property Map', ud_get_wp_property()->domain ),
+            'description' => sprintf( __( 'Renders %s Map', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
             'group' => 'WP-Property'
         );
 

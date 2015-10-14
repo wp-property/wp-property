@@ -494,7 +494,7 @@ namespace UsabilityDynamics\WP {
          * 
          * The condition belongs to WordPress 4.3 and higher.
          */
-        if( did_action( 'plugins_loaded' ) ) {
+        if( did_action( 'plugins_loaded' ) && $this->type == 'plugin' ) {
           return;
         }
         $plugins = $this->get_schema( 'extra.schemas.dependencies.plugins' );

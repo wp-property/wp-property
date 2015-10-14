@@ -124,7 +124,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         if( get_post_type($args['post_id']) !== 'property' ) {
-          throw new \Exception( __( 'Invalid Post ID. It does not belong to Property.', ud_get_wp_property('domain') ) );
+          throw new \Exception( sprintf( __( 'Invalid Post ID. It does not belong to %s.', ud_get_wp_property('domain') ), \WPP_F::property_label() ) );
         }
 
         $post = get_post( $args['post_id'], ARRAY_A );

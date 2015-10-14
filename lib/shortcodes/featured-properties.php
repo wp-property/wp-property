@@ -117,7 +117,7 @@ namespace UsabilityDynamics\WPP {
                 'default' => 'thumbnail'
               )
             ),
-            'description' => __( 'Renders Featured Properties', ud_get_wp_property()->domain ),
+            'description' => sprintf( __( 'Renders Featured %s', ud_get_wp_property()->domain ), \WPP_F::property_label( 'plural' ) ),
             'group' => 'WP-Property'
         );
 

@@ -34,7 +34,7 @@ namespace UsabilityDynamics\WPP {
                 'options' => $meta,
               ),
             ),
-            'description' => __( 'Renders Property Meta', ud_get_wp_property()->domain ),
+            'description' => sprintf( __( 'Renders %s Meta', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
             'group' => 'WP-Property'
         );
 

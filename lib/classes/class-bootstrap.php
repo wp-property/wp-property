@@ -112,6 +112,15 @@ namespace UsabilityDynamics\WPP {
          * Initiate the plugin
          */
         $this->core = new \WPP_Core();
+
+        /**
+         * Flush WP-Property cache
+         */
+        if( get_transient( 'wpp_cache_flush' ) ) {
+          \WPP_F::clear_cache();
+          delete_transient( 'wpp_cache_flush' );
+        }
+
       }
 
       /**
@@ -156,6 +165,8 @@ namespace UsabilityDynamics\WPP {
         flush_rewrite_rules();
         //** flush Object Cache */
         wp_cache_flush();
+        //** set transient to flush WP-Property cache */
+        set_transient( 'wpp_cache_flush', time() );
       }
       
       /**
@@ -190,7 +201,7 @@ namespace UsabilityDynamics\WPP {
        * @author peshkov@UD
        */
       public function run_upgrade_process() {
-        Upgrade::run();
+        Upgrade::run( $this->old_version, $this->args['version'] );
       }
 
     }

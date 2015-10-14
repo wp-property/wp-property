@@ -4041,9 +4041,6 @@ class WPP_F extends UsabilityDynamics\Utility {
     $contextual_help[ 'Display' ][ ] = '<h3>' . __( 'Display', ud_get_wp_property()->domain ) . '</h3>';
     $contextual_help[ 'Display' ][ ] = '<p>' . __( 'This tab allows you to do many things. Make custom picture sizes that will let you to make posting pictures easier. Change the way you view property photos with the use of Fancy Box, Choose  to use pagination on the bottom of property pages and whether or not to show child properties. Manage Google map attributes and map thumbnail sizes. Select here which attributes you want to show once a property is pin pointed on your map. Change your currency and placement of symbols.', ud_get_wp_property()->domain ) . '</p>';
 
-    $contextual_help[ 'Premium Features' ][ ] = '<h3>' . __( 'Premium Features', ud_get_wp_property()->domain ) . '</h3>';
-    $contextual_help[ 'Premium Features' ][ ] = '<p>' . __( 'Tab allows you to manage your WP-Property Premium Features', ud_get_wp_property()->domain ) . '</p>';
-
     $contextual_help[ 'Help' ][ ] = '<h3>' . __( 'Help', ud_get_wp_property()->domain ) . '</h3>';
     $contextual_help[ 'Help' ][ ] = '<p>' . __( 'This tab will help you troubleshoot your plugin, do exports and check for updates for Premium Features', ud_get_wp_property()->domain ) . '</p>';
 

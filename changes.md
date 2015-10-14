@@ -4,6 +4,7 @@
 * Added object cache flushing on property updates.
 * Refactored get_property function.
 * Fixed 'Property/Properties' white labels.
+* Fixed plugin's upgrade process.
 
 ### 2.1.0 ( October 8, 2015 )
 * Added compatibility with Page Builder by SiteOrigin plugin.

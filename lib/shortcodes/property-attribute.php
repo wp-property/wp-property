@@ -72,7 +72,7 @@ namespace UsabilityDynamics\WPP {
                 'default' => ''
               )
             ),
-            'description' => __( 'Renders Property Attribute', ud_get_wp_property()->domain ),
+            'description' => sprintf( __( 'Renders %s Attribute', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
             'group' => 'WP-Property'
         );
 

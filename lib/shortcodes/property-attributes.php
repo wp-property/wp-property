@@ -99,7 +99,7 @@ namespace UsabilityDynamics\WPP {
                 'options' => $attributes,
               ),
             ),
-            'description' => __( 'Renders Property Attributes List', ud_get_wp_property()->domain ),
+            'description' => sprintf( __( 'Renders %s Attributes List', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
             'group' => 'WP-Property'
         );
 

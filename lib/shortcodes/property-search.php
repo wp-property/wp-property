@@ -69,7 +69,7 @@ namespace UsabilityDynamics\WPP {
                 'default' => 'false'
               )
             ),
-            'description' => __( 'Renders Property Search form', ud_get_wp_property()->domain ),
+            'description' => sprintf( __( 'Renders %s Search form', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
             'group' => 'WP-Property'
         );
 

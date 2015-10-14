@@ -79,7 +79,7 @@ namespace UsabilityDynamics\WPP {
               ),
               'show_children' => array(
                 'name' => __( 'Show Children', ud_get_wp_property()->domain ),
-                'description' => __( 'Switches children property displaying.', ud_get_wp_property()->domain ),
+                'description' => sprintf( __( 'Switches children %s displaying.', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
                 'type' => 'select',
                 'options' => array(
                   'true' => __( 'Yes', ud_get_wp_property()->domain ),
@@ -88,8 +88,8 @@ namespace UsabilityDynamics\WPP {
                 'default' => 'true'
               ),
               'child_properties_title' => array(
-                'name' => __( 'Child Properties Title', ud_get_wp_property()->domain ),
-                'description' => __( 'Title for child properties section.', ud_get_wp_property()->domain ),
+                'name' => sprintf( __( 'Child %s Title', ud_get_wp_property()->domain ), \WPP_F::property_label( 'plural' ) ),
+                'description' => sprintf( __( 'Title for Child %s section.', ud_get_wp_property()->domain ), \WPP_F::property_label( 'plural' ) ),
                 'type' => 'text',
                 'default' => __( 'Floor plans at location:', ud_get_wp_property()->domain )
               ),
@@ -181,7 +181,7 @@ namespace UsabilityDynamics\WPP {
               ),
               'per_page' => array(
                 'name' => __( 'Per Page', ud_get_wp_property()->domain ),
-                'description' => __( 'Property quantity per page.', ud_get_wp_property()->domain ),
+                'description' => sprintf( __( '%s quantity per page.', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
                 'type' => 'number',
                 'default' => 10
               ),
@@ -227,7 +227,7 @@ namespace UsabilityDynamics\WPP {
                 'default' => 'false'
               ),
             ),
-            'description' => __( 'Renders Property Attributes', ud_get_wp_property()->domain ),
+            'description' => sprintf( __( 'Renders %s Attributes', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
             'group' => 'WP-Property'
         );
 

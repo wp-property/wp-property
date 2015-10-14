@@ -29,7 +29,7 @@ namespace UsabilityDynamics\WPP {
             'params' => array(
               'property_id' => array(
                 'name' => sprintf( __( '%s ID', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label() ),
-                'description' => __( 'If not empty, result will show particular property, which ID is set.', ud_get_wp_property( 'domain' ) ),
+                'description' => sprintf( __( 'If not empty, result will show particular %s, which ID is set.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label() ),
                 'type' => 'text',
                 'default' => ''
               ),
@@ -40,7 +40,7 @@ namespace UsabilityDynamics\WPP {
                 'options' => $taxonomies,
               )
             ),
-            'description' => __( 'Renders Property Terms for specific taxonomy', ud_get_wp_property()->domain ),
+            'description' => sprintf( __( 'Renders %s Terms for specific taxonomy', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
             'group' => 'WP-Property'
         );
 
