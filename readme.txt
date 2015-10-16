@@ -159,6 +159,7 @@ Learn more about the [WP-Property Add-ons and themes](https://www.usabilitydynam
 * English (UK)
 * French (FR)
 * Danish (DK)
+* Dutch ( NL )
 * German (DE)
 * Italian (IT)
 * Portuguese (BR)
