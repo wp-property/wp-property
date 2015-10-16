@@ -341,14 +341,14 @@ namespace UsabilityDynamics\WPP {
 
               if( count( $range[ $range_attribute ] ) < 2 ) {
                 if( !isset( $property[ $range_attribute ] ) ) {
-                  $data[ $range_attribute ] = '';
+                  $property[ $range_attribute ] = '';
                 }
                 $data[ $range_attribute ] = $property[ $range_attribute ] . ' ( ' . $range[ $range_attribute ][ 0 ] . ' )';
               }
 
               if( count( $range[ $range_attribute ] ) > 1 ) {
                 if( !isset( $property[ $range_attribute ] ) ) {
-                  $data[ $range_attribute ] = '';
+                  $property[ $range_attribute ] = '';
                 }
                 $data[ $range_attribute ] = $property[ $range_attribute ] . ' ( ' . min( $range[ $range_attribute ] ) . " - " . max( $range[ $range_attribute ] ) . ' )';
               }

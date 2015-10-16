@@ -156,7 +156,8 @@ namespace UsabilityDynamics\WPP {
 
         //** On property editing page - determines which fields to hide for a particular property type */
         $d = $this->get( 'hidden_attributes', false );
-        if( !$d || !is_array( $d ) ) {
+
+        if( !is_array( $d ) ) {
           $this->set( 'hidden_attributes', array(
             'floorplan' => array('location', 'parking', 'school'), /*  Floorplans inherit location. Parking and school are generally same for all floorplans in a building */
             'building' => array('price', 'bedrooms', 'bathrooms', 'area', 'deposit'),
@@ -166,7 +167,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Determines property types that have addresses. */
         $d = $this->get( 'location_matters', false );
-        if( !$d || !is_array( $d ) ) {
+        if( !is_array( $d ) ) {
           $this->set( 'location_matters', array(
             'building',
             'single_family_home' 
@@ -175,7 +176,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Determine which property types should actually be searchable. */
         $d = $this->get( 'searchable_property_types', false );
-        if( !$d || !is_array( $d ) ) {
+        if( !is_array( $d ) ) {
           $this->set( 'searchable_property_types', array(
             'floorplan',
             'single_family_home'
@@ -184,7 +185,7 @@ namespace UsabilityDynamics\WPP {
         
         //** Attributes to use in searching. */
         $d = $this->get( 'searchable_attributes', false );
-        if( !$d || !is_array( $d ) ) {
+        if( !is_array( $d ) ) {
           $this->set( 'searchable_attributes', array(
             'area',
             'deposit',
@@ -197,7 +198,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Convert phrases to searchable values.  Converts string stats into numeric values for searching and filtering. */
         $d = $this->get( 'search_conversions', false );
-        if( !$d || !is_array( $d ) ) {
+        if( !is_array( $d ) ) {
           $this->set( 'search_conversions', array(
             'bedrooms' => array( __( 'Studio', ud_get_wp_property()->domain ) => '0.5' )
           ) );
@@ -205,7 +206,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Don't load defaults if settings exist in db */
         $d = $this->get( 'image_sizes', false );
-        if( !$d || !is_array( $d ) ) {
+        if( !is_array( $d ) ) {
           $this->set( 'image_sizes', array(
             'map_thumb' => array('width'=> '75', 'height' => '75'),
             'tiny_thumb' => array('width'=> '100', 'height' => '100'),
@@ -215,7 +216,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         $d = $this->get( 'configuration.google_maps.infobox_attributes', false );
-        if( !$d || !is_array( $d ) ) {
+        if( !is_array( $d ) ) {
           $this->set( 'configuration.google_maps.infobox_attributes', array(
             'bedrooms',
             'bathrooms',
@@ -226,6 +227,7 @@ namespace UsabilityDynamics\WPP {
         //** STEP 4. */
 
         $wp_properties = $this->get();
+
         
       }
 

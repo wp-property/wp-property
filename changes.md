@@ -1,3 +1,6 @@
+### 2.1.2
+* Fixed replacing of plugin's settings data with default values in some cases. 
+
 ### 2.1.1 ( October 14, 2015 )
 * Added function get_property_type() which returns label of property type for current or particular property.
 * Added automatic object cache and plugin cache flushing on plugin's settings updates.
