@@ -54,17 +54,10 @@ wp_cache_flush();
     <h3><?php printf( __( 'WP-Property %s important changes', ud_get_wp_property()->domain ), ud_get_wp_property( 'version' ) ); ?>:</h3>
 
     <ul>
-      <li>Added function get_property_type() which returns label of property type for current or particular property.</li>
-      <li>Added automatic object cache and plugin cache flushing on plugin's settings updates.</li>
-      <li>Added automatic object cache flushing on property updates.</li>
-      <li>Added automatic plugin cache flushing on plugin activation.</li>
-      <li>Updated localisation files.</li>
-      <li>Updated Russian localisation.</li>
-      <li>Refactored get_property function.</li>
-      <li>Fixed 'Property/Properties' white labels.</li>
-      <li>Fixed plugin's upgrade process.</li>
-      <li>Fixed localisation of javascript files on multi site.</li>
-      <li>Fixed rewrite rules breaking on plugin activation which has caused 404 errors on single property pages.</li>
+      <li>Added ability to sort properties by modified date for Property Overview widget.</li>
+      <li>Added option to export properties to CSV file on Help Tab of Settings page.</li>
+      <li>Fixed replacing of plugin's settings data with default values on updating WP-Property settings in some cases.</li>
+      <li>Fixed showing of Multi-Checkbox values.</li>
     </ul>
 
   </div>
