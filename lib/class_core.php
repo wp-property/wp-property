@@ -38,8 +38,6 @@ class WPP_Core {
     //** Hook in lower init */
     add_action( 'init', array( $this, 'init_lower' ), 100 );
 
-    /// add_action( 'admin_init', array( $this, 'admin_init' ), 100 );
-
     //** Setup template_redirect */
     add_action( "template_redirect", array( $this, 'template_redirect' ) );
 

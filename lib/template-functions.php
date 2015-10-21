@@ -805,7 +805,6 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
       if ( !array_key_exists( $meta_key, (array)$attributes ) ) {
         continue;
       }
-      $attribute_value = apply_filters( "wpp::attribute::display", $attribute_value, $meta_key );
       //** Only executed shortcodes if the value isn't an array */
       if ( !is_array( $attribute_value ) ) {
         if ( ( !empty( $args[ 'do_not_execute_shortcodes' ] ) && $args[ 'do_not_execute_shortcodes' ] == 'true' ) || $meta_key == 'post_content' ) {
@@ -818,6 +817,7 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
         $attribute_value = do_shortcode( html_entity_decode( $attribute_value ) );
         $attribute_value = str_replace( "\n", "", nl2br( $attribute_value ) );
       }
+      $attribute_value = apply_filters( "wpp::attribute::display", $attribute_value, $meta_key );
       $property[ $meta_key ] = apply_filters( "wpp_stat_filter_{$meta_key}", $attribute_value, $attribute_scope );
     }
 

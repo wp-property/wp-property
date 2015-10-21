@@ -497,13 +497,6 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <div class="wpp_inner_tab wp-core-ui">
 
       <div class="wpp_settings_block">
-        <label>
-        <?php _e( 'If prompted for your domain name during a premium feature purchase, enter as appears here:', ud_get_wp_property()->domain ); ?>
-          <input type="text" readonly="true" value="<?php echo $this_domain; ?>" size="<?php echo strlen( $this_domain ) + 10; ?>"/>
-        </label>
-      </div>
-
-      <div class="wpp_settings_block">
         <?php _e( "Restore Backup of WP-Property Configuration", ud_get_wp_property()->domain ); ?>
         : <input name="wpp_settings[settings_from_backup]" class="" id="wpp_backup_file" type="file"/>
         <a href="<?php echo wp_nonce_url( "edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup", 'download-wpp-backup' ); ?>"><?php _e( 'Download Backup of Current WP-Property Configuration.', ud_get_wp_property()->domain ); ?></a>

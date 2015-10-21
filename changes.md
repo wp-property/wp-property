@@ -1,5 +1,6 @@
 ### 2.1.2 ( October 21, 2015 )
 * Added ability to sort properties by modified date for Property Overview widget.
+* Added option to export properties to CSV file on Help Tab of Settings page.
 * Fixed replacing of plugin's settings data with default values on updating WP-Property settings in some cases.
 * Fixed showing of Multi-Checkbox values.
 
