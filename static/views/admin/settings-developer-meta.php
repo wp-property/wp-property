@@ -58,7 +58,7 @@ global $wp_properties;
 
   <tfoot>
   <tr>
-    <td colspan='4'>
+    <td colspan='5'>
       <input type="button" class="wpp_add_row button-secondary" value="<?php _e( 'Add Row', ud_get_wp_property()->domain ) ?>"/>
     </td>
   </tr>

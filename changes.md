@@ -1,5 +1,7 @@
-### 2.1.2
-* Fixed replacing of plugin's settings data with default values in some cases. 
+### 2.1.2 ( October 21, 2015 )
+* Added ability to sort properties by modified date for Property Overview widget.
+* Fixed replacing of plugin's settings data with default values on updating WP-Property settings in some cases.
+* Fixed showing of Multi-Checkbox values.
 
 ### 2.1.1 ( October 14, 2015 )
 * Added function get_property_type() which returns label of property type for current or particular property.

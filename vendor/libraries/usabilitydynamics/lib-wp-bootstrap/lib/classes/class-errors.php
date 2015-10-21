@@ -144,11 +144,16 @@ namespace UsabilityDynamics\WP {
       public function admin_notices() {
         global $wp_version;
 
-        //** Don't show the message if the user has no 'activate plugins' permission. */
+        //** Don't show the message if the user has no enough permissions. */
         if ( ! function_exists( 'wp_get_current_user' ) ) {
           require_once( ABSPATH . 'wp-includes/pluggable.php' );
         }
-        if( !current_user_can( 'activate_plugins' ) ) {
+        
+        if(
+          empty( $this->args['type'] ) ||
+          ( $this->args['type'] == 'plugin' && !current_user_can( 'activate_plugins' ) ) ||
+          ( $this->args['type'] == 'theme' && !current_user_can( 'switch_themes' ) )
+        ) {
           return;
         }
 

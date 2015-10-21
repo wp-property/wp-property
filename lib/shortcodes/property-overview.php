@@ -32,7 +32,8 @@ namespace UsabilityDynamics\WPP {
         }
 
         $sort_by = array(
-          'post_date' => sprintf( __( 'Date (%s)', ud_get_wp_property( 'domain' ) ), 'post_date' ),
+          'post_date' => sprintf( __( 'Post Date (%s)', ud_get_wp_property( 'domain' ) ), 'post_date' ),
+          'post_modified' => sprintf( __( 'Modified Date (%s)', ud_get_wp_property( 'domain' ) ), 'post_modified' ),
           'random' => sprintf( __( 'Random (%s)', ud_get_wp_property( 'domain' ) ), 'random' ),
           'menu_order' => sprintf( __( 'Menu Order (%s)', ud_get_wp_property( 'domain' ) ), 'menu_order' ),
         );

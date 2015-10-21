@@ -798,37 +798,27 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
       }
     }
 
-    if ( empty( $args[ 'do_not_execute_shortcodes' ] ) || $args[ 'do_not_execute_shortcodes' ] !== 'true' ) {
+    $attributes = ud_get_wp_property( 'property_stats', array() );
 
-      $attributes = ud_get_wp_property( 'property_stats', array() );
-
-      foreach ( $property as $meta_key => $attribute_value ) {
-
-        //** Only executed shortcodes if the value isn't an array */
-        if ( is_array( $attribute_value ) ) {
+    foreach ( $property as $meta_key => $attribute_value ) {
+      //** Only execute shortcodes for defined property attributes to prevent different issues */
+      if ( !array_key_exists( $meta_key, (array)$attributes ) ) {
+        continue;
+      }
+      $attribute_value = apply_filters( "wpp::attribute::display", $attribute_value, $meta_key );
+      //** Only executed shortcodes if the value isn't an array */
+      if ( !is_array( $attribute_value ) ) {
+        if ( ( !empty( $args[ 'do_not_execute_shortcodes' ] ) && $args[ 'do_not_execute_shortcodes' ] == 'true' ) || $meta_key == 'post_content' ) {
           continue;
         }
-
-        //** Only execute shortcodes for defined property attributes to prevent different issues */
-        if ( !array_key_exists( $meta_key, (array)$attributes ) ) {
-          continue;
-        }
-
         //** Determine if the current attribute is address and set it as display address */
         if ( $meta_key == $wp_properties[ 'configuration' ][ 'address_attribute' ] && !empty( $property[ 'display_address' ] ) ) {
           $attribute_value = $property[ 'display_address' ];
         }
-
         $attribute_value = do_shortcode( html_entity_decode( $attribute_value ) );
-
         $attribute_value = str_replace( "\n", "", nl2br( $attribute_value ) );
-
-        $attribute_value = apply_filters( "wpp::attribute::display", $attribute_value, $meta_key );
-
-        $property[ $meta_key ] = apply_filters( "wpp_stat_filter_{$meta_key}", $attribute_value, $attribute_scope );
-
       }
-
+      $property[ $meta_key ] = apply_filters( "wpp_stat_filter_{$meta_key}", $attribute_value, $attribute_scope );
     }
 
     $property[ 'system' ][ 'prepared_for_display' ] = true;

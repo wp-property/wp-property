@@ -605,7 +605,7 @@ namespace UsabilityDynamics\UD_API {
         //** If we do not have cache ( transient ), do request to get the list of all available products */
         if( !$trnst || !is_array( $trnst ) ) {
           $target_url = $this->api_url . 'products.json';
-          $request = wp_remote_get( $target_url );
+          $request = wp_remote_get( $target_url, array( 'sslverify' => false ) );
           if( is_wp_error( $request ) || wp_remote_retrieve_response_code( $request ) != 200 ) {
             return $more_products;
           } else {
