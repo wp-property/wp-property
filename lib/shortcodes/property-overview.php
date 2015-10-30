@@ -322,6 +322,7 @@ namespace UsabilityDynamics\WPP {
         $defaults[ 'sorter_type' ] = 'buttons';
         $defaults[ 'sorter' ] = 'on';
         $defaults[ 'pagination' ] = 'on';
+        $defaults[ 'pagination_type' ] = isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'pagination_type' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'pagination_type' ] : 'slider';
         $defaults[ 'hide_count' ] = false;
         $defaults[ 'per_page' ] = 10;
         $defaults[ 'starting_row' ] = 0;
@@ -527,9 +528,8 @@ namespace UsabilityDynamics\WPP {
         $template_found = \WPP_F::get_template_part( array(
           "property-overview-{$template}",
           "property-overview-" . sanitize_key( $property_type ),
-          "property-{$template}",
           "property-overview",
-        ), array( WPP_Templates ) );
+        ), array( ud_get_wp_property()->path( 'static/views', 'dir' ) ) );
 
         if( $template_found ) {
           include $template_found;
@@ -639,46 +639,52 @@ namespace UsabilityDynamics\WPP {
 
           ob_start(); ?>
           <script type="text/javascript">
+
+            var vars = {
+              "unique_id": "<?php echo $unique_hash ?>",
+              "pages": <?php echo !empty( $pages ) ? $pages : 'null'; ?>,
+              "use_pagination": <?php echo $use_pagination; ?>,
+              "query": <?php echo json_encode($wpp_query); ?>,
+              "ajax_url": <?php echo admin_url('admin-ajax.php'); ?>
+            };
+
             /*
              * The functionality below is used for pagination and sorting the list of properties
              * It can be many times (on multiple shortcodes)
              * So the current javascript functionality should not to be initialized twice.
-             */
-            /*
+             *
              * Init global WPP_QUERY variable which will contain all query objects
              */
-            if ( typeof wpp_query == 'undefined' ) {
-              var wpp_query = [];
+            if ( typeof window.wpp_query == 'undefined' ) {
+              window.wpp_query = {};
             }
+
             /*
              *
              */
             if ( typeof document_ready == 'undefined' ) {
               var document_ready = false;
             }
+
             /*
              * Initialize shortcode's wpp_query object
              */
-            if ( typeof wpp_query_<?php echo $unique_hash; ?> == 'undefined' ) {
-              var wpp_query_<?php echo $unique_hash; ?> = <?php echo json_encode($wpp_query); ?>;
-              /* Default values for ajax query. It's used when we go to base URL using back button */
-              wpp_query_<?php echo $unique_hash; ?>['default_query'] = wpp_query_<?php echo $unique_hash; ?>.query;
-              /* Push query objects to global wpp_query variable */
-              wpp_query.push( wpp_query_<?php echo $unique_hash; ?> );
+            if ( typeof wpp_query[ vars.unique_id ] == 'undefined' ) {
+              window.wpp_query[ vars.unique_id ] = vars.query;
+              window.wpp_query[ vars.unique_id].default_query = vars.query.query;
             }
+
             /*
              * Init variable only at once
              */
             if ( typeof wpp_pagination_history_ran == 'undefined' ) {
               var wpp_pagination_history_ran = false;
             }
-            /* Init variable only at once */
-            if ( typeof wpp_pagination_<?php echo $unique_hash; ?> == 'undefined' ) {
-              var wpp_pagination_<?php echo $unique_hash; ?> = false;
-            }
+
             if ( typeof first_load == 'undefined' ) {
               var first_load = true;
             }
+
             /* Watch for address URL for back buttons support */
             if ( !wpp_pagination_history_ran ) {
               wpp_pagination_history_ran = true;
@@ -752,9 +758,9 @@ namespace UsabilityDynamics\WPP {
                       } );
                     }
                     if ( history.requested_page && history.requested_page != '' ) {
-                      eval( 'wpp_do_ajax_pagination_' + q.unique_hash + '(' + history.requested_page + ')' );
+                      wpp_do_ajax_pagination( history.requested_page );
                     } else {
-                      eval( 'wpp_do_ajax_pagination_' + q.unique_hash + '(1)' );
+                      wpp_do_ajax_pagination(1);
                     }
                   } else {
                     return false;
@@ -783,7 +789,7 @@ namespace UsabilityDynamics\WPP {
                           }
                         } );
                       }
-                      eval( 'wpp_do_ajax_pagination_' + wpp_query[i].unique_hash + '(1, false)' );
+                      wpp_do_ajax_pagination(1, false);
                     }
                   }
                 }
@@ -832,7 +838,7 @@ namespace UsabilityDynamics\WPP {
               }
             }
 
-            function wpp_do_ajax_pagination_<?php echo $unique_hash; ?>( this_page, scroll_to ) {
+            function wpp_do_ajax_pagination( this_page, scroll_to ) {
               if ( typeof this_page == 'undefined' ) {
                 this_page = 1;
               }
@@ -840,54 +846,53 @@ namespace UsabilityDynamics\WPP {
                 scroll_to = true;
               }
 
-              data = wpp_query_<?php echo $unique_hash; ?>;
+              data = window.wpp_query[ vars.unique_id ];
               /* Update page counter */
-              jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_current_page_count" ).text( this_page );
-              jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider .slider_page_info .val" ).text( this_page );
+              jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_current_page_count" ).text( this_page );
+              jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider .slider_page_info .val" ).text( this_page );
               /* Update sliders  */
-              jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider" ).slider( "value", this_page );
-              jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .ajax_loader' ).show();
+              jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider" ).slider( "value", this_page );
+              jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .ajax_loader' ).show();
               /* Scroll page to the top of the current shortcode */
               if ( scroll_to ) {
-                jQuery( document ).trigger( 'wpp_pagination_change', {'overview_id': <?php echo $unique_hash; ?>} );
+                jQuery( document ).trigger( 'wpp_pagination_change', {'overview_id': vars.unique_id} );
               }
               data.ajax_call = 'true';
               data.requested_page = this_page;
-              jQuery.post( '<?php echo admin_url('admin-ajax.php'); ?>', {
+              jQuery.post( vars.ajax_url, {
                 action: 'wpp_property_overview_pagination',
                 wpp_ajax_query: data
               }, function ( result_data ) {
-                jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .ajax_loader' ).hide();
+                jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .ajax_loader' ).hide();
                 var p_list = jQuery( '.wpp_property_view_result', result_data.display );
                 //* Determine if p_list is empty try previous version's selector */
                 if ( p_list.length == 0 ) {
                   p_list = jQuery( '.wpp_row_view', result_data.display );
                 }
                 var content = ( p_list.length > 0 ) ? p_list.html() : result_data.display;
-                var p_wrapper = jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_property_view_result' );
+                var p_wrapper = jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_property_view_result' );
                 //* Determine if p_wrapper is empty try previous version's selector */
                 if ( p_wrapper.length == 0 ) {
-                  p_wrapper = jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_row_view' )
+                  p_wrapper = jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_row_view' )
                 }
                 p_wrapper.html( content );
-                /* Total properties count may change depending on sorting (if sorted by an attribute that all properties do not have) */
-                /* It seems issue mentioned above are fexed so nex line unneeded, commented odokienko@UD */
-                // jQuery("#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_property_results").text(result_data.wpp_query.properties?result_data.wpp_query.properties.total:0);
-                <?php if( isset( $use_pagination ) && $use_pagination ) { ?>
+
                 /* Update max page in slider and in display */
-                jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider" ).slider( "option", "max", result_data.wpp_query.pages );
-                jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_total_page_count" ).text( result_data.wpp_query.pages );
-                max_slider_pos_<?php echo $unique_hash; ?> = result_data.wpp_query.pages;
-                if ( max_slider_pos_<?php echo $unique_hash; ?> == 0 ) jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_current_page_count" ).text( 0 );
-                <?php } ?>
-                jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> a.fancybox_image" ).fancybox( {
+                if( vars.use_pagination ) {
+                  jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider" ).slider( "option", "max", result_data.wpp_query.pages );
+                  jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_total_page_count" ).text( result_data.wpp_query.pages );
+                  max_slider_pos_<?php echo $unique_hash; ?> = result_data.wpp_query.pages;
+                  if ( max_slider_pos_<?php echo $unique_hash; ?> == 0 ) jQuery( "#wpp_shortcode_" + vars.unique_id + " .wpp_current_page_count" ).text( 0 );
+                }
+
+                jQuery( "#wpp_shortcode_" + vars.unique_id +  " a.fancybox_image" ).fancybox( {
                   'transitionIn': 'elastic',
                   'transitionOut': 'elastic',
                   'speedIn': 600,
                   'speedOut': 200,
                   'overlayShow': false
                 } );
-                jQuery( document ).trigger( 'wpp_pagination_change_complete', {'overview_id': <?php echo $unique_hash; ?>} );
+                jQuery( document ).trigger( 'wpp_pagination_change_complete', {'overview_id': vars.unique_id} );
               }, "json" );
             }
 
@@ -897,35 +902,35 @@ namespace UsabilityDynamics\WPP {
                 return null;
               }
               document_ready = true;
-              max_slider_pos_<?php echo $unique_hash; ?> = <?php echo !empty( $pages ) ? $pages : 'null'; ?>;
+              max_slider_pos_<?php echo $unique_hash; ?> = vars.pages;
               //** Do not assign click event again */
-              if ( !jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_back' ).data( 'events' ) ) {
-                jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_back' ).click( function () {
-                  var current_value = jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider" ).slider( "value" );
+              if ( !jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_pagination_back' ).data( 'events' ) ) {
+                jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_pagination_back' ).click( function () {
+                  var current_value = jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider" ).slider( "value" );
                   if ( current_value == 1 ) {
                     return;
                   }
                   var new_value = current_value - 1;
-                  jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider" ).slider( "value", new_value );
-                  wpp_query_<?php echo $unique_hash; ?> = changeAddressValue( new_value, wpp_query_<?php echo $unique_hash; ?> );
+                  jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider" ).slider( "value", new_value );
+                  window.wpp_query[ vars.unique_id ] = changeAddressValue( new_value, window.wpp_query[ vars.unique_id ] );
                 } );
               }
-              if ( !jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_forward' ).data( 'events' ) ) {
-                jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_forward' ).click( function () {
-                  var current_value = jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider" ).slider( "value" );
+              if ( !jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_pagination_forward' ).data( 'events' ) ) {
+                jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_pagination_forward' ).click( function () {
+                  var current_value = jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider" ).slider( "value" );
                   if ( max_slider_pos_<?php echo $unique_hash; ?> && (current_value == max_slider_pos_<?php echo $unique_hash; ?> || max_slider_pos_<?php echo $unique_hash; ?> < 1 ) ) {
                     return;
                   }
                   var new_value = current_value + 1;
-                  jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider" ).slider( "value", new_value );
-                  wpp_query_<?php echo $unique_hash; ?> = changeAddressValue( new_value, wpp_query_<?php echo $unique_hash; ?> );
+                  jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider" ).slider( "value", new_value );
+                  window.wpp_query[ vars.unique_id ] = changeAddressValue( new_value, window.wpp_query[ vars.unique_id ] );
                 } );
               }
-              if ( !jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_link' ).data( 'events' ) ) {
-                jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_link' ).click( function () {
+              if ( !jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_sortable_link' ).data( 'events' ) ) {
+                jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_sortable_link' ).click( function () {
                   var attribute = jQuery( this ).attr( 'sort_slug' );
                   var sort_order = jQuery( this ).attr( 'sort_order' );
-                  var this_attribute = jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_link[sort_slug=" + attribute + "]" );
+                  var this_attribute = jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_sortable_link[sort_slug=" + attribute + "]" );
                   if ( jQuery( this ).is( ".wpp_sorted_element" ) ) {
                     var currently_sorted = true;
                     /* If this attribute is already sorted, we switch sort order */
@@ -935,29 +940,29 @@ namespace UsabilityDynamics\WPP {
                       sort_order = "ASC";
                     }
                   }
-                  jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_link" ).removeClass( "wpp_sorted_element" );
-                  wpp_query_<?php echo $unique_hash; ?>.sort_by = attribute;
-                  wpp_query_<?php echo $unique_hash; ?>.sort_order = sort_order;
+                  jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_sortable_link" ).removeClass( "wpp_sorted_element" );
+                  window.wpp_query[ vars.unique_id ].sort_by = attribute;
+                  window.wpp_query[ vars.unique_id ].sort_order = sort_order;
                   jQuery( this_attribute ).addClass( "wpp_sorted_element" );
                   jQuery( this_attribute ).attr( "sort_order", sort_order );
                   /* Get ajax results and reset to first page */
-                  wpp_query_<?php echo $unique_hash; ?> = changeAddressValue( 1, wpp_query_<?php echo $unique_hash; ?> );
+                  window.wpp_query[ vars.unique_id ] = changeAddressValue( 1, window.wpp_query[ vars.unique_id ] );
                 } );
               }
-              if ( !jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_dropdown' ).data( 'events' ) ) {
-                jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_sortable_dropdown' ).change( function () {
+              if ( !jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_sortable_dropdown' ).data( 'events' ) ) {
+                jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_sortable_dropdown' ).change( function () {
                   var parent = jQuery( this ).parents( '.wpp_sorter_options' );
                   var attribute = jQuery( ":selected", this ).attr( 'sort_slug' );
                   var sort_element = jQuery( ".sort_order", parent );
                   var sort_order = jQuery( sort_element ).attr( 'sort_order' );
-                  wpp_query_<?php echo $unique_hash; ?>.sort_by = attribute;
-                  wpp_query_<?php echo $unique_hash; ?>.sort_order = sort_order;
+                  window.wpp_query[ vars.unique_id ].sort_by = attribute;
+                  window.wpp_query[ vars.unique_id ].sort_order = sort_order;
                   /* Get ajax results and reset to first page */
-                  wpp_query_<?php echo $unique_hash; ?> = changeAddressValue( 1, wpp_query_<?php echo $unique_hash; ?> );
+                  window.wpp_query[ vars.unique_id ] = changeAddressValue( 1, window.wpp_query[ vars.unique_id ] );
                 } );
               }
-              if ( !jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_overview_sorter' ).data( 'events' ) ) {
-                jQuery( '#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_overview_sorter' ).click( function () {
+              if ( !jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_overview_sorter' ).data( 'events' ) ) {
+                jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_overview_sorter' ).click( function () {
                   var parent = jQuery( this ).parents( '.wpp_sorter_options' );
                   var sort_element = this;
                   var dropdown_element = jQuery( ".wpp_sortable_dropdown", parent );
@@ -970,42 +975,44 @@ namespace UsabilityDynamics\WPP {
                   } else if ( sort_order == "DESC" ) {
                     sort_order = "ASC";
                   }
-                  wpp_query_<?php echo $unique_hash; ?>.sort_by = attribute;
-                  wpp_query_<?php echo $unique_hash; ?>.sort_order = sort_order;
+                  window.wpp_query[ vars.unique_id ].sort_by = attribute;
+                  window.wpp_query[ vars.unique_id ].sort_order = sort_order;
                   jQuery( sort_element ).attr( "sort_order", sort_order );
                   jQuery( sort_element ).addClass( sort_order );
                   /* Get ajax results and reset to first page */
-                  wpp_query_<?php echo $unique_hash; ?> = changeAddressValue( 1, wpp_query_<?php echo $unique_hash; ?> );
+                  window.wpp_query[ vars.unique_id ] = changeAddressValue( 1, window.wpp_query[ vars.unique_id ] );
                 } );
               }
-              <?php if( isset( $use_pagination ) && $use_pagination ) { ?>
-              jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider_wrapper" ).each( function () {
-                var this_parent = this;
-                /* Slider */
-                jQuery( '.wpp_pagination_slider', this ).slider( {
-                  value: 1,
-                  min: 1,
-                  max: <?php echo $pages; ?>,
-                  step: 1,
-                  slide: function ( event, ui ) {
-                    /* Update page counter - we do it here because we want it to be instant */
-                    jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_current_page_count" ).text( ui.value );
-                    jQuery( "#wpp_shortcode_<?php echo $unique_hash; ?> .wpp_pagination_slider .slider_page_info .val" ).text( ui.value );
-                  },
-                  stop: function ( event, ui ) {
-                    wpp_query_<?php echo $unique_hash; ?> = changeAddressValue( ui.value, wpp_query_<?php echo $unique_hash; ?> );
-                  }
+
+              if( vars.use_pagination ) {
+                jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider_wrapper" ).each( function () {
+                  var this_parent = this;
+                  /* Slider */
+                  jQuery( '.wpp_pagination_slider', this ).slider( {
+                    value: 1,
+                    min: 1,
+                    max: vars.pages,
+                    step: 1,
+                    slide: function ( event, ui ) {
+                      /* Update page counter - we do it here because we want it to be instant */
+                      jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_current_page_count" ).text( ui.value );
+                      jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider .slider_page_info .val" ).text( ui.value );
+                    },
+                    stop: function ( event, ui ) {
+                      window.wpp_query[ vars.unique_id ] = changeAddressValue( ui.value, window.wpp_query[ vars.unique_id ] );
+                    }
+
+                  } );
+
+                  /* Fix slider width based on button width */
+                  var slider_width = (jQuery( this_parent ).width() - jQuery( ".wpp_pagination_back", this_parent ).outerWidth() - jQuery( ".wpp_pagination_forward", this_parent ).outerWidth() - 30);
+                  jQuery( ".wpp_pagination_slider", this_parent ).css( 'width', slider_width );
+
+                  jQuery( '.wpp_pagination_slider .ui-slider-handle', this ).append( '<div class="slider_page_info"><div class="val">1</div><div class="arrow"></div></div>' );
 
                 } );
+              }
 
-                /* Fix slider width based on button width */
-                var slider_width = (jQuery( this_parent ).width() - jQuery( ".wpp_pagination_back", this_parent ).outerWidth() - jQuery( ".wpp_pagination_forward", this_parent ).outerWidth() - 30);
-                jQuery( ".wpp_pagination_slider", this_parent ).css( 'width', slider_width );
-
-                jQuery( '.wpp_pagination_slider .ui-slider-handle', this ).append( '<div class="slider_page_info"><div class="val">1</div><div class="arrow"></div></div>' );
-
-              } );
-              <?php } ?>
             } );
 
           </script>
@@ -1016,59 +1023,17 @@ namespace UsabilityDynamics\WPP {
 
         }
 
-        ob_start(); ?>
-        <div class="properties_pagination <?php echo $settings[ 'class' ]; ?> wpp_slider_pagination" id="properties_pagination_<?php echo $unique_hash; ?>">
-          <div class="wpp_pagination_slider_status">
-        <span class="wpp_property_results_options">
-          <?php if ( $hide_count != 'true' ) {
-            $wpp_property_results = '<span class="wpp_property_results">';
-            $wpp_property_results .= ( $properties[ 'total' ] > 0 ? \WPP_F::format_numeric( $properties[ 'total' ] ) : __( 'None', ud_get_wp_property()->domain ) );
-            $wpp_property_results .= __( ' found.', ud_get_wp_property()->domain );
-            echo apply_filters( 'wpp::wpp_draw_pagination::wpp_property_results', $wpp_property_results, array( 'properties' => $properties, 'settings' => $settings ) );
-            ?>
-          <?php } ?>
-          <?php if ( !empty( $use_pagination ) ) { ?>
-            <?php _e( 'Viewing page', ud_get_wp_property()->domain ); ?>
-            <span class="wpp_current_page_count">1</span> <?php _e( 'of', ud_get_wp_property()->domain ); ?>
-            <span class="wpp_total_page_count"><?php echo $pages; ?></span>.
-          <?php } ?>
-        </span>
-            <?php if ( $sortable_attrs ) { ?>
-              <span class="wpp_sorter_options"><span class="wpp_sort_by_text"><?php echo $settings[ 'sort_by_text' ]; ?></span>
-                <?php
-                if ( $settings[ 'sorter_type' ] == 'buttons' ) {
-                  ?>
-                  <?php foreach ( $sortable_attrs as $slug => $label ) { ?>
-                    <span class="wpp_sortable_link <?php echo( $sort_by == $slug ? 'wpp_sorted_element' : '' ); ?> label label-info" sort_order="<?php echo $sort_order ?>" sort_slug="<?php echo $slug; ?>"><?php echo $label; ?></span>
-                  <?php }
-                } elseif ( $settings[ 'sorter_type' ] == 'dropdown' ) { ?>
-                  <select class="wpp_sortable_dropdown sort_by label-info" name="sort_by">
-                    <?php foreach ( $sortable_attrs as $slug => $label ) { ?>
-                      <option <?php echo( $sort_by == $slug ? 'class="wpp_sorted_element" selected="true"' : '' ); ?> sort_slug="<?php echo $slug; ?>" value="<?php echo $slug; ?>"><?php echo $label; ?></option>
-                    <?php } ?>
-                  </select>
-                  <?php /* <span class="wpp_overview_sorter sort_order <?php echo $sort_order ?> label label-info" sort_order="<?php echo $sort_order ?>"></span> */ ?>
-                  <?php
-                } else {
-                  do_action( 'wpp_custom_sorter', array( 'settings' => $settings, 'wpp_query' => $wpp_query, 'sorter_type' => $settings[ 'sorter_type' ] ) );
-                }
-                ?>
-        </span>
-            <?php } ?>
-            <div class="clear"></div>
-          </div>
-          <?php if ( !empty( $use_pagination ) ) { ?>
-            <div class="wpp_pagination_slider_wrapper">
-              <div class="wpp_pagination_back wpp_pagination_button"><?php _e( 'Prev', ud_get_wp_property()->domain ); ?></div>
-              <div class="wpp_pagination_forward wpp_pagination_button"><?php _e( 'Next', ud_get_wp_property()->domain ); ?></div>
-              <div class="wpp_pagination_slider"></div>
-            </div>
-          <?php } ?>
-        </div>
-        <div class="ajax_loader"></div>
-        <?php
-        $result = ob_get_contents();
-        ob_end_clean();
+        //** Try find custom template */
+        $template_found = \WPP_F::get_template_part( array(
+          "property-overview-pagination-slider"
+        ), array( ud_get_wp_property()->path( 'static/views', 'dir' ) ) );
+
+        $result = '';
+        if( $template_found ) {
+          ob_start();
+          include $template_found;
+          $result = ob_get_clean();
+        }
 
         //** Combine JS (after minification) with HTML results */
         if ( $settings[ 'javascript' ] && isset( $js_result ) ) {
