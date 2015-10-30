@@ -6,13 +6,9 @@
    */
   jQuery.fn.wpp_pagination = function(options) {
 
-    var instance = this;
-
-    /** Our Main container */
-    var el = jQuery(this);
-
     /** Making variables public */
     var vars = jQuery.extend({
+      'type': 'numeric',
       'unique_id': false,
       'use_pagination': true,
       'pages': null,
@@ -24,7 +20,7 @@
       return;
     }
 
-    /*
+    /**
      * The functionality below is used for pagination and sorting the list of properties
      * It can be many times (on multiple shortcodes)
      * So the current javascript functionality should not to be initialized twice.
@@ -35,19 +31,20 @@
       window.wpp_query = {};
     }
 
-    /*
+    /**
      *
      */
     if ( typeof document_ready == 'undefined' ) {
       var document_ready = false;
     }
 
-    /*
+    /**
      * Initialize shortcode's wpp_query object
      */
     if ( typeof wpp_query[ vars.unique_id ] == 'undefined' ) {
       window.wpp_query[ vars.unique_id ] = vars.query;
       window.wpp_query[ vars.unique_id].default_query = vars.query.query;
+      window.wpp_query[ vars.unique_id].pagination_type = vars.type;
       window.wpp_query[ vars.unique_id].index = Object.keys(wpp_query).length;
     }
 
@@ -62,126 +59,107 @@
       window.wpp_overview_first_load = true;
     }
 
-    /* Watch for address URL for back buttons support */
-    if ( !window.wpp_pagination_history_ran ) {
-      window.wpp_pagination_history_ran = true;
+    /**
+     * Parse location (address) hash,
+     * Setup shortcode params by hash params
+     * Calls ajax pagination
+     */
+    function callPagination ( event ) {
       /*
-       * On change location (address) Event.
-       *
-       * Also used as Back button functionality.
-       *
-       * Attention! This event is unique (binds at once) and is used for any (multiple) shortcode
+       * We have to be sure that DOM is ready
+       * if it's not, wait 0.1 sec and call function again
        */
-      jQuery( document ).ready( function () {
-        if ( !jQuery.isFunction( jQuery.fn.slider ) ) {
-          return;
-        }
-        jQuery.address.change( function ( event ) {
-          console.log('CALL PAGINATION');
+      if ( !document_ready ) {
+        window.setTimeout( function () {
           callPagination( event );
-        } );
-      } );
-      /*
-       * Parse location (address) hash,
-       * Setup shortcode params by hash params
-       * Calls ajax pagination
-       */
-      function callPagination ( event ) {
-        /*
-         * We have to be sure that DOM is ready
-         * if it's not, wait 0.1 sec and call function again
-         */
-        if ( !document_ready ) {
-          window.setTimeout( function () {
-            callPagination( event );
-          }, 100 );
-          return false;
+        }, 100 );
+        return false;
+      }
+      var history = {};
+      /* Parse hash value (params) */
+      var hashes = event.value.replace( /^\//, '' );
+      /* Determine if we have hash params */
+      if ( hashes ) {
+        hashes = hashes.split( '&' );
+        for ( var i in hashes ) {
+          if ( typeof hashes[i] != 'function' ) {
+            hash = hashes[i].split( '=' );
+            history[hash[0]] = hash[1];
+          }
         }
-        var history = {};
-        /* Parse hash value (params) */
-        var hashes = event.value.replace( /^\//, '' );
-        /* Determine if we have hash params */
-        if ( hashes ) {
-          hashes = hashes.split( '&' );
-          for ( var i in hashes ) {
-            if ( typeof hashes[i] != 'function' ) {
-              hash = hashes[i].split( '=' );
-              history[hash[0]] = hash[1];
+        if ( history.i ) {
+          /* get current shortcode's object */
+          var q = false;
+          for( var i in wpp_query ) {
+            if( wpp_query[i].index == history.i ) {
+              q = wpp_query[i];
+              break;
             }
           }
-          if ( history.i ) {
-            /* get current shortcode's object */
-            var q = false;
-            for( var i in wpp_query ) {
-              if( wpp_query[i].index == history.i ) {
-                q = wpp_query[i];
-                break;
+
+          if(!q) {
+            return false;
+          }
+
+          if ( history.sort_by && history.sort_by != '' ) {
+            q.sort_by = history.sort_by;
+          }
+          if ( history.sort_order && history.sort_order != '' ) {
+            q.sort_order = history.sort_order;
+          }
+          /* 'Select/Unselect' sortable buttons */
+          var sortable_links = jQuery( '#wpp_shortcode_' + q.unique_hash + ' .wpp_sortable_link' );
+          if ( sortable_links.length > 0 ) {
+            sortable_links.each( function ( i, e ) {
+              jQuery( e ).removeClass( "wpp_sorted_element" );
+              if ( jQuery( e ).attr( 'sort_slug' ) == q.sort_by ) {
+                jQuery( e ).addClass( "wpp_sorted_element" );
               }
-            }
-
-            if(!q) {
-              return false;
-            }
-
-            if ( history.sort_by && history.sort_by != '' ) {
-              q.sort_by = history.sort_by;
-            }
-            if ( history.sort_order && history.sort_order != '' ) {
-              q.sort_order = history.sort_order;
-            }
+            } );
+          }
+          if ( history.requested_page && history.requested_page != '' ) {
+            do_ajax_pagination( q.unique_hash, q.pagination_type, history.requested_page );
+          } else {
+            do_ajax_pagination( q.unique_hash, q.pagination_type, 1 );
+          }
+        } else {
+          return false;
+        }
+      } else {
+        /* Looks like it's base url
+         * Determine if this first load, we do nothing
+         * If not, - we use 'back button' functionality.
+         */
+        if ( window.wpp_overview_first_load ) {
+          window.wpp_overview_first_load = false;
+        } else {
+          /*
+           * Set default pagination values for all shortcodes
+           */
+          for ( var i in wpp_query ) {
+            wpp_query[i].sort_by = wpp_query[i].default_query.sort_by;
+            wpp_query[i].sort_order = wpp_query[i].default_query.sort_order;
             /* 'Select/Unselect' sortable buttons */
-            var sortable_links = jQuery( '#wpp_shortcode_' + q.unique_hash + ' .wpp_sortable_link' );
+            var sortable_links = jQuery( '#wpp_shortcode_' + wpp_query[i].unique_hash + ' .wpp_sortable_link' );
             if ( sortable_links.length > 0 ) {
-              sortable_links.each( function ( i, e ) {
+              sortable_links.each( function ( ie, e ) {
                 jQuery( e ).removeClass( "wpp_sorted_element" );
-                if ( jQuery( e ).attr( 'sort_slug' ) == q.sort_by ) {
+                if ( jQuery( e ).attr( 'sort_slug' ) == wpp_query[i].sort_by ) {
                   jQuery( e ).addClass( "wpp_sorted_element" );
                 }
               } );
             }
-            if ( history.requested_page && history.requested_page != '' ) {
-              wpp_do_ajax_pagination( q.unique_hash, history.requested_page );
-            } else {
-              wpp_do_ajax_pagination( q.unique_hash, 1 );
-            }
-          } else {
-            return false;
-          }
-        } else {
-          /* Looks like it's base url
-           * Determine if this first load, we do nothing
-           * If not, - we use 'back button' functionality.
-           */
-          if ( window.wpp_overview_first_load ) {
-            window.wpp_overview_first_load = false;
-          } else {
-            /*
-             * Set default pagination values for all shortcodes
-             */
-            for ( var i in wpp_query ) {
-              wpp_query[i].sort_by = wpp_query[i].default_query.sort_by;
-              wpp_query[i].sort_order = wpp_query[i].default_query.sort_order;
-              /* 'Select/Unselect' sortable buttons */
-              var sortable_links = jQuery( '#wpp_shortcode_' + wpp_query[i].unique_hash + ' .wpp_sortable_link' );
-              if ( sortable_links.length > 0 ) {
-                sortable_links.each( function ( ie, e ) {
-                  jQuery( e ).removeClass( "wpp_sorted_element" );
-                  if ( jQuery( e ).attr( 'sort_slug' ) == wpp_query[i].sort_by ) {
-                    jQuery( e ).addClass( "wpp_sorted_element" );
-                  }
-                } );
-              }
-              wpp_do_ajax_pagination( wpp_query[i].unique_hash, 1, false);
-            }
+            do_ajax_pagination( wpp_query[i].unique_hash, wpp_query[i].pagination_type, 1, false);
           }
         }
       }
     }
-    /*
+
+    /**
      * Changes location (address) hash based on pagination
      *
-     * We use this function extend of wpp_do_ajax_pagination()
-     * because wpp_do_ajax_pagination() is called on change Address Value's event
+     * We use this function extend of do_ajax_pagination()
+     * because do_ajax_pagination() is called on change Address Value's event
      *
      * @param int this_page Page which will be loaded
      * @param object data WPP_QUERY object
@@ -209,17 +187,24 @@
       return data;
     }
 
-    function wpp_do_ajax_pagination( unique_id, this_page, scroll_to ) {
-      if( typeof this_page == 'undefined' ) {
-        return false;
-      }
-      if ( typeof this_page == 'undefined' ) {
-        this_page = 1;
-      }
-      if ( typeof scroll_to == 'undefined' ) {
-        scroll_to = true;
-      }
+    /**
+     *
+     * @param unique_id
+     * @param this_page
+     * @param scroll_to
+     */
+    function do_numeric_pagination( unique_id, this_page, scroll_to ) {
 
+    }
+
+    /**
+     * Slider Pagination
+     *
+     * @param unique_id
+     * @param this_page
+     * @param scroll_to
+     */
+    function do_slider_pagination( unique_id, this_page, scroll_to ) {
       data = window.wpp_query[ unique_id ];
       /* Update page counter */
       jQuery( "#wpp_shortcode_" + unique_id +  " .wpp_current_page_count" ).text( this_page );
@@ -270,13 +255,67 @@
       }, "json" );
     }
 
+    /**
+     * Run pagination
+     *
+     * @param unique_id
+     * @param this_page
+     * @param scroll_to
+     * @returns {boolean}
+     */
+    function do_ajax_pagination( unique_id, type, this_page, scroll_to ) {
+      if( typeof this_page == 'undefined' ) {
+        return false;
+      }
+      if( typeof type == 'undefined' ) {
+        return false;
+      }
+      if ( typeof this_page == 'undefined' ) {
+        this_page = 1;
+      }
+      if ( typeof scroll_to == 'undefined' ) {
+        scroll_to = true;
+      }
+
+      switch( type ) {
+        case 'slider':
+          do_slider_pagination( unique_id, this_page, scroll_to );
+          break;
+        case 'numeric':
+          do_numeric_pagination( unique_id, this_page, scroll_to );
+          break;
+      }
+    }
+
+    /**
+     * EVENTS
+     */
     jQuery( document ).ready( function () {
+
+      /* Watch for address URL for back buttons support */
+      if ( !window.wpp_pagination_history_ran ) {
+        window.wpp_pagination_history_ran = true;
+        /*
+         * On change location (address) Event.
+         *
+         * Also used as Back button functionality.
+         *
+         * Attention! This event is unique (binds at once) and is used for any (multiple) shortcodes
+         */
+        jQuery.address.change( function ( event ) {
+          callPagination( event );
+        } );
+      }
+
       if ( !jQuery.isFunction( jQuery.fn.slider ) || !jQuery.isFunction( jQuery.fn.slider ) ) {
         jQuery( ".wpp_pagination_slider_wrapper" ).hide();
         return null;
       }
+
       document_ready = true;
+
       max_slider_pos = vars.pages;
+
       //** Do not assign click event again */
       if ( !jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_pagination_back' ).data( 'events' ) ) {
         jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_pagination_back' ).click( function () {
@@ -359,6 +398,9 @@
       }
 
       if( vars.use_pagination ) {
+        if ( !jQuery.isFunction( jQuery.fn.slider ) ) {
+          return false;
+        }
         jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider_wrapper" ).each( function () {
           var this_parent = this;
           /* Slider */

@@ -651,14 +651,15 @@ namespace UsabilityDynamics\WPP {
         if ( $settings[ 'javascript' ] ) {
 
           //** Load pagination script */
-          $script_path = apply_filters( "wpp-overview-pagination-{$settings['type']}-script-path", ud_get_wp_property()->path( 'static/scripts/overview.pagination.slider.js', 'url' ), $settings );
-          wp_enqueue_script( "wpp-overview-pagination-{$settings['type']}", $script_path, array( 'jquery' ) );
+          $script_path = apply_filters( "wpp-overview-pagination-script-path", ud_get_wp_property()->path( 'static/scripts/overview.pagination.js', 'url' ), $settings );
+          wp_enqueue_script( "wpp-overview-pagination", $script_path, array( 'jquery' ) );
 
           ob_start(); ?>
           <script type="text/javascript">
             jQuery( document).ready(function(){
-              if( typeof jQuery.fn.wpp_pagination_<?php echo $settings['type']; ?> == 'function' ) {
-                jQuery( '#wpp_shortcode_<?php echo $unique_hash ?>' ).wpp_pagination_<?php echo $settings['type'] ?>({
+              if( typeof jQuery.fn.wpp_pagination == 'function' ) {
+                jQuery( '#wpp_shortcode_<?php echo $unique_hash ?>' ).wpp_pagination({
+                  "type": "<?php echo $settings['type'] ?>",
                   "unique_id": "<?php echo $unique_hash ?>",
                   "pages": <?php echo !empty( $pages ) ? $pages : 'null'; ?>,
                   "use_pagination": <?php echo $use_pagination; ?>,

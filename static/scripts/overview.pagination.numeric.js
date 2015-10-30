@@ -4,7 +4,7 @@
    *
    * @param options
    */
-  jQuery.fn.wpp_pagination = function(options) {
+  jQuery.fn.wpp_pagination_numeric = function(options) {
 
     var instance = this;
 
