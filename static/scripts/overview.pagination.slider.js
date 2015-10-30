@@ -48,6 +48,7 @@
     if ( typeof wpp_query[ vars.unique_id ] == 'undefined' ) {
       window.wpp_query[ vars.unique_id ] = vars.query;
       window.wpp_query[ vars.unique_id].default_query = vars.query.query;
+      window.wpp_query[ vars.unique_id].index = Object.keys(wpp_query).length;
     }
 
     /*
@@ -110,12 +111,18 @@
           }
           if ( history.i ) {
             /* get current shortcode's object */
-            var q;
-            if( typeof wpp_query[history.i] == 'undefined' ) {
-              q = wpp_query[Object.keys(wpp_query)[0]];
-            } else {
-              q = wpp_query[history.i];
+            var q = false;
+            for( var i in wpp_query ) {
+              if( wpp_query[i].index == history.i ) {
+                q = wpp_query[i];
+                break;
+              }
             }
+
+            if(!q) {
+              return false;
+            }
+
             if ( history.sort_by && history.sort_by != '' ) {
               q.sort_by = history.sort_by;
             }
@@ -180,28 +187,26 @@
      * @param object data WPP_QUERY object
      * @return object data Returns updated WPP_QUERY object
      */
-    if ( typeof changeAddressValue == 'undefined' ) {
-      function changeAddressValue ( this_page, data ) {
-        /* Set data query which will be used in history hash below */
-        var q = {
-          requested_page: this_page,
-          sort_order: data.sort_order,
-          sort_by: data.sort_by,
-          i: data.unique_hash
-        };
-        /* Update WPP_QUERY query */
-        data.query.requested_page = this_page;
-        data.query.sort_order = data.sort_order;
-        data.query.sort_by = data.sort_by;
-        /*
-         * Update page URL for back-button support (needs to do sort order and direction)
-         * jQuery.address.value() and jQuery.address.path() double binds jQuery.change() event, some way
-         * so for now, we use window.location
-         */
-        var history = jQuery.param( q );
-        window.location.hash = '/' + history;
-        return data;
-      }
+    function changeAddressValue ( this_page, data ) {
+      /* Set data query which will be used in history hash below */
+      var q = {
+        requested_page: this_page,
+        sort_order: data.sort_order,
+        sort_by: data.sort_by,
+        i: data.index
+      };
+      /* Update WPP_QUERY query */
+      data.query.requested_page = this_page;
+      data.query.sort_order = data.sort_order;
+      data.query.sort_by = data.sort_by;
+      /*
+       * Update page URL for back-button support (needs to do sort order and direction)
+       * jQuery.address.value() and jQuery.address.path() double binds jQuery.change() event, some way
+       * so for now, we use window.location
+       */
+      var history = jQuery.param( q );
+      window.location.hash = '/' + history;
+      return data;
     }
 
     function wpp_do_ajax_pagination( unique_id, this_page, scroll_to ) {
