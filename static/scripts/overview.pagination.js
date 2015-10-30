@@ -34,8 +34,8 @@
     /**
      *
      */
-    if ( typeof document_ready == 'undefined' ) {
-      var document_ready = false;
+    if ( typeof window.wpp_overview_document_ready == 'undefined' ) {
+      window.wpp_overview_document_ready = false;
     }
 
     /**
@@ -69,7 +69,7 @@
        * We have to be sure that DOM is ready
        * if it's not, wait 0.1 sec and call function again
        */
-      if ( !document_ready ) {
+      if ( !window.wpp_overview_document_ready ) {
         window.setTimeout( function () {
           callPagination( event );
         }, 100 );
@@ -288,6 +288,77 @@
     }
 
     /**
+     *
+     */
+    function init_slider_pagination() {
+
+      if ( !jQuery.isFunction( jQuery.fn.slider ) ) {
+        jQuery( ".wpp_pagination_slider_wrapper" ).hide();
+        return null;
+      }
+
+      //** Do not assign click event again */
+      if ( !jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_pagination_back' ).data( 'events' ) ) {
+        jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_pagination_back' ).click( function () {
+          var current_value = jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider" ).slider( "value" );
+          if ( current_value == 1 ) {
+            return;
+          }
+          var new_value = current_value - 1;
+          jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider" ).slider( "value", new_value );
+          window.wpp_query[ vars.unique_id ] = changeAddressValue( new_value, window.wpp_query[ vars.unique_id ] );
+        } );
+      }
+
+      if ( !jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_pagination_forward' ).data( 'events' ) ) {
+        jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_pagination_forward' ).click( function () {
+          var current_value = jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider" ).slider( "value" );
+          if ( max_slider_pos && (current_value == max_slider_pos || max_slider_pos < 1 ) ) {
+            return;
+          }
+          var new_value = current_value + 1;
+          jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider" ).slider( "value", new_value );
+          window.wpp_query[ vars.unique_id ] = changeAddressValue( new_value, window.wpp_query[ vars.unique_id ] );
+        } );
+      }
+
+      jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider_wrapper" ).each( function () {
+        var this_parent = this;
+        /* Slider */
+        jQuery( '.wpp_pagination_slider', this ).slider( {
+          value: 1,
+          min: 1,
+          max: vars.pages,
+          step: 1,
+          slide: function ( event, ui ) {
+            /* Update page counter - we do it here because we want it to be instant */
+            jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_current_page_count" ).text( ui.value );
+            jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider .slider_page_info .val" ).text( ui.value );
+          },
+          stop: function ( event, ui ) {
+            window.wpp_query[ vars.unique_id ] = changeAddressValue( ui.value, window.wpp_query[ vars.unique_id ] );
+          }
+
+        } );
+
+        /* Fix slider width based on button width */
+        var slider_width = (jQuery( this_parent ).width() - jQuery( ".wpp_pagination_back", this_parent ).outerWidth() - jQuery( ".wpp_pagination_forward", this_parent ).outerWidth() - 30);
+        jQuery( ".wpp_pagination_slider", this_parent ).css( 'width', slider_width );
+
+        jQuery( '.wpp_pagination_slider .ui-slider-handle', this ).append( '<div class="slider_page_info"><div class="val">1</div><div class="arrow"></div></div>' );
+
+      } );
+
+    }
+
+    /**
+     *
+     */
+    function init_numeric_pagination() {
+
+    }
+
+    /**
      * EVENTS
      */
     jQuery( document ).ready( function () {
@@ -307,38 +378,21 @@
         } );
       }
 
-      if ( !jQuery.isFunction( jQuery.fn.slider ) || !jQuery.isFunction( jQuery.fn.slider ) ) {
-        jQuery( ".wpp_pagination_slider_wrapper" ).hide();
-        return null;
-      }
-
-      document_ready = true;
+      window.wpp_overview_document_ready = true;
 
       max_slider_pos = vars.pages;
 
-      //** Do not assign click event again */
-      if ( !jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_pagination_back' ).data( 'events' ) ) {
-        jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_pagination_back' ).click( function () {
-          var current_value = jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider" ).slider( "value" );
-          if ( current_value == 1 ) {
-            return;
-          }
-          var new_value = current_value - 1;
-          jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider" ).slider( "value", new_value );
-          window.wpp_query[ vars.unique_id ] = changeAddressValue( new_value, window.wpp_query[ vars.unique_id ] );
-        } );
+      if( vars.use_pagination ) {
+        switch (vars.type) {
+          case 'slider':
+            init_slider_pagination();
+            break;
+          case 'numeric':
+            init_numeric_pagination();
+            break;
+        }
       }
-      if ( !jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_pagination_forward' ).data( 'events' ) ) {
-        jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_pagination_forward' ).click( function () {
-          var current_value = jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider" ).slider( "value" );
-          if ( max_slider_pos && (current_value == max_slider_pos || max_slider_pos < 1 ) ) {
-            return;
-          }
-          var new_value = current_value + 1;
-          jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider" ).slider( "value", new_value );
-          window.wpp_query[ vars.unique_id ] = changeAddressValue( new_value, window.wpp_query[ vars.unique_id ] );
-        } );
-      }
+
       if ( !jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_sortable_link' ).data( 'events' ) ) {
         jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_sortable_link' ).click( function () {
           var attribute = jQuery( this ).attr( 'sort_slug' );
@@ -362,6 +416,7 @@
           window.wpp_query[ vars.unique_id ] = changeAddressValue( 1, window.wpp_query[ vars.unique_id ] );
         } );
       }
+
       if ( !jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_sortable_dropdown' ).data( 'events' ) ) {
         jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_sortable_dropdown' ).change( function () {
           var parent = jQuery( this ).parents( '.wpp_sorter_options' );
@@ -374,6 +429,7 @@
           window.wpp_query[ vars.unique_id ] = changeAddressValue( 1, window.wpp_query[ vars.unique_id ] );
         } );
       }
+
       if ( !jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_overview_sorter' ).data( 'events' ) ) {
         jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_overview_sorter' ).click( function () {
           var parent = jQuery( this ).parents( '.wpp_sorter_options' );
@@ -394,38 +450,6 @@
           jQuery( sort_element ).addClass( sort_order );
           /* Get ajax results and reset to first page */
           window.wpp_query[ vars.unique_id ] = changeAddressValue( 1, window.wpp_query[ vars.unique_id ] );
-        } );
-      }
-
-      if( vars.use_pagination ) {
-        if ( !jQuery.isFunction( jQuery.fn.slider ) ) {
-          return false;
-        }
-        jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider_wrapper" ).each( function () {
-          var this_parent = this;
-          /* Slider */
-          jQuery( '.wpp_pagination_slider', this ).slider( {
-            value: 1,
-            min: 1,
-            max: vars.pages,
-            step: 1,
-            slide: function ( event, ui ) {
-              /* Update page counter - we do it here because we want it to be instant */
-              jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_current_page_count" ).text( ui.value );
-              jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider .slider_page_info .val" ).text( ui.value );
-            },
-            stop: function ( event, ui ) {
-              window.wpp_query[ vars.unique_id ] = changeAddressValue( ui.value, window.wpp_query[ vars.unique_id ] );
-            }
-
-          } );
-
-          /* Fix slider width based on button width */
-          var slider_width = (jQuery( this_parent ).width() - jQuery( ".wpp_pagination_back", this_parent ).outerWidth() - jQuery( ".wpp_pagination_forward", this_parent ).outerWidth() - 30);
-          jQuery( ".wpp_pagination_slider", this_parent ).css( 'width', slider_width );
-
-          jQuery( '.wpp_pagination_slider .ui-slider-handle', this ).append( '<div class="slider_page_info"><div class="val">1</div><div class="arrow"></div></div>' );
-
         } );
       }
 
