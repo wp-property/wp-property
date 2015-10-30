@@ -133,15 +133,14 @@
               } );
             }
             if ( history.requested_page && history.requested_page != '' ) {
-              wpp_do_ajax_pagination( history.requested_page );
+              wpp_do_ajax_pagination( q.unique_hash, history.requested_page );
             } else {
-              wpp_do_ajax_pagination(1);
+              wpp_do_ajax_pagination( q.unique_hash, 1 );
             }
           } else {
             return false;
           }
         } else {
-          console.log( 'FIRST LOAD' );
           /* Looks like it's base url
            * Determine if this first load, we do nothing
            * If not, - we use 'back button' functionality.
@@ -165,7 +164,7 @@
                   }
                 } );
               }
-              wpp_do_ajax_pagination(1, false);
+              wpp_do_ajax_pagination( wpp_query[i].unique_hash, 1, false);
             }
           }
         }
@@ -205,7 +204,10 @@
       }
     }
 
-    function wpp_do_ajax_pagination( this_page, scroll_to ) {
+    function wpp_do_ajax_pagination( unique_id, this_page, scroll_to ) {
+      if( typeof this_page == 'undefined' ) {
+        return false;
+      }
       if ( typeof this_page == 'undefined' ) {
         this_page = 1;
       }
@@ -213,16 +215,16 @@
         scroll_to = true;
       }
 
-      data = window.wpp_query[ vars.unique_id ];
+      data = window.wpp_query[ unique_id ];
       /* Update page counter */
-      jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_current_page_count" ).text( this_page );
-      jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider .slider_page_info .val" ).text( this_page );
+      jQuery( "#wpp_shortcode_" + unique_id +  " .wpp_current_page_count" ).text( this_page );
+      jQuery( "#wpp_shortcode_" + unique_id +  " .wpp_pagination_slider .slider_page_info .val" ).text( this_page );
       /* Update sliders  */
-      jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider" ).slider( "value", this_page );
-      jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .ajax_loader' ).show();
+      jQuery( "#wpp_shortcode_" + unique_id +  " .wpp_pagination_slider" ).slider( "value", this_page );
+      jQuery( '#wpp_shortcode_' + unique_id +  ' .ajax_loader' ).show();
       /* Scroll page to the top of the current shortcode */
       if ( scroll_to ) {
-        jQuery( document ).trigger( 'wpp_pagination_change', {'overview_id': vars.unique_id} );
+        jQuery( document ).trigger( 'wpp_pagination_change', {'overview_id': unique_id} );
       }
       data.ajax_call = 'true';
       data.requested_page = this_page;
@@ -230,36 +232,36 @@
         action: 'wpp_property_overview_pagination',
         wpp_ajax_query: data
       }, function ( result_data ) {
-        jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .ajax_loader' ).hide();
+        jQuery( '#wpp_shortcode_' + unique_id +  ' .ajax_loader' ).hide();
         var p_list = jQuery( '.wpp_property_view_result', result_data.display );
         //* Determine if p_list is empty try previous version's selector */
         if ( p_list.length == 0 ) {
           p_list = jQuery( '.wpp_row_view', result_data.display );
         }
         var content = ( p_list.length > 0 ) ? p_list.html() : result_data.display;
-        var p_wrapper = jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_property_view_result' );
+        var p_wrapper = jQuery( '#wpp_shortcode_' + unique_id +  ' .wpp_property_view_result' );
         //* Determine if p_wrapper is empty try previous version's selector */
         if ( p_wrapper.length == 0 ) {
-          p_wrapper = jQuery( '#wpp_shortcode_' + vars.unique_id +  ' .wpp_row_view' )
+          p_wrapper = jQuery( '#wpp_shortcode_' + unique_id +  ' .wpp_row_view' )
         }
         p_wrapper.html( content );
 
         /* Update max page in slider and in display */
         if( vars.use_pagination ) {
-          jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_pagination_slider" ).slider( "option", "max", result_data.wpp_query.pages );
-          jQuery( "#wpp_shortcode_" + vars.unique_id +  " .wpp_total_page_count" ).text( result_data.wpp_query.pages );
+          jQuery( "#wpp_shortcode_" + unique_id +  " .wpp_pagination_slider" ).slider( "option", "max", result_data.wpp_query.pages );
+          jQuery( "#wpp_shortcode_" + unique_id +  " .wpp_total_page_count" ).text( result_data.wpp_query.pages );
           max_slider_pos = result_data.wpp_query.pages;
-          if ( max_slider_pos == 0 ) jQuery( "#wpp_shortcode_" + vars.unique_id + " .wpp_current_page_count" ).text( 0 );
+          if ( max_slider_pos == 0 ) jQuery( "#wpp_shortcode_" + unique_id + " .wpp_current_page_count" ).text( 0 );
         }
 
-        jQuery( "#wpp_shortcode_" + vars.unique_id +  " a.fancybox_image" ).fancybox( {
+        jQuery( "#wpp_shortcode_" + unique_id +  " a.fancybox_image" ).fancybox( {
           'transitionIn': 'elastic',
           'transitionOut': 'elastic',
           'speedIn': 600,
           'speedOut': 200,
           'overlayShow': false
         } );
-        jQuery( document ).trigger( 'wpp_pagination_change_complete', {'overview_id': vars.unique_id} );
+        jQuery( document ).trigger( 'wpp_pagination_change_complete', {'overview_id': unique_id} );
       }, "json" );
     }
 
