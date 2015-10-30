@@ -180,6 +180,16 @@ namespace UsabilityDynamics\WPP {
                 ),
                 'default' => 'on'
               ),
+              'pagination_type' => array(
+                'name' => __( 'Pagination Type', ud_get_wp_property()->domain ),
+                'description' => __( 'Determine pagination UI', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'slider' => __( 'slider', ud_get_wp_property()->domain ),
+                  'numeric'  => __( 'numeric', ud_get_wp_property()->domain )
+                ),
+                'default' => ud_get_wp_property( 'configuration.property_overview.pagination_type' ) ? ud_get_wp_property( 'configuration.property_overview.pagination_type' ) : 'slider',
+              ),
               'per_page' => array(
                 'name' => __( 'Per Page', ud_get_wp_property()->domain ),
                 'description' => sprintf( __( '%s quantity per page.', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
@@ -322,7 +332,7 @@ namespace UsabilityDynamics\WPP {
         $defaults[ 'sorter_type' ] = 'buttons';
         $defaults[ 'sorter' ] = 'on';
         $defaults[ 'pagination' ] = 'on';
-        $defaults[ 'pagination_type' ] = isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'pagination_type' ] ) ? $wp_properties[ 'configuration' ][ 'property_overview' ][ 'pagination_type' ] : 'slider';
+        $defaults[ 'pagination_type' ] = ud_get_wp_property( 'configuration.property_overview.pagination_type' ) ? ud_get_wp_property( 'configuration.property_overview.pagination_type' ) : 'slider';
         $defaults[ 'hide_count' ] = false;
         $defaults[ 'per_page' ] = 10;
         $defaults[ 'starting_row' ] = 0;
@@ -546,6 +556,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         $result[ 'top_pagination' ] = self::draw_pagination( array(
+          'type' => $wpp_query[ 'pagination_type' ],
           'class' => 'wpp_top_pagination',
           'sorter_type' => $wpp_query[ 'sorter_type' ],
           'hide_count' => $wpp_query[ 'hide_count' ],
@@ -636,15 +647,17 @@ namespace UsabilityDynamics\WPP {
           $sortable_attrs = false;
         }
 
-        //** */
+        //** Determine if we should initialize javascript logic */ */
         if ( $settings[ 'javascript' ] ) {
 
-          wp_enqueue_script( "wpp-overview-pagination-{$settings['type']}", ud_get_wp_property()->path( 'static/scripts/overview.pagination.slider.js' ), array( 'jquery' ) );
+          //** Load pagination script */
+          $script_path = apply_filters( "wpp-overview-pagination-{$settings['type']}-script-path", ud_get_wp_property()->path( 'static/scripts/overview.pagination.slider.js', 'url' ), $settings );
+          wp_enqueue_script( "wpp-overview-pagination-{$settings['type']}", $script_path, array( 'jquery' ) );
 
           ob_start(); ?>
           <script type="text/javascript">
             jQuery( document).ready(function(){
-              if( typeof jQuery.fn.wpp_pagination_slider == 'function' ) {
+              if( typeof jQuery.fn.wpp_pagination_<?php echo $settings['type']; ?> == 'function' ) {
                 jQuery( '#wpp_shortcode_<?php echo $unique_hash ?>' ).wpp_pagination_<?php echo $settings['type'] ?>({
                   "unique_id": "<?php echo $unique_hash ?>",
                   "pages": <?php echo !empty( $pages ) ? $pages : 'null'; ?>,
@@ -657,14 +670,14 @@ namespace UsabilityDynamics\WPP {
           </script>
           <?php
 
-          $js_result = ob_get_contents();
-          ob_end_clean();
+          $js_result = ob_get_clean();
+          $js_result = apply_filters( "wpp-overview-pagination-{$settings['type']}-script-inline", $js_result, $settings );
 
         }
 
-        //** Try find custom template */
+        //** Try find pagination template based on type */
         $template_found = \WPP_F::get_template_part( array(
-          "property-overview-pagination-{$settings['type']}"
+          "pagination"
         ), array( ud_get_wp_property()->path( 'static/views', 'dir' ) ) );
 
         $result = '';
@@ -686,6 +699,18 @@ namespace UsabilityDynamics\WPP {
         echo $result;
       }
 
+      /**
+       * Try find pagination template based on type
+       *
+       * @param $type
+       * @return bool|mixed|null|string|void
+       */
+      static public function get_pagination_template_based_on_type( $type ) {
+        //** Try find pagination template based on type */
+        return \WPP_F::get_template_part( array(
+          "pagination-{$type}"
+        ), array( ud_get_wp_property()->path( 'static/views', 'dir' ) ) );
+      }
 
     }
 
