@@ -1,4 +1,4 @@
-( function( jQuery ){
+( function( jQuery, l10n ){
 
   /**
    *
@@ -199,8 +199,9 @@
       number = parseInt( number );
       /** Maybe, render 'first' page link */
       if( number > 3 ) {
-        c.append( '<li data-page="1" class="first-page-btn">First</li>' );
-        c.append( '<li class="dots">...</li>' );
+        c.append( '<li data-page="1" class="first-page-btn">' + l10n.first + '</li>' );
+        c.append( '<li data-page="' + ( number - 1 ) + '" class="previous-page-btn">' + l10n.previous + '</li>' );
+        //c.append( '<li class="dots">...</li>' );
       }
       /** Maybe, render two previous pages links */
       for( i=2; i>= 1; i-- ) {
@@ -228,8 +229,9 @@
       }
       /** Maybe, render 'last' page link */
       if( show_last ) {
-        c.append( '<li class="dots">...</li>' );
-        c.append( '<li data-page="' + query.pages + '" class="last-page-btn">Last</li>' );
+        //c.append( '<li class="dots">...</li>' );
+        c.append( '<li data-page="' + ( number + 1 ) + '" class="previous-page-btn">' + l10n.next + '</li>' );
+        c.append( '<li data-page="' + query.pages + '" class="last-page-btn">' + l10n.last + '</li>' );
       }
       /** Update our HTML */
       el.html( c );
@@ -518,4 +520,4 @@
 
   };
 
-} )( jQuery );
+} )( jQuery, _wpp_overview_pagination );

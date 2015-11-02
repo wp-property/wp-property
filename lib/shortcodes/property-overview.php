@@ -653,6 +653,12 @@ namespace UsabilityDynamics\WPP {
           //** Load pagination script */
           $script_path = apply_filters( "wpp-overview-pagination-script-path", ud_get_wp_property()->path( 'static/scripts/overview.pagination.js', 'url' ), $settings );
           wp_enqueue_script( "wpp-overview-pagination", $script_path, array( 'jquery' ) );
+          wp_localize_script( "wpp-overview-pagination", "_wpp_overview_pagination", array(
+            "previous" => __( 'Previous', ud_get_wp_property('domain') ),
+            "next" => __( 'Next', ud_get_wp_property('domain') ),
+            "first" => __( 'First', ud_get_wp_property('domain') ),
+            "last" => __( 'Last', ud_get_wp_property('domain') ),
+          ) );
 
           ob_start(); ?>
           <script type="text/javascript">
