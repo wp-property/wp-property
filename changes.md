@@ -1,3 +1,6 @@
+### 2.1.3 ( November 4, 2015 )
+* Added ability to set numeric or slider pagination for [property_overview] shortcode and Property Overview widget.
+
 ### 2.1.2 ( October 21, 2015 )
 * Added ability to sort properties by modified date for Property Overview widget.
 * Added option to export properties to CSV file on Help Tab of Settings page.

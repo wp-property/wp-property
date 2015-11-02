@@ -40,7 +40,16 @@ namespace UsabilityDynamics\WPP {
               $settings[ 'configuration' ][ 'enable_legacy_features' ] = 'true';
             }
             update_option( 'wpp_settings', $settings );
-            break;
+
+          case ( version_compare( $old_version, '2.1.3', '<' ) ):
+            /*
+             * Set default pagination type 'slider'
+             * to prevent issues on already existing sites.
+             */
+            $settings = get_option( 'wpp_settings' );
+            $settings[ 'configuration' ][ 'property_overview' ][ 'pagination_type' ] = 'slider';
+            update_option( 'wpp_settings', $settings );
+
 
         }
 
