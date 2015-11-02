@@ -651,9 +651,9 @@ namespace UsabilityDynamics\WPP {
         if ( $settings[ 'javascript' ] ) {
 
           //** Load pagination script */
-          $script_path = apply_filters( "wpp-overview-pagination-script-path", ud_get_wp_property()->path( 'static/scripts/overview.pagination.js', 'url' ), $settings );
-          wp_enqueue_script( "wpp-overview-pagination", $script_path, array( 'jquery' ) );
-          wp_localize_script( "wpp-overview-pagination", "_wpp_overview_pagination", array(
+          $script_path = apply_filters( "wpp::property_overview::script::path", ud_get_wp_property()->path( 'static/scripts/property_overview.js', 'url' ), $settings );
+          wp_enqueue_script( "property-overview", $script_path, array( 'jquery' ) );
+          wp_localize_script( "property-overview", "_wpp_overview_pagination", array(
             "previous" => __( 'Previous', ud_get_wp_property('domain') ),
             "next" => __( 'Next', ud_get_wp_property('domain') ),
             "first" => __( 'First', ud_get_wp_property('domain') ),
@@ -678,7 +678,7 @@ namespace UsabilityDynamics\WPP {
           <?php
 
           $js_result = ob_get_clean();
-          $js_result = apply_filters( "wpp-overview-pagination-{$settings['type']}-script-inline", $js_result, $settings );
+          $js_result = apply_filters( "wpp::property_overview::{$settings['type']}::script::inline", $js_result, $settings );
 
         }
 
@@ -690,6 +690,7 @@ namespace UsabilityDynamics\WPP {
         $result = '';
         if( $template_found ) {
           ob_start();
+          self::maybe_print_styles();
           include $template_found;
           $result = ob_get_clean();
         }
@@ -704,6 +705,20 @@ namespace UsabilityDynamics\WPP {
           return $result;
         }
         echo $result;
+      }
+
+      /**
+       * Render property_overview default styles at once!
+       */
+      public function maybe_print_styles() {
+        global $_wp_property_overview_style;
+        if( empty( $_wp_property_overview_style) || !$_wp_property_overview_style ) {
+          $_wp_property_overview_style = true;
+          $style_path = apply_filters( "property-overview-style-path", ud_get_wp_property()->path( 'static/styles/property_overview.css', 'url' ) );
+          if( !empty( $style_path ) ) {
+            echo "<link rel='stylesheet' href='{$style_path}' type='text/css' media='all' />";
+          }
+        }
       }
 
       /**

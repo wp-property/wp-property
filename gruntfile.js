@@ -61,7 +61,9 @@ module.exports = function build( grunt ) {
           'static/styles/theme-specific/twentyten.css': [ 'static/styles/src/theme-specific/twentyten.less' ],
           'static/styles/theme-specific/twentytwelve.css': [ 'static/styles/src/theme-specific/twentytwelve.less' ],
 
-          'static/styles/fields/wpp-parent.css': [ 'static/styles/src/fields/wpp-parent.less' ]
+          'static/styles/fields/wpp-parent.css': [ 'static/styles/src/fields/wpp-parent.less' ],
+
+          'static/styles/property_overview.css': [ 'static/styles/src/property_overview.less' ]
         }
       },
       development: {
@@ -82,7 +84,9 @@ module.exports = function build( grunt ) {
           'static/styles/theme-specific/twentyten.dev.css': [ 'static/styles/src/theme-specific/twentyten.less' ],
           'static/styles/theme-specific/twentytwelve.dev.css': [ 'static/styles/src/theme-specific/twentytwelve.less' ],
 
-          'static/styles/fields/wpp-parent.dev.css': [ 'static/styles/src/fields/wpp-parent.less' ]
+          'static/styles/fields/wpp-parent.dev.css': [ 'static/styles/src/fields/wpp-parent.less' ],
+
+          'static/styles/property_overview.dev.css': [ 'static/styles/src/property_overview.less' ]
         }
       }
     },

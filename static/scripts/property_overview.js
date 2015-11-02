@@ -198,40 +198,52 @@
       console.log( 'draw_pagination', number, query );
       number = parseInt( number );
       /** Maybe, render 'first' page link */
-      if( number > 3 ) {
-        c.append( '<li data-page="1" class="first-page-btn">' + l10n.first + '</li>' );
-        c.append( '<li data-page="' + ( number - 1 ) + '" class="previous-page-btn">' + l10n.previous + '</li>' );
+      if( number > 1 ) {
+        c.append( '<li data-page="1" class="first-page-btn"><a href="javascript:;" class="btn button">' + l10n.first + '</a></li>' );
+        c.append( '<li data-page="' + ( number - 1 ) + '" class="previous-page-btn"><a href="javascript:;" class="btn button">' + l10n.previous + '</a></li>' );
         //c.append( '<li class="dots">...</li>' );
       }
+
+      c.append( '<li class="pages"><ul></ul></li>' );
+
+      p = c.find( '.pages ul' );
+
       /** Maybe, render two previous pages links */
       for( i=2; i>= 1; i-- ) {
         var page = number - i;
         if( page > 0 ) {
-          c.append( '<li data-page="' + page + '">' + page + '</li>' );
+          p.append( '<li data-page="' + page + '" class="page"><a href="javascript:;" class="btn button">' + page + '</a></li>' );
         }
       }
+
       /** Render current page link */
-      c.append( '<li data-page="' + number + '" data-current="true" class="current-page">' + number + '</li>' );
+      p.append( '<li data-page="' + number + '" data-current="true" class="page current-page"><a href="javascript:;" class="btn button">' + number + '</span></li>' );
+
       /** Maybe, render two next pages links */
       var show_last = true;
       for( i=1; i<= 2; i++ ) {
         var page = number + i;
         if( page > query.pages ) {
           show_last = false;
+          console.log('page > query.pages', page, query.pages);
           break;
         } else if ( page == query.pages ) {
-          show_last = false;
-          c.append( '<li data-page="' + page + '">' + page + '</li>' );
+          //show_last = false;
+          console.log('page == query.pages', page, query.pages);
+          p.append( '<li data-page="' + page + '" class="page"><a href="javascript:;" class="btn button">' + page + '</a></li>' );
           break;
         } else {
-          c.append( '<li data-page="' + page + '">' + page + '</li>' );
+          p.append( '<li data-page="' + page + '" class="page"><a href="javascript:;" class="btn button">' + page + '</a></li>' );
         }
       }
+
+      c.append( '</ul></li>' );
+
       /** Maybe, render 'last' page link */
       if( show_last ) {
         //c.append( '<li class="dots">...</li>' );
-        c.append( '<li data-page="' + ( number + 1 ) + '" class="previous-page-btn">' + l10n.next + '</li>' );
-        c.append( '<li data-page="' + query.pages + '" class="last-page-btn">' + l10n.last + '</li>' );
+        c.append( '<li data-page="' + ( number + 1 ) + '" class="previous-page-btn"><a href="javascript:;" class="btn button">' + l10n.next + '</a></li>' );
+        c.append( '<li data-page="' + query.pages + '" class="last-page-btn"><a href="javascript:;" class="btn button">' + l10n.last + '</a></li>' );
       }
       /** Update our HTML */
       el.html( c );

@@ -1,0 +1,79 @@
+.wpp_property_overview_shortcode {
+
+  .properties_pagination {
+
+    .pagination-numeric {
+
+      ul.property-overview-navigation {
+        list-style: none;
+        margin: 0;
+
+        &:after {
+          content: "&nbsp;";
+          clear: both;
+          height: 1px;
+          font-size: 1px;
+          line-height: 1px;
+          margin-top: -1px;
+        }
+
+        li {
+          list-style: none;
+          display: inline-block;
+          margin: 0 6px 0 0;
+
+          &:last-child {
+            margin-right: 0;
+          }
+
+          a {
+            text-decoration: none;
+            display: block;
+            padding: 2px 6px;
+            border: 1px solid #bfbfbf;
+
+            &:hover,
+            &:active {
+              border-color: #000;
+            }
+          }
+
+          &.current-page {
+
+            a {
+              font-weight: 600;
+              cursor: default;
+              border-color: #000;
+            }
+
+          }
+
+          &.pages {
+
+            ul {
+
+              li {
+
+              }
+
+            }
+
+          }
+
+
+
+        }
+
+
+
+      }
+
+    }
+
+    .pagination-slider {
+
+    }
+
+  }
+
+}
