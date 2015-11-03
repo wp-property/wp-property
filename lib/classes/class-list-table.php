@@ -309,22 +309,15 @@ namespace UsabilityDynamics\WPP {
         $data = '';
 
         $wp_image_sizes = get_intermediate_image_sizes();
-        $thumbnail_id = get_post_meta( $post->ID, '_thumbnail_id', true );
+        $thumbnail_id = Property_Factory::get_thumbnail_id( $post->ID );
         if( $thumbnail_id ) {
           foreach( $wp_image_sizes as $image_name ) {
             $this_url = wp_get_attachment_image_src( $thumbnail_id, $image_name, true );
             $return[ 'images' ][ $image_name ] = $this_url[ 0 ];
           }
           $featured_image_id = $thumbnail_id;
-        } else {
-          $attachments = get_children( array( 'post_parent' => $post->ID, 'post_type' => 'attachment', 'post_mime_type' => 'image', 'orderby' => 'menu_order ASC, ID', 'order' => 'DESC' ) );
-          if( $attachments ) {
-            foreach( $attachments as $attachment_id => $attachment ) {
-              $featured_image_id = $attachment_id;
-              break;
-            }
-          }
         }
+
         if( empty( $featured_image_id ) ) {
           return $data;
         }

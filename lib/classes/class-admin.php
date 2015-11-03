@@ -86,6 +86,8 @@ namespace UsabilityDynamics\WPP {
             wp_enqueue_script( 'jquery-ui-tabs' );
             wp_enqueue_script( 'jquery-cookie' );
             wp_enqueue_style( 'wpp-jquery-colorpicker-css' );
+            // This will enqueue the Media Uploader script
+            wp_enqueue_media();
             break;
 
           //** Widgets Page */

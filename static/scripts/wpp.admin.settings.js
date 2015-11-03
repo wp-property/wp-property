@@ -293,6 +293,68 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
       wpp.ui.settings.set_pre_defined_values_for_attribute( this );
     } );
 
+    /**
+     * Default Property Image
+     */
+    jQuery('#setup_default_image').click(function(e) {
+      e.preventDefault();
+      var image = wp.media({
+        title: wpp.strings.default_property_image,
+        multiple: false
+      }).open()
+        .on('select', function(e){
+          // This will return the selected image from the Media Uploader, the result is an object
+          var uploaded_image = image.state().get('selection').first();
+          // We convert uploaded_image to a JSON object to make accessing it easier
+          // Output to the console uploaded_image
+          //console.log(uploaded_image);
+          var image_url = uploaded_image.toJSON().url;
+          var image_id = uploaded_image.toJSON().id;
+          // Let's assign the url and id values to the input fields
+          jQuery('#default_image_url').val(image_url);
+          jQuery('#default_image_id').val(image_id);
+
+          wpp.ui.settings.append_default_image();
+        });
+    });
+
+    wpp.ui.settings.append_default_image();
+
+  },
+
+  /**
+   *
+   */
+  append_default_image: function() {
+    //<img src="<?php echo $wp_properties[ 'configuration' ][ 'default_image' ]['url']; ?>" alt="" title="" />
+    if(
+      jQuery('.current_default_image_block').length > 0 &&
+      jQuery('#default_image_url').length > 0 &&
+      jQuery('#default_image_url').val().length > 0
+    ) {
+      jQuery('.current_default_image_block ').html('')
+        .append( '<img src="' + jQuery('#default_image_url').val() + '" alt="" title="" />' );
+      wpp.ui.settings.append_remove_default_image_btn();
+    }
+  },
+
+  /**
+   *
+   */
+  append_remove_default_image_btn: function() {
+    if(
+      jQuery('.setup_default_image_block').length > 0 &&
+
+      !jQuery('#remove_default_image').length > 0
+    ) {
+      jQuery('.setup_default_image_block').append('<input id="remove_default_image" class="button-secondary" type="button" value="' + wpp.strings.remove_image + '">');
+      jQuery('#remove_default_image').one( 'click', function() {
+        jQuery('#default_image_url').val('');
+        jQuery('#default_image_id').val('');
+        jQuery('.current_default_image_block img').remove();
+        jQuery(this).remove();
+      } );
+    }
   },
 
   /**

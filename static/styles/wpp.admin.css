@@ -7,6 +7,16 @@
 #wpp_settings_form .google-maps-api-section input {
   width: 350px;
 }
+#wpp_settings_form .setup_default_image_block {
+  margin: 10px 0;
+}
+#wpp_settings_form .current_default_image_block img {
+  display: block;
+  max-width: 275px;
+  background-color: #f5f5f5;
+  padding: 6px;
+  border: 1px solid #e1e1e1;
+}
 .wpp-ui-panel-left {
   margin-left: 300px;
   margin-top: 23px;
