@@ -150,16 +150,17 @@ namespace UsabilityDynamics\WPP {
               } else {
                 $value = implode( '<br/>', $value );
               }
-              $value = apply_filters( "wpp::attribute::display", $value, $column_name );
-              $value = apply_filters( "wpp_stat_filter_{$column_name}", $value );
+              $value = apply_filters( "wpp::attribute::display", $value, $column_name, $item );
+              $value = apply_filters( "wpp_stat_filter_{$column_name}", $value, $item );
               if( !empty( $value ) ) {
                 return $value;
               }
             } else {
-              //Show the whole array for troubleshooting purposes
+              $value = '';
               if( isset( $item->{$column_name} ) && is_string( $item->{$column_name} ) ) {
-                return apply_filters( "wpp_stat_filter_{$column_name}", $item->{$column_name} );
+                $value = $item->{$column_name};
               }
+              return apply_filters( "wpp_stat_filter_{$column_name}", $value, $item );
             }
         }
         return '-';
@@ -418,7 +419,7 @@ namespace UsabilityDynamics\WPP {
 
             default:
               //** Any custom action can be processed using action hook */
-              do_action( 'wpp::all_properties::process_bulk_action', $this->current_action() );
+              do_action( 'wpp::all_properties::process_bulk_action', $this->current_action(), $this );
               break;
 
           }
