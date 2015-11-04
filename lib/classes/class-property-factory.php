@@ -373,13 +373,16 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * Returns thumbnail ID of property.
-       * It thumbnail does not exist, it returns ID of default property image
+       * It thumbnail does not exist,
+       * it returns ID of default property image based on property type
        *
        * @param $property_id
        * @return mixed
        * @since 2.1.3
+       * @author peshkov@UD
        */
       static public function get_thumbnail_id( $property_id ) {
+
         $meta_cache = wp_cache_get( $property_id, 'post_meta' );
 
         if ( !$meta_cache ) {
@@ -387,6 +390,7 @@ namespace UsabilityDynamics\WPP {
           $meta_cache = $meta_cache[ $property_id ];
         }
 
+        /* STEP 1:  Try to get ID of featured image */
         if ( isset( $meta_cache[ '_thumbnail_id' ] ) ) {
 
           if( is_array( $meta_cache[ '_thumbnail_id' ] ) ) {
@@ -395,7 +399,10 @@ namespace UsabilityDynamics\WPP {
             return $meta_cache[ '_thumbnail_id' ];
           }
 
-        } else {
+        }
+
+        /* STEP 2:  Try to get ID of any existing attachment (image) */
+        else {
 
           $attachments = get_children( array(
             'numberposts' => '1',
@@ -414,8 +421,19 @@ namespace UsabilityDynamics\WPP {
 
         }
 
-        $id = ud_get_wp_property( 'configuration.default_image.id' );
+        /* STEP 3:  Try to get ID of default image based on property type */
+        $property_type = get_post_meta( $property_id, "property_type", true );
+        if( !empty( $property_type ) ) {
+          $id = ud_get_wp_property( "configuration.default_image.types.{$property_type}.id" );
+          if( !empty( $id ) && is_numeric( $id ) ) {
+            return $id;
+          }
+        }
+
+        /* STEP 4:  Try to get ID of basic default image. See Display Tab on Settings page (UI) */
+        $id = ud_get_wp_property( 'configuration.default_image.default.id' );
         return !empty( $id ) && is_numeric( $id ) ? $id : false;
+
       }
 
       /**

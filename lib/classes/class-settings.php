@@ -47,7 +47,7 @@ namespace UsabilityDynamics\WPP {
           'fancybox_preview' => 'true',
           'display_slideshow' => 'false',
           'show_children' => 'true',
-          'pagination_type' => 'numeric'
+          'pagination_type' => 'slider' // @todo: change to 'numeric' when compatibility will be added to Madison theme. peshkov@UD
         );
 
         $data['configuration']['single_property_view'] = array(

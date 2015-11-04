@@ -12,6 +12,12 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
    */
   ready: function() {
 
+    if( typeof jQuery.fn.tooltip == 'function' ) {
+      jQuery( document ).tooltip({
+        track: true
+      });
+    }
+
     /**
      * Handles data saving.
      * Only if we don't upload backup file!
@@ -294,10 +300,14 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
     } );
 
     /**
-     * Default Property Image
+     * Upload Image
      */
-    jQuery('#setup_default_image').click(function(e) {
+    jQuery('.button-setup-image').live( 'click', function(e) {
       e.preventDefault();
+      var section = jQuery( this).parents( '.upload-image-section' );
+      if( !section.length > 0 ) {
+        return;
+      }
       var image = wp.media({
         title: wpp.strings.default_property_image,
         multiple: false
@@ -311,47 +321,58 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
           var image_url = uploaded_image.toJSON().url;
           var image_id = uploaded_image.toJSON().id;
           // Let's assign the url and id values to the input fields
-          jQuery('#default_image_url').val(image_url);
-          jQuery('#default_image_id').val(image_id);
+          jQuery( 'input.input-image-url', section ).val(image_url);
+          jQuery( 'input.input-image-id', section ).val(image_id);
 
-          wpp.ui.settings.append_default_image();
+          wpp.ui.settings.append_default_image( section );
         });
     });
 
-    wpp.ui.settings.append_default_image();
+    jQuery( '.upload-image-section' ).each( function( i, e ){
+      wpp.ui.settings.append_default_image( jQuery(e) );
+    } );
+
+    jQuery( '#wpp_inquiry_property_types tr').live( 'added', function() {
+      var section = jQuery( this).find( '.upload-image-section' );
+      if( !section.length > 0 ) {
+        return;
+      }
+      jQuery( 'input.input-image-url', section ).val('');
+      jQuery( 'input.input-image-id', section ).val('');
+      jQuery( '.image-wrapper img', section ).remove();
+      jQuery( '.button-remove-image', section ).remove();
+    } );
 
   },
 
   /**
-   *
+   * Renders specified image in upload section
    */
-  append_default_image: function() {
-    //<img src="<?php echo $wp_properties[ 'configuration' ][ 'default_image' ]['url']; ?>" alt="" title="" />
+  append_default_image: function( section ) {
     if(
-      jQuery('.current_default_image_block').length > 0 &&
-      jQuery('#default_image_url').length > 0 &&
-      jQuery('#default_image_url').val().length > 0
+      jQuery( '.image-wrapper', section ).length > 0 &&
+      jQuery( 'input.input-image-url', section ).length > 0 &&
+      jQuery( 'input.input-image-url', section ).val().length > 0
     ) {
-      jQuery('.current_default_image_block ').html('')
-        .append( '<img src="' + jQuery('#default_image_url').val() + '" alt="" title="" />' );
-      wpp.ui.settings.append_remove_default_image_btn();
+      jQuery( '.image-wrapper', section ).html('')
+        .append( '<img src="' + jQuery( 'input.input-image-url', section ).val() + '" alt="" title="" />' );
+      wpp.ui.settings.append_remove_default_image_btn( section );
     }
   },
 
   /**
-   *
+   * Renders 'Remove Image' button in upload section
    */
-  append_remove_default_image_btn: function() {
+  append_remove_default_image_btn: function( section ) {
     if(
-      jQuery('.setup_default_image_block').length > 0 &&
-
-      !jQuery('#remove_default_image').length > 0
+      jQuery( '.image-actions', section ).length > 0 &&
+      !jQuery( '.button-remove-image', section ).length > 0
     ) {
-      jQuery('.setup_default_image_block').append('<input id="remove_default_image" class="button-secondary" type="button" value="' + wpp.strings.remove_image + '">');
-      jQuery('#remove_default_image').one( 'click', function() {
-        jQuery('#default_image_url').val('');
-        jQuery('#default_image_id').val('');
-        jQuery('.current_default_image_block img').remove();
+      jQuery( '.image-actions', section ).append('<input class="button-secondary button-remove-image" type="button" value="' + wpp.strings.remove_image + '">');
+      jQuery( '.button-remove-image', section ).one( 'click', function() {
+        jQuery( 'input.input-image-url', section ).val('');
+        jQuery( 'input.input-image-id', section ).val('');
+        jQuery( '.image-wrapper img', section ).remove();
         jQuery(this).remove();
       } );
     }

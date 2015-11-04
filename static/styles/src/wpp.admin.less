@@ -5,6 +5,20 @@
   overflow-y: scroll;
 }
 
+// TOOLTIP
+
+.ui-tooltip, .arrow:after {
+  background: #f5f5f5;
+  border: 1px solid #e1e1e1;
+}
+.ui-tooltip {
+  max-width: 200px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font: 14px "Helvetica Neue", Sans-Serif;
+  box-shadow: 0 0 7px #e1e1e1;
+}
+
 // Settings Form
 
 #wpp_settings_form {
@@ -17,18 +31,42 @@
 
   }
 
-  .setup_default_image_block {
-    margin: 10px 0;
+  .upload-image-section {
+
+    .image-actions {
+      margin: 10px 0;
+    }
+
+    .image-wrapper {
+
+      img {
+        display: block;
+        max-width: 275px;
+        background-color: #f5f5f5;
+        padding: 6px;
+        border: 1px solid #e1e1e1;
+      }
+
+    }
+
   }
 
-  .current_default_image_block {
+  #wpp_inquiry_property_types {
 
-    img {
-      display: block;
-      max-width: 275px;
-      background-color: #f5f5f5;
-      padding: 6px;
-      border: 1px solid #e1e1e1;
+    .upload-image-section {
+
+      .image-actions {
+        margin: 0 0 10px 0;
+      }
+
+      .image-wrapper {
+
+        img {
+          max-width: 200px;
+        }
+
+      }
+
     }
 
   }
@@ -2054,6 +2092,42 @@ body.property_page_all_properties {
     }
 
   }
+
+  .column-children {
+
+    .child-properties {
+
+      ul {
+        list-style: none;
+        margin: 0;
+
+        li {
+          border-top: 1px solid #e5e5e5;
+          padding: 4px 6px;
+          background: #fff;
+          margin: 0;
+
+          &:nth-child(even) {
+            background: #f9f9f9;
+          }
+
+          &:first-child {
+            border-top: 0;
+          }
+
+          &.wpp_show_advanced {
+            background-color: transparent;
+            border-top: 0;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
 
 }
 

@@ -89,7 +89,8 @@ namespace UsabilityDynamics\WPP {
           'overview' => __( 'Overview', ud_get_wp_property( 'domain' ) ),
           'created' => __( 'Added', ud_get_wp_property( 'domain' ) ),
           'modified' => __( 'Updated', ud_get_wp_property( 'domain' ) ),
-          'featured' => __( 'Featured', ud_get_wp_property( 'domain' ) )
+          'featured' => __( 'Featured', ud_get_wp_property( 'domain' ) ),
+          'children' => sprintf( __( 'Child %s', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label('plural') ),
         ) );
 
         $meta = ud_get_wp_property( 'property_stats', array() );
@@ -297,6 +298,46 @@ namespace UsabilityDynamics\WPP {
           $data = $featured ? __( 'Featured', ud_get_wp_property( 'domain' ) ) : '';
         }
         return $data;
+      }
+
+      /**
+       * Return Featured
+       *
+       * @param $post
+       * @return mixed|string
+       */
+      public function column_children( $post ) {
+        global $wpdb;
+
+        $count = 0;
+        $hidden_count = 0;
+
+        $posts = $wpdb->get_results( "
+          SELECT ID, post_title
+            FROM {$wpdb->posts}
+              WHERE post_type = 'property'
+              AND post_status = 'publish'
+              AND post_parent = '{$post->ID}' ORDER BY menu_order ASC
+        ", ARRAY_A );
+
+        if( !empty( $posts ) ) {
+          $data = array();
+          foreach( $posts as $post ) {
+            $count++;
+            $class = '';
+            if( $count > 3 ) {
+              $class = 'hidden wpp_overview_hidden_stats';
+              $hidden_count++;
+            }
+            $data[] = '<li class="' . $class . '"><a href="' . admin_url() . 'post.php?post=' . $post['ID'] . '&action=edit">' . $post[ 'post_title' ] . '</a></li>';
+          }
+          if( $count > 3 ) {
+            $data[] = '<li class="wpp_show_advanced" advanced_option_class="wpp_overview_hidden_stats">' . sprintf( __( 'Toggle %1s more.', ud_get_wp_property()->domain ), $hidden_count ) . '</li>';
+          }
+          return '<div class="child-properties"><ul class="wpp_something_advanced_wrapper">' . implode( '', $data ) . '</ul>';
+        }
+
+        return '';
       }
 
       /**

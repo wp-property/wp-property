@@ -354,7 +354,6 @@ if ( get_option( 'permalink_structure' ) == '' ) {
             </tfoot>
           </table>
 
-
        </td>
     </tr>
 
@@ -362,14 +361,17 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       <th><?php printf( __( 'Default %s image', ud_get_wp_property('domain') ), \WPP_F::property_label() ); ?></th>
       <td>
         <p>
-          <?php printf( __( 'Setup image which will be used by default for all %s without images.', ud_get_wp_property('domain') ), \WPP_F::property_label('plural') ); ?>
+          <?php printf( __( 'Setup image which will be used by default for all %s without images.', ud_get_wp_property('domain') ), \WPP_F::property_label('plural') ); ?><br/>
+          <?php printf( __( 'Note, you also can setup default image for every %s type on Developer tab. So, that image will be used instead of current one.', ud_get_wp_property('domain') ), \WPP_F::property_label() ); ?>
         </p>
-        <input type="hidden" name="wpp_settings[configuration][default_image][url]" id="default_image_url" value="<?php echo isset( $wp_properties[ 'configuration' ][ 'default_image' ]['url'] ) ? $wp_properties[ 'configuration' ][ 'default_image' ]['url'] : ''; ?>">
-        <input type="hidden" name="wpp_settings[configuration][default_image][id]" id="default_image_id" value="<?php echo isset( $wp_properties[ 'configuration' ][ 'default_image' ]['id'] ) ? $wp_properties[ 'configuration' ][ 'default_image_id' ]['id'] : ''; ?>">
-        <div class="setup_default_image_block">
-          <input type="button" id="setup_default_image" class="button-secondary" value="<?php _e( 'Setup Image', ud_get_wp_property('domain') ); ?>">
+        <div class="upload-image-section">
+          <input type="hidden" name="wpp_settings[configuration][default_image][default][url]" class="input-image-url" value="<?php echo isset( $wp_properties[ 'configuration' ][ 'default_image' ][ 'default' ][ 'url' ] ) ? $wp_properties[ 'configuration' ][ 'default_image' ][ 'default' ]['url'] : ''; ?>">
+          <input type="hidden" name="wpp_settings[configuration][default_image][default][id]" class="input-image-id" value="<?php echo isset( $wp_properties[ 'configuration' ][ 'default_image' ][ 'default' ][ 'id' ] ) ? $wp_properties[ 'configuration' ][ 'default_image' ][ 'default' ]['id'] : ''; ?>">
+          <div class="image-actions">
+            <input type="button" class="button-secondary button-setup-image" value="<?php _e( 'Setup Image', ud_get_wp_property('domain') ); ?>">
+          </div>
+          <div class="image-wrapper"></div>
         </div>
-        <div class="current_default_image_block"></div>
       </td>
     </tr>
 

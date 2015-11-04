@@ -12,7 +12,7 @@ global $wp_properties;
   <thead>
   <tr>
     <th><?php _e( 'Type', ud_get_wp_property()->domain ) ?></th>
-    <th><?php _e( 'Slug', ud_get_wp_property()->domain ) ?></th>
+    <th><?php _e( 'Default Image', ud_get_wp_property()->domain ) ?></th>
     <th><?php _e( 'Settings', ud_get_wp_property()->domain ) ?></th>
     <th><?php _e( 'Hidden Attributes', ud_get_wp_property()->domain ) ?></th>
     <th><?php _e( 'Inherit from Parent', ud_get_wp_property()->domain ) ?></th>
@@ -22,12 +22,24 @@ global $wp_properties;
   <?php foreach( $wp_properties[ 'property_types' ] as $property_slug => $label ): ?>
 
     <tr class="wpp_dynamic_table_row" slug="<?php echo $property_slug; ?>"  data-property-slug="<?php echo $property_slug; ?>" new_row='false'>
+
       <td>
-        <input class="slug_setter" type="text" name="wpp_settings[property_types][<?php echo $property_slug; ?>]" value="<?php echo $label; ?>"/><br/>
-        <span class="wpp_delete_row wpp_link">Delete</span>
+        <ul>
+          <li><input class="slug_setter" type="text" name="wpp_settings[property_types][<?php echo $property_slug; ?>]" value="<?php echo $label; ?>"/></li>
+          <li><input type="text" class="slug" readonly='readonly' value="<?php echo $property_slug; ?>"/></li>
+          <li><span class="wpp_delete_row wpp_link">Delete</span></li>
+        </ul>
       </td>
+
       <td>
-        <input type="text" class="slug" readonly='readonly' value="<?php echo $property_slug; ?>"/>
+        <div class="upload-image-section">
+          <input type="hidden" name="wpp_settings[configuration][default_image][types][<?php echo $property_slug; ?>][url]" class="input-image-url" value="<?php echo isset( $wp_properties[ 'configuration' ][ 'default_image' ]['types'][$property_slug]['url'] ) ? $wp_properties[ 'configuration' ][ 'default_image' ]['types'][$property_slug]['url'] : ''; ?>">
+          <input type="hidden" name="wpp_settings[configuration][default_image][types][<?php echo $property_slug; ?>][id]" class="input-image-id" value="<?php echo isset( $wp_properties[ 'configuration' ][ 'default_image' ]['types'][$property_slug]['id'] ) ? $wp_properties[ 'configuration' ][ 'default_image' ]['types'][$property_slug]['id'] : ''; ?>">
+          <div class="image-actions">
+            <input type="button" class="button-secondary button-setup-image" value="<?php _e( 'Setup Image', ud_get_wp_property('domain') ); ?>" title="<?php printf( __( 'If %1$s has no any image, the default one based on %1$s Type will be shown.', ud_get_wp_property('domain') ), \WPP_F::property_label() ); ?>">
+          </div>
+          <div class="image-wrapper"></div>
+        </div>
       </td>
 
       <td>
