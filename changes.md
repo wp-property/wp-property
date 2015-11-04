@@ -1,6 +1,7 @@
 ### 2.1.3 ( November 4, 2015 )
 * Added ability to set numeric or slider pagination for [property_overview] shortcode and Property Overview widget.
 * Added ability to set default image which will be shown if property does not have any one.
+* Added 'Child Properties' table's column on 'All Properties' page, which shows the list of all children for particular property.
 * Improved hooks for list table on 'All Properties' page to have more flexibility with adding custom columns and bulk actions.
 
 ### 2.1.2 ( October 21, 2015 )
