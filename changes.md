@@ -1,3 +1,6 @@
+### 2.1.4
+* Fixed default template for [featured_properties] shortcode.
+
 ### 2.1.3 ( November 4, 2015 )
 * Added ability to set numeric or slider pagination for [property_overview] shortcode and Property Overview widget.
 * Added ability to set default image which will be shown if property does not have any one.

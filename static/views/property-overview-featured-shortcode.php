@@ -17,7 +17,6 @@ if( !empty( $stats ) && !is_array( $stats ) ) {
 ?>
 
 <?php if ( have_properties() ) : ?>
-
   <ul class="<?php wpp_css('property_featured_shortcode::featured_properties', "wpp_featured_properties_shortcode clearfix"); ?>">
     <?php foreach ( returned_properties('load_gallery=false') as $property) {  ?>
       <li class="<?php wpp_css('property_featured_shortcode::property', "{$class} wpp_featured_property_container wp-caption clearfix"); ?>" >
