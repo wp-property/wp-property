@@ -394,7 +394,8 @@ namespace UsabilityDynamics\WPP {
         if ( isset( $meta_cache[ '_thumbnail_id' ] ) ) {
 
           if( is_array( $meta_cache[ '_thumbnail_id' ] ) ) {
-            return array_shift( array_values( $meta_cache[ '_thumbnail_id' ] ) );
+            $_ = array_values( $meta_cache[ '_thumbnail_id' ] );
+            return array_shift( $_ );
           } else {
             return $meta_cache[ '_thumbnail_id' ];
           }
