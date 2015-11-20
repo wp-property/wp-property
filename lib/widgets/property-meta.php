@@ -40,10 +40,11 @@ namespace UsabilityDynamics\WPP\Widgets {
       $title = isset( $instance[ '_widget_title' ] ) ? $instance[ '_widget_title' ] : '';
 
       echo $before_widget;
-      if ( !empty( $title ) ) {
+      $output = do_shortcode( '[property_meta '.$this->shortcode_args( $instance ).']' );
+      if ( !empty( $title ) and trim($output) != '') {
         echo $before_title . $title . $after_title;
       }
-      echo do_shortcode( '[property_meta '.$this->shortcode_args( $instance ).']' );
+      echo $output;
       echo $after_widget;
     }
 
