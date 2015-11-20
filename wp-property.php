@@ -14,7 +14,7 @@
  * GitHub Branch: v2.0
  * Support: https://wordpress.org/support/plugin/wp-property
  * UserVoice: http://feedback.usabilitydynamics.com/forums/95259-wp-property
- *
+ * 
  * Copyright 2012 - 2015 Usability Dynamics, Inc.  ( email : info@usabilitydynamics.com )
  *
  */
