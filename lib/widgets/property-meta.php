@@ -36,16 +36,17 @@ namespace UsabilityDynamics\WPP\Widgets {
       $before_title = '';
       $after_title = '';
       extract( $args );
+      $output = "";
 
       $title = isset( $instance[ '_widget_title' ] ) ? $instance[ '_widget_title' ] : '';
 
-      echo $before_widget;
+      $output .= $before_widget;
       $output = do_shortcode( '[property_meta '.$this->shortcode_args( $instance ).']' );
       if ( !empty( $title ) and trim($output) != '') {
-        echo $before_title . $title . $after_title;
+        $output .= $before_title . $title . $after_title;
       }
+      $output .= $after_widget;
       echo $output;
-      echo $after_widget;
     }
 
     /**
