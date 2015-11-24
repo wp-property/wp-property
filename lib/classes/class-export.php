@@ -226,6 +226,7 @@ namespace UsabilityDynamics\WPP {
             die( __( 'There is an Error on trying to create XML feed.', ud_get_wp_property()->domain ) );
           }
           header( 'Content-type: text/xml' );
+          header('Content-Type: text/html; charset=utf-8');
           header( 'Content-Disposition: inline; filename="wpp_xml_data.xml"' );
         } else {
           $result = json_encode( $properties );
