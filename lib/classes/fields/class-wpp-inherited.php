@@ -38,9 +38,16 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) 
           $multiple = 1;
           break;
         default:
-          $type = 'text';
+          //
           break;
       }
+
+      $field_class = RW_Meta_Box::get_class_name( $field );
+      if(!$field_class){
+        $type = 'text';
+      }
+
+
       $field['class'] = "readonly";
       $field['readonly'] = true;
       $field['type'] = $type;
