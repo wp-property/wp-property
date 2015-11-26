@@ -1,5 +1,12 @@
-### 2.1.4
+### 2.1.4 ( November 26, 2015 )
+* Property Attributes widget is not shown anymore if no data found.
+* Property Meta widget is not shown anymore if no data found.
+* Property Term widget is not shown anymore if no data found.
 * Fixed default template for [featured_properties] shortcode.
+* Fixed the bug related to showing properties with specific float numbers in [property_overview] shortcode.
+* Fixed javascript error which broke pagination and sorting functionality in [property_overview] shortcode.
+* Fixed showing of inherited multi-checkbox values.
+* Fixed encoding issues in export feed.
 
 ### 2.1.3 ( November 4, 2015 )
 * Added ability to set numeric or slider pagination for [property_overview] shortcode and Property Overview widget.
