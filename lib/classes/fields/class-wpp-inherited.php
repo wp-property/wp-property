@@ -1,34 +1,205 @@
 <?php
 // Prevent loading this file directly
+/*
+This file will use for any inheried fields.
+This find original field type from $wp_properties array.
+Then pass field to modified show function of wp-meta-box/inc/field.php
+
+*/
 defined( 'ABSPATH' ) || exit;
 
-if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Text_Field' ) ) {
+if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) ) {
 
-  class RWMB_Wpp_Inherited_Field extends RWMB_Text_Field {
+  class RWMB_Wpp_Inherited_Field extends RWMB_Field {
 
-    /**
-     * Get field HTML
-     *
-     * @param mixed $meta
-     * @param array $field
-     *
-     * @return string
-     */
-    static function html( $meta, $field ) {
-      return sprintf(
-        '<input type="text" data-field-type="wpp-inheriteed" readonly="readonly" name="%s" class="rwmb-text" id="%s" value="%s" placeholder="%s" size="%s" %s>%s',
-        $field[ 'field_name' ],
-        $field[ 'id' ],
-        $meta,
-        $field[ 'placeholder' ],
-        $field[ 'size' ],
-        $field[ 'datalist' ] ? "list='{$field['datalist']['id']}'" : '',
-        self::datalist_html( $field )
-      );
+    static function show( $field, $saved ){
+
+      global $wp_properties, $post;
+
+      $id   = $field['id'];
+      $type = $wp_properties['admin_attr_fields'][$id];
+      $multiple = '';
+
+      switch($type) {
+        case 'input':
+          $type = 'text';
+          break;
+        case 'range_input':
+        case 'range_dropdown':
+        case 'advanced_range_dropdown':
+        case 'dropdown':
+          $type = 'select_advanced';
+          $multiple = 1;
+          break;
+        case 'multi_checkbox':
+          $type = 'checkbox_list';
+          $multiple = 1;
+          break;
+        default:
+          //
+          break;
+      }
+
+      $field_class = RW_Meta_Box::get_class_name( $field );
+      if(!$field_class){
+        $type = 'text';
+      }
+
+      $field['class'] = "readonly";
+      $field['readonly'] = true;
+      $field['type'] = $type;
+      $field['multiple'] = $multiple;
+      
+      add_filter( "rwmb_{$type}_html", array(__CLASS__, 'make_readonly'), 10, 3);
+      self::_show( $field, $saved );
+      remove_filter( "rwmb_{$type}_html", array(__CLASS__, 'make_readonly'), 10, 3);
     }
 
     /**
-     * Get meta value
+     * Show field HTML
+     * Filters are put inside this method, not inside methods such as "meta", "html", "begin_html", etc.
+     * That ensures the returned value are always been applied filters
+     * This method is not meant to be overwritten in specific fields
+     * Copied & modified from wp-meta-box/inc/field.php
+     * @param array $field
+     * @param bool  $saved
+     *
+     * @return string
+     */
+    static function _show( $field, $saved ){
+
+      global $post;
+
+
+      $field_class = RW_Meta_Box::get_class_name( $field );
+      $meta        = self::meta($post->ID, $saved, $field ); // Modification made here to get meta() function from this class.
+
+      // Apply filter to field meta value
+      // 1st filter applies to all fields
+      // 2nd filter applies to all fields with the same type
+      // 3rd filter applies to current field only
+      $meta = apply_filters( 'rwmb_field_meta', $meta, $field, $saved );
+      $meta = apply_filters( "rwmb_{$field['type']}_meta", $meta, $field, $saved );
+      $meta = apply_filters( "rwmb_{$field['id']}_meta", $meta, $field, $saved );
+
+      $type = $field['type'];
+      $id   = $field['id'];
+
+      $begin = call_user_func( array( $field_class, 'begin_html' ), $meta, $field );
+
+      // Apply filter to field begin HTML
+      // 1st filter applies to all fields
+      // 2nd filter applies to all fields with the same type
+      // 3rd filter applies to current field only
+      $begin = apply_filters( 'rwmb_begin_html', $begin, $field, $meta );
+      $begin = apply_filters( "rwmb_{$type}_begin_html", $begin, $field, $meta );
+      $begin = apply_filters( "rwmb_{$id}_begin_html", $begin, $field, $meta );
+
+      // Separate code for cloneable and non-cloneable fields to make easy to maintain
+
+      // Cloneable fields
+      if ( $field['clone'] )
+      {
+        $field_html = '';
+
+        /**
+         * Note: $meta must contain value so that the foreach loop runs!
+         * @see self::meta()
+         */
+        foreach ( $meta as $index => $sub_meta )
+        {
+          $sub_field               = $field;
+          $sub_field['field_name'] = $field['field_name'] . "[{$index}]";
+          if ( $index > 0 )
+          {
+            if ( isset( $sub_field['address_field'] ) )
+              $sub_field['address_field'] = $field['address_field'] . "_{$index}";
+            $sub_field['id'] = $field['id'] . "_{$index}";
+          }
+          if ( $field['multiple'] )
+            $sub_field['field_name'] .= '[]';
+
+          // Wrap field HTML in a div with class="rwmb-clone" if needed
+          $input_html = '<div class="rwmb-clone">';
+
+          // Call separated methods for displaying each type of field
+          $input_html .= call_user_func( array( $field_class, 'html' ), $sub_meta, $sub_field );
+
+          // Apply filter to field HTML
+          // 1st filter applies to all fields with the same type
+          // 2nd filter applies to current field only
+          $input_html = apply_filters( "rwmb_{$type}_html", $input_html, $field, $sub_meta );
+          $input_html = apply_filters( "rwmb_{$id}_html", $input_html, $field, $sub_meta );
+
+          // Remove clone button
+          $input_html .= call_user_func( array( $field_class, 'remove_clone_button' ), $sub_field );
+
+          $input_html .= '</div>';
+
+          $field_html .= $input_html;
+        }
+      }
+      // Non-cloneable fields
+      else
+      {
+        // Call separated methods for displaying each type of field
+        $field_html = call_user_func( array( $field_class, 'html' ), $meta, $field );
+
+        // Apply filter to field HTML
+        // 1st filter applies to all fields with the same type
+        // 2nd filter applies to current field only
+        $field_html = apply_filters( "rwmb_{$type}_html", $field_html, $field, $meta );
+        $field_html = apply_filters( "rwmb_{$id}_html", $field_html, $field, $meta );
+      }
+
+      $end = call_user_func( array( $field_class, 'end_html' ), $meta, $field );
+
+      // Apply filter to field end HTML
+      // 1st filter applies to all fields
+      // 2nd filter applies to all fields with the same type
+      // 3rd filter applies to current field only
+      $end = apply_filters( 'rwmb_end_html', $end, $field, $meta );
+      $end = apply_filters( "rwmb_{$type}_end_html", $end, $field, $meta );
+      $end = apply_filters( "rwmb_{$id}_end_html", $end, $field, $meta );
+
+      // Apply filter to field wrapper
+      // This allow users to change whole HTML markup of the field wrapper (i.e. table row)
+      // 1st filter applies to all fields
+      // 1st filter applies to all fields with the same type
+      // 2nd filter applies to current field only
+      $html = apply_filters( 'rwmb_wrapper_html', "{$begin}{$field_html}{$end}", $field, $meta );
+      $html = apply_filters( "rwmb_{$type}_wrapper_html", $html, $field, $meta );
+      $html = apply_filters( "rwmb_{$id}_wrapper_html", $html, $field, $meta );
+
+      // Display label and input in DIV and allow user-defined classes to be appended
+      $classes = array( 'rwmb-field', "rwmb-{$type}-wrapper" );
+      if ( 'hidden' === $field['type'] )
+        $classes[] = 'hidden';
+      if ( ! empty( $field['required'] ) )
+        $classes[] = 'required';
+      if ( ! empty( $field['class'] ) )
+        $classes[] = $field['class'];
+
+      $outer_html = sprintf(
+        $field['before'] . '<div class="%s">%s</div>' . $field['after'],
+        implode( ' ', $classes ),
+        $html
+      );
+
+      // Allow to change output of outer div
+      // 1st filter applies to all fields
+      // 1st filter applies to all fields with the same type
+      // 2nd filter applies to current field only
+      $outer_html = apply_filters( 'rwmb_outer_html', $outer_html, $field, $meta );
+      $outer_html = apply_filters( "rwmb_{$type}_outer_html", $outer_html, $field, $meta );
+      $outer_html = apply_filters( "rwmb_{$id}_outer_html", $outer_html, $field, $meta );
+
+      echo $outer_html;
+
+    }
+
+    /**
+     * Get meta value frm parent post
      *
      * @param int $post_id
      * @param bool $saved
@@ -68,6 +239,14 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Text_Fiel
       $meta = call_user_func( array( RW_Meta_Box::get_class_name( $field ), 'esc_meta' ), $meta );
 
       return $meta;
+    }
+
+    static function make_readonly($field_html, $field = array(), $meta = ""){
+      if(isset($field['readonly']) and $field['readonly']):
+        $field_html = preg_replace("/(name=(\"|').*?(\"|'))/", " ", $field_html);
+        return preg_replace('/(<(input|select).*?)>/', '$1 disabled="disabled" >', $field_html);
+      endif;
+      return $field_html;
     }
 
   }

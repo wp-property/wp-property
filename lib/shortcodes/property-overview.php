@@ -668,7 +668,7 @@ namespace UsabilityDynamics\WPP {
                   "type": "<?php echo $settings['type'] ?>",
                   "unique_id": "<?php echo $unique_hash ?>",
                   "pages": <?php echo !empty( $pages ) ? $pages : 'null'; ?>,
-                  "use_pagination": <?php echo $use_pagination; ?>,
+                  "use_pagination": <?php echo $use_pagination?$use_pagination:'""'; ?>,
                   "query": <?php echo json_encode($wpp_query); ?>,
                   "ajax_url": "<?php echo admin_url('admin-ajax.php'); ?>"
                 });

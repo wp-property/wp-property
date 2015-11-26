@@ -46,7 +46,7 @@ namespace UsabilityDynamics\WPP {
           'indent' => " ",
           'linebreak' => "\n",
           'addDecl' => true,
-          'encoding' => 'ISO-8859-1',
+          'encoding' => 'utf-8',
           'rootName' => 'objects',
           'defaultTagName' => 'object',
           'mode' => false
@@ -225,7 +225,7 @@ namespace UsabilityDynamics\WPP {
           if ( !$result ) {
             die( __( 'There is an Error on trying to create XML feed.', ud_get_wp_property()->domain ) );
           }
-          header( 'Content-type: text/xml' );
+          header( 'Content-type: text/xml; charset=utf-8' );
           header( 'Content-Disposition: inline; filename="wpp_xml_data.xml"' );
         } else {
           $result = json_encode( $properties );

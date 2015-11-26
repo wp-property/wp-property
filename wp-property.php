@@ -4,7 +4,7 @@
  * Plugin URI: https://www.usabilitydynamics.com/product/wp-property/
  * Description: Property and Real Estate Management Plugin for WordPress.  Create a directory of real estate / rental properties and integrate them into you WordPress CMS.
  * Author: Usability Dynamics, Inc.
- * Version: 2.1.3
+ * Version: 2.1.4
  * Requires at least: 4.0
  * Tested up to: 4.3.1
  * Text Domain: wpp
@@ -14,7 +14,7 @@
  * GitHub Branch: v2.0
  * Support: https://wordpress.org/support/plugin/wp-property
  * UserVoice: http://feedback.usabilitydynamics.com/forums/95259-wp-property
- *
+ * 
  * Copyright 2012 - 2015 Usability Dynamics, Inc.  ( email : info@usabilitydynamics.com )
  *
  */
