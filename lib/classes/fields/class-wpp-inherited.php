@@ -35,20 +35,32 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) 
           $type = 'checkbox_list';
           $multiple = 1;
           break;
+        case 'number':
+          break;
         default:
           //
           break;
       }
+      // Some empty value to ignor warning when wp_debug is enabled
+      $field['step']        = '';
+      $field['min']         = '';
+      $field['size']        = '';
+      $field['security_deposit']        = '';
+      $field['max_file_uploads']        = '';
+      $field['force_delete']        = '';
+      $field['js_options']  = '';
+      $field['datalist']    = '';
+
+      $field['class']       = "readonly";
+      $field['readonly']    = true;
+      $field['type']        = $type;
+      $field['multiple']    = $multiple;
 
       $field_class = RW_Meta_Box::get_class_name( $field );
       if(!$field_class){
         $type = 'text';
+        $field['type']      = $type;
       }
-
-      $field['class'] = "readonly";
-      $field['readonly'] = true;
-      $field['type'] = $type;
-      $field['multiple'] = $multiple;
       
       add_filter( "rwmb_{$type}_html", array(__CLASS__, 'make_readonly'), 10, 3);
       self::_show( $field, $saved );
