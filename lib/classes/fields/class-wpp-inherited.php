@@ -13,8 +13,7 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) 
   class RWMB_Wpp_Inherited_Field extends RWMB_Field {
 
 
-  static function show( $field, $saved )
-    {
+  static function show( $field, $saved ){
 
       global $wp_properties, $post;
 
@@ -47,21 +46,15 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) 
         $type = 'text';
       }
 
-
       $field['class'] = "readonly";
       $field['readonly'] = true;
       $field['type'] = $type;
       $field['multiple'] = $multiple;
+      
       add_filter( "rwmb_{$type}_html", array(__CLASS__, 'make_readonly'), 10, 3);
       self::_show( $field, $saved );
       remove_filter( "rwmb_{$type}_html", array(__CLASS__, 'make_readonly'), 10, 3);
     }
-
-
-
-
-
-
 
     /**
      * Show field HTML
@@ -74,8 +67,7 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) 
      *
      * @return string
      */
-    static function _show( $field, $saved )
-    {
+    static function _show( $field, $saved ){
 
       global $post;
 
