@@ -12,8 +12,7 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) 
 
   class RWMB_Wpp_Inherited_Field extends RWMB_Field {
 
-
-  static function show( $field, $saved ){
+    static function show( $field, $saved ){
 
       global $wp_properties, $post;
 
