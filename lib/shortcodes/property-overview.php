@@ -710,7 +710,7 @@ namespace UsabilityDynamics\WPP {
       /**
        * Render property_overview default styles at once!
        */
-      public function maybe_print_styles() {
+      static public function maybe_print_styles() {
         global $_wp_property_overview_style;
         if( empty( $_wp_property_overview_style) || !$_wp_property_overview_style ) {
           $_wp_property_overview_style = true;
