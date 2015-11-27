@@ -1,3 +1,6 @@
+### 2.1.5
+* Removed 'Images Upload' data entry for attribute since it duplicated 'Image Upload'.
+
 ### 2.1.4 ( November 26, 2015 )
 * Property Attributes widget is not shown anymore if no data found.
 * Property Meta widget is not shown anymore if no data found.
