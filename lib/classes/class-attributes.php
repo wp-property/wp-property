@@ -38,7 +38,6 @@ namespace UsabilityDynamics\WPP {
           'time' => __( 'Time picker', ud_get_wp_property('domain') ),
           'color' => __( 'Color picker', ud_get_wp_property('domain') ),
           'image_advanced' => __( 'Image upload', ud_get_wp_property('domain') ),
-          'plupload_image' => __( 'Images upload', ud_get_wp_property('domain') ),
           'file_advanced' => __( 'Files upload', ud_get_wp_property('domain') ),
           'file_input' => __( 'File URL', ud_get_wp_property('domain') ),
         ) );

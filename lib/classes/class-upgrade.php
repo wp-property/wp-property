@@ -18,6 +18,7 @@ namespace UsabilityDynamics\WPP {
        * @param $new_version
        */
       static public function run( $old_version, $new_version ){
+        global $wpdb;
 
         self::do_backup( $old_version, $new_version );
 
@@ -50,6 +51,17 @@ namespace UsabilityDynamics\WPP {
             $settings[ 'configuration' ][ 'property_overview' ][ 'pagination_type' ] = 'slider';
             update_option( 'wpp_settings', $settings );
 
+          case ( version_compare( $old_version, '2.1.5', '<' ) ):
+            /*
+             * 'Images Upload' data entry has been removed, because it duplicates 'Image Upload'.
+             * So all images_upload meta of properties should be moved to image_upload.
+             */
+            $wpdb->query( "
+              UPDATE {$wpdb->postmeta}
+	              SET meta_key='image_upload'
+	              WHERE meta_key='images_upload'
+		              AND post_id IN ( SELECT ID FROM {$wpdb->posts} WHERE post_type='property' );
+            " );
 
         }
 
