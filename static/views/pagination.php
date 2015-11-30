@@ -53,3 +53,4 @@
   }
   ?>
 </div>
+<div class="ajax_loader"></div>

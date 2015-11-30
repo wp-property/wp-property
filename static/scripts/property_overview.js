@@ -287,16 +287,13 @@
           prepare_numeric_pagination_ui( this_page, unique_id );
           break;
       }
-      var wpp_shortcode = jQuery( "#wpp_shortcode_" + unique_id),
-          wpp_current_page_count = wpp_shortcode.find(".wpp_current_page_count" ),
-          wpp_pagination_slider = wpp_shortcode.find(".wpp_pagination_slider" )
-
 
       /* Update page counter */
-      wpp_current_page_count.text( this_page );
-      wpp_pagination_slider.find(".slider_page_info .val" ).text( this_page );
+      jQuery( "#wpp_shortcode_" + unique_id +  " .wpp_current_page_count" ).text( this_page );
+      jQuery( "#wpp_shortcode_" + unique_id +  " .wpp_pagination_slider .slider_page_info .val" ).text( this_page );
       /* Update sliders  */
-      wpp_pagination_slider.slider( "value", this_page );
+      jQuery( "#wpp_shortcode_" + unique_id +  " .wpp_pagination_slider" ).slider( "value", this_page );
+      jQuery( '#wpp_shortcode_' + unique_id +  ' .ajax_loader' ).show();
       /* Scroll page to the top of the current shortcode */
       if ( scroll_to ) {
         jQuery( document ).trigger( 'wpp_pagination_change', {'overview_id': unique_id} );
@@ -306,23 +303,11 @@
       data.ajax_call = 'true';
       data.requested_page = this_page;
 
-      var p_wrapper = wpp_shortcode.find('.wpp_property_view_result' );
-      //* Determine if p_wrapper is empty try previous version's selector */
-      if ( p_wrapper.length == 0 ) {
-        p_wrapper = wpp_shortcode.find('.wpp_row_view' );
-      }
-      var ajax_loader = p_wrapper.find('.ajax_loader');
-      if(!ajax_loader.length){
-        ajax_loader = jQuery('<div class="ajax_loader"></div>');
-      }
-        
-      p_wrapper.css('position', 'relative').append(ajax_loader);
-      ajax_loader.show();
-
       jQuery.post( vars.ajax_url, {
         action: 'wpp_property_overview_pagination',
         wpp_ajax_query: data
       }, function ( result_data ) {
+        jQuery( '#wpp_shortcode_' + unique_id +  ' .ajax_loader' ).hide();
 
         var p_list = jQuery( '.wpp_property_view_result', result_data.display );
         //* Determine if p_list is empty try previous version's selector */
@@ -331,6 +316,12 @@
         }
 
         var content = ( p_list.length > 0 ) ? p_list.html() : result_data.display;
+        var p_wrapper = jQuery( '#wpp_shortcode_' + unique_id +  ' .wpp_property_view_result' );
+
+        //* Determine if p_wrapper is empty try previous version's selector */
+        if ( p_wrapper.length == 0 ) {
+          p_wrapper = jQuery( '#wpp_shortcode_' + unique_id +  ' .wpp_row_view' )
+        }
 
         p_wrapper.html( content );
 
@@ -340,24 +331,24 @@
           switch( type ) {
 
             case 'slider':
-              wpp_pagination_slider.slider( "option", "max", result_data.wpp_query.pages );
-              wpp_shortcode.find(".wpp_total_page_count" ).text( result_data.wpp_query.pages );
+              jQuery( "#wpp_shortcode_" + unique_id +  " .wpp_pagination_slider" ).slider( "option", "max", result_data.wpp_query.pages );
+              jQuery( "#wpp_shortcode_" + unique_id +  " .wpp_total_page_count" ).text( result_data.wpp_query.pages );
               max_slider_pos = result_data.wpp_query.pages;
-              if ( max_slider_pos == 0 ) wpp_current_page_count.text( 0 );
+              if ( max_slider_pos == 0 ) jQuery( "#wpp_shortcode_" + unique_id + " .wpp_current_page_count" ).text( 0 );
               break;
 
             case 'numeric':
               last_property = parseInt(result_data.wpp_query.starting_row) + parseInt(result_data.wpp_query.per_page);
               last_property = last_property > parseInt(result_data.wpp_query.properties.total) ? parseInt(result_data.wpp_query.properties.total) : last_property;
-              wpp_shortcode.find(".wpp_display_from_property").text(parseInt(result_data.wpp_query.starting_row) + 1);
-              wpp_shortcode.find(".wpp_display_to_property").text(last_property);
+              jQuery("#wpp_shortcode_" + unique_id +  " .wpp_display_from_property").text(parseInt(result_data.wpp_query.starting_row) + 1);
+              jQuery("#wpp_shortcode_" + unique_id +  " .wpp_display_to_property").text(last_property);
               break;
 
           }
 
         }
 
-        wpp_shortcode.find("a.fancybox_image" ).fancybox( {
+        jQuery( "#wpp_shortcode_" + unique_id +  " a.fancybox_image" ).fancybox( {
           'transitionIn': 'elastic',
           'transitionOut': 'elastic',
           'speedIn': 600,
@@ -366,7 +357,7 @@
         } );
 
         jQuery( document ).trigger( 'wpp_pagination_change_complete', {'overview_id': unique_id} );
-        ajax_loader.hide();
+
       }, "json" );
 
     }
