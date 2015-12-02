@@ -3459,6 +3459,13 @@ class WPP_F extends UsabilityDynamics\Utility {
   }
 
   /**
+   * Validate if a URL is a valid image.
+   */
+  static public function isIMG( $url ) {
+    return preg_match( '@(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*\.(?:jpg|jpeg|gif|png))(?:\?([^#]*))?(?:#(.*))?@i', $url );
+  }
+
+  /**
    * Determine if a email is valid.
    *
    * @param $value
@@ -3483,7 +3490,10 @@ class WPP_F extends UsabilityDynamics\Utility {
     $defaults = array(
       'label_as_key' => 'true',
     );
-
+    $return_multi = array(
+                  'image_advanced',
+                  'file_advanced',
+                 );
     if( is_array( $property_object ) ) {
       $property_object = (object) $property_object;
     }
@@ -3498,6 +3508,12 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     $return = array();
+    $parent_property_object = "";
+    if(isset($property_object->is_child) && $property_object->is_child && 
+       isset($property_object->parent_id) && $property_object->parent_id 
+    ){
+      $parent_property_object = UsabilityDynamics\WPP\Property_Factory::get($property_object->parent_id, array('return_object' => 'true'));
+    }
 
     foreach( $property_stats as $slug => $label ) {
 
@@ -3515,10 +3531,23 @@ class WPP_F extends UsabilityDynamics\Utility {
         continue;
       }
 
-      if( !empty( $property_object->{$slug} ) ) {
-        $value = $property_object->{$slug};
+      $_property_object = $property_object;
+      $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $slug );
+
+      if(is_object($parent_property_object) &&
+         in_array($attribute_data[ 'data_input_type' ], $return_multi) &&
+         isset($attribute_data['inheritance']) && in_array($property_object->property_type, $attribute_data['inheritance'])
+      ){
+        $_property_object = $parent_property_object;
+      }
+
+      if(in_array($attribute_data[ 'data_input_type' ], $return_multi)){
+        $value = get_post_meta( $_property_object->ID, $slug );
+      }
+      elseif( !empty( $_property_object->{$slug} ) ) {
+        $value = $_property_object->{$slug};
       } else {
-        $value = get_post_meta( $property_object->ID, $slug, true );
+        $value = get_post_meta( $_property_object->ID, $slug, true );
       }
 
       if( $value === true ) {
@@ -3527,7 +3556,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
       //** Override property_type slug with label */
       if( $slug == 'property_type' ) {
-        $value = $property_object->property_type_label;
+        $value = $_property_object->property_type_label;
       }
 
       // Include only passed variables

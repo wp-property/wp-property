@@ -552,8 +552,58 @@ if ( !function_exists( 'draw_stats' ) ):
       if ( $return_blank == 'false' && empty( $value ) ) {
         continue;
       }
+      if(!is_array($value))
+        $value = html_entity_decode( $value );
 
-      $value = html_entity_decode( $value );
+      if ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'image_advanced') {
+        $imgs = implode(',', $value);
+        $img_html = do_shortcode("[gallery ids='$imgs']");
+        $value = "<ul>" . $img_html . "</ul>";
+
+      }
+      elseif ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'file_advanced') {
+        $file_html = '';
+        $imgs = array();
+        $files = array();
+        foreach ($value as $file) {
+          $isIMG = wp_attachment_is_image( $file );
+          if($isIMG){
+            $imgs[] = $file;
+          }
+          else{
+            $files[] = $file;
+          }
+        }
+
+        if(count($imgs)){
+          $imgs = implode(",", $imgs);
+          $file_html .= do_shortcode("[gallery ids='$imgs']");
+        }
+
+        if(count($files)){
+          foreach ($files as $file) {
+            $li          = '
+            <li id="item_%s">
+              <div class="rwmb-icon">%s</div>
+              <div class="rwmb-info">
+                <a href="%s" target="_blank">%s</a>
+                <p>%s</p>
+              </div>
+            </li>';
+            $mime_type = get_post_mime_type( $file );
+            $file_html .= sprintf(
+              $li,
+              $file,
+              @wp_get_attachment_image( $file, array( 60, 60 ), true ), // Wp genereate warning if image not found.
+              wp_get_attachment_url( $file ),
+              get_the_title( $file ),
+              $mime_type
+            );
+          }
+        }
+
+        $value = "<ul>" . $file_html . "</ul>";
+      }
 
       //** Single "true" is converted to 1 by get_properties() we check 1 as well, as long as it isn't a numeric attribute */
       if ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'checkbox' && in_array( strtolower( $value ), array( 'true', '1', 'yes' ) ) ) {

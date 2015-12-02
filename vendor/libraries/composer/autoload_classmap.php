@@ -114,6 +114,8 @@ return array(
     'RWMB_Wpp_Checkbox_Field' => $baseDir . '/lib/classes/fields/class-wpp-checkbox.php',
     'RWMB_Wpp_Inherited_Address_Field' => $baseDir . '/lib/classes/fields/class-wpp-inherited-address.php',
     'RWMB_Wpp_Inherited_Field' => $baseDir . '/lib/classes/fields/class-wpp-inherited.php',
+    'RWMB_Wpp_Inherited_File_Advanced_Field' => $baseDir . '/lib/classes/fields/class-wpp-inherited-file-advanced.php',
+    'RWMB_Wpp_Inherited_Image_Advanced_Field' => $baseDir . '/lib/classes/fields/class-wpp-inherited-image-advanced.php',
     'RWMB_Wpp_Parent_Field' => $baseDir . '/lib/classes/fields/class-wpp-parent.php',
     'RWMB_Wpp_Readonly_Field' => $baseDir . '/lib/classes/fields/class-wpp-readonly.php',
     'RWMB_Wysiwyg_Field' => $baseDir . '/vendor/plugins/wp-meta-box/inc/fields/wysiwyg.php',

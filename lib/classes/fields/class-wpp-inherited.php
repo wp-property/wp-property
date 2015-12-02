@@ -12,12 +12,16 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) 
 
   class RWMB_Wpp_Inherited_Field extends RWMB_Field {
 
+    static function admin_enqueue_scripts(){
+      wp_enqueue_style( 'wpp-inherited-style', ud_get_wp_property()->path( 'static/styles/fields/wpp-inherited.css' ), array( 'wp-admin' ), ud_get_wp_property( 'version' ) );
+    }
+
     static function show( $field, $saved ){
 
-      global $wp_properties, $post;
+      global $post;
 
       $id   = $field['id'];
-      $type = $wp_properties['admin_attr_fields'][$id];
+      $type = UsabilityDynamics\WPP\Attributes::get_attribute_data( $id )['data_input_type'];
       $multiple = '';
 
       switch($type) {
@@ -35,7 +39,10 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) 
           $type = 'checkbox_list';
           $multiple = 1;
           break;
-        case 'number':
+        case 'image_advanced':
+        case 'file_advanced':
+          $type = "wpp_Inherited_" . $type;
+          $multiple = 1;
           break;
         default:
           //
@@ -61,7 +68,7 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) 
         $type = 'text';
         $field['type']      = $type;
       }
-      
+      call_user_func(array($field_class, 'admin_enqueue_scripts'));
       add_filter( "rwmb_{$type}_html", array(__CLASS__, 'make_readonly'), 10, 3);
       self::_show( $field, $saved );
       remove_filter( "rwmb_{$type}_html", array(__CLASS__, 'make_readonly'), 10, 3);
