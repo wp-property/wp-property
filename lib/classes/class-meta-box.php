@@ -407,6 +407,7 @@ namespace UsabilityDynamics\WPP {
             // $description[] = __( 'The value is being used by Google Address Validator to determine and prepare address to valid format. However you can set coordinates manually.', ud_get_wp_property()->domain );
           }
 
+          $original_type = $input_type;
           //* Is current attribute inherited from parent? If so, set it as readonly!. */
           if(
             isset( $post->post_parent ) &&
@@ -457,6 +458,7 @@ namespace UsabilityDynamics\WPP {
             'id' => $slug,
             'name' => $label,
             'type' => $input_type,
+            'original_type' => $original_type,
             'desc' => implode( ' ', (array) $description ),
             'options' => $options,
           ) ), $slug, $post );
