@@ -98,7 +98,10 @@ namespace UsabilityDynamics\WPP {
          * Set schema for multiple attributes types.
          */
         ud_get_wp_property()->set('attributes.multiple', array(
-          'multi_checkbox'
+          'multi_checkbox',
+          'checkbox_list',
+          'image_advanced',
+          'file_advanced ',
         ) );
 
         /** Fix numeric/currency logic */

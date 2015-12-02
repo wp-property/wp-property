@@ -19,7 +19,7 @@ if( !class_exists( 'RWMB_Wpp_Checkbox_Field' ) && class_exists( 'RWMB_Checkbox_F
         '<label><input type="checkbox" class="rwmb-checkbox" name="%s" id="%s" value="true" %s> %s</label>',
         $field[ 'field_name' ],
         $field[ 'id' ],
-        checked( $meta, 'true', false ),
+        checked( ! empty( $meta ), 1, false ), // from original class of checkbox 
         $desc
       );
     }
