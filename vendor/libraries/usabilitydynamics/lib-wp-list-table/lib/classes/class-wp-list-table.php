@@ -116,6 +116,7 @@ namespace UsabilityDynamics\WPLT {
                 'show_filter' => false,
                 'show_bulk_actions' => true,
                 'show_pagination' => true,
+				'show_languages' => true, // add new option to filters posts by language if WPML plugin active
               ));
               break;
             /* Filter Query ( Used by ajax requests ) */
@@ -833,7 +834,10 @@ namespace UsabilityDynamics\WPLT {
       public function display( $args = array() ) {
 
         echo "<div id=\"{$this->name}\" class=\"wplt_container\">";
-
+		
+		//add WPML Compatibility filters here
+		$this->display_languages();
+		
         if( $this->options['show_filter'] ) {
           $this->filter();
         }
@@ -1000,9 +1004,59 @@ namespace UsabilityDynamics\WPLT {
       public function __get($name) {
         return isset($this->properties[$name]) ? $this->properties[$name] : NULL;
       }
-
+	  /*
+	  *	get properity posts count by language code
+	  * @param $lang string
+	  *	@author Fadi Yousef
+	  */
+	  protected function get_property_posts_count_bylang( $lang ){
+		
+	  	global $sitepress;
+		$lang_now = $sitepress->get_current_language();
+		$lang_changed = 0;
+		if($lang_now != $lang){
+			$sitepress->switch_lang($lang);
+			$lang_changed = 1;
+		}
+		$args = array(
+			'posts_per_page' => -1,
+			'post_type' => 'property',
+			'suppress_filters' => false
+		);
+		$result = new WP_Query($args);
+		if($lang_changed) $sitepress->switch_lang($lang_now);
+		return $result->post_count;
+	  }
+	  /**
+       * Display posts by Language if WPML plugin is active
+       *
+       * @access protected
+       * @Author Fadi Yousef frontend-expert@outlook.com
+       */
+      protected function display_languages() {
+		  if(  function_exists('icl_object_id') ){
+			$curr_lang = apply_filters( 'wpml_current_language', NULL );
+		  	$languages = apply_filters( 'wpml_active_languages', NULL, 'orderby=id&order=desc' );
+		  	if ( !empty( $languages ) ) {?>
+            
+            <ul class="lang_subsubsub" style="clear:both">
+			<?php foreach( $languages as $l ) {?>
+				<li class="<?php echo 'language_'.$l['language_code']; ?>">
+                	<a href="<?php echo '?post_type=property&page=all_properties&lang='.$l['language_code']; ?>" class="<?php echo ($l['active']) ? 'current' : 'lang'; ?>"><?php echo $l['translated_name']; ?>
+                    <!--<span class="count">(<?php //echo $this->get_property_posts_count_bylang($l['language_code']); ?>)</span>-->
+                    </a>
+                </li>	
+			<?php	}
+			}
+		  ?>
+          <li class="language_all"><a href="?post_type=property&page=all_properties&lang=all" 
+          class="<?php if($curr_lang == 'all') echo 'current';  ?>"><?php echo __( 'All languages', 'sitepress' ); ?></a></li>
+          </ul>
+        <?php
+		  }
+      }
+	
     }
-
   }
 
 }
