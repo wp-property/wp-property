@@ -542,7 +542,7 @@ if ( !function_exists( 'draw_stats' ) ):
       $value = $data[ 'value' ];
 
       $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $tag );
-
+      //print_r($attribute_data);
       //** Do not show attributes that have value of 'value' if enabled */
       if ( $hide_false == 'true' && $value == 'false' ) {
         continue;
@@ -559,9 +559,13 @@ if ( !function_exists( 'draw_stats' ) ):
         $imgs = implode(',', $value);
         $img_html = do_shortcode("[gallery ids='$imgs']");
         $value = "<ul>" . $img_html . "</ul>";
-
+      }
+      elseif ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'oembed') {
+        $value = wp_oembed_get(trim($value));
       }
       elseif ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'file_advanced') {
+        wp_enqueue_style( 'front-file-style', ud_get_wp_property()->path( 'static/styles/fields/front-file.css' ), array(), ud_get_wp_property( 'version' ) );
+
         $file_html = '';
         $imgs = array();
         $files = array();
@@ -602,7 +606,7 @@ if ( !function_exists( 'draw_stats' ) ):
           }
         }
 
-        $value = "<ul>" . $file_html . "</ul>";
+        $value = "<ul class='rwmb-file'>" . $file_html . "</ul>";
       }
 
       //** Single "true" is converted to 1 by get_properties() we check 1 as well, as long as it isn't a numeric attribute */

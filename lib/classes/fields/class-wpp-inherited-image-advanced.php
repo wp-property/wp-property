@@ -24,7 +24,6 @@ if ( ! class_exists( 'RWMB_Wpp_Inherited_Image_Advanced_Field' ) ){
 		 */
 		static function html( $meta, $field ){
 			// Uploaded images
-			print_r($meta);
 			$html = self::get_uploaded_images( $meta, $field );
 			return $html;
 		}

@@ -19,29 +19,20 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) 
     static function show( $field, $saved ){
 
       global $post;
-
       $id   = $field['id'];
 
       $type = $field['original_type'];
       if($type == 'image_advanced' || $type == 'file_advanced') {
           $type = "wpp_Inherited_" . $type;
       }
-      // Some empty value to ignor warning when wp_debug is enabled
-      $field['step']        = '';
-      $field['min']         = '';
-      $field['size']        = '';
-      $field['max_file_uploads']        = '';
-      $field['force_delete']        = '';
-      $field['js_options']  = '';
-      $field['datalist']    = '';
+      $field['readonly']    = true;  
 
-      $field['class']       = "readonly";
-      $field['readonly']    = true;
-      $field['type']        = $type;
-
+      if($type != 'oembed'){
+        $field['class']       = "readonly";
+      }
+      
       $field_class = RW_Meta_Box::get_class_name( $field );
       $field = call_user_func(array($field_class , 'normalize_field'), $field);
-
       call_user_func(array($field_class, 'admin_enqueue_scripts'));
       add_filter( "rwmb_{$type}_html", array(__CLASS__, 'make_readonly'), 10, 3);
       self::_show( $field, $saved );
@@ -62,7 +53,6 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) 
     static function _show( $field, $saved ){
 
       global $post;
-
 
       $field_class = RW_Meta_Box::get_class_name( $field );
       $meta        = self::meta($post->ID, $saved, $field ); // Modification made here to get meta() function from this class.
@@ -91,16 +81,14 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) 
       // Separate code for cloneable and non-cloneable fields to make easy to maintain
 
       // Cloneable fields
-      if ( $field['clone'] )
-      {
+      if ( $field['clone'] ){
         $field_html = '';
 
         /**
          * Note: $meta must contain value so that the foreach loop runs!
          * @see self::meta()
          */
-        foreach ( $meta as $index => $sub_meta )
-        {
+        foreach ( $meta as $index => $sub_meta ){
           $sub_field               = $field;
           $sub_field['field_name'] = $field['field_name'] . "[{$index}]";
           if ( $index > 0 )
@@ -133,8 +121,7 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) 
         }
       }
       // Non-cloneable fields
-      else
-      {
+      else{
         // Call separated methods for displaying each type of field
         $field_html = call_user_func( array( $field_class, 'html' ), $meta, $field );
 
@@ -237,7 +224,7 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) 
     static function make_readonly($field_html, $field = array(), $meta = ""){
       if(isset($field['readonly']) and $field['readonly']):
         $field_html = preg_replace("/(name=(\"|').*?(\"|'))/", " ", $field_html);
-        return preg_replace('/(<(input|select).*?)>/', '$1 disabled="disabled" >', $field_html);
+        return preg_replace('/(<(input|select|a).*?)>/', '$1 disabled="disabled" >', $field_html);
       endif;
       return $field_html;
     }
