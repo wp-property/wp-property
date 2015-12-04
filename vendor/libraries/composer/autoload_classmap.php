@@ -180,6 +180,7 @@ return array(
     'UsabilityDynamics\\WPP\\Settings' => $baseDir . '/lib/classes/class-settings.php',
     'UsabilityDynamics\\WPP\\Shortcode' => $baseDir . '/lib/classes/class-shortcode.php',
     'UsabilityDynamics\\WPP\\Upgrade' => $baseDir . '/lib/classes/class-upgrade.php',
+    'UsabilityDynamics\\WPP\\WPML' => $baseDir . '/lib/classes/class-wpml.php',
     'UsabilityDynamics\\WPP\\Widget' => $baseDir . '/lib/classes/class-widget.php',
     'UsabilityDynamics\\WP\\Bootstrap' => $vendorDir . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap.php',
     'UsabilityDynamics\\WP\\Bootstrap_Plugin' => $vendorDir . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php',
