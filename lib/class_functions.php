@@ -2891,7 +2891,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       }
       unset( $query[ 'post_status' ] );
     }
-
+	
     foreach( (array) $non_post_meta as $field => $condition ) {
       if( array_key_exists( $field, $query ) ) {
         if( $condition == 'like' ) {
@@ -2914,7 +2914,7 @@ class WPP_F extends UsabilityDynamics\Utility {
         unset( $query[ $field ] );
       }
     }
-
+	
     if( !empty( $sql_args[ 'limit_query' ] ) ) {
       $sql_args[ 'starting_row' ] = ( $sql_args[ 'starting_row' ] ? $sql_args[ 'starting_row' ] : 0 );
       $limit_query                = "LIMIT {$sql_args['starting_row']}, {$sql_args['limit_query']};";
@@ -2991,7 +2991,12 @@ class WPP_F extends UsabilityDynamics\Utility {
               $matching_id_filter = implode( "' OR ID ='", $matching_ids );
               $matching_ids       = $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE (ID ='$matching_id_filter' ) AND post_type = 'property'" );
             } else {
-              $matching_ids = $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'property'" );
+				$wpml = new UsabilityDynamics\WPP\WPML();
+				if($wpml->is_active){
+					$matching_ids = $wpml->get_matching_ids_by_lang();
+				}else{
+              		$matching_ids = $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'property'" );
+				}
             }
             break;
           }

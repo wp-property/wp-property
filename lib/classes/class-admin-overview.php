@@ -281,7 +281,11 @@ namespace UsabilityDynamics\WPP {
        * Render List Table in Overview Meta Box
        */
       public function render_list_table() {
-		$this->display_languages();
+		$wpp_wpml = new WPML();
+
+		if( $wpp_wpml->is_active){
+			$wpp_wpml->display_languages();
+		}
         $this->list_table->prepare_items();
         $this->list_table->display();
       }
@@ -349,63 +353,7 @@ namespace UsabilityDynamics\WPP {
           }
         }
         return $title;
-      }
-	  /**
-       * Display property Languages if WPML plugin is active
-       *
-       * @Author Fadi Yousef frontend-expert@outlook.com
-       */
-	  public function display_languages(){
-		global $pagenow, $typenow;
-		if( 'property' === $typenow && 'edit.php' === $pagenow && function_exists('icl_object_id'))
-		{
-			$curr_lang = apply_filters( 'wpml_current_language', NULL );
-		  	$languages = apply_filters( 'wpml_active_languages', NULL, 'orderby=id&order=desc' );
-			$all_count = 0;
-			if ( !empty( $languages ) ) {?>
-				<ul class="lang_subsubsub" style="clear:both">
-                	<?php foreach( $languages as $l ):
-						$posts_count = $this->get_property_posts_count_bylang($l['language_code']);
-						$all_count += intval($posts_count);
-					?>
-                    	<li class="<?php echo 'language_'.$l['language_code']; ?>">
-                        	<a href="<?php echo '?post_type=property&page=all_properties&lang='.$l['language_code']; ?>" class="<?php echo ($l['active']) ? 'current' : 'lang'; ?>"><?php echo $l['translated_name']; ?>
-                            <span class="count">(<?php echo $posts_count; ?>)</span>
-                            </a>
-                        </li>
-                    <?php endforeach;?>
-                    <li class="language_all"><a href="?post_type=property&page=all_properties&lang=all" 
-          class="<?php if($curr_lang == 'all') echo 'current';  ?>"><?php echo __( 'All languages', 'sitepress' ).' ('.$all_count.')'; ?></a></li>
-                </ul>
-		<?php }
-			
-		}	
-	  }
-	  
-	   /*
-	  *	get properity posts count by language code
-	  * @param $lang string
-	  *	@author Fadi Yousef  frontend-expert@outlook.com
-	  */
-	  protected function get_property_posts_count_bylang( $lang ){
-		
-	  	global $sitepress;
-		$lang_now = $sitepress->get_current_language();
-		$lang_changed = 0;
-		if($lang_now != $lang){
-			$sitepress->switch_lang($lang);
-			$lang_changed = 1;
-		}
-		$args = array(
-			'posts_per_page' => -1,
-			'post_type' => 'property',
-			'suppress_filters' => false
-		);
-		$result = new \WP_Query($args);
-		if($lang_changed) $sitepress->switch_lang($lang_now);
-		return $result->post_count;
-	  }
-	  
+      }	  
     }
 	
   }
