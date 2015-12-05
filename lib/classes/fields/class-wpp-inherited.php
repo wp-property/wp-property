@@ -24,9 +24,9 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) 
       $type = $field['original_type'];
       if($type == 'image_advanced' || $type == 'file_advanced') {
           $type = "wpp_Inherited_" . $type;
-      }
-      $field['readonly']    = true;  
+      } 
 
+      $field['readonly']    = true; 
       if($type != 'oembed'){
         $field['class']       = "readonly";
       }
