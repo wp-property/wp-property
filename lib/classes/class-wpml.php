@@ -83,6 +83,40 @@ class WPML{
 		  AND {$wpdb->prefix}icl_translations.language_code ='".ICL_LANGUAGE_CODE."' GROUP BY ID " );
 		  return $matching_ids;
 	  }
+	  /*
+	  * get properties IDs by meta key
+	  * @params:
+	  * meta_key string
+	  * @return array
+	  * @author Fadi Yousef frontend-expert@outlook.com
+	  */
+	  public function filtering_matching_ids($meta_key = false,$specific = false,$matching_id_filter = false){
+		global $wpdb;
+		$sql_query = "SELECT post_id FROM {$wpdb->postmeta} 
+		LEFT JOIN {$wpdb->prefix}icl_translations ON 
+		({$wpdb->postmeta}.post_id = {$wpdb->prefix}icl_translations.element_id) WHERE ";
+		if($matching_id_filter){
+			$sql_query .="post_id IN ($matching_id_filter)";
+		}
+		if($meta_key){
+			$sql_query .="AND meta_key ='$meta_key'";
+		}
+		if($specific){
+			$sql_query .=" AND ".$specific;
+		}
+		$sql_query .= " AND {$wpdb->prefix}icl_translations.language_code ='".ICL_LANGUAGE_CODE."' GROUP BY post_id";
+
+	  	$matching_ids = $wpdb->get_col($sql_query);
+		return $matching_ids;
+		
+	  }
+	  /*
+	  *
+	  *
+	  */
+	  public function add_string_translation($str_name){
+	  	
+	  }
 }
 
 }

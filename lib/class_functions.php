@@ -2980,7 +2980,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       if( !isset( $limit_query ) ) {
         $limit_query = '';
       }
-
+	  $wpml = new UsabilityDynamics\WPP\WPML();
       switch( $meta_key ) {
 
         case 'property_type':
@@ -2991,7 +2991,7 @@ class WPP_F extends UsabilityDynamics\Utility {
               $matching_id_filter = implode( "' OR ID ='", $matching_ids );
               $matching_ids       = $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE (ID ='$matching_id_filter' ) AND post_type = 'property'" );
             } else {
-				$wpml = new UsabilityDynamics\WPP\WPML();
+				
 				if($wpml->is_active){
 					$matching_ids = $wpml->get_matching_ids_by_lang();
 				}else{
@@ -3046,7 +3046,11 @@ class WPP_F extends UsabilityDynamics\Utility {
               $matching_id_filter = implode( "' OR post_id ='", $matching_ids );
               $matching_ids       = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE (post_id ='$matching_id_filter' ) AND ( meta_key = '$meta_key' )" );
             } else {
-              $matching_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE (meta_key = '$meta_key' )" );
+			  if($wpml->is_active){
+					$matching_ids = $wpml->filtering_matching_ids( $meta_key );
+			  }else{
+              	$matching_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE (meta_key = '$meta_key' )" );
+			  }
             }
             break;
 
@@ -3123,8 +3127,11 @@ class WPP_F extends UsabilityDynamics\Utility {
               'matching_id_filter' => isset( $matching_id_filter ) ? $matching_id_filter : false,
               'criteria'           => $criteria,
             ) );
-
-            $matching_ids = $wpdb->get_col( $sql_query );
+			if($wpml->is_active){
+				$matching_ids = $wpml->filtering_matching_ids($meta_key,$specific,$matching_id_filter);
+			}else{
+            	$matching_ids = $wpdb->get_col( $sql_query );
+			}
 
           }
           break;
