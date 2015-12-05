@@ -99,7 +99,11 @@ class WPML{
 			$sql_query .="post_id IN ($matching_id_filter)";
 		}
 		if($meta_key){
-			$sql_query .="AND meta_key ='$meta_key'";
+			if($matching_id_filter){
+				$sql_query .="AND meta_key ='$meta_key'";
+			}else{
+				$sql_query .="meta_key ='$meta_key'";
+			}
 		}
 		if($specific){
 			$sql_query .=" AND ".$specific;

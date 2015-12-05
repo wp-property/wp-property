@@ -3026,7 +3026,12 @@ class WPP_F extends UsabilityDynamics\Utility {
             $matching_id_filter = implode( "' OR post_id ='", $matching_ids );
             $matching_ids       = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE (post_id ='$matching_id_filter' ) AND ( meta_key = 'property_type' AND (meta_value ='$where_string' ))" );
           } else {
-            $matching_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE (meta_key = 'property_type' AND (meta_value ='$where_string' ))" );
+			if($wpml->is_active){
+				$wpml_property_type = "(meta_value ='$where_string')";
+				$matching_ids = $wpml->filtering_matching_ids('property_type',$wpml_property_type);
+			}else{
+            	$matching_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE (meta_key = 'property_type' AND (meta_value ='$where_string' ))" );
+			}
           }
 
           break;
@@ -3117,7 +3122,11 @@ class WPP_F extends UsabilityDynamics\Utility {
               $matching_id_filter = implode( ",", $matching_ids );
               $sql_query          = "SELECT post_id FROM {$wpdb->postmeta} WHERE post_id IN ( $matching_id_filter ) AND meta_key = '$meta_key' AND $specific";
             } else {
-              $sql_query = "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '$meta_key' AND $specific";
+			  if($wpml->is_active){
+              	  $wpml->filtering_matching_ids($meta_key,$specific);
+			  }else{
+				  $sql_query = "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '$meta_key' AND $specific";
+			  }
             }
 
             //** Some specific additional conditions can be set in filters */
