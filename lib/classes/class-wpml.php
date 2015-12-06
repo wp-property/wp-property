@@ -115,11 +115,24 @@ class WPML{
 		
 	  }
 	  /*
-	  *
-	  *
+	  * Add dynamic elements to translation
+	  * @params
+	  * @package_name - string // types under developer tab
+	  * @str_name - string // the element need translation
+	  * @author Fadi Yousef frontend-expert@outlook.com
 	  */
-	  public function add_string_translation($str_name){
-	  	
+	  public function translate_property_types($types){
+		  global $wpp_settings;
+		  $package = array(
+		  	'kind' => 'property_types',
+			'name' => 'property-types',
+			'title' => 'Property Types',
+		  );
+		  foreach($types as $key => $type){
+			  $str_name = 'property_type_'.$key;
+		  	  do_action('wpml_register_string', $str_name , $key , $package , $type , 'LINE'); 
+		  }
+		  //echo '<pre>';print_r($types);echo '</pre>';exit();
 	  }
 }
 

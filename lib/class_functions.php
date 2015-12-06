@@ -2355,6 +2355,10 @@ class WPP_F extends UsabilityDynamics\Utility {
           }
         }
       }
+	  $wpml = new UsabilityDynamics\WPP\WPML();
+	  if( $wpml->is_active ){
+		  $wpml->translate_property_types( $wpp_settings['property_types'] );
+	  }
       update_option( 'wpp_settings', $wpp_settings );
       do_action( 'wpp::save_settings', $data );
       /* Remove all WordPress cache items. */
