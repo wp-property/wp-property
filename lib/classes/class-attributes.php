@@ -99,7 +99,6 @@ namespace UsabilityDynamics\WPP {
          */
         ud_get_wp_property()->set('attributes.multiple', array(
           'multi_checkbox',
-          'checkbox_list',
           'image_advanced',
           'file_advanced',
         ) );
