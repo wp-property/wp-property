@@ -119,7 +119,9 @@ $wpml = new UsabilityDynamics\WPP\WPML();
   <?php endforeach; ?>
   </tbody>
 	<?php
-		$wpml->translate_property_types($wp_properties[ 'property_types' ]);
+    if($wpml->is_active){
+		  $wpml->translate_property_types($wp_properties[ 'property_types' ]);
+    }
 	?>
   <tfoot>
   <tr>
