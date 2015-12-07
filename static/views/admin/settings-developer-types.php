@@ -118,11 +118,6 @@ $wpml = new UsabilityDynamics\WPP\WPML();
     </tr>
   <?php endforeach; ?>
   </tbody>
-	<?php
-    if($wpml->is_active){
-		  $wpml->translate_property_types($wp_properties[ 'property_types' ]);
-    }
-	?>
   <tfoot>
   <tr>
     <td colspan='5'>

@@ -2161,3 +2161,37 @@ body.post-type-property {
   }
 
 }
+.lang_subsubsub{
+  list-style:none;
+  margin:8px 0 0;
+  padding:0;
+  font-size:13px;
+  color:#666;
+  li{
+    display:inline-block;
+    margin:0;
+    padding:0;
+    white-space:nowrap;
+    &:after{
+      content:" |";
+    }
+    &:last-child:after{
+      content:"";
+    }
+  }
+  a{
+    line-height:2;
+    padding:.2em;
+    text-decoration:none;
+    &.current{
+      font-weight:600;
+      border:none;
+      color:#000;
+    }
+    &.count,&.current .count{
+      color:#999;
+      font-weight:400;
+    }
+    
+  }
+}

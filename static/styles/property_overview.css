@@ -3,9 +3,12 @@
   margin: 0;
 }
 .wpp_property_overview_shortcode .properties_pagination .pagination-numeric ul.property-overview-navigation:after {
-  content: " ";
+  content: "&nbsp;";
   clear: both;
-  display: table;
+  height: 1px;
+  font-size: 1px;
+  line-height: 1px;
+  margin-top: -1px;
 }
 .wpp_property_overview_shortcode .properties_pagination .pagination-numeric ul.property-overview-navigation li {
   list-style: none;
