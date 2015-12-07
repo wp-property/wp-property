@@ -17,7 +17,7 @@ namespace UsabilityDynamics\WPP {
   
     add_filter( 'wpp::get_properties::matching_ids',array($this, 'filtering_matching_ids') );
     add_action( 'wpp::above_list_table',array($this, 'display_languages' ) );
-    add_action( 'wpp::save_settings',array($this, 'translate_property_types'),10,1 );
+    add_action( 'wpp::save_settings',array($this, 'translate_property_types_attributes'),10,1 );
   }
   /*
   * get properity posts count by language code
@@ -97,20 +97,33 @@ namespace UsabilityDynamics\WPP {
     * @str_name - string // the element need translation
     * @author Fadi Yousef frontend-expert@outlook.com
     */
-    public function translate_property_types($data){
-    $package = array(
-      'kind' => 'Property Types',
-      'name' => 'custom-types',
-    'title' => 'Property Types',
-    );
-    //echo '<pre>';print_r($data);echo '</pre>';exit();
-    $types = $data['wpp_settings'][ 'property_types' ];
-    foreach($types as $key => $type){
-      do_action('wpml_register_string', $type , $key , $package , $type , 'LINE'); 
+    public function translate_property_types_attributes($data){
+      $type_package = array(
+        'kind' => 'Property Types',
+        'name' => 'custom-types',
+      'title' => 'Property Types',
+      );
+      
+      $types = $data['wpp_settings'][ 'property_types' ];
+      foreach($types as $key => $type){
+        do_action('wpml_register_string', $type , $key , $type_package , $type , 'LINE'); 
+      }
+      
+      $attributes_package = array(
+        'kind' => 'Property Attributes',
+        'name' => 'custom-attributes',
+      'title' => 'Property Attributes',
+      );
+      $attributes = $data['wpp_settings']['property_stats'];
+      foreach($attributes as $key => $attibute){
+        do_action('wpml_register_string', $attibute , $key , $attributes_package , $attibute , 'LINE'); 
+        //add_filter( "wpp_stat_filter_$key",array($this,'get_attribute_translation'),10,$key );
+      }
+    //echo '<pre>';print_r($data['wpp_settings']['property_stats']);echo '</pre>';exit();
     }
-    //echo '<pre>';print_r($types);echo '</pre>';exit();
+    public function get_attribute_translation($v){
+      //echo '<pre>';print_r($v);echo '</pre>';exit();
     }
-   
   }
 
 }
