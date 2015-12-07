@@ -5,7 +5,7 @@
  */
 
 global $wp_properties;
-
+$wpml = new UsabilityDynamics\WPP\WPML();
 ?>
 <h3><?php printf( __( '%1s Types', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></h3>
 <table id="wpp_inquiry_property_types" class="ud_ui_dynamic_table widefat" allow_random_slug="true">
@@ -116,10 +116,11 @@ global $wp_properties;
       </td>
 
     </tr>
-
   <?php endforeach; ?>
   </tbody>
-
+	<?php
+		$wpml->translate_property_types($wp_properties[ 'property_types' ]);
+	?>
   <tfoot>
   <tr>
     <td colspan='5'>

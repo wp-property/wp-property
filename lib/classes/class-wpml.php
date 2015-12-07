@@ -122,15 +122,13 @@ class WPML{
 	  * @author Fadi Yousef frontend-expert@outlook.com
 	  */
 	  public function translate_property_types($types){
-		  global $wpp_settings;
 		  $package = array(
-		  	'kind' => 'property_types',
-			'name' => 'property-types',
+		  	'kind' => 'Property Types',
+			'name' => 'custom-types',
 			'title' => 'Property Types',
 		  );
 		  foreach($types as $key => $type){
-			  $str_name = 'property_type_'.$key;
-		  	  do_action('wpml_register_string', $str_name , $key , $package , $type , 'LINE'); 
+		  	  do_action('wpml_register_string', $type , $key , $package , $type , 'LINE'); 
 		  }
 		  //echo '<pre>';print_r($types);echo '</pre>';exit();
 	  }

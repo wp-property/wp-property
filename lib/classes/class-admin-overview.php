@@ -281,11 +281,11 @@ namespace UsabilityDynamics\WPP {
        * Render List Table in Overview Meta Box
        */
       public function render_list_table() {
-		$wpp_wpml = new WPML();
+		    $wpp_wpml = new WPML();
 
-		if( $wpp_wpml->is_active){
-			$wpp_wpml->display_languages();
-		}
+        if( $wpp_wpml->is_active){
+          $wpp_wpml->display_languages();
+        }
         $this->list_table->prepare_items();
         $this->list_table->display();
       }
