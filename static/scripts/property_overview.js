@@ -242,9 +242,10 @@
       /** Maybe, render 'last' page link */
       if( show_last ) {
         //c.append( '<li class="dots">...</li>' );
-        c.append( '<li data-page="' + ( number + 1 ) + '" class="previous-page-btn"><a href="javascript:;" class="btn button">' + l10n.next + '</a></li>' );
+        c.append( '<li data-page="' + ( number + 1 ) + '" class="next-page-btn"><a href="javascript:;" class="btn button">' + l10n.next + '</a></li>' );
         c.append( '<li data-page="' + query.pages + '" class="last-page-btn"><a href="javascript:;" class="btn button">' + l10n.last + '</a></li>' );
       }
+      jQuery(document).trigger('filter::pagination', [c]);
       /** Update our HTML */
       el.html( c );
       /** Add 'click' events for our links */
@@ -298,6 +299,8 @@
       if ( scroll_to ) {
         jQuery( document ).trigger( 'wpp_pagination_change', {'overview_id': unique_id} );
       }
+      
+      jQuery( document ).trigger( 'wpp_pagination_change_start', {'overview_id': unique_id} );
 
       data = window.wpp_query[ unique_id ];
       data.ajax_call = 'true';
