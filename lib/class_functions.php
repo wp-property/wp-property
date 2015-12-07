@@ -3515,10 +3515,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     $defaults = array(
       'label_as_key' => 'true',
     );
-    $return_multi = array(
-                  'image_advanced',
-                  'file_advanced',
-                 );
+    $return_multi = ud_get_wp_property( 'attributes.multiple', array() );
     if( is_array( $property_object ) ) {
       $property_object = (object) $property_object;
     }

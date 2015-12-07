@@ -91,6 +91,12 @@ global $wp_properties;
               <?php _e( 'Add Column on "All Properties" page.', ud_get_wp_property()->domain ); ?>
             </label>
           </li>
+          <li class="wpp_development_advanced_option">
+            <label>
+              <input <?php echo ( isset( $wp_properties[ 'en_default_value' ] ) && is_array( $wp_properties[ 'en_default_value' ] ) && in_array( $slug, $wp_properties[ 'en_default_value' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug en_default_value" name="wpp_settings[en_default_value][]" value="<?php echo $slug; ?>"/>
+              <?php _e( 'Enable deafult value assign.', ud_get_wp_property()->domain ); ?>
+            </label>
+          </li>
           <?php do_action( 'wpp::property_attributes::settings', $slug ); ?>
           <li class="wpp_development_advanced_option">
             <span class="wpp_delete_row wpp_link"><?php _e( 'Delete Attribute', ud_get_wp_property()->domain ) ?></span>
@@ -132,6 +138,10 @@ global $wp_properties;
           </li>
           <li>
             <textarea class="wpp_attribute_pre_defined_values" name="wpp_settings[predefined_values][<?php echo $slug; ?>]"><?php echo isset( $wp_properties[ 'predefined_values' ][ $slug ] ) ? $wp_properties[ 'predefined_values' ][ $slug ] : ''; ?></textarea>
+          </li>
+          <li>
+          <?php $class = (isset( $wp_properties[ 'en_default_value' ] ) && is_array( $wp_properties[ 'en_default_value' ] ) && in_array( $slug, $wp_properties[ 'en_default_value' ] ) )? "show":"hidden"; ?>
+            <textarea class="wpp_attribute_default_values <?php echo $class;?>" name="wpp_settings[default_values][<?php echo $slug; ?>]" placeholder="Default Value"><?php echo isset( $wp_properties[ 'default_values' ][ $slug ] ) ? $wp_properties[ 'default_values' ][ $slug ] : ''; ?></textarea>
           </li>
         </ul>
       </td>

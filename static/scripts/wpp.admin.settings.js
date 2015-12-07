@@ -221,6 +221,14 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
 
     } );
 
+    jQuery(document).on('change', '.en_default_value', function(){
+      var _this = jQuery(this);
+      if(this.checked)
+        _this.closest('td').siblings('td.wpp_admin_input_col').find('.wpp_attribute_default_values').show();
+      else
+        _this.closest('td').siblings('td.wpp_admin_input_col').find('.wpp_attribute_default_values').hide();
+    });
+
     //* Stats to group functionality */
     jQuery( '.wpp_attribute_group' ).wppGroups();
 

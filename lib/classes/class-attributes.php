@@ -101,7 +101,7 @@ namespace UsabilityDynamics\WPP {
           'multi_checkbox',
           'checkbox_list',
           'image_advanced',
-          'file_advanced ',
+          'file_advanced',
         ) );
 
         /** Fix numeric/currency logic */
