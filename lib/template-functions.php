@@ -657,7 +657,8 @@ if ( !function_exists( 'draw_stats' ) ):
       foreach ( $stats as $tag => $data ) {
         
         $label = apply_filters('wpp::attribute::label', $data[ 'label' ]);
-        $value = $data[ 'value' ];
+        //check if the tag is property type to get the translated value for it
+        ($tag == 'property_type') ? $value = apply_filters('wpp_stat_filter_property_type',$data[ 'value' ]) : $value = $data[ 'value' ];
         $alt = ( $alt == "alt" ) ? "" : "alt";
         
         switch ( $display ) {
