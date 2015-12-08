@@ -121,6 +121,16 @@ namespace UsabilityDynamics\WPP {
       foreach($attributes as $key => $attibute){
         do_action('wpml_register_string', $attibute , $key , $attributes_package , $attibute , 'LINE'); 
       }
+      
+      $meta_package = array(
+        'kind' => 'Property Meta',
+        'name' => 'custom-meta',
+      'title' => 'Property Meta',
+      );
+      $metas = $data['wpp_settings']['property_meta'];
+      foreach($metas as $key => $meta){
+        do_action('wpml_register_string', $meta , $key , $meta_package , $meta , 'LINE'); 
+      }
     }
     /*
     * Get translated text for property types 
