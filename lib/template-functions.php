@@ -716,7 +716,8 @@ if ( !function_exists( 'draw_stats' ) ):
             <?php foreach ( $gstats as $tag => $data ) : ?>
               <?php
               $label = apply_filters('wpp::attribute::label',$data[ 'label' ]);
-              $value = $data[ 'value' ];
+              //check if the tag is property type to get the translated value for it
+              ($tag == 'property_type') ? $value = apply_filters('wpp_stat_filter_property_type',$data[ 'value' ]) : $value = $data[ 'value' ];
               ?>
               <?php $alt = ( $alt == "alt" ) ? "" : "alt"; ?>
               <dt class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_dt_<?php echo $tag; ?>"><?php echo $label; ?></dt>
@@ -732,7 +733,8 @@ if ( !function_exists( 'draw_stats' ) ):
             <?php foreach ( $gstats as $tag => $data ) : ?>
               <?php
               $label = apply_filters('wpp::attribute::label',$data[ 'label' ]);
-              $value = $data[ 'value' ];
+              //check if the tag is property type to get the translated value for it
+              ($tag == 'property_type') ? $value = apply_filters('wpp_stat_filter_property_type',$data[ 'value' ]) : $value = $data[ 'value' ];
               $alt = ( $alt == "alt" ) ? "" : "alt";
               ?>
               <li class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_plain_list_<?php echo $tag; ?> <?php echo $alt; ?>">
@@ -746,7 +748,8 @@ if ( !function_exists( 'draw_stats' ) ):
           case 'plain_list':
             foreach ( $gstats as $tag => $data ) {
               $label = apply_filters('wpp::attribute::label',$data[ 'label' ]);
-              $value = $data[ 'value' ];
+              //check if the tag is property type to get the translated value for it
+              ($tag == 'property_type') ? $value = apply_filters('wpp_stat_filter_property_type',$data[ 'value' ]) : $value = $data[ 'value' ];
               ?>
               <span class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> attribute"><?php echo $label; ?>:</span>
               <span class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> value"><?php echo $value; ?>&nbsp;</span>
