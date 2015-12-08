@@ -19,6 +19,7 @@ namespace UsabilityDynamics\WPP {
     add_action( 'wpp::above_list_table',array($this, 'display_languages' ) );
     add_action( 'wpp::save_settings',array($this, 'translate_property_types_attributes'),10,1 );
     add_filter( "wpp::search_attribute::label", array($this,"get_attribute_translation") );
+    add_filter( "wpp::attribute::label", array($this,"get_attribute_translation") );
     add_filter( "wpp_stat_filter_property_type", array($this,"get_property_type_translation") );
   }
   /*

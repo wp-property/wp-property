@@ -656,7 +656,7 @@ if ( !function_exists( 'draw_stats' ) ):
 
       foreach ( $stats as $tag => $data ) {
         
-        $label = $data[ 'label' ];
+        $label = apply_filters('wpp::attribute::label', $data[ 'label' ]);
         $value = $data[ 'value' ];
         $alt = ( $alt == "alt" ) ? "" : "alt";
         
