@@ -714,7 +714,7 @@ if ( !function_exists( 'draw_stats' ) ):
             <dl class="wpp_property_stats overview_stats">
             <?php foreach ( $gstats as $tag => $data ) : ?>
               <?php
-              $label = $data[ 'label' ];
+              $label = apply_filters('wpp::attribute::label',$data[ 'label' ]);
               $value = $data[ 'value' ];
               ?>
               <?php $alt = ( $alt == "alt" ) ? "" : "alt"; ?>
@@ -730,7 +730,7 @@ if ( !function_exists( 'draw_stats' ) ):
             <ul class="overview_stats wpp_property_stats list">
             <?php foreach ( $gstats as $tag => $data ) : ?>
               <?php
-              $label = $data[ 'label' ];
+              $label = apply_filters('wpp::attribute::label',$data[ 'label' ]);
               $value = $data[ 'value' ];
               $alt = ( $alt == "alt" ) ? "" : "alt";
               ?>
@@ -744,7 +744,7 @@ if ( !function_exists( 'draw_stats' ) ):
             break;
           case 'plain_list':
             foreach ( $gstats as $tag => $data ) {
-              $label = $data[ 'label' ];
+              $label = apply_filters('wpp::attribute::label',$data[ 'label' ]);
               $value = $data[ 'value' ];
               ?>
               <span class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> attribute"><?php echo $label; ?>:</span>
