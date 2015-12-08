@@ -18,6 +18,8 @@ namespace UsabilityDynamics\WPP {
     add_filter( 'wpp::get_properties::matching_ids',array($this, 'filtering_matching_ids') );
     add_action( 'wpp::above_list_table',array($this, 'display_languages' ) );
     add_action( 'wpp::save_settings',array($this, 'translate_property_types_attributes'),10,1 );
+    add_filter( "wpp::search_attribute::label", array($this,"get_attribute_translation") );
+    add_filter( "wpp_stat_filter_property_type", array($this,"get_property_type_translation") );
   }
   /*
   * get properity posts count by language code
@@ -117,12 +119,31 @@ namespace UsabilityDynamics\WPP {
       $attributes = $data['wpp_settings']['property_stats'];
       foreach($attributes as $key => $attibute){
         do_action('wpml_register_string', $attibute , $key , $attributes_package , $attibute , 'LINE'); 
-        //add_filter( "wpp_stat_filter_$key",array($this,'get_attribute_translation'),10,$key );
       }
-    //echo '<pre>';print_r($data['wpp_settings']['property_stats']);echo '</pre>';exit();
     }
-    public function get_attribute_translation($v){
-      //echo '<pre>';print_r($v);echo '</pre>';exit();
+    /*
+    * Get translated text for property types 
+    * @auther Fadi Yousef
+    */
+    public function get_property_type_translation($v){
+      $type_package = array(
+        'kind' => 'Property Types',
+        'name' => 'custom-types',
+      'title' => 'Property Types',
+      );
+      return apply_filters( 'wpml_translate_string', $v,$v, $type_package );
+    }
+    /*
+    * Get translated text for property attributes 
+    * @auther Fadi Yousef
+    */
+    public function get_attribute_translation($v,$attrib=false){
+      $attributes_package = array(
+        'kind' => 'Property Attributes',
+        'name' => 'custom-attributes',
+      'title' => 'Property Attributes',
+      );
+      return apply_filters( 'wpml_translate_string', $v,$v, $attributes_package );
     }
   }
 
