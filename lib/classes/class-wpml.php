@@ -21,7 +21,6 @@ namespace UsabilityDynamics\WPP {
     add_filter( "wpp::search_attribute::label", array($this,"get_attribute_translation") );
     add_filter( "wpp::attribute::label", array($this,"get_attribute_translation") );
     add_filter( "wpp_stat_filter_property_type", array($this,"get_property_type_translation") );
-    add_filter( "wpp::meta::label", array($this,"get_property_meta_translation") );
     
   }
   /*
@@ -176,12 +175,47 @@ namespace UsabilityDynamics\WPP {
     * @auther Fadi Yousef
     */
     public function get_attribute_translation($v){
-      $attributes_package = array(
-        'kind' => 'Property Attributes',
-        'name' => 'custom-attributes',
-      'title' => 'Property Attributes',
-      );
-      return apply_filters( 'wpml_translate_string', $v,$v, $attributes_package );
+      global $wp_properties;
+      $attributes = $wp_properties['property_stats'];
+      $property_types = $wp_properties['property_types'];
+      $property_meta = $wp_properties['property_meta'];
+      $property_terms = $wp_properties['taxonomies'];
+      
+      if( $attr_key = array_search($v,$attributes) ){
+        $attributes_package = array(
+          'kind' => 'Property Attributes',
+          'name' => 'custom-attributes',
+        'title' => 'Property Attributes',
+        );
+        return apply_filters( 'wpml_translate_string', $v,$v, $attributes_package );
+        
+      }elseif( $type_key = array_search($v,$property_types) ){
+        $type_package = array(
+          'kind' => 'Property Types',
+          'name' => 'custom-types',
+        'title' => 'Property Types',
+        );
+        return apply_filters( 'wpml_translate_string', $v,$v, $type_package );
+        
+      }elseif( $meta_key = array_search($v,$property_meta) ){
+        $meta_package = array(
+          'kind' => 'Property Meta',
+          'name' => 'custom-meta',
+        'title' => 'Property Meta',
+        );
+        return apply_filters( 'wpml_translate_string', $v,$v, $meta_package );
+        
+      }elseif( $term_key = array_search($v,$property_terms) ){
+        $terms_package = array(
+          'kind' => 'Property Term',
+          'name' => 'custom-term',
+        'title' => 'Property Term',
+        );
+        return apply_filters( 'wpml_translate_string', $v,$v, $terms_package );
+      }else{
+        return; 
+      }
+      
     }
     /*
     * Get translated text for property meta 
