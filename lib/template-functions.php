@@ -496,7 +496,7 @@ if ( !function_exists( 'draw_stats' ) ):
           continue;
         }
         if ( !empty( $property->$k ) ) {
-          $property_stats[ $k ] = array( 'label' => $v, 'value' => $property->$k );
+          $property_stats[ $k ] = array( 'label' => apply_filters('wpp::meta::label',$v), 'value' => $property->$k ); 
         }
       }
     } else {

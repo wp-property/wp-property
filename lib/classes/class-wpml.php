@@ -21,6 +21,8 @@ namespace UsabilityDynamics\WPP {
     add_filter( "wpp::search_attribute::label", array($this,"get_attribute_translation") );
     add_filter( "wpp::attribute::label", array($this,"get_attribute_translation") );
     add_filter( "wpp_stat_filter_property_type", array($this,"get_property_type_translation") );
+    add_filter( "wpp::meta::label", array($this,"get_property_meta_translation") );
+    
   }
   /*
   * get properity posts count by language code
@@ -101,9 +103,6 @@ namespace UsabilityDynamics\WPP {
     * @author Fadi Yousef frontend-expert@outlook.com
     */
     public function translate_property_types_attributes($data){
-      $translates_ptypes = '';
-      //icl_unregister_string ( string $context, string $name );
-      //echo '<pre>';print_r($data);echo '</pre>';exit();
       
       $type_package = array(
         'kind' => 'Property Types',
@@ -144,6 +143,21 @@ namespace UsabilityDynamics\WPP {
       foreach($metas as $key => $meta){
         do_action('wpml_register_string', $meta , $key , $meta_package , $meta , 'LINE'); 
       }
+      
+      $terms_package = array(
+        'kind' => 'Property Term',
+        'name' => 'custom-term',
+      'title' => 'Property Term',
+      );
+      $wpp_terms = $data['wpp_terms']['taxonomies'];
+      
+      $this->delete_strings_translation( $terms_package, $wpp_terms );
+      
+      foreach($wpp_terms as $key => $term){
+        do_action('wpml_register_string', $term['label'] , $key , $terms_package , $term['label'] , 'LINE'); 
+      }
+      
+      //echo '<pre>';print_r($wpp_terms);echo '</pre>';exit();
     }
     /*
     * Get translated text for property types 
@@ -161,7 +175,7 @@ namespace UsabilityDynamics\WPP {
     * Get translated text for property attributes 
     * @auther Fadi Yousef
     */
-    public function get_attribute_translation($v,$attrib=false){
+    public function get_attribute_translation($v){
       $attributes_package = array(
         'kind' => 'Property Attributes',
         'name' => 'custom-attributes',
@@ -170,8 +184,20 @@ namespace UsabilityDynamics\WPP {
       return apply_filters( 'wpml_translate_string', $v,$v, $attributes_package );
     }
     /*
-    *
-    *
+    * Get translated text for property meta 
+    * @auther Fadi Yousef
+    */
+    public function get_property_meta_translation($v){
+      $meta_package = array(
+        'kind' => 'Property Meta',
+        'name' => 'custom-meta',
+      'title' => 'Property Meta',
+      );
+      return apply_filters( 'wpml_translate_string', $v,$v, $meta_package );
+    }
+    /*
+    * delete string keys from translation when deleted from the setting
+    * @auther Fadi Yousef frontend-expert@outlook.com
     */
     public function delete_strings_translation($package,$values){
       global $wpdb;
@@ -183,7 +209,7 @@ namespace UsabilityDynamics\WPP {
           icl_unregister_string ($context,$item);
         }
       }
-      
+     
     }
   }
 
