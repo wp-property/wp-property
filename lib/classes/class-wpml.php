@@ -101,6 +101,10 @@ namespace UsabilityDynamics\WPP {
     * @author Fadi Yousef frontend-expert@outlook.com
     */
     public function translate_property_types_attributes($data){
+      $translates_ptypes = '';
+      //icl_unregister_string ( string $context, string $name );
+      //echo '<pre>';print_r($data);echo '</pre>';exit();
+      
       $type_package = array(
         'kind' => 'Property Types',
         'name' => 'custom-types',
@@ -108,6 +112,9 @@ namespace UsabilityDynamics\WPP {
       );
       
       $types = $data['wpp_settings'][ 'property_types' ];
+      
+      $this->delete_strings_translation( $type_package, $types );
+      
       foreach($types as $key => $type){
         do_action('wpml_register_string', $type , $key , $type_package , $type , 'LINE'); 
       }
@@ -118,6 +125,9 @@ namespace UsabilityDynamics\WPP {
       'title' => 'Property Attributes',
       );
       $attributes = $data['wpp_settings']['property_stats'];
+      
+      $this->delete_strings_translation( $attributes_package, $attributes );
+      
       foreach($attributes as $key => $attibute){
         do_action('wpml_register_string', $attibute , $key , $attributes_package , $attibute , 'LINE'); 
       }
@@ -128,6 +138,9 @@ namespace UsabilityDynamics\WPP {
       'title' => 'Property Meta',
       );
       $metas = $data['wpp_settings']['property_meta'];
+      
+      $this->delete_strings_translation( $meta_package, $metas );
+      
       foreach($metas as $key => $meta){
         do_action('wpml_register_string', $meta , $key , $meta_package , $meta , 'LINE'); 
       }
@@ -155,6 +168,22 @@ namespace UsabilityDynamics\WPP {
       'title' => 'Property Attributes',
       );
       return apply_filters( 'wpml_translate_string', $v,$v, $attributes_package );
+    }
+    /*
+    *
+    *
+    */
+    public function delete_strings_translation($package,$values){
+      global $wpdb;
+      $context = str_replace(' ','-',strtolower( $package['kind'] ) ).'-'.$package['name'];
+      $sql = "SELECT name FROM {$wpdb->prefix}icl_strings WHERE context ='{$context}'";
+      $result = $wpdb->get_col($sql);
+      foreach($result as $key => $item){
+        if( array_key_exists($item,$values) == false ){
+          icl_unregister_string ($context,$item);
+        }
+      }
+      
     }
   }
 
