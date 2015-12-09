@@ -555,7 +555,7 @@ if ( !function_exists( 'draw_stats' ) ):
       if(!is_array($value))
         $value = html_entity_decode( $value );
 
-      if ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'image_advanced') {
+      if ( is_array($value) && isset( $attribute_data[ 'data_input_type' ] ) && ($attribute_data[ 'data_input_type' ] == 'image_advanced' || $attribute_data[ 'data_input_type' ] == 'image_upload')) {
         $imgs = implode(',', $value);
         $img_html = do_shortcode("[gallery ids='$imgs']");
         $value = "<ul>" . $img_html . "</ul>";
@@ -626,6 +626,7 @@ if ( !function_exists( 'draw_stats' ) ):
       //* Make URLs into clickable links */
       if ( $make_link == 'true' && WPP_F::isURL( $value ) ) {
         $value = str_replace( '&ndash;', '-', $value );
+        $label = $data['label'];
         $value = "<a href='{$value}' title='{$label}'>{$value}</a>";
       }
 

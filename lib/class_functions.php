@@ -3494,6 +3494,11 @@ class WPP_F extends UsabilityDynamics\Utility {
       $property_object = (object) $property_object;
     }
 
+    $property_types = $wp_properties['property_types'];
+    if( array_key_exists($property_object->property_type, $property_types))
+      $property_type = $property_object->property_type;
+    else
+      $property_type = array_search($property_object->property_type, $property_types);
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
     $exclude = isset( $exclude ) ? ( is_array( $exclude ) ? $exclude : explode( ',', $exclude ) ) : false;
@@ -3529,21 +3534,23 @@ class WPP_F extends UsabilityDynamics\Utility {
 
       $_property_object = $property_object;
       $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $slug );
+      $input_type = isset($attribute_data[ 'data_input_type' ])?$attribute_data[ 'data_input_type' ]:false;
+      
+      if(!$input_type)
+        $input_type = isset($attribute_data[ 'input_type' ])?$attribute_data[ 'input_type' ]: "";
 
+      $single = !in_array($input_type, $return_multi);
       if(is_object($parent_property_object) &&
-         in_array($attribute_data[ 'data_input_type' ], $return_multi) &&
-         isset($attribute_data['inheritance']) && in_array($property_object->property_type, $attribute_data['inheritance'])
+         isset($attribute_data['inheritance']) && 
+         in_array($property_type, $attribute_data['inheritance'])
       ){
         $_property_object = $parent_property_object;
       }
 
-      if(in_array($attribute_data[ 'data_input_type' ], $return_multi)){
-        $value = get_post_meta( $_property_object->ID, $slug );
-      }
-      elseif( !empty( $_property_object->{$slug} ) ) {
+      if($single && !empty( $_property_object->{$slug} ) ) {
         $value = $_property_object->{$slug};
       } else {
-        $value = get_post_meta( $_property_object->ID, $slug, true );
+        $value = get_post_meta( $_property_object->ID, $slug, $single );
       }
 
       if( $value === true ) {
