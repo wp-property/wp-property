@@ -13,100 +13,106 @@ namespace UsabilityDynamics\WPP {
 
   class WPML{
   
-  function __construct() {
-  
-    add_filter( 'wpp::get_properties::matching_ids',array($this, 'filtering_matching_ids') );
-    add_action( 'wpp::above_list_table',array($this, 'display_languages' ) );
-    add_action( 'wpp::save_settings',array($this, 'translate_property_types_attributes'),10,1 );
-    add_filter( "wpp::search_attribute::label", array($this,"get_attribute_translation") );
-    add_filter( "wpp::attribute::label", array($this,"get_attribute_translation") );
-    add_filter( "wpp_stat_filter_property_type", array($this,"get_property_type_translation") );
-    
-  }
-  /*
-  * get properity posts count by language code
-  * @param $lang string
-  * @author Fadi Yousef  frontend-expert@outlook.com
-  */
-  public function get_property_posts_count_bylang( $lang ){
-    global $sitepress;
-    $lang_now = $sitepress->get_current_language();
-    $lang_changed = 0;
-    if($lang_now != $lang){
-    $sitepress->switch_lang($lang);
-    $lang_changed = 1;
-    }
-    $args = array(
-    'posts_per_page' => -1,
-    'post_type' => 'property',
-    'suppress_filters' => false
-    );
-    $result = new \WP_Query($args);
-    if($lang_changed) $sitepress->switch_lang($lang_now);
-    return $result->post_count;
-  }
-  /**
-  * Display property Languages if WPML plugin is active
-  *
-  * @Author Fadi Yousef frontend-expert@outlook.com
-  */
-  public function display_languages(){
-    global $pagenow, $typenow;
-    if( 'property' === $typenow && 'edit.php' === $pagenow )
-    {
-    $curr_lang = apply_filters( 'wpml_current_language', NULL );
-    $languages = apply_filters( 'wpml_active_languages', NULL, 'orderby=id&order=desc' );
-    $all_count = 0;
-    if ( !empty( $languages ) ) {?>
-      <ul class="lang_subsubsub" style="clear:both">
-      <?php foreach( $languages as $l ):
-        $posts_count = $this->get_property_posts_count_bylang($l['language_code']);
-        $all_count += intval($posts_count);
-      ?>
-        <li class="<?php echo 'language_'.$l['language_code']; ?>">
-        <a href="<?php echo '?post_type=property&page=all_properties&lang='.$l['language_code']; ?>" class="<?php echo ($l['active']) ? 'current' : 'lang'; ?>"><?php echo $l['translated_name']; ?>
-        <span class="count">(<?php echo $posts_count; ?>)</span>
-        </a>
-        </li>
-      <?php endforeach;?>
-      <li class="language_all"><a href="?post_type=property&page=all_properties&lang=all" 
-    class="<?php if($curr_lang == 'all') echo 'current';  ?>"><?php echo __( 'All languages', 'sitepress' ).' ('.$all_count.')'; ?></a></li>
-      </ul>
-    <?php }	
-    }	
-  }
+    function __construct() {
 
-    /*
-    * get properties IDs by meta key
-    * @params:
-    * meta_key string
-    * @return array
-    * @author Fadi Yousef frontend-expert@outlook.com
-    */
-    public function filtering_matching_ids($matching_ids){
-    global $wpdb;
-    $matching_ids = implode(',',$matching_ids);
-    $sql_query = "SELECT post_id FROM {$wpdb->postmeta} 
-    LEFT JOIN {$wpdb->prefix}icl_translations ON 
-    ({$wpdb->postmeta}.post_id = {$wpdb->prefix}icl_translations.element_id) WHERE post_id IN ($matching_ids)";
-    $sql_query .= " AND {$wpdb->prefix}icl_translations.language_code ='".ICL_LANGUAGE_CODE."' GROUP BY post_id";
+      add_filter( 'wpp::get_properties::matching_ids',array($this, 'filtering_matching_ids') );
+      add_action( 'wpp::above_list_table',array($this, 'display_languages' ) );
+      add_action( 'wpp::save_settings',array($this, 'translate_property_types_attributes'),10,1 );
+      add_filter( "wpp::search_attribute::label", array($this,"get_attribute_translation") );
+      add_filter( "wpp::attribute::label", array($this,"get_attribute_translation") );
+      add_filter( "wpp_stat_filter_property_type", array($this,"get_property_type_translation") );
 
-    return $wpdb->get_col($sql_query);
-    
     }
-    /*
-    * Add dynamic elements to translation
-    * @params
-    * @package_name - string // types under developer tab
-    * @str_name - string // the element need translation
-    * @author Fadi Yousef frontend-expert@outlook.com
-    */
-    public function translate_property_types_attributes($data){
+
+    /**
+     * get properity posts count by language code
+     *
+     * @param $lang string
+     * @author Fadi Yousef  frontend-expert@outlook.com
+     */
+    public function get_property_posts_count_bylang( $lang ){
+      global $sitepress;
+      $lang_now = $sitepress->get_current_language();
+      $lang_changed = 0;
+      if($lang_now != $lang){
+        $sitepress->switch_lang($lang);
+        $lang_changed = 1;
+      }
+      $args = array(
+        'posts_per_page' => -1,
+        'post_type' => 'property',
+        'suppress_filters' => false
+      );
+      $result = new \WP_Query($args);
+      if($lang_changed) $sitepress->switch_lang($lang_now);
+      return $result->post_count;
+    }
+
+    /**
+     * Display property Languages if WPML plugin is active
+     *
+     * @Author Fadi Yousef frontend-expert@outlook.com
+     */
+    public function display_languages(){
+      global $pagenow, $typenow;
+      if( 'property' === $typenow && 'edit.php' === $pagenow )
+      {
+      $curr_lang = apply_filters( 'wpml_current_language', NULL );
+      $languages = apply_filters( 'wpml_active_languages', NULL, 'orderby=id&order=desc' );
+      $all_count = 0;
+      if ( !empty( $languages ) ) {?>
+        <ul class="lang_subsubsub" style="clear:both">
+        <?php foreach( $languages as $l ):
+          $posts_count = $this->get_property_posts_count_bylang($l['language_code']);
+          $all_count += intval($posts_count);
+        ?>
+          <li class="<?php echo 'language_'.$l['language_code']; ?>">
+          <a href="<?php echo '?post_type=property&page=all_properties&lang='.$l['language_code']; ?>" class="<?php echo ($l['active']) ? 'current' : 'lang'; ?>"><?php echo $l['translated_name']; ?>
+          <span class="count">(<?php echo $posts_count; ?>)</span>
+          </a>
+          </li>
+        <?php endforeach;?>
+        <li class="language_all"><a href="?post_type=property&page=all_properties&lang=all"
+      class="<?php if($curr_lang == 'all') echo 'current';  ?>"><?php echo __( 'All languages', 'sitepress' ).' ('.$all_count.')'; ?></a></li>
+        </ul>
+      <?php }
+      }
+    }
+
+    /**
+     * get properties IDs by meta key
+     *
+     * @params:
+     * meta_key string
+     * @return array
+     * @author Fadi Yousef frontend-expert@outlook.com
+     */
+    public function filtering_matching_ids( $matching_ids ){
+      global $wpdb;
+
+      $matching_ids = implode(',',$matching_ids);
+      $sql_query = "SELECT post_id FROM {$wpdb->postmeta}
+      LEFT JOIN {$wpdb->prefix}icl_translations ON
+      ({$wpdb->postmeta}.post_id = {$wpdb->prefix}icl_translations.element_id) WHERE post_id IN ($matching_ids)";
+      $sql_query .= " AND {$wpdb->prefix}icl_translations.language_code ='".ICL_LANGUAGE_CODE."' GROUP BY post_id";
+
+      return $wpdb->get_col($sql_query);
+    }
+
+    /**
+     * Add dynamic elements to translation
+     *
+     * @params
+     * @package_name - string // types under developer tab
+     * @str_name - string // the element need translation
+     * @author Fadi Yousef frontend-expert@outlook.com
+     */
+    public function translate_property_types_attributes( $data ){
       
       $type_package = array(
         'kind' => 'Property Types',
         'name' => 'custom-types',
-      'title' => 'Property Types',
+        'title' => 'Property Types',
       );
       
       $types = $data['wpp_settings'][ 'property_types' ];
@@ -120,7 +126,7 @@ namespace UsabilityDynamics\WPP {
       $attributes_package = array(
         'kind' => 'Property Attributes',
         'name' => 'custom-attributes',
-      'title' => 'Property Attributes',
+        'title' => 'Property Attributes',
       );
       $attributes = $data['wpp_settings']['property_stats'];
       
@@ -133,7 +139,7 @@ namespace UsabilityDynamics\WPP {
       $meta_package = array(
         'kind' => 'Property Meta',
         'name' => 'custom-meta',
-      'title' => 'Property Meta',
+        'title' => 'Property Meta',
       );
       $metas = $data['wpp_settings']['property_meta'];
       
@@ -146,7 +152,7 @@ namespace UsabilityDynamics\WPP {
       $terms_package = array(
         'kind' => 'Property Term',
         'name' => 'custom-term',
-      'title' => 'Property Term',
+        'title' => 'Property Term',
       );
       $wpp_terms = $data['wpp_terms']['taxonomies'];
       
@@ -166,7 +172,7 @@ namespace UsabilityDynamics\WPP {
       $type_package = array(
         'kind' => 'Property Types',
         'name' => 'custom-types',
-      'title' => 'Property Types',
+        'title' => 'Property Types',
       );
       return apply_filters( 'wpml_translate_string', $v,$v, $type_package );
     }
@@ -176,51 +182,59 @@ namespace UsabilityDynamics\WPP {
     */
     public function get_attribute_translation($v){
       global $wp_properties;
+
       $attributes = $wp_properties['property_stats'];
       $property_types = $wp_properties['property_types'];
       $property_meta = $wp_properties['property_meta'];
       $property_terms = $wp_properties['taxonomies'];
       
       if( $attr_key = array_search($v,$attributes) ){
+
         $attributes_package = array(
           'kind' => 'Property Attributes',
           'name' => 'custom-attributes',
-        'title' => 'Property Attributes',
+          'title' => 'Property Attributes',
         );
         return apply_filters( 'wpml_translate_string', $v,$v, $attributes_package );
         
-      }elseif( $type_key = array_search($v,$property_types) ){
+      } elseif( $type_key = array_search($v,$property_types) ){
+
         $type_package = array(
           'kind' => 'Property Types',
           'name' => 'custom-types',
-        'title' => 'Property Types',
+          'title' => 'Property Types',
         );
         return apply_filters( 'wpml_translate_string', $v,$v, $type_package );
         
-      }elseif( $meta_key = array_search($v,$property_meta) ){
+      } elseif( $meta_key = array_search($v,$property_meta) ){
         $meta_package = array(
           'kind' => 'Property Meta',
           'name' => 'custom-meta',
-        'title' => 'Property Meta',
+          'title' => 'Property Meta',
         );
         return apply_filters( 'wpml_translate_string', $v,$v, $meta_package );
         
       }elseif( $term_key = array_search($v,$property_terms) ){
+
         $terms_package = array(
           'kind' => 'Property Term',
           'name' => 'custom-term',
-        'title' => 'Property Term',
+          'title' => 'Property Term',
         );
         return apply_filters( 'wpml_translate_string', $v,$v, $terms_package );
+
       }else{
-        return; 
+
+        return;
+
       }
       
     }
-    /*
-    * Get translated text for property meta 
-    * @auther Fadi Yousef
-    */
+
+    /**
+     * Get translated text for property meta
+     * @auther Fadi Yousef
+     */
     public function get_property_meta_translation($v){
       $meta_package = array(
         'kind' => 'Property Meta',
@@ -229,10 +243,11 @@ namespace UsabilityDynamics\WPP {
       );
       return apply_filters( 'wpml_translate_string', $v,$v, $meta_package );
     }
-    /*
-    * delete string keys from translation when deleted from the setting
-    * @auther Fadi Yousef frontend-expert@outlook.com
-    */
+
+    /**
+     * delete string keys from translation when deleted from the setting
+     * @auther Fadi Yousef frontend-expert@outlook.com
+     */
     public function delete_strings_translation($package,$values){
       global $wpdb;
       $context = str_replace(' ','-',strtolower( $package['kind'] ) ).'-'.$package['name'];
