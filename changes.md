@@ -1,5 +1,10 @@
 ### 2.1.5
+* Added compatibility with WPML plugin.
 * Removed 'Images Upload' data entry for attribute since it duplicated 'Image Upload'.
+* Changed Agent definer from ID to email in wp-property export feed.
+* Fixed inherited values for non text attributes.
+* Fixed values rendering for 'Image Upload', 'File Upload' attributes on Single Property page.
+* Fixed 'Next' button's event in numeric pagination for property overview.
 
 ### 2.1.4 ( November 26, 2015 )
 * Property Attributes widget is not shown anymore if no data found.
