@@ -273,7 +273,7 @@ namespace UsabilityDynamics\WPP {
       foreach( $taxonomies as $key => $tax ){
         $taxonomies[$key]['label'] = apply_filters( 'wpml_translate_string', $key,$key, $terms_package );
       }
-
+      return $taxonomies;
     }
     
   }
