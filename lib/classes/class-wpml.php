@@ -162,7 +162,6 @@ namespace UsabilityDynamics\WPP {
         do_action('wpml_register_string', $term['label'] , $key , $terms_package , $term['label'] , 'LINE'); 
       }
       
-      //echo '<pre>';print_r($wpp_terms);echo '</pre>';exit();
     }
     /*
     * Get translated text for property types 
@@ -271,7 +270,7 @@ namespace UsabilityDynamics\WPP {
         'title' => 'Property Term',
       );
       
-      foreach( $taxonomies as $key => $tax ){
+      foreach( (array)$taxonomies as $key => $tax ){
         $taxonomies[$key]['label'] = apply_filters( 'wpml_translate_string', $key,$key, $terms_package );
       }
       
