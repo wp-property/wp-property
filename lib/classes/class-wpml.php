@@ -91,10 +91,10 @@ namespace UsabilityDynamics\WPP {
       global $wpdb;
 
       $matching_ids = implode(',',$matching_ids);
-      $sql_query = "SELECT post_id FROM {$wpdb->postmeta}
+      $sql_query = "SELECT ID FROM {$wpdb->posts}
       LEFT JOIN {$wpdb->prefix}icl_translations ON
-      ({$wpdb->postmeta}.post_id = {$wpdb->prefix}icl_translations.element_id) WHERE post_id IN ($matching_ids)";
-      $sql_query .= " AND {$wpdb->prefix}icl_translations.language_code ='".ICL_LANGUAGE_CODE."' GROUP BY post_id";
+      ({$wpdb->posts}.ID = {$wpdb->prefix}icl_translations.element_id) WHERE ID IN ($matching_ids)";
+      $sql_query .= " AND {$wpdb->prefix}icl_translations.language_code ='".ICL_LANGUAGE_CODE."' GROUP BY ID";
 
       return $wpdb->get_col($sql_query);
     }
