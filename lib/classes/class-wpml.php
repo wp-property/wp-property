@@ -21,7 +21,7 @@ namespace UsabilityDynamics\WPP {
       add_filter( "wpp::search_attribute::label", array($this,"get_attribute_translation") );
       add_filter( "wpp::attribute::label", array($this,"get_attribute_translation") );
       add_filter( "wpp_stat_filter_property_type", array($this,"get_property_type_translation") );
-
+      add_filter( "wpp::taxonomies::labels", array($this,"get_property_taxonomies_translation") );
     }
 
     /**
@@ -260,6 +260,23 @@ namespace UsabilityDynamics\WPP {
       }
      
     }
+    /*
+    * translate taxonomies labels in $wp_properties['taxonomies'] directly
+    * auther Fadi Yousef
+    */
+    public function get_property_taxonomies_translation($taxonomies){
+      $terms_package = array(
+        'kind' => 'Property Term',
+        'name' => 'custom-term',
+        'title' => 'Property Term',
+      );
+      
+      foreach( $taxonomies as $key => $tax ){
+        $taxonomies[$key]['label'] = apply_filters( 'wpml_translate_string', $key,$key, $terms_package );
+      }
+      
+    }
+    
   }
 
 }

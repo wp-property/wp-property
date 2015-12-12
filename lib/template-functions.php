@@ -238,11 +238,12 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
    */
   function prepare_property_for_display( $property, $args = false ) {
     global $wp_properties;
-
+    
     if ( empty( $property ) ) {
       return;
     }
-
+    // translate taxonomies labels before display it.
+    $wp_properties['taxonomies'] = apply_filters('wpp::taxonomies::labels',$wp_properties['taxonomies']);
     $_args = is_array( $args ) ? http_build_query( $args ) : (string) $args;
     
     /* Used to apply different filters depending on where the attribute is displayed. i.e. google_map_infobox  */
@@ -267,6 +268,7 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
 
     //** Check if this function has already been done */
     if ( is_array( $property ) && isset( $property[ 'system' ][ 'prepared_for_display' ] ) ) {
+      
       return $property;
     }
     
