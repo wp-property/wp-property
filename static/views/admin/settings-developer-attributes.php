@@ -5,6 +5,9 @@
  */
 
 global $wp_properties;
+$attributes_default = ud_get_wp_property()->get('attributes.default');
+$attributes_multiple = ud_get_wp_property()->get('attributes.multiple');
+$predefined_values = $wp_properties[ 'predefined_values' ] ;
 
 ?>
 <div>
@@ -139,14 +142,55 @@ global $wp_properties;
           <li>
             <textarea class="wpp_attribute_pre_defined_values" name="wpp_settings[predefined_values][<?php echo $slug; ?>]"><?php echo isset( $wp_properties[ 'predefined_values' ][ $slug ] ) ? $wp_properties[ 'predefined_values' ][ $slug ] : ''; ?></textarea>
           </li>
-          <li>
-          <?php $class = (isset( $wp_properties[ 'en_default_value' ] ) && is_array( $wp_properties[ 'en_default_value' ] ) && in_array( $slug, $wp_properties[ 'en_default_value' ] ) )? "show":"hidden"; ?>
-            <textarea class="wpp_attribute_default_values <?php echo $class;?>" name="wpp_settings[default_values][<?php echo $slug; ?>]" placeholder="Default Value"><?php echo isset( $wp_properties[ 'default_values' ][ $slug ] ) ? $wp_properties[ 'default_values' ][ $slug ] : ''; ?></textarea>
+          <?php $class = (isset( $wp_properties[ 'en_default_value' ] ) && in_array( $slug, $wp_properties[ 'en_default_value' ] ) )? "show":"hidden";?>
+          <li class="wpp_attribute_default_values <?php echo $class;?>">
+          <label>Default Value</label><br />
+          <?php
+          $input_type = $wp_properties[ 'admin_attr_fields' ][ $slug ];
+          //var_dump(array_key_exists($input_type, $attributes_default));
+          //echo "array_key_exists($input_type, ". print_r($attributes_default, 1) . ")";
+          if(array_key_exists($input_type, $attributes_default) and $type = $attributes_default[$input_type]){
+            //$attributes_default = WPP_F::get_attribute_data($slug);
+            $multiple = in_array($type, $attributes_multiple) || in_array($input_type, $attributes_multiple);
+            $options = array();
+            if( $input_type == 'select' ) {
+              $options[''] = __( 'Not Selected', ud_get_wp_property()->domain );
+            }
+            if ( !empty( $predefined_values[ $slug ] ) && is_string( $predefined_values[ $slug ] ) ) {
+              $_options = explode( ',', trim( $predefined_values[ $slug ] ) );
+              foreach( $_options as $option ) {
+                $option = trim( preg_replace( "/\r|\n/", "", $option ) );
+                $options[ esc_attr( $option ) ] = apply_filters( 'wpp_stat_filter_' . $slug, $option );
+              }
+            }
+
+            $value = (isset( $wp_properties[ 'default_values' ][ $slug ]))? $wp_properties[ 'default_values' ][ $slug ]: "";
+            $field_name = "wpp_settings[default_values][$slug]";
+            $field_name = $multiple?$field_name."[]":$field_name;
+            $field = array(
+                          'id' => $slug,
+                          'field_name' => $field_name,
+                          'type' => $type,
+                          'clone' => false,
+                          'multiple' => $multiple,
+                          'options' => $options,
+                        );
+            //print_r($field);
+            $field_class = RW_Meta_Box::get_class_name( $field );
+            //var_dump($field_class);
+            $field = call_user_func(array($field_class, "normalize_field"), $field);
+            $field['field_name'] = $field_name; // Providing field name once again because it's can be replace by normalize field.
+            //call_user_func(array($field_class, "admin_enqueue_scripts"));
+            echo call_user_func(array($field_class, 'html'), $value, $field);
+
+            ?>
+            <a class="button apply-to-all" data-attribute="<?php echo $slug;?>" href="#" title="Apply to listings that have no value for this field." >Apply to all</a> <br/>
+            <?php }?>
           </li>
         </ul>
       </td>
     </tr>
-  <?php endforeach; ?>
+  <?php endforeach;?>
   </tbody>
 
   <tfoot>

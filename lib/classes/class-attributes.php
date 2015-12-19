@@ -94,6 +94,20 @@ namespace UsabilityDynamics\WPP {
           ),
         ));
 
+
+        /**
+         * Set schema for searchable attributes types.
+         */
+        ud_get_wp_property()->set('attributes.default', array(
+          'input'           => 'text',
+          'number'          => 'text',
+          'currency'        => 'text',
+          'url'             => 'url',
+          'oembed'          => 'text',
+          'textarea'        => 'textarea',
+          'wysiwyg'         => 'textarea',
+        ));
+
         /**
          * Set schema for multiple attributes types.
          */

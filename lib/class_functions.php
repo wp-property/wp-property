@@ -4724,3 +4724,84 @@ if( !function_exists( 'property_feed' ) ) {
 
   }
 }
+
+/**
+ * Apply default value to all existing property.
+ *
+ * @param string $request
+ *
+ * @return string
+ * @author korotkov@ud
+ * @since 1.36.2
+ */
+if( !function_exists( 'wpp_apply_default_value' ) ) {
+  function wpp_apply_default_value( ) {
+    global $wpdb;
+    $affected_row = 0;
+    $added_row = 0;
+    $prefix = $wpdb->prefix;
+    $data = $_POST['data'];
+    $attribute = $data['attribute'];
+    $value = $data['value'];
+    $response = array();
+    $chk_meta_key = "SELECT DISTINCT p.ID FROM {$wpdb->posts} AS p INNER JOIN {$wpdb->postmeta} AS pm ON p.ID = pm.post_id  WHERE p.post_type = 'property' AND pm.meta_key = '$attribute'";
+    if(isset($data['confirmed']) && $data['confirmed']){
+      if ($data['confirmed'] == 'all') {
+        $sql = "UPDATE {$wpdb->posts} AS p INNER JOIN {$wpdb->postmeta} AS pm ON p.ID = pm.post_id SET pm.meta_value = '$value' WHERE p.post_type = 'property' AND pm.meta_key = '$attribute'";
+        $affected_row = $wpdb->query($sql);
+      }
+
+      if ($data['confirmed'] == 'all' || $data['confirmed'] == 'empty-or-not-exist') {
+        $_chk_meta_key = "SELECT DISTINCT p.ID FROM {$wpdb->posts} AS p INNER JOIN {$wpdb->postmeta} AS pm ON p.ID = pm.post_id  WHERE p.post_type = 'property' AND pm.meta_key = '$attribute' and pm.meta_value != ''";
+        $sql = "SELECT DISTINCT p.ID FROM {$wpdb->posts} AS p WHERE p.post_type = 'property' AND p.ID NOT IN($_chk_meta_key)";
+        $results = $wpdb->get_results($sql);
+        //foreach ($results as $post) {
+        //  $wpdb->insert(
+        //                $wpdb->postmeta,
+        //                array(
+        //                  'post_id' => $post->ID,
+        //                  'meta_key' => $attribute,
+        //                  'meta_value' => $value,
+        //                  )
+        //              );
+        //}
+        $added_row = count($results);
+      }
+      $response = array(
+                        'status' => "replaced",
+                        'message' => "Attributes replaced in $affected_row Property and added in $added_row Property.",
+                        'wpdb' => $wpdb
+                      );
+    }
+    else{
+      $chk_meta_results = $wpdb->get_results($chk_meta_key);
+      if(is_array($chk_meta_results) && $count = count($chk_meta_results)){
+        $response = array(
+                          'status' => "confirm",
+                          'message' => "Key already exist(In $count property). Do you want to replace?",
+                        );
+      }
+      else{
+        $sql = "SELECT DISTINCT p.ID FROM {$wpdb->posts} AS p WHERE p.post_type = 'property' AND p.ID";
+        $results = $wpdb->get_results($sql);
+        foreach ($results as $post) {
+          $wpdb->insert(
+                        $wpdb->postmeta,
+                        array(
+                          'post_id' => $post->ID,
+                          'meta_key' => $attribute,
+                          'meta_value' => $value,
+                          )
+                      );
+        }
+        
+        $response = array(
+                          'status' => 'success',
+                          'message' => "Applied to " . count($results) . " property.",
+                        );
+      }
+    }
+
+    echo json_encode($response);
+  }
+}

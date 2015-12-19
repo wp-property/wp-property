@@ -221,14 +221,6 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
 
     } );
 
-    jQuery(document).on('change', '.en_default_value', function(){
-      var _this = jQuery(this);
-      if(this.checked)
-        _this.closest('td').siblings('td.wpp_admin_input_col').find('.wpp_attribute_default_values').show();
-      else
-        _this.closest('td').siblings('td.wpp_admin_input_col').find('.wpp_attribute_default_values').hide();
-    });
-
     //* Stats to group functionality */
     jQuery( '.wpp_attribute_group' ).wppGroups();
 
@@ -351,6 +343,109 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
       jQuery( '.button-remove-image', section ).remove();
     } );
 
+    /**
+     * For default value.
+     */
+    jQuery(document).on('change', '.en_default_value', function(){
+      var _this = jQuery(this);
+      console.log(_this);
+      if(this.checked)
+        _this.closest('td').siblings('td.wpp_admin_input_col').find('.wpp_attribute_default_values').show();
+      else
+        _this.closest('td').siblings('td.wpp_admin_input_col').find('.wpp_attribute_default_values').hide();
+    });
+    
+    jQuery(document).on('click', '.apply-to-all', function(){
+      var $this = jQuery(this),
+          attribute  = $this.data('attribute'),
+          value = $this.parent().find('input, select, textarea').val(),
+          data  = {
+                    attribute: attribute,
+                    value: value,
+
+                };
+      if($this.hasClass('disabled')) return false;
+      $this.addClass('disabled').attr('disabled', 'disabled');
+      jQuery.ajax({
+          type: 'POST',
+          url: wpp.instance.ajax_url,
+          data: {
+            action: 'wpp_apply_default_value',
+            data: data
+          },
+          success: function( response ){
+            var response = jQuery.parseJSON( response );
+            if( response.status == 'success' ) {
+              $this.removeClass('disabled').removeAttr('disabled');
+              wppModal({
+                    message: response.message,
+                    title: "Done!"
+                });
+            } else if(response.status == 'confirm' ) {
+              wppModal({
+                    message: response.message,
+                    buttons: {
+                        'Yes All': function () {
+                            var _this = jQuery(this);
+                            data.confirmed = 'all';
+                            console.log(jQuery(this).parent().find('.ui-dialog-buttonpane button'));
+                            jQuery(this).parent().find('.ui-dialog-buttonpane button').addClass('disabled').attr('disabled', 'disabled');
+                            onConfirm(data, function(){
+                              $this.removeClass('disabled').removeAttr('disabled');
+                            });
+                        },
+                        "Empty or not Exist": function () {
+                            var _this = jQuery(this);
+                            data.confirmed = 'empty-or-not-exist';
+                            jQuery(this).parent().find('.ui-dialog-buttonpane button').addClass('disabled').attr('disabled', 'disabled');
+                            onConfirm(data, function(){
+                              $this.removeClass('disabled').removeAttr('disabled');
+                            });
+                        },
+                        Cancle: function () {
+                            $this.removeClass('disabled').removeAttr('disabled');
+                            jQuery(this).dialog("close");
+                        }
+                    },
+                    close: function (event, ui) {
+                        $this.removeClass('disabled').removeAttr('disabled');
+                        jQuery(this).remove();
+                    }
+                });
+            }
+          },
+          error: function() {
+            $this.removeClass('disabled').removeAttr('disabled');
+            alert( wpp.strings.undefined_error );
+          }
+        });
+      return false;
+    });
+
+    var onConfirm = function(data, callback){
+      if(typeof callback == 'undefined')
+        callback = function(){}
+      jQuery.ajax({
+          type: 'POST',
+          url: wpp.instance.ajax_url,
+          data: {
+            action: 'wpp_apply_default_value',
+            data: data
+          },
+          success: function( response ){
+            var response = jQuery.parseJSON( response );
+            callback();
+            wppModal({
+                    message: response.message,
+                    title: "Done!"
+                });
+          },
+          error: function() {
+            callback();
+            alert( wpp.strings.undefined_error );
+          }
+        });
+    }
   },
 
   /**
@@ -439,3 +534,31 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
 
 // Initialize Overview.
 jQuery( document ).ready( wpp.ui.settings.ready );
+
+wppModal = function(option){
+  var _default = {
+    modal: true,
+    title: 'Are you sure?',
+    zIndex: 10000,
+    autoOpen: true,
+    width: 'auto',
+    resizable: false,
+    buttons: {
+        Cancle: function () {
+            jQuery(this).dialog("close");
+        }
+    },
+    close: function (event, ui) {
+        jQuery(this).remove();
+    }
+  };
+  option = jQuery.extend(true, {}, _default, option);
+
+  var wppModal = jQuery('#wpp-modal');
+  if(wppModal.length == 0)
+    wppModal = jQuery('<div id="wpp-modal"></div>').appendTo('body')
+                .html('<div><h3 class="message"></h3></div>');
+  wppModal.find('h3.message').html(option.message);
+  wppModal.dialog(option);
+  return wppModal.dialog( "instance" );
+}

@@ -121,6 +121,7 @@ class WPP_Core {
     add_action( 'wp_ajax_wpp_ajax_clear_cache', create_function( "", '  echo WPP_F::clear_cache(); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_revalidate_all_addresses', create_function( "", '  echo WPP_F::revalidate_all_addresses(); die();' ) );
     add_action( 'wp_ajax_wpp_save_settings', create_function( "", ' die(WPP_F::save_settings());' ) );
+    add_action( 'wp_ajax_wpp_apply_default_value', create_function( "", ' die(wpp_apply_default_value());' ) );
 
     /** Called in setup_postdata().  We add property values here to make available in global $post variable on frontend */
     add_action( 'the_post', array( 'WPP_F', 'the_post' ) );
@@ -700,7 +701,7 @@ class WPP_Core {
 
         //** Load the first found template */
         if( $_template ) {
-          WPP_F::console_log( 'Found single property page template:' . $_template );
+          WPP_F::console_log( 'Found single property page template:' . wp_normalize_path($_template) );
           return $_template;
         }
 

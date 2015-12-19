@@ -1652,6 +1652,10 @@ body.post-type-property input[type=text].rwmb-text {
   width: 30em;
   max-width: 90%;
 }
+body.post-type-property .wpp_attribute_default_values input[type=text].rwmb-text {
+  width: 100%;
+  max-width: 100%;
+}
 body.post-type-property .uisf-date {
   width: 100%;
 }
@@ -1688,4 +1692,7 @@ body.post-type-property .uisf-date {
 .lang_subsubsub a.current .count {
   color: #999;
   font-weight: 400;
+}
+.wp-color-result:after {
+  content: "Select Color";
 }
