@@ -293,10 +293,12 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
 
     jQuery( ".wpp_pre_defined_value_setter" ).live( "change", function() {
       wpp.ui.settings.set_pre_defined_values_for_attribute( this );
+      wpp.ui.settings.default_values_for_attribute( this );
     } );
 
     jQuery( ".wpp_pre_defined_value_setter" ).each( function() {
       wpp.ui.settings.set_pre_defined_values_for_attribute( this );
+      wpp.ui.settings.default_values_for_attribute( this );
     } );
 
     /**
@@ -344,11 +346,10 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
     } );
 
     /**
-     * For default value.
+     * Default value.
      */
-    jQuery(document).on('change', '.en_default_value', function(){
+    jQuery(document).on('change', '.en_default_value:checkbox', function(){
       var _this = jQuery(this);
-      console.log(_this);
       if(this.checked)
         _this.closest('td').siblings('td.wpp_admin_input_col').find('.wpp_attribute_default_values').show();
       else
@@ -509,6 +510,30 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
 
     }
 
+  },
+
+  /**
+   *
+   */
+  default_values_for_attribute: function( setter_element ) {
+
+    var default_wrapper = jQuery( setter_element ).closest( "ul" );
+    var row_wrapper = jQuery( setter_element ).closest( ".wpp_dynamic_table_row" );
+    var setting    = jQuery( setter_element ).val();
+    var type       = attributes_default_support[setting];
+    var en_default_value_container = row_wrapper.find('.en_default_value_container');
+    var en_default_value = en_default_value_container.find('.en_default_value:checkbox');
+    if(typeof(type) == "undefined"){
+      default_wrapper.find('.wpp_attribute_default_values').hide();
+      en_default_value.prop('checked', false).attr('disabled', 'disabled').addClass('disabled').trigger('change');
+      en_default_value_container.attr('title', 'Default Value not supported for this field.');
+    }
+    else{
+      default_wrapper.find('.wpp_attribute_default_values').find('input, textarea').hide();
+      default_wrapper.find('.wpp_attribute_default_values .type-' + type).show();
+      en_default_value.removeAttr('disabled').removeAttr('title').removeClass('disabled').trigger('change');
+      en_default_value_container.removeAttr('title');
+    }
   },
 
   /**

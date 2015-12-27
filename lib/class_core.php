@@ -182,6 +182,8 @@ class WPP_Core {
     wp_register_script( 'wp-property-admin-overview', WPP_URL . 'scripts/wpp.admin.overview.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-admin-widgets', WPP_URL . 'scripts/wpp.admin.widgets.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-admin-settings', WPP_URL . 'scripts/wpp.admin.settings.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
+    wp_localize_script( 'wp-property-admin-settings', 'attributes_default_support', ud_get_wp_property()->get('attributes.default'));
+
     wp_register_script( 'wp-property-backend-global', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-backend-editor', WPP_URL . 'scripts/wpp.admin.editor.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable' ), WPP_Version );
