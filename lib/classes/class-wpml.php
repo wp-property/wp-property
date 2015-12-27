@@ -162,6 +162,35 @@ namespace UsabilityDynamics\WPP {
         do_action('wpml_register_string', $term['label'] , $key , $terms_package , $term['label'] , 'LINE'); 
       }
       
+      $groups_package = array(
+        'kind' => 'Property Groups',
+        'name' => 'custom-groups',
+        'title' => 'Property Groups',
+      );
+      $property_groups = $data['wpp_settings']['property_groups'];
+      
+      $this->delete_strings_translation( $groups_package, $property_groups );
+      
+      foreach($property_groups as $key => $group){
+        do_action('wpml_register_string', $group['name'] , $key , $groups_package , $group['name'] , 'LINE'); 
+      }
+      
+      //echo '<pre>';print_r($data['wpp_settings']['predefined_values']);echo '</pre>';exit();
+      $attributes_values_package = array(
+        'kind' => 'Property Attributes Values',
+        'name' => 'custom-attributes-value',
+        'title' => 'Property Attributes Values',
+      );
+      $attributes_values = $data['wpp_settings']['predefined_values'];
+      
+      $this->delete_strings_translation( $attributes_values_package, $attributes );
+      
+      foreach($attributes_values as $key => $value){
+        if( $value ){
+          do_action('wpml_register_string', $value , $key , $attributes_values_package , $value , 'LINE');
+        }
+      }
+
     }
     /*
     * Get translated text for property types 
