@@ -319,7 +319,12 @@ namespace UsabilityDynamics\WPP {
           'name' => 'custom-groups',
           'title' => 'Property Groups',
         );
-        return apply_filters( 'wpml_translate_string', $v,$v, $groups_package );
+        $group_label =  apply_filters( 'wpml_translate_string', $v,$v, $groups_package );
+        if( !empty($group_label) ){
+          return $group_label;
+        }else{
+          return $wp_properties['property_groups'][$v]['name'];
+        }
         
       } 
     }
