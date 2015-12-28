@@ -215,6 +215,7 @@ namespace UsabilityDynamics\WPP {
       $property_types = $wp_properties['property_types'];
       $property_meta = $wp_properties['property_meta'];
       $property_terms = $wp_properties['taxonomies'];
+      $property_groups = $data['wpp_settings']['property_groups'];
       
       if( $attr_key = array_search($v,$attributes) ){
 
@@ -251,6 +252,15 @@ namespace UsabilityDynamics\WPP {
         );
         return apply_filters( 'wpml_translate_string', $v,$v, $terms_package );
 
+      }elseif( $attr_key = array_search($v,$property_groups) ){
+        
+        $groups_package = array(
+          'kind' => 'Property Groups',
+          'name' => 'custom-groups',
+          'title' => 'Property Groups',
+        );
+        return apply_filters( 'wpml_translate_string', $v,$v, $groups_package );
+        
       }else{
 
         return;
