@@ -322,7 +322,7 @@ namespace UsabilityDynamics\WPP {
         return apply_filters( 'wpml_translate_string', $v,$v, $groups_package );
 
       }else{
-        return $wp_properties['property_groups'][$v]['name'];
+        return ( @array_key_exists( $v, $property_groups ) ? $wp_properties['property_groups'][$v]['name'] : __( 'Other', ud_get_wp_property()->domain ) );
       }
     }
     
