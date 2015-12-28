@@ -710,7 +710,7 @@ if ( !function_exists( 'draw_stats' ) ):
         if ( $main_stats_group != $gslug || !@array_key_exists( $gslug, $groups ) ) {
           $group_name = ( @array_key_exists( $gslug, $groups ) ? $groups[ $gslug ][ 'name' ] : __( 'Other', ud_get_wp_property()->domain ) );
           ?>
-          <h2 class="wpp_stats_group"><?php echo apply_filters('wpp::attribute::label',$gslug); ?></h2>
+          <h2 class="wpp_stats_group"><?php echo $group_name; ?></h2>
         <?php
         }
 
