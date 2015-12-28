@@ -215,8 +215,8 @@ namespace UsabilityDynamics\WPP {
       $property_types = $wp_properties['property_types'];
       $property_meta = $wp_properties['property_meta'];
       $property_terms = $wp_properties['taxonomies'];
-      $property_groups = $data['wpp_settings']['property_groups'];
-      
+      $property_groups = array_keys($wp_properties['property_groups']);
+     
       if( $attr_key = array_search($v,$attributes) ){
 
         $attributes_package = array(
