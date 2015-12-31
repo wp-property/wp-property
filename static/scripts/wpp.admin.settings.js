@@ -293,11 +293,15 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
 
     jQuery( ".wpp_pre_defined_value_setter" ).live( "change", function() {
       wpp.ui.settings.set_pre_defined_values_for_attribute( this );
-      wpp.ui.settings.default_values_for_attribute( this );
     } );
-
     jQuery( ".wpp_pre_defined_value_setter" ).each( function() {
       wpp.ui.settings.set_pre_defined_values_for_attribute( this );
+    } );
+    // Assigning  default value
+    jQuery( ".wpp_admin_input_col .wpp_pre_defined_value_setter" ).live( "change", function() {
+      wpp.ui.settings.default_values_for_attribute( this );
+    } );
+    jQuery( ".wpp_admin_input_col .wpp_pre_defined_value_setter" ).each( function() {
       wpp.ui.settings.default_values_for_attribute( this );
     } );
 
@@ -386,16 +390,15 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
               wppModal({
                     message: response.message,
                     buttons: {
-                        'Yes All': function () {
+                        'Replace all': function () {
                             var _this = jQuery(this);
                             data.confirmed = 'all';
-                            console.log(jQuery(this).parent().find('.ui-dialog-buttonpane button'));
                             jQuery(this).parent().find('.ui-dialog-buttonpane button').addClass('disabled').attr('disabled', 'disabled');
                             onConfirm(data, function(){
                               $this.removeClass('disabled').removeAttr('disabled');
                             });
                         },
-                        "Empty or not Exist": function () {
+                        "Replace only empty": function () {
                             var _this = jQuery(this);
                             data.confirmed = 'empty-or-not-exist';
                             jQuery(this).parent().find('.ui-dialog-buttonpane button').addClass('disabled').attr('disabled', 'disabled');
@@ -513,7 +516,7 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
   },
 
   /**
-   *
+   * @Author: Md. Alimuzzaman Alim
    */
   default_values_for_attribute: function( setter_element ) {
 
@@ -526,13 +529,13 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
     if(typeof(type) == "undefined"){
       default_wrapper.find('.wpp_attribute_default_values').hide();
       en_default_value.prop('checked', false).attr('disabled', 'disabled').addClass('disabled').trigger('change');
-      en_default_value_container.attr('title', 'Default Value not supported for this field.');
+      en_default_value_container.attr('title', wpp.strings.attr_not_support_default ).addClass('overlay');
     }
     else{
       default_wrapper.find('.wpp_attribute_default_values').find('input, textarea').hide();
       default_wrapper.find('.wpp_attribute_default_values .type-' + type).show();
       en_default_value.removeAttr('disabled').removeAttr('title').removeClass('disabled').trigger('change');
-      en_default_value_container.removeAttr('title');
+      en_default_value_container.removeAttr('title').removeClass('overlay');
     }
   },
 

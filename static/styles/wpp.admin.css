@@ -1696,3 +1696,15 @@ body.post-type-property .uisf-date {
 .wp-color-result:after {
   content: "Select Color";
 }
+.en_default_value_container {
+  position: relative;
+}
+.en_default_value_container.overlay:before {
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  position: absolute;
+}

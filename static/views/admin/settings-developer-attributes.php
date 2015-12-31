@@ -144,22 +144,16 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
           </li>
           <?php $class = (isset( $wp_properties[ 'en_default_value' ] ) && in_array( $slug, $wp_properties[ 'en_default_value' ] ) )? "show":"hidden";?>
           <li class="wpp_attribute_default_values <?php echo $class;?>">
-          <?php
-          $input_type = $wp_properties[ 'admin_attr_fields' ][ $slug ];
-          //var_dump(array_key_exists($input_type, $attributes_default));
-          //echo "array_key_exists($input_type, ". print_r($attributes_default, 1) . ")";
-          if($type = $attributes_default[$input_type]){ //array_key_exists($input_type, $attributes_default) and 
-            echo "<label>Default Value</label><br />";
-            //$attributes_default = WPP_F::get_attribute_data($slug);
-            $multiple = in_array($type, $attributes_multiple) || in_array($input_type, $attributes_multiple);
+            <?php
+            $input_type = $wp_properties[ 'admin_attr_fields' ][ $slug ];
             $value = (isset( $wp_properties[ 'default_values' ][ $slug ]))? $wp_properties[ 'default_values' ][ $slug ]: "";
             $field_name = "wpp_settings[default_values][$slug]";
-            $field_name = $multiple?$field_name."[]":$field_name;
-            echo "<input class='type-text type-url rwmb-text' type='$type' name='$field_name' value='$value' />";
+            echo __("<label>Default Value</label>", ud_get_wp_property()->domain);
+            echo "<br />";
+            echo "<input class='type-text type-url rwmb-text' name='$field_name' value='$value' />";
             echo "<textarea class='type-textarea rwmb-text' name='$field_name'>$value</textarea>";
             ?>
             <a class="button apply-to-all" data-attribute="<?php echo $slug;?>" href="#" title="Apply to listings that have no value for this field." >Apply to all</a> <br/>
-          <?php }?>
           </li>
         </ul>
       </td>

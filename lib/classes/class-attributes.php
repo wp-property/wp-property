@@ -96,7 +96,7 @@ namespace UsabilityDynamics\WPP {
 
 
         /**
-         * Set schema for searchable attributes types.
+         * Set supported type for default value.
          */
         ud_get_wp_property()->set('attributes.default', array(
           'input'           => 'text',

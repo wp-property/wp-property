@@ -27,7 +27,7 @@ $l10n = array(
   'geo_attribute_usage'             => __( 'Attention! This attribute (slug) is used by Google Validator and Address Display functionality. It is set automatically and can not be edited on Property Adding/Updating page.',ud_get_wp_property()->domain ),
   'default_property_image'          => sprintf( __( 'Default %s Image', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
   'remove_image'                    => __( 'Remove Image', ud_get_wp_property()->domain ),
-
+  'attr_not_support_default'        => __('Default Value not supported for this data entry.', ud_get_wp_property()->domain),
   //** Ajaxupload */
   'uploading'                       => __( 'Uploading', ud_get_wp_property()->domain ),
   'drop_file'                       => __( 'Drop files here to upload', ud_get_wp_property()->domain ),
