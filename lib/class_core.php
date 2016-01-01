@@ -203,6 +203,8 @@ class WPP_Core {
     wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'scripts/colorpicker/colorpicker.css' );
     wp_register_style( 'jquery-ui', WPP_URL . 'styles/wpp.admin.jquery.ui.css' );
 
+    wp_register_style( 'wpp-fa-icons', WPP_URL . 'fonts/icons/fa/css/font-awesome.min.css', array(), '4.5.0' );
+
     /** Find and register stylesheet  */
     if( file_exists( STYLESHEETPATH . '/wp-properties.css' ) ) {
       wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp-properties.css', array(), WPP_Version );

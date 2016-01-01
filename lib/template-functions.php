@@ -1430,3 +1430,14 @@ if ( !function_exists( 'wpp_css' ) ):
   }
 
 endif;
+
+
+/**
+ * Will class to body if on mobile device.
+ */
+add_filter( 'body_class','wpp_is_mobile_body_class' );
+function wpp_is_mobile_body_class( $classes ) {
+  if(wp_is_mobile())
+    $classes[] = 'wpp_is_mobile';
+  return $classes;
+}
