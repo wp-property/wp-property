@@ -520,12 +520,13 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
    */
   default_values_for_attribute: function( setter_element ) {
 
-    var default_wrapper = jQuery( setter_element ).closest( "ul" );
-    var row_wrapper = jQuery( setter_element ).closest( ".wpp_dynamic_table_row" );
-    var setting    = jQuery( setter_element ).val();
-    var type       = attributes_default_support[setting];
+    var default_wrapper            = jQuery( setter_element ).closest( "ul" );
+    var row_wrapper                = jQuery( setter_element ).closest( ".wpp_dynamic_table_row" );
+    var setting                    = jQuery( setter_element ).val();
+    var type                       = attributes_default_support[setting];
     var en_default_value_container = row_wrapper.find('.en_default_value_container');
-    var en_default_value = en_default_value_container.find('.en_default_value:checkbox');
+    var en_default_value           = en_default_value_container.find('.en_default_value:checkbox');
+    
     if(typeof(type) == "undefined"){
       default_wrapper.find('.wpp_attribute_default_values').hide();
       en_default_value.prop('checked', false).attr('disabled', 'disabled').addClass('disabled').trigger('change');
