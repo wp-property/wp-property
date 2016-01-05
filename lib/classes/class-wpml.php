@@ -21,6 +21,7 @@ namespace UsabilityDynamics\WPP {
       add_filter( "wpp::search_attribute::label", array($this,"get_attribute_translation") );
       add_filter( "wpp::attribute::label", array($this,"get_attribute_translation") );
       add_filter( "wpp::groups::label", array($this,"get_groups_translation") );
+      add_filter( "wpp::attribute::value", array($this,"get_attribute_value_translation") );
       add_filter( "wpp_stat_filter_property_type", array($this,"get_property_type_translation") );
       add_filter( "wpp::taxonomies::labels", array($this,"get_property_taxonomies_translation") );
     }
@@ -176,7 +177,6 @@ namespace UsabilityDynamics\WPP {
         do_action('wpml_register_string', $group['name'] , $key , $groups_package , $group['name'] , 'LINE'); 
       }
       
-      //echo '<pre>';print_r($data['wpp_settings']['predefined_values']);echo '</pre>';exit();
       $attributes_values_package = array(
         'kind' => 'Property Attributes Values',
         'name' => 'custom-attributes-value',
@@ -324,7 +324,35 @@ namespace UsabilityDynamics\WPP {
         return  __( 'Other', ud_get_wp_property()->domain ) ;
       }
     }
-    
+    /**
+     * Get translation for predefined property attribute value
+     * @auther Fadi Yousef
+     */
+    public function get_attribute_value_translation($v){
+      global $wp_properties;$value_in_key;$translated_value;
+      //find the key of the value
+      foreach($wp_properties['predefined_values'] as $key => $value){
+        if( stristr( $value, $v ) ){
+            $value_in_key =  $key;
+        }
+      }
+      if ( $value_in_key != null){
+        $attributes_values_package = array(
+          'kind' => 'Property Attributes Values',
+          'name' => 'custom-attributes-value',
+          'title' => 'Property Attributes Values',
+        );
+        $default_values = explode(',', str_replace(', ', ',', $wp_properties['predefined_values'][$value_in_key]) );
+        $translated_values = apply_filters( 'wpml_translate_string', $value_in_key,$value_in_key, $attributes_values_package );
+        $translated_values = explode(',',str_replace(', ', ',', $translated_values) );
+        $value_pos = array_search( $v,$default_values );
+        return $translated_values[$value_pos];
+        
+      }else{
+        return $v;
+      }
+    }
+
     
   }
 
