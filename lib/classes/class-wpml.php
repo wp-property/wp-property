@@ -312,8 +312,7 @@ namespace UsabilityDynamics\WPP {
     public function get_groups_translation($v){
       global $wp_properties;
       $property_groups = array_keys($wp_properties['property_groups']);
-      if( $attr_key = array_search($v,$property_groups) ){
-        
+      if( array_search($v,$property_groups,true) !== false ){
         $groups_package = array(
           'kind' => 'Property Groups',
           'name' => 'custom-groups',
@@ -322,7 +321,7 @@ namespace UsabilityDynamics\WPP {
         return apply_filters( 'wpml_translate_string', $v,$v, $groups_package );
 
       }else{
-        return ( @array_key_exists( $v, $property_groups ) ? $wp_properties['property_groups'][$v]['name'] : __( 'Other', ud_get_wp_property()->domain ) );
+        return  __( 'Other', ud_get_wp_property()->domain ) ;
       }
     }
     
