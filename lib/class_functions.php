@@ -3490,6 +3490,11 @@ class WPP_F extends UsabilityDynamics\Utility {
       'label_as_key' => 'true',
     );
     $return_multi = ud_get_wp_property( 'attributes.multiple', array() );
+    // Need to improve the way
+    // By: Md. Alimuzzaman Alim
+    if(($key = array_search('multi_checkbox', $return_multi)) !== false) {
+        unset($return_multi[$key]);
+    }
     if( is_array( $property_object ) ) {
       $property_object = (object) $property_object;
     }
