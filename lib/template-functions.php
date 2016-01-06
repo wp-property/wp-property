@@ -739,8 +739,7 @@ if ( !function_exists( 'draw_stats' ) ):
               <?php
               $label = apply_filters('wpp::attribute::label',$data[ 'label' ]);
               //check if the tag is property type to get the translated value for it
-              $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type',$data[ 'value' ]) : $data[ 'value' ];
-              $value = apply_filters('wpp::attribute::value',$data[ 'value' ]);
+              $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type',$data[ 'value' ]) : apply_filters('wpp::attribute::value',$data[ 'value' ]);
               $alt = ( $alt == "alt" ) ? "" : "alt";
               ?>
               <li class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_plain_list_<?php echo $tag; ?> <?php echo $alt; ?>">

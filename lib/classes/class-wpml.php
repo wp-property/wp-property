@@ -198,12 +198,15 @@ namespace UsabilityDynamics\WPP {
     * @auther Fadi Yousef
     */
     public function get_property_type_translation($v){
+      global $wp_properties;
       $type_package = array(
         'kind' => 'Property Types',
         'name' => 'custom-types',
         'title' => 'Property Types',
       );
-      return apply_filters( 'wpml_translate_string', $v,$v, $type_package );
+
+      $key = array_search($v,$wp_properties['property_types']);
+      return ($key !== false) ? apply_filters( 'wpml_translate_string', $key,$key, $type_package ) : $v;
     }
     /*
     * Get translated text for property attributes 
