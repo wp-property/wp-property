@@ -20,7 +20,7 @@ namespace UsabilityDynamics\WPP {
       add_action( 'wpp::save_settings',array($this, 'translate_property_types_attributes'),10,1 );
       add_filter( "wpp::search_attribute::label", array($this,"get_attribute_translation") );
       add_filter( "wpp::attribute::label", array($this,"get_attribute_translation") );
-      add_filter( "wpp::groups::label", array($this,"get_groups_translation") );
+      add_filter( "wpp::groups::label", array($this,"get_groups_translation"),10,2 );
       add_filter( "wpp::attribute::value", array($this,"get_attribute_value_translation") );
       add_filter( "wpp_stat_filter_property_type", array($this,"get_property_type_translation") );
       add_filter( "wpp::taxonomies::labels", array($this,"get_property_taxonomies_translation") );
@@ -312,16 +312,16 @@ namespace UsabilityDynamics\WPP {
      * Get translated text for property group
      * @auther Fadi Yousef
      */
-    public function get_groups_translation($v){
+    public function get_groups_translation($name,$slug){
       global $wp_properties;
       $property_groups = array_keys($wp_properties['property_groups']);
-      if( array_search($v,$property_groups,true) !== false ){
+      if( array_search($slug,$property_groups,true) !== false ){
         $groups_package = array(
           'kind' => 'Property Groups',
           'name' => 'custom-groups',
           'title' => 'Property Groups',
         );
-        return apply_filters( 'wpml_translate_string', $v,$v, $groups_package );
+        return apply_filters( 'wpml_translate_string', $slug,$slug, $groups_package );
 
       }else{
         return  __( 'Other', ud_get_wp_property()->domain ) ;
