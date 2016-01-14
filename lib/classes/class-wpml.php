@@ -33,11 +33,10 @@ namespace UsabilityDynamics\WPP {
      * @author Fadi Yousef  frontend-expert@outlook.com
      */
     public function get_property_posts_count_bylang( $lang ){
-      global $sitepress;
-      $lang_now = $sitepress->get_current_language();
+      $lang_now = apply_filters( 'wpml_current_language', NULL );
       $lang_changed = 0;
       if($lang_now != $lang){
-        $sitepress->switch_lang($lang);
+        do_action( 'wpml_switch_language', $lang );
         $lang_changed = 1;
       }
       $args = array(
@@ -46,7 +45,7 @@ namespace UsabilityDynamics\WPP {
         'suppress_filters' => false
       );
       $result = new \WP_Query($args);
-      if($lang_changed) $sitepress->switch_lang($lang_now);
+      if($lang_changed) do_action( 'wpml_switch_language', $lang_now );
       return $result->post_count;
     }
 
@@ -93,10 +92,11 @@ namespace UsabilityDynamics\WPP {
       global $wpdb;
 
       $matching_ids = implode(',',$matching_ids);
+      $language_code = apply_filters( 'wpml_current_language', NULL );
       $sql_query = "SELECT ID FROM {$wpdb->posts}
       LEFT JOIN {$wpdb->prefix}icl_translations ON
       ({$wpdb->posts}.ID = {$wpdb->prefix}icl_translations.element_id) WHERE ID IN ($matching_ids)";
-      $sql_query .= " AND {$wpdb->prefix}icl_translations.language_code ='".ICL_LANGUAGE_CODE."' GROUP BY ID";
+      $sql_query .= " AND {$wpdb->prefix}icl_translations.language_code ='".$language_code."' GROUP BY ID";
 
       return $wpdb->get_col($sql_query);
     }
