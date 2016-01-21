@@ -583,11 +583,11 @@ wppModal = function(option){
   };
   option = jQuery.extend(true, {}, _default, option);
 
-  var wppModal = jQuery('#wpp-modal');
-  if(wppModal.length == 0)
-    wppModal = jQuery('<div id="wpp-modal"></div>').appendTo('body')
+  var wppModalBox = jQuery('#wpp-modal');
+  if(wppModalBox.length == 0)
+    wppModalBox = jQuery('<div id="wpp-modal"></div>').appendTo('body')
                 .html('<div><h3 class="message"></h3></div>');
-  wppModal.find('h3.message').html(option.message);
-  wppModal.dialog(option);
-  return wppModal.dialog( "instance" );
+  wppModalBox.find('h3.message').html(option.message);
+  wppModalBox.dialog(option);
+  return wppModalBox.dialog( "instance" );
 }
