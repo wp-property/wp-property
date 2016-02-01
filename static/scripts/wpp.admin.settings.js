@@ -406,7 +406,7 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
                               $this.removeClass('disabled').removeAttr('disabled');
                             });
                         },
-                        Cancle: function () {
+                        Cancel: function () {
                             $this.removeClass('disabled').removeAttr('disabled');
                             jQuery(this).dialog("close");
                         }
@@ -523,7 +523,7 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
     var default_wrapper            = jQuery( setter_element ).closest( "ul" );
     var row_wrapper                = jQuery( setter_element ).closest( ".wpp_dynamic_table_row" );
     var setting                    = jQuery( setter_element ).val();
-    var type                       = attributes_default_support[setting];
+    var type                       = wpp.instance.settings.attributes.default[setting];
     var en_default_value_container = row_wrapper.find('.en_default_value_container');
     var en_default_value           = en_default_value_container.find('.en_default_value:checkbox');
     
@@ -573,7 +573,7 @@ wppModal = function(option){
     width: 'auto',
     resizable: false,
     buttons: {
-        Cancle: function () {
+        Cancel: function () {
             jQuery(this).dialog("close");
         }
     },

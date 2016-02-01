@@ -4702,7 +4702,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
       $response = array(
                     'status' => "replaced",
-                    'message' => sprintf( __( "Attributes replaced in %d %s and Property and added in %d %s.", ud_get_wp_property()->domain ), $replaced_row, $replaced_property_label, $replaced_row, $added_property_label ),
+                    'message' => sprintf( __( "Attributes replaced in %d %s and added in %d %s.", ud_get_wp_property()->domain ), $replaced_row, $replaced_property_label, $replaced_row, $added_property_label ),
                   );
     }
     else{

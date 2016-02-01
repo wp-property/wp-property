@@ -153,7 +153,7 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
             echo "<input class='type-text type-url rwmb-text' name='$field_name' value='$value' />";
             echo "<textarea class='type-textarea rwmb-text' name='$field_name'>$value</textarea>";
             ?>
-            <a class="button apply-to-all" data-attribute="<?php echo $slug;?>" href="#" title="Apply to listings that have no value for this field." >Apply to all</a> <br/>
+            <a class="button apply-to-all" data-attribute="<?php echo $slug;?>" href="#" title="<?php _e("Apply to listings that have no value for this field.", ud_get_wp_property()->domain);?>" ><?php _e("Apply to all", ud_get_wp_property()->domain);?></a> <br/>
           </li>
         </ul>
       </td>
