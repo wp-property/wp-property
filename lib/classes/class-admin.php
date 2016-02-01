@@ -88,7 +88,7 @@ namespace UsabilityDynamics\WPP {
             wp_enqueue_script( 'jquery-ui-dialog' );
             wp_enqueue_script( 'wp-property-admin-settings' );
             
-            wp_enqueue_style( 'wp-jquery-ui-dialog' );
+            wp_enqueue_style( 'wpp-jquery-ui-dialog' );
             wp_enqueue_style( 'wpp-jquery-colorpicker-css' );
             // This will enqueue the Media Uploader script
             wp_enqueue_media();
