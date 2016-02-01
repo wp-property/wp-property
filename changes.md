@@ -6,6 +6,7 @@
 * Fixed inherited values for non text attributes.
 * Fixed values rendering for 'Image Upload', 'File Upload' attributes on Single Property page.
 * Fixed 'Next' button's event in numeric pagination for property overview.
+* Warnings and Notices fixes.
 
 ### 2.1.4 ( November 26, 2015 )
 * Property Attributes widget is not shown anymore if no data found.

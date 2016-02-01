@@ -265,8 +265,13 @@ class WPP_Core {
   static public function make_attributes_hidden( $attributes, $property ) {
     global $wp_properties;
 
-    if ( !empty( $attributes ) && !empty( $wp_properties['hidden_attributes'][$property->property_type] )
-    && is_array( $attributes ) && is_array( $wp_properties['hidden_attributes'][$property->property_type] ) ) {
+    if (
+      !empty( $property->property_type ) &&
+      !empty( $attributes ) &&
+      !empty( $wp_properties['hidden_attributes'][$property->property_type] ) &&
+      is_array( $attributes ) &&
+      is_array( $wp_properties['hidden_attributes'][$property->property_type] )
+    ) {
       foreach( $attributes as $slug => $attr ) {
         if ( in_array( $slug, $wp_properties['hidden_attributes'][$property->property_type] ) ) {
           unset($attributes[$slug]);

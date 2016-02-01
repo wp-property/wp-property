@@ -109,90 +109,118 @@ namespace UsabilityDynamics\WPP {
      * @str_name - string // the element need translation
      * @author Fadi Yousef frontend-expert@outlook.com
      */
-    public function translate_property_types_attributes( $data ){
-      
-      $type_package = array(
-        'kind' => 'Property Types',
-        'name' => 'custom-types',
-        'title' => 'Property Types',
-      );
-      
-      $types = $data['wpp_settings'][ 'property_types' ];
-      
-      $this->delete_strings_translation( $type_package, $types );
-      
-      foreach($types as $key => $type){
-        do_action('wpml_register_string', $type , $key , $type_package , $type , 'LINE'); 
-      }
-      
-      $attributes_package = array(
-        'kind' => 'Property Attributes',
-        'name' => 'custom-attributes',
-        'title' => 'Property Attributes',
-      );
-      $attributes = $data['wpp_settings']['property_stats'];
-      
-      $this->delete_strings_translation( $attributes_package, $attributes );
-      
-      foreach($attributes as $key => $attibute){
-        do_action('wpml_register_string', $attibute , $key , $attributes_package , $attibute , 'LINE'); 
-      }
-      
-      $meta_package = array(
-        'kind' => 'Property Meta',
-        'name' => 'custom-meta',
-        'title' => 'Property Meta',
-      );
-      $metas = $data['wpp_settings']['property_meta'];
-      
-      $this->delete_strings_translation( $meta_package, $metas );
-      
-      foreach($metas as $key => $meta){
-        do_action('wpml_register_string', $meta , $key , $meta_package , $meta , 'LINE'); 
-      }
-      
-      $terms_package = array(
-        'kind' => 'Property Term',
-        'name' => 'custom-term',
-        'title' => 'Property Term',
-      );
-      $wpp_terms = $data['wpp_terms']['taxonomies'];
-      
-      $this->delete_strings_translation( $terms_package, $wpp_terms );
-      
-      foreach($wpp_terms as $key => $term){
-        do_action('wpml_register_string', $term['label'] , $key , $terms_package , $term['label'] , 'LINE'); 
-      }
-      
-      $groups_package = array(
-        'kind' => 'Property Groups',
-        'name' => 'custom-groups',
-        'title' => 'Property Groups',
-      );
-      $property_groups = $data['wpp_settings']['property_groups'];
-      
-      $this->delete_strings_translation( $groups_package, $property_groups );
-      
-      foreach($property_groups as $key => $group){
-        do_action('wpml_register_string', $group['name'] , $key , $groups_package , $group['name'] , 'LINE'); 
-      }
-      
-      $attributes_values_package = array(
-        'kind' => 'Property Attributes Values',
-        'name' => 'custom-attributes-value',
-        'title' => 'Property Attributes Values',
-      );
-      $attributes_values = $data['wpp_settings']['predefined_values'];
-      
-      $this->delete_strings_translation( $attributes_values_package, $attributes );
-      
-      foreach($attributes_values as $key => $value){
-        if( $value ){
-          do_action('wpml_register_string', $value , $key , $attributes_values_package , $value , 'LINE');
+    public function translate_property_types_attributes( $data ) {
+
+      if( !empty( $data['wpp_settings'][ 'property_types' ] ) ) {
+
+        $type_package = array(
+          'kind' => 'Property Types',
+          'name' => 'custom-types',
+          'title' => 'Property Types',
+        );
+
+        $types = $data['wpp_settings'][ 'property_types' ];
+
+        $this->delete_strings_translation( $type_package, $types );
+
+        foreach($types as $key => $type){
+          do_action('wpml_register_string', $type , $key , $type_package , $type , 'LINE');
         }
+
+      }
+
+      if( !empty(  $data['wpp_settings']['property_stats'] ) ) {
+
+        $attributes_package = array(
+          'kind' => 'Property Attributes',
+          'name' => 'custom-attributes',
+          'title' => 'Property Attributes',
+        );
+        $attributes = $data['wpp_settings']['property_stats'];
+
+        $this->delete_strings_translation( $attributes_package, $attributes );
+
+        foreach($attributes as $key => $attibute){
+          do_action('wpml_register_string', $attibute , $key , $attributes_package , $attibute , 'LINE');
+        }
+
+      }
+
+      
+      if( !empty( $data['wpp_settings']['property_meta'] ) ) {
+
+        $meta_package = array(
+          'kind' => 'Property Meta',
+          'name' => 'custom-meta',
+          'title' => 'Property Meta',
+        );
+        $metas = $data['wpp_settings']['property_meta'];
+
+        $this->delete_strings_translation( $meta_package, $metas );
+
+        foreach($metas as $key => $meta){
+          do_action('wpml_register_string', $meta , $key , $meta_package , $meta , 'LINE');
+        }
+
+      }
+
+      // @todo: move it to 'WP-Property: Terms' plugin ( add-on ). peshkov@UD
+      if( !empty( $data[ 'wpp_terms' ] ) ) {
+
+        $terms_package = array(
+          'kind' => 'Property Term',
+          'name' => 'custom-term',
+          'title' => 'Property Term',
+        );
+
+        $wpp_terms = $data['wpp_terms']['taxonomies'];
+
+        $this->delete_strings_translation( $terms_package, $wpp_terms );
+
+        foreach($wpp_terms as $key => $term){
+          do_action('wpml_register_string', $term['label'] , $key , $terms_package , $term['label'] , 'LINE');
+        }
+
+      }
+
+      if( !empty( $data['wpp_settings']['property_groups'] ) ) {
+
+        $groups_package = array(
+          'kind' => 'Property Groups',
+          'name' => 'custom-groups',
+          'title' => 'Property Groups',
+        );
+        $property_groups = $data['wpp_settings']['property_groups'];
+
+        $this->delete_strings_translation( $groups_package, $property_groups );
+
+        foreach($property_groups as $key => $group){
+          do_action('wpml_register_string', $group['name'] , $key , $groups_package , $group['name'] , 'LINE');
+        }
+
+      }
+
+      if( !empty( $data['wpp_settings']['predefined_values'] ) ) {
+
+        $attributes_values_package = array(
+          'kind' => 'Property Attributes Values',
+          'name' => 'custom-attributes-value',
+          'title' => 'Property Attributes Values',
+        );
+        $attributes_values = $data['wpp_settings']['predefined_values'];
+
+        $this->delete_strings_translation( $attributes_values_package, $attributes );
+
+        foreach($attributes_values as $key => $value){
+          if( $value ){
+            do_action('wpml_register_string', $value , $key , $attributes_values_package , $value , 'LINE');
+          }
+        }
+
       }
 
     }
+
     /*
     * Get translated text for property types 
     * @auther Fadi Yousef

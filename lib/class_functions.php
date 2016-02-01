@@ -3500,10 +3500,14 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     $property_types = $wp_properties['property_types'];
-    if( array_key_exists($property_object->property_type, $property_types))
-      $property_type = $property_object->property_type;
-    else
-      $property_type = array_search($property_object->property_type, $property_types);
+    $property_type = '';
+    if( !empty( $property_object->property_type ) ) {
+      if( array_key_exists($property_object->property_type, $property_types)) {
+        $property_type = $property_object->property_type;
+      } else {
+        $property_type = array_search($property_object->property_type, $property_types);
+      }
+    }
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
     $exclude = isset( $exclude ) ? ( is_array( $exclude ) ? $exclude : explode( ',', $exclude ) ) : false;
