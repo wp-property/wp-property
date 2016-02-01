@@ -4651,7 +4651,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
 
   /**
-   * Apply default value to all existing property.
+   * Apply default value to all existing properties.
    *
    * @param none
    *
@@ -4659,7 +4659,7 @@ class WPP_F extends UsabilityDynamics\Utility {
    * @author Md. Alimuzzaman Alim
    * @since 2.1.5
    */
-  static function wpp_apply_default_value( ) {
+  static function apply_default_value( ) {
     global $wpdb;
     $replaced_row = 0;
     $added_row = 0;
