@@ -202,6 +202,7 @@ class WPP_Core {
     wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.css' );
     wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'scripts/colorpicker/colorpicker.css' );
     wp_register_style( 'jquery-ui', WPP_URL . 'styles/wpp.admin.jquery.ui.css' );
+    wp_register_style( 'wpp-jquery-ui-dialog', WPP_URL . 'styles/jquery-ui-dialog.min.css' );
 
     wp_register_style( 'wpp-fa-icons', WPP_URL . 'fonts/icons/fa/css/font-awesome.min.css', array(), '4.5.0' );
 
