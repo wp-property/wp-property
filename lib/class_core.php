@@ -1142,7 +1142,6 @@ class WPP_Core {
    * @return array
    */
   function get_instance() {
-    global $wp_properties;
 
     $data = array(
       'request' => $_REQUEST,
@@ -1153,7 +1152,7 @@ class WPP_Core {
       'home_url' => home_url(),
       'user_logged_in' => is_user_logged_in() ? 'true' : 'false',
       'is_permalink' => ( get_option( 'permalink_structure' ) !== '' ? true : false ),
-      'settings' => $wp_properties,
+      'settings' => ud_get_wp_property()->get(),
     );
 
     if( isset( $data[ 'request' ][ 'wp_customize' ] ) && $data[ 'request' ][ 'wp_customize' ] == 'on' ) {
