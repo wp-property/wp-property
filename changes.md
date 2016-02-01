@@ -1,4 +1,5 @@
 ### 2.1.5
+* Added ability to set default values for property's attributes.
 * Added compatibility with WPML plugin.
 * Removed 'Images Upload' data entry for attribute since it duplicated 'Image Upload'.
 * Changed Agent definer from ID to email in wp-property export feed.
