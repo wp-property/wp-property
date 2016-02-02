@@ -567,6 +567,11 @@ if ( !function_exists( 'draw_stats' ) ):
       elseif ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'oembed') {
         $value = wp_oembed_get(trim($value));
       }
+      elseif ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'date') {
+        $time = strtotime($value);
+        $format = get_option('date_format');
+        $value = date($format, $time);
+      }
       elseif ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'file_advanced') {
         wp_enqueue_style( 'front-file-style', ud_get_wp_property()->path( 'static/styles/fields/front-file.css' ), array(), ud_get_wp_property( 'version' ) );
 

@@ -4716,7 +4716,7 @@ class WPP_F extends UsabilityDynamics\Utility {
         $str_value = _n( "value", "values", $count, ud_get_wp_property()->domain );
         $response = array(
                           'status' => "confirm",
-                          'message' => sprintf( __( "Key already exist (In %d %s). Do you want to replace %s %s?", ud_get_wp_property()->domain ), $count, $key_exist_property_label, $str_that, $str_value),
+                          'message' => sprintf( __( "Attribute value already exist (In %d %s). Do you want to replace %s %s?", ud_get_wp_property()->domain ), $count, $key_exist_property_label, $str_that, $str_value),
                         );
       }
       else{
