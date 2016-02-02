@@ -24,6 +24,31 @@ namespace UsabilityDynamics\WPP {
       add_filter( "wpp::attribute::value", array($this,"get_attribute_value_translation") );
       add_filter( "wpp_stat_filter_property_type", array($this,"get_property_type_translation") );
       add_filter( "wpp::taxonomies::labels", array($this,"get_property_taxonomies_translation") );
+
+      add_action( "template_redirect", array( $this, "template_redirect" ) );
+    }
+
+    /**
+     * Maybe translate $wp_properties values
+     *
+     * @author peshkov@UD
+     */
+    public function template_redirect() {
+      global $wp_properties;
+
+      foreach( ud_get_wp_property()->get( 'property_groups' ) as $k => $v ) {
+        $v[ 'name' ] = $this->get_groups_translation( $v[ 'name' ], $k );
+        ud_get_wp_property()->set( "property_groups.{$k}", $v );
+      }
+
+      if( !ud_get_wp_property()->get( 'property_groups._other' ) ) {
+        ud_get_wp_property()->set( "property_groups._other", array(
+          'name' => $this->get_groups_translation( '', '0' )
+        ) );
+      }
+
+      $wp_properties[ 'property_groups' ] = ud_get_wp_property()->get( 'property_groups' );
+
     }
 
     /**
