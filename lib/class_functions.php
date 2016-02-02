@@ -4655,7 +4655,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
 
   /**
-   * Apply default value to all existing properties.
+   * Apply default value to all new and empty and existing properties.
    *
    * @param none
    *
@@ -4703,19 +4703,20 @@ class WPP_F extends UsabilityDynamics\Utility {
       // Whether it's plural or not.
       $replaced_property_label = ($replaced_row>1)? $property_label_plural:$property_label;
       $added_property_label   = ($added_row>1)? $property_label_plural:$property_label;
-
       $response = array(
                     'status' => "replaced",
-                    'message' => sprintf( __( "Attributes replaced in %d %s and added in %d %s.", ud_get_wp_property()->domain ), $replaced_row, $replaced_property_label, $replaced_row, $added_property_label ),
+                    'message' => sprintf( __( "Attributes replaced in %d %s and added in %d %s.", ud_get_wp_property()->domain ), $replaced_row, $replaced_property_label, $added_row, $added_property_label ),
                   );
     }
     else{
       $chk_meta_results = $wpdb->get_results($chk_meta_key);
       if(is_array($chk_meta_results) && $count = count($chk_meta_results)){
         $key_exist_property_label   = ($count>1)? $property_label_plural:$property_label;
+        $str_that = _n( "that", "those", $count, ud_get_wp_property()->domain );
+        $str_value = _n( "value", "values", $count, ud_get_wp_property()->domain );
         $response = array(
                           'status' => "confirm",
-                          'message' => sprintf( __( "Key already exist(In %d %s). Do you want to replace?", ud_get_wp_property()->domain ), $count, $key_exist_property_label),
+                          'message' => sprintf( __( "Key already exist (In %d %s). Do you want to replace %s %s?", ud_get_wp_property()->domain ), $count, $key_exist_property_label, $str_that, $str_value),
                         );
       }
       else{
