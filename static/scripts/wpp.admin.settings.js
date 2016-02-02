@@ -384,13 +384,13 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
               $this.removeClass('disabled').removeAttr('disabled');
               wppModal({
                     message: response.message,
-                    title: "Done!"
+                    title: wpp.strings._done
                 });
             } else if(response.status == 'confirm' ) {
               wppModal({
                     message: response.message,
                     buttons: {
-                        'Replace all': function () {
+                        [wpp.strings.replace_all]: function () {
                             var _this = jQuery(this);
                             data.confirmed = 'all';
                             jQuery(this).parent().find('.ui-dialog-buttonpane button').addClass('disabled').attr('disabled', 'disabled');
@@ -398,7 +398,7 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
                               $this.removeClass('disabled').removeAttr('disabled');
                             });
                         },
-                        "Replace only empty": function () {
+                        [wpp.strings.replace_empty]: function () {
                             var _this = jQuery(this);
                             data.confirmed = 'empty-or-not-exist';
                             jQuery(this).parent().find('.ui-dialog-buttonpane button').addClass('disabled').attr('disabled', 'disabled');
@@ -406,7 +406,7 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
                               $this.removeClass('disabled').removeAttr('disabled');
                             });
                         },
-                        Cancel: function () {
+                        [wpp.strings.cancel]: function () {
                             $this.removeClass('disabled').removeAttr('disabled');
                             jQuery(this).dialog("close");
                         }
@@ -567,13 +567,13 @@ jQuery( document ).ready( wpp.ui.settings.ready );
 wppModal = function(option){
   var _default = {
     modal: true,
-    title: 'Are you sure?',
+    title: wpp.strings.are_you_sure,
     zIndex: 10000,
     autoOpen: true,
     width: 'auto',
     resizable: false,
     buttons: {
-        Cancel: function () {
+        [wpp.strings.cancel]: function () {
             jQuery(this).dialog("close");
         }
     },
