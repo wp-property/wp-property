@@ -809,10 +809,14 @@ class WPP_Core {
       wp_redirect( get_permalink( $post->ID ) );
       die();
     }
-
+    
     /* (count($wp_query->posts) < 2) added post 1.31.1 release */
     /* to avoid taxonomy archives from being broken by single property pages */
-    if( isset( $post ) && count( $wp_query->posts ) < 2 && ( $post->post_type == "property" || isset( $wp_query->is_child_property ) ) ) {
+    if(
+      isset( $post ) &&
+      ( count( $wp_query->posts ) < 2 || ( !empty( $wp_query->queried_object ) && $wp_query->queried_object->post_type == 'property' ) ) &&
+      ( $post->post_type == "property" || isset( $wp_query->is_child_property ) )
+    ) {
       $wp_query->single_property_page = true;
 
       //** This is a hack and should be done better */
