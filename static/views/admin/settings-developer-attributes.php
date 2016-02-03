@@ -97,7 +97,7 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
           <li class="wpp_development_advanced_option en_default_value_container">
             <label>
               <input <?php echo ( isset( $wp_properties[ 'en_default_value' ] ) && is_array( $wp_properties[ 'en_default_value' ] ) && in_array( $slug, $wp_properties[ 'en_default_value' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug en_default_value" name="wpp_settings[en_default_value][]" value="<?php echo $slug; ?>"/>
-              <?php _e( 'Enable deafult value assign.', ud_get_wp_property()->domain ); ?>
+              <?php _e( 'Enable default value assign.', ud_get_wp_property()->domain ); ?>
             </label>
           </li>
           <?php do_action( 'wpp::property_attributes::settings', $slug ); ?>
