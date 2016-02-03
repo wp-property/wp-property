@@ -48,6 +48,7 @@ return array(
     'Composer\\Installers\\PhpBBInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/PhpBBInstaller.php',
     'Composer\\Installers\\PimcoreInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/PimcoreInstaller.php',
     'Composer\\Installers\\PiwikInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/PiwikInstaller.php',
+    'Composer\\Installers\\Plugin' => $vendorDir . '/composer/installers/src/Composer/Installers/Plugin.php',
     'Composer\\Installers\\PrestashopInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/PrestashopInstaller.php',
     'Composer\\Installers\\PuppetInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/PuppetInstaller.php',
     'Composer\\Installers\\RedaxoInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/RedaxoInstaller.php',
