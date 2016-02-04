@@ -102,7 +102,7 @@ namespace UsabilityDynamics\WPP {
           'input'           => 'text',
           'number'          => 'text',
           'currency'        => 'text',
-          'url'             => 'url',
+          'url'             => 'text',
           'oembed'          => 'text',
           'textarea'        => 'textarea',
           'wysiwyg'         => 'textarea',

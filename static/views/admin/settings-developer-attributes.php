@@ -150,8 +150,7 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
             $field_name = "wpp_settings[default_values][$slug]";
             echo __("<label>Default Value</label>", ud_get_wp_property()->domain);
             echo "<br />";
-            echo "<input class='type-text type-url rwmb-text' name='$field_name' value='$value' />";
-            echo "<textarea class='type-textarea rwmb-text' name='$field_name'>$value</textarea>";
+            echo "<div class='default_value_container' data-name='$field_name' data-value='$value' ></div>";
             ?>
             <a class="button apply-to-all" data-attribute="<?php echo $slug;?>" href="#" title="<?php _e("Apply to listings that have no value for this field.", ud_get_wp_property()->domain);?>" ><?php _e("Apply to all", ud_get_wp_property()->domain);?></a> <br/>
           </li>

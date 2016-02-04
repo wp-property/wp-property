@@ -4705,18 +4705,20 @@ class WPP_F extends UsabilityDynamics\Utility {
       $added_property_label   = ($added_row>1)? $property_label_plural:$property_label;
       $response = array(
                     'status' => "replaced",
-                    'message' => sprintf( __( "Attributes replaced in %d %s and added in %d %s.", ud_get_wp_property()->domain ), $replaced_row, $replaced_property_label, $added_row, $added_property_label ),
+                    'message' => sprintf( __( "Attributes replaced in %d %s and added in %d %s.", ud_get_wp_property()->domain ), number_format_i18n($replaced_row), $replaced_property_label, number_format_i18n($added_row), $added_property_label ),
                   );
     }
     else{
       $chk_meta_results = $wpdb->get_results($chk_meta_key);
       if(is_array($chk_meta_results) && $count = count($chk_meta_results)){
         $key_exist_property_label   = ($count>1)? $property_label_plural:$property_label;
-        $str_that = _n( "that", "those", $count, ud_get_wp_property()->domain );
-        $str_value = _n( "value", "values", $count, ud_get_wp_property()->domain );
+        $_those  = __("those", ud_get_wp_property()->domain );
+        $_values = __("values", ud_get_wp_property()->domain );
+        $str_that = _n( "that", $_those, $count, ud_get_wp_property()->domain );
+        $str_value = _n( "value", $_values, $count, ud_get_wp_property()->domain );
         $response = array(
                           'status' => "confirm",
-                          'message' => sprintf( __( "Attribute value already exist (In %d %s). Do you want to replace %s %s?", ud_get_wp_property()->domain ), $count, $key_exist_property_label, $str_that, $str_value),
+                          'message' => sprintf( __( "Attribute value already exist (In %d %s). Do you want to replace %s %s?", ud_get_wp_property()->domain ), number_format_i18n($count), $key_exist_property_label, $str_that, $str_value),
                         );
       }
       else{
@@ -4737,7 +4739,7 @@ class WPP_F extends UsabilityDynamics\Utility {
         
         $response = array(
                           'status' => 'success',
-                          'message' => sprintf( __( "Applied to %d %s.", ud_get_wp_property()->domain), $count, $property_label),
+                          'message' => sprintf( __( "Applied to %d %s.", ud_get_wp_property()->domain), number_format_i18n($count), $property_label),
                         );
       }
     }
