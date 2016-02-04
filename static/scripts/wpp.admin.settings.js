@@ -533,8 +533,20 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
       en_default_value_container.attr('title', wpp.strings.attr_not_support_default ).addClass('overlay');
     }
     else{
-      default_wrapper.find('.wpp_attribute_default_values').find('input, textarea').hide();
-      default_wrapper.find('.wpp_attribute_default_values .type-' + type).show();
+      var dvc = default_wrapper.find('.default_value_container');
+      dvc.html('');
+      if(type == 'text'){
+        jQuery("<input />" )
+          .addClass('type-text type-url rwmb-text')
+          .attr('name', dvc.attr('data-name'))
+          .attr('value', dvc.attr('data-value')).appendTo(dvc);
+      }
+      else if(type == 'textarea'){
+        jQuery("<textarea />" )
+          .addClass('type-text type-url rwmb-textarea')
+          .attr('name', dvc.attr('data-name'))
+          .html(dvc.attr('data-value')).appendTo(dvc);
+      }
       en_default_value.removeAttr('disabled').removeAttr('title').removeClass('disabled').trigger('change');
       en_default_value_container.removeAttr('title').removeClass('overlay');
     }
