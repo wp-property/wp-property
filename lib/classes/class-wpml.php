@@ -18,13 +18,12 @@ namespace UsabilityDynamics\WPP {
       add_filter( 'wpp::get_properties::matching_ids',array($this, 'filtering_matching_ids') );
       add_action( 'wpp::above_list_table',array($this, 'display_languages' ) );
       add_action( 'wpp::save_settings',array($this, 'translate_property_types_attributes'),10,1 );
-      add_filter( "wpp::search_attribute::label", array($this,"get_attribute_translation") );
-      add_filter( "wpp::attribute::label", array($this,"get_attribute_translation") );
+      add_filter( "wpp::search_attribute::label", array($this,"get_attribute_translation"),11,2 );
+      add_filter( "wpp::attribute::label", array($this,"get_attribute_translation"),10,2 );
       add_filter( "wpp::groups::label", array($this,"get_groups_translation"),10,2 );
-      add_filter( "wpp::attribute::value", array($this,"get_attribute_value_translation") );
+      add_filter( "wpp::attribute::value", array($this,"get_attribute_value_translation"),10,2 );
       add_filter( "wpp_stat_filter_property_type", array($this,"get_property_type_translation") );
       add_filter( "wpp::taxonomies::labels", array($this,"get_property_taxonomies_translation") );
-
       add_action( "template_redirect", array( $this, "template_redirect" ) );
     }
 
@@ -265,53 +264,52 @@ namespace UsabilityDynamics\WPP {
     * Get translated text for property attributes 
     * @auther Fadi Yousef
     */
-    public function get_attribute_translation($v){
+    public function get_attribute_translation($v,$attribute_slug=null){
       global $wp_properties;
-
+      
       $attributes = $wp_properties['property_stats'];
       $property_types = $wp_properties['property_types'];
       $property_meta = $wp_properties['property_meta'];
       $property_terms = $wp_properties['taxonomies'];
      
       if( $attr_key = array_search($v,$attributes) ){
-
+        $attribute_slug = ($attribute_slug === null)? $attr_key : $attribute_slug;
         $attributes_package = array(
           'kind' => 'Property Attributes',
           'name' => 'custom-attributes',
           'title' => 'Property Attributes',
         );
-        return apply_filters( 'wpml_translate_string', $v,$v, $attributes_package );
+        return apply_filters( 'wpml_translate_string', $v,$attribute_slug, $attributes_package );
         
       } elseif( $type_key = array_search($v,$property_types) ){
-
+        $attribute_slug = ($attribute_slug === null)? $type_key : $attribute_slug;
         $type_package = array(
           'kind' => 'Property Types',
           'name' => 'custom-types',
           'title' => 'Property Types',
         );
-        return apply_filters( 'wpml_translate_string', $v,$v, $type_package );
+        return apply_filters( 'wpml_translate_string', $v,$attribute_slug, $type_package );
         
       } elseif( $meta_key = array_search($v,$property_meta) ){
+        $attribute_slug = ($attribute_slug === null)? $meta_key : $attribute_slug;
         $meta_package = array(
           'kind' => 'Property Meta',
           'name' => 'custom-meta',
           'title' => 'Property Meta',
         );
-        return apply_filters( 'wpml_translate_string', $v,$v, $meta_package );
+        return apply_filters( 'wpml_translate_string', $v,$attribute_slug, $meta_package );
         
       }elseif( $term_key = array_search($v,$property_terms) ){
-
+        $attribute_slug = ($attribute_slug === null)? $term_key : $attribute_slug;
         $terms_package = array(
           'kind' => 'Property Term',
           'name' => 'custom-term',
           'title' => 'Property Term',
         );
-        return apply_filters( 'wpml_translate_string', $v,$v, $terms_package );
+        return apply_filters( 'wpml_translate_string', $v,$attribute_slug, $terms_package );
 
       }else{
-
-        return;
-
+        return $v;
       }
       
     }
@@ -384,31 +382,42 @@ namespace UsabilityDynamics\WPP {
      * Get translation for predefined property attribute value
      * @auther Fadi Yousef
      */
-    public function get_attribute_value_translation($v){
-      global $wp_properties;$value_in_key;$translated_value;
-      //find the key of the value
-      foreach($wp_properties['predefined_values'] as $key => $value){
-        if( stristr( $value, $v ) ){
-            $value_in_key =  $key;
-        }
-      }
-      if ( $value_in_key != null){
-        $attributes_values_package = array(
+    public function get_attribute_value_translation($v, $attibute_slug = false){
+      global $wp_properties;$value_in_key=null;$translated_value;
+      $attributes_values_package = array(
           'kind' => 'Property Attributes Values',
           'name' => 'custom-attributes-value',
           'title' => 'Property Attributes Values',
         );
-        $default_values = explode(',', str_replace(', ', ',', $wp_properties['predefined_values'][$value_in_key]) );
-        $translated_values = apply_filters( 'wpml_translate_string', $value_in_key,$value_in_key, $attributes_values_package );
-        $translated_values = explode(',',str_replace(', ', ',', $translated_values) );
-        $value_pos = array_search( $v,$default_values );
-        return $translated_values[$value_pos];
-        
+      if($attibute_slug === false){
+        //find the key of the value
+        foreach($wp_properties['predefined_values'] as $key => $value){
+          if( stristr( $value, $v ) ){
+              $value_in_key =  $key;
+          }
+        }
+        if ( $value_in_key != null){
+          
+          $default_values = explode(',', str_replace(', ', ',', $wp_properties['predefined_values'][$value_in_key]) );
+          $translated_values = apply_filters( 'wpml_translate_string', $value_in_key,$value_in_key, $attributes_values_package );
+          $translated_values = explode(',',str_replace(', ', ',', $translated_values) );
+          $value_pos = array_search( $v,$default_values );
+          return $translated_values[$value_pos];
+          
+        }else{
+          return $v;
+        }
       }else{
-        return $v;
+        return apply_filters( 'wpml_translate_string', $attibute_slug,$attibute_slug, $attributes_values_package );
       }
     }
 
+    /*public function translate_wpp_attribute_data($ttribute_data){
+
+      if( !empty( $ttribute_data['label'] ) ){
+        echo '<pre>'. $this->get_attribute_translation( $ttribute_data['slug'] ).'</pre>';
+      }
+    }*/
     
   }
 

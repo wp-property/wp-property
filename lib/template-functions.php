@@ -1025,7 +1025,10 @@ if ( !function_exists( 'draw_property_search_form' ) ):
       foreach ( $search_attributes as $attrib ) {
         //** Override search values if they are set in the developer tab */
         if ( !empty( $wp_properties[ 'predefined_search_values' ][ $attrib ] ) ) {
-          $maybe_search_values = explode( ',', $wp_properties[ 'predefined_search_values' ][ $attrib ] );
+          //*wpp::attribute::value will return predefined values based on attribute name
+          // if WPML not active will return the first value @fadi*/
+          $maybe_search_values = explode( ',', apply_filters('wpp::attribute::value',$wp_properties[ 'predefined_search_values' ][ $attrib ],$attrib) );
+          
           if ( is_array( $maybe_search_values ) ) {
             $using_predefined_values = true;
             $search_values[ $attrib ] = $maybe_search_values;
@@ -1089,7 +1092,6 @@ endif;
 if ( !function_exists( 'wpp_render_search_input' ) ):
   function wpp_render_search_input( $args = false ) {
     global $wp_properties;
-
     extract( $args = wp_parse_args( $args, array(
       'type' => 'input',
       'input_type' => false,
