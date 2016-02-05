@@ -441,7 +441,7 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
             callback();
             wppModal({
                     message: response.message,
-                    title: "Done!"
+                    title: wpp.strings._done
                 });
           },
           error: function() {
