@@ -48,7 +48,8 @@ class LatestPropertiesWidget extends WP_Widget {
         'post_status' => 'publish',
         'post_parent' => null, // any parent
         'order' => 'DESC',
-        'orderby' => 'post_date'
+        'orderby' => 'post_date',
+        'suppress_filters' => 0
     );
 
     $postslist = get_posts( $arg );
