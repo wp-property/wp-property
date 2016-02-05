@@ -266,7 +266,6 @@ namespace UsabilityDynamics\WPP {
     */
     public function get_attribute_translation($v,$attribute_slug=null){
       global $wp_properties;
-      
       $attributes = $wp_properties['property_stats'];
       $property_types = $wp_properties['property_types'];
       $property_meta = $wp_properties['property_meta'];
@@ -279,6 +278,7 @@ namespace UsabilityDynamics\WPP {
           'name' => 'custom-attributes',
           'title' => 'Property Attributes',
         );
+        
         return apply_filters( 'wpml_translate_string', $v,$attribute_slug, $attributes_package );
         
       } elseif( $type_key = array_search($v,$property_types) ){
@@ -288,6 +288,7 @@ namespace UsabilityDynamics\WPP {
           'name' => 'custom-types',
           'title' => 'Property Types',
         );
+        
         return apply_filters( 'wpml_translate_string', $v,$attribute_slug, $type_package );
         
       } elseif( $meta_key = array_search($v,$property_meta) ){
@@ -297,18 +298,22 @@ namespace UsabilityDynamics\WPP {
           'name' => 'custom-meta',
           'title' => 'Property Meta',
         );
+        
         return apply_filters( 'wpml_translate_string', $v,$attribute_slug, $meta_package );
         
-      }elseif( $term_key = array_search($v,$property_terms) ){
+      }elseif( ($term_key = array_search($v,$property_terms)) || is_array($property_terms[$attribute_slug]) ){
         $attribute_slug = ($attribute_slug === null)? $term_key : $attribute_slug;
+        
         $terms_package = array(
           'kind' => 'Property Term',
           'name' => 'custom-term',
           'title' => 'Property Term',
         );
+        
         return apply_filters( 'wpml_translate_string', $v,$attribute_slug, $terms_package );
 
       }else{
+        
         return $v;
       }
       
