@@ -64,7 +64,8 @@ class OtherPropertiesWidget extends WP_Widget {
           'post_type' => 'property',
           'post_status' => 'publish',
           'post_parent' => $post->post_parent,
-          'exclude' => $post->ID
+          'exclude' => $post->ID,
+          'suppress_filters' => 0
       ) );
     } else {
       $properties = WPP_F::get_properties( "property_type={$this_property['property_type']}&pagi=0--$amount_items" );
