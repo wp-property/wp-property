@@ -391,13 +391,11 @@ namespace UsabilityDynamics\WPP {
     public function get_attribute_value_translation($v, $attribute_slug = false){
       global $wp_properties;
       $not_translatable_atts = array('currency','number','oembed','datetime','date','time','color','image_advanced','file_advanced','file_input','checkbox');
-      $v = ( is_array($v) )? implode(',', $v): $v;
+      
       if( empty($wp_properties['predefined_values'][$attribute_slug]) || in_array($wp_properties["admin_attr_fields"][$attribute_slug],$not_translatable_atts)){
         return $v;
       }
-      if( is_array($v) ){
-        echo '<pre>';var_dump($v);echo '</pre>';
-      }
+      $v = ( is_array($v) )? implode(',', $v): $v;
       $attributes_values_package = array(
         'kind' => 'Property Attributes Values',
         'name' => 'custom-attributes-value',
