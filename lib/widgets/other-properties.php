@@ -126,7 +126,7 @@ class OtherPropertiesWidget extends WP_Widget {
                   $content = nl2br( apply_filters( "wpp_stat_filter_property_type_label", $this_property->property_type_label ) );
                   break;
                 case ( !empty($wp_properties["predefined_values"][$stat]) ):
-                  $content = nl2br( apply_filters( "wpp::attribute::value", $this_property->$stat, $stat ) );
+                  $content = nl2br( apply_filters( "wpp_stat_filter_{$stat}",apply_filters( "wpp::attribute::value", $this_property->$stat, $stat ) ) );
                   break;
                 default:
                   $content = nl2br( apply_filters( "wpp_stat_filter_{$stat}", $this_property->$stat ) );

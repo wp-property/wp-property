@@ -118,6 +118,9 @@ class FeaturedPropertiesWidget extends WP_Widget {
                 case ( $stat == 'property_type' ):
                   $content = nl2br( apply_filters( "wpp_stat_filter_property_type_label", $this_property->property_type_label ) );
                   break;
+                case ( !empty($wp_properties["predefined_values"][$stat]) ):
+                  $content = nl2br( apply_filters( "wpp_stat_filter_{$stat}",apply_filters( "wpp::attribute::value", $this_property->$stat, $stat ) ) );
+                  break;
                 default:
                   $content = nl2br( apply_filters( "wpp_stat_filter_{$stat}", $this_property->$stat ) );
                   break;
@@ -126,7 +129,7 @@ class FeaturedPropertiesWidget extends WP_Widget {
                 continue;
               }
               ?>
-              <li class="<?php echo $stat ?>"><span class='attribute'><?php echo $property_stats[ $stat ]; ?>:</span>
+              <li class="<?php echo $stat ?>"><span class='attribute'><?php echo apply_filters('wpp::attribute::label', $property_stats[ $stat ], $stat ); ?>:</span>
                 <span class='value'><?php echo $content; ?></span></li>
             <?php endforeach; ?>
           <?php endif; ?>
