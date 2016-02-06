@@ -23,6 +23,7 @@ namespace UsabilityDynamics\WPP {
       add_filter( "wpp::groups::label", array($this,"get_groups_translation"),10,2 );
       add_filter( "wpp::attribute::value", array($this,"get_attribute_value_translation"),10,2 );
       add_filter( "wpp_stat_filter_property_type", array($this,"get_property_type_translation") );
+      add_filter( "wpp_stat_filter_property_type_label", array($this,"get_property_type_translation") );
       add_filter( "wpp::taxonomies::labels", array($this,"get_property_taxonomies_translation") );
       add_action( "template_redirect", array( $this, "template_redirect" ) );
     }
@@ -387,34 +388,40 @@ namespace UsabilityDynamics\WPP {
      * Get translation for predefined property attribute value
      * @auther Fadi Yousef
      */
-    public function get_attribute_value_translation($v, $attibute_slug = false){
-      global $wp_properties;$value_in_key=null;$translated_value;
-      $attributes_values_package = array(
-          'kind' => 'Property Attributes Values',
-          'name' => 'custom-attributes-value',
-          'title' => 'Property Attributes Values',
-        );
-      if($attibute_slug === false){
-        //find the key of the value
-        foreach($wp_properties['predefined_values'] as $key => $value){
-          if( stristr( $value, $v ) ){
-              $value_in_key =  $key;
-          }
-        }
-        if ( $value_in_key != null){
-          
-          $default_values = explode(',', str_replace(', ', ',', $wp_properties['predefined_values'][$value_in_key]) );
-          $translated_values = apply_filters( 'wpml_translate_string', $value_in_key,$value_in_key, $attributes_values_package );
-          $translated_values = explode(',',str_replace(', ', ',', $translated_values) );
-          $value_pos = array_search( $v,$default_values );
-          return $translated_values[$value_pos];
-          
-        }else{
-          return $v;
-        }
-      }else{
-        return apply_filters( 'wpml_translate_string', $attibute_slug,$attibute_slug, $attributes_values_package );
+    public function get_attribute_value_translation($v, $attribute_slug = false){
+      global $wp_properties;
+      $not_translatable_atts = array('currency','number','oembed','datetime','date','time','color','image_advanced','file_advanced','file_input','checkbox');
+      $v = ( is_array($v) )? implode(',', $v): $v;
+      if( empty($wp_properties['predefined_values'][$attribute_slug]) || in_array($wp_properties["admin_attr_fields"][$attribute_slug],$not_translatable_atts)){
+        return $v;
       }
+      if( is_array($v) ){
+        echo '<pre>';var_dump($v);echo '</pre>';
+      }
+      $attributes_values_package = array(
+        'kind' => 'Property Attributes Values',
+        'name' => 'custom-attributes-value',
+        'title' => 'Property Attributes Values',
+      );
+
+      $default_values = explode(',', str_replace(', ', ',', $wp_properties['predefined_values'][$attribute_slug]) );
+      $translated_values = explode(',',str_replace(', ', ',',apply_filters( 'wpml_translate_string', $attribute_slug,$attribute_slug, $attributes_values_package )));
+      
+      if( $wp_properties['predefined_values'][$attribute_slug] == $v ){
+        return apply_filters( 'wpml_translate_string', $v,$attribute_slug, $attributes_values_package );
+      }elseif( !is_array($v) && (strpos( $v, ',' ) !== false) ){
+        $selected_values = explode(',', str_replace(', ', ',',$v));
+        $s_values_arr = array();
+        foreach ($selected_values as $s_key => $s_value) {
+          $value_pos = array_search( $s_value,$default_values );
+          $s_values_arr[$s_key] = $translated_values[$value_pos];
+        }
+        return implode(',', $s_values_arr);
+      }else{
+        $value_pos = array_search( $v,$default_values );
+        return $translated_values[$value_pos];
+      }
+      
     }
 
     /*public function translate_wpp_attribute_data($ttribute_data){
