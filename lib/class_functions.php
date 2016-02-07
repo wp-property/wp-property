@@ -952,7 +952,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     if( !empty( $wp_properties[ 'property_stats' ] ) && !empty( $wp_properties[ 'sortable_attributes' ] ) ) {
       foreach( (array)$wp_properties[ 'property_stats' ] as $slug => $label ) {
         if( in_array( $slug, (array)$wp_properties[ 'sortable_attributes' ] ) ) {
-          $sortable_attrs[ $slug ] = $label;
+          $sortable_attrs[ $slug ] = apply_filters('wpp::attribute::label',$label,$slug);
         }
       }
     }
