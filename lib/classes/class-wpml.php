@@ -259,7 +259,7 @@ namespace UsabilityDynamics\WPP {
       );
 
       $key = array_search($v,$wp_properties['property_types']);
-      return ($key !== false) ? apply_filters( 'wpml_translate_string', $key,$key, $type_package ) : $v;
+      return ($key !== false) ? apply_filters( 'wpml_translate_string', $v,$key, $type_package ) : $v;
     }
     /*
     * Get translated text for property attributes 
