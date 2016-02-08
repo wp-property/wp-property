@@ -25,6 +25,7 @@ namespace UsabilityDynamics\WPP {
       add_filter( "wpp_stat_filter_property_type", array($this,"get_property_type_translation") );
       add_filter( "wpp_stat_filter_property_type_label", array($this,"get_property_type_translation") );
       add_filter( "wpp::taxonomies::labels", array($this,"get_property_taxonomies_translation") );
+      add_filter( "wpp::search::query", array($this,"add_language_to_search_query"));
       add_action( "template_redirect", array( $this, "template_redirect" ) );
     }
 
@@ -422,12 +423,12 @@ namespace UsabilityDynamics\WPP {
       
     }
 
-    /*public function translate_wpp_attribute_data($ttribute_data){
-
-      if( !empty( $ttribute_data['label'] ) ){
-        echo '<pre>'. $this->get_attribute_translation( $ttribute_data['slug'] ).'</pre>';
-      }
-    }*/
+    /*
+    * append language to search query
+    */
+    public function add_language_to_search_query( $query ){
+      return $query . '&lang=' . apply_filters( 'wpml_current_language', NULL );
+    }
     
   }
 
