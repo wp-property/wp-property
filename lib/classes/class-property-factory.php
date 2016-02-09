@@ -224,7 +224,7 @@ namespace UsabilityDynamics\WPP {
           $data[ 'parent_title' ] = $parent_object[ 'post_title' ];
 
           // Inherit things
-          if( !empty( $wp_properties[ 'property_inheritance' ][ $property[ 'property_type' ] ] ) ) {
+          if( !empty( $property[ 'property_type' ] ) && !empty( $wp_properties[ 'property_inheritance' ][ $property[ 'property_type' ] ] ) ) {
             foreach( (array)$wp_properties[ 'property_inheritance' ][ $property[ 'property_type' ] ] as $inherit_attrib ) {
               if( !empty( $parent_object[ $inherit_attrib ] ) && empty( $property[ $inherit_attrib ] ) ) {
                 $data[ $inherit_attrib ] = $parent_object[ $inherit_attrib ];

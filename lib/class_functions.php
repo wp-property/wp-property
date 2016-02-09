@@ -952,7 +952,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     if( !empty( $wp_properties[ 'property_stats' ] ) && !empty( $wp_properties[ 'sortable_attributes' ] ) ) {
       foreach( (array)$wp_properties[ 'property_stats' ] as $slug => $label ) {
         if( in_array( $slug, (array)$wp_properties[ 'sortable_attributes' ] ) ) {
-          $sortable_attrs[ $slug ] = $label;
+          $sortable_attrs[ $slug ] = apply_filters('wpp::attribute::label',$label,$slug);
         }
       }
     }
@@ -2891,7 +2891,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       }
       unset( $query[ 'post_status' ] );
     }
-
+	
     foreach( (array) $non_post_meta as $field => $condition ) {
       if( array_key_exists( $field, $query ) ) {
         if( $condition == 'like' ) {
@@ -2914,7 +2914,7 @@ class WPP_F extends UsabilityDynamics\Utility {
         unset( $query[ $field ] );
       }
     }
-
+	
     if( !empty( $sql_args[ 'limit_query' ] ) ) {
       $sql_args[ 'starting_row' ] = ( $sql_args[ 'starting_row' ] ? $sql_args[ 'starting_row' ] : 0 );
       $limit_query                = "LIMIT {$sql_args['starting_row']}, {$sql_args['limit_query']};";
@@ -2980,7 +2980,6 @@ class WPP_F extends UsabilityDynamics\Utility {
       if( !isset( $limit_query ) ) {
         $limit_query = '';
       }
-
       switch( $meta_key ) {
 
         case 'property_type':
@@ -3108,7 +3107,7 @@ class WPP_F extends UsabilityDynamics\Utility {
               $matching_id_filter = implode( ",", $matching_ids );
               $sql_query          = "SELECT post_id FROM {$wpdb->postmeta} WHERE post_id IN ( $matching_id_filter ) AND meta_key = '$meta_key' AND $specific";
             } else {
-              $sql_query = "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '$meta_key' AND $specific";
+				      $sql_query = "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '$meta_key' AND $specific";
             }
 
             //** Some specific additional conditions can be set in filters */
@@ -3118,7 +3117,7 @@ class WPP_F extends UsabilityDynamics\Utility {
               'matching_id_filter' => isset( $matching_id_filter ) ? $matching_id_filter : false,
               'criteria'           => $criteria,
             ) );
-
+            
             $matching_ids = $wpdb->get_col( $sql_query );
 
           }
@@ -3459,6 +3458,13 @@ class WPP_F extends UsabilityDynamics\Utility {
   }
 
   /**
+   * Validate if a URL is a valid image.
+   */
+  static public function isIMG( $url ) {
+    return preg_match( '@(?:([^:/?#]+):)?(?://([^/?#]*))?([^?#]*\.(?:jpg|jpeg|gif|png))(?:\?([^#]*))?(?:#(.*))?@i', $url );
+  }
+
+  /**
    * Determine if a email is valid.
    *
    * @param $value
@@ -3483,11 +3489,25 @@ class WPP_F extends UsabilityDynamics\Utility {
     $defaults = array(
       'label_as_key' => 'true',
     );
-
+    $return_multi = ud_get_wp_property( 'attributes.multiple', array() );
+    // Need to improve the way
+    // By: Md. Alimuzzaman Alim
+    if(($key = array_search('multi_checkbox', $return_multi)) !== false) {
+        unset($return_multi[$key]);
+    }
     if( is_array( $property_object ) ) {
       $property_object = (object) $property_object;
     }
 
+    $property_types = $wp_properties['property_types'];
+    $property_type = '';
+    if( !empty( $property_object->property_type ) ) {
+      if( array_key_exists($property_object->property_type, $property_types)) {
+        $property_type = $property_object->property_type;
+      } else {
+        $property_type = array_search($property_object->property_type, $property_types);
+      }
+    }
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
     $exclude = isset( $exclude ) ? ( is_array( $exclude ) ? $exclude : explode( ',', $exclude ) ) : false;
@@ -3498,6 +3518,12 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     $return = array();
+    $parent_property_object = "";
+    if(isset($property_object->is_child) && $property_object->is_child && 
+       isset($property_object->parent_id) && $property_object->parent_id 
+    ){
+      $parent_property_object = UsabilityDynamics\WPP\Property_Factory::get($property_object->parent_id, array('return_object' => 'true'));
+    }
 
     foreach( $property_stats as $slug => $label ) {
 
@@ -3515,10 +3541,25 @@ class WPP_F extends UsabilityDynamics\Utility {
         continue;
       }
 
-      if( !empty( $property_object->{$slug} ) ) {
-        $value = $property_object->{$slug};
+      $_property_object = $property_object;
+      $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $slug );
+      $input_type = isset($attribute_data[ 'data_input_type' ])?$attribute_data[ 'data_input_type' ]:false;
+      
+      if(!$input_type)
+        $input_type = isset($attribute_data[ 'input_type' ])?$attribute_data[ 'input_type' ]: "";
+
+      $single = !in_array($input_type, $return_multi);
+      if(is_object($parent_property_object) &&
+         isset($attribute_data['inheritance']) && 
+         in_array($property_type, $attribute_data['inheritance'])
+      ){
+        $_property_object = $parent_property_object;
+      }
+
+      if($single && !empty( $_property_object->{$slug} ) ) {
+        $value = $_property_object->{$slug};
       } else {
-        $value = get_post_meta( $property_object->ID, $slug, true );
+        $value = get_post_meta( $_property_object->ID, $slug, $single );
       }
 
       if( $value === true ) {
@@ -3527,7 +3568,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
       //** Override property_type slug with label */
       if( $slug == 'property_type' ) {
-        $value = $property_object->property_type_label;
+        $value = $_property_object->property_type_label;
       }
 
       // Include only passed variables
@@ -3708,6 +3749,13 @@ class WPP_F extends UsabilityDynamics\Utility {
                   }
                 } elseif( $value == 'false' ) {
                   continue;
+                }
+                // to get attribute label and value translation @auther fadi
+                $attribute_label = apply_filters('wpp::attribute::label', $attribute_label, $attribute_slug);
+                if( $attribute_slug == 'property_type' ){
+                  $value = apply_filters( "wpp_stat_filter_property_type_label", $value );
+                }elseif( !empty($wp_properties["predefined_values"][$attribute_slug]) ){
+                  $value = apply_filters( "wpp::attribute::value", $value, $attribute_slug);
                 }
 
                 $attributes[ ] = '<li class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_' . $attribute_slug . '">';
@@ -4612,6 +4660,100 @@ class WPP_F extends UsabilityDynamics\Utility {
     return false;
   }
 
+
+  /**
+   * Apply default value to all new and empty and existing properties.
+   *
+   * @param none
+   *
+   * @return nothing.
+   * @author Md. Alimuzzaman Alim
+   * @since 2.1.5
+   */
+  static function apply_default_value( ) {
+    global $wpdb;
+    $replaced_row = 0;
+    $added_row = 0;
+    $prefix = $wpdb->prefix;
+    $data = $_POST['data'];
+    $attribute = $data['attribute'];
+    $value = $data['value'];
+    $response = array();
+    $property_label         = WPP_F::property_label();
+    $property_label_plural  = WPP_F::property_label( 'plural' );
+
+    $chk_meta_key = "SELECT DISTINCT p.ID FROM {$wpdb->posts} AS p INNER JOIN {$wpdb->postmeta} AS pm ON p.ID = pm.post_id  WHERE p.post_type = 'property' AND pm.meta_key = '$attribute'";
+    if(isset($data['confirmed']) && $data['confirmed']){
+      if ($data['confirmed'] == 'all') {
+        $sql = "UPDATE {$wpdb->posts} AS p INNER JOIN {$wpdb->postmeta} AS pm ON p.ID = pm.post_id SET pm.meta_value = '$value' WHERE p.post_type = 'property' AND pm.meta_key = '$attribute'";
+        $replaced_row = $wpdb->query($sql);
+      }
+
+      if ($data['confirmed'] == 'all' || $data['confirmed'] == 'empty-or-not-exist') {
+        $_chk_meta_key = "SELECT DISTINCT p.ID FROM {$wpdb->posts} AS p INNER JOIN {$wpdb->postmeta} AS pm ON p.ID = pm.post_id  WHERE p.post_type = 'property' AND pm.meta_key = '$attribute' and pm.meta_value != ''";
+        $sql = "SELECT DISTINCT p.ID FROM {$wpdb->posts} AS p WHERE p.post_type = 'property' AND p.ID NOT IN($_chk_meta_key)";
+        $results = $wpdb->get_results($sql);
+        foreach ($results as $post) {
+          $wpdb->insert(
+                        $wpdb->postmeta,
+                        array(
+                          'post_id' => $post->ID,
+                          'meta_key' => $attribute,
+                          'meta_value' => $value,
+                          )
+                      );
+        }
+        $added_row = count($results);
+      }
+      //"Attributes replaced in $replaced_row Property and added in $added_row Property."
+
+      // Whether it's plural or not.
+      $replaced_property_label = ($replaced_row>1)? $property_label_plural:$property_label;
+      $added_property_label   = ($added_row>1)? $property_label_plural:$property_label;
+      $response = array(
+                    'status' => "replaced",
+                    'message' => sprintf( __( "Attributes replaced in %d %s and added in %d %s.", ud_get_wp_property()->domain ), number_format_i18n($replaced_row), $replaced_property_label, number_format_i18n($added_row), $added_property_label ),
+                  );
+    }
+    else{
+      $chk_meta_results = $wpdb->get_results($chk_meta_key);
+      if(is_array($chk_meta_results) && $count = count($chk_meta_results)){
+        $key_exist_property_label   = ($count>1)? $property_label_plural:$property_label;
+        $_those  = __("those", ud_get_wp_property()->domain );
+        $_values = __("values", ud_get_wp_property()->domain );
+        $str_that = _n( "that", $_those, $count, ud_get_wp_property()->domain );
+        $str_value = _n( "value", $_values, $count, ud_get_wp_property()->domain );
+        $response = array(
+                          'status' => "confirm",
+                          'message' => sprintf( __( "Attribute value already exist (In %d %s). Do you want to replace %s %s?", ud_get_wp_property()->domain ), number_format_i18n($count), $key_exist_property_label, $str_that, $str_value),
+                        );
+      }
+      else{
+        $sql = "SELECT DISTINCT p.ID FROM {$wpdb->posts} AS p WHERE p.post_type = 'property' AND p.ID";
+        $results = $wpdb->get_results($sql);
+        $count = count($results);
+        $property_label   = ($count>1)? $property_label_plural:$property_label;
+        foreach ($results as $post) {
+          $wpdb->insert(
+                        $wpdb->postmeta,
+                        array(
+                          'post_id' => $post->ID,
+                          'meta_key' => $attribute,
+                          'meta_value' => $value,
+                          )
+                      );
+        }
+        
+        $response = array(
+                          'status' => 'success',
+                          'message' => sprintf( __( "Applied to %d %s.", ud_get_wp_property()->domain), number_format_i18n($count), $property_label),
+                        );
+      }
+    }
+
+    echo json_encode($response);
+  }
+
 }
 
 /**
@@ -4692,3 +4834,4 @@ if( !function_exists( 'property_feed' ) ) {
 
   }
 }
+

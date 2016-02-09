@@ -82,10 +82,13 @@ namespace UsabilityDynamics\WPP {
             wp_enqueue_script( 'jquery-ui-core' );
             wp_enqueue_script( 'jquery-ui-sortable' );
             wp_enqueue_script( 'wpp-jquery-colorpicker' );
-            wp_enqueue_script( 'wp-property-admin-settings' );
             wp_enqueue_script( 'jquery-ui-tabs' );
             wp_enqueue_script( 'jquery-ui-tooltip' );
             wp_enqueue_script( 'jquery-cookie' );
+            wp_enqueue_script( 'jquery-ui-dialog' );
+            wp_enqueue_script( 'wp-property-admin-settings' );
+            
+            wp_enqueue_style( 'wpp-jquery-ui-dialog' );
             wp_enqueue_style( 'wpp-jquery-colorpicker-css' );
             // This will enqueue the Media Uploader script
             wp_enqueue_media();

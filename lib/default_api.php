@@ -456,6 +456,7 @@ function add_display_address( $property ) {
   // Check if property is supposed to inehrit the address
   if ( 
     isset( $property[ 'parent_id' ] )
+    && !empty( $property[ 'property_type' ] )
     && isset( $wp_properties[ 'property_inheritance' ][ $property[ 'property_type' ] ] )
     && in_array( $wp_properties[ 'configuration' ][ 'address_attribute' ], (array)$wp_properties[ 'property_inheritance' ][ $property[ 'property_type' ] ] )
   ) {

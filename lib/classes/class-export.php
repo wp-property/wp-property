@@ -189,6 +189,14 @@ namespace UsabilityDynamics\WPP {
           // Set unique site ID
           $property[ 'wpp_unique_id' ] = md5( $api_key . $property[ 'ID' ] );
 
+          if(is_array($property['wpp_agents']) && count($property['wpp_agents'])){
+            foreach ($property['wpp_agents'] as $key => $agent_id) {
+              $agent = get_userdata($agent_id);
+              if ( is_object($agent) && isset($agent->user_email) ) {
+                 $property['wpp_agents'][$key] = $agent->user_email;
+              }   
+            }
+          }
           //** Get taxonomies */
           if ( $taxonomies ) {
             foreach ( $taxonomies as $taxonomy_slug => $taxonomy_data ) {

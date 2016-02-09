@@ -48,7 +48,8 @@ class LatestPropertiesWidget extends WP_Widget {
         'post_status' => 'publish',
         'post_parent' => null, // any parent
         'order' => 'DESC',
-        'orderby' => 'post_date'
+        'orderby' => 'post_date',
+        'suppress_filters' => 0
     );
 
     $postslist = get_posts( $arg );
@@ -98,6 +99,9 @@ class LatestPropertiesWidget extends WP_Widget {
               case ( $stat == 'property_type' ):
                 $content = nl2br( apply_filters( "wpp_stat_filter_property_type_label", $this_property->property_type_label ) );
                 break;
+              case ( !empty($wp_properties["predefined_values"][$stat]) ):
+                $content = nl2br( apply_filters( "wpp_stat_filter_{$stat}",apply_filters( "wpp::attribute::value", $this_property->$stat, $stat ) ) );
+                break;
               default:
                 $content = nl2br( apply_filters( "wpp_stat_filter_{$stat}", $this_property->$stat ) );
                 break;
@@ -105,7 +109,7 @@ class LatestPropertiesWidget extends WP_Widget {
             if ( empty( $content ) ) {
               continue;
             }
-            echo '<li class="' . $stat . '"><span class="attribute">' . $property_stats[ $stat ] . ':</span> <span class="value">' . $content . '</span></li>';
+            echo '<li class="' . $stat . '"><span class="attribute">' . apply_filters('wpp::attribute::label',$property_stats[ $stat ],$stat) . ':</span> <span class="value">' . $content . '</span></li>';
           }
         }
         echo '</ul>';

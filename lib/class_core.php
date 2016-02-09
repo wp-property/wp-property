@@ -121,6 +121,7 @@ class WPP_Core {
     add_action( 'wp_ajax_wpp_ajax_clear_cache', create_function( "", '  echo WPP_F::clear_cache(); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_revalidate_all_addresses', create_function( "", '  echo WPP_F::revalidate_all_addresses(); die();' ) );
     add_action( 'wp_ajax_wpp_save_settings', create_function( "", ' die(WPP_F::save_settings());' ) );
+    add_action( 'wp_ajax_wpp_apply_default_value', create_function( "", ' die(WPP_F::apply_default_value());' ) );
 
     /** Called in setup_postdata().  We add property values here to make available in global $post variable on frontend */
     add_action( 'the_post', array( 'WPP_F', 'the_post' ) );
@@ -181,6 +182,7 @@ class WPP_Core {
     wp_register_script( 'wp-property-admin-overview', WPP_URL . 'scripts/wpp.admin.overview.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-admin-widgets', WPP_URL . 'scripts/wpp.admin.widgets.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-admin-settings', WPP_URL . 'scripts/wpp.admin.settings.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
+
     wp_register_script( 'wp-property-backend-global', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-backend-editor', WPP_URL . 'scripts/wpp.admin.editor.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable' ), WPP_Version );
@@ -199,6 +201,9 @@ class WPP_Core {
     wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.css' );
     wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'scripts/colorpicker/colorpicker.css' );
     wp_register_style( 'jquery-ui', WPP_URL . 'styles/wpp.admin.jquery.ui.css' );
+    wp_register_style( 'wpp-jquery-ui-dialog', WPP_URL . 'styles/jquery-ui-dialog.min.css' );
+
+    wp_register_style( 'wpp-fa-icons', WPP_URL . 'fonts/icons/fa/css/font-awesome.min.css', array(), '4.5.0' );
 
     /** Find and register stylesheet  */
     if( file_exists( STYLESHEETPATH . '/wp-properties.css' ) ) {
@@ -259,8 +264,13 @@ class WPP_Core {
   static public function make_attributes_hidden( $attributes, $property ) {
     global $wp_properties;
 
-    if ( !empty( $attributes ) && !empty( $wp_properties['hidden_attributes'][$property->property_type] )
-    && is_array( $attributes ) && is_array( $wp_properties['hidden_attributes'][$property->property_type] ) ) {
+    if (
+      !empty( $property->property_type ) &&
+      !empty( $attributes ) &&
+      !empty( $wp_properties['hidden_attributes'][$property->property_type] ) &&
+      is_array( $attributes ) &&
+      is_array( $wp_properties['hidden_attributes'][$property->property_type] )
+    ) {
       foreach( $attributes as $slug => $attr ) {
         if ( in_array( $slug, $wp_properties['hidden_attributes'][$property->property_type] ) ) {
           unset($attributes[$slug]);
@@ -335,7 +345,8 @@ class WPP_Core {
     if( isset( $_REQUEST[ 'wpp_search' ] ) && is_array( $_REQUEST[ 'wpp_search' ] ) ) {
 
       if( isset( $_POST[ 'wpp_search' ] ) ) {
-        $_query = '?' . http_build_query( array( 'wpp_search' => $_REQUEST[ 'wpp_search' ] ), '', '&' );
+        $_query = '?' . http_build_query( array( 'wpp_search' => $_REQUEST[ 'wpp_search' ], 'lang' => apply_filters( 'wpml_current_language', NULL ) ), '', '&' );
+
         wp_redirect( WPP_F::base_url( $wp_properties[ 'configuration' ][ 'base_slug' ] ) . $_query );
         die();
       }
@@ -700,7 +711,7 @@ class WPP_Core {
 
         //** Load the first found template */
         if( $_template ) {
-          WPP_F::console_log( 'Found single property page template:' . $_template );
+          WPP_F::console_log( 'Found single property page template:' . wp_normalize_path($_template) );
           return $_template;
         }
 
@@ -1137,7 +1148,6 @@ class WPP_Core {
    * @return array
    */
   function get_instance() {
-    global $wp_properties;
 
     $data = array(
       'request' => $_REQUEST,
@@ -1148,7 +1158,7 @@ class WPP_Core {
       'home_url' => home_url(),
       'user_logged_in' => is_user_logged_in() ? 'true' : 'false',
       'is_permalink' => ( get_option( 'permalink_structure' ) !== '' ? true : false ),
-      'settings' => $wp_properties,
+      'settings' => ud_get_wp_property()->get(),
     );
 
     if( isset( $data[ 'request' ][ 'wp_customize' ] ) && $data[ 'request' ][ 'wp_customize' ] == 'on' ) {

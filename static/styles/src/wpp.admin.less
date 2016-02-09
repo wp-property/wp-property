@@ -2156,8 +2156,63 @@ body.post-type-property {
 
   }
 
+  & .wpp_attribute_default_values input[type=text].rwmb-text {
+    width: 100%;
+    max-width: 100%;
+
+  }
   .uisf-date {
     width: 100%;
   }
 
+}
+.lang_subsubsub{
+  list-style:none;
+  margin:8px 0 0;
+  padding:0;
+  font-size:13px;
+  color:#666;
+  li{
+    display:inline-block;
+    margin:0;
+    padding:0;
+    white-space:nowrap;
+    &:after{
+      content:" |";
+    }
+    &:last-child:after{
+      content:"";
+    }
+  }
+  a{
+    line-height:2;
+    padding:.2em;
+    text-decoration:none;
+    &.current{
+      font-weight:600;
+      border:none;
+      color:#000;
+    }
+    &.count,&.current .count{
+      color:#999;
+      font-weight:400;
+    }
+    
+  }
+}
+.wp-color-result:after{
+  content:"Select Color";
+}
+
+.en_default_value_container{
+  position:relative;
+  &.overlay:before{
+    content:"";
+    top:0; 
+    left:0; 
+    right:0; 
+    bottom:0;
+    z-index: 99;
+    position:absolute; 
+  }
 }

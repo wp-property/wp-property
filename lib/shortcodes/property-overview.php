@@ -598,6 +598,7 @@ namespace UsabilityDynamics\WPP {
       static public function draw_pagination( $settings = '' ) {
         global $wpp_query, $wp_properties;
 
+        $use_pagination = false;
         $settings = wp_parse_args( $settings, array(
           'type' => 'slider',
           'javascript' => true,
@@ -710,9 +711,10 @@ namespace UsabilityDynamics\WPP {
       /**
        * Render property_overview default styles at once!
        */
-      public function maybe_print_styles() {
+      static public function maybe_print_styles() {
         global $_wp_property_overview_style;
         if( empty( $_wp_property_overview_style) || !$_wp_property_overview_style ) {
+          wp_enqueue_style('wpp-fa-icons');
           $_wp_property_overview_style = true;
           $style_path = apply_filters( "property-overview-style-path", ud_get_wp_property()->path( 'static/styles/property_overview.css', 'url' ) );
           if( !empty( $style_path ) ) {

@@ -9,12 +9,9 @@
         margin: 0;
 
         &:after {
-          content: "&nbsp;";
+          content: "";
           clear: both;
-          height: 1px;
-          font-size: 1px;
-          line-height: 1px;
-          margin-top: -1px;
+          display:table;
         }
 
         li {
@@ -30,7 +27,19 @@
             text-decoration: none;
             display: block;
             padding: 2px 6px;
+            font-size:16px;
             border: 1px solid #bfbfbf;
+
+            body.wpp_is_mobile &{
+              width: 30px;
+              height:30px;
+              font-size: 16px;
+              padding: 0px;
+              font-weight: 600;
+              line-height: 28px;
+              text-align: center;
+              box-sizing: border-box;
+            }
 
             &:hover,
             &:active {
@@ -38,22 +47,25 @@
             }
           }
 
-          &.current-page {
-
-            a {
-              font-weight: 600;
-              cursor: default;
-              border-color: #000;
-            }
-
-          }
 
           &.pages {
 
             ul {
-
-              li {
-
+              body.wpp_is_mobile & li.page{
+                display:none;
+              }
+              li{
+                &.current-page {
+                  body.wpp_is_mobile &{
+                    display:inline;
+                    margin-right: 0px;
+                  }
+                  a {
+                    font-weight: 600;
+                    cursor: default;
+                  }
+  
+                } 
               }
 
             }

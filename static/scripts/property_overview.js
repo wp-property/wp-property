@@ -194,14 +194,23 @@
     function prepare_numeric_pagination_ui( number ) {
       var c = jQuery( '<ul class="property-overview-navigation"></ul>' ),
         query = window.wpp_query[ vars.unique_id ],
-        el = jQuery( "#wpp_shortcode_" + query.unique_hash + " .wpp_pagination_buttons_wrapper" );
+        el = jQuery( "#wpp_shortcode_" + query.unique_hash + " .wpp_pagination_buttons_wrapper" ),
+        is_mobile = jQuery('body').hasClass('wpp_is_mobile');
       console.log( 'draw_pagination', number, query );
       number = parseInt( number );
       /** Maybe, render 'first' page link */
-      if( number > 1 ) {
+      if( number > 1 && !is_mobile) {
         c.append( '<li data-page="1" class="first-page-btn"><a href="javascript:;" class="btn button">' + l10n.first + '</a></li>' );
         c.append( '<li data-page="' + ( number - 1 ) + '" class="previous-page-btn"><a href="javascript:;" class="btn button">' + l10n.previous + '</a></li>' );
         //c.append( '<li class="dots">...</li>' );
+      }
+      else if(is_mobile) {
+        var prev = '';
+        if(number > 1){
+          prev = 'data-page="' + ( number - 1 ) + '"';
+        }
+        c.append( '<li data-page="1" class="first-page-btn"><a href="javascript:;" class="btn button fa fa-step-backward"></a></li>' );
+        c.append( '<li ' + prev + ' class="previous-page-btn"><a href="javascript:;" class="btn button fa fa-chevron-left"></a></li>' );
       }
 
       c.append( '<li class="pages"><ul></ul></li>' );
@@ -240,11 +249,22 @@
       c.append( '</ul></li>' );
 
       /** Maybe, render 'last' page link */
-      if( show_last ) {
+      if( show_last && !is_mobile) {
         //c.append( '<li class="dots">...</li>' );
-        c.append( '<li data-page="' + ( number + 1 ) + '" class="previous-page-btn"><a href="javascript:;" class="btn button">' + l10n.next + '</a></li>' );
+        c.append( '<li data-page="' + ( number + 1 ) + '" class="next-page-btn"><a href="javascript:;" class="btn button">' + l10n.next + '</a></li>' );
         c.append( '<li data-page="' + query.pages + '" class="last-page-btn"><a href="javascript:;" class="btn button">' + l10n.last + '</a></li>' );
       }
+      else if(is_mobile) {
+        var next = '';
+        var last = '';
+        if(show_last){
+          next = 'data-page="' + ( number + 1 ) + '"';
+          last = 'data-page="' + ( query.pages ) + '"';
+        }
+        c.append( '<li ' + next + ' class="next-page-btn"><a href="javascript:;" class="btn button fa fa-chevron-right"></a></li>' );
+        c.append( '<li ' + last + ' class="last-page-btn"><a href="javascript:;" class="btn button fa fa-step-forward"></a></li>' );
+      }
+      jQuery(document).trigger('filter::pagination', [c]);
       /** Update our HTML */
       el.html( c );
       /** Add 'click' events for our links */
@@ -298,6 +318,8 @@
       if ( scroll_to ) {
         jQuery( document ).trigger( 'wpp_pagination_change', {'overview_id': unique_id} );
       }
+      
+      jQuery( document ).trigger( 'wpp_pagination_change_start', {'overview_id': unique_id} );
 
       data = window.wpp_query[ unique_id ];
       data.ajax_call = 'true';

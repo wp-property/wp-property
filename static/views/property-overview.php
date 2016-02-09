@@ -46,7 +46,7 @@
                 <li class="property_title">
                     <a <?php echo $in_new_window; ?> href="<?php echo $property['permalink']; ?>"><?php echo $property['post_title']; ?></a>
                     <?php if( !empty( $property['is_child'] ) ): ?>
-                        of <a <?php echo $in_new_window; ?> href='<?php echo $property['parent_link']; ?>'><?php echo $property['parent_title']; ?></a>
+                        <?php _e('of',ud_get_wp_property()->domain); ?> <a <?php echo $in_new_window; ?> href='<?php echo $property['parent_link']; ?>'><?php echo $property['parent_title']; ?></a>
                     <?php endif; ?>
                 </li>
 

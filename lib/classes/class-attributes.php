@@ -94,11 +94,28 @@ namespace UsabilityDynamics\WPP {
           ),
         ));
 
+
+        /**
+         * Set supported type for default value.
+         */
+        ud_get_wp_property()->set('attributes.default', array(
+          'input'           => 'text',
+          'number'          => 'text',
+          'currency'        => 'text',
+          'url'             => 'text',
+          'oembed'          => 'text',
+          'textarea'        => 'textarea',
+          'wysiwyg'         => 'textarea',
+        ));
+
         /**
          * Set schema for multiple attributes types.
          */
         ud_get_wp_property()->set('attributes.multiple', array(
-          'multi_checkbox'
+          'multi_checkbox',
+          'image_advanced',
+          'file_advanced',
+          'image_upload',
         ) );
 
         /** Fix numeric/currency logic */

@@ -261,6 +261,7 @@ namespace UsabilityDynamics\WPP {
          * Get all data we need to operate with.
          */
         $attributes = ud_get_wp_property( 'property_stats', array() );
+        $defaults = ud_get_wp_property( 'default_values', array() );
         $geo_type_attributes = ud_get_wp_property( 'geo_type_attributes', array() );
         $hidden_attributes = ud_get_wp_property( 'hidden_attributes', array() );
         $inherited_attributes = ud_get_wp_property( 'property_inheritance', array() );
@@ -407,6 +408,7 @@ namespace UsabilityDynamics\WPP {
             // $description[] = __( 'The value is being used by Google Address Validator to determine and prepare address to valid format. However you can set coordinates manually.', ud_get_wp_property()->domain );
           }
 
+          $original_type = $input_type;
           //* Is current attribute inherited from parent? If so, set it as readonly!. */
           if(
             isset( $post->post_parent ) &&
@@ -450,6 +452,15 @@ namespace UsabilityDynamics\WPP {
             }
           }
 
+          $default = isset($defaults[$slug])?$defaults[$slug]:"";
+          //if(!empty($default) && $attribute['multiple']){
+          //  $_defaults = explode(',', $default);
+          //  $default = array();
+          //  foreach ($_defaults as $key => $d) {
+          //    $d = trim( preg_replace( "/\r|\n/", "", $d ) );
+          //    $default[esc_attr( $d ) ] = apply_filters( 'wpp_stat_filter_' . $slug, $d );
+          //  }
+          //}
           /**
            * Well, init field now.
            */
@@ -457,6 +468,8 @@ namespace UsabilityDynamics\WPP {
             'id' => $slug,
             'name' => $label,
             'type' => $input_type,
+            'std' => $default,
+            'original_type' => $original_type,
             'desc' => implode( ' ', (array) $description ),
             'options' => $options,
           ) ), $slug, $post );

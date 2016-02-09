@@ -112,7 +112,7 @@
         <?php if(!empty($wp_properties['taxonomies'])) foreach($wp_properties['taxonomies'] as $tax_slug => $tax_data): ?>
           <?php if(get_features("type={$tax_slug}&format=count")):  ?>
           <div class="<?php echo $tax_slug; ?>_list">
-          <h2><?php echo $tax_data['label']; ?></h2>
+          <h2><?php echo apply_filters('wpp::attribute::label',$tax_data['label']); ?></h2>
           <ul class="clearfix">
           <?php get_features("type={$tax_slug}&format=list&links=true"); ?>
           </ul>

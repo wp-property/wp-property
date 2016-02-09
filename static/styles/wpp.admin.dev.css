@@ -1652,6 +1652,59 @@ body.post-type-property input[type=text].rwmb-text {
   width: 30em;
   max-width: 90%;
 }
+body.post-type-property .wpp_attribute_default_values input[type=text].rwmb-text {
+  width: 100%;
+  max-width: 100%;
+}
 body.post-type-property .uisf-date {
   width: 100%;
+}
+.lang_subsubsub {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  font-size: 13px;
+  color: #666;
+}
+.lang_subsubsub li {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+.lang_subsubsub li:after {
+  content: " |";
+}
+.lang_subsubsub li:last-child:after {
+  content: "";
+}
+.lang_subsubsub a {
+  line-height: 2;
+  padding: .2em;
+  text-decoration: none;
+}
+.lang_subsubsub a.current {
+  font-weight: 600;
+  border: none;
+  color: #000;
+}
+.lang_subsubsub a.count,
+.lang_subsubsub a.current .count {
+  color: #999;
+  font-weight: 400;
+}
+.wp-color-result:after {
+  content: "Select Color";
+}
+.en_default_value_container {
+  position: relative;
+}
+.en_default_value_container.overlay:before {
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  position: absolute;
 }

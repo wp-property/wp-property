@@ -294,9 +294,15 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
     jQuery( ".wpp_pre_defined_value_setter" ).live( "change", function() {
       wpp.ui.settings.set_pre_defined_values_for_attribute( this );
     } );
-
     jQuery( ".wpp_pre_defined_value_setter" ).each( function() {
       wpp.ui.settings.set_pre_defined_values_for_attribute( this );
+    } );
+    // Assigning  default value
+    jQuery( ".wpp_admin_input_col .wpp_pre_defined_value_setter" ).live( "change", function() {
+      wpp.ui.settings.default_values_for_attribute( this );
+    } );
+    jQuery( ".wpp_admin_input_col .wpp_pre_defined_value_setter" ).each( function() {
+      wpp.ui.settings.default_values_for_attribute( this );
     } );
 
     /**
@@ -343,6 +349,107 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
       jQuery( '.button-remove-image', section ).remove();
     } );
 
+    /**
+     * Default value.
+     */
+    jQuery(document).on('change', '.en_default_value:checkbox', function(){
+      var _this = jQuery(this);
+      if(this.checked)
+        _this.closest('td').siblings('td.wpp_admin_input_col').find('.wpp_attribute_default_values').show();
+      else
+        _this.closest('td').siblings('td.wpp_admin_input_col').find('.wpp_attribute_default_values').hide();
+    });
+    
+    jQuery(document).on('click', '.apply-to-all', function(){
+      var $this = jQuery(this),
+          attribute  = $this.data('attribute'),
+          value = $this.parent().find('input, select, textarea').val(),
+          data  = {
+                    attribute: attribute,
+                    value: value,
+
+                };
+      if($this.hasClass('disabled')) return false;
+      $this.addClass('disabled').attr('disabled', 'disabled');
+      jQuery.ajax({
+          type: 'POST',
+          url: wpp.instance.ajax_url,
+          data: {
+            action: 'wpp_apply_default_value',
+            data: data
+          },
+          success: function( response ){
+            var response = jQuery.parseJSON( response );
+            if( response.status == 'success' ) {
+              $this.removeClass('disabled').removeAttr('disabled');
+              wppModal({
+                    message: response.message,
+                    title: wpp.strings._done
+                });
+            } else if(response.status == 'confirm' ) {
+              wppModal({
+                    message: response.message,
+                    buttons: {
+                        [wpp.strings.replace_all]: function () {
+                            var _this = jQuery(this);
+                            data.confirmed = 'all';
+                            jQuery(this).parent().find('.ui-dialog-buttonpane button').addClass('disabled').attr('disabled', 'disabled');
+                            onConfirm(data, function(){
+                              $this.removeClass('disabled').removeAttr('disabled');
+                            });
+                        },
+                        [wpp.strings.replace_empty]: function () {
+                            var _this = jQuery(this);
+                            data.confirmed = 'empty-or-not-exist';
+                            jQuery(this).parent().find('.ui-dialog-buttonpane button').addClass('disabled').attr('disabled', 'disabled');
+                            onConfirm(data, function(){
+                              $this.removeClass('disabled').removeAttr('disabled');
+                            });
+                        },
+                        [wpp.strings.cancel]: function () {
+                            $this.removeClass('disabled').removeAttr('disabled');
+                            jQuery(this).dialog("close");
+                        }
+                    },
+                    close: function (event, ui) {
+                        $this.removeClass('disabled').removeAttr('disabled');
+                        jQuery(this).remove();
+                    }
+                });
+            }
+          },
+          error: function() {
+            $this.removeClass('disabled').removeAttr('disabled');
+            alert( wpp.strings.undefined_error );
+          }
+        });
+      return false;
+    });
+
+    var onConfirm = function(data, callback){
+      if(typeof callback == 'undefined')
+        callback = function(){}
+      jQuery.ajax({
+          type: 'POST',
+          url: wpp.instance.ajax_url,
+          data: {
+            action: 'wpp_apply_default_value',
+            data: data
+          },
+          success: function( response ){
+            var response = jQuery.parseJSON( response );
+            callback();
+            wppModal({
+                    message: response.message,
+                    title: wpp.strings._done
+                });
+          },
+          error: function() {
+            callback();
+            alert( wpp.strings.undefined_error );
+          }
+        });
+    }
   },
 
   /**
@@ -409,6 +516,43 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
   },
 
   /**
+   * @Author: Md. Alimuzzaman Alim
+   */
+  default_values_for_attribute: function( setter_element ) {
+
+    var default_wrapper            = jQuery( setter_element ).closest( "ul" );
+    var row_wrapper                = jQuery( setter_element ).closest( ".wpp_dynamic_table_row" );
+    var setting                    = jQuery( setter_element ).val();
+    var type                       = wpp.instance.settings.attributes.default[setting];
+    var en_default_value_container = row_wrapper.find('.en_default_value_container');
+    var en_default_value           = en_default_value_container.find('.en_default_value:checkbox');
+    
+    if(typeof(type) == "undefined"){
+      default_wrapper.find('.wpp_attribute_default_values').hide();
+      en_default_value.prop('checked', false).attr('disabled', 'disabled').addClass('disabled').trigger('change');
+      en_default_value_container.attr('title', wpp.strings.attr_not_support_default ).addClass('overlay');
+    }
+    else{
+      var dvc = default_wrapper.find('.default_value_container');
+      dvc.html('');
+      if(type == 'text'){
+        jQuery("<input />" )
+          .addClass('type-text type-url rwmb-text')
+          .attr('name', dvc.attr('data-name'))
+          .attr('value', dvc.attr('data-value')).appendTo(dvc);
+      }
+      else if(type == 'textarea'){
+        jQuery("<textarea />" )
+          .addClass('type-text type-url rwmb-textarea')
+          .attr('name', dvc.attr('data-name'))
+          .html(dvc.attr('data-value')).appendTo(dvc);
+      }
+      en_default_value.removeAttr('disabled').removeAttr('title').removeClass('disabled').trigger('change');
+      en_default_value_container.removeAttr('title').removeClass('overlay');
+    }
+  },
+
+  /**
    * Modifies UI to reflect Default Property Page selection
    *
    * @for wpp.ui.settings
@@ -431,3 +575,31 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
 
 // Initialize Overview.
 jQuery( document ).ready( wpp.ui.settings.ready );
+
+wppModal = function(option){
+  var _default = {
+    modal: true,
+    title: wpp.strings.are_you_sure,
+    zIndex: 10000,
+    autoOpen: true,
+    width: 'auto',
+    resizable: false,
+    buttons: {
+        [wpp.strings.cancel]: function () {
+            jQuery(this).dialog("close");
+        }
+    },
+    close: function (event, ui) {
+        jQuery(this).remove();
+    }
+  };
+  option = jQuery.extend(true, {}, _default, option);
+
+  var wppModalBox = jQuery('#wpp-modal');
+  if(wppModalBox.length == 0)
+    wppModalBox = jQuery('<div id="wpp-modal"></div>').appendTo('body')
+                .html('<div><h3 class="message"></h3></div>');
+  wppModalBox.find('h3.message').html(option.message);
+  wppModalBox.dialog(option);
+  return wppModalBox.dialog( "instance" );
+}

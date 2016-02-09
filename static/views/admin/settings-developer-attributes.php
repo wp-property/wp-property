@@ -5,6 +5,9 @@
  */
 
 global $wp_properties;
+$attributes_default = ud_get_wp_property()->get('attributes.default');
+$attributes_multiple = ud_get_wp_property()->get('attributes.multiple');
+$predefined_values = $wp_properties[ 'predefined_values' ] ;
 
 ?>
 <div>
@@ -91,6 +94,12 @@ global $wp_properties;
               <?php _e( 'Add Column on "All Properties" page.', ud_get_wp_property()->domain ); ?>
             </label>
           </li>
+          <li class="wpp_development_advanced_option en_default_value_container">
+            <label>
+              <input <?php echo ( isset( $wp_properties[ 'en_default_value' ] ) && is_array( $wp_properties[ 'en_default_value' ] ) && in_array( $slug, $wp_properties[ 'en_default_value' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug en_default_value" name="wpp_settings[en_default_value][]" value="<?php echo $slug; ?>"/>
+              <?php _e( 'Enable default value assign.', ud_get_wp_property()->domain ); ?>
+            </label>
+          </li>
           <?php do_action( 'wpp::property_attributes::settings', $slug ); ?>
           <li class="wpp_development_advanced_option">
             <span class="wpp_delete_row wpp_link"><?php _e( 'Delete Attribute', ud_get_wp_property()->domain ) ?></span>
@@ -133,10 +142,22 @@ global $wp_properties;
           <li>
             <textarea class="wpp_attribute_pre_defined_values" name="wpp_settings[predefined_values][<?php echo $slug; ?>]"><?php echo isset( $wp_properties[ 'predefined_values' ][ $slug ] ) ? $wp_properties[ 'predefined_values' ][ $slug ] : ''; ?></textarea>
           </li>
+          <?php $class = (isset( $wp_properties[ 'en_default_value' ] ) && in_array( $slug, $wp_properties[ 'en_default_value' ] ) )? "show":"hidden";?>
+          <li class="wpp_attribute_default_values <?php echo $class;?>">
+            <?php
+            $input_type = $wp_properties[ 'admin_attr_fields' ][ $slug ];
+            $value = (isset( $wp_properties[ 'default_values' ][ $slug ]))? $wp_properties[ 'default_values' ][ $slug ]: "";
+            $field_name = "wpp_settings[default_values][$slug]";
+            echo __("<label>Default Value</label>", ud_get_wp_property()->domain);
+            echo "<br />";
+            echo "<div class='default_value_container' data-name='$field_name' data-value='$value' ></div>";
+            ?>
+            <a class="button apply-to-all" data-attribute="<?php echo $slug;?>" href="#" title="<?php _e("Apply to listings that have no value for this field.", ud_get_wp_property()->domain);?>" ><?php _e("Apply to all", ud_get_wp_property()->domain);?></a> <br/>
+          </li>
         </ul>
       </td>
     </tr>
-  <?php endforeach; ?>
+  <?php endforeach;?>
   </tbody>
 
   <tfoot>

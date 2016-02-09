@@ -64,7 +64,8 @@ class OtherPropertiesWidget extends WP_Widget {
           'post_type' => 'property',
           'post_status' => 'publish',
           'post_parent' => $post->post_parent,
-          'exclude' => $post->ID
+          'exclude' => $post->ID,
+          'suppress_filters' => 0
       ) );
     } else {
       $properties = WPP_F::get_properties( "property_type={$this_property['property_type']}&pagi=0--$amount_items" );
@@ -125,6 +126,9 @@ class OtherPropertiesWidget extends WP_Widget {
                 case ( $stat == 'property_type' ):
                   $content = nl2br( apply_filters( "wpp_stat_filter_property_type_label", $this_property->property_type_label ) );
                   break;
+                case ( !empty($wp_properties["predefined_values"][$stat]) ):
+                  $content = nl2br( apply_filters( "wpp_stat_filter_{$stat}",apply_filters( "wpp::attribute::value", $this_property->$stat, $stat ) ) );
+                  break;
                 default:
                   $content = nl2br( apply_filters( "wpp_stat_filter_{$stat}", $this_property->$stat ) );
                   break;
@@ -134,7 +138,7 @@ class OtherPropertiesWidget extends WP_Widget {
               }
               ?>
               <li class="<?php echo $stat ?>">
-                <span class="attribute"><?php echo $wp_properties[ 'property_stats' ][ $stat ]; ?>:</span>
+                <span class="attribute"><?php echo apply_filters('wpp::attribute::label', $wp_properties[ 'property_stats' ][ $stat ], $stat); ?>:</span>
                 <span class="value"><?php echo $content; ?></span>
               </li>
             <?php

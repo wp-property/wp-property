@@ -78,7 +78,11 @@ namespace UsabilityDynamics\WPP {
 
         //** Handles Export (XML/JSON/CSV) functionality */
         new Export();
-
+        
+        /** Initiate WPML class if WPML plugin activated. **/
+        if( function_exists('icl_object_id') ){
+          new \UsabilityDynamics\WPP\WPML();
+        }
         //** Initiate Admin UI */
         if( is_admin() ) {
           //** Initiate Admin Handler */

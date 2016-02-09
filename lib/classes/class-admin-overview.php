@@ -281,6 +281,7 @@ namespace UsabilityDynamics\WPP {
        * Render List Table in Overview Meta Box
        */
       public function render_list_table() {
+		    do_action('wpp::above_list_table');
         $this->list_table->prepare_items();
         $this->list_table->display();
       }
@@ -348,9 +349,8 @@ namespace UsabilityDynamics\WPP {
           }
         }
         return $title;
-      }
-
+      }	  
     }
-
+	
   }
 }

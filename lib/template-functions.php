@@ -238,11 +238,14 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
    */
   function prepare_property_for_display( $property, $args = false ) {
     global $wp_properties;
-
+    
     if ( empty( $property ) ) {
       return;
     }
-
+    // translate taxonomies labels before display it.
+    if( isset( $wp_properties['taxonomies'] ) ){
+      $wp_properties['taxonomies'] = apply_filters('wpp::taxonomies::labels',$wp_properties['taxonomies']);
+    }
     $_args = is_array( $args ) ? http_build_query( $args ) : (string) $args;
     
     /* Used to apply different filters depending on where the attribute is displayed. i.e. google_map_infobox  */
@@ -267,6 +270,7 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
 
     //** Check if this function has already been done */
     if ( is_array( $property ) && isset( $property[ 'system' ][ 'prepared_for_display' ] ) ) {
+      
       return $property;
     }
     
@@ -542,7 +546,7 @@ if ( !function_exists( 'draw_stats' ) ):
       $value = $data[ 'value' ];
 
       $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $tag );
-
+      //print_r($attribute_data);
       //** Do not show attributes that have value of 'value' if enabled */
       if ( $hide_false == 'true' && $value == 'false' ) {
         continue;
@@ -552,8 +556,67 @@ if ( !function_exists( 'draw_stats' ) ):
       if ( $return_blank == 'false' && empty( $value ) ) {
         continue;
       }
+      if(!is_array($value))
+        $value = html_entity_decode( $value );
 
-      $value = html_entity_decode( $value );
+      if ( is_array($value) && isset( $attribute_data[ 'data_input_type' ] ) && ($attribute_data[ 'data_input_type' ] == 'image_advanced' || $attribute_data[ 'data_input_type' ] == 'image_upload')) {
+        $imgs = implode(',', $value);
+        $img_html = do_shortcode("[gallery ids='$imgs']");
+        $value = "<ul>" . $img_html . "</ul>";
+      }
+      elseif ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'oembed') {
+        $value = wp_oembed_get(trim($value));
+      }
+      elseif ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'date') {
+        $time = strtotime($value);
+        $format = get_option('date_format');
+        $value = date($format, $time);
+      }
+      elseif ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'file_advanced') {
+        wp_enqueue_style( 'front-file-style', ud_get_wp_property()->path( 'static/styles/fields/front-file.css' ), array(), ud_get_wp_property( 'version' ) );
+
+        $file_html = '';
+        $imgs = array();
+        $files = array();
+        foreach ($value as $file) {
+          $isIMG = wp_attachment_is_image( $file );
+          if($isIMG){
+            $imgs[] = $file;
+          }
+          else{
+            $files[] = $file;
+          }
+        }
+
+        if(count($imgs)){
+          $imgs = implode(",", $imgs);
+          $file_html .= do_shortcode("[gallery ids='$imgs']");
+        }
+
+        if(count($files)){
+          foreach ($files as $file) {
+            $li          = '
+            <li id="item_%s">
+              <div class="rwmb-icon">%s</div>
+              <div class="rwmb-info">
+                <a href="%s" target="_blank">%s</a>
+                <p>%s</p>
+              </div>
+            </li>';
+            $mime_type = get_post_mime_type( $file );
+            $file_html .= sprintf(
+              $li,
+              $file,
+              @wp_get_attachment_image( $file, array( 60, 60 ), true ), // Wp genereate warning if image not found.
+              wp_get_attachment_url( $file ),
+              get_the_title( $file ),
+              $mime_type
+            );
+          }
+        }
+
+        $value = "<ul class='rwmb-file'>" . $file_html . "</ul>";
+      }
 
       //** Single "true" is converted to 1 by get_properties() we check 1 as well, as long as it isn't a numeric attribute */
       if ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'checkbox' && in_array( strtolower( $value ), array( 'true', '1', 'yes' ) ) ) {
@@ -572,6 +635,7 @@ if ( !function_exists( 'draw_stats' ) ):
       //* Make URLs into clickable links */
       if ( $make_link == 'true' && WPP_F::isURL( $value ) ) {
         $value = str_replace( '&ndash;', '-', $value );
+        $label = $data['label'];
         $value = "<a href='{$value}' title='{$label}'>{$value}</a>";
       }
 
@@ -589,10 +653,36 @@ if ( !function_exists( 'draw_stats' ) ):
     }
 
     if ( $display == 'array' ) {
+
       if( $sort_by_groups == 'true' && is_array( $groups ) ) {
+
         $stats = sort_stats_by_groups( $stats );
+
+        foreach ( $stats as $gslug => $gstats ) {
+
+          foreach ( $gstats as $tag => $data ) {
+            $data[ 'label' ] = apply_filters('wpp::attribute::label', $data[ 'label' ]);
+            //check if the tag is property type to get the translated value for it
+            $data[ 'value' ] = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type',$data[ 'value' ]) : apply_filters('wpp::attribute::value',$data[ 'value' ],$tag);
+            $gstats[ $tag ] = $data;
+          }
+
+          $stats[$gslug] = $gstats;
+        }
+
+      } else {
+
+        foreach ( $stats as $tag => $data ) {
+          $data[ 'label' ] = apply_filters('wpp::attribute::label', $data[ 'label' ]);
+          //check if the tag is property type to get the translated value for it
+          $data[ 'value' ] = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type',$data[ 'value' ]) : apply_filters('wpp::attribute::value',$data[ 'value' ],$tag);
+          $stats[ $tag ] = $data;
+        }
+
       }
+
       return $stats;
+
     }
 
     $alt = $first_alt == 'true' ? "" : "alt";
@@ -602,8 +692,9 @@ if ( !function_exists( 'draw_stats' ) ):
 
       foreach ( $stats as $tag => $data ) {
         
-        $label = $data[ 'label' ];
-        $value = $data[ 'value' ];
+        $label = apply_filters('wpp::attribute::label', $data[ 'label' ]);
+        //check if the tag is property type to get the translated value for it
+        $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type',$data[ 'value' ]) : apply_filters('wpp::attribute::value',$data[ 'value' ],$tag);
         $alt = ( $alt == "alt" ) ? "" : "alt";
         
         switch ( $display ) {
@@ -650,7 +741,7 @@ if ( !function_exists( 'draw_stats' ) ):
         if ( $main_stats_group != $gslug || !@array_key_exists( $gslug, $groups ) ) {
           $group_name = ( @array_key_exists( $gslug, $groups ) ? $groups[ $gslug ][ 'name' ] : __( 'Other', ud_get_wp_property()->domain ) );
           ?>
-          <h2 class="wpp_stats_group"><?php echo $group_name; ?></h2>
+          <h2 class="wpp_stats_group"><?php echo $group_name;  ?></h2>
         <?php
         }
 
@@ -660,8 +751,9 @@ if ( !function_exists( 'draw_stats' ) ):
             <dl class="wpp_property_stats overview_stats">
             <?php foreach ( $gstats as $tag => $data ) : ?>
               <?php
-              $label = $data[ 'label' ];
-              $value = $data[ 'value' ];
+              $label = apply_filters('wpp::attribute::label',$data[ 'label' ]);
+              //check if the tag is property type to get the translated value for it
+              $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type',$data[ 'value' ]) : $data[ 'value' ];
               ?>
               <?php $alt = ( $alt == "alt" ) ? "" : "alt"; ?>
               <dt class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_dt_<?php echo $tag; ?>"><?php echo $label; ?></dt>
@@ -676,8 +768,9 @@ if ( !function_exists( 'draw_stats' ) ):
             <ul class="overview_stats wpp_property_stats list">
             <?php foreach ( $gstats as $tag => $data ) : ?>
               <?php
-              $label = $data[ 'label' ];
-              $value = $data[ 'value' ];
+              $label = apply_filters('wpp::attribute::label',$data[ 'label' ]);
+              //check if the tag is property type to get the translated value for it
+              $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type',$data[ 'value' ]) : apply_filters('wpp::attribute::value',$data[ 'value' ],$tag);
               $alt = ( $alt == "alt" ) ? "" : "alt";
               ?>
               <li class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_plain_list_<?php echo $tag; ?> <?php echo $alt; ?>">
@@ -690,8 +783,9 @@ if ( !function_exists( 'draw_stats' ) ):
             break;
           case 'plain_list':
             foreach ( $gstats as $tag => $data ) {
-              $label = $data[ 'label' ];
-              $value = $data[ 'value' ];
+              $label = apply_filters('wpp::attribute::label',$data[ 'label' ]);
+              //check if the tag is property type to get the translated value for it
+              $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type',$data[ 'value' ]) : $data[ 'value' ];
               ?>
               <span class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> attribute"><?php echo $label; ?>:</span>
               <span class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> value"><?php echo $value; ?>&nbsp;</span>
@@ -757,18 +851,18 @@ if ( !function_exists( 'sort_stats_by_groups' ) ):
           case 'city':
             if ( empty( $stats_groups[ 'city' ] ) ) {
               $g_slug = $main_stats_group;
+            } else {
+              $g_slug = '_other';
             }
+            break;
+          default:
+            $g_slug = '_other';
             break;
         }
       }
 
-      if ( $g_slug && !array_key_exists( $g_slug, $groups ) ) {
-        //** Build array of attributes WITHOUT groups */
-        $filtered_stats[ 0 ][ $slug ] = $data;
-      } else {
-        //** Build array of attributes in groups */
-        $filtered_stats[ $g_slug ][ $slug ] = $data;
-      }
+      //** Build array of attributes in groups */
+      $filtered_stats[ $g_slug ][ $slug ] = $data;
     }
 
     //** Cycle back through to make sure we don't have any empty groups */
@@ -791,8 +885,9 @@ if ( !function_exists( 'sort_stats_by_groups' ) ):
         unset( $filtered_stats[$key] );
       }
     }
+
     $filtered_stats = $main_ordered + $ordered + $filtered_stats;
-    
+
     //echo "<pre>";print_r($filtered_stats);echo "</pre>";die();
     return $filtered_stats;
   }
@@ -930,7 +1025,10 @@ if ( !function_exists( 'draw_property_search_form' ) ):
       foreach ( $search_attributes as $attrib ) {
         //** Override search values if they are set in the developer tab */
         if ( !empty( $wp_properties[ 'predefined_search_values' ][ $attrib ] ) ) {
-          $maybe_search_values = explode( ',', $wp_properties[ 'predefined_search_values' ][ $attrib ] );
+          //*wpp::attribute::value will return predefined values based on attribute name
+          // if WPML not active will return the first value @fadi*/
+          $maybe_search_values = explode( ',', apply_filters('wpp::attribute::value',$wp_properties[ 'predefined_search_values' ][ $attrib ],$attrib) );
+          
           if ( is_array( $maybe_search_values ) ) {
             $using_predefined_values = true;
             $search_values[ $attrib ] = $maybe_search_values;
@@ -994,7 +1092,6 @@ endif;
 if ( !function_exists( 'wpp_render_search_input' ) ):
   function wpp_render_search_input( $args = false ) {
     global $wp_properties;
-
     extract( $args = wp_parse_args( $args, array(
       'type' => 'input',
       'input_type' => false,
@@ -1367,3 +1464,14 @@ if ( !function_exists( 'wpp_css' ) ):
   }
 
 endif;
+
+
+/**
+ * Will class to body if on mobile device.
+ */
+add_filter( 'body_class','wpp_is_mobile_body_class' );
+function wpp_is_mobile_body_class( $classes ) {
+  if(wp_is_mobile())
+    $classes[] = 'wpp_is_mobile';
+  return $classes;
+}
