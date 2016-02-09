@@ -345,9 +345,10 @@ class WPP_Core {
     if( isset( $_REQUEST[ 'wpp_search' ] ) && is_array( $_REQUEST[ 'wpp_search' ] ) ) {
 
       if( isset( $_POST[ 'wpp_search' ] ) ) {
-        $_query = '?' . http_build_query( array( 'wpp_search' => $_REQUEST[ 'wpp_search' ], 'lang' => apply_filters( 'wpml_current_language', NULL ) ), '', '&' );
-
-        wp_redirect( WPP_F::base_url( $wp_properties[ 'configuration' ][ 'base_slug' ] ) . $_query );
+        $_query = http_build_query( apply_filters( 'wpp::search::query', array( 'wpp_search' => $_POST[ 'wpp_search' ] ) ), '', '&' );
+        $_redirect = WPP_F::base_url( $wp_properties[ 'configuration' ][ 'base_slug' ] );
+        $_redirect .= ( strpos( $_redirect, '?' ) === false ? '?' : '&' ) . $_query;
+        wp_redirect( $_redirect );
         die();
       }
 
@@ -810,10 +811,14 @@ class WPP_Core {
       wp_redirect( get_permalink( $post->ID ) );
       die();
     }
-
+    
     /* (count($wp_query->posts) < 2) added post 1.31.1 release */
     /* to avoid taxonomy archives from being broken by single property pages */
-    if( isset( $post ) && count( $wp_query->posts ) < 2 && ( $post->post_type == "property" || isset( $wp_query->is_child_property ) ) ) {
+    if(
+      isset( $post ) &&
+      ( count( $wp_query->posts ) < 2 || ( !empty( $wp_query->queried_object ) && $wp_query->queried_object->post_type == 'property' ) ) &&
+      ( $post->post_type == "property" || isset( $wp_query->is_child_property ) )
+    ) {
       $wp_query->single_property_page = true;
 
       //** This is a hack and should be done better */
