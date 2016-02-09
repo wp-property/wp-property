@@ -3673,6 +3673,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     $infobox_style = ( !empty( $infobox_settings[ 'minimum_box_width' ] ) ) ? 'style="min-width: ' . $infobox_settings[ 'minimum_box_width' ] . 'px;"' : '';
 
+    $property_stats = array();
     foreach( $infobox_attributes as $attribute ) {
       if ( !empty( $wp_properties[ 'property_stats' ][ $attribute ] ) ) {
         $property_stats[$attribute] = $wp_properties['property_stats'][$attribute];
