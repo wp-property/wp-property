@@ -431,7 +431,7 @@ namespace UsabilityDynamics\WPP {
 
       if( apply_filters( 'wpml_setting', null, 'language_negotiation_type' ) == '3'){
         $query = str_replace( '&lang='.$curr_lang, '', $query );
-        return $query . '&lang=' . apply_filters( 'wpml_current_language', NULL );
+        return $query . '&lang=' . $curr_lang;
       }else{
         return $query;
       }
