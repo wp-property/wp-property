@@ -346,7 +346,9 @@ class WPP_Core {
 
       if( isset( $_POST[ 'wpp_search' ] ) ) {
         $_query = http_build_query( apply_filters( 'wpp::search::query', array( 'wpp_search' => $_POST[ 'wpp_search' ] ) ), '', '&' );
-        wp_redirect( WPP_F::base_url( $wp_properties[ 'configuration' ][ 'base_slug' ] ) . '?' . $_query );
+        $_redirect = WPP_F::base_url( $wp_properties[ 'configuration' ][ 'base_slug' ] );
+        $_redirect .= ( strpos( $_redirect, '?' ) === false ? '?' : '&' ) . $_query;
+        wp_redirect( $_redirect );
         die();
       }
 
