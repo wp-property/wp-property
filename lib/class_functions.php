@@ -4542,7 +4542,8 @@ class WPP_F extends UsabilityDynamics\Utility {
       }
       //** If the page doesn't exist, return default url ( base_slug ) */
       if( empty( $page_id ) ) {
-        $permalink = home_url() . "/" . ( !is_numeric( $page ) ? $page : $wp_properties[ 'configuration' ][ 'base_slug' ] ) . '/';
+        $home_url = explode( '?', home_url() );
+        $permalink = $home_url[0] . "/" . ( !is_numeric( $page ) ? $page : $wp_properties[ 'configuration' ][ 'base_slug' ] ) . ( !empty( $home_url[1] ) ? '?' . $home_url[1] : '/' );
       } else {
         $permalink = get_permalink( $page_id );
       }
