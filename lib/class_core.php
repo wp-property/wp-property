@@ -345,9 +345,9 @@ class WPP_Core {
     if( isset( $_REQUEST[ 'wpp_search' ] ) && is_array( $_REQUEST[ 'wpp_search' ] ) ) {
 
       if( isset( $_POST[ 'wpp_search' ] ) ) {
-        $_query = '?' . http_build_query( array( 'wpp_search' => $_REQUEST[ 'wpp_search' ], 'lang' => apply_filters( 'wpml_current_language', NULL ) ), '', '&' );
+        $_query = '?' . http_build_query( array( 'wpp_search' => $_REQUEST[ 'wpp_search' ] ), '', '&' );
 
-        wp_redirect( WPP_F::base_url( $wp_properties[ 'configuration' ][ 'base_slug' ] ) . $_query );
+        wp_redirect( apply_filters('wpp::search::query', WPP_F::base_url( $wp_properties[ 'configuration' ][ 'base_slug' ] ) . $_query) );
         die();
       }
 
