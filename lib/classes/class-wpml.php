@@ -427,14 +427,10 @@ namespace UsabilityDynamics\WPP {
     * append language to search query
     */
     public function add_language_to_search_query( $query ){
-      $curr_lang = apply_filters( 'wpml_current_language', NULL );
-
       if( apply_filters( 'wpml_setting', null, 'language_negotiation_type' ) == '3'){
-        $query = str_replace( '&lang='.$curr_lang, '', $query );
-        return $query . '&lang=' . $curr_lang;
-      }else{
-        return $query;
+        $query[ 'lang' ] = apply_filters( 'wpml_current_language', NULL );
       }
+      return $query;
     }
   }
 
