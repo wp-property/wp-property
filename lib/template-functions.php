@@ -570,6 +570,12 @@ if ( !function_exists( 'draw_stats' ) ):
       elseif ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'date') {
         $value = date_i18n( get_option( 'date_format' ), strtotime($value));
       }
+      elseif ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'datetime') {
+        $value = date_i18n( get_option( 'date_format' ) . " " . get_option( 'time_format' ), strtotime($value));
+      }
+      elseif ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'time') {
+        $value = date_i18n( get_option( 'time_format' ), strtotime($value));
+      }
       elseif ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'file_advanced') {
         wp_enqueue_style( 'front-file-style', ud_get_wp_property()->path( 'static/styles/fields/front-file.css' ), array(), ud_get_wp_property( 'version' ) );
 
