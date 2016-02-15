@@ -4837,3 +4837,12 @@ if( !function_exists( 'property_feed' ) ) {
   }
 }
 
+// prevent automatic add slashes while using parse_str. By Md. Alimuzzaman Alim
+function stripslashes_array($array){
+  return is_array($array) ? array_map('stripslashes_array', $array) : stripslashes($array);
+}
+
+add_filter('wpp_settings_save', 'wpp_settings_save_stripslashes');
+function wpp_settings_save_stripslashes($data){
+  return stripslashes_array($data);
+}
