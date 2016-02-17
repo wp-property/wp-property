@@ -341,21 +341,6 @@ class WPP_Core {
       $wp_properties[ 'configuration' ][ 'base_slug' ] = 'property';
     }
 
-    //** If we are displaying search results, we can assume this is the default property page */
-    if( isset( $_REQUEST[ 'wpp_search' ] ) && is_array( $_REQUEST[ 'wpp_search' ] ) ) {
-
-      if( isset( $_POST[ 'wpp_search' ] ) ) {
-        $_query = http_build_query( apply_filters( 'wpp::search::query', array( 'wpp_search' => $_POST[ 'wpp_search' ] ) ), '', '&' );
-        $_redirect = WPP_F::base_url( $wp_properties[ 'configuration' ][ 'base_slug' ] );
-        $_redirect .= ( strpos( $_redirect, '?' ) === false ? '?' : '&' ) . $_query;
-        wp_redirect( $_redirect );
-        die();
-      }
-
-      $wp_query->wpp_root_property_page = true;
-      $wp_query->wpp_search_page = true;
-    }
-
     //** Determine if this is the Default Property Page */
 
     if( isset( $wp_properties[ 'configuration' ][ 'base_slug' ] ) && $wp->request == $wp_properties[ 'configuration' ][ 'base_slug' ] ) {
@@ -376,6 +361,23 @@ class WPP_Core {
 
     if( isset( $query->query_vars[ 'category_name' ] ) && $query->query_vars[ 'category_name' ] == $wp_properties[ 'configuration' ][ 'base_slug' ] ) {
       $wp_query->wpp_root_property_page = true;
+    }
+
+    //** If we are displaying search results: */
+    if( isset( $_REQUEST[ 'wpp_search' ] ) && is_array( $_REQUEST[ 'wpp_search' ] ) ) {
+
+      if( isset( $_POST[ 'wpp_search' ] ) ) {
+        $_query = http_build_query( apply_filters( 'wpp::search::query', array( 'wpp_search' => $_POST[ 'wpp_search' ] ) ), '', '&' );
+        $_redirect = WPP_F::base_url( $wp_properties[ 'configuration' ][ 'base_slug' ] );
+        $_redirect .= ( strpos( $_redirect, '?' ) === false ? '?' : '&' ) . $_query;
+        wp_redirect( $_redirect );
+        die();
+      }
+
+      if( isset( $wp_query->wpp_root_property_page ) && $wp_query->wpp_root_property_page ) {
+        $wp_query->wpp_search_page = true;
+      }
+
     }
 
     //** If this is a the root property page, and the Dynamic Default Property page is used */

@@ -1,4 +1,7 @@
-### 2.1.5
+### 2.1.6
+* Fixed the bug when page content was always replaced with property_overview shortcode if wpp_search existed in request parameters.
+
+### 2.1.5 ( February 9, 2015 )
 * Added ability to set default values for property's attributes.
 * Added compatibility with WPML plugin.
 * Removed 'Images Upload' data entry for attribute since it duplicated 'Image Upload'.

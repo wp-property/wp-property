@@ -74,7 +74,7 @@ namespace UsabilityDynamics\WPP {
               ),
               'custom_query' => array(
                 'name' => __( 'Custom Query by Attributes Values', ud_get_wp_property()->domain ),
-                'description' => sprintf( __( 'Setup your custom query by providing values for specific attributes. Empty values will be ignored. Example:<br/>- to list only %1$s which have minimum 2 and maximum 4 bedrooms, you should set <b>2-4</b> value for your Bedrooms attribute.<br/>- to list only %1$s which have 1 or 3 bathrooms, you should set <b>1,3</b> value for your Batrooms attribute.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label() ),
+                'description' => sprintf( __( 'Setup your custom query by providing values for specific attributes. Empty values will be ignored. Example:<br/>- to list only %1$s which have minimum 2 and maximum 4 bedrooms, you should set <b>2-4</b> value for your Bedrooms attribute.<br/>- to list only %1$s which have 1 or 3 bathrooms, you should set <b>1,3</b> value for your Bathrooms attribute.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label() ),
                 'type' => 'custom_attributes',
                 'options' => $custom_attributes,
               ),
@@ -305,6 +305,7 @@ namespace UsabilityDynamics\WPP {
         \WPP_F::force_script_inclusion( 'wp-property-frontend' );
 
         //** Load all queriable attributes **/
+        $queryable_keys = array();
         foreach( \WPP_F::get_queryable_keys() as $key ) {
           //** This needs to be done because a key has to exist in the $deafult array for shortcode_atts() to load passed value */
           $queryable_keys[ $key ] = false;
