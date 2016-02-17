@@ -299,6 +299,7 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
       if ( !array_key_exists( $meta_key, (array)$attributes ) ) {
         continue;
       }
+      $attribute_data = WPP_F::get_attribute_data($meta_key);
       //** Only executed shortcodes if the value isn't an array */
       if ( !is_array( $attribute_value ) ) {
         if ( ( !empty( $args[ 'do_not_execute_shortcodes' ] ) && $args[ 'do_not_execute_shortcodes' ] == 'true' ) || $meta_key == 'post_content' ) {
@@ -308,8 +309,15 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
         if ( $meta_key == $wp_properties[ 'configuration' ][ 'address_attribute' ] && !empty( $property[ 'display_address' ] ) ) {
           $attribute_value = $property[ 'display_address' ];
         }
-        $attribute_value = do_shortcode( html_entity_decode( $attribute_value ) );
-        $attribute_value = str_replace( "\n", "", nl2br( $attribute_value ) );
+        // No display formating is needed for wysiwyg because it's formatted.
+        if($attribute_data['data_input_type'] == 'wysiwyg'){
+          $attribute_value = do_shortcode( $attribute_value );
+        }
+        else{
+          $attribute_value = do_shortcode( html_entity_decode( $attribute_value ) );
+          $attribute_value = str_replace( "\n", "", nl2br( $attribute_value ) );
+        }
+          
       }
       $attribute_value = apply_filters( "wpp::attribute::display", $attribute_value, $meta_key );
       $property[ $meta_key ] = apply_filters( "wpp_stat_filter_{$meta_key}", $attribute_value, $attribute_scope );
@@ -568,9 +576,13 @@ if ( !function_exists( 'draw_stats' ) ):
         $value = wp_oembed_get(trim($value));
       }
       elseif ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'date') {
-        $time = strtotime($value);
-        $format = get_option('date_format');
-        $value = date($format, $time);
+        $value = date_i18n( get_option( 'date_format' ), strtotime($value));
+      }
+      elseif ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'datetime') {
+        $value = date_i18n( get_option( 'date_format' ) . " " . get_option( 'time_format' ), strtotime($value));
+      }
+      elseif ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'time') {
+        $value = date_i18n( get_option( 'time_format' ), strtotime($value));
       }
       elseif ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'file_advanced') {
         wp_enqueue_style( 'front-file-style', ud_get_wp_property()->path( 'static/styles/fields/front-file.css' ), array(), ud_get_wp_property( 'version' ) );

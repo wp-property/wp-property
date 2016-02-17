@@ -241,6 +241,13 @@ namespace UsabilityDynamics\WPP {
           $return[ 'data_input_type' ] = 'textarea';
         }
 
+        if( isset( $wp_properties[ 'taxonomies' ][ $attribute ] ) ) {
+          $return[ 'label' ]        = $wp_properties[ 'taxonomies' ][ $attribute ]['label'];
+          $return[ 'storage_type' ] = 'taxonomy';
+          $categories = get_terms( $attribute, array('hide_empty' => 0, 'fields' => 'names') );
+          $return['predefined_values'] = implode(', ', $categories);
+        }
+
         if( isset( $wp_properties[ 'searchable_attr_fields' ][ $attribute ] ) ) {
           $return[ 'input_type' ] = $wp_properties[ 'searchable_attr_fields' ][ $attribute ];
           $ui_class[ ]            = $return[ 'input_type' ];

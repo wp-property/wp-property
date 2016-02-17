@@ -15,11 +15,13 @@ if( !class_exists( 'RWMB_Wpp_Checkbox_Field' ) && class_exists( 'RWMB_Checkbox_F
      */
     static function html( $meta, $field ) {
       $desc = $field[ 'desc' ] ? "<span id='{$field['id']}_description' class='description'>{$field['desc']}</span>" : '';
+      if( $meta == 'on' || $meta == 1 )
+        $meta = 'true'; // Double checking value. It's can be different format in import.
       return sprintf(
         '<label><input type="checkbox" class="rwmb-checkbox" name="%s" id="%s" value="true" %s> %s</label>',
         $field[ 'field_name' ],
         $field[ 'id' ],
-        checked( ! empty( $meta ), 1, false ), // from original class of checkbox 
+        checked( $meta , 'true', false ), // checkbox 
         $desc
       );
     }

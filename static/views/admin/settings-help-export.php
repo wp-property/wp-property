@@ -1,5 +1,5 @@
 <div class="wpp_settings_block">
-  <?php printf( __( 'Export All %s to SCV file', ud_get_wp_property()->domain ), \WPP_F::property_label('plural') ); ?>
+  <?php printf( __( 'Export All %s to CSV file', ud_get_wp_property()->domain ), \WPP_F::property_label('plural') ); ?>
   <a href="<?php echo home_url() . '?action=wpp_export_to_scv&nonce=' . wp_create_nonce( 'export_properties_to_scv' ); ?>" class="button" id="wpp_export_to_scv"><?php _e( 'Export', ud_get_wp_property()->domain ); ?></a>
 </div>
 <div class="wpp_settings_block">
