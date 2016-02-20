@@ -324,6 +324,47 @@ namespace UsabilityDynamics\WPP {
 
       }
 
+      /**
+       * Returns valid attribute type.
+       *
+       * @see UsabilityDynamics\WPP\Attributes::get_valid_attribute_type()
+       * @param bool $type //ud_get_wp_property()->set( 'attributes.types'
+       * @return mixed
+       */
+      /** Maybe Convert input types to valid ones and prepare options. */
+      public static function get_valid_attribute_type($type){
+        switch($type) {
+          case 'input':
+            $type = 'text';
+            break;
+          case 'range_input':
+          case 'range_dropdown':
+          case 'advanced_range_dropdown':
+          case 'dropdown':
+            $type = 'select_advanced';
+            break;
+          case 'multi_checkbox':
+            $type = 'checkbox_list';
+            break;
+          case 'image_upload':
+            $type = 'image_advanced';
+            break;
+          case 'oembed':
+            $type = 'OEmbed';
+            break;
+        }
+        return $type;
+      }
+
+      public static function is_attribute_multi($attribute){
+        $attribute_data = self::get_attribute_data($attribute);
+        $multiple_attributes = ud_get_wp_property( 'attributes.multiple', array() );
+        if( isset( $attribute_data[ 'data_input_type' ] ) && in_array( $attribute_data[ 'data_input_type' ], $multiple_attributes ) ) {
+          return true;
+        }
+        return false;
+      }
+
     }
 
   }

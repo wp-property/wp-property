@@ -346,6 +346,19 @@ class WPP_F extends UsabilityDynamics\Utility {
   static function get_attribute_data( $attribute = false ) {
     return UsabilityDynamics\WPP\Attributes::get_attribute_data($attribute);
   }
+  /**
+   * Returns valid attribute type.
+   *
+   * @see UsabilityDynamics\WPP\Attributes::get_valid_attribute_type()
+   * @param bool $type //ud_get_wp_property()->set( 'attributes.types'
+   * @return mixed
+   */
+  static function get_valid_attribute_type( $type = false ) {
+    return UsabilityDynamics\WPP\Attributes::get_valid_attribute_type($type);
+  }
+  static function is_attribute_multi( $attribute ) {
+    return UsabilityDynamics\WPP\Attributes::is_attribute_multi($attribute);
+  }
 
   /**
    * Checks if script or style have been loaded.
