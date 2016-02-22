@@ -1041,6 +1041,7 @@ if ( !function_exists( 'draw_property_search_form' ) ):
           // if WPML not active will return the first value @fadi*/
           $maybe_search_values = explode( ',', apply_filters('wpp::attribute::value',$wp_properties[ 'predefined_search_values' ][ $attrib ],$attrib) );
           
+          $maybe_search_values = array_map('trim', $maybe_search_values);
           if ( is_array( $maybe_search_values ) ) {
             $using_predefined_values = true;
             $search_values[ $attrib ] = $maybe_search_values;
