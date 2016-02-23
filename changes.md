@@ -1,5 +1,10 @@
 ### 2.1.6
 * Fixed the bug when page content was always replaced with property_overview shortcode if wpp_search existed in request parameters.
+* Fixed multi-checkbox issue on Property Search.
+* Fixed issue with odd  br in Text Editor Data Entry field.
+* Fixed Single checkbox became enabled when publishing new property.
+* Fixed converting apostrophe to slash in Property Types.
+* Date and Time attributes now take date and time format from Settings/General tab.
 
 ### 2.1.5 ( February 9, 2015 )
 * Added ability to set default values for property's attributes.
