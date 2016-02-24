@@ -71,8 +71,26 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
 
     /* Show settings array */
     jQuery( "#wpp_show_settings_array" ).click( function () {
-      jQuery( "#wpp_show_settings_array_cancel" ).show();
-      jQuery( "#wpp_show_settings_array_result" ).show();
+      var $this = jQuery(this),
+          $showSettingsElem = jQuery( "#wpp_show_settings_array_result" ),
+          $cancelBtn = jQuery( "#wpp_show_settings_array_cancel" ),
+          loadedClass = 'wp_properties_loaded';
+
+      if ($showSettingsElem.hasClass(loadedClass)) {
+        $cancelBtn.show();
+        $showSettingsElem.show();
+      } else {
+        $this.attr('disabled', 'disabled');
+        jQuery.post( wpp.instance.ajax_url, {
+          action: 'wpp_ajax_print_wp_properties'
+        }, function ( data ) {
+
+          $cancelBtn.show();
+          $this.removeAttr('disabled');
+          $showSettingsElem.text(data).addClass(loadedClass).show();
+        } );
+      }
+
     } );
 
     /* Hide settings array */
