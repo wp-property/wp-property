@@ -239,7 +239,9 @@ class WPP_Core {
     //** Add troubleshoot log page */
     //** Modify admin body class */
     add_filter( 'admin_body_class', array( $this, 'admin_body_class' ), 5 );
-
+	  
+    add_filter( 'display_post_states', array( $this, 'display_post_states' ), 10, 2 );
+    
     //** Modify Front-end property body class */
     add_filter( 'body_class', array( $this, 'properties_body_class' ) );
 
@@ -318,6 +320,15 @@ class WPP_Core {
       return 'wpp_property_edit';
     }
 
+  }
+
+  function display_post_states( $post_states, $post ) {
+    global $wp_properties;
+
+    if ($post->post_name === $wp_properties['configuration']['base_slug']) {
+      $post_states['properties_page'] = __('Properties Page');
+    }
+    return $post_states;
   }
 
   /**
