@@ -1037,6 +1037,7 @@ class WPP_Core {
 
     //* General WPP capabilities */
     $wpp_capabilities = array(
+      'read_wpp_property' => __( 'View Properties', ud_get_wp_property()->domain ),
       //* Manage WPP Properties Capabilities */
       'edit_wpp_properties' => __( 'View Properties', ud_get_wp_property()->domain ),
       'edit_wpp_property' => __( 'Add/Edit Properties', ud_get_wp_property()->domain ),
