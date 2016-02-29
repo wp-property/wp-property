@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Property\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-04 16:41+0300\n"
+"POT-Creation-Date: 2016-02-08 16:24+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
 "Language-Team: \n"
@@ -618,9 +618,9 @@ msgstr ""
 
 #: lib/class_functions.php:949 lib/classes/class-children-list-table.php:38
 #: lib/classes/class-export.php:284 lib/classes/class-list-table.php:86
-#: lib/widgets/child-properties.php:172 lib/widgets/featured-properties.php:234
-#: lib/widgets/latest-properties.php:203 lib/widgets/list-attachments.php:58
-#: lib/widgets/other-properties.php:254 lib/widgets/property-attributes.php:62
+#: lib/widgets/child-properties.php:173 lib/widgets/featured-properties.php:237
+#: lib/widgets/latest-properties.php:207 lib/widgets/list-attachments.php:58
+#: lib/widgets/other-properties.php:258 lib/widgets/property-attributes.php:62
 #: lib/widgets/property-map.php:58 lib/widgets/property-meta.php:62
 #: lib/widgets/property-overview.php:58 lib/widgets/property-terms.php:62
 #: static/views/property-overview-featured-shortcode.php:8
@@ -691,104 +691,104 @@ msgstr "Получить направление"
 msgid "Yes"
 msgstr "Да"
 
-#: lib/class_functions.php:3953
+#: lib/class_functions.php:3960
 msgid "General Settings"
 msgstr "Основные Настройки"
 
-#: lib/class_functions.php:3954
+#: lib/class_functions.php:3961
 msgid "Find your property"
 msgstr "Найти Ваш ваш объект"
 
-#: lib/class_functions.php:3955 static/views/property-overview-my-feps.php:56
+#: lib/class_functions.php:3962 static/views/property-overview-my-feps.php:56
 msgid "Edit"
 msgstr "Редактировать"
 
-#: lib/class_functions.php:3956 lib/default_api.php:80
+#: lib/class_functions.php:3963 lib/default_api.php:80
 msgid "City"
 msgstr "Город"
 
-#: lib/class_functions.php:3957
+#: lib/class_functions.php:3964
 msgid "Contact us"
 msgstr "Форма связи"
 
-#: lib/class_functions.php:3958
+#: lib/class_functions.php:3965
 msgid "Login"
 msgstr "Вход"
 
-#: lib/class_functions.php:3959
+#: lib/class_functions.php:3966
 msgid "Explore"
 msgstr "Обзор"
 
-#: lib/class_functions.php:3960
+#: lib/class_functions.php:3967
 msgid "Message"
 msgstr "Сообщение"
 
-#: lib/class_functions.php:3961 lib/classes/class-settings.php:143
+#: lib/class_functions.php:3968 lib/classes/class-settings.php:143
 msgid "Phone Number"
 msgstr "Телефон"
 
-#: lib/class_functions.php:3962 lib/template-functions.php:1368
+#: lib/class_functions.php:3969 lib/template-functions.php:1370
 msgid "Name"
 msgstr "Название"
 
-#: lib/class_functions.php:3963
+#: lib/class_functions.php:3970
 msgid "E-mail"
 msgstr "Электронная почта"
 
-#: lib/class_functions.php:3964
+#: lib/class_functions.php:3971
 msgid "Send Message"
 msgstr "Отослать сообщение"
 
-#: lib/class_functions.php:3965
+#: lib/class_functions.php:3972
 msgid "Submit Inquiry"
 msgstr "Отправить запрос"
 
-#: lib/class_functions.php:3966
+#: lib/class_functions.php:3973
 msgid "Inquiry"
 msgstr "Запрос"
 
-#: lib/class_functions.php:3967
+#: lib/class_functions.php:3974
 msgid "Comment About"
 msgstr "Коментировать"
 
-#: lib/class_functions.php:3968
+#: lib/class_functions.php:3975
 msgid "Inquire About"
 msgstr "Сделать запрос"
 
-#: lib/class_functions.php:3969
+#: lib/class_functions.php:3976
 msgid "Inquiry About:"
 msgstr "Запрос:"
 
-#: lib/class_functions.php:3970
+#: lib/class_functions.php:3977
 msgid "Inquiry message:"
 msgstr "Сообщение запроса:"
 
-#: lib/class_functions.php:3971
+#: lib/class_functions.php:3978
 msgid "You forgot to enter your e-mail."
 msgstr "Вы забыли ввести адрес электронной почты."
 
-#: lib/class_functions.php:3972
+#: lib/class_functions.php:3979
 msgid "You forgot to enter a message."
 msgstr "Вы забыли ввести сообщение."
 
-#: lib/class_functions.php:3973
+#: lib/class_functions.php:3980
 msgid "You forgot to enter your  name."
 msgstr "Вы забыли ввести Ваше имя."
 
-#: lib/class_functions.php:3974
+#: lib/class_functions.php:3981
 msgid "Error with sending message. Please contact site administrator."
 msgstr ""
 "Ошибка отправки сообщения. Пожалуйста, свяжитесь с администратором сайта."
 
-#: lib/class_functions.php:3975
+#: lib/class_functions.php:3982
 msgid "Thank you for your message."
 msgstr "Спасибо за Ваше сообщение."
 
-#: lib/class_functions.php:4077
+#: lib/class_functions.php:4084
 msgid "Default Properties Page"
 msgstr "Страница объекта по умолчанию"
 
-#: lib/class_functions.php:4078
+#: lib/class_functions.php:4085
 msgid ""
 "The default <b>property page</b> will be used to display property search "
 "results, as well as be the base for property URLs. "
@@ -796,7 +796,7 @@ msgstr ""
 "Страница объектов по умолчанию используется для отображения результатов "
 "поиска объектов, а так же как база для URL объектов."
 
-#: lib/class_functions.php:4079
+#: lib/class_functions.php:4086
 #, fuzzy, php-format
 msgid ""
 "By default, the <b>Default Properties Page</b> is set to <b>%s</b>, which is "
@@ -806,7 +806,7 @@ msgstr ""
 "b>, это динамически созданная страница дл яотображения результатов поиска "
 "объектов."
 
-#: lib/class_functions.php:4080
+#: lib/class_functions.php:4087
 msgid ""
 "We recommend you create an actual WordPress page to be used as the "
 "<b>Default Properties Page</b>. For example, you may create a root page "
@@ -817,12 +817,12 @@ msgstr ""
 "создать базовую страницу \"Недвижимость\" - адрес страницы  объектов по "
 "умолчанию  будет"
 
-#: lib/class_functions.php:4082 lib/shortcodes/property-attributes.php:43
+#: lib/class_functions.php:4089 lib/shortcodes/property-attributes.php:43
 #: static/views/admin/settings.php:81
 msgid "Display"
 msgstr "Отображение"
 
-#: lib/class_functions.php:4083
+#: lib/class_functions.php:4090
 msgid ""
 "This tab allows you to do many things. Make custom picture sizes that will "
 "let you to make posting pictures easier. Change the way you view property "
@@ -840,11 +840,11 @@ msgstr ""
 "эскиза карты. Выберите здесь, какие атрибуты вы хотите показать при выводе "
 "объектов на карте. Изменить валюту и размещение символов."
 
-#: lib/class_functions.php:4085 static/views/admin/settings.php:90
+#: lib/class_functions.php:4092 static/views/admin/settings.php:90
 msgid "Help"
 msgstr "Справка"
 
-#: lib/class_functions.php:4086
+#: lib/class_functions.php:4093
 msgid ""
 "This tab will help you troubleshoot your plugin, do exports and check for "
 "updates for Premium Features"
@@ -852,11 +852,11 @@ msgstr ""
 "Эта вкладка поможет вам устранить неполадки плагина, сделать экспорт и "
 "проверить наличие обновлений для премиальных дополнений."
 
-#: lib/class_functions.php:4091
+#: lib/class_functions.php:4098
 msgid "More Help"
 msgstr "Детальная справка"
 
-#: lib/class_functions.php:4092
+#: lib/class_functions.php:4099
 msgid ""
 "Visit <a target=\"_blank\" href=\"https://usabilitydynamics.com/products/wp-"
 "property/\">WP-Property Help Page</a> on UsabilityDynamics.com for more help."
@@ -865,7 +865,7 @@ msgstr ""
 "wp-property/\">Страницу помощи WP-Property</a> на UsabilityDynamics.com для "
 "более детальной помощи."
 
-#: lib/class_functions.php:4228
+#: lib/class_functions.php:4235
 #, php-format
 msgid ""
 "You cannot use your site as Facebook Application. You should <a href=\"%s"
@@ -876,45 +876,53 @@ msgstr ""
 "посетите <a href=\"%s\">purchase</a> WP-Property Premium Feature \"Facebook "
 "Tabs\" для управления таблицами Facebook."
 
-#: lib/class_functions.php:4611
+#: lib/class_functions.php:4618
 msgid "published"
 msgstr "опубликовано"
 
-#: lib/class_functions.php:4614
+#: lib/class_functions.php:4621
 msgid "pending"
 msgstr "подлежит одобрению"
 
-#: lib/class_functions.php:4617
+#: lib/class_functions.php:4624
 msgid "trashed"
 msgstr "удаленное"
 
-#: lib/class_functions.php:4620
+#: lib/class_functions.php:4627
 msgid "inherited"
 msgstr "унаследовано"
 
-#: lib/class_functions.php:4623
+#: lib/class_functions.php:4630
 msgid "drafted"
 msgstr "черновик"
 
-#: lib/class_functions.php:4708
+#: lib/class_functions.php:4715
 #, php-format
 msgid "Attributes replaced in %d %s and added in %d %s."
 msgstr "Атрибут заменен в %d %s и добавлен в %d %s."
 
-#: lib/class_functions.php:4715
+#: lib/class_functions.php:4722
+msgid "those"
+msgstr ""
+
+#: lib/class_functions.php:4723
+msgid "values"
+msgstr ""
+
+#: lib/class_functions.php:4724
 msgid "that"
 msgstr ""
 
-#: lib/class_functions.php:4716
+#: lib/class_functions.php:4725
 msgid "value"
 msgstr ""
 
-#: lib/class_functions.php:4719
+#: lib/class_functions.php:4728
 #, php-format
 msgid "Attribute value already exist (In %d %s). Do you want to replace %s %s?"
 msgstr "Атрибут уже заполнен (In %d %s). Вы хотите перезаписать %s %s?"
 
-#: lib/class_functions.php:4740
+#: lib/class_functions.php:4749
 #, php-format
 msgid "Applied to %d %s."
 msgstr ""
@@ -1012,7 +1020,7 @@ msgstr "Количество строк на странице"
 msgid "Global Search"
 msgstr "Общее Слайдшоу"
 
-#: lib/classes/class-admin-overview.php:126 lib/template-functions.php:1073
+#: lib/classes/class-admin-overview.php:126 lib/template-functions.php:1076
 msgid "Search"
 msgstr "Поиск"
 
@@ -1033,8 +1041,8 @@ msgstr "Автор"
 #: lib/shortcodes/featured-properties.php:24
 #: lib/shortcodes/property-overview.php:66 lib/template-functions.php:940
 #: lib/widgets/featured-properties.php:53
-#: lib/widgets/featured-properties.php:178 lib/widgets/latest-properties.php:42
-#: lib/widgets/latest-properties.php:155 lib/widgets/property-search.php:184
+#: lib/widgets/featured-properties.php:181 lib/widgets/latest-properties.php:42
+#: lib/widgets/latest-properties.php:159 lib/widgets/property-search.php:184
 #, fuzzy, php-format
 msgid "%s Type"
 msgstr "Тип %1s "
@@ -1080,8 +1088,8 @@ msgstr "удаленное"
 msgid "Auto-Draft"
 msgstr "Авто-Черновик"
 
-#: lib/classes/class-admin-overview.php:332 lib/template-functions.php:1135
-#: lib/template-functions.php:1169 lib/template-functions.php:1209
+#: lib/classes/class-admin-overview.php:332 lib/template-functions.php:1137
+#: lib/template-functions.php:1171 lib/template-functions.php:1211
 msgid "Any"
 msgstr "Любое"
 
@@ -1509,7 +1517,7 @@ msgstr "Студия"
 msgid "All languages"
 msgstr ""
 
-#: lib/classes/class-wpml.php:380 lib/template-functions.php:742
+#: lib/classes/class-wpml.php:384 lib/template-functions.php:742
 msgid "Other"
 msgstr "Другие"
 
@@ -1718,7 +1726,7 @@ msgstr ""
 #: lib/shortcodes/list-attachments.php:27
 #: lib/shortcodes/property-overview.php:138
 #: lib/shortcodes/property-overview.php:139
-#: lib/widgets/child-properties.php:157
+#: lib/widgets/child-properties.php:158
 #, fuzzy
 msgid "Sort Order"
 msgstr "Порядок отображения в меню"
@@ -2139,7 +2147,7 @@ msgstr ""
 
 #: lib/shortcodes/property-overview.php:128
 #: lib/shortcodes/property-overview.php:131
-#: lib/widgets/child-properties.php:149
+#: lib/widgets/child-properties.php:150
 #, fuzzy
 msgid "Sort By"
 msgstr "Сортировать по:"
@@ -2321,39 +2329,39 @@ msgstr ""
 "Условные запросы тегов не работают до выполнения запроса. До этого, они "
 "всегда возвращаются ложными."
 
-#: lib/template-functions.php:1148
+#: lib/template-functions.php:1150
 #, fuzzy
 msgid "Min"
 msgstr "Основные"
 
-#: lib/template-functions.php:1157
+#: lib/template-functions.php:1159
 msgid "Max"
 msgstr "Максимум"
 
-#: lib/template-functions.php:1370
+#: lib/template-functions.php:1372
 msgid "Email"
 msgstr "Электронная почта"
 
-#: lib/template-functions.php:1372
+#: lib/template-functions.php:1374
 msgid "Website"
 msgstr "Сайт"
 
-#: lib/template-functions.php:1375
+#: lib/template-functions.php:1377
 #, php-format
 msgid "Required fields are marked %s"
 msgstr "Обязательные поля помечены %s"
 
-#: lib/template-functions.php:1378
+#: lib/template-functions.php:1380
 msgid "Comment"
 msgstr "Коментарий"
 
-#: lib/template-functions.php:1379
+#: lib/template-functions.php:1381
 #, php-format
 msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
 msgstr ""
 "Вы должны <a href=\"%s\">войти</a>, чтобы иметь возможность коментировать."
 
-#: lib/template-functions.php:1380
+#: lib/template-functions.php:1382
 #, php-format
 msgid ""
 "Logged in as <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\" title=\"Log out of "
@@ -2362,11 +2370,11 @@ msgstr ""
 "Зарегистрированы как <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\" title="
 "\"Выйти\">Выйти?</a>"
 
-#: lib/template-functions.php:1381
+#: lib/template-functions.php:1383
 msgid "Your email address will not be published."
 msgstr "Ваш адрес электронной почты не будет опубликован."
 
-#: lib/template-functions.php:1382
+#: lib/template-functions.php:1384
 #, php-format
 msgid ""
 "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags "
@@ -2375,20 +2383,20 @@ msgstr ""
 "Вы можете использовать эти <abbr title=\"HyperText Markup Language\">HTML</"
 "abbr> теги и атрибуты: %s"
 
-#: lib/template-functions.php:1385
+#: lib/template-functions.php:1387
 msgid "Leave a Reply"
 msgstr "Оставить отзыв"
 
-#: lib/template-functions.php:1386
+#: lib/template-functions.php:1388
 #, php-format
 msgid "Leave a Reply to %s"
 msgstr "Оставить отзыв на  %s"
 
-#: lib/template-functions.php:1387
+#: lib/template-functions.php:1389
 msgid "Cancel reply"
 msgstr "Отменить ответ"
 
-#: lib/template-functions.php:1388
+#: lib/template-functions.php:1390
 msgid "Post Comment"
 msgstr "Опубликовать коментарий"
 
@@ -2401,50 +2409,50 @@ msgstr "Дочерняя  %1s"
 msgid "Show child properties (if any) for currently displayed property"
 msgstr "Отображение дочерних объектов (если есть) для текущего объекта"
 
-#: lib/widgets/child-properties.php:114
+#: lib/widgets/child-properties.php:115
 msgid ""
 "The widget will not be displayed if the currently viewed property has no "
 "children."
 msgstr ""
 "Виджет не будет отображаться, если текущий объект не имеет дочерних объектов."
 
-#: lib/widgets/child-properties.php:116 lib/widgets/featured-properties.php:194
-#: lib/widgets/latest-properties.php:171 lib/widgets/other-properties.php:221
+#: lib/widgets/child-properties.php:117 lib/widgets/featured-properties.php:197
+#: lib/widgets/latest-properties.php:175 lib/widgets/other-properties.php:225
 #: lib/widgets/property-gallery.php:157 lib/widgets/property-search.php:238
 msgid "Title:"
 msgstr "Заголовок:"
 
-#: lib/widgets/child-properties.php:127 lib/widgets/featured-properties.php:204
-#: lib/widgets/latest-properties.php:182
+#: lib/widgets/child-properties.php:128 lib/widgets/featured-properties.php:207
+#: lib/widgets/latest-properties.php:186
 msgid "Hide Images?"
 msgstr "Скрыть рисунки?"
 
-#: lib/widgets/child-properties.php:136 lib/widgets/featured-properties.php:209
-#: lib/widgets/latest-properties.php:186 lib/widgets/other-properties.php:235
+#: lib/widgets/child-properties.php:137 lib/widgets/featured-properties.php:212
+#: lib/widgets/latest-properties.php:190 lib/widgets/other-properties.php:239
 msgid "Image Size:"
 msgstr "Размер изображения:"
 
-#: lib/widgets/child-properties.php:141 lib/widgets/featured-properties.php:214
-#: lib/widgets/latest-properties.php:191 lib/widgets/other-properties.php:241
+#: lib/widgets/child-properties.php:142 lib/widgets/featured-properties.php:217
+#: lib/widgets/latest-properties.php:195 lib/widgets/other-properties.php:245
 msgid "Listings to display?"
 msgstr "Отображать объявления?"
 
-#: lib/widgets/child-properties.php:165 lib/widgets/featured-properties.php:228
+#: lib/widgets/child-properties.php:166 lib/widgets/featured-properties.php:231
 msgid "Select the stats you want to display"
 msgstr "Выберите атрибуты, которые вы хотите показывать"
 
-#: lib/widgets/child-properties.php:188 lib/widgets/featured-properties.php:247
-#: lib/widgets/latest-properties.php:216 lib/widgets/other-properties.php:269
+#: lib/widgets/child-properties.php:189 lib/widgets/featured-properties.php:250
+#: lib/widgets/latest-properties.php:220 lib/widgets/other-properties.php:273
 msgid "Address Format:"
 msgstr "Формат адреса:"
 
-#: lib/widgets/child-properties.php:198 lib/widgets/featured-properties.php:257
-#: lib/widgets/latest-properties.php:226 lib/widgets/other-properties.php:281
+#: lib/widgets/child-properties.php:199 lib/widgets/featured-properties.php:260
+#: lib/widgets/latest-properties.php:230 lib/widgets/other-properties.php:285
 msgid "Show \"More\" link?"
 msgstr "Показывать ссылку \"Детали\"?"
 
-#: lib/widgets/child-properties.php:207 lib/widgets/featured-properties.php:265
-#: lib/widgets/latest-properties.php:234 lib/widgets/other-properties.php:288
+#: lib/widgets/child-properties.php:208 lib/widgets/featured-properties.php:268
+#: lib/widgets/latest-properties.php:238 lib/widgets/other-properties.php:292
 msgid "Show \"View All\" link?"
 msgstr "Показывать ссылку \"Смотреть все\"?"
 
@@ -2457,19 +2465,19 @@ msgstr "Избранные %1s"
 msgid "List of properties that were marked as Featured"
 msgstr "Список объектов, помеченных как Избранные"
 
-#: lib/widgets/featured-properties.php:135
-#: lib/widgets/latest-properties.php:114 lib/widgets/other-properties.php:146
-#: static/views/child-properties.php:68
+#: lib/widgets/featured-properties.php:138
+#: lib/widgets/latest-properties.php:118 lib/widgets/other-properties.php:150
+#: static/views/child-properties.php:71
 msgid "More"
 msgstr "Детали"
 
-#: lib/widgets/featured-properties.php:142
-#: lib/widgets/latest-properties.php:123 lib/widgets/other-properties.php:159
-#: static/views/child-properties.php:76
+#: lib/widgets/featured-properties.php:145
+#: lib/widgets/latest-properties.php:127 lib/widgets/other-properties.php:163
+#: static/views/child-properties.php:79
 msgid "View All"
 msgstr "Смотреть все"
 
-#: lib/widgets/featured-properties.php:225
+#: lib/widgets/featured-properties.php:228
 msgid "Display properties in random order?"
 msgstr "Отображать объекты в случайном порядке?"
 
@@ -2482,16 +2490,16 @@ msgstr "Последние %1s"
 msgid "List of the latest properties created on this site"
 msgstr "Список всех последних объектов, созданных на сайте"
 
-#: lib/widgets/latest-properties.php:77 static/views/child-properties.php:29
+#: lib/widgets/latest-properties.php:78 static/views/child-properties.php:29
 #, php-format
 msgid "%s at %s for %s"
 msgstr "%s на %s за %s"
 
-#: lib/widgets/latest-properties.php:174
+#: lib/widgets/latest-properties.php:178
 msgid "Latest Properties"
 msgstr "Последние объекты"
 
-#: lib/widgets/latest-properties.php:197
+#: lib/widgets/latest-properties.php:201
 msgid "Select stats you want to display"
 msgstr "Выберите атрибуты, которые вы хотите показывать"
 
@@ -2525,7 +2533,7 @@ msgid ""
 msgstr ""
 "Отображать список %1s , которые делят родительский с отображаемым объектом."
 
-#: lib/widgets/other-properties.php:218
+#: lib/widgets/other-properties.php:222
 msgid ""
 "The widget will show other properties that share a parent with the currently "
 "displayed property."
@@ -2533,19 +2541,19 @@ msgstr ""
 "Виджет покажет другие объекты, которые имеют один родительский с "
 "отображенным в настоящее время объектом."
 
-#: lib/widgets/other-properties.php:230
+#: lib/widgets/other-properties.php:234
 msgid "Hide images."
 msgstr "Скрыть рисунки."
 
-#: lib/widgets/other-properties.php:247
+#: lib/widgets/other-properties.php:251
 msgid "Select the attributes you want to display: "
 msgstr "Выберите атрибуты, которые вы хотите показывать:"
 
-#: lib/widgets/other-properties.php:295
+#: lib/widgets/other-properties.php:299
 msgid "If property has no parent, show other properties of same type."
 msgstr "Если объект не имеет родительских, показать другие объекты этого типа."
 
-#: lib/widgets/other-properties.php:302
+#: lib/widgets/other-properties.php:306
 msgid "Randomize order of displayed properties."
 msgstr "Рандомозировать порядок отображения объектов."
 
@@ -2791,15 +2799,15 @@ msgstr "Диапазон выпадающим списком"
 msgid "<label>Default Value</label>"
 msgstr "<label>Значение по умолчанию</label>"
 
-#: static/views/admin/settings-developer-attributes.php:156
+#: static/views/admin/settings-developer-attributes.php:155
 msgid "Apply to listings that have no value for this field."
 msgstr "Применить к объектам, у которых значение атрибута не заполнено."
 
-#: static/views/admin/settings-developer-attributes.php:156
+#: static/views/admin/settings-developer-attributes.php:155
 msgid "Apply to all"
 msgstr "Применить ко всем"
 
-#: static/views/admin/settings-developer-attributes.php:167
+#: static/views/admin/settings-developer-attributes.php:166
 #: static/views/admin/settings-developer-meta.php:62
 #: static/views/admin/settings-developer-types.php:123
 #: static/views/admin/settings.php:352
@@ -3561,7 +3569,7 @@ msgstr "найдено."
 msgid "Viewing page"
 msgstr "Просмотр страницы"
 
-#: static/views/pagination.php:21
+#: static/views/pagination.php:21 static/views/property-overview.php:49
 msgid "of"
 msgstr "из"
 
