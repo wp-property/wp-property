@@ -633,7 +633,7 @@ function wpp_set_unique_ids(el, unique) {
   if (typeof el == "undefined" || el.size() === 0) {
     return;
   }
-  
+
   el.each(function(){
     var child = jQuery(this);
 
@@ -705,6 +705,7 @@ jQuery(document).ready(function() {
         return false;
     }
     // Blank out all values
+    /*
     jQuery("input[type=text]", parent).val('');
     jQuery("input[type=checkbox]", parent).attr('checked', false);
     // Don't hide last row
@@ -714,6 +715,9 @@ jQuery(document).ready(function() {
     } else {
       jQuery(parent).attr( 'new_row', 'true' );
     }
+*/
+    jQuery(parent).hide();
+    jQuery(parent).remove();
 
     table.trigger('row_removed', [parent]);
   });
