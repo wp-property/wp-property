@@ -4859,3 +4859,38 @@ add_filter('wpp_settings_save', 'wpp_settings_save_stripslashes');
 function wpp_settings_save_stripslashes($data){
   return stripslashes_array($data);
 }
+
+add_filter('wpp_settings_save', 'wpp_settings_remove_preset_values');
+function wpp_settings_remove_preset_values($data){
+  if(isset( $data ['property_meta']['__first_row'])){
+    unset($data ['property_meta']['__first_row']);
+  }
+  if(isset( $data ['property_types']['__first_row'])){
+    unset($data ['property_types']['__first_row']);
+  }
+  if(isset( $data ['property_stats']['__first_row'])){
+    unset($data ['property_stats']['__first_row']);
+  }
+  if(isset( $data ['property_stats_groups']['__first_row'])){
+    unset($data ['property_stats_groups']['__first_row']);
+  }
+  if(isset( $data ['searchable_attr_fields']['__first_row'])){
+    unset($data ['searchable_attr_fields']['__first_row']);
+  }
+  if(isset( $data ['predefined_search_values']['__first_row'])){
+    unset($data ['predefined_search_values']['__first_row']);
+  }
+  if(isset( $data ['admin_attr_fields']['__first_row'])){
+    unset($data ['admin_attr_fields']['__first_row']);
+  }
+  if(isset( $data ['admin_attr_fields']['__first_row'])){
+    unset($data ['admin_attr_fields']['__first_row']);
+  }
+  if(isset( $data ['predefined_values']['__first_row'])){
+    unset($data ['predefined_values']['__first_row']);
+  }
+  if(isset( $data ['default_values']['__first_row'])){
+    unset($data ['default_values']['__first_row']);
+  }
+  return $data;
+}

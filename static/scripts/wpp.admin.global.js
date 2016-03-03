@@ -705,19 +705,18 @@ jQuery(document).ready(function() {
         return false;
     }
     // Blank out all values
-    /*
     jQuery("input[type=text]", parent).val('');
     jQuery("input[type=checkbox]", parent).attr('checked', false);
-    // Don't hide last row
+    // Last row stay hidden
     if(row_count > 1) {
       jQuery(parent).hide();
       jQuery(parent).remove();
     } else {
-      jQuery(parent).attr( 'new_row', 'true' );
+      var $parent = jQuery(parent);
+      wpp_add_row($parent);
+      $parent.hide();
+      $parent.remove();
     }
-*/
-    jQuery(parent).hide();
-    jQuery(parent).remove();
 
     table.trigger('row_removed', [parent]);
   });
