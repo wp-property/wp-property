@@ -21,7 +21,12 @@ namespace UsabilityDynamics\WPP {
        */
       public function __construct( $args = false ) {
         global $wp_properties;
-        
+
+        $is_installation = false;
+        if(!get_option('wpp_settings')){
+          $is_installation = true;
+        }
+
         //** STEP 1. Default */
         
         parent::__construct( $args );
@@ -113,10 +118,9 @@ namespace UsabilityDynamics\WPP {
         
         //** Setup default property types to be used. */
         $d = $this->get( 'property_types', false );
-
         // Should only be set on install, not added on every request. These literally can not be removed from settings... -potanin@UD
         // It is adding these defaults only if types are empty (install) - korotkov@UD
-        if( empty( $d ) || !is_array( $d ) ) {
+        if( (empty( $d ) || !is_array( $d )) && $is_installation ) {
           $this->set( 'property_types', array(
             'building' => __( 'Building', ud_get_wp_property()->domain ),
             'floorplan' => __( 'Floorplan', ud_get_wp_property()->domain ),
@@ -134,7 +138,7 @@ namespace UsabilityDynamics\WPP {
           
         //** Property stats. Can be searchable, displayed as input boxes on editing page. */
         $d = $this->get( 'property_stats', false );
-        if( !$d || !is_array( $d ) ) {
+        if( (!$d || !is_array( $d )) && $is_installation ) {
           $this->set( 'property_stats', array(
             'location' => __('Address',ud_get_wp_property()->domain),
             'price' => __('Price',ud_get_wp_property()->domain),
@@ -146,7 +150,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Property meta.  Typically not searchable, displayed as textarea on editing page. */
         $d = $this->get( 'property_meta', false );
-        if( !$d || !is_array( $d ) ) {
+        if( (!$d || !is_array( $d )) && $is_installation ) {
           $this->set( 'property_meta', array(
             'lease_terms' => __('Lease Terms',ud_get_wp_property()->domain),
             'pet_policy' => __('Pet Policy',ud_get_wp_property()->domain),
