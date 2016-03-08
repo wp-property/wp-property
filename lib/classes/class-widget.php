@@ -48,7 +48,6 @@ namespace UsabilityDynamics\WPP {
         $args = array();
 
         $_shortcode = \UsabilityDynamics\Shortcode\Manager::get_by( 'id', $this->shortcode_id );
-
         if ( is_object( $_shortcode ) && !empty( $_shortcode->params ) && is_array( $_shortcode->params ) ) {
 
           foreach( $_shortcode->params as $param ) {
@@ -70,6 +69,13 @@ namespace UsabilityDynamics\WPP {
                   }
                 }
 
+                break;
+
+              case 'combobox':
+                if( is_array( $value ) ) {
+                  $value = implode( ',', $value );
+                }
+                $args[] = $param['id'] . '="' . esc_attr( $value ) . '"';
                 break;
 
               default:
@@ -94,7 +100,6 @@ namespace UsabilityDynamics\WPP {
           }
 
         }
-
         return implode( ' ', $args );
 
       }
@@ -189,6 +194,117 @@ namespace UsabilityDynamics\WPP {
                       </li>
                     <?php } ?>
                   </ul>
+                  <?php }
+                  break;
+
+                case 'combobox':
+                  if ( !empty( $param['options'] ) && is_array( $param['options'] ) ) { 
+                    wp_enqueue_script('jquery-ui-autocomplete');
+                    ?>
+                  <div class="wpp-combobox-wrapper" id="<?php echo $this->get_field_id( $param['id'] ); ?>" data-slug="<?php echo $param['id'];?>">
+                    <div class="ui-widget">
+                      <span class="custom-combobox">
+                        <input title="" class="custom-combobox-input newtag form-input-tip" autocomplete="off">
+                        <a tabindex="-1" class="custom-combobox-toggle" role="button" title="Show All Items"></a>
+                      </span>
+                      <input type="button" class="button tagadd" value="Add">
+                    </div>
+                    <div class="combolist" on-click="$(this).remove();">
+                      <?php
+                      $i = 0;
+                      if(isset($instance[ $param['id'] ]) && is_array($instance[ $param['id'] ]))
+                        foreach ($instance[ $param['id'] ] as $key => $val) {
+                          $i++;
+                          echo "<span id='combo-list-$i' class='combo-list'>";
+                            echo "<span><a id='property_feature-check-num-$i' class='rmlistitem' ></a>&nbsp;{$param['options'][$val]}</span>";
+                            echo "<input type='hidden' name='{$this->get_field_name( $param['id'] )}[]' value='$val' />";
+                          echo "</span>";
+                        }
+                      ?>
+                    </div>
+                    <script>
+                      jQuery(document).ready(function($){
+                          var $comboWrapper = $('#<?php echo $this->get_field_id( $param['id'] ); ?>');
+                          var combolist = $comboWrapper.find('.combolist');
+                          var dataslug = $comboWrapper.attr('data-slug');
+                          var slug = $comboWrapper.attr('data-slug');
+                          var btnAdd = $comboWrapper.find('.tagadd');
+                          var input  = $comboWrapper.find('.newtag');
+                          var template = $comboWrapper.find('.wpp-widget-combobox').html();
+                          var autoCompleteList = ["<?php echo implode('","', array_values($param['options']));?>"];
+                          var autoCompleteList_key = ["<?php echo implode('","', array_keys($param['options']));?>"];
+                          
+                          input.autocomplete({
+                            source: autoCompleteList,
+                            minLength: 0
+                          });
+                          var autoComplete = input.autocomplete( "instance" );
+                          var wasOpen = false;
+                          $comboWrapper.find('.custom-combobox-toggle')
+                            .mousedown(function() {
+                              wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+                            })
+                            .on('click', function(){
+                              // Close if already visible
+                              input.focus();
+                              if ( wasOpen ) return;
+                              input.autocomplete( "search", "" );
+                              input.autocomplete( "widget" ).css({
+                                'overflow-y': 'auto',
+                                'height': '200px',
+                              });
+                            });
+
+                          $(autoComplete.menu.activeMenu).on('click', '.ui-menu-item', function(){
+                            input.val($(this).html());
+                            autoComplete.close();
+                          });
+
+                          btnAdd.on('click', btnAdd, function(e){
+                            var tag = input.val();
+                            var taglistChild = combolist.children();
+                            if(tag == '') return;
+                            tag = tag.split(",");
+
+                            taglistChild.each(function(index, item){
+                              var val = $(item).find('input').val();
+                              var index = tag.indexOf(val);
+                              if (index >= 0) {
+                                tag.splice( index, 1 );
+                              }
+                            });
+
+                            $.each(tag, function(index, item){
+                              item = item.trim();
+                              var index = autoCompleteList.indexOf( item );
+                              var slug = autoCompleteList_key[index];
+                              var tmpl = template.replace('<%= label %>', item)
+                                          .replace('<%= slug %>', slug); // taglistChild.length item  slug
+                              combolist.append(tmpl);
+                            })
+                            input.val('');
+                            
+                          });
+                          input.keypress(function(e){
+                            if ( e.which == 13 ){
+                              btnAdd.trigger('click');
+                              e.preventDefault();
+                              return false;
+                            }
+                          });
+                          combolist.on('click', '.rmlistitem', function(){
+                            $(this).parent().parent().remove();
+                            return false;
+                          });
+                      });
+                    </script>
+                    <script type="text/html" class="wpp-widget-combobox">
+                      <span class='combo-list'>
+                        <span><a class='rmlistitem'></a>&nbsp;<%= label %></span>
+                        <input type='hidden' name='<?php echo $this->get_field_name( $param['id'] ); ?>[]' value='<%= slug %>' />
+                      </span>
+                    </script>
+                  </div>
                   <?php }
                   break;
 
