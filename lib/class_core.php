@@ -122,6 +122,7 @@ class WPP_Core {
     add_action( 'wp_ajax_wpp_ajax_revalidate_all_addresses', create_function( "", '  echo WPP_F::revalidate_all_addresses(); die();' ) );
     add_action( 'wp_ajax_wpp_save_settings', create_function( "", ' die(WPP_F::save_settings());' ) );
     add_action( 'wp_ajax_wpp_apply_default_value', create_function( "", ' die(WPP_F::apply_default_value());' ) );
+    add_action( 'wp_ajax_wpp_ajax_print_wp_properties', create_function( "", ' global $wp_properties; print_r($wp_properties); die();' ) );
 
     /** Called in setup_postdata().  We add property values here to make available in global $post variable on frontend */
     add_action( 'the_post', array( 'WPP_F', 'the_post' ) );
@@ -239,7 +240,9 @@ class WPP_Core {
     //** Add troubleshoot log page */
     //** Modify admin body class */
     add_filter( 'admin_body_class', array( $this, 'admin_body_class' ), 5 );
-
+	  
+    add_filter( 'display_post_states', array( $this, 'display_post_states' ), 10, 2 );
+    
     //** Modify Front-end property body class */
     add_filter( 'body_class', array( $this, 'properties_body_class' ) );
 
@@ -318,6 +321,15 @@ class WPP_Core {
       return 'wpp_property_edit';
     }
 
+  }
+
+  function display_post_states( $post_states, $post ) {
+    global $wp_properties;
+
+    if ($post->post_name === $wp_properties['configuration']['base_slug']) {
+      $post_states['properties_page'] = __('Properties Page');
+    }
+    return $post_states;
   }
 
   /**
@@ -1026,6 +1038,7 @@ class WPP_Core {
 
     //* General WPP capabilities */
     $wpp_capabilities = array(
+      'read_wpp_property' => __( 'View Properties', ud_get_wp_property()->domain ),
       //* Manage WPP Properties Capabilities */
       'edit_wpp_properties' => __( 'View Properties', ud_get_wp_property()->domain ),
       'edit_wpp_property' => __( 'Add/Edit Properties', ud_get_wp_property()->domain ),

@@ -22,6 +22,36 @@ global $wp_properties;
   </tr>
   </thead>
   <tbody>
+
+    <tr class="wpp_dynamic_table_row" slug="__first_row" new_row='false' style="display: none">
+      <th class='wpp_draggable_handle'>&nbsp;</th>
+      <td>
+        <ul>
+          <li>
+            <input class="slug_setter" type="text" name="wpp_settings[property_meta][__first_row]" value=""/>
+          </li>
+        </ul>
+      <td>
+        <ul>
+          <li>
+            <input type="text" class="slug" readonly='readonly' value=""/>
+          </li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          </li>
+          <input type="checkbox" class="slug" name="wpp_settings[hidden_frontend_attributes][]" value=""/>
+          <label><?php _e( 'Show in Admin Only', ud_get_wp_property()->domain ); ?></label>
+          </li>
+        </ul>
+      </td>
+
+      <td>
+        <span class="wpp_delete_row wpp_link"><?php _e( 'Delete Meta Attribute', ud_get_wp_property()->domain ) ?></span>
+      </td>
+    </tr>
+
   <?php foreach( $wp_properties[ 'property_meta' ] as $slug => $label ): ?>
 
     <tr class="wpp_dynamic_table_row" slug="<?php echo $slug; ?>" new_row='false'>

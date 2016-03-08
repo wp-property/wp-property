@@ -153,5 +153,5 @@ Learn more about the [WP-Property Add-ons and themes](https://www.usabilitydynam
 ##### Installation
 1. Download and activate the plugin through the 'Plugins' menu in WordPress.
 2. Visit Properties -> Settings page and set "Property Page" to one of your pages. This will be used in the URL to show all your single property listings.  For example, if you have a page called "Apartments", and you select it, your property URLs will be built like this: http://yoursite.com/apartments/property-name-here
-3. Check "Automatically insert property overview into property page content." or copy and paste [property_overview] into the body of your main property page.
+3. Check "Automatically overwrite this page's content with [property_overview]" or copy and paste [property_overview] into the body of your main property page.
 4. Visit Appearance -> Widgets and set up the widgets you want to show on your different property type pages.
