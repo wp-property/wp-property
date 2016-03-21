@@ -2426,7 +2426,7 @@ class WPP_F extends UsabilityDynamics\Utility {
         foreach( $decoded_settings as $option_key => $data ) {
 
           // Handle core settings ( legacy support )
-          if( $option_key = 'wpp_settings' ) {
+          if( $option_key == 'wpp_settings' ) {
             //** Allow features to preserve their settings that are not configured on the settings page */
             $data = apply_filters( 'wpp_settings_save', $data, $wp_properties );
             //** Prevent removal of featured settings configurations if they are not present */
