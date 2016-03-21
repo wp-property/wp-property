@@ -710,15 +710,12 @@ jQuery(document).ready(function() {
     // Blank out all values
     jQuery("input[type=text]", parent).val('');
     jQuery("input[type=checkbox]", parent).attr('checked', false);
-    // Last row stays hidden
+    // Don't hide last row
     if(row_count > 1) {
       jQuery(parent).hide();
       jQuery(parent).remove();
     } else {
-      var $parent = jQuery(parent);
-      wpp_add_row($parent);
-      $parent.hide();
-      $parent.remove();
+      jQuery(parent).attr( 'new_row', 'true' );
     }
 
     table.trigger('row_removed', [parent]);
