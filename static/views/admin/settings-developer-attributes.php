@@ -32,14 +32,18 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
   </tr>
   </thead>
   <tbody>
-  <?php foreach( $wp_properties[ 'property_stats' ] as $slug => $label ): ?>
+  <?php 
+  $i=0;
+  foreach( $wp_properties[ 'property_stats' ] as $slug => $label ): ?>
     <?php $gslug = false; ?>
     <?php $group = false; ?>
     <?php if( !empty( $wp_properties[ 'property_stats_groups' ][ $slug ] ) ) : ?>
       <?php $gslug = $wp_properties[ 'property_stats_groups' ][ $slug ]; ?>
       <?php $group = $wp_properties[ 'property_groups' ][ $gslug ]; ?>
-    <?php endif; ?>
-    <tr class="wpp_dynamic_table_row" <?php echo( !empty( $gslug ) ? "wpp_attribute_group=\"" . $gslug . "\"" : "" ); ?> style="<?php echo( !empty( $group[ 'color' ] ) ? "background-color:" . $group[ 'color' ] : "" ); ?>" slug="<?php echo $slug; ?>" new_row='false'>
+    <?php endif; 
+		
+	?>
+    <tr class="wpp_dynamic_table_row" <?php echo( !empty( $gslug ) ? "wpp_attribute_group=\"" . $gslug . "\"" : "" ); ?> style="<? if(empty($label)){echo "display:none;";}?><?php echo( !empty( $group[ 'color' ] ) ? "background-color:" . $group[ 'color' ] : "" ); ?>" slug="<?php echo $slug; ?>" new_row='false'>
 
       <td class="wpp_draggable_handle">&nbsp;</td>
 
@@ -157,7 +161,9 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
         </ul>
       </td>
     </tr>
-  <?php endforeach;?>
+  <?php 
+	
+	endforeach;?>
   </tbody>
 
   <tfoot>
