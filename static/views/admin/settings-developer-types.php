@@ -20,7 +20,7 @@ global $wp_properties;
   <tbody>
   <?php foreach( $wp_properties[ 'property_types' ] as $property_slug => $label ): ?>
 
-    <tr class="wpp_dynamic_table_row" slug="<?php echo $property_slug; ?>"  data-property-slug="<?php echo $property_slug; ?>" new_row='false'>
+    <tr class="wpp_dynamic_table_row" slug="<?php echo $property_slug; ?>"  data-property-slug="<?php echo $property_slug; ?>" new_row='false'  <? if(empty($label)){echo 'style="display:none;"';}?>>
 
       <td>
         <ul>
