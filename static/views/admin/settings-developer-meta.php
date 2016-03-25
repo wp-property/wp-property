@@ -24,7 +24,7 @@ global $wp_properties;
   <tbody>
   <?php foreach( $wp_properties[ 'property_meta' ] as $slug => $label ): ?>
 
-    <tr class="wpp_dynamic_table_row" slug="<?php echo $slug; ?>" new_row='false'>
+    <tr class="wpp_dynamic_table_row" slug="<?php echo $slug; ?>" new_row='false' <? if(empty($label)){echo 'style="display:none;"';}?>>
       <th class='wpp_draggable_handle'>&nbsp;</th>
       <td>
         <ul>
