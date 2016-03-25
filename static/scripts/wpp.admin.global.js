@@ -709,10 +709,11 @@ jQuery(document).ready(function() {
     jQuery("input[type=checkbox]", parent).attr('checked', false);
     // Don't hide last row
     if(row_count > 1) {
-      jQuery(parent).hide();
+     jQuery(parent).hide();
       jQuery(parent).remove();
     } else {
-      jQuery(parent).attr( 'new_row', 'true' );
+      //jQuery(parent).attr( 'new_row', 'true' );
+	  jQuery(parent).hide();
     }
 
     table.trigger('row_removed', [parent]);
