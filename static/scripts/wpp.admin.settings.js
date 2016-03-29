@@ -28,6 +28,21 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
       if( !jQuery( '#wpp_backup_file' ).val() ) {
         var btn = jQuery( "input[type='submit']" );
         btn.prop( 'disabled', true );
+		jQuery("#wpp_inquiry_property_types tbody tr").each(function(){
+			if(jQuery(".slug_setter",this).val() == ""){
+				jQuery(this).remove();
+			}
+		});
+		jQuery("#wpp_inquiry_meta_fields tbody tr").each(function(){
+			if(jQuery(".slug_setter",this).val() == ""){
+				jQuery(this).remove();
+			}
+		});
+		jQuery("#wpp_inquiry_attribute_fields tbody tr").each(function(){
+			if(jQuery(".slug_setter",this).val() == ""){
+				jQuery(this).remove();
+			}
+		});
         var data = jQuery( this ).serialize();
         jQuery.ajax({
           type: 'POST',
