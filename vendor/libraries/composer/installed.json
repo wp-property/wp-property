@@ -6,12 +6,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/composer/installers.git",
-            "reference": "6213d900e92647831f7a406d5c530ea1f3d4360e"
+            "reference": "6aac6a0a931ad06780fa7c574f27178d48109ec7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/installers/zipball/6213d900e92647831f7a406d5c530ea1f3d4360e",
-            "reference": "6213d900e92647831f7a406d5c530ea1f3d4360e",
+            "url": "https://api.github.com/repos/composer/installers/zipball/6aac6a0a931ad06780fa7c574f27178d48109ec7",
+            "reference": "6aac6a0a931ad06780fa7c574f27178d48109ec7",
             "shasum": ""
         },
         "require": {
@@ -25,7 +25,7 @@
             "composer/composer": "1.0.*@dev",
             "phpunit/phpunit": "4.1.*"
         },
-        "time": "2016-01-27 12:54:22",
+        "time": "2016-03-23 16:25:33",
         "type": "composer-plugin",
         "extra": {
             "class": "Composer\\Installers\\Plugin",
@@ -51,12 +51,13 @@
             }
         ],
         "description": "A multi-framework Composer library installer",
-        "homepage": "http://composer.github.com/installers/",
+        "homepage": "https://composer.github.io/installers/",
         "keywords": [
             "Craft",
             "Dolibarr",
             "Hurad",
             "MODX Evo",
+            "Mautic",
             "OXID",
             "SMF",
             "Thelia",
@@ -583,16 +584,16 @@
     },
     {
         "name": "usabilitydynamics/wp-gallery-metabox",
-        "version": "2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "2.0.1",
+        "version_normalized": "2.0.1.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/wp-gallery-metabox",
-            "reference": "2.0.0"
+            "reference": "2.0.1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/wp-gallery-metabox/archive/2.0.0.zip",
+            "url": "https://github.com/UsabilityDynamics/wp-gallery-metabox/archive/2.0.1.zip",
             "reference": null,
             "shasum": null
         },
