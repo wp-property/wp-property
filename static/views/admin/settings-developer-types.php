@@ -3,7 +3,6 @@
  * Settings 'Developer' Tab
  * Section 'Types'
  */
-
 global $wp_properties;
 ?>
 <h3><?php printf( __( '%1s Types', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></h3>
@@ -73,14 +72,17 @@ global $wp_properties;
 
           <li class="wpp_show_advanced" wrapper="wpp_something_advanced_wrapper"><?php _e( 'Toggle Attributes Selection', ud_get_wp_property()->domain ); ?></li>
 
-          <?php foreach( $wp_properties[ 'property_stats' ] as $property_stat_slug => $property_stat_label ) : ?>
+          <?php 
+		  if(!empty($wp_properties[ 'property_stats' ])){
+		  foreach( $wp_properties[ 'property_stats' ] as $property_stat_slug => $property_stat_label ) : ?>
             <li class="wpp_development_advanced_option">
               <input id="<?php echo $property_slug . "_" . $property_stat_slug; ?>_hidden_attributes" <?php if( isset( $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) && in_array( $property_stat_slug, $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[hidden_attributes][<?php echo $property_slug; ?>][]" value="<?php echo $property_stat_slug; ?>"/>
               <label for="<?php echo $property_slug . "_" . $property_stat_slug; ?>_hidden_attributes">
                 <?php echo $property_stat_label; ?>
               </label>
             </li>
-          <?php endforeach; ?>
+          <?php endforeach; 
+		  }?>
 
           <?php 
           if(!empty($wp_properties[ 'property_meta' ])){
@@ -172,28 +174,34 @@ global $wp_properties;
         </ul>
       </td>
 
-      <td>
+     <td>
         <ul class="wp-tab-panel wpp_hidden_property_attributes wpp_something_advanced_wrapper">
 
           <li class="wpp_show_advanced" wrapper="wpp_something_advanced_wrapper"><?php _e( 'Toggle Attributes Selection', ud_get_wp_property()->domain ); ?></li>
 
-          <?php foreach( $wp_properties[ 'property_stats' ] as $property_stat_slug => $property_stat_label ) : ?>
+          <?php 
+		  if(!empty($wp_properties[ 'property_stats' ])){
+		  foreach( $wp_properties[ 'property_stats' ] as $property_stat_slug => $property_stat_label ) : ?>
             <li class="wpp_development_advanced_option">
               <input id="<?php echo $property_slug . "_" . $property_stat_slug; ?>_hidden_attributes" <?php if( isset( $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) && in_array( $property_stat_slug, $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[hidden_attributes][<?php echo $property_slug; ?>][]" value="<?php echo $property_stat_slug; ?>"/>
               <label for="<?php echo $property_slug . "_" . $property_stat_slug; ?>_hidden_attributes">
                 <?php echo $property_stat_label; ?>
               </label>
             </li>
-          <?php endforeach; ?>
+          <?php endforeach; 
+		  }?>
 
-          <?php foreach( $wp_properties[ 'property_meta' ] as $property_meta_slug => $property_meta_label ) : ?>
+          <?php 
+          if(!empty($wp_properties[ 'property_meta' ])){
+          foreach( $wp_properties[ 'property_meta' ] as $property_meta_slug => $property_meta_label ) : ?>
             <li class="wpp_development_advanced_option">
               <input id="<?php echo $property_slug . "_" . $property_meta_slug; ?>_hidden_attributes" <?php if( isset( $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) && in_array( $property_meta_slug, $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[hidden_attributes][<?php echo $property_slug; ?>][]" value="<?php echo $property_meta_slug; ?>"/>
               <label for="<?php echo $property_slug . "_" . $property_meta_slug; ?>_hidden_attributes">
                 <?php echo $property_meta_label; ?>
               </label>
             </li>
-          <?php endforeach; ?>
+          <?php endforeach; 
+          }?>
 
           <?php if( empty( $wp_properties[ 'property_stats' ][ 'parent' ] ) ) : ?>
             <li class="wpp_development_advanced_option">
@@ -208,19 +216,21 @@ global $wp_properties;
       <td>
         <ul class="wp-tab-panel wpp_inherited_property_attributes wpp_something_advanced_wrapper">
           <li class="wpp_show_advanced" wrapper="wpp_something_advanced_wrapper"><?php _e( 'Toggle Attributes Selection', ud_get_wp_property()->domain ); ?></li>
-          <?php foreach( $wp_properties[ 'property_stats' ] as $property_stat_slug => $property_stat_label ): ?>
+          <?php 
+          if(!empty($wp_properties[ 'property_stats' ])){
+          foreach( $wp_properties[ 'property_stats' ] as $property_stat_slug => $property_stat_label ): ?>
             <li class="wpp_development_advanced_option">
               <input id="<?php echo $property_slug . "_" . $property_stat_slug; ?>_inheritance" <?php if( isset( $wp_properties[ 'property_inheritance' ][ $property_slug ] ) && in_array( $property_stat_slug, $wp_properties[ 'property_inheritance' ][ $property_slug ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[property_inheritance][<?php echo $property_slug; ?>][]" value="<?php echo $property_stat_slug; ?>"/>
               <label for="<?php echo $property_slug . "_" . $property_stat_slug; ?>_inheritance">
                 <?php echo $property_stat_label; ?>
               </label>
             </li>
-          <?php endforeach; ?>
+          <?php endforeach; 
+          }?>
           <?php do_action( 'wpp::types::inherited_attributes', $property_slug ); ?>
-		  
         </ul>
-		
       </td>
+
 
     </tr>
   <?}?>
