@@ -451,7 +451,7 @@ function wpp_create_slug(slug) {
  * @param element
  * @return
  */
-function wpp_add_row(element) {
+function wpp_add_row(element,hides) {
   var auto_increment = false;
   var table = jQuery(element).parents('.ud_ui_dynamic_table');
   var table_id = jQuery(table).attr("id");
@@ -520,103 +520,12 @@ function wpp_add_row(element) {
   //* Bind (Set) ColorPicker with new fields '.wpp_input_colorpicker' */
   bindColorPicker(added_row);
   // Display row just in case
-  jQuery(added_row).show();
-
-  //* Blank out all values */
-  jQuery("textarea", added_row).val('');
-  jQuery("select", added_row).val('');
-  jQuery("input[type=text]", added_row).val('');
-  jQuery("input[type=checkbox]", added_row).attr('checked', false);
-
-  //* Unset 'new_row' attribute */
-  jQuery(added_row).attr('new_row', 'true');
-
-  //* Focus on new element */
-  jQuery('input.slug_setter', added_row).focus();
-
-  //* Fire Event after Row added to the Table */
-  added_row.trigger('added');
-
-  if (callback_function = jQuery(element).attr("callback_function")) {
-    wpp_call_function(callback_function, window, added_row);
+  if(hides== true){
+   jQuery(added_row).hide();
+   
+  } else{
+   jQuery(added_row).show();
   }
-
-  return added_row;
-}
-
-/**
-Reset all data in form settings developer
-*/
-function wpp_add_row_new(element) {
-   var auto_increment = false;
-  var table = jQuery(element).parents('.ud_ui_dynamic_table');
-  var table_id = jQuery(table).attr("id");
-
-  //* Determine if table rows are numeric */
-  if(jQuery(table).attr('auto_increment') == 'true') {
-    var auto_increment = true;
-  } else if (jQuery(table).attr('use_random_row_id') == 'true') {
-    var use_random_row_id = true;
-  } else if (jQuery(table).attr('allow_random_slug') == 'true') {
-    var allow_random_slug = true;
-  }
-
-  //* Clone last row */
-  var cloned = jQuery(".wpp_dynamic_table_row:last", table).clone();
-
-  //return;
-  //* Set unique 'id's and 'for's for elements of the new row */
-  var unique = Math.floor(Math.random()*1000);
-  wpp_set_unique_ids(cloned, unique);
-
-
-  //* Increment name value automatically */
-  if(auto_increment) {
-    //* Cycle through all child elements and fix names */
-    jQuery('input,select,textarea', cloned).each(function(element) {
-      var old_name = jQuery(this).attr('name');
-      var matches = old_name.match(/\[(\d{1,4})\]/);
-      if (matches) {
-        old_count = parseInt(matches[1]);
-        new_count = (old_count + 1);
-      }
-      var new_name =  old_name.replace('[' + old_count + ']','[' + new_count + ']');
-      //* Update to new name */
-      jQuery(this).attr('name', new_name);
-    });
-
-  } else if (use_random_row_id) {
-    //* Get the current random id of row */
-    var random_row_id = jQuery(cloned).attr('random_row_id');
-    var new_random_row_id = Math.floor(Math.random()*1000)
-    //* Cycle through all child elements and fix names */
-    jQuery('input,select,textarea', cloned).each(function(element) {
-      var old_name = jQuery(this).attr('name');
-      var new_name =  old_name.replace('[' + random_row_id + ']','[' + new_random_row_id + ']');
-      //* Update to new name */
-      jQuery(this).attr('name', new_name);
-    });
-    jQuery(cloned).attr('random_row_id', new_random_row_id);
-
-  } else if (allow_random_slug) {
-    //* Update Row names */
-    var slug_setter = jQuery("input.slug_setter", cloned);
-    jQuery(slug_setter).attr('value', '');
-    if(slug_setter.length > 0) {
-      updateRowNames(slug_setter.get(0), true);
-    }
-  }
-
-  //* Insert new row after last one */
-  jQuery(cloned).appendTo(table);
-
-  //* Get Last row to update names to match slug */
-  var added_row = jQuery(".wpp_dynamic_table_row:last", table);
-
-  //* Bind (Set) ColorPicker with new fields '.wpp_input_colorpicker' */
-  bindColorPicker(added_row);
-  // Display row just in case
-  jQuery(added_row).hide();
 
   //* Blank out all values */
   jQuery("textarea", added_row).val('');
@@ -829,7 +738,7 @@ jQuery(document).ready(function() {
      jQuery(parent).hide();
       jQuery(parent).remove();
     } else {
-      wpp_add_row_new(this);
+      wpp_add_row_new(this,true);
       jQuery(parent).remove();
     }
 
