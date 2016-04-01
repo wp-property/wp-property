@@ -23,10 +23,12 @@ global $wp_properties;
   </thead>
   <tbody>
   <?php 
-  if(!empty($wp_properties[ 'property_meta' ])){
+  if(empty($wp_properties[ 'property_meta' ])){
+	  $wp_properties[ 'property_meta' ] = array("first" => "");
+  }
   foreach( $wp_properties[ 'property_meta' ] as $slug => $label ): ?>
 
-    <tr class="wpp_dynamic_table_row" slug="<?php echo $slug; ?>" new_row='false'>
+    <tr class="wpp_dynamic_table_row" slug="<?php echo $slug; ?>" new_row='false' style="<?php echo( empty( $label ) ? "display:none;" : ""); ?>">
       <th class='wpp_draggable_handle'>&nbsp;</th>
       <td>
         <ul>
@@ -56,38 +58,7 @@ global $wp_properties;
     </tr>
 
   <?php endforeach; 
-  }
-  else{?>
-  <tr class="wpp_dynamic_table_row delete_class_rows" slug="" new_row='' style="display:none;">
-      <th class='wpp_draggable_handle'>&nbsp;</th>
-      <td>
-        <ul>
-          <li>
-            <input class="slug_setter" type="text" name="wpp_settings[property_meta][]" value=""/>
-          </li>
-        </ul>
-      <td>
-        <ul>
-          <li>
-            <input type="text" class="slug" readonly='readonly' value="<?php echo $slug; ?>"/>
-          </li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          </li>
-          <input  type="checkbox" class="slug" name="wpp_settings[hidden_frontend_attributes][]" value=""/>
-          <label><?php _e( 'Show in Admin Only', ud_get_wp_property()->domain ); ?></label>
-          </li>
-        </ul>
-      </td>
-
-      <td>
-        <span class="wpp_delete_row wpp_link"><?php _e( 'Delete Meta Attribute', ud_get_wp_property()->domain ) ?></span>
-		
-      </td>
-    </tr>
-  <?}?>
+  ?>
   </tbody>
 
   <tfoot>
