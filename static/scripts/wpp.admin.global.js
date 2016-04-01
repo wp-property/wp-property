@@ -716,34 +716,17 @@ jQuery(document).ready(function() {
      jQuery(parent).hide();
       jQuery(parent).remove();
     } else {
-      jQuery(parent).attr( 'new_row', 'true' );
+	   if(jQuery(table).hasClass('last_delete_row')){
+	    wpp_add_row(this,true);
+        jQuery(parent).remove();
+	   } else{
+        jQuery(parent).attr( 'new_row', 'true' );
+	   }
     }
 
     table.trigger('row_removed', [parent]);
   });
-// Delete dynamic row in settings attribute
-  jQuery(".last_delete_row .wpp_delete_row").live("click", function() {
-    var parent = jQuery(this).parents('tr.wpp_dynamic_table_row');
-    var table = jQuery(jQuery(this).parents('table').get(0));
-    var row_count = table.find(".wpp_delete_row").length;
-    if(jQuery(this).attr('verify_action') == 'true') {
-      if(!confirm('Are you sure?'))
-        return false;
-    }
-    // Blank out all values
-    jQuery("input[type=text]", parent).val('');
-    jQuery("input[type=checkbox]", parent).attr('checked', false);
-    // Don't hide last row
-    if(row_count > 1) {
-     jQuery(parent).hide();
-      jQuery(parent).remove();
-    } else {
-      wpp_add_row(this,true);
-      jQuery(parent).remove();
-    }
 
-    table.trigger('row_removed', [parent]);
-  });
   jQuery('.wpp_attach_to_agent').live('click', function(){
     var agent_image_id = jQuery(this).attr('id');
     if (agent_image_id != '')
