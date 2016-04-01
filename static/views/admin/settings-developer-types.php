@@ -128,7 +128,7 @@ global $wp_properties;
 
     </tr>
   <?php endforeach; 
-  }?>
+  ?>
   </tbody>
   <tfoot>
   <tr>
