@@ -112,7 +112,7 @@ namespace UsabilityDynamics\WPP {
         //** STEP 3. */
         
         //** Setup default property types to be used. */
-		$b_install = $this->get( 'first_install', false );
+	  $b_install = get_option('wpp_settings');
         $d = $this->get( 'property_types', false );
        if(empty($b_install)){
         // Should only be set on install, not added on every request. These literally can not be removed from settings... -potanin@UD
