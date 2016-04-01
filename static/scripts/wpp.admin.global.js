@@ -522,7 +522,6 @@ function wpp_add_row(element,hides) {
   // Display row just in case
   if(hides== true){
    jQuery(added_row).hide();
-   
   } else{
    jQuery(added_row).show();
   }
@@ -713,14 +712,14 @@ jQuery(document).ready(function() {
     jQuery("input[type=checkbox]", parent).attr('checked', false);
     // Don't hide last row
     if(row_count > 1) {
-     jQuery(parent).hide();
+      jQuery(parent).hide();
       jQuery(parent).remove();
     } else {
 	   if(jQuery(table).hasClass('last_delete_row')){
 	    wpp_add_row(this,true);
-        jQuery(parent).remove();
+            jQuery(parent).remove();
 	   } else{
-        jQuery(parent).attr( 'new_row', 'true' );
+            jQuery(parent).attr( 'new_row', 'true' );
 	   }
     }
 
