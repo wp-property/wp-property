@@ -738,7 +738,7 @@ jQuery(document).ready(function() {
      jQuery(parent).hide();
       jQuery(parent).remove();
     } else {
-      wpp_add_row_new(this,true);
+      wpp_add_row(this,true);
       jQuery(parent).remove();
     }
 
