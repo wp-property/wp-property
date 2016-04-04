@@ -39,20 +39,10 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
 		jQuery('.wpp_save_changes_row').after('<div class="notice notice-error"><p>'+wpp.strings.error_types_one+'</p></div>');
 		return false;
 	  } else{
-	   jQuery("#wpp_inquiry_property_types tbody tr").each(function(){
+	   jQuery("table.last_delete_row tbody tr").each(function(){
 	    if(jQuery(".slug_setter",this).val() == ""){
 	     jQuery(this).remove();
 	    }
-	   });
-	   jQuery("#wpp_inquiry_meta_fields tbody tr").each(function(){
-		if(jQuery(".slug_setter",this).val() == ""){
-		 jQuery(this).remove();
-		}
-	   });
-	   jQuery("#wpp_inquiry_attribute_fields tbody tr").each(function(){
-		if(jQuery(".slug_setter",this).val() == ""){
-		 jQuery(this).remove();
-		}
 	   });
         btn.prop( 'disabled', true );	
         var data = jQuery( this ).serialize();
