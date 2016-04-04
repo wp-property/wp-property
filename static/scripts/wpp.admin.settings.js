@@ -26,8 +26,25 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
      */
     jQuery( '#wpp_settings_form' ).submit( function() {
       if( !jQuery( '#wpp_backup_file' ).val() ) {
-        var btn = jQuery( "input[type='submit']" );
-        btn.prop( 'disabled', true );
+		var btn = jQuery( "input[type='submit']" );
+		 jQuery("#wpp_inquiry_property_types tbody tr").each(function(){
+			if(jQuery(".slug_setter",this).val() == ""){
+			 jQuery(this).addClass('no-slug');
+			} else{
+			  jQuery(this).addClass('yes-slug');
+			  btn.prop( 'disabled', false );
+			}
+		 });
+	  if(jQuery("#wpp_inquiry_property_types tbody tr.yes-slug").length==0){
+		jQuery('.wpp_save_changes_row').after('<div class="notice notice-error"><p>'+wpp.strings.error_types_one+'</p></div>');
+		return false;
+	  } else{
+	   jQuery("table.last_delete_row tbody tr").each(function(){
+	    if(jQuery(".slug_setter",this).val() == ""){
+	     jQuery(this).remove();
+	    }
+	   });
+        btn.prop( 'disabled', true );	
         var data = jQuery( this ).serialize();
         jQuery.ajax({
           type: 'POST',
@@ -52,6 +69,7 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
         });
         return false;
       }
+	  }
     } );
 
     /* Tabs for various UI elements */

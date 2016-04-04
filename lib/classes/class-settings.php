@@ -112,49 +112,60 @@ namespace UsabilityDynamics\WPP {
         //** STEP 3. */
         
         //** Setup default property types to be used. */
+	      $b_install = get_option('wpp_settings');
         $d = $this->get( 'property_types', false );
-
+        
         // Should only be set on install, not added on every request. These literally can not be removed from settings... -potanin@UD
         // It is adding these defaults only if types are empty (install) - korotkov@UD
         if( empty( $d ) || !is_array( $d ) ) {
-          $this->set( 'property_types', array(
-            'building' => __( 'Building', ud_get_wp_property()->domain ),
-            'floorplan' => __( 'Floorplan', ud_get_wp_property()->domain ),
-            'single_family_home' => __( 'Single Family Home', ud_get_wp_property()->domain )
-          ) );
-        }
+          $ar = array();
+            if( empty($b_install) ) {
+              $ar = array(
+                'building' => __( 'Building', ud_get_wp_property()->domain ),
+                'floorplan' => __( 'Floorplan', ud_get_wp_property()->domain ),
+                'single_family_home' => __( 'Single Family Home', ud_get_wp_property()->domain )
+              );
+            }
+          $this->set( 'property_stats', $ar );
+      }
 
         //** Setup property types to be used. */
         $d = !$this->get( 'property_inheritance', false );
-        if( !$d || !is_array( $d ) ) {
-          $this->set( 'property_inheritance', array(
-            'floorplan' => array( 'street_number', 'route', 'state', 'postal_code', 'location', 'display_address', 'address_is_formatted' )
-          ) );
-        }
+       if( !$d || !is_array( $d ) ) {
+         $this->set( 'property_inheritance', array(
+           'floorplan' => array( 'street_number', 'route', 'state', 'postal_code', 'location', 'display_address', 'address_is_formatted' )
+         ) );
+       }
           
         //** Property stats. Can be searchable, displayed as input boxes on editing page. */
         $d = $this->get( 'property_stats', false );
-        if( !$d || !is_array( $d ) ) {
-          $this->set( 'property_stats', array(
-            'location' => __('Address',ud_get_wp_property()->domain),
-            'price' => __('Price',ud_get_wp_property()->domain),
-            'deposit' => __('Deposit',ud_get_wp_property()->domain),
-            'area' => __('Area',ud_get_wp_property()->domain),
-            'phone_number' => __('Phone Number',ud_get_wp_property()->domain),
-          ) );
+        if( empty( $d ) || !is_array( $d ) ) {
+         $ar = array();
+          if( empty($b_install) ) {
+            $ar = array(
+             'location' => __('Address',ud_get_wp_property()->domain),
+             'price' => __('Price',ud_get_wp_property()->domain),
+             'deposit' => __('Deposit',ud_get_wp_property()->domain),
+             'area' => __('Area',ud_get_wp_property()->domain),
+             'phone_number' => __('Phone Number',ud_get_wp_property()->domain),
+            );
+          }
+         $this->set( 'property_stats', $ar );
         }
-
         //** Property meta.  Typically not searchable, displayed as textarea on editing page. */
         $d = $this->get( 'property_meta', false );
-        if( !$d || !is_array( $d ) ) {
-          $this->set( 'property_meta', array(
-            'lease_terms' => __('Lease Terms',ud_get_wp_property()->domain),
-            'pet_policy' => __('Pet Policy',ud_get_wp_property()->domain),
-            'school' => __('School',ud_get_wp_property()->domain),
-            'tagline' => __('Tagline',ud_get_wp_property()->domain)
-          ) );
+        if( empty( $d ) || !is_array( $d ) ) {
+         $ar = array();
+          if( empty($b_install) ) {
+            $ar = array(
+             'lease_terms' => __('Lease Terms',ud_get_wp_property()->domain),
+             'pet_policy' => __('Pet Policy',ud_get_wp_property()->domain),
+             'school' => __('School',ud_get_wp_property()->domain),
+             'tagline' => __('Tagline',ud_get_wp_property()->domain)
+            );
+          }
+         $this->set( 'property_meta', $ar );
         }
-
         //** On property editing page - determines which fields to hide for a particular property type */
         $d = $this->get( 'hidden_attributes', false );
 
