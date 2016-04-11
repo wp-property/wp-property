@@ -242,6 +242,12 @@ namespace UsabilityDynamics\WPP {
               $values = \WPP_F::get_all_attribute_values( $attribute );
               $type = 'checkbox_list';
               break;
+            case 'date':
+              $type = 'date';
+              $map = array(
+                'compare' => 'LIKE'
+              );
+              break;
           }
 
           if( !empty( $values ) ) {
