@@ -120,6 +120,7 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
               <option value="checkbox" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'checkbox' ); ?>><?php _e( 'Single Checkbox', ud_get_wp_property()->domain ) ?></option>
               <option value="multi_checkbox" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'multi_checkbox' ); ?>><?php _e( 'Multi-Checkbox', ud_get_wp_property()->domain ) ?></option>
               <option value="date" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'date' ); ?>><?php _e( 'Date Picker', ud_get_wp_property()->domain ) ?></option>
+              <option value="range_date" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'range_date' ); ?>><?php _e( 'Date Input Range', ud_get_wp_property()->domain ) ?></option>
               <?php do_action( 'wpp::property_attributes::searchable_attr_field', $slug ); ?>
             </select>
           </li>
