@@ -59,7 +59,6 @@ if ( ! class_exists( 'RW_Meta_Box' ) )
 			// Assign meta box values to local variables and add it's missed values
 			$this->meta_box   = self::normalize( $meta_box );
 			$this->fields     = &$this->meta_box['fields'];
-			var_dump($this->fields);
 			$this->validation = &$this->meta_box['validation'];
 
 			// Allow users to show/hide meta box
