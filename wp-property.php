@@ -34,6 +34,14 @@ if( !defined( 'WPP_URL' ) ) {
   define( 'WPP_URL', plugin_dir_url( __FILE__ ) . 'static/' );
 }
 
+if( !defined( 'WPP_VENDOR_URL' ) ) {
+  define( 'WPP_VENDOR_URL', plugin_dir_url( __FILE__ ) . 'vendor/' );
+}
+
+if( !defined( 'WPP_VENDOR_Path' ) ) {
+  define( 'WPP_VENDOR_Path', plugin_dir_path( __FILE__ ) . 'vendor/' );
+}
+
 /** Directory path for includes of template files  */
 if( !defined( 'WPP_Templates' ) ) {
   define( 'WPP_Templates', WPP_Path . 'static/views' );

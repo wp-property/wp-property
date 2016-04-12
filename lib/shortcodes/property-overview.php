@@ -446,7 +446,7 @@ namespace UsabilityDynamics\WPP {
 
         //** We add # to value which says that we don't want to use LIKE in SQL query for searching this value. */
         $required_strict_search = apply_filters( 'wpp::required_strict_search', array( 'wpp_agents' ) );
-        $ignored_strict_search_field_types = apply_filters( 'wpp:ignored_strict_search_field_types', array( 'range_dropdown', 'range_input' ) );
+        $ignored_strict_search_field_types = apply_filters( 'wpp:ignored_strict_search_field_types', array( 'range_dropdown', 'range_input', 'range_date' ) );
 
         foreach( $wpp_query[ 'query' ] as $key => $val ) {
           if( !array_key_exists( $key, $defaults ) && $key != 'property_type' ) {

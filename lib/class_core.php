@@ -198,6 +198,29 @@ class WPP_Core {
     wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'scripts/jquery.number.format.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wp-property-galleria', WPP_URL . 'scripts/galleria/galleria-1.2.5.js', array( 'jquery', 'wpp-localization' ) );
 
+
+    // Load localized scripts
+    $locale = str_replace('_', '-', get_locale());
+    $file_paths = array('jqueryui/datepicker-i18n/jquery.ui.datepicker-' . $locale . '.js');
+    // Also check alternate i18n filename (e.g. jquery.ui.datepicker-de.js instead of jquery.ui.datepicker-de-DE.js)
+    if (strlen($locale) > 2)
+      $file_paths[] = 'jqueryui/datepicker-i18n/jquery.ui.datepicker-' . substr($locale, 0, 2) . '.js';
+    $deps = array('jquery-ui-datepicker');
+    foreach ($file_paths as $file_path) {
+      $path = WPP_VENDOR_Path . 'libraries/usabilitydynamics/lib-ui/static/scripts/fields/' . $file_path;
+      if (file_exists($path)) {
+        wp_register_script('jquery-ui-datepicker-i18n', WPP_VENDOR_URL . 'libraries/usabilitydynamics/lib-ui/static/scripts/fields/' . $file_path, $deps, '1.8.17', true);
+        $deps[] = 'jquery-ui-datepicker-i18n';
+        break;
+      }
+    }
+    
+    wp_register_style('jquery-ui-core', WPP_VENDOR_URL . 'libraries/usabilitydynamics/lib-ui/static/styles/fields/jqueryui/jquery.ui.core.css', array(), '1.8.17');
+    wp_register_style('jquery-ui-theme', WPP_VENDOR_URL . 'libraries/usabilitydynamics/lib-ui/static/styles/fields/jqueryui/jquery.ui.theme.css', array(), '1.8.17');
+    wp_register_style( 'jquery-ui-datepicker', WPP_VENDOR_URL . 'libraries/usabilitydynamics/lib-ui/static/styles/fields/jqueryui/jquery.ui.datepicker.css', array('jquery-ui-core', 'jquery-ui-theme'), '1.8.17');
+    wp_register_script('uisf-date', WPP_VENDOR_URL . 'libraries/usabilitydynamics/lib-ui/static/scripts/fields/date.js', array('jquery-ui-datepicker'), false, true);
+
+
     wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.css' );
     wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'scripts/colorpicker/colorpicker.css' );
     wp_register_style( 'jquery-ui', WPP_URL . 'styles/wpp.admin.jquery.ui.css' );

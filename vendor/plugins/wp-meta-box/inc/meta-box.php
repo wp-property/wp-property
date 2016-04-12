@@ -59,6 +59,7 @@ if ( ! class_exists( 'RW_Meta_Box' ) )
 			// Assign meta box values to local variables and add it's missed values
 			$this->meta_box   = self::normalize( $meta_box );
 			$this->fields     = &$this->meta_box['fields'];
+			var_dump($this->fields);
 			$this->validation = &$this->meta_box['validation'];
 
 			// Allow users to show/hide meta box
@@ -375,6 +376,27 @@ if ( ! class_exists( 'RW_Meta_Box' ) )
 		}
 
 		/**
+		 * Get field class name
+		 *
+		 * @param array $field Field array
+		 *
+		 * @return bool|string Field class name OR false on failure
+		 */
+		static function get_class_name( $field )
+		{
+			// Convert underscores to whitespace so ucwords works as expected. Otherwise: plupload_image -> Plupload_image instead of Plupload_Image
+			$type = str_replace( '_', ' ', $field['type'] );
+
+			// Uppercase first words
+			$class = 'RWMB_' . ucwords( $type ) . '_Field';
+
+			// Relace whitespace with underscores
+			$class = str_replace( ' ', '_', $class );
+
+			return class_exists( $class ) ? $class : false;
+		}
+
+		/**
 		 * Normalize an array of fields
 		 *
 		 * @param array $fields Array of fields
@@ -423,27 +445,6 @@ if ( ! class_exists( 'RW_Meta_Box' ) )
 			}
 
 			return $fields;
-		}
-
-		/**
-		 * Get field class name
-		 *
-		 * @param array $field Field array
-		 *
-		 * @return bool|string Field class name OR false on failure
-		 */
-		static function get_class_name( $field )
-		{
-			// Convert underscores to whitespace so ucwords works as expected. Otherwise: plupload_image -> Plupload_image instead of Plupload_Image
-			$type = str_replace( '_', ' ', $field['type'] );
-
-			// Uppercase first words
-			$class = 'RWMB_' . ucwords( $type ) . '_Field';
-
-			// Relace whitespace with underscores
-			$class = str_replace( ' ', '_', $class );
-
-			return class_exists( $class ) ? $class : false;
 		}
 
 		/**
