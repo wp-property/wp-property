@@ -93,7 +93,7 @@ namespace UsabilityDynamics\WPP {
             'input'
           ),
           'date' => array(
-            'date'
+            'range_date'
           ),
         ));
 
