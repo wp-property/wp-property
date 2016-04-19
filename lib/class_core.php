@@ -207,18 +207,18 @@ class WPP_Core {
       $file_paths[] = 'jqueryui/datepicker-i18n/jquery.ui.datepicker-' . substr($locale, 0, 2) . '.js';
     $deps = array('jquery-ui-datepicker');
     foreach ($file_paths as $file_path) {
-      $path = WPP_VENDOR_Path . 'libraries/usabilitydynamics/lib-ui/static/scripts/fields/' . $file_path;
+      $path = ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/scripts/fields/' . $file_path, 'dir' );
       if (file_exists($path)) {
-        wp_register_script('jquery-ui-datepicker-i18n', WPP_VENDOR_URL . 'libraries/usabilitydynamics/lib-ui/static/scripts/fields/' . $file_path, $deps, '1.8.17', true);
+        wp_register_script('jquery-ui-datepicker-i18n', ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/scripts/fields/' . $file_path, 'url' ), $deps, '1.8.17', true);
         $deps[] = 'jquery-ui-datepicker-i18n';
         break;
       }
     }
-    
-    wp_register_style('jquery-ui-core', WPP_VENDOR_URL . 'libraries/usabilitydynamics/lib-ui/static/styles/fields/jqueryui/jquery.ui.core.css', array(), '1.8.17');
-    wp_register_style('jquery-ui-theme', WPP_VENDOR_URL . 'libraries/usabilitydynamics/lib-ui/static/styles/fields/jqueryui/jquery.ui.theme.css', array(), '1.8.17');
-    wp_register_style( 'jquery-ui-datepicker', WPP_VENDOR_URL . 'libraries/usabilitydynamics/lib-ui/static/styles/fields/jqueryui/jquery.ui.datepicker.css', array('jquery-ui-core', 'jquery-ui-theme'), '1.8.17');
-    wp_register_script('uisf-date', WPP_VENDOR_URL . 'libraries/usabilitydynamics/lib-ui/static/scripts/fields/date.js', array('jquery-ui-datepicker'), false, true);
+
+    wp_register_style('jquery-ui-core', ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/styles/fields/jqueryui/jquery.ui.core.css', 'url' ), array(), '1.8.17');
+    wp_register_style('jquery-ui-theme', ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/styles/fields/jqueryui/jquery.ui.theme.css', 'url' ), array(), '1.8.17');
+    wp_register_style('jquery-ui-datepicker', ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/styles/fields/jqueryui/jquery.ui.datepicker.css', 'url' ), array('jquery-ui-core', 'jquery-ui-theme'), '1.8.17');
+    wp_register_script('uisf-date', ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/scripts/fields/date.js', 'url' ), array('jquery-ui-datepicker'), false, true);
 
 
     wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.css' );
