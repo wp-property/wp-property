@@ -2415,21 +2415,34 @@ class WPP_F extends UsabilityDynamics\Utility {
       }
 
       if( !empty( $decoded_settings ) ) {
-        //** Allow features to preserve their settings that are not configured on the settings page */
-        $wpp_settings = apply_filters( 'wpp_settings_save', $decoded_settings, $wp_properties );
-        //** Prevent removal of featured settings configurations if they are not present */
-        if( !empty( $wp_properties[ 'configuration' ][ 'feature_settings' ] ) ) {
-          foreach( $wp_properties[ 'configuration' ][ 'feature_settings' ] as $feature_type => $preserved_settings ) {
-            if( empty( $decoded_settings[ 'configuration' ][ 'feature_settings' ][ $feature_type ] ) ) {
-              $wpp_settings[ 'configuration' ][ 'feature_settings' ][ $feature_type ] = $preserved_settings;
+
+        // Fix legacy backup data
+        if( empty( $decoded_settings[ 'wpp_settings' ] ) ) {
+          $decoded_settings = array( 'wpp_settings' => $decoded_settings );
+        }
+
+        // Note! We are restoring all options.
+        // Since some add-ons are storing data under own options.
+        foreach( $decoded_settings as $option_key => $data ) {
+
+          // Handle core settings ( legacy support )
+          if( $option_key == 'wpp_settings' ) {
+            //** Allow features to preserve their settings that are not configured on the settings page */
+            $data = apply_filters( 'wpp_settings_save', $data, $wp_properties );
+            //** Prevent removal of featured settings configurations if they are not present */
+            if( !empty( $wp_properties[ 'configuration' ][ 'feature_settings' ] ) ) {
+              foreach( $wp_properties[ 'configuration' ][ 'feature_settings' ] as $feature_type => $preserved_settings ) {
+                if( empty( $data[ 'configuration' ][ 'feature_settings' ][ $feature_type ] ) ) {
+                  $data[ 'configuration' ][ 'feature_settings' ][ $feature_type ] = $preserved_settings;
+                }
+              }
             }
           }
+
+          update_option( $option_key, $data );
+
         }
-        update_option( 'wpp_settings', $wpp_settings );
-        //** Load settings out of database to overwrite defaults from action_hooks. */
-        $wp_properties_db = get_option( 'wpp_settings' );
-        //** Overwrite $wp_properties with database setting */
-        $wp_properties = array_merge( $wp_properties, $wp_properties_db );
+
         //** Reload page to make sure higher-end functions take affect of new settings */
         //** The filters below will be ran on reload, but the saving functions won't */
         if( $_REQUEST[ 'page' ] == 'property_settings' ) {
@@ -2437,7 +2450,10 @@ class WPP_F extends UsabilityDynamics\Utility {
           wp_redirect( admin_url( "edit.php?post_type=property&page=property_settings&message=updated" ) );
           exit;
         }
+
       }
+
+
     }
 
     if( $force_db ) {
@@ -2965,7 +2981,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
       $numeric = ( isset( $wp_properties[ 'numeric_attributes' ] ) && in_array( $meta_key, (array) $wp_properties[ 'numeric_attributes' ] ) ) ? true : false;
 
-      if( !in_array( $meta_key, (array) $commas_ignore ) && substr_count( $criteria, ',' ) || ( substr_count( $criteria, '-' ) && $numeric ) || substr_count( $criteria, '--' ) ) {
+      if( !in_array( $meta_key, (array) $commas_ignore ) && substr_count( $criteria, ',' ) || ( substr_count( $criteria, '-' ) && $numeric ) || substr_count( $criteria, '--' ) || substr_count( $criteria, '/' ) ) {
 
         if( substr_count( $criteria, '-' ) && !substr_count( $criteria, ',' ) ) {
           $cr = explode( '-', $criteria );
@@ -3073,9 +3089,10 @@ class WPP_F extends UsabilityDynamics\Utility {
 
                 if( preg_match( '%\\d{1,2}/\\d{1,2}/\\d{4}%i', $hyphen_between[ 1 ] ) ) {
                   foreach( $hyphen_between as $key => $value ) {
-                    $hyphen_between[ $key ] = "STR_TO_DATE( '{$value}', '%c/%e/%Y' )";
+                    $value = date( 'm-d-Y', strtotime( $value ) );
+                    $hyphen_between[ $key ] = "STR_TO_DATE( '{$value}', '%m-%d-%Y' )";
                   }
-                  $where_between = "STR_TO_DATE( `meta_value`, '%c/%e/%Y' ) BETWEEN " . implode( " AND ", $hyphen_between ) . "";
+                  $where_between = "STR_TO_DATE( `meta_value`, '%Y-%m-%d' ) BETWEEN " . implode( " AND ", $hyphen_between ) . "";
                 } else {
                   $where_between = "`meta_value` BETWEEN " . implode( " AND ", $hyphen_between ) . "";
                 }
@@ -3083,7 +3100,7 @@ class WPP_F extends UsabilityDynamics\Utility {
               } else {
 
                 if( $adate ) {
-                  $where_between = "STR_TO_DATE( `meta_value`, '%c/%e/%Y' ) >= STR_TO_DATE( '{$hyphen_between[0]}', '%c/%e/%Y' )";
+                  $where_between = "STR_TO_DATE( `meta_value`, '%Y-%m-%d' ) >= STR_TO_DATE( '{$hyphen_between[0]}', '%m-%d-%Y' )";
                 } else {
                   $where_between = "`meta_value` >= $hyphen_between[0]";
                 }
@@ -3321,6 +3338,17 @@ class WPP_F extends UsabilityDynamics\Utility {
               $search_query = str_replace( $non_numeric_chars, '', $search_query[ 'min' ] ) . '-' . str_replace( $non_numeric_chars, '', $search_query[ 'max' ] );
             }
           }
+        } elseif( in_array( 'from', array_keys( $search_query ) ) ||
+            in_array( 'to', array_keys( $search_query ) )
+        ) {
+          //** Get arrays with from and to date ranges */
+
+          //* There is no range if max value is empty and min value is -1 */
+          if( empty( $search_query[ 'from' ] ) && empty( $search_query[ 'to' ] ) ) {
+            continue;
+          }
+          //* Set range */
+          $search_query = date( 'm/d/Y', strtotime( $search_query[ 'from' ] ) ) . '-' . date( 'm/d/Y', strtotime( $search_query[ 'to' ] ) ) ;
         }
       }
 

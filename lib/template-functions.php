@@ -236,7 +236,7 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
    * @since 1.4
    *
    */
-  function prepare_property_for_display( $property, $args = false ) {
+  function prepare_property_for_display( $property, $args = false, $force = false ) {
     global $wp_properties;
     
     if ( empty( $property ) ) {
@@ -269,7 +269,7 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
     }
 
     //** Check if this function has already been done */
-    if ( is_array( $property ) && isset( $property[ 'system' ][ 'prepared_for_display' ] ) ) {
+    if ( is_array( $property ) && isset( $property[ 'system' ][ 'prepared_for_display' ] ) && $force == false ) {
       
       return $property;
     }
@@ -463,7 +463,7 @@ if ( !function_exists( 'draw_stats' ) ):
       $property = $post;
     }
 
-    $property = prepare_property_for_display( $property );
+    $property = prepare_property_for_display( $property, false, true );
 
     if ( is_array( $property ) ) {
       $property = WPP_F::array_to_object( $property );
@@ -918,7 +918,11 @@ if ( !function_exists( 'draw_property_search_form' ) ):
   function draw_property_search_form( $args = false ) {
     global $wp_properties;
 
+    WPP_F::force_style_inclusion( 'jquery-ui-datepicker' );
+
     WPP_F::force_script_inclusion( 'wpp-jquery-number-format' );
+    WPP_F::force_script_inclusion( 'jquery-ui-datepicker' );
+    WPP_F::force_script_inclusion( 'uisf-date' );
 
     $args = wp_parse_args( $args, array(
       'search_attributes' => false,
@@ -1204,6 +1208,13 @@ if ( !function_exists( 'wpp_render_search_input' ) ):
         case 'checkbox':
           ?>
           <input id="<?php echo $random_element_id; ?>" type="checkbox" class="<?php echo $attribute_data[ 'ui_class' ]; ?>" name="wpp_search[<?php echo $attrib; ?>]" <?php checked( $value, 'true' ); ?> value="true"/>
+          <?php
+          break;
+        case 'range_date':
+          ?>
+          <input id="<?php echo $random_element_id; ?>" class="uisf-date wpp_search_input_field wpp_search_date_field_from wpp_search_date_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" type="text" name="wpp_search[<?php echo $attrib; ?>][from]" value="" placeholder=""/>
+          <span class="wpp_dash">-</span>
+          <input class="uisf-date wpp_search_input_field wpp_search_date_field_to wpp_search_date_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" type="text" name="wpp_search[<?php echo $attrib; ?>][to]" value="" placeholder=""/>
           <?php
           break;
         default:

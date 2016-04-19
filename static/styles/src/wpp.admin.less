@@ -2216,3 +2216,89 @@ body.post-type-property {
     position:absolute; 
   }
 }
+
+
+.combolist{
+  margin-left: 14px;
+  font-size: 12px;
+   span{ 
+    font-size: 13px;
+    line-height: 1.8em;
+    cursor: default;
+    min-width: 50%;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    display: inline-block;
+
+    a {
+      margin: 1px 0 0 -17px;
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      text-indent: 0;
+      position: absolute;
+      
+      &:before {
+        background: 0 0;
+        color: #b4b9be;
+        content: "\f153";
+        display: block;
+        font: 400 16px/20px dashicons;
+        speak: none;
+        height: 20px;
+        text-align: center;
+        width: 20px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    }
+  }
+}
+
+.custom-combobox{
+  position:relative;
+  display: inline-block;
+  margin-right: 8px;
+  input{
+    border: 1px solid #d3d3d3;
+    font-weight: normal;
+    color: #555555;
+    margin:0px;
+  }
+  a.custom-combobox-toggle{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right:0;
+    padding: 0;
+    width: 2.2em;
+    display: inline-block;
+    background: #e6e6e6;
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+    overflow: visible;
+    border: 1px solid #d3d3d3;
+    color: #555555;
+
+    &:after{
+      right: 0;
+      content: "\f140";
+      border: none;
+      background: 0 0;
+      font: 400 20px/1 dashicons;
+      speak: none;
+      display: block;
+      padding: 0;
+      text-indent: 0;
+      text-align: center;
+      position: relative;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-decoration: none!important;
+    }
+    &.open:after{
+      content: "\f142";
+    }
+  }
+}

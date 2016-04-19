@@ -251,16 +251,45 @@ namespace UsabilityDynamics\WPP {
             }
           }
 
-          array_push( $fields, array_filter( array(
-            'id' => $attribute,
-            'name' => $attributes[$attribute],
-            'type' => $type,
-            'js_options' => array(
-              'allowClear' => true,
-            ),
-            'options' => $options,
-            'map' => $map,
-          ) ) );
+          if ( 'range_date' == $type ) {
+            array_push( $fields, array_filter( array(
+                'id' => $attribute,
+                'name' => $attributes[$attribute] . ' From',
+                'type' => 'date',
+                'js_options' => array(
+                    'allowClear' => true,
+                ),
+                'options' => $options,
+                'map' => array(
+                    'class' => 'meta',
+                    'compare' => 'BETWEEN'
+                ),
+            ) ) );
+            array_push( $fields, array_filter( array(
+                'id' => $attribute,
+                'name' => $attributes[$attribute] . ' To',
+                'type' => 'date',
+                'js_options' => array(
+                    'allowClear' => true,
+                ),
+                'options' => $options,
+                'map' => array(
+                    'class' => 'meta',
+                    'compare' => 'BETWEEN'
+                ),
+            ) ) );
+          } else {
+            array_push( $fields, array_filter( array(
+                'id' => $attribute,
+                'name' => $attributes[$attribute],
+                'type' => $type,
+                'js_options' => array(
+                    'allowClear' => true,
+                ),
+                'options' => $options,
+                'map' => $map,
+            ) ) );
+          }
         }
 
         $fields = apply_filters( 'wpp::overview::filter::fields', $fields );

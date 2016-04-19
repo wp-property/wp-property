@@ -122,6 +122,7 @@ class WPP_Core {
     add_action( 'wp_ajax_wpp_ajax_revalidate_all_addresses', create_function( "", '  echo WPP_F::revalidate_all_addresses(); die();' ) );
     add_action( 'wp_ajax_wpp_save_settings', create_function( "", ' die(WPP_F::save_settings());' ) );
     add_action( 'wp_ajax_wpp_apply_default_value', create_function( "", ' die(WPP_F::apply_default_value());' ) );
+    add_action( 'wp_ajax_wpp_ajax_print_wp_properties', create_function( "", ' global $wp_properties; print_r($wp_properties); die();' ) );
 
     /** Called in setup_postdata().  We add property values here to make available in global $post variable on frontend */
     add_action( 'the_post', array( 'WPP_F', 'the_post' ) );
@@ -198,6 +199,29 @@ class WPP_Core {
     wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'scripts/jquery.number.format.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wp-property-galleria', WPP_URL . 'scripts/galleria/galleria-1.2.5.js', array( 'jquery', 'wpp-localization' ) );
 
+
+    // Load localized scripts
+    $locale = str_replace('_', '-', get_locale());
+    $file_paths = array('jqueryui/datepicker-i18n/jquery.ui.datepicker-' . $locale . '.js');
+    // Also check alternate i18n filename (e.g. jquery.ui.datepicker-de.js instead of jquery.ui.datepicker-de-DE.js)
+    if (strlen($locale) > 2)
+      $file_paths[] = 'jqueryui/datepicker-i18n/jquery.ui.datepicker-' . substr($locale, 0, 2) . '.js';
+    $deps = array('jquery-ui-datepicker');
+    foreach ($file_paths as $file_path) {
+      $path = ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/scripts/fields/' . $file_path, 'dir' );
+      if (file_exists($path)) {
+        wp_register_script('jquery-ui-datepicker-i18n', ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/scripts/fields/' . $file_path, 'url' ), $deps, '1.8.17', true);
+        $deps[] = 'jquery-ui-datepicker-i18n';
+        break;
+      }
+    }
+
+    wp_register_style('jquery-ui-core', ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/styles/fields/jqueryui/jquery.ui.core.css', 'url' ), array(), '1.8.17');
+    wp_register_style('jquery-ui-theme', ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/styles/fields/jqueryui/jquery.ui.theme.css', 'url' ), array(), '1.8.17');
+    wp_register_style('jquery-ui-datepicker', ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/styles/fields/jqueryui/jquery.ui.datepicker.css', 'url' ), array('jquery-ui-core', 'jquery-ui-theme'), '1.8.17');
+    wp_register_script('uisf-date', ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/scripts/fields/date.js', 'url' ), array('jquery-ui-datepicker'), false, true);
+
+
     wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.css' );
     wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'scripts/colorpicker/colorpicker.css' );
     wp_register_style( 'jquery-ui', WPP_URL . 'styles/wpp.admin.jquery.ui.css' );
@@ -239,7 +263,9 @@ class WPP_Core {
     //** Add troubleshoot log page */
     //** Modify admin body class */
     add_filter( 'admin_body_class', array( $this, 'admin_body_class' ), 5 );
-
+	  
+    add_filter( 'display_post_states', array( $this, 'display_post_states' ), 10, 2 );
+    
     //** Modify Front-end property body class */
     add_filter( 'body_class', array( $this, 'properties_body_class' ) );
 
@@ -318,6 +344,15 @@ class WPP_Core {
       return 'wpp_property_edit';
     }
 
+  }
+
+  function display_post_states( $post_states, $post ) {
+    global $wp_properties;
+
+    if ($post->post_name === $wp_properties['configuration']['base_slug']) {
+      $post_states['properties_page'] = __('Properties Page');
+    }
+    return $post_states;
   }
 
   /**
@@ -1026,6 +1061,7 @@ class WPP_Core {
 
     //* General WPP capabilities */
     $wpp_capabilities = array(
+      'read_wpp_property' => __( 'View Properties', ud_get_wp_property()->domain ),
       //* Manage WPP Properties Capabilities */
       'edit_wpp_properties' => __( 'View Properties', ud_get_wp_property()->domain ),
       'edit_wpp_property' => __( 'Add/Edit Properties', ud_get_wp_property()->domain ),

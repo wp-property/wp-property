@@ -92,6 +92,9 @@ namespace UsabilityDynamics\WPP {
           'url' => array(
             'input'
           ),
+          'date' => array(
+            'range_date'
+          ),
         ));
 
 

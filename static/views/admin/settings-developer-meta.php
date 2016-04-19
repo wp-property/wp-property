@@ -22,6 +22,7 @@ global $wp_properties;
   </tr>
   </thead>
   <tbody>
+
   <?php foreach( $wp_properties[ 'property_meta' ] as $slug => $label ): ?>
 
     <tr class="wpp_dynamic_table_row" slug="<?php echo $slug; ?>" new_row='false'>
