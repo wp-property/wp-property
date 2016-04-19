@@ -28,6 +28,7 @@
         "Lithium",
         "Magento",
         "Mako",
+        "Mautic",
         "MODX Evo",
         "MediaWiki",
         "OXID",
@@ -49,7 +50,7 @@
         "Zend",
         "Zikula"
     ],
-    "homepage": "http://composer.github.com/installers/",
+    "homepage": "https://composer.github.io/installers/",
     "authors": [
         {
             "name": "Kyle Robinson Young",
@@ -76,5 +77,8 @@
     "require-dev": {
         "composer/composer": "1.0.*@dev",
         "phpunit/phpunit": "4.1.*"
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }

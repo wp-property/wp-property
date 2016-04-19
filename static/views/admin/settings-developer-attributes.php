@@ -32,6 +32,7 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
   </tr>
   </thead>
   <tbody>
+
   <?php foreach( $wp_properties[ 'property_stats' ] as $slug => $label ): ?>
     <?php $gslug = false; ?>
     <?php $group = false; ?>

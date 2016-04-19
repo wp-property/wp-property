@@ -18,6 +18,7 @@ global $wp_properties;
   </tr>
   </thead>
   <tbody>
+
   <?php foreach( $wp_properties[ 'property_types' ] as $property_slug => $label ): ?>
 
     <tr class="wpp_dynamic_table_row" slug="<?php echo $property_slug; ?>"  data-property-slug="<?php echo $property_slug; ?>" new_row='false'>
