@@ -1,4 +1,7 @@
-### 2.1.6
+### 2.1.7
+* Extended backup of WP-Property settings with settings of WP-Property Add-ons. 
+
+### 2.1.6 ( February 24, 2016 )
 * Fixed the bug when page content was always replaced with property_overview shortcode if wpp_search existed in request parameters.
 * Fixed multi-checkbox issue on Property Search.
 * Fixed issue with odd  br in Text Editor Data Entry field.
@@ -6,7 +9,7 @@
 * Fixed converting apostrophe to slash in Property Types.
 * Date and Time attributes now take date and time format from Settings/General tab.
 
-### 2.1.5 ( February 9, 2015 )
+### 2.1.5 ( February 9, 2016 )
 * Added ability to set default values for property's attributes.
 * Added compatibility with WPML plugin.
 * Removed 'Images Upload' data entry for attribute since it duplicated 'Image Upload'.

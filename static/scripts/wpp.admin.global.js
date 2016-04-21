@@ -661,6 +661,9 @@ function wpp_set_unique_ids(el, unique) {
  */
 jQuery(document).ready(function() {
 
+  setTimeout(function(){
+    jQuery('#posts_list').removeClass('closed').children('h2').off();
+  }, 400);
   /* Remove any highlight classes */
   jQuery("#contextual-help-link").click(function() {
     jQuery("#contextual-help-wrap h3").removeClass("wpp_contextual_highlight");

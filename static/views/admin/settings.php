@@ -547,7 +547,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       <div class="wpp_settings_block">
         <?php _e( 'Look up the <b>$wp_properties</b> global settings array.  This array stores all the default settings, which are overwritten by database settings, and custom filters.', ud_get_wp_property()->domain ) ?>
         <input type="button" class="button" value="<?php _e( 'Show $wp_properties', ud_get_wp_property()->domain ) ?>" id="wpp_show_settings_array"> <span id="wpp_show_settings_array_cancel" class="wpp_link hidden"><?php _e( 'Cancel', ud_get_wp_property()->domain ) ?></span>
-        <pre id="wpp_show_settings_array_result" class="wpp_class_pre hidden"><?php print_r( $wp_properties ); ?></pre>
+        <pre id="wpp_show_settings_array_result" class="wpp_class_pre hidden"></pre>
       </div>
 
       <div class="wpp_settings_block">
