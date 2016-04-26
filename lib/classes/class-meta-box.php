@@ -59,6 +59,9 @@ namespace UsabilityDynamics\WPP {
           if( !file_exists( $file ) ) {
             return;
           }
+          
+          // Load file for image advacne field to override original.
+          include_once ud_get_wp_property()->path("lib/classes/fields/image-advanced.php", 'dir');
           include_once( $file );
         }
       }
