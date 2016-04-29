@@ -194,7 +194,6 @@ class WPP_Mail {
 
       $user_id = $_property[ 'post_author' ];
       $user = get_user_by( 'id', $user_id );
-      $user->data->user_email = $form['notifications']['notify_admin_email'];
 
       $notification[ 'trigger_action' ] = 'pending_property_added_admin';
       $notification[ 'user' ] = $user;
@@ -210,6 +209,8 @@ class WPP_Mail {
       $notification[ 'data' ][ 'property_link' ] = class_wpp_feps::get_feps_permalink( $_property, false );
       $notification[ 'data' ][ 'title' ] = $notification[ 'data' ][ 'property_title' ] = $_property[ 'post_title' ];
       $notification[ 'data' ][ 'status' ] = @$wp_post_statuses[ $_property[ 'post_status' ] ]->label;
+
+      $user->data->user_email = $form['notifications']['notify_admin_email']; //change notification email for sending the email to admin for that particular form
 
       $notification = WPP_F::array_merge_recursive_distinct( $notification, $args );
 
