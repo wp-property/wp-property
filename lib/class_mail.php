@@ -194,18 +194,18 @@ class WPP_Mail {
 
       $user_id = $_property[ 'post_author' ];
       $user = get_user_by( 'id', $user_id );
+      $user->data->user_email = $form['notifications']['notify_admin_email'];
 
       $notification[ 'trigger_action' ] = 'pending_property_added_admin';
       $notification[ 'user' ] = $user;
       $notification[ 'subject' ] = __( 'Submission Received', ud_get_wp_property()->domain );
-      $notification[ 'message' ] = sprintf( __( 'Hello.%1$s%1$s A %2$s has been added to your site by [user_name] [email_user].%1$s%1$sYou can view it using this URL:%1$s[property_link]', ud_get_wp_property()->domain ), PHP_EOL, WPP_F::property_label( 'singular' ) );
+      $notification[ 'message' ] = sprintf( __( 'Hello.%1$s%1$s A %2$s has been added to your site by [user_name] [user_email].%1$s%1$sYou can view it using this URL:%1$s[property_link]', ud_get_wp_property()->domain ), PHP_EOL, WPP_F::property_label( 'singular' ) );
       $notification[ 'crm_log_message' ] = sprintf( __( 'User submitted %1$s ([property_title]) using FEPS.', ud_get_wp_property()->domain ), WPP_F::property_label( 'singular' ) );
 
       $notification[ 'data' ][ 'notification_type' ] = __( 'Submission Received', ud_get_wp_property()->domain );
       $notification[ 'data' ][ 'display_name' ] = $user->data->display_name;
       $notification[ 'data' ][ 'user_name' ] = $user->data->display_name;
-      $notification[ 'data' ][ 'email_user' ] = $user->data->user_email;
-      $notification[ 'data' ][ 'user_email' ] = $form['notifications']['notify_admin_email'];
+      $notification[ 'data' ][ 'user_email' ] = $user->data->user_email;
       $notification[ 'data' ][ 'site_url' ] = site_url();
       $notification[ 'data' ][ 'property_link' ] = class_wpp_feps::get_feps_permalink( $_property, false );
       $notification[ 'data' ][ 'title' ] = $notification[ 'data' ][ 'property_title' ] = $_property[ 'post_title' ];
