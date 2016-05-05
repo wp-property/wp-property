@@ -177,6 +177,47 @@ class WPP_Mail {
     self::_send_notification( $notification );
   }
 
+  /**
+   *
+   * @author mehul@UD
+   * @since 1.38
+   */
+  static public function feps_notify_admin_post_created( $post_id, $args = array() ) {
+    global $wp_post_statuses;
+
+    $form = class_wpp_feps::get_form_by_post( $post_id );
+
+    if ( ! empty( $form['notifications']['notify_admin_email'] ) ){
+      $notification = self::_notification_template();
+
+      $_property = WPP_F::get_property( $post_id, array( 'get_children' => 'false' ) );
+
+      $user_id = $_property[ 'post_author' ];
+      $user = get_user_by( 'id', $user_id );
+
+      $notification[ 'trigger_action' ] = 'pending_property_added_admin';
+      $notification[ 'user' ] = $user;
+      $notification[ 'subject' ] = __( 'Submission Received', ud_get_wp_property()->domain );
+      $notification[ 'message' ] = sprintf( __( 'Hello.%1$s%1$s A %2$s has been added to your site by [user_name] [user_email].%1$s%1$sYou can view it using this URL:%1$s[property_link]', ud_get_wp_property()->domain ), PHP_EOL, WPP_F::property_label( 'singular' ) );
+      $notification[ 'crm_log_message' ] = sprintf( __( 'User submitted %1$s ([property_title]) using FEPS.', ud_get_wp_property()->domain ), WPP_F::property_label( 'singular' ) );
+
+      $notification[ 'data' ][ 'notification_type' ] = __( 'Submission Received', ud_get_wp_property()->domain );
+      $notification[ 'data' ][ 'display_name' ] = $user->data->display_name;
+      $notification[ 'data' ][ 'user_name' ] = $user->data->display_name;
+      $notification[ 'data' ][ 'user_email' ] = $user->data->user_email;
+      $notification[ 'data' ][ 'site_url' ] = site_url();
+      $notification[ 'data' ][ 'property_link' ] = class_wpp_feps::get_feps_permalink( $_property, false );
+      $notification[ 'data' ][ 'title' ] = $notification[ 'data' ][ 'property_title' ] = $_property[ 'post_title' ];
+      $notification[ 'data' ][ 'status' ] = @$wp_post_statuses[ $_property[ 'post_status' ] ]->label;
+
+      $user->data->user_email = $form['notifications']['notify_admin_email']; //change notification email for sending the email to admin for that particular form
+
+      $notification = WPP_F::array_merge_recursive_distinct( $notification, $args );
+
+      self::_send_notification( $notification );
+    }
+  }
+
 }
 
 

@@ -31,7 +31,7 @@ class GalleryPropertiesWidget extends WP_Widget {
     $gallery_count = isset( $instance[ 'gallery_count' ] ) ? $instance[ 'gallery_count' ] : false;
     $show_caption = isset( $instance[ 'show_caption' ] ) ? $instance[ 'show_caption' ] : false;
     $show_description = isset( $instance[ 'show_description' ] ) ? $instance[ 'show_description' ] : false;
-    $gallery = isset( $post->gallery ) ? (array)$post->gallery : ( isset( $property[ 'gallery' ] ) ? (array)$property[ 'gallery' ] : array() );
+    $gallery = !empty( $post->gallery ) ? (array)$post->gallery : ( !empty( $property[ 'gallery' ] ) ? (array)$property[ 'gallery' ] : array() );
 
     $slideshow_images = !empty( $post->slideshow_images ) ? $post->slideshow_images : ( !empty( $property[ 'slideshow_images' ] ) ? $property[ 'slideshow_images' ] : false );
     $slideshow_order = maybe_unserialize( $slideshow_images );
