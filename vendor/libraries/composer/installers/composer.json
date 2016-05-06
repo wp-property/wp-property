@@ -22,6 +22,7 @@
         "FuelPHP",
         "Grav",
         "Hurad",
+        "ImageCMS",
         "Joomla",
         "Kohana",
         "Laravel",
@@ -38,6 +39,7 @@
         "phpBB",
         "PPI",
         "Puppet",
+        "RadPHP",
         "Roundcube",
         "shopware",
         "SilverStripe",
@@ -59,7 +61,7 @@
         }
     ],
     "autoload": {
-        "psr-0": { "Composer\\Installers\\": "src/" }
+        "psr-4": { "Composer\\Installers\\": "src/Composer/Installers" }
     },
     "extra": {
         "class": "Composer\\Installers\\Plugin",

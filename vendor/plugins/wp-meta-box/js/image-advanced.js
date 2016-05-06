@@ -75,13 +75,12 @@ jQuery( function ( $ )
 				{
 					if ( r.success )
 					{
-						var tmpl = _.template( template , {
+						$imageList
+							.append( _.template( template, { attachments: selection }, {
 								evaluate   : /<#([\s\S]+?)#>/g,
 								interpolate: /\{\{\{([\s\S]+?)\}\}\}/g,
 								escape     : /\{\{([^\}]+?)\}\}(?!\})/g
-							} );
-						$imageList
-							.append( tmpl( { attachments: selection }) )
+							} ) )
 							.trigger( 'update.rwmbFile' );
 					}
 				}, 'json' );
