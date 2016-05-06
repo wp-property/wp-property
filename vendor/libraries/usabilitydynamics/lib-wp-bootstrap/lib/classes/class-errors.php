@@ -178,11 +178,11 @@ namespace UsabilityDynamics\WP {
           //** Warnings Block */
           $message = '<ul style="list-style:disc inside;"><li>' . implode( '</li><li>', $warnings ) . '</li></ul>';
           $message = sprintf( __( '<p><b>%s</b> has the following warnings:</p> %s', $this->domain ), $this->name, $message );
-          if( !empty( $this->action_links[ 'warnings' ] ) && is_array( $this->action_links[ 'warnings' ] ) ) {
-            $message .= '<p>' . implode( ' | ', $this->action_links[ 'warnings' ] ) . '</p>';
-          }
           if( $this->dismiss ) {
             $this->action_links[ 'warnings' ][] = '<a class="dismiss-warning dismiss" data-key="dismissed_warning_' . sanitize_key( $this->name ).'" href="#">' . __( 'Dismiss this warning', $this->domain ) . '</a>';
+          }
+          if( !empty( $this->action_links[ 'warnings' ] ) && is_array( $this->action_links[ 'warnings' ] ) ) {
+            $message .= '<p>' . implode( ' | ', $this->action_links[ 'warnings' ] ) . '</p>';
           }
           echo '<div class="ud-admin-notice updated update-nag fade" style="padding:11px;">' . $message . '</div>';
         }
