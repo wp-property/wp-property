@@ -114,7 +114,7 @@
         "dist": {
             "type": "zip",
             "url": "https://github.com/UsabilityDynamics/lib-utility/archive/0.3.6.zip",
-            "reference": null,
+            "reference": "0.3.6",
             "shasum": null
         },
         "require-dev": {
@@ -177,7 +177,7 @@
         "dist": {
             "type": "zip",
             "url": "https://github.com/UsabilityDynamics/lib-settings/archive/0.2.3.zip",
-            "reference": null,
+            "reference": "0.2.3",
             "shasum": null
         },
         "require": {
@@ -247,7 +247,7 @@
         "dist": {
             "type": "zip",
             "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.2.0.zip",
-            "reference": null,
+            "reference": "1.2.0",
             "shasum": null
         },
         "require": {
@@ -285,7 +285,7 @@
         "dist": {
             "type": "zip",
             "url": "https://github.com/UsabilityDynamics/lib-ud-api-client/archive/1.1.5.zip",
-            "reference": null,
+            "reference": "1.1.5",
             "shasum": null
         },
         "require": {
@@ -326,7 +326,7 @@
         "dist": {
             "type": "zip",
             "url": "https://github.com/UsabilityDynamics/lib-ui/archive/0.3.4.zip",
-            "reference": null,
+            "reference": "0.3.4",
             "shasum": null
         },
         "require": {
@@ -400,7 +400,7 @@
         "dist": {
             "type": "zip",
             "url": "https://github.com/UsabilityDynamics/lib-wp-list-table/archive/1.0.8.zip",
-            "reference": null,
+            "reference": "1.0.8",
             "shasum": null
         },
         "require": {
@@ -443,7 +443,7 @@
         "dist": {
             "type": "zip",
             "url": "https://github.com/UsabilityDynamics/lib-wp-shortcode/archive/0.1.2.zip",
-            "reference": null,
+            "reference": "0.1.2",
             "shasum": null
         },
         "type": "library",
@@ -497,7 +497,7 @@
         "dist": {
             "type": "zip",
             "url": "https://github.com/UsabilityDynamics/wp-meta-box/archive/4.5.2.1.zip",
-            "reference": null,
+            "reference": "4.5.2.1",
             "shasum": null
         },
         "require": {
@@ -555,7 +555,7 @@
         "dist": {
             "type": "zip",
             "url": "https://github.com/UsabilityDynamics/wp-meta-box-utilities/archive/1.0.2.zip",
-            "reference": null,
+            "reference": "1.0.2",
             "shasum": null
         },
         "require": {
@@ -596,7 +596,7 @@
         "dist": {
             "type": "zip",
             "url": "https://github.com/UsabilityDynamics/wp-gallery-metabox/archive/2.0.1.zip",
-            "reference": null,
+            "reference": "2.0.1",
             "shasum": null
         },
         "require": {
