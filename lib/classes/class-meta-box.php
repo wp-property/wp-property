@@ -333,6 +333,7 @@ namespace UsabilityDynamics\WPP {
           //* Ignore Hidden Attributes */
           if (
             !empty( $post->property_type )
+            && ( ! is_object( $post->property_type ) || ! is_array( $post->property_type ) )
             && !empty( $hidden_attributes[ $post->property_type ] )
             && in_array( $slug, (array)$hidden_attributes[ $post->property_type ] )
           ) {
