@@ -82,22 +82,25 @@ class GalleryPropertiesWidget extends WP_Widget {
       foreach ( $gallery as $image ) {
 
         $thumb_image = wpp_get_image_link( $image[ 'attachment_id' ], $image_type );
+        $thumb_image_title = ! empty( $image['post_title'] ) ? trim( strip_tags( $image['post_title'] ) ) : trim( strip_tags( $post->post_title ) );
+        $alt = get_post_meta( $image['attachment_id'], '_wp_attachment_image_alt', true );
+        $thumb_image_alt = ! empty( $alt ) ? trim( strip_tags( $alt ) ) : $thumb_image_title;
         ?>
         <div class="sidebar_gallery_item">
           <?php if ( !empty( $big_image_type ) ) : ?>
             <?php $big_image = wpp_get_image_link( $image[ 'attachment_id' ], $big_image_type ); ?>
             <a href="<?php echo $big_image; ?>" class="fancybox_image thumbnail" rel="property_gallery">
               <img src="<?php echo $thumb_image; ?>"
-                   title="<?php echo esc_attr( $image[ 'post_excerpt' ] ? $image[ 'post_excerpt' ] : $image[ 'post_title' ] . ' - ' . $post->post_title ); ?>"
-                   alt="<?php echo esc_attr( $image[ 'post_excerpt' ] ? $image[ 'post_excerpt' ] : $image[ 'post_title' ] ); ?>"
+                   title="<?php echo $thumb_image_title; ?>"
+                   alt="<?php echo $thumb_image_alt; ?>"
                    class="wpp_gallery_widget_image size-thumbnail "
                    width="<?php echo $thumbnail_dimensions[ 'width' ]; ?>"
                    height="<?php echo $thumbnail_dimensions[ 'height' ]; ?>"/>
             </a>
           <?php else : ?>
             <img src="<?php echo $thumb_image; ?>"
-                 title="<?php echo esc_attr( $image[ 'post_excerpt' ] ? $image[ 'post_excerpt' ] : $image[ 'post_title' ] . ' - ' . $post->post_title ); ?>"
-                 alt="<?php echo esc_attr( $image[ 'post_excerpt' ] ? $image[ 'post_excerpt' ] : $image[ 'post_title' ] ); ?>"
+                 title="<?php echo $thumb_image_title; ?>"
+                 alt="<?php echo $thumb_image_alt; ?>"
                  class="wpp_gallery_widget_image size-thumbnail "
                  width="<?php echo $thumbnail_dimensions[ 'width' ]; ?>"
                  height="<?php echo $thumbnail_dimensions[ 'height' ]; ?>"/>            <?php endif; ?>
