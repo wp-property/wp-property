@@ -119,6 +119,11 @@ jQuery( document ).ready( function() {
     setTimeout( function() { wpp.widgets.run() }, 100 );
   } );
 
+  /* call update DOM method when customizer add widget on DOM */
+  jQuery( document ).on( 'widget-added', function(){
+    wpp.widgets.run();
+  });
+
   /* */
   wpp.widgets.run();
 
