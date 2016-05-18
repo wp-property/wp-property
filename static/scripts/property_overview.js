@@ -91,7 +91,7 @@
           /* get current shortcode's object */
           var q = false;
           for( var i in wpp_query ) {
-            if( wpp_query[i].index == history.i ) {
+            if( wpp_query[i].unique_hash == history.unique_hash ) {
               q = wpp_query[i];
               break;
             }
@@ -171,7 +171,8 @@
         requested_page: this_page,
         sort_order: data.sort_order,
         sort_by: data.sort_by,
-        i: data.index
+        i: data.index,
+        unique_hash: data.unique_hash,
       };
       /* Update WPP_QUERY query */
       data.query.requested_page = this_page;
@@ -191,10 +192,10 @@
      * Draw our numeric navigation buttons.
      *
      */
-    function prepare_numeric_pagination_ui( number ) {
+    function prepare_numeric_pagination_ui( number, unique_id ) {
       var c = jQuery( '<ul class="property-overview-navigation"></ul>' ),
-        query = window.wpp_query[ vars.unique_id ],
-        el = jQuery( "#wpp_shortcode_" + query.unique_hash + " .wpp_pagination_buttons_wrapper" ),
+        query = window.wpp_query[ unique_id ],
+        el = jQuery( "#wpp_shortcode_" + unique_id + " .wpp_pagination_buttons_wrapper" ),
         is_mobile = jQuery('body').hasClass('wpp_is_mobile');
       console.log( 'draw_pagination', number, query );
       number = parseInt( number );
@@ -272,7 +273,7 @@
         if( jQuery( this ).hasClass( 'dots' ) || typeof jQuery( this ).data( 'page' ) == 'undefined' ) {
           return false;
         }
-        window.wpp_query[ vars.unique_id ] = changeAddressValue( jQuery( this ).data( 'page' ), window.wpp_query[ vars.unique_id ] );
+        window.wpp_query[ unique_id ] = changeAddressValue( jQuery( this ).data( 'page' ), window.wpp_query[ unique_id ] );
       } );
     }
 
