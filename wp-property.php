@@ -6,7 +6,7 @@
  * Author: Usability Dynamics, Inc.
  * Version: 2.1.7
  * Requires at least: 4.0
- * Tested up to: 4.4.2
+ * Tested up to: 4.5.2
  * Text Domain: wpp
  * Domain Path: /static/languages/
  * Author URI: https://www.usabilitydynamics.com
@@ -15,7 +15,7 @@
  * Support: https://wordpress.org/support/plugin/wp-property
  * UserVoice: http://feedback.usabilitydynamics.com/forums/95259-wp-property
  * 
- * Copyright 2012 - 2015 Usability Dynamics, Inc.  ( email : info@usabilitydynamics.com )
+ * Copyright 2012 - 2016 Usability Dynamics, Inc.  ( email : info@usabilitydynamics.com )
  *
  */
 
