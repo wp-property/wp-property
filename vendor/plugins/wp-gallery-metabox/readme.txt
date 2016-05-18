@@ -5,7 +5,7 @@ Requires at least: 3.0
 Tested up to: 3.9
 Stable tag: 1.5
 
-Displays all the post's attached images on the Edit screen.
+Displays all the post's attached images on the Edit screen. 
 
 == Description ==
 
@@ -27,7 +27,7 @@ It's also customizable for developers (see documentation).
 * Rebuild the plugin as a class, props @norcross
 * Rebuild AJAX refresh according to WP Standards, props @norcross
 
-= 1.4 = 
+= 1.4 =
 * Fixed an issue of compatiblity with other plugins
 
 = 1.3 =

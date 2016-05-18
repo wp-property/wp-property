@@ -1,4 +1,24 @@
-### 2.1.6
+### 2.1.7 ( May 18, 2016 )
+* Added Date picker for Property Search form.
+* Added ability to remove all default attributes, meta attributes and property types from Developer tab on Settings page.
+* Added label "Properties page" to page's title ( on backend's "Pages" page ) which is used as Properties Overview page.
+* Removed ability to hide Overview meta box on "All Properties" page on backend.
+* Extended backup of WP-Property settings with settings of WP-Property Add-ons.
+* Loading $wp_properties object was moved to AJAX on Help tab on Settings page.
+* Changed `get_images` method to sort images by ascending order and expose `menu_order`.
+* Fixed empty view-link on Edit Property page.
+* Fixed fatal error when [property_attribute] shortcode was added to non-Single Property page.
+* Fixed CSS styles for Gallery meta box on Edit Property page.
+* Fixed WordPress 4.5 issue with File Upload Data Entry.
+* Fixed issue with showing empty Property Gallery widget when there were not images for the particular property.
+* Fixed issue when private properties were not showing for administrator.
+* Fixed issue when Property Search widget in Customizer had duplicated attributes.
+* Fixed displaying of title, alt and caption options of property images.
+* Fixed issue with pagination on property overview when they are two on the page
+* Fixed multiple usage of Property Overview widget and shortcode on the same page.
+* Warnings and Notices fixes.
+
+### 2.1.6 ( February 24, 2016 )
 * Fixed the bug when page content was always replaced with property_overview shortcode if wpp_search existed in request parameters.
 * Fixed multi-checkbox issue on Property Search.
 * Fixed issue with odd  br in Text Editor Data Entry field.
@@ -6,7 +26,7 @@
 * Fixed converting apostrophe to slash in Property Types.
 * Date and Time attributes now take date and time format from Settings/General tab.
 
-### 2.1.5 ( February 9, 2015 )
+### 2.1.5 ( February 9, 2016 )
 * Added ability to set default values for property's attributes.
 * Added compatibility with WPML plugin.
 * Removed 'Images Upload' data entry for attribute since it duplicated 'Image Upload'.

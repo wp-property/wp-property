@@ -6,12 +6,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/composer/installers.git",
-            "reference": "6213d900e92647831f7a406d5c530ea1f3d4360e"
+            "reference": "21a8c06dd5fe0a22b776797cc552e51d17d7e7dd"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/installers/zipball/6213d900e92647831f7a406d5c530ea1f3d4360e",
-            "reference": "6213d900e92647831f7a406d5c530ea1f3d4360e",
+            "url": "https://api.github.com/repos/composer/installers/zipball/21a8c06dd5fe0a22b776797cc552e51d17d7e7dd",
+            "reference": "21a8c06dd5fe0a22b776797cc552e51d17d7e7dd",
             "shasum": ""
         },
         "require": {
@@ -25,7 +25,7 @@
             "composer/composer": "1.0.*@dev",
             "phpunit/phpunit": "4.1.*"
         },
-        "time": "2016-01-27 12:54:22",
+        "time": "2016-04-24 13:17:36",
         "type": "composer-plugin",
         "extra": {
             "class": "Composer\\Installers\\Plugin",
@@ -35,8 +35,8 @@
         },
         "installation-source": "dist",
         "autoload": {
-            "psr-0": {
-                "Composer\\Installers\\": "src/"
+            "psr-4": {
+                "Composer\\Installers\\": "src/Composer/Installers"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -51,13 +51,16 @@
             }
         ],
         "description": "A multi-framework Composer library installer",
-        "homepage": "http://composer.github.com/installers/",
+        "homepage": "https://composer.github.io/installers/",
         "keywords": [
             "Craft",
             "Dolibarr",
             "Hurad",
+            "ImageCMS",
             "MODX Evo",
+            "Mautic",
             "OXID",
+            "RadPHP",
             "SMF",
             "Thelia",
             "WolfCMS",
@@ -111,7 +114,7 @@
         "dist": {
             "type": "zip",
             "url": "https://github.com/UsabilityDynamics/lib-utility/archive/0.3.6.zip",
-            "reference": null,
+            "reference": "0.3.6",
             "shasum": null
         },
         "require-dev": {
@@ -174,7 +177,7 @@
         "dist": {
             "type": "zip",
             "url": "https://github.com/UsabilityDynamics/lib-settings/archive/0.2.3.zip",
-            "reference": null,
+            "reference": "0.2.3",
             "shasum": null
         },
         "require": {
@@ -234,17 +237,17 @@
     },
     {
         "name": "usabilitydynamics/lib-wp-bootstrap",
-        "version": "1.1.9",
-        "version_normalized": "1.1.9.0",
+        "version": "1.2.0",
+        "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/lib-wp-bootstrap",
-            "reference": "1.1.9"
+            "reference": "1.2.0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.1.9.zip",
-            "reference": null,
+            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.2.0.zip",
+            "reference": "1.2.0",
             "shasum": null
         },
         "require": {
@@ -282,7 +285,7 @@
         "dist": {
             "type": "zip",
             "url": "https://github.com/UsabilityDynamics/lib-ud-api-client/archive/1.1.5.zip",
-            "reference": null,
+            "reference": "1.1.5",
             "shasum": null
         },
         "require": {
@@ -323,7 +326,7 @@
         "dist": {
             "type": "zip",
             "url": "https://github.com/UsabilityDynamics/lib-ui/archive/0.3.4.zip",
-            "reference": null,
+            "reference": "0.3.4",
             "shasum": null
         },
         "require": {
@@ -397,7 +400,7 @@
         "dist": {
             "type": "zip",
             "url": "https://github.com/UsabilityDynamics/lib-wp-list-table/archive/1.0.8.zip",
-            "reference": null,
+            "reference": "1.0.8",
             "shasum": null
         },
         "require": {
@@ -440,7 +443,7 @@
         "dist": {
             "type": "zip",
             "url": "https://github.com/UsabilityDynamics/lib-wp-shortcode/archive/0.1.2.zip",
-            "reference": null,
+            "reference": "0.1.2",
             "shasum": null
         },
         "type": "library",
@@ -494,7 +497,7 @@
         "dist": {
             "type": "zip",
             "url": "https://github.com/UsabilityDynamics/wp-meta-box/archive/4.5.2.1.zip",
-            "reference": null,
+            "reference": "4.5.2.1",
             "shasum": null
         },
         "require": {
@@ -552,7 +555,7 @@
         "dist": {
             "type": "zip",
             "url": "https://github.com/UsabilityDynamics/wp-meta-box-utilities/archive/1.0.2.zip",
-            "reference": null,
+            "reference": "1.0.2",
             "shasum": null
         },
         "require": {
@@ -583,17 +586,17 @@
     },
     {
         "name": "usabilitydynamics/wp-gallery-metabox",
-        "version": "2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "2.0.1",
+        "version_normalized": "2.0.1.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/wp-gallery-metabox",
-            "reference": "2.0.0"
+            "reference": "2.0.1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/wp-gallery-metabox/archive/2.0.0.zip",
-            "reference": null,
+            "url": "https://github.com/UsabilityDynamics/wp-gallery-metabox/archive/2.0.1.zip",
+            "reference": "2.0.1",
             "shasum": null
         },
         "require": {
