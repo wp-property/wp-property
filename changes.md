@@ -1,3 +1,8 @@
+### 2.1.8 ( May 23, 2016 )
+* Added default Search Input and Data Entry types for Property Attributes on first WP-Property install.
+* Fixed default list of Property Types on first WP-Property install.
+* Fixed issue with duplicated Currency symbol on Single Property page.
+
 ### 2.1.7 ( May 18, 2016 )
 * Added Date picker for Property Search form.
 * Added ability to remove all default attributes, meta attributes and property types from Developer tab on Settings page.
