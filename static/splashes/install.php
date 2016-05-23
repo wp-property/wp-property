@@ -54,10 +54,9 @@ wp_cache_flush();
     <h3><?php printf( __( 'WP-Property %s important changes', ud_get_wp_property()->domain ), ud_get_wp_property( 'version' ) ); ?>:</h3>
 
     <ul>
-      <li>Added ability to sort properties by modified date for Property Overview widget.</li>
-      <li>Added option to export properties to CSV file on Help Tab of Settings page.</li>
-      <li>Fixed replacing of plugin's settings data with default values on updating WP-Property settings in some cases.</li>
-      <li>Fixed showing of Multi-Checkbox values.</li>
+      <li>Added default Search Input and Data Entry types for Property Attributes on first WP-Property install.</li>
+      <li>Fixed default list of Property Types on first WP-Property install.</li>
+      <li>Fixed issue with duplicated Currency symbol on Single Property page.</li>
     </ul>
 
   </div>
