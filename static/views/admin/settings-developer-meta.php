@@ -11,7 +11,7 @@ global $wp_properties;
 <p><?php _e( 'Meta is used for descriptions,  on the back-end  meta fields will be displayed as textareas.  On the front-end they will be displayed as individual sections.', ud_get_wp_property()->domain ) ?></p>
 <p><i><?php _e( '<b>Note!</b> Meta is deprecated from WP-Property 2.0. You can continue using it, however we recommend you to use Attribute with Data Entry \'Textarea\' or \'Text Editor\' instead of new meta fields.', ud_get_wp_property()->domain ) ?></i></p>
 
-<table id="wpp_inquiry_meta_fields" class="ud_ui_dynamic_table widefat">
+<table id="wpp_inquiry_meta_fields" class="ud_ui_dynamic_table widefat last_delete_row">
   <thead>
   <tr>
     <th class='wpp_draggable_handle'>&nbsp;</th>
@@ -22,10 +22,13 @@ global $wp_properties;
   </tr>
   </thead>
   <tbody>
+  <?php 
+  if(empty($wp_properties[ 'property_meta' ])){
+	  $wp_properties[ 'property_meta' ] = array("first" => "");
+  }
+  foreach( $wp_properties[ 'property_meta' ] as $slug => $label ): ?>
 
-  <?php foreach( $wp_properties[ 'property_meta' ] as $slug => $label ): ?>
-
-    <tr class="wpp_dynamic_table_row" slug="<?php echo $slug; ?>" new_row='false'>
+    <tr class="wpp_dynamic_table_row" slug="<?php echo $slug; ?>" new_row='false' style="<?php echo( empty( $label ) ? "display:none;" : ""); ?>">
       <th class='wpp_draggable_handle'>&nbsp;</th>
       <td>
         <ul>
@@ -54,12 +57,14 @@ global $wp_properties;
       </td>
     </tr>
 
-  <?php endforeach; ?>
+  <?php endforeach; 
+  ?>
   </tbody>
 
   <tfoot>
   <tr>
     <td colspan='5'>
+
       <input type="button" class="wpp_add_row button-secondary" value="<?php _e( 'Add Row', ud_get_wp_property()->domain ) ?>"/>
     </td>
   </tr>

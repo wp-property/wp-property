@@ -17,7 +17,7 @@
   "repositories": [
     {
       "type": "composer",
-      "url": "http://repository.usabilitydynamics.com"
+      "url": "https://repository.usabilitydynamics.com"
     }
   ],
   "require": {
@@ -25,7 +25,7 @@
     "usabilitydynamics/lib-ui": "0.3.4",
     "usabilitydynamics/lib-utility": "0.3.6",
     "usabilitydynamics/lib-settings": "0.2.3",
-    "usabilitydynamics/lib-wp-bootstrap": "1.1.9",
+    "usabilitydynamics/lib-wp-bootstrap": "1.2.0",
     "usabilitydynamics/lib-ud-api-client": "1.1.5",
     "usabilitydynamics/lib-wp-list-table": "1.0.8",
     "usabilitydynamics/lib-wp-shortcode": "0.1.2",

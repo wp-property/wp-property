@@ -134,7 +134,7 @@ namespace UsabilityDynamics\WPP {
                 case 'number':
                   ?>
                   <input class="widefat" id="<?php echo $this->get_field_id( $param['id'] ); ?>"
-                         min="<?php echo $param['min']; ?>"
+                         min="<?php echo ( isset( $param['min'] ) ? $param['min'] : '' ); ?>"
                          name="<?php echo $this->get_field_name( $param['id'] ); ?>" type="number"
                          value="<?php echo esc_attr( !empty( $instance[ $param['id'] ] ) ? $instance[ $param['id'] ] : $param['default'] ); ?>"/>
                   <?php

@@ -20,7 +20,7 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
   <div class="clear"></div>
 </div>
 
-<table id="wpp_inquiry_attribute_fields" class="wpp_inquiry_attribute_fields ud_ui_dynamic_table widefat" allow_random_slug="true">
+<table id="wpp_inquiry_attribute_fields" class="wpp_inquiry_attribute_fields ud_ui_dynamic_table widefat last_delete_row" allow_random_slug="true">
   <thead>
   <tr>
     <th class='wpp_draggable_handle'>&nbsp;</th>
@@ -32,15 +32,21 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
   </tr>
   </thead>
   <tbody>
-
-  <?php foreach( $wp_properties[ 'property_stats' ] as $slug => $label ): ?>
+  <?php 
+  
+  if(empty($wp_properties[ 'property_stats' ])){
+	  $wp_properties[ 'property_stats' ] = array("first" => "");
+  }
+  foreach( $wp_properties[ 'property_stats' ] as $slug => $label ): ?>
     <?php $gslug = false; ?>
     <?php $group = false; ?>
     <?php if( !empty( $wp_properties[ 'property_stats_groups' ][ $slug ] ) ) : ?>
       <?php $gslug = $wp_properties[ 'property_stats_groups' ][ $slug ]; ?>
       <?php $group = $wp_properties[ 'property_groups' ][ $gslug ]; ?>
-    <?php endif; ?>
-    <tr class="wpp_dynamic_table_row" <?php echo( !empty( $gslug ) ? "wpp_attribute_group=\"" . $gslug . "\"" : "" ); ?> style="<?php echo( !empty( $group[ 'color' ] ) ? "background-color:" . $group[ 'color' ] : "" ); ?>" slug="<?php echo $slug; ?>" new_row='false'>
+    <?php endif; 
+		
+	?>
+    <tr class="wpp_dynamic_table_row" <?php echo( !empty( $gslug ) ? "wpp_attribute_group=\"" . $gslug . "\"" : "" ); ?> style="<?php echo( !empty( $group[ 'color' ] ) ? "background-color:" . $group[ 'color' ] : "" ); echo( empty( $label ) ? "display:none;" : ""); ?>" slug="<?php echo $slug; ?>" new_row='false'>
 
       <td class="wpp_draggable_handle">&nbsp;</td>
 
@@ -159,7 +165,9 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
         </ul>
       </td>
     </tr>
-  <?php endforeach;?>
+  <?php
+	endforeach;
+  ?>
   </tbody>
 
   <tfoot>

@@ -149,6 +149,7 @@ namespace UsabilityDynamics\WP {
         delete_option( sanitize_key( 'dismiss_' . $this->slug . '_' . str_replace( '.', '_', $this->args['version'] ) . '_notice' ) );
         /* Delete 'Bootstrap' notice 'dismissed' information */
         delete_option( 'dismissed_notice_' . sanitize_key( $this->name ) );
+        delete_option( 'dismissed_warning_' . sanitize_key( $this->name ) );
         $this->activate();
       }
 
@@ -161,6 +162,7 @@ namespace UsabilityDynamics\WP {
         delete_option( sanitize_key( 'dismiss_' . $this->slug . '_' . str_replace( '.', '_', $this->args['version'] ) . '_notice' ) );
         /* Delete 'Bootstrap' notice 'dismissed' information */
         delete_option( 'dismissed_notice_' . sanitize_key( $this->name ) );
+        delete_option( 'dismissed_warning_' . sanitize_key( $this->name ) );
         $this->deactivate();
       }
 

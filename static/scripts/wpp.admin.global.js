@@ -451,7 +451,7 @@ function wpp_create_slug(slug) {
  * @param element
  * @return
  */
-function wpp_add_row(element) {
+function wpp_add_row(element,hides) {
   var auto_increment = false;
   var table = jQuery(element).parents('.ud_ui_dynamic_table');
   var table_id = jQuery(table).attr("id");
@@ -520,7 +520,11 @@ function wpp_add_row(element) {
   //* Bind (Set) ColorPicker with new fields '.wpp_input_colorpicker' */
   bindColorPicker(added_row);
   // Display row just in case
-  jQuery(added_row).show();
+  if(hides== true){
+   jQuery(added_row).hide();
+  } else{
+   jQuery(added_row).show();
+  }
 
   //* Blank out all values */
   jQuery("textarea", added_row).val('');
@@ -543,7 +547,6 @@ function wpp_add_row(element) {
 
   return added_row;
 }
-
 /**
  * Slides down WP contextual help,
  * and if 'wpp_scroll_to' attribute exists, scroll to it.
@@ -715,7 +718,12 @@ jQuery(document).ready(function() {
       jQuery(parent).hide();
       jQuery(parent).remove();
     } else {
-      jQuery(parent).attr( 'new_row', 'true' );
+	   if(jQuery(table).hasClass('last_delete_row')){
+	    wpp_add_row(this,true);
+            jQuery(parent).remove();
+	   } else{
+            jQuery(parent).attr( 'new_row', 'true' );
+	   }
     }
 
     table.trigger('row_removed', [parent]);

@@ -121,6 +121,9 @@ class InstallerTest extends TestCase
             array('fuelphp-component', true),
             array('hurad-plugin', true),
             array('hurad-theme', true),
+            array('imagecms-template', true),
+            array('imagecms-module', true),
+            array('imagecms-library', true),
             array('joomla-library', true),
             array('kirby-plugin', true),
             array('kohana-module', true),
@@ -147,6 +150,7 @@ class InstallerTest extends TestCase
             array('prestashop-module', true),
             array('prestashop-theme', true),
             array('puppet-module', true),
+            array('radphp-bundle', true),
             array('redaxo-addon', true),
             array('redaxo-bestyle-plugin', true),
             array('roundcube-plugin', true),
@@ -166,6 +170,7 @@ class InstallerTest extends TestCase
             array('tusk-task', true),
             array('tusk-asset', true),
             array('typo3-flow-plugin', true),
+            array('typo3-cms-extension', true),
             array('whmcs-gateway', true),
             array('wolfcms-plugin', true),
             array('wordpress-plugin', true),
@@ -175,6 +180,9 @@ class InstallerTest extends TestCase
             array('zikula-theme', true),
             array('kodicms-plugin', true),
             array('kodicms-media', true),
+            array('phifty-bundle', true),
+            array('phifty-library', true),
+            array('phifty-framework', true),
         );
     }
 
@@ -234,6 +242,9 @@ class InstallerTest extends TestCase
             array('fuelphp-component', 'components/demo/', 'fuelphp/demo'),
             array('hurad-plugin', 'plugins/Akismet/', 'atkrad/akismet'),
             array('hurad-theme', 'plugins/Hurad2013/', 'atkrad/Hurad2013'),
+            array('imagecms-template', 'templates/my_template/', 'shama/my_template'),
+            array('imagecms-module', 'application/modules/my_module/', 'shama/my_module'),
+            array('imagecms-library', 'application/libraries/my_library/', 'shama/my_library'),
             array('joomla-plugin', 'plugins/my_plugin/', 'shama/my_plugin'),
             array('kirby-plugin', 'site/plugins/my_plugin/', 'shama/my_plugin'),
             array('kohana-module', 'modules/my_package/', 'shama/my_package'),
@@ -267,6 +278,7 @@ class InstallerTest extends TestCase
             array('pimcore-plugin', 'plugins/MyPlugin/', 'ubikz/my_plugin'),
             array('ppi-module', 'modules/foo/', 'test/foo'),
             array('puppet-module', 'modules/puppet-name/', 'puppet/puppet-name'),
+            array('radphp-bundle', 'src/Migration/', 'atkrad/migration'),
             array('redaxo-addon', 'redaxo/include/addons/my_plugin/', 'shama/my_plugin'),
             array('redaxo-bestyle-plugin', 'redaxo/include/addons/be_style/plugins/my_plugin/', 'shama/my_plugin'),
             array('roundcube-plugin', 'plugins/base/', 'test/base'),
@@ -292,6 +304,7 @@ class InstallerTest extends TestCase
             array('tusk-task', '.tusk/tasks/my_task/', 'shama/my_task'),
             array('typo3-flow-package', 'Packages/Application/my_package/', 'shama/my_package'),
             array('typo3-flow-build', 'Build/my_package/', 'shama/my_package'),
+            array('typo3-cms-extension', 'typo3conf/ext/my_extension/', 'shama/my_extension'),
             array('whmcs-gateway', 'modules/gateways/gateway_name/', 'vendor/gateway_name'),
             array('wolfcms-plugin', 'wolf/plugins/my_plugin/', 'shama/my_plugin'),
             array('wordpress-plugin', 'wp-content/plugins/my_plugin/', 'shama/my_plugin'),
@@ -301,6 +314,9 @@ class InstallerTest extends TestCase
             array('zikula-theme', 'themes/my-test_theme/', 'my/test_theme'),
             array('kodicms-media', 'cms/media/vendor/my_media/', 'shama/my_media'),
             array('kodicms-plugin', 'cms/plugins/my_plugin/', 'shama/my_plugin'),
+            array('phifty-bundle', 'bundles/core/', 'shama/core'),
+            array('phifty-library', 'libraries/my-lib/', 'shama/my-lib'),
+            array('phifty-framework', 'frameworks/my-framework/', 'shama/my-framework'),
         );
     }
 
@@ -376,6 +392,27 @@ class InstallerTest extends TestCase
         ));
         $result = $installer->getInstallPath($package);
         $this->assertEquals('my/custom/path/my_plugin/', $result);
+    }
+
+    /**
+     * testVendorPath
+     */
+    public function testVendorPath()
+    {
+        $installer = new Installer($this->io, $this->composer);
+        $package = new Package('penyaskito/my_module', '1.0.0', '1.0.0');
+        $package->setType('drupal-module');
+        $consumerPackage = new RootPackage('drupal/drupal', '1.0.0', '1.0.0');
+        $this->composer->setPackage($consumerPackage);
+        $consumerPackage->setExtra(array(
+          'installer-paths' => array(
+            'modules/custom/{$name}/' => array(
+              'vendor:penyaskito'
+            ),
+          ),
+        ));
+        $result = $installer->getInstallPath($package);
+        $this->assertEquals('modules/custom/my_module/', $result);
     }
 
     /**

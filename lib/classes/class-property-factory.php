@@ -508,7 +508,7 @@ namespace UsabilityDynamics\WPP {
             'post_type' => 'attachment',
             'post_mime_type' => 'image',
             'orderby' => 'menu_order ASC, ID',
-            'order' => 'DESC'
+            'order' => 'ASC'
           ) );
 
           /* Get property images */
@@ -518,6 +518,7 @@ namespace UsabilityDynamics\WPP {
               $data[ $attachment->post_name ][ 'post_title' ]    = $attachment->post_title;
               $data[ $attachment->post_name ][ 'post_excerpt' ]  = $attachment->post_excerpt;
               $data[ $attachment->post_name ][ 'post_content' ]  = $attachment->post_content;
+              $data[ $attachment->post_name ][ 'menu_order' ]  = $attachment->menu_order;
               $data[ $attachment->post_name ][ 'attachment_id' ] = $attachment_id;
               foreach( $wp_image_sizes as $image_name ) {
                 $this_url = wp_get_attachment_image_src( $attachment_id, $image_name, true );
