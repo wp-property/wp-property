@@ -1071,7 +1071,9 @@ class WPP_Core {
       //* WPP Settings capability */
       'manage_wpp_settings' => __( 'Manage Settings', ud_get_wp_property()->domain ),
       //* WPP Taxonomies capability */
-      'manage_wpp_categories' => __( 'Manage Taxonomies', ud_get_wp_property()->domain )
+      'manage_wpp_categories' => __( 'Manage Taxonomies', ud_get_wp_property()->domain ),
+      //* WPP make featured capability */
+      'manage_wpp_featured' => __( 'Allow to mark properties as featured', ud_get_wp_property()->domain )
     );
 
     //* Adds Premium Feature Capabilities */
