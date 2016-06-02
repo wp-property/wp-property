@@ -1067,12 +1067,12 @@ class WPP_Core {
       'edit_others_wpp_properties' => __( 'Edit Other Properties', ud_get_wp_property()->domain ),
       'delete_wpp_property' => __( 'Delete Properties', ud_get_wp_property()->domain ),
       'publish_wpp_properties' => __( 'Publish Properties', ud_get_wp_property()->domain ),
+      //* WPP make featured capability */
+      'manage_wpp_make_featured' => __( 'Allow to mark properties as featured', ud_get_wp_property()->domain ),
       //* WPP Settings capability */
       'manage_wpp_settings' => __( 'Manage Settings', ud_get_wp_property()->domain ),
       //* WPP Taxonomies capability */
-      'manage_wpp_categories' => __( 'Manage Taxonomies', ud_get_wp_property()->domain ),
-      //* WPP make featured capability */
-      'manage_wpp_make_featured' => __( 'Allow to mark properties as featured', ud_get_wp_property()->domain )
+      'manage_wpp_categories' => __( 'Manage Taxonomies', ud_get_wp_property()->domain )
     );
 
     //* Adds Premium Feature Capabilities */
