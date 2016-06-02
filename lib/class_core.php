@@ -647,7 +647,7 @@ class WPP_Core {
       <div class="misc-pub-section ">
         <ul>
           <li><?php _e( 'Menu Sort Order:', ud_get_wp_property()->domain ) ?> <?php echo WPP_F::input( "name=menu_order&special=size=4", $post->menu_order ); ?></li>
-          <?php if( current_user_can( 'manage_options' ) ) { ?>
+          <?php if( current_user_can( 'manage_wpp_make_featured' ) ) { ?>
             <li><?php echo WPP_F::checkbox( "name=wpp_data[meta][featured]&label=" . __( 'Display in featured listings.', ud_get_wp_property()->domain ), get_post_meta( $post->ID, 'featured', true ) ); ?></li>
           <?php } ?>
           <?php do_action( 'wpp_publish_box_options', $post ); ?>
@@ -1073,7 +1073,7 @@ class WPP_Core {
       //* WPP Taxonomies capability */
       'manage_wpp_categories' => __( 'Manage Taxonomies', ud_get_wp_property()->domain ),
       //* WPP make featured capability */
-      'manage_wpp_featured' => __( 'Allow to mark properties as featured', ud_get_wp_property()->domain )
+      'manage_wpp_make_featured' => __( 'Allow to mark properties as featured', ud_get_wp_property()->domain )
     );
 
     //* Adds Premium Feature Capabilities */

@@ -287,7 +287,7 @@ namespace UsabilityDynamics\WPP {
         $data = '';
         $featured = get_post_meta( $post->ID, 'featured', true );
         $featured = !empty( $featured ) && !in_array( $featured, array( '0', 'false' ) ) ? true : false;
-        if( current_user_can( 'manage_wpp_featured' ) ) {
+        if( current_user_can( 'manage_wpp_make_featured' ) ) {
           if( $featured ) {
             $data .= "<input type='button' id='wpp_feature_{$post->ID}' class='wpp_featured_toggle wpp_is_featured' nonce='" . wp_create_nonce( 'wpp_make_featured_' . $post->ID ) . "' value='" . __( 'Featured', ud_get_wp_property( 'domain' ) ) . "' />";
           } else {
