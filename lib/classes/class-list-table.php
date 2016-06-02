@@ -102,7 +102,6 @@ namespace UsabilityDynamics\WPP {
         }
 
         $columns[ 'thumbnail' ] = __( 'Thumbnail', ud_get_wp_property( 'domain' ) );
-
         return $columns;
       }
 
@@ -201,7 +200,7 @@ namespace UsabilityDynamics\WPP {
        * @return string
        */
       public function column_created( $post ) {
-        return get_the_date( '', $post );
+        return get_the_date( get_option( 'date_format' ) . " " . get_option( 'time_format' ), $post );
       }
 
       /**
@@ -211,7 +210,7 @@ namespace UsabilityDynamics\WPP {
        * @return string
        */
       public function column_modified( $post ) {
-        return get_post_modified_time( get_option( 'date_format' ), null, $post, true );
+        return get_post_modified_time( get_option( 'date_format' ) . " " . get_option( 'time_format' ), null, $post, true );
       }
 
       /**
