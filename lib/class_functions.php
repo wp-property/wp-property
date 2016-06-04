@@ -3784,9 +3784,10 @@ class WPP_F extends UsabilityDynamics\Utility {
                 $attribute_label = apply_filters('wpp::attribute::label', $attribute_label, $attribute_slug);
                 if( $attribute_slug == 'property_type' ){
                   $value = apply_filters( "wpp_stat_filter_property_type_label", $value );
-                }elseif( !empty($wp_properties["predefined_values"][$attribute_slug]) ){
-                  $value = apply_filters( "wpp::attribute::value", $value, $attribute_slug);
                 }
+                
+                $value = apply_filters( "wpp::attribute::value", $value, $attribute_slug);
+                
 
                 $attributes[ ] = '<li class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_' . $attribute_slug . '">';
                 $attributes[ ] = '<span class="attribute">' . $attribute_label . '</span>';
