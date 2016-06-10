@@ -569,7 +569,7 @@ function add_dollar_sign( $content ) {
   $currency_symbol = ( !empty( $wp_properties[ 'configuration' ][ 'currency_symbol' ] ) ? $wp_properties[ 'configuration' ][ 'currency_symbol' ] : "$" );
   $currency_symbol_placement = ( !empty( $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ] ) ? $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ] : "before" );
 
-  $content = trim( str_replace( array( "$", "," ), "", $content ) );
+  $content = trim( str_replace( array( $currency_symbol, "," ), "", $content ) );
 
   if ( !is_numeric( $content ) ) {
     return preg_replace_callback( '/(\d+)/', create_function(
