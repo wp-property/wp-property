@@ -41,6 +41,18 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Wrapper for UsabilityDynamics\WPLT\WP_List_Table::ajax_response() function.
+       * To add the pagination args on response. 
+       *
+       * @access public
+       */
+      public function ajax_response() {
+        $response = parent::ajax_response();
+        $response['pagination']['_pagination_args'] = $this->_pagination_args;
+        return $response;
+      }
+
+      /**
        * Allows to modify WP_Query arguments
        *
        * @param array $args
