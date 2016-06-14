@@ -63,6 +63,22 @@ namespace UsabilityDynamics\WPP {
 		              AND post_id IN ( SELECT ID FROM {$wpdb->posts} WHERE post_type='property' );
             " );
 
+          // To change the title key from "_widget_title" to "title"
+          case ( version_compare( $old_version, '2.1.9', '<' ) ):
+            $property_terms_widget = get_option('widget_wpp_property_terms');
+            $property_terms_widget_updated = false;
+            if(is_array($property_terms_widget)){
+              foreach ($property_terms_widget as $id => $widget) {
+                if(isset($widget['_widget_title'])){
+                  $property_terms_widget[$id]['title'] = $widget['_widget_title'];
+                  unset($property_terms_widget[$id]['_widget_title']);
+                  $property_terms_widget_updated = true;
+                }
+              }
+            }
+            if($property_terms_widget_updated)
+              update_option('widget_wpp_property_terms', $property_terms_widget);
+
         }
 
         /* Additional stuff can be handled here */
