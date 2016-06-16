@@ -567,7 +567,7 @@ class WPP_Core {
       /* Handle logic for featured property. */
       if( $meta_key == 'featured' ) {
         //* Only admins can mark properties as featured. */
-        if( !current_user_can( 'manage_options' ) ) {
+        if( !current_user_can( 'manage_wpp_make_featured' ) ) {
           //** But be sure that meta 'featured' exists at all */
           if( !metadata_exists( 'post', $post_id, $meta_key ) ) {
             $meta_value = 'false';
@@ -647,7 +647,7 @@ class WPP_Core {
       <div class="misc-pub-section ">
         <ul>
           <li><?php _e( 'Menu Sort Order:', ud_get_wp_property()->domain ) ?> <?php echo WPP_F::input( "name=menu_order&special=size=4", $post->menu_order ); ?></li>
-          <?php if( current_user_can( 'manage_options' ) ) { ?>
+          <?php if( current_user_can( 'manage_wpp_make_featured' ) ) { ?>
             <li><?php echo WPP_F::checkbox( "name=wpp_data[meta][featured]&label=" . __( 'Display in featured listings.', ud_get_wp_property()->domain ), get_post_meta( $post->ID, 'featured', true ) ); ?></li>
           <?php } ?>
           <?php do_action( 'wpp_publish_box_options', $post ); ?>
@@ -688,19 +688,19 @@ class WPP_Core {
 
     $messages[ 'property' ] = array(
       0 => '', // Unused. Messages start at index 1.
-      1 => sprintf( __( 'Property updated. <a href="%s">view property</a>', ud_get_wp_property()->domain ), esc_url( get_permalink( $post_id ) ) ),
+      1 => sprintf( __( '%2$s updated. <a href="%s">View %2$s</a>', ud_get_wp_property()->domain ), esc_url( get_permalink( $post_id ) ), ud_get_wp_property( 'labels.name' ) ),
       2 => __( 'Custom field updated.', ud_get_wp_property()->domain ),
       3 => __( 'Custom field deleted.', ud_get_wp_property()->domain ),
-      4 => __( 'Property updated.', ud_get_wp_property()->domain ),
+      4 => sprintf( __( '%s updated.', ud_get_wp_property()->domain ), ud_get_wp_property( 'labels.name' ) ),
       /* translators: %s: date and time of the revision */
-      5 => isset( $_GET[ 'revision' ] ) ? sprintf( __( 'Property restored to revision from %s', ud_get_wp_property()->domain ), wp_post_revision_title( (int)$_GET[ 'revision' ], false ) ) : false,
-      6 => sprintf( __( 'Property published. <a href="%s">View property</a>', ud_get_wp_property()->domain ), esc_url( get_permalink( $post_id ) ) ),
-      7 => __( 'Property saved.', ud_get_wp_property()->domain ),
-      8 => sprintf( __( 'Property submitted. <a target="_blank" href="%s">Preview property</a>', ud_get_wp_property()->domain ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ) ),
-      9 => sprintf( __( 'Property scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview property</a>', ud_get_wp_property()->domain ),
+      5 => isset( $_GET[ 'revision' ] ) ? sprintf( __( '%2$s restored to revision from %s', ud_get_wp_property()->domain ), wp_post_revision_title( (int)$_GET[ 'revision' ], false ), ud_get_wp_property( 'labels.name' ) ) : false,
+      6 => sprintf( __( '%2$s published. <a href="%s">View %2$s</a>', ud_get_wp_property()->domain ), esc_url( get_permalink( $post_id ) ), ud_get_wp_property( 'labels.name' ) ),
+      7 => sprintf( __( '%s saved.', ud_get_wp_property()->domain ), ud_get_wp_property( 'labels.name' ) ),
+      8 => sprintf( __( '%2$s submitted. <a target="_blank" href="%s">Preview %2$s</a>', ud_get_wp_property()->domain ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), ud_get_wp_property( 'labels.name' ) ),
+      9 => sprintf( __( '%2$s scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview %2$s</a>', ud_get_wp_property()->domain ),
         // translators: Publish box date format, see http://php.net/date
-        date_i18n( __( 'M j, Y @ G:i', ud_get_wp_property()->domain ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_id ) ) ),
-      10 => sprintf( __( 'Property draft updated. <a target="_blank" href="%s">Preview property</a>', ud_get_wp_property()->domain ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ) ),
+        date_i18n( __( 'M j, Y @ G:i', ud_get_wp_property()->domain ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_id ) ), ud_get_wp_property( 'labels.name' )),
+      10 => sprintf( __( '%2$s draft updated. <a target="_blank" href="%s">Preview %2$s</a>', ud_get_wp_property()->domain ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), ud_get_wp_property( 'labels.name' ) ),
     );
 
     $messages = apply_filters( 'wpp_updated_messages', $messages );
@@ -1061,13 +1061,14 @@ class WPP_Core {
 
     //* General WPP capabilities */
     $wpp_capabilities = array(
-      'read_wpp_property' => __( 'View Properties', ud_get_wp_property()->domain ),
       //* Manage WPP Properties Capabilities */
       'edit_wpp_properties' => __( 'View Properties', ud_get_wp_property()->domain ),
       'edit_wpp_property' => __( 'Add/Edit Properties', ud_get_wp_property()->domain ),
       'edit_others_wpp_properties' => __( 'Edit Other Properties', ud_get_wp_property()->domain ),
       'delete_wpp_property' => __( 'Delete Properties', ud_get_wp_property()->domain ),
       'publish_wpp_properties' => __( 'Publish Properties', ud_get_wp_property()->domain ),
+      //* WPP make featured capability */
+      'manage_wpp_make_featured' => __( 'Allow to mark properties as featured', ud_get_wp_property()->domain ),
       //* WPP Settings capability */
       'manage_wpp_settings' => __( 'Manage Settings', ud_get_wp_property()->domain ),
       //* WPP Taxonomies capability */

@@ -28,7 +28,15 @@ jQuery.extend( wpp = wpp || {}, { overview: {
       });
     });
 
-    jQuery(document).on('wplt-after-update', function(){
+    jQuery(document).on('wplt-after-update', function(e, instance, type, r){
+      var el = jQuery(instance);
+      // Showing or hiding the pagination.
+      if(typeof r.data.pagination._pagination_args !== 'undefined' && r.data.pagination._pagination_args.total_pages > 1 ){
+        jQuery('.tablenav .tablenav-pages', el).show();
+      }
+      else{
+        jQuery('.tablenav .tablenav-pages', el).hide();
+      }
       wpp.overview.initialize();
     });
     wpp.overview.initialize();

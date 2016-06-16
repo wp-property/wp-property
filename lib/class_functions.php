@@ -2197,7 +2197,7 @@ class WPP_F extends UsabilityDynamics\Utility {
   static public function toggle_featured( $post_id = false ) {
     global $current_user;
 
-    if( !current_user_can( 'manage_options' ) )
+    if( !current_user_can( 'manage_wpp_make_featured' ) )
       return;
 
     if( !$post_id )
