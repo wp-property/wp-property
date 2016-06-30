@@ -463,7 +463,7 @@ if ( !function_exists( 'draw_stats' ) ):
       $property = $post;
     }
 
-    $property = prepare_property_for_display( $property, false, true );
+    $property = prepare_property_for_display( $property, false, false );
 
     if ( is_array( $property ) ) {
       $property = WPP_F::array_to_object( $property );
