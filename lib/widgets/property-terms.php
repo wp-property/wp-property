@@ -40,6 +40,8 @@ namespace UsabilityDynamics\WPP\Widgets {
 
       $title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : '';
 
+      // Clearing title to avoid duplicate in widget.
+      $instance[ 'title' ] = '';
       $output .= $before_widget;
       $_shortcode_return = do_shortcode( '[property_terms '.$this->shortcode_args( $instance ).']' );
       if ( !empty( $title ) ) {
