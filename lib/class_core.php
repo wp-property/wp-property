@@ -688,19 +688,19 @@ class WPP_Core {
 
     $messages[ 'property' ] = array(
       0 => '', // Unused. Messages start at index 1.
-      1 => sprintf( __( '%2$s updated. <a href="%s">View %2$s</a>', ud_get_wp_property()->domain ), esc_url( get_permalink( $post_id ) ), ud_get_wp_property( 'labels.name' ) ),
+      1 => sprintf( __( '%2$s updated. <a href="%s">View %2$s</a>', ud_get_wp_property()->domain ), esc_url( get_permalink( $post_id ) ), WPP_F::property_label() ),
       2 => __( 'Custom field updated.', ud_get_wp_property()->domain ),
       3 => __( 'Custom field deleted.', ud_get_wp_property()->domain ),
-      4 => sprintf( __( '%s updated.', ud_get_wp_property()->domain ), ud_get_wp_property( 'labels.name' ) ),
+      4 => sprintf( __( '%s updated.', ud_get_wp_property()->domain ), WPP_F::property_label() ),
       /* translators: %s: date and time of the revision */
-      5 => isset( $_GET[ 'revision' ] ) ? sprintf( __( '%2$s restored to revision from %s', ud_get_wp_property()->domain ), wp_post_revision_title( (int)$_GET[ 'revision' ], false ), ud_get_wp_property( 'labels.name' ) ) : false,
-      6 => sprintf( __( '%2$s published. <a href="%s">View %2$s</a>', ud_get_wp_property()->domain ), esc_url( get_permalink( $post_id ) ), ud_get_wp_property( 'labels.name' ) ),
-      7 => sprintf( __( '%s saved.', ud_get_wp_property()->domain ), ud_get_wp_property( 'labels.name' ) ),
-      8 => sprintf( __( '%2$s submitted. <a target="_blank" href="%s">Preview %2$s</a>', ud_get_wp_property()->domain ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), ud_get_wp_property( 'labels.name' ) ),
+      5 => isset( $_GET[ 'revision' ] ) ? sprintf( __( '%2$s restored to revision from %s', ud_get_wp_property()->domain ), wp_post_revision_title( (int)$_GET[ 'revision' ], false ), WPP_F::property_label() ) : false,
+      6 => sprintf( __( '%2$s published. <a href="%s">View %2$s</a>', ud_get_wp_property()->domain ), esc_url( get_permalink( $post_id ) ), WPP_F::property_label() ),
+      7 => sprintf( __( '%s saved.', ud_get_wp_property()->domain ), WPP_F::property_label() ),
+      8 => sprintf( __( '%2$s submitted. <a target="_blank" href="%s">Preview %2$s</a>', ud_get_wp_property()->domain ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), WPP_F::property_label() ),
       9 => sprintf( __( '%2$s scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview %2$s</a>', ud_get_wp_property()->domain ),
         // translators: Publish box date format, see http://php.net/date
-        date_i18n( __( 'M j, Y @ G:i', ud_get_wp_property()->domain ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_id ) ), ud_get_wp_property( 'labels.name' )),
-      10 => sprintf( __( '%2$s draft updated. <a target="_blank" href="%s">Preview %2$s</a>', ud_get_wp_property()->domain ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), ud_get_wp_property( 'labels.name' ) ),
+        date_i18n( __( 'M j, Y @ G:i', ud_get_wp_property()->domain ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_id ) ), WPP_F::property_label()),
+      10 => sprintf( __( '%2$s draft updated. <a target="_blank" href="%s">Preview %2$s</a>', ud_get_wp_property()->domain ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), WPP_F::property_label() ),
     );
 
     $messages = apply_filters( 'wpp_updated_messages', $messages );
