@@ -1788,3 +1788,7 @@ body.post-type-property .uisf-date {
 .custom-combobox a.custom-combobox-toggle.open:after {
   content: "\f142";
 }
+#the-list tr .locked-info {
+  height: auto;
+  opacity: 1;
+}
