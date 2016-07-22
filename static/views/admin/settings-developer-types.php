@@ -6,9 +6,10 @@
 global $wp_properties;
 ?>
 <h3><?php printf( __( '%1s Types', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></h3>
-<table id="wpp_inquiry_property_types" class="ud_ui_dynamic_table widefat last_delete_row" allow_random_slug="true">
+<table id="wpp_inquiry_property_types" class="ud_ui_dynamic_table widefat last_delete_row wpp_sortable" allow_random_slug="true">
   <thead>
   <tr>
+	<th class='wpp_draggable_handle'>&nbsp;</th>
     <th><?php _e( 'Type', ud_get_wp_property()->domain ) ?></th>
     <th><?php _e( 'Default Image', ud_get_wp_property()->domain ) ?></th>
     <th><?php _e( 'Settings', ud_get_wp_property()->domain ) ?></th>
@@ -16,7 +17,7 @@ global $wp_properties;
     <th><?php _e( 'Inherit from Parent', ud_get_wp_property()->domain ) ?></th>
   </tr>
   </thead>
-  <tbody>
+  <tbody class="ui-sortable">
   <?php 
    if(empty($wp_properties[ 'property_meta' ])){
 	  $wp_properties[ 'property_types' ] = array("first" => "");
@@ -24,7 +25,7 @@ global $wp_properties;
   foreach( $wp_properties[ 'property_types' ] as $property_slug => $label ): ?>
 
     <tr class="wpp_dynamic_table_row" slug="<?php echo $property_slug; ?>"  data-property-slug="<?php echo $property_slug; ?>" new_row='false'>
-
+	  <td class="wpp_draggable_handle">&nbsp;</td>
       <td>
         <ul>
           <li><input class="slug_setter" type="text" name="wpp_settings[property_types][<?php echo $property_slug; ?>]" value="<?php echo $label; ?>"/></li>
