@@ -400,6 +400,12 @@ namespace UsabilityDynamics\WPP {
           if( $input_type == 'number' ) {
             $input_type = 'text'; // HTML5 does not allow to use float, so we have to use default 'text' here
           }
+          
+        // for property_id , ID should be non-editable(readonly)
+          if( $input_type == 'readonly' ) {
+            $input_type = 'wpp_readonly'; // HTML5 does not allow to use float, so we have to use default 'text' here
+            $description[] =  __( 'Non-editable Field.', ud_get_wp_property('domain') );
+          }
 
           //** Determine if current attribute is used by Google Address Validator. */
           if( ud_get_wp_property( 'configuration.address_attribute' ) == $slug ) {
