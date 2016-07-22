@@ -70,7 +70,13 @@ namespace UsabilityDynamics\WPP {
                 'name' => __( 'Strip Tags', ud_get_wp_property()->domain ),
                 'description' => __( 'Strip tags', ud_get_wp_property()->domain ),
                 'default' => ''
-              )
+              ),
+              'show_taxonomy_label'=> array(
+                'name' => __( 'Show Taxanomy Label', ud_get_wp_property()->domain ),
+                'description' => __( 'True/False : Show/Hide taxanomy label', ud_get_wp_property()->domain ),
+                'type' => 'text',
+                'default' => true
+              ),
             ),
             'description' => sprintf( __( 'Renders %s Attribute', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
             'group' => 'WP-Property'
@@ -107,6 +113,7 @@ namespace UsabilityDynamics\WPP {
             'if_empty' => '',
             'do_not_format' => '',
             'make_terms_links' => 'false',
+            'show_taxonomy_label' => true,
             'separator' => ' ',
             'strip_tags' => ''
         );
@@ -157,6 +164,11 @@ namespace UsabilityDynamics\WPP {
           $return[ 'before' ] = html_entity_decode( $args[ 'before' ] );
         }
 
+        // show label if  'show_taxonomy_label' true
+        if($args['show_taxonomy_label'] && $args['show_taxonomy_label'] !== "false" ) {
+            $value = ucwords(str_replace("_",' ',$attribute)). " ".$value;
+        }
+
         $return[ 'value' ] = apply_filters( 'wpp_property_attribute_shortcode', $value, $this_property );
 
         if( $args[ 'strip_tags' ] == "true" && !empty( $return[ 'value' ] ) ) {
@@ -176,7 +188,7 @@ namespace UsabilityDynamics\WPP {
             return false;
           }
         }
-
+        
         if( is_array( $return ) ) {
           return implode( '', $return );
         }
