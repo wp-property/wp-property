@@ -127,6 +127,12 @@ namespace UsabilityDynamics\WPP {
             'type' => 'text',
           ),
           array(
+            'id' => 'ID',
+            'name' => __( 'Property ID', $this->get('domain') ),
+            'placeholder' => __( 'Property ID', $this->get('domain') ),
+            'type' => 'text',
+          ),
+          array(
             'id' => 'post_status',
             'name' => __( 'Status', $this->get('domain') ),
             'type' => 'select_advanced',
