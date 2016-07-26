@@ -537,7 +537,7 @@ namespace UsabilityDynamics\WPLT {
                   $_query[ 'meta_query' ] = array();
                 }
 
-                if( is_array( $q['value'] ) && !in_array( $map['compare'], array( 'NOT IN', 'IN' ) ) ) {
+                if( is_array( $q['value'] ) && !in_array( $map['compare'], array( 'NOT IN', 'IN' ) ) && 'BETWEEN' != $map['compare'] ) {
                   $map['compare'] = 'IN';
                 }
 

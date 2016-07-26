@@ -41,6 +41,18 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Wrapper for UsabilityDynamics\WPLT\WP_List_Table::ajax_response() function.
+       * To add the pagination args on response. 
+       *
+       * @access public
+       */
+      public function ajax_response() {
+        $response = parent::ajax_response();
+        $response['pagination']['_pagination_args'] = $this->_pagination_args;
+        return $response;
+      }
+
+      /**
        * Allows to modify WP_Query arguments
        *
        * @param array $args
@@ -102,7 +114,6 @@ namespace UsabilityDynamics\WPP {
         }
 
         $columns[ 'thumbnail' ] = __( 'Thumbnail', ud_get_wp_property( 'domain' ) );
-
         return $columns;
       }
 
@@ -201,7 +212,7 @@ namespace UsabilityDynamics\WPP {
        * @return string
        */
       public function column_created( $post ) {
-        return get_the_date( '', $post );
+        return get_the_date( get_option( 'date_format' ) . " " . get_option( 'time_format' ), $post );
       }
 
       /**
@@ -211,7 +222,7 @@ namespace UsabilityDynamics\WPP {
        * @return string
        */
       public function column_modified( $post ) {
-        return get_post_modified_time( get_option( 'date_format' ), null, $post, true );
+        return get_post_modified_time( get_option( 'date_format' ) . " " . get_option( 'time_format' ), null, $post, true );
       }
 
       /**
@@ -288,7 +299,7 @@ namespace UsabilityDynamics\WPP {
         $data = '';
         $featured = get_post_meta( $post->ID, 'featured', true );
         $featured = !empty( $featured ) && !in_array( $featured, array( '0', 'false' ) ) ? true : false;
-        if( current_user_can( 'manage_options' ) ) {
+        if( current_user_can( 'manage_wpp_make_featured' ) ) {
           if( $featured ) {
             $data .= "<input type='button' id='wpp_feature_{$post->ID}' class='wpp_featured_toggle wpp_is_featured' nonce='" . wp_create_nonce( 'wpp_make_featured_' . $post->ID ) . "' value='" . __( 'Featured', ud_get_wp_property( 'domain' ) ) . "' />";
           } else {

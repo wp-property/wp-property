@@ -27,6 +27,12 @@ namespace UsabilityDynamics\WPP {
         $options = array(
             'id' => 'property_terms',
             'params' => array(
+              'title' => array(
+                'name' => __( 'Title', ud_get_wp_property( 'domain' ) ),
+                'description' => __( 'Will show title before terms.', ud_get_wp_property( 'domain' ) ),
+                'type' => 'text',
+                'default' => ''
+              ),
               'property_id' => array(
                 'name' => sprintf( __( '%s ID', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label() ),
                 'description' => sprintf( __( 'If not empty, result will show particular %s, which ID is set.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label() ),
@@ -54,6 +60,7 @@ namespace UsabilityDynamics\WPP {
       public function call( $atts = "" ) {
 
         $data = shortcode_atts( array(
+          'title' => '',
           'property_id' => '',
           'taxonomy' => '',
         ), $atts );

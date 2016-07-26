@@ -188,7 +188,7 @@ class WPP_Core {
     wp_register_script( 'wp-property-backend-editor', WPP_URL . 'scripts/wpp.admin.editor.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable' ), WPP_Version );
     wp_register_script( 'jquery-cookie', WPP_URL . 'scripts/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
-    wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?sensor=true' );
+    wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?sensor=true&key='.ud_get_wp_property( 'configuration.google_maps_api' ) );
 
     wp_register_script( 'wpp-md5', WPP_URL . 'scripts/md5.js', array( 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wpp-jquery-gmaps', WPP_URL . 'scripts/jquery.ui.map.min.js', array( 'google-maps', 'jquery-ui-core', 'jquery-ui-widget', 'wpp-localization' ) );
@@ -198,6 +198,29 @@ class WPP_Core {
     wp_register_script( 'wpp-jquery-validate', WPP_URL . 'scripts/jquery.validate.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'scripts/jquery.number.format.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wp-property-galleria', WPP_URL . 'scripts/galleria/galleria-1.2.5.js', array( 'jquery', 'wpp-localization' ) );
+
+
+    // Load localized scripts
+    $locale = str_replace('_', '-', get_locale());
+    $file_paths = array('jqueryui/datepicker-i18n/jquery.ui.datepicker-' . $locale . '.js');
+    // Also check alternate i18n filename (e.g. jquery.ui.datepicker-de.js instead of jquery.ui.datepicker-de-DE.js)
+    if (strlen($locale) > 2)
+      $file_paths[] = 'jqueryui/datepicker-i18n/jquery.ui.datepicker-' . substr($locale, 0, 2) . '.js';
+    $deps = array('jquery-ui-datepicker');
+    foreach ($file_paths as $file_path) {
+      $path = ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/scripts/fields/' . $file_path, 'dir' );
+      if (file_exists($path)) {
+        wp_register_script('jquery-ui-datepicker-i18n', ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/scripts/fields/' . $file_path, 'url' ), $deps, '1.8.17', true);
+        $deps[] = 'jquery-ui-datepicker-i18n';
+        break;
+      }
+    }
+
+    wp_register_style('jquery-ui-core', ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/styles/fields/jqueryui/jquery.ui.core.css', 'url' ), array(), '1.8.17');
+    wp_register_style('jquery-ui-theme', ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/styles/fields/jqueryui/jquery.ui.theme.css', 'url' ), array(), '1.8.17');
+    wp_register_style('jquery-ui-datepicker', ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/styles/fields/jqueryui/jquery.ui.datepicker.css', 'url' ), array('jquery-ui-core', 'jquery-ui-theme'), '1.8.17');
+    wp_register_script('uisf-date', ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/scripts/fields/date.js', 'url' ), array('jquery-ui-datepicker'), false, true);
+
 
     wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.css' );
     wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'scripts/colorpicker/colorpicker.css' );
@@ -544,7 +567,7 @@ class WPP_Core {
       /* Handle logic for featured property. */
       if( $meta_key == 'featured' ) {
         //* Only admins can mark properties as featured. */
-        if( !current_user_can( 'manage_options' ) ) {
+        if( !current_user_can( 'manage_wpp_make_featured' ) ) {
           //** But be sure that meta 'featured' exists at all */
           if( !metadata_exists( 'post', $post_id, $meta_key ) ) {
             $meta_value = 'false';
@@ -624,7 +647,7 @@ class WPP_Core {
       <div class="misc-pub-section ">
         <ul>
           <li><?php _e( 'Menu Sort Order:', ud_get_wp_property()->domain ) ?> <?php echo WPP_F::input( "name=menu_order&special=size=4", $post->menu_order ); ?></li>
-          <?php if( current_user_can( 'manage_options' ) ) { ?>
+          <?php if( current_user_can( 'manage_wpp_make_featured' ) ) { ?>
             <li><?php echo WPP_F::checkbox( "name=wpp_data[meta][featured]&label=" . __( 'Display in featured listings.', ud_get_wp_property()->domain ), get_post_meta( $post->ID, 'featured', true ) ); ?></li>
           <?php } ?>
           <?php do_action( 'wpp_publish_box_options', $post ); ?>
@@ -665,19 +688,19 @@ class WPP_Core {
 
     $messages[ 'property' ] = array(
       0 => '', // Unused. Messages start at index 1.
-      1 => sprintf( __( 'Property updated. <a href="%s">view property</a>', ud_get_wp_property()->domain ), esc_url( get_permalink( $post_id ) ) ),
+      1 => sprintf( __( '%2$s updated. <a href="%s">View %2$s</a>', ud_get_wp_property()->domain ), esc_url( get_permalink( $post_id ) ), WPP_F::property_label() ),
       2 => __( 'Custom field updated.', ud_get_wp_property()->domain ),
       3 => __( 'Custom field deleted.', ud_get_wp_property()->domain ),
-      4 => __( 'Property updated.', ud_get_wp_property()->domain ),
+      4 => sprintf( __( '%s updated.', ud_get_wp_property()->domain ), WPP_F::property_label() ),
       /* translators: %s: date and time of the revision */
-      5 => isset( $_GET[ 'revision' ] ) ? sprintf( __( 'Property restored to revision from %s', ud_get_wp_property()->domain ), wp_post_revision_title( (int)$_GET[ 'revision' ], false ) ) : false,
-      6 => sprintf( __( 'Property published. <a href="%s">View property</a>', ud_get_wp_property()->domain ), esc_url( get_permalink( $post_id ) ) ),
-      7 => __( 'Property saved.', ud_get_wp_property()->domain ),
-      8 => sprintf( __( 'Property submitted. <a target="_blank" href="%s">Preview property</a>', ud_get_wp_property()->domain ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ) ),
-      9 => sprintf( __( 'Property scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview property</a>', ud_get_wp_property()->domain ),
+      5 => isset( $_GET[ 'revision' ] ) ? sprintf( __( '%2$s restored to revision from %s', ud_get_wp_property()->domain ), wp_post_revision_title( (int)$_GET[ 'revision' ], false ), WPP_F::property_label() ) : false,
+      6 => sprintf( __( '%2$s published. <a href="%s">View %2$s</a>', ud_get_wp_property()->domain ), esc_url( get_permalink( $post_id ) ), WPP_F::property_label() ),
+      7 => sprintf( __( '%s saved.', ud_get_wp_property()->domain ), WPP_F::property_label() ),
+      8 => sprintf( __( '%2$s submitted. <a target="_blank" href="%s">Preview %2$s</a>', ud_get_wp_property()->domain ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), WPP_F::property_label() ),
+      9 => sprintf( __( '%2$s scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview %2$s</a>', ud_get_wp_property()->domain ),
         // translators: Publish box date format, see http://php.net/date
-        date_i18n( __( 'M j, Y @ G:i', ud_get_wp_property()->domain ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_id ) ) ),
-      10 => sprintf( __( 'Property draft updated. <a target="_blank" href="%s">Preview property</a>', ud_get_wp_property()->domain ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ) ),
+        date_i18n( __( 'M j, Y @ G:i', ud_get_wp_property()->domain ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_id ) ), WPP_F::property_label()),
+      10 => sprintf( __( '%2$s draft updated. <a target="_blank" href="%s">Preview %2$s</a>', ud_get_wp_property()->domain ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_id ) ) ), WPP_F::property_label() ),
     );
 
     $messages = apply_filters( 'wpp_updated_messages', $messages );
@@ -1038,13 +1061,14 @@ class WPP_Core {
 
     //* General WPP capabilities */
     $wpp_capabilities = array(
-      'read_wpp_property' => __( 'View Properties', ud_get_wp_property()->domain ),
       //* Manage WPP Properties Capabilities */
       'edit_wpp_properties' => __( 'View Properties', ud_get_wp_property()->domain ),
       'edit_wpp_property' => __( 'Add/Edit Properties', ud_get_wp_property()->domain ),
       'edit_others_wpp_properties' => __( 'Edit Other Properties', ud_get_wp_property()->domain ),
       'delete_wpp_property' => __( 'Delete Properties', ud_get_wp_property()->domain ),
       'publish_wpp_properties' => __( 'Publish Properties', ud_get_wp_property()->domain ),
+      //* WPP make featured capability */
+      'manage_wpp_make_featured' => __( 'Allow to mark properties as featured', ud_get_wp_property()->domain ),
       //* WPP Settings capability */
       'manage_wpp_settings' => __( 'Manage Settings', ud_get_wp_property()->domain ),
       //* WPP Taxonomies capability */

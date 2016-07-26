@@ -2197,7 +2197,7 @@ class WPP_F extends UsabilityDynamics\Utility {
   static public function toggle_featured( $post_id = false ) {
     global $current_user;
 
-    if( !current_user_can( 'manage_options' ) )
+    if( !current_user_can( 'manage_wpp_make_featured' ) )
       return;
 
     if( !$post_id )
@@ -2981,7 +2981,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
       $numeric = ( isset( $wp_properties[ 'numeric_attributes' ] ) && in_array( $meta_key, (array) $wp_properties[ 'numeric_attributes' ] ) ) ? true : false;
 
-      if( !in_array( $meta_key, (array) $commas_ignore ) && substr_count( $criteria, ',' ) || ( substr_count( $criteria, '-' ) && $numeric ) || substr_count( $criteria, '--' ) ) {
+      if( !in_array( $meta_key, (array) $commas_ignore ) && substr_count( $criteria, ',' ) || ( substr_count( $criteria, '-' ) && $numeric ) || substr_count( $criteria, '--' ) || substr_count( $criteria, '/' ) ) {
 
         if( substr_count( $criteria, '-' ) && !substr_count( $criteria, ',' ) ) {
           $cr = explode( '-', $criteria );
@@ -3089,9 +3089,10 @@ class WPP_F extends UsabilityDynamics\Utility {
 
                 if( preg_match( '%\\d{1,2}/\\d{1,2}/\\d{4}%i', $hyphen_between[ 1 ] ) ) {
                   foreach( $hyphen_between as $key => $value ) {
-                    $hyphen_between[ $key ] = "STR_TO_DATE( '{$value}', '%c/%e/%Y' )";
+                    $value = date( 'm-d-Y', strtotime( $value ) );
+                    $hyphen_between[ $key ] = "STR_TO_DATE( '{$value}', '%m-%d-%Y' )";
                   }
-                  $where_between = "STR_TO_DATE( `meta_value`, '%c/%e/%Y' ) BETWEEN " . implode( " AND ", $hyphen_between ) . "";
+                  $where_between = "STR_TO_DATE( `meta_value`, '%Y-%m-%d' ) BETWEEN " . implode( " AND ", $hyphen_between ) . "";
                 } else {
                   $where_between = "`meta_value` BETWEEN " . implode( " AND ", $hyphen_between ) . "";
                 }
@@ -3099,7 +3100,7 @@ class WPP_F extends UsabilityDynamics\Utility {
               } else {
 
                 if( $adate ) {
-                  $where_between = "STR_TO_DATE( `meta_value`, '%c/%e/%Y' ) >= STR_TO_DATE( '{$hyphen_between[0]}', '%c/%e/%Y' )";
+                  $where_between = "STR_TO_DATE( `meta_value`, '%Y-%m-%d' ) >= STR_TO_DATE( '{$hyphen_between[0]}', '%m-%d-%Y' )";
                 } else {
                   $where_between = "`meta_value` >= $hyphen_between[0]";
                 }
@@ -3337,6 +3338,17 @@ class WPP_F extends UsabilityDynamics\Utility {
               $search_query = str_replace( $non_numeric_chars, '', $search_query[ 'min' ] ) . '-' . str_replace( $non_numeric_chars, '', $search_query[ 'max' ] );
             }
           }
+        } elseif( in_array( 'from', array_keys( $search_query ) ) ||
+            in_array( 'to', array_keys( $search_query ) )
+        ) {
+          //** Get arrays with from and to date ranges */
+
+          //* There is no range if max value is empty and min value is -1 */
+          if( empty( $search_query[ 'from' ] ) && empty( $search_query[ 'to' ] ) ) {
+            continue;
+          }
+          //* Set range */
+          $search_query = date( 'm/d/Y', strtotime( $search_query[ 'from' ] ) ) . '-' . date( 'm/d/Y', strtotime( $search_query[ 'to' ] ) ) ;
         }
       }
 

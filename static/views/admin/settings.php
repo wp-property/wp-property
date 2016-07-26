@@ -114,7 +114,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
         <div class="must_have_permalinks">
           <select name="wpp_settings[configuration][base_slug]" id="wpp_settings_base_slug">
-            <option <?php selected( $wp_properties[ 'configuration' ][ 'base_slug' ], 'property' ); ?> value="property"><?php _e( 'Property (Default)', ud_get_wp_property()->domain ); ?></option>
+            <option <?php selected( $wp_properties[ 'configuration' ][ 'base_slug' ], 'property' ); ?> value="property"><?php printf(__( '%s (Default)', ud_get_wp_property()->domain ), ud_get_wp_property( 'labels.name' )); ?></option>
             <?php foreach ( get_pages() as $page ): ?>
               <option <?php selected( $wp_properties[ 'configuration' ][ 'base_slug' ], $page->post_name ); ?> value="<?php echo $page->post_name; ?>"><?php echo $page->post_title; ?></option>
             <?php endforeach; ?>
@@ -408,12 +408,6 @@ if ( get_option( 'permalink_structure' ) == '' ) {
         <ul>
           <li><?php _e( 'Map Thumbnail Size:', ud_get_wp_property()->domain ); ?> <?php WPP_F::image_sizes_dropdown( "name=wpp_settings[configuration][single_property_view][map_image_type]&selected=" . ( isset( $wp_properties[ 'configuration' ][ 'single_property_view' ][ 'map_image_type' ] ) ? $wp_properties[ 'configuration' ][ 'single_property_view' ][ 'map_image_type' ] : '' ) ); ?></li>
           <li><?php _e( 'Map Zoom Level:', ud_get_wp_property()->domain ); ?> <?php echo WPP_F::input( "name=wpp_settings[configuration][gm_zoom_level]&style=width: 30px;", ( isset( $wp_properties[ 'configuration' ][ 'gm_zoom_level' ] ) ? $wp_properties[ 'configuration' ][ 'gm_zoom_level' ] : false ) ); ?></li>
-          <li><?php _e( 'Custom Latitude Coordinate', ud_get_wp_property()->domain ); ?>
-            : <?php echo WPP_F::input( "name=wpp_settings[custom_coords][latitude]&style=width: 100px;", ( isset( $wp_properties[ 'custom_coords' ][ 'latitude' ] ) ? $wp_properties[ 'custom_coords' ][ 'latitude' ] : false ) ); ?>
-            <span class="description"><?php printf( __( 'Default is "%s"', ud_get_wp_property()->domain ), $wp_properties[ 'default_coords' ][ 'latitude' ] ); ?></span></li>
-          <li><?php _e( 'Custom Longitude Coordinate', ud_get_wp_property()->domain ); ?>
-            : <?php echo WPP_F::input( "name=wpp_settings[custom_coords][longitude]&style=width: 100px;", ( isset( $wp_properties[ 'custom_coords' ][ 'longitude' ] ) ? $wp_properties[ 'custom_coords' ][ 'longitude' ] : false ) ); ?>
-            <span class="description"><?php printf( __( 'Default is "%s"', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'default_coords' ][ 'longitude' ] ) ? $wp_properties[ 'default_coords' ][ 'longitude' ] : false ) ); ?></span></li>
           <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][google_maps][show_true_as_image]&label=" . sprintf( __( 'Show Checkboxed Image instead of "%s" and hide "%s" for %s/%s values', ud_get_wp_property()->domain ), __( 'Yes', ud_get_wp_property()->domain ), __( 'No', ud_get_wp_property()->domain ), __( 'Yes', ud_get_wp_property()->domain ), __( 'No', ud_get_wp_property()->domain ) ), ( isset( $wp_properties[ 'configuration' ][ 'google_maps' ][ 'show_true_as_image' ] ) ? $wp_properties[ 'configuration' ][ 'google_maps' ][ 'show_true_as_image' ] : false ) ); ?></li>
         </ul>
 
