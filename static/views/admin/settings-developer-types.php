@@ -9,7 +9,7 @@ global $wp_properties;
 <table id="wpp_inquiry_property_types" class="ud_ui_dynamic_table widefat last_delete_row wpp_sortable" allow_random_slug="true">
   <thead>
   <tr>
-	<th class='wpp_draggable_handle'>&nbsp;</th>
+    <th class='wpp_draggable_handle'>&nbsp;</th>
     <th><?php _e( 'Type', ud_get_wp_property()->domain ) ?></th>
     <th><?php _e( 'Default Image', ud_get_wp_property()->domain ) ?></th>
     <th><?php _e( 'Settings', ud_get_wp_property()->domain ) ?></th>
@@ -21,8 +21,8 @@ global $wp_properties;
   <?php 
    if(empty($wp_properties[ 'property_meta' ])){
 	  $wp_properties[ 'property_types' ] = array("first" => "");
-  }
-  foreach( $wp_properties[ 'property_types' ] as $property_slug => $label ): ?>
+   }
+   foreach( $wp_properties[ 'property_types' ] as $property_slug => $label ): ?>
 
     <tr class="wpp_dynamic_table_row" slug="<?php echo $property_slug; ?>"  data-property-slug="<?php echo $property_slug; ?>" new_row='false'>
 	  <td class="wpp_draggable_handle">&nbsp;</td>
@@ -76,8 +76,8 @@ global $wp_properties;
           <li class="wpp_show_advanced" wrapper="wpp_something_advanced_wrapper"><?php _e( 'Toggle Attributes Selection', ud_get_wp_property()->domain ); ?></li>
 
           <?php 
-		  if(!empty($wp_properties[ 'property_stats' ])){
-		  foreach( $wp_properties[ 'property_stats' ] as $property_stat_slug => $property_stat_label ) : ?>
+          if(!empty($wp_properties[ 'property_stats' ])){
+		foreach( $wp_properties[ 'property_stats' ] as $property_stat_slug => $property_stat_label ) : ?>
             <li class="wpp_development_advanced_option">
               <input id="<?php echo $property_slug . "_" . $property_stat_slug; ?>_hidden_attributes" <?php if( isset( $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) && in_array( $property_stat_slug, $wp_properties[ 'hidden_attributes' ][ $property_slug ] ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[hidden_attributes][<?php echo $property_slug; ?>][]" value="<?php echo $property_stat_slug; ?>"/>
               <label for="<?php echo $property_slug . "_" . $property_stat_slug; ?>_hidden_attributes">
@@ -85,7 +85,7 @@ global $wp_properties;
               </label>
             </li>
           <?php endforeach; 
-		  }?>
+	  }?>
 
           <?php 
           if(!empty($wp_properties[ 'property_meta' ])){
