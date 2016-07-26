@@ -13,6 +13,9 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * Init
+       * added taxanaomy label true/false : 21/07/2015
+       * hides labels if put to false (default : fale to make it backward compatible ) 
+       * NOTE taxanomy label for property_meta defaults to true
        */
       public function __construct() {
 
@@ -75,7 +78,7 @@ namespace UsabilityDynamics\WPP {
                 'name' => __( 'Show Taxanomy Label', ud_get_wp_property()->domain ),
                 'description' => __( 'True/False : Show/Hide taxanomy label', ud_get_wp_property()->domain ),
                 'type' => 'text',
-                'default' => true
+                'default' => false
               ),
             ),
             'description' => sprintf( __( 'Renders %s Attribute', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
@@ -113,7 +116,7 @@ namespace UsabilityDynamics\WPP {
             'if_empty' => '',
             'do_not_format' => '',
             'make_terms_links' => 'false',
-            'show_taxonomy_label' => true,
+            'show_taxonomy_label' => false,
             'separator' => ' ',
             'strip_tags' => ''
         );
