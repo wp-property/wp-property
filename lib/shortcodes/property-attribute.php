@@ -13,7 +13,8 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * Init
-       * added taxanaomy label true/false : 21/07/2015
+       * 
+       * added taxanaomy label true/false : 21/07/2015 @raj
        * hides labels if put to false (default : fale to make it backward compatible ) 
        * NOTE taxanomy label for property_meta defaults to true
        */
@@ -168,7 +169,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         // show label if  'show_taxonomy_label' true
-        if($args['show_taxonomy_label'] && $args['show_taxonomy_label'] !== "false" ) {
+        if(isset($args['show_taxonomy_label'])  && $args['show_taxonomy_label'] !== "false" ) {
             $value = ucwords(str_replace("_",' ',$attribute)). " ".$value;
         }
 

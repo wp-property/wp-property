@@ -13,7 +13,8 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * init
-       * added taxanaomy label true/false : 21/07/2015
+       * 
+       * added taxanaomy label true/false : 21/07/2015 @raj
        * hides labels if put to false (default : true)
        */
       public function __construct() {
