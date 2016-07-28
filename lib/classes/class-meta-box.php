@@ -460,6 +460,16 @@ namespace UsabilityDynamics\WPP {
           }
 
           $default = isset($defaults[$slug])?$defaults[$slug]:"";
+         
+          // BUT for property_id default is post ID
+          // so make sure it is assigned if not present
+          // case arising when adding property_id meta to existing properties
+          // added 27.07/2016 @raj
+          
+          if ($slug=="ID"){
+            $default =  $post->ID;
+          }
+          
           //if(!empty($default) && $attribute['multiple']){
           //  $_defaults = explode(',', $default);
           //  $default = array();

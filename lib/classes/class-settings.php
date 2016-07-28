@@ -161,6 +161,7 @@ namespace UsabilityDynamics\WPP {
           }
           $this->set('property_stats', $ar);
           $this->set('predefined_values', $ar2);
+          $d = array();// intialize empty array for setting default values
         }
         
         // ID is missing, push it back. It is a compulsory field
@@ -244,6 +245,7 @@ namespace UsabilityDynamics\WPP {
             'area' => 'number',
             'phone_number' => 'input',
           ));
+          $d = array();// intialize empty array for setting default values
         }
         
         // make sure ID is always visible(re push into the fields)
