@@ -17,4 +17,4 @@ You would do it the same way as if you were editing a post or a page.  On the pr
 You can send us a message via our website, or, preferably, visit our [feedback.usabilitydynamics.com](http://feedback.usabilitydynamics.com/forums/95259-wp-property) page to submit new, and vote on existing, ideas.
 
 #### I like where this is going, but how do I get customization?
-If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.  If you need something custom, and urgent, [contact us](https://www.usabilitydynamics.com/contact-us)
+If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.  If you need something custom, and urgent, [contact us](https://www.usabilitydynamics.com/contact-us) 
