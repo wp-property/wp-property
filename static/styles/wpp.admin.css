@@ -702,6 +702,19 @@ body.property_page_show_agents .wp-list-table .column-id {
 .wpp_attribute_name_col input {
   width: 226px;
 }
+.widefat td p.wpp-std-att-cont{
+  margin-top:8px;
+}
+.std-attr-mapper{
+    display: none;
+}
+input.wpp-std-attr-enabled-check{
+  width : 16px;
+}
+select.std-attr-mapper {
+  width: 100%;
+  max-width : 226px;
+}
 .wpp_attribute_name_col input.slug_setter {
   font-size: 1.1em;
 }
@@ -946,6 +959,72 @@ textarea.wpp_full_width {
 }
 .wpp_draggable_handle_show .wpp_draggable_handle {
   background: url("images/wpp_draggable.png") no-repeat center center transparent;
+}
+td.wpp_std_attr_view {
+    padding: 0px ;
+}
+td.wpp_std_attr_view i {
+    padding: 0px;
+    width: 18px;
+    height: 18px;
+    margin-top: 10px;
+    display: block;
+}
+td.wpp_std_attr_view i.price {
+    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-position: -222px -110px;
+}
+td.wpp_std_attr_view i.address {
+    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-position: 2px -110px;
+}
+td.wpp_std_attr_view i.bedrooms {
+    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-position: -221px -94px;
+}
+td.wpp_std_attr_view i.bathrooms {
+    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-position: -254px -80px;
+}
+td.wpp_std_attr_view i.living_space_size {
+    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-position: -271px -80px;
+}
+td.wpp_std_attr_view i.features {
+    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-position: -271px -95px;
+}
+td.wpp_std_attr_view i.community_features {
+    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-position: -271px -112px;
+}
+td.wpp_std_attr_view i.total_rooms {
+    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-position: -271px -127px;
+}
+td.wpp_std_attr_view i.year_built {
+    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-position: -222px -125px;
+}
+td.wpp_std_attr_view i.no_of_floors {
+    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-position: -15px -141px;
+}
+td.wpp_std_attr_view i.lot_size_acres {
+    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-position: -15px -158px;
+}
+td.wpp_std_attr_view i.neighborhood {
+    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-position: -15px -173px;
+}
+td.wpp_std_attr_view i.fees {
+    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-position: -15px -188px;
+}
+td.wpp_std_attr_view i.status {
+    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-position: -157px -284px;
 }
 tr.wpp_dynamic_table_row {
   background-color: #F9F9F9;

@@ -127,6 +127,47 @@ namespace UsabilityDynamics\WPP {
           }
           $this->set('property_types', $ar);
         }
+        
+        /* Standard Attributes 
+         * added 28/07/2016 @raj
+         * 
+         */
+
+        $PDF_unique = array(
+            'price' => __('Price', ud_get_wp_property()->domain),
+            'address' => __('Address', ud_get_wp_property()->domain),
+            'bedrooms' => __('Bedrooms', ud_get_wp_property()->domain),
+            'bathrooms' => __('Bathrooms', ud_get_wp_property()->domain),
+            'living_space_size' => __('Living Space size Sq ft', ud_get_wp_property()->domain),
+            'features' => __('Features (term)', ud_get_wp_property()->domain),
+            'community_features' => __('Community features (term)', ud_get_wp_property()->domain)
+        );
+        $IMPORTER_unique = array(
+            'total_rooms' => __('Total Rooms', ud_get_wp_property()->domain),
+            'year_built' => __('Year Built', ud_get_wp_property()->domain),
+            'no_of_floors' => __('No of Floors', ud_get_wp_property()->domain),
+            'lot_size_acres' => __('Lot size, acres', ud_get_wp_property()->domain),
+            'neighborhood' => __('Neighborhood (term)', ud_get_wp_property()->domain),
+            'fees' => __('Fees', ud_get_wp_property()->domain),
+            'status' => __('Status', ud_get_wp_property()->domain)
+        );
+        $PSA = array('pdf'=>$PDF_unique,'importer'=>$IMPORTER_unique);
+        $this->set('prop_std_att', $PSA);
+//        print_r($PSA);die;
+
+        // get mapped standard attributes
+        //prop_std_att_mapped refers to true/fase
+        $d = $this->get('prop_std_att_mapped', false);
+        if (empty($d) || !is_array($d)) {
+          $d=array();
+          $d = $this->set('prop_std_att_mapped', $d);
+        }
+        //stores attribute array to which the field is mapped
+        $d = $this->get('prop_std_att_mapsto', false);
+        if (empty($d) || !is_array($d)) {
+          $d=array();
+          $d = $this->set('prop_std_att_mapsto', $d);
+        }
 
         //** Setup property types to be used. */
         $d = !$this->get('property_inheritance', false);
