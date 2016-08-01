@@ -88,7 +88,7 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
               // for the case if we need to differentiate the categories
               
               echo "<select  name='wpp_settings[prop_std_att_mapsto][$slug]' ".
-                       " class='std-attr-mapper wpp_settings[prop_std_att_mapsto][$slug]'>";
+                       " class='std-attr-mapper wpp_settings-prop_std_att_mapsto'>";
               echo  "<option value=''> - </option>";
               foreach ($wp_properties[ 'prop_std_att' ] as $std_attr_type){
                 foreach ($std_attr_type as $std_key => $std_val){

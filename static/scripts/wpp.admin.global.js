@@ -754,12 +754,12 @@ jQuery(document).ready(function() {
   // for developer-settings-attributes
   // load icon on page load
   jQuery("#wpp_inquiry_attribute_fields tr").each(function(){
-      var iconClass =  jQuery(this).find("[name='wpp_settings[prop_std_att_mapsto][location]']").val();
+      var iconClass =  jQuery(this).find(".std-attr-mapper.wpp_settings-prop_std_att_mapsto").val();
       $x = jQuery(this).find(".wpp_std_attr_view i").addClass(iconClass);
   });
   // for developer-settings-attributes
   //change icon on select change
-  jQuery("[name='wpp_settings[prop_std_att_mapsto][location]']").change(function(){
+  jQuery(".std-attr-mapper.wpp_settings-prop_std_att_mapsto").change(function(){
     var iconClass =  jQuery(this).val();
     $x = jQuery(this).closest("tr").find(".wpp_std_attr_view i");
     $x.removeClass().addClass(iconClass);
