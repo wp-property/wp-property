@@ -715,6 +715,19 @@ select.std-attr-mapper {
   width: 100%;
   max-width : 226px;
 }
+i.std_att_notices {
+  display : none;
+  color: #908282;
+  text-align: left;
+  padding: 4px 10px;
+  border: 1px #d6cfcf solid;
+  float: left;
+  max-width: 205px;
+  width: 100%;
+}
+#wpp_inquiry_attribute_fields tbody tr td {
+  border-bottom: 1px rgba(210, 200, 200, 0.66) solid;
+}
 .wpp_attribute_name_col input.slug_setter {
   font-size: 1.1em;
 }

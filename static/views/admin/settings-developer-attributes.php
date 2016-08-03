@@ -73,8 +73,9 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
 
             <?php
             // BEGIN : code for standard attributes
+            
             // merge std_attr  if need to use all attributes as a single array
-            $merged_std_attributes = array_unique(call_user_func_array('array_merge', $wp_properties[ 'prop_std_att' ]));
+            $merged_std_attributes = array_unique(call_user_func_array('array_merge', $wp_properties[ 'prop_std_att' ]),SORT_REGULAR);
             ?>
             <p class="wpp-std-att-cont">
               <label>
@@ -82,28 +83,38 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
               </label>
             </p>
             <?php
-            if(count($wp_properties[ 'prop_std_att' ])){
+            if(count($wp_properties[ 'prop_std_att' ]) || 
+                (isset( $wp_properties[ 'configuration' ]['address_attribute']) && !empty($wp_properties[ 'configuration' ]['address_attribute']))){
+            ?>
               
-              //using un-merged array here
-              // for the case if we need to differentiate the categories
-              
-              echo "<select  name='wpp_settings[prop_std_att_mapsto][$slug]' ".
-                       " class='std-attr-mapper wpp_settings-prop_std_att_mapsto'>";
-              echo  "<option value=''> - </option>";
+             <div  class='std-attr-mapper'>
+              <select  name='wpp_settings[prop_std_att_mapsto][<?php echo $slug;?>]'  class=' wpp_settings-prop_std_att_mapsto'>
+                <option value=''> - </option>
+             <?php
               foreach ($wp_properties[ 'prop_std_att' ] as $std_attr_type){
                 foreach ($std_attr_type as $std_key => $std_val){
-                  
                 ?>    
                   <option value="<?php echo $std_key; ?>" 
-                     <?php if( isset( $wp_properties[ 'prop_std_att_mapsto' ][ $slug ] ) ) 
+                    data-notice='<?php  if(isset($std_val['notice']) && !empty($std_val['notice'])) echo $std_val['notice'];?> '
+                    <?php
+                    // check if the attribute type is "address" from legacy system  @raj
+                    if ( $slug == $wp_properties[ 'configuration' ]['address_attribute'] ){
+                       selected(  $std_key,'address');
+                    }
+                     // if the user has updated to new standard attributes then this is the one we select
+                     if(isset( $wp_properties[ 'prop_std_att_mapsto' ][ $slug ]) )
                        selected( $wp_properties[ 'prop_std_att_mapsto' ][ $slug ], $std_key ); ?>	
-                  >
-                    <?php _e( $std_val, ud_get_wp_property()->domain ) ?>
+                   > 
+                    <?php _e( $std_val['label'], ud_get_wp_property()->domain ) ?>
                   </option>
                   <?php  
                 } //end attributes foreach
               } //end attributes-category foreach
-              echo '</select>';
+              ?>
+              </select>
+              <i class='std_att_notices'></i>
+              </div>
+            <?php
             }// end $wp_properties[ 'prop_std_att' ]
             // END : code for standard attributes
             ?>
