@@ -708,6 +708,13 @@ body.property_page_show_agents .wp-list-table .column-id {
 .std-attr-mapper{
     display: none;
 }
+.wpp_settings-prop_std_att_mapsto {
+    width: 100%;
+    max-width: 226px;
+}
+td.wpp_std_attr_view {
+    width: 10px;
+}
 input.wpp-std-attr-enabled-check{
   width : 16px;
 }
@@ -723,6 +730,7 @@ i.std_att_notices {
   border: 1px #d6cfcf solid;
   float: left;
   max-width: 205px;
+  margin-bottom: 10px;
   width: 100%;
 }
 #wpp_inquiry_attribute_fields tbody tr td {
