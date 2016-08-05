@@ -752,6 +752,25 @@ jQuery(document).ready(function() {
       jQuery(this).closest('li').find(".std-attr-mapper").fadeToggle();
   });
   
+  //hide already choosen standard attributes
+  toggleAttributesDropdown = function(){
+    jQuery(".wpp_settings-prop_std_att_mapsto").each(function () {
+        // Get the selected value
+        var selected = jQuery("option:selected", jQuery(this)).val();
+        // Get the ID of this element
+        var thisID = jQuery(this).attr("id");
+        // Reset so all values are showing:
+        jQuery(".wpp_settings-prop_std_att_mapsto option").each(function () {
+            jQuery(this).show();
+        });
+        jQuery(".wpp_settings-prop_std_att_mapsto").each(function () {
+            if (jQuery(this).attr("id") != thisID) {
+                jQuery("option[value='" + selected + "']", jQuery(this)).attr("disabled", true);
+            }
+        });
+    });
+  }
+  
   // apply notices on developer tab
   applyNotices = function(notice,notice_cont){
       
@@ -773,6 +792,7 @@ jQuery(document).ready(function() {
     var notice = jQuery(this).find('.wpp_settings-prop_std_att_mapsto').find(':selected').data('notice');
     var notice_cont = jQuery(this).find("i.std_att_notices");
     applyNotices(notice,notice_cont);
+    toggleAttributesDropdown();
   });
   
   // for developer-settings-attributes
@@ -787,5 +807,6 @@ jQuery(document).ready(function() {
     var notice = jQuery(this).find(':selected').data('notice');
     var notice_cont = jQuery(this).parent().find("i.std_att_notices");
     applyNotices(notice,notice_cont);
+    toggleAttributesDropdown();
   });
 });
