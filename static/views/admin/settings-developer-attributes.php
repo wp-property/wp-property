@@ -88,7 +88,9 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
             ?>
               
              <div  class='std-attr-mapper'>
-              <select  name='wpp_settings[prop_std_att_mapsto][<?php echo $slug;?>]'  class=' wpp_settings-prop_std_att_mapsto'>
+              <select  name='wpp_settings[prop_std_att_mapsto][<?php echo $slug;?>]'  
+                       id="wpp_prop_std_att_mapsto_<?php echo $slug;?>"
+                       class=' wpp_settings-prop_std_att_mapsto'>
                 <option value=''> - </option>
              <?php
               foreach ($wp_properties[ 'prop_std_att' ] as $std_attr_type){
