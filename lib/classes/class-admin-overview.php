@@ -115,7 +115,7 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * Prepare and return list of filter fields
-       *
+       * Addition on 25/07/2016 : ID field added to search @Raj
        * @return array
        */
       public function get_filter_fields() {
@@ -124,6 +124,12 @@ namespace UsabilityDynamics\WPP {
             'id' => 's',
             'name' => __( 'Global Search', $this->get('domain') ),
             'placeholder' => __( 'Search', $this->get('domain') ),
+            'type' => 'text',
+          ),
+          array(
+            'id' => 'ID',
+            'name' => __( 'Property ID', $this->get('domain') ),
+            'placeholder' => __( 'Property ID', $this->get('domain') ),
             'type' => 'text',
           ),
           array(
@@ -251,16 +257,45 @@ namespace UsabilityDynamics\WPP {
             }
           }
 
-          array_push( $fields, array_filter( array(
-            'id' => $attribute,
-            'name' => $attributes[$attribute],
-            'type' => $type,
-            'js_options' => array(
-              'allowClear' => true,
-            ),
-            'options' => $options,
-            'map' => $map,
-          ) ) );
+          if ( 'range_date' == $type ) {
+            array_push( $fields, array_filter( array(
+                'id' => $attribute,
+                'name' => $attributes[$attribute] . ' From',
+                'type' => 'date',
+                'js_options' => array(
+                    'allowClear' => true,
+                ),
+                'options' => $options,
+                'map' => array(
+                    'class' => 'meta',
+                    'compare' => 'BETWEEN'
+                ),
+            ) ) );
+            array_push( $fields, array_filter( array(
+                'id' => $attribute,
+                'name' => $attributes[$attribute] . ' To',
+                'type' => 'date',
+                'js_options' => array(
+                    'allowClear' => true,
+                ),
+                'options' => $options,
+                'map' => array(
+                    'class' => 'meta',
+                    'compare' => 'BETWEEN'
+                ),
+            ) ) );
+          } else {
+            array_push( $fields, array_filter( array(
+                'id' => $attribute,
+                'name' => $attributes[$attribute],
+                'type' => $type,
+                'js_options' => array(
+                    'allowClear' => true,
+                ),
+                'options' => $options,
+                'map' => $map,
+            ) ) );
+          }
         }
 
         $fields = apply_filters( 'wpp::overview::filter::fields', $fields );

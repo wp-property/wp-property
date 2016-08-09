@@ -92,6 +92,9 @@ namespace UsabilityDynamics\WPP {
           'url' => array(
             'input'
           ),
+          'date' => array(
+            'range_date'
+          ),
         ));
 
 
@@ -245,6 +248,9 @@ namespace UsabilityDynamics\WPP {
           $return[ 'label' ]        = $wp_properties[ 'taxonomies' ][ $attribute ]['label'];
           $return[ 'storage_type' ] = 'taxonomy';
           $categories = get_terms( $attribute, array('hide_empty' => 0, 'fields' => 'names') );
+          if( is_wp_error( $categories ) ) {
+            $categories = array();
+          }
           $return['predefined_values'] = implode(', ', $categories);
         }
 

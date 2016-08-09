@@ -1,3 +1,9 @@
+### 2.1.9 ( July 27, 2016 )
+* Added Date Input range Search Input.
+* Fixed Google Maps Api key issue.
+* Fixed pagination on trashed properties.
+* Added minutes to the Added and Updated fields on All properties page.
+
 ### 2.1.8 ( May 23, 2016 )
 * Added default Search Input and Data Entry types for Property Attributes on first WP-Property install.
 * Fixed default list of Property Types on first WP-Property install.

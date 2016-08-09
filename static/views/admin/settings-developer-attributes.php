@@ -62,6 +62,11 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
                 <span><?php _e( 'Attention! This attribute (slug) is used by Google Validator and Address Display functionality. It is set automaticaly and can not be edited on Property Adding/Updating page.', ud_get_wp_property()->domain ); ?></span>
               </div>
             <?php endif; ?>
+           <?php if($slug=="ID"): // for ID field: show a notice to the user about the field being non-editable @raj (22/07/2016) ?>
+              <div class="wpp_notice">
+                <span><?php _e( 'Note! This attribute (slug) is predefined and used by WP-Property. You can not remove it or change it.', ud_get_wp_property()->domain ); ?></span>
+              </div>
+            <?php endif; ?>
           </li>
           <?php do_action( 'wpp::property_attributes::attribute_name', $slug ); ?>
           <li>
@@ -108,9 +113,11 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
             </label>
           </li>
           <?php do_action( 'wpp::property_attributes::settings', $slug ); ?>
+          <?php if($slug!="ID"): // for ID field we do not show Delete option ?>
           <li class="wpp_development_advanced_option">
             <span class="wpp_delete_row wpp_link"><?php _e( 'Delete Attribute', ud_get_wp_property()->domain ) ?></span>
           </li>
+          <?php endif; ?>
         </ul>
       </td>
 
@@ -136,7 +143,8 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
       </td>
 
       <td class="wpp_admin_input_col">
-        <ul>
+        <?php if($slug!="ID"): // for ID field we do not show Data Entry Column?>
+         <ul>
           <li>
             <select name="wpp_settings[admin_attr_fields][<?php echo $slug; ?>]" class="wpp_pre_defined_value_setter wpp_searchable_attr_fields">
               <?php $meta_box_fields = ud_get_wp_property('attributes.types', array()); ?>
@@ -162,6 +170,7 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
             <a class="button apply-to-all" data-attribute="<?php echo $slug;?>" href="#" title="<?php _e("Apply to listings that have no value for this field.", ud_get_wp_property()->domain);?>" ><?php _e("Apply to all", ud_get_wp_property()->domain);?></a> <br/>
           </li>
         </ul>
+        <?php endif; ?>
       </td>
     </tr>
   <?php
