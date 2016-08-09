@@ -115,7 +115,7 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * Prepare and return list of filter fields
-       * Addition on 25/07/2016 : ID field added to search @Raj
+       *
        * @return array
        */
       public function get_filter_fields() {
@@ -124,12 +124,6 @@ namespace UsabilityDynamics\WPP {
             'id' => 's',
             'name' => __( 'Global Search', $this->get('domain') ),
             'placeholder' => __( 'Search', $this->get('domain') ),
-            'type' => 'text',
-          ),
-          array(
-            'id' => 'ID',
-            'name' => __( 'Property ID', $this->get('domain') ),
-            'placeholder' => __( 'Property ID', $this->get('domain') ),
             'type' => 'text',
           ),
           array(
