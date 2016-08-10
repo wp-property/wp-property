@@ -620,6 +620,10 @@ body #normal-sortables .inside table.property_meta {
   cursor: pointer;
   color: #8C8989;
 }
+.wpp_attribute_name .wpp_show_advanced{
+  clear: both;
+  display: block;
+}
 .wpp_development_advanced_option {
   display: none;
 }
@@ -708,7 +712,7 @@ body.property_page_show_agents .wp-list-table .column-id {
 .std-attr-mapper{
     display: none;
 }
-.wpp_settings-prop_std_att_mapsto {
+#wpp_inquiry_attribute_fields .wpp_settings-prop_std_att_mapsto {
     width: 100%;
     max-width: 226px;
 }
