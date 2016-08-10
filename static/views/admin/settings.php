@@ -212,8 +212,16 @@ if ( get_option( 'permalink_structure' ) == '' ) {
           <li><?php _e( 'Attribute to use for physical addresses:', ud_get_wp_property('domain') ); ?><?php echo WPP_F::draw_attribute_dropdown( "name=wpp_settings[configuration][address_attribute]&selected={$wp_properties[ 'configuration' ]['address_attribute']}" ); ?></li>
           <li><?php _e( 'Localize addresses in:', ud_get_wp_property('domain') ); ?> <?php echo WPP_F::draw_localization_dropdown( "name=wpp_settings[configuration][google_maps_localization]&selected={$wp_properties[ 'configuration' ]['google_maps_localization']}" ); ?></li>
           <li class="google-maps-api-section" data-feature-since="2.0.3">
-            <?php printf(__( 'Google Maps API (optional):', ud_get_wp_property('domain') ) ); ?> <?php echo WPP_F::input( "name=wpp_settings[configuration][google_maps_api]", ud_get_wp_property( 'configuration.google_maps_api' ) ); ?>
-            <br/><span class="description"><?php printf( __( 'Note, Google Maps has its own limit of usage. You can provide Google Maps API license ( key ) above to increase limit. See more details %shere%s.', ud_get_wp_property('domain') ), '<a href="https://developers.google.com/maps/documentation/javascript/usage#usage_limits" target="_blank">', '</a>' ); ?></span>
+            <?php printf(__( 'Google Maps API (Browser Key):', ud_get_wp_property('domain') ) ); ?>
+            <?php echo WPP_F::input( "name=wpp_settings[configuration][google_maps_api]", ud_get_wp_property( 'configuration.google_maps_api' ) ); ?>
+
+            <br/><span class="description"><?php printf( __( 'Note, Google Maps has its own limit of usage. You need to provide Google Maps API license ( browser key ) above to increase limit. See more details in %shelp tab%s.', ud_get_wp_property('domain') ), '<a href="#tab-link-google-map-api-key" class="open-help-tab">', '</a>' ); ?></span>
+          </li>
+          <li class="google-maps-api-section" data-feature-since="2.0.3">
+            <?php printf(__( 'Google Maps API (Server Key):', ud_get_wp_property('domain') ) ); ?>
+            <?php echo WPP_F::input( "name=wpp_settings[configuration][google_maps_api_server]", ud_get_wp_property( 'configuration.google_maps_api_server' ) ); ?>
+
+            <br/><span class="description"><?php printf( __( 'You need to  provide Google Maps API license ( server key ) above. See more details in %shelp tab%s.', ud_get_wp_property('domain') ), '<a href="#tab-link-google-map-api-key" class="open-help-tab">', '</a>' ); ?></span>
           </li>
         </ul>
       </td>

@@ -486,6 +486,26 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
           }
         });
     }
+
+    jQuery('.open-help-tab').on('click', function(e){
+      var tab = jQuery(jQuery(this).attr('href'));
+      var panel = jQuery( tab.find('a').attr('href') );
+
+      e.preventDefault();
+   
+      // Don't do anything if the click is for the tab already showing.
+      if ( !tab.is('.active') ){
+        // Links
+        jQuery('.contextual-help-tabs .active').removeClass('active');
+        tab.addClass('active');
+     
+        // Panels
+        jQuery('.help-tab-content').not( panel ).removeClass('active').hide();
+        panel.addClass('active').show();
+      }
+      screenMeta.open( jQuery('#contextual-help-wrap'), jQuery('#contextual-help-link') );
+    });
+
   },
 
   /**

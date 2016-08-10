@@ -89,6 +89,35 @@ if( !class_exists( 'class_admin_tools' ) ) {
       $data[ 'Developer' ][ ] = '<p>' . __( '<b>Search Input:</b> Select and input type and enter comma-separated values that you would like to be used in property search, on the front-end.', ud_get_wp_property()->domain ) . '</p>';
       $data[ 'Developer' ][ ] = '<p>' . __( '<b>Data Entry:</b> Enter comma-separated values that you would like to use on the back-end when editing properties.', ud_get_wp_property()->domain ) . '</p>';
 
+
+      // Google map api key
+      $data[ 'Google Map API key' ][ ] = '<h3>' . __( 'Google Map API key', ud_get_wp_property()->domain ) . '</h3>';
+      $data[ 'Google Map API key' ][ ] = '<p>' . __( 'Google Maps has its own limit of usage. Google map API key is needed for map in frontend (browser key) and to validate address in backend (server key).', ud_get_wp_property()->domain ) . '</p>';
+      // Browser key
+      $data[ 'Google Map API key' ][ ] = '<h4>' . __( 'Browser Key', ud_get_wp_property()->domain ) . '</h4>';
+      $data[ 'Google Map API key' ][ ] = '<ol>';
+      $data[ 'Google Map API key' ][ ] = '<li>' . __( 'Go to the <a target="_blank" href="https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&amp;keyType=CLIENT_SIDE&amp;reusekey=true" target="_blank">Google API Console</a>.', ud_get_wp_property()->domain ) . '</li>';
+      $data[ 'Google Map API key' ][ ] = '<li>' . __( 'Create or select a project.', ud_get_wp_property()->domain ) . '</li>';
+      $data[ 'Google Map API key' ][ ] = '<li>' . __( 'Click <b>Continue</b> to enable the API and any related services.', ud_get_wp_property()->domain ) . '</li>';
+      $data[ 'Google Map API key' ][ ] = '<li>' . __( 'On the<b> Credentials</b> page, get a <b>Browser key</b> (and set the API Credentials).<br>Note: If you have an existing <b>Browser key</b>, you may use that key.', ud_get_wp_property()->domain ) . '</li>';
+      $data[ 'Google Map API key' ][ ] = '<li>' . __( 'To prevent quota theft, <a target="_blank" href="https://support.google.com/cloud/answer/6310037">secure your API key following these best practices</a>.', ud_get_wp_property()->domain ) . '</li>';
+      $data[ 'Google Map API key' ][ ] = '<li>' . __( '(Optional) Enable billing. See <a target="_blank" href="https://developers.google.com/maps/documentation/javascript/usage">Usage Limits</a> for more information.', ud_get_wp_property()->domain ) . '</li>';
+      $data[ 'Google Map API key' ][ ] = '<li>' . __( 'For more info <a target="_blank" href="https://developers.google.com/maps/documentation/javascript/get-api-key">click here</a>', ud_get_wp_property()->domain ) . '</li>';
+      $data[ 'Google Map API key' ][ ] = '</ol>';
+
+      // Server key
+      $data[ 'Google Map API key' ][ ] = '<h4>' . __( 'Server Key', ud_get_wp_property()->domain ) . '</h4>';
+      $data[ 'Google Map API key' ][ ] = '<ol>';
+      $data[ 'Google Map API key' ][ ] = '<li>' . __( 'Go to the <a target="_blank" href="https://console.developers.google.com/flows/enableapi?apiid=geocoding_backend&amp;keyType=SERVER_SIDE&amp;reusekey=true">Google API Console</a>.', ud_get_wp_property()->domain ) . '</li>';
+      $data[ 'Google Map API key' ][ ] = '<li>' . __( 'Create or select a project.', ud_get_wp_property()->domain ) . '</li>';
+      $data[ 'Google Map API key' ][ ] = '<li>' . __( 'Click <b>Continue</b> to Enable the API.', ud_get_wp_property()->domain ) . '</li>';
+      $data[ 'Google Map API key' ][ ] = '<li>' . __( 'On the <b>Credentials</b> page, get a <b>Server key</b> (and set the API Credentials).<br>Note: If you have an existing <b>Server key</b>, you may use that key.', ud_get_wp_property()->domain ) . '</li>';
+      $data[ 'Google Map API key' ][ ] = '<li>' . __( 'To prevent quota theft, <a target="_blank" href="https://support.google.com/cloud/answer/6310037">secure your API key following these best practices</a>.', ud_get_wp_property()->domain ) . '</li>';
+      $data[ 'Google Map API key' ][ ] = '<li>' . __( '(Optional) Enable billing. See <a target="_blank" href="https://developers.google.com/maps/documentation/geocoding/usage-limits">Usage Limits</a> for more information.', ud_get_wp_property()->domain ) . '</li>';
+      $data[ 'Google Map API key' ][ ] = '<li>' . __( 'For more info <a target="_blank" href="https://developers.google.com/maps/documentation/geocoding/get-api-key">click here</a>', ud_get_wp_property()->domain ) . '</li>';
+      $data[ 'Google Map API key' ][ ] = '</ol>';
+
+
       return $data;
 
     }

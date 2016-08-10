@@ -55,7 +55,7 @@ class WPP_Core {
      * @since 2.0.5
      */
     add_filter( 'wpp:geocoding_request', function( $args ){
-      $key = ud_get_wp_property( 'configuration.google_maps_api' );
+      $key = ud_get_wp_property( 'configuration.google_maps_api_server' );
       if( !empty( $key ) ) {
         $args[ 'key' ] = $key;
       }
