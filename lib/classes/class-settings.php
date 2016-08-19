@@ -127,48 +127,6 @@ namespace UsabilityDynamics\WPP {
           }
           $this->set('property_types', $ar);
         }
-        
-        /* Standard Attributes 
-         * added 28/07/2016 @raj
-         * 
-         */
-
-        $PDF_unique = array(
-          'price' =>array('label' => __('Price', ud_get_wp_property()->domain),'notice'=>''),
-          'address' => array('label' => __('Address', ud_get_wp_property()->domain),
-              'notice'=> __('This attribute will be used for automatic geolocation.', ud_get_wp_property()->domain)),
-          'bedrooms' => array('label' => __('Bedrooms', ud_get_wp_property()->domain),'notice'=>''),
-          'bathrooms' =>array('label' => __('Bathrooms', ud_get_wp_property()->domain),'notice'=>''),
-          'living_space_size' =>array('label' => __('Living Space size Sq ft', ud_get_wp_property()->domain),'notice'=>''),
-          'features' => array('label' => __('Features', ud_get_wp_property()->domain),'notice'=>''),
-          'community_features' =>array('label' => __('Community Features', ud_get_wp_property()->domain),'notice'=>'')
-        );
-        $IMPORTER_unique = array(
-          'total_rooms' =>array('label' => __('Total Rooms', ud_get_wp_property()->domain),'notice'=>''),
-          'year_built' =>array('label' => __('Year Built', ud_get_wp_property()->domain),'notice'=>''),
-          'no_of_floors' =>array('label' => __('No. of Floors', ud_get_wp_property()->domain),'notice'=>''),
-          'lot_size_acres' => array('label' => __('Lot size, acres', ud_get_wp_property()->domain),'notice'=>''),
-          'neighborhood' => array('label' => __('Neighborhood (term)', ud_get_wp_property()->domain),'notice'=>''),
-          'fees' => array('label' => __('Fees', ud_get_wp_property()->domain),'notice'=>''),
-          'status' =>array('label' => __('Status', ud_get_wp_property()->domain),'notice'=>'')
-        );
-        $PSA = array('pdf'=>$PDF_unique,'importer'=>$IMPORTER_unique);
-        $this->set('prop_std_att', $PSA);
-//        print_r($PSA);die;
-
-        // get mapped standard attributes
-        //prop_std_att_mapped refers to true/fase
-        $d = $this->get('prop_std_att_mapped', false);
-        if (empty($d) || !is_array($d)) {
-          $d=array();
-          $d = $this->set('prop_std_att_mapped', $d);
-        }
-        //stores attribute array to which the field is mapped
-        $d = $this->get('prop_std_att_mapsto', false);
-        if (empty($d) || !is_array($d)) {
-          $d=array();
-          $d = $this->set('prop_std_att_mapsto', $d);
-        }
 
         //** Setup property types to be used. */
         $d = !$this->get('property_inheritance', false);

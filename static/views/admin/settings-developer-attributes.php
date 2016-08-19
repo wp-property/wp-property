@@ -24,7 +24,6 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
   <thead>
   <tr>
     <th class='wpp_draggable_handle'>&nbsp;</th>
-    <th class="wpp_std_attr_view">&nbsp;</th>
     <th class='wpp_attribute_name_col'><?php _e( 'Attribute Name', ud_get_wp_property()->domain ) ?></th>
     <th class='wpp_attribute_group_col'><?php _e( 'Group', ud_get_wp_property()->domain ) ?></th>
     <th class='wpp_settings_input_col'><?php _e( 'Settings', ud_get_wp_property()->domain ) ?></th>
@@ -34,9 +33,7 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
   </thead>
   <tbody>
   <?php 
-  if(!isset($wp_properties[ 'prop_std_att' ]) ||  empty($wp_properties[ 'prop_std_att' ])){
-    $wp_properties[ 'prop_std_att' ] =  array();
-  }
+  
   if(empty($wp_properties[ 'property_stats' ])){
 	  $wp_properties[ 'property_stats' ] = array("first" => "");
   }
@@ -52,7 +49,7 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
     <tr class="wpp_dynamic_table_row" <?php echo( !empty( $gslug ) ? "wpp_attribute_group=\"" . $gslug . "\"" : "" ); ?> style="<?php echo( !empty( $group[ 'color' ] ) ? "background-color:" . $group[ 'color' ] : "" ); echo( empty( $label ) ? "display:none;" : ""); ?>" slug="<?php echo $slug; ?>" new_row='false'>
 
       <td class="wpp_draggable_handle">&nbsp;</td>
-      <td class="wpp_std_attr_view"><i>&nbsp;</i></td>
+
       <td class="wpp_attribute_name_col">
         <ul class="wpp_attribute_name">
           <li>
@@ -65,62 +62,11 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
                 <span><?php _e( 'Attention! This attribute (slug) is used by Google Validator and Address Display functionality. It is set automaticaly and can not be edited on Property Adding/Updating page.', ud_get_wp_property()->domain ); ?></span>
               </div>
             <?php endif; ?>
-            <?php if($slug=="ID"): // for ID field: show a notice to the user about the field being non-editable @raj (22/07/2016) ?>
+           <?php if($slug=="ID"): // for ID field: show a notice to the user about the field being non-editable @raj (22/07/2016) ?>
               <div class="wpp_notice">
                 <span><?php _e( 'Note! This attribute (slug) is predefined and used by WP-Property. You can not remove it or change it.', ud_get_wp_property()->domain ); ?></span>
               </div>
             <?php endif; ?>
-
-            <?php
-            // BEGIN : code for standard attributes
-            
-            // merge std_attr  if need to use all attributes as a single array
-            $merged_std_attributes = array_unique(call_user_func_array('array_merge', $wp_properties[ 'prop_std_att' ]),SORT_REGULAR);
-            ?>
-            <p class="wpp-std-att-cont">
-              <label>
-                  <a class="wpp-toggle-std-attr">  <?php _e( 'Use standard attribute', ud_get_wp_property()->domain ); ?></a>
-              </label>
-            </p>
-            <?php
-            if(count($wp_properties[ 'prop_std_att' ]) || 
-                (isset( $wp_properties[ 'configuration' ]['address_attribute']) && !empty($wp_properties[ 'configuration' ]['address_attribute']))){
-            ?>
-              
-             <div  class='std-attr-mapper'>
-              <select  name='wpp_settings[prop_std_att_mapsto][<?php echo $slug;?>]'  
-                       id="wpp_prop_std_att_mapsto_<?php echo $slug;?>"
-                       class=' wpp_settings-prop_std_att_mapsto'>
-                <option value=''> - </option>
-             <?php
-              foreach ($wp_properties[ 'prop_std_att' ] as $std_attr_type){
-                foreach ($std_attr_type as $std_key => $std_val){
-                ?>    
-                  <option value="<?php echo $std_key; ?>" 
-                    data-notice='<?php  if(isset($std_val['notice']) && !empty($std_val['notice'])) echo $std_val['notice'];?> '
-                    <?php
-                    // check if the attribute type is "address" from legacy system  @raj
-                    if ( $slug == $wp_properties[ 'configuration' ]['address_attribute'] ){
-                       selected(  $std_key,'address');
-                    }
-                     // if the user has updated to new standard attributes then this is the one we select
-                     if(isset( $wp_properties[ 'prop_std_att_mapsto' ][ $slug ]) )
-                       selected( $wp_properties[ 'prop_std_att_mapsto' ][ $slug ], $std_key ); ?>	
-                   > 
-                    <?php _e( $std_val['label'], ud_get_wp_property()->domain ) ?>
-                  </option>
-                  <?php  
-                } //end attributes foreach
-              } //end attributes-category foreach
-              ?>
-              </select>
-              <i class='std_att_notices'></i>
-              </div>
-            <?php
-            }// end $wp_properties[ 'prop_std_att' ]
-            // END : code for standard attributes
-            ?>
-                  
           </li>
           <?php do_action( 'wpp::property_attributes::attribute_name', $slug ); ?>
           <li>

@@ -415,13 +415,6 @@ namespace UsabilityDynamics\WPP {
             // $description[] = __( 'The value is being used by Google Address Validator to determine and prepare address to valid format. However you can set coordinates manually.', ud_get_wp_property()->domain );
           }
 
-          $checklist_std_attr = ud_get_wp_property('prop_std_att_mapsto');
-          // if this slug has been matched to the 'standard attriubute' type 'address'
-          if(  !empty($checklist_std_attr) && in_array('address',$checklist_std_attr) 
-                  && array_search('address', $checklist_std_attr)==$slug) {
-            $input_type = 'wpp_address';
-          }
-
           $original_type = $input_type;
           //* Is current attribute inherited from parent? If so, set it as readonly!. */
           if(
@@ -534,7 +527,7 @@ namespace UsabilityDynamics\WPP {
       public function get_property_type_field( $post ) {
 
         $types = ud_get_wp_property( 'property_types', array() );
-        
+
         if( empty( $types ) ) {
           return false;
         }
