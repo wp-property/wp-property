@@ -1,17 +1,17 @@
 [
     {
         "name": "composer/installers",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
+        "version": "v1.1.0",
+        "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/composer/installers.git",
-            "reference": "21a8c06dd5fe0a22b776797cc552e51d17d7e7dd"
+            "reference": "a3595c5272a6f247228abb20076ed27321e4aae9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/installers/zipball/21a8c06dd5fe0a22b776797cc552e51d17d7e7dd",
-            "reference": "21a8c06dd5fe0a22b776797cc552e51d17d7e7dd",
+            "url": "https://api.github.com/repos/composer/installers/zipball/a3595c5272a6f247228abb20076ed27321e4aae9",
+            "reference": "a3595c5272a6f247228abb20076ed27321e4aae9",
             "shasum": ""
         },
         "require": {
@@ -25,7 +25,7 @@
             "composer/composer": "1.0.*@dev",
             "phpunit/phpunit": "4.1.*"
         },
-        "time": "2016-04-24 13:17:36",
+        "time": "2016-07-05 06:18:20",
         "type": "composer-plugin",
         "extra": {
             "class": "Composer\\Installers\\Plugin",
@@ -76,6 +76,7 @@
             "dokuwiki",
             "drupal",
             "elgg",
+            "expressionengine",
             "fuelphp",
             "grav",
             "installer",
@@ -275,17 +276,17 @@
     },
     {
         "name": "usabilitydynamics/lib-ud-api-client",
-        "version": "1.1.5",
-        "version_normalized": "1.1.5.0",
+        "version": "1.1.5.1",
+        "version_normalized": "1.1.5.1",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/lib-ud-api-client",
-            "reference": "1.1.5"
+            "reference": "1.1.5.1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-ud-api-client/archive/1.1.5.zip",
-            "reference": "1.1.5",
+            "url": "https://github.com/UsabilityDynamics/lib-ud-api-client/archive/1.1.5.1.zip",
+            "reference": "1.1.5.1",
             "shasum": null
         },
         "require": {
