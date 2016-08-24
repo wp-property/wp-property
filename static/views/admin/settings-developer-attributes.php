@@ -75,8 +75,9 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
             // BEGIN : code for standard attributes
             
             // merge std_attr  if need to use all attributes as a single array
-            $merged_std_attributes = array_unique(call_user_func_array('array_merge', $wp_properties[ 'prop_std_att' ]),SORT_REGULAR);
+//            $merged_std_attributes = array_unique(call_user_func_array('array_merge', $wp_properties[ 'prop_std_att' ]),SORT_REGULAR);
             ?>
+            
             <p class="wpp-std-att-cont">
               <label>
                   <a class="wpp-toggle-std-attr">  <?php _e( 'Use standard attribute', ud_get_wp_property()->domain ); ?></a>
@@ -115,6 +116,10 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
               ?>
               </select>
               <i class='std_att_notices'></i>
+              <div class="wpp-notice-for-match">
+                <a> <?php _e( 'Why do I see match with standard attributes ?', ud_get_wp_property()->domain ); ?> </a>
+                
+              </div>
               </div>
             <?php
             }// end $wp_properties[ 'prop_std_att' ]
@@ -241,3 +246,6 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
   </tfoot>
 
 </table>
+<div class="wpp-notice-dialog" title="WP Property" >
+    <p>You see this option because you are using our PDF or RETS service. This help us to find which attribute you want to show as Price, Address and place it in correct place in our templates.</p>
+</div>

@@ -129,30 +129,17 @@ namespace UsabilityDynamics\WPP {
         }
         
         /* Standard Attributes 
+         * pick them from json file in the plugin root
          * added 28/07/2016 @raj
          * 
          */
-
-        $PDF_unique = array(
-          'price' =>array('label' => __('Price', ud_get_wp_property()->domain),'notice'=>''),
-          'address' => array('label' => __('Address', ud_get_wp_property()->domain),
-              'notice'=> __('This attribute will be used for automatic geolocation.', ud_get_wp_property()->domain)),
-          'bedrooms' => array('label' => __('Bedrooms', ud_get_wp_property()->domain),'notice'=>''),
-          'bathrooms' =>array('label' => __('Bathrooms', ud_get_wp_property()->domain),'notice'=>''),
-          'living_space_size' =>array('label' => __('Living Space size Sq ft', ud_get_wp_property()->domain),'notice'=>''),
-          'features' => array('label' => __('Features', ud_get_wp_property()->domain),'notice'=>''),
-          'community_features' =>array('label' => __('Community Features', ud_get_wp_property()->domain),'notice'=>'')
-        );
-        $IMPORTER_unique = array(
-          'total_rooms' =>array('label' => __('Total Rooms', ud_get_wp_property()->domain),'notice'=>''),
-          'year_built' =>array('label' => __('Year Built', ud_get_wp_property()->domain),'notice'=>''),
-          'no_of_floors' =>array('label' => __('No. of Floors', ud_get_wp_property()->domain),'notice'=>''),
-          'lot_size_acres' => array('label' => __('Lot size, acres', ud_get_wp_property()->domain),'notice'=>''),
-          'neighborhood' => array('label' => __('Neighborhood (term)', ud_get_wp_property()->domain),'notice'=>''),
-          'fees' => array('label' => __('Fees', ud_get_wp_property()->domain),'notice'=>''),
-          'status' =>array('label' => __('Status', ud_get_wp_property()->domain),'notice'=>'')
-        );
-        $PSA = array('pdf'=>$PDF_unique,'importer'=>$IMPORTER_unique);
+        $PSA_file = WPP_Path."/static/config/standard_attributes.json";
+        if(file_exists($PSA_file) && !empty(trim(file_get_contents($PSA_file)))){
+          $PSA = json_decode(file_get_contents($PSA_file),true);
+        }
+        else{
+          $PSA =  array();
+        }
         $this->set('prop_std_att', $PSA);
 //        print_r($PSA);die;
 

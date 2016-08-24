@@ -990,70 +990,163 @@ td.wpp_std_attr_view {
 }
 td.wpp_std_attr_view i {
     padding: 0px;
-    width: 18px;
-    height: 18px;
-    margin-top: 10px;
+    width: 20px;
+    height: 20px;
+    margin-top: 16px;
+    margin-left: 4px;
     display: block;
+    background-position: 0 0 !important;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 td.wpp_std_attr_view i.price {
-    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-image: url("images/std_att_price.png") ;
     background-position: -222px -110px;
 }
 td.wpp_std_attr_view i.address {
-    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-image: url("images/std_att_address.png") ;
     background-position: 2px -110px;
 }
 td.wpp_std_attr_view i.bedrooms {
-    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-image: url("images/std_att_bedrooms.png") ;
     background-position: -221px -94px;
 }
 td.wpp_std_attr_view i.bathrooms {
-    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-image: url("images/std_att_bathrooms.png") ;
     background-position: -254px -80px;
 }
 td.wpp_std_attr_view i.living_space_size {
-    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-image: url("images/std_att_living.png") ;
     background-position: -271px -80px;
 }
 td.wpp_std_attr_view i.features {
-    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-image: url("images/std_att_features.png") ;
     background-position: -271px -95px;
 }
 td.wpp_std_attr_view i.community_features {
-    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-image: url("images/std_att_community.png") ;
     background-position: -271px -112px;
 }
 td.wpp_std_attr_view i.total_rooms {
-    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-image: url("images/std_att_total_rooms.png") ;
     background-position: -271px -127px;
 }
 td.wpp_std_attr_view i.year_built {
-    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-image: url("images/std_att_years.png") ;
     background-position: -222px -125px;
 }
 td.wpp_std_attr_view i.no_of_floors {
-    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-image: url("images/std_att_floors.png") ;
     background-position: -15px -141px;
 }
 td.wpp_std_attr_view i.lot_size_acres {
-    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-image: url("images/std_att_lot_size.png") ;
     background-position: -15px -158px;
 }
 td.wpp_std_attr_view i.neighborhood {
-    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-image: url("images/std_att_neighbourhood.png") ;
     background-position: -15px -173px;
 }
 td.wpp_std_attr_view i.fees {
-    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-image: url("images/std_att_price.png") ;
     background-position: -15px -188px;
 }
 td.wpp_std_attr_view i.status {
-    background-image: url("images/ui-icons_222222_256x240.png") ;
+    background-image: url("images/std_att_status.png") ;
     background-position: -157px -284px;
 }
 tr.wpp_dynamic_table_row {
   background-color: #F9F9F9;
 }
+.wpp-notice-for-match a {
+    color: #ccc;
+}
+.wpp-notice-for-match a:hover {
+    color: #ccc;
+    transition: .5s all ease;
+}
+.wpp-notice-for-match a:hover {
+    color: rgb(140, 137, 137);
+}
+.wpp-notice-for-match {
+    padding: 0px 0px 6px;
+    display: block;
+    float: left;
+    font-size: 11px;
+}
+.cmn-toggle {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden;
+}
+.cmn-toggle + label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+input.cmn-toggle-round + label {
+  padding: 2px;
+  width: 52px;
+  height: 20px;
+  background-color: #dddddd;
+  -webkit-border-radius: 60px;
+  -moz-border-radius: 60px;
+  -ms-border-radius: 60px;
+  -o-border-radius: 60px;
+  border-radius: 60px;
+}
+input.cmn-toggle-round + label:before, input.cmn-toggle-round + label:after {
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  bottom: 1px;
+  content: "";
+}
+input.cmn-toggle-round + label:before {
+  right: 1px;
+  background-color: #f1f1f1;
+  -webkit-border-radius: 60px;
+  -moz-border-radius: 60px;
+  -ms-border-radius: 60px;
+  -o-border-radius: 60px;
+  border-radius: 60px;
+  -webkit-transition: background 0.4s;
+  -moz-transition: background 0.4s;
+  -o-transition: background 0.4s;
+  transition: background 0.4s;
+}
+input.cmn-toggle-round + label:after {
+  width: 23px;
+  background-color: #fff;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  border-radius: 100%;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  -webkit-transition: margin 0.4s;
+  -moz-transition: margin 0.4s;
+  -o-transition: margin 0.4s;
+  transition: margin 0.4s;
+}
+input.cmn-toggle-round:checked + label:before {
+  background-color: #8ce196;
+}
+.wpp-tpggl-switch {
+    padding: 0px 10px 10px 1px;
+}
+input.cmn-toggle-round:checked + label:after {
+  margin-left: 30px;
+}
+
 .wpp_clear {
   clear: both;
   height: 1px;

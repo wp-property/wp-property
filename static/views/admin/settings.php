@@ -226,7 +226,24 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <tr>
       <th><?php _e( 'Advanced Options', ud_get_wp_property()->domain ); ?></th>
       <td>
-        <div class="wpp_settings_block"><br/>
+          <?php
+          $wppShowAdvOpt = isset($wp_properties['configuration']['show_advanced_options']) && !empty($wp_properties['configuration']['show_advanced_options']);
+          if ($wppShowAdvOpt) {
+            $wppShowAdvOpt_value = 'checked="checked"';
+            $wppShowAdvOpt_css = '';
+          } else{
+            $wppShowAdvOpt_value = '';
+            $wppShowAdvOpt_css = ' style="display:none;" ';
+          }
+            
+          ?>
+          <div class="wpp-tpggl-switch">
+              <input id="wp-show-adv-opt" name="wpp_settings[configuration][show_advanced_options]" 
+              <?php echo $wppShowAdvOpt_value.$wppShowAdvOpt_css; ?> 
+                     class="cmn-toggle cmn-toggle-round" type="checkbox">
+              <label for="wp-show-adv-opt"></label>
+          </div>
+        <div class="wpp_settings_block" <?php echo $wppShowAdvOpt_css; ?> ><br/>
           <ul>
             <?php if ( apply_filters( 'wpp::custom_styles', false ) === false ) : ?>
               <li>
