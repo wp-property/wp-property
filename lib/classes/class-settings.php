@@ -134,7 +134,7 @@ namespace UsabilityDynamics\WPP {
          * 
          */
         $PSA_file = WPP_Path."/static/config/standard_attributes.json";
-        if(file_exists($PSA_file) && !empty(trim(file_get_contents($PSA_file)))){
+        if(file_exists($PSA_file) && strlen(trim(file_get_contents($PSA_file)))){
           $PSA = json_decode(file_get_contents($PSA_file),true);
         }
         else{
