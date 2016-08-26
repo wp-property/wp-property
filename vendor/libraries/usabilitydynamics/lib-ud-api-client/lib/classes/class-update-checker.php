@@ -536,6 +536,29 @@ namespace UsabilityDynamics\UD_API {
             return false;
         }
 
+        /**
+         * dismiss the notice ajax callback
+         * @throws \Exception
+         */
+        public function dismiss_notices(){
+          $response = array(
+              'success' => '0',
+              'error' => __( 'There was an error in request.', $this->text_domain ),
+          );
+          $error = false;
+
+          if( empty($_POST['key']) ) {
+            $response['error'] = __( 'Invalid key', $this->text_domain );
+            $error = true;
+          }
+
+          if ( ! $error && update_option( ( $_POST['key'] ), time() ) ) {
+            $response['success'] = '1';
+          }
+
+          wp_send_json( $response );
+        }
+
       
     }
   
