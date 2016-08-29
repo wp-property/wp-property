@@ -799,7 +799,7 @@ jQuery(document).ready(function() {
         });
       
       jQuery.each(items, function() {
-        if (jQuery.trim(jQuery(this).val()) != ''){
+        if (jQuery.trim(jQuery(this).val()) == ''){
           jQuery("option[value='" + jQuery(this).val() + "']", val).attr("disabled", true);
         }
       });

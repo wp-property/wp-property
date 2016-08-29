@@ -78,7 +78,7 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
             ?>
             <p class="wpp-std-att-cont">
               <label>
-                  <a class="wpp-toggle-std-attr">  <?php _e( 'Use standard attribute', ud_get_wp_property()->domain ); ?></a>
+                  <a class="wpp-toggle-std-attr">  <?php _e( 'Match standard attribute', ud_get_wp_property()->domain ); ?></a>
               </label>
             </p>
             <?php

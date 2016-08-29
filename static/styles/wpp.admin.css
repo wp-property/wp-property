@@ -1071,6 +1071,12 @@ tr.wpp_dynamic_table_row {
 .wpp-notice-for-match {
     border-bottom: 1px #ccc dotted;
     cursor: pointer;
+    border-radius: 100%;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    margin-left: 5px;
+    text-align: center;
 }
 
 .wpp_clear {

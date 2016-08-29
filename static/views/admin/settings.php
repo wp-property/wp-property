@@ -261,8 +261,8 @@ if ( get_option( 'permalink_structure' ) == '' ) {
               <span class="description"><?php _e('Enabling this option may cause performance issues.',ud_get_wp_property()->domain); ?></span>
             </li>
             <li>
-              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][show_advanced_options]&label=" . __( 'Enable Standard Attributes Matching', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'show_advanced_options' ] ) ? $wp_properties[ 'configuration' ][ 'show_advanced_options' ] : true ) ); ?>
-              <span class="description wpp-notice-for-match"><?php _e('Why do I see Match with standard attributes (please change to match not use)',ud_get_wp_property()->domain); ?></span>
+              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][show_advanced_options]&label=" . __( 'Enable Standard Attributes Matching', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'show_advanced_options' ] ) ? $wp_properties[ 'configuration' ][ 'show_advanced_options' ] : false ) ); ?>
+              <i class="description wpp-notice-for-match" title="This option is designed to help us find which attribute you want to show as Price, Address, etc and place it in correct place in our templates."> ? </i>
             </li>
           </ul>
         </div>
@@ -585,9 +585,6 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
 
 </form>
-</div>
-<div class="wpp-notice-dialog" title="WP Property" >
-    <p>You see this option because you are using our PDF or RETS service. This help us to find which attribute you want to show as Price, Address and place it in correct place in our templates.</p>
 </div>
 <!--fb-->
 <div id="fb-root"></div>
