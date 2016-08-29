@@ -806,23 +806,12 @@ jQuery(document).ready(function() {
     });
   })();
   
-  //toggle advanced options in settings main-tab
-    jQuery("#wp-show-adv-opt").change(function () {
-        if (jQuery(this).is(':checked')) {
-            jQuery(this).parents("td").find(".wpp_settings_block").fadeIn("fast");
-        }
-        else {
-            jQuery(this).parents("td").find(".wpp_settings_block").hide();
-        }
-    });
-
     //notice popups to explain matched fields in Standard attributes
     jQuery('.wpp-notice-dialog').dialog({
         autoOpen:false
     });    
-    jQuery(".wpp-notice-for-match a").click(function(e){
+    jQuery(".wpp-notice-for-match").click(function(e){
          e.preventDefault();
-        console.log("asdasdsa");
         jQuery(".wpp-notice-dialog").dialog('open');
     })
 });

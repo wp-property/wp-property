@@ -226,24 +226,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <tr>
       <th><?php _e( 'Advanced Options', ud_get_wp_property()->domain ); ?></th>
       <td>
-          <?php
-          $wppShowAdvOpt = isset($wp_properties['configuration']['show_advanced_options']) && !empty($wp_properties['configuration']['show_advanced_options']);
-          if ($wppShowAdvOpt) {
-            $wppShowAdvOpt_value = 'checked="checked"';
-            $wppShowAdvOpt_css = '';
-          } else{
-            $wppShowAdvOpt_value = '';
-            $wppShowAdvOpt_css = ' style="display:none;" ';
-          }
-            
-          ?>
-          <div class="wpp-tpggl-switch">
-              <input id="wp-show-adv-opt" name="wpp_settings[configuration][show_advanced_options]" 
-              <?php echo $wppShowAdvOpt_value.$wppShowAdvOpt_css; ?> 
-                     class="cmn-toggle cmn-toggle-round" type="checkbox">
-              <label for="wp-show-adv-opt"></label>
-          </div>
-        <div class="wpp_settings_block" <?php echo $wppShowAdvOpt_css; ?> ><br/>
+        <div class="wpp_settings_block"><br/>
           <ul>
             <?php if ( apply_filters( 'wpp::custom_styles', false ) === false ) : ?>
               <li>
@@ -276,6 +259,10 @@ if ( get_option( 'permalink_structure' ) == '' ) {
             <li>
               <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_automatically_regenerate_thumbnails]&label=" . __( 'Disable "on-the-fly" image regeneration.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] ) ? $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] : true ) ); ?>
               <span class="description"><?php _e('Enabling this option may cause performance issues.',ud_get_wp_property()->domain); ?></span>
+            </li>
+            <li>
+              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][show_advanced_options]&label=" . __( 'Enable Standard Attributes Matching', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'show_advanced_options' ] ) ? $wp_properties[ 'configuration' ][ 'show_advanced_options' ] : true ) ); ?>
+              <span class="description wpp-notice-for-match"><?php _e('Why do I see Match with standard attributes (please change to match not use)',ud_get_wp_property()->domain); ?></span>
             </li>
           </ul>
         </div>
@@ -599,7 +586,9 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
 </form>
 </div>
-
+<div class="wpp-notice-dialog" title="WP Property" >
+    <p>You see this option because you are using our PDF or RETS service. This help us to find which attribute you want to show as Price, Address and place it in correct place in our templates.</p>
+</div>
 <!--fb-->
 <div id="fb-root"></div>
 <script type="text/javascript">(function ( d, s, id ) {
