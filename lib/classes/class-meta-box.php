@@ -400,12 +400,6 @@ namespace UsabilityDynamics\WPP {
           if( $input_type == 'number' ) {
             $input_type = 'text'; // HTML5 does not allow to use float, so we have to use default 'text' here
           }
-          
-        // for property_id , ID should be non-editable(readonly)
-          if( $input_type == 'readonly' ) {
-            $input_type = 'wpp_readonly'; // HTML5 does not allow to use float, so we have to use default 'text' here
-            $description[] =  __( 'Non-editable Field.', ud_get_wp_property('domain') );
-          }
 
           //** Determine if current attribute is used by Google Address Validator. */
           if( ud_get_wp_property( 'configuration.address_attribute' ) == $slug ) {
@@ -460,16 +454,6 @@ namespace UsabilityDynamics\WPP {
           }
 
           $default = isset($defaults[$slug])?$defaults[$slug]:"";
-         
-          // BUT for property_id default is post ID
-          // so make sure it is assigned if not present
-          // case arising when adding property_id meta to existing properties
-          // added 27.07/2016 @raj
-          
-          if ($slug=="ID"){
-            $default =  $post->ID;
-          }
-          
           //if(!empty($default) && $attribute['multiple']){
           //  $_defaults = explode(',', $default);
           //  $default = array();

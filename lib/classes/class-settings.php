@@ -146,7 +146,6 @@ namespace UsabilityDynamics\WPP {
               'location' => __('Address', ud_get_wp_property()->domain),
               'price' => __('Price', ud_get_wp_property()->domain),
               'deposit' => __('Deposit', ud_get_wp_property()->domain),
-              'ID' =>__('Property ID', ud_get_wp_property()->domain),
               'area' => __('Area', ud_get_wp_property()->domain),
               'phone_number' => __('Phone Number', ud_get_wp_property()->domain),
             );
@@ -154,20 +153,14 @@ namespace UsabilityDynamics\WPP {
               'location' => '',
               'price' => '',
               'deposit' => '',
-              'ID' => '',
               'area' => '',
               'phone_number' => '',
             );
           }
           $this->set('property_stats', $ar);
           $this->set('predefined_values', $ar2);
-          $d = array();// intialize empty array for setting default values
         }
-        
-        // ID is missing, push it back. It is a compulsory field
-        $this->set('property_stats', array_merge($d,array('ID' =>__('Property ID', ud_get_wp_property()->domain))));
-        $d = $this->get('property_stats', false);
-        
+
         //** Property meta.  Typically not searchable, displayed as textarea on editing page. */
         $d = $this->get('property_meta', false);
         if (empty($d) || !is_array($d)) {
@@ -241,15 +234,10 @@ namespace UsabilityDynamics\WPP {
             'location' => 'input',
             'price' => 'currency',
             'deposit' => 'currency',
-            'ID' => 'readonly',
             'area' => 'number',
             'phone_number' => 'input',
           ));
-          $d = array();// intialize empty array for setting default values
         }
-        
-        // make sure ID is always visible(re push into the fields)
-        $this->set('admin_attr_fields', array_merge($d,array('ID' => 'readonly')));
 
         //** Convert phrases to searchable values.  Converts string stats into numeric values for searching and filtering. */
         $d = $this->get('search_conversions', false);
