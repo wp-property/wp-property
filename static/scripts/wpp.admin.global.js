@@ -807,11 +807,8 @@ jQuery(document).ready(function() {
   })();
   
     //notice popups to explain matched fields in Standard attributes
-    jQuery('.wpp-notice-dialog').dialog({
-        autoOpen:false
-    });    
-    jQuery(".wpp-notice-for-match").click(function(e){
-         e.preventDefault();
-        jQuery(".wpp-notice-dialog").dialog('open');
-    })
+  jQuery(".wpp-notice-for-match").click(function(e){
+    e.preventDefault();
+    jQuery(".wpp-notice-dialog").dialog('open');
+  });
 });
