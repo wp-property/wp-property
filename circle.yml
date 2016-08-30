@@ -2,7 +2,7 @@ machine:
   node:
     version: 0.10.28
   php:
-    version: 5.4.5
+    version: 7.0.4
 
 database:
   override:
