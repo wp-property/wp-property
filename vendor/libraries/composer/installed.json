@@ -105,17 +105,17 @@
     },
     {
         "name": "usabilitydynamics/lib-utility",
-        "version": "0.3.6",
-        "version_normalized": "0.3.6.0",
+        "version": "0.3.7",
+        "version_normalized": "0.3.7.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/lib-utility",
-            "reference": "0.3.6"
+            "reference": "0.3.7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-utility/archive/0.3.6.zip",
-            "reference": "0.3.6",
+            "url": "https://github.com/UsabilityDynamics/lib-utility/archive/0.3.7.zip",
+            "reference": "0.3.7",
             "shasum": null
         },
         "require-dev": {
@@ -238,17 +238,17 @@
     },
     {
         "name": "usabilitydynamics/lib-wp-bootstrap",
-        "version": "1.2.0",
-        "version_normalized": "1.2.0.0",
+        "version": "1.2.1",
+        "version_normalized": "1.2.1.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/lib-wp-bootstrap",
-            "reference": "1.2.0"
+            "reference": "1.2.1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.2.0.zip",
-            "reference": "1.2.0",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.2.1.zip",
+            "reference": "1.2.1",
             "shasum": null
         },
         "require": {
