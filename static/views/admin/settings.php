@@ -51,6 +51,9 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 <div class="wrap <?php echo implode( ' ', $wrapper_classes ); ?>">
 <?php screen_icon(); ?>
 <h2 class='wpp_settings_page_header'><?php echo ud_get_wp_property( 'labels.name' ) . ' ' . __( 'Settings', ud_get_wp_property()->domain ) ?>
+  <a class="wpp-setup-asst" href="<?php echo admin_url( 'index.php?page=wpp-setup-page' );?>">
+    <?php echo __( 'Setup Assistant', ud_get_wp_property()->domain );?> 
+  </a>
   <div class="wpp_fb_like">
   <div class="fb-like" data-href="https://www.facebook.com/wpproperty" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
 </div>
@@ -262,7 +265,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
             </li>
             <li>
               <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][show_advanced_options]&label=" . __( 'Enable Standard Attributes Matching', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'show_advanced_options' ] ) ? $wp_properties[ 'configuration' ][ 'show_advanced_options' ] : false ) ); ?>
-              <i class="description wpp-notice-for-match" title="This option is designed to help us find which attribute you want to show as Price, Address, etc and place it in correct place in our templates."> ? </i>
+              <i class="description wpp-notice-for-match" title="<?php _e( 'This option is designed to help us find which attribute you want to show as Price, Address, etc and place it in correct place in our templates.', ud_get_wp_property()->domain ); ?>"> ? </i>
             </li>
           </ul>
         </div>

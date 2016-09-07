@@ -136,12 +136,15 @@ namespace UsabilityDynamics\WPP {
         $PSA_file = WPP_Path."/static/config/standard_attributes.json";
         if(file_exists($PSA_file) && strlen(trim(file_get_contents($PSA_file)))){
           $PSA = json_decode(file_get_contents($PSA_file),true);
+          // move json array to composer.json in root
+//          $plugins = $this->get_schema( 'extra.schemas.dependencies.plugins' );
+//          $xx= ud_get_wp_property()->get_schema( 'extra.schemas.standard_attributes.pdf.price.label' );
+//          $l10n = apply_filters( 'ud::schema::localization', $xx );
         }
         else{
           $PSA =  array();
         }
         $this->set('prop_std_att', $PSA);
-//        print_r($PSA);die;
 
         // get mapped standard attributes
         //prop_std_att_mapped refers to true/fase
