@@ -2347,6 +2347,9 @@ class WPP_F extends UsabilityDynamics\Utility {
     global $wp_properties;
 
     $data = self::parse_str( $_REQUEST[ 'data' ] );
+    
+    if(get_option('wpp_settings'))
+      $data["wpp_settings"] = array_replace_recursive(get_option('wpp_settings'),$data["wpp_settings"]);
 
     $return = array(
       'success'  => true,

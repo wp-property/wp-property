@@ -51,6 +51,13 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 <div class="wrap <?php echo implode( ' ', $wrapper_classes ); ?>">
 <?php screen_icon(); ?>
 <h2 class='wpp_settings_page_header'><?php echo ud_get_wp_property( 'labels.name' ) . ' ' . __( 'Settings', ud_get_wp_property()->domain ) ?>
+    <?php 
+    if(isset($wp_properties["configuration"]) && isset($wp_properties["configuration"]["show_assistant"]) ) {?>
+      <a class="wpp-setup-asst" href="<?php echo admin_url( 'index.php?page=wpp-setup-page' );?>">
+        <?php echo __( 'Setup Assistant', ud_get_wp_property()->domain );?> 
+      </a>
+    <?php } ?>
+  
   <div class="wpp_fb_like">
   <div class="fb-like" data-href="https://www.facebook.com/wpproperty" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
 </div>
@@ -211,16 +218,8 @@ if ( get_option( 'permalink_structure' ) == '' ) {
         <ul>
           <li><?php _e( 'Localize addresses in:', ud_get_wp_property('domain') ); ?> <?php echo WPP_F::draw_localization_dropdown( "name=wpp_settings[configuration][google_maps_localization]&selected={$wp_properties[ 'configuration' ]['google_maps_localization']}" ); ?></li>
           <li class="google-maps-api-section" data-feature-since="2.0.3">
-            <?php printf(__( 'Google Maps API (Browser Key):', ud_get_wp_property('domain') ) ); ?>
-            <?php echo WPP_F::input( "name=wpp_settings[configuration][google_maps_api]", ud_get_wp_property( 'configuration.google_maps_api' ) ); ?>
-
-            <br/><span class="description"><?php printf( __( 'Note, Google Maps has its own limit of usage. You need to provide Google Maps API license ( browser key ) above to increase limit. See more details in %shelp tab%s.', ud_get_wp_property('domain') ), '<a href="#tab-link-google-map-api-key" class="open-help-tab">', '</a>' ); ?></span>
-          </li>
-          <li class="google-maps-api-section" data-feature-since="2.0.3">
-            <?php printf(__( 'Google Maps API (Server Key):', ud_get_wp_property('domain') ) ); ?>
-            <?php echo WPP_F::input( "name=wpp_settings[configuration][google_maps_api_server]", ud_get_wp_property( 'configuration.google_maps_api_server' ) ); ?>
-
-            <br/><span class="description"><?php printf( __( 'You need to  provide Google Maps API license ( server key ) above. See more details in %shelp tab%s.', ud_get_wp_property('domain') ), '<a href="#tab-link-google-map-api-key" class="open-help-tab">', '</a>' ); ?></span>
+            <?php printf(__( 'Google Maps API (optional):', ud_get_wp_property('domain') ) ); ?> <?php echo WPP_F::input( "name=wpp_settings[configuration][google_maps_api]", ud_get_wp_property( 'configuration.google_maps_api' ) ); ?>
+            <br/><span class="description"><?php printf( __( 'Note, Google Maps has its own limit of usage. You can provide Google Maps API license ( key ) above to increase limit. See more details %shere%s.', ud_get_wp_property('domain') ), '<a href="https://developers.google.com/maps/documentation/javascript/usage#usage_limits" target="_blank">', '</a>' ); ?></span>
           </li>
         </ul>
       </td>
@@ -267,6 +266,10 @@ if ( get_option( 'permalink_structure' ) == '' ) {
             <li>
               <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_automatically_regenerate_thumbnails]&label=" . __( 'Disable "on-the-fly" image regeneration.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] ) ? $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] : true ) ); ?>
               <span class="description"><?php _e('Enabling this option may cause performance issues.',ud_get_wp_property()->domain); ?></span>
+            </li>
+            <li>
+              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][show_advanced_options]&label=" . __( 'Enable Standard Attributes Matching', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'show_advanced_options' ] ) ? $wp_properties[ 'configuration' ][ 'show_advanced_options' ] : false ) ); ?>
+              <i class="description wpp-notice-for-match" title="<?php _e( 'This option is designed to help us find which attribute you want to show as Price, Address, etc and place it in correct place in our templates.', ud_get_wp_property()->domain ); ?>"> ? </i>
             </li>
           </ul>
         </div>
@@ -590,7 +593,6 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
 </form>
 </div>
-
 <!--fb-->
 <div id="fb-root"></div>
 <script type="text/javascript">(function ( d, s, id ) {

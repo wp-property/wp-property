@@ -91,6 +91,9 @@ namespace UsabilityDynamics\WP {
         if ( !has_action( 'admin_menu', array( Dashboard::get_instance(), 'add_ud_splash_page') ) ) {
           add_action( 'admin_menu', array( Dashboard::get_instance(), 'add_ud_splash_page') );
         }
+        if ( !has_action( 'admin_menu', array( Dashboard::get_instance(), 'add_wpp_setup_page') ) ) {
+          add_action( 'admin_menu', array( Dashboard::get_instance(), 'add_wpp_setup_page') );
+        }
       }
       
       /**

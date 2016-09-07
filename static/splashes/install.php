@@ -1,98 +1,310 @@
 <?php
-/**
- * Welcome (Upgrade) WP-Property page
- */
-
-//** flush Rewrite Rules */
+// /**
+// * Welcome (Upgrade) WP-Property page
+// */flush Rewrite Rules */
 flush_rewrite_rules();
 //** flush Object Cache */
 wp_cache_flush();
+?>
+<link href="<?php echo WPP_URL; ?>splashes/assets/css/owl.carousel.css" rel="stylesheet">
+<link href="<?php echo WPP_URL; ?>splashes/assets/css/owl.theme.css" rel="stylesheet">
+<link href="<?php echo WPP_URL; ?>splashes/assets/css/custom.css" rel="stylesheet">
 
-?><style>
-  .ud-badge {
-    background: url( "<?php echo ud_get_wp_property()->path( '/static/images/icon.png', 'url' ); ?>" ) no-repeat center !important;
-    background-size: 150px 150px !important;
-    box-shadow: none !important;
+<script src="<?php echo WPP_URL; ?>splashes/assets/js/owl.carousel.min.js"></script>
+
+<style>
+  .ud-badge.wp-badge {
+    background-image: url("<?php echo ud_get_wp_property()->path('/static/images/icon.png', 'url'); ?>") ;
   }
-  .changelog .col-1 {
-    padding-right: 2%;
+  #wpp-splash-screen .owl-buttons div.owl-prev::before {
+    background: rgba(0, 0, 0, 0) url("<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/back.png', 'url'); ?>") no-repeat scroll 0 0 / 100% auto;
   }
-  .changelog .col-1,
-  .changelog .col-2 {
-    float: left;
-    width: 48%;
+  #wpp-splash-screen .owl-buttons div.owl-next::before {
+    background: rgba(0, 0, 0, 0) url("<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/next.png', 'url'); ?>") no-repeat scroll 0 0 / 100% auto;
   }
-  .changelog ul {
-    list-style-position: outside;
-    list-style-type: disc;
-    margin-left: 20px;
+  .wpp_asst_select {
+    background: #fff url("<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/icon1.png', 'url'); ?>") no-repeat scroll 100% 50%;
   }
 </style>
-<div class="changelog">
+<?php
+global $wp_properties;
 
-  <div class="overview">
+//enable assistant for new installations
+$wp_properties['configuration']["show_assistant"] = true;
+update_option("wpp_settings",$wp_properties);
 
-    <h2><?php printf( __( 'WP-Property %s has been installed', ud_get_wp_property()->domain ), ud_get_wp_property( 'version' ) ); ?></h2>
+$property_assistant = json_encode($wp_properties);
+echo "<script> var wpp_property_assistant = $property_assistant; </script>";
+?>
+<div id="wpp-splash-screen">
+  <form id="wpp-setup-assistant">
+    <?php wp_nonce_field('wpp_setting_save'); ?>
 
-    <p><?php _e( 'Congratulations! You have just installed brand new version of WP-Property plugin. There are some important things that you need to be aware of in order to use our products successfully and with pleasure.', ud_get_wp_property()->domain ) ?></p>
+    <div id="wpp-splash-screen-owl" class="owl-carousel">
 
-    <p><?php _e( 'Please read the following instructions carefully. Explore links below to get more information on our site.', ud_get_wp_property()->domain ); ?></p>
+      <div class="item">
+        <div class="wpp_asst_screen wpp_asst_screen_1">
+          <h2 class="wpp_asst_heading_main">CONGRATULATIONS,YOU HAVE SET UP</h2>
+          <h1>WP-PROPERTY PLUGIN!</h1>
+          <p class="tagline">Make few steps in order to set up it on your site!</p>
+          <center><button type="button" class="btn_letsgo">LET'S GO!</button></center>
+        </div>
+      </div>
 
-    <hr />
+      <div class="item">
+        <div class="wpp_asst_screen wpp_asst_screen_2">
+          <h2 class="wpp_asst_heading"><b>Which Property Types do you want to have on your site?</b></h2>
 
-    <p><i><?php _e( 'WP-Property is the leading WordPress plugin for creating and managing highly customizable real estate, property management, and completely custom listing showcase websites. Packed full of features, it gives you possibilities that no other real estate system for WordPress does.', ud_get_wp_property()->domain ); ?></i></p>
+          <div class="wpp_asst_inner_wrap">
+            <ul class="">               
+              <li class="wpp_asst_label"> House<label for="accessible"><input class="wpp_box asst_prop_types" type="checkbox" value="House" name="house" id="accessible"> <span></span> </label></li>				
+              <li class="wpp_asst_label"> Condo<label for="test5"> <input class="wpp_box asst_prop_types" type="checkbox" value="Condo" name="condo" id="test5"> <span></span> </label></li>
+              <li class="wpp_asst_label"> Townhouse<label for="test2"> <input class="wpp_box asst_prop_types" type="checkbox" value="Townhouse" name="townhouse" id="test2"> <span></span> </label></li>
+              <li class="wpp_asst_label"> Multi-Family<label for="test3"> <input class="wpp_box  asst_prop_types" type="checkbox" value="Multi-Family" data-label="" name="multifamily" id="test3"> <span></span> </label></li>
+              <li class="wpp_asst_label"> Land<label for="test4"> <input class="wpp_box asst_prop_types" type="checkbox" value="land" name="Land" id="test4"> <span></span> </label></li>
+              <li class="wpp_asst_label"> Commercial<label for="test6"> <input class="wpp_box asst_prop_types" type="checkbox" value="Commercial" name="commercial" id="test6"> <span></span> </label></li> 
+            </ul>      
+          </div> <!-- wpp_asst_inner_wrap --> 
 
-    <p><i><?php printf( __( 'In addition to the default functions WP-Property can be extended with a <a href="%s">set of add-ons</a>. They may help you manage your business more effectively.', ud_get_wp_property()->domain ), 'https://www.usabilitydynamics.com/products' ); ?></i></p>
+          <div class="foot-note">
+            <h3> We Will add Appropriate attributes for types you have selected</h5>
+          </div>
 
-    <?php $s = ud_get_wp_property(); if( isset( $s->uservoice_url ) ) : ?>
-      <hr />
-      <p><?php printf( __( 'Do you want to help us to improve %s? Or do you have any idea? We are waiting <a href="%s" target="_blank">feedback</a> from you!', ud_get_wp_property()->domain ), ud_get_wp_property()->name, $s->uservoice_url  ); ?></p>
-    <?php endif; ?>
+        </div><!-- wpp_asst_screen wpp_asst_screen_2 --> 
+      </div><!-- item --> 
 
-    <hr />
+      <div class="item">
+        <div class="wpp_asst_screen wpp_asst_screen_3">
+          <h2 class="wpp_asst_heading"><b>Add 10 test properties to the site?</b></h2>
+          <div class="wpp_asst_inner_wrap">
+            <ul>
+              <li class="wpp_asst_label"> Yes Please<label for="yes-please"> 
+                  <input class="wpp_box" type="checkbox" value="yes-please" name="quality" id="yes-please"> <span></span> </label>
+              </li> 
+              <li class="wpp_asst_label narrow"> No, thanks i have already</br> added properties<label for="no-thanks"> 
+                  <input class="wpp_box" type="checkbox" value="no-thanks" name="quality" id="no-thanks"> <span></span> </label>
+              </li> 
+            </ul>
+          </div>
 
-    <h3><?php printf( __( 'WP-Property %s important changes', ud_get_wp_property()->domain ), ud_get_wp_property( 'version' ) ); ?>:</h3>
+          <h2 class="wpp_asst_heading"><b>Add Widgets to the single property pages?</b> </h2>
+          <div class="wpp_asst_inner_wrap">
+            <ul>
+              <li class="wpp_asst_label">Property Gallery <label for="property-gallery"> 
+                  <input class="wpp_box" type="checkbox" value="property-gallery" name="quality" id="property-gallery"> <span></span> </label>
+              </li> 
+              <li class="wpp_asst_label"> Child Properties<label for="child-properties"> 
+                  <input class="wpp_box" type="checkbox" value="child-properties" name="quality" id="child-properties"> <span></span> </label>
+              </li> 
+            </ul>
+          </div>
+        </div><!-- wpp_asst_screen wpp_asst_screen_3 --> 
+      </div><!-- item --> 
 
-    <ul>
-      <li>Added default Search Input and Data Entry types for Property Attributes on first WP-Property install.</li>
-      <li>Fixed default list of Property Types on first WP-Property install.</li>
-      <li>Fixed issue with duplicated Currency symbol on Single Property page.</li>
-    </ul>
+      <div class="item item-wider">
+        <div class="wpp_asst_screen wpp_asst_screen_4">
+          <h2 class="wpp_asst_heading"><b>Choose default properties pages</b></h2>  
+          <div class="wpp_asst_inner_wrap">
+            <div class="wpp_asst_select">
+              <select id="soflow" name="wpp_settings[configuration][base_slug]">
+                <option value="property" class="list_property">Properties (Default)</option>
+                <?php
+                $args = array('post_type' => 'page', 'post_status' => 'publish');
+                $pages = get_pages($args);
+                foreach ($pages as $page) {
+                  ?>
+                  <option value="<?php echo $page->post_name; ?>" class="list_property"><?php echo $page->post_title; ?></option>
+                <?php } ?>
+              </select>
+            </div>	
 
-  </div>
+            <h2 class="wpp_asst_heading"><b>List Propery pages</b></h2>
+            <div class="wpp_asst_inner_wrap">
 
-  <hr />
+              <ul class="three-sectionals">
+                <li class="wpp_asst_label"> Property Search<label for="property-search"> 
+                    <input class="wpp_box" type="checkbox" value="property-search" name="quality" id="property-search"> <span></span> </label>
+                </li> 
+                <li class="wpp_asst_label">Featured Property<label for="featured-properties"> 
+                    <input class="wpp_box" type="checkbox" value="featured-properties" name="quality" id="featured-properties"> <span></span> </label>
+                </li> 
+                <li class="wpp_asst_label"> Latest Property<label for="latest-properties"> 
+                    <input class="wpp_box" type="checkbox" value="latest-properties" name="quality" id="latest-properties"> <span></span> </label>
+                </li> 
+              </ul>
+            </div>
 
-  <div class="feature-section col two-col">
+            <h2 class="wpp_asst_heading"><b>Add overview of properties to your Properties page?</b></h2>
 
-    <div class="col-1">
+            <div class="wpp_asst_inner_wrap">
+              <ul class="three-sectionals">
+                <li class="wpp_asst_label"> Sure<label for="Sure"> 
+                    <input class="wpp_box" type="checkbox" value="Sure" name="wpp_settings[configuration][automatically_insert_overview]" 
+                           id="Sure"> <span></span> </label>
+                </li> 
+              </ul>
+            </div>
+          </div>
+        </div><!-- wpp_asst_screen wpp_asst_screen_4 --> 
+      </div><!-- item --> 
 
-      <h3><?php _e( 'User license management', ud_get_wp_property()->domain ); ?></h3>
+      <div class="item">
+        <div class="wpp_asst_screen wpp_asst_screen_5">
+          <h2 class="wpp_asst_heading text-center"><b>Let's view what we have</b></h2>
+          <ul class="list-img">
+            <li>
+              <span><img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/wpp-single-prop.jpg', 'url'); ?>" alt="image"></span>
+            <center><button class="btn_single_page">SINGLE PROPERTY PAGES</button></center>
+            </li>
+            <li>
+              <img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/overview-prop.jpg', 'url'); ?>" alt="image">
+            <center><button class="btn_single_page">OVERVIEW OF PROPERTIES</button></center>
+            </li>
+          </ul>
 
-      <h4><?php _e( 'Installation', ud_get_wp_property()->domain ); ?></h4>
 
-      <p><?php _e( 'In new version of WP-Property all your premium features are separate plugins. If you are upgrading from old WP-Property ( < 2.0.0 ) you will need to install and activate them one more time.', ud_get_wp_property()->domain ); ?></p>
+        </div>
+      </div>
+    </div>
+    <div class="wpp-asst_hidden-attr">
+      <input  type="hidden" name="wpp_settings[configuration][show_assistant]" value="true">
 
-      <p><?php printf( __( 'After you purchased the product, visit your <a href="%s">UD Account</a>. You will find license keys and download links for all your purchased add-ons. Download plugins to your computer and Upload as new plugin on your site.', ud_get_wp_property()->domain ), 'https://www.usabilitydynamics.com/account' ); ?></p>
+      <input  type="hidden" name="wpp_settings[admin_attr_fields][location]" value="input">
+      <input  type="hidden" name="wpp_settings[searchable_attr_fields][location]" value="input">
+      <input  type="hidden"  name="wpp_settings[configuration][address_attribute]" value="input">
+
+      <input  type="hidden" name="wpp_settings[admin_attr_fields][price]" value="currency">
+      <input  type="hidden" name="wpp_settings[searchable_attr_fields][price]" value="range_dropdown">
+
 
     </div>
 
-    <div class="col-2 last-feature">
 
-      <h4><?php _e( 'Adding License Keys', ud_get_wp_property()->domain ); ?></h4>
-
-      <p><?php _e( 'Click to activate plugin, you will see link to the Add-ons admin screen. On the Add-ons admin screen, you should see all your installed activated products, with an option to add your license key.', ud_get_wp_property()->domain ) ?></p>
-
-      <p><?php _e( 'To add a license key:', ud_get_wp_property()->domain ); ?></p>
-
-      <ul>
-        <li><?php _e( 'copy the license key from your UD Account page or receipt email;', ud_get_wp_property()->domain ); ?></li>
-        <li><?php _e( 'paste the license key into input field for your product;', ud_get_wp_property()->domain ); ?></li>
-        <li><?php _e( 'save changes;', ud_get_wp_property()->domain ); ?></li>
-      </ul>
-
-    </div>
-
-  </div>
-
+  </form >
 </div>
+
+<script>
+
+  jQuery(document).ready(function () {
+    $ = jQuery.noConflict();
+
+    jQuery('#wpp-setup-assistant').submit(postBackForm);
+
+    function postBackForm() {
+      var btn = jQuery("input[type='submit']");
+      jQuery("#wpp_inquiry_property_types tbody tr").each(function () {
+        if (jQuery(".slug_setter", this).val() == "") {
+          jQuery(this).addClass('no-slug');
+        } else {
+          jQuery(this).addClass('yes-slug');
+          btn.prop('disabled', false);
+        }
+      });
+      btn.prop('disabled', true);
+      var data = jQuery(this).serialize();
+      console.log(data);
+
+      jQuery.ajax({
+        type: 'POST',
+        url: "<?php echo admin_url('admin-ajax.php'); ?>",
+        data: {
+          action: 'wpp_save_settings',
+          data: data
+        },
+        success: function (response) {
+          var data = jQuery.parseJSON(response);
+        },
+        error: function () {
+          alert(wpp.strings.undefined_error);
+          btn.prop('disabled', false);
+        }
+      });
+      return false;
+    }
+
+    // handle screen 2: property types and attributes
+    function handle_prop_types() {
+      if ($('.wpp_settings_property_stats'))
+        $('.wpp_settings_property_stats').remove();
+
+      var propAttrSet = {};
+      $('input:checkbox.asst_prop_types').each(function () {
+        var sThisVal = (this.checked ? $(this).attr('name') : "");
+
+        if (sThisVal != "") {
+
+          switch (sThisVal) {
+            case 'land':
+              $.extend(propAttrSet, wpp_property_assistant.property_assistant.land);
+              break;
+            case 'commercial'  :
+              $.extend(propAttrSet, wpp_property_assistant.property_assistant.commercial);
+              break;
+            default :
+              $.extend(propAttrSet, wpp_property_assistant.property_assistant.residential);
+              break;
+          }
+
+          // add property type
+          $('.wpp-asst_hidden-attr')
+                  .append('<input type="hidden" class="wpp_settings_property_stats" name="wpp_settings[property_types][' + $(this).attr('name') + ']"  value="'
+                          + $(this).val() + '" />');
+
+          // make property Searchable
+          $('.wpp-asst_hidden-attr')
+                  .append('<input type="hidden" class="wpp_settings_property_stats" name="wpp_settings[searchable_property_types][]" value="' +
+                          $(this).attr('name') + '" />');
+          // make property Searchable
+          $('.wpp-asst_hidden-attr')
+                  .append('<input type="hidden" class="wpp_settings_property_stats" name="wpp_settings[location_matters][]"  value="' +
+                          $(this).attr('name') + '" />');
+        }
+      });
+
+      // add property attributes
+      $.each(propAttrSet, function (index, value) {
+        $('.wpp-asst_hidden-attr').append('<input type="hidden" class="wpp_settings_property_stats" name="wpp_settings[property_stats][' + index + ']"  value="' + value + '" />');
+      });
+    }
+
+    //handle each screen individually
+    function propAssistScreens() {
+      var isScreen = $(".owl-page.active").index() + 1;
+      console.log(isScreen);
+      switch (isScreen) {
+        case 2:
+          handle_prop_types();
+          break;
+        default:
+          console.log("reached default screen");
+          break;
+      }
+    }
+    var wpp_owl = $("#wpp-splash-screen-owl");
+    wpp_owl.owlCarousel({
+      navigation: true,
+      slideSpeed: 400,
+      paginationSpeed: 400,
+      autoPlay: false,
+      pagination: true,
+      rewindNav: true,
+      touchDrag: false,
+      mouseDrag: false,
+      navigationText: [
+        "<i class='icon-chevron-left icon-white'></i>",
+        "<i class='icon-chevron-right icon-white'></i>"
+      ],
+      beforeMove: propAssistScreens,
+      afterMove: function () {
+        jQuery('#wpp-setup-assistant').submit();
+      },
+      singleItem: true
+    });
+    var wpp_owl = $("#wpp-splash-screen-owl").data('owlCarousel');
+    $(".btn_letsgo").click(function () {
+      wpp_owl.next();
+
+    });
+  });
+
+</script>

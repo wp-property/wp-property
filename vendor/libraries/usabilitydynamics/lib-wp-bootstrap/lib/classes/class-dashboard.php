@@ -77,11 +77,42 @@ namespace UsabilityDynamics\WP {
         if ( empty( $_GET['page'] ) ) {
           return;
         }
-        if ( $_GET['page'] == $this->page_slug ) {
-          add_dashboard_page( __( 'Welcome to Usability Dynamics, Inc.', $this->domain ), __( 'Welcome', $this->domain ), 'manage_options', $this->page_slug, array( $this, 'ud_splash_page' ) );
+        if ($_GET['page'] == $this->page_slug) {
+          add_dashboard_page(__('Welcome to Wp Property', $this->domain), __('Welcome', $this->domain), 'manage_options', $this->page_slug, array($this, 'ud_splash_page'));
+        }
+      }
+      /**
+       * Register fake page
+       * 
+       * @return null
+       */
+      public function add_wpp_setup_page() {
+        if ( empty( $_GET['page'] ) ) {
+          return;
+        }
+        if ($_GET['page'] == "wpp-setup-page") {
+          add_dashboard_page(__('Welcome to Wp Property', $this->domain), __('Welcome', $this->domain), 'manage_options', "wpp-setup-page", array($this, "wpp_setup_page"));
         }
       }
       
+      /**
+       * Render UD dashboard page
+       * 
+       * @author korotkov@ud
+       */
+      public function wpp_setup_page() {
+        //** Try to get information to show */
+        ?>
+        <div class="wrap about-wrap">
+          <div class="wp-badge ud-badge"></div>  
+          <?php
+          include get_home_path() . "wp-content/plugins/wp-property/static/splashes/install.php";
+          exit;
+          ?>
+        </div>
+        <?php
+      }
+
       /**
        * Render UD dashboard page
        * 
@@ -92,8 +123,6 @@ namespace UsabilityDynamics\WP {
         $updates = get_transient( $this->transient_key );
         ?>
         <div class="wrap about-wrap">
-          <h1><?php _e( 'Usability Dynamics, Inc.', $this->domain ) ?></h1>
-          <div class="about-text"><?php _e( 'Thank you for using our products.', $this->domain ) ?></div>
           <div class="wp-badge ud-badge"></div>
           <?php
             //** If user visited this page directly */

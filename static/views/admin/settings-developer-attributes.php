@@ -7,8 +7,7 @@
 global $wp_properties;
 $attributes_default = ud_get_wp_property()->get('attributes.default');
 $attributes_multiple = ud_get_wp_property()->get('attributes.multiple');
-$predefined_values = $wp_properties[ 'predefined_values' ] ;
-
+$predefined_values = isset( $wp_properties[ 'predefined_values' ] ) ? $wp_properties[ 'predefined_values' ]: ''; 
 ?>
 <div>
   <h3 style="float:left;"><?php printf( __( '%1s Attributes', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></h3>

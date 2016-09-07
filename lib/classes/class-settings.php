@@ -129,32 +129,22 @@ namespace UsabilityDynamics\WPP {
         }
         
         /* Standard Attributes 
+         * pick them from json file in the plugin root
          * added 28/07/2016 @raj
          * 
          */
-
-        $PDF_unique = array(
-          'price' =>array('label' => __('Price', ud_get_wp_property()->domain),'notice'=>''),
-          'address' => array('label' => __('Address', ud_get_wp_property()->domain),
-              'notice'=> __('This attribute will be used for automatic geolocation.', ud_get_wp_property()->domain)),
-          'bedrooms' => array('label' => __('Bedrooms', ud_get_wp_property()->domain),'notice'=>''),
-          'bathrooms' =>array('label' => __('Bathrooms', ud_get_wp_property()->domain),'notice'=>''),
-          'living_space_size' =>array('label' => __('Living Space size Sq ft', ud_get_wp_property()->domain),'notice'=>''),
-          'features' => array('label' => __('Features', ud_get_wp_property()->domain),'notice'=>''),
-          'community_features' =>array('label' => __('Community Features', ud_get_wp_property()->domain),'notice'=>'')
-        );
-        $IMPORTER_unique = array(
-          'total_rooms' =>array('label' => __('Total Rooms', ud_get_wp_property()->domain),'notice'=>''),
-          'year_built' =>array('label' => __('Year Built', ud_get_wp_property()->domain),'notice'=>''),
-          'no_of_floors' =>array('label' => __('No. of Floors', ud_get_wp_property()->domain),'notice'=>''),
-          'lot_size_acres' => array('label' => __('Lot size, acres', ud_get_wp_property()->domain),'notice'=>''),
-          'neighborhood' => array('label' => __('Neighborhood (term)', ud_get_wp_property()->domain),'notice'=>''),
-          'fees' => array('label' => __('Fees', ud_get_wp_property()->domain),'notice'=>''),
-          'status' =>array('label' => __('Status', ud_get_wp_property()->domain),'notice'=>'')
-        );
-        $PSA = array('pdf'=>$PDF_unique,'importer'=>$IMPORTER_unique);
+        $PSA_file = WPP_Path."/static/config/standard_attributes.json";
+        if(file_exists($PSA_file) && strlen(trim(file_get_contents($PSA_file)))){
+          $PSA = json_decode(file_get_contents($PSA_file),true);
+          // move json array to composer.json in root
+//          $plugins = $this->get_schema( 'extra.schemas.dependencies.plugins' );
+//          $xx= ud_get_wp_property()->get_schema( 'extra.schemas.standard_attributes.pdf.price.label' );
+//          $l10n = apply_filters( 'ud::schema::localization', $xx );
+        }
+        else{
+          $PSA =  array();
+        }
         $this->set('prop_std_att', $PSA);
-//        print_r($PSA);die;
 
         // get mapped standard attributes
         //prop_std_att_mapped refers to true/fase
@@ -168,6 +158,47 @@ namespace UsabilityDynamics\WPP {
         if (empty($d) || !is_array($d)) {
           $d=array();
           $d = $this->set('prop_std_att_mapsto', $d);
+        }
+        
+        /* properties and attributes for setup assistant 
+         * @Raj
+         */
+        $d = !$this->get('property_assistant', false);
+        if (!$d || !is_array($d)) {
+          $this->set('property_assistant', array(
+                    "residential" => array(
+                      'location' => __('Address', ud_get_wp_property()->domain),
+                      'city' => __('City', ud_get_wp_property()->domain),
+                      'price' => __('Price', ud_get_wp_property()->domain),
+                      'bedrooms' => __('Bedrooms', ud_get_wp_property()->domain),
+                      'bathrooms' => __('Bathrooms', ud_get_wp_property()->domain),
+                      'total_rooms' => __('Total Rooms', ud_get_wp_property()->domain),
+                      'living_space' => __('Living space', ud_get_wp_property()->domain),
+                      'year_built' => __('Year Built', ud_get_wp_property()->domain),
+                      'number_of_rooms' => __('Number of rooms', ud_get_wp_property()->domain),
+                      'fees' => __('Fees', ud_get_wp_property()->domain),
+                      'features_term' => __('Features (term)', ud_get_wp_property()->domain),
+                      'community_features_term' => __('Community features (term)', ud_get_wp_property()->domain)
+                    ),
+                    "commercial" => array(
+                      'location' => __('Address', ud_get_wp_property()->domain),
+                      'city' => __('City', ud_get_wp_property()->domain),
+                      'price' => __('Price', ud_get_wp_property()->domain),
+                      'year_built' => __('Year Built', ud_get_wp_property()->domain),
+                      'fees' => __('Fees', ud_get_wp_property()->domain),
+                      'features_term' => __('Features (term)', ud_get_wp_property()->domain),
+                      'community_features_term' => __('Community features (term)', ud_get_wp_property()->domain),    
+                      'business_purpose' => __('Business Purpose', ud_get_wp_property()->domain),  
+                    ),
+                    "land" => array(
+                      'location' => __('Address', ud_get_wp_property()->domain),
+                      'city' => __('City', ud_get_wp_property()->domain),
+                      'price' => __('Price', ud_get_wp_property()->domain),
+                      'year_built' => __('Year Built', ud_get_wp_property()->domain),
+                      'fees' => __('Fees', ud_get_wp_property()->domain),
+                      'features_term' => __('Features (term)', ud_get_wp_property()->domain),
+                      'lot_size' => __('Lot Size', ud_get_wp_property()->domain), 
+                    )));
         }
 
         //** Setup property types to be used. */
