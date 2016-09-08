@@ -5,33 +5,39 @@
 flush_rewrite_rules();
 //** flush Object Cache */
 wp_cache_flush();
-?>
-<link href="<?php echo WPP_URL; ?>splashes/assets/css/owl.carousel.css" rel="stylesheet">
-<link href="<?php echo WPP_URL; ?>splashes/assets/css/owl.theme.css" rel="stylesheet">
-<link href="<?php echo WPP_URL; ?>splashes/assets/css/custom.css" rel="stylesheet">
+//owl-carousel base css
+wp_enqueue_style('setup-assist-owl-css', WPP_URL . "splashes/assets/css/owl.carousel.css", array(), WPP_Version, 'screen');
+//page css
+wp_enqueue_style('setup-assist-page-css', WPP_URL . "splashes/assets/css/setup-assist.css", array(), WPP_Version, 'screen');
 
-<script src="<?php echo WPP_URL; ?>splashes/assets/js/owl.carousel.min.js"></script>
+wp_enqueue_script('setup-assist-owl-js', WPP_URL . "splashes/assets/js/owl.carousel.min.js", array('jquery'), WPP_Version, true);
+wp_enqueue_script('setup-assist-page-js', WPP_URL . "splashes/assets/js/setup-assist.js", array('jquery'), WPP_Version, true);
+?>
 
 <style>
   .ud-badge.wp-badge {
-    background-image: url("<?php echo ud_get_wp_property()->path('/static/images/icon.png', 'url'); ?>") ;
+    background-image: url("<?php echo ud_get_wp_property()->path('/static/images/icon.png', 'url'); ?>")  !important ;
   }
   #wpp-splash-screen .owl-buttons div.owl-prev::before {
-    background: rgba(0, 0, 0, 0) url("<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/back.png', 'url'); ?>") no-repeat scroll 0 0 / 100% auto;
+    background: rgba(0, 0, 0, 0) url("<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/back.png', 'url'); ?>") no-repeat scroll 0 0 / 100% auto  !important;
   }
   #wpp-splash-screen .owl-buttons div.owl-next::before {
-    background: rgba(0, 0, 0, 0) url("<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/next.png', 'url'); ?>") no-repeat scroll 0 0 / 100% auto;
+    background: rgba(0, 0, 0, 0) url("<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/next.png', 'url'); ?>") no-repeat scroll 0 0 / 100% auto  !important;
   }
   .wpp_asst_select {
-    background: #fff url("<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/icon1.png', 'url'); ?>") no-repeat scroll 100% 50%;
+    background: #fff url("<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/icon1.png', 'url'); ?>") no-repeat scroll 100% 50%  !important;
+  }
+  #wpbody-content {
+    background :url("<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/wpp_backimage.png', 'url'); ?>")   repeat-x bottom  !important;  
   }
 </style>
+
 <?php
 global $wp_properties;
 
 //enable assistant for new installations
 $wp_properties['configuration']["show_assistant"] = true;
-update_option("wpp_settings",$wp_properties);
+update_option("wpp_settings", $wp_properties);
 
 $property_assistant = json_encode($wp_properties);
 echo "<script> var wpp_property_assistant = $property_assistant; </script>";
@@ -138,9 +144,9 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
 
             <div class="wpp_asst_inner_wrap">
               <ul class="three-sectionals">
-                <li class="wpp_asst_label"> Sure<label for="Sure"> 
-                    <input class="wpp_box" type="checkbox" value="Sure" name="wpp_settings[configuration][automatically_insert_overview]" 
-                           id="Sure"> <span></span> </label>
+                <li class="wpp_asst_label"> Sure<label for="true"> 
+                    <input class="wpp_box" type="checkbox" value="true" name="wpp_settings[configuration][automatically_insert_overview]" 
+                           id="true"> <span></span> </label>
                 </li> 
               </ul>
             </div>
@@ -167,144 +173,21 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
       </div>
     </div>
     <div class="wpp-asst_hidden-attr">
+      <!--  add field to recognize the source on save--> 
       <input  type="hidden" name="wpp_settings[configuration][show_assistant]" value="true">
 
+      <!-- Additional attributes for location  --> 
       <input  type="hidden" name="wpp_settings[admin_attr_fields][location]" value="input">
       <input  type="hidden" name="wpp_settings[searchable_attr_fields][location]" value="input">
       <input  type="hidden"  name="wpp_settings[configuration][address_attribute]" value="input">
 
+      <!--  Additional attributes for price --> 
       <input  type="hidden" name="wpp_settings[admin_attr_fields][price]" value="currency">
       <input  type="hidden" name="wpp_settings[searchable_attr_fields][price]" value="range_dropdown">
 
+      <!--  Additional attributes attached here (dynamically)
+          includes property types, attributes for each property type --> 
 
     </div>
-
-
   </form >
 </div>
-
-<script>
-
-  jQuery(document).ready(function () {
-    $ = jQuery.noConflict();
-
-    jQuery('#wpp-setup-assistant').submit(postBackForm);
-
-    function postBackForm() {
-      var btn = jQuery("input[type='submit']");
-      jQuery("#wpp_inquiry_property_types tbody tr").each(function () {
-        if (jQuery(".slug_setter", this).val() == "") {
-          jQuery(this).addClass('no-slug');
-        } else {
-          jQuery(this).addClass('yes-slug');
-          btn.prop('disabled', false);
-        }
-      });
-      btn.prop('disabled', true);
-      var data = jQuery(this).serialize();
-      console.log(data);
-
-      jQuery.ajax({
-        type: 'POST',
-        url: "<?php echo admin_url('admin-ajax.php'); ?>",
-        data: {
-          action: 'wpp_save_settings',
-          data: data
-        },
-        success: function (response) {
-          var data = jQuery.parseJSON(response);
-        },
-        error: function () {
-          alert(wpp.strings.undefined_error);
-          btn.prop('disabled', false);
-        }
-      });
-      return false;
-    }
-
-    // handle screen 2: property types and attributes
-    function handle_prop_types() {
-      if ($('.wpp_settings_property_stats'))
-        $('.wpp_settings_property_stats').remove();
-
-      var propAttrSet = {};
-      $('input:checkbox.asst_prop_types').each(function () {
-        var sThisVal = (this.checked ? $(this).attr('name') : "");
-
-        if (sThisVal != "") {
-
-          switch (sThisVal) {
-            case 'land':
-              $.extend(propAttrSet, wpp_property_assistant.property_assistant.land);
-              break;
-            case 'commercial'  :
-              $.extend(propAttrSet, wpp_property_assistant.property_assistant.commercial);
-              break;
-            default :
-              $.extend(propAttrSet, wpp_property_assistant.property_assistant.residential);
-              break;
-          }
-
-          // add property type
-          $('.wpp-asst_hidden-attr')
-                  .append('<input type="hidden" class="wpp_settings_property_stats" name="wpp_settings[property_types][' + $(this).attr('name') + ']"  value="'
-                          + $(this).val() + '" />');
-
-          // make property Searchable
-          $('.wpp-asst_hidden-attr')
-                  .append('<input type="hidden" class="wpp_settings_property_stats" name="wpp_settings[searchable_property_types][]" value="' +
-                          $(this).attr('name') + '" />');
-          // make property Searchable
-          $('.wpp-asst_hidden-attr')
-                  .append('<input type="hidden" class="wpp_settings_property_stats" name="wpp_settings[location_matters][]"  value="' +
-                          $(this).attr('name') + '" />');
-        }
-      });
-
-      // add property attributes
-      $.each(propAttrSet, function (index, value) {
-        $('.wpp-asst_hidden-attr').append('<input type="hidden" class="wpp_settings_property_stats" name="wpp_settings[property_stats][' + index + ']"  value="' + value + '" />');
-      });
-    }
-
-    //handle each screen individually
-    function propAssistScreens() {
-      var isScreen = $(".owl-page.active").index() + 1;
-      console.log(isScreen);
-      switch (isScreen) {
-        case 2:
-          handle_prop_types();
-          break;
-        default:
-          console.log("reached default screen");
-          break;
-      }
-    }
-    var wpp_owl = $("#wpp-splash-screen-owl");
-    wpp_owl.owlCarousel({
-      navigation: true,
-      slideSpeed: 400,
-      paginationSpeed: 400,
-      autoPlay: false,
-      pagination: true,
-      rewindNav: true,
-      touchDrag: false,
-      mouseDrag: false,
-      navigationText: [
-        "<i class='icon-chevron-left icon-white'></i>",
-        "<i class='icon-chevron-right icon-white'></i>"
-      ],
-      beforeMove: propAssistScreens,
-      afterMove: function () {
-        jQuery('#wpp-setup-assistant').submit();
-      },
-      singleItem: true
-    });
-    var wpp_owl = $("#wpp-splash-screen-owl").data('owlCarousel');
-    $(".btn_letsgo").click(function () {
-      wpp_owl.next();
-
-    });
-  });
-
-</script>

@@ -107,7 +107,6 @@ namespace UsabilityDynamics\WP {
           <div class="wp-badge ud-badge"></div>  
           <?php
           include get_home_path() . "wp-content/plugins/wp-property/static/splashes/install.php";
-          exit;
           ?>
         </div>
         <?php

@@ -434,9 +434,7 @@ li.checkbox-up [type="checkbox"] + span::before {
   margin: 0 auto 20px;
   display: block;
 }
-#wpbody-content {
-  background :url("<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/wpp_backimage.png', 'url'); ?>")   repeat-x bottom;  
-}
+
 
 #wpbody-content {
   float: left;

@@ -2348,9 +2348,16 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     $data = self::parse_str( $_REQUEST[ 'data' ] );
     
-    if(get_option('wpp_settings'))
+    //handle requests coming from setup assistance page
+    if(get_option('wpp_settings')){
+      // merge with previous settings. untill we are securing backups
       $data["wpp_settings"] = array_replace_recursive(get_option('wpp_settings'),$data["wpp_settings"]);
-
+      
+      //automatically_insert_overview should be set to false if no value being recieved
+      $data["wpp_settings"]['configuration']['automatically_insert_overview'] = isset($data["wpp_settings"]['configuration']['automatically_insert_overview']) ?  $data["wpp_settings"]['configuration']['automatically_insert_overview'] : false;
+      
+    }
+      
     $return = array(
       'success'  => true,
       'message'  => '',
