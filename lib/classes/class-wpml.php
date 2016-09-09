@@ -36,9 +36,11 @@ namespace UsabilityDynamics\WPP {
     public function template_redirect() {
       global $wp_properties;
 
-      foreach( ud_get_wp_property()->get( 'property_groups' ) as $k => $v ) {
-        $v[ 'name' ] = $this->get_groups_translation( $v[ 'name' ], $k );
-        ud_get_wp_property()->set( "property_groups.{$k}", $v );
+      if(is_array(ud_get_wp_property()->get( 'property_groups' ))){
+        foreach( ud_get_wp_property()->get( 'property_groups' ) as $k => $v ) {
+          $v[ 'name' ] = $this->get_groups_translation( $v[ 'name' ], $k );
+          ud_get_wp_property()->set( "property_groups.{$k}", $v );
+        }
       }
 
       if( !ud_get_wp_property()->get( 'property_groups._other' ) ) {
@@ -371,7 +373,7 @@ namespace UsabilityDynamics\WPP {
      */
     public function get_groups_translation($name,$slug){
       global $wp_properties;
-      $property_groups = array_keys($wp_properties['property_groups']);
+      $property_groups = (isset($wp_properties['property_groups']) && is_array($wp_properties['property_groups']))?array_keys($wp_properties['property_groups']):array();
       if( array_search($slug,$property_groups,true) !== false ){
         $groups_package = array(
           'kind' => 'Property Groups',
