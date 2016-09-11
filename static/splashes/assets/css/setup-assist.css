@@ -141,6 +141,7 @@
 }
 .btn_letsgo {
   background-color: #4ec4d0;
+  cursor: pointer;
   border: 1px solid #4ec4d0;
   border-radius: 5px;
   box-shadow: 0 5px 2px -1px #1897aa;

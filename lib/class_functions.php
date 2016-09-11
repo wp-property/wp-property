@@ -2335,6 +2335,99 @@ class WPP_F extends UsabilityDynamics\Utility {
     return $return;
 
   }
+  public function widget_childpropertieswidget_data() {
+    return 
+      array('title' => '',
+        'image_type' => 'medium',
+        'big_image_type' => 'large',
+        'gallery_count' => 10
+      );
+  }
+  public function widget_gallerypropertieswidget_data() {
+    return 
+      array('title' => '',
+        'image_type' => 'medium',
+        'big_image_type' => 'large',
+        'amount_items' => 5,
+        'sort_by' => '',
+        'sort_order' => 'ASC',
+         'address_format' =>' [street_number] [street_name], [city], [state]'
+        );
+  }
+  /**
+   * AJAX Handler for Setup Assistant.
+   * proxies to save_settings()
+   *
+   * @author raj
+   */
+  static public function save_setup_settings() {
+    
+    global $wp_properties;
+//    print_r($wp_properties);
+    $data = self::parse_str($_REQUEST['data']);
+
+    //set up some basic variables
+    $prop_types = isset($data['wpp_settings']['property_types']) ? $data['wpp_settings']['property_types'] : false;
+    $widgets_required = isset($data['wpp_settings']['configuration']['widgets']) ? $data['wpp_settings']['configuration']['widgets'] : false;
+
+    //some settings should just be installed first time,and later taken/updated from settings tab
+    $freshInstallation = 1; 
+    { // running this block unconditionally for now
+      $data['wpp_settings']['configuration']['show_assistant'] = true;
+      $data["wpp_settings"]['configuration']['automatically_insert_overview'] = true;
+
+//      To allow deprecated widget options 
+      $data['wpp_settings']['configuration']['enable_legacy_features'] = true;
+
+//       Additional attributes for location 
+      $data['wpp_settings']['admin_attr_fields']['location'] = "input";
+      $data['wpp_settings']['searchable_attr_fields']['location'] = "input";
+      $data['wpp_settings']['configuration']['address_attribute'] = "input";
+
+//        Additional attributes for price
+      $data['wpp_settings']['admin_attr_fields']['price'] = "currency";
+      $data['wpp_settings']['searchable_attr_fields']['price'] = "range_dropdown";
+
+//      compute basic property attributes
+      $propAttrSet = array();
+      if ($prop_types && isset($data['wpp_settings']['property_types']['land']))
+        $propAttrSet = array_merge($propAttrSet, $wp_properties['property_assistant']['land']);
+      if ($prop_types && isset($data['wpp_settings']['property_types']['commercial']))
+        $propAttrSet = array_merge($propAttrSet, $wp_properties['property_assistant']['commercial']);
+      if ($prop_types && array_intersect(array_map('strtolower', $data['wpp_settings']['property_types']), array('house', 'condo', 'townhouse', 'multifamily')))
+        $propAttrSet = array_merge($propAttrSet, $wp_properties['property_assistant']['residential']);
+
+//      Install basic property attributes
+      $data['wpp_settings']['property_stats'] = $propAttrSet;
+      update_option('wpp_settings', $data['wpp_settings']);
+    }
+    
+    //update widgets if $widgets_required
+    if($widgets_required && $prop_types){
+      //get existing widgets
+     $allWidgets = get_option('sidebars_widgets');
+
+     $randInt = rand(200,300);  
+      foreach($prop_types as $prop=>$property){
+        // we need such widgets on all prop pages, so cycle through all props
+        foreach($widgets_required as $required){
+          $randInt++;
+          $allWidgets['wpp_sidebar_'.$prop][] = $required.'-'.$randInt;
+          
+          $widget_name =  'widget_'.$required;
+          $widget_content = array();
+          $content = call_user_func(array('self', $widget_name.'_data'));
+          $widget_content[$randInt] = $content;
+          update_option( $widget_name, $widget_content );  
+        }
+      }
+      update_option('sidebars_widgets', $allWidgets);
+//      $allWidgets = get_option('sidebars_widgets');
+    }
+    
+    // allow the default save function to fire 
+    self::save_settings();
+  }
 
   /**
    * AJAX Handler.
@@ -2352,10 +2445,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     if(get_option('wpp_settings')){
       // merge with previous settings. untill we are securing backups
       $data["wpp_settings"] = array_replace_recursive(get_option('wpp_settings'),$data["wpp_settings"]);
-      
-      //automatically_insert_overview should be set to false if no value being recieved
-      $data["wpp_settings"]['configuration']['automatically_insert_overview'] = isset($data["wpp_settings"]['configuration']['automatically_insert_overview']) ?  $data["wpp_settings"]['configuration']['automatically_insert_overview'] : false;
-      
+
     }
       
     $return = array(
@@ -4070,7 +4160,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       $value = trim( $value );
 
       //** Hack for child properties. Skip values with dashes */
-      if( empty( $value ) || strstr( $value, '&ndash;' ) || strstr( $value, '–' ) ) {
+      if( empty( $value ) || strstr( $value, '&ndash;' ) || strstr( $value, 'â€“' ) ) {
         continue;
       }
 

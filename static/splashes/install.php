@@ -36,7 +36,14 @@ wp_enqueue_script('setup-assist-page-js', WPP_URL . "splashes/assets/js/setup-as
 global $wp_properties;
 
 //enable assistant for new installations
-$wp_properties['configuration']["show_assistant"] = true;
+if(!isset($wp_properties['configuration']["show_assistant"])){
+    $wp_properties['configuration']["show_assistant"] = true;
+    $freshInstallation = 'yes';
+}
+else{
+    $freshInstallation = 'no';
+}
+
 update_option("wpp_settings", $wp_properties);
 
 $property_assistant = json_encode($wp_properties);
@@ -50,30 +57,47 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
 
       <div class="item">
         <div class="wpp_asst_screen wpp_asst_screen_1">
-          <h2 class="wpp_asst_heading_main">CONGRATULATIONS,YOU HAVE SET UP</h2>
-          <h1>WP-PROPERTY PLUGIN!</h1>
-          <p class="tagline">Make few steps in order to set up it on your site!</p>
-          <center><button type="button" class="btn_letsgo">LET'S GO!</button></center>
+          <h2 class="wpp_asst_heading_main"><?php  echo __('CONGRATULATIONS,YOU HAVE SET UP', ud_get_wp_property()->domain); ?></h2>
+          <h1><?php echo __('WP-PROPERTY PLUGIN!', ud_get_wp_property()->domain); ?></h1>
+          <p class="tagline"><?php echo __('Make few steps in order to set up it on your site!', ud_get_wp_property()->domain); ?></p>
+          <center><button type="button" class="btn_letsgo"><?php echo __("LET'S GO!", ud_get_wp_property()->domain); ?></button></center>
         </div>
       </div>
 
       <div class="item">
         <div class="wpp_asst_screen wpp_asst_screen_2">
-          <h2 class="wpp_asst_heading"><b>Which Property Types do you want to have on your site?</b></h2>
+          <h2 class="wpp_asst_heading"><b><?php echo __('Which Property Types do you want to have on your site?', ud_get_wp_property()->domain); ?></b></h2>
 
           <div class="wpp_asst_inner_wrap">
             <ul class="">               
-              <li class="wpp_asst_label"> House<label for="accessible"><input class="wpp_box asst_prop_types" type="checkbox" value="House" name="house" id="accessible"> <span></span> </label></li>				
-              <li class="wpp_asst_label"> Condo<label for="test5"> <input class="wpp_box asst_prop_types" type="checkbox" value="Condo" name="condo" id="test5"> <span></span> </label></li>
-              <li class="wpp_asst_label"> Townhouse<label for="test2"> <input class="wpp_box asst_prop_types" type="checkbox" value="Townhouse" name="townhouse" id="test2"> <span></span> </label></li>
-              <li class="wpp_asst_label"> Multi-Family<label for="test3"> <input class="wpp_box  asst_prop_types" type="checkbox" value="Multi-Family" data-label="" name="multifamily" id="test3"> <span></span> </label></li>
-              <li class="wpp_asst_label"> Land<label for="test4"> <input class="wpp_box asst_prop_types" type="checkbox" value="land" name="Land" id="test4"> <span></span> </label></li>
-              <li class="wpp_asst_label"> Commercial<label for="test6"> <input class="wpp_box asst_prop_types" type="checkbox" value="Commercial" name="commercial" id="test6"> <span></span> </label></li> 
+              <li class="wpp_asst_label"><?php echo __('House', ud_get_wp_property()->domain); ?> 
+                <label for="property_types_house">
+                  <input type="checkbox" class="wpp_box asst_prop_types" name="wpp_settings[property_types][house]"  value="House" id="property_types_house"/>
+                  <span></span> </label></li>				
+              <li class="wpp_asst_label"> 
+                <?php echo __('Condo', ud_get_wp_property()->domain); ?>
+                <label for="property_types_condo"> 
+              <input type="checkbox" class="wpp_box asst_prop_types" name="wpp_settings[property_types][condo]"  value="Condo" id="property_types_condo" />
+                  <span></span> </label></li>
+              <li class="wpp_asst_label"> <?php echo __('Townhouse', ud_get_wp_property()->domain); ?>
+                <label for="property_types_townhouse"> 
+                  <input type="checkbox" class="wpp_settings_property_stats" name="wpp_settings[property_types][townhouse]" id="property_types_townhouse" value="Townhouse" />
+                  <span></span> </label></li>
+              <li class="wpp_asst_label"> <?php echo __('Multi-Family', ud_get_wp_property()->domain); ?>
+                <label for="property_types_multifamily"> 
+                  <input class="wpp_box  asst_prop_types" id="property_types_multifamily" type="checkbox" value="Multi-Family" data-label="" 
+                         name="wpp_settings[property_types][multifamily]" > <span></span> </label></li>
+              <li class="wpp_asst_label"> <?php echo __('Land', ud_get_wp_property()->domain); ?>
+                <label for="property_types_land"> 
+                  <input class="wpp_box asst_prop_types" type="checkbox" value="Land" name="wpp_settings[property_types][land]" id="property_types_land"> <span></span> </label></li>
+              <li class="wpp_asst_label"> <?php echo __('Commercial', ud_get_wp_property()->domain); ?>
+                <label for="property_types_commercial"> 
+                  <input class="wpp_box asst_prop_types" type="checkbox" value="Commercial" name="wpp_settings[property_types][commercial]" id="property_types_commercial"> <span></span> </label></li> 
             </ul>      
           </div> <!-- wpp_asst_inner_wrap --> 
 
           <div class="foot-note">
-            <h3> We Will add Appropriate attributes for types you have selected</h5>
+            <h3> <?php echo __('We Will add Appropriate attributes for types you have selected', ud_get_wp_property()->domain); ?></h5>
           </div>
 
         </div><!-- wpp_asst_screen wpp_asst_screen_2 --> 
@@ -81,26 +105,26 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
 
       <div class="item">
         <div class="wpp_asst_screen wpp_asst_screen_3">
-          <h2 class="wpp_asst_heading"><b>Add 10 test properties to the site?</b></h2>
+          <h2 class="wpp_asst_heading"><b><?php echo __('Add 10 test properties to the site?', ud_get_wp_property()->domain); ?></b></h2>
           <div class="wpp_asst_inner_wrap">
             <ul>
-              <li class="wpp_asst_label"> Yes Please<label for="yes-please"> 
+              <li class="wpp_asst_label"> <?php echo __('Yes Please', ud_get_wp_property()->domain); ?><label for="yes-please"> 
                   <input class="wpp_box" type="checkbox" value="yes-please" name="quality" id="yes-please"> <span></span> </label>
               </li> 
-              <li class="wpp_asst_label narrow"> No, thanks i have already</br> added properties<label for="no-thanks"> 
+              <li class="wpp_asst_label narrow"><?php echo __('No, thanks i have already</br> added properties', ud_get_wp_property()->domain); ?> <label for="no-thanks"> 
                   <input class="wpp_box" type="checkbox" value="no-thanks" name="quality" id="no-thanks"> <span></span> </label>
               </li> 
             </ul>
           </div>
 
-          <h2 class="wpp_asst_heading"><b>Add Widgets to the single property pages?</b> </h2>
+          <h2 class="wpp_asst_heading"><b><?php echo __('Add Widgets to the single property pages?', ud_get_wp_property()->domain); ?></b> </h2>
           <div class="wpp_asst_inner_wrap">
             <ul>
-              <li class="wpp_asst_label">Property Gallery <label for="property-gallery"> 
-                  <input class="wpp_box" type="checkbox" value="property-gallery" name="quality" id="property-gallery"> <span></span> </label>
+              <li class="wpp_asst_label"><?php echo __('Property Gallery', ud_get_wp_property()->domain); ?> <label for="gallerypropertieswidget"> 
+                  <input class="wpp_box" type="checkbox" value="gallerypropertieswidget" name="wpp_settings[configuration][widgets][gallerypropertieswidget]" value="gallerypropertieswidget"  id="gallerypropertieswidget"> <span></span> </label>
               </li> 
-              <li class="wpp_asst_label"> Child Properties<label for="child-properties"> 
-                  <input class="wpp_box" type="checkbox" value="child-properties" name="quality" id="child-properties"> <span></span> </label>
+              <li class="wpp_asst_label"> <?php echo __('Child Properties', ud_get_wp_property()->domain); ?><label for="childpropertieswidget"> 
+                  <input class="wpp_box" type="checkbox" name="wpp_settings[configuration][widgets][childpropertieswidget]" value="childpropertieswidget" id="childpropertieswidget"> <span></span> </label>
               </li> 
             </ul>
           </div>
@@ -109,42 +133,42 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
 
       <div class="item item-wider">
         <div class="wpp_asst_screen wpp_asst_screen_4">
-          <h2 class="wpp_asst_heading"><b>Choose default properties pages</b></h2>  
+          <h2 class="wpp_asst_heading"><b><?php echo __('Choose default properties pages', ud_get_wp_property()->domain); ?></b></h2>  
           <div class="wpp_asst_inner_wrap">
             <div class="wpp_asst_select">
               <select id="soflow" name="wpp_settings[configuration][base_slug]">
-                <option value="property" class="list_property">Properties (Default)</option>
+                <option value="property" class="list_property"><?php echo __('Properties (Default)', ud_get_wp_property()->domain); ?></option>
                 <?php
                 $args = array('post_type' => 'page', 'post_status' => 'publish');
                 $pages = get_pages($args);
                 foreach ($pages as $page) {
-                  ?>
-                  <option value="<?php echo $page->post_name; ?>" class="list_property"><?php echo $page->post_title; ?></option>
+                    ?>
+                    <option value="<?php echo $page->post_name; ?>" class="list_property"><?php echo $page->post_title; ?></option>
                 <?php } ?>
               </select>
             </div>	
 
-            <h2 class="wpp_asst_heading"><b>List Propery pages</b></h2>
+            <h2 class="wpp_asst_heading"><b><?php echo __('List Propery pages', ud_get_wp_property()->domain); ?></b></h2>
             <div class="wpp_asst_inner_wrap">
 
               <ul class="three-sectionals">
-                <li class="wpp_asst_label"> Property Search<label for="property-search"> 
+                <li class="wpp_asst_label"> <?php echo __('Property Search', ud_get_wp_property()->domain); ?><label for="property-search"> 
                     <input class="wpp_box" type="checkbox" value="property-search" name="quality" id="property-search"> <span></span> </label>
                 </li> 
-                <li class="wpp_asst_label">Featured Property<label for="featured-properties"> 
+                <li class="wpp_asst_label"><?php echo __('Featured Property', ud_get_wp_property()->domain); ?><label for="featured-properties"> 
                     <input class="wpp_box" type="checkbox" value="featured-properties" name="quality" id="featured-properties"> <span></span> </label>
                 </li> 
-                <li class="wpp_asst_label"> Latest Property<label for="latest-properties"> 
+                <li class="wpp_asst_label"><?php echo __('Latest Property', ud_get_wp_property()->domain); ?> <label for="latest-properties"> 
                     <input class="wpp_box" type="checkbox" value="latest-properties" name="quality" id="latest-properties"> <span></span> </label>
                 </li> 
               </ul>
             </div>
 
-            <h2 class="wpp_asst_heading"><b>Add overview of properties to your Properties page?</b></h2>
+            <h2 class="wpp_asst_heading"><b><?php echo __('Add overview of properties to your Properties page?', ud_get_wp_property()->domain); ?></b></h2>
 
             <div class="wpp_asst_inner_wrap">
               <ul class="three-sectionals">
-                <li class="wpp_asst_label"> Sure<label for="true"> 
+                <li class="wpp_asst_label"> <?php echo __('Sure', ud_get_wp_property()->domain); ?><label for="true"> 
                     <input class="wpp_box" type="checkbox" value="true" name="wpp_settings[configuration][automatically_insert_overview]" 
                            id="true"> <span></span> </label>
                 </li> 
@@ -156,15 +180,15 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
 
       <div class="item">
         <div class="wpp_asst_screen wpp_asst_screen_5">
-          <h2 class="wpp_asst_heading text-center"><b>Let's view what we have</b></h2>
+          <h2 class="wpp_asst_heading text-center"><b><?php echo __("Let's view what we have", ud_get_wp_property()->domain); ?></b></h2>
           <ul class="list-img">
             <li>
               <span><img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/wpp-single-prop.jpg', 'url'); ?>" alt="image"></span>
-            <center><button class="btn_single_page">SINGLE PROPERTY PAGES</button></center>
+            <center><button class="btn_single_page"><?php echo __('SINGLE PROPERTY PAGES', ud_get_wp_property()->domain); ?></button></center>
             </li>
             <li>
               <img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/overview-prop.jpg', 'url'); ?>" alt="image">
-            <center><button class="btn_single_page">OVERVIEW OF PROPERTIES</button></center>
+            <center><button class="btn_single_page"><?php echo __('OVERVIEW OF PROPERTIES', ud_get_wp_property()->domain); ?></button></center>
             </li>
           </ul>
 
@@ -174,19 +198,7 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
     </div>
     <div class="wpp-asst_hidden-attr">
       <!--  add field to recognize the source on save--> 
-      <input  type="hidden" name="wpp_settings[configuration][show_assistant]" value="true">
-
-      <!-- Additional attributes for location  --> 
-      <input  type="hidden" name="wpp_settings[admin_attr_fields][location]" value="input">
-      <input  type="hidden" name="wpp_settings[searchable_attr_fields][location]" value="input">
-      <input  type="hidden"  name="wpp_settings[configuration][address_attribute]" value="input">
-
-      <!--  Additional attributes for price --> 
-      <input  type="hidden" name="wpp_settings[admin_attr_fields][price]" value="currency">
-      <input  type="hidden" name="wpp_settings[searchable_attr_fields][price]" value="range_dropdown">
-
-      <!--  Additional attributes attached here (dynamically)
-          includes property types, attributes for each property type --> 
+      <input  type="hidden" name="wpp_freshInstallation" value="<?php echo $freshInstallation; ?>">      
 
     </div>
   </form >

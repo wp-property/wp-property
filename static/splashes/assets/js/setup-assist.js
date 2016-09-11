@@ -12,7 +12,7 @@ jQuery(document).ready(function () {
       type: 'POST',
       url: ajaxurl,
       data: {
-        action: 'wpp_save_settings',
+        action: 'wpp_save_setup_settings',
         data: data
       },
       success: function (response) {
@@ -25,60 +25,11 @@ jQuery(document).ready(function () {
     return false;
   }
 
-  // handle screen 2: property types and attributes
-  function handle_prop_types() {
-    // remove previously set props in case user is moving back and forth
-    if ($('.wpp_settings_property_stats'))
-      $('.wpp_settings_property_stats').remove();
-
-    var propAttrSet = {};
-    $('input:checkbox.asst_prop_types').each(function () {
-      var sThisVal = (this.checked ? $(this).attr('name') : "");
-
-      if (sThisVal != "") {
-
-        switch (sThisVal) {
-          case 'land':
-            $.extend(propAttrSet, wpp_property_assistant.property_assistant.land);
-            break;
-          case 'commercial'  :
-            $.extend(propAttrSet, wpp_property_assistant.property_assistant.commercial);
-            break;
-          default :
-            $.extend(propAttrSet, wpp_property_assistant.property_assistant.residential);
-            break;
-        }
-
-        // add property type
-        $('.wpp-asst_hidden-attr')
-                .append('<input type="hidden" class="wpp_settings_property_stats" name="wpp_settings[property_types][' +
-                        $(this).attr('name') + ']"  value="' + $(this).val() + '" />');
-
-        // make property Searchable
-        $('.wpp-asst_hidden-attr')
-                .append('<input type="hidden" class="wpp_settings_property_stats" name="wpp_settings[searchable_property_types][]" value="' +
-                        $(this).attr('name') + '" />');
-        //handle location matters
-        $('.wpp-asst_hidden-attr')
-                .append('<input type="hidden" class="wpp_settings_property_stats" name="wpp_settings[location_matters][]"  value="' +
-                        $(this).attr('name') + '" />');
-      }
-    });
-
-    // add property attributes
-    $.each(propAttrSet, function (index, value) {
-      $('.wpp-asst_hidden-attr').append('<input type="hidden" class="wpp_settings_property_stats" name="wpp_settings[property_stats][' +
-              index + ']"  value="' + value + '" />');
-    });
-  }
-
   //handle each screen individually
   function propAssistScreens() {
     var isScreen = $(".owl-page.active").index() + 1;
+    // maybe add some screen specific
     switch (isScreen) {
-      case 2:
-        handle_prop_types();
-        break;
       default:
         console.log("reached default screen");
         break;
