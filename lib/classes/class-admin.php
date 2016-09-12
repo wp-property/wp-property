@@ -158,6 +158,12 @@ namespace UsabilityDynamics\WPP {
           header( "Content-Transfer-Encoding: binary" );
           header( 'Content-Type: text/plain; charset=' . get_option( 'blog_charset' ), true );
 
+          //if backup of data from setup-assistant
+          // get backed-up data for download
+          if(isset( $_REQUEST[ 'timestamp' ] )){
+            $data = get_option('wpp_property_backups');
+            $wp_properties = $data[ $_REQUEST[ 'timestamp' ]];
+          }
           // May be extend backup data by add-ons options.
           $data = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $wp_properties ) );
 

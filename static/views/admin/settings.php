@@ -527,6 +527,20 @@ if ( get_option( 'permalink_structure' ) == '' ) {
         : <input name="wpp_settings[settings_from_backup]" class="" id="wpp_backup_file" type="file"/>
         <a href="<?php echo wp_nonce_url( "edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup", 'download-wpp-backup' ); ?>"><?php _e( 'Download Backup of Current WP-Property Configuration.', ud_get_wp_property()->domain ); ?></a>
       </div>
+      
+      <?php 
+      //list automatic backups taken from setup-assistant screen
+      if(get_option("wpp_property_backups")){
+      ?>
+      <div class="wpp_settings_block">
+        <?php _e( "Automatic Backups of WP-Property Configuration", ud_get_wp_property()->domain ); ?>
+        <?php 
+        $auto_backups = get_option("wpp_property_backups");
+        foreach( $auto_backups as  $time=>$backups){
+          echo '<a href="'.wp_nonce_url( "edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup&timestamp=".$time, 'download-wpp-backup' ).'">'.date('d-m-Y H:i', $time).'</a>&nbsp;&nbsp;&nbsp;';
+        } ?>
+      </div>
+      <?php } ?>
 
       <div class="wpp_settings_block">
         <?php $google_map_localizations = WPP_F::draw_localization_dropdown( 'return_array=true' ); ?>

@@ -2361,20 +2361,21 @@ class WPP_F extends UsabilityDynamics\Utility {
    * @author raj
    */
   static public function save_setup_settings() {
-    
-    global $wp_properties;
-//    print_r($wp_properties);
-    $data = self::parse_str($_REQUEST['data']);
 
+    global $wp_properties;
+
+    $data = self::parse_str($_REQUEST['data']);
+    
     //set up some basic variables
     $prop_types = isset($data['wpp_settings']['property_types']) ? $data['wpp_settings']['property_types'] : false;
     $widgets_required = isset($data['wpp_settings']['configuration']['widgets']) ? $data['wpp_settings']['configuration']['widgets'] : false;
+    $widgets_available = array('gallerypropertieswidget','childpropertieswidget'); 
 
     //some settings should just be installed first time,and later taken/updated from settings tab
     $freshInstallation = 1; 
+    
     { // running this block unconditionally for now
       $data['wpp_settings']['configuration']['show_assistant'] = true;
-      $data["wpp_settings"]['configuration']['automatically_insert_overview'] = true;
 
 //      To allow deprecated widget options 
       $data['wpp_settings']['configuration']['enable_legacy_features'] = true;
@@ -2387,7 +2388,15 @@ class WPP_F extends UsabilityDynamics\Utility {
 //        Additional attributes for price
       $data['wpp_settings']['admin_attr_fields']['price'] = "currency";
       $data['wpp_settings']['searchable_attr_fields']['price'] = "range_dropdown";
-
+      
+      if(!isset($data['wpp_settings']['configuration']['automatically_insert_overview'])){
+        echo "here";
+        $data['wpp_settings']['configuration']['automatically_insert_overview'] = false;
+      }else{
+        echo "there";
+      }
+        
+      
 //      compute basic property attributes
       $propAttrSet = array();
       if ($prop_types && isset($data['wpp_settings']['property_types']['land']))
@@ -2401,32 +2410,37 @@ class WPP_F extends UsabilityDynamics\Utility {
       $data['wpp_settings']['property_stats'] = $propAttrSet;
       update_option('wpp_settings', $data['wpp_settings']);
     }
-    
-    //update widgets if $widgets_required
-    if($widgets_required && $prop_types){
-      //get existing widgets
-     $allWidgets = get_option('sidebars_widgets');
 
-     $randInt = rand(200,300);  
-      foreach($prop_types as $prop=>$property){
-        // we need such widgets on all prop pages, so cycle through all props
-        foreach($widgets_required as $required){
+    //update widgets if $widgets_required
+    if ($widgets_required && $prop_types) {
+      //get existing widgets
+      $allWidgets = get_option('sidebars_widgets');
+      $randInt = rand(200, 300);
+      
+      foreach ($widgets_available as $widget) {
+        $widget_name = 'widget_' . $widget;
+        $widget_content = array();
+        foreach ($prop_types as $prop => $property) {
           $randInt++;
-          $allWidgets['wpp_sidebar_'.$prop][] = $required.'-'.$randInt;
-          
-          $widget_name =  'widget_'.$required;
-          $widget_content = array();
-          $content = call_user_func(array('self', $widget_name.'_data'));
+          $allWidgets['wpp_sidebar_' . $prop][] = $widget . '-' . $randInt;
+          $content = call_user_func(array('self', $widget_name . '_data'));
           $widget_content[$randInt] = $content;
-          update_option( $widget_name, $widget_content );  
+          
+          // if widget has been removed then we need to reset its value
+          if(!in_array($widget,$widgets_required )){
+            $widget_content = '';
+          }
         }
+        // update individual widget types
+        update_option($widget_name, $widget_content);
+        print_r(get_option($widget_name));
       }
+      
+      //update widgets for each property type
       update_option('sidebars_widgets', $allWidgets);
-//      $allWidgets = get_option('sidebars_widgets');
+      rerurn;
     }
-    
-    // allow the default save function to fire 
-    self::save_settings();
+
   }
 
   /**
@@ -2442,7 +2456,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     $data = self::parse_str( $_REQUEST[ 'data' ] );
     
     //handle requests coming from setup assistance page
-    if(get_option('wpp_settings')){
+    if($data['wpp_freshInstallation']){
       // merge with previous settings. untill we are securing backups
       $data["wpp_settings"] = array_replace_recursive(get_option('wpp_settings'),$data["wpp_settings"]);
 

@@ -35,17 +35,20 @@ wp_enqueue_script('setup-assist-page-js', WPP_URL . "splashes/assets/js/setup-as
 <?php
 global $wp_properties;
 
+//save backup
+$data = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $wp_properties ) );
+$timestamp =time();
+$backups = !empty(get_option("wpp_property_backups"))?get_option("wpp_property_backups") : array();
+$backups[$timestamp]= $data;
+update_option("wpp_property_backups",$backups);
+
 //enable assistant for new installations
 if(!isset($wp_properties['configuration']["show_assistant"])){
-    $wp_properties['configuration']["show_assistant"] = true;
     $freshInstallation = 'yes';
 }
 else{
     $freshInstallation = 'no';
 }
-
-update_option("wpp_settings", $wp_properties);
-
 $property_assistant = json_encode($wp_properties);
 echo "<script> var wpp_property_assistant = $property_assistant; </script>";
 ?>
@@ -72,27 +75,32 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
             <ul class="">               
               <li class="wpp_asst_label"><?php echo __('House', ud_get_wp_property()->domain); ?> 
                 <label for="property_types_house">
-                  <input type="checkbox" class="wpp_box asst_prop_types" name="wpp_settings[property_types][house]"  value="House" id="property_types_house"/>
-                  <span></span> </label></li>				
+                  <input type="checkbox" class="wpp_box asst_prop_types" name="wpp_settings[property_types][house]"  value="House" id="property_types_house"  <?php if(isset($wp_properties['property_types']) && in_array("house",array_keys($wp_properties['property_types']))) echo "checked";?> />
+                  <span></span> </label></li>	
+                  
               <li class="wpp_asst_label"> 
                 <?php echo __('Condo', ud_get_wp_property()->domain); ?>
                 <label for="property_types_condo"> 
-              <input type="checkbox" class="wpp_box asst_prop_types" name="wpp_settings[property_types][condo]"  value="Condo" id="property_types_condo" />
+              <input type="checkbox" class="wpp_box asst_prop_types" name="wpp_settings[property_types][condo]"  value="Condo" id="property_types_condo"  <?php if(isset($wp_properties['property_types']) && in_array("condo",array_keys($wp_properties['property_types']))) echo "checked";?> />
                   <span></span> </label></li>
+                  
               <li class="wpp_asst_label"> <?php echo __('Townhouse', ud_get_wp_property()->domain); ?>
                 <label for="property_types_townhouse"> 
-                  <input type="checkbox" class="wpp_settings_property_stats" name="wpp_settings[property_types][townhouse]" id="property_types_townhouse" value="Townhouse" />
+                  <input type="checkbox" class="wpp_settings_property_stats" name="wpp_settings[property_types][townhouse]" id="property_types_townhouse" value="Townhouse" <?php if(isset($wp_properties['property_types']) && in_array("townhouse",array_keys($wp_properties['property_types']))) echo "checked";?>/>
                   <span></span> </label></li>
+                  
               <li class="wpp_asst_label"> <?php echo __('Multi-Family', ud_get_wp_property()->domain); ?>
                 <label for="property_types_multifamily"> 
                   <input class="wpp_box  asst_prop_types" id="property_types_multifamily" type="checkbox" value="Multi-Family" data-label="" 
-                         name="wpp_settings[property_types][multifamily]" > <span></span> </label></li>
+                         name="wpp_settings[property_types][multifamily]" <?php if(isset($wp_properties['property_types']) && in_array("multifamily",array_keys($wp_properties['property_types']))) echo "checked";?>> <span></span> </label></li>
+              
               <li class="wpp_asst_label"> <?php echo __('Land', ud_get_wp_property()->domain); ?>
                 <label for="property_types_land"> 
-                  <input class="wpp_box asst_prop_types" type="checkbox" value="Land" name="wpp_settings[property_types][land]" id="property_types_land"> <span></span> </label></li>
+                  <input class="wpp_box asst_prop_types" type="checkbox" value="Land" name="wpp_settings[property_types][land]" id="property_types_land" <?php if(isset($wp_properties['property_types']) && in_array("land",array_keys($wp_properties['property_types']))) echo "checked";?>> <span></span> </label></li>
+                  
               <li class="wpp_asst_label"> <?php echo __('Commercial', ud_get_wp_property()->domain); ?>
                 <label for="property_types_commercial"> 
-                  <input class="wpp_box asst_prop_types" type="checkbox" value="Commercial" name="wpp_settings[property_types][commercial]" id="property_types_commercial"> <span></span> </label></li> 
+                  <input class="wpp_box asst_prop_types" type="checkbox" value="Commercial" name="wpp_settings[property_types][commercial]" id="property_types_commercial" <?php if(isset($wp_properties['property_types']) && in_array("commercial",array_keys($wp_properties['property_types']))) echo "checked";?> accept=""> <span></span> </label></li> 
             </ul>      
           </div> <!-- wpp_asst_inner_wrap --> 
 
@@ -121,10 +129,10 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
           <div class="wpp_asst_inner_wrap">
             <ul>
               <li class="wpp_asst_label"><?php echo __('Property Gallery', ud_get_wp_property()->domain); ?> <label for="gallerypropertieswidget"> 
-                  <input class="wpp_box" type="checkbox" value="gallerypropertieswidget" name="wpp_settings[configuration][widgets][gallerypropertieswidget]" value="gallerypropertieswidget"  id="gallerypropertieswidget"> <span></span> </label>
+                  <input class="wpp_box" type="checkbox" value="gallerypropertieswidget" name="wpp_settings[configuration][widgets][gallerypropertieswidget]" value="gallerypropertieswidget"  id="gallerypropertieswidget"  <?php if(isset($wp_properties['configuration']['widgets']) && in_array("gallerypropertieswidget",array_keys($wp_properties['configuration']['widgets']))) echo "checked";?>> <span></span> </label>
               </li> 
               <li class="wpp_asst_label"> <?php echo __('Child Properties', ud_get_wp_property()->domain); ?><label for="childpropertieswidget"> 
-                  <input class="wpp_box" type="checkbox" name="wpp_settings[configuration][widgets][childpropertieswidget]" value="childpropertieswidget" id="childpropertieswidget"> <span></span> </label>
+                  <input class="wpp_box" type="checkbox" name="wpp_settings[configuration][widgets][childpropertieswidget]" value="childpropertieswidget" id="childpropertieswidget"  <?php if(isset($wp_properties['configuration']['widgets']) && in_array("childpropertieswidget",array_keys($wp_properties['configuration']['widgets']))) echo "checked";?>> <span></span> </label>
               </li> 
             </ul>
           </div>
@@ -137,13 +145,13 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
           <div class="wpp_asst_inner_wrap">
             <div class="wpp_asst_select">
               <select id="soflow" name="wpp_settings[configuration][base_slug]">
-                <option value="property" class="list_property"><?php echo __('Properties (Default)', ud_get_wp_property()->domain); ?></option>
+                <option <?php selected( $wp_properties[ 'configuration' ][ 'base_slug' ], 'property' ); ?> value="property" class="list_property"><?php echo __('Properties (Default)', ud_get_wp_property()->domain); ?></option>
                 <?php
                 $args = array('post_type' => 'page', 'post_status' => 'publish');
                 $pages = get_pages($args);
                 foreach ($pages as $page) {
                     ?>
-                    <option value="<?php echo $page->post_name; ?>" class="list_property"><?php echo $page->post_title; ?></option>
+                    <option value="<?php echo $page->post_name; ?>" <?php selected( $wp_properties[ 'configuration' ][ 'base_slug' ], $page->post_name ); ?> class="list_property"><?php echo $page->post_title; ?></option>
                 <?php } ?>
               </select>
             </div>	
@@ -170,7 +178,7 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
               <ul class="three-sectionals">
                 <li class="wpp_asst_label"> <?php echo __('Sure', ud_get_wp_property()->domain); ?><label for="true"> 
                     <input class="wpp_box" type="checkbox" value="true" name="wpp_settings[configuration][automatically_insert_overview]" 
-                           id="true"> <span></span> </label>
+                          <?php if(isset($wp_properties['configuration']['automatically_insert_overview'] ) && !empty($wp_properties['configuration']['automatically_insert_overview'])) echo "checked";?> id="true"> <span></span> </label>
                 </li> 
               </ul>
             </div>
@@ -192,14 +200,12 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
             </li>
           </ul>
 
-
         </div>
       </div>
     </div>
     <div class="wpp-asst_hidden-attr">
       <!--  add field to recognize the source on save--> 
       <input  type="hidden" name="wpp_freshInstallation" value="<?php echo $freshInstallation; ?>">      
-
     </div>
   </form >
 </div>

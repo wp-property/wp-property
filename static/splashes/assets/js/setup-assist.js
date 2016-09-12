@@ -5,9 +5,13 @@ jQuery(document).ready(function () {
   $('#wpp-setup-assistant').submit(postBackForm);
 
   function postBackForm() {
-
+    
     var data = jQuery(this).serialize();
-
+    
+    // no need to do anything for first screen
+    if($isScreen==1)
+      return false;
+    
     jQuery.ajax({
       type: 'POST',
       url: ajaxurl,
@@ -27,9 +31,9 @@ jQuery(document).ready(function () {
 
   //handle each screen individually
   function propAssistScreens() {
-    var isScreen = $(".owl-page.active").index() + 1;
+    $isScreen = $(".owl-page.active").index() + 1;
     // maybe add some screen specific
-    switch (isScreen) {
+    switch ($isScreen) {
       default:
         console.log("reached default screen");
         break;
