@@ -147,9 +147,7 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
       jQuery.post( wpp.instance.ajax_url, {
         action: 'wpp_ajax_generate_is_remote_meta'
       }, function ( data ) {
-        if(!data)
-          data = 0;
-        message = "<div class='clear_cache_status updated fade'><p>" + data + " image meta updated.</p></div>";
+        message = "<div class='clear_cache_status updated fade'><p>" + data + "</p></div>";
         jQuery( message ).insertAfter( _this );
       } );
     } );
