@@ -4868,7 +4868,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       }
 
       if(count($update_is_remote)==0)
-        return "false";
+        return false;
 
       $delete_sql = "DELETE FROM {$wpdb->postmeta} WHERE meta_key = '_is_remote' AND post_id IN(" . implode(', ', $update_is_remote) . ");";
       $delete_sql = $wpdb->prepare($delete_sql);
