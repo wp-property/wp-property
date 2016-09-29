@@ -26,6 +26,7 @@ namespace UsabilityDynamics\WPP {
       add_filter( "wpp_stat_filter_property_type_label", array($this,"get_property_type_translation") );
       add_filter( "wpp::taxonomies::labels", array($this,"get_property_taxonomies_translation") );
       add_action( "template_redirect", array( $this, "template_redirect" ) );
+      add_action( "wpml_media_create_duplicate_attachment", array( $this, "wpml_media_meta_update") );
     }
 
     /**
@@ -422,6 +423,12 @@ namespace UsabilityDynamics\WPP {
         return $translated_values[$value_pos];
       }
       
+    }
+
+    public function wpml_media_meta_update($attachment_id, $duplicated_attachment_id){
+      $_is_remote = get_post_meta($attachment_id, '_is_remote', true);
+      if($_is_remote)
+        update_post_meta($duplicated_attachment_id, '_is_remote', $_is_remote);
     }
 
   }

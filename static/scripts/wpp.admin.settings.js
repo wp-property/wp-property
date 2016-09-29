@@ -139,6 +139,17 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
         jQuery( message ).insertAfter( "h2" );
       } );
     } );
+    
+    /* Generate _is_remote meta */
+    jQuery( "#wpp_is_remote_meta" ).click( function () {
+      jQuery( '.clear_cache_status' ).remove();
+      jQuery.post( wpp.instance.ajax_url, {
+        action: 'wpp_ajax_generate_is_remote_meta'
+      }, function ( data ) {
+        message = "<div class='clear_cache_status updated fade'><p>" + data + "</p></div>";
+        jQuery( message ).insertAfter( this );
+      } );
+    } );
 
     /* Revalidate all addresses */
     jQuery( "#wpp_ajax_revalidate_all_addresses" ).click( function () {

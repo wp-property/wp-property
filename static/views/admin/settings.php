@@ -557,6 +557,14 @@ if ( get_option( 'permalink_structure' ) == '' ) {
         <input type="button" class="button" value="<?php _e( 'Clear Cache', ud_get_wp_property()->domain ) ?>" id="wpp_clear_cache">
       </div>
 
+      <div class="wpp_settings_block">
+        <?php _e( 'Generate _is_remote meta for all WPML duplicate images.', ud_get_wp_property()->domain ) ?>
+        <input type="button" class="button" value="<?php _e( 'Generate _is_remote meta', ud_get_wp_property()->domain ) ?>" id="wpp_is_remote_meta">
+        <p>
+          <?php _e( "If you have remote image as attachment then _is_remote meta is needed to be set true. But WPML doesn't copy all meta. So you should generate this meta by clicking this button if you got broken image.", ud_get_wp_property()->domain ) ?>
+        </p>
+      </div>
+
       <div class="wpp_settings_block"><?php printf(__( 'Set all %1s to same %2s type:', ud_get_wp_property()->domain ), WPP_F::property_label( 'plural' ), WPP_F::property_label( 'singular' )) ?>
         <select id="wpp_ajax_max_set_property_type_type">
         <?php foreach ( $wp_properties[ 'property_types' ] as $p_slug => $p_label ) { ?>
