@@ -559,11 +559,8 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
     <?php if(function_exists('icl_object_id')):?>
       <div class="wpp_settings_block">
-        <?php _e( 'Generate _is_remote meta for all WPML duplicate images.', ud_get_wp_property()->domain ) ?>
-        <input type="button" class="button" value="<?php _e( 'Generate _is_remote meta', ud_get_wp_property()->domain ) ?>" id="wpp_is_remote_meta">
-        <p>
-          <?php _e( "If you have remote image as attachment then _is_remote meta is needed to be set true. But WPML doesn't copy all meta. So you should generate this meta by clicking this button if you got broken image.", ud_get_wp_property()->domain ) ?>
-        </p>
+        <?php _e( 'Generate images for duplicates of properties (WPML plugin option). ', ud_get_wp_property()->domain ) ?>
+        <input type="button" class="button" value="<?php _e( 'Generate', ud_get_wp_property()->domain ) ?>" id="wpp_is_remote_meta">
       </div>
     <?php endif;?>
     
