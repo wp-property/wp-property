@@ -58,7 +58,6 @@
     ]
   },
   "extra": {
-    "_build": {},
     "installer-paths": {
       "vendor/plugins/{$name}": [
         "type:wordpress-muplugin",
