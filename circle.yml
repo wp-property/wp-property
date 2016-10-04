@@ -29,7 +29,7 @@ dependencies:
     - export CONTAINER_HOSTNAME=${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io
 
     - "bash /home/ubuntu/wp-property-tests/bin/run-container.sh"
-    - "sudo chown -R www-data:www-data /home/ubuntu/html"
+    - "sudo chown -R www-data:www-data /home/ubuntu/www"
 
 test:
   pre:
