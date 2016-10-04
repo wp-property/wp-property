@@ -1,29 +1,23 @@
 machine:
-  node:
-    version: 0.10.28
-  php:
-    version: 7.0.4
-
-database:
-  override:
-    - mysql -u ubuntu circle_test < ./test/php/db-setup.sql
+  hosts:
+    wp-property-tests.github.com: 192.30.253.112
+  services:
+    - docker
 
 dependencies:
+  cache_directories:
+    - "~/docker"
+    - "~/utils"
+
   pre:
-    - sed -i 's/^;//' ~/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini
-    
+    - git clone git@192.30.253.112:wp-property/wp-property-tests.git /home/ubuntu/wp-property-tests --branch=master
+    - wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip;
+    #- unzip ngrok-stable-linux-amd64.zip;
+    #- ./ngrok authtoken $NGROK_TOKEN
+    #- nohup ./ngrok http 3000 -subdomain=${CIRCLE_SHA1} </dev/null >/dev/null 2>&1 &
+
 test:
   override:
-    - grunt testscrutinizer
+    - echo "OK";
     #- grunt testcodeclimate
-    
-deployment:
-  production:
-    branch: master 
-    commands:
-      - sh build.sh
-      
-notify:
-  webhooks:
-    - url: https://api.usabilitydynamics.com/audits/v1/update
     
