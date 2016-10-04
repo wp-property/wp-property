@@ -14,7 +14,6 @@ module.exports = {
     // console.log( require( 'util' ).inspect(   module.host, {showHidden: false, depth: 2, colors: true} ) );
     module.host = 'localhost';
 
-
     module.downloadUrl = process.env.CIRCLE_REPOSITORY_URL + '/archive/' + process.env.CIRCLE_SHA1 + '.zip';
     done();
 
@@ -60,7 +59,6 @@ module.exports = {
       done();
     });
 
-
   },
 
   // /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 option update home "http://${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io"
@@ -85,7 +83,7 @@ module.exports = {
   // /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 option update siteurl "http://${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io"
   'can update site url': function( done ) {
 
-    exec( '/home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 option update home http://' + process.env.CIRCLE_SHA1 + '-' + process.env.CIRCLE_BUILD_NUM + '.ngrok.io', function( error, stdout, stderr ) {
+    exec( '/home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 option update siteurl http://' + process.env.CIRCLE_SHA1 + '-' + process.env.CIRCLE_BUILD_NUM + '.ngrok.io', function( error, stdout, stderr ) {
 
       if( error ) {
         console.log( 'error', error );
@@ -141,7 +139,7 @@ module.exports = {
     } , function checkResponse( error, resp, body ) {
 
       // console.log( require( 'util' ).inspect( resp.headers, {showHidden: false, depth: 2, colors: true} ) );
-      // console.log( 'resp.statusCode', resp.statusCode );
+      console.log( 'resp.statusCode', resp.statusCode );
       done();
 
     });
