@@ -27,20 +27,3 @@ dependencies:
   override:
     - echo "Skipping composer install on purpose."
 
-test:
-  pre:
-    - curl -H 'host:localhost' http://localhost:3000/ -I
-    - /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 user create andy@udx.io andy@udx.io --role=administrator --user_pass=jgnqaobleiubnmcx
-    - /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 option update home "http://${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io"
-    - /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 option update siteurl "http://${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io"
-
-  override:
-    - /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 plugin activate wp-property
-    - curl -H 'host:localhost' http://localhost:3000/ -I
-    - curl -H 'host:localhost' http://localhost:3000/?ci-test=one
-    - curl -H 'host:localhost' http://localhost:3000/?ci-test=two
-
-  post:
-    - echo "Tests finished.";
-    #- grunt testcodeclimate
-    
