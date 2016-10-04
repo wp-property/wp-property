@@ -14,14 +14,19 @@ dependencies:
   pre:
     - mkdir -p ~/utils ~/docker ~/backups
 
+    - sudo rm -rf /home/ubuntu/wp-property-tests
     - git clone git@192.30.253.112:wp-property/wp-property-tests.git /home/ubuntu/wp-property-tests --branch=master
+
 
     - mysql -u ubuntu circle_test < /home/ubuntu/wp-property-tests/state/db-setup.sql
     - mysql -u ubuntu -e "GRANT USAGE on circle_test.* to wp@'%' IDENTIFIED BY 'kjmnlxjvipbxmtud'";
     - mysql -u ubuntu -e "GRANT ALL PRIVILEGES on circle_test.* to wp@'%';";
     - mysql -u ubuntu -e "FLUSH PRIVILEGES;";
-
+    - cat ~/wp-property-tests/static/alias.sh >> ~/.bashrc
+    - curl --silent https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > /home/ubuntu/utils/wp-cli
+    - chmod +x /home/ubuntu/utils/wp-cli;
     - if [[ -e ~/docker/wp.tar ]]; then docker load -i ~/docker/wp.tar; else docker pull wordpress && docker save wordpress > ~/docker/wp.tar; fi
+    - export CONTAINER_HOSTNAME=${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io
 
   override:
     - "docker run --name wordpress-latest \
@@ -32,7 +37,7 @@ dependencies:
         --volume=/home/ubuntu/www:/var/www/html \
         --volume=/home/ubuntu/wp-property-tests/mu/wp-property-tests.php:/var/www/html/wp-content/mu-plugins/wp-property-tests.php \
         --volume=/home/ubuntu/wp-property:/var/www/html/wp-content/plugins/wp-property \
-        -e WORDPRESS_DB_HOST=172.18.0.1:3306 \
+        -e WORDPRESS_DB_HOST=172.18.42.1:3306 \
         -e WORDPRESS_DB_USER=wp \
         -e WORDPRESS_DB_PASSWORD=kjmnlxjvipbxmtud \
         -e WORDPRESS_DB_NAME=circle_test \
