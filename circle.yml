@@ -42,19 +42,19 @@ dependencies:
         -e WORDPRESS_DB_PASSWORD=kjmnlxjvipbxmtud \
         -e WORDPRESS_DB_NAME=circle_test \
         -dit wordpress:latest"
+    - sleep 10
     - "sudo chown -R ubuntu /home/ubuntu/wp-property-tests"
     - "sudo chown -R ubuntu /home/ubuntu/wp-property"
 
 test:
   pre:
-    - sleep 5;
     - curl -H 'host:localhost' http://localhost:3000/
     - /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 user create andy@udx.io andy@udx.io --role=administrator --user_pass=jgnqaobleiubnmcx
     - /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 option update home "http://${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io"
     - /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 option update siteurl "http://${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io"
 
   override:
-    - /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 plugin activate wp-property"
+    - /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 plugin activate wp-property
     - curl -H 'host:localhost' http://localhost:3000/
 
   post:
