@@ -20,7 +20,7 @@ module.exports = {
 
   // curl -H 'host:localhost' http://localhost:3000/ -I
   'WordPress is reachable.': function( done ) {
-    console.log( 'test one', 'http://' + module.host + ':3000/' );
+    // console.log( 'test one', 'http://' + module.host + ':3000/' );
 
     request.get( {
       followRedirect: false,
