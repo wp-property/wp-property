@@ -136,4 +136,3 @@ module.exports = {
 
 var exec = require( 'child_process' ).exec;
 var request = require( 'requestretry' );
-var WP = require('wp-cli');
