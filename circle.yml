@@ -16,6 +16,9 @@ dependencies:
     #- ./ngrok authtoken $NGROK_TOKEN
     #- nohup ./ngrok http 3000 -subdomain=${CIRCLE_SHA1} </dev/null >/dev/null 2>&1 &
 
+  override:
+    - composer install --no-interaction
+
 test:
   override:
     - echo "OK";
