@@ -28,7 +28,6 @@ dependencies:
     - if [[ -e ~/docker/wp.tar ]]; then docker load -i ~/docker/wp.tar; else docker pull wordpress && docker save wordpress > ~/docker/wp.tar; fi
     - export CONTAINER_HOSTNAME=${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io
 
-  override:
     - "bash /home/ubuntu/wp-property-tests/bin/run-container.sh"
     - "sudo chown -R ubuntu /home/ubuntu/wp-property-tests"
     - "sudo chown -R ubuntu /home/ubuntu/wp-property"
