@@ -30,6 +30,8 @@ dependencies:
 
     - "bash /home/ubuntu/wp-property-tests/bin/run-container.sh"
     - "sudo chown -R www-data:www-data /home/ubuntu/www"
+    - "sudo chown -R www-data:www-data /home/ubuntu/wp-property"
+    - "sudo chown -R www-data:www-data /home/ubuntu/wp-property-tests"
 
   override:
     - echo "Skipping composer install on purpose."
