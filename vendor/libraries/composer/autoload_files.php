@@ -9,4 +9,5 @@ return array(
     '68586f4e52570fad0a0d201f5302cfc0' => $baseDir . '/vendor/plugins/wp-meta-box/meta-box-loader.php',
     '90e77fd57b3ada1d71a5a74923356b5f' => $baseDir . '/vendor/plugins/wp-meta-box-utilities/wp-meta-box-utilities.php',
     '8a7957f8f2f99393c431a5d1f28ff7aa' => $baseDir . '/vendor/plugins/wp-gallery-metabox/loader.php',
+    'b19b183aa467dadb9e7c538535e7f296' => $baseDir . '/vendor/plugins/wp-rets-client/wp-rets-client.php',
 );
