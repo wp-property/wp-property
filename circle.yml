@@ -10,6 +10,8 @@ dependencies:
     - "~/utils"
 
   pre:
+    - mkdir -p ~/docker
+    - mkdir -p ~/utils
     - git clone git@192.30.253.112:wp-property/wp-property-tests.git /home/ubuntu/wp-property-tests --branch=master
     - wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip;
     #- unzip ngrok-stable-linux-amd64.zip;
@@ -17,7 +19,7 @@ dependencies:
     #- nohup ./ngrok http 3000 -subdomain=${CIRCLE_SHA1} </dev/null >/dev/null 2>&1 &
 
   override:
-    - composer install --no-interaction
+    - composer install --no-interaction --no-dev
 
 test:
   override:
