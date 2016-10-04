@@ -17,21 +17,12 @@ dependencies:
     - sudo rm -rf /home/ubuntu/wp-property-tests
     - git clone git@192.30.253.112:wp-property/wp-property-tests.git /home/ubuntu/wp-property-tests --branch=master
 
-
-    - mysql -u ubuntu circle_test < /home/ubuntu/wp-property-tests/state/db-setup.sql
-    - mysql -u ubuntu -e "GRANT USAGE on circle_test.* to wp@'%' IDENTIFIED BY 'kjmnlxjvipbxmtud'";
-    - mysql -u ubuntu -e "GRANT ALL PRIVILEGES on circle_test.* to wp@'%';";
-    - mysql -u ubuntu -e "FLUSH PRIVILEGES;";
-    - cat ~/wp-property-tests/static/alias.sh >> ~/.bashrc
-    - curl --silent https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > /home/ubuntu/utils/wp-cli
-    - chmod +x /home/ubuntu/utils/wp-cli;
-    - if [[ -e ~/docker/wp.tar ]]; then docker load -i ~/docker/wp.tar; else docker pull wordpress && docker save wordpress > ~/docker/wp.tar; fi
-    - export CONTAINER_HOSTNAME=${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io
-
+    - "bash /home/ubuntu/wp-property-tests/bin/create-sql.sh"
+    - "bash /home/ubuntu/wp-property-tests/bin/prepare-for-docker.sh"
     - "bash /home/ubuntu/wp-property-tests/bin/run-container.sh"
-    - "sudo chown -R www-data:www-data /home/ubuntu/www"
-    - "sudo chown -R www-data:www-data /home/ubuntu/wp-property"
-    - "sudo chown -R www-data:www-data /home/ubuntu/wp-property-tests"
+    - "bash /home/ubuntu/wp-property-tests/bin/fix-permissions.sh"
+
+    - echo "Site at http://${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io"
 
   override:
     - echo "Skipping composer install on purpose."
