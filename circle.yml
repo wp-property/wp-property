@@ -29,8 +29,8 @@ dependencies:
     - export CONTAINER_HOSTNAME=${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io
 
     - "bash /home/ubuntu/wp-property-tests/bin/run-container.sh"
-    - "sudo chown -R ubuntu /home/ubuntu/wp-property-tests"
-    - "sudo chown -R ubuntu /home/ubuntu/wp-property"
+    - "sudo chown -R www-data:www-data /home/ubuntu/wp-property-tests"
+    - "sudo chown -R www-data:www-data /home/ubuntu/wp-property"
 
 test:
   pre:
@@ -42,6 +42,8 @@ test:
   override:
     - /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 plugin activate wp-property
     - curl -H 'host:localhost' http://localhost:3000/
+    - curl -H 'host:localhost' http://localhost:3000/?ci-test=one
+    - curl -H 'host:localhost' http://localhost:3000/?ci-test=two
 
   post:
     - echo "Tests finished.";
