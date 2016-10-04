@@ -26,4 +26,5 @@ dependencies:
 
   override:
     - echo "Skipping composer install on purpose."
+    - NODE_ENV=development npm install
 
