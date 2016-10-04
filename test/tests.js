@@ -127,7 +127,24 @@ module.exports = {
   },
 
   // curl -H 'host:localhost' http://localhost:3000/?ci-test=one
-  'test mu was added': function() {
+  'site operational aftect activation': function( done ) {
+
+    // I realize this isn't setting the bar very high, but its a start.
+
+    request.get( {
+      followRedirect: false,
+      timeout: 2000,
+      headers: {
+        host: process.env.CIRCLE_SHA1 + '-' + process.env.CIRCLE_BUILD_NUM + '.ngrok.io'
+      },
+      url: 'http://' + module.host + ':3000/'
+    } , function checkResponse( error, resp, body ) {
+
+      // console.log( require( 'util' ).inspect( resp.headers, {showHidden: false, depth: 2, colors: true} ) );
+      // console.log( 'resp.statusCode', resp.statusCode );
+      done();
+
+    });
 
   },
 
