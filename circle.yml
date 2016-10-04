@@ -27,22 +27,23 @@ dependencies:
     - chmod +x /home/ubuntu/utils/wp-cli;
     - if [[ -e ~/docker/wp.tar ]]; then docker load -i ~/docker/wp.tar; else docker pull wordpress && docker save wordpress > ~/docker/wp.tar; fi
     - export CONTAINER_HOSTNAME=${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io
+    - export HOST_ADDRESS=$(ip addr show docker0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)
 
   override:
     - "docker run --name wordpress-latest \
         --hostname=${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io \
         --publish=3000:80 \
         --restart=always \
-        --add-host=api.wordpress.org:172.18.0.1 \
+        --add-host=api.wordpress.org:${HOST_ADDRESS} \
         --volume=/home/ubuntu/www:/var/www/html \
         --volume=/home/ubuntu/wp-property-tests/mu/wp-property-tests.php:/var/www/html/wp-content/mu-plugins/wp-property-tests.php \
         --volume=/home/ubuntu/wp-property:/var/www/html/wp-content/plugins/wp-property \
-        -e WORDPRESS_DB_HOST=172.18.42.1:3306 \
+        -e WORDPRESS_DB_HOST=${HOST_ADDRESS}:3306 \
         -e WORDPRESS_DB_USER=wp \
         -e WORDPRESS_DB_PASSWORD=kjmnlxjvipbxmtud \
         -e WORDPRESS_DB_NAME=circle_test \
         -dit wordpress:latest"
-    - sleep 10
+    - "sleep 10"
     - "sudo chown -R ubuntu /home/ubuntu/wp-property-tests"
     - "sudo chown -R ubuntu /home/ubuntu/wp-property"
 
