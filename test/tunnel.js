@@ -7,8 +7,8 @@ module.exports = {
     var options = {
       proto: 'http',
       addr: 3000,
-      subdomain: [ (process.env.CIRCLE_SHA1 || 'wp-property-tests').substring( 0, 8 ), process.env.CIRCLE_BUILD_NUM || '1' ].join( '-' ),
-      authtoken: process.env.NGROK_TOKEN || '66WK9K2peXWAAdJ256kiq_JRJyzAjft76p2CiQfjed'
+      subdomain: [ (process.env.CIRCLE_SHA1 || 'wp-property').substring( 0, 8 ), process.env.CIRCLE_BUILD_NUM || '1' ].join( '-' ),
+      authtoken: process.env.NGROK_TOKEN
     };
 
     ngrok.connect(options, function (error, url) {
