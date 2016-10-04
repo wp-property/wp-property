@@ -23,6 +23,7 @@ dependencies:
 
     - if [[ -e ~/docker/wp.tar ]]; then docker load -i ~/docker/wp.tar; else docker pull wordpress && docker save wordpress > ~/docker/wp.tar; fi
 
+  override:
     - "docker run --name wordpress-latest \
         --hostname=${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io \
         --publish=3000:80 \
@@ -39,14 +40,15 @@ dependencies:
     - "sudo chown -R ubuntu /home/ubuntu/wp-property-tests"
     - "sudo chown -R ubuntu /home/ubuntu/wp-property"
 
-  override:
-    - composer install --no-interaction --no-dev
-
 test:
   pre:
     - /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 user create andy@udx.io andy@udx.io --role=administrator --user_pass=jgnqaobleiubnmcx
     - /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 option update home "http://${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io"
     - /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 option update siteurl "http://${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io"
+
+  override:
+    - /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 plugin activate wp-property"
+    - curl -H 'host:localhost' http://localhost:3000/
 
   post:
     - echo "Tests finished.";
