@@ -13,6 +13,8 @@ return array(
     'UsabilityDynamics\\Utility' => $vendorDir . '/usabilitydynamics/lib-utility/lib/class-utility.php',
     'UsabilityDynamics\\Utility\\Guid_Fix' => $vendorDir . '/usabilitydynamics/lib-utility/lib/class-guid-fix.php',
     'UsabilityDynamics\\WPRETSC\\Bootstrap' => $baseDir . '/lib/classes/class-bootstrap.php',
+    'UsabilityDynamics\\WPRETSC\\Connectors\\Loader' => $baseDir . '/lib/connectors/class-loader.php',
+    'UsabilityDynamics\\WPRETSC\\Connectors\\WPML' => $baseDir . '/lib/connectors/class-wpml.php',
     'UsabilityDynamics\\WPRETSC\\Media' => $baseDir . '/lib/classes/class-media.php',
     'UsabilityDynamics\\WPRETSC\\Utility' => $baseDir . '/lib/classes/class-utility.php',
     'UsabilityDynamics\\WPRETSC\\XMLRPC' => $baseDir . '/lib/classes/class-xmlrpc.php',

@@ -295,8 +295,12 @@ namespace UsabilityDynamics\WPRETSC {
 
         if( !is_wp_error( $_update_post ) ) {
           ud_get_wp_rets_client()->write_log( 'Published property post ' . $_post_id );
+          /**
+           * Do something after property is published
+           */
+          do_action( 'wrc_property_published', $_post_id );
         } else {
-          ud_get_wp_rets_client()->write_log( 'Error publishign post ' . $_post_id );
+          ud_get_wp_rets_client()->write_log( 'Error publishing post ' . $_post_id );
           ud_get_wp_rets_client()->write_log( '<pre>' . print_r( $_update_post, true ) . '</pre>' );
         }
 
@@ -352,6 +356,8 @@ namespace UsabilityDynamics\WPRETSC {
 
         ud_get_wp_rets_client()->write_log( "Checking post ID [$post_id]" );
 
+        do_action( 'wrc_before_property_deleted', $post_id );
+
         if( FALSE === get_post_status( $post_id ) ) {
 
           ud_get_wp_rets_client()->write_log( "Post ID [$post_id] does not exist. Removing its postmeta and terms if exist" );
@@ -364,12 +370,18 @@ namespace UsabilityDynamics\WPRETSC {
           array_push( $response[ 'logs' ], $log );
           ud_get_wp_rets_client()->write_log( $log );
 
+          do_action( 'wrc_property_deleted', $post_id );
+
         } else {
 
           ud_get_wp_rets_client()->write_log( "Post [$post_id] found. Removing it." );
 
           if( wp_delete_post( $post_id, true ) ) {
             $log = "Removed Property [{$post_id}]";
+            /**
+             * Do something after property is deleted
+             */
+            do_action( 'wrc_property_deleted', $post_id );
           } else {
             $log = "Property [{$post_id}] could not be removed";
             $response[ "ok" ] = false;

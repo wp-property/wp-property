@@ -26,7 +26,7 @@
     "codeclimate/php-test-reporter": "~0.1"
   },
   "autoload": {
-    "classmap": [ "lib/classes" ],
+    "classmap": [ "lib/classes", "lib/connectors" ],
     "files": [
       "wp-rets-client.php"
     ]
