@@ -72,13 +72,13 @@ namespace UsabilityDynamics\WPRETSC {
 
         // Do nothing for non-xmlrpc.
         if( !defined( 'XMLRPC_REQUEST' ) || ( defined( 'XMLRPC_REQUEST' ) && !XMLRPC_REQUEST ) ) {
-          return wp_parse_args( $_REQUEST, $defaults ? $defaults : array() );;
+          return wp_parse_args( $_REQUEST, $defaults ? $defaults : array() );
         }
 
         $wp_xmlrpc_server->escape( $args );
 
         // @note Shouldn't this be done automatically elsewhere?
-        if( $args[0] && $args[0] !== 1 ) {
+        if( $args[0] && (int)$args[0] !== 1 ) {
           switch_to_blog($args[0]);
         }
 
