@@ -269,6 +269,10 @@ if ( get_option( 'permalink_structure' ) == '' ) {
               <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_automatically_regenerate_thumbnails]&label=" . __( 'Disable "on-the-fly" image regeneration.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] ) ? $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] : true ) ); ?>
               <span class="description"><?php _e('Enabling this option may cause performance issues.',ud_get_wp_property()->domain); ?></span>
             </li>
+            <li>
+              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][pre_release_update]&label=" . __( 'Enable pre-release updates.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'pre_release_update' ] ) ? $wp_properties[ 'configuration' ][ 'pre_release_update' ] : false ) ); ?>
+              <br/>
+            </li>
           </ul>
         </div>
       </td>

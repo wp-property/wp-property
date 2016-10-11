@@ -4,12 +4,13 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit8c0c72a60eeb5e01c69bb1e116e4a938
+class ComposerStaticInitc7c0568b8cf7cc94d13923d4157f9cf5
 {
     public static $files = array (
         '68586f4e52570fad0a0d201f5302cfc0' => __DIR__ . '/../../..' . '/vendor/plugins/wp-meta-box/meta-box-loader.php',
         '90e77fd57b3ada1d71a5a74923356b5f' => __DIR__ . '/../../..' . '/vendor/plugins/wp-meta-box-utilities/wp-meta-box-utilities.php',
         '8a7957f8f2f99393c431a5d1f28ff7aa' => __DIR__ . '/../../..' . '/vendor/plugins/wp-gallery-metabox/loader.php',
+        'b19b183aa467dadb9e7c538535e7f296' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/wp-rets-client.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -31,12 +32,14 @@ class ComposerStaticInit8c0c72a60eeb5e01c69bb1e116e4a938
         'Composer\\Installers\\AimeosInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/AimeosInstaller.php',
         'Composer\\Installers\\AnnotateCmsInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/AnnotateCmsInstaller.php',
         'Composer\\Installers\\AsgardInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/AsgardInstaller.php',
+        'Composer\\Installers\\AttogramInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/AttogramInstaller.php',
         'Composer\\Installers\\BaseInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/BaseInstaller.php',
         'Composer\\Installers\\BitrixInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/BitrixInstaller.php',
         'Composer\\Installers\\BonefishInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/BonefishInstaller.php',
         'Composer\\Installers\\CakePHPInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/CakePHPInstaller.php',
         'Composer\\Installers\\ChefInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ChefInstaller.php',
         'Composer\\Installers\\ClanCatsFrameworkInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ClanCatsFrameworkInstaller.php',
+        'Composer\\Installers\\CockpitInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/CockpitInstaller.php',
         'Composer\\Installers\\CodeIgniterInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/CodeIgniterInstaller.php',
         'Composer\\Installers\\Concrete5Installer' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/Concrete5Installer.php',
         'Composer\\Installers\\CraftInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/CraftInstaller.php',
@@ -74,10 +77,12 @@ class ComposerStaticInit8c0c72a60eeb5e01c69bb1e116e4a938
         'Composer\\Installers\\PhpBBInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/PhpBBInstaller.php',
         'Composer\\Installers\\PimcoreInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/PimcoreInstaller.php',
         'Composer\\Installers\\PiwikInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/PiwikInstaller.php',
+        'Composer\\Installers\\PlentymarketsInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/PlentymarketsInstaller.php',
         'Composer\\Installers\\Plugin' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/Plugin.php',
         'Composer\\Installers\\PrestashopInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/PrestashopInstaller.php',
         'Composer\\Installers\\PuppetInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/PuppetInstaller.php',
         'Composer\\Installers\\RadPHPInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/RadPHPInstaller.php',
+        'Composer\\Installers\\ReIndexInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ReIndexInstaller.php',
         'Composer\\Installers\\RedaxoInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/RedaxoInstaller.php',
         'Composer\\Installers\\RoundcubeInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/RoundcubeInstaller.php',
         'Composer\\Installers\\SMFInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/SMFInstaller.php',
@@ -88,9 +93,11 @@ class ComposerStaticInit8c0c72a60eeb5e01c69bb1e116e4a938
         'Composer\\Installers\\TYPO3FlowInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/TYPO3FlowInstaller.php',
         'Composer\\Installers\\TheliaInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/TheliaInstaller.php',
         'Composer\\Installers\\TuskInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/TuskInstaller.php',
+        'Composer\\Installers\\VanillaInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/VanillaInstaller.php',
         'Composer\\Installers\\WHMCSInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/WHMCSInstaller.php',
         'Composer\\Installers\\WolfCMSInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/WolfCMSInstaller.php',
         'Composer\\Installers\\WordPressInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/WordPressInstaller.php',
+        'Composer\\Installers\\YawikInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/YawikInstaller.php',
         'Composer\\Installers\\ZendInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ZendInstaller.php',
         'Composer\\Installers\\ZikulaInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ZikulaInstaller.php',
         'RWMB_Autocomplete_Field' => __DIR__ . '/../../..' . '/vendor/plugins/wp-meta-box/inc/fields/autocomplete.php',
@@ -210,6 +217,10 @@ class ComposerStaticInit8c0c72a60eeb5e01c69bb1e116e4a938
         'UsabilityDynamics\\WPP\\Upgrade' => __DIR__ . '/../../..' . '/lib/classes/class-upgrade.php',
         'UsabilityDynamics\\WPP\\WPML' => __DIR__ . '/../../..' . '/lib/classes/class-wpml.php',
         'UsabilityDynamics\\WPP\\Widget' => __DIR__ . '/../../..' . '/lib/classes/class-widget.php',
+        'UsabilityDynamics\\WPRETSC\\Bootstrap' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-bootstrap.php',
+        'UsabilityDynamics\\WPRETSC\\Media' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-media.php',
+        'UsabilityDynamics\\WPRETSC\\Utility' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-utility.php',
+        'UsabilityDynamics\\WPRETSC\\XMLRPC' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-xmlrpc.php',
         'UsabilityDynamics\\WP\\Bootstrap' => __DIR__ . '/..' . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap.php',
         'UsabilityDynamics\\WP\\Bootstrap_Plugin' => __DIR__ . '/..' . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php',
         'UsabilityDynamics\\WP\\Bootstrap_Theme' => __DIR__ . '/..' . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap-theme.php',
@@ -226,9 +237,9 @@ class ComposerStaticInit8c0c72a60eeb5e01c69bb1e116e4a938
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit8c0c72a60eeb5e01c69bb1e116e4a938::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit8c0c72a60eeb5e01c69bb1e116e4a938::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit8c0c72a60eeb5e01c69bb1e116e4a938::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc7c0568b8cf7cc94d13923d4157f9cf5::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc7c0568b8cf7cc94d13923d4157f9cf5::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitc7c0568b8cf7cc94d13923d4157f9cf5::$classMap;
 
         }, null, ClassLoader::class);
     }
