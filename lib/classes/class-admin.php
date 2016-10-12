@@ -33,6 +33,10 @@ namespace UsabilityDynamics\WPP {
 
         // @todo Move back to Settings -> Properties as it was years ago.
         add_action( "admin_menu", array( $this, 'admin_menu' ), 150 );
+
+	      // @todo Make directory names dynamic, since it may change.
+	      add_action( "in_plugin_update_message-wp-property/wp-property.php", array( $this, 'product_update_message' ), 20, 2 );
+
       }
 
       /**
@@ -176,6 +180,29 @@ namespace UsabilityDynamics\WPP {
           global $wp_properties;
           include ud_get_wp_property()->path( "static/views/admin/settings.php", 'dir' );
         } );
+
+      }
+
+	    /**
+	     * Display a hopefully helpful message next to "there's an update available" message, in particular if pre-release updates are enabled.
+	     *
+	     * @author potanin@UD
+	     * @param $plugin_data
+	     * @param $response
+	     */
+      public function product_update_message( $plugin_data, $response ) {
+      	global $wp_properties;
+
+	      // pre-release updates not enabled or no update.
+	      if( !isset( $wp_properties[ 'configuration' ]['pre_release_update'] ) ||  $wp_properties[ 'configuration' ]['pre_release_update'] !== 'true' || !$plugin_data['update'] ) {
+		      return;
+	      }
+
+	      if( isset( $response ) && isset( $response->message ) ) {
+		      echo ' <span class="wpp-update-message">' . $response->message . '</span>';
+	      } else {
+		      echo ' <span class="wpp-update-message">' . __( 'You are seeing this because you subscribed to latest updates.', ud_get_wp_property()->domain ) . '</span>';
+	      }
 
       }
 
