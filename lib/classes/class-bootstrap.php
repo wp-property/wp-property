@@ -234,7 +234,7 @@ namespace UsabilityDynamics\WPP {
         // if ( current_filter() === 'pre_update_site_option__site_transient_update_plugins' ) {}
         // if ( current_filter() === 'site_transient_update_plugins' ) {}
 
-        if ( ! $response || ! is_array( $response->response ) || ! isset( $wp_properties ) || ! isset( $wp_properties[ 'configuration' ][ 'pre_release_update' ] ) ) {
+        if ( ! $response || !isset( $response->response ) || ! is_array( $response->response ) || ! isset( $wp_properties ) || ! isset( $wp_properties[ 'configuration' ][ 'pre_release_update' ] ) ) {
           return $response;
         }
 
@@ -244,8 +244,8 @@ namespace UsabilityDynamics\WPP {
         }
 
         // Last check was very recent. (This doesn't seem to be right place for this). That being said, if it's being forced, we ignore last time we tried.
-        if ( ! ( isset( $_GET[ 'force-check' ] ) && $_GET[ 'force-check' ] === '1' ) && $response->last_checked && ( time() - $response->last_checked ) < 360 ) {
-          return $response;
+        if ( current_filter() === 'site_transient_update_plugins' && !( isset( $_GET[ 'force-check' ] ) && $_GET[ 'force-check' ] === '1' ) && $response->last_checked && ( time() - $response->last_checked ) < 360 ) {
+            return $response;
         }
 
         // e.g. "wp-property", the clean directory name that we are runnig from.
@@ -258,9 +258,6 @@ namespace UsabilityDynamics\WPP {
         if ( ! file_exists( WP_PLUGIN_DIR . '/' . $_plugin_name . '/composer.json' ) ) {
           return $response;
         }
-
-        // Trying to detect if we already ran a check in this very request.
-        // if( isset( $response->response ) && isset( $response->response[ $_plugin_local_id ] ) ) {}
 
         try {
 
@@ -286,6 +283,15 @@ namespace UsabilityDynamics\WPP {
 
             // If there is no "data" field then we have nothing to update.
             if ( isset( $_body->data ) ) {
+
+              if( !isset( $response->response ) ) {
+                $response->response = array();
+              }
+
+              if( !isset( $response->no_update ) ) {
+                $response->no_update = array();
+              }
+
               $response->response[ $_plugin_local_id ] = $_body->data;
 
               if ( isset( $response->no_update[ $_plugin_local_id ] ) ) {
@@ -296,8 +302,7 @@ namespace UsabilityDynamics\WPP {
 
           }
 
-        } catch( \Exception $e ) {
-        }
+        } catch( \Exception $e ) {}
 
         return $response;
 
