@@ -91,7 +91,7 @@ namespace UsabilityDynamics\WPP {
             wp_enqueue_script( 'jquery-cookie' );
             wp_enqueue_script( 'jquery-ui-dialog' );
             wp_enqueue_script( 'wp-property-admin-settings' );
-            
+
             wp_enqueue_style( 'wpp-jquery-ui-dialog' );
             wp_enqueue_style( 'wpp-jquery-colorpicker-css' );
             // This will enqueue the Media Uploader script
@@ -183,26 +183,26 @@ namespace UsabilityDynamics\WPP {
 
       }
 
-	    /**
-	     * Display a hopefully helpful message next to "there's an update available" message, in particular if pre-release updates are enabled.
-	     *
-	     * @author potanin@UD
-	     * @param $plugin_data
-	     * @param $response
-	     */
+      /**
+       * Display a hopefully helpful message next to "there's an update available" message, in particular if pre-release updates are enabled.
+       *
+       * @author potanin@UD
+       * @param $plugin_data
+       * @param $response
+       */
       public function product_update_message( $plugin_data, $response ) {
-      	global $wp_properties;
+        global $wp_properties;
 
-	      // pre-release updates not enabled or no update.
-	      if( !isset( $wp_properties[ 'configuration' ]['pre_release_update'] ) ||  $wp_properties[ 'configuration' ]['pre_release_update'] !== 'true' || !$plugin_data['update'] ) {
-		      return;
-	      }
+        // pre-release updates not enabled or no update.
+        if ( ! isset( $wp_properties[ 'configuration' ][ 'pre_release_update' ] ) || $wp_properties[ 'configuration' ][ 'pre_release_update' ] !== 'true' || ! $plugin_data[ 'update' ] ) {
+          return;
+        }
 
-	      if( isset( $response ) && isset( $response->message ) ) {
-		      echo ' <span class="wpp-update-message">' . $response->message . '</span>';
-	      } else {
-		      echo ' <span class="wpp-update-message">' . __( 'You are seeing this because you subscribed to latest updates.', ud_get_wp_property()->domain ) . '</span>';
-	      }
+        if ( isset( $response ) && isset( $response->message ) ) {
+          echo ' <span class="wpp-update-message">' . $response->message . '</span>';
+        } else {
+          echo ' <span class="wpp-update-message">' . __( 'You are seeing this because you subscribed to latest updates.', ud_get_wp_property()->domain ) . '</span>';
+        }
 
       }
 
