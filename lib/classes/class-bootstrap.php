@@ -249,7 +249,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         // e.g. "wp-property", the clean directory name that we are runnig from.
-        $_plugin_name = plugin_basename( dirname( dirname( __DIR__ ) ) );
+        $_plugin_name = plugin_basename( dirname( __DIR__, 2 ) );
 
         // e.g. "wp-property/wp-property.php". Directory name may vary but the main plugin file should not.
         $_plugin_local_id = $_plugin_name . '/wp-property.php';
