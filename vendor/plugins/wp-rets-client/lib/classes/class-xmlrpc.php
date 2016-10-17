@@ -82,20 +82,50 @@ namespace UsabilityDynamics\WPRETSC {
           switch_to_blog($args[0]);
         }
 
-        if( !$user = $wp_xmlrpc_server->login( $args[ 1 ], $args[ 2 ] ) ) {
+        if( !$wp_xmlrpc_server->login( $args[ 1 ], $args[ 2 ] ) && !self::token_login( $args[ 1 ], $args[ 2 ] ) ) {
+
           return array(
             'ok' => false,
-            'invalid' => $user,
-            'error' => $wp_xmlrpc_server->error,
+            'error' => isset( $wp_xmlrpc_server->error ) ? $wp_xmlrpc_server->error : 'Invalid credentials.',
             'username' => $args[ 1 ],
             'password' => $args[ 2 ],
           );
+
         }
 
         // remove filter which slows down updates significantly. (experimental)
         remove_filter( 'transition_post_status', '_update_term_count_on_transition_post_status', 10 );
 
-        return $args[ 3 ];
+        // Return blank array of nothing provided so auth does not fail.
+        return $args[ 3 ] ? $args[ 3 ] : array();
+
+      }
+
+      /**
+       * Login with UD Site ID and Secret Token.
+       *
+       * @author potanin@UD
+       * @param null $site_id
+       * @param null $secret_token
+       * @return bool
+       */
+      static public function token_login( $site_id = null, $secret_token = null ) {
+
+        if( !$site_id || !$secret_token ) {
+          return false;
+        }
+
+        if( !get_site_option( 'ud_site_id' ) || !get_site_option( 'ud_site_secret_token' ) ) {
+          return false;
+        }
+
+
+        if( $site_id === get_site_option( 'ud_site_id' ) && $secret_token === get_site_option( 'ud_site_secret_token' ) ) {
+          return true;
+        }
+
+        return false;
+
       }
 
       /**
@@ -130,7 +160,11 @@ namespace UsabilityDynamics\WPRETSC {
         // ud_get_wp_rets_client()->write_log( 'Have system check [wpp.editProperty] request.' );
 
         // swets blog
-        self::parseRequest( $args );
+
+        $post_data = self::parseRequest( $args );
+        if( !empty( $post_data['error'] ) ) {
+          return $post_data;
+        }
 
         $_response = self::send(array(
           "ok" => true,
