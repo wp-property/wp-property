@@ -99,6 +99,25 @@ namespace UsabilityDynamics\WPRETSC {
       }
 
       /**
+       * Return list of plugins.
+       *
+       * @author potanin@UD
+       * @param $args
+       * @return array
+       */
+      static public function get_plugins( $args = null ) {
+
+        $_active = wp_get_active_and_valid_plugins();
+        $result = array();
+
+        foreach( $_active as $_plugin ) {
+          $result[] = basename( dirname($_plugin) );
+        }
+
+        return $result;
+      }
+
+      /**
        * Basic System Information.
        *
        * @author potanin@UD
@@ -108,21 +127,30 @@ namespace UsabilityDynamics\WPRETSC {
       public function rpc_system_check( $args ) {
         global $wp_xmlrpc_server;
 
+        // ud_get_wp_rets_client()->write_log( 'Have system check [wpp.editProperty] request.' );
+
         // swets blog
         self::parseRequest( $args );
 
         $_response = self::send(array(
           "ok" => true,
+          "home_url" => home_url(),
           "blog_id" => get_current_blog_id(),
           "themeName" => wp_get_theme()->get( 'Name' ),
           "themeVersion" => wp_get_theme()->get( 'Version' ),
           "stylesheet" => get_option( 'stylesheet' ),
           "template" => get_option( 'stylesheet' ),
-          "post_types" => get_post_types()
+          "post_types" => get_post_types(),
+          "activePlugins" => self::get_plugins()
         ));
 
+
+        // ud_get_wp_rets_client()->write_log( 'Have system check [wpp.editProperty] response:' . print_r($_response,true) );
+
         // not sure if needed here, but seems like good pratice.
-        restore_current_blog();
+        if( function_exists( 'restore_current_blog' ) ) {
+          restore_current_blog();
+        }
 
         // Send response to wherever.
         return $_response;
@@ -142,6 +170,9 @@ namespace UsabilityDynamics\WPRETSC {
           return $post_data;
         }
 
+
+      //ud_get_wp_rets_client()->write_log( 'data' . print_r( $post_data, true ) );
+
         ud_get_wp_rets_client()->write_log( 'Have request wpp.editProperty request' );
 
         if( isset( $post_data[ 'meta_input' ][ 'rets_id' ] ) ) {
@@ -153,7 +184,7 @@ namespace UsabilityDynamics\WPRETSC {
         if( !empty( $post_data[ 'meta_input' ][ 'rets_id' ] ) ) {
           $post_data[ 'ID' ] = ud_get_wp_rets_client()->find_property_by_rets_id( $post_data[ 'meta_input' ][ 'rets_id' ] );
         } else {
-          return array( 'ok' => false, 'error' => "Property missing RETS ID." );
+          return array( 'ok' => false, 'error' => "Property missing RETS ID.", "data" => $post_data );
         }
 
         // set post status to draft since it may be inserting for a while due to large amount of terms
@@ -218,15 +249,14 @@ namespace UsabilityDynamics\WPRETSC {
 
           }
 
-          // delete all old attachments if the count of new media doesn't match up with old media
-          ud_get_wp_rets_client()->write_log( 'Deleting old media because count does not match.' );
-
           foreach( $attached_media as $_single_media_item ) {
             // ud_get_wp_rets_client()->write_log( 'Deleting [' .  $_single_media_item->ID . '] media item.' );
             wp_delete_attachment( $_single_media_item->ID, true );
           }
 
+          // delete all old attachments if the count of new media doesn't match up with old media
           if( count( $attached_media ) != count( $post_data[ 'meta_input' ][ 'rets_media' ] ) ) {
+            ud_get_wp_rets_client()->write_log( 'For ['.$_post_id.'] property media count has changed. Before ['.count( $attached_media ).'], now ['.count( $post_data[ 'meta_input' ][ 'rets_media' ] ).'].' );
           }
 
           foreach( $post_data[ 'meta_input' ][ 'rets_media' ] as $media ) {
@@ -285,7 +315,16 @@ namespace UsabilityDynamics\WPRETSC {
 
         }
 
-        ud_get_wp_rets_client()->write_log( 'Publishing property post ' . $_post_id );
+        // We dont need to store this once the Media inserting is working well, besides we can always get it from api. - potanin@UD
+        if( isset( $post_data[ 'meta_input' ][ 'rets_media' ] ) ) {
+          unset( $post_data[ 'meta_input' ][ 'rets_media' ] );
+        }
+
+        if( $_post_id ) {
+          ud_get_wp_rets_client()->write_log( 'Updating property post [' . $_post_id  . '].' );
+        } else {
+          ud_get_wp_rets_client()->write_log( 'Creating property post [' . $_post_id  . '].' );
+        }
 
         $_update_post = wp_update_post( array(
           'ID' => $_post_id,
@@ -294,7 +333,7 @@ namespace UsabilityDynamics\WPRETSC {
         ) );
 
         if( !is_wp_error( $_update_post ) ) {
-          ud_get_wp_rets_client()->write_log( 'Published property post ' . $_post_id );
+          ud_get_wp_rets_client()->write_log( 'Published property post [' . $_post_id  . '].' );
           /**
            * Do something after property is published
            */

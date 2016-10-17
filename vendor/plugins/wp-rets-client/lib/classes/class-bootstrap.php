@@ -23,7 +23,7 @@ namespace UsabilityDynamics\WPRETSC {
       /**
        * @var string
        */
-      public $logfile = 'debug-log.log';
+      public $logfile = 'wp-content/rets-debug-log.log';
 
       /**
        * Instantaite class.
@@ -64,6 +64,10 @@ namespace UsabilityDynamics\WPRETSC {
             'query_var'         => false,
             'rewrite'           => false
           ) );
+
+          add_shortcode('wp-rets-client', function() {
+            return '<!--Delivered by rets.ci.-->';
+          });
 
         });
 
