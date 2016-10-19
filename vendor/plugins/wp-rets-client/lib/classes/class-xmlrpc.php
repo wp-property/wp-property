@@ -110,7 +110,7 @@ namespace UsabilityDynamics\WPRETSC {
        * @return bool
        */
       static public function token_login( $site_id = null, $secret_token = null ) {
-
+        global $wp_xmlrpc_server;
         if( !$site_id || !$secret_token ) {
           return false;
         }
@@ -121,6 +121,7 @@ namespace UsabilityDynamics\WPRETSC {
 
 
         if( $site_id === get_site_option( 'ud_site_id' ) && $secret_token === get_site_option( 'ud_site_secret_token' ) ) {
+          $wp_xmlrpc_server->error = null;
           return true;
         }
 
