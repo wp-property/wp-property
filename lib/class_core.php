@@ -68,6 +68,108 @@ class WPP_Core {
      */
     add_filter( 'get_post_metadata', array( $this, 'maybe_get_thumbnail_id' ), 10, 4 );
 
+    /**
+     * Maybe register site on UD
+     */
+    add_action( 'wpp_post_init', array( $this, 'maybe_register_site' ) );
+
+    /**
+     * Updated remote settings to UD
+     */
+    add_action( 'wpp::save_settings', array( $this, 'update_site_settings' ) );
+
+  }
+
+  /**
+   * Register Site on UD if needed
+   */
+  public function maybe_register_site() {
+    global $wpdb, $wp_properties;
+
+    $table_prefix = $wpdb->prefix;
+
+    if ( get_site_option('ud_site_secret_token') ) return;
+
+    add_site_option( 'ud_site_secret_token', $ud_site_secret_token = md5( wp_generate_password( 20 ) ) );
+
+    $site_url = get_site_url();
+    $ud_site_id = get_site_option('ud_site_id');
+
+    $url = 'https://api.usabilitydynamics.com/product/v1/site/register';
+    $find = array( 'http://', 'https://' );
+    $replace = '';
+    $output = str_replace( $find, $replace, $site_url );
+    // May be extend backup data by add-ons options.
+    $data_settings = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $wp_properties ) );
+    $data_settings_json = json_encode($data_settings);
+    $args = array(
+        'method' => 'POST',
+        'timeout' => 45,
+        'redirection' => 5,
+        'httpversion' => '1.0',
+        'headers' => array(),
+        'body' => array(
+            'host' => $output,
+            'ud_site_secret_token' => $ud_site_secret_token,
+            'ud_site_id' => ($ud_site_id ? $ud_site_id : ''),
+            'db_name' => DB_NAME,
+            'home_url' => home_url(),
+            'xmlrpc_url' => site_url('/xmlrpc.php'),
+            'table_refix' => $table_prefix,
+            'wpp_settings' => $data_settings_json,
+            'user_id' => get_current_user_id(),
+            'message' => "Hello, I'm WP-property plugin. Give me ID, please."
+        ),
+    );
+    $response = wp_remote_post( $url, $args );
+
+    $api_body = json_decode(wp_remote_retrieve_body($response));
+
+    if ( !is_wp_error( $response ) ) {
+      if($api_body->ud_site_secret_token == $ud_site_secret_token){
+        add_site_option('ud_site_id', $api_body->ud_site_id);
+      }
+    }
+
+  }
+
+  /**
+   * Update remote settings
+   */
+  public function update_site_settings() {
+    global $wpdb, $wp_properties;
+
+    $table_prefix = $wpdb->prefix;
+    $ud_site_secret_token = get_site_option('ud_site_secret_token');
+    $site_url = get_site_url();
+    $ud_site_id = get_site_option('ud_site_id');
+    $url = 'https://api.usabilitydynamics.com/product/v1/site/update_settings';
+    $find = array( 'http://', 'https://' );
+    $replace = '';
+    $output = str_replace( $find, $replace, $site_url );
+    // May be extend backup data by add-ons options.
+    $data_settings = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $wp_properties ) );
+    $data_settings_json = json_encode($data_settings);
+
+    $args = array(
+        'method' => 'POST',
+        'timeout' => 45,
+        'redirection' => 5,
+        'httpversion' => '1.0',
+        'headers' => array(),
+        'body' => array(
+            'host' => $output,
+            'ud_site_secret_token' => $ud_site_secret_token,
+            'ud_site_id' => $ud_site_id,
+            'db_name' => DB_NAME,
+            'home_url' => home_url(),
+            'table_refix' => $table_prefix,
+            'wpp_settings' => $data_settings_json,
+            'message' => "Hello, I'm WP-property plugin. Give me ID, please."
+        ),
+    );
+
+    wp_remote_post( $url, $args );
   }
 
   /**
