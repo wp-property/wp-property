@@ -196,6 +196,8 @@ return array(
     'UsabilityDynamics\\WPP\\WPML' => $baseDir . '/lib/classes/class-wpml.php',
     'UsabilityDynamics\\WPP\\Widget' => $baseDir . '/lib/classes/class-widget.php',
     'UsabilityDynamics\\WPRETSC\\Bootstrap' => $baseDir . '/vendor/plugins/wp-rets-client/lib/classes/class-bootstrap.php',
+    'UsabilityDynamics\\WPRETSC\\Connectors\\Loader' => $baseDir . '/vendor/plugins/wp-rets-client/lib/connectors/class-loader.php',
+    'UsabilityDynamics\\WPRETSC\\Connectors\\WPML' => $baseDir . '/vendor/plugins/wp-rets-client/lib/connectors/class-wpml.php',
     'UsabilityDynamics\\WPRETSC\\Media' => $baseDir . '/vendor/plugins/wp-rets-client/lib/classes/class-media.php',
     'UsabilityDynamics\\WPRETSC\\Utility' => $baseDir . '/vendor/plugins/wp-rets-client/lib/classes/class-utility.php',
     'UsabilityDynamics\\WPRETSC\\XMLRPC' => $baseDir . '/vendor/plugins/wp-rets-client/lib/classes/class-xmlrpc.php',

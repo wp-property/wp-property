@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitc7c0568b8cf7cc94d13923d4157f9cf5
+class ComposerStaticInit8900037fc6f37f90ab8d49e20f07969e
 {
     public static $files = array (
         '68586f4e52570fad0a0d201f5302cfc0' => __DIR__ . '/../../..' . '/vendor/plugins/wp-meta-box/meta-box-loader.php',
@@ -218,6 +218,8 @@ class ComposerStaticInitc7c0568b8cf7cc94d13923d4157f9cf5
         'UsabilityDynamics\\WPP\\WPML' => __DIR__ . '/../../..' . '/lib/classes/class-wpml.php',
         'UsabilityDynamics\\WPP\\Widget' => __DIR__ . '/../../..' . '/lib/classes/class-widget.php',
         'UsabilityDynamics\\WPRETSC\\Bootstrap' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-bootstrap.php',
+        'UsabilityDynamics\\WPRETSC\\Connectors\\Loader' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/connectors/class-loader.php',
+        'UsabilityDynamics\\WPRETSC\\Connectors\\WPML' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/connectors/class-wpml.php',
         'UsabilityDynamics\\WPRETSC\\Media' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-media.php',
         'UsabilityDynamics\\WPRETSC\\Utility' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-utility.php',
         'UsabilityDynamics\\WPRETSC\\XMLRPC' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-xmlrpc.php',
@@ -237,9 +239,9 @@ class ComposerStaticInitc7c0568b8cf7cc94d13923d4157f9cf5
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc7c0568b8cf7cc94d13923d4157f9cf5::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitc7c0568b8cf7cc94d13923d4157f9cf5::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitc7c0568b8cf7cc94d13923d4157f9cf5::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit8900037fc6f37f90ab8d49e20f07969e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit8900037fc6f37f90ab8d49e20f07969e::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit8900037fc6f37f90ab8d49e20f07969e::$classMap;
 
         }, null, ClassLoader::class);
     }
