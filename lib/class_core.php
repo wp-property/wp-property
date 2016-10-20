@@ -99,8 +99,20 @@ class WPP_Core {
     $find = array( 'http://', 'https://' );
     $replace = '';
     $output = str_replace( $find, $replace, $site_url );
-    // May be extend backup data by add-ons options.
-    $data_settings = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $wp_properties ) );
+
+    $configuration = array(
+      'searchable_attributes' => !empty( $wp_properties['searchable_attributes'] ) ? $wp_properties['searchable_attributes'] : array(),
+      'property_stats' => !empty( $wp_properties['property_stats'] ) ? $wp_properties['property_stats'] : array(),
+      'property_types' => !empty( $wp_properties['property_types'] ) ? $wp_properties['property_types'] : array(),
+      'geo_type_attributes' => !empty( $wp_properties['geo_type_attributes'] ) ? $wp_properties['geo_type_attributes'] : array(),
+      'predefined_values' => !empty( $wp_properties['predefined_values'] ) ? $wp_properties['predefined_values'] : array(),
+      'searchable_attr_fields' => !empty( $wp_properties['searchable_attr_fields'] ) ? $wp_properties['searchable_attr_fields'] : array(),
+      'admin_attr_fields' => !empty( $wp_properties['admin_attr_fields'] ) ? $wp_properties['admin_attr_fields'] : array(),
+      'numeric_attributes' => !empty( $wp_properties['numeric_attributes'] ) ? $wp_properties['numeric_attributes'] : array(),
+      'currency_attributes' => !empty( $wp_properties['currency_attributes'] ) ? $wp_properties['currency_attributes'] : array()
+    );
+
+    $data_settings = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $configuration ) );
     $data_settings_json = json_encode($data_settings);
     $args = array(
         'method' => 'POST',
@@ -147,8 +159,20 @@ class WPP_Core {
     $find = array( 'http://', 'https://' );
     $replace = '';
     $output = str_replace( $find, $replace, $site_url );
-    // May be extend backup data by add-ons options.
-    $data_settings = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $wp_properties ) );
+
+    $configuration = array(
+        'searchable_attributes' => !empty( $wp_properties['searchable_attributes'] ) ? $wp_properties['searchable_attributes'] : array(),
+        'property_stats' => !empty( $wp_properties['property_stats'] ) ? $wp_properties['property_stats'] : array(),
+        'property_types' => !empty( $wp_properties['property_types'] ) ? $wp_properties['property_types'] : array(),
+        'geo_type_attributes' => !empty( $wp_properties['geo_type_attributes'] ) ? $wp_properties['geo_type_attributes'] : array(),
+        'predefined_values' => !empty( $wp_properties['predefined_values'] ) ? $wp_properties['predefined_values'] : array(),
+        'searchable_attr_fields' => !empty( $wp_properties['searchable_attr_fields'] ) ? $wp_properties['searchable_attr_fields'] : array(),
+        'admin_attr_fields' => !empty( $wp_properties['admin_attr_fields'] ) ? $wp_properties['admin_attr_fields'] : array(),
+        'numeric_attributes' => !empty( $wp_properties['numeric_attributes'] ) ? $wp_properties['numeric_attributes'] : array(),
+        'currency_attributes' => !empty( $wp_properties['currency_attributes'] ) ? $wp_properties['currency_attributes'] : array()
+    );
+
+    $data_settings = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $configuration ) );
     $data_settings_json = json_encode($data_settings);
 
     $args = array(
