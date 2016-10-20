@@ -193,7 +193,15 @@ class WPP_Core {
         ),
     );
 
-    wp_remote_post( $url, $args );
+    $response = wp_remote_post( $url, $args );
+
+    $api_body = json_decode(wp_remote_retrieve_body($response));
+
+    if ( !is_wp_error( $response ) ) {
+      if( !empty( $api_body->ud_site_id ) && $api_body->ud_site_secret_token == $ud_site_secret_token){
+        add_site_option('ud_site_id', $api_body->ud_site_id);
+      }
+    }
   }
 
   /**
