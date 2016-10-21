@@ -39,6 +39,13 @@ namespace UsabilityDynamics\WPRETSC {
         // 3d-party compatibility
         new Connectors\Loader();
 
+        // AJAX
+        new Ajax();
+
+        add_action( 'wp_dashboard_setup', function(){
+          new Widget();
+        } );
+
         add_action('init', function() {
 
           // Needed for import associationa and tracking of what schedule a listing came from

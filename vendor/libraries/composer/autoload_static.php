@@ -207,6 +207,7 @@ class ComposerStaticInit8900037fc6f37f90ab8d49e20f07969e
         'UsabilityDynamics\\WPP\\Attributes' => __DIR__ . '/../../..' . '/lib/classes/class-attributes.php',
         'UsabilityDynamics\\WPP\\Bootstrap' => __DIR__ . '/../../..' . '/lib/classes/class-bootstrap.php',
         'UsabilityDynamics\\WPP\\Children_List_Table' => __DIR__ . '/../../..' . '/lib/classes/class-children-list-table.php',
+        'UsabilityDynamics\\WPP\\Dashboard_Widget' => __DIR__ . '/../../..' . '/lib/classes/class-dashboard-widget.php',
         'UsabilityDynamics\\WPP\\Export' => __DIR__ . '/../../..' . '/lib/classes/class-export.php',
         'UsabilityDynamics\\WPP\\List_Table' => __DIR__ . '/../../..' . '/lib/classes/class-list-table.php',
         'UsabilityDynamics\\WPP\\Meta_Box' => __DIR__ . '/../../..' . '/lib/classes/class-meta-box.php',
