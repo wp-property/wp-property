@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit8900037fc6f37f90ab8d49e20f07969e
+class ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece
 {
     public static $files = array (
         '68586f4e52570fad0a0d201f5302cfc0' => __DIR__ . '/../../..' . '/vendor/plugins/wp-meta-box/meta-box-loader.php',
@@ -218,11 +218,13 @@ class ComposerStaticInit8900037fc6f37f90ab8d49e20f07969e
         'UsabilityDynamics\\WPP\\Upgrade' => __DIR__ . '/../../..' . '/lib/classes/class-upgrade.php',
         'UsabilityDynamics\\WPP\\WPML' => __DIR__ . '/../../..' . '/lib/classes/class-wpml.php',
         'UsabilityDynamics\\WPP\\Widget' => __DIR__ . '/../../..' . '/lib/classes/class-widget.php',
+        'UsabilityDynamics\\WPRETSC\\Ajax' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-ajax.php',
         'UsabilityDynamics\\WPRETSC\\Bootstrap' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-bootstrap.php',
         'UsabilityDynamics\\WPRETSC\\Connectors\\Loader' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/connectors/class-loader.php',
         'UsabilityDynamics\\WPRETSC\\Connectors\\WPML' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/connectors/class-wpml.php',
         'UsabilityDynamics\\WPRETSC\\Media' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-media.php',
         'UsabilityDynamics\\WPRETSC\\Utility' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-utility.php',
+        'UsabilityDynamics\\WPRETSC\\Widget' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-widget.php',
         'UsabilityDynamics\\WPRETSC\\XMLRPC' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-xmlrpc.php',
         'UsabilityDynamics\\WP\\Bootstrap' => __DIR__ . '/..' . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap.php',
         'UsabilityDynamics\\WP\\Bootstrap_Plugin' => __DIR__ . '/..' . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php',
@@ -240,9 +242,9 @@ class ComposerStaticInit8900037fc6f37f90ab8d49e20f07969e
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit8900037fc6f37f90ab8d49e20f07969e::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit8900037fc6f37f90ab8d49e20f07969e::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit8900037fc6f37f90ab8d49e20f07969e::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece::$classMap;
 
         }, null, ClassLoader::class);
     }
