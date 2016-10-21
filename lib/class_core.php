@@ -99,8 +99,20 @@ class WPP_Core {
     $find = array( 'http://', 'https://' );
     $replace = '';
     $output = str_replace( $find, $replace, $site_url );
-    // May be extend backup data by add-ons options.
-    $data_settings = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $wp_properties ) );
+
+    $configuration = array(
+      'searchable_attributes' => !empty( $wp_properties['searchable_attributes'] ) ? $wp_properties['searchable_attributes'] : array(),
+      'property_stats' => !empty( $wp_properties['property_stats'] ) ? $wp_properties['property_stats'] : array(),
+      'property_types' => !empty( $wp_properties['property_types'] ) ? $wp_properties['property_types'] : array(),
+      'geo_type_attributes' => !empty( $wp_properties['geo_type_attributes'] ) ? $wp_properties['geo_type_attributes'] : array(),
+      'predefined_values' => !empty( $wp_properties['predefined_values'] ) ? $wp_properties['predefined_values'] : array(),
+      'searchable_attr_fields' => !empty( $wp_properties['searchable_attr_fields'] ) ? $wp_properties['searchable_attr_fields'] : array(),
+      'admin_attr_fields' => !empty( $wp_properties['admin_attr_fields'] ) ? $wp_properties['admin_attr_fields'] : array(),
+      'numeric_attributes' => !empty( $wp_properties['numeric_attributes'] ) ? $wp_properties['numeric_attributes'] : array(),
+      'currency_attributes' => !empty( $wp_properties['currency_attributes'] ) ? $wp_properties['currency_attributes'] : array()
+    );
+
+    $data_settings = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $configuration ) );
     $data_settings_json = json_encode($data_settings);
     $args = array(
         'method' => 'POST',
@@ -128,6 +140,7 @@ class WPP_Core {
     if ( !is_wp_error( $response ) ) {
       if($api_body->ud_site_secret_token == $ud_site_secret_token){
         add_site_option('ud_site_id', $api_body->ud_site_id);
+        add_site_option('ud_site_public_key', $api_body->ud_site_public_key);
       }
     }
 
@@ -143,12 +156,25 @@ class WPP_Core {
     $ud_site_secret_token = get_site_option('ud_site_secret_token');
     $site_url = get_site_url();
     $ud_site_id = get_site_option('ud_site_id');
+    $ud_site_public_key = get_site_option('ud_site_public_key');
     $url = 'https://api.usabilitydynamics.com/product/v1/site/update_settings';
     $find = array( 'http://', 'https://' );
     $replace = '';
     $output = str_replace( $find, $replace, $site_url );
-    // May be extend backup data by add-ons options.
-    $data_settings = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $wp_properties ) );
+
+    $configuration = array(
+        'searchable_attributes' => !empty( $wp_properties['searchable_attributes'] ) ? $wp_properties['searchable_attributes'] : array(),
+        'property_stats' => !empty( $wp_properties['property_stats'] ) ? $wp_properties['property_stats'] : array(),
+        'property_types' => !empty( $wp_properties['property_types'] ) ? $wp_properties['property_types'] : array(),
+        'geo_type_attributes' => !empty( $wp_properties['geo_type_attributes'] ) ? $wp_properties['geo_type_attributes'] : array(),
+        'predefined_values' => !empty( $wp_properties['predefined_values'] ) ? $wp_properties['predefined_values'] : array(),
+        'searchable_attr_fields' => !empty( $wp_properties['searchable_attr_fields'] ) ? $wp_properties['searchable_attr_fields'] : array(),
+        'admin_attr_fields' => !empty( $wp_properties['admin_attr_fields'] ) ? $wp_properties['admin_attr_fields'] : array(),
+        'numeric_attributes' => !empty( $wp_properties['numeric_attributes'] ) ? $wp_properties['numeric_attributes'] : array(),
+        'currency_attributes' => !empty( $wp_properties['currency_attributes'] ) ? $wp_properties['currency_attributes'] : array()
+    );
+
+    $data_settings = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $configuration ) );
     $data_settings_json = json_encode($data_settings);
 
     $args = array(
@@ -161,6 +187,7 @@ class WPP_Core {
             'host' => $output,
             'ud_site_secret_token' => $ud_site_secret_token,
             'ud_site_id' => $ud_site_id,
+	    'ud_site_public_key' => $ud_site_public_key,
             'db_name' => DB_NAME,
             'home_url' => home_url(),
             'table_refix' => $table_prefix,
@@ -169,7 +196,18 @@ class WPP_Core {
         ),
     );
 
-    wp_remote_post( $url, $args );
+    $response = wp_remote_post( $url, $args );
+
+    $api_body = json_decode(wp_remote_retrieve_body($response));
+
+    if ( !is_wp_error( $response ) ) {
+      if( !empty( $api_body->ud_site_id ) && $api_body->ud_site_secret_token == $ud_site_secret_token){
+        add_site_option('ud_site_id', $api_body->ud_site_id);
+        if( !empty( $api_body->ud_site_public_key ) ){
+          add_site_option('ud_site_public_key', $api_body->ud_site_public_key);
+        }
+      }
+    }
   }
 
   /**
