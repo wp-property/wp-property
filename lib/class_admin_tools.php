@@ -99,6 +99,12 @@ if( !class_exists( 'class_admin_tools' ) ) {
       $data[ 'Google Map API key' ][ ] = '<li>' . sprintf(__( "Go to the <a href='%s'>API Console</a>.", ud_get_wp_property()->domain ), 'https://console.developers.google.com/') . '</li>';
       $data[ 'Google Map API key' ][ ] = '<li>' . __( "From the projects list, select a project or create a new one.", ud_get_wp_property()->domain ) . '</li>';
       $data[ 'Google Map API key' ][ ] = '<li>' . sprintf(__( "If the API Manager page isn't already open, open the menu %s and select <b>API Manager</b>.", ud_get_wp_property()->domain ), "&nbsp;<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAKCAYAAABrGwT5AAAABHNCSVQICAgIfAhkiAAAADZJREFUKJFjrKio+M9AJmD59+/fGXI1DxxgLCsre0euZiZquoR+gLGsrOw0uZpZmJiYTMjVDAAtHArypQrPMgAAAABJRU5ErkJggg==' height='10'>&nbsp;") . '</li>';
+
+      $data[ 'Google Map API key' ][ ] = '<li>' . __( "From Dashboard click <b>Enable API</b> button at top or click on <b>Library</b> from left menu.", ud_get_wp_property()->domain ) . '</li>';
+      $data[ 'Google Map API key' ][ ] = '<li>' . __( "Click <b>Google Maps JavaScript API</b> and <b>Google Maps Geolocation API </b> from <b>Google Maps APIs</b> one by one.", ud_get_wp_property()->domain ) . '</li>';
+      $data[ 'Google Map API key' ][ ] = '<li>' . __( "To enable the api click <b>Enable</b>. Do this for both <b>Google Maps JavaScript API</b> and <b>Google Maps Geolocation API </b>,", ud_get_wp_property()->domain ) . '</li>';
+
+      
       $data[ 'Google Map API key' ][ ] = '<li>' . __( "On the left, choose <b>Credentials</b>.", ud_get_wp_property()->domain ) . '</li>';
       $data[ 'Google Map API key' ][ ] = '<li>' . __( "Click <b>Create credentials</b> and then select API key.", ud_get_wp_property()->domain ) . '</li>';
       $data[ 'Google Map API key' ][ ] = '<li>' . __( "Copy API key from <b>Your API key</b> field.", ud_get_wp_property()->domain ) . '</li>';
