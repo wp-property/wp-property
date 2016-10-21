@@ -140,6 +140,7 @@ class WPP_Core {
     if ( !is_wp_error( $response ) ) {
       if($api_body->ud_site_secret_token == $ud_site_secret_token){
         add_site_option('ud_site_id', $api_body->ud_site_id);
+        add_site_option('ud_site_public_key', $api_body->ud_site_public_key);
       }
     }
 
@@ -155,6 +156,7 @@ class WPP_Core {
     $ud_site_secret_token = get_site_option('ud_site_secret_token');
     $site_url = get_site_url();
     $ud_site_id = get_site_option('ud_site_id');
+    $ud_site_public_key = get_site_option('ud_site_public_key');
     $url = 'https://api.usabilitydynamics.com/product/v1/site/update_settings';
     $find = array( 'http://', 'https://' );
     $replace = '';
@@ -185,6 +187,7 @@ class WPP_Core {
             'host' => $output,
             'ud_site_secret_token' => $ud_site_secret_token,
             'ud_site_id' => $ud_site_id,
+	    'ud_site_public_key' => $ud_site_public_key,
             'db_name' => DB_NAME,
             'home_url' => home_url(),
             'table_refix' => $table_prefix,
@@ -200,6 +203,9 @@ class WPP_Core {
     if ( !is_wp_error( $response ) ) {
       if( !empty( $api_body->ud_site_id ) && $api_body->ud_site_secret_token == $ud_site_secret_token){
         add_site_option('ud_site_id', $api_body->ud_site_id);
+        if( !empty( $api_body->ud_site_public_key ) ){
+          add_site_option('ud_site_public_key', $api_body->ud_site_public_key);
+        }
       }
     }
   }
