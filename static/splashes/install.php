@@ -38,7 +38,11 @@ global $wp_properties;
 //save backup
 $data = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $wp_properties ) );
 $timestamp =time();
-$backups = !empty(get_option("wpp_property_backups"))?get_option("wpp_property_backups") : array();
+if(get_option("wpp_property_backups"))
+  $backups = get_option("wpp_property_backups") ;
+else 
+  $backups = array();
+
 $backups[$timestamp]= $data;
 update_option("wpp_property_backups",$backups);
 
