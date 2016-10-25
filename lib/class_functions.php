@@ -2354,6 +2354,291 @@ class WPP_F extends UsabilityDynamics\Utility {
          'address_format' =>' [street_number] [street_name], [city], [state]'
         );
   }
+    /**
+   * Add dummy properties for Setup Assistant.
+   *
+   * @author raj
+   */
+  static public function generate_wpp_dummy_properties() {
+    global $user_ID, $wp_properties, $wpdb;
+
+    /* Determine if the dummy properties already exist */
+    $posts = $wpdb->get_col( "
+      SELECT `post_title`
+      FROM {$wpdb->posts}
+      WHERE `post_title` IN ('122 Bishopsgate','East Pointe Marketplace','MIDLEVELS WEST','720 N Larrabee St Apt','460 W Huron St','207 Chantilly Ave', '2 Bedroom Home','4420 Sycamore Forest Pl','1525 Istrice Rd','4509 Eagle Mountain Dr')
+    " );
+   
+    /* Check array to avoid issues in future */
+    if( !is_array( $posts ) ) {
+      $posts = array();
+    }
+
+    /* If Property doesn't exist we create it : ONE */
+    if( !in_array( '122 Bishopsgate', $posts ) ) {
+
+      self::generate_wpp_dummy_property( array(
+        'post_title' => '122 Bishopsgate',
+        'post_content' => 'Take notice of this amazing home! It has an original detached 2 garage/workshop built with the home and on a concrete slab along with regular 2 car attached garage. Very nicely landscaped front and back yard. Hardwood floors in Foyer, den, dining and great room. Great room is open to large Kitchen. Carpet in all upstairs bedrooms. Home is located in the Woodlands in the middle of very nice community. You and your family will feel right at home. A must see.',
+        'tagline' => 'Need Room for your TOYS! Take notice of this unique Home!',
+        'location' => '122 Bishopsgate, Jacksonville, NC 28540, USA',
+        'price' => '195000',
+        'bedrooms' => '4',
+        'bathrooms' => '4',
+        'phone_number' => '8002700781',
+        'img_index' => '1',
+      ) );
+
+    }
+
+    /* If Property doesn't exist we create it : TWO */
+    if( !in_array( 'East Pointe Marketplace', $posts ) ) {
+
+      self::generate_wpp_dummy_property( array(
+        'post_title' => 'East Pointe Marketplace',
+        'post_content' => "Convenient suburban shopping experience located in the epicenter of Milwaukee's lower east side.
+Adjacent to the Milwaukee School of Engineering
+On bus line
+Ample off-street parking ",
+        'tagline' => 'Need Room for your TOYS! Take notice of this unique Home!',
+        'location' => '605 E Lyon St Milwaukee, WI 53202',
+        'price' => '215000',
+        'bedrooms' => '5',
+        'bathrooms' => '4',
+        'phone_number' => '8002300781',
+        'img_index' => '1',
+      ) );
+
+    }
+    /* If Property doesn't exist we create it : THREE */
+    if( !in_array( 'MIDLEVELS WEST', $posts ) ) {
+
+      self::generate_wpp_dummy_property( array(
+        'post_title' => 'MIDLEVELS WEST',
+        'post_content' => 'Ideal family flat with 4 bedrooms at upper Conduit Road',
+        'tagline' => 'Ideal family flat with 4 bedrooms at upper Conduit Road',
+        'location' => '122 Bishopsgate, Jacksonville, NC 28540, USA',
+        'price' => '255000',
+        'bedrooms' => '8',
+        'bathrooms' => '8',
+        'phone_number' => '9992700781',
+        'img_index' => '1',
+      ) );
+
+    }
+    /* If Property doesn't exist we create it : FOUR */
+    if( !in_array( '720 N Larrabee St Apt', $posts ) ) {
+
+      self::generate_wpp_dummy_property( array(
+        'post_title' => '720 N Larrabee St Apt',
+        'post_content' => 'Beautiful west views of river in ideal River North location close to downtown, Magnificent Mile, shopping, dining, entertainment. Split 2 bedroom, 2 bath floor plan with hardwood floors, granite counters and breakfast bar, stainless steel appliances, gas fireplace, 12-foot ceilings in this trendy loft-style unit with large balcony to enjoy sunset views over the river. Plenty of room for dining table and tons of closet space built out with Elfa shelving. 2nd bedroom closed off to the ceiling for privacy. Washer/dryer in the unit. Full-amenity building with onsite manager/engineer, 24-hour door staff, fitness room, bike storage; indoor heated parking for $35,000 extra, additional storage cage included.',
+        'tagline' => 'Great new home',
+        'location' => '720 N Larrabee St Apt 1012,Chicago, IL 60654',
+        'price' => '985000',
+        'bedrooms' => '8',
+        'bathrooms' => '8',
+        'phone_number' => '9856700781',
+        'img_index' => '1',
+      ) );
+
+    }
+    /* If Property doesn't exist we create it : FIVE */
+    if( !in_array( '460 W Huron St', $posts ) ) {
+
+      self::generate_wpp_dummy_property( array(
+        'post_title' => '460 W Huron St',
+        'post_content' => 'Unique amenities nestled among exquisite building features will make your home feel like an urban oasis while ours dedicated staff will not only fulfill your needs, but anticipate them.',
+        'tagline' => 'Only for a limited period DEPOSIT $0!!!!',
+        'location' => '460 W Huron St,Chicago, IL 60654',
+        'price' => '876000',
+        'bedrooms' => '5',
+        'bathrooms' => '5',
+        'phone_number' => '8002708876',
+        'img_index' => '1',
+      ) );
+
+    }
+    /* If Property doesn't exist we create it : SIX */
+    if( !in_array( '207 Chantilly Ave', $posts ) ) {
+
+      self::generate_wpp_dummy_property( array(
+        'post_title' => '207 Chantilly Ave',
+        'post_content' => 'Truly a beautiful home! Pull into your brand new driveway, walk up the new sidewalk and up to your newly epoxy painted porch. When you walk in the new front door, you will notice the new hardwood flooring and carpet, new kitchen tile, new back splash, new counter tops, new cabinets, new sink and new kitchen appliances. All this in addition to your newly remodeled bathrooms. This home also has a new water heater, new HVAC, newer windows, brand new roof, brand new electric panel and wiring throughout the house. ',
+        'tagline' => 'A huge laundry room with plenty of storage and also a utility room.',
+        'location' => '207 Chantilly Ave,Louisville, KY 40214',
+        'price' => '190000',
+        'bedrooms' => '4',
+        'bathrooms' => '4',
+        'phone_number' => '6754600781',
+        'img_index' => '1',
+      ) );
+
+    }
+    /* If Property doesn't exist we create it : SEVEN */
+    if( !in_array( '4420 Sycamore Forest Pl', $posts ) ) {
+
+      self::generate_wpp_dummy_property( array(
+        'post_title' => '14420 Sycamore Forest Pl',
+        'post_content' => 'One of a kind! Everything you could imagine in this gorgeous 3 bedroom, 2 1/2 bath brick ranch. Great curb appeal, beautifully landscaped. Former Homearama Home! Beautiful entry foyer opens to gorgeous dining room and alluring great room w/ vaulted ceiling, moldings and cozy fireplace w/ unique bookcases. Very open kitchen w/ white cabinets, granite counter tops and sunny breakfast area. Walk out to large inviting screened porch and deck featuring a hot tub. ',
+        'tagline' => 'NEW $11,000 GENERATOR SYSTEM',
+        'location' => '4420 Sycamore Forest Pl, Louisville,KY 40245',
+        'price' => '876000',
+        'bedrooms' => '4',
+        'bathrooms' => '4',
+        'phone_number' => '9898700781',
+        'img_index' => '1',
+      ) );
+
+    }
+    /* If Property doesn't exist we create it : EIGHT */
+    if( !in_array( '1525 Istrice Rd', $posts ) ) {
+
+      self::generate_wpp_dummy_property( array(
+        'post_title' => '1525 Istrice Rd',
+        'post_content' => 'Rarely do the homes in this terrific neighborhood come on the market. Whether you have teenagers or live in a multi-generational home, there is so much to love about this warm and inviting home. There are two master suites with one on the main level, a great room, formal living and dining areas and a large family/game room with three bedrooms upstairs. The 3 car garage has plenty of room for work benches and toys. ',
+        'tagline' => 'Easy access up the stairs to Bud Beasley Elementary and shopping is all very conveniently located close to home!',
+        'location' => '1525 Istrice Rd,Sparks, NV 89436',
+        'price' => '444000',
+        'bedrooms' => '5',
+        'bathrooms' => '5',
+        'phone_number' => '7878700781',
+        'img_index' => '1',
+      ) );
+
+    }
+    /* If Property doesn't exist we create it : NINE */
+    if( !in_array( '4509 Eagle Mountain Dr', $posts ) ) {
+
+      self::generate_wpp_dummy_property( array(
+        'post_title' => '4509 Eagle Mountain Dr',
+        'post_content' => 'The lush Acacia hardwood floors and grand living/dining room welcome you home. Desirable floorplan with full bed, bath and bonus room on main level. Each bedroom comes equipped with private bath. The gorgeous gourmet kitchen illuminates with upgraded quartz countertops, custom cabinets with special features, stainless steel appliances and spectacular views of the valley. ',
+        'tagline' => 'Pear, apple and peach trees accent the yard for the perfect combination of the outdoors.',
+        'location' => '4509 Eagle Mountain Dr,Sparks, NV 89436',
+        'price' => '555000',
+        'bedrooms' => '4',
+        'bathrooms' => '4',
+        'phone_number' => '8002700781',
+        'img_index' => '1',
+      ) );
+
+    }
+    /* If Property doesn't exist we create it : TEN */
+    if( !in_array( '2 Bedroom Home', $posts ) ) {
+
+      self::generate_wpp_dummy_property( array(
+        'post_title' => '2 Bedroom Home',
+        'post_content' => 'Donec volutpat elit malesuada eros porttitor blandit. Donec sit amet ligula quis tortor molestie sagittis tincidunt at tortor. Phasellus augue leo, molestie in ultricies gravida; blandit et diam. Curabitur quis nisl eros! Proin quis nisi quam, sit amet lacinia nisi. Vivamus sollicitudin magna eu ipsum blandit tempor. Duis rhoncus orci at massa consequat et egestas lectus ornare? Duis a neque magna, quis placerat lacus. Phasellus non nunc sapien, id cursus mi! Mauris sit amet nisi vel felis molestie pretium.',
+        'tagline' => 'Great starter home in beautiful St. Paul, Minnesota.',
+        'location' => '332 S Main St, St Paul, Minnesota',
+        'price' => '119000',
+        'bedrooms' => '3',
+        'bathrooms' => '2',
+        'phone_number' => '8002700781',
+        'img_index' => '2',
+      ) );
+
+    }
+
+  }
+  static public function generate_wpp_dummy_property( $data )
+  {
+    global $wp_properties;
+
+    $defaults = array(
+      'post_title' => 'Dummy Listing',
+      'post_content' => 'Donec volutpat elit malesuada eros porttitor blandit. Donec sit amet ligula quis tortor molestie sagittis tincidunt at tortor. Phasellus augue leo, molestie in ultricies gravida; blandit et diam. Curabitur quis nisl eros! Proin quis nisi quam, sit amet lacinia nisi. Vivamus sollicitudin magna eu ipsum blandit tempor. Duis rhoncus orci at massa consequat et egestas lectus ornare? Duis a neque magna, quis placerat lacus. Phasellus non nunc sapien, id cursus mi! Mauris sit amet nisi vel felis molestie pretium.',
+      'tagline' => 'Donec volutpat elit malesuada eros porttitor blandit',
+      'location' => '122 Bishopsgate, Jacksonville, NC 28540, USA',
+      'property_type' => 'single_family_home',
+      'img_index' => '1', // Available: '1', '2'
+      'price' => '',
+      'bedrooms' => '',
+      'bathrooms' => '',
+      'phone_number' => '',
+    );
+
+    $data = wp_parse_args( $data, $defaults );
+
+    //** STEP 1. Create dummy property */
+
+    $insert_id = wp_insert_post( array(
+      'post_title' => $data[ 'post_title' ],
+      'post_status' => 'publish',
+      'post_content' => $data[ 'post_content' ],
+      'post_type' => 'property',
+    ) );
+
+    $property_type = '';
+    if( is_array( $wp_properties[ 'property_types' ] ) && !empty( $wp_properties[ 'property_types' ] ) ) {
+      reset( $wp_properties[ 'property_types' ] );
+      $property_type = key_exists( $defaults[ 'property_type' ], $wp_properties[ 'property_types' ] ) ? $defaults[ 'property_type' ] : key( $wp_properties[ 'property_types' ] );
+    }
+    update_post_meta( $insert_id, 'property_type', $property_type );
+
+    if( !empty( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) && key_exists( $wp_properties[ 'configuration' ][ 'address_attribute' ], $wp_properties[ 'property_stats' ] ) ) {
+      update_post_meta( $insert_id, $wp_properties[ 'configuration' ][ 'address_attribute' ], $data[ 'location' ] );
+
+      if( method_exists( 'WPP_F', 'revalidate_address' ) ) {
+        WPP_F::revalidate_address( $insert_id );
+      }
+    }
+
+    if( !empty( $wp_properties[ 'property_stats' ][ 'tagline' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'tagline' ] ) ) {
+      update_post_meta( $insert_id, 'tagline', $data[ 'tagline' ] );
+    }
+
+    if( !empty( $wp_properties[ 'property_stats' ][ 'price' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'price' ] ) ) {
+      update_post_meta( $insert_id, 'price', $data[ 'price' ] );
+    }
+
+    if( !empty( $wp_properties[ 'property_stats' ][ 'bedrooms' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'bedrooms' ] ) ) {
+      update_post_meta( $insert_id, 'bedrooms', $data[ 'bedrooms' ] );
+    }
+
+    if( !empty( $wp_properties[ 'property_stats' ][ 'bathrooms' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'bathrooms' ] ) ) {
+      update_post_meta( $insert_id, 'bathrooms', $data[ 'bathrooms' ] );
+    }
+
+    if( !empty( $wp_properties[ 'property_stats' ][ 'phone_number' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'phone_number' ] ) ) {
+      update_post_meta( $insert_id, 'phone_number', $data[ 'phone_number' ] );
+    }
+
+    update_post_meta( $insert_id, 'dummy_property', true );
+
+    //** STEP 2. Create and Move temporary image files */
+
+    require_once( ABSPATH . 'wp-admin/includes/image.php' );
+    $upload_dir = wp_upload_dir();
+
+    $dummy_images = array(
+      WPP_Path . "static/splashes/assets/images/dummy_data/property_{$data['img_index']}_img_0.jpg",
+      WPP_Path . "static/splashes/assets/images/dummy_data/property_{$data['img_index']}_img_1.jpg",
+      WPP_Path . "static/splashes/assets/images/dummy_data/property_{$data['img_index']}_img_2.jpg"
+    );
+
+    foreach( $dummy_images as $dummy_path ) {
+      if( @copy( $dummy_path, $upload_dir[ 'path' ] . "/" . basename( $dummy_path ) ) ) {
+        $filename = $upload_dir[ 'path' ] . "/" . basename( $dummy_path );
+        $wp_filetype = wp_check_filetype( basename( $filename ), null );
+
+        $attach_id = wp_insert_attachment( array(
+          'post_mime_type' => $wp_filetype[ 'type' ],
+          'post_title' => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
+          'post_status' => 'inherit'
+        ), $filename, $insert_id );
+
+        $attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
+        wp_update_attachment_metadata( $attach_id, $attach_data );
+      }
+    }
+
+    //** Last attached file is set as thumbnail */
+    if( isset( $attach_id ) ) {
+      update_post_meta( $insert_id, '_thumbnail_id', $attach_id );
+    }
+
+  }
+
   /**
    * AJAX Handler for Setup Assistant.
    * proxies to save_settings()
@@ -2390,13 +2675,9 @@ class WPP_F extends UsabilityDynamics\Utility {
       $data['wpp_settings']['searchable_attr_fields']['price'] = "range_dropdown";
       
       if(!isset($data['wpp_settings']['configuration']['automatically_insert_overview'])){
-        echo "here";
         $data['wpp_settings']['configuration']['automatically_insert_overview'] = false;
-      }else{
-        echo "there";
       }
         
-      
 //      compute basic property attributes
       $propAttrSet = array();
       if ($prop_types && isset($data['wpp_settings']['property_types']['land']))
@@ -2410,7 +2691,13 @@ class WPP_F extends UsabilityDynamics\Utility {
       $data['wpp_settings']['property_stats'] = $propAttrSet;
       update_option('wpp_settings', $data['wpp_settings']);
     }
-
+    
+    //if dummy properties required
+//    print_r($data['wpp_settings']);
+    if(isset($data['wpp_settings']['configuration']['dummy-prop']) && $data['wpp_settings']['configuration']['dummy-prop']=='yes-please'){
+      self::generate_wpp_dummy_properties();
+    }
+    
     //update widgets if $widgets_required
     if ($widgets_required && $prop_types) {
       //get existing widgets
@@ -2433,7 +2720,7 @@ class WPP_F extends UsabilityDynamics\Utility {
         }
         // update individual widget types
         update_option($widget_name, $widget_content);
-        print_r(get_option($widget_name));
+//        print_r(get_option($widget_name));
       }
       
       //update widgets for each property type

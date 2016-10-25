@@ -19,16 +19,29 @@ jQuery(document).ready(function () {
         action: 'wpp_save_setup_settings',
         data: data
       },
+      beforeSend : function(){
+        showLoader();
+      },
       success: function (response) {
+        hideLoader();
         var data = jQuery.parseJSON(response);
       },
       error: function () {
+        hideLoader();
         alert(wpp.strings.undefined_error);
       }
     });
     return false;
   }
+  function showLoader(){
+    $( ".loader-div" ).fadeTo( "fast" , 1);
+    $( ".owl-item" ).fadeTo( "fast" , 0);
+  }
 
+  function hideLoader(){
+    $( ".loader-div" ).fadeTo( "fast" , 0);
+    $( ".owl-item" ).fadeTo( "fast" , 1);
+  }
   //handle each screen individually
   function propAssistScreens() {
     $isScreen = $(".owl-page.active").index() + 1;

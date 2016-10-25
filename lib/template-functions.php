@@ -310,7 +310,7 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
           $attribute_value = $property[ 'display_address' ];
         }
         // No display formating is needed for wysiwyg because it's formatted.
-        if($attribute_data['data_input_type'] == 'wysiwyg'){
+        if( !empty($attribute_data['data_input_type']) && $attribute_data['data_input_type'] == 'wysiwyg'){
           $attribute_value = do_shortcode( $attribute_value );
         }
         else{

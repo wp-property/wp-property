@@ -166,6 +166,7 @@
   width: 43%;
   padding: 12px 0px 10px 17px;
   font-size: 20px;
+  position: relative;
 }
 .three-sectionals .wpp_asst_label {
   margin: 0px 10px 0px 8px;
@@ -331,7 +332,7 @@ h2.wpp_asst_heading b {
 .label-property-left{ margin-top:-5px;}
 
 
-[type="checkbox"] {
+[type="checkbox"], [type="radio"] {
   border: 0; 
   clip: rect(0 0 0 0); 
   height: 1px; margin: -1px; 
@@ -349,12 +350,12 @@ label {
   font-size: 1.5em;
 }
 
-[type="checkbox"] + span {
+[type="checkbox"] + span, [type="radio"] + span {
   display: block;
 }
 
 /* the basic, unchecked style */
-[type="checkbox"] + span::before {
+[type="checkbox"] + span::before, [type="radio"] + span::before {
   border-radius: 1em;
   box-shadow: 0px 0 0 0.15em #fff;
   content: "";
@@ -368,17 +369,17 @@ label {
   width: 15px;
   background: #fff;
 }
-.narrow [type="checkbox"] + span::before{
+.narrow [type="checkbox"] + span::before, .narrow [type="radio"] + span::before{
   margin-top: -22px;
 }
 
 /* the checked style using the :checked pseudo class */
-[type="checkbox"]:checked + span::before {
+[type="checkbox"]:checked + span::before, [type="radio"]:checked + span::before {
   background: #f46c3e none repeat scroll 0 0;
 }
 
 /* never forget focus styling */
-[type="checkbox"]:focus + span:after {
+[type="checkbox"]:focus + span:after, [type="radio"]:focus + span:after {
   content: '\0020\2190';
   font-size: 1.5em;
   line-height: 1;
@@ -449,4 +450,15 @@ li.checkbox-up [type="checkbox"] + span::before {
   margin-left:8px;
   color:white;
 
+}
+
+.loader-div {
+  display: block;
+  left: 0;
+  margin: 0 auto;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 50%;
+  opacity : 0;
 }

@@ -55,7 +55,8 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
 <div id="wpp-splash-screen">
   <form id="wpp-setup-assistant">
     <?php wp_nonce_field('wpp_setting_save'); ?>
-
+    
+    <div class="loader-div"><img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/loader.gif', 'url'); ?>" alt="image"></div> 
     <div id="wpp-splash-screen-owl" class="owl-carousel">
 
       <div class="item">
@@ -117,10 +118,10 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
           <div class="wpp_asst_inner_wrap">
             <ul>
               <li class="wpp_asst_label"> <?php echo __('Yes Please', ud_get_wp_property()->domain); ?><label for="yes-please"> 
-                  <input class="wpp_box" type="checkbox" value="yes-please" name="quality" id="yes-please"> <span></span> </label>
+                  <input class="wpp_box" type="radio" value="yes-please" name="wpp_settings[configuration][dummy-prop]" id="yes-please" <?php if(isset($wp_properties['configuration']['dummy-prop']) && $wp_properties['configuration']['dummy-prop']=="yes-please") echo "checked='checked'";?>> <span></span> </label>
               </li> 
               <li class="wpp_asst_label narrow"><?php echo __('No, thanks i have already</br> added properties', ud_get_wp_property()->domain); ?> <label for="no-thanks"> 
-                  <input class="wpp_box" type="checkbox" value="no-thanks" name="quality" id="no-thanks"> <span></span> </label>
+                  <input class="wpp_box" type="radio" value="no-thanks" name="wpp_settings[configuration][dummy-prop]" id="no-thanks" <?php if(isset($wp_properties['configuration']['dummy-prop']) && $wp_properties['configuration']['dummy-prop']=="no-thanks") echo "checked='checked'";?> > <span></span> </label>
               </li> 
             </ul>
           </div>
