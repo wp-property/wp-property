@@ -31,12 +31,16 @@ namespace UsabilityDynamics\WPP {
       public function page_template( $template ) {
         global $wp_query;
 
+        $render = apply_filters( 'wpp_layouts_settings', false );
+
+        if ( $render && !empty( $wp_query->post ) ) {
+          $wp_query->post->ID = $render[ 'layout_id' ];
+        }
+
         if ( count( $wp_query->posts ) > 1 ) {
           $wp_query->posts = array($wp_query->post);
           $wp_query->post_count = 1;
         }
-
-        $render = apply_filters( 'wpp_layouts_settings', false );
 
         if ( !$render ) return $template;
 
