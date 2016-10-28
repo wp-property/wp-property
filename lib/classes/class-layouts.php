@@ -29,6 +29,12 @@ namespace UsabilityDynamics\WPP {
        * @return string
        */
       public function page_template( $template ) {
+        global $wp_query;
+
+        if ( count( $wp_query->posts ) > 1 ) {
+          $wp_query->posts = array($wp_query->post);
+          $wp_query->post_count = 1;
+        }
 
         $render = apply_filters( 'wpp_layouts_settings', false );
 
@@ -48,12 +54,15 @@ namespace UsabilityDynamics\WPP {
        * @return string
        */
       public function the_content( $data ) {
-
         $render = apply_filters( 'wpp_layouts_settings', false );
 
         if ( !$render ) return $data;
 
-        return siteorigin_panels_render( $render[ 'layout_id' ] );
+        if ( function_exists( 'siteorigin_panels_render' ) ) {
+          return siteorigin_panels_render( $render[ 'layout_id' ] );
+        }
+
+        return $data;
       }
 
       /**
