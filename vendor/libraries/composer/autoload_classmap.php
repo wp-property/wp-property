@@ -187,6 +187,7 @@ return array(
     'UsabilityDynamics\\WPP\\Children_List_Table' => $baseDir . '/lib/classes/class-children-list-table.php',
     'UsabilityDynamics\\WPP\\Dashboard_Widget' => $baseDir . '/lib/classes/class-dashboard-widget.php',
     'UsabilityDynamics\\WPP\\Export' => $baseDir . '/lib/classes/class-export.php',
+    'UsabilityDynamics\\WPP\\Layouts' => $baseDir . '/lib/classes/class-layouts.php',
     'UsabilityDynamics\\WPP\\List_Table' => $baseDir . '/lib/classes/class-list-table.php',
     'UsabilityDynamics\\WPP\\Meta_Box' => $baseDir . '/lib/classes/class-meta-box.php',
     'UsabilityDynamics\\WPP\\Property_Factory' => $baseDir . '/lib/classes/class-property-factory.php',

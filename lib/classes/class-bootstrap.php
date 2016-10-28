@@ -137,6 +137,9 @@ namespace UsabilityDynamics\WPP {
         // Handle regular pre-release checks.
         add_filter( 'pre_update_site_option__site_transient_update_plugins', array( 'UsabilityDynamics\WPP\Bootstrap', 'update_check_handler' ), 50, 2 );
 
+        //
+        if ( apply_filters( 'wpp_layouts_enabled', false ) ) new Layouts();
+
       }
 
       /**
