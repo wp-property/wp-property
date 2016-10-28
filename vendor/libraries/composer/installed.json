@@ -631,17 +631,17 @@
     },
     {
         "name": "usabilitydynamics/wp-rets-client",
-        "version": "0.2.2",
-        "version_normalized": "0.2.2.0",
+        "version": "0.2.3",
+        "version_normalized": "0.2.3.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/wp-rets-client",
-            "reference": "0.2.2"
+            "reference": "0.2.3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/wp-rets-client/archive/0.2.2.zip",
-            "reference": "0.2.2",
+            "url": "https://github.com/UsabilityDynamics/wp-rets-client/archive/0.2.3.zip",
+            "reference": "0.2.3",
             "shasum": null
         },
         "archive": {
