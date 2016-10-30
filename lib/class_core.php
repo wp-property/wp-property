@@ -78,6 +78,26 @@ class WPP_Core {
      */
     add_action( 'wpp::save_settings', array( $this, 'update_site_settings' ) );
 
+    add_filter( 'wpp_get_properties_query', array( $this, 'fix_tax_property_query' ));
+
+  }
+
+  /**
+   * @param $query
+   * @return mixed
+   */
+  public function fix_tax_property_query( $query ) {
+    global $wp_query;
+
+    if ( !is_tax() || empty( $wp_query->queried_object )
+        || !is_a( $wp_query->queried_object, 'WP_Term' )
+        || !is_object_in_taxonomy( 'property', $wp_query->queried_object->taxonomy )
+        || !function_exists( 'ud_get_wpp_terms' )
+        || !empty( $query[$wp_query->queried_object->taxonomy] )) return $query;
+
+    $query[$wp_query->queried_object->taxonomy] = $wp_query->queried_object->slug;
+
+    return $query;
   }
 
   /**
