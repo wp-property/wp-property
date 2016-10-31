@@ -1,0 +1,63 @@
+.rwmb-row {
+  margin-left: -2.5%;
+  margin-right: -2.5%;
+}
+.rwmb-row:before,
+.rwmb-row:after {
+  content: " ";
+  display: table;
+}
+.rwmb-row:after {
+  clear: both;
+}
+.rwmb-column {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0 2.5%;
+  float: left;
+}
+.rwmb-column-12 {
+  width: 100%;
+}
+.rwmb-column-11 {
+  width: 91.66666667%;
+}
+.rwmb-column-10 {
+  width: 83.33333333%;
+}
+.rwmb-column-9 {
+  width: 75%;
+}
+.rwmb-column-8 {
+  width: 66.66666667%;
+}
+.rwmb-column-7 {
+  width: 58.33333333%;
+}
+.rwmb-column-6 {
+  width: 50%;
+}
+.rwmb-column-5 {
+  width: 41.66666667%;
+}
+.rwmb-column-4 {
+  width: 33.33333333%;
+}
+.rwmb-column-3 {
+  width: 25%;
+}
+.rwmb-column-2 {
+  width: 16.66666667%;
+}
+.rwmb-column-1 {
+  width: 8.33333333%;
+}
+.rwmb-column .rwmb-label,
+.rwmb-column .rwmb-label ~ .rwmb-input {
+  display: block;
+  width: 100%;
+}
+.rwmb-column * {
+  max-width: 100%;
+}

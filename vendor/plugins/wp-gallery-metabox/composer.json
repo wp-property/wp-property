@@ -1,0 +1,40 @@
+
+{
+  "name": "usabilitydynamics/wp-gallery-metabox",
+  "type": "wordpress-plugin",
+  "description": "WP Repository plugin.",
+  "minimum-stability": "dev",
+  "homepage": "https://usabilitydynamics.com",
+  "license": "MIT",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://repository.usabilitydynamics.com"
+    },
+    {
+      "type":"composer",
+      "url":"http://wpackagist.org"
+    }
+  ],
+  "require": {
+    "php": ">=5.3",
+    "composer/installers": "~1.0"
+  },
+  "require-dev": {
+    "usabilitydynamics/lib-wp-phpunit": "master",
+    "codeclimate/php-test-reporter": "dev-master"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "github-protocols": [ "ssh" ],
+    "vendor-dir": "vendor",
+    "bin-dir": "vendor/bin",
+    "optimize-autoloader": true
+  },
+  "extra": {},
+  "autoload": {
+    "files": [
+      "loader.php"
+    ]
+  }
+}

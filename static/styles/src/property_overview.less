@@ -1,0 +1,91 @@
+.wpp_property_overview_shortcode {
+
+  .properties_pagination {
+
+    .pagination-numeric {
+
+      ul.property-overview-navigation {
+        list-style: none;
+        margin: 0;
+
+        &:after {
+          content: "";
+          clear: both;
+          display:table;
+        }
+
+        li {
+          list-style: none;
+          display: inline-block;
+          margin: 0 6px 0 0;
+
+          &:last-child {
+            margin-right: 0;
+          }
+
+          a {
+            text-decoration: none;
+            display: block;
+            padding: 2px 6px;
+            font-size:16px;
+            border: 1px solid #bfbfbf;
+
+            body.wpp_is_mobile &{
+              width: 30px;
+              height:30px;
+              font-size: 16px;
+              padding: 0px;
+              font-weight: 600;
+              line-height: 28px;
+              text-align: center;
+              box-sizing: border-box;
+            }
+
+            &:hover,
+            &:active {
+              border-color: #000;
+            }
+          }
+
+
+          &.pages {
+
+            ul {
+              body.wpp_is_mobile & li.page{
+                display:none;
+              }
+              li{
+                &.current-page {
+                  body.wpp_is_mobile &{
+                    display:inline;
+                    margin-right: 0px;
+                  }
+                  a {
+                    font-weight: 600;
+                    cursor: default;
+                  }
+  
+                } 
+              }
+
+            }
+
+          }
+
+
+
+        }
+
+
+
+      }
+
+    }
+
+    .pagination-slider {
+
+    }
+
+  }
+
+}

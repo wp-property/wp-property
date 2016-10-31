@@ -1,0 +1,8 @@
+/* =Styles for 'button' field
+-------------------------------------------------------------- */
+
+.rwmb-button-wrapper p.description {
+  display: inline-block;
+  line-height: 26px;
+  padding-left: 0.75em;
+}

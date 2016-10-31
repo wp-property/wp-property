@@ -1,0 +1,12 @@
+.rwmb-field.readonly {
+    position: relative;
+}
+.rwmb-field.readonly:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    z-index: 999;
+}

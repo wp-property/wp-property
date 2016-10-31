@@ -1,0 +1,43 @@
+{
+  "name": "lib-wp-shortcode",
+  "description": "Improves Shortcode implemetation in Wordpress and adds Shortcode UI",
+  "version": "0.1.0",
+  "homepage": "http://github.com/UsabilityDynamics/lib-wp-shortcode",
+  "author": {
+    "name": "Usability Dynamics",
+    "email": "info@UsabilityDynamics.com",
+    "url": "http://UsabilityDynamics.com"
+  },
+  "bugs": {
+    "url": "http://github.com/UsabilityDynamics/lib-wp-shortcode/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/UsabilityDynamics/lib-lib-wp-shortcode/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">=0.10.21"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt-markdown": "~0.4.0",
+    "grunt-contrib-symlink": "*",
+    "grunt-contrib-yuidoc": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-jscoverage": "0.0.3",
+    "grunt-shell": "*",
+    "mocha": "*",
+    "should": "*",
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "library",
+    "component",
+    "composer"
+  ]
+}

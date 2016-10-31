@@ -1,0 +1,15 @@
+.wplt_container {
+  position: relative;
+}
+.wplt_container .wplt-spinner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 15px;
+  padding-top: 10px;
+}
+.wplt_container .wplt-spinner img {
+  display: block;
+  margin: 0 auto;
+}

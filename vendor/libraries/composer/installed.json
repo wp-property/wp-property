@@ -1,0 +1,696 @@
+[
+    {
+        "name": "composer/installers",
+        "version": "v1.2.0",
+        "version_normalized": "1.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/composer/installers.git",
+            "reference": "d78064c68299743e0161004f2de3a0204e33b804"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/composer/installers/zipball/d78064c68299743e0161004f2de3a0204e33b804",
+            "reference": "d78064c68299743e0161004f2de3a0204e33b804",
+            "shasum": ""
+        },
+        "require": {
+            "composer-plugin-api": "^1.0"
+        },
+        "replace": {
+            "roundcube/plugin-installer": "*",
+            "shama/baton": "*"
+        },
+        "require-dev": {
+            "composer/composer": "1.0.*@dev",
+            "phpunit/phpunit": "4.1.*"
+        },
+        "time": "2016-08-13 20:53:52",
+        "type": "composer-plugin",
+        "extra": {
+            "class": "Composer\\Installers\\Plugin",
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Composer\\Installers\\": "src/Composer/Installers"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Kyle Robinson Young",
+                "email": "kyle@dontkry.com",
+                "homepage": "https://github.com/shama"
+            }
+        ],
+        "description": "A multi-framework Composer library installer",
+        "homepage": "https://composer.github.io/installers/",
+        "keywords": [
+            "Craft",
+            "Dolibarr",
+            "Hurad",
+            "ImageCMS",
+            "MODX Evo",
+            "Mautic",
+            "OXID",
+            "Plentymarkets",
+            "RadPHP",
+            "SMF",
+            "Thelia",
+            "WolfCMS",
+            "agl",
+            "aimeos",
+            "annotatecms",
+            "attogram",
+            "bitrix",
+            "cakephp",
+            "chef",
+            "cockpit",
+            "codeigniter",
+            "concrete5",
+            "croogo",
+            "dokuwiki",
+            "drupal",
+            "elgg",
+            "expressionengine",
+            "fuelphp",
+            "grav",
+            "installer",
+            "joomla",
+            "kohana",
+            "laravel",
+            "lithium",
+            "magento",
+            "mako",
+            "mediawiki",
+            "modulework",
+            "moodle",
+            "phpbb",
+            "piwik",
+            "ppi",
+            "puppet",
+            "reindex",
+            "roundcube",
+            "shopware",
+            "silverstripe",
+            "symfony",
+            "typo3",
+            "wordpress",
+            "yawik",
+            "zend",
+            "zikula"
+        ]
+    },
+    {
+        "name": "usabilitydynamics/lib-utility",
+        "version": "0.3.7",
+        "version_normalized": "0.3.7.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-utility",
+            "reference": "0.3.7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-utility/archive/0.3.7.zip",
+            "reference": "0.3.7",
+            "shasum": null
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.1.*"
+        },
+        "type": "library",
+        "extra": {
+            "installer-name": "lib-utility",
+            "component": {
+                "name": "utility",
+                "scripts": [
+                    "scripts/*.js"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Andy Potanin",
+                "email": "andy.potanin@usabilitydynamics.com",
+                "homepage": "http://usabilitydynamics.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Maxim Peshkov",
+                "email": "maxim.peshkov@usabilitydynamics.com",
+                "homepage": "http://usabilitydynamics.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Anton Korotkov",
+                "email": "anton.korotkov@usabilitydynamics.com",
+                "homepage": "http://usabilitydynamics.com",
+                "role": "Developer"
+            }
+        ],
+        "keywords": [
+            "job",
+            "process",
+            "utility"
+        ]
+    },
+    {
+        "name": "usabilitydynamics/lib-settings",
+        "version": "0.2.3",
+        "version_normalized": "0.2.3.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-settings",
+            "reference": "0.2.3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-settings/archive/0.2.3.zip",
+            "reference": "0.2.3",
+            "shasum": null
+        },
+        "require": {
+            "usabilitydynamics/lib-utility": "~0.3"
+        },
+        "require-dev": {
+            "justinrainbow/json-schema": "1.1.*"
+        },
+        "type": "library",
+        "extra": {
+            "component": {
+                "scripts": [
+                    "static/scripts/settings.js"
+                ],
+                "templates": [
+                    "static/views/new-installation.xhtml"
+                ],
+                "files": [
+                    "static/schemas/settings.json"
+                ]
+            },
+            "installer-name": "lib-settings"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Andy Potanin",
+                "email": "andy.potanin@usabilitydynamics.com",
+                "homepage": "http://usabilitydynamics.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Maxim Peshkov",
+                "email": "maxim.peshkov@usabilitydynamics.com",
+                "homepage": "http://usabilitydynamics.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Anton Korotkov",
+                "email": "anton.korotkov@usabilitydynamics.com",
+                "homepage": "http://usabilitydynamics.com",
+                "role": "Developer"
+            }
+        ],
+        "homepage": "http://github.com/usabilitydynamics/lib-settings",
+        "keywords": [
+            "settings"
+        ]
+    },
+    {
+        "name": "usabilitydynamics/lib-ud-api-client",
+        "version": "1.1.5.1",
+        "version_normalized": "1.1.5.1",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-ud-api-client",
+            "reference": "1.1.5.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-ud-api-client/archive/1.1.5.1.zip",
+            "reference": "1.1.5.1",
+            "shasum": null
+        },
+        "require": {
+            "php": ">=5.3"
+        },
+        "type": "library",
+        "extra": {
+            "installer-name": "lib-ud-api-client"
+        },
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "lib/classes"
+            ]
+        },
+        "license": [
+            "GPLv2"
+        ],
+        "description": "UD API Client for WooCommerce API Manager",
+        "homepage": "https://github.com/UsabilityDynamics/lib-ud-api-client",
+        "keywords": [
+            "api",
+            "client",
+            "licenses",
+            "plugins",
+            "wordpress"
+        ]
+    },
+    {
+        "name": "usabilitydynamics/lib-ui",
+        "version": "0.3.4",
+        "version_normalized": "0.3.4.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-ui",
+            "reference": "0.3.4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-ui/archive/0.3.4.zip",
+            "reference": "0.3.4",
+            "shasum": null
+        },
+        "require": {
+            "php": ">=5.3",
+            "usabilitydynamics/lib-utility": "~0.3"
+        },
+        "type": "library",
+        "extra": {
+            "installer-name": "lib-ui",
+            "text_domain": "lib-ui",
+            "main-file": "lib/class-ui.php",
+            "class": "UsabilityDynamics\\UI",
+            "component": {
+                "scripts": [
+                    "static/scripts/ui.js",
+                    "static/scripts/ui.markdown.js",
+                    "static/scripts/ui.jquery-tabs.js"
+                ],
+                "styles": [
+                    "static/styles/ui.css",
+                    "static/styles/ui.less"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib"
+            ]
+        },
+        "license": [
+            "GNU"
+        ],
+        "authors": [
+            {
+                "name": "Andy Potanin",
+                "email": "andy.potanin@usabilitydynamics.com",
+                "homepage": "http://usabilitydynamics.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Maxim Peshkov",
+                "email": "maxim.peshkov@usabilitydynamics.com",
+                "homepage": "http://usabilitydynamics.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Anton Korotkov",
+                "email": "anton.korotkov@usabilitydynamics.com",
+                "homepage": "http://usabilitydynamics.com",
+                "role": "Developer"
+            }
+        ],
+        "homepage": "http://github.com/UsabilityDynamics/wp-ui",
+        "keywords": [
+            "css-editor",
+            "editor",
+            "script-editor",
+            "ui"
+        ]
+    },
+    {
+        "name": "usabilitydynamics/lib-wp-list-table",
+        "version": "1.0.8",
+        "version_normalized": "1.0.8.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-wp-list-table",
+            "reference": "1.0.8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-list-table/archive/1.0.8.zip",
+            "reference": "1.0.8",
+            "shasum": null
+        },
+        "require": {
+            "php": ">=5.3",
+            "usabilitydynamics/lib-ui": "~0.3"
+        },
+        "type": "library",
+        "extra": {
+            "installer-name": "lib-wp-list-table"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib/classes"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "Advanced Ajax List Table & Filter library for Wordpress",
+        "homepage": "https://github.com/UsabilityDynamics/lib-wp-list-table",
+        "keywords": [
+            "ajax",
+            "filter",
+            "library",
+            "search",
+            "wordpress",
+            "wp-list-table"
+        ]
+    },
+    {
+        "name": "usabilitydynamics/lib-wp-shortcode",
+        "version": "0.1.2",
+        "version_normalized": "0.1.2.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-wp-shortcode",
+            "reference": "0.1.2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-shortcode/archive/0.1.2.zip",
+            "reference": "0.1.2",
+            "shasum": null
+        },
+        "type": "library",
+        "extra": {
+            "component": {
+                "name": "usabilitydynamics/lib-wp-shortcode",
+                "version": "0.1.0",
+                "description": "Improves Shortcode implemetation in Wordpres and adds Shortcode UI",
+                "homepage": "http://github.com/UsabilityDynamics/lib-wp-shortcode",
+                "dependencies": [],
+                "scripts": [
+                    "./scripts"
+                ],
+                "templates": [
+                    "./templates"
+                ],
+                "styles": [
+                    "./styles"
+                ],
+                "files": [
+                    "./lib"
+                ],
+                "license": "MIT"
+            },
+            "installer-name": "lib-wp-shortcode"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "Improves Shortcode implementation in Wordpress and adds Shortcode UI",
+        "homepage": "http://github.com/UsabilityDynamics/lib-wp-shortcode",
+        "support": {
+            "issues": "http://github.com/UsabilityDynamics/lib-wp-shortcode/issues"
+        }
+    },
+    {
+        "name": "usabilitydynamics/wp-meta-box",
+        "version": "4.5.2.1",
+        "version_normalized": "4.5.2.1",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/wp-meta-box",
+            "reference": "4.5.2.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/wp-meta-box/archive/4.5.2.1.zip",
+            "reference": "4.5.2.1",
+            "shasum": null
+        },
+        "require": {
+            "composer/installers": "~1.0"
+        },
+        "type": "wordpress-plugin",
+        "extra": {
+            "installer-name": "wp-meta-box"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "meta-box-loader.php"
+            ],
+            "classmap": [
+                "inc/fields",
+                "inc/common.php",
+                "inc/field.php",
+                "inc/field-multiple-values.php",
+                "inc/helpers.php",
+                "inc/meta-box.php"
+            ]
+        },
+        "license": [
+            "GPLv2"
+        ],
+        "authors": [
+            {
+                "name": "Tran Ngoc Tuan Anh",
+                "email": "rilwis@gmail.com",
+                "homepage": "http://www.deluxeblogtips.com/",
+                "role": "Developer"
+            }
+        ],
+        "description": "Easily create custom meta boxes in WordPress.",
+        "homepage": "http://www.deluxeblogtips.com/meta-box/",
+        "keywords": [
+            "meta-box",
+            "select2",
+            "ui",
+            "wordpress",
+            "wordpress-plugin",
+            "wp-admin"
+        ]
+    },
+    {
+        "name": "usabilitydynamics/wp-meta-box-utilities",
+        "version": "1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/wp-meta-box-utilities",
+            "reference": "1.0.2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/wp-meta-box-utilities/archive/1.0.2.zip",
+            "reference": "1.0.2",
+            "shasum": null
+        },
+        "require": {
+            "composer/installers": "~1.0"
+        },
+        "type": "wordpress-plugin",
+        "extra": {
+            "installer-name": "wp-meta-box-utilities"
+        },
+        "installation-source": "source",
+        "autoload": {
+            "files": [
+                "wp-meta-box-utilities.php"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "Set of Utilities to extend default Meta Box plugin functionality in WordPress.",
+        "keywords": [
+            "meta-box",
+            "select2",
+            "ui",
+            "wordpress",
+            "wordpress-plugin",
+            "wp-admin"
+        ]
+    },
+    {
+        "name": "usabilitydynamics/wp-gallery-metabox",
+        "version": "2.0.1",
+        "version_normalized": "2.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/wp-gallery-metabox",
+            "reference": "2.0.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/wp-gallery-metabox/archive/2.0.1.zip",
+            "reference": "2.0.1",
+            "shasum": null
+        },
+        "require": {
+            "composer/installers": "~1.0",
+            "php": ">=5.3"
+        },
+        "require-dev": {
+            "codeclimate/php-test-reporter": "dev-master",
+            "usabilitydynamics/lib-wp-phpunit": "master"
+        },
+        "type": "wordpress-plugin",
+        "extra": {
+            "installer-name": "wp-gallery-metabox"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "loader.php"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "WP Repository plugin.",
+        "homepage": "https://usabilitydynamics.com"
+    },
+    {
+        "name": "usabilitydynamics/lib-wp-bootstrap",
+        "version": "1.2.1",
+        "version_normalized": "1.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-wp-bootstrap",
+            "reference": "1.2.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.2.1.zip",
+            "reference": "1.2.1",
+            "shasum": null
+        },
+        "require": {
+            "php": ">=5.3",
+            "usabilitydynamics/lib-utility": "~0.3"
+        },
+        "type": "library",
+        "extra": {
+            "installer-name": "lib-wp-bootstrap"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib/classes"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "Wordpress bootstrap library created by UsabilityDynamics",
+        "homepage": "https://github.com/UsabilityDynamics/lib-wp-bootstrap",
+        "keywords": [
+            "wordpress"
+        ]
+    },
+    {
+        "name": "usabilitydynamics/wp-rets-client",
+        "version": "0.2.3",
+        "version_normalized": "0.2.3.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/wp-rets-client",
+            "reference": "0.2.3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/wp-rets-client/archive/0.2.3.zip",
+            "reference": "0.2.3",
+            "shasum": null
+        },
+        "archive": {
+            "exclude": [
+                "vendor",
+                "node_modules",
+                ".gitignore",
+                "test",
+                "circle.yml",
+                "composer.lock",
+                "gruntfile.js",
+                "package.json"
+            ]
+        },
+        "require": {
+            "php": ">=5.3",
+            "usabilitydynamics/lib-wp-bootstrap": "1.2.1"
+        },
+        "require-dev": {
+            "codeclimate/php-test-reporter": "~0.1",
+            "usabilitydynamics/lib-wp-phpunit": "~0.2"
+        },
+        "type": "wordpress-plugin",
+        "extra": {
+            "schemas": {
+                "dependencies": {
+                    "modules": [],
+                    "plugins": []
+                },
+                "licenses": {
+                    "client": false,
+                    "product": false
+                }
+            },
+            "installer-name": "wp-rets-client"
+        },
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "lib/classes",
+                "lib/connectors"
+            ],
+            "files": [
+                "wp-rets-client.php"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "homepage": "https://usabilitydynamics.com"
+    }
+]
