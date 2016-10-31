@@ -60,7 +60,7 @@ function wpp_fs() {
       'has_paid_plans'    => false,
       'menu'              => array(
         'slug'       => "edit.phppost_typeproperty",
-        'first-path' => 'admin.php?page=all_properties',
+        'first-path' => 'index.php?page=ud-splash',
         'account'    => false,
       ),
     ) );
