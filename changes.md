@@ -1,3 +1,6 @@
+### 2.2.1 
+* Version bump. [wip]
+
 ### 2.2.0 ( August 31, 2016 )
 * Fixed issue with Google Map functionality.
 * Added options for Google API Keys (browser and server).
