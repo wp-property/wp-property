@@ -32,7 +32,8 @@
     "usabilitydynamics/wp-meta-box": "4.5.2.1",
     "usabilitydynamics/wp-meta-box-utilities": "1.0.2",
     "UsabilityDynamics/wp-gallery-metabox": "2.0.1",
-    "usabilitydynamics/wp-rets-client": "0.2.3"
+    "usabilitydynamics/wp-rets-client": "0.2.3",
+    "freemius/wordpress-sdk": "^1.7"
   },
   "require-dev": {
     "usabilitydynamics/lib-wp-phpunit": "master",
