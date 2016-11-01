@@ -31,14 +31,15 @@ namespace UsabilityDynamics\WPP {
       public function page_template( $template ) {
         global $wp_query;
 
-        $render = apply_filters( 'wpp_layouts_settings', false );
+        $render = apply_filters( 'wpp::layouts::settings', false );
 
         if ( $render && !empty( $wp_query->post ) ) {
-          $wp_query->post->ID = $render[ 'layout_id' ];
+          //$wp_query->post->ID = $render[ 'layout_id' ];
+          //$wp_query->post->raw = '_is_layout';
         }
 
         if ( count( $wp_query->posts ) > 1 ) {
-          $wp_query->posts = array($wp_query->post);
+          //$wp_query->posts = array($wp_query->post);
           $wp_query->post_count = 1;
         }
 
@@ -58,12 +59,16 @@ namespace UsabilityDynamics\WPP {
        * @return string
        */
       public function the_content( $data ) {
-        $render = apply_filters( 'wpp_layouts_settings', false );
+        global $property;
+
+        $render = apply_filters( 'wpp::layouts::settings', false );
 
         if ( !$render ) return $data;
 
         if ( function_exists( 'siteorigin_panels_render' ) ) {
+          //return siteorigin_panels_render( $property['ID'], false, json_decode( file_get_contents( WP_PLUGIN_DIR . '/' . 'wp-property' . '/static/layouts/single-classic.json' ), true ) );
           return siteorigin_panels_render( $render[ 'layout_id' ] );
+
         }
 
         return $data;

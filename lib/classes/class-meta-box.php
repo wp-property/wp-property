@@ -40,7 +40,11 @@ namespace UsabilityDynamics\WPP {
           add_meta_box( 'wpp_property_children', sprintf( __( 'Child %s', ud_get_wp_property('domain') ), \WPP_F::property_label( 'plural' ) ), array( $this, 'render_child_properties_meta_box' ), 'property', 'advanced', 'high' );
         }
 
-        add_meta_box( 'wpp_property_template', __( 'Template', ud_get_wp_property('domain') ), array( $this, 'render_template_meta_box' ), 'property', 'side', 'default' );
+        // Only show if new layouts are NOT enabled.
+        if( !apply_filters( 'wpp::layouts::enabled', false ) ) {
+          add_meta_box( 'wpp_property_template', __( 'Template', ud_get_wp_property('domain') ), array( $this, 'render_template_meta_box' ), 'property', 'side', 'default' );
+        }
+
       }
 
       /**

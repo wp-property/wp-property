@@ -3461,7 +3461,8 @@ class WPP_F extends UsabilityDynamics\Utility {
 
   /**
    * Get coordinates for property out of database
-   *
+   * @param bool $listing_id
+   * @return array|bool
    */
   static public function get_coordinates( $listing_id = false ) {
     global $post, $property;

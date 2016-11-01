@@ -66,6 +66,7 @@ namespace UsabilityDynamics\WPRETSC {
               'menu_name'         => __( 'Schedules' ),
             ),
             'show_ui'           => true,
+            'meta_box_cb'       => false,
             'show_in_menu'      => false,
             'show_admin_column' => false,
             'query_var'         => false,

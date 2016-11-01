@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname(dirname($vendorDir));
 
 return array(
+    'ChromePhp' => $vendorDir . '/ccampbell/chromephp/ChromePhp.php',
     'Composer\\Installers\\AglInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/AglInstaller.php',
     'Composer\\Installers\\AimeosInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/AimeosInstaller.php',
     'Composer\\Installers\\AnnotateCmsInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/AnnotateCmsInstaller.php',

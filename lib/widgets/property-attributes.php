@@ -55,6 +55,7 @@ namespace UsabilityDynamics\WPP\Widgets {
      * Renders form based on Shortcode's params
      *
      * @param array $instance
+     * @return bool|void
      */
     public function form( $instance ) {
       ?>

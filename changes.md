@@ -1,5 +1,7 @@
 ### 2.2.1 
 * Hiding advanced legacy options Single Template selection, Default Property Page, Default Phone Number and Widget Sidebars.
+* Added `ccampbell/chromephp` logger.
+* Added greater support for Layouts.
 * Version bump. [wip]
 
 ### 2.2.0 ( August 31, 2016 )
