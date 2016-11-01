@@ -1,4 +1,5 @@
 ### 2.2.1 
+* Enabled `property_location` taxonomy which automatically creates hierarchial location terms during address validation.
 * Hiding advanced legacy options Single Template selection, Default Property Page, Default Phone Number and Widget Sidebars.
 * Added `ccampbell/chromephp` logger.
 * Added greater support for Layouts.

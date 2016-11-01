@@ -255,14 +255,14 @@ namespace UsabilityDynamics\WPRETSC {
 
           ud_get_wp_rets_client()->write_log( 'Inserted property post as draft ' . $_post_id );
 
-          if(
-            ( !isset( $post_data[ 'meta_input' ][ 'address_is_formatted' ] ) || !$post_data[ 'meta_input' ][ 'address_is_formatted' ] ) &&
-            method_exists( 'WPP_F', 'revalidate_address' )
-          ) {
+          if( ( !isset( $post_data[ 'meta_input' ][ 'address_is_formatted' ] ) || !$post_data[ 'meta_input' ][ 'address_is_formatted' ] ) && method_exists( 'WPP_F', 'revalidate_address' )  ) {
             ud_get_wp_rets_client()->write_log( 'Revalidate address if it was not done yet' );
             $r = \WPP_F::revalidate_address( $_post_id, array( 'skip_existing' => 'false' ) );
+
             if( !empty( $r[ 'status' ] ) && $r[ 'status' ] !== 'updated' ) {
               ud_get_wp_rets_client()->write_log( 'Address validation failed: ' . $r[ 'status' ] );
+            } else {
+              ud_get_wp_rets_client()->write_log( 'Address validation worked, have [' . count($r['terms']) . '] terms.' );
             }
           }
 

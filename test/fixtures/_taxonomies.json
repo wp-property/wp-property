@@ -80,7 +80,7 @@
         "label": "Locations",
         "public": 1,
         "meta_box_cb": false,
-        "hierarchical": false,
+        "hierarchical": true,
         "show_in_menu": false,
         "add_native_mtbox": false,
         "show_in_nav_menus": true,

@@ -1588,6 +1588,8 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     }
 
+    $return['geo_data'] = $geo_data;
+
     if( !empty( $geo_data->formatted_address ) ) {
 
       foreach( (array) $wp_properties[ 'geo_type_attributes' ] + array( 'display_address' ) as $meta_key ) {
@@ -1606,9 +1608,11 @@ class WPP_F extends UsabilityDynamics\Utility {
         }
       }
 
+      $return['terms'] = self::update_location_terms( $post_id, $geo_data );
+
       update_post_meta( $post_id, 'wpp::last_address_validation', time() );
 
-      if( $manual_coordinates ) {
+      if( isset( $manual_coordinates ) ) {
         $lat = !empty( $coordinates[ 'lat' ] ) ? $coordinates[ 'lat' ] : 0;
         $lng = !empty( $coordinates[ 'lng' ] ) ? $coordinates[ 'lng' ] : 0;
       } else {
@@ -1654,6 +1658,109 @@ class WPP_F extends UsabilityDynamics\Utility {
     return $return;
   }
 
+  /**
+   * Registers a system taxonomy if needed with most essential arguments.
+   *
+   * @since 2.2.1
+   * @author potanin@UD
+   * @param string $taxonomy
+   * @return string
+   */
+  static public function verify_have_system_taxonomy($taxonomy = '') {
+
+    if( taxonomy_exists ( $taxonomy ) ) {
+      return $taxonomy;
+    }
+
+    register_taxonomy( $taxonomy, array( 'property' ), array(
+      'hierarchical'          => true,
+      'update_count_callback' => null,
+      'labels'            => array(),
+      'show_ui'           => false,
+      'show_in_menu'      => false,
+      'show_admin_column' => false,
+      'meta_box_cb'       => false,
+      'query_var'         => false,
+      'rewrite'           => false
+    ) );
+
+    if( taxonomy_exists ( $taxonomy ) ) {
+      return $taxonomy;
+    }
+
+  }
+
+  /**
+   * Build terms from address parts.
+   *
+   * @since 2.2.1
+   * @author potanin@UD
+   * @param $post_id
+   * @param $geo_data
+   * @return array
+   */
+  static public function update_location_terms($post_id, $geo_data) {
+
+    self::verify_have_system_taxonomy( 'property_location' );
+
+    $geo_data->terms = array(
+      'state' => get_term_by( 'name', $geo_data->state, 'property_location', OBJECT ),
+      'county' => get_term_by( 'name', $geo_data->county, 'property_location', OBJECT ),
+      'city' => get_term_by( 'name', $geo_data->city, 'property_location', OBJECT ),
+      'route' => get_term_by( 'name', $geo_data->route, 'property_location', OBJECT )
+    );
+
+    // validate, lookup and add all location terms to object.
+    if( isset( $geo_data->terms ) && is_array( $geo_data->terms ) ) {
+      foreach( $geo_data->terms as $_level => $_haveTerm ) {
+
+        if( !$_haveTerm || is_wp_error( $_haveTerm ) ) {
+
+          $_value = $geo_data->{$_level};
+
+          $index_key = array_search( $_level, array_keys( $geo_data->terms ), true );
+          //$_higher_levels = array_slice( $geo_data->terms, 0, $index_key, true );
+          $_higher_level = end( array_slice( $geo_data->terms, ( $index_key - 1 ), 1, true ) );
+          $_higher_level_name = end( array_keys( array_slice( $geo_data->terms, ( $index_key - 1 ), 1, true ) ) );
+
+          $_detail = array(//'slug' => 'houston'
+          );
+
+          if( $_higher_level && isset( $_higher_level->term_id ) ) {
+            $_detail[ 'description' ] = $_value . ' is a ' . $_level . ' within ' . ( isset( $_higher_level ) ? $_higher_level->name : '' ) . ', a ' . $_higher_level_name . '.';
+            $_detail[ 'parent' ] = $_higher_level->term_id;
+          } else {
+            $_detail[ 'description' ] = $_value . ' is a ' . $_level . ' with nothin above it.';
+          }
+
+          $_inserted_term = wp_insert_term( $_value, 'property_location', $_detail );
+
+          if( !is_wp_error( $_inserted_term ) && isset( $_inserted_term[ 'term_id' ] ) ) {
+            $geo_data->terms[ $_level ] = get_term_by( 'term_id', $_inserted_term[ 'term_id' ], 'property_location', OBJECT );
+            //die( '<pre>' . print_r( $geo_data->terms->{$_level}, true ) . '</pre>' );
+          } else {
+            error_log('Could not insert [property_location] term, error: [' . $_inserted_term->get_error_message() . ']' );
+          }
+
+        }
+
+      }
+
+      $_location_terms = array();
+      foreach( $geo_data->terms as $_term_hopefully ) {
+        if( isset( $_term_hopefully->term_id ) ) {
+          $_location_terms[] = $_term_hopefully->term_id;
+        }
+      }
+
+      // write, ovewriting any settings from before
+      wp_set_object_terms( $post_id, $_location_terms, 'property_location', false );
+
+    }
+
+    return $geo_data->terms;
+
+  }
   /**
    * Returns location information from Google Maps API call
    *
