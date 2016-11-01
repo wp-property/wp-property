@@ -6,6 +6,7 @@
  */
 namespace UsabilityDynamics\WPP {
 
+
   if( !class_exists( 'UsabilityDynamics\WPP\Bootstrap' ) ) {
 
     final class Bootstrap extends \UsabilityDynamics\WP\Bootstrap_Plugin {
@@ -310,6 +311,7 @@ namespace UsabilityDynamics\WPP {
         return $response;
 
       }
+
 
     }
 

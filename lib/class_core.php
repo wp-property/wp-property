@@ -275,6 +275,7 @@ class WPP_Core {
     //** Load all widgets and register widget areas */
     add_action( 'widgets_init', array( 'WPP_F', 'widgets_init' ) );
 
+    do_action( 'wpp_init:end', $this );
   }
 
   /**

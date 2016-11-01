@@ -2,6 +2,7 @@
 * Hiding advanced legacy options Single Template selection, Default Property Page, Default Phone Number and Widget Sidebars.
 * Added `ccampbell/chromephp` logger.
 * Added greater support for Layouts.
+* Addinng logic to handle property_type link between Taxonomy and legacy attribute.
 * Version bump. [wip]
 
 ### 2.2.0 ( August 31, 2016 )

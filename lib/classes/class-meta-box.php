@@ -516,6 +516,8 @@ namespace UsabilityDynamics\WPP {
 
         $types = ud_get_wp_property( 'property_types', array() );
 
+        $types = apply_filters( 'wpp::property_types', $types );
+
         if( empty( $types ) ) {
           return false;
         }
