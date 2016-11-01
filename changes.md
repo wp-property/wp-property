@@ -1,4 +1,5 @@
 ### 2.2.1 
+* Hiding advanced legacy options Single Template selection, Default Property Page, Default Phone Number and Widget Sidebars.
 * Version bump. [wip]
 
 ### 2.2.0 ( August 31, 2016 )
