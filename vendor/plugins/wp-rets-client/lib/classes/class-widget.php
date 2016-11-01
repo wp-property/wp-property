@@ -26,7 +26,7 @@ namespace UsabilityDynamics\WPRETSC {
       /**
        * @var string
        */
-      private $api_url = 'https://api.rets.ci/';
+      private $api_url = 'https://rets-ci-api-rets-ci-develop-andy.c.rabbit.ci/';
 
       /**
        * Widget constructor.

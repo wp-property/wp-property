@@ -263,7 +263,7 @@
         "extra": {
             "installer-name": "lib-ud-api-client"
         },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "classmap": [
                 "lib/classes"
@@ -694,40 +694,6 @@
         "homepage": "https://usabilitydynamics.com"
     },
     {
-        "name": "freemius/wordpress-sdk",
-        "version": "1.7.4",
-        "version_normalized": "1.7.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Freemius/wordpress-sdk.git",
-            "reference": "b77dc8ca671c8d28b9d368a9b15e532448557a05"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Freemius/wordpress-sdk/zipball/b77dc8ca671c8d28b9d368a9b15e532448557a05",
-            "reference": "b77dc8ca671c8d28b9d368a9b15e532448557a05",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2"
-        },
-        "time": "2016-03-28 04:32:07",
-        "type": "library",
-        "installation-source": "dist",
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "GPL-2.0+"
-        ],
-        "description": "Freemius WordPress SDK",
-        "homepage": "https://freemius.com",
-        "keywords": [
-            "freemius",
-            "plugin",
-            "sdk",
-            "wordpress"
-        ]
-    },
-    {
         "name": "ccampbell/chromephp",
         "version": "4.1.0",
         "version_normalized": "4.1.0.0",
@@ -770,6 +736,40 @@
         "keywords": [
             "log",
             "logging"
+        ]
+    },
+    {
+        "name": "freemius/wordpress-sdk",
+        "version": "1.7.4",
+        "version_normalized": "1.7.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Freemius/wordpress-sdk.git",
+            "reference": "b77dc8ca671c8d28b9d368a9b15e532448557a05"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Freemius/wordpress-sdk/zipball/b77dc8ca671c8d28b9d368a9b15e532448557a05",
+            "reference": "b77dc8ca671c8d28b9d368a9b15e532448557a05",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2"
+        },
+        "time": "2016-03-28 04:32:07",
+        "type": "library",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "description": "Freemius WordPress SDK",
+        "homepage": "https://freemius.com",
+        "keywords": [
+            "freemius",
+            "plugin",
+            "sdk",
+            "wordpress"
         ]
     }
 ]

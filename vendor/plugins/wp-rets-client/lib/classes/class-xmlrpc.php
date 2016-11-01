@@ -239,10 +239,6 @@ namespace UsabilityDynamics\WPRETSC {
           ud_get_wp_rets_client()->write_log( 'Running wp_insert_post for [new post].' );
         }
 
-        $_post_data_tax_input = $post_data['tax_input'];
-
-        $post_data['tax_input'] = array();
-
         $_post_id = wp_insert_post( $post_data, true );
 
         if( is_wp_error( $_post_id ) ) {
@@ -256,21 +252,6 @@ namespace UsabilityDynamics\WPRETSC {
           );
 
         } else {
-
-          if(!empty($_post_data_tax_input)){
-            foreach($_post_data_tax_input as $tax_name => $tax_tags){
-              if(!get_taxonomy($tax_name)){
-
-                $register_taxonomy = register_taxonomy($tax_name, array('property'), array());
-                ud_get_wp_rets_client()->write_log( 'Registered a new taxonomy ' . $tax_name );
-                wp_set_post_terms( $_post_id, $tax_tags, $tax_name );
-
-              } else {
-                wp_set_post_terms( $_post_id, $tax_tags, $tax_name );
-              }
-
-            }
-          }
 
           ud_get_wp_rets_client()->write_log( 'Inserted property post as draft ' . $_post_id );
 
