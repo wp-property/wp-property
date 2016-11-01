@@ -3,12 +3,18 @@
   display:none;
 }
 
-// Hidden on new installs.
+// @temp Hidden legacy settings on new installs.
+li.wpp-setting-attribute-admin-sortable,
 li.wpp-setting-exclude-from-regular-search-results,
 tr.wpp-setting-single-template,
 tr.wpp-setting-default-property-page,
 tr.wpp-setting-default-phone-number,
 tr.wpp-setting-widget-sidebars {
+  display:none;
+}
+
+// @temp Hidden legacy settings on single property editing page.
+div.rwmb-wpp_parent-wrapper {
   display:none;
 }
 
