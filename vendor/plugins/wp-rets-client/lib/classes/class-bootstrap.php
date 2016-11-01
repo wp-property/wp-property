@@ -68,6 +68,7 @@ namespace UsabilityDynamics\WPRETSC {
             'show_ui'           => true,
             'show_in_menu'      => false,
             'show_admin_column' => false,
+            'meta_box_cb' => false,
             'query_var'         => false,
             'rewrite'           => false
           ) );

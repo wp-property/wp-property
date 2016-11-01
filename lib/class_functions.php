@@ -1776,8 +1776,8 @@ class WPP_F extends UsabilityDynamics\Utility {
    * Returns avaliability of Google's Geocoding Service based on time of last returned status OVER_QUERY_LIMIT
    * @uses const self::blocking_for_new_validation_interval
    * @uses option ud::geo_locate_address_last_OVER_QUERY_LIMIT
-   * @param type $update used to set option value in time()
-   * @return boolean
+   * @param bool|type $update used to set option value in time()
+   * @return bool
    * @author odokienko@UD
    */
   static public function available_address_validation( $update = false ) {

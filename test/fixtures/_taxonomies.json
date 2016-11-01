@@ -1,0 +1,135 @@
+{
+  "name": "WP-Property: Terms",
+  "version": "1.0.2",
+  "domain": "wpp_terms",
+  "types": {
+    "multiple": {
+      "label": "Multiple Terms",
+      "desc": "Property can have multiple terms. It's a native WordPress functionality."
+    },
+    "unique": {
+      "label": "Unique Term",
+      "desc": "Property can have only one term. Be sure to not enable native Meta Box for current taxonomy to prevent issues."
+    }
+  },
+  "config": {
+    "taxonomies": {
+      "property_feature": {
+        "label": "Features",
+        "labels": [ ],
+        "public": true,
+        "hierarchical": false,
+        "show_in_menu": false,
+        "add_native_mtbox": false,
+        "show_in_nav_menus": true,
+        "admin_searchable": false,
+        "show_tagcloud": true,
+        "rich_taxonomy": false,
+        "capabilities": {
+          "manage_terms": "manage_wpp_categories",
+          "edit_terms": "manage_wpp_categories",
+          "delete_terms": "manage_wpp_categories",
+          "assign_terms": "manage_wpp_categories"
+        },
+        "rewrite": {
+          "slug": "feature"
+        }
+      },
+      "community_feature": {
+        "label": "Community",
+        "labels": [ ],
+        "public": true,
+        "hierarchical": false,
+        "show_in_menu": false,
+        "add_native_mtbox": false,
+        "show_in_nav_menus": true,
+        "admin_searchable": false,
+        "show_tagcloud": true,
+        "rich_taxonomy": false,
+        "capabilities": {
+          "manage_terms": "manage_wpp_categories",
+          "edit_terms": "manage_wpp_categories",
+          "delete_terms": "manage_wpp_categories",
+          "assign_terms": "manage_wpp_categories"
+        },
+        "rewrite": {
+          "slug": "community_feature"
+        }
+      },
+      "property_type": {
+        "label": "Property Type",
+        "public": 1,
+        "hierarchical": false,
+        "show_in_menu": false,
+        "meta_box_cb": false,
+        "add_native_mtbox": false,
+        "show_in_nav_menus": true,
+        "admin_searchable": 1,
+        "show_tagcloud": false,
+        "capabilities": {
+          "manage_terms": "manage_wpp_categories",
+          "edit_terms": "manage_wpp_categories",
+          "delete_terms": "manage_wpp_categories",
+          "assign_terms": "manage_wpp_categories"
+        },
+        "rewrite": {
+          "slug": "types"
+        }
+      },
+      "property_location": {
+        "label": "Locations",
+        "public": 1,
+        "meta_box_cb": false,
+        "hierarchical": false,
+        "show_in_menu": false,
+        "add_native_mtbox": false,
+        "show_in_nav_menus": true,
+        "admin_searchable": 1,
+        "show_tagcloud": false,
+        "capabilities": {
+          "manage_terms": "manage_wpp_categories",
+          "edit_terms": "manage_wpp_categories",
+          "delete_terms": "manage_wpp_categories",
+          "assign_terms": "manage_wpp_categories"
+        },
+        "rewrite": {
+          "slug": "location"
+        }
+      },
+      "property_status": {
+        "label": "Status",
+        "public": 1,
+        "meta_box_cb": false,
+        "hierarchical": false,
+        "show_in_menu": true,
+        "add_native_mtbox": false,
+        "show_in_nav_menus": true,
+        "admin_searchable": 1,
+        "show_tagcloud": false,
+        "capabilities": {
+          "manage_terms": "manage_wpp_categories",
+          "edit_terms": "manage_wpp_categories",
+          "delete_terms": "manage_wpp_categories",
+          "assign_terms": "manage_wpp_categories"
+        },
+        "rewrite": {
+          "slug": "status"
+        }
+      }
+    },
+    "groups": {
+      "property_type": "_general",
+      "property_status": "_general",
+      "property_feature": "main",
+      "community_feature": "main",
+      "property_location": "_location"
+    },
+    "types": {
+      "property_feature": "multiple",
+      "community_feature": "multiple",
+      "property_type": "unique",
+      "property_location": "multiple",
+      "property_status": "unique"
+    }
+  }
+}
