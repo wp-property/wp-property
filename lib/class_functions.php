@@ -1714,17 +1714,15 @@ class WPP_F extends UsabilityDynamics\Utility {
     if( isset( $geo_data->terms ) && is_array( $geo_data->terms ) ) {
       foreach( $geo_data->terms as $_level => $_haveTerm ) {
 
-        if( !$_haveTerm || is_wp_error( $_haveTerm ) ) {
+        if( !$_haveTerm || is_wp_error( $_haveTerm ) && $geo_data->{$_level} ) {
 
           $_value = $geo_data->{$_level};
 
           $index_key = array_search( $_level, array_keys( $geo_data->terms ), true );
-          //$_higher_levels = array_slice( $geo_data->terms, 0, $index_key, true );
           $_higher_level = end( array_slice( $geo_data->terms, ( $index_key - 1 ), 1, true ) );
           $_higher_level_name = end( array_keys( array_slice( $geo_data->terms, ( $index_key - 1 ), 1, true ) ) );
 
-          $_detail = array(//'slug' => 'houston'
-          );
+          $_detail = array();
 
           if( $_higher_level && isset( $_higher_level->term_id ) ) {
             $_detail[ 'description' ] = $_value . ' is a ' . $_level . ' within ' . ( isset( $_higher_level ) ? $_higher_level->name : '' ) . ', a ' . $_higher_level_name . '.';
@@ -1733,13 +1731,15 @@ class WPP_F extends UsabilityDynamics\Utility {
             $_detail[ 'description' ] = $_value . ' is a ' . $_level . ' with nothin above it.';
           }
 
+          // $_detail[ 'slug' ] = 'city-slug';
+
           $_inserted_term = wp_insert_term( $_value, 'property_location', $_detail );
 
           if( !is_wp_error( $_inserted_term ) && isset( $_inserted_term[ 'term_id' ] ) ) {
             $geo_data->terms[ $_level ] = get_term_by( 'term_id', $_inserted_term[ 'term_id' ], 'property_location', OBJECT );
             //die( '<pre>' . print_r( $geo_data->terms->{$_level}, true ) . '</pre>' );
           } else {
-            error_log('Could not insert [property_location] term, error: [' . $_inserted_term->get_error_message() . ']' );
+            error_log('Could not insert [property_location] term ['.$_value.'], error: [' . $_inserted_term->get_error_message() . ']' );
           }
 
         }
@@ -1747,6 +1747,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       }
 
       $_location_terms = array();
+
       foreach( $geo_data->terms as $_term_hopefully ) {
         if( isset( $_term_hopefully->term_id ) ) {
           $_location_terms[] = $_term_hopefully->term_id;

@@ -1,7 +1,10 @@
 <?php
-
 /**
  * Shortcode: [property_attribute]
+ *
+ * ### Usage:
+ *
+ *    [property_attribute attribute=post_content]
  *
  * @since 2.1
  */

@@ -1474,6 +1474,13 @@ if ( !function_exists( 'wpp_css' ) ):
    * @author peshkov@UD
    * @version 0.1
    */
+  /**
+   * @param type $element
+   * @param array|bool $classes
+   * @param bool $return
+   * @param array $args
+   * @return bool|string
+   */
   function wpp_css( $element, $classes = false, $return = false, $args = array() ) {
     $args = array_merge( (array) $args, array(
       'instance' => 'wpp',
