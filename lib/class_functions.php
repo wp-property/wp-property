@@ -2383,7 +2383,9 @@ class WPP_F extends UsabilityDynamics\Utility {
         'tagline' => 'Need Room for your TOYS! Take notice of this unique Home!',
         'location' => '122 Bishopsgate, Jacksonville, NC 28540, USA',
         'price' => '195000',
+        'featured'=>'true',
         'bedrooms' => '4',
+        'property_type'=>'house',
         'bathrooms' => '4',
         'phone_number' => '8002700781',
         'img_index' => '1',
@@ -2405,6 +2407,7 @@ Ample off-street parking ",
         'price' => '215000',
         'bedrooms' => '5',
         'bathrooms' => '4',
+        'property_type'=>'house',
         'phone_number' => '8002300781',
         'img_index' => '1',
       ) );
@@ -2420,6 +2423,8 @@ Ample off-street parking ",
         'location' => '122 Bishopsgate, Jacksonville, NC 28540, USA',
         'price' => '255000',
         'bedrooms' => '8',
+        'featured'=>'true',
+        'property_type'=>'condo',
         'bathrooms' => '8',
         'phone_number' => '9992700781',
         'img_index' => '1',
@@ -2437,6 +2442,7 @@ Ample off-street parking ",
         'price' => '985000',
         'bedrooms' => '8',
         'bathrooms' => '8',
+        'property_type'=>'condo',
         'phone_number' => '9856700781',
         'img_index' => '1',
       ) );
@@ -2452,6 +2458,8 @@ Ample off-street parking ",
         'location' => '460 W Huron St,Chicago, IL 60654',
         'price' => '876000',
         'bedrooms' => '5',
+        'featured'=>'true',
+        'property_type'=>'townhouse',
         'bathrooms' => '5',
         'phone_number' => '8002708876',
         'img_index' => '1',
@@ -2459,15 +2467,16 @@ Ample off-street parking ",
 
     }
     /* If Property doesn't exist we create it : SIX */
-    if( !in_array( '207 Chantilly Ave', $posts ) ) {
+    if( !in_array( '7846 Charlesmont Road', $posts ) ) {
 
       self::generate_wpp_dummy_property( array(
-        'post_title' => '207 Chantilly Ave',
+        'post_title' => '7846 Charlesmont Road',
         'post_content' => 'Truly a beautiful home! Pull into your brand new driveway, walk up the new sidewalk and up to your newly epoxy painted porch. When you walk in the new front door, you will notice the new hardwood flooring and carpet, new kitchen tile, new back splash, new counter tops, new cabinets, new sink and new kitchen appliances. All this in addition to your newly remodeled bathrooms. This home also has a new water heater, new HVAC, newer windows, brand new roof, brand new electric panel and wiring throughout the house. ',
         'tagline' => 'A huge laundry room with plenty of storage and also a utility room.',
         'location' => '207 Chantilly Ave,Louisville, KY 40214',
         'price' => '190000',
         'bedrooms' => '4',
+        'property_type'=>'townhouse',
         'bathrooms' => '4',
         'phone_number' => '6754600781',
         'img_index' => '1',
@@ -2475,15 +2484,17 @@ Ample off-street parking ",
 
     }
     /* If Property doesn't exist we create it : SEVEN */
-    if( !in_array( '4420 Sycamore Forest Pl', $posts ) ) {
+    if( !in_array( '3212 Ramona Avenue', $posts ) ) {
 
       self::generate_wpp_dummy_property( array(
-        'post_title' => '14420 Sycamore Forest Pl',
+        'post_title' => '3212 Ramona Avenue',
         'post_content' => 'One of a kind! Everything you could imagine in this gorgeous 3 bedroom, 2 1/2 bath brick ranch. Great curb appeal, beautifully landscaped. Former Homearama Home! Beautiful entry foyer opens to gorgeous dining room and alluring great room w/ vaulted ceiling, moldings and cozy fireplace w/ unique bookcases. Very open kitchen w/ white cabinets, granite counter tops and sunny breakfast area. Walk out to large inviting screened porch and deck featuring a hot tub. ',
         'tagline' => 'NEW $11,000 GENERATOR SYSTEM',
         'location' => '4420 Sycamore Forest Pl, Louisville,KY 40245',
         'price' => '876000',
         'bedrooms' => '4',
+        'featured'=>'true',
+        'property_type'=>'multifamily',
         'bathrooms' => '4',
         'phone_number' => '9898700781',
         'img_index' => '1',
@@ -2491,15 +2502,16 @@ Ample off-street parking ",
 
     }
     /* If Property doesn't exist we create it : EIGHT */
-    if( !in_array( '1525 Istrice Rd', $posts ) ) {
+    if( !in_array( '4602 Chatford Avenue', $posts ) ) {
 
       self::generate_wpp_dummy_property( array(
-        'post_title' => '1525 Istrice Rd',
+        'post_title' => '4602 Chatford Avenue',
         'post_content' => 'Rarely do the homes in this terrific neighborhood come on the market. Whether you have teenagers or live in a multi-generational home, there is so much to love about this warm and inviting home. There are two master suites with one on the main level, a great room, formal living and dining areas and a large family/game room with three bedrooms upstairs. The 3 car garage has plenty of room for work benches and toys. ',
         'tagline' => 'Easy access up the stairs to Bud Beasley Elementary and shopping is all very conveniently located close to home!',
         'location' => '1525 Istrice Rd,Sparks, NV 89436',
         'price' => '444000',
         'bedrooms' => '5',
+        'property_type'=>'multifamily',
         'bathrooms' => '5',
         'phone_number' => '7878700781',
         'img_index' => '1',
@@ -2507,38 +2519,75 @@ Ample off-street parking ",
 
     }
     /* If Property doesn't exist we create it : NINE */
-    if( !in_array( '4509 Eagle Mountain Dr', $posts ) ) {
+    if( !in_array( '619 Beechfield Avenue', $posts ) ) {
 
       self::generate_wpp_dummy_property( array(
-        'post_title' => '4509 Eagle Mountain Dr',
+        'post_title' => '619 Beechfield Avenue',
         'post_content' => 'The lush Acacia hardwood floors and grand living/dining room welcome you home. Desirable floorplan with full bed, bath and bonus room on main level. Each bedroom comes equipped with private bath. The gorgeous gourmet kitchen illuminates with upgraded quartz countertops, custom cabinets with special features, stainless steel appliances and spectacular views of the valley. ',
         'tagline' => 'Pear, apple and peach trees accent the yard for the perfect combination of the outdoors.',
         'location' => '4509 Eagle Mountain Dr,Sparks, NV 89436',
         'price' => '555000',
         'bedrooms' => '4',
+        'featured'=>'true',
         'bathrooms' => '4',
+        'property_type'=>'land',
         'phone_number' => '8002700781',
         'img_index' => '1',
       ) );
 
     }
     /* If Property doesn't exist we create it : TEN */
-    if( !in_array( '2 Bedroom Home', $posts ) ) {
+    if( !in_array( '5109 Eugene Avenue', $posts ) ) {
 
       self::generate_wpp_dummy_property( array(
-        'post_title' => '2 Bedroom Home',
+        'post_title' => '5109 Eugene Avenue',
         'post_content' => 'Donec volutpat elit malesuada eros porttitor blandit. Donec sit amet ligula quis tortor molestie sagittis tincidunt at tortor. Phasellus augue leo, molestie in ultricies gravida; blandit et diam. Curabitur quis nisl eros! Proin quis nisi quam, sit amet lacinia nisi. Vivamus sollicitudin magna eu ipsum blandit tempor. Duis rhoncus orci at massa consequat et egestas lectus ornare? Duis a neque magna, quis placerat lacus. Phasellus non nunc sapien, id cursus mi! Mauris sit amet nisi vel felis molestie pretium.',
         'tagline' => 'Great starter home in beautiful St. Paul, Minnesota.',
         'location' => '332 S Main St, St Paul, Minnesota',
         'price' => '119000',
         'bedrooms' => '3',
         'bathrooms' => '2',
+        'property_type'=>'land',
         'phone_number' => '8002700781',
         'img_index' => '2',
       ) );
 
     }
 
+    /* If Property doesn't exist we create it : TEN */
+    if( !in_array( '5109 Beechfield', $posts ) ) {
+
+      self::generate_wpp_dummy_property( array(
+        'post_title' => '5102 Eugene Avenue',
+        'post_content' => 'Donec volutpat elit malesuada eros porttitor blandit. Donec sit amet ligula quis tortor molestie sagittis tincidunt at tortor. Phasellus augue leo, molestie in ultricies gravida; blandit et diam. Curabitur quis nisl eros! Proin quis nisi quam, sit amet lacinia nisi. Vivamus sollicitudin magna eu ipsum blandit tempor. Duis rhoncus orci at massa consequat et egestas lectus ornare? Duis a neque magna, quis placerat lacus. Phasellus non nunc sapien, id cursus mi! Mauris sit amet nisi vel felis molestie pretium.',
+        'tagline' => 'Great starter home in beautiful St. Paul, Minnesota.',
+        'location' => '5109 Beechfield, St Paul, Minnesota',
+        'price' => '119000',
+        'bedrooms' => '3',
+        'bathrooms' => '2',
+        'property_type'=>'commercial',
+        'phone_number' => '8002700781',
+        'img_index' => '2',
+      ) );
+
+    }
+/* If Property doesn't exist we create it : TWELVE */
+    if( !in_array( '9812 NE Avenue', $posts ) ) {
+
+      self::generate_wpp_dummy_property( array(
+        'post_title' => '9812 NE Avenue',
+        'post_content' => 'Donec volutpat elit malesuada eros porttitor blandit. Donec sit amet ligula quis tortor molestie sagittis tincidunt at tortor. Phasellus augue leo, molestie in ultricies gravida; blandit et diam. Curabitur quis nisl eros! Proin quis nisi quam, sit amet lacinia nisi. Vivamus sollicitudin magna eu ipsum blandit tempor. Duis rhoncus orci at massa consequat et egestas lectus ornare? Duis a neque magna, quis placerat lacus. Phasellus non nunc sapien, id cursus mi! Mauris sit amet nisi vel felis molestie pretium.',
+        'tagline' => 'Great starter home in beautiful St. Paul, Minnesota.',
+        'location' => '9812 NE Avenue, Minnesota',
+        'price' => '119000',
+        'bedrooms' => '3',
+        'bathrooms' => '2',
+        'property_type'=>'commercial',
+        'phone_number' => '8002700781',
+        'img_index' => '2',
+      ) );
+
+    }    
   }
   static public function generate_wpp_dummy_property( $data )
   {
@@ -2587,6 +2636,10 @@ Ample off-street parking ",
       update_post_meta( $insert_id, 'tagline', $data[ 'tagline' ] );
     }
 
+    if( !empty( $wp_properties[ 'property_stats' ][ 'featured' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'featured' ] ) ) {
+      update_post_meta( $insert_id, 'featured', $data[ 'featured' ] );
+    }
+    
     if( !empty( $wp_properties[ 'property_stats' ][ 'price' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'price' ] ) ) {
       update_post_meta( $insert_id, 'price', $data[ 'price' ] );
     }
@@ -2638,6 +2691,26 @@ Ample off-street parking ",
     }
 
   }
+  /**
+   * AJAX Handler for manaually creating backups.
+   *
+   * @author raj
+   */
+  static public function create_settings_backup() {
+    //save backup
+    
+    $data = apply_filters('wpp::backup::data', array('wpp_settings' => $wp_properties));
+    $timestamp = time();
+    if (get_option("wpp_property_backups"))
+      $backups = get_option("wpp_property_backups");
+    else
+      $backups = array();
+
+    $backups[$timestamp] = $data;
+    update_option("wpp_property_backups", $backups);
+    $message = '<a href="'.wp_nonce_url( "edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup&timestamp=".$timestamp, 'download-wpp-backup' ).'">'.date('d-m-Y H:i', $timestamp).'</a>&nbsp;&nbsp;&nbsp;';
+    echo json_encode(array("success"=>true,'message'=>$message));
+  }
 
   /**
    * AJAX Handler for Setup Assistant.
@@ -2655,6 +2728,44 @@ Ample off-street parking ",
     $prop_types = isset($data['wpp_settings']['property_types']) ? $data['wpp_settings']['property_types'] : false;
     $widgets_required = isset($data['wpp_settings']['configuration']['widgets']) ? $data['wpp_settings']['configuration']['widgets'] : false;
     $widgets_available = array('gallerypropertieswidget','childpropertieswidget'); 
+
+        //if dummy properties required
+//    print_r($data['wpp_settings']);
+    if(isset($data['wpp_settings']['configuration']['dummy-prop']) && $data['wpp_settings']['configuration']['dummy-prop']=='yes-please'){
+      self::generate_wpp_dummy_properties();
+    }
+    
+    //check if new page needs to be created for wpp_settings[configuration][base_slug] (Choose default properties pages)
+    if(isset( $data['wpp_settings']['configuration']['base_slug']) && $data['wpp_settings']['configuration']['base_slug']=="create-new"){
+      
+      $pageName = $data['wpp-base-slug-new'];
+      $new_page = array(
+                'post_type' => 'page',
+                'post_title' => $pageName,
+                'post_content' => '',
+                'post_status' => 'publish',
+                'post_author' => 1,
+        );
+      $new_page_id = wp_insert_post($new_page);
+      $post = get_post($new_page_id); 
+      $slug = $post->post_name;
+      $data['wpp_settings']['configuration']['base_slug'] = $slug;
+      $return['props_over'] = get_permalink($new_page_id);
+    }
+    else{
+      $return['props_over'] = get_site_url().'/property';
+    }
+    $args = array(
+        'posts_per_page' => 1,
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'post_type' => 'property',
+        'post_status' => 'publish',
+        'suppress_filters' => true
+    );
+    $posts_array = get_posts($args);
+    $return['props_single'] = get_permalink($posts_array[0]->ID);
+   
 
     //some settings should just be installed first time,and later taken/updated from settings tab
     $freshInstallation = 1; 
@@ -2684,18 +2795,17 @@ Ample off-street parking ",
         $propAttrSet = array_merge($propAttrSet, $wp_properties['property_assistant']['land']);
       if ($prop_types && isset($data['wpp_settings']['property_types']['commercial']))
         $propAttrSet = array_merge($propAttrSet, $wp_properties['property_assistant']['commercial']);
-      if ($prop_types && array_intersect(array_map('strtolower', $data['wpp_settings']['property_types']), array('house', 'condo', 'townhouse', 'multifamily')))
+      if ($prop_types && array_intersect(array_map('strtolower', $data['wpp_settings']['property_types']), array('house', 'condo', 'townhouse', 'multifamily'))){
         $propAttrSet = array_merge($propAttrSet, $wp_properties['property_assistant']['residential']);
+        // in this case we need bedrooms/bathrooms/total rooms to be numeric
+        $data['wpp_settings']['admin_attr_fields']['bedrooms'] = "number";
+        $data['wpp_settings']['admin_attr_fields']['bathrooms'] = "number";
+        $data['wpp_settings']['admin_attr_fields']['total_rooms'] = "number";
+      }
 
 //      Install basic property attributes
       $data['wpp_settings']['property_stats'] = $propAttrSet;
       update_option('wpp_settings', $data['wpp_settings']);
-    }
-    
-    //if dummy properties required
-//    print_r($data['wpp_settings']);
-    if(isset($data['wpp_settings']['configuration']['dummy-prop']) && $data['wpp_settings']['configuration']['dummy-prop']=='yes-please'){
-      self::generate_wpp_dummy_properties();
     }
     
     //update widgets if $widgets_required
@@ -2725,9 +2835,10 @@ Ample off-street parking ",
       
       //update widgets for each property type
       update_option('sidebars_widgets', $allWidgets);
-      rerurn;
+      
     }
-
+    echo json_encode($return);
+    exit;
   }
 
   /**

@@ -175,10 +175,7 @@ namespace UsabilityDynamics\WPP {
                       'total_rooms' => __('Total Rooms', ud_get_wp_property()->domain),
                       'living_space' => __('Living space', ud_get_wp_property()->domain),
                       'year_built' => __('Year Built', ud_get_wp_property()->domain),
-                      'number_of_rooms' => __('Number of rooms', ud_get_wp_property()->domain),
-                      'fees' => __('Fees', ud_get_wp_property()->domain),
-                      'features_term' => __('Features (term)', ud_get_wp_property()->domain),
-                      'community_features_term' => __('Community features (term)', ud_get_wp_property()->domain)
+                      'fees' => __('Fees', ud_get_wp_property()->domain)
                     ),
                     "commercial" => array(
                       'location' => __('Address', ud_get_wp_property()->domain),
@@ -186,8 +183,6 @@ namespace UsabilityDynamics\WPP {
                       'price' => __('Price', ud_get_wp_property()->domain),
                       'year_built' => __('Year Built', ud_get_wp_property()->domain),
                       'fees' => __('Fees', ud_get_wp_property()->domain),
-                      'features_term' => __('Features (term)', ud_get_wp_property()->domain),
-                      'community_features_term' => __('Community features (term)', ud_get_wp_property()->domain),    
                       'business_purpose' => __('Business Purpose', ud_get_wp_property()->domain),  
                     ),
                     "land" => array(
@@ -196,7 +191,6 @@ namespace UsabilityDynamics\WPP {
                       'price' => __('Price', ud_get_wp_property()->domain),
                       'year_built' => __('Year Built', ud_get_wp_property()->domain),
                       'fees' => __('Fees', ud_get_wp_property()->domain),
-                      'features_term' => __('Features (term)', ud_get_wp_property()->domain),
                       'lot_size' => __('Lot Size', ud_get_wp_property()->domain), 
                     )));
         }

@@ -53,6 +53,8 @@ if(!isset($wp_properties['configuration']["show_assistant"])){
 else{
     $freshInstallation = 'no';
 }
+$wp_properties["properties_page_error"] = __('Please enter Properties Page name', ud_get_wp_property()->domain);
+$wp_properties["no_link_available"] = __('Necessary data missing.Please check all values.', ud_get_wp_property()->domain);
 $property_assistant = json_encode($wp_properties);
 echo "<script> var wpp_property_assistant = $property_assistant; </script>";
 ?>
@@ -65,7 +67,7 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
 
       <div class="item">
         <div class="wpp_asst_screen wpp_asst_screen_1">
-          <h2 class="wpp_asst_heading_main"><?php  echo __('CONGRATULATIONS,YOU HAVE SET UP', ud_get_wp_property()->domain); ?></h2>
+          <h2 class="wpp_asst_heading_main"><?php  echo __('WELCOME TO', ud_get_wp_property()->domain); ?></h2>
           <h1><?php echo __('WP-PROPERTY PLUGIN!', ud_get_wp_property()->domain); ?></h1>
           <p class="tagline"><?php echo __('Make few steps in order to set up it on your site!', ud_get_wp_property()->domain); ?></p>
           <center><button type="button" class="btn_letsgo"><?php echo __("LET'S GO!", ud_get_wp_property()->domain); ?></button></center>
@@ -158,8 +160,12 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
                     ?>
                     <option value="<?php echo $page->post_name; ?>" <?php selected( $wp_properties[ 'configuration' ][ 'base_slug' ], $page->post_name ); ?> class="list_property"><?php echo $page->post_title; ?></option>
                 <?php } ?>
+                <option value="create-new" class="list_property"><?php echo __('Create a new page', ud_get_wp_property()->domain); ?></option>
               </select>
             </div>	
+            <div class="wpp_asst_select_new">
+              <input type="text" name="wpp-base-slug-new" class="wpp-base-slug-new" required="required"/>
+            </div>
 
             <h2 class="wpp_asst_heading"><b><?php echo __('List Propery pages', ud_get_wp_property()->domain); ?></b></h2>
             <div class="wpp_asst_inner_wrap">
@@ -177,7 +183,7 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
               </ul>
             </div>
 
-            <h2 class="wpp_asst_heading"><b><?php echo __('Add overview of properties to your Properties page?', ud_get_wp_property()->domain); ?></b></h2>
+            <h2 class="wpp_asst_heading"><b><?php echo __('Add list of properties to your Properties page?', ud_get_wp_property()->domain); ?></b></h2>
 
             <div class="wpp_asst_inner_wrap">
               <ul class="three-sectionals">
@@ -197,11 +203,11 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
           <ul class="list-img">
             <li>
               <span><img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/wpp-single-prop.jpg', 'url'); ?>" alt="image"></span>
-            <center><button class="btn_single_page"><?php echo __('SINGLE PROPERTY PAGES', ud_get_wp_property()->domain); ?></button></center>
+            <center><a class="btn_single_page props" href="javascript:;"><?php echo __('SINGLE PROPERTY PAGES', ud_get_wp_property()->domain); ?></a></center>
             </li>
             <li>
               <img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/overview-prop.jpg', 'url'); ?>" alt="image">
-            <center><button class="btn_single_page"><?php echo __('OVERVIEW OF PROPERTIES', ud_get_wp_property()->domain); ?></button></center>
+            <center><a class="btn_single_page oviews" href="javascript:;"><?php echo __('OVERVIEW OF PROPERTIES', ud_get_wp_property()->domain); ?></a></center>
             </li>
           </ul>
 

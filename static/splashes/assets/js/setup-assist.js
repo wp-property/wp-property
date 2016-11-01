@@ -12,6 +12,11 @@ jQuery(document).ready(function () {
     if($isScreen==1)
       return false;
     
+    if( $('#soflow').val()=="create-new" && $(".wpp-base-slug-new").val()==""){
+      alert(wpp_property_assistant.properties_page_error);
+      return false;
+    }
+    
     jQuery.ajax({
       type: 'POST',
       url: ajaxurl,
@@ -25,6 +30,10 @@ jQuery(document).ready(function () {
       success: function (response) {
         hideLoader();
         var data = jQuery.parseJSON(response);
+        if(data.props_over!='false' && data.props_over!=false)
+          $(".btn_single_page.oviews").attr("href",data.props_over);
+        if(data.props_single!='false' && data.props_single!=false)
+          $(".btn_single_page.props").attr("href",data.props_single);
       },
       error: function () {
         hideLoader();
@@ -47,6 +56,8 @@ jQuery(document).ready(function () {
     $isScreen = $(".owl-page.active").index() + 1;
     // maybe add some screen specific
     switch ($isScreen) {
+      case 4 :
+        jQuery('#wpp-setup-assistant').submit();
       default:
         console.log("reached default screen");
         break;
@@ -61,7 +72,7 @@ jQuery(document).ready(function () {
     paginationSpeed: 400,
     autoPlay: false,
     pagination: true,
-    rewindNav: true,
+    rewindNav: false,
     touchDrag: false,
     mouseDrag: false,
     navigationText: [
@@ -69,14 +80,41 @@ jQuery(document).ready(function () {
       "<i class='icon-chevron-right icon-white'></i>"
     ],
     beforeMove: propAssistScreens,
+    afterAction :function(){
+//      console.log("afterAction")
+    },
     afterMove: function () {
-      jQuery('#wpp-setup-assistant').submit();
+//      console.log("afterMove")
     },
     singleItem: true
   });
   var wpp_owl = $("#wpp-splash-screen-owl").data('owlCarousel');
-// letsgo button on screen one should mimic next event
+  // letsgo button on screen one should mimic next event
   $(".btn_letsgo").click(function () {
     wpp_owl.next();
+  });
+  
+  //on change of "Choose default properties pages"
+  $('#soflow').on('change', function() {
+    if(this.value=="create-new"){
+      $('.wpp-base-slug-new').fadeIn("fast");
+    }
+    else{
+      $('.wpp-base-slug-new').fadeOut("fast");
+    }
+  });
+  
+  //on click of last screen option buttons
+  $(".btn_single_page").click(function (e) {
+    e.stopPropagation();
+    e.preventDefault();
+    
+    if(this.href.indexOf("javascript:;")>-1 || this.href=="" || this.href=="false"){
+      alert(wpp_property_assistant.no_link_available);
+    }
+    else{
+      window.location =  this.href;
+    }
+    return false;
   });
 });

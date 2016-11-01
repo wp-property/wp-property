@@ -534,11 +534,16 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       ?>
       <div class="wpp_settings_block">
         <?php _e( "Automatic Backups of WP-Property Configuration", ud_get_wp_property()->domain ); ?>
+        <input type="button" value="<?php _e( 'Backup Now', ud_get_wp_property()->domain ); ?>" id="wpp_ajax_create_settings_backup" class="button">
+        <span class="description"><?php _e( 'Backups created when you use Setup Assistant,or create one now.', ud_get_wp_property()->domain ); ?> </span>
+        <br>
+        <div class="wpp_backups_list">
         <?php 
         $auto_backups = get_option("wpp_property_backups");
         foreach( $auto_backups as  $time=>$backups){
           echo '<a href="'.wp_nonce_url( "edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup&timestamp=".$time, 'download-wpp-backup' ).'">'.date('d-m-Y H:i', $time).'</a>&nbsp;&nbsp;&nbsp;';
         } ?>
+        </div>
       </div>
       <?php } ?>
 

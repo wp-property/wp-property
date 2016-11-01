@@ -211,6 +211,7 @@
 
 .wpp_asst_inner_wrap{
   float:left;
+  overflow: hidden;
   width:100%;
 }
 .right_label{
@@ -273,6 +274,9 @@ h2.wpp_asst_heading b {
   color: white;
   border: 1px solid #4ec4d0;
   box-shadow: 0 5px 2px -1px #1897aa;
+}
+.btn_single_page:hover{
+  color: white;
 }
 .lab h2{margin-right:100px;}	
 
@@ -412,6 +416,12 @@ li.checkbox-up [type="checkbox"] + span::before {
   -moz-appearance: none;
   appearance: none;
   height:100%;
+}
+.wpp-base-slug-new{
+  padding: 9px;
+  display: none;
+  margin-left: 10px;
+  width: 250px;
 }
 .wpp_asst_select select, .wpp_asst_select select option{outline:none;}
 .wpp_asst_select select:hover {

@@ -221,7 +221,7 @@ namespace UsabilityDynamics\WPP {
           if(
             empty( $entry_types[ $attribute ] ) ||
             empty( $search_schema[ $entry_types[ $attribute ] ] ) ||
-            !in_array( $search_types[ $attribute ], $search_schema[ $entry_types[ $attribute ] ] )
+            !in_array( @$search_types[ $attribute ], @$search_schema[ $entry_types[ $attribute ] ] )
           ) {
             continue;
           }

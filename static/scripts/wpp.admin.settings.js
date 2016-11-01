@@ -140,6 +140,23 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
       } );
     } );
 
+    /* Create settings backup 
+    * used at : wp-property\static\views\admin\settings.php
+    */
+   jQuery( "#wpp_ajax_create_settings_backup" ).click( function () {
+      jQuery( this ).val( wpp.strings.processing );
+      jQuery( this ).attr( 'disabled', true );
+      jQuery( '.address_revalidation_status' ).remove();
+
+      jQuery.post( wpp.instance.ajax_url, {
+        action: 'wpp_ajax_create_settings_backup'
+      }, function ( data ) {
+        jQuery( "#wpp_ajax_create_settings_backup" ).val( 'Create Another Backup' );
+        jQuery( "#wpp_ajax_create_settings_backup" ).attr( 'disabled', false );
+        jQuery( '.wpp_backups_list' ).append( data.message );
+      }, 'json' );
+    } );
+    
     /* Revalidate all addresses */
     jQuery( "#wpp_ajax_revalidate_all_addresses" ).click( function () {
       jQuery( this ).val( wpp.strings.processing );

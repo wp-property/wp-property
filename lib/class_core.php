@@ -120,6 +120,7 @@ class WPP_Core {
     add_action( 'wp_ajax_wpp_ajax_image_query', create_function( "", ' $class = WPP_F::get_property_image_data($_REQUEST["image_id"]); if($class)  print_r($class); else echo __("No image found.","wpp"); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_clear_cache', create_function( "", '  echo WPP_F::clear_cache(); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_revalidate_all_addresses', create_function( "", '  echo WPP_F::revalidate_all_addresses(); die();' ) );
+    add_action( 'wp_ajax_wpp_ajax_create_settings_backup', create_function( "", '  echo WPP_F::create_settings_backup(); die();' ) );
     add_action( 'wp_ajax_wpp_save_settings', create_function( "", ' die(WPP_F::save_settings());' ) );
     add_action( 'wp_ajax_wpp_save_setup_settings', create_function( "", ' die(WPP_F::save_setup_settings());' ) );
     add_action( 'wp_ajax_wpp_apply_default_value', create_function( "", ' die(WPP_F::apply_default_value());' ) );
