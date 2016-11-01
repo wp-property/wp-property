@@ -300,6 +300,10 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
         continue;
       }
       $attribute_data = WPP_F::get_attribute_data($meta_key);
+
+      if( $meta_key === 'post_content' ) {
+        die( '<pre>' . print_r( $attribute_data, true ) . '</pre>' );
+      }
       //** Only executed shortcodes if the value isn't an array */
       if ( !is_array( $attribute_value ) ) {
         if ( ( !empty( $args[ 'do_not_execute_shortcodes' ] ) && $args[ 'do_not_execute_shortcodes' ] == 'true' ) || $meta_key == 'post_content' ) {

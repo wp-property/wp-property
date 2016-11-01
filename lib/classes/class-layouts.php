@@ -101,12 +101,12 @@ namespace UsabilityDynamics\WPP {
         register_post_type( 'wpp_layout', array(
           'public' => false,
           'show_ui' => true,
+          'description' => __( 'Layouts for property pages.' ),
+          'can_export' > true,
           'rewrite' => false,
           'labels' => $labels,
           'show_in_menu' => 'edit.php?post_type=property',
-          'supports' => array(
-            'title', 'editor'
-          )
+          'supports' => array(  'title', 'editor', 'revisions'  )
         ) );
 
       }

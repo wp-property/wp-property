@@ -156,6 +156,11 @@ namespace UsabilityDynamics\WPP {
           ) );
         }
 
+        // parse shortcodes for the post_content field
+        if( $attribute === 'post_content' && $value ) {
+          $value = do_shortcode( $value );;
+        }
+
         if( !empty( $args[ 'before' ] ) ) {
           $return[ 'before' ] = html_entity_decode( $args[ 'before' ] );
         }
