@@ -69,6 +69,7 @@ namespace UsabilityDynamics\WPP {
           // self::log('the_content, overriding with '. $render[ 'layout_id' ]);
           //return siteorigin_panels_render( null, true, json_decode( file_get_contents( WP_PLUGIN_DIR . '/' . 'wp-property' . '/static/layouts/standard-results.json' ), true ) );
           //return siteorigin_panels_render( null, true, json_decode( file_get_contents( WP_PLUGIN_DIR . '/' . 'wp-property' . '/static/layouts/single-classic.json' ), true ) );
+
           return siteorigin_panels_render( $render[ 'layout_id' ] );
 
         }

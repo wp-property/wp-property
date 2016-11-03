@@ -55,15 +55,17 @@ function wpp_fs() {
       'slug'              => 'wp-property',
       'type'              => 'plugin',
       'public_key'        => 'pk_806be0ef60e25dd84a77d6e49dfa8',
-      'is_premium'        => false,
       'has_addons'        => false,
+      'is_premium'        => false,
       'has_paid_plans'    => false,
       'menu'              => array(
-        'slug'       => "edit.phppost_typeproperty",
+        'slug'       => "edit.php?post_type=property",
         'first-path' => 'index.php?page=ud-splash',
-        'account'    => false,
+        'account'    => true,
       ),
     ) );
+
+    //die( '<pre>' . print_r( $wpp_fs, true ) . '</pre>' );
   }
 
   return $wpp_fs;

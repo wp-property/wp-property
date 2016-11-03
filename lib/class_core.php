@@ -551,6 +551,7 @@ class WPP_Core {
    * @param $query
    *
    * @since 0.5
+   * @return mixed
    */
   function parse_request( $query ) {
     global $wp, $wp_query, $wp_properties, $wpdb;
