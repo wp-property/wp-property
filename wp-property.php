@@ -39,6 +39,11 @@ if( !defined( 'WPP_Templates' ) ) {
   define( 'WPP_Templates', WPP_Path . 'static/views' );
 }
 
+// New Feature Flags since 2.2.1.
+if( !defined( 'WPP_FEATURE_FLAG_LAYOUTS' ) ) {
+  define( 'WPP_FEATURE_FLAG_LAYOUTS', true);
+}
+
 // Use Freemius is flag is enabled.
 if( defined( 'WPP_FEATURE_FLAG_FREEMIUS' ) && WPP_FEATURE_FLAG_FREEMIUS ) {
 

@@ -46,35 +46,61 @@ namespace UsabilityDynamics\WPP {
 
         add_filter( 'the_content', array( $this, 'the_content' ), 1000 );
 
+        // @note This should probaly be used instead of our content-override.
+        // add_filter( 'siteorigin_panels_data', array( $this, 'siteorigin_panels_data' ), 1000, 2 );
+
         $template = locate_template( $render[ 'templates' ] );
 
         return $template;
 
       }
 
+      public function siteorigin_panels_data( $panels_data, $post_id ) {
+
+        // this returns the ID for the layout_id we're using.
+        // $render = apply_filters( 'wpp::layouts::settings', false );
+
+        // $_panels_data = get_post_meta($render['layout_id'], 'panels_data', true );
+
+        //die( '<pre>' . print_r( $_panels_data, true ) . '</pre>' );
+
+        return $panels_data;
+
+      }
+
       /**
        * Replace the content
+       *
+       *
+       * @note Gotta keep the 2nd argument.
+       *
        * @param $data
        * @return string
        */
       public function the_content( $data ) {
-        global $property;
-
+        global $property, $post;
 
         $render = apply_filters( 'wpp::layouts::settings', false );
 
         if ( !$render ) return $data;
 
-        if ( function_exists( 'siteorigin_panels_render' ) ) {
-          // self::log('the_content, overriding with '. $render[ 'layout_id' ]);
-          //return siteorigin_panels_render( null, true, json_decode( file_get_contents( WP_PLUGIN_DIR . '/' . 'wp-property' . '/static/layouts/standard-results.json' ), true ) );
-          //return siteorigin_panels_render( null, true, json_decode( file_get_contents( WP_PLUGIN_DIR . '/' . 'wp-property' . '/static/layouts/single-classic.json' ), true ) );
 
-          return siteorigin_panels_render( $render[ 'layout_id' ] );
+        $_layout_config = apply_filters( 'wpp::layouts::layout_override', false, $render, $post );
+
+        if ( function_exists( 'siteorigin_panels_render' ) ) {
+
+          if( $render[ 'layout_id' ] ) {
+            return siteorigin_panels_render( $render[ 'layout_id' ], true, $_layout_config );
+          }
+
+          if( $render['layout_meta'] ) {
+            return siteorigin_panels_render( $post->ID, true, $render[ 'layout_meta' ] );
+          }
 
         }
 
         return $data;
+
       }
 
       /**

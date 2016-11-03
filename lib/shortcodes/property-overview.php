@@ -692,7 +692,7 @@ namespace UsabilityDynamics\WPP {
         $result = '';
         if( $template_found ) {
           ob_start();
-          //self::maybe_print_styles();
+          self::maybe_print_styles();
           include $template_found;
           $result = ob_get_clean();
         }
@@ -713,7 +713,7 @@ namespace UsabilityDynamics\WPP {
        * Render property_overview default styles at once!
        *
        *
-       * @depreciated
+       *
        */
       static public function maybe_print_styles() {
         global $_wp_property_overview_style, $wp_properties;
