@@ -21,7 +21,7 @@ namespace UsabilityDynamics\WPRETSC {
       /**
        * @var string
        */
-      public $widget_title = 'RETS.CI';
+      public $widget_title = 'rets.ci';
 
       /**
        * @var string

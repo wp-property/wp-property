@@ -354,9 +354,12 @@ class WPP_Core {
       wp_localize_script( 'wpp-localization', 'wpp_l10n', $this->get_l10n_data() );
     }
 
+    // wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox.2.1.5/jquery.fancybox.pack.js', array( 'jquery', 'wpp-localization' ), '2.1.5' );
     wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
+
     wp_register_script( 'wpp-jquery-colorpicker', WPP_URL . 'scripts/colorpicker/colorpicker.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-easing', WPP_URL . 'scripts/fancybox/jquery.easing-1.3.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
+
     wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'scripts/fileuploader.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wp-property-admin-overview', WPP_URL . 'scripts/wpp.admin.overview.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-admin-widgets', WPP_URL . 'scripts/wpp.admin.widgets.js', array( 'jquery', 'wpp-localization' ), WPP_Version );

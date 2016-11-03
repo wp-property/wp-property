@@ -43,7 +43,11 @@ namespace UsabilityDynamics\WPRETSC {
         new Ajax();
 
         add_action( 'wp_dashboard_setup', function(){
-          new Widget();
+
+          if( defined( 'RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET' ) && RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET ) {
+            new Widget();
+          }
+
         } );
 
         add_action('init', function() {
