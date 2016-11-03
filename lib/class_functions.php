@@ -2512,12 +2512,10 @@ class WPP_F extends UsabilityDynamics\Utility {
     global $wp_properties;
 
     //** Handle backup */
-    if( isset( $_REQUEST[ 'wpp_settings' ] ) &&
-      wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'wpp_setting_save' ) &&
-      !empty( $_FILES[ 'wpp_settings' ][ 'tmp_name' ][ 'settings_from_backup' ] )
-    ) {
+    if( isset( $_REQUEST[ 'wpp_settings' ] ) && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'wpp_setting_save' ) &&  !empty( $_FILES[ 'wpp_settings' ][ 'tmp_name' ][ 'settings_from_backup' ] ) ) {
       $backup_file     = $_FILES[ 'wpp_settings' ][ 'tmp_name' ][ 'settings_from_backup' ];
       $backup_contents = file_get_contents( $backup_file );
+
       if( !empty( $backup_contents ) ) {
         $decoded_settings = json_decode( $backup_contents, true );
       }

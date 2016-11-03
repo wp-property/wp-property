@@ -7,6 +7,7 @@
 * Fixed issue with property_overview.css loading even when CSS loading is disabled.
 * Fix to Grunt build file, referencing some missing files during LESS build. Removed all legacy front-end style/script files from build.
 * Added wpp.public.v2.3.css / wpp.public.v2.3.less styles to handle all the new front-end styles.
+* Added `wpp::property_types` filter, utilized on admin UI only for now.
 
 ### 2.2.0 ( August 31, 2016 )
 * Fixed issue with Google Map functionality.
