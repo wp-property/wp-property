@@ -413,6 +413,9 @@ class WPP_Core {
 
     wp_register_style( 'wpp-fa-icons', WPP_URL . 'fonts/icons/fa/css/font-awesome.min.css', array(), '4.5.0' );
 
+
+
+
     /** Find and register stylesheet  */
     if( file_exists( STYLESHEETPATH . '/wp-properties.css' ) ) {
       wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp-properties.css', array(), WPP_Version );
@@ -423,7 +426,14 @@ class WPP_Core {
     } elseif( file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
       wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), WPP_Version );
     } elseif( $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-      wp_register_style( 'wp-property-frontend', WPP_URL . 'styles/wp_properties.css', array(), WPP_Version );
+
+
+      // these are the legacy styles.
+      // wp_register_style( 'wp-property-frontend', WPP_URL . 'styles/wp_properties.css', array(), WPP_Version );
+
+      // load the new v2.3 styles
+      wp_register_style( 'wp-property-frontend', WPP_URL . 'styles/wpp.public.v2.3.css', array(), WPP_Version );
+
 
       //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
       if(
@@ -1018,6 +1028,7 @@ class WPP_Core {
     if( apply_filters( 'wpp::custom_styles', false ) === false ) {
       //** Possibly load essential styles that are used in widgets */
       wp_enqueue_style( 'wp-property-frontend' );
+      wp_enqueue_style( 'wpp-public-frontend' );
       //** Possibly load theme specific styles */
       wp_enqueue_style( 'wp-property-theme-specific' );
     }

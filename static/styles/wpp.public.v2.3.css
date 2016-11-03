@@ -1,0 +1,21 @@
+/**
+ * New Styles starting with v2.3
+ *
+ */
+.wpp_property_overview_shortcode .wpp_property_view_result div.property_div {
+  max-width: 32%;
+  background: #FFF;
+  float: left;
+  margin: 0 10px 20px 0;
+}
+.wpp_property_overview_shortcode .wpp_property_view_result div.property_div div.wpp_overview_right_column {
+  margin-left: 0 !important;
+}
+.wpp_property_overview_shortcode .wpp_property_view_result div.property_div div.wpp_overview_left_column {
+  display: block;
+  width: 100% !important;
+}
+.wpp_property_overview_shortcode .wpp_property_view_result div.property_div div.wpp_overview_left_column img {
+  width: 100% !important;
+  height: auto !important;
+}
