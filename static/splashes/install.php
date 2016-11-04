@@ -120,7 +120,7 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
 
       <div class="item">
         <div class="wpp_asst_screen wpp_asst_screen_3">
-          <h2 class="wpp_asst_heading"><b><?php echo __('Add 10 test properties to the site?', ud_get_wp_property()->domain); ?></b></h2>
+          <h2 class="wpp_asst_heading"><b><?php echo __('Add test properties to the site?', ud_get_wp_property()->domain); ?></b></h2>
           <div class="wpp_asst_inner_wrap">
             <ul>
               <li class="wpp_asst_label"> <?php echo __('Yes Please', ud_get_wp_property()->domain); ?><label for="yes-please"> 
@@ -167,7 +167,7 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
               <input type="text" name="wpp-base-slug-new" class="wpp-base-slug-new" required="required"/>
             </div>
 
-            <h2 class="wpp_asst_heading"><b><?php echo __('List Propery pages', ud_get_wp_property()->domain); ?></b></h2>
+            <h2 class="wpp_asst_heading"><b><?php echo __('Choose widget which you would like to see on Properties Page', ud_get_wp_property()->domain); ?></b></h2>
             <div class="wpp_asst_inner_wrap">
 
               <ul class="three-sectionals">
@@ -203,14 +203,13 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
           <ul class="list-img">
             <li>
               <span><img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/wpp-single-prop.jpg', 'url'); ?>" alt="image"></span>
-            <center><a class="btn_single_page props" href="javascript:;"><?php echo __('SINGLE PROPERTY PAGES', ud_get_wp_property()->domain); ?></a></center>
+              <center><a class="btn_single_page props" href="javascript:;"><?php echo __('SINGLE PROPERTY PAGE', ud_get_wp_property()->domain); ?></a></center>
             </li>
             <li>
               <img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/overview-prop.jpg', 'url'); ?>" alt="image">
             <center><a class="btn_single_page oviews" href="javascript:;"><?php echo __('OVERVIEW OF PROPERTIES', ud_get_wp_property()->domain); ?></a></center>
             </li>
           </ul>
-
         </div>
       </div>
     </div>

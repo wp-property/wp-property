@@ -113,7 +113,8 @@ jQuery(document).ready(function () {
       alert(wpp_property_assistant.no_link_available);
     }
     else{
-      window.location =  this.href;
+      var win = window.open(this.href, '_blank');
+      win.focus();
     }
     return false;
   });
