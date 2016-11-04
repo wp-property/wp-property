@@ -311,7 +311,7 @@ namespace UsabilityDynamics\WPP {
         foreach( ud_get_wp_property()->get( 'property_meta', array() ) as $slug => $label ) {
 
           // not in group
-          if( $group['id'] !== $property_stats_groups[ $slug ]  ) {
+          if( empty( $property_stats_groups[ $slug ] ) || $group['id'] !== $property_stats_groups[ $slug ]  ) {
             continue;
           }
 
