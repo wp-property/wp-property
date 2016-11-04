@@ -2613,6 +2613,28 @@ Ample off-street parking ",
     $prop_types = isset($data['wpp_settings']['property_types']) ? $data['wpp_settings']['property_types'] : false;
     $widgets_required = isset($data['wpp_settings']['configuration']['widgets']) ? $data['wpp_settings']['configuration']['widgets'] : false;
     $widgets_available = array('gallerypropertieswidget','childpropertieswidget'); 
+    
+    //check if new page needs to be created for wpp_settings[configuration][base_slug] (Choose default properties pages)
+    if(isset( $data['wpp_settings']['configuration']['base_slug']) && $data['wpp_settings']['configuration']['base_slug']=="create-new"){
+      
+      $pageName = $data['wpp-base-slug-new'];
+      $new_page = array(
+                'post_type' => 'page',
+                'post_title' => $pageName,
+                'post_content' => '[property_overview]',
+                'post_status' => 'publish',
+                'post_author' => 1,
+        );
+      $new_page_id = wp_insert_post($new_page);
+      $post = get_post($new_page_id); 
+//      print_r($post);die;
+      $slug = $post->post_name;
+      $data['wpp_settings']['configuration']['base_slug'] = $slug;
+      $return['props_over'] = get_permalink($new_page_id);
+    }
+    else{
+      $return['props_over'] = get_site_url().'/'.$data['wpp_settings']['configuration']['base_slug'];
+    }
 
     //some settings should just be installed first time,and later taken/updated from settings tab
     $freshInstallation = 1; 
@@ -2688,26 +2710,7 @@ Ample off-street parking ",
     if(isset($data['wpp_settings']['configuration']['dummy-prop']) && $data['wpp_settings']['configuration']['dummy-prop']=='yes-please'){
       self::generate_asst_dummy_properties($data);
     }
-     //check if new page needs to be created for wpp_settings[configuration][base_slug] (Choose default properties pages)
-    if(isset( $data['wpp_settings']['configuration']['base_slug']) && $data['wpp_settings']['configuration']['base_slug']=="create-new"){
-      
-      $pageName = $data['wpp-base-slug-new'];
-      $new_page = array(
-                'post_type' => 'page',
-                'post_title' => $pageName,
-                'post_content' => '[property_overview]',
-                'post_status' => 'publish',
-                'post_author' => 1,
-        );
-      $new_page_id = wp_insert_post($new_page);
-      $post = get_post($new_page_id); 
-      $slug = $post->post_name;
-      $data['wpp_settings']['configuration']['base_slug'] = $slug;
-      $return['props_over'] = get_permalink($new_page_id);
-    }
-    else{
-      $return['props_over'] = get_site_url().'/'.$data['wpp_settings']['configuration']['base_slug'];
-    }
+     
     $args = array(
         'posts_per_page' => 1,
         'orderby' => 'date',
