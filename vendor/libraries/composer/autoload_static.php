@@ -223,6 +223,7 @@ class ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece
         'UsabilityDynamics\\WPP\\Layouts' => __DIR__ . '/../../..' . '/lib/classes/class-layouts.php',
         'UsabilityDynamics\\WPP\\List_Table' => __DIR__ . '/../../..' . '/lib/classes/class-list-table.php',
         'UsabilityDynamics\\WPP\\Meta_Box' => __DIR__ . '/../../..' . '/lib/classes/class-meta-box.php',
+        'UsabilityDynamics\\WPP\\Panels_Css_Builder' => __DIR__ . '/../../..' . '/lib/classes/class-layouts.php',
         'UsabilityDynamics\\WPP\\Property_Factory' => __DIR__ . '/../../..' . '/lib/classes/class-property-factory.php',
         'UsabilityDynamics\\WPP\\Scaffold' => __DIR__ . '/../../..' . '/lib/classes/class-scaffold.php',
         'UsabilityDynamics\\WPP\\Settings' => __DIR__ . '/../../..' . '/lib/classes/class-settings.php',

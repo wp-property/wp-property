@@ -191,6 +191,7 @@ return array(
     'UsabilityDynamics\\WPP\\Layouts' => $baseDir . '/lib/classes/class-layouts.php',
     'UsabilityDynamics\\WPP\\List_Table' => $baseDir . '/lib/classes/class-list-table.php',
     'UsabilityDynamics\\WPP\\Meta_Box' => $baseDir . '/lib/classes/class-meta-box.php',
+    'UsabilityDynamics\\WPP\\Panels_Css_Builder' => $baseDir . '/lib/classes/class-layouts.php',
     'UsabilityDynamics\\WPP\\Property_Factory' => $baseDir . '/lib/classes/class-property-factory.php',
     'UsabilityDynamics\\WPP\\Scaffold' => $baseDir . '/lib/classes/class-scaffold.php',
     'UsabilityDynamics\\WPP\\Settings' => $baseDir . '/lib/classes/class-settings.php',
