@@ -300,6 +300,10 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
         continue;
       }
       $attribute_data = WPP_F::get_attribute_data($meta_key);
+
+      if( $meta_key === 'post_content' ) {
+        die( '<pre>' . print_r( $attribute_data, true ) . '</pre>' );
+      }
       //** Only executed shortcodes if the value isn't an array */
       if ( !is_array( $attribute_value ) ) {
         if ( ( !empty( $args[ 'do_not_execute_shortcodes' ] ) && $args[ 'do_not_execute_shortcodes' ] == 'true' ) || $meta_key == 'post_content' ) {
@@ -1473,6 +1477,13 @@ if ( !function_exists( 'wpp_css' ) ):
    * @return array|echo
    * @author peshkov@UD
    * @version 0.1
+   */
+  /**
+   * @param type $element
+   * @param array|bool $classes
+   * @param bool $return
+   * @param array $args
+   * @return bool|string
    */
   function wpp_css( $element, $classes = false, $return = false, $args = array() ) {
     $args = array_merge( (array) $args, array(

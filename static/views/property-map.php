@@ -4,8 +4,7 @@
  *
  * To modify it, copy it to your theme's root.
  */
-
-global $wp_properties;
+global $wp_properties, $property;
 
 if ( !$coords = \WPP_F::get_coordinates( $property[ 'ID' ] ) ) {
   return;

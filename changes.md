@@ -1,3 +1,14 @@
+### 2.2.1 
+* Enabled `property_location` taxonomy which automatically creates hierarchial location terms during address validation.
+* Hiding advanced legacy options Single Template selection, Default Property Page, Default Phone Number and Widget Sidebars.
+* Added `ccampbell/chromephp` logger.
+* Added greater support for Layouts.
+* Addinng logic to handle property_type link between Taxonomy and legacy attribute.
+* Fixed issue with property_overview.css loading even when CSS loading is disabled.
+* Fix to Grunt build file, referencing some missing files during LESS build. Removed all legacy front-end style/script files from build.
+* Added wpp.public.v2.3.css / wpp.public.v2.3.less styles to handle all the new front-end styles.
+* Added `wpp::property_types` filter, utilized on admin UI only for now.
+
 ### 2.2.0 ( August 31, 2016 )
 * Fixed issue with Google Map functionality.
 * Added options for Google API Keys (browser and server).

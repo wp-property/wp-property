@@ -275,6 +275,7 @@ class WPP_Core {
     //** Load all widgets and register widget areas */
     add_action( 'widgets_init', array( 'WPP_F', 'widgets_init' ) );
 
+    do_action( 'wpp_init:end', $this );
   }
 
   /**
@@ -353,9 +354,12 @@ class WPP_Core {
       wp_localize_script( 'wpp-localization', 'wpp_l10n', $this->get_l10n_data() );
     }
 
+    // wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox.2.1.5/jquery.fancybox.pack.js', array( 'jquery', 'wpp-localization' ), '2.1.5' );
     wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
+
     wp_register_script( 'wpp-jquery-colorpicker', WPP_URL . 'scripts/colorpicker/colorpicker.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-easing', WPP_URL . 'scripts/fancybox/jquery.easing-1.3.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
+
     wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'scripts/fileuploader.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wp-property-admin-overview', WPP_URL . 'scripts/wpp.admin.overview.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-admin-widgets', WPP_URL . 'scripts/wpp.admin.widgets.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
@@ -412,6 +416,9 @@ class WPP_Core {
 
     wp_register_style( 'wpp-fa-icons', WPP_URL . 'fonts/icons/fa/css/font-awesome.min.css', array(), '4.5.0' );
 
+
+
+
     /** Find and register stylesheet  */
     if( file_exists( STYLESHEETPATH . '/wp-properties.css' ) ) {
       wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp-properties.css', array(), WPP_Version );
@@ -422,7 +429,14 @@ class WPP_Core {
     } elseif( file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
       wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), WPP_Version );
     } elseif( $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-      wp_register_style( 'wp-property-frontend', WPP_URL . 'styles/wp_properties.css', array(), WPP_Version );
+
+
+      // these are the legacy styles.
+      // wp_register_style( 'wp-property-frontend', WPP_URL . 'styles/wp_properties.css', array(), WPP_Version );
+
+      // load the new v2.3 styles
+      wp_register_style( 'wp-property-frontend', WPP_URL . 'styles/wpp.public.v2.3.css', array(), WPP_Version );
+
 
       //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
       if(
@@ -550,6 +564,7 @@ class WPP_Core {
    * @param $query
    *
    * @since 0.5
+   * @return mixed
    */
   function parse_request( $query ) {
     global $wp, $wp_query, $wp_properties, $wpdb;
@@ -1016,6 +1031,7 @@ class WPP_Core {
     if( apply_filters( 'wpp::custom_styles', false ) === false ) {
       //** Possibly load essential styles that are used in widgets */
       wp_enqueue_style( 'wp-property-frontend' );
+      wp_enqueue_style( 'wpp-public-frontend' );
       //** Possibly load theme specific styles */
       wp_enqueue_style( 'wp-property-theme-specific' );
     }

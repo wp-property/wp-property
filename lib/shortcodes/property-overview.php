@@ -711,10 +711,14 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * Render property_overview default styles at once!
+       *
+       *
+       *
        */
       static public function maybe_print_styles() {
-        global $_wp_property_overview_style;
-        if( empty( $_wp_property_overview_style) || !$_wp_property_overview_style ) {
+        global $_wp_property_overview_style, $wp_properties;
+
+        if( ( empty( $_wp_property_overview_style) || !$_wp_property_overview_style ) && $wp_properties[ 'configuration' ][ 'autoload_css' ] !== 'false' ) {
           wp_enqueue_style('wpp-fa-icons');
           $_wp_property_overview_style = true;
           $style_path = apply_filters( "property-overview-style-path", ud_get_wp_property()->path( 'static/styles/property_overview.css', 'url' ) );
