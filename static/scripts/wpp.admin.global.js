@@ -809,4 +809,6 @@ jQuery(document).ready(function() {
     applyNotices(notice,notice_cont);
     toggleAttributesDropdown();
   });
+  if(jQuery("#wpp_settings_base_slug").length>0)
+    jQuery("#wpp_settings_base_slug").select2();
 });
