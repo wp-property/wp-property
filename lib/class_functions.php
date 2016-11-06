@@ -2617,6 +2617,7 @@ Ample off-street parking ",
     //check if new page needs to be created for wpp_settings[configuration][base_slug] (Choose default properties pages)
     if(isset( $data['wpp_settings']['configuration']['base_slug']) && $data['wpp_settings']['configuration']['base_slug']=="create-new"){
       
+      // if "create-new-page" then create a new WP page
       $pageName = $data['wpp-base-slug-new'];
       $new_page = array(
                 'post_type' => 'page',
@@ -2646,7 +2647,7 @@ Ample off-street parking ",
       $data['wpp_settings']['configuration']['enable_legacy_features'] = true;
 
 //       Additional attributes for location 
-      $data['wpp_settings']['admin_attr_fields']['location'] = "input";
+      $data['wpp_settings']['admin_attr_fields']['location'] = "wpp_address";
       $data['wpp_settings']['searchable_attr_fields']['location'] = "input";
       $data['wpp_settings']['configuration']['address_attribute'] = "input";
 
@@ -2656,6 +2657,12 @@ Ample off-street parking ",
       
       if(!isset($data['wpp_settings']['configuration']['automatically_insert_overview'])){
         $data['wpp_settings']['configuration']['automatically_insert_overview'] = false;
+      }
+    
+      // make property types "searchable" "location matters"
+      foreach($data['wpp_settings']['property_types'] as $key => $val){
+        $data['wpp_settings']['searchable_property_types'][] = $key;
+        $data['wpp_settings']['location_matters'][] = $key;
       }
         
 //      compute basic property attributes
@@ -2674,6 +2681,8 @@ Ample off-street parking ",
 
 //      Install basic property attributes
       $data['wpp_settings']['property_stats'] = $propAttrSet;
+      
+      // update settings
       update_option('wpp_settings', $data['wpp_settings']);
     }
     
@@ -2711,6 +2720,8 @@ Ample off-street parking ",
       self::generate_asst_dummy_properties($data);
     }
      
+    // get return values
+    // returns links for last screen of assistant
     $args = array(
         'posts_per_page' => 1,
         'orderby' => 'date',
@@ -4457,7 +4468,7 @@ Ample off-street parking ",
       $value = trim( $value );
 
       //** Hack for child properties. Skip values with dashes */
-      if( empty( $value ) || strstr( $value, '&ndash;' ) || strstr( $value, 'â€“' ) ) {
+      if( empty( $value ) || strstr( $value, '&ndash;' ) || strstr( $value, 'Ã¢â‚¬â€œ' ) ) {
         continue;
       }
 

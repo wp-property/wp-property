@@ -417,11 +417,19 @@ li.checkbox-up [type="checkbox"] + span::before {
   appearance: none;
   height:100%;
 }
-.wpp-base-slug-new{
+.wpp-base-slug-new,.wpp_asst_google_api input{
   padding: 9px;
   display: none;
   margin-left: 10px;
   width: 250px;
+}
+.wpp_asst_google_api input{
+  margin: 10px;
+  font-style: italic;
+  display: block;
+}
+.wpp_asst_google_api .decription{
+  margin-left: 10px;
 }
 .wpp_asst_select select, .wpp_asst_select select option{outline:none;}
 .wpp_asst_select select:hover {
