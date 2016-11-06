@@ -1622,6 +1622,9 @@ a.wpp-setup-asst {
 #wpp_facebook_canvases select {
   width: 250px;
 }
+.wpp_settings_base_slug{
+  min-width: 180px;
+}
 #wpp_facebook_canvases .wpp_fb_canvas_urls input {
   width: 100%;
 }

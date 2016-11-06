@@ -152,7 +152,6 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
           <div class="wpp_asst_inner_wrap">
             <div class="wpp_asst_select">
               <select id="soflow" name="wpp_settings[configuration][base_slug]">
-                <option <?php selected( $wp_properties[ 'configuration' ][ 'base_slug' ], 'property' ); ?> value="property" class="list_property"><?php echo __('Properties (Default)', ud_get_wp_property()->domain); ?></option>
                 <?php
                 $args = array('post_type' => 'page', 'post_status' => 'publish');
                 $pages = get_pages($args);

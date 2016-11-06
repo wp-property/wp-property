@@ -120,8 +120,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       <td>
 
         <div class="must_have_permalinks">
-          <select name="wpp_settings[configuration][base_slug]" id="wpp_settings_base_slug">
-            <option <?php selected( $wp_properties[ 'configuration' ][ 'base_slug' ], 'property' ); ?> value="property"><?php printf(__( '%s (Default)', ud_get_wp_property()->domain ), ud_get_wp_property( 'labels.name' )); ?></option>
+          <select name="wpp_settings[configuration][base_slug]" id="wpp_settings_base_slug" class="wpp_settings_base_slug">
             <?php foreach ( get_pages() as $page ): ?>
               <option <?php selected( $wp_properties[ 'configuration' ][ 'base_slug' ], $page->post_name ); ?> value="<?php echo $page->post_name; ?>"><?php echo $page->post_title; ?></option>
             <?php endforeach; ?>

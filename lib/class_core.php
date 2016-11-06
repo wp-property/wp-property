@@ -96,6 +96,8 @@ class WPP_Core {
     //** Load settings into $wp_properties and save settings if nonce exists */
     WPP_F::settings_action();
 
+    //** Set up our default page for properties */
+    WPP_F::register_properties_page();
     //** Load all widgets and register widget areas */
     add_action( 'widgets_init', array( 'WPP_F', 'widgets_init' ) );
 

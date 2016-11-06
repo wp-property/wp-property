@@ -292,7 +292,32 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
   }
+  
+  /**
+   * Create a new default page for properites
+   * Default can be changed from the WPP settings page
+   * author Raj
+   */
+  static public function register_properties_page() {
+    global $wp_properties;
 
+    //check if Properties page existed
+    $pageName = "Properties";
+    if (!get_page_by_path($pageName)){
+      $new_page = array(
+        'post_type' => 'page',
+        'post_title' => $pageName,
+        'post_content' => '[property_overview]',
+        'post_status' => 'publish',
+        'post_author' => 1,
+    );
+    $new_page_id = wp_insert_post($new_page);
+    $post = get_post($new_page_id);
+    $slug = $post->post_name;
+    $wp_properties['configuration']['base_slug'] = $slug;
+    update_option( 'wpp_settings', $wp_properties );
+    }
+  }
 
   /**
    * Loads applicable WP-Property scripts and styles
