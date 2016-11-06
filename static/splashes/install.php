@@ -196,9 +196,19 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
           </div>
         </div><!-- wpp_asst_screen wpp_asst_screen_4 --> 
       </div><!-- item --> 
-
       <div class="item">
         <div class="wpp_asst_screen wpp_asst_screen_5">
+          <h2 class="wpp_asst_heading"><b><?php echo __('Google Maps API (optional)', ud_get_wp_property()->domain); ?></b></h2>  
+          <div class="wpp_asst_inner_wrap wpp_asst_google_api">
+            <?php echo WPP_F::input( "name=wpp_settings[configuration][google_maps_api]", ud_get_wp_property( 'configuration.google_maps_api' ) ); ?>
+            <br/>
+            <span class="description"><?php printf( __( 'Note, Google Maps has its own limit of usage. You can provide Google Maps API license ( key ) above to increase limit. See more details %shere%s.', ud_get_wp_property('domain') ), '<a href="https://developers.google.com/maps/documentation/javascript/usage#usage_limits" target="_blank">', '</a>' ); ?></span>
+            
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="wpp_asst_screen wpp_asst_screen_6">
           <h2 class="wpp_asst_heading text-center"><b><?php echo __("Let's view what we have", ud_get_wp_property()->domain); ?></b></h2>
           <ul class="list-img">
             <li>
