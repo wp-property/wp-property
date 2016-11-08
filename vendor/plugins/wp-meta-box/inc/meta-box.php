@@ -375,27 +375,6 @@ if ( ! class_exists( 'RW_Meta_Box' ) )
 		}
 
 		/**
-		 * Get field class name
-		 *
-		 * @param array $field Field array
-		 *
-		 * @return bool|string Field class name OR false on failure
-		 */
-		static function get_class_name( $field )
-		{
-			// Convert underscores to whitespace so ucwords works as expected. Otherwise: plupload_image -> Plupload_image instead of Plupload_Image
-			$type = str_replace( '_', ' ', $field['type'] );
-
-			// Uppercase first words
-			$class = 'RWMB_' . ucwords( $type ) . '_Field';
-
-			// Relace whitespace with underscores
-			$class = str_replace( ' ', '_', $class );
-
-			return class_exists( $class ) ? $class : false;
-		}
-
-		/**
 		 * Normalize an array of fields
 		 *
 		 * @param array $fields Array of fields
@@ -444,6 +423,27 @@ if ( ! class_exists( 'RW_Meta_Box' ) )
 			}
 
 			return $fields;
+		}
+
+		/**
+		 * Get field class name
+		 *
+		 * @param array $field Field array
+		 *
+		 * @return bool|string Field class name OR false on failure
+		 */
+		static function get_class_name( $field )
+		{
+			// Convert underscores to whitespace so ucwords works as expected. Otherwise: plupload_image -> Plupload_image instead of Plupload_Image
+			$type = str_replace( '_', ' ', $field['type'] );
+
+			// Uppercase first words
+			$class = 'RWMB_' . ucwords( $type ) . '_Field';
+
+			// Relace whitespace with underscores
+			$class = str_replace( ' ', '_', $class );
+
+			return class_exists( $class ) ? $class : false;
 		}
 
 		/**

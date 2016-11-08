@@ -20,15 +20,6 @@ if( !class_exists( 'RWMB_Wpp_Readonly_Field' ) && class_exists( 'RWMB_Text_Field
         $meta = array_shift(array_values($meta));
       }
 
-      // Following if block checks predefined values if meta is empty
-      // inotially added for the READONLY field of property_id 
-      // added 27.07/2016 @raj
-
-       if( empty( $meta ) && isset($field['std']) && !empty($field['std'])) {
-         // replace empty meta with the predefined default option
-        $meta = $field['std'];
-      }
-      
       return sprintf(
         '<input type="text" data-field-type="wpp-readonly" readonly="readonly" class="rwmb-text" id="%s" value="%s" placeholder="%s" size="%s" %s>%s',
         // $field['field_name'],

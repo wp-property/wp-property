@@ -57,7 +57,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
         <?php echo __( 'Setup Assistant', ud_get_wp_property()->domain );?> 
       </a>
     <?php } ?>
-  
+
   <div class="wpp_fb_like">
   <div class="fb-like" data-href="https://www.facebook.com/wpproperty" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
 </div>
@@ -212,9 +212,10 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <?php endif; ?>
 
     <tr>
-      <th><?php printf( __( 'Geolocation options', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></th>
+      <th><?php printf( __( 'Automatic Geolocation', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></th>
       <td>
         <ul>
+          <li><?php _e( 'Attribute to use for physical addresses:', ud_get_wp_property('domain') ); ?><?php echo WPP_F::draw_attribute_dropdown( "name=wpp_settings[configuration][address_attribute]&selected={$wp_properties[ 'configuration' ]['address_attribute']}" ); ?></li>
           <li><?php _e( 'Localize addresses in:', ud_get_wp_property('domain') ); ?> <?php echo WPP_F::draw_localization_dropdown( "name=wpp_settings[configuration][google_maps_localization]&selected={$wp_properties[ 'configuration' ]['google_maps_localization']}" ); ?></li>
           <li class="google-maps-api-section" data-feature-since="2.0.3">
             <?php printf(__( 'Google Maps API (optional):', ud_get_wp_property('domain') ) ); ?> <?php echo WPP_F::input( "name=wpp_settings[configuration][google_maps_api]", ud_get_wp_property( 'configuration.google_maps_api' ) ); ?>
@@ -269,6 +270,10 @@ if ( get_option( 'permalink_structure' ) == '' ) {
             <li>
               <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][show_advanced_options]&label=" . __( 'Enable Standard Attributes Matching', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'show_advanced_options' ] ) ? $wp_properties[ 'configuration' ][ 'show_advanced_options' ] : false ) ); ?>
               <i class="description wpp-notice-for-match" title="<?php _e( 'This option is designed to help us find which attribute you want to show as Price, Address, etc and place it in correct place in our templates.', ud_get_wp_property()->domain ); ?>"> ? </i>
+
+              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][pre_release_update]&label=" . __( 'Enable pre-release updates.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'pre_release_update' ] ) ? $wp_properties[ 'configuration' ][ 'pre_release_update' ] : false ) ); ?>
+              <br/>
+
             </li>
           </ul>
         </div>
@@ -577,6 +582,13 @@ if ( get_option( 'permalink_structure' ) == '' ) {
         <input type="button" class="button" value="<?php _e( 'Clear Cache', ud_get_wp_property()->domain ) ?>" id="wpp_clear_cache">
       </div>
 
+    <?php if(function_exists('icl_object_id')):?>
+      <div class="wpp_settings_block">
+        <?php _e( 'Generate images for duplicates of properties (WPML plugin option). ', ud_get_wp_property()->domain ) ?>
+        <input type="button" class="button" value="<?php _e( 'Generate', ud_get_wp_property()->domain ) ?>" id="wpp_is_remote_meta">
+      </div>
+    <?php endif;?>
+    
       <div class="wpp_settings_block"><?php printf(__( 'Set all %1s to same %2s type:', ud_get_wp_property()->domain ), WPP_F::property_label( 'plural' ), WPP_F::property_label( 'singular' )) ?>
         <select id="wpp_ajax_max_set_property_type_type">
         <?php foreach ( $wp_properties[ 'property_types' ] as $p_slug => $p_label ) { ?>
