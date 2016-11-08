@@ -2741,10 +2741,10 @@ class WPP_F extends UsabilityDynamics\Utility {
       foreach( $search_attributes as $searchable_attribute ) {
 
         if( $searchable_attribute == 'property_type' ) {
-          //foreach ($wp_properties['searchable_property_types'] as $property_type) {
-          //  $range['property_type'][$property_type] = $wp_properties['property_types'][$property_type];
-          //}
-          //continue;
+          foreach ($wp_properties['searchable_property_types'] as $property_type) {
+            $range['property_type'][$property_type] = $wp_properties['property_types'][$property_type];
+          }
+          continue;
         }
 
         //** Load attribute data */
