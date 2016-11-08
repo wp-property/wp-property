@@ -2,55 +2,21 @@
  * New Styles starting with v2.3
  *
  */
-.wpp_property_overview_shortcode {
-
-
-  // These are very temporary. Attempting to make default view work as a grid.
-  .wpp_property_view_result {
-
-    div.property_div {
-
-      max-width: 32%;
-      background: #FFF;
-      float: left;
-      margin: 0 10px 20px 0;
-
-
-      div.wpp_overview_right_column {
-        margin-left: 0 !important;
-      }
-
-      div.wpp_overview_left_column {
-        display: block;
-        width: 100% !important;
-
-        img {
-          width: 100% !important;
-          height: auto !important;
-        }
-
-      }
-
-    }
-
-  }
-
-}
-
-// we include these incase siteorigin is disabled.
-
 .panel-grid {
   zoom: 1;
 }
+
 .panel-grid:before {
   content: '';
   display: block;
 }
+
 .panel-grid:after {
   content: '';
   display: table;
   clear: both;
 }
+
 .panel-grid-cell {
   -ms-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -58,33 +24,123 @@
   box-sizing: border-box;
   min-height: 1em;
 }
+
 .panel-grid-cell .so-panel {
   zoom: 1;
 }
+
 .panel-grid-cell .so-panel:before {
   content: '';
   display: block;
 }
+
 .panel-grid-cell .so-panel:after {
   content: '';
   display: table;
   clear: both;
 }
+
 .panel-grid-cell .panel-last-child {
   margin-bottom: 0;
 }
+
 .panel-grid-cell .widget-title {
   margin-top: 0;
 }
+
 .panel-row-style {
   zoom: 1;
 }
+
 .panel-row-style:before {
   content: '';
   display: block;
 }
+
 .panel-row-style:after {
   content: '';
   display: table;
   clear: both;
+}
+
+/* Main styles
+----------------------------------- */
+#wpp_layout {
+
+  /* WP Property overview shortcode */
+  .wpp_property_overview_shortcode {
+
+    /* Property Pagination */
+    .properties_pagination {
+
+      ul.property-overview-navigation {
+        margin: 5px 0 10px;
+        padding: 0px;
+        list-style: outside none none;
+        li {
+          display: inline-block;
+          padding: 0 5px;
+          &.pages {
+            padding: 0;
+          }
+          ul {
+            margin: 0px;
+            padding: 0px;
+            list-style: outside none none;
+          }
+        }
+      }
+    }
+    /* Property Pagination */
+
+    /* View results */
+    .all-properties {
+      .property_div {
+        display: inline-block;
+        margin-right: -3px;
+        min-width: 25%;
+        max-width: 32%;
+        .property_div_wrapper {
+          display: table-cell;
+          vertical-align: top;
+        }
+      }
+    }
+    /* View results */
+
+  }
+  /* WP Property overview shortcode */
+
+  /* WP Property search widget */
+  .wpp_search_properties_widget {
+
+    .wpp_shortcode_search_form {
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        li.wpp_search_form_element {
+          margin: 0 0 10px;
+          .wpp_search_group_title,
+          .wpp_search_label {
+            display: block;
+            font-weight: 600;
+            margin: 0 0 5px;
+          }
+          input.wpp_range_input {
+            display: inline-block;
+            width: 46%;
+          }
+          .wpp_dash {
+            display: inline-block;
+            text-align: center;
+            width: 4%;
+          }
+        }
+      }
+    }
+  }
+  /* WP Property search widget */
+
 }

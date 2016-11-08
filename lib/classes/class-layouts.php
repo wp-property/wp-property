@@ -197,7 +197,7 @@ namespace UsabilityDynamics\WPP {
             'id' => 'pl-' . $post_id
         ), $post_id, $panels_data);
 
-        echo apply_filters( 'wpp::layouts::before_container', '' );
+        echo apply_filters( 'wpp::layouts::before_container', '<div id="wpp_layout">' );
 
         echo '<div';
         foreach ($panel_layout_attributes as $name => $value) {
@@ -288,7 +288,7 @@ namespace UsabilityDynamics\WPP {
 
         echo '</div>';
 
-        echo apply_filters( 'wpp::layouts::after_container', '' );
+        echo apply_filters( 'wpp::layouts::after_container', '</div>' );
 
         $html = ob_get_clean();
 
