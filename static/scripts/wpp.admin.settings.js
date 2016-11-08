@@ -139,6 +139,18 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
         jQuery( message ).insertAfter( "h2" );
       } );
     } );
+    
+    /* Generate _is_remote meta */
+    jQuery( "#wpp_is_remote_meta" ).click( function () {
+      var _this = jQuery(this);
+      jQuery( '.clear_cache_status' ).remove();
+      jQuery.post( wpp.instance.ajax_url, {
+        action: 'wpp_ajax_generate_is_remote_meta'
+      }, function ( data ) {
+        message = "<div class='clear_cache_status updated fade'><p>" + data + "</p></div>";
+        jQuery( message ).insertAfter( _this );
+      } );
+    } );
 
     /* Revalidate all addresses */
     jQuery( "#wpp_ajax_revalidate_all_addresses" ).click( function () {
@@ -486,6 +498,26 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
           }
         });
     }
+
+    jQuery('.open-help-tab').on('click', function(e){
+      var tab = jQuery(jQuery(this).attr('href'));
+      var panel = jQuery( tab.find('a').attr('href') );
+
+      e.preventDefault();
+   
+      // Don't do anything if the click is for the tab already showing.
+      if ( !tab.is('.active') ){
+        // Links
+        jQuery('.contextual-help-tabs .active').removeClass('active');
+        tab.addClass('active');
+     
+        // Panels
+        jQuery('.help-tab-content').not( panel ).removeClass('active').hide();
+        panel.addClass('active').show();
+      }
+      screenMeta.open( jQuery('#contextual-help-wrap'), jQuery('#contextual-help-link') );
+    });
+
   },
 
   /**

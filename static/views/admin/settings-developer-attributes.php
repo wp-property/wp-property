@@ -24,7 +24,6 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
   <thead>
   <tr>
     <th class='wpp_draggable_handle'>&nbsp;</th>
-    <th class="wpp_std_attr_view">&nbsp;</th>
     <th class='wpp_attribute_name_col'><?php _e( 'Attribute Name', ud_get_wp_property()->domain ) ?></th>
     <th class='wpp_attribute_group_col'><?php _e( 'Group', ud_get_wp_property()->domain ) ?></th>
     <th class='wpp_settings_input_col'><?php _e( 'Settings', ud_get_wp_property()->domain ) ?></th>
@@ -34,9 +33,7 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
   </thead>
   <tbody>
   <?php 
-  if(!isset($wp_properties[ 'prop_std_att' ]) ||  empty($wp_properties[ 'prop_std_att' ])){
-    $wp_properties[ 'prop_std_att' ] =  array();
-  }
+  
   if(empty($wp_properties[ 'property_stats' ])){
 	  $wp_properties[ 'property_stats' ] = array("first" => "");
   }
@@ -52,7 +49,7 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
     <tr class="wpp_dynamic_table_row" <?php echo( !empty( $gslug ) ? "wpp_attribute_group=\"" . $gslug . "\"" : "" ); ?> style="<?php echo( !empty( $group[ 'color' ] ) ? "background-color:" . $group[ 'color' ] : "" ); echo( empty( $label ) ? "display:none;" : ""); ?>" slug="<?php echo $slug; ?>" new_row='false'>
 
       <td class="wpp_draggable_handle">&nbsp;</td>
-      <td class="wpp_std_attr_view"><i>&nbsp;</i></td>
+
       <td class="wpp_attribute_name_col">
         <ul class="wpp_attribute_name">
           <li>
@@ -167,11 +164,9 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
             </label>
           </li>
           <?php do_action( 'wpp::property_attributes::settings', $slug ); ?>
-          <?php if($slug!="ID"): // for ID field we do not show Delete option ?>
           <li class="wpp_development_advanced_option">
             <span class="wpp_delete_row wpp_link"><?php _e( 'Delete Attribute', ud_get_wp_property()->domain ) ?></span>
           </li>
-          <?php endif; ?>
         </ul>
       </td>
 
@@ -187,6 +182,7 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
               <option value="dropdown" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'dropdown' ); ?>><?php _e( 'Dropdown Selection', ud_get_wp_property()->domain ) ?></option>
               <option value="checkbox" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'checkbox' ); ?>><?php _e( 'Single Checkbox', ud_get_wp_property()->domain ) ?></option>
               <option value="multi_checkbox" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'multi_checkbox' ); ?>><?php _e( 'Multi-Checkbox', ud_get_wp_property()->domain ) ?></option>
+              <option value="range_date" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'range_date' ); ?>><?php _e( 'Date Input Range', ud_get_wp_property()->domain ) ?></option>
               <?php do_action( 'wpp::property_attributes::searchable_attr_field', $slug ); ?>
             </select>
           </li>
@@ -197,8 +193,7 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
       </td>
 
       <td class="wpp_admin_input_col">
-        <?php if($slug!="ID"): // for ID field we do not show Data Entry Column?>
-         <ul>
+        <ul>
           <li>
             <select name="wpp_settings[admin_attr_fields][<?php echo $slug; ?>]" class="wpp_pre_defined_value_setter wpp_searchable_attr_fields">
               <?php $meta_box_fields = ud_get_wp_property('attributes.types', array()); ?>
@@ -224,7 +219,6 @@ $predefined_values = $wp_properties[ 'predefined_values' ] ;
             <a class="button apply-to-all" data-attribute="<?php echo $slug;?>" href="#" title="<?php _e("Apply to listings that have no value for this field.", ud_get_wp_property()->domain);?>" ><?php _e("Apply to all", ud_get_wp_property()->domain);?></a> <br/>
           </li>
         </ul>
-        <?php endif; ?>
       </td>
     </tr>
   <?php

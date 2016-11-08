@@ -400,12 +400,6 @@ namespace UsabilityDynamics\WPP {
           if( $input_type == 'number' ) {
             $input_type = 'text'; // HTML5 does not allow to use float, so we have to use default 'text' here
           }
-          
-        // for property_id , ID should be non-editable(readonly)
-          if( $input_type == 'readonly' ) {
-            $input_type = 'wpp_readonly'; // HTML5 does not allow to use float, so we have to use default 'text' here
-            $description[] =  __( 'Non-editable Field.', ud_get_wp_property('domain') );
-          }
 
           //** Determine if current attribute is used by Google Address Validator. */
           if( ud_get_wp_property( 'configuration.address_attribute' ) == $slug ) {
@@ -413,13 +407,6 @@ namespace UsabilityDynamics\WPP {
 
             // Too obvious, I believe. -potanin@UD
             // $description[] = __( 'The value is being used by Google Address Validator to determine and prepare address to valid format. However you can set coordinates manually.', ud_get_wp_property()->domain );
-          }
-
-          $checklist_std_attr = ud_get_wp_property('prop_std_att_mapsto');
-          // if this slug has been matched to the 'standard attriubute' type 'address'
-          if(  !empty($checklist_std_attr) && in_array('address',$checklist_std_attr) 
-                  && array_search('address', $checklist_std_attr)==$slug) {
-            $input_type = 'wpp_address';
           }
 
           $original_type = $input_type;
@@ -467,16 +454,6 @@ namespace UsabilityDynamics\WPP {
           }
 
           $default = isset($defaults[$slug])?$defaults[$slug]:"";
-         
-          // BUT for property_id default is post ID
-          // so make sure it is assigned if not present
-          // case arising when adding property_id meta to existing properties
-          // added 27.07/2016 @raj
-          
-          if ($slug=="ID"){
-            $default =  $post->ID;
-          }
-          
           //if(!empty($default) && $attribute['multiple']){
           //  $_defaults = explode(',', $default);
           //  $default = array();
@@ -534,7 +511,7 @@ namespace UsabilityDynamics\WPP {
       public function get_property_type_field( $post ) {
 
         $types = ud_get_wp_property( 'property_types', array() );
-        
+
         if( empty( $types ) ) {
           return false;
         }

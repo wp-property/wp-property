@@ -4797,6 +4797,99 @@ class WPP_F extends UsabilityDynamics\Utility {
     echo json_encode($response);
   }
 
+  /**
+   * This function is only for generate_is_remote_meta() function.
+   * Used to search more than one array (ex. array of arrays).
+   * 
+   * @param array $array: The array of arrays.
+   * @param string $key: The key to search in $array.
+   * @param string $value: The value to search for $key.
+   * 
+   * @return array of element_id found.
+   */
+  private static function _found_in_array($array, $key, $value = '1'){
+    $return = array();
+    if(is_array($array)){
+      foreach ($array as $k => $v) {
+        if($key == 'wpml_media_processed'){
+          if($v['_is_remote'] == '')
+            $return[] = $v['element_id'];
+        }
+        else if($v[$key] == $value)
+          $return[] = $v['element_id'];
+      }
+    }
+    
+    if(empty($return))
+      return false;
+    if(count($return) == 1)
+      return $return[0];
+
+    return $return;
+  }
+
+
+  /**
+   * Used in generate_is_remote_meta() function.
+   * Used to search more than one array (ex. array of arrays).
+   * 
+   * @param none.
+   * 
+   * @return bool whether succeed or not.
+   */
+  static function generate_is_remote_meta(){
+    global $wpdb;
+    $update_is_remote = array();
+    $sql = "
+    SELECT tr.element_id, tr.trid, tr.source_language_code, pm1.meta_value AS _is_remote, pm2.meta_value AS wpml_media_processed  
+    FROM `{$wpdb->prefix}icl_translations` AS tr 
+    LEFT JOIN {$wpdb->postmeta} AS pm1 ON tr.element_id = pm1.post_id AND pm1.meta_key = '_is_remote'
+    LEFT JOIN {$wpdb->postmeta} AS pm2 ON tr.element_id = pm2.post_id AND pm2.meta_key = 'wpml_media_processed'
+    WHERE tr.element_type = 'post_attachment'";
+
+    $sql = $wpdb->prepare($sql);
+    $results = $wpdb->get_results($sql);
+    $translations = array();
+    if(is_array($results)){
+      foreach ($results as $key => $row) {
+        $translations[$row->trid][] = (array) $row;
+      }
+
+      foreach ($translations as $trid => $trans_group) {
+        if(count($trans_group)<2) continue;
+        if(WPP_F::_found_in_array($trans_group, '_is_remote') == WPP_F::_found_in_array($trans_group, 'source_language_code', '')){
+          $destination_pid = WPP_F::_found_in_array($trans_group, 'wpml_media_processed', '1');
+          if($destination_pid != false){
+            foreach ((array) $destination_pid as $pid) {
+              $update_is_remote[] = $pid;
+            }
+          }
+        }
+      }
+
+      if(count($update_is_remote)==0){
+        _e("Already up to date.");
+        return;
+      }
+
+      $delete_sql = "DELETE FROM {$wpdb->postmeta} WHERE meta_key = '_is_remote' AND post_id IN(" . implode(', ', $update_is_remote) . ");";
+      $delete_sql = $wpdb->prepare($delete_sql);
+      $wpdb->query($delete_sql);
+
+      $insert_array = array();
+      foreach ($update_is_remote as $pid) {
+        $insert_array[] = "('$pid', '_is_remote', '1')";
+      }
+
+      $insert_sql = "INSERT INTO {$wpdb->postmeta} (`post_id`, `meta_key`, `meta_value`) VALUES ";
+      $insert_sql .= implode(', ', $insert_array);
+      $insert_sql = $wpdb->prepare($insert_sql);
+      $row_updated = $wpdb->query($insert_sql);
+      printf(__("%s image meta updated.", ud_get_wp_property()->domain ), $row_updated);
+
+    }
+  }
+
 }
 
 /**

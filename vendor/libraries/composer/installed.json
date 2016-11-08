@@ -1,17 +1,17 @@
 [
     {
         "name": "composer/installers",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
+        "version": "v1.2.0",
+        "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/composer/installers.git",
-            "reference": "21a8c06dd5fe0a22b776797cc552e51d17d7e7dd"
+            "reference": "d78064c68299743e0161004f2de3a0204e33b804"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/installers/zipball/21a8c06dd5fe0a22b776797cc552e51d17d7e7dd",
-            "reference": "21a8c06dd5fe0a22b776797cc552e51d17d7e7dd",
+            "url": "https://api.github.com/repos/composer/installers/zipball/d78064c68299743e0161004f2de3a0204e33b804",
+            "reference": "d78064c68299743e0161004f2de3a0204e33b804",
             "shasum": ""
         },
         "require": {
@@ -25,7 +25,7 @@
             "composer/composer": "1.0.*@dev",
             "phpunit/phpunit": "4.1.*"
         },
-        "time": "2016-04-24 13:17:36",
+        "time": "2016-08-13 20:53:52",
         "type": "composer-plugin",
         "extra": {
             "class": "Composer\\Installers\\Plugin",
@@ -60,6 +60,7 @@
             "MODX Evo",
             "Mautic",
             "OXID",
+            "Plentymarkets",
             "RadPHP",
             "SMF",
             "Thelia",
@@ -67,15 +68,18 @@
             "agl",
             "aimeos",
             "annotatecms",
+            "attogram",
             "bitrix",
             "cakephp",
             "chef",
+            "cockpit",
             "codeigniter",
             "concrete5",
             "croogo",
             "dokuwiki",
             "drupal",
             "elgg",
+            "expressionengine",
             "fuelphp",
             "grav",
             "installer",
@@ -92,29 +96,31 @@
             "piwik",
             "ppi",
             "puppet",
+            "reindex",
             "roundcube",
             "shopware",
             "silverstripe",
             "symfony",
             "typo3",
             "wordpress",
+            "yawik",
             "zend",
             "zikula"
         ]
     },
     {
         "name": "usabilitydynamics/lib-utility",
-        "version": "0.3.6",
-        "version_normalized": "0.3.6.0",
+        "version": "0.3.7",
+        "version_normalized": "0.3.7.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/lib-utility",
-            "reference": "0.3.6"
+            "reference": "0.3.7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-utility/archive/0.3.6.zip",
-            "reference": "0.3.6",
+            "url": "https://github.com/UsabilityDynamics/lib-utility/archive/0.3.7.zip",
+            "reference": "0.3.7",
             "shasum": null
         },
         "require-dev": {
@@ -236,56 +242,18 @@
         ]
     },
     {
-        "name": "usabilitydynamics/lib-wp-bootstrap",
-        "version": "1.2.0",
-        "version_normalized": "1.2.0.0",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:UsabilityDynamics/lib-wp-bootstrap",
-            "reference": "1.2.0"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.2.0.zip",
-            "reference": "1.2.0",
-            "shasum": null
-        },
-        "require": {
-            "php": ">=5.3",
-            "usabilitydynamics/lib-utility": "~0.3"
-        },
-        "type": "library",
-        "extra": {
-            "installer-name": "lib-wp-bootstrap"
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "lib/classes"
-            ]
-        },
-        "license": [
-            "MIT"
-        ],
-        "description": "Wordpress bootstrap library created by UsabilityDynamics",
-        "homepage": "https://github.com/UsabilityDynamics/lib-wp-bootstrap",
-        "keywords": [
-            "wordpress"
-        ]
-    },
-    {
         "name": "usabilitydynamics/lib-ud-api-client",
-        "version": "1.1.5",
-        "version_normalized": "1.1.5.0",
+        "version": "1.1.5.1",
+        "version_normalized": "1.1.5.1",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/lib-ud-api-client",
-            "reference": "1.1.5"
+            "reference": "1.1.5.1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-ud-api-client/archive/1.1.5.zip",
-            "reference": "1.1.5",
+            "url": "https://github.com/UsabilityDynamics/lib-ud-api-client/archive/1.1.5.1.zip",
+            "reference": "1.1.5.1",
             "shasum": null
         },
         "require": {
@@ -621,6 +589,108 @@
             "MIT"
         ],
         "description": "WP Repository plugin.",
+        "homepage": "https://usabilitydynamics.com"
+    },
+    {
+        "name": "usabilitydynamics/lib-wp-bootstrap",
+        "version": "1.2.1",
+        "version_normalized": "1.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-wp-bootstrap",
+            "reference": "1.2.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.2.1.zip",
+            "reference": "1.2.1",
+            "shasum": null
+        },
+        "require": {
+            "php": ">=5.3",
+            "usabilitydynamics/lib-utility": "~0.3"
+        },
+        "type": "library",
+        "extra": {
+            "installer-name": "lib-wp-bootstrap"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib/classes"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "Wordpress bootstrap library created by UsabilityDynamics",
+        "homepage": "https://github.com/UsabilityDynamics/lib-wp-bootstrap",
+        "keywords": [
+            "wordpress"
+        ]
+    },
+    {
+        "name": "usabilitydynamics/wp-rets-client",
+        "version": "0.2.3",
+        "version_normalized": "0.2.3.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/wp-rets-client",
+            "reference": "0.2.3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/wp-rets-client/archive/0.2.3.zip",
+            "reference": "0.2.3",
+            "shasum": null
+        },
+        "archive": {
+            "exclude": [
+                "vendor",
+                "node_modules",
+                ".gitignore",
+                "test",
+                "circle.yml",
+                "composer.lock",
+                "gruntfile.js",
+                "package.json"
+            ]
+        },
+        "require": {
+            "php": ">=5.3",
+            "usabilitydynamics/lib-wp-bootstrap": "1.2.1"
+        },
+        "require-dev": {
+            "codeclimate/php-test-reporter": "~0.1",
+            "usabilitydynamics/lib-wp-phpunit": "~0.2"
+        },
+        "type": "wordpress-plugin",
+        "extra": {
+            "schemas": {
+                "dependencies": {
+                    "modules": [],
+                    "plugins": []
+                },
+                "licenses": {
+                    "client": false,
+                    "product": false
+                }
+            },
+            "installer-name": "wp-rets-client"
+        },
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "lib/classes",
+                "lib/connectors"
+            ],
+            "files": [
+                "wp-rets-client.php"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
         "homepage": "https://usabilitydynamics.com"
     }
 ]

@@ -55,7 +55,7 @@ class WPP_Core {
      * @since 2.0.5
      */
     add_filter( 'wpp:geocoding_request', function( $args ){
-      $key = ud_get_wp_property( 'configuration.google_maps_api' );
+      $key = ud_get_wp_property( 'configuration.google_maps_api_server' );
       if( !empty( $key ) ) {
         $args[ 'key' ] = $key;
       }
@@ -68,6 +68,162 @@ class WPP_Core {
      */
     add_filter( 'get_post_metadata', array( $this, 'maybe_get_thumbnail_id' ), 10, 4 );
 
+    /**
+     * Maybe register site on UD
+     */
+    add_action( 'wpp_post_init', array( $this, 'maybe_register_site' ) );
+
+    /**
+     * Updated remote settings to UD
+     */
+    add_action( 'wpp::save_settings', array( $this, 'update_site_settings' ) );
+
+  }
+
+  /**
+   * Register Site on UD if needed
+   *
+   */
+  public function maybe_register_site() {
+    global $wpdb, $wp_properties;
+
+    $table_prefix = $wpdb->prefix;
+
+    // Token set, do not attempt registration unless it cleared.
+    if( get_site_option( 'ud_site_secret_token' ) ) {
+      return;
+    }
+
+    // Generate new secret token.
+    add_site_option( 'ud_site_secret_token', $ud_site_secret_token = md5( wp_generate_password( 20 ) ) );
+
+    $site_url = get_site_url();
+    $ud_site_id = get_site_option( 'ud_site_id' );
+
+    $url = 'https://api.usabilitydynamics.com/product/v1/site/register';
+    $find = array( 'http://', 'https://' );
+    $replace = '';
+    $output = str_replace( $find, $replace, $site_url );
+
+    $configuration = array(
+      'searchable_attributes' => !empty( $wp_properties[ 'searchable_attributes' ] ) ? $wp_properties[ 'searchable_attributes' ] : array(),
+      'property_stats' => !empty( $wp_properties[ 'property_stats' ] ) ? $wp_properties[ 'property_stats' ] : array(),
+      'property_types' => !empty( $wp_properties[ 'property_types' ] ) ? $wp_properties[ 'property_types' ] : array(),
+      'geo_type_attributes' => !empty( $wp_properties[ 'geo_type_attributes' ] ) ? $wp_properties[ 'geo_type_attributes' ] : array(),
+      'predefined_values' => !empty( $wp_properties[ 'predefined_values' ] ) ? $wp_properties[ 'predefined_values' ] : array(),
+      'searchable_attr_fields' => !empty( $wp_properties[ 'searchable_attr_fields' ] ) ? $wp_properties[ 'searchable_attr_fields' ] : array(),
+      'admin_attr_fields' => !empty( $wp_properties[ 'admin_attr_fields' ] ) ? $wp_properties[ 'admin_attr_fields' ] : array(),
+      'numeric_attributes' => !empty( $wp_properties[ 'numeric_attributes' ] ) ? $wp_properties[ 'numeric_attributes' ] : array(),
+      'currency_attributes' => !empty( $wp_properties[ 'currency_attributes' ] ) ? $wp_properties[ 'currency_attributes' ] : array()
+    );
+
+    $data_settings = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $configuration ) );
+    $data_settings_json = json_encode( $data_settings );
+
+    $args = array(
+      'method' => 'POST',
+      'timeout' => 10,
+      'redirection' => 5,
+      'httpversion' => '1.0',
+      'headers' => array(),
+      'body' => array(
+        'host' => $output,
+        'ud_site_secret_token' => $ud_site_secret_token,
+        'ud_site_id' => ( $ud_site_id ? $ud_site_id : '' ),
+        'db_name' => defined( 'DB_NAME' ) ? DB_NAME : null,
+        'home_url' => home_url(),
+        'xmlrpc_url' => site_url( '/xmlrpc.php' ),
+        'table_refix' => isset( $table_prefix ) ? $table_prefix : null,
+        'wpp_settings' => $data_settings_json,
+        'user_id' => get_current_user_id(),
+        'message' => "Hello, I'm WP-property plugin. Give me ID, please."
+      ),
+    );
+
+    $response = wp_remote_post( $url, $args );
+
+    if( wp_remote_retrieve_response_code( $response ) === 200 && !is_wp_error( $response ) ) {
+
+      $api_body = json_decode( wp_remote_retrieve_body( $response ) );
+
+      if( isset( $api_body ) && $api_body->ud_site_secret_token === $ud_site_secret_token ) {
+
+        if( isset( $api_body->ud_site_id ) ) {
+          add_site_option( 'ud_site_id', $api_body->ud_site_id );
+        }
+
+        if( isset( $api_body->ud_site_public_key ) ) {
+          add_site_option( 'ud_site_public_key', $api_body->ud_site_public_key );
+        }
+
+      }
+
+    }
+
+  }
+
+  /**
+   * Update remote settings
+   */
+  public function update_site_settings() {
+    global $wpdb, $wp_properties;
+
+    $table_prefix = $wpdb->prefix;
+    $ud_site_secret_token = get_site_option('ud_site_secret_token');
+    $site_url = get_site_url();
+    $ud_site_id = get_site_option('ud_site_id');
+    $ud_site_public_key = get_site_option('ud_site_public_key');
+    $url = 'https://api.usabilitydynamics.com/product/v1/site/update_settings';
+    $find = array( 'http://', 'https://' );
+    $replace = '';
+    $output = str_replace( $find, $replace, $site_url );
+
+    $configuration = array(
+        'searchable_attributes' => !empty( $wp_properties['searchable_attributes'] ) ? $wp_properties['searchable_attributes'] : array(),
+        'property_stats' => !empty( $wp_properties['property_stats'] ) ? $wp_properties['property_stats'] : array(),
+        'property_types' => !empty( $wp_properties['property_types'] ) ? $wp_properties['property_types'] : array(),
+        'geo_type_attributes' => !empty( $wp_properties['geo_type_attributes'] ) ? $wp_properties['geo_type_attributes'] : array(),
+        'predefined_values' => !empty( $wp_properties['predefined_values'] ) ? $wp_properties['predefined_values'] : array(),
+        'searchable_attr_fields' => !empty( $wp_properties['searchable_attr_fields'] ) ? $wp_properties['searchable_attr_fields'] : array(),
+        'admin_attr_fields' => !empty( $wp_properties['admin_attr_fields'] ) ? $wp_properties['admin_attr_fields'] : array(),
+        'numeric_attributes' => !empty( $wp_properties['numeric_attributes'] ) ? $wp_properties['numeric_attributes'] : array(),
+        'currency_attributes' => !empty( $wp_properties['currency_attributes'] ) ? $wp_properties['currency_attributes'] : array()
+    );
+
+    $data_settings = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $configuration ) );
+    $data_settings_json = json_encode($data_settings);
+
+    $args = array(
+        'method' => 'POST',
+        'timeout' => 45,
+        'redirection' => 5,
+        'httpversion' => '1.0',
+        'headers' => array(),
+        'body' => array(
+            'host' => $output,
+            'ud_site_secret_token' => $ud_site_secret_token,
+            'ud_site_id' => $ud_site_id,
+	    'ud_site_public_key' => $ud_site_public_key,
+            'db_name' => DB_NAME,
+            'home_url' => home_url(),
+            'table_refix' => $table_prefix,
+            'wpp_settings' => $data_settings_json,
+            'message' => "Hello, I'm WP-property plugin. Give me ID, please."
+        ),
+    );
+
+    $response = wp_remote_post( $url, $args );
+
+    $api_body = json_decode(wp_remote_retrieve_body($response));
+
+    if ( !is_wp_error( $response ) ) {
+      if( !empty( $api_body->ud_site_id ) && $api_body->ud_site_secret_token == $ud_site_secret_token){
+        add_site_option('ud_site_id', $api_body->ud_site_id);
+        if( !empty( $api_body->ud_site_public_key ) ){
+          add_site_option('ud_site_public_key', $api_body->ud_site_public_key);
+        }
+      }
+    }
   }
 
   /**
@@ -123,6 +279,7 @@ class WPP_Core {
     add_action( 'wp_ajax_wpp_save_settings', create_function( "", ' die(WPP_F::save_settings());' ) );
     add_action( 'wp_ajax_wpp_apply_default_value', create_function( "", ' die(WPP_F::apply_default_value());' ) );
     add_action( 'wp_ajax_wpp_ajax_print_wp_properties', create_function( "", ' global $wp_properties; print_r($wp_properties); die();' ) );
+    add_action( 'wp_ajax_wpp_ajax_generate_is_remote_meta', create_function( "", ' WPP_F::generate_is_remote_meta(); die();' ) );
 
     /** Called in setup_postdata().  We add property values here to make available in global $post variable on frontend */
     add_action( 'the_post', array( 'WPP_F', 'the_post' ) );
@@ -188,7 +345,13 @@ class WPP_Core {
     wp_register_script( 'wp-property-backend-editor', WPP_URL . 'scripts/wpp.admin.editor.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable' ), WPP_Version );
     wp_register_script( 'jquery-cookie', WPP_URL . 'scripts/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
-    wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?sensor=true&key='.ud_get_wp_property( 'configuration.google_maps_api' ) );
+
+    // Use Google Maps API Key, if provided.
+    if( ud_get_wp_property( 'configuration.google_maps_api' ) ) {
+      wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?key='.ud_get_wp_property( 'configuration.google_maps_api' ) );
+    } else {
+      wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?sensor=true' );
+    }
 
     wp_register_script( 'wpp-md5', WPP_URL . 'scripts/md5.js', array( 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wpp-jquery-gmaps', WPP_URL . 'scripts/jquery.ui.map.min.js', array( 'google-maps', 'jquery-ui-core', 'jquery-ui-widget', 'wpp-localization' ) );
