@@ -72,8 +72,10 @@
 
     /* Property Pagination */
     .properties_pagination {
-
+      margin-bottom: 10px;
       .wpp_pagination_slider_status {
+        margin-top: 5px;
+        margin-bottom: 10px;
         .wpp_sorter_options {
           padding-left: 25px;
           .wpp_sort_by_text {
@@ -138,9 +140,13 @@
             margin: 0;
             padding: 0;
             list-style: none;
-            .property_title {
-              a {
-                font-weight: bold;
+            li {
+              list-style: none;
+              margin: 0;
+              &.property_title {
+                a {
+                  font-weight: bold;
+                }
               }
             }
           }

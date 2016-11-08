@@ -65,6 +65,13 @@
   /* View results */
   /* View results */
 }
+#wpp_layout .wpp_property_overview_shortcode .properties_pagination {
+  margin-bottom: 10px;
+}
+#wpp_layout .wpp_property_overview_shortcode .properties_pagination .wpp_pagination_slider_status {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
 #wpp_layout .wpp_property_overview_shortcode .properties_pagination .wpp_pagination_slider_status .wpp_sorter_options {
   padding-left: 25px;
 }
@@ -124,7 +131,11 @@
   padding: 0;
   list-style: none;
 }
-#wpp_layout .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_right_column .wpp_overview_data .property_title a {
+#wpp_layout .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_right_column .wpp_overview_data li {
+  list-style: none;
+  margin: 0;
+}
+#wpp_layout .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_right_column .wpp_overview_data li.property_title a {
   font-weight: bold;
 }
 #wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul {
