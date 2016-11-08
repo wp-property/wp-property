@@ -121,6 +121,10 @@
   padding: 0;
   list-style: none;
 }
+#wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li {
+  margin: 0;
+  list-style: none;
+}
 #wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element {
   margin: 0 0 10px;
 }
