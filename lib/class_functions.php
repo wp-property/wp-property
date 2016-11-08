@@ -2408,7 +2408,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     if( !is_array( $posts ) ) {
       $posts = array();
     }
-
+    
     /* If Property doesn't exist we create it : ONE */
     if( !in_array( '122 Bishopsgate', $posts ) ) {
 
@@ -2422,6 +2422,10 @@ class WPP_F extends UsabilityDynamics\Utility {
         'bedrooms' => '4',
         'property_type'=>$default_prop,
         'bathrooms' => '4',
+        'fees' => '100',
+        'year_built' => '2001',
+        'living_space' => "1000",
+        'total_rooms' => '6',
         'phone_number' => '8002700781',
         'img_index' => '1',
       ) );
@@ -2442,6 +2446,10 @@ Ample off-street parking ",
         'price' => '215000',
         'bedrooms' => '5',
         'bathrooms' => '4',
+          'fees' => '200',
+        'year_built' => '2002',
+        'living_space' => "2000",
+        'total_rooms' => '8',
         'property_type'=>$default_prop,
         'phone_number' => '8002300781',
         'img_index' => '1',
@@ -2459,6 +2467,10 @@ Ample off-street parking ",
         'price' => '255000',
         'bedrooms' => '8',
         'featured'=>'true',
+        'fees' => '300',
+        'year_built' => '2003',
+        'living_space' => "3000",
+        'total_rooms' => '11',          
         'property_type'=>$default_prop,
         'bathrooms' => '8',
         'phone_number' => '9992700781',
@@ -2476,6 +2488,10 @@ Ample off-street parking ",
         'location' => '720 N Larrabee St Apt 1012,Chicago, IL 60654',
         'price' => '985000',
         'bedrooms' => '8',
+        'fees' => '400',
+        'year_built' => '2004',
+        'living_space' => "4000",
+        'total_rooms' => '10',
         'bathrooms' => '8',
         'property_type'=>$default_prop,
         'phone_number' => '9856700781',
@@ -2494,6 +2510,10 @@ Ample off-street parking ",
         'price' => '876000',
         'bedrooms' => '5',
         'featured'=>'true',
+        'fees' => '500',
+        'year_built' => '2005',
+        'living_space' => "5000",
+        'total_rooms' => '8',
         'property_type'=>$default_prop,
         'bathrooms' => '5',
         'phone_number' => '8002708876',
@@ -2535,7 +2555,7 @@ Ample off-street parking ",
     update_post_meta( $insert_id, 'property_type', $property_type );
 
     if( !empty( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) && key_exists( $wp_properties[ 'configuration' ][ 'address_attribute' ], $wp_properties[ 'property_stats' ] ) ) {
-      update_post_meta( $insert_id, $wp_properties[ 'configuration' ][ 'address_attribute' ], $data[ 'location' ] );
+      update_post_meta( $insert_id, 'location', $data[ 'location' ] );
 
       if( method_exists( 'WPP_F', 'revalidate_address' ) ) {
         WPP_F::revalidate_address( $insert_id );
@@ -2545,7 +2565,7 @@ Ample off-street parking ",
     if( !empty( $wp_properties[ 'property_stats' ][ 'tagline' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'tagline' ] ) ) {
       update_post_meta( $insert_id, 'tagline', $data[ 'tagline' ] );
     }
-
+    
     if( !empty( $wp_properties[ 'property_stats' ][ 'featured' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'featured' ] ) ) {
       update_post_meta( $insert_id, 'featured', $data[ 'featured' ] );
     }
@@ -2564,6 +2584,22 @@ Ample off-street parking ",
 
     if( !empty( $wp_properties[ 'property_stats' ][ 'phone_number' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'phone_number' ] ) ) {
       update_post_meta( $insert_id, 'phone_number', $data[ 'phone_number' ] );
+    }
+    
+    if( !empty( $wp_properties[ 'property_stats' ][ 'total_rooms' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'total_rooms' ] ) ) {
+      update_post_meta( $insert_id, 'total_rooms', $data[ 'total_rooms' ] );
+    }
+    
+    if( !empty( $wp_properties[ 'property_stats' ][ 'fees' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'fees' ] ) ) {
+      update_post_meta( $insert_id, 'fees', $data[ 'fees' ] );
+    }
+    
+    if( !empty( $wp_properties[ 'property_stats' ][ 'year_built' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'year_built' ] ) ) {
+      update_post_meta( $insert_id, 'year_built', $data[ 'year_built' ] );
+    }
+    
+    if( !empty( $wp_properties[ 'property_stats' ][ 'living_space' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'living_space' ] ) ) {
+      update_post_meta( $insert_id, 'living_space', $data[ 'living_space' ] );
     }
 
     update_post_meta( $insert_id, 'dummy_property', true );
@@ -2599,7 +2635,7 @@ Ample off-street parking ",
     if( isset( $attach_id ) ) {
       update_post_meta( $insert_id, '_thumbnail_id', $attach_id );
     }
-
+    
   }
   /**
    * AJAX Handler for manaually creating backups.

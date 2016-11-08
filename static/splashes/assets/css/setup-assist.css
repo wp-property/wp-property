@@ -428,8 +428,9 @@ li.checkbox-up [type="checkbox"] + span::before {
   font-style: italic;
   display: block;
 }
-.wpp_asst_google_api .decription{
+.wpp_asst_google_api .description{
   margin-left: 10px;
+  display: block;
 }
 .wpp_asst_select select, .wpp_asst_select select option{outline:none;}
 .wpp_asst_select select:hover {
