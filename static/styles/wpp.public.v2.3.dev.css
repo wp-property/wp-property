@@ -68,6 +68,9 @@
 #wpp_layout .wpp_property_overview_shortcode .properties_pagination .wpp_pagination_slider_status .wpp_sorter_options {
   padding-left: 25px;
 }
+#wpp_layout .wpp_property_overview_shortcode .properties_pagination .wpp_pagination_slider_status .wpp_sorter_options .wpp_sort_by_text {
+  padding-right: 5px;
+}
 #wpp_layout .wpp_property_overview_shortcode .properties_pagination .wpp_pagination_slider_status .wpp_sorter_options .wpp_sortable_link {
   cursor: pointer;
 }
@@ -86,6 +89,8 @@
 }
 #wpp_layout .wpp_property_overview_shortcode .properties_pagination ul.property-overview-navigation li a {
   text-decoration: none;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 #wpp_layout .wpp_property_overview_shortcode .properties_pagination ul.property-overview-navigation li ul {
   margin: 0px;
@@ -98,13 +103,19 @@
   margin-right: -3px;
   padding: 0 10px;
   vertical-align: top;
+  min-width: 138px;
   width: 25%;
 }
 #wpp_layout .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_left_column {
   margin: 0 auto 5px;
   max-width: 100%;
 }
-#wpp_layout .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_left_column img {
+#wpp_layout .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_left_column .property_overview_thumb {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+#wpp_layout .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_left_column .property_overview_thumb img {
   max-width: 100%;
   height: auto;
 }
