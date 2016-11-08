@@ -138,9 +138,7 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
               <li class="wpp_asst_label"><?php echo __('Property Gallery', ud_get_wp_property()->domain); ?> <label for="gallerypropertieswidget"> 
                   <input class="wpp_box" type="checkbox" value="gallerypropertieswidget" name="wpp_settings[configuration][widgets][gallerypropertieswidget]" value="gallerypropertieswidget"  id="gallerypropertieswidget"  <?php if(isset($wp_properties['configuration']['widgets']) && in_array("gallerypropertieswidget",array_keys($wp_properties['configuration']['widgets']))) echo "checked";?>> <span></span> </label>
               </li> 
-              <li class="wpp_asst_label"> <?php echo __('Child Properties', ud_get_wp_property()->domain); ?><label for="childpropertieswidget"> 
-                  <input class="wpp_box" type="checkbox" name="wpp_settings[configuration][widgets][childpropertieswidget]" value="childpropertieswidget" id="childpropertieswidget"  <?php if(isset($wp_properties['configuration']['widgets']) && in_array("childpropertieswidget",array_keys($wp_properties['configuration']['widgets']))) echo "checked";?>> <span></span> </label>
-              </li> 
+              
             </ul>
           </div>
         </div><!-- wpp_asst_screen wpp_asst_screen_3 --> 
@@ -164,22 +162,6 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
             </div>	
             <div class="wpp_asst_select_new">
               <input type="text" name="wpp-base-slug-new" class="wpp-base-slug-new" required="required"/>
-            </div>
-
-            <h2 class="wpp_asst_heading"><b><?php echo __('Choose widget which you would like to see on Properties Page', ud_get_wp_property()->domain); ?></b></h2>
-            <div class="wpp_asst_inner_wrap">
-
-              <ul class="three-sectionals">
-                <li class="wpp_asst_label"> <?php echo __('Property Search', ud_get_wp_property()->domain); ?><label for="property-search"> 
-                    <input class="wpp_box" type="checkbox" value="property-search" name="quality" id="property-search"> <span></span> </label>
-                </li> 
-                <li class="wpp_asst_label"><?php echo __('Featured Property', ud_get_wp_property()->domain); ?><label for="featured-properties"> 
-                    <input class="wpp_box" type="checkbox" value="featured-properties" name="quality" id="featured-properties"> <span></span> </label>
-                </li> 
-                <li class="wpp_asst_label"><?php echo __('Latest Property', ud_get_wp_property()->domain); ?> <label for="latest-properties"> 
-                    <input class="wpp_box" type="checkbox" value="latest-properties" name="quality" id="latest-properties"> <span></span> </label>
-                </li> 
-              </ul>
             </div>
 
             <h2 class="wpp_asst_heading"><b><?php echo __('Add list of properties to your Properties page?', ud_get_wp_property()->domain); ?></b></h2>
