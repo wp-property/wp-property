@@ -73,6 +73,14 @@
     /* Property Pagination */
     .properties_pagination {
 
+      .wpp_pagination_slider_status {
+        .wpp_sorter_options {
+          padding-left: 25px;
+          .wpp_sortable_link {
+            cursor: pointer;
+          }
+        }
+      }
       ul.property-overview-navigation {
         margin: 5px 0 10px;
         padding: 0px;
@@ -80,8 +88,12 @@
         li {
           display: inline-block;
           padding: 0 5px;
+          border: none;
           &.pages {
             padding: 0;
+          }
+          a {
+            text-decoration: none;
           }
           ul {
             margin: 0px;
@@ -97,12 +109,30 @@
     .all-properties {
       .property_div {
         display: inline-block;
+        margin-bottom: 20px;
         margin-right: -3px;
-        min-width: 25%;
-        max-width: 32%;
-        .property_div_wrapper {
-          display: table-cell;
-          vertical-align: top;
+        padding: 0 10px;
+        vertical-align: top;
+        width: 25%;
+        .wpp_overview_left_column {
+          margin: 0 auto 5px;
+          max-width: 100%;
+          img {
+            max-width: 100%;
+            height: auto;
+          }
+        }
+        .wpp_overview_right_column {
+          .wpp_overview_data {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            .property_title {
+              a {
+                font-weight: bold;
+              }
+            }
+          }
         }
       }
     }
@@ -120,22 +150,30 @@
         margin: 0;
         padding: 0;
         list-style: none;
-        li.wpp_search_form_element {
-          margin: 0 0 10px;
-          .wpp_search_group_title,
-          .wpp_search_label {
-            display: block;
-            font-weight: 600;
-            margin: 0 0 5px;
-          }
-          input.wpp_range_input {
-            display: inline-block;
-            width: 46%;
-          }
-          .wpp_dash {
-            display: inline-block;
-            text-align: center;
-            width: 4%;
+        li {
+          &.wpp_search_form_element {
+            margin: 0 0 10px;
+            .wpp_search_group_title,
+            .wpp_search_label {
+              display: block;
+              font-weight: 600;
+              margin: 0 0 5px;
+            }
+            input {
+              margin: 0;
+              &.wpp_range_input {
+                display: inline-block;
+                width: 46%;
+              }
+            }
+            label {
+              display: inline-block;
+            }
+            .wpp_dash {
+              display: inline-block;
+              text-align: center;
+              width: 4%;
+            }
           }
         }
       }

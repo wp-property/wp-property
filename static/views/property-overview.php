@@ -36,8 +36,6 @@ if (have_properties()) {
 
   <div class="<?php wpp_css('property_overview::property_div', "property_div {$property['post_type']}"); ?>">
 
-  <div
-    class="<?php wpp_css('property_overview::property_div_wrapper', "property_div_wrapper {$property['post_type']}"); ?>">
     <div class="<?php wpp_css('property_overview::left_column', "wpp_overview_left_column"); ?>"
          style="width:<?php echo $thumbnail_dimentions['width']; ?>px; ">
       <?php property_overview_image(); ?>
@@ -102,8 +100,6 @@ if (have_properties()) {
     </ul>
 
     </div><?php // .wpp_right_column ?>
-
-    </div><?php // .property_div_wrapper ?>
 
     </div><?php // .property_div ?>
 
