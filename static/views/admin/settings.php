@@ -400,6 +400,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
             <select name="wpp_settings[configuration][property_overview][pagination_type]">
               <option value="slider" <?php if( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'pagination_type' ] ) ) selected( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'pagination_type' ], 'slider' ); ?>><?php _e( 'Slider', ud_get_wp_property()->domain ); ?> (slider)</option>
               <option value="numeric" <?php if( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'pagination_type' ] ) ) selected( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'pagination_type' ], 'numeric' ); ?>><?php _e( 'Numeric', ud_get_wp_property()->domain ); ?> (numeric)</option>
+              <option value="loadmore" <?php if( isset( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'pagination_type' ] ) ) selected( $wp_properties[ 'configuration' ][ 'property_overview' ][ 'pagination_type' ], 'loadmore' ); ?>><?php _e( 'Load more', ud_get_wp_property()->domain ); ?> (button)</option>
             </select>
             <span class="description"><?php printf( __( 'You always can set pagination type for specific shortcode or widget manually. Example: %s', ud_get_wp_property('domain') ), '<code>[property_overview pagination_type=numeric]</code>' ); ?></span>
           </li>

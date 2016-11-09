@@ -17,7 +17,7 @@ namespace UsabilityDynamics\WPP {
        * @param $old_version
        * @param $new_version
        */
-      static public function run( $old_version, $new_version ){
+      static public function run( $old_version, $new_version ) {
         global $wpdb;
 
         self::do_backup( $old_version, $new_version );

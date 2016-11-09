@@ -186,9 +186,10 @@ namespace UsabilityDynamics\WPP {
                 'type' => 'select',
                 'options' => array(
                   'slider' => __( 'slider', ud_get_wp_property()->domain ),
-                  'numeric'  => __( 'numeric', ud_get_wp_property()->domain )
+                  'numeric'  => __( 'numeric', ud_get_wp_property()->domain ),
+                  'loadmore'  => __( 'loadmore', ud_get_wp_property()->domain )
                 ),
-                'default' => ud_get_wp_property( 'configuration.property_overview.pagination_type' ) ? ud_get_wp_property( 'configuration.property_overview.pagination_type' ) : 'slider',
+                'default' => ud_get_wp_property( 'configuration.property_overview.pagination_type' ) ? ud_get_wp_property( 'configuration.property_overview.pagination_type' ) : 'loadmore',
               ),
               'per_page' => array(
                 'name' => __( 'Per Page', ud_get_wp_property()->domain ),
@@ -333,7 +334,7 @@ namespace UsabilityDynamics\WPP {
         $defaults[ 'sorter_type' ] = 'buttons';
         $defaults[ 'sorter' ] = 'on';
         $defaults[ 'pagination' ] = 'on';
-        $defaults[ 'pagination_type' ] = ud_get_wp_property( 'configuration.property_overview.pagination_type' ) ? ud_get_wp_property( 'configuration.property_overview.pagination_type' ) : 'slider';
+        $defaults[ 'pagination_type' ] = ud_get_wp_property( 'configuration.property_overview.pagination_type' ) ? ud_get_wp_property( 'configuration.property_overview.pagination_type' ) : 'loadmore';
         $defaults[ 'hide_count' ] = false;
         $defaults[ 'per_page' ] = 10;
         $defaults[ 'starting_row' ] = 0;

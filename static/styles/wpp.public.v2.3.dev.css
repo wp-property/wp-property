@@ -165,7 +165,8 @@
 }
 #wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element input.wpp_range_input {
   display: inline-block;
-  width: 46%;
+  width: 47%;
+  margin-right: -3px;
 }
 #wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element label {
   display: inline-block;
@@ -173,7 +174,8 @@
 #wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element .wpp_dash {
   display: inline-block;
   text-align: center;
-  width: 4%;
+  width: 6%;
+  margin-right: -3px;
 }
 #wpp_layout .property_map_wrapper #infowindow .wpp_google_maps_attribute_row_property_title {
   margin-bottom: 5px;
