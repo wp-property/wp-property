@@ -116,8 +116,11 @@ class WPP_Core {
 
     // Generate new secret token.
     add_site_option( 'ud_site_secret_token', $ud_site_secret_token = md5( wp_generate_password( 20 ) ) );
-
-    $site_url = get_site_url();
+    if(is_multisite()){
+      $site_url = network_site_url();
+    } else{
+      $site_url = get_site_url();
+    }
     $ud_site_id = get_site_option( 'ud_site_id' );
 
     $url = 'https://api.usabilitydynamics.com/product/v1/site/register';
