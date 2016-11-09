@@ -3843,7 +3843,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       if( !empty( $image ) && is_array( $image ) ) {
         $imageHTML = "<img width=\"{$image['width']}\" height=\"{$image['height']}\" src=\"{$image['link']}\" alt=\"" . addslashes( $post->post_title ) . "\" />";
         if( @$wp_properties[ 'configuration' ][ 'property_overview' ][ 'fancybox_preview' ] == 'true' && !empty( $property[ 'featured_image_url' ] ) ) {
-          $imageHTML = "<a href=\"{$property['featured_image_url']}\" class=\"fancybox_image thumbnail\">{$imageHTML}</a>";
+          $imageHTML = "<a href=\"{$property['featured_image_url']}\" class=\"thumbnail\">{$imageHTML}</a>";
         }
       }
     }
