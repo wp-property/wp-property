@@ -58,6 +58,10 @@
   /* WP Property overview shortcode */
   /* WP Property search widget */
   /* WP Property search widget */
+  /* Property MAP */
+  /* Property MAP */
+  /* Gallery widget */
+  /* Gallery widget */
 }
 #wpp_layout .wpp_property_overview_shortcode {
   /* Property Pagination */
@@ -170,4 +174,39 @@
   display: inline-block;
   text-align: center;
   width: 4%;
+}
+#wpp_layout .property_map_wrapper #infowindow .wpp_google_maps_attribute_row_property_title {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+#wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table {
+  border: none;
+}
+#wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col {
+  border: none;
+  padding: 0;
+}
+#wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a img {
+  max-width: 100%;
+}
+#wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col {
+  border: none;
+  padding: 0 0 0 10px;
+}
+#wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li {
+  list-style: none;
+}
+#wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li .attribute {
+  padding-right: 5px;
+}
+#wpp_layout .wpp_gallery_widget .sidebar_gallery_item {
+  margin-bottom: 10px;
+}
+#wpp_layout .wpp_gallery_widget .sidebar_gallery_item a img {
+  max-width: 100%;
 }
