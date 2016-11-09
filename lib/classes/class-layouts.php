@@ -21,6 +21,42 @@ namespace UsabilityDynamics\WPP {
 
         add_filter('template_include', array($this, 'page_template'), 99);
         add_action('wp_footer', array($this, 'panels_print_inline_css'));
+
+        add_filter( 'wpp::layouts::configuration', function( $false ) {
+          global $wp_properties;
+
+          $available_layouts = get_option( 'wpp_available_layouts', false );
+
+          if ( is_tax() && in_array( 'property', get_taxonomy( get_queried_object()->taxonomy )->object_type ) ) {
+            $layout_id = !empty($wp_properties['configuration']['layouts']['templates'])
+                && !empty($wp_properties['configuration']['layouts']['templates']['property_term_single'])
+                ?  $wp_properties['configuration']['layouts']['templates']['property_term_single'] : 'false';
+
+            if ( $layout_id != 'false' && !empty($available_layouts['single-property-term']) && !empty( $available_layouts['single-property-term'][$layout_id] ) ) {
+
+              if ( !empty( $available_layouts['single-property-term'][$layout_id]->layout) ) {
+
+                try {
+                  $layout = json_decode( base64_decode($available_layouts['single-property-term'][$layout_id]->layout), true );
+                } catch ( \Exception $e ) {
+                  echo $e->getMessage();
+                }
+
+              }
+
+              return array(
+                /**
+                 * @todo option for php files
+                 */
+                'templates' => array( 'page.php', 'single.php' ),
+                'layout_meta' => $layout
+              );
+
+            }
+          }
+
+          return $false;
+        });
       }
 
       /**
@@ -53,10 +89,10 @@ namespace UsabilityDynamics\WPP {
       {
         global $wp_query;
 
-        $render = apply_filters('wpp::layouts::settings', false);
+        $render = apply_filters('wpp::layouts::configuration', false);
 
         if ($render && !empty($wp_query->post)) {
-          $wp_query->post->ID = $render['layout_id'];
+          $wp_query->post->ID = !empty( $render['layout_id'] ) ? $render['layout_id'] : '0';
         }
 
         if (count($wp_query->posts) > 1) {
@@ -104,19 +140,19 @@ namespace UsabilityDynamics\WPP {
       {
         global $property, $post;
 
-        $render = apply_filters('wpp::layouts::settings', false);
+        $render = apply_filters('wpp::layouts::configuration', false);
 
         if (!$render) return $data;
 
         $_layout_config = apply_filters('wpp::layouts::layout_override', false, $render, $post);
 
-        if ($render['layout_id']) {
+        if ( !empty( $render['layout_id'] ) ) {
           return function_exists('siteorigin_panels_render') ?
               siteorigin_panels_render($render['layout_id'], true, $_layout_config) :
               $this->standard_render($render['layout_id'], $_layout_config);
         }
 
-        if ($render['layout_meta']) {
+        if ( !empty( $render['layout_meta'] ) ) {
           return function_exists('siteorigin_panels_render') ?
               siteorigin_panels_render($post->ID, true, $render['layout_meta']) :
               $this->standard_render($post->ID, $render['layout_meta']);

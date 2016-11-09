@@ -121,9 +121,9 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties;
 
         $layouts_settings = wp_parse_args( !empty( $wp_properties['configuration']['layouts']['templates'] ) ? $wp_properties['configuration']['layouts']['templates'] : array() , array(
-            'property_term_single' => false,
-            'property_single'      => false,
-            'search_results'       => false
+          'property_term_single' => 'false',
+          'property_single'      => 'false',
+          'search_results'       => 'false'
         ));
 
         ob_start();
@@ -140,6 +140,13 @@ namespace UsabilityDynamics\WPP {
                   if ( !empty( $this->preloaded_layouts['single-property-term'] ) && is_array( $this->preloaded_layouts['single-property-term'] ) ) {
                 ?>
                   <ul class="layouts-list">
+                    <li>
+                      <label class="<?php echo $layouts_settings['property_term_single'] == 'false' ? 'checked' : ''; ?>">
+                        <h5><?php _e( 'Default', ud_get_wp_property()->domain ); ?></h5>
+                        <img width="150" height="150" src="//placehold.it/150?text=Default" alt="Default" />
+                        <input <?php checked( 'false', $layouts_settings['property_term_single'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][property_term_single]" value="false">
+                      </label>
+                    </li>
                 <?php
                   foreach( $this->preloaded_layouts['single-property-term'] as $layout ) {
                 ?>
@@ -169,6 +176,13 @@ namespace UsabilityDynamics\WPP {
                 if ( !empty( $this->preloaded_layouts['single-property'] ) && is_array( $this->preloaded_layouts['single-property'] ) ) {
                   ?>
                   <ul class="layouts-list">
+                    <li>
+                      <label class="<?php echo $layouts_settings['property_single'] == 'false' ? 'checked' : ''; ?>">
+                        <h5><?php _e( 'Default', ud_get_wp_property()->domain ); ?></h5>
+                        <img width="150" height="150" src="//placehold.it/150?text=Default" alt="Default" />
+                        <input <?php checked( 'false', $layouts_settings['property_single'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][property_single]" value="false">
+                      </label>
+                    </li>
                     <?php
                     foreach( $this->preloaded_layouts['single-property'] as $layout ) {
                       ?>
@@ -198,6 +212,13 @@ namespace UsabilityDynamics\WPP {
                 if ( !empty( $this->preloaded_layouts['search-results'] ) && is_array( $this->preloaded_layouts['search-results'] ) ) {
                   ?>
                   <ul class="layouts-list">
+                    <li>
+                      <label class="<?php echo $layouts_settings['search_results'] == 'false' ? 'checked' : ''; ?>">
+                        <h5><?php _e( 'Default', ud_get_wp_property()->domain ); ?></h5>
+                        <img width="150" height="150" src="//placehold.it/150?text=Default" alt="Default" />
+                        <input <?php checked( 'false', $layouts_settings['search_results'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][search_results]" value="false">
+                      </label>
+                    </li>
                     <?php
                     foreach( $this->preloaded_layouts['search-results'] as $layout ) {
                       ?>
