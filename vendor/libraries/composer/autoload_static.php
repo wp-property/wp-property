@@ -221,6 +221,8 @@ class ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece
         'UsabilityDynamics\\WPP\\Dashboard_Widget' => __DIR__ . '/../../..' . '/lib/classes/class-dashboard-widget.php',
         'UsabilityDynamics\\WPP\\Export' => __DIR__ . '/../../..' . '/lib/classes/class-export.php',
         'UsabilityDynamics\\WPP\\Layouts' => __DIR__ . '/../../..' . '/lib/classes/class-layouts.php',
+        'UsabilityDynamics\\WPP\\Layouts_API_Client' => __DIR__ . '/../../..' . '/lib/classes/class-layouts-api-client.php',
+        'UsabilityDynamics\\WPP\\Layouts_Settings' => __DIR__ . '/../../..' . '/lib/classes/class-layouts-settings.php',
         'UsabilityDynamics\\WPP\\List_Table' => __DIR__ . '/../../..' . '/lib/classes/class-list-table.php',
         'UsabilityDynamics\\WPP\\Meta_Box' => __DIR__ . '/../../..' . '/lib/classes/class-meta-box.php',
         'UsabilityDynamics\\WPP\\Panels_Css_Builder' => __DIR__ . '/../../..' . '/lib/classes/class-layouts.php',
