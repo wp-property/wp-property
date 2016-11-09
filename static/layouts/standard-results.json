@@ -11,11 +11,6 @@
         "area": "",
         "my_new_attribute": ""
       },
-      "attributes": {
-        "phone_number": "",
-        "display_address": "",
-        "price": "",
-      },
       "show_children": "true",
       "child_properties_title": "At location:",
       "fancybox_preview": "true",

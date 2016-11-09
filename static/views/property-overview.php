@@ -60,21 +60,17 @@
               </li>
             <?php endif; ?>
 
+            <?php if( !empty( $property['phone_number'] ) ): ?>
+                <li class="property_phone_number"><?php echo $property['phone_number']; ?></li>
+            <?php endif; ?>
 
-            <?php 
-            if( is_array($wpp_query[ 'attributes' ]) ){
-                foreach ($wpp_query[ 'attributes' ] as $attribute){
-                    if(!empty($property[$attribute])){
-                        $attribute_data = WPP_F::get_attribute_data($attribute);
-                        $data = $property[$attribute];
-                        if(is_array($data)){
-                            $data = implode( ', ', $data);
-                        }
-                        echo "<li class='property_attributes property_$attribute'><span class='title'>{$attribute_data['title']}:</span> {$property[$attribute]}</li>";
-                    }
-                }
-            }
-            ?>
+            <?php if( !empty( $property['display_address'] ) ): ?>
+                <li class="property_address"><a href="<?php echo $property['permalink']; ?>#property_map"><?php echo $property['display_address']; ?></a></li>
+            <?php endif; ?>
+
+            <?php if( !empty( $property['price'] ) ): ?>
+                <li class="property_price"><?php echo $property['price']; ?></li>
+            <?php endif; ?>
 
             <?php if( $show_children && !empty( $property['children'] ) ): ?>
             <li class="child_properties">

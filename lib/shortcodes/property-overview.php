@@ -237,13 +237,6 @@ namespace UsabilityDynamics\WPP {
                 ),
                 'default' => 'false'
               ),
-              'attributes' => array(
-                'name' => __( 'Attributes to display', ud_get_wp_property()->domain ),
-                'description' => __( 'The list of attributes which will not be shown.', ud_get_wp_property()->domain ),
-                'type' => 'multi_checkbox',
-                'options' => $custom_attributes,
-                'default' => array('phone_number', 'display_address', 'price'),
-              ),
             ),
             'description' => sprintf( __( 'Renders %s Attributes', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
             'group' => 'WP-Property'
@@ -302,9 +295,6 @@ namespace UsabilityDynamics\WPP {
         $wpp_query = array();
 
         $atts = wp_parse_args( $atts, array() );
-        if(isset($atts['attributes']) && !is_array($atts['attributes'])){
-          $atts['attributes'] = explode( ',', $atts['attributes'] );
-        }
 
         \WPP_F::force_script_inclusion( 'jquery-ui-widget' );
         \WPP_F::force_script_inclusion( 'jquery-ui-mouse' );
@@ -352,7 +342,6 @@ namespace UsabilityDynamics\WPP {
         $defaults[ 'stats' ] = '';
         $defaults[ 'class' ] = 'wpp_property_overview_shortcode';
         $defaults[ 'in_new_window' ] = false;
-        $defaults[ 'attributes' ] = array('phone_number', 'display_address', 'price');
 
         $defaults = apply_filters( 'shortcode_property_overview_allowed_args', $defaults, $atts );
 
@@ -541,7 +530,7 @@ namespace UsabilityDynamics\WPP {
         $show_children = $wpp_query[ 'show_children' ];
         $class = $wpp_query[ 'class' ];
         $stats = $wpp_query[ 'stats' ];
-        $in_new_window = ( $wpp_query[ 'in_new_window' ] == "true" ? " target=\"_blank\" " : "" );
+        $in_new_window = ( !empty( $wpp_query[ 'in_new_window' ] ) ? " target=\"_blank\" " : "" );
 
         //** Make query_vars available to emulate WP template loading */
         extract( $wp_query->query_vars, EXTR_SKIP );
