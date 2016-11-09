@@ -90,6 +90,38 @@ namespace UsabilityDynamics\WPP {
             }
           }
 
+          global $wp_query;
+
+          if ( !empty( $wp_query->wpp_search_page ) ) {
+
+            $layout_id = !empty($wp_properties['configuration']['layouts']['templates'])
+            && !empty($wp_properties['configuration']['layouts']['templates']['search_results'])
+                ?  $wp_properties['configuration']['layouts']['templates']['search_results'] : 'false';
+
+            if ( $layout_id != 'false' && !empty($available_layouts['search-results']) && !empty( $available_layouts['search-results'][$layout_id] ) ) {
+
+              if ( !empty( $available_layouts['search-results'][$layout_id]->layout) ) {
+
+                try {
+                  $layout = json_decode( base64_decode($available_layouts['search-results'][$layout_id]->layout), true );
+                } catch ( \Exception $e ) {
+                  echo $e->getMessage();
+                }
+
+                return array(
+                  /**
+                   * @todo option for php files
+                   */
+                  'templates' => array( 'onecolumn-page.php', 'no-sidebar.php', 'page.php', 'single.php', 'index.php' ),
+                  'layout_meta' => $layout
+                );
+
+              }
+
+            }
+
+          }
+
           return $false;
         });
       }
