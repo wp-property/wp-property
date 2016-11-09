@@ -40,9 +40,7 @@ namespace UsabilityDynamics\WPP {
           add_meta_box( 'wpp_property_children', sprintf( __( 'Child %s', ud_get_wp_property('domain') ), \WPP_F::property_label( 'plural' ) ), array( $this, 'render_child_properties_meta_box' ), 'property', 'advanced', 'high' );
         }
 
-        // This is removed due to the new Layout system.
-        // add_meta_box( 'wpp_property_template', __( 'Template', ud_get_wp_property('domain') ), array( $this, 'render_template_meta_box' ), 'property', 'side', 'default' );
-
+        add_meta_box( 'wpp_property_template', __( 'Template', ud_get_wp_property('domain') ), array( $this, 'render_template_meta_box' ), 'property', 'side', 'default' );
       }
 
       /**
@@ -118,8 +116,7 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * Register all meta boxes here.
-       * @param $meta_boxes
-       * @return array
+       *
        */
       public function register_meta_boxes( $meta_boxes ) {
         $_meta_boxes = array();
@@ -147,15 +144,14 @@ namespace UsabilityDynamics\WPP {
 
         /* Register 'General Information' metabox for Edit Property page */
         $meta_box = $this->get_property_meta_box( array(
-          'name' => __( 'General', ud_get_wp_property()->domain )
-          //'id' => 'general'
+          'name' => __( 'General', ud_get_wp_property()->domain ),
         ), $post );
 
         $groups = ud_get_wp_property( 'property_groups', array() );
         $property_stats_groups = ud_get_wp_property( 'property_stats_groups', array() );
 
         if( $meta_box ) {
-          $_meta_boxes[ ] = $meta_box;
+          $_meta_boxes[] = $meta_box;
         }
 
         /* Register Meta Box for every Attributes Group separately */
@@ -163,11 +159,11 @@ namespace UsabilityDynamics\WPP {
           foreach ( $groups as $slug => $group ) {
             $meta_box = $this->get_property_meta_box( array_filter( array_merge( $group, array( 'id' => $slug ) ) ), $post );
             if( $meta_box ) {
-              $_meta_boxes[ ] = $meta_box;
+              $_meta_boxes[] = $meta_box;
             }
           }
         }
-        //die( '<pre>' . print_r( $_meta_boxes, true ) . '</pre>' );
+
         /**
          * Allow to customize our meta boxes via external add-ons ( modules, or whatever else ).
          */
@@ -184,19 +180,13 @@ namespace UsabilityDynamics\WPP {
           }
         }
 
-        //die(json_encode($_meta_boxes));
-
-
         /**
          *  Probably convert Meta Boxes to single one with tabs
          */
         $_meta_boxes = $this->maybe_convert_to_tabs( $_meta_boxes );
-
         if( is_array( $meta_boxes ) ) {
           $meta_boxes = $meta_boxes + $_meta_boxes;
         }
-
-        //die(json_encode($_meta_boxes));
 
         return $meta_boxes;
       }
@@ -257,16 +247,12 @@ namespace UsabilityDynamics\WPP {
        *
        * @since 2.0
        * @author peshkov@UD
-       * @param array $group
-       * @param bool $post
-       * @return mixed|void
        */
       public function get_property_meta_box( $group = array(), $post = false ) {
 
         $group = wp_parse_args( $group, array(
-          'id' => '_general',
+          'id' => false,
           'name' => __( 'NO NAME', ud_get_wp_property()->domain ),
-          //'order' => null
         ) );
 
         $fields = array();
@@ -293,54 +279,37 @@ namespace UsabilityDynamics\WPP {
          * If group ID is not defined, it means that we're registering main Meta Box
          * So, here, we're adding custom fields for management!
          */
-        if( $group['id'] === '_general' ) {
+        if( $group['id'] == false ) {
           /* May be add Property Parent field - 'Falls Under' */
-
-          if( $falls_under_field = $this->get_parent_property_field( $post ) ) {
-          //  $fields[] = $falls_under_field;
-          }
-
-          // Disable legacy way of forcing property_type field into field list
-          if( !array_key_exists( 'property_type', $attributes ) && $this->get_property_type_field( $post ) ) {
-            // $fields[] = $this->get_property_type_field( $post );
-          }
-
-          /* May be add Meta fields */
-        }
-
-        foreach( ud_get_wp_property()->get( 'property_meta', array() ) as $slug => $label ) {
-
-          // not in group
-          if( empty( $property_stats_groups[ $slug ] ) || $group['id'] !== $property_stats_groups[ $slug ]  ) {
-            continue;
-          }
-
-          $field = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
-            'id' => $slug,
-            'name' => $label,
-            'type' => 'textarea',
-            'desc' => __( 'Meta description.', ud_get_wp_property()->domain ),
-            'group' => '_content',
-            //'order' => 100
-          ) ), $slug, $post );
-
-          //$field['order'] = $group['order'] ? $group['order'] : 100;
-
+          $field = $this->get_parent_property_field( $post );
           if( $field ) {
             $fields[] = $field;
           }
-
+          /* May be add Property Type field. */
+          if( !array_key_exists( 'property_type', $attributes ) ) {
+            $field = $this->get_property_type_field( $post );
+            if( $field ) {
+              $fields[] = $field;
+            }
+          }
+          /* May be add Meta fields */
+          foreach( ud_get_wp_property()->get( 'property_meta', array() ) as $slug => $label ) {
+            $field = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
+              'id' => $slug,
+              'name' => $label,
+              'type' => 'textarea',
+              'desc' => __( 'Meta description.', ud_get_wp_property()->domain ),
+            ) ), $slug, $post );
+            if( $field ) {
+              $fields[] = $field;
+            }
+          }
         }
-
 
         /**
          * Loop through all available attributes and determine if any of them must be added to current meta box.
          */
-
-        $_attribute_order = 0;
         foreach ( $attributes as $slug => $label ) {
-
-          $_attribute_order++;
 
           /**
            * Determine if we should add attribute's field in this meta box
@@ -378,10 +347,9 @@ namespace UsabilityDynamics\WPP {
 
           //* HACK. If property_type is set as attribute, we register it here. */
           if( $slug == 'property_type' ) {
-            $_property_type_field = $this->get_property_type_field( $post );
-
-            if( $_property_type_field ) {
-              // $fields[] = $_property_type_field;
+            $field = $this->get_property_type_field( $post );
+            if( $field ) {
+              $fields[] = $field;
             }
             continue;
           }
@@ -505,14 +473,12 @@ namespace UsabilityDynamics\WPP {
             'original_type' => $original_type,
             'desc' => implode( ' ', (array) $description ),
             'options' => $options,
-            'order' => $_attribute_order * 10,
           ) ), $slug, $post );
 
         }
 
         $meta_box = apply_filters( 'wpp::rwmb_meta_box', array(
           'id'       => !empty( $group['id'] ) ? $group['id'] : '_general',
-          //'order'    => $group['order'] ? $group['order'] : null,
           'title'    => $group['name'],
           'pages'    => array( 'property' ),
           'context'  => 'normal',
@@ -533,7 +499,6 @@ namespace UsabilityDynamics\WPP {
           'id' => 'parent_id',
           'type' => 'wpp_parent',
           'options' => admin_url( 'admin-ajax.php?action=wpp_autocomplete_property_parent' ),
-          //'order' => 10
         );
 
         return $field;
@@ -547,30 +512,24 @@ namespace UsabilityDynamics\WPP {
 
         $types = ud_get_wp_property( 'property_types', array() );
 
-        $types = apply_filters( 'wpp::property_types', $types );
-
         if( empty( $types ) ) {
           return false;
         }
 
         if( count( $types ) > 1 ) {
           $types = array_merge( array( '' => __( 'No Selected', ud_get_wp_property()->domain ) ), $types );
-
           $field = array(
             'id' => 'property_type',
             'name' => sprintf( __( '%s Type', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
             // 'desc' => sprintf( __( '%s Attributes are related to Property Type. They can be aggregated, inherited or hidden after updating the current type.', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
             'type' => 'select',
             'options' => $types,
-            //'order' => 20
           );
-
         } else {
           $field = array(
             'id' => 'property_type',
             'type' => 'hidden',
             'std' => key($types),
-            //'order' => 20
           );
         }
 
