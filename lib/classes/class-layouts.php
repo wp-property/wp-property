@@ -81,7 +81,7 @@ namespace UsabilityDynamics\WPP {
                   /**
                    * @todo option for php files
                    */
-                    'templates' => array( 'single.php' ),
+                    'templates' => array( 'onecolumn-page.php', 'no-sidebar.php', 'page.php', 'single.php', 'index.php' ),
                     'layout_meta' => $layout
                 );
 
