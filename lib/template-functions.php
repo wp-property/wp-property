@@ -158,7 +158,7 @@ if ( !function_exists( 'property_overview_image' ) ) {
       ?>
       <div class="property_image">
         <a href="<?php echo $thumbnail_link; ?>" title="<?php echo $property[ 'post_title' ] . ( !empty( $property[ 'parent_title' ] ) ? __( ' of ', ud_get_wp_property()->domain ) . $property[ 'parent_title' ] : "" ); ?>" class="property_overview_thumb property_overview_thumb_<?php echo $thumbnail_size; ?> <?php echo $link_class; ?> thumbnail" rel="<?php echo $property[ 'post_name' ] ?>">
-          <img width="<?php echo $image[ 'width' ]; ?>" height="<?php echo $image[ 'height' ]; ?>" src="<?php echo $image[ 'link' ]; ?>" alt="<?php echo $property[ 'post_title' ]; ?>" style="width:<?php echo $image[ 'width' ]; ?>px;height:<?php echo $image[ 'height' ]; ?>px;"/>
+          <img width="<?php echo $image[ 'width' ]; ?>" height="<?php echo $image[ 'height' ]; ?>" src="<?php echo $image[ 'link' ]; ?>" alt="<?php echo $property[ 'post_title' ]; ?>" style="width:<?php echo $image[ 'width' ]; ?>px;height:auto;"/>
         </a>
       </div>
       <?php

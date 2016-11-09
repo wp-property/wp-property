@@ -116,8 +116,11 @@ class WPP_Core {
 
     // Generate new secret token.
     add_site_option( 'ud_site_secret_token', $ud_site_secret_token = md5( wp_generate_password( 20 ) ) );
-
-    $site_url = get_site_url();
+    if(is_multisite()){
+      $site_url = network_site_url();
+    } else{
+      $site_url = get_site_url();
+    }
     $ud_site_id = get_site_option( 'ud_site_id' );
 
     $url = 'https://api.usabilitydynamics.com/product/v1/site/register';
@@ -356,6 +359,7 @@ class WPP_Core {
 
     // wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox.2.1.5/jquery.fancybox.pack.js', array( 'jquery', 'wpp-localization' ), '2.1.5' );
     wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
+    wp_register_script( 'wpp-jquery-swiper', WPP_URL . 'scripts/swiper.jquery.min.js', array( 'jquery' ), '1.7.3' );
 
     wp_register_script( 'wpp-jquery-colorpicker', WPP_URL . 'scripts/colorpicker/colorpicker.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-easing', WPP_URL . 'scripts/fancybox/jquery.easing-1.3.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
@@ -410,6 +414,7 @@ class WPP_Core {
 
 
     wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.css' );
+    wp_register_style( 'wpp-jquery-swiper', WPP_URL . 'styles/swiper.min.css' );
     wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'scripts/colorpicker/colorpicker.css' );
     wp_register_style( 'jquery-ui', WPP_URL . 'styles/wpp.admin.jquery.ui.css' );
     wp_register_style( 'wpp-jquery-ui-dialog', WPP_URL . 'styles/jquery-ui-dialog.min.css' );
@@ -454,7 +459,7 @@ class WPP_Core {
     } elseif( file_exists( TEMPLATEPATH . '/wp_properties.js' ) ) {
       wp_register_script( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp-localization' ), WPP_Version, true );
     } else {
-      wp_register_script( 'wp-property-frontend', WPP_URL . 'scripts/wp_properties.js', array( 'jquery-ui-core', 'wpp-localization' ), WPP_Version, true );
+      wp_register_script( 'wp-property-frontend', WPP_URL . 'scripts/wp_properties.js', array( 'jquery-ui-core', 'wpp-localization', 'wpp-jquery-swiper' ), WPP_Version, true );
     }
 
     //** Add troubleshoot log page */
