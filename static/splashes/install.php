@@ -53,6 +53,20 @@ if(!isset($wp_properties['configuration']["show_assistant"])){
 else{
     $freshInstallation = 'no';
 }
+
+// add default features and taxanomies. 
+//being added here instead of "save_setup_settings" to keep setup speed for ajax under check
+if(taxonomy_exists('property_feature') ){
+  wp_insert_term(__('Cable Prewire'),'property_feature',array('slug' => 'cable_prewire'));
+  wp_insert_term(__('Cathedral Ceiling'),'property_feature',array('slug' => 'cathedral_ceiling'));
+  wp_insert_term(__('Disability Equipped'),'property_feature',array('slug' => 'disability_equipped'));
+}
+if(taxonomy_exists('community_feature') ){
+  wp_insert_term(__('Dishwasher'),'community_feature',array('slug' => 'dishwasher'));
+  wp_insert_term(__('Double Oven'),'community_feature',array('slug' => 'double_oven'));
+  wp_insert_term(__('Central Vacuum'),'community_feature',array('slug' => 'central_vacuum'));
+}
+
 $wp_properties["properties_page_error"] = __('Please enter Properties Page name', ud_get_wp_property()->domain);
 $wp_properties["no_link_available"] = __('Necessary data missing.Please check all values.', ud_get_wp_property()->domain);
 $property_assistant = json_encode($wp_properties);
@@ -184,6 +198,8 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
             <?php echo WPP_F::input( "name=wpp_settings[configuration][google_maps_api]", ud_get_wp_property( 'configuration.google_maps_api' ) ); ?>
             <br/>
             <span class="description"><?php printf( __( 'Note, Google Maps has its own limit of usage. You can provide Google Maps API license ( key ) above to increase limit. See more details %shere%s.', ud_get_wp_property('domain') ), '<a href="https://developers.google.com/maps/documentation/javascript/usage#usage_limits" target="_blank">', '</a>' ); ?></span>
+            <br/>
+            <span class="description"><?php printf( __( '%s Where can I get the key ? %s.', ud_get_wp_property('domain') ), '<a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">', '</a>' ); ?></span>
             
           </div>
         </div>

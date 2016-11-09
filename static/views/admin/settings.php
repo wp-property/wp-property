@@ -220,6 +220,8 @@ if ( get_option( 'permalink_structure' ) == '' ) {
           <li class="google-maps-api-section" data-feature-since="2.0.3">
             <?php printf(__( 'Google Maps API (optional):', ud_get_wp_property('domain') ) ); ?> <?php echo WPP_F::input( "name=wpp_settings[configuration][google_maps_api]", ud_get_wp_property( 'configuration.google_maps_api' ) ); ?>
             <br/><span class="description"><?php printf( __( 'Note, Google Maps has its own limit of usage. You can provide Google Maps API license ( key ) above to increase limit. See more details %shere%s.', ud_get_wp_property('domain') ), '<a href="https://developers.google.com/maps/documentation/javascript/usage#usage_limits" target="_blank">', '</a>' ); ?></span>
+            <br/><span class="description"><?php printf( __( '%s Where can I get the key ? %s.', ud_get_wp_property('domain') ), '<a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">', '</a>' ); ?></span>
+
           </li>
         </ul>
       </td>

@@ -2426,6 +2426,8 @@ class WPP_F extends UsabilityDynamics\Utility {
         'year_built' => '2001',
         'living_space' => "1000",
         'total_rooms' => '6',
+        'property_feature'=>'cable_prewire',
+        'community_feature'=>'dishwasher',
         'phone_number' => '8002700781',
         'img_index' => '1',
       ) );
@@ -2446,7 +2448,9 @@ Ample off-street parking ",
         'price' => '215000',
         'bedrooms' => '5',
         'bathrooms' => '4',
-          'fees' => '200',
+        'fees' => '200',
+        'property_feature'=>'cable_prewire',
+        'community_feature'=>'dishwasher',
         'year_built' => '2002',
         'living_space' => "2000",
         'total_rooms' => '8',
@@ -2468,6 +2472,8 @@ Ample off-street parking ",
         'bedrooms' => '8',
         'featured'=>'true',
         'fees' => '300',
+        'property_feature'=>'cathedral_ceiling',
+        'community_feature'=>'double_oven',
         'year_built' => '2003',
         'living_space' => "3000",
         'total_rooms' => '11',          
@@ -2491,6 +2497,8 @@ Ample off-street parking ",
         'fees' => '400',
         'year_built' => '2004',
         'living_space' => "4000",
+        'property_feature'=>'cathedral_ceiling',
+        'community_feature'=>'double_oven',
         'total_rooms' => '10',
         'bathrooms' => '8',
         'property_type'=>$default_prop,
@@ -2510,6 +2518,8 @@ Ample off-street parking ",
         'price' => '876000',
         'bedrooms' => '5',
         'featured'=>'true',
+        'property_feature'=>'disability_equipped',
+        'community_feature'=>'central_vacuum',
         'fees' => '500',
         'year_built' => '2005',
         'living_space' => "5000",
@@ -2601,6 +2611,9 @@ Ample off-street parking ",
     if( !empty( $wp_properties[ 'property_stats' ][ 'living_space' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'living_space' ] ) ) {
       update_post_meta( $insert_id, 'living_space', $data[ 'living_space' ] );
     }
+    
+    wp_set_post_terms( $insert_id, $data[ 'property_feature' ] , 'property_feature' );
+    wp_set_post_terms( $insert_id, $data[ 'community_feature' ] , 'community_feature' );
 
     update_post_meta( $insert_id, 'dummy_property', true );
 
