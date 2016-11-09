@@ -187,7 +187,7 @@ namespace UsabilityDynamics\WPP {
                 'options' => array(
                   'slider' => __( 'slider', ud_get_wp_property()->domain ),
                   'numeric'  => __( 'numeric', ud_get_wp_property()->domain ),
-                  'loadmore'  => __( 'loadmore', ud_get_wp_property()->domain )
+                  'loadmore'  => __( 'load more', ud_get_wp_property()->domain )
                 ),
                 'default' => ud_get_wp_property( 'configuration.property_overview.pagination_type' ) ? ud_get_wp_property( 'configuration.property_overview.pagination_type' ) : 'loadmore',
               ),

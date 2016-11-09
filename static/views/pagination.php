@@ -44,7 +44,6 @@
 
   <?php /* Render Pagination Template based on pagination type */
   if ( !empty( $use_pagination ) ) {
-    print_r($settings[ 'type' ]);
     $template = self::get_pagination_template_based_on_type( $settings[ 'type' ] );
     if( file_exists( $template ) ) {
       include( $template );
