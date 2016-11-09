@@ -27,6 +27,9 @@ namespace UsabilityDynamics\WPP {
 
           $available_layouts = get_option( 'wpp_available_layouts', false );
 
+          /**
+           * For property taxonomies
+           */
           if ( is_tax() && in_array( 'property', get_taxonomy( get_queried_object()->taxonomy )->object_type ) ) {
             $layout_id = !empty($wp_properties['configuration']['layouts']['templates'])
                 && !empty($wp_properties['configuration']['layouts']['templates']['property_term_single'])
@@ -42,15 +45,47 @@ namespace UsabilityDynamics\WPP {
                   echo $e->getMessage();
                 }
 
+                return array(
+                  /**
+                   * @todo option for php files
+                   */
+                  'templates' => array( 'onecolumn-page.php', 'no-sidebar.php', 'page.php', 'single.php', 'index.php' ),
+                  'layout_meta' => $layout
+                );
+
               }
 
-              return array(
-                /**
-                 * @todo option for php files
-                 */
-                'templates' => array( 'page.php', 'single.php' ),
-                'layout_meta' => $layout
-              );
+            }
+          }
+
+          /**
+           * For single property
+           */
+          if ( is_singular( 'property' ) ) {
+
+            $layout_id = !empty($wp_properties['configuration']['layouts']['templates'])
+            && !empty($wp_properties['configuration']['layouts']['templates']['property_single'])
+                ?  $wp_properties['configuration']['layouts']['templates']['property_single'] : 'false';
+
+            if ( $layout_id != 'false' && !empty($available_layouts['single-property']) && !empty( $available_layouts['single-property'][$layout_id] ) ) {
+
+              if ( !empty( $available_layouts['single-property'][$layout_id]->layout) ) {
+
+                try {
+                  $layout = json_decode( base64_decode($available_layouts['single-property'][$layout_id]->layout), true );
+                } catch ( \Exception $e ) {
+                  echo $e->getMessage();
+                }
+
+                return array(
+                  /**
+                   * @todo option for php files
+                   */
+                    'templates' => array( 'single.php' ),
+                    'layout_meta' => $layout
+                );
+
+              }
 
             }
           }
@@ -92,7 +127,7 @@ namespace UsabilityDynamics\WPP {
         $render = apply_filters('wpp::layouts::configuration', false);
 
         if ($render && !empty($wp_query->post)) {
-          $wp_query->post->ID = !empty( $render['layout_id'] ) ? $render['layout_id'] : '0';
+          $wp_query->post->ID = !empty( $render['layout_id'] ) ? $render['layout_id'] : $wp_query->post->ID;
         }
 
         if (count($wp_query->posts) > 1) {
@@ -147,15 +182,11 @@ namespace UsabilityDynamics\WPP {
         $_layout_config = apply_filters('wpp::layouts::layout_override', false, $render, $post);
 
         if ( !empty( $render['layout_id'] ) ) {
-          return function_exists('siteorigin_panels_render') ?
-              siteorigin_panels_render($render['layout_id'], true, $_layout_config) :
-              $this->standard_render($render['layout_id'], $_layout_config);
+          return $this->standard_render($render['layout_id'], $_layout_config);
         }
 
         if ( !empty( $render['layout_meta'] ) ) {
-          return function_exists('siteorigin_panels_render') ?
-              siteorigin_panels_render($post->ID, true, $render['layout_meta']) :
-              $this->standard_render($post->ID, $render['layout_meta']);
+          return $this->standard_render($post->ID, $render['layout_meta']);
         }
 
         return $data;
