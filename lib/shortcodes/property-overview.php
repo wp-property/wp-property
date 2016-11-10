@@ -601,7 +601,6 @@ namespace UsabilityDynamics\WPP {
             'sorter_type' => $wpp_query['sorter_type'],
             'hide_count' => $wpp_query['hide_count'],
             'sort_by_text' => $wpp_query['sort_by_text'],
-            'javascript' => false
           ));
         }
 
