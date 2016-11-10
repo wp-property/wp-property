@@ -21,16 +21,18 @@ namespace UsabilityDynamics\WPP {
       /**
        * @var array
        */
-      private $headers = array(
-        'ud-site-id' => 'test',
-        'ud-site-secret-token' => 'test'
-      );
+      private $headers = array();
 
       /**
        * Layouts_API_Client constructor.
        * @param array $options
        */
       public function __construct( $options = array() ) {
+
+        $this->headers = array(
+          'ud-site-id' => get_site_option('ud_site_id'),
+          'ud-site-secret-token' => get_site_option('ud_site_secret_token')
+        );
 
         $this->options = wp_parse_args( $options, array(
           'url' => false

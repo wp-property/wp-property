@@ -70,7 +70,8 @@ namespace UsabilityDynamics\WPP {
           'footer.php',
           'functions.php',
           'header.php',
-          'search.php'
+          'search.php',
+          'searchform.php'
         );
 
         foreach( $unwanted as $file ) {
@@ -167,7 +168,7 @@ namespace UsabilityDynamics\WPP {
             'search_results'       => 'page.php'
         ));
 
-        $template_files = apply_filters( 'wpp::layouts::template_files', wp_get_theme()->get_files( 'php', 1 ) );
+        $template_files = apply_filters( 'wpp::layouts::template_files', wp_get_theme()->get_files( 'php', 0 ) );
 
         ob_start();
 
