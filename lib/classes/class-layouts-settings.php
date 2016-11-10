@@ -49,6 +49,41 @@ namespace UsabilityDynamics\WPP {
          * Add settings page
          */
         add_action( 'wpp_settings_content_layouts', array( $this, 'settings_page' ) );
+
+        /**
+         *
+         */
+        add_filter( 'wpp::layouts::template_files', array( $this, 'filter_template_files' ) );
+      }
+
+      /**
+       * @param $files
+       * @return mixed
+       */
+      public function filter_template_files( $files ) {
+
+        $unwanted = array(
+          '404.php',
+          'author.php',
+          'sidebar.php',
+          'comments.php',
+          'footer.php',
+          'functions.php',
+          'header.php',
+          'search.php'
+        );
+
+        foreach( $unwanted as $file ) {
+          unset( $files[$file] );
+        }
+
+        foreach( $files as $file => $path ) {
+          if( preg_match( "/sidebar/", $file ) ) {
+            unset( $files[$file] );
+          }
+        }
+
+        return $files;
       }
 
       /**
@@ -121,10 +156,18 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties;
 
         $layouts_settings = wp_parse_args( !empty( $wp_properties['configuration']['layouts']['templates'] ) ? $wp_properties['configuration']['layouts']['templates'] : array() , array(
-          'property_term_single' => 'false',
-          'property_single'      => 'false',
-          'search_results'       => 'false'
+            'property_term_single' => 'false',
+            'property_single'      => 'false',
+            'search_results'       => 'false'
         ));
+
+        $layouts_template_files = wp_parse_args( !empty( $wp_properties['configuration']['layouts']['files'] ) ? $wp_properties['configuration']['layouts']['files'] : array() , array(
+            'property_term_single' => 'page.php',
+            'property_single'      => 'single.php',
+            'search_results'       => 'page.php'
+        ));
+
+        $template_files = apply_filters( 'wpp::layouts::template_files', wp_get_theme()->get_files( 'php', 1 ) );
 
         ob_start();
 
@@ -134,7 +177,16 @@ namespace UsabilityDynamics\WPP {
           <tbody>
 
             <tr id="property-term-single">
-              <th><?php _e( 'Property Term Single', ud_get_wp_property()->domain ); ?></th>
+              <th>
+                <?php _e( 'Property Term Single', ud_get_wp_property()->domain ); ?>
+                <br /><br /><br />
+                <select style="font-weight: normal" name="wpp_settings[configuration][layouts][files][property_term_single]">
+                  <?php foreach( $template_files as $file => $file_path ): ?>
+                    <option <?php selected( $layouts_template_files['property_term_single'], $file ); ?> value="<?php echo $file; ?>"><?php echo $file; ?></option>
+                  <?php endforeach; ?>
+                </select>
+                <small style="font-weight: normal"><?php _e( 'Applies only when layout is selected', ud_get_wp_property()->domain ); ?></small>
+              </th>
               <td>
                 <?php
                   if ( !empty( $this->preloaded_layouts['single-property-term'] ) && is_array( $this->preloaded_layouts['single-property-term'] ) ) {
@@ -170,7 +222,16 @@ namespace UsabilityDynamics\WPP {
             </tr>
 
             <tr id="property-single">
-              <th><?php _e( 'Property Single', ud_get_wp_property()->domain ); ?></th>
+              <th>
+                <?php _e( 'Property Single', ud_get_wp_property()->domain ); ?>
+                <br /><br /><br />
+                <select style="font-weight: normal" name="wpp_settings[configuration][layouts][files][property_single]">
+                  <?php foreach( $template_files as $file => $file_path ): ?>
+                    <option <?php selected( $layouts_template_files['property_single'], $file ); ?> value="<?php echo $file; ?>"><?php echo $file; ?></option>
+                  <?php endforeach; ?>
+                </select>
+                <small style="font-weight: normal"><?php _e( 'Applies only when layout is selected', ud_get_wp_property()->domain ); ?></small>
+              </th>
               <td>
                 <?php
                 if ( !empty( $this->preloaded_layouts['single-property'] ) && is_array( $this->preloaded_layouts['single-property'] ) ) {
@@ -206,7 +267,16 @@ namespace UsabilityDynamics\WPP {
             </tr>
 
             <tr id="search-results">
-              <th><?php _e( 'Search Results', ud_get_wp_property()->domain ); ?></th>
+              <th>
+                <?php _e( 'Search Results', ud_get_wp_property()->domain ); ?>
+                <br /><br /><br />
+                <select style="font-weight: normal" name="wpp_settings[configuration][layouts][files][search_results]">
+                  <?php foreach( $template_files as $file => $file_path ): ?>
+                    <option <?php selected( $layouts_template_files['search_results'], $file ); ?> value="<?php echo $file; ?>"><?php echo $file; ?></option>
+                  <?php endforeach; ?>
+                </select>
+                <small style="font-weight: normal"><?php _e( 'Applies only when layout is selected', ud_get_wp_property()->domain ); ?></small>
+              </th>
               <td>
                 <?php
                 if ( !empty( $this->preloaded_layouts['search-results'] ) && is_array( $this->preloaded_layouts['search-results'] ) ) {

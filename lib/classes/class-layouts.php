@@ -45,11 +45,12 @@ namespace UsabilityDynamics\WPP {
                   echo $e->getMessage();
                 }
 
+                $template_file = !empty($wp_properties['configuration']['layouts']['files'])
+                && !empty($wp_properties['configuration']['layouts']['files']['property_term_single'])
+                    ?  $wp_properties['configuration']['layouts']['files']['property_term_single'] : 'index.php';
+
                 return array(
-                  /**
-                   * @todo option for php files
-                   */
-                  'templates' => array( 'onecolumn-page.php', 'no-sidebar.php', 'page.php', 'single.php', 'index.php' ),
+                  'templates' => array( $template_file, 'page.php', 'single.php', 'index.php' ),
                   'layout_meta' => $layout
                 );
 
@@ -77,12 +78,13 @@ namespace UsabilityDynamics\WPP {
                   echo $e->getMessage();
                 }
 
+                $template_file = !empty($wp_properties['configuration']['layouts']['files'])
+                && !empty($wp_properties['configuration']['layouts']['files']['property_single'])
+                    ?  $wp_properties['configuration']['layouts']['files']['property_single'] : 'index.php';
+
                 return array(
-                  /**
-                   * @todo option for php files
-                   */
-                    'templates' => array( 'onecolumn-page.php', 'no-sidebar.php', 'page.php', 'single.php', 'index.php' ),
-                    'layout_meta' => $layout
+                  'templates' => array( $template_file, 'page.php', 'single.php', 'index.php' ),
+                  'layout_meta' => $layout
                 );
 
               }
@@ -108,11 +110,12 @@ namespace UsabilityDynamics\WPP {
                   echo $e->getMessage();
                 }
 
+                $template_file = !empty($wp_properties['configuration']['layouts']['files'])
+                && !empty($wp_properties['configuration']['layouts']['files']['search_results'])
+                    ?  $wp_properties['configuration']['layouts']['files']['search_results'] : 'index.php';
+
                 return array(
-                  /**
-                   * @todo option for php files
-                   */
-                  'templates' => array( 'onecolumn-page.php', 'no-sidebar.php', 'page.php', 'single.php', 'index.php' ),
+                  'templates' => array( $template_file, 'page.php', 'single.php', 'index.php' ),
                   'layout_meta' => $layout
                 );
 
