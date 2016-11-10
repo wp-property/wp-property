@@ -1,20 +1,16 @@
 (function (jQuery, l10n) {
 
   jQuery(document).on('click', '.wpp_pagination_buttons_wrapper.pagination-loadmore button.wpp_loadmore_button', function () {
-    var offset = jQuery(this).attr('data-load');
-    var sort_type = jQuery(this).attr('data-sort');
+    var _data = jQuery(this).attr('data-button');
     jQuery.ajax({
       type: 'POST',
       url: wpp.instance.ajax_url,
       data: {
         action: 'ajax_load_more_properties',
-        data: {
-          post_count: offset,
-          sort_type: sort_type
-        }
+        data: _data
       },
       success: function (result) {
-        console.log(result);
+        jQuery('.wpp_row_view.wpp_property_view_result .all-properties').append(result);
       }
     })
   });

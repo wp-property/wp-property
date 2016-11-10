@@ -5212,19 +5212,97 @@ function wpp_settings_save_stripslashes($data)
  */
 function ajax_load_more_properties()
 {
-  $data = $_POST['data'];
+  try {
+    $data = json_decode(base64_decode($_POST['data']), 1);
+  } catch (Exception $e) {
+    echo $e->getMessage();
+  }
   $args = array(
     'post_type' => 'property',
     'posts_per_page' => 10,
     'offset' => $data['post_count'],
-    'order' => $data['sort_type']
+    'order' => $data['sort_order']
   );
   $loop = new WP_Query($args);
   if ($loop->have_posts()) :
     while ($loop->have_posts()) : $loop->the_post();
-    
+      $property = get_property(get_the_ID());
+      $thumbnail_dimentions = WPP_F::get_image_dimensions($data['thumbnail_size']);
+      $in_new_window = ($data['in_new_window'] == "true" ? " target=\"_blank\" " : "");
+      $child_properties_title = $data['child_properties_title'];
+      ?>
+    <div class="<?php wpp_css('property_overview::property_div', "property_div {$property['post_type']}"); ?>">
+
+      <div class="<?php wpp_css('property_overview::left_column', "wpp_overview_left_column"); ?>"
+           style="width:<?php echo $thumbnail_dimentions['width']; ?>px; ">
+        <?php property_overview_image(array('image_type' => $data['thumbnail_size'])); ?>
+      </div>
+
+    <div class="<?php wpp_css('property_overview::right_column', "wpp_overview_right_column"); ?>">
+
+      <ul class="<?php wpp_css('property_overview::data', "wpp_overview_data"); ?>">
+        <li class="property_title">
+          <a <?php echo $in_new_window; ?>
+            href="<?php echo $property['permalink']; ?>"><?php echo $property['post_title']; ?></a>
+          <?php if (!empty($property['is_child'])): ?>
+            <?php _e('of', ud_get_wp_property()->domain); ?> <a <?php echo $in_new_window; ?>
+              href='<?php echo $property['parent_link']; ?>'><?php echo $property['parent_title']; ?></a>
+          <?php endif; ?>
+        </li>
+
+        <?php if (!empty($property['custom_attribute_overview']) || !empty($property['tagline'])): ?>
+          <li class="property_tagline">
+            <?php if (isset($property['custom_attribute_overview']) && $property['custom_attribute_overview']): ?>
+              <?php echo $property['custom_attribute_overview']; ?>
+            <?php elseif ($property['tagline']): ?>
+              <?php echo $property['tagline']; ?>
+            <?php endif; ?>
+          </li>
+        <?php endif; ?>
+
+        <?php
+        if (is_array($data['attributes'])) {
+          foreach ($data['attributes'] as $attribute) {
+            if (!empty($property[$attribute])) {
+              $attribute_data = WPP_F::get_attribute_data($attribute);
+              $data = $property[$attribute];
+              if (is_array($data)) {
+                $data = implode(', ', $data);
+              }
+              echo "<li class='property_attributes property_$attribute'><span class='title'>{$attribute_data['title']}:</span> {$property[$attribute]}</li>";
+            }
+          }
+        }
+        ?>
+
+        <?php if (!empty($property['children'])): ?>
+          <li class="child_properties">
+            <div class="wpd_floorplans_title"><?php echo $child_properties_title; ?></div>
+            <table class="wpp_overview_child_properties_table">
+              <?php foreach ($property['children'] as $child): ?>
+                <tr class="property_child_row">
+                  <th class="property_child_title"><a
+                      href="<?php echo $child['permalink']; ?>"><?php echo $child['post_title']; ?></a></th>
+                  <td class="property_child_price"><?php echo isset($child['price']) ? $child['price'] : ''; ?></td>
+                </tr>
+              <?php endforeach; ?>
+            </table>
+          </li>
+        <?php endif; ?>
+
+        <?php if (!empty($wpp_query['detail_button'])) : ?>
+          <li><a <?php echo $in_new_window; ?> class="button"
+                                               href="<?php echo $property['permalink']; ?>"><?php echo $wpp_query['detail_button'] ?></a>
+          </li>
+        <?php endif; ?>
+      </ul>
+
+      </div><?php // .wpp_right_column ?>
+
+      </div><?php // .property_div
     endwhile;
   endif;
+  die();
 }
 
 add_action('wp_ajax_ajax_load_more_properties', 'ajax_load_more_properties');
