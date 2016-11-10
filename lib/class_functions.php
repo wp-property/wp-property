@@ -5223,6 +5223,7 @@ function ajax_load_more_properties()
     'offset' => $data['post_count'],
     'order' => $data['sort_order']
   );
+  print_r($data);
   $loop = new WP_Query($args);
   if ($loop->have_posts()) :
     while ($loop->have_posts()) : $loop->the_post();
