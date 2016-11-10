@@ -5212,5 +5212,20 @@ function wpp_settings_save_stripslashes($data)
  */
 function ajax_load_more_properties()
 {
-
+  $data = $_POST['data'];
+  $args = array(
+    'post_type' => 'property',
+    'posts_per_page' => 10,
+    'offset' => $data['post_count'],
+    'order' => $data['sort_type']
+  );
+  $loop = new WP_Query($args);
+  if ($loop->have_posts()) :
+    while ($loop->have_posts()) : $loop->the_post();
+    
+    endwhile;
+  endif;
 }
+
+add_action('wp_ajax_ajax_load_more_properties', 'ajax_load_more_properties');
+add_action('wp_ajax_nopriv_ajax_load_more_properties', 'ajax_load_more_properties');

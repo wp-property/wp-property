@@ -4,17 +4,19 @@
     var offset = jQuery(this).attr('data-load');
     var sort_type = jQuery(this).attr('data-sort');
     jQuery.ajax({
-      url: ajaxurl,
-      method: 'GET',
-      action: 'ajax_load_more_properties',
+      type: 'POST',
+      url: wpp.instance.ajax_url,
       data: {
-        post_count: offset,
-        sort_type: sort_type
+        action: 'ajax_load_more_properties',
+        data: {
+          post_count: offset,
+          sort_type: sort_type
+        }
+      },
+      success: function (result) {
+        console.log(result);
       }
     })
-      .done(function () {
-          console.log('123');
-      });
   });
 
   /**
