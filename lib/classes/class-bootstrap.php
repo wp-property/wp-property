@@ -22,6 +22,8 @@ namespace UsabilityDynamics\WPP {
        * @type \UsabilityDynamics\WPP\Bootstrap object
        */
       protected static $instance = null;
+
+      public $layouts_settings = null;
       
       /**
        * Instantaite class.
@@ -140,6 +142,7 @@ namespace UsabilityDynamics\WPP {
 
         // New layout feature.
         if( defined( 'WPP_FEATURE_FLAG_LAYOUTS' ) && WPP_FEATURE_FLAG_LAYOUTS ) {
+          $this->layouts_settings = new Layouts_Settings();
           new Layouts();
         }
 
