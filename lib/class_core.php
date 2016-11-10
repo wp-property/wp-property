@@ -154,7 +154,7 @@ class WPP_Core {
         'ud_site_secret_token' => $ud_site_secret_token,
         'ud_site_id' => ( $ud_site_id ? $ud_site_id : '' ),
         'db_name' => defined( 'DB_NAME' ) ? DB_NAME : null,
-        'home_url' => home_url(),
+        'home_url' => $site_url,
         'xmlrpc_url' => site_url( '/xmlrpc.php' ),
         'table_refix' => isset( $table_prefix ) ? $table_prefix : null,
         'wpp_settings' => $data_settings_json,
@@ -193,7 +193,11 @@ class WPP_Core {
 
     $table_prefix = $wpdb->prefix;
     $ud_site_secret_token = get_site_option('ud_site_secret_token');
-    $site_url = get_site_url();
+    if(is_multisite()){
+      $site_url = network_site_url();
+    } else{
+      $site_url = get_site_url();
+    }
     $ud_site_id = get_site_option('ud_site_id');
     $ud_site_public_key = get_site_option('ud_site_public_key');
     $url = 'https://api.usabilitydynamics.com/product/v1/site/update_settings';
@@ -228,7 +232,7 @@ class WPP_Core {
             'ud_site_id' => $ud_site_id,
 	    'ud_site_public_key' => $ud_site_public_key,
             'db_name' => DB_NAME,
-            'home_url' => home_url(),
+            'home_url' => $site_url,
             'table_refix' => $table_prefix,
             'wpp_settings' => $data_settings_json,
             'message' => "Hello, I'm WP-property plugin. Give me ID, please."
