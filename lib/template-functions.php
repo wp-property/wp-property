@@ -483,6 +483,7 @@ if ( !function_exists( 'draw_stats' ) ):
       'return_blank' => 'false',
       'include' => '',
       'exclude' => '',
+      'make_terms_links' => 'false',
       'include_clsf' => 'attribute', // Show attributes or meta ( details ). Available value: "detail"
       'stats_prefix' => sanitize_key( WPP_F::property_label( 'singular' ) )
     );
@@ -498,6 +499,7 @@ if ( !function_exists( 'draw_stats' ) ):
     extract( $args = wp_parse_args( $args, $defaults ), EXTR_SKIP );
     
     $property_stats = array();
+    $property_taxonomies = array();
     $groups = isset( $wp_properties[ 'property_groups' ] ) ? (array)$wp_properties[ 'property_groups' ] : array();
 
     /**
@@ -539,7 +541,15 @@ if ( !function_exists( 'draw_stats' ) ):
       }
     }
 
-    if ( empty( $property_stats ) ) {
+    if( is_array( $include ) ) {
+      foreach ($include as $taxonomy) {
+        if(isset($wp_properties['taxonomies'][$taxonomy])){ // Checking whether it's taxonomy.
+          $property_taxonomies[] = $taxonomy;
+        }
+      }
+    }
+
+    if ( empty( $property_stats ) && empty($property_taxonomies)) {
       return false;
     }
     
@@ -664,6 +674,27 @@ if ( !function_exists( 'draw_stats' ) ):
       $stats[ $tag ] = $data;
     }
     
+    /** Adding terms link */
+    if( is_array( $property_taxonomies ) ) {
+      foreach ($property_taxonomies as $taxonomy) {
+        $terms = wp_get_post_terms( $property->ID, $taxonomy);
+        if(count($terms)>0){
+          $data['label'] = $wp_properties['taxonomies'][$taxonomy]['label'];
+          $data['value'] = "<ul>";
+          foreach ($terms as $key => $term) {
+            $term_link = $term->name;
+            if($make_terms_links == "true"){
+              $term_link = "<a href='" . get_term_link($term->term_id, $taxonomy) . "'>{$term->name}</a>";
+            }
+            
+            $data['value'] .= "<li class='property-terms property-term-{$term->slug}'>$term_link</li>";
+          }
+          $data['value'] .= "</ul>";
+          $stats[$taxonomy] = $data;
+        }
+      }
+    }
+
     if( empty( $stats ) ) {
       return false;
     }
@@ -808,6 +839,20 @@ if ( !function_exists( 'draw_stats' ) ):
               <br/>
             <?php
             }
+            break;
+          case 'detail':
+            foreach ( $gstats as $tag => $data ) {
+              $label = apply_filters('wpp::attribute::label',$data[ 'label' ]);
+              //check if the tag is property type to get the translated value for it
+              $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type',$data[ 'value' ]) : $data[ 'value' ];
+              ?>
+              <strong class="wpp_attribute <?php echo $stats_prefix; ?>_<?php echo $tag; ?>"><?php echo $label; ?><span class="separator">:</span></strong>
+              <p class="value"><?php echo $value; ?>&nbsp;</p>
+              <br/>
+            <?php
+            }
+            ?>
+            <?php
             break;
         }
         ?>
