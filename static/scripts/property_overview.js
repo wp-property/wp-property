@@ -3,7 +3,18 @@
   jQuery(document).on('click', '.wpp_pagination_buttons_wrapper.pagination-loadmore button.wpp_loadmore_button', function () {
     var offset = jQuery(this).attr('data-load');
     var sort_type = jQuery(this).attr('data-sort');
-    console.log('123');
+    jQuery.ajax({
+      url: ajaxurl,
+      method: 'GET',
+      action: 'ajax_load_more_properties',
+      data: {
+        post_count: offset,
+        sort_type: sort_type
+      }
+    })
+      .done(function () {
+          console.log('123');
+      });
   });
 
   /**
