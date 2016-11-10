@@ -167,7 +167,7 @@ namespace UsabilityDynamics\WPP {
             'search_results'       => 'page.php'
         ));
 
-        $template_files = apply_filters( 'wpp::layouts::template_files', wp_get_theme()->get_files( 'php', 1 ) );
+        $template_files = apply_filters( 'wpp::layouts::template_files', wp_get_theme()->get_files( 'php', 0 ) );
 
         ob_start();
 
