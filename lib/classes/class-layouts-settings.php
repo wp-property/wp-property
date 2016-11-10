@@ -70,7 +70,8 @@ namespace UsabilityDynamics\WPP {
           'footer.php',
           'functions.php',
           'header.php',
-          'search.php'
+          'search.php',
+          'searchform.php'
         );
 
         foreach( $unwanted as $file ) {
