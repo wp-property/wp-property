@@ -19,7 +19,7 @@ namespace UsabilityDynamics\WPP {
 
         $attributes = ud_get_wp_property( 'property_stats', array() );
 
-        $default_taxonomies = array('features', 'community_features', 'property_type', 'property_status', 'property_location');
+        $default_taxonomies = array('features', 'community_features', 'property_type', 'property_status', 'wpp_location');
 
         if(function_exists( 'ud_get_wpp_terms' )){
           foreach ( ud_get_wpp_terms('config.taxonomies') as $tax => $taxonomy) {

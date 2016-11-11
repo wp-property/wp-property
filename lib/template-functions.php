@@ -312,7 +312,24 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
         //** Determine if the current attribute is address and set it as display address */
         if ( $meta_key == $wp_properties[ 'configuration' ][ 'address_attribute' ] && !empty( $property[ 'display_address' ] ) ) {
           $attribute_value = $property[ 'display_address' ];
+          /*
+            Replace address with generated taxonomy links.
+            depend on add_display_address();
+          */
+          $address_format = $wp_properties[ 'configuration' ][ 'display_address_format' ];
+          preg_match_all('/\[(.*?)\]/', $address_format, $matches);
+          if(isset($matches[1]) && is_array($matches[1])){
+            foreach ($matches[1] as $value) {
+              if(!isset($property[$value]) || !$property[$value]) continue; 
+              if($term = get_term_by('name', $property[$value], 'wpp_location')){
+                $term_link = "<a href='" . get_term_link($term->term_id) . "'>{$term->name}</a>";
+                $address_format = str_replace("[$value]", $term_link, $address_format);
+              }
+            }
+            $attribute_value = $address_format;
+          }
         }
+        
         // No display formating is needed for wysiwyg because it's formatted.
         if($attribute_data['data_input_type'] == 'wysiwyg'){
           $attribute_value = do_shortcode( $attribute_value );
