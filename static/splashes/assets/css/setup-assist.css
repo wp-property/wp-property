@@ -417,20 +417,11 @@ li.checkbox-up [type="checkbox"] + span::before {
   appearance: none;
   height:100%;
 }
-.wpp-base-slug-new,.wpp_asst_google_api input{
+.wpp-base-slug-new{
   padding: 9px;
   display: none;
   margin-left: 10px;
   width: 250px;
-}
-.wpp_asst_google_api input{
-  margin: 10px;
-  font-style: italic;
-  display: block;
-}
-.wpp_asst_google_api .description{
-  margin-left: 10px;
-  display: block;
 }
 .wpp_asst_select select, .wpp_asst_select select option{outline:none;}
 .wpp_asst_select select:hover {
@@ -480,4 +471,19 @@ li.checkbox-up [type="checkbox"] + span::before {
   text-align: center;
   top: 50%;
   opacity : 0;
+}
+
+.wpp_asst_screen.wpp_map_api_screen  h2{
+  margin: 24px 0px 10px;
+}
+.wpp_asst_screen .wpp_map_api_screen  .description{
+  margin-left: 10px;
+  display: block;
+}
+.wpp_asst_google_api input{
+  margin: 20px 0px;
+  font-style: italic;
+  padding: 9px;
+  display: block;
+  width: 300px;
 }

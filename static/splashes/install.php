@@ -192,14 +192,14 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
         </div><!-- wpp_asst_screen wpp_asst_screen_4 --> 
       </div><!-- item --> 
       <div class="item">
-        <div class="wpp_asst_screen wpp_asst_screen_5">
-          <h2 class="wpp_asst_heading"><b><?php echo __('Google Maps API (optional)', ud_get_wp_property()->domain); ?></b></h2>  
+        <div class="wpp_asst_screen wpp_asst_screen_5 wpp_map_api_screen">
+          <h2 class="wpp_asst_heading"><b><?php echo __('Google Maps API ', ud_get_wp_property()->domain); ?></b></h2>  
+          <span class="description"><?php echo __( 'Google Maps requires API key to be shown on your single property pages.', ud_get_wp_property('domain')); ?> <?php printf( __( '%s Where can I get the key ? %s', ud_get_wp_property('domain') ), '<a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">( ', ' ) </a>' ); ?></span>
           <div class="wpp_asst_inner_wrap wpp_asst_google_api">
             <?php echo WPP_F::input( "name=wpp_settings[configuration][google_maps_api]", ud_get_wp_property( 'configuration.google_maps_api' ) ); ?>
+            
             <br/>
-            <span class="description"><?php printf( __( 'Note, Google Maps has its own limit of usage. You can provide Google Maps API license ( key ) above to increase limit. See more details %shere%s.', ud_get_wp_property('domain') ), '<a href="https://developers.google.com/maps/documentation/javascript/usage#usage_limits" target="_blank">', '</a>' ); ?></span>
-            <br/>
-            <span class="description"><?php printf( __( '%s Where can I get the key ? %s.', ud_get_wp_property('domain') ), '<a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">', '</a>' ); ?></span>
+            <span class="description"></span>
             
           </div>
         </div>

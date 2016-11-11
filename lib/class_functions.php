@@ -2680,48 +2680,50 @@ Ample off-street parking ",
       }
     }
 
-    if( !empty( $wp_properties[ 'property_stats' ][ 'tagline' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'tagline' ] ) ) {
+    if( !empty( $data[ 'tagline' ] ) ) {
       update_post_meta( $insert_id, 'tagline', $data[ 'tagline' ] );
     }
     
-    if( !empty( $wp_properties[ 'property_stats' ][ 'featured' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'featured' ] ) ) {
+    if( !empty( $data[ 'featured' ]) ) {
       update_post_meta( $insert_id, 'featured', $data[ 'featured' ] );
     }
     
-    if( !empty( $wp_properties[ 'property_stats' ][ 'price' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'price' ] ) ) {
+    if( !empty( $data[ 'price' ] ) ) {
       update_post_meta( $insert_id, 'price', $data[ 'price' ] );
     }
 
-    if( !empty( $wp_properties[ 'property_stats' ][ 'bedrooms' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'bedrooms' ] ) ) {
+    if( !empty( $data[ 'bedrooms' ] ) ) {
       update_post_meta( $insert_id, 'bedrooms', $data[ 'bedrooms' ] );
     }
 
-    if( !empty( $wp_properties[ 'property_stats' ][ 'bathrooms' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'bathrooms' ] ) ) {
+    if( !empty( $data[ 'bathrooms' ] ) ) {
       update_post_meta( $insert_id, 'bathrooms', $data[ 'bathrooms' ] );
     }
 
-    if( !empty( $wp_properties[ 'property_stats' ][ 'phone_number' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'phone_number' ] ) ) {
+    if( !empty( $data[ 'phone_number' ] ) ) {
       update_post_meta( $insert_id, 'phone_number', $data[ 'phone_number' ] );
     }
     
-    if( !empty( $wp_properties[ 'property_stats' ][ 'total_rooms' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'total_rooms' ] ) ) {
+    if( !empty($data[ 'total_rooms' ] ) ) {
       update_post_meta( $insert_id, 'total_rooms', $data[ 'total_rooms' ] );
     }
     
-    if( !empty( $wp_properties[ 'property_stats' ][ 'fees' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'fees' ] ) ) {
+    if( !empty( $data[ 'fees' ] ) ) {
       update_post_meta( $insert_id, 'fees', $data[ 'fees' ] );
     }
     
-    if( !empty( $wp_properties[ 'property_stats' ][ 'year_built' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'year_built' ] ) ) {
+    if( !empty( $data[ 'year_built' ] ) ) {
       update_post_meta( $insert_id, 'year_built', $data[ 'year_built' ] );
     }
     
-    if( !empty( $wp_properties[ 'property_stats' ][ 'living_space' ] ) || !empty( $wp_properties[ 'property_meta' ][ 'living_space' ] ) ) {
+    if( !empty( $data[ 'living_space' ] ) ) {
       update_post_meta( $insert_id, 'living_space', $data[ 'living_space' ] );
     }
     
-    wp_set_post_terms( $insert_id, $data[ 'property_feature' ] , 'property_feature' );
-    wp_set_post_terms( $insert_id, $data[ 'community_feature' ] , 'community_feature' );
+    if( !empty( $data[ 'property_feature' ] ) ) 
+      wp_set_post_terms( $insert_id, $data[ 'property_feature' ] , 'property_feature' );
+    if( !empty( $data[ 'community_feature' ] ) ) 
+      wp_set_post_terms( $insert_id, $data[ 'community_feature' ] , 'community_feature' );
 
     update_post_meta( $insert_id, 'dummy_property', true );
 

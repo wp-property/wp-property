@@ -210,12 +210,13 @@ namespace UsabilityDynamics\WPP {
                         <input <?php checked( $layout->_id, $layouts_settings['property_term_single'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][property_term_single]" value="<?php echo $layout->_id; ?>">
                       </label>
                     </li>
-                <?
+                <?php
                   }
                 ?>
                   </ul>
                 <?php
-                  } else {
+                  } 
+                  else {
                     _e( 'There are no available layouts. Default view is used.', ud_get_wp_property()->domain );
                   }
                 ?>
@@ -255,7 +256,7 @@ namespace UsabilityDynamics\WPP {
                           <input <?php checked( $layout->_id, $layouts_settings['property_single'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][property_single]" value="<?php echo $layout->_id; ?>">
                         </label>
                       </li>
-                      <?
+                      <?php
                     }
                     ?>
                   </ul>
@@ -300,7 +301,7 @@ namespace UsabilityDynamics\WPP {
                           <input <?php checked( $layout->_id, $layouts_settings['search_results'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][search_results]" value="<?php echo $layout->_id; ?>">
                         </label>
                       </li>
-                      <?
+                      <?php
                     }
                     ?>
                   </ul>
