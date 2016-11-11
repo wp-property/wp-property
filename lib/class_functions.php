@@ -166,6 +166,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
       return array(
         'property_feature'  => array(
+          'default'             => true,
           'hierarchical'        => false,
           'public'              => true,
           'show_ui'             => true,
@@ -189,6 +190,7 @@ class WPP_F extends UsabilityDynamics\Utility {
           'rewrite'      => array( 'slug' => 'feature' )
         ),
         'community_feature' => array(
+          'default'             => true,
           'hierarchical' => false,
           'public'              => true,
           'show_ui'             => true,
@@ -210,6 +212,33 @@ class WPP_F extends UsabilityDynamics\Utility {
           ),
           'query_var'    => 'community_feature',
           'rewrite'      => array( 'slug' => 'community_feature' )
+        ),
+        'wpp_location' => array(
+          'default'             => true,
+          'readonly'            => true,
+          'hidden'              => true,
+          'hierarchical'        => true,
+          'public'              => false,
+          'show_ui'             => false,
+          'show_in_nav_menus'   => true,
+          'show_tagcloud'       => false,
+          'label'        => sprintf(_x( '%s Location', 'property location taxonomy', ud_get_wp_property()->domain ), WPP_F::property_label()),
+          'labels'       => array(
+            'name'              => sprintf(_x( '%s Location', 'property location taxonomy', ud_get_wp_property()->domain ), WPP_F::property_label()),
+            'singular_name'     => sprintf(_x( '%s Location', 'property location taxonomy', ud_get_wp_property()->domain ), WPP_F::property_label()),
+            'search_items'      => _x( 'Search %s Location', 'property location taxonomy', ud_get_wp_property()->domain ),
+            'all_items'         => _x( 'All Location', 'property location taxonomy', ud_get_wp_property()->domain ),
+            'parent_item'       => _x( 'Parent Location', 'property location taxonomy', ud_get_wp_property()->domain ),
+            'parent_item_colon' => _x( 'Parent Location', 'property location taxonomy', ud_get_wp_property()->domain ),
+            'edit_item'         => _x( 'Edit Location', 'property location taxonomy', ud_get_wp_property()->domain ),
+            'update_item'       => _x( 'Update Location', 'property location taxonomy', ud_get_wp_property()->domain ),
+            'add_new_item'      => _x( 'Add New Location', 'property location taxonomy', ud_get_wp_property()->domain ),
+            'new_item_name'     => _x( 'New Location', 'property location taxonomy', ud_get_wp_property()->domain ),
+            'not_found'     => _x( 'No location found', 'property location taxonomy', ud_get_wp_property()->domain ),
+            'menu_name'         => sprintf(_x( '%s Location', 'property location taxonomy', ud_get_wp_property()->domain ), WPP_F::property_label()),
+          ),
+          'query_var'    => 'location',
+          'rewrite'      => array( 'slug' => 'location' )
         ),
       );
 
@@ -731,7 +760,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     //** Get all properties */
-    $ap = $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'property'" );
+    $ap = $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'property' AND post_status != 'auto-draft'" );
 
     if( !$ap ) {
       return false;
@@ -746,7 +775,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     if( !$success ) {
-      return false;
+      return sprintf( __( 'Set %s %s to "%s" %s type', ud_get_wp_property()->domain ), count( $success ), WPP_F::property_label( 'plural' ), WPP_F::property_label(), $property_type );
     }
 
     return sprintf( __( 'Set %s %s to "%s" %s type', ud_get_wp_property()->domain ), count( $success ), WPP_F::property_label( 'plural' ), WPP_F::property_label(), $property_type );
@@ -1588,6 +1617,8 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     }
 
+    $return['geo_data'] = $geo_data;
+
     if( !empty( $geo_data->formatted_address ) ) {
 
       foreach( (array) $wp_properties[ 'geo_type_attributes' ] + array( 'display_address' ) as $meta_key ) {
@@ -1606,9 +1637,11 @@ class WPP_F extends UsabilityDynamics\Utility {
         }
       }
 
+      $return['terms'] = self::update_location_terms( $post_id, $geo_data );
+
       update_post_meta( $post_id, 'wpp::last_address_validation', time() );
 
-      if( $manual_coordinates ) {
+      if( isset( $manual_coordinates ) ) {
         $lat = !empty( $coordinates[ 'lat' ] ) ? $coordinates[ 'lat' ] : 0;
         $lng = !empty( $coordinates[ 'lng' ] ) ? $coordinates[ 'lng' ] : 0;
       } else {
@@ -1654,6 +1687,110 @@ class WPP_F extends UsabilityDynamics\Utility {
     return $return;
   }
 
+  /**
+   * Registers a system taxonomy if needed with most essential arguments.
+   *
+   * @since 2.2.1
+   * @author potanin@UD
+   * @param string $taxonomy
+   * @return string
+   */
+  static public function verify_have_system_taxonomy($taxonomy = '') {
+
+    if( taxonomy_exists ( $taxonomy ) ) {
+      return $taxonomy;
+    }
+
+    register_taxonomy( $taxonomy, array( 'property' ), array(
+      'hierarchical'          => true,
+      'update_count_callback' => null,
+      'labels'            => array(),
+      'show_ui'           => false,
+      'show_in_menu'      => false,
+      'show_admin_column' => false,
+      'meta_box_cb'       => false,
+      'query_var'         => false,
+      'rewrite'           => false
+    ) );
+
+    if( taxonomy_exists ( $taxonomy ) ) {
+      return $taxonomy;
+    }
+
+  }
+
+  /**
+   * Build terms from address parts.
+   *
+   * @since 2.2.1
+   * @author potanin@UD
+   * @param $post_id
+   * @param $geo_data
+   * @return array
+   */
+  static public function update_location_terms($post_id, $geo_data) {
+
+    self::verify_have_system_taxonomy( 'wpp_location' );
+
+    $geo_data->terms = array(
+      'state' => get_term_by( 'name', $geo_data->state, 'wpp_location', OBJECT ),
+      'county' => get_term_by( 'name', $geo_data->county, 'wpp_location', OBJECT ),
+      'city' => get_term_by( 'name', $geo_data->city, 'wpp_location', OBJECT ),
+      'route' => get_term_by( 'name', $geo_data->route, 'wpp_location', OBJECT )
+    );
+
+    // validate, lookup and add all location terms to object.
+    if( isset( $geo_data->terms ) && is_array( $geo_data->terms ) ) {
+      foreach( $geo_data->terms as $_level => $_haveTerm ) {
+
+        if( !$_haveTerm || is_wp_error( $_haveTerm ) && $geo_data->{$_level} ) {
+
+          $_value = $geo_data->{$_level};
+
+          $index_key = array_search( $_level, array_keys( $geo_data->terms ), true );
+          $_higher_level = end( array_slice( $geo_data->terms, ( $index_key - 1 ), 1, true ) );
+          $_higher_level_name = end( array_keys( array_slice( $geo_data->terms, ( $index_key - 1 ), 1, true ) ) );
+
+          $_detail = array();
+
+          if( $_higher_level && isset( $_higher_level->term_id ) ) {
+            $_detail[ 'description' ] = $_value . ' is a ' . $_level . ' within ' . ( isset( $_higher_level ) ? $_higher_level->name : '' ) . ', a ' . $_higher_level_name . '.';
+            $_detail[ 'parent' ] = $_higher_level->term_id;
+          } else {
+            $_detail[ 'description' ] = $_value . ' is a ' . $_level . ' with nothin above it.';
+          }
+
+          // $_detail[ 'slug' ] = 'city-slug';
+
+          $_inserted_term = wp_insert_term( $_value, 'wpp_location', $_detail );
+
+          if( !is_wp_error( $_inserted_term ) && isset( $_inserted_term[ 'term_id' ] ) ) {
+            $geo_data->terms[ $_level ] = get_term_by( 'term_id', $_inserted_term[ 'term_id' ], 'wpp_location', OBJECT );
+            //die( '<pre>' . print_r( $geo_data->terms->{$_level}, true ) . '</pre>' );
+          } else {
+            error_log('Could not insert [wpp_location] term ['.$_value.'], error: [' . $_inserted_term->get_error_message() . ']' );
+          }
+
+        }
+
+      }
+
+      $_location_terms = array();
+
+      foreach( $geo_data->terms as $_term_hopefully ) {
+        if( isset( $_term_hopefully->term_id ) ) {
+          $_location_terms[] = $_term_hopefully->term_id;
+        }
+      }
+
+      // write, ovewriting any settings from before
+      wp_set_object_terms( $post_id, $_location_terms, 'wpp_location', false );
+
+    }
+
+    return $geo_data->terms;
+
+  }
   /**
    * Returns location information from Google Maps API call
    *
@@ -1776,8 +1913,8 @@ class WPP_F extends UsabilityDynamics\Utility {
    * Returns avaliability of Google's Geocoding Service based on time of last returned status OVER_QUERY_LIMIT
    * @uses const self::blocking_for_new_validation_interval
    * @uses option ud::geo_locate_address_last_OVER_QUERY_LIMIT
-   * @param type $update used to set option value in time()
-   * @return boolean
+   * @param bool|type $update used to set option value in time()
+   * @return bool
    * @author odokienko@UD
    */
   static public function available_address_validation( $update = false ) {
@@ -2404,12 +2541,10 @@ class WPP_F extends UsabilityDynamics\Utility {
     global $wp_properties;
 
     //** Handle backup */
-    if( isset( $_REQUEST[ 'wpp_settings' ] ) &&
-      wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'wpp_setting_save' ) &&
-      !empty( $_FILES[ 'wpp_settings' ][ 'tmp_name' ][ 'settings_from_backup' ] )
-    ) {
+    if( isset( $_REQUEST[ 'wpp_settings' ] ) && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'wpp_setting_save' ) &&  !empty( $_FILES[ 'wpp_settings' ][ 'tmp_name' ][ 'settings_from_backup' ] ) ) {
       $backup_file     = $_FILES[ 'wpp_settings' ][ 'tmp_name' ][ 'settings_from_backup' ];
       $backup_contents = file_get_contents( $backup_file );
+
       if( !empty( $backup_contents ) ) {
         $decoded_settings = json_decode( $backup_contents, true );
       }
@@ -2620,7 +2755,10 @@ class WPP_F extends UsabilityDynamics\Utility {
         $search_attributes = $wp_properties[ 'searchable_attributes' ];
       }
 
-      if( !is_array( $searchable_property_types ) ) {
+      if($searchable_property_types == 'all'){
+        $searchable_property_types = $wp_properties['searchable_property_types'];
+      }
+      else if( !is_array( $searchable_property_types ) ) {
         $searchable_property_types = explode( ',', $searchable_property_types );
         foreach( $searchable_property_types as $k => $v ) {
           $searchable_property_types[ $k ] = trim( $v );
@@ -2632,6 +2770,9 @@ class WPP_F extends UsabilityDynamics\Utility {
       foreach( $search_attributes as $searchable_attribute ) {
 
         if( $searchable_attribute == 'property_type' ) {
+          foreach ($wp_properties['searchable_property_types'] as $property_type) {
+            $range['property_type'][$property_type] = $wp_properties['property_types'][$property_type];
+          }
           continue;
         }
 
@@ -3461,7 +3602,8 @@ class WPP_F extends UsabilityDynamics\Utility {
 
   /**
    * Get coordinates for property out of database
-   *
+   * @param bool $listing_id
+   * @return array|bool
    */
   static public function get_coordinates( $listing_id = false ) {
     global $post, $property;
@@ -3730,7 +3872,7 @@ class WPP_F extends UsabilityDynamics\Utility {
       if( !empty( $image ) && is_array( $image ) ) {
         $imageHTML = "<img width=\"{$image['width']}\" height=\"{$image['height']}\" src=\"{$image['link']}\" alt=\"" . addslashes( $post->post_title ) . "\" />";
         if( @$wp_properties[ 'configuration' ][ 'property_overview' ][ 'fancybox_preview' ] == 'true' && !empty( $property[ 'featured_image_url' ] ) ) {
-          $imageHTML = "<a href=\"{$property['featured_image_url']}\" class=\"fancybox_image thumbnail\">{$imageHTML}</a>";
+          $imageHTML = "<a href=\"{$property['featured_image_url']}\" class=\"thumbnail\">{$imageHTML}</a>";
         }
       }
     }
@@ -4795,6 +4937,99 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     echo json_encode($response);
+  }
+
+  /**
+   * This function is only for generate_is_remote_meta() function.
+   * Used to search more than one array (ex. array of arrays).
+   * 
+   * @param array $array: The array of arrays.
+   * @param string $key: The key to search in $array.
+   * @param string $value: The value to search for $key.
+   * 
+   * @return array of element_id found.
+   */
+  private static function _found_in_array($array, $key, $value = '1'){
+    $return = array();
+    if(is_array($array)){
+      foreach ($array as $k => $v) {
+        if($key == 'wpml_media_processed'){
+          if($v['_is_remote'] == '')
+            $return[] = $v['element_id'];
+        }
+        else if($v[$key] == $value)
+          $return[] = $v['element_id'];
+      }
+    }
+    
+    if(empty($return))
+      return false;
+    if(count($return) == 1)
+      return $return[0];
+
+    return $return;
+  }
+
+
+  /**
+   * Used in generate_is_remote_meta() function.
+   * Used to search more than one array (ex. array of arrays).
+   * 
+   * @param none.
+   * 
+   * @return bool whether succeed or not.
+   */
+  static function generate_is_remote_meta(){
+    global $wpdb;
+    $update_is_remote = array();
+    $sql = "
+    SELECT tr.element_id, tr.trid, tr.source_language_code, pm1.meta_value AS _is_remote, pm2.meta_value AS wpml_media_processed  
+    FROM `{$wpdb->prefix}icl_translations` AS tr 
+    LEFT JOIN {$wpdb->postmeta} AS pm1 ON tr.element_id = pm1.post_id AND pm1.meta_key = '_is_remote'
+    LEFT JOIN {$wpdb->postmeta} AS pm2 ON tr.element_id = pm2.post_id AND pm2.meta_key = 'wpml_media_processed'
+    WHERE tr.element_type = 'post_attachment'";
+
+    $sql = $wpdb->prepare($sql);
+    $results = $wpdb->get_results($sql);
+    $translations = array();
+    if(is_array($results)){
+      foreach ($results as $key => $row) {
+        $translations[$row->trid][] = (array) $row;
+      }
+
+      foreach ($translations as $trid => $trans_group) {
+        if(count($trans_group)<2) continue;
+        if(WPP_F::_found_in_array($trans_group, '_is_remote') == WPP_F::_found_in_array($trans_group, 'source_language_code', '')){
+          $destination_pid = WPP_F::_found_in_array($trans_group, 'wpml_media_processed', '1');
+          if($destination_pid != false){
+            foreach ((array) $destination_pid as $pid) {
+              $update_is_remote[] = $pid;
+            }
+          }
+        }
+      }
+
+      if(count($update_is_remote)==0){
+        _e("Already up to date.");
+        return;
+      }
+
+      $delete_sql = "DELETE FROM {$wpdb->postmeta} WHERE meta_key = '_is_remote' AND post_id IN(" . implode(', ', $update_is_remote) . ");";
+      $delete_sql = $wpdb->prepare($delete_sql);
+      $wpdb->query($delete_sql);
+
+      $insert_array = array();
+      foreach ($update_is_remote as $pid) {
+        $insert_array[] = "('$pid', '_is_remote', '1')";
+      }
+
+      $insert_sql = "INSERT INTO {$wpdb->postmeta} (`post_id`, `meta_key`, `meta_value`) VALUES ";
+      $insert_sql .= implode(', ', $insert_array);
+      $insert_sql = $wpdb->prepare($insert_sql);
+      $row_updated = $wpdb->query($insert_sql);
+      printf(__("%s image meta updated.", ud_get_wp_property()->domain ), $row_updated);
+
+    }
   }
 
 }

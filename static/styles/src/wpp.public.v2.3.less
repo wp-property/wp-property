@@ -1,0 +1,255 @@
+/**
+ * New Styles starting with v2.3
+ *
+ */
+.panel-grid {
+  zoom: 1;
+}
+
+.panel-grid:before {
+  content: '';
+  display: block;
+}
+
+.panel-grid:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.panel-grid-cell {
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  min-height: 1em;
+}
+
+.panel-grid-cell .so-panel {
+  zoom: 1;
+}
+
+.panel-grid-cell .so-panel:before {
+  content: '';
+  display: block;
+}
+
+.panel-grid-cell .so-panel:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.panel-grid-cell .panel-last-child {
+  margin-bottom: 0;
+}
+
+.panel-grid-cell .widget-title {
+  margin-top: 0;
+}
+
+.panel-row-style {
+  zoom: 1;
+}
+
+.panel-row-style:before {
+  content: '';
+  display: block;
+}
+
+.panel-row-style:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* Main styles
+----------------------------------- */
+#wpp_layout {
+
+  /* WP Property overview shortcode */
+  .wpp_property_overview_shortcode {
+
+    /* Property Pagination */
+    .properties_pagination {
+      margin-bottom: 10px;
+      .wpp_pagination_slider_status {
+        margin-top: 5px;
+        margin-bottom: 10px;
+        .wpp_sorter_options {
+          padding-left: 25px;
+          .wpp_sort_by_text {
+            padding-right: 5px;
+          }
+          .wpp_sortable_link {
+            cursor: pointer;
+          }
+        }
+      }
+      ul.property-overview-navigation {
+        margin: 5px 0 10px;
+        padding: 0px;
+        list-style: outside none none;
+        li {
+          display: inline-block;
+          padding: 0 5px;
+          border: none;
+          &.pages {
+            padding: 0;
+          }
+          a {
+            text-decoration: none;
+            padding-left: 6px;
+            padding-right: 6px;
+          }
+          ul {
+            margin: 0px;
+            padding: 0px;
+            list-style: outside none none;
+          }
+        }
+      }
+    }
+    /* Property Pagination */
+
+    /* View results */
+    .all-properties {
+      .property_div {
+        display: inline-block;
+        margin-bottom: 20px;
+        margin-right: -3px;
+        padding: 0 10px;
+        vertical-align: top;
+        min-width: 138px;
+        width: 25%;
+        .wpp_overview_left_column {
+          margin: 0 auto 5px;
+          max-width: 100%;
+          .property_overview_thumb {
+            border: none;
+            padding: 0;
+            margin: 0;
+            img {
+              max-width: 100%;
+              height: auto;
+            }
+          }
+        }
+        .wpp_overview_right_column {
+          .wpp_overview_data {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            li {
+              list-style: none;
+              margin: 0;
+              &.property_title {
+                a {
+                  font-weight: bold;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    /* View results */
+
+  }
+  /* WP Property overview shortcode */
+
+  /* WP Property search widget */
+  .wpp_search_properties_widget {
+
+    .wpp_shortcode_search_form {
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        li {
+          margin: 0;
+          list-style: none;
+          &.wpp_search_form_element {
+            margin: 0 0 10px;
+            .wpp_search_group_title,
+            .wpp_search_label {
+              display: block;
+              font-weight: 600;
+              margin: 0 0 5px;
+            }
+            input {
+              margin: 0;
+              &.wpp_range_input {
+                display: inline-block;
+                width: 46%;
+              }
+            }
+            label {
+              display: inline-block;
+            }
+            .wpp_dash {
+              display: inline-block;
+              text-align: center;
+              width: 4%;
+            }
+          }
+        }
+      }
+    }
+  }
+  /* WP Property search widget */
+
+  /* Property MAP */
+  .property_map_wrapper {
+    #infowindow {
+      .wpp_google_maps_attribute_row_property_title {
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      table.wpp_google_maps_infobox_table {
+        border: none;
+        .wpp_google_maps_left_col {
+          border: none;
+          padding: 0;
+          a {
+            img {
+              max-width: 100%;
+            }
+          }
+        }
+        .wpp_google_maps_right_col {
+          border: none;
+          padding: 0 0 0 10px;
+          .wpp_google_maps_infobox {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            li {
+              list-style: none;
+              .attribute {
+                padding-right: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  /* Property MAP */
+
+  /* Gallery widget */
+  .wpp_gallery_widget {
+    .sidebar_gallery_item {
+      margin-bottom: 10px;
+      a {
+        img {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+  /* Gallery widget */
+
+
+}

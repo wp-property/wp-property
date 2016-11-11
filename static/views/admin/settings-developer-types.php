@@ -21,7 +21,8 @@ global $wp_properties;
    if(empty($wp_properties[ 'property_meta' ])){
 	  $wp_properties[ 'property_types' ] = array("first" => "");
   }
-  foreach( $wp_properties[ 'property_types' ] as $property_slug => $label ): ?>
+
+  foreach( apply_filters( 'wpp::property_types', $wp_properties[ 'property_types' ] ) as $property_slug => $label ): ?>
 
     <tr class="wpp_dynamic_table_row" slug="<?php echo $property_slug; ?>"  data-property-slug="<?php echo $property_slug; ?>" new_row='false'>
 

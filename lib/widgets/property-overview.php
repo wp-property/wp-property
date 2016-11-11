@@ -43,7 +43,9 @@ namespace UsabilityDynamics\WPP\Widgets {
       if ( !empty( $title ) ) {
         echo $before_title . $title . $after_title;
       }
+      //die('[property_overview '.$this->shortcode_args( $instance ).']' );
       echo do_shortcode( '[property_overview '.$this->shortcode_args( $instance ).']' );
+
       echo $after_widget;
     }
 
@@ -51,6 +53,7 @@ namespace UsabilityDynamics\WPP\Widgets {
      * Renders form based on Shortcode's params
      *
      * @param array $instance
+     * @return bool|void
      */
     public function form( $instance ) {
       ?>

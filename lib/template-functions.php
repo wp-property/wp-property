@@ -158,7 +158,7 @@ if ( !function_exists( 'property_overview_image' ) ) {
       ?>
       <div class="property_image">
         <a href="<?php echo $thumbnail_link; ?>" title="<?php echo $property[ 'post_title' ] . ( !empty( $property[ 'parent_title' ] ) ? __( ' of ', ud_get_wp_property()->domain ) . $property[ 'parent_title' ] : "" ); ?>" class="property_overview_thumb property_overview_thumb_<?php echo $thumbnail_size; ?> <?php echo $link_class; ?> thumbnail" rel="<?php echo $property[ 'post_name' ] ?>">
-          <img width="<?php echo $image[ 'width' ]; ?>" height="<?php echo $image[ 'height' ]; ?>" src="<?php echo $image[ 'link' ]; ?>" alt="<?php echo $property[ 'post_title' ]; ?>" style="width:<?php echo $image[ 'width' ]; ?>px;height:<?php echo $image[ 'height' ]; ?>px;"/>
+          <img width="<?php echo $image[ 'width' ]; ?>" height="<?php echo $image[ 'height' ]; ?>" src="<?php echo $image[ 'link' ]; ?>" alt="<?php echo $property[ 'post_title' ]; ?>" style="width:<?php echo $image[ 'width' ]; ?>px;height:auto;"/>
         </a>
       </div>
       <?php
@@ -300,6 +300,10 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
         continue;
       }
       $attribute_data = WPP_F::get_attribute_data($meta_key);
+
+      if( $meta_key === 'post_content' ) {
+        die( '<pre>' . print_r( $attribute_data, true ) . '</pre>' );
+      }
       //** Only executed shortcodes if the value isn't an array */
       if ( !is_array( $attribute_value ) ) {
         if ( ( !empty( $args[ 'do_not_execute_shortcodes' ] ) && $args[ 'do_not_execute_shortcodes' ] == 'true' ) || $meta_key == 'post_content' ) {
@@ -308,7 +312,24 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
         //** Determine if the current attribute is address and set it as display address */
         if ( $meta_key == $wp_properties[ 'configuration' ][ 'address_attribute' ] && !empty( $property[ 'display_address' ] ) ) {
           $attribute_value = $property[ 'display_address' ];
+          /*
+            Replace address with generated taxonomy links.
+            depend on add_display_address();
+          */
+          $address_format = $wp_properties[ 'configuration' ][ 'display_address_format' ];
+          preg_match_all('/\[(.*?)\]/', $address_format, $matches);
+          if(isset($matches[1]) && is_array($matches[1])){
+            foreach ($matches[1] as $value) {
+              if(!isset($property[$value]) || !$property[$value]) continue; 
+              if($term = get_term_by('name', $property[$value], 'wpp_location')){
+                $term_link = "<a href='" . get_term_link($term->term_id) . "'>{$term->name}</a>";
+                $address_format = str_replace("[$value]", $term_link, $address_format);
+              }
+            }
+            $attribute_value = $address_format;
+          }
         }
+        
         // No display formating is needed for wysiwyg because it's formatted.
         if($attribute_data['data_input_type'] == 'wysiwyg'){
           $attribute_value = do_shortcode( $attribute_value );
@@ -479,6 +500,7 @@ if ( !function_exists( 'draw_stats' ) ):
       'return_blank' => 'false',
       'include' => '',
       'exclude' => '',
+      'make_terms_links' => 'false',
       'include_clsf' => 'attribute', // Show attributes or meta ( details ). Available value: "detail"
       'stats_prefix' => sanitize_key( WPP_F::property_label( 'singular' ) )
     );
@@ -514,7 +536,15 @@ if ( !function_exists( 'draw_stats' ) ):
     } else {
       $property_stats = WPP_F::get_stat_values_and_labels( $property, array( 'label_as_key' => 'false' ) );
     }
-    
+
+    /* Extend $property_stats with property taxonomy */
+    if(is_array($wp_properties['taxonomies'])){
+      foreach ($wp_properties['taxonomies'] as $taxonomy => $data) {
+        if($data['public'])
+          $property_stats[ $taxonomy ] = array( 'label' => $data['label'], 'value' => $data['label'] );
+      }
+    }
+
     /** Include only passed attributes */
     if( !empty( $include ) ) {
       $include = !is_array( $include ) ? explode( ',', $include ) : $include; 
@@ -535,7 +565,7 @@ if ( !function_exists( 'draw_stats' ) ):
       }
     }
 
-    if ( empty( $property_stats ) ) {
+    if ( empty( $property_stats )) {
       return false;
     }
     
@@ -630,6 +660,22 @@ if ( !function_exists( 'draw_stats' ) ):
         $value = "<ul class='rwmb-file'>" . $file_html . "</ul>";
       }
 
+      // Taxonomies. Adding terms link
+      if ( isset( $attribute_data[ 'storage_type' ] ) && $attribute_data[ 'storage_type' ] == 'taxonomy') {
+        $terms = wp_get_post_terms( $property->ID, $tag);
+        if(count($terms) == 0)
+          continue;
+        $value = "<ul>";
+        foreach ($terms as $key => $term) {
+          $term_link = $term->name;
+          if(isset($make_terms_links) && $make_terms_links == "true"){
+            $term_link = "<a href='" . get_term_link($term->term_id, $tag) . "'>{$term->name}</a>";
+          }
+          $value .= "<li class='property-terms property-term-{$term->slug}'>$term_link</li>";
+        }
+        $value .= "</ul>";
+      }
+
       //** Single "true" is converted to 1 by get_properties() we check 1 as well, as long as it isn't a numeric attribute */
       if ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'checkbox' && in_array( strtolower( $value ), array( 'true', '1', 'yes' ) ) ) {
         if ( $show_true_as_image == 'true' ) {
@@ -659,7 +705,7 @@ if ( !function_exists( 'draw_stats' ) ):
       $data[ 'value' ] = $value;
       $stats[ $tag ] = $data;
     }
-    
+
     if( empty( $stats ) ) {
       return false;
     }
@@ -804,6 +850,20 @@ if ( !function_exists( 'draw_stats' ) ):
               <br/>
             <?php
             }
+            break;
+          case 'detail':
+            foreach ( $gstats as $tag => $data ) {
+              $label = apply_filters('wpp::attribute::label',$data[ 'label' ]);
+              //check if the tag is property type to get the translated value for it
+              $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type',$data[ 'value' ]) : $data[ 'value' ];
+              ?>
+              <strong class="wpp_attribute <?php echo $stats_prefix; ?>_<?php echo $tag; ?>"><?php echo $label; ?><span class="separator">:</span></strong>
+              <p class="value"><?php echo $value; ?>&nbsp;</p>
+              <br/>
+            <?php
+            }
+            ?>
+            <?php
             break;
         }
         ?>
@@ -1473,6 +1533,13 @@ if ( !function_exists( 'wpp_css' ) ):
    * @return array|echo
    * @author peshkov@UD
    * @version 0.1
+   */
+  /**
+   * @param type $element
+   * @param array|bool $classes
+   * @param bool $return
+   * @param array $args
+   * @return bool|string
    */
   function wpp_css( $element, $classes = false, $return = false, $args = array() ) {
     $args = array_merge( (array) $args, array(
