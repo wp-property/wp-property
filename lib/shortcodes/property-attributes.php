@@ -19,18 +19,20 @@ namespace UsabilityDynamics\WPP {
 
         $attributes = ud_get_wp_property( 'property_stats', array() );
 
-        $default_taxonomies = array('features', 'community_features', 'property_type', 'status');
+        $default_taxonomies = array('features', 'community_features', 'property_type', 'property_status', 'property_location');
 
         if(function_exists( 'ud_get_wpp_terms' )){
           foreach ( ud_get_wpp_terms('config.taxonomies') as $tax => $taxonomy) {
-            //if($taxonomy['public'])
-            $attributes[$tax] = "<b>Term:</b> " . $taxonomy['label'];
+            if($taxonomy['public']){
+              $attributes[$tax] = "<b>Term:</b> " . $taxonomy['label'];
+            }
           }
         }
         else{
           foreach ( $default_taxonomies as $tax) {
-            if(isset($wp_properties['taxonomies'][$tax]))// && $taxonomy['public'])
+            if(isset($wp_properties['taxonomies'][$tax]) && $wp_properties['taxonomies'][$tax]['public']){
               $attributes[$tax] = "<b>Term:</b> " . $wp_properties['taxonomies'][$tax]['label'];
+            }
           }
         }
         
