@@ -190,13 +190,6 @@
     }
 
     /**
-     * Sorting for loadmore pagination
-     */
-    function loadmoreSorting(page) {
-      console.log(page);
-    }
-
-    /**
      * Draw our numeric navigation buttons.
      *
      */
@@ -363,8 +356,7 @@
           p_wrapper = jQuery('#wpp_shortcode_' + unique_id + ' .wpp_row_view')
         }
 
-        console.log(result_data);
-        if (type == 'loadmore') {
+        if (type == 'loadmore' && window.wpp_query[unique_id].is_sort !== true) {
           p_wrapper.append(content);
         } else {
           p_wrapper.html(content);
@@ -414,7 +406,9 @@
      */
     function init_loadmore_pagination() {
       jQuery(document).on('click', '.wpp_pagination_buttons_wrapper.pagination-loadmore button.wpp_loadmore_button', function () {
+        window.wpp_query[vars.unique_id].is_sort = false;
         var page = jQuery(this).data('page');
+        console.log(page);
         do_ajax_pagination(vars.unique_id, 'loadmore', page, false);
         jQuery(this).data('page', page + 1);
       });
@@ -544,18 +538,17 @@
               sort_order = "ASC";
             }
           }
+          window.wpp_query[vars.unique_id].is_sort = true;
           jQuery("#wpp_shortcode_" + vars.unique_id + " .wpp_sortable_link").removeClass("wpp_sorted_element");
+          console.log(jQuery("#wpp_shortcode_" + vars.unique_id + " .wpp_loadmore_button").data('page'));
+          jQuery("#wpp_shortcode_" + vars.unique_id + " .wpp_loadmore_button").data('page', '2');
+          console.log(jQuery("#wpp_shortcode_" + vars.unique_id + " .wpp_loadmore_button").data('page'));
           window.wpp_query[vars.unique_id].sort_by = attribute;
           window.wpp_query[vars.unique_id].sort_order = sort_order;
           jQuery(this_attribute).addClass("wpp_sorted_element");
           jQuery(this_attribute).attr("sort_order", sort_order);
           /* Get ajax results and reset to first page */
-          if (vars.type === 'loadmore') {
-            var pagination = jQuery('#wpp_shortcode_' + vars.unique_id + ' .wpp_loadmore_button').data('page');
-            window.wpp_query[vars.unique_id] = changeAddressValue(pagination - 1, window.wpp_query[vars.unique_id]);
-          } else {
-            window.wpp_query[vars.unique_id] = changeAddressValue(1, window.wpp_query[vars.unique_id]);
-          }
+          window.wpp_query[vars.unique_id] = changeAddressValue(1, window.wpp_query[vars.unique_id]);
         });
       }
 
