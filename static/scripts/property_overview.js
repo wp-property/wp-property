@@ -190,6 +190,13 @@
     }
 
     /**
+     * Sorting for loadmore pagination
+     */
+    function loadmoreSorting(page) {
+      console.log(page);
+    }
+
+    /**
      * Draw our numeric navigation buttons.
      *
      */
@@ -198,7 +205,6 @@
         query = window.wpp_query[unique_id],
         el = jQuery("#wpp_shortcode_" + unique_id + " .wpp_pagination_buttons_wrapper"),
         is_mobile = jQuery('body').hasClass('wpp_is_mobile');
-      console.log('draw_pagination', number, query);
       number = parseInt(number);
       /** Maybe, render 'first' page link */
       if (number > 1 && !is_mobile) {
@@ -287,7 +293,6 @@
      * @returns {boolean}
      */
     function do_ajax_pagination(unique_id, type, this_page, scroll_to) {
-      console.log(arguments);
       if (typeof this_page == 'undefined') {
         return false;
       }
@@ -336,20 +341,29 @@
       }, function (result_data) {
         jQuery('#wpp_shortcode_' + unique_id + ' .ajax_loader').hide();
 
-        var p_list = jQuery('.wpp_property_view_result', result_data.display);
+        if (type === 'loadmore') {
+          var p_list = jQuery('.wpp_property_view_result .all-properties', result_data.display);
+        } else {
+          var p_list = jQuery('.wpp_property_view_result', result_data.display);
+        }
+
         //* Determine if p_list is empty try previous version's selector */
         if (p_list.length == 0) {
           p_list = jQuery('.wpp_row_view', result_data.display);
         }
-
         var content = ( p_list.length > 0 ) ? p_list.html() : result_data.display;
-        var p_wrapper = jQuery('#wpp_shortcode_' + unique_id + ' .wpp_property_view_result');
+        if (type === 'loadmore') {
+          var p_wrapper = jQuery('#wpp_shortcode_' + unique_id + ' .wpp_property_view_result .all-properties');
+        } else {
+          var p_wrapper = jQuery('#wpp_shortcode_' + unique_id + ' .wpp_property_view_result');
+        }
 
         //* Determine if p_wrapper is empty try previous version's selector */
         if (p_wrapper.length == 0) {
           p_wrapper = jQuery('#wpp_shortcode_' + unique_id + ' .wpp_row_view')
         }
 
+        console.log(result_data);
         if (type == 'loadmore') {
           p_wrapper.append(content);
         } else {
@@ -536,7 +550,12 @@
           jQuery(this_attribute).addClass("wpp_sorted_element");
           jQuery(this_attribute).attr("sort_order", sort_order);
           /* Get ajax results and reset to first page */
-          window.wpp_query[vars.unique_id] = changeAddressValue(1, window.wpp_query[vars.unique_id]);
+          if (vars.type === 'loadmore') {
+            var pagination = jQuery('#wpp_shortcode_' + vars.unique_id + ' .wpp_loadmore_button').data('page');
+            window.wpp_query[vars.unique_id] = changeAddressValue(pagination - 1, window.wpp_query[vars.unique_id]);
+          } else {
+            window.wpp_query[vars.unique_id] = changeAddressValue(1, window.wpp_query[vars.unique_id]);
+          }
         });
       }
 
