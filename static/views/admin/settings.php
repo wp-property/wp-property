@@ -49,7 +49,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
 ?>
 <div class="wrap <?php echo implode( ' ', $wrapper_classes ); ?>">
-<?php screen_icon(); ?>
+
 <h2 class='wpp_settings_page_header'><?php echo ud_get_wp_property( 'labels.name' ) . ' ' . __( 'Settings', ud_get_wp_property()->domain ) ?>
   <div class="wpp_fb_like">
   <div class="fb-like" data-href="https://www.facebook.com/wpproperty" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
@@ -100,8 +100,9 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       <th><?php _e( 'Options', ud_get_wp_property()->domain ); ?></th>
       <td>
         <ul>
-          <li class="configuration_enable_comments"><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][enable_comments]&label=" . __( 'Enable comments.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'enable_comments' ] ) ? $wp_properties[ 'configuration' ][ 'enable_comments' ] : false ) ); ?></li>
-          <li class="configuration_enable_revisions" data-feature-since="2.0.0"><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][enable_revisions]&label=" . __( 'Enable revisions.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'enable_revisions' ] ) ? $wp_properties[ 'configuration' ][ 'enable_revisions' ] : false ) ); ?></li>
+          <li class="configuration_enable_comments"><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][enable_comments]&label=" . __( 'Enable comments', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'enable_comments' ] ) ? $wp_properties[ 'configuration' ][ 'enable_comments' ] : false ) ); ?></li>
+          <li class="configuration_enable_revisions" data-feature-since="2.0.0"><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][enable_revisions]&label=" . __( 'Enable revisions', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'enable_revisions' ] ) ? $wp_properties[ 'configuration' ][ 'enable_revisions' ] : false ) ); ?></li>
+          <li class="configuration_enable_layouts" data-feature-since="2.2.1"><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][enable_layouts]&label=" . __( 'Enable layouts', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'enable_layouts' ] ) ? $wp_properties[ 'configuration' ][ 'enable_layouts' ] : false ) ); ?></li>
           <li class="wpp-setting-exclude-from-regular-search-results"><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][exclude_from_regular_search_results]&label=" . sprintf( __( 'Exclude %1s from regular search results.', ud_get_wp_property()->domain ), $object_label[ 'plural' ] ), ( isset( $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] ) ? $wp_properties[ 'configuration' ][ 'exclude_from_regular_search_results' ] : false ) ); ?></li>
         </ul>
       </td>
