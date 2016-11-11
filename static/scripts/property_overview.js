@@ -540,9 +540,7 @@
           }
           window.wpp_query[vars.unique_id].is_sort = true;
           jQuery("#wpp_shortcode_" + vars.unique_id + " .wpp_sortable_link").removeClass("wpp_sorted_element");
-          console.log(jQuery("#wpp_shortcode_" + vars.unique_id + " .wpp_loadmore_button").data('page'));
-          jQuery("#wpp_shortcode_" + vars.unique_id + " .wpp_loadmore_button").data('page', '2');
-          console.log(jQuery("#wpp_shortcode_" + vars.unique_id + " .wpp_loadmore_button").data('page'));
+          jQuery('.wpp_loadmore_button').data('page', 2);
           window.wpp_query[vars.unique_id].sort_by = attribute;
           window.wpp_query[vars.unique_id].sort_order = sort_order;
           jQuery(this_attribute).addClass("wpp_sorted_element");
