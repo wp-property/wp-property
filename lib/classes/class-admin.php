@@ -101,6 +101,7 @@ namespace UsabilityDynamics\WPP {
           //** Widgets Page */
           case 'widgets':
           case 'customize':
+          case 'wpp_layout':
             wp_enqueue_script( 'wp-property-backend-global' );
             wp_enqueue_script( 'wp-property-global' );
             wp_enqueue_script( 'jquery-ui-core' );

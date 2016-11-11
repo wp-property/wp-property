@@ -444,7 +444,9 @@ class WPP_Core {
       // wp_register_style( 'wp-property-frontend', WPP_URL . 'styles/wp_properties.css', array(), WPP_Version );
 
       // load the new v2.3 styles
+      if($wp_properties['configuration']['enable_layouts'] == 'true') {
       wp_register_style( 'wp-property-frontend', WPP_URL . 'styles/wpp.public.v2.3.css', array(), WPP_Version );
+      }
 
 
       //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
@@ -469,9 +471,9 @@ class WPP_Core {
     //** Add troubleshoot log page */
     //** Modify admin body class */
     add_filter( 'admin_body_class', array( $this, 'admin_body_class' ), 5 );
-	  
+
     add_filter( 'display_post_states', array( $this, 'display_post_states' ), 10, 2 );
-    
+
     //** Modify Front-end property body class */
     add_filter( 'body_class', array( $this, 'properties_body_class' ) );
 
@@ -1056,7 +1058,7 @@ class WPP_Core {
       wp_redirect( get_permalink( $post->ID ) );
       die();
     }
-    
+
     /* (count($wp_query->posts) < 2) added post 1.31.1 release */
     /* to avoid taxonomy archives from being broken by single property pages */
     if(
