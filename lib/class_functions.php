@@ -731,7 +731,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     //** Get all properties */
-    $ap = $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'property'" );
+    $ap = $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'property' AND post_status != 'auto-draft'" );
 
     if( !$ap ) {
       return false;
@@ -746,7 +746,7 @@ class WPP_F extends UsabilityDynamics\Utility {
     }
 
     if( !$success ) {
-      return false;
+      return sprintf( __( 'Set %s %s to "%s" %s type', ud_get_wp_property()->domain ), count( $success ), WPP_F::property_label( 'plural' ), WPP_F::property_label(), $property_type );
     }
 
     return sprintf( __( 'Set %s %s to "%s" %s type', ud_get_wp_property()->domain ), count( $success ), WPP_F::property_label( 'plural' ), WPP_F::property_label(), $property_type );
