@@ -600,7 +600,7 @@ namespace UsabilityDynamics\WPP {
             'class' => 'wpp_bottom_pagination',
             'sorter_type' => $wpp_query['sorter_type'],
             'hide_count' => $wpp_query['hide_count'],
-            'sort_by_text' => $wpp_query['sort_by_text'],
+            'sort_by_text' => $wpp_query['sort_by_text']
           ));
         }
 
