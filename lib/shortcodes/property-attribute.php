@@ -1,7 +1,10 @@
 <?php
-
 /**
  * Shortcode: [property_attribute]
+ *
+ * ### Usage:
+ *
+ *    [property_attribute attribute=post_content]
  *
  * @since 2.1
  */
@@ -151,6 +154,11 @@ namespace UsabilityDynamics\WPP {
               'return' => 'true',
               'property_object' => $this_property
           ) );
+        }
+
+        // parse shortcodes for the post_content field
+        if( $attribute === 'post_content' && $value ) {
+          $value = do_shortcode( $value );;
         }
 
         if( !empty( $args[ 'before' ] ) ) {

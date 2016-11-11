@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname(dirname($vendorDir));
 
 return array(
+    'ChromePhp' => $vendorDir . '/ccampbell/chromephp/ChromePhp.php',
     'Composer\\Installers\\AglInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/AglInstaller.php',
     'Composer\\Installers\\AimeosInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/AimeosInstaller.php',
     'Composer\\Installers\\AnnotateCmsInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/AnnotateCmsInstaller.php',
@@ -187,8 +188,12 @@ return array(
     'UsabilityDynamics\\WPP\\Children_List_Table' => $baseDir . '/lib/classes/class-children-list-table.php',
     'UsabilityDynamics\\WPP\\Dashboard_Widget' => $baseDir . '/lib/classes/class-dashboard-widget.php',
     'UsabilityDynamics\\WPP\\Export' => $baseDir . '/lib/classes/class-export.php',
+    'UsabilityDynamics\\WPP\\Layouts' => $baseDir . '/lib/classes/class-layouts.php',
+    'UsabilityDynamics\\WPP\\Layouts_API_Client' => $baseDir . '/lib/classes/class-layouts-api-client.php',
+    'UsabilityDynamics\\WPP\\Layouts_Settings' => $baseDir . '/lib/classes/class-layouts-settings.php',
     'UsabilityDynamics\\WPP\\List_Table' => $baseDir . '/lib/classes/class-list-table.php',
     'UsabilityDynamics\\WPP\\Meta_Box' => $baseDir . '/lib/classes/class-meta-box.php',
+    'UsabilityDynamics\\WPP\\Panels_Css_Builder' => $baseDir . '/lib/classes/class-layouts.php',
     'UsabilityDynamics\\WPP\\Property_Factory' => $baseDir . '/lib/classes/class-property-factory.php',
     'UsabilityDynamics\\WPP\\Scaffold' => $baseDir . '/lib/classes/class-scaffold.php',
     'UsabilityDynamics\\WPP\\Settings' => $baseDir . '/lib/classes/class-settings.php',

@@ -7,7 +7,7 @@
  * @package WP-Property
  */
 //** Support for legacy UD Classes - extend WPP_F, which in turn extends UD_API */
-if ( !class_exists( 'WPP_UD_F' ) ) {
+if ( !class_exists( 'WPP_UD_F' ) && class_exists( 'WPP_F' ) ) {
   class WPP_UD_F extends WPP_F {
   }
 }

@@ -1613,6 +1613,8 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     }
 
+    $return['geo_data'] = $geo_data;
+
     if( !empty( $geo_data->formatted_address ) ) {
 
       foreach( (array) $wp_properties[ 'geo_type_attributes' ] + array( 'display_address' ) as $meta_key ) {
@@ -1631,9 +1633,11 @@ class WPP_F extends UsabilityDynamics\Utility {
         }
       }
 
+      $return['terms'] = self::update_location_terms( $post_id, $geo_data );
+
       update_post_meta( $post_id, 'wpp::last_address_validation', time() );
 
-      if( $manual_coordinates ) {
+      if( isset( $manual_coordinates ) ) {
         $lat = !empty( $coordinates[ 'lat' ] ) ? $coordinates[ 'lat' ] : 0;
         $lng = !empty( $coordinates[ 'lng' ] ) ? $coordinates[ 'lng' ] : 0;
       } else {
@@ -1679,6 +1683,110 @@ class WPP_F extends UsabilityDynamics\Utility {
     return $return;
   }
 
+  /**
+   * Registers a system taxonomy if needed with most essential arguments.
+   *
+   * @since 2.2.1
+   * @author potanin@UD
+   * @param string $taxonomy
+   * @return string
+   */
+  static public function verify_have_system_taxonomy($taxonomy = '') {
+
+    if( taxonomy_exists ( $taxonomy ) ) {
+      return $taxonomy;
+    }
+
+    register_taxonomy( $taxonomy, array( 'property' ), array(
+      'hierarchical'          => true,
+      'update_count_callback' => null,
+      'labels'            => array(),
+      'show_ui'           => false,
+      'show_in_menu'      => false,
+      'show_admin_column' => false,
+      'meta_box_cb'       => false,
+      'query_var'         => false,
+      'rewrite'           => false
+    ) );
+
+    if( taxonomy_exists ( $taxonomy ) ) {
+      return $taxonomy;
+    }
+
+  }
+
+  /**
+   * Build terms from address parts.
+   *
+   * @since 2.2.1
+   * @author potanin@UD
+   * @param $post_id
+   * @param $geo_data
+   * @return array
+   */
+  static public function update_location_terms($post_id, $geo_data) {
+
+    self::verify_have_system_taxonomy( 'property_location' );
+
+    $geo_data->terms = array(
+      'state' => get_term_by( 'name', $geo_data->state, 'property_location', OBJECT ),
+      'county' => get_term_by( 'name', $geo_data->county, 'property_location', OBJECT ),
+      'city' => get_term_by( 'name', $geo_data->city, 'property_location', OBJECT ),
+      'route' => get_term_by( 'name', $geo_data->route, 'property_location', OBJECT )
+    );
+
+    // validate, lookup and add all location terms to object.
+    if( isset( $geo_data->terms ) && is_array( $geo_data->terms ) ) {
+      foreach( $geo_data->terms as $_level => $_haveTerm ) {
+
+        if( !$_haveTerm || is_wp_error( $_haveTerm ) && $geo_data->{$_level} ) {
+
+          $_value = $geo_data->{$_level};
+
+          $index_key = array_search( $_level, array_keys( $geo_data->terms ), true );
+          $_higher_level = end( array_slice( $geo_data->terms, ( $index_key - 1 ), 1, true ) );
+          $_higher_level_name = end( array_keys( array_slice( $geo_data->terms, ( $index_key - 1 ), 1, true ) ) );
+
+          $_detail = array();
+
+          if( $_higher_level && isset( $_higher_level->term_id ) ) {
+            $_detail[ 'description' ] = $_value . ' is a ' . $_level . ' within ' . ( isset( $_higher_level ) ? $_higher_level->name : '' ) . ', a ' . $_higher_level_name . '.';
+            $_detail[ 'parent' ] = $_higher_level->term_id;
+          } else {
+            $_detail[ 'description' ] = $_value . ' is a ' . $_level . ' with nothin above it.';
+          }
+
+          // $_detail[ 'slug' ] = 'city-slug';
+
+          $_inserted_term = wp_insert_term( $_value, 'property_location', $_detail );
+
+          if( !is_wp_error( $_inserted_term ) && isset( $_inserted_term[ 'term_id' ] ) ) {
+            $geo_data->terms[ $_level ] = get_term_by( 'term_id', $_inserted_term[ 'term_id' ], 'property_location', OBJECT );
+            //die( '<pre>' . print_r( $geo_data->terms->{$_level}, true ) . '</pre>' );
+          } else {
+            error_log('Could not insert [property_location] term ['.$_value.'], error: [' . $_inserted_term->get_error_message() . ']' );
+          }
+
+        }
+
+      }
+
+      $_location_terms = array();
+
+      foreach( $geo_data->terms as $_term_hopefully ) {
+        if( isset( $_term_hopefully->term_id ) ) {
+          $_location_terms[] = $_term_hopefully->term_id;
+        }
+      }
+
+      // write, ovewriting any settings from before
+      wp_set_object_terms( $post_id, $_location_terms, 'property_location', false );
+
+    }
+
+    return $geo_data->terms;
+
+  }
   /**
    * Returns location information from Google Maps API call
    *
@@ -1801,8 +1909,8 @@ class WPP_F extends UsabilityDynamics\Utility {
    * Returns avaliability of Google's Geocoding Service based on time of last returned status OVER_QUERY_LIMIT
    * @uses const self::blocking_for_new_validation_interval
    * @uses option ud::geo_locate_address_last_OVER_QUERY_LIMIT
-   * @param type $update used to set option value in time()
-   * @return boolean
+   * @param bool|type $update used to set option value in time()
+   * @return bool
    * @author odokienko@UD
    */
   static public function available_address_validation( $update = false ) {
@@ -2886,12 +2994,10 @@ Ample off-street parking ",
     global $wp_properties;
 
     //** Handle backup */
-    if( isset( $_REQUEST[ 'wpp_settings' ] ) &&
-      wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'wpp_setting_save' ) &&
-      !empty( $_FILES[ 'wpp_settings' ][ 'tmp_name' ][ 'settings_from_backup' ] )
-    ) {
+    if( isset( $_REQUEST[ 'wpp_settings' ] ) && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'wpp_setting_save' ) &&  !empty( $_FILES[ 'wpp_settings' ][ 'tmp_name' ][ 'settings_from_backup' ] ) ) {
       $backup_file     = $_FILES[ 'wpp_settings' ][ 'tmp_name' ][ 'settings_from_backup' ];
       $backup_contents = file_get_contents( $backup_file );
+
       if( !empty( $backup_contents ) ) {
         $decoded_settings = json_decode( $backup_contents, true );
       }
@@ -3102,7 +3208,10 @@ Ample off-street parking ",
         $search_attributes = $wp_properties[ 'searchable_attributes' ];
       }
 
-      if( !is_array( $searchable_property_types ) ) {
+      if($searchable_property_types == 'all'){
+        $searchable_property_types = $wp_properties['searchable_property_types'];
+      }
+      else if( !is_array( $searchable_property_types ) ) {
         $searchable_property_types = explode( ',', $searchable_property_types );
         foreach( $searchable_property_types as $k => $v ) {
           $searchable_property_types[ $k ] = trim( $v );
@@ -3114,6 +3223,9 @@ Ample off-street parking ",
       foreach( $search_attributes as $searchable_attribute ) {
 
         if( $searchable_attribute == 'property_type' ) {
+          foreach ($wp_properties['searchable_property_types'] as $property_type) {
+            $range['property_type'][$property_type] = $wp_properties['property_types'][$property_type];
+          }
           continue;
         }
 
@@ -3943,7 +4055,8 @@ Ample off-street parking ",
 
   /**
    * Get coordinates for property out of database
-   *
+   * @param bool $listing_id
+   * @return array|bool
    */
   static public function get_coordinates( $listing_id = false ) {
     global $post, $property;
@@ -4212,7 +4325,7 @@ Ample off-street parking ",
       if( !empty( $image ) && is_array( $image ) ) {
         $imageHTML = "<img width=\"{$image['width']}\" height=\"{$image['height']}\" src=\"{$image['link']}\" alt=\"" . addslashes( $post->post_title ) . "\" />";
         if( @$wp_properties[ 'configuration' ][ 'property_overview' ][ 'fancybox_preview' ] == 'true' && !empty( $property[ 'featured_image_url' ] ) ) {
-          $imageHTML = "<a href=\"{$property['featured_image_url']}\" class=\"fancybox_image thumbnail\">{$imageHTML}</a>";
+          $imageHTML = "<a href=\"{$property['featured_image_url']}\" class=\"thumbnail\">{$imageHTML}</a>";
         }
       }
     }

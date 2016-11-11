@@ -27,7 +27,18 @@ class ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'C' => 
+        array (
+            'ChromePhp' => 
+            array (
+                0 => __DIR__ . '/..' . '/ccampbell/chromephp',
+            ),
+        ),
+    );
+
     public static $classMap = array (
+        'ChromePhp' => __DIR__ . '/..' . '/ccampbell/chromephp/ChromePhp.php',
         'Composer\\Installers\\AglInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/AglInstaller.php',
         'Composer\\Installers\\AimeosInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/AimeosInstaller.php',
         'Composer\\Installers\\AnnotateCmsInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/AnnotateCmsInstaller.php',
@@ -209,8 +220,12 @@ class ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece
         'UsabilityDynamics\\WPP\\Children_List_Table' => __DIR__ . '/../../..' . '/lib/classes/class-children-list-table.php',
         'UsabilityDynamics\\WPP\\Dashboard_Widget' => __DIR__ . '/../../..' . '/lib/classes/class-dashboard-widget.php',
         'UsabilityDynamics\\WPP\\Export' => __DIR__ . '/../../..' . '/lib/classes/class-export.php',
+        'UsabilityDynamics\\WPP\\Layouts' => __DIR__ . '/../../..' . '/lib/classes/class-layouts.php',
+        'UsabilityDynamics\\WPP\\Layouts_API_Client' => __DIR__ . '/../../..' . '/lib/classes/class-layouts-api-client.php',
+        'UsabilityDynamics\\WPP\\Layouts_Settings' => __DIR__ . '/../../..' . '/lib/classes/class-layouts-settings.php',
         'UsabilityDynamics\\WPP\\List_Table' => __DIR__ . '/../../..' . '/lib/classes/class-list-table.php',
         'UsabilityDynamics\\WPP\\Meta_Box' => __DIR__ . '/../../..' . '/lib/classes/class-meta-box.php',
+        'UsabilityDynamics\\WPP\\Panels_Css_Builder' => __DIR__ . '/../../..' . '/lib/classes/class-layouts.php',
         'UsabilityDynamics\\WPP\\Property_Factory' => __DIR__ . '/../../..' . '/lib/classes/class-property-factory.php',
         'UsabilityDynamics\\WPP\\Scaffold' => __DIR__ . '/../../..' . '/lib/classes/class-scaffold.php',
         'UsabilityDynamics\\WPP\\Settings' => __DIR__ . '/../../..' . '/lib/classes/class-settings.php',
@@ -244,6 +259,7 @@ class ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece::$classMap;
 
         }, null, ClassLoader::class);

@@ -21,12 +21,12 @@ namespace UsabilityDynamics\WPRETSC {
       /**
        * @var string
        */
-      public $widget_title = 'RETS.CI';
+      public $widget_title = 'rets.ci';
 
       /**
        * @var string
        */
-      private $api_url = 'https://api.rets.ci/';
+      private $api_url = 'https://rets-ci-api-rets-ci-develop-andy.c.rabbit.ci/';
 
       /**
        * Widget constructor.

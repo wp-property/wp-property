@@ -147,19 +147,19 @@ $predefined_values = isset( $wp_properties[ 'predefined_values' ] ) ? $wp_proper
           <li class="wpp_development_advanced_option">
             <label>
               <input <?php echo ( isset( $wp_properties[ 'hidden_frontend_attributes' ] ) && is_array( $wp_properties[ 'hidden_frontend_attributes' ] ) && in_array( $slug, $wp_properties[ 'hidden_frontend_attributes' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug" name="wpp_settings[hidden_frontend_attributes][]" value="<?php echo $slug; ?>"/>
-              <?php _e( 'Admin Only.', ud_get_wp_property()->domain ); ?>
+              <?php _e( 'Admin only.', ud_get_wp_property()->domain ); ?>
             </label>
           </li>
-          <li class="wpp_development_advanced_option">
+          <li class="wpp-setting wpp_development_advanced_option wpp-setting-attribute-admin-sortable">
             <label>
               <input <?php echo ( isset( $wp_properties[ 'column_attributes' ] ) && is_array( $wp_properties[ 'column_attributes' ] ) && in_array( $slug, $wp_properties[ 'column_attributes' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug" name="wpp_settings[column_attributes][]" value="<?php echo $slug; ?>"/>
-              <?php _e( 'Add Column on "All Properties" page.', ud_get_wp_property()->domain ); ?>
+              <?php _e( 'Admin sortable.', ud_get_wp_property()->domain ); ?>
             </label>
           </li>
           <li class="wpp_development_advanced_option en_default_value_container">
             <label>
               <input <?php echo ( isset( $wp_properties[ 'en_default_value' ] ) && is_array( $wp_properties[ 'en_default_value' ] ) && in_array( $slug, $wp_properties[ 'en_default_value' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug en_default_value" name="wpp_settings[en_default_value][]" value="<?php echo $slug; ?>"/>
-              <?php _e( 'Enable default value assign.', ud_get_wp_property()->domain ); ?>
+              <?php _e( 'Set default value.', ud_get_wp_property()->domain ); ?>
             </label>
           </li>
           <?php do_action( 'wpp::property_attributes::settings', $slug ); ?>

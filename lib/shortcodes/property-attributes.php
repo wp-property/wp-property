@@ -15,9 +15,25 @@ namespace UsabilityDynamics\WPP {
        * Init
        */
       public function __construct() {
+        global $wp_properties;
 
         $attributes = ud_get_wp_property( 'property_stats', array() );
 
+        $default_taxonomies = array('features', 'community_features', 'property_type', 'status');
+
+        if(function_exists( 'ud_get_wpp_terms' )){
+          foreach ( ud_get_wpp_terms('config.taxonomies') as $tax => $taxonomy) {
+            //if($taxonomy['public'])
+            $attributes[$tax] = "<b>Term:</b> " . $taxonomy['label'];
+          }
+        }
+        else{
+          foreach ( $default_taxonomies as $tax) {
+            if(isset($wp_properties['taxonomies'][$tax]))// && $taxonomy['public'])
+              $attributes[$tax] = "<b>Term:</b> " . $wp_properties['taxonomies'][$tax]['label'];
+          }
+        }
+        
         /*
         $hidden_attributes = ud_get_wp_property( 'hidden_frontend_attributes', array() );
         foreach( $attributes as $k => $v ) {
@@ -98,6 +114,15 @@ namespace UsabilityDynamics\WPP {
                 'type' => 'multi_checkbox',
                 'options' => $attributes,
               ),
+              'make_terms_links' => array(
+                'name' => __( 'Make terms link', ud_get_wp_property()->domain ),
+                'description' => __( 'Make the term link to term page.', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
+                  'false' => __( 'No', ud_get_wp_property()->domain ),
+                )
+              ),
             ),
             'description' => sprintf( __( 'Renders %s Attributes List', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
             'group' => 'WP-Property'
@@ -122,6 +147,7 @@ namespace UsabilityDynamics\WPP {
           'return_blank' => 'false',
           'include' => '',
           'exclude' => '',
+          'make_terms_links' => 'false',
         ), $atts );
 
         return $this->get_template( 'property-attributes', $data, false );

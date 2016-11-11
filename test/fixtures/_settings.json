@@ -1,0 +1,202 @@
+{
+  "configuration": {
+    "enable_comments": "false",
+    "enable_revisions": "false",
+    "exclude_from_regular_search_results": "false",
+    "base_slug": "property",
+    "automatically_insert_overview": "false",
+    "do_not_override_search_result_page": "false",
+    "single_property": {
+      "template": "property",
+      "page_template": "default"
+    },
+    "property_overview": {
+      "sort_stats_by_groups": "false",
+      "show_true_as_image": "false",
+      "thumbnail_size": "tiny_thumb",
+      "pagination_type": "slider",
+      "show_children": "true",
+      "fancybox_preview": "true",
+      "add_sort_by_title": "false"
+    },
+    "disable_widgets": {
+      "wpp_sidebar_boat-dock": "false",
+      "wpp_sidebar_commercial": "false",
+      "wpp_sidebar_lot-land": "false",
+      "wpp_sidebar_residential": "false",
+      "wpp_sidebar_residential-income": "false"
+    },
+    "address_attribute": "location",
+    "google_maps_localization": "en",
+    "google_maps_api": "AIzaSyBf-cfQC4gV1eJ7f814509m08mfG6LY-Rs",
+    "google_maps_api_server": "AIzaSyBf-cfQC4gV1eJ7f814509m08mfG6LY-Rs",
+    "phone_number": "",
+    "autoload_css": "false",
+    "enable_legacy_features": "false",
+    "allow_parent_deep_depth": "false",
+    "disable_wordpress_postmeta_cache": "false",
+    "developer_mode": "true",
+    "auto_delete_attachments": "false",
+    "do_not_automatically_regenerate_thumbnails": "true",
+    "pre_release_update": "false",
+    "default_image": {
+      "default": {
+        "url": "",
+        "id": ""
+      },
+      "types": {
+        "boat-dock": {
+          "url": "",
+          "id": ""
+        },
+        "commercial": {
+          "url": "",
+          "id": ""
+        },
+        "lot-land": {
+          "url": "",
+          "id": ""
+        },
+        "residential": {
+          "url": "",
+          "id": ""
+        },
+        "residential-income": {
+          "url": "",
+          "id": ""
+        }
+      }
+    },
+    "bottom_insert_pagenation": "false",
+    "single_property_view": {
+      "map_image_type": "tiny_thumb"
+    },
+    "gm_zoom_level": "",
+    "google_maps": {
+      "show_true_as_image": "false",
+      "infobox_settings": {
+        "show_property_title": "true",
+        "show_direction_link": "true",
+        "do_not_show_child_properties": "false"
+      },
+      "infobox_attributes": [
+        "price"
+      ]
+    },
+    "display_address_format": "[city], [state]",
+    "currency_symbol": "$",
+    "thousands_sep": "",
+    "currency_symbol_placement": "",
+    "show_aggregated_value_as_average": "false",
+    "admin_ui": {
+      "overview_table_thumbnail_size": "tiny_thumb"
+    },
+    "completely_hide_hidden_attributes_in_admin_ui": "false",
+    "main_stats_group": "main"
+  },
+  "image_sizes": {
+    "map_thumb": {
+      "width": "75",
+      "height": "75"
+    },
+    "tiny_thumb": {
+      "width": "100",
+      "height": "100"
+    },
+    "sidebar_wide": {
+      "width": "195",
+      "height": "130"
+    },
+    "slideshow": {
+      "width": "640",
+      "height": "235"
+    }
+  },
+  "property_stats": {
+    "location": "Address",
+    "price": "Price",
+    "deposit": "Deposit",
+    "area": "Area"
+  },
+  "property_stats_groups": {
+    "property_type": "_general",
+    "property_status": "_general",
+    "property_location": "_location",
+    "post_content": "_content",
+    "tagline": "_content",
+    "location": "_location",
+    "price": "main",
+    "deposit": "main",
+    "area": "main"
+  },
+  "searchable_attr_fields": {
+    "location": "",
+    "price": "range_input",
+    "deposit": "range_input",
+    "area": "range_input",
+    "property_feature": "dropdown",
+    "community_feature": "dropdown",
+    "property_type": "dropdown",
+    "property_location": "dropdown",
+    "property_status": "multi_checkbox"
+  },
+  "predefined_search_values": {
+    "location": "",
+    "price": "",
+    "deposit": "",
+    "area": ""
+  },
+  "admin_attr_fields": {
+    "location": "input",
+    "price": "currency",
+    "deposit": "currency",
+    "area": "number"
+  },
+  "predefined_values": {
+    "location": "",
+    "price": "",
+    "deposit": "",
+    "area": ""
+  },
+  "default_values": {
+    "location": "",
+    "price": "",
+    "deposit": "",
+    "area": ""
+  },
+  "searchable_attributes": [
+    "price",
+    "deposit",
+    "area"
+  ],
+  "property_meta": {
+    "tagline": "Tagline"
+  },
+  "property_types": {
+    "boat-dock": "Boat Dock",
+    "commercial": "Commercial",
+    "lot-land": "Lot & Land",
+    "residential": "Residential",
+    "residential-income": "Residential Income"
+  },
+  "property_groups": {
+    "main": {
+      "name": "Main",
+      "color": "#bdd6ff"
+    },
+    "_location": {
+      "name": "Location",
+      "color": "#ffffff"
+    },
+    "_media": {
+      "name": "Media",
+      "color": "#ffffff"
+    },
+    "_content": {
+      "name": "Content",
+      "color": "#ffffff"
+    }
+  },
+  "hidden_attributes": [ ],
+  "property_inheritance": [ ]
+}

@@ -172,7 +172,7 @@ namespace UsabilityDynamics\WPP {
                   <ul class="wpp-multi-checkbox-wrapper">
                     <?php foreach( $param['options'] as $opt_name => $opt_label ) { ?>
                       <li><label><input type="checkbox"
-                          <?php echo ( !empty( $instance[ $param['id'] ][ $opt_name ] ) ) ? 'checked' : ''; ?>
+                          <?php echo ( !empty( $instance[ $param['id'] ][ $opt_name ] ) || (empty($instance) &&in_array( $opt_name, (array) $param['default'] )) ) ? 'checked' : ''; ?>
                           class="widefat"
                           id="<?php echo $this->get_field_id( $param['id'] ) . '_' . $opt_name; ?>"
                           name="<?php echo $this->get_field_name( $param['id'] ); ?>[<?php echo $opt_name; ?>]"> <?php echo $opt_label; ?></label>

@@ -6,6 +6,7 @@
  */
 namespace UsabilityDynamics\WPP {
 
+
   if( !class_exists( 'UsabilityDynamics\WPP\Bootstrap' ) ) {
 
     final class Bootstrap extends \UsabilityDynamics\WP\Bootstrap_Plugin {
@@ -21,6 +22,8 @@ namespace UsabilityDynamics\WPP {
        * @type \UsabilityDynamics\WPP\Bootstrap object
        */
       protected static $instance = null;
+
+      public $layouts_settings = null;
       
       /**
        * Instantaite class.
@@ -136,6 +139,12 @@ namespace UsabilityDynamics\WPP {
 
         // Handle regular pre-release checks.
         add_filter( 'pre_update_site_option__site_transient_update_plugins', array( 'UsabilityDynamics\WPP\Bootstrap', 'update_check_handler' ), 50, 2 );
+
+        // New layout feature.
+        if( defined( 'WPP_FEATURE_FLAG_LAYOUTS' ) && WPP_FEATURE_FLAG_LAYOUTS ) {
+          $this->layouts_settings = new Layouts_Settings();
+          new Layouts();
+        }
 
       }
 
@@ -307,6 +316,7 @@ namespace UsabilityDynamics\WPP {
         return $response;
 
       }
+
 
     }
 

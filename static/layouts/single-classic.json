@@ -1,0 +1,182 @@
+{
+  "widgets": [
+    {
+      "type": "title",
+      "panels_info": {
+        "class": "SiteOrigin_Panels_Widgets_PostContent",
+        "raw": false,
+        "grid": 0,
+        "cell": 0,
+        "id": 0,
+        "widget_id": "98bdc9e2-fb4b-4d1d-9f52-81d96113c676",
+        "style": {
+          "background_display": "tile"
+        }
+      }
+    },
+    {
+      "type": "featured",
+      "panels_info": {
+        "class": "SiteOrigin_Panels_Widgets_PostContent",
+        "raw": false,
+        "grid": 0,
+        "cell": 1,
+        "id": 1,
+        "widget_id": "0d01d12e-ac2c-4c87-b19e-f92394232e41",
+        "style": {
+          "background_display": "tile"
+        }
+      }
+    },
+    {
+      "_widget_title": "Atrributes",
+      "sort_by_groups": "true",
+      "display": "list",
+      "show_true_as_image": "false",
+      "make_link": "true",
+      "hide_false": "false",
+      "return_blank": "false",
+      "include": {
+        "location": "on",
+        "price": "on",
+        "deposit": "on",
+        "area": "on",
+        "my_new_attribute": "on"
+      },
+      "panels_info": {
+        "class": "UsabilityDynamics\\WPP\\Widgets\\PropertyAttributesWidget",
+        "raw": false,
+        "grid": 1,
+        "cell": 0,
+        "id": 2,
+        "widget_id": "6bd9b39d-2daa-4d9a-afc4-7bbbf0176737",
+        "style": {
+          "background_display": "tile"
+        }
+      }
+    },
+    {
+      "_widget_title": "Meta List",
+      "property_id": "",
+      "include": {
+        "tagline": "on"
+      },
+      "panels_info": {
+        "class": "UsabilityDynamics\\WPP\\Widgets\\PropertyMetaWidget",
+        "raw": false,
+        "grid": 1,
+        "cell": 0,
+        "id": 3,
+        "widget_id": "9256a473-b24a-4d00-8f69-e774d841f5bb",
+        "style": {
+          "background_display": "tile"
+        }
+      }
+    },
+    {
+      "title": "Gallery",
+      "image_type": "thumbnail",
+      "big_image_type": "large",
+      "gallery_count": "3",
+      "panels_info": {
+        "class": "GalleryPropertiesWidget",
+        "raw": false,
+        "grid": 1,
+        "cell": 1,
+        "id": 4,
+        "widget_id": "cf286fe9-7e50-46c9-9f9d-0d853c3f50fb",
+        "style": {
+          "background_display": "tile"
+        }
+      }
+    },
+    {
+      "_widget_title": "Map",
+      "property_id": "",
+      "width": "100%",
+      "height": "450px",
+      "zoom_level": "13",
+      "hide_infobox": "false",
+      "panels_info": {
+        "class": "UsabilityDynamics\\WPP\\Widgets\\PropertyMapWidget",
+        "raw": false,
+        "grid": 2,
+        "cell": 0,
+        "id": 5,
+        "widget_id": "c01e5344-7017-4de7-b7e7-34afbb8791ae",
+        "style": {
+          "background_display": "tile"
+        }
+      }
+    },
+    {
+      "_widget_title": "Attachments",
+      "type": "",
+      "sort_order": "ASC",
+      "groupby": "",
+      "opening": "<ul class=\"attachment-list wpp_attachment_list\">",
+      "closing": "<\/ul>",
+      "before_item": "<li>",
+      "after_item": "<\/li>",
+      "panels_info": {
+        "class": "UsabilityDynamics\\WPP\\Widgets\\ListAttachmentsWidget",
+        "raw": false,
+        "grid": 3,
+        "cell": 1,
+        "id": 6,
+        "widget_id": "72c3eebd-ef98-4738-b482-c05df6b959b7",
+        "style": {
+          "background_display": "tile"
+        }
+      }
+    }
+  ],
+  "grids": [
+    {
+      "cells": 2,
+      "style": [ ]
+    },
+    {
+      "cells": 2,
+      "style": [ ]
+    },
+    {
+      "cells": 1,
+      "style": [ ]
+    },
+    {
+      "cells": 2,
+      "style": [ ]
+    }
+  ],
+  "grid_cells": [
+    {
+      "grid": 0,
+      "weight": 0.33333333333333
+    },
+    {
+      "grid": 0,
+      "weight": 0.66666666666667
+    },
+    {
+      "grid": 1,
+      "weight": 0.750000001875
+    },
+    {
+      "grid": 1,
+      "weight": 0.249999998125
+    },
+    {
+      "grid": 2,
+      "weight": 1
+    },
+    {
+      "grid": 3,
+      "weight": 0.5
+    },
+    {
+      "grid": 3,
+      "weight": 0.5
+    }
+  ]
+}

@@ -1,3 +1,18 @@
+.wpp_settings_page .fs-notice label.fs-plugin-title {
+  display: none;
+}
+tr.wpp-setting-single-template {
+  display: none;
+}
+li.wpp-setting-attribute-admin-sortable,
+li.wpp-setting-exclude-from-regular-search-results,
+tr.wpp-setting-default-phone-number,
+tr.wpp-setting-widget-sidebars {
+  display: none;
+}
+div.rwmb-wpp_parent-wrapper {
+  display: none;
+}
 .wpp-multi-checkbox-wrapper {
   padding: 10px;
   max-height: 200px;
