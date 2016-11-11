@@ -180,33 +180,41 @@
 }
 /* WP Property search widget */
 /* Property MAP */
-.property_map_wrapper #infowindow .wpp_google_maps_attribute_row_property_title {
+.property_map_wrapper #infowindow .wpp_google_maps_attribute_row_property_title,
+#property_map #infowindow .wpp_google_maps_attribute_row_property_title {
   margin-bottom: 5px;
   font-weight: bold;
 }
-.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table {
+.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table,
+#property_map #infowindow table.wpp_google_maps_infobox_table {
   border: none;
 }
-.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col {
+.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col,
+#property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col {
   border: none;
   padding: 0;
 }
-.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a img {
+.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a img,
+#property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a img {
   max-width: 100%;
 }
-.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col {
+.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col,
+#property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col {
   border: none;
   padding: 0 0 0 10px;
 }
-.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox {
+.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox,
+#property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li {
+.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li,
+#property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li {
   list-style: none;
 }
-.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li .attribute {
+.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li .attribute,
+#property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li .attribute {
   padding-right: 5px;
 }
 /* Property MAP */
