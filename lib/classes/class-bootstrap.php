@@ -31,6 +31,11 @@ namespace UsabilityDynamics\WPP {
       public function init() {
         global $wp_properties;
 
+        add_action('admin_head', function(){
+          global $wp_properties, $_wp_admin_css_colors;
+          $wp_properties['admin_colors'] = $_wp_admin_css_colors[get_user_option('admin_color')]->colors;
+        });
+
         /**
          * Duplicates UsabilityDynamics\WP\Bootstrap_Plugin::load_textdomain();
          *
