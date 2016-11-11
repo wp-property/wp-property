@@ -141,7 +141,7 @@ namespace UsabilityDynamics\WPP {
         add_filter( 'pre_update_site_option__site_transient_update_plugins', array( 'UsabilityDynamics\WPP\Bootstrap', 'update_check_handler' ), 50, 2 );
 
         // New layout feature.
-        if( defined( 'WPP_FEATURE_FLAG_LAYOUTS' ) && WPP_FEATURE_FLAG_LAYOUTS ) {
+        if( !empty( $wp_properties['configuration']['enable_layouts'] ) && $wp_properties['configuration']['enable_layouts'] == 'true' ) {
           $this->layouts_settings = new Layouts_Settings();
           new Layouts();
         }
