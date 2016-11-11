@@ -76,6 +76,8 @@ if( defined( 'WPP_FEATURE_FLAG_FREEMIUS' ) && WPP_FEATURE_FLAG_FREEMIUS ) {
           'slug'       => "edit.php?post_type=property",
           'first-path' => 'index.php?page=ud-splash',
           'account'    => false,
+          'support' => false,
+          'contact' => false
         ),
       ) );
 
