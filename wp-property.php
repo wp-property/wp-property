@@ -39,6 +39,11 @@ if( !defined( 'WPP_Templates' ) ) {
   define( 'WPP_Templates', WPP_Path . 'static/views' );
 }
 
+// New Feature Flags since 2.2.1 - enable freemius 
+if( !defined( 'WPP_FEATURE_FLAG_FREEMIUS' ) ) {
+  define( 'WPP_FEATURE_FLAG_FREEMIUS', true);
+}
+
 // Use Freemius is flag is enabled.
 if( defined( 'WPP_FEATURE_FLAG_FREEMIUS' ) && WPP_FEATURE_FLAG_FREEMIUS ) {
 
@@ -65,6 +70,8 @@ if( defined( 'WPP_FEATURE_FLAG_FREEMIUS' ) && WPP_FEATURE_FLAG_FREEMIUS ) {
           'slug'       => "edit.php?post_type=property",
           'first-path' => 'index.php?page=ud-splash',
           'account'    => false,
+          'support' => false,
+          'contact' => false
         ),
       ) );
 
