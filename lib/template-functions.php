@@ -539,7 +539,7 @@ if ( !function_exists( 'draw_stats' ) ):
     /* Extend $property_stats with property taxonomy */
     if(is_array($wp_properties['taxonomies'])){
       foreach ($wp_properties['taxonomies'] as $taxonomy => $data) {
-        if($data['public'])
+        if($data['public'] && empty($wp_properties['taxonomies'][$taxonomy]['hidden']))
           $property_stats[ $taxonomy ] = array( 'label' => $data['label'], 'value' => $data['label'] );
       }
     }

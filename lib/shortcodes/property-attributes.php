@@ -19,8 +19,6 @@ namespace UsabilityDynamics\WPP {
 
         $attributes = ud_get_wp_property( 'property_stats', array() );
 
-        $default_taxonomies = array('features', 'community_features', 'property_type', 'property_status', 'wpp_location');
-
         foreach ($wp_properties['taxonomies'] as $taxonomy => $data) {
           if($data['public'] && ( function_exists( 'ud_get_wpp_terms' ) || !empty($data['default']) )){
             $attributes[$taxonomy] = "<b>Term:</b> " . $data['label'];
