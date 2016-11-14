@@ -286,7 +286,7 @@ class WPP_Core {
     add_action( 'created_wpp_type', array($this, 'term_created_wpp_type'), 10, 2 );
     add_action( 'edited_wpp_type', array($this, 'term_created_wpp_type'), 10, 2 );
     add_action( 'delete_wpp_type', array($this, 'term_delete_wpp_type'), 10, 4 );
-    add_action( 'wpp_settings_save', array(WPP_F, 'create_property_type_terms'), 10, 2 );
+    add_action( 'wpp_settings_save', array('WPP_F', 'create_property_type_terms'), 10, 2 );
   }
 
   /**
