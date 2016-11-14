@@ -226,3 +226,32 @@
   max-width: 100%;
 }
 /* Gallery widget */
+/* Features list */
+.wpp_feature_list dl dt {
+  font-weight: bold;
+}
+.wpp_feature_list dl dd {
+  margin: 0 0 0 15px;
+}
+.wpp_feature_list dl dd ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.wpp_feature_list span {
+  display: inline-block;
+  vertical-align: top;
+}
+.wpp_feature_list span.attribute {
+  font-weight: bold;
+  min-width: 15%;
+}
+.wpp_feature_list span.value {
+  margin: 0 0 0 15px;
+}
+.wpp_feature_list span.value ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* Features list */
