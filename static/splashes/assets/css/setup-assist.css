@@ -61,7 +61,24 @@
 }
 #wpp-splash-screen .owl-buttons div{
   position: absolute;
-  top : 42%;
+  top : 300px;
+}
+.wpp_asst_screen table.wpp_layouts_table .layouts-list h5{
+  font-size: small;
+  margin: 0px 0 0.1em;
+}
+.wpp_asst_screen table.wpp_layouts_table th select{
+  margin-left: 0px;
+  margin-top: 0px;
+  width: 100%;
+      border: 0px none;
+    height: 100%;
+}
+.wpp_asst_screen table.wpp_layouts_table .wpp_dropdown_wrap{
+  margin-top: 32px !important;  
+}
+.wpp_asst_screen .layouts-list{
+  margin-top: 0px;
 }
 #wpp-splash-screen .owl-buttons div.owl-prev{
   left: 0;      
@@ -321,12 +338,17 @@ h2.wpp_asst_heading b {
 .wp-admin select {
   height: 28px;
   line-height: 28px;
-  margin-left: 34px;
-  margin-top: 20px;
+  margin-top: 30px;
   padding: 2px;
-  width: 36%;
 }
-
+.wpp_asst_screen table small {
+    clear: both;
+    float: left;
+    margin-top: 10px;
+}
+.wpp_asst_screen .wpp_layouts_table th{
+  width: 175px;
+}
 .label-main
 {
   margin-left: 67px;
@@ -393,7 +415,7 @@ li.checkbox-up [type="checkbox"] + span::before {
   margin-top: -27px;
 }
 
-.wpp_asst_select {
+.wpp_asst_select,.wpp_asst_screen table.wpp_layouts_table .wpp_dropdown_wrap {
   border: 1px solid #ccc;
   border-radius: 3px;
   float: left;
@@ -403,6 +425,9 @@ li.checkbox-up [type="checkbox"] + span::before {
   width: 100%;
   height:38px;
   margin: 0 0 0 6px;
+}
+.wpp_asst_screen table.wpp_layouts_table .wpp_dropdown_wrap {
+  max-width: 140px;
 }
 .wpp_asst_select select {
   padding: 5px;

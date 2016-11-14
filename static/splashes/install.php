@@ -24,7 +24,7 @@ wp_enqueue_script('setup-assist-page-js', WPP_URL . "splashes/assets/js/setup-as
   #wpp-splash-screen .owl-buttons div.owl-next::before {
     background: rgba(0, 0, 0, 0) url("<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/next.png', 'url'); ?>") no-repeat scroll 0 0 / 100% auto  !important;
   }
-  .wpp_asst_select {
+  .wpp_asst_select,.wpp_asst_screen table.wpp_layouts_table th select {
     background: #fff url("<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/icon1.png', 'url'); ?>") no-repeat scroll 100% 50%  !important;
   }
   #wpbody-content {
@@ -78,7 +78,7 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
     
     <div class="loader-div"><img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/loader.gif', 'url'); ?>" alt="image"></div> 
     <div id="wpp-splash-screen-owl" class="owl-carousel">
-
+      
       <div class="item">
         <div class="wpp_asst_screen wpp_asst_screen_1">
           <h2 class="wpp_asst_heading_main"><?php  echo __('WELCOME TO', ud_get_wp_property()->domain); ?></h2>
@@ -202,6 +202,11 @@ echo "<script> var wpp_property_assistant = $property_assistant; </script>";
             <span class="description"></span>
             
           </div>
+        </div>
+      </div>
+      <div class="item  item-wider">
+        <div class="wpp_asst_screen wpp_asst_screen_6">
+          <?php echo ud_get_wp_property()->layouts_settings->setup_assistant_layouts(); ?>
         </div>
       </div>
       <div class="item">

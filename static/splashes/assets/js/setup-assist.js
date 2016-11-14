@@ -56,7 +56,7 @@ jQuery(document).ready(function () {
     $isScreen = $(".owl-page.active").index() + 1;
     // maybe add some screen specific
     switch ($isScreen) {
-      case 5 :
+      case 6 :
         jQuery('#wpp-setup-assistant').submit();
       default:
         console.log("reached default screen");

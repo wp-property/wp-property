@@ -174,19 +174,19 @@ namespace UsabilityDynamics\WPP {
 
         ?>
 
-        <table class="form-table">
+        <table class="form-table wpp_layouts_table">
           <tbody>
-
+            <tr class="wpp_layout_header"><td colspan="2"><?php _e( 'Property Term Single', ud_get_wp_property()->domain ); ?> 
+              <small><?php _e( 'Applies only when layout is selected', ud_get_wp_property()->domain ); ?></small></td></tr>
             <tr id="property-term-single">
               <th>
-                <?php _e( 'Property Term Single', ud_get_wp_property()->domain ); ?>
-                <br /><br /><br />
-                <select style="font-weight: normal" name="wpp_settings[configuration][layouts][files][property_term_single]">
-                  <?php foreach( $template_files as $file => $file_path ): ?>
-                    <option <?php selected( $layouts_template_files['property_term_single'], $file ); ?> value="<?php echo $file; ?>"><?php echo $file; ?></option>
-                  <?php endforeach; ?>
-                </select>
-                <small style="font-weight: normal"><?php _e( 'Applies only when layout is selected', ud_get_wp_property()->domain ); ?></small>
+                <div class="wpp_dropdown_wrap">
+                  <select class="wpp_dropdown" name="wpp_settings[configuration][layouts][files][property_term_single]">
+                    <?php foreach( $template_files as $file => $file_path ): ?>
+                      <option <?php selected( $layouts_template_files['property_term_single'], $file ); ?> value="<?php echo $file; ?>"><?php echo $file; ?></option>
+                    <?php endforeach; ?>
+                  </select>
+                </div>
               </th>
               <td>
                 <?php
@@ -215,24 +215,23 @@ namespace UsabilityDynamics\WPP {
                 ?>
                   </ul>
                 <?php
-                  } 
-                  else {
+                  } else {
                     _e( 'There are no available layouts. Default view is used.', ud_get_wp_property()->domain );
                   }
                 ?>
               </td>
             </tr>
-
+            <tr class="wpp_layout_header"><td colspan="2"><?php _e( 'Property Single', ud_get_wp_property()->domain ); ?>
+              <small><?php _e( 'Applies only when layout is selected', ud_get_wp_property()->domain ); ?></small></td></tr>
             <tr id="property-single">
               <th>
-                <?php _e( 'Property Single', ud_get_wp_property()->domain ); ?>
-                <br /><br /><br />
-                <select style="font-weight: normal" name="wpp_settings[configuration][layouts][files][property_single]">
-                  <?php foreach( $template_files as $file => $file_path ): ?>
-                    <option <?php selected( $layouts_template_files['property_single'], $file ); ?> value="<?php echo $file; ?>"><?php echo $file; ?></option>
-                  <?php endforeach; ?>
-                </select>
-                <small style="font-weight: normal"><?php _e( 'Applies only when layout is selected', ud_get_wp_property()->domain ); ?></small>
+                <div class="wpp_dropdown_wrap">
+                  <select  class="wpp_dropdown" name="wpp_settings[configuration][layouts][files][property_single]">
+                    <?php foreach( $template_files as $file => $file_path ): ?>
+                      <option <?php selected( $layouts_template_files['property_single'], $file ); ?> value="<?php echo $file; ?>"><?php echo $file; ?></option>
+                    <?php endforeach; ?>
+                  </select>
+                </div>
               </th>
               <td>
                 <?php
@@ -267,17 +266,18 @@ namespace UsabilityDynamics\WPP {
                 ?>
               </td>
             </tr>
-
+            
+            <tr class="wpp_layout_header"><td colspan="2"><?php _e( 'Search Results', ud_get_wp_property()->domain ); ?>
+              <small><?php _e( 'Applies only when layout is selected', ud_get_wp_property()->domain ); ?></small></td></tr>
             <tr id="search-results">
               <th>
-                <?php _e( 'Search Results', ud_get_wp_property()->domain ); ?>
-                <br /><br /><br />
-                <select style="font-weight: normal" name="wpp_settings[configuration][layouts][files][search_results]">
-                  <?php foreach( $template_files as $file => $file_path ): ?>
-                    <option <?php selected( $layouts_template_files['search_results'], $file ); ?> value="<?php echo $file; ?>"><?php echo $file; ?></option>
-                  <?php endforeach; ?>
-                </select>
-                <small style="font-weight: normal"><?php _e( 'Applies only when layout is selected', ud_get_wp_property()->domain ); ?></small>
+                <div class="wpp_dropdown_wrap">
+                  <select  class="wpp_dropdown" name="wpp_settings[configuration][layouts][files][search_results]">
+                    <?php foreach( $template_files as $file => $file_path ): ?>
+                      <option <?php selected( $layouts_template_files['search_results'], $file ); ?> value="<?php echo $file; ?>"><?php echo $file; ?></option>
+                    <?php endforeach; ?>
+                  </select>
+                </div>
               </th>
               <td>
                 <?php
@@ -355,6 +355,14 @@ namespace UsabilityDynamics\WPP {
         <?php
 
         echo apply_filters( 'wpp::layouts::settings_html', ob_get_clean() );
+      }
+    
+      /**
+       * load layouts for setup assistant page
+       */
+      function setup_assistant_layouts(){
+        $this->preloaded_layouts = $this->preload_layouts();
+        return $this->settings_page();
       }
     }
   }

@@ -1947,3 +1947,27 @@ body.post-type-property .uisf-date {
   height: auto;
   opacity: 1;
 }
+table.wpp_layouts_table th,table.wpp_layouts_table td{
+  padding-top: 0px;
+}
+table.wpp_layouts_table  .wpp_layout_header td{
+  font-weight: bold;
+  font-size: large;
+  padding-top :20px;
+}
+table.wpp_layouts_table  .wpp_layout_header td small{
+  font-weight:100;
+  font-size: smaller;
+  padding: 0px 10px;
+  color: #72777c;
+  float: none;
+}
+table.wpp_layouts_table th select{
+  margin-top: 35px;
+  min-width: 125px;
+  padding: 0px 5px 5px 5px;
+  height: 32px;
+}
+table.wpp_layouts_table .layouts-list h5{
+  margin: 0px 0 1.67em;
+} 
