@@ -63,96 +63,241 @@
   clear: both;
 }
 
+.clearfix {
+  &:after,
+  &:before {
+    display: block;
+    clear: both;
+    content: '';
+  }
+}
+
 /* Main styles
 ----------------------------------- */
+body,
+#wpp_layout {
 
-/* WP Property overview shortcode */
-.wpp_property_overview_shortcode {
+  /* WP Property overview shortcode */
+  .wpp_property_overview_shortcode {
 
-  /* Property Pagination */
-  .properties_pagination {
-    margin-bottom: 10px;
-    .wpp_pagination_slider_status {
-      margin-top: 5px;
+    /* Property Pagination */
+    .properties_pagination {
       margin-bottom: 10px;
-      .wpp_sorter_options {
-        padding-left: 25px;
-        .wpp_sort_by_text {
-          padding-right: 5px;
-        }
-        .wpp_sortable_link {
-          cursor: pointer;
-        }
-      }
-    }
-    ul.property-overview-navigation {
-      margin: 5px 0 10px;
-      padding: 0px;
-      list-style: outside none none;
-      li {
-        display: inline-block;
-        padding: 0 5px;
-        border: none;
-        &.pages {
-          padding: 0;
-        }
-        a {
-          text-decoration: none;
-          padding-left: 6px;
-          padding-right: 6px;
-        }
-        ul {
-          margin: 0px;
-          padding: 0px;
-          list-style: outside none none;
-        }
-      }
-    }
-    .pagination-loadmore {
-      text-align: center;
-      button.wpp_loadmore_button {
-        cursor: pointer;
-        display: inline-block;
-        padding: 5px 15px;
-      }
-    }
-  }
-  /* Property Pagination */
+      .wpp_pagination_slider_status {
+        margin-top: 5px;
+        margin-bottom: 10px;
+        .clearfix;
+        .wpp_property_results_options {
+          display: block;
 
-  /* View results */
-  .all-properties {
-    .property_div {
-      display: inline-block;
-      margin-bottom: 20px;
-      margin-right: -3px;
-      padding: 0 10px;
-      vertical-align: top;
-      min-width: 138px;
-      width: 25%;
-      .wpp_overview_left_column {
-        margin: 0 auto 5px;
-        max-width: 100%;
-        .property_overview_thumb {
-          border: none;
-          padding: 0;
-          margin: 0;
-          img {
-            max-width: 100%;
-            height: auto;
+          .wpp_property_results {
+            float: left;
+            display: block;
+          }
+          .wpp_sorter_options {
+            padding-left: 25px;
+            display: block;
+            float: right;
+            .wpp_sort_by_text {
+              padding-right: 5px;
+            }
+            .wpp_sortable_link {
+              cursor: pointer;
+              padding: 5px 15px;
+              display: inline-block;
+              border: 1px solid #DDD;
+            }
           }
         }
       }
-      .wpp_overview_right_column {
-        .wpp_overview_data {
-          margin: 0;
-          padding: 0;
-          list-style: none;
-          li {
-            list-style: none;
+      ul.property-overview-navigation {
+        margin: 5px 0 10px;
+        padding: 0px;
+        list-style: outside none none;
+        li {
+          display: inline-block;
+          padding: 0 5px;
+          border: none;
+          &.pages {
+            padding: 0;
+          }
+          a {
+            text-decoration: none;
+            padding-left: 6px;
+            padding-right: 6px;
+          }
+          ul {
+            margin: 0px;
+            padding: 0px;
+            list-style: outside none none;
+          }
+        }
+      }
+      /* Load more */
+      .pagination-loadmore {
+        text-align: center;
+        button.wpp_loadmore_button {
+          cursor: pointer;
+          display: inline-block;
+          padding: 5px 15px;
+        }
+      }
+      /* Slider pagination */
+      .pagination-slider {
+        position: relative;
+        .clearfix;
+        .wpp_pagination_button {
+          border: 1px solid #ddd;
+          cursor: pointer;
+          float: left;
+          line-height: 1;
+          padding: 5px 15px;
+          &.wpp_pagination_forward {
+            margin: 0 20px 0 5px;
+          }
+        }
+        .ui-slider {
+          float: right;
+          margin: 7px 0;
+          width: auto;
+          .ui-slider-handle {
+            padding: 0 5px;
+            width: auto;
+            .slider_page_info {
+              font-size: 0.9em;
+              height: inherit;
+              line-height: 1.2em;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+    /* Property Pagination */
+
+    /* View results */
+    .all-properties {
+      .property_div {
+        box-sizing: border-box;
+        display: inline-block;
+        margin-bottom: 20px;
+        margin-right: -3px;
+        padding: 0 10px;
+        vertical-align: top;
+        min-width: 138px;
+        width: 25%;
+        .wpp_overview_left_column {
+          margin: 0 auto 5px;
+          max-width: 100%;
+          .property_overview_thumb {
+            border: none;
+            padding: 0;
             margin: 0;
-            &.property_title {
-              a {
-                font-weight: bold;
+            img {
+              max-width: 100%;
+              height: auto;
+            }
+          }
+        }
+        .wpp_overview_right_column {
+          .wpp_overview_data {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            li {
+              list-style: none;
+              margin: 0;
+              &.property_title {
+                a {
+                  font-weight: bold;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    /* View results */
+
+  }
+
+  /* WP Property overview shortcode */
+
+  /* WP Property search widget */
+  .wpp_search_properties_widget {
+
+    .wpp_shortcode_search_form {
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        li {
+          margin: 0;
+          list-style: none;
+          &.wpp_search_form_element {
+            margin: 0 0 10px;
+            .wpp_search_group_title,
+            .wpp_search_label {
+              display: block;
+              font-weight: 600;
+              margin: 0 0 5px;
+            }
+            input {
+              margin: 0;
+              &.wpp_range_input {
+                display: inline-block;
+                width: 47%;
+                margin-right: -3px;
+              }
+            }
+            label {
+              display: inline-block;
+            }
+            .wpp_dash {
+              display: inline-block;
+              text-align: center;
+              width: 6%;
+              margin-right: -3px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* WP Property search widget */
+
+  /* Property MAP */
+  .property_map_wrapper,
+  #property_map {
+    #infowindow {
+      .wpp_google_maps_attribute_row_property_title {
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      table.wpp_google_maps_infobox_table {
+        border: none;
+        .wpp_google_maps_left_col {
+          border: none;
+          padding: 0;
+          a {
+            img {
+              max-width: 100%;
+            }
+          }
+        }
+        .wpp_google_maps_right_col {
+          border: none;
+          padding: 0 0 0 10px;
+          .wpp_google_maps_infobox {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            li {
+              list-style: none;
+              .attribute {
+                padding-right: 5px;
               }
             }
           }
@@ -160,143 +305,86 @@
       }
     }
   }
-  /* View results */
 
-}
+  /* Property MAP */
 
-/* WP Property overview shortcode */
-
-/* WP Property search widget */
-.wpp_search_properties_widget {
-
-  .wpp_shortcode_search_form {
-
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      li {
-        margin: 0;
-        list-style: none;
-        &.wpp_search_form_element {
-          margin: 0 0 10px;
-          .wpp_search_group_title,
-          .wpp_search_label {
-            display: block;
-            font-weight: 600;
-            margin: 0 0 5px;
-          }
-          input {
-            margin: 0;
-            &.wpp_range_input {
-              display: inline-block;
-              width: 47%;
-              margin-right: -3px;
-            }
-          }
-          label {
-            display: inline-block;
-          }
-          .wpp_dash {
-            display: inline-block;
-            text-align: center;
-            width: 6%;
-            margin-right: -3px;
-          }
+  /* Gallery widget */
+  .wpp_gallery_widget {
+    .sidebar_gallery_item {
+      margin-bottom: 10px;
+      a {
+        img {
+          max-width: 100%;
         }
       }
     }
   }
-}
 
-/* WP Property search widget */
+  /* Gallery widget */
 
-/* Property MAP */
-.property_map_wrapper,
-#property_map {
-  #infowindow {
-    .wpp_google_maps_attribute_row_property_title {
-      margin-bottom: 5px;
-      font-weight: bold;
+  /* Features list */
+  .wpp_feature_list {
+    margin: 0 0 1em;
+    h2.wpp_stats_group {
+      margin: 0 0 0.5em;
+      padding: 0;
     }
-    table.wpp_google_maps_infobox_table {
-      border: none;
-      .wpp_google_maps_left_col {
-        border: none;
-        padding: 0;
-        a {
-          img {
-            max-width: 100%;
-          }
+    dl {
+      dt {
+        font-weight: bold;
+      }
+      dd {
+        margin: 0 0 0 15px;
+        ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
         }
       }
-      .wpp_google_maps_right_col {
-        border: none;
-        padding: 0 0 0 10px;
-        .wpp_google_maps_infobox {
+    }
+
+    span {
+      display: inline-block;
+      vertical-align: top;
+      &.attribute {
+        font-weight: bold;
+        min-width: 15%;
+      }
+      &.value {
+        margin: 0 0 0 15px;
+        ul {
           margin: 0;
           padding: 0;
           list-style: none;
           li {
             list-style: none;
-            .attribute {
-              padding-right: 5px;
-            }
           }
         }
       }
     }
   }
-}
+  /* Features list */
 
-/* Property MAP */
-
-/* Gallery widget */
-.wpp_gallery_widget {
-  .sidebar_gallery_item {
-    margin-bottom: 10px;
-    a {
-      img {
-        max-width: 100%;
-      }
+  /* Property status list */
+  ul.property_status_list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+      list-style: none;
     }
   }
-}
+  /* Property status list */
 
-/* Gallery widget */
-
-/* Features list */
-.wpp_feature_list {
-  dl {
-    dt {
-      font-weight: bold;
-    }
-    dd {
-      margin: 0 0 0 15px;
-      ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
+  /* Property type list */
+  ul.property_type_list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+      list-style: none;
     }
   }
+  /* Property type list */
 
-  span {
-    display: inline-block;
-    vertical-align: top;
-    &.attribute {
-      font-weight: bold;
-      min-width: 15%;
-    }
-    &.value {
-      margin: 0 0 0 15px;
-      ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
-    }
-  }
 }
-
-/* Features list */
