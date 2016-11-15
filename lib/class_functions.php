@@ -179,6 +179,7 @@ class WPP_F extends UsabilityDynamics\Utility
           'show_ui' => true,
           'show_in_nav_menus' => true,
           'show_tagcloud' => true,
+          'add_native_mtbox'    => true,
           'label' => _x('Features', 'taxonomy general name', ud_get_wp_property()->domain),
           'labels' => array(
             'name' => _x('Features', 'taxonomy general name', ud_get_wp_property()->domain),
@@ -203,6 +204,7 @@ class WPP_F extends UsabilityDynamics\Utility
           'show_ui' => true,
           'show_in_nav_menus' => true,
           'show_tagcloud' => true,
+          'add_native_mtbox'    => true,
           'label' => _x('Community Features', 'taxonomy general name', ud_get_wp_property()->domain),
           'labels' => array(
             'name' => _x('Community Features', 'taxonomy general name', ud_get_wp_property()->domain),
@@ -229,6 +231,7 @@ class WPP_F extends UsabilityDynamics\Utility
           'show_in_nav_menus'   => true,
           'show_ui'             => false,
           'show_tagcloud'       => false,
+          'add_native_mtbox'    => false,
           'label'        => sprintf(_x( '%s Location', 'property location taxonomy', ud_get_wp_property()->domain ), WPP_F::property_label()),
           'labels'       => array(
             'name'              => sprintf(_x( '%s Location', 'property location taxonomy', ud_get_wp_property()->domain ), WPP_F::property_label()),
@@ -250,12 +253,14 @@ class WPP_F extends UsabilityDynamics\Utility
         'wpp_type' => array(
           'default'             => true,
           'readonly'            => false,
-          'hidden'              => false,
+          'hidden'              => true,
           'hierarchical'        => false,
+          'unique'              => true,
           'public'              => true,
           'show_in_nav_menus'   => true,
           'show_ui'             => false,
           'show_tagcloud'       => false,
+          'add_native_mtbox'    => false,
           'label'        => sprintf(_x( '%s Type', 'property type taxonomy', ud_get_wp_property()->domain ), WPP_F::property_label()),
           'labels'       => array(
             'name'              => sprintf(_x( '%s Type', 'property type taxonomy', ud_get_wp_property()->domain ), WPP_F::property_label()),

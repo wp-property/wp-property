@@ -500,6 +500,7 @@ if ( !function_exists( 'draw_stats' ) ):
       'include' => '',
       'exclude' => '',
       'make_terms_links' => 'false',
+      'include_taxonomies' => 'false',
       'include_clsf' => 'attribute', // Show attributes or meta ( details ). Available value: "detail"
       'stats_prefix' => sanitize_key( WPP_F::property_label( 'singular' ) )
     );
@@ -537,7 +538,7 @@ if ( !function_exists( 'draw_stats' ) ):
     }
 
     /* Extend $property_stats with property taxonomy */
-    if(is_array($wp_properties['taxonomies'])){
+    if(($include_taxonomies === 'true' || $include_taxonomies === true) && is_array($wp_properties['taxonomies'])){
       foreach ($wp_properties['taxonomies'] as $taxonomy => $data) {
         if($data['public'] && empty($wp_properties['taxonomies'][$taxonomy]['hidden']))
           $property_stats[ $taxonomy ] = array( 'label' => $data['label'], 'value' => $data['label'] );
