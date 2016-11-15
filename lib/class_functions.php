@@ -1810,24 +1810,26 @@ class WPP_F extends UsabilityDynamics\Utility
 
     self::verify_have_system_taxonomy('wpp_location');
 
-    $geo_data->terms = array(
-      'state' => get_term_by('name', $geo_data->state, 'wpp_location', OBJECT),
-      'county' => get_term_by('name', $geo_data->county, 'wpp_location', OBJECT),
-      'city' => get_term_by('name', $geo_data->city, 'wpp_location', OBJECT),
-      'route' => get_term_by('name', $geo_data->route, 'wpp_location', OBJECT)
-    );
+    $geo_data->terms = array();
+
+    $geo_data->terms['state'] = !empty( $geo_data->state ) ? get_term_by('name', $geo_data->state, 'wpp_location', OBJECT) : false;
+    $geo_data->terms['county'] = !empty( $geo_data->county ) ? get_term_by('name', $geo_data->county, 'wpp_location', OBJECT) : false;
+    $geo_data->terms['city'] = !empty( $geo_data->city ) ? get_term_by('name', $geo_data->city, 'wpp_location', OBJECT) : false;
+    $geo_data->terms['route'] = !empty( $geo_data->route ) ? get_term_by('name', $geo_data->route, 'wpp_location', OBJECT) : false;
 
     // validate, lookup and add all location terms to object.
     if (isset($geo_data->terms) && is_array($geo_data->terms)) {
       foreach ($geo_data->terms as $_level => $_haveTerm) {
 
-        if (!$_haveTerm || is_wp_error($_haveTerm) && $geo_data->{$_level}) {
+        if ($_haveTerm && !is_wp_error($_haveTerm) && $geo_data->{$_level}) {
 
           $_value = $geo_data->{$_level};
 
           $index_key = array_search($_level, array_keys($geo_data->terms), true);
-          $_higher_level = end(array_slice($geo_data->terms, ($index_key - 1), 1, true));
-          $_higher_level_name = end(array_keys(array_slice($geo_data->terms, ($index_key - 1), 1, true)));
+          $_hl = array_slice($geo_data->terms, ($index_key - 1), 1, true);
+          $_higher_level = end($_hl);
+          $_hln = array_keys(array_slice($geo_data->terms, ($index_key - 1), 1, true));
+          $_higher_level_name = end($_hln);
 
           $_detail = array();
 
