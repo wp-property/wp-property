@@ -285,6 +285,10 @@ class WPP_Core {
     add_action( 'widgets_init', array( 'WPP_F', 'widgets_init' ) );
 
     do_action( 'wpp_init:end', $this );
+    add_action( 'created_wpp_type', array($this, 'term_created_wpp_type'), 10, 2 );
+    add_action( 'edited_wpp_type', array($this, 'term_created_wpp_type'), 10, 2 );
+    add_action( 'delete_wpp_type', array($this, 'term_delete_wpp_type'), 10, 4 );
+    add_action( 'wpp_settings_save', array('WPP_F', 'create_property_type_terms'), 10, 2 );
   }
 
   /**
@@ -451,7 +455,9 @@ class WPP_Core {
       // wp_register_style( 'wp-property-frontend', WPP_URL . 'styles/wp_properties.css', array(), WPP_Version );
 
       // load the new v2.3 styles
+      if($wp_properties['configuration']['enable_layouts'] == 'true') {
       wp_register_style( 'wp-property-frontend', WPP_URL . 'styles/wpp.public.v2.3.css', array(), WPP_Version );
+      }
 
 
       //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
@@ -476,9 +482,9 @@ class WPP_Core {
     //** Add troubleshoot log page */
     //** Modify admin body class */
     add_filter( 'admin_body_class', array( $this, 'admin_body_class' ), 5 );
-	  
+
     add_filter( 'display_post_states', array( $this, 'display_post_states' ), 10, 2 );
-    
+
     //** Modify Front-end property body class */
     add_filter( 'body_class', array( $this, 'properties_body_class' ) );
 
@@ -1063,7 +1069,7 @@ class WPP_Core {
       wp_redirect( get_permalink( $post->ID ) );
       die();
     }
-    
+
     /* (count($wp_query->posts) < 2) added post 1.31.1 release */
     /* to avoid taxonomy archives from being broken by single property pages */
     if(
@@ -1443,6 +1449,32 @@ class WPP_Core {
   static function shortcode_property_overview( $atts = '' ) {
     //_deprecated_function( __FUNCTION__, '2.1.0', 'do_shortcode([property_overview])' );
     return UsabilityDynamics\WPP\Property_Overview_Shortcode::render( $atts );
+  }
+
+  function term_created_wpp_type($term_id, $tt_id){
+    global $wp_properties;
+    $term = get_term($term_id, 'wpp_type');
+    if(!in_array($term->slug, $wp_properties['property_types']) || $wp_properties['property_types'][$term->slug] != $term->name){
+      $wp_properties['property_types'][$term->slug] = $term->name;
+      $wp_properties['property_types_term_id'][$term->slug] = $term->term_id;
+
+      ud_get_wp_property()->set('property_types', $wp_properties['property_types']);
+      ud_get_wp_property()->set('property_types_term_id', $wp_properties['property_types_term_id']);
+      update_option('wpp_settings', $wp_properties);
+    }
+
+  }
+
+  function term_delete_wpp_type($term_id, $tt_id, $term){
+    global $wp_properties;
+    if(array_key_exists($term->slug, $wp_properties['property_types'])){
+      unset($wp_properties['property_types'][$term->slug]);
+      unset($wp_properties['property_types_term_id'][$term->slug]);
+
+      ud_get_wp_property()->set('property_types', $wp_properties['property_types']);
+      ud_get_wp_property()->set('property_types_term_id', $wp_properties['property_types_term_id']);
+      update_option('wpp_settings', $wp_properties);
+    }
   }
 
 }

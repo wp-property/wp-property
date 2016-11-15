@@ -31,6 +31,11 @@ namespace UsabilityDynamics\WPP {
       public function init() {
         global $wp_properties;
 
+        add_action('admin_head', function(){
+          global $wp_properties, $_wp_admin_css_colors;
+          $wp_properties['admin_colors'] = $_wp_admin_css_colors[get_user_option('admin_color')]->colors;
+        });
+
         /**
          * Duplicates UsabilityDynamics\WP\Bootstrap_Plugin::load_textdomain();
          *
@@ -141,7 +146,7 @@ namespace UsabilityDynamics\WPP {
         add_filter( 'pre_update_site_option__site_transient_update_plugins', array( 'UsabilityDynamics\WPP\Bootstrap', 'update_check_handler' ), 50, 2 );
 
         // New layout feature.
-        if( defined( 'WPP_FEATURE_FLAG_LAYOUTS' ) && WPP_FEATURE_FLAG_LAYOUTS ) {
+        if( !empty( $wp_properties['configuration']['enable_layouts'] ) && $wp_properties['configuration']['enable_layouts'] == 'true' ) {
           $this->layouts_settings = new Layouts_Settings();
           new Layouts();
         }

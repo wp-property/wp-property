@@ -462,14 +462,15 @@ function add_display_address( $property ) {
   ) {
 
     if ( get_post_meta( $property[ 'parent_id' ], 'address_is_formatted', true ) ) {
-      $street_number = get_post_meta( $property[ 'parent_id' ], 'street_number', true );
-      $route = get_post_meta( $property[ 'parent_id' ], 'route', true );
-      $city = get_post_meta( $property[ 'parent_id' ], 'city', true );
-      $state = get_post_meta( $property[ 'parent_id' ], 'state', true );
-      $state_code = get_post_meta( $property[ 'parent_id' ], 'state_code', true );
-      $postal_code = get_post_meta( $property[ 'parent_id' ], 'postal_code', true );
-      $county = get_post_meta( $property[ 'parent_id' ], 'county', true );
-      $country = get_post_meta( $property[ 'parent_id' ], 'country', true );
+      // Also assign to $property[] to make data accessible later.
+      $property[ 'street_number' ] = $street_number = get_post_meta( $property[ 'parent_id' ], 'street_number', true );
+      $property[ 'route' ] = $route = get_post_meta( $property[ 'parent_id' ], 'route', true );
+      $property[ 'city' ] = $city = get_post_meta( $property[ 'parent_id' ], 'city', true );
+      $property[ 'state' ] = $state = get_post_meta( $property[ 'parent_id' ], 'state', true );
+      $property[ 'state_code' ] = $state_code = get_post_meta( $property[ 'parent_id' ], 'state_code', true );
+      $property[ 'postal_code' ] = $postal_code = get_post_meta( $property[ 'parent_id' ], 'postal_code', true );
+      $property[ 'county' ] = $county = get_post_meta( $property[ 'parent_id' ], 'county', true );
+      $property[ 'country' ] = $country = get_post_meta( $property[ 'parent_id' ], 'country', true );
 
       $display_address = str_replace( "[street_number]", $street_number, $display_address );
       $display_address = str_replace( "[street_name]", $route, $display_address );

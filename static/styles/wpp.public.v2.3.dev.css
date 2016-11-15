@@ -53,62 +53,61 @@
 }
 /* Main styles
 ----------------------------------- */
-#wpp_layout {
-  /* WP Property overview shortcode */
-  /* WP Property overview shortcode */
-  /* WP Property search widget */
-  /* WP Property search widget */
-  /* Property MAP */
-  /* Property MAP */
-  /* Gallery widget */
-  /* Gallery widget */
-}
-#wpp_layout .wpp_property_overview_shortcode {
+/* WP Property overview shortcode */
+.wpp_property_overview_shortcode {
   /* Property Pagination */
   /* Property Pagination */
   /* View results */
   /* View results */
 }
-#wpp_layout .wpp_property_overview_shortcode .properties_pagination {
+.wpp_property_overview_shortcode .properties_pagination {
   margin-bottom: 10px;
 }
-#wpp_layout .wpp_property_overview_shortcode .properties_pagination .wpp_pagination_slider_status {
+.wpp_property_overview_shortcode .properties_pagination .wpp_pagination_slider_status {
   margin-top: 5px;
   margin-bottom: 10px;
 }
-#wpp_layout .wpp_property_overview_shortcode .properties_pagination .wpp_pagination_slider_status .wpp_sorter_options {
+.wpp_property_overview_shortcode .properties_pagination .wpp_pagination_slider_status .wpp_sorter_options {
   padding-left: 25px;
 }
-#wpp_layout .wpp_property_overview_shortcode .properties_pagination .wpp_pagination_slider_status .wpp_sorter_options .wpp_sort_by_text {
+.wpp_property_overview_shortcode .properties_pagination .wpp_pagination_slider_status .wpp_sorter_options .wpp_sort_by_text {
   padding-right: 5px;
 }
-#wpp_layout .wpp_property_overview_shortcode .properties_pagination .wpp_pagination_slider_status .wpp_sorter_options .wpp_sortable_link {
+.wpp_property_overview_shortcode .properties_pagination .wpp_pagination_slider_status .wpp_sorter_options .wpp_sortable_link {
   cursor: pointer;
 }
-#wpp_layout .wpp_property_overview_shortcode .properties_pagination ul.property-overview-navigation {
+.wpp_property_overview_shortcode .properties_pagination ul.property-overview-navigation {
   margin: 5px 0 10px;
   padding: 0px;
   list-style: outside none none;
 }
-#wpp_layout .wpp_property_overview_shortcode .properties_pagination ul.property-overview-navigation li {
+.wpp_property_overview_shortcode .properties_pagination ul.property-overview-navigation li {
   display: inline-block;
   padding: 0 5px;
   border: none;
 }
-#wpp_layout .wpp_property_overview_shortcode .properties_pagination ul.property-overview-navigation li.pages {
+.wpp_property_overview_shortcode .properties_pagination ul.property-overview-navigation li.pages {
   padding: 0;
 }
-#wpp_layout .wpp_property_overview_shortcode .properties_pagination ul.property-overview-navigation li a {
+.wpp_property_overview_shortcode .properties_pagination ul.property-overview-navigation li a {
   text-decoration: none;
   padding-left: 6px;
   padding-right: 6px;
 }
-#wpp_layout .wpp_property_overview_shortcode .properties_pagination ul.property-overview-navigation li ul {
+.wpp_property_overview_shortcode .properties_pagination ul.property-overview-navigation li ul {
   margin: 0px;
   padding: 0px;
   list-style: outside none none;
 }
-#wpp_layout .wpp_property_overview_shortcode .all-properties .property_div {
+.wpp_property_overview_shortcode .properties_pagination .pagination-loadmore {
+  text-align: center;
+}
+.wpp_property_overview_shortcode .properties_pagination .pagination-loadmore button.wpp_loadmore_button {
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px 15px;
+}
+.wpp_property_overview_shortcode .all-properties .property_div {
   display: inline-block;
   margin-bottom: 20px;
   margin-right: -3px;
@@ -117,96 +116,113 @@
   min-width: 138px;
   width: 25%;
 }
-#wpp_layout .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_left_column {
+.wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_left_column {
   margin: 0 auto 5px;
   max-width: 100%;
 }
-#wpp_layout .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_left_column .property_overview_thumb {
+.wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_left_column .property_overview_thumb {
   border: none;
   padding: 0;
   margin: 0;
 }
-#wpp_layout .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_left_column .property_overview_thumb img {
+.wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_left_column .property_overview_thumb img {
   max-width: 100%;
   height: auto;
 }
-#wpp_layout .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_right_column .wpp_overview_data {
+.wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_right_column .wpp_overview_data {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-#wpp_layout .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_right_column .wpp_overview_data li {
+.wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_right_column .wpp_overview_data li {
   list-style: none;
   margin: 0;
 }
-#wpp_layout .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_right_column .wpp_overview_data li.property_title a {
+.wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_right_column .wpp_overview_data li.property_title a {
   font-weight: bold;
 }
-#wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul {
+/* WP Property overview shortcode */
+/* WP Property search widget */
+.wpp_search_properties_widget .wpp_shortcode_search_form ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-#wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li {
+.wpp_search_properties_widget .wpp_shortcode_search_form ul li {
   margin: 0;
   list-style: none;
 }
-#wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element {
+.wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element {
   margin: 0 0 10px;
 }
-#wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element .wpp_search_group_title,
-#wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element .wpp_search_label {
+.wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element .wpp_search_group_title,
+.wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element .wpp_search_label {
   display: block;
   font-weight: 600;
   margin: 0 0 5px;
 }
-#wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element input {
+.wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element input {
   margin: 0;
 }
-#wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element input.wpp_range_input {
+.wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element input.wpp_range_input {
   display: inline-block;
-  width: 46%;
+  width: 47%;
+  margin-right: -3px;
 }
-#wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element label {
+.wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element label {
   display: inline-block;
 }
-#wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element .wpp_dash {
+.wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element .wpp_dash {
   display: inline-block;
   text-align: center;
-  width: 4%;
+  width: 6%;
+  margin-right: -3px;
 }
-#wpp_layout .property_map_wrapper #infowindow .wpp_google_maps_attribute_row_property_title {
+/* WP Property search widget */
+/* Property MAP */
+.property_map_wrapper #infowindow .wpp_google_maps_attribute_row_property_title,
+#property_map #infowindow .wpp_google_maps_attribute_row_property_title {
   margin-bottom: 5px;
   font-weight: bold;
 }
-#wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table {
+.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table,
+#property_map #infowindow table.wpp_google_maps_infobox_table {
   border: none;
 }
-#wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col {
+.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col,
+#property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col {
   border: none;
   padding: 0;
 }
-#wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a img {
+.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a img,
+#property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a img {
   max-width: 100%;
 }
-#wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col {
+.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col,
+#property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col {
   border: none;
   padding: 0 0 0 10px;
 }
-#wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox {
+.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox,
+#property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-#wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li {
+.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li,
+#property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li {
   list-style: none;
 }
-#wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li .attribute {
+.property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li .attribute,
+#property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li .attribute {
   padding-right: 5px;
 }
-#wpp_layout .wpp_gallery_widget .sidebar_gallery_item {
+/* Property MAP */
+/* Gallery widget */
+.wpp_gallery_widget .sidebar_gallery_item {
   margin-bottom: 10px;
 }
-#wpp_layout .wpp_gallery_widget .sidebar_gallery_item a img {
+.wpp_gallery_widget .sidebar_gallery_item a img {
   max-width: 100%;
 }
+/* Gallery widget */

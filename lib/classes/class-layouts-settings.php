@@ -329,7 +329,7 @@ namespace UsabilityDynamics\WPP {
             transition: border .5s;
           }
           .layouts-list li label.checked img {
-            border: 5px solid #0083ff;
+            border: 5px solid <?php echo $wp_properties['admin_colors'][2]; ?>;
           }
         </style>
 

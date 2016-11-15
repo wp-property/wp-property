@@ -312,6 +312,22 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
         //** Determine if the current attribute is address and set it as display address */
         if ( $meta_key == $wp_properties[ 'configuration' ][ 'address_attribute' ] && !empty( $property[ 'display_address' ] ) ) {
           $attribute_value = $property[ 'display_address' ];
+          /*
+            Replace address with generated taxonomy links.
+            depend on add_display_address();
+          */
+          $address_format = $wp_properties[ 'configuration' ][ 'display_address_format' ];
+          preg_match_all('/\[(.*?)\]/', $address_format, $matches);
+          if(isset($matches[1]) && is_array($matches[1])){
+            foreach ($matches[1] as $value) {
+              if(!isset($property[$value]) || !$property[$value]) continue; 
+              if($term = get_term_by('name', $property[$value], 'wpp_location')){
+                $term_link = "<a href='" . get_term_link($term->term_id) . "'>{$term->name}</a>";
+                $address_format = str_replace("[$value]", $term_link, $address_format);
+              }
+            }
+            $attribute_value = $address_format;
+          }
         }
         // No display formating is needed for wysiwyg because it's formatted.
         if( !empty($attribute_data['data_input_type']) && $attribute_data['data_input_type'] == 'wysiwyg'){
@@ -499,7 +515,6 @@ if ( !function_exists( 'draw_stats' ) ):
     extract( $args = wp_parse_args( $args, $defaults ), EXTR_SKIP );
     
     $property_stats = array();
-    $property_taxonomies = array();
     $groups = isset( $wp_properties[ 'property_groups' ] ) ? (array)$wp_properties[ 'property_groups' ] : array();
 
     /**
@@ -520,7 +535,15 @@ if ( !function_exists( 'draw_stats' ) ):
     } else {
       $property_stats = WPP_F::get_stat_values_and_labels( $property, array( 'label_as_key' => 'false' ) );
     }
-    
+
+    /* Extend $property_stats with property taxonomy */
+    if(is_array($wp_properties['taxonomies'])){
+      foreach ($wp_properties['taxonomies'] as $taxonomy => $data) {
+        if($data['public'] && empty($wp_properties['taxonomies'][$taxonomy]['hidden']))
+          $property_stats[ $taxonomy ] = array( 'label' => $data['label'], 'value' => $data['label'] );
+      }
+    }
+
     /** Include only passed attributes */
     if( !empty( $include ) ) {
       $include = !is_array( $include ) ? explode( ',', $include ) : $include; 
@@ -541,15 +564,7 @@ if ( !function_exists( 'draw_stats' ) ):
       }
     }
 
-    if( is_array( $include ) ) {
-      foreach ($include as $taxonomy) {
-        if(isset($wp_properties['taxonomies'][$taxonomy])){ // Checking whether it's taxonomy.
-          $property_taxonomies[] = $taxonomy;
-        }
-      }
-    }
-
-    if ( empty( $property_stats ) && empty($property_taxonomies)) {
+    if ( empty( $property_stats )) {
       return false;
     }
     
@@ -644,6 +659,22 @@ if ( !function_exists( 'draw_stats' ) ):
         $value = "<ul class='rwmb-file'>" . $file_html . "</ul>";
       }
 
+      // Taxonomies. Adding terms link
+      if ( isset( $attribute_data[ 'storage_type' ] ) && $attribute_data[ 'storage_type' ] == 'taxonomy') {
+        $terms = wp_get_post_terms( $property->ID, $tag);
+        if(count($terms) == 0)
+          continue;
+        $value = "<ul>";
+        foreach ($terms as $key => $term) {
+          $term_link = $term->name;
+          if(isset($make_terms_links) && $make_terms_links == "true"){
+            $term_link = "<a href='" . get_term_link($term->term_id, $tag) . "'>{$term->name}</a>";
+          }
+          $value .= "<li class='property-terms property-term-{$term->slug}'>$term_link</li>";
+        }
+        $value .= "</ul>";
+      }
+
       //** Single "true" is converted to 1 by get_properties() we check 1 as well, as long as it isn't a numeric attribute */
       if ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'checkbox' && in_array( strtolower( $value ), array( 'true', '1', 'yes' ) ) ) {
         if ( $show_true_as_image == 'true' ) {
@@ -672,27 +703,6 @@ if ( !function_exists( 'draw_stats' ) ):
 
       $data[ 'value' ] = $value;
       $stats[ $tag ] = $data;
-    }
-    
-    /** Adding terms link */
-    if( is_array( $property_taxonomies ) ) {
-      foreach ($property_taxonomies as $taxonomy) {
-        $terms = wp_get_post_terms( $property->ID, $taxonomy);
-        if(count($terms)>0){
-          $data['label'] = $wp_properties['taxonomies'][$taxonomy]['label'];
-          $data['value'] = "<ul>";
-          foreach ($terms as $key => $term) {
-            $term_link = $term->name;
-            if($make_terms_links == "true"){
-              $term_link = "<a href='" . get_term_link($term->term_id, $taxonomy) . "'>{$term->name}</a>";
-            }
-            
-            $data['value'] .= "<li class='property-terms property-term-{$term->slug}'>$term_link</li>";
-          }
-          $data['value'] .= "</ul>";
-          $stats[$taxonomy] = $data;
-        }
-      }
     }
 
     if( empty( $stats ) ) {

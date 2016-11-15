@@ -65,170 +65,94 @@
 
 /* Main styles
 ----------------------------------- */
-#wpp_layout {
 
-  /* WP Property overview shortcode */
-  .wpp_property_overview_shortcode {
+/* WP Property overview shortcode */
+.wpp_property_overview_shortcode {
 
-    /* Property Pagination */
-    .properties_pagination {
+  /* Property Pagination */
+  .properties_pagination {
+    margin-bottom: 10px;
+    .wpp_pagination_slider_status {
+      margin-top: 5px;
       margin-bottom: 10px;
-      .wpp_pagination_slider_status {
-        margin-top: 5px;
-        margin-bottom: 10px;
-        .wpp_sorter_options {
-          padding-left: 25px;
-          .wpp_sort_by_text {
-            padding-right: 5px;
-          }
-          .wpp_sortable_link {
-            cursor: pointer;
-          }
+      .wpp_sorter_options {
+        padding-left: 25px;
+        .wpp_sort_by_text {
+          padding-right: 5px;
         }
-      }
-      ul.property-overview-navigation {
-        margin: 5px 0 10px;
-        padding: 0px;
-        list-style: outside none none;
-        li {
-          display: inline-block;
-          padding: 0 5px;
-          border: none;
-          &.pages {
-            padding: 0;
-          }
-          a {
-            text-decoration: none;
-            padding-left: 6px;
-            padding-right: 6px;
-          }
-          ul {
-            margin: 0px;
-            padding: 0px;
-            list-style: outside none none;
-          }
+        .wpp_sortable_link {
+          cursor: pointer;
         }
       }
     }
-    /* Property Pagination */
-
-    /* View results */
-    .all-properties {
-      .property_div {
+    ul.property-overview-navigation {
+      margin: 5px 0 10px;
+      padding: 0px;
+      list-style: outside none none;
+      li {
         display: inline-block;
-        margin-bottom: 20px;
-        margin-right: -3px;
-        padding: 0 10px;
-        vertical-align: top;
-        min-width: 138px;
-        width: 25%;
-        .wpp_overview_left_column {
-          margin: 0 auto 5px;
-          max-width: 100%;
-          .property_overview_thumb {
-            border: none;
-            padding: 0;
-            margin: 0;
-            img {
-              max-width: 100%;
-              height: auto;
-            }
-          }
-        }
-        .wpp_overview_right_column {
-          .wpp_overview_data {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            li {
-              list-style: none;
-              margin: 0;
-              &.property_title {
-                a {
-                  font-weight: bold;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    /* View results */
-
-  }
-  /* WP Property overview shortcode */
-
-  /* WP Property search widget */
-  .wpp_search_properties_widget {
-
-    .wpp_shortcode_search_form {
-
-      ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        li {
-          margin: 0;
-          list-style: none;
-          &.wpp_search_form_element {
-            margin: 0 0 10px;
-            .wpp_search_group_title,
-            .wpp_search_label {
-              display: block;
-              font-weight: 600;
-              margin: 0 0 5px;
-            }
-            input {
-              margin: 0;
-              &.wpp_range_input {
-                display: inline-block;
-                width: 46%;
-              }
-            }
-            label {
-              display: inline-block;
-            }
-            .wpp_dash {
-              display: inline-block;
-              text-align: center;
-              width: 4%;
-            }
-          }
-        }
-      }
-    }
-  }
-  /* WP Property search widget */
-
-  /* Property MAP */
-  .property_map_wrapper {
-    #infowindow {
-      .wpp_google_maps_attribute_row_property_title {
-        margin-bottom: 5px;
-        font-weight: bold;
-      }
-      table.wpp_google_maps_infobox_table {
+        padding: 0 5px;
         border: none;
-        .wpp_google_maps_left_col {
+        &.pages {
+          padding: 0;
+        }
+        a {
+          text-decoration: none;
+          padding-left: 6px;
+          padding-right: 6px;
+        }
+        ul {
+          margin: 0px;
+          padding: 0px;
+          list-style: outside none none;
+        }
+      }
+    }
+    .pagination-loadmore {
+      text-align: center;
+      button.wpp_loadmore_button {
+        cursor: pointer;
+        display: inline-block;
+        padding: 5px 15px;
+      }
+    }
+  }
+  /* Property Pagination */
+
+  /* View results */
+  .all-properties {
+    .property_div {
+      display: inline-block;
+      margin-bottom: 20px;
+      margin-right: -3px;
+      padding: 0 10px;
+      vertical-align: top;
+      min-width: 138px;
+      width: 25%;
+      .wpp_overview_left_column {
+        margin: 0 auto 5px;
+        max-width: 100%;
+        .property_overview_thumb {
           border: none;
           padding: 0;
-          a {
-            img {
-              max-width: 100%;
-            }
+          margin: 0;
+          img {
+            max-width: 100%;
+            height: auto;
           }
         }
-        .wpp_google_maps_right_col {
-          border: none;
-          padding: 0 0 0 10px;
-          .wpp_google_maps_infobox {
-            margin: 0;
-            padding: 0;
+      }
+      .wpp_overview_right_column {
+        .wpp_overview_data {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          li {
             list-style: none;
-            li {
-              list-style: none;
-              .attribute {
-                padding-right: 5px;
+            margin: 0;
+            &.property_title {
+              a {
+                font-weight: bold;
               }
             }
           }
@@ -236,20 +160,107 @@
       }
     }
   }
-  /* Property MAP */
+  /* View results */
 
-  /* Gallery widget */
-  .wpp_gallery_widget {
-    .sidebar_gallery_item {
-      margin-bottom: 10px;
-      a {
-        img {
-          max-width: 100%;
+}
+
+/* WP Property overview shortcode */
+
+/* WP Property search widget */
+.wpp_search_properties_widget {
+
+  .wpp_shortcode_search_form {
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      li {
+        margin: 0;
+        list-style: none;
+        &.wpp_search_form_element {
+          margin: 0 0 10px;
+          .wpp_search_group_title,
+          .wpp_search_label {
+            display: block;
+            font-weight: 600;
+            margin: 0 0 5px;
+          }
+          input {
+            margin: 0;
+            &.wpp_range_input {
+              display: inline-block;
+              width: 47%;
+              margin-right: -3px;
+            }
+          }
+          label {
+            display: inline-block;
+          }
+          .wpp_dash {
+            display: inline-block;
+            text-align: center;
+            width: 6%;
+            margin-right: -3px;
+          }
         }
       }
     }
   }
-  /* Gallery widget */
-
-
 }
+
+/* WP Property search widget */
+
+/* Property MAP */
+.property_map_wrapper,
+#property_map {
+  #infowindow {
+    .wpp_google_maps_attribute_row_property_title {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    table.wpp_google_maps_infobox_table {
+      border: none;
+      .wpp_google_maps_left_col {
+        border: none;
+        padding: 0;
+        a {
+          img {
+            max-width: 100%;
+          }
+        }
+      }
+      .wpp_google_maps_right_col {
+        border: none;
+        padding: 0 0 0 10px;
+        .wpp_google_maps_infobox {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          li {
+            list-style: none;
+            .attribute {
+              padding-right: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Property MAP */
+
+/* Gallery widget */
+.wpp_gallery_widget {
+  .sidebar_gallery_item {
+    margin-bottom: 10px;
+    a {
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+/* Gallery widget */
