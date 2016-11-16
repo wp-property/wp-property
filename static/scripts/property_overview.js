@@ -316,7 +316,7 @@
       jQuery("#wpp_shortcode_" + unique_id + " .wpp_pagination_slider .slider_page_info .val").text(this_page);
       /* Update sliders  */
       jQuery("#wpp_shortcode_" + unique_id + " .wpp_pagination_slider").slider("value", this_page);
-      jQuery('#wpp_shortcode_' + unique_id + ' .ajax_loader').show();
+      jQuery('#wpp_shortcode_' + unique_id + ' .wpp_ajax_loader').show();
       /* Scroll page to the top of the current shortcode */
       if (scroll_to) {
         jQuery(document).trigger('wpp_pagination_change', {'overview_id': unique_id});
@@ -332,7 +332,7 @@
         action: 'wpp_property_overview_pagination',
         wpp_ajax_query: data
       }, function (result_data) {
-        jQuery('#wpp_shortcode_' + unique_id + ' .ajax_loader').hide();
+        jQuery('#wpp_shortcode_' + unique_id + ' .wpp_ajax_loader').hide();
 
         if (type === 'loadmore') {
           var p_list = jQuery('.wpp_property_view_result .all-properties', result_data.display);

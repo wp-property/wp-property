@@ -72,6 +72,20 @@
   }
 }
 
+//@import "../fonts/icons/fa/css/font-awesome.css";
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../fonts/icons/fa/fonts/fontawesome-webfont.eot?v=4.4.0');
+  src: url('../fonts/icons/fa/fonts/fontawesome-webfont.eot?#iefix&v=4.4.0') format('embedded-opentype'),
+  url('../fonts/icons/fa/fonts/fontawesome-webfont.woff2?v=4.4.0') format('woff2'),
+  url('../fonts/icons/fa/fonts/fontawesome-webfont.woff?v=4.4.0') format('woff'),
+  url('../fonts/icons/fa/fonts/fontawesome-webfont.ttf?v=4.4.0') format('truetype'),
+  url('../fonts/icons/fa/fonts/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Main styles
 ----------------------------------- */
 body,
@@ -81,14 +95,25 @@ body,
   .wpp_property_overview_shortcode {
     position: relative;
 
-    .ajax_loader_box {
+    .wpp_ajax_loader {
       background-color: rgba(0, 0, 0, 0.5);
       height: 100%;
       left: 0;
       position: fixed;
+      display: none;
       top: 0;
       width: 100%;
       z-index: 999999;
+      .wpp_ajax_loader_img {
+        background: url('../images/ajax_loader.svg') no-repeat;
+        height: 100px;
+        left: 50%;
+        margin-left: -50px;
+        margin-top: -50px;
+        position: absolute;
+        top: 50%;
+        width: 100px;
+      }
     }
     /* Property Pagination */
     .properties_pagination {
@@ -219,9 +244,18 @@ body,
             li {
               list-style: none;
               margin: 0;
+              > span.title {
+                font-weight: bold;
+                padding-right: 5px;
+              }
               &.property_title {
+                margin-bottom: 10px;
                 a {
+                  display: block;
                   font-weight: bold;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
                 }
               }
             }
@@ -293,6 +327,7 @@ body,
         .wpp_google_maps_left_col {
           border: none;
           padding: 0;
+          max-width: 200px;
           a {
             img {
               max-width: 100%;
@@ -351,6 +386,9 @@ body,
           margin: 0;
           padding: 0;
           list-style: none;
+          li {
+            list-style: none;
+          }
         }
       }
     }
@@ -370,6 +408,27 @@ body,
           list-style: none;
           li {
             list-style: none;
+          }
+        }
+        &.property_property_feature {
+          ul {
+            li {
+              &:before {
+                padding-right: 5px;
+                content: "\f00c";
+                display: inline-block;
+                font: normal normal normal 14px/1 FontAwesome;
+                font-size: inherit;
+                text-rendering: auto;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+              }
+              &.property-term-none {
+                &:before {
+                  content: "\f00d";
+                }
+              }
+            }
           }
         }
       }
@@ -398,5 +457,37 @@ body,
     }
   }
   /* Property type list */
+
+  /* Property featured list */
+  .property_feature_list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+      list-style: none;
+      &:before {
+        padding-right: 5px;
+        content: "\f00c";
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    }
+  }
+  /* Property featured list */
+
+  /* Community featured list */
+  .community_feature_list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+      list-style: none;
+    }
+  }
+  /* Community featured list */
 
 }

@@ -57,6 +57,13 @@
   clear: both;
   content: '';
 }
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../fonts/icons/fa/fonts/fontawesome-webfont.eot?v=4.4.0');
+  src: url('../fonts/icons/fa/fonts/fontawesome-webfont.eot?#iefix&v=4.4.0') format('embedded-opentype'), url('../fonts/icons/fa/fonts/fontawesome-webfont.woff2?v=4.4.0') format('woff2'), url('../fonts/icons/fa/fonts/fontawesome-webfont.woff?v=4.4.0') format('woff'), url('../fonts/icons/fa/fonts/fontawesome-webfont.ttf?v=4.4.0') format('truetype'), url('../fonts/icons/fa/fonts/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 /* Main styles
 ----------------------------------- */
 body,
@@ -75,6 +82,10 @@ body,
   /* Property status list */
   /* Property type list */
   /* Property type list */
+  /* Property featured list */
+  /* Property featured list */
+  /* Community featured list */
+  /* Community featured list */
 }
 body .wpp_property_overview_shortcode,
 #wpp_layout .wpp_property_overview_shortcode {
@@ -84,15 +95,27 @@ body .wpp_property_overview_shortcode,
   /* View results */
   /* View results */
 }
-body .wpp_property_overview_shortcode .ajax_loader_box,
-#wpp_layout .wpp_property_overview_shortcode .ajax_loader_box {
+body .wpp_property_overview_shortcode .wpp_ajax_loader,
+#wpp_layout .wpp_property_overview_shortcode .wpp_ajax_loader {
   background-color: rgba(0, 0, 0, 0.5);
   height: 100%;
   left: 0;
   position: fixed;
+  display: none;
   top: 0;
   width: 100%;
   z-index: 999999;
+}
+body .wpp_property_overview_shortcode .wpp_ajax_loader .wpp_ajax_loader_img,
+#wpp_layout .wpp_property_overview_shortcode .wpp_ajax_loader .wpp_ajax_loader_img {
+  background: url('../images/ajax_loader.svg') no-repeat;
+  height: 100px;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -50px;
+  position: absolute;
+  top: 50%;
+  width: 100px;
 }
 body .wpp_property_overview_shortcode .properties_pagination,
 #wpp_layout .wpp_property_overview_shortcode .properties_pagination {
@@ -259,9 +282,22 @@ body .wpp_property_overview_shortcode .all-properties .property_div .wpp_overvie
   list-style: none;
   margin: 0;
 }
+body .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_right_column .wpp_overview_data li > span.title,
+#wpp_layout .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_right_column .wpp_overview_data li > span.title {
+  font-weight: bold;
+  padding-right: 5px;
+}
+body .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_right_column .wpp_overview_data li.property_title,
+#wpp_layout .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_right_column .wpp_overview_data li.property_title {
+  margin-bottom: 10px;
+}
 body .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_right_column .wpp_overview_data li.property_title a,
 #wpp_layout .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_right_column .wpp_overview_data li.property_title a {
+  display: block;
   font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 body .wpp_search_properties_widget .wpp_shortcode_search_form ul,
 #wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul {
@@ -326,6 +362,7 @@ body #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_m
 #wpp_layout #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col {
   border: none;
   padding: 0;
+  max-width: 200px;
 }
 body .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a img,
 #wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a img,
@@ -391,6 +428,10 @@ body .wpp_feature_list dl dd ul,
   padding: 0;
   list-style: none;
 }
+body .wpp_feature_list dl dd ul li,
+#wpp_layout .wpp_feature_list dl dd ul li {
+  list-style: none;
+}
 body .wpp_feature_list span,
 #wpp_layout .wpp_feature_list span {
   display: inline-block;
@@ -415,6 +456,21 @@ body .wpp_feature_list span.value ul li,
 #wpp_layout .wpp_feature_list span.value ul li {
   list-style: none;
 }
+body .wpp_feature_list span.value.property_property_feature ul li:before,
+#wpp_layout .wpp_feature_list span.value.property_property_feature ul li:before {
+  padding-right: 5px;
+  content: "\f00c";
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body .wpp_feature_list span.value.property_property_feature ul li.property-term-none:before,
+#wpp_layout .wpp_feature_list span.value.property_property_feature ul li.property-term-none:before {
+  content: "\f00d";
+}
 body ul.property_status_list,
 #wpp_layout ul.property_status_list {
   margin: 0;
@@ -433,5 +489,36 @@ body ul.property_type_list,
 }
 body ul.property_type_list li,
 #wpp_layout ul.property_type_list li {
+  list-style: none;
+}
+body .property_feature_list,
+#wpp_layout .property_feature_list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+body .property_feature_list li,
+#wpp_layout .property_feature_list li {
+  list-style: none;
+}
+body .property_feature_list li:before,
+#wpp_layout .property_feature_list li:before {
+  padding-right: 5px;
+  content: "\f00c";
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body .community_feature_list,
+#wpp_layout .community_feature_list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+body .community_feature_list li,
+#wpp_layout .community_feature_list li {
   list-style: none;
 }

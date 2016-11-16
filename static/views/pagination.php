@@ -70,5 +70,7 @@ if (!empty($use_pagination)) {
 ?>
 </div>
 <?php if ($settings['class'] !== 'wpp_bottom_pagination') { ?>
-  <div class="ajax_loader"></div>
+  <div class="wpp_ajax_loader">
+    <div class="wpp_ajax_loader_img"></div>
+  </div>
 <?php } ?>
