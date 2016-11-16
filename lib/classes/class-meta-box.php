@@ -120,6 +120,7 @@ namespace UsabilityDynamics\WPP {
        */
       public function register_meta_boxes( $meta_boxes ) {
         $_meta_boxes = array();
+        $taxonomies = ud_get_wp_property( 'taxonomies', array() );
 
         /* May be determine property_type to know which attributes should be hidden and which ones just readable. */
         $post = new \WP_Post( new \stdClass );
@@ -261,6 +262,7 @@ namespace UsabilityDynamics\WPP {
          * Get all data we need to operate with.
          */
         $attributes = ud_get_wp_property( 'property_stats', array() );
+        $taxonomies = ud_get_wp_property( 'taxonomies', array() );
         $defaults = ud_get_wp_property( 'default_values', array() );
         $geo_type_attributes = ud_get_wp_property( 'geo_type_attributes', array() );
         $hidden_attributes = ud_get_wp_property( 'hidden_attributes', array() );
@@ -286,7 +288,26 @@ namespace UsabilityDynamics\WPP {
             $fields[] = $field;
           }
           /* May be add Property Type field. */
-          if( !array_key_exists( 'property_type', $attributes ) ) {
+          if( isset($taxonomies['wpp_type']['default'])) {
+
+            $field = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
+              'id' => 'wpp_type',
+              'name' => $taxonomies['wpp_type']['label'],
+              'type' => !function_exists( 'ud_get_wpp_terms' )?'taxonomy':'wpp_taxonomy',
+              'placeholder' => sprintf( __( 'Selecte %s Type', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
+              'multiple' => ( isset( $taxonomies['wpp_type'][ 'unique' ] ) && $taxonomies['wpp_type'][ 'unique' ] ? false : true ),
+              'options' => array(
+                'taxonomy' => 'wpp_type',
+                'type' => ( isset( $taxonomies['wpp_type'][ 'hierarchical' ] ) && $taxonomies['wpp_type'][ 'hierarchical' ] == true ? 'select_tree' : 'select_advanced' ),
+                'args' => array(),
+              )
+            ) ), 'wpp_type', $post );
+
+            if( $field ) {
+              $fields[] = $field;
+            }
+          }
+          else if( !array_key_exists( 'property_type', $attributes ) ) {
             $field = $this->get_property_type_field( $post );
             if( $field ) {
               $fields[] = $field;
@@ -304,6 +325,26 @@ namespace UsabilityDynamics\WPP {
               $fields[] = $field;
             }
           }
+          /* May be add default taxonomies */
+          /* Could be needed in future */
+          //foreach ($taxonomies as $slug => $data) {
+          //  if ($data['default'] && $data['public'] && empty($data['add_native_mtbox'])) {
+          //    $field = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
+          //      'id' => $slug,
+          //      'name' => $data['label'],
+          //      'type' => 'taxonomy',
+          //      'multiple' => ( isset( $data[ 'unique' ] ) && $data[ 'unique' ] ? false : true ),
+          //      'options' => array(
+          //        'taxonomy' => $slug,
+          //        'type' => ( isset( $data[ 'hierarchical' ] ) && $data[ 'hierarchical' ] == true ? 'select_tree' : '//select_advanced' ),
+          //        'args' => array(),
+          //    )
+          //    ) ), $slug, $post );
+          //    if( $field ) {
+          //      $fields[] = $field;
+          //    }
+          //  }
+          //}
         }
 
         /**

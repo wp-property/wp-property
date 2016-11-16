@@ -140,6 +140,7 @@ namespace UsabilityDynamics\WPP {
           'include' => '',
           'exclude' => '',
           'make_terms_links' => 'false',
+          'include_taxonomies' => 'true',
         ), $atts );
 
         return $this->get_template( 'property-attributes', $data, false );
