@@ -79,13 +79,24 @@ body,
 
   /* WP Property overview shortcode */
   .wpp_property_overview_shortcode {
+    position: relative;
 
+    .ajax_loader_box {
+      background-color: rgba(0, 0, 0, 0.5);
+      height: 100%;
+      left: 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999999;
+    }
     /* Property Pagination */
     .properties_pagination {
       margin-bottom: 10px;
       .wpp_pagination_slider_status {
         margin-top: 5px;
         margin-bottom: 10px;
+        line-height: 2;
         .clearfix;
         .wpp_property_results_options {
           display: block;
@@ -106,6 +117,7 @@ body,
               padding: 5px 15px;
               display: inline-block;
               border: 1px solid #DDD;
+              line-height: 1.2;
             }
           }
         }

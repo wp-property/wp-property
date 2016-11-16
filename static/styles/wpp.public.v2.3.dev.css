@@ -78,10 +78,21 @@ body,
 }
 body .wpp_property_overview_shortcode,
 #wpp_layout .wpp_property_overview_shortcode {
+  position: relative;
   /* Property Pagination */
   /* Property Pagination */
   /* View results */
   /* View results */
+}
+body .wpp_property_overview_shortcode .ajax_loader_box,
+#wpp_layout .wpp_property_overview_shortcode .ajax_loader_box {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999999;
 }
 body .wpp_property_overview_shortcode .properties_pagination,
 #wpp_layout .wpp_property_overview_shortcode .properties_pagination {
@@ -93,6 +104,7 @@ body .wpp_property_overview_shortcode .properties_pagination .wpp_pagination_sli
 #wpp_layout .wpp_property_overview_shortcode .properties_pagination .wpp_pagination_slider_status {
   margin-top: 5px;
   margin-bottom: 10px;
+  line-height: 2;
 }
 body .wpp_property_overview_shortcode .properties_pagination .wpp_pagination_slider_status:after,
 #wpp_layout .wpp_property_overview_shortcode .properties_pagination .wpp_pagination_slider_status:after,
@@ -127,6 +139,7 @@ body .wpp_property_overview_shortcode .properties_pagination .wpp_pagination_sli
   padding: 5px 15px;
   display: inline-block;
   border: 1px solid #DDD;
+  line-height: 1.2;
 }
 body .wpp_property_overview_shortcode .properties_pagination ul.property-overview-navigation,
 #wpp_layout .wpp_property_overview_shortcode .properties_pagination ul.property-overview-navigation {
