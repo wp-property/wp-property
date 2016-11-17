@@ -287,27 +287,31 @@ namespace UsabilityDynamics\WPP {
           if( $field ) {
             $fields[] = $field;
           }
-          /* May be add Property Type field. */
-          if( isset($taxonomies['wpp_type']['default'])) {
 
-            $field = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
-              'id' => 'wpp_type',
-              'name' => $taxonomies['wpp_type']['label'],
-              'type' => !function_exists( 'ud_get_wpp_terms' )?'taxonomy':'wpp_taxonomy',
-              'placeholder' => sprintf( __( 'Selecte %s Type', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
-              'multiple' => ( isset( $taxonomies['wpp_type'][ 'unique' ] ) && $taxonomies['wpp_type'][ 'unique' ] ? false : true ),
-              'options' => array(
-                'taxonomy' => 'wpp_type',
-                'type' => ( isset( $taxonomies['wpp_type'][ 'hierarchical' ] ) && $taxonomies['wpp_type'][ 'hierarchical' ] == true ? 'select_tree' : 'select_advanced' ),
-                'args' => array(),
-              )
-            ) ), 'wpp_type', $post );
+          if( defined( 'WPP_FEATURE_FLAG_WPP_TYPE' ) ) {
+            /* May be add Property Type field. */
+            if( !empty($taxonomies['wpp_type']['default'])) {
 
-            if( $field ) {
-              $fields[] = $field;
+              $field = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
+                'id' => 'wpp_type',
+                'name' => $taxonomies['wpp_type']['label'],
+                'type' => !function_exists( 'ud_get_wpp_terms' )?'taxonomy':'wpp_taxonomy',
+                'placeholder' => sprintf( __( 'Selecte %s Type', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
+                'multiple' => ( isset( $taxonomies['wpp_type'][ 'unique' ] ) && $taxonomies['wpp_type'][ 'unique' ] ? false : true ),
+                'options' => array(
+                  'taxonomy' => 'wpp_type',
+                  'type' => ( isset( $taxonomies['wpp_type'][ 'hierarchical' ] ) && $taxonomies['wpp_type'][ 'hierarchical' ] == true ? 'select_tree' : 'select_advanced' ),
+                  'args' => array(),
+                )
+              ) ), 'wpp_type', $post );
+
+              if( $field ) {
+                $fields[] = $field;
+              }
             }
           }
-          else if( !array_key_exists( 'property_type', $attributes ) ) {
+          
+          if( empty($taxonomies['wpp_type']['default']) && !array_key_exists( 'property_type', $attributes ) ) {
             $field = $this->get_property_type_field( $post );
             if( $field ) {
               $fields[] = $field;
