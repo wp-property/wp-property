@@ -1821,7 +1821,7 @@ class WPP_F extends UsabilityDynamics\Utility
     if (isset($geo_data->terms) && is_array($geo_data->terms)) {
       foreach ($geo_data->terms as $_level => $_haveTerm) {
 
-        if ($_haveTerm && !is_wp_error($_haveTerm) && $geo_data->{$_level}) {
+        if ((!$_haveTerm || is_wp_error($_haveTerm)) && $geo_data->{$_level}) {
 
           $_value = $geo_data->{$_level};
 
@@ -2634,11 +2634,12 @@ class WPP_F extends UsabilityDynamics\Utility
               'taxonomy' => 'wpp_type',
               'hide_empty' => false,
             ));
+
+    /* Delete terms if not exist in $wpp_settings */
     if ( ! empty( $terms ) && ! is_wp_error( $terms ) )
     foreach ($terms as $term) {
       if(!array_key_exists($term->slug, $wpp_settings['property_types'])){
-        $wpp_settings['property_types'][$term->slug] = $term->name;
-        $wpp_settings['property_types_term_id'][$term->slug] = $term->term_id;
+        wp_delete_term($term->term_id, 'wpp_type');
       }
     }
 

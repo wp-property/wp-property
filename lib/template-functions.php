@@ -320,14 +320,16 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
           preg_match_all('/\[(.*?)\]/', $address_format, $matches);
           if(isset($matches[1]) && is_array($matches[1])){
             foreach ($matches[1] as $value) {
-              if(!isset($property[$value]) || !$property[$value]) continue; 
-              if($term = get_term_by('name', $property[$value], 'wpp_location')){
+              $term_link = !empty($property[$value]) ? $property[$value] : "";
+              if($term_link && $term = get_term_by('name', $property[$value], 'wpp_location')){
                 $term_link = "<a href='" . get_term_link($term->term_id) . "'>{$term->name}</a>";
-                $address_format = str_replace("[$value]", $term_link, $address_format);
               }
+              $address_format = str_replace("[$value]", $term_link, $address_format);
             }
             $attribute_value = $address_format;
           }
+          /* Trim down trailing comma "," or space " " */
+          $attribute_value = trim($attribute_value, ", ");
         }
         // No display formating is needed for wysiwyg because it's formatted.
         if($attribute_data['data_input_type'] == 'wysiwyg'){
