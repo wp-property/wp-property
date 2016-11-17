@@ -751,6 +751,13 @@ class WPP_Core {
 
     $update_data = $_REQUEST[ 'wpp_data' ][ 'meta' ];
 
+    // if wpp_type is set then update property_type attribute.
+    if(isset($_REQUEST[ 'wpp_type' ])){
+      $term   = get_the_terms($post_id, 'wpp_type');
+      if(is_object($term[0]))
+        update_post_meta($post_id, 'property_type', $term[0]->slug);
+    }
+
     //** Neccessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
     if( empty( $_REQUEST[ 'exclude_from_supermap' ] ) ) {
       if( !metadata_exists( 'post', $post_id, 'exclude_from_supermap' ) ) {
