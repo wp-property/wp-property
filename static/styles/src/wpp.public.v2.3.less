@@ -224,12 +224,14 @@ body,
         min-width: 138px;
         width: 25%;
         .wpp_overview_left_column {
+          float: none;
           margin: 0 auto 5px;
           max-width: 100%;
+          .thumbnail,
           .property_overview_thumb {
             border: none;
             padding: 0;
-            margin: 0;
+            margin: 0 0 5px;
             img {
               max-width: 100%;
               height: auto;
@@ -237,6 +239,7 @@ body,
           }
         }
         .wpp_overview_right_column {
+          float: none;
           .wpp_overview_data {
             margin: 0;
             padding: 0;
@@ -281,18 +284,19 @@ body,
         li {
           margin: 0;
           list-style: none;
+          .wpp_search_group_title,
+          .wpp_search_label {
+            display: block;
+            font-weight: 600;
+            margin: 0 0 5px;
+          }
           &.wpp_search_form_element {
             margin: 0 0 10px;
-            .wpp_search_group_title,
-            .wpp_search_label {
-              display: block;
-              font-weight: 600;
-              margin: 0 0 5px;
-            }
             input {
               margin: 0;
               &.wpp_range_input {
                 display: inline-block;
+                box-sizing: border-box;
                 width: 47%;
                 margin-right: -3px;
               }
@@ -321,6 +325,10 @@ body,
       .wpp_google_maps_attribute_row_property_title {
         margin-bottom: 5px;
         font-weight: bold;
+        font-size: 14px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
       table.wpp_google_maps_infobox_table {
         border: none;
@@ -329,6 +337,7 @@ body,
           padding: 0;
           max-width: 200px;
           a {
+            font-size: 14px;
             img {
               max-width: 100%;
             }
@@ -337,14 +346,19 @@ body,
         .wpp_google_maps_right_col {
           border: none;
           padding: 0 0 0 10px;
+          a {
+            font-size: 14px;
+          }
           .wpp_google_maps_infobox {
             margin: 0;
             padding: 0;
             list-style: none;
             li {
               list-style: none;
+              font-size: 14px;
               .attribute {
                 padding-right: 5px;
+                font-weight: bold;
               }
             }
           }
@@ -408,6 +422,9 @@ body,
           list-style: none;
           li {
             list-style: none;
+            a {
+              padding: 0;
+            }
           }
         }
         &.property_property_feature {
@@ -443,6 +460,9 @@ body,
     list-style: none;
     li {
       list-style: none;
+      a {
+        padding: 0;
+      }
     }
   }
   /* Property status list */
@@ -454,6 +474,9 @@ body,
     list-style: none;
     li {
       list-style: none;
+      a {
+        padding: 0;
+      }
     }
   }
   /* Property type list */
@@ -486,6 +509,9 @@ body,
     list-style: none;
     li {
       list-style: none;
+      a {
+        padding: 0;
+      }
     }
   }
   /* Community featured list */
