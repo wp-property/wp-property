@@ -2906,6 +2906,38 @@ Ample off-street parking ",
   }
 
   /**
+   * AJAX Handler for Setup Assistant + Freemius options.
+   *
+   * @author raj
+   */
+
+  static public function save_freemius_settings(){
+    $rawData =  $_REQUEST['data'];
+    $rawData  =  urldecode($rawData);
+    parse_str($rawData, $data);
+    $return_url = $data['return_url'].'&_wpnonce='.$data['_wpnonce'];
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_HEADER, 1);
+    curl_setopt($ch, CURLOPT_VERBOSE, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_URL, $data['post_url']);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    
+    $result = curl_exec($ch);
+    $responseInfo = curl_getinfo($ch);
+    curl_close($ch);
+    if($responseInfo && $responseInfo['redirect_url']){
+      $return['redirect_url'] =  $responseInfo['redirect_url'].'&_wpnonce='.$data['_wpnonce'].'&page='.$data['plugin_slug'];
+    }
+    $return['data'] = $data ;
+    $return['success'] = '1' ;
+    echo json_encode($return);
+    exit;
+  }
+  /**
    * AJAX Handler for Setup Assistant.
    * proxies to save_settings()
    *

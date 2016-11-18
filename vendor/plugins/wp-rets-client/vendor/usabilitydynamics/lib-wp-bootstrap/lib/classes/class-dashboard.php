@@ -102,15 +102,10 @@ namespace UsabilityDynamics\WP {
        */
       public function wpp_setup_page() {
         //** Try to get information to show */
-        ?>
-        <div class="wrap about-wrap">
-          <div class="wp-badge ud-badge"></div>  
-          <?php
-          include get_home_path() . "wp-content/plugins/wp-property/static/splashes/install.php";
-          ?>
-        </div>
-        <?php
-    }
+//        include WPP_Path . "static/splashes/install.php";
+        
+        wpp_fs()->_connect_page_render();
+      }
     
       /**
        * Render UD dashboard page
