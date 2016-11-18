@@ -295,12 +295,12 @@ namespace UsabilityDynamics\WPP {
               $field = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
                 'id' => 'wpp_type',
                 'name' => $taxonomies['wpp_type']['label'],
-                'type' => !function_exists( 'ud_get_wpp_terms' )?'taxonomy':'wpp_taxonomy',
+                'type' => 'wpp_property_type',
                 'placeholder' => sprintf( __( 'Selecte %s Type', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
-                'multiple' => ( isset( $taxonomies['wpp_type'][ 'unique' ] ) && $taxonomies['wpp_type'][ 'unique' ] ? false : true ),
+                'multiple' => false,
                 'options' => array(
                   'taxonomy' => 'wpp_type',
-                  'type' => ( isset( $taxonomies['wpp_type'][ 'hierarchical' ] ) && $taxonomies['wpp_type'][ 'hierarchical' ] == true ? 'select_tree' : 'select_advanced' ),
+                  'type' => 'combobox',
                   'args' => array(),
                 )
               ) ), 'wpp_type', $post );

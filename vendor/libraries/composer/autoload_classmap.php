@@ -131,6 +131,7 @@ return array(
     'RWMB_Wpp_Inherited_File_Advanced_Field' => $baseDir . '/lib/classes/fields/class-wpp-inherited-file-advanced.php',
     'RWMB_Wpp_Inherited_Image_Advanced_Field' => $baseDir . '/lib/classes/fields/class-wpp-inherited-image-advanced.php',
     'RWMB_Wpp_Parent_Field' => $baseDir . '/lib/classes/fields/class-wpp-parent.php',
+    'RWMB_Wpp_Property_Type_Field' => $baseDir . '/lib/classes/fields/class-wpp-property-type.php',
     'RWMB_Wpp_Readonly_Field' => $baseDir . '/lib/classes/fields/class-wpp-readonly.php',
     'RWMB_Wysiwyg_Field' => $baseDir . '/vendor/plugins/wp-meta-box/inc/fields/wysiwyg.php',
     'RW_Meta_Box' => $baseDir . '/vendor/plugins/wp-meta-box/inc/meta-box.php',
