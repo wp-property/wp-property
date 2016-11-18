@@ -285,10 +285,12 @@ class WPP_Core {
     add_action( 'widgets_init', array( 'WPP_F', 'widgets_init' ) );
 
     do_action( 'wpp_init:end', $this );
-    add_action( 'created_wpp_type', array($this, 'term_created_wpp_type'), 10, 2 );
-    add_action( 'edited_wpp_type', array($this, 'term_created_wpp_type'), 10, 2 );
-    add_action( 'delete_wpp_type', array($this, 'term_delete_wpp_type'), 10, 4 );
-    add_action( 'wpp_settings_save', array('WPP_F', 'create_property_type_terms'), 10, 2 );
+    if( defined( 'WPP_FEATURE_FLAG_WPP_TYPE' ) ) {
+      add_action( 'created_wpp_type', array($this, 'term_created_wpp_type'), 10, 2 );
+      add_action( 'edited_wpp_type', array($this, 'term_created_wpp_type'), 10, 2 );
+      add_action( 'delete_wpp_type', array($this, 'term_delete_wpp_type'), 10, 4 );
+      add_action( 'wpp_settings_save', array('WPP_F', 'create_property_type_terms'), 10, 2 );
+    }
   }
 
   /**
@@ -759,6 +761,14 @@ class WPP_Core {
 
     $update_data = $_REQUEST[ 'wpp_data' ][ 'meta' ];
 
+    if( defined( 'WPP_FEATURE_FLAG_WPP_TYPE' ) ) {
+      // if wpp_type is set then update property_type attribute.
+      if(isset($_REQUEST[ 'wpp_type' ])){
+        $term   = get_the_terms($post_id, 'wpp_type');
+        if(is_object($term[0]))
+          update_post_meta($post_id, 'property_type', $term[0]->slug);
+      }
+    }
     //** Neccessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
     if( empty( $_REQUEST[ 'exclude_from_supermap' ] ) ) {
       if( !metadata_exists( 'post', $post_id, 'exclude_from_supermap' ) ) {
@@ -1452,6 +1462,17 @@ class WPP_Core {
     return UsabilityDynamics\WPP\Property_Overview_Shortcode::render( $atts );
   }
 
+  /**
+   * Add/update Property Type to $wp_properties when wpp_type 
+   * created/updated outside of developer tab of settings page.
+   * Feature Flag: WPP_FEATURE_FLAG_WPP_TYPE
+   * 
+   * @author Md. Alimuzzaman Alim
+   * 
+   * @param int $term_id
+   * @param int $tt_id
+   * 
+   */
   function term_created_wpp_type($term_id, $tt_id){
     global $wp_properties;
     $term = get_term($term_id, 'wpp_type');
@@ -1466,6 +1487,18 @@ class WPP_Core {
 
   }
 
+  /**
+   * Remove Property Type from $wp_properties when wpp_type 
+   * deleted outside of developer tab of settings page.
+   * Feature Flag: WPP_FEATURE_FLAG_WPP_TYPE
+   * 
+   * @author Md. Alimuzzaman Alim
+   * 
+   * @param int $term_id
+   * @param int $tt_id
+   * @param int $term
+   * 
+   */
   function term_delete_wpp_type($term_id, $tt_id, $term){
     global $wp_properties;
     if(array_key_exists($term->slug, $wp_properties['property_types'])){

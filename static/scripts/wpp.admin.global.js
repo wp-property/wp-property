@@ -532,6 +532,9 @@ function wpp_add_row(element,hides) {
   jQuery("input[type=text]", added_row).val('');
   jQuery("input[type=checkbox]", added_row).attr('checked', false);
 
+  //* Remove hidden cass from delete button if the button of last row was hidden. */
+  jQuery(".wpp_delete_row", added_row).removeClass('hidden');
+
   //* Unset 'new_row' attribute */
   jQuery(added_row).attr('new_row', 'true');
 
