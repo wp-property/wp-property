@@ -142,7 +142,7 @@ body,
               cursor: pointer;
               padding: 5px 15px;
               display: inline-block;
-              border: 1px solid #DDD;
+              border: 1px solid;
               line-height: 1.2;
             }
             .wpp_sortable_dropdown {
@@ -182,9 +182,10 @@ body,
       .pagination-loadmore {
         text-align: center;
         button.wpp_loadmore_button {
+          border: 1px solid;
           cursor: pointer;
           display: inline-block;
-          padding: 5px 15px;
+          padding: 10px 25px;
         }
       }
       /* Slider pagination */
@@ -192,7 +193,7 @@ body,
         position: relative;
         .clearfix;
         .wpp_pagination_button {
-          border: 1px solid #ddd;
+          border: 1px solid;
           cursor: pointer;
           float: left;
           line-height: 1;
@@ -222,11 +223,13 @@ body,
 
     /* View results */
     .all-properties {
+      margin: 0 -10px;
+      .clearfix;
       .property_div {
         box-sizing: border-box;
         display: inline-block;
         margin-bottom: 20px;
-        margin-right: -3px;
+        margin-right: -4px;
         padding: 0 10px;
         vertical-align: top;
         min-width: 138px;
@@ -258,6 +261,13 @@ body,
               > span.title {
                 font-weight: bold;
                 padding-right: 5px;
+              }
+              > a.button {
+                border: 1px solid;
+                display: inline-block;
+                margin-top: 5px;
+                padding: 2px 10px;
+                text-decoration: none;
               }
               &.property_title {
                 margin-bottom: 10px;
@@ -307,6 +317,12 @@ body,
                 box-sizing: border-box;
                 width: 47%;
                 margin-right: -3px;
+              }
+              &.wpp_search_button {
+                border: 1px solid;
+                cursor: pointer;
+                display: inline-block;
+                padding: 10px 25px;
               }
             }
             label {
@@ -470,11 +486,6 @@ body,
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
               }
-              //&.property-term-none {
-              //  &:before {
-              //    content: "\f00d";
-              //  }
-              //}
             }
           }
         }
@@ -532,11 +543,6 @@ body,
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
-      //&.property-term-none {
-      //  &:before {
-      //    content: "\f00d";
-      //  }
-      //}
     }
   }
   /* Property and Community featured list */
