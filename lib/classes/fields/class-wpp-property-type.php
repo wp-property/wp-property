@@ -43,6 +43,7 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 			if(isset($meta[0])){
 				$term_id = $meta[0];
 				$term = get_term( $term_id , $options['taxonomy'] );
+				$term_name  = $term->name;
 			}
 			ob_start();
 			?>
@@ -56,7 +57,7 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 					  name="<?php echo $field_name;?>" 
 					  class="ui-corner-left wpp-terms-input wpp-terms-term" 
 					  autocomplete="off"
-					  value="<?php echo $term->name?>"
+					  value="<?php echo $term_name;?>"
 					>
 					<a tabindex="-1" title="Show All Items" class="ui-widget ui-state-default ui-button-icon-only select-combobox-toggle ui-corner-right" role="button">
 						<span class="ui-button-icon-primary ui-icon ui-icon-triangle-1-s"></span>
