@@ -5734,6 +5734,15 @@ Ample off-street parking ",
     }
   }
 
+  /**
+   * Deactivate wp-property-terms.
+   * Because it's now bundled with wp-property.
+   * 
+   */
+  static function deactive_wp_property_terms(){
+    deactivate_plugins( 'wp-property-terms/wp-property-terms.php', true );
+  }
+
 }
 
 /**
