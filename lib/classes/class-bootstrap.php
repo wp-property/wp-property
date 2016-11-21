@@ -196,7 +196,7 @@ namespace UsabilityDynamics\WPP {
         //** set transient to flush WP-Property cache */
         set_transient( 'wpp_cache_flush', time() );
         /* Deactivate wp-property-terms */
-        WPP_F::deactive_wp_property_terms();
+        deactivate_plugins( 'wp-property-terms/wp-property-terms.php', true );
       }
       
       /**
