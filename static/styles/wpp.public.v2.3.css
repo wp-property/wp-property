@@ -459,6 +459,17 @@ body .wpp_feature_list h2.wpp_stats_group,
   margin: 0 0 0.5em;
   padding: 0;
 }
+body .wpp_feature_list ul.wpp_property_stats,
+#wpp_layout .wpp_feature_list ul.wpp_property_stats {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+body .wpp_feature_list ul.wpp_property_stats li,
+#wpp_layout .wpp_feature_list ul.wpp_property_stats li {
+  list-style: none;
+  margin: 0;
+}
 body .wpp_feature_list dl dt,
 #wpp_layout .wpp_feature_list dl dt {
   font-weight: bold;

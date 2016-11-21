@@ -80,8 +80,8 @@ class GalleryPropertiesWidget extends WP_Widget
 
     if (is_array($gallery)) {
 
-      echo '<div class="swiper-container">';
-      echo '<div class="swiper-wrapper">';
+//      echo '<div class="swiper-container">';
+//      echo '<div class="swiper-wrapper">';
 
       $real_count = 0;
 
@@ -92,7 +92,8 @@ class GalleryPropertiesWidget extends WP_Widget
         $alt = get_post_meta($image['attachment_id'], '_wp_attachment_image_alt', true);
         $thumb_image_alt = !empty($alt) ? trim(strip_tags($alt)) : $thumb_image_title;
         ?>
-        <div class="sidebar_gallery_item swiper-slide">
+<!--        <div class="sidebar_gallery_item swiper-slide">-->
+        <div class="sidebar_gallery_item">
           <?php if (!empty($big_image_type)) : ?>
             <?php $big_image = wpp_get_image_link($image['attachment_id'], $big_image_type); ?>
             <a href="<?php echo $big_image; ?>" class="thumbnail" rel="property_gallery">
@@ -127,8 +128,8 @@ class GalleryPropertiesWidget extends WP_Widget
         }
 
       }
-      echo '</div>';
-      echo '</div>';
+//      echo '</div>';
+//      echo '</div>';
     }
 
     $html['images'] = ob_get_contents();
