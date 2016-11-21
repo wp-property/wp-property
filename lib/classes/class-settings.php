@@ -44,7 +44,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Default setings for [property_overview] shortcode */
         $data['configuration']['property_overview'] = array(
-          'thumbnail_size' => 'tiny_thumb',
+          'thumbnail_size' => 'medium',
           'fancybox_preview' => 'true',
           'display_slideshow' => 'false',
           'show_children' => 'true',
@@ -52,13 +52,13 @@ namespace UsabilityDynamics\WPP {
         );
 
         $data['configuration']['single_property_view'] = array(
-          'map_image_type' => 'tiny_thumb',
+          'map_image_type' => 'medium',
           'gm_zoom_level' => '13'
         );
 
         //** Default setings for admin UI */
         $data['configuration']['admin_ui'] = array(
-          'overview_table_thumbnail_size' => 'tiny_thumb'
+          'overview_table_thumbnail_size' => 'medium'
         );
 
         $data['default_coords']['latitude'] = '57.7973333';
