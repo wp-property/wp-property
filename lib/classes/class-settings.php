@@ -128,6 +128,74 @@ namespace UsabilityDynamics\WPP {
           $this->set('property_types', $ar);
         }
 
+        
+        /* Standard Attributes 
+         * pick them from json file in the plugin root
+         * added 28/07/2016 @raj
+         * 
+         */
+        $PSA_file = WPP_Path."/static/config/standard_attributes.json";
+        if(file_exists($PSA_file) && strlen(trim(file_get_contents($PSA_file)))){
+          $PSA = json_decode(file_get_contents($PSA_file),true);
+          // move json array to composer.json in root
+//          $plugins = $this->get_schema( 'extra.schemas.dependencies.plugins' );
+//          $xx= ud_get_wp_property()->get_schema( 'extra.schemas.standard_attributes.pdf.price.label' );
+//          $l10n = apply_filters( 'ud::schema::localization', $xx );
+        }
+        else{
+          $PSA =  array();
+        }
+        $this->set('prop_std_att', $PSA);
+
+        // get mapped standard attributes
+        //prop_std_att_mapped refers to true/fase
+        $d = $this->get('prop_std_att_mapped', false);
+        if (empty($d) || !is_array($d)) {
+          $d=array();
+          $d = $this->set('prop_std_att_mapped', $d);
+        }
+        //stores attribute array to which the field is mapped
+        $d = $this->get('prop_std_att_mapsto', false);
+        if (empty($d) || !is_array($d)) {
+          $d=array();
+          $d = $this->set('prop_std_att_mapsto', $d);
+        }
+        
+        /* properties and attributes for setup assistant 
+         * @Raj
+         */
+        $d = !$this->get('property_assistant', false);
+        if (!$d || !is_array($d)) {
+          $this->set('property_assistant', array(
+                    "residential" => array(
+                      'location' => __('Address', ud_get_wp_property()->domain),
+                      'city' => __('City', ud_get_wp_property()->domain),
+                      'price' => __('Price', ud_get_wp_property()->domain),
+                      'bedrooms' => __('Bedrooms', ud_get_wp_property()->domain),
+                      'bathrooms' => __('Bathrooms', ud_get_wp_property()->domain),
+                      'total_rooms' => __('Total Rooms', ud_get_wp_property()->domain),
+                      'living_space' => __('Living space', ud_get_wp_property()->domain),
+                      'year_built' => __('Year Built', ud_get_wp_property()->domain),
+                      'fees' => __('Fees', ud_get_wp_property()->domain)
+                    ),
+                    "commercial" => array(
+                      'location' => __('Address', ud_get_wp_property()->domain),
+                      'city' => __('City', ud_get_wp_property()->domain),
+                      'price' => __('Price', ud_get_wp_property()->domain),
+                      'year_built' => __('Year Built', ud_get_wp_property()->domain),
+                      'fees' => __('Fees', ud_get_wp_property()->domain),
+                      'business_purpose' => __('Business Purpose', ud_get_wp_property()->domain),  
+                    ),
+                    "land" => array(
+                      'location' => __('Address', ud_get_wp_property()->domain),
+                      'city' => __('City', ud_get_wp_property()->domain),
+                      'price' => __('Price', ud_get_wp_property()->domain),
+                      'year_built' => __('Year Built', ud_get_wp_property()->domain),
+                      'fees' => __('Fees', ud_get_wp_property()->domain),
+                      'lot_size' => __('Lot Size', ud_get_wp_property()->domain), 
+                    )));
+        }
+
         //** Setup property types to be used. */
         $d = !$this->get('property_inheritance', false);
         if (!$d || !is_array($d)) {

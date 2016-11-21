@@ -51,6 +51,13 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 <div class="wrap <?php echo implode( ' ', $wrapper_classes ); ?>">
 
 <h2 class='wpp_settings_page_header'><?php echo ud_get_wp_property( 'labels.name' ) . ' ' . __( 'Settings', ud_get_wp_property()->domain ) ?>
+    <?php 
+    if(isset($wp_properties["configuration"]) && isset($wp_properties["configuration"]["show_assistant"]) ) {?>
+      <a class="wpp-setup-asst" href="<?php echo admin_url( 'index.php?page=wpp-setup-page' );?>">
+        <?php echo __( 'Setup Assistant', ud_get_wp_property()->domain );?> 
+      </a>
+    <?php } ?>
+
   <div class="wpp_fb_like">
   <div class="fb-like" data-href="https://www.facebook.com/wpproperty" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
 </div>
@@ -113,8 +120,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       <td>
 
         <div class="must_have_permalinks">
-          <select name="wpp_settings[configuration][base_slug]" id="wpp_settings_base_slug">
-            <option <?php selected( $wp_properties[ 'configuration' ][ 'base_slug' ], 'property' ); ?> value="property"><?php printf(__( '%s (Default)', ud_get_wp_property()->domain ), ud_get_wp_property( 'labels.name' )); ?></option>
+          <select name="wpp_settings[configuration][base_slug]" id="wpp_settings_base_slug" class="wpp_settings_base_slug">
             <?php foreach ( get_pages() as $page ): ?>
               <option <?php selected( $wp_properties[ 'configuration' ][ 'base_slug' ], $page->post_name ); ?> value="<?php echo $page->post_name; ?>"><?php echo $page->post_title; ?></option>
             <?php endforeach; ?>
@@ -136,7 +142,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
             <?php echo WPP_F::checkbox( 'name=wpp_settings[configuration][automatically_insert_overview]&label=' . __( 'Automatically overwrite this page\'s content with [property_overview].', ud_get_wp_property()->domain ), $wp_properties[ 'configuration' ][ 'automatically_insert_overview' ] ); ?>
           </li>
           <li class="wpp_wpp_settings_configuration_do_not_override_search_result_page_row <?php if ( $wp_properties[ 'configuration' ][ 'automatically_insert_overview' ] == 'true' ) echo " hidden "; ?>">
-            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_override_search_result_page]&label=" . __( 'When showing property search results, don\'t override the page content with [property_overview].', ud_get_wp_property()->domain ), $wp_properties[ 'configuration' ][ 'do_not_override_search_result_page' ] ); ?>
+            <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][do_not_override_search_result_page]&label=" . __( 'When showing property search results, don\'t override the page content with [property_overview].', ud_get_wp_property()->domain ), isset($wp_properties[ 'configuration' ][ 'do_not_override_search_result_page' ]) ?$wp_properties[ 'configuration' ][ 'do_not_override_search_result_page' ] :false ); ?>
             <div class="description"><?php _e( 'If checked, be sure to include [property_overview] somewhere in the content, or no properties will be displayed.', ud_get_wp_property()->domain ); ?></div>
           </li>
         </ul>
@@ -212,16 +218,10 @@ if ( get_option( 'permalink_structure' ) == '' ) {
           <li><?php _e( 'Attribute to use for physical addresses:', ud_get_wp_property('domain') ); ?><?php echo WPP_F::draw_attribute_dropdown( "name=wpp_settings[configuration][address_attribute]&selected={$wp_properties[ 'configuration' ]['address_attribute']}" ); ?></li>
           <li><?php _e( 'Localize addresses in:', ud_get_wp_property('domain') ); ?> <?php echo WPP_F::draw_localization_dropdown( "name=wpp_settings[configuration][google_maps_localization]&selected={$wp_properties[ 'configuration' ]['google_maps_localization']}" ); ?></li>
           <li class="google-maps-api-section" data-feature-since="2.0.3">
-            <?php printf(__( 'Google Maps API (Browser Key):', ud_get_wp_property('domain') ) ); ?>
-            <?php echo WPP_F::input( "name=wpp_settings[configuration][google_maps_api]", ud_get_wp_property( 'configuration.google_maps_api' ) ); ?>
+            <?php printf(__( 'Google Maps API (optional):', ud_get_wp_property('domain') ) ); ?> <?php echo WPP_F::input( "name=wpp_settings[configuration][google_maps_api]", ud_get_wp_property( 'configuration.google_maps_api' ) ); ?>
+            <br/><span class="description"><?php printf( __( 'Note, Google Maps has its own limit of usage. You can provide Google Maps API license ( key ) above to increase limit. See more details %shere%s.', ud_get_wp_property('domain') ), '<a href="https://developers.google.com/maps/documentation/javascript/usage#usage_limits" target="_blank">', '</a>' ); ?></span>
+            <br/><span class="description"><?php printf( __( '%s Where can I get the key ? %s.', ud_get_wp_property('domain') ), '<a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">', '</a>' ); ?></span>
 
-            <br/><span class="description"><?php printf( __( 'Note, Google Maps has its own limit of usage. You need to provide Google Maps API license ( browser key ) above to increase limit. See more details in %shelp tab%s.', ud_get_wp_property('domain') ), '<a href="#tab-link-google-map-api-key" class="open-help-tab">', '</a>' ); ?></span>
-          </li>
-          <li class="google-maps-api-section" data-feature-since="2.0.3">
-            <?php printf(__( 'Google Maps API (Server Key):', ud_get_wp_property('domain') ) ); ?>
-            <?php echo WPP_F::input( "name=wpp_settings[configuration][google_maps_api_server]", ud_get_wp_property( 'configuration.google_maps_api_server' ) ); ?>
-
-            <br/><span class="description"><?php printf( __( 'You need to  provide Google Maps API license ( server key ) above. See more details in %shelp tab%s.', ud_get_wp_property('domain') ), '<a href="#tab-link-google-map-api-key" class="open-help-tab">', '</a>' ); ?></span>
           </li>
         </ul>
       </td>
@@ -271,8 +271,13 @@ if ( get_option( 'permalink_structure' ) == '' ) {
               <span class="description"><?php _e('Enabling this option may cause performance issues.',ud_get_wp_property()->domain); ?></span>
             </li>
             <li>
+              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][show_advanced_options]&label=" . __( 'Enable Standard Attributes Matching', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'show_advanced_options' ] ) ? $wp_properties[ 'configuration' ][ 'show_advanced_options' ] : false ) ); ?>
+              <i class="description wpp-notice-for-match" title="<?php _e( 'This option is designed to help us find which attribute you want to show as Price, Address, etc and place it in correct place in our templates.', ud_get_wp_property()->domain ); ?>"> ? </i>
+          </li>
+          <li>
               <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][pre_release_update]&label=" . __( 'Enable pre-release updates.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'pre_release_update' ] ) ? $wp_properties[ 'configuration' ][ 'pre_release_update' ] : false ) ); ?>
               <br/>
+
             </li>
           </ul>
         </div>
@@ -532,6 +537,25 @@ if ( get_option( 'permalink_structure' ) == '' ) {
         : <input name="wpp_settings[settings_from_backup]" class="" id="wpp_backup_file" type="file"/>
         <a href="<?php echo wp_nonce_url( "edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup", 'download-wpp-backup' ); ?>"><?php _e( 'Download Backup of Current WP-Property Configuration.', ud_get_wp_property()->domain ); ?></a>
       </div>
+      
+      <?php 
+      //list automatic backups taken from setup-assistant screen
+      if(get_option("wpp_property_backups")){
+      ?>
+      <div class="wpp_settings_block">
+        <?php _e( "Automatic Backups of WP-Property Configuration", ud_get_wp_property()->domain ); ?>
+        <input type="button" value="<?php _e( 'Backup Now', ud_get_wp_property()->domain ); ?>" id="wpp_ajax_create_settings_backup" class="button">
+        <span class="description"><?php _e( 'Backups created when you use Setup Assistant,or create one now.', ud_get_wp_property()->domain ); ?> </span>
+        <br>
+        <div class="wpp_backups_list">
+        <?php 
+        $auto_backups = get_option("wpp_property_backups");
+        foreach( $auto_backups as  $time=>$backups){
+          echo '<a href="'.wp_nonce_url( "edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup&timestamp=".$time, 'download-wpp-backup' ).'">'.date('d-m-Y H:i', $time).'</a>&nbsp;&nbsp;&nbsp;';
+        } ?>
+        </div>
+      </div>
+      <?php } ?>
 
       <div class="wpp_settings_block">
         <?php $google_map_localizations = WPP_F::draw_localization_dropdown( 'return_array=true' ); ?>
@@ -605,7 +629,6 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
 </form>
 </div>
-
 <!--fb-->
 <div id="fb-root"></div>
 <script type="text/javascript">(function ( d, s, id ) {

@@ -86,6 +86,7 @@ namespace UsabilityDynamics\WPP {
             wp_enqueue_script( 'jquery-ui-core' );
             wp_enqueue_script( 'jquery-ui-sortable' );
             wp_enqueue_script( 'wpp-jquery-colorpicker' );
+            wp_enqueue_script( 'select2' );
             wp_enqueue_script( 'jquery-ui-tabs' );
             wp_enqueue_script( 'jquery-ui-tooltip' );
             wp_enqueue_script( 'jquery-cookie' );
@@ -94,6 +95,7 @@ namespace UsabilityDynamics\WPP {
 
             wp_enqueue_style( 'wpp-jquery-ui-dialog' );
             wp_enqueue_style( 'wpp-jquery-colorpicker-css' );
+            wp_enqueue_style( 'select2' );
             // This will enqueue the Media Uploader script
             wp_enqueue_media();
             break;
@@ -163,6 +165,12 @@ namespace UsabilityDynamics\WPP {
           header( "Content-Transfer-Encoding: binary" );
           header( 'Content-Type: text/plain; charset=' . get_option( 'blog_charset' ), true );
 
+          //if backup of data from setup-assistant
+          // get backed-up data for download
+          if(isset( $_REQUEST[ 'timestamp' ] )){
+            $data = get_option('wpp_property_backups');
+            $wp_properties = $data[ $_REQUEST[ 'timestamp' ]];
+          }
           // May be extend backup data by add-ons options.
           $data = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $wp_properties ) );
 
