@@ -279,6 +279,8 @@ class WPP_Core {
     //** Load settings into $wp_properties and save settings if nonce exists */
     WPP_F::settings_action();
 
+    //** Set up our default page for properties */
+    WPP_F::register_properties_page();
     //** Load all widgets and register widget areas */
     add_action( 'widgets_init', array( 'WPP_F', 'widgets_init' ) );
 
@@ -310,7 +312,10 @@ class WPP_Core {
     add_action( 'wp_ajax_wpp_ajax_image_query', create_function( "", ' $class = WPP_F::get_property_image_data($_REQUEST["image_id"]); if($class)  print_r($class); else echo __("No image found.","wpp"); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_clear_cache', create_function( "", '  echo WPP_F::clear_cache(); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_revalidate_all_addresses', create_function( "", '  echo WPP_F::revalidate_all_addresses(); die();' ) );
+    add_action( 'wp_ajax_wpp_ajax_create_settings_backup', create_function( "", '  echo WPP_F::create_settings_backup(); die();' ) );
     add_action( 'wp_ajax_wpp_save_settings', create_function( "", ' die(WPP_F::save_settings());' ) );
+    add_action( 'wp_ajax_wpp_save_setup_settings', create_function( "", ' die(WPP_F::save_setup_settings());' ) );
+    add_action( 'wp_ajax_wpp_save_freemius_settings', create_function( "", ' die(WPP_F::save_freemius_settings());' ) );
     add_action( 'wp_ajax_wpp_apply_default_value', create_function( "", ' die(WPP_F::apply_default_value());' ) );
     add_action( 'wp_ajax_wpp_ajax_print_wp_properties', create_function( "", ' global $wp_properties; print_r($wp_properties); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_generate_is_remote_meta', create_function( "", ' WPP_F::generate_is_remote_meta(); die();' ) );
@@ -372,6 +377,7 @@ class WPP_Core {
     wp_register_script( 'wpp-jquery-swiper', WPP_URL . 'scripts/swiper.jquery.min.js', array( 'jquery' ), '1.7.3' );
 
     wp_register_script( 'wpp-jquery-colorpicker', WPP_URL . 'scripts/colorpicker/colorpicker.js', array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'select2', WPP_URL . 'scripts/select2.min.js', array( 'jquery' ));
     wp_register_script( 'wpp-jquery-easing', WPP_URL . 'scripts/fancybox/jquery.easing-1.3.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
 
     wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'scripts/fileuploader.js', array( 'jquery', 'wpp-localization' ) );
@@ -399,6 +405,7 @@ class WPP_Core {
     wp_register_script( 'wpp-jquery-validate', WPP_URL . 'scripts/jquery.validate.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'scripts/jquery.number.format.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wp-property-galleria', WPP_URL . 'scripts/galleria/galleria-1.2.5.js', array( 'jquery', 'wpp-localization' ) );
+    
 
 
     // Load localized scripts
@@ -427,6 +434,7 @@ class WPP_Core {
     wp_register_style( 'wpp-jquery-swiper', WPP_URL . 'styles/swiper.min.css' );
     wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'scripts/colorpicker/colorpicker.css' );
     wp_register_style( 'jquery-ui', WPP_URL . 'styles/wpp.admin.jquery.ui.css' );
+    wp_register_style( 'select2', WPP_URL . 'styles/select2.min.css' );
     wp_register_style( 'wpp-jquery-ui-dialog', WPP_URL . 'styles/jquery-ui-dialog.min.css' );
 
     wp_register_style( 'wpp-fa-icons', WPP_URL . 'fonts/icons/fa/css/font-awesome.min.css', array(), '4.5.0' );

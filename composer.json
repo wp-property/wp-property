@@ -104,6 +104,68 @@
           }
         },
         "product" : false
+      },
+      "standard_attributes":{
+        "pdf": {
+          "price": {
+            "label": "l10n.price",
+            "notice": ""
+          },
+          "address": {
+            "label": "l10n.address",
+            "notice": "This attribute will be used for automatic geolocation."
+          },
+          "bedrooms": {
+            "label": "l10n.bedrooms",
+            "notice": ""
+          },
+          "bathrooms": {
+            "label": "l10n.bathrooms",
+            "notice": ""
+          },
+          "living_space_size": {
+            "label": "l10n.living_space_size_sq_ft",
+            "notice": ""
+          },
+          "features": {
+            "label": "l10n.features",
+            "notice": ""
+          },
+          "community_features": {
+            "label": "l10n.community_features",
+            "notice": ""
+          }
+       },
+        "importer": {
+          "total_rooms": {
+            "label": "l10n.total_rooms",
+            "notice": ""
+          },
+          "year_built": {
+            "label": "l10n.year_built",
+            "notice": ""
+          },
+          "no_of_floors": {
+            "label": "l10n.no_of_floors",
+            "notice": ""
+          },
+          "lot_size_acres": {
+            "label": "l10n.lot_size_acres",
+            "notice": ""
+          },
+          "neighborhood": {
+            "label": "l10n.neighborhood_(term)",
+            "notice": ""
+          },
+          "fees": {
+            "label": "l10n.fees",
+            "notice": ""
+          },
+          "status": {
+            "label": "l10n.status",
+            "notice": ""
+          }
+        }
       }
     }
   }
