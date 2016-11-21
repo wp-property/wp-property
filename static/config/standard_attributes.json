@@ -1,0 +1,62 @@
+{
+    "pdf": {
+        "price": {
+            "label": "Price",
+            "notice": ""
+        },
+        "address": {
+            "label": "Address",
+            "notice": "This attribute will be used for automatic geolocation."
+        },
+        "bedrooms": {
+            "label": "Bedrooms",
+            "notice": ""
+        },
+        "bathrooms": {
+            "label": "Bathrooms",
+            "notice": ""
+        },
+        "living_space_size": {
+            "label": "Living Space size Sq ft",
+            "notice": ""
+        },
+        "features": {
+            "label": "Features",
+            "notice": ""
+        },
+        "community_features": {
+            "label": "Community Features",
+            "notice": ""
+        }
+    },
+    "importer": {
+        "total_rooms": {
+            "label": "Total Rooms",
+            "notice": ""
+        },
+        "year_built": {
+            "label": "Year Built",
+            "notice": ""
+        },
+        "no_of_floors": {
+            "label": "No. of Floors",
+            "notice": ""
+        },
+        "lot_size_acres": {
+            "label": "Lot size, acres",
+            "notice": ""
+        },
+        "neighborhood": {
+            "label": "Neighborhood (term)",
+            "notice": ""
+        },
+        "fees": {
+            "label": "Fees",
+            "notice": ""
+        },
+        "status": {
+            "label": "Status",
+            "notice": ""
+        }
+    }
+}

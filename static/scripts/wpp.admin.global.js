@@ -749,4 +749,71 @@ jQuery(document).ready(function() {
       }
     });
   }
+  // for developer-settings-attributes
+  //toggle std attr
+  jQuery(".wpp-toggle-std-attr").live("click", function() {
+      jQuery(this).closest('li').find(".std-attr-mapper").fadeToggle();
+  });
+  
+  // apply notices on developer tab
+  applyNotices = function(notice,notice_cont){
+      
+    if(typeof(notice)!="undefined" && notice.trim().length >0){
+      notice_cont.text(notice).fadeIn();
+    }
+    else{
+      notice_cont.text('').fadeOut();
+    }
+  }
+  // for developer-settings-attributes
+  // load icon on page load
+  jQuery("#wpp_inquiry_attribute_fields tr").each(function(){
+
+    var iconClass =  jQuery(this).find(".std-attr-mapper .wpp_settings-prop_std_att_mapsto").val();
+    $x = jQuery(this).find(".wpp_std_attr_view i").addClass(iconClass);
+    
+    //if there are notices then display them
+    var notice = jQuery(this).find('.wpp_settings-prop_std_att_mapsto').find(':selected').data('notice');
+    var notice_cont = jQuery(this).find("i.std_att_notices");
+    applyNotices(notice,notice_cont);
+  });
+  
+  // for developer-settings-attributes
+  //change icon on select change
+  jQuery(".std-attr-mapper .wpp_settings-prop_std_att_mapsto").change(function(){
+    
+    var iconClass =  jQuery(this).val();
+    $x = jQuery(this).closest("tr").find(".wpp_std_attr_view i");
+    $x.removeClass().addClass(iconClass);
+    
+    //if there are notices then display them
+    var notice = jQuery(this).find(':selected').data('notice');
+    var notice_cont = jQuery(this).parent().find("i.std_att_notices");
+    applyNotices(notice,notice_cont);
+    toggleAttributesDropdown();
+  });
+  if(jQuery("#wpp_settings_base_slug").length>0)
+    jQuery("#wpp_settings_base_slug").select2();
+    //hide already choosen standard attributes
+  (toggleAttributesDropdown = function(){
+    var items = jQuery(".wpp_settings-prop_std_att_mapsto option:selected");
+    jQuery(".wpp_settings-prop_std_att_mapsto").each(function (ind,val) {
+        // Get the selected value
+        jQuery("option", jQuery(this)).each(function(){
+            jQuery(this).removeAttr("disabled");
+        });
+      
+      jQuery.each(items, function() {
+        if (jQuery.trim(jQuery(this).val()) == ''){
+          jQuery("option[value='" + jQuery(this).val() + "']", val).attr("disabled", true);
+        }
+      });
+    });
+  })();
+  
+    //notice popups to explain matched fields in Standard attributes
+  jQuery(".wpp-notice-for-match").click(function(e){
+    e.preventDefault();
+    jQuery(".wpp-notice-dialog").dialog('open');
+  });
 });

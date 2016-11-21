@@ -13,7 +13,7 @@ get_header(); ?>
 <div id="container" class="<?php wpp_css('property_overview_page::container'); ?>">
   <div id="content" class="<?php wpp_css('property_overview_page::content'); ?>" role="main">
     <div id="wpp_default_overview_page" >
-      <h1 class="entry-title"><?php echo $post->post_title; ?></h1>
+      <h1 class="entry-title"><?php if($post && $post->post_title) echo $post->post_title; ?></h1>
       <div class="<?php wpp_css('property_overview_page::entry_content', "entry-content"); ?>">
         <?php if(is_404()): ?>
         <p><?php _e('Sorry, we could not find what you were looking for.  Since you are here, take a look at some of our properties.',ud_get_wp_property()->domain) ?></p>

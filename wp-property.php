@@ -78,7 +78,7 @@ if( defined( 'WPP_FEATURE_FLAG_FREEMIUS' ) && WPP_FEATURE_FLAG_FREEMIUS ) {
         'has_paid_plans'    => false,
         'menu'              => array(
           'slug'       => "edit.php?post_type=property",
-          'first-path' => 'index.php?page=ud-splash',
+          'first-path' => 'admin.php?page=wpp-setup-page',
           'account'    => false,
           'support' => false,
           'contact' => false
