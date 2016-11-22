@@ -11,6 +11,7 @@ class ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece
         '90e77fd57b3ada1d71a5a74923356b5f' => __DIR__ . '/../../..' . '/vendor/plugins/wp-meta-box-utilities/wp-meta-box-utilities.php',
         '8a7957f8f2f99393c431a5d1f28ff7aa' => __DIR__ . '/../../..' . '/vendor/plugins/wp-gallery-metabox/loader.php',
         'b19b183aa467dadb9e7c538535e7f296' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/wp-rets-client.php',
+        'c9aeeed2e9885337348595653f9fcaea' => __DIR__ . '/../../..' . '/vendor/plugins/wp-property-terms/wp-property-terms.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -165,8 +166,13 @@ class ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece
         'RWMB_Wpp_Parent_Field' => __DIR__ . '/../../..' . '/lib/classes/fields/class-wpp-parent.php',
         'RWMB_Wpp_Property_Type_Field' => __DIR__ . '/../../..' . '/lib/classes/fields/class-wpp-property-type.php',
         'RWMB_Wpp_Readonly_Field' => __DIR__ . '/../../..' . '/lib/classes/fields/class-wpp-readonly.php',
+        'RWMB_Wpp_Select_Advanced_Field' => __DIR__ . '/../../..' . '/vendor/plugins/wp-property-terms/lib/classes/fields/select-advanced.php',
+        'RWMB_Wpp_Select_Combobox_Field' => __DIR__ . '/../../..' . '/vendor/plugins/wp-property-terms/lib/classes/fields/select-combobox.php',
+        'RWMB_Wpp_Taxonomy_Field' => __DIR__ . '/../../..' . '/vendor/plugins/wp-property-terms/lib/classes/fields/taxonomy.php',
+        'RWMB_Wpp_Taxonomy_Inherited_Field' => __DIR__ . '/../../..' . '/vendor/plugins/wp-property-terms/lib/classes/fields/class-wpp-taxonomy-inherited.php',
         'RWMB_Wysiwyg_Field' => __DIR__ . '/../../..' . '/vendor/plugins/wp-meta-box/inc/fields/wysiwyg.php',
         'RW_Meta_Box' => __DIR__ . '/../../..' . '/vendor/plugins/wp-meta-box/inc/meta-box.php',
+        'UsabilityDynamics\\CFTPB\\Loader' => __DIR__ . '/../../..' . '/vendor/plugins/wp-tax-post-binding/lib/class-loader.php',
         'UsabilityDynamics\\Job' => __DIR__ . '/..' . '/usabilitydynamics/lib-utility/lib/class-job.php',
         'UsabilityDynamics\\Loader' => __DIR__ . '/..' . '/usabilitydynamics/lib-utility/lib/class-loader.php',
         'UsabilityDynamics\\Settings' => __DIR__ . '/..' . '/usabilitydynamics/lib-settings/lib/class-settings.php',
@@ -231,6 +237,8 @@ class ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece
         'UsabilityDynamics\\WPP\\Scaffold' => __DIR__ . '/../../..' . '/lib/classes/class-scaffold.php',
         'UsabilityDynamics\\WPP\\Settings' => __DIR__ . '/../../..' . '/lib/classes/class-settings.php',
         'UsabilityDynamics\\WPP\\Shortcode' => __DIR__ . '/../../..' . '/lib/classes/class-shortcode.php',
+        'UsabilityDynamics\\WPP\\Terms_Bootstrap' => __DIR__ . '/../../..' . '/vendor/plugins/wp-property-terms/lib/classes/class-terms-bootstrap.php',
+        'UsabilityDynamics\\WPP\\Terms_Upgrade' => __DIR__ . '/../../..' . '/vendor/plugins/wp-property-terms/lib/classes/class-terms-upgrade.php',
         'UsabilityDynamics\\WPP\\Upgrade' => __DIR__ . '/../../..' . '/lib/classes/class-upgrade.php',
         'UsabilityDynamics\\WPP\\WPML' => __DIR__ . '/../../..' . '/lib/classes/class-wpml.php',
         'UsabilityDynamics\\WPP\\Widget' => __DIR__ . '/../../..' . '/lib/classes/class-widget.php',
