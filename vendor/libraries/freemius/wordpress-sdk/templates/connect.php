@@ -220,7 +220,7 @@ if (!$fs->enable_anonymous() || $is_pending_activation) {
       $.get($(this).attr('href'));
     });    
 
-    $(".fs-actions").click(function (e) {
+    $(".fs-actions a,.fs-actions button").click(function (e) {
       e.preventDefault();
       data = $(".fs-actions input").serialize();
       submitFreemiusData(data);
