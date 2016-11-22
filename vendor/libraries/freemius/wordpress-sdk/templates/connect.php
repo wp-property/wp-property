@@ -200,7 +200,11 @@ if (!$fs->enable_anonymous() || $is_pending_activation) {
         success: function (response) {
           $hideLoader();
           response = JSON.parse(response);
-          console.log(response);
+          
+          //move slider one step ahead
+          var wpp_owl = $("#wpp-splash-screen-owl").data('owlCarousel');
+          wpp_owl.next();
+          
           if (response && response.success == 1) {
             if (response.redirect_url) {
               console.info(response.redirect_url);
@@ -216,7 +220,7 @@ if (!$fs->enable_anonymous() || $is_pending_activation) {
       $.get($(this).attr('href'));
     });    
 
-    $(".fs-actions").click(function (e) {
+    $(".fs-actions a,.fs-actions button").click(function (e) {
       e.preventDefault();
       data = $(".fs-actions input").serialize();
       submitFreemiusData(data);

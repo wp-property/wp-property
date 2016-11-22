@@ -61,7 +61,7 @@
 }
 #wpp-splash-screen .owl-buttons div{
   position: absolute;
-  top : 300px;
+  top : 260px;
 }
 .wpp_asst_screen table.wpp_layouts_table .layouts-list h5{
   font-size: small;
@@ -494,7 +494,7 @@ li.checkbox-up [type="checkbox"] + span::before {
   position: absolute;
   right: 0;
   text-align: center;
-  top: 50%;
+  top: 300px;
   opacity : 0;
 }
 
@@ -511,4 +511,7 @@ li.checkbox-up [type="checkbox"] + span::before {
   padding: 9px;
   display: block;
   width: 300px;
+}
+#fs_connect{
+  margin : 0 auto;
 }
