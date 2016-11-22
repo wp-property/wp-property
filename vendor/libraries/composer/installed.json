@@ -771,5 +771,142 @@
             "sdk",
             "wordpress"
         ]
+    },
+    {
+        "name": "usabilitydynamics/wp-tax-post-binding",
+        "version": "2.0.5",
+        "version_normalized": "2.0.5.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/wp-tax-post-binding",
+            "reference": "2.0.5"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/wp-tax-post-binding/archive/2.0.5.zip",
+            "reference": "2.0.5",
+            "shasum": null
+        },
+        "require": {
+            "composer/installers": "~1.0"
+        },
+        "type": "wordpress-plugin",
+        "extra": {
+            "installer-name": "wp-tax-post-binding"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib"
+            ]
+        },
+        "license": [
+            "GPLv2"
+        ],
+        "authors": [
+            {
+                "name": "Crowd Favorite",
+                "homepage": "http://crowdfavorite.com"
+            },
+            {
+                "name": "UsabilityDynamics",
+                "email": "maxim.peshkov@usabilitydynamics.com",
+                "homepage": "https://www.usabilitydynamics.com/",
+                "role": "Developer"
+            }
+        ],
+        "description": "A WordPress plugin that provides extended functionality for taxonomies such as post meta and featured image through creating a custom post type and associating it to that taxonomy.",
+        "keywords": [
+            "taxonomy",
+            "term",
+            "wordpress",
+            "wordpress-plugin"
+        ]
+    },
+    {
+        "name": "wp-property/wp-property-terms",
+        "version": "dev-latest",
+        "version_normalized": "dev-latest",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:wp-property/wp-property-terms",
+            "reference": "latest"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/wp-property/wp-property-terms/archive/latest.zip",
+            "reference": "latest",
+            "shasum": null
+        },
+        "archive": {
+            "exclude": [
+                "vendor",
+                "node_modules",
+                ".gitignore",
+                "test",
+                "circle.yml",
+                "composer.lock",
+                "gruntfile.js",
+                "package.json"
+            ]
+        },
+        "require": {
+            "php": ">=5.3",
+            "usabilitydynamics/lib-utility": "0.3.7",
+            "usabilitydynamics/lib-wp-bootstrap": "1.2.1",
+            "usabilitydynamics/wp-tax-post-binding": "2.0.5"
+        },
+        "require-dev": {
+            "codeclimate/php-test-reporter": "~0.1",
+            "usabilitydynamics/lib-wp-phpunit": "~0.2"
+        },
+        "type": "wordpress-plugin",
+        "extra": {
+            "installer-paths": {
+                "vendor/plugins/{$name}": [
+                    "type:wordpress-muplugin",
+                    "type:wordpress-module",
+                    "type:wordpress-plugin",
+                    "type:wpackagist-plugin"
+                ],
+                "vendor/libraries/{$vendor}/{$name}": [
+                    "type:wordpress-library"
+                ]
+            },
+            "schemas": {
+                "dependencies": {
+                    "modules": [],
+                    "plugins": [
+                        {
+                            "name": "WP-Property",
+                            "slug": "wp-property",
+                            "version": "2.0.0",
+                            "required": true
+                        }
+                    ]
+                },
+                "licenses": {
+                    "client": false,
+                    "product": {
+                        "referrer": "wp-property/wp-property",
+                        "product_id": "wp-property/wp-property-terms"
+                    }
+                }
+            },
+            "installer-name": "wp-property-terms"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib/classes"
+            ],
+            "files": [
+                "wp-property-terms.php"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "homepage": "https://www.usabilitydynamics.com/product/wp-property-terms"
     }
 ]

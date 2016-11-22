@@ -79,6 +79,9 @@ namespace UsabilityDynamics\WPP {
             if($property_terms_widget_updated)
               update_option('widget_wpp_property_terms', $property_terms_widget);
 
+          case ( version_compare( $old_version, '2.3.0', '<' ) ):
+            WPP_F::deactive_wp_property_terms();
+
         }
 
         /* Additional stuff can be handled here */

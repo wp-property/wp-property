@@ -10,4 +10,5 @@ return array(
     '90e77fd57b3ada1d71a5a74923356b5f' => $baseDir . '/vendor/plugins/wp-meta-box-utilities/wp-meta-box-utilities.php',
     '8a7957f8f2f99393c431a5d1f28ff7aa' => $baseDir . '/vendor/plugins/wp-gallery-metabox/loader.php',
     'b19b183aa467dadb9e7c538535e7f296' => $baseDir . '/vendor/plugins/wp-rets-client/wp-rets-client.php',
+    'c9aeeed2e9885337348595653f9fcaea' => $baseDir . '/vendor/plugins/wp-property-terms/wp-property-terms.php',
 );
