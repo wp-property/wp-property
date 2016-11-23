@@ -360,6 +360,7 @@ namespace UsabilityDynamics\WPP {
         }
         $attrs[ 'any' ] = __( 'Any', $this->get('domain') ) . ' (' . \WPP_F::format_numeric( $all ) . ')';
         ksort( $attrs );
+        $attrs = apply_filters('admin_overview_post_statuses', $attrs);
         return $attrs;
       }
 

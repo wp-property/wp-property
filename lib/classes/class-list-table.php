@@ -47,6 +47,7 @@ namespace UsabilityDynamics\WPP {
        * @access public
        */
       public function ajax_response() {
+        do_action('wplt::ajax_response_action');
         $response = parent::ajax_response();
         $response['pagination']['_pagination_args'] = $this->_pagination_args;
         return $response;
