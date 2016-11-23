@@ -78,7 +78,7 @@ namespace UsabilityDynamics\WP {
           return;
         }
         if ($_GET['page'] == $this->page_slug) {
-          add_dashboard_page(__('Welcome to Wp Property', $this->domain), __('Welcome', $this->domain), 'manage_options', $this->page_slug, array($this, 'ud_splash_page'));
+          add_dashboard_page(__('Welcome to Wp Property', $this->domain), __('Welcome', $this->domain), 'manage_options', $this->page_slug, array($this, 'wpp_setup_page'));
         }
       }
       /**
