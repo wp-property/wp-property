@@ -100,7 +100,16 @@ if (!class_exists('WPP_Setup_Assistant')) {
             <div id="wpp-splash-screen-owl" class="owl-carousel">
 
               <div class="item">
-                <div class="wpp_asst_screen wpp_asst_screen_0">
+                <div class="wpp_asst_screen wpp_asst_screen_1">
+                  <h2 class="wpp_asst_heading_main"><?php echo __('WELCOME TO', ud_get_wp_property()->domain); ?></h2>
+                  <h1><?php echo __('WP-PROPERTY PLUGIN!', ud_get_wp_property()->domain); ?></h1>
+                  <p class="tagline"><?php echo __('Make few steps in order to set up it on your site!', ud_get_wp_property()->domain); ?></p>
+                  <center><button type="button" class="btn_letsgo"><?php echo __("LET'S GO!", ud_get_wp_property()->domain); ?></button></center>
+                </div>
+              </div>
+
+              <div class="item">
+                <div class="wpp_asst_screen wpp_asst_screen_freemius">
                   <?php
                   /* if following code is exectuted from setup assistant page
                    * force optin render manually
@@ -113,6 +122,7 @@ if (!class_exists('WPP_Setup_Assistant')) {
               </div>
 
               <div class="item">
+<<<<<<< HEAD
                 <div class="wpp_asst_screen wpp_asst_screen_1">
                   <h2 class="wpp_asst_heading_main"><?php echo __('WELCOME TO', ud_get_wp_property()->domain); ?></h2>
                   <h1><?php echo __('WP-PROPERTY PLUGIN!', ud_get_wp_property()->domain); ?></h1>
@@ -126,6 +136,8 @@ if (!class_exists('WPP_Setup_Assistant')) {
               </div>
 
               <div class="item">
+=======
+>>>>>>> 3833444e6c521a1e63a5840bd6d587f65b179c9d
                 <div class="wpp_asst_screen wpp_asst_screen_2">
                   <h2 class="wpp_asst_heading">
                     <b><?php echo __('Which Property Types do you want to have on your site?', ud_get_wp_property()->domain); ?></b>
@@ -290,9 +302,8 @@ if (!class_exists('WPP_Setup_Assistant')) {
               <div class="item  item-wider">
                 <div class="wpp_asst_screen wpp_asst_screen_6">
                   <?php
-                  echo "layouts here ";
-                  //           new Layouts();
-                  //           echo ud_get_wp_property()->layouts_settings->setup_assistant_layouts();
+                  $layouts =  new UsabilityDynamics\WPP\Layouts_Settings();
+                  echo $layouts->setup_assistant_layouts();
                   ?>
                 </div>
               </div>
