@@ -180,6 +180,7 @@
   float: left;
   height: 21px;
   margin: 0 24px 18px;
+  cursor: pointer;
   width: 43%;
   padding: 12px 0px 10px 17px;
   font-size: 20px;
@@ -248,7 +249,12 @@ h2.wpp_asst_heading b {
   font-size: 30px;
   line-height: 30px;
 }
-
+.description-cont{
+  float: left;
+  display: block;
+  width: 100%;
+  margin: 10px;
+}
 .label-property
 {
   width:34%;
