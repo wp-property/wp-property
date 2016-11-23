@@ -825,6 +825,11 @@ class WPP_Core {
       'post_type' => 'property'
     ) );
 
+    // Checking if this is a child property if then add it to children array.
+    if($parent_id = wp_get_post_parent_id($post_id)){
+      $children[$post_id] = null;
+    }
+
     //* Write any data to children properties that are supposed to inherit things */
     //* 1) Go through all children */
     foreach( (array) $children as $child_id => $child_data ) {
@@ -837,8 +842,11 @@ class WPP_Core {
         isset( $wp_properties[ 'property_inheritance' ][ $child_property_type ] ) &&
         is_array( $wp_properties[ 'property_inheritance' ][ $child_property_type ] )
       ) {
+        // Getting parret id //because current property could be a child.
+        $parent_id = wp_get_post_parent_id($child_id);
+
         foreach( $wp_properties[ 'property_inheritance' ][ $child_property_type ] as $i_meta_key ) {
-          $parent_meta_value = get_post_meta( $post_id, $i_meta_key, true );
+          $parent_meta_value = get_post_meta( $parent_id, $i_meta_key, true );
           //* inheritance rule exists for this property_type for this meta_key */
           update_post_meta( $child_id, $i_meta_key, $parent_meta_value );
         }
