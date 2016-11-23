@@ -90,15 +90,6 @@ if (!class_exists('WPP_Setup_Assistant')) {
             <div id="wpp-splash-screen-owl" class="owl-carousel">
 
               <div class="item">
-                <div class="wpp_asst_screen wpp_asst_screen_1">
-                  <h2 class="wpp_asst_heading_main"><?php echo __('WELCOME TO', ud_get_wp_property()->domain); ?></h2>
-                  <h1><?php echo __('WP-PROPERTY PLUGIN!', ud_get_wp_property()->domain); ?></h1>
-                  <p class="tagline"><?php echo __('Make few steps in order to set up it on your site!', ud_get_wp_property()->domain); ?></p>
-                  <center><button type="button" class="btn_letsgo"><?php echo __("LET'S GO!", ud_get_wp_property()->domain); ?></button></center>
-                </div>
-              </div>
-
-              <div class="item">
                 <div class="wpp_asst_screen wpp_asst_screen_freemius">
                   <?php
                   /* if following code is exectuted from setup assistant page
@@ -169,15 +160,6 @@ if (!class_exists('WPP_Setup_Assistant')) {
                     </ul>
                   </div>
 
-                  <h2 class="wpp_asst_heading"><b><?php echo __('Add Widgets to the single property pages?', ud_get_wp_property()->domain); ?></b> </h2>
-                  <div class="wpp_asst_inner_wrap">
-                    <ul>
-                      <li class="wpp_asst_label"><?php echo __('Property Gallery', ud_get_wp_property()->domain); ?> <label for="gallerypropertieswidget"> 
-                          <input class="wpp_box" type="checkbox" value="gallerypropertieswidget" name="wpp_settings[configuration][widgets][gallerypropertieswidget]" value="gallerypropertieswidget"  id="gallerypropertieswidget"  <?php if (isset($wp_properties['configuration']['widgets']) && in_array("gallerypropertieswidget", array_keys($wp_properties['configuration']['widgets']))) echo "checked"; ?>> <span></span> </label>
-                      </li> 
-
-                    </ul>
-                  </div>
                 </div><!-- wpp_asst_screen wpp_asst_screen_3 --> 
               </div><!-- item --> 
 
@@ -196,37 +178,19 @@ if (!class_exists('WPP_Setup_Assistant')) {
                         <?php } ?>
                         <option value="create-new" class="list_property"><?php echo __('Create a new page', ud_get_wp_property()->domain); ?></option>
                       </select>
+                      
                     </div>	
                     <div class="wpp_asst_select_new">
                       <input type="text" name="wpp-base-slug-new" class="wpp-base-slug-new" required="required"/>
                     </div>
-
-                    <h2 class="wpp_asst_heading"><b><?php echo __('Add list of properties to your Properties page?', ud_get_wp_property()->domain); ?></b></h2>
-
-                    <div class="wpp_asst_inner_wrap">
-                      <ul class="three-sectionals">
-                        <li class="wpp_asst_label"> <?php echo __('Sure', ud_get_wp_property()->domain); ?><label for="true"> 
-                            <input class="wpp_box" type="checkbox" value="true" name="wpp_settings[configuration][automatically_insert_overview]" 
-                                   <?php if (isset($wp_properties['configuration']['automatically_insert_overview']) && !empty($wp_properties['configuration']['automatically_insert_overview'])) echo "checked"; ?> id="true"> <span></span> </label>
-                        </li> 
-                      </ul>
+                    <div class="description-cont">
+                      <span class="description"><?php echo __('All properties will be listed on the "Properties" page by default.', ud_get_wp_property('domain')); ?></span>
                     </div>
+                    <input class="wpp_box" type="hidden" value="true" name="wpp_settings[configuration][automatically_insert_overview]"  id="true">
                   </div>
                 </div><!-- wpp_asst_screen wpp_asst_screen_4 --> 
               </div><!-- item --> 
-              <div class="item">
-                <div class="wpp_asst_screen wpp_asst_screen_5 wpp_map_api_screen">
-                  <h2 class="wpp_asst_heading"><b><?php echo __('Google Maps API ', ud_get_wp_property()->domain); ?></b></h2>  
-                  <span class="description"><?php echo __('Google Maps requires API key to be shown on your single property pages.', ud_get_wp_property('domain')); ?> <?php printf(__('%s Where can I get the key ? %s', ud_get_wp_property('domain')), '<a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">( ', ' ) </a>'); ?></span>
-                  <div class="wpp_asst_inner_wrap wpp_asst_google_api">
-                    <?php echo WPP_F::input("name=wpp_settings[configuration][google_maps_api]", ud_get_wp_property('configuration.google_maps_api')); ?>
 
-                    <br/>
-                    <span class="description"></span>
-
-                  </div>
-                </div>
-              </div>
               <div class="item  item-wider">
                 <div class="wpp_asst_screen wpp_asst_screen_6">
                   <?php
@@ -241,11 +205,11 @@ if (!class_exists('WPP_Setup_Assistant')) {
                   <ul class="list-img">
                     <li>
                       <span><img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/wpp-single-prop.jpg', 'url'); ?>" alt="image"></span>
-                    <center><a class="btn_single_page props" href="javascript:;"><?php echo __('SINGLE PROPERTY PAGE', ud_get_wp_property()->domain); ?></a></center>
+                    <center><a class="btn_single_page props" href="<?php echo get_admin_url();?>post-new.php?post_type=property"><?php echo __('CREATE NEW PROPERTY', ud_get_wp_property()->domain); ?></a></center>
                     </li>
                     <li>
                       <img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/overview-prop.jpg', 'url'); ?>" alt="image">
-                    <center><a class="btn_single_page oviews" href="javascript:;"><?php echo __('OVERVIEW OF PROPERTIES', ud_get_wp_property()->domain); ?></a></center>
+                    <center><a class="btn_single_page oviews" href="<?php echo get_admin_url();?>edit.php?post_type=property&page=all_properties"><?php echo __('OVERVIEW OF PROPERTIES', ud_get_wp_property()->domain); ?></a></center>
                     </li>
                   </ul>
                 </div>
