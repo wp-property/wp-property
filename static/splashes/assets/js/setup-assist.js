@@ -25,7 +25,7 @@ jQuery(document).ready(function () {
         data: data
       },
       beforeSend: function () {
-        $showLoader;
+        $showLoader();
       },
       success: function (response) {
         $hideLoader();
@@ -53,12 +53,13 @@ jQuery(document).ready(function () {
   }
   //handle each screen individually
   function propAssistScreens() {
-    $isScreen = $(".owl-page.active").index() + 1;
+    
+    $indexOfLastScreen = $(".owl-page").length;
+    $isScreen = $(".owl-page.active").index() + 1 + 1;
     // maybe add some screen specific
     switch ($isScreen) {
-      case 7 :
+      case $indexOfLastScreen:
         jQuery('#wpp-setup-assistant').submit();
-//        console.log("postback data");
         break;
       default:
 //        console.log("reached default screen");
@@ -120,4 +121,12 @@ jQuery(document).ready(function () {
     }
     return false;
   });
+  
+  //make checkboxes container clickable
+  $('li.wpp_asst_label').click(function (e) {
+    if (e.target != this)
+      return;
+    el = $(this).find('input');
+    el.click();
+  })
 });
