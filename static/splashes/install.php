@@ -122,7 +122,6 @@ if (!class_exists('WPP_Setup_Assistant')) {
               </div>
 
               <div class="item">
-<<<<<<< HEAD
                 <div class="wpp_asst_screen wpp_asst_screen_1">
                   <h2 class="wpp_asst_heading_main"><?php echo __('WELCOME TO', ud_get_wp_property()->domain); ?></h2>
                   <h1><?php echo __('WP-PROPERTY PLUGIN!', ud_get_wp_property()->domain); ?></h1>
@@ -136,8 +135,6 @@ if (!class_exists('WPP_Setup_Assistant')) {
               </div>
 
               <div class="item">
-=======
->>>>>>> 3833444e6c521a1e63a5840bd6d587f65b179c9d
                 <div class="wpp_asst_screen wpp_asst_screen_2">
                   <h2 class="wpp_asst_heading">
                     <b><?php echo __('Which Property Types do you want to have on your site?', ud_get_wp_property()->domain); ?></b>
