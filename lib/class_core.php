@@ -290,6 +290,13 @@ class WPP_Core {
       add_action( 'edited_wpp_type', array($this, 'term_created_wpp_type'), 10, 2 );
       add_action( 'delete_wpp_type', array($this, 'term_delete_wpp_type'), 10, 4 );
       add_action( 'wpp_settings_save', array('WPP_F', 'create_property_type_terms'), 10, 2 );
+
+      // Run activation task after plugin fully activated.
+      if(get_option('wpp_activated') ){
+        WPP_F::add_wpp_type_from_existing_terms();
+        WPP_F::create_property_type_terms($wp_properties, $wp_properties);
+        delete_option('wpp_activated');
+      }
     }
   }
 
