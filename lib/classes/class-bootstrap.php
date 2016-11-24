@@ -197,6 +197,8 @@ namespace UsabilityDynamics\WPP {
         set_transient( 'wpp_cache_flush', time() );
         /* Deactivate wp-property-terms */
         deactivate_plugins( 'wp-property-terms/wp-property-terms.php', true );
+        // To run activation task after plugin fully activated.
+        add_option('wpp_activated', true);
       }
       
       /**

@@ -127,7 +127,7 @@ wp_enqueue_style( 'wpp-terms-settings', ud_get_wpp_terms()->path( '/static/style
       </td>
 
       <td>
-        <span class="wpp_delete_row wpp_link <?php echo (isset($data['default']) && $data['default'])?"hidden":"";?>"><?php _e( 'Delete', ud_get_wpp_terms()->domain ); ?></span>
+        <span class="wpp_delete_row wpp_link <?php echo (isset($data['readonly']) && $data['readonly'])?"hidden":"";?>"><?php _e( 'Delete', ud_get_wpp_terms()->domain ); ?></span>
       </td>
     </tr>
 

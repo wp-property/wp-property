@@ -34,7 +34,7 @@ $predefined_values = isset( $wp_properties[ 'predefined_values' ] ) ? $wp_proper
   <?php 
   
   if(empty($wp_properties[ 'property_stats' ])){
-	  $wp_properties[ 'property_stats' ] = array("first" => "");
+	  $wp_properties[ 'property_stats' ] = array("" => "");
   }
   foreach( $wp_properties[ 'property_stats' ] as $slug => $label ): ?>
     <?php $gslug = false; ?>
@@ -45,7 +45,7 @@ $predefined_values = isset( $wp_properties[ 'predefined_values' ] ) ? $wp_proper
     <?php endif; 
 		
 	?>
-    <tr class="wpp_dynamic_table_row" <?php echo( !empty( $gslug ) ? "wpp_attribute_group=\"" . $gslug . "\"" : "" ); ?> style="<?php echo( !empty( $group[ 'color' ] ) ? "background-color:" . $group[ 'color' ] : "" ); echo( empty( $label ) ? "display:none;" : ""); ?>" slug="<?php echo $slug; ?>" new_row='false'>
+    <tr class="wpp_dynamic_table_row" <?php echo( !empty( $gslug ) ? "wpp_attribute_group=\"" . $gslug . "\"" : "" ); ?> style="<?php echo( !empty( $group[ 'color' ] ) ? "background-color:" . $group[ 'color' ] : "" ); echo( empty( $slug ) ? "display:none;" : ""); ?>" slug="<?php echo $slug; ?>" new_row='false'>
 
       <td class="wpp_draggable_handle">&nbsp;</td>
 
