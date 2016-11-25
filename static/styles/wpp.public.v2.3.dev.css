@@ -645,6 +645,7 @@ body .wpp_agent_widget_wrapper dl.wpp_agent_info_list dt,
 #wpp_layout .wpp_agent_widget_wrapper dl.wpp_agent_info_list dt {
   display: inline-block;
   padding-right: 5px;
+  font-weight: bold;
 }
 body .wpp_agent_widget_wrapper dl.wpp_agent_info_list dd,
 #wpp_layout .wpp_agent_widget_wrapper dl.wpp_agent_info_list dd {
