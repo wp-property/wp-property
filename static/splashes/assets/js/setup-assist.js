@@ -29,11 +29,8 @@ jQuery(document).ready(function () {
       },
       success: function (response) {
         $hideLoader();
-        var data = jQuery.parseJSON(response);
-        if (data.props_over != 'false' && data.props_over != false)
-          $(".btn_single_page.oviews").attr("href", data.props_over);
-        if (data.props_single != 'false' && data.props_single != false)
-          $(".btn_single_page.props").attr("href", data.props_single);
+//        var data = jQuery.parseJSON(response);
+        
       },
       error: function () {
         $hideLoader();
@@ -106,21 +103,6 @@ jQuery(document).ready(function () {
       $('.wpp-base-slug-new').fadeOut("fast");
     }
   });
-
-  //on click of last screen option buttons
-  $(".btn_single_page").click(function (e) {
-    e.stopPropagation();
-    e.preventDefault();
-
-    if (this.href.indexOf("javascript:;") > -1 || this.href == "" || this.href == "false") {
-      alert(wpp_property_assistant.no_link_available);
-    }
-    else {
-      var win = window.open(this.href, '_blank');
-      win.focus();
-    }
-    return false;
-  });
   
   //make checkboxes container clickable
   $('li.wpp_asst_label').click(function (e) {
@@ -128,5 +110,6 @@ jQuery(document).ready(function () {
       return;
     el = $(this).find('input');
     el.click();
-  })
+  });
+  $(".wpp_asst_screen .foot-note a").click(function(){$('.wpp_asst_screen .foot-note .wpp_toggl_desctiption').toggle("slow")})
 });
