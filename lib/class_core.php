@@ -1274,6 +1274,10 @@ class WPP_Core {
           }
         }
       }
+      
+      if(empty($wpp_settings['configuration']['google_maps_api_server']) && !empty($wpp_settings['configuration']['google_maps_api'])){
+        $wpp_settings['configuration']['google_maps_api_server'] = $wpp_settings['configuration']['google_maps_api'];
+      }
     }
 
     return $wpp_settings;
