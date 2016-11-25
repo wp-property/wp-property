@@ -72,6 +72,9 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
 	  }
     } );
 
+    /* Disable auto scroll for help expander. */
+    jQuery('#contextual-help-link, #show-settings-link').off( 'focus.scroll-into-view');
+
     /* Tabs for various UI elements */
     jQuery( '.wpp_subtle_tabs' ).tabs();
 

@@ -39,6 +39,7 @@ namespace UsabilityDynamics\WPP {
           'currency_symbol' => '$',
           'address_attribute' => 'location',
           'google_maps_localization' => 'en',
+          'enable_layouts' => 'true',
           'display_address_format' => '[city], [state]'
         );
 
@@ -167,31 +168,24 @@ namespace UsabilityDynamics\WPP {
         $d = !$this->get('property_assistant', false);
         if (!$d || !is_array($d)) {
           $this->set('property_assistant', array(
-                    "residential" => array(
+                    "default_atts" => array(
+                      'tagline' => __('Tagline', ud_get_wp_property()->domain),
                       'location' => __('Address', ud_get_wp_property()->domain),
                       'city' => __('City', ud_get_wp_property()->domain),
                       'price' => __('Price', ud_get_wp_property()->domain),
+                      'year_built' => __('Year Built', ud_get_wp_property()->domain),
+                      'fees' => __('Fees', ud_get_wp_property()->domain)
+                    ),
+                    "residential" => array(
                       'bedrooms' => __('Bedrooms', ud_get_wp_property()->domain),
                       'bathrooms' => __('Bathrooms', ud_get_wp_property()->domain),
                       'total_rooms' => __('Total Rooms', ud_get_wp_property()->domain),
                       'living_space' => __('Living space', ud_get_wp_property()->domain),
-                      'year_built' => __('Year Built', ud_get_wp_property()->domain),
-                      'fees' => __('Fees', ud_get_wp_property()->domain)
                     ),
                     "commercial" => array(
-                      'location' => __('Address', ud_get_wp_property()->domain),
-                      'city' => __('City', ud_get_wp_property()->domain),
-                      'price' => __('Price', ud_get_wp_property()->domain),
-                      'year_built' => __('Year Built', ud_get_wp_property()->domain),
-                      'fees' => __('Fees', ud_get_wp_property()->domain),
                       'business_purpose' => __('Business Purpose', ud_get_wp_property()->domain),  
                     ),
                     "land" => array(
-                      'location' => __('Address', ud_get_wp_property()->domain),
-                      'city' => __('City', ud_get_wp_property()->domain),
-                      'price' => __('Price', ud_get_wp_property()->domain),
-                      'year_built' => __('Year Built', ud_get_wp_property()->domain),
-                      'fees' => __('Fees', ud_get_wp_property()->domain),
                       'lot_size' => __('Lot Size', ud_get_wp_property()->domain), 
                     )));
         }
@@ -211,6 +205,7 @@ namespace UsabilityDynamics\WPP {
           $ar2 = array();
           if (empty($b_install)) {
             $ar = array(
+              'tagline' => __('Tagline', ud_get_wp_property()->domain),
               'location' => __('Address', ud_get_wp_property()->domain),
               'price' => __('Price', ud_get_wp_property()->domain),
               'deposit' => __('Deposit', ud_get_wp_property()->domain),
@@ -218,6 +213,7 @@ namespace UsabilityDynamics\WPP {
               'phone_number' => __('Phone Number', ud_get_wp_property()->domain),
             );
             $ar2 = array(
+              'tagline' => '',
               'location' => '',
               'price' => '',
               'deposit' => '',

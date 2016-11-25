@@ -3018,7 +3018,8 @@ Ample off-street parking ",
       }
         
 //      compute basic property attributes
-      $propAttrSet = array();
+      $propAttrSet = $wp_properties['property_assistant']['default_atts']; // Default attributes regardless of property types.
+
       if ($prop_types && isset($data['wpp_settings']['property_types']['land']))
         $propAttrSet = array_merge($propAttrSet, $wp_properties['property_assistant']['land']);
       if ($prop_types && isset($data['wpp_settings']['property_types']['commercial']))
