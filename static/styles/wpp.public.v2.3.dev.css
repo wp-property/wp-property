@@ -84,6 +84,8 @@ body,
   /* Property type list */
   /* Property and Community featured list */
   /* Property and Community featured list */
+  /* Property Agent widget */
+  /* Property Agent widget */
 }
 body .wpp_property_overview_shortcode,
 #wpp_layout .wpp_property_overview_shortcode {
@@ -546,16 +548,16 @@ body .wpp_feature_list span.value ul li a,
 #wpp_layout .wpp_feature_list span.value ul li a {
   padding: 0;
 }
-body .wpp_feature_list span.value.property_property_feature ul li,
-#wpp_layout .wpp_feature_list span.value.property_property_feature ul li,
-body .wpp_feature_list span.value.property_community_feature ul li,
-#wpp_layout .wpp_feature_list span.value.property_community_feature ul li {
+body .wpp_feature_list .property_property_feature ul li,
+#wpp_layout .wpp_feature_list .property_property_feature ul li,
+body .wpp_feature_list .property_community_feature ul li,
+#wpp_layout .wpp_feature_list .property_community_feature ul li {
   margin: 0;
 }
-body .wpp_feature_list span.value.property_property_feature ul li:before,
-#wpp_layout .wpp_feature_list span.value.property_property_feature ul li:before,
-body .wpp_feature_list span.value.property_community_feature ul li:before,
-#wpp_layout .wpp_feature_list span.value.property_community_feature ul li:before {
+body .wpp_feature_list .property_property_feature ul li:before,
+#wpp_layout .wpp_feature_list .property_property_feature ul li:before,
+body .wpp_feature_list .property_community_feature ul li:before,
+#wpp_layout .wpp_feature_list .property_community_feature ul li:before {
   padding-right: 5px;
   content: "\f00c";
   display: inline-block;
@@ -622,4 +624,29 @@ body .property_feature_list li:before,
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+body .wpp_agent_widget_wrapper ul.wpp_agent_info_list,
+#wpp_layout .wpp_agent_widget_wrapper ul.wpp_agent_info_list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+body .wpp_agent_widget_wrapper ul.wpp_agent_info_list li,
+#wpp_layout .wpp_agent_widget_wrapper ul.wpp_agent_info_list li {
+  margin: 0;
+  list-style: none;
+  border: none;
+}
+body .wpp_agent_widget_wrapper ul.wpp_agent_info_list li.wpp_agent_stats_display_name,
+#wpp_layout .wpp_agent_widget_wrapper ul.wpp_agent_info_list li.wpp_agent_stats_display_name {
+  font-weight: bold;
+}
+body .wpp_agent_widget_wrapper dl.wpp_agent_info_list dt,
+#wpp_layout .wpp_agent_widget_wrapper dl.wpp_agent_info_list dt {
+  display: inline-block;
+  padding-right: 5px;
+}
+body .wpp_agent_widget_wrapper dl.wpp_agent_info_list dd,
+#wpp_layout .wpp_agent_widget_wrapper dl.wpp_agent_info_list dd {
+  display: inline-block;
 }

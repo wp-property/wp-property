@@ -471,22 +471,22 @@ body,
             }
           }
         }
-        &.property_property_feature,
-        &.property_community_feature {
-          ul {
-            li {
-              margin: 0;
-              &:before {
-                padding-right: 5px;
-                content: "\f00c";
-                display: inline-block;
-                font: normal normal normal 14px/1 FontAwesome;
-                font-size: inherit;
-                text-rendering: auto;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-              }
-            }
+      }
+    }
+    .property_property_feature,
+    .property_community_feature {
+      ul {
+        li {
+          margin: 0;
+          &:before {
+            padding-right: 5px;
+            content: "\f00c";
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
           }
         }
       }
@@ -546,5 +546,36 @@ body,
     }
   }
   /* Property and Community featured list */
+
+  /* Property Agent widget */
+  .wpp_agent_widget_wrapper {
+
+    .wpp_agent_info_single_wrapper {
+
+    }
+    ul.wpp_agent_info_list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      li {
+        margin: 0;
+        list-style: none;
+        border: none;
+        &.wpp_agent_stats_display_name {
+          font-weight: bold;
+        }
+      }
+    }
+    dl.wpp_agent_info_list {
+      dt {
+        display: inline-block;
+        padding-right: 5px;
+      }
+      dd {
+        display: inline-block;
+      }
+    }
+  }
+  /* Property Agent widget */
 
 }
