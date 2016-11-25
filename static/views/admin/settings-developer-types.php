@@ -18,13 +18,16 @@ global $wp_properties;
   </thead>
   <tbody>
   <?php 
-   if(empty($wp_properties[ 'property_meta' ])){
-	  $wp_properties[ 'property_types' ] = array("first" => "");
+  if(empty($wp_properties[ 'property_types' ])){
+	  $wp_properties[ 'property_types' ] = array("" => "");
   }
+  
+  $wp_properties[ 'property_stats' ] = array_filter($wp_properties[ 'property_stats' ]);
+  $wp_properties[ 'property_meta' ] = array_filter($wp_properties[ 'property_meta' ]);
 
   foreach( apply_filters( 'wpp::property_types', $wp_properties[ 'property_types' ] ) as $property_slug => $label ): ?>
 
-    <tr class="wpp_dynamic_table_row" slug="<?php echo $property_slug; ?>"  data-property-slug="<?php echo $property_slug; ?>" new_row='false'>
+    <tr class="wpp_dynamic_table_row" slug="<?php echo $property_slug; ?>"  data-property-slug="<?php echo $property_slug; ?>" new_row='false' style="<?php echo( empty( $property_slug ) ? "display:none;" : ""); ?>">
 
       <td>
         <ul>

@@ -174,7 +174,7 @@ class WPP_F extends UsabilityDynamics\Utility
       if( defined( 'WPP_FEATURE_FLAG_WPP_TYPE' ) ) {
         $taxonomies['wpp_type'] = array(
           'default'             => true,
-          'readonly'            => false,
+          'readonly'            => true,
           'hidden'              => true,
           'hierarchical'        => false,
           'unique'              => true,
@@ -3169,7 +3169,7 @@ Ample off-street parking ",
           $term = wp_update_term( $term['term_id'], 'wpp_type', array('name' => $label) );
         }
       }
-      // Fail safe layer. 
+      // Find term by label
       elseif($term = term_exists($label, 'wpp_type')){
 
       }
@@ -3182,6 +3182,33 @@ Ample off-street parking ",
       }
     }
     return $wpp_settings;
+  }
+
+  /**
+   * Add property type from terms if not already exists.
+   * Feature Flag: WPP_FEATURE_FLAG_WPP_TYPE
+   * 
+   */
+  public static function add_wpp_type_from_existing_terms(){
+    global $wp_properties;
+    $updated = false;
+    $terms = get_terms( array(
+              'taxonomy' => 'wpp_type',
+              'hide_empty' => false,
+            ));
+
+    /* Add property type from terms */
+    if ( ! empty( $terms ) && ! is_wp_error( $terms ) )
+    foreach ($terms as $term) {
+      if(!array_key_exists($term->slug, $wp_properties['property_types'])){
+        $wp_properties['property_types'][$term->slug] = $term->name;
+        $wp_properties['property_types_term_id'][$term->slug] = $term->term_id;
+        $updated = true;
+      }
+    }
+    if($updated){
+      update_option('wpp_settings', $wp_properties);
+    }
   }
 
   /**

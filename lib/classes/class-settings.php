@@ -229,28 +229,13 @@ namespace UsabilityDynamics\WPP {
           $this->set('predefined_values', $ar2);
         }
 
-        //** Property meta.  Typically not searchable, displayed as textarea on editing page. */
-        $d = $this->get('property_meta', false);
-        if (empty($d) || !is_array($d)) {
-          $ar = array();
-          if (empty($b_install)) {
-            $ar = array(
-              'lease_terms' => __('Lease Terms', ud_get_wp_property()->domain),
-              'pet_policy' => __('Pet Policy', ud_get_wp_property()->domain),
-              'school' => __('School', ud_get_wp_property()->domain),
-              'tagline' => __('Tagline', ud_get_wp_property()->domain)
-            );
-          }
-          $this->set('property_meta', $ar);
-        }
-
         //** On property editing page - determines which fields to hide for a particular property type */
         $d = $this->get('hidden_attributes', false);
         if (!is_array($d)) {
           $this->set('hidden_attributes', array(
-            'floorplan' => array('location', 'parking', 'school'), /*  Floorplans inherit location. Parking and school are generally same for all floorplans in a building */
+            'floorplan' => array('location', 'parking'), /*  Floorplans inherit location. Parking is same for all floorplans in a building */
             'building' => array('price', 'bedrooms', 'bathrooms', 'area', 'deposit'),
-            'single_family_home' => array('deposit', 'lease_terms', 'pet_policy')
+            'single_family_home' => array('deposit')
           ));
         }
 
