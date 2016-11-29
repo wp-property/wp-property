@@ -140,61 +140,22 @@ if (!class_exists('WPP_Setup_Assistant')) {
                   </div> <!-- wpp_asst_inner_wrap --> 
 
                   <div class="foot-note">
-                    <h3> <?php echo __('We Will add Appropriate attributes for types you have selected', ud_get_wp_property()->domain); ?></h5>
+                    <a href="javascript:;">
+                      <h3> 
+                        <?php echo __('If you do not see your property type click here', ud_get_wp_property()->domain); ?></h3>
+                    </a>
+                    <div class="wpp_toggl_desctiption">
+                      <?php echo __('Custom Property Type can be created and managed in Properties/Settings/Developer Tab/Terms', ud_get_wp_property()->domain); ?>
+                    </div>
                   </div>
 
                 </div><!-- wpp_asst_screen wpp_asst_screen_2 --> 
               </div><!-- item --> 
 
-              <div class="item">
-                <div class="wpp_asst_screen wpp_asst_screen_3">
-                  <h2 class="wpp_asst_heading"><b><?php echo __('Add test properties to the site?', ud_get_wp_property()->domain); ?></b></h2>
-                  <div class="wpp_asst_inner_wrap">
-                    <ul>
-                      <li class="wpp_asst_label"> <?php echo __('Yes Please', ud_get_wp_property()->domain); ?><label for="yes-please"> 
-                          <input class="wpp_box" type="radio" value="yes-please" name="wpp_settings[configuration][dummy-prop]" id="yes-please" <?php if (isset($wp_properties['configuration']['dummy-prop']) && $wp_properties['configuration']['dummy-prop'] == "yes-please") echo "checked='checked'"; ?>> <span></span> </label>
-                      </li> 
-                      <li class="wpp_asst_label narrow"><?php echo __('No, thanks i have already</br> added properties', ud_get_wp_property()->domain); ?> <label for="no-thanks"> 
-                          <input class="wpp_box" type="radio" value="no-thanks" name="wpp_settings[configuration][dummy-prop]" id="no-thanks" <?php if (isset($wp_properties['configuration']['dummy-prop']) && $wp_properties['configuration']['dummy-prop'] == "no-thanks") echo "checked='checked'"; ?> > <span></span> </label>
-                      </li> 
-                    </ul>
-                  </div>
-
-                </div><!-- wpp_asst_screen wpp_asst_screen_3 --> 
-              </div><!-- item --> 
-
-              <div class="item item-wider">
-                <div class="wpp_asst_screen wpp_asst_screen_4">
-                  <h2 class="wpp_asst_heading"><b><?php echo __('Choose default properties pages', ud_get_wp_property()->domain); ?></b></h2>  
-                  <div class="wpp_asst_inner_wrap">
-                    <div class="wpp_asst_select">
-                      <select id="soflow" name="wpp_settings[configuration][base_slug]">
-                        <?php
-                        $args = array('post_type' => 'page', 'post_status' => 'publish');
-                        $pages = get_pages($args);
-                        foreach ($pages as $page) {
-                          ?>
-                          <option value="<?php echo $page->post_name; ?>" <?php selected($wp_properties['configuration']['base_slug'], $page->post_name); ?> class="list_property"><?php echo $page->post_title; ?></option>
-                        <?php } ?>
-                        <option value="create-new" class="list_property"><?php echo __('Create a new page', ud_get_wp_property()->domain); ?></option>
-                      </select>
-                      
-                    </div>	
-                    <div class="wpp_asst_select_new">
-                      <input type="text" name="wpp-base-slug-new" class="wpp-base-slug-new" required="required"/>
-                    </div>
-                    <div class="description-cont">
-                      <span class="description"><?php echo __('All properties will be listed on the "Properties" page by default.', ud_get_wp_property('domain')); ?></span>
-                    </div>
-                    <input class="wpp_box" type="hidden" value="true" name="wpp_settings[configuration][automatically_insert_overview]"  id="true">
-                  </div>
-                </div><!-- wpp_asst_screen wpp_asst_screen_4 --> 
-              </div><!-- item --> 
-
               <div class="item  item-wider">
                 <div class="wpp_asst_screen wpp_asst_screen_6">
                   <?php
-                  $layouts =  new UsabilityDynamics\WPP\Layouts_Settings();
+                  $layouts = new UsabilityDynamics\WPP\Layouts_Settings();
                   echo $layouts->setup_assistant_layouts();
                   ?>
                 </div>
@@ -203,22 +164,25 @@ if (!class_exists('WPP_Setup_Assistant')) {
                 <div class="wpp_asst_screen wpp_asst_screen_6">
                   <h2 class="wpp_asst_heading text-center"><b><?php echo __("Let's view what we have", ud_get_wp_property()->domain); ?></b></h2>
                   <ul class="list-img">
-                    <li>
-                      <span><img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/wpp-single-prop.jpg', 'url'); ?>" alt="image"></span>
-                    <center><a class="btn_single_page props" href="<?php echo get_admin_url();?>post-new.php?post_type=property"><?php echo __('CREATE NEW PROPERTY', ud_get_wp_property()->domain); ?></a></center>
-                    </li>
+
                     <li>
                       <img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/overview-prop.jpg', 'url'); ?>" alt="image">
-                    <center><a class="btn_single_page oviews" href="<?php echo get_admin_url();?>edit.php?post_type=property&page=all_properties"><?php echo __('OVERVIEW OF PROPERTIES', ud_get_wp_property()->domain); ?></a></center>
+                    <center><a class="btn_single_page oviews" href="<?php echo get_admin_url(); ?>edit.php?post_type=property&page=all_properties"><?php echo __('OVERVIEW OF PROPERTIES', ud_get_wp_property()->domain); ?></a></center>
+                    </li>
+                    <li>
+                      <span><img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/wpp-single-prop.jpg', 'url'); ?>" alt="image"></span>
+                    <center><a class="btn_single_page dash" href="<?php echo get_admin_url(); ?>"><?php echo __('SKIP THIS STEP', ud_get_wp_property()->domain); ?></a></center>
                     </li>
                   </ul>
+                  <div class="wpp-asst_hidden-attr">
+                    <input  type="hidden" name="wpp_settings[configuration][dummy-prop]"  value="yes-please"> 
+                    <!--  add field to recognize the source on save--> 
+                    <input  type="hidden" name="wpp_freshInstallation" value="<?php echo $freshInstallation; ?>">      
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="wpp-asst_hidden-attr">
-              <!--  add field to recognize the source on save--> 
-              <input  type="hidden" name="wpp_freshInstallation" value="<?php echo $freshInstallation; ?>">      
-            </div>
+
           </form >
         </div>
       </div>

@@ -39,16 +39,7 @@ if (!$fs->enable_anonymous() || $is_pending_activation) {
   echo ' fs-anonymous-disabled';
 }
 ?>">
-  <div class="fs-visual">
-    <b class="fs-site-icon"><i class="dashicons dashicons-wordpress"></i></b>
-    <i class="dashicons dashicons-plus fs-first"></i>
-    <?php
-    $vars = array('slug' => $slug);
-    fs_require_once_template('plugin-icon.php', $vars);
-    ?>
-    <i class="dashicons dashicons-plus fs-second"></i>
-    <img class="fs-connect-logo" width="80" height="80" src="//img.freemius.com/connect-logo.png"/>
-  </div>
+
   <div class="fs-content">
     <p><?php
       if ($is_pending_activation) {
@@ -165,11 +156,7 @@ if (!$fs->enable_anonymous() || $is_pending_activation) {
     </div>
   <?php endif; ?>
 
-  <div class="fs-terms">
-    <a href="https://freemius.com/privacy/" target="_blank"><?php _efs('privacy-policy', $slug) ?></a>
-    &nbsp;&nbsp;-&nbsp;&nbsp;
-    <a href="https://freemius.com/terms/" target="_blank"><?php _efs('tos', $slug) ?></a>
-  </div>
+
 </div>
 <script type="text/javascript">
   (function ($) {

@@ -215,13 +215,19 @@
   float: none;
   display: block;
   clear: both;
-  padding: 0px 10px;
+  padding: 0px 5px;
   color: #989696;
   font-style: italic;
   font-weight: 400;
-  letter-spacing: 1px;
-  font-size: 21px;
+  /* letter-spacing: 1px; */
+  font-size: 18px;
   margin-top: 12px;
+}
+.wpp_toggl_desctiption{
+  color: #797676;
+  padding: 0px 5px;
+  font-size: 16px;
+  display: none;
 }
 .lab b {
   margin-right: 100px;
@@ -296,10 +302,17 @@ h2.wpp_asst_heading b {
   padding: 10px 25px;
   color: white;
   border: 1px solid #4ec4d0;
+  width : 185px;
+  display: block;
   box-shadow: 0 5px 2px -1px #1897aa;
 }
 .btn_single_page:hover{
   color: white;
+}
+.btn_single_page.dash{
+  background-color: rgba(169, 169, 169, 0.96);
+  box-shadow: 0 5px 2px -1px #636c6d;
+  border: 1px solid #898c8c;
 }
 .lab h2{margin-right:100px;}	
 
@@ -520,4 +533,12 @@ li.checkbox-up [type="checkbox"] + span::before {
 }
 #fs_connect{
   margin : 0 auto;
+  box-shadow: none;
+  -webkit-box-shadow :none;
+}
+#fs_connect .fs-visual,#fs_connect .fs-content,#fs_connect .fs-actions,#fs_connect .fs-permissions,#fs_connect .fs-permissions.fs-open{
+  background: transparent;
+}
+.wpp_asst_screen.wpp_asst_screen_freemius {
+    margin-top: 110px;
 }
