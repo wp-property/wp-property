@@ -162,16 +162,16 @@ if (!class_exists('WPP_Setup_Assistant')) {
               </div>
               <div class="item">
                 <div class="wpp_asst_screen wpp_asst_screen_6">
-                  <h2 class="wpp_asst_heading text-center"><b><?php echo __("Let's view what we have", ud_get_wp_property()->domain); ?></b></h2>
+                  <h2 class="wpp_asst_heading text-center"><b><?php echo __("We have created test properties for you", ud_get_wp_property()->domain); ?></b></h2>
                   <ul class="list-img">
 
                     <li>
                       <img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/overview-prop.jpg', 'url'); ?>" alt="image">
-                    <center><a class="btn_single_page oviews" href="<?php echo get_admin_url(); ?>edit.php?post_type=property&page=all_properties"><?php echo __('OVERVIEW OF PROPERTIES', ud_get_wp_property()->domain); ?></a></center>
+                    <center><a class="btn_single_page oviews" href="<?php echo get_admin_url(); ?>edit.php?post_type=property&page=all_properties"><?php echo __('Great, take me to my properties', ud_get_wp_property()->domain); ?></a></center>
                     </li>
                     <li>
                       <span><img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/wpp-single-prop.jpg', 'url'); ?>" alt="image"></span>
-                    <center><a class="btn_single_page dash" href="<?php echo get_admin_url(); ?>"><?php echo __('SKIP THIS STEP', ud_get_wp_property()->domain); ?></a></center>
+                    <center><a class="btn_single_page dash" href="<?php echo get_admin_url(); ?>"><?php echo __('Skip this step', ud_get_wp_property()->domain); ?></a></center>
                     </li>
                   </ul>
                   <div class="wpp-asst_hidden-attr">

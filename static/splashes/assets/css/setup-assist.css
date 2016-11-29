@@ -297,14 +297,14 @@ h2.wpp_asst_heading b {
   margin-top:-4px;
 }
 .btn_single_page{    
-  background-color: #4ec4d0;
-  border-radius: 5px;
-  padding: 10px 25px;
-  color: white;
-  border: 1px solid #4ec4d0;
-  width : 185px;
-  display: block;
-  box-shadow: 0 5px 2px -1px #1897aa;
+    background-color: #4ec4d0;
+    border-radius: 5px;
+    padding: 10px 0px;
+    color: white;
+    border: 1px solid #4ec4d0;
+    width: 240px;
+    display: block;
+    box-shadow: 0 5px 2px -1px #1897aa;
 }
 .btn_single_page:hover{
   color: white;
