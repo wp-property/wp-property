@@ -30,7 +30,7 @@ jQuery(document).ready(function () {
       success: function (response) {
         $hideLoader();
 //        var data = jQuery.parseJSON(response);
-        
+
       },
       error: function () {
         $hideLoader();
@@ -50,7 +50,7 @@ jQuery(document).ready(function () {
   }
   //handle each screen individually
   function propAssistScreens() {
-    
+
     $indexOfLastScreen = $(".owl-page").length;
     $isScreen = $(".owl-page.active").index() + 1 + 1;
     // maybe add some screen specific
@@ -103,7 +103,7 @@ jQuery(document).ready(function () {
       $('.wpp-base-slug-new').fadeOut("fast");
     }
   });
-  
+
   //make checkboxes container clickable
   $('li.wpp_asst_label').click(function (e) {
     if (e.target != this)
@@ -111,5 +111,56 @@ jQuery(document).ready(function () {
     el = $(this).find('input');
     el.click();
   });
-  $(".wpp_asst_screen .foot-note a").click(function(){$('.wpp_asst_screen .foot-note .wpp_toggl_desctiption').toggle("slow")})
+
+  $(".wpp_asst_screen .foot-note a").click(function () {
+    $('.wpp_asst_screen .foot-note .wpp_toggl_desctiption').toggle("slow")
+  });
+
+
+  /*BEGIN : start code for freemius */
+  function submitFreemiusData(data) {
+
+    jQuery.ajax({
+      type: 'POST',
+      url: ajaxurl,
+      data: {
+        action: 'wpp_save_freemius_settings',
+        data: data
+      },
+      beforeSend: function () {
+        $showLoader();
+      },
+      success: function (response) {
+        $hideLoader();
+        response = JSON.parse(response);
+
+        //move slider one step ahead
+        var wpp_owl = $("#wpp-splash-screen-owl").data('owlCarousel');
+        wpp_owl.next();
+
+        if (response && response.success == 1) {
+          if (response.redirect_url) {
+            console.info(response.redirect_url);
+            $.get(response.redirect_url);
+          }
+        }
+      }
+    });
+  }
+
+  if (typeof (wpp_owl) != 'undefined') {
+    $(".fs-actions > a").click(function (e) {
+      e.preventDefault();
+      $.get($(this).attr('href'));
+    });
+
+    $(".fs-actions > a,.fs-actions > button").click(function (e) {
+      e.preventDefault();
+      data = $(".fs-actions input").serialize();
+      submitFreemiusData(data);
+      return false;
+    });
+  }
+  /* END : start code for freemius */
+  
 });

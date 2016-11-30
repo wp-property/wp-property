@@ -2645,9 +2645,11 @@ class WPP_F extends UsabilityDynamics\Utility
     $posts = $wpdb->get_col( "
       SELECT `post_title`
       FROM {$wpdb->posts}
-      WHERE `post_title` IN ('122 Bishopsgate','East Pointe Marketplace','MIDLEVELS WEST','720 N Larrabee St Apt','460 W Huron St','7846 Charlesmont Road','3212 Ramona Avenue','4602 Chatford Avenue','619 Beechfield Avenue','5109 Eugene Avenue','99 Richfield','9812 NE Avenue')
+      WHERE 
+      `post_title` IN ('122 Bishopsgate','East Pointe Marketplace','MIDLEVELS WEST','720 N Larrabee St Apt','460 W Huron St','7846 Charlesmont Road','3212 Ramona Avenue','4602 Chatford Avenue','619 Beechfield Avenue','5109 Eugene Avenue','99 Richfield','9812 NE Avenue')
+       AND `post_status` = 'publish'
     " );
-   
+
     /* Check array to avoid issues in future */
     if( !is_array( $posts ) ) {
       $posts = array();
@@ -2990,7 +2992,6 @@ Ample off-street parking ",
     }
 
     //some settings should just be installed first time,and later taken/updated from settings tab
-    $freshInstallation = 1; 
     
     { // running this block unconditionally for now
       $data['wpp_settings']['configuration']['show_assistant'] = true;
