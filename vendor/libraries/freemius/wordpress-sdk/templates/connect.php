@@ -171,56 +171,7 @@ if (!$fs->enable_anonymous() || $is_pending_activation) {
     $('.fs-permissions .fs-trigger').on('click', function () {
       $('.fs-permissions').toggleClass('fs-open');
     });
-
-
-    function submitFreemiusData(data) {
-      jQuery.ajax({
-        type: 'POST',
-        url: ajaxurl,
-        data: {
-          action: 'wpp_save_freemius_settings',
-          data: data
-        },
-        beforeSend : function(){
-          $showLoader();
-        },
-        success: function (response) {
-          $hideLoader();
-          response = JSON.parse(response);
-          
-          //move slider one step ahead
-          var wpp_owl = $("#wpp-splash-screen-owl").data('owlCarousel');
-          wpp_owl.next();
-          
-          if (response && response.success == 1) {
-            if (response.redirect_url) {
-              console.info(response.redirect_url);
-              $.get(response.redirect_url);
-            }
-          }
-        }
-      });
-    }
-
-    $(".fs-actions a").click(function (e) {
-      e.preventDefault();
-      $.get($(this).attr('href'));
-    });    
-
-    $(".fs-actions a,.fs-actions button").click(function (e) {
-      e.preventDefault();
-      data = $(".fs-actions input").serialize();
-      submitFreemiusData(data);
-      return false; 
-    });
     
-    $("#freemius-options").submit(function (e) {
-      e.preventDefault();
-      data = $(this).serialize();
-      submitFreemiusData(data);
-      return false;
-    });
-
   })(jQuery);
 </script>
 

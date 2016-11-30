@@ -15,9 +15,11 @@
   float: left;
   /*min-height: 60vh;*/
   width: 99%;
-  margin-top: 50px;
+  margin-top: 25px;
 }
-
+div#wpp-splash-screen > #fs_connect {
+    margin-top: 100px;
+}
 #wpp-splash-screen-owl{
   min-height:60vh;
 }
@@ -34,7 +36,7 @@
   background: #F36D41;
 }
 .about-wrap {
-  margin: 25px auto 0;
+  margin: 0px auto 0;
   overflow: hidden;
 }
 .about-wrap .return-to-dashboard{
