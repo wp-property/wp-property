@@ -162,5 +162,21 @@ jQuery(document).ready(function () {
     });
   }
   /* END : start code for freemius */
-  
+
+  /* BEGIN : start code for layouts */
+  jQuery('#property-term-single .layouts-list li label').on('click', function (e) {
+    jQuery('#property-term-single .layouts-list li label').removeClass('checked');
+    jQuery(this).addClass('checked');
+  });
+
+  jQuery('#property-single .layouts-list li label').on('click', function (e) {
+    jQuery('#property-single .layouts-list li label').removeClass('checked');
+    jQuery(this).addClass('checked');
+  });
+
+  jQuery('#search-results .layouts-list li label').on('click', function (e) {
+    jQuery('#search-results .layouts-list li label').removeClass('checked');
+    jQuery(this).addClass('checked');
+  });
+  /* END : start code for layouts */
 });

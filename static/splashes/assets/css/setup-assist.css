@@ -544,3 +544,17 @@ li.checkbox-up [type="checkbox"] + span::before {
 .wpp_asst_screen.wpp_asst_screen_freemius {
     margin-top: 110px;
 }
+.layouts-list {}
+.layouts-list li {
+  float: left;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+.layouts-list li label img {
+  display: block;
+  border: 5px solid white;
+  transition: border .5s;
+}
+.layouts-list li label.checked img {
+  border: 5px solid #F36D41;
+}
