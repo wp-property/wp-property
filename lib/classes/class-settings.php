@@ -24,7 +24,7 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties;
 
         //** STEP 1. Default */
-
+        
         parent::__construct($args);
 
         //** STEP 2. */
@@ -99,7 +99,10 @@ namespace UsabilityDynamics\WPP {
         );
 
         $_stored_settings = $this->get();
-
+        if(!isset($_stored_settings['configuration'])){
+          $data['configuration']['show_assistant'] = "yes";
+        }
+        
         //** Merge with default data. */
         $this->set(\UsabilityDynamics\Utility::extend($data, $this->get()));
 
