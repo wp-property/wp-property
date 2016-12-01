@@ -361,8 +361,111 @@ namespace UsabilityDynamics\WPP {
        * load layouts for setup assistant page
        */
       function setup_assistant_layouts(){
+
+        global $wp_properties;
         $this->preloaded_layouts = $this->preload_layouts();
-        return $this->settings_page();
+
+        $layouts_settings = wp_parse_args( !empty( $wp_properties['configuration']['layouts']['templates'] ) ? $wp_properties['configuration']['layouts']['templates'] : array() , array(
+            'property_term_single' => 'false',
+            'property_single'      => 'false',
+            'search_results'       => 'false'
+        ));
+
+        $layouts_template_files = wp_parse_args( !empty( $wp_properties['configuration']['layouts']['files'] ) ? $wp_properties['configuration']['layouts']['files'] : array() , array(
+            'property_term_single' => 'page.php',
+            'property_single'      => 'single.php',
+            'search_results'       => 'page.php'
+        ));
+
+        $template_files = apply_filters( 'wpp::layouts::template_files', wp_get_theme()->get_files( 'php', 0 ) );
+
+        ob_start();
+
+        ?>
+
+        <table class="form-table wpp_layouts_table">
+          <tbody>
+             <tr class="wpp_layout_header"><td colspan="2"><?php _e( 'This is how your Single Property Page will look like', ud_get_wp_property()->domain ); ?>
+              <small><?php _e( 'Applies only when layout is selected', ud_get_wp_property()->domain ); ?></small></td></tr>
+            <tr id="property-single">
+              <td>
+                <input type="hidden" name="wpp_settings[configuration][layouts][files][property_single]" value="<?php echo $layouts_template_files['property_single']; ?>">
+                <?php
+                if ( !empty( $this->preloaded_layouts['single-property'] ) && is_array( $this->preloaded_layouts['single-property'] ) ) {
+                  ?>
+                  <ul class="layouts-list">
+                    <li>
+                      <label class="<?php echo $layouts_settings['property_single'] == 'false' ? 'checked' : ''; ?>">
+                        <h5><?php _e( 'No Layout', ud_get_wp_property()->domain ); ?></h5>
+                        <img width="150" height="150" src="//placehold.it/150?text=No+Layout" alt="No Layout" />
+                        <input <?php checked( 'false', $layouts_settings['property_single'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][property_single]" value="false">
+                      </label>
+                    </li>
+                    <?php
+                    foreach( $this->preloaded_layouts['single-property'] as $layout ) {
+                      ?>
+                      <li>
+                        <label class="<?php echo $layout->_id == $layouts_settings['property_single'] ? 'checked' : ''; ?>">
+                          <h5><?php echo $layout->title; ?></h5>
+                          <img width="150" height="150" src="<?php echo !empty($layout->screenshot)?$layout->screenshot:'//placehold.it/150?text=No+preview'; ?>" alt="<?php echo $layout->title ?>" />
+                          <input <?php checked( $layout->_id, $layouts_settings['property_single'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][property_single]" value="<?php echo $layout->_id; ?>">
+                        </label>
+                      </li>
+                      <?php
+                    }
+                    ?>
+                  </ul>
+                  <?php
+                } else {
+                  _e( 'There are no available layouts. Default view is used.', ud_get_wp_property()->domain );
+                }
+                ?>
+              </td>
+            </tr>
+            
+            <tr class="wpp_layout_header"><td colspan="2"><?php _e( 'This is how your Property Overview Page will look like', ud_get_wp_property()->domain ); ?>
+              <small><?php _e( 'Applies only when layout is selected', ud_get_wp_property()->domain ); ?></small></td></tr>
+            <tr id="search-results">
+              <td>
+                <input type="hidden" name="wpp_settings[configuration][layouts][files][search_results]" value="<?php echo $layouts_template_files['search_results']; ?>">
+                <?php
+                if ( !empty( $this->preloaded_layouts['search-results'] ) && is_array( $this->preloaded_layouts['search-results'] ) ) {
+                  ?>
+                
+                  <ul class="layouts-list">
+                    <li>
+                      <label class="<?php echo $layouts_settings['search_results'] == 'false' ? 'checked' : ''; ?>">
+                        <h5><?php _e( 'No Layout', ud_get_wp_property()->domain ); ?></h5>
+                        <img width="150" height="150" src="//placehold.it/150?text=No+Layout" alt="No Layout" />
+                        <input <?php checked( 'false', $layouts_settings['search_results'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][search_results]" value="false">
+                      </label>
+                    </li>
+                    <?php
+                    foreach( $this->preloaded_layouts['search-results'] as $layout ) {
+                      ?>
+                      <li>
+                        <label class="<?php echo $layout->_id == $layouts_settings['search_results'] ? 'checked' : ''; ?>">
+                          <h5><?php echo $layout->title; ?></h5>
+                          <img width="150" height="150" src="<?php echo !empty($layout->screenshot)?$layout->screenshot:'//placehold.it/150?text=No+preview'; ?>" alt="<?php echo $layout->title ?>" />
+                          <input <?php checked( $layout->_id, $layouts_settings['search_results'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][search_results]" value="<?php echo $layout->_id; ?>">
+                        </label>
+                      </li>
+                      <?php
+                    }
+                    ?>
+                  </ul>
+                  <?php
+                } else {
+                  _e( 'There are no available layouts. Default view is used.', ud_get_wp_property()->domain );
+                }
+                ?>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <?php  echo apply_filters( 'wpp::layouts::settings_html', ob_get_clean() );
       }
     }
   }
