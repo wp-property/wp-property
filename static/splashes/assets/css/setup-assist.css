@@ -19,6 +19,7 @@
 }
 div#wpp-splash-screen > #fs_connect {
     margin-top: 100px;
+    margin-bottom: 100px;
 }
 #wpp-splash-screen-owl{
   min-height:60vh;
