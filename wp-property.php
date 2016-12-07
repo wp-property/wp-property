@@ -78,7 +78,7 @@ if( defined( 'WPP_FEATURE_FLAG_FREEMIUS' ) && WPP_FEATURE_FLAG_FREEMIUS ) {
         'has_paid_plans'    => false,
         'menu'              => array(
           'slug'       => "edit.php?post_type=property",
-          'first-path' => 'admin.php?page=wpp-setup-page',
+          'first-path' => 'edit.php?post_type=property&page=all_properties',
           'account'    => false,
           'support' => false,
           'contact' => false

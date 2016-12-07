@@ -29,11 +29,8 @@ jQuery(document).ready(function () {
       },
       success: function (response) {
         $hideLoader();
-        var data = jQuery.parseJSON(response);
-        if (data.props_over != 'false' && data.props_over != false)
-          $(".btn_single_page.oviews").attr("href", data.props_over);
-        if (data.props_single != 'false' && data.props_single != false)
-          $(".btn_single_page.props").attr("href", data.props_single);
+//        var data = jQuery.parseJSON(response);
+
       },
       error: function () {
         $hideLoader();
@@ -53,7 +50,7 @@ jQuery(document).ready(function () {
   }
   //handle each screen individually
   function propAssistScreens() {
-    
+
     $indexOfLastScreen = $(".owl-page").length;
     $isScreen = $(".owl-page.active").index() + 1 + 1;
     // maybe add some screen specific
@@ -107,26 +104,79 @@ jQuery(document).ready(function () {
     }
   });
 
-  //on click of last screen option buttons
-  $(".btn_single_page").click(function (e) {
-    e.stopPropagation();
-    e.preventDefault();
-
-    if (this.href.indexOf("javascript:;") > -1 || this.href == "" || this.href == "false") {
-      alert(wpp_property_assistant.no_link_available);
-    }
-    else {
-      var win = window.open(this.href, '_blank');
-      win.focus();
-    }
-    return false;
-  });
-  
   //make checkboxes container clickable
   $('li.wpp_asst_label').click(function (e) {
     if (e.target != this)
       return;
     el = $(this).find('input');
     el.click();
-  })
+  });
+
+  $(".wpp_asst_screen .foot-note a").click(function () {
+    $('.wpp_asst_screen .foot-note .wpp_toggl_desctiption').toggle("slow")
+  });
+
+
+  /*BEGIN : start code for freemius */
+  function submitFreemiusData(data) {
+
+    jQuery.ajax({
+      type: 'POST',
+      url: ajaxurl,
+      data: {
+        action: 'wpp_save_freemius_settings',
+        data: data
+      },
+      beforeSend: function () {
+        $showLoader();
+      },
+      success: function (response) {
+        $hideLoader();
+        response = JSON.parse(response);
+
+        //move slider one step ahead
+        var wpp_owl = $("#wpp-splash-screen-owl").data('owlCarousel');
+        wpp_owl.next();
+
+        if (response && response.success == 1) {
+          if (response.redirect_url) {
+            console.info(response.redirect_url);
+            $.get(response.redirect_url);
+          }
+        }
+      }
+    });
+  }
+
+  if (typeof (wpp_owl) != 'undefined') {
+    $(".fs-actions > a").click(function (e) {
+      e.preventDefault();
+      $.get($(this).attr('href'));
+    });
+
+    $(".fs-actions > a,.fs-actions > button").click(function (e) {
+      e.preventDefault();
+      data = $(".fs-actions input").serialize();
+      submitFreemiusData(data);
+      return false;
+    });
+  }
+  /* END : start code for freemius */
+
+  /* BEGIN : start code for layouts */
+  jQuery('#property-term-single .layouts-list li label').on('click', function (e) {
+    jQuery('#property-term-single .layouts-list li label').removeClass('checked');
+    jQuery(this).addClass('checked');
+  });
+
+  jQuery('#property-single .layouts-list li label').on('click', function (e) {
+    jQuery('#property-single .layouts-list li label').removeClass('checked');
+    jQuery(this).addClass('checked');
+  });
+
+  jQuery('#search-results .layouts-list li label').on('click', function (e) {
+    jQuery('#search-results .layouts-list li label').removeClass('checked');
+    jQuery(this).addClass('checked');
+  });
+  /* END : start code for layouts */
 });
