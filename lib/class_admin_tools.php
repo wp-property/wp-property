@@ -104,6 +104,9 @@ if( !class_exists( 'class_admin_tools' ) ) {
       $data[ 'Google Map API key' ][ ] = '<li>' . __( "Click <b>Google Maps JavaScript API</b> and <b>Google Maps Geolocation API </b> from <b>Google Maps APIs</b> one by one.", ud_get_wp_property()->domain ) . '</li>';
       $data[ 'Google Map API key' ][ ] = '<li>' . __( "To enable the api click <b>Enable</b>. Do this for both <b>Google Maps JavaScript API</b> and <b>Google Maps Geolocation API </b>,", ud_get_wp_property()->domain ) . '</li>';
 
+      if(function_exists('ud_get_wpp_pdf'))
+        $data[ 'Google Map API key' ][ ] = '<li>' . __( "Also enable <b>Google Static Maps API</b>. It's required for <b>WP-Property: PDF Flyer</b> to work.", ud_get_wp_property()->domain ) . '</li>';
+
       
       $data[ 'Google Map API key' ][ ] = '<li>' . __( "On the left, choose <b>Credentials</b>.", ud_get_wp_property()->domain ) . '</li>';
       $data[ 'Google Map API key' ][ ] = '<li>' . __( "Click <b>Create credentials</b> and then select API key.", ud_get_wp_property()->domain ) . '</li>';

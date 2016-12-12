@@ -63,7 +63,7 @@ namespace UsabilityDynamics\WPP {
      * @param $lang string
      * @author Fadi Yousef  frontend-expert@outlook.com
      */
-    public function get_property_posts_count_bylang( $lang ){
+    public function get_property_posts_count_bylang( $lang, $post_status = '' ){
       $lang_now = apply_filters( 'wpml_current_language', NULL );
       $lang_changed = 0;
       if($lang_now != $lang){
@@ -75,6 +75,9 @@ namespace UsabilityDynamics\WPP {
         'post_type' => 'property',
         'suppress_filters' => false
       );
+      if($post_status){
+        $args['post_status'] = $post_status;
+      }
       $result = new \WP_Query($args);
       if($lang_changed) do_action( 'wpml_switch_language', $lang_now );
       return $result->post_count;
@@ -119,14 +122,19 @@ namespace UsabilityDynamics\WPP {
      * @return $post_statuses
      */
     public function add_lang_count($post_statuses){
+      $new_post_statuses = array();
       $languages = apply_filters( 'wpml_active_languages', NULL, 'orderby=id&order=desc' );
       if ( !empty( $languages ) ) {
-        foreach( $languages as $l ){
-          $count = $this->get_property_posts_count_bylang($l['language_code']);
-          $post_statuses[$l['default_locale']] = $l['native_name'] . " ($count) ";
+        foreach ($post_statuses as $post_status => $attr) {
+          $new_post_statuses[$post_status] = $attr;
+          foreach( $languages as $l ){
+            if($count = $this->get_property_posts_count_bylang($l['language_code'], $post_status)){
+              $new_post_statuses[$post_status . "_" . $l['default_locale']] = " - " . $l['native_name'] . " ($count) ";
+            }
+          }
         }
       }
-      return $post_statuses;
+      return $new_post_statuses;
     }
 
     /**
