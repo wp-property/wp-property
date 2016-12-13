@@ -1,3 +1,6 @@
+### 2.2.0.1 ( December 13, 2016 )
+* Compatibility with WordPress 4.7
+
 ### 2.2.0 ( August 31, 2016 )
 * Fixed issue with Google Map functionality.
 * Added options for Google API Keys (browser and server).

@@ -78,18 +78,7 @@
     "schemas": {
       "dependencies" : {
         "modules": {},
-        "plugins": [
-          {
-            "name": "WP-Property Terms",
-            "slug": "wp-property-terms",
-            "version": "1.0.0",
-            "required": false,
-            "private": true,
-            "author": "UsabilityDynamics, Inc.",
-            "author_url": "https://www.usabilitydynamics.com",
-            "external_url": "https://www.usabilitydynamics.com/product/wp-property-terms"
-          }
-        ]
+        "plugins": []
       },
       "licenses" : {
         "client" : {
