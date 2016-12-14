@@ -299,15 +299,21 @@ h2.wpp_asst_heading b {
   line-height:13px;
   margin-top:-4px;
 }
-.btn_single_page{    
-    background-color: #4ec4d0;
-    border-radius: 5px;
-    padding: 10px 0px;
-    color: white;
-    border: 1px solid #4ec4d0;
-    width: 240px;
-    display: block;
-    box-shadow: 0 5px 2px -1px #1897aa;
+.wpp_asst_screen.wpp_asst_screen_6{
+  margin-top: 100px;
+}
+.btn_single_page {
+  background-color: #4ec4d0;
+  border-radius: 5px;
+  padding: 30px 0px;
+  color: white;
+  border: 1px solid #4ec4d0;
+  margin-top: 30px;
+  width: 310px;
+  display: block;
+  box-shadow: 0 5px 2px -1px #1897aa;
+  font-size: 20px;
+  line-height: 30px;
 }
 .btn_single_page:hover{
   color: white;
@@ -315,7 +321,7 @@ h2.wpp_asst_heading b {
 .btn_single_page.dash{
   background-color: rgba(169, 169, 169, 0.96);
   box-shadow: 0 5px 2px -1px #636c6d;
-  border: 1px solid #898c8c;
+  border:1px solid rgba(137, 140, 140, 0.02);
 }
 .lab h2{margin-right:100px;}	
 
@@ -325,6 +331,9 @@ h2.wpp_asst_heading b {
   margin : 24px 8px;
 }	
 
+.wpp_asst_screen  h2.maybe_away {
+  margin : 24px 0px;
+}
 .child{padding-top:5px;}
 
 .wpp_asst_screen_4 h2 b{float:left;}
