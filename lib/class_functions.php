@@ -2988,9 +2988,10 @@ Ample off-street parking ",
       $return['props_over'] = get_permalink($new_page_id);
     }
     else{
-      $return['props_over'] = get_site_url().'/'.$data['wpp_settings']['configuration']['base_slug'];
+//      $return['props_over'] = get_site_url().'/'.$data['wpp_settings']['configuration']['base_slug'];
+      $return['props_over'] = get_site_url().'/'.$wp_properties['configuration']['base_slug'];
     }
-
+    
     //some settings should just be installed first time,and later taken/updated from settings tab
     
     { // running this block unconditionally for now

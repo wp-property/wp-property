@@ -184,10 +184,10 @@ $show_assistant = "yes";
                     <ul class="list-img">
 
                       <li>
-                      <center><a class="btn_single_page oviews" href="<?php echo get_admin_url(); ?>edit.php?post_type=property&page=all_properties"><?php echo __('Great, take me to my properties', ud_get_wp_property()->domain); ?></a></center>
+                      <center><a class="btn_single_page oviews" href="<?php echo get_admin_url(); ?>edit.php?post_type=property&page=all_properties"><?php echo __('View my properties', ud_get_wp_property()->domain); ?></a></center>
                       </li>
                       <li>
-                      <center><a class="btn_single_page dash" href="<?php echo get_admin_url(); ?>"><?php echo __('Skip this step', ud_get_wp_property()->domain); ?></a></center>
+                      <center><a class="btn_single_page dash" href="<?php echo get_admin_url(); ?>edit.php?post_type=property&page=all_properties"><?php echo __('View my properties', ud_get_wp_property()->domain); ?></a></center>
                       </li>
                     </ul>
                     <div class="wpp-asst_hidden-attr">

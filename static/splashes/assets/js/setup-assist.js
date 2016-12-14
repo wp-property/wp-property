@@ -29,8 +29,9 @@ jQuery(document).ready(function () {
       },
       success: function (response) {
         $hideLoader();
-//        var data = jQuery.parseJSON(response);
-
+        var data = jQuery.parseJSON(response);
+        if(data.props_over!='false' && data.props_over!=false)
+          $(".btn_single_page.oviews").attr("href",data.props_over);
       },
       error: function () {
         $hideLoader();
