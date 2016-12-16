@@ -275,7 +275,8 @@ if ( get_option( 'permalink_structure' ) == '' ) {
               <span class="description"><?php _e('Enabling this option may cause performance issues.',ud_get_wp_property()->domain); ?></span>
             </li>
             <li>
-              <?php echo WPP_F::checkbox( "name=wpp_settings[configuration][show_advanced_options]&label=" . __( 'Enable Standard Attributes Matching', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'show_advanced_options' ] ) ? $wp_properties[ 'configuration' ][ 'show_advanced_options' ] : false ) ); ?>
+              <?php //show standard attribute matching 
+              echo WPP_F::checkbox( "name=wpp_settings[configuration][show_advanced_options]&label=" . __( 'Enable Standard Attributes Matching and Terms', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'show_advanced_options' ] ) ? $wp_properties[ 'configuration' ][ 'show_advanced_options' ] : false ) ); ?>
               <i class="description wpp-notice-for-match" title="<?php _e( 'This option is designed to help us find which attribute you want to show as Price, Address, etc and place it in correct place in our templates.', ud_get_wp_property()->domain ); ?>"> ? </i>
           </li>
           <li>

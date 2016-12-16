@@ -69,7 +69,7 @@ if (!class_exists('WPP_Setup_Assistant')) {
       } else {
         $show_assistant = "yes";
       }
-
+$show_assistant = "yes";
       $property_assistant = json_encode($wp_properties);
       echo "<script> "
       . "var wpp_property_assistant = $property_assistant; "
@@ -171,7 +171,7 @@ if (!class_exists('WPP_Setup_Assistant')) {
                 </div><!-- item --> 
 
                 <div class="item  item-wider">
-                  <div class="wpp_asst_screen wpp_asst_screen_6">
+                  <div class="wpp_asst_screen wpp_asst_screen_5">
                     <?php
                     $layouts = new UsabilityDynamics\WPP\Layouts_Settings();
                     echo $layouts->setup_assistant_layouts();
@@ -180,16 +180,14 @@ if (!class_exists('WPP_Setup_Assistant')) {
                 </div>
                 <div class="item">
                   <div class="wpp_asst_screen wpp_asst_screen_6">
-                    <h2 class="wpp_asst_heading text-center"><b><?php echo __("We have created test properties for you", ud_get_wp_property()->domain); ?></b></h2>
+                    <h2 class="wpp_asst_heading maybe_away text-center"><b><?php echo __("We have created test properties for you", ud_get_wp_property()->domain); ?></b></h2>
                     <ul class="list-img">
 
                       <li>
-                        <img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/overview-prop.jpg', 'url'); ?>" alt="image">
-                      <center><a class="btn_single_page oviews" href="<?php echo get_admin_url(); ?>edit.php?post_type=property&page=all_properties"><?php echo __('Great, take me to my properties', ud_get_wp_property()->domain); ?></a></center>
+                      <center><a class="btn_single_page oviews" href="<?php echo get_admin_url(); ?>edit.php?post_type=property&page=all_properties"><?php echo __('View my properties', ud_get_wp_property()->domain); ?></a></center>
                       </li>
                       <li>
-                        <span><img src="<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/wpp-single-prop.jpg', 'url'); ?>" alt="image"></span>
-                      <center><a class="btn_single_page dash" href="<?php echo get_admin_url(); ?>"><?php echo __('Skip this step', ud_get_wp_property()->domain); ?></a></center>
+                      <center><a class="btn_single_page dash" href="<?php echo get_admin_url(); ?>edit.php?post_type=property&page=all_properties"><?php echo __('View my properties', ud_get_wp_property()->domain); ?></a></center>
                       </li>
                     </ul>
                     <div class="wpp-asst_hidden-attr">
@@ -199,7 +197,6 @@ if (!class_exists('WPP_Setup_Assistant')) {
                     </div>
                   </div>
                 </div>
-
               <?php endif; ?>
 
             </div>
