@@ -69,7 +69,7 @@ if (!class_exists('WPP_Setup_Assistant')) {
       } else {
         $show_assistant = "yes";
       }
-$show_assistant = "yes";
+      $show_assistant = "yes";
       $property_assistant = json_encode($wp_properties);
       echo "<script> "
       . "var wpp_property_assistant = $property_assistant; "
@@ -178,18 +178,53 @@ $show_assistant = "yes";
                     ?>
                   </div>
                 </div>
+                <div class="item  item-wider">
+                  <div class="wpp_asst_screen wpp_asst_screen_5">
+
+                    <h2 class="wpp_asst_heading"><b><?php echo __('Do you need to keep track of agents?', ud_get_wp_property()->domain); ?></b></h2>
+
+                    <div class="wpp_asst_inner_wrap">
+                      <ul>
+                        <li class="wpp_asst_label"> <?php echo __('Yes Please', ud_get_wp_property()->domain); ?><label for="yes-please"> 
+                            <input class="wpp_box" type="radio" value="yes-please" name="wpp_settings[wpp-addons][wpp-agents]" id="yes-please" <?php if (isset($wp_properties['wpp-addons']['wpp-agents']) && $wp_properties['wpp-addons']['wpp-agents'] == "yes-please") echo "checked='checked'"; ?>> <span></span> </label>
+                        </li> 
+                        <li class="wpp_asst_label"><?php echo __('No thanks', ud_get_wp_property()->domain); ?> <label for="no-thanks"> 
+                            <input class="wpp_box" type="radio" value="no-thanks" name="wpp_settings[wpp-addons][wpp-agents]" id="no-thanks" <?php if (isset($wp_properties['wpp-addons']['wpp-agents']) && $wp_properties['wpp-addons']['wpp-agents'] == "no-thanks") echo "checked='checked'"; ?> > <span></span> </label>
+                        </li> 
+                      </ul>
+
+                      <small class="center foot-note">(Installs WP-Property Agents Addon)</small>
+                    </div> <!-- wpp_asst_inner_wrap --> 
+
+                    <h2 class="wpp_asst_heading"><b><?php echo __('Do you want to display interactive searchable maps?', ud_get_wp_property()->domain); ?></b></h2>
+                    <div class="wpp_asst_inner_wrap">
+                      <ul>
+                        <li class="wpp_asst_label"> <?php echo __('Sure', ud_get_wp_property()->domain); ?><label for="yes-please"> 
+                            <input class="wpp_box" type="radio" value="yes-please" name="wpp_settings[wpp-addons][wpp-supermap]" id="yes-please" <?php if (isset($wp_properties['wpp-addons']['wpp-supermap']) && $wp_properties['wpp-addons']['wpp-supermap'] == "yes-please") echo "checked='checked'"; ?>> <span></span> </label>
+                        </li> 
+                        <li class="wpp_asst_label"><?php echo __('Maybe later', ud_get_wp_property()->domain); ?> <label for="no-thanks"> 
+                            <input class="wpp_box" type="radio" value="no-thanks" name="wpp_settings[wpp-addons][wpp-supermap]" id="no-thanks" <?php if (isset($wp_properties['wpp-addons']['wpp-supermap']) && $wp_properties['wpp-addons']['wpp-supermap'] == "no-thanks") echo "checked='checked'"; ?> > <span></span> </label>
+                        </li> 
+                      </ul>    
+                      <small  class="center foot-note">(Installs WP-Property Supermap Add)</small>
+                    </div> <!-- wpp_asst_inner_wrap --> 
+                  </div>
+                </div>
                 <div class="item">
                   <div class="wpp_asst_screen wpp_asst_screen_6">
                     <h2 class="wpp_asst_heading maybe_away text-center"><b><?php echo __("We have created test properties for you", ud_get_wp_property()->domain); ?></b></h2>
                     <ul class="list-img">
+                      <li>
+                      <center><a class="btn_single_page dash" href="<?php echo get_admin_url(); ?>edit.php?post_type=property&page=all_properties"><?php echo __('Add/edit properties', ud_get_wp_property()->domain); ?></a></center>
+                      </li>
+                      <li>
+                      <center><a class="btn_single_page oviews" href="<?php echo get_admin_url(); ?>edit.php?post_type=property&page=all_properties"><?php echo __('View property listings', ud_get_wp_property()->domain); ?></a></center>
+                      </li>
 
-                      <li>
-                      <center><a class="btn_single_page oviews" href="<?php echo get_admin_url(); ?>edit.php?post_type=property&page=all_properties"><?php echo __('View my properties', ud_get_wp_property()->domain); ?></a></center>
-                      </li>
-                      <li>
-                      <center><a class="btn_single_page dash" href="<?php echo get_admin_url(); ?>edit.php?post_type=property&page=all_properties"><?php echo __('View my properties', ud_get_wp_property()->domain); ?></a></center>
-                      </li>
                     </ul>
+                    <div class="wp-install-addons">
+                      <a href="<?php echo get_admin_url(); ?>edit.php?post_type=property&page=wp-property-addons">Finish the wizard and continue installing addon(s)</a>
+                    </div>
                     <div class="wpp-asst_hidden-attr">
                       <input  type="hidden" name="wpp_settings[configuration][dummy-prop]"  value="yes-please"> 
                       <!--  add field to recognize the source on save--> 

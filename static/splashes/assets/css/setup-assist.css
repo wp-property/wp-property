@@ -214,7 +214,7 @@ div#wpp-splash-screen > #fs_connect {
   display: block;
   clear: both;
 }
-.foot-note h3{
+.foot-note h3, small.foot-note{
   float: none;
   display: block;
   clear: both;
@@ -222,9 +222,14 @@ div#wpp-splash-screen > #fs_connect {
   color: #989696;
   font-style: italic;
   font-weight: 400;
+  line-height: 26px;
   /* letter-spacing: 1px; */
   font-size: 18px;
   margin-top: 12px;
+}
+small.foot-note.center{
+  text-align: center;
+  font-size: 14px;
 }
 .wpp_toggl_desctiption{
   color: #797676;
@@ -305,11 +310,11 @@ h2.wpp_asst_heading b {
 .btn_single_page {
   background-color: #4ec4d0;
   border-radius: 5px;
-  padding: 30px 0px;
+  padding: 12px 0px;
   color: white;
   border: 1px solid #4ec4d0;
   margin-top: 30px;
-  width: 310px;
+  width: 215px;
   display: block;
   box-shadow: 0 5px 2px -1px #1897aa;
   font-size: 20px;
@@ -317,6 +322,16 @@ h2.wpp_asst_heading b {
 }
 .btn_single_page:hover{
   color: white;
+}
+.wp-install-addons {
+  float: left;
+  text-align: center;
+  width: 100%;
+  margin: 20px 0px;
+  display: none;
+}
+.wp-install-addons a {
+  color: #D54E21 ;
 }
 .btn_single_page.dash{
   background-color: rgba(169, 169, 169, 0.96);
@@ -347,6 +362,11 @@ h2.wpp_asst_heading b {
 
 .owl-theme .owl-controls .owl-buttons div {
   padding: 18px;
+}
+.owl-next.disabled ,.owl-prev.disabled {
+    display: none !important;
+}{
+    display: none !important;
 }
 
 .new{width:100%; float:left; padding-top:17px;}
@@ -487,15 +507,17 @@ li.checkbox-up [type="checkbox"] + span::before {
   outline: none;
 }
 
-
 .list-img {
-  display: inline-flex;
+  display: block;
   list-style: outside none none;
   width: 100%;
+  max-width: 475px;
+  margin: 0 auto;
 }
 
 .list-img li{
   width: 49%;
+  float: left;
 }
 .list-img li img {
   text-align: center;
