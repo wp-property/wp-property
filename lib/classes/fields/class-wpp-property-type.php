@@ -31,7 +31,9 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 						'hide_empty' => false,
 					) );
 			$options = $field['options'];
-			$field_name = trim($field['field_name'], '[]');
+			$field_name = $field['field_name'];
+			if(substr($field_name, -2) == '[]')
+				$field_name = substr_replace($field_name, '', -2);
 
 			foreach ($_terms as $term) {
 				$terms[] = $term->name;
