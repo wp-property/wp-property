@@ -147,6 +147,10 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       </td>
     </tr>
 
+    <?php /* begin : Single Property Template Options */
+//    echo $wp_properties[ 'configuration' ][ 'enable_layouts' ]; die;
+    if(!isset( $wp_properties[ 'configuration' ][ 'enable_layouts' ] ) ||   $wp_properties[ 'configuration' ][ 'enable_layouts' ] != "true") : ?>
+    
     <tr class="wpp-setting wpp-setting-single-template">
       <th><?php printf( __( 'Single %s Template', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></th>
       <td>
@@ -190,6 +194,8 @@ if ( get_option( 'permalink_structure' ) == '' ) {
         </ul>
       </td>
     </tr>
+    <?php endif; ?>
+    <?php /* End : Single Property Template Options */ ?>
 
     <?php if( !isset( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] ) || ( isset( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] ) && $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] != 'true' ) ) : ?>
       <tr class="wpp-setting wpp-setting-widget-sidebars">

@@ -49,6 +49,15 @@ jQuery(document).ready(function () {
     $(".loader-div").fadeTo("fast", 0);
     $(".owl-item").fadeTo("fast", 1);
   }
+  $showAddonsOption = function(){
+    if(($("input[type='radio'][name='wpp_settings[wpp-addons][wpp-supermap]']") && $("input[type='radio'][name='wpp_settings[wpp-addons][wpp-supermap]']:checked").val() && $("input[type='radio'][name='wpp_settings[wpp-addons][wpp-supermap]']:checked").val() == "yes-please") ||
+         ($("input[type='radio'][name='wpp_settings[wpp-addons][wpp-agents]']:checked") && $("input[type='radio'][name='wpp_settings[wpp-addons][wpp-agents]']:checked").val() && $("input[type='radio'][name='wpp_settings[wpp-addons][wpp-agents]']:checked").val() == "yes-please")   ){
+         $(".wp-install-addons").fadeIn();
+    }
+    else{
+      $(".wp-install-addons").hide();
+    }
+  }
   //handle each screen individually
   function propAssistScreens() {
 
@@ -58,6 +67,7 @@ jQuery(document).ready(function () {
     switch ($isScreen) {
       case $indexOfLastScreen:
         jQuery('#wpp-setup-assistant').submit();
+        $showAddonsOption();
         break;
       default:
 //        console.log("reached default screen");
