@@ -573,6 +573,7 @@ namespace UsabilityDynamics\WPP {
           $result['top'] = '<div id="wpp_shortcode_' . $wpp_query['unique_hash'] . '" class="wpp_ui ' . $wpp_query['class'] . '">';
         }
 
+        if ($wpp_query['pagination_type'] !== 'loadmore') {
           $result['top_pagination'] = self::draw_pagination(array(
             'type' => $wpp_query['pagination_type'],
             'class' => 'wpp_top_pagination',
@@ -582,7 +583,7 @@ namespace UsabilityDynamics\WPP {
           ));
           $result['result'] = $ob_get_contents;
 
-          if ($wpp_query['pagination_type'] === 'loadmore' || $wpp_query['bottom_pagination_flag'] == 'true') {
+          if ($wpp_query['bottom_pagination_flag'] == 'true') {
             $result['bottom_pagination'] = self::draw_pagination(array(
               'type' => $wpp_query['pagination_type'],
               'class' => 'wpp_bottom_pagination',
@@ -592,6 +593,16 @@ namespace UsabilityDynamics\WPP {
               'javascript' => false
             ));
           }
+        } else {
+          $result['result'] = $ob_get_contents;
+          $result['bottom_pagination'] = self::draw_pagination(array(
+            'type' => $wpp_query['pagination_type'],
+            'class' => 'wpp_bottom_pagination',
+            'sorter_type' => $wpp_query['sorter_type'],
+            'hide_count' => $wpp_query['hide_count'],
+            'sort_by_text' => $wpp_query['sort_by_text']
+          ));
+        }
 
         if ($wpp_query['disable_wrapper'] != 'true') {
           $result['bottom'] = '</div>';

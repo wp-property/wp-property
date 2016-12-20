@@ -174,7 +174,7 @@ class WPP_F extends UsabilityDynamics\Utility
       if( defined( 'WPP_FEATURE_FLAG_WPP_TYPE' ) ) {
         $taxonomies['wpp_type'] = array(
           'default'             => true,
-          'readonly'            => false,
+          'readonly'            => true,
           'hidden'              => true,
           'hierarchical'        => false,
           'unique'              => true,
@@ -2645,9 +2645,11 @@ class WPP_F extends UsabilityDynamics\Utility
     $posts = $wpdb->get_col( "
       SELECT `post_title`
       FROM {$wpdb->posts}
-      WHERE `post_title` IN ('122 Bishopsgate','East Pointe Marketplace','MIDLEVELS WEST','720 N Larrabee St Apt','460 W Huron St','7846 Charlesmont Road','3212 Ramona Avenue','4602 Chatford Avenue','619 Beechfield Avenue','5109 Eugene Avenue','99 Richfield','9812 NE Avenue')
+      WHERE 
+      `post_title` IN ('122 Bishopsgate','East Pointe Marketplace','MIDLEVELS WEST','720 N Larrabee St Apt','460 W Huron St','7846 Charlesmont Road','3212 Ramona Avenue','4602 Chatford Avenue','619 Beechfield Avenue','5109 Eugene Avenue','99 Richfield','9812 NE Avenue')
+       AND `post_status` = 'publish'
     " );
-   
+
     /* Check array to avoid issues in future */
     if( !is_array( $posts ) ) {
       $posts = array();
@@ -2986,11 +2988,11 @@ Ample off-street parking ",
       $return['props_over'] = get_permalink($new_page_id);
     }
     else{
-      $return['props_over'] = get_site_url().'/'.$data['wpp_settings']['configuration']['base_slug'];
+//      $return['props_over'] = get_site_url().'/'.$data['wpp_settings']['configuration']['base_slug'];
+      $return['props_over'] = get_site_url().'/'.$wp_properties['configuration']['base_slug'];
     }
-
+    
     //some settings should just be installed first time,and later taken/updated from settings tab
-    $freshInstallation = 1; 
     
     { // running this block unconditionally for now
       $data['wpp_settings']['configuration']['show_assistant'] = true;
@@ -3018,7 +3020,8 @@ Ample off-street parking ",
       }
         
 //      compute basic property attributes
-      $propAttrSet = array();
+      $propAttrSet = $wp_properties['property_assistant']['default_atts']; // Default attributes regardless of property types.
+
       if ($prop_types && isset($data['wpp_settings']['property_types']['land']))
         $propAttrSet = array_merge($propAttrSet, $wp_properties['property_assistant']['land']);
       if ($prop_types && isset($data['wpp_settings']['property_types']['commercial']))
@@ -3169,7 +3172,7 @@ Ample off-street parking ",
           $term = wp_update_term( $term['term_id'], 'wpp_type', array('name' => $label) );
         }
       }
-      // Fail safe layer. 
+      // Find term by label
       elseif($term = term_exists($label, 'wpp_type')){
 
       }
@@ -3182,6 +3185,33 @@ Ample off-street parking ",
       }
     }
     return $wpp_settings;
+  }
+
+  /**
+   * Add property type from terms if not already exists.
+   * Feature Flag: WPP_FEATURE_FLAG_WPP_TYPE
+   * 
+   */
+  public static function add_wpp_type_from_existing_terms(){
+    global $wp_properties;
+    $updated = false;
+    $terms = get_terms( array(
+              'taxonomy' => 'wpp_type',
+              'hide_empty' => false,
+            ));
+
+    /* Add property type from terms */
+    if ( ! empty( $terms ) && ! is_wp_error( $terms ) )
+    foreach ($terms as $term) {
+      if(!array_key_exists($term->slug, $wp_properties['property_types'])){
+        $wp_properties['property_types'][$term->slug] = $term->name;
+        $wp_properties['property_types_term_id'][$term->slug] = $term->term_id;
+        $updated = true;
+      }
+    }
+    if($updated){
+      update_option('wpp_settings', $wp_properties);
+    }
   }
 
   /**

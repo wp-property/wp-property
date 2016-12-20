@@ -51,6 +51,10 @@ namespace UsabilityDynamics\WPRETSC {
             // get available image sizes
             $_image_sizes = \UsabilityDynamics\Utility::all_image_sizes();
 
+	    if(is_array($size)){
+	    	return array( $this->fix_rets_image_url( $attachment_id ), $size[0], $size[1] );
+	    }
+
             if( $size && !isset( $_image_sizes[$size] ) ) {
               $size = 'full';
             }
@@ -198,6 +202,16 @@ namespace UsabilityDynamics\WPRETSC {
 
         // get image url of remote asset
         $_url = get_post_meta( $id, '_wp_attached_file', true );
+	
+	if(is_array($size)){
+	  $_extension = pathinfo( $_url, PATHINFO_EXTENSION );
+          if( empty( $_extension ) ) {
+            $_url .= '-' . $size[0] . 'x' . $size[1];
+          } else {
+            $_url = str_replace( '.' . $_extension, '-' . $size[0] . 'x' . $size[1] . '.' . $_extension, $_url );
+          }
+  	return  $_url;
+	}
 
         //die('$size'.$size);
         // if the size exists in image sizes, append the image-size spedific annex to url
@@ -208,7 +222,7 @@ namespace UsabilityDynamics\WPRETSC {
           } else {
             $_url = str_replace( '.' . $_extension, '-' . $_image_sizes[$size]['width'] . 'x' . $_image_sizes[$size]['height'] . '.' . $_extension, $_url );
           }
-        }
+        } 
 
         // return finished url
         return  $_url;

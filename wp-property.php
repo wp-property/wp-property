@@ -73,12 +73,12 @@ if( defined( 'WPP_FEATURE_FLAG_FREEMIUS' ) && WPP_FEATURE_FLAG_FREEMIUS ) {
         'slug'              => 'wp-property',
         'type'              => 'plugin',
         'public_key'        => 'pk_806be0ef60e25dd84a77d6e49dfa8',
-        'has_addons'        => false,
+        'has_addons'        => true,
         'is_premium'        => false,
         'has_paid_plans'    => false,
         'menu'              => array(
           'slug'       => "edit.php?post_type=property",
-          'first-path' => 'admin.php?page=wpp-setup-page',
+          'first-path' => 'edit.php?post_type=property&page=all_properties',
           'account'    => false,
           'support' => false,
           'contact' => false

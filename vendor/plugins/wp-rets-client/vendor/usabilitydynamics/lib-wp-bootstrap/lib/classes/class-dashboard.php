@@ -27,7 +27,7 @@ namespace UsabilityDynamics\WP {
        * 
        * @var string 
        */
-      public $page_slug = 'ud-splash';
+      public $page_slug = 'wpp-setup-page';
       
       /**
        * Need splash key
@@ -81,20 +81,6 @@ namespace UsabilityDynamics\WP {
           add_dashboard_page(__('Welcome to Wp Property', $this->domain), __('Welcome', $this->domain), 'manage_options', $this->page_slug, array($this, 'wpp_setup_page'));
         }
       }
-      /**
-       * Register fake page
-       * 
-       * @return null
-       */
-      public function add_wpp_setup_page() {
-        if ( empty( $_GET['page'] ) ) {
-          return;
-        }
-        if ($_GET['page'] == "wpp-setup-page") {
-          add_dashboard_page(__('Welcome to Wp Property', $this->domain), __('Welcome', $this->domain), 'manage_options', "wpp-setup-page", array($this, "wpp_setup_page"));
-        }
-      }
-      
       /**
        * Render UD dashboard page
        * 

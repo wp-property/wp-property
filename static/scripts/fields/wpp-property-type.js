@@ -6,7 +6,7 @@ jQuery(document).ready(function($){
         var input_terms = $this.find('.wpp-terms-input');
         var btntoggle  = $this.find('.select-combobox-toggle');
 
-        input_terms.autocomplete({
+        var autocomplete = input_terms.autocomplete({
             minLength: 0,
             source: $this.data('terms'),
         });
@@ -18,6 +18,12 @@ jQuery(document).ready(function($){
             .append( "<a class='"+selected+"'>" + item.label + "</a>" )
             .appendTo( ul );
         };
+
+        input_terms.autocomplete( "widget" ).on('click', 'li', function( event) {
+            var _this = jQuery(this);
+            input_terms.val(_this.find('a').text());
+            input_terms.autocomplete( "close" );
+        });
 
         input_terms.autocomplete( "instance" )._resizeMenu = function () {
             var ul = this.menu.element;

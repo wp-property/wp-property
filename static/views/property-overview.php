@@ -46,10 +46,10 @@ if (have_properties()) {
     <ul class="<?php wpp_css('property_overview::data', "wpp_overview_data"); ?>">
       <li class="property_title">
         <a <?php echo $in_new_window; ?>
-          href="<?php echo $property['permalink']; ?>" title="<?php echo $property['post_title']; ?>"><?php echo $property['post_title']; ?></a>
+          href="<?php echo $property['permalink']; ?>"><?php echo $property['post_title']; ?></a>
         <?php if (!empty($property['is_child'])): ?>
           <?php _e('of', ud_get_wp_property()->domain); ?> <a <?php echo $in_new_window; ?>
-            href='<?php echo $property['parent_link']; ?>' title='<?php echo $property['parent_title']; ?>'><?php echo $property['parent_title']; ?></a>
+            href='<?php echo $property['parent_link']; ?>'><?php echo $property['parent_title']; ?></a>
         <?php endif; ?>
       </li>
 

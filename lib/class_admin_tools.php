@@ -104,6 +104,9 @@ if( !class_exists( 'class_admin_tools' ) ) {
       $data[ 'Google Map API key' ][ ] = '<li>' . __( "Click <b>Google Maps JavaScript API</b> and <b>Google Maps Geolocation API </b> from <b>Google Maps APIs</b> one by one.", ud_get_wp_property()->domain ) . '</li>';
       $data[ 'Google Map API key' ][ ] = '<li>' . __( "To enable the api click <b>Enable</b>. Do this for both <b>Google Maps JavaScript API</b> and <b>Google Maps Geolocation API </b>,", ud_get_wp_property()->domain ) . '</li>';
 
+      if(function_exists('ud_get_wpp_pdf'))
+        $data[ 'Google Map API key' ][ ] = '<li>' . __( "Also enable <b>Google Static Maps API</b>. It's required for <b>WP-Property: PDF Flyer</b> to work.", ud_get_wp_property()->domain ) . '</li>';
+
       
       $data[ 'Google Map API key' ][ ] = '<li>' . __( "On the left, choose <b>Credentials</b>.", ud_get_wp_property()->domain ) . '</li>';
       $data[ 'Google Map API key' ][ ] = '<li>' . __( "Click <b>Create credentials</b> and then select API key.", ud_get_wp_property()->domain ) . '</li>';
@@ -151,24 +154,29 @@ if( !class_exists( 'class_admin_tools' ) ) {
      * @version 2.0
      */
     static function settings_page() {
+      global $wp_properties;
 
-      $tabs = apply_filters( 'wpp::settings_developer::tabs', array(
-        'attributes' => array(
-          'label' => __( 'Attributes', ud_get_wp_property()->domain ),
-          'template' => ud_get_wp_property()->path( 'static/views/admin/settings-developer-attributes.php', 'dir' ),
-          'order' => 10
-        ),
-        'meta' => array(
-          'label' => __( 'Meta', ud_get_wp_property()->domain ),
-          'template' => ud_get_wp_property()->path( 'static/views/admin/settings-developer-meta.php', 'dir' ),
-          'order' => 20
-        ),
-        'types' => array(
-          'label' => __( 'Types', ud_get_wp_property()->domain ),
-          'template' => ud_get_wp_property()->path( 'static/views/admin/settings-developer-types.php', 'dir' ),
-          'order' => 30
-        ),
-      ) );
+      $developer_tabs = array(
+                          'attributes' => array(
+                            'label' => __( 'Attributes', ud_get_wp_property()->domain ),
+                            'template' => ud_get_wp_property()->path( 'static/views/admin/settings-developer-attributes.php', 'dir' ),
+                            'order' => 10
+                          ),
+                          'types' => array(
+                            'label' => __( 'Types', ud_get_wp_property()->domain ),
+                            'template' => ud_get_wp_property()->path( 'static/views/admin/settings-developer-types.php', 'dir' ),
+                            'order' => 30
+                          ),
+                        );
+      if(!empty($wp_properties[ 'property_meta' ])){
+        $developer_tabs['meta'] = array(
+                                    'label' => __( 'Meta', ud_get_wp_property()->domain ),
+                                    'template' => ud_get_wp_property()->path( 'static/views/admin/settings-developer-meta.php', 'dir' ),
+                                    'order' => 20
+                                  );
+      }
+
+      $tabs = apply_filters( 'wpp::settings_developer::tabs',  $developer_tabs);
 
       /* Sort Tabs by 'order' */
       uasort( $tabs, create_function( '$a,$b', 'if ($a[\'order\'] == $b[\'order\']) { return 0; } return ($a[\'order\'] > $b[\'order\']) ? 1 : -1;' ) );

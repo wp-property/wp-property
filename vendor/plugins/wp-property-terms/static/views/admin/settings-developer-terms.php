@@ -52,6 +52,52 @@ wp_enqueue_style( 'wpp-terms-settings', ud_get_wpp_terms()->path( '/static/style
           </li>
           <li class="wpp_development_advanced_option">
             <input type="text" class="slug" readonly='readonly' value="<?php echo $slug; ?>"/>
+                      <?php
+//                      print_r($wp_properties[ 'prop_std_att' ]);
+          // BEGIN : code for standard attributes
+          if(isset($wp_properties[ 'configuration' ][ 'show_advanced_options' ]) && $wp_properties[ 'configuration' ][ 'show_advanced_options' ]=="true"){
+            // merge std_attr  if need to use all attributes as a single array
+//            $merged_std_attributes = array_unique(call_user_func_array('array_merge', $wp_properties[ 'prop_std_att' ]),SORT_REGULAR);
+            ?>
+            <p class="wpp-std-att-cont">
+              <label>
+                  <a class="wpp-toggle-std-attr">  <?php _e( 'Match standard terms', ud_get_wp_property()->domain ); ?></a>
+              </label>
+            </p>
+            <?php
+            if(count($wp_properties[ 'prop_std_att' ])){
+            ?>
+             <div  class='std-attr-mapper'>
+              <select  name='wpp_settings[prop_std_att_mapsto][<?php echo $slug;?>]'  
+                       id="wpp_prop_std_att_mapsto_<?php echo $slug;?>"
+                       class=' wpp_settings-prop_std_att_mapsto'>
+                <option value=''> - </option>
+             <?php
+              foreach ($wp_properties[ 'prop_std_att' ] as $std_attr_type){
+                foreach ($std_attr_type as $std_key => $std_val){
+                ?>    
+                  <option value="<?php echo $std_key; ?>" 
+                    data-notice='<?php  if(isset($std_val['notice']) && !empty($std_val['notice'])) echo $std_val['notice'];?> '
+                    <?php
+                   
+                     // if the user has updated to new standard attributes then this is the one we select
+                     if(isset( $wp_properties[ 'prop_std_att_mapsto' ][ $slug ]) )
+                       selected( $wp_properties[ 'prop_std_att_mapsto' ][ $slug ], $std_key ); ?>	
+                   > 
+                    <?php _e( $std_val['label'], ud_get_wp_property()->domain ) ?>
+                  </option>
+                  <?php  
+                } //end attributes foreach
+              } //end attributes-category foreach
+              ?>
+              </select>
+              <i class='std_att_notices'></i>
+              </div>
+            <?php
+            }// end $wp_properties[ 'prop_std_att' ]
+          }
+          // END : code for standard attributes
+          ?>
           </li>
           <li class="hide-on-new-row">
             <a href="<?php echo admin_url( "edit-tags.php?taxonomy={$slug}&post_type=property" ); ?>"><?php _e( 'Manage Terms', ud_get_wpp_terms()->domain ); ?></a>
@@ -127,7 +173,7 @@ wp_enqueue_style( 'wpp-terms-settings', ud_get_wpp_terms()->path( '/static/style
       </td>
 
       <td>
-        <span class="wpp_delete_row wpp_link <?php echo (isset($data['default']) && $data['default'])?"hidden":"";?>"><?php _e( 'Delete', ud_get_wpp_terms()->domain ); ?></span>
+        <span class="wpp_delete_row wpp_link <?php echo (isset($data['readonly']) && $data['readonly'])?"hidden":"";?>"><?php _e( 'Delete', ud_get_wpp_terms()->domain ); ?></span>
       </td>
     </tr>
 

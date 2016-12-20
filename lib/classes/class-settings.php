@@ -24,7 +24,7 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties;
 
         //** STEP 1. Default */
-
+        
         parent::__construct($args);
 
         //** STEP 2. */
@@ -39,26 +39,27 @@ namespace UsabilityDynamics\WPP {
           'currency_symbol' => '$',
           'address_attribute' => 'location',
           'google_maps_localization' => 'en',
+          'enable_layouts' => 'true',
           'display_address_format' => '[city], [state]'
         );
 
         //** Default setings for [property_overview] shortcode */
         $data['configuration']['property_overview'] = array(
-          'thumbnail_size' => 'medium',
+          'thumbnail_size' => 'tiny_thumb',
           'fancybox_preview' => 'true',
           'display_slideshow' => 'false',
           'show_children' => 'true',
-          'pagination_type' => 'loadmore' // @todo: change to 'numeric' when compatibility will be added to Madison theme. peshkov@UD
+          'pagination_type' => 'slider' // @todo: change to 'numeric' when compatibility will be added to Madison theme. peshkov@UD
         );
 
         $data['configuration']['single_property_view'] = array(
-          'map_image_type' => 'medium',
+          'map_image_type' => 'tiny_thumb',
           'gm_zoom_level' => '13'
         );
 
         //** Default setings for admin UI */
         $data['configuration']['admin_ui'] = array(
-          'overview_table_thumbnail_size' => 'medium'
+          'overview_table_thumbnail_size' => 'tiny_thumb'
         );
 
         $data['default_coords']['latitude'] = '57.7973333';
@@ -98,7 +99,10 @@ namespace UsabilityDynamics\WPP {
         );
 
         $_stored_settings = $this->get();
-
+        if(!isset($_stored_settings['configuration'])){
+          $data['configuration']['show_assistant'] = "yes";
+        }
+        
         //** Merge with default data. */
         $this->set(\UsabilityDynamics\Utility::extend($data, $this->get()));
 
@@ -167,31 +171,24 @@ namespace UsabilityDynamics\WPP {
         $d = !$this->get('property_assistant', false);
         if (!$d || !is_array($d)) {
           $this->set('property_assistant', array(
-                    "residential" => array(
+                    "default_atts" => array(
+                      'tagline' => __('Tagline', ud_get_wp_property()->domain),
                       'location' => __('Address', ud_get_wp_property()->domain),
                       'city' => __('City', ud_get_wp_property()->domain),
                       'price' => __('Price', ud_get_wp_property()->domain),
+                      'year_built' => __('Year Built', ud_get_wp_property()->domain),
+                      'fees' => __('Fees', ud_get_wp_property()->domain)
+                    ),
+                    "residential" => array(
                       'bedrooms' => __('Bedrooms', ud_get_wp_property()->domain),
                       'bathrooms' => __('Bathrooms', ud_get_wp_property()->domain),
                       'total_rooms' => __('Total Rooms', ud_get_wp_property()->domain),
                       'living_space' => __('Living space', ud_get_wp_property()->domain),
-                      'year_built' => __('Year Built', ud_get_wp_property()->domain),
-                      'fees' => __('Fees', ud_get_wp_property()->domain)
                     ),
                     "commercial" => array(
-                      'location' => __('Address', ud_get_wp_property()->domain),
-                      'city' => __('City', ud_get_wp_property()->domain),
-                      'price' => __('Price', ud_get_wp_property()->domain),
-                      'year_built' => __('Year Built', ud_get_wp_property()->domain),
-                      'fees' => __('Fees', ud_get_wp_property()->domain),
                       'business_purpose' => __('Business Purpose', ud_get_wp_property()->domain),  
                     ),
                     "land" => array(
-                      'location' => __('Address', ud_get_wp_property()->domain),
-                      'city' => __('City', ud_get_wp_property()->domain),
-                      'price' => __('Price', ud_get_wp_property()->domain),
-                      'year_built' => __('Year Built', ud_get_wp_property()->domain),
-                      'fees' => __('Fees', ud_get_wp_property()->domain),
                       'lot_size' => __('Lot Size', ud_get_wp_property()->domain), 
                     )));
         }
@@ -211,6 +208,7 @@ namespace UsabilityDynamics\WPP {
           $ar2 = array();
           if (empty($b_install)) {
             $ar = array(
+              'tagline' => __('Tagline', ud_get_wp_property()->domain),
               'location' => __('Address', ud_get_wp_property()->domain),
               'price' => __('Price', ud_get_wp_property()->domain),
               'deposit' => __('Deposit', ud_get_wp_property()->domain),
@@ -218,6 +216,7 @@ namespace UsabilityDynamics\WPP {
               'phone_number' => __('Phone Number', ud_get_wp_property()->domain),
             );
             $ar2 = array(
+              'tagline' => '',
               'location' => '',
               'price' => '',
               'deposit' => '',
@@ -229,28 +228,13 @@ namespace UsabilityDynamics\WPP {
           $this->set('predefined_values', $ar2);
         }
 
-        //** Property meta.  Typically not searchable, displayed as textarea on editing page. */
-        $d = $this->get('property_meta', false);
-        if (empty($d) || !is_array($d)) {
-          $ar = array();
-          if (empty($b_install)) {
-            $ar = array(
-              'lease_terms' => __('Lease Terms', ud_get_wp_property()->domain),
-              'pet_policy' => __('Pet Policy', ud_get_wp_property()->domain),
-              'school' => __('School', ud_get_wp_property()->domain),
-              'tagline' => __('Tagline', ud_get_wp_property()->domain)
-            );
-          }
-          $this->set('property_meta', $ar);
-        }
-
         //** On property editing page - determines which fields to hide for a particular property type */
         $d = $this->get('hidden_attributes', false);
         if (!is_array($d)) {
           $this->set('hidden_attributes', array(
-            'floorplan' => array('location', 'parking', 'school'), /*  Floorplans inherit location. Parking and school are generally same for all floorplans in a building */
+            'floorplan' => array('location', 'parking'), /*  Floorplans inherit location. Parking is same for all floorplans in a building */
             'building' => array('price', 'bedrooms', 'bathrooms', 'area', 'deposit'),
-            'single_family_home' => array('deposit', 'lease_terms', 'pet_policy')
+            'single_family_home' => array('deposit')
           ));
         }
 
