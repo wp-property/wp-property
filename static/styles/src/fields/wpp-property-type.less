@@ -3,6 +3,12 @@
 	&, >div{
 		position: relative;
 	}
+
+	.clearfix.term:before, .clearfix.term:after {
+		clear: both;
+		content: "";
+		display: block;
+	}
 	.select-combobox-toggle {
 		position: absolute;
 		top: 0;
@@ -49,11 +55,14 @@
 			-moz-border-radius-bottomleft: 4px;
 		-webkit-border-bottom-left-radius: 4px;
 		 -khtml-border-bottom-left-radius: 4px;
-				border-bottom-left-radius: 4px;
 			-moz-border-radius-topleft: 4px;
 		-webkit-border-top-left-radius: 4px;
 		 -khtml-border-top-left-radius: 4px;
-				border-top-left-radius: 4px;
+		border-bottom-left-radius: 4px;
+		border-top-left-radius: 4px;
+		border-bottom-right-radius: 0px !important;
+		border-top-right-radius: 0px !important;
+		border-right: 0px;
 
 		&:focus+a{
 			border-color: #5b9dd9;

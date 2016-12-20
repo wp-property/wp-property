@@ -2,6 +2,12 @@
 .wpp-property-type > div {
   position: relative;
 }
+.wpp-property-type .clearfix.term:before,
+.wpp-property-type .clearfix.term:after {
+  clear: both;
+  content: "";
+  display: block;
+}
 .wpp-property-type .select-combobox-toggle {
   position: absolute;
   top: 0;
@@ -50,6 +56,9 @@
   -webkit-border-top-left-radius: 4px;
   -khtml-border-top-left-radius: 4px;
   border-top-left-radius: 4px;
+  border-bottom-right-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+  border-right: 0px;
 }
 .wpp-property-type .wpp-terms-input:focus + a {
   border-color: #5b9dd9;
