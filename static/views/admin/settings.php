@@ -23,6 +23,10 @@ $object_label = array(
 
 $wrapper_classes = array( 'wpp_settings_page' );
 
+global $tab_labels; // this is an array that holds all the labels of the tabs that will be used in autocomplete in the search box.
+
+
+
 if ( isset( $_REQUEST[ 'message' ] ) ) {
   $wp_messages = array();
   switch ( $_REQUEST[ 'message' ] ) {
@@ -70,7 +74,9 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <p><?php echo $notice_message; ?>
       <?php endforeach; ?>
 </div>
-<?php endif; ?>
+<?php endif;
+
+?>
 
 <form id="wpp_settings_form" method="post" action="<?php echo admin_url( 'edit.php?post_type=property&page=property_settings' ); ?>" enctype="multipart/form-data"/>
 <?php wp_nonce_field( 'wpp_setting_save' ); ?>
@@ -88,8 +94,9 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     }
     ?>
     <li><a href="#tab_troubleshooting"><?php _e( 'Help', ud_get_wp_property()->domain ); ?></a></li>
+	<li style="float:right"><input type="text" id="search_tags" name="search_tags"/></li>
   </ul>
-
+	
   <div id="tab_main">
 
     <?php do_action( 'wpp_settings_main_top', $wp_properties ); ?>
@@ -97,7 +104,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <table class="form-table">
 
     <tr>
-      <th><?php _e( 'Options', ud_get_wp_property()->domain ); ?></th>
+      <th><?php echo $tab_labels[] = __( 'Options', ud_get_wp_property()->domain ); ?></th>
       <td>
         <ul>
           <li class="configuration_enable_comments"><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][enable_comments]&label=" . __( 'Enable comments.', ud_get_wp_property()->domain ), ( isset( $wp_properties[ 'configuration' ][ 'enable_comments' ] ) ? $wp_properties[ 'configuration' ][ 'enable_comments' ] : false ) ); ?></li>
@@ -109,7 +116,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     </tr>
 
     <tr>
-      <th><?php printf( __( 'Default %1s Page', ud_get_wp_property()->domain ), ud_get_wp_property( 'labels.name' ) ); ?></th>
+      <th><?php echo $tab_labels[] = sprintf(   __( 'Default %1s Page', ud_get_wp_property()->domain ), ud_get_wp_property( 'labels.name' ) ); ?></th>
       <td>
 
         <div class="must_have_permalinks">
@@ -144,7 +151,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     </tr>
 
     <tr>
-      <th><?php printf( __( 'Single %s Template', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></th>
+      <th><?php echo $tab_labels[] = sprintf( __( 'Single %s Template', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></th>
       <td>
         <p><?php printf( __( 'Select template which will be used to render Single %s page.', ud_get_wp_property( 'domain' ) ), WPP_F::property_label() ); ?></p>
         <p><?php printf( __( 'You also can redeclare selected template for specific %s on Edit %s page.', ud_get_wp_property( 'domain' ) ), WPP_F::property_label(), WPP_F::property_label() ); ?></p>
@@ -189,7 +196,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
     <?php if( !isset( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] ) || ( isset( $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] ) && $wp_properties[ 'configuration' ][ 'do_not_register_sidebars' ] != 'true' ) ) : ?>
     <tr>
-      <th><?php printf( __( 'Widget Sidebars', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></th>
+      <th><?php printf( $tab_labels[] = __( 'Widget Sidebars', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></th>
       <td>
         <p><?php printf( __( 'By default, %1$s registers widget sidebars for <b>Single %2$s page</b> based on defined %2$s types. But you can disable any of them here.', ud_get_wp_property( 'domain' ) ), 'WP-Property', WPP_F::property_label() ); ?></p>
         <p><?php printf( __( 'Note, the following sidebar are added only on default <b>%s</b> ( Default %s Template ).', ud_get_wp_property( 'domain' ) ), 'property.php', WPP_F::property_label() ); ?></p><br/>
@@ -206,7 +213,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <?php endif; ?>
 
     <tr>
-      <th><?php printf( __( 'Automatic Geolocation', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></th>
+      <th><?php printf( $tab_labels[] =__( 'Automatic Geolocation', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></th>
       <td>
         <ul>
           <li><?php _e( 'Attribute to use for physical addresses:', ud_get_wp_property('domain') ); ?><?php echo WPP_F::draw_attribute_dropdown( "name=wpp_settings[configuration][address_attribute]&selected={$wp_properties[ 'configuration' ]['address_attribute']}" ); ?></li>
@@ -228,12 +235,12 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     </tr>
 
     <tr>
-      <th><?php _e( 'Default Phone Number', ud_get_wp_property()->domain ); ?></th>
+      <th><?php echo $tab_labels[] = __( 'Default Phone Number', ud_get_wp_property()->domain ); ?></th>
       <td><?php echo WPP_F::input( "name=phone_number&label=" . sprintf(__( 'Phone number to use when a %1s-specific phone number is not specified.', ud_get_wp_property()->domain ), WPP_F::property_label( 'singular' ) ) . "&group=wpp_settings[configuration]&style=width: 200px;", ( isset( $wp_properties[ 'configuration' ][ 'phone_number' ] ) ? $wp_properties[ 'configuration' ][ 'phone_number' ] : false ) ); ?></td>
     </tr>
 
     <tr>
-      <th><?php _e( 'Advanced Options', ud_get_wp_property()->domain ); ?></th>
+      <th><?php echo $tab_labels[] =__( 'Advanced Options', ud_get_wp_property()->domain ); ?></th>
       <td>
         <div class="wpp_settings_block"><br/>
           <ul>
@@ -286,7 +293,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <table class="form-table">
 
     <tr>
-      <th><?php _e( 'Image Sizes', ud_get_wp_property()->domain ); ?></th>
+      <th><?php echo $tab_labels[] =__( 'Image Sizes', ud_get_wp_property()->domain ); ?></th>
       <td>
         <p><?php _e( 'Image sizes used throughout the plugin.', ud_get_wp_property()->domain ); ?> </p>
 
@@ -366,7 +373,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     </tr>
 
     <tr>
-      <th><?php printf( __( 'Default %s image', ud_get_wp_property('domain') ), \WPP_F::property_label() ); ?></th>
+      <th><?php echo $tab_labels[] = sprintf( __( 'Default %s image', ud_get_wp_property('domain') ), \WPP_F::property_label() ); ?></th>
       <td>
         <p>
           <?php printf( __( 'Setup image which will be used by default for all %s without images.', ud_get_wp_property('domain') ), \WPP_F::property_label('plural') ); ?><br/>
@@ -384,7 +391,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     </tr>
 
     <tr>
-      <th><?php _e( 'Overview Shortcode', ud_get_wp_property()->domain ) ?></th>
+      <th><?php echo $tab_labels[] = __( 'Overview Shortcode', ud_get_wp_property()->domain ) ?></th>
       <td>
         <p>
         <?php printf( __( 'These are the settings for the <b>%s</b> shortcode and %s Overview widget. The shortcode (widget) displays a list of all %s.<br />The display settings may be edited further by customizing the <b>%s</b> file.  To avoid losing your changes during updates, copy <b>%s</b> file in your theme\'s root directory, which will be automatically loaded.', ud_get_wp_property()->domain ), '[property_overview]', WPP_F::property_label(), WPP_F::property_label( 'plural' ), 'wp-content/plugins/wp-property/static/views/property-overview.php', 'property-overview.php' ); ?>
@@ -410,7 +417,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     </tr>
 
     <tr>
-      <th><?php _e( 'Google Maps', ud_get_wp_property()->domain ) ?></th>
+      <th><?php echo $tab_labels[] = __( 'Google Maps', ud_get_wp_property()->domain ) ?></th>
       <td>
 
         <ul>
@@ -440,7 +447,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     </tr>
 
     <tr>
-      <th><?php _e( 'Address Display', ud_get_wp_property()->domain ) ?></th>
+      <th><?php echo $tab_labels[] = __( 'Address Display', ud_get_wp_property()->domain ) ?></th>
       <td>
 
 
@@ -453,7 +460,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     </tr>
 
     <tr>
-      <th><?php _e( 'Currency & Numbers', ud_get_wp_property()->domain ); ?></th>
+      <th><?php echo $tab_labels[] = __( 'Currency & Numbers', ud_get_wp_property()->domain ); ?></th>
       <td>
         <ul>
           <li><?php echo WPP_F::input( "name=currency_symbol&label=" . __( 'Currency symbol.', ud_get_wp_property()->domain ) . "&group=wpp_settings[configuration]&style=width: 50px;", $wp_properties[ 'configuration' ][ 'currency_symbol' ] ); ?></li>
@@ -490,7 +497,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
     <tr>
       <th>
-        <?php _e( 'Admin Settings', ud_get_wp_property()->domain ) ?>
+        <?php echo $tab_labels[] = __( 'Admin Settings', ud_get_wp_property()->domain ) ?>
       </th>
         <td>
         <ul>
@@ -592,7 +599,16 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 </form>
 </div>
 
-<!--fb-->
+<!--  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+  <script>
+  jQuery(document).ready( function($) {
+    var availableTags = <?php echo json_encode($tab_labels); ?>;
+	
+    $( "#search_tags" ).autocomplete({
+      source: availableTags
+    });
+  } );
+  </script><!--fb-->
 <div id="fb-root"></div>
 <script type="text/javascript">(function ( d, s, id ) {
     var js, fjs = d.getElementsByTagName( s )[0];
