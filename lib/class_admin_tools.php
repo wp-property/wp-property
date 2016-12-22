@@ -134,8 +134,7 @@ if( !class_exists( 'class_admin_tools' ) ) {
         'slug'  => 'admin_tools',
         'title' => __( 'Developer', ud_get_wp_property()->domain )
       );
-	  //print_R($tabs);
-      return $tabs;
+	  return $tabs;
     }
 
     /**
@@ -167,10 +166,9 @@ if( !class_exists( 'class_admin_tools' ) ) {
 	  echo $tab_labels[] = $dveloper_tab_label." ".$tabs['attributes']['label'];
 	  echo $tab_labels[] = $dveloper_tab_label." ".$tabs['meta']['label'];
 	  echo $tab_labels[] = $dveloper_tab_label." ".$tabs['types']['label'];
-	  ////echo "in settings page functions ";
+	  
       /* Sort Tabs by 'order' */
-	  //print_r($tabs);
-      uasort( $tabs, create_function( '$a,$b', 'if ($a[\'order\'] == $b[\'order\']) { return 0; } return ($a[\'order\'] > $b[\'order\']) ? 1 : -1;' ) );
+	  uasort( $tabs, create_function( '$a,$b', 'if ($a[\'order\'] == $b[\'order\']) { return 0; } return ($a[\'order\'] > $b[\'order\']) ? 1 : -1;' ) );
 
       $template = ud_get_wp_property()->path( 'static/views/admin/settings-developer.php', 'dir' );
 	  
