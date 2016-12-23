@@ -1558,7 +1558,7 @@ button.ui-button::-moz-focus-inner {
  * http://jquery.org/license
  *
  */
-li#label-search-text{
+#label-search-text{
 	float:right;
 	border:none!important;
 	margin-right: 15px;
@@ -1573,6 +1573,8 @@ li#label-search-text{
     margin: 0;
     padding: 2px 2px;
     width: 100%;
+	max-width: 300px;
+    float: right;
 }
 .autocomplete-suggestion {
     overflow: hidden;

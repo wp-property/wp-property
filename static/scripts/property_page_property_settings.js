@@ -75,9 +75,9 @@ jQuery(document).ready(function() {
 		href_attr = jQuery("#"+main_tab_id).attr('href');
 		jQuery("#"+main_tab_id).click();
 		jQuery(href_attr+" table.form-table tr:nth-child("+label_index+") th:first").addClass("show-selected");//("background","black");
-		jQuery(".show-selected").scroll();
+		
 		jQuery('html,body').animate({
-			scrollTop: jQuery(".show-selected").offset().top-40},'slow');
+			scrollTop: jQuery(href_attr+" table.form-table tr:nth-child("+label_index+") th:first").offset().top -40},'slow');
       }
     });
   } );
