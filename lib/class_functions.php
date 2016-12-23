@@ -4124,7 +4124,7 @@ class WPP_F extends UsabilityDynamics\Utility {
 
     //** Default Help items */
     $contextual_help[ 'Main' ][ ] = '<h3>' . __( 'Default Properties Page', ud_get_wp_property()->domain ) . '</h3>';
-    $contextual_help[ 'Main' ][ ] = '<p>' . __( 'The default <b>SUDHIRproperty page</b> will be used to display property search results, as well as be the base for property URLs. ', ud_get_wp_property()->domain ) . '</p>';
+    $contextual_help[ 'Main' ][ ] = '<p>' . __( 'The default <b>property page</b> will be used to display property search results, as well as be the base for property URLs. ', ud_get_wp_property()->domain ) . '</p>';
     $contextual_help[ 'Main' ][ ] = '<p>' . sprintf( __( 'By default, the <b>Default Properties Page</b> is set to <b>%s</b>, which is a dynamically created page used for displaying property search results. ', ud_get_wp_property()->domain ), 'property' ) . '</p>';
     $contextual_help[ 'Main' ][ ] = '<p>' . __( 'We recommend you create an actual WordPress page to be used as the <b>Default Properties Page</b>. For example, you may create a root page called "Real Estate" - the URL of the default property page will be ' . get_bloginfo( 'url' ) . '<b>/real_estate/</b>, and you properties will have the URLs of ' . get_bloginfo( 'url' ) . '/real_estate/<b>property_name</b>/', ud_get_wp_property()->domain ) . '</p>';
 
