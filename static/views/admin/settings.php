@@ -88,6 +88,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     }
     ?>
     <li><a href="#tab_troubleshooting"><?php _e( 'Help', ud_get_wp_property()->domain ); ?></a></li>
+	<li id="label-search-text"><input type="text" id="search_tags" name="search_tags"/></li>
   </ul>
 
   <div id="tab_main">
