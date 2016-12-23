@@ -1562,7 +1562,7 @@ li#label-search-text{
 	float:right;
 	border:none!important;
 	margin-right: 15px;
-	margin-bottom: 5px;
+	margin-top: -5px;
 }
 
 #search_tags{
