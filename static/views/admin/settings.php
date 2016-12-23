@@ -25,6 +25,8 @@ $wrapper_classes = array( 'wpp_settings_page' );
 
 global $tab_labels; // this is an array that holds all the labels of the tabs that will be used in autocomplete in the search box.
 
+
+
 if ( isset( $_REQUEST[ 'message' ] ) ) {
   $wp_messages = array();
   switch ( $_REQUEST[ 'message' ] ) {
@@ -72,7 +74,9 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     <p><?php echo $notice_message; ?>
       <?php endforeach; ?>
 </div>
-<?php endif; ?>
+<?php endif;
+
+?>
 
 <form id="wpp_settings_form" method="post" action="<?php echo admin_url( 'edit.php?post_type=property&page=property_settings' ); ?>" enctype="multipart/form-data"/>
 <?php wp_nonce_field( 'wpp_setting_save' ); ?>
