@@ -35,3 +35,49 @@ jQuery(document).ready(function() {
   });
 
 });
+
+/*
+ * search box with auto population and displaying particular label on selection in search box
+ */ 
+  jQuery(document).ready( function($) {
+	  main_tabs = new Array();
+	  main_tabs_href = new Array();
+	  inner_tabs = new Array();
+	  tabs_labels = all_label_key = all_label = new Array();
+	  all_label_count = k=0;
+	  jQuery("#wpp_settings_tabs ul.ui-tabs-nav:first li.ui-tabs-tab").each(function(){
+		  main_tabs[k] = jQuery(this).children("a:first").attr("id");
+		  main_tabs_href[k] = jQuery(this).children("a:first").attr("href");
+		  tabs_labels[main_tabs[k]]= new Array();
+		  k++;
+	  });
+	  for (j=0;j<k;j++){
+		  label_count = 0;
+		  jQuery(main_tabs_href[j]+" table.form-table th").each(function(){
+			  label_count++;
+			  html_text = jQuery(this).html();
+			  html_text_arr = html_text.split('<');
+			  tabs_labels[main_tabs[j]][label_count] = html_text_arr[0];
+			  all_label[all_label_count++]={"id":main_tabs[j]+"~~"+label_count,"label":tabs_labels[main_tabs[j]][label_count],"value":tabs_labels[main_tabs[j]][label_count]};
+		  });
+
+	  }
+//		console.log(main_tabs);
+//		console.log(all_label);
+	var availableTags = all_label;
+    $( "#search_tags" ).autocomplete({
+      source: availableTags,
+	  select: function( event, ui ) {
+		  jQuery(".show-selected").removeClass("show-selected");
+		id_arr = ui.item.id.split("~~");
+		main_tab_id = id_arr[0];
+		label_index = id_arr[1];
+		href_attr = jQuery("#"+main_tab_id).attr('href');
+		jQuery("#"+main_tab_id).click();
+		jQuery(href_attr+" table.form-table tr:nth-child("+label_index+") th:first").addClass("show-selected");//("background","black");
+		
+		jQuery('html,body').animate({
+			scrollTop: jQuery(href_attr+" table.form-table tr:nth-child("+label_index+") th:first").offset().top -40},'slow');
+      }
+    });
+  } );
