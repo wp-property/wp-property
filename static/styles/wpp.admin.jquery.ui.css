@@ -1566,8 +1566,7 @@ button.ui-button::-moz-focus-inner {
 }
 
 #search_tags{
-    -moz-box-sizing: border-box;
-    border: 1px solid #EEEEEE;
+    border: 1px solid #D0D0D0;
     font-weight: 600;
     height: 37px;
     margin: 0;
@@ -1621,3 +1620,18 @@ a.ui-button:active,
   border-left:5px saddlebrown solid;
 }
 
+input#search_tags::-webkit-input-placeholder {
+   text-align: center;
+}
+
+input#search_tags:-moz-placeholder { /* Firefox 18- */
+   text-align: center;  
+}
+
+input#search_tags::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;  
+}
+
+input#search_tags:-ms-input-placeholder {  
+   text-align: center; 
+}
