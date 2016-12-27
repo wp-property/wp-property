@@ -1574,6 +1574,7 @@ button.ui-button::-moz-focus-inner {
     width: 100%;
 	max-width: 300px;
     float: right;
+	text-align: center;
 }
 .autocomplete-suggestion {
     overflow: hidden;
