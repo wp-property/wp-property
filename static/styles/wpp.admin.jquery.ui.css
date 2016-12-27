@@ -1562,7 +1562,7 @@ button.ui-button::-moz-focus-inner {
 	float:right;
 	border:none!important;
 	margin-right: 15px;
-	margin-top: -5px;
+	margin-bottom: 5px;
 }
 
 #search_tags{
@@ -1574,6 +1574,7 @@ button.ui-button::-moz-focus-inner {
     width: 100%;
 	max-width: 300px;
     float: right;
+	text-align: center;
 }
 .autocomplete-suggestion {
     overflow: hidden;
