@@ -1550,3 +1550,89 @@ button.ui-button::-moz-focus-inner {
   margin: -1px;
   height: 100%;
 }
+/*
+ * jQuery UI or autocompelte
+ *
+ * http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ */
+#label-search-text{
+	float:right;
+	border:none!important;
+	margin-right: 15px;
+	margin-bottom: 5px;
+}
+
+#search_tags{
+    border: 1px solid #D0D0D0;
+    font-weight: 600;
+    height: 37px;
+    margin: 0;
+    padding: 2px 2px;
+    width: 100%;
+	max-width: 300px;
+    float: right;
+	text-align: center;
+}
+.autocomplete-suggestion {
+    overflow: hidden;
+    padding: 2px 5px;
+    white-space: nowrap;
+}
+.autocomplete-suggestions strong {
+    color: #3399FF;
+    font-weight: normal;
+}
+.ui-autocomplete li {
+    margin-bottom: 0;
+    padding: 4px 10px;
+    text-align: left;
+}
+.ui-autocomplete li{
+	cursor: pointer;
+	background:#F0F0F0;
+	padding: 4px 10px;
+	text-align: left;
+
+}
+.ui-menu .ui-menu-item-wrapper {
+    position: relative;
+    padding: 3px 1em 3px .4em;
+}
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
+	border: 1px solid #003eff;
+	background: #007fff;
+	font-weight: normal;
+	color: #ffffff;
+}
+/*
+* To hightlight selected th from search text box selection
+	*/
+.show-selected{
+  font-size:14px;
+  font-weight: bold;
+  border-left:5px saddlebrown solid;
+}
+
+input#search_tags::-webkit-input-placeholder {
+   text-align: center;
+}
+
+input#search_tags:-moz-placeholder { /* Firefox 18- */
+   text-align: center;  
+}
+
+input#search_tags::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;  
+}
+
+input#search_tags:-ms-input-placeholder {  
+   text-align: center; 
+}
