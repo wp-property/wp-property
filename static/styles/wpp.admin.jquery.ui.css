@@ -1562,7 +1562,7 @@ button.ui-button::-moz-focus-inner {
 	float:right;
 	border:none!important;
 	margin-right: 15px;
-	margin-top: -5px;
+	margin-bottom: 5px;
 }
 
 #search_tags{
