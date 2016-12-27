@@ -451,83 +451,119 @@ body .wpp_gallery_widget .sidebar_gallery_item a.thumbnail img,
   max-width: 100%;
 }
 body .wpp_feature_list,
-#wpp_layout .wpp_feature_list {
+#wpp_layout .wpp_feature_list,
+body .widget_wpp_property_stats,
+#wpp_layout .widget_wpp_property_stats {
   margin: 0 0 1em;
 }
 body .wpp_feature_list h2.wpp_stats_group,
-#wpp_layout .wpp_feature_list h2.wpp_stats_group {
+#wpp_layout .wpp_feature_list h2.wpp_stats_group,
+body .widget_wpp_property_stats h2.wpp_stats_group,
+#wpp_layout .widget_wpp_property_stats h2.wpp_stats_group {
   margin: 0 0 0.5em;
   padding: 0;
 }
 body .wpp_feature_list ul.wpp_property_stats,
-#wpp_layout .wpp_feature_list ul.wpp_property_stats {
+#wpp_layout .wpp_feature_list ul.wpp_property_stats,
+body .widget_wpp_property_stats ul.wpp_property_stats,
+#wpp_layout .widget_wpp_property_stats ul.wpp_property_stats {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 body .wpp_feature_list ul.wpp_property_stats li,
-#wpp_layout .wpp_feature_list ul.wpp_property_stats li {
+#wpp_layout .wpp_feature_list ul.wpp_property_stats li,
+body .widget_wpp_property_stats ul.wpp_property_stats li,
+#wpp_layout .widget_wpp_property_stats ul.wpp_property_stats li {
   list-style: none;
   margin: 0;
 }
 body .wpp_feature_list dl dt,
-#wpp_layout .wpp_feature_list dl dt {
+#wpp_layout .wpp_feature_list dl dt,
+body .widget_wpp_property_stats dl dt,
+#wpp_layout .widget_wpp_property_stats dl dt {
   font-weight: bold;
 }
 body .wpp_feature_list dl dd,
-#wpp_layout .wpp_feature_list dl dd {
+#wpp_layout .wpp_feature_list dl dd,
+body .widget_wpp_property_stats dl dd,
+#wpp_layout .widget_wpp_property_stats dl dd {
   margin: 0 0 0 15px;
 }
 body .wpp_feature_list dl dd ul,
-#wpp_layout .wpp_feature_list dl dd ul {
+#wpp_layout .wpp_feature_list dl dd ul,
+body .widget_wpp_property_stats dl dd ul,
+#wpp_layout .widget_wpp_property_stats dl dd ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 body .wpp_feature_list dl dd ul li,
-#wpp_layout .wpp_feature_list dl dd ul li {
+#wpp_layout .wpp_feature_list dl dd ul li,
+body .widget_wpp_property_stats dl dd ul li,
+#wpp_layout .widget_wpp_property_stats dl dd ul li {
   list-style: none;
   margin: 0;
 }
 body .wpp_feature_list span,
-#wpp_layout .wpp_feature_list span {
+#wpp_layout .wpp_feature_list span,
+body .widget_wpp_property_stats span,
+#wpp_layout .widget_wpp_property_stats span {
   display: inline-block;
   vertical-align: top;
 }
 body .wpp_feature_list span.attribute,
-#wpp_layout .wpp_feature_list span.attribute {
+#wpp_layout .wpp_feature_list span.attribute,
+body .widget_wpp_property_stats span.attribute,
+#wpp_layout .widget_wpp_property_stats span.attribute {
   font-weight: bold;
   min-width: 15%;
 }
 body .wpp_feature_list span.value,
-#wpp_layout .wpp_feature_list span.value {
+#wpp_layout .wpp_feature_list span.value,
+body .widget_wpp_property_stats span.value,
+#wpp_layout .widget_wpp_property_stats span.value {
   margin: 0 0 0 10px;
 }
 body .wpp_feature_list span.value ul,
-#wpp_layout .wpp_feature_list span.value ul {
+#wpp_layout .wpp_feature_list span.value ul,
+body .widget_wpp_property_stats span.value ul,
+#wpp_layout .widget_wpp_property_stats span.value ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 body .wpp_feature_list span.value ul li,
-#wpp_layout .wpp_feature_list span.value ul li {
+#wpp_layout .wpp_feature_list span.value ul li,
+body .widget_wpp_property_stats span.value ul li,
+#wpp_layout .widget_wpp_property_stats span.value ul li {
   list-style: none;
   margin: 0;
 }
 body .wpp_feature_list span.value ul li a,
-#wpp_layout .wpp_feature_list span.value ul li a {
+#wpp_layout .wpp_feature_list span.value ul li a,
+body .widget_wpp_property_stats span.value ul li a,
+#wpp_layout .widget_wpp_property_stats span.value ul li a {
   padding: 0;
 }
 body .wpp_feature_list span.value.property_property_feature ul li,
 #wpp_layout .wpp_feature_list span.value.property_property_feature ul li,
+body .widget_wpp_property_stats span.value.property_property_feature ul li,
+#wpp_layout .widget_wpp_property_stats span.value.property_property_feature ul li,
 body .wpp_feature_list span.value.property_community_feature ul li,
-#wpp_layout .wpp_feature_list span.value.property_community_feature ul li {
+#wpp_layout .wpp_feature_list span.value.property_community_feature ul li,
+body .widget_wpp_property_stats span.value.property_community_feature ul li,
+#wpp_layout .widget_wpp_property_stats span.value.property_community_feature ul li {
   margin: 0;
 }
 body .wpp_feature_list span.value.property_property_feature ul li:before,
 #wpp_layout .wpp_feature_list span.value.property_property_feature ul li:before,
+body .widget_wpp_property_stats span.value.property_property_feature ul li:before,
+#wpp_layout .widget_wpp_property_stats span.value.property_property_feature ul li:before,
 body .wpp_feature_list span.value.property_community_feature ul li:before,
-#wpp_layout .wpp_feature_list span.value.property_community_feature ul li:before {
+#wpp_layout .wpp_feature_list span.value.property_community_feature ul li:before,
+body .widget_wpp_property_stats span.value.property_community_feature ul li:before,
+#wpp_layout .widget_wpp_property_stats span.value.property_community_feature ul li:before {
   padding-right: 5px;
   content: "\f00c";
   display: inline-block;
