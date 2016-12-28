@@ -86,6 +86,8 @@ body,
   /* Property type list */
   /* Property and Community featured list */
   /* Property and Community featured list */
+  /* Gallery property widget */
+  /* Gallery property widget */
 }
 body .wpp_property_overview_shortcode,
 #wpp_layout .wpp_property_overview_shortcode {
@@ -658,4 +660,8 @@ body .property_feature_list li:before,
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+body .widget_gallerypropertieswidget .wpp_galleria_wrapper,
+#wpp_layout .widget_gallerypropertieswidget .wpp_galleria_wrapper {
+  margin-bottom: 20px;
 }
