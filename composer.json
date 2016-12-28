@@ -82,9 +82,7 @@
     "schemas": {
       "dependencies" : {
         "modules": {},
-        "plugins": [
-          
-        ]
+        "plugins": []
       },
       "licenses" : {
         "client" : {

@@ -173,6 +173,7 @@ namespace UsabilityDynamics\WPP {
         if (!$render) return $template;
 
         add_filter('the_content', array($this, 'the_content'), 1000);
+        add_filter('the_excerpt', array($this, 'the_content'), 1000);
 
         // @note This should probaly be used instead of our content-override.
         // add_filter( 'siteorigin_panels_data', array( $this, 'siteorigin_panels_data' ), 1000, 2 );
