@@ -417,20 +417,20 @@ body,
       }
     }
 
-    dl {
-      dt {
-        font-weight: bold;
-      }
-      dd {
-        margin: 0 0 0 15px;
-        ul {
-          margin: 0;
-          padding: 0;
+    dl dt,
+    dt {
+      font-weight: bold;
+    }
+    dl dd,
+    dd {
+      margin: 0 0 0 15px;
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        li {
           list-style: none;
-          li {
-            list-style: none;
-            margin: 0;
-          }
+          margin: 0;
         }
       }
     }
@@ -506,6 +506,9 @@ body,
       margin: 0;
       padding: 0;
       list-style: none;
+      li {
+        margin: 0;
+      }
     }
   }
   /* Agent widget */

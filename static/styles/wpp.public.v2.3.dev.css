@@ -483,19 +483,31 @@ body .widget_wpp_property_stats ul.wpp_property_stats li,
 body .wpp_feature_list dl dt,
 #wpp_layout .wpp_feature_list dl dt,
 body .widget_wpp_property_stats dl dt,
-#wpp_layout .widget_wpp_property_stats dl dt {
+#wpp_layout .widget_wpp_property_stats dl dt,
+body .wpp_feature_list dt,
+#wpp_layout .wpp_feature_list dt,
+body .widget_wpp_property_stats dt,
+#wpp_layout .widget_wpp_property_stats dt {
   font-weight: bold;
 }
 body .wpp_feature_list dl dd,
 #wpp_layout .wpp_feature_list dl dd,
 body .widget_wpp_property_stats dl dd,
-#wpp_layout .widget_wpp_property_stats dl dd {
+#wpp_layout .widget_wpp_property_stats dl dd,
+body .wpp_feature_list dd,
+#wpp_layout .wpp_feature_list dd,
+body .widget_wpp_property_stats dd,
+#wpp_layout .widget_wpp_property_stats dd {
   margin: 0 0 0 15px;
 }
 body .wpp_feature_list dl dd ul,
 #wpp_layout .wpp_feature_list dl dd ul,
 body .widget_wpp_property_stats dl dd ul,
-#wpp_layout .widget_wpp_property_stats dl dd ul {
+#wpp_layout .widget_wpp_property_stats dl dd ul,
+body .wpp_feature_list dd ul,
+#wpp_layout .wpp_feature_list dd ul,
+body .widget_wpp_property_stats dd ul,
+#wpp_layout .widget_wpp_property_stats dd ul {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -503,7 +515,11 @@ body .widget_wpp_property_stats dl dd ul,
 body .wpp_feature_list dl dd ul li,
 #wpp_layout .wpp_feature_list dl dd ul li,
 body .widget_wpp_property_stats dl dd ul li,
-#wpp_layout .widget_wpp_property_stats dl dd ul li {
+#wpp_layout .widget_wpp_property_stats dl dd ul li,
+body .wpp_feature_list dd ul li,
+#wpp_layout .wpp_feature_list dd ul li,
+body .widget_wpp_property_stats dd ul li,
+#wpp_layout .widget_wpp_property_stats dd ul li {
   list-style: none;
   margin: 0;
 }
@@ -595,6 +611,10 @@ body .widget_agentwidget ul.wpp_agent_info_list,
   margin: 0;
   padding: 0;
   list-style: none;
+}
+body .widget_agentwidget ul.wpp_agent_info_list li,
+#wpp_layout .widget_agentwidget ul.wpp_agent_info_list li {
+  margin: 0;
 }
 body ul.property_type_list,
 #wpp_layout ul.property_type_list {
