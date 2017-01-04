@@ -34,6 +34,7 @@
 
       if(typeof jQuery.fn.fancybox == 'function') {
         jQuery("a.fancybox_image, .gallery-item a").fancybox({
+          'type': "image",
           'transitionIn'  :  'elastic',
           'transitionOut'  :  'elastic',
           'speedIn'    :  600,
