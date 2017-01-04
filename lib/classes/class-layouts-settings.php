@@ -196,7 +196,7 @@ namespace UsabilityDynamics\WPP {
                     <li>
                       <label class="<?php echo $layouts_settings['property_term_single'] == 'false' ? 'checked' : ''; ?>">
                         <h5><?php _e( 'No Layout', ud_get_wp_property()->domain ); ?></h5>
-                        <img width="150" height="150" src="//placehold.it/150?text=No+Layout" alt="No Layout" />
+                        <img width="150" height="150" src="<?php echo plugin_dir_url() . '/static/images/no-layout.jpg'; ?>" alt="No Layout" />
                         <input <?php checked( 'false', $layouts_settings['property_term_single'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][property_term_single]" value="false">
                       </label>
                     </li>
@@ -241,7 +241,7 @@ namespace UsabilityDynamics\WPP {
                     <li>
                       <label class="<?php echo $layouts_settings['property_single'] == 'false' ? 'checked' : ''; ?>">
                         <h5><?php _e( 'No Layout', ud_get_wp_property()->domain ); ?></h5>
-                        <img width="150" height="150" src="//placehold.it/150?text=No+Layout" alt="No Layout" />
+                        <img width="150" height="150" src="<?php echo plugin_dir_url() . '/static/images/no-layout.jpg'; ?>" alt="No Layout" />
                         <input <?php checked( 'false', $layouts_settings['property_single'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][property_single]" value="false">
                       </label>
                     </li>
@@ -287,7 +287,7 @@ namespace UsabilityDynamics\WPP {
                     <li>
                       <label class="<?php echo $layouts_settings['search_results'] == 'false' ? 'checked' : ''; ?>">
                         <h5><?php _e( 'No Layout', ud_get_wp_property()->domain ); ?></h5>
-                        <img width="150" height="150" src="//placehold.it/150?text=No+Layout" alt="No Layout" />
+                        <img width="150" height="150" src="<?php echo plugin_dir_url() . '/static/images/no-layout.jpg'; ?>" alt="No Layout" />
                         <input <?php checked( 'false', $layouts_settings['search_results'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][search_results]" value="false">
                       </label>
                     </li>
@@ -397,7 +397,7 @@ namespace UsabilityDynamics\WPP {
                     <li>
                       <label class="<?php echo $layouts_settings['property_single'] == 'false' ? 'checked' : ''; ?>">
                         <h5><?php _e( 'No Layout', ud_get_wp_property()->domain ); ?></h5>
-                        <img width="150" height="150" src="//placehold.it/150?text=No+Layout" alt="No Layout" />
+                        <img width="150" height="150" src="<?php echo plugin_dir_url() . '/static/images/no-layout.jpg'; ?>" alt="No Layout" />
                         <input <?php checked( 'false', $layouts_settings['property_single'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][property_single]" value="false">
                       </label>
                     </li>
@@ -436,7 +436,7 @@ namespace UsabilityDynamics\WPP {
                     <li>
                       <label class="<?php echo $layouts_settings['search_results'] == 'false' ? 'checked' : ''; ?>">
                         <h5><?php _e( 'No Layout', ud_get_wp_property()->domain ); ?></h5>
-                        <img width="150" height="150" src="//placehold.it/150?text=No+Layout" alt="No Layout" />
+                        <img width="150" height="150" src="<?php echo plugin_dir_url() . '/static/images/no-layout.jpg'; ?>" alt="No Layout" />
                         <input <?php checked( 'false', $layouts_settings['search_results'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][search_results]" value="false">
                       </label>
                     </li>
