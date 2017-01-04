@@ -388,6 +388,7 @@
         }
 
         jQuery("#wpp_shortcode_" + unique_id + " a.fancybox_image").fancybox({
+          'type': "image",
           'transitionIn': 'elastic',
           'transitionOut': 'elastic',
           'speedIn': 600,
