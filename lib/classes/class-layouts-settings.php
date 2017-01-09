@@ -13,7 +13,7 @@ namespace UsabilityDynamics\WPP {
       /**
        * @var null
        */
-      private $preloaded_layouts = null;
+      public $preloaded_layouts = null;
 
       /**
        * @var array
@@ -90,7 +90,7 @@ namespace UsabilityDynamics\WPP {
       /**
        * @return array
        */
-      private function preload_layouts() {
+      public function preload_layouts() {
 
         $res = $this->api_client->get_layouts();
 
