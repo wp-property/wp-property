@@ -39,11 +39,6 @@ namespace UsabilityDynamics\WPP {
         // @todo Make directory names dynamic, since it may change.
         add_action("in_plugin_update_message-wp-property/wp-property.php", array($this, 'product_update_message'), 20, 2);
 
-        // Init customizer
-        if (!isset($wp_properties['configuration']['enable_layouts']) || $wp_properties['configuration']['enable_layouts'] != "true") :
-          add_action('customize_register', array($this, 'property_layouts_customizer'), 20, 2);
-        endif;
-
       }
 
       /**
@@ -228,92 +223,11 @@ namespace UsabilityDynamics\WPP {
 
       }
 
-      public function property_layouts_customizer($wp_customize)
+      public function wp_property_sanitize_callback($input)
       {
-//        global $wp_properties;
-
-        $wp_customize->add_panel('layouts_area_panel', array(
-          'priority' => 41,
-          'capability' => 'edit_theme_options',
-          'title' => __('Layouts section', ud_get_wp_property()->domain)
-        ));
-
-//    Property overview settings
-        $wp_customize->add_section('layouts_property_overview_settings', array(
-          'title' => __('Property overview settings', ud_get_wp_property()->domain),
-          'panel' => 'layouts_area_panel',
-          'priority' => 1,
-        ));
-//    Property overview settings
-        $wp_customize->add_setting('layouts_property_overview', array(
-          'default' => __('', ud_get_wp_property()->domain),
-          'sanitize_callback' => 'avalon_sanitize_callback',
-          'capability' => 'edit_theme_options',
-          'transport' => 'postMessage'
-        ));
-        $wp_customize->add_control('layouts_property_overview', array(
-          'label' => __('Lol', ud_get_wp_property()->domain),
-          'section' => 'layouts_property_overview_settings',
-          'priority' => 1
-        ));
-
-
-//        $layouts_settings = wp_parse_args(!empty($wp_properties['configuration']['layouts']['templates']) ? $wp_properties['configuration']['layouts']['templates'] : array(), array(
-//          'property_term_single' => 'false',
-//          'property_single' => 'false',
-//          'search_results' => 'false'
-//        ));
-
-//        $layouts_template_files = wp_parse_args(!empty($wp_properties['configuration']['layouts']['files']) ? $wp_properties['configuration']['layouts']['files'] : array(), array(
-//          'property_term_single' => 'page.php',
-//          'property_single' => 'single.php',
-//          'search_results' => 'page.php'
-//        ));
-
-//        $template_files = apply_filters('wpp::layouts::template_files', wp_get_theme()->get_files('php', 0));
-
-//        $layouts = new Layouts_Settings();
-//  $data_layouts = $layouts->setup_assistant_layouts();
-//        $layouts->preloaded_layouts = $layouts->preload_layouts();
-//        $data = $layouts->preloaded_layouts;
-//  print_r($layouts);
-//  die();
-
-//        foreach ($data as $field) {
-//          print_r($field);
-//    $wp_customize->add_setting('layouts_property_overview_select_'. $field->id, array(
-//      'default' => false,
-//      'transport' => 'postMessage'
-//    ));
-//    $wp_customize->add_control('avalon_search_field_5_type', array(
-//      'label' => __('Field 5 Type', ud_get_wp_property()->domain),
-//      'section' => 'welcome_property_search_settings',
-//      'type' => 'checkbox',
-//      'choices' => $field_types,
-//      'settings' => 'avalon_search_field_5_type'
-//    ));
-//        }
-
-
-//    Single property settings
-        $wp_customize->add_section('layouts_property_single_settings', array(
-          'title' => __('Single property settings', ud_get_wp_property()->domain),
-          'panel' => 'layouts_area_panel',
-          'priority' => 2,
-        ));
-//    Property overview settings
-        $wp_customize->add_setting('layouts_property_single', array(
-          'default' => __('', ud_get_wp_property()->domain),
-          'sanitize_callback' => 'avalon_sanitize_callback',
-          'capability' => 'edit_theme_options',
-          'transport' => 'postMessage'
-        ));
-        $wp_customize->add_control('layouts_property_single', array(
-          'label' => __('Lol', ud_get_wp_property()->domain),
-          'section' => 'layouts_property_single_settings',
-          'priority' => 1
-        ));
+        return $input;
       }
+
 
     }
 

@@ -208,6 +208,7 @@ return array(
     'UsabilityDynamics\\WPP\\Terms_Upgrade' => $baseDir . '/vendor/plugins/wp-property-terms/lib/classes/class-terms-upgrade.php',
     'UsabilityDynamics\\WPP\\Upgrade' => $baseDir . '/lib/classes/class-upgrade.php',
     'UsabilityDynamics\\WPP\\WPML' => $baseDir . '/lib/classes/class-wpml.php',
+    'UsabilityDynamics\\WPP\\WP_Property_Customizer' => $baseDir . '/lib/classes/class-customizer.php',
     'UsabilityDynamics\\WPP\\Widget' => $baseDir . '/lib/classes/class-widget.php',
     'UsabilityDynamics\\WPRETSC\\Ajax' => $baseDir . '/vendor/plugins/wp-rets-client/lib/classes/class-ajax.php',
     'UsabilityDynamics\\WPRETSC\\Bootstrap' => $baseDir . '/vendor/plugins/wp-rets-client/lib/classes/class-bootstrap.php',
