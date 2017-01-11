@@ -22,15 +22,35 @@ namespace UsabilityDynamics\WPP {
         add_action('customize_controls_enqueue_scripts', array($this, 'wp_property_customizer_controls'));
         add_action('customize_preview_init', array($this, 'wp_property_customizer_live_preview'));
 
-        add_action('customize_save', array($this, 'wpp_action_customize_save'));
+//        add_action('customize_save_response', array($this, 'wpp_action_customize_save'));
+
+        add_filter('wpp::layouts::configuration', array($this, 'wpp_customize_configuration'), 11);
       }
 
-      public function wpp_action_customize_save($instance)
+      public function wpp_customize_configuration($false)
       {
-        // make action magic happen here...
-        print_r($instance);
-        echo '123';
-        die();
+        $selected_items = json_decode(stripslashes($_POST['customized']));
+        if (isset($selected_items->layouts_property_single_choice)) {
+          $layout_id = $selected_items->layouts_property_single_choice;
+        } else {
+          $layout_id = '';
+        }
+        if (isset($selected_items->layouts_property_single_select)) {
+          $template_file = $selected_items->layouts_property_single_select;
+        } else {
+          $template_file = '';
+        }
+        if (is_singular('property')) {
+          if (!empty($layout_id)) {
+            $layout = json_decode(base64_decode($layout_id), true);
+          } else {
+            $layout = '';
+          }
+          return array(
+            'templates' => array($template_file, 'page.php', 'single.php', 'index.php'),
+            'layout_meta' => $layout
+          );
+        }
       }
 
       public function wp_property_customizer_controls()
@@ -45,30 +65,13 @@ namespace UsabilityDynamics\WPP {
 
       public function property_layouts_customizer($wp_customize)
       {
-        global $wp_properties;
-
-        $layouts_settings = wp_parse_args(!empty($wp_properties['configuration']['layouts']['templates']) ? $wp_properties['configuration']['layouts']['templates'] : array(), array(
-          'property_term_single' => 'false',
-          'property_single' => 'false',
-          'search_results' => 'false'
-        ));
-
-        $layouts_template_files = wp_parse_args(!empty($wp_properties['configuration']['layouts']['files']) ? $wp_properties['configuration']['layouts']['files'] : array(), array(
-          'property_term_single' => 'page.php',
-          'property_single' => 'single.php',
-          'search_results' => 'page.php'
-        ));
-
         $template_files = apply_filters('wpp::layouts::template_files', wp_get_theme()->get_files('php', 0));
-
         $templates_names = array();
         foreach ($template_files as $file => $file_path) {
-          $template_name = $file;
-          array_push($templates_names, $template_name);
+          $templates_names[$file] = $file;
         }
 
-        $layouts = new Layouts_Settings();
-        $layouts = $layouts->preload_layouts();
+        $layouts = get_option('wpp_available_layouts', false);
         $overview_layouts = $layouts['search-results'];
         $single_layouts = $layouts['single-property'];
 
@@ -99,12 +102,11 @@ namespace UsabilityDynamics\WPP {
 
         $overview_radio_choices = array();
         foreach ($overview_layouts as $layout) {
-          $overview_radio_choice = $layout->title;
-          array_push($overview_radio_choices, $overview_radio_choice);
+          $overview_radio_choices[$layout->layout] = $layout->title;
         }
         $wp_customize->add_setting('layouts_property_overview_choice', array(
           'default' => false,
-          'transport' => 'postMessage'
+          'transport' => 'refresh'
         ));
         $wp_customize->add_control('layouts_property_overview_choice', array(
           'label' => __('Select Layout for Property Overview page', ud_get_wp_property()->domain),
@@ -122,7 +124,7 @@ namespace UsabilityDynamics\WPP {
         // Single property settings
         $wp_customize->add_setting('layouts_property_single_select', array(
           'default' => false,
-          'transport' => 'postMessage'
+          'transport' => 'refresh'
         ));
         $wp_customize->add_control('layouts_property_single_select', array(
           'label' => __('Select template for Single Property page', ud_get_wp_property()->domain),
@@ -133,12 +135,11 @@ namespace UsabilityDynamics\WPP {
 
         $single_radio_choices = array();
         foreach ($single_layouts as $layout) {
-          $single_radio_choice = $layout->title;
-          array_push($single_radio_choices, $single_radio_choice);
+          $single_radio_choices[$layout->layout] = $layout->title;
         }
         $wp_customize->add_setting('layouts_property_single_choice', array(
           'default' => false,
-          'transport' => 'postMessage'
+          'transport' => 'refresh'
         ));
         $wp_customize->add_control('layouts_property_single_choice', array(
           'label' => __('Select Layout for Single Property page', ud_get_wp_property()->domain),
