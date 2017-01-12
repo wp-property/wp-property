@@ -33,7 +33,7 @@ namespace UsabilityDynamics\WPP {
            * For property taxonomies
            * property_term_single
            */
-          if (is_tax() && in_array('property', get_taxonomy(get_queried_object()->taxonomy)->object_type)) {
+          if (is_tax() && in_array('property', get_taxonomy(get_queried_object()->taxonomy)->object_type) || is_property_overview_page()) {
             $layout_id = !empty(get_theme_mod('layouts_property_overview_choice'))
               ? get_theme_mod('layouts_property_overview_choice') : 'false';
 
