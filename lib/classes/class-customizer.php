@@ -46,12 +46,15 @@ namespace UsabilityDynamics\WPP {
             } else {
               $layout_id = 'false';
             }
+            if ($layout_id == 'none') {
+              return $false;
+            }
             if (isset($selected_items->layouts_property_single_select)) {
               $template_file = $selected_items->layouts_property_single_select;
             } else {
               $template_file = 'index.php';
             }
-            if (!empty($layout_id) && $layout_id !== 'false' && $layout_id !== 'none') {
+            if (!empty($layout_id) && $layout_id !== 'false') {
               try {
                 $layout = json_decode(base64_decode($layout_id), true);
               } catch (\Exception $e) {
@@ -73,12 +76,15 @@ namespace UsabilityDynamics\WPP {
             } else {
               $layout_id = 'false';
             }
+            if ($layout_id == 'none') {
+              return $false;
+            }
             if (isset($selected_items->layouts_property_overview_select)) {
               $template_file = $selected_items->layouts_property_overview_select;
             } else {
               $template_file = 'index.php';
             }
-            if (!empty($layout_id) && $layout_id !== 'false' && $layout_id !== 'none') {
+            if (!empty($layout_id) && $layout_id !== 'false') {
               try {
                 $layout = json_decode(base64_decode($layout_id), true);
               } catch (\Exception $e) {
