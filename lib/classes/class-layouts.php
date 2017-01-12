@@ -11,50 +11,47 @@ namespace UsabilityDynamics\WPP {
      * Class Layouts
      * @package UsabilityDynamics\WPP
      */
-    final class Layouts extends Scaffold {
+    final class Layouts extends Scaffold
+    {
 
       /**
        * Layouts constructor.
        */
-      public function __construct() {
+      public function __construct()
+      {
         parent::__construct();
 
         add_filter('template_include', array($this, 'page_template'), 99);
         add_action('wp_footer', array($this, 'panels_print_inline_css'));
 
-        add_filter( 'wpp::layouts::configuration', function( $false ) {
+        add_filter('wpp::layouts::configuration', function ($false) {
           global $wp_properties;
 
-          $available_layouts = get_option( 'wpp_available_layouts', false );
+          $available_layouts = get_option('wpp_available_layouts', false);
 
           /**
            * For property taxonomies
+           * property_term_single
            */
-          if ( is_tax() && in_array( 'property', get_taxonomy( get_queried_object()->taxonomy )->object_type ) ) {
-            $layout_id = !empty($wp_properties['configuration']['layouts']['templates'])
-                && !empty($wp_properties['configuration']['layouts']['templates']['property_term_single'])
-                ?  $wp_properties['configuration']['layouts']['templates']['property_term_single'] : 'false';
+          if (is_tax() && in_array('property', get_taxonomy(get_queried_object()->taxonomy)->object_type)) {
+            $layout_id = !empty(get_theme_mod('layouts_property_overview_choice'))
+              ? get_theme_mod('layouts_property_overview_choice') : 'false';
 
-            if ( $layout_id != 'false' && !empty($available_layouts['single-property-term']) && !empty( $available_layouts['single-property-term'][$layout_id] ) ) {
+            if ($layout_id != 'false') {
 
-              if ( !empty( $available_layouts['single-property-term'][$layout_id]->layout) ) {
-
-                try {
-                  $layout = json_decode( base64_decode($available_layouts['single-property-term'][$layout_id]->layout), true );
-                } catch ( \Exception $e ) {
-                  echo $e->getMessage();
-                }
-
-                $template_file = !empty($wp_properties['configuration']['layouts']['files'])
-                && !empty($wp_properties['configuration']['layouts']['files']['property_term_single'])
-                    ?  $wp_properties['configuration']['layouts']['files']['property_term_single'] : 'index.php';
-
-                return array(
-                  'templates' => array( $template_file, 'page.php', 'single.php', 'index.php' ),
-                  'layout_meta' => $layout
-                );
-
+              try {
+                $layout = json_decode(base64_decode($layout_id), true);
+              } catch (\Exception $e) {
+                echo $e->getMessage();
               }
+
+              $template_file = !empty(get_theme_mod('layouts_property_overview_select'))
+                ? get_theme_mod('layouts_property_overview_select') : 'index.php';
+
+              return array(
+                'templates' => array($template_file, 'page.php', 'single.php', 'index.php'),
+                'layout_meta' => $layout
+              );
 
             }
           }
@@ -62,69 +59,54 @@ namespace UsabilityDynamics\WPP {
           /**
            * For single property
            */
-          if ( is_singular( 'property' ) ) {
+          if (is_singular('property')) {
 
-            $layout_id = !empty($wp_properties['configuration']['layouts']['templates'])
-            && !empty($wp_properties['configuration']['layouts']['templates']['property_single'])
-                ?  $wp_properties['configuration']['layouts']['templates']['property_single'] : 'false';
+            $layout_id = !empty(get_theme_mod('layouts_property_single_choice'))
+              ? get_theme_mod('layouts_property_single_choice') : 'false';
 
-            if ( $layout_id != 'false' && !empty($available_layouts['single-property']) && !empty( $available_layouts['single-property'][$layout_id] ) ) {
+            if ($layout_id != 'false') {
 
-              if ( !empty( $available_layouts['single-property'][$layout_id]->layout) ) {
-
-                try {
-                  $layout = json_decode( base64_decode($available_layouts['single-property'][$layout_id]->layout), true );
-                } catch ( \Exception $e ) {
-                  echo $e->getMessage();
-                }
-
-                $template_file = !empty($wp_properties['configuration']['layouts']['files'])
-                && !empty($wp_properties['configuration']['layouts']['files']['property_single'])
-                    ?  $wp_properties['configuration']['layouts']['files']['property_single'] : 'index.php';
-
-                return array(
-                  'templates' => array( $template_file, 'page.php', 'single.php', 'index.php' ),
-                  'layout_meta' => $layout
-                );
-
+              try {
+                $layout = json_decode(base64_decode($layout_id), true);
+              } catch (\Exception $e) {
+                echo $e->getMessage();
               }
+
+              $template_file = !empty(get_theme_mod('layouts_property_single_select'))
+                ? get_theme_mod('layouts_property_single_select') : 'index.php';
+
+              return array(
+                'templates' => array($template_file, 'page.php', 'single.php', 'index.php'),
+                'layout_meta' => $layout
+              );
 
             }
           }
 
           global $wp_query;
 
-          if ( !empty( $wp_query->wpp_search_page ) ) {
+          if (!empty($wp_query->wpp_search_page)) {
 
-            $layout_id = !empty($wp_properties['configuration']['layouts']['templates'])
-            && !empty($wp_properties['configuration']['layouts']['templates']['search_results'])
-                ?  $wp_properties['configuration']['layouts']['templates']['search_results'] : 'false';
+            $layout_id = !empty(get_theme_mod('layouts_property_overview_choice'))
+              ? get_theme_mod('layouts_property_overview_choice') : 'false';
 
-            if ( $layout_id != 'false' && !empty($available_layouts['search-results']) && !empty( $available_layouts['search-results'][$layout_id] ) ) {
+            if ($layout_id != 'false') {
 
-              if ( !empty( $available_layouts['search-results'][$layout_id]->layout) ) {
-
-                try {
-                  $layout = json_decode( base64_decode($available_layouts['search-results'][$layout_id]->layout), true );
-                } catch ( \Exception $e ) {
-                  echo $e->getMessage();
-                }
-
-                $template_file = !empty($wp_properties['configuration']['layouts']['files'])
-                && !empty($wp_properties['configuration']['layouts']['files']['search_results'])
-                    ?  $wp_properties['configuration']['layouts']['files']['search_results'] : 'index.php';
-
-                return array(
-                  'templates' => array( $template_file, 'page.php', 'single.php', 'index.php' ),
-                  'layout_meta' => $layout
-                );
-
+              try {
+                $layout = json_decode(base64_decode($layout_id), true);
+              } catch (\Exception $e) {
+                echo $e->getMessage();
               }
 
+              $template_file = !empty(get_theme_mod('layouts_property_overview_select'))
+                ? get_theme_mod('layouts_property_overview_select') : 'index.php';
+
+              return array(
+                'templates' => array($template_file, 'page.php', 'single.php', 'index.php'),
+                'layout_meta' => $layout
+              );
             }
-
           }
-
           return $false;
         });
       }
@@ -132,20 +114,23 @@ namespace UsabilityDynamics\WPP {
       /**
        * CSS
        */
-      public function panels_print_inline_css() {
+      public function panels_print_inline_css()
+      {
         global $wpp_layouts_panels_inline_css;
-        if(!empty($wpp_layouts_panels_inline_css)) {
+        if (!empty($wpp_layouts_panels_inline_css)) {
           $the_css = '';
-          foreach( $wpp_layouts_panels_inline_css as $post_id => $css ) {
-            if( empty($css) ) continue;
+          foreach ($wpp_layouts_panels_inline_css as $post_id => $css) {
+            if (empty($css)) continue;
 
             $the_css .= '/* wpp Layout ' . esc_attr($post_id) . ' */ ';
             $the_css .= $css;
             $wpp_layouts_panels_inline_css[$post_id] = '';
           }
 
-          if( !empty($the_css) ) {
-            ?><style type="text/css" media="all" id="wpp-layouts-panels-grids-<?php echo esc_attr( current_filter() ) ?>"><?php echo $the_css ?></style><?php
+          if (!empty($the_css)) {
+            ?>
+            <style type="text/css" media="all"
+                   id="wpp-layouts-panels-grids-<?php echo esc_attr(current_filter()) ?>"><?php echo $the_css ?></style><?php
           }
         }
       }
@@ -162,7 +147,7 @@ namespace UsabilityDynamics\WPP {
         $render = apply_filters('wpp::layouts::configuration', false);
 
         if ($render && !empty($wp_query->post)) {
-          $wp_query->post->ID = !empty( $render['layout_id'] ) ? $render['layout_id'] : $wp_query->post->ID;
+          $wp_query->post->ID = !empty($render['layout_id']) ? $render['layout_id'] : $wp_query->post->ID;
         }
 
         if (count($wp_query->posts) > 1) {
@@ -217,11 +202,11 @@ namespace UsabilityDynamics\WPP {
 
         $_layout_config = apply_filters('wpp::layouts::layout_override', false, $render, $post);
 
-        if ( !empty( $render['layout_id'] ) ) {
+        if (!empty($render['layout_id'])) {
           return $this->standard_render($render['layout_id'], $_layout_config);
         }
 
-        if ( !empty( $render['layout_meta'] ) ) {
+        if (!empty($render['layout_meta'])) {
           return $this->standard_render($post->ID, $render['layout_meta']);
         }
 
@@ -296,11 +281,11 @@ namespace UsabilityDynamics\WPP {
 
         $panel_layout_classes = apply_filters('wpp::layouts::panels_layout_classes', array(), $post_id, $panels_data);
         $panel_layout_attributes = apply_filters('wpp::layouts::panels_layout_attributes', array(
-            'class' => implode(' ', $panel_layout_classes),
-            'id' => 'pl-' . $post_id
+          'class' => implode(' ', $panel_layout_classes),
+          'id' => 'pl-' . $post_id
         ), $post_id, $panels_data);
 
-        echo apply_filters( 'wpp::layouts::before_container', '<div id="wpp_layout">' );
+        echo apply_filters('wpp::layouts::before_container', '<div id="wpp_layout">');
 
         echo '<div';
         foreach ($panel_layout_attributes as $name => $value) {
@@ -323,8 +308,8 @@ namespace UsabilityDynamics\WPP {
           $grid_id = !empty($panels_data['grids'][$gi]['style']['id']) ? sanitize_html_class($panels_data['grids'][$gi]['style']['id']) : false;
 
           $grid_attributes = apply_filters('wpp::layouts::panels_row_attributes', array(
-              'class' => implode(' ', $grid_classes),
-              'id' => !empty($grid_id) ? $grid_id : 'pg-' . $post_id . '-' . $gi,
+            'class' => implode(' ', $grid_classes),
+            'id' => !empty($grid_id) ? $grid_id : 'pg-' . $post_id . '-' . $gi,
           ), $panels_data['grids'][$gi]);
 
           echo apply_filters('wpp::layouts::panels_before_row', '', $panels_data['grids'][$gi], $grid_attributes);
@@ -360,8 +345,8 @@ namespace UsabilityDynamics\WPP {
             // Themes can add their own styles to cells
             $cell_classes = apply_filters('wpp::layouts::panels_row_cell_classes', $cell_classes, $panels_data);
             $cell_attributes = apply_filters('wpp::layouts::panels_row_cell_attributes', array(
-                'class' => implode(' ', $cell_classes),
-                'id' => 'pgc-' . $post_id . '-' . (!empty($grid_id) ? $grid_id : $gi) . '-' . $ci
+              'class' => implode(' ', $cell_classes),
+              'id' => 'pgc-' . $post_id . '-' . (!empty($grid_id) ? $grid_id : $gi) . '-' . $ci
             ), $panels_data);
 
             echo '<div ';
@@ -391,7 +376,7 @@ namespace UsabilityDynamics\WPP {
 
         echo '</div>';
 
-        echo apply_filters( 'wpp::layouts::after_container', '</div>' );
+        echo apply_filters('wpp::layouts::after_container', '</div>');
 
         $html = ob_get_clean();
 
@@ -403,7 +388,8 @@ namespace UsabilityDynamics\WPP {
        * @param bool $panels_data
        * @return string|void
        */
-      public function panels_generate_css($post_id, $panels_data = false) {
+      public function panels_generate_css($post_id, $panels_data = false)
+      {
         // Exit if we don't have panels data
         if (empty($panels_data)) {
           $panels_data = get_post_meta($post_id, 'panels_data', true);
@@ -437,7 +423,7 @@ namespace UsabilityDynamics\WPP {
 
               // Add the width and ensure we have correct formatting for CSS.
               $css->add_cell_css($post_id, $grid_id, $i, '', array(
-                  'width' => str_replace(',', '.', $width)
+                'width' => str_replace(',', '.', $width)
               ));
             }
           }
@@ -446,7 +432,7 @@ namespace UsabilityDynamics\WPP {
           if ($gi != count($panels_data['grids']) - 1 || !empty($grid['style']['bottom_margin']) || !empty($panels_margin_bottom_last_row)) {
             // Filter the bottom margin for this row with the arguments
             $css->add_row_css($post_id, $grid_id, '', array(
-                'margin-bottom' => apply_filters('siteorigin_panels_css_row_margin_bottom', $panels_margin_bottom . 'px', $grid, $gi, $panels_data, $post_id)
+              'margin-bottom' => apply_filters('siteorigin_panels_css_row_margin_bottom', $panels_margin_bottom . 'px', $grid, $gi, $panels_data, $post_id)
             ));
           }
 
@@ -455,34 +441,34 @@ namespace UsabilityDynamics\WPP {
           if ($cell_count > 1) {
             $css->add_cell_css($post_id, $grid_id, false, '', array(
               // Float right for RTL
-                'float' => $collapse_order == 'left-top' ? 'left' : 'right'
+              'float' => $collapse_order == 'left-top' ? 'left' : 'right'
             ));
           } else {
             $css->add_cell_css($post_id, $grid_id, false, '', array(
               // Float right for RTL
-                'float' => 'none'
+              'float' => 'none'
             ));
           }
 
-          if ( $responsive ) {
+          if ($responsive) {
 
             if ($tablet_layout && $cell_count >= 3 && $panels_tablet_width > $panels_mobile_width) {
               // Tablet Responsive
               $css->add_cell_css($post_id, $grid_id, false, '', array(
-                  'width' => '50%'
+                'width' => '50%'
               ), $panels_tablet_width);
             }
 
             // Mobile Responsive
             $css->add_cell_css($post_id, $grid_id, false, '', array(
-                'float' => 'none',
-                'width' => 'auto'
+              'float' => 'none',
+              'width' => 'auto'
             ), $panels_mobile_width);
 
             for ($i = 0; $i < $cell_count; $i++) {
               if (($collapse_order == 'left-top' && $i != $cell_count - 1) || ($collapse_order == 'right-top' && $i !== 0)) {
                 $css->add_cell_css($post_id, $grid_id, $i, '', array(
-                    'margin-bottom' => $panels_margin_bottom . 'px',
+                  'margin-bottom' => $panels_margin_bottom . 'px',
                 ), $panels_mobile_width);
               }
             }
@@ -491,31 +477,31 @@ namespace UsabilityDynamics\WPP {
 
         // Add the bottom margins
         $css->add_cell_css($post_id, false, false, '.so-panel', array(
-            'margin-bottom' => apply_filters('siteorigin_panels_css_cell_margin_bottom', $panels_margin_bottom . 'px', $grid, $gi, $panels_data, $post_id)
+          'margin-bottom' => apply_filters('siteorigin_panels_css_cell_margin_bottom', $panels_margin_bottom . 'px', $grid, $gi, $panels_data, $post_id)
         ));
         $css->add_cell_css($post_id, false, false, '.so-panel:last-child', array(
-            'margin-bottom' => apply_filters('siteorigin_panels_css_cell_last_margin_bottom', '0px', $grid, $gi, $panels_data, $post_id)
+          'margin-bottom' => apply_filters('siteorigin_panels_css_cell_last_margin_bottom', '0px', $grid, $gi, $panels_data, $post_id)
         ));
 
-        if ( $responsive ) {
+        if ($responsive) {
           // Add CSS to prevent overflow on mobile resolution.
           $css->add_row_css($post_id, false, '', array(
-              'margin-left' => 0,
-              'margin-right' => 0,
+            'margin-left' => 0,
+            'margin-right' => 0,
           ), $panels_mobile_width);
 
           $css->add_cell_css($post_id, false, false, '', array(
-              'padding' => 0,
+            'padding' => 0,
           ), $panels_mobile_width);
 
           // Hide empty cells on mobile
           $css->add_row_css($post_id, false, '.panel-grid-cell-empty', array(
-              'display' => 'none',
+            'display' => 'none',
           ), $panels_mobile_width);
 
           // Hide empty cells on mobile
           $css->add_row_css($post_id, false, '.panel-grid-cell-mobile-last', array(
-              'margin-bottom' => '0px',
+            'margin-bottom' => '0px',
           ), $panels_mobile_width);
         }
 
@@ -532,12 +518,12 @@ namespace UsabilityDynamics\WPP {
             if (!empty($match[1])) {
               $margin_half = (floatval($match[1]) / 2) . $match[2];
               $css->add_row_css($post_id, $grid_id, '', array(
-                  'margin-left' => '-' . $margin_half,
-                  'margin-right' => '-' . $margin_half,
+                'margin-left' => '-' . $margin_half,
+                'margin-right' => '-' . $margin_half,
               ));
               $css->add_cell_css($post_id, $grid_id, false, '', array(
-                  'padding-left' => $margin_half,
-                  'padding-right' => $margin_half,
+                'padding-left' => $margin_half,
+                'padding-right' => $margin_half,
               ));
 
             }
@@ -548,7 +534,7 @@ namespace UsabilityDynamics\WPP {
           if (!empty($widget['panels_info']['style']['link_color'])) {
             $selector = '#panel-' . $post_id . '-' . $widget['panels_info']['grid'] . '-' . $widget['panels_info']['cell'] . '-' . $widget['panels_info']['cell_index'] . ' a';
             $css->add_css($selector, array(
-                'color' => $widget['panels_info']['style']['link_color']
+              'color' => $widget['panels_info']['style']['link_color']
             ));
           }
         }
@@ -600,11 +586,11 @@ namespace UsabilityDynamics\WPP {
         $after_title = '</h3>';
 
         $args = array(
-            'before_widget' => '<div class="' . esc_attr(implode(' ', $classes)) . '" id="' . $id . '" data-index="' . $widget_info['widget_index'] . '">',
-            'after_widget' => '</div>',
-            'before_title' => $before_title,
-            'after_title' => $after_title,
-            'widget_id' => 'widget-' . $grid . '-' . $cell . '-' . $panel
+          'before_widget' => '<div class="' . esc_attr(implode(' ', $classes)) . '" id="' . $id . '" data-index="' . $widget_info['widget_index'] . '">',
+          'after_widget' => '</div>',
+          'before_title' => $before_title,
+          'after_title' => $after_title,
+          'widget_id' => 'widget-' . $grid . '-' . $cell . '-' . $panel
         );
 
         $args = apply_filters('wpp::layouts::panels_widget_args', $args);
@@ -669,7 +655,8 @@ namespace UsabilityDynamics\WPP {
   }
 
   if (!class_exists('UsabilityDynamics\WPP\Panels_Css_Builder')) {
-    class Panels_Css_Builder {
+    class Panels_Css_Builder
+    {
 
       private $css;
 

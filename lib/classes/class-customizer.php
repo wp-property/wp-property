@@ -29,28 +29,64 @@ namespace UsabilityDynamics\WPP {
 
       public function wpp_customize_configuration($false)
       {
-        $selected_items = json_decode(stripslashes($_POST['customized']));
-        if (isset($selected_items->layouts_property_single_choice)) {
-          $layout_id = $selected_items->layouts_property_single_choice;
-        } else {
-          $layout_id = '';
-        }
-        if (isset($selected_items->layouts_property_single_select)) {
-          $template_file = $selected_items->layouts_property_single_select;
-        } else {
-          $template_file = '';
-        }
-        if (is_singular('property')) {
-          if (!empty($layout_id)) {
-            $layout = json_decode(base64_decode($layout_id), true);
-          } else {
-            $layout = '';
+        if (!empty($_POST)) {
+          try {
+            $selected_items = json_decode(stripslashes($_POST['customized']));
+          } catch (\Exception $e) {
+            echo $e->getMessage();
           }
-          return array(
-            'templates' => array($template_file, 'page.php', 'single.php', 'index.php'),
-            'layout_meta' => $layout
-          );
+
+          /** If is single property page */
+          if (is_singular('property')) {
+            if (isset($selected_items->layouts_property_single_choice)) {
+              $layout_id = $selected_items->layouts_property_single_choice;
+            } else {
+              $layout_id = 'false';
+            }
+            if (isset($selected_items->layouts_property_single_select)) {
+              $template_file = $selected_items->layouts_property_single_select;
+            } else {
+              $template_file = 'index.php';
+            }
+            if (!empty($layout_id) && $layout_id !== 'false') {
+              try {
+                $layout = json_decode(base64_decode($layout_id), true);
+              } catch (\Exception $e) {
+                echo $e->getMessage();
+              }
+              return array(
+                'templates' => array($template_file, 'page.php', 'single.php', 'index.php'),
+                'layout_meta' => $layout
+              );
+            }
+          }
+
+          /** If is property overview page */
+          if (is_tax() && in_array('property', get_taxonomy(get_queried_object()->taxonomy)->object_type)) {
+            if (isset($selected_items->layouts_property_overview_choice)) {
+              $layout_id = $selected_items->layouts_property_overview_choice;
+            } else {
+              $layout_id = 'false';
+            }
+            if (isset($selected_items->layouts_property_overview_select)) {
+              $template_file = $selected_items->layouts_property_overview_select;
+            } else {
+              $template_file = 'index.php';
+            }
+            if (!empty($layout_id) && $layout_id !== 'false') {
+              try {
+                $layout = json_decode(base64_decode($layout_id), true);
+              } catch (\Exception $e) {
+                echo $e->getMessage();
+              }
+              return array(
+                'templates' => array($template_file, 'page.php', 'single.php', 'index.php'),
+                'layout_meta' => $layout
+              );
+            }
+          }
         }
+        return $false;
       }
 
       public function wp_property_customizer_controls()
