@@ -11,12 +11,14 @@ namespace UsabilityDynamics\WPP {
 
   if (!class_exists('UsabilityDynamics\WPP\Admin')) {
 
-    class Admin extends Scaffold {
+    class Admin extends Scaffold
+    {
 
       /**
        * Adds all required hooks
        */
-      public function __construct() {
+      public function __construct()
+      {
 
         parent::__construct();
 
@@ -26,16 +28,16 @@ namespace UsabilityDynamics\WPP {
         new Admin_Overview();
 
         //** Load admin header scripts */
-        add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+        add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts'));
 
         /** Admin interface init */
-        add_action( "admin_init", array( $this, "admin_init" ) );
+        add_action("admin_init", array($this, "admin_init"));
 
         // @todo Move back to Settings -> Properties as it was years ago.
-        add_action( "admin_menu", array( $this, 'admin_menu' ), 150 );
+        add_action("admin_menu", array($this, 'admin_menu'), 150);
 
-	      // @todo Make directory names dynamic, since it may change.
-	      add_action( "in_plugin_update_message-wp-property/wp-property.php", array( $this, 'product_update_message' ), 20, 2 );
+        // @todo Make directory names dynamic, since it may change.
+        add_action("in_plugin_update_message-wp-property/wp-property.php", array($this, 'product_update_message'), 20, 2);
 
       }
 
@@ -47,57 +49,58 @@ namespace UsabilityDynamics\WPP {
        * @since 0.53
        *
        */
-      public function enqueue_scripts() {
+      public function enqueue_scripts()
+      {
         global $current_screen;
 
-        wp_localize_script( 'wpp-localization', 'wpp', array( 'instance' => $this->instance->core->get_instance() ) );
+        wp_localize_script('wpp-localization', 'wpp', array('instance' => $this->instance->core->get_instance()));
 
-        switch( $current_screen->id ) {
+        switch ($current_screen->id) {
 
           //** Edit Property page */
           case 'property':
             global $post;
 
             $post_type_object = get_post_type_object('property');
-            if( current_user_can( $post_type_object->cap->create_posts ) ) {
-              wp_enqueue_script( 'wpp-clone-property', $this->instance->path( 'static/scripts/wpp.admin.clone.js', 'url' ), array( 'jquery', 'wp-property-global' ), $this->instance->get('version'), true );
+            if (current_user_can($post_type_object->cap->create_posts)) {
+              wp_enqueue_script('wpp-clone-property', $this->instance->path('static/scripts/wpp.admin.clone.js', 'url'), array('jquery', 'wp-property-global'), $this->instance->get('version'), true);
             }
 
-            wp_enqueue_script( 'wp-property-global' );
-            wp_enqueue_script( 'wp-property-backend-editor' );
+            wp_enqueue_script('wp-property-global');
+            wp_enqueue_script('wp-property-backend-editor');
             //** Enabldes fancybox js, css and loads overview scripts */
-            wp_enqueue_script( 'post' );
-            wp_enqueue_script( 'postbox' );
-            wp_enqueue_script( 'wpp-jquery-fancybox' );
-            wp_enqueue_style( 'wpp-jquery-fancybox-css' );
-            wp_enqueue_script( 'wp-property-backend-global' );
-            wp_enqueue_script( 'jquery-ui-core' );
-            wp_enqueue_script( 'jquery-ui-sortable' );
-            wp_enqueue_script( 'jquery-ui-tabs' );
-            wp_enqueue_style( 'jquery-ui' );
-            wp_enqueue_script( 'wp-property-admin-widgets' );
+            wp_enqueue_script('post');
+            wp_enqueue_script('postbox');
+            wp_enqueue_script('wpp-jquery-fancybox');
+            wp_enqueue_style('wpp-jquery-fancybox-css');
+            wp_enqueue_script('wp-property-backend-global');
+            wp_enqueue_script('jquery-ui-core');
+            wp_enqueue_script('jquery-ui-sortable');
+            wp_enqueue_script('jquery-ui-tabs');
+            wp_enqueue_style('jquery-ui');
+            wp_enqueue_script('wp-property-admin-widgets');
             break;
 
           //** Settings Page */
           case 'property_page_property_settings':
-            wp_enqueue_script( 'wp-property-backend-global' );
-            wp_enqueue_script( 'wp-property-global' );
-            wp_enqueue_script( 'jquery' );
-            wp_enqueue_script( 'jquery-ui-core' );
-            wp_enqueue_script( 'jquery-ui-sortable' );
-            wp_enqueue_script( 'wpp-jquery-colorpicker' );
-            wp_enqueue_script( 'select2' );
-            wp_enqueue_script( 'jquery-ui-tabs' );
-            wp_enqueue_script( 'jquery-ui-tooltip' );
-            wp_enqueue_script( 'jquery-cookie' );
-            wp_enqueue_script( 'jquery-ui-dialog' );
-            wp_enqueue_script( 'wp-property-admin-settings' );
+            wp_enqueue_script('wp-property-backend-global');
+            wp_enqueue_script('wp-property-global');
+            wp_enqueue_script('jquery');
+            wp_enqueue_script('jquery-ui-core');
+            wp_enqueue_script('jquery-ui-sortable');
+            wp_enqueue_script('wpp-jquery-colorpicker');
+            wp_enqueue_script('select2');
+            wp_enqueue_script('jquery-ui-tabs');
+            wp_enqueue_script('jquery-ui-tooltip');
+            wp_enqueue_script('jquery-cookie');
+            wp_enqueue_script('jquery-ui-dialog');
+            wp_enqueue_script('wp-property-admin-settings');
 
-            wp_enqueue_script( 'custom-jqueryui-script',  '//code.jquery.com/ui/1.12.1/jquery-ui.js', array( 'jquery' ) );
-            wp_enqueue_style( 'jquery-ui' );
-            wp_enqueue_style( 'wpp-jquery-ui-dialog' );
-            wp_enqueue_style( 'wpp-jquery-colorpicker-css' );
-            wp_enqueue_style( 'select2' );
+            wp_enqueue_script('custom-jqueryui-script', '//code.jquery.com/ui/1.12.1/jquery-ui.js', array('jquery'));
+            wp_enqueue_style('jquery-ui');
+            wp_enqueue_style('wpp-jquery-ui-dialog');
+            wp_enqueue_style('wpp-jquery-colorpicker-css');
+            wp_enqueue_style('select2');
             // This will enqueue the Media Uploader script
             wp_enqueue_media();
             break;
@@ -106,31 +109,31 @@ namespace UsabilityDynamics\WPP {
           case 'widgets':
           case 'customize':
           case 'wpp_layout':
-            wp_enqueue_script( 'wp-property-backend-global' );
-            wp_enqueue_script( 'wp-property-global' );
-            wp_enqueue_script( 'jquery-ui-core' );
-            wp_enqueue_script( 'jquery-ui-sortable' );
-            wp_enqueue_script( 'jquery-ui-tabs' );
-            wp_enqueue_style( 'jquery-ui' );
-            wp_enqueue_script( 'wp-property-admin-widgets' );
+            wp_enqueue_script('wp-property-backend-global');
+            wp_enqueue_script('wp-property-global');
+            wp_enqueue_script('jquery-ui-core');
+            wp_enqueue_script('jquery-ui-sortable');
+            wp_enqueue_script('jquery-ui-tabs');
+            wp_enqueue_style('jquery-ui');
+            wp_enqueue_script('wp-property-admin-widgets');
             break;
 
         }
 
         //** Automatically insert styles sheet if one exists with $current_screen->ID name */
-        if( file_exists( $this->instance->path( "static/styles/{$current_screen->id}.css", 'dir' ) ) ) {
-          wp_enqueue_style( $current_screen->id . '-style', $this->instance->path( "static/styles/{$current_screen->id}.css", 'url' ), array(), WPP_Version, 'screen' );
+        if (file_exists($this->instance->path("static/styles/{$current_screen->id}.css", 'dir'))) {
+          wp_enqueue_style($current_screen->id . '-style', $this->instance->path("static/styles/{$current_screen->id}.css", 'url'), array(), WPP_Version, 'screen');
         }
 
         //** Automatically insert JS sheet if one exists with $current_screen->ID name */
-        if( file_exists( $this->instance->path( "static/scripts/{$current_screen->id}.js", 'dir' ) ) ) {
-          wp_enqueue_script( $current_screen->id . '-js', $this->instance->path( "static/scripts/{$current_screen->id}.js", 'url' ), array( 'jquery' ), WPP_Version, 'wp-property-backend-global' );
+        if (file_exists($this->instance->path("static/scripts/{$current_screen->id}.js", 'dir'))) {
+          wp_enqueue_script($current_screen->id . '-js', $this->instance->path("static/scripts/{$current_screen->id}.js", 'url'), array('jquery'), WPP_Version, 'wp-property-backend-global');
         }
 
         //** Enqueue CSS styles on all pages */
-        if( file_exists( $this->instance->path( 'static/styles/wpp.admin.css', 'dir' ) ) ) {
-          wp_register_style( 'wpp-admin-styles', $this->instance->path( 'static/styles/wpp.admin.css', 'url' ), array(), WPP_Version );
-          wp_enqueue_style( 'wpp-admin-styles' );
+        if (file_exists($this->instance->path('static/styles/wpp.admin.css', 'dir'))) {
+          wp_register_style('wpp-admin-styles', $this->instance->path('static/styles/wpp.admin.css', 'url'), array(), WPP_Version);
+          wp_enqueue_style('wpp-admin-styles');
         }
 
       }
@@ -143,40 +146,41 @@ namespace UsabilityDynamics\WPP {
        * @since 1.10
        *
        */
-      public function admin_init() {
+      public function admin_init()
+      {
         global $wp_properties;
 
         // Add metaboxes
-        do_action( 'wpp_metaboxes' );
+        do_action('wpp_metaboxes');
 
         //** Download backup of configuration */
-        if(
-          isset( $_REQUEST[ 'page' ] )
-          && $_REQUEST[ 'page' ] == 'property_settings'
-          && isset( $_REQUEST[ 'wpp_action' ] )
-          && $_REQUEST[ 'wpp_action' ] == 'download-wpp-backup'
-          && isset( $_REQUEST[ '_wpnonce' ] )
-          && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'download-wpp-backup' )
+        if (
+          isset($_REQUEST['page'])
+          && $_REQUEST['page'] == 'property_settings'
+          && isset($_REQUEST['wpp_action'])
+          && $_REQUEST['wpp_action'] == 'download-wpp-backup'
+          && isset($_REQUEST['_wpnonce'])
+          && wp_verify_nonce($_REQUEST['_wpnonce'], 'download-wpp-backup')
         ) {
-          $sitename = sanitize_key( get_bloginfo( 'name' ) );
-          $filename = $sitename . '-wp-property.' . date( 'Y-m-d' ) . '.json';
+          $sitename = sanitize_key(get_bloginfo('name'));
+          $filename = $sitename . '-wp-property.' . date('Y-m-d') . '.json';
 
-          header( "Cache-Control: public" );
-          header( "Content-Description: File Transfer" );
-          header( "Content-Disposition: attachment; filename=$filename" );
-          header( "Content-Transfer-Encoding: binary" );
-          header( 'Content-Type: text/plain; charset=' . get_option( 'blog_charset' ), true );
+          header("Cache-Control: public");
+          header("Content-Description: File Transfer");
+          header("Content-Disposition: attachment; filename=$filename");
+          header("Content-Transfer-Encoding: binary");
+          header('Content-Type: text/plain; charset=' . get_option('blog_charset'), true);
 
           //if backup of data from setup-assistant
           // get backed-up data for download
-          if(isset( $_REQUEST[ 'timestamp' ] )){
+          if (isset($_REQUEST['timestamp'])) {
             $data = get_option('wpp_property_backups');
-            $wp_properties = $data[ $_REQUEST[ 'timestamp' ]];
+            $wp_properties = $data[$_REQUEST['timestamp']];
           }
           // May be extend backup data by add-ons options.
-          $data = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $wp_properties ) );
+          $data = apply_filters('wpp::backup::data', array('wpp_settings' => $wp_properties));
 
-          echo json_encode( $data, JSON_PRETTY_PRINT );
+          echo json_encode($data, JSON_PRETTY_PRINT);
 
           die();
         }
@@ -185,12 +189,13 @@ namespace UsabilityDynamics\WPP {
       /**
        *
        */
-      public function admin_menu() {
+      public function admin_menu()
+      {
 
-        $settings_page = add_submenu_page( 'edit.php?post_type=property', __( 'Settings', ud_get_wp_property()->domain ), __( 'Settings', ud_get_wp_property()->domain ), 'manage_wpp_settings', 'property_settings', function () {
+        $settings_page = add_submenu_page('edit.php?post_type=property', __('Settings', ud_get_wp_property()->domain), __('Settings', ud_get_wp_property()->domain), 'manage_wpp_settings', 'property_settings', function () {
           global $wp_properties;
-          include ud_get_wp_property()->path( "static/views/admin/settings.php", 'dir' );
-        } );
+          include ud_get_wp_property()->path("static/views/admin/settings.php", 'dir');
+        });
 
       }
 
@@ -201,21 +206,28 @@ namespace UsabilityDynamics\WPP {
        * @param $plugin_data
        * @param $response
        */
-      public function product_update_message( $plugin_data, $response ) {
+      public function product_update_message($plugin_data, $response)
+      {
         global $wp_properties;
 
         // pre-release updates not enabled or no update.
-        if ( ! isset( $wp_properties[ 'configuration' ][ 'pre_release_update' ] ) || $wp_properties[ 'configuration' ][ 'pre_release_update' ] !== 'true' || ! $plugin_data[ 'update' ] ) {
+        if (!isset($wp_properties['configuration']['pre_release_update']) || $wp_properties['configuration']['pre_release_update'] !== 'true' || !$plugin_data['update']) {
           return;
         }
 
-        if ( isset( $response ) && isset( $response->message ) ) {
+        if (isset($response) && isset($response->message)) {
           echo ' <span class="wpp-update-message">' . $response->message . '</span>';
         } else {
-          echo ' <span class="wpp-update-message">' . __( 'You are seeing this because you subscribed to latest updates.', ud_get_wp_property()->domain ) . '</span>';
+          echo ' <span class="wpp-update-message">' . __('You are seeing this because you subscribed to latest updates.', ud_get_wp_property()->domain) . '</span>';
         }
 
       }
+
+      public function wp_property_sanitize_callback($input)
+      {
+        return $input;
+      }
+
 
     }
 
