@@ -119,12 +119,14 @@ namespace UsabilityDynamics\WPP {
         $wp_customize->add_panel('layouts_area_panel', array(
           'priority' => 10,
           'capability' => 'edit_theme_options',
-          'title' => __('Layouts section', ud_get_wp_property()->domain)
+          'title' => __('Layouts section', ud_get_wp_property()->domain),
+          'description' => __('Here you can change page layout in live preview.', ud_get_wp_property()->domain),
         ));
 
         // Property overview settings
         $wp_customize->add_section('layouts_property_overview_settings', array(
-          'title' => __('Property overview settings', ud_get_wp_property()->domain),
+          'title' => __('Property overview page settings', ud_get_wp_property()->domain),
+          'description' => __('Changing layout for property overview page in live preview.', ud_get_wp_property()->domain),
           'panel' => 'layouts_area_panel',
           'priority' => 1,
         ));
@@ -160,7 +162,8 @@ namespace UsabilityDynamics\WPP {
 
         // Single property settings
         $wp_customize->add_section('layouts_property_single_settings', array(
-          'title' => __('Single property settings', ud_get_wp_property()->domain),
+          'title' => __('Single property page settings', ud_get_wp_property()->domain),
+          'description' => __('Changing layout for single property page in live preview.', ud_get_wp_property()->domain),
           'panel' => 'layouts_area_panel',
           'priority' => 2,
         ));
