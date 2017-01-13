@@ -22,8 +22,6 @@ namespace UsabilityDynamics\WPP {
         add_action('customize_controls_enqueue_scripts', array($this, 'wp_property_customizer_controls'));
         add_action('customize_preview_init', array($this, 'wp_property_customizer_live_preview'));
 
-//        add_action('customize_save_response', array($this, 'wpp_action_customize_save'));
-
         add_filter('wpp::layouts::configuration', array($this, 'wpp_customize_configuration'), 11);
       }
 
@@ -35,10 +33,6 @@ namespace UsabilityDynamics\WPP {
           } catch (\Exception $e) {
             echo $e->getMessage();
           }
-//          echo '<pre>';
-//          print_r($selected_items);
-//          echo '</pre>';
-
           /** If is single property page */
           if (is_singular('property')) {
             if (isset($selected_items->layouts_property_single_choice)) {
@@ -122,10 +116,6 @@ namespace UsabilityDynamics\WPP {
         $overview_layouts = $layouts['single-property-term'];
         $single_layouts = $layouts['single-property'];
 
-//        echo '<pre>';
-//        print_r($layouts);
-//        echo '</pre>';
-
         $wp_customize->add_panel('layouts_area_panel', array(
           'priority' => 10,
           'capability' => 'edit_theme_options',
@@ -156,7 +146,6 @@ namespace UsabilityDynamics\WPP {
           'choices' => $overview_radio_choices
         ));
 
-        // Property overview settings
         $wp_customize->add_setting('layouts_property_overview_select', array(
           'default' => false,
           'transport' => 'refresh'
@@ -193,7 +182,6 @@ namespace UsabilityDynamics\WPP {
           'choices' => $single_radio_choices
         ));
 
-        // Single property settings
         $wp_customize->add_setting('layouts_property_single_select', array(
           'default' => false,
           'transport' => 'refresh'
