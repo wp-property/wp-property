@@ -147,7 +147,7 @@ namespace UsabilityDynamics\WPP {
           'transport' => 'refresh'
         ));
         $wp_customize->add_control(new Layouts_Custom_Control($wp_customize, 'layouts_property_overview_choice', array(
-          'label' => __('Layout Picker Setting', ud_get_wp_property()->domain),
+          'label' => __('Select Layout for Property overview page', ud_get_wp_property()->domain),
           'section' => 'layouts_property_overview_settings',
           'type' => 'checkbox',
           'choices' => $overview_radio_choices
