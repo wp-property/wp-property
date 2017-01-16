@@ -132,15 +132,15 @@ namespace UsabilityDynamics\WPP {
         ));
 
         $overview_radio_choices = array(
-          'none' => '<img style="display: block;" src="' . WPP_Path . 'static/images/no-layout.jpg" alt="no layout" />' . __('No Layout', ud_get_wp_property()->domain)
+          'none' => '<img style="display: block; width: 150px; height: 150px;" src="' . WPP_URL . 'images/no-layout.jpg" alt="no layout" />' . __('No Layout', ud_get_wp_property()->domain)
         );
         foreach ($overview_layouts as $layout) {
           if (!empty($layout->screenshot)) {
             $layout_preview = $layout->screenshot;
           } else {
-            $layout_preview = WPP_Path . 'static/images/no-preview.jpg';
+            $layout_preview = WPP_URL . 'images/no-preview.jpg';
           }
-          $overview_radio_choices[$layout->layout] = '<img style="display: block;" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
+          $overview_radio_choices[$layout->layout] = '<img style="display: block; width: 150px; height: 150px;" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
         }
         $wp_customize->add_setting('layouts_property_overview_choice', array(
           'default' => 'none',
@@ -174,15 +174,15 @@ namespace UsabilityDynamics\WPP {
         ));
 
         $single_radio_choices = array(
-          'none' => '<img style="display: block;" src="' . WPP_Path . 'static/images/no-layout.jpg" alt="no layout" />' . __('No Layout', ud_get_wp_property()->domain)
+          'none' => '<img style="display: block; width: 150px; height: 150px;" src="' . WPP_URL . 'images/no-layout.jpg" alt="no layout" />' . __('No Layout', ud_get_wp_property()->domain)
         );
         foreach ($single_layouts as $layout) {
           if (!empty($layout->screenshot)) {
             $layout_preview = $layout->screenshot;
           } else {
-            $layout_preview = WPP_URL . 'static/images/no-preview.jpg';
+            $layout_preview = WPP_URL . 'images/no-preview.jpg';
           }
-          $single_radio_choices[$layout->layout] = '<img style="display: block;" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
+          $single_radio_choices[$layout->layout] = '<img style="display: block; width: 150px; height: 150px;" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
         }
         $wp_customize->add_setting('layouts_property_single_choice', array(
           'default' => 'none',
