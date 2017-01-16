@@ -83,6 +83,7 @@ namespace UsabilityDynamics\WPP {
 
           //** Settings Page */
           case 'property_page_property_settings':
+<<<<<<< HEAD
             wp_enqueue_script('wp-property-backend-global');
             wp_enqueue_script('wp-property-global');
             wp_enqueue_script('jquery');
@@ -101,6 +102,26 @@ namespace UsabilityDynamics\WPP {
             wp_enqueue_style('wpp-jquery-ui-dialog');
             wp_enqueue_style('wpp-jquery-colorpicker-css');
             wp_enqueue_style('select2');
+=======
+            wp_enqueue_script( 'wp-property-backend-global' );
+            wp_enqueue_script( 'wp-property-global' );
+            wp_enqueue_script( 'jquery' );
+            wp_enqueue_script( 'jquery-ui-core' );
+            wp_enqueue_script( 'jquery-ui-sortable' );
+            wp_enqueue_script( 'wpp-jquery-colorpicker' );
+            wp_enqueue_script( 'wpp-select2' );
+            wp_enqueue_script( 'jquery-ui-tabs' );
+            wp_enqueue_script( 'jquery-ui-tooltip' );
+            wp_enqueue_script( 'jquery-cookie' );
+            wp_enqueue_script( 'jquery-ui-dialog' );
+            wp_enqueue_script( 'wp-property-admin-settings' );
+
+            wp_enqueue_script( 'custom-jqueryui-script',  '//code.jquery.com/ui/1.12.1/jquery-ui.js', array( 'jquery' ) );
+            wp_enqueue_style( 'jquery-ui' );
+            wp_enqueue_style( 'wpp-jquery-ui-dialog' );
+            wp_enqueue_style( 'wpp-jquery-colorpicker-css' );
+            wp_enqueue_style( 'select2' );
+>>>>>>> origin/develop-den
             // This will enqueue the Media Uploader script
             wp_enqueue_media();
             break;

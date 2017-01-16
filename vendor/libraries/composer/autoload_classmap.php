@@ -196,6 +196,7 @@ return array(
     'UsabilityDynamics\\WPP\\Export' => $baseDir . '/lib/classes/class-export.php',
     'UsabilityDynamics\\WPP\\Layouts' => $baseDir . '/lib/classes/class-layouts.php',
     'UsabilityDynamics\\WPP\\Layouts_API_Client' => $baseDir . '/lib/classes/class-layouts-api-client.php',
+    'UsabilityDynamics\\WPP\\Layouts_Custom_Control' => $baseDir . '/lib/classes/class-customizer.php',
     'UsabilityDynamics\\WPP\\Layouts_Settings' => $baseDir . '/lib/classes/class-layouts-settings.php',
     'UsabilityDynamics\\WPP\\List_Table' => $baseDir . '/lib/classes/class-list-table.php',
     'UsabilityDynamics\\WPP\\Meta_Box' => $baseDir . '/lib/classes/class-meta-box.php',

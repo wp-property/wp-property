@@ -132,21 +132,26 @@ namespace UsabilityDynamics\WPP {
         ));
 
         $overview_radio_choices = array(
-          'none' => __('No Layout', ud_get_wp_property()->domain)
+          'none' => '<img style="display: block;" src="' . WPP_Path . 'static/images/" alt="no layout" />' . __('No Layout', ud_get_wp_property()->domain)
         );
         foreach ($overview_layouts as $layout) {
-          $overview_radio_choices[$layout->layout] = $layout->title;
+          if (!empty($layout->screenshot)) {
+            $layout_preview = $layout->screenshot;
+          } else {
+            $layout_preview = WPP_Path . 'static/images/';
+          }
+          $overview_radio_choices[$layout->layout] = '<img style="display: block;" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
         }
         $wp_customize->add_setting('layouts_property_overview_choice', array(
           'default' => 'none',
           'transport' => 'refresh'
         ));
-        $wp_customize->add_control('layouts_property_overview_choice', array(
-          'label' => __('Select Layout for Property Overview page', ud_get_wp_property()->domain),
+        $wp_customize->add_control(new Layouts_Custom_Control($wp_customize, 'layouts_property_overview_choice', array(
+          'label' => __('Layout Picker Setting', ud_get_wp_property()->domain),
           'section' => 'layouts_property_overview_settings',
-          'type' => 'radio',
+          'type' => 'checkbox',
           'choices' => $overview_radio_choices
-        ));
+        )));
 
         $wp_customize->add_setting('layouts_property_overview_select', array(
           'default' => false,
@@ -169,21 +174,26 @@ namespace UsabilityDynamics\WPP {
         ));
 
         $single_radio_choices = array(
-          'none' => __('No Layout', ud_get_wp_property()->domain)
+          'none' => '<img style="display: block;" src="' . WPP_Path . 'static/images/" alt="no layout" />' . __('No Layout', ud_get_wp_property()->domain)
         );
         foreach ($single_layouts as $layout) {
-          $single_radio_choices[$layout->layout] = $layout->title;
+          if (!empty($layout->screenshot)) {
+            $layout_preview = $layout->screenshot;
+          } else {
+            $layout_preview = WPP_Path . 'static/images/';
+          }
+          $single_radio_choices[$layout->layout] = '<img style="display: block;" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
         }
         $wp_customize->add_setting('layouts_property_single_choice', array(
           'default' => 'none',
           'transport' => 'refresh'
         ));
-        $wp_customize->add_control('layouts_property_single_choice', array(
+        $wp_customize->add_control(new Layouts_Custom_Control($wp_customize, 'layouts_property_single_choice', array(
           'label' => __('Select Layout for Single Property page', ud_get_wp_property()->domain),
           'section' => 'layouts_property_single_settings',
           'type' => 'radio',
           'choices' => $single_radio_choices
-        ));
+        )));
 
         $wp_customize->add_setting('layouts_property_single_select', array(
           'default' => false,
@@ -198,4 +208,42 @@ namespace UsabilityDynamics\WPP {
       }
     }
   }
+
+  if (class_exists('WP_Customize_Control')) {
+    /**
+     * Class to create a custom layout control
+     */
+    class Layouts_Custom_Control extends \WP_Customize_Control
+    {
+      /**
+       * Render the content on the theme customizer page
+       */
+      public function render_content()
+      {
+        if (empty($this->choices))
+          return;
+
+        $name = '_customize-radio-' . $this->id;
+
+        if (!empty($this->label)) : ?>
+          <span class="customize-control-title"><?php echo esc_html($this->label); ?></span>
+        <?php endif;
+        if (!empty($this->description)) : ?>
+          <span class="description customize-control-description"><?php echo $this->description; ?></span>
+        <?php endif;
+
+        foreach ($this->choices as $value => $label) :
+          ?>
+          <label>
+            <?php echo $label; ?><br/>
+            <input style="margin-top: -16px" type="radio" value="<?php echo esc_attr($value); ?>"
+                   name="<?php echo esc_attr($name); ?>" <?php $this->link();
+            checked($this->value(), $value); ?> />
+          </label>
+          <?php
+        endforeach;
+      }
+    }
+  }
 }
+
