@@ -17,17 +17,21 @@ namespace UsabilityDynamics\WPP {
        */
       public function __construct()
       {
-        add_action('customize_register', array($this, 'property_layouts_customizer'));
+        global $wp_properties;
+        if (isset($wp_properties['configuration']) && isset($wp_properties['configuration']['enable_layouts']) && $wp_properties['configuration']['enable_layouts'] == 'false') {
+          add_action('customize_register', array($this, 'property_layouts_customizer'));
 
-        add_action('customize_controls_enqueue_scripts', array($this, 'wp_property_customizer_controls'));
-        add_action('customize_preview_init', array($this, 'wp_property_customizer_live_preview'));
+          add_action('customize_controls_enqueue_scripts', array($this, 'wp_property_customizer_controls'));
+          add_action('customize_preview_init', array($this, 'wp_property_customizer_live_preview'));
 
-        add_filter('wpp::layouts::configuration', array($this, 'wpp_customize_configuration'), 11);
+          add_filter('wpp::layouts::configuration', array($this, 'wpp_customize_configuration'), 11);
+        }
       }
 
       public function wpp_customize_configuration($false)
       {
-        if (!empty($_POST)) {
+        global $wp_properties;
+        if (!empty($_POST) && (isset($wp_properties['configuration']) && isset($wp_properties['configuration']['enable_layouts']) && $wp_properties['configuration']['enable_layouts'] == 'false')) {
           try {
             $selected_items = json_decode(stripslashes($_POST['customized']));
           } catch (\Exception $e) {
@@ -131,9 +135,7 @@ namespace UsabilityDynamics\WPP {
           'priority' => 1,
         ));
 
-        $overview_radio_choices = array(
-          'none' => '<img style="display: block; width: 150px; height: 150px;" src="' . WPP_URL . 'images/no-layout.jpg" alt="no layout" />' . __('No Layout', ud_get_wp_property()->domain)
-        );
+        $overview_radio_choices = array();
         foreach ($overview_layouts as $layout) {
           if (!empty($layout->screenshot)) {
             $layout_preview = $layout->screenshot;
@@ -173,9 +175,7 @@ namespace UsabilityDynamics\WPP {
           'priority' => 2,
         ));
 
-        $single_radio_choices = array(
-          'none' => '<img style="display: block; width: 150px; height: 150px;" src="' . WPP_URL . 'images/no-layout.jpg" alt="no layout" />' . __('No Layout', ud_get_wp_property()->domain)
-        );
+        $single_radio_choices = array();
         foreach ($single_layouts as $layout) {
           if (!empty($layout->screenshot)) {
             $layout_preview = $layout->screenshot;
@@ -215,9 +215,6 @@ namespace UsabilityDynamics\WPP {
      */
     class Layouts_Custom_Control extends \WP_Customize_Control
     {
-      /**
-       * Render the content on the theme customizer page
-       */
       public function render_content()
       {
         if (empty($this->choices))

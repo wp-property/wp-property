@@ -39,7 +39,7 @@ namespace UsabilityDynamics\WPP {
           'currency_symbol' => '$',
           'address_attribute' => 'location',
           'google_maps_localization' => 'en',
-          'enable_layouts' => 'true',
+          'enable_layouts' => 'false',
           'display_address_format' => '[city], [state]'
         );
 
