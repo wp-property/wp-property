@@ -334,7 +334,7 @@ namespace UsabilityDynamics\WPP {
         // If a parent is found and it is not same as the current property (can happen by mistake during imports) - potanin@UD
         if( $_parent_id && $_parent_id !== 0 && $_parent_id !== $post->ID) {
           $_parent_post = get_post($_parent_id);
-          $_response[] = '<div class="wpp-property-parent"><a href="' . get_edit_post_link($_parent) . '">' . $_parent_post->post_title . '</a>' . '</div>';
+          $_response[] = '<div class="wpp-property-parent"><a href="' . get_edit_post_link($_parent_id) . '">' . $_parent_post->post_title . '</a>' . '</div>';
         }
 
         $posts = $wpdb->get_results( "
