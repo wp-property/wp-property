@@ -10,51 +10,51 @@ namespace UsabilityDynamics\WP {
 
     /**
      * UD Plugins/Themes dashboard
-     * 
+     *
      * @author korotkov@ud
      */
     class Dashboard extends Scaffold {
-      
+
       /**
        * Singleton instance
-       * 
-       * @var type 
+       *
+       * @var type
        */
       static $instance = null;
-      
+
       /**
        * Dashboard page slug
-       * 
-       * @var string 
+       *
+       * @var string
        */
 //      public $page_slug = 'ud-splash';
       public $page_slug = 'wpp-setup-page';
       /**
        * Need splash key
-       * 
-       * @var string 
+       *
+       * @var string
        */
       public $need_splash_key = 'ud_need_splash';
-      
+
       /**
        * Transient key
-       * 
-       * @var string 
+       *
+       * @var string
        */
       public $transient_key = 'ud_splash_dashboard';
-      
+
       /**
        * Singleton
-       * 
+       *
        * @return object
        */
       static function get_instance() {
         return self::$instance ? self::$instance : self::$instance = new Dashboard();
       }
-      
+
       /**
        * Maybe redirect to UD Splash Page
-       * 
+       *
        * @author korotkov@ud
        */
       public function maybe_ud_splash_page() {
@@ -67,10 +67,10 @@ namespace UsabilityDynamics\WP {
           exit;
         }
       }
-      
+
       /**
        * Register fake page
-       * 
+       *
        * @return null
        */
       public function add_ud_splash_page() {
@@ -84,19 +84,19 @@ namespace UsabilityDynamics\WP {
 
       /**
        * Render UD dashboard page
-       * 
+       *
        * @author korotkov@ud
        */
       public function wpp_setup_page() {
         //** Try to get information to show */
 //        include WPP_Path . "static/splashes/install.php";
-        
+
         wpp_fs()->_connect_page_render();
       }
 
       /**
        * Render UD dashboard page
-       * 
+       *
        * @author korotkov@ud
        */
       public function ud_splash_page() {
@@ -107,9 +107,9 @@ namespace UsabilityDynamics\WP {
           <div class="wp-badge ud-badge"></div>
           <?php
             //** If user visited this page directly */
-            if ( !$updates ) { 
-              echo '<h2>Keep it up! There are no notices for you in the moment.</h2>'; 
-              
+            if ( !$updates ) {
+              echo '<h2>Keep it up! There are no notices for you in the moment.</h2>';
+
             //** in other case - show corresponding predefined template if it exists*/
             } else {
               foreach( $updates as $key => $page_data ) {
@@ -119,20 +119,20 @@ namespace UsabilityDynamics\WP {
                 }
               }
             }
-            
-            
+
+
           ?>
-          
+
           <div class="return-to-dashboard">
             <a href="<?php echo esc_url( self_admin_url() ); ?>"><?php is_blog_admin() ? _e( 'Go to Dashboard &rarr; Home' ) : _e( 'Go to Dashboard' ); ?></a>
           </div>
-          
+
         </div>
         <?php
         delete_transient( $this->need_splash_key );
       }
-      
+
     }
-    
+
   }
 }
