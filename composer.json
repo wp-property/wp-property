@@ -79,6 +79,15 @@
       "install": "static/splashes/install.php",
       "upgrade": "static/splashes/upgrade.php"
     },
+    "featureFlags": [
+      {
+        "name": "WP Property Layouts",
+        "constant": "WP_PROPERTY_LAYOUTS",
+        "description": "Layouts for WP Property",
+        "since": "2.2.1",
+        "enabled": true
+      }
+    ],
     "schemas": {
       "dependencies" : {
         "modules": {},
