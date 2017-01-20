@@ -86,6 +86,13 @@
         "description": "Layouts for WP Property",
         "since": "2.2.1",
         "enabled": true
+      },
+      {
+        "name": "RETS Client Dashboard Widget",
+        "constant": "RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET",
+        "description": "Dashboard widget for wp-rets-client, shows stats.",
+        "since": "2.2.1",
+        "enabled": true
       }
     ],
     "schemas": {

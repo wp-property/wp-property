@@ -115,12 +115,12 @@ namespace UsabilityDynamics\WPRETSC {
           return false;
         }
 
-        if( !get_site_option( 'ud_site_id' ) || !get_site_option( 'ud_site_secret_token' ) ) {
+        if( !get_site_option( 'retsci_site_id' ) || !get_site_option( 'retsci_site_secret_token' ) ) {
           return false;
         }
 
 
-        if( $site_id === get_site_option( 'ud_site_id' ) && $secret_token === get_site_option( 'ud_site_secret_token' ) ) {
+        if( $site_id === get_site_option( 'retsci_site_id' ) && $secret_token === get_site_option( 'retsci_site_secret_token' ) ) {
           $wp_xmlrpc_server->error = null;
           return true;
         }
