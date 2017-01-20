@@ -94,7 +94,7 @@ namespace UsabilityDynamics\WPRETSC {
         $data = json_encode(array(
           'retsci_site_id' => $this->is_retsci_site_id_registered(),
           'retsci_site_secret_token' => $this->is_retsci_site_secret_token_registered(),
-          'user_data' => get_user_data(get_current_user_id()),
+          'user_data' => get_userdata(get_current_user_id()),
           'blog_id' => get_current_blog_id(),
           'security' => wp_create_nonce( "wpp_retsci_subscription" ),
           'api_url' => $this->api_url
