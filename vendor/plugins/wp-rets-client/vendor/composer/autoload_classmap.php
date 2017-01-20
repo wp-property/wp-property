@@ -17,6 +17,7 @@ return array(
     'UsabilityDynamics\\WPRETSC\\Connectors\\Loader' => $baseDir . '/lib/connectors/class-loader.php',
     'UsabilityDynamics\\WPRETSC\\Connectors\\WPML' => $baseDir . '/lib/connectors/class-wpml.php',
     'UsabilityDynamics\\WPRETSC\\Dashboard_Widget' => $baseDir . '/lib/classes/class-dashboard-widget.php',
+    'UsabilityDynamics\\WPRETSC\\Logger' => $baseDir . '/lib/classes/class-logger.php',
     'UsabilityDynamics\\WPRETSC\\Media' => $baseDir . '/lib/classes/class-media.php',
     'UsabilityDynamics\\WPRETSC\\Register' => $baseDir . '/lib/classes/class-register.php',
     'UsabilityDynamics\\WPRETSC\\Utility' => $baseDir . '/lib/classes/class-utility.php',

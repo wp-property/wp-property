@@ -22,6 +22,7 @@ class ComposerStaticInit589bafad0d78fdaa0be7887063578b3b
         'UsabilityDynamics\\WPRETSC\\Connectors\\Loader' => __DIR__ . '/../..' . '/lib/connectors/class-loader.php',
         'UsabilityDynamics\\WPRETSC\\Connectors\\WPML' => __DIR__ . '/../..' . '/lib/connectors/class-wpml.php',
         'UsabilityDynamics\\WPRETSC\\Dashboard_Widget' => __DIR__ . '/../..' . '/lib/classes/class-dashboard-widget.php',
+        'UsabilityDynamics\\WPRETSC\\Logger' => __DIR__ . '/../..' . '/lib/classes/class-logger.php',
         'UsabilityDynamics\\WPRETSC\\Media' => __DIR__ . '/../..' . '/lib/classes/class-media.php',
         'UsabilityDynamics\\WPRETSC\\Register' => __DIR__ . '/../..' . '/lib/classes/class-register.php',
         'UsabilityDynamics\\WPRETSC\\Utility' => __DIR__ . '/../..' . '/lib/classes/class-utility.php',

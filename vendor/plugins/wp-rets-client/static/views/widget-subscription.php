@@ -1,6 +1,7 @@
 <div class="wpp_retsci_widget_schedule" data-config="<?php echo esc_attr($data) ?>">
 
   <h3>RETS Credentials</h3>
+  <p>Please provide rets credentials to setup..</p>
 
   <form id="subscription-form" action="" method="post">
 
