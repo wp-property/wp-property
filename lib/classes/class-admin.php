@@ -89,7 +89,7 @@ namespace UsabilityDynamics\WPP {
             wp_enqueue_script('jquery-ui-core');
             wp_enqueue_script('jquery-ui-sortable');
             wp_enqueue_script('wpp-jquery-colorpicker');
-            wp_enqueue_script('select2');
+            wp_enqueue_script('wpp-select2');
             wp_enqueue_script('jquery-ui-tabs');
             wp_enqueue_script('jquery-ui-tooltip');
             wp_enqueue_script('jquery-cookie');

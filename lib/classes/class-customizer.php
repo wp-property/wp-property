@@ -9,25 +9,48 @@ namespace UsabilityDynamics\WPP {
 
   if (!class_exists('UsabilityDynamics\WPP\WP_Property_Customizer')) {
 
+
     class WP_Property_Customizer
     {
+      /**
+       * @var
+       */
+      private $api_client;
+
+      /**
+       * @var array
+       */
+      private $possible_tags = array(
+        'search-results', 'single-property', 'single-property-term'
+      );
 
       /**
        * Adds all required hooks
        */
       public function __construct()
       {
-        add_action('customize_register', array($this, 'property_layouts_customizer'));
+        global $wp_properties;
+        if ((defined('WP_PROPERTY_LAYOUTS')) && (isset($wp_properties['configuration']) && isset($wp_properties['configuration']['enable_layouts']) && $wp_properties['configuration']['enable_layouts'] == 'false')) {
+          add_action('customize_register', array($this, 'property_layouts_customizer'));
 
-        add_action('customize_controls_enqueue_scripts', array($this, 'wp_property_customizer_controls'));
-        add_action('customize_preview_init', array($this, 'wp_property_customizer_live_preview'));
+          add_action('customize_controls_enqueue_scripts', array($this, 'wp_property_customizer_controls'));
+          add_action('customize_preview_init', array($this, 'wp_property_customizer_live_preview'));
 
-        add_filter('wpp::layouts::configuration', array($this, 'wpp_customize_configuration'), 11);
+          add_filter('wpp::layouts::configuration', array($this, 'wpp_customize_configuration'), 11);
+
+          /*
+           *
+           */
+          $this->api_client = new Layouts_API_Client(array(
+            'url' => 'https://api.usabilitydynamics.com/v1/layouts/'
+          ));
+        }
       }
 
       public function wpp_customize_configuration($false)
       {
-        if (!empty($_POST)) {
+        global $wp_properties;
+        if (!empty($_POST) && (isset($wp_properties['configuration']) && isset($wp_properties['configuration']['enable_layouts']) && $wp_properties['configuration']['enable_layouts'] == 'false')) {
           try {
             $selected_items = json_decode(stripslashes($_POST['customized']));
           } catch (\Exception $e) {
@@ -104,6 +127,55 @@ namespace UsabilityDynamics\WPP {
         wp_enqueue_script('wp-property-customizer-live-preview', WPP_URL . 'scripts/wp-property-customizer-live-preview.js', array('jquery', 'customize-preview'), WPP_Version);
       }
 
+      /**
+       * @return array
+       */
+      public function preload_layouts()
+      {
+
+        $res = $this->api_client->get_layouts();
+
+        try {
+          $res = json_decode($res);
+        } catch (\Exception $e) {
+          return array();
+        }
+
+        if ($res->ok && !empty($res->data) && is_array($res->data)) {
+
+          $_available_layouts = array();
+
+          foreach ($this->possible_tags as $p_tag) {
+            foreach ($res->data as $layout) {
+
+              if (empty($layout->tags) || !is_array($layout->tags)) continue;
+              $_found = false;
+              foreach ($layout->tags as $_tag) {
+
+                if ($_tag->tag == $p_tag) {
+                  $_found = true;
+                }
+              }
+              if (!$_found) continue;
+
+              $_available_layouts[$p_tag][$layout->_id] = $layout;
+            }
+          }
+
+          update_option('wpp_available_layouts', $_available_layouts);
+          return $_available_layouts;
+        } else {
+          if ($_available_layouts = get_option('wpp_available_layouts', false)) {
+            return $_available_layouts;
+          } else {
+            return array();
+          }
+        }
+
+        return array();
+
+      }
+
       public function property_layouts_customizer($wp_customize)
       {
         $template_files = apply_filters('wpp::layouts::template_files', wp_get_theme()->get_files('php', 0));
@@ -112,6 +184,7 @@ namespace UsabilityDynamics\WPP {
           $templates_names[$file] = $file;
         }
 
+        $this->preload_layouts();
         $layouts = get_option('wpp_available_layouts', false);
         $overview_layouts = $layouts['single-property-term'];
         $single_layouts = $layouts['single-property'];
@@ -131,22 +204,25 @@ namespace UsabilityDynamics\WPP {
           'priority' => 1,
         ));
 
-        $overview_radio_choices = array(
-          'none' => __('No Layout', ud_get_wp_property()->domain)
-        );
+        $overview_radio_choices = array();
         foreach ($overview_layouts as $layout) {
-          $overview_radio_choices[$layout->layout] = $layout->title;
+          if (!empty($layout->screenshot)) {
+            $layout_preview = $layout->screenshot;
+          } else {
+            $layout_preview = WPP_URL . 'images/no-preview.jpg';
+          }
+          $overview_radio_choices[$layout->layout] = '<img style="display: block; width: 150px; height: 150px;" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
         }
         $wp_customize->add_setting('layouts_property_overview_choice', array(
           'default' => 'none',
           'transport' => 'refresh'
         ));
-        $wp_customize->add_control('layouts_property_overview_choice', array(
-          'label' => __('Select Layout for Property Overview page', ud_get_wp_property()->domain),
+        $wp_customize->add_control(new Layouts_Custom_Control($wp_customize, 'layouts_property_overview_choice', array(
+          'label' => __('Select Layout for Property overview page', ud_get_wp_property()->domain),
           'section' => 'layouts_property_overview_settings',
-          'type' => 'radio',
+          'type' => 'checkbox',
           'choices' => $overview_radio_choices
-        ));
+        )));
 
         $wp_customize->add_setting('layouts_property_overview_select', array(
           'default' => false,
@@ -168,22 +244,25 @@ namespace UsabilityDynamics\WPP {
           'priority' => 2,
         ));
 
-        $single_radio_choices = array(
-          'none' => __('No Layout', ud_get_wp_property()->domain)
-        );
+        $single_radio_choices = array();
         foreach ($single_layouts as $layout) {
-          $single_radio_choices[$layout->layout] = $layout->title;
+          if (!empty($layout->screenshot)) {
+            $layout_preview = $layout->screenshot;
+          } else {
+            $layout_preview = WPP_URL . 'images/no-preview.jpg';
+          }
+          $single_radio_choices[$layout->layout] = '<img style="display: block; width: 150px; height: 150px;" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
         }
         $wp_customize->add_setting('layouts_property_single_choice', array(
           'default' => 'none',
           'transport' => 'refresh'
         ));
-        $wp_customize->add_control('layouts_property_single_choice', array(
+        $wp_customize->add_control(new Layouts_Custom_Control($wp_customize, 'layouts_property_single_choice', array(
           'label' => __('Select Layout for Single Property page', ud_get_wp_property()->domain),
           'section' => 'layouts_property_single_settings',
           'type' => 'radio',
           'choices' => $single_radio_choices
-        ));
+        )));
 
         $wp_customize->add_setting('layouts_property_single_select', array(
           'default' => false,
@@ -198,4 +277,39 @@ namespace UsabilityDynamics\WPP {
       }
     }
   }
+
+  if (class_exists('WP_Customize_Control')) {
+    /**
+     * Class to create a custom layout control
+     */
+    class Layouts_Custom_Control extends \WP_Customize_Control
+    {
+      public function render_content()
+      {
+        if (empty($this->choices))
+          return;
+
+        $name = '_customize-radio-' . $this->id;
+
+        if (!empty($this->label)) : ?>
+          <span class="customize-control-title"><?php echo esc_html($this->label); ?></span>
+        <?php endif;
+        if (!empty($this->description)) : ?>
+          <span class="description customize-control-description"><?php echo $this->description; ?></span>
+        <?php endif;
+
+        foreach ($this->choices as $value => $label) :
+          ?>
+          <label>
+            <?php echo $label; ?><br/>
+            <input style="margin-top: -16px" type="radio" value="<?php echo esc_attr($value); ?>"
+                   name="<?php echo esc_attr($name); ?>" <?php $this->link();
+            checked($this->value(), $value); ?> />
+          </label>
+          <?php
+        endforeach;
+      }
+    }
+  }
 }
+

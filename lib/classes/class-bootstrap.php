@@ -6,7 +6,6 @@
  */
 namespace UsabilityDynamics\WPP {
 
-
   if (!class_exists('UsabilityDynamics\WPP\Bootstrap')) {
 
     final class Bootstrap extends \UsabilityDynamics\WP\Bootstrap_Plugin
@@ -32,6 +31,9 @@ namespace UsabilityDynamics\WPP {
       public function init()
       {
         global $wp_properties;
+
+        // Parse feature falgs, set constants.
+        $this->parse_feature_flags();
 
         add_action('admin_head', function () {
           global $wp_properties, $_wp_admin_css_colors;
@@ -150,7 +152,7 @@ namespace UsabilityDynamics\WPP {
         add_filter('pre_update_site_option__site_transient_update_plugins', array('UsabilityDynamics\WPP\Bootstrap', 'update_check_handler'), 50, 2);
 
         // New layout feature.
-        if (!empty($wp_properties['configuration']['enable_layouts']) && $wp_properties['configuration']['enable_layouts'] == 'true') {
+        if (!empty($wp_properties['configuration']['enable_layouts']) && $wp_properties['configuration']['enable_layouts'] == 'false') {
           $this->layouts_settings = new Layouts_Settings();
           new Layouts();
 
@@ -340,6 +342,34 @@ namespace UsabilityDynamics\WPP {
 
         return $response;
 
+      }
+
+      /**
+       * Set Feature Flag constants by parsing composer.json
+       *
+       * @todo Make sure settings from DB can override these.
+       *
+       * @author potanin@UD
+       * @return array|mixed|null|object
+       */
+      public function parse_feature_flags()
+      {
+        try {
+          $_raw = file_get_contents(wp_normalize_path($this->root_path) . 'composer.json');
+          $_parsed = json_decode($_raw);
+          // @todo Catch poorly formatted JSON.
+          if (!is_object($_parsed)) {
+            // throw new Error( "unable to parse."  );
+          }
+          foreach ((array)$_parsed->extra->featureFlags as $_feature) {
+            if (!defined($_feature->constant)) {
+              define($_feature->constant, $_feature->enabled);
+            }
+          }
+        } catch (Exception $e) {
+          echo 'Caught exception: ', $e->getMessage(), "\n";
+        }
+        return isset($_parsed) ? $_parsed : null;
       }
 
 

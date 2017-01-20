@@ -41,16 +41,6 @@ namespace UsabilityDynamics\WPP {
         ));
 
         /**
-         * Add settings tab
-         */
-        add_filter( 'wpp_settings_nav', array( $this, 'settings_nav' ) );
-
-        /**
-         * Add settings page
-         */
-        add_action( 'wpp_settings_content_layouts', array( $this, 'settings_page' ) );
-
-        /**
          *
          */
         add_filter( 'wpp::layouts::template_files', array( $this, 'filter_template_files' ) );
@@ -134,228 +124,6 @@ namespace UsabilityDynamics\WPP {
         return array();
 
       }
-
-      /**
-       * @param $tabs
-       * @return mixed
-       */
-      public function settings_nav( $tabs ) {
-
-        $this->preloaded_layouts = $this->preload_layouts();
-
-        $tabs['layouts'] = array(
-            'slug' => 'layouts',
-            'title' => __('Layouts', ud_get_wp_property()->domain ),
-        );
-        return $tabs;
-      }
-
-      /**
-       *
-       */
-      public function settings_page() {
-        global $wp_properties;
-
-        $layouts_settings = wp_parse_args( !empty( $wp_properties['configuration']['layouts']['templates'] ) ? $wp_properties['configuration']['layouts']['templates'] : array() , array(
-            'property_term_single' => 'false',
-            'property_single'      => 'false',
-            'search_results'       => 'false'
-        ));
-
-        $layouts_template_files = wp_parse_args( !empty( $wp_properties['configuration']['layouts']['files'] ) ? $wp_properties['configuration']['layouts']['files'] : array() , array(
-            'property_term_single' => 'page.php',
-            'property_single'      => 'single.php',
-            'search_results'       => 'page.php'
-        ));
-
-        $template_files = apply_filters( 'wpp::layouts::template_files', wp_get_theme()->get_files( 'php', 0 ) );
-
-        ob_start();
-
-        ?>
-
-        <table class="form-table wpp_layouts_table">
-          <tbody>
-            <tr class="wpp_layout_header"><td colspan="2"><?php _e( 'Property Term Single', ud_get_wp_property()->domain ); ?> 
-              <small><?php _e( 'Applies only when layout is selected', ud_get_wp_property()->domain ); ?></small></td></tr>
-            <tr id="property-term-single">
-              <th>
-                <div class="wpp_dropdown_wrap">
-                  <select class="wpp_dropdown" name="wpp_settings[configuration][layouts][files][property_term_single]">
-                    <?php foreach( $template_files as $file => $file_path ): ?>
-                      <option <?php selected( $layouts_template_files['property_term_single'], $file ); ?> value="<?php echo $file; ?>"><?php echo $file; ?></option>
-                    <?php endforeach; ?>
-                  </select>
-                </div>
-              </th>
-              <td>
-                <?php
-                  if ( !empty( $this->preloaded_layouts['single-property-term'] ) && is_array( $this->preloaded_layouts['single-property-term'] ) ) {
-                ?>
-                  <ul class="layouts-list">
-                    <li>
-                      <label class="<?php echo $layouts_settings['property_term_single'] == 'false' ? 'checked' : ''; ?>">
-                        <h5><?php _e( 'No Layout', ud_get_wp_property()->domain ); ?></h5>
-                        <img width="150" height="150" src="//placehold.it/150?text=No+Layout" alt="No Layout" />
-                        <input <?php checked( 'false', $layouts_settings['property_term_single'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][property_term_single]" value="false">
-                      </label>
-                    </li>
-                <?php
-                  foreach( $this->preloaded_layouts['single-property-term'] as $layout ) {
-                ?>
-                    <li>
-                      <label class="<?php echo $layout->_id == $layouts_settings['property_term_single'] ? 'checked' : ''; ?>">
-                        <h5><?php echo $layout->title; ?></h5>
-                        <img width="150" height="150" src="<?php echo !empty($layout->screenshot)?$layout->screenshot:'//placehold.it/150?text=No+preview'; ?>" alt="<?php echo $layout->title ?>" />
-                        <input <?php checked( $layout->_id, $layouts_settings['property_term_single'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][property_term_single]" value="<?php echo $layout->_id; ?>">
-                      </label>
-                    </li>
-                <?php
-                  }
-                ?>
-                  </ul>
-                <?php
-                  } else {
-                    _e( 'There are no available layouts. Default view is used.', ud_get_wp_property()->domain );
-                  }
-                ?>
-              </td>
-            </tr>
-            <tr class="wpp_layout_header"><td colspan="2"><?php _e( 'Property Single', ud_get_wp_property()->domain ); ?>
-              <small><?php _e( 'Applies only when layout is selected', ud_get_wp_property()->domain ); ?></small></td></tr>
-            <tr id="property-single">
-              <th>
-                <div class="wpp_dropdown_wrap">
-                  <select  class="wpp_dropdown" name="wpp_settings[configuration][layouts][files][property_single]">
-                    <?php foreach( $template_files as $file => $file_path ): ?>
-                      <option <?php selected( $layouts_template_files['property_single'], $file ); ?> value="<?php echo $file; ?>"><?php echo $file; ?></option>
-                    <?php endforeach; ?>
-                  </select>
-                </div>
-              </th>
-              <td>
-                <?php
-                if ( !empty( $this->preloaded_layouts['single-property'] ) && is_array( $this->preloaded_layouts['single-property'] ) ) {
-                  ?>
-                  <ul class="layouts-list">
-                    <li>
-                      <label class="<?php echo $layouts_settings['property_single'] == 'false' ? 'checked' : ''; ?>">
-                        <h5><?php _e( 'No Layout', ud_get_wp_property()->domain ); ?></h5>
-                        <img width="150" height="150" src="//placehold.it/150?text=No+Layout" alt="No Layout" />
-                        <input <?php checked( 'false', $layouts_settings['property_single'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][property_single]" value="false">
-                      </label>
-                    </li>
-                    <?php
-                    foreach( $this->preloaded_layouts['single-property'] as $layout ) {
-                      ?>
-                      <li>
-                        <label class="<?php echo $layout->_id == $layouts_settings['property_single'] ? 'checked' : ''; ?>">
-                          <h5><?php echo $layout->title; ?></h5>
-                          <img width="150" height="150" src="<?php echo !empty($layout->screenshot)?$layout->screenshot:'//placehold.it/150?text=No+preview'; ?>" alt="<?php echo $layout->title ?>" />
-                          <input <?php checked( $layout->_id, $layouts_settings['property_single'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][property_single]" value="<?php echo $layout->_id; ?>">
-                        </label>
-                      </li>
-                      <?php
-                    }
-                    ?>
-                  </ul>
-                  <?php
-                } else {
-                  _e( 'There are no available layouts. Default view is used.', ud_get_wp_property()->domain );
-                }
-                ?>
-              </td>
-            </tr>
-            
-            <tr class="wpp_layout_header"><td colspan="2"><?php _e( 'Search Results', ud_get_wp_property()->domain ); ?>
-              <small><?php _e( 'Applies only when layout is selected', ud_get_wp_property()->domain ); ?></small></td></tr>
-            <tr id="search-results">
-              <th>
-                <div class="wpp_dropdown_wrap">
-                  <select  class="wpp_dropdown" name="wpp_settings[configuration][layouts][files][search_results]">
-                    <?php foreach( $template_files as $file => $file_path ): ?>
-                      <option <?php selected( $layouts_template_files['search_results'], $file ); ?> value="<?php echo $file; ?>"><?php echo $file; ?></option>
-                    <?php endforeach; ?>
-                  </select>
-                </div>
-              </th>
-              <td>
-                <?php
-                if ( !empty( $this->preloaded_layouts['search-results'] ) && is_array( $this->preloaded_layouts['search-results'] ) ) {
-                  ?>
-                  <ul class="layouts-list">
-                    <li>
-                      <label class="<?php echo $layouts_settings['search_results'] == 'false' ? 'checked' : ''; ?>">
-                        <h5><?php _e( 'No Layout', ud_get_wp_property()->domain ); ?></h5>
-                        <img width="150" height="150" src="//placehold.it/150?text=No+Layout" alt="No Layout" />
-                        <input <?php checked( 'false', $layouts_settings['search_results'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][search_results]" value="false">
-                      </label>
-                    </li>
-                    <?php
-                    foreach( $this->preloaded_layouts['search-results'] as $layout ) {
-                      ?>
-                      <li>
-                        <label class="<?php echo $layout->_id == $layouts_settings['search_results'] ? 'checked' : ''; ?>">
-                          <h5><?php echo $layout->title; ?></h5>
-                          <img width="150" height="150" src="<?php echo !empty($layout->screenshot)?$layout->screenshot:'//placehold.it/150?text=No+preview'; ?>" alt="<?php echo $layout->title ?>" />
-                          <input <?php checked( $layout->_id, $layouts_settings['search_results'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][search_results]" value="<?php echo $layout->_id; ?>">
-                        </label>
-                      </li>
-                      <?php
-                    }
-                    ?>
-                  </ul>
-                  <?php
-                } else {
-                  _e( 'There are no available layouts. Default view is used.', ud_get_wp_property()->domain );
-                }
-                ?>
-              </td>
-            </tr>
-
-          </tbody>
-        </table>
-
-        <style type="text/css">
-          .layouts-list {}
-          .layouts-list li {
-            float: left;
-            margin-left: 10px;
-            margin-bottom: 10px;
-          }
-          .layouts-list li label img {
-            display: block;
-            border: 5px solid white;
-            transition: border .5s;
-          }
-          .layouts-list li label.checked img {
-            border: 5px solid <?php echo $wp_properties['admin_colors'][2]; ?>;
-          }
-        </style>
-
-        <script type="application/javascript">
-          jQuery(document).ready(function(){
-            jQuery('#property-term-single .layouts-list li label').on( 'click', function(e) {
-              jQuery('#property-term-single .layouts-list li label').removeClass( 'checked' );
-              jQuery(this).addClass( 'checked' );
-            });
-
-            jQuery('#property-single .layouts-list li label').on( 'click', function(e) {
-              jQuery('#property-single .layouts-list li label').removeClass( 'checked' );
-              jQuery(this).addClass( 'checked' );
-            });
-
-            jQuery('#search-results .layouts-list li label').on( 'click', function(e) {
-              jQuery('#search-results .layouts-list li label').removeClass( 'checked' );
-              jQuery(this).addClass( 'checked' );
-            });
-          });
-        </script>
-
-        <?php
-
-        echo apply_filters( 'wpp::layouts::settings_html', ob_get_clean() );
-      }
     
       /**
        * load layouts for setup assistant page
@@ -397,7 +165,7 @@ namespace UsabilityDynamics\WPP {
                     <li>
                       <label class="<?php echo $layouts_settings['property_single'] == 'false' ? 'checked' : ''; ?>">
                         <h5><?php _e( 'No Layout', ud_get_wp_property()->domain ); ?></h5>
-                        <img width="150" height="150" src="//placehold.it/150?text=No+Layout" alt="No Layout" />
+                        <img width="150" height="150" src="<?php echo WPP_URL . 'images/no-layout.jpg'; ?>" alt="No Layout" />
                         <input <?php checked( 'false', $layouts_settings['property_single'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][property_single]" value="false">
                       </label>
                     </li>
@@ -407,7 +175,7 @@ namespace UsabilityDynamics\WPP {
                       <li>
                         <label class="<?php echo $layout->_id == $layouts_settings['property_single'] ? 'checked' : ''; ?>">
                           <h5><?php echo $layout->title; ?></h5>
-                          <img width="150" height="150" src="<?php echo !empty($layout->screenshot)?$layout->screenshot:'//placehold.it/150?text=No+preview'; ?>" alt="<?php echo $layout->title ?>" />
+                          <img width="150" height="150" src="<?php echo !empty($layout->screenshot)?$layout->screenshot:WPP_URL . 'images/no-preview.jpg'; ?>" alt="<?php echo $layout->title ?>" />
                           <input <?php checked( $layout->_id, $layouts_settings['property_single'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][property_single]" value="<?php echo $layout->_id; ?>">
                         </label>
                       </li>
@@ -436,7 +204,7 @@ namespace UsabilityDynamics\WPP {
                     <li>
                       <label class="<?php echo $layouts_settings['search_results'] == 'false' ? 'checked' : ''; ?>">
                         <h5><?php _e( 'No Layout', ud_get_wp_property()->domain ); ?></h5>
-                        <img width="150" height="150" src="//placehold.it/150?text=No+Layout" alt="No Layout" />
+                        <img width="150" height="150" src="<?php echo WPP_URL . 'images/no-layout.jpg'; ?>" alt="No Layout" />
                         <input <?php checked( 'false', $layouts_settings['search_results'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][search_results]" value="false">
                       </label>
                     </li>
@@ -446,7 +214,7 @@ namespace UsabilityDynamics\WPP {
                       <li>
                         <label class="<?php echo $layout->_id == $layouts_settings['search_results'] ? 'checked' : ''; ?>">
                           <h5><?php echo $layout->title; ?></h5>
-                          <img width="150" height="150" src="<?php echo !empty($layout->screenshot)?$layout->screenshot:'//placehold.it/150?text=No+preview'; ?>" alt="<?php echo $layout->title ?>" />
+                          <img width="150" height="150" src="<?php echo !empty($layout->screenshot)?$layout->screenshot:WPP_URL . 'images/no-preview.jpg'; ?>" alt="<?php echo $layout->title ?>" />
                           <input <?php checked( $layout->_id, $layouts_settings['search_results'] ); ?> style="display:none;" type="radio" name="wpp_settings[configuration][layouts][templates][search_results]" value="<?php echo $layout->_id; ?>">
                         </label>
                       </li>
