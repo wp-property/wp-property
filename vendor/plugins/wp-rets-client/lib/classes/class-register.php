@@ -25,15 +25,26 @@ namespace UsabilityDynamics\WPRETSC {
      */
     public function maybe_register_site() {
 
-      // Token set, do not attempt registration unless it cleared.
-      if (get_site_option('retsci_site_secret_token')) {
+
+      // Do nothing on Ajax, XMLRPC or wp-cli requests.
+      if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
         return;
       }
-      
+
+      // Token already set, do not attempt registration unless it cleared.
+      if( get_site_option('retsci_site_id') && get_site_option( 'retsci_site_public_key' ) ) {
+        return;
+      }
+
+
       $multisite = false;
 
-      // Generate new secret token.
-      add_site_option('retsci_site_secret_token', $retsci_site_secret_token = md5(wp_generate_password(20)));
+      // Generate new secret token, unless already exists.
+      $retsci_site_secret_token = get_site_option( 'retsci_site_secret_token' );
+
+      if( !$retsci_site_secret_token ) {
+        add_site_option('retsci_site_secret_token', $retsci_site_secret_token = md5(wp_generate_password(20)));
+      }
 
       if (is_multisite()) {
         $site_url = network_site_url();
@@ -41,9 +52,16 @@ namespace UsabilityDynamics\WPRETSC {
       } else {
         $site_url = get_site_url();
       }
+
+      // This will most likely not exist.
       $retsci_site_id = get_site_option('retsci_site_id');
 
-      $url = 'https://api.usabilitydynamics.com/product/retsci/site/register/v2';
+      if( defined( 'UD_RETS_API_URL' ) ) {
+        $url = UD_RETS_API_URL;
+      } else {
+        $url = 'https://api.usabilitydynamics.com/product/retsci/site/register/v2';
+      }
+
       $find = array('http://', 'https://');
       $replace = '';
       $output = str_replace($find, $replace, $site_url);
@@ -62,7 +80,7 @@ namespace UsabilityDynamics\WPRETSC {
           'xmlrpc_url' => site_url('/xmlrpc.php'),
           'user_id' => get_current_user_id(),
           'multisite' => $multisite,
-          'message' => "Hello, I'm RETS Client plugin. Give me ID, please."
+          'message' => "Hello, I'm wp-rets-client plugin. Give me Site ID and Site Public Key, please."
         ),
       );
 
