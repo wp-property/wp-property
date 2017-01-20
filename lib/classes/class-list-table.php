@@ -103,7 +103,7 @@ namespace UsabilityDynamics\WPP {
           'created' => __( 'Added', ud_get_wp_property( 'domain' ) ),
           'modified' => __( 'Updated', ud_get_wp_property( 'domain' ) ),
           'featured' => __( 'Featured', ud_get_wp_property( 'domain' ) ),
-          'children' => sprintf( __( 'Child %s', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label('plural') ),
+          'related' => sprintf( __( 'Related %s', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label('plural') ),
         ) );
 
         $meta = ud_get_wp_property( 'property_stats', array() );
@@ -313,16 +313,29 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       * Return Featured
+       * Return Related Properties
+       *
+       * @todo Return children and/or parents in list.
+       * @todo Use get_children()
        *
        * @param $post
        * @return mixed|string
        */
-      public function column_children( $post ) {
+      public function column_related( $post ) {
         global $wpdb;
 
         $count = 0;
         $hidden_count = 0;
+
+        $_response = array();
+
+        $_parent_id = wp_get_post_parent_id( $post->ID );
+
+        // If a parent is found and it is not same as the current property (can happen by mistake during imports) - potanin@UD
+        if( $_parent_id && $_parent_id !== 0 && $_parent_id !== $post->ID) {
+          $_parent_post = get_post($_parent_id);
+          $_response[] = '<div class="wpp-property-parent"><a href="' . get_edit_post_link($_parent_id) . '">' . $_parent_post->post_title . '</a>' . '</div>';
+        }
 
         $posts = $wpdb->get_results( "
           SELECT ID, post_title
@@ -341,15 +354,15 @@ namespace UsabilityDynamics\WPP {
               $class = 'hidden wpp_overview_hidden_stats';
               $hidden_count++;
             }
-            $data[] = '<li class="' . $class . '"><a href="' . admin_url() . 'post.php?post=' . $post['ID'] . '&action=edit">' . $post[ 'post_title' ] . '</a></li>';
+            $data[] = '<li class="' . $class . '"><a href="' . get_edit_post_link($post['ID']) . '">' . $post[ 'post_title' ] . '</a></li>';
           }
           if( $count > 3 ) {
             $data[] = '<li class="wpp_show_advanced" advanced_option_class="wpp_overview_hidden_stats">' . sprintf( __( 'Toggle %1s more.', ud_get_wp_property()->domain ), $hidden_count ) . '</li>';
           }
-          return '<div class="child-properties"><ul class="wpp_something_advanced_wrapper">' . implode( '', $data ) . '</ul>';
+          $_response[] =  '<div class="child-properties"><ul class="wpp_something_advanced_wrapper">' . implode( '', $data ) . '</ul>';
         }
 
-        return '';
+        return implode( '', $_response );
       }
 
       /**
