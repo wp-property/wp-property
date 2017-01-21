@@ -266,15 +266,88 @@ namespace UsabilityDynamics\WPRETSC {
 
           if(!empty($_post_data_tax_input)){
             foreach($_post_data_tax_input as $tax_name => $tax_tags){
+
               if(!get_taxonomy($tax_name)){
 
-                $register_taxonomy = register_taxonomy($tax_name, array('property'), array());
-                ud_get_wp_rets_client()->write_log( 'Registered a new taxonomy ' . $tax_name );
-                wp_set_post_terms( $_post_id, $tax_tags, $tax_name );
+                // @note If "hierarchical" is true then we can not pass in terms using names but must inead use ID.
+                $_register_taxonomy = register_taxonomy($tax_name, array( 'property' ), array(
+                  'hierarchical' => false
+                ));
+
+                if( is_wp_error( $_register_taxonomy ) ) {
+                  ud_get_wp_rets_client()->write_log( 'Unable to register a new taxonomy ' . $tax_name );
+                }
+
+              }
+
+              if( is_taxonomy_hierarchical( $tax_name ) ) {
+
+                ud_get_wp_rets_client()->write_log( "Handling hierarchical taxonomy [$tax_name]." );
+
+                $_terms = array();
+
+                foreach( $tax_tags as $_term_name ) {
+
+                  $_term_parts = explode( ' > ', $_term_name );
+
+                  $_term = get_term_by( 'slug', sanitize_title( $_term_name ), $tax_name, ARRAY_A );
+                  $_term_parent = get_term_by( 'slug', sanitize_title( $_term_parts[0] ), $tax_name, ARRAY_A );
+
+                  if( !$_term_parent ) {
+                    ud_get_wp_rets_client()->write_log( "Did not find parent term [$_term_parts[0]]." );
+
+                    $_term_parent = wp_insert_term( $_term_parts[0], $tax_name, array(
+                      "slug" => sanitize_title( $_term_parts[0] )
+                    ));
+
+                    ud_get_wp_rets_client()->write_log( "Created parent term [$_term_parts[0]] with [" . $_term_parent['term_id'] ."]." );
+
+                  }
+
+                  if( $_term_parent && !$_term && $_term_parts[1] ) {
+                    ud_get_wp_rets_client()->write_log( "Did not find child term [$_term_parts[1]] with slug [" .sanitize_title( $_term_name ) . "]." );
+
+                    $_term = wp_insert_term( $_term_name, $tax_name, array(
+                      "parent" => $_term_parent['term_id'],
+                      "slug" => sanitize_title( $_term_name )
+                    ));
+
+                    if( $_term && !is_wp_error( $_term ) ) {
+
+                      $_child_term_name_change = wp_update_term( $_term['term_id'], $tax_name, array(
+                        'name' => $_term_parts[1],
+                        'slug' => sanitize_title( $_term_name )
+                      ));
+
+                      //ud_get_wp_rets_client()->write_log( '$_child_term_name_change' );
+                      //ud_get_wp_rets_client()->write_log( $_child_term_name_change );
+
+                    }
+
+                    ud_get_wp_rets_client()->write_log( "Created child term [$_term_name] with [" . $_term['term_id'] ."] for [$_term_parts[0]] parent." );
+                  }
+
+                  if( $_term_parent && $_term_parent['term_id'] ) {
+                    $_terms[] = $_term_parent['term_id'];
+                  }
+
+                  if( $_term && $_term['term_id'] ) {
+                    // ud_get_wp_rets_client()->write_log( "Did not find and could not create child term [$_term_parts[0]] using [".sanitize_title( $_term_parts[1] )."] slug" );
+                    $_terms[] = $_term['term_id'];
+                  }
+
+                }
+
+                $_inserted_terms = wp_set_post_terms( $_post_id, $_terms, $tax_name );
+
+                ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_inserted_terms ) . "] terms." );
 
               } else {
                 wp_set_post_terms( $_post_id, $tax_tags, $tax_name );
               }
+
+              //ud_get_wp_rets_client()->write_log( "Inserted terms $tax_name." );
+              //ud_get_wp_rets_client()->write_log( $_insert_result );
 
             }
           }
