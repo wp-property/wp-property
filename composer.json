@@ -86,6 +86,27 @@
         "description": "Layouts for WP Property",
         "since": "2.2.1",
         "enabled": true
+      },
+      {
+        "name": "WP Property Taxonomies",
+        "constant": "WPP_FEATURE_FLAG_WPP_TYPE",
+        "description": "Enable Property Type taxonomy",
+        "since": "2.3.0",
+        "enabled": true
+      },
+      {
+        "name": "Freemius",
+        "constant": "WPP_FEATURE_FLAG_FREEMIUS",
+        "description": "Freemius",
+        "since": "2.3.0",
+        "enabled": true
+      },
+      {
+        "name": "WPP Location",
+        "constant": "WPP_FEATURE_FLAG_WPP_LOCATION",
+        "description": "WPP Location",
+        "since": "2.3.0",
+        "enabled": true
       }
     ],
     "schemas": {

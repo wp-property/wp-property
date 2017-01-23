@@ -25,10 +25,6 @@ namespace UsabilityDynamics\WPP {
         add_action('wp_footer', array($this, 'panels_print_inline_css'));
 
         add_filter('wpp::layouts::configuration', function ($false) {
-          global $wp_properties;
-
-          $available_layouts = get_option('wpp_available_layouts', false);
-
           /**
            * For property taxonomies
            * property_term_single
@@ -52,7 +48,6 @@ namespace UsabilityDynamics\WPP {
                 'templates' => array($template_file, 'page.php', 'single.php', 'index.php'),
                 'layout_meta' => $layout
               );
-
             }
           }
 
