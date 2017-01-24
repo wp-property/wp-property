@@ -184,6 +184,7 @@ namespace UsabilityDynamics\WPP {
           wp_register_style('wpp-admin-styles', $this->instance->path('static/styles/wpp.admin.css', 'url'), array(), WPP_Version);
           wp_enqueue_style('wpp-admin-styles');
         }
+        
       }
 
       /**
