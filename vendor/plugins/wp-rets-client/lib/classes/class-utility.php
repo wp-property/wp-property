@@ -59,7 +59,7 @@ namespace UsabilityDynamics\WPRETSC {
        * - all post meta/terms added by this thing are attached to the original post, it seems
        * @param $data
        */
-      public function write_log( $data, $file = false ) {
+      static public function write_log( $data, $file = false ) {
         $file = $file ? $file : ud_get_wp_rets_client()->logfile;
         file_put_contents( ABSPATH . rtrim( $file, '/\\' ), '' . print_r( $data, true ) . ' in ' . timer_stop() . ' seconds.' . "\n", FILE_APPEND  );
       }

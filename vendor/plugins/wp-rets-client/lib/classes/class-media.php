@@ -19,79 +19,79 @@ namespace UsabilityDynamics\WPRETSC {
         /**
          * Filters in order to make remote images to work
          */
-        add_filter( 'image_downsize', function( $false, $id, $size ) {
+        add_filter( 'image_downsize', function ( $false, $id, $size ) {
 
-          if ( get_post_meta( $id, '_is_remote', 1 ) ) {
+          if( get_post_meta( $id, '_is_remote', 1 ) ) {
             return array( $this->fix_rets_image_url( $id, $size ) );
           }
 
           return $false;
 
-        }, 10, 3);
+        }, 10, 3 );
 
         /**
          * Filters in order to make remote images to work
          */
-        add_filter( 'wp_get_attachment_url', function( $url, $post_id ) {
+        add_filter( 'wp_get_attachment_url', function ( $url, $post_id ) {
 
-          if ( get_post_meta( $post_id, '_is_remote', 1 ) ) {
+          if( get_post_meta( $post_id, '_is_remote', 1 ) ) {
             return $this->fix_rets_image_url( $post_id );
           }
 
           return $url;
-        }, 10, 2);
+        }, 10, 2 );
 
         /**
          *
          */
-        add_filter( 'wp_get_attachment_image_src', function( $image, $attachment_id, $size, $icon ){
+        add_filter( 'wp_get_attachment_image_src', function ( $image, $attachment_id, $size, $icon ) {
 
-          if ( get_post_meta( $attachment_id, '_is_remote', 1 ) ) {
+          if( get_post_meta( $attachment_id, '_is_remote', 1 ) ) {
 
             // get available image sizes
             $_image_sizes = \UsabilityDynamics\Utility::all_image_sizes();
 
-	    if(is_array($size)){
-	    	return array( $this->fix_rets_image_url( $attachment_id ), $size[0], $size[1] );
-	    }
+            if( isset( $size ) && is_array( $size ) ) {
+              return array( $this->fix_rets_image_url( $attachment_id ), $size[ 0 ], $size[ 1 ] );
+            }
 
-            if( $size && !isset( $_image_sizes[$size] ) ) {
+            if( $size && !isset( $_image_sizes[ $size ] ) ) {
               $size = 'full';
             }
 
             // add "full" and "medium_large" sizes which are now standard
-            if( !isset( $_image_sizes['full'] ) ) {
-              $_image_sizes['full']['width'] = get_option('large_size_w');
-              $_image_sizes['full']['height'] = get_option('large_size_h');
+            if( !isset( $_image_sizes[ 'full' ] ) ) {
+              $_image_sizes[ 'full' ][ 'width' ] = get_option( 'large_size_w' );
+              $_image_sizes[ 'full' ][ 'height' ] = get_option( 'large_size_h' );
             }
 
-            if( !isset( $_image_sizes['medium_large'] ) ) {
-              $_image_sizes['medium_large']['width'] = get_option('medium_large_size_w');
-              $_image_sizes['medium_large']['height'] = get_option('medium_large_size_h');
+            if( !isset( $_image_sizes[ 'medium_large' ] ) ) {
+              $_image_sizes[ 'medium_large' ][ 'width' ] = get_option( 'medium_large_size_w' );
+              $_image_sizes[ 'medium_large' ][ 'height' ] = get_option( 'medium_large_size_h' );
             }
 
             // return expected array of url, width, height
-            return array( $this->fix_rets_image_url( $attachment_id, $size ), $_image_sizes[$size]['width'], $_image_sizes[$size]['height'] );
+            return array( $this->fix_rets_image_url( $attachment_id, $size ), $_image_sizes[ $size ][ 'width' ], $_image_sizes[ $size ][ 'height' ] );
 
           }
 
           return $image;
-        }, 10, 4);
+        }, 10, 4 );
 
         /**
          * Filters in order to make remote images to work
          */
-        add_filter ( 'wp_prepare_attachment_for_js',  function( $response, $attachment, $meta ){
+        add_filter( 'wp_prepare_attachment_for_js', function ( $response, $attachment, $meta ) {
 
           $size_array = get_intermediate_image_sizes();
 
-          $response['sizes'] = array();
+          $response[ 'sizes' ] = array();
 
-          foreach ( $size_array as $size ) {
+          foreach( $size_array as $size ) {
 
-            $attachment_url = wp_get_attachment_url($attachment->ID);
+            $attachment_url = wp_get_attachment_url( $attachment->ID );
 
-            $response['sizes'][$size] = array(
+            $response[ 'sizes' ][ $size ] = array(
               'height' => 'auto',
               'width' => 'auto',
               'url' => $attachment_url,
@@ -100,7 +100,7 @@ namespace UsabilityDynamics\WPRETSC {
 
           }
 
-          $response['sizes']['full'] = array(
+          $response[ 'sizes' ][ 'full' ] = array(
             'height' => 'auto',
             'width' => 'auto',
             'url' => $attachment_url,
@@ -108,9 +108,9 @@ namespace UsabilityDynamics\WPRETSC {
           );
 
           return $response;
-        } , 10, 3  );
+        }, 10, 3 );
 
-        add_filter( 'wp_get_attachment_metadata', function( $data, $post_id ) {
+        add_filter( 'wp_get_attachment_metadata', function ( $data, $post_id ) {
           global $_wp_additional_image_sizes;
 
           //die( '<pre>' . print_r( $_wp_additional_image_sizes, true ) . '</pre>' );
@@ -120,7 +120,7 @@ namespace UsabilityDynamics\WPRETSC {
           }
 
           // check if this is one of our "remote files", if not, do nothing
-          if ( !get_post_meta( $post_id, '_is_remote', 1 ) ) {
+          if( !get_post_meta( $post_id, '_is_remote', 1 ) ) {
             return $data;
           }
 
@@ -129,31 +129,30 @@ namespace UsabilityDynamics\WPRETSC {
           //_wp_attached_file
           $_intermediate_image_sizes = get_intermediate_image_sizes();
 
-
           $data = array(
-            'width' => get_option('large_size_w'),
-            'height' => get_option('large_size_h'),
+            'width' => get_option( 'large_size_w' ),
+            'height' => get_option( 'large_size_h' ),
             'file' => $_wp_attached_file,
             'sizes' => array(
               'thumbnail' => array(
                 'file' => $_wp_attached_file,
-                'width' => get_option('thumbnail_size_w'),
-                'height' => get_option('thumbnail_size_h'),
+                'width' => get_option( 'thumbnail_size_w' ),
+                'height' => get_option( 'thumbnail_size_h' ),
               ),
               'medium' => array(
                 'file' => $_wp_attached_file,
-                'width' => get_option('medium_size_w'),
-                'height' => get_option('medium_size_h'),
+                'width' => get_option( 'medium_size_w' ),
+                'height' => get_option( 'medium_size_h' ),
               ),
               'large' => array(
                 'file' => $_wp_attached_file,
-                'width' => get_option('large_size_w'),
-                'height' => get_option('large_size_h'),
+                'width' => get_option( 'large_size_w' ),
+                'height' => get_option( 'large_size_h' ),
               ),
               'medium_large' => array(
                 'file' => $_wp_attached_file,
-                'width' => get_option('medium_large_size_w'),
-                'height' => get_option('medium_large_size_h'),
+                'width' => get_option( 'medium_large_size_w' ),
+                'height' => get_option( 'medium_large_size_h' ),
               ),
             ),
             'image_meta' => array(
@@ -174,10 +173,10 @@ namespace UsabilityDynamics\WPRETSC {
 
           // add our intermediate image sizes
           foreach( $_wp_additional_image_sizes as $_size_name => $_size_detail ) {
-            $data['sizes'][$_size_name] = array(
+            $data[ 'sizes' ][ $_size_name ] = array(
               'file' => $_wp_attached_file,
-              'width' => $_size_detail['width'],
-              'height' => $_size_detail['height'],
+              'width' => $_size_detail[ 'width' ],
+              'height' => $_size_detail[ 'height' ],
             );
 
           }
@@ -202,30 +201,30 @@ namespace UsabilityDynamics\WPRETSC {
 
         // get image url of remote asset
         $_url = get_post_meta( $id, '_wp_attached_file', true );
-	
-	if(is_array($size)){
-	  $_extension = pathinfo( $_url, PATHINFO_EXTENSION );
+
+        if( is_array( $size ) ) {
+          $_extension = pathinfo( $_url, PATHINFO_EXTENSION );
           if( empty( $_extension ) ) {
-            $_url .= '-' . $size[0] . 'x' . $size[1];
+            $_url .= '-' . $size[ 0 ] . 'x' . $size[ 1 ];
           } else {
-            $_url = str_replace( '.' . $_extension, '-' . $size[0] . 'x' . $size[1] . '.' . $_extension, $_url );
+            $_url = str_replace( '.' . $_extension, '-' . $size[ 0 ] . 'x' . $size[ 1 ] . '.' . $_extension, $_url );
           }
-  	return  $_url;
-	}
+          return $_url;
+        }
 
         //die('$size'.$size);
         // if the size exists in image sizes, append the image-size spedific annex to url
         if( $size && array_key_exists( $size, $_image_sizes ) ) {
           $_extension = pathinfo( $_url, PATHINFO_EXTENSION );
           if( empty( $_extension ) ) {
-            $_url .= '-' . $_image_sizes[$size]['width'] . 'x' . $_image_sizes[$size]['height'];
+            $_url .= '-' . $_image_sizes[ $size ][ 'width' ] . 'x' . $_image_sizes[ $size ][ 'height' ];
           } else {
-            $_url = str_replace( '.' . $_extension, '-' . $_image_sizes[$size]['width'] . 'x' . $_image_sizes[$size]['height'] . '.' . $_extension, $_url );
+            $_url = str_replace( '.' . $_extension, '-' . $_image_sizes[ $size ][ 'width' ] . 'x' . $_image_sizes[ $size ][ 'height' ] . '.' . $_extension, $_url );
           }
-        } 
+        }
 
         // return finished url
-        return  $_url;
+        return $_url;
 
       }
 
