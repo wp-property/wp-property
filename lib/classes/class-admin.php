@@ -130,12 +130,6 @@ namespace UsabilityDynamics\WPP {
           wp_enqueue_script($current_screen->id . '-js', $this->instance->path("static/scripts/{$current_screen->id}.js", 'url'), array('jquery'), WPP_Version, 'wp-property-backend-global');
         }
 
-        //** Enqueue CSS styles on all pages */
-        if (file_exists($this->instance->path('static/styles/wpp.admin.css', 'dir'))) {
-          wp_register_style('wpp-admin-styles', $this->instance->path('static/styles/wpp.admin.css', 'url'), array(), WPP_Version);
-          wp_enqueue_style('wpp-admin-styles');
-        }
-
       }
 
       /**
@@ -183,6 +177,12 @@ namespace UsabilityDynamics\WPP {
           echo json_encode($data, JSON_PRETTY_PRINT);
 
           die();
+        }
+
+        //** Enqueue CSS styles on admin page */
+        if (file_exists($this->instance->path('static/styles/wpp.admin.css', 'dir'))) {
+          wp_register_style('wpp-admin-styles', $this->instance->path('static/styles/wpp.admin.css', 'url'), array(), WPP_Version);
+          wp_enqueue_style('wpp-admin-styles');
         }
       }
 
