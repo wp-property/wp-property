@@ -233,7 +233,7 @@ namespace UsabilityDynamics\WPRETSC {
           $post_data[ 'post_date' ] = $_post->post_date;
           // Status could be changed manually by administrator.
           // So we are preventing to publish property again in case it was trashed. peshkov@UD
-          $post_data[ 'post_status' ] = $_post->post_status;
+          // $post_data[ 'post_status' ] = $_post->post_status;
 
         } else {
           ud_get_wp_rets_client()->write_log( 'Running wp_insert_post for [new post].' );
@@ -458,7 +458,8 @@ namespace UsabilityDynamics\WPRETSC {
         $_update_post = wp_update_post( array(
           'ID' => $_post_id,
           // If post already was added to DB, probably its status was changed manually, so let's set the latest status. peshkov@UD
-          'post_status' => ( !empty( $_post ) && !empty( $_post->post_status ) ? $_post->post_status : 'publish' )
+          //'post_status' => ( !empty( $_post ) && !empty( $_post->post_status ) ? $_post->post_status : 'publish' )
+          'post_status' => ( isset( $post_data['post_status' ] ) ? $post_data['post_status' ] : '' )
         ) );
 
         if( !is_wp_error( $_update_post ) ) {
