@@ -361,11 +361,15 @@ namespace UsabilityDynamics\WPP {
           if (!is_object($_parsed)) {
             // throw new Error( "unable to parse."  );
           }
-          foreach ((array)$_parsed->extra->featureFlags as $_feature) {
-            if (!defined($_feature->constant)) {
-              define($_feature->constant, $_feature->enabled);
+
+          if( isset( $_parsed ) && isset( $_parsed->extra ) && isset( $_parsed->extra->featureFlags )) {
+            foreach( (array)$_parsed->extra->featureFlags as $_feature ) {
+              if( !defined( $_feature->constant ) ) {
+                define( $_feature->constant, $_feature->enabled );
+              }
             }
           }
+
         } catch (Exception $e) {
           echo 'Caught exception: ', $e->getMessage(), "\n";
         }
