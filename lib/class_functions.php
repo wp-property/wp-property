@@ -493,6 +493,29 @@ class WPP_F extends UsabilityDynamics\Utility
   }
 
   /**
+   * ChromePHP Logger
+   *
+   * @param bool $text
+   * @return bool|void
+   */
+  static public function debug($text = false, $detail = null)
+  {
+
+    global $wp_properties;
+
+    if (!isset($wp_properties['configuration']['developer_mode']) || $wp_properties['configuration']['developer_mode'] != 'true') {
+      return false;
+    }
+
+    if( class_exists( '\ChromePhp' ) ) {
+      ChromePhp::log( '[wp-property]', $text, $detail );
+      return;
+    }
+
+    return true;
+  }
+
+  /**
    * PHP function to echoing a message to JS console
    *
    * @since 1.32.0
@@ -500,6 +523,9 @@ class WPP_F extends UsabilityDynamics\Utility
   static public function console_log($text = false)
   {
     global $wp_properties;
+
+    self::debug( $text );
+    return;
 
     if (!isset($wp_properties['configuration']['developer_mode']) || $wp_properties['configuration']['developer_mode'] != 'true') {
       return false;
@@ -3684,6 +3710,7 @@ Ample off-street parking ",
   {
     global $wpdb, $wp_properties, $wpp_query;
 
+
     //** Cleanup (fix) ID argument if it's passed */
     $args = wp_parse_args($args);
     if (isset($args['id'])) {
@@ -3698,7 +3725,6 @@ Ample off-street parking ",
 
     //** Prints args to firebug if debug mode is enabled */
     $log = is_array($args) ? urldecode(http_build_query($args)) : $args;
-    WPP_F::console_log("get_properties() args: {$log}");
 
     //** The function can be overwritten using the filter below. */
     $response = apply_filters('wpp::get_properties::custom', null, $args, $total);
@@ -3784,6 +3810,10 @@ Ample off-street parking ",
 
     $query = wp_parse_args($args, $defaults);
     $query = apply_filters('wpp_get_properties_query', $query);
+
+    //WPP_F::console_log("get_properties() args: {$log}");
+    WPP_F::debug("get_properties()", array( 'query' => $query, 'args' => $args )  );
+
     $query_keys = array_keys((array)$query);
 
     //** Search by non meta values */
@@ -4130,6 +4160,9 @@ Ample off-street parking ",
     }
 
     WPP_F::console_log("get_properties() total: $total");
+
+    self::debug('get_properties', $args);
+
     if (!empty($result)) {
       $return = array();
       if (!empty($total)) {
