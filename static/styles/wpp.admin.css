@@ -7,6 +7,16 @@
   border: 1px solid #ddd;
   overflow-y: scroll;
 }
+.wpp-feature-flag,
+.wpp-feature-flag .dashicons {
+  line-height: 30px;
+}
+.wpp-feature-flag.wpp-feature-flag-enabled .dashicons-yes {
+  color: #33b333;
+}
+.wpp-feature-flag.wpp-feature-flag-disabled .dashicons-yes {
+  color: rgba(218, 218, 218, 0.69);
+}
 .ui-tooltip,
 .arrow:after {
   background: #f5f5f5;

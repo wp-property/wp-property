@@ -723,6 +723,21 @@ if (get_option('permalink_structure') == '') {
           </div>
 
           <div class="wpp_settings_block">
+            <p><?php _e( 'Available feature flags and their status.', ud_get_wp_property()->domain ); ?></p>
+
+            <ul class="wpp-feature-flag-list">
+            <?php foreach( ud_get_wp_property()->get_feature_flags() as $_flagDetail ) { ?>
+              <li class="wpp-feature-flag wpp-feature-flag-<?php echo defined( $_flagDetail->constant ) && constant( $_flagDetail->constant ) ? 'enabled': 'disabled';  ?>">
+                <span class="dashicons dashicons-yes"></span>
+                <b class="wpp-feature-name"><?php echo $_flagDetail->name; ?></b>
+                <span class="wpp-feature-description"><?php echo $_flagDetail->description; ?></span>
+              </li>
+            <?php } ?>
+            </ul>
+
+          </div>
+
+          <div class="wpp_settings_block">
             <?php if (function_exists('memory_get_usage')): ?>
               <?php _e('Memory Usage:', ud_get_wp_property()->domain); ?><?php echo round((memory_get_usage() / 1048576), 2); ?> megabytes.
             <?php endif; ?>

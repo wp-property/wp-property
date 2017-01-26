@@ -156,12 +156,8 @@ namespace UsabilityDynamics\WPP {
         }
 
         // Handle forced pre-release update checks.
-        if (is_admin() && isset($_GET['force-check']) && $_GET['force-check'] === '1') {
-          add_filter('site_transient_update_plugins', array('UsabilityDynamics\WPP\Bootstrap', 'update_check_handler'), 50, 2);
-        }
-
-        // Handle regular pre-release checks.
-        add_filter('pre_update_site_option__site_transient_update_plugins', array('UsabilityDynamics\WPP\Bootstrap', 'update_check_handler'), 50, 2);
+        add_filter('site_transient_update_plugins', array('UsabilityDynamics\WPP\Bootstrap', 'update_check_handler'), 10, 2);
+        add_filter('upgrader_process_complete', array('UsabilityDynamics\WPP\Bootstrap', 'upgrader_process_complete'), 10, 2);
 
         // New layout feature.
         if (!empty($wp_properties['configuration']['enable_layouts']) && $wp_properties['configuration']['enable_layouts'] == 'false') {
@@ -173,7 +169,6 @@ namespace UsabilityDynamics\WPP {
         }
 
       }
-
 
       /**
        * Includes all PHP files from specific folder
@@ -263,6 +258,85 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Check API for pre-release updates.
+       *
+       * @author potanin@UD
+       * @return array|mixed
+       */
+      static public function get_update_check_result() {
+
+        if( get_site_transient( 'wpp_product_updates' ) && !isset( $_GET['force-check'] ) ) {
+
+          $_transient = get_site_transient( 'wpp_product_updates' );
+
+          if( is_array( $_transient ) ) {
+            return $_transient;
+          }
+
+        }
+
+        $_products = array( 'wp-property' => 'wp-property/wp-property.php' );
+
+        foreach( $_products as $_product_name => $_product_path ) {
+
+          try {
+
+            // Must be able to parse composer.json from plugin file, hopefully to detect the "_build.sha" field.
+            $_composer = json_decode( @file_get_contents( ABSPATH . '/'  . $_product_path . '/composer.json' )  );
+
+            if( is_object( $_composer ) && $_composer->extra && isset( $_composer->extra->_build ) && isset( $_composer->extra->_build->sha ) ) {
+              $_version = $_composer->extra->_build->sha;
+            } else {
+              $_version = null;
+            }
+
+            $_detail[ $_product_name ] = array(
+              'request_url' => 'https://api.usabilitydynamics.com/v1/product/updates/' . $_product_name . '/latest/?version=' . $_version,
+              'product_path' => $_product_path,
+              'response' => null,
+              'have_update' => null,
+            );
+
+            $_response = wp_remote_get( $_detail[ $_product_name ]['request_url'] );
+
+            if( wp_remote_retrieve_response_code( $_response ) === 200 ) {
+              $_body = wp_remote_retrieve_body( $_response );
+              $_body = json_decode( $_body );
+
+              if( isset( $_body->data )) {
+                $_detail[ $_product_name ]['response'] = $_body->data;
+
+                if( !$_body->data->changesSince || $_body->data->changesSince > 0 ) {
+                  $_detail[ $_product_name ]['have_update'] = true;
+                }
+
+              } else {
+                $_detail[ $_product_name ]['response'] = null;
+                $_detail[ $_product_name ]['have_update'] = false;
+              }
+            }
+
+          } catch ( \Exception $e ) {}
+
+        }
+
+        if( isset( $_detail ) ) {
+          $_transient_result = set_site_transient( 'wpp_product_updates', array( 'data' => $_detail, 'cached' => true ), 3600 );
+        }
+
+        return array( 'data' => isset( $_detail ) ? $_detail : null, 'cached' => false, 'transient_result' => isset( $_transient_result ) ? $_transient_result : 0 );
+
+      }
+
+      /**
+       * @param $response
+       * @param null $old_value
+       */
+      static public function upgrader_process_complete($response, $old_value = null) {
+        delete_site_transient( 'wpp_product_updates' );
+      }
+
+      /**
        * Check pre-release updates.
        *
        * @todo Refine the "when-to-check" logic. Right now multple requests may be made per request.
@@ -278,9 +352,6 @@ namespace UsabilityDynamics\WPP {
       {
         global $wp_properties;
 
-        // if ( current_filter() === 'pre_update_site_option__site_transient_update_plugins' ) {}
-        // if ( current_filter() === 'site_transient_update_plugins' ) {}
-
         if (!$response || !isset($response->response) || !is_array($response->response) || !isset($wp_properties) || !isset($wp_properties['configuration']['pre_release_update'])) {
           return $response;
         }
@@ -290,67 +361,16 @@ namespace UsabilityDynamics\WPP {
           return $response;
         }
 
-        // Last check was very recent. (This doesn't seem to be right place for this). That being said, if it's being forced, we ignore last time we tried.
-        if (current_filter() === 'site_transient_update_plugins' && !(isset($_GET['force-check']) && $_GET['force-check'] === '1') && $response->last_checked && (time() - $response->last_checked) < 360) {
-          return $response;
-        }
+        $_ud_get_product_updates = self::get_update_check_result();
 
-        // e.g. "wp-property", the clean directory name that we are runnig from.
-        $_plugin_name = plugin_basename(dirname(dirname(__DIR__)));
+        foreach( (array) $_ud_get_product_updates['data']  as $_product_short_name => $_product_detail ) {
 
-        // e.g. "wp-property/wp-property.php". Directory name may vary but the main plugin file should not.
-        $_plugin_local_id = $_plugin_name . '/wp-property.php';
-
-        // Bail, no composer.json file, something broken badly.
-        if (!file_exists(WP_PLUGIN_DIR . '/' . $_plugin_name . '/composer.json')) {
-          return $response;
-        }
-
-        try {
-
-          // Must be able to parse composer.json from plugin file, hopefully to detect the "_build.sha" field.
-          $_composer = json_decode(file_get_contents(WP_PLUGIN_DIR . '/' . $_plugin_name . '/composer.json'));
-
-          if (is_object($_composer) && isset($_composer->extra) && isset($_composer->extra->_build) && isset($_composer->extra->_build->sha)) {
-            $_version = $_composer->extra->_build->sha;
+          if( $_product_detail['have_update'] ) {
+            $response->response[ $_product_detail['product_path'] ] = $_product_detail['response'];
           }
 
-          // @todo Allow for latest branch to be swapped out for another track.
-          $_response = wp_remote_get('https://api.usabilitydynamics.com/v1/product/updates/' . $_plugin_name . '/latest/' . (isset($_version) && $_version ? '?version=' . $_version : ''), array(
-            "headers" => array(
-              // "x-set-branch"=> "staging",
-              // "cache-control"=> "no-cache",
-              // "pragma"=> "no-cache"
-            )
-          ));
-
-          if (wp_remote_retrieve_response_code($_response) === 200) {
-            $_body = wp_remote_retrieve_body($_response);
-            $_body = json_decode($_body);
-
-            // If there is no "data" field then we have nothing to update.
-            if (isset($_body->data)) {
-
-              if (!isset($response->response)) {
-                $response->response = array();
-              }
-
-              if (!isset($response->no_update)) {
-                $response->no_update = array();
-              }
-
-              $response->response[$_plugin_local_id] = $_body->data;
-
-              if (isset($response->no_update[$_plugin_local_id])) {
-                unset($response->no_update[$_plugin_local_id]);
-              }
-
-            }
-
-          }
-
-        } catch (\Exception $e) {
         }
+//        die( '<pre>' . print_r( $response, true ) . '</pre>' );
 
         return $response;
 
@@ -388,6 +408,30 @@ namespace UsabilityDynamics\WPP {
         return isset($_parsed) ? $_parsed : null;
       }
 
+      /**
+       * @return array
+       */
+      public function get_feature_flags()
+      {
+        try {
+          $_raw = file_get_contents(wp_normalize_path($this->root_path) . 'composer.json');
+          $_parsed = json_decode($_raw);
+
+          if (!is_object($_parsed)) {
+            return array();
+          }
+
+          if( isset( $_parsed ) && isset( $_parsed->extra ) && isset( $_parsed->extra->featureFlags )) {
+            return (array) $_parsed->extra->featureFlags;
+          }
+
+        } catch (Exception $e) {
+          return array();
+        }
+
+        return array();
+
+      }
 
     }
 

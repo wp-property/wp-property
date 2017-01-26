@@ -407,8 +407,7 @@ class class_wpp_supermap {
       <div class="wpp_supermap_marker_image">
       <?php if (!empty( $supermap_configuration['property_type_markers'][$slug] ) ) : ?>
         <?php
-        $marker_image_url = preg_match( '/(http|https):\/\//', $supermap_configuration['property_type_markers'][$slug] )
-            ? $supermap_configuration['property_type_markers'][$slug] : $markers_url . "/" . $supermap_configuration['property_type_markers'][$slug];
+        $marker_image_url = preg_match( '/(http|https):\/\//', $supermap_configuration['property_type_markers'][$slug] ) ? $supermap_configuration['property_type_markers'][$slug] : $markers_url . "/" . $supermap_configuration['property_type_markers'][$slug];
         ?>
         <img src="<?php echo $marker_image_url; ?>" alt="" />
       <?php else : ?>

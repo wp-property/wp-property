@@ -1,4 +1,7 @@
 ### 2.2.1 
+* Added Feature flags to help tab to help understand what features are enabled.
+* Fixed a bug with rets-client site registration hanging.
+* Fixed a minor issue with Supermap trying to load a non-existant map pin.
 * Bundled Supermap and Agents features.
 * Enabled `property_location` taxonomy which automatically creates hierarchial location terms during address validation.
 * Hiding advanced legacy options Single Template selection, Default Property Page, Default Phone Number and Widget Sidebars.

@@ -563,7 +563,7 @@ ul.feps_property_input_fields .description {
   height: 80px;
   margin: 0 0 0 -40px;
   border: 1px solid #606060;
-  background: #DDDDDD url("images/ajax-loader-po.gif") center center no-repeat;
+  background: #dddddd url("images/ajax-loader-po.gif") center center no-repeat;
   top: 100px;
   left: 50%;
   -moz-border-radius: 4px;
@@ -910,7 +910,7 @@ html[xmlns] .clearfix {
 }
 #property_stats.overview_stats dd.alt,
 .wpp_property_stats.overview_stats dd.alt {
-  background: #eee;
+  background: #eeeeee;
 }
 ul#property_stats.list,
 ul.wpp_property_stats.list {
