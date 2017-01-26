@@ -2381,10 +2381,6 @@ class WPP_F extends UsabilityDynamics\Utility
       $extra_values = array();
     }
 
-    echo( '<pre>$property_stats' . print_r( $property_stats, true ) . '</pre>' );
-    echo( '<pre>$property_meta' . print_r( $property_meta, true ) . '</pre>' );
-    echo( '<pre>$extra_values' . print_r( $extra_values, true ) . '</pre>' );
-
     if ($use_optgroups == 'true') {
       $attributes['Attributes'] = $property_stats;
       $attributes['Meta'] = $property_meta;
