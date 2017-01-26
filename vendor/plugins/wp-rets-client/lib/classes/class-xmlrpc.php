@@ -222,6 +222,8 @@ namespace UsabilityDynamics\WPRETSC {
           return array( 'ok' => false, 'error' => "Property missing RETS ID.", "data" => $post_data );
         }
 
+        $_new_post_status = $post_data[ 'post_status' ];
+
         // set post status to draft since it may be inserting for a while due to large amount of terms
         $post_data[ 'post_status' ] = 'draft';
 
@@ -361,14 +363,20 @@ namespace UsabilityDynamics\WPRETSC {
           ud_get_wp_rets_client()->write_log( 'Creating property post [' . $_post_id  . '].' );
         }
 
+        $_post_status = ( !empty( $_post ) && !empty( $_post->post_status ) ? $_post->post_status : 'publish' );
+
+        if( isset( $_new_post_status ) ) {
+          $_post_status  = $_new_post_status;
+        }
+
+        // If post already was added to DB, probably its status was changed manually, so let's set the latest status. peshkov@UD
         $_update_post = wp_update_post( array(
           'ID' => $_post_id,
-          // If post already was added to DB, probably its status was changed manually, so let's set the latest status. peshkov@UD
-          'post_status' => ( !empty( $_post ) && !empty( $_post->post_status ) ? $_post->post_status : 'publish' )
+          'post_status' => $_post_status
         ) );
 
         if( !is_wp_error( $_update_post ) ) {
-          ud_get_wp_rets_client()->write_log( 'Published property post [' . $_post_id  . '].' );
+          ud_get_wp_rets_client()->write_log( 'Published property post [' . $_post_id  . '], setting post_status to [' .$_post_status .']' );
           /**
            * Do something after property is published
            */
