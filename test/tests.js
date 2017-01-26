@@ -11,6 +11,7 @@ module.exports = {
     }
 
     module.host = 'localhost';
+    module.base_url = 'http://' + module.host + ':3000';
 
     module.downloadUrl = process.env.CIRCLE_REPOSITORY_URL + '/archive/' + process.env.CIRCLE_SHA1 + '.zip';
 
@@ -19,25 +20,28 @@ module.exports = {
   },
 
   // curl -H 'host:localhost' http://localhost:3000/ -I
-  'WordPress is reachable.': function( done ) {
-    // console.log( 'test one', 'http://' + module.host + ':3000/' );
+  'WordPress readme.html is reachable.': function( done ) {
+    console.log( 'test one', 'http://' + module.host + ':3000/' );
 
     request.get( {
       followRedirect: false,
-      timeout: 2000,
+      timeout: 1000,
       headers: {
         host: process.env.CIRCLE_SHA1 + '-' + process.env.CIRCLE_BUILD_NUM + '.ngrok.io'
       },
-      url: 'http://' + module.host + ':3000/'
+      url: module.base_url + '/readme.html'
     } , function checkResponse( error, resp, body ) {
 
+      if( error ) {
+        done( new Error( 'Can not reach WordPress at [' + module.base_url + '/readme.html].' ) );
+      }
       // console.log( require( 'util' ).inspect( resp.headers, {showHidden: false, depth: 2, colors: true} ) );
       // console.log( 'resp.statusCode', resp.statusCode );
 
       if( resp.statusCode === 301 ) {
         console.log( "Most likely first time tests are being ran and site is trying to redirect to its default siteurl." );
       } else if( resp.statusCode === 200 ) {
-        console.log( "No redirection, our custom siteurl/home have already been set." );
+        // console.log( "No redirection, our custom siteurl/home have already been set." );
       } else {
         console.log( "Unexpected status code!", resp.statusCode );
         return done( new Error( 'Unexpected status code.' ) );
