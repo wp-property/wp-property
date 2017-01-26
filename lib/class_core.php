@@ -98,8 +98,10 @@ class WPP_Core {
   static public function apply_property_alias( $property, $args ) {
     global $wp_properties;
 
+    $_result = array();
+
     // add terms to object.
-    foreach( $wp_properties['taxonomies'] as $_tax => $_tax_setup) {
+    foreach( (array) $wp_properties['taxonomies'] as $_tax => $_tax_setup) {
 
       if( $_tax_setup['unique'] === '1' ) {
         $property[$_tax] = join( ', ', wp_get_object_terms( $property['ID'], $_tax, array( 'fields' => 'names' ) ) );
@@ -112,13 +114,13 @@ class WPP_Core {
     foreach( (array) WPP_F::get_alias_map() as $_alias => $_target ) {
 
       if( isset( $property[ $_target ] ) && $property[ $_target ] && ( !isset( $property[ $_alias ] ) || !$property[ $_alias ] ) ) {
+        $_result[] = "Applied target [$_target] alias to [$_alias].";
         $property[ $_alias ] = $property[ $_target ] ;
       }
 
-
     }
 
-    WPP_F::debug( 'wpp_get_property:filter (applying alias)', $property['ID'] );
+    // WPP_F::debug( 'apply_property_alias', array( 'id' => $property['ID'], 'result' => join( ",", $_result ) ) );
 
     return $property;
 
@@ -133,16 +135,19 @@ class WPP_Core {
    */
   static public function apply_properties_query_alias( $query ) {
 
+    $_result = array();
+
     foreach( (array) WPP_F::get_alias_map() as $_alias => $_target ) {
 
       if( isset( $query[ $_alias ] ) ) {
         $query[ $_target ] = $query[ $_alias ];
+        $_result[] = "Applied target [$_target] alias to [$_alias].";
         unset( $query[ $_alias ] );
       }
 
     }
 
-    WPP_F::debug( 'wpp_get_properties_query:filter (applying alias)' );
+    WPP_F::debug( 'apply_properties_query_alias', array( 'query' => $query, 'result' => $_result ) );
 
     return $query;
 

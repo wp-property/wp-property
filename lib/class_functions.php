@@ -22,9 +22,9 @@ class WPP_F extends UsabilityDynamics\Utility
   static public function get_alias_map( $field = false ) {
     global $wp_properties;
 
-    $field_alias = apply_filters( 'wpp:field_alias', isset( $wp_properties[ 'field_alias' ] ) ? $wp_properties[ 'field_alias' ] : array() );
+    $field_alias = apply_filters( 'wpp:field_alias', isset( $wp_properties[ 'field_alias' ] ) ? array_filter( $wp_properties[ 'field_alias' ] ) : array() );
 
-    if( isset( $field ) ) {
+    if( isset( $field ) && $field ) {
       return isset( $field_alias[ $field ] ) ? $field_alias[ $field ] : null;
     }
 
@@ -3260,7 +3260,9 @@ Ample off-street parking ",
 
     /* Generate Property type terms */
     foreach ($wpp_settings['property_types'] as $_term => $label) {
+
       $term = get_term($wp_properties['property_types_term_id'][$_term], 'wpp_type', ARRAY_A);
+
       if (!is_wp_error($term) && isset($term['term_id'])) {
         if ($label != $term['name']) {
           $term = wp_update_term($term['term_id'], 'wpp_type', array('name' => $label));
