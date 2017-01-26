@@ -123,6 +123,13 @@
         "enabled": true
       },
       {
+        "name": "Meta Attributes",
+        "constant": "WP_PROPERTY_META_ATTRIBUTES",
+        "description": "Legacy Meta fields.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
         "name": "RETS Client Dashboard Widget",
         "constant": "RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET",
         "description": "Dashboard widget for wp-rets-client, shows stats.",

@@ -27,7 +27,8 @@ class WPP_F extends UsabilityDynamics\Utility
     if( isset( $field ) ) {
       return isset( $field_alias[ $field ] ) ? $field_alias[ $field ] : null;
     }
-    return $field_alias;
+
+    return (array) $field_alias;
 
   }
 
@@ -3827,6 +3828,7 @@ Ample off-street parking ",
     );
 
     $query = wp_parse_args($args, $defaults);
+
     $query = apply_filters('wpp_get_properties_query', $query);
 
     //WPP_F::console_log("get_properties() args: {$log}");

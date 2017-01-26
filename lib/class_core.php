@@ -83,7 +83,7 @@ class WPP_Core {
     // Apply alises.
     if( defined( 'WP_PROPERTY_FIELD_ALIAS' ) && WP_PROPERTY_FIELD_ALIAS ) {
       add_filter( 'wpp_get_property', array( $this, 'apply_property_alias' ), 50, 2 );
-      add_filter( 'wpp_get_properties_query', array( $this, 'apply_properties_query_alias' ) . 50, 2 );
+      add_filter( 'wpp_get_properties_query', array( $this, 'apply_properties_query_alias' ), 50 );
     }
 
   }
@@ -109,7 +109,7 @@ class WPP_Core {
     }
 
     // apply alias logic.
-    foreach( WPP_F::get_alias_map() as $_alias => $_target ) {
+    foreach( (array) WPP_F::get_alias_map() as $_alias => $_target ) {
 
       if( isset( $property[ $_target ] ) && $property[ $_target ] && ( !isset( $property[ $_alias ] ) || !$property[ $_alias ] ) ) {
         $property[ $_alias ] = $property[ $_target ] ;
@@ -133,7 +133,7 @@ class WPP_Core {
    */
   static public function apply_properties_query_alias( $query ) {
 
-    foreach( WPP_F::get_alias_map() as $_alias => $_target ) {
+    foreach( (array) WPP_F::get_alias_map() as $_alias => $_target ) {
 
       if( isset( $query[ $_alias ] ) ) {
         $query[ $_target ] = $query[ $_alias ];
