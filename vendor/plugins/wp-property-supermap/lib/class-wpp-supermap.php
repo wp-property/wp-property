@@ -392,7 +392,7 @@ class class_wpp_supermap {
   static public function property_type_settings($settings, $slug) {
     global $wp_properties;
 
-    $supermap_configuration = isset( $wp_properties['configuration']['feature_settings']['supermap'] ) ? 
+    $supermap_configuration = isset( $wp_properties['configuration']['feature_settings']['supermap'] ) ?
       $wp_properties['configuration']['feature_settings']['supermap'] : array();
     $upload_dir = wp_upload_dir();
     $markers_url = $upload_dir['baseurl'] . '/supermap_files/markers';

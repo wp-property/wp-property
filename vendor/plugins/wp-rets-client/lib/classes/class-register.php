@@ -25,6 +25,11 @@ namespace UsabilityDynamics\WPRETSC {
      */
     public function maybe_register_site() {
 
+      $_retsi_state = get_transient('retsi_state');
+
+      if( $_retsi_state && is_array( $_retsi_state ) && $_retsi_state['registration-backoff' ] ) {
+        return;
+      }
 
       // Do nothing on Ajax, XMLRPC or wp-cli requests.
       if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
@@ -85,6 +90,8 @@ namespace UsabilityDynamics\WPRETSC {
       );
 
       $response = wp_remote_post($url, $args);
+
+      set_transient('retsi_state', array('registration-backoff'=>true), 3600 );
 
       if (wp_remote_retrieve_response_code($response) === 200 && !is_wp_error($response)) {
 

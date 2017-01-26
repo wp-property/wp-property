@@ -1,0 +1,231 @@
+/*
+  Theme-specific styles are introduced in WP-Property 1.08.
+  New styles specifically for Denali can be stored here.
+  This will prevent us form having to release a new version of Denali whenever we add new features to WPP that affect it.
+
+  WP-Property loads this stylesheet after the other Denali styles are loaded, so it has authority.
+
+  This file is loaded for Denali child theme as well.  Loading can be disabled in Settings -> Display -> "Do not load theme-specific stylesheet."
+
+  This file should only include critical CSS rules - mostly structural. Colors and images should be loaded into the main Denali styles.
+
+  Version: 0.1
+ */
+/* FEPS Styles Begin */
+.container .wpp_feps_form .wpp_feps_row_wrapper {
+  list-style: none !important;
+  width: 100%;
+  padding: 0 0 9px 0;
+  margin-bottom: 13px;
+}
+.container .entry-content .wpp_feps_form li {
+  list-style: none;
+  list-style-type: none;
+}
+.wpp_feps_form {
+  overflow: hidden;
+}
+.wpp_feps_form span.wpp_feps_input_error {
+  color: #A53535;
+}
+.wpp_feps_form .wpp_feps_row_wrapper.wpp_checkbox .wpp_feps_label_wrapper {
+  position: absolute;
+  text-align: left;
+  width: 100%;
+  z-index: 1;
+}
+.wpp_feps_form ul.feps_property_input_fields li.wpp_feps_row_wrapper.wpp_checkbox label {
+  display: block;
+  margin-left: 262px;
+  overflow: auto;
+}
+.wpp_feps_form .wpp_feps_row_wrapper.wpp_checkbox .wpp_feps_label_wrapper .the_title {
+  float: left;
+  text-transform: none;
+}
+.wpp_feps_form .wpp_feps_row_wrapper.wpp_checkbox .wpp_feps_input_wrapper {
+  clear: none;
+  display: block;
+  float: left;
+  margin: 0;
+  min-height: 2em;
+  z-index: 2;
+}
+.wpp_feps_form .wpp_feps_input_wrapper.submit_action {
+  float: right;
+}
+.wpp_feps_form .wpp_feps_row_wrapper .wpp_feps_label_wrapper {
+  clear: left;
+  float: left;
+  position: relative;
+  width: 215px;
+  /* Base Width */
+  text-align: right;
+}
+.wpp_feps_form .feps_user_input_fields .wpp_feps_label_wrapper,
+.wpp_feps_form .feps_user_input_fields .wpp_feps_input_wrapper {
+  margin-top: 10px;
+}
+.wpp_feps_form .wpp_feps_row_wrapper .wpp_feps_input_wrapper {
+  clear: right;
+  float: right;
+  margin-left: -240px;
+  /* -(40 + Base Width) */
+  width: 100%;
+  margin-bottom: 0px;
+  position: relative;
+}
+.wpp_feps_form .wpp_feps_row_wrapper .wpp_feps_input_wrapper span.images_limit {
+  position: absolute;
+}
+.wpp_feps_form .wpp_feps_row_wrapper .wpp_feps_input_wrapper .wpp_feps_input_content {
+  margin-left: 230px;
+  /* +20 to Base Width */
+  padding-right: 3px;
+}
+.wpp_feps_form .wpp_feps_row_wrapper .wpp_feps_description_wrapper {
+  clear: both;
+  margin-left: 230px;
+}
+.wpp_feps_form ul.feps_property_input_fields div.qq-upload-button {
+  margin-left: 220px;
+  float: left;
+}
+.wpp_feps_form ul.feps_property_input_fields ul.qq-upload-list {
+  clear: both;
+  padding-top: 15px;
+}
+.wpp_feps_form ul.feps_property_input_fields li.qq-upload-success {
+  margin: 0 0 10px 10px;
+  padding: 0;
+  float: right;
+}
+.wpp_feps_form ul.feps_property_input_fields img.wpp_feps_preview_thumb {
+  border: 3px solid #FFFFFF;
+  box-shadow: 0 0 4px #000000;
+  -moz-box-shadow: 0 0 4px #000000;
+  -webkit-box-shadow: 0 0 4px #000000;
+  -khtml-box-shadow: 0 0 4px #000000;
+  -o-box-shadow: 0 0 4px #000000;
+  -ms-box-shadow: 0 0 4px #000000;
+  height: auto;
+  width: 188px !important;
+}
+.wpp_feps_form .the_title {
+  text-transform: uppercase;
+  float: right;
+}
+.wpp_feps_form .wpp_feps_ajax_message {
+  color: #5B4949;
+  line-height: 52px;
+}
+.wpp_feps_form .wpp_feps_row_wrapper.image_upload .wpp_feps_input_wrapper .wpp_feps_input_content {
+  margin-left: 10px;
+}
+.mceContentBody .wpp_feps_form ul li,
+.entry-content .wpp_feps_form ul li,
+.mceContentBody .wpp_feps_sponsored_listing ul li,
+.entry-content .wpp_feps_sponsored_listing ul li {
+  margin-bottom: auto;
+  padding-left: 0;
+}
+.wpp_feps_form ul.wpp_feps_subscription_plan_info {
+  background-color: #EFEFEF;
+  border: 1px solid #D6D6D6;
+  padding: 15px;
+}
+.wpp_feps_form ul.wpp_feps_subscription_plan_info .description {
+  font-size: 12px;
+  color: #ADADAD;
+}
+.container .wpp_feps_form ul li.wpp_feps_subscription_plan {
+  padding: 15px 0;
+  margin-bottom: 0;
+}
+.wpp_feps_form .wpp_feps_subscription_plan .wpp_feps_input_wrapper .wpp_feps_input_content {
+  padding-right: 15px;
+}
+form.wpi_checkout .total_price {
+  left: 0;
+}
+.wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li span {
+  padding: 8px 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  -moz-border-top-right-radius: 5px;
+  -moz-border-bottom-right-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+}
+ul.wpp_feps_step_tabs {
+  margin: 15px 0 20px 0;
+}
+.wpp_feps_sponsored_listing ul.wpp_feps_step_tabs li span.wpp_feps_arrow {
+  margin-left: -5px;
+}
+.wpp_feps_form ul.feps_spc_details li.wpp_feps_row_wrapper .wpp_feps_label_wrapper {
+  width: 180px;
+}
+.wpp_feps_form ul.feps_spc_details li.wpp_feps_row_wrapper .wpp_feps_input_wrapper {
+  margin-left: -200px;
+}
+.wpp_feps_form ul.feps_spc_details li.wpp_feps_row_wrapper .wpp_feps_input_content {
+  margin-left: 200px;
+}
+.wpp_feps_form ul.feps_spc_details li.wpp_feps_row_wrapper {
+  padding: 10px;
+  margin: 0;
+}
+.wpp_feps_form ul.feps_spc_details .wpp_feps_row_wrapper label {
+  line-height: 1.1em;
+}
+.wpp_feps_form ul.feps_spc_details ul.wpp_feps_subscription_plan_info {
+  border: 0;
+  padding: 0;
+  background: none;
+}
+.feps_spc_details_wrapper .submit_action_wrapper li.submit_action {
+  float: none;
+}
+.feps_spc_details_wrapper .submit_action_wrapper li.submit_action input {
+  margin: 0;
+}
+ul.feps_spc_details {
+  background-color: #EFEFEF;
+}
+.feps_spc_details_wrapper ul.feps_spc_details a {
+  color: #987965;
+  text-decoration: none;
+}
+#content .wpp_shortcode_feps_menu {
+  background: none repeat scroll 0 0 #FBFAF5;
+  border: 6px solid #F4F4EA;
+  border-radius: 7px 7px 7px 7px;
+  margin: 10px 0;
+  overflow: auto;
+  padding: 16px;
+}
+#content .wpp_shortcode_feps_menu li {
+  padding-left: 0;
+}
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action li.actions ul li {
+  margin: 0 0 0 10px;
+  padding: 0;
+  line-height: 1.5em;
+}
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action li.actions ul li a {
+  width: auto;
+  padding: 0 0.5em;
+  margin-top: 0;
+}
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action li.actions ul li a:first-child {
+  padding: 0 0.5em 0 1em;
+}
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action li.actions ul li a:last-child {
+  padding: 0 1em 0 0.5em;
+}
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action > li.post_status,
+.wpp_row_view .property_div div.wpp_overview_feps_column ul.feps_action > li.expired_date {
+  min-width: 9.5em;
+}
+/* FEPS Styles End */
