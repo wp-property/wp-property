@@ -101,6 +101,7 @@ namespace UsabilityDynamics\WPP {
             wp_enqueue_style('wpp-jquery-ui-dialog');
             wp_enqueue_style('wpp-jquery-colorpicker-css');
             wp_enqueue_style('select2');
+            wp_enqueue_script('jquery-jjsonviewer', $this->instance->path('static/scripts/vendor/jjsonviewer.js', 'url'), array( 'jquery' ), WPP_Version, true );
             // This will enqueue the Media Uploader script
             wp_enqueue_media();
             break;

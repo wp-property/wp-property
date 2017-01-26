@@ -447,7 +447,11 @@ namespace UsabilityDynamics\WPRETSC {
                   "slug" => sanitize_title( $_term_parent_value )
                 ));
 
-                ud_get_wp_rets_client()->write_log( "Created parent term [$_term_parent_value] with [" . $_term_parent['term_id'] ."]." );
+                if( is_wp_error( $_term_parent ) ) {
+                  ud_get_wp_rets_client()->write_log( "Error creating term [$_term_parent_value] with [" . $_term_parent->get_error_message() ."]." );
+                } else {
+                  ud_get_wp_rets_client()->write_log( "Created parent term [$_term_parent_value] with [" . $_term_parent['term_id'] ."]." );
+                }
 
               }
 

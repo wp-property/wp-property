@@ -202,8 +202,10 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
         action: 'wpp_ajax_property_query',
         property_id: property_id
       }, function ( data ) {
+
         jQuery( "#wpp_ajax_property_result" ).show();
-        jQuery( "#wpp_ajax_property_result" ).html( data );
+        jQuery( "#wpp_ajax_property_result" ).addClass( 'jjson' );
+        jQuery("#wpp_ajax_property_result").jJsonViewer(data.data.property);
         jQuery( "#wpp_ajax_property_query_cancel" ).show();
       } );
     } );

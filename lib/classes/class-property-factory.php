@@ -17,7 +17,9 @@ namespace UsabilityDynamics\WPP {
        * @since 1.11
        * @todo Code pertaining to displaying data should be migrated to prepare_property_for_display() like :$real_value = nl2br($real_value);
        * @todo Fix the long dashes - when in latitude or longitude it breaks it when using static map
-       *
+       * @param $id
+       * @param bool $args
+       * @return array|bool|mixed
        */
       static public function get( $id, $args = false ) {
         global $wp_properties;

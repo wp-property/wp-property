@@ -672,10 +672,8 @@ if (get_option('permalink_structure') == '') {
           <div
             class="wpp_settings_block"><?php printf(__('Enter in the ID of the %1s you want to look up, and the class will be displayed below.', ud_get_wp_property()->domain), WPP_F::property_label('singular')) ?>
             <input type="text" id="wpp_property_class_id"/>
-            <input type="button" class="button" value="<?php _e('Lookup', ud_get_wp_property()->domain) ?>"
-                   id="wpp_ajax_property_query"> <span id="wpp_ajax_property_query_cancel"
-                                                       class="wpp_link hidden"><?php _e('Cancel', ud_get_wp_property()->domain) ?></span>
-            <pre id="wpp_ajax_property_result" class="wpp_class_pre hidden"></pre>
+            <input type="button" class="button" value="<?php _e('Lookup', ud_get_wp_property()->domain) ?>" id="wpp_ajax_property_query"> <span id="wpp_ajax_property_query_cancel" class="wpp_link hidden"><?php _e('Cancel', ud_get_wp_property()->domain) ?></span>
+            <pre id="wpp_ajax_property_result" class="wpp-json-viewer hidden"></pre>
           </div>
 
           <div

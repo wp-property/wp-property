@@ -7,6 +7,7 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use WPP_F;
   use MatthiasMullie\Minify\Exception;
 
   if( !class_exists( 'UsabilityDynamics\WPP\Ajax' ) ) {
@@ -227,18 +228,23 @@ namespace UsabilityDynamics\WPP {
 
       }
 
-      public function action_wpp_ajax_property_query() {
+      /**
+       * Property Object previewer
+       *
+       * @author potanin@UD
+       * @param array $args
+       * @return array
+       */
+      public function action_wpp_ajax_property_query($args = array( )) {
 
-        $class = WPP_F::get_property( trim( $_REQUEST[ "property_id" ] ) );
+        $_property_id = trim( $args[ "property_id" ] );
 
-        if( $class ) {
-          echo "WPP_F::get_property() output: \n\n";
-          print_r( $class );
-          echo "\nAfter prepare_property_for_display() filter:\n\n";
-          print_r( prepare_property_for_display( $class ) );
-        } else {
-          echo __( "No property found.", "wpp" );
-        }
+        $class = WPP_F::get_property( $_property_id );
+
+        return array(
+          'property' => $class,
+          'for_display' => prepare_property_for_display( $class )
+        );
 
       }
 
