@@ -150,7 +150,7 @@ module.exports = {
         console.log( 'stderr', stderr );
       }
 
-      if( stdout.indexOf( "Success: Value passed for" ) === 0 ) {
+      if( stdout.indexOf( "Success:" ) === 0 ) {
         return done();
       }
 
