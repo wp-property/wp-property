@@ -1,3 +1,6 @@
+#### 4.0.4 ( January 26, 2017 )
+* Added ability to load plugin as vendor dependency
+
 #### 4.0.3 ( October 7, 2015 )
 * Fixed initialisation logic of plugin.
 

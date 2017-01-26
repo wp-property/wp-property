@@ -188,6 +188,7 @@ return array(
     'UsabilityDynamics\\WPLT\\WP_List_Table' => $vendorDir . '/usabilitydynamics/lib-wp-list-table/lib/classes/class-wp-list-table.php',
     'UsabilityDynamics\\WPP\\Admin' => $baseDir . '/lib/classes/class-admin.php',
     'UsabilityDynamics\\WPP\\Admin_Overview' => $baseDir . '/lib/classes/class-admin-overview.php',
+    'UsabilityDynamics\\WPP\\Agents_Bootstrap' => $baseDir . '/vendor/plugins/wp-property-agents/lib/classes/class-agents-bootstrap.php',
     'UsabilityDynamics\\WPP\\Ajax' => $baseDir . '/lib/classes/class-ajax.php',
     'UsabilityDynamics\\WPP\\Attributes' => $baseDir . '/lib/classes/class-attributes.php',
     'UsabilityDynamics\\WPP\\Bootstrap' => $baseDir . '/lib/classes/class-bootstrap.php',

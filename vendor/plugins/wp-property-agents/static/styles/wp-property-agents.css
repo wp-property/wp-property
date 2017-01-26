@@ -1,0 +1,72 @@
+.wpp_agent_info_single_wrapper {
+  margin-bottom: 15px;
+}
+
+.wpp_agent_image {
+margin-bottom: 15px;
+  text-align: center;
+}
+
+.wpp_agent_image img {
+  max-width: 100%;
+}
+
+ul.wpp_agent_info_list {
+  margin: 0 0 15px;
+  padding: 0;
+  list-style: none;
+}
+
+ul.wpp_agent_info_list li {
+  list-style: none;
+}
+
+ul.wpp_agent_info_list li.wpp_agent_stats_display_name {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 1.5em;
+}
+
+ul.wpp_agent_info_list li.wpp_agent_stats_widget_bio {
+  margin-bottom: 5px;
+}
+
+ul.wpp_agent_info_list li.wpp_agent_stats_socials {
+
+}
+
+ul.wpp_agent_info_list li.wpp_agent_stats_socials .wpp_agent_socials_list {
+  margin: 0 0 15px;
+  padding: 0 0 0 10px;
+  list-style: none;
+}
+
+ul.wpp_agent_info_list li.wpp_agent_stats_socials .wpp_agent_socials_list li {
+
+}
+
+ul.wpp_agent_info_list li.wpp_agent_stats_socials .wpp_agent_socials_list li a {
+
+}
+
+dl.wpp_agent_info_list {
+  margin-bottom: 10px;
+}
+
+dl.wpp_agent_info_list dt {
+  font-weight: bold;
+}
+
+dl.wpp_agent_info_list dd {
+
+}
+
+.wpp_agent_full_bio {
+  margin: 10px 0;
+}
+
+.clearfix:after {
+  display: block;
+  content: '';
+  clear: both;
+}

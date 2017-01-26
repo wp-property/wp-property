@@ -695,17 +695,17 @@
     },
     {
         "name": "wp-property/wp-property-supermap",
-        "version": "dev-develop-maxim",
-        "version_normalized": "dev-develop-maxim",
+        "version": "4.0.4",
+        "version_normalized": "4.0.4.0",
         "source": {
             "type": "git",
             "url": "git@github.com:wp-property/wp-property-supermap",
-            "reference": "develop-maxim"
+            "reference": "4.0.4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/wp-property/wp-property-supermap/archive/develop-maxim.zip",
-            "reference": "develop-maxim",
+            "url": "https://github.com/wp-property/wp-property-supermap/archive/4.0.4.zip",
+            "reference": "4.0.4",
             "shasum": null
         },
         "archive": {
@@ -756,12 +756,88 @@
         "autoload": {
             "classmap": [
                 "lib/classes"
+            ],
+            "files": [
+                "loader.php"
             ]
         },
         "license": [
             "MIT"
         ],
         "homepage": "https://www.usabilitydynamics.com/product/wp-property-supermap/"
+    },
+    {
+        "name": "wp-property/wp-property-agents",
+        "version": "2.0.6",
+        "version_normalized": "2.0.6.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:wp-property/wp-property-agents",
+            "reference": "2.0.6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/wp-property/wp-property-agents/archive/2.0.6.zip",
+            "reference": "2.0.6",
+            "shasum": null
+        },
+        "archive": {
+            "exclude": [
+                "node_modules",
+                ".gitignore",
+                "test",
+                "circle.yml",
+                "composer.lock",
+                "gruntfile.js",
+                "package.json"
+            ]
+        },
+        "require": {
+            "php": ">=5.3",
+            "usabilitydynamics/lib-utility": "0.3.7",
+            "usabilitydynamics/lib-wp-bootstrap": "1.2.1"
+        },
+        "require-dev": {
+            "codeclimate/php-test-reporter": "dev-master",
+            "usabilitydynamics/lib-wp-phpunit": "master"
+        },
+        "type": "wordpress-plugin",
+        "extra": {
+            "schemas": {
+                "dependencies": {
+                    "modules": [],
+                    "plugins": [
+                        {
+                            "name": "WP-Property",
+                            "slug": "wp-property",
+                            "version": "2.0.0",
+                            "required": true
+                        }
+                    ]
+                },
+                "licenses": {
+                    "client": false,
+                    "product": {
+                        "referrer": "wp-property/wp-property",
+                        "product_id": "wp-property/wp-property-agents"
+                    }
+                }
+            },
+            "installer-name": "wp-property-agents"
+        },
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "lib/classes"
+            ],
+            "files": [
+                "loader.php"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "homepage": "https://www.usabilitydynamics.com/product/wp-property-agents"
     },
     {
         "name": "usabilitydynamics/wp-tax-post-binding",

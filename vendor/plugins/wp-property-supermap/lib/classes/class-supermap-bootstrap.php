@@ -19,6 +19,46 @@ namespace UsabilityDynamics\WPP {
        * @type UsabilityDynamics\WPP\Supermap_Bootstrap object
        */
       protected static $instance = null;
+
+      /**
+       * License Manager: to BE or NOT TO BE
+       *
+       * @author peshkov@UD
+       */
+      protected function define_license_client() {
+        // Well, we just loaded Plugin via Vendor.
+        // So, we ignore license manager
+        if( defined( 'WPP_SUPERMAP_VENDOR_LOADED' ) && WPP_SUPERMAP_VENDOR_LOADED ) {
+          return false;
+        }
+        //** Break if we already have errors to prevent fatal ones. */
+        if( $this->has_errors() ) {
+          return false;
+        }
+        //** Be sure we have licenses scheme to continue */
+        $schema = $this->get_schema( 'extra.schemas.licenses.client' );
+        if( !$schema ) {
+          return false;
+        }
+        //** Licenses Manager */
+        if( !class_exists( '\UsabilityDynamics\UD_API\Bootstrap' ) ) {
+          $this->errors->add( __( 'Class \UsabilityDynamics\UD_API\Bootstrap does not exist. Be sure all required plugins and (or) composer modules installed and activated.', $this->domain ) );
+          return false;
+        }
+        $args = $this->args;
+        $args = array_merge( $args, array(
+          'type' => $this->type,
+          'name' => $this->name,
+          'slug' => $this->slug,
+          'referrer_slug' => $this->slug,
+          'domain' => $this->domain,
+          'errors_callback' => array( $this->errors, 'add' ),
+        ), $schema );
+        if( empty( $args[ 'screen' ] ) ) {
+          $this->errors->add( __( 'Licenses client can not be activated due to invalid \'licenses\' schema.', $this->domain ) );
+        }
+        $this->client = new \UsabilityDynamics\UD_API\Bootstrap( $args );
+      }
       
       /**
        * Instantaite class.
