@@ -38,7 +38,7 @@ module.exports = {
       // console.log( require( 'util' ).inspect( resp.headers, {showHidden: false, depth: 2, colors: true} ) );
       if( !resp || resp.statusCode !== 200 ) {
         console.log( require( 'util' ).inspect( error, { showHidden: false, depth: 2, colors: true } ) );
-        return new Error( 'Unexpected response code post-wp-property activation.' );
+        return done( new Error( 'Unexpected response code post-wp-property activation.' ) );
       }
 
       done();
@@ -70,7 +70,7 @@ module.exports = {
       // console.log( require( 'util' ).inspect( resp.headers, {showHidden: false, depth: 2, colors: true} ) );
       if( !resp || resp.statusCode !== 200 ) {
         console.log( require( 'util' ).inspect( error, { showHidden: false, depth: 2, colors: true } ) );
-        return new Error( 'Unexpected response code post-wp-property activation.' );
+        return done( new Error( 'Unexpected response code post-wp-property activation.' ) );
       }
 
       done();
