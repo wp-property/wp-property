@@ -244,7 +244,7 @@ namespace UsabilityDynamics\WPRETSC {
         $post_data['tax_input'] = array();
 
         // Ensure we have lat/log meta fields. @note May be a better place to set this up?
-        if( !$post_data[ 'meta_input' ][ 'latitude' ] && isset( $post_data['_system']['location']['lat'] ) ) {
+        if( ( !isset( $post_data[ 'meta_input' ][ 'latitude' ] ) || !$post_data[ 'meta_input' ][ 'latitude' ] ) && isset( $post_data['_system']['location']['lat'] ) ) {
           $post_data[ 'meta_input' ][ 'latitude' ] = $post_data['_system']['location']['lat'];
           $post_data[ 'meta_input' ][ 'longitude' ] = $post_data['_system']['location']['lon'];
           ud_get_wp_rets_client()->write_log( 'Inserted lat/lon from _system ' . $post_data['_system']['location']['lat'] );
