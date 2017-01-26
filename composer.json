@@ -88,6 +88,27 @@
         "enabled": true
       },
       {
+        "name": "Freemius",
+        "constant": "WPP_FEATURE_FLAG_FREEMIUS",
+        "description": "Freemius for WP Property",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Standard Location Taxonomy",
+        "constant": "WPP_FEATURE_FLAG_WPP_LOCATION",
+        "description": "Rich location terms.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Standard Property Type",
+        "constant": "WPP_FEATURE_FLAG_WPP_TYPE",
+        "description": "Freemius for WP Property",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
         "name": "Meta Aliases",
         "constant": "WP_PROPERTY_META_ALIAS",
         "description": "Meta aliases for WP-Property.",

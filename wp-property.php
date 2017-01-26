@@ -39,21 +39,6 @@ if( !defined( 'WPP_Templates' ) ) {
   define( 'WPP_Templates', WPP_Path . 'static/views' );
 }
 
-// New Feature Flags since 2.3.0 - enable freemius 
-if( !defined( 'WPP_FEATURE_FLAG_FREEMIUS' ) ) {
-  define( 'WPP_FEATURE_FLAG_FREEMIUS', true);
-}
-
-// New Feature Flags since 2.3.0 - enable Property Location taxonomy 
-if( !defined( 'WPP_FEATURE_FLAG_WPP_LOCATION' ) ) {
-  define( 'WPP_FEATURE_FLAG_WPP_LOCATION', true);
-}
-
-// New Feature Flags since 2.3.0 - enable Property Type taxonomy 
-if( !defined( 'WPP_FEATURE_FLAG_WPP_TYPE' ) ) {
-  define( 'WPP_FEATURE_FLAG_WPP_TYPE', true);
-}
-
 // Use Freemius is flag is enabled.
 if( defined( 'WPP_FEATURE_FLAG_FREEMIUS' ) && WPP_FEATURE_FLAG_FREEMIUS ) {
 
