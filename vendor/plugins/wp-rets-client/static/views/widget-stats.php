@@ -1,5 +1,7 @@
 <div class="wpp_retsci_widget_stats" data-config="<?php echo esc_attr($data) ?>">
 
+  <p>Stats below for imported listings.</p>
+
   <div class="stats">
     <p class="updates_description">Updates Today</p>
     <h1 class="updates_number"><h1>

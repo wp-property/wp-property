@@ -36,6 +36,9 @@ namespace UsabilityDynamics\WPRETSC {
         // Initialize Media handler
         new Media();
 
+        // Initialize Register handler
+        new Register();
+
         // 3d-party compatibility
         new Connectors\Loader();
 
@@ -43,7 +46,11 @@ namespace UsabilityDynamics\WPRETSC {
         new Ajax();
 
         add_action( 'wp_dashboard_setup', function(){
-          new Widget();
+
+          if( defined( 'RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET' ) && RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET ) {
+            new Widget();
+          }
+
         } );
 
         add_action('init', function() {
@@ -68,6 +75,7 @@ namespace UsabilityDynamics\WPRETSC {
             'show_ui'           => true,
             'show_in_menu'      => false,
             'show_admin_column' => false,
+            'meta_box_cb' => false,
             'query_var'         => false,
             'rewrite'           => false
           ) );
