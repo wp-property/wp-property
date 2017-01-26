@@ -1,3 +1,5 @@
+@import "../start";
+
 #fs_account
 {
     .postbox,
@@ -58,6 +60,10 @@
     }
 }
 
+#fs_account_details .button-group {
+    float: right;
+}
+
 .rtl #fs_account .fs-header-actions
 {
     left: 15px;
@@ -106,11 +112,20 @@
         padding: 10px;
     }
 
-    var, code
+    code {
+        line-height: 28px;
+    }
+
+    var, code, input[type="text"]
     {
         color: #0073AA;
         font-size: 16px;
         background: none;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        font-weight: bold;
     }
 }
 
@@ -153,6 +168,10 @@ label.fs-tag
         vertical-align: middle;
     }
 
+    thead {
+        white-space: nowrap;
+    }
+
     td:first-child,
     th:first-child
     {
@@ -167,5 +186,65 @@ label.fs-tag
     th
     {
         font-weight: bold;
+    }
+}
+
+#fs_billing_address {
+    width: 100%;
+
+    tr {
+        td {
+            width: 50%;
+            padding: 5px;
+        }
+
+        &:first-of-type {
+            td {
+                padding-top: 0;
+            }
+        }
+    }
+
+    @mixin read-mode {
+        border-color: transparent;
+        color: #777;
+        border-bottom: 1px dashed #ccc;
+        padding-left: 0;
+        background: none;
+    }
+
+    span {
+        font-weight: bold;
+    }
+
+    input, select {
+        @include placeholder(transparent);
+
+        display: block;
+        width: 100%;
+        margin-top: 5px;
+
+        &.fs-read-mode {
+            @include read-mode();
+        }
+    }
+
+
+    &.fs-read-mode {
+        td span {
+            display: none;
+        }
+
+        input, select
+        {
+            @include read-mode();
+            @include placeholder(#ccc);
+        }
+    }
+
+
+    button {
+        display: block;
+        width: 100%;
     }
 }

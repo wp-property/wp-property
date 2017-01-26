@@ -205,6 +205,8 @@ return array(
     'UsabilityDynamics\\WPP\\Scaffold' => $baseDir . '/lib/classes/class-scaffold.php',
     'UsabilityDynamics\\WPP\\Settings' => $baseDir . '/lib/classes/class-settings.php',
     'UsabilityDynamics\\WPP\\Shortcode' => $baseDir . '/lib/classes/class-shortcode.php',
+    'UsabilityDynamics\\WPP\\Supermap_Bootstrap' => $baseDir . '/vendor/plugins/wp-property-supermap/lib/classes/class-supermap-bootstrap.php',
+    'UsabilityDynamics\\WPP\\Supermap_Utility' => $baseDir . '/vendor/plugins/wp-property-supermap/lib/classes/class-supermap-utility.php',
     'UsabilityDynamics\\WPP\\Terms_Bootstrap' => $baseDir . '/vendor/plugins/wp-property-terms/lib/classes/class-terms-bootstrap.php',
     'UsabilityDynamics\\WPP\\Terms_Upgrade' => $baseDir . '/vendor/plugins/wp-property-terms/lib/classes/class-terms-upgrade.php',
     'UsabilityDynamics\\WPP\\Upgrade' => $baseDir . '/lib/classes/class-upgrade.php',

@@ -6,6 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInite2785405f0a6b7f55ec316a45b405cc6
 {
+    public static $files = array (
+        '106c83b0e8b3c9e1edae0b692e60f4a5' => __DIR__ . '/../../..' . '/wp-property-terms.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'C' => 
         array (

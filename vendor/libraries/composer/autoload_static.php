@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece
+class ComposerStaticInitb193c46a726c7192f51faac3921de92a
 {
     public static $files = array (
         '68586f4e52570fad0a0d201f5302cfc0' => __DIR__ . '/../../..' . '/vendor/plugins/wp-meta-box/meta-box-loader.php',
@@ -229,6 +229,7 @@ class ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece
         'UsabilityDynamics\\WPP\\Export' => __DIR__ . '/../../..' . '/lib/classes/class-export.php',
         'UsabilityDynamics\\WPP\\Layouts' => __DIR__ . '/../../..' . '/lib/classes/class-layouts.php',
         'UsabilityDynamics\\WPP\\Layouts_API_Client' => __DIR__ . '/../../..' . '/lib/classes/class-layouts-api-client.php',
+        'UsabilityDynamics\\WPP\\Layouts_Custom_Control' => __DIR__ . '/../../..' . '/lib/classes/class-customizer.php',
         'UsabilityDynamics\\WPP\\Layouts_Settings' => __DIR__ . '/../../..' . '/lib/classes/class-layouts-settings.php',
         'UsabilityDynamics\\WPP\\List_Table' => __DIR__ . '/../../..' . '/lib/classes/class-list-table.php',
         'UsabilityDynamics\\WPP\\Meta_Box' => __DIR__ . '/../../..' . '/lib/classes/class-meta-box.php',
@@ -237,10 +238,13 @@ class ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece
         'UsabilityDynamics\\WPP\\Scaffold' => __DIR__ . '/../../..' . '/lib/classes/class-scaffold.php',
         'UsabilityDynamics\\WPP\\Settings' => __DIR__ . '/../../..' . '/lib/classes/class-settings.php',
         'UsabilityDynamics\\WPP\\Shortcode' => __DIR__ . '/../../..' . '/lib/classes/class-shortcode.php',
+        'UsabilityDynamics\\WPP\\Supermap_Bootstrap' => __DIR__ . '/../../..' . '/vendor/plugins/wp-property-supermap/lib/classes/class-supermap-bootstrap.php',
+        'UsabilityDynamics\\WPP\\Supermap_Utility' => __DIR__ . '/../../..' . '/vendor/plugins/wp-property-supermap/lib/classes/class-supermap-utility.php',
         'UsabilityDynamics\\WPP\\Terms_Bootstrap' => __DIR__ . '/../../..' . '/vendor/plugins/wp-property-terms/lib/classes/class-terms-bootstrap.php',
         'UsabilityDynamics\\WPP\\Terms_Upgrade' => __DIR__ . '/../../..' . '/vendor/plugins/wp-property-terms/lib/classes/class-terms-upgrade.php',
         'UsabilityDynamics\\WPP\\Upgrade' => __DIR__ . '/../../..' . '/lib/classes/class-upgrade.php',
         'UsabilityDynamics\\WPP\\WPML' => __DIR__ . '/../../..' . '/lib/classes/class-wpml.php',
+        'UsabilityDynamics\\WPP\\WP_Property_Customizer' => __DIR__ . '/../../..' . '/lib/classes/class-customizer.php',
         'UsabilityDynamics\\WPP\\Widget' => __DIR__ . '/../../..' . '/lib/classes/class-widget.php',
         'UsabilityDynamics\\WPRETSC\\Ajax' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-ajax.php',
         'UsabilityDynamics\\WPRETSC\\Bootstrap' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-bootstrap.php',
@@ -266,10 +270,10 @@ class ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit1454419d8a3e10d3cb0d524d00ebbece::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitb193c46a726c7192f51faac3921de92a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitb193c46a726c7192f51faac3921de92a::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitb193c46a726c7192f51faac3921de92a::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitb193c46a726c7192f51faac3921de92a::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -33,8 +33,9 @@
     "usabilitydynamics/wp-meta-box-utilities": "1.0.2",
     "UsabilityDynamics/wp-gallery-metabox": "2.0.1",
     "usabilitydynamics/wp-rets-client": "0.2.3",
+    "wp-property/wp-property-supermap": "dev-develop-maxim",
     "wp-property/wp-property-terms": "dev-latest",
-    "freemius/wordpress-sdk": "^1.7",
+    "freemius/wordpress-sdk": "^1.1.7",
     "ccampbell/chromephp": "^4.1"
   },
   "require-dev": {

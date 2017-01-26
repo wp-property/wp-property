@@ -58,7 +58,7 @@
 		/**
 		 * @since 1.1.3
 		 *
-		 * @var string[]bool
+		 * @var array<string,bool>
 		 */
 		private $_default_submenu_items;
 		/**
@@ -110,7 +110,7 @@
 		}
 
 		private function get_bool_option( &$options, $key, $default = false ) {
-			return isset( $options[ $key ] ) &&is_bool( $options[ $key ] )  ? $options[ $key ] : $default;
+			return isset( $options[ $key ] ) && is_bool( $options[ $key ] ) ? $options[ $key ] : $default;
 		}
 
 		#endregion Helpers
@@ -502,7 +502,6 @@
 		}
 
 		/**
-		 *
 		 * @author Vova Feldman (@svovaf)
 		 * @since  1.1.4
 		 *
@@ -527,6 +526,9 @@
 			} else {
 				global $menu;
 
+				// Remove original CPT menu.
+				unset( $menu[ $found_menu['position'] ] );
+
 				// Create new top-level menu action.
 				$hookname = add_menu_page(
 					$found_menu['menu'][3],
@@ -537,12 +539,32 @@
 					$found_menu['menu'][6],
 					$found_menu['position']
 				);
-
-				// Remove original CPT menu.
-				unset( $menu[ $found_menu['position'] ] );
 			}
 
 			return $hookname;
+		}
+
+		/**
+		 * Adds a counter to the module's top level menu item.
+		 *
+		 * @author Vova Feldman (@svovaf)
+		 * @since  1.2.1.5
+		 *
+		 * @param int    $counter
+		 * @param string $class
+		 */
+		function add_counter_to_menu_item( $counter = 1, $class = '' ) {
+			global $menu;
+
+			// Find main menu item.
+			$found_menu = $this->find_top_level_menu();
+
+			if ( false === $menu ) {
+				return;
+			}
+
+			// Override menu label.
+			$menu[ $found_menu['position'] ][0] = $found_menu['menu'][0] . ' <span class="update-plugins ' . $class . ' count-' . $counter . '"><span>' . $counter . '</span></span>';
 		}
 
 		#endregion Top level menu Override
