@@ -244,15 +244,17 @@ class class_wpp_supermap {
               foreach($supermap_configuration['markers'] as $slug => $marker): ?>
 
                 <?php
-                  $marker_image_url = preg_match( '/(http|https):\/\//', $marker['file'] )
-                                      ? $marker['file'] : $markers_url . '/' . $marker['file'];
+
+                if( isset( $marker['file'] ) && $marker['file'] ){
+                  $marker_image_url = preg_match( '/(http|https):\/\//', $marker['file'] ) ? $marker['file'] : $markers_url . '/' . $marker['file'];
+                }
                 ?>
 
                 <tr class="wpp_dynamic_table_row" slug="<?php echo $slug; ?>" new_row='false'>
                   <td class="wpp_draggable_handle">&nbsp;</td>
                   <td class="wpp_ajax_image_upload">
                     <div class="wpp_supermap_ajax_uploader">
-                    <?php if(!empty($marker_image_url)) : ?>
+                    <?php if( isset( $marker_image_url ) && !empty($marker_image_url)) : ?>
                       <img class="wpp_marker_image" src="<?php echo $marker_image_url; ?>" alt="" />
                     <?php endif; ?>
                     </div>
