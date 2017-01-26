@@ -11,6 +11,7 @@ module.exports = {
     }
 
     module.host = 'localhost';
+    module.base_url = 'http://' + module.host + ':3000';
 
     module.downloadUrl = process.env.CIRCLE_REPOSITORY_URL + '/archive/' + process.env.CIRCLE_SHA1 + '.zip';
 
@@ -19,25 +20,63 @@ module.exports = {
   },
 
   // curl -H 'host:localhost' http://localhost:3000/ -I
-  'WordPress is reachable.': function( done ) {
-    // console.log( 'test one', 'http://' + module.host + ':3000/' );
+  'WordPress readme.html is reachable.': function( done ) {
+    //console.log( 'test one', 'http://' + module.host + ':3000/' );
 
     request.get( {
       followRedirect: false,
-      timeout: 2000,
+      timeout: 1000,
       headers: {
         host: process.env.CIRCLE_SHA1 + '-' + process.env.CIRCLE_BUILD_NUM + '.ngrok.io'
       },
-      url: 'http://' + module.host + ':3000/'
+      url: module.base_url + '/readme.html'
     } , function checkResponse( error, resp, body ) {
 
+      if( error ) {
+        done( new Error( 'Can not reach WordPress at [' + module.base_url + '/readme.html].' ) );
+      }
       // console.log( require( 'util' ).inspect( resp.headers, {showHidden: false, depth: 2, colors: true} ) );
       // console.log( 'resp.statusCode', resp.statusCode );
 
       if( resp.statusCode === 301 ) {
         console.log( "Most likely first time tests are being ran and site is trying to redirect to its default siteurl." );
       } else if( resp.statusCode === 200 ) {
-        console.log( "No redirection, our custom siteurl/home have already been set." );
+        // console.log( "No redirection, our custom siteurl/home have already been set." );
+      } else {
+        console.log( "Unexpected status code!", resp.statusCode );
+        return done( new Error( 'Unexpected status code.' ) );
+      }
+
+      done();
+
+    });
+
+    //done();
+
+  },
+
+  'WordPress wp-admin/admin-ajax.php is reachable.': function( done ) {
+    //console.log( 'test one', 'http://' + module.host + ':3000/' );
+
+    request.get( {
+      followRedirect: false,
+      timeout: 1000,
+      headers: {
+        host: process.env.CIRCLE_SHA1 + '-' + process.env.CIRCLE_BUILD_NUM + '.ngrok.io'
+      },
+      url: module.base_url + '/wp-admin/admin-ajax.php'
+    } , function checkResponse( error, resp, body ) {
+
+      if( error ) {
+        done( new Error( 'Can not reach WordPress at [' + module.base_url + '/wp-admin/admin-ajax.php].' ) );
+      }
+      // console.log( require( 'util' ).inspect( resp.headers, {showHidden: false, depth: 2, colors: true} ) );
+      // console.log( 'resp.statusCode', resp.statusCode );
+
+      if( resp.statusCode === 301 ) {
+        console.log( "Most likely first time tests are being ran and site is trying to redirect to its default siteurl." );
+      } else if( resp.statusCode === 200 ) {
+        // console.log( "No redirection, our custom siteurl/home have already been set." );
       } else {
         console.log( "Unexpected status code!", resp.statusCode );
         return done( new Error( 'Unexpected status code.' ) );
@@ -52,7 +91,7 @@ module.exports = {
   },
 
   // /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 user create andy@udx.io andy@udx.io --role=administrator --user_pass=jgnqaobleiubnmcx
-  'can create user via wp-cli': function( done ) {
+  'Can create user via wp-cli': function( done ) {
 
     exec( '/home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 user create andy@udx.io andy@udx.io --role=administrator --user_pass=jgnqaobleiubnmcx', function( error, stdout, stderr ) {
 
@@ -76,7 +115,7 @@ module.exports = {
   },
 
   // /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 option update home "http://${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io"
-  'can update home url': function( done ) {
+  'Can update home url': function( done ) {
 
     exec( '/home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 option update home http://' + process.env.CIRCLE_SHA1 + '-' + process.env.CIRCLE_BUILD_NUM + '.ngrok.io', function( error, stdout, stderr ) {
 
@@ -88,6 +127,10 @@ module.exports = {
         console.log( 'stderr', stderr );
       }
 
+      if( stdout.indexOf( "Success: Value passed for" ) === 0 ) {
+        return done();
+      }
+
       console.log( stdout );
 
       done();
@@ -95,7 +138,7 @@ module.exports = {
   },
 
   // /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 option update siteurl "http://${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io"
-  'can update site url': function( done ) {
+  'Can update site url': function( done ) {
 
     exec( '/home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 option update siteurl http://' + process.env.CIRCLE_SHA1 + '-' + process.env.CIRCLE_BUILD_NUM + '.ngrok.io', function( error, stdout, stderr ) {
 
@@ -107,6 +150,39 @@ module.exports = {
         console.log( 'stderr', stderr );
       }
 
+      if( stdout.indexOf( "Success: Value passed for" ) === 0 ) {
+        return done();
+      }
+
+      console.log( stdout );
+
+      done();
+    });
+
+  },
+
+  'Can activate twentyfifteen theme': function( done ) {
+
+    exec( '/home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 theme activate twentyfifteen', function( error, stdout, stderr ) {
+
+      if( error ) {
+        console.log( 'error', error );
+      }
+
+      if( stderr ) {
+
+        if( stderr.indexOf( "theme is already active" ) > 0 ) {
+          return done();
+        }
+
+        console.log( 'stderr', stderr );
+      }
+
+      if( stdout.indexOf( "Success:" ) === 0 ) {
+        return done();
+      }
+
+
       console.log( stdout );
 
       done();
@@ -116,10 +192,10 @@ module.exports = {
 
   // sudo -u www-data /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 plugin install wp-property
   // sudo -u www-data /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 plugin install wp-property
-  'can download and activate wp-property using the sha version ': function( done ) {
+  'Can download and activate wp-property using the sha version ': function( done ) {
 
     //console.log( '/home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 plugin install ' + module.downloadUrl + ' --activate --quiet' );
-    exec( 'sudo -u www-data /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 plugin install ' + module.downloadUrl + ' --activate --quiet', function( error, stdout, stderr ) {
+    exec( 'sudo -u www-data /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 plugin install ' + module.downloadUrl + ' --force --activate', function( error, stdout, stderr ) {
 
       if( error ) {
         console.log( 'error', error );
@@ -127,40 +203,62 @@ module.exports = {
       }
 
       if( stderr ) {
+
+        if( stderr.indexOf( "is already active." ) > 0 ) {
+          return done();
+        }
+
         console.log( 'stderr', stderr );
+
         return done( new Error( stderr ) );
       }
 
-      console.log( stdout );
+      if( stdout ) {
+
+        if( stdout.indexOf( "Success: Plugin" ) > 0 ) {
+          return done();
+        }
+
+        console.log( 'stdout', stdout );
+      }
 
       done();
     });
 
   },
 
-  // curl -H 'host:localhost' http://localhost:3000/?ci-test=one
-  'site operational after wp-proeprty activation': function( done ) {
-
-    // I realize this isn't setting the bar very high, but its a start.
+  'wp-property/composer.json is reachable.': function( done ) {
+    //console.log( 'test one', 'http://' + module.host + ':3000/' );
 
     request.get( {
       followRedirect: false,
-      timeout: 2000,
+      timeout: 1000,
       headers: {
         host: process.env.CIRCLE_SHA1 + '-' + process.env.CIRCLE_BUILD_NUM + '.ngrok.io'
       },
-      url: 'http://' + module.host + ':3000/'
+      url: module.base_url + '/wp-content/plugins/wp-property-' + process.env.CIRCLE_SHA1 + '/composer.json'
     } , function checkResponse( error, resp, body ) {
 
+      if( error ) {
+        done( new Error( 'Can not reach WordPress at [' + module.base_url + '/wp-admin/admin-ajax.php].' ) );
+      }
       // console.log( require( 'util' ).inspect( resp.headers, {showHidden: false, depth: 2, colors: true} ) );
-      if( !resp || resp.statusCode !== 200 ) {
-        console.log( require( 'util' ).inspect( error, { showHidden: false, depth: 2, colors: true } ) );
-        return new Error( 'Unexpected response code post-wp-property activation.' );
+      // console.log( 'resp.statusCode', resp.statusCode );
+
+      if( resp.statusCode === 301 ) {
+        console.log( "Most likely first time tests are being ran and site is trying to redirect to its default siteurl." );
+      } else if( resp.statusCode === 200 ) {
+        // console.log( "No redirection, our custom siteurl/home have already been set." );
+      } else {
+        console.log( "Unexpected status code!", resp.statusCode );
+        return done( new Error( 'Unexpected status code.' ) );
       }
 
       done();
 
     });
+
+    //done();
 
   },
 

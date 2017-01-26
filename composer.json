@@ -87,7 +87,7 @@
         "constant": "WP_PROPERTY_LAYOUTS",
         "description": "Layouts for WP Property",
         "since": "2.2.1",
-        "enabled": true
+        "enabled": false
       },
       {
         "name": "Setup Assistant",
@@ -108,14 +108,14 @@
         "constant": "WPP_FEATURE_FLAG_WPP_LOCATION",
         "description": "Rich location terms.",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "Standard Property Type",
         "constant": "WPP_FEATURE_FLAG_WPP_TYPE",
         "description": "Freemius for WP Property",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "Field Aliases",
