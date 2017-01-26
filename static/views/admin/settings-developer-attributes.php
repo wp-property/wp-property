@@ -55,7 +55,17 @@ $predefined_values = isset( $wp_properties[ 'predefined_values' ] ) ? $wp_proper
             <input class="slug_setter" type="text" name="wpp_settings[property_stats][<?php echo $slug; ?>]" value="<?php echo $label; ?>"/>
           </li>
           <li class="wpp_development_advanced_option">
-            <input type="text" class="slug wpp_stats_slug_field" readonly='readonly' value="<?php echo $slug; ?>"/>
+
+            <label class="wpp-mmeta-slug-entry">
+              <input type="text" class="slug wpp_stats_slug_field" readonly='readonly' value="<?php echo $slug; ?>"/>
+            </label>
+
+            <?php if( defined( 'WP_PROPERTY_META_ALIAS' ) && WP_PROPERTY_META_ALIAS ) { ?>
+            <label class="wpp-meta-alias-entry">
+              <input type="text" class="slug wpp_meta_alias" name="wpp_settings[meta_alias][<?php echo $slug; ?>]" placeholder="<?php echo $slug; ?>" value="<?php echo isset( $wp_properties[ 'meta_alias' ] ) && isset( $wp_properties[ 'meta_alias' ][$slug] ) ? $wp_properties[ 'meta_alias' ] : '' ; ?>" />
+            </label>
+            <?php } ?>
+
             <?php if( in_array( $slug, $wp_properties[ 'geo_type_attributes' ] ) ): ?>
               <div class="wpp_notice">
                 <span><?php _e( 'Attention! This attribute (slug) is used by Google Validator and Address Display functionality. It is set automaticaly and can not be edited on Property Adding/Updating page.', ud_get_wp_property()->domain ); ?></span>
@@ -83,10 +93,7 @@ $predefined_values = isset( $wp_properties[ 'predefined_values' ] ) ? $wp_proper
             ?>
               
              <div  class='std-attr-mapper'>
-              <select  name='wpp_settings[prop_std_att_mapsto][<?php echo $slug;?>]'  
-                       id="wpp_prop_std_att_mapsto_<?php echo $slug;?>"
-                       class=' wpp_settings-prop_std_att_mapsto'>
-                <option value=''> - </option>
+              <select  name='wpp_settings[prop_std_att_mapsto][<?php echo $slug;?>]' id="wpp_prop_std_att_mapsto_<?php echo $slug;?>" class=' wpp_settings-prop_std_att_mapsto'><option value=''> - </option>
              <?php
               foreach ($wp_properties[ 'prop_std_att' ] as $std_attr_type){
                 foreach ($std_attr_type as $std_key => $std_val){

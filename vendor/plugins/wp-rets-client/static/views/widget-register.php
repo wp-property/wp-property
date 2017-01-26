@@ -1,6 +1,7 @@
 <div class="wpp_retsci_widget_register" data-config="<?php echo esc_attr($data) ?>">
 
   <h3>RETS Sign In</h3>
+  <p>This site is not registered, please proceed below.</p>
 
   <form id="signin-form" action="" method="post">
 

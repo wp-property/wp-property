@@ -341,6 +341,42 @@ namespace UsabilityDynamics\WPP {
 
       }
 
+<<<<<<< HEAD
+=======
+      /**
+       * Set Feature Flag constants by parsing composer.json
+       *
+       * @todo Make sure settings from DB can override these.
+       *
+       * @author potanin@UD
+       * @return array|mixed|null|object
+       */
+      public function parse_feature_flags()
+      {
+        try {
+          $_raw = file_get_contents(wp_normalize_path($this->root_path) . 'composer.json');
+          $_parsed = json_decode($_raw);
+          // @todo Catch poorly formatted JSON.
+          if (!is_object($_parsed)) {
+            // throw new Error( "unable to parse."  );
+          }
+
+          if( isset( $_parsed ) && isset( $_parsed->extra ) && isset( $_parsed->extra->featureFlags )) {
+            foreach( (array)$_parsed->extra->featureFlags as $_feature ) {
+              if( !defined( $_feature->constant ) ) {
+                define( $_feature->constant, $_feature->enabled );
+              }
+            }
+          }
+
+        } catch (Exception $e) {
+          echo 'Caught exception: ', $e->getMessage(), "\n";
+        }
+        return isset($_parsed) ? $_parsed : null;
+      }
+
+
+>>>>>>> origin/latest
     }
 
   }

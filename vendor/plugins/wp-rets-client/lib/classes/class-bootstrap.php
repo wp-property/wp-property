@@ -36,6 +36,9 @@ namespace UsabilityDynamics\WPRETSC {
         // Initialize Media handler
         new Media();
 
+        // Initialize Register handler
+        new Register();
+
         // 3d-party compatibility
         new Connectors\Loader();
 

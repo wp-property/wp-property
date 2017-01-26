@@ -85,14 +85,12 @@ namespace UsabilityDynamics\WP {
         //** Set install/upgrade pages if needed */
         $this->define_splash_pages();
         //** Maybe need to show UD splash page. Used static functions intentionaly. */
-        //hide splash page and make wpp-setup-page+freemius as default
-//        if ( !has_action( 'admin_init', array( Dashboard::get_instance(), 'maybe_ud_splash_page' ) ) ) {
-//          add_action( 'admin_init', array( Dashboard::get_instance(), 'maybe_ud_splash_page' ) );
-//        }
+        if ( !has_action( 'admin_init', array( Dashboard::get_instance(), 'maybe_ud_splash_page' ) ) ) {
+          add_action( 'admin_init', array( Dashboard::get_instance(), 'maybe_ud_splash_page' ) );
+        }
         if ( !has_action( 'admin_menu', array( Dashboard::get_instance(), 'add_ud_splash_page') ) ) {
           add_action( 'admin_menu', array( Dashboard::get_instance(), 'add_ud_splash_page') );
         }
-        
         add_action( 'wp_ajax_ud_bootstrap_dismiss_notice', array( $this, 'ud_bootstrap_dismiss_notice' ) );
       }
       

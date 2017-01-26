@@ -88,6 +88,7 @@
         "enabled": true
       },
       {
+<<<<<<< HEAD
         "name": "WP Property Taxonomies",
         "constant": "WPP_FEATURE_FLAG_WPP_TYPE",
         "description": "Enable Property Type taxonomy",
@@ -106,6 +107,40 @@
         "constant": "WPP_FEATURE_FLAG_WPP_LOCATION",
         "description": "WPP Location",
         "since": "2.3.0",
+=======
+        "name": "Freemius",
+        "constant": "WPP_FEATURE_FLAG_FREEMIUS",
+        "description": "Freemius for WP Property",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Standard Location Taxonomy",
+        "constant": "WPP_FEATURE_FLAG_WPP_LOCATION",
+        "description": "Rich location terms.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Standard Property Type",
+        "constant": "WPP_FEATURE_FLAG_WPP_TYPE",
+        "description": "Freemius for WP Property",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Meta Aliases",
+        "constant": "WP_PROPERTY_META_ALIAS",
+        "description": "Meta aliases for WP-Property.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "RETS Client Dashboard Widget",
+        "constant": "RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET",
+        "description": "Dashboard widget for wp-rets-client, shows stats.",
+        "since": "2.2.1",
+>>>>>>> origin/latest
         "enabled": true
       }
     ],
