@@ -35,7 +35,7 @@ if (!defined('WPP_URL')) {
 }
 
 /** Directory path for includes of template files  */
-<<<<<<< HEAD
+
 if (!defined('WPP_Templates')) {
   define('WPP_Templates', WPP_Path . 'static/views');
 }
@@ -71,10 +71,6 @@ if (!function_exists('parse_feature_flags')) {
 
   // Init feature flags
   parse_feature_flags();
-=======
-if( !defined( 'WPP_Templates' ) ) {
-  define( 'WPP_Templates', WPP_Path . 'static/views' );
->>>>>>> origin/latest
 }
 
 // Use Freemius is flag is enabled.

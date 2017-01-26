@@ -88,26 +88,6 @@
         "enabled": true
       },
       {
-<<<<<<< HEAD
-        "name": "WP Property Taxonomies",
-        "constant": "WPP_FEATURE_FLAG_WPP_TYPE",
-        "description": "Enable Property Type taxonomy",
-        "since": "2.3.0",
-        "enabled": true
-      },
-      {
-        "name": "Freemius",
-        "constant": "WPP_FEATURE_FLAG_FREEMIUS",
-        "description": "Freemius",
-        "since": "2.3.0",
-        "enabled": true
-      },
-      {
-        "name": "WPP Location",
-        "constant": "WPP_FEATURE_FLAG_WPP_LOCATION",
-        "description": "WPP Location",
-        "since": "2.3.0",
-=======
         "name": "Freemius",
         "constant": "WPP_FEATURE_FLAG_FREEMIUS",
         "description": "Freemius for WP Property",
@@ -140,7 +120,6 @@
         "constant": "RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET",
         "description": "Dashboard widget for wp-rets-client, shows stats.",
         "since": "2.2.1",
->>>>>>> origin/latest
         "enabled": true
       }
     ],
