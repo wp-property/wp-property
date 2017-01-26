@@ -65,7 +65,7 @@ jQuery(document).ready(function() {
 //		console.log(main_tabs);
 //		console.log(all_label);
 	var availableTags = all_label;
-    $( "#search_tags" ).autocomplete({
+    $( "#wpp_search_tags" ).autocomplete({
       source: availableTags,
 	  select: function( event, ui ) {
 		  jQuery(".show-selected").removeClass("show-selected");

@@ -132,6 +132,13 @@
         "enabled": false
       },
       {
+        "name": "Enable Setting Search",
+        "constant": "WP_PROPERTY_SETTINGS_SEARCH",
+        "description": "Search settings.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
         "name": "RETS Client Dashboard Widget",
         "constant": "RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET",
         "description": "Dashboard widget for wp-rets-client, shows stats.",

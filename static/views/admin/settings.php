@@ -84,8 +84,11 @@ if (get_option('permalink_structure') == '') {
     <?php wp_nonce_field('wpp_setting_save'); ?>
 
     <div id="wpp_settings_tabs" class="wpp_tabs clearfix">
-      <div id="label-search-text"><input type="text" id="search_tags" placeholder="Settings search" name="search_tags"/>
-      </div>
+
+      <?php if( defined( 'WP_PROPERTY_SETTINGS_SEARCH' ) && WP_PROPERTY_SETTINGS_SEARCH ) { ?>
+        <div id="label-search-text"><input type="text" id="wpp_search_tags" placeholder="Settings search" name="search_tags"/></div>
+      <?php } ?>
+
       <ul class="tabs">
         <li><a href="#tab_main"><?php _e('Main', ud_get_wp_property()->domain); ?></a></li>
         <li><a href="#tab_display"><?php _e('Display', ud_get_wp_property()->domain); ?></a></li>
