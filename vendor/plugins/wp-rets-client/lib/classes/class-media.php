@@ -71,7 +71,16 @@ namespace UsabilityDynamics\WPRETSC {
             }
 
             // return expected array of url, width, height
-            return array( $this->fix_rets_image_url( $attachment_id, $size ), $_image_sizes[ $size ][ 'width' ], $_image_sizes[ $size ][ 'height' ] );
+
+            if( isset( $_image_sizes[ $size ] ) && isset( $_image_sizes[ $size ][ 'width' ] ) && isset( $_image_sizes[ $size ][ 'height' ] ) ) {
+              return array(
+                $this->fix_rets_image_url( $attachment_id, $size ), $_image_sizes[ $size ][ 'width' ], $_image_sizes[ $size ][ 'height' ]
+              );
+            }
+
+            return array(
+              $this->fix_rets_image_url( $attachment_id, $size )
+            );
 
           }
 
@@ -219,7 +228,13 @@ namespace UsabilityDynamics\WPRETSC {
           if( empty( $_extension ) ) {
             $_url .= '-' . $_image_sizes[ $size ][ 'width' ] . 'x' . $_image_sizes[ $size ][ 'height' ];
           } else {
-            $_url = str_replace( '.' . $_extension, '-' . $_image_sizes[ $size ][ 'width' ] . 'x' . $_image_sizes[ $size ][ 'height' ] . '.' . $_extension, $_url );
+
+            if( isset( $_image_sizes[ $size ] ) && isset( $_image_sizes[ $size ]['height'] ) && isset( $_image_sizes[ $size ]['width'] ) ) {
+              $_url = str_replace( '.' . $_extension, '-' . $_image_sizes[ $size ][ 'width' ] . 'x' . $_image_sizes[ $size ][ 'height' ] . '.' . $_extension, $_url );
+            } else {
+              //$_url = str_replace( '.' . $_extension, '.' . $_extension, $_url );
+            }
+
           }
         }
 
