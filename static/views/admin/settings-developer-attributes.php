@@ -60,9 +60,9 @@ $predefined_values = isset( $wp_properties[ 'predefined_values' ] ) ? $wp_proper
               <input type="text" class="slug wpp_stats_slug_field" readonly='readonly' value="<?php echo $slug; ?>"/>
             </label>
 
-            <?php if( defined( 'WP_PROPERTY_META_ALIAS' ) && WP_PROPERTY_META_ALIAS ) { ?>
+            <?php if( defined( 'WP_PROPERTY_FIELD_ALIAS' ) && WP_PROPERTY_FIELD_ALIAS ) { ?>
             <label class="wpp-meta-alias-entry">
-              <input type="text" class="slug wpp_meta_alias" name="wpp_settings[meta_alias][<?php echo $slug; ?>]" placeholder="<?php echo $slug; ?>" value="<?php echo isset( $wp_properties[ 'meta_alias' ] ) && isset( $wp_properties[ 'meta_alias' ][$slug] ) ? $wp_properties[ 'meta_alias' ] : '' ; ?>" />
+              <input type="text" class="slug wpp_field_alias" name="wpp_settings[field_alias][<?php echo $slug; ?>]" placeholder="<?php echo $slug; ?>" value="<?php echo WPP_F::get_alias_map( $slug ) ; ?>" />
             </label>
             <?php } ?>
 

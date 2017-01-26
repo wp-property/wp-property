@@ -81,11 +81,18 @@
     },
     "featureFlags": [
       {
-        "name": "WP Property Layouts",
+        "name": "Layouts",
         "constant": "WP_PROPERTY_LAYOUTS",
         "description": "Layouts for WP Property",
         "since": "2.2.1",
         "enabled": true
+      },
+      {
+        "name": "Setup Assistant",
+        "constant": "WP_PROPERTY_SETUP_ASSISTANT",
+        "description": "Automated setup assistant.",
+        "since": "2.2.1",
+        "enabled": false
       },
       {
         "name": "Freemius",
@@ -109,11 +116,11 @@
         "enabled": false
       },
       {
-        "name": "Meta Aliases",
-        "constant": "WP_PROPERTY_META_ALIAS",
+        "name": "Field Aliases",
+        "constant": "WP_PROPERTY_FIELD_ALIAS",
         "description": "Meta aliases for WP-Property.",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "RETS Client Dashboard Widget",

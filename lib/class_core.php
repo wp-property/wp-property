@@ -80,6 +80,72 @@ class WPP_Core {
 
     add_filter( 'wpp_get_properties_query', array( $this, 'fix_tax_property_query' ));
 
+    // Apply alises.
+    if( defined( 'WP_PROPERTY_FIELD_ALIAS' ) && WP_PROPERTY_FIELD_ALIAS ) {
+      add_filter( 'wpp_get_property', array( $this, 'apply_property_alias' ), 50, 2 );
+      add_filter( 'wpp_get_properties_query', array( $this, 'apply_properties_query_alias' ) . 50, 2 );
+    }
+
+  }
+
+  /**
+   * Apply field alias to property object.
+   *
+   * @param $property
+   * @param $args
+   * @return mixed
+   */
+  static public function apply_property_alias( $property, $args ) {
+    global $wp_properties;
+
+    // add terms to object.
+    foreach( $wp_properties['taxonomies'] as $_tax => $_tax_setup) {
+
+      if( $_tax_setup['unique'] === '1' ) {
+        $property[$_tax] = join( ', ', wp_get_object_terms( $property['ID'], $_tax, array( 'fields' => 'names' ) ) );
+      } else {
+        $property[$_tax] = wp_get_object_terms( $property['ID'], $_tax, array( 'fields' => 'names' ) );
+      }
+    }
+
+    // apply alias logic.
+    foreach( WPP_F::get_alias_map() as $_alias => $_target ) {
+
+      if( isset( $property[ $_target ] ) && $property[ $_target ] && ( !isset( $property[ $_alias ] ) || !$property[ $_alias ] ) ) {
+        $property[ $_alias ] = $property[ $_target ] ;
+      }
+
+
+    }
+
+    WPP_F::debug( 'wpp_get_property:filter (applying alias)', $property['ID'] );
+
+    return $property;
+
+
+  }
+
+  /**
+   * Apply field alises to property query.
+   *
+   * @param $query
+   * @return mixed
+   */
+  static public function apply_properties_query_alias( $query ) {
+
+    foreach( WPP_F::get_alias_map() as $_alias => $_target ) {
+
+      if( isset( $query[ $_alias ] ) ) {
+        $query[ $_target ] = $query[ $_alias ];
+        unset( $query[ $_alias ] );
+      }
+
+    }
+
+    WPP_F::debug( 'wpp_get_properties_query:filter (applying alias)' );
+
+    return $query;
+
   }
 
   /**

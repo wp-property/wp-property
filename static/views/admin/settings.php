@@ -52,12 +52,12 @@ if (get_option('permalink_structure') == '') {
 
   <h2
     class='wpp_settings_page_header'><?php echo ud_get_wp_property('labels.name') . ' ' . __('Settings', ud_get_wp_property()->domain) ?>
-    <?php
-//    if (isset($wp_properties["configuration"]) && isset($wp_properties["configuration"]["show_assistant"])) { ?>
+
+    <?php  if( defined( 'WP_PROPERTY_SETUP_ASSISTANT' ) && WP_PROPERTY_SETUP_ASSISTANT ) { ?>
       <a class="wpp-setup-asst" href="<?php echo admin_url('index.php?page=wpp-setup-page'); ?>">
         <?php echo __('Setup Assistant', ud_get_wp_property()->domain); ?>
       </a>
-<!--    --><?php //} ?>
+    <?php } ?>
 
 
   </h2>
@@ -643,8 +643,10 @@ if (get_option('permalink_structure') == '') {
               <?php _e("Automatic Backups of WP-Property Configuration", ud_get_wp_property()->domain); ?>
               <input type="button" value="<?php _e('Backup Now', ud_get_wp_property()->domain); ?>"
                      id="wpp_ajax_create_settings_backup" class="button">
-              <span
-                class="description"><?php _e('Backups created when you use Setup Assistant,or create one now.', ud_get_wp_property()->domain); ?> </span>
+
+              <?php  if( defined( 'WP_PROPERTY_SETUP_ASSISTANT' ) && WP_PROPERTY_SETUP_ASSISTANT ) { ?>
+              <span class="description"><?php _e('Backups created when you use Setup Assistant,or create one now.', ud_get_wp_property()->domain); ?> </span>
+              <?php } ?>
               <br>
               <div class="wpp_backups_list">
                 <?php

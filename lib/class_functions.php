@@ -14,6 +14,24 @@ class WPP_F extends UsabilityDynamics\Utility
 {
 
   /**
+   * Get Field Aliases
+   *
+   *
+   * @return mixed|void
+   */
+  static public function get_alias_map( $field = false ) {
+    global $wp_properties;
+
+    $field_alias = apply_filters( 'wpp:field_alias', isset( $wp_properties[ 'field_alias' ] ) ? $wp_properties[ 'field_alias' ] : array() );
+
+    if( isset( $field ) ) {
+      return isset( $field_alias[ $field ] ) ? $field_alias[ $field ] : null;
+    }
+    return $field_alias;
+
+  }
+
+  /**
    * This function grabs the API key from UD's servers
    *
    * @updated 1.36.0
