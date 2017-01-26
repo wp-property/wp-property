@@ -22,8 +22,6 @@ module.exports = {
   // curl -H 'host:localhost' http://localhost:3000/?ci-test=one
   'Site admin-ajax.php operational after wp-property activation.': function( done ) {
 
-    // I realize this isn't setting the bar very high, but its a start.
-
     request.get( {
       followRedirect: false,
       timeout: 2000,
