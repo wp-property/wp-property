@@ -153,7 +153,8 @@ module.exports = {
     } , function checkResponse( error, resp, body ) {
 
       // console.log( require( 'util' ).inspect( resp.headers, {showHidden: false, depth: 2, colors: true} ) );
-      if( resp.statusCode !== 200 ) {
+      if( !resp || resp.statusCode !== 200 ) {
+        console.log( require( 'util' ).inspect( error, { showHidden: false, depth: 2, colors: true } ) );
         return new Error( 'Unexpected response code post-wp-property activation.' );
       }
 
