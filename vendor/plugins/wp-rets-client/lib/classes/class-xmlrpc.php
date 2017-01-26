@@ -449,11 +449,6 @@ namespace UsabilityDynamics\WPRETSC {
 
         }
 
-        // We dont need to store this once the Media inserting is working well, besides we can always get it from api. - potanin@UD
-        if( isset( $post_data[ 'meta_input' ][ 'rets_media' ] ) ) {
-          unset( $post_data[ 'meta_input' ][ 'rets_media' ] );
-        }
-
         if( $_post_id ) {
           ud_get_wp_rets_client()->write_log( 'Updating property post [' . $_post_id  . '].' );
         } else {
@@ -467,6 +462,12 @@ namespace UsabilityDynamics\WPRETSC {
         ) );
 
         if( !is_wp_error( $_update_post ) ) {
+
+          // We dont need to store this once the Media inserting is working well, besides we can always get it from api. - potanin@UD
+          if( isset( $post_data[ 'meta_input' ][ 'rets_media' ] ) ) {
+            delete_post_meta( $_post_id, 'rets_media' );
+          }
+
           ud_get_wp_rets_client()->write_log( 'Published property post [' . $_post_id  . '].' );
           /**
            * Do something after property is published
