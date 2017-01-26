@@ -2381,12 +2381,16 @@ class WPP_F extends UsabilityDynamics\Utility
       $extra_values = array();
     }
 
+    echo( '<pre>$property_stats' . print_r( $property_stats, true ) . '</pre>' );
+    echo( '<pre>$property_meta' . print_r( $property_meta, true ) . '</pre>' );
+    echo( '<pre>$extra_values' . print_r( $extra_values, true ) . '</pre>' );
+
     if ($use_optgroups == 'true') {
       $attributes['Attributes'] = $property_stats;
       $attributes['Meta'] = $property_meta;
       $attributes['Other'] = $extra_values;
     } else {
-      $attributes = $property_stats + $property_meta + $extra_values;
+      $attributes = (array) $property_stats + (array) $property_meta + (array) $extra_values;
     }
 
     $attributes = apply_filters('wpp_total_attribute_array', $attributes);
