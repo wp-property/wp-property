@@ -15,7 +15,7 @@ namespace UsabilityDynamics\WPRETSC {
        * @param $rets_id
        * @return null
        */
-      static public function find_property_by_rets_id( $rets_id ) {
+      public function find_property_by_rets_id( $rets_id ) {
         global $wpdb;
 
         $_actual_post_id = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='rets_id' AND meta_value={$rets_id};" );
@@ -57,21 +57,11 @@ namespace UsabilityDynamics\WPRETSC {
        *  it is created with "auto-draft" status but all meta is already added to it.
        *
        * - all post meta/terms added by this thing are attached to the original post, it seems
-       *
-       * tail -f wp-content/debug.log wp-content/rets-debug-log.log
-       *
        * @param $data
-       * @param bool $file
        */
-      static public function write_log( $data, $file = false ) {
+      public function write_log( $data, $file = false ) {
         $file = $file ? $file : ud_get_wp_rets_client()->logfile;
-
-        // same format as debug.log
-        $_time_stamp = date('d-M-Y h:i:s T', time());
-
-        $_content = '[' . $_time_stamp  . '] ' . print_r( $data, true ) . '. [' . timer_stop() . 's].' . "\n";
-
-        file_put_contents( ABSPATH . rtrim( $file, '/\\' ), $_content, FILE_APPEND  );
+        file_put_contents( ABSPATH . rtrim( $file, '/\\' ), '' . print_r( $data, true ) . ' in ' . timer_stop() . ' seconds.' . "\n", FILE_APPEND  );
       }
 
       /**

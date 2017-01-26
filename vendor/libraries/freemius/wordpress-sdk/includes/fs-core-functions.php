@@ -56,7 +56,7 @@
 			ob_start();
 
 			$VARS = &$params;
-			require_once( fs_get_template_path( $path ) );
+			require( fs_get_template_path( $path ) );
 
 			return ob_get_clean();
 		}
@@ -107,7 +107,19 @@
 	}
 
 	function fs_request_get_bool( $key, $def = false ) {
-		return ( isset( $_REQUEST[ $key ] ) && ( 1 == $_REQUEST[ $key ] || 'true' === strtolower( $_REQUEST[ $key ] ) ) ) ? true : $def;
+		if ( ! isset( $_REQUEST[ $key ] ) ) {
+			return $def;
+		}
+
+		if ( 1 == $_REQUEST[ $key ] || 'true' === strtolower( $_REQUEST[ $key ] ) ) {
+			return true;
+		}
+
+		if ( 0 == $_REQUEST[ $key ] || 'false' === strtolower( $_REQUEST[ $key ] ) ) {
+			return false;
+		}
+
+		return $def;
 	}
 
 	function fs_request_is_post() {
@@ -136,6 +148,40 @@
 
 	function fs_request_is_action( $action, $action_key = 'action' ) {
 		return ( strtolower( $action ) === fs_get_action( $action_key ) );
+	}
+
+	/**
+	 * @author Vova Feldman (@svovaf)
+	 * @since  1.0.0
+	 *
+	 * @since  1.2.1.5 Allow nonce verification.
+	 *
+	 * @param string $action
+	 * @param string $action_key
+	 * @param string $nonce_key
+	 *
+	 * @return bool
+	 */
+	function fs_request_is_action_secure(
+		$action,
+		$action_key = 'action',
+		$nonce_key = 'nonce'
+	) {
+		if ( strtolower( $action ) !== fs_get_action( $action_key ) ) {
+			return false;
+		}
+
+		$nonce = ! empty( $_REQUEST[ $nonce_key ] ) ?
+			$_REQUEST[ $nonce_key ] :
+			'';
+
+		if ( empty( $nonce ) ||
+		     ( false === wp_verify_nonce( $nonce, $action ) )
+		) {
+			return false;
+		}
+
+		return true;
 	}
 
 	function fs_is_plugin_page( $menu_slug ) {
@@ -267,9 +313,26 @@
 
 	set_error_handler('fs_error_handler');*/
 
-	function fs_nonce_url( $actionurl, $action = - 1, $name = '_wpnonce' ) {
-//		$actionurl = str_replace( '&amp;', '&', $actionurl );
-		return add_query_arg( $name, wp_create_nonce( $action ), $actionurl );
+	if ( ! function_exists( 'fs_nonce_url' ) ) {
+		/**
+		 * Retrieve URL with nonce added to URL query.
+		 *
+		 * Originally was using `wp_nonce_url()` but the new version
+		 * changed the return value to escaped URL, that's not the expected
+		 * behaviour.
+		 *
+		 * @author Vova Feldman (@svovaf)
+		 * @since  ~1.1.3
+		 *
+		 * @param string     $actionurl URL to add nonce action.
+		 * @param int|string $action    Optional. Nonce action name. Default -1.
+		 * @param string     $name      Optional. Nonce name. Default '_wpnonce'.
+		 *
+		 * @return string Escaped URL with nonce action added.
+		 */
+		function fs_nonce_url( $actionurl, $action = - 1, $name = '_wpnonce' ) {
+			return add_query_arg( $name, wp_create_nonce( $action ), $actionurl );
+		}
 	}
 
 	if ( ! function_exists( 'fs_starts_with' ) ) {
@@ -338,7 +401,7 @@
 				return '';
 			}
 
-			// Urlencode both keys and values
+			// Url encode both keys and values
 			$keys   = fs_urlencode_rfc3986( array_keys( $params ) );
 			$values = fs_urlencode_rfc3986( array_values( $params ) );
 			$params = array_combine( $keys, $values );
@@ -352,7 +415,9 @@
 				$lower_param = strtolower( $parameter );
 
 				// Skip ignore params.
-				if ( in_array( $lower_param, $ignore_params ) || ( false !== $params_prefix && startsWith( $lower_param, $params_prefix ) ) ) {
+				if ( in_array( $lower_param, $ignore_params ) ||
+				     ( false !== $params_prefix && fs_starts_with( $lower_param, $params_prefix ) )
+				) {
 					continue;
 				}
 
@@ -438,4 +503,3 @@
 		// If both have priority return the winner.
 		return ( $a['priority'] < $b['priority'] ) ? - 1 : 1;
 	}
-

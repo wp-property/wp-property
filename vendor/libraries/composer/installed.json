@@ -694,83 +694,150 @@
         "homepage": "https://usabilitydynamics.com"
     },
     {
-        "name": "ccampbell/chromephp",
-        "version": "4.1.0",
-        "version_normalized": "4.1.0.0",
+        "name": "wp-property/wp-property-supermap",
+        "version": "4.0.4",
+        "version_normalized": "4.0.4.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/ccampbell/chromephp.git",
-            "reference": "c3c297615d48ae5b2a86a82311152d1ed095fcef"
+            "url": "git@github.com:wp-property/wp-property-supermap",
+            "reference": "4.0.4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/ccampbell/chromephp/zipball/c3c297615d48ae5b2a86a82311152d1ed095fcef",
-            "reference": "c3c297615d48ae5b2a86a82311152d1ed095fcef",
-            "shasum": ""
+            "url": "https://github.com/wp-property/wp-property-supermap/archive/4.0.4.zip",
+            "reference": "4.0.4",
+            "shasum": null
+        },
+        "archive": {
+            "exclude": [
+                "node_modules",
+                ".gitignore",
+                "test",
+                "circle.yml",
+                "composer.lock",
+                "gruntfile.js",
+                "package.json"
+            ]
         },
         "require": {
-            "php": ">=5.0.0"
+            "php": ">=5.3",
+            "usabilitydynamics/lib-utility": "0.3.7",
+            "usabilitydynamics/lib-wp-bootstrap": "1.2.1"
         },
-        "time": "2013-06-26 03:44:33",
-        "type": "library",
-        "installation-source": "dist",
+        "require-dev": {
+            "codeclimate/php-test-reporter": "dev-master",
+            "usabilitydynamics/lib-wp-phpunit": "master"
+        },
+        "type": "wordpress-plugin",
+        "extra": {
+            "schemas": {
+                "dependencies": {
+                    "modules": [],
+                    "plugins": [
+                        {
+                            "name": "WP-Property",
+                            "slug": "wp-property",
+                            "version": "2.0.0",
+                            "required": true
+                        }
+                    ]
+                },
+                "licenses": {
+                    "client": false,
+                    "product": {
+                        "referrer": "wp-property/wp-property",
+                        "product_id": "wp-property/wp-property-supermap"
+                    }
+                }
+            },
+            "installer-name": "wp-property-supermap"
+        },
+        "installation-source": "source",
         "autoload": {
-            "psr-0": {
-                "ChromePhp": ""
-            }
+            "classmap": [
+                "lib/classes"
+            ],
+            "files": [
+                "loader.php"
+            ]
         },
-        "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "Apache-2.0"
+            "MIT"
         ],
-        "authors": [
-            {
-                "name": "Craig Campbell",
-                "email": "iamcraigcampbell@gmail.com",
-                "homepage": "http://craig.is",
-                "role": "Developer"
-            }
-        ],
-        "description": "Log variables to the Chrome console (via Chrome Logger Google Chrome extension).",
-        "homepage": "http://github.com/ccampbell/chromephp",
-        "keywords": [
-            "log",
-            "logging"
-        ]
+        "homepage": "https://www.usabilitydynamics.com/product/wp-property-supermap/"
     },
     {
-        "name": "freemius/wordpress-sdk",
-        "version": "1.7.4",
-        "version_normalized": "1.7.4.0",
+        "name": "wp-property/wp-property-agents",
+        "version": "2.0.6",
+        "version_normalized": "2.0.6.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/Freemius/wordpress-sdk.git",
-            "reference": "b77dc8ca671c8d28b9d368a9b15e532448557a05"
+            "url": "git@github.com:wp-property/wp-property-agents",
+            "reference": "2.0.6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Freemius/wordpress-sdk/zipball/b77dc8ca671c8d28b9d368a9b15e532448557a05",
-            "reference": "b77dc8ca671c8d28b9d368a9b15e532448557a05",
-            "shasum": ""
+            "url": "https://github.com/wp-property/wp-property-agents/archive/2.0.6.zip",
+            "reference": "2.0.6",
+            "shasum": null
+        },
+        "archive": {
+            "exclude": [
+                "node_modules",
+                ".gitignore",
+                "test",
+                "circle.yml",
+                "composer.lock",
+                "gruntfile.js",
+                "package.json"
+            ]
         },
         "require": {
-            "php": ">=5.2"
+            "php": ">=5.3",
+            "usabilitydynamics/lib-utility": "0.3.7",
+            "usabilitydynamics/lib-wp-bootstrap": "1.2.1"
         },
-        "time": "2016-03-28 04:32:07",
-        "type": "library",
-        "installation-source": "dist",
-        "notification-url": "https://packagist.org/downloads/",
+        "require-dev": {
+            "codeclimate/php-test-reporter": "dev-master",
+            "usabilitydynamics/lib-wp-phpunit": "master"
+        },
+        "type": "wordpress-plugin",
+        "extra": {
+            "schemas": {
+                "dependencies": {
+                    "modules": [],
+                    "plugins": [
+                        {
+                            "name": "WP-Property",
+                            "slug": "wp-property",
+                            "version": "2.0.0",
+                            "required": true
+                        }
+                    ]
+                },
+                "licenses": {
+                    "client": false,
+                    "product": {
+                        "referrer": "wp-property/wp-property",
+                        "product_id": "wp-property/wp-property-agents"
+                    }
+                }
+            },
+            "installer-name": "wp-property-agents"
+        },
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "lib/classes"
+            ],
+            "files": [
+                "loader.php"
+            ]
+        },
         "license": [
-            "GPL-2.0+"
+            "MIT"
         ],
-        "description": "Freemius WordPress SDK",
-        "homepage": "https://freemius.com",
-        "keywords": [
-            "freemius",
-            "plugin",
-            "sdk",
-            "wordpress"
-        ]
+        "homepage": "https://www.usabilitydynamics.com/product/wp-property-agents"
     },
     {
         "name": "usabilitydynamics/wp-tax-post-binding",
@@ -876,14 +943,7 @@
             "schemas": {
                 "dependencies": {
                     "modules": [],
-                    "plugins": [
-                        {
-                            "name": "WP-Property",
-                            "slug": "wp-property",
-                            "version": "2.0.0",
-                            "required": true
-                        }
-                    ]
+                    "plugins": []
                 },
                 "licenses": {
                     "client": false,
@@ -908,5 +968,84 @@
             "MIT"
         ],
         "homepage": "https://www.usabilitydynamics.com/product/wp-property-terms"
+    },
+    {
+        "name": "ccampbell/chromephp",
+        "version": "4.1.0",
+        "version_normalized": "4.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ccampbell/chromephp.git",
+            "reference": "c3c297615d48ae5b2a86a82311152d1ed095fcef"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/ccampbell/chromephp/zipball/c3c297615d48ae5b2a86a82311152d1ed095fcef",
+            "reference": "c3c297615d48ae5b2a86a82311152d1ed095fcef",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.0.0"
+        },
+        "time": "2013-06-26 03:44:33",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "ChromePhp": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Craig Campbell",
+                "email": "iamcraigcampbell@gmail.com",
+                "homepage": "http://craig.is",
+                "role": "Developer"
+            }
+        ],
+        "description": "Log variables to the Chrome console (via Chrome Logger Google Chrome extension).",
+        "homepage": "http://github.com/ccampbell/chromephp",
+        "keywords": [
+            "log",
+            "logging"
+        ]
+    },
+    {
+        "name": "freemius/wordpress-sdk",
+        "version": "1.2.1.5",
+        "version_normalized": "1.2.1.5",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Freemius/wordpress-sdk.git",
+            "reference": "0c132a52b69dd6bc160112d2cf7399702d95599b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Freemius/wordpress-sdk/zipball/0c132a52b69dd6bc160112d2cf7399702d95599b",
+            "reference": "0c132a52b69dd6bc160112d2cf7399702d95599b",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2"
+        },
+        "time": "2016-12-13 01:17:43",
+        "type": "library",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "description": "Freemius WordPress SDK",
+        "homepage": "https://freemius.com",
+        "keywords": [
+            "freemius",
+            "plugin",
+            "sdk",
+            "wordpress"
+        ]
     }
 ]

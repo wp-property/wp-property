@@ -35,7 +35,10 @@
     "codeclimate/php-test-reporter": "~0.1"
   },
   "autoload": {
-    "classmap": [ "lib/classes" ]
+    "classmap": [ "lib/classes" ],
+    "files": [
+      "wp-property-terms.php"
+    ]
   },
   "archive": {
     "exclude": [
@@ -64,14 +67,7 @@
     "schemas": {
       "dependencies" : {
         "modules": {},
-        "plugins": [
-          {
-            "name": "WP-Property",
-            "slug": "wp-property",
-            "version": "2.0.0",
-            "required": true
-          }
-        ]
+        "plugins": {}
       },
       "licenses" : {
         "client" : false,

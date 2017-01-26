@@ -33,8 +33,10 @@
     "usabilitydynamics/wp-meta-box-utilities": "1.0.2",
     "UsabilityDynamics/wp-gallery-metabox": "2.0.1",
     "usabilitydynamics/wp-rets-client": "0.2.3",
+    "wp-property/wp-property-supermap": "4.0.4",
+    "wp-property/wp-property-agents": "2.0.6",
     "wp-property/wp-property-terms": "dev-latest",
-    "freemius/wordpress-sdk": "^1.7",
+    "freemius/wordpress-sdk": "^1.1.7",
     "ccampbell/chromephp": "^4.1"
   },
   "require-dev": {
@@ -85,7 +87,7 @@
         "constant": "WP_PROPERTY_LAYOUTS",
         "description": "Layouts for WP Property",
         "since": "2.2.1",
-        "enabled": true
+        "enabled": false
       },
       {
         "name": "Setup Assistant",
@@ -106,14 +108,14 @@
         "constant": "WPP_FEATURE_FLAG_WPP_LOCATION",
         "description": "Rich location terms.",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "Standard Property Type",
         "constant": "WPP_FEATURE_FLAG_WPP_TYPE",
         "description": "Freemius for WP Property",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "Field Aliases",

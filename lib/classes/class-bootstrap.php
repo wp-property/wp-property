@@ -26,6 +26,18 @@ namespace UsabilityDynamics\WPP {
       public $layouts_settings = null;
 
       /**
+       * Handle some stuff very early
+       *
+       * @author peshkov@UD
+       */
+      public function boot() {
+        // Enable Supermap
+        define( 'WPP_SUPERMAP_VENDOR_LOAD', true );
+        // Enable Agents
+        define( 'WPP_AGENTS_VENDOR_LOAD', true );
+      }
+
+      /**
        * Instantaite class.
        */
       public function init()
