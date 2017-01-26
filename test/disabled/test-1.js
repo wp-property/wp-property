@@ -22,9 +22,9 @@ module.exports = {
   // curl -H 'host:localhost' http://localhost:3000/?ci-test=one
   'Site admin-ajax.php operational after wp-property activation.': function( done ) {
 
-    request.get( {
+    var requestOptions = {
       followRedirect: false,
-      timeout: 2000,
+      timeout: 5000,
       headers: {
         "host": process.env.CIRCLE_SHA1 + '-' + process.env.CIRCLE_BUILD_NUM + '.ngrok.io',
         'Accept':"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -33,7 +33,15 @@ module.exports = {
         "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36"
       },
       url: 'http://' + module.host + ':3000/wp-admin/admin-ajax.php'
-    } , function checkResponse( error, resp, body ) {
+    };
+
+    request.get( requestOptions , function checkResponse( error, resp, body ) {
+
+
+      if( error && error.code && error.code === 'ESOCKETTIMEDOUT' ) {
+        return done( new Error( 'Socker timeout to ' + requestOptions.url ) );
+      }
+
 
       // console.log( require( 'util' ).inspect( resp.headers, {showHidden: false, depth: 2, colors: true} ) );
       if( !resp || resp.statusCode !== 200 ) {
@@ -54,7 +62,7 @@ module.exports = {
 
     var requestOptions = {
       followRedirect: true,
-      timeout: 2000,
+      timeout: 5000,
       headers: {
         "host": process.env.CIRCLE_SHA1 + '-' + process.env.CIRCLE_BUILD_NUM + '.ngrok.io',
         'Accept':"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -66,6 +74,10 @@ module.exports = {
     };
 
     request.get( requestOptions, function checkResponse( error, resp, body ) {
+
+      if( error && error.code && error.code === 'ESOCKETTIMEDOUT' ) {
+        return done( new Error( 'Socker timeout to ' + requestOptions.url ) );
+      }
 
       // console.log( require( 'util' ).inspect( resp.headers, {showHidden: false, depth: 2, colors: true} ) );
       if( !resp || resp.statusCode !== 200 ) {
@@ -82,4 +94,4 @@ module.exports = {
 };
 
 var exec = require( 'child_process' ).exec;
-var request = require( 'requestretry' );
+var request = require( 'request' );

@@ -90,6 +90,10 @@ module.exports = {
 
   },
 
+  // alias wp="/home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000"
+  //
+  // curl -H 'host:de25021ab429e0f95909a482778c89768cc5b65b-1071.ngrok.io' localhost:3000/
+  //
   // /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 user create andy@udx.io andy@udx.io --role=administrator --user_pass=jgnqaobleiubnmcx
   'Can create user via wp-cli': function( done ) {
 
@@ -196,6 +200,43 @@ module.exports = {
 
     //console.log( '/home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 plugin install ' + module.downloadUrl + ' --activate --quiet' );
     exec( 'sudo -u www-data /home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 plugin install ' + module.downloadUrl + ' --force --activate', function( error, stdout, stderr ) {
+
+      if( error ) {
+        console.log( 'error', error );
+        return done( error );
+      }
+
+      if( stderr ) {
+
+        if( stderr.indexOf( "is already active." ) > 0 ) {
+          return done();
+        }
+
+        console.log( 'stderr', stderr );
+
+        return done( new Error( stderr ) );
+      }
+
+      if( stdout ) {
+
+        if( stdout.indexOf( "Success: Plugin" ) > 0 ) {
+          return done();
+        }
+
+        console.log( 'stdout', stdout );
+      }
+
+      done();
+    });
+
+  },
+
+  'Can fix permissions': function( done ) {
+
+    return done();
+
+    //console.log( '/home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 plugin install ' + module.downloadUrl + ' --activate --quiet' );
+    exec( 'sudo chown -R www-data:www-data /home/ubuntu/www/wp-content/plugins', function( error, stdout, stderr ) {
 
       if( error ) {
         console.log( 'error', error );
