@@ -420,7 +420,8 @@ class class_wpp_supermap {
         <option value=""><?php _e('Default by Google', ud_get_wpp_supermap()->domain); ?></option>
         <?php if( !empty( $supermap_configuration['markers'] ) && is_array( $supermap_configuration['markers'] ) ) : ?>
           <?php foreach ($supermap_configuration['markers'] as $mslug => $mvalue ) : ?>
-            <option value="<?php echo $mvalue['file']; ?>" <?php selected($supermap_configuration['property_type_markers'][$slug], $mvalue['file']); ?>><?php echo $mvalue['name']; ?></option>
+            <option value="<?php echo $mvalue['file']; ?>" <?php selected(
+              isset( $supermap_configuration['property_type_markers'][$slug] ) && $supermap_configuration['property_type_markers'][$slug] ? $supermap_configuration['property_type_markers'][$slug]  : null, $mvalue['file']); ?>><?php echo $mvalue['name']; ?></option>
           <?php endforeach; ?>
         <?php endif; ?>
       </select>
