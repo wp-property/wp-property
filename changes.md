@@ -1,4 +1,5 @@
 ### 2.2.1 
+* Improved wp-rets-client logic for inserting terms and taxonomies. Both are added on-the-fly, with hierarchy support if needed.
 * Added Feature flags to help tab to help understand what features are enabled.
 * Fixed a bug with rets-client site registration hanging.
 * Fixed a minor issue with Supermap trying to load a non-existant map pin.

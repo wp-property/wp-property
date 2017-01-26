@@ -102,7 +102,7 @@
       <div class="<?php wpp_css('property::entry_content', "entry-content"); ?>">
         <div class="<?php wpp_css('property::the_content', "wpp_the_content"); ?>"><?php @the_content(); ?></div>
 
-        <?php if ( empty($wp_properties['property_groups']) || $wp_properties['configuration']['property_overview']['sort_stats_by_groups'] != 'true' ) : ?>
+        <?php if ( empty($wp_properties['property_groups']) || !isset( $wp_properties['configuration']['property_overview']['sort_stats_by_groups'] ) || $wp_properties['configuration']['property_overview']['sort_stats_by_groups'] != 'true' ) : ?>
           <ul id="property_stats" class="<?php wpp_css('property::property_stats', "property_stats overview_stats list"); ?>">
             <?php @draw_stats("display=list&make_link=true"); ?>
           </ul>

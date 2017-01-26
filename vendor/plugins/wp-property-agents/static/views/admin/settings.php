@@ -40,8 +40,8 @@ if ( empty($agent_fields) ) {
     </th>
     <td>
       <ul>
-        <li><label><?php _e( 'Single', ud_get_wpp_agents()->domain ); ?>: <input type="text" title="" value="<?php echo ud_get_wp_property( 'configuration.feature_settings.agents.label.single', 'Real Estate Agent' ); ?>" name="wpp_settings[configuration][feature_settings][agents][label][single]" class="" style="" /></label></li>
-        <li><label><?php _e( 'Plural', ud_get_wpp_agents()->domain ); ?>: <input type="text" title="" value="<?php echo ud_get_wp_property( 'configuration.feature_settings.agents.label.plural', 'Real Estate Agents' ); ?>" name="wpp_settings[configuration][feature_settings][agents][label][plural]" class="" style="" /></label></li>
+        <li><label><?php _e( 'Single', ud_get_wpp_agents()->domain ); ?>: <input type="text" title="" value="<?php echo ud_get_wp_property( 'configuration.feature_settings.agents.label.single', 'Agent' ); ?>" name="wpp_settings[configuration][feature_settings][agents][label][single]" class="" style="" /></label></li>
+        <li><label><?php _e( 'Plural', ud_get_wpp_agents()->domain ); ?>: <input type="text" title="" value="<?php echo ud_get_wp_property( 'configuration.feature_settings.agents.label.plural', 'Agents' ); ?>" name="wpp_settings[configuration][feature_settings][agents][label][plural]" class="" style="" /></label></li>
       </ul>
     </td>
   </tr>

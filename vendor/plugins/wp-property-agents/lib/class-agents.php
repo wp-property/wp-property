@@ -40,11 +40,11 @@ class class_agents
     /* Setup White Labels */
     $single_label = ud_get_wp_property('configuration.feature_settings.agents.label.single', false);
     if (empty($single_label)) {
-      ud_get_wp_property()->set('configuration.feature_settings.agents.label.single', __('Real Estate Agent', ud_get_wpp_agents()->domain));
+      ud_get_wp_property()->set('configuration.feature_settings.agents.label.single', __('Agents', ud_get_wpp_agents()->domain));
     }
     $plural_label = ud_get_wp_property('configuration.feature_settings.agents.label.plural', false);
     if (empty($plural_label)) {
-      ud_get_wp_property()->set('configuration.feature_settings.agents.label.plural', __('Real Estate Agents', ud_get_wpp_agents()->domain));
+      ud_get_wp_property()->set('configuration.feature_settings.agents.label.plural', __('Agents', ud_get_wpp_agents()->domain));
     }
 
     /* Add capability */
@@ -62,9 +62,9 @@ class class_agents
     if (!isset($wp_roles)) {
       $wp_roles = new WP_Roles();
     }
-    $wp_roles->roles['agent']['name'] = ud_get_wp_property( 'configuration.feature_settings.agents.label.single', 'Real Estate Agent' );
-    $wp_roles->role_objects['agent']->name = ud_get_wp_property( 'configuration.feature_settings.agents.label.single', 'Real Estate Agent' ); // This will cover get_role() function;
-    $wp_roles->role_names['agent'] = ud_get_wp_property( 'configuration.feature_settings.agents.label.single', 'Real Estate Agent' );
+    $wp_roles->roles['agent']['name'] = ud_get_wp_property( 'configuration.feature_settings.agents.label.single', 'Agent' );
+    $wp_roles->role_objects['agent']->name = ud_get_wp_property( 'configuration.feature_settings.agents.label.single', 'Agents' ); // This will cover get_role() function;
+    $wp_roles->role_names['agent'] = ud_get_wp_property( 'configuration.feature_settings.agents.label.single', 'Agents' );
 
     if (current_user_can(self::$capability)) {
       // Add settings page
