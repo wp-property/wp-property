@@ -34,9 +34,11 @@ module.exports = {
     };
     request.get( _params , function checkResponse( error, resp, body ) {
 
-      console.log( require( 'util' ).inspect( _params.url, { showHidden: false, depth: 2, colors: true } ) );
-      console.log( require( 'util' ).inspect( body, { showHidden: false, depth: 2, colors: true } ) );
-      console.log( require( 'util' ).inspect( resp.headers, { showHidden: false, depth: 2, colors: true } ) );
+      // @note just returns "null"
+
+      //console.log( require( 'util' ).inspect( _params.url, { showHidden: false, depth: 2, colors: true } ) );
+      //console.log( require( 'util' ).inspect( body, { showHidden: false, depth: 2, colors: true } ) );
+      //console.log( require( 'util' ).inspect( resp.headers, { showHidden: false, depth: 2, colors: true } ) );
 
       // console.log( require( 'util' ).inspect( resp.headers, {showHidden: false, depth: 2, colors: true} ) );
       if( !resp || resp.statusCode !== 200 ) {
