@@ -283,10 +283,10 @@ class WPP_Core {
     WPP_F::register_properties_page();
 
     //** Set up url of default property overview page */
-    // WPP_F::register_property_page_url();
+    WPP_F::register_property_page_url();
 
     //** Set up url of random property single page */
-    //WPP_F::register_property_single_url();
+    WPP_F::register_property_single_url();
 
     //** Load all widgets and register widget areas */
     add_action( 'widgets_init', array( 'WPP_F', 'widgets_init' ) );
