@@ -41,6 +41,19 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * @return URL
+       */
+      public function get_url () {
+        return $this->options['url'];
+      }
+      /**
+       * @return Headers
+       */
+      public function get_headers() {
+        return $this->headers;
+      }
+
+      /**
        * @return array|\WP_Error
        */
       public function get_layouts() {
