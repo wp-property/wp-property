@@ -106,14 +106,14 @@
       {
         "name": "Standard Location Taxonomy",
         "constant": "WPP_FEATURE_FLAG_WPP_LOCATION",
-        "description": "Rich location terms.",
+        "description": "Standard property location taxonomy, stored in [wpp_location].",
         "since": "2.2.1",
         "enabled": true
       },
       {
         "name": "Standard Property Type",
         "constant": "WPP_FEATURE_FLAG_WPP_TYPE",
-        "description": "Freemius for WP Property",
+        "description": "Standard property type taxonomy, stored in [wpp_type].",
         "since": "2.2.1",
         "enabled": true
       },
@@ -126,8 +126,8 @@
       },
       {
         "name": "Meta Attributes",
-        "constant": "WP_PROPERTY_META_ATTRIBUTES",
-        "description": "Legacy Meta fields.",
+        "constant": "WP_PROPERTY_LEGACY_META_ATTRIBUTES",
+        "description": "Legacy Meta fields. In v2.2.1 meta fields have been merged with attributes.",
         "since": "2.2.1",
         "enabled": false
       },
