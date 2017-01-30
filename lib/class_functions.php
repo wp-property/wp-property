@@ -1896,7 +1896,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
     register_taxonomy($taxonomy, array('property'), array(
       'hierarchical' => true,
-      'update_count_callback' => null,
+      // 'update_count_callback' => null,
       'labels' => array(),
       'show_ui' => false,
       'show_in_menu' => false,
@@ -1953,7 +1953,7 @@ class WPP_F extends UsabilityDynamics\Utility
             $_detail['description'] = $_value . ' is a ' . $_level . ' within ' . (isset($_higher_level) ? $_higher_level->name : '') . ', a ' . $_higher_level_name . '.';
             $_detail['parent'] = $_higher_level->term_id;
           } else {
-            $_detail['description'] = $_value . ' is a ' . $_level . ' with nothin above it.';
+            $_detail['description'] = $_value . ' is a ' . $_level . ' with nothing above it.';
           }
 
           // $_detail[ 'slug' ] = 'city-slug';
