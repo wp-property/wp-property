@@ -30,8 +30,8 @@ namespace UsabilityDynamics\WPP {
       public function __construct( $options = array() ) {
 
         $this->headers = array(
-          'ud-site-id' => get_site_option('ud_site_id'),
-          'ud-site-secret-token' => get_site_option('ud_site_secret_token')
+          'ud-site-id' => get_site_option('ud_site_id', 'none'),
+          'ud-site-secret-token' => get_site_option('ud_site_secret_token', 'none')
         );
 
         $this->options = wp_parse_args( $options, array(
@@ -108,7 +108,7 @@ namespace UsabilityDynamics\WPP {
           return new \WP_Error('100', 'Could not parse query data', $data);
         }
 
-        $res = wp_remote_post( $this->options['url'] . $id, array(
+        $res = wp_remote_post( trailingslashit($this->options['url']) . trailingslashit($id), array(
           'headers' => wp_parse_args(array(
             'content-type' => 'application/json'
           ), $this->headers),
@@ -135,7 +135,7 @@ namespace UsabilityDynamics\WPP {
           return new \WP_Error('100', 'Could not parse query data', $data);
         }
 
-        $res = wp_remote_post( $this->options['url'], array(
+        $res = wp_remote_post( trailingslashit($this->options['url']), array(
           'headers' => wp_parse_args(array(
             'content-type' => 'application/json'
           ), $this->headers),

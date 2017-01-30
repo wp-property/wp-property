@@ -287,7 +287,7 @@ namespace UsabilityDynamics\WPP {
           $_post = get_post($ID);
           $_meta = get_post_meta($ID, 'panels_data', 1);
           $_tags_objects = wp_get_post_terms($ID, 'layout_type');
-          $_remote_layout_id = '35';
+          $_remote_layout_id = get_post_meta($ID, '_remote_layout_id', 1);
           $_tags = array();
 
           if (!empty($_tags_objects) && is_array($_tags_objects)) {
@@ -307,7 +307,7 @@ namespace UsabilityDynamics\WPP {
               'tags' => $_tags
             ));
           } else {
-            $res = $this->create_layout_metas('35', array(
+            $res = $this->create_layout_metas(array(
               'title' => $_post->post_title,
               'screenshot' => get_post_meta($ID, 'screenshot', 1),
               'layout' => $_meta,
@@ -318,7 +318,7 @@ namespace UsabilityDynamics\WPP {
           if (!is_wp_error($res)) {
             $res = json_decode($res);
             if ($res->ok && $res->data->_id) {
-
+              update_post_meta($ID, '_remote_layout_id', $res->data->_id);
             }
           }
         }
