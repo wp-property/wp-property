@@ -61,7 +61,7 @@ namespace UsabilityDynamics\WPP {
           }
 
           //** Figure out what all the editable attributes are, and get their keys */
-          $editable_keys = array_keys( array_merge( (array)$wp_properties[ 'property_meta' ], (array)$wp_properties[ 'property_stats' ] ) );
+          $editable_keys = array_keys( array_merge( isset( $wp_properties[ 'property_meta' ] ) ? (array) $wp_properties[ 'property_meta' ] : array(), (array)$wp_properties[ 'property_stats' ] ) );
 
           //** Load all meta keys for this object */
           if( $keys = get_post_custom( $id ) ) {
