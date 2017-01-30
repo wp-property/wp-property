@@ -14,7 +14,7 @@ namespace UsabilityDynamics\WPP {
       /**
        * Constructor
        * Sets default data.
-       *
+       * @param bool $args
        */
       public function __construct( $args = false ) {
         /* Be sure all required files are loaded. */
@@ -23,13 +23,12 @@ namespace UsabilityDynamics\WPP {
         add_action( 'rwmb_meta_boxes', array( $this, 'register_meta_boxes' ) );
         //** Add metaboxes hook */
         add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 );
+
       }
 
       /**
        * Register metaboxes.
        *
-       * @global type $post
-       * @global type $wpdb
        */
       function add_meta_boxes() {
         global $post, $wpdb;
@@ -40,7 +39,11 @@ namespace UsabilityDynamics\WPP {
           add_meta_box( 'wpp_property_children', sprintf( __( 'Child %s', ud_get_wp_property('domain') ), \WPP_F::property_label( 'plural' ) ), array( $this, 'render_child_properties_meta_box' ), 'property', 'advanced', 'high' );
         }
 
-        add_meta_box( 'wpp_property_template', __( 'Template', ud_get_wp_property('domain') ), array( $this, 'render_template_meta_box' ), 'property', 'side', 'default' );
+        // Template selection only used when layouts are not enabled.
+        if( !defined( 'WP_PROPERTY_LAYOUTS' ) || !WP_PROPERTY_LAYOUTS ) {
+          add_meta_box( 'wpp_property_template', __( 'Template', ud_get_wp_property('domain') ), array( $this, 'render_template_meta_box' ), 'property', 'side', 'default' );
+        }
+
       }
 
       /**
@@ -116,7 +119,8 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * Register all meta boxes here.
-       *
+       * @param $meta_boxes
+       * @return array
        */
       public function register_meta_boxes( $meta_boxes ) {
         $_meta_boxes = array();
@@ -248,6 +252,9 @@ namespace UsabilityDynamics\WPP {
        *
        * @since 2.0
        * @author peshkov@UD
+       * @param array $group
+       * @param bool $post
+       * @return mixed|void
        */
       public function get_property_meta_box( $group = array(), $post = false ) {
 
@@ -258,6 +265,7 @@ namespace UsabilityDynamics\WPP {
 
         $fields = array();
 
+
         /**
          * Get all data we need to operate with.
          */
@@ -267,6 +275,9 @@ namespace UsabilityDynamics\WPP {
         $geo_type_attributes = ud_get_wp_property( 'geo_type_attributes', array() );
         $hidden_attributes = ud_get_wp_property( 'hidden_attributes', array() );
         $inherited_attributes = ud_get_wp_property( 'property_inheritance', array() );
+
+        // @todo Implement, if a property type does NOT support hierarchies, we should now hos "Falls Under" field.
+        // $type_supports_hierarchy = ud_get_wp_property( 'type_supports_hierarchy', array() );
 
         $property_stats_groups = ud_get_wp_property( 'property_stats_groups', array() );
 
@@ -537,7 +548,7 @@ namespace UsabilityDynamics\WPP {
       /**
        *
        */
-      public function get_parent_property_field( $post ) {
+      public function get_parent_property_field( ) {
 
         $field = array(
           'name' => __('Falls Under', ud_get_wp_property()->domain),
@@ -553,7 +564,7 @@ namespace UsabilityDynamics\WPP {
        * Return RWMB Field for Property Type
        *
        */
-      public function get_property_type_field( $post ) {
+      public function get_property_type_field( ) {
 
         $types = ud_get_wp_property( 'property_types', array() );
 
