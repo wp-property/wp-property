@@ -94,7 +94,7 @@ namespace UsabilityDynamics\WPRETSC {
         }
 
         // remove filter which slows down updates significantly. (experimental)
-        remove_filter( 'transition_post_status', '_update_term_count_on_transition_post_status', 10 );
+        // remove_filter( 'transition_post_status', '_update_term_count_on_transition_post_status', 10 );
 
         // Return blank array of nothing provided so auth does not fail.
         return $args[ 3 ] ? $args[ 3 ] : array();
