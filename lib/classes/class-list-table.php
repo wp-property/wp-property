@@ -227,20 +227,29 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       * Return Property Type
+       * Shows Property Type
+       *
+       * - includes link to view type in admin UI
        *
        * @param $post
        * @return mixed|string
        */
       public function column_property_type( $post ) {
-        $property_types = (array)ud_get_wp_property( 'property_types' );
-        $type = get_post_meta( $post->ID, 'property_type', true );
+        $property_types = (array) ud_get_wp_property( 'property_types' );
 
-        if( isset( $type ) && is_string( $type ) && is_array( $property_types ) && !empty( $property_types[ $type ] ) ) {
-          $type = $property_types[ $type ];
+        $type_slug = $post->property_type;
+
+        if( isset( $type_slug ) && is_string( $type_slug ) && is_array( $property_types ) && !empty( $property_types[ $type_slug ] ) ) {
+          $type_label = $property_types[ $type_slug ];
         }
 
-        return !empty( $type ) ? $type : '-';
+        if( isset( $type_label ) && isset( $type_slug ) ) {
+          $_html = '<a href="' . admin_url( 'edit.php?post_type=property&page=all_properties&wpp_type=' . $type_slug ) . '" target="_blank" class="wpp-type-label" data-type="' . $type_slug . '">' . $type_label . '</a>';
+        } else {
+          $_html = '-';
+        }
+
+        return $_html;
 
       }
 
