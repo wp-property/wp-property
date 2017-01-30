@@ -215,7 +215,7 @@ $predefined_values = isset( $wp_properties[ 'predefined_values' ] ) ? $wp_proper
           <?php $class = (isset( $wp_properties[ 'en_default_value' ] ) && in_array( $slug, $wp_properties[ 'en_default_value' ] ) )? "show":"hidden";?>
           <li class="wpp_attribute_default_values <?php echo $class;?>">
             <?php
-            $input_type = $wp_properties[ 'admin_attr_fields' ][ $slug ];
+            $input_type = isset( $wp_properties[ 'admin_attr_fields' ][ $slug ] ) ? $wp_properties[ 'admin_attr_fields' ][ $slug ] : null;
             $value = (isset( $wp_properties[ 'default_values' ][ $slug ]))? $wp_properties[ 'default_values' ][ $slug ]: "";
             $field_name = "wpp_settings[default_values][$slug]";
             echo __("<label>Default Value</label>", ud_get_wp_property()->domain);
