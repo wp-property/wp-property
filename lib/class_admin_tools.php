@@ -169,7 +169,7 @@ if( !class_exists( 'class_admin_tools' ) ) {
                           ),
                         );
 
-      if( defined( 'WP_PROPERTY_LEGACY_META_ATTRIBUTES' ) && WP_PROPERTY_LEGACYMETA_ATTRIBUTES && !empty( $wp_properties[ 'property_meta' ] ) ) {
+      if( defined( 'WP_PROPERTY_LEGACY_META_ATTRIBUTES' ) && WP_PROPERTY_LEGACY_META_ATTRIBUTES && !empty( $wp_properties[ 'property_meta' ] ) ) {
         $developer_tabs[ 'meta' ] = array(
           'label' => __( 'Meta', ud_get_wp_property()->domain ),
           'template' => ud_get_wp_property()->path( 'static/views/admin/settings-developer-meta.php', 'dir' ),
