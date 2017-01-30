@@ -205,7 +205,7 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
 
         jQuery( "#wpp_ajax_property_result" ).show();
         jQuery( "#wpp_ajax_property_result" ).addClass( 'jjson' );
-        jQuery("#wpp_ajax_property_result").jJsonViewer(data.property);
+        jQuery("#wpp_ajax_property_result").jJsonViewer(data.data.property);
         jQuery( "#wpp_ajax_property_query_cancel" ).show();
       } );
     } );
