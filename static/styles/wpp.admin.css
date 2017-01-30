@@ -1824,7 +1824,7 @@ body.post-type-property .uisf-date {
   font-family: monospace;
   padding-left: 0;
   margin-left: 20px;
-  overflow-x: hidden;
+  overflow-x: auto;
   overflow-y: auto;
 }
 .wpp-json-viewer .jjson-container,
