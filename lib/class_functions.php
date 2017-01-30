@@ -1924,6 +1924,10 @@ class WPP_F extends UsabilityDynamics\Utility
   static public function update_location_terms($post_id, $geo_data)
   {
 
+    if( !$geo_data || !is_object( $geo_data ) ) {
+      return new WP_Error( 'No [geo_data] argument provided.' );
+    }
+
     self::verify_have_system_taxonomy('wpp_location');
 
     $geo_data->terms = array();

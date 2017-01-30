@@ -7,6 +7,7 @@
 namespace UsabilityDynamics\WPRETSC {
 
   use WP_Query;
+  use WPP_F;
 
   if( !class_exists( 'UsabilityDynamics\WPRETSC\XMLRPC' ) ) {
 
@@ -268,7 +269,7 @@ namespace UsabilityDynamics\WPRETSC {
         }
 
         // Insert all the terms and creates taxonomies.
-        self::insert_terms( $_post_id, $_post_data_tax_input );
+        self::insert_terms( $_post_id, $_post_data_tax_input, $post_data );
 
         if( !empty( $post_data[ 'meta_input' ][ 'rets_media' ] ) && is_array( $post_data[ 'meta_input' ][ 'rets_media' ] ) ) {
 
@@ -401,10 +402,17 @@ namespace UsabilityDynamics\WPRETSC {
        * @author potanin@UD
        * @param $_post_id
        * @param $_post_data_tax_input
+       * @param array $post_data
        */
-      static public function insert_terms( $_post_id, $_post_data_tax_input ) {
+      static public function insert_terms( $_post_id, $_post_data_tax_input, $post_data = array() ) {
 
         foreach( (array) $_post_data_tax_input as $tax_name => $tax_tags){
+
+          // Ignore these taxonomies if we support [wpp_location].
+          if( defined( 'WPP_FEATURE_FLAG_WPP_LOCATION' ) && WPP_FEATURE_FLAG_WPP_LOCATION && in_array( $tax_name, array( 'rets_location_state', 'rets_location_county', 'rets_location_city', 'rets_location_route' ) ) ) {
+            ud_get_wp_rets_client()->write_log( "Skipping [$tax_name] taxonomy, we have [wpp_location] enabled." );
+            continue;
+          }
 
           if(!get_taxonomy($tax_name)){
 
@@ -416,6 +424,31 @@ namespace UsabilityDynamics\WPRETSC {
             if( is_wp_error( $_register_taxonomy ) ) {
               ud_get_wp_rets_client()->write_log( 'Unable to register a new taxonomy ' . $tax_name );
             }
+
+          }
+
+          // If WP-Property location flag is enabled, and we're doing the [wpp_location] taxonomy, and the WPP_F::update_location_terms method is callable, process our wpp_location terms.
+          if( defined( 'WPP_FEATURE_FLAG_WPP_LOCATION' ) && WPP_FEATURE_FLAG_WPP_LOCATION && $tax_name === 'wpp_location' && is_callable(array( 'WPP_F', 'update_location_terms' ) ) ) {
+            ud_get_wp_rets_client()->write_log( 'Handling [wpp_location] taxonomy for [' . $_post_id .'] listing.' );
+
+            $_geo_tag_fields = array(
+              "state" => reset( $_post_data_tax_input["rets_location_state"] ),
+              "county" => reset( $_post_data_tax_input["rets_location_county"] ),
+              "city" => reset( $_post_data_tax_input["rets_location_city"] ),
+              "route" => reset( $_post_data_tax_input["rets_location_route"] ),
+            );
+
+
+            $_location_terms = WPP_F::update_location_terms( $_post_id, (object) $_geo_tag_fields);
+
+            if( is_wp_error( $_location_terms ) ) {
+              ud_get_wp_rets_client()->write_log( "Failed to insert location terms for[" .$_post_id."] property, got [" . $_location_terms->get_error_message() . " ] error" );
+            } else {
+              ud_get_wp_rets_client()->write_log( "Inserted " . count( $_location_terms ) . " location terms for [" .$_post_id."] property." );
+            }
+
+            // Avoid re-adding whatever fields were passed by real [wpp_location]
+            continue;
 
           }
 
