@@ -67,6 +67,7 @@ jQuery(document).ready(function () {
     switch ($isScreen) {
       case $indexOfLastScreen:
         jQuery('#wpp-setup-assistant').submit();
+        //hide addons options for current revision
         $showAddonsOption();
         break;
       default:
