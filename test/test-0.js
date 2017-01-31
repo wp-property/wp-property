@@ -15,6 +15,8 @@ module.exports = {
 
     module.downloadUrl = process.env.CIRCLE_REPOSITORY_URL + '/archive/' + process.env.CIRCLE_SHA1 + '.zip';
 
+    done();
+
   },
 
   // curl -H 'host:localhost' http://localhost:3000/ -I
