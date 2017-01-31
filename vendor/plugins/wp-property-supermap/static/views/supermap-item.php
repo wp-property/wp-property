@@ -60,7 +60,7 @@ if(in_array('view_property', $supermap_configuration['display_attributes'])) {
     <ul class='property_in_list_items clearfix'>
 
       <?php if( !empty( $property['featured_image'] ) && ( !isset( $supermap_configuration['hide_sidebar_thumb'] ) || $supermap_configuration['hide_sidebar_thumb'] != 'true' ) ) { ?>
-        <?php $image = wpp_get_image_link( $property['featured_image'], $supermap_configuration['supermap_thumb'], array('return'=>'array')); ?>
+        <?php $image = wpp_get_image_link( $property['featured_image'], isset( $supermap_configuration['supermap_thumb'] ) ? $supermap_configuration['supermap_thumb'] : 'thumbnail', array('return'=>'array')); ?>
         <li class='supermap_list_thumb'><span  onclick="showInfobox_<?php echo $rand; ?>(<?php echo $property['ID']; ?>);"><img class="<?php echo ($image['link'] ? 'wpp_supermap_thumb' : 'wpp_supermap_thumb wpp_default_iamge'); ?>" src="<?php echo (empty($image['link']) ? WPP_URL . 'templates/images/no_image.png' : $image['link']); ?>" style="<?php echo ($image['width'] ? 'width: '.$image['width'].'px; ' : 'width: '.$default_image_width.'px;'); ?>" alt="<?php echo $property['post_title']; ?>" /></span></li>
       <?php } ?>
         <li class='supermap_list_title'><span onclick="showInfobox_<?php echo $rand; ?>(<?php echo $property['ID']; ?>);"><?php echo  stripslashes($property['post_title']); ?></span></li>
