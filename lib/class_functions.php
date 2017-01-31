@@ -3076,6 +3076,7 @@ Ample off-street parking ",
   {
     //save backup
 
+
     $data = apply_filters('wpp::backup::data', array('wpp_settings' => $wp_properties));
     $timestamp = time();
     if (get_option("wpp_property_backups"))

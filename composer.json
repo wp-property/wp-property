@@ -83,11 +83,11 @@
     },
     "featureFlags": [
       {
-        "name": "Flags",
+        "name": "Featured Flags",
         "constant": "WP_PROPERTY_FLAG_WPP_FLAGS",
-        "description": "Property flags, for highlighting important information, stored in [wpp_flags].",
+        "description": "Property flags, for highlighting important information, stored in [wpp_flags]. Can be used to identify 'featured' properties.",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "Layouts",
@@ -109,6 +109,13 @@
         "description": "Freemius for WP Property",
         "since": "2.2.1",
         "enabled": false
+      },
+      {
+        "name": "Settings Backups",
+        "constant": "WPP_FEATURE_FLAG_SETTINGS_BACKUPS",
+        "description": "Enables automaic backups of the WP-Property settings. Backups stored in [wpp_property_backups] option.",
+        "since": "2.2.1",
+        "enabled": true
       },
       {
         "name": "Disable Editor",
@@ -136,7 +143,7 @@
         "constant": "WPP_FEATURE_FLAG_WPP_CATEGORY",
         "description": "Taxonomy for general property terms, stored in [wpp_category]",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "Field Aliases",
@@ -153,7 +160,7 @@
         "enabled": false
       },
       {
-        "name": "Enable Setting Search",
+        "name": "Enable Settings Search",
         "constant": "WP_PROPERTY_SETTINGS_SEARCH",
         "description": "Search settings.",
         "since": "2.2.1",

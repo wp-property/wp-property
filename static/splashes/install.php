@@ -53,15 +53,22 @@ if (!class_exists('WPP_Setup_Assistant')) {
         if (isset($wpp_settings['configuration']['show_assistant']) && $wpp_settings['configuration']['show_assistant']) {
           $show_assistant = "yes";
           //save backup
-          $data = apply_filters('wpp::backup::data', array('wpp_settings' => $wp_properties));
-          $timestamp = time();
-          if (get_option("wpp_property_backups"))
-            $backups = get_option("wpp_property_backups");
-          else
-            $backups = array();
 
-          $backups[$timestamp] = $data;
-          update_option("wpp_property_backups", $backups);
+
+          if( defined( 'WPP_FEATURE_FLAG_SETTINGS_BACKUPS' ) && WPP_FEATURE_FLAG_SETTINGS_BACKUPS ) {
+            $data = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $wp_properties ) );
+            $timestamp = time();
+
+            if( get_option( "wpp_property_backups" ) )
+              $backups = get_option( "wpp_property_backups" );
+            else
+              $backups = array();
+
+            $backups[ $timestamp ] = $data;
+            update_option( "wpp_property_backups", $backups );
+
+          }
+
         }
         else {
           $show_assistant = "no";

@@ -640,12 +640,10 @@ if (get_option('permalink_structure') == '') {
 
           <?php
           //list automatic backups taken from setup-assistant screen
-          if (get_option("wpp_property_backups")) {
-            ?>
+          if ( defined( 'WPP_FEATURE_FLAG_SETTINGS_BACKUPS' ) && WPP_FEATURE_FLAG_SETTINGS_BACKUPS && get_option("wpp_property_backups")) { ?>
             <div class="wpp_settings_block">
               <?php _e("Automatic Backups of WP-Property Configuration", ud_get_wp_property()->domain); ?>
-              <input type="button" value="<?php _e('Backup Now', ud_get_wp_property()->domain); ?>"
-                     id="wpp_ajax_create_settings_backup" class="button">
+              <input type="button" value="<?php _e('Backup Now', ud_get_wp_property()->domain); ?>" id="wpp_ajax_create_settings_backup" class="button">
 
               <?php  if( defined( 'WP_PROPERTY_SETUP_ASSISTANT' ) && WP_PROPERTY_SETUP_ASSISTANT ) { ?>
               <span class="description"><?php _e('Backups created when you use Setup Assistant,or create one now.', ud_get_wp_property()->domain); ?> </span>
@@ -665,12 +663,10 @@ if (get_option('permalink_structure') == '') {
             <?php $google_map_localizations = WPP_F::draw_localization_dropdown('return_array=true'); ?>
             <?php _e('Revalidate all addresses using', ud_get_wp_property()->domain); ?>
             <b><?php echo $google_map_localizations[$wp_properties['configuration']['google_maps_localization']]; ?></b> <?php _e('localization', ud_get_wp_property()->domain); ?>
-            <input type="button" value="<?php _e('Revalidate', ud_get_wp_property()->domain); ?>"
-                   id="wpp_ajax_revalidate_all_addresses" class="button">
+            <input type="button" value="<?php _e('Revalidate', ud_get_wp_property()->domain); ?>" id="wpp_ajax_revalidate_all_addresses" class="button">
           </div>
 
-          <div
-            class="wpp_settings_block"><?php printf(__('Enter in the ID of the %1s you want to look up, and the class will be displayed below.', ud_get_wp_property()->domain), WPP_F::property_label('singular')) ?>
+          <div class="wpp_settings_block"><?php printf(__('Enter in the ID of the %1s you want to look up, and the class will be displayed below.', ud_get_wp_property()->domain), WPP_F::property_label('singular')) ?>
             <input type="text" id="wpp_property_class_id"/>
             <input type="button" class="button" value="<?php _e('Lookup', ud_get_wp_property()->domain) ?>" id="wpp_ajax_property_query"> <span id="wpp_ajax_property_query_cancel" class="wpp_link hidden"><?php _e('Cancel', ud_get_wp_property()->domain) ?></span>
             <pre id="wpp_ajax_property_result" class="wpp-json-viewer hidden"></pre>
@@ -681,17 +677,13 @@ if (get_option('permalink_structure') == '') {
             <label
               for="wpp_image_id"><?php printf(__('%1s ID:', ud_get_wp_property()->domain), WPP_F::property_label('singular')) ?></label>
             <input type="text" id="wpp_image_id"/>
-            <input type="button" class="button" value="<?php _e('Lookup', ud_get_wp_property()->domain) ?>"
-                   id="wpp_ajax_image_query"> <span id="wpp_ajax_image_query_cancel"
-                                                    class="wpp_link hidden"><?php _e('Cancel', ud_get_wp_property()->domain) ?></span>
+            <input type="button" class="button" value="<?php _e('Lookup', ud_get_wp_property()->domain) ?>" id="wpp_ajax_image_query"> <span id="wpp_ajax_image_query_cancel" class="wpp_link hidden"><?php _e('Cancel', ud_get_wp_property()->domain) ?></span>
             <pre id="wpp_ajax_image_result" class="wpp_class_pre hidden"></pre>
           </div>
 
           <div class="wpp_settings_block">
             <?php _e('Look up the <b>$wp_properties</b> global settings array.  This array stores all the default settings, which are overwritten by database settings, and custom filters.', ud_get_wp_property()->domain) ?>
-            <input type="button" class="button" value="<?php _e('Show $wp_properties', ud_get_wp_property()->domain) ?>"
-                   id="wpp_show_settings_array"> <span id="wpp_show_settings_array_cancel"
-                                                       class="wpp_link hidden"><?php _e('Cancel', ud_get_wp_property()->domain) ?></span>
+            <input type="button" class="button" value="<?php _e('Show $wp_properties', ud_get_wp_property()->domain) ?>" id="wpp_show_settings_array"> <span id="wpp_show_settings_array_cancel" class="wpp_link hidden"><?php _e('Cancel', ud_get_wp_property()->domain) ?></span>
             <pre id="wpp_show_settings_array_result" class="wpp_class_pre hidden"></pre>
           </div>
 
@@ -709,18 +701,16 @@ if (get_option('permalink_structure') == '') {
             </div>
           <?php endif; ?>
 
-          <div
-            class="wpp_settings_block"><?php printf(__('Set all %1s to same %2s type:', ud_get_wp_property()->domain), WPP_F::property_label('plural'), WPP_F::property_label('singular')) ?>
+          <div class="wpp_settings_block"><?php printf(__('Set all %1s to same %2s type:', ud_get_wp_property()->domain), WPP_F::property_label('plural'), WPP_F::property_label('singular')) ?>
             <select id="wpp_ajax_max_set_property_type_type">
               <?php foreach ($wp_properties['property_types'] as $p_slug => $p_label) { ?>
                 <option value="<?php echo $p_slug; ?>"><?php echo $p_label; ?></option>
               <?php } ?>
-              <input type="button" class="button" value="<?php _e('Set', ud_get_wp_property()->domain) ?>"
-                     id="wpp_ajax_max_set_property_type">
+              <input type="button" class="button" value="<?php _e('Set', ud_get_wp_property()->domain) ?>" id="wpp_ajax_max_set_property_type">
               <pre id="wpp_ajax_max_set_property_type_result" class="wpp_class_pre hidden"></pre>
           </div>
 
-          <div class="wpp_settings_block">
+          <div class="wpp_settings_block" data-wpp-section="feature-flags">>
             <p><?php _e( 'Available feature flags and their status.', ud_get_wp_property()->domain ); ?></p>
 
             <ul class="wpp-feature-flag-list">
@@ -735,11 +725,11 @@ if (get_option('permalink_structure') == '') {
 
           </div>
 
-          <div class="wpp_settings_block">
+          <div class="wpp_settings_block" data-wpp-section="api-registration-status">
             <p><?php _e( 'API Registration Status', ud_get_wp_property()->domain ); ?></p>
 
             <ul class="wpp-feature-api-status-list">
-            <?php foreach( array( 'ud_site_secret_token' => 'Secret Token', 'ud_site_id' => 'Site ID', 'ud_site_public_key' => 'Public Key', 'ud_api_key' => 'Update API Key' ) as $_option => $_option_label) { ?>
+            <?php foreach( array( 'ud_site_secret_token' => 'Secret Token', 'ud_site_id' => 'Site ID', 'ud_site_public_key' => 'Public Key', 'ud_api_key' => 'Generic API Key' ) as $_option => $_option_label) { ?>
               <li class="wpp-feature-flag wpp-feature-flag-<?php echo get_site_option( $_option ) ? 'enabled': 'disabled';  ?>">
                 <span class="dashicons dashicons-yes"></span>
                 <label>
