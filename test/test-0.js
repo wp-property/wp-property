@@ -107,6 +107,10 @@ module.exports = {
         console.log( 'stderr', stderr );
       }
 
+      if( stdout.indexOf( "Success:" ) === 0 ) {
+        return done();
+      }
+
       console.log( stdout );
 
       done();
