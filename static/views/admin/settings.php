@@ -536,7 +536,7 @@ if (get_option('permalink_structure') == '') {
                   <?php endforeach; ?>
 
                   <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][google_maps][infobox_settings][show_direction_link]&label=" . __('Show Directions Link', ud_get_wp_property()->domain), $wp_properties['configuration']['google_maps']['infobox_settings']['show_direction_link']); ?></li>
-                  <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][google_maps][infobox_settings][do_not_show_child_properties]&label=" . sprintf(__('Do not show a list of child %1s in Infobox. ', ud_get_wp_property()->domain), WPP_F::property_label('plural')), $wp_properties['configuration']['google_maps']['infobox_settings']['do_not_show_child_properties']); ?></li>
+                  <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][google_maps][infobox_settings][do_not_show_child_properties]&label=" . sprintf(__('Do not show a list of child %1s in Infobox. ', ud_get_wp_property()->domain), WPP_F::property_label('plural')), isset( $wp_properties['configuration']['google_maps']['infobox_settings']['do_not_show_child_properties']) ? $wp_properties['configuration']['google_maps']['infobox_settings']['do_not_show_child_properties'] : false ); ?></li>
                 </ul>
               </div>
             </td>
@@ -729,6 +729,23 @@ if (get_option('permalink_structure') == '') {
                 <span class="dashicons dashicons-yes"></span>
                 <b class="wpp-feature-name"><?php echo $_flagDetail->name; ?></b>
                 <span class="wpp-feature-description"><?php echo $_flagDetail->description; ?></span>
+              </li>
+            <?php } ?>
+            </ul>
+
+          </div>
+
+          <div class="wpp_settings_block">
+            <p><?php _e( 'API Registration Status', ud_get_wp_property()->domain ); ?></p>
+
+            <ul class="wpp-feature-api-status-list">
+            <?php foreach( array( 'ud_site_secret_token' => 'Secret Token', 'ud_site_id' => 'Site ID', 'ud_site_public_key' => 'Public Key' ) as $_option => $_option_label) { ?>
+              <li class="wpp-feature-flag wpp-feature-flag-<?php echo get_site_option( $_option ) ? 'enabled': 'disabled';  ?>">
+                <span class="dashicons dashicons-yes"></span>
+                <label>
+                  <b class="wpp-feature-name"><?php echo $_option_label; ?>:</b>
+                  <span class="wpp-feature-description"><input type="text" size="48" readonly="readonly" value="<?php echo get_option($_option); ?>" /></span>
+                  </label>
               </li>
             <?php } ?>
             </ul>

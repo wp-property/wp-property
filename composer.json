@@ -143,7 +143,7 @@
         "constant": "RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET",
         "description": "Dashboard widget for wp-rets-client, shows stats.",
         "since": "2.2.1",
-        "enabled": true
+        "enabled": false
       }
     ],
     "schemas": {

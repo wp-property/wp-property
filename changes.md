@@ -1,4 +1,5 @@
 ### 2.2.1 
+* Fixes to Site API registration process. 
 * Improvements to [wpp_location] taxonomy for wp-rets-client.
 * Implemented [WP_PROPERTY_LEGACY_META_ATTRIBUTES] feature flag, disabling legacy meta UI.
 * Improved UX for viewing property objects by using a JSON viewer library.
