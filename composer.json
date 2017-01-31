@@ -111,6 +111,13 @@
         "enabled": false
       },
       {
+        "name": "Disable Editor",
+        "constant": "WPP_FEATURE_FLAG_DISABLE_EDITOR",
+        "description": "Disables native WordPress post editor.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
         "name": "Standard Location Taxonomy",
         "constant": "WPP_FEATURE_FLAG_WPP_LOCATION",
         "description": "Standard property location taxonomy, stored in [wpp_location].",

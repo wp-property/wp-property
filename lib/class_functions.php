@@ -395,6 +395,12 @@ class WPP_F extends UsabilityDynamics\Utility
 
     $supports = array('title', 'editor', 'thumbnail');
 
+    if( defiend( 'WPP_FEATURE_FLAG_DISABLE_EDITOR' ) && WPP_FEATURE_FLAG_DISABLE_EDITOR ) {
+      $supports = array('title', 'editor', 'thumbnail');
+    } else {
+      $supports = array('title', 'thumbnail');
+    }
+
     if (isset($wp_properties['configuration']['enable_revisions']) && $wp_properties['configuration']['enable_revisions'] == 'true') {
       array_push($supports, 'revisions');
     }

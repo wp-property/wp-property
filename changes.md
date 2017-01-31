@@ -1,4 +1,5 @@
 ### 2.2.1 
+* Added [WPP_FEATURE_FLAG_DISABLE_EDITOR] feature flag which hides the native Post Content editor.
 * Added [WPP_FEATURE_FLAG_WPP_CATEGORY] and [WP_PROPERTY_FLAG_WPP_FLAGS] feature flags, which enable [wpp_category] and [wpp_flags] taxonomies. 
 * Fixes to Site API registration process. 
 * Improvements to [wpp_location] taxonomy for wp-rets-client.
