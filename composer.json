@@ -92,7 +92,7 @@
       {
         "name": "Layouts",
         "constant": "WP_PROPERTY_LAYOUTS",
-        "description": "Layouts for WP Property",
+        "description": "Layouts for WP Property. When enabled, disabled legacy Sidebars and PHP Templates.",
         "since": "2.2.1",
         "enabled": false
       },

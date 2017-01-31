@@ -5,6 +5,51 @@
 jQuery.extend( wpp = wpp || {}, { ui: { settings: {
 
   /**
+   * Callback for when a tab is selectd.
+   *
+   * @param event
+   * @param ui
+   */
+  settingsTabActived: function settingsTabActived( event, ui ) {
+    // console.debug( 'wpp.ui.settings', 'settingsTabActived', ui.newPanel.selector );
+
+    if( 'object' === typeof localStorage ) {
+      localStorage.setItem('wpp.state.settings.activeTab', ui.newPanel.selector );
+    }
+
+  },
+
+  /**
+   * Get currently active tab.
+   *
+   * @returns {*}
+   */
+  settingsActivateTab: function settingsActivateTab( ) {
+
+    if( 'object' !== typeof localStorage ) {
+      return 0;
+    }
+
+    var activeTab = localStorage.getItem('wpp.state.settings.activeTab' );
+
+    var tabContainer  = jQuery( "#wpp_settings_tabs > ul  > li" );
+    var tabs = jQuery( "#wpp_settings_tabs > ul > li > a" );
+    var activeTabElement  = jQuery( 'a[href=' + activeTab + ']' ).get(0);
+    var activeTabIndex = jQuery( tabs ).index( activeTabElement );
+
+    if( activeTabIndex ) {
+      activeTabIndex = parseInt( activeTabIndex );
+    } else {
+      activeTabIndex = 0;
+    }
+
+    // console.debug( 'wpp.ui.settings', 'settingsActivateTab', activeTab );
+
+    return activeTabIndex;
+
+  },
+
+  /**
    * Initialize DOM.
    *
    * @for wpp.ui.settings
@@ -85,10 +130,11 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
     } );
 
     if ( document.location.hash != '' && jQuery( document.location.hash ).length > 0 ) {
-      jQuery( "#wpp_settings_tabs" ).tabs();
+      jQuery( "#wpp_settings_tabs" ).tabs({activate: wpp.ui.settings.settingsTabActived, active: wpp.ui.settings.settingsActivateTab()});
     } else {
-      jQuery( "#wpp_settings_tabs" ).tabs( { cookie: {  name: 'wpp_settings_tabs', expires: 30 } } );
+      jQuery( "#wpp_settings_tabs" ).tabs( { activate: wpp.ui.settings.settingsTabActived, active: wpp.ui.settings.settingsActivateTab(), cookie: {  name: 'wpp_settings_tabs', expires: 30 } } );
     }
+
 
     /* Show settings array */
     jQuery( "#wpp_show_settings_array" ).click( function () {

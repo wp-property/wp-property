@@ -1,4 +1,5 @@
 ### 2.2.1 
+* Added sticky-tab selection to Property Settings page.
 * Added [WPP_FEATURE_FLAG_SETTINGS_BACKUPS] feature flag, enabled by default. Feature automatically creates backups of plugin settings.
 * Added [WPP_FEATURE_FLAG_DISABLE_EDITOR] feature flag which hides the native Post Content editor.
 * Added [WPP_FEATURE_FLAG_WPP_CATEGORY] and [WP_PROPERTY_FLAG_WPP_FLAGS] feature flags, which enable [wpp_category] and [wpp_flags] taxonomies. 
