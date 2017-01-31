@@ -189,8 +189,10 @@ namespace UsabilityDynamics\WPP {
 
         $this->preload_layouts();
         $layouts = get_option('wpp_available_layouts', false);
+        $local_layouts = get_option('wpp_available_local_layouts', false);
         $overview_layouts = $layouts['single-property-term'];
         $single_layouts = $layouts['single-property'];
+        $single_layouts = array_merge($single_layouts, $local_layouts);
 
         $wp_customize->add_panel('layouts_area_panel', array(
           'priority' => 10,
@@ -282,12 +284,12 @@ namespace UsabilityDynamics\WPP {
       public function get_local_layout()
       {
         $available_local_layouts = get_posts(array('post_type' => 'wpp_layout', 'post_status' => 'pending'));
+        $local_layouts = array();
         foreach ($available_local_layouts as $local_layout) {
           $ID = $local_layout->ID;
           $_post = get_post($ID);
           $_meta = get_post_meta($ID, 'panels_data', 1);
           $_tags_objects = wp_get_post_terms($ID, 'layout_type');
-          $_remote_layout_id = get_post_meta($ID, '_remote_layout_id', 1);
           $_tags = array();
 
           if (!empty($_tags_objects) && is_array($_tags_objects)) {
@@ -299,52 +301,31 @@ namespace UsabilityDynamics\WPP {
             }
           }
 
-          if (!empty($_remote_layout_id) && strlen($_remote_layout_id)) {
-            $res = $this->create_layout_metas($_remote_layout_id, array(
-              'title' => $_post->post_title,
-              'screenshot' => get_post_meta($ID, 'screenshot', 1),
-              'layout' => $_meta,
-              'tags' => $_tags
-            ));
-          } else {
-            $res = $this->create_layout_metas(array(
-              'title' => $_post->post_title,
-              'screenshot' => get_post_meta($ID, 'screenshot', 1),
-              'layout' => $_meta,
-              'tags' => $_tags
-            ));
-          }
+          $res = $this->create_layout_metas(array(
+            'title' => $_post->post_title,
+            'screenshot' => get_post_meta($ID, 'screenshot', 1),
+            'layout' => $_meta,
+            'tags' => $_tags
+          ));
+
 
           if (!is_wp_error($res)) {
             $res = json_decode($res);
-            if ($res->ok && $res->data->_id) {
-              update_post_meta($ID, '_remote_layout_id', $res->data->_id);
-            }
+            $local_layouts[] = $res;
           }
         }
+        update_option('wpp_available_local_layouts', $local_layouts);
       }
 
-      public function create_layout_metas($id, $data)
+      public function create_layout_metas($data)
       {
-
         try {
           $data['layout'] = base64_encode(json_encode($data['layout']));
           $data = json_encode($data);
         } catch (\Exception $e) {
           return new \WP_Error('100', 'Could not parse query data', $data);
         }
-
-        $res = wp_remote_post($this->api_client->get_url() . $id, array(
-          'headers' => wp_parse_args(array(
-            'content-type' => 'application/json'
-          ), $this->api_client->get_headers()),
-          'body' => $data
-        ));
-
-
-        if (is_wp_error($res)) return $res;
-
-        return $res['body'];
+        return $data;
       }
     }
   }
