@@ -83,6 +83,13 @@
     },
     "featureFlags": [
       {
+        "name": "Flags",
+        "constant": "WP_PROPERTY_FLAG_WPP_FLAGS",
+        "description": "Property flags, for highlighting important information, stored in [wpp_flags].",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
         "name": "Layouts",
         "constant": "WP_PROPERTY_LAYOUTS",
         "description": "Layouts for WP Property",
@@ -116,6 +123,13 @@
         "description": "Standard property type taxonomy, stored in [wpp_type].",
         "since": "2.2.1",
         "enabled": true
+      },
+      {
+        "name": "Property Categories",
+        "constant": "WPP_FEATURE_FLAG_WPP_CATEGORY",
+        "description": "Taxonomy for general property terms, stored in [wpp_category]",
+        "since": "2.2.1",
+        "enabled": false
       },
       {
         "name": "Field Aliases",

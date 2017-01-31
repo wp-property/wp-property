@@ -190,6 +190,7 @@ class WPP_F extends UsabilityDynamics\Utility
     // @note legacy taxonomies. (perhaps disable for new installers, but make available via some option)
     add_filter('wpp_taxonomies', function () {
       $taxonomies = array();
+
       if (defined('WPP_FEATURE_FLAG_WPP_TYPE')) {
         $taxonomies['wpp_type'] = array(
           'default' => true,
@@ -221,6 +222,71 @@ class WPP_F extends UsabilityDynamics\Utility
           'rewrite' => array('slug' => 'type')
         );
       }
+
+      if (defined('WP_PROPERTY_FLAG_WPP_FLAGS')) {
+        $taxonomies['wpp_flags'] = array(
+          'default' => true,
+          'readonly' => true,
+          'hidden' => true,
+          'hierarchical' => false,
+          'unique' => false,
+          'public' => true,
+          'show_in_nav_menus' => true,
+          'show_ui' => false,
+          'show_tagcloud' => false,
+          'add_native_mtbox' => false,
+          'label' => sprintf(_x('%s Flags', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'labels' => array(
+            'name' => sprintf(_x('%s Flags', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'singular_name' => sprintf(_x('%s Flag', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'search_items' => _x('Search %s Flags', 'property type taxonomy', ud_get_wp_property()->domain),
+            'all_items' => _x('All Flags', 'property type taxonomy', ud_get_wp_property()->domain),
+            'parent_item' => _x('Parent Flags', 'property type taxonomy', ud_get_wp_property()->domain),
+            'parent_item_colon' => _x('Parent Flags', 'property type taxonomy', ud_get_wp_property()->domain),
+            'edit_item' => _x('Edit Flags', 'property type taxonomy', ud_get_wp_property()->domain),
+            'update_item' => _x('Update Flags', 'property type taxonomy', ud_get_wp_property()->domain),
+            'add_new_item' => _x('Add New Flags', 'property type taxonomy', ud_get_wp_property()->domain),
+            'new_item_name' => _x('New Flags', 'property type taxonomy', ud_get_wp_property()->domain),
+            'not_found' => sprintf(_x('No %s Flag Found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'menu_name' => sprintf(_x('%s Flags', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          ),
+          'query_var' => 'property-flags',
+          'rewrite' => array('slug' => 'property-flags')
+        );
+      }
+
+      if (defined('WPP_FEATURE_FLAG_WPP_CATEGORY')) {
+        $taxonomies['wpp_category'] = array(
+          'default' => true,
+          'readonly' => true,
+          'hidden' => true,
+          'hierarchical' => false,
+          'unique' => false,
+          'public' => true,
+          'show_in_nav_menus' => true,
+          'show_ui' => false,
+          'show_tagcloud' => false,
+          'add_native_mtbox' => false,
+          'label' => sprintf(_x('%s Category', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'labels' => array(
+            'name' => sprintf(_x('%s Category', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'singular_name' => sprintf(_x('%s Category', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'search_items' => _x('Search %s Category', 'property type taxonomy', ud_get_wp_property()->domain),
+            'all_items' => _x('All Categories', 'property type taxonomy', ud_get_wp_property()->domain),
+            'parent_item' => _x('Parent Category', 'property type taxonomy', ud_get_wp_property()->domain),
+            'parent_item_colon' => _x('Parent Category', 'property type taxonomy', ud_get_wp_property()->domain),
+            'edit_item' => _x('Edit Category', 'property type taxonomy', ud_get_wp_property()->domain),
+            'update_item' => _x('Update Category', 'property type taxonomy', ud_get_wp_property()->domain),
+            'add_new_item' => _x('Add New Category', 'property type taxonomy', ud_get_wp_property()->domain),
+            'new_item_name' => _x('New Category', 'property type taxonomy', ud_get_wp_property()->domain),
+            'not_found' => sprintf(_x('No %s Category found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'menu_name' => sprintf(_x('%s Category', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          ),
+          'query_var' => 'property-category',
+          'rewrite' => array('slug' => 'property-category')
+        );
+      }
+
       if (defined('WPP_FEATURE_FLAG_WPP_LOCATION')) {
         $taxonomies['wpp_location'] = array(
           'default' => true,
@@ -251,6 +317,7 @@ class WPP_F extends UsabilityDynamics\Utility
           'rewrite' => array('slug' => 'location')
         );
       }
+
       $taxonomies['property_feature'] = array(
         'default' => true,
         'hierarchical' => false,
@@ -276,6 +343,7 @@ class WPP_F extends UsabilityDynamics\Utility
         'query_var' => 'property_feature',
         'rewrite' => array('slug' => 'feature')
       );
+
       $taxonomies['community_feature'] = array(
         'default' => true,
         'hierarchical' => false,
@@ -301,6 +369,7 @@ class WPP_F extends UsabilityDynamics\Utility
         'query_var' => 'community_feature',
         'rewrite' => array('slug' => 'community_feature')
       );
+
       return $taxonomies;
 
     }, 4);
