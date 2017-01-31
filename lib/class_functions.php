@@ -191,7 +191,7 @@ class WPP_F extends UsabilityDynamics\Utility
     add_filter('wpp_taxonomies', function () {
       $taxonomies = array();
 
-      if (defined('WPP_FEATURE_FLAG_WPP_TYPE')) {
+      if (defined('WPP_FEATURE_FLAG_WPP_TYPE') && WPP_FEATURE_FLAG_WPP_TYPE ) {
         $taxonomies['wpp_type'] = array(
           'default' => true,
           'readonly' => true,
@@ -223,7 +223,7 @@ class WPP_F extends UsabilityDynamics\Utility
         );
       }
 
-      if (defined('WP_PROPERTY_FLAG_WPP_FLAGS')) {
+      if (defined('WP_PROPERTY_FLAG_WPP_FLAGS') && WP_PROPERTY_FLAG_WPP_FLAGS ) {
         $taxonomies['wpp_flags'] = array(
           'default' => true,
           'readonly' => true,
@@ -255,7 +255,7 @@ class WPP_F extends UsabilityDynamics\Utility
         );
       }
 
-      if (defined('WPP_FEATURE_FLAG_WPP_CATEGORY')) {
+      if (defined('WPP_FEATURE_FLAG_WPP_CATEGORY') && WPP_FEATURE_FLAG_WPP_CATEGORY) {
         $taxonomies['wpp_category'] = array(
           'default' => true,
           'readonly' => true,
@@ -287,7 +287,7 @@ class WPP_F extends UsabilityDynamics\Utility
         );
       }
 
-      if (defined('WPP_FEATURE_FLAG_WPP_LOCATION')) {
+      if (defined('WPP_FEATURE_FLAG_WPP_LOCATION') && WPP_FEATURE_FLAG_WPP_LOCATION) {
         $taxonomies['wpp_location'] = array(
           'default' => true,
           'readonly' => true,
