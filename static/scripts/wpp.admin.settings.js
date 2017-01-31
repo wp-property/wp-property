@@ -13,8 +13,8 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
   settingsTabActived: function settingsTabActived( event, ui ) {
     // console.debug( 'wpp.ui.settings', 'settingsTabActived', ui.newPanel.selector );
 
-    if( 'object' === typeof localStorage ) {
-      localStorage.setItem('wpp.state.settings.activeTab', ui.newPanel.selector );
+    if( 'object' === typeof sessionStorage ) {
+      sessionStorage.setItem('wpp.state.settings.activeTab', ui.newPanel.selector );
     }
 
   },
@@ -26,11 +26,11 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
    */
   settingsActivateTab: function settingsActivateTab( ) {
 
-    if( 'object' !== typeof localStorage ) {
+    if( 'object' !== typeof sessionStorage ) {
       return 0;
     }
 
-    var activeTab = localStorage.getItem('wpp.state.settings.activeTab' );
+    var activeTab = sessionStorage.getItem('wpp.state.settings.activeTab' );
 
     var tabContainer  = jQuery( "#wpp_settings_tabs > ul  > li" );
     var tabs = jQuery( "#wpp_settings_tabs > ul > li > a" );
