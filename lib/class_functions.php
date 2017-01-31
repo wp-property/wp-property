@@ -395,7 +395,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
     $supports = array('title', 'editor', 'thumbnail');
 
-    if( defiend( 'WPP_FEATURE_FLAG_DISABLE_EDITOR' ) && WPP_FEATURE_FLAG_DISABLE_EDITOR ) {
+    if( defined( 'WPP_FEATURE_FLAG_DISABLE_EDITOR' ) && WPP_FEATURE_FLAG_DISABLE_EDITOR ) {
       $supports = array('title', 'editor', 'thumbnail');
     } else {
       $supports = array('title', 'thumbnail');

@@ -739,7 +739,7 @@ if (get_option('permalink_structure') == '') {
             <p><?php _e( 'API Registration Status', ud_get_wp_property()->domain ); ?></p>
 
             <ul class="wpp-feature-api-status-list">
-            <?php foreach( array( 'ud_site_secret_token' => 'Secret Token', 'ud_site_id' => 'Site ID', 'ud_site_public_key' => 'Public Key' ) as $_option => $_option_label) { ?>
+            <?php foreach( array( 'ud_site_secret_token' => 'Secret Token', 'ud_site_id' => 'Site ID', 'ud_site_public_key' => 'Public Key', 'ud_api_key' => 'Update API Key' ) as $_option => $_option_label) { ?>
               <li class="wpp-feature-flag wpp-feature-flag-<?php echo get_site_option( $_option ) ? 'enabled': 'disabled';  ?>">
                 <span class="dashicons dashicons-yes"></span>
                 <label>
