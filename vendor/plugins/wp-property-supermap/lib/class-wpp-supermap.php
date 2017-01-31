@@ -219,7 +219,7 @@ class class_wpp_supermap {
                 <input <?php if( isset( $supermap_configuration['hide_sidebar_thumb'] ) ) checked( 'true', $supermap_configuration[ 'hide_sidebar_thumb' ] ); ?> value='true' type="checkbox" id="supermap_hide_sidebar_thumb" name="wpp_settings[configuration][feature_settings][supermap][hide_sidebar_thumb]" />
                 <label for="supermap_hide_sidebar_thumb"><?php _e('Do not show a property thumbnail in sidebar.',ud_get_wpp_supermap()->domain) ?></label>
               </li>
-              <li><?php WPP_F::image_sizes_dropdown("name=wpp_settings[configuration][feature_settings][supermap][supermap_thumb]&selected=" . isset( $supermap_configuration['supermap_thumb'] ) ? $supermap_configuration['supermap_thumb'] : 'thumbnail'); ?></li>
+              <li><?php WPP_F::image_sizes_dropdown("name=wpp_settings[configuration][feature_settings][supermap][supermap_thumb]&selected=" . isset( $supermap_configuration['supermap_thumb'] ) && $supermap_configuration['supermap_thumb' ? $supermap_configuration['supermap_thumb'] : 'thumbnail'); ?></li>
               <li><?php _e('If you create a new image size, please be sure to regenerate all thumbnails. ',ud_get_wpp_supermap()->domain) ?></li>
             </ul>
           </td>
