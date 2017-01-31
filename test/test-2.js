@@ -41,17 +41,15 @@ module.exports = {
       //console.log( require( 'util' ).inspect( resp.headers, { showHidden: false, depth: 2, colors: true } ) );
 
       // console.log( require( 'util' ).inspect( resp.headers, {showHidden: false, depth: 2, colors: true} ) );
-      if( !resp || resp.statusCode !== 200 ) {
-        console.log( require( 'util' ).inspect( resp.statusCode, { showHidden: false, depth: 2, colors: true } ) );
-        //console.log( require( 'util' ).inspect( error, { showHidden: false, depth: 2, colors: true } ) );
-        //return done( new Error( 'Unexpected response code post-wp-property activation.' ) );
+      if( !resp || ( resp.statusCode !== 200 && resp.statusCode !== 302 ) ) {
+        return done( new Error( 'Unexpected response code post-wp-property activation.' ) );
       }
 
       done();
 
     });
 
-  },
+  }
 
 
 };

@@ -15,8 +15,6 @@ module.exports = {
 
     module.downloadUrl = process.env.CIRCLE_REPOSITORY_URL + '/archive/' + process.env.CIRCLE_SHA1 + '.zip';
 
-    done();
-
   },
 
   // curl -H 'host:localhost' http://localhost:3000/ -I
@@ -51,8 +49,6 @@ module.exports = {
 
     });
 
-    //done();
-
   },
 
   'WordPress wp-admin/admin-ajax.php is reachable.': function( done ) {
@@ -85,8 +81,6 @@ module.exports = {
       done();
 
     });
-
-    //done();
 
   },
 
@@ -131,7 +125,7 @@ module.exports = {
         console.log( 'stderr', stderr );
       }
 
-      if( stdout.indexOf( "Success: Value passed for" ) === 0 ) {
+      if( stdout.indexOf( "Success:" ) === 0 ) {
         return done();
       }
 
@@ -186,10 +180,10 @@ module.exports = {
         return done();
       }
 
-
       console.log( stdout );
 
       done();
+
     });
 
   },
@@ -231,44 +225,7 @@ module.exports = {
 
   },
 
-  'Can fix permissions': function( done ) {
-
-    return done();
-
-    //console.log( '/home/ubuntu/wp-property-tests/bin/wp --path=/home/ubuntu/www --url=localhost:3000 plugin install ' + module.downloadUrl + ' --activate --quiet' );
-    exec( 'sudo chown -R www-data:www-data /home/ubuntu/www/wp-content/plugins', function( error, stdout, stderr ) {
-
-      if( error ) {
-        console.log( 'error', error );
-        return done( error );
-      }
-
-      if( stderr ) {
-
-        if( stderr.indexOf( "is already active." ) > 0 ) {
-          return done();
-        }
-
-        console.log( 'stderr', stderr );
-
-        return done( new Error( stderr ) );
-      }
-
-      if( stdout ) {
-
-        if( stdout.indexOf( "Success: Plugin" ) > 0 ) {
-          return done();
-        }
-
-        console.log( 'stdout', stdout );
-      }
-
-      done();
-    });
-
-  },
-
-  'wp-property/composer.json is reachable.': function( done ) {
+  'HTTP request can get [wp-property/composer.json].': function( done ) {
     //console.log( 'test one', 'http://' + module.host + ':3000/' );
 
     request.get( {
@@ -301,8 +258,7 @@ module.exports = {
 
     //done();
 
-  },
-
+  }
 
 };
 
