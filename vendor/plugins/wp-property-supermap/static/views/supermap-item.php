@@ -54,7 +54,7 @@ if(in_array('view_property', $supermap_configuration['display_attributes'])) {
 
 ?>
 
-<?php if ($property['latitude'] && $property['longitude'] && $property['ID']) { ?>
+<?php if ( ( isset( $property['latitude'] ) && $property['latitude'] ) && ( isset( $property['longitude'] ) && $property['longitude'] && $property['ID'] ) ) { ?>
 
   <div id="property_in_list_<?php echo isset( $rand ) ? $rand : ''; ?>_<?php echo $property['ID']; ?>" class="property_in_list but_smaller">
     <ul class='property_in_list_items clearfix'>
