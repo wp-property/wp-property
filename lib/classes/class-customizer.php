@@ -192,7 +192,14 @@ namespace UsabilityDynamics\WPP {
         $local_layouts = get_option('wpp_available_local_layouts', false);
         $overview_layouts = $layouts['single-property-term'];
         $single_layouts = $layouts['single-property'];
-        $single_layouts = array_merge($single_layouts, $local_layouts);
+        foreach ($local_layouts as $value) {
+          $tag = $value->tags[0]->tag;
+          if ($tag == 'single-property-term') {
+            $overview_layouts = array_merge($overview_layouts, array($value));
+          } else if ($tag == 'single-property') {
+            $single_layouts = array_merge($single_layouts, array($value));
+          }
+        }
 
         $wp_customize->add_panel('layouts_area_panel', array(
           'priority' => 10,
