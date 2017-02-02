@@ -1,0 +1,444 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-26 18:01+0200\n"
+"PO-Revision-Date: 2014-09-26 18:01+0200\n"
+"Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
+"Language-Team: \n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_n;_x\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: lib/class-agents.php:139
+msgid "Agent Shortcodes"
+msgstr ""
+
+#: lib/class-agents.php:140
+msgid "Show agent information:"
+msgstr ""
+
+#: lib/class-agents.php:140
+msgid ", or you can specify which fields to show:"
+msgstr ""
+
+#: lib/class-agents.php:141
+msgid "To query agent properties:"
+msgstr ""
+
+#: lib/class-agents.php:143
+msgid "Shortcode Attribute Fields"
+msgstr ""
+
+#: lib/class-agents.php:144
+msgid "The following attributes can be used in the [agent_card] shortcode."
+msgstr ""
+
+#: lib/class-agents.php:162
+msgid "Example Using All Available Fields"
+msgstr ""
+
+#: lib/class-agents.php:190
+msgid "Manage Real Estate Agents"
+msgstr ""
+
+#: lib/class-agents.php:239
+#, php-format
+msgid "%1$s <span class=\"count\">(%2$s)</span>"
+msgstr ""
+
+#: lib/class-agents.php:266
+msgid "Match the \"Property Agent\" attribute to "
+msgstr ""
+
+#: lib/class-agents.php:272
+msgid " field, when it is found, and associate with agent."
+msgstr ""
+
+#: lib/class-agents.php:338
+msgid "Agent Image Size"
+msgstr ""
+
+#: lib/class-agents.php:364
+msgid "Agent Information"
+msgstr ""
+
+#: lib/class-agents.php:413 lib/class-agents.php:1959
+msgid "Agent"
+msgstr ""
+
+#: lib/class-agents.php:435
+msgid "Edit"
+msgstr ""
+
+#: lib/class-agents.php:436 lib/class-agents.php:719
+msgid "Delete"
+msgstr ""
+
+#: lib/class-agents.php:509
+msgid "No Properties."
+msgstr ""
+
+#: lib/class-agents.php:531
+msgid "Create Agent"
+msgstr ""
+
+#: lib/class-agents.php:531
+msgid "Update Agent"
+msgstr ""
+
+#: lib/class-agents.php:549 lib/class-agents.php:2116
+msgid "Display Name"
+msgstr ""
+
+#: lib/class-agents.php:554
+msgid "Username"
+msgstr ""
+
+#: lib/class-agents.php:557
+msgid "Usernames cannot be changed."
+msgstr ""
+
+#: lib/class-agents.php:562
+msgid "E-Mail"
+msgstr ""
+
+#: lib/class-agents.php:567
+msgid "Widget Bio"
+msgstr ""
+
+#: lib/class-agents.php:571
+msgid "Content that is displayed in the agent widget."
+msgstr ""
+
+#: lib/class-agents.php:577
+msgid "Options"
+msgstr ""
+
+#: lib/class-agents.php:592 lib/class-agents.php:2119
+msgid "Full Bio"
+msgstr ""
+
+#: lib/class-agents.php:596
+msgid "Content that can be displayed in the shortcode."
+msgstr ""
+
+#: lib/class-agents.php:622
+msgid "Primary"
+msgstr ""
+
+#: lib/class-agents.php:623
+msgid "Save"
+msgstr ""
+
+#: lib/class-agents.php:624
+msgid "Associated Properties"
+msgstr ""
+
+#: lib/class-agents.php:625
+msgid "Images"
+msgstr ""
+
+#: lib/class-agents.php:646 lib/class-agents.php:820 lib/class-agents.php:862
+msgid "Agents"
+msgstr ""
+
+#: lib/class-agents.php:682
+msgid "Agent Roles"
+msgstr ""
+
+#: lib/class-agents.php:683
+msgid "User roles that can be associated with properties as agents."
+msgstr ""
+
+#: lib/class-agents.php:700
+msgid "Agent Fields"
+msgstr ""
+
+#: lib/class-agents.php:701
+msgid "Extra data fields to be used for agent profiles."
+msgstr ""
+
+#: lib/class-agents.php:704
+msgid ""
+"Custom fields may be used to adapt the information about agents to suit your "
+"needs."
+msgstr ""
+
+#: lib/class-agents.php:709
+msgid "Field name"
+msgstr ""
+
+#: lib/class-agents.php:710
+msgid "Slug"
+msgstr ""
+
+#: lib/class-agents.php:725
+msgid "Add Row"
+msgstr ""
+
+#: lib/class-agents.php:862
+msgid "Add New"
+msgstr ""
+
+#: lib/class-agents.php:884
+msgid "User removed."
+msgstr ""
+
+#: lib/class-agents.php:962
+msgid "Please enter a valid e-mail."
+msgstr ""
+
+#: lib/class-agents.php:972
+msgid "Agent updated."
+msgstr ""
+
+#: lib/class-agents.php:975
+msgid "Agent created."
+msgstr ""
+
+#: lib/class-agents.php:978
+msgid "Edit Agent"
+msgstr ""
+
+#: lib/class-agents.php:1047
+msgid "Associated Agents"
+msgstr ""
+
+#: lib/class-agents.php:1111
+#, php-format
+msgid "You can add fields on the <a href=\"%s\">settings page</a>."
+msgstr ""
+
+#: lib/class-agents.php:1116
+msgid "Flyer Writeup"
+msgstr ""
+
+#: lib/class-agents.php:1119
+msgid "Please enter a writeup for flyers."
+msgstr ""
+
+#: lib/class-agents.php:1189
+msgid "File should be an image"
+msgstr ""
+
+#: lib/class-agents.php:1191
+msgid "Agent ID is not set"
+msgstr ""
+
+#: lib/class-agents.php:1222
+msgid "Looks like, Image can not be uploaded."
+msgstr ""
+
+#: lib/class-agents.php:1226
+msgid "Image of Real Estate Agent #"
+msgstr ""
+
+#: lib/class-agents.php:1227
+msgid "Image for User #"
+msgstr ""
+
+#: lib/class-agents.php:1263
+msgid "Please save first to add images."
+msgstr ""
+
+#: lib/class-agents.php:1270
+msgid "No images found."
+msgstr ""
+
+#: lib/class-agents.php:1280 lib/class-agents.php:1326
+msgid "Remove"
+msgstr ""
+
+#: lib/class-agents.php:1289
+msgid "Please enable JavaScript to use file uploader"
+msgstr ""
+
+#: lib/class-agents.php:1293
+msgid "Add Image"
+msgstr ""
+
+#: lib/class-agents.php:1541
+msgid "Moderate comments"
+msgstr ""
+
+#: lib/class-agents.php:1542
+msgid "Manage categories"
+msgstr ""
+
+#: lib/class-agents.php:1543
+msgid "Manage links"
+msgstr ""
+
+#: lib/class-agents.php:1544
+msgid "Upload files"
+msgstr ""
+
+#: lib/class-agents.php:1545
+msgid "Edit posts"
+msgstr ""
+
+#: lib/class-agents.php:1546
+msgid "Edit other's posts"
+msgstr ""
+
+#: lib/class-agents.php:1547
+msgid "Edit published posts"
+msgstr ""
+
+#: lib/class-agents.php:1548
+msgid "Publish posts"
+msgstr ""
+
+#: lib/class-agents.php:1549
+msgid "Edit pages"
+msgstr ""
+
+#: lib/class-agents.php:1550
+msgid "Read"
+msgstr ""
+
+#: lib/class-agents.php:1551
+msgid "Edit other's pages"
+msgstr ""
+
+#: lib/class-agents.php:1552
+msgid "Edit published pages"
+msgstr ""
+
+#: lib/class-agents.php:1553
+msgid "Publish pages"
+msgstr ""
+
+#: lib/class-agents.php:1554
+msgid "Delete pages"
+msgstr ""
+
+#: lib/class-agents.php:1555
+msgid "Delete other's pages"
+msgstr ""
+
+#: lib/class-agents.php:1556
+msgid "Delete published pages"
+msgstr ""
+
+#: lib/class-agents.php:1557
+msgid "Delete posts"
+msgstr ""
+
+#: lib/class-agents.php:1558
+msgid "Delete other's posts"
+msgstr ""
+
+#: lib/class-agents.php:1559
+msgid "Delete published posts"
+msgstr ""
+
+#: lib/class-agents.php:1560
+msgid "Delete private posts"
+msgstr ""
+
+#: lib/class-agents.php:1561
+msgid "Edit private posts"
+msgstr ""
+
+#: lib/class-agents.php:1562
+msgid "Read private posts"
+msgstr ""
+
+#: lib/class-agents.php:1563
+msgid "Delete private pages"
+msgstr ""
+
+#: lib/class-agents.php:1564
+msgid "Edit private pages"
+msgstr ""
+
+#: lib/class-agents.php:1565
+msgid "Read private pages"
+msgstr ""
+
+#: lib/class-agents.php:1667
+msgid "Email"
+msgstr ""
+
+#: lib/class-agents.php:1668
+msgid "Name"
+msgstr ""
+
+#: lib/class-agents.php:1773
+msgid ""
+"Agent can see only the properties which are assigned to him. Agent will be "
+"automatically assigned to the property which he will create."
+msgstr ""
+
+#: lib/class-agents.php:1965
+msgid "Any"
+msgstr ""
+
+#: lib/class-agents.php:2117
+msgid "Image"
+msgstr ""
+
+#: lib/class-agents.php:2118
+msgid "Widget Text"
+msgstr ""
+
+#: lib/class-agents.php:2125
+msgid "Email Address"
+msgstr ""
+
+#: lib/class-agents.php:2128
+msgid "Title:"
+msgstr ""
+
+#: wp-property-agents.php:43
+msgid ""
+"Distributive is broken. composer.json is missed. Try to remove and upload "
+"plugin again."
+msgstr ""
+
+#: wp-property-agents.php:51
+#, php-format
+msgid "Plugin requires PHP %s or higher. Your current PHP version is %s"
+msgstr ""
+
+#: wp-property-agents.php:59
+#, php-format
+msgid ""
+"Distributive is broken. %s file is missed. Try to remove and upload plugin "
+"again."
+msgstr ""
+
+#: wp-property-agents.php:63
+msgid ""
+"Distributive is broken. Plugin loader is not available. Try to remove and "
+"upload plugin again."
+msgstr ""
+
+#: wp-property-agents.php:84
+#, php-format
+msgid "<p><b>%s</b> can not be initialized. %s</p>"
+msgstr ""
+
+#~ msgid "Inquiry"
+#~ msgstr "Enquiry"
+
+#~ msgid "Inquire About"
+#~ msgstr "Enquire About"
+
+#, fuzzy
+#~ msgid "Inquiry About:"
+#~ msgstr "Enquire About"
+
+#, fuzzy
+#~ msgid "Inquiry message:"
+#~ msgstr "Enquiry"

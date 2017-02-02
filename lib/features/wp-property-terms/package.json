@@ -1,0 +1,32 @@
+{
+  "name": "wp-property-terms",
+  "title": "Wp-Property Terms",
+  "description": "The Add-on for WP-Property plugin which adds ability to manage custom taxonomies for your properties.",
+  "version": "1.0.2",
+  "homepage": "https://usabilitydynamics.com",
+  "author": {
+    "name": "UsabilityDynamics, Inc.",
+    "url": "https://usabilitydynamics.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wp-property/wp-property-terms"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "dependencies": {
+    "load-grunt-tasks": "^0.6.0",
+    "grunt": "^0.4.5"
+  },
+  "devDependencies": {
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-markdown": "~0.4.0",
+    "grunt-contrib-less": "~0.8.3",
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-phpunit": "~0.3.3",
+    "grunt-shell": "~0.6.0",
+    "grunt-json-minify": "~0.4.0"
+  }
+}

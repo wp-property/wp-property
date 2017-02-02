@@ -1,0 +1,2890 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-29 13:56+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
+"Language-Team: \n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_n;_x\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: lib/class-wpp-supermap.php:70
+#, fuzzy
+msgid "Manage Supermap"
+msgstr "SuperHarita"
+
+#: lib/class-wpp-supermap.php:84
+msgid "Supermap"
+msgstr "SuperHarita"
+
+#: lib/class-wpp-supermap.php:115
+#, fuzzy
+msgid "Example Area"
+msgstr "Harita alanı:"
+
+#: lib/class-wpp-supermap.php:157
+msgid "Sidebar Attributes"
+msgstr "Kenar Çubuğu nitelikleri"
+
+#: lib/class-wpp-supermap.php:159
+msgid ""
+"Select the attributes you want to display in the left sidebar on the "
+"supermap."
+msgstr "SuperHarita üzerinde kenar çubuğunda görüntülenecek niteliği seçin."
+
+#: lib/class-wpp-supermap.php:173
+msgid ""
+"Display \"View Property\" link in the left sidebar. It directs user to "
+"Property Page."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:179
+#, fuzzy
+msgid "Supermap Sidebar Thumbnail:"
+msgstr "SuperHarita kenar çubuğu küçük resmi:"
+
+#: lib/class-wpp-supermap.php:184
+msgid "Do not show a property thumbnail in sidebar."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:187
+msgid ""
+"If you create a new image size, please be sure to regenerate all thumbnails. "
+msgstr ""
+"Yeni resim boyutu yaratırsanız, küçük resimleri yeniden yarattığınızdan emin "
+"olun."
+
+#: lib/class-wpp-supermap.php:192
+#, fuzzy
+msgid "Map Markers:"
+msgstr "Harita alanı:"
+
+#: lib/class-wpp-supermap.php:198
+msgid "Image"
+msgstr "Resim"
+
+#: lib/class-wpp-supermap.php:199 lib/class-wpp-supermap.php:341
+msgid "Name"
+msgstr "Ad"
+
+#: lib/class-wpp-supermap.php:200
+msgid "Slug"
+msgstr "Deyiş"
+
+#: lib/class-wpp-supermap.php:227 lib/class-wpp-supermap.php:374
+msgid "Delete"
+msgstr "Sil"
+
+#: lib/class-wpp-supermap.php:235
+#, fuzzy
+msgid "Add Marker"
+msgstr "Resim ekle"
+
+#: lib/class-wpp-supermap.php:335
+msgid "Map Areas:"
+msgstr "Harita alanı:"
+
+#: lib/class-wpp-supermap.php:337
+msgid ""
+"<p>Map areas let you draw our areas on the map, such as neighborhoods.</"
+"p><p>Just add to shortcode attribute <b>show_areas=all</b> to draw all areas "
+"on the map. Also You can use area's slugs to show them on the map, like as "
+"<b>show_areas=new_york,washington</b>. Please, use coordinates in this "
+"format: <b>(82.72, -37.79)(69.54, -57.48)(68.93, -18.63).</b></p><p><i>This "
+"is an experimental feature, you may not want to use it on a live site.  "
+"We're eager to hear your feedback regarding this feature and the "
+"capabilities that would be useful to you.</i></p>"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:342
+msgid "Coordinates"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:343
+msgid "Fill Color"
+msgstr "Renk doldur"
+
+#: lib/class-wpp-supermap.php:344
+msgid "Opacity"
+msgstr "Şeffaflık"
+
+#: lib/class-wpp-supermap.php:345
+msgid "Stoke Color"
+msgstr "Tıkıştırılmış renk"
+
+#: lib/class-wpp-supermap.php:346
+msgid "Hover Color"
+msgstr "Üzerinde rengi"
+
+#: lib/class-wpp-supermap.php:382
+msgid "Add Row"
+msgstr "Satır ekle"
+
+#: lib/class-wpp-supermap.php:424 lib/class-wpp-supermap.php:675
+#, fuzzy
+msgid "Map Marker"
+msgstr "Harita alanı:"
+
+#: lib/class-wpp-supermap.php:426 lib/class-wpp-supermap.php:677
+#, fuzzy
+msgid "Default by Google"
+msgstr "Varsayılan şablon"
+
+#: lib/class-wpp-supermap.php:493
+msgid "File should be an image"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:546
+msgid "Looks like, Image can not be uploaded."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:624
+msgid "Supermap Options"
+msgstr "SuperHarita seçenekleri"
+
+#: lib/class-wpp-supermap.php:637
+#, fuzzy
+msgid "Exclude property from Supermap"
+msgstr "Emlak SuperHaritada gösterilmesin"
+
+#: lib/class-wpp-supermap.php:828 lib/class-wpp-supermap.php:1170
+msgid "Options"
+msgstr "Ayarlar"
+
+#: lib/class-wpp-supermap.php:840
+#, php-format
+msgid "Element cannot be rendered, missing %1s script."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:928
+#, fuzzy, php-format
+msgid "Sorry, no %s found, try expanding your search."
+msgstr ""
+"Üzgünüm, hiç bir emlak bulunamadı - aramanızı genişletin ya da  <a href=\"%s"
+"\">tümünü görüntüleyin</a>."
+
+#: lib/class-wpp-supermap.php:1052 lib/class-wpp-supermap.php:1641
+msgid "Yes"
+msgstr "Evet"
+
+#: lib/class-wpp-supermap.php:1068 lib/class-wpp-supermap.php:1656
+msgid "View Property"
+msgstr "Emlak görüntüle"
+
+#: lib/class-wpp-supermap.php:1131
+#, fuzzy
+msgid "No results found."
+msgstr "Resim bulunamadı."
+
+#: lib/class-wpp-supermap.php:1677
+#, fuzzy
+msgid "Show More"
+msgstr "\"More\" bağlantısı gösterilsin mi?"
+
+#: lib/class-wpp-supermap.php:1678
+msgid "Loading..."
+msgstr "Yükleniyor..."
+
+#: lib/class-wpp-supermap.php:1790
+msgid "Loading"
+msgstr "Yükleniyor"
+
+#: wp-property-supermap.php:43
+msgid ""
+"Distributive is broken. composer.json is missed. Try to remove and upload "
+"plugin again."
+msgstr ""
+
+#: wp-property-supermap.php:51
+#, php-format
+msgid "Plugin requires PHP %s or higher. Your current PHP version is %s"
+msgstr ""
+
+#: wp-property-supermap.php:59
+#, php-format
+msgid ""
+"Distributive is broken. %s file is missed. Try to remove and upload plugin "
+"again."
+msgstr ""
+
+#: wp-property-supermap.php:63
+msgid ""
+"Distributive is broken. Plugin loader is not available. Try to remove and "
+"upload plugin again."
+msgstr ""
+
+#: wp-property-supermap.php:84
+#, php-format
+msgid "<p><b>%s</b> can not be initialized. %s</p>"
+msgstr ""
+
+#~ msgid "Building"
+#~ msgstr "Yapı"
+
+#~ msgid "Floorplan"
+#~ msgstr "Daire"
+
+#~ msgid "Single Family Home"
+#~ msgstr "Müstakil ev"
+
+#~ msgid "Address"
+#~ msgstr "Adres"
+
+#~ msgid "Price"
+#~ msgstr "Fiyat"
+
+#~ msgid "Bedrooms"
+#~ msgstr "Yatak Odası"
+
+#~ msgid "Bathrooms"
+#~ msgstr "Banyo"
+
+#~ msgid "Deposit"
+#~ msgstr "Depozito"
+
+#~ msgid "Area"
+#~ msgstr "Bölge"
+
+#~ msgid "Phone Number"
+#~ msgstr "Telefon"
+
+#~ msgid "Lease Terms"
+#~ msgstr "Kiralama koşulları"
+
+#~ msgid "Pet Policy"
+#~ msgstr "Evcil hayvan koşulları"
+
+#~ msgid "School"
+#~ msgstr "Okul"
+
+#~ msgid "Tagline"
+#~ msgstr "Etiketler"
+
+#~ msgid "Studio"
+#~ msgstr "Stüdyo"
+
+#~ msgid "The property type will determine the layout."
+#~ msgstr "Emlak tipi dış görünümü belirleyecek"
+
+#~ msgid ""
+#~ "Customize what appears in search results in the attribute section.  For "
+#~ "example: 1bed, 2baths, area varies slightly."
+#~ msgstr ""
+#~ "Aramalarınızda sonuçlarınızı seçeneklerden özelleştirin. Örneğin: 1yatak, "
+#~ "2banyo, alan hafif değişiklik gösterir gibi."
+
+#~ msgid "Will appear on overview pages and on top of every listing page."
+#~ msgstr ""
+#~ "Genel görünüm sayfalarında ve her listeyen sayfanın başında "
+#~ "görüntülenecek."
+
+#, fuzzy
+#~ msgid "View "
+#~ msgstr "Tümünü göster"
+
+#~ msgid "Property Type"
+#~ msgstr "Emlak tipi"
+
+#~ msgid "City"
+#~ msgstr "İl"
+
+#~ msgid "For Sale"
+#~ msgstr "Satılık"
+
+#~ msgid "For Rent"
+#~ msgstr "Kiralık"
+
+#~ msgid "This is a rental property."
+#~ msgstr "Bu emlak kiralıktır."
+
+#~ msgid "This property is for sale."
+#~ msgstr "Bu emlak satılıktır."
+
+#~ msgid "Latitude"
+#~ msgstr "Enlem"
+
+#~ msgid "Longitude"
+#~ msgstr "Boylam"
+
+#~ msgid "Format phone number."
+#~ msgstr "Telefon numarası biçimlendir"
+
+#, fuzzy
+#~ msgid " sq. ft."
+#~ msgstr "metrekare"
+
+#~ msgid "Address was validated by Google Maps."
+#~ msgstr "Adres Google Maps tarafından doğrulandı."
+
+#~ msgid ""
+#~ "Address has not yet been validated, should be formatted as: street, city, "
+#~ "state, postal code, country. Locations are validated through Google Maps."
+#~ msgstr ""
+#~ "Adres henüz doğrulanmadı, şu şekilde biçimlendirilmeli: cadde, şehir, "
+#~ "eyalet, postakodu, ülke. Adresler Google Maps tarafından doğrulanır."
+
+#, fuzzy
+#~ msgid "Show"
+#~ msgstr "Kütüğü göster"
+
+#~ msgid "Featured"
+#~ msgstr "Özellikli"
+
+#, fuzzy
+#~ msgid "Add to Featured"
+#~ msgstr "Yeni özellik ekle"
+
+#~ msgid "Processing..."
+#~ msgstr "İşliyor..."
+
+#, fuzzy
+#~ msgid "Uploading"
+#~ msgstr "Yükleniyor"
+
+#, fuzzy
+#~ msgid "Upload Image"
+#~ msgstr "Resim ekle"
+
+#~ msgid "Cancel"
+#~ msgstr "İptal"
+
+#, fuzzy
+#~ msgid "Failed"
+#~ msgstr "Alanlar"
+
+#, fuzzy
+#~ msgid "Previous"
+#~ msgstr "Önceki"
+
+#~ msgid "Next"
+#~ msgstr "Sonraki"
+
+#, fuzzy
+#~ msgid "Last"
+#~ msgstr "Son içeri aktarma"
+
+#, fuzzy
+#~ msgid "Show %s entries"
+#~ msgstr "%s tane resim göster"
+
+#, fuzzy
+#~ msgid "No matching records found"
+#~ msgstr "Resim bulunamadı."
+
+#, fuzzy
+#~ msgid "Search:"
+#~ msgstr "Arama"
+
+#, fuzzy
+#~ msgid "Display:"
+#~ msgstr "Görüntüle"
+
+#, fuzzy
+#~ msgid "Automatically Match"
+#~ msgstr "Otomatik eşleştirme"
+
+#~ msgid "Settings"
+#~ msgstr "Ayarlar"
+
+#, fuzzy
+#~ msgid "Enabled Options"
+#~ msgstr "Ayarlar"
+
+#~ msgid "Are you sure?"
+#~ msgstr "Emin misiniz?"
+
+#~ msgid "Save Configuration"
+#~ msgstr "Ayarları kaydet"
+
+#, fuzzy
+#~ msgid "Schedule has been updated."
+#~ msgstr "Zamanlama içeri aktarılamadı."
+
+#, fuzzy
+#~ msgid "Please save schedule first."
+#~ msgstr "Lütfen resimleri eklemek için önce kaydedin."
+
+#, fuzzy
+#~ msgid "Cannot Load Source: Reload."
+#~ msgstr "Kaynak yüklenemedi."
+
+#, fuzzy
+#~ msgid "Source Is Good. Reload."
+#~ msgstr "Kaynak iyi."
+
+#, fuzzy
+#~ msgid "Manage Admin Tools"
+#~ msgstr "Bağlantıları yönet"
+
+#~ msgid "Developer"
+#~ msgstr "Geliştirici"
+
+#, fuzzy
+#~ msgid "%1s Attributes"
+#~ msgstr "Nitelikler"
+
+#, fuzzy
+#~ msgid "Advanced Stats Settings:"
+#~ msgstr "Genel ayarlar"
+
+#~ msgid "Main"
+#~ msgstr "Ana"
+
+#, fuzzy
+#~ msgid "Group Color"
+#~ msgstr "Tıkıştırılmış renk"
+
+#, fuzzy
+#~ msgid "Add Group"
+#~ msgstr "Satır ekle"
+
+#~ msgid "Attribute Name"
+#~ msgstr "Özellik adı"
+
+#~ msgid "Search Input"
+#~ msgstr "Arama girdisi"
+
+#, fuzzy
+#~ msgid "Toggle Advanced Settings"
+#~ msgstr "Genel ayarlar"
+
+#, fuzzy
+#~ msgid "Sortable."
+#~ msgstr "Aranabilir"
+
+#, fuzzy
+#~ msgid "Searchable."
+#~ msgstr "Aranabilir"
+
+#, fuzzy
+#~ msgid "Format: numeric."
+#~ msgstr "Telefon numarası biçimlendir"
+
+#, fuzzy
+#~ msgid "Show in \"All Properties\" table."
+#~ msgstr "Alt özellikleri göster."
+
+#, fuzzy
+#~ msgid "Delete Attribute"
+#~ msgstr "Nitelikler"
+
+#, fuzzy
+#~ msgid "Free Text"
+#~ msgstr "Araç metni"
+
+#, fuzzy
+#~ msgid "Range Dropdown"
+#~ msgstr "aralık (açılır)"
+
+#, fuzzy
+#~ msgid "Single Checkbox"
+#~ msgstr "işaret kutusu"
+
+#, fuzzy
+#~ msgid "Multi-Checkbox"
+#~ msgstr "işaret kutusu"
+
+#, fuzzy
+#~ msgid "Attribute Slug"
+#~ msgstr "Nitelikler"
+
+#, fuzzy
+#~ msgid "Delete Meta Attribute"
+#~ msgstr "Kenar Çubuğu nitelikleri"
+
+#, fuzzy
+#~ msgid "%1s Types"
+#~ msgstr "Tip"
+
+#~ msgid "Type"
+#~ msgstr "Tip"
+
+#~ msgid "Hidden Attributes"
+#~ msgstr "Gizli özellikler"
+
+#, fuzzy
+#~ msgid "Inherit from Parent"
+#~ msgstr "Devralınan"
+
+#~ msgid "Searchable"
+#~ msgstr "Aranabilir"
+
+#~ msgid "Location Matters"
+#~ msgstr "Yerleşim önemli"
+
+#, fuzzy
+#~ msgid "Parent Selection"
+#~ msgstr "Emlak ayarları"
+
+#, fuzzy
+#~ msgid "Advanced Options"
+#~ msgstr "Ayarlar"
+
+#~ msgid "Show Log."
+#~ msgstr "Kütüğü göster"
+
+#~ msgid "Child Properties"
+#~ msgstr "Alt Emlak"
+
+#~ msgid "Menu Sort Order:"
+#~ msgstr "Menü sıralaması:"
+
+#, fuzzy
+#~ msgid "Display in featured listings."
+#~ msgstr "Özellikli Emlaklarda göster."
+
+#~ msgid "Property updated. <a href=\"%s\">view property</a>"
+#~ msgstr "Emlak güncellendi. <a href=\"%s\">Emlak görüntüle</a>"
+
+#~ msgid "Custom field updated."
+#~ msgstr "Özel alan güncellendi."
+
+#~ msgid "Custom field deleted."
+#~ msgstr "Özel alan silindi."
+
+#~ msgid "Property updated."
+#~ msgstr "Emlak güncellendi."
+
+#~ msgid "Property restored to revision from %s"
+#~ msgstr "Emlak %s sürümünden geri yüklendi"
+
+#~ msgid "Property published. <a href=\"%s\">View property</a>"
+#~ msgstr "Emlak yayımlandı. <a href=\"%s\">Emlak görüntüle</a>"
+
+#~ msgid "Property saved."
+#~ msgstr "Emlak kaydedildi."
+
+#~ msgid ""
+#~ "Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+#~ msgstr "Emlak eklendi. <a target=\"_blank\" href=\"%s\">Emlak önizleme</a>"
+
+#~ msgid ""
+#~ "Property scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href="
+#~ "\"%2$s\">Preview property</a>"
+#~ msgstr ""
+#~ "Emlak takvime eklendi: <strong>%1$s</strong>. <a target=\"_blank\" href="
+#~ "\"%2$s\">Emlak önizleme</a>"
+
+#~ msgid ""
+#~ "Property draft updated. <a target=\"_blank\" href=\"%s\">Preview "
+#~ "property</a>"
+#~ msgstr ""
+#~ "Emlak taslağı güncellendi.  <a target=\"_blank\" href=\"%s\">Emlak "
+#~ "önizleme</a>"
+
+#~ msgid "Title"
+#~ msgstr "Başlık"
+
+#~ msgid "Overview"
+#~ msgstr "Genel görünüm"
+
+#~ msgid "Order"
+#~ msgstr "Sipariş"
+
+#~ msgid "Thumbnail"
+#~ msgstr "Küçük resim"
+
+#~ msgid "General Information"
+#~ msgstr "Genel bilgiler"
+
+#~ msgid "Search"
+#~ msgstr "Arama"
+
+#~ msgid "Floor plans at location:"
+#~ msgstr "Daire planları:"
+
+#, fuzzy
+#~ msgid "View Properties"
+#~ msgstr "Emlak görüntüle"
+
+#, fuzzy
+#~ msgid "Add/Edit Properties"
+#~ msgstr "Emlak düzenle"
+
+#, fuzzy
+#~ msgid "Edit Other Properties"
+#~ msgstr "Diğer emlaklar"
+
+#, fuzzy
+#~ msgid "Delete Properties"
+#~ msgstr "Diğer emlaklar"
+
+#, fuzzy
+#~ msgid "Publish Properties"
+#~ msgstr "Yayımlanmış emlak yok."
+
+#, fuzzy
+#~ msgid "Manage Settings"
+#~ msgstr "Bağlantıları yönet"
+
+#, fuzzy
+#~ msgid "Manage Taxonomies"
+#~ msgstr "Sınıflandırma"
+
+#, fuzzy
+#~ msgid "For more information:"
+#~ msgstr "Temsil bilgilerini göster:"
+
+#, fuzzy
+#~ msgid "An error occurred during API key request: <b>%s</b>."
+#~ msgstr "Ücretli özellik kontrolü yaparken bir hata oluştu: <b> %s </b>."
+
+#~ msgid "Properties"
+#~ msgstr "Emlaklar"
+
+#~ msgid "Property"
+#~ msgstr "Emlak"
+
+#~ msgid "Property: %s"
+#~ msgstr "Emlak: %s"
+
+#~ msgid "Sidebar located on the %s page."
+#~ msgstr "Kenar çubuğu %s sayfasına yerleştirildi."
+
+#~ msgid "Features"
+#~ msgstr "Özellikler"
+
+#~ msgid "Feature"
+#~ msgstr "Özellik"
+
+#~ msgid "Search Features"
+#~ msgstr "Arama seçenekleri"
+
+#~ msgid "All Features"
+#~ msgstr "Tüm seçenekler"
+
+#~ msgid "Parent Feature"
+#~ msgstr "Üst özellik"
+
+#~ msgid "Parent Feature:"
+#~ msgstr "Üst özellik"
+
+#~ msgid "Edit Feature"
+#~ msgstr "Özelliği düzenle"
+
+#~ msgid "Update Feature"
+#~ msgstr "Özelliği güncelle"
+
+#~ msgid "Add New Feature"
+#~ msgstr "Yeni özellik ekle"
+
+#~ msgid "New Feature Name"
+#~ msgstr "Yeni özellik adı"
+
+#~ msgid "Community Features"
+#~ msgstr "Topluluk özellikleri"
+
+#~ msgid "Community Feature"
+#~ msgstr "Topluluk özelliği"
+
+#~ msgid "Search Community Features"
+#~ msgstr "Topluluk özellikleri arama"
+
+#~ msgid "All Community Features"
+#~ msgstr "Tüm topluluk özellikleri"
+
+#~ msgid "Parent Community Feature"
+#~ msgstr "Üst topluluk özelliği"
+
+#~ msgid "Parent Community Feature:"
+#~ msgstr "Üst topluluk özelliği:"
+
+#~ msgid "Edit Community Feature"
+#~ msgstr "Topluluk özelliğini düzenle"
+
+#~ msgid "Update Community Feature"
+#~ msgstr "Topluluk özelliğini güncelle"
+
+#~ msgid "Add New Community Feature"
+#~ msgstr "Yeni topluluk özelliği"
+
+#~ msgid "New Community Feature Name"
+#~ msgstr "Yeni topluluk özelliği adı"
+
+#, fuzzy
+#~ msgid "All Properties"
+#~ msgstr "Emlaklar"
+
+#, fuzzy
+#~ msgid "Add Property"
+#~ msgstr "Yeni emlak ekle"
+
+#~ msgid "Add New Property"
+#~ msgstr "Yeni emlak ekle"
+
+#~ msgid "Edit Property"
+#~ msgstr "Emlak düzenle"
+
+#~ msgid "New Property"
+#~ msgstr "Yeni emlak"
+
+#~ msgid "Search Properties"
+#~ msgstr "Arama seçenekleri"
+
+#~ msgid "No properties found"
+#~ msgstr "Emlak bulunamadı"
+
+#~ msgid "No properties found in Trash"
+#~ msgstr "Çöp kutusunda emlak bulunamadı"
+
+#~ msgid "Default"
+#~ msgstr "Varsayılan"
+
+#~ msgid ""
+#~ "If you have problems automatically downloading premium features, it may "
+#~ "be due to PHP not having ownership issues over the premium feature folder."
+#~ msgstr ""
+#~ "Ücretli özellikleri otomatik indirirken problem yaşıyorsanız, PHP ücretli "
+#~ "özellikler klasörünüzün sahipliğine sahip olmayabilir."
+
+#, fuzzy
+#~ msgid "%1$d %2$s could not be updated."
+#~ msgstr "Zamanlama içeri aktarılamadı."
+
+#, fuzzy
+#~ msgid "Cache was successfully cleared"
+#~ msgstr "Güncelleme başarılı bir şekilde çalıştırıldı."
+
+#, fuzzy
+#~ msgid "The API key could not be generated."
+#~ msgstr "Zamanlama içeri aktarılamadı."
+
+#, fuzzy
+#~ msgid ""
+#~ "An error occurred during premium feature check. API Key '<b>%s</b>' is "
+#~ "incorrect."
+#~ msgstr "Ücretli özellik kontrolü yaparken bir hata oluştu: <b> %s </b>."
+
+#, fuzzy
+#~ msgid "WP-Property Premium Feature: %s"
+#~ msgstr "WP-Property Ücretli Özellikler"
+
+#~ msgid "Update ran successfully."
+#~ msgstr "Güncelleme başarılı bir şekilde çalıştırıldı."
+
+#, fuzzy
+#~ msgid "Request can not be verified."
+#~ msgstr "Kullanıcı adları değiştirilemez."
+
+#, fuzzy
+#~ msgid "An error occurred during premium feature check: <b> %s </b>."
+#~ msgstr "Ücretli özellik kontrolü yaparken bir hata oluştu: <b> %s </b>."
+
+#~ msgid " sq ft."
+#~ msgstr "metrekare"
+
+#~ msgid "Get Directions"
+#~ msgstr "Yön bul"
+
+#~ msgid "General Settings"
+#~ msgstr "Genel ayarlar"
+
+#~ msgid "Find your property"
+#~ msgstr "Emlak bul"
+
+#~ msgid "Edit"
+#~ msgstr "Düzenle"
+
+#~ msgid "Contact us"
+#~ msgstr "Bize yazın"
+
+#~ msgid "Login"
+#~ msgstr "Giriş"
+
+#~ msgid "Explore"
+#~ msgstr "Araştır"
+
+#~ msgid "Message"
+#~ msgstr "Mesaj"
+
+#~ msgid "E-mail"
+#~ msgstr "E-posta"
+
+#~ msgid "Send Message"
+#~ msgstr "Mesaj gönder"
+
+#~ msgid "Submit Inquiry"
+#~ msgstr "Sorgu gönder"
+
+#~ msgid "Inquiry"
+#~ msgstr "Sorgu"
+
+#~ msgid "Comment About"
+#~ msgstr "Yorum bırak"
+
+#~ msgid "Inquire About"
+#~ msgstr "Sorgu yaz"
+
+#~ msgid "Inquiry About:"
+#~ msgstr "Sorgu yaz:"
+
+#~ msgid "Inquiry message:"
+#~ msgstr "Sorgu tümcesi:"
+
+#~ msgid "You forgot to enter your e-mail."
+#~ msgstr "E-posta girmeyi unuttunuz."
+
+#~ msgid "You forgot to enter a message."
+#~ msgstr "Mesaj girmeyi unuttunuz."
+
+#~ msgid "You forgot to enter your  name."
+#~ msgstr "Adınızı girmeyi unuttunuz."
+
+#~ msgid "Error with sending message. Please contact site administrator."
+#~ msgstr "Mesaj gönderirken hata oluştu. Site yöneticisi ile görüşünüz."
+
+#~ msgid "Thank you for your message."
+#~ msgstr "Mesajınız için teşekkürler."
+
+#, fuzzy
+#~ msgid "Status"
+#~ msgstr "Eyalet"
+
+#, fuzzy
+#~ msgid "Date"
+#~ msgstr "Eyalet"
+
+#, fuzzy
+#~ msgid "Published"
+#~ msgstr "Gönderileri yayımla"
+
+#, fuzzy
+#~ msgid "Pending"
+#~ msgstr "Yükleniyor"
+
+#~ msgid "Any"
+#~ msgstr "Herhangi"
+
+#, fuzzy
+#~ msgid "Show all dates"
+#~ msgstr "%s tane resim göster"
+
+#, fuzzy
+#~ msgid "General Help"
+#~ msgstr "Genel ayarlar"
+
+#, fuzzy
+#~ msgid "Default Properties Page"
+#~ msgstr "Özellikli emlaklar"
+
+#, fuzzy
+#~ msgid ""
+#~ "The default <b>property page</b> will be used to display property search "
+#~ "results, as well as be the base for property URLs. "
+#~ msgstr "Arama sonuçları "
+
+#~ msgid "Display"
+#~ msgstr "Görüntüle"
+
+#, fuzzy
+#~ msgid "Premium Features"
+#~ msgstr "Üst özellik"
+
+#, fuzzy
+#~ msgid "Tab allows you to manage your WP-Property Premium Features"
+#~ msgstr "WP-Property Ücretli Özellikler"
+
+#~ msgid "Help"
+#~ msgstr "Yardım"
+
+#, fuzzy
+#~ msgid "More Help"
+#~ msgstr "Daha fazla"
+
+#, fuzzy
+#~ msgid "published"
+#~ msgstr "Gönderileri yayımla"
+
+#, fuzzy
+#~ msgid "pending"
+#~ msgstr "Yükleniyor"
+
+#, fuzzy
+#~ msgid "Nothing found."
+#~ msgstr "Resim bulunamadı."
+
+#, fuzzy
+#~ msgid "Account Created"
+#~ msgstr "Temsilci yaratıldı."
+
+#, fuzzy
+#~ msgid "New User account created."
+#~ msgstr "Temsilci yaratıldı."
+
+#, fuzzy
+#~ msgid "Status Updated"
+#~ msgstr "Seçenekler güncellendi."
+
+#, fuzzy
+#~ msgid "or"
+#~ msgstr "Daha fazla"
+
+#~ msgid "There has been an error retreiving your API key."
+#~ msgstr "API anahtarını getirirken hata oluştu."
+
+#, fuzzy
+#~ msgid "XML_Serializer could not be loaded."
+#~ msgstr "Zamanlama içeri aktarılamadı."
+
+#~ msgid "Invalid API key."
+#~ msgstr "Hatalı API anahtarı."
+
+#~ msgid "No published properties."
+#~ msgstr "Yayımlanmış emlak yok."
+
+#~ msgid "Title:"
+#~ msgstr "Başlık:"
+
+#, fuzzy
+#~ msgid "Attributes to Display:"
+#~ msgstr "Adres gösterimi"
+
+#~ msgid "%s at %s for %s"
+#~ msgstr "%s %s'de %s için"
+
+#~ msgid "More"
+#~ msgstr "Daha fazla"
+
+#~ msgid "View All"
+#~ msgstr "Tümünü göster"
+
+#, fuzzy
+#~ msgid ""
+#~ "The widget will show other properties that share a parent with the "
+#~ "currently displayed property."
+#~ msgstr "Görüntülenen emlak için alt emlakları göster"
+
+#, fuzzy
+#~ msgid "Hide images."
+#~ msgstr "Resimler gizlensin mi?"
+
+#~ msgid "Image Size:"
+#~ msgstr "Resim boyutu:"
+
+#~ msgid "Listings to display?"
+#~ msgstr "Listeler görüntülensin mi?"
+
+#, fuzzy
+#~ msgid "Select the attributes you want to display: "
+#~ msgstr "Görüntülemek istediğiniz istatistiği seçin"
+
+#~ msgid "Address Format:"
+#~ msgstr "Adres biçimi:"
+
+#~ msgid "Show \"More\" link?"
+#~ msgstr "\"More\" bağlantısı gösterilsin mi?"
+
+#~ msgid "Show \"View All\" link?"
+#~ msgstr "\"View All\" bağlantısı görüntülensin mi?"
+
+#~ msgid "Show child properties (if any) for currently displayed property"
+#~ msgstr "Görüntülenen emlak için alt emlakları göster"
+
+#~ msgid ""
+#~ "The widget will not be displayed if the currently viewed property has no "
+#~ "children."
+#~ msgstr ""
+#~ "Görüntülenen emlak alt bileşene sahip değilse araç görüntülenmeyecek."
+
+#~ msgid "Hide Images?"
+#~ msgstr "Resimler gizlensin mi?"
+
+#~ msgid "Select the stats you want to display"
+#~ msgstr "Görüntülemek istediğiniz istatistiği seçin"
+
+#, fuzzy
+#~ msgid "Featured %1s"
+#~ msgstr "Özellikler"
+
+#~ msgid "List of properties that were marked as Featured"
+#~ msgstr "Özellikli emlak olarak işaretli emlakların listesi"
+
+#~ msgid "Featured Properies"
+#~ msgstr "Özellikli emlaklar"
+
+#~ msgid "List of the latest properties created on this site"
+#~ msgstr "En son eklenen emlak listesi"
+
+#~ msgid "Latest Properties"
+#~ msgstr "Son emlaklar"
+
+#~ msgid "Select stats you want to display"
+#~ msgstr "Görüntülemek istediğiniz istatistiği seçiniz"
+
+#, fuzzy
+#~ msgid "%1s Search"
+#~ msgstr "Arama"
+
+#, fuzzy
+#~ msgid "Display a highly customizable  %1s search form."
+#~ msgstr "Daha çok özelleştirilebilir emlak arama formu göster"
+
+#~ msgid "No searchable property types were found."
+#~ msgstr "Aranabilir emlak tipi bulunamadı"
+
+#~ msgid "Property types to search:"
+#~ msgstr "Aranacak emlak tipi"
+
+#~ msgid "Select the attributes you want to search."
+#~ msgstr "Aranacak özellikleri seçin"
+
+#, fuzzy
+#~ msgid "All Attributes"
+#~ msgstr "Nitelikler"
+
+#, fuzzy
+#~ msgid "Grouped Attributes"
+#~ msgstr "WP-Property niteliği"
+
+#, fuzzy
+#~ msgid "Default Sort Order"
+#~ msgstr "Menü sıralaması:"
+
+#~ msgid "Use pagination"
+#~ msgstr "Sayfalama kullan"
+
+#~ msgid "Items per page"
+#~ msgstr "Sayfa başına nesne"
+
+#~ msgid "Search Properies"
+#~ msgstr "Emlak arama"
+
+#~ msgid "List of all images attached to the current property"
+#~ msgstr "Geçerli emlak için atanmış tüm resimlerin listesi"
+
+#, fuzzy
+#~ msgid "Large Image Size:"
+#~ msgstr "Temsil resim boyutu"
+
+#~ msgid "Show %s Images"
+#~ msgstr "%s tane resim göster"
+
+#, fuzzy
+#~ msgid "Show Image Captions"
+#~ msgstr "%s tane resim göster"
+
+#, fuzzy
+#~ msgid "Show Image Descriptions."
+#~ msgstr "Açıklama"
+
+#, fuzzy
+#~ msgid "API Failure: %1s."
+#~ msgstr "Özellikler"
+
+#~ msgid "Log Started."
+#~ msgstr "Kütük başladı."
+
+#, fuzzy
+#~ msgid "Log Page for"
+#~ msgstr "UD kütük sayfası "
+
+#~ msgid "Clear Log"
+#~ msgstr "Kütüğü temizle"
+
+#~ msgid "Timestamp"
+#~ msgstr "Zaman etiketi"
+
+#~ msgid "Event"
+#~ msgstr "Olay"
+
+#~ msgid "User"
+#~ msgstr "Kullanıcı"
+
+#~ msgid "Agent Shortcodes"
+#~ msgstr "Temsil kısa kod"
+
+#~ msgid "Show agent information:"
+#~ msgstr "Temsil bilgilerini göster:"
+
+#~ msgid ", or you can specify which fields to show:"
+#~ msgstr ", ya da görüntülenecek alanları belirtebilirsiniz:"
+
+#~ msgid "To query agent properties:"
+#~ msgstr "Temsil özelliklerini sorgulamak için:"
+
+#~ msgid "Shortcode Attribute Fields"
+#~ msgstr "Kısa kod nitelik alanları"
+
+#~ msgid "The following attributes can be used in the [agent_card] shortcode."
+#~ msgstr ""
+#~ "Aşağıdaki nitelikler temsil kartı kısa kodu için kullanılabilir. "
+#~ "[agent_card]"
+
+#~ msgid "Example Using All Available Fields"
+#~ msgstr "Örneğin tüm kullanılabilir alanların kullanılması"
+
+#, fuzzy
+#~ msgid "Manage Real Estate Agents"
+#~ msgstr "Kategorileri yönet"
+
+#~ msgid "Agent Image Size"
+#~ msgstr "Temsil resim boyutu"
+
+#~ msgid "Agent Information"
+#~ msgstr "Temsil bilgileri"
+
+#~ msgid "Agent"
+#~ msgstr "Temsil"
+
+#~ msgid "No Properties."
+#~ msgstr "Emlak yok."
+
+#~ msgid "Create Agent"
+#~ msgstr "Temsil yarat"
+
+#~ msgid "Update Agent"
+#~ msgstr "Temsil güncelle"
+
+#~ msgid "Display Name"
+#~ msgstr "Ad görüntüle"
+
+#~ msgid "Username"
+#~ msgstr "Kullanıcı adı"
+
+#~ msgid "Usernames cannot be changed."
+#~ msgstr "Kullanıcı adları değiştirilemez."
+
+#~ msgid "E-Mail"
+#~ msgstr "E-posta"
+
+#~ msgid "Widget Bio"
+#~ msgstr "Araç biyografisi"
+
+#~ msgid "Content that is displayed in the agent widget."
+#~ msgstr "Temsil araçta görüntülenen içerik."
+
+#~ msgid "Full Bio"
+#~ msgstr "Tam biyografi"
+
+#~ msgid "Content that can be displayed in the shortcode."
+#~ msgstr "Kısa kod içinde görüntülenen içerik."
+
+#~ msgid "Primary"
+#~ msgstr "İlk"
+
+#~ msgid "Save"
+#~ msgstr "Kaydet"
+
+#~ msgid "Associated Properties"
+#~ msgstr "İlişkili emlaklar"
+
+#~ msgid "Images"
+#~ msgstr "Resimler"
+
+#~ msgid "Agents"
+#~ msgstr "Temsilciler"
+
+#, fuzzy
+#~ msgid "Agent Roles"
+#~ msgstr "Temsilciler"
+
+#, fuzzy
+#~ msgid "Agent Fields"
+#~ msgstr "Emlak alanları"
+
+#~ msgid ""
+#~ "Custom fields may be used to adapt the information about agents to suit "
+#~ "your needs."
+#~ msgstr ""
+#~ "Özel alanlar temsil hakkında bilgileri ihtiyaçlarınıza göre adapte etmek "
+#~ "için kullanılabilir."
+
+#~ msgid "Field name"
+#~ msgstr "Alan adı"
+
+#~ msgid "Add New"
+#~ msgstr "Yeni ekle"
+
+#~ msgid "User removed."
+#~ msgstr "Kullanıcı silindi."
+
+#, fuzzy
+#~ msgid "Please enter a valid e-mail."
+#~ msgstr "Broşür için ayrıntı girin."
+
+#~ msgid "Agent updated."
+#~ msgstr "Temsilci güncellendi."
+
+#~ msgid "Agent created."
+#~ msgstr "Temsilci yaratıldı."
+
+#~ msgid "Edit Agent"
+#~ msgstr "Temsilciyi düzenle"
+
+#~ msgid "Associated Agents"
+#~ msgstr "İlişkili temsilciler"
+
+#~ msgid "You can add fields on the <a href=\"%s\">settings page</a>."
+#~ msgstr "<a href=\"%s\">Ayarlar sayfasında</a> alanları ekleyebilirsiniz."
+
+#~ msgid "Flyer Writeup"
+#~ msgstr "Broşür yaz"
+
+#~ msgid "Please enter a writeup for flyers."
+#~ msgstr "Broşür için ayrıntı girin."
+
+#~ msgid "Please save first to add images."
+#~ msgstr "Lütfen resimleri eklemek için önce kaydedin."
+
+#~ msgid "No images found."
+#~ msgstr "Resim bulunamadı."
+
+#~ msgid "Remove"
+#~ msgstr "Kaldır"
+
+#~ msgid "Add Image"
+#~ msgstr "Resim ekle"
+
+#~ msgid "Moderate comments"
+#~ msgstr "Yorumları kontrol et"
+
+#~ msgid "Manage categories"
+#~ msgstr "Kategorileri yönet"
+
+#~ msgid "Manage links"
+#~ msgstr "Bağlantıları yönet"
+
+#~ msgid "Upload files"
+#~ msgstr "Dosya yükle"
+
+#~ msgid "Edit posts"
+#~ msgstr "Gönderileri düzenle"
+
+#~ msgid "Edit other's posts"
+#~ msgstr "Diğer gönderileri düzenle"
+
+#~ msgid "Edit published posts"
+#~ msgstr "Yayımlanmış gönderileri düzenle"
+
+#~ msgid "Publish posts"
+#~ msgstr "Gönderileri yayımla"
+
+#~ msgid "Edit pages"
+#~ msgstr "Sayfaları düzenle"
+
+#~ msgid "Read"
+#~ msgstr "Oku"
+
+#~ msgid "Edit other's pages"
+#~ msgstr "Diğerlerinin sayfalarını düzenle"
+
+#~ msgid "Edit published pages"
+#~ msgstr "Yayımlanmış sayfaları düzenle"
+
+#~ msgid "Publish pages"
+#~ msgstr "Sayfayı yayımla"
+
+#~ msgid "Delete pages"
+#~ msgstr "Sayfayı sil"
+
+#~ msgid "Delete other's pages"
+#~ msgstr "Diğerlerinin sayfasını sil"
+
+#~ msgid "Delete published pages"
+#~ msgstr "Yayımlanmış sayfaları sil"
+
+#~ msgid "Delete posts"
+#~ msgstr "Gönderileri sil"
+
+#~ msgid "Delete other's posts"
+#~ msgstr "Diğerlerinin gönderilerini sil"
+
+#~ msgid "Delete published posts"
+#~ msgstr "Yayımlanmış gönderileri sil"
+
+#~ msgid "Delete private posts"
+#~ msgstr "Özel gönderileri sil"
+
+#~ msgid "Edit private posts"
+#~ msgstr "Özel gönderileri düzenle"
+
+#~ msgid "Read private posts"
+#~ msgstr "Özel göderileri oku"
+
+#~ msgid "Delete private pages"
+#~ msgstr "Özel sayfaları sil"
+
+#~ msgid "Edit private pages"
+#~ msgstr "Özel sayfaları düzenle"
+
+#~ msgid "Read private pages"
+#~ msgstr "Özel sayfaları oku"
+
+#~ msgid "Email"
+#~ msgstr "E-posta"
+
+#~ msgid "Widget Text"
+#~ msgstr "Araç metni"
+
+#~ msgid "Email Address"
+#~ msgstr "E-posta adresi"
+
+#, fuzzy
+#~ msgid "<b>Page Settings</b><br/>"
+#~ msgstr "Bağlantıları yönet"
+
+#, fuzzy
+#~ msgid "Requested Canvas does not exist."
+#~ msgstr "Resim boyutları atanmamış."
+
+#, fuzzy
+#~ msgid "Name:"
+#~ msgstr "Ad"
+
+#, fuzzy
+#~ msgid "Page:"
+#~ msgstr "Resim"
+
+#, fuzzy
+#~ msgid "Page"
+#~ msgstr "Resim"
+
+#, fuzzy
+#~ msgid "Search..."
+#~ msgstr "Arama"
+
+#, fuzzy
+#~ msgid "Template Settings:"
+#~ msgstr "Genel ayarlar"
+
+#, fuzzy
+#~ msgid "Template:"
+#~ msgstr "Şablon"
+
+#, fuzzy
+#~ msgid "Disable default CSS."
+#~ msgstr "Otomatik olarak varsayılan CSS kullan."
+
+#, fuzzy
+#~ msgid "Secret:"
+#~ msgstr "Cadde"
+
+#~ msgid "Save Changes"
+#~ msgstr "Değişiklikleri kaydet"
+
+#, fuzzy
+#~ msgid "FEPS Details"
+#~ msgstr "Ayrıntılar"
+
+#, fuzzy
+#~ msgid "Property Form"
+#~ msgstr "Emlak: %s"
+
+#, fuzzy
+#~ msgid "Subscription Plan"
+#~ msgstr "Açıklama"
+
+#, fuzzy
+#~ msgid "Templates"
+#~ msgstr "Şablon"
+
+#, fuzzy
+#~ msgid "Overview Page"
+#~ msgstr "Yönetici genel görünüm sayfası"
+
+#, fuzzy
+#~ msgid "Edit Page"
+#~ msgstr "Sayfaları düzenle"
+
+#, fuzzy
+#~ msgid "Overview Page ( All %s )"
+#~ msgstr "Yönetici genel görünüm sayfası"
+
+#, fuzzy
+#~ msgid "Administration"
+#~ msgstr "Ayarlar"
+
+#, fuzzy
+#~ msgid "Notifications"
+#~ msgstr "Yerleşim"
+
+#, fuzzy
+#~ msgid "Form Name"
+#~ msgstr "Satılık"
+
+#, fuzzy
+#~ msgid "Shortcode"
+#~ msgstr "Temsil kısa kod"
+
+#, fuzzy
+#~ msgid "General Options"
+#~ msgstr "Genel ayarlar"
+
+#, fuzzy
+#~ msgid "Subscriptions Plans"
+#~ msgstr "Açıklama"
+
+#, fuzzy
+#~ msgid "Propery Attributes"
+#~ msgstr "WP-Property niteliği"
+
+#, fuzzy
+#~ msgid "Available shortcode attributes"
+#~ msgstr "Kısa kod nitelik alanları"
+
+#, fuzzy
+#~ msgid "Just a name of Subscription plan."
+#~ msgstr "Açıklama"
+
+#, fuzzy
+#~ msgid "Duration"
+#~ msgstr "Açıklama"
+
+#, fuzzy
+#~ msgid "Is Featured"
+#~ msgstr "Özellikli"
+
+#, fuzzy
+#~ msgid "Images Limit"
+#~ msgstr "Resimler"
+
+#~ msgid "Description"
+#~ msgstr "Açıklama"
+
+#, fuzzy
+#~ msgid "Property Forms"
+#~ msgstr "Emlak: %s"
+
+#, fuzzy
+#~ msgid "Edit %s Page"
+#~ msgstr "Sayfaları düzenle"
+
+#~ msgid "Price:"
+#~ msgstr "Fiyat:"
+
+#, fuzzy
+#~ msgid "Duration:"
+#~ msgstr "Açıklama"
+
+#, fuzzy
+#~ msgid "Images:"
+#~ msgstr "Resimler"
+
+#, fuzzy
+#~ msgid "Renewal of Subscription Plan"
+#~ msgstr "Açıklama"
+
+#, fuzzy
+#~ msgid "Options:"
+#~ msgstr "Ayarlar"
+
+#, fuzzy
+#~ msgid "day"
+#~ msgstr "Bugün"
+
+#, fuzzy
+#~ msgid "Manage FEPS"
+#~ msgstr "Bağlantıları yönet"
+
+#, fuzzy
+#~ msgid "created"
+#~ msgstr "Temsil yarat"
+
+#, fuzzy
+#~ msgid "updated"
+#~ msgstr "Temsil güncelle"
+
+#, fuzzy
+#~ msgid "Publish Now"
+#~ msgstr "Gönderileri yayımla"
+
+#, fuzzy
+#~ msgid "Add New %s"
+#~ msgstr "Yeni ekle"
+
+#, fuzzy
+#~ msgid "Expired"
+#~ msgstr "Emlak sayfası"
+
+#, fuzzy
+#~ msgid "Plan Details"
+#~ msgstr "Ayrıntılar"
+
+#, fuzzy
+#~ msgid "Wrong FEPS form used"
+#~ msgstr "Emlak güncellendi."
+
+#, fuzzy
+#~ msgid "FEPS forms updated."
+#~ msgstr "Emlak güncellendi."
+
+#, fuzzy
+#~ msgid "%1$s Content"
+#~ msgstr "Başlık"
+
+#, fuzzy
+#~ msgid "%1$s Type"
+#~ msgstr "Tip"
+
+#, fuzzy
+#~ msgid "Form Name:"
+#~ msgstr "Satılık"
+
+#, fuzzy
+#~ msgid "Shortcode:"
+#~ msgstr "Temsil kısa kod"
+
+#, fuzzy
+#~ msgid "General Options:"
+#~ msgstr "Genel ayarlar"
+
+#, fuzzy
+#~ msgid "%1$s Status:"
+#~ msgstr "Eyalet"
+
+#, fuzzy
+#~ msgid "%1$s Type:"
+#~ msgstr "Tip"
+
+#, fuzzy
+#~ msgid "Preview Thumbnail Size:"
+#~ msgstr "Küçük resim boyutu"
+
+#, fuzzy
+#~ msgid "%1$s Attributes"
+#~ msgstr "Nitelikler"
+
+#, fuzzy
+#~ msgid "Attribute"
+#~ msgstr "Nitelikler"
+
+#, fuzzy
+#~ msgid "%1$s Title"
+#~ msgstr "Başlık"
+
+#, fuzzy
+#~ msgid "Required"
+#~ msgstr "Özellikli"
+
+#, fuzzy
+#~ msgid "Editing"
+#~ msgstr "Düzenle"
+
+#, fuzzy
+#~ msgid "Subscription Plans"
+#~ msgstr "Açıklama"
+
+#, fuzzy
+#~ msgid "Actions"
+#~ msgstr "Ayarlar"
+
+#, fuzzy
+#~ msgid "Account Approved"
+#~ msgstr "Temsilci yaratıldı."
+
+#, fuzzy
+#~ msgid "User Account Approved."
+#~ msgstr "Kullanıcı silindi."
+
+#, fuzzy
+#~ msgid "Account has been activated"
+#~ msgstr "Temsilci yaratıldı."
+
+#, fuzzy
+#~ msgid "Update"
+#~ msgstr "Temsil güncelle"
+
+#, fuzzy
+#~ msgid "Publish"
+#~ msgstr "Gönderileri yayımla"
+
+#, fuzzy
+#~ msgid "Submit"
+#~ msgstr "Sorgu gönder"
+
+#, fuzzy
+#~ msgid "FEPS Information"
+#~ msgstr "Temsil bilgileri"
+
+#, fuzzy
+#~ msgid "Manage PDF Flyer"
+#~ msgstr "PDF çıktı"
+
+#, fuzzy
+#~ msgid "PDF Flyer Options"
+#~ msgstr "PDF çıktı"
+
+#, fuzzy
+#~ msgid "Exclude %1s from PDF Lists"
+#~ msgstr "Emlak SuperHaritada gösterilmesin"
+
+#, fuzzy
+#~ msgid "Full Description"
+#~ msgstr "Açıklama"
+
+#~ msgid "Finished."
+#~ msgstr "Bitti."
+
+#~ msgid "Attributes"
+#~ msgstr "Nitelikler"
+
+#, fuzzy
+#~ msgid "List Name:"
+#~ msgstr "Ad görüntüle"
+
+#, fuzzy
+#~ msgid "File Name:"
+#~ msgstr "Alan adı"
+
+#, fuzzy
+#~ msgid "Actions:"
+#~ msgstr "Ayarlar"
+
+#, fuzzy
+#~ msgid "View PDF"
+#~ msgstr "Tümünü göster"
+
+#, fuzzy
+#~ msgid "Properties per page:"
+#~ msgstr "Sayfa başına nesne"
+
+#, fuzzy
+#~ msgid "Show child properties."
+#~ msgstr "Alt özellikleri göster."
+
+#, fuzzy
+#~ msgid "Contact Information"
+#~ msgstr "Temsil bilgileri"
+
+#, fuzzy
+#~ msgid "Header & Footer background color:"
+#~ msgstr "Bölüm zemin rengi"
+
+#, fuzzy
+#~ msgid "Header & Footer text color:"
+#~ msgstr "Başlık rengi"
+
+#, fuzzy
+#~ msgid "Text color:"
+#~ msgstr "Başlık rengi"
+
+#~ msgid "PDF Flyer"
+#~ msgstr "PDF çıktı"
+
+#~ msgid "Details"
+#~ msgstr "Ayrıntılar"
+
+#~ msgid "Location"
+#~ msgstr "Yerleşim"
+
+#~ msgid ", or <a href=\"%s\" target=\"_blank\">view flyer</a>."
+#~ msgstr ", ya da <a href=\"%s\" target=\"_blank\">çıktıyı görüntüle</a>."
+
+#~ msgid "Warning: <b>%s</b> is not writable, PDF flyer cannot be created."
+#~ msgstr "Uyarı: <b>%s</b> yazılabilir değil, PDF çıktı yaratılamadı."
+
+#, fuzzy
+#~ msgid ""
+#~ "Generate %1s flyers automatically when somebody tries to view them for "
+#~ "the first time."
+#~ msgstr "Çıktıları ilk kez görüntülenmek istendiklerinde yarat."
+
+#, fuzzy
+#~ msgid "Generate QR Code."
+#~ msgstr "QR kodu üret"
+
+#, fuzzy
+#~ msgid "Flyer Display"
+#~ msgstr "Görüntüle"
+
+#~ msgid "Title (Header)"
+#~ msgstr "Başlık (Header)"
+
+#~ msgid "Tagline under Title (Header)"
+#~ msgstr "Başlıktaki etiket satırı (Header)"
+
+#, fuzzy
+#~ msgid "QR Code's note (a note explaining what a QR Code is, if it exists)"
+#~ msgstr "QR kodu notu (QR kodu varsa)"
+
+#~ msgid "Description (if exists)"
+#~ msgstr "Açıklama (varsa)"
+
+#~ msgid "Location on Map (if exists)"
+#~ msgstr "Haritada yerleşim (varsa)"
+
+#~ msgid "Features (if exists)"
+#~ msgstr "Özellikler (varsa)"
+
+#~ msgid "Agent Information (if exists)"
+#~ msgstr "Temsilci bilgisi (varsa)"
+
+#~ msgid "Primary Photo Size"
+#~ msgstr "İlk fotoğraf boyutu"
+
+#~ msgid "Secondary Images"
+#~ msgstr "İkincil resimler"
+
+#, fuzzy
+#~ msgid "Show %1$s images."
+#~ msgstr "%s tane resim göster"
+
+#~ msgid "Logo URL"
+#~ msgstr "Logo URL"
+
+#~ msgid "Header color"
+#~ msgstr "Başlık rengi"
+
+#~ msgid "Section background color"
+#~ msgstr "Bölüm zemin rengi"
+
+#, fuzzy
+#~ msgid "Regenerate all Flyers"
+#~ msgstr "Küçük resimleri tekrar yarat."
+
+#, fuzzy
+#~ msgid "PDF Flyer for property \""
+#~ msgstr "PDF çıktı"
+
+#, fuzzy
+#~ msgid "\" is generated."
+#~ msgstr "Temsilci yaratıldı."
+
+#, fuzzy
+#~ msgid "\" could not be generated.</b>"
+#~ msgstr "Zamanlama içeri aktarılamadı."
+
+#, fuzzy
+#~ msgid "\". Looks like, something caused error on server."
+#~ msgstr ""
+#~ "Sunucuda birşeyler hata üretmiş gibi görünüyor. Lütfen, PDF çıktıları "
+#~ "yeniden üretmek için tekrar deneyin."
+
+#~ msgid "Property List is got. Start generate PDF Flyers..."
+#~ msgstr "Emlak listesi alındı. PDF çıktı üretmek iin başlatın..."
+
+#~ msgid "There are no any property to generate PDF Flyer for."
+#~ msgstr "PDF çıktı üretmek için hiçbir emlak yok."
+
+#~ msgid ""
+#~ "Looks like, something caused error on server. Please, try to regenerate "
+#~ "PDF Flyers later."
+#~ msgstr ""
+#~ "Sunucuda birşeyler hata üretmiş gibi görünüyor. Lütfen, PDF çıktıları "
+#~ "yeniden üretmek için tekrar deneyin."
+
+#~ msgid "Flyer"
+#~ msgstr "Çıktı"
+
+#, fuzzy
+#~ msgid "PDF flyer for "
+#~ msgstr "PDF çıktı"
+
+#, fuzzy
+#~ msgid "Manage Capabilities"
+#~ msgstr "Yetenekler"
+
+#~ msgid "Capabilities"
+#~ msgstr "Yetenekler"
+
+#, fuzzy
+#~ msgid "Allows user to publish properties."
+#~ msgstr "Yayımlanmış emlak yok."
+
+#, fuzzy
+#~ msgid "Other manage capabilities"
+#~ msgstr "Yetenekler"
+
+#, fuzzy
+#~ msgid "WP Property Capabilities"
+#~ msgstr "Yetenekler"
+
+#, fuzzy
+#~ msgid "Role"
+#~ msgstr "Kaldır"
+
+#~ msgid "Taxonomies"
+#~ msgstr "Sınıflandırma"
+
+#, fuzzy
+#~ msgid "Contextual Menus"
+#~ msgstr "Bize yazın"
+
+#, fuzzy
+#~ msgid "Singular Property:"
+#~ msgstr "Emlak bul"
+
+#, fuzzy
+#~ msgid "Plural Property:"
+#~ msgstr "Emlak"
+
+#, fuzzy
+#~ msgid "Add "
+#~ msgstr "Yeni ekle"
+
+#, fuzzy
+#~ msgid "Add New "
+#~ msgstr "Yeni ekle"
+
+#, fuzzy
+#~ msgid "Edit "
+#~ msgstr "Düzenle"
+
+#, fuzzy
+#~ msgid "Search "
+#~ msgstr "Arama"
+
+#, fuzzy
+#~ msgid " found."
+#~ msgstr "Resim bulunamadı."
+
+#, fuzzy
+#~ msgid "Property Title"
+#~ msgstr "Emlak tipi"
+
+#, fuzzy
+#~ msgid "Property Content"
+#~ msgstr "Emlak diğer bilgileri"
+
+#, fuzzy
+#~ msgid "Property Excerpt"
+#~ msgstr "Emlak diğer bilgileri"
+
+#, fuzzy
+#~ msgid "Property Status"
+#~ msgstr "Emlak istatistikleri"
+
+#, fuzzy
+#~ msgid "Property Order"
+#~ msgstr "Emlak arama"
+
+#, fuzzy
+#~ msgid "Property Date"
+#~ msgstr "Emlak sayfası"
+
+#, fuzzy
+#~ msgid "Property Author"
+#~ msgstr "Emlak diğer bilgileri"
+
+#, fuzzy
+#~ msgid "Starting "
+#~ msgstr "Ayarlar"
+
+#~ msgid "ago"
+#~ msgstr "önce"
+
+#~ msgid "Last Import"
+#~ msgstr "Son içeri aktarma"
+
+#, fuzzy
+#~ msgid "Time: "
+#~ msgstr "Başlık:"
+
+#, fuzzy
+#~ msgid "Delete Unattached Files"
+#~ msgstr "Diğerlerinin sayfasını sil"
+
+#~ msgid "Look up XML import history."
+#~ msgstr "XML içeri aktarma geçmişine gözat."
+
+#~ msgid "Show XML Import History"
+#~ msgstr "XML içeri aktarma geçmişini göster"
+
+#, fuzzy
+#~ msgid "( Imported )"
+#~ msgstr "İçeri aktarıcı"
+
+#~ msgid "Schedule coult not be imported."
+#~ msgstr "Zamanlama içeri aktarılamadı."
+
+#~ msgid "Importer"
+#~ msgstr "İçeri aktarıcı"
+
+#, fuzzy
+#~ msgid "XML Importer Help"
+#~ msgstr "İçeri aktarıcı"
+
+#, fuzzy
+#~ msgid "XPath Query to Property Elements"
+#~ msgstr "Emlak için XPath sorgu elemanları:"
+
+#, fuzzy
+#~ msgid "Import Limits"
+#~ msgstr "İçeri aktar"
+
+#, fuzzy
+#~ msgid "No objects found."
+#~ msgstr "Resim bulunamadı."
+
+#, fuzzy
+#~ msgid "Available tags in source: %1s"
+#~ msgstr "Kullanılabilir etiketler"
+
+#, fuzzy
+#~ msgid "Importing %1s"
+#~ msgstr "İçeri aktar"
+
+#, fuzzy
+#~ msgid ""
+#~ "Did not find any properties that have been imported from this feed to "
+#~ "remove."
+#~ msgstr "Şu kadardan az içeri aktarılmış emlakları içeri aktarma "
+
+#, fuzzy
+#~ msgid "Did not remove any old properties."
+#~ msgstr "Hiç bir nesne içeri aktarılamadı."
+
+#~ msgid "Schedule imported from file."
+#~ msgstr "Zamanlama dosyadan içeri aktarıldı."
+
+#, fuzzy
+#~ msgid "Property Importer"
+#~ msgstr "Emlak tipi"
+
+#, fuzzy
+#~ msgid "Created Properties"
+#~ msgstr "Özellikli emlaklar"
+
+#, fuzzy
+#~ msgid "Updated Properties"
+#~ msgstr "Özellikli emlaklar"
+
+#, fuzzy
+#~ msgid "Total Properties"
+#~ msgstr "Emlak yok."
+
+#, fuzzy
+#~ msgid "Saved Import Schedules"
+#~ msgstr "Zamanlamayı içeri aktar"
+
+#, fuzzy
+#~ msgid "Last run "
+#~ msgstr "Son içeri aktarma"
+
+#, fuzzy
+#~ msgid " ago."
+#~ msgstr "önce"
+
+#, fuzzy
+#~ msgid "Updated "
+#~ msgstr "Temsil güncelle"
+
+#, fuzzy
+#~ msgid "Created "
+#~ msgstr "Temsil yarat"
+
+#, fuzzy
+#~ msgid "Total Properties: "
+#~ msgstr "Emlak yok."
+
+#, fuzzy
+#~ msgid "Source URL:"
+#~ msgstr "Kaynak (URL)"
+
+#, fuzzy
+#~ msgid "Delete All Properties"
+#~ msgstr "Diğer emlaklar"
+
+#~ msgid "You do not have any saved schedules. Create one now."
+#~ msgstr "Herhangi bir zamanlamanız yok. Bir tane yaratın."
+
+#~ msgid "Import Schedule"
+#~ msgstr "Zamanlamayı içeri aktar"
+
+#, fuzzy
+#~ msgid "Upload File"
+#~ msgstr "Dosya yükle"
+
+#, fuzzy
+#~ msgid "Import name"
+#~ msgstr "İçeri aktarıcı"
+
+#, fuzzy
+#~ msgid "Source"
+#~ msgstr "Kaynak (URL)"
+
+#~ msgid "URL"
+#~ msgstr "URL (Web adresi)"
+
+#~ msgid "Type:"
+#~ msgstr "Tip:"
+
+#~ msgid "Google Spreadsheet"
+#~ msgstr "Google Dökümanlar"
+
+#~ msgid "WP-Property Feed"
+#~ msgstr "WP-Property Besleme"
+
+#~ msgid "Send GET variables as POST data."
+#~ msgstr "GET değişkenlerini POST veri olarak gönder."
+
+#~ msgid "Google Username"
+#~ msgstr "Google kullanıcı adı"
+
+#~ msgid "Google Password"
+#~ msgstr "Google şifre"
+
+#~ msgid "Google Extra Query Vars"
+#~ msgstr "Google ekstra sorgu değişkenleri"
+
+#, fuzzy
+#~ msgid "RETS Username."
+#~ msgstr "Kullanıcı adı"
+
+#, fuzzy
+#~ msgid "RETS Password."
+#~ msgstr "Google şifre"
+
+#, fuzzy
+#~ msgid "Property Resource."
+#~ msgstr "Emlak kaydedildi."
+
+#, fuzzy
+#~ msgid "Default is \"Property\""
+#~ msgstr "Emlak tipi"
+
+#, fuzzy
+#~ msgid "Property Resource Class."
+#~ msgstr "Emlak kaydedildi."
+
+#, fuzzy
+#~ msgid "User-Agent Password."
+#~ msgstr "Google şifre"
+
+#, fuzzy
+#~ msgid "RETS Version."
+#~ msgstr "Sürüm"
+
+#, fuzzy
+#~ msgid "Property Query."
+#~ msgstr "Emlak galerisi"
+
+#, fuzzy
+#~ msgid "Default Property Type"
+#~ msgstr "Emlak tipi"
+
+#, fuzzy
+#~ msgid "properties in the feed."
+#~ msgstr "Emlak bulunamadı"
+
+#, fuzzy
+#~ msgid "Imported properties must have at least "
+#~ msgstr "Şu kadardan az içeri aktarılmış emlakları içeri aktarma "
+
+#, fuzzy
+#~ msgid " valid images."
+#~ msgstr "Resimler gizlensin mi?"
+
+#, fuzzy
+#~ msgid "Do not update properties that have been imported less than "
+#~ msgstr "Şu kadardan az içeri aktarılmış emlakları içeri aktarma "
+
+#~ msgid "hour(s) ago."
+#~ msgstr "saat önce."
+
+#, fuzzy
+#~ msgid "Completely remove <b>all</b> existing properties prior to import."
+#~ msgstr ""
+#~ "İçeri aktarma önceliğine göre varolan emlakların tümünü tamamen kaldır."
+
+#~ msgid "Automatic Matching"
+#~ msgstr "Otomatik eşleştirme"
+
+#~ msgid "Attribute Map"
+#~ msgstr "Nitelik haritası"
+
+#, fuzzy
+#~ msgid "Sort Attribute Rules"
+#~ msgstr "Kısa kod nitelik alanları"
+
+#~ msgid "WP-Property Attribute"
+#~ msgstr "WP-Property niteliği"
+
+#~ msgid "XPath Rule"
+#~ msgstr "XPath kuralı"
+
+#~ msgid "WordPress Attributes"
+#~ msgstr "Wordpress nitelikleri"
+
+#~ msgid "Street Number"
+#~ msgstr "Cadde numarası"
+
+#~ msgid "Street"
+#~ msgstr "Cadde"
+
+#~ msgid "County"
+#~ msgstr "İlçe"
+
+#~ msgid "State"
+#~ msgstr "Eyalet"
+
+#~ msgid "Country"
+#~ msgstr "Ülke"
+
+#~ msgid "Postal Code"
+#~ msgstr "Postakodu"
+
+#, fuzzy
+#~ msgid "WP-Property Attributes"
+#~ msgstr "WP-Property niteliği"
+
+#, fuzzy
+#~ msgid "Property Agent"
+#~ msgstr "Emlak diğer bilgileri"
+
+#, fuzzy
+#~ msgid "Global Property ID"
+#~ msgstr "Emlak"
+
+#, fuzzy
+#~ msgid "Display Address"
+#~ msgstr "E-posta adresi"
+
+#~ msgid "Delete Selected"
+#~ msgstr "Seçileni sil"
+
+#, fuzzy
+#~ msgid "Preview Import"
+#~ msgstr "İçeri aktar"
+
+#, fuzzy
+#~ msgid ""
+#~ "Address validation was skipped because address has already been validated."
+#~ msgstr ""
+#~ "Adres doğrulanamadı, çünkü Google günlük adres gözatma sınırı aşıldı."
+
+#, fuzzy
+#~ msgid ""
+#~ "Address validation has failed because the Google service has denied the "
+#~ "request ( OVER QUERY LIMIT )."
+#~ msgstr ""
+#~ "Adres doğrulanamadı, çünkü Google günlük adres gözatma sınırı aşıldı."
+
+#, fuzzy
+#~ msgid "Manage Slideshow"
+#~ msgstr "Slayt gösterisi"
+
+#, fuzzy
+#~ msgid "Fade into background color"
+#~ msgstr "Bölüm zemin rengi"
+
+#, fuzzy
+#~ msgid "Slide"
+#~ msgstr "Slayt gösterisi"
+
+#, fuzzy
+#~ msgid "Crop images."
+#~ msgstr "Resim bulunamadı."
+
+#, fuzzy
+#~ msgid "Carousel Thumbnail Size:"
+#~ msgstr "Harita küçük resim boyutu:"
+
+#~ msgid "Slideshow Options"
+#~ msgstr "Slayt gösterisi ayarları"
+
+#~ msgid "Slideshow Images:"
+#~ msgstr "Slayt gösterisi resimleri:"
+
+#~ msgid "All Images:"
+#~ msgstr "Tüm resimler:"
+
+#, fuzzy
+#~ msgid "Image is too small."
+#~ msgstr "Orijinal resim çok küçük."
+
+#~ msgid "Slideshow"
+#~ msgstr "Slayt gösterisi"
+
+#~ msgid "Global Slideshow"
+#~ msgstr "Tümünün slayt gösterisi"
+
+#, fuzzy
+#~ msgid "Show property title and tagline in slideshow."
+#~ msgstr "Sonuçların en altında sayfalama göster."
+
+#, fuzzy
+#~ msgid "Slideshow Size: "
+#~ msgstr "Slayt gösterisi resimleri:"
+
+#, fuzzy
+#~ msgid "Display in Global Slideshow Caption:"
+#~ msgstr "Tümünün slayt gösterisi"
+
+#, fuzzy
+#~ msgid "Title."
+#~ msgstr "Başlık"
+
+#, fuzzy
+#~ msgid "Tagline."
+#~ msgstr "Etiketler"
+
+#~ msgid "Single Listing Slideshow"
+#~ msgstr "Tek listeleme slayt gösterisi"
+
+#~ msgid "Slideshow image size to be used for single property pages."
+#~ msgstr "Tek emlak sayfası slayt gösterisi için resim boyutları."
+
+#, fuzzy
+#~ msgid "Show pagination buttons in slideshow."
+#~ msgstr "Sonuçların en altında sayfalama göster."
+
+#~ msgid "Thumbnail Size"
+#~ msgstr "Küçük resim boyutları"
+
+#~ msgid "Effect:"
+#~ msgstr "Geçiş:"
+
+#~ msgid "Effect that will be used to change from one image to the next."
+#~ msgstr "Bir resimden diğerine geçerken kullanılacak geçiş:"
+
+#~ msgid "Slices:"
+#~ msgstr "Dilimler:"
+
+#~ msgid "Animation Speed:"
+#~ msgstr "Animasyon hızı:"
+
+#~ msgid "How quickly the transition should happen, in miliseconds."
+#~ msgstr "Geçişin ne kadar hızlı gerçekleşeceği, milisaniye."
+
+#~ msgid "Pause Time:"
+#~ msgstr "Bekletme süresi:"
+
+#~ msgid "The pause time between transitions."
+#~ msgstr "Geçişler arası bekletme süresi:"
+
+#~ msgid "Slideshow selection and order saved."
+#~ msgstr "Slayt gösterisi seçimi ve sırası kaydedildi."
+
+#~ msgid "WP-Property Slideshow"
+#~ msgstr "WP-Property slayt gösterisi"
+
+#~ msgid "Save Selection and Order"
+#~ msgstr "Seçimi ve sırayı kaydet"
+
+#, fuzzy
+#~ msgid "Restore"
+#~ msgstr "Kaldır"
+
+#, fuzzy
+#~ msgid "Edit this item"
+#~ msgstr "Diğer gönderileri düzenle"
+
+#, fuzzy
+#~ msgid "Delete Permanently"
+#~ msgstr "Seçileni sil"
+
+#, fuzzy
+#~ msgid "View"
+#~ msgstr "Tümünü göster"
+
+#~ msgid "Settings updated."
+#~ msgstr "Seçenekler güncellendi."
+
+#, fuzzy
+#~ msgid "Feature Updates"
+#~ msgstr "Özellik adı"
+
+#~ msgid "Check Updates"
+#~ msgstr "Güncellemeleri kontrol et"
+
+#, fuzzy
+#~ msgid "Enable comments."
+#~ msgstr "Yorumları kontrol et"
+
+#, fuzzy
+#~ msgid "Default %1s Page"
+#~ msgstr "Varsayılan şablon"
+
+#~ msgid "Property (Default)"
+#~ msgstr "Emlak (Varsayılan)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Automatically overwrite this page's content with [property_overview]."
+#~ msgstr "Daima sayfa içeriğinin üzerine yaz."
+
+#, fuzzy
+#~ msgid ""
+#~ "When showing property search results, don't override the page content "
+#~ "with [property_overview]."
+#~ msgstr "Daima sayfa içeriğinin üzerine yaz."
+
+#~ msgid ""
+#~ "If checked, be sure to include [property_overview] somewhere in the "
+#~ "content, or no properties will be displayed."
+#~ msgstr ""
+#~ "İşaretlerseniz, [property_overview] kodunu içeriğin içinde bir yerlerde "
+#~ "bulundurduğunuzdan emin olun ya da hiç bir emlak görüntülenmeyecek."
+
+#, fuzzy
+#~ msgid "Automatic Geolocation"
+#~ msgstr "Otomatik eşleştirme"
+
+#, fuzzy
+#~ msgid "Attribute to use for physical addresses:"
+#~ msgstr "Adres için kullanılacak nitelik:"
+
+#, fuzzy
+#~ msgid "Load default CSS."
+#~ msgstr "Otomatik olarak varsayılan CSS kullan."
+
+#~ msgid "Default Phone Number"
+#~ msgstr "Varsayılan telefon numarası"
+
+#, fuzzy
+#~ msgid ""
+#~ "Phone number to use when a %1s-specific phone number is not specified."
+#~ msgstr ""
+#~ "Emlak özel telefon numarası atanmadığında kullanılacak telefon numarası."
+
+#~ msgid "Image Sizes"
+#~ msgstr "Resim boyutları"
+
+#~ msgid "Image sizes used throughout the plugin."
+#~ msgstr "Eklentide kullanılan resim boyutları"
+
+#~ msgid "Width"
+#~ msgstr "Genişlik"
+
+#~ msgid "Height"
+#~ msgstr "Yükseklik"
+
+#~ msgid "Overview Shortcode"
+#~ msgstr "Kısa kod genel bakış"
+
+#~ msgid "Thumbnail size:"
+#~ msgstr "Küçük resim boyutu:"
+
+#, fuzzy
+#~ msgid "Show children %1s."
+#~ msgstr "Alt özellikleri göster."
+
+#, fuzzy
+#~ msgid "Show larger image of %1s when image is clicked using fancybox."
+#~ msgstr ""
+#~ "Fancybox kullanan resim tıklandığında emlak için daha büyük resmi göster."
+
+#~ msgid "Show pagination on bottom of results."
+#~ msgstr "Sonuçların en altında sayfalama göster."
+
+#, fuzzy
+#~ msgid "%1s Page"
+#~ msgstr "Sayfaları düzenle"
+
+#~ msgid "Google Maps"
+#~ msgstr "Google Haritalar"
+
+#~ msgid "Map Thumbnail Size:"
+#~ msgstr "Harita küçük resim boyutu:"
+
+#~ msgid "Map Zoom Level:"
+#~ msgstr "Harita yakınlaştırma seviyesi:"
+
+#, fuzzy
+#~ msgid "Default is \"%s\""
+#~ msgstr "Varsayılan şablon"
+
+#, fuzzy
+#~ msgid "Show %1s Title"
+#~ msgstr "Başlık"
+
+#, fuzzy
+#~ msgid "Show Directions Link"
+#~ msgstr "Yön bul"
+
+#~ msgid "Address Display"
+#~ msgstr "Adres gösterimi"
+
+#~ msgid "Available tags:"
+#~ msgstr "Kullanılabilir etiketler"
+
+#~ msgid "Currency & Numbers"
+#~ msgstr "Para birimi ve Sayılar"
+
+#~ msgid "Currency symbol."
+#~ msgstr "Para Birimi simgesi"
+
+#~ msgid "Thousands separator symbol:"
+#~ msgstr "Binlik ayracı:"
+
+#~ msgid ". (period)"
+#~ msgstr ". (zaman ayracı)"
+
+#~ msgid ", (comma)"
+#~ msgstr ", (virgül)"
+
+#~ msgid "The character separating the 1 and the 5: $1<b>,</b>500"
+#~ msgstr "Ayırıcı karakter 1 ve 5: $1<b>,</b>500"
+
+#~ msgid "Currency symbol placement:"
+#~ msgstr "Para birimi sembolü değiştirme:"
+
+#~ msgid "Before number"
+#~ msgstr "Sayıdan önce"
+
+#~ msgid "After number"
+#~ msgstr "Sayıdan sonra"
+
+#, fuzzy
+#~ msgid "Admin Settings"
+#~ msgstr "Ayarlar"
+
+#~ msgid "[purchase feature]"
+#~ msgstr "[satın al]"
+
+#~ msgid "Disable plugin."
+#~ msgstr "Eklentiyi etkisizleştir."
+
+#~ msgid "Feature installed, using version"
+#~ msgstr "Özellik yüklendi, sürüm"
+
+#~ msgid "Restore Backup of WP-Property Configuration"
+#~ msgstr "Ayarları geri yükle"
+
+#~ msgid "Download Backup of Current WP-Property Configuration."
+#~ msgstr "Ayarların yedeğini indir"
+
+#, fuzzy
+#~ msgid "localization"
+#~ msgstr "Yerleşim"
+
+#~ msgid "Revalidate"
+#~ msgstr "Tekrar doğrula"
+
+#~ msgid "Lookup"
+#~ msgstr "Gözat"
+
+#, fuzzy
+#~ msgid "Get %1s image data."
+#~ msgstr "Emlak kaydedildi."
+
+#, fuzzy
+#~ msgid "Clear Cache"
+#~ msgstr "Kütüğü temizle"
+
+#, fuzzy
+#~ msgid "Set"
+#~ msgstr "Cadde"
+
+#, fuzzy
+#~ msgid "Memory Usage:"
+#~ msgstr "Mesaj"
+
+#~ msgid "(no parent)"
+#~ msgstr "(üst yok)"
+
+#~ msgid "Parent"
+#~ msgstr "Üst"
+
+#~ msgid "Template"
+#~ msgstr "Şablon"
+
+#~ msgid "Page Template"
+#~ msgstr "Sayfa şablonu"
+
+#~ msgid "Default Template"
+#~ msgstr "Varsayılan şablon"
+
+#~ msgid "Need help? Use the Help tab in the upper right of your screen."
+#~ msgstr "Yardıma mı ihtiyacınız var? Yukarıdaki Yardım sekmesini kullanın."
+
+#~ msgid "Falls Under"
+#~ msgstr "Altına iner"
+
+#, fuzzy
+#~ msgid "ID of parent property"
+#~ msgstr "Bu emlak kiralıktır."
+
+#~ msgid "Editing %s is disabled, it may be inherited."
+#~ msgstr "Düzenleme devre dışı %s, devralınmış olabilir."
+
+#~ msgid "Enable."
+#~ msgstr "Aktifleştir."
+
+#, fuzzy
+#~ msgid "%1s Type"
+#~ msgstr "Tip"
+
+#~ msgid "Return to building page."
+#~ msgstr "Yapı sayfasına dönün."
+
+#, fuzzy
+#~ msgid "Change"
+#~ msgstr "Değişiklikleri kaydet"
+
+#, fuzzy
+#~ msgid "Featured:"
+#~ msgstr "Özellikli"
+
+#, fuzzy
+#~ msgid "Publish the current %s"
+#~ msgstr "Yayımlanmış emlak yok."
+
+#, fuzzy
+#~ msgid "Add Credits"
+#~ msgstr "Yeni emlak ekle"
+
+#, fuzzy
+#~ msgid "Your Password:"
+#~ msgstr "Google şifre"
+
+#, fuzzy
+#~ msgid "Choose Subscription Plan"
+#~ msgstr "Açıklama"
+
+#, fuzzy
+#~ msgid "Subscription Plan Options"
+#~ msgstr "Açıklama"
+
+#, fuzzy
+#~ msgid "Information"
+#~ msgstr "Temsil bilgileri"
+
+#, fuzzy
+#~ msgid "Expiry Date"
+#~ msgstr "Emlak sayfası"
+
+#~ msgid ""
+#~ "Sorry, we could not find what you were looking for.  Since you are here, "
+#~ "take a look at some of our properties."
+#~ msgstr ""
+#~ "Üzgünüm, aradığınızı bulamadım. Buradayken, birkaç özelliğe göz atın."
+
+#~ msgid ""
+#~ "Sorry, no properties found - try expanding your search, or <a href=\"%s"
+#~ "\">view all</a>."
+#~ msgstr ""
+#~ "Üzgünüm, hiç bir emlak bulunamadı - aramanızı genişletin ya da  <a href="
+#~ "\"%s\">tümünü görüntüleyin</a>."
+
+#~ msgid " of "
+#~ msgstr "ait"
+
+#, fuzzy
+#~ msgid "of"
+#~ msgstr "ait"
+
+#~ msgid "Prev"
+#~ msgstr "Önceki"
+
+#, fuzzy
+#~ msgid "Other"
+#~ msgstr "Sipariş"
+
+#, fuzzy
+#~ msgid "Comment"
+#~ msgstr "Postakodu"
+
+#, fuzzy
+#~ msgid "Cancel reply"
+#~ msgstr "İptal"
+
+#, fuzzy
+#~ msgid "Post Comment"
+#~ msgstr "Postakodu"
+
+#, fuzzy
+#~ msgid "Payment Method"
+#~ msgstr "Emlak ayarları"
+
+#~ msgid "Version"
+#~ msgstr "Sürüm"
+
+#~ msgid "Allow property inquiries to be sent directly to agent."
+#~ msgstr "Emlak sorgularının direkt temsile gönderilmesine izin ver."
+
+#, fuzzy
+#~ msgid " ago"
+#~ msgstr "önce"
+
+#~ msgid "Property Page"
+#~ msgstr "Emlak sayfası"
+
+#, fuzzy
+#~ msgid "Show Property Title"
+#~ msgstr "Emlak tipi"
+
+#, fuzzy
+#~ msgid "Property ID:"
+#~ msgstr "Emlak"
+
+#~ msgid "Interested?"
+#~ msgstr "İlginizi mi çekti?"
+
+#, fuzzy
+#~ msgid "Read Property"
+#~ msgstr "Yeni emlak"
+
+#, fuzzy
+#~ msgid "Delete Property"
+#~ msgstr "Yeni emlak"
+
+#, fuzzy
+#~ msgid "Read Private Properties"
+#~ msgstr "Özel göderileri oku"
+
+#, fuzzy
+#~ msgid "Manage Categories"
+#~ msgstr "Kategorileri yönet"
+
+#~ msgid "Feature Name"
+#~ msgstr "Özellik adı"
+
+#~ msgid "WP-Property Premium Feature: %s updated to version %s from %s."
+#~ msgstr ""
+#~ "WP-Property Emlak ücretli özellik: %s, yeni sürüme güncellendi %s, eski "
+#~ "sürüm %s."
+
+#~ msgid "WP-Property Premium Feature: %s updated to version %s."
+#~ msgstr ""
+#~ "WP-Property Emlak ücretli özellik: eski sürüm %s, yeni sürüme güncellendi "
+#~ "%s."
+
+#, fuzzy
+#~ msgid "General"
+#~ msgstr "Genel ayarlar"
+
+#, fuzzy
+#~ msgid "Slug:"
+#~ msgstr "Deyiş"
+
+#, fuzzy
+#~ msgid "<h3>WP-Property</h3>"
+#~ msgstr "WP-Property Besleme"
+
+#, fuzzy
+#~ msgid "Property Status:"
+#~ msgstr "Emlak istatistikleri"
+
+#, fuzzy
+#~ msgid "Property Type:"
+#~ msgstr "Emlak tipi"
+
+#~ msgid "Cache table does not exist. Attempting to create:"
+#~ msgstr "Önbellek tablosu yok. Yaratmaya çalışıyor:"
+
+#~ msgid "SQL Ran: %s , verifying existance."
+#~ msgstr "SQL çalıştı: %s, varlığı doğrulanıyor."
+
+#~ msgid "Table created and exists."
+#~ msgstr "Tablo yaratıldı ve artık var."
+
+#~ msgid "Table not created."
+#~ msgstr "Tablo yaratılamadı."
+
+#~ msgid "Tomorrow "
+#~ msgstr "Yarın"
+
+#~ msgid "Yesterday "
+#~ msgstr "Dün"
+
+#~ msgid " in %d days "
+#~ msgstr "%d gün içinde"
+
+#~ msgid "%d days ago"
+#~ msgstr "%d gün önce"
+
+#~ msgid "Automatically logged failed JSON response: "
+#~ msgstr "Otomatik kütük kayıtlarında JSON yanıtı hata oluşturdu:"
+
+#~ msgid "%s hours ago"
+#~ msgstr "%s saat önce"
+
+#~ msgid "%s minutes ago"
+#~ msgstr "%s dakika önce"
+
+#~ msgid "Address Attribute"
+#~ msgstr "Adres niteliği"
+
+#~ msgid "and localize for:"
+#~ msgstr "ve yerleştirilecek:"
+
+#~ msgid ""
+#~ "Set Coordinates Manually (When unchecked the coordinates will be set (and "
+#~ "validated) by Google Maps)"
+#~ msgstr ""
+#~ "Koordinatları elle atayın (İşaretli değilken Google tarafından "
+#~ "atanacaktır)"
+
+#~ msgid ""
+#~ "Be advised, since you don't have permalinks enabled, you must visit the "
+#~ "<a href=\"%s\">Settings Page</a> and set a custom property overview page."
+#~ msgstr ""
+#~ "Permalinkleri aktif etmediğiniz sürece <a href=\"%s\">Ayarlar Sayfası</"
+#~ "a>'nı ziyaret etmeniz ve özelleştirilmiş emlak sayfası atamanız tavsiye "
+#~ "edilir."
+
+#~ msgid ""
+#~ "By default, your property overview will be displayed on the <a href=\"%s"
+#~ "\">%s</a> page. You may change the overview page on the <a href=\"%s"
+#~ "\">Settings Page</a>"
+#~ msgstr ""
+#~ "Varsayılan olarak, emlak sayfanız <a href=\"%s\">%s</a> olarak "
+#~ "görüntülenecek. Genel görünüm sayfasını <a href=\"%s\">Ayarlar Sayfası</"
+#~ "a>'ndan değiştirebilirsiniz."
+
+#~ msgid "Thank you for installing WP-Property!"
+#~ msgstr "WP-Property Emlak aracını yüklediğiniz için teşekkürler!"
+
+#~ msgid ""
+#~ "You may also visit <a href=\"http://twincitiestech.com/plugins/wp-"
+#~ "property/\">TwinCitiesTech.com</a> for more information, and <a href="
+#~ "\"http://twincitiestech.com/plugins/wp-property/screencasts/"
+#~ "\">screencasts</a>."
+#~ msgstr ""
+#~ "Daha fazla bilgi için <a href=\"http://twincitiestech.com/plugins/wp-"
+#~ "property/\">TwinCitiesTech.com</a> ve <a href=\"http://twincitiestech.com/"
+#~ "plugins/wp-property/screencasts/\">screencasts</a> adreslerini ziyaret "
+#~ "edebilirsiniz."
+
+#~ msgid " - "
+#~ msgstr "-"
+
+#~ msgid "An error occured that prevented geo-location from working."
+#~ msgstr "Geo-yerleşim çalışmasına engel olan bir hata oluştu."
+
+#~ msgid ""
+#~ "This URL lets you access your property export feed, it is custom to your "
+#~ "site:"
+#~ msgstr ""
+#~ "Bu adres(URL) emlak dışa aktarım beslemesine erişmenize izin veriyor, "
+#~ "sitenize özel:"
+
+#~ msgid "Show other properties (if any) with the same Parent"
+#~ msgstr "Varsa aynı üste bağlı diğer emlakları göster"
+
+#~ msgid "Property Types"
+#~ msgstr "Emlak tipleri"
+
+#~ msgid ""
+#~ "City is an automatically created attribute once the address is validated."
+#~ msgstr "İl otomatik olarak adres doğrunlandıktan sonra yaratılır"
+
+#~ msgid "Popup Image Size:"
+#~ msgstr "Açılır pencere resim boyutu:"
+
+#~ msgid ""
+#~ "If an attribute has <b>Admin Predefined Values</b>, a list of comma-"
+#~ "separated words, a dropdown will be displayed instead of an input box on "
+#~ "the property editing page for the given attribute."
+#~ msgstr ""
+#~ "Bir nitelik <b>Yönetici Öntanımlı Değerler</b> içeriyorsa, belirtilen "
+#~ "niteliğe ait emlak düzenleme sayfasında girdi kutusu yerine virgülle "
+#~ "ayrılmış sözcükler listesi,  açılır liste görüntülenir."
+
+#~ msgid "Admin Dropdown Values"
+#~ msgstr "Yönetici açılır değerleri"
+
+#~ msgid "input"
+#~ msgstr "girdi"
+
+#~ msgid "range (input)"
+#~ msgstr "aralık (girdi)"
+
+#~ msgid "dropdown"
+#~ msgstr "açılır"
+
+#~ msgid "Log"
+#~ msgstr "Kütük"
+
+#~ msgid "Attach to Agent"
+#~ msgstr "Temsile ekle"
+
+#~ msgid "Saved."
+#~ msgstr "Kaydedildi."
+
+#~ msgid "Assign capabilities to agents."
+#~ msgstr "Yetenekleri temsile ata"
+
+#~ msgid "Capability"
+#~ msgstr "Yetenek"
+
+#~ msgid "Import Unique ID"
+#~ msgstr "İçeri aktarma eşsiz numarası"
+
+#~ msgid "begin"
+#~ msgstr "başla"
+
+#~ msgid "end"
+#~ msgstr "bitir"
+
+#~ msgid "Preview limited to 5 objects, proceed once settings are configured."
+#~ msgstr "5 nesneye kadar önizle, ayarlar atanınca devam et."
+
+#~ msgid "XML Feed"
+#~ msgstr "XML Besleme"
+
+#~ msgid "Give the import some sort of title for reference."
+#~ msgstr "Referans için başlıkların bir kısmını içeri ver."
+
+#~ msgid "Allow to be run from URL for cron jobs."
+#~ msgstr "URL ile cron jobs çalıştırılmasına izin ver."
+
+#~ msgid "Remove and re-download all images."
+#~ msgstr "Kaldır ve tüm resimleri yeniden indir."
+
+#~ msgid ""
+#~ "Remove listings that are no longer in source XML from this site's "
+#~ "database."
+#~ msgstr ""
+#~ "Bu sitenin veritabanından XML kaynak içinde artık bulunmayan "
+#~ "listelemeleri kaldır."
+
+#~ msgid "Remove PDF flyers on import."
+#~ msgstr "İçeri aktarmada PDF çıktıları kaldır."
+
+#~ msgid ""
+#~ "Revalidate address on completion (get latitude and longitude for every "
+#~ "property using Google Maps API)."
+#~ msgstr ""
+#~ "Tamamlanınca adresi yeniden doğrula (enlem ve boylamı tüm emlaklar için "
+#~ "Google Maps API kullanarak al)"
+
+#~ msgid "Automatically Match (Experimental)"
+#~ msgstr "Otomatik eşleştir (Deneyimsel)"
+
+#~ msgid "Unique id field"
+#~ msgstr "Eşsiz numara alanı"
+
+#~ msgid "Disable slideshow on property page."
+#~ msgstr "Emlak sayfasında slayt gösterisini kapat."
+
+#~ msgid "Some Slideshow Options"
+#~ msgstr "Bir kaç slayt gösterisi ayarı"
+
+#~ msgid "WPP Slideshow"
+#~ msgstr "WPP Slayt Gösterisi"
+
+#~ msgid "WPP Slideshow with options"
+#~ msgstr "Ayarlar ile WPP Slayt Gösterisi"
+
+#~ msgid "+"
+#~ msgstr "+"
+
+#~ msgid "Plugins"
+#~ msgstr "Eklentiler"
+
+#~ msgid "View list of available shortcodes."
+#~ msgstr "Kullanılabilir kısa kodların listesini görüntüle."
+
+#~ msgid "These are the general display settings"
+#~ msgstr "Genel görüntü ayarları"
+
+#~ msgid ""
+#~ "Display larger image, or slideshow, at the top of the property listing."
+#~ msgstr ""
+#~ "Emlak listelemenin en başında, daha büyük resim ya da slayt gösterisi "
+#~ "göster."
+
+#~ msgid "These settings are for the main property page on the back-end."
+#~ msgstr "Bu ayarlar en sonda ana emlak sayfası için."
+
+#~ msgid "Order By:"
+#~ msgstr "Sırala:"
+
+#~ msgid "Bed(s):"
+#~ msgstr "Yatak:"
+
+#~ msgid "Bath(s):"
+#~ msgstr "Banyo:"
+
+#~ msgid "Square Ft:"
+#~ msgstr "Metrekare:"
