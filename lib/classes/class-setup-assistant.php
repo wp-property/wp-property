@@ -31,9 +31,14 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * Enqueue Scripts.
-       *
+       * @param null $slug
        */
-      static public function admin_enqueue_scripts() {
+      static public function admin_enqueue_scripts($slug = null) {
+
+        if( $slug !== 'property_page_property_settings' ) {
+          return;
+        }
+
         //owl-carousel base css
         wp_enqueue_style( 'setup-assist-owl-css', WPP_URL . "styles/owl.carousel.css", array(), WPP_Version, 'screen' );
         //page css
