@@ -239,11 +239,13 @@ namespace UsabilityDynamics\WPP {
 
         $_property_id = trim( $args[ "property_id" ] );
 
-        $class = WPP_F::get_property( $_property_id );
+        $class = WPP_F::get_property( $_property_id, array( 'load_gallery' => false, 'cache' => false ) );
+
+        $_display = prepare_property_for_display( $class );
 
         return array(
           'property' => $class,
-          'for_display' => prepare_property_for_display( $class )
+          'for_display' => $_display
         );
 
       }

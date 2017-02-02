@@ -244,7 +244,7 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
       var property_id = jQuery( "#wpp_property_class_id" ).val();
       jQuery( "#wpp_ajax_property_result" ).html( "" );
 
-      jQuery.post( wpp.instance.ajax_url, {
+      jQuery.get( wpp.instance.ajax_url, {
         action: 'wpp_ajax_property_query',
         property_id: property_id
       }, function ( data ) {
