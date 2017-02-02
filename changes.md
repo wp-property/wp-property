@@ -1,4 +1,7 @@
 ### 2.2.1 
+* Added [wpp::localization::instance] filter to customizer/extend the [wpp] variable.
+* Removed WPP_F::register_property_page_url and WPP_F::register_property_single_url.
+* Improved Layout Customizer logic for detecting URL to single property page and main properties page.
 * Added [WPP_FEATURE_FLAG_WPP_STATUS] feature flag and standard Status taxonomy.
 * Serialized property meta fields are now automatically unserialized.
 * Added [WP_PROPERTY_FLAG_ENABLE_SUPERMAP] and [WP_PROPERTY_FLAG_ENABLE_AGENTS] feature flags to toggle features.

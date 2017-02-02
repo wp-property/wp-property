@@ -39,6 +39,9 @@ namespace UsabilityDynamics\WPP {
 
           add_filter('wpp::layouts::configuration', array($this, 'wpp_customize_configuration'), 11);
 
+          // extend [wpp] variable for customizer
+          add_filter( 'wpp::localization::instance', array( $this, 'localization_instance' ));
+
           /*
            *
            */
@@ -47,6 +50,46 @@ namespace UsabilityDynamics\WPP {
           ));
         }
       }
+
+      /**
+       * Extends [wpp] variable.
+       *
+       * Makes [wpp.instance.settings.configuration.base_property_single_url] available for admin that can use customizer.
+       *
+       * @author potanin@UD
+       * @param $data
+       * @return mixed
+       */
+      public function localization_instance($data) {
+        global $wp_properties;
+
+        if( !is_admin() || !current_user_can( 'customize' ) ) {
+          return $data;
+        }
+
+        // Get first, most recent, property.
+        $properties = get_posts(array(
+          'post_type' => 'property',
+          'orderby' => 'date',
+          'order' => 'desc',
+          'post_status' => 'publish',
+          'per_page' => 1
+        ));
+
+        $post_id = $properties[0]->ID;
+
+        $post_url = get_permalink($post_id);
+
+        // store first property url
+        $data['settings']['configuration']['base_property_single_url'] = $post_url;
+
+        // get home url. This could/should be improved.
+        $data['settings']['configuration']['base_property_url'] = home_url( $wp_properties['configuration']['base_slug'] );
+
+        return $data;
+
+      }
+
 
       public function wpp_customize_configuration($false)
       {

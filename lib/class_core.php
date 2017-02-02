@@ -1166,7 +1166,7 @@ class WPP_Core {
       $wp_query->is_page = true;
     }
 
-    wp_localize_script( 'wpp-localization', 'wpp', array( 'instance' => $this->get_instance() ) );
+    wp_localize_script( 'wpp-localization', 'wpp',array( 'instance' =>  apply_filters( 'wpp::localization::instance', $this->get_instance() ) ) );
 
     //** Load global wp-property script on all frontend pages */
     wp_enqueue_script( 'wp-property-global' );
@@ -1465,6 +1465,7 @@ class WPP_Core {
    *
    */
   public function get_l10n_data() {
+
     $l10n = array();
     //** Include the list of translations */
     $l10n_dir = ud_get_wp_property()->path( 'l10n.php', 'dir' );
