@@ -1,4 +1,5 @@
 ### 2.2.1 
+* Serialized property meta fields are now automatically unserialized.
 * Added [WP_PROPERTY_FLAG_ENABLE_SUPERMAP] and [WP_PROPERTY_FLAG_ENABLE_AGENTS] feature flags to toggle features.
 * Added sticky-tab selection to Property Settings page. Selected tab stored in [sessionStorage].
 * Added [WPP_FEATURE_FLAG_SETTINGS_BACKUPS] feature flag, enabled by default. Feature automatically creates backups of plugin settings.
