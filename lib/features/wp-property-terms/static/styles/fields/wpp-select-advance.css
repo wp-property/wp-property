@@ -1,0 +1,69 @@
+.rwmb-wpp-taxonomy-wrapper .assign-parent {
+  display: inline-block;
+  padding: 5px;
+  margin: 5px 0px;
+  -webkit-user-select: none;
+  /* Chrome all / Safari all */
+  -moz-user-select: none;
+  /* Firefox all */
+  -ms-user-select: none;
+  /* IE 10+ */
+  user-select: none;
+  /* Likely future */
+}
+.rwmb-wpp-taxonomy-wrapper .tagchecklist {
+  margin-left: 0;
+  font-size: 12px;
+  overflow: auto;
+}
+.rwmb-wpp-taxonomy-wrapper .tagchecklist .tax-tag {
+  position: relative;
+  margin-right: 20px;
+  padding-left: 25px;
+  font-size: 13px;
+  line-height: 1.8em;
+  cursor: default;
+  max-width: 100%;
+  text-overflow: ellipsis;
+}
+.rwmb-wpp-taxonomy-wrapper .tagchecklist .tax-tag a.ntdelbutton {
+  position: absolute;
+  left: 0;
+  margin: 0px;
+  padding: 0px;
+  float: left;
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  text-indent: 0;
+}
+.rwmb-wpp-taxonomy-wrapper .tagchecklist .tax-tag a.ntdelbutton:before {
+  background: 0 0;
+  color: #b4b9be;
+  content: "\f153";
+  display: block;
+  font: 400 16px/20px dashicons;
+  speak: none;
+  height: 20px;
+  text-align: center;
+  width: 20px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.wpp-autocomplete {
+  max-height: 150px;
+  overflow-y: scroll;
+}
+.wpp-autocomplete .ui-menu-item {
+  padding: 0px;
+}
+.wpp-autocomplete .ui-menu-item a {
+  display: block;
+  padding: 4px 10px;
+}
+.wpp-autocomplete .ui-menu-item a.ui-state-selected {
+  background-color: #ddd;
+  cursor: pointer;
+}
