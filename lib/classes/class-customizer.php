@@ -30,7 +30,8 @@ namespace UsabilityDynamics\WPP {
       public function __construct()
       {
         global $wp_properties;
-        if ((defined('WP_PROPERTY_LAYOUTS')) && (isset($wp_properties['configuration']) && isset($wp_properties['configuration']['enable_layouts']) && $wp_properties['configuration']['enable_layouts'] == 'false')) {
+
+        if ((defined('WP_PROPERTY_LAYOUTS') && WP_PROPERTY_LAYOUTS === true ) && (isset($wp_properties['configuration']) && isset($wp_properties['configuration']['enable_layouts']) && $wp_properties['configuration']['enable_layouts'] == 'false')) {
           add_action('customize_register', array($this, 'property_layouts_customizer'));
 
           add_action('customize_controls_enqueue_scripts', array($this, 'wp_property_customizer_controls'));
