@@ -291,8 +291,15 @@ namespace UsabilityDynamics\WPP {
             // Must be able to parse composer.json from plugin file, hopefully to detect the "_build.sha" field.
             $_composer = json_decode( @file_get_contents(  trailingslashit( WPP_Path ) .'/composer.json' )  );
 
-            if( is_object( $_composer ) && $_composer->extra && isset( $_composer->extra->_build ) && isset( $_composer->extra->_build->sha ) ) {
-              $_version = $_composer->extra->_build->sha;
+            if( is_object( $_composer ) && $_composer->extra && isset( $_composer->extra->_build ) ) {
+
+              // A _build with no "sha" means that a development version is being used.
+              if( isset( $_composer->extra->_build->sha ) ) {
+                $_version = $_composer->extra->_build->sha;
+              } else {
+                continue;
+              }
+
             } else {
               $_version = null;
             }
