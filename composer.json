@@ -139,6 +139,13 @@
         "enabled": true
       },
       {
+        "name": "Standard Property Status",
+        "constant": "WPP_FEATURE_FLAG_WPP_STATUS",
+        "description": "Standard property status taxonomy [wpp_status].",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
         "name": "Property Categories",
         "constant": "WPP_FEATURE_FLAG_WPP_CATEGORY",
         "description": "Taxonomy for general property terms, stored in [wpp_category]",
