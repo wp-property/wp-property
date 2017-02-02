@@ -6,7 +6,7 @@ jQuery(function() {
   if ( jQuery( '.wpp_retsci_widget_stats').length ) {
     var container = jQuery( '.wpp_retsci_widget_stats');
     var config = container.data('config');
-    var url    = config.api_url + 'v1/site/' + config.site_id + '/status';
+    var url    = config.api_url + 'v2/site/' + config.site_id + '/status';
 
     jQuery.getJSON( url, { token: config.site_secret_token }, function( res ) {
       if ( res.ok ) {
