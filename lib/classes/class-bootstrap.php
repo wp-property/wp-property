@@ -291,13 +291,13 @@ namespace UsabilityDynamics\WPP {
             // Must be able to parse composer.json from plugin file, hopefully to detect the "_build.sha" field.
             $_composer = json_decode( @file_get_contents(  trailingslashit( WPP_Path ) .'/composer.json' )  );
 
-            if( is_object( $_composer ) && $_composer->extra && isset( $_composer->extra->_build ) ) {
+            if( is_object( $_composer ) && $_composer->extra && isset( $_composer->extra->_build ) && !isset( $_composer->extra->_build->sha ) ) {
 
-              // A _build with no "sha" means that a development version is being used.
-              if( isset( $_composer->extra->_build->sha ) ) {
-                $_version = $_composer->extra->_build->sha;
-              }
+              continue;
+            }
 
+            if( is_object( $_composer ) && $_composer->extra && isset( $_composer->extra->_build ) && isset( $_composer->extra->_build->sha ) ) {
+              $_version = $_composer->extra->_build->sha;
             } else {
               $_version = null;
             }
@@ -310,10 +310,6 @@ namespace UsabilityDynamics\WPP {
             );
 
 
-            if( $_detail[ $_product_name ]['have_update'] !== false ) {
-              continue;
-            }
-
             $_response = wp_remote_get( $_detail[ $_product_name ]['request_url'] );
 
             if( wp_remote_retrieve_response_code( $_response ) === 200 ) {
@@ -323,7 +319,7 @@ namespace UsabilityDynamics\WPP {
               if( isset( $_body->data )) {
                 $_detail[ $_product_name ]['response'] = $_body->data;
 
-                if( !$_body->data->changesSince || $_body->data->changesSince > 0 ) {
+                if( !$_body->data->changesSince || $_body->data->changesSince > 0 )  {
                   $_detail[ $_product_name ]['have_update'] = true;
                 }
 
@@ -381,7 +377,6 @@ namespace UsabilityDynamics\WPP {
         $_ud_get_product_updates = self::get_update_check_result();
 
         foreach( (array) $_ud_get_product_updates['data']  as $_product_short_name => $_product_detail ) {
-
           if( $_product_detail['have_update'] ) {
             $response->response[ $_product_detail['product_path'] ] = $_product_detail['response'];
           }
