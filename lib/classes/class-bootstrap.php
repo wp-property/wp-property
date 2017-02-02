@@ -296,8 +296,6 @@ namespace UsabilityDynamics\WPP {
               // A _build with no "sha" means that a development version is being used.
               if( isset( $_composer->extra->_build->sha ) ) {
                 $_version = $_composer->extra->_build->sha;
-              } else {
-                continue;
               }
 
             } else {
@@ -305,11 +303,16 @@ namespace UsabilityDynamics\WPP {
             }
 
             $_detail[ $_product_name ] = array(
-              'request_url' => 'https://api.usabilitydynamics.com/v1/product/updates/' . $_product_name . '/latest/?version=' . $_version,
+              'request_url' => 'https://api.usabilitydynamics.com/v1/product/updates/' . $_product_name . '/latest/?version=' . ( isset( $_version ) ? $_version : '' ),
               'product_path' => $_product_path,
               'response' => null,
-              'have_update' => null,
+              'have_update' => isset( $_composer->extra->_build->sha ) ? null : false
             );
+
+
+            if( $_detail[ $_product_name ]['have_update'] !== false ) {
+              continue;
+            }
 
             $_response = wp_remote_get( $_detail[ $_product_name ]['request_url'] );
 
