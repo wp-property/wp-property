@@ -69,7 +69,11 @@ namespace UsabilityDynamics\WPRETSC {
         // same format as debug.log
         $_time_stamp = date('d-M-Y h:i:s T', time());
 
-        $_content = '[' . $_time_stamp  . '] ' . print_r( $data, true ) . '. [' . timer_stop() . 's].' . "\n";
+        if( is_array( $data ) || is_object( $data ) ) {
+          $_content = '[' . $_time_stamp  . '] ' . print_r( $data, true ) . ' [' . timer_stop() . 's].' . "\n";
+        } else {
+          $_content = '[' . $_time_stamp  . '] ' . $data . ' [' . timer_stop() . 's].' . "\n";
+        }
 
         file_put_contents( ABSPATH . rtrim( $file, '/\\' ), $_content, FILE_APPEND  );
       }

@@ -6,6 +6,8 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use UsabilityDynamics\Settings;
+
   if( !class_exists( 'UsabilityDynamics\WPP\Terms_Bootstrap' ) ) {
 
     final class Terms_Bootstrap extends \UsabilityDynamics\WP\Bootstrap_Plugin {
@@ -92,6 +94,8 @@ namespace UsabilityDynamics\WPP {
         add_action( 'admin_menu' , array( $this, 'maybe_remove_native_meta_boxes' ), 11 );
 
         add_action( 'wp_ajax_term_autocomplete', array($this, 'ajax_term_autocomplete'));
+
+        //add_filter( 'wpp_get_property', array($this, 'wpp_get_property'), 305, 2 );
       }
 
       /**
@@ -617,12 +621,13 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * Define our custom taxonomies on wpp_taxonomies hook
-       *
+       * @param $taxonomies
+       * @return \UsabilityDynamics\type
        */
       public function define_taxonomies( $taxonomies ) {
 
         /** Init Settings */
-        $this->settings = new \UsabilityDynamics\Settings( array(
+        $this->settings = new Settings( array(
           'key'  => 'wpp_terms',
           'store'  => 'options',
           'data' => array(
@@ -781,9 +786,11 @@ namespace UsabilityDynamics\WPP {
         return $args;
       }
 
-
       /**
        * Prepare arguments
+       * @param $args
+       * @param $taxonomy
+       * @return array
        */
       public function prepare_taxonomy( $args, $taxonomy ) {
 
@@ -842,6 +849,12 @@ namespace UsabilityDynamics\WPP {
       public function deactivate() {
         //** flush Object Cache */
         wp_cache_flush();
+      }
+
+      public function wpp_get_property( $property, $args ){
+
+        die( '<pre>' . print_r( $property, true ) . '</pre>' );
+        return $property;
       }
 
       public function ajax_term_autocomplete(){

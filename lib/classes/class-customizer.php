@@ -30,13 +30,17 @@ namespace UsabilityDynamics\WPP {
       public function __construct()
       {
         global $wp_properties;
-        if ((defined('WP_PROPERTY_LAYOUTS')) && (isset($wp_properties['configuration']) && isset($wp_properties['configuration']['enable_layouts']) && $wp_properties['configuration']['enable_layouts'] == 'false')) {
+
+        if ((defined('WP_PROPERTY_LAYOUTS') && WP_PROPERTY_LAYOUTS === true ) && (isset($wp_properties['configuration']) && isset($wp_properties['configuration']['enable_layouts']) && $wp_properties['configuration']['enable_layouts'] == 'false')) {
           add_action('customize_register', array($this, 'property_layouts_customizer'));
 
           add_action('customize_controls_enqueue_scripts', array($this, 'wp_property_customizer_controls'));
           add_action('customize_preview_init', array($this, 'wp_property_customizer_live_preview'));
 
           add_filter('wpp::layouts::configuration', array($this, 'wpp_customize_configuration'), 11);
+
+          // extend [wpp] variable for customizer
+          add_filter( 'wpp::localization::instance', array( $this, 'localization_instance' ));
 
           /*
            *
@@ -46,6 +50,46 @@ namespace UsabilityDynamics\WPP {
           ));
         }
       }
+
+      /**
+       * Extends [wpp] variable.
+       *
+       * Makes [wpp.instance.settings.configuration.base_property_single_url] available for admin that can use customizer.
+       *
+       * @author potanin@UD
+       * @param $data
+       * @return mixed
+       */
+      public function localization_instance($data) {
+        global $wp_properties;
+
+        if( !is_admin() || !current_user_can( 'customize' ) ) {
+          return $data;
+        }
+
+        // Get first, most recent, property.
+        $properties = get_posts(array(
+          'post_type' => 'property',
+          'orderby' => 'date',
+          'order' => 'desc',
+          'post_status' => 'publish',
+          'per_page' => 1
+        ));
+
+        $post_id = $properties[0]->ID;
+
+        $post_url = get_permalink($post_id);
+
+        // store first property url
+        $data['settings']['configuration']['base_property_single_url'] = $post_url;
+
+        // get home url. This could/should be improved.
+        $data['settings']['configuration']['base_property_url'] = home_url( $wp_properties['configuration']['base_slug'] );
+
+        return $data;
+
+      }
+
 
       public function wpp_customize_configuration($false)
       {
@@ -202,15 +246,15 @@ namespace UsabilityDynamics\WPP {
         }
 
         $wp_customize->add_panel('layouts_area_panel', array(
-          'priority' => 10,
+          'priority' => 20,
           'capability' => 'edit_theme_options',
-          'title' => __('Layouts section', ud_get_wp_property()->domain),
+          'title' => __('Property Layouts', ud_get_wp_property()->domain),
           'description' => __('Here you can change page layout in live preview.', ud_get_wp_property()->domain),
         ));
 
         // Property overview settings
         $wp_customize->add_section('layouts_property_overview_settings', array(
-          'title' => __('Property overview page settings', ud_get_wp_property()->domain),
+          'title' => __('Overview Page', ud_get_wp_property()->domain),
           'description' => __('Changing layout for property overview page in live preview.', ud_get_wp_property()->domain),
           'panel' => 'layouts_area_panel',
           'priority' => 1,
@@ -250,7 +294,7 @@ namespace UsabilityDynamics\WPP {
 
         // Single property settings
         $wp_customize->add_section('layouts_property_single_settings', array(
-          'title' => __('Single property page settings', ud_get_wp_property()->domain),
+          'title' => __('Single Property', ud_get_wp_property()->domain),
           'description' => __('Changing layout for single property page in live preview.', ud_get_wp_property()->domain),
           'panel' => 'layouts_area_panel',
           'priority' => 2,

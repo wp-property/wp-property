@@ -1,8 +1,10 @@
 jQuery(document).ready(function () {
+  console.log( 'sestup' );
+
   $ = jQuery.noConflict();//allow shorthand without conflict
 
   //handle form submits
-  $('#wpp-setup-assistant').submit(postBackForm);
+  // $('#wpp-setup-assistant').submit(postBackForm);
 
   function postBackForm() {
 
@@ -49,6 +51,7 @@ jQuery(document).ready(function () {
     $(".loader-div").fadeTo("fast", 0);
     $(".owl-item").fadeTo("fast", 1);
   }
+
   $showAddonsOption = function(){
     if(($("input[type='radio'][name='wpp_settings[wpp-addons][wpp-supermap]']") && $("input[type='radio'][name='wpp_settings[wpp-addons][wpp-supermap]']:checked").val() && $("input[type='radio'][name='wpp_settings[wpp-addons][wpp-supermap]']:checked").val() == "yes-please") ||
          ($("input[type='radio'][name='wpp_settings[wpp-addons][wpp-agents]']:checked") && $("input[type='radio'][name='wpp_settings[wpp-addons][wpp-agents]']:checked").val() && $("input[type='radio'][name='wpp_settings[wpp-addons][wpp-agents]']:checked").val() == "yes-please")   ){
@@ -63,11 +66,12 @@ jQuery(document).ready(function () {
 
     $indexOfLastScreen = $(".owl-page").length;
     $isScreen = $(".owl-page.active").index() + 1 + 1;
+
     // maybe add some screen specific
     switch ($isScreen) {
       case $indexOfLastScreen:
-        jQuery('#wpp-setup-assistant').submit();
-        $showAddonsOption();
+        //jQuery('#wpp-setup-assistant').submit();
+        //$showAddonsOption();
         break;
       default:
 //        console.log("reached default screen");
@@ -77,6 +81,7 @@ jQuery(document).ready(function () {
 
   //init owl carousel
   var wpp_owl = $("#wpp-splash-screen-owl");
+
   wpp_owl.owlCarousel({
     navigation: true,
     slideSpeed: 400,
@@ -168,26 +173,9 @@ jQuery(document).ready(function () {
     $(".fs-actions > a,.fs-actions > button").click(function (e) {
       e.preventDefault();
       data = $(".fs-actions input").serialize();
-      submitFreemiusData(data);
+      //submitFreemiusData(data);
       return false;
     });
   }
-  /* END : start code for freemius */
 
-  /* BEGIN : start code for layouts */
-  jQuery('#property-term-single .layouts-list li label').on('click', function (e) {
-    jQuery('#property-term-single .layouts-list li label').removeClass('checked');
-    jQuery(this).addClass('checked');
-  });
-
-  jQuery('#property-single .layouts-list li label').on('click', function (e) {
-    jQuery('#property-single .layouts-list li label').removeClass('checked');
-    jQuery(this).addClass('checked');
-  });
-
-  jQuery('#search-results .layouts-list li label').on('click', function (e) {
-    jQuery('#search-results .layouts-list li label').removeClass('checked');
-    jQuery(this).addClass('checked');
-  });
-  /* END : start code for layouts */
 });

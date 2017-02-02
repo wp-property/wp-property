@@ -64,6 +64,7 @@
     ]
   },
   "extra": {
+    "_build": {},
     "installer-paths": {
       "vendor/plugins/{$name}": [
         "type:wordpress-muplugin",
@@ -77,15 +78,18 @@
         "type:wordpress-library"
       ]
     },
-    "splashes": {
-      "install": "static/splashes/install.php",
-      "upgrade": "static/splashes/upgrade.php"
-    },
     "featureFlags": [
+      {
+        "name": "Featured Flags",
+        "constant": "WP_PROPERTY_FLAG_WPP_FLAGS",
+        "description": "Property flags, for highlighting important information, stored in [wpp_flags]. Can be used to identify 'featured' properties.",
+        "since": "2.2.1",
+        "enabled": true
+      },
       {
         "name": "Layouts",
         "constant": "WP_PROPERTY_LAYOUTS",
-        "description": "Layouts for WP Property",
+        "description": "Layouts for WP Property. When enabled, disabled legacy Sidebars and PHP Templates.",
         "since": "2.2.1",
         "enabled": false
       },
@@ -104,6 +108,20 @@
         "enabled": false
       },
       {
+        "name": "Settings Backups",
+        "constant": "WPP_FEATURE_FLAG_SETTINGS_BACKUPS",
+        "description": "Enables automaic backups of the WP-Property settings. Backups stored in [wpp_property_backups] option.",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
+        "name": "Disable Editor",
+        "constant": "WPP_FEATURE_FLAG_DISABLE_EDITOR",
+        "description": "Disables native WordPress post editor.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
         "name": "Standard Location Taxonomy",
         "constant": "WPP_FEATURE_FLAG_WPP_LOCATION",
         "description": "Standard property location taxonomy, stored in [wpp_location].",
@@ -114,6 +132,20 @@
         "name": "Standard Property Type",
         "constant": "WPP_FEATURE_FLAG_WPP_TYPE",
         "description": "Standard property type taxonomy, stored in [wpp_type].",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
+        "name": "Standard Property Status",
+        "constant": "WPP_FEATURE_FLAG_WPP_STATUS",
+        "description": "Standard property status taxonomy [wpp_status].",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
+        "name": "Property Categories",
+        "constant": "WPP_FEATURE_FLAG_WPP_CATEGORY",
+        "description": "Taxonomy for general property terms, stored in [wpp_category]",
         "since": "2.2.1",
         "enabled": true
       },
@@ -132,7 +164,21 @@
         "enabled": false
       },
       {
-        "name": "Enable Setting Search",
+        "name": "Enable Supermap Feature",
+        "constant": "WP_PROPERTY_FLAG_ENABLE_SUPERMAP",
+        "description": "Enable Supermap feature.",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
+        "name": "Enable Agents Feature",
+        "constant": "WP_PROPERTY_FLAG_ENABLE_AGENTS",
+        "description": "Enable Agent management.",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
+        "name": "Enable Settings Search",
         "constant": "WP_PROPERTY_SETTINGS_SEARCH",
         "description": "Search settings.",
         "since": "2.2.1",
@@ -143,7 +189,7 @@
         "constant": "RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET",
         "description": "Dashboard widget for wp-rets-client, shows stats.",
         "since": "2.2.1",
-        "enabled": true
+        "enabled": false
       }
     ],
     "schemas": {

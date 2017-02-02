@@ -12,7 +12,12 @@ $agent_data = isset( $wp_properties['configuration']['feature_settings']['agents
 $agent_roles = $agent_data['agent_roles'];
 
 $agent_fields = stripslashes_deep( self::clean_array( $agent_data['agent_fields'] ) );
-$agent_social_fields = stripslashes_deep( self::clean_array( $agent_data['agent_social_fields'] ) );
+
+if( isset( $agent_data['agent_social_fields'] ) ) {
+  $agent_social_fields = stripslashes_deep( self::clean_array( $agent_data['agent_social_fields'] ) );
+} else {
+  $agent_social_fields = array();
+}
 
 //** Force at lest one role to always be associated */
 if ( empty($agent_roles) ) {

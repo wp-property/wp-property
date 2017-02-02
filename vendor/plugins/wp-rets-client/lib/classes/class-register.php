@@ -15,29 +15,46 @@ namespace UsabilityDynamics\WPRETSC {
         /**
          * Maybe register site on UD
          */
-        add_action( 'init', array( $this, 'maybe_register_site' ) );
+        add_action( 'admin_init', array( $this, 'maybe_register_site' ), 200 );
         
       }
 
     /**
      * Register Site on UD if needed
      *
+     * Runs on admin_init, level 200, after WPP registration.
+     *
+     * 
+     * wp option delete retsci_site_id; wp option delete retsci_site_public_key; wp option delete retsci_site_id; wp transient delete retsci_state;
+     * 
+     * @author potanin@UD
      */
     public function maybe_register_site() {
-
-      $_retsi_state = get_transient('retsi_state');
-
-      if( $_retsi_state && is_array( $_retsi_state ) && $_retsi_state['registration-backoff' ] ) {
-        return;
-      }
 
       // Do nothing on Ajax, XMLRPC or wp-cli requests.
       if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
         return;
       }
 
-      // Token already set, do not attempt registration unless it cleared.
-      if( get_site_option('retsci_site_id') && get_site_option( 'retsci_site_public_key' ) ) {
+      // Tokens already set, do not attempt registration unless it cleared.
+      if( get_site_option('retsci_site_id') && get_site_option( 'retsci_site_public_key' ) && get_site_option( 'retsci_site_secret_token' ) ) {
+        return;
+      }
+
+      $_retsci_state = get_transient('retsci_state');
+
+      if( $_retsci_state && is_array( $_retsci_state ) && $_retsci_state['registration-backoff' ] ) {
+        return;
+      }
+
+      // Set registration backoff in case we have a failure.
+      set_transient('retsci_state', array('registration-backoff'=>true), 3600 );
+
+      // If UD keys registered, used them.
+      if( get_site_option( 'ud_site_id' ) && get_site_option( 'ud_site_public_key' ) && get_site_option( 'ud_site_secret_token' ) ) {
+        update_site_option( 'retsci_site_id', get_site_option( 'ud_site_id' ) );
+        update_site_option( 'retsci_site_public_key', get_site_option( 'ud_site_public_key' ) );
+        update_site_option( 'retsci_site_secret_token', get_site_option( 'ud_site_secret_token' ) );
         return;
       }
 
@@ -73,13 +90,14 @@ namespace UsabilityDynamics\WPRETSC {
 
       $args = array(
         'method' => 'POST',
-        'timeout' => 10,
+        'timeout' => 5,
         'redirection' => 5,
         'httpversion' => '1.0',
         'headers' => array(),
         'body' => array(
           'host' => $output,
           'retsci_site_secret_token' => $retsci_site_secret_token,
+          'retsci_secret_token' => $retsci_site_secret_token,
           'retsci_site_id' => ($retsci_site_id ? $retsci_site_id : ''),
           'home_url' => $site_url,
           'xmlrpc_url' => site_url('/xmlrpc.php'),
@@ -90,8 +108,6 @@ namespace UsabilityDynamics\WPRETSC {
       );
 
       $response = wp_remote_post($url, $args);
-
-      set_transient('retsi_state', array('registration-backoff'=>true), 3600 );
 
       if (wp_remote_retrieve_response_code($response) === 200 && !is_wp_error($response)) {
 

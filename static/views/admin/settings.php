@@ -50,6 +50,9 @@ if (get_option('permalink_structure') == '') {
 ?>
 <div class="wrap <?php echo implode(' ', $wrapper_classes); ?>">
 
+
+
+
   <h2
     class='wpp_settings_page_header'><?php echo ud_get_wp_property('labels.name') . ' ' . __('Settings', ud_get_wp_property()->domain) ?>
 
@@ -78,9 +81,7 @@ if (get_option('permalink_structure') == '') {
     </div>
   <?php endif; ?>
 
-  <form id="wpp_settings_form" method="post"
-        action="<?php echo admin_url('edit.php?post_type=property&page=property_settings'); ?>"
-        enctype="multipart/form-data">
+  <form id="wpp_settings_form" method="post" action="<?php echo admin_url('edit.php?post_type=property&page=property_settings'); ?>" enctype="multipart/form-data">
     <?php wp_nonce_field('wpp_setting_save'); ?>
 
     <div id="wpp_settings_tabs" class="wpp_tabs clearfix">
@@ -114,14 +115,15 @@ if (get_option('permalink_structure') == '') {
             <th><?php _e('Options', ud_get_wp_property()->domain); ?></th>
             <td>
               <ul>
-                <li
-                  class="configuration_enable_comments"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][enable_comments]&label=" . __('Enable comments', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['enable_comments']) ? $wp_properties['configuration']['enable_comments'] : false)); ?></li>
-                <li class="configuration_enable_revisions"
-                    data-feature-since="2.0.0"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][enable_revisions]&label=" . __('Enable revisions', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['enable_revisions']) ? $wp_properties['configuration']['enable_revisions'] : false)); ?></li>
-                <li class="configuration_enable_layouts"
-                    data-feature-since="2.2.1"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][enable_layouts]&label=" . __('Disable layouts', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['enable_layouts']) ? $wp_properties['configuration']['enable_layouts'] : false)); ?></li>
-                <li
-                  class="wpp-setting-exclude-from-regular-search-results"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][exclude_from_regular_search_results]&label=" . sprintf(__('Exclude %1s from regular search results.', ud_get_wp_property()->domain), $object_label['plural']), (isset($wp_properties['configuration']['exclude_from_regular_search_results']) ? $wp_properties['configuration']['exclude_from_regular_search_results'] : false)); ?></li>
+                <li class="configuration_enable_comments"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][enable_comments]&label=" . __('Enable comments', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['enable_comments']) ? $wp_properties['configuration']['enable_comments'] : false)); ?></li>
+                <li class="configuration_enable_revisions" data-feature-since="2.0.0"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][enable_revisions]&label=" . __('Enable revisions', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['enable_revisions']) ? $wp_properties['configuration']['enable_revisions'] : false)); ?></li>
+
+                <?php if( defined( 'WP_PROPERTY_LAYOUTS' ) && WP_PROPERTY_LAYOUTS ) { ?>
+                <li class="configuration_enable_layouts" data-feature-since="2.2.1"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][enable_layouts]&label=" . __('Disable layouts', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['enable_layouts']) ? $wp_properties['configuration']['enable_layouts'] : false)); ?></li>
+                <?php } ?>
+
+                <li class="wpp-setting-exclude-from-regular-search-results"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][exclude_from_regular_search_results]&label=" . sprintf(__('Exclude %1s from regular search results.', ud_get_wp_property()->domain), $object_label['plural']), (isset($wp_properties['configuration']['exclude_from_regular_search_results']) ? $wp_properties['configuration']['exclude_from_regular_search_results'] : false)); ?></li>
+
               </ul>
             </td>
           </tr>
@@ -166,9 +168,9 @@ if (get_option('permalink_structure') == '') {
             </td>
           </tr>
 
-          <?php /* begin : Single Property Template Options */
-          //    echo $wp_properties[ 'configuration' ][ 'enable_layouts' ]; die;
-          if (!isset($wp_properties['configuration']['enable_layouts']) || $wp_properties['configuration']['enable_layouts'] != "false") : ?>
+          <?php if(defined( 'WP_PROPERTY_LAYOUTS' ) && WP_PROPERTY_LAYOUTS === false )  {
+
+            if( !isset($wp_properties['configuration']['enable_layouts']) || $wp_properties['configuration']['enable_layouts'] != "false")  { ?>
 
             <tr class="wpp-setting wpp-setting-single-template">
               <th><?php printf(__('Single %s Template', ud_get_wp_property()->domain), WPP_F::property_label()); ?></th>
@@ -242,8 +244,7 @@ if (get_option('permalink_structure') == '') {
                 </ul>
               </td>
             </tr>
-          <?php endif; ?>
-          <?php /* End : Single Property Template Options */ ?>
+          <?php } ?>
 
           <?php if ((!isset($wp_properties['configuration']['do_not_register_sidebars']) || (isset($wp_properties['configuration']['do_not_register_sidebars']) && $wp_properties['configuration']['do_not_register_sidebars'] != 'true')) && ($wp_properties['configuration']['enable_layouts'] == 'true')) : ?>
             <tr class="wpp-setting wpp-setting-widget-sidebars">
@@ -263,6 +264,8 @@ if (get_option('permalink_structure') == '') {
               </td>
             </tr>
           <?php endif; ?>
+
+          <?php } ?>
 
           <tr>
             <th><?php printf(__('Automatic Geolocation', ud_get_wp_property()->domain), WPP_F::property_label()); ?></th>
@@ -354,10 +357,8 @@ if (get_option('permalink_structure') == '') {
             </td>
           </tr>
 
-
           <?php do_action('wpp_settings_main_tab_bottom', $wp_properties); ?>
         </table>
-
 
       </div>
 
@@ -536,7 +537,7 @@ if (get_option('permalink_structure') == '') {
                   <?php endforeach; ?>
 
                   <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][google_maps][infobox_settings][show_direction_link]&label=" . __('Show Directions Link', ud_get_wp_property()->domain), $wp_properties['configuration']['google_maps']['infobox_settings']['show_direction_link']); ?></li>
-                  <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][google_maps][infobox_settings][do_not_show_child_properties]&label=" . sprintf(__('Do not show a list of child %1s in Infobox. ', ud_get_wp_property()->domain), WPP_F::property_label('plural')), $wp_properties['configuration']['google_maps']['infobox_settings']['do_not_show_child_properties']); ?></li>
+                  <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][google_maps][infobox_settings][do_not_show_child_properties]&label=" . sprintf(__('Do not show a list of child %1s in Infobox. ', ud_get_wp_property()->domain), WPP_F::property_label('plural')), isset( $wp_properties['configuration']['google_maps']['infobox_settings']['do_not_show_child_properties']) ? $wp_properties['configuration']['google_maps']['infobox_settings']['do_not_show_child_properties'] : false ); ?></li>
                 </ul>
               </div>
             </td>
@@ -640,12 +641,10 @@ if (get_option('permalink_structure') == '') {
 
           <?php
           //list automatic backups taken from setup-assistant screen
-          if (get_option("wpp_property_backups")) {
-            ?>
+          if ( defined( 'WPP_FEATURE_FLAG_SETTINGS_BACKUPS' ) && WPP_FEATURE_FLAG_SETTINGS_BACKUPS && get_option("wpp_property_backups")) { ?>
             <div class="wpp_settings_block">
               <?php _e("Automatic Backups of WP-Property Configuration", ud_get_wp_property()->domain); ?>
-              <input type="button" value="<?php _e('Backup Now', ud_get_wp_property()->domain); ?>"
-                     id="wpp_ajax_create_settings_backup" class="button">
+              <input type="button" value="<?php _e('Backup Now', ud_get_wp_property()->domain); ?>" id="wpp_ajax_create_settings_backup" class="button">
 
               <?php  if( defined( 'WP_PROPERTY_SETUP_ASSISTANT' ) && WP_PROPERTY_SETUP_ASSISTANT ) { ?>
               <span class="description"><?php _e('Backups created when you use Setup Assistant,or create one now.', ud_get_wp_property()->domain); ?> </span>
@@ -661,66 +660,7 @@ if (get_option('permalink_structure') == '') {
             </div>
           <?php } ?>
 
-          <div class="wpp_settings_block">
-            <?php $google_map_localizations = WPP_F::draw_localization_dropdown('return_array=true'); ?>
-            <?php _e('Revalidate all addresses using', ud_get_wp_property()->domain); ?>
-            <b><?php echo $google_map_localizations[$wp_properties['configuration']['google_maps_localization']]; ?></b> <?php _e('localization', ud_get_wp_property()->domain); ?>
-            <input type="button" value="<?php _e('Revalidate', ud_get_wp_property()->domain); ?>"
-                   id="wpp_ajax_revalidate_all_addresses" class="button">
-          </div>
-
-          <div
-            class="wpp_settings_block"><?php printf(__('Enter in the ID of the %1s you want to look up, and the class will be displayed below.', ud_get_wp_property()->domain), WPP_F::property_label('singular')) ?>
-            <input type="text" id="wpp_property_class_id"/>
-            <input type="button" class="button" value="<?php _e('Lookup', ud_get_wp_property()->domain) ?>" id="wpp_ajax_property_query"> <span id="wpp_ajax_property_query_cancel" class="wpp_link hidden"><?php _e('Cancel', ud_get_wp_property()->domain) ?></span>
-            <pre id="wpp_ajax_property_result" class="wpp-json-viewer hidden"></pre>
-          </div>
-
-          <div
-            class="wpp_settings_block"><?php printf(__('Get %1s image data.', ud_get_wp_property()->domain), WPP_F::property_label('singular')) ?>
-            <label
-              for="wpp_image_id"><?php printf(__('%1s ID:', ud_get_wp_property()->domain), WPP_F::property_label('singular')) ?></label>
-            <input type="text" id="wpp_image_id"/>
-            <input type="button" class="button" value="<?php _e('Lookup', ud_get_wp_property()->domain) ?>"
-                   id="wpp_ajax_image_query"> <span id="wpp_ajax_image_query_cancel"
-                                                    class="wpp_link hidden"><?php _e('Cancel', ud_get_wp_property()->domain) ?></span>
-            <pre id="wpp_ajax_image_result" class="wpp_class_pre hidden"></pre>
-          </div>
-
-          <div class="wpp_settings_block">
-            <?php _e('Look up the <b>$wp_properties</b> global settings array.  This array stores all the default settings, which are overwritten by database settings, and custom filters.', ud_get_wp_property()->domain) ?>
-            <input type="button" class="button" value="<?php _e('Show $wp_properties', ud_get_wp_property()->domain) ?>"
-                   id="wpp_show_settings_array"> <span id="wpp_show_settings_array_cancel"
-                                                       class="wpp_link hidden"><?php _e('Cancel', ud_get_wp_property()->domain) ?></span>
-            <pre id="wpp_show_settings_array_result" class="wpp_class_pre hidden"></pre>
-          </div>
-
-          <div class="wpp_settings_block">
-            <?php _e('Clear WPP Cache. Some shortcodes and widgets use cache, so the good practice is clear it after widget, shortcode changes.', ud_get_wp_property()->domain) ?>
-            <input type="button" class="button" value="<?php _e('Clear Cache', ud_get_wp_property()->domain) ?>"
-                   id="wpp_clear_cache">
-          </div>
-
-          <?php if (function_exists('icl_object_id')): ?>
-            <div class="wpp_settings_block">
-              <?php _e('Generate images for duplicates of properties (WPML plugin option). ', ud_get_wp_property()->domain) ?>
-              <input type="button" class="button" value="<?php _e('Generate', ud_get_wp_property()->domain) ?>"
-                     id="wpp_is_remote_meta">
-            </div>
-          <?php endif; ?>
-
-          <div
-            class="wpp_settings_block"><?php printf(__('Set all %1s to same %2s type:', ud_get_wp_property()->domain), WPP_F::property_label('plural'), WPP_F::property_label('singular')) ?>
-            <select id="wpp_ajax_max_set_property_type_type">
-              <?php foreach ($wp_properties['property_types'] as $p_slug => $p_label) { ?>
-                <option value="<?php echo $p_slug; ?>"><?php echo $p_label; ?></option>
-              <?php } ?>
-              <input type="button" class="button" value="<?php _e('Set', ud_get_wp_property()->domain) ?>"
-                     id="wpp_ajax_max_set_property_type">
-              <pre id="wpp_ajax_max_set_property_type_result" class="wpp_class_pre hidden"></pre>
-          </div>
-
-          <div class="wpp_settings_block">
+          <div class="wpp_settings_block" data-wpp-section="feature-flags">
             <p><?php _e( 'Available feature flags and their status.', ud_get_wp_property()->domain ); ?></p>
 
             <ul class="wpp-feature-flag-list">
@@ -733,6 +673,72 @@ if (get_option('permalink_structure') == '') {
             <?php } ?>
             </ul>
 
+          </div>
+
+          <div class="wpp_settings_block" data-wpp-section="api-registration-status">
+            <p><?php _e( 'API Registration Status', ud_get_wp_property()->domain ); ?></p>
+
+            <ul class="wpp-feature-api-status-list">
+            <?php foreach( array( 'ud_site_secret_token' => 'Secret Token', 'ud_site_id' => 'Site ID', 'ud_site_public_key' => 'Public Key', 'ud_api_key' => 'Generic API Key' ) as $_option => $_option_label) { ?>
+              <li class="wpp-feature-flag wpp-feature-flag-<?php echo get_site_option( $_option ) ? 'enabled': 'disabled';  ?>">
+                <span class="dashicons dashicons-yes"></span>
+                <label>
+                  <b class="wpp-feature-name"><?php echo $_option_label; ?>:</b>
+                  <span class="wpp-feature-description"><input type="text" size="48" readonly="readonly" value="<?php echo get_option($_option); ?>" /></span>
+                  </label>
+              </li>
+            <?php } ?>
+            </ul>
+
+          </div>
+
+          <div class="wpp_settings_block">
+            <?php $google_map_localizations = WPP_F::draw_localization_dropdown('return_array=true'); ?>
+            <?php _e('Revalidate all addresses using', ud_get_wp_property()->domain); ?>
+            <b><?php echo $google_map_localizations[$wp_properties['configuration']['google_maps_localization']]; ?></b> <?php _e('localization', ud_get_wp_property()->domain); ?>
+            <input type="button" value="<?php _e('Revalidate', ud_get_wp_property()->domain); ?>" id="wpp_ajax_revalidate_all_addresses" class="button">
+          </div>
+
+          <div class="wpp_settings_block"><?php printf(__('Enter in the ID of the %1s you want to look up, and the class will be displayed below.', ud_get_wp_property()->domain), WPP_F::property_label('singular')) ?>
+            <input type="text" id="wpp_property_class_id"/>
+            <input type="button" class="button" value="<?php _e('Lookup', ud_get_wp_property()->domain) ?>" id="wpp_ajax_property_query"> <span id="wpp_ajax_property_query_cancel" class="wpp_link hidden"><?php _e('Cancel', ud_get_wp_property()->domain) ?></span>
+            <pre id="wpp_ajax_property_result" class="wpp-json-viewer hidden"></pre>
+          </div>
+
+          <div
+            class="wpp_settings_block"><?php printf(__('Get %1s image data.', ud_get_wp_property()->domain), WPP_F::property_label('singular')) ?>
+            <label
+              for="wpp_image_id"><?php printf(__('%1s ID:', ud_get_wp_property()->domain), WPP_F::property_label('singular')) ?></label>
+            <input type="text" id="wpp_image_id"/>
+            <input type="button" class="button" value="<?php _e('Lookup', ud_get_wp_property()->domain) ?>" id="wpp_ajax_image_query"> <span id="wpp_ajax_image_query_cancel" class="wpp_link hidden"><?php _e('Cancel', ud_get_wp_property()->domain) ?></span>
+            <pre id="wpp_ajax_image_result" class="wpp_class_pre hidden"></pre>
+          </div>
+
+          <div class="wpp_settings_block">
+            <?php _e('Look up the <b>$wp_properties</b> global settings array.  This array stores all the default settings, which are overwritten by database settings, and custom filters.', ud_get_wp_property()->domain) ?>
+            <input type="button" class="button" value="<?php _e('Show $wp_properties', ud_get_wp_property()->domain) ?>" id="wpp_show_settings_array"> <span id="wpp_show_settings_array_cancel" class="wpp_link hidden"><?php _e('Cancel', ud_get_wp_property()->domain) ?></span>
+            <pre id="wpp_show_settings_array_result" class="wpp_class_pre hidden"></pre>
+          </div>
+
+          <div class="wpp_settings_block">
+            <?php _e('Clear WPP Cache. Some shortcodes and widgets use cache, so the good practice is clear it after widget, shortcode changes.', ud_get_wp_property()->domain) ?>
+            <input type="button" class="button" value="<?php _e('Clear Cache', ud_get_wp_property()->domain) ?>" id="wpp_clear_cache">
+          </div>
+
+          <?php if (function_exists('icl_object_id')): ?>
+            <div class="wpp_settings_block">
+              <?php _e('Generate images for duplicates of properties (WPML plugin option). ', ud_get_wp_property()->domain) ?>
+              <input type="button" class="button" value="<?php _e('Generate', ud_get_wp_property()->domain) ?>" id="wpp_is_remote_meta">
+            </div>
+          <?php endif; ?>
+
+          <div class="wpp_settings_block"><?php printf(__('Set all %1s to same %2s type:', ud_get_wp_property()->domain), WPP_F::property_label('plural'), WPP_F::property_label('singular')) ?>
+            <select id="wpp_ajax_max_set_property_type_type">
+              <?php foreach ($wp_properties['property_types'] as $p_slug => $p_label) { ?>
+                <option value="<?php echo $p_slug; ?>"><?php echo $p_label; ?></option>
+              <?php } ?>
+              <input type="button" class="button" value="<?php _e('Set', ud_get_wp_property()->domain) ?>" id="wpp_ajax_max_set_property_type">
+              <pre id="wpp_ajax_max_set_property_type_result" class="wpp_class_pre hidden"></pre>
           </div>
 
           <div class="wpp_settings_block">

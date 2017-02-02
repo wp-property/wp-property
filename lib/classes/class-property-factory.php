@@ -7,6 +7,8 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use WPP_F;
+
   if( !class_exists( 'UsabilityDynamics\WPP\Property_Factory' ) ) {
 
     class Property_Factory {
@@ -50,6 +52,10 @@ namespace UsabilityDynamics\WPP {
 
           // Do nothing here since we already have data from cache!
 
+          if( is_array( $property ) ) {
+            $property['_cached'] = true;
+          }
+
         } else {
 
           $property = array();
@@ -61,7 +67,7 @@ namespace UsabilityDynamics\WPP {
           }
 
           //** Figure out what all the editable attributes are, and get their keys */
-          $editable_keys = array_keys( array_merge( (array)$wp_properties[ 'property_meta' ], (array)$wp_properties[ 'property_stats' ] ) );
+          $editable_keys = array_keys( array_merge( isset( $wp_properties[ 'property_meta' ] ) ? (array) $wp_properties[ 'property_meta' ] : array(), (array)$wp_properties[ 'property_stats' ] ) );
 
           //** Load all meta keys for this object */
           if( $keys = get_post_custom( $id ) ) {
@@ -94,7 +100,7 @@ namespace UsabilityDynamics\WPP {
 
                 default:
                   $real_value = $value;
-                  break;
+                break;
 
               }
 
@@ -105,6 +111,8 @@ namespace UsabilityDynamics\WPP {
                 $property[ $key ] = $real_value;
               }
 
+              $property[ $key ] = maybe_unserialize( $property[ $key ] );
+
             }
           }
 
@@ -114,7 +122,7 @@ namespace UsabilityDynamics\WPP {
           $property[ 'system' ]  = array();
           $property[ 'gallery' ] = array();
 
-          $property[ 'wpp_gpid' ]  = \WPP_F::maybe_set_gpid( $id );
+          $property[ 'wpp_gpid' ]  = WPP_F::maybe_set_gpid( $id );
           $property[ 'permalink' ] = get_permalink( $id );
 
           //** Make sure property_type stays as slug, or it will break many things:  (widgets, class names, etc)  */
@@ -182,7 +190,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Convert to object */
         if( $return_object ) {
-          $property = \WPP_F::array_to_object( $property );
+          $property = WPP_F::array_to_object( $property );
         }
 
         return $property;

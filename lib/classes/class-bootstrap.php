@@ -31,11 +31,18 @@ namespace UsabilityDynamics\WPP {
        * @author peshkov@UD
        */
       public function boot() {
+
         // Enable Supermap
-        define( 'WPP_SUPERMAP_VENDOR_LOAD', true );
+        if( defined( 'WP_PROPERTY_FLAG_ENABLE_SUPERMAP' ) && WP_PROPERTY_FLAG_ENABLE_SUPERMAP && !defined( 'WPP_SUPERMAP_VENDOR_LOAD' ) ) {
+          define( 'WPP_SUPERMAP_VENDOR_LOAD', true );
+        }
         // Enable Agents
-        define( 'WPP_AGENTS_VENDOR_LOAD', true );
+        if( defined( 'WP_PROPERTY_FLAG_ENABLE_AGENTS' ) && WP_PROPERTY_FLAG_ENABLE_AGENTS && !defined( 'WPP_AGENTS_VENDOR_LOAD' )) {
+          define( 'WPP_AGENTS_VENDOR_LOAD', true );
+        }
+
       }
+
 
       /**
        * Instantaite class.
@@ -51,6 +58,7 @@ namespace UsabilityDynamics\WPP {
           global $wp_properties, $_wp_admin_css_colors;
           $wp_properties['admin_colors'] = $_wp_admin_css_colors[get_user_option('admin_color')]->colors;
         });
+
 
         /**
          * Duplicates UsabilityDynamics\WP\Bootstrap_Plugin::load_textdomain();
@@ -284,6 +292,11 @@ namespace UsabilityDynamics\WPP {
             // Must be able to parse composer.json from plugin file, hopefully to detect the "_build.sha" field.
             $_composer = json_decode( @file_get_contents(  trailingslashit( WPP_Path ) .'/composer.json' )  );
 
+            if( is_object( $_composer ) && $_composer->extra && isset( $_composer->extra->_build ) && !isset( $_composer->extra->_build->sha ) ) {
+
+              continue;
+            }
+
             if( is_object( $_composer ) && $_composer->extra && isset( $_composer->extra->_build ) && isset( $_composer->extra->_build->sha ) ) {
               $_version = $_composer->extra->_build->sha;
             } else {
@@ -291,11 +304,12 @@ namespace UsabilityDynamics\WPP {
             }
 
             $_detail[ $_product_name ] = array(
-              'request_url' => 'https://api.usabilitydynamics.com/v1/product/updates/' . $_product_name . '/latest/?version=' . $_version,
+              'request_url' => 'https://api.usabilitydynamics.com/v1/product/updates/' . $_product_name . '/latest/?version=' . ( isset( $_version ) ? $_version : '' ),
               'product_path' => $_product_path,
               'response' => null,
-              'have_update' => null,
+              'have_update' => isset( $_composer->extra->_build->sha ) ? null : false
             );
+
 
             $_response = wp_remote_get( $_detail[ $_product_name ]['request_url'] );
 
@@ -306,7 +320,7 @@ namespace UsabilityDynamics\WPP {
               if( isset( $_body->data )) {
                 $_detail[ $_product_name ]['response'] = $_body->data;
 
-                if( !$_body->data->changesSince || $_body->data->changesSince > 0 ) {
+                if( !$_body->data->changesSince || $_body->data->changesSince > 0 )  {
                   $_detail[ $_product_name ]['have_update'] = true;
                 }
 
@@ -364,7 +378,6 @@ namespace UsabilityDynamics\WPP {
         $_ud_get_product_updates = self::get_update_check_result();
 
         foreach( (array) $_ud_get_product_updates['data']  as $_product_short_name => $_product_detail ) {
-
           if( $_product_detail['have_update'] ) {
             $response->response[ $_product_detail['product_path'] ] = $_product_detail['response'];
           }
