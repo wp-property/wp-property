@@ -25,7 +25,7 @@
             "composer/composer": "1.0.*@dev",
             "phpunit/phpunit": "4.1.*"
         },
-        "time": "2016-08-13 20:53:52",
+        "time": "2016-08-13T20:53:52+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "Composer\\Installers\\Plugin",
@@ -239,6 +239,44 @@
         "homepage": "http://github.com/usabilitydynamics/lib-settings",
         "keywords": [
             "settings"
+        ]
+    },
+    {
+        "name": "usabilitydynamics/lib-wp-bootstrap",
+        "version": "1.2.1",
+        "version_normalized": "1.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-wp-bootstrap",
+            "reference": "1.2.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.2.1.zip",
+            "reference": "1.2.1",
+            "shasum": null
+        },
+        "require": {
+            "php": ">=5.3",
+            "usabilitydynamics/lib-utility": "~0.3"
+        },
+        "type": "library",
+        "extra": {
+            "installer-name": "lib-wp-bootstrap"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib/classes"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "Wordpress bootstrap library created by UsabilityDynamics",
+        "homepage": "https://github.com/UsabilityDynamics/lib-wp-bootstrap",
+        "keywords": [
+            "wordpress"
         ]
     },
     {
@@ -592,254 +630,6 @@
         "homepage": "https://usabilitydynamics.com"
     },
     {
-        "name": "usabilitydynamics/lib-wp-bootstrap",
-        "version": "1.2.1",
-        "version_normalized": "1.2.1.0",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:UsabilityDynamics/lib-wp-bootstrap",
-            "reference": "1.2.1"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.2.1.zip",
-            "reference": "1.2.1",
-            "shasum": null
-        },
-        "require": {
-            "php": ">=5.3",
-            "usabilitydynamics/lib-utility": "~0.3"
-        },
-        "type": "library",
-        "extra": {
-            "installer-name": "lib-wp-bootstrap"
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "lib/classes"
-            ]
-        },
-        "license": [
-            "MIT"
-        ],
-        "description": "Wordpress bootstrap library created by UsabilityDynamics",
-        "homepage": "https://github.com/UsabilityDynamics/lib-wp-bootstrap",
-        "keywords": [
-            "wordpress"
-        ]
-    },
-    {
-        "name": "usabilitydynamics/wp-rets-client",
-        "version": "0.2.3",
-        "version_normalized": "0.2.3.0",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:UsabilityDynamics/wp-rets-client",
-            "reference": "0.2.3"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/wp-rets-client/archive/0.2.3.zip",
-            "reference": "0.2.3",
-            "shasum": null
-        },
-        "archive": {
-            "exclude": [
-                "vendor",
-                "node_modules",
-                ".gitignore",
-                "test",
-                "circle.yml",
-                "composer.lock",
-                "gruntfile.js",
-                "package.json"
-            ]
-        },
-        "require": {
-            "php": ">=5.3",
-            "usabilitydynamics/lib-wp-bootstrap": "1.2.1"
-        },
-        "require-dev": {
-            "codeclimate/php-test-reporter": "~0.1",
-            "usabilitydynamics/lib-wp-phpunit": "~0.2"
-        },
-        "type": "wordpress-plugin",
-        "extra": {
-            "schemas": {
-                "dependencies": {
-                    "modules": [],
-                    "plugins": []
-                },
-                "licenses": {
-                    "client": false,
-                    "product": false
-                }
-            },
-            "installer-name": "wp-rets-client"
-        },
-        "installation-source": "source",
-        "autoload": {
-            "classmap": [
-                "lib/classes",
-                "lib/connectors"
-            ],
-            "files": [
-                "wp-rets-client.php"
-            ]
-        },
-        "license": [
-            "MIT"
-        ],
-        "homepage": "https://usabilitydynamics.com"
-    },
-    {
-        "name": "wp-property/wp-property-supermap",
-        "version": "4.0.4",
-        "version_normalized": "4.0.4.0",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:wp-property/wp-property-supermap",
-            "reference": "4.0.4"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/wp-property/wp-property-supermap/archive/4.0.4.zip",
-            "reference": "4.0.4",
-            "shasum": null
-        },
-        "archive": {
-            "exclude": [
-                "node_modules",
-                ".gitignore",
-                "test",
-                "circle.yml",
-                "composer.lock",
-                "gruntfile.js",
-                "package.json"
-            ]
-        },
-        "require": {
-            "php": ">=5.3",
-            "usabilitydynamics/lib-utility": "0.3.7",
-            "usabilitydynamics/lib-wp-bootstrap": "1.2.1"
-        },
-        "require-dev": {
-            "codeclimate/php-test-reporter": "dev-master",
-            "usabilitydynamics/lib-wp-phpunit": "master"
-        },
-        "type": "wordpress-plugin",
-        "extra": {
-            "schemas": {
-                "dependencies": {
-                    "modules": [],
-                    "plugins": [
-                        {
-                            "name": "WP-Property",
-                            "slug": "wp-property",
-                            "version": "2.0.0",
-                            "required": true
-                        }
-                    ]
-                },
-                "licenses": {
-                    "client": false,
-                    "product": {
-                        "referrer": "wp-property/wp-property",
-                        "product_id": "wp-property/wp-property-supermap"
-                    }
-                }
-            },
-            "installer-name": "wp-property-supermap"
-        },
-        "installation-source": "source",
-        "autoload": {
-            "classmap": [
-                "lib/classes"
-            ],
-            "files": [
-                "loader.php"
-            ]
-        },
-        "license": [
-            "MIT"
-        ],
-        "homepage": "https://www.usabilitydynamics.com/product/wp-property-supermap/"
-    },
-    {
-        "name": "wp-property/wp-property-agents",
-        "version": "2.0.6",
-        "version_normalized": "2.0.6.0",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:wp-property/wp-property-agents",
-            "reference": "2.0.6"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/wp-property/wp-property-agents/archive/2.0.6.zip",
-            "reference": "2.0.6",
-            "shasum": null
-        },
-        "archive": {
-            "exclude": [
-                "node_modules",
-                ".gitignore",
-                "test",
-                "circle.yml",
-                "composer.lock",
-                "gruntfile.js",
-                "package.json"
-            ]
-        },
-        "require": {
-            "php": ">=5.3",
-            "usabilitydynamics/lib-utility": "0.3.7",
-            "usabilitydynamics/lib-wp-bootstrap": "1.2.1"
-        },
-        "require-dev": {
-            "codeclimate/php-test-reporter": "dev-master",
-            "usabilitydynamics/lib-wp-phpunit": "master"
-        },
-        "type": "wordpress-plugin",
-        "extra": {
-            "schemas": {
-                "dependencies": {
-                    "modules": [],
-                    "plugins": [
-                        {
-                            "name": "WP-Property",
-                            "slug": "wp-property",
-                            "version": "2.0.0",
-                            "required": true
-                        }
-                    ]
-                },
-                "licenses": {
-                    "client": false,
-                    "product": {
-                        "referrer": "wp-property/wp-property",
-                        "product_id": "wp-property/wp-property-agents"
-                    }
-                }
-            },
-            "installer-name": "wp-property-agents"
-        },
-        "installation-source": "source",
-        "autoload": {
-            "classmap": [
-                "lib/classes"
-            ],
-            "files": [
-                "loader.php"
-            ]
-        },
-        "license": [
-            "MIT"
-        ],
-        "homepage": "https://www.usabilitydynamics.com/product/wp-property-agents"
-    },
-    {
         "name": "usabilitydynamics/wp-tax-post-binding",
         "version": "2.0.5",
         "version_normalized": "2.0.5.0",
@@ -891,85 +681,6 @@
         ]
     },
     {
-        "name": "wp-property/wp-property-terms",
-        "version": "dev-latest",
-        "version_normalized": "dev-latest",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:wp-property/wp-property-terms",
-            "reference": "latest"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/wp-property/wp-property-terms/archive/latest.zip",
-            "reference": "latest",
-            "shasum": null
-        },
-        "archive": {
-            "exclude": [
-                "vendor",
-                "node_modules",
-                ".gitignore",
-                "test",
-                "circle.yml",
-                "composer.lock",
-                "gruntfile.js",
-                "package.json"
-            ]
-        },
-        "require": {
-            "php": ">=5.3",
-            "usabilitydynamics/lib-utility": "0.3.7",
-            "usabilitydynamics/lib-wp-bootstrap": "1.2.1",
-            "usabilitydynamics/wp-tax-post-binding": "2.0.5"
-        },
-        "require-dev": {
-            "codeclimate/php-test-reporter": "~0.1",
-            "usabilitydynamics/lib-wp-phpunit": "~0.2"
-        },
-        "type": "wordpress-plugin",
-        "extra": {
-            "installer-paths": {
-                "vendor/plugins/{$name}": [
-                    "type:wordpress-muplugin",
-                    "type:wordpress-module",
-                    "type:wordpress-plugin",
-                    "type:wpackagist-plugin"
-                ],
-                "vendor/libraries/{$vendor}/{$name}": [
-                    "type:wordpress-library"
-                ]
-            },
-            "schemas": {
-                "dependencies": {
-                    "modules": [],
-                    "plugins": []
-                },
-                "licenses": {
-                    "client": false,
-                    "product": {
-                        "referrer": "wp-property/wp-property",
-                        "product_id": "wp-property/wp-property-terms"
-                    }
-                }
-            },
-            "installer-name": "wp-property-terms"
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "lib/classes"
-            ],
-            "files": [
-                "wp-property-terms.php"
-            ]
-        },
-        "license": [
-            "MIT"
-        ],
-        "homepage": "https://www.usabilitydynamics.com/product/wp-property-terms"
-    },
-    {
         "name": "ccampbell/chromephp",
         "version": "4.1.0",
         "version_normalized": "4.1.0.0",
@@ -987,7 +698,7 @@
         "require": {
             "php": ">=5.0.0"
         },
-        "time": "2013-06-26 03:44:33",
+        "time": "2013-06-26T03:44:33+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1032,7 +743,7 @@
         "require": {
             "php": ">=5.2"
         },
-        "time": "2016-12-13 01:17:43",
+        "time": "2016-12-13T01:17:43+00:00",
         "type": "library",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",

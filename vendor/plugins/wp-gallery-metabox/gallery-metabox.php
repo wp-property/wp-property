@@ -133,10 +133,9 @@ if( !class_exists( 'BE_Gallery_Metabox' ) ) {
      * Display setup for images, which include filters and AJAX return
      * @since 1.3
      *
-     * @param $loop
+     * @param int $post_id
      * @return string html output
      *
-     * @internal param int $post_id
      * @author Bill Erickson
      */
     public function gallery_display( $loop ) {
