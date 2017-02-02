@@ -1,4 +1,5 @@
 jQuery(document).ready(function () {
+  console.log( 'sestup' );
   $ = jQuery.noConflict();//allow shorthand without conflict
 
   //handle form submits

@@ -50,6 +50,9 @@ if (get_option('permalink_structure') == '') {
 ?>
 <div class="wrap <?php echo implode(' ', $wrapper_classes); ?>">
 
+
+
+
   <h2
     class='wpp_settings_page_header'><?php echo ud_get_wp_property('labels.name') . ' ' . __('Settings', ud_get_wp_property()->domain) ?>
 

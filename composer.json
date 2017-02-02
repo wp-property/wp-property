@@ -78,10 +78,6 @@
         "type:wordpress-library"
       ]
     },
-    "splashes": {
-      "install": "static/splashes/install.php",
-      "upgrade": "static/splashes/upgrade.php"
-    },
     "featureFlags": [
       {
         "name": "Featured Flags",

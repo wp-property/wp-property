@@ -59,6 +59,7 @@ namespace UsabilityDynamics\WPP {
           $wp_properties['admin_colors'] = $_wp_admin_css_colors[get_user_option('admin_color')]->colors;
         });
 
+
         /**
          * Duplicates UsabilityDynamics\WP\Bootstrap_Plugin::load_textdomain();
          *
