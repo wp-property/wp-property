@@ -31,11 +31,19 @@ namespace UsabilityDynamics\WPP {
        * @author peshkov@UD
        */
       public function boot() {
+
         // Enable Supermap
-        define( 'WPP_SUPERMAP_VENDOR_LOAD', true );
+        if( defined( 'WP_PROPERTY_FLAG_ENABLE_SUPERMAP' ) && WP_PROPERTY_FLAG_ENABLE_SUPERMAP && !defined( 'WPP_SUPERMAP_VENDOR_LOAD' ) ) {
+          define( 'WPP_SUPERMAP_VENDOR_LOAD', true );
+        }
+
         // Enable Agents
-        define( 'WPP_AGENTS_VENDOR_LOAD', true );
+        if( defined( 'WP_PROPERTY_FLAG_ENABLE_AGENTS' ) && WP_PROPERTY_FLAG_ENABLE_AGENTS && !defined( 'WPP_AGENTS_VENDOR_LOAD' )) {
+          define( 'WPP_AGENTS_VENDOR_LOAD', true );
+        }
+
       }
+
 
       /**
        * Instantaite class.
