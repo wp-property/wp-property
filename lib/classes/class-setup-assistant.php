@@ -11,7 +11,9 @@
  */
 namespace UsabilityDynamics\WPP {
 
-  if (!class_exists('UsabilityDynamics\WPP\Setup_Assistant')) {
+  use WPP_F;
+
+  if( !class_exists( 'UsabilityDynamics\WPP\Setup_Assistant' ) ) {
 
     class Setup_Assistant {
 
@@ -21,7 +23,9 @@ namespace UsabilityDynamics\WPP {
         //** flush Object Cache */
         //wp_cache_flush();
 
-        //add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+        add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+
+        add_action( 'wp_ajax_wpp_save_setup_settings', array( 'UsabilityDynamics\WPP\Setup_Assistant', 'save_setup_settings' ) );
 
       }
 
@@ -41,175 +45,169 @@ namespace UsabilityDynamics\WPP {
       /**
        * Render UI
        *
-       * @param string $freemius_optin_slide
+       * UsabilityDynamics\WPP\Setup_Assistant::render_page()
+       *
+       * @internal param string $freemius_optin_slide
        */
-      static public function render_setup_page( $freemius_optin_slide = '' ) {
+      static public function render_page() {
+
+        include ud_get_wp_property()->path( "static/views/admin/setup.php", 'dir' );
+
+      }
+
+      /**
+       * AJAX Handler for Setup Assistant.
+       * proxies to save_settings()
+       *
+       * @author raj
+       */
+      static public function save_setup_settings() {
+
         global $wp_properties;
 
-        ?>
+        $data = WPP_F::parse_str( $_REQUEST[ 'data' ] );
 
-        <style>
-      .ud-badge.wp-badge {
-        background-image: url("<?php echo ud_get_wp_property()->path('/static/images/icon.png', 'url'); ?>") !important;
+        //set up some basic variables
+        $prop_types = isset( $data[ 'wpp_settings' ][ 'property_types' ] ) ? $data[ 'wpp_settings' ][ 'property_types' ] : false;
+        $widgets_required = isset( $data[ 'wpp_settings' ][ 'configuration' ][ 'widgets' ] ) ? $data[ 'wpp_settings' ][ 'configuration' ][ 'widgets' ] : false;
+        $widgets_available = array( 'gallerypropertieswidget', 'childpropertieswidget' );
+
+        //check if new page needs to be created for wpp_settings[configuration][base_slug] (Choose default properties pages)
+        if( isset( $data[ 'wpp_settings' ][ 'configuration' ][ 'base_slug' ] ) && $data[ 'wpp_settings' ][ 'configuration' ][ 'base_slug' ] == "create-new" ) {
+
+          // if "create-new-page" then create a new WP page
+          $pageName = $data[ 'wpp-base-slug-new' ];
+          $new_page = array(
+            'post_type' => 'page',
+            'post_title' => $pageName,
+            'post_content' => '[property_overview]',
+            'post_status' => 'publish',
+            'post_author' => 1,
+          );
+          $new_page_id = wp_insert_post( $new_page );
+          $post = get_post( $new_page_id );
+//      print_r($post);die;
+          $slug = $post->post_name;
+          $data[ 'wpp_settings' ][ 'configuration' ][ 'base_slug' ] = $slug;
+          $return[ 'props_over' ] = get_permalink( $new_page_id );
+        } else {
+//      $return['props_over'] = get_site_url().'/'.$data['wpp_settings']['configuration']['base_slug'];
+          $return[ 'props_over' ] = get_site_url() . '/' . $wp_properties[ 'configuration' ][ 'base_slug' ];
+        }
+
+        //some settings should just be installed first time,and later taken/updated from settings tab
+
+        { // running this block unconditionally for now
+          $data[ 'wpp_settings' ][ 'configuration' ][ 'show_assistant' ] = true;
+
+//      To allow deprecated widget options
+          $data[ 'wpp_settings' ][ 'configuration' ][ 'enable_legacy_features' ] = true;
+
+//       Additional attributes for location
+          $data[ 'wpp_settings' ][ 'admin_attr_fields' ][ 'location' ] = "wpp_address";
+          $data[ 'wpp_settings' ][ 'searchable_attr_fields' ][ 'location' ] = "input";
+          $data[ 'wpp_settings' ][ 'configuration' ][ 'address_attribute' ] = "input";
+
+//        Additional attributes for price
+          $data[ 'wpp_settings' ][ 'admin_attr_fields' ][ 'price' ] = "currency";
+          $data[ 'wpp_settings' ][ 'searchable_attr_fields' ][ 'price' ] = "range_dropdown";
+
+          if( !isset( $data[ 'wpp_settings' ][ 'configuration' ][ 'automatically_insert_overview' ] ) ) {
+            $data[ 'wpp_settings' ][ 'configuration' ][ 'automatically_insert_overview' ] = false;
+          }
+
+          // make property types "searchable" "location matters"
+          foreach( $data[ 'wpp_settings' ][ 'property_types' ] as $key => $val ) {
+            $data[ 'wpp_settings' ][ 'searchable_property_types' ][] = $key;
+            $data[ 'wpp_settings' ][ 'location_matters' ][] = $key;
+          }
+
+//      compute basic property attributes
+          $propAttrSet = $wp_properties[ 'property_assistant' ][ 'default_atts' ]; // Default attributes regardless of property types.
+
+          if( $prop_types && isset( $data[ 'wpp_settings' ][ 'property_types' ][ 'land' ] ) )
+            $propAttrSet = array_merge( $propAttrSet, $wp_properties[ 'property_assistant' ][ 'land' ] );
+          if( $prop_types && isset( $data[ 'wpp_settings' ][ 'property_types' ][ 'commercial' ] ) )
+            $propAttrSet = array_merge( $propAttrSet, $wp_properties[ 'property_assistant' ][ 'commercial' ] );
+          if( $prop_types && array_intersect( array_map( 'strtolower', $data[ 'wpp_settings' ][ 'property_types' ] ), array( 'house', 'condo', 'townhouse', 'multifamily' ) ) ) {
+            $propAttrSet = array_merge( $propAttrSet, $wp_properties[ 'property_assistant' ][ 'residential' ] );
+            // in this case we need bedrooms/bathrooms/total rooms to be numeric
+            $data[ 'wpp_settings' ][ 'admin_attr_fields' ][ 'bedrooms' ] = "number";
+            $data[ 'wpp_settings' ][ 'admin_attr_fields' ][ 'bathrooms' ] = "number";
+            $data[ 'wpp_settings' ][ 'admin_attr_fields' ][ 'total_rooms' ] = "number";
+          }
+
+//      Install basic property attributes
+          $data[ 'wpp_settings' ][ 'property_stats' ] = $propAttrSet;
+
+          // update settings
+          update_option( 'wpp_settings', $data[ 'wpp_settings' ] );
+        }
+
+        //update widgets if $widgets_required
+        if( $widgets_required && $prop_types ) {
+          //get existing widgets
+          $allWidgets = get_option( 'sidebars_widgets' );
+          $randInt = rand( 200, 300 );
+
+          foreach( $widgets_available as $widget ) {
+            $widget_name = 'widget_' . $widget;
+            $widget_content = array();
+            foreach( $prop_types as $prop => $property ) {
+              $randInt++;
+              $allWidgets[ 'wpp_sidebar_' . $prop ][] = $widget . '-' . $randInt;
+              $content = call_user_func( array( 'self', $widget_name . '_data' ) );
+              $widget_content[ $randInt ] = $content;
+
+              // if widget has been removed then we need to reset its value
+              if( !in_array( $widget, $widgets_required ) ) {
+                $widget_content = '';
+              }
+            }
+            // update individual widget types
+            update_option( $widget_name, $widget_content );
+//        print_r(get_option($widget_name));
+          }
+
+          //update widgets for each property type
+          update_option( 'sidebars_widgets', $allWidgets );
+        }
+
+        //if dummy properties required
+        if( isset( $data[ 'wpp_settings' ][ 'configuration' ][ 'dummy-prop' ] ) && $data[ 'wpp_settings' ][ 'configuration' ][ 'dummy-prop' ] == 'yes-please' ) {
+          // self::generate_asst_dummy_properties($data);
+        }
+
+        // get return values
+        // returns links for last screen of assistant
+        $args = array(
+          'posts_per_page' => 1,
+          'orderby' => 'date',
+          'order' => 'DESC',
+          'post_type' => 'property',
+          'post_status' => 'publish',
+          'suppress_filters' => true
+        );
+        $posts_array = get_posts( $args );
+        $return[ 'props_single' ] = get_permalink( $posts_array[ 0 ]->ID );
+
+        $return[ '_settings' ] = $data[ 'wpp_settings' ];
+
+        wp_send_json( $return );
+
       }
-
-      #wpp-splash-screen .owl-buttons div.owl-prev::before {
-        background: rgba(0, 0, 0, 0) url("<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/back.png', 'url'); ?>") no-repeat scroll 0 0 / 100% auto !important;
-      }
-
-      #wpp-splash-screen .owl-buttons div.owl-next::before {
-        background: rgba(0, 0, 0, 0) url("<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/next.png', 'url'); ?>") no-repeat scroll 0 0 / 100% auto !important;
-      }
-
-      .wpp_asst_select, .wpp_asst_screen table.wpp_layouts_table th select {
-        background: #fff url("<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/icon1.png', 'url'); ?>") no-repeat scroll 100% 50% !important;
-      }
-
-      #wpbody-content {
-        background: url("<?php echo ud_get_wp_property()->path('/static/splashes/assets/images/wpp_backimage.png', 'url'); ?>") repeat-x bottom !important;
-      }
-    </style>
-        <div class="wrap about-wrap">
-      <div class="wp-badge ud-badge"></div>
-      <div id="wpp-splash-screen">
-
-        <?php wp_nonce_field( 'wpp_setting_save' ); ?>
-
-        <div class="loader-div"><img src="<?php echo ud_get_wp_property()->path( '/static/splashes/assets/images/loader.gif', 'url' ); ?>" alt="image"></div>
-          <form id="wpp-setup-assistant" name="wpp-setup-assistant">
-            <div id="wpp-splash-screen-owl" class="owl-carousel">
-
-              <div class="item">
-                <div class="wpp_asst_screen wpp_asst_screen_2">
-                  <h2 class="wpp_asst_heading"><b><?php echo __( 'Which Property Types do you want to have on your site?', ud_get_wp_property()->domain ); ?></b></h2>
-
-                  <div class="wpp_asst_inner_wrap">
-                    <ul class="">
-                      <li class="wpp_asst_label"><?php echo __( 'House', ud_get_wp_property()->domain ); ?>
-                        <label for="property_types_house">
-                          <input type="checkbox" class="wpp_box asst_prop_types" name="wpp_settings[property_types][house]" value="House" id="property_types_house" <?php if( isset( $wp_properties[ 'property_types' ] ) && in_array( "house", array_keys( $wp_properties[ 'property_types' ] ) ) ) echo "checked"; ?> />
-                          <span></span> </label></li>
-
-                      <li class="wpp_asst_label">
-                        <?php echo __( 'Condo', ud_get_wp_property()->domain ); ?>
-                        <label for="property_types_condo">
-                          <input type="checkbox" class="wpp_box asst_prop_types" name="wpp_settings[property_types][condo]" value="Condo" id="property_types_condo" <?php if( isset( $wp_properties[ 'property_types' ] ) && in_array( "condo", array_keys( $wp_properties[ 'property_types' ] ) ) ) echo "checked"; ?> />
-                          <span></span> </label></li>
-
-                      <li class="wpp_asst_label"> <?php echo __( 'Townhouse', ud_get_wp_property()->domain ); ?>
-                        <label for="property_types_townhouse">
-                          <input type="checkbox" class="wpp_settings_property_stats" name="wpp_settings[property_types][townhouse]" id="property_types_townhouse" value="Townhouse" <?php if( isset( $wp_properties[ 'property_types' ] ) && in_array( "townhouse", array_keys( $wp_properties[ 'property_types' ] ) ) ) echo "checked"; ?>/>
-                          <span></span> </label></li>
-
-                      <li class="wpp_asst_label"> <?php echo __( 'Multi-Family', ud_get_wp_property()->domain ); ?>
-                        <label for="property_types_multifamily">
-                          <input class="wpp_box  asst_prop_types" id="property_types_multifamily" type="checkbox" value="Multi-Family" data-label=""
-                                 name="wpp_settings[property_types][multifamily]" <?php if( isset( $wp_properties[ 'property_types' ] ) && in_array( "multifamily", array_keys( $wp_properties[ 'property_types' ] ) ) ) echo "checked"; ?>> <span></span> </label></li>
-
-                      <li class="wpp_asst_label"> <?php echo __( 'Land', ud_get_wp_property()->domain ); ?>
-                        <label for="property_types_land">
-                          <input class="wpp_box asst_prop_types" type="checkbox" value="Land" name="wpp_settings[property_types][land]" id="property_types_land" <?php if( isset( $wp_properties[ 'property_types' ] ) && in_array( "land", array_keys( $wp_properties[ 'property_types' ] ) ) ) echo "checked"; ?>> <span></span> </label></li>
-
-                      <li class="wpp_asst_label"> <?php echo __( 'Commercial', ud_get_wp_property()->domain ); ?>
-                        <label for="property_types_commercial">
-                          <input class="wpp_box asst_prop_types" type="checkbox" value="Commercial" name="wpp_settings[property_types][commercial]" id="property_types_commercial" <?php if( isset( $wp_properties[ 'property_types' ] ) && in_array( "commercial", array_keys( $wp_properties[ 'property_types' ] ) ) ) echo "checked"; ?> accept=""> <span></span> </label></li>
-                    </ul>
-                  </div> <!-- wpp_asst_inner_wrap -->
-
-                  <div class="foot-note">
-                    <a href="javascript:;">
-                      <h3>
-                        <?php echo __( 'If you do not see your property type click here', ud_get_wp_property()->domain ); ?></h3>
-                    </a>
-                    <div class="wpp_toggl_desctiption">
-                      <?php echo __( 'Custom Property Type can be created and managed in Properties/Settings/Developer Tab/Terms', ud_get_wp_property()->domain ); ?>
-                    </div>
-                  </div>
-
-                </div><!-- wpp_asst_screen wpp_asst_screen_2 -->
-              </div><!-- item -->
-
-              <div class="item  item-wider">
-                <div class="wpp_asst_screen wpp_asst_screen_5">
-
-                  <h2 class="wpp_asst_heading"><b><?php echo __( 'Do you need to keep track of agents?', ud_get_wp_property()->domain ); ?></b></h2>
-
-                  <div class="wpp_asst_inner_wrap">
-                    <ul>
-                      <li class="wpp_asst_label"> <?php echo __( 'Yes Please', ud_get_wp_property()->domain ); ?>
-                        <label for="yes-please">
-                          <input class="wpp_box" type="radio" value="yes-please" name="wpp_settings[wpp-addons][wpp-agents]" id="yes-please" <?php if( isset( $wp_properties[ 'wpp-addons' ][ 'wpp-agents' ] ) && $wp_properties[ 'wpp-addons' ][ 'wpp-agents' ] == "yes-please" ) echo "checked='checked'"; ?>> <span></span> </label>
-                      </li>
-                      <li class="wpp_asst_label"><?php echo __( 'No thanks', ud_get_wp_property()->domain ); ?>
-                        <label for="no-thanks">
-                          <input class="wpp_box" type="radio" value="no-thanks" name="wpp_settings[wpp-addons][wpp-agents]" id="no-thanks" <?php if( isset( $wp_properties[ 'wpp-addons' ][ 'wpp-agents' ] ) && $wp_properties[ 'wpp-addons' ][ 'wpp-agents' ] == "no-thanks" ) echo "checked='checked'"; ?> > <span></span> </label>
-                      </li>
-                    </ul>
-
-                    <small class="center foot-note">(Installs WP-Property Agents Addon)</small>
-                  </div> <!-- wpp_asst_inner_wrap -->
-
-                  <h2 class="wpp_asst_heading"><b><?php echo __( 'Do you want to display interactive searchable maps?', ud_get_wp_property()->domain ); ?></b></h2>
-                  <div class="wpp_asst_inner_wrap">
-                    <ul>
-                      <li class="wpp_asst_label"> <?php echo __( 'Sure', ud_get_wp_property()->domain ); ?>
-                        <label for="yes-please">
-                          <input class="wpp_box" type="radio" value="yes-please" name="wpp_settings[wpp-addons][wpp-supermap]" id="yes-please" <?php if( isset( $wp_properties[ 'wpp-addons' ][ 'wpp-supermap' ] ) && $wp_properties[ 'wpp-addons' ][ 'wpp-supermap' ] == "yes-please" ) echo "checked='checked'"; ?>> <span></span> </label>
-                      </li>
-                      <li class="wpp_asst_label"><?php echo __( 'Maybe later', ud_get_wp_property()->domain ); ?>
-                        <label for="no-thanks">
-                          <input class="wpp_box" type="radio" value="no-thanks" name="wpp_settings[wpp-addons][wpp-supermap]" id="no-thanks" <?php if( isset( $wp_properties[ 'wpp-addons' ][ 'wpp-supermap' ] ) && $wp_properties[ 'wpp-addons' ][ 'wpp-supermap' ] == "no-thanks" ) echo "checked='checked'"; ?> > <span></span> </label>
-                      </li>
-                    </ul>
-                    <small class="center foot-note">(Installs WP-Property Supermap Add)</small>
-                  </div> <!-- wpp_asst_inner_wrap -->
-                </div>
-              </div>
-
-              <div class="item">
-                <div class="wpp_asst_screen wpp_asst_screen_6">
-                  <h2 class="wpp_asst_heading maybe_away text-center"><b><?php echo __( "We have created test properties for you", ud_get_wp_property()->domain ); ?></b></h2>
-                  <ul class="list-img">
-                    <li>
-                    <center><a class="btn_single_page dash" href="<?php echo get_admin_url(); ?>edit.php?post_type=property&page=all_properties"><?php echo __( 'Add/edit properties', ud_get_wp_property()->domain ); ?></a></center>
-                    </li>
-                    <li>
-                    <center><a class="btn_single_page oviews" href="<?php echo get_admin_url(); ?>edit.php?post_type=property&page=all_properties"><?php echo __( 'View property listings', ud_get_wp_property()->domain ); ?></a></center>
-                    </li>
-
-                  </ul>
-                  <div class="wp-install-addons">
-                    <a href="<?php echo get_admin_url(); ?>edit.php?post_type=property&page=wp-property-addons">Finish the wizard and continue installing addon(s)</a>
-                  </div>
-                  <div class="wpp-asst_hidden-attr">
-                    <input type="hidden" name="wpp_settings[configuration][dummy-prop]" value="yes-please">
-                    <!--  add field to recognize the source on save-->
-                    <input type="hidden" name="wpp_freshInstallation" value="<?php echo isset( $freshInstallation ) ? $freshInstallation : 'false'; ?>">
-                  </div>
-                </div>
-              </div>
-
-          </div>
-
-        </form>
-      </div>
-    </div>
-        <?php
-      }
-
 
       /**
        * Add dummy properties for Setup Assistant.
        *
        * @author raj
        */
-      static public function generate_asst_dummy_properties($data)
-      {
+      static public function generate_asst_dummy_properties( $data ) {
 
         // select default property for the dummy properties
-        if (count($data['wpp_settings']['property_types']) > 0) {
-          $default_prop = array_keys($data['wpp_settings']['property_types']);
-          $default_prop = $default_prop[0];
+        if( count( $data[ 'wpp_settings' ][ 'property_types' ] ) > 0 ) {
+          $default_prop = array_keys( $data[ 'wpp_settings' ][ 'property_types' ] );
+          $default_prop = $default_prop[ 0 ];
         } else {
           $default_prop = "house";
         }
@@ -217,23 +215,23 @@ namespace UsabilityDynamics\WPP {
         global $user_ID, $wp_properties, $wpdb;
 
         /* Determine if the dummy properties already exist */
-        $posts = $wpdb->get_col("
+        $posts = $wpdb->get_col( "
       SELECT `post_title`
       FROM {$wpdb->posts}
       WHERE 
       `post_title` IN ('122 Bishopsgate','East Pointe Marketplace','MIDLEVELS WEST','720 N Larrabee St Apt','460 W Huron St','7846 Charlesmont Road','3212 Ramona Avenue','4602 Chatford Avenue','619 Beechfield Avenue','5109 Eugene Avenue','99 Richfield','9812 NE Avenue')
        AND `post_status` = 'publish'
-    ");
+    " );
 
         /* Check array to avoid issues in future */
-        if (!is_array($posts)) {
+        if( !is_array( $posts ) ) {
           $posts = array();
         }
 
         /* If Property doesn't exist we create it : ONE */
-        if (!in_array('122 Bishopsgate', $posts)) {
+        if( !in_array( '122 Bishopsgate', $posts ) ) {
 
-          self::generate_asst_dummy_property(array(
+          self::generate_asst_dummy_property( array(
             'post_title' => '122 Bishopsgate',
             'post_content' => 'Take notice of this amazing home! It has an original detached 2 garage/workshop built with the home and on a concrete slab along with regular 2 car attached garage. Very nicely landscaped front and back yard. Hardwood floors in Foyer, den, dining and great room. Great room is open to large Kitchen. Carpet in all upstairs bedrooms. Home is located in the Woodlands in the middle of very nice community. You and your family will feel right at home. A must see.',
             'tagline' => 'Need Room for your TOYS! Take notice of this unique Home!',
@@ -251,14 +249,14 @@ namespace UsabilityDynamics\WPP {
             'community_feature' => 'dishwasher',
             'phone_number' => '8002700781',
             'img_index' => '1',
-          ));
+          ) );
 
         }
 
         /* If Property doesn't exist we create it : TWO */
-        if (!in_array('East Pointe Marketplace', $posts)) {
+        if( !in_array( 'East Pointe Marketplace', $posts ) ) {
 
-          self::generate_asst_dummy_property(array(
+          self::generate_asst_dummy_property( array(
             'post_title' => 'East Pointe Marketplace',
             'post_content' => "Convenient suburban shopping experience located in the epicenter of Milwaukee's lower east side.
 Adjacent to the Milwaukee School of Engineering
@@ -278,13 +276,13 @@ Ample off-street parking ",
             'property_type' => $default_prop,
             'phone_number' => '8002300781',
             'img_index' => '1',
-          ));
+          ) );
 
         }
         /* If Property doesn't exist we create it : THREE */
-        if (!in_array('MIDLEVELS WEST', $posts)) {
+        if( !in_array( 'MIDLEVELS WEST', $posts ) ) {
 
-          self::generate_asst_dummy_property(array(
+          self::generate_asst_dummy_property( array(
             'post_title' => 'MIDLEVELS WEST',
             'post_content' => 'Ideal family flat with 4 bedrooms at upper Conduit Road',
             'tagline' => 'Ideal family flat with 4 bedrooms at upper Conduit Road',
@@ -302,13 +300,13 @@ Ample off-street parking ",
             'bathrooms' => '8',
             'phone_number' => '9992700781',
             'img_index' => '1',
-          ));
+          ) );
 
         }
         /* If Property doesn't exist we create it : FOUR */
-        if (!in_array('720 N Larrabee St Apt', $posts)) {
+        if( !in_array( '720 N Larrabee St Apt', $posts ) ) {
 
-          self::generate_asst_dummy_property(array(
+          self::generate_asst_dummy_property( array(
             'post_title' => '720 N Larrabee St Apt',
             'post_content' => 'Beautiful west views of river in ideal River North location close to downtown, Magnificent Mile, shopping, dining, entertainment. Split 2 bedroom, 2 bath floor plan with hardwood floors, granite counters and breakfast bar, stainless steel appliances, gas fireplace, 12-foot ceilings in this trendy loft-style unit with large balcony to enjoy sunset views over the river. Plenty of room for dining table and tons of closet space built out with Elfa shelving. 2nd bedroom closed off to the ceiling for privacy. Washer/dryer in the unit. Full-amenity building with onsite manager/engineer, 24-hour door staff, fitness room, bike storage; indoor heated parking for $35,000 extra, additional storage cage included.',
             'tagline' => 'Great new home',
@@ -325,13 +323,13 @@ Ample off-street parking ",
             'property_type' => $default_prop,
             'phone_number' => '9856700781',
             'img_index' => '1',
-          ));
+          ) );
 
         }
         /* If Property doesn't exist we create it : FIVE */
-        if (!in_array('460 W Huron St', $posts)) {
+        if( !in_array( '460 W Huron St', $posts ) ) {
 
-          self::generate_asst_dummy_property(array(
+          self::generate_asst_dummy_property( array(
             'post_title' => '460 W Huron St',
             'post_content' => 'Unique amenities nestled among exquisite building features will make your home feel like an urban oasis while ours dedicated staff will not only fulfill your needs, but anticipate them.',
             'tagline' => 'Only for a limited period DEPOSIT $0!!!!',
@@ -349,12 +347,11 @@ Ample off-street parking ",
             'bathrooms' => '5',
             'phone_number' => '8002708876',
             'img_index' => '1',
-          ));
+          ) );
         }
       }
 
-      static public function generate_asst_dummy_property($data)
-      {
+      static public function generate_asst_dummy_property( $data ) {
         global $wp_properties;
 
         $defaults = array(
@@ -370,107 +367,121 @@ Ample off-street parking ",
           'phone_number' => '',
         );
 
-        $data = wp_parse_args($data, $defaults);
+        $data = wp_parse_args( $data, $defaults );
 
         //** STEP 1. Create dummy property */
 
-        $insert_id = wp_insert_post(array(
-          'post_title' => $data['post_title'],
+        $insert_id = wp_insert_post( array(
+          'post_title' => $data[ 'post_title' ],
           'post_status' => 'publish',
-          'post_content' => $data['post_content'],
+          'post_content' => $data[ 'post_content' ],
           'post_type' => 'property',
-        ));
+        ) );
 
-        $property_type = $data['property_type'];
+        $property_type = $data[ 'property_type' ];
 
-        update_post_meta($insert_id, 'property_type', $property_type);
+        update_post_meta( $insert_id, 'property_type', $property_type );
 
-        if (!empty($wp_properties['configuration']['address_attribute']) && key_exists($wp_properties['configuration']['address_attribute'], $wp_properties['property_stats'])) {
-          update_post_meta($insert_id, 'location', $data['location']);
+        if( !empty( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) && key_exists( $wp_properties[ 'configuration' ][ 'address_attribute' ], $wp_properties[ 'property_stats' ] ) ) {
+          update_post_meta( $insert_id, 'location', $data[ 'location' ] );
 
-          if (method_exists('WPP_F', 'revalidate_address')) {
-            WPP_F::revalidate_address($insert_id);
+          if( method_exists( 'WPP_F', 'revalidate_address' ) ) {
+            WPP_F::revalidate_address( $insert_id );
           }
         }
 
-        if (!empty($data['tagline'])) {
-          update_post_meta($insert_id, 'tagline', $data['tagline']);
+        if( !empty( $data[ 'tagline' ] ) ) {
+          update_post_meta( $insert_id, 'tagline', $data[ 'tagline' ] );
         }
 
-        if (!empty($data['featured'])) {
-          update_post_meta($insert_id, 'featured', $data['featured']);
+        if( !empty( $data[ 'featured' ] ) ) {
+          update_post_meta( $insert_id, 'featured', $data[ 'featured' ] );
         }
 
-        if (!empty($data['price'])) {
-          update_post_meta($insert_id, 'price', $data['price']);
+        if( !empty( $data[ 'price' ] ) ) {
+          update_post_meta( $insert_id, 'price', $data[ 'price' ] );
         }
 
-        if (!empty($data['bedrooms'])) {
-          update_post_meta($insert_id, 'bedrooms', $data['bedrooms']);
+        if( !empty( $data[ 'bedrooms' ] ) ) {
+          update_post_meta( $insert_id, 'bedrooms', $data[ 'bedrooms' ] );
         }
 
-        if (!empty($data['bathrooms'])) {
-          update_post_meta($insert_id, 'bathrooms', $data['bathrooms']);
+        if( !empty( $data[ 'bathrooms' ] ) ) {
+          update_post_meta( $insert_id, 'bathrooms', $data[ 'bathrooms' ] );
         }
 
-        if (!empty($data['phone_number'])) {
-          update_post_meta($insert_id, 'phone_number', $data['phone_number']);
+        if( !empty( $data[ 'phone_number' ] ) ) {
+          update_post_meta( $insert_id, 'phone_number', $data[ 'phone_number' ] );
         }
 
-        if (!empty($data['total_rooms'])) {
-          update_post_meta($insert_id, 'total_rooms', $data['total_rooms']);
+        if( !empty( $data[ 'total_rooms' ] ) ) {
+          update_post_meta( $insert_id, 'total_rooms', $data[ 'total_rooms' ] );
         }
 
-        if (!empty($data['fees'])) {
-          update_post_meta($insert_id, 'fees', $data['fees']);
+        if( !empty( $data[ 'fees' ] ) ) {
+          update_post_meta( $insert_id, 'fees', $data[ 'fees' ] );
         }
 
-        if (!empty($data['year_built'])) {
-          update_post_meta($insert_id, 'year_built', $data['year_built']);
+        if( !empty( $data[ 'year_built' ] ) ) {
+          update_post_meta( $insert_id, 'year_built', $data[ 'year_built' ] );
         }
 
-        if (!empty($data['living_space'])) {
-          update_post_meta($insert_id, 'living_space', $data['living_space']);
+        if( !empty( $data[ 'living_space' ] ) ) {
+          update_post_meta( $insert_id, 'living_space', $data[ 'living_space' ] );
         }
 
-        if (!empty($data['property_feature']))
-          wp_set_post_terms($insert_id, $data['property_feature'], 'property_feature');
-        if (!empty($data['community_feature']))
-          wp_set_post_terms($insert_id, $data['community_feature'], 'community_feature');
+        if( !empty( $data[ 'property_feature' ] ) )
+          wp_set_post_terms( $insert_id, $data[ 'property_feature' ], 'property_feature' );
+        if( !empty( $data[ 'community_feature' ] ) )
+          wp_set_post_terms( $insert_id, $data[ 'community_feature' ], 'community_feature' );
 
-        update_post_meta($insert_id, 'dummy_property', true);
+        update_post_meta( $insert_id, 'dummy_property', true );
 
         //** STEP 2. Create and Move temporary image files */
 
-        require_once(ABSPATH . 'wp-admin/includes/image.php');
+        require_once( ABSPATH . 'wp-admin/includes/image.php' );
         $upload_dir = wp_upload_dir();
 
         $dummy_images = array(
-          WPP_Path . "static/splashes/assets/images/dummy_data/property_{$data['img_index']}_img_0.jpg",
-          WPP_Path . "static/splashes/assets/images/dummy_data/property_{$data['img_index']}_img_1.jpg",
-          WPP_Path . "static/splashes/assets/images/dummy_data/property_{$data['img_index']}_img_2.jpg"
+          WPP_Path . "static/images/dummy_data/property_{$data['img_index']}_img_0.jpg",
+          WPP_Path . "static/images/dummy_data/property_{$data['img_index']}_img_1.jpg",
+          WPP_Path . "static/images/dummy_data/property_{$data['img_index']}_img_2.jpg"
         );
 
-        foreach ($dummy_images as $dummy_path) {
-          if (@copy($dummy_path, $upload_dir['path'] . "/" . basename($dummy_path))) {
-            $filename = $upload_dir['path'] . "/" . basename($dummy_path);
-            $wp_filetype = wp_check_filetype(basename($filename), null);
+        foreach( $dummy_images as $dummy_path ) {
+          if( @copy( $dummy_path, $upload_dir[ 'path' ] . "/" . basename( $dummy_path ) ) ) {
+            $filename = $upload_dir[ 'path' ] . "/" . basename( $dummy_path );
+            $wp_filetype = wp_check_filetype( basename( $filename ), null );
 
-            $attach_id = wp_insert_attachment(array(
-              'post_mime_type' => $wp_filetype['type'],
-              'post_title' => preg_replace('/\.[^.]+$/', '', basename($filename)),
+            $attach_id = wp_insert_attachment( array(
+              'post_mime_type' => $wp_filetype[ 'type' ],
+              'post_title' => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
               'post_status' => 'inherit'
-            ), $filename, $insert_id);
+            ), $filename, $insert_id );
 
-            $attach_data = wp_generate_attachment_metadata($attach_id, $filename);
-            wp_update_attachment_metadata($attach_id, $attach_data);
+            $attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
+            wp_update_attachment_metadata( $attach_id, $attach_data );
           }
         }
 
         //** Last attached file is set as thumbnail */
-        if (isset($attach_id)) {
-          update_post_meta($insert_id, '_thumbnail_id', $attach_id);
+        if( isset( $attach_id ) ) {
+          update_post_meta( $insert_id, '_thumbnail_id', $attach_id );
         }
+
+      }
+
+      static public function get_standard_data() {
+
+        $_types = json_decode( wp_remote_retrieve_body( wp_remote_get( 'https://api.usabilitydynamics.com/product/property/v1/standard/types' ) ) );
+        $_fields = json_decode( wp_remote_retrieve_body( wp_remote_get( 'https://api.usabilitydynamics.com/product/property/v1/standard/fields' ) ) );
+        $_groups = json_decode( wp_remote_retrieve_body( wp_remote_get( 'https://api.usabilitydynamics.com/product/property/v1/standard/groups' ) ) );
+
+        return (object) array(
+          'types' => $_types->data,
+          'fields' => $_fields->data,
+          'groups' => $_groups->data,
+        );
 
       }
 

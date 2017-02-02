@@ -175,7 +175,7 @@
         "constant": "WP_PROPERTY_FLAG_ENABLE_AGENTS",
         "description": "Enable Agent management.",
         "since": "2.2.1",
-        "enabled": true
+        "enabled": false
       },
       {
         "name": "Enable Settings Search",

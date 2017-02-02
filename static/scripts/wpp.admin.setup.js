@@ -4,7 +4,7 @@ jQuery(document).ready(function () {
   $ = jQuery.noConflict();//allow shorthand without conflict
 
   //handle form submits
-  // $('#wpp-setup-assistant').submit(postBackForm);
+  $('#wpp-setup-assistant').submit(postBackForm);
 
   function postBackForm() {
 
@@ -31,9 +31,19 @@ jQuery(document).ready(function () {
       },
       success: function (response) {
         $hideLoader();
-        var data = jQuery.parseJSON(response);
-        if(data.props_over!='false' && data.props_over!=false)
-          $(".btn_single_page.oviews").attr("href",data.props_over);
+
+        try {
+
+
+
+          if(response.props_over!='false' && response.props_over!=false)
+            jQuery(".btn_single_page.oviews").attr("href",response.props_over);
+
+        } catch( error ) {
+          console.error( error.message );
+        }
+
+
       },
       error: function () {
         $hideLoader();
@@ -70,7 +80,7 @@ jQuery(document).ready(function () {
     // maybe add some screen specific
     switch ($isScreen) {
       case $indexOfLastScreen:
-        //jQuery('#wpp-setup-assistant').submit();
+        jQuery('#wpp-setup-assistant').submit();
         //$showAddonsOption();
         break;
       default:

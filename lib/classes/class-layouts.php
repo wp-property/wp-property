@@ -2,7 +2,6 @@
 /**
  * Custom predefined layouts
  */
-
 namespace UsabilityDynamics\WPP {
 
   if (!class_exists('UsabilityDynamics\WPP\Layouts')) {
