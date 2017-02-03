@@ -23,6 +23,11 @@ namespace UsabilityDynamics\WPP {
         //** flush Object Cache */
         //wp_cache_flush();
 
+        if( !defined( 'WPP_API_URL_STANDARDS' ) ) {
+          define( 'WPP_API_URL_STANDARDS', 'https://api.usabilitydynamics.com/product/property/standard/v1' );
+        }
+
+
         add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
         add_action( 'wp_ajax_wpp_save_setup_settings', array( 'UsabilityDynamics\WPP\Setup_Assistant', 'save_setup_settings' ) );
@@ -35,7 +40,7 @@ namespace UsabilityDynamics\WPP {
        */
       static public function admin_enqueue_scripts($slug = null) {
 
-        if( $slug !== 'property_page_property_settings' ) {
+        if( $slug !== 'property_page_property_settings' || !isset( $_GET['splash'] ) ) {
           return;
         }
 
@@ -45,6 +50,7 @@ namespace UsabilityDynamics\WPP {
         wp_enqueue_style( 'setup-assist-page-css', WPP_URL . "styles/wpp.admin.setup.css", array(), WPP_Version, 'screen' );
         wp_enqueue_script( 'setup-assist-owl-js', WPP_URL . "scripts/owl.carousel.min.js", array( 'jquery' ), WPP_Version, true );
         wp_enqueue_script( 'setup-assist-page-js', WPP_URL . "scripts/wpp.admin.setup.js", array( 'jquery', 'setup-assist-owl-js' ), WPP_Version, true );
+
       }
 
       /**
@@ -67,133 +73,33 @@ namespace UsabilityDynamics\WPP {
        * @author raj
        */
       static public function save_setup_settings() {
-
         global $wp_properties;
 
         $data = WPP_F::parse_str( $_REQUEST[ 'data' ] );
 
-        //set up some basic variables
-        $prop_types = isset( $data[ 'wpp_settings' ][ 'property_types' ] ) ? $data[ 'wpp_settings' ][ 'property_types' ] : false;
-        $widgets_required = isset( $data[ 'wpp_settings' ][ 'configuration' ][ 'widgets' ] ) ? $data[ 'wpp_settings' ][ 'configuration' ][ 'widgets' ] : false;
-        $widgets_available = array( 'gallerypropertieswidget', 'childpropertieswidget' );
 
-        //check if new page needs to be created for wpp_settings[configuration][base_slug] (Choose default properties pages)
-        if( isset( $data[ 'wpp_settings' ][ 'configuration' ][ 'base_slug' ] ) && $data[ 'wpp_settings' ][ 'configuration' ][ 'base_slug' ] == "create-new" ) {
+        $_setup = array(
+          'api' => WPP_API_URL_STANDARDS,
+          'data' => $data,
+          'schema' => self::get_settings_schema()
+        );
 
-          // if "create-new-page" then create a new WP page
-          $pageName = $data[ 'wpp-base-slug-new' ];
-          $new_page = array(
-            'post_type' => 'page',
-            'post_title' => $pageName,
-            'post_content' => '[property_overview]',
-            'post_status' => 'publish',
-            'post_author' => 1,
-          );
-          $new_page_id = wp_insert_post( $new_page );
-          $post = get_post( $new_page_id );
-//      print_r($post);die;
-          $slug = $post->post_name;
-          $data[ 'wpp_settings' ][ 'configuration' ][ 'base_slug' ] = $slug;
-          $return[ 'props_over' ] = get_permalink( $new_page_id );
-        } else {
-//      $return['props_over'] = get_site_url().'/'.$data['wpp_settings']['configuration']['base_slug'];
-          $return[ 'props_over' ] = get_site_url() . '/' . $wp_properties[ 'configuration' ][ 'base_slug' ];
-        }
+        $_current_settings = get_option('wpp_settings');
+        //die( '<pre>' . print_r( $_current_settings, true ) . '</pre>' );
+        $_modified_settings = WPP_F::extend( $_current_settings, $_setup['schema'] );
 
-        //some settings should just be installed first time,and later taken/updated from settings tab
+        //die( '<pre>' . print_r( $_modified_settings , true ) . '</pre>' );
+        update_option( 'wpp_settings', $_modified_settings );
 
-        { // running this block unconditionally for now
-          $data[ 'wpp_settings' ][ 'configuration' ][ 'show_assistant' ] = true;
-
-//      To allow deprecated widget options
-          $data[ 'wpp_settings' ][ 'configuration' ][ 'enable_legacy_features' ] = true;
-
-//       Additional attributes for location
-          $data[ 'wpp_settings' ][ 'admin_attr_fields' ][ 'location' ] = "wpp_address";
-          $data[ 'wpp_settings' ][ 'searchable_attr_fields' ][ 'location' ] = "input";
-          $data[ 'wpp_settings' ][ 'configuration' ][ 'address_attribute' ] = "input";
-
-//        Additional attributes for price
-          $data[ 'wpp_settings' ][ 'admin_attr_fields' ][ 'price' ] = "currency";
-          $data[ 'wpp_settings' ][ 'searchable_attr_fields' ][ 'price' ] = "range_dropdown";
-
-          if( !isset( $data[ 'wpp_settings' ][ 'configuration' ][ 'automatically_insert_overview' ] ) ) {
-            $data[ 'wpp_settings' ][ 'configuration' ][ 'automatically_insert_overview' ] = false;
-          }
-
-          // make property types "searchable" "location matters"
-          foreach( $data[ 'wpp_settings' ][ 'property_types' ] as $key => $val ) {
-            $data[ 'wpp_settings' ][ 'searchable_property_types' ][] = $key;
-            $data[ 'wpp_settings' ][ 'location_matters' ][] = $key;
-          }
-
-//      compute basic property attributes
-          $propAttrSet = $wp_properties[ 'property_assistant' ][ 'default_atts' ]; // Default attributes regardless of property types.
-
-          if( $prop_types && isset( $data[ 'wpp_settings' ][ 'property_types' ][ 'land' ] ) )
-            $propAttrSet = array_merge( $propAttrSet, $wp_properties[ 'property_assistant' ][ 'land' ] );
-          if( $prop_types && isset( $data[ 'wpp_settings' ][ 'property_types' ][ 'commercial' ] ) )
-            $propAttrSet = array_merge( $propAttrSet, $wp_properties[ 'property_assistant' ][ 'commercial' ] );
-          if( $prop_types && array_intersect( array_map( 'strtolower', $data[ 'wpp_settings' ][ 'property_types' ] ), array( 'house', 'condo', 'townhouse', 'multifamily' ) ) ) {
-            $propAttrSet = array_merge( $propAttrSet, $wp_properties[ 'property_assistant' ][ 'residential' ] );
-            // in this case we need bedrooms/bathrooms/total rooms to be numeric
-            $data[ 'wpp_settings' ][ 'admin_attr_fields' ][ 'bedrooms' ] = "number";
-            $data[ 'wpp_settings' ][ 'admin_attr_fields' ][ 'bathrooms' ] = "number";
-            $data[ 'wpp_settings' ][ 'admin_attr_fields' ][ 'total_rooms' ] = "number";
-          }
-
-//      Install basic property attributes
-          $data[ 'wpp_settings' ][ 'property_stats' ] = $propAttrSet;
-
-          // update settings
-          update_option( 'wpp_settings', $data[ 'wpp_settings' ] );
-        }
-
-        //update widgets if $widgets_required
-        if( $widgets_required && $prop_types ) {
-          //get existing widgets
-          $allWidgets = get_option( 'sidebars_widgets' );
-          $randInt = rand( 200, 300 );
-
-          foreach( $widgets_available as $widget ) {
-            $widget_name = 'widget_' . $widget;
-            $widget_content = array();
-            foreach( $prop_types as $prop => $property ) {
-              $randInt++;
-              $allWidgets[ 'wpp_sidebar_' . $prop ][] = $widget . '-' . $randInt;
-              $content = call_user_func( array( 'self', $widget_name . '_data' ) );
-              $widget_content[ $randInt ] = $content;
-
-              // if widget has been removed then we need to reset its value
-              if( !in_array( $widget, $widgets_required ) ) {
-                $widget_content = '';
-              }
-            }
-            // update individual widget types
-            update_option( $widget_name, $widget_content );
-//        print_r(get_option($widget_name));
-          }
-
-          //update widgets for each property type
-          update_option( 'sidebars_widgets', $allWidgets );
-        }
-
-        //if dummy properties required
-        if( isset( $data[ 'wpp_settings' ][ 'configuration' ][ 'dummy-prop' ] ) && $data[ 'wpp_settings' ][ 'configuration' ][ 'dummy-prop' ] == 'yes-please' ) {
-          // self::generate_asst_dummy_properties($data);
-        }
-
-        // get return values
-        // returns links for last screen of assistant
-        $args = array(
+        $posts_array = get_posts( array(
           'posts_per_page' => 1,
           'orderby' => 'date',
           'order' => 'DESC',
           'post_type' => 'property',
           'post_status' => 'publish',
           'suppress_filters' => true
-        );
-        $posts_array = get_posts( $args );
+        ) );
+
         $return[ 'props_single' ] = get_permalink( $posts_array[ 0 ]->ID );
 
         $return[ '_settings' ] = $data[ 'wpp_settings' ];
@@ -478,15 +384,23 @@ Ample off-street parking ",
 
       static public function get_standard_data() {
 
-        $_types = json_decode( wp_remote_retrieve_body( wp_remote_get( 'https://api.usabilitydynamics.com/product/property/v1/standard/types' ) ) );
-        $_fields = json_decode( wp_remote_retrieve_body( wp_remote_get( 'https://api.usabilitydynamics.com/product/property/v1/standard/fields' ) ) );
-        $_groups = json_decode( wp_remote_retrieve_body( wp_remote_get( 'https://api.usabilitydynamics.com/product/property/v1/standard/groups' ) ) );
+        $_types = json_decode( wp_remote_retrieve_body( wp_remote_get( WPP_API_URL_STANDARDS . '/types' ) ) );
+        $_fields = json_decode( wp_remote_retrieve_body( wp_remote_get( WPP_API_URL_STANDARDS . '/fields' ) ) );
+        $_groups = json_decode( wp_remote_retrieve_body( wp_remote_get( WPP_API_URL_STANDARDS . '/groups' ) ) );
 
         return (object) array(
           'types' => $_types->data,
           'fields' => $_fields->data,
           'groups' => $_groups->data,
         );
+
+      }
+
+      static public function get_settings_schema() {
+
+        $_schema = json_decode( wp_remote_retrieve_body( wp_remote_get( WPP_API_URL_STANDARDS . '/schema' ) ), true );
+
+        return $_schema['data'];
 
       }
 

@@ -148,7 +148,7 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
         $showSettingsElem.show();
       } else {
         $this.attr('disabled', 'disabled');
-        jQuery.post( wpp.instance.ajax_url, {
+        jQuery.get( wpp.instance.ajax_url, {
           action: 'wpp_ajax_print_wp_properties'
         }, function ( data ) {
 
@@ -495,43 +495,69 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
             data: data
           },
           success: function( response ){
-            var response = jQuery.parseJSON( response );
+
+            response = jQuery.parseJSON( response );
+
             if( response.status == 'success' ) {
+
               $this.removeClass('disabled').removeAttr('disabled');
+
               wppModal({
-                    message: response.message,
-                    title: wpp.strings._done
-                });
+                  message: response.message,
+                  title: wpp.strings._done
+              });
+
             } else if(response.status == 'confirm' ) {
-              wppModal({
-                    message: response.message,
-                    buttons: {
-                        [wpp.strings.replace_all]: function () {
-                            var _this = jQuery(this);
-                            data.confirmed = 'all';
-                            jQuery(this).parent().find('.ui-dialog-buttonpane button').addClass('disabled').attr('disabled', 'disabled');
-                            onConfirm(data, function(){
-                              $this.removeClass('disabled').removeAttr('disabled');
-                            });
-                        },
-                        [wpp.strings.replace_empty]: function () {
-                            var _this = jQuery(this);
-                            data.confirmed = 'empty-or-not-exist';
-                            jQuery(this).parent().find('.ui-dialog-buttonpane button').addClass('disabled').attr('disabled', 'disabled');
-                            onConfirm(data, function(){
-                              $this.removeClass('disabled').removeAttr('disabled');
-                            });
-                        },
-                        [wpp.strings.cancel]: function () {
-                            $this.removeClass('disabled').removeAttr('disabled');
-                            jQuery(this).dialog("close");
-                        }
-                    },
-                    close: function (event, ui) {
-                        $this.removeClass('disabled').removeAttr('disabled');
-                        jQuery(this).remove();
-                    }
-                });
+
+              var _modal = {
+                message: response.message,
+                buttons: {},
+                close: function (event, ui) {
+                  $this.removeClass('disabled').removeAttr('disabled');
+                  jQuery(this).remove();
+                }
+              }
+
+              Object.defineProperty( _modal.buttons, wpp.strings.replace_all, {
+                value: function () {
+                  var _this = jQuery(this);
+                  data.confirmed = 'all';
+                  jQuery(this).parent().find('.ui-dialog-buttonpane button').addClass('disabled').attr('disabled', 'disabled');
+                  onConfirm(data, function(){
+                    $this.removeClass('disabled').removeAttr('disabled');
+                  });
+                },
+                configurable: true,
+                enumerable: true,
+                writable: true
+              } );
+
+              Object.defineProperty( _modal.buttons, wpp.strings.replace_empty, {
+                value: function () {
+                  var _this = jQuery(this);
+                  data.confirmed = 'empty-or-not-exist';
+                  jQuery(this).parent().find('.ui-dialog-buttonpane button').addClass('disabled').attr('disabled', 'disabled');
+                  onConfirm(data, function(){
+                    $this.removeClass('disabled').removeAttr('disabled');
+                  });
+                },
+                configurable: true,
+                enumerable: true,
+                writable: true
+              } );
+
+              Object.defineProperty( _modal.buttons, wpp.strings.cancel, {
+                value: function () {
+                  $this.removeClass('disabled').removeAttr('disabled');
+                  jQuery(this).dialog("close");
+                },
+                configurable: true,
+                enumerable: true,
+                writable: true
+              } );
+
+              wppModal(_modal);
+
             }
           },
           error: function() {
@@ -720,15 +746,21 @@ wppModal = function(option){
     autoOpen: true,
     width: 'auto',
     resizable: false,
-    buttons: {
-        [wpp.strings.cancel]: function () {
-            jQuery(this).dialog("close");
-        }
-    },
+    buttons: {},
     close: function (event, ui) {
         jQuery(this).remove();
     }
   };
+
+  Object.defineProperty( _default.buttons, wpp.strings.cancel, {
+    value: function () {
+      jQuery(this).dialog("close");
+    },
+    configurable: true,
+    enumerable: true,
+    writable: true
+  } );
+
   option = jQuery.extend(true, {}, _default, option);
 
   var wppModalBox = jQuery('#wpp-modal');

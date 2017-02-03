@@ -2,7 +2,7 @@
  *
  *
  */
-#wpbody-content {
+.wpp-setup-assistant-wraper {
   background: url("../images/wpp_backimage.png") repeat-x bottom !important;
 }
 .wpp-setup-assistant {
@@ -25,7 +25,7 @@
   /* never forget focus styling */
 }
 .wpp-setup-assistant .ud-badge.wp-badge {
-  background-image: url("../images/icon.png") !important;
+  background-image: url('../images/icon.png') !important;
 }
 .wpp-setup-assistant .ud-badge.wp-badge {
   position: absolute;

@@ -1,6 +1,8 @@
 jQuery(document).ready(function () {
   console.log( 'sestup' );
 
+  jQuery('#wpbody-content').addClass( 'wpp-setup-assistant-wraper' );
+
   $ = jQuery.noConflict();//allow shorthand without conflict
 
   //handle form submits

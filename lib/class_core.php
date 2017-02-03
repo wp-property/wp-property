@@ -211,7 +211,7 @@ class WPP_Core {
     if( defined( 'WPP_API_REGISTER_URL' ) && WPP_API_REGISTER_URL ) {
       $_api_url = WPP_API_REGISTER_URL;
     } else {
-      $_api_url = 'https://api.usabilitydynamics.com/product/property/site/register/v1';
+      $_api_url = 'https://api.usabilitydynamics.com/product/property/register/v1';
     }
 
     $args = array(
@@ -288,7 +288,7 @@ class WPP_Core {
     }
     $ud_site_id = get_site_option('ud_site_id');
     $ud_site_public_key = get_site_option('ud_site_public_key');
-    $url = 'https://api.usabilitydynamics.com/product/v1/site/update_settings';
+    $url = 'https://api.usabilitydynamics.com/product/property/settings/v1/update';
     $find = array( 'http://', 'https://' );
     $replace = '';
     $output = str_replace( $find, $replace, $site_url );
