@@ -62,9 +62,9 @@ class class_agents
     if (!isset($wp_roles)) {
       $wp_roles = new WP_Roles();
     }
-    $wp_roles->roles['agent']['name'] = ud_get_wp_property( 'configuration.feature_settings.agents.label.single', 'Agent' );
-    $wp_roles->role_objects['agent']->name = ud_get_wp_property( 'configuration.feature_settings.agents.label.single', 'Agents' ); // This will cover get_role() function;
-    $wp_roles->role_names['agent'] = ud_get_wp_property( 'configuration.feature_settings.agents.label.single', 'Agents' );
+    $wp_roles->roles['agent']['name'] = ud_get_wp_property('configuration.feature_settings.agents.label.single', 'Agent');
+    $wp_roles->role_objects['agent']->name = ud_get_wp_property('configuration.feature_settings.agents.label.single', 'Agents'); // This will cover get_role() function;
+    $wp_roles->role_names['agent'] = ud_get_wp_property('configuration.feature_settings.agents.label.single', 'Agents');
 
     if (current_user_can(self::$capability)) {
       // Add settings page
@@ -142,22 +142,23 @@ class class_agents
 
     // Checking if current user should have ability.
 
-    add_filter( 'user_has_cap', array('class_agents', 'agent_has_cap'), 10, 4 );
-    
+    add_filter('user_has_cap', array('class_agents', 'agent_has_cap'), 10, 4);
+
     // Checking if current user should have ability.
-    add_filter( 'wp_crm_user_level_roles', array('class_agents', 'wp_crm_user_level_roles'), 10 );
+    add_filter('wp_crm_user_level_roles', array('class_agents', 'wp_crm_user_level_roles'), 10);
   }
 
   /**
-    * Add agent role to the wp-crm user level dropdown.
-    * 
-    * @param $roles: Roles array.
-    * 
-    * @return Array of roles.
-    *
-  */
-  public static function wp_crm_user_level_roles($roles){
-    $roles['agent'] = (array) get_role('agent');
+   * Add agent role to the wp-crm user level dropdown.
+   *
+   * @param $roles : Roles array.
+   *
+   * @return Array of roles.
+   *
+   */
+  public static function wp_crm_user_level_roles($roles)
+  {
+    $roles['agent'] = (array)get_role('agent');
     return $roles;
   }
 
@@ -1806,6 +1807,8 @@ class class_agents
         }
         if (WPP_F::isURL($this_field)) {
           $social_element = "<li class='wpp_agent_social_link with_permalink {$slug}'><a href='{$this_field}'>{$display_social_fields[$slug]}</a></li>";
+        } else if (WPP_F::is_email($this_field)) {
+          $social_element = "<li class='wpp_agent_social_link with_permalink {$slug}'><a href='mailto:{$this_field}'>{$display_social_fields[$slug]}</a></li>";
         } else {
           $social_element = "<li class='wpp_agent_social_link {$slug}'>{$this_field}</li>";
         }
@@ -1817,7 +1820,7 @@ class class_agents
       <?php if ($ul_print_rows):
         if ($agent_image):
           echo '<div class="wpp_agent_image">' . $agent_image . '</div>';
-          endif;
+        endif;
         ?>
         <ul class="wpp_agent_info_list">
           <?php
