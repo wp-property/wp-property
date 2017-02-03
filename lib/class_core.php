@@ -211,7 +211,7 @@ class WPP_Core {
     if( defined( 'WPP_API_REGISTER_URL' ) && WPP_API_REGISTER_URL ) {
       $_api_url = WPP_API_REGISTER_URL;
     } else {
-      $_api_url = 'https://api.usabilitydynamics.com/product/property/site/register/v1';
+      $_api_url = 'https://api.usabilitydynamics.com/product/property/register/v1';
     }
 
     $args = array(
@@ -288,7 +288,7 @@ class WPP_Core {
     }
     $ud_site_id = get_site_option('ud_site_id');
     $ud_site_public_key = get_site_option('ud_site_public_key');
-    $url = 'https://api.usabilitydynamics.com/product/v1/site/update_settings';
+    $url = 'https://api.usabilitydynamics.com/product/property/settings/v1/update';
     $find = array( 'http://', 'https://' );
     $replace = '';
     $output = str_replace( $find, $replace, $site_url );
@@ -416,7 +416,6 @@ class WPP_Core {
     add_action( 'wp_ajax_wpp_ajax_revalidate_all_addresses', create_function( "", '  echo WPP_F::revalidate_all_addresses(); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_create_settings_backup', create_function( "", '  echo WPP_F::create_settings_backup(); die();' ) );
     add_action( 'wp_ajax_wpp_save_settings', create_function( "", ' die(WPP_F::save_settings());' ) );
-    add_action( 'wp_ajax_wpp_save_setup_settings', create_function( "", ' die(WPP_F::save_setup_settings());' ) );
     add_action( 'wp_ajax_wpp_save_freemius_settings', create_function( "", ' die(WPP_F::save_freemius_settings());' ) );
     add_action( 'wp_ajax_wpp_apply_default_value', create_function( "", ' die(WPP_F::apply_default_value());' ) );
     add_action( 'wp_ajax_wpp_ajax_print_wp_properties', create_function( "", ' global $wp_properties; print_r($wp_properties); die();' ) );

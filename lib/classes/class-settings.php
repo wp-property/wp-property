@@ -326,6 +326,12 @@ namespace UsabilityDynamics\WPP {
 
       }
 
+      static public function render_page() {
+
+        include ud_get_wp_property()->path("static/views/admin/settings.php", 'dir');
+
+      }
+
     }
 
   }

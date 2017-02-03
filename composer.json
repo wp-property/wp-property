@@ -32,10 +32,7 @@
     "usabilitydynamics/wp-meta-box": "4.5.2.1",
     "usabilitydynamics/wp-meta-box-utilities": "1.0.2",
     "UsabilityDynamics/wp-gallery-metabox": "2.0.1",
-    "usabilitydynamics/wp-rets-client": "0.2.3",
-    "wp-property/wp-property-supermap": "4.0.4",
-    "wp-property/wp-property-agents": "2.0.6",
-    "wp-property/wp-property-terms": "dev-latest",
+    "usabilitydynamics/wp-tax-post-binding": "2.0.5",
     "freemius/wordpress-sdk": "^1.1.7",
     "ccampbell/chromephp": "^4.1"
   },
@@ -175,7 +172,14 @@
         "constant": "WP_PROPERTY_FLAG_ENABLE_AGENTS",
         "description": "Enable Agent management.",
         "since": "2.2.1",
-        "enabled": true
+        "enabled": false
+      },
+      {
+        "name": "Enable Terms Feature",
+        "constant": "WP_PROPERTY_FLAG_ENABLE_TERMS",
+        "description": "Enable Terms management.",
+        "since": "2.2.1",
+        "enabled": false
       },
       {
         "name": "Enable Settings Search",

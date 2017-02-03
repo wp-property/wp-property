@@ -15,6 +15,8 @@
  * @author     team@UD
  * @copyright  2012 Usability Dyanmics, Inc.
  */
+global $wp_properties;
+
 
 $object_label = array(
   'singular' => WPP_F::property_label('singular'),
@@ -47,17 +49,20 @@ if (get_option('permalink_structure') == '') {
   $wrapper_classes[] = 'have_permalinks';
 }
 
+if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
+  UsabilityDynamics\WPP\Setup_Assistant::render_page();
+  return;
+}
+
 ?>
 <div class="wrap <?php echo implode(' ', $wrapper_classes); ?>">
 
 
 
-
-  <h2
-    class='wpp_settings_page_header'><?php echo ud_get_wp_property('labels.name') . ' ' . __('Settings', ud_get_wp_property()->domain) ?>
+  <h2 class='wpp_settings_page_header'><?php echo ud_get_wp_property('labels.name') . ' ' . __('Settings', ud_get_wp_property()->domain) ?>
 
     <?php  if( defined( 'WP_PROPERTY_SETUP_ASSISTANT' ) && WP_PROPERTY_SETUP_ASSISTANT ) { ?>
-      <a class="wpp-setup-asst" href="<?php echo admin_url('index.php?page=wpp-setup-page'); ?>">
+      <a class="wpp-setup-asst" href="<?php echo admin_url('edit.php?post_type=property&page=property_settings&splash=setup-assistant'); ?>">
         <?php echo __('Setup Assistant', ud_get_wp_property()->domain); ?>
       </a>
     <?php } ?>

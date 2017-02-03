@@ -30,19 +30,50 @@ namespace UsabilityDynamics\WPP {
        *
        * @author peshkov@UD
        */
-      public function boot() {
+      public function boot()
+      {
 
-        // Enable Supermap
-        if( defined( 'WP_PROPERTY_FLAG_ENABLE_SUPERMAP' ) && WP_PROPERTY_FLAG_ENABLE_SUPERMAP && !defined( 'WPP_SUPERMAP_VENDOR_LOAD' ) ) {
-          define( 'WPP_SUPERMAP_VENDOR_LOAD', true );
-        }
-        // Enable Agents
-        if( defined( 'WP_PROPERTY_FLAG_ENABLE_AGENTS' ) && WP_PROPERTY_FLAG_ENABLE_AGENTS && !defined( 'WPP_AGENTS_VENDOR_LOAD' )) {
-          define( 'WPP_AGENTS_VENDOR_LOAD', true );
-        }
+        // Take care about our features before plugins loaded!
+        $this->load_features();
 
       }
 
+      /**
+       * May be load WP-Property Features
+       *
+       * @TODO: Fix Flag conditions: constants are still not defined on this step.
+       *
+       * @author peshkov@UD
+       */
+      public function load_features()
+      {
+        // Autoload all our features
+        require_once ( dirname( __DIR__ ) . '/autoload/autoload.php' );
+
+        // Enable Supermap
+        //if( defined( 'WP_PROPERTY_FLAG_ENABLE_SUPERMAP' ) && WP_PROPERTY_FLAG_ENABLE_SUPERMAP && !defined( 'WPP_SUPERMAP_VENDOR_LOAD' ) ) {
+        if( !defined( 'WPP_SUPERMAP_VENDOR_LOAD' ) ) {
+          define( 'WPP_SUPERMAP_VENDOR_LOAD', true );
+        }
+        // Enable Agents
+        //if( defined( 'WP_PROPERTY_FLAG_ENABLE_AGENTS' ) && WP_PROPERTY_FLAG_ENABLE_AGENTS && !defined( 'WPP_AGENTS_VENDOR_LOAD' )) {
+        if( !defined( 'WPP_AGENTS_VENDOR_LOAD' )) {
+          define( 'WPP_AGENTS_VENDOR_LOAD', true );
+        }
+
+        // Enable Terms
+        //if( defined( 'WP_PROPERTY_FLAG_ENABLE_TERMS' ) && WP_PROPERTY_FLAG_ENABLE_TERMS && !defined( 'WPP_TERMS_VENDOR_LOAD' )) {
+        if( !defined( 'WPP_TERMS_VENDOR_LOAD' )) {
+          define( 'WPP_TERMS_VENDOR_LOAD', true );
+        }
+
+        // Enable RETS Client
+        //if( defined( 'RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET' ) && RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET && !defined( 'WP_RETS_CLIENT_VENDOR_LOAD' )) {
+        if( !defined( 'WP_RETS_CLIENT_VENDOR_LOAD' )) {
+          define( 'WP_RETS_CLIENT_VENDOR_LOAD', true );
+        }
+
+      }
 
       /**
        * Instantaite class.

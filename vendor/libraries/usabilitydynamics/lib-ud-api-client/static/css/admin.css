@@ -89,8 +89,8 @@
   background: linear-gradient(to bottom, #ff3019 0%, #cf0404 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff3019', endColorstr='#cf0404', GradientType=0);
   border: 3px solid #b60404;
-  -webkit-box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), 0 0 0 0.618em #eee;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), 0 0 0 0.618em #eee;
+  -webkit-box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), 0 0 0 0.618em #eeeeee;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), 0 0 0 0.618em #eeeeee;
 }
 .ud-licenses-wrap .panic-button-wrap a:hover:before {
   background: #ff4635;

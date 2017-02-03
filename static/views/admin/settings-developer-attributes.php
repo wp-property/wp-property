@@ -36,12 +36,18 @@ $predefined_values = isset( $wp_properties[ 'predefined_values' ] ) ? $wp_proper
   if(empty($wp_properties[ 'property_stats' ])){
 	  $wp_properties[ 'property_stats' ] = array("" => "");
   }
+
+  if( !isset( $wp_properties[ 'property_groups' ] ) ) {
+    $wp_properties[ 'property_groups' ] = array();
+  }
+
   foreach( $wp_properties[ 'property_stats' ] as $slug => $label ): ?>
     <?php $gslug = false; ?>
     <?php $group = false; ?>
     <?php if( !empty( $wp_properties[ 'property_stats_groups' ][ $slug ] ) ) : ?>
       <?php $gslug = $wp_properties[ 'property_stats_groups' ][ $slug ]; ?>
-      <?php $group = $wp_properties[ 'property_groups' ][ $gslug ]; ?>
+
+      <?php $group = isset( $wp_properties[ 'property_groups' ][ $gslug ] ) ? $wp_properties[ 'property_groups' ][ $gslug ] : ''; ?>
     <?php endif; 
 		
 	?>
