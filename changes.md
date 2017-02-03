@@ -1,4 +1,5 @@
 ### 2.2.1 
+* Added API actions to generate and remove demo listing data, fetched from API.
 * Configured Setup Assistant to load configuration schema from API, setting up default attributes, groups and property types.
 * Added [wpp::localization::instance] filter to customizer/extend the [wpp] variable.
 * Removed WPP_F::register_property_page_url and WPP_F::register_property_single_url.
