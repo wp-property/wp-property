@@ -118,7 +118,7 @@ if (get_option('permalink_structure') == '') {
                 <li class="configuration_enable_comments"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][enable_comments]&label=" . __('Enable comments', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['enable_comments']) ? $wp_properties['configuration']['enable_comments'] : false)); ?></li>
                 <li class="configuration_enable_revisions" data-feature-since="2.0.0"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][enable_revisions]&label=" . __('Enable revisions', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['enable_revisions']) ? $wp_properties['configuration']['enable_revisions'] : false)); ?></li>
 
-                <?php if( defined( 'WP_PROPERTY_LAYOUTS' ) && WP_PROPERTY_LAYOUTS ) { ?>
+                <?php if( defined( 'WP_PROPERTY_LAYOUTS' ) && WP_PROPERTY_LAYOUTS === true ) { ?>
                 <li class="configuration_enable_layouts" data-feature-since="2.2.1"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][enable_layouts]&label=" . __('Disable layouts', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['enable_layouts']) ? $wp_properties['configuration']['enable_layouts'] : false)); ?></li>
                 <?php } ?>
 
