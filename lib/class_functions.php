@@ -223,8 +223,8 @@ class WPP_F extends UsabilityDynamics\Utility
         );
       }
 
-      if (defined('WP_PROPERTY_FLAG_WPP_FLAGS') && WP_PROPERTY_FLAG_WPP_FLAGS ) {
-        $taxonomies['wpp_flags'] = array(
+      if (defined('WP_PROPERTY_FLAG_LISTING_HIGHLIGHTS') && WP_PROPERTY_FLAG_LISTING_HIGHLIGHTS ) {
+        $taxonomies['wpp_highlights'] = array(
           'default' => true,
           'readonly' => true,
           'hidden' => true,
