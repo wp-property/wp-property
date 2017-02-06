@@ -82,7 +82,7 @@
     "featureFlags": [
       {
         "name": "Listing Highlights",
-        "constant": "WP_PROPERTY_FLAG_LISTING_HIGHLIGHTS",
+        "constant": "WP_PROPERTY_FLAG_LISTING_LABELS",
         "description": "Property flags, for highlighting important information, stored in [wpp_highlights]. Can be used to identify 'featured' properties.",
         "since": "2.2.1",
         "enabled": true
