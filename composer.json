@@ -45,18 +45,22 @@
   },
   "archive": {
     "exclude": [
+      ".gitignore",
+      ".scrutinizer.yml",
       "alpha.php",
       "beta.php",
       "build.sh",
       "makefile",
       "node_modules",
-      ".gitignore",
       "test",
       "static/cache",
       "static/wiki",
       "circle.yml",
       "composer.lock",
       "gruntfile.js",
+      "vendor/libraries/usabilitydynamics/lib-ui/static/scripts/src/",
+      "vendor/libraries/usabilitydynamics/lib-ui/static/scripts/editor",
+      "vendor/libraries/usabilitydynamics/lib-utility/scripts/src/",
       "package.json"
     ]
   },
