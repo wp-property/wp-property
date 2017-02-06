@@ -189,6 +189,13 @@
         "enabled": false
       },
       {
+        "name": "Standard Attributes Matching and Terms",
+        "constant": "WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING",
+        "description": "Enable Standard Attributes Matching and Terms.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
         "name": "RETS Client Dashboard Widget",
         "constant": "RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET",
         "description": "Dashboard widget for wp-rets-client, shows stats.",

@@ -30,7 +30,10 @@ if (isset($_REQUEST['message'])) {
   switch ($_REQUEST['message']) {
     case 'updated':
       $wp_messages['notice'][] = __("Settings updated.", ud_get_wp_property()->domain);
-      break;
+    break;
+    case 'restored':
+      $wp_messages['notice'][] = __("Settings restored from backup.", ud_get_wp_property()->domain);
+    break;
   }
 }
 
@@ -345,13 +348,16 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
                     <span
                       class="description"><?php _e('Enabling this option may cause performance issues.', ud_get_wp_property()->domain); ?></span>
                   </li>
+
+
+                  <?php if( defined( 'WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING' ) && WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING ) { ?>
                   <li>
                     <?php //show standard attribute matching
                     echo WPP_F::checkbox("name=wpp_settings[configuration][show_advanced_options]&label=" . __('Enable Standard Attributes Matching and Terms', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['show_advanced_options']) ? $wp_properties['configuration']['show_advanced_options'] : false)); ?>
-                    <i class="description wpp-notice-for-match"
-                       title="<?php _e('This option is designed to help us find which attribute you want to show as Price, Address, etc and place it in correct place in our templates.', ud_get_wp_property()->domain); ?>">
-                      ? </i>
+                    <i class="description wpp-notice-for-match" title="<?php _e('This option is designed to help us find which attribute you want to show as Price, Address, etc and place it in correct place in our templates.', ud_get_wp_property()->domain); ?>"></i>
                   </li>
+                  <?php } ?>
+
                   <li>
                     <?php echo WPP_F::checkbox("name=wpp_settings[configuration][pre_release_update]&label=" . __('Enable pre-release updates.', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['pre_release_update']) ? $wp_properties['configuration']['pre_release_update'] : false)); ?>
                     <br/>

@@ -627,18 +627,26 @@ class WPP_F extends UsabilityDynamics\Utility
   static public function debug($text = false, $detail = null)
   {
 
+
     global $wp_properties;
 
-    if (!isset($wp_properties['configuration']['developer_mode']) || $wp_properties['configuration']['developer_mode'] != 'true') {
-      return false;
+    $_debug = false;
+
+    if( defined( 'WP_DEBUG' ) && WP_DEBUG && defined( 'WP_DEBUG_DISPLAY' ) && WP_DEBUG_DISPLAY ) {
+      $_debug = true;
     }
 
-    if( class_exists( '\ChromePhp' ) ) {
+    if ( !$_debug && ( !isset($wp_properties['configuration']['developer_mode']) || $wp_properties['configuration']['developer_mode'] !== 'true') ) {
+      $_debug = false;
+    }
+
+    if($_debug && class_exists( '\ChromePhp' ) ) {
       ChromePhp::log( '[wp-property]', $text, $detail );
-      return;
+      return true;
     }
 
-    return true;
+    return false;
+
   }
 
   /**
@@ -2792,6 +2800,7 @@ class WPP_F extends UsabilityDynamics\Utility
    */
   static public function create_settings_backup()
   {
+    global $wp_properties;
     //save backup
 
 
@@ -3009,7 +3018,7 @@ class WPP_F extends UsabilityDynamics\Utility
           // Handle core settings ( legacy support )
           if ($option_key == 'wpp_settings') {
             //** Allow features to preserve their settings that are not configured on the settings page */
-            $data = apply_filters('wpp_settings_save', $data, $wp_properties);
+
             //** Prevent removal of featured settings configurations if they are not present */
             if (!empty($wp_properties['configuration']['feature_settings'])) {
               foreach ($wp_properties['configuration']['feature_settings'] as $feature_type => $preserved_settings) {
@@ -3018,6 +3027,19 @@ class WPP_F extends UsabilityDynamics\Utility
                 }
               }
             }
+
+            foreach( $wp_properties as $_suboption_key  => $_suboption_data ) {
+              // WPP_F::debug( "Checking [$_suboption_key]/" );
+
+              if( !isset( $data[ $_suboption_key ] ) ) {
+                WPP_F::debug( "Preserving [$_suboption_key]." );
+                $data[ $_suboption_key ] = $wp_properties[ $_suboption_key ] ;
+              }
+
+            }
+
+            $data = apply_filters('wpp_settings_save', $data, $wp_properties);
+
           }
 
           update_option($option_key, $data);
@@ -3028,12 +3050,11 @@ class WPP_F extends UsabilityDynamics\Utility
         //** The filters below will be ran on reload, but the saving functions won't */
         if ($_REQUEST['page'] == 'property_settings') {
           unset($_REQUEST);
-          wp_redirect(admin_url("edit.php?post_type=property&page=property_settings&message=updated"));
+          wp_redirect(admin_url("edit.php?post_type=property&page=property_settings&message=restored"));
           exit;
         }
 
       }
-
 
     }
 
