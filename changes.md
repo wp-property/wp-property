@@ -1,4 +1,5 @@
 ### 2.2.1 
+* Disabled legacy "on-the-fly" image regeneration.
 * Added wp-json / wp-rest support to wp-rest-client as an alternative to XML-RPC requests.
 * Added support for single-value taxonomies to be treated as standard meta attributes for display purposes.
 * Added option to export only the attribute fields, groups and property types.

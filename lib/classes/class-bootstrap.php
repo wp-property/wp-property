@@ -48,29 +48,29 @@ namespace UsabilityDynamics\WPP {
       public function load_features()
       {
         // Autoload all our features
-        require_once(dirname(__DIR__) . '/autoload/autoload.php');
+        require_once ( dirname( __DIR__ ) . '/autoload/autoload.php' );
 
         // Enable Supermap
         //if( defined( 'WP_PROPERTY_FLAG_ENABLE_SUPERMAP' ) && WP_PROPERTY_FLAG_ENABLE_SUPERMAP && !defined( 'WPP_SUPERMAP_VENDOR_LOAD' ) ) {
-        if (!defined('WPP_SUPERMAP_VENDOR_LOAD')) {
-          define('WPP_SUPERMAP_VENDOR_LOAD', true);
+        if( !defined( 'WPP_SUPERMAP_VENDOR_LOAD' ) ) {
+          define( 'WPP_SUPERMAP_VENDOR_LOAD', true );
         }
         // Enable Agents
         //if( defined( 'WP_PROPERTY_FLAG_ENABLE_AGENTS' ) && WP_PROPERTY_FLAG_ENABLE_AGENTS && !defined( 'WPP_AGENTS_VENDOR_LOAD' )) {
-        if (!defined('WPP_AGENTS_VENDOR_LOAD')) {
-          define('WPP_AGENTS_VENDOR_LOAD', true);
+        if( !defined( 'WPP_AGENTS_VENDOR_LOAD' )) {
+          define( 'WPP_AGENTS_VENDOR_LOAD', true );
         }
 
         // Enable Terms
         //if( defined( 'WP_PROPERTY_FLAG_ENABLE_TERMS' ) && WP_PROPERTY_FLAG_ENABLE_TERMS && !defined( 'WPP_TERMS_VENDOR_LOAD' )) {
-        if (!defined('WPP_TERMS_VENDOR_LOAD')) {
-          define('WPP_TERMS_VENDOR_LOAD', true);
+        if( !defined( 'WPP_TERMS_VENDOR_LOAD' )) {
+          define( 'WPP_TERMS_VENDOR_LOAD', true );
         }
 
         // Enable RETS Client
         //if( defined( 'RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET' ) && RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET && !defined( 'WP_RETS_CLIENT_VENDOR_LOAD' )) {
-        if (!defined('WP_RETS_CLIENT_VENDOR_LOAD')) {
-          define('WP_RETS_CLIENT_VENDOR_LOAD', true);
+        if( !defined( 'WP_RETS_CLIENT_VENDOR_LOAD' )) {
+          define( 'WP_RETS_CLIENT_VENDOR_LOAD', true );
         }
 
       }
@@ -81,6 +81,9 @@ namespace UsabilityDynamics\WPP {
       public function init()
       {
         global $wp_properties;
+
+        // Parse feature falgs, set constants.
+        $this->parse_feature_flags();
 
         add_action('admin_head', function () {
           global $wp_properties, $_wp_admin_css_colors;
@@ -299,76 +302,74 @@ namespace UsabilityDynamics\WPP {
        * @author potanin@UD
        * @return array|mixed
        */
-      static public function get_update_check_result()
-      {
+      static public function get_update_check_result() {
 
-        if (get_site_transient('wpp_product_updates') && !isset($_GET['force-check'])) {
+        if( get_site_transient( 'wpp_product_updates' ) && !isset( $_GET['force-check'] ) ) {
 
-          $_transient = get_site_transient('wpp_product_updates');
+          $_transient = get_site_transient( 'wpp_product_updates' );
 
-          if (is_array($_transient)) {
+          if( is_array( $_transient ) ) {
             return $_transient;
           }
 
         }
 
-        $_products = array('wp-property' => 'wp-property/wp-property.php');
+        $_products = array( 'wp-property' => 'wp-property/wp-property.php' );
 
-        foreach ($_products as $_product_name => $_product_path) {
+        foreach( $_products as $_product_name => $_product_path ) {
 
           try {
 
             // Must be able to parse composer.json from plugin file, hopefully to detect the "_build.sha" field.
-            $_composer = json_decode(@file_get_contents(trailingslashit(WPP_Path) . '/composer.json'));
+            $_composer = json_decode( @file_get_contents(  trailingslashit( WPP_Path ) .'/composer.json' )  );
 
-            if (is_object($_composer) && $_composer->extra && isset($_composer->extra->_build) && !isset($_composer->extra->_build->sha)) {
+            if( is_object( $_composer ) && $_composer->extra && isset( $_composer->extra->_build ) && !isset( $_composer->extra->_build->sha ) ) {
 
               continue;
             }
 
-            if (is_object($_composer) && $_composer->extra && isset($_composer->extra->_build) && isset($_composer->extra->_build->sha)) {
+            if( is_object( $_composer ) && $_composer->extra && isset( $_composer->extra->_build ) && isset( $_composer->extra->_build->sha ) ) {
               $_version = $_composer->extra->_build->sha;
             } else {
               $_version = null;
             }
 
-            $_detail[$_product_name] = array(
-              'request_url' => 'https://api.usabilitydynamics.com/v1/product/updates/' . $_product_name . '/latest/?version=' . (isset($_version) ? $_version : ''),
+            $_detail[ $_product_name ] = array(
+              'request_url' => 'https://api.usabilitydynamics.com/v1/product/updates/' . $_product_name . '/latest/?version=' . ( isset( $_version ) ? $_version : '' ),
               'product_path' => $_product_path,
               'response' => null,
-              'have_update' => isset($_composer->extra->_build->sha) ? null : false
+              'have_update' => isset( $_composer->extra->_build->sha ) ? null : false
             );
 
 
-            $_response = wp_remote_get($_detail[$_product_name]['request_url']);
+            $_response = wp_remote_get( $_detail[ $_product_name ]['request_url'] );
 
-            if (wp_remote_retrieve_response_code($_response) === 200) {
-              $_body = wp_remote_retrieve_body($_response);
-              $_body = json_decode($_body);
+            if( wp_remote_retrieve_response_code( $_response ) === 200 ) {
+              $_body = wp_remote_retrieve_body( $_response );
+              $_body = json_decode( $_body );
 
-              if (isset($_body->data)) {
-                $_detail[$_product_name]['response'] = $_body->data;
+              if( isset( $_body->data )) {
+                $_detail[ $_product_name ]['response'] = $_body->data;
 
-                if (!$_body->data->changesSince || $_body->data->changesSince > 0) {
-                  $_detail[$_product_name]['have_update'] = true;
+                if( !$_body->data->changesSince || $_body->data->changesSince > 0 )  {
+                  $_detail[ $_product_name ]['have_update'] = true;
                 }
 
               } else {
-                $_detail[$_product_name]['response'] = null;
-                $_detail[$_product_name]['have_update'] = false;
+                $_detail[ $_product_name ]['response'] = null;
+                $_detail[ $_product_name ]['have_update'] = false;
               }
             }
 
-          } catch (\Exception $e) {
-          }
+          } catch ( \Exception $e ) {}
 
         }
 
-        if (isset($_detail)) {
-          $_transient_result = set_site_transient('wpp_product_updates', array('data' => $_detail, 'cached' => true), 3600);
+        if( isset( $_detail ) ) {
+          $_transient_result = set_site_transient( 'wpp_product_updates', array( 'data' => $_detail, 'cached' => true ), 3600 );
         }
 
-        return array('data' => isset($_detail) ? $_detail : null, 'cached' => false, 'transient_result' => isset($_transient_result) ? $_transient_result : 0);
+        return array( 'data' => isset( $_detail ) ? $_detail : null, 'cached' => false, 'transient_result' => isset( $_transient_result ) ? $_transient_result : 0 );
 
       }
 
@@ -376,9 +377,8 @@ namespace UsabilityDynamics\WPP {
        * @param $response
        * @param null $old_value
        */
-      static public function upgrader_process_complete($response, $old_value = null)
-      {
-        delete_site_transient('wpp_product_updates');
+      static public function upgrader_process_complete($response, $old_value = null) {
+        delete_site_transient( 'wpp_product_updates' );
       }
 
       /**
@@ -408,9 +408,9 @@ namespace UsabilityDynamics\WPP {
 
         $_ud_get_product_updates = self::get_update_check_result();
 
-        foreach ((array)$_ud_get_product_updates['data'] as $_product_short_name => $_product_detail) {
-          if ($_product_detail['have_update']) {
-            $response->response[$_product_detail['product_path']] = $_product_detail['response'];
+        foreach( (array) $_ud_get_product_updates['data']  as $_product_short_name => $_product_detail ) {
+          if( $_product_detail['have_update'] ) {
+            $response->response[ $_product_detail['product_path'] ] = $_product_detail['response'];
           }
 
         }
@@ -438,10 +438,10 @@ namespace UsabilityDynamics\WPP {
             // throw new Error( "unable to parse."  );
           }
 
-          if (isset($_parsed) && isset($_parsed->extra) && isset($_parsed->extra->featureFlags)) {
-            foreach ((array)$_parsed->extra->featureFlags as $_feature) {
-              if (!defined($_feature->constant)) {
-                define($_feature->constant, $_feature->enabled);
+          if( isset( $_parsed ) && isset( $_parsed->extra ) && isset( $_parsed->extra->featureFlags )) {
+            foreach( (array)$_parsed->extra->featureFlags as $_feature ) {
+              if( !defined( $_feature->constant ) ) {
+                define( $_feature->constant, $_feature->enabled );
               }
             }
           }
@@ -465,8 +465,8 @@ namespace UsabilityDynamics\WPP {
             return array();
           }
 
-          if (isset($_parsed) && isset($_parsed->extra) && isset($_parsed->extra->featureFlags)) {
-            return (array)$_parsed->extra->featureFlags;
+          if( isset( $_parsed ) && isset( $_parsed->extra ) && isset( $_parsed->extra->featureFlags )) {
+            return (array) $_parsed->extra->featureFlags;
           }
 
         } catch (Exception $e) {
