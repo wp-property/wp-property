@@ -46,7 +46,7 @@ namespace UsabilityDynamics\WPP {
            *
            */
           $this->api_client = new Layouts_API_Client(array(
-            'url' => 'https://api.usabilitydynamics.com/property/layouts/v1/'
+            'url' => defined('UD_API_LAYOUTS_URL') ? UD_API_LAYOUTS_URL : 'https://api.usabilitydynamics.com/property/layouts/v1'
           ));
         }
       }
@@ -233,6 +233,10 @@ namespace UsabilityDynamics\WPP {
 
         $this->preload_layouts();
         $layouts = get_option('wpp_available_layouts', false);
+        echo '<pre>';
+        print_r($layouts);
+        echo '</pre>';
+        die();
         $local_layouts = get_option('wpp_available_local_layouts', false);
         $overview_layouts = $layouts['single-property-term'];
         $single_layouts = $layouts['single-property'];
