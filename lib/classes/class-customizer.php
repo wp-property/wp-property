@@ -233,10 +233,6 @@ namespace UsabilityDynamics\WPP {
 
         $this->preload_layouts();
         $layouts = get_option('wpp_available_layouts', false);
-        echo '<pre>';
-        print_r($layouts);
-        echo '</pre>';
-        die();
         $local_layouts = get_option('wpp_available_local_layouts', false);
         $overview_layouts = $layouts['single-property-term'];
         $single_layouts = $layouts['single-property'];
