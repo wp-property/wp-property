@@ -42,6 +42,10 @@ namespace UsabilityDynamics\WPRETSC {
         // Add custom XML-RPC methods
         add_filter( 'xmlrpc_methods', array( $this, 'xmlrpc_methods' ) );
 
+        // REST API
+        add_action( 'rest_api_init', array( $this, 'api_init' ), 100 );
+
+
       }
 
       /**
@@ -62,6 +66,40 @@ namespace UsabilityDynamics\WPRETSC {
       }
 
       /**
+       * Initialize REST routes for our internal XML-RPC routes.
+       *
+       * @author potanin@UD
+       */
+      public function api_init( ) {
+
+        register_rest_route( 'wp-rets-client/v1', '/systemCheck', array(
+          'methods' => 'GET',
+          'callback' => array( $this, 'rpc_system_check' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/deleteProperty', array(
+          'methods' => 'DELETE',
+          'callback' => array( $this, 'rpc_delete_property' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/editProperty', array(
+          'methods' => 'POST',
+          'callback' => array( $this, 'rpc_edit_property' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/removeDuplicates', array(
+          'methods' => 'POST',
+          'callback' => array( $this, 'rpc_remove_duplicated_mls' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/getHistogram', array(
+          'methods' => 'GET',
+          'callback' => array( $this, 'rpc_get_modified_histogram' ),
+        ) );
+
+      }
+
+      /**
        * Parse XML-RPC request
        * Make sure credentials are valid.
        * @param null $args
@@ -73,10 +111,31 @@ namespace UsabilityDynamics\WPRETSC {
 
         // Do nothing for non-xmlrpc.
         if( !defined( 'XMLRPC_REQUEST' ) || ( defined( 'XMLRPC_REQUEST' ) && !XMLRPC_REQUEST ) ) {
+
+
+          if( is_callable( array( $args, 'get_json_params' ) ) ) {
+
+            if( !self::token_login( $_SERVER[ 'HTTP_X_ACCESS_USER' ], $_SERVER[ 'HTTP_X_ACCESS_PASSWORD' ] ) ) {
+
+              return array(
+                'ok' => false,
+                'error' => "Unable to login.",
+                'username' => $_SERVER[ 'HTTP_X_ACCESS_USER' ],
+                'password' => $_SERVER[ 'HTTP_X_ACCESS_PASSWORD' ],
+              );
+
+            }
+
+            return $args->get_json_params();
+          }
+
           return wp_parse_args( $_REQUEST, $defaults ? $defaults : array() );
+
         }
 
-        $wp_xmlrpc_server->escape( $args );
+        if( isset( $wp_xmlrpc_server ) ) {
+          $wp_xmlrpc_server->escape( $args );
+        }
 
         // @note Shouldn't this be done automatically elsewhere?
         if( $args[0] && (int)$args[0] !== 1 ) {
@@ -112,6 +171,7 @@ namespace UsabilityDynamics\WPRETSC {
        */
       static public function token_login( $site_id = null, $secret_token = null ) {
         global $wp_xmlrpc_server;
+
         if( !$site_id || !$secret_token ) {
           return false;
         }
@@ -120,10 +180,14 @@ namespace UsabilityDynamics\WPRETSC {
           return false;
         }
 
-
         if( $site_id === get_site_option( 'ud_site_id' ) && $secret_token === get_site_option( 'ud_site_secret_token' ) ) {
-          $wp_xmlrpc_server->error = null;
+
+          if( isset ( $wp_xmlrpc_server ) ) {
+            $wp_xmlrpc_server->error = null;
+          }
+
           return true;
+
         }
 
         return false;
@@ -203,14 +267,13 @@ namespace UsabilityDynamics\WPRETSC {
         global $wp_xmlrpc_server;
 
         $post_data = self::parseRequest( $args );
-        if( !empty( $wp_xmlrpc_server->error ) ) {
+
+        if( isset( $wp_xmlrpc_server ) && !empty( $wp_xmlrpc_server->error ) ) {
           return $post_data;
         }
 
-
-      //ud_get_wp_rets_client()->write_log( 'data' . print_r( $post_data, true ) );
-
         ud_get_wp_rets_client()->write_log( 'Have request wpp.editProperty request' );
+
 
         if( isset( $post_data[ 'meta_input' ][ 'rets_id' ] ) ) {
           $post_data[ 'meta_input' ][ 'wpp::rets_pk' ] = $post_data[ 'meta_input' ][ 'rets_id' ];

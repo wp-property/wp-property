@@ -84,7 +84,31 @@ class WPP_Core {
     if( defined( 'WP_PROPERTY_FIELD_ALIAS' ) && WP_PROPERTY_FIELD_ALIAS ) {
       add_filter( 'wpp_get_property', array( $this, 'apply_property_alias' ), 50, 2 );
       add_filter( 'wpp_get_properties_query', array( $this, 'apply_properties_query_alias' ), 50 );
+      // add_filter( 'get_post_metadata', array( $this, 'alias_get_post_metadata' ), 50, 4 );
     }
+
+  }
+
+  /**
+   * Direct Meta Override
+   *
+   * @param $false
+   * @param $object_id
+   * @param $meta_key
+   * @param $single
+   * @return mixed
+   */
+  static public function alias_get_post_metadata( $false, $object_id, $meta_key, $single ) {
+
+    if( $meta_key === 'short_address' ) {
+      return get_post_meta( $object_id, 'formatted_address_simple', $single );
+    }
+
+    if( $meta_key === 'address' ) {
+      return get_post_meta( $object_id, 'formatted_address', $single );
+    }
+
+    return $false;
 
   }
 
