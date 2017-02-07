@@ -426,10 +426,13 @@ namespace UsabilityDynamics\WPP {
        * @return string|void
        * @internal param $title
        */
-      public function get_column_title_label( $post ) {
+      public function get_column_title_label( $title, $post ) {
         $title = get_the_title( $post );
-        if( empty( $title ) )
+
+        if( empty( $title ) ) {
           $title = __( '(no name)' );
+        }
+
         return $title;
       }
 
