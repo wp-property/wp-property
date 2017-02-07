@@ -5,6 +5,7 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use WPP_F;
   if( !class_exists( 'UsabilityDynamics\WPP\List_Table' ) ) {
 
     class List_Table extends \UsabilityDynamics\WPLT\WP_List_Table {
@@ -21,9 +22,9 @@ namespace UsabilityDynamics\WPP {
 
         $this->args = wp_parse_args( $args, array(
           //singular name of the listed records
-          'singular' => \WPP_F::property_label(),
+          'singular' => WPP_F::property_label(),
           //plural name of the listed records
-          'plural' => \WPP_F::property_label( 'plural' ),
+          'plural' => WPP_F::property_label( 'plural' ),
           // Post Type
           'post_type' => 'property',
           'orderby' => 'ID',
@@ -80,7 +81,9 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * Determines if orderby values are numeric.
-       *
+       * @param $bool
+       * @param $column
+       * @return bool
        */
       public function is_numeric_column( $bool, $column ) {
         $types = ud_get_wp_property( 'admin_attr_fields', array() );

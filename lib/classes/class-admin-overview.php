@@ -6,6 +6,8 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use UsabilityDynamics\UI;
+
   if (!class_exists('UsabilityDynamics\WPP\Admin_Overview')) {
 
     /**
@@ -38,7 +40,7 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties, $submenu;
 
         /* Add submenu page using already existing UI for overview page */
-        $this->page = new \UsabilityDynamics\UI\Page( 'edit.php?post_type=property', $this->get( 'labels.all_items' ), $this->get( 'labels.all_items' ), 'edit_wpp_properties', 'all_properties' );
+        $this->page = new UI\Page( 'edit.php?post_type=property', $this->get( 'labels.all_items' ), $this->get( 'labels.all_items' ), 'edit_wpp_properties', 'all_properties' );
 
         add_action( 'load-' . $this->page->screen_id, array( $this, 'preload' ) );
         /* Register meta boxes */
