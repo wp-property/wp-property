@@ -678,7 +678,7 @@ class WPP_F extends UsabilityDynamics\Utility
   {
     global $wp_properties;
 
-    self::debug( $text );
+    self::debug($text);
     return;
 
     if (!isset($wp_properties['configuration']['developer_mode']) || $wp_properties['configuration']['developer_mode'] != 'true') {
@@ -1454,6 +1454,50 @@ class WPP_F extends UsabilityDynamics\Utility
   }
 
   /**
+<<<<<<< HEAD
+=======
+   * Default property page url
+   *
+   * author Den@UD
+   */
+  static public function register_property_page_url()
+  {
+    global $wpdb, $wp_properties;
+
+    $base_slug = $wp_properties['configuration']['base_slug'];
+
+    if (empty($wp_properties['configuration']['base_property_url']) || $wp_properties['configuration']['base_property_url'] == '') {
+      //** Check if this page actually exists */
+      $post_id = $wpdb->get_var("SELECT ID FROM {$wpdb->posts} WHERE post_name = '{$base_slug}'");
+
+      $post_url = get_permalink($post_id);
+
+      $wp_properties['configuration']['base_property_url'] = $post_url;
+      update_option('wpp_settings', $wp_properties);
+    }
+
+  }
+
+  /**
+   * Default property page url
+   *
+   * author Den@UD
+   */
+  static public function register_property_single_url()
+  {
+    global $wp_properties;
+    if (empty($wp_properties['configuration']['base_property_single_url']) || $wp_properties['configuration']['base_property_single_url'] == '') {
+      $properties = get_posts(array('post_type' => 'property'));
+      $post_id = $properties[0]->ID;
+      $post_url = get_permalink($post_id);
+
+      $wp_properties['configuration']['base_property_single_url'] = $post_url;
+      update_option('wpp_settings', $wp_properties);
+    }
+  }
+
+  /**
+>>>>>>> origin/layouts-customizer
    * Perform WPP related things when a post is being deleted
    *
    * Makes sure all attached files and images get deleted.
@@ -3535,7 +3579,7 @@ class WPP_F extends UsabilityDynamics\Utility
     $query = apply_filters('wpp_get_properties_query', $query);
 
     //WPP_F::console_log("get_properties() args: {$log}");
-    WPP_F::debug("get_properties()", array( 'query' => $query, 'args' => $args )  );
+    WPP_F::debug("get_properties()", array('query' => $query, 'args' => $args));
 
     $query_keys = array_keys((array)$query);
 
