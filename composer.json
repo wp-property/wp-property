@@ -58,9 +58,15 @@
       "circle.yml",
       "composer.lock",
       "gruntfile.js",
-      "vendor/libraries/usabilitydynamics/lib-ui/static/scripts/src/",
+      "vendor/libraries/usabilitydynamics/lib-ui/static/scripts/src",
       "vendor/libraries/usabilitydynamics/lib-ui/static/scripts/editor",
-      "vendor/libraries/usabilitydynamics/lib-utility/scripts/src/",
+      "vendor/libraries/usabilitydynamics/lib-ui/static/styles/src",
+      "vendor/libraries/usabilitydynamics/lib-ui/static/test",
+      "vendor/libraries/usabilitydynamics/lib-ui/static/examples",
+      "vendor/libraries/usabilitydynamics/lib-ud-api-client/static/css/src",
+      "vendor/libraries/usabilitydynamics/lib-settings/test",
+      "vendor/libraries/usabilitydynamics/lib-utility/test",
+      "vendor/libraries/usabilitydynamics/lib-utility/scripts/src",
       "package.json"
     ]
   },
