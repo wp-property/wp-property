@@ -271,7 +271,7 @@ var updateRowNames = function(instance, allowRandomSlug) {
 
   var this_row = jQuery(instance).parents('tr.wpp_dynamic_table_row');
   // Slug of row in question
-  var old_slug = jQuery(this_row).attr('slug');
+  var old_slug = jQuery(this_row).attr('data-slug') || jQuery(this_row).attr('slug');
   // Get data from input.slug_setter
   var new_slug = jQuery(instance).val();
 

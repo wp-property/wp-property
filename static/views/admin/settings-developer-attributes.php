@@ -68,7 +68,7 @@ $predefined_values = isset( $wp_properties[ 'predefined_values' ] ) ? $wp_proper
 
             <?php if( defined( 'WP_PROPERTY_FIELD_ALIAS' ) && WP_PROPERTY_FIELD_ALIAS ) { ?>
             <label class="wpp-meta-alias-entry">
-              <input type="text" class="slug wpp_field_alias" name="wpp_settings[field_alias][<?php echo $slug; ?>]" placeholder="<?php echo $slug; ?>" value="<?php echo WPP_F::get_alias_map( $slug ) ; ?>" />
+              <input type="text" class="slug wpp_field_alias" name="wpp_settings[field_alias][<?php echo $slug; ?>]" placeholder="Alias for <?php echo $slug; ?>" value="<?php echo WPP_F::get_alias_map( $slug ) ; ?>" />
             </label>
             <?php } ?>
 
@@ -84,10 +84,7 @@ $predefined_values = isset( $wp_properties[ 'predefined_values' ] ) ? $wp_proper
             <?php endif; ?>
           <?php
           // BEGIN : code for standard attributes
-          if(isset($wp_properties[ 'configuration' ][ 'show_advanced_options' ]) && $wp_properties[ 'configuration' ][ 'show_advanced_options' ]=="true"){
-            // merge std_attr  if need to use all attributes as a single array
-//            $merged_std_attributes = array_unique(call_user_func_array('array_merge', $wp_properties[ 'prop_std_att' ]),SORT_REGULAR);
-            ?>
+          if( defined( 'WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING' ) && WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING && isset($wp_properties[ 'configuration' ][ 'show_advanced_options' ]) && $wp_properties[ 'configuration' ][ 'show_advanced_options' ] === "true" ) { ?>
             <p class="wpp-std-att-cont">
               <label>
                   <a class="wpp-toggle-std-attr">  <?php _e( 'Match standard attribute', ud_get_wp_property()->domain ); ?></a>

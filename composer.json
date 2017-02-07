@@ -45,18 +45,28 @@
   },
   "archive": {
     "exclude": [
+      ".gitignore",
+      ".scrutinizer.yml",
       "alpha.php",
       "beta.php",
       "build.sh",
       "makefile",
       "node_modules",
-      ".gitignore",
       "test",
       "static/cache",
       "static/wiki",
       "circle.yml",
       "composer.lock",
       "gruntfile.js",
+      "vendor/libraries/usabilitydynamics/lib-ui/static/scripts/src",
+      "vendor/libraries/usabilitydynamics/lib-ui/static/scripts/editor",
+      "vendor/libraries/usabilitydynamics/lib-ui/static/styles/src",
+      "vendor/libraries/usabilitydynamics/lib-ui/static/test",
+      "vendor/libraries/usabilitydynamics/lib-ui/static/examples",
+      "vendor/libraries/usabilitydynamics/lib-ud-api-client/static/css/src",
+      "vendor/libraries/usabilitydynamics/lib-settings/test",
+      "vendor/libraries/usabilitydynamics/lib-utility/test",
+      "vendor/libraries/usabilitydynamics/lib-utility/scripts/src",
       "package.json"
     ]
   },
@@ -77,9 +87,9 @@
     },
     "featureFlags": [
       {
-        "name": "Featured Flags",
-        "constant": "WP_PROPERTY_FLAG_WPP_FLAGS",
-        "description": "Property flags, for highlighting important information, stored in [wpp_flags]. Can be used to identify 'featured' properties.",
+        "name": "Listing Labels",
+        "constant": "WP_PROPERTY_FLAG_WPP_LABEL",
+        "description": "Property flags, for highlighting important information, stored in [wpp_label]. Can be used to identify 'featured' properties.",
         "since": "2.2.1",
         "enabled": true
       },
@@ -185,6 +195,20 @@
         "name": "Enable Settings Search",
         "constant": "WP_PROPERTY_SETTINGS_SEARCH",
         "description": "Search settings.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Standard Attributes Matching and Terms",
+        "constant": "WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING",
+        "description": "Enable Standard Attributes Matching and Terms.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Legacy Taxonomies",
+        "constant": "WP_PROPERTY_FLAG_ENABLE_LEGACY_TAXONOMIES",
+        "description": "Enable legacy [property_features] and [community_features] taxonomies. These have been replaced by [wpp_category].",
         "since": "2.2.1",
         "enabled": false
       },

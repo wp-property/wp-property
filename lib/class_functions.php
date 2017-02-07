@@ -191,6 +191,7 @@ class WPP_F extends UsabilityDynamics\Utility
     add_filter('wpp_taxonomies', function () {
       $taxonomies = array();
 
+      // Add [wpp_type] taxonomy.
       if (defined('WPP_FEATURE_FLAG_WPP_TYPE') && WPP_FEATURE_FLAG_WPP_TYPE ) {
         $taxonomies['wpp_type'] = array(
           'default' => true,
@@ -223,8 +224,9 @@ class WPP_F extends UsabilityDynamics\Utility
         );
       }
 
-      if (defined('WP_PROPERTY_FLAG_WPP_FLAGS') && WP_PROPERTY_FLAG_WPP_FLAGS ) {
-        $taxonomies['wpp_flags'] = array(
+      // Add [wpp_label] taxonomy.
+      if (defined('WP_PROPERTY_FLAG_WPP_LABEL') && WP_PROPERTY_FLAG_WPP_LABEL ) {
+        $taxonomies['wpp_label'] = array(
           'default' => true,
           'readonly' => true,
           'hidden' => true,
@@ -235,26 +237,27 @@ class WPP_F extends UsabilityDynamics\Utility
           'show_ui' => false,
           'show_tagcloud' => false,
           'add_native_mtbox' => false,
-          'label' => sprintf(_x('%s Flags', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'label' => sprintf(_x('%s Labels', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
           'labels' => array(
-            'name' => sprintf(_x('%s Flags', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-            'singular_name' => sprintf(_x('%s Flag', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-            'search_items' => _x('Search %s Flags', 'property type taxonomy', ud_get_wp_property()->domain),
-            'all_items' => _x('All Flags', 'property type taxonomy', ud_get_wp_property()->domain),
-            'parent_item' => _x('Parent Flags', 'property type taxonomy', ud_get_wp_property()->domain),
-            'parent_item_colon' => _x('Parent Flags', 'property type taxonomy', ud_get_wp_property()->domain),
-            'edit_item' => _x('Edit Flags', 'property type taxonomy', ud_get_wp_property()->domain),
-            'update_item' => _x('Update Flags', 'property type taxonomy', ud_get_wp_property()->domain),
-            'add_new_item' => _x('Add New Flags', 'property type taxonomy', ud_get_wp_property()->domain),
-            'new_item_name' => _x('New Flags', 'property type taxonomy', ud_get_wp_property()->domain),
-            'not_found' => sprintf(_x('No %s Flag Found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-            'menu_name' => sprintf(_x('%s Flags', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'name' => sprintf(_x('%s Labels', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'singular_name' => sprintf(_x('%s Label', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'search_items' => _x('Search %s Labels', 'property type taxonomy', ud_get_wp_property()->domain),
+            'all_items' => _x('All Labels', 'property type taxonomy', ud_get_wp_property()->domain),
+            'parent_item' => _x('Parent Labels', 'property type taxonomy', ud_get_wp_property()->domain),
+            'parent_item_colon' => _x('Parent Labels', 'property type taxonomy', ud_get_wp_property()->domain),
+            'edit_item' => _x('Edit Labels', 'property type taxonomy', ud_get_wp_property()->domain),
+            'update_item' => _x('Update Labels', 'property type taxonomy', ud_get_wp_property()->domain),
+            'add_new_item' => _x('Add New Labels', 'property type taxonomy', ud_get_wp_property()->domain),
+            'new_item_name' => _x('New Labels', 'property type taxonomy', ud_get_wp_property()->domain),
+            'not_found' => sprintf(_x('No %s Label Found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'menu_name' => sprintf(_x('%s Labels', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
           ),
-          'query_var' => 'property-flags',
-          'rewrite' => array('slug' => 'property-flags')
+          'query_var' => 'property-labels',
+          'rewrite' => array('slug' => 'property-labels')
         );
       }
 
+      // Add [wpp_category] taxonomy.
       if (defined('WPP_FEATURE_FLAG_WPP_CATEGORY') && WPP_FEATURE_FLAG_WPP_CATEGORY) {
         $taxonomies['wpp_category'] = array(
           'default' => true,
@@ -287,6 +290,7 @@ class WPP_F extends UsabilityDynamics\Utility
         );
       }
 
+      // Add [wpp_status] taxonomy.
       if (defined('WPP_FEATURE_FLAG_WPP_STATUS') && WPP_FEATURE_FLAG_WPP_STATUS) {
         $taxonomies['wpp_status'] = array(
           'default' => true,
@@ -319,6 +323,7 @@ class WPP_F extends UsabilityDynamics\Utility
         );
       }
 
+      // Add [wpp_location] taxonomy.
       if (defined('WPP_FEATURE_FLAG_WPP_LOCATION') && WPP_FEATURE_FLAG_WPP_LOCATION) {
         $taxonomies['wpp_location'] = array(
           'default' => true,
@@ -350,57 +355,62 @@ class WPP_F extends UsabilityDynamics\Utility
         );
       }
 
-      $taxonomies['property_feature'] = array(
-        'default' => true,
-        'hierarchical' => false,
-        'public' => true,
-        'show_ui' => true,
-        'show_in_nav_menus' => true,
-        'show_tagcloud' => true,
-        'add_native_mtbox' => true,
-        'label' => _x('Features', 'taxonomy general name', ud_get_wp_property()->domain),
-        'labels' => array(
-          'name' => _x('Features', 'taxonomy general name', ud_get_wp_property()->domain),
-          'singular_name' => _x('Feature', 'taxonomy singular name', ud_get_wp_property()->domain),
-          'search_items' => __('Search Features', ud_get_wp_property()->domain),
-          'all_items' => __('All Features', ud_get_wp_property()->domain),
-          'parent_item' => __('Parent Feature', ud_get_wp_property()->domain),
-          'parent_item_colon' => __('Parent Feature:', ud_get_wp_property()->domain),
-          'edit_item' => __('Edit Feature', ud_get_wp_property()->domain),
-          'update_item' => __('Update Feature', ud_get_wp_property()->domain),
-          'add_new_item' => __('Add New Feature', ud_get_wp_property()->domain),
-          'new_item_name' => __('New Feature Name', ud_get_wp_property()->domain),
-          'menu_name' => __('Feature', ud_get_wp_property()->domain)
-        ),
-        'query_var' => 'property_feature',
-        'rewrite' => array('slug' => 'feature')
-      );
+      // Add [property_features] and [community_features] taxonomies.
+      if( defined( 'WP_PROPERTY_FLAG_ENABLE_LEGACY_TAXONOMIES') && WP_PROPERTY_FLAG_ENABLE_LEGACY_TAXONOMIES ) {
 
-      $taxonomies['community_feature'] = array(
-        'default' => true,
-        'hierarchical' => false,
-        'public' => true,
-        'show_ui' => true,
-        'show_in_nav_menus' => true,
-        'show_tagcloud' => true,
-        'add_native_mtbox' => true,
-        'label' => _x('Community Features', 'taxonomy general name', ud_get_wp_property()->domain),
-        'labels' => array(
-          'name' => _x('Community Features', 'taxonomy general name', ud_get_wp_property()->domain),
-          'singular_name' => _x('Community Feature', 'taxonomy singular name', ud_get_wp_property()->domain),
-          'search_items' => __('Search Community Features', ud_get_wp_property()->domain),
-          'all_items' => __('All Community Features', ud_get_wp_property()->domain),
-          'parent_item' => __('Parent Community Feature', ud_get_wp_property()->domain),
-          'parent_item_colon' => __('Parent Community Feature:', ud_get_wp_property()->domain),
-          'edit_item' => __('Edit Community Feature', ud_get_wp_property()->domain),
-          'update_item' => __('Update Community Feature', ud_get_wp_property()->domain),
-          'add_new_item' => __('Add New Community Feature', ud_get_wp_property()->domain),
-          'new_item_name' => __('New Community Feature Name', ud_get_wp_property()->domain),
-          'menu_name' => __('Community Feature', ud_get_wp_property()->domain)
-        ),
-        'query_var' => 'community_feature',
-        'rewrite' => array('slug' => 'community_feature')
-      );
+        $taxonomies[ 'property_feature' ] = array(
+          'default' => true,
+          'hierarchical' => false,
+          'public' => true,
+          'show_ui' => true,
+          'show_in_nav_menus' => true,
+          'show_tagcloud' => true,
+          'add_native_mtbox' => true,
+          'label' => _x( 'Features', 'taxonomy general name', ud_get_wp_property()->domain ),
+          'labels' => array(
+            'name' => _x( 'Features', 'taxonomy general name', ud_get_wp_property()->domain ),
+            'singular_name' => _x( 'Feature', 'taxonomy singular name', ud_get_wp_property()->domain ),
+            'search_items' => __( 'Search Features', ud_get_wp_property()->domain ),
+            'all_items' => __( 'All Features', ud_get_wp_property()->domain ),
+            'parent_item' => __( 'Parent Feature', ud_get_wp_property()->domain ),
+            'parent_item_colon' => __( 'Parent Feature:', ud_get_wp_property()->domain ),
+            'edit_item' => __( 'Edit Feature', ud_get_wp_property()->domain ),
+            'update_item' => __( 'Update Feature', ud_get_wp_property()->domain ),
+            'add_new_item' => __( 'Add New Feature', ud_get_wp_property()->domain ),
+            'new_item_name' => __( 'New Feature Name', ud_get_wp_property()->domain ),
+            'menu_name' => __( 'Feature', ud_get_wp_property()->domain )
+          ),
+          'query_var' => 'property_feature',
+          'rewrite' => array( 'slug' => 'feature' )
+        );
+
+        $taxonomies[ 'community_feature' ] = array(
+          'default' => true,
+          'hierarchical' => false,
+          'public' => true,
+          'show_ui' => true,
+          'show_in_nav_menus' => true,
+          'show_tagcloud' => true,
+          'add_native_mtbox' => true,
+          'label' => _x( 'Community Features', 'taxonomy general name', ud_get_wp_property()->domain ),
+          'labels' => array(
+            'name' => _x( 'Community Features', 'taxonomy general name', ud_get_wp_property()->domain ),
+            'singular_name' => _x( 'Community Feature', 'taxonomy singular name', ud_get_wp_property()->domain ),
+            'search_items' => __( 'Search Community Features', ud_get_wp_property()->domain ),
+            'all_items' => __( 'All Community Features', ud_get_wp_property()->domain ),
+            'parent_item' => __( 'Parent Community Feature', ud_get_wp_property()->domain ),
+            'parent_item_colon' => __( 'Parent Community Feature:', ud_get_wp_property()->domain ),
+            'edit_item' => __( 'Edit Community Feature', ud_get_wp_property()->domain ),
+            'update_item' => __( 'Update Community Feature', ud_get_wp_property()->domain ),
+            'add_new_item' => __( 'Add New Community Feature', ud_get_wp_property()->domain ),
+            'new_item_name' => __( 'New Community Feature Name', ud_get_wp_property()->domain ),
+            'menu_name' => __( 'Community Feature', ud_get_wp_property()->domain )
+          ),
+          'query_var' => 'community_feature',
+          'rewrite' => array( 'slug' => 'community_feature' )
+        );
+
+      }
 
       return $taxonomies;
 
@@ -629,16 +639,34 @@ class WPP_F extends UsabilityDynamics\Utility
 
     global $wp_properties;
 
-    if (!isset($wp_properties['configuration']['developer_mode']) || $wp_properties['configuration']['developer_mode'] != 'true') {
-      return false;
+    $_debug = false;
+
+    if( defined( 'WP_DEBUG' ) && WP_DEBUG && defined( 'WP_DEBUG_DISPLAY' ) && WP_DEBUG_DISPLAY ) {
+      $_debug = true;
     }
 
-    if( class_exists( '\ChromePhp' ) ) {
-      ChromePhp::log( '[wp-property]', $text, $detail );
-      return;
+    if ( !$_debug && ( !isset($wp_properties['configuration']['developer_mode']) || $wp_properties['configuration']['developer_mode'] !== 'true') ) {
+      $_debug = false;
     }
 
-    return true;
+    if($_debug && class_exists( 'ChromePhp' ) && !headers_sent() ) {
+
+      // truncate strings to avoid sending oversized header.
+      if( strlen( $text ) > 1000 ) {
+        $text = '[truncated]';
+      }
+
+      if( $detail ) {
+        ChromePhp::log( '[wp-property]', $text, $detail);
+      } else {
+        ChromePhp::log( '[wp-property]', $text );
+      }
+
+      return true;
+    }
+
+    return false;
+
   }
 
   /**
@@ -1963,7 +1991,7 @@ class WPP_F extends UsabilityDynamics\Utility
       return $taxonomy;
     }
 
-    register_taxonomy($taxonomy, array('property'), array(
+    register_taxonomy($taxonomy, array( 'property' ), array(
       'hierarchical' => true,
       // 'update_count_callback' => null,
       'labels' => array(),
@@ -1983,6 +2011,9 @@ class WPP_F extends UsabilityDynamics\Utility
 
   /**
    * Build terms from address parts.
+   *
+   * @todo Add "location_" prefix.
+   *
    * Feature Flag: WPP_FEATURE_FLAG_WPP_LOCATION
    * @since 2.2.1
    * @author potanin@UD
@@ -2792,6 +2823,7 @@ class WPP_F extends UsabilityDynamics\Utility
    */
   static public function create_settings_backup()
   {
+    global $wp_properties;
     //save backup
 
 
@@ -3009,7 +3041,7 @@ class WPP_F extends UsabilityDynamics\Utility
           // Handle core settings ( legacy support )
           if ($option_key == 'wpp_settings') {
             //** Allow features to preserve their settings that are not configured on the settings page */
-            $data = apply_filters('wpp_settings_save', $data, $wp_properties);
+
             //** Prevent removal of featured settings configurations if they are not present */
             if (!empty($wp_properties['configuration']['feature_settings'])) {
               foreach ($wp_properties['configuration']['feature_settings'] as $feature_type => $preserved_settings) {
@@ -3018,6 +3050,19 @@ class WPP_F extends UsabilityDynamics\Utility
                 }
               }
             }
+
+            foreach( $wp_properties as $_suboption_key  => $_suboption_data ) {
+              // WPP_F::debug( "Checking [$_suboption_key]/" );
+
+              if( !isset( $data[ $_suboption_key ] ) ) {
+                WPP_F::debug( "Preserving [$_suboption_key]." );
+                $data[ $_suboption_key ] = $wp_properties[ $_suboption_key ] ;
+              }
+
+            }
+
+            $data = apply_filters('wpp_settings_save', $data, $wp_properties);
+
           }
 
           update_option($option_key, $data);
@@ -3028,12 +3073,11 @@ class WPP_F extends UsabilityDynamics\Utility
         //** The filters below will be ran on reload, but the saving functions won't */
         if ($_REQUEST['page'] == 'property_settings') {
           unset($_REQUEST);
-          wp_redirect(admin_url("edit.php?post_type=property&page=property_settings&message=updated"));
+          wp_redirect(admin_url("edit.php?post_type=property&page=property_settings&message=restored"));
           exit;
         }
 
       }
-
 
     }
 

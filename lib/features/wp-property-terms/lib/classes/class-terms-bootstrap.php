@@ -6,12 +6,14 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use UsabilityDynamics\WP\Bootstrap_Plugin;
   use UsabilityDynamics\Settings;
+  use WPP_F;
 
   if( !class_exists( 'UsabilityDynamics\WPP\Terms_Bootstrap' ) ) {
 
-    final class Terms_Bootstrap extends \UsabilityDynamics\WP\Bootstrap_Plugin {
-      
+    final class Terms_Bootstrap extends Bootstrap_Plugin {
+
       /**
        * Singleton Instance Reference.
        *
@@ -21,7 +23,7 @@ namespace UsabilityDynamics\WPP {
        * @type \UsabilityDynamics\WPP\Terms_Bootstrap object
        */
       protected static $instance = null;
-      
+
       /**
        * Instantaite class.
        */
@@ -59,7 +61,7 @@ namespace UsabilityDynamics\WPP {
           // Priority must be greater than 1 for save_settings to make tax post binding work.
           add_action( 'wpp::save_settings', array( $this, 'save_settings' ) );
           // Add terms settings to backup
-          add_filter( 'wpp::backup::data', array( $this, 'backup_settings' ) );
+          add_filter( 'wpp::backup::data', array( $this, 'backup_settings' ), 50, 2 );
 
         }
 
@@ -95,7 +97,13 @@ namespace UsabilityDynamics\WPP {
 
         add_action( 'wp_ajax_term_autocomplete', array($this, 'ajax_term_autocomplete'));
 
-        //add_filter( 'wpp_get_property', array($this, 'wpp_get_property'), 305, 2 );
+        // Extend property object early.
+        add_filter( 'wpp::property::early_extend', array($this, 'extend_property_object'), 5, 2 );
+        add_filter( 'wpp_get_property', array($this, 'finalize_property_object'), 100, 2 );
+
+        // Inject single-value terms into attributes
+        add_filter( 'wpp::draw_stats::attributes', array($this, 'draw_attributes'), 10, 3 );
+
       }
 
       /**
@@ -321,10 +329,10 @@ namespace UsabilityDynamics\WPP {
           }
         }
       }
-      
+
       /**
        * Determine if search key belongs taxonomy.
-       * 
+       *
        * @action wpp::get_properties::custom_case
        * @see WPP_F::get_properties()
        * @param bool $bool
@@ -338,10 +346,10 @@ namespace UsabilityDynamics\WPP {
         }
         return $bool;
       }
-      
+
       /**
        * Do search for taxonomies.
-       * 
+       *
        * @param array $matching_ids
        * @param string $key
        * @param string $criteria
@@ -412,13 +420,13 @@ namespace UsabilityDynamics\WPP {
           }
           wp_reset_postdata();
         }
-        
+
         return $matching_ids;
       }
-      
+
       /**
        * Adds taxonomies keys to queryable keys list.
-       * 
+       *
        * @see WPP_F::get_queryable_keys()
        * @param array $keys
        * @return array
@@ -480,16 +488,80 @@ namespace UsabilityDynamics\WPP {
        * Add terms settings to WP-Property backup's data
        *
        * @param $data
+       * @param array $options
+       * @return
        * @since 1.0.3
        */
-      public function backup_settings( $data ) {
-        $data[ 'wpp_terms' ] = $this->get();
+      public function backup_settings( $data, $options = array() ) {
+
+        $data['wpp_terms'] = $this->get();
+
+        // Exprt only field-related data.
+        if( isset( $options ) && is_array( $options ) && isset( $options[ 'type' ] ) && $options[ 'type' ] === 'fields' ) {
+          unset( $data['wpp_terms']['types'] );
+        }
+
         return $data;
+
+      }
+
+      /**
+       * Get all taxonomies are thare used for-single-value storage.
+       *
+       * @author potanin@UD
+       * @param $args
+       * @return array
+       */
+      public function get_single_value_taxonomies( $args = array() ) {
+        global $wp_properties;
+
+        $_taxonomies = $this->get( 'config.taxonomies', array() );
+        $_types = $this->get( 'config.types', array() );
+
+        $_results = array();
+
+        foreach( $_taxonomies  as $_tax_key => $_tax_data ) {
+
+          if( isset( $_types[ $_tax_key ] ) && $_types[ $_tax_key ] === 'unique' ) {
+            $_results[ $_tax_key ] = $_tax_data;
+          }
+
+        }
+
+        return (array) $_results;
+
+      }
+
+      /**
+       * Get taxonomies for multi-value storage.
+       *
+       * @param array $args
+       * @return array
+       */
+      public function get_multi_value_taxonomies( $args = array() ) {
+        global $wp_properties;
+
+        $_taxonomies = $this->get( 'config.taxonomies', array() );
+        $_types = $this->get( 'config.types', array() );
+
+        $_results = array();
+
+        foreach( $_taxonomies  as $_tax_key => $_tax_data ) {
+
+          if( isset( $_types ) && isset( $_types[ $_tax_key ] ) && $_types[ $_tax_key ] === 'multiple' ) {
+            $_results[ $_tax_key ] = $_tax_data;
+          }
+
+        }
+
+        return (array) $_results;
+
       }
 
       /**
        * Register Meta Box for taxonomies on Edit Property Page
        *
+       * @author potanin@UD
        * @param $meta_boxes
        * @return array
        */
@@ -641,7 +713,7 @@ namespace UsabilityDynamics\WPP {
               ),
               'unique' => array(
                 'label' => __( 'Unique Term', $this->domain ),
-                'desc'  => __( 'Property can have only one term. Be sure to not enable native Meta Box for current taxonomy to prevent issues.', $this->domain ),
+                'desc'  => __( 'Property can have only one term. ', $this->domain ),
               ),
             )
           )
@@ -851,12 +923,124 @@ namespace UsabilityDynamics\WPP {
         wp_cache_flush();
       }
 
-      public function wpp_get_property( $property, $args ){
+      /**
+       * Extends property object with taxonomies, immediatly after meta fields are loaded.
+       *
+       * @author potanin@UD
+       * @param $property
+       * @param $args
+       * @return mixed
+       */
+      public function extend_property_object( $property, $args = array() ){
 
-        die( '<pre>' . print_r( $property, true ) . '</pre>' );
-        return $property;
+        $_values = array();
+
+        foreach( self::get_single_value_taxonomies() as $_tax_key => $_tax_data ) {
+
+          if( $_tax_data['hidden']) { continue; }
+
+          $_terms = wp_get_object_terms( $property['ID'], $_tax_key, array( 'fields' => 'names' ) );
+
+          if( !empty( $_terms ) ) {
+            $_values[ $_tax_key ] = end( $_terms );
+            WPP_F::debug("Getting single-value terms for [$_tax_key], setting to [" . $_values[ $_tax_key ] . ']' );
+          } else {
+            WPP_F::debug("Getting single-value terms for [$_tax_key], no values found." );
+          }
+
+        }
+
+        foreach( self::get_multi_value_taxonomies() as $_tax_key => $_tax_data ) {
+
+          if( $_tax_data['hidden'] === true ) {
+            continue;
+          }
+
+          $_terms = wp_get_object_terms( $property['ID'], $_tax_key, array( 'fields' => 'names' ) );
+
+          if( !empty( $_terms ) ) {
+            $_values[ $_tax_key ] = $_terms;
+            WPP_F::debug("Getting multi-value terms for [$_tax_key], setting to [" . join( ', ', $_terms ) . ']' );
+          } else {
+            WPP_F::debug("Getting multi-value terms for [$_tax_key], no values found." );
+          }
+
+        }
+
+        // Extend property object with taxonomy data.
+        $_result = array_merge( $property, $_values );
+
+        // WPP_F::debug("Terms has extneded property object.", $_values );
+        return $_result;
+
       }
 
+      /**
+       * Iterate over property object, verify now single-value taxonomies are being handled as arrays.
+       *
+       * @param $property
+       * @param array $args
+       * @return mixed
+       */
+      public function finalize_property_object( $property, $args = array() ) {
+
+        foreach( self::get_single_value_taxonomies() as $_tax_key => $_tax_data ) {
+
+          if( isset(  $property[$_tax_key] ) && is_array( $property[$_tax_key] ) ) {
+
+            $property[$_tax_key] = end( $property[$_tax_key] );
+          }
+
+        }
+
+        return $property;
+
+      }
+
+      /**
+       * Extend the draw_attributes function with single-value taxonomies being treatued as regualr attributes
+       *
+       * @param $property_stats
+       * @param $property
+       * @param array $args
+       */
+      public function draw_attributes( $property_stats, $property, $args = array() ){
+
+        foreach( self::get_single_value_taxonomies() as $_tax_key => $_tax_data ) {
+
+          if( is_object( $property ) ) {
+
+            $_item = array(
+              'label' => $_tax_data['label'],
+              'value' => $property->{$_tax_key}
+            );
+
+          }
+
+          if( is_array( $property ) ) {
+
+            $_item = array(
+              'label' => $_tax_data['label'],
+              'value' => $property[$_tax_key]
+            );
+
+          }
+
+          if( isset( $_item ) && ( $args['return_blank'] == 'true' || $_item['value'] ) ) {
+
+            $property_stats[ $_tax_key ] = $_item;
+
+          }
+
+        }
+
+        return $property_stats;
+
+      }
+
+      /**
+       *
+       */
       public function ajax_term_autocomplete(){
         $terms = get_terms($_REQUEST['taxonomy'], array('fields' => 'all', 'hide_empty'=>false));
         $return = $this->prepare_terms_hierarchicaly($terms);
@@ -871,13 +1055,12 @@ namespace UsabilityDynamics\WPP {
 
       /**
        *
-       * prepare_terms_hierarchicaly 
+       * prepare_terms_hierarchicaly
        *
        * @param $terms
        *
        * @return array
        */
-
       public function prepare_terms_hierarchicaly($terms){
         $_terms = array();
         $return = array();
@@ -885,7 +1068,7 @@ namespace UsabilityDynamics\WPP {
         if(count($terms) == 0)
           return $return;
 
-        // Prepering terms 
+        // Prepering terms
         foreach ($terms as $term) {
           $_terms[$term->parent][] = array('term_id' => $term->term_id, 'name' => $term->name);
         }
@@ -893,23 +1076,22 @@ namespace UsabilityDynamics\WPP {
         // Making terms as hierarchical by prefix
         foreach ($_terms[0] as $term) { // $_terms[0] is parent or parentless terms
           $return[] = $term;
-          $this->get_childs($term['term_id'], $_terms, $return);
+          $this->get_children($term['term_id'], $_terms, $return);
         }
 
         return $return;
       }
 
       // Helper function for prepare_terms_hierarchicaly
-      public function get_childs($term_id, $terms, &$return, $prefix = "-"){
+      public function get_children($term_id, $terms, &$return, $prefix = "-"){
         if(isset($terms[$term_id])){
           foreach ($terms[$term_id] as $child) {
             $child['name'] = $prefix . " " . $child['name'];
             $return[] = $child;
-            $this->get_childs($child['term_id'], $terms, $return, $prefix . "-");
+            $this->get_children($child['term_id'], $terms, $return, $prefix . "-");
           }
         }
       }
-
 
       /**
        * Run Upgrade Process.

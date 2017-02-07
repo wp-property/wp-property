@@ -17,8 +17,10 @@ namespace UsabilityDynamics\WPP {
        * Returns property
        *
        * @since 1.11
+       *
        * @todo Code pertaining to displaying data should be migrated to prepare_property_for_display() like :$real_value = nl2br($real_value);
        * @todo Fix the long dashes - when in latitude or longitude it breaks it when using static map
+       *
        * @param $id
        * @param bool $args
        * @return array|bool|mixed
@@ -117,6 +119,9 @@ namespace UsabilityDynamics\WPP {
           }
 
           $property = array_merge( $property, $post );
+
+          // Early get_property, before adding standard/computed fields.
+          $property = apply_filters( 'wpp::property::early_extend', $property, $args );
 
           //** Make sure certain keys were not messed up by custom attributes */
           $property[ 'system' ]  = array();

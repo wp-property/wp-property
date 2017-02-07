@@ -30,7 +30,10 @@ if (isset($_REQUEST['message'])) {
   switch ($_REQUEST['message']) {
     case 'updated':
       $wp_messages['notice'][] = __("Settings updated.", ud_get_wp_property()->domain);
-      break;
+    break;
+    case 'restored':
+      $wp_messages['notice'][] = __("Settings restored from backup.", ud_get_wp_property()->domain);
+    break;
   }
 }
 
@@ -345,13 +348,16 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
                     <span
                       class="description"><?php _e('Enabling this option may cause performance issues.', ud_get_wp_property()->domain); ?></span>
                   </li>
+
+
+                  <?php if( defined( 'WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING' ) && WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING ) { ?>
                   <li>
                     <?php //show standard attribute matching
                     echo WPP_F::checkbox("name=wpp_settings[configuration][show_advanced_options]&label=" . __('Enable Standard Attributes Matching and Terms', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['show_advanced_options']) ? $wp_properties['configuration']['show_advanced_options'] : false)); ?>
-                    <i class="description wpp-notice-for-match"
-                       title="<?php _e('This option is designed to help us find which attribute you want to show as Price, Address, etc and place it in correct place in our templates.', ud_get_wp_property()->domain); ?>">
-                      ? </i>
+                    <i class="description wpp-notice-for-match" title="<?php _e('This option is designed to help us find which attribute you want to show as Price, Address, etc and place it in correct place in our templates.', ud_get_wp_property()->domain); ?>"></i>
                   </li>
+                  <?php } ?>
+
                   <li>
                     <?php echo WPP_F::checkbox("name=wpp_settings[configuration][pre_release_update]&label=" . __('Enable pre-release updates.', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['pre_release_update']) ? $wp_properties['configuration']['pre_release_update'] : false)); ?>
                     <br/>
@@ -638,10 +644,11 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
         <div class="wpp_inner_tab wp-core-ui">
 
           <div class="wpp_settings_block">
-            <?php _e("Restore Backup of WP-Property Configuration", ud_get_wp_property()->domain); ?>
-            : <input name="wpp_settings[settings_from_backup]" class="" id="wpp_backup_file" type="file"/>
-            <a
-              href="<?php echo wp_nonce_url("edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup", 'download-wpp-backup'); ?>"><?php _e('Download Backup of Current WP-Property Configuration.', ud_get_wp_property()->domain); ?></a>
+            <?php _e("Restore Backup of WP-Property Configuration", ud_get_wp_property()->domain); ?>: <input name="wpp_settings[settings_from_backup]" class="" id="wpp_backup_file" type="file" />
+            <br />
+            <a href="<?php echo wp_nonce_url("edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup&wpp-backup-type=full", 'download-wpp-backup'); ?>"><?php _e('Download Entire WP-Property Configuration.', ud_get_wp_property()->domain); ?></a>
+            <br />
+            <a href="<?php echo wp_nonce_url("edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup&wpp-backup-type=fields", 'download-wpp-backup'); ?>"><?php _e('Download Attributes Configuration.', ud_get_wp_property()->domain); ?></a>
           </div>
 
           <?php
