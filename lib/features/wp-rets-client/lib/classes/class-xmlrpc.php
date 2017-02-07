@@ -112,7 +112,6 @@ namespace UsabilityDynamics\WPRETSC {
         // Do nothing for non-xmlrpc.
         if( !defined( 'XMLRPC_REQUEST' ) || ( defined( 'XMLRPC_REQUEST' ) && !XMLRPC_REQUEST ) ) {
 
-
           if( is_callable( array( $args, 'get_json_params' ) ) ) {
 
             if( !self::token_login( isset( $_SERVER[ 'HTTP_X_ACCESS_USER' ] ) ? $_SERVER[ 'HTTP_X_ACCESS_USER' ] : null, isset( $_SERVER[ 'HTTP_X_ACCESS_PASSWORD' ] ) ? $_SERVER[ 'HTTP_X_ACCESS_PASSWORD' ] : null ) ) {
@@ -269,12 +268,11 @@ namespace UsabilityDynamics\WPRETSC {
 
         $post_data = self::parseRequest( $args );
 
-        if( isset( $wp_xmlrpc_server ) && !empty( $wp_xmlrpc_server->error ) ) {
+        if( ( isset( $wp_xmlrpc_server ) && !empty( $wp_xmlrpc_server->error ) ) || isset( $post_data['error'] ) ) {
           return $post_data;
         }
 
         ud_get_wp_rets_client()->write_log( 'Have request wpp.editProperty request' );
-
 
         if( isset( $post_data[ 'meta_input' ][ 'rets_id' ] ) ) {
           $post_data[ 'meta_input' ][ 'wpp::rets_pk' ] = $post_data[ 'meta_input' ][ 'rets_id' ];
