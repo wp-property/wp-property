@@ -115,18 +115,19 @@ namespace UsabilityDynamics\WPRETSC {
 
           if( is_callable( array( $args, 'get_json_params' ) ) ) {
 
-            if( !self::token_login( $_SERVER[ 'HTTP_X_ACCESS_USER' ], $_SERVER[ 'HTTP_X_ACCESS_PASSWORD' ] ) ) {
+            if( !self::token_login( isset( $_SERVER[ 'HTTP_X_ACCESS_USER' ] ) ? $_SERVER[ 'HTTP_X_ACCESS_USER' ] : null, isset( $_SERVER[ 'HTTP_X_ACCESS_PASSWORD' ] ) ? $_SERVER[ 'HTTP_X_ACCESS_PASSWORD' ] : null ) ) {
 
               return array(
                 'ok' => false,
                 'error' => "Unable to login.",
-                'username' => $_SERVER[ 'HTTP_X_ACCESS_USER' ],
-                'password' => $_SERVER[ 'HTTP_X_ACCESS_PASSWORD' ],
+                'username' => isset( $_SERVER[ 'HTTP_X_ACCESS_USER' ] ) ? $_SERVER[ 'HTTP_X_ACCESS_USER' ] : '',
+                'password' => isset( $_SERVER[ 'HTTP_X_ACCESS_PASSWORD' ] ) ? $_SERVER[ 'HTTP_X_ACCESS_PASSWORD' ] : '',
               );
 
             }
 
             return $args->get_json_params();
+
           }
 
           return wp_parse_args( $_REQUEST, $defaults ? $defaults : array() );
