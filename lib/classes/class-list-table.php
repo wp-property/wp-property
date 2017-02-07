@@ -6,9 +6,11 @@
 namespace UsabilityDynamics\WPP {
 
   use WPP_F;
+  use UsabilityDynamics\WPLT\WP_List_Table;
+
   if( !class_exists( 'UsabilityDynamics\WPP\List_Table' ) ) {
 
-    class List_Table extends \UsabilityDynamics\WPLT\WP_List_Table {
+    class List_Table extends WP_List_Table {
 
       /**
        * @param array $args
@@ -389,6 +391,7 @@ namespace UsabilityDynamics\WPP {
 
         $wp_image_sizes = get_intermediate_image_sizes();
         $thumbnail_id = Property_Factory::get_thumbnail_id( $post->ID );
+
         if( $thumbnail_id ) {
           foreach( $wp_image_sizes as $image_name ) {
             $this_url = wp_get_attachment_image_src( $thumbnail_id, $image_name, true );
@@ -407,11 +410,13 @@ namespace UsabilityDynamics\WPP {
           $overview_thumb_type = 'thumbnail';
         }
 
-        $image_large_obj = wpp_get_image_link( $featured_image_id, 'large', array( 'return' => 'array' ) );
-        $image_thumb_obj = wpp_get_image_link( $featured_image_id, $overview_thumb_type, array( 'return' => 'array' ) );
+        //$image_large_obj = wp_get_attachment_image_src( $featured_image_id, 'large' );
+        $image_thumb_obj = wp_get_attachment_image_src( $featured_image_id, $overview_thumb_type );
 
         if( !empty( $image_large_obj ) && !empty( $image_thumb_obj ) ) {
-          $data = '<a href="' . $image_large_obj[ 'url' ] . '" class="fancybox" rel="overview_group" title="' . $post->post_title . '"><img src="' . $image_thumb_obj[ 'url' ] . '" width="' . $image_thumb_obj[ 'width' ] . '" height="' . $image_thumb_obj[ 'height' ] . '" /></a>';
+          $data = '<a href="' . $image_large_obj[ '0' ] . '" class="fancybox" rel="overview_group" title="' . $post->post_title . '"><img src="' . $image_thumb_obj[ '0' ] . '" width="' . $image_thumb_obj[ '1' ] . '" height="' . $image_thumb_obj[ '2' ] . '" /></a>';
+        } elseif( !empty( $image_thumb_obj ) ) {
+          $data = '<img src="' . $image_thumb_obj[ '0' ] . '" width="' . $image_thumb_obj[ '1' ] . '" height="' . $image_thumb_obj[ '2' ] . '" />';
         }
 
         return $data;
@@ -419,8 +424,11 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * Returns label for Title Column
+       * @param $post
+       * @return string|void
+       * @internal param $title
        */
-      public function get_column_title_label( $title, $post ) {
+      public function get_column_title_label( $post ) {
         $title = get_the_title( $post );
         if( empty( $title ) )
           $title = __( '(no name)' );

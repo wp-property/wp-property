@@ -6,6 +6,7 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use WPP_F;
   use UsabilityDynamics\UI;
 
   if (!class_exists('UsabilityDynamics\WPP\Admin_Overview')) {
