@@ -644,10 +644,11 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
         <div class="wpp_inner_tab wp-core-ui">
 
           <div class="wpp_settings_block">
-            <?php _e("Restore Backup of WP-Property Configuration", ud_get_wp_property()->domain); ?>
-            : <input name="wpp_settings[settings_from_backup]" class="" id="wpp_backup_file" type="file"/>
-            <a
-              href="<?php echo wp_nonce_url("edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup", 'download-wpp-backup'); ?>"><?php _e('Download Backup of Current WP-Property Configuration.', ud_get_wp_property()->domain); ?></a>
+            <?php _e("Restore Backup of WP-Property Configuration", ud_get_wp_property()->domain); ?>: <input name="wpp_settings[settings_from_backup]" class="" id="wpp_backup_file" type="file" />
+            <br />
+            <a href="<?php echo wp_nonce_url("edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup&wpp-backup-type=full", 'download-wpp-backup'); ?>"><?php _e('Download Entire WP-Property Configuration.', ud_get_wp_property()->domain); ?></a>
+            <br />
+            <a href="<?php echo wp_nonce_url("edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup&wpp-backup-type=fields", 'download-wpp-backup'); ?>"><?php _e('Download Attributes Configuration.', ud_get_wp_property()->domain); ?></a>
           </div>
 
           <?php

@@ -1,4 +1,5 @@
 ### 2.2.1 
+* Added option to export only the attribute fields, groups and property types.
 * Debug log enabled when [WP_DEBUG] and [WP_DEBUG_DISPLAY] constants are defined automatically.
 * Added [WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING] feature flag, hiding the "Enable Standard Attributes Matching and Terms." option by default.
 * When backup is restored from settings, any omitted fields are preserved, allowing partial configuration backups.

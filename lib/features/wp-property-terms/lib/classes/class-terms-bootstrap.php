@@ -6,12 +6,13 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use UsabilityDynamics\WP\Bootstrap_Plugin;
   use UsabilityDynamics\Settings;
 
   if( !class_exists( 'UsabilityDynamics\WPP\Terms_Bootstrap' ) ) {
 
-    final class Terms_Bootstrap extends \UsabilityDynamics\WP\Bootstrap_Plugin {
-      
+    final class Terms_Bootstrap extends Bootstrap_Plugin {
+
       /**
        * Singleton Instance Reference.
        *
@@ -21,7 +22,7 @@ namespace UsabilityDynamics\WPP {
        * @type \UsabilityDynamics\WPP\Terms_Bootstrap object
        */
       protected static $instance = null;
-      
+
       /**
        * Instantaite class.
        */
@@ -59,7 +60,7 @@ namespace UsabilityDynamics\WPP {
           // Priority must be greater than 1 for save_settings to make tax post binding work.
           add_action( 'wpp::save_settings', array( $this, 'save_settings' ) );
           // Add terms settings to backup
-          add_filter( 'wpp::backup::data', array( $this, 'backup_settings' ) );
+          add_filter( 'wpp::backup::data', array( $this, 'backup_settings' ), 50, 2 );
 
         }
 
@@ -321,10 +322,10 @@ namespace UsabilityDynamics\WPP {
           }
         }
       }
-      
+
       /**
        * Determine if search key belongs taxonomy.
-       * 
+       *
        * @action wpp::get_properties::custom_case
        * @see WPP_F::get_properties()
        * @param bool $bool
@@ -338,10 +339,10 @@ namespace UsabilityDynamics\WPP {
         }
         return $bool;
       }
-      
+
       /**
        * Do search for taxonomies.
-       * 
+       *
        * @param array $matching_ids
        * @param string $key
        * @param string $criteria
@@ -412,13 +413,13 @@ namespace UsabilityDynamics\WPP {
           }
           wp_reset_postdata();
         }
-        
+
         return $matching_ids;
       }
-      
+
       /**
        * Adds taxonomies keys to queryable keys list.
-       * 
+       *
        * @see WPP_F::get_queryable_keys()
        * @param array $keys
        * @return array
@@ -480,11 +481,21 @@ namespace UsabilityDynamics\WPP {
        * Add terms settings to WP-Property backup's data
        *
        * @param $data
+       * @param array $options
+       * @return
        * @since 1.0.3
        */
-      public function backup_settings( $data ) {
-        $data[ 'wpp_terms' ] = $this->get();
+      public function backup_settings( $data, $options = array() ) {
+
+        $data['wpp_terms'] = $this->get();
+
+        // Exprt only field-related data.
+        if( isset( $options ) && is_array( $options ) && isset( $options[ 'type' ] ) && $options[ 'type' ] === 'fields' ) {
+          unset( $data['wpp_terms']['types'] );
+        }
+
         return $data;
+
       }
 
       /**
@@ -871,13 +882,12 @@ namespace UsabilityDynamics\WPP {
 
       /**
        *
-       * prepare_terms_hierarchicaly 
+       * prepare_terms_hierarchicaly
        *
        * @param $terms
        *
        * @return array
        */
-
       public function prepare_terms_hierarchicaly($terms){
         $_terms = array();
         $return = array();
@@ -885,7 +895,7 @@ namespace UsabilityDynamics\WPP {
         if(count($terms) == 0)
           return $return;
 
-        // Prepering terms 
+        // Prepering terms
         foreach ($terms as $term) {
           $_terms[$term->parent][] = array('term_id' => $term->term_id, 'name' => $term->name);
         }
@@ -893,23 +903,22 @@ namespace UsabilityDynamics\WPP {
         // Making terms as hierarchical by prefix
         foreach ($_terms[0] as $term) { // $_terms[0] is parent or parentless terms
           $return[] = $term;
-          $this->get_childs($term['term_id'], $_terms, $return);
+          $this->get_children($term['term_id'], $_terms, $return);
         }
 
         return $return;
       }
 
       // Helper function for prepare_terms_hierarchicaly
-      public function get_childs($term_id, $terms, &$return, $prefix = "-"){
+      public function get_children($term_id, $terms, &$return, $prefix = "-"){
         if(isset($terms[$term_id])){
           foreach ($terms[$term_id] as $child) {
             $child['name'] = $prefix . " " . $child['name'];
             $return[] = $child;
-            $this->get_childs($child['term_id'], $terms, $return, $prefix . "-");
+            $this->get_children($child['term_id'], $terms, $return, $prefix . "-");
           }
         }
       }
-
 
       /**
        * Run Upgrade Process.
