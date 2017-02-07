@@ -637,7 +637,6 @@ class WPP_F extends UsabilityDynamics\Utility
   static public function debug($text = false, $detail = null)
   {
 
-
     global $wp_properties;
 
     $_debug = false;
@@ -650,13 +649,19 @@ class WPP_F extends UsabilityDynamics\Utility
       $_debug = false;
     }
 
-    if($_debug && class_exists( '\ChromePhp' ) && !headers_sent() ) {
+    if($_debug && class_exists( 'ChromePhp' ) && !headers_sent() ) {
+
+      // truncate strings to avoid sending oversized header.
+      if( strlen( $text ) > 1000 ) {
+        $text = '[truncated]';
+      }
 
       if( $detail ) {
-        ChromePhp::log( '[wp-property]', $text, $detail );
+        ChromePhp::log( '[wp-property]', $text, $detail);
       } else {
         ChromePhp::log( '[wp-property]', $text );
       }
+
       return true;
     }
 
