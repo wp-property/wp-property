@@ -343,10 +343,10 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
                     <br/>
                   </li>
                   <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][auto_delete_attachments]&label=" . sprintf(__('Automatically delete all %1s images and attachments when a %2s is deleted.', ud_get_wp_property()->domain), $object_label['singular'], $object_label['singular']), (isset($wp_properties['configuration']['auto_delete_attachments']) ? $wp_properties['configuration']['auto_delete_attachments'] : false)); ?></li>
-                  <li>
-                    <?php echo WPP_F::checkbox("name=wpp_settings[configuration][automatically_regenerate_thumbnail]&label=" . __('Disable "on-the-fly" image regeneration.', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['automatically_regenerate_thumbnail']) ? $wp_properties['configuration']['automatically_regenerate_thumbnail'] : true)); ?>
-                    <span
-                      class="description"><?php _e('Enabling this option may cause performance issues.', ud_get_wp_property()->domain); ?></span>
+
+                  <li class="hidden">
+                    <?php echo WPP_F::checkbox("name=wpp_settings[configuration][automatically_regenerate_thumbnail]&label=" . __('Enable "on-the-fly" image regeneration.', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['automatically_regenerate_thumbnail']) ? $wp_properties['configuration']['automatically_regenerate_thumbnail'] : true)); ?>
+                    <span class="description"><?php _e('Enabling this option may cause performance issues.', ud_get_wp_property()->domain); ?></span>
                   </li>
 
 

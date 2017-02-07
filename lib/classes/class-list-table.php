@@ -410,13 +410,11 @@ namespace UsabilityDynamics\WPP {
           $overview_thumb_type = 'thumbnail';
         }
 
-        //$image_large_obj = wp_get_attachment_image_src( $featured_image_id, 'large' );
+        $image_large_obj = wp_get_attachment_image_src( $featured_image_id, 'medium' );
         $image_thumb_obj = wp_get_attachment_image_src( $featured_image_id, $overview_thumb_type );
 
         if( !empty( $image_large_obj ) && !empty( $image_thumb_obj ) ) {
           $data = '<a href="' . $image_large_obj[ '0' ] . '" class="fancybox" rel="overview_group" title="' . $post->post_title . '"><img src="' . $image_thumb_obj[ '0' ] . '" width="' . $image_thumb_obj[ '1' ] . '" height="' . $image_thumb_obj[ '2' ] . '" /></a>';
-        } elseif( !empty( $image_thumb_obj ) ) {
-          $data = '<img src="' . $image_thumb_obj[ '0' ] . '" width="' . $image_thumb_obj[ '1' ] . '" height="' . $image_thumb_obj[ '2' ] . '" />';
         }
 
         return $data;
