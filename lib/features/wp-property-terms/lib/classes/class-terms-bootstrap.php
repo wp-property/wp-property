@@ -8,6 +8,7 @@ namespace UsabilityDynamics\WPP {
 
   use UsabilityDynamics\WP\Bootstrap_Plugin;
   use UsabilityDynamics\Settings;
+  use WPP_F;
 
   if( !class_exists( 'UsabilityDynamics\WPP\Terms_Bootstrap' ) ) {
 
@@ -96,7 +97,13 @@ namespace UsabilityDynamics\WPP {
 
         add_action( 'wp_ajax_term_autocomplete', array($this, 'ajax_term_autocomplete'));
 
-        //add_filter( 'wpp_get_property', array($this, 'wpp_get_property'), 305, 2 );
+        // Extend property object early.
+        add_filter( 'wpp::property::early_extend', array($this, 'extend_property_object'), 5, 2 );
+        add_filter( 'wpp_get_property', array($this, 'finalize_property_object'), 100, 2 );
+
+        // Inject single-value terms into attributes
+        add_filter( 'wpp::draw_stats::attributes', array($this, 'draw_attributes'), 10, 3 );
+
       }
 
       /**
@@ -499,8 +506,62 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Get all taxonomies are thare used for-single-value storage.
+       *
+       * @author potanin@UD
+       * @param $args
+       * @return array
+       */
+      public function get_single_value_taxonomies( $args = array() ) {
+        global $wp_properties;
+
+        $_taxonomies = $this->get( 'config.taxonomies', array() );
+        $_types = $this->get( 'config.types', array() );
+
+        $_results = array();
+
+        foreach( $_taxonomies  as $_tax_key => $_tax_data ) {
+
+          if( isset( $_types[ $_tax_key ] ) && $_types[ $_tax_key ] === 'unique' ) {
+            $_results[ $_tax_key ] = $_tax_data;
+          }
+
+        }
+
+        return (array) $_results;
+
+      }
+
+      /**
+       * Get taxonomies for multi-value storage.
+       *
+       * @param array $args
+       * @return array
+       */
+      public function get_multi_value_taxonomies( $args = array() ) {
+        global $wp_properties;
+
+        $_taxonomies = $this->get( 'config.taxonomies', array() );
+        $_types = $this->get( 'config.types', array() );
+
+        $_results = array();
+
+        foreach( $_taxonomies  as $_tax_key => $_tax_data ) {
+
+          if( isset( $_types ) && isset( $_types[ $_tax_key ] ) && $_types[ $_tax_key ] === 'multiple' ) {
+            $_results[ $_tax_key ] = $_tax_data;
+          }
+
+        }
+
+        return (array) $_results;
+
+      }
+
+      /**
        * Register Meta Box for taxonomies on Edit Property Page
        *
+       * @author potanin@UD
        * @param $meta_boxes
        * @return array
        */
@@ -652,7 +713,7 @@ namespace UsabilityDynamics\WPP {
               ),
               'unique' => array(
                 'label' => __( 'Unique Term', $this->domain ),
-                'desc'  => __( 'Property can have only one term. Be sure to not enable native Meta Box for current taxonomy to prevent issues.', $this->domain ),
+                'desc'  => __( 'Property can have only one term. ', $this->domain ),
               ),
             )
           )
@@ -862,12 +923,124 @@ namespace UsabilityDynamics\WPP {
         wp_cache_flush();
       }
 
-      public function wpp_get_property( $property, $args ){
+      /**
+       * Extends property object with taxonomies, immediatly after meta fields are loaded.
+       *
+       * @author potanin@UD
+       * @param $property
+       * @param $args
+       * @return mixed
+       */
+      public function extend_property_object( $property, $args = array() ){
 
-        die( '<pre>' . print_r( $property, true ) . '</pre>' );
-        return $property;
+        $_values = array();
+
+        foreach( self::get_single_value_taxonomies() as $_tax_key => $_tax_data ) {
+
+          if( $_tax_data['hidden']) { continue; }
+
+          $_terms = wp_get_object_terms( $property['ID'], $_tax_key, array( 'fields' => 'names' ) );
+
+          if( !empty( $_terms ) ) {
+            $_values[ $_tax_key ] = end( $_terms );
+            WPP_F::debug("Getting single-value terms for [$_tax_key], setting to [" . $_values[ $_tax_key ] . ']' );
+          } else {
+            WPP_F::debug("Getting single-value terms for [$_tax_key], no values found." );
+          }
+
+        }
+
+        foreach( self::get_multi_value_taxonomies() as $_tax_key => $_tax_data ) {
+
+          if( $_tax_data['hidden'] === true ) {
+            continue;
+          }
+
+          $_terms = wp_get_object_terms( $property['ID'], $_tax_key, array( 'fields' => 'names' ) );
+
+          if( !empty( $_terms ) ) {
+            $_values[ $_tax_key ] = $_terms;
+            WPP_F::debug("Getting multi-value terms for [$_tax_key], setting to [" . join( ', ', $_terms ) . ']' );
+          } else {
+            WPP_F::debug("Getting multi-value terms for [$_tax_key], no values found." );
+          }
+
+        }
+
+        // Extend property object with taxonomy data.
+        $_result = array_merge( $property, $_values );
+
+        // WPP_F::debug("Terms has extneded property object.", $_values );
+        return $_result;
+
       }
 
+      /**
+       * Iterate over property object, verify now single-value taxonomies are being handled as arrays.
+       *
+       * @param $property
+       * @param array $args
+       * @return mixed
+       */
+      public function finalize_property_object( $property, $args = array() ) {
+
+        foreach( self::get_single_value_taxonomies() as $_tax_key => $_tax_data ) {
+
+          if( isset(  $property[$_tax_key] ) && is_array( $property[$_tax_key] ) ) {
+
+            $property[$_tax_key] = end( $property[$_tax_key] );
+          }
+
+        }
+
+        return $property;
+
+      }
+
+      /**
+       * Extend the draw_attributes function with single-value taxonomies being treatued as regualr attributes
+       *
+       * @param $property_stats
+       * @param $property
+       * @param array $args
+       */
+      public function draw_attributes( $property_stats, $property, $args = array() ){
+
+        foreach( self::get_single_value_taxonomies() as $_tax_key => $_tax_data ) {
+
+          if( is_object( $property ) ) {
+
+            $_item = array(
+              'label' => $_tax_data['label'],
+              'value' => $property->{$_tax_key}
+            );
+
+          }
+
+          if( is_array( $property ) ) {
+
+            $_item = array(
+              'label' => $_tax_data['label'],
+              'value' => $property[$_tax_key]
+            );
+
+          }
+
+          if( isset( $_item ) && ( $args['return_blank'] == 'true' || $_item['value'] ) ) {
+
+            $property_stats[ $_tax_key ] = $_item;
+
+          }
+
+        }
+
+        return $property_stats;
+
+      }
+
+      /**
+       *
+       */
       public function ajax_term_autocomplete(){
         $terms = get_terms($_REQUEST['taxonomy'], array('fields' => 'all', 'hide_empty'=>false));
         $return = $this->prepare_terms_hierarchicaly($terms);

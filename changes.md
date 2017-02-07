@@ -1,4 +1,5 @@
 ### 2.2.1 
+* Added support for single-value taxonomies to be treated as standard meta attributes for display purposes.
 * Added option to export only the attribute fields, groups and property types.
 * Debug log enabled when [WP_DEBUG] and [WP_DEBUG_DISPLAY] constants are defined automatically.
 * Added [WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING] feature flag, hiding the "Enable Standard Attributes Matching and Terms." option by default.
@@ -14,7 +15,7 @@
 * Added sticky-tab selection to Property Settings page. Selected tab stored in [sessionStorage].
 * Added [WPP_FEATURE_FLAG_SETTINGS_BACKUPS] feature flag, enabled by default. Feature automatically creates backups of plugin settings.
 * Added [WPP_FEATURE_FLAG_DISABLE_EDITOR] feature flag which hides the native Post Content editor.
-* Added [WPP_FEATURE_FLAG_WPP_CATEGORY] and [WP_PROPERTY_FLAG_LISTING_LABELS] feature flags, which enable [wpp_category] and [wpp_highlights] taxonomies. 
+* Added [WPP_FEATURE_FLAG_WPP_CATEGORY] and [WP_PROPERTY_FLAG_WPP_LABEL] feature flags, which enable [wpp_category] and [wpp_label] taxonomies. 
 * Fixes to Site API registration process. 
 * Improvements to [wpp_location] taxonomy for wp-rets-client.
 * Implemented [WP_PROPERTY_LEGACY_META_ATTRIBUTES] feature flag, disabling legacy meta UI.

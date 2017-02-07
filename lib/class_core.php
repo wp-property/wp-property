@@ -91,36 +91,38 @@ class WPP_Core {
   /**
    * Apply field alias to property object.
    *
+   * - Alias will overwrite actual if alias exists, regardless of if actual exists.
+   *
    * @param $property
    * @param $args
    * @return mixed
    */
   static public function apply_property_alias( $property, $args ) {
-    global $wp_properties;
 
     $_result = array();
 
     // add terms to object.
-    foreach( (array) $wp_properties['taxonomies'] as $_tax => $_tax_setup) {
-
-      if( $_tax_setup['unique'] === '1' ) {
-        $property[$_tax] = join( ', ', wp_get_object_terms( $property['ID'], $_tax, array( 'fields' => 'names' ) ) );
-      } else {
-        $property[$_tax] = wp_get_object_terms( $property['ID'], $_tax, array( 'fields' => 'names' ) );
-      }
-    }
-
     // apply alias logic.
-    foreach( (array) WPP_F::get_alias_map() as $_alias => $_target ) {
+    foreach( (array) WPP_F::get_alias_map() as $_defined_field => $_target ) {
 
-      if( isset( $property[ $_target ] ) && $property[ $_target ] && ( !isset( $property[ $_alias ] ) || !$property[ $_alias ] ) ) {
-        $_result[] = "Applied target [$_target] alias to [$_alias].";
-        $property[ $_alias ] = $property[ $_target ] ;
+      // try meta, defined taxonomy
+      $_alias_value  = isset( $property[ $_target ] ) ? $property[ $_target ] : null;
+
+      // Support for dynamic taxonomies.
+      if( !$_alias_value ) {
+        WPP_F::verify_have_system_taxonomy( $_target );
+        $_alias_value = wp_get_object_terms( $property['ID'], $_target, array( 'fields' => 'names' ) );
+      }
+
+      // Alias value found.
+      if( $_alias_value ) {
+        $property[ $_defined_field ] = $_alias_value;
+        $_result[] = "Applied target [$_target] alias to [$_defined_field].";
       }
 
     }
 
-    // WPP_F::debug( 'apply_property_alias', array( 'id' => $property['ID'], 'result' => join( ",", $_result ) ) );
+    WPP_F::debug( 'apply_property_alias', array( 'id' => $property['ID'], 'result' => join( ",", $_result ) ) );
 
     return $property;
 
@@ -370,17 +372,12 @@ class WPP_Core {
     //** Set up our default page for properties */
     WPP_F::register_properties_page();
 
-    //** Set up url of default property overview page */
-    // WPP_F::register_property_page_url();
-
-    //** Set up url of random property single page */
-    //WPP_F::register_property_single_url();
-
     //** Load all widgets and register widget areas */
     add_action( 'widgets_init', array( 'WPP_F', 'widgets_init' ) );
 
     do_action( 'wpp_init:end', $this );
-    if( defined( 'WPP_FEATURE_FLAG_WPP_TYPE' ) ) {
+
+    if( defined( 'WPP_FEATURE_FLAG_WPP_TYPE' ) && WPP_FEATURE_FLAG_WPP_TYPE ) {
       add_action( 'created_wpp_type', array($this, 'term_created_wpp_type'), 10, 2 );
       add_action( 'edited_wpp_type', array($this, 'term_created_wpp_type'), 10, 2 );
       add_action( 'delete_wpp_type', array($this, 'term_delete_wpp_type'), 10, 4 );
@@ -393,6 +390,7 @@ class WPP_Core {
         delete_option('wpp_activated');
       }
     }
+
   }
 
   /**
@@ -595,15 +593,11 @@ class WPP_Core {
     add_filter( 'wp_get_attachment_link', array( 'WPP_F', 'wp_get_attachment_link' ), 10, 6 );
 
     //** Make Property Featured Via AJAX */
-    if(
-      isset( $_REQUEST[ 'post_id' ] )
-      && isset( $_REQUEST[ '_wpnonce' ] )
-      && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], "wpp_make_featured_" . $_REQUEST[ 'post_id' ] )
-    ) {
+    if( isset( $_REQUEST[ 'post_id' ] ) && isset( $_REQUEST[ '_wpnonce' ] ) && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], "wpp_make_featured_" . $_REQUEST[ 'post_id' ] ) ) {
       add_action( 'wp_ajax_wpp_make_featured', create_function( "", '  $post_id = $_REQUEST[\'post_id\']; echo WPP_F::toggle_featured( $post_id ); die();' ) );
     }
 
-    add_filter( 'wpp::draw_stats::attributes', array( __CLASS__, 'make_attributes_hidden' ), 10, 2 );
+    add_filter( 'wpp::draw_stats::attributes', array( __CLASS__, 'make_attributes_hidden' ), 100, 2 );
 
     //** Post-init action hook */
     do_action( 'wpp_post_init' );

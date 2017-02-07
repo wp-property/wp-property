@@ -325,7 +325,7 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
      */
 
     jQuery( ".wpp_all_advanced_settings" ).live( "click", function() {
-      var action = jQuery( this ).attr( "action" );
+      var action = jQuery( this ).attr( "data-action" ) || jQuery( this ).attr( "action" );
 
       if( action == "expand" ) {
         jQuery( this ).parents( '.developer-panel' ).find( ".wpp_development_advanced_option" ).show();

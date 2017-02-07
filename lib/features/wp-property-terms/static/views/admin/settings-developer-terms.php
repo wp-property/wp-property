@@ -7,12 +7,14 @@
 wp_enqueue_script( 'wpp-terms-settings', ud_get_wpp_terms()->path( '/static/scripts/wpp.terms.settings.js', 'url' ), array( 'wp-property-admin-settings' ) );
 wp_enqueue_style( 'wpp-terms-settings', ud_get_wpp_terms()->path( '/static/styles/wpp.terms.settings.css', 'url' ) );
 
+$_taxonomies = (array) ud_get_wpp_terms( 'config.taxonomies', array() );
+
 ?>
 <div>
-  <h3 style="float:left;"><?php printf( __( '%1s Terms', ud_get_wpp_terms()->domain ), \WPP_F::property_label() ); ?></h3>
+  <h3 style="float:left;"><?php printf( __( '%1s Taxonomies', ud_get_wpp_terms()->domain ), \WPP_F::property_label() ); ?></h3>
   <div class="wpp_property_stat_functions">
-    <input type="button" class="wpp_all_advanced_settings button-secondary" action="expand" value="<?php _e( 'Expand all', 'wpp' ) ?>" />
-    <input type="button" class="wpp_all_advanced_settings button-secondary" action="collapse" value="<?php _e( 'Collapse all', 'wpp' ) ?>" />
+    <input type="button" class="wpp_all_advanced_settings button-secondary" data-action="expand" value="<?php _e( 'Expand all', 'wpp' ) ?>" />
+    <input type="button" class="wpp_all_advanced_settings button-secondary" data-action="collapse" value="<?php _e( 'Collapse all', 'wpp' ) ?>" />
     <input type="button" class="sort_stats_by_groups button-secondary" value="<?php _e( 'Sort by Groups', 'wpp' ) ?>"/>
   </div>
   <div class="clear"></div>
@@ -20,7 +22,6 @@ wp_enqueue_style( 'wpp-terms-settings', ud_get_wpp_terms()->path( '/static/style
 
 <p style="margin-top: 0;"><?php printf( __( 'Manage your %s Taxonomies here. Note, you can not remove all taxonomies, in this case default WP-Property taxonomies will be returned back.', ud_get_wpp_terms()->domain ), WPP_F::property_label() ); ?></p>
 
-<p><?php printf(__( 'Note, taxonomies length limit is 32 characters.', ud_get_wpp_terms()->domain ));?></p>
 <table id="" class="wpp_sortable wpp_inquiry_attribute_fields ud_ui_dynamic_table widefat">
   <thead>
   <tr>
@@ -34,7 +35,7 @@ wp_enqueue_style( 'wpp-terms-settings', ud_get_wpp_terms()->path( '/static/style
   </thead>
   <tbody>
   <?php $search_input = apply_filters( 'wpp::terms::search_input_fields', array( 'dropdown' => __( 'Dropdown Selection', ud_get_wpp_terms()->domain ), 'multi_checkbox' => __( 'Multi-Checkbox', ud_get_wpp_terms()->domain ) ) ); ?>
-  <?php foreach( (array) ud_get_wpp_terms( 'config.taxonomies', array() ) as $slug => $data ): ?>
+  <?php foreach( $_taxonomies as $slug => $data ): ?>
     <?php
 
     $data = ud_get_wpp_terms()->prepare_taxonomy( $data, $slug );
@@ -52,6 +53,13 @@ wp_enqueue_style( 'wpp-terms-settings', ud_get_wpp_terms()->path( '/static/style
           </li>
           <li class="wpp_development_advanced_option">
             <input type="text" class="slug" readonly='readonly' value="<?php echo $slug; ?>"/>
+
+            <?php if( defined( 'WP_PROPERTY_FIELD_ALIAS' ) && WP_PROPERTY_FIELD_ALIAS ) { ?>
+            <label class="wpp-meta-alias-entry">
+              <input type="text" class="slug wpp_field_alias" name="wpp_settings[field_alias][<?php echo $slug; ?>]" placeholder="Alias for <?php echo $slug; ?>" value="<?php echo WPP_F::get_alias_map( $slug ) ; ?>" />
+            </label>
+            <?php } ?>
+
           </li>
           <li class="hide-on-new-row">
             <a href="<?php echo admin_url( "edit-tags.php?taxonomy={$slug}&post_type=property" ); ?>"><?php _e( 'Manage Terms', ud_get_wpp_terms()->domain ); ?></a>

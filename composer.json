@@ -87,9 +87,9 @@
     },
     "featureFlags": [
       {
-        "name": "Listing Highlights",
-        "constant": "WP_PROPERTY_FLAG_LISTING_LABELS",
-        "description": "Property flags, for highlighting important information, stored in [wpp_highlights]. Can be used to identify 'featured' properties.",
+        "name": "Listing Labels",
+        "constant": "WP_PROPERTY_FLAG_WPP_LABEL",
+        "description": "Property flags, for highlighting important information, stored in [wpp_label]. Can be used to identify 'featured' properties.",
         "since": "2.2.1",
         "enabled": true
       },
@@ -202,6 +202,13 @@
         "name": "Standard Attributes Matching and Terms",
         "constant": "WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING",
         "description": "Enable Standard Attributes Matching and Terms.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Legacy Taxonomies",
+        "constant": "WP_PROPERTY_FLAG_ENABLE_LEGACY_TAXONOMIES",
+        "description": "Enable legacy [property_features] and [community_features] taxonomies. These have been replaced by [wpp_category].",
         "since": "2.2.1",
         "enabled": false
       },
