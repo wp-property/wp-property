@@ -494,10 +494,10 @@ namespace UsabilityDynamics\WPRETSC {
             ud_get_wp_rets_client()->write_log( 'Handling [wpp_location] taxonomy for [' . $_post_id .'] listing.' );
 
             $_geo_tag_fields = array(
-              "state" => reset( $_post_data_tax_input["rets_location_state"] ),
-              "county" => reset( $_post_data_tax_input["rets_location_county"] ),
-              "city" => reset( $_post_data_tax_input["rets_location_city"] ),
-              "route" => reset( $_post_data_tax_input["rets_location_route"] ),
+              "state" => isset( $_post_data_tax_input["rets_location_state"] ) ? reset( $_post_data_tax_input["rets_location_state"] ) : null,
+              "county" => isset( $_post_data_tax_input["rets_location_county"] ) ? reset( $_post_data_tax_input["rets_location_county"] ) : null,
+              "city" => isset( $_post_data_tax_input["rets_location_city"] ) ? reset( $_post_data_tax_input["rets_location_city"] ) : null,
+              "route" => isset( $_post_data_tax_input["rets_location_route"] ) ? reset( $_post_data_tax_input["rets_location_route"] ) : null,
             );
 
 
