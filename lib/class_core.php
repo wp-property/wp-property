@@ -122,7 +122,10 @@ class WPP_Core {
 
     }
 
-    WPP_F::debug( 'apply_property_alias', array( 'id' => $property['ID'], 'result' => join( ",", $_result ) ) );
+    WPP_F::debug( 'apply_property_alias', array( 'id' => $property['ID']) );
+
+    //die( '<pre>' . print_r( $_result, true ) . '</pre>' );
+    //WPP_F::debug( 'apply_property_alias:detail',$_result );
 
     return $property;
 
@@ -149,7 +152,7 @@ class WPP_Core {
 
     }
 
-    WPP_F::debug( 'apply_properties_query_alias', array( 'query' => $query, 'result' => $_result ) );
+    //WPP_F::debug( 'apply_properties_query_alias', array( 'query' => $query, 'result' => $_result ) );
 
     return $query;
 

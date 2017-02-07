@@ -650,7 +650,8 @@ class WPP_F extends UsabilityDynamics\Utility
       $_debug = false;
     }
 
-    if($_debug && class_exists( '\ChromePhp' ) ) {
+    if($_debug && class_exists( '\ChromePhp' ) && !headers_sent() ) {
+
       if( $detail ) {
         ChromePhp::log( '[wp-property]', $text, $detail );
       } else {
