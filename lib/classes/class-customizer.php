@@ -270,7 +270,7 @@ namespace UsabilityDynamics\WPP {
           $overview_radio_choices[$layout->layout] = '<img style="display: block; width: 150px; height: 150px;" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
         }
         $wp_customize->add_setting('layouts_property_overview_choice', array(
-          'default' => 'none',
+          'default' => $overview_layouts[0]->layout,
           'transport' => 'refresh'
         ));
         $wp_customize->add_control(new Layouts_Custom_Control($wp_customize, 'layouts_property_overview_choice', array(
@@ -310,7 +310,7 @@ namespace UsabilityDynamics\WPP {
           $single_radio_choices[$layout->layout] = '<img style="display: block; width: 150px; height: 150px;" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
         }
         $wp_customize->add_setting('layouts_property_single_choice', array(
-          'default' => 'none',
+          'default' => $single_layouts[0]->layout,
           'transport' => 'refresh'
         ));
         $wp_customize->add_control(new Layouts_Custom_Control($wp_customize, 'layouts_property_single_choice', array(
