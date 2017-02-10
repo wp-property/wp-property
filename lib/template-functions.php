@@ -1362,16 +1362,8 @@ if ( !function_exists( 'wpp_get_image_link' ) ):
       'return' => 'string'
     );
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
-    if ( 
-      isset( $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] ) 
-      && $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] == 'true' 
-    ) {
-      //* If on-the-fly image generation is specifically disabled, we simply return the default URL */
-      $default_return = wp_get_attachment_image_src( $attachment_id, $size, true );
-      $i[ 0 ] = $default_return[ 0 ];
-      $i[ 1 ] = $default_return[ 1 ];
-      $i[ 2 ] = $default_return[ 2 ];
-    } else {
+
+    if ( isset( $wp_properties[ 'configuration' ][ 'automatically_regenerate_thumbnail' ] ) && $wp_properties[ 'configuration' ][ 'automatically_regenerate_thumbnail' ] == 'true' ) {
       //* Do the default action of attempting to regenerate image if needed. */
       $uploads_dir = wp_upload_dir();
       //** Get image path from meta table (if this doesn't exist, nothing we can do */
@@ -1412,6 +1404,13 @@ if ( !function_exists( 'wpp_get_image_link' ) ):
           $image_path = str_replace( $uploads_dir[ 'baseurl' ], $uploads_dir[ 'basedir' ], $img_url );
         }
       }
+    } else {
+
+      $default_return = wp_get_attachment_image_src( $attachment_id, $size, true );
+      $i[ 0 ] = $default_return[ 0 ];
+      $i[ 1 ] = $default_return[ 1 ];
+      $i[ 2 ] = $default_return[ 2 ];
+
     }
 
     // Must check that $image_path exists, for remotely stored images this will be empty and will cause an an error within getimagesize.
