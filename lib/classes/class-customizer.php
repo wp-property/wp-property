@@ -21,7 +21,7 @@ namespace UsabilityDynamics\WPP {
        * @var array
        */
       private $possible_tags = array(
-        'search-results', 'single-property', 'single-property-term'
+        'single-property', 'property-overview'
       );
 
       /**
@@ -234,11 +234,11 @@ namespace UsabilityDynamics\WPP {
         $this->preload_layouts();
         $layouts = get_option('wpp_available_layouts', false);
         $local_layouts = get_option('wpp_available_local_layouts', false);
-        $overview_layouts = $layouts['single-property-term'];
+        $overview_layouts = $layouts['property-overview'];
         $single_layouts = $layouts['single-property'];
         foreach ($local_layouts as $value) {
           $tag = $value->tags[0]->tag;
-          if ($tag == 'single-property-term') {
+          if ($tag == 'property-overview') {
             $overview_layouts = array_merge($overview_layouts, array($value));
           } else if ($tag == 'single-property') {
             $single_layouts = array_merge($single_layouts, array($value));
@@ -254,8 +254,8 @@ namespace UsabilityDynamics\WPP {
 
         // Property overview settings
         $wp_customize->add_section('layouts_property_overview_settings', array(
-          'title' => __('Overview Page', ud_get_wp_property()->domain),
-          'description' => __('Changing layout for property overview page in live preview.', ud_get_wp_property()->domain),
+          'title' => __('Property Overview', ud_get_wp_property()->domain),
+          'description' => __('Overview layouts will apply to default properties page, search results and terms pages.', ud_get_wp_property()->domain),
           'panel' => 'layouts_area_panel',
           'priority' => 1,
         ));
@@ -295,7 +295,7 @@ namespace UsabilityDynamics\WPP {
         // Single property settings
         $wp_customize->add_section('layouts_property_single_settings', array(
           'title' => __('Single Property', ud_get_wp_property()->domain),
-          'description' => __('Changing layout for single property page in live preview.', ud_get_wp_property()->domain),
+          'description' => __('Layout for single property page in live preview.', ud_get_wp_property()->domain),
           'panel' => 'layouts_area_panel',
           'priority' => 2,
         ));

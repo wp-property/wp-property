@@ -19,7 +19,7 @@ namespace UsabilityDynamics\WPP {
        * @var array
        */
       private $possible_tags = array(
-        'search-results', 'single-property', 'single-property-term'
+         'single-property', 'property-overview'
       );
 
       /**
