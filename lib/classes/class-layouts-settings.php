@@ -37,7 +37,7 @@ namespace UsabilityDynamics\WPP {
          *
          */
         $this->api_client = new Layouts_API_Client(array(
-            'url' => defined('UD_API_LAYOUTS_URL') ? UD_API_LAYOUTS_URL : 'https://api.usabilitydynamics.com/property/layouts/v1'
+            'url' => 'https://api.usabilitydynamics.com/property/layouts/v1/'
         ));
 
         /**

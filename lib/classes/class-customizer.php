@@ -46,7 +46,7 @@ namespace UsabilityDynamics\WPP {
            *
            */
           $this->api_client = new Layouts_API_Client(array(
-            'url' => defined('UD_API_LAYOUTS_URL') ? UD_API_LAYOUTS_URL : 'https://api.usabilitydynamics.com/property/layouts/v1'
+            'url' => 'https://api.usabilitydynamics.com/property/layouts/v1/'
           ));
         }
       }
@@ -94,9 +94,6 @@ namespace UsabilityDynamics\WPP {
       public function wpp_customize_configuration($false)
       {
         global $wp_properties;
-
-        $this->get_local_layout();
-
         if (!empty($_POST) && (isset($wp_properties['configuration']) && isset($wp_properties['configuration']['enable_layouts']) && $wp_properties['configuration']['enable_layouts'] == 'false')) {
           try {
             $selected_items = json_decode(stripslashes($_POST['customized']));
@@ -330,53 +327,6 @@ namespace UsabilityDynamics\WPP {
           'type' => 'select',
           'choices' => $templates_names
         ));
-      }
-
-      public function get_local_layout()
-      {
-        $available_local_layouts = get_posts(array('post_type' => 'wpp_layout', 'post_status' => 'pending'));
-        $local_layouts = array();
-        foreach ($available_local_layouts as $local_layout) {
-          $ID = $local_layout->ID;
-          $_post = get_post($ID);
-          $_meta = get_post_meta($ID, 'panels_data', 1);
-          $_tags_objects = wp_get_post_terms($ID, 'layout_type');
-          $_tags = array();
-
-          if (!empty($_tags_objects) && is_array($_tags_objects)) {
-            foreach ($_tags_objects as $_tags_object) {
-              $_tags[] = array(
-                'label' => $_tags_object->name,
-                'tag' => $_tags_object->slug
-              );
-            }
-          }
-
-          $res = $this->create_layout_metas(array(
-            'title' => $_post->post_title,
-            'screenshot' => get_post_meta($ID, 'screenshot', 1),
-            'layout' => $_meta,
-            'tags' => $_tags
-          ));
-
-
-          if (!is_wp_error($res)) {
-            $res = json_decode($res);
-            $local_layouts[] = $res;
-          }
-        }
-        update_option('wpp_available_local_layouts', $local_layouts);
-      }
-
-      public function create_layout_metas($data)
-      {
-        try {
-          $data['layout'] = base64_encode(json_encode($data['layout']));
-          $data = json_encode($data);
-        } catch (\Exception $e) {
-          return new \WP_Error('100', 'Could not parse query data', $data);
-        }
-        return $data;
       }
     }
   }

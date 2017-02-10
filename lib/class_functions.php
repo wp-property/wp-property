@@ -678,7 +678,7 @@ class WPP_F extends UsabilityDynamics\Utility
   {
     global $wp_properties;
 
-    self::debug($text);
+    self::debug( $text );
     return;
 
     if (!isset($wp_properties['configuration']['developer_mode']) || $wp_properties['configuration']['developer_mode'] != 'true') {
@@ -3535,7 +3535,7 @@ class WPP_F extends UsabilityDynamics\Utility
     $query = apply_filters('wpp_get_properties_query', $query);
 
     //WPP_F::console_log("get_properties() args: {$log}");
-    WPP_F::debug("get_properties()", array('query' => $query, 'args' => $args));
+    WPP_F::debug("get_properties()", array( 'query' => $query, 'args' => $args )  );
 
     $query_keys = array_keys((array)$query);
 
