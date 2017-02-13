@@ -51,7 +51,7 @@ if (!function_exists('parse_feature_flags')) {
   function parse_feature_flags()
   {
     try {
-      $_raw = file_get_contents(plugin_dir_url(__FILE__) . 'composer.json');
+      $_raw = file_get_contents(plugin_dir_path(__FILE__) . 'composer.json');
       $_parsed = json_decode($_raw);
       // @todo Catch poorly formatted JSON.
       if (!is_object($_parsed)) {
