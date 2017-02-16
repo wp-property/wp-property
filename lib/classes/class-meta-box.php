@@ -404,7 +404,7 @@ namespace UsabilityDynamics\WPP {
           //* HACK. If property_type is set as attribute, we register it here. */
           if( $slug == 'property_type' ) {
             $field = $this->get_property_type_field( $post );
-            if( $field ) {
+            if( $field && (!defined( 'WPP_FEATURE_FLAG_WPP_TYPE' ) || empty($taxonomies['wpp_type']['default']))) {
               $fields[] = $field;
             }
             continue;
