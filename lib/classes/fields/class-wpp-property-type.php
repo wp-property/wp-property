@@ -73,6 +73,28 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 		}
 
 		/**
+		 * Standard meta retrieval
+		 *
+		 * @param int   $post_id
+		 * @param bool  $saved
+		 * @param array $field
+		 *
+		 * @return array
+		 */
+		static function meta( $post_id, $saved, $field )
+		{
+			$options = $field['options'];
+
+			$meta = parent::meta( $post_id, $saved, $field );
+			if (empty($meta)) {
+				$_meta = get_post_meta($post_id, 'property_type', true);
+				$term = get_term_by('slug', $_meta, 'wpp_type');
+				$meta = isset($term->term_id)? (array) $term->term_id : $meta;
+			}
+			return $meta;
+		}
+
+		/**
 		 * Save meta value
 		 *
 		 * @param mixed $new
