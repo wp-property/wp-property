@@ -37,7 +37,7 @@
     "disable_wordpress_postmeta_cache": "false",
     "developer_mode": "true",
     "auto_delete_attachments": "false",
-    "do_not_automatically_regenerate_thumbnails": "true",
+    "automatically_regenerate_thumbnail": "true",
     "pre_release_update": "false",
     "default_image": {
       "default": {

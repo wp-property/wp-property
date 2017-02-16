@@ -1,0 +1,111 @@
+/**
+ *
+ */
+.wpp-json-viewer {
+  font-size: 12px;
+  height: 600px;
+  line-height: 1.1em;
+  margin-top: 17px;
+  overflow: scroll;
+  padding: 6px;
+  width: auto;
+  overflow-x: hidden;
+
+  .jjson-container {
+    font-size: 13px;
+    line-height: 1.2;
+    font-family: monospace;
+    padding-left: 0;
+    margin-left: 20px;
+    overflow-x: auto;
+    overflow-y: auto;
+  }
+
+  .jjson-container,
+  .jjson-container ul{
+    list-style: none !important;
+  }
+  .jjson-container ul{
+    padding: 0px !important;
+    padding-left: 20px !important;
+    margin: 0px !important;
+  }
+
+  .jjson-container li {
+    position: relative;
+  }
+
+  .jjson-container > li  > .key,
+  .jjson-container .array .key {
+    display: none;
+  }
+
+  .jjson-container .array .object .key {
+    display: inline;
+  }
+
+  .jjson-container li:after {
+    content: ",";
+  }
+
+  .jjson-container li:last-child:after {
+    content: "";
+  }
+
+  .jjson-container .null {
+    color: #999;
+  }
+  .jjson-container .string {
+    color: #4e9a06;
+  }
+  .jjson-container .number {
+    color: #a40000;
+  }
+  .jjson-container .boolean {
+    color: #c4a000;
+  }
+  .jjson-container .key {
+    color: #204a87;
+  }
+  .jjson-error {
+    margin: 10px;
+    color: rgb(239, 62, 62);
+  }
+  .jjson-container .expanded {
+    cursor: pointer;
+  }
+  .jjson-container .expanded:before {
+    content: "-";
+    font-size: 1.2em;
+    width: 13px;
+    text-align: center;
+    line-height: 13px;
+    font-family: sans-serif;
+    color: #933;
+    position: absolute;
+    left: -15px;
+    top: 3px;
+  }
+
+  .jjson-container .collapsed:before {
+    content: "+";
+    font-size: 1.1em;
+    color: #000;
+    top: 1px;
+  }
+
+  .jjson-container li .collapsed ~ .close:before {
+    content: "... ";
+    color: #999;
+  }
+
+  .jjson-container .hidden ~ ul {
+    display: none;
+  }
+
+  .jjson-container span {
+    position: static !important;
+  }
+
+
+}

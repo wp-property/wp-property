@@ -36,12 +36,18 @@ $predefined_values = isset( $wp_properties[ 'predefined_values' ] ) ? $wp_proper
   if(empty($wp_properties[ 'property_stats' ])){
 	  $wp_properties[ 'property_stats' ] = array("" => "");
   }
+
+  if( !isset( $wp_properties[ 'property_groups' ] ) ) {
+    $wp_properties[ 'property_groups' ] = array();
+  }
+
   foreach( $wp_properties[ 'property_stats' ] as $slug => $label ): ?>
     <?php $gslug = false; ?>
     <?php $group = false; ?>
     <?php if( !empty( $wp_properties[ 'property_stats_groups' ][ $slug ] ) ) : ?>
       <?php $gslug = $wp_properties[ 'property_stats_groups' ][ $slug ]; ?>
-      <?php $group = $wp_properties[ 'property_groups' ][ $gslug ]; ?>
+
+      <?php $group = isset( $wp_properties[ 'property_groups' ][ $gslug ] ) ? $wp_properties[ 'property_groups' ][ $gslug ] : ''; ?>
     <?php endif; 
 		
 	?>
@@ -55,7 +61,17 @@ $predefined_values = isset( $wp_properties[ 'predefined_values' ] ) ? $wp_proper
             <input class="slug_setter" type="text" name="wpp_settings[property_stats][<?php echo $slug; ?>]" value="<?php echo $label; ?>"/>
           </li>
           <li class="wpp_development_advanced_option">
-            <input type="text" class="slug wpp_stats_slug_field" readonly='readonly' value="<?php echo $slug; ?>"/>
+
+            <label class="wpp-mmeta-slug-entry">
+              <input type="text" class="slug wpp_stats_slug_field" readonly='readonly' value="<?php echo $slug; ?>"/>
+            </label>
+
+            <?php if( defined( 'WP_PROPERTY_FIELD_ALIAS' ) && WP_PROPERTY_FIELD_ALIAS ) { ?>
+            <label class="wpp-meta-alias-entry">
+              <input type="text" class="slug wpp_field_alias" name="wpp_settings[field_alias][<?php echo $slug; ?>]" placeholder="Alias for <?php echo $slug; ?>" value="<?php echo WPP_F::get_alias_map( $slug ) ; ?>" />
+            </label>
+            <?php } ?>
+
             <?php if( in_array( $slug, $wp_properties[ 'geo_type_attributes' ] ) ): ?>
               <div class="wpp_notice">
                 <span><?php _e( 'Attention! This attribute (slug) is used by Google Validator and Address Display functionality. It is set automaticaly and can not be edited on Property Adding/Updating page.', ud_get_wp_property()->domain ); ?></span>
@@ -68,10 +84,7 @@ $predefined_values = isset( $wp_properties[ 'predefined_values' ] ) ? $wp_proper
             <?php endif; ?>
           <?php
           // BEGIN : code for standard attributes
-          if(isset($wp_properties[ 'configuration' ][ 'show_advanced_options' ]) && $wp_properties[ 'configuration' ][ 'show_advanced_options' ]=="true"){
-            // merge std_attr  if need to use all attributes as a single array
-//            $merged_std_attributes = array_unique(call_user_func_array('array_merge', $wp_properties[ 'prop_std_att' ]),SORT_REGULAR);
-            ?>
+          if( defined( 'WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING' ) && WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING && isset($wp_properties[ 'configuration' ][ 'show_advanced_options' ]) && $wp_properties[ 'configuration' ][ 'show_advanced_options' ] === "true" ) { ?>
             <p class="wpp-std-att-cont">
               <label>
                   <a class="wpp-toggle-std-attr">  <?php _e( 'Match standard attribute', ud_get_wp_property()->domain ); ?></a>
@@ -83,10 +96,7 @@ $predefined_values = isset( $wp_properties[ 'predefined_values' ] ) ? $wp_proper
             ?>
               
              <div  class='std-attr-mapper'>
-              <select  name='wpp_settings[prop_std_att_mapsto][<?php echo $slug;?>]'  
-                       id="wpp_prop_std_att_mapsto_<?php echo $slug;?>"
-                       class=' wpp_settings-prop_std_att_mapsto'>
-                <option value=''> - </option>
+              <select  name='wpp_settings[prop_std_att_mapsto][<?php echo $slug;?>]' id="wpp_prop_std_att_mapsto_<?php echo $slug;?>" class=' wpp_settings-prop_std_att_mapsto'><option value=''> - </option>
              <?php
               foreach ($wp_properties[ 'prop_std_att' ] as $std_attr_type){
                 foreach ($std_attr_type as $std_key => $std_val){
@@ -208,7 +218,7 @@ $predefined_values = isset( $wp_properties[ 'predefined_values' ] ) ? $wp_proper
           <?php $class = (isset( $wp_properties[ 'en_default_value' ] ) && in_array( $slug, $wp_properties[ 'en_default_value' ] ) )? "show":"hidden";?>
           <li class="wpp_attribute_default_values <?php echo $class;?>">
             <?php
-            $input_type = $wp_properties[ 'admin_attr_fields' ][ $slug ];
+            $input_type = isset( $wp_properties[ 'admin_attr_fields' ][ $slug ] ) ? $wp_properties[ 'admin_attr_fields' ][ $slug ] : null;
             $value = (isset( $wp_properties[ 'default_values' ][ $slug ]))? $wp_properties[ 'default_values' ][ $slug ]: "";
             $field_name = "wpp_settings[default_values][$slug]";
             echo __("<label>Default Value</label>", ud_get_wp_property()->domain);

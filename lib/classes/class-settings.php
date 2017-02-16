@@ -39,7 +39,7 @@ namespace UsabilityDynamics\WPP {
           'currency_symbol' => '$',
           'address_attribute' => 'location',
           'google_maps_localization' => 'en',
-          'enable_layouts' => 'true',
+          'enable_layouts' => 'false',
           'display_address_format' => '[city], [state]'
         );
 
@@ -323,6 +323,12 @@ namespace UsabilityDynamics\WPP {
 
         $wp_properties = $this->get();
 
+
+      }
+
+      static public function render_page() {
+
+        include ud_get_wp_property()->path("static/views/admin/settings.php", 'dir');
 
       }
 

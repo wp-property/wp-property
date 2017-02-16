@@ -435,19 +435,34 @@ if ( !function_exists( 'the_tagline' ) ) {
 }
 
 if ( !function_exists( 'get_features' ) ) {
+  /**
+   * @param string $args
+   * @param bool $property
+   * @return array|bool|int
+   */
   function get_features( $args = '', $property = false ) {
     global $post;
+
     if ( is_array( $property ) ) {
       $property = (object) $property;
     }
+
     if ( !$property ) {
       $property = $post;
     }
-    $defaults = array( 'type' => 'property_feature', 'format' => 'comma', 'links' => true );
-    $args = wp_parse_args( $args, $defaults );
+
+    $args = wp_parse_args( $args, array(
+      'type' => 'property_feature',
+      'format' => 'comma',
+      'links' => true
+    ) );
+
     $features = get_the_terms( $property->ID, $args[ 'type' ] );
+
     $features_html = array();
+
     if ( $features ) {
+
       foreach ( $features as $feature ) {
         if ( $args[ 'links' ] == 'true' ) {
           array_push( $features_html, '<a href="' . get_term_link( $feature->slug, $args[ 'type' ] ) . '">' . $feature->name . '</a>' );
@@ -455,6 +470,7 @@ if ( !function_exists( 'get_features' ) ) {
           array_push( $features_html, $feature->name );
         }
       }
+
       if ( $args[ 'format' ] == 'comma' ) {
         echo implode( $features_html, ", " );
       }
@@ -468,6 +484,7 @@ if ( !function_exists( 'get_features' ) ) {
         echo "<li>" . implode( $features_html, "</li><li>" ) . "</li>";
       }
     }
+
   }
 }
 
@@ -492,7 +509,7 @@ if ( !function_exists( 'draw_stats' ) ):
     if ( is_array( $property ) ) {
       $property = WPP_F::array_to_object( $property );
     }
-    
+
     $defaults = array(
       'sort_by_groups' => 'false',
       'display' => 'dl_list',
@@ -518,7 +535,7 @@ if ( !function_exists( 'draw_stats' ) ):
     }
 
     extract( $args = wp_parse_args( $args, $defaults ), EXTR_SKIP );
-    
+
     $property_stats = array();
     $groups = isset( $wp_properties[ 'property_groups' ] ) ? (array)$wp_properties[ 'property_groups' ] : array();
 
@@ -527,7 +544,7 @@ if ( !function_exists( 'draw_stats' ) ):
      * The functionality below is related to WPP2.0
      * Now it just adds compatibility with new Denali versions
      */
-    if ( $include_clsf == 'detail' ) {
+    if ( $args['include_clsf'] === 'detail' ) {
       $sort_by_groups = 'false';
       foreach ( $wp_properties[ 'property_meta' ] as $k => $v ) {
         if ( $k == 'tagline' ) {
@@ -542,7 +559,7 @@ if ( !function_exists( 'draw_stats' ) ):
     }
 
     /* Extend $property_stats with property taxonomy */
-    if(($include_taxonomies === 'true' || $include_taxonomies === true) && is_array($wp_properties['taxonomies'])){
+    if(( $args['include_taxonomies'] === 'true' || $args['include_taxonomies'] === true) && is_array($wp_properties['taxonomies'])){
       foreach ($wp_properties['taxonomies'] as $taxonomy => $data) {
         if($data['public'] && empty($wp_properties['taxonomies'][$taxonomy]['hidden']))
           $property_stats[ $taxonomy ] = array( 'label' => $data['label'], 'value' => $data['label'] );
@@ -573,10 +590,9 @@ if ( !function_exists( 'draw_stats' ) ):
       return false;
     }
     
-    //echo "<pre>"; print_r( $property_stats ); echo "</pre>"; die();
-
     //* Prepare values before display */
-    $property_stats = apply_filters( 'wpp::draw_stats::attributes', $property_stats, $property );
+    $property_stats = apply_filters( 'wpp::draw_stats::attributes', $property_stats, $property, $args );
+
     $stats = array();
 
     foreach ( $property_stats as $tag => $data ) {
@@ -588,16 +604,18 @@ if ( !function_exists( 'draw_stats' ) ):
       $value = $data[ 'value' ];
 
       $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $tag );
+
       //print_r($attribute_data);
       //** Do not show attributes that have value of 'value' if enabled */
-      if ( $hide_false == 'true' && $value == 'false' ) {
+      if ( $args['hide_false'] == 'true' && $value == 'false' ) {
         continue;
       }
 
       //* Skip blank values (check after filters have been applied) */
-      if ( $return_blank == 'false' && empty( $value ) ) {
+      if ( $args['return_blank'] == 'false' && empty( $value ) ) {
         continue;
       }
+
       if(!is_array($value))
         $value = html_entity_decode( $value );
 
@@ -664,45 +682,51 @@ if ( !function_exists( 'draw_stats' ) ):
         $value = "<ul class='rwmb-file'>" . $file_html . "</ul>";
       }
 
-      // Taxonomies. Adding terms link
-      if ( isset( $attribute_data[ 'storage_type' ] ) && $attribute_data[ 'storage_type' ] == 'taxonomy') {
-        $terms = wp_get_post_terms( $property->ID, $tag);
-        if(count($terms) == 0)
+      // Taxonomies. Adding terms link, only if multi-value taxonomy.
+      if ( isset( $attribute_data[ 'storage_type' ] ) && $attribute_data[ 'storage_type' ] == 'taxonomy' && $attribute_data['multiple'] ) {
+
+        $terms = wp_get_post_terms( $property->ID, $tag );
+        if( count( $terms ) == 0 ) {
           continue;
+        }
+
         $value = "<ul>";
-        foreach ($terms as $key => $term) {
+
+        foreach( $terms as $key => $term ) {
           $term_link = $term->name;
-          if(isset($make_terms_links) && $make_terms_links == "true"){
-            $term_link = "<a href='" . get_term_link($term->term_id, $tag) . "'>{$term->name}</a>";
+          if( isset( $make_terms_links ) && $make_terms_links == "true" ) {
+            $term_link = "<a href='" . get_term_link( $term->term_id, $tag ) . "'>{$term->name}</a>";
           }
           $value .= "<li class='property-terms property-term-{$term->slug}'>$term_link</li>";
         }
+
         $value .= "</ul>";
+
       }
 
       //** Single "true" is converted to 1 by get_properties() we check 1 as well, as long as it isn't a numeric attribute */
       if ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'checkbox' && in_array( strtolower( $value ), array( 'true', '1', 'yes' ) ) ) {
-        if ( $show_true_as_image == 'true' ) {
+        if ( $args['show_true_as_image'] == 'true' ) {
           $value = '<div class="true-checkbox-image"></div>';
         } else {
           $value = __( 'Yes', ud_get_wp_property()->domain );
         }
       } else if ( $value == 'false' ) {
-        if ( $show_true_as_image == 'true' ) {
+        if ( $args['show_true_as_image'] == 'true' ) {
           continue;
         }
         $value = __( 'No', ud_get_wp_property()->domain );
       }
 
       //* Make URLs into clickable links */
-      if ( $make_link == 'true' && WPP_F::isURL( $value ) ) {
+      if ( $args['make_link'] == 'true' && WPP_F::isURL( $value ) ) {
         $value = str_replace( '&ndash;', '-', $value );
         $label = $data['label'];
         $value = "<a href='{$value}' title='{$label}'>{$value}</a>";
       }
 
       //* Make emails into clickable links */
-      if ( $make_link == 'true' && WPP_F::is_email( $value ) ) {
+      if ( $args['make_link'] == 'true' && WPP_F::is_email( $value ) ) {
         $value = "<a href='mailto:{$value}'>{$value}</a>";
       }
 
@@ -714,9 +738,9 @@ if ( !function_exists( 'draw_stats' ) ):
       return false;
     }
 
-    if ( $display == 'array' ) {
+    if ( $args['display'] == 'array' ) {
 
-      if( $sort_by_groups == 'true' && is_array( $groups ) ) {
+      if( $args['sort_by_groups'] == 'true' && is_array( $groups ) ) {
 
         $stats = sort_stats_by_groups( $stats );
 
@@ -747,10 +771,10 @@ if ( !function_exists( 'draw_stats' ) ):
 
     }
 
-    $alt = $first_alt == 'true' ? "" : "alt";
+    $alt = $args['first_alt'] == 'true' ? "" : "alt";
 
     //** Disable regular list if groups are NOT enabled, or if groups is not an array */
-    if ( $sort_by_groups != 'true' || !is_array( $groups ) ) {
+    if ( $args['sort_by_groups'] != 'true' || !is_array( $groups ) ) {
 
       foreach ( $stats as $tag => $data ) {
         
@@ -759,18 +783,18 @@ if ( !function_exists( 'draw_stats' ) ):
         $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type',$data[ 'value' ]) : apply_filters('wpp::attribute::value',$data[ 'value' ],$tag);
         $alt = ( $alt == "alt" ) ? "" : "alt";
         
-        switch ( $display ) {
+        switch ( $args['display'] ) {
           case 'dl_list':
             ?>
-            <dt class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_dt_<?php echo $tag; ?>"><?php echo $label; ?>
+            <dt class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> wpp_stat_dt_<?php echo $tag; ?>"><?php echo $label; ?>
               <span class="wpp_colon">:</span></dt>
-            <dd class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_dd_<?php echo $tag; ?> <?php echo $alt; ?>"><?php echo $value; ?>
+            <dd class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> wpp_stat_dd_<?php echo $tag; ?> <?php echo $alt; ?>"><?php echo $value; ?>
               &nbsp;</dd>
             <?php
             break;
           case 'list':
             ?>
-            <li class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_plain_list_<?php echo $tag; ?> <?php echo $alt; ?>">
+            <li class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> wpp_stat_plain_list_<?php echo $tag; ?> <?php echo $alt; ?>">
               <span class="attribute"><?php echo $label; ?><span class="wpp_colon">:</span></span>
               <span class="value"><?php echo $value; ?>&nbsp;</span>
             </li>
@@ -778,8 +802,8 @@ if ( !function_exists( 'draw_stats' ) ):
             break;
           case 'plain_list':
             ?>
-            <span class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> attribute"><?php echo $label; ?>:</span>
-            <span class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> value"><?php echo $value; ?>&nbsp;</span>
+            <span class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> attribute"><?php echo $label; ?>:</span>
+            <span class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> value"><?php echo $value; ?>&nbsp;</span>
             <br/>
             <?php
             break;
@@ -807,7 +831,7 @@ if ( !function_exists( 'draw_stats' ) ):
         <?php
         }
 
-        switch ( $display ) {
+        switch ( $args['display'] ) {
           case 'dl_list':
             ?>
             <dl class="wpp_property_stats overview_stats">
@@ -874,6 +898,7 @@ if ( !function_exists( 'draw_stats' ) ):
         </div>
       <?php
       }
+
     }
 
   }
@@ -1337,16 +1362,8 @@ if ( !function_exists( 'wpp_get_image_link' ) ):
       'return' => 'string'
     );
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
-    if ( 
-      isset( $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] ) 
-      && $wp_properties[ 'configuration' ][ 'do_not_automatically_regenerate_thumbnails' ] == 'true' 
-    ) {
-      //* If on-the-fly image generation is specifically disabled, we simply return the default URL */
-      $default_return = wp_get_attachment_image_src( $attachment_id, $size, true );
-      $i[ 0 ] = $default_return[ 0 ];
-      $i[ 1 ] = $default_return[ 1 ];
-      $i[ 2 ] = $default_return[ 2 ];
-    } else {
+
+    if ( isset( $wp_properties[ 'configuration' ][ 'automatically_regenerate_thumbnail' ] ) && $wp_properties[ 'configuration' ][ 'automatically_regenerate_thumbnail' ] == 'true' ) {
       //* Do the default action of attempting to regenerate image if needed. */
       $uploads_dir = wp_upload_dir();
       //** Get image path from meta table (if this doesn't exist, nothing we can do */
@@ -1387,6 +1404,13 @@ if ( !function_exists( 'wpp_get_image_link' ) ):
           $image_path = str_replace( $uploads_dir[ 'baseurl' ], $uploads_dir[ 'basedir' ], $img_url );
         }
       }
+    } else {
+
+      $default_return = wp_get_attachment_image_src( $attachment_id, $size, true );
+      $i[ 0 ] = $default_return[ 0 ];
+      $i[ 1 ] = $default_return[ 1 ];
+      $i[ 2 ] = $default_return[ 2 ];
+
     }
 
     // Must check that $image_path exists, for remotely stored images this will be empty and will cause an an error within getimagesize.
@@ -1528,34 +1552,28 @@ if ( !function_exists( 'wpp_css' ) ):
    * This function is just wrapper.
    * See: WPP_F::get_css_classes();
    *
-   * @param type $element [required] It's used for determine which classes should be filtered.
-   * It can be set of template and element: "{template}::{element}"
-   * @param array $classes [optional] Set of classes
-   * @param boolean $return [optional] If false, prints classes. If true returns array of classes
-   * @param array $args [optional] Any set of additional arguments which can be needed.
-   *
-   * @return array|echo
    * @author peshkov@UD
    * @version 0.1
+   *
+   * @param string $element [required] It's used for determine which classes should be filtered. It can be set of template and element: "{template}::{element}"
+   * @param bool $classes [optional] Set of classes
+   * @param bool $return [optional] If false, prints classes. If true returns array of classes
+   * @param array $args [optional] Any set of additional arguments which can be needed.
+   * @return array|echo
    */
-  /**
-   * @param type $element
-   * @param array|bool $classes
-   * @param bool $return
-   * @param array $args
-   * @return bool|string
-   */
-  function wpp_css( $element, $classes = false, $return = false, $args = array() ) {
+  function wpp_css( $element = '', $classes = false, $return = false, $args = array() ) {
     $args = array_merge( (array) $args, array(
       'instance' => 'wpp',
       'element' => $element,
       'classes' => $classes,
       'return' => $return,
     ) );
+
     if ( is_callable( array( 'WPP_F', 'get_css_classes' ) ) ) {
       return WPP_F::get_css_classes( $args );
     }
     return false;
+
   }
 
 endif;

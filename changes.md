@@ -1,4 +1,32 @@
 ### 2.2.1 
+* Disabled legacy "on-the-fly" image regeneration.
+* Added wp-json / wp-rest support to wp-rest-client as an alternative to XML-RPC requests.
+* Added support for single-value taxonomies to be treated as standard meta attributes for display purposes.
+* Added option to export only the attribute fields, groups and property types.
+* Debug log enabled when [WP_DEBUG] and [WP_DEBUG_DISPLAY] constants are defined automatically.
+* Added [WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING] feature flag, hiding the "Enable Standard Attributes Matching and Terms." option by default.
+* When backup is restored from settings, any omitted fields are preserved, allowing partial configuration backups.
+* Added API actions to generate and remove demo listing data, fetched from API.
+* Configured Setup Assistant to load configuration schema from API, setting up default attributes, groups and property types.
+* Added [wpp::localization::instance] filter to customizer/extend the [wpp] variable.
+* Removed WPP_F::register_property_page_url and WPP_F::register_property_single_url.
+* Improved Layout Customizer logic for detecting URL to single property page and main properties page.
+* Added [WPP_FEATURE_FLAG_WPP_STATUS] feature flag and standard Status taxonomy.
+* Serialized property meta fields are now automatically unserialized.
+* Added [WP_PROPERTY_FLAG_ENABLE_SUPERMAP] and [WP_PROPERTY_FLAG_ENABLE_AGENTS] feature flags to toggle features.
+* Added sticky-tab selection to Property Settings page. Selected tab stored in [sessionStorage].
+* Added [WPP_FEATURE_FLAG_SETTINGS_BACKUPS] feature flag, enabled by default. Feature automatically creates backups of plugin settings.
+* Added [WPP_FEATURE_FLAG_DISABLE_EDITOR] feature flag which hides the native Post Content editor.
+* Added [WPP_FEATURE_FLAG_WPP_CATEGORY] and [WP_PROPERTY_FLAG_WPP_LABEL] feature flags, which enable [wpp_category] and [wpp_label] taxonomies. 
+* Fixes to Site API registration process. 
+* Improvements to [wpp_location] taxonomy for wp-rets-client.
+* Implemented [WP_PROPERTY_LEGACY_META_ATTRIBUTES] feature flag, disabling legacy meta UI.
+* Improved UX for viewing property objects by using a JSON viewer library.
+* Improved wp-rets-client logic for inserting terms and taxonomies. Both are added on-the-fly, with hierarchy support if needed.
+* Added Feature flags to help tab to help understand what features are enabled.
+* Fixed a bug with rets-client site registration hanging.
+* Fixed a minor issue with Supermap trying to load a non-existant map pin.
+* Bundled Supermap and Agents features.
 * Enabled `property_location` taxonomy which automatically creates hierarchial location terms during address validation.
 * Hiding advanced legacy options Single Template selection, Default Property Page, Default Phone Number and Widget Sidebars.
 * Added `ccampbell/chromephp` logger.

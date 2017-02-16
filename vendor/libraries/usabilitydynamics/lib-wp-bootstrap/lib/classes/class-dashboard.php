@@ -27,8 +27,8 @@ namespace UsabilityDynamics\WP {
        * 
        * @var string 
        */
-//      public $page_slug = 'ud-splash';
-      public $page_slug = 'wpp-setup-page';
+      public $page_slug = 'ud-splash';
+      
       /**
        * Need splash key
        * 
@@ -77,23 +77,11 @@ namespace UsabilityDynamics\WP {
         if ( empty( $_GET['page'] ) ) {
           return;
         }
-        if ($_GET['page'] == $this->page_slug) {
-          add_dashboard_page(__('Welcome to Wp Property', $this->domain), __('Welcome', $this->domain), 'manage_options', $this->page_slug, array($this, 'wpp_setup_page'));
+        if ( $_GET['page'] == $this->page_slug ) {
+          add_dashboard_page( __( 'Welcome to Usability Dynamics, Inc.', $this->domain ), __( 'Welcome', $this->domain ), 'manage_options', $this->page_slug, array( $this, 'ud_splash_page' ) );
         }
       }
-
-      /**
-       * Render UD dashboard page
-       * 
-       * @author korotkov@ud
-       */
-      public function wpp_setup_page() {
-        //** Try to get information to show */
-//        include WPP_Path . "static/splashes/install.php";
-        
-        wpp_fs()->_connect_page_render();
-      }
-
+      
       /**
        * Render UD dashboard page
        * 
@@ -104,6 +92,8 @@ namespace UsabilityDynamics\WP {
         $updates = get_transient( $this->transient_key );
         ?>
         <div class="wrap about-wrap">
+          <h1><?php _e( 'Usability Dynamics, Inc.', $this->domain ) ?></h1>
+          <div class="about-text"><?php _e( 'Thank you for using our products.', $this->domain ) ?></div>
           <div class="wp-badge ud-badge"></div>
           <?php
             //** If user visited this page directly */

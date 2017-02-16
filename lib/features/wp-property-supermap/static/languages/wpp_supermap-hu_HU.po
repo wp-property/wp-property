@@ -1,0 +1,2162 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-29 13:51+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
+"Language-Team: \n"
+"Language: hu_HU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_n;_x\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: lib/class-wpp-supermap.php:70
+#, fuzzy
+msgid "Manage Supermap"
+msgstr "Szupertérkép opció"
+
+#: lib/class-wpp-supermap.php:84
+#, fuzzy
+msgid "Supermap"
+msgstr "Szupertérkép opció"
+
+#: lib/class-wpp-supermap.php:115
+msgid "Example Area"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:157
+#, fuzzy
+msgid "Sidebar Attributes"
+msgstr "Elrejtett tartalmak"
+
+#: lib/class-wpp-supermap.php:159
+msgid ""
+"Select the attributes you want to display in the left sidebar on the "
+"supermap."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:173
+msgid ""
+"Display \"View Property\" link in the left sidebar. It directs user to "
+"Property Page."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:179
+msgid "Supermap Sidebar Thumbnail:"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:184
+msgid "Do not show a property thumbnail in sidebar."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:187
+msgid ""
+"If you create a new image size, please be sure to regenerate all thumbnails. "
+msgstr ""
+
+#: lib/class-wpp-supermap.php:192
+#, fuzzy
+msgid "Map Markers:"
+msgstr "Anunciantes"
+
+#: lib/class-wpp-supermap.php:198
+#, fuzzy
+msgid "Image"
+msgstr "Képméret:"
+
+#: lib/class-wpp-supermap.php:199 lib/class-wpp-supermap.php:341
+msgid "Name"
+msgstr "Név"
+
+#: lib/class-wpp-supermap.php:200
+msgid "Slug"
+msgstr "Slug"
+
+#: lib/class-wpp-supermap.php:227 lib/class-wpp-supermap.php:374
+msgid "Delete"
+msgstr "Törlés"
+
+#: lib/class-wpp-supermap.php:235
+msgid "Add Marker"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:335
+msgid "Map Areas:"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:337
+msgid ""
+"<p>Map areas let you draw our areas on the map, such as neighborhoods.</"
+"p><p>Just add to shortcode attribute <b>show_areas=all</b> to draw all areas "
+"on the map. Also You can use area's slugs to show them on the map, like as "
+"<b>show_areas=new_york,washington</b>. Please, use coordinates in this "
+"format: <b>(82.72, -37.79)(69.54, -57.48)(68.93, -18.63).</b></p><p><i>This "
+"is an experimental feature, you may not want to use it on a live site.  "
+"We're eager to hear your feedback regarding this feature and the "
+"capabilities that would be useful to you.</i></p>"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:342
+msgid "Coordinates"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:343
+msgid "Fill Color"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:344
+msgid "Opacity"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:345
+msgid "Stoke Color"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:346
+msgid "Hover Color"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:382
+msgid "Add Row"
+msgstr "Sor hozzáadása"
+
+#: lib/class-wpp-supermap.php:424 lib/class-wpp-supermap.php:675
+msgid "Map Marker"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:426 lib/class-wpp-supermap.php:677
+#, fuzzy
+msgid "Default by Google"
+msgstr "Alapértelmezett sablon"
+
+#: lib/class-wpp-supermap.php:493
+msgid "File should be an image"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:546
+msgid "Looks like, Image can not be uploaded."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:624
+msgid "Supermap Options"
+msgstr "Szupertérkép opció"
+
+#: lib/class-wpp-supermap.php:637
+#, fuzzy
+msgid "Exclude property from Supermap"
+msgstr "Üzlet kizárása a szupertérképről"
+
+#: lib/class-wpp-supermap.php:828 lib/class-wpp-supermap.php:1170
+msgid "Options"
+msgstr "Beállítások"
+
+#: lib/class-wpp-supermap.php:840
+#, php-format
+msgid "Element cannot be rendered, missing %1s script."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:928
+#, fuzzy, php-format
+msgid "Sorry, no %s found, try expanding your search."
+msgstr ""
+"Elnézést, nem található üzlet - próbálja meg kiterjeszteni a keresést, vagy "
+"<a href=\"%s\">nézze meg az összeset</a>."
+
+#: lib/class-wpp-supermap.php:1052 lib/class-wpp-supermap.php:1641
+msgid "Yes"
+msgstr "Igen"
+
+#: lib/class-wpp-supermap.php:1068 lib/class-wpp-supermap.php:1656
+msgid "View Property"
+msgstr "Üzlet megtekintése"
+
+#: lib/class-wpp-supermap.php:1131
+#, fuzzy
+msgid "No results found."
+msgstr "Nem található üzlet"
+
+#: lib/class-wpp-supermap.php:1677
+#, fuzzy
+msgid "Show More"
+msgstr "\"Több\" link mutatása"
+
+#: lib/class-wpp-supermap.php:1678
+#, fuzzy
+msgid "Loading..."
+msgstr "Töltés"
+
+#: lib/class-wpp-supermap.php:1790
+msgid "Loading"
+msgstr "Töltés"
+
+#: wp-property-supermap.php:43
+msgid ""
+"Distributive is broken. composer.json is missed. Try to remove and upload "
+"plugin again."
+msgstr ""
+
+#: wp-property-supermap.php:51
+#, php-format
+msgid "Plugin requires PHP %s or higher. Your current PHP version is %s"
+msgstr ""
+
+#: wp-property-supermap.php:59
+#, php-format
+msgid ""
+"Distributive is broken. %s file is missed. Try to remove and upload plugin "
+"again."
+msgstr ""
+
+#: wp-property-supermap.php:63
+msgid ""
+"Distributive is broken. Plugin loader is not available. Try to remove and "
+"upload plugin again."
+msgstr ""
+
+#: wp-property-supermap.php:84
+#, php-format
+msgid "<p><b>%s</b> can not be initialized. %s</p>"
+msgstr ""
+
+#~ msgid "Building"
+#~ msgstr "Épület"
+
+#~ msgid "Floorplan"
+#~ msgstr "Alaprajz"
+
+#~ msgid "Single Family Home"
+#~ msgstr "Egyszerű családi ház"
+
+#~ msgid "Address"
+#~ msgstr "Cégnév"
+
+#~ msgid "Price"
+#~ msgstr "Ár"
+
+#~ msgid "Bedrooms"
+#~ msgstr "Hálószobák"
+
+#~ msgid "Bathrooms"
+#~ msgstr "Fürdőszobák"
+
+#~ msgid "Deposit"
+#~ msgstr "Előleg"
+
+#~ msgid "Area"
+#~ msgstr "Terület"
+
+#~ msgid "Phone Number"
+#~ msgstr "telefonszám"
+
+#~ msgid "Lease Terms"
+#~ msgstr "Bérleti feltételek"
+
+#~ msgid "Pet Policy"
+#~ msgstr "Állattartás"
+
+#~ msgid "School"
+#~ msgstr "Iskola"
+
+#~ msgid "Tagline"
+#~ msgstr "Szlogen"
+
+#~ msgid "Studio"
+#~ msgstr "Stúdió"
+
+#~ msgid "The property type will determine the layout."
+#~ msgstr "Az üzlet típusa befolyásolja az alaprajzot"
+
+#~ msgid ""
+#~ "Customize what appears in search results in the attribute section.  For "
+#~ "example: 1bed, 2baths, area varies slightly."
+#~ msgstr ""
+#~ "Állítsa be, hogy mi jelenjen meg a keresési eredmények között az "
+#~ "attribútum részben..Például: 1 háló, 2 fürdő, stb."
+
+#~ msgid "Will appear on overview pages and on top of every listing page."
+#~ msgstr ""
+#~ "Meg fog jelleni minden áttekintő oldalon, valamint minden lista oldal "
+#~ "tetején."
+
+#, fuzzy
+#~ msgid "View "
+#~ msgstr "Összes mutatása"
+
+#~ msgid "Property Type"
+#~ msgstr "Üzlet típus"
+
+#~ msgid "City"
+#~ msgstr "Város"
+
+#~ msgid "For Sale"
+#~ msgstr "Eladásra"
+
+#~ msgid "For Rent"
+#~ msgstr "Bérlésre"
+
+#~ msgid "This is a rental property."
+#~ msgstr "Ez egy bérelhető üzlet."
+
+#~ msgid "This property is for sale."
+#~ msgstr "Ez az üzlet eladó."
+
+#, fuzzy
+#~ msgid "Format phone number."
+#~ msgstr "Általános telefonszám"
+
+#, fuzzy
+#~ msgid " sq. ft."
+#~ msgstr "négyzetméter"
+
+#, fuzzy
+#~ msgid "Address was validated by Google Maps."
+#~ msgstr ""
+#~ "<span class='description'>A címet hitelesítette a Google Maps.</span>"
+
+#, fuzzy
+#~ msgid ""
+#~ "Address has not yet been validated, should be formatted as: street, city, "
+#~ "state, postal code, country. Locations are validated through Google Maps."
+#~ msgstr ""
+#~ "<span class='description'>A cím még nincs hitelesítve, próbáljon meg "
+#~ "változtatni a következőkön: utca, város, állam, irányító szám, ország. A "
+#~ "hely hitelesítve lesz a Google Maps által.</span>"
+
+#, fuzzy
+#~ msgid "Show"
+#~ msgstr "Csúszka"
+
+#~ msgid "Featured"
+#~ msgstr "Kiemelt"
+
+#, fuzzy
+#~ msgid "Add to Featured"
+#~ msgstr "Új üzlet hozzáadása"
+
+#~ msgid "Processing..."
+#~ msgstr "Feldolgozás..."
+
+#, fuzzy
+#~ msgid "Uploading"
+#~ msgstr "Töltés"
+
+#, fuzzy
+#~ msgid "Upload Image"
+#~ msgstr "Összes kép:"
+
+#~ msgid "Cancel"
+#~ msgstr "Mégse"
+
+#, fuzzy
+#~ msgid "Previous"
+#~ msgstr "Előző"
+
+#~ msgid "Next"
+#~ msgstr "Következő"
+
+#, fuzzy
+#~ msgid "Show %s entries"
+#~ msgstr "%s képek mutatása"
+
+#, fuzzy
+#~ msgid "No matching records found"
+#~ msgstr "Nem található üzlet"
+
+#, fuzzy
+#~ msgid "Search:"
+#~ msgstr "Keresés"
+
+#, fuzzy
+#~ msgid "Display:"
+#~ msgstr "Kijelzés"
+
+#, fuzzy
+#~ msgid "Select a unique ID attribute."
+#~ msgstr "Válasszon egyet"
+
+#~ msgid "Settings"
+#~ msgstr "Beállítások"
+
+#, fuzzy
+#~ msgid "Enabled Options"
+#~ msgstr "Beállítások"
+
+#~ msgid "Developer"
+#~ msgstr "Fejlesztő"
+
+#, fuzzy
+#~ msgid "%1s Attributes"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "Advanced Stats Settings:"
+#~ msgstr "Általános beállítások"
+
+#~ msgid "Main"
+#~ msgstr "Fő"
+
+#, fuzzy
+#~ msgid "Add Group"
+#~ msgstr "Sor hozzáadása"
+
+#, fuzzy
+#~ msgid "Attribute Name"
+#~ msgstr "Funkció név"
+
+#, fuzzy
+#~ msgid "Search Input"
+#~ msgstr "Keresés"
+
+#, fuzzy
+#~ msgid "Toggle Advanced Settings"
+#~ msgstr "Általános beállítások"
+
+#, fuzzy
+#~ msgid "Sortable."
+#~ msgstr "Rendezhető"
+
+#, fuzzy
+#~ msgid "Searchable."
+#~ msgstr "Kereshető"
+
+#, fuzzy
+#~ msgid "Admin Only."
+#~ msgstr "Admin UI"
+
+#, fuzzy
+#~ msgid "Show in \"All Properties\" table."
+#~ msgstr "Gyermek üzletek mutatása."
+
+#, fuzzy
+#~ msgid "Delete Attribute"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "%1s Types"
+#~ msgstr "Típus"
+
+#~ msgid "Type"
+#~ msgstr "Típus"
+
+#~ msgid "Hidden Attributes"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "Inherit from Parent"
+#~ msgstr "Öröklődés"
+
+#~ msgid "Searchable"
+#~ msgstr "Kereshető"
+
+#~ msgid "Location Matters"
+#~ msgstr "Helyszín fontos"
+
+#, fuzzy
+#~ msgid "Parent Selection"
+#~ msgstr "Üzlet  beállítások"
+
+#, fuzzy
+#~ msgid "Advanced Options"
+#~ msgstr "Beállítások"
+
+#~ msgid "Show Log."
+#~ msgstr "Napló mutatása"
+
+#~ msgid "Child Properties"
+#~ msgstr "Üzlet altipusok"
+
+#~ msgid "Menu Sort Order:"
+#~ msgstr "Menü elrendezés:"
+
+#, fuzzy
+#~ msgid "Display in featured listings."
+#~ msgstr "Üzlet mutatása a kiemelt listában."
+
+#, fuzzy
+#~ msgid "Property updated. <a href=\"%s\">view property</a>"
+#~ msgstr "Üzlet frissítve <a href=\"%s\">üzlet megnézése</a>"
+
+#~ msgid "Custom field updated."
+#~ msgstr "Egyedi mező frissítve."
+
+#~ msgid "Custom field deleted."
+#~ msgstr "Egyedi mező törölve."
+
+#~ msgid "Property updated."
+#~ msgstr "Üzlet frissítve."
+
+#~ msgid "Property restored to revision from %s"
+#~ msgstr "Imóvel restaurado para a versão %s"
+
+#~ msgid "Property published. <a href=\"%s\">View property</a>"
+#~ msgstr "Üzlet publikálva <a href=\"%s\">Üzlet megnézése</a>"
+
+#~ msgid "Property saved."
+#~ msgstr "Üzlet elmentve."
+
+#~ msgid ""
+#~ "Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+#~ msgstr ""
+#~ "Üzlet feltöltve. <a target=\"_blank\" href=\"%s\">Üzlet megtekintése</a>"
+
+#~ msgid "M j, Y @ G:i"
+#~ msgstr "Y. F j.  l H:i"
+
+#~ msgid "Title"
+#~ msgstr "Cím"
+
+#~ msgid "Overview"
+#~ msgstr "Nézet"
+
+#~ msgid "Order"
+#~ msgstr "Sorrend"
+
+#~ msgid "Thumbnail"
+#~ msgstr "Előkép"
+
+#~ msgid "General Information"
+#~ msgstr "Általános informió"
+
+#~ msgid "Search"
+#~ msgstr "Keresés"
+
+#~ msgid "Floor plans at location:"
+#~ msgstr "Alaprajz a címhez:"
+
+#, fuzzy
+#~ msgid "View Properties"
+#~ msgstr "Üzlet megtekintése"
+
+#, fuzzy
+#~ msgid "Add/Edit Properties"
+#~ msgstr "Üzlet módosítása"
+
+#, fuzzy
+#~ msgid "Edit Other Properties"
+#~ msgstr "Üzlet keresése"
+
+#, fuzzy
+#~ msgid "Delete Properties"
+#~ msgstr "Üzlet keresése"
+
+#, fuzzy
+#~ msgid "Publish Properties"
+#~ msgstr "Üzletek"
+
+#, fuzzy
+#~ msgid "Manage Settings"
+#~ msgstr "Általános beállítások"
+
+#, fuzzy
+#~ msgid "Manage Taxonomies"
+#~ msgstr "Csúszka"
+
+#, fuzzy
+#~ msgid "For more information:"
+#~ msgstr "Általános informió"
+
+#, fuzzy
+#~ msgid "An error occurred during API key request: <b>%s</b>."
+#~ msgstr "Hiba történt a prémium kiegészítés ellenőrzésénél: <b> %s <b>"
+
+#~ msgid "Properties"
+#~ msgstr "Üzletek"
+
+#~ msgid "Property"
+#~ msgstr "Üzlet"
+
+#~ msgid "Property: %s"
+#~ msgstr "Üzlet: %s"
+
+#~ msgid "Features"
+#~ msgstr "Szolgáltatások"
+
+#~ msgid "Feature"
+#~ msgstr "Funkció"
+
+#, fuzzy
+#~ msgid "Search Features"
+#~ msgstr "Keresési beálíltások"
+
+#, fuzzy
+#~ msgid "All Features"
+#~ msgstr "Szolgáltatások"
+
+#, fuzzy
+#~ msgid "Parent Feature"
+#~ msgstr "Funkció"
+
+#, fuzzy
+#~ msgid "Parent Feature:"
+#~ msgstr "Funkció"
+
+#, fuzzy
+#~ msgid "Edit Feature"
+#~ msgstr "Funkció"
+
+#, fuzzy
+#~ msgid "Update Feature"
+#~ msgstr "Funkció"
+
+#, fuzzy
+#~ msgid "Add New Feature"
+#~ msgstr "Új üzlet hozzáadása"
+
+#, fuzzy
+#~ msgid "New Feature Name"
+#~ msgstr "Funkció név"
+
+#~ msgid "Community Features"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "Community Feature"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "Search Community Features"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "All Community Features"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "Parent Community Feature"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "Parent Community Feature:"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "Edit Community Feature"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "Update Community Feature"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "Add New Community Feature"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "New Community Feature Name"
+#~ msgstr "Közösségi szolgáltatások"
+
+#, fuzzy
+#~ msgid "All Properties"
+#~ msgstr "Üzletek"
+
+#, fuzzy
+#~ msgid "Add Property"
+#~ msgstr "Új üzlet hozzáadása"
+
+#~ msgid "Add New Property"
+#~ msgstr "Új üzlet hozzáadása"
+
+#~ msgid "Edit Property"
+#~ msgstr "Üzlet módosítása"
+
+#~ msgid "New Property"
+#~ msgstr "Új üzlet"
+
+#~ msgid "Search Properties"
+#~ msgstr "Üzlet keresése"
+
+#~ msgid "No properties found"
+#~ msgstr "Nem található üzlet"
+
+#~ msgid "No properties found in Trash"
+#~ msgstr "Nem található üzlet a lomtárban"
+
+#, fuzzy
+#~ msgid "Default"
+#~ msgstr "Törlés"
+
+#~ msgid ""
+#~ "One of the folders that is necessary for downloading additional features "
+#~ "for the WP-Property plugin is not writable.  This means features cannot "
+#~ "be downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-"
+#~ "property/core/premium</b> permissions to 0755."
+#~ msgstr ""
+#~ "Az egyik mappa, ami feltétlenül szükséges a WP-Property bővítménynek hogy "
+#~ "le tudja tölteni a további jellegzetességeket nem írható. Ez azt jelenti, "
+#~ "hogy a kiegészítőt ne tudja letölteni. Ahhoz hogy ez működjön, Őnnek be "
+#~ "kell állítania a <b> wp-content/plugins6wp-property/core/premium </b> "
+#~ "engedélyt 0755-re."
+
+#, fuzzy
+#~ msgid "Cache was successfully cleared"
+#~ msgstr "Frissítés sikeres."
+
+#, fuzzy
+#~ msgid ""
+#~ "An error occurred during premium feature check. API Key '<b>%s</b>' is "
+#~ "incorrect."
+#~ msgstr "Hiba történt a prémium kiegészítés ellenőrzésénél: <b> %s <b>"
+
+#, fuzzy
+#~ msgid "WP-Property Premium Feature: %s"
+#~ msgstr "WP-Property kiemelt kiegészítők"
+
+#~ msgid "Update ran successfully."
+#~ msgstr "Frissítés sikeres."
+
+#, fuzzy
+#~ msgid "An error occurred during premium feature check: <b> %s </b>."
+#~ msgstr "Hiba történt a prémium kiegészítés ellenőrzésénél: <b> %s <b>"
+
+#~ msgid " sq ft."
+#~ msgstr "négyzetméter"
+
+#~ msgid "Get Directions"
+#~ msgstr "Útvonal"
+
+#~ msgid "General Settings"
+#~ msgstr "Általános beállítások"
+
+#, fuzzy
+#~ msgid "Login"
+#~ msgstr "Napló"
+
+#, fuzzy
+#~ msgid "Submit Inquiry"
+#~ msgstr "Enviar"
+
+#, fuzzy
+#~ msgid "Date"
+#~ msgstr "Törlés"
+
+#, fuzzy
+#~ msgid "Published"
+#~ msgstr "Csúszka képek:"
+
+#, fuzzy
+#~ msgid "Pending"
+#~ msgstr "Töltés"
+
+#, fuzzy
+#~ msgid "Show all dates"
+#~ msgstr "%s képek mutatása"
+
+#, fuzzy
+#~ msgid "General Help"
+#~ msgstr "Általános beállítások"
+
+#, fuzzy
+#~ msgid "Default Properties Page"
+#~ msgstr "Kiemelt üzletek"
+
+#~ msgid "Display"
+#~ msgstr "Kijelzés"
+
+#, fuzzy
+#~ msgid "Premium Features"
+#~ msgstr "WP-Property kiemelt kiegészítők"
+
+#, fuzzy
+#~ msgid "Tab allows you to manage your WP-Property Premium Features"
+#~ msgstr "WP-Property kiemelt kiegészítők"
+
+#, fuzzy
+#~ msgid "More Help"
+#~ msgstr "Több"
+
+#, fuzzy
+#~ msgid "published"
+#~ msgstr "Csúszka képek:"
+
+#, fuzzy
+#~ msgid "pending"
+#~ msgstr "Töltés"
+
+#, fuzzy
+#~ msgid "Nothing found."
+#~ msgstr "Nem található üzlet"
+
+#, fuzzy
+#~ msgid "New User account created."
+#~ msgstr "Tábla nincs kész."
+
+#, fuzzy
+#~ msgid "Status Updated"
+#~ msgstr "Üzlet frissítve."
+
+#, fuzzy
+#~ msgid "or"
+#~ msgstr "Több"
+
+#, fuzzy
+#~ msgid "No published properties."
+#~ msgstr "Gyermek üzletek mutatása."
+
+#~ msgid "Title:"
+#~ msgstr "Cím:"
+
+#, fuzzy
+#~ msgid "Attributes to Display:"
+#~ msgstr "Cím mutatása"
+
+#~ msgid "%s at %s for %s"
+#~ msgstr "%s mikor %s kinek %s"
+
+#~ msgid "More"
+#~ msgstr "Több"
+
+#~ msgid "View All"
+#~ msgstr "Összes mutatása"
+
+#, fuzzy
+#~ msgid ""
+#~ "The widget will show other properties that share a parent with the "
+#~ "currently displayed property."
+#~ msgstr "Mutassa a gyermek üzleteket a jelenleg kijelzetteknél"
+
+#, fuzzy
+#~ msgid "Hide images."
+#~ msgstr "Csúszka képek:"
+
+#~ msgid "Image Size:"
+#~ msgstr "Képméret:"
+
+#, fuzzy
+#~ msgid "Listings to display?"
+#~ msgstr "Hányat mutasson?"
+
+#, fuzzy
+#~ msgid "Select the attributes you want to display: "
+#~ msgstr "Állítsa be az információkat, amiket ki szeretne jelezni."
+
+#~ msgid "Address Format:"
+#~ msgstr "Címormátum"
+
+#~ msgid "Show \"More\" link?"
+#~ msgstr "\"Több\" link mutatása"
+
+#~ msgid "Show \"View All\" link?"
+#~ msgstr "\"Összes mutatása\" link mutatása"
+
+#~ msgid "Show child properties (if any) for currently displayed property"
+#~ msgstr "Mutassa a gyermek üzleteket a jelenleg kijelzetteknél"
+
+#~ msgid ""
+#~ "The widget will not be displayed if the currently viewed property has no "
+#~ "children."
+#~ msgstr "Widget nem fog megjelenni, hacsak az üzlet  nemalkategóriában van."
+
+#, fuzzy
+#~ msgid "Hide Images?"
+#~ msgstr "Csúszka képek:"
+
+#~ msgid "Select the stats you want to display"
+#~ msgstr "Állítsa be az információkat, amiket ki szeretne jelezni."
+
+#, fuzzy
+#~ msgid "Featured %1s"
+#~ msgstr "Szolgáltatások"
+
+#~ msgid "List of properties that were marked as Featured"
+#~ msgstr ""
+#~ "Azoknak az üzleteknek a listája, amik megvannak jelölve kiemelt jelzővel"
+
+#~ msgid "Featured Properies"
+#~ msgstr "Imóveis Kiemelt üzletek"
+
+#~ msgid "List of the latest properties created on this site"
+#~ msgstr "Az utolsónak felrakott üzletek listája "
+
+#~ msgid "Latest Properties"
+#~ msgstr "Legutolsó üzletek"
+
+#~ msgid "Select stats you want to display"
+#~ msgstr "Válasszon tulajdonságokat, amiket mutatni szeretne"
+
+#, fuzzy
+#~ msgid "%1s Search"
+#~ msgstr "Keresés"
+
+#, fuzzy
+#~ msgid "Display a highly customizable  %1s search form."
+#~ msgstr "A jobban módosítható üzletkereső mutatása"
+
+#~ msgid "Property types to search:"
+#~ msgstr "Üzlet típusok a kereséshez:"
+
+#, fuzzy
+#~ msgid "All Attributes"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "Grouped Attributes"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "Default Sort Order"
+#~ msgstr "Menü elrendezés:"
+
+#~ msgid "Items per page"
+#~ msgstr "1 oldalon levő adatok"
+
+#~ msgid "Search Properies"
+#~ msgstr "Keresési beálíltások"
+
+#~ msgid "List of all images attached to the current property"
+#~ msgstr "Az összes kép mutatása, ami ehhez az üzletekhez van kapcsolva"
+
+#, fuzzy
+#~ msgid "Large Image Size:"
+#~ msgstr "Képméret:"
+
+#~ msgid "Show %s Images"
+#~ msgstr "%s képek mutatása"
+
+#, fuzzy
+#~ msgid "Show Image Captions"
+#~ msgstr "%s képek mutatása"
+
+#, fuzzy
+#~ msgid "Show Image Descriptions."
+#~ msgstr "Leírás"
+
+#, fuzzy
+#~ msgid "API Failure: %1s."
+#~ msgstr "Szolgáltatások"
+
+#~ msgid "Log Started."
+#~ msgstr "Naplózás elkezdődött."
+
+#~ msgid "Clear Log"
+#~ msgstr "Tiszta log"
+
+#~ msgid "Timestamp"
+#~ msgstr "Időbélyeg"
+
+#~ msgid "Event"
+#~ msgstr "Esemény"
+
+#~ msgid "User"
+#~ msgstr "Felhasználó"
+
+#, fuzzy
+#~ msgid "Agent Shortcodes"
+#~ msgstr "Áttekintő oldal kódja"
+
+#, fuzzy
+#~ msgid "Show agent information:"
+#~ msgstr "Általános informió"
+
+#, fuzzy
+#~ msgid "To query agent properties:"
+#~ msgstr "Gyermek üzletek mutatása."
+
+#, fuzzy
+#~ msgid "Shortcode Attribute Fields"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "Agent Image Size"
+#~ msgstr "Képméret:"
+
+#, fuzzy
+#~ msgid "Agent Information"
+#~ msgstr "Általános informió"
+
+#, fuzzy
+#~ msgid "Agent"
+#~ msgstr "Esemény"
+
+#, fuzzy
+#~ msgid "No Properties."
+#~ msgstr "Üzletek"
+
+#, fuzzy
+#~ msgid "Display Name"
+#~ msgstr "Kijelzés"
+
+#, fuzzy
+#~ msgid "Username"
+#~ msgstr "Felhasználó"
+
+#, fuzzy
+#~ msgid "E-Mail"
+#~ msgstr "Fő"
+
+#, fuzzy
+#~ msgid "Associated Properties"
+#~ msgstr "Kiemelt üzletek"
+
+#, fuzzy
+#~ msgid "Images"
+#~ msgstr "Összes kép:"
+
+#, fuzzy
+#~ msgid "Agent Fields"
+#~ msgstr "Üzlet mezői"
+
+#~ msgid "Add New"
+#~ msgstr "Új hozzáadása"
+
+#, fuzzy
+#~ msgid "Agent updated."
+#~ msgstr "Üzlet frissítve."
+
+#, fuzzy
+#~ msgid "Agent created."
+#~ msgstr "Tábla nincs kész."
+
+#, fuzzy
+#~ msgid "Edit Agent"
+#~ msgstr "Üzlet módosítása"
+
+#, fuzzy
+#~ msgid "No images found."
+#~ msgstr "Nem található üzlet"
+
+#, fuzzy
+#~ msgid "Add Image"
+#~ msgstr "Összes kép:"
+
+#, fuzzy
+#~ msgid "Edit posts"
+#~ msgstr "Üzlet módosítása"
+
+#, fuzzy
+#~ msgid "Edit pages"
+#~ msgstr "Üzlet módosítása"
+
+#, fuzzy
+#~ msgid "Publish pages"
+#~ msgstr "Csúszka képek:"
+
+#, fuzzy
+#~ msgid "Delete pages"
+#~ msgstr "Törlés"
+
+#, fuzzy
+#~ msgid "Delete posts"
+#~ msgstr "Törlés"
+
+#, fuzzy
+#~ msgid "Email Address"
+#~ msgstr "Cégnév"
+
+#, fuzzy
+#~ msgid "<b>Page Settings</b><br/>"
+#~ msgstr "Általános beállítások"
+
+#, fuzzy
+#~ msgid "Name:"
+#~ msgstr "Név"
+
+#, fuzzy
+#~ msgid "Page:"
+#~ msgstr "Szülő"
+
+#, fuzzy
+#~ msgid "Page"
+#~ msgstr "Szülő"
+
+#, fuzzy
+#~ msgid "Search..."
+#~ msgstr "Keresés"
+
+#, fuzzy
+#~ msgid "Template Settings:"
+#~ msgstr "Általános beállítások"
+
+#, fuzzy
+#~ msgid "Template:"
+#~ msgstr "sablon"
+
+#~ msgid "Save Changes"
+#~ msgstr "Módosítások mentése"
+
+#, fuzzy
+#~ msgid "Property Form"
+#~ msgstr "Üzlet: %s"
+
+#, fuzzy
+#~ msgid "Subscription Plan"
+#~ msgstr "Leírás"
+
+#, fuzzy
+#~ msgid "Templates"
+#~ msgstr "sablon"
+
+#, fuzzy
+#~ msgid "Overview Page"
+#~ msgstr "Nézet"
+
+#, fuzzy
+#~ msgid "Edit Page"
+#~ msgstr "Üzlet módosítása"
+
+#, fuzzy
+#~ msgid "Administration"
+#~ msgstr "Beállítások"
+
+#, fuzzy
+#~ msgid "Form Name"
+#~ msgstr "Eladásra"
+
+#, fuzzy
+#~ msgid "Shortcode"
+#~ msgstr "Áttekintő oldal kódja"
+
+#, fuzzy
+#~ msgid "General Options"
+#~ msgstr "Általános beállítások"
+
+#, fuzzy
+#~ msgid "Subscriptions Plans"
+#~ msgstr "Leírás"
+
+#, fuzzy
+#~ msgid "Propery Attributes"
+#~ msgstr "WP-Property kiemelt kiegészítők"
+
+#, fuzzy
+#~ msgid "Available shortcode attributes"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "Just a name of Subscription plan."
+#~ msgstr "Leírás"
+
+#, fuzzy
+#~ msgid "Duration"
+#~ msgstr "Leírás"
+
+#, fuzzy
+#~ msgid "Is Featured"
+#~ msgstr "Kiemelt"
+
+#, fuzzy
+#~ msgid "Images Limit"
+#~ msgstr "Összes kép:"
+
+#~ msgid "Description"
+#~ msgstr "Leírás"
+
+#, fuzzy
+#~ msgid "Property Forms"
+#~ msgstr "Üzlet: %s"
+
+#, fuzzy
+#~ msgid "Edit %s Page"
+#~ msgstr "Üzlet módosítása"
+
+#~ msgid "Price:"
+#~ msgstr "Ár:"
+
+#, fuzzy
+#~ msgid "Duration:"
+#~ msgstr "Leírás"
+
+#, fuzzy
+#~ msgid "Images:"
+#~ msgstr "Összes kép:"
+
+#, fuzzy
+#~ msgid "Renewal of Subscription Plan"
+#~ msgstr "Leírás"
+
+#, fuzzy
+#~ msgid "Options:"
+#~ msgstr "Beállítások"
+
+#, fuzzy
+#~ msgid "day"
+#~ msgstr "Ma"
+
+#, fuzzy
+#~ msgid "created"
+#~ msgstr "Kiemelt"
+
+#, fuzzy
+#~ msgid "updated"
+#~ msgstr "Üzlet frissítve."
+
+#, fuzzy
+#~ msgid "Publish Now"
+#~ msgstr "Csúszka"
+
+#, fuzzy
+#~ msgid "Add New %s"
+#~ msgstr "Új hozzáadása"
+
+#, fuzzy
+#~ msgid "Expired"
+#~ msgstr "Üzlet oldal"
+
+#, fuzzy
+#~ msgid "Wrong FEPS form used"
+#~ msgstr "Üzlet frissítve."
+
+#, fuzzy
+#~ msgid "FEPS forms updated."
+#~ msgstr "Üzlet frissítve."
+
+#, fuzzy
+#~ msgid "%1$s Content"
+#~ msgstr "Cím"
+
+#, fuzzy
+#~ msgid "%1$s Type"
+#~ msgstr "Típus"
+
+#, fuzzy
+#~ msgid "Form Name:"
+#~ msgstr "Eladásra"
+
+#, fuzzy
+#~ msgid "Shortcode:"
+#~ msgstr "Áttekintő oldal kódja"
+
+#, fuzzy
+#~ msgid ""
+#~ "Copy and paste this shortcode into any page or post to display the form"
+#~ msgstr "Másolja ki és illessze be a kódot az oldalba. "
+
+#, fuzzy
+#~ msgid "General Options:"
+#~ msgstr "Általános beállítások"
+
+#, fuzzy
+#~ msgid "%1$s Type:"
+#~ msgstr "Típus"
+
+#, fuzzy
+#~ msgid "Preview Thumbnail Size:"
+#~ msgstr "Előlép méret:"
+
+#, fuzzy
+#~ msgid "%1$s Attributes"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "Attribute"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "%1$s Title"
+#~ msgstr "Cím"
+
+#, fuzzy
+#~ msgid "Required"
+#~ msgstr "Kiemelt"
+
+#, fuzzy
+#~ msgid "Subscription Plans"
+#~ msgstr "Leírás"
+
+#, fuzzy
+#~ msgid "Actions"
+#~ msgstr "Beállítások"
+
+#, fuzzy
+#~ msgid "Update"
+#~ msgstr "Frissítések keresése"
+
+#~ msgid "Submit"
+#~ msgstr "Enviar"
+
+#, fuzzy
+#~ msgid "FEPS Information"
+#~ msgstr "Általános informió"
+
+#, fuzzy
+#~ msgid "PDF Flyer Options"
+#~ msgstr "Szupertérkép opció"
+
+#, fuzzy
+#~ msgid "Exclude %1s from PDF Lists"
+#~ msgstr "Üzlet kizárása a szupertérképről"
+
+#, fuzzy
+#~ msgid "Full Description"
+#~ msgstr "Leírás"
+
+#, fuzzy
+#~ msgid "Attributes"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "File Name:"
+#~ msgstr "Funkció név"
+
+#, fuzzy
+#~ msgid "Actions:"
+#~ msgstr "Beállítások"
+
+#, fuzzy
+#~ msgid "View PDF"
+#~ msgstr "Összes mutatása"
+
+#, fuzzy
+#~ msgid "Properties per page:"
+#~ msgstr "1 oldalon levő adatok"
+
+#, fuzzy
+#~ msgid "Show child properties."
+#~ msgstr "Gyermek üzletek mutatása."
+
+#, fuzzy
+#~ msgid "Contact Information"
+#~ msgstr "Általános informió"
+
+#, fuzzy
+#~ msgid "Refresh Page"
+#~ msgstr "Áttekintő oldal"
+
+#, fuzzy
+#~ msgid "Location"
+#~ msgstr "Töltés"
+
+#, fuzzy
+#~ msgid "Flyer Display"
+#~ msgstr "Kijelzés"
+
+#, fuzzy
+#~ msgid "Description (if exists)"
+#~ msgstr "Leírás"
+
+#, fuzzy
+#~ msgid "Location on Map (if exists)"
+#~ msgstr "Helyszín fontos"
+
+#, fuzzy
+#~ msgid "Secondary Images"
+#~ msgstr "Csúszka képek:"
+
+#, fuzzy
+#~ msgid "Show %1$s images."
+#~ msgstr "%s képek mutatása"
+
+#, fuzzy
+#~ msgid "\" is generated."
+#~ msgstr "Tábla nincs kész."
+
+#, fuzzy
+#~ msgid "Allows user to publish properties."
+#~ msgstr "Gyermek üzletek mutatása."
+
+#, fuzzy
+#~ msgid "WP Property Capabilities"
+#~ msgstr "WP-Property csúszka"
+
+#, fuzzy
+#~ msgid "Labels"
+#~ msgstr "ágyak"
+
+#, fuzzy
+#~ msgid "Singular Property:"
+#~ msgstr "Üzlet módosítása"
+
+#, fuzzy
+#~ msgid "Plural Property:"
+#~ msgstr "Üzlet"
+
+#, fuzzy
+#~ msgid "Overview Page Contextual Help:"
+#~ msgstr "Áttekintő oldal"
+
+#, fuzzy
+#~ msgid "Add "
+#~ msgstr "Új hozzáadása"
+
+#, fuzzy
+#~ msgid "Add New "
+#~ msgstr "Új hozzáadása"
+
+#, fuzzy
+#~ msgid "Search "
+#~ msgstr "Keresés"
+
+#, fuzzy
+#~ msgid "Property Title"
+#~ msgstr "Üzlet típus"
+
+#, fuzzy
+#~ msgid "Property Content"
+#~ msgstr "Üzletek további adatai"
+
+#, fuzzy
+#~ msgid "Property Excerpt"
+#~ msgstr "Üzletek további adatai"
+
+#, fuzzy
+#~ msgid "Property Status"
+#~ msgstr "Üzletek alapadatai"
+
+#, fuzzy
+#~ msgid "Property Order"
+#~ msgstr "Üzlet keresés"
+
+#, fuzzy
+#~ msgid "Property Date"
+#~ msgstr "Üzlet oldal"
+
+#, fuzzy
+#~ msgid "Property Author"
+#~ msgstr "Üzletek további adatai"
+
+#, fuzzy
+#~ msgid "Starting "
+#~ msgstr "Beállítások"
+
+#, fuzzy
+#~ msgid "Last Import"
+#~ msgstr "Novo Imóvel"
+
+#, fuzzy
+#~ msgid "Time: "
+#~ msgstr "Cím:"
+
+#, fuzzy
+#~ msgid "No objects found."
+#~ msgstr "Nem található üzlet"
+
+#, fuzzy
+#~ msgid "Available tags in source: %1s"
+#~ msgstr "Rendelkezésre álló címkék"
+
+#, fuzzy
+#~ msgid "Property Importer"
+#~ msgstr "Üzlet típus"
+
+#, fuzzy
+#~ msgid "Sort by:"
+#~ msgstr "Rendezhető"
+
+#, fuzzy
+#~ msgid "Created Properties"
+#~ msgstr "Kiemelt üzletek"
+
+#, fuzzy
+#~ msgid "Updated Properties"
+#~ msgstr "Kiemelt üzletek"
+
+#, fuzzy
+#~ msgid "Total Properties"
+#~ msgstr "Üzletek"
+
+#, fuzzy
+#~ msgid "Created "
+#~ msgstr "Kiemelt"
+
+#, fuzzy
+#~ msgid "Total Properties: "
+#~ msgstr "Üzletek"
+
+#, fuzzy
+#~ msgid "Delete All Properties"
+#~ msgstr "Üzlet keresése"
+
+#, fuzzy
+#~ msgid "Source"
+#~ msgstr "Több"
+
+#, fuzzy
+#~ msgid "Type:"
+#~ msgstr "Típus"
+
+#, fuzzy
+#~ msgid "Google Spreadsheet"
+#~ msgstr "Google térkép"
+
+#, fuzzy
+#~ msgid "WP-Property Feed"
+#~ msgstr "Üzlet mezői"
+
+#, fuzzy
+#~ msgid "Google Username"
+#~ msgstr "Google térkép"
+
+#, fuzzy
+#~ msgid "Google Password"
+#~ msgstr "Google térkép"
+
+#, fuzzy
+#~ msgid "Property Resource."
+#~ msgstr "Üzlet elmentve."
+
+#, fuzzy
+#~ msgid "Default is \"Property\""
+#~ msgstr "Üzlet típus"
+
+#, fuzzy
+#~ msgid "Property Resource Class."
+#~ msgstr "Üzlet elmentve."
+
+#, fuzzy
+#~ msgid "RETS Version."
+#~ msgstr "Verzió"
+
+#, fuzzy
+#~ msgid "Property Query."
+#~ msgstr "Üzlet galéria"
+
+#, fuzzy
+#~ msgid "Default Property Type"
+#~ msgstr "Üzlet típus"
+
+#, fuzzy
+#~ msgid "properties in the feed."
+#~ msgstr "Nem található üzlet"
+
+#, fuzzy
+#~ msgid " valid images."
+#~ msgstr "Csúszka képek:"
+
+#, fuzzy
+#~ msgid "hour(s) ago."
+#~ msgstr "%s órával korábban"
+
+#, fuzzy
+#~ msgid "Attribute Map"
+#~ msgstr "Elrejtett tartalmak"
+
+#, fuzzy
+#~ msgid "WP-Property Attribute"
+#~ msgstr "WP-Property kiemelt kiegészítők"
+
+#, fuzzy
+#~ msgid "WordPress Attributes"
+#~ msgstr "Üzlet címe"
+
+#, fuzzy
+#~ msgid "Street Number"
+#~ msgstr "telefonszám"
+
+#, fuzzy
+#~ msgid "County"
+#~ msgstr "Város"
+
+#, fuzzy
+#~ msgid "State"
+#~ msgstr "Rendezhető"
+
+#, fuzzy
+#~ msgid "WP-Property Attributes"
+#~ msgstr "WP-Property kiemelt kiegészítők"
+
+#, fuzzy
+#~ msgid "Property Agent"
+#~ msgstr "Üzletek további adatai"
+
+#, fuzzy
+#~ msgid "Global Property ID"
+#~ msgstr "Üzlet"
+
+#, fuzzy
+#~ msgid "Display Address"
+#~ msgstr "Cégnév"
+
+#, fuzzy
+#~ msgid "Address validation has failed."
+#~ msgstr "Cím nincs hitelesítve"
+
+#, fuzzy
+#~ msgid "Manage Slideshow"
+#~ msgstr "Csúszka"
+
+#, fuzzy
+#~ msgid "Slide"
+#~ msgstr "Csúszka"
+
+#, fuzzy
+#~ msgid "Carousel Thumbnail Size:"
+#~ msgstr "Térkép előkép mérete:"
+
+#~ msgid "Slideshow Options"
+#~ msgstr "csúszka beállításai"
+
+#~ msgid "Slideshow Images:"
+#~ msgstr "Csúszka képek:"
+
+#~ msgid "All Images:"
+#~ msgstr "Összes kép:"
+
+#~ msgid "Slideshow"
+#~ msgstr "Csúszka"
+
+#~ msgid "Global Slideshow"
+#~ msgstr "Globális csúszka"
+
+#, fuzzy
+#~ msgid "Slideshow Size: "
+#~ msgstr "Csúszka képek:"
+
+#, fuzzy
+#~ msgid "Display in Global Slideshow Caption:"
+#~ msgstr "Globális csúszka"
+
+#, fuzzy
+#~ msgid "Title."
+#~ msgstr "Cím"
+
+#, fuzzy
+#~ msgid "Tagline."
+#~ msgstr "Szlogen"
+
+#, fuzzy
+#~ msgid "Thumbnail Size"
+#~ msgstr "Előlép méret:"
+
+#, fuzzy
+#~ msgid "Slices:"
+#~ msgstr "Csúszka"
+
+#~ msgid "Slideshow selection and order saved."
+#~ msgstr "Csúszka kiválasztva és a sorrend elmentve."
+
+#~ msgid "WP-Property Slideshow"
+#~ msgstr "WP-Property csúszka"
+
+#~ msgid ""
+#~ "This slideshow can be integrated into your front-end pages by either "
+#~ "using the shortcode, or pasting PHP code into your theme."
+#~ msgstr ""
+#~ "Ezt a csúszkát használhatja a kezdő oldalon, ha beilleszti az oldalba a "
+#~ "kódját, vagy berakja a PHP kódba a asblonjánál."
+
+#~ msgid ""
+#~ "Drag images from selection on the left to the selection on the right, and "
+#~ "then click save."
+#~ msgstr ""
+#~ "Húzza a képeket a bal oldali kiválasztásból a jobb oldali kiválasztásba, "
+#~ "majd nyomja meg a mentés gombot."
+
+#~ msgid ""
+#~ "This list gets all images from your media library that are over %s pixels "
+#~ "wide and %s pixels tall."
+#~ msgstr ""
+#~ "Ez a lista mutatja az összes képet a média könyvtárból, ami %s pixel "
+#~ "szélességnél és %s pixel magasságnál nagyobb."
+
+#~ msgid "Save Selection and Order"
+#~ msgstr "Kiválasztás és sorrend elmentése"
+
+#, fuzzy
+#~ msgid "View"
+#~ msgstr "Összes mutatása"
+
+#, fuzzy
+#~ msgid "Settings updated."
+#~ msgstr "Üzlet frissítve."
+
+#, fuzzy
+#~ msgid "Feature Updates"
+#~ msgstr "Funkció név"
+
+#~ msgid "Check Updates"
+#~ msgstr "Frissítések keresése"
+
+#, fuzzy
+#~ msgid "Enable comments."
+#~ msgstr "Beállítások"
+
+#, fuzzy
+#~ msgid "Default %1s Page"
+#~ msgstr "Alapértelmezett sablon"
+
+#~ msgid "Property (Default)"
+#~ msgstr "Üzlet  (általános)"
+
+#, fuzzy
+#~ msgid "Attribute to use for physical addresses:"
+#~ msgstr "Hol jelenjen meg az üzlet címe."
+
+#~ msgid "Default Phone Number"
+#~ msgstr "Általános telefonszám"
+
+#, fuzzy
+#~ msgid ""
+#~ "Phone number to use when a %1s-specific phone number is not specified."
+#~ msgstr "Telefonszám használata, ha nincs megadva saját telefonszám."
+
+#~ msgid "Image Sizes"
+#~ msgstr "Kép méretek"
+
+#~ msgid "Width"
+#~ msgstr "Szélesség"
+
+#~ msgid "Height"
+#~ msgstr "Magasság"
+
+#~ msgid "Overview Shortcode"
+#~ msgstr "Áttekintő oldal kódja"
+
+#, fuzzy
+#~ msgid ""
+#~ "These are the settings for the [property_overview] shortcode.  The "
+#~ "shortcode displays a list of all building / root %1s.<br />The display "
+#~ "settings may be edited further by customizing the <b>wp-content/plugins/"
+#~ "wp-properties/templates/property-overview.php</b> file.  To avoid losing "
+#~ "your changes during updates, create a <b>property-overview.php</b> file "
+#~ "in your template directory, which will be automatically loaded."
+#~ msgstr ""
+#~ "Ezek a beállítások a [property_overview] kódhoz. A kód kijelzi az "
+#~ "épületek listáját / alap információit.<br />\n"
+#~ "\t\t\t\tA kijelzendő információkat lehet módosítani akövetkező kódban: "
+#~ "<b>wp-content/plugins/wp-properties/templates/property.php</b>. Hogy "
+#~ "elkerüljük az esetleges veszteségeket a frissítés során, készítsünk egy "
+#~ "<b>property.php</b> fáljt a sablon mappába, amely autómatikusan "
+#~ "betöltődik."
+
+#~ msgid "Thumbnail size:"
+#~ msgstr "Előkép mérete:"
+
+#, fuzzy
+#~ msgid "Show children %1s."
+#~ msgstr "Gyermek üzletek mutatása."
+
+#, fuzzy
+#~ msgid "Show larger image of %1s when image is clicked using fancybox."
+#~ msgstr ""
+#~ "Nagyobb kép mutatása az üzleteknél, amikor a a képre kattintanak, "
+#~ "fancyboxxal. "
+
+#, fuzzy
+#~ msgid "Show pagination on bottom of results."
+#~ msgstr "Lapszámolás bekapcsolása a keresési eredménynél"
+
+#, fuzzy
+#~ msgid "%1s Page"
+#~ msgstr "Üzlet módosítása"
+
+#, fuzzy
+#~ msgid ""
+#~ "The display settings may be edited further by customizing the <b>wp-"
+#~ "content/plugins/wp-properties/templates/property.php</b> file.  To avoid "
+#~ "losing your changes during updates, create a <b>property.php</b> file in "
+#~ "your template directory, which will be automatically loaded."
+#~ msgstr ""
+#~ "Ezek a beállítások a [property_overview] kódhoz. A kód kijelzi az "
+#~ "épületek listáját / alap információit.<br />\n"
+#~ "\t\t\t\tA kijelzendő információkat lehet módosítani akövetkező kódban: "
+#~ "<b>wp-content/plugins/wp-properties/templates/property.php</b>. Hogy "
+#~ "elkerüljük az esetleges veszteségeket a frissítés során, készítsünk egy "
+#~ "<b>property.php</b> fáljt a sablon mappába, amely autómatikusan "
+#~ "betöltődik."
+
+#~ msgid "Google Maps"
+#~ msgstr "Google térkép"
+
+#~ msgid "Map Thumbnail Size:"
+#~ msgstr "Térkép előkép mérete:"
+
+#~ msgid "Map Zoom Level:"
+#~ msgstr "Térkép nagyítás szintje"
+
+#, fuzzy
+#~ msgid "Default is \"%s\""
+#~ msgstr "Alapértelmezett sablon"
+
+#, fuzzy
+#~ msgid "Show %1s Title"
+#~ msgstr "Cím"
+
+#, fuzzy
+#~ msgid "Show Directions Link"
+#~ msgstr "Útvonal"
+
+#~ msgid "Address Display"
+#~ msgstr "Cím mutatása"
+
+#~ msgid "Available tags:"
+#~ msgstr "Rendelkezésre álló címkék"
+
+#, fuzzy
+#~ msgid "Currency & Numbers"
+#~ msgstr "Jelenlegi szimbólum"
+
+#~ msgid "Currency symbol."
+#~ msgstr "Jelenlegi szimbólum"
+
+#, fuzzy
+#~ msgid "Currency symbol placement:"
+#~ msgstr "Jelenlegi szimbólum"
+
+#, fuzzy
+#~ msgid "Before number"
+#~ msgstr "telefonszám"
+
+#, fuzzy
+#~ msgid "Admin Settings"
+#~ msgstr "Beállítások"
+
+#~ msgid "Disable plugin."
+#~ msgstr "Bővítmény kikapcsolása"
+
+#~ msgid "Feature installed, using version"
+#~ msgstr "Kiegészítő telepítve, használt verzió "
+
+#, fuzzy
+#~ msgid ""
+#~ "Please visit <a href=\"%s\">UsabilityDynamics.com</a> to purchase this "
+#~ "feature."
+#~ msgstr ""
+#~ "Kérem látogassa meg a következő oldalt a kiegészítő megvásárlásához: <a "
+#~ "href=\"%s\">TwinCitiesTech.com</a> "
+
+#, fuzzy
+#~ msgid "Revalidate"
+#~ msgstr "Hiteleítve"
+
+#~ msgid "Lookup"
+#~ msgstr "Kikeresés"
+
+#, fuzzy
+#~ msgid "Get %1s image data."
+#~ msgstr "Üzlet elmentve."
+
+#~ msgid ""
+#~ "Look up the <b>$wp_properties</b> global settings array.  This array "
+#~ "stores all the default settings, which are overwritten by database "
+#~ "settings, and custom filters."
+#~ msgstr ""
+#~ "Nézd meg a <b>$wp_properties</b> tömböt. Ez a tömb tartalmazza az összes "
+#~ "beállítást. "
+
+#~ msgid "Show $wp_properties"
+#~ msgstr "$wp_properties mutatása"
+
+#, fuzzy
+#~ msgid "Clear Cache"
+#~ msgstr "Tiszta log"
+
+#~ msgid "(no parent)"
+#~ msgstr "(nincs szülő)"
+
+#~ msgid "Parent"
+#~ msgstr "Szülő"
+
+#~ msgid "Template"
+#~ msgstr "sablon"
+
+#~ msgid "Page Template"
+#~ msgstr "oldal sablon"
+
+#~ msgid "Default Template"
+#~ msgstr "Alapértelmezett sablon"
+
+#, fuzzy
+#~ msgid "ID of parent property"
+#~ msgstr "Ez egy bérelhető üzlet."
+
+#, fuzzy
+#~ msgid "%1s Type"
+#~ msgstr "Típus"
+
+#~ msgid "Return to building page."
+#~ msgstr "Vissza az épület oldalra"
+
+#, fuzzy
+#~ msgid "Change"
+#~ msgstr "Módosítások mentése"
+
+#, fuzzy
+#~ msgid "Featured:"
+#~ msgstr "Kiemelt"
+
+#, fuzzy
+#~ msgid "Current Balance"
+#~ msgstr "Valuta"
+
+#, fuzzy
+#~ msgid "Publish the current %s"
+#~ msgstr "Üzletek"
+
+#, fuzzy
+#~ msgid "Add Credits"
+#~ msgstr "Új üzlet hozzáadása"
+
+#, fuzzy
+#~ msgid "Choose Subscription Plan"
+#~ msgstr "Leírás"
+
+#, fuzzy
+#~ msgid "Subscription Plan Options"
+#~ msgstr "Leírás"
+
+#, fuzzy
+#~ msgid "Information"
+#~ msgstr "Általános informió"
+
+#, fuzzy
+#~ msgid "Expiry Date"
+#~ msgstr "Üzlet oldal"
+
+#~ msgid ""
+#~ "Sorry, we could not find what you were looking for.  Since you are here, "
+#~ "take a look at some of our properties."
+#~ msgstr ""
+#~ "Elnézést, de nem találtuk meg amit keres. De ha már itt van, nézze meg "
+#~ "néhány üzletünket."
+
+#~ msgid ""
+#~ "Sorry, no properties found - try expanding your search, or <a href=\"%s"
+#~ "\">view all</a>."
+#~ msgstr ""
+#~ "Elnézést, nem található üzlet - próbálja meg kiterjeszteni a keresést, "
+#~ "vagy <a href=\"%s\">nézze meg az összeset</a>."
+
+#~ msgid "Prev"
+#~ msgstr "Előző"
+
+#, fuzzy
+#~ msgid "Other"
+#~ msgstr "Sorrend"
+
+#, fuzzy
+#~ msgid "Cancel reply"
+#~ msgstr "Mégse"
+
+#, fuzzy
+#~ msgid "Payment Method"
+#~ msgstr "Üzlet  beállítások"
+
+#~ msgid "Version"
+#~ msgstr "Verzió"
+
+#~ msgid "Property Page"
+#~ msgstr "Üzlet oldal"
+
+#, fuzzy
+#~ msgid "Show Property Title"
+#~ msgstr "Üzlet típus"
+
+#, fuzzy
+#~ msgid "Property ID:"
+#~ msgstr "Üzlet"
+
+#~ msgid "Interested?"
+#~ msgstr "Érdekli?"
+
+#, fuzzy
+#~ msgid "Read Property"
+#~ msgstr "Új üzlet"
+
+#, fuzzy
+#~ msgid "Delete Property"
+#~ msgstr "Új üzlet"
+
+#, fuzzy
+#~ msgid "Read Private Properties"
+#~ msgstr "Kiemelt üzletek"
+
+#~ msgid "Feature Name"
+#~ msgstr "Funkció név"
+
+#, fuzzy
+#~ msgid "General"
+#~ msgstr "Általános beállítások"
+
+#, fuzzy
+#~ msgid "Slug:"
+#~ msgstr "Slug"
+
+#, fuzzy
+#~ msgid "Property Status:"
+#~ msgstr "Üzletek alapadatai"
+
+#, fuzzy
+#~ msgid "Property Type:"
+#~ msgstr "Üzlet típus"
+
+#~ msgid "Cache table does not exist. Attempting to create:"
+#~ msgstr "Cashe tábla nem létezik. Beleegyezés a készítésbe:"
+
+#~ msgid "Table created and exists."
+#~ msgstr "Tábla készen van, és működik."
+
+#~ msgid "Table not created."
+#~ msgstr "Tábla nincs kész."
+
+#~ msgid "Tomorrow "
+#~ msgstr "Holnap"
+
+#~ msgid "Yesterday "
+#~ msgstr "tegnap"
+
+#~ msgid " in %d days "
+#~ msgstr "%d napon belül"
+
+#~ msgid "%d days ago"
+#~ msgstr "%d nappal ezelőtt"
+
+#~ msgid "Automatically logged failed JSON response: "
+#~ msgstr "Autómatikus naplózási hiba JSON válasz:"
+
+#~ msgid "%s hours ago"
+#~ msgstr "%s órával korábban"
+
+#~ msgid "%s minutes ago"
+#~ msgstr "%s perccel ezelőtt"
+
+#~ msgid "Address Attribute"
+#~ msgstr "Üzlet címe"
+
+#~ msgid "and localize for:"
+#~ msgstr "és hova legyen lokalizálva"
+
+#~ msgid "Order By:"
+#~ msgstr "Sorrend:"
+
+#~ msgid "Bed(s):"
+#~ msgstr "Háló(k):"
+
+#~ msgid "Bath(s):"
+#~ msgstr "Fürdő(k):"
+
+#~ msgid "Square Ft:"
+#~ msgstr "Négyzetméter:"
+
+#~ msgid ""
+#~ "Be advised, since you don't have permalinks enabled, you must visit the "
+#~ "<a href=\"%s\">Settings Page</a> and set a custom property overview page."
+#~ msgstr ""
+#~ "Mivel nincsnenek beállítva a közvetlen linkek, ezért el kell mennie a  <a "
+#~ "href=\"%s\">Beállítások</a> oldalra és be kell állítania egy egyedi üzlet "
+#~ "mutatási oldalt."
+
+#~ msgid ""
+#~ "By default, your property overview will be displayed on the <a href=\"%s"
+#~ "\">%s</a> page. You may change the overview page on the <a href=\"%s"
+#~ "\">Settings Page</a>"
+#~ msgstr ""
+#~ "Általános beállításként az ön üzlet összegző oldala ezen az oldalon "
+#~ "jelenik meg: <a href=\"%s\">%s</a>. Ön ezt tudja módosítani a <a href=\"%s"
+#~ "\">Beállítások oldalon</a>"
+
+#~ msgid "Thank you for installing WP-Property!"
+#~ msgstr "Köszönjük, hogy feltelepítette a WP-Property-t!"
+
+#~ msgid ""
+#~ "<p>You may also visit <a href=\"http://twincitiestech.com/plugins/wp-"
+#~ "property/\">TwinCitiesTech.com</a> for more information, and <a href="
+#~ "\"http://twincitiestech.com/plugins/wp-property/screencasts/"
+#~ "\">screencasts</a>.</div>"
+#~ msgstr ""
+#~ "<p>Ön meglátogathatja a <a href=\"http://twincitiestech.com/plugins/wp-"
+#~ "property/\">TwinCitiesTech.com</a>-ot több információért, és<a href="
+#~ "\"http://twincitiestech.com/plugins/wp-property/screencasts/"
+#~ "\">képernyővideóért</a>.</div>"
+
+#~ msgid "Validated:"
+#~ msgstr "Hiteleítve"
+
+#~ msgid "view on map"
+#~ msgstr "Megnézni a térképen"
+
+#, fuzzy
+#~ msgid "Show other properties (if any) with the same Parent"
+#~ msgstr "Mutassa a gyermek üzleteket a jelenleg kijelzetteknél"
+
+#~ msgid "Do you want to use pagination?"
+#~ msgstr "Szeretné használni a lapszámozást?"
+
+#~ msgid "Popup Image Size:"
+#~ msgstr "Popup képméret:"
+
+#, fuzzy
+#~ msgid "Thumbnail Width"
+#~ msgstr "Előkép szélessége"
+
+#~ msgid "Disable slideshow on property page."
+#~ msgstr "Csúszka kikapcsolása az üzlet oldalon."
+
+#~ msgid "Some Slideshow Options"
+#~ msgstr "Néhány csúszka beállítás"
+
+#~ msgid "WPP Slideshow"
+#~ msgstr "WPP csúszka"
+
+#~ msgid "WPP Slideshow with options"
+#~ msgstr "WPP csúszka beállításokkal"
+
+#~ msgid "Property Types"
+#~ msgstr "Üzlet típusok"
+
+#~ msgid "Show common values."
+#~ msgstr "Mutasd az összeset"
+
+#~ msgid "Cancel."
+#~ msgstr "Mégse."
+
+#~ msgid "Plugins"
+#~ msgstr "Bővítmények"
+
+#~ msgid "Troubleshooting"
+#~ msgstr "Problémamegoldás"
+
+#, fuzzy
+#~ msgid "View list of available shortcodes."
+#~ msgstr "Elérhető kódok:"
+
+#~ msgid "These are the general display settings"
+#~ msgstr "Ezek az általános kijelzési beállítások"
+
+#~ msgid ""
+#~ "Display larger image, or slideshow, at the top of the property listing."
+#~ msgstr "Nagyobb kép vagy csúszka kijelzése az üzletek listájánál."
+
+#~ msgid ""
+#~ "Premium features will become available shortly, we are still waiting on "
+#~ "more feedback on the core of the plugin."
+#~ msgstr ""
+#~ "Prémium tartalmak hamarosan elérhetőek lesznek, még várunk több "
+#~ "visszajelzésre a bővítményeknél."
+
+#~ msgid "[learn more]"
+#~ msgstr "[bővebben]"
+
+#~ msgid "Show Image?"
+#~ msgstr "Kép mutatása?"
+
+#~ msgid "select image dimensions"
+#~ msgstr "Kép dimenziójának kiválasztása"
+
+#~ msgid ""
+#~ "This width used on \"Media &rarr; Slideshow\" page to display available "
+#~ "images"
+#~ msgstr ""
+#~ "Ennek a szélességnek a használata a \"Média &rarr; Csúszka\" oldalon a "
+#~ "képek kijelzésére"
+
+#~ msgid "Property Slideshow <br>(displayed on individual property pages)"
+#~ msgstr "Üzlet  csúszka <br> (egyéni Üzlet oldalakon való kijelzésre)"
+
+#~ msgid "For rent"
+#~ msgstr "Bérlésre"
+
+#~ msgid "For sale"
+#~ msgstr "Eladásra"
+
+#~ msgid "bed"
+#~ msgstr "ágy"
+
+#~ msgid ""
+#~ "If unchecked, you will have to copy and paste one of the shortcodes into "
+#~ "the content to display property information on the page."
+#~ msgstr ""
+#~ "Ha kikkantintja a pipát, akkor be kell valahova másolni az alább levő "
+#~ "kódot, hogy megjelenítse az üzlet információkat az oldalon. "
+
+#~ msgid "[property_overview] - Property Overview"
+#~ msgstr "[property_overview] - Üzletoldal kódja"
+
+#~ msgid "Speaker"
+#~ msgstr "Anunciante"
+
+#~ msgid "Horizontal Slider"
+#~ msgstr "Slider horizontal"

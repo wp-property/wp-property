@@ -23,7 +23,12 @@ global $wp_properties;
   }
   
   $wp_properties[ 'property_stats' ] = array_filter($wp_properties[ 'property_stats' ]);
-  $wp_properties[ 'property_meta' ] = array_filter($wp_properties[ 'property_meta' ]);
+
+  if( isset( $wp_properties[ 'property_meta' ] ) ) {
+    $wp_properties[ 'property_meta' ] = array_filter($wp_properties[ 'property_meta' ]);
+  } else {
+    $wp_properties[ 'property_meta' ] = array();
+  }
 
   foreach( apply_filters( 'wpp::property_types', $wp_properties[ 'property_types' ] ) as $property_slug => $label ): ?>
 
@@ -63,7 +68,14 @@ global $wp_properties;
               <?php _e( 'Location Matters', ud_get_wp_property()->domain ) ?>
             </label>
           </li>
-          
+
+          <li>
+            <label>
+              <input class="slug" <?php if( in_array( $property_slug, isset( $wp_properties[ 'type_supports_hierarchy' ] ) ? $wp_properties[ 'type_supports_hierarchy' ] : array() ) ) echo " CHECKED "; ?> type="checkbox" name="wpp_settings[type_supports_hierarchy][]" value="<?php echo $property_slug; ?>"/>
+              <?php _e( 'Supports Hiearchy', ud_get_wp_property()->domain ) ?>
+            </label>
+          </li>
+
           <?php $property_type_settings = apply_filters( 'wpp_property_type_settings', array(), $property_slug ); ?>
           <?php foreach( (array) $property_type_settings as $property_type_setting ) : ?>
             <li>

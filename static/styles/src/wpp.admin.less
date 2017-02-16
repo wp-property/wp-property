@@ -10,6 +10,26 @@
   overflow-y: scroll;
 }
 
+.wpp-feature-flag, .wpp-feature-flag .dashicons  {
+  line-height: 30px;
+}
+
+.wpp-feature-flag.wpp-feature-flag-enabled {
+
+   .dashicons-yes {
+    color: #33b333;
+  }
+
+}
+
+.wpp-feature-flag.wpp-feature-flag-disabled {
+
+   .dashicons-yes {
+    color: rgba(218, 218, 218, 0.69);
+  }
+
+}
+
 // TOOLTIP
 
 .ui-tooltip, .arrow:after {
@@ -2316,3 +2336,6 @@ body.post-type-property {
     }
   }
 }
+
+
+@import "wpp-json-viewer.less";

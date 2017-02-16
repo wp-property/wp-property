@@ -28,10 +28,10 @@
 		 */
 		private $_logger;
 		/**
-		 * @var bool
-		 * @since 1.1.7
+		 * @var object
+		 * @since 1.1.8.1
 		 */
-		private $_update_checked = false;
+		private $_update_details;
 
 		function __construct( Freemius $freemius ) {
 			$this->_fs = $freemius;
@@ -57,7 +57,7 @@
 				'pre_set_site_transient_update_plugins_filter'
 			) );
 
-			if ( ! $this->_fs->has_active_license() ) {
+			if ( ! $this->_fs->has_active_valid_license() ) {
 				/**
 				 * If user has the premium plugin's code but do NOT have an active license,
 				 * encourage him to upgrade by showing that there's a new release, but instead
@@ -100,6 +100,9 @@
 		 *
 		 * @author Vova Feldman (@svovaf)
 		 * @since  1.1.6
+		 *
+		 * @param string $file
+		 * @param array $plugin_data
 		 */
 		function edit_and_echo_plugin_update_row( $file, $plugin_data ) {
 			$plugin_update_row = ob_get_clean();
@@ -108,7 +111,7 @@
 			if ( ! isset( $current->response[ $file ] ) ) {
 				echo $plugin_update_row;
 
-				return false;
+				return;
 			}
 
 			$r = $current->response[ $file ];
@@ -167,35 +170,41 @@
 			$this->_logger->entrance();
 
 			if ( empty( $transient_data ) ||
-			     defined( 'WP_FS__UNINSTALL_MODE' ) ||
-			     /**
-			      * From some reason 'pre_set_site_transient_update_plugins' filter
-			      * is called four times in a row.
-			      *
-			      * @since 1.1.7.3
-			      */
-			     $this->_update_checked
+			     defined( 'WP_FS__UNINSTALL_MODE' )
 			) {
 				return $transient_data;
 			}
 
-			// Get plugin's newest update.
-			$new_version = $this->_fs->get_update(false, false);
+			if ( ! isset( $this->_update_details ) ) {
+				// Get plugin's newest update.
+				$new_version = $this->_fs->get_update( false, false );
 
-			$this->_update_checked = true;
+				$this->_update_details = false;
 
-			if ( is_object( $new_version ) ) {
-				$this->_logger->log( 'Found newer plugin version ' . $new_version->version );
+				if ( is_object( $new_version ) ) {
+					$this->_logger->log( 'Found newer plugin version ' . $new_version->version );
 
-				$plugin_details              = new stdClass();
-				$plugin_details->slug        = $this->_fs->get_slug();
-				$plugin_details->new_version = $new_version->version;
-				$plugin_details->url         = WP_FS__ADDRESS;
-				$plugin_details->package     = $new_version->url;
-				$plugin_details->plugin      = $this->_fs->get_plugin_basename();
+					$plugin_details              = new stdClass();
+					$plugin_details->slug        = $this->_fs->get_slug();
+					$plugin_details->new_version = $new_version->version;
+					$plugin_details->url         = WP_FS__ADDRESS;
+					$plugin_details->package     = $new_version->url;
+					$plugin_details->plugin      = $this->_fs->get_plugin_basename();
 
+					/**
+					 * Cache plugin details locally since set_site_transient( 'update_plugins' )
+					 * called multiple times and the non wp.org plugins are filtered after the
+					 * call to .org.
+					 *
+					 * @since 1.1.8.1
+					 */
+					$this->_update_details = $plugin_details;
+				}
+			}
+
+			if ( is_object( $this->_update_details ) ) {
 				// Add plugin to transient data.
-				$transient_data->response[ $this->_fs->get_plugin_basename() ] = $plugin_details;
+				$transient_data->response[ $this->_fs->get_plugin_basename() ] = $this->_update_details;
 			}
 
 			return $transient_data;

@@ -1,5 +1,5 @@
-﻿=== WP-Property - WordPress Powered Real Estate and Property Management ===
-Contributors: usability_dynamics, andypotanin, jbrw1984, maxim.peshkov, Anton Korotkoff, ideric, MariaKravchenko
+=== WP-Property - WordPress Powered Real Estate and Property Management ===
+Contributors: usability_dynamics, andypotanin, jbrw1984, maxim.peshkov, Anton Korotkoff, ideric, MariaKravchenko, lena60942, SoSeductive
 Donate link: http://usabilitydynamics.com/product/wp-property/
 Tags: property management, real estate, listings, properties, property, wp-property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 4.0
@@ -76,7 +76,7 @@ Although WP-Property is the most downloaded WordPress real estate plugin, it can
 * List Attachments. Displays attachments of current property.
 
 = Shortcodes =
-We have setup a ["Shortcode Cheatsheet" page](https://www.usabilitydynamics.com/tutorials/wp-property-help/wp-property-shortcode-cheat-sheet/) for your convenience.
+We have setup a ["Shortcode Cheatsheet" page](https://www.usabilitydynamics.com/product/wp-property/docs/wp-property-shortcode-cheatsheet) for your convenience.
 
 * [property_overview]
 * [property_search]

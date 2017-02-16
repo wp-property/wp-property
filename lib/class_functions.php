@@ -14,6 +14,25 @@ class WPP_F extends UsabilityDynamics\Utility
 {
 
   /**
+   * Get Field Aliases
+   *
+   *
+   * @return mixed|void
+   */
+  static public function get_alias_map( $field = false ) {
+    global $wp_properties;
+
+    $field_alias = apply_filters( 'wpp:field_alias', isset( $wp_properties[ 'field_alias' ] ) ? array_filter( $wp_properties[ 'field_alias' ] ) : array() );
+
+    if( isset( $field ) && $field ) {
+      return isset( $field_alias[ $field ] ) ? $field_alias[ $field ] : null;
+    }
+
+    return (array) $field_alias;
+
+  }
+
+  /**
    * This function grabs the API key from UD's servers
    *
    * @updated 1.36.0
@@ -171,117 +190,228 @@ class WPP_F extends UsabilityDynamics\Utility
     // @note legacy taxonomies. (perhaps disable for new installers, but make available via some option)
     add_filter('wpp_taxonomies', function () {
       $taxonomies = array();
-      if( defined( 'WPP_FEATURE_FLAG_WPP_TYPE' ) ) {
+
+      // Add [wpp_type] taxonomy.
+      if (defined('WPP_FEATURE_FLAG_WPP_TYPE') && WPP_FEATURE_FLAG_WPP_TYPE ) {
         $taxonomies['wpp_type'] = array(
-          'default'             => true,
-          'readonly'            => true,
-          'hidden'              => true,
-          'hierarchical'        => false,
-          'unique'              => true,
-          'public'              => true,
-          'show_in_nav_menus'   => true,
-          'show_ui'             => false,
-          'show_tagcloud'       => false,
-          'add_native_mtbox'    => false,
-          'label'        => sprintf(_x( '%s Type', 'property type taxonomy', ud_get_wp_property()->domain ), WPP_F::property_label()),
-          'labels'       => array(
-            'name'              => sprintf(_x( '%s Type', 'property type taxonomy', ud_get_wp_property()->domain ), WPP_F::property_label()),
-            'singular_name'     => sprintf(_x( '%s Type', 'property type taxonomy', ud_get_wp_property()->domain ), WPP_F::property_label()),
-            'search_items'      => _x( 'Search %s Type', 'property type taxonomy', ud_get_wp_property()->domain ),
-            'all_items'         => _x( 'All Type', 'property type taxonomy', ud_get_wp_property()->domain ),
-            'parent_item'       => _x( 'Parent Type', 'property type taxonomy', ud_get_wp_property()->domain ),
-            'parent_item_colon' => _x( 'Parent Type', 'property type taxonomy', ud_get_wp_property()->domain ),
-            'edit_item'         => _x( 'Edit Type', 'property type taxonomy', ud_get_wp_property()->domain ),
-            'update_item'       => _x( 'Update Type', 'property type taxonomy', ud_get_wp_property()->domain ),
-            'add_new_item'      => _x( 'Add New Type', 'property type taxonomy', ud_get_wp_property()->domain ),
-            'new_item_name'     => _x( 'New Type', 'property type taxonomy', ud_get_wp_property()->domain ),
-            'not_found'         => sprintf(_x( 'No %s type found', 'property type taxonomy', ud_get_wp_property()->domain ), WPP_F::property_label()),
-            'menu_name'         => sprintf(_x( '%s Type', 'property type taxonomy', ud_get_wp_property()->domain ), WPP_F::property_label()),
+          'default' => true,
+          'readonly' => true,
+          'hidden' => true,
+          'hierarchical' => false,
+          'unique' => true,
+          'public' => true,
+          'show_in_nav_menus' => true,
+          'show_ui' => false,
+          'show_tagcloud' => false,
+          'add_native_mtbox' => false,
+          'label' => sprintf(_x('%s Type', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'labels' => array(
+            'name' => sprintf(_x('%s Type', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'singular_name' => sprintf(_x('%s Type', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'search_items' => _x('Search %s Type', 'property type taxonomy', ud_get_wp_property()->domain),
+            'all_items' => _x('All Type', 'property type taxonomy', ud_get_wp_property()->domain),
+            'parent_item' => _x('Parent Type', 'property type taxonomy', ud_get_wp_property()->domain),
+            'parent_item_colon' => _x('Parent Type', 'property type taxonomy', ud_get_wp_property()->domain),
+            'edit_item' => _x('Edit Type', 'property type taxonomy', ud_get_wp_property()->domain),
+            'update_item' => _x('Update Type', 'property type taxonomy', ud_get_wp_property()->domain),
+            'add_new_item' => _x('Add New Type', 'property type taxonomy', ud_get_wp_property()->domain),
+            'new_item_name' => _x('New Type', 'property type taxonomy', ud_get_wp_property()->domain),
+            'not_found' => sprintf(_x('No %s type found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'menu_name' => sprintf(_x('%s Type', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
           ),
-          'query_var'    => 'type',
-          'rewrite'      => array( 'slug' => 'type' )
+          'query_var' => 'type',
+          'rewrite' => array('slug' => 'type')
         );
       }
-      if(defined( 'WPP_FEATURE_FLAG_WPP_LOCATION' )){
+
+      // Add [wpp_label] taxonomy.
+      if (defined('WP_PROPERTY_FLAG_WPP_LABEL') && WP_PROPERTY_FLAG_WPP_LABEL ) {
+        $taxonomies['wpp_label'] = array(
+          'default' => true,
+          'readonly' => true,
+          'hidden' => true,
+          'hierarchical' => false,
+          'unique' => false,
+          'public' => true,
+          'show_in_nav_menus' => true,
+          'show_ui' => false,
+          'show_tagcloud' => false,
+          'add_native_mtbox' => false,
+          'label' => sprintf(_x('%s Labels', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'labels' => array(
+            'name' => sprintf(_x('%s Labels', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'singular_name' => sprintf(_x('%s Label', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'search_items' => _x('Search %s Labels', 'property type taxonomy', ud_get_wp_property()->domain),
+            'all_items' => _x('All Labels', 'property type taxonomy', ud_get_wp_property()->domain),
+            'parent_item' => _x('Parent Labels', 'property type taxonomy', ud_get_wp_property()->domain),
+            'parent_item_colon' => _x('Parent Labels', 'property type taxonomy', ud_get_wp_property()->domain),
+            'edit_item' => _x('Edit Labels', 'property type taxonomy', ud_get_wp_property()->domain),
+            'update_item' => _x('Update Labels', 'property type taxonomy', ud_get_wp_property()->domain),
+            'add_new_item' => _x('Add New Labels', 'property type taxonomy', ud_get_wp_property()->domain),
+            'new_item_name' => _x('New Labels', 'property type taxonomy', ud_get_wp_property()->domain),
+            'not_found' => sprintf(_x('No %s Label Found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'menu_name' => sprintf(_x('%s Labels', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          ),
+          'query_var' => 'property-labels',
+          'rewrite' => array('slug' => 'property-labels')
+        );
+      }
+
+      // Add [wpp_category] taxonomy.
+      if (defined('WPP_FEATURE_FLAG_WPP_CATEGORY') && WPP_FEATURE_FLAG_WPP_CATEGORY) {
+        $taxonomies['wpp_category'] = array(
+          'default' => true,
+          'readonly' => true,
+          'hidden' => true,
+          'hierarchical' => false,
+          'unique' => false,
+          'public' => true,
+          'show_in_nav_menus' => true,
+          'show_ui' => false,
+          'show_tagcloud' => false,
+          'add_native_mtbox' => false,
+          'label' => sprintf(_x('%s Category', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'labels' => array(
+            'name' => sprintf(_x('%s Category', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'singular_name' => sprintf(_x('%s Category', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'search_items' => _x('Search %s Category', 'property type taxonomy', ud_get_wp_property()->domain),
+            'all_items' => _x('All Categories', 'property type taxonomy', ud_get_wp_property()->domain),
+            'parent_item' => _x('Parent Category', 'property type taxonomy', ud_get_wp_property()->domain),
+            'parent_item_colon' => _x('Parent Category', 'property type taxonomy', ud_get_wp_property()->domain),
+            'edit_item' => _x('Edit Category', 'property type taxonomy', ud_get_wp_property()->domain),
+            'update_item' => _x('Update Category', 'property type taxonomy', ud_get_wp_property()->domain),
+            'add_new_item' => _x('Add New Category', 'property type taxonomy', ud_get_wp_property()->domain),
+            'new_item_name' => _x('New Category', 'property type taxonomy', ud_get_wp_property()->domain),
+            'not_found' => sprintf(_x('No %s Category found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'menu_name' => sprintf(_x('%s Category', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          ),
+          'query_var' => 'property-category',
+          'rewrite' => array('slug' => 'property-category')
+        );
+      }
+
+      // Add [wpp_status] taxonomy.
+      if (defined('WPP_FEATURE_FLAG_WPP_STATUS') && WPP_FEATURE_FLAG_WPP_STATUS) {
+        $taxonomies['wpp_status'] = array(
+          'default' => true,
+          'readonly' => true,
+          'hidden' => true,
+          'hierarchical' => false,
+          'unique' => false,
+          'public' => false,
+          'show_in_nav_menus' => false,
+          'show_ui' => false,
+          'show_tagcloud' => false,
+          'add_native_mtbox' => false,
+          'label' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'labels' => array(
+            'name' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'singular_name' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'search_items' => _x('Search %s Status', 'property type taxonomy', ud_get_wp_property()->domain),
+            'all_items' => _x('All Status', 'property type taxonomy', ud_get_wp_property()->domain),
+            'parent_item' => _x('Parent Status', 'property type taxonomy', ud_get_wp_property()->domain),
+            'parent_item_colon' => _x('Parent Status', 'property type taxonomy', ud_get_wp_property()->domain),
+            'edit_item' => _x('Edit Status', 'property type taxonomy', ud_get_wp_property()->domain),
+            'update_item' => _x('Update Status', 'property type taxonomy', ud_get_wp_property()->domain),
+            'add_new_item' => _x('Add New Status', 'property type taxonomy', ud_get_wp_property()->domain),
+            'new_item_name' => _x('New Status', 'property type taxonomy', ud_get_wp_property()->domain),
+            'not_found' => sprintf(_x('No %s Status found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'menu_name' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          ),
+          'query_var' => 'property-status',
+          'rewrite' => array('slug' => 'property-status')
+        );
+      }
+
+      // Add [wpp_location] taxonomy.
+      if (defined('WPP_FEATURE_FLAG_WPP_LOCATION') && WPP_FEATURE_FLAG_WPP_LOCATION) {
         $taxonomies['wpp_location'] = array(
-          'default'             => true,
-          'readonly'            => true,
-          'hidden'              => true,
-          'hierarchical'        => true,
-          'public'              => true,
-          'show_in_nav_menus'   => true,
-          'show_ui'             => false,
-          'show_tagcloud'       => false,
-          'add_native_mtbox'    => false,
-          'label'        => sprintf(_x( '%s Location', 'property location taxonomy', ud_get_wp_property()->domain ), WPP_F::property_label()),
-          'labels'       => array(
-            'name'              => sprintf(_x( '%s Location', 'property location taxonomy', ud_get_wp_property()->domain ), WPP_F::property_label()),
-            'singular_name'     => sprintf(_x( '%s Location', 'property location taxonomy', ud_get_wp_property()->domain ), WPP_F::property_label()),
-            'search_items'      => _x( 'Search %s Location', 'property location taxonomy', ud_get_wp_property()->domain ),
-            'all_items'         => _x( 'All Location', 'property location taxonomy', ud_get_wp_property()->domain ),
-            'parent_item'       => _x( 'Parent Location', 'property location taxonomy', ud_get_wp_property()->domain ),
-            'parent_item_colon' => _x( 'Parent Location', 'property location taxonomy', ud_get_wp_property()->domain ),
-            'edit_item'         => _x( 'Edit Location', 'property location taxonomy', ud_get_wp_property()->domain ),
-            'update_item'       => _x( 'Update Location', 'property location taxonomy', ud_get_wp_property()->domain ),
-            'add_new_item'      => _x( 'Add New Location', 'property location taxonomy', ud_get_wp_property()->domain ),
-            'new_item_name'     => _x( 'New Location', 'property location taxonomy', ud_get_wp_property()->domain ),
-            'not_found'     => _x( 'No location found', 'property location taxonomy', ud_get_wp_property()->domain ),
-            'menu_name'         => sprintf(_x( '%s Location', 'property location taxonomy', ud_get_wp_property()->domain ), WPP_F::property_label()),
+          'default' => true,
+          'readonly' => true,
+          'hidden' => true,
+          'hierarchical' => true,
+          'public' => true,
+          'show_in_nav_menus' => true,
+          'show_ui' => false,
+          'show_tagcloud' => false,
+          'add_native_mtbox' => false,
+          'label' => sprintf(_x('%s Location', 'property location taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'labels' => array(
+            'name' => sprintf(_x('%s Location', 'property location taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'singular_name' => sprintf(_x('%s Location', 'property location taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'search_items' => _x('Search %s Location', 'property location taxonomy', ud_get_wp_property()->domain),
+            'all_items' => _x('All Location', 'property location taxonomy', ud_get_wp_property()->domain),
+            'parent_item' => _x('Parent Location', 'property location taxonomy', ud_get_wp_property()->domain),
+            'parent_item_colon' => _x('Parent Location', 'property location taxonomy', ud_get_wp_property()->domain),
+            'edit_item' => _x('Edit Location', 'property location taxonomy', ud_get_wp_property()->domain),
+            'update_item' => _x('Update Location', 'property location taxonomy', ud_get_wp_property()->domain),
+            'add_new_item' => _x('Add New Location', 'property location taxonomy', ud_get_wp_property()->domain),
+            'new_item_name' => _x('New Location', 'property location taxonomy', ud_get_wp_property()->domain),
+            'not_found' => _x('No location found', 'property location taxonomy', ud_get_wp_property()->domain),
+            'menu_name' => sprintf(_x('%s Location', 'property location taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
           ),
-          'query_var'    => 'location',
-          'rewrite'      => array( 'slug' => 'location' )
+          'query_var' => 'location',
+          'rewrite' => array('slug' => 'location')
         );
       }
-      $taxonomies['property_feature'] = array(
-        'default'      => true,
-        'hierarchical' => false,
-        'public' => true,
-        'show_ui' => true,
-        'show_in_nav_menus' => true,
-        'show_tagcloud' => true,
-        'add_native_mtbox'    => true,
-        'label' => _x('Features', 'taxonomy general name', ud_get_wp_property()->domain),
-        'labels' => array(
-          'name' => _x('Features', 'taxonomy general name', ud_get_wp_property()->domain),
-          'singular_name' => _x('Feature', 'taxonomy singular name', ud_get_wp_property()->domain),
-          'search_items' => __('Search Features', ud_get_wp_property()->domain),
-          'all_items' => __('All Features', ud_get_wp_property()->domain),
-          'parent_item' => __('Parent Feature', ud_get_wp_property()->domain),
-          'parent_item_colon' => __('Parent Feature:', ud_get_wp_property()->domain),
-          'edit_item' => __('Edit Feature', ud_get_wp_property()->domain),
-          'update_item' => __('Update Feature', ud_get_wp_property()->domain),
-          'add_new_item' => __('Add New Feature', ud_get_wp_property()->domain),
-          'new_item_name' => __('New Feature Name', ud_get_wp_property()->domain),
-          'menu_name' => __('Feature', ud_get_wp_property()->domain)
-        ),
-        'query_var' => 'property_feature',
-        'rewrite' => array('slug' => 'feature')
-      );
-      $taxonomies['community_feature'] = array(
-        'default'      => true,
-        'hierarchical' => false,
-        'public' => true,
-        'show_ui' => true,
-        'show_in_nav_menus' => true,
-        'show_tagcloud' => true,
-        'add_native_mtbox'    => true,
-        'label' => _x('Community Features', 'taxonomy general name', ud_get_wp_property()->domain),
-        'labels' => array(
-          'name' => _x('Community Features', 'taxonomy general name', ud_get_wp_property()->domain),
-          'singular_name' => _x('Community Feature', 'taxonomy singular name', ud_get_wp_property()->domain),
-          'search_items' => __('Search Community Features', ud_get_wp_property()->domain),
-          'all_items' => __('All Community Features', ud_get_wp_property()->domain),
-          'parent_item' => __('Parent Community Feature', ud_get_wp_property()->domain),
-          'parent_item_colon' => __('Parent Community Feature:', ud_get_wp_property()->domain),
-          'edit_item' => __('Edit Community Feature', ud_get_wp_property()->domain),
-          'update_item' => __('Update Community Feature', ud_get_wp_property()->domain),
-          'add_new_item' => __('Add New Community Feature', ud_get_wp_property()->domain),
-          'new_item_name' => __('New Community Feature Name', ud_get_wp_property()->domain),
-          'menu_name' => __('Community Feature', ud_get_wp_property()->domain)
-        ),
-        'query_var' => 'community_feature',
-        'rewrite' => array('slug' => 'community_feature')
-      );
+
+      // Add [property_features] and [community_features] taxonomies.
+      if( defined( 'WP_PROPERTY_FLAG_ENABLE_LEGACY_TAXONOMIES') && WP_PROPERTY_FLAG_ENABLE_LEGACY_TAXONOMIES ) {
+
+        $taxonomies[ 'property_feature' ] = array(
+          'default' => true,
+          'hierarchical' => false,
+          'public' => true,
+          'show_ui' => true,
+          'show_in_nav_menus' => true,
+          'show_tagcloud' => true,
+          'add_native_mtbox' => true,
+          'label' => _x( 'Features', 'taxonomy general name', ud_get_wp_property()->domain ),
+          'labels' => array(
+            'name' => _x( 'Features', 'taxonomy general name', ud_get_wp_property()->domain ),
+            'singular_name' => _x( 'Feature', 'taxonomy singular name', ud_get_wp_property()->domain ),
+            'search_items' => __( 'Search Features', ud_get_wp_property()->domain ),
+            'all_items' => __( 'All Features', ud_get_wp_property()->domain ),
+            'parent_item' => __( 'Parent Feature', ud_get_wp_property()->domain ),
+            'parent_item_colon' => __( 'Parent Feature:', ud_get_wp_property()->domain ),
+            'edit_item' => __( 'Edit Feature', ud_get_wp_property()->domain ),
+            'update_item' => __( 'Update Feature', ud_get_wp_property()->domain ),
+            'add_new_item' => __( 'Add New Feature', ud_get_wp_property()->domain ),
+            'new_item_name' => __( 'New Feature Name', ud_get_wp_property()->domain ),
+            'menu_name' => __( 'Feature', ud_get_wp_property()->domain )
+          ),
+          'query_var' => 'property_feature',
+          'rewrite' => array( 'slug' => 'feature' )
+        );
+
+        $taxonomies[ 'community_feature' ] = array(
+          'default' => true,
+          'hierarchical' => false,
+          'public' => true,
+          'show_ui' => true,
+          'show_in_nav_menus' => true,
+          'show_tagcloud' => true,
+          'add_native_mtbox' => true,
+          'label' => _x( 'Community Features', 'taxonomy general name', ud_get_wp_property()->domain ),
+          'labels' => array(
+            'name' => _x( 'Community Features', 'taxonomy general name', ud_get_wp_property()->domain ),
+            'singular_name' => _x( 'Community Feature', 'taxonomy singular name', ud_get_wp_property()->domain ),
+            'search_items' => __( 'Search Community Features', ud_get_wp_property()->domain ),
+            'all_items' => __( 'All Community Features', ud_get_wp_property()->domain ),
+            'parent_item' => __( 'Parent Community Feature', ud_get_wp_property()->domain ),
+            'parent_item_colon' => __( 'Parent Community Feature:', ud_get_wp_property()->domain ),
+            'edit_item' => __( 'Edit Community Feature', ud_get_wp_property()->domain ),
+            'update_item' => __( 'Update Community Feature', ud_get_wp_property()->domain ),
+            'add_new_item' => __( 'Add New Community Feature', ud_get_wp_property()->domain ),
+            'new_item_name' => __( 'New Community Feature Name', ud_get_wp_property()->domain ),
+            'menu_name' => __( 'Community Feature', ud_get_wp_property()->domain )
+          ),
+          'query_var' => 'community_feature',
+          'rewrite' => array( 'slug' => 'community_feature' )
+        );
+
+      }
+
       return $taxonomies;
 
     }, 4);
@@ -306,6 +436,12 @@ class WPP_F extends UsabilityDynamics\Utility
     )));
 
     $supports = array('title', 'editor', 'thumbnail');
+
+    if( defined( 'WPP_FEATURE_FLAG_DISABLE_EDITOR' ) && WPP_FEATURE_FLAG_DISABLE_EDITOR ) {
+      $supports = array('title', 'thumbnail');
+    } else {
+      $supports = array('title', 'editor', 'thumbnail');
+    }
 
     if (isset($wp_properties['configuration']['enable_revisions']) && $wp_properties['configuration']['enable_revisions'] == 'true') {
       array_push($supports, 'revisions');
@@ -363,30 +499,31 @@ class WPP_F extends UsabilityDynamics\Utility
     }
 
   }
-  
+
   /**
    * Create a new default page for properites
    * Default can be changed from the WPP settings page
    * author Raj
    */
-  static public function register_properties_page() {
+  static public function register_properties_page()
+  {
     global $wp_properties;
 
     //check if Properties page existed
     $pageName = "Properties";
-    if (!get_page_by_path($pageName)){
+    if (!get_page_by_path($pageName)) {
       $new_page = array(
         'post_type' => 'page',
         'post_title' => $pageName,
         'post_content' => '[property_overview]',
         'post_status' => 'publish',
         'post_author' => 1,
-    );
-    $new_page_id = wp_insert_post($new_page);
-    $post = get_post($new_page_id);
-    $slug = $post->post_name;
-    $wp_properties['configuration']['base_slug'] = $slug;
-    update_option( 'wpp_settings', $wp_properties );
+      );
+      $new_page_id = wp_insert_post($new_page);
+      $post = get_post($new_page_id);
+      $slug = $post->post_name;
+      $wp_properties['configuration']['base_slug'] = $slug;
+      update_option('wpp_settings', $wp_properties);
     }
   }
 
@@ -394,7 +531,7 @@ class WPP_F extends UsabilityDynamics\Utility
    * Loads applicable WP-Property scripts and styles
    *
    * @since 1.10
-   *
+   * @param array $types
    */
   static public function load_assets($types = array())
   {
@@ -492,6 +629,47 @@ class WPP_F extends UsabilityDynamics\Utility
   }
 
   /**
+   * ChromePHP Logger
+   *
+   * @param bool $text
+   * @return bool|void
+   */
+  static public function debug($text = false, $detail = null)
+  {
+
+    global $wp_properties;
+
+    $_debug = false;
+
+    if( defined( 'WP_DEBUG' ) && WP_DEBUG && defined( 'WP_DEBUG_DISPLAY' ) && WP_DEBUG_DISPLAY ) {
+      $_debug = true;
+    }
+
+    if ( !$_debug && ( !isset($wp_properties['configuration']['developer_mode']) || $wp_properties['configuration']['developer_mode'] !== 'true') ) {
+      $_debug = false;
+    }
+
+    if($_debug && class_exists( 'ChromePhp' ) && !headers_sent() ) {
+
+      // truncate strings to avoid sending oversized header.
+      if( strlen( $text ) > 1000 ) {
+        $text = '[truncated]';
+      }
+
+      if( $detail ) {
+        ChromePhp::log( '[wp-property]', $text, $detail);
+      } else {
+        ChromePhp::log( '[wp-property]', $text );
+      }
+
+      return true;
+    }
+
+    return false;
+
+  }
+
+  /**
    * PHP function to echoing a message to JS console
    *
    * @since 1.32.0
@@ -499,6 +677,9 @@ class WPP_F extends UsabilityDynamics\Utility
   static public function console_log($text = false)
   {
     global $wp_properties;
+
+    self::debug( $text );
+    return;
 
     if (!isset($wp_properties['configuration']['developer_mode']) || $wp_properties['configuration']['developer_mode'] != 'true') {
       return false;
@@ -1741,12 +1922,12 @@ class WPP_F extends UsabilityDynamics\Utility
         }
       }
 
-      if(defined( 'WPP_FEATURE_FLAG_WPP_LOCATION' )){
-        if(isset($wp_properties['taxonomies']['wpp_location'])){
+      if (defined('WPP_FEATURE_FLAG_WPP_LOCATION')) {
+        if (isset($wp_properties['taxonomies']['wpp_location'])) {
           $return['terms'] = self::update_location_terms($post_id, $geo_data);
         }
       }
-      
+
       update_post_meta($post_id, 'wpp::last_address_validation', time());
 
       if (isset($manual_coordinates)) {
@@ -1810,9 +1991,9 @@ class WPP_F extends UsabilityDynamics\Utility
       return $taxonomy;
     }
 
-    register_taxonomy($taxonomy, array('property'), array(
+    register_taxonomy($taxonomy, array( 'property' ), array(
       'hierarchical' => true,
-      'update_count_callback' => null,
+      // 'update_count_callback' => null,
       'labels' => array(),
       'show_ui' => false,
       'show_in_menu' => false,
@@ -1830,6 +2011,9 @@ class WPP_F extends UsabilityDynamics\Utility
 
   /**
    * Build terms from address parts.
+   *
+   * @todo Add "location_" prefix.
+   *
    * Feature Flag: WPP_FEATURE_FLAG_WPP_LOCATION
    * @since 2.2.1
    * @author potanin@UD
@@ -1840,14 +2024,18 @@ class WPP_F extends UsabilityDynamics\Utility
   static public function update_location_terms($post_id, $geo_data)
   {
 
+    if( !$geo_data || !is_object( $geo_data ) ) {
+      return new WP_Error( 'No [geo_data] argument provided.' );
+    }
+
     self::verify_have_system_taxonomy('wpp_location');
 
     $geo_data->terms = array();
 
-    $geo_data->terms['state'] = !empty( $geo_data->state ) ? get_term_by('name', $geo_data->state, 'wpp_location', OBJECT) : false;
-    $geo_data->terms['county'] = !empty( $geo_data->county ) ? get_term_by('name', $geo_data->county, 'wpp_location', OBJECT) : false;
-    $geo_data->terms['city'] = !empty( $geo_data->city ) ? get_term_by('name', $geo_data->city, 'wpp_location', OBJECT) : false;
-    $geo_data->terms['route'] = !empty( $geo_data->route ) ? get_term_by('name', $geo_data->route, 'wpp_location', OBJECT) : false;
+    $geo_data->terms['state'] = !empty($geo_data->state) ? get_term_by('name', $geo_data->state, 'wpp_location', OBJECT) : false;
+    $geo_data->terms['county'] = !empty($geo_data->county) ? get_term_by('name', $geo_data->county, 'wpp_location', OBJECT) : false;
+    $geo_data->terms['city'] = !empty($geo_data->city) ? get_term_by('name', $geo_data->city, 'wpp_location', OBJECT) : false;
+    $geo_data->terms['route'] = !empty($geo_data->route) ? get_term_by('name', $geo_data->route, 'wpp_location', OBJECT) : false;
 
     // validate, lookup and add all location terms to object.
     if (isset($geo_data->terms) && is_array($geo_data->terms)) {
@@ -1869,7 +2057,7 @@ class WPP_F extends UsabilityDynamics\Utility
             $_detail['description'] = $_value . ' is a ' . $_level . ' within ' . (isset($_higher_level) ? $_higher_level->name : '') . ', a ' . $_higher_level_name . '.';
             $_detail['parent'] = $_higher_level->term_id;
           } else {
-            $_detail['description'] = $_value . ' is a ' . $_level . ' with nothin above it.';
+            $_detail['description'] = $_value . ' is a ' . $_level . ' with nothing above it.';
           }
 
           // $_detail[ 'slug' ] = 'city-slug';
@@ -2002,7 +2190,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
           case 'sublocality':
             $return->district = $ac->long_name;
-          break;
+            break;
 
         }
       }
@@ -2302,7 +2490,7 @@ class WPP_F extends UsabilityDynamics\Utility
       $attributes['Meta'] = $property_meta;
       $attributes['Other'] = $extra_values;
     } else {
-      $attributes = $property_stats + $property_meta + $extra_values;
+      $attributes = (array) $property_stats + (array) $property_meta + (array) $extra_values;
     }
 
     $attributes = apply_filters('wpp_total_attribute_array', $attributes);
@@ -2533,7 +2721,7 @@ class WPP_F extends UsabilityDynamics\Utility
       <?php } ?>
     </select>
 
-  <?php
+    <?php
   }
 
   /**
@@ -2604,308 +2792,41 @@ class WPP_F extends UsabilityDynamics\Utility
     return $return;
 
   }
-  public function widget_childpropertieswidget_data() {
-    return 
+
+  public function widget_childpropertieswidget_data()
+  {
+    return
       array('title' => '',
         'image_type' => 'medium',
         'big_image_type' => 'large',
         'gallery_count' => 10
       );
   }
-  public function widget_gallerypropertieswidget_data() {
-    return 
+
+  public function widget_gallerypropertieswidget_data()
+  {
+    return
       array('title' => '',
         'image_type' => 'medium',
         'big_image_type' => 'large',
         'amount_items' => 5,
         'sort_by' => '',
         'sort_order' => 'ASC',
-         'address_format' =>' [street_number] [street_name], [city], [state]'
-        );
+        'address_format' => ' [street_number] [street_name], [city], [state]'
+      );
   }
-    /**
-   * Add dummy properties for Setup Assistant.
-   *
-   * @author raj
-   */
-  static public function generate_asst_dummy_properties($data) {
 
-    // select default property for the dummy properties
-    if(count($data['wpp_settings']['property_types'])>0){
-      $default_prop = array_keys($data['wpp_settings']['property_types']);
-      $default_prop = $default_prop[0];
-    }
-    else{
-      $default_prop = "house";
-    }
-    
-    global $user_ID, $wp_properties, $wpdb;
-
-    /* Determine if the dummy properties already exist */
-    $posts = $wpdb->get_col( "
-      SELECT `post_title`
-      FROM {$wpdb->posts}
-      WHERE 
-      `post_title` IN ('122 Bishopsgate','East Pointe Marketplace','MIDLEVELS WEST','720 N Larrabee St Apt','460 W Huron St','7846 Charlesmont Road','3212 Ramona Avenue','4602 Chatford Avenue','619 Beechfield Avenue','5109 Eugene Avenue','99 Richfield','9812 NE Avenue')
-       AND `post_status` = 'publish'
-    " );
-
-    /* Check array to avoid issues in future */
-    if( !is_array( $posts ) ) {
-      $posts = array();
-    }
-    
-    /* If Property doesn't exist we create it : ONE */
-    if( !in_array( '122 Bishopsgate', $posts ) ) {
-
-      self::generate_asst_dummy_property( array(
-        'post_title' => '122 Bishopsgate',
-        'post_content' => 'Take notice of this amazing home! It has an original detached 2 garage/workshop built with the home and on a concrete slab along with regular 2 car attached garage. Very nicely landscaped front and back yard. Hardwood floors in Foyer, den, dining and great room. Great room is open to large Kitchen. Carpet in all upstairs bedrooms. Home is located in the Woodlands in the middle of very nice community. You and your family will feel right at home. A must see.',
-        'tagline' => 'Need Room for your TOYS! Take notice of this unique Home!',
-        'location' => '122 Bishopsgate, Jacksonville, NC 28540, USA',
-        'price' => '195000',
-        'featured'=>'true',
-        'bedrooms' => '4',
-        'property_type'=>$default_prop,
-        'bathrooms' => '4',
-        'fees' => '100',
-        'year_built' => '2001',
-        'living_space' => "1000",
-        'total_rooms' => '6',
-        'property_feature'=>'cable_prewire',
-        'community_feature'=>'dishwasher',
-        'phone_number' => '8002700781',
-        'img_index' => '1',
-      ) );
-
-    }
-
-    /* If Property doesn't exist we create it : TWO */
-    if( !in_array( 'East Pointe Marketplace', $posts ) ) {
-
-      self::generate_asst_dummy_property( array(
-        'post_title' => 'East Pointe Marketplace',
-        'post_content' => "Convenient suburban shopping experience located in the epicenter of Milwaukee's lower east side.
-Adjacent to the Milwaukee School of Engineering
-On bus line
-Ample off-street parking ",
-        'tagline' => 'Need Room for your TOYS! Take notice of this unique Home!',
-        'location' => '605 E Lyon St Milwaukee, WI 53202',
-        'price' => '215000',
-        'bedrooms' => '5',
-        'bathrooms' => '4',
-        'fees' => '200',
-        'property_feature'=>'cable_prewire',
-        'community_feature'=>'dishwasher',
-        'year_built' => '2002',
-        'living_space' => "2000",
-        'total_rooms' => '8',
-        'property_type'=>$default_prop,
-        'phone_number' => '8002300781',
-        'img_index' => '1',
-      ) );
-
-    }
-    /* If Property doesn't exist we create it : THREE */
-    if( !in_array( 'MIDLEVELS WEST', $posts ) ) {
-
-      self::generate_asst_dummy_property( array(
-        'post_title' => 'MIDLEVELS WEST',
-        'post_content' => 'Ideal family flat with 4 bedrooms at upper Conduit Road',
-        'tagline' => 'Ideal family flat with 4 bedrooms at upper Conduit Road',
-        'location' => '122 Bishopsgate, Jacksonville, NC 28540, USA',
-        'price' => '255000',
-        'bedrooms' => '8',
-        'featured'=>'true',
-        'fees' => '300',
-        'property_feature'=>'cathedral_ceiling',
-        'community_feature'=>'double_oven',
-        'year_built' => '2003',
-        'living_space' => "3000",
-        'total_rooms' => '11',          
-        'property_type'=>$default_prop,
-        'bathrooms' => '8',
-        'phone_number' => '9992700781',
-        'img_index' => '1',
-      ) );
-
-    }
-    /* If Property doesn't exist we create it : FOUR */
-    if( !in_array( '720 N Larrabee St Apt', $posts ) ) {
-
-      self::generate_asst_dummy_property( array(
-        'post_title' => '720 N Larrabee St Apt',
-        'post_content' => 'Beautiful west views of river in ideal River North location close to downtown, Magnificent Mile, shopping, dining, entertainment. Split 2 bedroom, 2 bath floor plan with hardwood floors, granite counters and breakfast bar, stainless steel appliances, gas fireplace, 12-foot ceilings in this trendy loft-style unit with large balcony to enjoy sunset views over the river. Plenty of room for dining table and tons of closet space built out with Elfa shelving. 2nd bedroom closed off to the ceiling for privacy. Washer/dryer in the unit. Full-amenity building with onsite manager/engineer, 24-hour door staff, fitness room, bike storage; indoor heated parking for $35,000 extra, additional storage cage included.',
-        'tagline' => 'Great new home',
-        'location' => '720 N Larrabee St Apt 1012,Chicago, IL 60654',
-        'price' => '985000',
-        'bedrooms' => '8',
-        'fees' => '400',
-        'year_built' => '2004',
-        'living_space' => "4000",
-        'property_feature'=>'cathedral_ceiling',
-        'community_feature'=>'double_oven',
-        'total_rooms' => '10',
-        'bathrooms' => '8',
-        'property_type'=>$default_prop,
-        'phone_number' => '9856700781',
-        'img_index' => '1',
-      ) );
-
-    }
-    /* If Property doesn't exist we create it : FIVE */
-    if( !in_array( '460 W Huron St', $posts ) ) {
-
-      self::generate_asst_dummy_property( array(
-        'post_title' => '460 W Huron St',
-        'post_content' => 'Unique amenities nestled among exquisite building features will make your home feel like an urban oasis while ours dedicated staff will not only fulfill your needs, but anticipate them.',
-        'tagline' => 'Only for a limited period DEPOSIT $0!!!!',
-        'location' => '460 W Huron St,Chicago, IL 60654',
-        'price' => '876000',
-        'bedrooms' => '5',
-        'featured'=>'true',
-        'property_feature'=>'disability_equipped',
-        'community_feature'=>'central_vacuum',
-        'fees' => '500',
-        'year_built' => '2005',
-        'living_space' => "5000",
-        'total_rooms' => '8',
-        'property_type'=>$default_prop,
-        'bathrooms' => '5',
-        'phone_number' => '8002708876',
-        'img_index' => '1',
-      ) );
-    }
-  }
-  
-  static public function generate_asst_dummy_property( $data )
-  {
-    global $wp_properties;
-
-    $defaults = array(
-      'post_title' => 'Dummy Listing',
-      'post_content' => 'Donec volutpat elit malesuada eros porttitor blandit. Donec sit amet ligula quis tortor molestie sagittis tincidunt at tortor. Phasellus augue leo, molestie in ultricies gravida; blandit et diam. Curabitur quis nisl eros! Proin quis nisi quam, sit amet lacinia nisi. Vivamus sollicitudin magna eu ipsum blandit tempor. Duis rhoncus orci at massa consequat et egestas lectus ornare? Duis a neque magna, quis placerat lacus. Phasellus non nunc sapien, id cursus mi! Mauris sit amet nisi vel felis molestie pretium.',
-      'tagline' => 'Donec volutpat elit malesuada eros porttitor blandit',
-      'location' => '122 Bishopsgate, Jacksonville, NC 28540, USA',
-      'property_type' => 'house',
-      'img_index' => '1', // Available: '1', '2'
-      'price' => '',
-      'bedrooms' => '',
-      'bathrooms' => '',
-      'phone_number' => '',
-    );
-
-    $data = wp_parse_args( $data, $defaults );
-
-    //** STEP 1. Create dummy property */
-
-    $insert_id = wp_insert_post( array(
-      'post_title' => $data[ 'post_title' ],
-      'post_status' => 'publish',
-      'post_content' => $data[ 'post_content' ],
-      'post_type' => 'property',
-    ) );
-
-    $property_type = $data['property_type'];
- 
-    update_post_meta( $insert_id, 'property_type', $property_type );
-
-    if( !empty( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) && key_exists( $wp_properties[ 'configuration' ][ 'address_attribute' ], $wp_properties[ 'property_stats' ] ) ) {
-      update_post_meta( $insert_id, 'location', $data[ 'location' ] );
-
-      if( method_exists( 'WPP_F', 'revalidate_address' ) ) {
-        WPP_F::revalidate_address( $insert_id );
-      }
-    }
-
-    if( !empty( $data[ 'tagline' ] ) ) {
-      update_post_meta( $insert_id, 'tagline', $data[ 'tagline' ] );
-    }
-    
-    if( !empty( $data[ 'featured' ]) ) {
-      update_post_meta( $insert_id, 'featured', $data[ 'featured' ] );
-    }
-    
-    if( !empty( $data[ 'price' ] ) ) {
-      update_post_meta( $insert_id, 'price', $data[ 'price' ] );
-    }
-
-    if( !empty( $data[ 'bedrooms' ] ) ) {
-      update_post_meta( $insert_id, 'bedrooms', $data[ 'bedrooms' ] );
-    }
-
-    if( !empty( $data[ 'bathrooms' ] ) ) {
-      update_post_meta( $insert_id, 'bathrooms', $data[ 'bathrooms' ] );
-    }
-
-    if( !empty( $data[ 'phone_number' ] ) ) {
-      update_post_meta( $insert_id, 'phone_number', $data[ 'phone_number' ] );
-    }
-    
-    if( !empty($data[ 'total_rooms' ] ) ) {
-      update_post_meta( $insert_id, 'total_rooms', $data[ 'total_rooms' ] );
-    }
-    
-    if( !empty( $data[ 'fees' ] ) ) {
-      update_post_meta( $insert_id, 'fees', $data[ 'fees' ] );
-    }
-    
-    if( !empty( $data[ 'year_built' ] ) ) {
-      update_post_meta( $insert_id, 'year_built', $data[ 'year_built' ] );
-    }
-    
-    if( !empty( $data[ 'living_space' ] ) ) {
-      update_post_meta( $insert_id, 'living_space', $data[ 'living_space' ] );
-    }
-    
-    if( !empty( $data[ 'property_feature' ] ) ) 
-      wp_set_post_terms( $insert_id, $data[ 'property_feature' ] , 'property_feature' );
-    if( !empty( $data[ 'community_feature' ] ) ) 
-      wp_set_post_terms( $insert_id, $data[ 'community_feature' ] , 'community_feature' );
-
-    update_post_meta( $insert_id, 'dummy_property', true );
-
-    //** STEP 2. Create and Move temporary image files */
-
-    require_once( ABSPATH . 'wp-admin/includes/image.php' );
-    $upload_dir = wp_upload_dir();
-
-    $dummy_images = array(
-      WPP_Path . "static/splashes/assets/images/dummy_data/property_{$data['img_index']}_img_0.jpg",
-      WPP_Path . "static/splashes/assets/images/dummy_data/property_{$data['img_index']}_img_1.jpg",
-      WPP_Path . "static/splashes/assets/images/dummy_data/property_{$data['img_index']}_img_2.jpg"
-    );
-
-    foreach( $dummy_images as $dummy_path ) {
-      if( @copy( $dummy_path, $upload_dir[ 'path' ] . "/" . basename( $dummy_path ) ) ) {
-        $filename = $upload_dir[ 'path' ] . "/" . basename( $dummy_path );
-        $wp_filetype = wp_check_filetype( basename( $filename ), null );
-
-        $attach_id = wp_insert_attachment( array(
-          'post_mime_type' => $wp_filetype[ 'type' ],
-          'post_title' => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
-          'post_status' => 'inherit'
-        ), $filename, $insert_id );
-
-        $attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
-        wp_update_attachment_metadata( $attach_id, $attach_data );
-      }
-    }
-
-    //** Last attached file is set as thumbnail */
-    if( isset( $attach_id ) ) {
-      update_post_meta( $insert_id, '_thumbnail_id', $attach_id );
-    }
-    
-  }
   /**
    * AJAX Handler for manaually creating backups.
    *
    * @author raj
    */
-  static public function create_settings_backup() {
+  static public function create_settings_backup()
+  {
+    global $wp_properties;
     //save backup
-    
+
+
     $data = apply_filters('wpp::backup::data', array('wpp_settings' => $wp_properties));
     $timestamp = time();
     if (get_option("wpp_property_backups"))
@@ -2915,8 +2836,8 @@ Ample off-street parking ",
 
     $backups[$timestamp] = $data;
     update_option("wpp_property_backups", $backups);
-    $message = '<a href="'.wp_nonce_url( "edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup&timestamp=".$timestamp, 'download-wpp-backup' ).'">'.date('d-m-Y H:i', $timestamp).'</a>&nbsp;&nbsp;&nbsp;';
-    echo json_encode(array("success"=>true,'message'=>$message));
+    $message = '<a href="' . wp_nonce_url("edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup&timestamp=" . $timestamp, 'download-wpp-backup') . '">' . date('d-m-Y H:i', $timestamp) . '</a>&nbsp;&nbsp;&nbsp;';
+    echo json_encode(array("success" => true, 'message' => $message));
   }
 
   /**
@@ -2925,12 +2846,13 @@ Ample off-street parking ",
    * @author raj
    */
 
-  static public function save_freemius_settings(){
-    $rawData =  $_REQUEST['data'];
-    $rawData  =  urldecode($rawData);
+  static public function save_freemius_settings()
+  {
+    $rawData = $_REQUEST['data'];
+    $rawData = urldecode($rawData);
     parse_str($rawData, $data);
-    $return_url = $data['return_url'].'&_wpnonce='.$data['_wpnonce'];
-    
+    $return_url = $data['return_url'] . '&_wpnonce=' . $data['_wpnonce'];
+
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_HEADER, 1);
     curl_setopt($ch, CURLOPT_VERBOSE, 1);
@@ -2939,155 +2861,15 @@ Ample off-street parking ",
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    
+
     $result = curl_exec($ch);
     $responseInfo = curl_getinfo($ch);
     curl_close($ch);
-    if($responseInfo && $responseInfo['redirect_url']){
-      $return['redirect_url'] =  $responseInfo['redirect_url'].'&_wpnonce='.$data['_wpnonce'].'&page='.$data['plugin_slug'];
+    if ($responseInfo && $responseInfo['redirect_url']) {
+      $return['redirect_url'] = $responseInfo['redirect_url'] . '&_wpnonce=' . $data['_wpnonce'] . '&page=' . $data['plugin_slug'];
     }
-    $return['data'] = $data ;
-    $return['success'] = '1' ;
-    echo json_encode($return);
-    exit;
-  }
-  /**
-   * AJAX Handler for Setup Assistant.
-   * proxies to save_settings()
-   *
-   * @author raj
-   */
-  static public function save_setup_settings() {
-
-    global $wp_properties;
-
-    $data = self::parse_str($_REQUEST['data']);
-    
-    //set up some basic variables
-    $prop_types = isset($data['wpp_settings']['property_types']) ? $data['wpp_settings']['property_types'] : false;
-    $widgets_required = isset($data['wpp_settings']['configuration']['widgets']) ? $data['wpp_settings']['configuration']['widgets'] : false;
-    $widgets_available = array('gallerypropertieswidget','childpropertieswidget'); 
-    
-    //check if new page needs to be created for wpp_settings[configuration][base_slug] (Choose default properties pages)
-    if(isset( $data['wpp_settings']['configuration']['base_slug']) && $data['wpp_settings']['configuration']['base_slug']=="create-new"){
-      
-      // if "create-new-page" then create a new WP page
-      $pageName = $data['wpp-base-slug-new'];
-      $new_page = array(
-                'post_type' => 'page',
-                'post_title' => $pageName,
-                'post_content' => '[property_overview]',
-                'post_status' => 'publish',
-                'post_author' => 1,
-        );
-      $new_page_id = wp_insert_post($new_page);
-      $post = get_post($new_page_id); 
-//      print_r($post);die;
-      $slug = $post->post_name;
-      $data['wpp_settings']['configuration']['base_slug'] = $slug;
-      $return['props_over'] = get_permalink($new_page_id);
-    }
-    else{
-//      $return['props_over'] = get_site_url().'/'.$data['wpp_settings']['configuration']['base_slug'];
-      $return['props_over'] = get_site_url().'/'.$wp_properties['configuration']['base_slug'];
-    }
-    
-    //some settings should just be installed first time,and later taken/updated from settings tab
-    
-    { // running this block unconditionally for now
-      $data['wpp_settings']['configuration']['show_assistant'] = true;
-
-//      To allow deprecated widget options 
-      $data['wpp_settings']['configuration']['enable_legacy_features'] = true;
-
-//       Additional attributes for location 
-      $data['wpp_settings']['admin_attr_fields']['location'] = "wpp_address";
-      $data['wpp_settings']['searchable_attr_fields']['location'] = "input";
-      $data['wpp_settings']['configuration']['address_attribute'] = "input";
-
-//        Additional attributes for price
-      $data['wpp_settings']['admin_attr_fields']['price'] = "currency";
-      $data['wpp_settings']['searchable_attr_fields']['price'] = "range_dropdown";
-      
-      if(!isset($data['wpp_settings']['configuration']['automatically_insert_overview'])){
-        $data['wpp_settings']['configuration']['automatically_insert_overview'] = false;
-      }
-    
-      // make property types "searchable" "location matters"
-      foreach($data['wpp_settings']['property_types'] as $key => $val){
-        $data['wpp_settings']['searchable_property_types'][] = $key;
-        $data['wpp_settings']['location_matters'][] = $key;
-      }
-        
-//      compute basic property attributes
-      $propAttrSet = $wp_properties['property_assistant']['default_atts']; // Default attributes regardless of property types.
-
-      if ($prop_types && isset($data['wpp_settings']['property_types']['land']))
-        $propAttrSet = array_merge($propAttrSet, $wp_properties['property_assistant']['land']);
-      if ($prop_types && isset($data['wpp_settings']['property_types']['commercial']))
-        $propAttrSet = array_merge($propAttrSet, $wp_properties['property_assistant']['commercial']);
-      if ($prop_types && array_intersect(array_map('strtolower', $data['wpp_settings']['property_types']), array('house', 'condo', 'townhouse', 'multifamily'))){
-        $propAttrSet = array_merge($propAttrSet, $wp_properties['property_assistant']['residential']);
-        // in this case we need bedrooms/bathrooms/total rooms to be numeric
-        $data['wpp_settings']['admin_attr_fields']['bedrooms'] = "number";
-        $data['wpp_settings']['admin_attr_fields']['bathrooms'] = "number";
-        $data['wpp_settings']['admin_attr_fields']['total_rooms'] = "number";
-      }
-
-//      Install basic property attributes
-      $data['wpp_settings']['property_stats'] = $propAttrSet;
-      
-      // update settings
-      update_option('wpp_settings', $data['wpp_settings']);
-    }
-    
-    //update widgets if $widgets_required
-    if ($widgets_required && $prop_types) {
-      //get existing widgets
-      $allWidgets = get_option('sidebars_widgets');
-      $randInt = rand(200, 300);
-      
-      foreach ($widgets_available as $widget) {
-        $widget_name = 'widget_' . $widget;
-        $widget_content = array();
-        foreach ($prop_types as $prop => $property) {
-          $randInt++;
-          $allWidgets['wpp_sidebar_' . $prop][] = $widget . '-' . $randInt;
-          $content = call_user_func(array('self', $widget_name . '_data'));
-          $widget_content[$randInt] = $content;
-          
-          // if widget has been removed then we need to reset its value
-          if(!in_array($widget,$widgets_required )){
-            $widget_content = '';
-          }
-        }
-        // update individual widget types
-        update_option($widget_name, $widget_content);
-//        print_r(get_option($widget_name));
-      }
-      
-      //update widgets for each property type
-      update_option('sidebars_widgets', $allWidgets);
-    }
-
-    //if dummy properties required
-    if(isset($data['wpp_settings']['configuration']['dummy-prop']) && $data['wpp_settings']['configuration']['dummy-prop']=='yes-please'){
-      self::generate_asst_dummy_properties($data);
-    }
-     
-    // get return values
-    // returns links for last screen of assistant
-    $args = array(
-        'posts_per_page' => 1,
-        'orderby' => 'date',
-        'order' => 'DESC',
-        'post_type' => 'property',
-        'post_status' => 'publish',
-        'suppress_filters' => true
-    );
-    $posts_array = get_posts($args);
-    $return['props_single'] = get_permalink($posts_array[0]->ID);
-   
+    $return['data'] = $data;
+    $return['success'] = '1';
     echo json_encode($return);
     exit;
   }
@@ -3104,7 +2886,7 @@ Ample off-street parking ",
     global $wp_properties;
 
     $data = self::parse_str($_REQUEST['data']);
-    
+
     $return = array(
       'success' => true,
       'message' => '',
@@ -3145,42 +2927,43 @@ Ample off-street parking ",
    * Insert or update wpp_type terms
    * Based on property_types on settings developer tab.
    * Feature Flag: WPP_FEATURE_FLAG_WPP_TYPE
-   * 
-   * @param $wpp_settings: New settings
-   * @param $wp_properties: Old settings
+   *
+   * @param $wpp_settings : New settings
+   * @param $wp_properties : Old settings
    *
    */
-  static function create_property_type_terms($wpp_settings, $wp_properties){
-    $terms = get_terms( array(
-              'taxonomy' => 'wpp_type',
-              'hide_empty' => false,
-            ));
+  static function create_property_type_terms($wpp_settings, $wp_properties)
+  {
+    $terms = get_terms(array(
+      'taxonomy' => 'wpp_type',
+      'hide_empty' => false,
+    ));
 
     /* Delete terms if not exist in $wpp_settings */
-    if ( ! empty( $terms ) && ! is_wp_error( $terms ) )
-    foreach ($terms as $term) {
-      if(!array_key_exists($term->slug, $wpp_settings['property_types'])){
-        wp_delete_term($term->term_id, 'wpp_type');
+    if (!empty($terms) && !is_wp_error($terms))
+      foreach ($terms as $term) {
+        if (!array_key_exists($term->slug, $wpp_settings['property_types'])) {
+          wp_delete_term($term->term_id, 'wpp_type');
+        }
       }
-    }
 
     /* Generate Property type terms */
     foreach ($wpp_settings['property_types'] as $_term => $label) {
+
       $term = get_term($wp_properties['property_types_term_id'][$_term], 'wpp_type', ARRAY_A);
-      if(!is_wp_error($term) && isset($term['term_id'])){
-        if($label != $term['name']){
-          $term = wp_update_term( $term['term_id'], 'wpp_type', array('name' => $label) );
+
+      if (!is_wp_error($term) && isset($term['term_id'])) {
+        if ($label != $term['name']) {
+          $term = wp_update_term($term['term_id'], 'wpp_type', array('name' => $label));
         }
-      }
-      // Find term by label
-      elseif($term = term_exists($label, 'wpp_type')){
+      } // Find term by label
+      elseif ($term = term_exists($label, 'wpp_type')) {
 
-      }
-      else{
-        $term = wp_insert_term( $label, 'wpp_type', array( 'slug' => $_term ) );
+      } else {
+        $term = wp_insert_term($label, 'wpp_type', array('slug' => $_term));
       }
 
-      if(!is_wp_error($term) && isset($term['term_id'])){
+      if (!is_wp_error($term) && isset($term['term_id'])) {
         $wpp_settings['property_types_term_id'][$_term] = $term['term_id'];
       }
     }
@@ -3190,26 +2973,27 @@ Ample off-street parking ",
   /**
    * Add property type from terms if not already exists.
    * Feature Flag: WPP_FEATURE_FLAG_WPP_TYPE
-   * 
+   *
    */
-  public static function add_wpp_type_from_existing_terms(){
+  public static function add_wpp_type_from_existing_terms()
+  {
     global $wp_properties;
     $updated = false;
-    $terms = get_terms( array(
-              'taxonomy' => 'wpp_type',
-              'hide_empty' => false,
-            ));
+    $terms = get_terms(array(
+      'taxonomy' => 'wpp_type',
+      'hide_empty' => false,
+    ));
 
     /* Add property type from terms */
-    if ( ! empty( $terms ) && ! is_wp_error( $terms ) )
-    foreach ($terms as $term) {
-      if(!array_key_exists($term->slug, $wp_properties['property_types'])){
-        $wp_properties['property_types'][$term->slug] = $term->name;
-        $wp_properties['property_types_term_id'][$term->slug] = $term->term_id;
-        $updated = true;
+    if (!empty($terms) && !is_wp_error($terms))
+      foreach ($terms as $term) {
+        if (!array_key_exists($term->slug, $wp_properties['property_types'])) {
+          $wp_properties['property_types'][$term->slug] = $term->name;
+          $wp_properties['property_types_term_id'][$term->slug] = $term->term_id;
+          $updated = true;
+        }
       }
-    }
-    if($updated){
+    if ($updated) {
       update_option('wpp_settings', $wp_properties);
     }
   }
@@ -3257,7 +3041,7 @@ Ample off-street parking ",
           // Handle core settings ( legacy support )
           if ($option_key == 'wpp_settings') {
             //** Allow features to preserve their settings that are not configured on the settings page */
-            $data = apply_filters('wpp_settings_save', $data, $wp_properties);
+
             //** Prevent removal of featured settings configurations if they are not present */
             if (!empty($wp_properties['configuration']['feature_settings'])) {
               foreach ($wp_properties['configuration']['feature_settings'] as $feature_type => $preserved_settings) {
@@ -3266,6 +3050,19 @@ Ample off-street parking ",
                 }
               }
             }
+
+            foreach( $wp_properties as $_suboption_key  => $_suboption_data ) {
+              // WPP_F::debug( "Checking [$_suboption_key]/" );
+
+              if( !isset( $data[ $_suboption_key ] ) ) {
+                WPP_F::debug( "Preserving [$_suboption_key]." );
+                $data[ $_suboption_key ] = $wp_properties[ $_suboption_key ] ;
+              }
+
+            }
+
+            $data = apply_filters('wpp_settings_save', $data, $wp_properties);
+
           }
 
           update_option($option_key, $data);
@@ -3276,12 +3073,11 @@ Ample off-street parking ",
         //** The filters below will be ran on reload, but the saving functions won't */
         if ($_REQUEST['page'] == 'property_settings') {
           unset($_REQUEST);
-          wp_redirect(admin_url("edit.php?post_type=property&page=property_settings&message=updated"));
+          wp_redirect(admin_url("edit.php?post_type=property&page=property_settings&message=restored"));
           exit;
         }
 
       }
-
 
     }
 
@@ -3459,8 +3255,8 @@ Ample off-street parking ",
         $searchable_property_types = explode(',', $searchable_property_types);
         foreach ($searchable_property_types as $k => $v) {
           $searchable_property_types[$k] = trim($v);
-      }
         }
+      }
       $searchable_property_types_sql = "AND pm2.meta_value IN ('" . implode("','", $searchable_property_types) . "')";
 
       //** Cycle through requested attributes */
@@ -3636,6 +3432,7 @@ Ample off-street parking ",
   {
     global $wpdb, $wp_properties, $wpp_query;
 
+
     //** Cleanup (fix) ID argument if it's passed */
     $args = wp_parse_args($args);
     if (isset($args['id'])) {
@@ -3650,7 +3447,6 @@ Ample off-street parking ",
 
     //** Prints args to firebug if debug mode is enabled */
     $log = is_array($args) ? urldecode(http_build_query($args)) : $args;
-    WPP_F::console_log("get_properties() args: {$log}");
 
     //** The function can be overwritten using the filter below. */
     $response = apply_filters('wpp::get_properties::custom', null, $args, $total);
@@ -3735,7 +3531,12 @@ Ample off-street parking ",
     );
 
     $query = wp_parse_args($args, $defaults);
+
     $query = apply_filters('wpp_get_properties_query', $query);
+
+    //WPP_F::console_log("get_properties() args: {$log}");
+    WPP_F::debug("get_properties()", array( 'query' => $query, 'args' => $args )  );
+
     $query_keys = array_keys((array)$query);
 
     //** Search by non meta values */
@@ -3760,7 +3561,7 @@ Ample off-street parking ",
       }
       unset($query['post_status']);
     }
-	
+
     foreach ((array)$non_post_meta as $field => $condition) {
       if (array_key_exists($field, $query)) {
         if ($condition == 'like') {
@@ -3772,15 +3573,15 @@ Ample off-street parking ",
           $d = !is_array($query[$field]) ? explode(',', $query[$field]) : $query[$field];
           foreach ($d as $k => $v) {
             $f .= (!empty($f) ? ",'" . trim($v) . "'" : "'" . trim($v) . "'");
-        }
+          }
           $additional_sql .= " AND p.$field IN ({$f}) ";
         } else if ($condition == 'date') {
           $additional_sql .= " AND YEAR( p.$field ) = " . substr($query[$field], 0, 4) . " AND MONTH( p.$field ) = " . substr($query[$field], 4, 2) . " ";
-      }
+        }
         unset($query[$field]);
+      }
     }
-    }
-	
+
     if (!empty($sql_args['limit_query'])) {
       $sql_args['starting_row'] = ($sql_args['starting_row'] ? $sql_args['starting_row'] : 0);
       $limit_query = "LIMIT {$sql_args['starting_row']}, {$sql_args['limit_query']};";
@@ -3974,7 +3775,7 @@ Ample off-street parking ",
               $matching_id_filter = implode(",", $matching_ids);
               $sql_query = "SELECT post_id FROM {$wpdb->postmeta} WHERE post_id IN ( $matching_id_filter ) AND meta_key = '$meta_key' AND $specific";
             } else {
-				      $sql_query = "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '$meta_key' AND $specific";
+              $sql_query = "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '$meta_key' AND $specific";
             }
 
             //** Some specific additional conditions can be set in filters */
@@ -3984,7 +3785,7 @@ Ample off-street parking ",
               'matching_id_filter' => isset($matching_id_filter) ? $matching_id_filter : false,
               'criteria' => $criteria,
             ));
-            
+
             $matching_ids = $wpdb->get_col($sql_query);
 
           }
@@ -4082,6 +3883,9 @@ Ample off-street parking ",
     }
 
     WPP_F::console_log("get_properties() total: $total");
+
+    self::debug('get_properties', $args);
+
     if (!empty($result)) {
       $return = array();
       if (!empty($total)) {
@@ -4383,7 +4187,7 @@ Ample off-street parking ",
     // Need to improve the way
     // By: Md. Alimuzzaman Alim
     if (($key = array_search('multi_checkbox', $return_multi)) !== false) {
-        unset($return_multi[$key]);
+      unset($return_multi[$key]);
     }
     if (is_array($property_object)) {
       $property_object = (object)$property_object;
@@ -4410,7 +4214,7 @@ Ample off-street parking ",
     $return = array();
     $parent_property_object = "";
     if (isset($property_object->is_child) && $property_object->is_child &&
-       isset($property_object->parent_id) && $property_object->parent_id 
+      isset($property_object->parent_id) && $property_object->parent_id
     ) {
       $parent_property_object = UsabilityDynamics\WPP\Property_Factory::get($property_object->parent_id, array('return_object' => 'true'));
     }
@@ -4434,14 +4238,14 @@ Ample off-street parking ",
       $_property_object = $property_object;
       $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data($slug);
       $input_type = isset($attribute_data['data_input_type']) ? $attribute_data['data_input_type'] : false;
-      
+
       if (!$input_type)
         $input_type = isset($attribute_data['input_type']) ? $attribute_data['input_type'] : "";
 
       $single = !in_array($input_type, $return_multi);
       if (is_object($parent_property_object) &&
-         isset($attribute_data['inheritance']) && 
-         in_array($property_type, $attribute_data['inheritance'])
+        isset($attribute_data['inheritance']) &&
+        in_array($property_type, $attribute_data['inheritance'])
       ) {
         $_property_object = $parent_property_object;
       }
@@ -4617,7 +4421,7 @@ Ample off-street parking ",
                    href="http://maps.google.com/maps?gl=us&daddr=<?php echo $property['latitude'] ?>,<?php echo $property['longitude']; ?>"
                    class="btn btn-info"><?php _e('Get Directions', ud_get_wp_property()->domain) ?></a>
               </div>
-            <?php
+              <?php
             }
 
             $attributes = array();
@@ -5613,13 +5417,13 @@ Ample off-street parking ",
         $results = $wpdb->get_results($sql);
         foreach ($results as $post) {
           $wpdb->insert(
-                        $wpdb->postmeta,
-                        array(
-                          'post_id' => $post->ID,
-                          'meta_key' => $attribute,
-                          'meta_value' => $value,
-                          )
-                      );
+            $wpdb->postmeta,
+            array(
+              'post_id' => $post->ID,
+              'meta_key' => $attribute,
+              'meta_value' => $value,
+            )
+          );
         }
         $added_row = count($results);
       }
@@ -5629,9 +5433,9 @@ Ample off-street parking ",
       $replaced_property_label = ($replaced_row > 1) ? $property_label_plural : $property_label;
       $added_property_label = ($added_row > 1) ? $property_label_plural : $property_label;
       $response = array(
-                    'status' => "replaced",
+        'status' => "replaced",
         'message' => sprintf(__("Attributes replaced in %d %s and added in %d %s.", ud_get_wp_property()->domain), number_format_i18n($replaced_row), $replaced_property_label, number_format_i18n($added_row), $added_property_label),
-                  );
+      );
     } else {
       $chk_meta_results = $wpdb->get_results($chk_meta_key);
       if (is_array($chk_meta_results) && $count = count($chk_meta_results)) {
@@ -5641,9 +5445,9 @@ Ample off-street parking ",
         $str_that = _n("that", $_those, $count, ud_get_wp_property()->domain);
         $str_value = _n("value", $_values, $count, ud_get_wp_property()->domain);
         $response = array(
-                          'status' => "confirm",
+          'status' => "confirm",
           'message' => sprintf(__("Attribute value already exist (In %d %s). Do you want to replace %s %s?", ud_get_wp_property()->domain), number_format_i18n($count), $key_exist_property_label, $str_that, $str_value),
-                        );
+        );
       } else {
         $sql = "SELECT DISTINCT p.ID FROM {$wpdb->posts} AS p WHERE p.post_type = 'property' AND p.ID";
         $results = $wpdb->get_results($sql);
@@ -5651,19 +5455,19 @@ Ample off-street parking ",
         $property_label = ($count > 1) ? $property_label_plural : $property_label;
         foreach ($results as $post) {
           $wpdb->insert(
-                        $wpdb->postmeta,
-                        array(
-                          'post_id' => $post->ID,
-                          'meta_key' => $attribute,
-                          'meta_value' => $value,
-                          )
-                      );
+            $wpdb->postmeta,
+            array(
+              'post_id' => $post->ID,
+              'meta_key' => $attribute,
+              'meta_value' => $value,
+            )
+          );
         }
-        
+
         $response = array(
-                          'status' => 'success',
+          'status' => 'success',
           'message' => sprintf(__("Applied to %d %s.", ud_get_wp_property()->domain), number_format_i18n($count), $property_label),
-                        );
+        );
       }
     }
 
@@ -5673,11 +5477,11 @@ Ample off-street parking ",
   /**
    * This function is only for generate_is_remote_meta() function.
    * Used to search more than one array (ex. array of arrays).
-   * 
+   *
    * @param array $array : The array of arrays.
    * @param string $key : The key to search in $array.
    * @param string $value : The value to search for $key.
-   * 
+   *
    * @return array of element_id found.
    */
   private static function _found_in_array($array, $key, $value = '1')
@@ -5692,7 +5496,7 @@ Ample off-street parking ",
           $return[] = $v['element_id'];
       }
     }
-    
+
     if (empty($return))
       return false;
     if (count($return) == 1)
@@ -5705,9 +5509,9 @@ Ample off-street parking ",
   /**
    * Used in generate_is_remote_meta() function.
    * Used to search more than one array (ex. array of arrays).
-   * 
+   *
    * @param none .
-   * 
+   *
    * @return bool whether succeed or not.
    */
   static function generate_is_remote_meta()
@@ -5767,10 +5571,11 @@ Ample off-street parking ",
   /**
    * Deactivate wp-property-terms.
    * Because it's now bundled with wp-property.
-   * 
+   *
    */
-  static function deactive_wp_property_terms(){
-    deactivate_plugins( 'wp-property-terms/wp-property-terms.php', true );
+  static function deactive_wp_property_terms()
+  {
+    deactivate_plugins('wp-property-terms/wp-property-terms.php', true);
   }
 
 }

@@ -5,6 +5,51 @@
 jQuery.extend( wpp = wpp || {}, { ui: { settings: {
 
   /**
+   * Callback for when a tab is selectd.
+   *
+   * @param event
+   * @param ui
+   */
+  settingsTabActived: function settingsTabActived( event, ui ) {
+    // console.debug( 'wpp.ui.settings', 'settingsTabActived', ui.newPanel.selector );
+
+    if( 'object' === typeof sessionStorage ) {
+      sessionStorage.setItem('wpp.state.settings.activeTab', ui.newPanel.selector );
+    }
+
+  },
+
+  /**
+   * Get currently active tab.
+   *
+   * @returns {*}
+   */
+  settingsActivateTab: function settingsActivateTab( ) {
+
+    if( 'object' !== typeof sessionStorage ) {
+      return 0;
+    }
+
+    var activeTab = sessionStorage.getItem('wpp.state.settings.activeTab' );
+
+    var tabContainer  = jQuery( "#wpp_settings_tabs > ul  > li" );
+    var tabs = jQuery( "#wpp_settings_tabs > ul > li > a" );
+    var activeTabElement  = jQuery( 'a[href=' + activeTab + ']' ).get(0);
+    var activeTabIndex = jQuery( tabs ).index( activeTabElement );
+
+    if( activeTabIndex ) {
+      activeTabIndex = parseInt( activeTabIndex );
+    } else {
+      activeTabIndex = 0;
+    }
+
+    // console.debug( 'wpp.ui.settings', 'settingsActivateTab', activeTab );
+
+    return activeTabIndex;
+
+  },
+
+  /**
    * Initialize DOM.
    *
    * @for wpp.ui.settings
@@ -85,10 +130,11 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
     } );
 
     if ( document.location.hash != '' && jQuery( document.location.hash ).length > 0 ) {
-      jQuery( "#wpp_settings_tabs" ).tabs();
+      jQuery( "#wpp_settings_tabs" ).tabs({activate: wpp.ui.settings.settingsTabActived, active: wpp.ui.settings.settingsActivateTab()});
     } else {
-      jQuery( "#wpp_settings_tabs" ).tabs( { cookie: {  name: 'wpp_settings_tabs', expires: 30 } } );
+      jQuery( "#wpp_settings_tabs" ).tabs( { activate: wpp.ui.settings.settingsTabActived, active: wpp.ui.settings.settingsActivateTab(), cookie: {  name: 'wpp_settings_tabs', expires: 30 } } );
     }
+
 
     /* Show settings array */
     jQuery( "#wpp_show_settings_array" ).click( function () {
@@ -102,7 +148,7 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
         $showSettingsElem.show();
       } else {
         $this.attr('disabled', 'disabled');
-        jQuery.post( wpp.instance.ajax_url, {
+        jQuery.get( wpp.instance.ajax_url, {
           action: 'wpp_ajax_print_wp_properties'
         }, function ( data ) {
 
@@ -198,12 +244,14 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
       var property_id = jQuery( "#wpp_property_class_id" ).val();
       jQuery( "#wpp_ajax_property_result" ).html( "" );
 
-      jQuery.post( wpp.instance.ajax_url, {
+      jQuery.get( wpp.instance.ajax_url, {
         action: 'wpp_ajax_property_query',
         property_id: property_id
       }, function ( data ) {
+
         jQuery( "#wpp_ajax_property_result" ).show();
-        jQuery( "#wpp_ajax_property_result" ).html( data );
+        jQuery( "#wpp_ajax_property_result" ).addClass( 'jjson' );
+        jQuery("#wpp_ajax_property_result").jJsonViewer(data.data.property);
         jQuery( "#wpp_ajax_property_query_cancel" ).show();
       } );
     } );
@@ -277,7 +325,7 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
      */
 
     jQuery( ".wpp_all_advanced_settings" ).live( "click", function() {
-      var action = jQuery( this ).attr( "action" );
+      var action = jQuery( this ).attr( "data-action" ) || jQuery( this ).attr( "action" );
 
       if( action == "expand" ) {
         jQuery( this ).parents( '.developer-panel' ).find( ".wpp_development_advanced_option" ).show();
@@ -447,43 +495,69 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
             data: data
           },
           success: function( response ){
-            var response = jQuery.parseJSON( response );
+
+            response = jQuery.parseJSON( response );
+
             if( response.status == 'success' ) {
+
               $this.removeClass('disabled').removeAttr('disabled');
+
               wppModal({
-                    message: response.message,
-                    title: wpp.strings._done
-                });
+                  message: response.message,
+                  title: wpp.strings._done
+              });
+
             } else if(response.status == 'confirm' ) {
-              wppModal({
-                    message: response.message,
-                    buttons: {
-                        [wpp.strings.replace_all]: function () {
-                            var _this = jQuery(this);
-                            data.confirmed = 'all';
-                            jQuery(this).parent().find('.ui-dialog-buttonpane button').addClass('disabled').attr('disabled', 'disabled');
-                            onConfirm(data, function(){
-                              $this.removeClass('disabled').removeAttr('disabled');
-                            });
-                        },
-                        [wpp.strings.replace_empty]: function () {
-                            var _this = jQuery(this);
-                            data.confirmed = 'empty-or-not-exist';
-                            jQuery(this).parent().find('.ui-dialog-buttonpane button').addClass('disabled').attr('disabled', 'disabled');
-                            onConfirm(data, function(){
-                              $this.removeClass('disabled').removeAttr('disabled');
-                            });
-                        },
-                        [wpp.strings.cancel]: function () {
-                            $this.removeClass('disabled').removeAttr('disabled');
-                            jQuery(this).dialog("close");
-                        }
-                    },
-                    close: function (event, ui) {
-                        $this.removeClass('disabled').removeAttr('disabled');
-                        jQuery(this).remove();
-                    }
-                });
+
+              var _modal = {
+                message: response.message,
+                buttons: {},
+                close: function (event, ui) {
+                  $this.removeClass('disabled').removeAttr('disabled');
+                  jQuery(this).remove();
+                }
+              }
+
+              Object.defineProperty( _modal.buttons, wpp.strings.replace_all, {
+                value: function () {
+                  var _this = jQuery(this);
+                  data.confirmed = 'all';
+                  jQuery(this).parent().find('.ui-dialog-buttonpane button').addClass('disabled').attr('disabled', 'disabled');
+                  onConfirm(data, function(){
+                    $this.removeClass('disabled').removeAttr('disabled');
+                  });
+                },
+                configurable: true,
+                enumerable: true,
+                writable: true
+              } );
+
+              Object.defineProperty( _modal.buttons, wpp.strings.replace_empty, {
+                value: function () {
+                  var _this = jQuery(this);
+                  data.confirmed = 'empty-or-not-exist';
+                  jQuery(this).parent().find('.ui-dialog-buttonpane button').addClass('disabled').attr('disabled', 'disabled');
+                  onConfirm(data, function(){
+                    $this.removeClass('disabled').removeAttr('disabled');
+                  });
+                },
+                configurable: true,
+                enumerable: true,
+                writable: true
+              } );
+
+              Object.defineProperty( _modal.buttons, wpp.strings.cancel, {
+                value: function () {
+                  $this.removeClass('disabled').removeAttr('disabled');
+                  jQuery(this).dialog("close");
+                },
+                configurable: true,
+                enumerable: true,
+                writable: true
+              } );
+
+              wppModal(_modal);
+
             }
           },
           error: function() {
@@ -672,15 +746,21 @@ wppModal = function(option){
     autoOpen: true,
     width: 'auto',
     resizable: false,
-    buttons: {
-        [wpp.strings.cancel]: function () {
-            jQuery(this).dialog("close");
-        }
-    },
+    buttons: {},
     close: function (event, ui) {
         jQuery(this).remove();
     }
   };
+
+  Object.defineProperty( _default.buttons, wpp.strings.cancel, {
+    value: function () {
+      jQuery(this).dialog("close");
+    },
+    configurable: true,
+    enumerable: true,
+    writable: true
+  } );
+
   option = jQuery.extend(true, {}, _default, option);
 
   var wppModalBox = jQuery('#wpp-modal');
