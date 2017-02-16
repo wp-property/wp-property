@@ -237,12 +237,14 @@ namespace UsabilityDynamics\WPP {
         $local_layouts = get_option('wpp_available_local_layouts', false);
         $overview_layouts = $layouts['property-overview'];
         $single_layouts = $layouts['single-property'];
-        foreach ($local_layouts as $value) {
-          $tag = $value->tags[0]->tag;
-          if ($tag == 'property-overview') {
-            $overview_layouts = array_merge($overview_layouts, array($value));
-          } else if ($tag == 'single-property') {
-            $single_layouts = array_merge($single_layouts, array($value));
+        if (!empty($local_layouts)) {
+          foreach ($local_layouts as $value) {
+            $tag = $value->tags[0]->tag;
+            if ($tag == 'property-overview') {
+              $overview_layouts = array_merge($overview_layouts, array($value));
+            } else if ($tag == 'single-property') {
+              $single_layouts = array_merge($single_layouts, array($value));
+            }
           }
         }
 
@@ -262,16 +264,21 @@ namespace UsabilityDynamics\WPP {
         ));
 
         $overview_radio_choices = array();
-        foreach ($overview_layouts as $layout) {
-          if (!empty($layout->screenshot)) {
-            $layout_preview = $layout->screenshot;
-          } else {
-            $layout_preview = WPP_URL . 'images/no-preview.jpg';
+        if (!empty($overview_layouts)) {
+          foreach ($overview_layouts as $layout) {
+            if (!empty($layout->screenshot)) {
+              $layout_preview = $layout->screenshot;
+            } else {
+              $layout_preview = WPP_URL . 'images/no-preview.jpg';
+            }
+            $overview_radio_choices[$layout->layout] = '<img style="display: block; width: 150px; height: 150px;" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
           }
-          $overview_radio_choices[$layout->layout] = '<img style="display: block; width: 150px; height: 150px;" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
+          $first_overview_layout = array_shift($overview_layouts)->layout;
+        } else {
+          $first_overview_layout = '';
         }
         $wp_customize->add_setting('layouts_property_overview_choice', array(
-          'default' => $overview_layouts[0]->layout,
+          'default' => $first_overview_layout,
           'transport' => 'refresh'
         ));
         $wp_customize->add_control(new Layouts_Custom_Control($wp_customize, 'layouts_property_overview_choice', array(
@@ -282,7 +289,7 @@ namespace UsabilityDynamics\WPP {
         )));
 
         $wp_customize->add_setting('layouts_property_overview_select', array(
-          'default' => false,
+          'default' => 'page.php',
           'transport' => 'refresh'
         ));
         $wp_customize->add_control('layouts_property_overview_select', array(
@@ -302,16 +309,21 @@ namespace UsabilityDynamics\WPP {
         ));
 
         $single_radio_choices = array();
-        foreach ($single_layouts as $layout) {
-          if (!empty($layout->screenshot)) {
-            $layout_preview = $layout->screenshot;
-          } else {
-            $layout_preview = WPP_URL . 'images/no-preview.jpg';
+        if (!empty($single_layouts)) {
+          foreach ($single_layouts as $layout) {
+            if (!empty($layout->screenshot)) {
+              $layout_preview = $layout->screenshot;
+            } else {
+              $layout_preview = WPP_URL . 'images/no-preview.jpg';
+            }
+            $single_radio_choices[$layout->layout] = '<img style="display: block; width: 150px; height: 150px;" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
           }
-          $single_radio_choices[$layout->layout] = '<img style="display: block; width: 150px; height: 150px;" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
+          $first_single_layout = array_shift($single_layouts)->layout;
+        } else {
+          $first_single_layout = '';
         }
         $wp_customize->add_setting('layouts_property_single_choice', array(
-          'default' => $single_layouts[0]->layout,
+          'default' => $first_single_layout,
           'transport' => 'refresh'
         ));
         $wp_customize->add_control(new Layouts_Custom_Control($wp_customize, 'layouts_property_single_choice', array(
@@ -322,7 +334,7 @@ namespace UsabilityDynamics\WPP {
         )));
 
         $wp_customize->add_setting('layouts_property_single_select', array(
-          'default' => false,
+          'default' => 'single.php',
           'transport' => 'refresh'
         ));
         $wp_customize->add_control('layouts_property_single_select', array(
