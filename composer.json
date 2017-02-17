@@ -225,6 +225,13 @@
         "description": "Dashboard widget for wp-rets-client, shows stats.",
         "since": "2.2.1",
         "enabled": false
+      },
+      {
+        "name": "Elasticsearch Service",
+        "constant": "WP_PROPERTY_ELASTICSEARCH_SERVICE",
+        "description": "Hosted Elasticsearch synchronization for listing data.",
+        "since": "2.2.1",
+        "enabled": false
       }
     ],
     "schemas": {
