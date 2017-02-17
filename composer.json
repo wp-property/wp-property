@@ -130,22 +130,22 @@
       },
       {
         "name": "Standard Location Taxonomy",
-        "constant": "WPP_FEATURE_FLAG_WPP_LOCATION",
-        "description": "Standard property location taxonomy, stored in [wpp_location].",
+        "constant": "WPP_FEATURE_FLAG_WPP_LISTING_LOCATION",
+        "description": "Standard property location taxonomy, stored in [wpp_listing_location].",
         "since": "2.2.1",
         "enabled": true
       },
       {
         "name": "Standard Property Type",
-        "constant": "WPP_FEATURE_FLAG_WPP_TYPE",
-        "description": "Standard property type taxonomy, stored in [wpp_type].",
+        "constant": "WPP_FEATURE_FLAG_WPP_LISTING_TYPE",
+        "description": "Standard property type taxonomy, stored in [wpp_listing_type].",
         "since": "2.2.1",
         "enabled": true
       },
       {
         "name": "Standard Property Status",
-        "constant": "WPP_FEATURE_FLAG_WPP_STATUS",
-        "description": "Standard property status taxonomy [wpp_status].",
+        "constant": "WPP_FEATURE_FLAG_WPP_LISTING_STATUS",
+        "description": "Standard property status taxonomy [wpp_listing_status].",
         "since": "2.2.1",
         "enabled": true
       },

@@ -11,7 +11,7 @@
 * Added [wpp::localization::instance] filter to customizer/extend the [wpp] variable.
 * Removed WPP_F::register_property_page_url and WPP_F::register_property_single_url.
 * Improved Layout Customizer logic for detecting URL to single property page and main properties page.
-* Added [WPP_FEATURE_FLAG_WPP_STATUS] feature flag and standard Status taxonomy.
+* Added [WPP_FEATURE_FLAG_WPP_LISTING_STATUS] feature flag and standard Status taxonomy.
 * Serialized property meta fields are now automatically unserialized.
 * Added [WP_PROPERTY_FLAG_ENABLE_SUPERMAP] and [WP_PROPERTY_FLAG_ENABLE_AGENTS] feature flags to toggle features.
 * Added sticky-tab selection to Property Settings page. Selected tab stored in [sessionStorage].
@@ -19,7 +19,7 @@
 * Added [WPP_FEATURE_FLAG_DISABLE_EDITOR] feature flag which hides the native Post Content editor.
 * Added [WPP_FEATURE_FLAG_WPP_CATEGORY] and [WP_PROPERTY_FLAG_WPP_LABEL] feature flags, which enable [wpp_category] and [wpp_label] taxonomies. 
 * Fixes to Site API registration process. 
-* Improvements to [wpp_location] taxonomy for wp-rets-client.
+* Improvements to [wpp_listing_location] taxonomy for wp-rets-client.
 * Implemented [WP_PROPERTY_LEGACY_META_ATTRIBUTES] feature flag, disabling legacy meta UI.
 * Improved UX for viewing property objects by using a JSON viewer library.
 * Improved wp-rets-client logic for inserting terms and taxonomies. Both are added on-the-fly, with hierarchy support if needed.

@@ -1,4 +1,4 @@
-// Feature Flag: WPP_FEATURE_FLAG_WPP_TYPE
+// Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
 jQuery(document).ready(function($){
     var wraper = $('.wpp-property-type');
     wraper.each(function(){

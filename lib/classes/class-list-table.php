@@ -249,7 +249,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         if( isset( $type_label ) && isset( $type_slug ) ) {
-          $_html = '<a href="' . admin_url( 'edit.php?post_type=property&page=all_properties&wpp_type=' . $type_slug ) . '" target="_blank" class="wpp-type-label" data-type="' . $type_slug . '">' . $type_label . '</a>';
+          $_html = '<a href="' . admin_url( 'edit.php?post_type=property&page=all_properties&wpp_listing_type=' . $type_slug ) . '" target="_blank" class="wpp-type-label" data-type="' . $type_slug . '">' . $type_label . '</a>';
         } else {
           $_html = '-';
         }

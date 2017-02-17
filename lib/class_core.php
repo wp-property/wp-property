@@ -404,15 +404,15 @@ class WPP_Core {
 
     do_action( 'wpp_init:end', $this );
 
-    if( defined( 'WPP_FEATURE_FLAG_WPP_TYPE' ) && WPP_FEATURE_FLAG_WPP_TYPE ) {
-      add_action( 'created_wpp_type', array($this, 'term_created_wpp_type'), 10, 2 );
-      add_action( 'edited_wpp_type', array($this, 'term_created_wpp_type'), 10, 2 );
-      add_action( 'delete_wpp_type', array($this, 'term_delete_wpp_type'), 10, 4 );
+    if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_TYPE' ) && WPP_FEATURE_FLAG_WPP_LISTING_TYPE ) {
+      add_action( 'created_wpp_listing_type', array($this, 'term_created_wpp_listing_type'), 10, 2 );
+      add_action( 'edited_wpp_listing_type', array($this, 'term_created_wpp_listing_type'), 10, 2 );
+      add_action( 'delete_wpp_listing_type', array($this, 'term_delete_wpp_listing_type'), 10, 4 );
       add_action( 'wpp_settings_save', array('WPP_F', 'create_property_type_terms'), 10, 2 );
 
       // Run activation task after plugin fully activated.
       if(get_option('wpp_activated') ){
-        WPP_F::add_wpp_type_from_existing_terms();
+        WPP_F::add_wpp_listing_type_from_existing_terms();
         WPP_F::create_property_type_terms($wp_properties, $wp_properties);
         delete_option('wpp_activated');
       }
@@ -883,10 +883,10 @@ class WPP_Core {
 
     $update_data = $_REQUEST[ 'wpp_data' ][ 'meta' ];
 
-    if( defined( 'WPP_FEATURE_FLAG_WPP_TYPE' ) ) {
-      // if wpp_type is set then update property_type attribute.
-      if(isset($_REQUEST[ 'wpp_type' ])){
-        $term   = get_the_terms($post_id, 'wpp_type');
+    if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_TYPE' ) ) {
+      // if wpp_listing_type is set then update property_type attribute.
+      if(isset($_REQUEST[ 'wpp_listing_type' ])){
+        $term   = get_the_terms($post_id, 'wpp_listing_type');
         if(is_object($term[0]))
           update_post_meta($post_id, 'property_type', $term[0]->slug);
       }
@@ -1598,9 +1598,9 @@ class WPP_Core {
   }
 
   /**
-   * Add/update Property Type to $wp_properties when wpp_type 
+   * Add/update Property Type to $wp_properties when wpp_listing_type
    * created/updated outside of developer tab of settings page.
-   * Feature Flag: WPP_FEATURE_FLAG_WPP_TYPE
+   * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
    * 
    * @author Md. Alimuzzaman Alim
    * 
@@ -1608,9 +1608,9 @@ class WPP_Core {
    * @param int $tt_id
    * 
    */
-  function term_created_wpp_type($term_id, $tt_id){
+  function term_created_wpp_listing_type($term_id, $tt_id){
     global $wp_properties;
-    $term = get_term($term_id, 'wpp_type');
+    $term = get_term($term_id, 'wpp_listing_type');
     if(!in_array($term->slug, $wp_properties['property_types']) || $wp_properties['property_types'][$term->slug] != $term->name){
       $wp_properties['property_types'][$term->slug] = $term->name;
       $wp_properties['property_types_term_id'][$term->slug] = $term->term_id;
@@ -1623,9 +1623,9 @@ class WPP_Core {
   }
 
   /**
-   * Remove Property Type from $wp_properties when wpp_type 
+   * Remove Property Type from $wp_properties when wpp_listing_type
    * deleted outside of developer tab of settings page.
-   * Feature Flag: WPP_FEATURE_FLAG_WPP_TYPE
+   * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
    * 
    * @author Md. Alimuzzaman Alim
    * 
@@ -1634,7 +1634,7 @@ class WPP_Core {
    * @param int $term
    * 
    */
-  function term_delete_wpp_type($term_id, $tt_id, $term){
+  function term_delete_wpp_listing_type($term_id, $tt_id, $term){
     global $wp_properties;
     if(array_key_exists($term->slug, $wp_properties['property_types'])){
       unset($wp_properties['property_types'][$term->slug]);
