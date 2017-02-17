@@ -77,10 +77,8 @@ namespace UsabilityDynamics\WPP {
        * @author raj
        */
       static public function save_setup_settings() {
-        global $wp_properties;
 
         $data = WPP_F::parse_str( $_REQUEST[ 'data' ] );
-
 
         $_setup = array(
           'api' => WPP_API_URL_STANDARDS,
@@ -89,10 +87,11 @@ namespace UsabilityDynamics\WPP {
         );
 
         $_current_settings = get_option('wpp_settings');
-        //die( '<pre>' . print_r( $_current_settings, true ) . '</pre>' );
+
         $_modified_settings = WPP_F::extend( $_current_settings, $_setup['schema'] );
 
-        //die( '<pre>' . print_r( $_modified_settings , true ) . '</pre>' );
+        $_modified_settings['_updated'] = time();
+
         update_option( 'wpp_settings', $_modified_settings );
 
         $posts_array = get_posts( array(

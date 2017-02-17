@@ -88,8 +88,8 @@
     "featureFlags": [
       {
         "name": "Listing Labels",
-        "constant": "WP_PROPERTY_FLAG_WPP_LABEL",
-        "description": "Property flags, for highlighting important information, stored in [wpp_label]. Can be used to identify 'featured' properties.",
+        "constant": "WP_PROPERTY_FLAG_WPP_LISTING_LABEL",
+        "description": "Property flags, for highlighting important information, stored in [wpp_listing_label]. Can be used to identify 'featured' properties.",
         "since": "2.2.1",
         "enabled": true
       },
@@ -134,6 +134,13 @@
         "description": "Disables native WordPress post editor.",
         "since": "2.2.1",
         "enabled": false
+      },
+      {
+        "name": "Listing Permissions",
+        "constant": "WPP_FEATURE_FLAG_WPP_LISTING_PERMISSIONS",
+        "description": "Sets listing display permissions, stored in [wpp_listing_permissions].",
+        "since": "2.2.1",
+        "enabled": true
       },
       {
         "name": "Standard Location Taxonomy",

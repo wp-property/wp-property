@@ -68,8 +68,11 @@ namespace UsabilityDynamics\WPP {
         /** Load admin scripts */
         add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
+        // Watch for updates to wpp_settings field.
+        add_action( 'update_option_wpp_settings', array( $this, 'update_option_wpp_settings' ), 20, 3 );
+
         /** Define our custom taxonomies. */
-        add_filter( 'wpp_taxonomies', array( $this, 'define_taxonomies' ) );
+        add_filter( 'wpp_taxonomies', array( $this, 'define_taxonomies' ), 20 );
 
         /** Prepare taxonomy's arguments before registering taxonomy. */
         add_filter( 'wpp::register_taxonomy', array( $this, 'prepare_taxonomy' ), 99, 2 );
@@ -442,8 +445,10 @@ namespace UsabilityDynamics\WPP {
       /**
        * Save custom Taxonomies
        *
+       * @param array $data
        */
-      public function save_settings( $data ) {
+      public function save_settings( $data = array() ) {
+
         if( !empty( $data[ 'wpp_terms' ] ) ) {
 
           /** Take care about available taxonomies */
@@ -481,7 +486,9 @@ namespace UsabilityDynamics\WPP {
           }
 
           $this->settings->commit();
+
         }
+
       }
 
       /**
@@ -740,6 +747,28 @@ namespace UsabilityDynamics\WPP {
         $this->extend_wpp_settings();
 
         return $this->get( 'config.taxonomies', array() );
+      }
+
+      public function update_option_wpp_settings( $old_value, $settings, $option ) {
+
+        self::save_settings(array(
+          'wpp_terms' => array(
+            'taxonomies' => $settings['taxonomies'],
+
+            // Groups term belongs to.
+            //'groups' => array(),
+
+            // Set to "multiple" or "unique"
+            //'types' => array(),
+
+            // List of hidden/system taxonomies
+            //'hidden' => array()
+
+            // Not sure if used.
+            //'inherited' => array()
+          )
+        ));
+
       }
 
       /**
