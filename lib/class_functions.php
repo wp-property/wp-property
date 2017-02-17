@@ -191,9 +191,9 @@ class WPP_F extends UsabilityDynamics\Utility
     add_filter('wpp_taxonomies', function () {
       $taxonomies = array();
 
-      // Add [wpp_type] taxonomy.
-      if (defined('WPP_FEATURE_FLAG_WPP_TYPE') && WPP_FEATURE_FLAG_WPP_TYPE ) {
-        $taxonomies['wpp_type'] = array(
+      // Add [wpp_listing_type] taxonomy.
+      if (defined('WPP_FEATURE_FLAG_WPP_LISTING_TYPE') && WPP_FEATURE_FLAG_WPP_LISTING_TYPE ) {
+        $taxonomies['wpp_listing_type'] = array(
           'default' => true,
           'readonly' => true,
           'hidden' => true,
@@ -290,9 +290,9 @@ class WPP_F extends UsabilityDynamics\Utility
         );
       }
 
-      // Add [wpp_status] taxonomy.
-      if (defined('WPP_FEATURE_FLAG_WPP_STATUS') && WPP_FEATURE_FLAG_WPP_STATUS) {
-        $taxonomies['wpp_status'] = array(
+      // Add [wpp_listing_status] taxonomy.
+      if (defined('WPP_FEATURE_FLAG_WPP_LISTING_STATUS') && WPP_FEATURE_FLAG_WPP_LISTING_STATUS) {
+        $taxonomies['wpp_listing_status'] = array(
           'default' => true,
           'readonly' => true,
           'hidden' => true,
@@ -323,9 +323,9 @@ class WPP_F extends UsabilityDynamics\Utility
         );
       }
 
-      // Add [wpp_location] taxonomy.
-      if (defined('WPP_FEATURE_FLAG_WPP_LOCATION') && WPP_FEATURE_FLAG_WPP_LOCATION) {
-        $taxonomies['wpp_location'] = array(
+      // Add [wpp_listing_location] taxonomy.
+      if (defined('WPP_FEATURE_FLAG_WPP_LISTING_LOCATION') && WPP_FEATURE_FLAG_WPP_LISTING_LOCATION) {
+        $taxonomies['wpp_listing_location'] = array(
           'default' => true,
           'readonly' => true,
           'hidden' => true,
@@ -1922,8 +1922,8 @@ class WPP_F extends UsabilityDynamics\Utility
         }
       }
 
-      if (defined('WPP_FEATURE_FLAG_WPP_LOCATION')) {
-        if (isset($wp_properties['taxonomies']['wpp_location'])) {
+      if (defined('WPP_FEATURE_FLAG_WPP_LISTING_LOCATION')) {
+        if (isset($wp_properties['taxonomies']['wpp_listing_location'])) {
           $return['terms'] = self::update_location_terms($post_id, $geo_data);
         }
       }
@@ -2014,7 +2014,7 @@ class WPP_F extends UsabilityDynamics\Utility
    *
    * @todo Add "location_" prefix.
    *
-   * Feature Flag: WPP_FEATURE_FLAG_WPP_LOCATION
+   * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_LOCATION
    * @since 2.2.1
    * @author potanin@UD
    * @param $post_id
@@ -2028,14 +2028,14 @@ class WPP_F extends UsabilityDynamics\Utility
       return new WP_Error( 'No [geo_data] argument provided.' );
     }
 
-    self::verify_have_system_taxonomy('wpp_location');
+    self::verify_have_system_taxonomy('wpp_listing_location');
 
     $geo_data->terms = array();
 
-    $geo_data->terms['state'] = !empty($geo_data->state) ? get_term_by('name', $geo_data->state, 'wpp_location', OBJECT) : false;
-    $geo_data->terms['county'] = !empty($geo_data->county) ? get_term_by('name', $geo_data->county, 'wpp_location', OBJECT) : false;
-    $geo_data->terms['city'] = !empty($geo_data->city) ? get_term_by('name', $geo_data->city, 'wpp_location', OBJECT) : false;
-    $geo_data->terms['route'] = !empty($geo_data->route) ? get_term_by('name', $geo_data->route, 'wpp_location', OBJECT) : false;
+    $geo_data->terms['state'] = !empty($geo_data->state) ? get_term_by('name', $geo_data->state, 'wpp_listing_location', OBJECT) : false;
+    $geo_data->terms['county'] = !empty($geo_data->county) ? get_term_by('name', $geo_data->county, 'wpp_listing_location', OBJECT) : false;
+    $geo_data->terms['city'] = !empty($geo_data->city) ? get_term_by('name', $geo_data->city, 'wpp_listing_location', OBJECT) : false;
+    $geo_data->terms['route'] = !empty($geo_data->route) ? get_term_by('name', $geo_data->route, 'wpp_listing_location', OBJECT) : false;
 
     // validate, lookup and add all location terms to object.
     if (isset($geo_data->terms) && is_array($geo_data->terms)) {
@@ -2062,13 +2062,13 @@ class WPP_F extends UsabilityDynamics\Utility
 
           // $_detail[ 'slug' ] = 'city-slug';
 
-          $_inserted_term = wp_insert_term($_value, 'wpp_location', $_detail);
+          $_inserted_term = wp_insert_term($_value, 'wpp_listing_location', $_detail);
 
           if (!is_wp_error($_inserted_term) && isset($_inserted_term['term_id'])) {
-            $geo_data->terms[$_level] = get_term_by('term_id', $_inserted_term['term_id'], 'wpp_location', OBJECT);
+            $geo_data->terms[$_level] = get_term_by('term_id', $_inserted_term['term_id'], 'wpp_listing_location', OBJECT);
             //die( '<pre>' . print_r( $geo_data->terms->{$_level}, true ) . '</pre>' );
           } else {
-            error_log('Could not insert [wpp_location] term [' . $_value . '], error: [' . $_inserted_term->get_error_message() . ']');
+            error_log('Could not insert [wpp_listing_location] term [' . $_value . '], error: [' . $_inserted_term->get_error_message() . ']');
           }
 
         }
@@ -2084,7 +2084,7 @@ class WPP_F extends UsabilityDynamics\Utility
       }
 
       // write, ovewriting any settings from before
-      wp_set_object_terms($post_id, $_location_terms, 'wpp_location', false);
+      wp_set_object_terms($post_id, $_location_terms, 'wpp_listing_location', false);
 
     }
 
@@ -2924,9 +2924,9 @@ class WPP_F extends UsabilityDynamics\Utility
   }
 
   /**
-   * Insert or update wpp_type terms
+   * Insert or update wpp_listing_type terms
    * Based on property_types on settings developer tab.
-   * Feature Flag: WPP_FEATURE_FLAG_WPP_TYPE
+   * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
    *
    * @param $wpp_settings : New settings
    * @param $wp_properties : Old settings
@@ -2935,7 +2935,7 @@ class WPP_F extends UsabilityDynamics\Utility
   static function create_property_type_terms($wpp_settings, $wp_properties)
   {
     $terms = get_terms(array(
-      'taxonomy' => 'wpp_type',
+      'taxonomy' => 'wpp_listing_type',
       'hide_empty' => false,
     ));
 
@@ -2943,24 +2943,24 @@ class WPP_F extends UsabilityDynamics\Utility
     if (!empty($terms) && !is_wp_error($terms))
       foreach ($terms as $term) {
         if (!array_key_exists($term->slug, $wpp_settings['property_types'])) {
-          wp_delete_term($term->term_id, 'wpp_type');
+          wp_delete_term($term->term_id, 'wpp_listing_type');
         }
       }
 
     /* Generate Property type terms */
     foreach ($wpp_settings['property_types'] as $_term => $label) {
 
-      $term = get_term($wp_properties['property_types_term_id'][$_term], 'wpp_type', ARRAY_A);
+      $term = get_term($wp_properties['property_types_term_id'][$_term], 'wpp_listing_type', ARRAY_A);
 
       if (!is_wp_error($term) && isset($term['term_id'])) {
         if ($label != $term['name']) {
-          $term = wp_update_term($term['term_id'], 'wpp_type', array('name' => $label));
+          $term = wp_update_term($term['term_id'], 'wpp_listing_type', array('name' => $label));
         }
       } // Find term by label
-      elseif ($term = term_exists($label, 'wpp_type')) {
+      elseif ($term = term_exists($label, 'wpp_listing_type')) {
 
       } else {
-        $term = wp_insert_term($label, 'wpp_type', array('slug' => $_term));
+        $term = wp_insert_term($label, 'wpp_listing_type', array('slug' => $_term));
       }
 
       if (!is_wp_error($term) && isset($term['term_id'])) {
@@ -2972,15 +2972,15 @@ class WPP_F extends UsabilityDynamics\Utility
 
   /**
    * Add property type from terms if not already exists.
-   * Feature Flag: WPP_FEATURE_FLAG_WPP_TYPE
+   * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
    *
    */
-  public static function add_wpp_type_from_existing_terms()
+  public static function add_wpp_listing_type_from_existing_terms()
   {
     global $wp_properties;
     $updated = false;
     $terms = get_terms(array(
-      'taxonomy' => 'wpp_type',
+      'taxonomy' => 'wpp_listing_type',
       'hide_empty' => false,
     ));
 
@@ -3111,7 +3111,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
     // Filers are applied
     $wp_properties['configuration'] = apply_filters('wpp_configuration', $wp_properties['configuration']);
-    $wp_properties['location_matters'] = apply_filters('wpp_location_matters', $wp_properties['location_matters']);
+    $wp_properties['location_matters'] = apply_filters('wpp_listing_location_matters', $wp_properties['location_matters']);
     $wp_properties['hidden_attributes'] = apply_filters('wpp_hidden_attributes', $wp_properties['hidden_attributes']);
     $wp_properties['descriptions'] = apply_filters('wpp_label_descriptions', $wp_properties['descriptions']);
     $wp_properties['image_sizes'] = apply_filters('wpp_image_sizes', $wp_properties['image_sizes']);

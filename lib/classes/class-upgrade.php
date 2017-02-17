@@ -80,7 +80,10 @@ namespace UsabilityDynamics\WPP {
               update_option('widget_wpp_property_terms', $property_terms_widget);
 
           case ( version_compare( $old_version, '2.3.0', '<' ) ):
-            deactivate_plugins( 'wp-property-terms/wp-property-terms.php', true );
+
+            if( function_exists( 'deactivate_plugins' ) ) {
+              deactivate_plugins( 'wp-property-terms/wp-property-terms.php', true );
+            }
 
         }
 

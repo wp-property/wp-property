@@ -299,22 +299,22 @@ namespace UsabilityDynamics\WPP {
             $fields[] = $field;
           }
 
-          if( defined( 'WPP_FEATURE_FLAG_WPP_TYPE' ) ) {
+          if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_TYPE' ) ) {
             /* May be add Property Type field. */
-            if( !empty($taxonomies['wpp_type']['default'])) {
+            if( !empty($taxonomies['wpp_listing_type']['default'])) {
 
               $field = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
-                'id' => 'wpp_type',
-                'name' => $taxonomies['wpp_type']['label'],
+                'id' => 'wpp_listing_type',
+                'name' => $taxonomies['wpp_listing_type']['label'],
                 'type' => 'wpp_property_type',
                 'placeholder' => sprintf( __( 'Selecte %s Type', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
                 'multiple' => false,
                 'options' => array(
-                  'taxonomy' => 'wpp_type',
+                  'taxonomy' => 'wpp_listing_type',
                   'type' => 'combobox',
                   'args' => array(),
                 )
-              ) ), 'wpp_type', $post );
+              ) ), 'wpp_listing_type', $post );
 
               if( $field ) {
                 $fields[] = $field;
@@ -322,7 +322,7 @@ namespace UsabilityDynamics\WPP {
             }
           }
           
-          if( empty($taxonomies['wpp_type']['default']) && !array_key_exists( 'property_type', $attributes ) ) {
+          if( empty($taxonomies['wpp_listing_type']['default']) && !array_key_exists( 'property_type', $attributes ) ) {
             $field = $this->get_property_type_field( $post );
             if( $field ) {
               $fields[] = $field;
@@ -404,7 +404,7 @@ namespace UsabilityDynamics\WPP {
           //* HACK. If property_type is set as attribute, we register it here. */
           if( $slug == 'property_type' ) {
             $field = $this->get_property_type_field( $post );
-            if( $field && (!defined( 'WPP_FEATURE_FLAG_WPP_TYPE' ) || empty($taxonomies['wpp_type']['default']))) {
+            if( $field && (!defined( 'WPP_FEATURE_FLAG_WPP_LISTING_TYPE' ) || empty($taxonomies['wpp_listing_type']['default']))) {
               $fields[] = $field;
             }
             continue;
