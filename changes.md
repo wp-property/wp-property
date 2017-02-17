@@ -1,4 +1,5 @@
 ### 2.2.1 
+* Added [WP_PROPERTY_RESPONSIVE_SLIDESHOW] feature flag, enabled by default.
 * Disabled legacy "on-the-fly" image regeneration.
 * Added wp-json / wp-rest support to wp-rest-client as an alternative to XML-RPC requests.
 * Added support for single-value taxonomies to be treated as standard meta attributes for display purposes.

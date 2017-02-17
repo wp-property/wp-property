@@ -108,6 +108,13 @@
         "enabled": false
       },
       {
+        "name": "Responsive Slideshow",
+        "constant": "WP_PROPERTY_RESPONSIVE_SLIDESHOW",
+        "description": "Responsive slideshow feature, use [property_responsive_slideshow] shortcode.",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
         "name": "Freemius",
         "constant": "WPP_FEATURE_FLAG_FREEMIUS",
         "description": "Freemius for WP Property",

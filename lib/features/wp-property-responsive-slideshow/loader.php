@@ -9,15 +9,16 @@ defined( 'ABSPATH' ) || exit;
 add_action( 'plugins_loaded', function(){
 
   // If you want Plugin Bundle to be loaded
-  // you must define  WPP_SUPERMAP_VENDOR_LOAD before action will be called
-  if( !defined( 'WPP_RESP_SLIDESHOW_VENDOR_LOAD' ) ) {
-    define( 'WPP_RESP_SLIDESHOW_VENDOR_LOAD', false );
+  // you must define [WP_PROPERTY_RESPONSIVE_SLIDESHOW] before action will be called
+  if( !defined( 'WP_PROPERTY_RESPONSIVE_SLIDESHOW' ) ) {
+    define( 'WP_PROPERTY_RESPONSIVE_SLIDESHOW', false );
+
   }
 
   /** Be sure plugin is not activated anywhere else */
-  if( !function_exists( 'ud_get_wpp_resp_slideshow' ) && WPP_RESP_SLIDESHOW_VENDOR_LOAD ) {
+  if( !function_exists( 'ud_get_wpp_resp_slideshow' ) && WP_PROPERTY_RESPONSIVE_SLIDESHOW ) {
     define( 'WPP_RESP_SLIDESHOW_VENDOR_LOADED', true );
-    include_once( dirname( __FILE__ ) . '/wp-property-resp-slideshow.php' );
+    include_once( dirname( __FILE__ ) . '/wp-property-responsive-slideshow.php' );
   }
 
 }, 1 );
