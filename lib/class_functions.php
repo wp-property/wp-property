@@ -242,6 +242,12 @@ class WPP_F extends UsabilityDynamics\Utility
 
   }
 
+  /**
+   * Standard Taxonomies that can not be modified with Terms editor.
+   *
+   * @param array $taxonomies
+   * @return array
+   */
   static public function wpp_standard_taxonomies( $taxonomies = array() ) {
 
     // Add [wpp_listing_location] taxonomy.
@@ -409,8 +415,8 @@ class WPP_F extends UsabilityDynamics\Utility
     }
 
     // Generic [wpp_category] taxonomy for multiple terms.
-    if (defined('WPP_FEATURE_FLAG_WPP_CATEGORY') && WPP_FEATURE_FLAG_WPP_CATEGORY) {
-      $taxonomies['wpp_category'] = array(
+    if (defined('WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY') && WPP_FEATURE_FLAG_WPP_CATEGORY) {
+      $taxonomies['wpp_listing_category'] = array(
         'default' => true,
         'readonly' => true,
         'hidden' => true,
@@ -458,8 +464,8 @@ class WPP_F extends UsabilityDynamics\Utility
     // @note legacy taxonomies. (perhaps disable for new installers, but make available via some option)
     add_filter('wpp_taxonomies', array('WPP_F', 'wpp_commom_taxonomies'), 4 );
 
-    // New standard taxonomies.
-    add_filter('wpp_taxonomies', array('WPP_F', 'wpp_standard_taxonomies'), 10 );
+    // New standard taxonomies. Ran late, to force after Terms_Bootstrap::define_taxonomies
+    add_filter('wpp_taxonomies', array('WPP_F', 'wpp_standard_taxonomies'), 50 );
 
     // Setup taxonomies
     $wp_properties['taxonomies'] = apply_filters('wpp_taxonomies', array());
