@@ -233,7 +233,7 @@ namespace UsabilityDynamics\WPP {
 
         $_schema = json_decode( wp_remote_retrieve_body( wp_remote_get( WPP_API_URL_STANDARDS . '/schema' ) ), true );
 
-        return $_schema['data'];
+        return isset( $_schema['data'] ) ? $_schema['data'] : array();
 
       }
 

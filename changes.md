@@ -1,4 +1,6 @@
 ### 2.2.1 
+* Improved logic for updating Taxonomies.
+* If WP-Property settings fails to save (due to server error), the Save Settings button is re-enabled to avoid being locked out of saving settings.
 * Added [WP_PROPERTY_RESPONSIVE_SLIDESHOW] feature flag, enabled by default.
 * Disabled legacy "on-the-fly" image regeneration.
 * Added wp-json / wp-rest support to wp-rest-client as an alternative to XML-RPC requests.

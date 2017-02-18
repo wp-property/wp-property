@@ -443,7 +443,9 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       * Save custom Taxonomies
+       * Save Custom Taxonomies
+       *
+       * This runs after [update_option_wpp_settings] action therefore ovewriting anything it set.
        *
        * @param array $data
        */
@@ -488,6 +490,98 @@ namespace UsabilityDynamics\WPP {
           $this->settings->commit();
 
         }
+
+      }
+
+
+      /**
+       * Iterates of taxonomy settings. Cleans up, standardizes.
+       *
+       * @note This is triggered before [wpp::save_settings] action.
+       *
+       * @author potanin@UD
+       *
+       * @param $old_value
+       * @param $settings
+       * @param $option
+       */
+      public function update_option_wpp_settings( $old_value = null, $settings, $option = '' ) {
+
+        $_wpp_terms = array(
+          'taxonomies' => $settings['taxonomies'],
+
+          // Groups term belongs to.
+          'groups' => array(),
+
+          // Set to "multiple" or "unique"
+          'types' => array(),
+
+          // List of hidden/system taxonomies
+          'hidden' => array()
+
+        );
+
+        if( isset( $settings['taxonomies'] ) ) {
+          $_wpp_terms['taxonomies'] = $settings['taxonomies'];
+        }
+
+        foreach( $settings['taxonomies'] as $_taxonomy => $_taxonomy_data ) {
+
+          // Removed legacy/unused field(s)
+          if( isset( $_taxonomy_data['wpp_hidden'] )  && !$_taxonomy_data['wpp_hidden'] ) {
+            unset( $_wpp_terms['taxonomies'][ $_taxonomy ]['wpp_hidden'] );
+          }
+
+          // Removed legacy/unused field(s)
+          if( isset( $_taxonomy_data['wpp_input_type'] )  && !$_taxonomy_data['wpp_input_type'] ) {
+            unset( $_wpp_terms['taxonomies'][ $_taxonomy ]['wpp_input_type'] );
+          }
+
+          if( isset( $_taxonomy_data['fieldGroup'] ) ) {
+            unset( $_wpp_terms['taxonomies'][ $_taxonomy ]['fieldGroup'] );
+          }
+
+          // Verify rewrite rules are legic.
+          if( isset( $_taxonomy_data['rewrite'] ) &&  isset( $_taxonomy_data['rewrite']['slug'] ) ) {
+
+            $_wpp_terms['taxonomies'][ $_taxonomy ]['rewrite'] = array(
+              'slug' => isset( $_taxonomy_data['rewrite']['slug'] ) ? $_taxonomy_data['rewrite']['slug'] : null,
+              'hierarchical' => isset( $_taxonomy_data['rewrite']['hierarchical'] ) ? $_taxonomy_data['rewrite']['hierarchical'] : true,
+              'with_front' => isset( $_taxonomy_data['rewrite']['with_front'] ) ? $_taxonomy_data['rewrite']['with_front'] : false
+            );
+
+          } else {
+            unset( $_wpp_terms['taxonomies'][ $_taxonomy ]['rewrite'] );
+          }
+
+          // Set Group
+          if( isset( $_taxonomy_data['wpp_group']) ) {
+            $_wpp_terms['groups'][ $_taxonomy ] = $_taxonomy_data['wpp_group'];
+          }
+
+          // Set Type
+          if( isset( $_taxonomy_data['wpp_input_type']) ) {
+            $_wpp_terms['types'][ $_taxonomy ] = $_taxonomy_data['wpp_input_type'];
+          }
+
+          // Set Hidden flag
+          if( isset( $_taxonomy_data['hidden'] ) &&  ( $_taxonomy_data['hidden'] === true || $_taxonomy_data['hidden'] === 'true' || $_taxonomy_data['hidden'] === '1'  ) ) {
+            $_wpp_terms['hidden'][] = $_taxonomy;
+          }
+
+        }
+
+        // Clean up fields
+        $_wpp_terms['types'] = array_filter( $_wpp_terms['types'] );
+        $_wpp_terms['groups'] = array_filter( $_wpp_terms['groups'] );
+        $_wpp_terms['hidden'] = array_filter( $_wpp_terms['hidden'] );
+
+        // clean up array.
+        $_wpp_terms = array_filter( $_wpp_terms );
+
+        self::save_settings(array(
+          'wpp_terms' => $_wpp_terms
+        ));
 
       }
 
@@ -747,28 +841,6 @@ namespace UsabilityDynamics\WPP {
         $this->extend_wpp_settings();
 
         return $this->get( 'config.taxonomies', array() );
-      }
-
-      public function update_option_wpp_settings( $old_value, $settings, $option ) {
-
-        self::save_settings(array(
-          'wpp_terms' => array(
-            'taxonomies' => $settings['taxonomies'],
-
-            // Groups term belongs to.
-            //'groups' => array(),
-
-            // Set to "multiple" or "unique"
-            //'types' => array(),
-
-            // List of hidden/system taxonomies
-            //'hidden' => array()
-
-            // Not sure if used.
-            //'inherited' => array()
-          )
-        ));
-
       }
 
       /**
