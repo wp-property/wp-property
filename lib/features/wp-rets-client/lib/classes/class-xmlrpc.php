@@ -625,7 +625,6 @@ namespace UsabilityDynamics\WPRETSC {
 
               //wp_set_object_terms( $post_id, $_tags, $tax_name, true );
 
-
             }
 
             if( $_simple_tags === false ) {

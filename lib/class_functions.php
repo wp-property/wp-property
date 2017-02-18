@@ -1511,7 +1511,7 @@ class WPP_F extends UsabilityDynamics\Utility
   {
     global $wpdb, $wp_properties;
 
-    if ( !isset( $wp_properties['configuration']['auto_delete_attachments'] ) || $wp_properties['configuration']['auto_delete_attachments'] != 'true') {
+    if ( isset( $wp_properties['configuration']['auto_delete_attachments'] ) && $wp_properties['configuration']['auto_delete_attachments'] != 'true') {
       return;
     }
 
