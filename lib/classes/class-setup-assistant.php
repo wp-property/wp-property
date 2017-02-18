@@ -77,10 +77,8 @@ namespace UsabilityDynamics\WPP {
        * @author raj
        */
       static public function save_setup_settings() {
-        global $wp_properties;
 
         $data = WPP_F::parse_str( $_REQUEST[ 'data' ] );
-
 
         $_setup = array(
           'api' => WPP_API_URL_STANDARDS,
@@ -89,10 +87,20 @@ namespace UsabilityDynamics\WPP {
         );
 
         $_current_settings = get_option('wpp_settings');
-        //die( '<pre>' . print_r( $_current_settings, true ) . '</pre>' );
+
         $_modified_settings = WPP_F::extend( $_current_settings, $_setup['schema'] );
 
-        //die( '<pre>' . print_r( $_modified_settings , true ) . '</pre>' );
+        if( is_array( $_modified_settings['property_stats_groups'] ) ) {
+          // $_modified_settings['property_stats_groups'] = array_unique( $_modified_settings['property_stats_groups'] );
+        }
+
+        // @note This kills c.rabbit.ci response via Varnish, perhaps some sort of log output somewhere.
+        if( is_array( $_modified_settings['searchable_attributes'] ) ) {
+          // $_modified_settings[ 'searchable_attributes' ] = array_unique( $_modified_settings[ 'searchable_attributes' ] );
+        }
+
+        $_modified_settings['_updated'] = time();
+
         update_option( 'wpp_settings', $_modified_settings );
 
         $posts_array = get_posts( array(
@@ -234,7 +242,7 @@ namespace UsabilityDynamics\WPP {
 
         $_schema = json_decode( wp_remote_retrieve_body( wp_remote_get( WPP_API_URL_STANDARDS . '/schema' ) ), true );
 
-        return $_schema['data'];
+        return isset( $_schema['data'] ) ? $_schema['data'] : array();
 
       }
 
