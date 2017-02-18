@@ -546,7 +546,7 @@ namespace UsabilityDynamics\WPP {
 
             $_wpp_terms['taxonomies'][ $_taxonomy ]['rewrite'] = array(
               'slug' => isset( $_taxonomy_data['rewrite']['slug'] ) ? $_taxonomy_data['rewrite']['slug'] : null,
-              'hierarchical' => isset( $_taxonomy_data['rewrite']['hierarchical'] ) ? $_taxonomy_data['rewrite']['hierarchical'] : true,
+              'hierarchical' => isset( $_taxonomy_data['rewrite']['hierarchical'] ) ? $_taxonomy_data['rewrite']['hierarchical'] : false,
               'with_front' => isset( $_taxonomy_data['rewrite']['with_front'] ) ? $_taxonomy_data['rewrite']['with_front'] : false
             );
 
@@ -582,6 +582,8 @@ namespace UsabilityDynamics\WPP {
         self::save_settings(array(
           'wpp_terms' => $_wpp_terms
         ));
+
+        //echo( '<pre>' . print_r( $_wpp_terms, true ) . '</pre>' );
 
       }
 

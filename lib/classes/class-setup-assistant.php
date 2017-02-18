@@ -90,6 +90,14 @@ namespace UsabilityDynamics\WPP {
 
         $_modified_settings = WPP_F::extend( $_current_settings, $_setup['schema'] );
 
+        if( is_array( $_modified_settings['property_stats_groups'] ) ) {
+          $_modified_settings['property_stats_groups'] = array_unique( $_modified_settings['property_stats_groups'] );
+        }
+
+        if( is_array( $_modified_settings['searchable_attributes'] ) ) {
+          $_modified_settings[ 'searchable_attributes' ] = array_unique( $_modified_settings[ 'searchable_attributes' ] );
+        }
+
         $_modified_settings['_updated'] = time();
 
         update_option( 'wpp_settings', $_modified_settings );

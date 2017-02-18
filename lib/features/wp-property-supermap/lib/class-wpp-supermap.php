@@ -560,7 +560,7 @@ class class_wpp_supermap {
     }
 
     $property_type = get_post_meta($post_id, 'property_type', true);
-    if(empty($supermap_marker) && !empty($property_type)) {
+    if(empty($supermap_marker) && !empty($property_type) && isset( $supermap_configuration['property_type_markers'][$property_type] ) ) {
       $supermap_marker = $supermap_configuration['property_type_markers'][$property_type];
     }
 

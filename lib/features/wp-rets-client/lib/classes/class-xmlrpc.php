@@ -395,7 +395,7 @@ namespace UsabilityDynamics\WPRETSC {
               $_thumbnail_setting = add_post_meta( $_post_id, '_thumbnail_id', (int)$attach_id );
 
               if( $_thumbnail_setting ) {
-                ud_get_wp_rets_client()->write_log( 'setting thumbnail [' . $attach_id . '] to post [' . $_post_id . '] because it has order of 1, result: ' );
+                ud_get_wp_rets_client()->write_log( 'Setting thumbnail [' . $attach_id . '] to post [' . $_post_id . '] because it has order of 1, result: ' );
               } else {
                 ud_get_wp_rets_client()->write_log( 'Error! Failured at setting thumbnail [' . $attach_id . '] to post [' . $_post_id . ']' );
               }
@@ -467,8 +467,13 @@ namespace UsabilityDynamics\WPRETSC {
        * @param array $post_data
        */
       static public function insert_terms( $_post_id, $_post_data_tax_input, $post_data = array() ) {
+        global $wp_taxonomies;
 
-        foreach( (array) $_post_data_tax_input as $tax_name => $tax_tags){
+        ud_get_wp_rets_client()->write_log( "Have [" . count( $_post_data_tax_input ) . "] taxonomies to process." );
+        //ud_get_wp_rets_client()->write_log( $wp_taxonomies );
+
+
+        foreach( (array) $_post_data_tax_input as $tax_name => $tax_tags ) {
 
           // Ignore these taxonomies if we support [wpp_listing_location].
           if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_LOCATION' ) && WPP_FEATURE_FLAG_WPP_LISTING_LOCATION && in_array( $tax_name, array( 'rets_location_state', 'rets_location_county', 'rets_location_city', 'rets_location_route' ) ) ) {
@@ -485,6 +490,8 @@ namespace UsabilityDynamics\WPRETSC {
 
             if( is_wp_error( $_register_taxonomy ) ) {
               ud_get_wp_rets_client()->write_log( 'Unable to register a new taxonomy ' . $tax_name );
+            } else {
+              // ud_get_wp_rets_client()->write_log( "Registered [$tax_name]." );
             }
 
           }
@@ -500,7 +507,6 @@ namespace UsabilityDynamics\WPRETSC {
               "route" => isset( $_post_data_tax_input["rets_location_route"] ) ? reset( $_post_data_tax_input["rets_location_route"] ) : null,
             );
 
-
             $_location_terms = WPP_F::update_location_terms( $_post_id, (object) $_geo_tag_fields);
 
             if( is_wp_error( $_location_terms ) ) {
@@ -515,12 +521,12 @@ namespace UsabilityDynamics\WPRETSC {
           }
 
           if( is_taxonomy_hierarchical( $tax_name ) ) {
-
-            ud_get_wp_rets_client()->write_log( "Handling hierarchical taxonomy [$tax_name]." );
+            // ud_get_wp_rets_client()->write_log( "Handling hierarchical taxonomy [$tax_name]." );
 
             $_terms = array();
 
             foreach( $tax_tags as $_term_name ) {
+              ud_get_wp_rets_client()->write_log( "Handling inserting term [$_term_name] for [$tax_name]." );
 
               $_term_parts = explode( ' > ', $_term_name );
 
@@ -535,8 +541,14 @@ namespace UsabilityDynamics\WPRETSC {
               $_term = get_term_by( 'slug', sanitize_title( $_term_name ), $tax_name, ARRAY_A );
               $_term_parent = get_term_by( 'slug', sanitize_title( $_term_parent_value ), $tax_name, ARRAY_A );
 
+              if( is_wp_error( $_term_parent ) ) {
+                ud_get_wp_rets_client()->write_log( "Error inserting term [$tax_name]: " . $_term_parent->get_error_message() );
+                //continue;
+              }
+
+
               if( !$_term_parent ) {
-                ud_get_wp_rets_client()->write_log( "Did not find parent term [$_term_parent_value]." );
+                ud_get_wp_rets_client()->write_log( "Did not find parent term [$tax_name] - [$_term_parent_value]." );
 
                 $_term_parent = wp_insert_term( $_term_parent_value, $tax_name, array(
                   "slug" => sanitize_title( $_term_parent_value )
@@ -594,8 +606,37 @@ namespace UsabilityDynamics\WPRETSC {
 
             ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_inserted_terms ) . "] terms." );
 
-          } else {
-            wp_set_post_terms( $_post_id, $tax_tags, $tax_name );
+          }
+
+          if( !is_taxonomy_hierarchical( $tax_name ) ) {
+            // ud_get_wp_rets_client()->write_log( "Handling non-hierarchical taxonomy [$tax_name]." );
+
+            $_simple_tags = true;
+            $_terms = array();
+
+            // check each tag, make sure its NOT an an array.
+            foreach( $tax_tags as $_term_name ) {
+
+              // Item is an array, which means this entry includes term meta.
+              if( is_object( $_term_name ) || is_array( $_term_name ) ) {
+                ud_get_wp_rets_client()->write_log( "Have object term [$tax_name]." );
+                $_simple_tags = false;
+              }
+
+              //wp_set_object_terms( $post_id, $_tags, $tax_name, true );
+
+
+            }
+
+            if( $_simple_tags === false ) {
+              ud_get_wp_rets_client()->write_log( "Handling non-hierarchical taxonomy [$tax_name] using complex meta tags." );
+            }
+
+            if( $_simple_tags ) {
+              $_inserted_terms = wp_set_post_terms( $_post_id, $tax_tags, $tax_name );
+              // ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_inserted_terms ) . "] terms into [$tax_name] taxonomy." );
+            }
+
           }
 
         }
