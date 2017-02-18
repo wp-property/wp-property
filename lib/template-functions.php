@@ -704,6 +704,15 @@ if ( !function_exists( 'draw_stats' ) ):
 
       }
 
+      if($tag == "property_type" || $tag == "wpp_listing_type"){
+        $terms = wp_get_post_terms( $property->ID, "wpp_listing_type" );
+        if( count( $terms )) {
+          foreach( $terms as $key => $term ) {
+            $value = "<a href='" . get_term_link( $term->term_id, "wpp_listing_type" ) . "'>{$term->name}</a>";
+          }
+        }
+      }
+
       //** Single "true" is converted to 1 by get_properties() we check 1 as well, as long as it isn't a numeric attribute */
       if ( isset( $attribute_data[ 'data_input_type' ] ) && $attribute_data[ 'data_input_type' ] == 'checkbox' && in_array( strtolower( $value ), array( 'true', '1', 'yes' ) ) ) {
         if ( $args['show_true_as_image'] == 'true' ) {
