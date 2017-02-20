@@ -306,12 +306,12 @@ namespace UsabilityDynamics\WPP {
               $field = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
                 'id' => 'wpp_listing_type',
                 'name' => $taxonomies['wpp_listing_type']['label'],
-                'type' => 'wpp_listing_type',
+                'type' => 'taxonomy', // Metabox field name
                 'placeholder' => sprintf( __( 'Selecte %s Type', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
                 'multiple' => false,
                 'options' => array(
                   'taxonomy' => 'wpp_listing_type',
-                  'type' => 'combobox',
+                  'type' => 'select', // Metabox filed to use in taxonomy
                   'args' => array(),
                 )
               ) ), 'wpp_listing_type', $post );
