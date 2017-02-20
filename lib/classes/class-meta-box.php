@@ -306,7 +306,7 @@ namespace UsabilityDynamics\WPP {
               $field = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
                 'id' => 'wpp_listing_type',
                 'name' => $taxonomies['wpp_listing_type']['label'],
-                'type' => 'wpp_property_type',
+                'type' => 'wpp_listing_type',
                 'placeholder' => sprintf( __( 'Selecte %s Type', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
                 'multiple' => false,
                 'options' => array(
