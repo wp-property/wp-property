@@ -14,6 +14,165 @@ class WPP_F extends UsabilityDynamics\Utility
 {
 
   /**
+   * Insert Term.
+   *
+   * - If term exists, we update it. Otherwise its created.
+   * - All extra fields are inserted as term meta.
+   *
+   * @param $term_data
+   * @param $term_data._id - Unique ID, stored in term meta. Usually source ID. Native term_id used if not provided.
+   * @param $term_data._type - Taxonomy.
+   * @param $term_data._parent - ID of parent.
+   * @param $term_data.name - Print-friendly name of term.
+   * @param $term_data.slug - Optional, used for URL..
+   * @param $term_data.meta - Array, addedd to term_meta;
+   * @param $term_data.description - String. Default description of term.
+   * @param $term_data.post_meta - Array, added to post meta, extends relationship between term and post.
+   * @param $term_data.post_meta.description - Will overwrite term description for a post.
+   * @return array|WP_Error
+   */
+  static public function insert_term( $term_data ) {
+    global $wpdb;
+
+    $result = array(
+      '_id' => null,
+      '_type' => null,
+      'meta' => array(),
+      'errors' => array()
+    );
+
+    if( !isset( $term_data['_type'] )) {
+      return new WP_Error( 'missing-type' );
+    }
+    // try to find by [_id]
+    if( isset( $term_data['_id'] ) ) {
+      $_term_id = $wpdb->get_var($wpdb->prepare("SELECT term_id FROM $wpdb->termmeta as tm WHERE meta_key='%s' AND meta_value='%s';", array('_id', $term_data['_id'])));
+    }
+
+    // try to get by [name]
+    if( !$_term_id ) {
+      $_exists = term_exists( $term_data['name'], $term_data['_type'] );
+
+      if( $_exists ) {
+        $_term_id = $_exists['term_id'];
+      }
+    }
+
+    // Term not found, new term
+    if( !$_term_id ) {
+
+      $_term = wp_insert_term( $term_data['name'], $term_data['_type'], array(
+        'description'=> $term_data['description']
+      ));
+
+      $_term_id = $_term['term_id'];
+
+    }
+
+    // Could not create term.
+    if( !$_term_id ) {
+      return new WP_Error('unable-to-create-term', 'Can not create term.' );
+    }
+
+    $result['_id'] = $_term_id;
+    $result['_type'] = $term_data['_type'];
+    $result['name'] = $term_data['name'];
+    $result['slug'] = $term_data['slug'];
+
+    $term_data[ 'meta' ]['_id'] = $result[ '_id' ];
+
+    foreach( $term_data[ 'meta' ] as $_meta_key => $meta_value ) {
+      if( update_term_meta($_term_id, $_meta_key, $meta_value ) ) {}
+      $result['meta'][ $_meta_key ] = $meta_value;
+    }
+
+    return array_filter( $result );
+
+  }
+
+  /**
+   * Insert Multiple Terms
+   *
+   * @param $object_id
+   * @param $terms
+   * @return array
+   */
+  static public function insert_terms( $object_id, $terms ) {
+
+    $_terms = array();
+
+    $_results = array(
+      'post_id' => $object_id,
+      'set_terms' => array(),
+      'terms' => array(),
+      'meta_override' => array(),
+      'errors' => array()
+    );
+
+    foreach( $terms as $_index => $_term ) {
+
+      $_terms[ $_index ] = self::insert_term( $_term );
+
+      if( is_wp_error( $_terms[ $_index ] ) ) {
+        $_results['errors'][] = $_terms[ $_index ];
+        unset( $_terms[ $_index ] );
+        continue;
+      }
+
+      if( !is_wp_error( $_terms[ $_index ] ) ) {
+        $_results['set_terms'] = array_merge( $_results['set_terms'], wp_set_object_terms( $object_id, $_terms[ $_index ]['slug'], $_terms[ $_index ]['_type'], true ) );
+
+        if( isset( $_term['post_meta'] ) ) {
+          $_results['meta_override'][] = update_post_meta( $object_id, '_wpp_term_meta_override', $_term['post_meta'] );
+        }
+
+      } else {
+        $_results[ 'errors' ][] = $_terms[ $_index ];
+      }
+
+    }
+
+    $_results[ 'terms' ] = $_terms;
+
+    return $_results;
+
+  }
+
+
+  /**
+   * Registers a system taxonomy if needed with most essential arguments.
+   *
+   * @since 2.2.1
+   * @author potanin@UD
+   * @param string $taxonomy
+   * @return string
+   */
+  static public function verify_have_system_taxonomy($taxonomy = '')
+  {
+
+    if (taxonomy_exists($taxonomy)) {
+      return $taxonomy;
+    }
+
+    register_taxonomy($taxonomy, array( 'property' ), array(
+      'hierarchical' => true,
+      // 'update_count_callback' => null,
+      'labels' => array(),
+      'show_ui' => false,
+      'show_in_menu' => false,
+      'show_admin_column' => false,
+      'meta_box_cb' => false,
+      'query_var' => false,
+      'rewrite' => false
+    ));
+
+    if (taxonomy_exists($taxonomy)) {
+      return $taxonomy;
+    }
+
+  }
+
+  /**
    * Get Field Aliases
    *
    *
@@ -2026,39 +2185,6 @@ class WPP_F extends UsabilityDynamics\Utility
     }
 
     return $return;
-  }
-
-  /**
-   * Registers a system taxonomy if needed with most essential arguments.
-   *
-   * @since 2.2.1
-   * @author potanin@UD
-   * @param string $taxonomy
-   * @return string
-   */
-  static public function verify_have_system_taxonomy($taxonomy = '')
-  {
-
-    if (taxonomy_exists($taxonomy)) {
-      return $taxonomy;
-    }
-
-    register_taxonomy($taxonomy, array( 'property' ), array(
-      'hierarchical' => true,
-      // 'update_count_callback' => null,
-      'labels' => array(),
-      'show_ui' => false,
-      'show_in_menu' => false,
-      'show_admin_column' => false,
-      'meta_box_cb' => false,
-      'query_var' => false,
-      'rewrite' => false
-    ));
-
-    if (taxonomy_exists($taxonomy)) {
-      return $taxonomy;
-    }
-
   }
 
   /**
