@@ -6,6 +6,8 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use UsabilityDynamics\SAAS_UTIL\Register;
+
   if (!class_exists('UsabilityDynamics\WPP\Bootstrap')) {
 
     final class Bootstrap extends \UsabilityDynamics\WP\Bootstrap_Plugin
@@ -24,6 +26,8 @@ namespace UsabilityDynamics\WPP {
       protected static $instance = null;
 
       public $layouts_settings = null;
+
+      private $register;
 
       /**
        * Handle some stuff very early
@@ -132,6 +136,9 @@ namespace UsabilityDynamics\WPP {
             'cache_url' => $upload_dir['baseurl'] . '/wpp_cache',
           )
         ));
+
+        // Register site with SaaS Services.
+        $this->register = class_exists( 'UsabilityDynamics\SAAS_UTIL\Register' ) ? new Register( 'property' ) : null;
 
         //** Initiate Attributes Handler */
         new Attributes();

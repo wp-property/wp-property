@@ -1,5 +1,4 @@
 <?php
-
 /**
  * WP-Property Core Framework
  *
@@ -67,11 +66,6 @@ class WPP_Core {
      * We are doing it only for Front End! peshkov@UD
      */
     add_filter( 'get_post_metadata', array( $this, 'maybe_get_thumbnail_id' ), 10, 4 );
-
-    /**
-     * Maybe register site on UD
-     */
-    add_action( 'admin_init', array( $this, 'maybe_register_site' ), 100 );
 
     /**
      * Updated remote settings to UD
@@ -198,108 +192,6 @@ class WPP_Core {
     $query[$wp_query->queried_object->taxonomy] = $wp_query->queried_object->slug;
 
     return $query;
-  }
-
-  /**
-   * Register Site on UD, if needed. Runs on admin_init.
-   *
-   *
-   * wp option delete ud_site_secret_token; wp option delete ud_site_id; wp option delete ud_site_public_key; wp transient delete wpp_state;
-   *
-   * @author potanin@UD
-   */
-  public function maybe_register_site() {
-    global $wpdb, $wp_properties;
-
-    // Do nothing on Ajax, XMLRPC or wp-cli requests.
-    if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
-      return;
-    }
-
-    // Tokens set, do not attempt registration unless it cleared.
-    if( get_site_option( 'ud_site_secret_token' ) && get_site_option( 'ud_site_id' ) && get_site_option( 'ud_site_public_key' ) ) {
-      return;
-    }
-
-    $_wpp_state = get_transient('wpp_state');
-
-    if( $_wpp_state && is_array( $_wpp_state ) && $_wpp_state[ 'registration-backoff' ] ) {
-      return;
-    }
-
-    // set registration back-off to avoid this being ran multiple times.
-    set_transient('wpp_state', array('registration-backoff'=> true ), 3600 );
-
-    // Generate new secret token.
-    add_site_option( 'ud_site_secret_token', $ud_site_secret_token = md5( wp_generate_password( 20 ) ) );
-
-    // get site ID and public_key just in case.
-    $ud_site_id = get_site_option( 'ud_site_id' );
-    $ud_site_public_key = get_site_option( 'ud_site_public_key' );
-
-    if( defined( 'WPP_API_REGISTER_URL' ) && WPP_API_REGISTER_URL ) {
-      $_api_url = WPP_API_REGISTER_URL;
-    } else {
-      $_api_url = 'https://api.usabilitydynamics.com/product/property/register/v1';
-    }
-
-    $args = array(
-      'method' => 'POST',
-      'timeout' => 5,
-      'redirection' => 5,
-      // 'headers' => array(),
-      'body' => array(
-        'timestamp' => time(),
-        'host' => str_replace( array( 'http://', 'https://' ), '', is_multisite() ? network_site_url() : get_site_url() ),
-        'ud_site_secret_token' => $ud_site_secret_token,
-        'ud_site_public_key' => $ud_site_public_key,
-        'ud_site_id' => ( $ud_site_id ? $ud_site_id : '' ),
-        'db_hash' => md5( defined( 'DB_NAME' ) ? DB_NAME : null ) . '-' . md5( isset( $wpdb->prefix ) ? $wpdb->prefix : null),
-        'deployment_hash' => md5( is_multisite() ? network_site_url() : get_site_url() ) . '-' . md5( defined( 'DB_NAME' ) ? DB_NAME : null ) . '-' . md5( isset( $wpdb->prefix ) ? $wpdb->prefix : null),
-        'home_url' => is_multisite() ? network_site_url() : get_site_url(),
-        'xmlrpc_url' => site_url( '/xmlrpc.php' ),
-        'user_id' => get_current_user_id(),
-        'message' => "Hello, I'm WP-Property plugin. Give me [ud_site_id] and [ud_site_public_key], please.",
-
-        'wpp_settings' => json_encode( apply_filters( 'wpp::backup::data', array( 'wpp_settings' => array(
-          'searchable_attributes' => !empty( $wp_properties[ 'searchable_attributes' ] ) ? $wp_properties[ 'searchable_attributes' ] : array(),
-          'property_stats' => !empty( $wp_properties[ 'property_stats' ] ) ? $wp_properties[ 'property_stats' ] : array(),
-          'property_types' => !empty( $wp_properties[ 'property_types' ] ) ? $wp_properties[ 'property_types' ] : array(),
-          'geo_type_attributes' => !empty( $wp_properties[ 'geo_type_attributes' ] ) ? $wp_properties[ 'geo_type_attributes' ] : array(),
-          'predefined_values' => !empty( $wp_properties[ 'predefined_values' ] ) ? $wp_properties[ 'predefined_values' ] : array(),
-          'searchable_attr_fields' => !empty( $wp_properties[ 'searchable_attr_fields' ] ) ? $wp_properties[ 'searchable_attr_fields' ] : array(),
-          'admin_attr_fields' => !empty( $wp_properties[ 'admin_attr_fields' ] ) ? $wp_properties[ 'admin_attr_fields' ] : array(),
-          'numeric_attributes' => !empty( $wp_properties[ 'numeric_attributes' ] ) ? $wp_properties[ 'numeric_attributes' ] : array(),
-          'currency_attributes' => !empty( $wp_properties[ 'currency_attributes' ] ) ? $wp_properties[ 'currency_attributes' ] : array()
-        ) ) ) ),
-
-        // @todo Depreciate these - potanin@UD
-        'db_name' => defined( 'DB_NAME' ) ? DB_NAME : null,
-        'table_refix' => isset( $wpdb->prefix ) ? $wpdb->prefix : null
-
-      ),
-    );
-
-    $response = wp_remote_post( $_api_url, $args );
-
-    if( wp_remote_retrieve_response_code( $response ) === 200 && !is_wp_error( $response ) ) {
-
-      $api_body = json_decode( wp_remote_retrieve_body( $response ) );
-
-      if( isset( $api_body ) && $api_body->ud_site_secret_token === $ud_site_secret_token ) {
-
-        if( isset( $api_body->ud_site_id ) ) {
-          add_site_option( 'ud_site_id', $api_body->ud_site_id );
-        }
-
-        if( isset( $api_body->ud_site_public_key ) ) {
-          add_site_option( 'ud_site_public_key', $api_body->ud_site_public_key );
-        }
-
-      }
-
-    }
-
   }
 
   /**
