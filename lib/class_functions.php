@@ -520,23 +520,23 @@ class WPP_F extends UsabilityDynamics\Utility
         'show_ui' => false,
         'show_tagcloud' => false,
         'add_native_mtbox' => false,
-        'label' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+        'label' => sprintf(_x('%s Permissions', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
         'labels' => array(
-          'name' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'singular_name' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'search_items' => _x('Search %s Status', 'property type taxonomy', ud_get_wp_property()->domain),
-          'all_items' => _x('All Status', 'property type taxonomy', ud_get_wp_property()->domain),
-          'parent_item' => _x('Parent Status', 'property type taxonomy', ud_get_wp_property()->domain),
-          'parent_item_colon' => _x('Parent Status', 'property type taxonomy', ud_get_wp_property()->domain),
-          'edit_item' => _x('Edit Status', 'property type taxonomy', ud_get_wp_property()->domain),
-          'update_item' => _x('Update Status', 'property type taxonomy', ud_get_wp_property()->domain),
-          'add_new_item' => _x('Add New Status', 'property type taxonomy', ud_get_wp_property()->domain),
-          'new_item_name' => _x('New Status', 'property type taxonomy', ud_get_wp_property()->domain),
-          'not_found' => sprintf(_x('No %s Status found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'menu_name' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'name' => sprintf(_x('%s Permissions', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'singular_name' => sprintf(_x('%s Permissions', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'search_items' => _x('Search %s Permissions', 'property type taxonomy', ud_get_wp_property()->domain),
+          'all_items' => _x('All Permissions', 'property type taxonomy', ud_get_wp_property()->domain),
+          'parent_item' => _x('Parent Permissions', 'property type taxonomy', ud_get_wp_property()->domain),
+          'parent_item_colon' => _x('Parent Permissions', 'property type taxonomy', ud_get_wp_property()->domain),
+          'edit_item' => _x('Edit Permissions', 'property type taxonomy', ud_get_wp_property()->domain),
+          'update_item' => _x('Update Permissions', 'property type taxonomy', ud_get_wp_property()->domain),
+          'add_new_item' => _x('Add New Permissions', 'property type taxonomy', ud_get_wp_property()->domain),
+          'new_item_name' => _x('New Permissions', 'property type taxonomy', ud_get_wp_property()->domain),
+          'not_found' => sprintf(_x('No %s Permissions found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'menu_name' => sprintf(_x('%s Permissions', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
         ),
-        'query_var' => 'property-status',
-        'rewrite' => array('slug' => 'property-status')
+        'query_var' => 'property-permissions',
+        'rewrite' => array('slug' => 'property-permissions')
       );
     }
 
