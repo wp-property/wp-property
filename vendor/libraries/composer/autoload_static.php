@@ -169,6 +169,7 @@ class ComposerStaticInit058e019c61a5dc1813ffa20d1b0fcb3e
         'UsabilityDynamics\\CFTPB\\Loader' => __DIR__ . '/../../..' . '/vendor/plugins/wp-tax-post-binding/lib/class-loader.php',
         'UsabilityDynamics\\Job' => __DIR__ . '/..' . '/usabilitydynamics/lib-utility/lib/class-job.php',
         'UsabilityDynamics\\Loader' => __DIR__ . '/..' . '/usabilitydynamics/lib-utility/lib/class-loader.php',
+        'UsabilityDynamics\\SAAS_UTIL\\Register' => __DIR__ . '/..' . '/usabilitydynamics/lib-wp-saas-util/lib/classes/class-wp-saas-util.php',
         'UsabilityDynamics\\Settings' => __DIR__ . '/..' . '/usabilitydynamics/lib-settings/lib/class-settings.php',
         'UsabilityDynamics\\Shortcode\\Bootstrap' => __DIR__ . '/..' . '/usabilitydynamics/lib-wp-shortcode/lib/class-bootstrap.php',
         'UsabilityDynamics\\Shortcode\\Manager' => __DIR__ . '/..' . '/usabilitydynamics/lib-wp-shortcode/lib/class-manager.php',
