@@ -505,10 +505,10 @@ namespace UsabilityDynamics\WPP {
        * @param $settings
        * @param $option
        */
-      public function update_option_wpp_settings( $old_value = null, $settings, $option = '' ) {
+      public function update_option_wpp_settings( $old_value = null, $settings = array(), $option = '' ) {
 
         $_wpp_terms = array(
-          'taxonomies' => $settings['taxonomies'],
+          'taxonomies' => isset( $settings ) && isset( $settings['taxonomies'] ) ? $settings['taxonomies'] : array(),
 
           // Groups term belongs to.
           'groups' => array(),

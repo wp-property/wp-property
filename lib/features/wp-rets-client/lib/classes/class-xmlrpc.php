@@ -436,11 +436,20 @@ namespace UsabilityDynamics\WPRETSC {
 
           $_permalink = get_the_permalink( $_post_id );
 
+          $_message = array();
+
           if( isset( $_post_id ) && !is_wp_error( $_post_id ) && isset( $post_data[ 'ID' ] ) && $post_data[ 'ID' ] === $_post_id ) {
-            ud_get_wp_rets_client()->write_log( 'Updated property [' . $_post_id  . '] in [' . timer_stop() . '] seconds with [' .$_post_status .'] status. View at ['.$_permalink.']', 'info' );
+            $_message[] = 'Updated property [' . $_post_id  . '] in [' . timer_stop() . '] seconds with [' .$_post_status .'] status.';
           } else {
-            ud_get_wp_rets_client()->write_log( 'Created property [' . $_post_id  . '] in [' . timer_stop() . '] seconds with [' .$_post_status .'] status. View at ['.$_permalink.']', 'info' );
+            $_message[] = 'Created property [' . $_post_id  . '] in [' . timer_stop() . '] seconds with [' .$_post_status .'] status.';
           }
+
+          if( $_post_status === 'publish' ) {
+            $_message[] = 'View at ['.$_permalink.']';
+          }
+
+          ud_get_wp_rets_client()->write_log( join( " ", $_message ), 'info' );
+
 
           /**
            * Do something after property is published
