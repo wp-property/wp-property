@@ -599,18 +599,21 @@ class class_agents
   {
     global $wp_properties;
 
-    $agent_fields = $wp_properties['configuration']['feature_settings']['agents']['agent_fields'];
-    $agent_social_fields = $wp_properties['configuration']['feature_settings']['agents']['agent_social_fields'];
+    if( isset( $wp_properties['configuration']['feature_settings'] ) && isset( $wp_properties['configuration']['feature_settings']['agents'] ) ) {
+      $agent_fields = $wp_properties['configuration']['feature_settings']['agents']['agent_fields'];
+      $agent_social_fields = $wp_properties['configuration']['feature_settings']['agents']['agent_social_fields'];
+    }
+
     $columns['id'] = "ID";
     $columns['display_name'] = "Display Name";
     $columns['user_email'] = "Email";
 
-    if (!empty($agent_fields)) {
+    if ( isset( $agent_fields ) && !empty($agent_fields)) {
       foreach ($agent_fields as $slug => $data) {
         $columns[$slug] = $data['name'];
       }
     }
-    if (!empty($agent_social_fields)) {
+    if ( isset( $agent_social_fields ) && !empty($agent_social_fields)) {
       foreach ($agent_social_fields as $slug => $data) {
         $columns[$slug] = $data['name'];
       }

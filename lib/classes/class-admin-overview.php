@@ -215,10 +215,7 @@ namespace UsabilityDynamics\WPP {
            * - be searchable
            * - have valid 'Search Input'. See schema: ud_get_wp_property('attributes.searchable', array())
            */
-          if(
-            empty( $entry_types[ $attribute ] ) ||
-            empty( $search_schema[ $entry_types[ $attribute ] ] ) ||
-            !in_array( @$search_types[ $attribute ], @$search_schema[ $entry_types[ $attribute ] ] )
+          if( !isset( $attribute ) || !isset( $entry_types[ $attribute ] ) || empty( $entry_types[ $attribute ] ) || !isset( $search_schema[ $entry_types[ $attribute ] ] ) || empty( $search_schema[ $entry_types[ $attribute ] ] ) || !in_array( @$search_types[ $attribute ], @$search_schema[ $entry_types[ $attribute ] ] )
           ) {
             continue;
           }
