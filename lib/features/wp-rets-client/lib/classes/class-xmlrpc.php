@@ -223,7 +223,7 @@ namespace UsabilityDynamics\WPRETSC {
       public function rpc_system_check( $args ) {
         global $wp_xmlrpc_server;
 
-        // ud_get_wp_rets_client()->write_log( 'Have system check [wpp.editProperty] request.' );
+        ud_get_wp_rets_client()->write_log( 'Have system check [wpp.editProperty] request.', 'debug' );
 
         // swets blog
 
@@ -243,9 +243,6 @@ namespace UsabilityDynamics\WPRETSC {
           "post_types" => get_post_types(),
           "activePlugins" => self::get_plugins()
         ));
-
-
-        // ud_get_wp_rets_client()->write_log( 'Have system check [wpp.editProperty] response:' . print_r($_response,true) );
 
         // not sure if needed here, but seems like good pratice.
         if( function_exists( 'restore_current_blog' ) ) {
@@ -272,7 +269,7 @@ namespace UsabilityDynamics\WPRETSC {
           return $post_data;
         }
 
-        ud_get_wp_rets_client()->write_log( 'Have request wpp.editProperty request' );
+        ud_get_wp_rets_client()->write_log( 'Have request wpp.editProperty request', 'debug' );
 
         if( isset( $post_data[ 'meta_input' ][ 'rets_id' ] ) ) {
           $post_data[ 'meta_input' ][ 'wpp::rets_pk' ] = $post_data[ 'meta_input' ][ 'rets_id' ];
@@ -292,7 +289,7 @@ namespace UsabilityDynamics\WPRETSC {
         $post_data[ 'post_status' ] = 'draft';
 
         if( !empty( $post_data[ 'ID' ] ) ) {
-          ud_get_wp_rets_client()->write_log( 'Running wp_insert_post for [' . $post_data[ 'ID' ] . '].' );
+          ud_get_wp_rets_client()->write_log( 'Running wp_insert_post for [' . $post_data[ 'ID' ] . '].', 'debug' );
           $_post = get_post( $post_data[ 'ID' ] );
           // If post_date is not set wp_insert_post function sets the current datetime.
           // So we are preventing to do it by setting already existing post_date. peshkov@UD
@@ -302,7 +299,7 @@ namespace UsabilityDynamics\WPRETSC {
           $post_data[ 'post_status' ] = $_post->post_status;
 
         } else {
-          ud_get_wp_rets_client()->write_log( 'Running wp_insert_post for [new post].' );
+          ud_get_wp_rets_client()->write_log( 'Running wp_insert_post for [new post].', 'debug' );
         }
 
         $_post_data_tax_input = $post_data['tax_input'];
@@ -313,21 +310,20 @@ namespace UsabilityDynamics\WPRETSC {
         if( ( !isset( $post_data[ 'meta_input' ][ 'latitude' ] ) || !$post_data[ 'meta_input' ][ 'latitude' ] ) && isset( $post_data['_system']['location']['lat'] ) ) {
           $post_data[ 'meta_input' ][ 'latitude' ] = $post_data['_system']['location']['lat'];
           $post_data[ 'meta_input' ][ 'longitude' ] = $post_data['_system']['location']['lon'];
-          ud_get_wp_rets_client()->write_log( 'Inserted lat/lon from _system ' . $post_data['_system']['location']['lat'] );
+          ud_get_wp_rets_client()->write_log( 'Inserted lat/lon from _system ' . $post_data['_system']['location']['lat'], 'debug' );
         }
 
         $_post_id = wp_insert_post( $post_data, true );
 
         if( is_wp_error( $_post_id ) ) {
-          ud_get_wp_rets_client()->write_log( 'wp_insert_post error <pre>' . print_r( $_post_id, true ) . '</pre>' );
-          ud_get_wp_rets_client()->write_log( 'wp_insert_post $post_data <pre>' . print_r( $post_data, true ) . '</pre>' );
+          ud_get_wp_rets_client()->write_log( 'wp_insert_post error <pre>' . print_r( $_post_id, true ) . '</pre>', 'error' );
+          ud_get_wp_rets_client()->write_log( 'wp_insert_post $post_data <pre>' . print_r( $post_data, true ) . '</pre>', 'error' );
 
           return array(
             "ok" => false,
-            "message" => "Unable to insert post",
+            "message" => "Unable to insert post.",
             "error" => $_post_id->get_error_message()
           );
-
         }
 
         // Insert all the terms and creates taxonomies.
@@ -350,19 +346,19 @@ namespace UsabilityDynamics\WPRETSC {
           }
 
           foreach( $attached_media as $_single_media_item ) {
-            // ud_get_wp_rets_client()->write_log( 'Deleting [' .  $_single_media_item->ID . '] media item.' );
+            ud_get_wp_rets_client()->write_log( 'Deleting [' .  $_single_media_item->ID . '] media item.', 'debug' );
             wp_delete_attachment( $_single_media_item->ID, true );
           }
 
           // delete all old attachments if the count of new media doesn't match up with old media
           if( count( $attached_media ) != count( $post_data[ 'meta_input' ][ 'rets_media' ] ) ) {
-            ud_get_wp_rets_client()->write_log( 'For ['.$_post_id.'] property media count has changed. Before ['.count( $attached_media ).'], now ['.count( $post_data[ 'meta_input' ][ 'rets_media' ] ).'].' );
+            ud_get_wp_rets_client()->write_log( 'For ['.$_post_id.'] property media count has changed. Before ['.count( $attached_media ).'], now ['.count( $post_data[ 'meta_input' ][ 'rets_media' ] ).'].', 'debug' );
           }
 
           foreach( $post_data[ 'meta_input' ][ 'rets_media' ] as $media ) {
 
             if( in_array( $media[ 'url' ], $_already_attached_media ) ) {
-              // ud_get_wp_rets_client()->write_log( "Skipping $media[url] because it's already attached to $_post_id" );
+              ud_get_wp_rets_client()->write_log( "Skipping $media[url] because it's already attached to $_post_id", 'debug' );
             }
 
             // attach media if a URL is set and it isn't already attached
@@ -384,8 +380,6 @@ namespace UsabilityDynamics\WPRETSC {
 
             update_post_meta( $attach_id, '_is_remote', '1' );
 
-            // ud_get_wp_rets_client()->write_log( '$attach_id ' . $attach_id  . ' to ' . $_post_id );
-
             // set the item with order of 1 as the thumbnail
             if( (int)$media[ 'order' ] === 1 ) {
               //set_post_thumbnail( $_post_id, $attach_id );
@@ -395,9 +389,9 @@ namespace UsabilityDynamics\WPRETSC {
               $_thumbnail_setting = add_post_meta( $_post_id, '_thumbnail_id', (int)$attach_id );
 
               if( $_thumbnail_setting ) {
-                ud_get_wp_rets_client()->write_log( 'Setting thumbnail [' . $attach_id . '] to post [' . $_post_id . '] because it has order of 1, result: ' );
+                ud_get_wp_rets_client()->write_log( 'Setting thumbnail [' . $attach_id . '] to post [' . $_post_id . '] because it has order of 1, result: ', 'debug' );
               } else {
-                ud_get_wp_rets_client()->write_log( 'Error! Failured at setting thumbnail [' . $attach_id . '] to post [' . $_post_id . ']' );
+                ud_get_wp_rets_client()->write_log( 'Error! Failured at setting thumbnail [' . $attach_id . '] to post [' . $_post_id . ']', 'error' );
               }
 
               //die('dying early!' );
@@ -421,9 +415,9 @@ namespace UsabilityDynamics\WPRETSC {
         }
 
         if( $_post_id ) {
-          ud_get_wp_rets_client()->write_log( 'Updating property post [' . $_post_id  . '].' );
+          ud_get_wp_rets_client()->write_log( 'Updating property post [' . $_post_id  . '].', 'debug' );
         } else {
-          ud_get_wp_rets_client()->write_log( 'Creating property post [' . $_post_id  . '].' );
+          ud_get_wp_rets_client()->write_log( 'Creating property post [' . $_post_id  . '].', 'debug' );
         }
 
         $_post_status = ( !empty( $_post ) && !empty( $_post->post_status ) ? $_post->post_status : 'publish' );
@@ -439,21 +433,30 @@ namespace UsabilityDynamics\WPRETSC {
         ) );
 
         if( !is_wp_error( $_update_post ) ) {
-          ud_get_wp_rets_client()->write_log( 'Published property post [' . $_post_id  . '], setting post_status to [' .$_post_status .']' );
+
+          $_permalink = get_the_permalink( $_post_id );
+
+          if( isset( $_post_id ) && !is_wp_error( $_post_id ) && isset( $post_data[ 'ID' ] ) && $post_data[ 'ID' ] === $_post_id ) {
+            ud_get_wp_rets_client()->write_log( 'Updated property [' . $_post_id  . '] in [' . timer_stop() . '] seconds with [' .$_post_status .'] status. View at ['.$_permalink.']', 'info' );
+          } else {
+            ud_get_wp_rets_client()->write_log( 'Created property [' . $_post_id  . '] in [' . timer_stop() . '] seconds with [' .$_post_status .'] status. View at ['.$_permalink.']', 'info' );
+          }
+
           /**
            * Do something after property is published
            */
           do_action( 'wrc_property_published', $_post_id );
+
         } else {
-          ud_get_wp_rets_client()->write_log( 'Error publishing post ' . $_post_id );
-          ud_get_wp_rets_client()->write_log( '<pre>' . print_r( $_update_post, true ) . '</pre>' );
+          ud_get_wp_rets_client()->write_log( 'Error publishing post ' . $_post_id, 'error' );
+          ud_get_wp_rets_client()->write_log( '<pre>' . print_r( $_update_post, true ) . '</pre>', 'error' );
         }
 
         return array(
           "ok" => true,
           "post_id" => $_post_id,
           "post" => get_post( $_post_id ),
-          "permalink" => get_the_permalink( $_post_id )
+          "permalink" => isset( $_permalink ) ? $_permalink : null
         );
 
       }
@@ -468,13 +471,13 @@ namespace UsabilityDynamics\WPRETSC {
        */
       static public function insert_terms( $_post_id, $_post_data_tax_input, $post_data = array() ) {
 
-        ud_get_wp_rets_client()->write_log( "Have [" . count( $_post_data_tax_input ) . "] taxonomies to process." );
+        ud_get_wp_rets_client()->write_log( "Have [" . count( $_post_data_tax_input ) . "] taxonomies to process.", 'debug' );
 
         foreach( (array) $_post_data_tax_input as $tax_name => $tax_tags ) {
 
           // Ignore these taxonomies if we support [wpp_listing_location].
           if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_LOCATION' ) && WPP_FEATURE_FLAG_WPP_LISTING_LOCATION && in_array( $tax_name, array( 'rets_location_state', 'rets_location_county', 'rets_location_city', 'rets_location_route' ) ) ) {
-            ud_get_wp_rets_client()->write_log( "Skipping [$tax_name] taxonomy, we have [wpp_listing_location] enabled." );
+            ud_get_wp_rets_client()->write_log( "Skipping [$tax_name] taxonomy, we have [wpp_listing_location] enabled.", 'debug' );
             continue;
           }
 
@@ -483,7 +486,7 @@ namespace UsabilityDynamics\WPRETSC {
 
           // If WP-Property location flag is enabled, and we're doing the [wpp_listing_location] taxonomy, and the WPP_F::update_location_terms method is callable, process our wpp_listing_location terms.
           if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_LOCATION' ) && WPP_FEATURE_FLAG_WPP_LISTING_LOCATION && $tax_name === 'wpp_listing_location' && is_callable(array( 'WPP_F', 'update_location_terms' ) ) ) {
-            ud_get_wp_rets_client()->write_log( 'Handling [wpp_listing_location] taxonomy for [' . $_post_id .'] listing.' );
+            ud_get_wp_rets_client()->write_log( 'Handling [wpp_listing_location] taxonomy for [' . $_post_id .'] listing.', 'info' );
 
             $_geo_tag_fields = array(
               "state" => isset( $_post_data_tax_input["rets_location_state"] ) ? reset( $_post_data_tax_input["rets_location_state"] ) : null,
@@ -495,9 +498,9 @@ namespace UsabilityDynamics\WPRETSC {
             $_location_terms = WPP_F::update_location_terms( $_post_id, (object) $_geo_tag_fields);
 
             if( is_wp_error( $_location_terms ) ) {
-              ud_get_wp_rets_client()->write_log( "Failed to insert location terms for[" .$_post_id."] property, got [" . $_location_terms->get_error_message() . " ] error" );
+              ud_get_wp_rets_client()->write_log( "Failed to insert location terms for[" .$_post_id."] property, got [" . $_location_terms->get_error_message() . " ] error", 'error' );
             } else {
-              ud_get_wp_rets_client()->write_log( "Inserted " . count( $_location_terms ) . " location terms for [" .$_post_id."] property." );
+              ud_get_wp_rets_client()->write_log( "Inserted " . count( $_location_terms ) . " location terms for [" .$_post_id."] property.", 'info' );
             }
 
             // Avoid re-adding whatever fields were passed by real [wpp_listing_location]
@@ -506,7 +509,7 @@ namespace UsabilityDynamics\WPRETSC {
           }
 
           if( is_taxonomy_hierarchical( $tax_name ) ) {
-            ud_get_wp_rets_client()->write_log( "Handling hierarchical taxonomy [$tax_name]." );
+            ud_get_wp_rets_client()->write_log( "Handling hierarchical taxonomy [$tax_name].", 'debug' );
 
             $_terms = array();
 
@@ -515,15 +518,15 @@ namespace UsabilityDynamics\WPRETSC {
               if( is_object( $_term_name ) || is_array( $_term_name ) ) {
 
                 if( isset( $_term_name[ '_id'] ) ) {
-                  ud_get_wp_rets_client()->write_log( "Have hierarchical object term [$tax_name] with [" . $_term_name[ '_id'] . "] _id." );
+                  ud_get_wp_rets_client()->write_log( "Have hierarchical object term [$tax_name] with [" . $_term_name[ '_id'] . "] _id.", 'debug' );
                   $_insert_result = WPP_F::insert_terms($_post_id, array($_term_name), array( '_taxonomy' => $tax_name ) );
-                  ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_insert_result['set_terms'] ) . "] terms for [$tax_name] taxonomy." );
+                  ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_insert_result['set_terms'] ) . "] terms for [$tax_name] taxonomy.", 'debug' );
                 }
 
                 continue;
               }
 
-              ud_get_wp_rets_client()->write_log( "Handling inserting term [$_term_name] for [$tax_name]." );
+              ud_get_wp_rets_client()->write_log( "Handling inserting term [$_term_name] for [$tax_name].", 'debug' );
 
               $_term_parts = explode( ' > ', $_term_name );
 
@@ -539,31 +542,28 @@ namespace UsabilityDynamics\WPRETSC {
               $_term_parent = get_term_by( 'slug', sanitize_title( $_term_parent_value ), $tax_name, ARRAY_A );
 
               if( is_wp_error( $_term_parent ) ) {
-                ud_get_wp_rets_client()->write_log( "Error inserting term [$tax_name]: " . $_term_parent->get_error_message() );
+                ud_get_wp_rets_client()->write_log( "Error inserting term [$tax_name]: " . $_term_parent->get_error_message(), 'error' );
                 //continue;
               }
 
               if( !$_term_parent ) {
-                ud_get_wp_rets_client()->write_log( "Did not find parent term [$tax_name] - [$_term_parent_value]." );
+                ud_get_wp_rets_client()->write_log( "Did not find parent term [$tax_name] - [$_term_parent_value].", 'warn' );
 
                 $_term_parent = wp_insert_term( $_term_parent_value, $tax_name, array(
                   "slug" => sanitize_title( $_term_parent_value )
                 ));
 
                 if( is_wp_error( $_term_parent ) ) {
-                  ud_get_wp_rets_client()->write_log( "Error creating term [$_term_parent_value] with [" . $_term_parent->get_error_message() ."]." );
+                  ud_get_wp_rets_client()->write_log( "Error creating term [$_term_parent_value] with [" . $_term_parent->get_error_message() ."].", 'error' );
                 } else {
-                  ud_get_wp_rets_client()->write_log( "Created parent term [$_term_parent_value] with [" . $_term_parent['term_id'] ."]." );
+                  ud_get_wp_rets_client()->write_log( "Created parent term [$_term_parent_value] with [" . $_term_parent['term_id'] ."].", 'info' );
                 }
 
               }
 
               if( $_term_parent && !$_term && isset( $_term_parts ) && $_term_child_value  ) {
 
-                ud_get_wp_rets_client()->write_log( "Did not find child term [$_term_child_value] with slug [" .sanitize_title( $_term_name ) . "]." );
-                //ud_get_wp_rets_client()->write_log( 'count' . count( $_term_parts ) );
-                //ud_get_wp_rets_client()->write_log( '<pre>' . print_r( $_term_parts, true ) . '</pre>' );
-
+                ud_get_wp_rets_client()->write_log( "Did not find child term [$_term_child_value] with slug [" .sanitize_title( $_term_name ) . "].", 'info' );
                 $_term = wp_insert_term( $_term_name, $tax_name, array(
                   "parent" => $_term_parent['term_id'],
                   "slug" => sanitize_title( $_term_name ),
@@ -579,12 +579,10 @@ namespace UsabilityDynamics\WPRETSC {
                     'slug' => sanitize_title( $_term_name )
                   ));
 
-                  //ud_get_wp_rets_client()->write_log( '$_child_term_name_change' );
-                  //ud_get_wp_rets_client()->write_log( $_child_term_name_change );
 
                 }
 
-                ud_get_wp_rets_client()->write_log( "Created child term [$_term_name] with [" . $_term['term_id'] ."] for [$_term_parent_value] parent." );
+                ud_get_wp_rets_client()->write_log( "Created child term [$_term_name] with [" . $_term['term_id'] ."] for [$_term_parent_value] parent.", 'debug' );
               }
 
               if( $_term_parent && $_term_parent['term_id'] ) {
@@ -600,13 +598,13 @@ namespace UsabilityDynamics\WPRETSC {
 
             if( isset( $_terms ) && !empty( $_terms ) ) {
               $_inserted_terms = wp_set_post_terms( $_post_id, $_terms, $tax_name );
-              ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_inserted_terms ) . "] terms." );
+              ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_inserted_terms ) . "] terms.", 'info' );
             }
 
           }
 
           if( !is_taxonomy_hierarchical( $tax_name ) ) {
-            ud_get_wp_rets_client()->write_log( "Handling non-hierarchical taxonomy [$tax_name]." );
+            ud_get_wp_rets_client()->write_log( "Handling non-hierarchical taxonomy [$tax_name].", 'debug' );
 
             $_terms = array();
 
@@ -616,7 +614,7 @@ namespace UsabilityDynamics\WPRETSC {
               // Item is an array, which means this entry includes term meta.
               if( is_object( $_term_name ) || is_array( $_term_name ) && isset( $_term_name[ '_id'] ) ) {
                 $_insert_result = WPP_F::insert_terms($_post_id, array($_term_name), array( '_taxonomy' => $tax_name ) );
-                ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_insert_result['set_terms'] ) . "] non-hierarchical terms for [$tax_name] taxonomy with [" . $_term_name[ '_id'] . "] _id." );
+                ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_insert_result['set_terms'] ) . "] non-hierarchical terms for [$tax_name] taxonomy with [" . $_term_name[ '_id'] . "] _id.", 'debug' );
               } else {
                 $_terms[] = $_term_name;
               }
@@ -625,7 +623,7 @@ namespace UsabilityDynamics\WPRETSC {
 
             if( isset( $_terms ) && !empty( $_terms ) ) {
               $_inserted_terms = wp_set_post_terms( $_post_id, $_terms, $tax_name );
-              ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_inserted_terms ) . "] terms into [$tax_name] taxonomy." );
+              ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_inserted_terms ) . "] terms into [$tax_name] taxonomy.", "debug" );
             }
 
           }
@@ -661,12 +659,12 @@ namespace UsabilityDynamics\WPRETSC {
           ud_get_wp_rets_client()->logfile = !empty( $data[ 'logfile' ] ) ? $data[ 'logfile' ] : ud_get_wp_rets_client()->logfile;
         }
 
-        ud_get_wp_rets_client()->write_log( 'Have wpp.deleteProperty request' );
+        ud_get_wp_rets_client()->write_log( 'Have wpp.deleteProperty request.', 'info' );
 
         if( !$post_id || !is_numeric( $post_id ) ) {
           $log = 'No post ID provided';
           array_push( $response[ 'logs' ], $log );
-          ud_get_wp_rets_client()->write_log( $log );
+          ud_get_wp_rets_client()->write_log( $log, 'info' );
           return $response;
         }
 
@@ -681,7 +679,7 @@ namespace UsabilityDynamics\WPRETSC {
 
         if( FALSE === get_post_status( $post_id ) ) {
 
-          ud_get_wp_rets_client()->write_log( "Post ID [$post_id] does not exist. Removing its postmeta and terms if exist" );
+          ud_get_wp_rets_client()->write_log( "Post ID [$post_id] does not exist. Removing its postmeta and terms if exist.", 'info' );
 
           // Looks like post was deleted. But postmeta ( and probably terms ) still exist... Remove it.
           wp_delete_object_term_relationships( $post_id, get_object_taxonomies( 'property' ) );
@@ -689,13 +687,13 @@ namespace UsabilityDynamics\WPRETSC {
 
           $log = "Removed postmeta and terms for Property [{$post_id}].";
           array_push( $response[ 'logs' ], $log );
-          ud_get_wp_rets_client()->write_log( $log );
+          ud_get_wp_rets_client()->write_log( $log, 'debug' );
 
           do_action( 'wrc_property_deleted', $post_id );
 
         } else {
 
-          ud_get_wp_rets_client()->write_log( "Post [$post_id] found. Removing it." );
+          ud_get_wp_rets_client()->write_log( "Post [$post_id] found. Removing it.", "info" );
 
           if( wp_delete_post( $post_id, true ) ) {
             $log = "Removed Property [{$post_id}]";
@@ -709,7 +707,7 @@ namespace UsabilityDynamics\WPRETSC {
           }
 
           array_push( $response[ 'logs' ], $log );
-          ud_get_wp_rets_client()->write_log( $log );
+          ud_get_wp_rets_client()->write_log( $log, 'debug' );
 
         }
 
@@ -741,7 +739,7 @@ namespace UsabilityDynamics\WPRETSC {
           "logs" => array(),
         );
 
-        ud_get_wp_rets_client()->write_log( 'Have wpp.removeDuplicatedMLS request' );
+        ud_get_wp_rets_client()->write_log( 'Have wpp.removeDuplicatedMLS request', "info" );
 
         // Find all RETS IDs that have multiple posts associated with them.
         $query = "SELECT meta_value, COUNT(*) c FROM $wpdb->postmeta WHERE meta_key='rets_id' GROUP BY meta_value HAVING c > 1 ORDER BY c DESC";
@@ -751,7 +749,7 @@ namespace UsabilityDynamics\WPRETSC {
 
         $log = "Found [" . count( $_duplicates ) . "] RETS IDs which have duplicated properties";
         array_push( $response[ 'logs' ], $log );
-        ud_get_wp_rets_client()->write_log( $log );
+        ud_get_wp_rets_client()->write_log( $log, 'debug' );
 
         if( empty( $_duplicates ) ) {
           return $response;
@@ -767,7 +765,7 @@ namespace UsabilityDynamics\WPRETSC {
 
           $log = "Found [" . ( count( $post_ids ) - 1 ) . "] duplications for RETS ID [{$rets_id}]";
           array_push( $response[ 'logs' ], $log );
-          ud_get_wp_rets_client()->write_log( $log );
+          ud_get_wp_rets_client()->write_log( $log, 'info' );
 
           $primary = 0;
 
@@ -780,9 +778,7 @@ namespace UsabilityDynamics\WPRETSC {
 
             if( FALSE === get_post_status( $post_id ) ) {
 
-              ud_get_wp_rets_client()->write_log( "Checking post ID [$post_id]" );
-
-              ud_get_wp_rets_client()->write_log( "Post ID [$post_id] does not exist. Removing its postmeta and terms" );
+              ud_get_wp_rets_client()->write_log( "Checking post ID [$post_id].", 'info' );
 
               // Looks like post was deleted. But postmeta ( and probably terms ) still exist... Remove it.
               wp_delete_object_term_relationships( $post_id, get_object_taxonomies( 'property' ) );
@@ -790,7 +786,7 @@ namespace UsabilityDynamics\WPRETSC {
 
               $log = "RETS ID [{$rets_id}]. Removed postmeta and terms for Property [{$post_id}].";
               array_push( $response[ 'logs' ], $log );
-              ud_get_wp_rets_client()->write_log( $log );
+              ud_get_wp_rets_client()->write_log( $log, 'debug' );
 
             } else {
 
@@ -801,7 +797,7 @@ namespace UsabilityDynamics\WPRETSC {
 
               } else {
 
-                ud_get_wp_rets_client()->write_log( "Checking post ID [$post_id]" );
+                ud_get_wp_rets_client()->write_log( "Checking post ID [$post_id]", 'info' );
 
                 if( wp_delete_post( $post_id, true ) ) {
                   $log = "RETS ID [{$rets_id}]. Removed Property [{$post_id}]";
@@ -810,7 +806,7 @@ namespace UsabilityDynamics\WPRETSC {
                 }
 
                 array_push( $response[ 'logs' ], $log );
-                ud_get_wp_rets_client()->write_log( $log );
+                ud_get_wp_rets_client()->write_log( $log, 'debug' );
 
               }
 
@@ -819,7 +815,7 @@ namespace UsabilityDynamics\WPRETSC {
             // Maybe remove post from ES.
             if( !empty( $data[ 'es_client' ] ) ) {
 
-              ud_get_wp_rets_client()->write_log( "Removing post ID [$post_id] from Elasticsearch" );
+              ud_get_wp_rets_client()->write_log( "Removing post ID [$post_id] from Elasticsearch", 'info' );
 
               wp_remote_request( trailingslashit( $data[ 'es_client' ] ) . $post_id, array(
                 'method' => 'DELETE',
@@ -842,7 +838,7 @@ namespace UsabilityDynamics\WPRETSC {
         // @todo: probably term counting should be executed via different way. Because it takes forever to update counts.... peshkov@UD
         //wp_defer_term_counting( false );
 
-        ud_get_wp_rets_client()->write_log( 'wpp.removeDuplicatedMLS Done' );
+        ud_get_wp_rets_client()->write_log( 'wpp.removeDuplicatedMLS Done', 'info' );
 
         return $response;
 

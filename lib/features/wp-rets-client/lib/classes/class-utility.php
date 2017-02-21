@@ -52,19 +52,23 @@ namespace UsabilityDynamics\WPRETSC {
       }
 
       /**
+       * Write to Log. Writes to either rets-log.log or rets-debug.log, depending on type.
+       *
+       * The rets-debug.log file is not written to if it does not exist.
        *
        * By the time the post_data gets here it already has an ID because get_default_post_to_edit() is used to create it
        *  it is created with "auto-draft" status but all meta is already added to it.
        *
        * - all post meta/terms added by this thing are attached to the original post, it seems
        *
-       * tail -f wp-content/debug.log wp-content/rets-debug-log.log
+       * tail -f wp-content/rets-log.log
+       * tail -f wp-content/rets-debug.log
        *
        * @param $data
-       * @param bool $file
+       * @param $type
+       * @return bool
        */
-      static public function write_log( $data, $file = false ) {
-        $file = $file ? $file : ud_get_wp_rets_client()->logfile;
+      static public function write_log( $data, $type = 'debug' ) {
 
         // same format as debug.log
         $_time_stamp = date('d-M-Y h:i:s T', time());
@@ -75,7 +79,18 @@ namespace UsabilityDynamics\WPRETSC {
           $_content = '[' . $_time_stamp  . '] ' . $data . ' [' . timer_stop() . 's].' . "\n";
         }
 
-        file_put_contents( ABSPATH . rtrim( $file, '/\\' ), $_content, FILE_APPEND  );
+        if( $type === 'error' || $type === 'info' || $type === 'warning' ) {
+          file_put_contents( ABSPATH . rtrim( ud_get_wp_rets_client()->logfile, '/\\' ), $_content, FILE_APPEND  );
+          return true;
+        }
+
+        if( ( $type === 'debug' || $type === 'notice' ) && file_exists( ud_get_wp_rets_client()->debug_file ) ) {
+          file_put_contents( ABSPATH . rtrim( ud_get_wp_rets_client()->debug_file, '/\\' ), $_content, FILE_APPEND  );
+          return true;
+        }
+
+        return false;
+
       }
 
       /**

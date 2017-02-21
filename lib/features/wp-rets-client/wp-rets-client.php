@@ -26,6 +26,9 @@ if( !function_exists( 'ud_get_wp_rets_client' ) ) {
    *
    * @author Usability Dynamics, Inc.
    * @since 0.2.0
+   * @param bool $key
+   * @param null $default
+   * @return
    */
   function ud_get_wp_rets_client( $key = false, $default = null ) {
     $instance = \UsabilityDynamics\WPRETSC\Bootstrap::get_instance();

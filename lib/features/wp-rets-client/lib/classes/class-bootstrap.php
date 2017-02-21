@@ -23,7 +23,12 @@ namespace UsabilityDynamics\WPRETSC {
       /**
        * @var string
        */
-      public $logfile = 'wp-content/rets-debug-log.log';
+      public $logfile = 'wp-content/rets-log.log';
+
+      /**
+       * @var string
+       */
+      public $debug_file = 'wp-content/rets-debug.log';
 
       /**
        * Instantaite class.
