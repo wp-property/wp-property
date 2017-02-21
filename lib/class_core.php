@@ -70,7 +70,6 @@ class WPP_Core {
     /**
      * Updated remote settings to UD
      */
-    // add_action( 'wpp::save_settings', array( $this, 'update_site_settings' ) );
 
     add_filter( 'wpp_get_properties_query', array( $this, 'fix_tax_property_query' ));
 
@@ -196,6 +195,8 @@ class WPP_Core {
 
   /**
    * Update remote settings
+   *
+   * @depreciated
    *
    */
   public function update_site_settings() {

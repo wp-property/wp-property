@@ -140,6 +140,9 @@ namespace UsabilityDynamics\WPP {
         // Register site with SaaS Services.
         $this->register = class_exists( 'UsabilityDynamics\SAAS_UTIL\Register' ) ? new Register( 'property' ) : null;
 
+        // $this->register->register_blog();
+        // $this->register->create_subscription();
+
         //** Initiate Attributes Handler */
         new Attributes();
 
