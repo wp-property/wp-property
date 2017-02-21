@@ -1,5 +1,4 @@
 <?php
-
 /**
  * WP-Property General Functions
  *
@@ -18,6 +17,9 @@ class WPP_F extends UsabilityDynamics\Utility
    *
    * - If term exists, we update it. Otherwise its created.
    * - All extra fields are inserted as term meta.
+   *
+   *
+   * @author potanin@UD
    *
    * @param $term_data
    * @param $term_data._id - Unique ID, stored in term meta. Usually source ID. Native term_id used if not provided.
@@ -44,48 +46,88 @@ class WPP_F extends UsabilityDynamics\Utility
     if( !isset( $term_data['_type'] )) {
       return new WP_Error( 'missing-type' );
     }
+
     // try to find by [_id]
-    if( isset( $term_data['_id'] ) ) {
-      $_term_id = $wpdb->get_var($wpdb->prepare("SELECT term_id FROM $wpdb->termmeta as tm WHERE meta_key='%s' AND meta_value='%s';", array('_id', $term_data['_id'])));
+    if( isset( $term_data[ '_id' ] ) ) {
+      $term_data['term_id'] = intval( $wpdb->get_var($wpdb->prepare("SELECT term_id FROM $wpdb->termmeta as tm WHERE meta_key='%s' AND meta_value='%s';", array( '_id', $term_data['_id']))) );
+    }
+
+    // Use _type for _taxonomy if not provided.
+    if( !isset( $term_data['_taxonomy'] ) && isset( $term_data['_type'] ) ) {
+      $term_data['_taxonomy'] = $term_data['_type'];
     }
 
     // try to get by [name]
-    if( !$_term_id ) {
-      $_exists = term_exists( $term_data['name'], $term_data['_type'] );
+    if( !$term_data['term_id'] ) {
+      $_exists = term_exists( $term_data['name'], $term_data['_taxonomy'] );
 
       if( $_exists ) {
-        $_term_id = $_exists['term_id'];
+        $term_data['term_id'] = $_exists['term_id'];
       }
     }
 
+
     // Term not found, new term
-    if( !$_term_id ) {
+    if( !$term_data['term_id'] ) {
 
-      $_term = wp_insert_term( $term_data['name'], $term_data['_type'], array(
-        'description'=> $term_data['description']
-      ));
+      $_term_created = wp_insert_term( $term_data['name'], $term_data['_taxonomy'], array(  'description' => isset( $term_data['description'] ) ? $term_data['description'] : null  ));
 
-      $_term_id = $_term['term_id'];
+      if( isset( $_term_created ) && is_wp_error( $_term_created ) ) {
+        error_log( "Unable to insert term [" . $term_data['_taxonomy']. "]." );
+        return $_term_created;
+      }
 
+      $term_data['term_id'] = $_term_created['term_id'];
     }
 
     // Could not create term.
-    if( !$_term_id ) {
+    if( !isset( $term_data[ 'term_id'] ) ) {
+      // error_log( '$_term_created' . print_r($_term_created,true ));
+      // error_log( '$term_data' . print_r($term_data,true ));
       return new WP_Error('unable-to-create-term', 'Can not create term.' );
     }
 
-    $result['_id'] = $_term_id;
     $result['_type'] = $term_data['_type'];
-    $result['name'] = $term_data['name'];
-    $result['slug'] = $term_data['slug'];
+    $result['_taxonomy'] = $term_data['_taxonomy'];
 
-    $term_data[ 'meta' ]['_id'] = $result[ '_id' ];
+    $result['_created'] = isset( $_exists ) && isset( $_exists['term_id'] ) ? false : true;
+    $result['_updated'] = isset( $_exists ) && isset( $_exists['term_id'] ) ? true : false;
 
-    foreach( $term_data[ 'meta' ] as $_meta_key => $meta_value ) {
-      if( update_term_meta($_term_id, $_meta_key, $meta_value ) ) {}
-      $result['meta'][ $_meta_key ] = $meta_value;
+    $result['term_id'] = $term_data['term_id'];
+
+    $result['name'] = isset( $term_data['name'] ) ? $term_data['name'] : null;
+    $result['slug'] = isset( $term_data['slug'] ) ? $term_data['slug'] : sanitize_title( $term_data['name'] );
+
+    $term_data[ 'meta' ]['_id'] = $term_data[ '_id' ];
+
+    // set _id
+    if( update_term_meta($term_data['term_id'], '_id', $term_data[ '_id' ] ) ) {}
+
+    // This is most likely going to be removed.
+    if( $result['_created'] ) {
+      update_term_meta( $term_data['term_id'], '_created', time() );
+    } else {
+      update_term_meta( $term_data['term_id'], '_updated', time() );
     }
 
+    foreach( $term_data[ 'meta' ] as $_meta_key => $meta_value ) {
+
+      if( update_term_meta( $term_data['term_id'], ( $term_data['_type'] . '-' . $_meta_key ), $meta_value ) ) {}
+
+      $result['meta'][ ( $term_data['_type'] . '-' . $_meta_key ) ] = $meta_value;
+    }
+
+    return array_filter( $result );
+
+    // Update other fields.
+    wp_update_term( $term_data['term_id'], $term_data['_taxonomy'], array_filter(array(
+      'name' => isset( $term_data['name'] ) ? $term_data['name'] : null,
+      'alias_of' => isset( $term_data['alias_of'] ) ? $term_data['alias_of'] : null,
+      'description' => isset( $term_data['description'] ) ? $term_data['description'] : null,
+      'term_group' => isset( $term_data['term_group'] ) ? $term_data['term_group'] : null
+    )));
+
+    // error_log( print_r($result, true));
     return array_filter( $result );
 
   }
@@ -93,11 +135,13 @@ class WPP_F extends UsabilityDynamics\Utility
   /**
    * Insert Multiple Terms
    *
+   * @author potanin@UD
    * @param $object_id
-   * @param $terms
+   * @param $terms - An array of terms.
+   * @param array $defaults
    * @return array
    */
-  static public function insert_terms( $object_id, $terms ) {
+  static public function insert_terms( $object_id, $terms, $defaults = array() ) {
 
     $_terms = array();
 
@@ -111,7 +155,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
     foreach( $terms as $_index => $_term ) {
 
-      $_terms[ $_index ] = self::insert_term( $_term );
+      $_terms[ $_index ] = self::insert_term( array_merge( (array) $_term, (array) $defaults ));
 
       if( is_wp_error( $_terms[ $_index ] ) ) {
         $_results['errors'][] = $_terms[ $_index ];
@@ -120,7 +164,8 @@ class WPP_F extends UsabilityDynamics\Utility
       }
 
       if( !is_wp_error( $_terms[ $_index ] ) ) {
-        $_results['set_terms'] = array_merge( $_results['set_terms'], wp_set_object_terms( $object_id, $_terms[ $_index ]['slug'], $_terms[ $_index ]['_type'], true ) );
+
+        $_results['set_terms'] = array_merge( $_results['set_terms'], wp_set_object_terms( $object_id, intval( $_terms[ $_index ]['term_id'] ), $_terms[ $_index ]['_taxonomy'], true ) );
 
         if( isset( $_term['post_meta'] ) ) {
           $_results['meta_override'][] = update_post_meta( $object_id, '_wpp_term_meta_override', $_term['post_meta'] );
@@ -134,10 +179,19 @@ class WPP_F extends UsabilityDynamics\Utility
 
     $_results[ 'terms' ] = $_terms;
 
+    if( empty( $_results['meta_override'] )) {
+      unset( $_results['meta_override'] );
+    }
+
+    if( empty( $_results['errors'] )) {
+      unset( $_results['errors'] );
+    } else {
+      error_log( 'WP-Properrty Errors creating terms: ' . print_r($_results['errors'],true) );
+    }
+
     return $_results;
 
   }
-
 
   /**
    * Registers a system taxonomy if needed with most essential arguments.
@@ -145,17 +199,23 @@ class WPP_F extends UsabilityDynamics\Utility
    * @since 2.2.1
    * @author potanin@UD
    * @param string $taxonomy
+   * @param array $args
    * @return string
    */
-  static public function verify_have_system_taxonomy($taxonomy = '')
+  static public function verify_have_system_taxonomy($taxonomy = '', $args = array())
   {
+
+    $args = wp_parse_args($args, array(
+      'hierarchical' => true
+    ));
+
 
     if (taxonomy_exists($taxonomy)) {
       return $taxonomy;
     }
 
     register_taxonomy($taxonomy, array( 'property' ), array(
-      'hierarchical' => true,
+      'hierarchical' => $args['hierarchical'],
       // 'update_count_callback' => null,
       'labels' => array(),
       'show_ui' => false,

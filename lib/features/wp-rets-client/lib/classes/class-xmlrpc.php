@@ -467,11 +467,8 @@ namespace UsabilityDynamics\WPRETSC {
        * @param array $post_data
        */
       static public function insert_terms( $_post_id, $_post_data_tax_input, $post_data = array() ) {
-        global $wp_taxonomies;
 
         ud_get_wp_rets_client()->write_log( "Have [" . count( $_post_data_tax_input ) . "] taxonomies to process." );
-        //ud_get_wp_rets_client()->write_log( $wp_taxonomies );
-
 
         foreach( (array) $_post_data_tax_input as $tax_name => $tax_tags ) {
 
@@ -481,20 +478,8 @@ namespace UsabilityDynamics\WPRETSC {
             continue;
           }
 
-          if(!get_taxonomy($tax_name)){
-
-            // @note If "hierarchical" is true then we can not pass in terms using names but must inead use ID.
-            $_register_taxonomy = register_taxonomy($tax_name, array( 'property' ), array(
-              'hierarchical' => false
-            ));
-
-            if( is_wp_error( $_register_taxonomy ) ) {
-              ud_get_wp_rets_client()->write_log( 'Unable to register a new taxonomy ' . $tax_name );
-            } else {
-              // ud_get_wp_rets_client()->write_log( "Registered [$tax_name]." );
-            }
-
-          }
+          // Avoid hierarchical taxonomies since they do not allow simple-value passing.
+          WPP_F::verify_have_system_taxonomy( $tax_name, array( 'hierarchical' => false ) );
 
           // If WP-Property location flag is enabled, and we're doing the [wpp_listing_location] taxonomy, and the WPP_F::update_location_terms method is callable, process our wpp_listing_location terms.
           if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_LOCATION' ) && WPP_FEATURE_FLAG_WPP_LISTING_LOCATION && $tax_name === 'wpp_listing_location' && is_callable(array( 'WPP_F', 'update_location_terms' ) ) ) {
@@ -521,11 +506,23 @@ namespace UsabilityDynamics\WPRETSC {
           }
 
           if( is_taxonomy_hierarchical( $tax_name ) ) {
-            // ud_get_wp_rets_client()->write_log( "Handling hierarchical taxonomy [$tax_name]." );
+            ud_get_wp_rets_client()->write_log( "Handling hierarchical taxonomy [$tax_name]." );
 
             $_terms = array();
 
             foreach( $tax_tags as $_term_name ) {
+
+              if( is_object( $_term_name ) || is_array( $_term_name ) ) {
+
+                if( isset( $_term_name[ '_id'] ) ) {
+                  ud_get_wp_rets_client()->write_log( "Have hierarchical object term [$tax_name] with [" . $_term_name[ '_id'] . "] _id." );
+                  $_insert_result = WPP_F::insert_terms($_post_id, array($_term_name), array( '_taxonomy' => $tax_name ) );
+                  ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_insert_result['set_terms'] ) . "] terms for [$tax_name] taxonomy." );
+                }
+
+                continue;
+              }
+
               ud_get_wp_rets_client()->write_log( "Handling inserting term [$_term_name] for [$tax_name]." );
 
               $_term_parts = explode( ' > ', $_term_name );
@@ -545,7 +542,6 @@ namespace UsabilityDynamics\WPRETSC {
                 ud_get_wp_rets_client()->write_log( "Error inserting term [$tax_name]: " . $_term_parent->get_error_message() );
                 //continue;
               }
-
 
               if( !$_term_parent ) {
                 ud_get_wp_rets_client()->write_log( "Did not find parent term [$tax_name] - [$_term_parent_value]." );
@@ -602,38 +598,34 @@ namespace UsabilityDynamics\WPRETSC {
 
             }
 
-            $_inserted_terms = wp_set_post_terms( $_post_id, $_terms, $tax_name );
-
-            ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_inserted_terms ) . "] terms." );
+            if( isset( $_terms ) && !empty( $_terms ) ) {
+              $_inserted_terms = wp_set_post_terms( $_post_id, $_terms, $tax_name );
+              ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_inserted_terms ) . "] terms." );
+            }
 
           }
 
           if( !is_taxonomy_hierarchical( $tax_name ) ) {
-            // ud_get_wp_rets_client()->write_log( "Handling non-hierarchical taxonomy [$tax_name]." );
+            ud_get_wp_rets_client()->write_log( "Handling non-hierarchical taxonomy [$tax_name]." );
 
-            $_simple_tags = true;
             $_terms = array();
 
             // check each tag, make sure its NOT an an array.
             foreach( $tax_tags as $_term_name ) {
 
               // Item is an array, which means this entry includes term meta.
-              if( is_object( $_term_name ) || is_array( $_term_name ) ) {
-                ud_get_wp_rets_client()->write_log( "Have object term [$tax_name]." );
-                $_simple_tags = false;
+              if( is_object( $_term_name ) || is_array( $_term_name ) && isset( $_term_name[ '_id'] ) ) {
+                $_insert_result = WPP_F::insert_terms($_post_id, array($_term_name), array( '_taxonomy' => $tax_name ) );
+                ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_insert_result['set_terms'] ) . "] non-hierarchical terms for [$tax_name] taxonomy with [" . $_term_name[ '_id'] . "] _id." );
+              } else {
+                $_terms[] = $_term_name;
               }
 
-              //wp_set_object_terms( $post_id, $_tags, $tax_name, true );
-
             }
 
-            if( $_simple_tags === false ) {
-              ud_get_wp_rets_client()->write_log( "Handling non-hierarchical taxonomy [$tax_name] using complex meta tags." );
-            }
-
-            if( $_simple_tags ) {
-              $_inserted_terms = wp_set_post_terms( $_post_id, $tax_tags, $tax_name );
-              // ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_inserted_terms ) . "] terms into [$tax_name] taxonomy." );
+            if( isset( $_terms ) && !empty( $_terms ) ) {
+              $_inserted_terms = wp_set_post_terms( $_post_id, $_terms, $tax_name );
+              ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_inserted_terms ) . "] terms into [$tax_name] taxonomy." );
             }
 
           }
@@ -681,7 +673,7 @@ namespace UsabilityDynamics\WPRETSC {
         /**
          * Disable term counting
          */
-        wp_defer_term_counting( true );
+        // wp_defer_term_counting( true );
 
         ud_get_wp_rets_client()->write_log( "Checking post ID [$post_id]" );
 
