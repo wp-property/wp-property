@@ -325,20 +325,20 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
                       </li>
                     <?php endif; /* WPP_F::has_theme_specific_stylesheet() */ ?>
                   <?php endif; ?>
-                  <li>
+
+                  <li class="wpp-depreciated-option">
                     <?php echo WPP_F::checkbox("name=wpp_settings[configuration][enable_legacy_features]&label=" . __('Enable Legacy Features.', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['enable_legacy_features']) ? $wp_properties['configuration']['enable_legacy_features'] : false)); ?>
-                    <span
-                      class="description"><?php printf(__('If checked deprecated features will be enabled. E.g.: Child %1$s and Featured %1$s Widgets, etc', ud_get_wp_property()->domain), WPP_F::property_label('plural')) ?></span>
+                    <span class="description"><?php printf(__('If checked deprecated features will be enabled. E.g.: Child %1$s and Featured %1$s Widgets, etc', ud_get_wp_property()->domain), WPP_F::property_label('plural')) ?></span>
                   </li>
-                  <li>
+
+                  <li class="wpp-depreciated-option">
                     <?php echo WPP_F::checkbox("name=wpp_settings[configuration][allow_parent_deep_depth]&label=" . __('Enable \'Falls Under\' deep depth.', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['allow_parent_deep_depth']) ? $wp_properties['configuration']['allow_parent_deep_depth'] : false)); ?>
-                    <span
-                      class="description"><?php printf(__('Allows to set child %1s as parent.', ud_get_wp_property()->domain), WPP_F::property_label('singular')) ?></span>
+                    <span class="description"><?php printf(__('Allows to set child %1s as parent.', ud_get_wp_property()->domain), WPP_F::property_label('singular')) ?></span>
                   </li>
-                  <li>
+
+                  <li class="wpp-depreciated-option">
                     <?php echo WPP_F::checkbox("name=wpp_settings[configuration][disable_wordpress_postmeta_cache]&label=" . __('Disable WordPress update_post_caches() function.', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['disable_wordpress_postmeta_cache']) ? $wp_properties['configuration']['disable_wordpress_postmeta_cache'] : false)); ?>
-                    <span
-                      class="description"><?php printf(__('This may solve Out of Memory issues if you have a lot of %1s.', ud_get_wp_property()->domain), WPP_F::property_label('plural')); ?></span>
+                    <span class="description"><?php printf(__('This may solve Out of Memory issues if you have a lot of %1s.', ud_get_wp_property()->domain), WPP_F::property_label('plural')); ?></span>
                   </li>
                   <li>
                     <?php echo WPP_F::checkbox("name=wpp_settings[configuration][developer_mode]&label=" . __('Enable developer mode - some extra information displayed via Firebug console.', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['developer_mode']) ? $wp_properties['configuration']['developer_mode'] : false)); ?>
@@ -351,7 +351,6 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
                     <span class="description"><?php _e('Enabling this option may cause performance issues.', ud_get_wp_property()->domain); ?></span>
                   </li>
 
-
                   <?php if( defined( 'WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING' ) && WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING ) { ?>
                   <li>
                     <?php //show standard attribute matching
@@ -363,8 +362,8 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
                   <li>
                     <?php echo WPP_F::checkbox("name=wpp_settings[configuration][pre_release_update]&label=" . __('Enable pre-release updates.', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['pre_release_update']) ? $wp_properties['configuration']['pre_release_update'] : false)); ?>
                     <br/>
-
                   </li>
+
                 </ul>
               </div>
             </td>
@@ -378,7 +377,6 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
       <div id="tab_display">
 
         <table class="form-table">
-
           <tr>
             <th><?php _e('Image Sizes', ud_get_wp_property()->domain); ?></th>
             <td>

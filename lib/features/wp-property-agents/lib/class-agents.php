@@ -42,10 +42,14 @@ class class_agents
     if (empty($single_label)) {
       ud_get_wp_property()->set('configuration.feature_settings.agents.label.single', __('Agents', ud_get_wpp_agents()->domain));
     }
+
     $plural_label = ud_get_wp_property('configuration.feature_settings.agents.label.plural', false);
     if (empty($plural_label)) {
       ud_get_wp_property()->set('configuration.feature_settings.agents.label.plural', __('Agents', ud_get_wpp_agents()->domain));
     }
+
+    // New standard taxonomies. Ran late, to force after Terms_Bootstrap::define_taxonomies
+    add_filter('wpp_taxonomies', array('class_agents', 'wpp_taxonomies'), 15 );
 
     /* Add capability */
     add_filter('wpp_capabilities', array('class_agents', "add_capability"));
@@ -58,10 +62,12 @@ class class_agents
     //* Add role */
     add_role('agent', ud_get_wp_property('configuration.feature_settings.agents.label.single'), self::get_agent_capabilities());
     add_filter('wpp_role_description_agent', array('class_agents', "role_description"));
+
     //* Use Custom Agent's Role Name ( White Label ) */
     if (!isset($wp_roles)) {
       $wp_roles = new WP_Roles();
     }
+
     $wp_roles->roles['agent']['name'] = ud_get_wp_property('configuration.feature_settings.agents.label.single', 'Agent');
     $wp_roles->role_objects['agent']->name = ud_get_wp_property('configuration.feature_settings.agents.label.single', 'Agents'); // This will cover get_role() function;
     $wp_roles->role_names['agent'] = ud_get_wp_property('configuration.feature_settings.agents.label.single', 'Agents');
@@ -146,6 +152,83 @@ class class_agents
 
     // Checking if current user should have ability.
     add_filter('wp_crm_user_level_roles', array('class_agents', 'wp_crm_user_level_roles'), 10);
+  }
+
+  /**
+   * Add Agent/Office taxonomies.
+   *
+   * Since version 2.2.1 of WP-Property agents and offices will be stored as terms.
+   * If an agent requires login capability, a user will be created and then associated with the term.
+   * The agent/office terms container profile information while users account will contain authentication and permission information.
+   *
+   * @author potanin@UD
+   * @param array $taxonomies
+   * @return array
+   */
+  static public function wpp_taxonomies( $taxonomies = array() ) {
+
+    // Add [wpp_agency_agent] taxonomy.
+    $taxonomies['wpp_agency_agent'] = array(
+      'default' => true,
+      'readonly' => true,
+      'hidden' => true,
+      'hierarchical' => false,
+      'public' => true,
+      'show_in_nav_menus' => false,
+      'show_ui' => false,
+      'show_tagcloud' => false,
+      'add_native_mtbox' => false,
+      'label' => sprintf(_x('%s Agent', 'property agent taxonomy', ud_get_wpp_agents()->domain), WPP_F::property_label()),
+      'query_var' => 'agents',
+      'labels' => array(
+        'name' => sprintf(_x('%s Agent', 'property agent taxonomy', ud_get_wpp_agents()->domain), WPP_F::property_label()),
+        'singular_name' => sprintf(_x('%s Agent', 'property agent taxonomy', ud_get_wpp_agents()->domain), WPP_F::property_label()),
+        'search_items' => _x('Search Agent', 'property agent taxonomy', ud_get_wpp_agents()->domain),
+        'all_items' => _x('All Agents', 'property agent taxonomy', ud_get_wpp_agents()->domain),
+        'parent_item' => _x('Parent Agent', 'property agent taxonomy', ud_get_wpp_agents()->domain),
+        'parent_item_colon' => _x('Parent Agent', 'property agent taxonomy', ud_get_wpp_agents()->domain),
+        'edit_item' => _x('Edit Agent', 'property agent taxonomy', ud_get_wpp_agents()->domain),
+        'update_item' => _x('Update Agent', 'property agent taxonomy', ud_get_wpp_agents()->domain),
+        'add_new_item' => _x('Add New Agent', 'property agent taxonomy', ud_get_wpp_agents()->domain),
+        'new_item_name' => _x('New Agent', 'property agent taxonomy', ud_get_wpp_agents()->domain),
+        'not_found' => _x('No location found', 'property agent taxonomy', ud_get_wpp_agents()->domain),
+        'menu_name' => sprintf(_x('%s Agent', 'property agent taxonomy', ud_get_wpp_agents()->domain), WPP_F::property_label()),
+      ),
+      'rewrite' => array('slug' => 'agents')
+    );
+
+    // Add [wpp_agency_office] taxonomy.
+    $taxonomies['wpp_agency_office'] = array(
+      'default' => true,
+      'readonly' => true,
+      'hidden' => true,
+      'hierarchical' => false,
+      'public' => true,
+      'show_in_nav_menus' => false,
+      'show_ui' => false,
+      'show_tagcloud' => false,
+      'add_native_mtbox' => false,
+      'label' => sprintf(_x('%s Office', 'property office taxonomy', ud_get_wpp_agents()->domain), WPP_F::property_label()),
+      'query_var' => 'office',
+      'labels' => array(
+        'name' => __('Offices',  ud_get_wpp_agents()->domain ),
+        'singular_name' => __('Office',  ud_get_wpp_agents()->domain ),
+        'search_items' => _x('Search Office', 'property agent taxonomy', ud_get_wpp_agents()->domain),
+        'all_items' => _x('All Offices', 'property agent taxonomy', ud_get_wpp_agents()->domain),
+        'parent_item' => _x('Parent Office', 'property agent taxonomy', ud_get_wpp_agents()->domain),
+        'parent_item_colon' => _x('Parent Office', 'property agent taxonomy', ud_get_wpp_agents()->domain),
+        'edit_item' => _x('Edit Office', 'property agent taxonomy', ud_get_wpp_agents()->domain),
+        'update_item' => _x('Update Office', 'property agent taxonomy', ud_get_wpp_agents()->domain),
+        'add_new_item' => _x('Add New Office', 'property agent taxonomy', ud_get_wpp_agents()->domain),
+        'new_item_name' => _x('New Office', 'property agent taxonomy', ud_get_wpp_agents()->domain),
+        'not_found' => _x('No location found', 'property agent taxonomy', ud_get_wpp_agents()->domain),
+        'menu_name' => __('Office',  ud_get_wpp_agents()->domain)
+      ),
+      'rewrite' => array('slug' => 'offices')
+    );
+
+    return $taxonomies;
+
   }
 
   /**

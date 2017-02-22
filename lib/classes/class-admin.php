@@ -44,6 +44,53 @@ namespace UsabilityDynamics\WPP {
         // @todo Make directory names dynamic, since it may change.
         add_action("in_plugin_update_message-wp-property/wp-property.php", array($this, 'product_update_message'), 20, 2);
 
+        // wpp-disable-term-editing
+        add_filter( 'admin_body_class', array($this, 'admin_body_class'), 20, 2);
+
+        if( defined( 'WPP_FEATURE_FLAG_WPP_CATEGORICAL' ) && WPP_FEATURE_FLAG_WPP_CATEGORICAL ) {
+          add_action( 'wpp_categorical_edit_form_fields', array( $this, 'edit_form_fields' ), 20 );
+        }
+
+      }
+
+      /**
+       * Render Term Editor fields.
+       * 
+       */
+      public function edit_form_fields( ) {
+        include ud_get_wp_property()->path( "static/views/admin/edit-term-fields.php", 'dir' );
+      }
+
+      /**
+       * Manipulates admin body class for WPP UX.
+       *
+       * - Disable term-editing on WP-Property term pages.
+       *
+       * @author potanin@UD
+       * @return string
+       */
+      public function admin_body_class() {
+        global $current_screen, $wp_properties;
+
+        // Do nothing.
+        if( !isset( $current_screen->base ) || !isset( $current_screen->post_type ) || !isset( $current_screen->taxonomy ) || $current_screen->post_type !== 'property' ) {
+          return;
+        }
+
+        // When developer mode is enabeld, allow editing.
+        if( isset( $wp_properties['configuration'] ) && isset( $wp_properties['configuration']['developer_mode'] ) && $wp_properties['configuration']['developer_mode'] === 'true' ) {
+          return;
+        }
+
+        // Hide term editing UI.
+        if( $current_screen->base === 'edit-tags' && $current_screen->taxonomy === 'wpp_categorical' ) {
+          return 'wpp-disable-term-editing';
+        }
+
+        if( $current_screen->base === 'edit-tags' && $current_screen->taxonomy === 'wpp_listing_location' ) {
+          return 'wpp-disable-term-editing';
+        }
+
       }
 
       /**

@@ -42,7 +42,7 @@ namespace UsabilityDynamics\WPP {
           /** Add Settings on Developer Tab */
           add_filter( 'wpp::settings_developer::tabs', function( $tabs ){
             $tabs['terms'] = array(
-              'label' => __( 'Terms', ud_get_wpp_terms()->domain ),
+              'label' => __( 'Taxonomies', ud_get_wpp_terms()->domain ),
               'template' => ud_get_wpp_terms()->path( 'static/views/admin/settings-developer-terms.php', 'dir' ),
               'order' => 25
             );
@@ -58,8 +58,10 @@ namespace UsabilityDynamics\WPP {
           add_action( 'wpp::types::inherited_attributes', function( $property_slug ){
             include ud_get_wpp_terms()->path( 'static/views/admin/settings-inherited-terms.php', 'dir' );
           } );
+
           // Priority must be greater than 1 for save_settings to make tax post binding work.
           add_action( 'wpp::save_settings', array( $this, 'save_settings' ) );
+
           // Add terms settings to backup
           add_filter( 'wpp::backup::data', array( $this, 'backup_settings' ), 50, 2 );
 
@@ -80,6 +82,7 @@ namespace UsabilityDynamics\WPP {
 
         /** Add Meta Box to manage taxonomies on Edit Property page. */
         add_filter( 'wpp::meta_boxes', array( $this, 'add_meta_box' ), 99 );
+
         /** Handle inherited taxonomies on property saving. */
         add_action( 'save_property', array( $this, 'save_property' ), 11 );
 
@@ -87,6 +90,7 @@ namespace UsabilityDynamics\WPP {
         add_filter( 'get_queryable_keys', array( $this, 'get_queryable_keys' ) );
         add_filter( 'wpp::get_properties::custom_case', array( $this, 'custom_search_case' ), 99, 2 );
         add_filter( 'wpp::get_properties::custom_key', array( $this, 'custom_search_query' ), 99, 3 );
+
         /** Add Search fields on 'All Properties' page ( admin panel ) */
         add_filter( 'wpp::overview::filter::fields', array( $this, 'get_filter_fields' ) );
 
@@ -313,7 +317,6 @@ namespace UsabilityDynamics\WPP {
 
         $taxonomies = $this->get( 'config.taxonomies', array() );
 
-
         if( !empty($taxonomies) && is_array($taxonomies) ) {
           foreach( $taxonomies as $k => $v ) {
 
@@ -345,6 +348,7 @@ namespace UsabilityDynamics\WPP {
             ) );
           }
         }
+
         return $fields;
       }
 

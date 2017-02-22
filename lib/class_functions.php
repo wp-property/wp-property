@@ -209,12 +209,11 @@ class WPP_F extends UsabilityDynamics\Utility
       'hierarchical' => true
     ));
 
-
     if (taxonomy_exists($taxonomy)) {
       return $taxonomy;
     }
 
-    register_taxonomy($taxonomy, array( 'property' ), array(
+    register_taxonomy( substr( $taxonomy, 0, 32 ), array( 'property' ), array(
       'hierarchical' => $args['hierarchical'],
       // 'update_count_callback' => null,
       'labels' => array(),
@@ -483,15 +482,16 @@ class WPP_F extends UsabilityDynamics\Utility
         'hierarchical' => true,
         'public' => true,
         'show_in_nav_menus' => true,
+        'show_in_menu' => true,
         'show_ui' => false,
         'show_tagcloud' => false,
         'add_native_mtbox' => false,
-        'label' => sprintf(_x('%s Location', 'property location taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+        'label' => __('Location', ud_get_wp_property()->domain),
         'labels' => array(
-          'name' => sprintf(_x('%s Location', 'property location taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'singular_name' => sprintf(_x('%s Location', 'property location taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'name' => __('Locations', ud_get_wp_property()->domain),
+          'singular_name' => __('Location', ud_get_wp_property()->domain),
           'search_items' => _x('Search Location', 'property location taxonomy', ud_get_wp_property()->domain),
-          'all_items' => _x('All Location', 'property location taxonomy', ud_get_wp_property()->domain),
+          'all_items' => _x('All Locations', 'property location taxonomy', ud_get_wp_property()->domain),
           'parent_item' => _x('Parent Location', 'property location taxonomy', ud_get_wp_property()->domain),
           'parent_item_colon' => _x('Parent Location', 'property location taxonomy', ud_get_wp_property()->domain),
           'edit_item' => _x('Edit Location', 'property location taxonomy', ud_get_wp_property()->domain),
@@ -499,7 +499,7 @@ class WPP_F extends UsabilityDynamics\Utility
           'add_new_item' => _x('Add New Location', 'property location taxonomy', ud_get_wp_property()->domain),
           'new_item_name' => _x('New Location', 'property location taxonomy', ud_get_wp_property()->domain),
           'not_found' => _x('No location found', 'property location taxonomy', ud_get_wp_property()->domain),
-          'menu_name' => sprintf(_x('%s Location', 'property location taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'menu_name' => __('Locations', ud_get_wp_property()->domain),
         ),
         'query_var' => 'location',
         'rewrite' => array('slug' => 'location')
@@ -638,7 +638,7 @@ class WPP_F extends UsabilityDynamics\Utility
       );
     }
 
-    // Generic [wpp_category] taxonomy for multiple terms.
+    // Generic [wpp_categorical] taxonomy for multiple terms.
     if (defined('WPP_FEATURE_FLAG_WPP_CATEGORICAL') && WPP_FEATURE_FLAG_WPP_CATEGORICAL) {
       $taxonomies['wpp_categorical'] = array(
         'default' => true,
@@ -647,7 +647,7 @@ class WPP_F extends UsabilityDynamics\Utility
         'hierarchical' => true,
         'unique' => false,
         'public' => true,
-        'show_in_menu' => true,
+        'show_in_menu' => defined( 'WP_DEBUG' ) && WP_DEBUG ? true : false,
         'show_in_nav_menus' => true,
         'show_ui' => false,
         'show_tagcloud' => false,
@@ -691,6 +691,12 @@ class WPP_F extends UsabilityDynamics\Utility
 
     // New standard taxonomies. Ran late, to force after Terms_Bootstrap::define_taxonomies
     add_filter('wpp_taxonomies', array('WPP_F', 'wpp_standard_taxonomies'), 10 );
+
+    // Add custom columns to Taxonomy table.
+    add_filter( 'manage_edit-wpp_listing_location_columns', function( $data ) {
+      //$data['url'] = '';
+      return $data;
+    });
 
     // Setup taxonomies
     $wp_properties['taxonomies'] = apply_filters('wpp_taxonomies', array());

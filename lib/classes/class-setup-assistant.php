@@ -116,7 +116,26 @@ namespace UsabilityDynamics\WPP {
 
         $return[ '_settings' ] = $data[ 'wpp_settings' ];
 
+        self::flush_cache();
+
         wp_send_json( $return );
+
+      }
+
+      /**
+       * Also need to flush Memcached.
+       *
+       * deletes wpp_categorical_children
+       * deletes wpp_listing_location_children
+       */
+      static public function flush_cache( ) {
+
+        foreach( array( 'wpp_categorical', 'wpp_listing_location') as $taxonomy ) {
+          wp_cache_delete( 'all_ids', $taxonomy );
+          wp_cache_delete( 'get', $taxonomy );
+          delete_option( "{$taxonomy}_children" );
+          _get_term_hierarchy( $taxonomy );
+        }
 
       }
 

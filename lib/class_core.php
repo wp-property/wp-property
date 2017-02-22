@@ -122,11 +122,18 @@ class WPP_Core {
     // apply alias logic.
     foreach( (array) WPP_F::get_alias_map() as $_defined_field => $_target ) {
 
+      if( strpos( $_target, 'tax_input.' ) === 0 ) {
+        $_term_group_match = explode( '.', $_target );
+        $_alias_value = wp_get_object_terms( $property['ID'], $_term_group_match[1], array( 'fields' => 'names' ) );
+      }
+
       // try meta, defined taxonomy
-      $_alias_value  = isset( $property[ $_target ] ) ? $property[ $_target ] : null;
+      if( !isset( $_alias_value ) || !$_alias_value ) {
+        $_alias_value  = isset( $property[ $_target ] ) ? $property[ $_target ] : null;
+      }
 
       // Support for dynamic taxonomies.
-      if( !$_alias_value ) {
+      if( !isset( $_alias_value ) || !$_alias_value ) {
         WPP_F::verify_have_system_taxonomy( $_target );
         $_alias_value = wp_get_object_terms( $property['ID'], $_target, array( 'fields' => 'names' ) );
       }

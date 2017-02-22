@@ -17,29 +17,32 @@ namespace UsabilityDynamics\WPP {
        */
       public function __construct() {
 
+        // Standard attribute types.
         $_attribute_types = array(
           'input' => __( 'Short Text', ud_get_wp_property('domain') ),
           'textarea' => __( 'Textarea', ud_get_wp_property('domain') ),
-          'term' => __( 'Terms', ud_get_wp_property('domain') ),
           'checkbox' => __( 'Checkbox', ud_get_wp_property('domain') ),
           'datetime' => __( 'Date and Time', ud_get_wp_property('domain') ),
-          'attachment' => __( 'Attachment', ud_get_wp_property('domain') )
+          'currency' => __( 'Currency', ud_get_wp_property('domain') ),
+          'number' => __( 'Number', ud_get_wp_property('domain') )
         );
 
+        // New attribut type that uses [wpp_categorical] taxonomy.
+        if( defined( 'WPP_FEATURE_FLAG_WPP_CATEGORICAL' ) && WPP_FEATURE_FLAG_WPP_CATEGORICAL ) {
+          $_attribute_types[ 'categorical-term' ] = __( 'Common Terms', ud_get_wp_property( 'domain' ) );
+        }
+
+        // Legacy attribute types we no longer use.
         if( defined( 'WP_PROPERTY_LEGACY_ATTRIBUTE_INPUT_TYPES' ) && WP_PROPERTY_LEGACY_ATTRIBUTE_INPUT_TYPES ) {
 
           array_merge( $_attribute_types, array(
             'wysiwyg' => __( 'Text Editor', ud_get_wp_property('domain') ),
             'dropdown' => __( 'Dropdown Selection', ud_get_wp_property('domain') ),
             'select_advanced' => __( 'Advanced Dropdown', ud_get_wp_property('domain') ),
-            'checkbox' => __( 'Single Checkbox', ud_get_wp_property('domain') ),
             'multi_checkbox' => __( 'Multi-Checkbox', ud_get_wp_property('domain') ),
             'radio' => __( 'Radio', ud_get_wp_property('domain') ),
-            'number' => __( 'Number', ud_get_wp_property('domain') ),
-            'currency' => __( 'Currency', ud_get_wp_property('domain') ),
             'url' => __( 'URL', ud_get_wp_property('domain') ),
             'oembed' => __( 'Oembed', ud_get_wp_property('domain') ),
-            'datetime' => __( 'Date and time picker', ud_get_wp_property('domain') ),
             'date' => __( 'Date picker', ud_get_wp_property('domain') ),
             'time' => __( 'Time picker', ud_get_wp_property('domain') ),
             'color' => __( 'Color picker', ud_get_wp_property('domain') ),
@@ -110,7 +113,6 @@ namespace UsabilityDynamics\WPP {
           ),
         ));
 
-
         /**
          * Set supported type for default value.
          */
@@ -128,6 +130,7 @@ namespace UsabilityDynamics\WPP {
          * Set schema for multiple attributes types.
          */
         ud_get_wp_property()->set('attributes.multiple', array(
+          'categorical-term',
           'multi_checkbox',
           'image_advanced',
           'file_advanced',
@@ -146,7 +149,9 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * Prepare attribute's value to be displayed on front end.
-       *
+       * @param $value
+       * @param $attribute
+       * @return string
        */
       public function prepare_to_display( $value, $attribute ) {
         /**
@@ -154,9 +159,11 @@ namespace UsabilityDynamics\WPP {
          * if attribute is multiple.
          */
         $attribute = $this::get_attribute_data( $attribute );
+
         if( $attribute[ 'multiple' ] && is_array( $value ) ) {
           $value = implode( ', ', $value );
         }
+
         return $value;
       }
 
@@ -193,16 +200,21 @@ namespace UsabilityDynamics\WPP {
        * @todo Consider putting this into settings action, or somewhere, so it its only ran once, or adding caching
        * @version 1.17.3
        * @param bool $attribute
-       * @return
+       * @param array $args
+       * @return mixed
        */
-      static public function get_attribute_data( $attribute = false ) {
+      static public function get_attribute_data( $attribute = false, $args = array() ) {
         $wp_properties = ud_get_wp_property()->get();
 
         if( !$attribute ) {
           return;
         }
 
-        if( wp_cache_get( $attribute, 'wpp_attribute_data' ) ) {
+        $args = wp_parse_args($args, array(
+          'use_cache' => true
+        ));
+
+        if( $args[ 'use_cache' ] && wp_cache_get( $attribute, 'wpp_attribute_data' ) ) {
           return wp_cache_get( $attribute, 'wpp_attribute_data' );
         }
 
@@ -278,6 +290,26 @@ namespace UsabilityDynamics\WPP {
           $ui_class[ ]                 = $return[ 'data_input_type' ];
         }
 
+        if( defined( 'WPP_FEATURE_FLAG_WPP_CATEGORICAL' ) && WPP_FEATURE_FLAG_WPP_CATEGORICAL ) {
+
+          if( $return[ 'data_input_type' ] === 'categorical-term' ) {
+            $return[ 'storage_type' ] = 'taxonomy';
+            $return[ 'is_stat' ] = 'false';
+
+            $_term = get_term_by( 'slug', $attribute, 'wpp_categorical', 'ARRAY_A' );
+
+            $categories = get_terms( array(
+              'child_of' => $_term['term_id'],
+              'taxonomy' => 'wpp_categorical',
+              'fields' => 'names'
+            ));
+
+            // @hack. To get it to set properly a few lines below.
+            $wp_properties[ 'predefined_values' ][ $attribute ] =  implode( ', ', $categories );
+          }
+
+        }
+
         if( isset( $wp_properties[ 'configuration' ][ 'address_attribute' ] ) && $wp_properties[ 'configuration' ][ 'address_attribute' ] == $attribute ) {
           $return[ 'is_address_attribute' ] = 'true';
           $ui_class[ ]                      = 'address_attribute';
@@ -293,6 +325,16 @@ namespace UsabilityDynamics\WPP {
 
         if( isset( $wp_properties[ 'predefined_values' ][ $attribute ] ) ) {
           $return[ 'predefined_values' ] = $wp_properties[ 'predefined_values' ][ $attribute ];
+        }
+
+        // Get group and group_label
+        if( isset( $wp_properties[ 'property_stats_groups' ][ $attribute ] ) ) {
+          $return[ 'group' ] = $wp_properties[ 'property_stats_groups' ][ $attribute ];
+
+          if( isset( $return[ 'group' ] ) && $return[ 'group' ] ) {
+            $return[ 'group_label' ] = $wp_properties[ 'property_groups' ][ $return[ 'group' ] ]['name'];
+          }
+
         }
 
         if( isset( $wp_properties[ 'predefined_search_values' ][ $attribute ] ) ) {
@@ -376,6 +418,12 @@ namespace UsabilityDynamics\WPP {
         return $type;
       }
 
+      /**
+       * Check if attribute supports multiple values.
+       *
+       * @param $attribute
+       * @return bool
+       */
       public static function is_attribute_multi($attribute){
         $attribute_data = self::get_attribute_data($attribute);
         $multiple_attributes = ud_get_wp_property( 'attributes.multiple', array() );

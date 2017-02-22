@@ -230,7 +230,7 @@
       {
         "name": "Legacy Taxonomies",
         "constant": "WP_PROPERTY_FLAG_ENABLE_LEGACY_TAXONOMIES",
-        "description": "Enable legacy [property_features] and [community_features] taxonomies. These have been replaced by [wpp_category].",
+        "description": "Enable legacy [property_features] and [community_features] taxonomies. These have been replaced by [wpp_categorical].",
         "since": "2.2.1",
         "enabled": false
       },

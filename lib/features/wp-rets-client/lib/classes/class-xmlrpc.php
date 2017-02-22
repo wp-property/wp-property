@@ -940,7 +940,6 @@ namespace UsabilityDynamics\WPRETSC {
           wp_cache_delete( 'get', $taxonomy );
           delete_option( "{$taxonomy}_children" );
           _get_term_hierarchy( $taxonomy );
-
         }
 
         return self::send( array(

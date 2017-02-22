@@ -1,7 +1,8 @@
 //  Hide Term editor on WP-Property taxonomy pages.
-body.post-type-property {
+body.post-type-property.wpp-disable-term-editing {
 
   #col-container {
+
     #col-left {
       display: none;
     }
@@ -14,6 +15,9 @@ body.post-type-property {
 
 }
 
+.wpp-depreciated-option {
+  display:none;
+}
 // Hide weird label on messages.
 .wpp_settings_page .fs-notice label.fs-plugin-title {
   display:none;
