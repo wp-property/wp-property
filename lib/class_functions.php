@@ -52,44 +52,52 @@ class WPP_F extends UsabilityDynamics\Utility
       $term_data['term_id'] = intval( $wpdb->get_var($wpdb->prepare("SELECT term_id FROM $wpdb->termmeta as tm WHERE meta_key='%s' AND meta_value='%s';", array( '_id', $term_data['_id']))) );
     }
 
+    // Use _type for _taxonomy if not provided.
+    if( !isset( $term_data['_taxonomy'] ) && isset( $term_data['_type'] ) ) {
+      $term_data['_taxonomy'] = $term_data['_type'];
+    }
+
     // Parent set, try to find it.
     if( isset( $term_data[ '_parent' ] ) ) {
       $term_data['meta']['parent_term_id'] = intval( $wpdb->get_var($wpdb->prepare("SELECT term_id FROM $wpdb->termmeta as tm WHERE meta_key='%s' AND meta_value='%s';", array( '_id', $term_data['_parent']))) );
 
+      // Parent not found, we try findint it using [parent_name] instead of the [_parent], which is its UID.
       if( !$term_data['meta']['parent_term_id'] ) {
         $_exists = term_exists( $term_data['meta']['parent_name'], $term_data['_taxonomy'] );
 
+        // If parent found, we record the actual [term_id] of parent into our main term's meta.
         if( $_exists ) {
           $term_data['meta']['parent_term_id'] = $_exists['term_id'];
         }
 
       }
 
+      // Parent could not be found, we will attempt to create.
       if( !$term_data['meta']['parent_term_id'] ) {
 
+        // Insert new term, using the parent's name, from main terms' meta.
         $_parent_term = wp_insert_term( $term_data['meta']['parent_name'], $term_data['_taxonomy'], array(
-          //'name' => $term_data['meta']['parent_name'],
+          'slug' => $term_data['meta']['parent_slug'],
           'description' => "Parent term for [" . $term_data['name'] . "]."
         ));
 
+        // If parent still could not be created, then we have a serious error. Otherwise, updat the parent's meta.
         if( isset( $_parent_term ) && is_wp_error( $_parent_term ) ) {
           error_log( "Unable to insert term [" . $term_data['meta']['parent_name'] . "] for parent [" . $term_data['_taxonomy']. "]." );
           error_log( print_r($_parent_term,true));
         } else {
+
+          // record the unique _id, timestamp and a few meta fields from main term
           update_term_meta( $_parent_term['term_id'], '_id', $term_data[ '_parent' ] );
           update_term_meta( $_parent_term['term_id'], '_created', time() );
           update_term_meta( $_parent_term['term_id'], $term_data['meta']['parent_slug'] . '-_id', $term_data[ '_parent' ] );
           update_term_meta( $_parent_term['term_id'], $term_data['meta']['parent_slug'] . '-source', $term_data['meta']['source']);
+
           $term_data['meta']['parent_term_id'] = $_parent_term['term_id'];
         }
 
       }
 
-    }
-
-    // Use _type for _taxonomy if not provided.
-    if( !isset( $term_data['_taxonomy'] ) && isset( $term_data['_type'] ) ) {
-      $term_data['_taxonomy'] = $term_data['_type'];
     }
 
     // try to get by [name]
@@ -803,6 +811,7 @@ class WPP_F extends UsabilityDynamics\Utility
         'show_ui' => isset($data['show_ui']) ? $data['show_ui'] : true,
         'show_in_nav_menus' => isset($data['show_in_nav_menus']) ? $data['show_in_nav_menus'] : true,
         'show_tagcloud' => isset($data['show_tagcloud']) ? $data['show_tagcloud'] : true,
+        'update_count_callback' => '_update_post_term_count',
         'capabilities' => array(
           'manage_terms' => 'manage_wpp_categories',
           'edit_terms' => 'manage_wpp_categories',

@@ -277,6 +277,9 @@ namespace UsabilityDynamics\WPRETSC {
 
         ud_get_wp_rets_client()->write_log( 'Have request wpp.editProperty request', 'debug' );
 
+        // Defer term counting until method called again.
+        wp_defer_term_counting( true );
+
         if( isset( $post_data[ 'meta_input' ][ 'rets_id' ] ) ) {
           $post_data[ 'meta_input' ][ 'wpp::rets_pk' ] = $post_data[ 'meta_input' ][ 'rets_id' ];
         }
@@ -466,6 +469,9 @@ namespace UsabilityDynamics\WPRETSC {
           ud_get_wp_rets_client()->write_log( 'Error publishing post ' . $_post_id, 'error' );
           ud_get_wp_rets_client()->write_log( '<pre>' . print_r( $_update_post, true ) . '</pre>', 'error' );
         }
+
+        // Term counts can/may be updated now.
+        wp_defer_term_counting( false );
 
         return array(
           "ok" => true,
