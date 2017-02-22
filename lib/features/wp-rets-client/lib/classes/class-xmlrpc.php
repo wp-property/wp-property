@@ -61,6 +61,7 @@ namespace UsabilityDynamics\WPRETSC {
         $_methods[ 'wpp.editProperty' ] = array( $this, 'rpc_edit_property' );
         $_methods[ 'wpp.removeDuplicatedMLS' ] = array( $this, 'rpc_remove_duplicated_mls' );
         $_methods[ 'wpp.modifiedHistogram' ] = array( $this, 'rpc_get_modified_histogram' );
+        $_methods[ 'wpp.flushCache' ] = array( $this, 'rpc_flush_cache' );
 
         return $_methods;
       }
@@ -95,6 +96,11 @@ namespace UsabilityDynamics\WPRETSC {
         register_rest_route( 'wp-rets-client/v1', '/getHistogram', array(
           'methods' => 'GET',
           'callback' => array( $this, 'rpc_get_modified_histogram' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/flushCache', array(
+          'methods' => 'GET',
+          'callback' => array( $this, 'rpc_flush_cache' ),
         ) );
 
       }
@@ -910,6 +916,35 @@ namespace UsabilityDynamics\WPRETSC {
         ) );
 
         // die( 'Found [' . count( $query->posts ) . '] posts for [' . $data['schedule'] . '] schedule, using [' . DB_NAME . '] database in [' . timer_stop() . '] seconds.' );
+
+      }
+
+      /**
+       * Flush Cache.
+       *
+       * Mostly a placeholder for future.
+       *
+       * @author potanin@UD
+       * @param null $args
+       * @return null
+       */
+      public function rpc_flush_cache( $args = null ) {
+
+        $args = self::parseRequest( $args, array(
+          'taxonomies' => true
+        ) );
+
+        foreach( array( 'wpp_listing_category') as $taxonomy ) {
+          wp_cache_delete( 'all_ids', $taxonomy );
+          wp_cache_delete( 'get', $taxonomy );
+          delete_option( "{$taxonomy}_children" );
+          _get_term_hierarchy( $taxonomy );
+
+        }
+
+        return self::send( array(
+          "ok" => true
+        ) );
 
       }
 
