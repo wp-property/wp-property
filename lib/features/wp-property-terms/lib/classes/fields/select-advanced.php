@@ -14,7 +14,7 @@ if ( ! class_exists( 'RWMB_Wpp_Select_Advanced_Field' ) ){
      */
     static function admin_enqueue_scripts(){
       wp_enqueue_style( 'field-wpp-taxonomy-inherited', ud_get_wpp_terms()->path( 'static/styles/fields/wpp-select-advance.css' ), array('wp-admin'),  ud_get_wpp_terms('version'));
-      wp_enqueue_script( 'rwmb-taxonomy', ud_get_wpp_terms()->path( 'static/scripts/fields/wpp-select-advance.js' ), array( 'jquery', 'jquery-ui-autocomplete', 'underscore' ), ud_get_wpp_terms('version'), true );
+      wp_enqueue_script( 'wpp-select-advance', ud_get_wpp_terms()->path( 'static/scripts/fields/wpp-select-advance.js' ), array( 'jquery', 'jquery-ui-autocomplete', 'underscore' ), ud_get_wpp_terms('version'), true );
     }
 
     /**

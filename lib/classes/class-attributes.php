@@ -35,7 +35,7 @@ namespace UsabilityDynamics\WPP {
         // Legacy attribute types we no longer use.
         if( defined( 'WP_PROPERTY_LEGACY_ATTRIBUTE_INPUT_TYPES' ) && WP_PROPERTY_LEGACY_ATTRIBUTE_INPUT_TYPES ) {
 
-          array_merge( $_attribute_types, array(
+          $_attribute_types = array_merge( $_attribute_types, array(
             'wysiwyg' => __( 'Text Editor', ud_get_wp_property('domain') ),
             'dropdown' => __( 'Dropdown Selection', ud_get_wp_property('domain') ),
             'select_advanced' => __( 'Advanced Dropdown', ud_get_wp_property('domain') ),
