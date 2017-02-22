@@ -644,7 +644,7 @@ class WPP_F extends UsabilityDynamics\Utility
         'default' => true,
         'readonly' => true,
         'hidden' => true,
-        'hierarchical' => false,
+        'hierarchical' => true,
         'unique' => false,
         'public' => true,
         'show_in_nav_menus' => true,
