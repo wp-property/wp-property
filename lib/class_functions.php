@@ -90,6 +90,7 @@ class WPP_F extends UsabilityDynamics\Utility
           // record the unique _id, timestamp and a few meta fields from main term
           update_term_meta( $_parent_term['term_id'], '_id', $term_data[ '_parent' ] );
           update_term_meta( $_parent_term['term_id'], '_created', time() );
+          update_term_meta( $_parent_term['term_id'], '_type',  $term_data['meta']['parent_slug']  );
           update_term_meta( $_parent_term['term_id'], $term_data['meta']['parent_slug'] . '-_id', $term_data[ '_parent' ] );
           update_term_meta( $_parent_term['term_id'], $term_data['meta']['parent_slug'] . '-source', $term_data['meta']['source']);
 
@@ -150,6 +151,9 @@ class WPP_F extends UsabilityDynamics\Utility
 
     // set _id
     if( update_term_meta($term_data['term_id'], '_id', $term_data[ '_id' ] ) ) {}
+
+    // set _type, same as _prefix, I suppose.
+    if( update_term_meta($term_data['term_id'], '_type', $term_data['_type'] ) ) {}
 
     // This is most likely going to be removed.
     if( $result['_created'] ) {
