@@ -502,6 +502,11 @@ namespace UsabilityDynamics\WPP {
               if( empty( $v[ 'label' ] ) && count( $data[ 'wpp_terms' ] ) == 1 ) {
                 break;
               }
+
+              // Converting types to unique field
+              if(isset($data[ 'wpp_terms' ][ 'types' ][$taxonomy]) && $unique = $data[ 'wpp_terms' ][ 'types' ][$taxonomy]){
+                $v['unique'] = $unique == 'unique'? true: false;
+              }
               $taxonomies[ $taxonomy ] = $this->prepare_taxonomy( $v, $taxonomy );
             }
             $this->set( 'config.taxonomies', $taxonomies );
