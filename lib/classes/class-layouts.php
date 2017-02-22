@@ -16,8 +16,12 @@ namespace UsabilityDynamics\WPP {
       /**
        * Layouts constructor.
        */
-      public function __construct()
-      {
+      public function __construct()  {
+
+        /**
+         *
+         * @todo Construct runs on every page load, it seems. Breaks term landing pages. Does not chedck for property type and term pages and overrides $wp_query->posts to first only. - potanin@UD
+         */
         parent::__construct();
 
         add_filter('template_include', array($this, 'page_template'), 99);

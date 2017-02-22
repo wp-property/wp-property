@@ -6,6 +6,8 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use WPP_Core;
+  use WPP_F;
   use UsabilityDynamics\SAAS_UTIL\Register;
 
   if (!class_exists('UsabilityDynamics\WPP\Bootstrap')) {
@@ -26,6 +28,8 @@ namespace UsabilityDynamics\WPP {
       protected static $instance = null;
 
       public $layouts_settings = null;
+
+      public $layouts = null;
 
       private $register;
 
@@ -194,13 +198,13 @@ namespace UsabilityDynamics\WPP {
         /**
          * Initiate the plugin
          */
-        $this->core = new \WPP_Core();
+        $this->core = new WPP_Core();
 
         /**
          * Flush WP-Property cache
          */
         if (get_transient('wpp_cache_flush')) {
-          \WPP_F::clear_cache();
+          WPP_F::clear_cache();
           delete_transient('wpp_cache_flush');
         }
 
@@ -208,13 +212,17 @@ namespace UsabilityDynamics\WPP {
         add_filter('site_transient_update_plugins', array('UsabilityDynamics\WPP\Bootstrap', 'update_check_handler'), 10, 2);
         add_filter('upgrader_process_complete', array('UsabilityDynamics\WPP\Bootstrap', 'upgrader_process_complete'), 10, 2);
 
-        // New layout feature.
-        if (!empty($wp_properties['configuration']['enable_layouts']) && $wp_properties['configuration']['enable_layouts'] == 'false') {
-          $this->layouts_settings = new Layouts_Settings();
-          new Layouts();
+        // New layout feature. Feature flag must be enabled.
+        if( defined( 'WP_PROPERTY_LAYOUTS' ) && WP_PROPERTY_LAYOUTS === true ) {
 
-          //** WP Property Customizer */
-          new WP_Property_Customizer();
+          if( !empty( $wp_properties[ 'configuration' ][ 'enable_layouts' ] ) && $wp_properties[ 'configuration' ][ 'enable_layouts' ] == 'false' ) {
+            $this->layouts_settings = new Layouts_Settings();
+            $this->layouts = new Layouts();
+
+            //** WP Property Customizer */
+            new WP_Property_Customizer();
+          }
+
         }
 
       }
