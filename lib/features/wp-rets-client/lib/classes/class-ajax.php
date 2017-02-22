@@ -33,7 +33,6 @@ namespace UsabilityDynamics\WPRETSC {
           'body' => json_encode(array(
             'ud_site_id' => $payload['ud_site_id'],
             'ud_site_secret_token' => $payload['ud_site_secret_token'],
-            'retsci_site_secret_token' => $payload['retsci_site_secret_token'],
             'user_email' => wp_get_current_user()->user_email,
             'rets_credentials' => array(
               'url' => $payload['credentials']['url'],
@@ -50,13 +49,13 @@ namespace UsabilityDynamics\WPRETSC {
 
         if ( !empty( $response_body->ok ) && $response_body->ok == true ) {
 
-          if ( !empty( $response_body->retsci_site_id ) )
-            update_site_option( 'retsci_site_id', $response_body->retsci_site_id );
+          if ( !empty( $response_body->ud_site_id ) )
+            update_site_option( 'ud_site_id', $response_body->ud_site_id );
 
-          if ( !empty( $response_body->retsci_site_public_key ) )
-            update_site_option( 'retsci_site_public_key', $response_body->retsci_site_public_key );
+          if ( !empty( $response_body->ud_site_public_key ) )
+            update_site_option( 'ud_site_public_key', $response_body->ud_site_public_key );
 
-            update_site_option( 'retsci_site_secret_token', $payload['retsci_site_secret_token'] );
+            update_site_option( 'ud_site_secret_token', $payload['ud_site_secret_token'] );
 
         }
 
@@ -88,8 +87,8 @@ namespace UsabilityDynamics\WPRETSC {
             'content-type' => 'application/json'
           ),
           'body' => json_encode(array(
-            'retsci_site_id' => $payload['retsci_site_id'],
-            'retsci_site_secret_token' => $payload['retsci_site_secret_token'],
+            'ud_site_id' => $payload['ud_site_id'],
+            'ud_site_secret_token' => $payload['ud_site_secret_token'],
             'user_data' => json_encode($payload['user_data']),
             'rets_credentials' => array(
               'url' => $payload['credentials']['url'],

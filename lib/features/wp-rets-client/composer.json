@@ -7,6 +7,12 @@
     "name": "UsabilityDynamics, Inc.",
     "url": "https://usabilitydynamics.com"
   },
+  "require": {
+      "php": ">=5.3",
+      "usabilitydynamics/lib-utility": "0.3.7",
+      "usabilitydynamics/lib-wp-bootstrap": "1.2.1",
+      "usabilitydynamics/lib-wp-saas-util": "1.0.3"
+    },
   "repositories": [
     {
       "type": "composer",
@@ -23,7 +29,6 @@
   },
   "archive": {
     "exclude": [
-      "vendor",
       "node_modules",
       ".gitignore",
       "test",

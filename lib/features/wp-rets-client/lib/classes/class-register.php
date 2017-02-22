@@ -25,7 +25,7 @@ namespace UsabilityDynamics\WPRETSC {
      * Runs on admin_init, level 200, after WPP registration.
      *
      * 
-     * wp option delete retsci_site_id; wp option delete retsci_site_public_key; wp option delete retsci_site_id; wp transient delete retsci_state;
+     * wp option delete ud_site_id; wp option delete ud_site_public_key; wp option delete ud_site_id; wp transient delete retsci_state;
      * 
      * @author potanin@UD
      */
@@ -37,7 +37,7 @@ namespace UsabilityDynamics\WPRETSC {
       }
 
       // Tokens already set, do not attempt registration unless it cleared.
-      if( get_site_option('retsci_site_id') && get_site_option( 'retsci_site_public_key' ) && get_site_option( 'retsci_site_secret_token' ) ) {
+      if( get_site_option('ud_site_id') && get_site_option( 'ud_site_public_key' ) && get_site_option( 'ud_site_secret_token' ) ) {
         return;
       }
 
@@ -52,9 +52,9 @@ namespace UsabilityDynamics\WPRETSC {
 
       // If UD keys registered, used them.
       if( get_site_option( 'ud_site_id' ) && get_site_option( 'ud_site_public_key' ) && get_site_option( 'ud_site_secret_token' ) ) {
-        update_site_option( 'retsci_site_id', get_site_option( 'ud_site_id' ) );
-        update_site_option( 'retsci_site_public_key', get_site_option( 'ud_site_public_key' ) );
-        update_site_option( 'retsci_site_secret_token', get_site_option( 'ud_site_secret_token' ) );
+        update_site_option( 'ud_site_id', get_site_option( 'ud_site_id' ) );
+        update_site_option( 'ud_site_public_key', get_site_option( 'ud_site_public_key' ) );
+        update_site_option( 'ud_site_secret_token', get_site_option( 'ud_site_secret_token' ) );
         return;
       }
 
@@ -62,10 +62,10 @@ namespace UsabilityDynamics\WPRETSC {
       $multisite = false;
 
       // Generate new secret token, unless already exists.
-      $retsci_site_secret_token = get_site_option( 'retsci_site_secret_token' );
+      $ud_site_secret_token = get_site_option( 'ud_site_secret_token' );
 
-      if( !$retsci_site_secret_token ) {
-        add_site_option('retsci_site_secret_token', $retsci_site_secret_token = md5(wp_generate_password(20)));
+      if( !$ud_site_secret_token ) {
+        add_site_option('ud_site_secret_token', $ud_site_secret_token = md5(wp_generate_password(20)));
       }
 
       if (is_multisite()) {
@@ -76,7 +76,7 @@ namespace UsabilityDynamics\WPRETSC {
       }
 
       // This will most likely not exist.
-      $retsci_site_id = get_site_option('retsci_site_id');
+      $ud_site_id = get_site_option('ud_site_id');
 
       if( defined( 'UD_RETS_API_URL' ) ) {
         $url = UD_RETS_API_URL;
@@ -96,9 +96,9 @@ namespace UsabilityDynamics\WPRETSC {
         'headers' => array(),
         'body' => array(
           'host' => $output,
-          'retsci_site_secret_token' => $retsci_site_secret_token,
-          'retsci_secret_token' => $retsci_site_secret_token,
-          'retsci_site_id' => ($retsci_site_id ? $retsci_site_id : ''),
+          'ud_site_secret_token' => $ud_site_secret_token,
+          'retsci_secret_token' => $ud_site_secret_token,
+          'ud_site_id' => ($ud_site_id ? $ud_site_id : ''),
           'home_url' => $site_url,
           'xmlrpc_url' => site_url('/xmlrpc.php'),
           'user_id' => get_current_user_id(),
@@ -113,12 +113,12 @@ namespace UsabilityDynamics\WPRETSC {
 
         $api_body = json_decode(wp_remote_retrieve_body($response));
 
-        if (isset($api_body) && $api_body->retsci_site_secret_token === $retsci_site_secret_token) {
-          if (isset($api_body->retsci_site_id)) {
-            add_site_option('retsci_site_id', $api_body->retsci_site_id);
+        if (isset($api_body) && $api_body->ud_site_secret_token === $ud_site_secret_token) {
+          if (isset($api_body->ud_site_id)) {
+            add_site_option('ud_site_id', $api_body->ud_site_id);
           }
-          if (isset($api_body->retsci_site_public_key)) {
-            add_site_option('retsci_site_public_key', $api_body->retsci_site_public_key);
+          if (isset($api_body->ud_site_public_key)) {
+            add_site_option('ud_site_public_key', $api_body->ud_site_public_key);
           }
         }
       }

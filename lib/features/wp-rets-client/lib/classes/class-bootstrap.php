@@ -6,6 +6,8 @@
  */
 namespace UsabilityDynamics\WPRETSC {
 
+  use UsabilityDynamics\SAAS_UTIL\Register;
+
   if( !class_exists( 'UsabilityDynamics\WPRETSC\Bootstrap' ) ) {
 
     final class Bootstrap extends \UsabilityDynamics\WP\Bootstrap_Plugin {
@@ -31,6 +33,11 @@ namespace UsabilityDynamics\WPRETSC {
       public $debug_file = 'wp-content/rets-debug.log';
 
       /**
+       * @var
+       */
+      private $register;
+
+      /**
        * Instantaite class.
        */
       public function init() {
@@ -41,8 +48,8 @@ namespace UsabilityDynamics\WPRETSC {
         // Initialize Media handler
         new Media();
 
-        // Initialize Register handler
-        new Register();
+        // Register site with SaaS Services.
+        $this->register = class_exists( 'UsabilityDynamics\SAAS_UTIL\Register' ) ? new Register( 'property' ) : null;
 
         // 3d-party compatibility
         new Connectors\Loader();
