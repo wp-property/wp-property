@@ -8,7 +8,91 @@ global $wp_properties;
 $attributes_default = ud_get_wp_property()->get('attributes.default');
 $attributes_multiple = ud_get_wp_property()->get('attributes.multiple');
 $predefined_values = isset( $wp_properties[ 'predefined_values' ] ) ? $wp_properties[ 'predefined_values' ]: ''; 
+
+$attributes = ud_get_wp_property()->get('property_stats');
+
 ?>
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+  wp_properties = wpp.instance.settings;
+
+
+  var wppAttribute = Backbone.Model.extend({
+  });
+  var wppAttributeView = Backbone.View.extend({
+    tagName: 'tr',
+    className: 'wpp_dynamic_table_row',
+    template: _.template($('#attributesView').html()),
+    render: function() {
+      this.el.innerHTML = this.template(this.model.toJSON());
+      return this;
+    }
+  });
+
+  var wppAttributes = Backbone.Collection.extend({
+    model: wppAttribute,
+  });
+
+  var WPPAttributesView = Backbone.View.extend({
+    el: '#wpp_inquiry_attribute_fields tbody',
+    children: {},
+    render: function() {
+      this.collection.each(this.addAttribute.bind(this));
+      return this;
+    },
+    addAttribute: function (model) {
+      this.children[model.cid] = new wppAttributeView({ model: model });
+      this.el.append(this.children[model.cid].render().el);
+    },
+
+  });
+
+   _wppAttributes = new wppAttributes();
+
+  jQuery.each(wp_properties.property_stats, function(key, value) {
+    var row = new wppAttribute({label: value, slug: key});
+    _wppAttributes.add(row);
+  })
+
+  wppAttributesView = new WPPAttributesView({ collection: _wppAttributes });
+  $("#wpp_inquiry_attribute_fields tbody").empty().append(wppAttributesView.render().el);
+
+
+});
+
+</script>
+
+<script type="text/template" id="attributesView">
+
+    <tr class="wpp_dynamic_table_row" <?php //echo( !empty( $gslug ) ? "wpp_attribute_group=\"" . $gslug . "\"" : "" ); ?>  slug="<?php //echo $slug; ?>" new_row='false'>
+
+      <td class="wpp_draggable_handle">&nbsp;</td>
+
+      <td class="wpp_attribute_name_col">
+        <ul class="wpp_attribute_name">
+          <li>
+            <input class="slug_setter" type="text" name="wpp_settings[property_stats][<%= slug %>]" value="<%= label %>"/>
+          </li>
+          <li class="">
+
+            <label class="wpp-mmeta-slug-entry">
+              <input type="text" class="slug wpp_stats_slug_field" readonly='readonly' value="<%= slug %>"/>
+            </label>
+            <label class="wpp-meta-alias-entry">
+              <input type="text" class="slug wpp_field_alias" name="wpp_settings[field_alias][<%= slug %>]" placeholder="Alias for <%= slug %>" value="<?php echo WPP_F::get_alias_map( $slug ) ; ?>" />
+            </label>
+          </li>
+          <?php do_action( 'wpp::property_attributes::attribute_name', $slug ); ?>
+          <li>
+            <span class="wpp_show_advanced"><?php _e( 'Toggle Advanced Settings', ud_get_wp_property()->domain ); ?></span>
+          </li>
+        </ul>
+      </td>
+
+    </tr>
+  
+</script>
 <div>
   <h3 style="float:left;"><?php printf( __( '%1s Attributes', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></h3>
   <div class="wpp_property_stat_functions">
