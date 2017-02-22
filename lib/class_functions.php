@@ -52,6 +52,41 @@ class WPP_F extends UsabilityDynamics\Utility
       $term_data['term_id'] = intval( $wpdb->get_var($wpdb->prepare("SELECT term_id FROM $wpdb->termmeta as tm WHERE meta_key='%s' AND meta_value='%s';", array( '_id', $term_data['_id']))) );
     }
 
+    // Parent set, try to find it.
+    if( isset( $term_data[ '_parent' ] ) ) {
+      $term_data['meta']['parent_term_id'] = intval( $wpdb->get_var($wpdb->prepare("SELECT term_id FROM $wpdb->termmeta as tm WHERE meta_key='%s' AND meta_value='%s';", array( '_id', $term_data['_parent']))) );
+
+      if( !$term_data['meta']['parent_term_id'] ) {
+        $_exists = term_exists( $term_data['meta']['parent_name'], $term_data['_taxonomy'] );
+
+        if( $_exists ) {
+          $term_data['meta']['parent_term_id'] = $_exists['term_id'];
+        }
+
+      }
+
+      if( !$term_data['meta']['parent_term_id'] ) {
+
+        $_parent_term = wp_insert_term( $term_data['meta']['parent_name'], $term_data['_taxonomy'], array(
+          //'name' => $term_data['meta']['parent_name'],
+          'description' => "Parent term for [" . $term_data['name'] . "]."
+        ));
+
+        if( isset( $_parent_term ) && is_wp_error( $_parent_term ) ) {
+          error_log( "Unable to insert term [" . $term_data['meta']['parent_name'] . "] for parent [" . $term_data['_taxonomy']. "]." );
+          error_log( print_r($_parent_term,true));
+        } else {
+          update_term_meta( $_parent_term['term_id'], '_id', $term_data[ '_parent' ] );
+          update_term_meta( $_parent_term['term_id'], '_created', time() );
+          update_term_meta( $_parent_term['term_id'], $term_data['meta']['parent_slug'] . '-_id', $term_data[ '_parent' ] );
+          update_term_meta( $_parent_term['term_id'], $term_data['meta']['parent_slug'] . '-source', $term_data['meta']['source']);
+          $term_data['meta']['parent_term_id'] = $_parent_term['term_id'];
+        }
+
+      }
+
+    }
+
     // Use _type for _taxonomy if not provided.
     if( !isset( $term_data['_taxonomy'] ) && isset( $term_data['_type'] ) ) {
       $term_data['_taxonomy'] = $term_data['_type'];
@@ -66,11 +101,16 @@ class WPP_F extends UsabilityDynamics\Utility
       }
     }
 
-
     // Term not found, new term
     if( !$term_data['term_id'] ) {
 
-      $_term_created = wp_insert_term( $term_data['name'], $term_data['_taxonomy'], array(  'description' => isset( $term_data['description'] ) ? $term_data['description'] : null  ));
+      $_term_args = array( 'description' => isset( $term_data['description'] ) ? $term_data['description'] : null );
+
+      if( isset( $term_data['meta']['parent_term_id'] ) ) {
+        $_term_args['parent']  = $term_data['meta']['parent_term_id'];
+      }
+
+      $_term_created = wp_insert_term( $term_data['name'], $term_data['_taxonomy'], $_term_args);
 
       if( isset( $_term_created ) && is_wp_error( $_term_created ) ) {
         error_log( "Unable to insert term [" . $term_data['_taxonomy']. "]." );
@@ -117,7 +157,7 @@ class WPP_F extends UsabilityDynamics\Utility
       $result['meta'][ ( $term_data['_type'] . '-' . $_meta_key ) ] = $meta_value;
     }
 
-    return array_filter( $result );
+    //return array_filter( $result );
 
     // Update other fields.
     wp_update_term( $term_data['term_id'], $term_data['_taxonomy'], array_filter(array(
@@ -691,12 +731,6 @@ class WPP_F extends UsabilityDynamics\Utility
 
     // New standard taxonomies. Ran late, to force after Terms_Bootstrap::define_taxonomies
     add_filter('wpp_taxonomies', array('WPP_F', 'wpp_standard_taxonomies'), 10 );
-
-    // Add custom columns to Taxonomy table.
-    add_filter( 'manage_edit-wpp_listing_location_columns', function( $data ) {
-      //$data['url'] = '';
-      return $data;
-    });
 
     // Setup taxonomies
     $wp_properties['taxonomies'] = apply_filters('wpp_taxonomies', array());

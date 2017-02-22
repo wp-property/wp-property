@@ -77,15 +77,18 @@ namespace UsabilityDynamics\WPP {
           'per_page' => 1
         ));
 
-        $post_id = $properties[0]->ID;
+        if( $properties && is_array( $properties ) && !empty( $properties ) ) {
+          $post_id = $properties[0]->ID;
 
-        $post_url = get_permalink($post_id);
+          $post_url = get_permalink($post_id);
 
-        // store first property url
-        $data['settings']['configuration']['base_property_single_url'] = $post_url;
+          // store first property url
+          $data['settings']['configuration']['base_property_single_url'] = $post_url;
 
-        // get home url. This could/should be improved.
-        $data['settings']['configuration']['base_property_url'] = home_url($wp_properties['configuration']['base_slug']);
+          // get home url. This could/should be improved.
+          $data['settings']['configuration']['base_property_url'] = home_url($wp_properties['configuration']['base_slug']);
+
+        }
 
         return $data;
 

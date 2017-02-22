@@ -292,7 +292,7 @@ namespace UsabilityDynamics\WPP {
 
         if( defined( 'WPP_FEATURE_FLAG_WPP_CATEGORICAL' ) && WPP_FEATURE_FLAG_WPP_CATEGORICAL ) {
 
-          if( $return[ 'data_input_type' ] === 'categorical-term' ) {
+          if( isset( $return[ 'data_input_type' ] ) && $return[ 'data_input_type' ] === 'categorical-term' ) {
             $return[ 'storage_type' ] = 'taxonomy';
             $return[ 'is_stat' ] = 'false';
 

@@ -1511,7 +1511,9 @@ class WPP_Core {
   function term_created_wpp_listing_type($term_id, $tt_id){
     global $wp_properties;
     $term = get_term($term_id, 'wpp_listing_type');
+
     if(!in_array($term->slug, $wp_properties['property_types']) || $wp_properties['property_types'][$term->slug] != $term->name){
+
       $wp_properties['property_types'][$term->slug] = $term->name;
       $wp_properties['property_types_term_id'][$term->slug] = $term->term_id;
 

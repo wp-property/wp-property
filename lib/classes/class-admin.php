@@ -47,17 +47,100 @@ namespace UsabilityDynamics\WPP {
         // wpp-disable-term-editing
         add_filter( 'admin_body_class', array($this, 'admin_body_class'), 20, 2);
 
+        // If wpp_categorical used, add term page UI.
         if( defined( 'WPP_FEATURE_FLAG_WPP_CATEGORICAL' ) && WPP_FEATURE_FLAG_WPP_CATEGORICAL ) {
-          add_action( 'wpp_categorical_edit_form_fields', array( $this, 'edit_form_fields' ), 20 );
+          add_action( 'wpp_categorical_edit_form_fields', array( $this, 'edit_form_fields' ), 20, 2 );
+          add_action( 'manage_wpp_categorical_custom_column', array( $this, 'wpp_categorical_custom_column' ), 20, 3 );
+          add_filter( 'manage_edit-wpp_categorical_columns', array( $this, 'wpp_categorical_columns' ), 20 );
+        }
+
+        // Add custom columns to Taxonomy table.
+        if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_LOCATION' ) && WPP_FEATURE_FLAG_WPP_LISTING_LOCATION ) {
+          add_filter( 'manage_wpp_categorical_custom_columns', array( $this, 'wpp_listing_location_custom_columns' ), 20  );
+          //add_filter( 'manage_edit-wpp_listing_location_columns', array( $this, 'wpp_listing_location_columns' ), 20, 3 );
         }
 
       }
 
       /**
-       * Render Term Editor fields.
-       * 
+       * Categorical Term Data
+       *
+       * @author potanin@UD
+       *
+       * @param $nothing
+       * @param $column_name
+       * @param $term_id
        */
-      public function edit_form_fields( ) {
+      public function wpp_categorical_custom_column( $nothing, $column_name, $term_id ) {
+
+        if( $column_name === 'source' ) {
+          $source = get_term_meta( $term_id, 'source', true );
+          echo $source ? $source : '-';
+        }
+
+        if( $column_name === '_id' ) {
+          $type = get_term_meta( $term_id, '_id', true );
+          echo $type ? $type : '-';
+        }
+
+      }
+
+      /**
+       * Display values for custom meta fields.
+       *
+       * @param $nothing
+       * @param $column_name
+       * @param $term_id
+       */
+      public function wpp_listing_location_columns( $nothing, $column_name, $term_id ) {
+
+        if( $column_name === 'source' ) {
+          $source = get_term_meta( $term_id, 'source', true );
+          echo $source ? $source : '-';
+        }
+
+        if( $column_name === '_id' ) {
+          $type = get_term_meta( $term_id, '_id', true );
+          echo $type ? $type : '-';
+        }
+
+      }
+
+      /**
+       * Term Overview Columns
+       *
+       * @author potanin@UD
+       *
+       * @param $columns
+       * @return mixed
+       */
+      public function wpp_categorical_columns( $columns ) {
+        $columns['source'] = 'Source';
+        //$columns['_id'] = 'ID';
+        return $columns;
+      }
+
+      /**
+       * Term Overview Columns
+       *
+       * @author potanin@UD
+       *
+       * @param $columns
+       * @return mixed
+       */
+      public function wpp_listing_location_custom_columns( $columns ) {
+        $columns['source'] = 'Source';
+        //$columns['_id'] = 'ID';
+        return $columns;
+      }
+
+      /**
+       * Render Term Editor fields.
+       *
+       * @author potanin@UD
+       * @param $tag
+       */
+      public function edit_form_fields( $tag ) {
         include ud_get_wp_property()->path( "static/views/admin/edit-term-fields.php", 'dir' );
       }
 

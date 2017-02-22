@@ -15,25 +15,35 @@ $_attribute_data = Attributes::get_attribute_data( $tag->slug, array( 'use_cache
   </th>
   <td>
 
-    <table>
+    <table class="form-table">
 
+      <?php if( isset( $_attribute_data['group' ] ) && $_attribute_data['group' ] ) {?>
       <tr>
-        <th>Attribute Group</th>
-        <td><input type="text" readonly="readonly" value="<?php echo $_attribute_data['group_label']; ?>" /></td>
+        <th><?php _e('Attribute Group'); ?></th>
+        <td><input type="text" class="regular-text code" readonly="readonly" value="<?php echo isset( $_attribute_data ) ? $_attribute_data['group_label'] : ''; ?>" /></td>
       </tr>
+      <?php } ?>
 
+      <?php if( get_term_meta( $tag->term_id, '_id', true ) ) { ?>
       <tr>
-        <th>Internal ID</th>
-        <td><input type="text" readonly="readonly" value="<?php echo get_term_meta( $tag->term_id, '_id', true ); ?>" /></td>
+        <th><?php _e('Unique ID'); ?></th>
+        <td><input type="text" class="regular-text code" readonly="readonly" value="<?php echo get_term_meta( $tag->term_id, '_id', true ); ?>" /></td>
       </tr>
+      <?php } ?>
+
+      <?php if( get_term_meta( $tag->term_id, '_created', true ) ) { ?>
       <tr>
-        <th>Created</th>
-        <td><input type="text" readonly="readonly" value="<?php echo get_term_meta( $tag->term_id, '_created', true ); ?>" /></td>
+        <th><?php _e('Term Created'); ?></th>
+        <td><input type="text" class="regular-text code" readonly="readonly" value="<?php echo get_term_meta( $tag->term_id, '_created', true ); ?>" /></td>
       </tr>
+      <?php } ?>
+
+      <?php if( get_term_meta( $tag->term_id, '_updated', true ) ) { ?>
       <tr>
-        <th>Updated</th>
-        <td><input type="text" readonly="readonly" value="<?php echo get_term_meta( $tag->term_id, '_updated', true ); ?>" /></td>
+        <th><?php _e('Term Updated'); ?></th>
+        <td><input type="text" class="regular-text code" readonly="readonly" value="<?php echo get_term_meta( $tag->term_id, '_updated', true ); ?>" /></td>
       </tr>
+      <?php } ?>
 
     </table>
 
