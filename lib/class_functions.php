@@ -845,6 +845,7 @@ class WPP_F extends UsabilityDynamics\Utility
         'show_in_nav_menus' => isset($data['show_in_nav_menus']) ? $data['show_in_nav_menus'] : true,
         'show_tagcloud' => isset($data['show_tagcloud']) ? $data['show_tagcloud'] : true,
         'update_count_callback' => '_update_post_term_count',
+        'wpp_term_meta_fields' => isset( $data['wpp_term_meta_fields' ] ) ? $data['wpp_term_meta_fields'] : null,
         'capabilities' => array(
           'manage_terms' => 'manage_wpp_categories',
           'edit_terms' => 'manage_wpp_categories',

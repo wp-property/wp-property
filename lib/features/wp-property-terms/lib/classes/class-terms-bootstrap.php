@@ -230,9 +230,18 @@ namespace UsabilityDynamics\WPP {
 
         foreach( $taxonomies as $_taxonomy => $_taxonomy_data ) {
 
+
           // Make sure we dont override any [readonly] taxonomies.
           if( isset( $_taxonomy_data[ 'readonly' ] ) && $_taxonomy_data[ 'readonly' ]) {
+
+            $_original_taxonomy = $_taxonomies[ $_taxonomy ];
             $_taxonomies[ $_taxonomy ] = $_taxonomy_data;
+
+            // Preserve [wpp_term_meta_fields] fields.
+            if( !isset( $_taxonomies[ $_taxonomy ]['wpp_term_meta_fields'] ) && isset( $_original_taxonomy['wpp_term_meta_fields'] ) ) {
+              $_taxonomies[ $_taxonomy ]['wpp_term_meta_fields'] = $_original_taxonomy['wpp_term_meta_fields'];
+            }
+
           }
 
         }
