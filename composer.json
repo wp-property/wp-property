@@ -88,13 +88,6 @@
     },
     "featureFlags": [
       {
-        "name": "Listing Labels",
-        "constant": "WP_PROPERTY_FLAG_WPP_LISTING_LABEL",
-        "description": "Property flags, for highlighting important information, stored in [wpp_listing_label]. Can be used to identify 'featured' properties.",
-        "since": "2.2.1",
-        "enabled": true
-      },
-      {
         "name": "Layouts",
         "constant": "WP_PROPERTY_LAYOUTS",
         "description": "Layouts for WP Property. When enabled, disabled legacy Sidebars and PHP Templates.",
@@ -144,6 +137,13 @@
         "enabled": true
       },
       {
+        "name": "Listing Labels",
+        "constant": "WP_PROPERTY_FLAG_WPP_LISTING_LABEL",
+        "description": "Property flags, for highlighting important information, stored in [wpp_listing_label]. Can be used to identify 'featured' properties.",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
         "name": "Standard Location Taxonomy",
         "constant": "WPP_FEATURE_FLAG_WPP_LISTING_LOCATION",
         "description": "Standard property location taxonomy, stored in [wpp_listing_location].",
@@ -167,7 +167,7 @@
       {
         "name": "Property Categories",
         "constant": "WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY",
-        "description": "Taxonomy for general property terms, stored in [wpp_category]",
+        "description": "Taxonomy for general property terms, stored in [wpp_listing_category]",
         "since": "2.2.1",
         "enabled": true
       },
@@ -181,7 +181,14 @@
       {
         "name": "Meta Attributes",
         "constant": "WP_PROPERTY_LEGACY_META_ATTRIBUTES",
-        "description": "Legacy Meta fields. In v2.2.1 meta fields have been merged with attributes.",
+        "description": "Legacy Meta fields. In v2.2.1 meta fields have been merged with attributes. This includes default Phone Number.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Legacy Attribute Input Types",
+        "constant": "WP_PROPERTY_LEGACY_ATTRIBUTE_INPUT_TYPES",
+        "description": "Enables legacy input types such as radio, wysiwyg, etc.",
         "since": "2.2.1",
         "enabled": false
       },

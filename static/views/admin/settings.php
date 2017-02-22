@@ -299,10 +299,12 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
             </td>
           </tr>
 
+          <?php if( defined( 'WP_PROPERTY_LEGACY_META_ATTRIBUTES' ) && WP_PROPERTY_LEGACY_META_ATTRIBUTES ) { ?>
           <tr class="wpp-setting wpp-setting-default-phone-number">
             <th><?php _e('Default Phone Number', ud_get_wp_property()->domain); ?></th>
             <td><?php echo WPP_F::input("name=phone_number&label=" . sprintf(__('Phone number to use when a %1s-specific phone number is not specified.', ud_get_wp_property()->domain), WPP_F::property_label('singular')) . "&group=wpp_settings[configuration]&style=width: 200px;", (isset($wp_properties['configuration']['phone_number']) ? $wp_properties['configuration']['phone_number'] : false)); ?></td>
           </tr>
+          <?php } ?>
 
           <tr>
             <th><?php _e('Advanced Options', ud_get_wp_property()->domain); ?></th>

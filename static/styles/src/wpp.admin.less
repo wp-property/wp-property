@@ -1,3 +1,19 @@
+//  Hide Term editor on WP-Property taxonomy pages.
+body.post-type-property {
+
+  #col-container {
+    #col-left {
+      display: none;
+    }
+
+    #col-right {
+      width: 100%;
+    }
+
+  }
+
+}
+
 // Hide weird label on messages.
 .wpp_settings_page .fs-notice label.fs-plugin-title {
   display:none;
@@ -1769,7 +1785,7 @@ td.wpp_premium_feature_image {
 .wpp_box_header strong {
   color: #000;
   display: block;
-  font-weight: strong;
+  font-weight: 400;
   margin-bottom: 10px;
 }
 

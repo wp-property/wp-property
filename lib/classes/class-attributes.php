@@ -17,30 +17,43 @@ namespace UsabilityDynamics\WPP {
        */
       public function __construct() {
 
+        $_attribute_types = array(
+          'input' => __( 'Short Text', ud_get_wp_property('domain') ),
+          'textarea' => __( 'Textarea', ud_get_wp_property('domain') ),
+          'term' => __( 'Terms', ud_get_wp_property('domain') ),
+          'checkbox' => __( 'Checkbox', ud_get_wp_property('domain') ),
+          'datetime' => __( 'Date and Time', ud_get_wp_property('domain') ),
+          'attachment' => __( 'Attachment', ud_get_wp_property('domain') )
+        );
+
+        if( defined( 'WP_PROPERTY_LEGACY_ATTRIBUTE_INPUT_TYPES' ) && WP_PROPERTY_LEGACY_ATTRIBUTE_INPUT_TYPES ) {
+
+          array_merge( $_attribute_types, array(
+            'wysiwyg' => __( 'Text Editor', ud_get_wp_property('domain') ),
+            'dropdown' => __( 'Dropdown Selection', ud_get_wp_property('domain') ),
+            'select_advanced' => __( 'Advanced Dropdown', ud_get_wp_property('domain') ),
+            'checkbox' => __( 'Single Checkbox', ud_get_wp_property('domain') ),
+            'multi_checkbox' => __( 'Multi-Checkbox', ud_get_wp_property('domain') ),
+            'radio' => __( 'Radio', ud_get_wp_property('domain') ),
+            'number' => __( 'Number', ud_get_wp_property('domain') ),
+            'currency' => __( 'Currency', ud_get_wp_property('domain') ),
+            'url' => __( 'URL', ud_get_wp_property('domain') ),
+            'oembed' => __( 'Oembed', ud_get_wp_property('domain') ),
+            'datetime' => __( 'Date and time picker', ud_get_wp_property('domain') ),
+            'date' => __( 'Date picker', ud_get_wp_property('domain') ),
+            'time' => __( 'Time picker', ud_get_wp_property('domain') ),
+            'color' => __( 'Color picker', ud_get_wp_property('domain') ),
+            'image_advanced' => __( 'Image upload', ud_get_wp_property('domain') ),
+            'file_advanced' => __( 'Files upload', ud_get_wp_property('domain') ),
+            'file_input' => __( 'File URL', ud_get_wp_property('domain') ),
+          ));
+
+        }
+
         /**
          * Add Available Attribute Types ( Meta Box Fields )
          */
-        ud_get_wp_property()->set( 'attributes.types', array(
-          'input' => __( 'Free Text', ud_get_wp_property('domain') ),
-          'textarea' => __( 'Textarea', ud_get_wp_property('domain') ),
-          'wysiwyg' => __( 'Text Editor', ud_get_wp_property('domain') ),
-          'dropdown' => __( 'Dropdown Selection', ud_get_wp_property('domain') ),
-          'select_advanced' => __( 'Advanced Dropdown', ud_get_wp_property('domain') ),
-          'checkbox' => __( 'Single Checkbox', ud_get_wp_property('domain') ),
-          'multi_checkbox' => __( 'Multi-Checkbox', ud_get_wp_property('domain') ),
-          'radio' => __( 'Radio', ud_get_wp_property('domain') ),
-          'number' => __( 'Number', ud_get_wp_property('domain') ),
-          'currency' => __( 'Currency', ud_get_wp_property('domain') ),
-          'url' => __( 'URL', ud_get_wp_property('domain') ),
-          'oembed' => __( 'Oembed', ud_get_wp_property('domain') ),
-          'datetime' => __( 'Date and time picker', ud_get_wp_property('domain') ),
-          'date' => __( 'Date picker', ud_get_wp_property('domain') ),
-          'time' => __( 'Time picker', ud_get_wp_property('domain') ),
-          'color' => __( 'Color picker', ud_get_wp_property('domain') ),
-          'image_advanced' => __( 'Image upload', ud_get_wp_property('domain') ),
-          'file_advanced' => __( 'Files upload', ud_get_wp_property('domain') ),
-          'file_input' => __( 'File URL', ud_get_wp_property('domain') ),
-        ) );
+        ud_get_wp_property()->set( 'attributes.types', $_attribute_types );
 
         /**
          * Set schema for searchable attributes types.
