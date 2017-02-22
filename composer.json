@@ -138,8 +138,8 @@
       },
       {
         "name": "Listing Permissions",
-        "constant": "WPP_FEATURE_FLAG_WPP_LISTING_PERMISSIONS",
-        "description": "Sets listing display permissions, stored in [wpp_listing_permissions].",
+        "constant": "WPP_FEATURE_FLAG_WPP_LISTING_POLICY",
+        "description": "Sets listing display permissions, stored in [wpp_listing_policy].",
         "since": "2.2.1",
         "enabled": true
       },
@@ -166,7 +166,7 @@
       },
       {
         "name": "Property Categories",
-        "constant": "WPP_FEATURE_FLAG_WPP_CATEGORY",
+        "constant": "WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY",
         "description": "Taxonomy for general property terms, stored in [wpp_category]",
         "since": "2.2.1",
         "enabled": true

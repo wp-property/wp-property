@@ -204,6 +204,40 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Makes sure WPP-Terms doesn't override read-only taxonomies.
+       *
+       * @todo Update to allow labels to be overwritten for readonly taxonomies. - potanin@UD
+       *
+       * @param $taxonomies - Paseed down via wpp_taxonomies filter, not yet registered with WP.
+       */
+      public function prepare_taxonomies( $taxonomies ) {
+
+        /** Be sure that we have any taxonomy to register. If not, we set default taxonomies of WP-Property. */
+        if( !$this->get( 'config.taxonomies' ) ) {
+          $this->set( 'config.taxonomies', $taxonomies );
+          $types = array();
+          foreach ($taxonomies as $taxonomy => $data) {
+            $types[$taxonomy] = isset($data['unique']) && $data['unique'] ? 'unique' : '';
+          }
+          $this->set( 'config.types', $types );
+        }
+
+        $_taxonomies = $this->get( 'config.taxonomies', array() );
+
+        foreach( $taxonomies as $_taxonomy => $_taxonomy_data ) {
+
+          // Make sure we dont override any [readonly] taxonomies.
+          if( isset( $_taxonomy_data[ 'readonly' ] ) && $_taxonomy_data[ 'readonly' ]) {
+            $_taxonomies[ $_taxonomy ] = $_taxonomy_data;
+          }
+
+        }
+
+        $this->set( 'config.taxonomies', $_taxonomies );
+
+      }
+
+      /**
        * Maybe extend taxonomy functionality
        *
        */
@@ -214,9 +248,11 @@ namespace UsabilityDynamics\WPP {
         $exclude = array();
 
         foreach( $taxonomies as $key => $data ) {
+
           if( !isset( $data[ 'rich_taxonomy' ] ) || !$data[ 'rich_taxonomy' ] ) {
             array_push( $exclude, $key );
           }
+
         }
 
         new \UsabilityDynamics\CFTPB\Loader( array(
@@ -795,7 +831,9 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       * Define our custom taxonomies on wpp_taxonomies hook
+       * Define our custom taxonomies on wpp_taxonomies hook on level 30 after WPP_F::wpp_commom_taxonomies
+       *
+       *
        * @param $taxonomies
        * @return \UsabilityDynamics\type
        */
@@ -822,15 +860,7 @@ namespace UsabilityDynamics\WPP {
           )
         ));
 
-        /** Be sure that we have any taxonomy to register. If not, we set default taxonomies of WP-Property. */
-        if( !$this->get( 'config.taxonomies' ) ) {
-          $this->set( 'config.taxonomies', $taxonomies );
-          $types = array();
-          foreach ($taxonomies as $taxonomy => $data) {
-            $types[$taxonomy] = isset($data['unique']) && $data['unique'] ? 'unique' : '';
-          }
-          $this->set( 'config.types', $types );
-        }
+        $this->prepare_taxonomies( $taxonomies );
 
         /**
          * Rich Taxonomies ( adds taxonomy post type )
