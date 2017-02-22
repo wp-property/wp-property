@@ -25,7 +25,7 @@
             "composer/composer": "1.0.*@dev",
             "phpunit/phpunit": "4.1.*"
         },
-        "time": "2016-08-13T20:53:52+00:00",
+        "time": "2016-08-13 20:53:52",
         "type": "composer-plugin",
         "extra": {
             "class": "Composer\\Installers\\Plugin",
@@ -698,7 +698,7 @@
         "require": {
             "php": ">=5.0.0"
         },
-        "time": "2013-06-26T03:44:33+00:00",
+        "time": "2013-06-26 03:44:33",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -743,7 +743,7 @@
         "require": {
             "php": ">=5.2"
         },
-        "time": "2016-12-13T01:17:43+00:00",
+        "time": "2016-12-13 01:17:43",
         "type": "library",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -758,5 +758,39 @@
             "sdk",
             "wordpress"
         ]
+    },
+    {
+        "name": "usabilitydynamics/lib-wp-saas-util",
+        "version": "1.0.3",
+        "version_normalized": "1.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-wp-saas-util",
+            "reference": "1.0.3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-saas-util/archive/1.0.3.zip",
+            "reference": "1.0.3",
+            "shasum": null
+        },
+        "type": "library",
+        "extra": {
+            "installer-name": "lib-wp-saas-util"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "Saas utils.",
+        "homepage": "http://github.com/UsabilityDynamics/lib-wp-saas-util",
+        "support": {
+            "issues": "http://github.com/UsabilityDynamics/lib-wp-saas-util/issues"
+        }
     }
 ]

@@ -138,6 +138,7 @@ return array(
     'UsabilityDynamics\\CFTPB\\Loader' => $baseDir . '/vendor/plugins/wp-tax-post-binding/lib/class-loader.php',
     'UsabilityDynamics\\Job' => $vendorDir . '/usabilitydynamics/lib-utility/lib/class-job.php',
     'UsabilityDynamics\\Loader' => $vendorDir . '/usabilitydynamics/lib-utility/lib/class-loader.php',
+    'UsabilityDynamics\\SAAS_UTIL\\Register' => $vendorDir . '/usabilitydynamics/lib-wp-saas-util/lib/classes/class-wp-saas-util.php',
     'UsabilityDynamics\\Settings' => $vendorDir . '/usabilitydynamics/lib-settings/lib/class-settings.php',
     'UsabilityDynamics\\Shortcode\\Bootstrap' => $vendorDir . '/usabilitydynamics/lib-wp-shortcode/lib/class-bootstrap.php',
     'UsabilityDynamics\\Shortcode\\Manager' => $vendorDir . '/usabilitydynamics/lib-wp-shortcode/lib/class-manager.php',

@@ -1,3 +1,12 @@
+body.post-type-property.wpp-disable-term-editing #col-container #col-left {
+  display: none;
+}
+body.post-type-property.wpp-disable-term-editing #col-container #col-right {
+  width: 100%;
+}
+.wpp-depreciated-option {
+  display: none;
+}
 .wpp_settings_page .fs-notice label.fs-plugin-title {
   display: none;
 }
@@ -1367,7 +1376,7 @@ td.wpp_premium_feature_image {
 .wpp_box_header strong {
   color: #000;
   display: block;
-  font-weight: strong;
+  font-weight: 400;
   margin-bottom: 10px;
 }
 .wpp_box_header p {

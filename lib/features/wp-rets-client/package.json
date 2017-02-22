@@ -2,7 +2,7 @@
   "name": "wp-rets-client",
   "title": "WP-RETS Client",
   "description": "RETS Client for WP-Property: Importer. Allows to import properties from RETS system via XML-RPC",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage": "https://usabilitydynamics.com",
   "author": {
     "name": "UsabilityDynamics, Inc.",

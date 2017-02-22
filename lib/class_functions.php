@@ -1,5 +1,4 @@
 <?php
-
 /**
  * WP-Property General Functions
  *
@@ -18,6 +17,9 @@ class WPP_F extends UsabilityDynamics\Utility
    *
    * - If term exists, we update it. Otherwise its created.
    * - All extra fields are inserted as term meta.
+   *
+   *
+   * @author potanin@UD
    *
    * @param $term_data
    * @param $term_data._id - Unique ID, stored in term meta. Usually source ID. Native term_id used if not provided.
@@ -44,48 +46,136 @@ class WPP_F extends UsabilityDynamics\Utility
     if( !isset( $term_data['_type'] )) {
       return new WP_Error( 'missing-type' );
     }
+
     // try to find by [_id]
-    if( isset( $term_data['_id'] ) ) {
-      $_term_id = $wpdb->get_var($wpdb->prepare("SELECT term_id FROM $wpdb->termmeta as tm WHERE meta_key='%s' AND meta_value='%s';", array('_id', $term_data['_id'])));
+    if( isset( $term_data[ '_id' ] ) ) {
+      $term_data['term_id'] = intval( $wpdb->get_var($wpdb->prepare("SELECT term_id FROM $wpdb->termmeta as tm WHERE meta_key='%s' AND meta_value='%s';", array( '_id', $term_data['_id']))) );
+    }
+
+    // Use _type for _taxonomy if not provided.
+    if( !isset( $term_data['_taxonomy'] ) && isset( $term_data['_type'] ) ) {
+      $term_data['_taxonomy'] = $term_data['_type'];
+    }
+
+    // Parent set, try to find it.
+    if( isset( $term_data[ '_parent' ] ) ) {
+      $term_data['meta']['parent_term_id'] = intval( $wpdb->get_var($wpdb->prepare("SELECT term_id FROM $wpdb->termmeta as tm WHERE meta_key='%s' AND meta_value='%s';", array( '_id', $term_data['_parent']))) );
+
+      // Parent not found, we try findint it using [parent_name] instead of the [_parent], which is its UID.
+      if( !$term_data['meta']['parent_term_id'] ) {
+        $_exists = term_exists( $term_data['meta']['parent_name'], $term_data['_taxonomy'] );
+
+        // If parent found, we record the actual [term_id] of parent into our main term's meta.
+        if( $_exists ) {
+          $term_data['meta']['parent_term_id'] = $_exists['term_id'];
+        }
+
+      }
+
+      // Parent could not be found, we will attempt to create.
+      if( !$term_data['meta']['parent_term_id'] ) {
+
+        // Insert new term, using the parent's name, from main terms' meta.
+        $_parent_term = wp_insert_term( $term_data['meta']['parent_name'], $term_data['_taxonomy'], array(
+          'slug' => $term_data['meta']['parent_slug'],
+          'description' => "Parent term for [" . $term_data['name'] . "]."
+        ));
+
+        // If parent still could not be created, then we have a serious error. Otherwise, updat the parent's meta.
+        if( isset( $_parent_term ) && is_wp_error( $_parent_term ) ) {
+          error_log( "Unable to insert term [" . $term_data['meta']['parent_name'] . "] for parent [" . $term_data['_taxonomy']. "]." );
+          error_log( print_r($_parent_term,true));
+        } else {
+
+          // record the unique _id, timestamp and a few meta fields from main term
+          update_term_meta( $_parent_term['term_id'], '_id', $term_data[ '_parent' ] );
+          update_term_meta( $_parent_term['term_id'], '_created', time() );
+          update_term_meta( $_parent_term['term_id'], $term_data['meta']['parent_slug'] . '-_id', $term_data[ '_parent' ] );
+          update_term_meta( $_parent_term['term_id'], $term_data['meta']['parent_slug'] . '-source', $term_data['meta']['source']);
+
+          $term_data['meta']['parent_term_id'] = $_parent_term['term_id'];
+        }
+
+      }
+
     }
 
     // try to get by [name]
-    if( !$_term_id ) {
-      $_exists = term_exists( $term_data['name'], $term_data['_type'] );
+    if( !$term_data['term_id'] ) {
+      $_exists = term_exists( $term_data['name'], $term_data['_taxonomy'] );
 
       if( $_exists ) {
-        $_term_id = $_exists['term_id'];
+        $term_data['term_id'] = $_exists['term_id'];
       }
     }
 
     // Term not found, new term
-    if( !$_term_id ) {
+    if( !$term_data['term_id'] ) {
 
-      $_term = wp_insert_term( $term_data['name'], $term_data['_type'], array(
-        'description'=> $term_data['description']
-      ));
+      $_term_args = array( 'description' => isset( $term_data['description'] ) ? $term_data['description'] : null );
 
-      $_term_id = $_term['term_id'];
+      if( isset( $term_data['meta']['parent_term_id'] ) ) {
+        $_term_args['parent']  = $term_data['meta']['parent_term_id'];
+      }
 
+      $_term_created = wp_insert_term( $term_data['name'], $term_data['_taxonomy'], $_term_args);
+
+      if( isset( $_term_created ) && is_wp_error( $_term_created ) ) {
+        error_log( "Unable to insert term [" . $term_data['_taxonomy']. "]." );
+        return $_term_created;
+      }
+
+      $term_data['term_id'] = $_term_created['term_id'];
     }
 
     // Could not create term.
-    if( !$_term_id ) {
+    if( !isset( $term_data[ 'term_id'] ) ) {
+      // error_log( '$_term_created' . print_r($_term_created,true ));
+      // error_log( '$term_data' . print_r($term_data,true ));
       return new WP_Error('unable-to-create-term', 'Can not create term.' );
     }
 
-    $result['_id'] = $_term_id;
     $result['_type'] = $term_data['_type'];
-    $result['name'] = $term_data['name'];
-    $result['slug'] = $term_data['slug'];
+    $result['_taxonomy'] = $term_data['_taxonomy'];
 
-    $term_data[ 'meta' ]['_id'] = $result[ '_id' ];
+    $result['_created'] = isset( $_exists ) && isset( $_exists['term_id'] ) ? false : true;
+    $result['_updated'] = isset( $_exists ) && isset( $_exists['term_id'] ) ? true : false;
 
-    foreach( $term_data[ 'meta' ] as $_meta_key => $meta_value ) {
-      if( update_term_meta($_term_id, $_meta_key, $meta_value ) ) {}
-      $result['meta'][ $_meta_key ] = $meta_value;
+    $result['term_id'] = $term_data['term_id'];
+
+    $result['name'] = isset( $term_data['name'] ) ? $term_data['name'] : null;
+    $result['slug'] = isset( $term_data['slug'] ) ? $term_data['slug'] : sanitize_title( $term_data['name'] );
+
+    $term_data[ 'meta' ]['_id'] = $term_data[ '_id' ];
+
+    // set _id
+    if( update_term_meta($term_data['term_id'], '_id', $term_data[ '_id' ] ) ) {}
+
+    // This is most likely going to be removed.
+    if( $result['_created'] ) {
+      update_term_meta( $term_data['term_id'], '_created', time() );
+    } else {
+      update_term_meta( $term_data['term_id'], '_updated', time() );
     }
 
+    foreach( $term_data[ 'meta' ] as $_meta_key => $meta_value ) {
+
+      if( update_term_meta( $term_data['term_id'], ( $term_data['_type'] . '-' . $_meta_key ), $meta_value ) ) {}
+
+      $result['meta'][ ( $term_data['_type'] . '-' . $_meta_key ) ] = $meta_value;
+    }
+
+    //return array_filter( $result );
+
+    // Update other fields.
+    wp_update_term( $term_data['term_id'], $term_data['_taxonomy'], array_filter(array(
+      'name' => isset( $term_data['name'] ) ? $term_data['name'] : null,
+      'alias_of' => isset( $term_data['alias_of'] ) ? $term_data['alias_of'] : null,
+      'description' => isset( $term_data['description'] ) ? $term_data['description'] : null,
+      'term_group' => isset( $term_data['term_group'] ) ? $term_data['term_group'] : null
+    )));
+
+    // error_log( print_r($result, true));
     return array_filter( $result );
 
   }
@@ -93,11 +183,13 @@ class WPP_F extends UsabilityDynamics\Utility
   /**
    * Insert Multiple Terms
    *
+   * @author potanin@UD
    * @param $object_id
-   * @param $terms
+   * @param $terms - An array of terms.
+   * @param array $defaults
    * @return array
    */
-  static public function insert_terms( $object_id, $terms ) {
+  static public function insert_terms( $object_id, $terms, $defaults = array() ) {
 
     $_terms = array();
 
@@ -111,7 +203,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
     foreach( $terms as $_index => $_term ) {
 
-      $_terms[ $_index ] = self::insert_term( $_term );
+      $_terms[ $_index ] = self::insert_term( array_merge( (array) $_term, (array) $defaults ));
 
       if( is_wp_error( $_terms[ $_index ] ) ) {
         $_results['errors'][] = $_terms[ $_index ];
@@ -120,7 +212,8 @@ class WPP_F extends UsabilityDynamics\Utility
       }
 
       if( !is_wp_error( $_terms[ $_index ] ) ) {
-        $_results['set_terms'] = array_merge( $_results['set_terms'], wp_set_object_terms( $object_id, $_terms[ $_index ]['slug'], $_terms[ $_index ]['_type'], true ) );
+
+        $_results['set_terms'] = array_merge( $_results['set_terms'], wp_set_object_terms( $object_id, intval( $_terms[ $_index ]['term_id'] ), $_terms[ $_index ]['_taxonomy'], true ) );
 
         if( isset( $_term['post_meta'] ) ) {
           $_results['meta_override'][] = update_post_meta( $object_id, '_wpp_term_meta_override', $_term['post_meta'] );
@@ -134,10 +227,19 @@ class WPP_F extends UsabilityDynamics\Utility
 
     $_results[ 'terms' ] = $_terms;
 
+    if( empty( $_results['meta_override'] )) {
+      unset( $_results['meta_override'] );
+    }
+
+    if( empty( $_results['errors'] )) {
+      unset( $_results['errors'] );
+    } else {
+      error_log( 'WP-Properrty Errors creating terms: ' . print_r($_results['errors'],true) );
+    }
+
     return $_results;
 
   }
-
 
   /**
    * Registers a system taxonomy if needed with most essential arguments.
@@ -145,17 +247,22 @@ class WPP_F extends UsabilityDynamics\Utility
    * @since 2.2.1
    * @author potanin@UD
    * @param string $taxonomy
+   * @param array $args
    * @return string
    */
-  static public function verify_have_system_taxonomy($taxonomy = '')
+  static public function verify_have_system_taxonomy($taxonomy = '', $args = array())
   {
+
+    $args = wp_parse_args($args, array(
+      'hierarchical' => true
+    ));
 
     if (taxonomy_exists($taxonomy)) {
       return $taxonomy;
     }
 
-    register_taxonomy($taxonomy, array( 'property' ), array(
-      'hierarchical' => true,
+    register_taxonomy( substr( $taxonomy, 0, 32 ), array( 'property' ), array(
+      'hierarchical' => $args['hierarchical'],
       // 'update_count_callback' => null,
       'labels' => array(),
       'show_ui' => false,
@@ -336,6 +443,11 @@ class WPP_F extends UsabilityDynamics\Utility
     }
   }
 
+  /**
+   * Useful Taxonomies with extra handlers.
+   *
+   * @return array
+   */
   static public function wpp_commom_taxonomies() {
 
     $taxonomies = array();
@@ -418,15 +530,16 @@ class WPP_F extends UsabilityDynamics\Utility
         'hierarchical' => true,
         'public' => true,
         'show_in_nav_menus' => true,
+        'show_in_menu' => true,
         'show_ui' => false,
         'show_tagcloud' => false,
         'add_native_mtbox' => false,
-        'label' => sprintf(_x('%s Location', 'property location taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+        'label' => __('Location', ud_get_wp_property()->domain),
         'labels' => array(
-          'name' => sprintf(_x('%s Location', 'property location taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'singular_name' => sprintf(_x('%s Location', 'property location taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'search_items' => _x('Search %s Location', 'property location taxonomy', ud_get_wp_property()->domain),
-          'all_items' => _x('All Location', 'property location taxonomy', ud_get_wp_property()->domain),
+          'name' => __('Locations', ud_get_wp_property()->domain),
+          'singular_name' => __('Location', ud_get_wp_property()->domain),
+          'search_items' => _x('Search Location', 'property location taxonomy', ud_get_wp_property()->domain),
+          'all_items' => _x('All Locations', 'property location taxonomy', ud_get_wp_property()->domain),
           'parent_item' => _x('Parent Location', 'property location taxonomy', ud_get_wp_property()->domain),
           'parent_item_colon' => _x('Parent Location', 'property location taxonomy', ud_get_wp_property()->domain),
           'edit_item' => _x('Edit Location', 'property location taxonomy', ud_get_wp_property()->domain),
@@ -434,7 +547,7 @@ class WPP_F extends UsabilityDynamics\Utility
           'add_new_item' => _x('Add New Location', 'property location taxonomy', ud_get_wp_property()->domain),
           'new_item_name' => _x('New Location', 'property location taxonomy', ud_get_wp_property()->domain),
           'not_found' => _x('No location found', 'property location taxonomy', ud_get_wp_property()->domain),
-          'menu_name' => sprintf(_x('%s Location', 'property location taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'menu_name' => __('Locations', ud_get_wp_property()->domain),
         ),
         'query_var' => 'location',
         'rewrite' => array('slug' => 'location')
@@ -458,7 +571,7 @@ class WPP_F extends UsabilityDynamics\Utility
         'labels' => array(
           'name' => sprintf(_x('%s Type', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
           'singular_name' => sprintf(_x('%s Type', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'search_items' => _x('Search %s Type', 'property type taxonomy', ud_get_wp_property()->domain),
+          'search_items' => _x('Search Type', 'property type taxonomy', ud_get_wp_property()->domain),
           'all_items' => _x('All Type', 'property type taxonomy', ud_get_wp_property()->domain),
           'parent_item' => _x('Parent Type', 'property type taxonomy', ud_get_wp_property()->domain),
           'parent_item_colon' => _x('Parent Type', 'property type taxonomy', ud_get_wp_property()->domain),
@@ -491,7 +604,7 @@ class WPP_F extends UsabilityDynamics\Utility
         'labels' => array(
           'name' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
           'singular_name' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'search_items' => _x('Search %s Status', 'property type taxonomy', ud_get_wp_property()->domain),
+          'search_items' => _x('Search  Status', 'property type taxonomy', ud_get_wp_property()->domain),
           'all_items' => _x('All Status', 'property type taxonomy', ud_get_wp_property()->domain),
           'parent_item' => _x('Parent Status', 'property type taxonomy', ud_get_wp_property()->domain),
           'parent_item_colon' => _x('Parent Status', 'property type taxonomy', ud_get_wp_property()->domain),
@@ -507,9 +620,9 @@ class WPP_F extends UsabilityDynamics\Utility
       );
     }
 
-    // Add [wpp_listing_permissions] taxonomy.
-    if (defined('WPP_FEATURE_FLAG_WPP_LISTING_PERMISSIONS') && WPP_FEATURE_FLAG_WPP_LISTING_PERMISSIONS) {
-      $taxonomies['wpp_listing_permissions'] = array(
+    // Add [wpp_listing_policy] taxonomy.
+    if (defined('WPP_FEATURE_FLAG_WPP_LISTING_POLICY') && WPP_FEATURE_FLAG_WPP_LISTING_POLICY) {
+      $taxonomies['wpp_listing_policy'] = array(
         'default' => true,
         'readonly' => true,
         'hidden' => true,
@@ -520,23 +633,23 @@ class WPP_F extends UsabilityDynamics\Utility
         'show_ui' => false,
         'show_tagcloud' => false,
         'add_native_mtbox' => false,
-        'label' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+        'label' => sprintf(_x('%s Policy', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
         'labels' => array(
-          'name' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'singular_name' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'search_items' => _x('Search %s Status', 'property type taxonomy', ud_get_wp_property()->domain),
-          'all_items' => _x('All Status', 'property type taxonomy', ud_get_wp_property()->domain),
-          'parent_item' => _x('Parent Status', 'property type taxonomy', ud_get_wp_property()->domain),
-          'parent_item_colon' => _x('Parent Status', 'property type taxonomy', ud_get_wp_property()->domain),
-          'edit_item' => _x('Edit Status', 'property type taxonomy', ud_get_wp_property()->domain),
-          'update_item' => _x('Update Status', 'property type taxonomy', ud_get_wp_property()->domain),
-          'add_new_item' => _x('Add New Status', 'property type taxonomy', ud_get_wp_property()->domain),
-          'new_item_name' => _x('New Status', 'property type taxonomy', ud_get_wp_property()->domain),
-          'not_found' => sprintf(_x('No %s Status found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'menu_name' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'name' => sprintf(_x('%s Policy', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'singular_name' => sprintf(_x('%s Policy', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'search_items' => _x('Search Policy', 'property type taxonomy', ud_get_wp_property()->domain),
+          'all_items' => _x('All Policy', 'property type taxonomy', ud_get_wp_property()->domain),
+          'parent_item' => _x('Parent Policy', 'property type taxonomy', ud_get_wp_property()->domain),
+          'parent_item_colon' => _x('Parent Policy', 'property type taxonomy', ud_get_wp_property()->domain),
+          'edit_item' => _x('Edit Policy', 'property type taxonomy', ud_get_wp_property()->domain),
+          'update_item' => _x('Update Policy', 'property type taxonomy', ud_get_wp_property()->domain),
+          'add_new_item' => _x('Add New Policy', 'property type taxonomy', ud_get_wp_property()->domain),
+          'new_item_name' => _x('New Policy', 'property type taxonomy', ud_get_wp_property()->domain),
+          'not_found' => sprintf(_x('No %s Policy found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'menu_name' => sprintf(_x('%s Policy', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
         ),
-        'query_var' => 'property-status',
-        'rewrite' => array('slug' => 'property-status')
+        'query_var' => 'property-permissions',
+        'rewrite' => array('slug' => 'property-permissions')
       );
     }
 
@@ -557,7 +670,7 @@ class WPP_F extends UsabilityDynamics\Utility
         'labels' => array(
           'name' => sprintf(_x('%s Labels', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
           'singular_name' => sprintf(_x('%s Label', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'search_items' => _x('Search %s Labels', 'property type taxonomy', ud_get_wp_property()->domain),
+          'search_items' => _x('Search  Labels', 'property type taxonomy', ud_get_wp_property()->domain),
           'all_items' => _x('All Labels', 'property type taxonomy', ud_get_wp_property()->domain),
           'parent_item' => _x('Parent Labels', 'property type taxonomy', ud_get_wp_property()->domain),
           'parent_item_colon' => _x('Parent Labels', 'property type taxonomy', ud_get_wp_property()->domain),
@@ -573,24 +686,25 @@ class WPP_F extends UsabilityDynamics\Utility
       );
     }
 
-    // Generic [wpp_category] taxonomy for multiple terms.
-    if (defined('WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY') && WPP_FEATURE_FLAG_WPP_CATEGORY) {
-      $taxonomies['wpp_listing_category'] = array(
+    // Generic [wpp_categorical] taxonomy for multiple terms.
+    if (defined('WPP_FEATURE_FLAG_WPP_CATEGORICAL') && WPP_FEATURE_FLAG_WPP_CATEGORICAL) {
+      $taxonomies['wpp_categorical'] = array(
         'default' => true,
         'readonly' => true,
         'hidden' => true,
-        'hierarchical' => false,
+        'hierarchical' => true,
         'unique' => false,
         'public' => true,
+        'show_in_menu' => defined( 'WP_DEBUG' ) && WP_DEBUG ? true : false,
         'show_in_nav_menus' => true,
         'show_ui' => false,
         'show_tagcloud' => false,
         'add_native_mtbox' => false,
-        'label' => sprintf(_x('%s Category', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+        'label' => __( 'Categories', ud_get_wp_property()->domain) ,
         'labels' => array(
           'name' => sprintf(_x('%s Category', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
           'singular_name' => sprintf(_x('%s Category', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'search_items' => _x('Search %s Category', 'property type taxonomy', ud_get_wp_property()->domain),
+          'search_items' => _x('Search Category', 'property type taxonomy', ud_get_wp_property()->domain),
           'all_items' => _x('All Categories', 'property type taxonomy', ud_get_wp_property()->domain),
           'parent_item' => _x('Parent Category', 'property type taxonomy', ud_get_wp_property()->domain),
           'parent_item_colon' => _x('Parent Category', 'property type taxonomy', ud_get_wp_property()->domain),
@@ -599,7 +713,7 @@ class WPP_F extends UsabilityDynamics\Utility
           'add_new_item' => _x('Add New Category', 'property type taxonomy', ud_get_wp_property()->domain),
           'new_item_name' => _x('New Category', 'property type taxonomy', ud_get_wp_property()->domain),
           'not_found' => sprintf(_x('No %s Category found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'menu_name' => sprintf(_x('%s Category', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'menu_name' => __( 'Categories', ud_get_wp_property()->domain) ,
         ),
         'query_var' => 'property-category',
         'rewrite' => array('slug' => 'property-category')
@@ -624,7 +738,7 @@ class WPP_F extends UsabilityDynamics\Utility
     add_filter('wpp_taxonomies', array('WPP_F', 'wpp_commom_taxonomies'), 4 );
 
     // New standard taxonomies. Ran late, to force after Terms_Bootstrap::define_taxonomies
-    add_filter('wpp_taxonomies', array('WPP_F', 'wpp_standard_taxonomies'), 50 );
+    add_filter('wpp_taxonomies', array('WPP_F', 'wpp_standard_taxonomies'), 10 );
 
     // Setup taxonomies
     $wp_properties['taxonomies'] = apply_filters('wpp_taxonomies', array());
@@ -697,6 +811,7 @@ class WPP_F extends UsabilityDynamics\Utility
         'show_ui' => isset($data['show_ui']) ? $data['show_ui'] : true,
         'show_in_nav_menus' => isset($data['show_in_nav_menus']) ? $data['show_in_nav_menus'] : true,
         'show_tagcloud' => isset($data['show_tagcloud']) ? $data['show_tagcloud'] : true,
+        'update_count_callback' => '_update_post_term_count',
         'capabilities' => array(
           'manage_terms' => 'manage_wpp_categories',
           'edit_terms' => 'manage_wpp_categories',

@@ -42,7 +42,7 @@ namespace UsabilityDynamics\WPP {
           /** Add Settings on Developer Tab */
           add_filter( 'wpp::settings_developer::tabs', function( $tabs ){
             $tabs['terms'] = array(
-              'label' => __( 'Terms', ud_get_wpp_terms()->domain ),
+              'label' => __( 'Taxonomies', ud_get_wpp_terms()->domain ),
               'template' => ud_get_wpp_terms()->path( 'static/views/admin/settings-developer-terms.php', 'dir' ),
               'order' => 25
             );
@@ -58,8 +58,10 @@ namespace UsabilityDynamics\WPP {
           add_action( 'wpp::types::inherited_attributes', function( $property_slug ){
             include ud_get_wpp_terms()->path( 'static/views/admin/settings-inherited-terms.php', 'dir' );
           } );
+
           // Priority must be greater than 1 for save_settings to make tax post binding work.
           add_action( 'wpp::save_settings', array( $this, 'save_settings' ) );
+
           // Add terms settings to backup
           add_filter( 'wpp::backup::data', array( $this, 'backup_settings' ), 50, 2 );
 
@@ -80,6 +82,7 @@ namespace UsabilityDynamics\WPP {
 
         /** Add Meta Box to manage taxonomies on Edit Property page. */
         add_filter( 'wpp::meta_boxes', array( $this, 'add_meta_box' ), 99 );
+
         /** Handle inherited taxonomies on property saving. */
         add_action( 'save_property', array( $this, 'save_property' ), 11 );
 
@@ -87,6 +90,7 @@ namespace UsabilityDynamics\WPP {
         add_filter( 'get_queryable_keys', array( $this, 'get_queryable_keys' ) );
         add_filter( 'wpp::get_properties::custom_case', array( $this, 'custom_search_case' ), 99, 2 );
         add_filter( 'wpp::get_properties::custom_key', array( $this, 'custom_search_query' ), 99, 3 );
+
         /** Add Search fields on 'All Properties' page ( admin panel ) */
         add_filter( 'wpp::overview::filter::fields', array( $this, 'get_filter_fields' ) );
 
@@ -204,6 +208,40 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Makes sure WPP-Terms doesn't override read-only taxonomies.
+       *
+       * @todo Update to allow labels to be overwritten for readonly taxonomies. - potanin@UD
+       *
+       * @param $taxonomies - Paseed down via wpp_taxonomies filter, not yet registered with WP.
+       */
+      public function prepare_taxonomies( $taxonomies ) {
+
+        /** Be sure that we have any taxonomy to register. If not, we set default taxonomies of WP-Property. */
+        if( !$this->get( 'config.taxonomies' ) ) {
+          $this->set( 'config.taxonomies', $taxonomies );
+          $types = array();
+          foreach ($taxonomies as $taxonomy => $data) {
+            $types[$taxonomy] = isset($data['unique']) && $data['unique'] ? 'unique' : '';
+          }
+          $this->set( 'config.types', $types );
+        }
+
+        $_taxonomies = $this->get( 'config.taxonomies', array() );
+
+        foreach( $taxonomies as $_taxonomy => $_taxonomy_data ) {
+
+          // Make sure we dont override any [readonly] taxonomies.
+          if( isset( $_taxonomy_data[ 'readonly' ] ) && $_taxonomy_data[ 'readonly' ]) {
+            $_taxonomies[ $_taxonomy ] = $_taxonomy_data;
+          }
+
+        }
+
+        $this->set( 'config.taxonomies', $_taxonomies );
+
+      }
+
+      /**
        * Maybe extend taxonomy functionality
        *
        */
@@ -214,9 +252,11 @@ namespace UsabilityDynamics\WPP {
         $exclude = array();
 
         foreach( $taxonomies as $key => $data ) {
+
           if( !isset( $data[ 'rich_taxonomy' ] ) || !$data[ 'rich_taxonomy' ] ) {
             array_push( $exclude, $key );
           }
+
         }
 
         new \UsabilityDynamics\CFTPB\Loader( array(
@@ -277,7 +317,6 @@ namespace UsabilityDynamics\WPP {
 
         $taxonomies = $this->get( 'config.taxonomies', array() );
 
-
         if( !empty($taxonomies) && is_array($taxonomies) ) {
           foreach( $taxonomies as $k => $v ) {
 
@@ -309,6 +348,7 @@ namespace UsabilityDynamics\WPP {
             ) );
           }
         }
+
         return $fields;
       }
 
@@ -505,10 +545,10 @@ namespace UsabilityDynamics\WPP {
        * @param $settings
        * @param $option
        */
-      public function update_option_wpp_settings( $old_value = null, $settings, $option = '' ) {
+      public function update_option_wpp_settings( $old_value = null, $settings = array(), $option = '' ) {
 
         $_wpp_terms = array(
-          'taxonomies' => $settings['taxonomies'],
+          'taxonomies' => isset( $settings ) && isset( $settings['taxonomies'] ) ? $settings['taxonomies'] : array(),
 
           // Groups term belongs to.
           'groups' => array(),
@@ -525,7 +565,7 @@ namespace UsabilityDynamics\WPP {
           $_wpp_terms['taxonomies'] = $settings['taxonomies'];
         }
 
-        foreach( $settings['taxonomies'] as $_taxonomy => $_taxonomy_data ) {
+        foreach( (array) $settings['taxonomies'] as $_taxonomy => $_taxonomy_data ) {
 
           // Removed legacy/unused field(s)
           if( isset( $_taxonomy_data['wpp_hidden'] )  && !$_taxonomy_data['wpp_hidden'] ) {
@@ -795,7 +835,9 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       * Define our custom taxonomies on wpp_taxonomies hook
+       * Define our custom taxonomies on wpp_taxonomies hook on level 30 after WPP_F::wpp_commom_taxonomies
+       *
+       *
        * @param $taxonomies
        * @return \UsabilityDynamics\type
        */
@@ -822,15 +864,7 @@ namespace UsabilityDynamics\WPP {
           )
         ));
 
-        /** Be sure that we have any taxonomy to register. If not, we set default taxonomies of WP-Property. */
-        if( !$this->get( 'config.taxonomies' ) ) {
-          $this->set( 'config.taxonomies', $taxonomies );
-          $types = array();
-          foreach ($taxonomies as $taxonomy => $data) {
-            $types[$taxonomy] = isset($data['unique']) && $data['unique'] ? 'unique' : '';
-          }
-          $this->set( 'config.types', $types );
-        }
+        $this->prepare_taxonomies( $taxonomies );
 
         /**
          * Rich Taxonomies ( adds taxonomy post type )
