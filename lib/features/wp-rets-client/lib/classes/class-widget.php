@@ -52,20 +52,6 @@ namespace UsabilityDynamics\WPRETSC {
       }
 
       /**
-       * @return mixed
-       */
-      private function is_ud_site_id_registered() {
-        return get_site_option( 'ud_site_id' );
-      }
-
-      /**
-       * @return mixed
-       */
-      private function is_ud_site_secret_token_registered() {
-        return get_site_option( 'ud_site_secret_token' );
-      }
-
-      /**
        * @param \UsabilityDynamics\WPP\type $args
        * @param \UsabilityDynamics\WPP\type $instance
        * @return string
@@ -75,10 +61,6 @@ namespace UsabilityDynamics\WPRETSC {
         /**
          * Do nothing if was not able to register on UD
          */
-//        if ( !$this->is_ud_site_id_registered() || !$this->is_ud_site_secret_token_registered() ) {
-//          echo 'System is not ready for RETS.CI. Refresh page or contact UsabilityDynamics, Inc.';
-//          return;
-//        }
 
         if( defined( 'UD_RETSCI_AJAX_API_URL' ) ) {
           $api_url = trailingslashit(UD_RETSCI_AJAX_API_URL);
@@ -112,7 +94,6 @@ namespace UsabilityDynamics\WPRETSC {
           $data = json_encode(array(
             'ud_site_id' => $this->is_ud_site_id_registered(),
             'ud_site_secret_token' => $this->is_ud_site_secret_token_registered(),
-            'ud_site_secret_token' => md5( wp_generate_password() ),
             'security' => wp_create_nonce( "wpp_retsci_signin" ),
             'api_url' => $api_url
           ));

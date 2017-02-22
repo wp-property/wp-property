@@ -137,6 +137,13 @@
         "enabled": true
       },
       {
+        "name": "Schools Standard Taxonomy",
+        "constant": "WPP_FEATURE_FLAG_WPP_SCHOOLS",
+        "description": "Adds standard taxonomy for schools as [wpp_schools].",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
         "name": "Listing Labels",
         "constant": "WP_PROPERTY_FLAG_WPP_LISTING_LABEL",
         "description": "Property flags, for highlighting important information, stored in [wpp_listing_label]. Can be used to identify 'featured' properties.",

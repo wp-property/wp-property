@@ -554,6 +554,39 @@ class WPP_F extends UsabilityDynamics\Utility
       );
     }
 
+    // Add [wpp_schools] taxonomy.
+    if (defined('WPP_FEATURE_FLAG_WPP_SCHOOLS') && WPP_FEATURE_FLAG_WPP_SCHOOLS) {
+      $taxonomies['wpp_schools'] = array(
+        'default' => true,
+        'readonly' => true,
+        'hidden' => true,
+        'hierarchical' => true,
+        'public' => true,
+        'show_in_nav_menus' => true,
+        'show_in_menu' => true,
+        'show_ui' => false,
+        'show_tagcloud' => false,
+        'add_native_mtbox' => false,
+        'label' => __('School', ud_get_wp_property()->domain),
+        'labels' => array(
+          'name' => __('Schools', ud_get_wp_property()->domain),
+          'singular_name' => __('School', ud_get_wp_property()->domain),
+          'search_items' => _x('Search School', 'property location taxonomy', ud_get_wp_property()->domain),
+          'all_items' => _x('All Schools', 'property location taxonomy', ud_get_wp_property()->domain),
+          'parent_item' => _x('Parent School', 'property location taxonomy', ud_get_wp_property()->domain),
+          'parent_item_colon' => _x('Parent School', 'property location taxonomy', ud_get_wp_property()->domain),
+          'edit_item' => _x('Edit School', 'property location taxonomy', ud_get_wp_property()->domain),
+          'update_item' => _x('Update School', 'property location taxonomy', ud_get_wp_property()->domain),
+          'add_new_item' => _x('Add New School', 'property location taxonomy', ud_get_wp_property()->domain),
+          'new_item_name' => _x('New School', 'property location taxonomy', ud_get_wp_property()->domain),
+          'not_found' => _x('No location found', 'property location taxonomy', ud_get_wp_property()->domain),
+          'menu_name' => __('Schools', ud_get_wp_property()->domain),
+        ),
+        'query_var' => 'schools',
+        'rewrite' => array('slug' => 'schools')
+      );
+    }
+
     // Add [wpp_listing_type] taxonomy.
     if (defined('WPP_FEATURE_FLAG_WPP_LISTING_TYPE') && WPP_FEATURE_FLAG_WPP_LISTING_TYPE ) {
       $taxonomies['wpp_listing_type'] = array(
