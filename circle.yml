@@ -1,0 +1,31 @@
+machine:
+  hosts:
+    wp-rets-client.github.com: 192.30.253.112
+    wp-property-tests.github.com: 192.30.253.112
+  services:
+    - docker
+
+dependencies:
+  cache_directories:
+    - "~/docker"
+    - "~/utils"
+    - "~/backups"
+
+  pre:
+    - mkdir -p ~/utils ~/docker ~/backups
+
+    - sudo rm -rf /home/ubuntu/wp-property-tests
+    - git clone git@192.30.253.112:wp-property/wp-property-tests.git /home/ubuntu/wp-property-tests --branch=master
+
+    - "node /home/ubuntu/wp-property-tests/bin/start-ngrok.js"
+    - "bash /home/ubuntu/wp-property-tests/bin/create-sql.sh"
+    - "bash /home/ubuntu/wp-property-tests/bin/prepare-for-docker.sh"
+    - "bash /home/ubuntu/wp-property-tests/bin/run-container.sh"
+    - "bash /home/ubuntu/wp-property-tests/bin/fix-permissions.sh"
+
+    - echo "Site at http://${CIRCLE_SHA1}-${CIRCLE_BUILD_NUM}.ngrok.io"
+
+  override:
+    - echo "Skipping composer install on purpose."
+    - NODE_ENV=development npm install
+
