@@ -484,14 +484,13 @@ class WPP_F extends UsabilityDynamics\Utility
         'public' => true,
         'show_in_nav_menus' => true,
         'show_ui' => false,
-        'show_in_menu' => true,
         'show_tagcloud' => false,
         'add_native_mtbox' => false,
         'label' => sprintf(_x('%s Location', 'property location taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
         'labels' => array(
           'name' => sprintf(_x('%s Location', 'property location taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
           'singular_name' => sprintf(_x('%s Location', 'property location taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'search_items' => _x('Search %s Location', 'property location taxonomy', ud_get_wp_property()->domain),
+          'search_items' => _x('Search Location', 'property location taxonomy', ud_get_wp_property()->domain),
           'all_items' => _x('All Location', 'property location taxonomy', ud_get_wp_property()->domain),
           'parent_item' => _x('Parent Location', 'property location taxonomy', ud_get_wp_property()->domain),
           'parent_item_colon' => _x('Parent Location', 'property location taxonomy', ud_get_wp_property()->domain),
@@ -500,7 +499,7 @@ class WPP_F extends UsabilityDynamics\Utility
           'add_new_item' => _x('Add New Location', 'property location taxonomy', ud_get_wp_property()->domain),
           'new_item_name' => _x('New Location', 'property location taxonomy', ud_get_wp_property()->domain),
           'not_found' => _x('No location found', 'property location taxonomy', ud_get_wp_property()->domain),
-          'menu_name' => __('Locations', ud_get_wp_property()->domain),
+          'menu_name' => sprintf(_x('%s Location', 'property location taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
         ),
         'query_var' => 'location',
         'rewrite' => array('slug' => 'location')
@@ -524,7 +523,7 @@ class WPP_F extends UsabilityDynamics\Utility
         'labels' => array(
           'name' => sprintf(_x('%s Type', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
           'singular_name' => sprintf(_x('%s Type', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'search_items' => _x('Search %s Type', 'property type taxonomy', ud_get_wp_property()->domain),
+          'search_items' => _x('Search Type', 'property type taxonomy', ud_get_wp_property()->domain),
           'all_items' => _x('All Type', 'property type taxonomy', ud_get_wp_property()->domain),
           'parent_item' => _x('Parent Type', 'property type taxonomy', ud_get_wp_property()->domain),
           'parent_item_colon' => _x('Parent Type', 'property type taxonomy', ud_get_wp_property()->domain),
@@ -557,7 +556,7 @@ class WPP_F extends UsabilityDynamics\Utility
         'labels' => array(
           'name' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
           'singular_name' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'search_items' => _x('Search %s Status', 'property type taxonomy', ud_get_wp_property()->domain),
+          'search_items' => _x('Search  Status', 'property type taxonomy', ud_get_wp_property()->domain),
           'all_items' => _x('All Status', 'property type taxonomy', ud_get_wp_property()->domain),
           'parent_item' => _x('Parent Status', 'property type taxonomy', ud_get_wp_property()->domain),
           'parent_item_colon' => _x('Parent Status', 'property type taxonomy', ud_get_wp_property()->domain),
@@ -586,20 +585,20 @@ class WPP_F extends UsabilityDynamics\Utility
         'show_ui' => false,
         'show_tagcloud' => false,
         'add_native_mtbox' => false,
-        'label' => sprintf(_x('%s Permissions', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+        'label' => sprintf(_x('%s Policy', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
         'labels' => array(
-          'name' => sprintf(_x('%s Permissions', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'singular_name' => sprintf(_x('%s Permissions', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'search_items' => _x('Search %s Permissions', 'property type taxonomy', ud_get_wp_property()->domain),
-          'all_items' => _x('All Permissions', 'property type taxonomy', ud_get_wp_property()->domain),
-          'parent_item' => _x('Parent Permissions', 'property type taxonomy', ud_get_wp_property()->domain),
-          'parent_item_colon' => _x('Parent Permissions', 'property type taxonomy', ud_get_wp_property()->domain),
-          'edit_item' => _x('Edit Permissions', 'property type taxonomy', ud_get_wp_property()->domain),
-          'update_item' => _x('Update Permissions', 'property type taxonomy', ud_get_wp_property()->domain),
-          'add_new_item' => _x('Add New Permissions', 'property type taxonomy', ud_get_wp_property()->domain),
-          'new_item_name' => _x('New Permissions', 'property type taxonomy', ud_get_wp_property()->domain),
-          'not_found' => sprintf(_x('No %s Permissions found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'menu_name' => sprintf(_x('%s Permissions', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'name' => sprintf(_x('%s Policy', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'singular_name' => sprintf(_x('%s Policy', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'search_items' => _x('Search Policy', 'property type taxonomy', ud_get_wp_property()->domain),
+          'all_items' => _x('All Policy', 'property type taxonomy', ud_get_wp_property()->domain),
+          'parent_item' => _x('Parent Policy', 'property type taxonomy', ud_get_wp_property()->domain),
+          'parent_item_colon' => _x('Parent Policy', 'property type taxonomy', ud_get_wp_property()->domain),
+          'edit_item' => _x('Edit Policy', 'property type taxonomy', ud_get_wp_property()->domain),
+          'update_item' => _x('Update Policy', 'property type taxonomy', ud_get_wp_property()->domain),
+          'add_new_item' => _x('Add New Policy', 'property type taxonomy', ud_get_wp_property()->domain),
+          'new_item_name' => _x('New Policy', 'property type taxonomy', ud_get_wp_property()->domain),
+          'not_found' => sprintf(_x('No %s Policy found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+          'menu_name' => sprintf(_x('%s Policy', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
         ),
         'query_var' => 'property-permissions',
         'rewrite' => array('slug' => 'property-permissions')
@@ -623,7 +622,7 @@ class WPP_F extends UsabilityDynamics\Utility
         'labels' => array(
           'name' => sprintf(_x('%s Labels', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
           'singular_name' => sprintf(_x('%s Label', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'search_items' => _x('Search %s Labels', 'property type taxonomy', ud_get_wp_property()->domain),
+          'search_items' => _x('Search  Labels', 'property type taxonomy', ud_get_wp_property()->domain),
           'all_items' => _x('All Labels', 'property type taxonomy', ud_get_wp_property()->domain),
           'parent_item' => _x('Parent Labels', 'property type taxonomy', ud_get_wp_property()->domain),
           'parent_item_colon' => _x('Parent Labels', 'property type taxonomy', ud_get_wp_property()->domain),
@@ -640,8 +639,8 @@ class WPP_F extends UsabilityDynamics\Utility
     }
 
     // Generic [wpp_category] taxonomy for multiple terms.
-    if (defined('WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY') && WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY) {
-      $taxonomies['wpp_listing_category'] = array(
+    if (defined('WPP_FEATURE_FLAG_WPP_CATEGORICAL') && WPP_FEATURE_FLAG_WPP_CATEGORICAL) {
+      $taxonomies['wpp_categorical'] = array(
         'default' => true,
         'readonly' => true,
         'hidden' => true,

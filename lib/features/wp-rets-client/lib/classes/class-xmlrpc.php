@@ -935,7 +935,7 @@ namespace UsabilityDynamics\WPRETSC {
           'taxonomies' => true
         ) );
 
-        foreach( array( 'wpp_listing_category') as $taxonomy ) {
+        foreach( array( 'wpp_categorical') as $taxonomy ) {
           wp_cache_delete( 'all_ids', $taxonomy );
           wp_cache_delete( 'get', $taxonomy );
           delete_option( "{$taxonomy}_children" );

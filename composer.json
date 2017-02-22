@@ -166,8 +166,8 @@
       },
       {
         "name": "Property Categories",
-        "constant": "WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY",
-        "description": "Taxonomy for general property terms, stored in [wpp_listing_category]",
+        "constant": "WPP_FEATURE_FLAG_WPP_CATEGORICAL",
+        "description": "Taxonomy for general property terms, stored in [wpp_categorical]",
         "since": "2.2.1",
         "enabled": true
       },
