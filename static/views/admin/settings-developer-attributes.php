@@ -11,21 +11,64 @@ $predefined_values = isset( $wp_properties[ 'predefined_values' ] ) ? $wp_proper
 
 $attributes = ud_get_wp_property()->get('property_stats');
 
-if(empty($wp_properties[ 'property_stats' ])){
-  $wp_properties[ 'property_stats' ] = array("" => "");
+$searchable_attr_fields_options = array(
+        ''                        => __( ' - ', ud_get_wp_property()->domain ),
+        'input'                   => __( 'Free Text', ud_get_wp_property()->domain ),
+        'range_input'             => __( 'Text Input Range', ud_get_wp_property()->domain ),
+        'range_dropdown'          => __( 'Range Dropdown', ud_get_wp_property()->domain ),
+        'advanced_range_dropdown' => __( 'Advanced Range Dropdown', ud_get_wp_property()->domain ),
+        'dropdown'                => __( 'Dropdown Selection', ud_get_wp_property()->domain ),
+        'checkbox'                => __( 'Single Checkbox', ud_get_wp_property()->domain ),
+        'multi_checkbox'          => __( 'Multi-Checkbox', ud_get_wp_property()->domain ),
+        'range_date'              => __( 'Date Input Range', ud_get_wp_property()->domain ),
+      );
+$searchable_attr_field = array();
+foreach ($attributes as $slug => $label) {
+  ob_start();
+  do_action( 'wpp::property_attributes::searchable_attr_field', $slug );
+  $content = ob_get_clean();
+  $searchable_attr_field_do_action[$slug] = $content;
 }
 
-if( !isset( $wp_properties[ 'property_groups' ] ) ) {
-  $wp_properties[ 'property_groups' ] = array();
-}
-if( empty( $wp_properties[ 'sortable_attributes' ] ) ) {
-  $wp_properties[ 'sortable_attributes' ] = array();
-}
+$searchable_attr_field_do_action = array_filter($searchable_attr_field_do_action);
 
 ?>
 <script type="text/javascript">
 jQuery(document).ready(function($) {
   wp_properties = wpp.instance.settings;
+  searchable_attr_fields_options = <?php echo json_encode($searchable_attr_fields_options);?>;
+  searchable_attr_field_do_action = <?php echo json_encode($searchable_attr_field_do_action);?>;
+
+  if(typeof wp_properties.property_stats == 'undefined'){
+    wp_properties.property_stats = {'':''};
+  }
+
+  if(typeof  wp_properties.property_stats_groups == 'undefined' ) {
+    wp_properties.property_stats_groups = {};
+  }
+  if(typeof  wp_properties.property_groups == 'undefined' ) {
+    wp_properties.property_groups = {};
+  }
+  if(typeof  wp_properties.sortable_attributes == 'undefined' ) {
+    wp_properties.sortable_attributes = {};
+  }
+  if(typeof  wp_properties.prop_std_att == 'undefined' ) {
+    wp_properties.prop_std_att = {};
+  }
+  if( typeof  wp_properties.prop_std_att_mapsto == 'undefined' ) {
+    wp_properties.prop_std_att_mapsto = {};
+  }
+
+
+  window.selected = function(selected, current) {
+    var result = '';
+    current = current || true;
+
+    if ( selected === current )
+      result = " selected='selected' ";
+ 
+    return result;
+  }
 
 
   var wppAttribute = Backbone.Model.extend({
@@ -39,6 +82,7 @@ jQuery(document).ready(function($) {
       return this;
     }
   });
+
 
   var wppAttributes = Backbone.Collection.extend({
     model: wppAttribute,
@@ -63,7 +107,7 @@ jQuery(document).ready(function($) {
   jQuery.each(wp_properties.property_stats, function(slug, value) {
     var gslug = '';
     var group = '';
-    if(wp_properties.property_stats_groups[ slug ] != 'undefined'){
+    if(typeof wp_properties.property_stats_groups[ slug ] != 'undefined'){
       gslug = wp_properties.property_stats_groups[ slug ];
       group = typeof wp_properties.property_groups[ gslug ] != 'undefined'  ? wp_properties[ 'property_groups' ][ gslug ] : '';
     }
@@ -104,12 +148,12 @@ jQuery(document).ready(function($) {
             </label>
             <?php } ?>
 
-            <% if( jQuery.inArray(slug, wp_properties.geo_type_attributes)){ %>
+            <% if( jQuery.inArray(slug, wp_properties.geo_type_attributes) != -1){ %>
               <div class="wpp_notice">
                 <span><?php _e( 'Attention! This attribute (slug) is used by Google Validator and Address Display functionality. It is set automaticaly and can not be edited on Property Adding/Updating page.', ud_get_wp_property()->domain ); ?></span>
               </div>
             <% } %>
-            <% if(slug == "ID"){ %> <?// for ID field: show a notice to the user about the field being non-editable @raj (22/07/2016) ?>
+            <% if(slug == "ID"){ %> <?php// for ID field: show a notice to the user about the field being non-editable @raj (22/07/2016) ?>
               <div class="wpp_notice">
                 <span><?php _e( 'Note! This attribute (slug) is predefined and used by WP-Property. You can not remove it or change it.', ud_get_wp_property()->domain ); ?></span>
               </div>
@@ -128,28 +172,30 @@ jQuery(document).ready(function($) {
             ?>
               
              <div  class='std-attr-mapper'>
-              <select  name='wpp_settings[prop_std_att_mapsto][<?php echo $slug;?>]' id="wpp_prop_std_att_mapsto_<?php echo $slug;?>" class=' wpp_settings-prop_std_att_mapsto'><option value=''> - </option>
-             <?php
-              foreach ($wp_properties[ 'prop_std_att' ] as $std_attr_type){
-                foreach ($std_attr_type as $std_key => $std_val){
-                ?>    
-                  <option value="<?php echo $std_key; ?>" 
-                    data-notice='<?php  if(isset($std_val['notice']) && !empty($std_val['notice'])) echo $std_val['notice'];?> '
+              <select  name='wpp_settings[prop_std_att_mapsto][<%= slug %>]' id="wpp_prop_std_att_mapsto_<%= slug %>" class=' wpp_settings-prop_std_att_mapsto'><option value=''> - </option>
+
+              <% _.each(wp_properties.prop_std_att, function(std_attr_type){%>
+                <% _.each(std_attr_type, function(std_val, std_key){%>
+                  <option value="<%= std_key %>" 
+                    data-notice='<% if( typeof std_val.notice != 'undefined' && std_val.notice) print(std_val.notice); %>'
                     <?php
                     // check if the attribute type is "address" from legacy system  @raj
-                    if ( $slug == $wp_properties[ 'configuration' ]['address_attribute'] ){
-                       selected(  $std_key,'address');
+                    ?>
+                    <% if ( slug == wp_properties.configuration.address_attribute ){
+                       print(selected(  std_key,'address'));
                     }
+                    %> 
+                    <?php
                      // if the user has updated to new standard attributes then this is the one we select
-                     if(isset( $wp_properties[ 'prop_std_att_mapsto' ][ $slug ]) )
-                       selected( $wp_properties[ 'prop_std_att_mapsto' ][ $slug ], $std_key ); ?> 
+                    ?>
+                    <% if(typeof wp_properties.prop_std_att_mapsto[ slug ] != 'undefined' )
+                       print(selected( wp_properties.prop_std_att_mapsto[ slug ], std_key )); 
+                    %> 
                    > 
-                    <?php _e( $std_val['label'], ud_get_wp_property()->domain ) ?>
+                    <%= std_val.label %>
                   </option>
-                  <?php  
-                } //end attributes foreach
-              } //end attributes-category foreach
-              ?>
+                <% }); %>
+              <% }); %>
               </select>
               <i class='std_att_notices'></i>
               </div>
@@ -215,20 +261,14 @@ jQuery(document).ready(function($) {
         <ul>
           <li>
             <select name="wpp_settings[searchable_attr_fields][<%= slug %>]" class="wpp_pre_defined_value_setter wpp_searchable_attr_fields">
-              <option value=""> - </option>
-              <option value="input" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'input' ); ?>><?php _e( 'Free Text', ud_get_wp_property()->domain ) ?></option>
-              <option value="range_input" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'range_input' ); ?>><?php _e( 'Text Input Range', ud_get_wp_property()->domain ) ?></option>
-              <option value="range_dropdown" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'range_dropdown' ); ?>><?php _e( 'Range Dropdown', ud_get_wp_property()->domain ) ?></option>
-              <option value="advanced_range_dropdown" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'advanced_range_dropdown' ); ?>><?php _e( 'Advanced Range Dropdown', ud_get_wp_property()->domain ) ?></option>
-              <option value="dropdown" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'dropdown' ); ?>><?php _e( 'Dropdown Selection', ud_get_wp_property()->domain ) ?></option>
-              <option value="checkbox" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'checkbox' ); ?>><?php _e( 'Single Checkbox', ud_get_wp_property()->domain ) ?></option>
-              <option value="multi_checkbox" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'multi_checkbox' ); ?>><?php _e( 'Multi-Checkbox', ud_get_wp_property()->domain ) ?></option>
-              <option value="range_date" <?php if( isset( $wp_properties[ 'searchable_attr_fields' ][ $slug ] ) ) selected( $wp_properties[ 'searchable_attr_fields' ][ $slug ], 'range_date' ); ?>><?php _e( 'Date Input Range', ud_get_wp_property()->domain ) ?></option>
-              <?php do_action( 'wpp::property_attributes::searchable_attr_field', $slug ); ?>
+              <% _.each(searchable_attr_fields_options, function(label, key){ %>
+                <option value="<%= key %>" <% if( typeof wp_properties.searchable_attr_fields[ slug ] != 'undefined' ) { print(selected( wp_properties.searchable_attr_fields[ slug ], key ))};%>><%= label %></option>
+              <% }); %>
+              <% if(typeof searchable_attr_field_do_action[slug] != 'undefined') print(searchable_attr_field_do_action[slug]); %>
             </select>
           </li>
           <li>
-            <textarea class="wpp_attribute_pre_defined_values" name="wpp_settings[predefined_search_values][<%= slug %>]"><?php echo isset( $wp_properties[ 'predefined_search_values' ][ $slug ] ) ? $wp_properties[ 'predefined_search_values' ][ $slug ] : ''; ?></textarea>
+            <textarea class="wpp_attribute_pre_defined_values" name="wpp_settings[predefined_search_values][<%= slug %>]"><% if( wp_properties.predefined_search_values[ slug ] != 'undefined' ) wp_properties.predefined_search_values[ slug ]; %></textarea>
           </li>
         </ul>
       </td>
@@ -257,7 +297,7 @@ jQuery(document).ready(function($) {
             echo "<br />";
             echo "<div class='default_value_container' data-name='$field_name' data-value='$value' ></div>";
             ?>
-            <a class="button apply-to-all" data-attribute="<?php echo $slug;?>" href="#" title="<?php _e("Apply to listings that have no value for this field.", ud_get_wp_property()->domain);?>" ><?php _e("Apply to all", ud_get_wp_property()->domain);?></a> <br/>
+            <a class="button apply-to-all" data-attribute="<%= slug %>" href="#" title="<?php _e("Apply to listings that have no value for this field.", ud_get_wp_property()->domain);?>" ><?php _e("Apply to all", ud_get_wp_property()->domain);?></a> <br/>
           </li>
         </ul>
       </td>
