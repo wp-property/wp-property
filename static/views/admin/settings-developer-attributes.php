@@ -100,7 +100,7 @@ jQuery(document).ready(function($) {
             </label>
             <?php } ?>
 
-            <% if( typeof wp_properties.geo_type_attributes != 'undefined' && slug in wp_properties.geo_type_attributes){ %>
+            <% if( jQuery.inArray(slug, wp_properties.geo_type_attributes)){ %>
               <div class="wpp_notice">
                 <span><?php _e( 'Attention! This attribute (slug) is used by Google Validator and Address Display functionality. It is set automaticaly and can not be edited on Property Adding/Updating page.', ud_get_wp_property()->domain ); ?></span>
               </div>
@@ -172,31 +172,31 @@ jQuery(document).ready(function($) {
         <ul>
           <li>
             <label>
-              <input <% if( typeof wp_properties.sortable_attributes != 'undefined' && slug in wp_properties.sortable_attributes){ %>CHECKED<% } %> type="checkbox" class="slug" name="wpp_settings[sortable_attributes][]" value="<%= slug %>"/>
+              <input <% if( jQuery.inArray(slug, wp_properties.sortable_attributes) != -1){ print( 'CHECKED'); } %> type="checkbox" class="slug" name="wpp_settings[sortable_attributes][]" value="<%= slug %>"/>
               <?php _e( 'Sortable.', ud_get_wp_property()->domain ); ?>
             </label>
           </li>
           <li>
             <label>
-              <input <% if( typeof wp_properties.searchable_attributes != 'undefined' && slug in wp_properties.searchable_attributes){ %>CHECKED<% } %> type="checkbox" class="slug" name="wpp_settings[searchable_attributes][]" value="<%= slug %>"/>
+              <input <% if( jQuery.inArray(slug, wp_properties.searchable_attributes) != -1){ %>CHECKED<% } %> type="checkbox" class="slug" name="wpp_settings[searchable_attributes][]" value="<%= slug %>"/>
               <?php _e( 'Searchable.', ud_get_wp_property()->domain ); ?>
             </label>
           </li>
           <li class="wpp_development_advanced_option">
             <label>
-              <input <% if( typeof wp_properties.hidden_frontend_attributes != 'undefined' && slug in wp_properties.hidden_frontend_attributes){ %>CHECKED<% } %>  type="checkbox" class="slug" name="wpp_settings[hidden_frontend_attributes][]" value="<%= slug %>"/>
+              <input <% if( jQuery.inArray(slug, wp_properties.hidden_frontend_attributes) != -1){ %>CHECKED<% } %>  type="checkbox" class="slug" name="wpp_settings[hidden_frontend_attributes][]" value="<%= slug %>"/>
               <?php _e( 'Admin only.', ud_get_wp_property()->domain ); ?>
             </label>
           </li>
           <li class="wpp-setting wpp_development_advanced_option wpp-setting-attribute-admin-sortable">
             <label>
-              <input <% if( typeof wp_properties.column_attributes != 'undefined' && slug in wp_properties.column_attributes){ %>CHECKED<% } %> type="checkbox" class="slug" name="wpp_settings[column_attributes][]" value="<%= slug %>"/>
+              <input <% if( jQuery.inArray(slug, wp_properties.column_attributes) != -1){ %>CHECKED<% } %> type="checkbox" class="slug" name="wpp_settings[column_attributes][]" value="<%= slug %>"/>
               <?php _e( 'Admin sortable.', ud_get_wp_property()->domain ); ?>
             </label>
           </li>
           <li class="wpp_development_advanced_option en_default_value_container">
             <label>
-              <input <% if( wp_properties.en_default_value && slug in wp_properties.en_default_value){ %>CHECKED<% } %>  <?php echo ( isset( $wp_properties[ 'en_default_value' ] ) && is_array( $wp_properties[ 'en_default_value' ] ) && in_array( $slug, $wp_properties[ 'en_default_value' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug en_default_value" name="wpp_settings[en_default_value][]" value="<%= slug %>"/>
+              <input <% if( jQuery.inArray(slug, wp_properties.en_default_value) != -1){ %>CHECKED<% } %>  <?php echo ( isset( $wp_properties[ 'en_default_value' ] ) && is_array( $wp_properties[ 'en_default_value' ] ) && in_array( $slug, $wp_properties[ 'en_default_value' ] ) ) ? "CHECKED" : ""; ?> type="checkbox" class="slug en_default_value" name="wpp_settings[en_default_value][]" value="<%= slug %>"/>
               <?php _e( 'Set default value.', ud_get_wp_property()->domain ); ?>
             </label>
           </li>
