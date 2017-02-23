@@ -64,7 +64,7 @@ jQuery(document).ready(function($) {
     var gslug = '';
     var group = '';
     if(wp_properties.property_stats_groups[ slug ] != 'undefined'){
-      gslug = wp_properties.property_stats_groups[ slug ] : '';
+      gslug = wp_properties.property_stats_groups[ slug ];
       group = typeof wp_properties.property_groups[ gslug ] != 'undefined'  ? wp_properties[ 'property_groups' ][ gslug ] : '';
     }
 
