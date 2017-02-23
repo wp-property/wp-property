@@ -61,8 +61,12 @@ jQuery(document).ready(function($) {
    _wppAttributes = new wppAttributes();
 
   jQuery.each(wp_properties.property_stats, function(slug, value) {
-    var gslug = typeof wp_properties.property_stats_groups[ slug ] != 'undefined'  ? wp_properties.property_stats_groups[ slug ] : '';
-    var group = typeof wp_properties.property_groups[ gslug ] != 'undefined'  ? wp_properties[ 'property_groups' ][ gslug ] : '';
+    var gslug = '';
+    var group = '';
+    if(wp_properties.property_stats_groups[ slug ] != 'undefined'){
+      gslug = wp_properties.property_stats_groups[ slug ] : '';
+      group = typeof wp_properties.property_groups[ gslug ] != 'undefined'  ? wp_properties[ 'property_groups' ][ gslug ] : '';
+    }
 
     var row = new wppAttribute({wp_properties: wp_properties, slug: slug, gslug: gslug, group: group});
     _wppAttributes.add(row);
