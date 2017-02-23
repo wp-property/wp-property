@@ -36,7 +36,7 @@ namespace UsabilityDynamics\WPP {
 
             $layout_id = get_theme_mod('layouts_property_overview_choice', false ) ? get_theme_mod('layouts_property_overview_choice') : 'false';
             $layout_id = apply_filters('property_layouts_layout_id', $layout_id);
-            
+
             if ($layout_id != 'false') {
 
               try {
