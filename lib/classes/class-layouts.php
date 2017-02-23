@@ -35,6 +35,7 @@ namespace UsabilityDynamics\WPP {
           if (is_tax() && in_array('property', get_taxonomy(get_queried_object()->taxonomy)->object_type) || is_property_overview_page()) {
 
             $layout_id = get_theme_mod('layouts_property_overview_choice', false ) ? get_theme_mod('layouts_property_overview_choice') : 'false';
+            $layout_id = apply_filters('property_layouts_layout_id', $layout_id);
 
             if ($layout_id != 'false') {
 
@@ -59,6 +60,7 @@ namespace UsabilityDynamics\WPP {
           if (is_singular('property')) {
 
             $layout_id = get_theme_mod('layouts_property_single_choice', false ) ? get_theme_mod('layouts_property_single_choice') : 'false';
+            $layout_id = apply_filters('property_layouts_layout_id', $layout_id);
 
             if ($layout_id != 'false') {
 
@@ -83,6 +85,7 @@ namespace UsabilityDynamics\WPP {
           if (!empty($wp_query->wpp_search_page)) {
 
             $layout_id = get_theme_mod('layouts_property_overview_choice', false ) ? get_theme_mod('layouts_property_overview_choice') : 'false';
+            $layout_id = apply_filters('property_layouts_layout_id', $layout_id);
 
             if ($layout_id != 'false') {
 
