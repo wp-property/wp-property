@@ -54,9 +54,15 @@ namespace UsabilityDynamics\WPP {
           add_filter( 'manage_edit-wpp_categorical_columns', array( $this, 'wpp_categorical_columns' ), 20 );
         }
 
+        if( defined( 'WPP_FEATURE_FLAG_WPP_SCHOOLS' ) && WPP_FEATURE_FLAG_WPP_SCHOOLS ) {
+          add_action( 'wpp_schools_edit_form_fields', array( $this, 'edit_form_fields' ), 20, 2 );
+          //add_action( 'manage_wpp_schools_custom_column', array( $this, 'wpp_schools_custom_column' ), 20, 3 );
+          //add_filter( 'manage_edit-wpp_schools_columns', array( $this, 'wpp_schools_columns' ), 20 );
+        }
+
         // Add custom columns to Taxonomy table.
         if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_LOCATION' ) && WPP_FEATURE_FLAG_WPP_LISTING_LOCATION ) {
-          add_filter( 'manage_wpp_categorical_custom_columns', array( $this, 'wpp_listing_location_custom_columns' ), 20  );
+          add_filter( 'manage_wpp_listing_location_custom_columns', array( $this, 'wpp_listing_location_custom_columns' ), 20  );
           //add_filter( 'manage_edit-wpp_listing_location_columns', array( $this, 'wpp_listing_location_columns' ), 20, 3 );
         }
 
@@ -139,8 +145,9 @@ namespace UsabilityDynamics\WPP {
        *
        * @author potanin@UD
        * @param $tag
+       * @param $taxonomy
        */
-      public function edit_form_fields( $tag ) {
+      public function edit_form_fields( $tag, $taxonomy ) {
         include ud_get_wp_property()->path( "static/views/admin/edit-term-fields.php", 'dir' );
       }
 
