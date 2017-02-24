@@ -162,7 +162,7 @@
         "constant": "WPP_FEATURE_FLAG_WPP_SEARCH_LANDING",
         "description": "Dynamic terms for landing pages, stored in [wpp_search_landing].",
         "since": "2.2.1",
-        "enabled": true
+        "enabled": false
       },
       {
         "name": "Standard Property Type",
