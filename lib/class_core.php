@@ -926,7 +926,7 @@ class WPP_Core {
    * @since 0.5
    * @param $actions
    * @param $post
-   * @return
+   * @return mixed
    */
   function property_row_actions( $actions, $post ) {
     if( $post->post_type != 'property' )

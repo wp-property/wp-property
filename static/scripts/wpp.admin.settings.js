@@ -441,10 +441,7 @@ jQuery.extend( wpp = wpp || {}, {
           wpp.ui.settings.set_pre_defined_values_for_attribute( this );
         } );
         // Assigning  default value
-        jQuery( ".wpp_admin_input_col .wpp_pre_defined_value_setter" ).live( "change", function () {
-          wpp.ui.settings.default_values_for_attribute( this );
-        } );
-        jQuery( ".wpp_admin_input_col .wpp_pre_defined_value_setter" ).each( function () {
+        jQuery( ".wpp_admin_input_col .wpp_default_value_setter" ).live( "change", function () {
           wpp.ui.settings.default_values_for_attribute( this );
         } );
 

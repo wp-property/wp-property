@@ -137,6 +137,13 @@
         "enabled": true
       },
       {
+        "name": "Schools Standard Taxonomy",
+        "constant": "WPP_FEATURE_FLAG_WPP_SCHOOLS",
+        "description": "Adds standard taxonomy for schools as [wpp_schools].",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
         "name": "Listing Labels",
         "constant": "WP_PROPERTY_FLAG_WPP_LISTING_LABEL",
         "description": "Property flags, for highlighting important information, stored in [wpp_listing_label]. Can be used to identify 'featured' properties.",
@@ -149,6 +156,20 @@
         "description": "Standard property location taxonomy, stored in [wpp_listing_location].",
         "since": "2.2.1",
         "enabled": true
+      },
+      {
+        "name": "Advanced Rewrite Rules",
+        "constant": "WPP_FEATURE_FLAG_ADVANCED_REWRITE_RULES",
+        "description": "Improved rewrite rules.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Landing Page Taxonomy",
+        "constant": "WPP_FEATURE_FLAG_WPP_SEARCH_LANDING",
+        "description": "Dynamic terms for landing pages, stored in [wpp_search_landing].",
+        "since": "2.2.1",
+        "enabled": false
       },
       {
         "name": "Standard Property Type",
