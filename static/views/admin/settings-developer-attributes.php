@@ -93,10 +93,19 @@ jQuery(document).ready(function($) {
 
 
   var wppAttribute = Backbone.Model.extend({
+
   });
   var wppAttributeView = Backbone.View.extend({
     tagName: 'tr',
     className: 'wpp_dynamic_table_row',
+    attributes: function(){
+      return {
+        slug: this.model.attributes.slug,
+        wpp_attribute_group: this.model.attributes.gslug,
+        new_row: this.model.attributes.slug == '' ? true : false,
+        style: typeof this.model.attributes.group.color != 'undefined' ? 'background-color:' + this.model.attributes.group.color : '',
+      };
+    },
     template: _.template($('#attributesView').html()),
     render: function() {
       this.el.innerHTML = this.template(this.model.toJSON());
@@ -143,20 +152,24 @@ jQuery(document).ready(function($) {
 
     var row = new wppAttribute({wp_properties: wp_properties, slug: slug, gslug: gslug, group: group});
     _wppAttributes.add(row);
-  })
+  });
+
+    var row = new wppAttribute({wp_properties: wp_properties, slug: '', gslug: '', group: {}});
+    _wppAttributes.add(row);
 
   wppAttributesView = new WPPAttributesView({ collection: _wppAttributes });
-  $("#wpp_inquiry_attribute_fields tbody").empty().append(wppAttributesView.render().el);
+  jQuery("#wpp_inquiry_attribute_fields tbody").empty().append(wppAttributesView.render().el);
 
-
+  jQuery( ".wpp_admin_input_col .wpp_default_value_setter" ).each( function () {
+    wpp.ui.settings.default_values_for_attribute( this );
+  } );
 });
 
 </script>
 
 <script type="text/template" id="attributesView">
 
-  
-    <tr class="wpp_dynamic_table_row" wpp_attribute_group="<%= gslug %>" style="<% if(typeof group.color != 'undefined'){%>background-color: group.color;<% } %> <% if(slug == '') { %> display:none; <% } %>" slug="<%= slug %>" new_row='false' xloaded='true'>
+    <tr xloaded='true'>
 
       <td class="wpp_draggable_handle">&nbsp;</td>
 
@@ -241,7 +254,7 @@ jQuery(document).ready(function($) {
       </td>
 
       <td class="wpp_attribute_group_col">
-        <input type="text" class="wpp_attribute_group wpp_group" value="<?php echo( !empty( $group[ 'name' ] ) ? $group[ 'name' ] : "" ); ?>"/>
+        <input type="text" class="wpp_attribute_group wpp_group" value="<% typeof group.name != 'undefined' ? print(group.name) : "" %>"/>
         <input type="hidden" class="wpp_group_slug" name="wpp_settings[property_stats_groups][<%= slug %>]" value="<%= gslug %>">
       </td>
 
@@ -290,8 +303,6 @@ jQuery(document).ready(function($) {
           <li>
             <select name="wpp_settings[searchable_attr_fields][<%= slug %>]" class="wpp_pre_defined_value_setter wpp_searchable_attr_fields">
               <% _.each(searchable_attr_fields_options, function(label, key){ %>
-               wp_properties.searchable_attr_fields[ <%=slug%> ]  =
-              <%= key %>
                 <option value="<%= key %>" <% print(selected( wp_properties.searchable_attr_fields[ slug ], key ));%>><%= label %></option>
               <% }); %>
               <% if(typeof searchable_attr_field_do_action[slug] != 'undefined') print(searchable_attr_field_do_action[slug]); %>
@@ -306,7 +317,7 @@ jQuery(document).ready(function($) {
       <td class="wpp_admin_input_col">
         <ul>
           <li>
-            <select name="wpp_settings[admin_attr_fields][<%= slug %>]" class="wpp_pre_defined_value_setter wpp_searchable_attr_fields">
+            <select name="wpp_settings[admin_attr_fields][<%= slug %>]" class="wpp_pre_defined_value_setter wpp_default_value_setter wpp_searchable_attr_fields">
               <?php $meta_box_fields = ud_get_wp_property('attributes.types', array()); ?>
               <% _.each( meta_box_fields, function(label, key){ %>
                 <option value="<%= key %>" <% print(selected( wp_properties.admin_attr_fields[ slug ], key )) %>><%= label %></option>
