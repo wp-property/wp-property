@@ -59,7 +59,7 @@ jQuery.fn.wppGroups = function(opt) {
     groupsBlock.hide(300);
     wrapper.css('display','none');
 
-    statsRow.each(function(i, e){
+    jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row').each(function(i, e){
       jQuery(e).removeClass('groups_active');
     })
   };
@@ -82,44 +82,39 @@ jQuery.fn.wppGroups = function(opt) {
   //* Assign attribute to Group */
   assign.live('click', function(){
     var row = jQuery(this).parent().parent();
-    statsRow.each(function(i,e){
-      if(jQuery(e).hasClass('groups_active')) {
-        jQuery(e).css('background-color', jQuery('input.wpp_input_colorpicker' , row).val());
 
-        //* HACK FOR IE7 */
-        if(typeof jQuery.browser.msie != 'undefined' && (parseInt(jQuery.browser.version) == 7)) {
-          jQuery(e).find('td').css('background-color', jQuery('input.wpp_input_colorpicker' , row).val());
-        }
+    var active_groups = jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row.groups_active');
+    active_groups.css('background-color', jQuery('input.wpp_input_colorpicker' , row).val());
 
-        jQuery(e).attr('wpp_attribute_group' , row.attr('slug'));
-        jQuery('input.wpp_group_slug' , e).val(row.attr('slug'));
+    //* HACK FOR IE7 */
+    if(typeof jQuery.browser.msie != 'undefined' && (parseInt(jQuery.browser.version) == 7)) {
+      active_groups.find('td').css('background-color', jQuery('input.wpp_input_colorpicker' , row).val());
+    }
 
-        var groupName = jQuery('input.slug_setter' , row).val();
-        if(groupName == '') {
-          groupName = 'NO NAME';
-        }
+    active_groups.attr('wpp_attribute_group' , row.attr('slug'));
+    jQuery('input.wpp_group_slug' , active_groups).val(row.attr('slug'));
 
-        jQuery('input.wpp_attribute_group' , e).val(groupName);
-      }
-    });
+    var groupName = jQuery('input.slug_setter' , row).val();
+    if(groupName == '') {
+      groupName = 'NO NAME';
+    }
+
+    jQuery('input.wpp_attribute_group' , active_groups).val(groupName);
     closeGroupBox();
   });
 
   //* Unassign attribute from Group */
   unassign.live('click', function(){
-    statsRow.each(function(i,e){
-      if(jQuery(e).hasClass('groups_active')) {
-        jQuery(e).css('background-color', '');
-        //* HACK FOR IE7 */
-        if(typeof jQuery.browser.msie != 'undefined' && (parseInt(jQuery.browser.version) == 7)) {
-          jQuery(e).find('td').css('background-color', '');
-        }
+    var active_groups = jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row.groups_active');
+    jQuery(active_groups).css('background-color', '');
+    //* HACK FOR IE7 */
+    if(typeof jQuery.browser.msie != 'undefined' && (parseInt(jQuery.browser.version) == 7)) {
+      jQuery(active_groups).find('td').css('background-color', '');
+    }
 
-        jQuery(e).removeAttr('wpp_attribute_group');
-        jQuery('input.wpp_group_slug' , e).val('');
-        jQuery('input.wpp_attribute_group' , e).val('');
-      }
-    });
+    jQuery(active_groups).removeAttr('wpp_attribute_group');
+    jQuery('input.wpp_group_slug' , active_groups).val('');
+    jQuery('input.wpp_attribute_group' , active_groups).val('');
     closeGroupBox();
   });
 
@@ -173,6 +168,7 @@ jQuery.fn.wppGroups = function(opt) {
   //* Sorts all attributes by Groups */
   sortButton.live('click', function(){
     jQuery('tbody tr' , groupsBlock).each(function(gi,ge){
+      var statsRow = jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row');
       statsRow.each(function(si,se){
         if(typeof jQuery(se).attr('wpp_attribute_group') != 'undefined') {
           if(jQuery(se).attr('wpp_attribute_group') == jQuery(ge).attr('slug')) {
