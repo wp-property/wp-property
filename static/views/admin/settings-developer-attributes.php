@@ -153,9 +153,6 @@ jQuery(document).ready(function($) {
     _wppAttributes.add(row);
   });
 
-    var row = new wppAttribute({wp_properties: wp_properties, slug: '', gslug: '', group: {}});
-    _wppAttributes.add(row);
-
   wppAttributesView = new WPPAttributesView({ collection: _wppAttributes });
   jQuery("#wpp_inquiry_attribute_fields tbody").empty().append(wppAttributesView.render().el);
 
@@ -168,7 +165,7 @@ jQuery(document).ready(function($) {
 
 <script type="text/template" id="attributesView">
 
-    <tr xloaded='true'>
+    <tr>
 
       <td class="wpp_draggable_handle">&nbsp;</td>
 
