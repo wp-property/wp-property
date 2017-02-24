@@ -1021,18 +1021,36 @@ class class_agents
 
   /**
    * Add menu to WP's navigation
+   *
+   * @todo Make sure that the position after WPP page isnt occupied. - potanin@UD
    */
   static public function admin_menu()
   {
-    global $wp_properties;
+    global $wp_properties, $menu;
 
     $label = ud_get_wp_property('configuration.feature_settings.agents.label.plural');
-    add_submenu_page('edit.php?post_type=property', $label, $label, self::$capability, 'show_agents', array('class_agents', 'show_agents'));
-  }
+    //add_submenu_page('edit.php?post_type=property', $label, $label, self::$capability, 'show_agents', array('class_agents', 'show_agents'));
 
+    $_wpp_menu_position = null;
+
+    // Find WPP position in menu.
+    foreach( $menu as $_position => $_menu ) {
+
+      if( $_menu[1] === 'edit_wpp_properties' ) {
+        $_wpp_menu_position = intval( $_position );
+
+      }
+
+    }
+
+    add_menu_page( $label, $label, self::$capability, 'wpp_agency_agents', array('class_agents', 'show_agents'), 'dashicons-admin-home', ( $_wpp_menu_position + 1 ) );
+  }
 
   /**
    * Helper functions
+   * @param $user_id
+   * @param bool $amp
+   * @return string
    */
   static public function get_link_edit($user_id, $amp = true)
   {

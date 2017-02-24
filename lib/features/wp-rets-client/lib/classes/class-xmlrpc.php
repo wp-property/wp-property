@@ -497,38 +497,8 @@ namespace UsabilityDynamics\WPRETSC {
         foreach( (array) $_post_data_tax_input as $tax_name => $tax_tags ) {
           ud_get_wp_rets_client()->write_log( "Starting to process [$tax_name] taxonomy.", 'debug' );
 
-          // Ignore these taxonomies if we support [wpp_listing_location].
-          if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_LOCATION' ) && WPP_FEATURE_FLAG_WPP_LISTING_LOCATION && in_array( $tax_name, array( 'rets_location_state', 'rets_location_county', 'rets_location_city', 'rets_location_route' ) ) ) {
-            ud_get_wp_rets_client()->write_log( "Skipping [$tax_name] taxonomy, we have [wpp_listing_location] enabled.", 'debug' );
-            continue;
-          }
-
           // Avoid hierarchical taxonomies since they do not allow simple-value passing.
           WPP_F::verify_have_system_taxonomy( $tax_name, array( 'hierarchical' => false ) );
-
-          // If WP-Property location flag is enabled, and we're doing the [wpp_listing_location] taxonomy, and the WPP_F::update_location_terms method is callable, process our wpp_listing_location terms.
-          if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_LOCATION' ) && WPP_FEATURE_FLAG_WPP_LISTING_LOCATION && $tax_name === 'wpp_listing_location' && is_callable(array( 'WPP_F', 'update_location_terms' ) ) ) {
-            ud_get_wp_rets_client()->write_log( 'Handling [wpp_listing_location] taxonomy for [' . $_post_id .'] listing.', 'debug' );
-
-            $_geo_tag_fields = array(
-              "state" => isset( $_post_data_tax_input["rets_location_state"] ) ? reset( $_post_data_tax_input["rets_location_state"] ) : null,
-              "county" => isset( $_post_data_tax_input["rets_location_county"] ) ? reset( $_post_data_tax_input["rets_location_county"] ) : null,
-              "city" => isset( $_post_data_tax_input["rets_location_city"] ) ? reset( $_post_data_tax_input["rets_location_city"] ) : null,
-              "route" => isset( $_post_data_tax_input["rets_location_route"] ) ? reset( $_post_data_tax_input["rets_location_route"] ) : null,
-            );
-
-            $_location_terms = WPP_F::update_location_terms( $_post_id, (object) $_geo_tag_fields);
-
-            if( is_wp_error( $_location_terms ) ) {
-              ud_get_wp_rets_client()->write_log( "Failed to insert location terms for[" .$_post_id."] property, got [" . $_location_terms->get_error_message() . " ] error", 'error' );
-            } else {
-              ud_get_wp_rets_client()->write_log( "Inserted " . count( $_location_terms ) . " location terms for [" .$_post_id."] property.", 'info' );
-            }
-
-            // Avoid re-adding whatever fields were passed by real [wpp_listing_location]
-            continue;
-
-          }
 
           if( is_taxonomy_hierarchical( $tax_name ) ) {
             ud_get_wp_rets_client()->write_log( "Handling hierarchical taxonomy [$tax_name].", 'debug' );

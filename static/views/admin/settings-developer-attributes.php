@@ -93,7 +93,6 @@ jQuery(document).ready(function($) {
 
 
   var wppAttribute = Backbone.Model.extend({
-
   });
   var wppAttributeView = Backbone.View.extend({
     tagName: 'tr',
