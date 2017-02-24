@@ -245,6 +245,16 @@ namespace UsabilityDynamics\WPP {
               $_taxonomies[ $_taxonomy ]['wpp_term_meta_fields'] = $_original_taxonomy['wpp_term_meta_fields'];
             }
 
+            // Allow show_in_menu setting to be set
+            if( isset( $_original_taxonomy ) && !isset( $_taxonomies[ $_taxonomy ]['show_in_menu'] ) && isset( $_original_taxonomy['show_in_menu'] ) ) {
+              $_taxonomies[ $_taxonomy ]['show_in_menu'] = $_original_taxonomy['show_in_menu'];
+            }
+
+            // Allow rich_taxonomy to be enabled.
+            if( isset( $_original_taxonomy ) && !isset( $_taxonomies[ $_taxonomy ]['rich_taxonomy'] ) && isset( $_original_taxonomy['rich_taxonomy'] ) ) {
+              $_taxonomies[ $_taxonomy ]['rich_taxonomy'] = $_original_taxonomy['rich_taxonomy'];
+            }
+
           }
 
         }
