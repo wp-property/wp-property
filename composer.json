@@ -158,6 +158,13 @@
         "enabled": true
       },
       {
+        "name": "Advanced Rewrite Rules",
+        "constant": "WPP_FEATURE_FLAG_ADVANCED_REWRITE_RULES",
+        "description": "Improved rewrite rules.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
         "name": "Landing Page Taxonomy",
         "constant": "WPP_FEATURE_FLAG_WPP_SEARCH_LANDING",
         "description": "Dynamic terms for landing pages, stored in [wpp_search_landing].",
