@@ -32,8 +32,8 @@ namespace UsabilityDynamics\WPP {
       {
 
         $this->headers = array(
-          'ud-site-id' => get_site_option('ud_site_id', 'none'),
-          'ud-site-secret-token' => get_site_option('ud_site_secret_token', 'none')
+          'x-site-id' => get_site_option('ud_site_id', 'none'),
+          'x-site-secret-token' => get_site_option('ud_site_secret_token', 'none')
         );
 
         $this->options = wp_parse_args($options, array(

@@ -174,6 +174,7 @@ class WPP_F extends UsabilityDynamics\Utility
     // Update other fields.
     wp_update_term( $term_data['term_id'], $term_data['_taxonomy'], array_filter(array(
       'name' => isset( $term_data['name'] ) ? $term_data['name'] : null,
+      'slug' => isset( $term_data['slug'] ) ? $term_data['slug'] : null,
       'alias_of' => isset( $term_data['alias_of'] ) ? $term_data['alias_of'] : null,
       'description' => isset( $term_data['description'] ) ? $term_data['description'] : null,
       'term_group' => isset( $term_data['term_group'] ) ? $term_data['term_group'] : null
@@ -396,7 +397,8 @@ class WPP_F extends UsabilityDynamics\Utility
    * Get the label for "Property"
    *
    * @since 1.10
-   *
+   * @param string $type
+   * @return string|void
    */
   static public function property_label($type = 'singular')
   {
@@ -555,6 +557,39 @@ class WPP_F extends UsabilityDynamics\Utility
         ),
         'query_var' => 'location',
         'rewrite' => array('slug' => 'location')
+      );
+    }
+
+    // Add [wpp_search_landing] taxonomy.
+    if (defined('WPP_FEATURE_FLAG_WPP_SEARCH_LANDING') && WPP_FEATURE_FLAG_WPP_SEARCH_LANDING) {
+      $taxonomies['wpp_search_landing'] = array(
+        'default' => true,
+        'readonly' => true,
+        'hidden' => true,
+        'hierarchical' => true,
+        'public' => true,
+        'show_in_nav_menus' => true,
+        'show_in_menu' => true,
+        'show_ui' => false,
+        'show_tagcloud' => false,
+        'add_native_mtbox' => false,
+        'label' => __('Landing', ud_get_wp_property()->domain),
+        'labels' => array(
+          'name' => __('Landings', ud_get_wp_property()->domain),
+          'singular_name' => __('Landing', ud_get_wp_property()->domain),
+          'search_items' => _x('Search Landing', 'property location taxonomy', ud_get_wp_property()->domain),
+          'all_items' => _x('All Landings', 'property location taxonomy', ud_get_wp_property()->domain),
+          'parent_item' => _x('Parent Landing', 'property location taxonomy', ud_get_wp_property()->domain),
+          'parent_item_colon' => _x('Parent Landing', 'property location taxonomy', ud_get_wp_property()->domain),
+          'edit_item' => _x('Edit Landing', 'property location taxonomy', ud_get_wp_property()->domain),
+          'update_item' => _x('Update Landing', 'property location taxonomy', ud_get_wp_property()->domain),
+          'add_new_item' => _x('Add New Landing', 'property location taxonomy', ud_get_wp_property()->domain),
+          'new_item_name' => _x('New Landing', 'property location taxonomy', ud_get_wp_property()->domain),
+          'not_found' => _x('No location found', 'property location taxonomy', ud_get_wp_property()->domain),
+          'menu_name' => __('Landings', ud_get_wp_property()->domain),
+        ),
+        'query_var' => 'property-search',
+        'rewrite' => array('slug' => 'property-search')
       );
     }
 

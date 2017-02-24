@@ -156,6 +156,8 @@ namespace UsabilityDynamics\WPP {
        *
        * - Disable term-editing on WP-Property term pages.
        *
+       * @todo Make this automatic for "readonly" taxonomies. - potanin@UD
+       *
        * @author potanin@UD
        * @return string
        */
@@ -172,13 +174,18 @@ namespace UsabilityDynamics\WPP {
           return;
         }
 
-        // Hide term editing UI.
-        if( $current_screen->base === 'edit-tags' && $current_screen->taxonomy === 'wpp_categorical' ) {
-          return 'wpp-disable-term-editing';
+        $_readonly_taxonomies = array();
+
+        foreach( $wp_properties['taxonomies'] as $_tax => $_tax_detail ) {
+
+          if( $_tax_detail['readonly'] === 'true' || $_tax_detail['readonly'] == 1 || $_tax_detail['readonly'] === '1' ) {
+            $_readonly_taxonomies[] = $_tax;
+          }
         }
 
-        if( $current_screen->base === 'edit-tags' && $current_screen->taxonomy === 'wpp_listing_location' ) {
-          return 'wpp-disable-term-editing';
+        // Hide term editing UI.
+        if( $current_screen->base === 'edit-tags' && in_array($current_screen->taxonomy, $_readonly_taxonomies ) ) {
+          return 'wpp-disable-term-editing wpp-readonly-taxonomy';
         }
 
       }
