@@ -158,6 +158,13 @@
         "enabled": true
       },
       {
+        "name": "Landing Page Taxonomy",
+        "constant": "WPP_FEATURE_FLAG_WPP_SEARCH_LANDING",
+        "description": "Dynamic terms for landing pages, stored in [wpp_search_landing].",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
         "name": "Standard Property Type",
         "constant": "WPP_FEATURE_FLAG_WPP_LISTING_TYPE",
         "description": "Standard property type taxonomy, stored in [wpp_listing_type].",

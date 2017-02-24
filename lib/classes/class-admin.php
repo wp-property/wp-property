@@ -156,6 +156,8 @@ namespace UsabilityDynamics\WPP {
        *
        * - Disable term-editing on WP-Property term pages.
        *
+       * @todo Make this automatic for "readonly" taxonomies. - potanin@UD
+       *
        * @author potanin@UD
        * @return string
        */
