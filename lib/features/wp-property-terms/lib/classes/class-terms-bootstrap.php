@@ -255,6 +255,14 @@ namespace UsabilityDynamics\WPP {
               $_taxonomies[ $_taxonomy ]['rich_taxonomy'] = $_original_taxonomy['rich_taxonomy'];
             }
 
+            // Allow rich_taxonomy to be enabled.
+            if( isset( $_original_taxonomy ) && !isset( $_taxonomies[ $_taxonomy ]['query_var'] ) && isset( $_original_taxonomy['query_var'] ) ) {
+              $_taxonomies[ $_taxonomy ]['query_var'] = $_original_taxonomy['query_var'];
+            }
+            if( isset( $_original_taxonomy ) && !isset( $_taxonomies[ $_taxonomy ]['rewrite'] ) && isset( $_original_taxonomy['rewrite'] ) ) {
+              $_taxonomies[ $_taxonomy ]['rewrite'] = $_original_taxonomy['rewrite'];
+            }
+
           }
 
         }

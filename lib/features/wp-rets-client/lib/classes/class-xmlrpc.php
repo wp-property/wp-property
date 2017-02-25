@@ -590,7 +590,7 @@ namespace UsabilityDynamics\WPRETSC {
 
             if( isset( $_terms ) && !empty( $_terms ) ) {
               $_inserted_terms = wp_set_post_terms( $_post_id, $_terms, $tax_name );
-              ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_inserted_terms ) . "] terms.", 'info' );
+              ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_inserted_terms ) . "] terms.", 'debug' );
             }
 
           }

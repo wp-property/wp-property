@@ -175,7 +175,7 @@ class WPP_F extends UsabilityDynamics\Utility
     wp_update_term( $term_data['term_id'], $term_data['_taxonomy'], array_filter(array(
       'name' => isset( $term_data['name'] ) ? $term_data['name'] : null,
       'slug' => isset( $term_data['slug'] ) ? $term_data['slug'] : null,
-      'alias_of' => isset( $term_data['alias_of'] ) ? $term_data['alias_of'] : null,
+      //'alias_of' => isset( $term_data['_alias'] ) ? $term_data['_alias'] : null,
       'description' => isset( $term_data['description'] ) ? $term_data['description'] : null,
       'term_group' => isset( $term_data['term_group'] ) ? $term_data['term_group'] : null
     )));
@@ -522,10 +522,13 @@ class WPP_F extends UsabilityDynamics\Utility
   /**
    * Standard Taxonomies that can not be modified with Terms editor.
    *
+   * @todo The [wpp_listing_category] should match the property base slug. Will need to make sure there is no conflict with property post type's single pages. - potanin@UD
+   *
    * @param array $taxonomies
    * @return array
    */
   static public function wpp_standard_taxonomies( $taxonomies = array() ) {
+    global $wp_properties;
 
     // Add [wpp_listing_location] taxonomy.
     if (defined('WPP_FEATURE_FLAG_WPP_LISTING_LOCATION') && WPP_FEATURE_FLAG_WPP_LISTING_LOCATION) {
@@ -560,25 +563,25 @@ class WPP_F extends UsabilityDynamics\Utility
       );
     }
 
-    // Add [wpp_search_landing] taxonomy.
-    if (defined('WPP_FEATURE_FLAG_WPP_SEARCH_LANDING') && WPP_FEATURE_FLAG_WPP_SEARCH_LANDING) {
-      $taxonomies['wpp_search_landing'] = array(
+    // Add [wpp_listing_category] taxonomy.
+    if (defined('WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY') && WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY) {
+      $taxonomies['wpp_listing_category'] = array(
         'default' => true,
         'readonly' => true,
         'hidden' => true,
         'hierarchical' => true,
         'public' => true,
         'show_in_nav_menus' => true,
-        'show_in_menu' => true,
+        'show_in_menu' => false,
         'show_ui' => false,
         'show_tagcloud' => false,
         'add_native_mtbox' => false,
         'label' => __('Landing', ud_get_wp_property()->domain),
         'labels' => array(
-          'name' => __('Landings', ud_get_wp_property()->domain),
+          'name' => __('Landing Category', ud_get_wp_property()->domain),
           'singular_name' => __('Landing', ud_get_wp_property()->domain),
           'search_items' => _x('Search Landing', 'property location taxonomy', ud_get_wp_property()->domain),
-          'all_items' => _x('All Landings', 'property location taxonomy', ud_get_wp_property()->domain),
+          'all_items' => _x('All Landing Category', 'property location taxonomy', ud_get_wp_property()->domain),
           'parent_item' => _x('Parent Landing', 'property location taxonomy', ud_get_wp_property()->domain),
           'parent_item_colon' => _x('Parent Landing', 'property location taxonomy', ud_get_wp_property()->domain),
           'edit_item' => _x('Edit Landing', 'property location taxonomy', ud_get_wp_property()->domain),
@@ -588,8 +591,12 @@ class WPP_F extends UsabilityDynamics\Utility
           'not_found' => _x('No location found', 'property location taxonomy', ud_get_wp_property()->domain),
           'menu_name' => __('Landings', ud_get_wp_property()->domain),
         ),
-        'query_var' => 'property-search',
-        'rewrite' => array('slug' => 'property-search')
+        'query_var' => 'property-category',
+        'rewrite' => array(
+          //'slug' => isset( $wp_properties['configuration']['base_slug'] ) ? $wp_properties['configuration']['base_slug'] : 'listings',
+          'slug' => 'listings',
+          'with_front' => false
+        )
       );
     }
 
@@ -665,7 +672,7 @@ class WPP_F extends UsabilityDynamics\Utility
         'default' => true,
         'readonly' => true,
         'hidden' => true,
-        'hierarchical' => false,
+        'hierarchical' => true,
         'unique' => false,
         'public' => false,
         'show_in_nav_menus' => false,
@@ -719,9 +726,7 @@ class WPP_F extends UsabilityDynamics\Utility
           'new_item_name' => _x('New Policy', 'property type taxonomy', ud_get_wp_property()->domain),
           'not_found' => sprintf(_x('No %s Policy found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
           'menu_name' => sprintf(_x('%s Policy', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-        ),
-        'query_var' => 'property-permissions',
-        'rewrite' => array('slug' => 'property-permissions')
+        )
       );
     }
 
@@ -857,7 +862,8 @@ class WPP_F extends UsabilityDynamics\Utility
       '_edit_link' => 'post.php?post=%d',
       'capability_type' => array('wpp_property', 'wpp_properties'),
       'hierarchical' => true,
-      'rewrite' => array('slug' => $wp_properties['configuration']['base_slug']
+      'rewrite' => array(
+        'slug' => $wp_properties['configuration']['base_slug']
       ),
       'query_var' => $wp_properties['configuration']['base_slug'],
       'supports' => $supports,
