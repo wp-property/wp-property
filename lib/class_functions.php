@@ -598,7 +598,7 @@ class WPP_F extends UsabilityDynamics\Utility
           'menu_name' => __('Landings', ud_get_wp_property()->domain),
         ),
         'query_var' => 'listings',
-        'rewrite' => array('hierarchical' => true)
+        'rewrite' => array('hierarchical' => true )
       );
 
       // @todo Add this properly.
@@ -831,7 +831,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
       if( $_query['taxonomy'] === 'wpp_listing_category' ) {
 
-        $_meta_value = '/' . $context->query[ $_query['taxonomy'] ];
+        $_meta_value = '/' . $context->query[ $_query['taxonomy'] ] . '/';
 
         $_sql_query = $wpdb->prepare( "SELECT term_id FROM $wpdb->termmeta WHERE meta_key='listing-category-url_path' AND meta_value='%s';", $_meta_value );
 
@@ -853,7 +853,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
     }
 
-    // die( '<pre>' . print_r( $_sql_query, true ) . '</pre>' );
+    //die( '<pre>' . print_r( $_sql_query, true ) . '</pre>' );
   }
 
   /**

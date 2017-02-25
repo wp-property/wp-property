@@ -126,7 +126,7 @@ namespace UsabilityDynamics\WPP {
 
         if( $column_name === 'url_path' ) {
           $_value = get_term_meta( $term_id, $_type . '-' . $column_name, true );
-          echo $_value ? ( '<a href="' . home_url( '/listings' . $_value . '/' ) . '" target="_blank">/listings' . $_value . '/</a>' ) : '-';
+          echo $_value ? ( '<a href="' . home_url( '/listings' . $_value . '' ) . '" target="_blank">/listings' . $_value . '</a>' ) : '-';
           return;
         }
 
