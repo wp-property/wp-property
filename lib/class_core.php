@@ -942,8 +942,7 @@ class WPP_Core {
    *
    *
    * @since 0.5
-   * @param $messages
-   * @return mixed|void
+   *
    */
   function property_updated_messages( $messages ) {
     global $post_id, $post;

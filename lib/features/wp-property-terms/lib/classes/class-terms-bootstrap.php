@@ -617,13 +617,17 @@ namespace UsabilityDynamics\WPP {
           }
 
           // Verify rewrite rules are legic.
-          if( isset( $_taxonomy_data['rewrite'] ) &&  isset( $_taxonomy_data['rewrite']['slug'] ) ) {
+          if( isset( $_taxonomy_data['rewrite'] ) && isset( $_taxonomy_data['rewrite']['slug'] ) ) {
 
-            $_wpp_terms['taxonomies'][ $_taxonomy ]['rewrite'] = array(
-              'slug' => isset( $_taxonomy_data['rewrite']['slug'] ) ? $_taxonomy_data['rewrite']['slug'] : null,
-              'hierarchical' => isset( $_taxonomy_data['rewrite']['hierarchical'] ) ? $_taxonomy_data['rewrite']['hierarchical'] : true,
-              'with_front' => isset( $_taxonomy_data['rewrite']['with_front'] ) ? $_taxonomy_data['rewrite']['with_front'] : false
-            );
+            if( $_wpp_terms['taxonomies'][ $_taxonomy ]['rewrite'] !== false ) {
+
+              $_wpp_terms['taxonomies'][ $_taxonomy ]['rewrite'] = array(
+                'slug' => isset( $_taxonomy_data['rewrite']['slug'] ) ? $_taxonomy_data['rewrite']['slug'] : null,
+                'hierarchical' => isset( $_taxonomy_data['rewrite']['hierarchical'] ) ? $_taxonomy_data['rewrite']['hierarchical'] : true,
+                'with_front' => isset( $_taxonomy_data['rewrite']['with_front'] ) ? $_taxonomy_data['rewrite']['with_front'] : false
+              );
+
+            }
 
           } else {
             unset( $_wpp_terms['taxonomies'][ $_taxonomy ]['rewrite'] );
@@ -1068,7 +1072,8 @@ namespace UsabilityDynamics\WPP {
           }
         }
 
-        if( $args[ 'hierarchical' ] ) {
+        // Ensure [hierarchical] is set unless [rewrite] is explicitly set to false.
+        if( $args[ 'hierarchical' ] && isset( $args[ 'rewrite' ] ) && $args[ 'rewrite' ] !== false ) {
           $args[ 'rewrite' ][ 'hierarchical' ] = true;
         }
 

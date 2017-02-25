@@ -565,6 +565,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
     // Add [wpp_listing_category] taxonomy.
     if (defined('WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY') && WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY) {
+
       $taxonomies['wpp_listing_category'] = array(
         'default' => true,
         'readonly' => true,
@@ -591,13 +592,13 @@ class WPP_F extends UsabilityDynamics\Utility
           'not_found' => _x('No location found', 'property location taxonomy', ud_get_wp_property()->domain),
           'menu_name' => __('Landings', ud_get_wp_property()->domain),
         ),
-        'query_var' => 'property-category',
-        'rewrite' => array(
-          //'slug' => isset( $wp_properties['configuration']['base_slug'] ) ? $wp_properties['configuration']['base_slug'] : 'listings',
-          'slug' => 'listings',
-          'with_front' => false
-        )
+        'query_var' => 'listings',
+        'rewrite' => array('hierarchical' => true)
       );
+
+      // @todo Add this properly.
+      add_rewrite_rule('^listings\/([^&]+)\/?', 'index.php?wpp_listing_category=$matches[1]', 'top');
+
     }
 
     // Add [wpp_schools] taxonomy.
@@ -802,6 +803,52 @@ class WPP_F extends UsabilityDynamics\Utility
   }
 
   /**
+   * Modify Taxonomy Query.
+   *
+   * Looks in termmeta table for "url_path" values.
+   * For this to work the custom "wpp_listing_category" rewrite is requited that does not break terms by slash, as done by native term matching.
+   *
+   * @note The $wp_query->query_vars includes original value of term.
+   * @note Could/should modify queried_terms as well. - potanin@UD
+   * @param $context
+   */
+  static public function parse_tax_query( $context ) {
+    global $wpdb;
+
+    if( !isset( $context->tax_query ) || !isset( $context->tax_query->queries ) ) {
+      return;
+    }
+
+    foreach( (array) $context->tax_query->queries as $_index => $_query ) {
+
+      if( $_query['taxonomy'] === 'wpp_listing_category' ) {
+
+        $_meta_value = $context->query[ $_query['taxonomy'] ];
+
+        $_sql_query = $wpdb->prepare( "SELECT term_id FROM $wpdb->termmeta WHERE meta_key='listing-category-url_path' AND meta_value='%s';", $_meta_value );
+
+        // Get term_id by "url_path".
+        $_term_id = $wpdb->get_var( $_sql_query);
+
+        // Change search field to term_id if we found a match, and override search terms.
+        if( $_term_id ) {
+          $context->tax_query->queries[$_index]['field'] = 'term_id';
+          $context->tax_query->queries[$_index]['terms'] = array( $_term_id );
+          $context->tax_query->queries[$_index]['_extended'] = 'wpp_listing_category_helper';
+
+          // @note This is most likely not the right place to do this.
+          //$context->query[ $_query['taxonomy'] ] = $_term_id;
+          //$context->query_vars[ $_query['taxonomy'] ] = $_term_id;
+        }
+
+      }
+
+    }
+
+    //die( '<pre>' . print_r( $context->tax_query, true ) . '</pre>' );
+  }
+
+  /**
    * Registers post types and taxonomies.
    *
    * @since 1.31.0
@@ -816,6 +863,8 @@ class WPP_F extends UsabilityDynamics\Utility
 
     // New standard taxonomies. Ran late, to force after Terms_Bootstrap::define_taxonomies
     add_filter('wpp_taxonomies', array('WPP_F', 'wpp_standard_taxonomies'), 10 );
+
+    add_action('parse_tax_query', array('WPP_F', 'parse_tax_query'), 50 );
 
     // Setup taxonomies
     $wp_properties['taxonomies'] = apply_filters('wpp_taxonomies', array());
@@ -876,9 +925,6 @@ class WPP_F extends UsabilityDynamics\Utility
         $data['show_ui'] = (current_user_can('manage_wpp_categories') ? true : false);
       }
 
-      // @depreciated
-      // $wp_properties[ 'configuration' ][ 'disabled_taxonomies' ]
-
       register_taxonomy($taxonomy, 'property', $wp_properties['taxonomies'][$taxonomy] = apply_filters('wpp::register_taxonomy', array(
         'hierarchical' => isset($data['hierarchical']) ? $data['hierarchical'] : false,
         'label' => isset($data['label']) ? $data['label'] : $taxonomy,
@@ -898,8 +944,6 @@ class WPP_F extends UsabilityDynamics\Utility
           'assign_terms' => 'manage_wpp_categories'
         )
       ), $taxonomy));
-
-      // die( '<pre>' . print_r( $_taxonomy_args, true ) . '</pre>' );
 
     }
 
@@ -1695,6 +1739,8 @@ class WPP_F extends UsabilityDynamics\Utility
    * @todo This function is a hack. Need to use post_type rewrites better. - potanin@UD
    *
    * @version 1.26.0
+   * @param $posts
+   * @return array
    */
   static public function posts_results($posts)
   {
