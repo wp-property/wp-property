@@ -191,7 +191,7 @@ jQuery(document).ready(function($) {
                 <span><?php _e( 'Attention! This attribute (slug) is used by Google Validator and Address Display functionality. It is set automaticaly and can not be edited on Property Adding/Updating page.', ud_get_wp_property()->domain ); ?></span>
               </div>
             <% } %>
-            <% if(slug == "ID"){ %> <?php// for ID field: show a notice to the user about the field being non-editable @raj (22/07/2016) ?>
+            <% if(slug == "ID"){ %>
               <div class="wpp_notice">
                 <span><?php _e( 'Note! This attribute (slug) is predefined and used by WP-Property. You can not remove it or change it.', ud_get_wp_property()->domain ); ?></span>
               </div>

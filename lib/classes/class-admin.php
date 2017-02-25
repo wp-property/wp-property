@@ -77,6 +77,8 @@ namespace UsabilityDynamics\WPP {
       /**
        * Term Meta Column Data
        *
+       * @todo Fix hardcoded /listing/ prefix.
+       *
        * @author potanin@UD
        *
        * @param $nothing
@@ -122,6 +124,12 @@ namespace UsabilityDynamics\WPP {
           return;
         }
 
+        if( $column_name === 'url_path' ) {
+          $_value = get_term_meta( $term_id, $_type . '-' . $column_name, true );
+          echo $_value ? ( '<a href="' . home_url( '/listings' . $_value . '/' ) . '" target="_blank">/listings' . $_value . '/</a>' ) : '-';
+          return;
+        }
+
 
         if( $_type ) {
           $source = get_term_meta( $term_id, $_type .'-'.$column_name, true );
@@ -147,11 +155,14 @@ namespace UsabilityDynamics\WPP {
 
       public function wpp_listing_category_columns( $columns ) {
 
-        //$columns['slug']
+        //$columns['slug'];
 
+        $columns['_id'] = 'Unique ID';
         $columns['term_id'] = 'ID';
+
         $columns['url_slug'] = 'Slug';
         $columns['url_path'] = 'Path';
+
         $columns['_type'] = 'Type';
         $columns['_updated'] = 'Updated';
         $columns['_created'] = 'Created';
@@ -441,6 +452,7 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Add Settings page, under Property menu.
        *
        */
       public function admin_menu()

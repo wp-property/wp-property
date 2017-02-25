@@ -7,6 +7,7 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use UsabilityDynamics\Utility;
   if (!class_exists('UsabilityDynamics\WPP\Settings')) {
 
     class Settings extends \UsabilityDynamics\Settings
@@ -99,12 +100,15 @@ namespace UsabilityDynamics\WPP {
         );
 
         $_stored_settings = $this->get();
-        if(!isset($_stored_settings['configuration'])){
-          $data['configuration']['show_assistant'] = "yes";
+
+        if( defined( 'WP_PROPERTY_SETUP_ASSISTANT' ) && WP_PROPERTY_SETUP_ASSISTANT ) {
+          if( !isset( $_stored_settings[ 'configuration' ] ) ) {
+            $data[ 'configuration' ][ 'show_assistant' ] = "yes";
+          }
         }
         
         //** Merge with default data. */
-        $this->set(\UsabilityDynamics\Utility::extend($data, $this->get()));
+        $this->set(Utility::extend( $data, $_stored_settings ));
 
         // Check if settings have or have been upated. (we determine if configuration is good)
         // @todo Add a better _version_ check.

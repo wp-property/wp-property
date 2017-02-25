@@ -48,7 +48,7 @@ class WPP_F extends UsabilityDynamics\Utility
     }
 
     // try to find by [_id]
-    if( isset( $term_data[ '_id' ] ) ) {
+    if( isset( $term_data[ '_id' ] ) &&  $term_data[ '_id' ] ) {
       $term_data['term_id'] = intval( $wpdb->get_var($wpdb->prepare("SELECT term_id FROM $wpdb->termmeta as tm WHERE meta_key='%s' AND meta_value='%s';", array( '_id', $term_data['_id']))) );
     }
 
@@ -58,7 +58,7 @@ class WPP_F extends UsabilityDynamics\Utility
     }
 
     // Parent set, try to find it.
-    if( isset( $term_data[ '_parent' ] ) ) {
+    if( isset( $term_data[ '_parent' ] ) && $term_data[ '_parent' ] ) {
       $term_data['meta']['parent_term_id'] = intval( $wpdb->get_var($wpdb->prepare("SELECT term_id FROM $wpdb->termmeta as tm WHERE meta_key='%s' AND meta_value='%s';", array( '_id', $term_data['_parent']))) );
 
       // Parent not found, we try findint it using [parent_name] instead of the [_parent], which is its UID.
@@ -144,6 +144,10 @@ class WPP_F extends UsabilityDynamics\Utility
 
     $result['term_id'] = $term_data['term_id'];
 
+    if( isset( $term_data['meta']['parent_term_id'] ) ) {
+      $result['parent'] = $term_data['meta']['parent_term_id'];
+    }
+
     $result['name'] = isset( $term_data['name'] ) ? $term_data['name'] : null;
     $result['slug'] = isset( $term_data['slug'] ) ? $term_data['slug'] : sanitize_title( $term_data['name'] );
 
@@ -175,12 +179,13 @@ class WPP_F extends UsabilityDynamics\Utility
     wp_update_term( $term_data['term_id'], $term_data['_taxonomy'], array_filter(array(
       'name' => isset( $term_data['name'] ) ? $term_data['name'] : null,
       'slug' => isset( $term_data['slug'] ) ? $term_data['slug'] : null,
+      'parent' => isset( $result['parent'] ) ? $result['parent'] : null,
       //'alias_of' => isset( $term_data['_alias'] ) ? $term_data['_alias'] : null,
       'description' => isset( $term_data['description'] ) ? $term_data['description'] : null,
       'term_group' => isset( $term_data['term_group'] ) ? $term_data['term_group'] : null
     )));
 
-    // error_log( print_r($result, true));
+
     return array_filter( $result );
 
   }
@@ -211,7 +216,7 @@ class WPP_F extends UsabilityDynamics\Utility
       $_terms[ $_index ] = self::insert_term( array_merge( (array) $_term, (array) $defaults ));
 
       if( is_wp_error( $_terms[ $_index ] ) ) {
-        $_results['errors'][] = $_terms[ $_index ];
+        $_results['errors'][] = array( $_term, $_terms[ $_index ] );
         unset( $_terms[ $_index ] );
         continue;
       }
@@ -225,7 +230,7 @@ class WPP_F extends UsabilityDynamics\Utility
         }
 
       } else {
-        $_results[ 'errors' ][] = $_terms[ $_index ];
+        $_results[ 'errors' ][] = array( $_term, $_terms[ $_index ] );
       }
 
     }
@@ -808,6 +813,9 @@ class WPP_F extends UsabilityDynamics\Utility
    * Looks in termmeta table for "url_path" values.
    * For this to work the custom "wpp_listing_category" rewrite is requited that does not break terms by slash, as done by native term matching.
    *
+   *
+   * @todo Convert lookup to use "slug" after replacing all slahes with dashes.
+   *
    * @note The $wp_query->query_vars includes original value of term.
    * @note Could/should modify queried_terms as well. - potanin@UD
    * @param $context
@@ -823,7 +831,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
       if( $_query['taxonomy'] === 'wpp_listing_category' ) {
 
-        $_meta_value = $context->query[ $_query['taxonomy'] ];
+        $_meta_value = '/' . $context->query[ $_query['taxonomy'] ];
 
         $_sql_query = $wpdb->prepare( "SELECT term_id FROM $wpdb->termmeta WHERE meta_key='listing-category-url_path' AND meta_value='%s';", $_meta_value );
 
@@ -845,7 +853,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
     }
 
-    //die( '<pre>' . print_r( $context->tax_query, true ) . '</pre>' );
+    // die( '<pre>' . print_r( $_sql_query, true ) . '</pre>' );
   }
 
   /**
