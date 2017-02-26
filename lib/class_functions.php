@@ -879,7 +879,9 @@ class WPP_F extends UsabilityDynamics\Utility
     // New standard taxonomies. Ran late, to force after Terms_Bootstrap::define_taxonomies
     add_filter('wpp_taxonomies', array('WPP_F', 'wpp_standard_taxonomies'), 10 );
 
-    add_action('parse_tax_query', array('WPP_F', 'parse_tax_query'), 50 );
+    if (defined('WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY') && WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY) {
+      add_action( 'parse_tax_query', array( 'WPP_F', 'parse_tax_query' ), 50 );
+    }
 
     // Setup taxonomies
     $wp_properties['taxonomies'] = apply_filters('wpp_taxonomies', array());
