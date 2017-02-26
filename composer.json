@@ -35,7 +35,8 @@
     "UsabilityDynamics/wp-gallery-metabox": "2.0.1",
     "usabilitydynamics/wp-tax-post-binding": "2.0.5",
     "freemius/wordpress-sdk": "^1.1.7",
-    "ccampbell/chromephp": "^4.1"
+    "ccampbell/chromephp": "^4.1",
+    "10up/elasticpress": "^2.1"
   },
   "require-dev": {
     "usabilitydynamics/lib-wp-phpunit": "master",
