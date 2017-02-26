@@ -47,31 +47,6 @@ namespace UsabilityDynamics\WPP {
         // wpp-disable-term-editing
         add_filter( 'admin_body_class', array($this, 'admin_body_class'), 20, 2);
 
-        // If wpp_categorical used, add term page UI.
-        if( defined( 'WPP_FEATURE_FLAG_WPP_CATEGORICAL' ) && WPP_FEATURE_FLAG_WPP_CATEGORICAL ) {
-          add_action( 'wpp_categorical_edit_form_fields', array( $this, 'edit_form_fields' ), 20, 2 );
-          add_filter( 'manage_edit-wpp_categorical_columns', array( $this, 'wpp_categorical_columns' ), 20 );
-          add_action( 'manage_wpp_categorical_custom_column', array( $this, 'term_meta_columns' ), 20, 3 );
-        }
-
-        if( defined( 'WPP_FEATURE_FLAG_WPP_SCHOOLS' ) && WPP_FEATURE_FLAG_WPP_SCHOOLS ) {
-          add_action( 'wpp_schools_edit_form_fields', array( $this, 'edit_form_fields' ), 20, 2 );
-          //add_action( 'manage_wpp_schools_custom_column', array( $this, 'wpp_schools_custom_column' ), 20, 3 );
-          add_filter( 'manage_edit-wpp_schools_custom_column', array( $this, 'term_meta_columns' ), 20, 3 );
-        }
-
-        // Add custom columns to Taxonomy table.
-        if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_LOCATION' ) && WPP_FEATURE_FLAG_WPP_LISTING_LOCATION ) {
-          add_filter( 'manage_wpp_listing_location_custom_columns', array( $this, 'wpp_listing_location_custom_columns' ), 20  );
-          add_filter( 'manage_wpp_listing_location_custom_column', array( $this, 'term_meta_columns' ), 20, 3 );
-        }
-
-        if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY' ) && WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY ) {
-          add_filter( 'manage_edit-wpp_listing_category_columns', array( $this, 'wpp_listing_category_columns' ), 20 );
-          add_filter( 'manage_wpp_listing_category_custom_column', array( $this, 'term_meta_columns' ), 20, 3 );
-        }
-
-
       }
 
       /**
@@ -147,13 +122,7 @@ namespace UsabilityDynamics\WPP {
        * @param $columns
        * @return mixed
        */
-      public function wpp_categorical_columns( $columns ) {
-        $columns['source'] = 'Source';
-        //$columns['_id'] = 'ID';
-        return $columns;
-      }
-
-      public function wpp_listing_category_columns( $columns ) {
+      public function taxonomy_meta_columns( $columns ) {
 
         //$columns['slug'];
 
@@ -167,20 +136,6 @@ namespace UsabilityDynamics\WPP {
         $columns['_updated'] = 'Updated';
         $columns['_created'] = 'Created';
 
-        //$columns['_id'] = 'ID';
-        return $columns;
-      }
-
-      /**
-       * Term Overview Columns
-       *
-       * @author potanin@UD
-       *
-       * @param $columns
-       * @return mixed
-       */
-      public function wpp_listing_location_custom_columns( $columns ) {
-        $columns['source'] = 'Source';
         //$columns['_id'] = 'ID';
         return $columns;
       }
@@ -345,6 +300,7 @@ namespace UsabilityDynamics\WPP {
        */
       public function admin_init()
       {
+        global $wp_properties;
 
         // Add metaboxes
         do_action('wpp_metaboxes');
@@ -359,6 +315,19 @@ namespace UsabilityDynamics\WPP {
         if ( isset($_REQUEST['page']) && $_REQUEST['page'] == 'property_settings' && isset($_REQUEST['wpp_action']) && $_REQUEST['wpp_action'] == 'download-wpp-backup' && isset($_REQUEST['_wpnonce']) && wp_verify_nonce($_REQUEST['_wpnonce'], 'download-wpp-backup') ) {
           self::download_settings_backup();
         }
+
+        // Add custom columns and fields to taxonomies that have custom term-meta defined.
+        foreach( (array) $wp_properties['taxonomies'] as $_tax => $_tax_detail ) {
+
+          if( isset( $_tax_detail[ 'wpp_term_meta_fields' ] ) ) {
+            add_action( $_tax . '_edit_form_fields', array( $this, 'edit_form_fields' ), 20, 2 );
+            add_action( 'manage_' . $_tax . '_custom_column', array( $this, 'term_meta_columns' ), 20, 3 );
+            add_filter( 'manage_edit-' . $_tax. '_columns', array( $this, 'taxonomy_meta_columns' ), 20 );
+
+          }
+
+        }
+
 
       }
 

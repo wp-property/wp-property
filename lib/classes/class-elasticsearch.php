@@ -53,6 +53,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         add_filter( 'option_ep_index_meta', array( $this, 'option_ep_index_meta' ) );
+        add_filter( 'option_ep_active_modules', array( $this, 'option_ep_active_modules' ) );
 
         // Add Mapping.
         add_filter( 'ep_config_mapping', array( $this, 'ep_config_mapping' ) );
@@ -75,13 +76,19 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       * Always off because it'll be always on.
+       * Always off because it'll be always on. Prevents it from starting to sync.
+       *
+       * The process can still start in browser and run using AJAX but it will not record state.
        *
        * @param $value
        * @return bool
        */
       public function option_ep_index_meta( $value ) {
-        return false;///array('wpcli'=>false, 'original' => $value);
+        return array( );
+      }
+
+      public function option_ep_active_modules( $value ) {
+        return array( 'search', 'admin' );
       }
 
       /**
@@ -181,7 +188,11 @@ namespace UsabilityDynamics\WPP {
        * @return array
        */
       static public function ep_admin_supported_post_types( $post_types = array() ) {
-        return array( 'property' => 'property' );
+
+        return array(
+          'property' => 'property'
+        );
+
       }
 
       /**
@@ -192,7 +203,10 @@ namespace UsabilityDynamics\WPP {
        */
       static public function ep_indexable_post_types( $post_types = array() ) {
 
-        return array( 'property' => 'property' );
+        return array(
+          'property' => 'property'
+        );
+
       }
 
       /**
