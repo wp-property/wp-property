@@ -334,6 +334,8 @@ namespace UsabilityDynamics\WPP {
       /**
        * Add Rewrite Options section.
        *
+       * @todo Implement permalink selection UI based on available rewrite patterns.
+       *
        * @author potanin@UD
        */
       static public function render_permalink_settings() {

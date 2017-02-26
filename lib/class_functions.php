@@ -837,8 +837,8 @@ class WPP_F extends UsabilityDynamics\Utility
           array( 'slug' => 'related_taxonomy', 'label' => __( 'Related Taxonomy')  ),
           array( 'slug' => 'related_type', 'label' => __( 'Related Type')  ),
           array( 'slug' => 'pattern', 'label' => __( 'URL Pattern')   ),
-          array( 'slug' => 'url_path', 'label' => __( 'URL Path')   ),
-          array( 'slug' => 'url_slug', 'label' => __( 'URL Slug')   )
+          array( 'slug' => 'url_path', 'label' => __( 'Path')   ),
+          array( 'slug' => 'url_slug', 'label' => __( 'Slug')   )
         )
       );
 

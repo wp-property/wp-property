@@ -4,7 +4,7 @@
  *
  * - _type - A sub-categorization of terms within a taxonomy.
  * - _id - Unique textual ID.
- *
+ * - meta.url_path - Stores full relative path to the term.
  *
  * @todo Use WPP_F::get_term_metadata()
  *
