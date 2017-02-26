@@ -3,6 +3,8 @@
  * Render term fields related to WP-Property schema.
  *
  *
+ * @todo Use WPP_F::get_term_metadata()
+ *
  * @todo Implement saving/updating fields and then remove readonly.
  *
  */

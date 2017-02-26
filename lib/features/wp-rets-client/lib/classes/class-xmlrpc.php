@@ -457,6 +457,9 @@ namespace UsabilityDynamics\WPRETSC {
             $_message[] = 'View at ['.$_permalink.']';
           }
 
+          //
+          delete_post_meta( $_post_id, 'rets_media' );
+
           ud_get_wp_rets_client()->write_log( join( " ", $_message ), 'info' );
 
 

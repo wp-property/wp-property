@@ -13,6 +13,44 @@ class WPP_F extends UsabilityDynamics\Utility
 {
 
   /**
+   * Get term met values.
+   *
+   * @param $term
+   * @return array
+   */
+  static public function get_term_metadata( $term ) {
+
+    //$_attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $term->slug, array( 'use_cache' => false ) );
+
+    $_taxonomy = (array) get_taxonomy( $term->taxonomy );
+
+    $_type_prefix = get_term_meta( $term->term_id, '_type', true );
+
+    $_meta = array();
+
+    $_meta[ 'term_id' ] = get_term_meta( $term->term_id, '_id', true );
+    $_meta[ 'term_type' ] = get_term_meta( $term->term_id, '_type', true );
+
+    if( !isset( $_taxonomy[ 'wpp_term_meta_fields' ] ) ) {
+      return array();
+    }
+
+    foreach( (array) $_taxonomy[ 'wpp_term_meta_fields' ] as $_meta_field ) {
+
+      $_slug = str_replace( $term->taxonomy . '_', '', $_meta_field[ 'slug' ] );
+
+      $_meta_slug = $_type_prefix . '-' . $_slug;
+
+      $_meta[ $_meta_field[ 'slug' ] ] = get_term_meta( $term->term_id, $_meta_slug, true );
+
+    }
+
+
+    return array_filter( $_meta );
+
+  }
+
+  /**
    * Insert Term.
    *
    * - If term exists, we update it. Otherwise its created.
@@ -598,7 +636,14 @@ class WPP_F extends UsabilityDynamics\Utility
           'menu_name' => __('Landing', ud_get_wp_property()->domain),
         ),
         'query_var' => 'listings',
-        'rewrite' => array('hierarchical' => true, 'slug' => 'listings' )
+        'rewrite' => array('hierarchical' => true, 'slug' => 'listings' ),
+        'wpp_term_meta_fields' => array(
+          array( 'slug' => 'related_taxonomy' ),
+          array( 'slug' => 'related_type' ),
+          array( 'slug' => 'pattern' ),
+          array( 'slug' => 'url_path' ),
+          array( 'slug' => 'url_slug' )
+        )
       );
 
       // @todo Add this properly.
@@ -680,7 +725,7 @@ class WPP_F extends UsabilityDynamics\Utility
         'hidden' => true,
         'hierarchical' => true,
         'unique' => false,
-        'public' => false,
+        'public' => true,
         'show_in_nav_menus' => false,
         'show_ui' => false,
         'show_tagcloud' => false,

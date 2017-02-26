@@ -31,6 +31,8 @@ namespace UsabilityDynamics\WPP {
 
       public $layouts = null;
 
+      public $elastic = null;
+
       private $register;
 
       /**
@@ -49,6 +51,7 @@ namespace UsabilityDynamics\WPP {
       /**
        * May be load WP-Property Features
        *
+       * @todo Fix issue with Elasticpress activation triggering fatal error. (if (WP_PROPERTY_ELASTICSEARCH_SERVICE) flag is on)
        * @TODO: Fix Flag conditions: constants are still not defined on this step.
        *
        * @author peshkov@UD
@@ -155,6 +158,11 @@ namespace UsabilityDynamics\WPP {
 
         //** Handles Export (XML/JSON/CSV) functionality */
         new Export();
+
+        // Invoke Elasticsearch Handler.
+        if( defined( 'WP_PROPERTY_ELASTICSEARCH_SERVICE' ) && WP_PROPERTY_ELASTICSEARCH_SERVICE && class_exists( 'UsabilityDynamics\WPP\Elasticsearch' )) {
+          $this->elastic = new Elasticsearch();
+        }
 
         /** Initiate WPML class if WPML plugin activated. **/
         if (function_exists('icl_object_id')) {

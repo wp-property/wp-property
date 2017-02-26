@@ -334,7 +334,7 @@ class EP_Dashboard {
 			delete_option( 'ep_index_meta' );
 		}
 
-		ep_deactivate();
+		// ep_deactivate();
 
 		wp_send_json_success();
 	}

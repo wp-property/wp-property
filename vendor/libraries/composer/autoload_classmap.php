@@ -190,6 +190,7 @@ return array(
     'UsabilityDynamics\\WPP\\Bootstrap' => $baseDir . '/lib/classes/class-bootstrap.php',
     'UsabilityDynamics\\WPP\\Children_List_Table' => $baseDir . '/lib/classes/class-children-list-table.php',
     'UsabilityDynamics\\WPP\\Dashboard_Widget' => $baseDir . '/lib/classes/class-dashboard-widget.php',
+    'UsabilityDynamics\\WPP\\Elasticsearch' => $baseDir . '/lib/classes/class-elasticsearch.php',
     'UsabilityDynamics\\WPP\\Export' => $baseDir . '/lib/classes/class-export.php',
     'UsabilityDynamics\\WPP\\Layouts' => $baseDir . '/lib/classes/class-layouts.php',
     'UsabilityDynamics\\WPP\\Layouts_API_Client' => $baseDir . '/lib/classes/class-layouts-api-client.php',

@@ -1719,6 +1719,8 @@ class EP_API {
 
 			$request = wp_remote_request( $query['url'], $args ); //try the existing host to avoid unnecessary calls
 
+      //error_log(print_r($query,true));
+      //error_log(print_r($request,true));
 			if ( false === $request || is_wp_error( $request ) || ( isset( $request['response']['code'] ) && 0 !== strpos( $request['response']['code'], '20' ) ) ) {
 				$failures++;
 
