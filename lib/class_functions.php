@@ -598,7 +598,7 @@ class WPP_F extends UsabilityDynamics\Utility
           'menu_name' => __('Landing', ud_get_wp_property()->domain),
         ),
         'query_var' => 'listings',
-        'rewrite' => array('hierarchical' => true )
+        'rewrite' => array('hierarchical' => true, 'slug' => 'listings' )
       );
 
       // @todo Add this properly.
@@ -833,10 +833,16 @@ class WPP_F extends UsabilityDynamics\Utility
 
         $_meta_value = '/' . $context->query[ $_query['taxonomy'] ] . '/';
 
-        $_sql_query = $wpdb->prepare( "SELECT term_id FROM $wpdb->termmeta WHERE meta_key='listing-category-url_path' AND meta_value='%s';", $_meta_value );
+        $_term_id = wp_cache_get( $_meta_value, 'wpp_listing_category_term_query' );
 
-        // Get term_id by "url_path".
-        $_term_id = $wpdb->get_var( $_sql_query);
+        if( !$_term_id ) {
+          $_sql_query = $wpdb->prepare( "SELECT term_id FROM $wpdb->termmeta WHERE meta_key='listing-category-url_path' AND meta_value='%s';", $_meta_value );
+
+          // Get term_id by "url_path".
+          $_term_id = $wpdb->get_var( $_sql_query );
+
+          wp_cache_set( $_meta_value, $_term_id, 'wpp_listing_category_term_query' );
+        }
 
         // Change search field to term_id if we found a match, and override search terms.
         if( $_term_id ) {
@@ -844,9 +850,10 @@ class WPP_F extends UsabilityDynamics\Utility
           $context->tax_query->queries[$_index]['terms'] = array( $_term_id );
           $context->tax_query->queries[$_index]['_extended'] = 'wpp_listing_category_helper';
 
-          // @note This is most likely not the right place to do this.
-          //$context->query[ $_query['taxonomy'] ] = $_term_id;
-          //$context->query_vars[ $_query['taxonomy'] ] = $_term_id;
+          // Have to set this so get_queried_object() works.
+          $context->tax_query->queried_terms['wpp_listing_category']['terms'] = array($_term_id);
+          $context->tax_query->queried_terms['wpp_listing_category']['field'] ='term_id';
+
         }
 
       }
