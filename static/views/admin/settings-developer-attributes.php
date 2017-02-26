@@ -26,7 +26,7 @@ $searchable_attr_field_do_action = array();
 $admin_attr_field_do_action = array();
 $attribute_name_do_action = array();
 $settings_do_action = array();
-$field_alias = array();
+$filtered_field_alias = array();
 foreach ($attributes as $slug => $label) {
   ob_start();
   do_action( 'wpp::property_attributes::searchable_attr_field', $slug );
@@ -57,22 +57,23 @@ $meta_box_fields = ud_get_wp_property('attributes.types', array());
 ?>
 <script type="text/javascript">
 jQuery(document).ready(function($) {
-  wp_properties = wpp.instance.settings;
-  searchable_attr_fields_options  = <?php echo json_encode($searchable_attr_fields_options);?>;
+  var wp_properties = wpp.instance.settings;
+  var searchable_attr_fields_options  = <?php echo json_encode($searchable_attr_fields_options);?>;
+   
+  var searchable_attr_field_do_action = <?php echo json_encode($searchable_attr_field_do_action);?>;
+  var admin_attr_field_do_action      = <?php echo json_encode($admin_attr_field_do_action);?>;
+  var attribute_name_do_action        = <?php echo json_encode($attribute_name_do_action);?>;
+  var settings_do_action              = <?php echo json_encode($settings_do_action);?>;
 
-  searchable_attr_field_do_action = <?php echo json_encode($searchable_attr_field_do_action);?>;
-  admin_attr_field_do_action      = <?php echo json_encode($admin_attr_field_do_action);?>;
-  attribute_name_do_action        = <?php echo json_encode($attribute_name_do_action);?>;
-  settings_do_action              = <?php echo json_encode($settings_do_action);?>;
-
-  meta_box_fields       = <?php echo json_encode($meta_box_fields);?>;
-  filtered_field_alias  = <?php echo json_encode($filtered_field_alias);?>;
+  var meta_box_fields       = <?php echo json_encode($meta_box_fields);?>;
+  var filtered_field_alias  = <?php echo json_encode($filtered_field_alias);?>;
 
   if(typeof wp_properties.property_stats == 'undefined'){
     wp_properties.property_stats = {'':''};
   }
 
-  requiredProps = ['property_stats_groups', 'property_groups', 'sortable_attributes', 'prop_std_att', 'prop_std_att_mapsto', 'en_default_value', 'searchable_attr_fields', 'predefined_search_values', 'admin_attr_fields', 'predefined_values', 'default_values'];
+  // Defining property of object wp_properties(if not defined) to avoid checking of typeof != 'undefined' in template
+  var requiredProps = ['property_stats_groups', 'property_groups', 'sortable_attributes', 'prop_std_att', 'prop_std_att_mapsto', 'en_default_value', 'searchable_attr_fields', 'predefined_search_values', 'admin_attr_fields', 'predefined_values', 'default_values'];
   
   jQuery.each(requiredProps, function(index, item) {
     if(typeof  wp_properties[item] == 'undefined' ) {
@@ -105,7 +106,7 @@ jQuery(document).ready(function($) {
         style: typeof this.model.attributes.group.color != 'undefined' ? 'background-color:' + this.model.attributes.group.color : '',
       };
     },
-    template: _.template($('#attributesView').html()),
+    template: _.template($('#settings-developer-attributes-template').html()),
     render: function() {
       this.el.innerHTML = this.template(this.model.toJSON());
       return this;
@@ -131,14 +132,24 @@ jQuery(document).ready(function($) {
 
   });
 
-   _wppAttributes = new wppAttributes();
+  var _wppAttributes = new wppAttributes();
+
+  var _requiredProps = 
+  [
+    'searchable_attr_fields',
+    'predefined_search_values',
+    'admin_attr_fields',
+    'predefined_values',
+    'default_values',
+    'prop_std_att_mapsto'
+  ];
 
   jQuery.each(wp_properties.property_stats, function(slug, value) {
     var gslug = '';
     var group = '';
-    var requiredProps = ['searchable_attr_fields', 'predefined_search_values', 'admin_attr_fields', 'predefined_values', 'default_values', 'prop_std_att_mapsto'];
 
-    jQuery.each(requiredProps, function(index, props){
+    // Defining value of property in object wp_properties(if not defined) to avoid checking of typeof != 'undefined' in template
+    jQuery.each(_requiredProps, function(index, props){
       if (typeof wp_properties[props][slug] == 'undefined') {
         wp_properties[props][slug] = '';
       }
@@ -149,7 +160,19 @@ jQuery(document).ready(function($) {
       group = typeof wp_properties.property_groups[ gslug ] != 'undefined'  ? wp_properties[ 'property_groups' ][ gslug ] : '';
     }
 
-    var row = new wppAttribute({wp_properties: wp_properties, slug: slug, gslug: gslug, group: group});
+    var row = new wppAttribute({
+      slug                            : slug,
+      gslug                           : gslug,
+      group                           : group,
+      wp_properties                   : wp_properties,
+      meta_box_fields                 : meta_box_fields,
+      settings_do_action              : settings_do_action,
+      filtered_field_alias            : filtered_field_alias,
+      attribute_name_do_action        : attribute_name_do_action,
+      admin_attr_field_do_action      : admin_attr_field_do_action,
+      searchable_attr_fields_options  : searchable_attr_fields_options,
+      searchable_attr_field_do_action : searchable_attr_field_do_action,
+    });
     _wppAttributes.add(row);
   });
 
@@ -163,7 +186,7 @@ jQuery(document).ready(function($) {
 
 </script>
 
-<script type="text/template" id="attributesView">
+<script type="text/template" id="settings-developer-attributes-template">
 
     <tr>
 
@@ -191,7 +214,7 @@ jQuery(document).ready(function($) {
                 <span><?php _e( 'Attention! This attribute (slug) is used by Google Validator and Address Display functionality. It is set automaticaly and can not be edited on Property Adding/Updating page.', ud_get_wp_property()->domain ); ?></span>
               </div>
             <% } %>
-            <% if(slug == "ID"){ %>
+            <% if(slug == "ID"){ %> <?php// for ID field: show a notice to the user about the field being non-editable @raj (22/07/2016) ?>
               <div class="wpp_notice">
                 <span><?php _e( 'Note! This attribute (slug) is predefined and used by WP-Property. You can not remove it or change it.', ud_get_wp_property()->domain ); ?></span>
               </div>
@@ -314,7 +337,6 @@ jQuery(document).ready(function($) {
         <ul>
           <li>
             <select name="wpp_settings[admin_attr_fields][<%= slug %>]" class="wpp_pre_defined_value_setter wpp_default_value_setter wpp_searchable_attr_fields">
-              <?php $meta_box_fields = ud_get_wp_property('attributes.types', array()); ?>
               <% _.each( meta_box_fields, function(label, key){ %>
                 <option value="<%= key %>" <% print(selected( wp_properties.admin_attr_fields[ slug ], key )) %>><%= label %></option>
               <% }); %>
