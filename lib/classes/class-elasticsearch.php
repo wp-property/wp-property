@@ -52,6 +52,8 @@ namespace UsabilityDynamics\WPP {
 
         }
 
+        add_filter( 'option_ep_index_meta', array( $this, 'option_ep_index_meta' ) );
+
         // Add Mapping.
         add_filter( 'ep_config_mapping', array( $this, 'ep_config_mapping' ) );
 
@@ -70,6 +72,16 @@ namespace UsabilityDynamics\WPP {
         add_action( 'ep_index_post_retrieve_raw_response', array( $this, 'ep_index_post_retrieve_raw_response' ), 50, 3 );
         // add_filter( 'ep_config_mapping_request', array( $this, 'ep_config_mapping_request' ), 50, 3 );
 
+      }
+
+      /**
+       * Always off because it'll be always on.
+       *
+       * @param $value
+       * @return bool
+       */
+      public function option_ep_index_meta( $value ) {
+        return false;///array('wpcli'=>false, 'original' => $value);
       }
 
       /**
