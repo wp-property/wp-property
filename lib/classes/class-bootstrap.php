@@ -164,12 +164,15 @@ namespace UsabilityDynamics\WPP {
         if (is_admin()) {
           //** Initiate Admin Handler */
           new Admin();
+
           //** Initiate Meta Box Handler */
           new Meta_Box();
+
           //** Setup Gallery Meta Box ( wp-gallery-metabox ) */
           add_action('be_gallery_metabox_post_types', function ($post_types = array()) {
             return array('property');
           });
+
           add_filter('be_gallery_metabox_remove', '__return_false');
         }
 
