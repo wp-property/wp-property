@@ -57,7 +57,9 @@ $_type_prefix = get_term_meta( $tag->term_id, '_type', true );
         <th><?php echo $_meta_field['label']; ?></th>
         <td>
           <input type="text" name="wpp_term_meta_fields[<?php echo $tag->term_id; ?>][<?php echo $_slug; ?>]" readonly="readonly" data-meta-slug="<?php echo $_meta_slug; ?>" data-field-type="<?php echo $_type_prefix; ?>" data-field-slug="<?php echo $_slug; ?>" class="regular-text code" value="<?php echo get_term_meta( $tag->term_id, $_meta_slug, true ); ?>" />
+          <?php if( isset( $_meta_field['description'] ) ) { ?>
           <p class="description"><?php echo $_meta_field['description']; ?></p>
+          <?php } ?>
         </td>
       </tr>
       <?php } ?>
