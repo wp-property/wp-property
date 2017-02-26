@@ -61,7 +61,9 @@ namespace UsabilityDynamics\WPP {
         // Add our request headers.
         add_filter( 'ep_format_request_headers', array( $this, 'ep_format_request_headers' ) );
 
-        add_filter( 'ep_post_sync_args', array( $this, 'ep_post_sync_args' ), 50, 2 );
+        add_filter( 'ep_post_sync_args', array( $this, 'ep_post_sync_args' ), 40, 2 );
+        add_filter( 'ep_post_sync_args', array( $this, 'post_title_suggest' ), 50, 2 );
+        add_filter( 'ep_post_sync_args', array( $this, 'filter_term_suggest' ), 60, 2 );
 
         // Set index-name.
         add_filter( 'ep_index_name', array( $this, 'ep_index_name' ), 50, 2 );
@@ -160,6 +162,71 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Adds [title_suggest] field for autocompletion.
+       *
+       * @todo Expand the input array with common terms.
+       *
+       * @param $post_args
+       * @param $post_id
+       * @return mixed
+       */
+      public function post_title_suggest( $post_args, $post_id ) {
+
+        $post_args['title_suggest'] = array(
+          "input" => array(
+            $post_args['post_title']
+          ),
+          "output" => $post_args['post_title'],
+          "payload" => array(
+            "post_id" => $post_id,
+            "post_status" => $post_args['post_status'],
+            "post_title" => $post_args['post_title'],
+            "post_name" => $post_args['post_name'],
+            "permalink" => $post_args['permalink']
+          )
+        );
+
+        return $post_args;
+      }
+
+      /**
+       * Create [term_suggest] list.
+       *
+       * @param $post_args
+       * @param $post_id
+       * @return mixed
+       */
+      public function filter_term_suggest( $post_args, $post_id ) {
+
+        if ( ! empty( $post_args['terms'] ) ) {
+          foreach ( $post_args['terms'] as $_tax => $taxonomy ) {
+
+            foreach ( $taxonomy as $term ) {
+
+              $suggest[] = array(
+                "input" => array( $term['name'] ),
+                "output" => $term['name'],
+                "payload" => array(
+                  "term_id" => $term['term_id'],
+                  "slug" => $term['slug'],
+                  "name" => $term['name'],
+                  "tax" => $_tax
+                )
+              );
+
+            }
+
+          }
+        }
+
+        if ( ! empty( $suggest ) ) {
+          $post_args['term_suggest'] = $suggest;
+        }
+
+        return $post_args;
+      }
+
+      /**
        * Set api.realty.ci Index Name
        *
        * @param $index_name
@@ -224,16 +291,6 @@ namespace UsabilityDynamics\WPP {
 
         $mapping['settings']['index']['number_of_replicas'] = (int) 1;
         $mapping['settings']['index']['ep_default_index_number_of_shards'] = (int) 2;
-
-        $mapping['mappings']['post']['dynamic_templates'][] = array(
-          "wpp_location_geohash" => array(
-            "match" => "wpp_location_geohash",
-            "mapping" => array(
-              "type" => "geo_point",
-              //"geohash_precision" => "1km"
-            )
-          )
-        );
 
         $mapping['mappings']['post']['dynamic_templates'][] = array(
           'tax_input_meta' => array(
@@ -332,18 +389,23 @@ namespace UsabilityDynamics\WPP {
           ),
         );
 
-        $mapping['mappings']['post']['properties']['post_meta']['properties']['wpp_location_geohash'] = array(
-          "type" => "geo_point"
-        );
-
-        $mapping['mappings']['post']['properties']['post_meta']['properties']['wpp_location_pin'] = array(
-          "type" => "geo_point"
-        );
+        $mapping['mappings']['post']['properties']['post_meta']['properties']['wpp_location_pin'] = array( "type" => "geo_point" );
 
         $mapping['mappings']['post']['properties']['tax_input'] = array( "type" => "object" );
 
-        //die(json_encode($mapping['mappings']['post']['dynamic_templates'], JSON_PRETTY_PRINT));
-        //die(json_encode($mapping, JSON_PRETTY_PRINT));
+        $mapping['mappings']['post']['properties']['title_suggest'] = array(
+          'type' => 'completion',
+          'analyzer' => 'whitespace',
+          'search_analyzer' => 'whitespace',
+          'payloads' => true
+        );
+
+        $mapping['mappings']['post']['properties']['term_suggest'] = array(
+          'type' => 'completion',
+          'analyzer' => 'whitespace',
+          'search_analyzer' => 'whitespace',
+          'payloads' => true
+        );
 
         return $mapping;
       }
