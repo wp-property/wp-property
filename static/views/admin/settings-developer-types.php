@@ -271,7 +271,7 @@ jQuery(document).ready(function($) {
 
           <% jQuery.each( wp_properties.property_stats, function(property_stat_slug, property_stat_label ){ %>
             <li class="wpp_development_advanced_option">
-              <input id="<% print( property_slug + "_" + property_stat_slug) %>_inheritance" <% if( typeof wp_properties.property_inheritance[ property_slug ] != 'undefined' && jQuery.inArray('parent', wp_properties.property_inheritance[ property_slug ]) != -1){ print( 'CHECKED'); } %> type="checkbox" name="wpp_settings[property_inheritance][<%= property_slug %>][]" value="<%= property_stat_slug %>"/>
+              <input id="<% print( property_slug + "_" + property_stat_slug) %>_inheritance" <% if( typeof wp_properties.property_inheritance[ property_slug ] != 'undefined' && jQuery.inArray(property_stat_slug, wp_properties.property_inheritance[ property_slug ]) != -1){ print( 'CHECKED'); } %> type="checkbox" name="wpp_settings[property_inheritance][<%= property_slug %>][]" value="<%= property_stat_slug %>"/>
               <label for="<% print( property_slug + "_" + property_stat_slug) %>_inheritance">
                 <%= property_stat_label %>
               </label>
