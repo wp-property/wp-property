@@ -245,6 +245,24 @@ namespace UsabilityDynamics\WPP {
               $_taxonomies[ $_taxonomy ]['wpp_term_meta_fields'] = $_original_taxonomy['wpp_term_meta_fields'];
             }
 
+            // Allow show_in_menu setting to be set
+            if( isset( $_original_taxonomy ) && !isset( $_taxonomies[ $_taxonomy ]['show_in_menu'] ) && isset( $_original_taxonomy['show_in_menu'] ) ) {
+              $_taxonomies[ $_taxonomy ]['show_in_menu'] = $_original_taxonomy['show_in_menu'];
+            }
+
+            // Allow rich_taxonomy to be enabled.
+            if( isset( $_original_taxonomy ) && !isset( $_taxonomies[ $_taxonomy ]['rich_taxonomy'] ) && isset( $_original_taxonomy['rich_taxonomy'] ) ) {
+              $_taxonomies[ $_taxonomy ]['rich_taxonomy'] = $_original_taxonomy['rich_taxonomy'];
+            }
+
+            // Allow rich_taxonomy to be enabled.
+            if( isset( $_original_taxonomy ) && !isset( $_taxonomies[ $_taxonomy ]['query_var'] ) && isset( $_original_taxonomy['query_var'] ) ) {
+              $_taxonomies[ $_taxonomy ]['query_var'] = $_original_taxonomy['query_var'];
+            }
+            if( isset( $_original_taxonomy ) && !isset( $_taxonomies[ $_taxonomy ]['rewrite'] ) && isset( $_original_taxonomy['rewrite'] ) ) {
+              $_taxonomies[ $_taxonomy ]['rewrite'] = $_original_taxonomy['rewrite'];
+            }
+
           }
 
         }
@@ -599,13 +617,17 @@ namespace UsabilityDynamics\WPP {
           }
 
           // Verify rewrite rules are legic.
-          if( isset( $_taxonomy_data['rewrite'] ) &&  isset( $_taxonomy_data['rewrite']['slug'] ) ) {
+          if( isset( $_taxonomy_data['rewrite'] ) && isset( $_taxonomy_data['rewrite']['slug'] ) ) {
 
-            $_wpp_terms['taxonomies'][ $_taxonomy ]['rewrite'] = array(
-              'slug' => isset( $_taxonomy_data['rewrite']['slug'] ) ? $_taxonomy_data['rewrite']['slug'] : null,
-              'hierarchical' => isset( $_taxonomy_data['rewrite']['hierarchical'] ) ? $_taxonomy_data['rewrite']['hierarchical'] : true,
-              'with_front' => isset( $_taxonomy_data['rewrite']['with_front'] ) ? $_taxonomy_data['rewrite']['with_front'] : false
-            );
+            if( $_wpp_terms['taxonomies'][ $_taxonomy ]['rewrite'] !== false ) {
+
+              $_wpp_terms['taxonomies'][ $_taxonomy ]['rewrite'] = array(
+                'slug' => isset( $_taxonomy_data['rewrite']['slug'] ) ? $_taxonomy_data['rewrite']['slug'] : null,
+                'hierarchical' => isset( $_taxonomy_data['rewrite']['hierarchical'] ) ? $_taxonomy_data['rewrite']['hierarchical'] : true,
+                'with_front' => isset( $_taxonomy_data['rewrite']['with_front'] ) ? $_taxonomy_data['rewrite']['with_front'] : false
+              );
+
+            }
 
           } else {
             unset( $_wpp_terms['taxonomies'][ $_taxonomy ]['rewrite'] );
@@ -1050,7 +1072,8 @@ namespace UsabilityDynamics\WPP {
           }
         }
 
-        if( $args[ 'hierarchical' ] ) {
+        // Ensure [hierarchical] is set unless [rewrite] is explicitly set to false.
+        if( $args[ 'hierarchical' ] && isset( $args[ 'rewrite' ] ) && $args[ 'rewrite' ] !== false ) {
           $args[ 'rewrite' ][ 'hierarchical' ] = true;
         }
 

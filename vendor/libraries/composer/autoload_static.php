@@ -221,6 +221,7 @@ class ComposerStaticInit058e019c61a5dc1813ffa20d1b0fcb3e
         'UsabilityDynamics\\WPP\\Bootstrap' => __DIR__ . '/../../..' . '/lib/classes/class-bootstrap.php',
         'UsabilityDynamics\\WPP\\Children_List_Table' => __DIR__ . '/../../..' . '/lib/classes/class-children-list-table.php',
         'UsabilityDynamics\\WPP\\Dashboard_Widget' => __DIR__ . '/../../..' . '/lib/classes/class-dashboard-widget.php',
+        'UsabilityDynamics\\WPP\\Elasticsearch' => __DIR__ . '/../../..' . '/lib/classes/class-elasticsearch.php',
         'UsabilityDynamics\\WPP\\Export' => __DIR__ . '/../../..' . '/lib/classes/class-export.php',
         'UsabilityDynamics\\WPP\\Layouts' => __DIR__ . '/../../..' . '/lib/classes/class-layouts.php',
         'UsabilityDynamics\\WPP\\Layouts_API_Client' => __DIR__ . '/../../..' . '/lib/classes/class-layouts-api-client.php',

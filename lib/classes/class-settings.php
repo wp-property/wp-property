@@ -7,6 +7,8 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use UsabilityDynamics\Utility;
+
   if (!class_exists('UsabilityDynamics\WPP\Settings')) {
 
     class Settings extends \UsabilityDynamics\Settings
@@ -65,22 +67,6 @@ namespace UsabilityDynamics\WPP {
         $data['default_coords']['latitude'] = '57.7973333';
         $data['default_coords']['longitude'] = '12.0502107';
 
-        //** Geo type attributes are predefined and should not be editable on property adding/updating */
-        // @notice All these fields are automatically added as post_meta on revalidation.
-        $data['geo_type_attributes'] = array(
-          'formatted_address',
-          'street_number',
-          'route',
-          'district',
-          'city',
-          'county',
-          'state',
-          'state_code',
-          'country',
-          'country_code',
-          'postal_code'
-        );
-
         //** Image URLs. */
         $data['images']['map_icon_shadow'] = WPP_URL . "images/map_icon_shadow.png";
 
@@ -99,12 +85,15 @@ namespace UsabilityDynamics\WPP {
         );
 
         $_stored_settings = $this->get();
-        if(!isset($_stored_settings['configuration'])){
-          $data['configuration']['show_assistant'] = "yes";
+
+        if( defined( 'WP_PROPERTY_SETUP_ASSISTANT' ) && WP_PROPERTY_SETUP_ASSISTANT ) {
+          if( !isset( $_stored_settings[ 'configuration' ] ) ) {
+            $data[ 'configuration' ][ 'show_assistant' ] = "yes";
+          }
         }
-        
+
         //** Merge with default data. */
-        $this->set(\UsabilityDynamics\Utility::extend($data, $this->get()));
+        $this->set(Utility::extend( $data, $_stored_settings ));
 
         // Check if settings have or have been upated. (we determine if configuration is good)
         // @todo Add a better _version_ check.

@@ -31,6 +31,8 @@ namespace UsabilityDynamics\WPP {
 
       public $layouts = null;
 
+      public $elastic = null;
+
       private $register;
 
       /**
@@ -49,6 +51,7 @@ namespace UsabilityDynamics\WPP {
       /**
        * May be load WP-Property Features
        *
+       * @todo Fix issue with Elasticpress activation triggering fatal error. (if (WP_PROPERTY_ELASTICSEARCH_SERVICE) flag is on)
        * @TODO: Fix Flag conditions: constants are still not defined on this step.
        *
        * @author peshkov@UD
@@ -156,6 +159,11 @@ namespace UsabilityDynamics\WPP {
         //** Handles Export (XML/JSON/CSV) functionality */
         new Export();
 
+        // Invoke Elasticsearch Handler.
+        if( defined( 'WP_PROPERTY_ELASTICSEARCH_SERVICE' ) && WP_PROPERTY_ELASTICSEARCH_SERVICE && class_exists( 'UsabilityDynamics\WPP\Elasticsearch' )) {
+          $this->elastic = new Elasticsearch();
+        }
+
         /** Initiate WPML class if WPML plugin activated. **/
         if (function_exists('icl_object_id')) {
           new \UsabilityDynamics\WPP\WPML();
@@ -164,12 +172,15 @@ namespace UsabilityDynamics\WPP {
         if (is_admin()) {
           //** Initiate Admin Handler */
           new Admin();
+
           //** Initiate Meta Box Handler */
           new Meta_Box();
+
           //** Setup Gallery Meta Box ( wp-gallery-metabox ) */
           add_action('be_gallery_metabox_post_types', function ($post_types = array()) {
             return array('property');
           });
+
           add_filter('be_gallery_metabox_remove', '__return_false');
         }
 

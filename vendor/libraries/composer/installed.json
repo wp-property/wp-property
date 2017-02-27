@@ -792,5 +792,59 @@
         "support": {
             "issues": "http://github.com/UsabilityDynamics/lib-wp-saas-util/issues"
         }
+    },
+    {
+        "name": "10up/elasticpress",
+        "version": "2.1.x-dev",
+        "version_normalized": "2.1.9999999.9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/10up/ElasticPress.git",
+            "reference": "12b9e66168e80111ee40a63876e400c81b6d0b0f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/10up/ElasticPress/zipball/12b9e66168e80111ee40a63876e400c81b6d0b0f",
+            "reference": "12b9e66168e80111ee40a63876e400c81b6d0b0f",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "*@stable",
+            "woothemes/woocommerce": "@dev",
+            "wp-cli/wp-cli": "*@stable"
+        },
+        "time": "2016-07-01 03:34:13",
+        "type": "wordpress-plugin",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPLv2"
+        ],
+        "authors": [
+            {
+                "name": "Aaron Holbrook",
+                "email": "aaron@10up.com",
+                "homepage": "http://aaronjholbrook.com"
+            },
+            {
+                "name": "10up",
+                "homepage": "http://10up.com"
+            },
+            {
+                "name": "Taylor Lovett",
+                "email": "taylorl@get10up.com"
+            }
+        ],
+        "description": "Supercharge WordPress with Elasticsearch.",
+        "keywords": [
+            "elasticpress",
+            "elasticsearch",
+            "plugin",
+            "search",
+            "wordpress"
+        ]
     }
 ]

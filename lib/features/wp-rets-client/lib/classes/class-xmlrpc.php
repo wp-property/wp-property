@@ -457,6 +457,9 @@ namespace UsabilityDynamics\WPRETSC {
             $_message[] = 'View at ['.$_permalink.']';
           }
 
+          //
+          delete_post_meta( $_post_id, 'rets_media' );
+
           ud_get_wp_rets_client()->write_log( join( " ", $_message ), 'info' );
 
 
@@ -500,6 +503,9 @@ namespace UsabilityDynamics\WPRETSC {
           // Avoid hierarchical taxonomies since they do not allow simple-value passing.
           WPP_F::verify_have_system_taxonomy( $tax_name, array( 'hierarchical' => false ) );
 
+          if( $tax_name === 'wpp_listing_category' ) {
+            //error_log(print_r($tax_tags, true));
+          }
           if( is_taxonomy_hierarchical( $tax_name ) ) {
             ud_get_wp_rets_client()->write_log( "Handling hierarchical taxonomy [$tax_name].", 'debug' );
 
@@ -546,9 +552,9 @@ namespace UsabilityDynamics\WPRETSC {
                 ));
 
                 if( is_wp_error( $_term_parent ) ) {
-                  ud_get_wp_rets_client()->write_log( "Error creating term [$_term_parent_value] with [" . $_term_parent->get_error_message() ."].", 'error' );
+                  ud_get_wp_rets_client()->write_log( "Error creating term [$_term_parent_value] with [" . $_term_parent->get_error_message() ."] for [$tax_name] taxonomy.", 'error' );
                 } else {
-                  ud_get_wp_rets_client()->write_log( "Created parent term [$_term_parent_value] with [" . $_term_parent['term_id'] ."].", 'info' );
+                  ud_get_wp_rets_client()->write_log( "Created parent term [$_term_parent_value] with [" . $_term_parent['term_id'] ."] for [$tax_name] taxonomy.", 'info' );
                 }
 
               }
@@ -590,7 +596,7 @@ namespace UsabilityDynamics\WPRETSC {
 
             if( isset( $_terms ) && !empty( $_terms ) ) {
               $_inserted_terms = wp_set_post_terms( $_post_id, $_terms, $tax_name );
-              ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_inserted_terms ) . "] terms.", 'info' );
+              ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_inserted_terms ) . "] terms.", 'debug' );
             }
 
           }

@@ -35,7 +35,8 @@
     "UsabilityDynamics/wp-gallery-metabox": "2.0.1",
     "usabilitydynamics/wp-tax-post-binding": "2.0.5",
     "freemius/wordpress-sdk": "^1.1.7",
-    "ccampbell/chromephp": "^4.1"
+    "ccampbell/chromephp": "^4.1",
+    "10up/elasticpress": "^2.1"
   },
   "require-dev": {
     "usabilitydynamics/lib-wp-phpunit": "master",
@@ -165,11 +166,11 @@
         "enabled": false
       },
       {
-        "name": "Landing Page Taxonomy",
-        "constant": "WPP_FEATURE_FLAG_WPP_SEARCH_LANDING",
-        "description": "Dynamic terms for landing pages, stored in [wpp_search_landing].",
+        "name": "Landing Page Categories",
+        "constant": "WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY",
+        "description": "Dynamic terms for landing pages, stored in [wpp_listing_category].",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "Standard Property Type",

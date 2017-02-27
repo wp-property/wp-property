@@ -7,6 +7,7 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use WP_Post;
   if( !class_exists( 'UsabilityDynamics\WPP\Meta_Box' ) ) {
 
     class Meta_Box {
@@ -19,10 +20,6 @@ namespace UsabilityDynamics\WPP {
       public function __construct( $args = false ) {
         /* Be sure all required files are loaded. */
         add_action( 'admin_init', array( $this, 'load_files' ), 1 );
-        /* Register all RWMB meta boxes */
-        add_action( 'rwmb_meta_boxes', array( $this, 'register_meta_boxes' ) );
-        //** Add metaboxes hook */
-        add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 );
 
       }
 
@@ -50,6 +47,7 @@ namespace UsabilityDynamics\WPP {
        * May be loads all required RWMB Meta Box files
        */
       public function load_files() {
+
         // Stop here if Meta Box class doesn't exist
         if( !class_exists( '\RW_Meta_Box' ) ) {
           return;
@@ -64,6 +62,15 @@ namespace UsabilityDynamics\WPP {
           }
           include_once( $file );
         }
+
+
+        /* Register all RWMB meta boxes */
+        add_action( 'rwmb_meta_boxes', array( $this, 'register_meta_boxes' ) );
+
+        //** Add metaboxes hook */
+        add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 );
+
+
       }
 
       /**
@@ -124,16 +131,20 @@ namespace UsabilityDynamics\WPP {
        */
       public function register_meta_boxes( $meta_boxes ) {
         $_meta_boxes = array();
+
         $taxonomies = ud_get_wp_property( 'taxonomies', array() );
 
         /* May be determine property_type to know which attributes should be hidden and which ones just readable. */
-        $post = new \WP_Post( new \stdClass );
+        $post = new WP_Post( new \stdClass );
 
         $post_id = isset( $_REQUEST['post'] ) && is_numeric( $_REQUEST['post'] ) ? $_REQUEST['post'] : false;
+
         if( !$post_id && !empty( $_REQUEST['post_ID'] ) && isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'editpost' ) {
           $post_id = $_REQUEST['post_ID'];
         }
+
         if( $post_id ) {
+
           $p = get_property( $post_id, array(
             'get_children'          => 'true',
             'return_object'         => 'true',
@@ -142,9 +153,11 @@ namespace UsabilityDynamics\WPP {
             'load_parent'           => 'true',
             'cache'                 => 'false'
           ) );
+
           if( !empty($p) ) {
             $post = $p;
           }
+
         }
 
         /* Register 'General Information' metabox for Edit Property page */
@@ -189,6 +202,7 @@ namespace UsabilityDynamics\WPP {
          *  Probably convert Meta Boxes to single one with tabs
          */
         $_meta_boxes = $this->maybe_convert_to_tabs( $_meta_boxes );
+
         if( is_array( $meta_boxes ) ) {
           $meta_boxes = $meta_boxes + $_meta_boxes;
         }
