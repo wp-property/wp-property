@@ -100,10 +100,10 @@ jQuery(document).ready(function($) {
     className: 'wpp_dynamic_table_row',
     attributes: function(){
       return {
-        slug: this.model.attributes.slug,
-        wpp_attribute_group: this.model.attributes.gslug,
-        new_row: this.model.attributes.slug == '' ? true : false,
-        style: typeof this.model.attributes.group.color != 'undefined' ? 'background-color:' + this.model.attributes.group.color : '',
+        slug: this.model.get('slug'),
+        wpp_attribute_group: this.model.get('gslug'),
+        new_row: this.model.get('slug') == '' ? true : false,
+        style: typeof this.model.get('group').color != 'undefined' ? 'background-color:' + this.model.get('group').color : '',
       };
     },
     template: _.template($('#settings-developer-attributes-template').html()),
@@ -214,7 +214,7 @@ jQuery(document).ready(function($) {
                 <span><?php _e( 'Attention! This attribute (slug) is used by Google Validator and Address Display functionality. It is set automaticaly and can not be edited on Property Adding/Updating page.', ud_get_wp_property()->domain ); ?></span>
               </div>
             <% } %>
-            <% if(slug == "ID"){ %> <?php// for ID field: show a notice to the user about the field being non-editable @raj (22/07/2016) ?>
+            <% if(slug == "ID"){ %> <?php // for ID field: show a notice to the user about the field being non-editable @raj (22/07/2016) ?>
               <div class="wpp_notice">
                 <span><?php _e( 'Note! This attribute (slug) is predefined and used by WP-Property. You can not remove it or change it.', ud_get_wp_property()->domain ); ?></span>
               </div>
