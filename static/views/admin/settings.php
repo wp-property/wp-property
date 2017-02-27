@@ -176,9 +176,7 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
             </td>
           </tr>
 
-          <?php if(defined( 'WP_PROPERTY_LAYOUTS' ) && WP_PROPERTY_LAYOUTS === false )  {
-
-            if( !isset($wp_properties['configuration']['enable_layouts']) || $wp_properties['configuration']['enable_layouts'] != "false")  { ?>
+          <?php if( !isset($wp_properties['configuration']['enable_layouts']) || $wp_properties['configuration']['enable_layouts'] != "false")  { ?>
 
             <tr class="wpp-setting wpp-setting-single-template">
               <th><?php printf(__('Single %s Template', ud_get_wp_property()->domain), WPP_F::property_label()); ?></th>
@@ -272,8 +270,6 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
               </td>
             </tr>
           <?php endif; ?>
-
-          <?php } ?>
 
           <tr>
             <th><?php printf(__('Automatic Geolocation', ud_get_wp_property()->domain), WPP_F::property_label()); ?></th>
