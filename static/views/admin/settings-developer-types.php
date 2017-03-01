@@ -12,15 +12,15 @@ $inherited_attributes_do_action = array();
 
 foreach ($filtered_property_types as $slug => $label) {
   ob_start();
-  do_action_deprecated( 'wpp::types::hidden_attributes', array($slug), '3.0.0', 'wpp::settings::developer::types::hidden_attributes', "wpp::types::hidden_attributes has bin deperecated. Use wpp::settings::developer::types::hidden_attributes instead. New action expect underscore template and data should be passed by 'wpp::settings::developer::types' filter." );
+  WPP_F::do_action_deprecated( 'wpp::types::hidden_attributes', array($slug), '3.0.0', 'wpp::settings::developer::types::hidden_attributes', "New action expect underscore template and data should be passed by 'wpp::settings::developer::types' filter." );
   $hidden_attributes_do_action[$slug] = ob_get_clean();
 
   ob_start();
   do_action( 'wpp::types::inherited_attributes', $slug );
-  do_action_deprecated( 'wpp::types::inherited_attributes', array($slug), '3.0.0', 'wpp::settings::developer::types::inherited_attributes', "wpp::types::inherited_attributes has bin deperecated. Use wpp::settings::developer::types::inherited_attributes instead. New action expect underscore template and data should be passed by 'wpp::settings::developer::types' filter." );
+  WPP_F::do_action_deprecated( 'wpp::types::inherited_attributes', array($slug), '3.0.0', 'wpp::settings::developer::types::inherited_attributes', "New action expect underscore template and data should be passed by 'wpp::settings::developer::types' filter." );
   $inherited_attributes_do_action[$slug] = ob_get_clean();
 
-  $property_type_settings_do_action[$slug] = apply_filters_deprecated( 'wpp_property_type_settings', array(array(), $slug), '3.0.0', 'wpp::settings::developer::types::settings', "wpp_property_type_settings has bin deperecated. Use wpp::settings::developer::types::settings instead. New action expect underscore template and data should be passed by 'wpp::settings::developer::types' filter." );
+  $property_type_settings_do_action[$slug] = WPP_F::apply_filters_deprecated( 'wpp_property_type_settings', array(array(), $slug), '3.0.0', "New action expect underscore template and data should be passed by 'wpp::settings::developer::types' filter." );
 }
 
 $hidden_attributes_do_action    = array_filter($hidden_attributes_do_action);

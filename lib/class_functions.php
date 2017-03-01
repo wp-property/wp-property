@@ -6056,6 +6056,68 @@ class WPP_F extends UsabilityDynamics\Utility
   {
     deactivate_plugins('wp-property-terms/wp-property-terms.php', true);
   }
+  
+  /**
+   * Show notice for deprecated action..
+   * Then do the action.
+   */
+  static function do_action_deprecated($tag, $args, $version, $replacement = false, $message = null ){
+    if(function_exists('do_action_deprecated')){
+      do_action_deprecated($tag, $args, $version, $replacement, $message);
+    }
+    else{
+      if ( ! has_action( $tag ) ) {
+          return;
+      }
+   
+      self::_deprecated_hook( $tag, $version, $replacement, $message );
+
+      call_user_func_array( 'do_action', array_merge(array($tag), $args) );
+    }
+  }
+
+  /**
+   * Show notice for deprecated action..
+   * Then apply the filter.
+   */
+  static function apply_filters_deprecated($tag, $args, $version, $replacement = false, $message = null){
+    if(function_exists('apply_filters_deprecated')){
+      return apply_filters_deprecated($tag, $args, $version, $replacement, $message);
+    }
+    else{
+      if ( ! has_filter( $tag ) ) {
+        return $args[0];
+      }
+
+      self::_deprecated_hook( $tag, $version, $replacement, $message );
+ 
+      return call_user_func_array( 'apply_filters', array_merge(array($tag), $args) );
+    }
+  }
+
+
+  /**
+   * Fires when a deprecated hook is called.
+   *
+   * @since 4.6.0
+   *
+   * @param string $hook        The hook that was called.
+   * @param string $replacement The hook that should be used as a replacement.
+   * @param string $version     The version of WordPress that deprecated the argument used.
+   * @param string $message     A message regarding the change.
+   */
+  static function _deprecated_hook( $hook, $version, $replacement = null, $message = null ) {
+    if ( WP_DEBUG ) {
+      $message = empty( $message ) ? '' : ' ' . $message;
+      if ( ! is_null( $replacement ) ) {
+        /* translators: 1: WordPress hook name, 2: version number, 3: alternative hook name */
+        trigger_error( sprintf( __( '%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead.' ), $hook, $version, $replacement ) . $message );
+      } else {
+        /* translators: 1: WordPress hook name, 2: version number */
+        trigger_error( sprintf( __( '%1$s is <strong>deprecated</strong> since version %2$s with no alternative available.' ), $hook, $version ) . $message );
+      }
+    }
+  }
 
 }
 
