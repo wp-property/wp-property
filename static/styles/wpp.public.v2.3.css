@@ -329,11 +329,7 @@ body .wpp_property_overview_shortcode .all-properties .property_div .wpp_overvie
 }
 body .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_right_column .wpp_overview_data li.property_title a,
 #wpp_layout .wpp_property_overview_shortcode .all-properties .property_div .wpp_overview_right_column .wpp_overview_data li.property_title a {
-  display: block;
   font-weight: bold;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 body .wpp_search_properties_widget .wpp_shortcode_search_form ul,
 #wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul {
