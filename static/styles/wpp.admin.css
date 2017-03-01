@@ -1447,7 +1447,7 @@ td.wpp_premium_feature_image {
   font-weight: normal;
 }
 .wp-core-ui.wpp_property_admin_notice {
-  background: linear-gradient(to top, #E5E5E5, #F4F4F4) repeat scroll 0 0 #EEEEEE;
+  background: linear-gradient(to top, #e5e5e5, #f4f4f4) repeat scroll 0 0 #eeeeee;
   border-radius: 5px 5px 5px 5px;
   -moz-border-radius: 5px 5px 5px 5px;
   -webkit-border-radius: 5px 5px 5px 5px;
