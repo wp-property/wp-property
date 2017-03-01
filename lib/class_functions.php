@@ -2520,7 +2520,7 @@ class WPP_F extends UsabilityDynamics\Utility
     if (isset($geo_data->terms) && is_array($geo_data->terms)) {
       foreach ($geo_data->terms as $_level => $_haveTerm) {
 
-        if ((!$_haveTerm || is_wp_error($_haveTerm)) && $geo_data->{$_level}) {
+        if ((!$_haveTerm || is_wp_error($_haveTerm)) && isset( $geo_data->{$_level} )) {
 
           $_value = $geo_data->{$_level};
 
