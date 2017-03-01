@@ -33,11 +33,6 @@ namespace UsabilityDynamics\WPRETSC {
       public $debug_file = 'wp-content/rets-debug.log';
 
       /**
-       * @var
-       */
-      private $register;
-
-      /**
        * Instantaite class.
        */
       public function init() {
@@ -47,9 +42,6 @@ namespace UsabilityDynamics\WPRETSC {
 
         // Initialize Media handler
         new Media();
-
-        // Register site with SaaS Services.
-        $this->register = class_exists( 'UsabilityDynamics\SAAS_UTIL\Register' ) ? new Register( 'property' ) : null;
 
         // 3d-party compatibility
         new Connectors\Loader();

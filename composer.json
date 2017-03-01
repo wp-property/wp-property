@@ -271,6 +271,7 @@
         "enabled": false
       }
     ],
+    "saasProduct": "prod_AB8hYwVjwdfiSJ",
     "schemas": {
       "dependencies" : {
         "modules": {},
