@@ -281,13 +281,30 @@ namespace UsabilityDynamics\WPP {
        *
        *
        *    wp elasticpress put-mapping
-       *    wp elasticpress index --posts-per-page=1 --nobulk --post-type=property
+       *    wp elasticpress index --nobulk --post-type=property
+       *    wp elasticpress index --posts-per-page=50 --post-type=property
        *
        *
        * @param $mapping
        * @return mixed
        */
       static public function ep_config_mapping( $mapping ) {
+
+        $mapping['settings']['analysis']['analyzer']['nGram_analyzer'] = array(
+          "filter" => array(
+            "lowercase",
+            "asciifolding",
+            // "nGram_filter"
+          ),
+          "type" => "custom",
+          "tokenizer" => "whitespace"
+        );
+
+        $mapping['settings']['analysis']['analyzer']['whitespace_analyzer'] = array(
+          "filter" => array( "lowercase", "asciifolding" ),
+          "type" => "custom",
+          "tokenizer" => "whitespace"
+        );
 
         $mapping['settings']['index']['number_of_replicas'] = (int) 1;
         $mapping['settings']['index']['ep_default_index_number_of_shards'] = (int) 2;
@@ -395,17 +412,19 @@ namespace UsabilityDynamics\WPP {
 
         $mapping['mappings']['post']['properties']['title_suggest'] = array(
           'type' => 'completion',
-          'analyzer' => 'whitespace',
-          'search_analyzer' => 'whitespace',
+          'analyzer' => 'nGram_analyzer',
+          'search_analyzer' => 'whitespace_analyzer',
           'payloads' => true
         );
 
         $mapping['mappings']['post']['properties']['term_suggest'] = array(
           'type' => 'completion',
-          'analyzer' => 'whitespace',
-          'search_analyzer' => 'whitespace',
+          'analyzer' => 'nGram_analyzer',
+          'search_analyzer' => 'whitespace_analyzer',
           'payloads' => true
         );
+
+        //die(json_encode($mapping, JSON_PRETTY_PRINT));
 
         return $mapping;
       }
