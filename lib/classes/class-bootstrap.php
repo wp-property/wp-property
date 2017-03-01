@@ -29,6 +29,8 @@ namespace UsabilityDynamics\WPP {
 
       public $layouts_settings = null;
 
+      public $property_customizer = null;
+
       public $layouts = null;
 
       public $elastic = null;
@@ -231,7 +233,7 @@ namespace UsabilityDynamics\WPP {
             $this->layouts = new Layouts();
 
             //** WP Property Customizer */
-            new WP_Property_Customizer();
+            $this->property_customizer = new WP_Property_Customizer();
           }
 
         }
