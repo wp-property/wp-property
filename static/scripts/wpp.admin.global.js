@@ -58,10 +58,19 @@ jQuery.fn.wppGroups = function(opt) {
   closeGroupBox = function () {
     groupsBlock.hide(300);
     wrapper.css('display','none');
-
-    jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row').each(function(i, e){
+    var row = jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row');
+    row.each(function(i, e){
       jQuery(e).removeClass('groups_active');
-    })
+    });
+
+    jQuery.each(colorpicker, function(i, e) {
+      var _this = jQuery(e);
+      var gslug = _this.parent().parent().find('.slug').val();
+      console.log(gslug);
+      console.log(_this.val());
+      console.log(row.filter('tr[wpp_attribute_group=' + gslug + ']'));
+      row.filter('tr[wpp_attribute_group=' + gslug + ']').css('background-color', _this.val());
+    });
   };
 
   //* EVENTS */
