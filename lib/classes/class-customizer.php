@@ -7,6 +7,11 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use WP_Error;
+  use WPP_F;
+  use Exception;
+  use WP_Customize_Control;
+
   if (!class_exists('UsabilityDynamics\WPP\WP_Property_Customizer')) {
 
 
@@ -29,7 +34,6 @@ namespace UsabilityDynamics\WPP {
        */
       public function __construct()
       {
-        global $wp_properties;
 
         if ( defined( 'WP_PROPERTY_LAYOUTS' ) && WP_PROPERTY_LAYOUTS === true ) {
           add_action('customize_register', array($this, 'property_layouts_customizer'));
@@ -56,6 +60,9 @@ namespace UsabilityDynamics\WPP {
        *
        * Makes [wpp.instance.settings.configuration.base_property_single_url] available for admin that can use customizer.
        *
+       * @todo Stop adding the test URLS to [configuration], should be added to dedicated field just for customizer. - potanin@UD
+       * @todo Fix the [base_property_term_url] url to not be ghetto. - potanin@UD
+       *
        * @author potanin@UD
        * @param $data
        * @return mixed
@@ -77,6 +84,15 @@ namespace UsabilityDynamics\WPP {
           'per_page' => 1
         ));
 
+        // Get most popular terms.
+        $_popular_listing_category_terms = get_terms( array(
+          'taxonomy' => 'wpp_listing_category',
+          'hide_empty' => true,
+          'orderby' => 'count',
+          'number' => 1
+        ) );
+
+
         if( $properties && is_array( $properties ) && !empty( $properties ) ) {
           $post_id = $properties[0]->ID;
 
@@ -84,6 +100,9 @@ namespace UsabilityDynamics\WPP {
 
           // store first property url
           $data['settings']['configuration']['base_property_single_url'] = $post_url;
+
+          // store first property url
+          $data['settings']['configuration']['base_property_term_url'] = home_url( '/listings' . get_term_meta( $_popular_listing_category_terms[0]->term_id, 'listing-category-url_path', true ));
 
           // get home url. This could/should be improved.
           $data['settings']['configuration']['base_property_url'] = home_url($wp_properties['configuration']['base_slug']);
@@ -94,22 +113,26 @@ namespace UsabilityDynamics\WPP {
 
       }
 
-
+      /**
+       * @param $false
+       * @return array
+       */
       public function wpp_customize_configuration($false)
       {
-        global $wp_properties;
 
         $this->get_local_layout();
 
-        if (!empty($_POST) && (WP_PROPERTY_LAYOUTS)) {
+        if (!empty($_POST) && ( defined( 'WP_PROPERTY_LAYOUTS' ) && WP_PROPERTY_LAYOUTS)) {
+
           try {
             $selected_items = json_decode(stripslashes($_POST['customized']));
-          } catch (\Exception $e) {
+          } catch (Exception $e) {
             echo $e->getMessage();
           }
+
           /** If is single property page */
           if (is_singular('property')) {
-            if (isset($selected_items->layouts_property_single_choice)) {
+            if ( isset( $selected_items ) && isset($selected_items->layouts_property_single_choice)) {
               $layout_id = $selected_items->layouts_property_single_choice;
             } else {
               $layout_id = 'false';
@@ -117,15 +140,17 @@ namespace UsabilityDynamics\WPP {
             if ($layout_id == 'none') {
               return $false;
             }
-            if (isset($selected_items->layouts_property_single_select)) {
+
+            if ( isset( $selected_items ) && isset($selected_items->layouts_property_single_select)) {
               $template_file = $selected_items->layouts_property_single_select;
             } else {
               $template_file = 'index.php';
             }
+
             if (!empty($layout_id) && $layout_id !== 'false') {
               try {
                 $layout = json_decode(base64_decode($layout_id), true);
-              } catch (\Exception $e) {
+              } catch (Exception $e) {
                 echo $e->getMessage();
               }
               return array(
@@ -155,7 +180,7 @@ namespace UsabilityDynamics\WPP {
             if (!empty($layout_id) && $layout_id !== 'false') {
               try {
                 $layout = json_decode(base64_decode($layout_id), true);
-              } catch (\Exception $e) {
+              } catch (Exception $e) {
                 echo $e->getMessage();
               }
               return array(
@@ -165,9 +190,13 @@ namespace UsabilityDynamics\WPP {
             }
           }
         }
+
         return $false;
       }
 
+      /**
+       *
+       */
       public function wp_property_customizer_controls()
       {
         wp_enqueue_script('wp-property-customizer-controls', WPP_URL . 'scripts/wp-property-customizer-controls.js', array('jquery', 'customize-controls'), WPP_Version);
@@ -179,6 +208,10 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       *
+       *
+       * @todo Don't update [wpp_available_layouts] on every load if it has not changed.
+       *
        * @return array
        */
       public function preload_layouts()
@@ -212,6 +245,7 @@ namespace UsabilityDynamics\WPP {
           }
 
           update_option('wpp_available_layouts', $_available_layouts);
+
           return $_available_layouts;
         } else {
           if ($_available_layouts = get_option('wpp_available_layouts', false)) {
@@ -227,30 +261,126 @@ namespace UsabilityDynamics\WPP {
 
       /**
        *
+       * @todo Migrate layout iteration into standalone function with filter.
+       *
        * @param $wp_customize
        */
       public function property_layouts_customizer($wp_customize)
       {
+        WPP_F::debug( "WP_Property_Customizer::property_layouts_customizer");
+
         $template_files = apply_filters('wpp::layouts::template_files', wp_get_theme()->get_files('php', 0));
         $templates_names = array();
+
         foreach ($template_files as $file => $file_path) {
           $templates_names[$file] = $file;
         }
 
         $this->preload_layouts();
+
         $layouts = get_option('wpp_available_layouts', false);
         $local_layouts = get_option('wpp_available_local_layouts', false);
-        $overview_layouts = $layouts['property-overview'];
-        $single_layouts = $layouts['single-property'];
+
+        $overview_layouts = $layouts['property-overview'] ? $layouts['property-overview'] : array();
+        $single_layouts = $layouts['single-property'] ? $layouts['single-property'] : array();
+        $term_layouts = $layouts['term-overview'] ? $layouts['term-overview'] : array();
+
+        // Add local layouts to overview, term and single layouts.
         if (!empty($local_layouts)) {
+
           foreach ($local_layouts as $value) {
-            $tag = $value->tags[0]->tag;
-            if ($tag == 'property-overview') {
-              $overview_layouts = array_merge($overview_layouts, array($value));
-            } else if ($tag == 'single-property') {
-              $single_layouts = array_merge($single_layouts, array($value));
+
+            $value->local = true;
+
+            foreach( (array) $value->tags as $_tag ) {
+
+              if( $_tag->tag == 'property-overview' ) {
+                $overview_layouts = array_merge( array( $value ), $overview_layouts );
+              }
+
+              if( $_tag->tag == 'term-overview' ) {
+                $term_layouts = array_merge( array( $value ), $term_layouts );
+              }
+
+              if( $_tag->tag == 'single-property' ) {
+                $single_layouts = array_merge( array( $value ), $single_layouts );
+              }
+
             }
+
           }
+
+        }
+
+        $single_radio_choices = array();
+        $overview_radio_choices = array();
+        $term_radio_choices = array();
+
+        if (!empty($single_layouts)) {
+          foreach ($single_layouts as $layout) {
+
+            if( !$layout->screenshot && !$layout->local ) {
+              continue;
+            }
+
+            if (!empty($layout->screenshot)) {
+              $layout_preview = $layout->screenshot;
+            } else {
+              $layout_preview = WPP_URL . 'images/no-preview.jpg';
+            }
+
+            $single_radio_choices[$layout->layout] = '<img class="wpp-layout-icon" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
+
+          }
+          $first_single_layout = array_shift($single_layouts)->layout;
+
+        } else {
+          $first_single_layout = '';
+        }
+
+        if (!empty($term_layouts)) {
+          foreach ($term_layouts as $layout) {
+
+            if( !$layout->screenshot && !$layout->local ) {
+              continue;
+            }
+
+            if (!empty($layout->screenshot)) {
+              $layout_preview = $layout->screenshot;
+            } else {
+              $layout_preview = WPP_URL . 'images/no-preview.jpg';
+            }
+
+            $term_radio_choices[$layout->layout] = '<img class="wpp-layout-icon" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
+
+          }
+          $first_term_layout = array_shift($term_layouts)->layout;
+
+        } else {
+          $first_term_layout = '';
+        }
+
+        if (!empty($overview_layouts)) {
+          foreach ($overview_layouts as $layout) {
+
+            if( !$layout->screenshot && !$layout->local ) {
+              continue;
+            }
+
+            if (!empty($layout->screenshot)) {
+              $layout_preview = $layout->screenshot;
+            } else {
+              $layout_preview = WPP_URL . 'images/no-preview.jpg';
+            }
+
+            $overview_radio_choices[ $layout->layout ] = '<img class="wpp-layout-icon" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
+
+          }
+
+          $first_overview_layout = array_shift($overview_layouts)->layout;
+
+        } else {
+          $first_overview_layout = '';
         }
 
         $wp_customize->add_panel('layouts_area_panel', array(
@@ -263,40 +393,47 @@ namespace UsabilityDynamics\WPP {
         // Property overview settings
         $wp_customize->add_section('layouts_property_overview_settings', array(
           'title' => __('Results Page', ud_get_wp_property()->domain),
-          'description' => __('Overview layouts will apply to default properties page, search results and terms pages.', ud_get_wp_property()->domain),
+          'description' => __('Overview layouts will apply to property search results.', ud_get_wp_property()->domain),
           'panel' => 'layouts_area_panel',
-          'priority' => 1,
+          'priority' => 10,
         ));
 
-        $overview_radio_choices = array();
-        if (!empty($overview_layouts)) {
-          foreach ($overview_layouts as $layout) {
-            if (!empty($layout->screenshot)) {
-              $layout_preview = $layout->screenshot;
-            } else {
-              $layout_preview = WPP_URL . 'images/no-preview.jpg';
-            }
-            $overview_radio_choices[$layout->layout] = '<img style="display: block; width: 150px; height: 150px;" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
-          }
-          $first_overview_layout = array_shift($overview_layouts)->layout;
-        } else {
-          $first_overview_layout = '';
-        }
+        // Property Term Landing pages.
+        $wp_customize->add_section('layouts_property_term_settings', array(
+          'title' => __('Landing Page', ud_get_wp_property()->domain),
+          'description' => __('Term landing pages.', ud_get_wp_property()->domain),
+          'panel' => 'layouts_area_panel',
+          'priority' => 20,
+        ));
+
+        // Single Property.
+        $wp_customize->add_section('layouts_property_single_settings', array(
+          'title' => __('Property Page', ud_get_wp_property()->domain),
+          'description' => __('Layout for single property page in live preview.', ud_get_wp_property()->domain),
+          'panel' => 'layouts_area_panel',
+          'priority' => 30,
+        ));
+
         $wp_customize->add_setting('layouts_property_overview_choice', array(
           'default' => $first_overview_layout,
           'transport' => 'refresh'
         ));
-        $wp_customize->add_control(new Layouts_Custom_Control($wp_customize, 'layouts_property_overview_choice', array(
-          'label' => __('Select Layout for Property overview page', ud_get_wp_property()->domain),
-          'section' => 'layouts_property_overview_settings',
-          'type' => 'checkbox',
-          'choices' => $overview_radio_choices
-        )));
+
+        $wp_customize->add_setting('layouts_property_term_choice', array(
+          'default' => $first_term_layout,
+          'transport' => 'refresh'
+        ));
 
         $wp_customize->add_setting('layouts_property_overview_select', array(
           'default' => 'page.php',
           'transport' => 'refresh'
         ));
+
+        $wp_customize->add_setting('layouts_property_term_select', array(
+          'default' => 'page.php',
+          'transport' => 'refresh'
+        ));
+
         $wp_customize->add_control('layouts_property_overview_select', array(
           'label' => __('Select template for Property Overview page', ud_get_wp_property()->domain),
           'section' => 'layouts_property_overview_settings',
@@ -304,33 +441,32 @@ namespace UsabilityDynamics\WPP {
           'choices' => $templates_names
         ));
 
-
-        // Single property settings
-        $wp_customize->add_section('layouts_property_single_settings', array(
-          'title' => __('Property Page', ud_get_wp_property()->domain),
-          'description' => __('Layout for single property page in live preview.', ud_get_wp_property()->domain),
-          'panel' => 'layouts_area_panel',
-          'priority' => 2,
+        $wp_customize->add_control('layouts_property_term_select', array(
+          'label' => __('Select template for Term page', ud_get_wp_property()->domain),
+          'section' => 'layouts_property_term_settings',
+          'type' => 'select',
+          'choices' => $templates_names
         ));
 
-        $single_radio_choices = array();
-        if (!empty($single_layouts)) {
-          foreach ($single_layouts as $layout) {
-            if (!empty($layout->screenshot)) {
-              $layout_preview = $layout->screenshot;
-            } else {
-              $layout_preview = WPP_URL . 'images/no-preview.jpg';
-            }
-            $single_radio_choices[$layout->layout] = '<img style="display: block; width: 150px; height: 150px;" src="' . $layout_preview . '" alt="' . $layout->title . '" />' . $layout->title;
-          }
-          $first_single_layout = array_shift($single_layouts)->layout;
-        } else {
-          $first_single_layout = '';
-        }
         $wp_customize->add_setting('layouts_property_single_choice', array(
           'default' => $first_single_layout,
           'transport' => 'refresh'
         ));
+
+        $wp_customize->add_control(new Layouts_Custom_Control($wp_customize, 'layouts_property_overview_choice', array(
+          'label' => __('Select Layout for Property overview page', ud_get_wp_property()->domain),
+          'section' => 'layouts_property_overview_settings',
+          'type' => 'checkbox',
+          'choices' => $overview_radio_choices
+        )));
+
+        $wp_customize->add_control(new Layouts_Custom_Control($wp_customize, 'layouts_property_term_choice', array(
+          'label' => __('Select Layout for Term results page', ud_get_wp_property()->domain),
+          'section' => 'layouts_property_term_settings',
+          'type' => 'checkbox',
+          'choices' => $term_radio_choices
+        )));
+
         $wp_customize->add_control(new Layouts_Custom_Control($wp_customize, 'layouts_property_single_choice', array(
           'label' => __('Select Layout for Single Property page', ud_get_wp_property()->domain),
           'section' => 'layouts_property_single_settings',
@@ -342,23 +478,33 @@ namespace UsabilityDynamics\WPP {
           'default' => 'single.php',
           'transport' => 'refresh'
         ));
+
         $wp_customize->add_control('layouts_property_single_select', array(
           'label' => __('Select template for Single Property page', ud_get_wp_property()->domain),
           'section' => 'layouts_property_single_settings',
           'type' => 'select',
           'choices' => $templates_names
         ));
+
       }
 
+      /**
+       * Local Layouts
+       *
+       * 
+       */
       public function get_local_layout()
       {
-        $available_local_layouts = get_posts(array('post_type' => 'wpp_layout', 'post_status' => array('pending', 'publish' ) ));
+        WPP_F::debug( 'customizer::get_local_layout');
+
+        $available_local_layouts = get_posts(array('post_type' => 'wpp_layout', 'post_status' => array( 'pending', 'publish' ) ));
         $local_layouts = array();
+
         foreach ($available_local_layouts as $local_layout) {
           $ID = $local_layout->ID;
           $_post = get_post($ID);
           $_meta = get_post_meta($ID, 'panels_data', 1);
-          $_tags_objects = wp_get_post_terms($ID, 'layout_type');
+          $_tags_objects = wp_get_post_terms($ID, 'wpp_layout_type');
           $_tags = array();
 
           if (!empty($_tags_objects) && is_array($_tags_objects)) {
@@ -383,7 +529,9 @@ namespace UsabilityDynamics\WPP {
             $local_layouts[] = $res;
           }
         }
+
         update_option('wpp_available_local_layouts', $local_layouts);
+
       }
 
       public function create_layout_metas($data)
@@ -391,8 +539,8 @@ namespace UsabilityDynamics\WPP {
         try {
           $data['layout'] = base64_encode(json_encode($data['layout']));
           $data = json_encode($data);
-        } catch (\Exception $e) {
-          return new \WP_Error('100', 'Could not parse query data', $data);
+        } catch (Exception $e) {
+          return new WP_Error('100', 'Could not parse query data', $data);
         }
         return $data;
       }
@@ -403,7 +551,7 @@ namespace UsabilityDynamics\WPP {
     /**
      * Class to create a custom layout control
      */
-    class Layouts_Custom_Control extends \WP_Customize_Control
+    class Layouts_Custom_Control extends WP_Customize_Control
     {
       public function render_content()
       {
@@ -423,8 +571,7 @@ namespace UsabilityDynamics\WPP {
           ?>
           <label>
             <?php echo $label; ?><br/>
-            <input style="margin-top: -16px" type="radio" value="<?php echo esc_attr($value); ?>"
-                   name="<?php echo esc_attr($name); ?>" <?php $this->link();
+            <input style="margin-top: -16px" type="radio" value="<?php echo esc_attr($value); ?>"  name="<?php echo esc_attr($name); ?>" <?php $this->link();
             checked($this->value(), $value); ?> />
           </label>
           <?php

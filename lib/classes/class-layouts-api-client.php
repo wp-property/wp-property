@@ -4,6 +4,8 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use Exception ;
+  
   if (!class_exists('UsabilityDynamics\WPP\Layouts_API_Client')) {
 
     /**
@@ -144,7 +146,7 @@ namespace UsabilityDynamics\WPP {
         try {
           $data['layout'] = base64_encode(json_encode($data['layout']));
           $data = json_encode($data);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
           return new \WP_Error('100', 'Could not parse query data', $data);
         }
 
@@ -172,7 +174,7 @@ namespace UsabilityDynamics\WPP {
         try {
           $data['layout'] = base64_encode(json_encode($data['layout']));
           $data = json_encode($data);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
           return new \WP_Error('100', 'Could not parse query data', $data);
         }
 

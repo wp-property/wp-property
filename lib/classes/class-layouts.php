@@ -177,8 +177,7 @@ namespace UsabilityDynamics\WPP {
 
           if (!empty($the_css)) {
             ?>
-            <style type="text/css" media="all"
-                   id="wpp-layouts-panels-grids-<?php echo esc_attr(current_filter()) ?>"><?php echo $the_css ?></style><?php
+            <style type="text/css" media="all" id="wpp-layouts-panels-grids-<?php echo esc_attr(current_filter()) ?>"><?php echo $the_css ?></style><?php
           }
         }
       }
@@ -337,6 +336,7 @@ namespace UsabilityDynamics\WPP {
         ob_start();
 
         $panel_layout_classes = apply_filters('wpp::layouts::panels_layout_classes', array(), $post_id, $panels_data);
+
         $panel_layout_attributes = apply_filters('wpp::layouts::panels_layout_attributes', array(
           'class' => implode(' ', $panel_layout_classes),
           'id' => 'pl-' . $post_id

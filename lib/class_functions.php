@@ -878,7 +878,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
     foreach( (array) $context->tax_query->queries as $_index => $_query ) {
 
-      if( $_query['taxonomy'] === 'wpp_listing_category' && isset( $context->query ) && isset( $context->query[ $_query['taxonomy'] ] ) ) {
+      if( isset( $_query ) && isset( $_query['taxonomy'] ) && $_query['taxonomy'] === 'wpp_listing_category' && isset( $context->query ) && isset( $context->query[ $_query['taxonomy'] ] ) ) {
 
         $_meta_value = '/' . $context->query[ $_query['taxonomy'] ] . '/';
 
@@ -1147,6 +1147,7 @@ class WPP_F extends UsabilityDynamics\Utility
    * ChromePHP Logger
    *
    * @param bool $text
+   * @param null $detail
    * @return bool|void
    */
   static public function debug($text = false, $detail = null)
@@ -1156,7 +1157,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
     $_debug = false;
 
-    if( defined( 'WP_DEBUG' ) && WP_DEBUG && defined( 'WP_DEBUG_DISPLAY' ) && WP_DEBUG_DISPLAY ) {
+    if( defined( 'WP_DEBUG' ) && WP_DEBUG && ( ( defined( 'WP_DEBUG_DISPLAY' ) && WP_DEBUG_DISPLAY ) || ( defined( 'WP_DEBUG_CONSOLE' ) && WP_DEBUG_CONSOLE ) ) ) {
       $_debug = true;
     }
 
