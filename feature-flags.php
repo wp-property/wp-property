@@ -12,16 +12,15 @@
  * @author den@UD
  * @return define = true\false
  */
-function feature_flag_define($enabled)
-{
+
+
+add_filter('flag_wp_property_layouts', function ($enabled) {
   $settings = get_option('wpp_settings');
-  if(isset($settings['configuration']) && ($settings['configuration']['disable_layouts'] == 'true')) {
+  if (isset($settings['configuration']) && ($settings['configuration']['disable_layouts'] == 'true')) {
     return false;
   }
   return $enabled;
-}
-
-add_filter('flag_' . strtolower('WP_PROPERTY_LAYOUTS'), 'feature_flag_define');
+});
 
 if (!function_exists('parse_feature_flags')) {
   /**
@@ -42,6 +41,9 @@ if (!function_exists('parse_feature_flags')) {
         // throw new Error( "unable to parse."  );
       }
       foreach ((array)$_parsed->extra->featureFlags as $_feature) {
+        if (!defined($_feature->constant . '_DEFAULT')) {
+          define($_feature->constant . '_DEFAULT', $_feature->enabled);
+        }
         if (!defined($_feature->constant)) {
           define($_feature->constant, apply_filters('flag_' . strtolower($_feature->constant), $_feature->enabled));
         }

@@ -124,8 +124,10 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
             <td>
               <ul>
                 <li class="configuration_enable_comments"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][enable_comments]&label=" . __('Enable comments', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['enable_comments']) ? $wp_properties['configuration']['enable_comments'] : false)); ?></li>
-                <li class="configuration_enable_revisions" data-feature-since="2.0.0"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][enable_revisions]&label=" . __('Enable revisions', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['enable_revisions']) ? $wp_properties['configuration']['enable_revisions'] : false)); ?></li>
+                <li class="configuration_enable_revsions" data-feature-since="2.0.0"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][enable_revisions]&label=" . __('Enable revisions', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['enable_revisions']) ? $wp_properties['configuration']['enable_revisions'] : false)); ?></li>
+                <?php if(WP_PROPERTY_LAYOUTS_DEFAULT) { ?>
                 <li class="configuration_disable_layouts" data-feature-since="2.2.1"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][disable_layouts]&label=" . __('Disable layouts', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['disable_layouts']) ? $wp_properties['configuration']['disable_layouts'] : false)); ?></li>
+                <?php } ?>
                 <li class="wpp-setting-exclude-from-regular-search-results"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][exclude_from_regular_search_results]&label=" . sprintf(__('Exclude %1s from regular search results.', ud_get_wp_property()->domain), $object_label['plural']), (isset($wp_properties['configuration']['exclude_from_regular_search_results']) ? $wp_properties['configuration']['exclude_from_regular_search_results'] : false)); ?></li>
 
               </ul>
