@@ -31,7 +31,7 @@ namespace UsabilityDynamics\WPP {
       {
         global $wp_properties;
 
-        if ((defined('WP_PROPERTY_LAYOUTS') && WP_PROPERTY_LAYOUTS === true) && (isset($wp_properties['configuration']) && isset($wp_properties['configuration']['enable_layouts']) && $wp_properties['configuration']['enable_layouts'] == 'false')) {
+        if (WP_PROPERTY_LAYOUTS) {
           add_action('customize_register', array($this, 'property_layouts_customizer'));
 
           add_action('customize_controls_enqueue_scripts', array($this, 'wp_property_customizer_controls'));
@@ -101,7 +101,7 @@ namespace UsabilityDynamics\WPP {
 
         $this->get_local_layout();
 
-        if (!empty($_POST) && (isset($wp_properties['configuration']) && isset($wp_properties['configuration']['enable_layouts']) && $wp_properties['configuration']['enable_layouts'] == 'false')) {
+        if (!empty($_POST) && (WP_PROPERTY_LAYOUTS)) {
           try {
             $selected_items = json_decode(stripslashes($_POST['customized']));
           } catch (\Exception $e) {
