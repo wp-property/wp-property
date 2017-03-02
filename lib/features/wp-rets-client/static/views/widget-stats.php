@@ -5,7 +5,7 @@
   <div class="stats">
     <p class="updates_description">Updates Today</p>
     <h1 class="updates_number"><h1>
-    <p class="updates_description">From <span class="active_pollers"></span> pollers of <span class="provider"></span></p>
+    <p class="updates_description">From <span class="active_pollers"></span> schedules of <span class="provider"></span></p>
     <h3>Last Update: <span class="last_update_date"></span></h3>
 
     <h2 class="messages_header">Messages</h2>
