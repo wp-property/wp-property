@@ -14,8 +14,8 @@
  */
 function feature_flag_define($enabled)
 {
-  $options = get_option('wpp_settings');
-  if(isset($options['configuration']) && ($options['configuration']['disable_layouts'] == 'true')) {
+  $settings = get_option('wpp_settings');
+  if(isset($settings['configuration']) && ($settings['configuration']['disable_layouts'] == 'true')) {
     return false;
   }
   return $enabled;
