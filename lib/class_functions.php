@@ -16,11 +16,16 @@ class WPP_F extends UsabilityDynamics\Utility
    * Get term met values.
    *
    * @param $term
+   * @param array $fields - array of fields to return
    * @return array
    */
-  static public function get_term_metadata( $term ) {
+  static public function get_term_metadata( $term, $fields = array() ) {
 
     //$_attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data( $term->slug, array( 'use_cache' => false ) );
+
+    if( is_array( $term ) ) {
+      $term = (object) $term;
+    }
 
     $_taxonomy = (array) get_taxonomy( $term->taxonomy );
 

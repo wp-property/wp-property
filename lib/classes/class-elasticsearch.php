@@ -43,6 +43,7 @@ namespace UsabilityDynamics\WPP {
           // Only allow property post type if we are running our version of Elasticpress.
           add_filter( 'ep_admin_supported_post_types', array( $this, 'ep_admin_supported_post_types' ) );
           add_filter( 'ep_indexable_post_types', array( $this, 'ep_indexable_post_types' ), 50, 1 );
+          add_filter( 'ep_indexable_post_status', array( $this, 'ep_indexable_post_status' ), 50, 1 );
 
           // Remove menus.
           add_action( 'admin_menu', array( $this, 'admin_menu' ), 200 );
@@ -55,12 +56,17 @@ namespace UsabilityDynamics\WPP {
         add_filter( 'option_ep_index_meta', array( $this, 'option_ep_index_meta' ) );
         add_filter( 'option_ep_active_modules', array( $this, 'option_ep_active_modules' ) );
 
+        // Can't change these in mapping.
+        add_filter( 'ep_default_index_number_of_replicas', array( $this, 'ep_default_index_number_of_replicas' ) );
+        add_filter( 'ep_default_index_number_of_shards', array( $this, 'ep_default_index_number_of_shards' ) );
+
         // Add Mapping.
         add_filter( 'ep_config_mapping', array( $this, 'ep_config_mapping' ) );
 
         // Add our request headers.
         add_filter( 'ep_format_request_headers', array( $this, 'ep_format_request_headers' ) );
 
+        add_filter( 'ep_post_sync_args_post_prepare_meta', array( $this, 'ep_post_sync_args_post_prepare_meta' ), 40, 2 );
         add_filter( 'ep_post_sync_args', array( $this, 'ep_post_sync_args' ), 40, 2 );
         add_filter( 'ep_post_sync_args', array( $this, 'post_title_suggest' ), 50, 2 );
         add_filter( 'ep_post_sync_args', array( $this, 'filter_term_suggest' ), 60, 2 );
@@ -91,6 +97,26 @@ namespace UsabilityDynamics\WPP {
 
       public function option_ep_active_modules( $value ) {
         return array( 'search', 'admin' );
+      }
+
+      /**
+       * Number of shards for index.
+       *
+       * @param $value
+       * @return int
+       */
+      public function ep_default_index_number_of_shards( $value ) {
+        return 3;
+      }
+
+      /**
+       * Number of replicas for index.
+       *
+       * @param $value
+       * @return int
+       */
+      public function ep_default_index_number_of_replicas( $value ) {
+        return 0;
       }
 
       /**
@@ -162,6 +188,20 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Exclude fields from [meta], like [wpp_location_pin].
+       *
+       * @param $post_args
+       * @param $post_id
+       * @return mixed
+       */
+      public function ep_post_sync_args_post_prepare_meta( $post_args, $post_id  ) {
+
+        unset( $post_args['meta']['wpp_location_pin'] );
+
+        return $post_args;
+      }
+
+      /**
        * Adds [title_suggest] field for autocompletion.
        *
        * @todo Expand the input array with common terms.
@@ -182,15 +222,25 @@ namespace UsabilityDynamics\WPP {
             "post_status" => $post_args['post_status'],
             "post_title" => $post_args['post_title'],
             "post_name" => $post_args['post_name'],
-            "permalink" => $post_args['permalink']
+            "permalink" => str_replace( array( get_home_url(), get_site_url() ), '', $post_args['permalink'] )
           )
         );
 
+        $post_args['title_suggest'] = apply_filters( 'wpp:elastic:title_suggest', $post_args['title_suggest'], $post_args, $post_id );
+
+        // lowercase/tokenize fields.
+        foreach( $post_args['title_suggest']['input'] as $_input_index => $_input_vaue ) {
+          $post_args['title_suggest']['input'][ $_input_index  ] = str_replace( array( ' ', '-', ',', '.' ), '', strtolower( sanitize_title( $_input_vaue ) ) );
+        }
+
         return $post_args;
+
       }
 
       /**
        * Create [term_suggest] list.
+       *
+       *
        *
        * @param $post_args
        * @param $post_id
@@ -198,20 +248,42 @@ namespace UsabilityDynamics\WPP {
        */
       public function filter_term_suggest( $post_args, $post_id ) {
 
+        $_suggestion_taxonomies = array(
+          'wpp_listing_location',
+          'wpp_schools',
+          'wpp_listing_type',
+          'wpp_listing_status',
+          'wpp_listing_label',
+          'wpp_agency_agent',
+          'wpp_agency_office',
+          //'wpp_listing_category'
+        );
+
         if ( ! empty( $post_args['terms'] ) ) {
           foreach ( $post_args['terms'] as $_tax => $taxonomy ) {
 
             foreach ( $taxonomy as $term ) {
 
+              if( !in_array( $_tax, $_suggestion_taxonomies )) {
+                continue;
+              }
+
+              $_term_metadata = WPP_F::get_term_metadata( get_term( $term['term_id'], $_tax ) );
+
               $suggest[] = array(
-                "input" => array( $term['name'] ),
+                "input" => array_unique( array(
+                  str_replace( '&amp;', '&', $term['name'] ),
+                  strtolower( str_replace( '&amp;', '&', $term['name'] ) ),
+                  str_replace( array( ' ', '-', ',', '.' ), '', strtolower( sanitize_title( $term['name'] ) ) )
+                )),
                 "output" => $term['name'],
-                "payload" => array(
+                "payload" => array_filter( array(
                   "term_id" => $term['term_id'],
                   "slug" => $term['slug'],
-                  "name" => $term['name'],
-                  "tax" => $_tax
-                )
+                  "name" => str_replace( '&amp;', '&', $term['name'] ),
+                  "tax" => $_tax,
+                  "url_path" => isset( $_term_metadata['url_path'] ) ? $_term_metadata['url_path'] : null
+                ))
               );
 
             }
@@ -277,11 +349,24 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Define publishable post statuses.
+       *
+       * @param array $post_types
+       * @return array
+       */
+      static public function ep_indexable_post_status( $post_types = array() ) {
+
+        return array('publish');
+
+      }
+
+      /**
        * Set api.realty.ci Document Mapping.
        *
        *
        *    wp elasticpress put-mapping
        *    wp elasticpress index --nobulk --post-type=property
+       *    wp elasticpress index --posts-per-page=1 --post-type=property
        *    wp elasticpress index --posts-per-page=50 --post-type=property
        *
        *
@@ -294,20 +379,22 @@ namespace UsabilityDynamics\WPP {
           "filter" => array(
             "lowercase",
             "asciifolding",
-            // "nGram_filter"
+            //"nGram" // causes transport error
           ),
           "type" => "custom",
-          "tokenizer" => "whitespace"
+          "tokenizer" => "whitespace",
+          "max_token_length" => 590
         );
 
         $mapping['settings']['analysis']['analyzer']['whitespace_analyzer'] = array(
-          "filter" => array( "lowercase", "asciifolding" ),
+          "filter" => array(
+            "lowercase",
+            "asciifolding"
+          ),
           "type" => "custom",
-          "tokenizer" => "whitespace"
+          "tokenizer" => "whitespace",
+          "max_token_length" => 509
         );
-
-        $mapping['settings']['index']['number_of_replicas'] = (int) 1;
-        $mapping['settings']['index']['ep_default_index_number_of_shards'] = (int) 2;
 
         $mapping['mappings']['post']['dynamic_templates'][] = array(
           'tax_input_meta' => array(
@@ -406,7 +493,11 @@ namespace UsabilityDynamics\WPP {
           ),
         );
 
-        $mapping['mappings']['post']['properties']['post_meta']['properties']['wpp_location_pin'] = array( "type" => "geo_point" );
+        $mapping['mappings']['post']['properties']['post_meta']['properties']['wpp_location_pin'] = array(
+          "lat_lon" => true,
+          "ignore_malformed" => true,
+          "type" => "geo_point"
+        );
 
         $mapping['mappings']['post']['properties']['tax_input'] = array( "type" => "object" );
 
