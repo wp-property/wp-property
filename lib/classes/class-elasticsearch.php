@@ -375,25 +375,51 @@ namespace UsabilityDynamics\WPP {
        */
       static public function ep_config_mapping( $mapping ) {
 
+        $mapping['settings']['analysis']['filter']['autocomplete_filter'] = array(
+          "min_gram" => 1,
+          "max_gram" => 20,
+          "type" => "edge_ngram"
+        );
+
+        $mapping['settings']['analysis']['filter']['nGram_filter'] = array(
+          "type" => "edge_ngram",
+          "token_chars" => array(
+            "letter",
+            "digit",
+            "punctuation",
+            "symbol"
+          ),
+          "min_gram" => 1,
+          "max_gram" => 10,
+        );
+        $mapping['settings']['analysis']['analyzer']['autocomplete'] = array(
+          "type" => "custom",
+          "filter" => array(
+            "lowercase",
+            "autocomplete_filter"
+          ),
+          "tokenizer" => "standard"
+        );
+
         $mapping['settings']['analysis']['analyzer']['nGram_analyzer'] = array(
+          "type" => "custom",
           "filter" => array(
             "lowercase",
             "asciifolding",
-            //"nGram" // causes transport error
+            "nGram_filter"
           ),
-          "type" => "custom",
           "tokenizer" => "whitespace",
-          "max_token_length" => 590
+          "max_token_length" => 500
         );
 
         $mapping['settings']['analysis']['analyzer']['whitespace_analyzer'] = array(
+          "type" => "custom",
           "filter" => array(
             "lowercase",
             "asciifolding"
           ),
-          "type" => "custom",
           "tokenizer" => "whitespace",
-          "max_token_length" => 509
+          "max_token_length" => 500
         );
 
         $mapping['mappings']['post']['dynamic_templates'][] = array(
@@ -505,12 +531,15 @@ namespace UsabilityDynamics\WPP {
           'type' => 'completion',
           'analyzer' => 'nGram_analyzer',
           'search_analyzer' => 'whitespace_analyzer',
+          'preserve_separators' => true,
+          'preserve_position_increments' => true,
+          'max_input_length' => 50,
           'payloads' => true
         );
 
         $mapping['mappings']['post']['properties']['term_suggest'] = array(
           'type' => 'completion',
-          'analyzer' => 'nGram_analyzer',
+          'analyzer' => 'whitespace',
           'search_analyzer' => 'whitespace_analyzer',
           'payloads' => true
         );
