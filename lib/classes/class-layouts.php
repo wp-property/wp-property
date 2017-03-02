@@ -36,6 +36,7 @@ namespace UsabilityDynamics\WPP {
 
           $layouts = get_option('wpp_available_layouts', false);
           $local_layouts = get_option('wpp_available_local_layouts', false);
+
           $overview_layouts = $layouts['property-overview'];
           $single_layouts = $layouts['single-property'];
 
@@ -43,11 +44,16 @@ namespace UsabilityDynamics\WPP {
 
           if (!empty($local_layouts)) {
             foreach ($local_layouts as $value) {
-              $tag = $value->tags[0]->tag;
-              if ($tag == 'property-overview') {
-                $overview_layouts = array_merge($overview_layouts, array($value));
-              } else if ($tag == 'single-property') {
-                $single_layouts = array_merge($single_layouts, array($value));
+
+              if( isset( $value->tags ) && is_array( $value->tags ) && !empty( $value->tags ) ) {
+
+                $tag = $value->tags[ 0 ]->tag;
+                if( $tag == 'property-overview' ) {
+                  $overview_layouts = array_merge( $overview_layouts, array( $value ) );
+                } else if( $tag == 'single-property' ) {
+                  $single_layouts = array_merge( $single_layouts, array( $value ) );
+                }
+
               }
             }
           }
