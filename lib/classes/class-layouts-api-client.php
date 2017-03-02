@@ -59,10 +59,22 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       *
+       * Return array or error object.
+       *
+       * Uses "wp-property:layouts" cache key.
+       *
        * @return array|\WP_Error
        */
       public function get_layouts()
       {
+
+        $_cache = wp_cache_get( 'layouts', 'wp-property' );
+
+        if( $_cache && is_object( $_cache ) ) {
+          $_cache->_cached = true;
+          return $_cache;
+        }
 
         $res = wp_remote_get(trailingslashit($this->options['url']), array(
           'headers' => wp_parse_args(array(
@@ -70,9 +82,15 @@ namespace UsabilityDynamics\WPP {
           ), $this->headers)
         ));
 
-        if (is_wp_error($res)) return $res;
+        if (is_wp_error($res)) {
+          return $res;
+        }
 
-        return $res['body'];
+        $_body = json_decode( wp_remote_retrieve_body( $res ) );
+
+        wp_cache_set( 'layouts', $_body, 'wp-property', 360 );
+
+        return $_body->data;
 
       }
 

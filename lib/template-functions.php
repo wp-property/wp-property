@@ -569,7 +569,7 @@ if ( !function_exists( 'draw_stats' ) ):
     /** Include only passed attributes */
     if( !empty( $include ) ) {
       $include = !is_array( $include ) ? explode( ',', $include ) : $include; 
-      foreach( $property_stats as $k => $v ) {
+      foreach( (array) $property_stats as $k => $v ) {
         if( !in_array( $k, $include ) ) {
           unset( $property_stats[ $k ] );
         }
@@ -1370,9 +1370,13 @@ if ( !function_exists( 'wpp_get_image_link' ) ):
     $defaults = array(
       'return' => 'string'
     );
+
     extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
 
-    if ( isset( $wp_properties[ 'configuration' ][ 'automatically_regenerate_thumbnail' ] ) && $wp_properties[ 'configuration' ][ 'automatically_regenerate_thumbnail' ] == 'true' ) {
+    // If media item has "_is_remote" meta, we never try to resize it.
+    $_is_remote = get_post_meta($attachment_id, '_is_remote', true);
+
+    if ( !$_is_remote && isset( $wp_properties[ 'configuration' ][ 'automatically_regenerate_thumbnail' ] ) && $wp_properties[ 'configuration' ][ 'automatically_regenerate_thumbnail' ] == 'true' ) {
       //* Do the default action of attempting to regenerate image if needed. */
       $uploads_dir = wp_upload_dir();
       //** Get image path from meta table (if this doesn't exist, nothing we can do */

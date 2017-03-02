@@ -31,7 +31,7 @@ namespace UsabilityDynamics\WPP {
       {
         global $wp_properties;
 
-        if (WP_PROPERTY_LAYOUTS) {
+        if ( defined( 'WP_PROPERTY_LAYOUTS' ) && WP_PROPERTY_LAYOUTS === true ) {
           add_action('customize_register', array($this, 'property_layouts_customizer'));
 
           add_action('customize_controls_enqueue_scripts', array($this, 'wp_property_customizer_controls'));
@@ -184,20 +184,18 @@ namespace UsabilityDynamics\WPP {
       public function preload_layouts()
       {
 
-        $res = $this->api_client->get_layouts();
+        $_layouts = $this->api_client->get_layouts();
 
-        try {
-          $res = json_decode($res);
-        } catch (\Exception $e) {
+        if( is_wp_error( $_layouts ) ) {
           return array();
         }
 
-        if ($res->ok && !empty($res->data) && is_array($res->data)) {
+        if (is_array($_layouts)) {
 
           $_available_layouts = array();
 
           foreach ($this->possible_tags as $p_tag) {
-            foreach ($res->data as $layout) {
+            foreach ($_layouts as $layout) {
 
               if (empty($layout->tags) || !is_array($layout->tags)) continue;
               $_found = false;
@@ -227,6 +225,10 @@ namespace UsabilityDynamics\WPP {
 
       }
 
+      /**
+       *
+       * @param $wp_customize
+       */
       public function property_layouts_customizer($wp_customize)
       {
         $template_files = apply_filters('wpp::layouts::template_files', wp_get_theme()->get_files('php', 0));
@@ -260,7 +262,7 @@ namespace UsabilityDynamics\WPP {
 
         // Property overview settings
         $wp_customize->add_section('layouts_property_overview_settings', array(
-          'title' => __('Property Overview', ud_get_wp_property()->domain),
+          'title' => __('Results Page', ud_get_wp_property()->domain),
           'description' => __('Overview layouts will apply to default properties page, search results and terms pages.', ud_get_wp_property()->domain),
           'panel' => 'layouts_area_panel',
           'priority' => 1,
@@ -305,7 +307,7 @@ namespace UsabilityDynamics\WPP {
 
         // Single property settings
         $wp_customize->add_section('layouts_property_single_settings', array(
-          'title' => __('Single Property', ud_get_wp_property()->domain),
+          'title' => __('Property Page', ud_get_wp_property()->domain),
           'description' => __('Layout for single property page in live preview.', ud_get_wp_property()->domain),
           'panel' => 'layouts_area_panel',
           'priority' => 2,
@@ -350,7 +352,7 @@ namespace UsabilityDynamics\WPP {
 
       public function get_local_layout()
       {
-        $available_local_layouts = get_posts(array('post_type' => 'wpp_layout', 'post_status' => 'pending'));
+        $available_local_layouts = get_posts(array('post_type' => 'wpp_layout', 'post_status' => array('pending', 'publish' ) ));
         $local_layouts = array();
         foreach ($available_local_layouts as $local_layout) {
           $ID = $local_layout->ID;
