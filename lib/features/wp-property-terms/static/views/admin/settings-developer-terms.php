@@ -127,7 +127,7 @@ jQuery(document).ready(function($) {
     },
     addAttribute: function (model) {
       var row = new wppTermsView({ model: model });
-      this.el.append(row.render().el);
+      jQuery(this.el).append(row.render().el);
     },
 
   });

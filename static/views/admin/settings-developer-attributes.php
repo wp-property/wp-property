@@ -1,4 +1,4 @@
-.<?php
+<?php
 /**
  * Settings 'Developer' Tab
  * Section 'Attributes'
@@ -127,7 +127,7 @@ jQuery(document).ready(function($) {
     },
     addAttribute: function (model) {
       this.children[model.cid] = new wppAttributeView({ model: model });
-      this.el.append(this.children[model.cid].render().el);
+      jQuery(this.el).append(this.children[model.cid].render().el);
     },
 
   });

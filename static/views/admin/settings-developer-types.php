@@ -128,7 +128,7 @@ jQuery(document).ready(function($) {
     },
     addAttribute: function (model) {
       var row = new wppTypesView({ model: model });
-      this.el.append(row.render().el);
+      jQuery(this.el).append(row.render().el);
     },
 
   });
@@ -153,7 +153,6 @@ jQuery(document).ready(function($) {
       property_type_settings_do_action  : property_type_settings_do_action,
     };
     jQuery.extend(attributes, wpp_property_types_variables);
-    console.log(attributes);
     var row = new wppTypes(attributes);
     _wppTypes.add(row);
 
