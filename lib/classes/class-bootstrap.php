@@ -151,7 +151,8 @@ namespace UsabilityDynamics\WPP {
             "slug" => $this->slug,
             "version" => $this->args[ "version" ],
             "type" => "plugin",
-            "wpp_settings" => $this->settings->get()
+            // Commented for now since it may contain too big data
+            //"wpp_settings" => $this->settings->get()
           ) );
         }
 

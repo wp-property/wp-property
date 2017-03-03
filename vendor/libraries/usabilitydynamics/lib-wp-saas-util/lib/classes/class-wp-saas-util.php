@@ -176,7 +176,7 @@ namespace UsabilityDynamics\SAAS_UTIL {
           // And there is nothing new to update
           $options = get_option( $prefix.$product );
           if( $options == $hash ) {
-            //continue;
+            continue;
           }
 
           // Determine if Product registration/update is temporarily disabled.
