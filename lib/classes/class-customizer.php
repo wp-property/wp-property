@@ -233,9 +233,10 @@ namespace UsabilityDynamics\WPP {
         $overview_radio_choices = array();
         $term_radio_choices = array();
         //die( '<pre>' . print_r( $layouts['single-property'], true ) . '</pre>' );
-        foreach ($layouts['single-property'] as $layout) {
 
-          if( !$layout->screenshot && !$layout->local ) {
+        foreach ( (array) $layouts['single-property'] as $layout) {
+
+          if( !$layout->screenshot && ( !isset( $layout->local ) || !$layout->local ) ) {
             continue;
           }
 
@@ -249,10 +250,9 @@ namespace UsabilityDynamics\WPP {
 
         }
 
+        foreach ( (array) $layouts['term-overview'] as $layout) {
 
-        foreach ($layouts['term-overview'] as $layout) {
-
-          if( !$layout->screenshot && !$layout->local ) {
+          if( !$layout->screenshot && ( !isset( $layout->local ) || !$layout->local ) ) {
             continue;
           }
 
@@ -266,9 +266,9 @@ namespace UsabilityDynamics\WPP {
 
         }
 
-        foreach ($layouts['property-overview'] as $layout) {
+        foreach ( (array) $layouts['property-overview'] as $layout) {
 
-          if( !$layout->screenshot && !$layout->local ) {
+          if( !$layout->screenshot && ( !isset( $layout->local ) || !$layout->local ) ) {
             continue;
           }
 

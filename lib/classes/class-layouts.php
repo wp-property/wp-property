@@ -250,7 +250,7 @@ namespace UsabilityDynamics\WPP {
           }
 
           $_options['layout_meta'] = $_single_layout->layout_meta;
-          $_options['layout_type'] = $_single_layout->local ? 'local' : 'public';
+          $_options['layout_type'] = ( isset( $_single_layout->local ) && $_single_layout->local ) ? 'local' : 'public';
         }
 
         if( $_options['template_file'] ) {
