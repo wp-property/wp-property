@@ -254,8 +254,8 @@ namespace UsabilityDynamics\WPP {
           'wpp_listing_type',
           'wpp_listing_status',
           'wpp_listing_label',
-          'wpp_agency_agent',
-          'wpp_agency_office',
+          'wpp_agent',
+          'wpp_office',
           //'wpp_listing_category'
         );
 
