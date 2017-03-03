@@ -321,7 +321,7 @@ namespace UsabilityDynamics\WPP {
                 'id' => 'wpp_listing_type',
                 'name' => $taxonomies['wpp_listing_type']['label'],
                 'type' => 'taxonomy', // Metabox field name
-                'placeholder' => sprintf( __( 'Selecte %s Type', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
+                'placeholder' => sprintf( __( 'Select %s Type', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
                 'multiple' => false,
                 'options' => array(
                   'taxonomy' => 'wpp_listing_type',
