@@ -322,7 +322,7 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
             if(isset($matches[1]) && is_array($matches[1])){
               foreach ($matches[1] as $value) {
                 $term_link = !empty($property[$value]) ? $property[$value] : "";
-                if($term_link && $term = get_term_by('name', $property[$value], 'wpp_listing_location')){
+                if($term_link && $term = get_term_by('name', $property[$value], 'wpp_location')){
                   $term_link = "<a href='" . get_term_link($term->term_id) . "'>{$term->name}</a>";
                 }
                 $address_format = str_replace("[$value]", $term_link, $address_format);

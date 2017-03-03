@@ -577,9 +577,9 @@ class WPP_F extends UsabilityDynamics\Utility
    */
   static public function wpp_standard_taxonomies( $taxonomies = array() ) {
 
-    // Add [wpp_listing_location] taxonomy.
+    // Add [wpp_location] taxonomy.
     if (defined('WPP_FEATURE_FLAG_WPP_LISTING_LOCATION') && WPP_FEATURE_FLAG_WPP_LISTING_LOCATION) {
-      $taxonomies['wpp_listing_location'] = array(
+      $taxonomies['wpp_location'] = array(
         'default' => true,
         'readonly' => true,
         'hidden' => true,
@@ -2443,7 +2443,7 @@ class WPP_F extends UsabilityDynamics\Utility
       }
 
       if (defined('WPP_FEATURE_FLAG_WPP_LISTING_LOCATION')) {
-        if (isset($wp_properties['taxonomies']['wpp_listing_location'])) {
+        if (isset($wp_properties['taxonomies']['wpp_location'])) {
           $return['terms'] = self::update_location_terms($post_id, $geo_data);
         }
       }
@@ -2515,14 +2515,14 @@ class WPP_F extends UsabilityDynamics\Utility
       return new WP_Error( 'No [geo_data] argument provided.' );
     }
 
-    self::verify_have_system_taxonomy('wpp_listing_location');
+    self::verify_have_system_taxonomy('wpp_location');
 
     $geo_data->terms = array();
 
-    $geo_data->terms['state'] = !empty($geo_data->state) ? get_term_by('name', $geo_data->state, 'wpp_listing_location', OBJECT) : false;
-    $geo_data->terms['county'] = !empty($geo_data->county) ? get_term_by('name', $geo_data->county, 'wpp_listing_location', OBJECT) : false;
-    $geo_data->terms['city'] = !empty($geo_data->city) ? get_term_by('name', $geo_data->city, 'wpp_listing_location', OBJECT) : false;
-    $geo_data->terms['route'] = !empty($geo_data->route) ? get_term_by('name', $geo_data->route, 'wpp_listing_location', OBJECT) : false;
+    $geo_data->terms['state'] = !empty($geo_data->state) ? get_term_by('name', $geo_data->state, 'wpp_location', OBJECT) : false;
+    $geo_data->terms['county'] = !empty($geo_data->county) ? get_term_by('name', $geo_data->county, 'wpp_location', OBJECT) : false;
+    $geo_data->terms['city'] = !empty($geo_data->city) ? get_term_by('name', $geo_data->city, 'wpp_location', OBJECT) : false;
+    $geo_data->terms['route'] = !empty($geo_data->route) ? get_term_by('name', $geo_data->route, 'wpp_location', OBJECT) : false;
 
     // validate, lookup and add all location terms to object.
     if (isset($geo_data->terms) && is_array($geo_data->terms)) {
@@ -2549,13 +2549,13 @@ class WPP_F extends UsabilityDynamics\Utility
 
           // $_detail[ 'slug' ] = 'city-slug';
 
-          $_inserted_term = wp_insert_term($_value, 'wpp_listing_location', $_detail);
+          $_inserted_term = wp_insert_term($_value, 'wpp_location', $_detail);
 
           if (!is_wp_error($_inserted_term) && isset($_inserted_term['term_id'])) {
-            $geo_data->terms[$_level] = get_term_by('term_id', $_inserted_term['term_id'], 'wpp_listing_location', OBJECT);
+            $geo_data->terms[$_level] = get_term_by('term_id', $_inserted_term['term_id'], 'wpp_location', OBJECT);
             //die( '<pre>' . print_r( $geo_data->terms->{$_level}, true ) . '</pre>' );
           } else {
-            error_log('Could not insert [wpp_listing_location] term [' . $_value . '], error: [' . $_inserted_term->get_error_message() . ']');
+            error_log('Could not insert [wpp_location] term [' . $_value . '], error: [' . $_inserted_term->get_error_message() . ']');
           }
 
         }
@@ -2571,7 +2571,7 @@ class WPP_F extends UsabilityDynamics\Utility
       }
 
       // write, ovewriting any settings from before
-      wp_set_object_terms($post_id, $_location_terms, 'wpp_listing_location', false);
+      wp_set_object_terms($post_id, $_location_terms, 'wpp_location', false);
 
     }
 
@@ -3598,7 +3598,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
     // Filers are applied
     $wp_properties['configuration'] = apply_filters('wpp_configuration', $wp_properties['configuration']);
-    $wp_properties['location_matters'] = apply_filters('wpp_listing_location_matters', $wp_properties['location_matters']);
+    $wp_properties['location_matters'] = apply_filters('wpp_location_matters', $wp_properties['location_matters']);
     $wp_properties['hidden_attributes'] = apply_filters('wpp_hidden_attributes', $wp_properties['hidden_attributes']);
     $wp_properties['descriptions'] = apply_filters('wpp_listing_label_descriptions', $wp_properties['descriptions']);
     $wp_properties['image_sizes'] = apply_filters('wpp_image_sizes', $wp_properties['image_sizes']);

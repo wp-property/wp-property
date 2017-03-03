@@ -126,11 +126,11 @@ namespace UsabilityDynamics\WPP {
        * Also need to flush Memcached.
        *
        * deletes wpp_categorical_children
-       * deletes wpp_listing_location_children
+       * deletes wpp_location_children
        */
       static public function flush_cache( ) {
 
-        foreach( array( 'wpp_categorical', 'wpp_listing_location') as $taxonomy ) {
+        foreach( array( 'wpp_categorical', 'wpp_location') as $taxonomy ) {
           wp_cache_delete( 'all_ids', $taxonomy );
           wp_cache_delete( 'get', $taxonomy );
           delete_option( "{$taxonomy}_children" );

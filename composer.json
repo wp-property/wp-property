@@ -154,7 +154,7 @@
       {
         "name": "Standard Location Taxonomy",
         "constant": "WPP_FEATURE_FLAG_WPP_LISTING_LOCATION",
-        "description": "Standard property location taxonomy, stored in [wpp_listing_location].",
+        "description": "Standard property location taxonomy, stored in [wpp_location].",
         "since": "2.2.1",
         "enabled": true
       },

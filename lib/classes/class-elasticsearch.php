@@ -249,7 +249,7 @@ namespace UsabilityDynamics\WPP {
       public function filter_term_suggest( $post_args, $post_id ) {
 
         $_suggestion_taxonomies = array(
-          'wpp_listing_location',
+          'wpp_location',
           'wpp_schools',
           'wpp_listing_type',
           'wpp_listing_status',
