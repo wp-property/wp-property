@@ -484,7 +484,7 @@ class WPP_Core {
       // wp_register_style( 'wp-property-frontend', WPP_URL . 'styles/wp_properties.css', array(), WPP_Version );
 
       // load the new v2.3 styles
-      if( WP_PROPERTY_LAYOUTS ) {
+      if( defined( 'WP_PROPERTY_LAYOUTS' ) && WP_PROPERTY_LAYOUTS === true ) {
         wp_register_style( 'wp-property-frontend', WPP_URL . 'styles/wpp.public.v2.3.css', array(), WPP_Version );
       }
 

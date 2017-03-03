@@ -4632,7 +4632,11 @@ class WPP_F extends UsabilityDynamics\Utility
    */
   static public function isURL($url)
   {
-    return preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $url);
+    if( is_string( $url ) ) {
+      return preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $url);
+    }
+
+    return $url;
   }
 
   /**

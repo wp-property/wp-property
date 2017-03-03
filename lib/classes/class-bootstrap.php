@@ -226,7 +226,7 @@ namespace UsabilityDynamics\WPP {
         add_filter('upgrader_process_complete', array('UsabilityDynamics\WPP\Bootstrap', 'upgrader_process_complete'), 10, 2);
 
         // New layout feature. Feature flag must be enabled.
-        if (WP_PROPERTY_LAYOUTS) {
+        if (defined( 'WP_PROPERTY_LAYOUTS' ) && WP_PROPERTY_LAYOUTS === true ) {
           $this->layouts_settings = new Layouts_Settings();
           $this->layouts = new Layouts();
 

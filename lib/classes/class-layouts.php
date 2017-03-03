@@ -1,10 +1,27 @@
 <?php
 /**
  * Custom predefined layouts
+ *
+ *
+ * Filters:
+ *
+ * wpp::layouts::layout_override
+ * wpp::layouts::configuration
+ * wpp::layouts::default_template
+ * wpp::layouts::current
+ * wpp::layouts::panels_data
+ * wpp::layouts::panels_layout_classes
+ * wpp::layouts::panels_layout_attributes
+ * wpp::layouts::before_container
+ * wpp::layouts::after_container
+ * wpp::layouts::panels_render
+ *
  */
 namespace UsabilityDynamics\WPP {
 
+  use WP_Error;
   use Exception;
+  use ChromePhp;
 
   if (!class_exists('UsabilityDynamics\WPP\Layouts')) {
 
@@ -14,6 +31,18 @@ namespace UsabilityDynamics\WPP {
      */
     final class Layouts extends Scaffold
     {
+
+      /**
+       * @var array
+       */
+      private $possible_tags = array(
+        'single-property', 'property-overview', 'term-overview'
+      );
+
+      /**
+       * @var
+       */
+      private $api_client;
 
       /**
        * Layouts constructor.
@@ -26,137 +55,304 @@ namespace UsabilityDynamics\WPP {
          */
         parent::__construct();
 
+        $this->api_client = new Layouts_API_Client(array(
+          'url' => defined('UD_API_LAYOUTS_URL') ? UD_API_LAYOUTS_URL : 'https://api.usabilitydynamics.com/product/property/layouts/v1'
+        ));
+
+        // Identify page template to use.
         add_filter('template_include', array($this, 'page_template'), 99);
+
+        // Override Layout metadata.
+        add_action( 'template_redirect', array( $this, 'template_redirect' ), 50 );
+
+        // Set default layout configuration.
+        add_filter('wpp::layouts::configuration', array( $this, 'get_configuration' ) );
+
+        // Add footer CSS. (Hopefully not used).
         add_action('wp_footer', array($this, 'panels_print_inline_css'));
 
-        add_filter('wpp::layouts::configuration', function ($false) {
-          global $wp_query;
+      }
 
-          ud_get_wp_property()->property_customizer->preload_layouts();
+      /**
+       * Extends layouts with local layouts.
+       *
+       * @param $layouts
+       * @return mixed
+       */
+      public function add_local_layouts( $layouts ) {
 
-          $layouts = get_option('wpp_available_layouts', false);
-          $local_layouts = get_option('wpp_available_local_layouts', false);
+        $local_layouts = get_option('wpp_available_local_layouts', array());
 
-          $overview_layouts = $layouts['property-overview'];
-          $single_layouts = $layouts['single-property'];
+        foreach ($local_layouts as $value) {
 
-          $_default_template_page = apply_filters( 'wpp::layouts::default_template', 'page.php' );
+          $value->local = true;
 
-          if (!empty($local_layouts)) {
-            foreach ($local_layouts as $value) {
+          foreach( (array) $value->tags as $_tag ) {
+            $value->local = true;
+            $value->_id = isset( $value->_id ) ? $value->_id : sanitize_title( $value->title );
 
-              if( isset( $value->tags ) && is_array( $value->tags ) && !empty( $value->tags ) ) {
+            if( isset( $layouts[ $_tag->tag ] ) && is_array( $layouts[ $_tag->tag ] ) ) {
+              $layouts[ $_tag->tag ] = array_merge( array( $value ), $layouts[ $_tag->tag ] );
+            }
 
-                $tag = $value->tags[ 0 ]->tag;
-                if( $tag == 'property-overview' ) {
-                  $overview_layouts = array_merge( $overview_layouts, array( $value ) );
-                } else if( $tag == 'single-property' ) {
-                  $single_layouts = array_merge( $single_layouts, array( $value ) );
+          }
+
+        }
+
+        return $layouts;
+
+      }
+
+      /**
+       * Gets layouts from options or from the API.
+       *
+       * @param array $args
+       * @return array|mixed|void|WP_Error
+       */
+      public function get_public_layouts( $args = array() ) {
+        // self::debug( 'get_public_layouts' );
+
+        $args = wp_parse_args($args, array(
+          'refresh' => false
+        ));
+
+        if( !$args['refresh'] ) {
+
+          $_available_layouts = get_option('wpp_available_layouts', false);
+
+          if( $_available_layouts ) {
+            return $_available_layouts;
+          }
+
+        }
+
+        $_layouts = $this->api_client->get_layouts();
+
+        if( is_wp_error( $_layouts ) ) {
+          return $_layouts;
+        }
+
+        if (is_array($_layouts)) {
+
+          $_available_layouts = array();
+
+          foreach ($this->possible_tags as $p_tag) {
+
+            if( !isset( $_available_layouts[ $p_tag ] ) ) {
+              $_available_layouts[ $p_tag ] = array();
+            }
+
+            foreach ($_layouts as $layout) {
+
+              $layout->local = false;
+
+              if (empty($layout->tags) || !is_array($layout->tags)) {
+                continue;
+              }
+
+              $_found = false;
+
+              foreach ($layout->tags as $_tag) {
+
+                if ($_tag->tag == $p_tag) {
+                  $_found = true;
                 }
 
               }
+
+              if (!$_found) {
+                continue;
+              }
+
+              $_available_layouts[$p_tag][] = $layout;
+
             }
           }
 
-          if (!empty($overview_layouts)) {
-            $first_overview_layout = array_shift($overview_layouts)->layout;
+          update_option( 'wpp_available_layouts', $_available_layouts );
+
+          return $_available_layouts;
+
+        }
+
+        return new WP_Error( 'layouts-error', __( 'Layouts could not be loaded.' ));
+
+      }
+
+      /**
+       * Returns appropriate layout based on page being viewed.
+       *
+       *
+       * - layouts_property_overview_id
+       *
+       * - layouts_property_single_id - template to use for front-end. (e.g. page.php)
+       * - layouts_property_overview_select
+       * - layouts_term_overview_select
+       *
+       * @return array .templates
+       * @internal param bool $use_layouts
+       * @internal param $false
+       */
+      public function get_configuration() {
+        global $wp_query;
+
+        self::debug( 'get_configuration' );
+
+        // fetch or get from cache
+        $_layouts = $this->get_public_layouts();
+
+        // add local layouts, if they exist.
+        $_layouts = $this->add_local_layouts( $_layouts );
+
+        $_options = array(
+          'layout_id' => null,
+          'layout_type' => 'public',
+          'render_type' => null,
+          'template_file' => null,
+          'templates' => array( apply_filters( 'wpp::layouts::default_template', 'single.php' ) ),
+          'layout_meta' => null,
+          'layout_options' => array()
+        );
+
+        // Property Results / Property Overview
+        if ( is_property_overview_page()) {
+          $_options['render_type'] = 'property-overview';
+          $_options['layout_id'] = get_theme_mod('layouts_property_overview_id', isset( $_layouts['property-overview'][0] ) ? $_layouts['property-overview'][0]->_id : null );
+          $_options['template_file'] = get_theme_mod('layouts_property_overview_select', null );
+        }
+
+        // Property Terms
+        if ( !is_property_overview_page() && is_tax() && get_queried_object() && get_queried_object()->taxonomy && in_array('property', get_taxonomy(get_queried_object()->taxonomy)->object_type) ) {
+          $_options['render_type'] = 'term-overview';
+          $_options['layout_id'] = get_theme_mod('layouts_property_term_id', isset( $_layouts['term-overview'][0] ) ? $_layouts['term-overview'][0]->_id : null );
+          $_options['template_file'] = get_theme_mod('layouts_term_overview_select', null );
+        }
+
+        // For single property
+        if (is_singular('property')) {
+          $_options['render_type'] = 'single-property';
+          $_options['layout_id'] = get_theme_mod('layouts_property_single_id', isset( $_layouts['single-property'][0] ) ? $_layouts['single-property'][0]->_id : null );
+          $_options['template_file'] = get_theme_mod('layouts_property_single_select', null );
+        }
+
+        if (!empty($wp_query->wpp_search_page)) {
+          $_options['render_type'] = 'property-search';
+          $_options['layout_id'] = get_theme_mod('layouts_property_overview_id', isset( $_layouts['property-overview'][0] ) ? $_layouts['property-overview'][0]->_id : null );
+          $_options['template_file'] = get_theme_mod('layouts_property_overview_select', null );
+        }
+
+        $_options = apply_filters('wpp::layouts::current', $_options, $_options );
+
+        if( ( !isset( $_options['layout_meta'] ) || !$_options['layout_meta'] ) && $_single_layout = $this->get_layout( $_options['layout_id'], $_layouts ) ) {
+
+          if( isset( $_single_layout->options ) ) {
+            $_options['layout_options'] = $_single_layout->options;
+          }
+
+          $_options['layout_meta'] = $_single_layout->layout_meta;
+          $_options['layout_type'] = $_single_layout->local ? 'local' : 'public';
+        }
+
+        if( $_options['template_file'] ) {
+          $_options['templates'] = array_unique( array_merge( array( $_options['template_file'] ), $_options['templates'] ) );
+        }
+
+        if( isset( $_options['layout_meta'] ) && $_options['layout_meta'] ) {
+          return $_options;
+        }
+
+        return false;
+
+      }
+
+      /**
+       * Get [layout_meta] from provided layout array. If not found, fetch from API.
+       *
+       * @param $_id
+       * @param $_layouts
+       *
+       * @return array|mixed|null|object
+       */
+      public function get_layout( $_id, $_layouts ) {
+        // self::debug( 'get_layout_meta ' . $_id );
+
+        if( !$_layouts ) {
+          // @todo load layouts
+        }
+        foreach( (array) $_layouts as $_type => $_type_layouts ) {
+
+          foreach( (array) $_type_layouts as $_single_layout ) {
+
+            if( strval( $_single_layout->_id ) === strval( $_id ) ) {
+
+              if( is_object( $_single_layout->layout ) ) {
+                $_single_layout->layout_meta = $_single_layout->layout;
+              }
+
+              if( is_string( $_single_layout->layout ) ) {
+                $_single_layout->layout_meta = json_decode( base64_decode($_single_layout->layout), true );
+              }
+
+              return $_single_layout;
+
+            }
+
+          }
+        }
+
+        return null;
+
+      }
+
+      /**
+       * ChromePHP Logger
+       *
+       * @param bool $text
+       * @param null $detail
+       * @return bool|void
+       */
+      static public function debug($text = false, $detail = null)
+      {
+
+        global $wp_properties;
+
+        $_debug = false;
+
+        if( defined( 'WP_DEBUG' ) && WP_DEBUG && ( ( defined( 'WP_DEBUG_DISPLAY' ) && WP_DEBUG_DISPLAY ) || ( defined( 'WP_DEBUG_CONSOLE' ) && WP_DEBUG_CONSOLE ) ) ) {
+          $_debug = true;
+        }
+
+        if ( !$_debug && ( !isset($wp_properties['configuration']['developer_mode']) || $wp_properties['configuration']['developer_mode'] !== 'true') ) {
+          $_debug = false;
+        }
+
+        if($_debug && class_exists( 'ChromePhp' ) && !headers_sent() ) {
+
+          // truncate strings to avoid sending oversized header.
+          if( strlen( $text ) > 1000 ) {
+            $text = '[truncated]';
+          }
+
+          if( $detail ) {
+            ChromePhp::log( '[wp-property:layouts]', $text, $detail);
           } else {
-            $first_overview_layout = 'false';
+            ChromePhp::log( '[wp-property:layouts]', $text );
           }
 
-          if (!empty($single_layouts)) {
-            $first_single_layout = array_shift($single_layouts)->layout;
-          } else {
-            $first_single_layout = 'false';
-          }
+          return true;
+        }
 
-          /**
-           * For property taxonomies
-           * property_term_single
-           */
-          if (is_tax() && get_queried_object() && get_queried_object()->taxonomy && in_array('property', get_taxonomy(get_queried_object()->taxonomy)->object_type) || is_property_overview_page()) {
+        return false;
 
-            $layout_id = get_theme_mod('layouts_property_overview_choice', false ) ? get_theme_mod('layouts_property_overview_choice') : $first_overview_layout;
-            $layout_id = apply_filters('property_layouts_layout_id', $layout_id);
+      }
 
-            if ($layout_id != 'false') {
+      /**
+       * Adds hooks at template level.
+       *
+       */
+      public function template_redirect() {
+        add_filter( 'get_post_metadata', array( $this, 'override_metadata' ), 50, 4 );
 
-              try {
-                $layout = json_decode(base64_decode($layout_id), true);
-              } catch ( Exception $e) {
-                echo $e->getMessage();
-              }
-
-              $template_file = get_theme_mod('layouts_property_overview_select', false ) ? get_theme_mod('layouts_property_overview_select') : $_default_template_page;
-
-              return array(
-                'templates' => array_unique( array($template_file, 'page.php', 'single.php', 'index.php') ),
-                'layout_meta' => $layout
-              );
-            }
-          }
-
-          /**
-           * For single property
-           */
-          if (is_singular('property')) {
-
-            $layout_id = get_theme_mod('layouts_property_single_choice', false ) ? get_theme_mod('layouts_property_single_choice') : $first_single_layout;
-            $layout_id = apply_filters('property_layouts_layout_id', $layout_id);
-
-            // object/array passed
-            if( is_array( $layout_id ) || is_object( $layout_id ) ) {
-              $template_file = get_theme_mod('layouts_property_single_select', false ) ? get_theme_mod('layouts_property_single_select') : $_default_template_page;
-
-              return array(
-                'templates' => array_unique( array($template_file, 'page.php', 'single.php', 'index.php') ),
-                'layout_meta' => $layout_id
-              );
-
-            }
-
-            if ($layout_id != 'false') {
-
-              try {
-                $layout = json_decode(base64_decode($layout_id), true);
-              } catch (Exception $e) {
-                echo $e->getMessage();
-              }
-
-              $template_file = get_theme_mod('layouts_property_single_select', false ) ? get_theme_mod('layouts_property_single_select') : $_default_template_page;
-
-              return array(
-                'templates' => array_unique( array($template_file, 'page.php', 'single.php', 'index.php') ),
-                'layout_meta' => $layout
-              );
-
-            }
-          }
-
-
-          if (!empty($wp_query->wpp_search_page)) {
-
-            $layout_id = get_theme_mod('layouts_property_overview_choice', false ) ? get_theme_mod('layouts_property_overview_choice') : $first_overview_layout;
-            $layout_id = apply_filters('property_layouts_layout_id', $layout_id);
-
-            if ($layout_id != 'false') {
-
-              try {
-                $layout = json_decode(base64_decode($layout_id), true);
-              } catch (Exception $e) {
-                echo $e->getMessage();
-              }
-
-              $template_file = get_theme_mod('layouts_property_overview_select', false ) ? get_theme_mod('layouts_property_overview_select') : $_default_template_page;
-
-              return array(
-                'templates' => array_unique( array($template_file, 'page.php', 'single.php', 'index.php') ),
-                'layout_meta' => $layout
-              );
-            }
-          }
-          return $false;
-        });
       }
 
       /**
@@ -191,46 +387,81 @@ namespace UsabilityDynamics\WPP {
       {
         global $wp_query;
 
-        $render = apply_filters('wpp::layouts::configuration', false);
+        $_layout = apply_filters('wpp::layouts::configuration', false);
 
-        if ($render && !empty($wp_query->post)) {
-          $wp_query->post->ID = !empty($render['layout_id']) ? $render['layout_id'] : $wp_query->post->ID;
+        if (!$_layout) {
+          return $template;
         }
 
+        // Override currently queried post's ID so our layout can override metadata.
+        if ($_layout && !empty($wp_query->post)) {
+          $wp_query->post->ID = !empty($_layout['layout_id']) ? intval( $_layout['layout_id'] ): $wp_query->post->ID;
+          $wp_query->post->_layout = $_layout;
+        }
+
+        // Set post count to 0 to avoid loops.
         if (count($wp_query->posts) > 1) {
           $wp_query->posts = array($wp_query->post);
           $wp_query->post_count = 1;
         }
 
-        if (!$render) {
-          return $template;
-        }
+        // Makes the layout meta be honored by themes like Divi. Otherwise our page wil be treated as a 404/archive page and sidebars may be added.
+        $wp_query->is_page = true;
+        $wp_query->is_archive = false;
+        $wp_query->is_tax = false;
+        $wp_query->is_single = true;
+
+        //self::debug( 'page_template : ', $_layout['layout_id' ] );
 
         add_filter('the_content', array($this, 'the_content'), 1000);
         add_filter('the_excerpt', array($this, 'the_content'), 1000);
 
-        // @note This should probaly be used instead of our content-override.
-        // add_filter( 'siteorigin_panels_data', array( $this, 'siteorigin_panels_data' ), 1000, 2 );
+        self::debug( 'page_template', $_layout['templates'] );
 
-        $template = locate_template($render['templates']);
+        $template = locate_template($_layout['templates']);
 
         return $template;
 
       }
 
-      public function siteorigin_panels_data($panels_data, $post_id)
-      {
+      /**
+       * Concept of overriding post meta to add theme-specific support.
+       *
+       * @param $default
+       * @param $object_id
+       * @param $meta_key
+       * @param $single
+       * @return string
+       */
+      public function override_metadata( $default, $object_id, $meta_key, $single) {
+        global $wp_query;
 
-        // this returns the ID for the layout_id we're using.
-        // $render = apply_filters( 'wpp::layouts::settings', false );
+        //if( isset( $_layout['layout_options'] ) && isset( $_layout['layout_options']->layoutMetaOptions ) ) {}
 
-        // $_panels_data = get_post_meta($render['layout_id'], 'panels_data', true );
+        // Only apply to the main Layout/Post meta.
+        if( !isset( $wp_query->post ) || !isset( $wp_query->post->_layout ) || $wp_query->post->ID !== $object_id ) {
+          return $default;
+        }
 
-        //die( '<pre>' . print_r( $_panels_data, true ) . '</pre>' );
+        if(  $meta_key === '_et_pb_use_builder' ) {
+          // self::debug( 'override_metadata:_et_pb_use_builder' );
+          return 'off';
+        }
 
-        return $panels_data;
+        if(  $meta_key === '_et_pb_page_layout' ) {
+          // self::debug( 'override_metadata:_et_pb_page_layout' );
+          return 'et_full_width_page';
+        }
+
+        if(  $meta_key === '_et_pb_show_title' ) {
+          // self::debug( 'override_metadata:_et_pb_show_title' );
+          return 'off';
+        }
+
+        return $default;
 
       }
+
 
       /**
        * Replace the content
@@ -248,16 +479,16 @@ namespace UsabilityDynamics\WPP {
         $render = apply_filters('wpp::layouts::configuration', false);
 
         if (!$render) {
+          self::debug( "the_content - No layout." );
           return $data;
         }
 
-        $_layout_config = apply_filters('wpp::layouts::layout_override', false, $render, $post);
-
-        if (!empty($render['layout_id'])) {
-          $modified_data = $this->standard_render($render['layout_id'], $_layout_config);
-        } elseif (!empty($render['layout_meta'])) {
+        if (!empty($render['layout_meta'])) {
           $modified_data = $this->standard_render($post->ID, $render['layout_meta']);
         }
+
+        // $_layout_config = apply_filters('wpp::layouts::layout_override', false, $render, $post);
+       // $modified_data = $this->standard_render($render['layout_id'], $_layout_config);
 
         if( isset( $modified_data ) ) {
           return $modified_data;
@@ -276,8 +507,11 @@ namespace UsabilityDynamics\WPP {
        */
       public function standard_render($post_id = false, $panels_data = false)
       {
+        global $wpp_layouts_panels_inline_css;
 
-        if (empty($post_id)) $post_id = get_the_ID();
+        if (empty($post_id)) {
+          $post_id = get_the_ID();
+        }
 
         if (empty($panels_data)) {
           $panels_data = get_post_meta($post_id, 'panels_data', true);
@@ -285,7 +519,9 @@ namespace UsabilityDynamics\WPP {
 
         $panels_data = apply_filters('wpp::layouts::panels_data', $panels_data, $post_id);
 
-        if (empty($panels_data) || empty($panels_data['grids'])) return 'No panels data found.';
+        if (empty($panels_data) || empty( $panels_data['grids'] )) {
+          return 'No panels data found.';
+        }
 
         if (!empty($panels_data['widgets'])) {
           $last_gi = 0;
@@ -352,7 +588,7 @@ namespace UsabilityDynamics\WPP {
         }
         echo '>';
 
-        global $wpp_layouts_panels_inline_css;
+
         if (empty($wpp_layouts_panels_inline_css)) $wpp_layouts_panels_inline_css = array();
 
         if (!isset($wpp_layouts_panels_inline_css[$post_id])) {
@@ -401,22 +637,31 @@ namespace UsabilityDynamics\WPP {
             }
             // Themes can add their own styles to cells
             $cell_classes = apply_filters('wpp::layouts::panels_row_cell_classes', $cell_classes, $panels_data);
+
             $cell_attributes = apply_filters('wpp::layouts::panels_row_cell_attributes', array(
               'class' => implode(' ', $cell_classes),
               'id' => 'pgc-' . $post_id . '-' . (!empty($grid_id) ? $grid_id : $gi) . '-' . $ci
             ), $panels_data);
 
             echo '<div ';
+
             foreach ($cell_attributes as $name => $value) {
               echo $name . '="' . esc_attr($value) . '" ';
             }
+
             echo '>';
 
             $cell_style_wrapper = $this->panels_start_style_wrapper('cell', array(), !empty($panels_data['grids'][$gi]['style']) ? $panels_data['grids'][$gi]['style'] : array());
+
             if (!empty($cell_style_wrapper)) echo $cell_style_wrapper;
 
             foreach ($widgets as $pi => $widget_info) {
-              $widget_style_wrapper = $this->panels_start_style_wrapper('widget', array(), !empty($widget_info['panels_info']['style']) ? $widget_info['panels_info']['style'] : array());
+
+              $widget_style_wrapper = $this->panels_start_style_wrapper('widget', array(
+                'class' => isset( $widget_info['panels_info']['style']['class'] ) ? array( $widget_info['panels_info']['style']['class'] ) : array(),
+                'style' => isset( $widget_info['panels_info']['style']['widget_css'] ) ? $widget_info['panels_info']['style']['widget_css'] : '',
+              ), !empty($widget_info['panels_info']['style']) ? $widget_info['panels_info']['style'] : array());
+
               $this->panels_the_widget($widget_info['panels_info'], $widget_info, $gi, $ci, $pi, $pi == 0, $pi == count($widgets) - 1, $post_id, $widget_style_wrapper);
             }
 
@@ -538,6 +783,7 @@ namespace UsabilityDynamics\WPP {
         $css->add_cell_css($post_id, false, false, '.so-panel', array(
           'margin-bottom' => apply_filters('siteorigin_panels_css_cell_margin_bottom', $panels_margin_bottom . 'px', $grid, $gi, $panels_data, $post_id)
         ));
+
         $css->add_cell_css($post_id, false, false, '.so-panel:last-child', array(
           'margin-bottom' => apply_filters('siteorigin_panels_css_cell_last_margin_bottom', '0px', $grid, $gi, $panels_data, $post_id)
         ));
@@ -627,7 +873,7 @@ namespace UsabilityDynamics\WPP {
 
         if (empty($post_id)) $post_id = get_the_ID();
 
-        $classes = array('so-panel', 'widget');
+        $classes = array('so-panel', 'widget', 'wpp-layout-element');
 
         if (!empty($the_widget) && !empty($the_widget->id_base)) $classes[] = 'widget_' . $the_widget->id_base;
         if (!empty($the_widget) && is_array($the_widget->widget_options) && !empty($the_widget->widget_options['classname'])) $classes[] = $the_widget->widget_options['classname'];
@@ -677,6 +923,11 @@ namespace UsabilityDynamics\WPP {
       {
 
         $style_wrapper = '';
+        if( $name === 'widget' ) {
+          //$style_attributes = array('class' => '', 'style' => 'asdfas', 'data-stuff'=> 'asds' );
+        }
+
+        //if( $name === 'widget' ) {die( '<pre>' . print_r( $style_args, true ) . '</pre>' );}
 
         if (empty($style_attributes['class'])) $style_attributes['class'] = array();
         if (empty($style_attributes['style'])) $style_attributes['style'] = '';
@@ -686,8 +937,14 @@ namespace UsabilityDynamics\WPP {
         if (empty($style_attributes['class'])) unset($style_attributes['class']);
         if (empty($style_attributes['style'])) unset($style_attributes['style']);
 
+
+
         if (!empty($style_attributes)) {
-          if (empty($style_attributes['class'])) $style_attributes['class'] = array();
+
+          if (empty($style_attributes['class'])) {
+            $style_attributes['class'] = array();
+          }
+
           $style_attributes['class'][] = 'panel-' . $name . '-style';
           $style_attributes['class'] = array_unique($style_attributes['class']);
 
@@ -704,6 +961,9 @@ namespace UsabilityDynamics\WPP {
             }
           }
           $style_wrapper .= '>';
+
+//          if( $name === 'widget' ) {echo( '<pre>$style_wrapper' . print_r( $style_wrapper, true ) . '</pre>' );}
+
 
           return $style_wrapper;
         }
