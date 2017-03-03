@@ -56,7 +56,7 @@ namespace UsabilityDynamics\MetaBox {
 			 */
 			public function set_saved($obj) {
 				global $post;
-				self::$saved = \RW_Meta_Box::has_been_saved($post->ID, $obj->fields);
+				//self::$saved = \RW_Meta_Box::has_been_saved($post->ID, $obj->fields);
 			}
 
 			/**

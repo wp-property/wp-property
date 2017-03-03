@@ -3,7 +3,9 @@
 defined( 'ABSPATH' ) || exit;
 
 // Make sure "select" field is loaded
-require_once RWMB_FIELDS_DIR . 'select.php';
+if( defined( 'RWMB_FIELDS_DIR ' ) ) {
+  require_once RWMB_FIELDS_DIR . 'select.php';
+}
 
 if ( ! class_exists( 'RWMB_Wpp_Select_Combobox_Field' ) ){
   class RWMB_Wpp_Select_Combobox_Field extends RWMB_Select_Field{

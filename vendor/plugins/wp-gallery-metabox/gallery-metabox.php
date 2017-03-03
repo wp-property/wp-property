@@ -73,7 +73,7 @@ if( !class_exists( 'BE_Gallery_Metabox' ) ) {
         // Granular filter so you can limit it to single page or page template
         if( apply_filters( 'be_gallery_metabox_limit', true, $post_id ) ) {
           // Add Metabox
-          add_meta_box( 'be_gallery_metabox', __( 'Gallery Images', 'gallery-metabox' ), array( $this, 'gallery_metabox' ), $post_type, $context, $priority );
+          //add_meta_box( 'be_gallery_metabox', __( 'Gallery Images', 'gallery-metabox' ), array( $this, 'gallery_metabox' ), $post_type, $context, $priority );
           // Add Necessary Scripts and Styles
           wp_enqueue_script( 'thickbox' );
           wp_enqueue_style( 'thickbox' );

@@ -61,6 +61,9 @@ namespace UsabilityDynamics\WPP {
         // Autoload all our features
         require_once(dirname(__DIR__) . '/autoload/autoload.php');
 
+        //** Initiate Meta Box Handler */
+        new Meta_Box();
+
         // Enable Supermap
         //if( defined( 'WP_PROPERTY_FLAG_ENABLE_SUPERMAP' ) && WP_PROPERTY_FLAG_ENABLE_SUPERMAP && !defined( 'WPP_SUPERMAP_VENDOR_LOAD' ) ) {
         if (!defined('WPP_SUPERMAP_VENDOR_LOAD')) {
@@ -174,13 +177,13 @@ namespace UsabilityDynamics\WPP {
         if (function_exists('icl_object_id')) {
           new \UsabilityDynamics\WPP\WPML();
         }
+
         //** Initiate Admin UI */
         if (is_admin()) {
           //** Initiate Admin Handler */
           new Admin();
 
-          //** Initiate Meta Box Handler */
-          new Meta_Box();
+
 
           //** Setup Gallery Meta Box ( wp-gallery-metabox ) */
           add_action('be_gallery_metabox_post_types', function ($post_types = array()) {

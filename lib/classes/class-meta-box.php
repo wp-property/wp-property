@@ -7,7 +7,9 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use WPP_F;
   use WP_Post;
+
   if( !class_exists( 'UsabilityDynamics\WPP\Meta_Box' ) ) {
 
     class Meta_Box {
@@ -19,7 +21,18 @@ namespace UsabilityDynamics\WPP {
        */
       public function __construct( $args = false ) {
         /* Be sure all required files are loaded. */
-        add_action( 'admin_init', array( $this, 'load_files' ), 1 );
+        //add_action( 'admin_init', array( $this, 'load_files' ), 1 );
+
+
+        // Stop here if Meta Box class doesn't exist
+        if( !class_exists( '\RW_Meta_Box' ) ) {
+          //die(dirname(  __DIR__ , 2) . '/vendor/plugins/meta-box/meta-box.php');
+          include_once(dirname(  __DIR__ , 2) . '/vendor/plugins/meta-box/meta-box.php');
+          include_once(dirname(  __DIR__ , 2) . '/vendor/plugins/meta-box-conditional-logic/meta-box-conditional-logic.php');
+          include_once(dirname(  __DIR__ , 2) . '/vendor/plugins/meta-box-show-hide/meta-box-show-hide.php');
+        }
+
+        add_action( 'init', array( $this, 'load_files' ), 1 );
 
       }
 
@@ -33,7 +46,7 @@ namespace UsabilityDynamics\WPP {
          * Add metabox for child properties
          */
         if( isset( $post ) && $post->post_type == 'property' && $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_parent = '{$post->ID}' AND post_status = 'publish' " ) ) {
-          add_meta_box( 'wpp_property_children', sprintf( __( 'Child %s', ud_get_wp_property('domain') ), \WPP_F::property_label( 'plural' ) ), array( $this, 'render_child_properties_meta_box' ), 'property', 'advanced', 'high' );
+          add_meta_box( 'wpp_property_children', sprintf( __( 'Child %s', ud_get_wp_property('domain') ), WPP_F::property_label( 'plural' ) ), array( $this, 'render_child_properties_meta_box' ), 'property', 'advanced', 'high' );
         }
 
         // Template selection only used when layouts are not enabled.
@@ -48,28 +61,11 @@ namespace UsabilityDynamics\WPP {
        */
       public function load_files() {
 
-        // Stop here if Meta Box class doesn't exist
-        if( !class_exists( '\RW_Meta_Box' ) ) {
-          return;
-        }
-
-        // Init \RW_Meta_Box defines if needed
-        if ( !defined( 'RWMB_VER' ) ) {
-          $reflector = new \ReflectionClass( '\RW_Meta_Box' );
-          $file = dirname( dirname( $reflector->getFileName() ) ) . '/meta-box.php';
-          if( !file_exists( $file ) ) {
-            return;
-          }
-          include_once( $file );
-        }
-
-
         /* Register all RWMB meta boxes */
         add_action( 'rwmb_meta_boxes', array( $this, 'register_meta_boxes' ) );
 
         //** Add metaboxes hook */
         add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 );
-
 
       }
 
@@ -131,6 +127,7 @@ namespace UsabilityDynamics\WPP {
        */
       public function register_meta_boxes( $meta_boxes ) {
         $_meta_boxes = array();
+
 
         $taxonomies = ud_get_wp_property( 'taxonomies', array() );
 
@@ -226,7 +223,7 @@ namespace UsabilityDynamics\WPP {
 
         $meta_box = array(
           'id' => '_general',
-          'title' => sprintf( __( '%s Details', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
+          'title' => sprintf( __( '%s Details', ud_get_wp_property()->domain ), WPP_F::property_label() ),
           'pages' => array( 'property' ),
           'context' => 'advanced',
           'priority' => 'low',
@@ -308,20 +305,17 @@ namespace UsabilityDynamics\WPP {
          */
         if( $group['id'] == false ) {
           /* May be add Property Parent field - 'Falls Under' */
-          $field = $this->get_parent_property_field( $post );
-          if( $field ) {
-            $fields[] = $field;
-          }
+
+          //$fields[] = $this->get_parent_property_field( $post );
 
           if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_TYPE' ) ) {
             /* May be add Property Type field. */
-            if( !empty($taxonomies['wpp_listing_type']['default'])) {
 
-              $field = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
+              $fields[] = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
                 'id' => 'wpp_listing_type',
                 'name' => $taxonomies['wpp_listing_type']['label'],
                 'type' => 'taxonomy', // Metabox field name
-                'placeholder' => sprintf( __( 'Select %s Type', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
+                'placeholder' => sprintf( __( 'Select %s Type', ud_get_wp_property()->domain ), WPP_F::property_label() ),
                 'multiple' => false,
                 'options' => array(
                   'taxonomy' => 'wpp_listing_type',
@@ -330,50 +324,40 @@ namespace UsabilityDynamics\WPP {
                 )
               ) ), 'wpp_listing_type', $post );
 
-              if( $field ) {
-                $fields[] = $field;
-              }
-            }
           }
-          
-          if( empty($taxonomies['wpp_listing_type']['default']) && !array_key_exists( 'property_type', $attributes ) ) {
-            $field = $this->get_property_type_field( $post );
-            if( $field ) {
-              $fields[] = $field;
-            }
+
+          if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_STATUS' ) ) {
+
+              $fields[] = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
+                'id' => 'wpp_listing_status',
+                'name' => $taxonomies['wpp_listing_status']['label'],
+                'type' => 'taxonomy',
+                //'placeholder' => sprintf( __( 'Select %s Type', ud_get_wp_property()->domain ), WPP_F::property_label() ),
+                'multiple' => false,
+                'options' => array(
+                  'taxonomy' => 'wpp_listing_status',
+                  'type' => 'select',
+                  'args' => array(),
+                )
+              ) ), 'wpp_listing_status', $post );
+
           }
+
+          // @todo Add to own group.
+          $fields[] = $this->get_media_field( $post );
+
           /* May be add Meta fields */
           foreach( ud_get_wp_property()->get( 'property_meta', array() ) as $slug => $label ) {
-            $field = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
+
+            $fields[] = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
               'id' => $slug,
               'name' => $label,
               'type' => 'textarea',
               'desc' => __( 'Meta description.', ud_get_wp_property()->domain ),
             ) ), $slug, $post );
-            if( $field ) {
-              $fields[] = $field;
-            }
+
           }
-          /* May be add default taxonomies */
-          /* Could be needed in future */
-          //foreach ($taxonomies as $slug => $data) {
-          //  if ($data['default'] && $data['public'] && empty($data['add_native_mtbox'])) {
-          //    $field = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
-          //      'id' => $slug,
-          //      'name' => $data['label'],
-          //      'type' => 'taxonomy',
-          //      'multiple' => ( isset( $data[ 'unique' ] ) && $data[ 'unique' ] ? false : true ),
-          //      'options' => array(
-          //        'taxonomy' => $slug,
-          //        'type' => ( isset( $data[ 'hierarchical' ] ) && $data[ 'hierarchical' ] == true ? 'select_tree' : '//select_advanced' ),
-          //        'args' => array(),
-          //    )
-          //    ) ), $slug, $post );
-          //    if( $field ) {
-          //      $fields[] = $field;
-          //    }
-          //  }
-          //}
+
         }
 
         /**
@@ -417,7 +401,7 @@ namespace UsabilityDynamics\WPP {
 
           //* HACK. If property_type is set as attribute, we register it here. */
           if( $slug == 'property_type' ) {
-            $field = $this->get_property_type_field( $post );
+            //$field = $this->get_property_type_field( $post );
             if( $field && (!defined( 'WPP_FEATURE_FLAG_WPP_LISTING_TYPE' ) || empty($taxonomies['wpp_listing_type']['default']))) {
               $fields[] = $field;
             }
@@ -489,13 +473,13 @@ namespace UsabilityDynamics\WPP {
             in_array( $slug, $inherited_attributes[ $post->property_type ] )
           ) {
             $input_type = 'wpp_inherited';
-            $description[] = sprintf( __( 'The value is inherited from Parent %s.', ud_get_wp_property()->domain ), \WPP_F::property_label() );
+            $description[] = sprintf( __( 'The value is inherited from Parent %s.', ud_get_wp_property()->domain ), WPP_F::property_label() );
           }
 
           //** Is current attribute's value aggregated from child properties? If so, set it as readonly! */
           if( !empty( $aggregated_attributes ) && in_array( $slug, $aggregated_attributes ) ) {
             $input_type = 'wpp_aggregated';
-            $description[] = sprintf( __( 'The value is aggregated from Child %s.', ud_get_wp_property()->domain ), \WPP_F::property_label( 'plural' ) );
+            $description[] = sprintf( __( 'The value is aggregated from Child %s.', ud_get_wp_property()->domain ), WPP_F::property_label( 'plural' ) );
           }
 
           //** Determine if current attribute is used by Google Address Validator. */
@@ -553,7 +537,7 @@ namespace UsabilityDynamics\WPP {
           'pages'    => array( 'property' ),
           'context'  => 'normal',
           'priority' => 'high',
-          'fields'   => $fields,
+          'fields'   => array_filter( $fields ),
         ), $group, $post );
 
         return $meta_box;
@@ -568,10 +552,30 @@ namespace UsabilityDynamics\WPP {
           'name' => __('Falls Under', ud_get_wp_property()->domain),
           'id' => 'parent_id',
           'type' => 'wpp_parent',
+          'show' => array( 'wpp_listing_type', '=', 'Building' ),
+          'hide' => array(
+            'relation'      => 'OR',
+            'wpp_listing_type' => array( 6487, 'Building' )
+          ),
           'options' => admin_url( 'admin-ajax.php?action=wpp_autocomplete_property_parent' ),
         );
 
+
         return $field;
+      }
+
+      public function get_media_field( $post ) {
+
+        $_attached = array_keys( get_attached_media( 'image', $post->ID ) );
+        $_meta_attached = get_post_meta( $post->ID, 'wpp_media' );
+        return array(
+          'id' => 'wpp_media',
+          'type' => 'image_advanced',
+          'max_file_uploads' => 15,
+          'js_options' => array(
+            'ids' => array_merge( $_attached, is_array( $_meta_attached ) ? $_meta_attached : array() )
+          )
+        );
       }
 
       /**
@@ -590,8 +594,8 @@ namespace UsabilityDynamics\WPP {
           $types = array_merge( array( '' => __( 'No Selected', ud_get_wp_property()->domain ) ), $types );
           $field = array(
             'id' => 'property_type',
-            'name' => sprintf( __( '%s Type', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
-            // 'desc' => sprintf( __( '%s Attributes are related to Property Type. They can be aggregated, inherited or hidden after updating the current type.', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
+            'name' => sprintf( __( '%s Type', ud_get_wp_property()->domain ), WPP_F::property_label() ),
+            // 'desc' => sprintf( __( '%s Attributes are related to Property Type. They can be aggregated, inherited or hidden after updating the current type.', ud_get_wp_property()->domain ), WPP_F::property_label() ),
             'type' => 'select',
             'options' => $types,
           );
