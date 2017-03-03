@@ -663,6 +663,7 @@ namespace UsabilityDynamics\WPP {
           'type' => 'wysiwyg',
           'options' => array(
             'teeny' => true,
+            'editor_height' => 225,
             'tinymce' => true,
             'quicktags' => false,
             'media_buttons' => false,
@@ -670,11 +671,12 @@ namespace UsabilityDynamics\WPP {
           )
         );
 
-
       }
 
       /**
        * Media View/Upload
+       *
+       * @todo Add featured thumbnail selection. - potanin@UD
        *
        * @param $post
        * @return array
@@ -686,7 +688,7 @@ namespace UsabilityDynamics\WPP {
         return array(
           'id' => 'wpp_media',
           'type' => 'image_advanced',
-          'max_file_uploads' => 15,
+          //'max_file_uploads' => 15,
           'js_options' => array(
             'ids' => array_merge( $_attached, is_array( $_meta_attached ) ? $_meta_attached : array() )
           )
