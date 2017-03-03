@@ -122,18 +122,23 @@ class WPP_Core {
     // apply alias logic.
     foreach( (array) WPP_F::get_alias_map() as $_defined_field => $_target ) {
 
+      $_alias_value = null;
+
+      //UsabilityDynamics\WPP\Attributes::get_attribute_data( $_defined_field );
+
+      // In an ideal world we would prefix all of our fields with tax_input/post_mea.
       if( strpos( $_target, 'tax_input.' ) === 0 ) {
         $_term_group_match = explode( '.', $_target );
         $_alias_value = wp_get_object_terms( $property['ID'], $_term_group_match[1], array( 'fields' => 'names' ) );
       }
 
       // try meta, defined taxonomy
-      if( !isset( $_alias_value ) || !$_alias_value ) {
+      if( !$_alias_value ) {
         $_alias_value  = isset( $property[ $_target ] ) ? $property[ $_target ] : null;
       }
 
       // Support for dynamic taxonomies.
-      if( !isset( $_alias_value ) || !$_alias_value ) {
+      if( !$_alias_value ) {
         WPP_F::verify_have_system_taxonomy( $_target );
         $_alias_value = wp_get_object_terms( $property['ID'], $_target, array( 'fields' => 'names' ) );
       }
@@ -141,14 +146,14 @@ class WPP_Core {
       // Alias value found.
       if( $_alias_value ) {
         $property[ $_defined_field ] = $_alias_value;
-        $_result[] = "Applied target [$_target] alias to [$_defined_field].";
+        $_result[] = "Applied target [$_target] alias to [$_defined_field] with values";
       }
 
     }
 
     WPP_F::debug( 'apply_property_alias', array( 'id' => $property['ID']) );
 
-    //die( '<pre>' . print_r( $_result, true ) . '</pre>' );
+    // die( '<pre>' . print_r( $_result, true ) . '</pre>' );
     //WPP_F::debug( 'apply_property_alias:detail',$_result );
 
     return $property;

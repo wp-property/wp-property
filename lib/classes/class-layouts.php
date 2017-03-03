@@ -63,10 +63,12 @@ namespace UsabilityDynamics\WPP {
         add_filter('template_include', array($this, 'page_template'), 99);
 
         // Override Layout metadata.
-        add_action( 'template_redirect', array( $this, 'template_redirect' ), 50 );
+        add_action( 'get_header', array( $this, 'get_header' ), 50 );
+        add_action( 'get_footer', array( $this, 'get_footer' ), 50 );
 
         // Set default layout configuration.
         add_filter('wpp::layouts::configuration', array( $this, 'get_configuration' ) );
+
 
         // Add footer CSS. (Hopefully not used).
         add_action('wp_footer', array($this, 'panels_print_inline_css'));
@@ -354,8 +356,28 @@ namespace UsabilityDynamics\WPP {
        * Adds hooks at template level.
        *
        */
-      public function template_redirect() {
-        add_filter( 'get_post_metadata', array( $this, 'override_metadata' ), 50, 4 );
+      public function get_header() {
+
+        // Add metadata override filter.
+        add_filter( 'get_post_metadata', array( 'UsabilityDynamics\WPP\Layouts', 'override_metadata' ), 50, 4 );
+
+      }
+
+
+      /**
+       * Revert back to original Post ID.
+       *
+       */
+      public function get_footer() {
+        global $wp_query;
+
+        // Reset original post ID.
+        if( isset( $wp_query->post ) && isset( $wp_query->post->_original_id ) ) {
+          $wp_query->post->ID = $wp_query->post->_original_id;
+        }
+
+        // Remove our metadata override filter.
+        remove_filter( 'get_post_metadata', array( 'UsabilityDynamics\WPP\Layouts', 'override_metadata' ), 50 );
 
       }
 
@@ -383,7 +405,8 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       * Define a template
+       * If valid page for template and have a layout, override query, injecting the layout object.
+       *
        * @param $template
        * @return string
        */
@@ -398,9 +421,10 @@ namespace UsabilityDynamics\WPP {
         }
 
         // Override currently queried post's ID so our layout can override metadata.
-        if ($_layout && !empty($wp_query->post)) {
-          $wp_query->post->ID = !empty($_layout['layout_id']) ? intval( $_layout['layout_id'] ): $wp_query->post->ID;
+        if ($_layout && !empty($wp_query->post) && !empty($_layout['layout_id']) && $_layout['layout_id'] ) {
+          $wp_query->post->_original_id = $wp_query->post->ID;
           $wp_query->post->_layout = $_layout;
+          $wp_query->post->ID = intval( $_layout['layout_id'] );
         }
 
         // Set post count to 0 to avoid loops.
@@ -437,13 +461,13 @@ namespace UsabilityDynamics\WPP {
        * @param $single
        * @return string
        */
-      public function override_metadata( $default, $object_id, $meta_key, $single) {
+      static public function override_metadata( $default, $object_id, $meta_key, $single) {
         global $wp_query;
 
         //if( isset( $_layout['layout_options'] ) && isset( $_layout['layout_options']->layoutMetaOptions ) ) {}
 
         // Only apply to the main Layout/Post meta.
-        if( !isset( $wp_query->post ) || !isset( $wp_query->post->_layout ) || $wp_query->post->ID !== $object_id ) {
+        if( !isset( $wp_query->post->_original_id ) && !isset( $wp_query->post ) || !isset( $wp_query->post->_layout ) || ( $wp_query->post->ID !== $object_id && $wp_query->post->_original_id !== $object_id ) ) {
           return $default;
         }
 
@@ -453,7 +477,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         if(  $meta_key === '_et_pb_page_layout' ) {
-          // self::debug( 'override_metadata:_et_pb_page_layout' );
+          // self::debug( 'override_metadata:_et_pb_page_layout -> et_full_width_page' );
           return 'et_full_width_page';
         }
 
@@ -465,7 +489,6 @@ namespace UsabilityDynamics\WPP {
         return $default;
 
       }
-
 
       /**
        * Replace the content

@@ -229,7 +229,7 @@ namespace UsabilityDynamics\WPP {
         $post_args['title_suggest'] = apply_filters( 'wpp:elastic:title_suggest', $post_args['title_suggest'], $post_args, $post_id );
 
         // lowercase/tokenize fields.
-        foreach( $post_args['title_suggest']['input'] as $_input_index => $_input_vaue ) {
+        foreach( (array) $post_args['title_suggest']['input'] as $_input_index => $_input_vaue ) {
           $post_args['title_suggest']['input'][ $_input_index  ] = str_replace( array( ' ', '-', ',', '.' ), '', strtolower( sanitize_title( $_input_vaue ) ) );
         }
 

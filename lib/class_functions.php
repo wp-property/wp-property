@@ -336,6 +336,7 @@ class WPP_F extends UsabilityDynamics\Utility
    * Get Field Aliases
    *
    *
+   * @param bool $field
    * @return mixed|void
    */
   static public function get_alias_map( $field = false ) {

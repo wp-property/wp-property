@@ -16,7 +16,7 @@
 
 add_filter('flag_wp_property_layouts', function ($enabled) {
   $settings = get_option('wpp_settings');
-  if (isset($settings['configuration']) && ($settings['configuration']['disable_layouts'] == 'true')) {
+  if (isset($settings['configuration']['disable_layouts']) && ($settings['configuration']['disable_layouts'] == 'true')) {
     return false;
   }
   return $enabled;
