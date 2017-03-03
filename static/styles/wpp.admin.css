@@ -1911,3 +1911,8 @@ body.post-type-property .uisf-date {
 .wpp-json-viewer .jjson-container span {
   position: static !important;
 }
+.wp-full-overlay-sidebar-content .wpp-layout-icon {
+  display: block;
+  width: 100%;
+  height: auto;
+}

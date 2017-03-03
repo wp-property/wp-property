@@ -223,31 +223,38 @@ body,
     /* View results */
     .all-properties {
       .property_div {
+        .clearfix;
         box-sizing: border-box;
-        display: inline-block;
-        margin-bottom: 20px;
-        margin-right: -3px;
-        padding: 0 10px;
+        display: block;
+        margin-bottom: 2em;
         vertical-align: top;
-        min-width: 138px;
-        width: 25%;
+        width: 100%;
+        border: 1px solid #DDD;
         .wpp_overview_left_column {
-          float: none;
-          margin: 0 auto 5px;
+          float: left;
           max-width: 100%;
           .thumbnail,
           .property_overview_thumb {
-            border: none;
+            border: medium none;
+            box-shadow: none;
+            display: block;
+            margin: 0;
             padding: 0;
-            margin: 0 0 5px;
+            text-decoration: none;
             img {
+              border: medium none;
+              box-shadow: none;
+              display: block;
+              height: 100%;
               max-width: 100%;
-              height: auto;
+              text-decoration: none;
+              width: auto;
             }
           }
         }
         .wpp_overview_right_column {
-          float: none;
+          padding: 1.5em;
+          float: left;
           .wpp_overview_data {
             margin: 0;
             padding: 0;
@@ -262,11 +269,7 @@ body,
               &.property_title {
                 margin-bottom: 10px;
                 a {
-                  display: block;
                   font-weight: bold;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-                  white-space: nowrap;
                 }
               }
             }
@@ -558,4 +561,41 @@ body,
     }
   }
   /* Gallery property widget */
+
+  /* wpp shortcode search */
+  .wpp_shortcode_search {
+
+    .wpp_search_elements,
+    .wpp_search_elements li {
+      list-style: none;
+    }
+    .wpp_search_elements,
+    .wpp_search_elements li > ul {
+      margin: 0;
+      padding: 0;
+
+      .wpp_search_attribute_wrap {
+
+        .wpp_range_input {
+          display: inline-block;
+          width: 47%;
+          margin-right: -4px;
+        }
+        .wpp_dash {
+          display: inline-block;
+          margin-right: -3px;
+          text-align: center;
+          width: 6%;
+        }
+      }
+      .wpp_search_form_element {
+        margin-bottom: 0.5em;
+        &.submit {
+          margin-bottom: 0;
+          margin-top: 1em;
+        }
+      }
+    }
+  }
+  /* wpp shortcode search */
 }

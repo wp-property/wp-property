@@ -24,7 +24,7 @@
 * Added [WPP_FEATURE_FLAG_DISABLE_EDITOR] feature flag which hides the native Post Content editor.
 * Added [WPP_FEATURE_FLAG_WPP_CATEGORICAL] and [WP_PROPERTY_FLAG_WPP_LISTING_LABEL] feature flags, which enable [wpp_categorical] and [wpp_listing_label] taxonomies. 
 * Fixes to Site API registration process. 
-* Improvements to [wpp_listing_location] taxonomy for wp-rets-client.
+* Improvements to [wpp_location] taxonomy for wp-rets-client.
 * Implemented [WP_PROPERTY_LEGACY_META_ATTRIBUTES] feature flag, disabling legacy meta UI.
 * Improved UX for viewing property objects by using a JSON viewer library.
 * Improved wp-rets-client logic for inserting terms and taxonomies. Both are added on-the-fly, with hierarchy support if needed.

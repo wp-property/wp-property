@@ -4,44 +4,36 @@
  * Section 'Types'
  */
 global $wp_properties;
-
-if(empty($wp_properties[ 'property_types' ])){
-  $wp_properties[ 'property_types' ] = array("" => "");
-}
-
-$wp_properties[ 'property_stats' ] = array_filter($wp_properties[ 'property_stats' ]);
-
-if( isset( $wp_properties[ 'property_meta' ] ) ) {
-  $wp_properties[ 'property_meta' ] = array_filter($wp_properties[ 'property_meta' ]);
-} else {
-  $wp_properties[ 'property_meta' ] = array();
-}
-
 $filtered_property_types = apply_filters( 'wpp::property_types', $wp_properties[ 'property_types' ] );
 
 $property_type_settings = array();
 $hidden_attributes_do_action    = array();
 $inherited_attributes_do_action = array();
+
 foreach ($filtered_property_types as $slug => $label) {
   ob_start();
-  do_action( 'wpp::types::hidden_attributes', $slug );
+  WPP_F::do_action_deprecated( 'wpp::types::hidden_attributes', array($slug), '3.0.0', 'wpp::settings::developer::types::hidden_attributes', "New action expect underscore template and data should be passed by 'wpp::settings::developer::types' filter." );
   $hidden_attributes_do_action[$slug] = ob_get_clean();
 
   ob_start();
   do_action( 'wpp::types::inherited_attributes', $slug );
+  WPP_F::do_action_deprecated( 'wpp::types::inherited_attributes', array($slug), '3.0.0', 'wpp::settings::developer::types::inherited_attributes', "New action expect underscore template and data should be passed by 'wpp::settings::developer::types' filter." );
   $inherited_attributes_do_action[$slug] = ob_get_clean();
 
-  $property_type_settings_do_action[$slug] = apply_filters( 'wpp_property_type_settings', array(), $slug );
+  $property_type_settings_do_action[$slug] = WPP_F::apply_filters_deprecated( 'wpp_property_type_settings', array(array(), $slug), '3.0.0', "New action expect underscore template and data should be passed by 'wpp::settings::developer::types' filter." );
 }
 
 $hidden_attributes_do_action    = array_filter($hidden_attributes_do_action);
 $inherited_attributes_do_action = array_filter($inherited_attributes_do_action);
+$property_type_settings_do_action = array_filter($property_type_settings_do_action);
 
 
-
-
-
-
+$wpp_property_types_variables = apply_filters( 'wpp::settings::developer::types', array(
+    'globals'                           => array(),
+    'hidden_attributes_do_action'       => $hidden_attributes_do_action,
+    'inherited_attributes_do_action'    => $inherited_attributes_do_action,
+    'property_type_settings_do_action'  => $property_type_settings_do_action,
+  ) );
 
 ?>
 
@@ -50,35 +42,56 @@ $inherited_attributes_do_action = array_filter($inherited_attributes_do_action);
 jQuery(document).ready(function($) {
   var wp_properties = wpp.instance.settings;
   var configuration = wp_properties.configuration;
+  var supermap_configuration = typeof configuration.feature_settings.supermap != 'undefined' ? wp_properties.configuration.feature_settings.supermap : {};
 
-  var filtered_property_types         = <?php echo json_encode($filtered_property_types);?>;
-  var hidden_attributes_do_action     = <?php echo json_encode($hidden_attributes_do_action);?>;
-  var inherited_attributes_do_action  = <?php echo json_encode($inherited_attributes_do_action);?>;
+  var filtered_property_types           = <?php echo json_encode($filtered_property_types);?>;
+  var hidden_attributes_do_action       = <?php echo json_encode($hidden_attributes_do_action);?>;
+  var inherited_attributes_do_action    = <?php echo json_encode($inherited_attributes_do_action);?>;
   var property_type_settings_do_action  = <?php echo json_encode($property_type_settings_do_action);?>;
 
-  if(typeof configuration.default_image == 'undefined'){
+
+  var wpp_property_types_variables  = <?php echo json_encode($wpp_property_types_variables);?>;
+
+  jQuery.each(wpp_property_types_variables.globals, function(index, val){
+    window[index] = val;
+  });
+  delete wpp_property_types_variables.globals;
+
+  // Defining property of object wp_properties(if not defined) to avoid checking of typeof != 'undefined' in template
+  var requiredProps = [
+    'searchable_property_types', 
+    'location_matters',
+    'hidden_attributes', 
+    'property_stats',
+    'property_meta', 
+  ];
+  
+  jQuery.each(requiredProps, function(index, item) {
+    if(typeof  wp_properties[item] == 'undefined' ) {
+      wp_properties[item] = {};
+    }
+  });
+
+  if(typeof  configuration.default_image == 'undefined' ) {
     configuration.default_image = {};
   }
-  if(typeof configuration.default_image.types == 'undefined'){
+  if(typeof  configuration.default_image.types == 'undefined' ) {
     configuration.default_image.types = {};
   }
 
-  if(typeof wp_properties.searchable_property_types == 'undefined'){
-    wp_properties.searchable_property_types = {};
-  }
-  if(typeof wp_properties.location_matters == 'undefined'){
-    wp_properties.location_matters = {};
-  }
-  if(typeof wp_properties.hidden_attributes == 'undefined'){
-    wp_properties.hidden_attributes = {};
-  }
-  if(typeof wp_properties.property_stats == 'undefined'){
-    wp_properties.property_stats = {};
-  }
-  if(typeof wp_properties.property_meta == 'undefined'){
-    wp_properties.property_meta = {};
+  if(typeof  wp_properties.property_types == 'undefined' ) {
+    wp_properties.property_types = {'': ''};
   }
 
+  window.selected = function(selected, current) {
+    var result = '';
+    current = current || true;
+
+    if ( selected === current )
+      result = " selected='selected' ";
+ 
+    return result;
+  }
   
   var wppTypes = Backbone.Model.extend({
   });
@@ -92,10 +105,10 @@ jQuery(document).ready(function($) {
     className: 'wpp_dynamic_table_row',
     attributes: function(){
       return {
-        slug: this.model.attributes.property_slug,
-        'data-property-slug': this.model.attributes.property_slug,
-        new_row: this.model.attributes.property_slug == '' ? true : false,
-        style: this.model.attributes.property_slug == '' ? "display:none;" : "",
+        slug: this.model.get('property_slug'),
+        'data-property-slug': this.model.get('property_slug'),
+        new_row: this.model.get('property_slug') == '' ? true : false,
+        style: this.model.get('property_slug') == '' ? "display:none;" : "",
       };
     },
     template: _.template($('#settings-developer-types-template').html()),
@@ -129,15 +142,19 @@ jQuery(document).ready(function($) {
       configuration.default_image.types[property_slug] = {url: '', id: ''}
     }
 
-
-    var row = new wppTypes({
-      label         : label,
-      property_slug : property_slug,
-      wp_properties : wp_properties,
-      hidden_attributes_do_action     : hidden_attributes_do_action,
-      inherited_attributes_do_action  : inherited_attributes_do_action,
-      property_type_settings_do_action: property_type_settings_do_action,
-    });
+    var attributes = {
+      label                             : label,
+      slug                              : property_slug,
+      property_slug                     : property_slug,
+      wp_properties                     : wp_properties,
+      supermap_configuration            : supermap_configuration,
+      hidden_attributes_do_action       : hidden_attributes_do_action,
+      inherited_attributes_do_action    : inherited_attributes_do_action,
+      property_type_settings_do_action  : property_type_settings_do_action,
+    };
+    jQuery.extend(attributes, wpp_property_types_variables);
+    console.log(attributes);
+    var row = new wppTypes(attributes);
     _wppTypes.add(row);
 
 
@@ -220,6 +237,8 @@ jQuery(document).ready(function($) {
             </label>
           </li>
 
+          <?php do_action( 'wpp::settings::developer::types::settings'); /* The action should output underscore template. Template should pass variable to filter "wpp::settings::developer::types" to use in template or global wp_properties is available.*/ ?>
+
           <% if( typeof property_type_settings_do_action[property_slug] != 'undefined'){
 
             jQuery.each(property_type_settings_do_action[ property_slug ], function(index, property_type_setting){
@@ -262,6 +281,7 @@ jQuery(document).ready(function($) {
             </li>
           <% } %>
           <% typeof hidden_attributes_do_action[property_slug] != 'undefined'? print(hidden_attributes_do_action[ property_slug ]):''; %>
+          <?php do_action( 'wpp::settings::developer::types::hidden_attributes'); /* The action should output underscore template. Template should pass variable to filter "wpp::settings::developer::types" to use in template or global wp_properties is available.*/ ?>
         </ul>
       </td>
 
@@ -278,6 +298,7 @@ jQuery(document).ready(function($) {
             </li>
           <% }); %>
           <% typeof inherited_attributes_do_action[property_slug] != 'undefined'? print(inherited_attributes_do_action[ property_slug ]):''; %>
+        <?php do_action( 'wpp::settings::developer::types::inherited_attributes'); /* The action should output underscore template. Template should pass variable to filter "wpp::settings::developer::types" to use in template or global wp_properties is available.*/ ?>
         </ul>
       </td>
 

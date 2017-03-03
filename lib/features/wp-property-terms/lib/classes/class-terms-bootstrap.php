@@ -49,13 +49,22 @@ namespace UsabilityDynamics\WPP {
             return $tabs;
           } );
 
+          add_filter( 'wpp::settings::developer::types', function($attributes = array()){
+            $inheritance = ud_get_wpp_terms()->get( 'config.inherited', array() );
+            $hidden = ud_get_wpp_terms()->get( 'config.hidden', array() );
+
+            $attributes['terms_hidden'] = $hidden;
+            $attributes['terms_inheritance'] = $inheritance;
+            return $attributes;
+          });
+
           /** Add Hidden Taxonomies on Types Tab */
-          add_action( 'wpp::types::hidden_attributes', function( $property_slug ){
+          add_action( 'wpp::settings::developer::types::hidden_attributes', function( $property_slug ){
             include ud_get_wpp_terms()->path( 'static/views/admin/settings-hidden-terms.php', 'dir' );
           } );
 
           /** Add Inherited Taxonomies on Types Tab */
-          add_action( 'wpp::types::inherited_attributes', function( $property_slug ){
+          add_action( 'wpp::settings::developer::types::inherited_attributes', function( $property_slug ){
             include ud_get_wpp_terms()->path( 'static/views/admin/settings-inherited-terms.php', 'dir' );
           } );
 

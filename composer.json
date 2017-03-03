@@ -131,7 +131,7 @@
         "enabled": false
       },
       {
-        "name": "Listing Permissions",
+        "name": "Listing Policies",
         "constant": "WPP_FEATURE_FLAG_WPP_LISTING_POLICY",
         "description": "Sets listing display permissions, stored in [wpp_listing_policy].",
         "since": "2.2.1",
@@ -154,7 +154,7 @@
       {
         "name": "Standard Location Taxonomy",
         "constant": "WPP_FEATURE_FLAG_WPP_LISTING_LOCATION",
-        "description": "Standard property location taxonomy, stored in [wpp_listing_location].",
+        "description": "Standard property location taxonomy, stored in [wpp_location].",
         "since": "2.2.1",
         "enabled": true
       },
@@ -187,7 +187,7 @@
         "enabled": true
       },
       {
-        "name": "Property Categories",
+        "name": "Categorical Taxonomy",
         "constant": "WPP_FEATURE_FLAG_WPP_CATEGORICAL",
         "description": "Taxonomy for general property terms, stored in [wpp_categorical]",
         "since": "2.2.1",

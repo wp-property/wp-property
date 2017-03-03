@@ -7,9 +7,31 @@
 wp_enqueue_script( 'wpp-terms-settings', ud_get_wpp_terms()->path( '/static/scripts/wpp.terms.settings.js', 'url' ), array( 'wp-property-admin-settings' ) );
 wp_enqueue_style( 'wpp-terms-settings', ud_get_wpp_terms()->path( '/static/styles/wpp.terms.settings.css', 'url' ) );
 
-$_taxonomies = (array) ud_get_wpp_terms( 'config.taxonomies', array() );
+$_term_config = (array) ud_get_wpp_terms( 'config', array() );
+$_term_types = (array) ud_get_wpp_terms( 'types', array() );
+$filtered_field_alias = array();
+
+foreach( $_term_config['taxonomies'] as $slug => $data ){
+  $_term_config['taxonomies'][$slug] = ud_get_wpp_terms()->prepare_taxonomy( $data, $slug );
+  $filtered_field_alias[$slug] = WPP_F::get_alias_map( $slug ) ;
+}
+
+$search_input = apply_filters( 'wpp::terms::search_input_fields', 
+  array( 
+    'dropdown'          => __( 'Dropdown Selection', ud_get_wpp_terms()->domain ),
+    'multi_checkbox'    => __( 'Multi-Checkbox', ud_get_wpp_terms()->domain ) 
+) );
+
+$wpp_property_types_variables = apply_filters( 'wpp::settings::developer::terms', array(
+    'globals'               => array(),
+    'config'                => $_term_config,
+    'types'                 => $_term_types,
+    'search_input'          => $search_input,
+    'filtered_field_alias'  => $filtered_field_alias,
+  ) );
 
 ?>
+
 <div>
   <h3 style="float:left;"><?php printf( __( '%1s Taxonomies', ud_get_wpp_terms()->domain ), \WPP_F::property_label() ); ?></h3>
   <div class="wpp_property_stat_functions">
@@ -22,7 +44,7 @@ $_taxonomies = (array) ud_get_wpp_terms( 'config.taxonomies', array() );
 
 <p style="margin-top: 0;"><?php printf( __( 'Manage your %s Taxonomies here. Note, you can not remove all taxonomies, in this case default WP-Property taxonomies will be returned back.', ud_get_wpp_terms()->domain ), WPP_F::property_label() ); ?></p>
 
-<table id="" class="wpp_sortable wpp_inquiry_attribute_fields ud_ui_dynamic_table widefat">
+<table id="wpp_inquiry_property_terms" class="wpp_sortable wpp_inquiry_attribute_fields ud_ui_dynamic_table widefat">
   <thead>
   <tr>
     <th class='wpp_draggable_handle'>&nbsp;</th>
@@ -34,115 +56,6 @@ $_taxonomies = (array) ud_get_wpp_terms( 'config.taxonomies', array() );
   </tr>
   </thead>
   <tbody>
-  <?php $search_input = apply_filters( 'wpp::terms::search_input_fields', array( 'dropdown' => __( 'Dropdown Selection', ud_get_wpp_terms()->domain ), 'multi_checkbox' => __( 'Multi-Checkbox', ud_get_wpp_terms()->domain ) ) ); ?>
-  <?php foreach( $_taxonomies as $slug => $data ): ?>
-    <?php
-
-    $data = ud_get_wpp_terms()->prepare_taxonomy( $data, $slug );
-    $gslug = ud_get_wpp_terms( "config.groups.{$slug}" );
-    $group = ud_get_wp_property( "property_groups.{$gslug}" );
-    $current_search_input = ud_get_wp_property( "searchable_attr_fields.{$slug}", false );
-
-    ?>
-    <tr class="wpp_dynamic_table_row" slug="<?php echo $slug; ?>" <?php echo( !empty( $gslug ) ? "wpp_attribute_group=\"" . $gslug . "\"" : "" ); ?> style="<?php echo( !empty( $group[ 'color' ] ) ? "background-color:" . $group[ 'color' ] : "" ); ?>" slug="<?php echo $slug; ?>" new_row='false'>
-      <th class='wpp_draggable_handle'>&nbsp;</th>
-      <td>
-        <ul>
-          <li>
-            <input class="slug_setter" type="text" name="wpp_terms[taxonomies][<?php echo $slug; ?>][label]" value="<?php echo $data['label']; ?>" maxlength='32'/>
-          </li>
-          <li class="wpp_development_advanced_option">
-            <input type="text" class="slug" readonly='readonly' value="<?php echo $slug; ?>"/>
-
-            <?php if( defined( 'WP_PROPERTY_FIELD_ALIAS' ) && WP_PROPERTY_FIELD_ALIAS ) { ?>
-            <label class="wpp-meta-alias-entry">
-              <input type="text" class="slug wpp_field_alias" name="wpp_settings[field_alias][<?php echo $slug; ?>]" placeholder="Alias for <?php echo $slug; ?>" value="<?php echo WPP_F::get_alias_map( $slug ) ; ?>" />
-            </label>
-            <?php } ?>
-
-          </li>
-          <li class="hide-on-new-row">
-            <a href="<?php echo admin_url( "edit-tags.php?taxonomy={$slug}&post_type=property" ); ?>"><?php _e( 'Manage Terms', ud_get_wpp_terms()->domain ); ?></a>
-          </li>
-          <li>
-            <span class="wpp_show_advanced"><?php _e( 'Toggle Advanced Settings', ud_get_wpp_terms()->domain ); ?></span>
-          </li>
-        </ul>
-      </td>
-
-      <td>
-        <select class="wpp-terms-type-selector" name="wpp_terms[types][<?php echo $slug; ?>]">
-          <?php foreach( ud_get_wpp_terms( 'types', array() ) as $k => $type ) : ?>
-            <option value="<?php echo $k ?>" <?php echo selected( $k, ud_get_wpp_terms( "config.types.{$slug}" ) ) ?> data-desc="<?php echo $type[ 'desc' ]; ?>" ><?php echo $type[ 'label' ]; ?></option>
-          <?php endforeach; ?>
-        </select>
-      </td>
-
-      <td class="wpp_attribute_group_col">
-        <input type="text" class="wpp_attribute_group wpp_taxonomy_group wpp_group" value="<?php echo( !empty( $group[ 'name' ] ) ? $group[ 'name' ] : "" ); ?>"/>
-        <input type="hidden" class="wpp_group_slug" name="wpp_terms[groups][<?php echo $slug; ?>]" value="<?php echo( !empty( $gslug ) ? $gslug : "" ); ?>">
-      </td>
-
-      <td>
-        <ul>
-          <li class="wpp_development_advanced_option">
-            <label><?php _e( 'Rewrite Slug', ud_get_wpp_terms()->domain ); ?> <input type="text" name="wpp_terms[taxonomies][<?php echo $slug; ?>][rewrite][slug]" value="<?php echo !empty( $data['rewrite']['slug'] ) ? $data['rewrite']['slug'] : $slug; ?>" maxlength='32'/></label>
-          </li>
-          <?php if( !empty( $search_input ) && is_array( $search_input ) ) : ?>
-          <li class="wpp_development_advanced_option">
-            <label><?php _e( 'Search Input', ud_get_wpp_terms()->domain ); ?></label>
-              <select name="wpp_settings[searchable_attr_fields][<?php echo $slug; ?>]">
-                <?php foreach( $search_input as $k => $v ) : ?>
-                  <option value="<?php echo $k ?>" <?php echo ( isset( $current_search_input ) && $current_search_input == $k ? 'selected="selected"' : '' ); ?>><?php echo $v; ?></option>
-                <?php endforeach; ?>
-              </select>
-          </li>
-          <?php endif; ?>
-
-          <li class="">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<?php echo $slug; ?>][public]" <?php checked( $data['public'], true ); ?> value="true"/> <?php _e( 'Public & Searchable', ud_get_wpp_terms()->domain ); ?></label>
-          </li>
-
-          <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<?php echo $slug; ?>][hierarchical]" <?php checked( $data['hierarchical'], true ); ?> value="true"/> <?php _e( 'Hierarchical', ud_get_wpp_terms()->domain ); ?></label>
-          </li>
-
-          <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<?php echo $slug; ?>][show_in_nav_menus]" <?php checked( $data['show_in_nav_menus'], true ); ?> value="true"/> <?php _e( 'Show in Nav Menus', ud_get_wpp_terms()->domain ); ?></label>
-          </li>
-
-          <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<?php echo $slug; ?>][show_tagcloud]" <?php checked( $data['show_tagcloud'], true ); ?> value="true"/> <?php _e( 'Show in Tag Cloud', ud_get_wpp_terms()->domain ); ?></label>
-          </li>
-
-          <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<?php echo $slug; ?>][show_in_menu]" <?php checked( $data['show_in_menu'], true ); ?> value="true"/> <?php _e( 'Show in Admin Menu', ud_get_wpp_terms()->domain ); ?></label>
-          </li>
-
-          <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<?php echo $slug; ?>][add_native_mtbox]" <?php checked( $data['add_native_mtbox'], true ); ?> value="true"/> <?php _e( 'Add native Meta Box', ud_get_wpp_terms()->domain ); ?></label>
-          </li>
-
-          <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<?php echo $slug; ?>][rich_taxonomy]" <?php checked( $data['rich_taxonomy'], true ); ?> value="true"/> <?php _e( 'Add Term Post', ud_get_wpp_terms()->domain ); ?></label>
-          </li>
-
-          <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<?php echo $slug; ?>][admin_searchable]" <?php checked( $data['admin_searchable'], true ); ?> value="true" class="wpp-terms-option-admin_searchable"/> <?php _e( 'Admin Searchable', ud_get_wpp_terms()->domain ); ?></label>
-          </li>
-
-        </ul>
-      </td>
-
-      <td>
-        <span class="wpp_delete_row wpp_link <?php echo (isset($data['readonly']) && $data['readonly'])?"hidden":"";?>"><?php _e( 'Delete', ud_get_wpp_terms()->domain ); ?></span>
-      </td>
-    </tr>
-
-    <input type="hidden" name="wpp_terms[taxonomies][<?php echo $slug; ?>][default]" value="<?php echo isset($data['default'])?$data['default']:false;?>">
-    <input type="hidden" name="wpp_terms[taxonomies][<?php echo $slug; ?>][readonly]" value="<?php echo isset($data['readonly'])?$data['readonly']:false;?>">
-    <input type="hidden" name="wpp_terms[taxonomies][<?php echo $slug; ?>][hidden]" value="<?php echo isset($data['hidden'])?$data['hidden']:false;?>">
-  <?php endforeach; ?>
   </tbody>
 
   <tfoot>
@@ -154,3 +67,218 @@ $_taxonomies = (array) ud_get_wpp_terms( 'config.taxonomies', array() );
   </tfoot>
 
 </table>
+
+<script type="text/javascript">
+  
+jQuery(document).ready(function($) {
+  var wp_properties = wpp.instance.settings;
+
+  var wpp_property_types_variables  = <?php echo json_encode($wpp_property_types_variables);?>;
+  var config = wpp_property_types_variables.config;
+
+  jQuery.each(wpp_property_types_variables.globals, function(index, val){
+    window[index] = val;
+  });
+  delete wpp_property_types_variables.globals;
+
+  window.selected = function(selected, current) {
+    var result = '';
+    current = current || true;
+
+    if ( selected === current )
+      result = " selected='selected' ";
+ 
+    return result;
+  }
+  
+  var wppTerms = Backbone.Model.extend({
+  });
+
+  var wppTermsCollection = Backbone.Collection.extend({
+    model: wppTerms,
+  });
+
+  var wppTermsView = Backbone.View.extend({
+    tagName: 'tr',
+    className: 'wpp_dynamic_table_row',
+    template: _.template($('#settings-developer-terms-template').html()),
+    attributes: function(){
+      return {
+        slug: this.model.get('slug'),
+        'data-property-slug': this.model.get('slug'),
+        new_row: this.model.get('slug') == '' ? true : false,
+        wpp_attribute_group: this.model.get('gslug'),
+        style: typeof this.model.get('group').color != 'undefined' ? 'background-color:' + this.model.get('group').color : '',
+      };
+    },
+    render: function() {
+      this.el.innerHTML = this.template(this.model.toJSON());
+      return this;
+    }
+  });
+
+
+
+  var wppTermsWrapperView = Backbone.View.extend({
+    el: '#wpp_inquiry_property_terms tbody',
+    render: function() {
+      this.collection.each(this.addAttribute.bind(this));
+      return this;
+    },
+    addAttribute: function (model) {
+      var row = new wppTermsView({ model: model });
+      this.el.append(row.render().el);
+    },
+
+  });
+
+
+  var _wppTerms = new wppTermsCollection();
+
+  jQuery.each(config.taxonomies, function(slug, data) {
+
+    var gslug       = '';
+    var group       = '';
+    var rewriteSlug = '';
+
+    if(typeof config.groups[ slug ] != 'undefined'){
+      gslug = config.groups[ slug ];
+      group = typeof wp_properties.property_groups[ gslug ] != 'undefined'  ? wp_properties[ 'property_groups' ][ gslug ] : {};
+    }
+
+    if(typeof wp_properties.searchable_attr_fields[slug] == 'undefined'){
+      wp_properties.searchable_attr_fields[slug] = '';
+    }
+
+    if(typeof data.rewrite == 'undefined' || typeof data.rewrite.slug == 'undefined'){
+      rewriteSlug = slug;
+    }
+    else{
+      rewriteSlug = data.rewrite.slug;
+    }
+
+    var attributes = {
+      slug                              : slug,
+      data                              : data,
+      gslug                             : gslug,
+      group                             : group,
+      rewriteSlug                       : rewriteSlug,
+      wp_properties                     : wp_properties,
+      current_search_input              : wp_properties.searchable_attr_fields[slug],
+    };
+
+    jQuery.extend(attributes, wpp_property_types_variables);
+
+    var row = new wppTerms(attributes);
+    _wppTerms.add(row);
+
+
+  });
+
+  var wrapper = new wppTermsWrapperView({ collection: _wppTerms });
+  jQuery("#wpp_inquiry_property_terms tbody").empty().append(wrapper.render().el);
+
+});
+
+
+</script>
+<script type="text/template" id="settings-developer-terms-template">
+    <tr>
+      <th class='wpp_draggable_handle'>&nbsp;</th>
+      <td>
+        <ul>
+          <li>
+            <input class="slug_setter" type="text" name="wpp_terms[taxonomies][<%= slug %>][label]" value="<%= data.label %>" maxlength='32'/>
+          </li>
+          <li class="wpp_development_advanced_option">
+            <input type="text" class="slug" readonly='readonly' value="<%= slug %>"/>
+
+            <?php if( defined( 'WP_PROPERTY_FIELD_ALIAS' ) && WP_PROPERTY_FIELD_ALIAS ) { ?>
+            <label class="wpp-meta-alias-entry">
+              <input type="text" class="slug wpp_field_alias" name="wpp_settings[field_alias][<%= slug %>]" placeholder="Alias for <%= slug %>" value="<%= filtered_field_alias[slug] %>" />
+            </label>
+            <?php } ?>
+
+          </li>
+          <li class="hide-on-new-row">
+            <a href="<?php echo admin_url( "edit-tags.php?taxonomy={<%= slug %>}&post_type=property" ); ?>"><?php _e( 'Manage Terms', ud_get_wpp_terms()->domain ); ?></a>
+          </li>
+          <li>
+            <span class="wpp_show_advanced"><?php _e( 'Toggle Advanced Settings', ud_get_wpp_terms()->domain ); ?></span>
+          </li>
+        </ul>
+      </td>
+
+      <td>
+        <select class="wpp-terms-type-selector" name="wpp_terms[types][<%= slug %>]">
+          <% jQuery.each(types, function(key, type ){ %>
+            <option value="<%= key %>" <% typeof config.types[slug] != 'undefined'? print(selected(  key, config.types[slug])):'' %> data-desc="<%= type.desc %>" ><%= type.label %></option>
+          <% }); %>
+        </select>
+      </td>
+
+      <td class="wpp_attribute_group_col">
+        <input type="text" class="wpp_attribute_group wpp_taxonomy_group wpp_group" value="<% typeof group.name != 'undefined' ? print(group.name):'' %>"/>
+        <input type="hidden" class="wpp_group_slug" name="wpp_terms[groups][<%= slug %>]" value="<%= gslug %>">
+      </td>
+
+      <td>
+        <ul>
+          <li class="wpp_development_advanced_option">
+            <label><?php _e( 'Rewrite Slug', ud_get_wpp_terms()->domain ); ?> <input type="text" name="wpp_terms[taxonomies][<%= slug %>][rewrite][slug]" value="<%= rewriteSlug %>" maxlength='32'/></label>
+          </li>
+          <% if( search_input) { %>
+          <li class="wpp_development_advanced_option">
+            <label><?php _e( 'Search Input', ud_get_wpp_terms()->domain ); ?></label>
+              <select name="wpp_settings[searchable_attr_fields][<%= slug %>]">
+                <% jQuery.each(search_input, function(k, v ){ %>
+                  <option value="<%= k %>" <%= selected(  k, current_search_input) %>><%= v %></option>
+                <% }); %>
+              </select>
+          </li>
+          <% } %>
+
+          <li class="">
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][public]" <% if( data.public){ %>CHECKED<% } %> value="true"/> <?php _e( 'Public & Searchable', ud_get_wpp_terms()->domain ); ?></label>
+          </li>
+
+          <li class="wpp_development_advanced_option">
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][hierarchical]" <% if( data.hierarchical){ %>CHECKED<% } %> value="true"/> <?php _e( 'Hierarchical', ud_get_wpp_terms()->domain ); ?></label>
+          </li>
+
+          <li class="wpp_development_advanced_option">
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][show_in_nav_menus]" <% if( data.show_in_nav_menus){ %>CHECKED<% } %> value="true"/> <?php _e( 'Show in Nav Menus', ud_get_wpp_terms()->domain ); ?></label>
+          </li>
+
+          <li class="wpp_development_advanced_option">
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][show_tagcloud]" <% if( data.show_tagcloud){ %>CHECKED<% } %> value="true"/> <?php _e( 'Show in Tag Cloud', ud_get_wpp_terms()->domain ); ?></label>
+          </li>
+
+          <li class="wpp_development_advanced_option">
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][show_in_menu]"  <% if( data.show_in_menu){ %>CHECKED<% } %> value="true"/> <?php _e( 'Show in Admin Menu', ud_get_wpp_terms()->domain ); ?></label>
+          </li>
+
+          <li class="wpp_development_advanced_option">
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][add_native_mtbox]" <% if( data.add_native_mtbox){ %>CHECKED<% } %> value="true"/> <?php _e( 'Add native Meta Box', ud_get_wpp_terms()->domain ); ?></label>
+          </li>
+
+          <li class="wpp_development_advanced_option">
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][rich_taxonomy]" <% if( data.rich_taxonomy){ %>CHECKED<% } %> value="true"/> <?php _e( 'Add Term Post', ud_get_wpp_terms()->domain ); ?></label>
+          </li>
+
+          <li class="wpp_development_advanced_option">
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][admin_searchable]" <% if( data.admin_searchable){ %>CHECKED<% } %> value="true" class="wpp-terms-option-admin_searchable"/> <?php _e( 'Admin Searchable', ud_get_wpp_terms()->domain ); ?></label>
+          </li>
+
+        </ul>
+      </td>
+
+      <td>
+        <button class="wpp_delete_row button <% if(data.readonly) print('disabled'); %>" <% if(data.readonly) print('disabled = "disabled"');%>><?php _e( 'Delete', ud_get_wpp_terms()->domain ); ?></button>
+        <input type="hidden" name="wpp_terms[taxonomies][<%= slug %>][default]" value="<%= data.default %>">
+        <input type="hidden" name="wpp_terms[taxonomies][<%= slug %>][readonly]" value="<%= data.readonly %>">
+        <input type="hidden" name="wpp_terms[taxonomies][<%= slug %>][hidden]" value="<%= data.hidden %>">
+      </td>
+    </tr>
+
+</script>

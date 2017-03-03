@@ -167,8 +167,8 @@ class class_agents
    */
   static public function wpp_taxonomies( $taxonomies = array() ) {
 
-    // Add [wpp_agency_agent] taxonomy.
-    $taxonomies['wpp_agency_agent'] = array(
+    // Add [wpp_agent] taxonomy.
+    $taxonomies['wpp_agent'] = array(
       'default' => true,
       'readonly' => true,
       'hidden' => true,
@@ -197,8 +197,8 @@ class class_agents
       'rewrite' => array('slug' => 'agents')
     );
 
-    // Add [wpp_agency_office] taxonomy.
-    $taxonomies['wpp_agency_office'] = array(
+    // Add [wpp_office] taxonomy.
+    $taxonomies['wpp_office'] = array(
       'default' => true,
       'readonly' => true,
       'hidden' => true,
@@ -1043,7 +1043,7 @@ class class_agents
 
     }
 
-    add_menu_page( $label, $label, self::$capability, 'wpp_agency_agents', array('class_agents', 'show_agents'), 'dashicons-admin-home', ( $_wpp_menu_position + 1 ) );
+    add_menu_page( $label, $label, self::$capability, 'wpp_agents', array('class_agents', 'show_agents'), 'dashicons-admin-home', ( $_wpp_menu_position + 1 ) );
   }
 
   /**
