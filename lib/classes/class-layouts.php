@@ -88,6 +88,10 @@ namespace UsabilityDynamics\WPP {
           $value->local = true;
 
           foreach( (array) $value->tags as $_tag ) {
+
+            // Create array if it does not exist.
+            $layouts[ $_tag->tag ] = isset( $layouts[ $_tag->tag ] ) && is_array( $layouts[ $_tag->tag ] ) ? $layouts[ $_tag->tag ] : array();
+
             $value->local = true;
             $value->_id = isset( $value->_id ) ? $value->_id : sanitize_title( $value->title );
 
