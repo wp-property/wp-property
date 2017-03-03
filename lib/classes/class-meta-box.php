@@ -27,11 +27,11 @@ namespace UsabilityDynamics\WPP {
         // Stop here if Meta Box class doesn't exist
         if( !class_exists( '\RW_Meta_Box' ) ) {
           //die(dirname(  __DIR__ , 2) . '/vendor/plugins/meta-box/meta-box.php');
-          include_once(dirname(  __DIR__ , 2) . '/vendor/plugins/meta-box/meta-box.php');
-          include_once(dirname(  __DIR__ , 2) . '/vendor/plugins/meta-box-conditional-logic/meta-box-conditional-logic.php');
-          include_once(dirname(  __DIR__ , 2) . '/vendor/plugins/meta-box-show-hide/meta-box-show-hide.php');
-          include_once(dirname(  __DIR__ , 2) . '/vendor/plugins/meta-box-group/meta-box-group.php');
-          include_once(dirname(  __DIR__ , 2) . '/vendor/plugins/meta-box-tabs/meta-box-tabs.php');
+          include_once(dirname(dirname(  __DIR__)) . '/vendor/plugins/meta-box/meta-box.php');
+          include_once(dirname(dirname(  __DIR__)) . '/vendor/plugins/meta-box-conditional-logic/meta-box-conditional-logic.php');
+          include_once(dirname(dirname(  __DIR__)). '/vendor/plugins/meta-box-show-hide/meta-box-show-hide.php');
+          include_once(dirname(dirname(  __DIR__)) . '/vendor/plugins/meta-box-group/meta-box-group.php');
+          include_once(dirname(dirname(  __DIR__)) . '/vendor/plugins/meta-box-tabs/meta-box-tabs.php');
         }
 
         add_action( 'init', array( $this, 'load_files' ), 1 );
