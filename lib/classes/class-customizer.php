@@ -131,14 +131,16 @@ namespace UsabilityDynamics\WPP {
 
           $post_url = get_permalink($post_id);
 
-          // store first property url
-          $data['settings']['configuration']['base_property_single_url'] = $post_url;
+          $data['_customizer'] = isset( $data['_customizer'] ) && is_array( $data['_customizer'] ) ? $data['_customizer'] : array();
 
           // store first property url
-          $data['settings']['configuration']['base_property_term_url'] = home_url( '/listings' . get_term_meta( $_popular_listing_category_terms[0]->term_id, 'listing-category-url_path', true ));
+          $data['_customizer']['base_property_single_url'] = $post_url;
+
+          // store first property url
+          $data['_customizer']['base_property_term_url'] = home_url( '/listings' . get_term_meta( $_popular_listing_category_terms[0]->term_id, 'listing-category-url_path', true ));
 
           // get home url. This could/should be improved.
-          $data['settings']['configuration']['base_property_url'] = home_url($wp_properties['configuration']['base_slug']);
+          $data['_customizer']['base_property_url'] = home_url($wp_properties['configuration']['base_slug']);
 
         }
 

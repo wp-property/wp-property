@@ -6,9 +6,9 @@
  */
 jQuery(document).ready(function () {
 
-  var propertyOverviewUrl = wpp.instance.settings.configuration.base_property_url;
-  var propertySingleUrl = wpp.instance.settings.configuration.base_property_single_url;
-  var base_property_term_url = wpp.instance.settings.configuration.base_property_term_url;
+  var propertyOverviewUrl = wpp.instance._customizer.base_property_url;
+  var propertySingleUrl = wpp.instance._customizer.base_property_single_url;
+  var base_property_term_url = wpp.instance._customizer.base_property_term_url;
 
   jQuery('#accordion-section-layouts_property_overview_settings h3').on('click', function () {
     wp.customize.previewer.previewUrl(propertyOverviewUrl);

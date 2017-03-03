@@ -3394,7 +3394,9 @@ class WPP_F extends UsabilityDynamics\Utility
           }
         }
       }
+
       update_option('wpp_settings', $wpp_settings);
+
       do_action('wpp::save_settings', $data);
       /* Remove all WordPress cache items. */
       if (function_exists('wp_cache_flush')) {
@@ -3402,6 +3404,7 @@ class WPP_F extends UsabilityDynamics\Utility
       }
       /* Flush WPP cache */
       WPP_F::clear_cache();
+
     } catch (Exception $e) {
       $return['success'] = false;
       $return['message'] = $e->getMessage();
