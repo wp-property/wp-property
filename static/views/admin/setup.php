@@ -33,8 +33,8 @@ $_standard = UsabilityDynamics\WPP\Setup_Assistant::get_standard_data();
             <li class="wpp_asst_label">
 
               <label>
-                <span><?php echo $_type->label; ?></span>
-                <input type="checkbox" class="wpp_box asst_prop_types" name="wpp_settings[property_types][<?php echo $_type->slug; ?>]" value="<?php echo $_type->label; ?>" <?php if( isset( $wp_properties[ 'property_types' ] ) && in_array( $_type->slug, array_keys( $wp_properties[ 'property_types' ] ) ) ) echo "checked"; ?> />
+                <span><?php echo $_type->displayTitle; ?></span>
+                <input type="checkbox" class="wpp_box asst_prop_types" name="wpp_settings[property_types][<?php echo $_type->slug; ?>]" value="<?php echo $_type->displayTitle; ?>" <?php if( isset( $wp_properties[ 'property_types' ] ) && in_array( $_type->slug, array_keys( $wp_properties[ 'property_types' ] ) ) ) echo "checked"; ?> />
                 <span></span>
               </label>
             </li>
