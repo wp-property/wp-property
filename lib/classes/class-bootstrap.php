@@ -78,12 +78,6 @@ namespace UsabilityDynamics\WPP {
           define('WPP_TERMS_VENDOR_LOAD', true);
         }
 
-        // Enable RETS Client
-        //if( defined( 'RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET' ) && RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET && !defined( 'WP_RETS_CLIENT_VENDOR_LOAD' )) {
-        if (!defined('WP_RETS_CLIENT_VENDOR_LOAD')) {
-          define('WP_RETS_CLIENT_VENDOR_LOAD', true);
-        }
-
       }
 
       /**
