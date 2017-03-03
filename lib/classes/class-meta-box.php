@@ -30,6 +30,8 @@ namespace UsabilityDynamics\WPP {
           include_once(dirname(  __DIR__ , 2) . '/vendor/plugins/meta-box/meta-box.php');
           include_once(dirname(  __DIR__ , 2) . '/vendor/plugins/meta-box-conditional-logic/meta-box-conditional-logic.php');
           include_once(dirname(  __DIR__ , 2) . '/vendor/plugins/meta-box-show-hide/meta-box-show-hide.php');
+          include_once(dirname(  __DIR__ , 2) . '/vendor/plugins/meta-box-group/meta-box-group.php');
+          include_once(dirname(  __DIR__ , 2) . '/vendor/plugins/meta-box-tabs/meta-box-tabs.php');
         }
 
         add_action( 'init', array( $this, 'load_files' ), 1 );
@@ -159,7 +161,7 @@ namespace UsabilityDynamics\WPP {
 
         /* Register 'General Information' metabox for Edit Property page */
         $meta_box = $this->get_property_meta_box( array(
-          'name' => __( 'General', ud_get_wp_property()->domain ),
+          'name' => __( 'General', ud_get_wp_property()->domain )
         ), $post );
 
         $groups = ud_get_wp_property( 'property_groups', array() );
@@ -168,6 +170,20 @@ namespace UsabilityDynamics\WPP {
         if( $meta_box ) {
           $_meta_boxes[] = $meta_box;
         }
+
+
+        //$_meta_boxes[] =  $fields[] = $this->get_rooms_field( $post );
+
+        $_meta_boxes[] = array(
+          'id' => 'wpp_rooms',
+          'title' => "Rooms",
+          'pages' => array( 'property' ),
+          'context' => 'normal',
+          'priority' => 'high',
+          'fields' => array(
+            $this->get_rooms_field( $post )
+          )
+        );
 
         /* Register Meta Box for every Attributes Group separately */
         if ( !empty( $groups) && !empty( $property_stats_groups ) ) {
@@ -178,6 +194,9 @@ namespace UsabilityDynamics\WPP {
             }
           }
         }
+
+
+        //die( '<pre>' . print_r( $_meta_boxes, true ) . '</pre>' );
 
         /**
          * Allow to customize our meta boxes via external add-ons ( modules, or whatever else ).
@@ -276,7 +295,6 @@ namespace UsabilityDynamics\WPP {
 
         $fields = array();
 
-
         /**
          * Get all data we need to operate with.
          */
@@ -344,6 +362,9 @@ namespace UsabilityDynamics\WPP {
           }
 
           // @todo Add to own group.
+          $fields[] = array( 'type' => 'heading', 'name' => 'Content' );
+          $fields[] = $this->get_editor_field( $post );
+          $fields[] = array( 'type' => 'heading', 'name' => 'Media' );
           $fields[] = $this->get_media_field( $post );
 
           /* May be add Meta fields */
@@ -359,6 +380,7 @@ namespace UsabilityDynamics\WPP {
           }
 
         }
+
 
         /**
          * Loop through all available attributes and determine if any of them must be added to current meta box.
@@ -544,7 +566,9 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Parent Property Selection
        *
+       * @return array
        */
       public function get_parent_property_field( ) {
 
@@ -564,6 +588,97 @@ namespace UsabilityDynamics\WPP {
         return $field;
       }
 
+      /**
+       * Repeatable Rooms Field
+       *
+       * @author potanin@UD
+       * @param $post
+       * @return array
+       */
+      public function get_rooms_field( $post ) {
+
+        return array(
+          'id'     => 'wpp_rooms',
+          'type'   => 'group',
+          'clone'  => true,
+          'sort_clone' => true,
+          'fields' => array(
+            array(
+              'name'    => __( 'Type', 'rwmb' ),
+              'id'      => 'room_type',
+              'type'    => 'select_advanced',
+              'options' => array(
+                'utility'  => __( 'Utility', 'rwmb' ),
+                'master-bedroom'  => __( 'Master Bedroom', 'rwmb' ),
+                'bedroom'  => __( 'Bedroom', 'rwmb' ),
+                'office' => __( 'Office', 'rwmb' ),
+                'basement' => __( 'Basement', 'rwmb' ),
+                'dining' => __( 'Dining', 'rwmb' ),
+                'kitchen' => __( 'Kitchen', 'rwmb' ),
+              ),
+            ),
+            array(
+              'name' => __( 'Level', 'rwmb' ),
+              'id'   => 'level',
+              'type' => 'text',
+            ),
+            array(
+              'name' => __( 'Description', 'rwmb' ),
+              'id'   => 'description',
+              'type' => 'text',
+            ),
+            array(
+              'name' => __( 'Dimensions', 'rwmb' ),
+              'id'   => 'text',
+              'type' => 'text'
+            ),
+            array(
+              'name' => __( 'Detail', 'rwmb' ),
+              'id'   => 'key_value',
+              'type' => 'key_value',
+            ),
+            array(
+              'name'  => __( 'Image', 'rw_' ),
+              'id'    => "room_image",
+              'type'  => 'image_advanced',
+              'max_file_uploads' => 1,
+            ),
+          ),
+        );
+
+      }
+
+      /**
+       * Editor Field.
+       *
+       * @todo Make save/udpate post_content.
+       *
+       * @param $post
+       * @return array
+       */
+      public function get_editor_field( $post ) {
+
+        return array(
+          'id'     => 'wpp_description',
+          'type' => 'wysiwyg',
+          'options' => array(
+            'teeny' => true,
+            'tinymce' => true,
+            'quicktags' => false,
+            'media_buttons' => false,
+            'drag_drop_upload' => false,
+          )
+        );
+
+
+      }
+
+      /**
+       * Media View/Upload
+       *
+       * @param $post
+       * @return array
+       */
       public function get_media_field( $post ) {
 
         $_attached = array_keys( get_attached_media( 'image', $post->ID ) );

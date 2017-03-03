@@ -88,6 +88,7 @@ return array(
     'RWMB_Wpp_Inherited_Image_Advanced_Field' => $baseDir . '/lib/classes/fields/class-wpp-inherited-image-advanced.php',
     'RWMB_Wpp_Parent_Field' => $baseDir . '/lib/classes/fields/class-wpp-parent.php',
     'RWMB_Wpp_Property_Type_Field' => $baseDir . '/lib/classes/fields/class-wpp-property-type.php',
+    'RWMB_Wpp_Readonly_Field' => $baseDir . '/lib/classes/fields/class-wpp-readonly.php',
     'UsabilityDynamics\\CFTPB\\Loader' => $baseDir . '/vendor/plugins/wp-tax-post-binding/lib/class-loader.php',
     'UsabilityDynamics\\Job' => $vendorDir . '/usabilitydynamics/lib-utility/lib/class-job.php',
     'UsabilityDynamics\\Loader' => $vendorDir . '/usabilitydynamics/lib-utility/lib/class-loader.php',

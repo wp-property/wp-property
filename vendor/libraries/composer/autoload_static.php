@@ -7,8 +7,6 @@ namespace Composer\Autoload;
 class ComposerStaticInitc70b399bfa5b46d2002bda3c97ecef5d
 {
     public static $files = array (
-        '90e77fd57b3ada1d71a5a74923356b5f' => __DIR__ . '/../../..' . '/vendor/plugins/wp-meta-box-utilities/wp-meta-box-utilities.php',
-        '8a7957f8f2f99393c431a5d1f28ff7aa' => __DIR__ . '/../../..' . '/vendor/plugins/wp-gallery-metabox/loader.php',
         'aa33d7d08765e2232d2271599fc1e7eb' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/loader.php',
     );
 
@@ -119,6 +117,7 @@ class ComposerStaticInitc70b399bfa5b46d2002bda3c97ecef5d
         'RWMB_Wpp_Inherited_Image_Advanced_Field' => __DIR__ . '/../../..' . '/lib/classes/fields/class-wpp-inherited-image-advanced.php',
         'RWMB_Wpp_Parent_Field' => __DIR__ . '/../../..' . '/lib/classes/fields/class-wpp-parent.php',
         'RWMB_Wpp_Property_Type_Field' => __DIR__ . '/../../..' . '/lib/classes/fields/class-wpp-property-type.php',
+        'RWMB_Wpp_Readonly_Field' => __DIR__ . '/../../..' . '/lib/classes/fields/class-wpp-readonly.php',
         'UsabilityDynamics\\CFTPB\\Loader' => __DIR__ . '/../../..' . '/vendor/plugins/wp-tax-post-binding/lib/class-loader.php',
         'UsabilityDynamics\\Job' => __DIR__ . '/..' . '/usabilitydynamics/lib-utility/lib/class-job.php',
         'UsabilityDynamics\\Loader' => __DIR__ . '/..' . '/usabilitydynamics/lib-utility/lib/class-loader.php',
