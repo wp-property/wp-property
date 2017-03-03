@@ -278,10 +278,87 @@ body,
       }
     }
     /* View results */
+  }
+  /* WP Property overview shortcode */
 
+  /* WP Property overview shortcode V2 */
+  .wpp_pagination_slider_status {
+    line-height: 4em;
+    .clearfix;
+
+    .wpp_property_results {
+      float: left;
+      font-size: 20px;
+    }
+    .wpp_sorter_options {
+      float: right;
+      .wpp_sort_by_text {
+        font-size: 16px;
+      }
+      .wpp_sortable_link {
+        background-color: #145fc8;
+        color: #fff;
+        cursor: pointer;
+        padding: 1em 2em;
+      }
+    }
   }
 
-  /* WP Property overview shortcode */
+  .wpp_property_overview_shortcode_v2 {
+
+    .wpp_property_view_result {
+
+      .all-properties {
+        margin: 0 -1em;
+
+        .property_div {
+          box-sizing: border-box;
+          display: block;
+          float: left;
+          margin: 0;
+          padding: 0 1em 2em;
+          vertical-align: top;
+          width: 33.333%;
+          .property_div_box {
+            border: 1px solid #e3e3e3;
+
+            .wpp_overview_top_side {
+              width: 100%;
+              height: auto;
+
+              .property_image {
+
+                a {
+
+                  img {
+                    width: 100% !important;
+                    height: auto;
+                  }
+                }
+              }
+            }
+            .wpp_overview_bottom_side {
+              padding: 1.5em 2em;
+
+              .wpp_overview_data {
+                margin: 0 !important;
+                padding: 0 !important;
+                list-style: none !important;
+
+                li {
+                  &.property_title {
+                    font-size: 16px;
+                  }
+                }
+              }
+            }
+          }
+        }
+        /* property_div  */
+      }
+    }
+  }
+  /* WP Property overview shortcode V2 */
 
   /* WP Property search widget */
   .wpp_search_properties_widget {
@@ -346,19 +423,37 @@ body,
         .wpp_google_maps_left_col {
           border: none;
           padding: 0;
-          max-width: 200px;
-          a {
+          max-width: 150px;
+          vertical-align: top;
+          a.thumbnail {
             font-size: 14px;
             img {
               max-width: 100%;
             }
           }
+          .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link {
+            margin-top: 1em;
+            a.btn {
+              background-color: #145fc8;
+              color: #fff;
+              cursor: pointer;
+              display: block;
+              font-size: 14px;
+              padding: 1em 0;
+              text-align: center;
+            }
+          }
         }
+
         .wpp_google_maps_right_col {
           border: none;
           padding: 0 0 0 10px;
-          a {
-            font-size: 14px;
+          min-width: 200px;
+          .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link {
+            display: none;
+            a {
+              font-size: 14px;
+            }
           }
           .wpp_google_maps_infobox {
             margin: 0;

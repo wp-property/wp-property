@@ -591,3 +591,18 @@
   };
 
 })(jQuery, _wpp_overview_pagination);
+
+jQuery(window).load(function(){
+  var property = jQuery('body .wpp_property_overview_shortcode_v2 .wpp_property_view_result');
+  property.each(function(key, value) {
+    var height = 0,
+      columns = jQuery('.all-properties .property .property_div_box', jQuery(value));
+    columns.each(function(key1, value1) {
+      var currentHeight = jQuery(value1).outerHeight();
+      if (currentHeight > height) {
+        height = currentHeight;
+      }
+    });
+    columns.height(height);
+  });
+});
