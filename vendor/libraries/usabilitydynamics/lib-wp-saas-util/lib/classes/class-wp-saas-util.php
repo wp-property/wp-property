@@ -5,8 +5,6 @@
  */
 namespace UsabilityDynamics\SAAS_UTIL {
 
-  use Monolog\ErrorHandler;
-
   if( !class_exists( 'UsabilityDynamics\SAAS_UTIL\Register' ) ) {
 
     class Register {
@@ -17,7 +15,6 @@ namespace UsabilityDynamics\SAAS_UTIL {
        * @protected
        * @static
        * @property $instance
-       * @type \UsabilityDynamics\WPP\Bootstrap object
        */
       protected static $instance = null;
 
@@ -54,7 +51,7 @@ namespace UsabilityDynamics\SAAS_UTIL {
        * Registration API Url.
        *
        * Can be overwritten using UD_API_REGISTER_URL constant.
-       * 
+       *
        * @var null
        */
       protected $_api_url = null;
@@ -104,24 +101,24 @@ namespace UsabilityDynamics\SAAS_UTIL {
         update_site_option( 'ud_site_secret_token', $this->secret_token = md5( wp_generate_password( 20 ) ) );
 
         $args = array(
-            'method' => 'POST',
-            'timeout' => 10,
-            'redirection' => 5,
-            'httpversion' => '1.0',
-            //'headers' => array(),
-            'body' => array(
-              'timestamp' => time(),
-              'host' => str_replace( array( 'http://', 'https://' ), '', is_multisite() ? network_site_url() : get_site_url() ),
-              'ud_site_secret_token' => $this->secret_token,
-              'ud_site_public_key' => $this->public_key,
-              'ud_site_id' => $this->site_id,
-              'db_hash' => md5( defined( 'DB_NAME' ) ? DB_NAME : null ) . '-' . md5( isset( $wpdb->prefix ) ? $wpdb->prefix : null),
-              'deployment_hash' => md5( is_multisite() ? network_site_url() : get_site_url() ) . '-' . md5( defined( 'DB_NAME' ) ? DB_NAME : null ) . '-' . md5( isset( $wpdb->prefix ) ? $wpdb->prefix : null),
-              'home_url' => is_multisite() ? network_site_url() : get_site_url(),
-              'xmlrpc_url' => site_url( '/xmlrpc.php' ),
-              'rest_url' => site_url( function_exists( 'rest_get_url_prefix' ) ? rest_get_url_prefix() : null ),
-              'multisite' => is_multisite()
-            )
+          'method' => 'POST',
+          'timeout' => 10,
+          'redirection' => 5,
+          'httpversion' => '1.0',
+          //'headers' => array(),
+          'body' => array(
+            'timestamp' => time(),
+            'host' => str_replace( array( 'http://', 'https://' ), '', is_multisite() ? network_site_url() : get_site_url() ),
+            'ud_site_secret_token' => $this->secret_token,
+            'ud_site_public_key' => $this->public_key,
+            'ud_site_id' => $this->site_id,
+            'db_hash' => md5( defined( 'DB_NAME' ) ? DB_NAME : null ) . '-' . md5( isset( $wpdb->prefix ) ? $wpdb->prefix : null),
+            'deployment_hash' => md5( is_multisite() ? network_site_url() : get_site_url() ) . '-' . md5( defined( 'DB_NAME' ) ? DB_NAME : null ) . '-' . md5( isset( $wpdb->prefix ) ? $wpdb->prefix : null),
+            'home_url' => is_multisite() ? network_site_url() : get_site_url(),
+            'xmlrpc_url' => site_url( '/xmlrpc.php' ),
+            'rest_url' => site_url( function_exists( 'rest_get_url_prefix' ) ? rest_get_url_prefix() : null ),
+            'multisite' => is_multisite()
+          )
         );
 
         $response = wp_remote_post( $this->_api_url . "/site/register/v1", $args );
@@ -208,7 +205,6 @@ namespace UsabilityDynamics\SAAS_UTIL {
           'body' => array(
             'timestamp' => time(),
             'ud_site_secret_token' => $this->secret_token,
-            'ud_site_public_key' => $this->public_key,
             'ud_site_id' => $this->site_id,
             'blog_id' => get_current_blog_id(),
             'user_id' => get_current_user_id(),
@@ -307,9 +303,7 @@ namespace UsabilityDynamics\SAAS_UTIL {
           'httpversion' => '1.0',
           //'headers' => array(),
           'body' => array(
-            'timestamp' => time(),
             'ud_site_secret_token' => $instance->secret_token,
-            'ud_site_public_key' => $instance->public_key,
             'ud_site_id' => $instance->site_id,
             'blog_id' => get_current_blog_id(),
           )
@@ -328,7 +322,8 @@ namespace UsabilityDynamics\SAAS_UTIL {
         }
 
         if ( !$data ) {
-          $data = is_wp_error( $response ) ? $response : ( new \WP_Error( 'fail', 'Failed getting available Subscriptions' ) );
+          $message = ( !empty( $api_body ) && !empty( $api_body['message'] ) ) ? (string)$api_body['message'] : "Failed getting available Subscriptions";
+          $data = is_wp_error( $response ) ? $response : ( new \WP_Error( 'fail', $message ) );
         }
 
         return $data;
@@ -341,7 +336,7 @@ namespace UsabilityDynamics\SAAS_UTIL {
        * @param $product SaaS Product ID
        * @return array
        */
-      public static function get_current_subscription( $product ) {
+      public static function get_current_subscriptions( $product ) {
 
         $instance = self::get_instance();
 
@@ -354,9 +349,7 @@ namespace UsabilityDynamics\SAAS_UTIL {
           'httpversion' => '1.0',
           //'headers' => array(),
           'body' => array(
-            'timestamp' => time(),
             'ud_site_secret_token' => $instance->secret_token,
-            'ud_site_public_key' => $instance->public_key,
             'ud_site_id' => $instance->site_id,
             'blog_id' => get_current_blog_id()
           )
@@ -375,7 +368,8 @@ namespace UsabilityDynamics\SAAS_UTIL {
         }
 
         if ( !$data ) {
-          $data = is_wp_error( $response ) ? $response : ( new \WP_Error( 'fail', 'Failed getting current Subscriptions' ) );
+          $message = ( !empty( $api_body ) && !empty( $api_body['message'] ) ) ? (string)$api_body['message'] : "Failed getting current active Subscriptions";
+          $data = is_wp_error( $response ) ? $response : ( new \WP_Error( 'fail', $message ) );
         }
 
         return $data;
@@ -402,9 +396,7 @@ namespace UsabilityDynamics\SAAS_UTIL {
           'httpversion' => '1.0',
           //'headers' => array(),
           'body' => array(
-            'timestamp' => time(),
             'ud_site_secret_token' => $instance->secret_token,
-            'ud_site_public_key' => $instance->public_key,
             'ud_site_id' => $instance->site_id,
             'blog_id' => get_current_blog_id(),
             'subscription_id' => $subscription
@@ -424,7 +416,8 @@ namespace UsabilityDynamics\SAAS_UTIL {
         }
 
         if ( !$data ) {
-          $data = is_wp_error( $response ) ? $response : ( new \WP_Error( 'fail', 'Failed adding Subscription' ) );
+          $message = ( !empty( $api_body ) && !empty( $api_body['message'] ) ) ? (string)$api_body['message'] : "Failed adding Subscription";
+          $data = is_wp_error( $response ) ? $response : ( new \WP_Error( 'fail', $message ) );
         }
 
         return $data;
@@ -452,9 +445,7 @@ namespace UsabilityDynamics\SAAS_UTIL {
           'httpversion' => '1.0',
           //'headers' => array(),
           'body' => array(
-            'timestamp' => time(),
             'ud_site_secret_token' => $instance->secret_token,
-            'ud_site_public_key' => $instance->public_key,
             'ud_site_id' => $instance->site_id,
             'blog_id' => get_current_blog_id(),
             'subscription_id' => $subscription
@@ -474,7 +465,8 @@ namespace UsabilityDynamics\SAAS_UTIL {
         }
 
         if ( !$data ) {
-          $data = is_wp_error( $response ) ? $response : ( new \WP_Error( 'fail', 'Failed removing Subscription' ) );
+          $message = ( !empty( $api_body ) && !empty( $api_body['message'] ) ) ? (string)$api_body['message'] : "Failed removing Subscription";
+          $data = is_wp_error( $response ) ? $response : ( new \WP_Error( 'fail', $message ) );
         }
 
         return $data;
@@ -482,17 +474,152 @@ namespace UsabilityDynamics\SAAS_UTIL {
       }
 
       /**
-       * @param $product
+       * Returns Billing Information for particular Blog based on Product
+       *
+       * @param $product SaaS Product ID
+       * @return array
        */
-      public static function get_billing( $product, $data ) {
+      public static function get_billing( $product ) {
+        $instance = self::get_instance();
 
+        $data = null;
+
+        $args = array(
+          'method' => 'POST',
+          'timeout' => 10,
+          'redirection' => 5,
+          'httpversion' => '1.0',
+          //'headers' => array(),
+          'body' => array(
+            'ud_site_secret_token' => $instance->secret_token,
+            'ud_site_id' => $instance->site_id,
+            'blog_id' => get_current_blog_id()
+          )
+        );
+
+        $response = wp_remote_post( $instance->_api_url . "/" . $product . "/billing/get/v1", $args );
+
+        if( wp_remote_retrieve_response_code( $response ) === 200 && !is_wp_error( $response ) ) {
+
+          $api_body = json_decode( wp_remote_retrieve_body( $response ), true );
+
+          if( isset( $api_body ) && $api_body['ok'] && !empty( $api_body['data'] ) ) {
+            $data = $api_body['data'];
+          }
+
+        }
+
+        if ( !$data ) {
+          $message = ( !empty( $api_body ) && !empty( $api_body['message'] ) ) ? (string)$api_body['message'] : "Failed retrieving Billing Information";
+          $data = is_wp_error( $response ) ? $response : ( new \WP_Error( 'fail', $message ) );
+        }
+
+        return $data;
       }
 
       /**
+       * Add/Updates Billing Information
+       *
        * @param $product
+       * @param $card
+       * @return array
        */
-      public static function update_billing( $product, $data ) {
+      public static function update_billing( $product, $card ) {
+        $instance = self::get_instance();
 
+        $data = null;
+
+        $card = wp_parse_args( $card, array(
+          // Required
+          "number" => null, // string
+          "exp_month" => null, // integer
+          "exp_year" => null, // integer
+          // Optional
+          "address_city" => null, // string
+          "address_country" => null, // string
+          "address_line1" => null, // string
+          "address_line2" => null, // string
+          "address_state" => null, // string
+          "address_zip" => null, // string
+        ) );
+
+        $args = array(
+          'method' => 'POST',
+          'timeout' => 10,
+          'redirection' => 5,
+          'httpversion' => '1.0',
+          //'headers' => array(),
+          'body' => array(
+            'ud_site_secret_token' => $instance->secret_token,
+            'ud_site_id' => $instance->site_id,
+            'blog_id' => get_current_blog_id(),
+            'card' => $card
+          )
+        );
+
+        $response = wp_remote_post( $instance->_api_url . "/" . $product . "/billing/update/v1", $args );
+
+        if( wp_remote_retrieve_response_code( $response ) === 200 && !is_wp_error( $response ) ) {
+
+          $api_body = json_decode( wp_remote_retrieve_body( $response ), true );
+
+          if( isset( $api_body ) && $api_body['ok'] && !empty( $api_body['data'] ) ) {
+            $data = $api_body['data'];
+          }
+
+        }
+
+        if ( !$data ) {
+          $message = ( !empty( $api_body ) && !empty( $api_body['message'] ) ) ? (string)$api_body['message'] : "Failed updating Billing Information";
+          $data = is_wp_error( $response ) ? $response : ( new \WP_Error( 'fail', $message ) );
+        }
+
+        return $data;
+      }
+
+      /**
+       * Removes Billing Information
+       * Resets all subscriptions to basic (free) ones.
+       *
+       * @param $product
+       * @return array
+       */
+      public static function delete_billing( $product ) {
+        $instance = self::get_instance();
+
+        $data = null;
+
+        $args = array(
+          'method' => 'POST',
+          'timeout' => 10,
+          'redirection' => 5,
+          'httpversion' => '1.0',
+          //'headers' => array(),
+          'body' => array(
+            'ud_site_secret_token' => $instance->secret_token,
+            'ud_site_id' => $instance->site_id,
+            'blog_id' => get_current_blog_id()
+          )
+        );
+
+        $response = wp_remote_post( $instance->_api_url . "/" . $product . "/billing/delete/v1", $args );
+
+        if( wp_remote_retrieve_response_code( $response ) === 200 && !is_wp_error( $response ) ) {
+
+          $api_body = json_decode( wp_remote_retrieve_body( $response ), true );
+
+          if( isset( $api_body ) && $api_body['ok'] && !empty( $api_body['data'] ) ) {
+            $data = $api_body['data'];
+          }
+
+        }
+
+        if ( !$data ) {
+          $message = ( !empty( $api_body ) && !empty( $api_body['message'] ) ) ? (string)$api_body['message'] : "Failed removing Billing Information";
+          $data = is_wp_error( $response ) ? $response : ( new \WP_Error( 'fail', $message ) );
+        }
+
+        return $data;
       }
 
       /**

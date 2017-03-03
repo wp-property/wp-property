@@ -1,7 +1,7 @@
 {
   "name": "usabilitydynamics/lib-wp-saas-util",
   "type": "library",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Saas utils.",
   "require": {},
   "repositories": [
