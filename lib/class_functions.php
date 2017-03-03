@@ -1864,7 +1864,9 @@ class WPP_F extends UsabilityDynamics\Utility
   {
     global $wp_properties;
 
-    $content = trim($content);
+    if( is_string( $content ) ) {
+      $content = trim($content);
+    }
 
     $dec_point = (!empty($wp_properties['configuration']['dec_point']) ? $wp_properties['configuration']['dec_point'] : ".");
     $thousands_sep = (!empty($wp_properties['configuration']['thousands_sep']) ? $wp_properties['configuration']['thousands_sep'] : ",");

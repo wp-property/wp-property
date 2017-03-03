@@ -281,9 +281,9 @@ namespace UsabilityDynamics\WPP {
         $layouts = get_option('wpp_available_layouts', false);
         $local_layouts = get_option('wpp_available_local_layouts', false);
 
-        $overview_layouts = $layouts['property-overview'] ? $layouts['property-overview'] : array();
-        $single_layouts = $layouts['single-property'] ? $layouts['single-property'] : array();
-        $term_layouts = $layouts['term-overview'] ? $layouts['term-overview'] : array();
+        $overview_layouts = isset( $layouts['property-overview'] ) ? $layouts['property-overview'] : array();
+        $single_layouts = isset( $layouts['single-property'] ) ? $layouts['single-property'] : array();
+        $term_layouts = isset( $layouts['term-overview'] ) ? $layouts['term-overview'] : array();
 
         // Add local layouts to overview, term and single layouts.
         if (!empty($local_layouts)) {
@@ -319,7 +319,7 @@ namespace UsabilityDynamics\WPP {
         if (!empty($single_layouts)) {
           foreach ($single_layouts as $layout) {
 
-            if( !$layout->screenshot && !$layout->local ) {
+            if( !$layout->screenshot && !isset( $layout->local )) {
               continue;
             }
 
@@ -341,7 +341,7 @@ namespace UsabilityDynamics\WPP {
         if (!empty($term_layouts)) {
           foreach ($term_layouts as $layout) {
 
-            if( !$layout->screenshot && !$layout->local ) {
+            if( !$layout->screenshot && !isset( $layout->local )) {
               continue;
             }
 
@@ -363,7 +363,7 @@ namespace UsabilityDynamics\WPP {
         if (!empty($overview_layouts)) {
           foreach ($overview_layouts as $layout) {
 
-            if( !$layout->screenshot && !$layout->local ) {
+            if( !$layout->screenshot && !isset( $layout->local )) {
               continue;
             }
 
@@ -434,6 +434,16 @@ namespace UsabilityDynamics\WPP {
           'transport' => 'refresh'
         ));
 
+        $wp_customize->add_setting('layouts_property_single_select', array(
+          'default' => 'single.php',
+          'transport' => 'refresh'
+        ));
+
+        $wp_customize->add_setting('layouts_property_single_choice', array(
+          'default' => $first_single_layout,
+          'transport' => 'refresh'
+        ));
+
         $wp_customize->add_control('layouts_property_overview_select', array(
           'label' => __('Select template for Property Overview page', ud_get_wp_property()->domain),
           'section' => 'layouts_property_overview_settings',
@@ -446,11 +456,6 @@ namespace UsabilityDynamics\WPP {
           'section' => 'layouts_property_term_settings',
           'type' => 'select',
           'choices' => $templates_names
-        ));
-
-        $wp_customize->add_setting('layouts_property_single_choice', array(
-          'default' => $first_single_layout,
-          'transport' => 'refresh'
         ));
 
         $wp_customize->add_control(new Layouts_Custom_Control($wp_customize, 'layouts_property_overview_choice', array(
@@ -473,11 +478,6 @@ namespace UsabilityDynamics\WPP {
           'type' => 'radio',
           'choices' => $single_radio_choices
         )));
-
-        $wp_customize->add_setting('layouts_property_single_select', array(
-          'default' => 'single.php',
-          'transport' => 'refresh'
-        ));
 
         $wp_customize->add_control('layouts_property_single_select', array(
           'label' => __('Select template for Single Property page', ud_get_wp_property()->domain),
