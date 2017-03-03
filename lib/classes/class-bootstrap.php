@@ -35,8 +35,6 @@ namespace UsabilityDynamics\WPP {
 
       public $elastic = null;
 
-      private $register;
-
       /**
        * Handle some stuff very early
        *
@@ -146,11 +144,17 @@ namespace UsabilityDynamics\WPP {
           )
         ));
 
-        // Register site with SaaS Services.
-        //$this->register = class_exists( 'UsabilityDynamics\SAAS_UTIL\Register' ) ? new Register( 'property' ) : null;
-
-        // $this->register->register_blog();
-        // $this->register->create_subscription();
+        // Register Product with SaaS Services.
+        if( class_exists( 'UsabilityDynamics\SAAS_UTIL\Register' ) && $this->get_schema( "extra.saasProduct", false ) ) {
+          Register::product( $this->get_schema( "extra.saasProduct" ), array(
+            "name" => $this->name,
+            "slug" => $this->slug,
+            "version" => $this->args[ "version" ],
+            "type" => "plugin",
+            // Commented for now since it may contain too big data
+            //"wpp_settings" => $this->settings->get()
+          ) );
+        }
 
         //** Initiate Attributes Handler */
         new Attributes();

@@ -39,6 +39,7 @@
     ]
   },
   "extra": {
+    "saasProduct": "prod_ADfpGniA1kxNep",
     "schemas": {
       "dependencies" : {
         "modules": {},

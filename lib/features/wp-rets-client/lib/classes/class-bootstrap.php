@@ -49,7 +49,15 @@ namespace UsabilityDynamics\WPRETSC {
         new Media();
 
         // Register site with SaaS Services.
-        $this->register = class_exists( 'UsabilityDynamics\SAAS_UTIL\Register' ) ? new Register( 'property' ) : null;
+        // Register Product with SaaS Services.
+        if( class_exists( 'UsabilityDynamics\SAAS_UTIL\Register' ) && $this->get_schema( "extra.saasProduct", false ) ) {
+          Register::product( $this->get_schema( "extra.saasProduct" ), array(
+            "name" => $this->name,
+            "slug" => $this->slug,
+            "version" => $this->args[ "version" ],
+            "type" => "plugin"
+          ) );
+        }
 
         // 3d-party compatibility
         new Connectors\Loader();

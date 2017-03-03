@@ -141,7 +141,7 @@ jQuery(document).ready(function($) {
     var group       = '';
     var rewriteSlug = '';
 
-    if(typeof config.groups[ slug ] != 'undefined'){
+    if(typeof config.groups != 'undefined' && typeof config.groups[ slug ] != 'undefined'){
       gslug = config.groups[ slug ];
       group = typeof wp_properties.property_groups[ gslug ] != 'undefined'  ? wp_properties[ 'property_groups' ][ gslug ] : {};
     }
