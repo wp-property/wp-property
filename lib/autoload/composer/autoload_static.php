@@ -11,6 +11,7 @@ class ComposerStaticInitf4ed7b6af105d2c0f95f0f768a166c7c
         '51586b10f6b255677916528b236fc466' => __DIR__ . '/../..' . '/features/wp-property-responsive-slideshow/loader.php',
         '908b1da117a8a871817a375f7853341a' => __DIR__ . '/../..' . '/features/wp-property-supermap/loader.php',
         'f32e97dedfe851d55e4522a8b09dcb5a' => __DIR__ . '/../..' . '/features/wp-property-terms/loader.php',
+        'aa33d7d08765e2232d2271599fc1e7eb' => __DIR__ . '/../..' . '/features/wp-rets-client/loader.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -114,6 +115,17 @@ class ComposerStaticInitf4ed7b6af105d2c0f95f0f768a166c7c
         'UsabilityDynamics\\WPP\\Supermap_Utility' => __DIR__ . '/../..' . '/features/wp-property-supermap/lib/classes/class-supermap-utility.php',
         'UsabilityDynamics\\WPP\\Terms_Bootstrap' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/class-terms-bootstrap.php',
         'UsabilityDynamics\\WPP\\Terms_Upgrade' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/class-terms-upgrade.php',
+        'UsabilityDynamics\\WPRETSC\\Ajax' => __DIR__ . '/../..' . '/features/wp-rets-client/lib/classes/class-ajax.php',
+        'UsabilityDynamics\\WPRETSC\\Bootstrap' => __DIR__ . '/../..' . '/features/wp-rets-client/lib/classes/class-bootstrap.php',
+        'UsabilityDynamics\\WPRETSC\\Connectors\\Loader' => __DIR__ . '/../..' . '/features/wp-rets-client/lib/connectors/class-loader.php',
+        'UsabilityDynamics\\WPRETSC\\Connectors\\WPML' => __DIR__ . '/../..' . '/features/wp-rets-client/lib/connectors/class-wpml.php',
+        'UsabilityDynamics\\WPRETSC\\Dashboard_Widget' => __DIR__ . '/../..' . '/features/wp-rets-client/lib/classes/class-dashboard-widget.php',
+        'UsabilityDynamics\\WPRETSC\\Logger' => __DIR__ . '/../..' . '/features/wp-rets-client/lib/classes/class-logger.php',
+        'UsabilityDynamics\\WPRETSC\\Media' => __DIR__ . '/../..' . '/features/wp-rets-client/lib/classes/class-media.php',
+        'UsabilityDynamics\\WPRETSC\\Register' => __DIR__ . '/../..' . '/features/wp-rets-client/lib/classes/class-register.php',
+        'UsabilityDynamics\\WPRETSC\\Utility' => __DIR__ . '/../..' . '/features/wp-rets-client/lib/classes/class-utility.php',
+        'UsabilityDynamics\\WPRETSC\\Widget' => __DIR__ . '/../..' . '/features/wp-rets-client/lib/classes/class-widget.php',
+        'UsabilityDynamics\\WPRETSC\\XMLRPC' => __DIR__ . '/../..' . '/features/wp-rets-client/lib/classes/class-xmlrpc.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
