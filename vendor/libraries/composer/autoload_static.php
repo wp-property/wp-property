@@ -4,12 +4,13 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit058e019c61a5dc1813ffa20d1b0fcb3e
+class ComposerStaticInitc70b399bfa5b46d2002bda3c97ecef5d
 {
     public static $files = array (
         '68586f4e52570fad0a0d201f5302cfc0' => __DIR__ . '/../../..' . '/vendor/plugins/wp-meta-box/meta-box-loader.php',
         '90e77fd57b3ada1d71a5a74923356b5f' => __DIR__ . '/../../..' . '/vendor/plugins/wp-meta-box-utilities/wp-meta-box-utilities.php',
         '8a7957f8f2f99393c431a5d1f28ff7aa' => __DIR__ . '/../../..' . '/vendor/plugins/wp-gallery-metabox/loader.php',
+        'aa33d7d08765e2232d2271599fc1e7eb' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/loader.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -239,6 +240,16 @@ class ComposerStaticInit058e019c61a5dc1813ffa20d1b0fcb3e
         'UsabilityDynamics\\WPP\\WPML' => __DIR__ . '/../../..' . '/lib/classes/class-wpml.php',
         'UsabilityDynamics\\WPP\\WP_Property_Customizer' => __DIR__ . '/../../..' . '/lib/classes/class-customizer.php',
         'UsabilityDynamics\\WPP\\Widget' => __DIR__ . '/../../..' . '/lib/classes/class-widget.php',
+        'UsabilityDynamics\\WPRETSC\\Ajax' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-ajax.php',
+        'UsabilityDynamics\\WPRETSC\\Bootstrap' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-bootstrap.php',
+        'UsabilityDynamics\\WPRETSC\\Connectors\\Loader' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/connectors/class-loader.php',
+        'UsabilityDynamics\\WPRETSC\\Connectors\\WPML' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/connectors/class-wpml.php',
+        'UsabilityDynamics\\WPRETSC\\Dashboard_Widget' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-dashboard-widget.php',
+        'UsabilityDynamics\\WPRETSC\\Logger' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-logger.php',
+        'UsabilityDynamics\\WPRETSC\\Media' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-media.php',
+        'UsabilityDynamics\\WPRETSC\\Utility' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-utility.php',
+        'UsabilityDynamics\\WPRETSC\\Widget' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-widget.php',
+        'UsabilityDynamics\\WPRETSC\\XMLRPC' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/lib/classes/class-xmlrpc.php',
         'UsabilityDynamics\\WP\\Bootstrap' => __DIR__ . '/..' . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap.php',
         'UsabilityDynamics\\WP\\Bootstrap_Plugin' => __DIR__ . '/..' . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap-plugin.php',
         'UsabilityDynamics\\WP\\Bootstrap_Theme' => __DIR__ . '/..' . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap-theme.php',
@@ -255,10 +266,10 @@ class ComposerStaticInit058e019c61a5dc1813ffa20d1b0fcb3e
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit058e019c61a5dc1813ffa20d1b0fcb3e::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit058e019c61a5dc1813ffa20d1b0fcb3e::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit058e019c61a5dc1813ffa20d1b0fcb3e::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit058e019c61a5dc1813ffa20d1b0fcb3e::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc70b399bfa5b46d2002bda3c97ecef5d::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc70b399bfa5b46d2002bda3c97ecef5d::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitc70b399bfa5b46d2002bda3c97ecef5d::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitc70b399bfa5b46d2002bda3c97ecef5d::$classMap;
 
         }, null, ClassLoader::class);
     }

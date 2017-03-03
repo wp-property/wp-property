@@ -77,7 +77,7 @@ class EP_Config {
 	 */
 	public function get_host() {
 
-		if ( defined( 'EP_HOST' ) && ! empty( EP_HOST ) ) {
+		if ( defined( 'EP_HOST' ) && EP_HOST ) {
 			$host = EP_HOST;
 		} elseif ( defined( 'EP_IS_NETWORK' ) && EP_IS_NETWORK ) {
 			$host = get_site_option( 'ep_host', false );
@@ -135,7 +135,7 @@ class EP_Config {
 	 * @return mixed|void
 	 */
 	public function get_indexable_post_types() {
-		$post_types = get_post_types( array( 'exclude_from_search' => false ) );
+		$post_types = get_post_types( array( 'public' => true ) );
 
 		return apply_filters( 'ep_indexable_post_types', $post_types );
 	}
