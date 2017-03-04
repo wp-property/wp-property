@@ -268,8 +268,13 @@ namespace UsabilityDynamics\WPP {
             if( isset( $_original_taxonomy ) && !isset( $_taxonomies[ $_taxonomy ]['query_var'] ) && isset( $_original_taxonomy['query_var'] ) ) {
               $_taxonomies[ $_taxonomy ]['query_var'] = $_original_taxonomy['query_var'];
             }
+
             if( isset( $_original_taxonomy ) && !isset( $_taxonomies[ $_taxonomy ]['rewrite'] ) && isset( $_original_taxonomy['rewrite'] ) ) {
               $_taxonomies[ $_taxonomy ]['rewrite'] = $_original_taxonomy['rewrite'];
+            }
+
+            if( isset( $_original_taxonomy ) && !isset( $_taxonomies[ $_taxonomy ]['public'] ) && isset( $_original_taxonomy['public'] ) ) {
+              $_taxonomies[ $_taxonomy ]['public'] = $_original_taxonomy['public'];
             }
 
           }
