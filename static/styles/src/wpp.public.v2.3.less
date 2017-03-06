@@ -293,7 +293,9 @@ body,
     .wpp_sorter_options {
       float: right;
       .wpp_sort_by_text {
-        font-size: 16px;
+        padding-right: 5px;
+        font-size: 14px;
+        font-weight: bold;
       }
       .wpp_sortable_link {
         background-color: #145fc8;
@@ -301,14 +303,24 @@ body,
         cursor: pointer;
         padding: 1em 2em;
       }
+
+      .wpp_sortable_dropdown {
+        display: inline-block;
+        float: none;
+        margin: 0;
+        width: auto;
+        padding: 1em;
+      }
     }
   }
 
   .wpp_property_overview_shortcode_v2 {
 
     .wpp_property_view_result {
+      .clearfix;
 
       .all-properties {
+        .clearfix;
         margin: 0 -1em;
 
         .property_div {
@@ -348,6 +360,12 @@ body,
                 li {
                   &.property_title {
                     font-size: 16px;
+                    margin-bottom: 0.5em;
+                  }
+                  span {
+                    font-weight: bold;
+                    display: inline-block;
+                    padding-right: 5px;
                   }
                 }
               }
@@ -355,6 +373,24 @@ body,
           }
         }
         /* property_div  */
+      }
+    }
+    .properties_pagination {
+
+      .wpp_pagination_buttons_wrapper {
+
+        &.pagination-loadmore {
+          text-align: center;
+
+          .wpp_loadmore_button {
+            background-color: #145fc8;
+            border: medium none;
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            padding: 1em 2em;
+          }
+        }
       }
     }
   }

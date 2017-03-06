@@ -38,7 +38,10 @@ if (have_properties()) {
   <div class="<?php wpp_css('property_overview::property_div_box', "property_div_box"); ?>">
 
     <div class="<?php wpp_css('property_overview::top_side', "wpp_overview_top_side"); ?>">
-      <?php property_overview_image(); ?>
+      <div class="property_image">
+        <?php property_overview_image_v2(); ?>
+        <div class="property_price"><?php ?></div>
+      </div>
     </div>
 
   <div class="<?php wpp_css('property_overview::bottom_side', "wpp_overview_bottom_side"); ?>">

@@ -175,6 +175,59 @@ if ( !function_exists( 'property_overview_image' ) ) {
   }
 }
 
+
+if ( !function_exists( 'property_overview_image_v2' ) ) {
+  /**
+   * Renders the overview image of current property
+   *
+   * Used for property_overview to render the overview image based on current query and global $property object
+   *
+   * @args return, image_type
+   *
+   * @since 1.17.3
+   */
+  function property_overview_image_v2( $args = '' ) {
+    global $wpp_query, $property;
+
+    $thumbnail_size = $wpp_query[ 'thumbnail_size' ];
+
+    $defaults = array(
+      'return' => 'false',
+      'image_type' => $thumbnail_size,
+    );
+    $args = wp_parse_args( $args, $defaults );
+
+    /* Make sure that a feature image URL exists prior to committing to fancybox */
+    if ( $wpp_query[ 'fancybox_preview' ] == 'true' && !empty( $property[ 'featured_image_url' ] ) ) {
+      $thumbnail_link = $property[ 'featured_image_url' ];
+      $link_class = "fancybox_image";
+    } else {
+      $thumbnail_link = $property[ 'permalink' ];
+      $link_class = '';
+    }
+
+    $image = !empty( $property[ 'featured_image' ] ) ? wpp_get_image_link( $property[ 'featured_image' ], $thumbnail_size, array( 'return' => 'array' ) ) : false;
+
+    if ( !empty( $image ) ) {
+      ob_start();
+      ?>
+      <a href="<?php echo $thumbnail_link; ?>" title="<?php echo $property[ 'post_title' ] . ( !empty( $property[ 'parent_title' ] ) ? __( ' of ', ud_get_wp_property()->domain ) . $property[ 'parent_title' ] : "" ); ?>" class="property_overview_thumb property_overview_thumb_<?php echo $thumbnail_size; ?> <?php echo $link_class; ?> thumbnail" rel="<?php echo $property[ 'post_name' ] ?>">
+        <img width="<?php echo $image[ 'width' ]; ?>" height="<?php echo $image[ 'height' ]; ?>" src="<?php echo $image[ 'link' ]; ?>" alt="<?php echo $property[ 'post_title' ]; ?>" style="width:<?php echo $image[ 'width' ]; ?>px;height:auto;"/>
+      </a>
+      <?php
+      $html = ob_get_contents();
+      ob_end_clean();
+    } else {
+      $html = '';
+    }
+    if ( $args[ 'return' ] == 'true' ) {
+      return $html;
+    } else {
+      echo $html;
+    }
+  }
+}
+
 if ( !function_exists( 'returned_properties' ) ) {
   /**
    * Gets returned property loop, and loads the property objects
