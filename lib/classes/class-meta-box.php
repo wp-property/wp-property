@@ -52,7 +52,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         // Template selection only used when layouts are not enabled.
-        if( !defined( 'WP_PROPERTY_LAYOUTS' ) || WP_PROPERTY_LAYOUTS === false ) {
+        if( !WP_PROPERTY_LAYOUTS ) {
           add_meta_box( 'wpp_property_template', __( 'Template', ud_get_wp_property('domain') ), array( $this, 'render_template_meta_box' ), 'property', 'side', 'default' );
         }
 

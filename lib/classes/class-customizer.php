@@ -26,7 +26,7 @@ namespace UsabilityDynamics\WPP {
       public function __construct()
       {
 
-        if ( !defined( 'WP_PROPERTY_LAYOUTS' ) || WP_PROPERTY_LAYOUTS !== true ) {
+        if ( !WP_PROPERTY_LAYOUTS ) {
           return;
         }
 

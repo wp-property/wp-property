@@ -79,13 +79,6 @@ namespace UsabilityDynamics\WPP {
             if($property_terms_widget_updated)
               update_option('widget_wpp_property_terms', $property_terms_widget);
 
-          case ( version_compare( $old_version, '2.2.0.1', '<=' ) ):
-            $settings = get_option( 'wpp_settings' );
-            if( !empty( $settings[ 'configuration' ] ) ) {
-              $settings[ 'configuration' ][ 'disable_layouts' ] = 'true';
-            }
-            update_option( 'wpp_settings', $settings );
-
           case ( version_compare( $old_version, '2.3.0', '<' ) ):
 
             if( function_exists( 'deactivate_plugins' ) ) {

@@ -43,6 +43,9 @@ namespace UsabilityDynamics\WPP {
       public function boot()
       {
 
+        // Parse feature falgs, set constants.
+        $this->parse_feature_flags();
+
         // Take care about our features before plugins loaded!
         $this->load_features();
 
@@ -50,9 +53,6 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * May be load WP-Property Features
-       *
-       * @todo Fix issue with Elasticpress activation triggering fatal error. (if (WP_PROPERTY_ELASTICSEARCH_SERVICE) flag is on)
-       * @TODO: Fix Flag conditions: constants are still not defined on this step.
        *
        * @author peshkov@UD
        */
@@ -65,26 +65,30 @@ namespace UsabilityDynamics\WPP {
         new Meta_Box();
 
         // Enable Supermap
-        //if( defined( 'WP_PROPERTY_FLAG_ENABLE_SUPERMAP' ) && WP_PROPERTY_FLAG_ENABLE_SUPERMAP && !defined( 'WPP_SUPERMAP_VENDOR_LOAD' ) ) {
-        if (!defined('WPP_SUPERMAP_VENDOR_LOAD')) {
-          define('WPP_SUPERMAP_VENDOR_LOAD', true);
+        if( WP_PROPERTY_FLAG_ENABLE_SUPERMAP && !defined( 'WPP_SUPERMAP_VENDOR_LOAD' ) ) {
+          if (!defined('WPP_SUPERMAP_VENDOR_LOAD')) {
+            define('WPP_SUPERMAP_VENDOR_LOAD', true );
+          }
         }
         // Enable Agents
-        //if( defined( 'WP_PROPERTY_FLAG_ENABLE_AGENTS' ) && WP_PROPERTY_FLAG_ENABLE_AGENTS && !defined( 'WPP_AGENTS_VENDOR_LOAD' )) {
-        if (!defined('WPP_AGENTS_VENDOR_LOAD')) {
-          define('WPP_AGENTS_VENDOR_LOAD', true);
+        if( WP_PROPERTY_FLAG_ENABLE_AGENTS && !defined( 'WPP_AGENTS_VENDOR_LOAD' )) {
+          if (!defined('WPP_AGENTS_VENDOR_LOAD')) {
+            define('WPP_AGENTS_VENDOR_LOAD', true);
+          }
         }
 
         // Enable Terms
-        //if( defined( 'WP_PROPERTY_FLAG_ENABLE_TERMS' ) && WP_PROPERTY_FLAG_ENABLE_TERMS && !defined( 'WPP_TERMS_VENDOR_LOAD' )) {
-        if (!defined('WPP_TERMS_VENDOR_LOAD')) {
-          define('WPP_TERMS_VENDOR_LOAD', true);
+        if( WP_PROPERTY_FLAG_ENABLE_TERMS && !defined( 'WPP_TERMS_VENDOR_LOAD' )) {
+          if (!defined('WPP_TERMS_VENDOR_LOAD')) {
+            define('WPP_TERMS_VENDOR_LOAD', true);
+          }
         }
 
         // Enable RETS Client
-        //if( defined( 'RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET' ) && RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET && !defined( 'WP_RETS_CLIENT_VENDOR_LOAD' )) {
-        if (!defined('WP_RETS_CLIENT_VENDOR_LOAD')) {
-          define('WP_RETS_CLIENT_VENDOR_LOAD', true);
+        if( RETSCI_FEATURE_FLAG && !defined( 'WP_RETS_CLIENT_VENDOR_LOAD' )) {
+          if (!defined('WP_RETS_CLIENT_VENDOR_LOAD')) {
+            define('WP_RETS_CLIENT_VENDOR_LOAD', true);
+          }
         }
 
       }
@@ -95,9 +99,6 @@ namespace UsabilityDynamics\WPP {
       public function init()
       {
         global $wp_properties;
-
-        // Parse feature falgs, set constants.
-        $this->parse_feature_flags();
 
         add_action('admin_head', function () {
           global $wp_properties, $_wp_admin_css_colors;
@@ -233,7 +234,7 @@ namespace UsabilityDynamics\WPP {
         add_filter('upgrader_process_complete', array('UsabilityDynamics\WPP\Bootstrap', 'upgrader_process_complete'), 10, 2);
 
         // New layout feature. Feature flag must be enabled.
-        if (defined( 'WP_PROPERTY_LAYOUTS' ) && WP_PROPERTY_LAYOUTS === true ) {
+        if ( WP_PROPERTY_LAYOUTS ) {
           $this->layouts_settings = new Layouts_Settings();
           $this->layouts = new Layouts();
 

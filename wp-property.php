@@ -39,11 +39,6 @@ if (!defined('WPP_Templates')) {
   define('WPP_Templates', WPP_Path . 'static/views');
 }
 
-/**
- * Set Feature Flags
- */
-include_once WPP_Path . 'feature-flags.php';
-
 // Use Freemius is flag is enabled.
 if (defined('WPP_FEATURE_FLAG_FREEMIUS') && WPP_FEATURE_FLAG_FREEMIUS) {
 

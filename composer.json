@@ -263,6 +263,13 @@
         "description": "Hosted Elasticsearch synchronization for listing data.",
         "since": "2.2.1",
         "enabled": false
+      },
+      {
+        "name": "RETSCI Client",
+        "constant": "RETSCI_FEATURE_FLAG",
+        "description": "Integrated WP-RETS Client plugin",
+        "since": "2.2.1",
+        "enabled": false
       }
     ],
     "saasProduct": "prod_AB8hYwVjwdfiSJ",
