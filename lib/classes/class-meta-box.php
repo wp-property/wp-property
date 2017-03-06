@@ -366,8 +366,12 @@ namespace UsabilityDynamics\WPP {
           }
 
           // @todo Add to own group.
-          $fields[] = array( 'type' => 'heading', 'name' => 'Content' );
-          $fields[] = $this->get_editor_field( $post );
+
+          if( defined( 'WPP_FEATURE_FLAG_DISABLE_EDITOR' ) && WPP_FEATURE_FLAG_DISABLE_EDITOR === true ) {
+            $fields[] = array( 'type' => 'heading', 'name' => 'Content' );
+            $fields[] = $this->get_editor_field( $post );
+          }
+
           $fields[] = array( 'type' => 'heading', 'name' => 'Media' );
           $fields[] = $this->get_media_field( $post );
 
