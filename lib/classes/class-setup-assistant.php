@@ -90,6 +90,8 @@ namespace UsabilityDynamics\WPP {
 
         $_modified_settings = WPP_F::extend( $_current_settings, $_setup['schema'] );
 
+        //die( '<pre>' . print_r( $_modified_settings['field_alias'], true ) . '</pre>' );
+
         if( is_array( $_modified_settings['property_stats_groups'] ) ) {
           // $_modified_settings['property_stats_groups'] = array_unique( $_modified_settings['property_stats_groups'] );
         }
@@ -98,6 +100,9 @@ namespace UsabilityDynamics\WPP {
         if( is_array( $_modified_settings['searchable_attributes'] ) ) {
           // $_modified_settings[ 'searchable_attributes' ] = array_unique( $_modified_settings[ 'searchable_attributes' ] );
         }
+
+        // preserve field aliases
+        $_modified_settings['field_alias'] = $_current_settings['field_alias'];
 
         $_modified_settings['_updated'] = time();
 
