@@ -42,7 +42,11 @@ $wpp_property_types_variables = apply_filters( 'wpp::settings::developer::types'
 jQuery(document).ready(function($) {
   var wp_properties = wpp.instance.settings;
   var configuration = wp_properties.configuration;
-  var supermap_configuration = typeof configuration.feature_settings.supermap != 'undefined' ? wp_properties.configuration.feature_settings.supermap : {};
+  var supermap_configuration = {};
+
+  if( typeof configuration.feature_settings != 'undefined' && typeof configuration.feature_settings.supermap != 'undefined' ) {
+    supermap_configuration = configuration.feature_settings.supermap;
+  }
 
   var filtered_property_types           = <?php echo json_encode($filtered_property_types);?>;
   var hidden_attributes_do_action       = <?php echo json_encode($hidden_attributes_do_action);?>;
