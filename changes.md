@@ -38,6 +38,7 @@
 * Fix to Grunt build file, referencing some missing files during LESS build. Removed all legacy front-end style/script files from build.
 * Added wpp.public.v2.3.css / wpp.public.v2.3.less styles to handle all the new front-end styles.
 * Added `wpp::property_types` filter, utilized on admin UI only for now.
+* Fixed missing Properties menu items on first plugin activation. 
 
 ### 2.2.0.1 ( December 13, 2016 )
 * Compatibility with WordPress 4.7

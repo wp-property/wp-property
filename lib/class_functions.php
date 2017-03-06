@@ -3432,23 +3432,27 @@ class WPP_F extends UsabilityDynamics\Utility
 
     /* Delete terms if not exist in $wpp_settings */
     if (!empty($terms) && !is_wp_error($terms))
-      foreach ($terms as $term) {
-        if (!array_key_exists($term->slug, $wpp_settings['property_types'])) {
-          wp_delete_term($term->term_id, 'wpp_listing_type');
+      foreach ($terms as $_term) {
+        if (!array_key_exists($_term->slug, $wpp_settings['property_types'])) {
+          wp_delete_term($_term->term_id, 'wpp_listing_type');
         }
       }
 
     /* Generate Property type terms */
     foreach ($wpp_settings['property_types'] as $_term => $label) {
 
-      $term = get_term($wp_properties['property_types_term_id'][$_term], 'wpp_listing_type', ARRAY_A);
+      $term = null;
 
-      if (!is_wp_error($term) && isset($term['term_id'])) {
+      if(isset($wp_properties['property_types_term_id']) && isset($wp_properties['property_types_term_id'][$_term])) {
+        $term = get_term($wp_properties['property_types_term_id'][$_term], 'wpp_listing_type', ARRAY_A);
+      }
+
+      if ( !is_wp_error($term) && isset($term['term_id'])) {
         if ($label != $term['name']) {
           $term = wp_update_term($term['term_id'], 'wpp_listing_type', array('name' => $label));
         }
       } // Find term by label
-      elseif ($term = term_exists($label, 'wpp_listing_type')) {
+      elseif ($term == term_exists($label, 'wpp_listing_type')) {
 
       } else {
         $term = wp_insert_term($label, 'wpp_listing_type', array('slug' => $_term));

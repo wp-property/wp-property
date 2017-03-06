@@ -429,7 +429,7 @@ namespace UsabilityDynamics\WPP {
       public function admin_menu()
       {
 
-        $settings_page = add_submenu_page('edit.php?post_type=property', __('Settings', ud_get_wp_property()->domain), __('Settings', ud_get_wp_property()->domain), 'manage_wpp_settings', 'property_settings', array( 'UsabilityDynamics\WPP\Settings', 'render_page' ) );
+        add_submenu_page('edit.php?post_type=property', __('Settings', ud_get_wp_property()->domain), __('Settings', ud_get_wp_property()->domain), 'manage_wpp_settings', 'property_settings', array( 'UsabilityDynamics\WPP\Settings', 'render_page' ) );
 
       }
 
