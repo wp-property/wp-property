@@ -188,6 +188,13 @@
         "enabled": true
       },
       {
+        "name": "Rooms",
+        "constant": "WPP_FEATURE_FLAG_WPP_ROOMS",
+        "description": "Adds UI for adding standard rooms.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
         "name": "Categorical Taxonomy",
         "constant": "WPP_FEATURE_FLAG_WPP_CATEGORICAL",
         "description": "Taxonomy for general property terms, stored in [wpp_categorical]",

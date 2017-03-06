@@ -174,16 +174,20 @@ namespace UsabilityDynamics\WPP {
 
         //$_meta_boxes[] =  $fields[] = $this->get_rooms_field( $post );
 
-        $_meta_boxes[] = array(
-          'id' => 'wpp_rooms',
-          'title' => "Rooms",
-          'pages' => array( 'property' ),
-          'context' => 'normal',
-          'priority' => 'high',
-          'fields' => array(
-            $this->get_rooms_field( $post )
-          )
-        );
+        if( defined( 'WPP_FEATURE_FLAG_WPP_ROOMS' ) && WPP_FEATURE_FLAG_WPP_ROOMS === true ) {
+
+          $_meta_boxes[] = array(
+            'id' => 'wpp_rooms',
+            'title' => "Rooms",
+            'pages' => array( 'property' ),
+            'context' => 'normal',
+            'priority' => 'high',
+            'fields' => array(
+              $this->get_rooms_field( $post )
+            )
+          );
+
+        }
 
         /* Register Meta Box for every Attributes Group separately */
         if ( !empty( $groups) && !empty( $property_stats_groups ) ) {
