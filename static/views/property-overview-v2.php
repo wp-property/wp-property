@@ -37,11 +37,18 @@ if (have_properties()) {
   <div class="<?php wpp_css('property_overview::property_div', "property_div {$property['post_type']}"); ?>">
   <div class="<?php wpp_css('property_overview::property_div_box', "property_div_box"); ?>">
 
-    <div class="<?php wpp_css('property_overview::top_side', "wpp_overview_top_side"); ?>">
-      <div class="property_image">
-        <?php property_overview_image_v2(); ?>
-        <div class="property_price"><?php ?></div>
-      </div>
+    <?php $image = !empty($property['featured_image']) ? wpp_get_image_link($property['featured_image'], $thumbnail_size, array('return' => 'array')) : false; ?>
+    <div class="<?php wpp_css('property_overview::top_side', "wpp_overview_top_side");
+    echo $image ? ' has_thumbnail' : '';
+    ?>">
+      <?php
+      property_overview_image();
+      $list_price = $property['wpp_list_price'];
+      $property_type = get_property_type($property['ID']);
+
+      echo $property_type ? '<div class="property_type">' . $property_type . '</div>' : '';
+      echo $list_price ? '<div class="property_price">' . $list_price . '</div>' : '';
+      ?>
     </div>
 
   <div class="<?php wpp_css('property_overview::bottom_side', "wpp_overview_bottom_side"); ?>">

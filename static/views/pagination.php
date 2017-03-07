@@ -25,6 +25,8 @@ if ($settings['type'] !== 'loadmore' || ($settings['type'] == 'loadmore' && $set
   $sort_html .= '</span>';
   if ($sortable_attrs) {
 
+    $sort_html .= '<div class="wpp_sorter_box">';
+
     $sort_html .= '<span class="wpp_sorter_options"><span class="wpp_sort_by_text"> ' . $settings['sort_by_text'] . ' </span>';
     if ($settings['sorter_type'] == 'buttons') {
       foreach ($sortable_attrs as $slug => $label) {
@@ -50,6 +52,16 @@ if ($settings['type'] !== 'loadmore' || ($settings['type'] == 'loadmore' && $set
     }
     $sort_html .= ' </span > ';
   }
+
+  /* View template */
+  $template_view_html = '';
+  $template_view_html .= '<div class="wpp_template_view">';
+  $template_view_html .= '<span class="wpp_template_view_button wpp_template_grid" wpp_template="grid"></span>';
+  $template_view_html .= '<span class="wpp_template_view_button wpp_template_row" wpp_template="row"></span>';
+  $template_view_html .= '</div>';
+  $sort_html .= $template_view_html;
+  $sort_html .= '</div>';
+
   $sort_html .= '<div class="clear"></div>';
   $sort_html .= '</div>';
 }
