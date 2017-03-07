@@ -21,7 +21,7 @@ class WPP_Core {
     global $wp_properties;
 
     // Determine if memory limit is low and increase it
-    if( (int)ini_get( 'memory_limit' ) < 128 ) {
+    if( (int)ini_get( 'memory_limit' ) < 128 && (int)ini_get( 'memory_limit' ) > 0 ) {
       ini_set( 'memory_limit', '128M' );
     }
 
