@@ -40,12 +40,9 @@ namespace UsabilityDynamics\WPP {
         // extend [wpp] variable for customizer
         add_filter('wpp::localization::instance', array($this, 'localization_instance'));
 
-        /*
-           *
-           */
-          $this->api_client = new Layouts_API_Client(array(
-            'url' => defined('UD_API_LAYOUTS_URL') ? UD_API_LAYOUTS_URL : 'https://api.usabilitydynamics.com/product/property/layouts/v1'
-          ));
+        $this->api_client = new Layouts_API_Client(array(
+          'url' => defined('UD_API_LAYOUTS_URL') ? UD_API_LAYOUTS_URL : 'https://api.usabilitydynamics.com/product/property/layouts/v1'
+        ));
       }
 
       /**
@@ -117,15 +114,6 @@ namespace UsabilityDynamics\WPP {
           'per_page' => 1
         ));
 
-        // Get most popular terms.
-        $_popular_listing_category_terms = get_terms( array(
-          'taxonomy' => 'wpp_listing_category',
-          'hide_empty' => true,
-          'orderby' => 'count',
-          'number' => 1
-        ) );
-
-
         if( $properties && is_array( $properties ) && !empty( $properties ) ) {
           $post_id = $properties[0]->ID;
 
@@ -137,8 +125,16 @@ namespace UsabilityDynamics\WPP {
           $data['_customizer']['base_property_single_url'] = $post_url;
 
           // store first property url
-          if( isset( $_popular_listing_category_terms[0] ) ) {
-            $data['settings']['configuration']['base_property_term_url'] = home_url( '/listings' . get_term_meta( $_popular_listing_category_terms[0]->term_id, 'listing-category-url_path', true ));
+          if ( WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY ){
+            $_popular_listing_category_terms = get_terms( array(
+              'taxonomy' => 'wpp_listing_category',
+              'hide_empty' => true,
+              'orderby' => 'count',
+              'number' => 1
+            ) );
+            if( !is_wp_error( $_popular_listing_category_terms ) && isset( $_popular_listing_category_terms[0] ) ) {
+              $data['settings']['configuration']['base_property_term_url'] = home_url( '/listings' . get_term_meta( $_popular_listing_category_terms[0]->term_id, 'listing-category-url_path', true ));
+            }
           }
 
           // get home url. This could/should be improved.

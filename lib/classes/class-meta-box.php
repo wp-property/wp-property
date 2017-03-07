@@ -330,7 +330,7 @@ namespace UsabilityDynamics\WPP {
 
           //$fields[] = $this->get_parent_property_field( $post );
 
-          if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_TYPE' ) ) {
+          if( WPP_FEATURE_FLAG_WPP_LISTING_TYPE ) {
             /* May be add Property Type field. */
 
               $fields[] = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
@@ -348,7 +348,7 @@ namespace UsabilityDynamics\WPP {
 
           }
 
-          if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_STATUS' ) ) {
+          if( WPP_FEATURE_FLAG_WPP_LISTING_STATUS ) {
 
               $fields[] = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
                 'id' => 'wpp_listing_status',
@@ -367,7 +367,7 @@ namespace UsabilityDynamics\WPP {
 
           // @todo Add to own group.
 
-          if( defined( 'WPP_FEATURE_FLAG_DISABLE_EDITOR' ) && WPP_FEATURE_FLAG_DISABLE_EDITOR === true ) {
+          if( WPP_FEATURE_FLAG_DISABLE_EDITOR ) {
             $fields[] = array( 'type' => 'heading', 'name' => 'Content' );
             $fields[] = $this->get_editor_field( $post );
           }
