@@ -170,7 +170,13 @@ class WPP_F extends UsabilityDynamics\Utility
       }
 
       $term_data['term_id'] = $_term_created['term_id'];
+    } else {
+
+      $_exists = get_term( $term_data[ 'term_id'], $term_data['_taxonomy'], ARRAY_A );
+
+      $_existings_metadata = get_term_meta( $term_data[ 'term_id'] );
     }
+
 
     // Could not create term.
     if( !isset( $term_data[ 'term_id'] ) ) {
@@ -183,7 +189,6 @@ class WPP_F extends UsabilityDynamics\Utility
     $result['_taxonomy'] = $term_data['_taxonomy'];
 
     $result['_created'] = isset( $_exists ) && isset( $_exists['term_id'] ) ? false : true;
-    $result['_updated'] = isset( $_exists ) && isset( $_exists['term_id'] ) ? true : false;
 
     $result['term_id'] = $term_data['term_id'];
 
@@ -196,38 +201,78 @@ class WPP_F extends UsabilityDynamics\Utility
 
     $term_data[ 'meta' ]['_id'] = $term_data[ '_id' ];
 
+    $result['updated'] = array();
+
     // set _id
-    if( update_term_meta($term_data['term_id'], '_id', $term_data[ '_id' ] ) ) {}
+    if( !isset( $_existings_metadata['_id'] ) || ( isset( $_existings_metadata['_id'][0] ) && $_existings_metadata['_id'][0] !== $term_data[ '_id' ] ) ) {
+      update_term_meta($term_data['term_id'], '_id', $term_data[ '_id' ] );
+      $result['updated'][] = '_id';
+    }
 
     // set _type, same as _prefix, I suppose.
-    if( update_term_meta($term_data['term_id'], '_type', $term_data['_type'] ) ) {}
+    if( !isset( $_existings_metadata['_type'] ) || ( isset( $_existings_metadata['_type'][0] ) && $_existings_metadata['_type'][0] !== $term_data[ '_type' ] ) ) {
+      update_term_meta( $term_data[ 'term_id' ], '_type', $term_data[ '_type' ] );
+      $result['updated'][] = '_type';
+    }
 
     // This is most likely going to be removed.
     if( $result['_created'] ) {
       update_term_meta( $term_data['term_id'], '_created', time() );
-    } else {
-      update_term_meta( $term_data['term_id'], '_updated', time() );
     }
 
     foreach( $term_data[ 'meta' ] as $_meta_key => $meta_value ) {
 
-      if( update_term_meta( $term_data['term_id'], ( $term_data['_type'] . '-' . $_meta_key ), $meta_value ) ) {}
+      if( $_meta_key === '_id' ) { continue; }
+      if( $_meta_key === 'parent_slug' ) { continue; }
+      if( $_meta_key === 'parent_name' ) { continue; }
+      if( $_meta_key === 'parent_term_id' ) { continue; }
+
+      $_term_meta_key = $term_data[ '_type' ] . '-' . $_meta_key;
+
+      if( !isset( $_existings_metadata[ $_term_meta_key ] ) || ( isset( $_existings_metadata[$_term_meta_key][0] ) && $_existings_metadata[$_term_meta_key][0] !== $meta_value ) ) {
+        update_term_meta( $term_data[ 'term_id' ], $_term_meta_key, $meta_value );
+        $result['updated'][] = $_term_meta_key;
+      }
 
       $result['meta'][ ( $term_data['_type'] . '-' . $_meta_key ) ] = $meta_value;
     }
 
-    //return array_filter( $result );
-
-    // Update other fields.
-    wp_update_term( $term_data['term_id'], $term_data['_taxonomy'], array_filter(array(
+    $_term_update_detail = array_filter(array(
       'name' => isset( $term_data['name'] ) ? $term_data['name'] : null,
       'slug' => isset( $term_data['slug'] ) ? $term_data['slug'] : null,
       'parent' => isset( $result['parent'] ) ? $result['parent'] : null,
-      //'alias_of' => isset( $term_data['_alias'] ) ? $term_data['_alias'] : null,
       'description' => isset( $term_data['description'] ) ? $term_data['description'] : null,
       'term_group' => isset( $term_data['term_group'] ) ? $term_data['term_group'] : null
-    )));
+    ));
 
+    if( $_exists && isset( $_exists['name'] ) && isset( $_term_update_detail[ 'name' ] ) && $_exists['name'] == $_term_update_detail[ 'name' ]) {
+      unset( $_term_update_detail['name']);
+    }
+
+    if( $_exists && isset( $_exists['slug'] ) && isset( $_term_update_detail[ 'slug' ] ) && $_exists['slug'] == $_term_update_detail[ 'slug' ]) {
+      unset( $_term_update_detail['slug']);
+    }
+
+    if( $_exists && isset( $_exists['description'] ) &&  isset( $_term_update_detail[ 'description' ] ) && $_exists['description'] == $_term_update_detail[ 'description' ]) {
+      unset( $_term_update_detail['description']);
+    }
+
+    if( $_exists && isset( $_exists['parent'] ) && isset( $_term_update_detail[ 'parent' ] ) && $_exists['parent'] == $_term_update_detail[ 'parent' ]) {
+      unset( $_term_update_detail['parent']);
+    }
+
+    // Update other fields.
+    if( !empty( $_term_update_detail ) ) {
+      wp_update_term( $term_data['term_id'], $term_data['_taxonomy'], array_filter( $_term_update_detail ));
+      $result['updated'] = array_merge( $result['updated'], $_term_update_detail );
+    }
+
+    if( isset( $result['updated'] ) && !empty( $result['updated'] ) ) {
+      $result['_updated'] = time();
+      update_term_meta( $term_data['term_id'], '_updated', $result['_updated'] );
+      //error_log( '$result ' . print_r( $result, true ));
+      //error_log( '$_existings_metadata ' . print_r( $_existings_metadata, true ));
+    }
 
     return array_filter( $result );
 
