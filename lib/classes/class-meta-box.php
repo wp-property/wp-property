@@ -20,21 +20,15 @@ namespace UsabilityDynamics\WPP {
        * @param bool $args
        */
       public function __construct( $args = false ) {
+
         /* Be sure all required files are loaded. */
-        //add_action( 'admin_init', array( $this, 'load_files' ), 1 );
-
-
-        // Stop here if Meta Box class doesn't exist
-        if( !class_exists( '\RW_Meta_Box' ) ) {
-          //die(dirname(  __DIR__ , 2) . '/vendor/plugins/meta-box/meta-box.php');
-          include_once(dirname(dirname(  __DIR__)) . '/vendor/plugins/meta-box/meta-box.php');
-          include_once(dirname(dirname(  __DIR__)) . '/vendor/plugins/meta-box-conditional-logic/meta-box-conditional-logic.php');
-          include_once(dirname(dirname(  __DIR__)). '/vendor/plugins/meta-box-show-hide/meta-box-show-hide.php');
-          include_once(dirname(dirname(  __DIR__)) . '/vendor/plugins/meta-box-group/meta-box-group.php');
-          include_once(dirname(dirname(  __DIR__)) . '/vendor/plugins/meta-box-tabs/meta-box-tabs.php');
-        }
-
         add_action( 'init', array( $this, 'load_files' ), 1 );
+
+        /* Register all RWMB meta boxes */
+        add_action( 'rwmb_meta_boxes', array( $this, 'register_meta_boxes' ) );
+
+        //** Add metaboxes hook */
+        add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 );
 
       }
 
@@ -63,11 +57,25 @@ namespace UsabilityDynamics\WPP {
        */
       public function load_files() {
 
-        /* Register all RWMB meta boxes */
-        add_action( 'rwmb_meta_boxes', array( $this, 'register_meta_boxes' ) );
+        if( !class_exists( '\RW_Meta_Box' ) ) {
+          include_once(dirname(  __DIR__) . '/features/meta-box/meta-box/meta-box.php');
+        }
 
-        //** Add metaboxes hook */
-        add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 );
+        if( !class_exists( '\MB_Conditional_Logic' ) ) {
+          include_once(dirname(  __DIR__) . '/features/meta-box/meta-box-conditional-logic/meta-box-conditional-logic.php');
+        }
+
+        if( !class_exists( '\MB_Show_Hide' ) ) {
+          include_once(dirname(  __DIR__) . '/features/meta-box/meta-box-show-hide/meta-box-show-hide.php');
+        }
+
+        if( !class_exists( '\RWMB_Group' ) ) {
+          include_once(dirname(  __DIR__) . '/features/meta-box/meta-box-group/meta-box-group.php');
+        }
+
+        if( !class_exists( '\MB_Tabs' ) ) {
+          include_once(dirname(  __DIR__) . '/features/meta-box/meta-box-tabs/meta-box-tabs.php');
+        }
 
       }
 

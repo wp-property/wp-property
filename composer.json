@@ -30,11 +30,8 @@
     "usabilitydynamics/lib-ud-api-client": "1.1.5.1",
     "usabilitydynamics/lib-wp-list-table": "1.0.8",
     "usabilitydynamics/lib-wp-shortcode": "0.1.2",
-    "usabilitydynamics/wp-meta-box": "4.5.2.1",
-    "usabilitydynamics/wp-meta-box-utilities": "1.0.2",
-    "UsabilityDynamics/wp-gallery-metabox": "2.0.1",
     "usabilitydynamics/wp-tax-post-binding": "2.0.5",
-    "usabilitydynamics/wp-rets-client": "0.3.0",
+    "usabilitydynamics/wp-rets-client": "dev-latest",
     "freemius/wordpress-sdk": "^1.1.7",
     "ccampbell/chromephp": "^4.1",
     "10up/elasticpress": "^2.1"
