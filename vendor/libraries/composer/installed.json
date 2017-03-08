@@ -454,144 +454,6 @@
         }
     },
     {
-        "name": "usabilitydynamics/wp-meta-box",
-        "version": "4.5.2.1",
-        "version_normalized": "4.5.2.1",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:UsabilityDynamics/wp-meta-box",
-            "reference": "4.5.2.1"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/wp-meta-box/archive/4.5.2.1.zip",
-            "reference": "4.5.2.1",
-            "shasum": null
-        },
-        "require": {
-            "composer/installers": "~1.0"
-        },
-        "type": "wordpress-plugin",
-        "extra": {
-            "installer-name": "wp-meta-box"
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "meta-box-loader.php"
-            ],
-            "classmap": [
-                "inc/fields",
-                "inc/common.php",
-                "inc/field.php",
-                "inc/field-multiple-values.php",
-                "inc/helpers.php",
-                "inc/meta-box.php"
-            ]
-        },
-        "license": [
-            "GPLv2"
-        ],
-        "authors": [
-            {
-                "name": "Tran Ngoc Tuan Anh",
-                "email": "rilwis@gmail.com",
-                "homepage": "http://www.deluxeblogtips.com/",
-                "role": "Developer"
-            }
-        ],
-        "description": "Easily create custom meta boxes in WordPress.",
-        "homepage": "http://www.deluxeblogtips.com/meta-box/",
-        "keywords": [
-            "meta-box",
-            "select2",
-            "ui",
-            "wordpress",
-            "wordpress-plugin",
-            "wp-admin"
-        ]
-    },
-    {
-        "name": "usabilitydynamics/wp-meta-box-utilities",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:UsabilityDynamics/wp-meta-box-utilities",
-            "reference": "1.0.2"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/wp-meta-box-utilities/archive/1.0.2.zip",
-            "reference": "1.0.2",
-            "shasum": null
-        },
-        "require": {
-            "composer/installers": "~1.0"
-        },
-        "type": "wordpress-plugin",
-        "extra": {
-            "installer-name": "wp-meta-box-utilities"
-        },
-        "installation-source": "source",
-        "autoload": {
-            "files": [
-                "wp-meta-box-utilities.php"
-            ]
-        },
-        "license": [
-            "MIT"
-        ],
-        "description": "Set of Utilities to extend default Meta Box plugin functionality in WordPress.",
-        "keywords": [
-            "meta-box",
-            "select2",
-            "ui",
-            "wordpress",
-            "wordpress-plugin",
-            "wp-admin"
-        ]
-    },
-    {
-        "name": "usabilitydynamics/wp-gallery-metabox",
-        "version": "2.0.1",
-        "version_normalized": "2.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:UsabilityDynamics/wp-gallery-metabox",
-            "reference": "2.0.1"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/wp-gallery-metabox/archive/2.0.1.zip",
-            "reference": "2.0.1",
-            "shasum": null
-        },
-        "require": {
-            "composer/installers": "~1.0",
-            "php": ">=5.3"
-        },
-        "require-dev": {
-            "codeclimate/php-test-reporter": "dev-master",
-            "usabilitydynamics/lib-wp-phpunit": "master"
-        },
-        "type": "wordpress-plugin",
-        "extra": {
-            "installer-name": "wp-gallery-metabox"
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "loader.php"
-            ]
-        },
-        "license": [
-            "MIT"
-        ],
-        "description": "WP Repository plugin.",
-        "homepage": "https://usabilitydynamics.com"
-    },
-    {
         "name": "usabilitydynamics/wp-tax-post-binding",
         "version": "2.0.5",
         "version_normalized": "2.0.5.0",
@@ -716,17 +578,17 @@
     },
     {
         "name": "usabilitydynamics/wp-rets-client",
-        "version": "0.3.0",
-        "version_normalized": "0.3.0.0",
+        "version": "dev-latest",
+        "version_normalized": "dev-latest",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/wp-rets-client",
-            "reference": "0.3.0"
+            "reference": "latest"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/wp-rets-client/archive/0.3.0.zip",
-            "reference": "0.3.0",
+            "url": "https://github.com/UsabilityDynamics/wp-rets-client/archive/latest.zip",
+            "reference": "latest",
             "shasum": null
         },
         "archive": {
