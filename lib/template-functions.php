@@ -1018,6 +1018,7 @@ if ( !function_exists( 'draw_property_search_form' ) ):
 
     WPP_F::force_style_inclusion( 'jquery-ui-datepicker' );
 
+    WPP_F::force_script_inclusion( 'wpp.search_form' );
     WPP_F::force_script_inclusion( 'wpp-jquery-number-format' );
     WPP_F::force_script_inclusion( 'jquery-ui-datepicker' );
     WPP_F::force_script_inclusion( 'uisf-date' );
@@ -1325,8 +1326,9 @@ if ( !function_exists( 'wpp_render_search_input' ) ):
         <input id="<?php echo $random_element_id; ?>" class="wpp_search_input_field wpp_search_input_field_<?php echo $attrib; ?>" name="wpp_search[<?php echo $attrib; ?>]" value="<?php echo $value; ?>" type="text"/>
         <?php //* Determine if attribute is a numeric range */ ?>
       <?php elseif ( WPP_F::is_numeric_range( $search_values[ $attrib ] ) ) : ?>
-        <input class="wpp_search_input_field wpp_search_input_field_min wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" type="text" name="wpp_search[<?php echo $attrib; ?>][min]" value="<?php echo isset( $value[ 'min' ] ) ? $value[ 'min' ] : ''; ?>"/> -
-        <input class="wpp_search_input_field wpp_search_input_field_max wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" type="text" name="wpp_search[<?php echo $attrib; ?>][max]" value="<?php echo isset( $value[ 'max' ] ) ? $value[ 'max' ] : ''; ?>"/>
+        <input class="wpp_search_input_field wpp_range_input wpp_search_input_field_min wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" type="text" name="wpp_search[<?php echo $attrib; ?>][min]" value="<?php echo isset( $value[ 'min' ] ) ? $value[ 'min' ] : ''; ?>"/> -
+        <span class="wpp_dash">-</span>
+        <input class="wpp_search_input_field wpp_range_input wpp_search_input_field_max wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" type="text" name="wpp_search[<?php echo $attrib; ?>][max]" value="<?php echo isset( $value[ 'max' ] ) ? $value[ 'max' ] : ''; ?>"/>
       <?php else : ?>
         <?php /* Not a numeric range */ ?>
         <select id="<?php echo $random_element_id; ?>" class="wpp_search_select_field wpp_search_select_field_<?php echo $attrib; ?> <?php echo $attribute_data[ 'ui_class' ]; ?>" name="wpp_search[<?php echo $attrib; ?>]">

@@ -42,9 +42,11 @@ if (have_properties()) {
     echo $image ? ' has_thumbnail' : '';
     ?>">
       <?php
-      property_overview_image();
       $list_price = $property['wpp_list_price'];
+      $wpp_address = $property['wpp_address'];
       $property_type = get_property_type($property['ID']);
+
+      property_overview_image();
 
       echo $property_type ? '<div class="property_type">' . $property_type . '</div>' : '';
       echo $list_price ? '<div class="property_price">' . $list_price . '</div>' : '';
@@ -53,15 +55,19 @@ if (have_properties()) {
 
   <div class="<?php wpp_css('property_overview::bottom_side', "wpp_overview_bottom_side"); ?>">
 
+    <div class="property_title">
+      <a <?php echo $in_new_window; ?>
+        href="<?php echo $property['permalink']; ?>"><?php echo $property['post_title']; ?></a>
+      <?php if (!empty($property['is_child'])): ?>
+        <?php _e('of', ud_get_wp_property()->domain); ?> <a <?php echo $in_new_window; ?>
+          href='<?php echo $property['parent_link']; ?>'><?php echo $property['parent_title']; ?></a>
+      <?php endif; ?>
+      <?php echo $wpp_address ? '<span>'.$wpp_address.'</span>' : ''; ?>
+    </div>
+
+    <?php echo $list_price ? '<div class="property_price">' . $list_price . '</div>' : ''; ?>
+
     <ul class="<?php wpp_css('property_overview::data', "wpp_overview_data"); ?>">
-      <li class="property_title">
-        <a <?php echo $in_new_window; ?>
-          href="<?php echo $property['permalink']; ?>"><?php echo $property['post_title']; ?></a>
-        <?php if (!empty($property['is_child'])): ?>
-          <?php _e('of', ud_get_wp_property()->domain); ?> <a <?php echo $in_new_window; ?>
-            href='<?php echo $property['parent_link']; ?>'><?php echo $property['parent_title']; ?></a>
-        <?php endif; ?>
-      </li>
 
       <?php if (!empty($property['custom_attribute_overview']) || !empty($property['tagline'])): ?>
         <li class="property_tagline">

@@ -421,7 +421,9 @@ class WPP_Core {
     wp_register_script( 'wpp-jquery-validate', WPP_URL . 'scripts/jquery.validate.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'scripts/jquery.number.format.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wp-property-galleria', WPP_URL . 'scripts/galleria/galleria-1.2.5.js', array( 'jquery', 'wpp-localization' ) );
-    
+
+    /* New script for property search shortcode */
+    wp_register_script( 'wpp.search_form', WPP_URL . 'scripts/wpp.search_form.js', array( 'jquery' ) );
 
 
     // Load localized scripts
