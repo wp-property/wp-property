@@ -94,7 +94,7 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
 
     <div id="wpp_settings_tabs" class="wpp_tabs clearfix">
 
-      <?php if( defined( 'WP_PROPERTY_SETTINGS_SEARCH' ) && WP_PROPERTY_SETTINGS_SEARCH ) { ?>
+      <?php if( WP_PROPERTY_SETTINGS_SEARCH ) { ?>
         <div id="label-search-text"><input type="text" id="wpp_search_tags" placeholder="Settings search" name="search_tags"/></div>
       <?php } ?>
 

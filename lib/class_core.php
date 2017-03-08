@@ -284,7 +284,6 @@ class WPP_Core {
    *
    */
   function init_upper() {
-    global $wp_properties;
 
     //** Init action hook */
     do_action( 'wpp_init' );
@@ -308,20 +307,6 @@ class WPP_Core {
     add_action( 'widgets_init', array( 'WPP_F', 'widgets_init' ) );
 
     do_action( 'wpp_init:end', $this );
-
-    if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_TYPE' ) && WPP_FEATURE_FLAG_WPP_LISTING_TYPE ) {
-      add_action( 'created_wpp_listing_type', array($this, 'term_created_wpp_listing_type'), 10, 2 );
-      add_action( 'edited_wpp_listing_type', array($this, 'term_created_wpp_listing_type'), 10, 2 );
-      add_action( 'delete_wpp_listing_type', array($this, 'term_delete_wpp_listing_type'), 10, 4 );
-      add_action( 'wpp_settings_save', array('WPP_F', 'create_property_type_terms'), 10, 2 );
-
-      // Run activation task after plugin fully activated.
-      if(get_option('wpp_activated') ){
-        WPP_F::add_wpp_listing_type_from_existing_terms();
-        WPP_F::create_property_type_terms($wp_properties, $wp_properties);
-        delete_option('wpp_activated');
-      }
-    }
 
   }
 
@@ -788,14 +773,6 @@ class WPP_Core {
 
     $update_data = $_REQUEST[ 'wpp_data' ][ 'meta' ];
 
-    if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_TYPE' ) ) {
-      // if wpp_listing_type is set then update property_type attribute.
-      if(isset($_REQUEST[ 'wpp_listing_type' ])){
-        $term   = get_the_terms($post_id, 'wpp_listing_type');
-        if(is_object($term[0]))
-          update_post_meta($post_id, 'property_type', $term[0]->slug);
-      }
-    }
     //** Neccessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
     if( empty( $_REQUEST[ 'exclude_from_supermap' ] ) ) {
       if( !metadata_exists( 'post', $post_id, 'exclude_from_supermap' ) ) {
@@ -1515,57 +1492,6 @@ class WPP_Core {
   static function shortcode_property_overview( $atts = '' ) {
     //_deprecated_function( __FUNCTION__, '2.1.0', 'do_shortcode([property_overview])' );
     return UsabilityDynamics\WPP\Property_Overview_Shortcode::render( $atts );
-  }
-
-  /**
-   * Add/update Property Type to $wp_properties when wpp_listing_type
-   * created/updated outside of developer tab of settings page.
-   * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
-   * 
-   * @author Md. Alimuzzaman Alim
-   * 
-   * @param int $term_id
-   * @param int $tt_id
-   * 
-   */
-  function term_created_wpp_listing_type($term_id, $tt_id){
-    global $wp_properties;
-    $term = get_term($term_id, 'wpp_listing_type');
-
-    if(!in_array($term->slug, $wp_properties['property_types']) || $wp_properties['property_types'][$term->slug] != $term->name){
-
-      $wp_properties['property_types'][$term->slug] = $term->name;
-      $wp_properties['property_types_term_id'][$term->slug] = $term->term_id;
-
-      ud_get_wp_property()->set('property_types', $wp_properties['property_types']);
-      ud_get_wp_property()->set('property_types_term_id', $wp_properties['property_types_term_id']);
-      update_option('wpp_settings', $wp_properties);
-    }
-
-  }
-
-  /**
-   * Remove Property Type from $wp_properties when wpp_listing_type
-   * deleted outside of developer tab of settings page.
-   * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
-   * 
-   * @author Md. Alimuzzaman Alim
-   * 
-   * @param int $term_id
-   * @param int $tt_id
-   * @param int $term
-   * 
-   */
-  function term_delete_wpp_listing_type($term_id, $tt_id, $term){
-    global $wp_properties;
-    if(array_key_exists($term->slug, $wp_properties['property_types'])){
-      unset($wp_properties['property_types'][$term->slug]);
-      unset($wp_properties['property_types_term_id'][$term->slug]);
-
-      ud_get_wp_property()->set('property_types', $wp_properties['property_types']);
-      ud_get_wp_property()->set('property_types_term_id', $wp_properties['property_types_term_id']);
-      update_option('wpp_settings', $wp_properties);
-    }
   }
 
 }

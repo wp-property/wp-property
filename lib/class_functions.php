@@ -644,39 +644,6 @@ class WPP_F extends UsabilityDynamics\Utility
       );
     }
 
-    // Add [wpp_listing_type] taxonomy.
-    if (defined('WPP_FEATURE_FLAG_WPP_LISTING_TYPE') && WPP_FEATURE_FLAG_WPP_LISTING_TYPE ) {
-      $taxonomies['wpp_listing_type'] = array(
-        'default' => true,
-        'readonly' => true,
-        'hidden' => true,
-        'hierarchical' => false,
-        'unique' => true,
-        'public' => true,
-        'show_in_nav_menus' => true,
-        'show_ui' => false,
-        'show_tagcloud' => false,
-        'add_native_mtbox' => false,
-        'label' => sprintf(_x('%s Type', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-        'labels' => array(
-          'name' => sprintf(_x('%s Type', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'singular_name' => sprintf(_x('%s Type', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'search_items' => _x('Search Type', 'property type taxonomy', ud_get_wp_property()->domain),
-          'all_items' => _x('All Type', 'property type taxonomy', ud_get_wp_property()->domain),
-          'parent_item' => _x('Parent Type', 'property type taxonomy', ud_get_wp_property()->domain),
-          'parent_item_colon' => _x('Parent Type', 'property type taxonomy', ud_get_wp_property()->domain),
-          'edit_item' => _x('Edit Type', 'property type taxonomy', ud_get_wp_property()->domain),
-          'update_item' => _x('Update Type', 'property type taxonomy', ud_get_wp_property()->domain),
-          'add_new_item' => _x('Add New Type', 'property type taxonomy', ud_get_wp_property()->domain),
-          'new_item_name' => _x('New Type', 'property type taxonomy', ud_get_wp_property()->domain),
-          'not_found' => sprintf(_x('No %s type found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'menu_name' => sprintf(_x('%s Type', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-        ),
-        'query_var' => 'type',
-        'rewrite' => array('slug' => 'type')
-      );
-    }
-
     // Add [wpp_listing_status] taxonomy.
     if (defined('WPP_FEATURE_FLAG_WPP_LISTING_STATUS') && WPP_FEATURE_FLAG_WPP_LISTING_STATUS) {
       $taxonomies['wpp_listing_status'] = array(
@@ -3412,85 +3379,6 @@ class WPP_F extends UsabilityDynamics\Utility
     }
 
     return json_encode($return);
-  }
-
-  /**
-   * Insert or update wpp_listing_type terms
-   * Based on property_types on settings developer tab.
-   * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
-   *
-   * @param $wpp_settings : New settings
-   * @param $wp_properties : Old settings
-   *
-   */
-  static function create_property_type_terms($wpp_settings, $wp_properties)
-  {
-    $terms = get_terms(array(
-      'taxonomy' => 'wpp_listing_type',
-      'hide_empty' => false,
-    ));
-
-    /* Delete terms if not exist in $wpp_settings */
-    if (!empty($terms) && !is_wp_error($terms))
-      foreach ($terms as $_term) {
-        if (!array_key_exists($_term->slug, $wpp_settings['property_types'])) {
-          wp_delete_term($_term->term_id, 'wpp_listing_type');
-        }
-      }
-
-    /* Generate Property type terms */
-    foreach ($wpp_settings['property_types'] as $_term => $label) {
-
-      $term = null;
-
-      if(isset($wp_properties['property_types_term_id']) && isset($wp_properties['property_types_term_id'][$_term])) {
-        $term = get_term($wp_properties['property_types_term_id'][$_term], 'wpp_listing_type', ARRAY_A);
-      }
-
-      if ( !is_wp_error($term) && isset($term['term_id'])) {
-        if ($label != $term['name']) {
-          $term = wp_update_term($term['term_id'], 'wpp_listing_type', array('name' => $label));
-        }
-      } // Find term by label
-      elseif ($term == term_exists($label, 'wpp_listing_type')) {
-
-      } else {
-        $term = wp_insert_term($label, 'wpp_listing_type', array('slug' => $_term));
-      }
-
-      if (!is_wp_error($term) && isset($term['term_id'])) {
-        $wpp_settings['property_types_term_id'][$_term] = $term['term_id'];
-      }
-    }
-    return $wpp_settings;
-  }
-
-  /**
-   * Add property type from terms if not already exists.
-   * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
-   *
-   */
-  public static function add_wpp_listing_type_from_existing_terms()
-  {
-    global $wp_properties;
-    $updated = false;
-    $terms = get_terms(array(
-      'taxonomy' => 'wpp_listing_type',
-      'hide_empty' => false,
-    ));
-
-    /* Add property type from terms */
-    if (!empty($terms) && !is_wp_error($terms))
-      foreach ($terms as $term) {
-        if (!array_key_exists($term->slug, $wp_properties['property_types'])) {
-          $wp_properties['property_types'][$term->slug] = $term->name;
-          $wp_properties['property_types_term_id'][$term->slug] = $term->term_id;
-          $updated = true;
-        }
-      }
-    if ($updated) {
-      update_option('wpp_settings', $wp_properties);
-    }
   }
 
   /**

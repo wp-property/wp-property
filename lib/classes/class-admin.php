@@ -178,7 +178,7 @@ namespace UsabilityDynamics\WPP {
 
         foreach( $wp_properties['taxonomies'] as $_tax => $_tax_detail ) {
 
-          if( $_tax_detail['readonly'] === 'true' || $_tax_detail['readonly'] == 1 || $_tax_detail['readonly'] === '1' ) {
+          if( isset( $_tax_detail['readonly'] ) && ( $_tax_detail['readonly'] === 'true' || $_tax_detail['readonly'] == 1 || $_tax_detail['readonly'] === '1' ) ) {
             $_readonly_taxonomies[] = $_tax;
           }
         }

@@ -108,6 +108,7 @@ class ComposerStaticInitf4ed7b6af105d2c0f95f0f768a166c7c
         'RWMB_Wpp_Taxonomy_Field' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/fields/taxonomy.php',
         'RWMB_Wpp_Taxonomy_Inherited_Field' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/fields/class-wpp-taxonomy-inherited.php',
         'UsabilityDynamics\\WPP\\Agents_Bootstrap' => __DIR__ . '/../..' . '/features/wp-property-agents/lib/classes/class-agents-bootstrap.php',
+        'UsabilityDynamics\\WPP\\Listing_Type' => __DIR__ . '/../..' . '/features/listing-type/class-listing-type.php',
         'UsabilityDynamics\\WPP\\RS_Bootstrap' => __DIR__ . '/../..' . '/features/wp-property-responsive-slideshow/lib/classes/class-rs-bootstrap.php',
         'UsabilityDynamics\\WPP\\RS_Shortcode' => __DIR__ . '/../..' . '/features/wp-property-responsive-slideshow/lib/classes/class-rs-shortcode.php',
         'UsabilityDynamics\\WPP\\Supermap_Bootstrap' => __DIR__ . '/../..' . '/features/wp-property-supermap/lib/classes/class-supermap-bootstrap.php',

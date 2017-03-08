@@ -19,6 +19,11 @@
     "wp-property/wp-property-supermap": "dev-feature",
     "wp-property/wp-property-terms": "dev-feature"
   },
+  "autoload": {
+    "classmap": [
+      "features/listing-type"
+    ]
+  },
   "extra": {
     "_build": {},
     "installer-paths": {
