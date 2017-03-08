@@ -170,7 +170,13 @@ class WPP_F extends UsabilityDynamics\Utility
       }
 
       $term_data['term_id'] = $_term_created['term_id'];
+    } else {
+
+      $_exists = get_term( $term_data[ 'term_id'], $term_data['_taxonomy'], ARRAY_A );
+
+      $_existings_metadata = get_term_meta( $term_data[ 'term_id'] );
     }
+
 
     // Could not create term.
     if( !isset( $term_data[ 'term_id'] ) ) {
@@ -183,7 +189,6 @@ class WPP_F extends UsabilityDynamics\Utility
     $result['_taxonomy'] = $term_data['_taxonomy'];
 
     $result['_created'] = isset( $_exists ) && isset( $_exists['term_id'] ) ? false : true;
-    $result['_updated'] = isset( $_exists ) && isset( $_exists['term_id'] ) ? true : false;
 
     $result['term_id'] = $term_data['term_id'];
 
@@ -196,38 +201,78 @@ class WPP_F extends UsabilityDynamics\Utility
 
     $term_data[ 'meta' ]['_id'] = $term_data[ '_id' ];
 
+    $result['updated'] = array();
+
     // set _id
-    if( update_term_meta($term_data['term_id'], '_id', $term_data[ '_id' ] ) ) {}
+    if( !isset( $_existings_metadata['_id'] ) || ( isset( $_existings_metadata['_id'][0] ) && $_existings_metadata['_id'][0] !== $term_data[ '_id' ] ) ) {
+      update_term_meta($term_data['term_id'], '_id', $term_data[ '_id' ] );
+      $result['updated'][] = '_id';
+    }
 
     // set _type, same as _prefix, I suppose.
-    if( update_term_meta($term_data['term_id'], '_type', $term_data['_type'] ) ) {}
+    if( !isset( $_existings_metadata['_type'] ) || ( isset( $_existings_metadata['_type'][0] ) && $_existings_metadata['_type'][0] !== $term_data[ '_type' ] ) ) {
+      update_term_meta( $term_data[ 'term_id' ], '_type', $term_data[ '_type' ] );
+      $result['updated'][] = '_type';
+    }
 
     // This is most likely going to be removed.
     if( $result['_created'] ) {
       update_term_meta( $term_data['term_id'], '_created', time() );
-    } else {
-      update_term_meta( $term_data['term_id'], '_updated', time() );
     }
 
     foreach( $term_data[ 'meta' ] as $_meta_key => $meta_value ) {
 
-      if( update_term_meta( $term_data['term_id'], ( $term_data['_type'] . '-' . $_meta_key ), $meta_value ) ) {}
+      if( $_meta_key === '_id' ) { continue; }
+      if( $_meta_key === 'parent_slug' ) { continue; }
+      if( $_meta_key === 'parent_name' ) { continue; }
+      if( $_meta_key === 'parent_term_id' ) { continue; }
+
+      $_term_meta_key = $term_data[ '_type' ] . '-' . $_meta_key;
+
+      if( !isset( $_existings_metadata[ $_term_meta_key ] ) || ( isset( $_existings_metadata[$_term_meta_key][0] ) && $_existings_metadata[$_term_meta_key][0] !== $meta_value ) ) {
+        update_term_meta( $term_data[ 'term_id' ], $_term_meta_key, $meta_value );
+        $result['updated'][] = $_term_meta_key;
+      }
 
       $result['meta'][ ( $term_data['_type'] . '-' . $_meta_key ) ] = $meta_value;
     }
 
-    //return array_filter( $result );
-
-    // Update other fields.
-    wp_update_term( $term_data['term_id'], $term_data['_taxonomy'], array_filter(array(
+    $_term_update_detail = array_filter(array(
       'name' => isset( $term_data['name'] ) ? $term_data['name'] : null,
       'slug' => isset( $term_data['slug'] ) ? $term_data['slug'] : null,
       'parent' => isset( $result['parent'] ) ? $result['parent'] : null,
-      //'alias_of' => isset( $term_data['_alias'] ) ? $term_data['_alias'] : null,
       'description' => isset( $term_data['description'] ) ? $term_data['description'] : null,
       'term_group' => isset( $term_data['term_group'] ) ? $term_data['term_group'] : null
-    )));
+    ));
 
+    if( $_exists && isset( $_exists['name'] ) && isset( $_term_update_detail[ 'name' ] ) && $_exists['name'] == $_term_update_detail[ 'name' ]) {
+      unset( $_term_update_detail['name']);
+    }
+
+    if( $_exists && isset( $_exists['slug'] ) && isset( $_term_update_detail[ 'slug' ] ) && $_exists['slug'] == $_term_update_detail[ 'slug' ]) {
+      unset( $_term_update_detail['slug']);
+    }
+
+    if( $_exists && isset( $_exists['description'] ) &&  isset( $_term_update_detail[ 'description' ] ) && $_exists['description'] == $_term_update_detail[ 'description' ]) {
+      unset( $_term_update_detail['description']);
+    }
+
+    if( $_exists && isset( $_exists['parent'] ) && isset( $_term_update_detail[ 'parent' ] ) && $_exists['parent'] == $_term_update_detail[ 'parent' ]) {
+      unset( $_term_update_detail['parent']);
+    }
+
+    // Update other fields.
+    if( !empty( $_term_update_detail ) ) {
+      wp_update_term( $term_data['term_id'], $term_data['_taxonomy'], array_filter( $_term_update_detail ));
+      $result['updated'] = array_merge( $result['updated'], $_term_update_detail );
+    }
+
+    if( isset( $result['updated'] ) && !empty( $result['updated'] ) ) {
+      $result['_updated'] = time();
+      update_term_meta( $term_data['term_id'], '_updated', $result['_updated'] );
+      //error_log( '$result ' . print_r( $result, true ));
+      //error_log( '$_existings_metadata ' . print_r( $_existings_metadata, true ));
+    }
 
     return array_filter( $result );
 
@@ -641,39 +686,6 @@ class WPP_F extends UsabilityDynamics\Utility
         ),
         'query_var' => 'schools',
         'rewrite' => array('slug' => 'schools')
-      );
-    }
-
-    // Add [wpp_listing_type] taxonomy.
-    if (defined('WPP_FEATURE_FLAG_WPP_LISTING_TYPE') && WPP_FEATURE_FLAG_WPP_LISTING_TYPE ) {
-      $taxonomies['wpp_listing_type'] = array(
-        'default' => true,
-        'readonly' => true,
-        'hidden' => true,
-        'hierarchical' => false,
-        'unique' => true,
-        'public' => true,
-        'show_in_nav_menus' => true,
-        'show_ui' => false,
-        'show_tagcloud' => false,
-        'add_native_mtbox' => false,
-        'label' => sprintf(_x('%s Type', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-        'labels' => array(
-          'name' => sprintf(_x('%s Type', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'singular_name' => sprintf(_x('%s Type', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'search_items' => _x('Search Type', 'property type taxonomy', ud_get_wp_property()->domain),
-          'all_items' => _x('All Type', 'property type taxonomy', ud_get_wp_property()->domain),
-          'parent_item' => _x('Parent Type', 'property type taxonomy', ud_get_wp_property()->domain),
-          'parent_item_colon' => _x('Parent Type', 'property type taxonomy', ud_get_wp_property()->domain),
-          'edit_item' => _x('Edit Type', 'property type taxonomy', ud_get_wp_property()->domain),
-          'update_item' => _x('Update Type', 'property type taxonomy', ud_get_wp_property()->domain),
-          'add_new_item' => _x('Add New Type', 'property type taxonomy', ud_get_wp_property()->domain),
-          'new_item_name' => _x('New Type', 'property type taxonomy', ud_get_wp_property()->domain),
-          'not_found' => sprintf(_x('No %s type found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-          'menu_name' => sprintf(_x('%s Type', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-        ),
-        'query_var' => 'type',
-        'rewrite' => array('slug' => 'type')
       );
     }
 
@@ -3412,85 +3424,6 @@ class WPP_F extends UsabilityDynamics\Utility
     }
 
     return json_encode($return);
-  }
-
-  /**
-   * Insert or update wpp_listing_type terms
-   * Based on property_types on settings developer tab.
-   * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
-   *
-   * @param $wpp_settings : New settings
-   * @param $wp_properties : Old settings
-   *
-   */
-  static function create_property_type_terms($wpp_settings, $wp_properties)
-  {
-    $terms = get_terms(array(
-      'taxonomy' => 'wpp_listing_type',
-      'hide_empty' => false,
-    ));
-
-    /* Delete terms if not exist in $wpp_settings */
-    if (!empty($terms) && !is_wp_error($terms))
-      foreach ($terms as $_term) {
-        if (!array_key_exists($_term->slug, $wpp_settings['property_types'])) {
-          wp_delete_term($_term->term_id, 'wpp_listing_type');
-        }
-      }
-
-    /* Generate Property type terms */
-    foreach ($wpp_settings['property_types'] as $_term => $label) {
-
-      $term = null;
-
-      if(isset($wp_properties['property_types_term_id']) && isset($wp_properties['property_types_term_id'][$_term])) {
-        $term = get_term($wp_properties['property_types_term_id'][$_term], 'wpp_listing_type', ARRAY_A);
-      }
-
-      if ( !is_wp_error($term) && isset($term['term_id'])) {
-        if ($label != $term['name']) {
-          $term = wp_update_term($term['term_id'], 'wpp_listing_type', array('name' => $label));
-        }
-      } // Find term by label
-      elseif ($term == term_exists($label, 'wpp_listing_type')) {
-
-      } else {
-        $term = wp_insert_term($label, 'wpp_listing_type', array('slug' => $_term));
-      }
-
-      if (!is_wp_error($term) && isset($term['term_id'])) {
-        $wpp_settings['property_types_term_id'][$_term] = $term['term_id'];
-      }
-    }
-    return $wpp_settings;
-  }
-
-  /**
-   * Add property type from terms if not already exists.
-   * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
-   *
-   */
-  public static function add_wpp_listing_type_from_existing_terms()
-  {
-    global $wp_properties;
-    $updated = false;
-    $terms = get_terms(array(
-      'taxonomy' => 'wpp_listing_type',
-      'hide_empty' => false,
-    ));
-
-    /* Add property type from terms */
-    if (!empty($terms) && !is_wp_error($terms))
-      foreach ($terms as $term) {
-        if (!array_key_exists($term->slug, $wp_properties['property_types'])) {
-          $wp_properties['property_types'][$term->slug] = $term->name;
-          $wp_properties['property_types_term_id'][$term->slug] = $term->term_id;
-          $updated = true;
-        }
-      }
-    if ($updated) {
-      update_option('wpp_settings', $wp_properties);
-    }
   }
 
   /**

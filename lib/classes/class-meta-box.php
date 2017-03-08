@@ -20,21 +20,15 @@ namespace UsabilityDynamics\WPP {
        * @param bool $args
        */
       public function __construct( $args = false ) {
+
         /* Be sure all required files are loaded. */
-        //add_action( 'admin_init', array( $this, 'load_files' ), 1 );
-
-
-        // Stop here if Meta Box class doesn't exist
-        if( !class_exists( '\RW_Meta_Box' ) ) {
-          //die(dirname(  __DIR__ , 2) . '/vendor/plugins/meta-box/meta-box.php');
-          include_once(dirname(dirname(  __DIR__)) . '/vendor/plugins/meta-box/meta-box.php');
-          include_once(dirname(dirname(  __DIR__)) . '/vendor/plugins/meta-box-conditional-logic/meta-box-conditional-logic.php');
-          include_once(dirname(dirname(  __DIR__)). '/vendor/plugins/meta-box-show-hide/meta-box-show-hide.php');
-          include_once(dirname(dirname(  __DIR__)) . '/vendor/plugins/meta-box-group/meta-box-group.php');
-          include_once(dirname(dirname(  __DIR__)) . '/vendor/plugins/meta-box-tabs/meta-box-tabs.php');
-        }
-
         add_action( 'init', array( $this, 'load_files' ), 1 );
+
+        /* Register all RWMB meta boxes */
+        add_action( 'rwmb_meta_boxes', array( $this, 'register_meta_boxes' ) );
+
+        //** Add metaboxes hook */
+        add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 );
 
       }
 
@@ -63,11 +57,25 @@ namespace UsabilityDynamics\WPP {
        */
       public function load_files() {
 
-        /* Register all RWMB meta boxes */
-        add_action( 'rwmb_meta_boxes', array( $this, 'register_meta_boxes' ) );
+        if( !class_exists( '\RW_Meta_Box' ) ) {
+          include_once(dirname(  __DIR__) . '/features/meta-box/meta-box/meta-box.php');
+        }
 
-        //** Add metaboxes hook */
-        add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 );
+        if( !class_exists( '\MB_Conditional_Logic' ) ) {
+          include_once(dirname(  __DIR__) . '/features/meta-box/meta-box-conditional-logic/meta-box-conditional-logic.php');
+        }
+
+        if( !class_exists( '\MB_Show_Hide' ) ) {
+          include_once(dirname(  __DIR__) . '/features/meta-box/meta-box-show-hide/meta-box-show-hide.php');
+        }
+
+        if( !class_exists( '\RWMB_Group' ) ) {
+          include_once(dirname(  __DIR__) . '/features/meta-box/meta-box-group/meta-box-group.php');
+        }
+
+        if( !class_exists( '\MB_Tabs' ) ) {
+          include_once(dirname(  __DIR__) . '/features/meta-box/meta-box-tabs/meta-box-tabs.php');
+        }
 
       }
 
@@ -326,26 +334,19 @@ namespace UsabilityDynamics\WPP {
          * So, here, we're adding custom fields for management!
          */
         if( $group['id'] == false ) {
+
           /* May be add Property Parent field - 'Falls Under' */
+          $field = apply_filters( "wpp::rwmb_meta_box::field::parent_property", $this->get_parent_property_field( $post ), $post );
+          if( !empty($field) ) {
+            $fields[] = $field;
+          }
 
-          //$fields[] = $this->get_parent_property_field( $post );
-
-          if( WPP_FEATURE_FLAG_WPP_LISTING_TYPE ) {
-            /* May be add Property Type field. */
-
-              $fields[] = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
-                'id' => 'wpp_listing_type',
-                'name' => $taxonomies['wpp_listing_type']['label'],
-                'type' => 'taxonomy', // Metabox field name
-                'placeholder' => sprintf( __( 'Select %s Type', ud_get_wp_property()->domain ), WPP_F::property_label() ),
-                'multiple' => false,
-                'options' => array(
-                  'taxonomy' => 'wpp_listing_type',
-                  'type' => 'select', // Metabox filed to use in taxonomy
-                  'args' => array(),
-                )
-              ) ), 'wpp_listing_type', $post );
-
+          /* May be add Property Type field. */
+          if( !array_key_exists( 'property_type', $attributes ) ) {
+            $field = apply_filters( "wpp::rwmb_meta_box::field::property_type", $this->get_property_type_field( $post ), $post );
+            if( !empty($field) ) {
+              $fields[] = $field;
+            }
           }
 
           if( WPP_FEATURE_FLAG_WPP_LISTING_STATUS ) {
@@ -431,8 +432,8 @@ namespace UsabilityDynamics\WPP {
 
           //* HACK. If property_type is set as attribute, we register it here. */
           if( $slug == 'property_type' ) {
-            //$field = $this->get_property_type_field( $post );
-            if( $field && (!defined( 'WPP_FEATURE_FLAG_WPP_LISTING_TYPE' ) || empty($taxonomies['wpp_listing_type']['default']))) {
+            $field = apply_filters( "wpp::rwmb_meta_box::field::property_type", $this->get_property_type_field( $post ), $post );
+            if( !empty($field) ) {
               $fields[] = $field;
             }
             continue;
