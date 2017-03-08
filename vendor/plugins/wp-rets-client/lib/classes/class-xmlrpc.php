@@ -59,6 +59,8 @@ namespace UsabilityDynamics\WPRETSC {
         $_methods[ 'wpp.systemCheck' ] = array( $this, 'rpc_system_check' );
         $_methods[ 'wpp.deleteProperty' ] = array( $this, 'rpc_delete_property' );
         $_methods[ 'wpp.editProperty' ] = array( $this, 'rpc_edit_property' );
+        $_methods[ 'wpp.createProperty' ] = array( $this, 'create_property' );
+        $_methods[ 'wpp.updateProperty' ] = array( $this, 'update_property' );
         $_methods[ 'wpp.removeDuplicatedMLS' ] = array( $this, 'rpc_remove_duplicated_mls' );
         $_methods[ 'wpp.modifiedHistogram' ] = array( $this, 'rpc_get_modified_histogram' );
         $_methods[ 'wpp.flushCache' ] = array( $this, 'rpc_flush_cache' );
@@ -86,6 +88,16 @@ namespace UsabilityDynamics\WPRETSC {
         register_rest_route( 'wp-rets-client/v1', '/editProperty', array(
           'methods' => 'POST',
           'callback' => array( $this, 'rpc_edit_property' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/updateProperty', array(
+          'methods' => 'POST',
+          'callback' => array( $this, 'update_property' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/createProperty', array(
+          'methods' => 'POST',
+          'callback' => array( $this, 'create_property' ),
         ) );
 
         register_rest_route( 'wp-rets-client/v1', '/removeDuplicates', array(
@@ -229,7 +241,7 @@ namespace UsabilityDynamics\WPRETSC {
       public function rpc_system_check( $args ) {
         global $wp_xmlrpc_server;
 
-        ud_get_wp_rets_client()->write_log( 'Have system check [wpp.editProperty] request.', 'debug' );
+        ud_get_wp_rets_client()->write_log( 'Have system check [wpp.systemCheck] request.', 'debug' );
 
         // swets blog
 
@@ -247,7 +259,12 @@ namespace UsabilityDynamics\WPRETSC {
           "stylesheet" => get_option( 'stylesheet' ),
           "template" => get_option( 'stylesheet' ),
           "post_types" => get_post_types(),
-          "activePlugins" => self::get_plugins()
+          "activePlugins" => self::get_plugins(),
+          "support" => array(
+            "create_property",
+            "update_property",
+            "edit_property"
+          )
         ));
 
         // not sure if needed here, but seems like good pratice.
@@ -261,12 +278,12 @@ namespace UsabilityDynamics\WPRETSC {
       }
 
       /**
-       * Create or Update Property
+       * Create New Property Object
        *
        * @param $args
        * @return array
        */
-      public function rpc_edit_property( $args ) {
+      public function create_property( $args ) {
         global $wp_xmlrpc_server;
 
         $post_data = self::parseRequest( $args );
@@ -275,7 +292,7 @@ namespace UsabilityDynamics\WPRETSC {
           return $post_data;
         }
 
-        ud_get_wp_rets_client()->write_log( 'Have request wpp.editProperty request', 'debug' );
+        ud_get_wp_rets_client()->write_log( 'Have request [wpp.createProperty] request.', 'debug' );
 
         // Defer term counting until method called again.
         wp_defer_term_counting( true );
@@ -336,7 +353,7 @@ namespace UsabilityDynamics\WPRETSC {
         }
 
         // Insert all the terms and creates taxonomies.
-        self::insert_terms( $_post_id, $_post_data_tax_input, $post_data );
+        // self::insert_terms( $_post_id, $_post_data_tax_input, $post_data );
 
         if( !empty( $post_data[ 'meta_input' ][ 'rets_media' ] ) && is_array( $post_data[ 'meta_input' ][ 'rets_media' ] ) ) {
 
@@ -354,20 +371,285 @@ namespace UsabilityDynamics\WPRETSC {
 
           }
 
-          foreach( $attached_media as $_single_media_item ) {
-            ud_get_wp_rets_client()->write_log( 'Deleting [' .  $_single_media_item->ID . '] media item.', 'debug' );
-            wp_delete_attachment( $_single_media_item->ID, true );
-          }
-
           // delete all old attachments if the count of new media doesn't match up with old media
           if( count( $attached_media ) != count( $post_data[ 'meta_input' ][ 'rets_media' ] ) ) {
+
             ud_get_wp_rets_client()->write_log( 'For ['.$_post_id.'] property media count has changed. Before ['.count( $attached_media ).'], now ['.count( $post_data[ 'meta_input' ][ 'rets_media' ] ).'].', 'debug' );
+
+            //ud_get_wp_rets_client()->write_log( 'Deleting [' .  $_single_media_item->ID . '] media item.', 'debug' );
+            foreach( $attached_media as $_single_media_item ) {
+              ud_get_wp_rets_client()->write_log( 'Deleting [' .  $_single_media_item->ID . '] media item. (Skipping)', 'debug' );
+              // wp_delete_attachment( $_single_media_item->ID, true );
+            }
+
+
           }
 
           foreach( $post_data[ 'meta_input' ][ 'rets_media' ] as $media ) {
 
             if( in_array( $media[ 'url' ], $_already_attached_media ) ) {
-              ud_get_wp_rets_client()->write_log( "Skipping $media[url] because it's already attached to $_post_id", 'debug' );
+              ud_get_wp_rets_client()->write_log( "Skipping [" . $media['url'] . "] because it's already attached to [" . $_post_id . "]", 'debug' );
+            }
+
+            // attach media if a URL is set and it isn't already attached
+
+            $filetype = wp_check_filetype( basename( $media[ 'url' ] ), null );
+
+            $attachment = array(
+              'guid' => $media[ 'url' ],
+              'post_mime_type' => ( !empty( $filetype[ 'type' ] ) ? $filetype[ 'type' ] : 'image/jpeg' ),
+              'post_title' => preg_replace( '/\.[^.]+$/', '', basename( $media[ 'url' ] ) ),
+              'post_content' => '',
+              'post_status' => 'inherit',
+              'menu_order' => $media[ 'order' ] ? ( (int)$media[ 'order' ] ) : null
+            );
+
+            $attach_id = wp_insert_attachment( $attachment, $media[ 'url' ], $_post_id );
+
+            $_new_media[] = $media[ 'url' ];
+
+            update_post_meta( $attach_id, '_is_remote', '1' );
+
+            // set the item with order of 1 as the thumbnail
+            if( (int)$media[ 'order' ] === 1 ) {
+              //set_post_thumbnail( $_post_id, $attach_id );
+
+              // No idea why but set_post_thumbnail() fails routinely as does update_post_meta, testing this method.
+              delete_post_meta( $_post_id, '_thumbnail_id' );
+              $_thumbnail_setting = add_post_meta( $_post_id, '_thumbnail_id', (int)$attach_id );
+
+              if( $_thumbnail_setting ) {
+                ud_get_wp_rets_client()->write_log( 'Setting thumbnail [' . $attach_id . '] to post [' . $_post_id . '] because it has order of 1, result: ', 'debug' );
+              } else {
+                ud_get_wp_rets_client()->write_log( 'Error! Failured at setting thumbnail [' . $attach_id . '] to post [' . $_post_id . ']', 'error' );
+              }
+
+              //die('dying early!' );
+            }
+
+            // old logic of first checking that a new media url exists
+            if( !empty( $media[ 'url' ] ) && !in_array( $media[ 'url' ], $_already_attached_media ) ) {
+            }
+
+          }
+
+          // newly inserted media is in $_new_media
+          // old media is in $_already_attached_media
+          // we get media that was attached before but not in new media
+
+        }
+
+        // We dont need to store this once the Media inserting is working well, besides we can always get it from api. - potanin@UD
+        if( isset( $post_data[ 'meta_input' ][ 'rets_media' ] ) ) {
+          unset( $post_data[ 'meta_input' ][ 'rets_media' ] );
+        }
+
+        if( $_post_id ) {
+          ud_get_wp_rets_client()->write_log( 'Updating property post [' . $_post_id  . '].', 'debug' );
+        } else {
+          ud_get_wp_rets_client()->write_log( 'Creating property post [' . $_post_id  . '].', 'debug' );
+        }
+
+        $_post_status = ( !empty( $_post ) && !empty( $_post->post_status ) ? $_post->post_status : 'publish' );
+
+        if( isset( $_new_post_status ) ) {
+          $_post_status  = $_new_post_status;
+        }
+
+        // If post already was added to DB, probably its status was changed manually, so let's set the latest status. peshkov@UD
+        $_update_post = wp_update_post( array(
+          'ID' => $_post_id,
+          'post_status' => $_post_status
+        ) );
+
+        if( !is_wp_error( $_update_post ) ) {
+
+          $_permalink = get_the_permalink( $_post_id );
+
+          $_message = array();
+
+          if( isset( $_post_id ) && !is_wp_error( $_post_id ) && isset( $post_data[ 'ID' ] ) && $post_data[ 'ID' ] === $_post_id ) {
+            $_message[] = 'Updated property [' . $_post_id  . '] in [' . timer_stop() . '] seconds with [' .$_post_status .'] status using [wpp.createProperty] method.';
+          } else {
+            $_message[] = 'Created property [' . $_post_id  . '] in [' . timer_stop() . '] seconds with [' .$_post_status .'] status. using [wpp.createProperty] method.';
+          }
+
+          if( $_post_status === 'publish' ) {
+            $_message[] = 'View at ['.$_permalink.']';
+          }
+
+          ud_get_wp_rets_client()->write_log( join( " ", $_message ), 'info' );
+
+          /**
+           * Do something after property is published
+           */
+          do_action( 'wrc_property_published', $_post_id );
+
+        } else {
+          ud_get_wp_rets_client()->write_log( 'Error publishing post ' . $_post_id, 'error' );
+          ud_get_wp_rets_client()->write_log( '<pre>' . print_r( $_update_post, true ) . '</pre>', 'error' );
+        }
+
+        // Term counts can/may be updated now.
+        wp_defer_term_counting( false );
+
+        ud_get_wp_rets_client()->write_log( 'Term counting complete for [' . $_post_id . '].', 'info' );
+        return array(
+          "ok" => true,
+          "post_id" => $_post_id,
+          "post" => get_post( $_post_id ),
+          "permalink" => isset( $_permalink ) ? $_permalink : null
+        );
+
+      }
+
+      /**
+       * Update Existing Property
+       *
+       * @param $args
+       * @return array
+       */
+      public function update_property( $args ) {
+        global $wp_xmlrpc_server;
+
+        $post_data = self::parseRequest( $args );
+
+        if( ( isset( $wp_xmlrpc_server ) && !empty( $wp_xmlrpc_server->error ) ) || isset( $post_data['error'] ) ) {
+          return $post_data;
+        }
+
+        ud_get_wp_rets_client()->write_log( 'Have request [wpp.updateProperty] request.', 'debug' );
+
+        if( !empty( $post_data[ 'meta_input' ][ 'rets_id' ] ) ) {
+          $post_data[ 'ID' ] = ud_get_wp_rets_client()->find_property_by_rets_id( $post_data[ 'meta_input' ][ 'rets_id' ] );
+        } else {
+          return array( 'ok' => false, 'error' => "Property missing RETS ID.", "data" => $post_data );
+        }
+
+        // ud_get_wp_rets_client()->write_log( print_r($post_data,true), 'debug' );
+
+        self::insert_property_terms( $post_data[ 'ID' ], $post_data['tax_input'], $post_data );
+
+        return array(
+          "ok" => true,
+          "post_id" => $post_data[ 'ID' ],
+          "post" => get_post( $post_data[ 'ID' ] ),
+          "permalink" => get_the_permalink( $post_data[ 'ID' ] )
+        );
+      }
+
+      /**
+       * Create or Update Property
+       *
+       * @param $args
+       * @return array
+       */
+      public function rpc_edit_property( $args ) {
+        global $wp_xmlrpc_server;
+
+        $post_data = self::parseRequest( $args );
+
+        if( ( isset( $wp_xmlrpc_server ) && !empty( $wp_xmlrpc_server->error ) ) || isset( $post_data['error'] ) ) {
+          return $post_data;
+        }
+
+        ud_get_wp_rets_client()->write_log( 'Have request [wpp.editProperty] request.', 'debug' );
+
+        // Defer term counting until method called again.
+        wp_defer_term_counting( true );
+
+        if( isset( $post_data[ 'meta_input' ][ 'rets_id' ] ) ) {
+          $post_data[ 'meta_input' ][ 'wpp::rets_pk' ] = $post_data[ 'meta_input' ][ 'rets_id' ];
+        }
+
+        $post_data[ 'meta_input' ][ 'wpp_import_time' ] = time();
+
+        if( !empty( $post_data[ 'meta_input' ][ 'rets_id' ] ) ) {
+          $post_data[ 'ID' ] = ud_get_wp_rets_client()->find_property_by_rets_id( $post_data[ 'meta_input' ][ 'rets_id' ] );
+        } else {
+          return array( 'ok' => false, 'error' => "Property missing RETS ID.", "data" => $post_data );
+        }
+
+        $_new_post_status = $post_data[ 'post_status' ];
+
+        // set post status to draft since it may be inserting for a while due to large amount of terms
+        $post_data[ 'post_status' ] = 'draft';
+
+        if( !empty( $post_data[ 'ID' ] ) ) {
+          ud_get_wp_rets_client()->write_log( 'Running wp_insert_post for [' . $post_data[ 'ID' ] . '].', 'debug' );
+          $_post = get_post( $post_data[ 'ID' ] );
+          // If post_date is not set wp_insert_post function sets the current datetime.
+          // So we are preventing to do it by setting already existing post_date. peshkov@UD
+          $post_data[ 'post_date' ] = $_post->post_date;
+          // Status could be changed manually by administrator.
+          // So we are preventing to publish property again in case it was trashed. peshkov@UD
+          $post_data[ 'post_status' ] = $_post->post_status;
+
+        } else {
+          ud_get_wp_rets_client()->write_log( 'Running wp_insert_post for [new post].', 'debug' );
+        }
+
+        $_post_data_tax_input = $post_data['tax_input'];
+
+        $post_data['tax_input'] = array();
+
+        // Ensure we have lat/log meta fields. @note May be a better place to set this up?
+        if( ( !isset( $post_data[ 'meta_input' ][ 'latitude' ] ) || !$post_data[ 'meta_input' ][ 'latitude' ] ) && isset( $post_data['_system']['location']['lat'] ) ) {
+          $post_data[ 'meta_input' ][ 'latitude' ] = $post_data['_system']['location']['lat'];
+          $post_data[ 'meta_input' ][ 'longitude' ] = $post_data['_system']['location']['lon'];
+          ud_get_wp_rets_client()->write_log( 'Inserted lat/lon from _system ' . $post_data['_system']['location']['lat'], 'debug' );
+        }
+
+        $_post_id = wp_insert_post( $post_data, true );
+
+        if( is_wp_error( $_post_id ) ) {
+          ud_get_wp_rets_client()->write_log( 'wp_insert_post error <pre>' . print_r( $_post_id, true ) . '</pre>', 'error' );
+          ud_get_wp_rets_client()->write_log( 'wp_insert_post $post_data <pre>' . print_r( $post_data, true ) . '</pre>', 'error' );
+
+          return array(
+            "ok" => false,
+            "message" => "Unable to insert post.",
+            "error" => $_post_id->get_error_message()
+          );
+        }
+
+        // Insert all the terms and creates taxonomies.
+        self::insert_property_terms( $_post_id, $_post_data_tax_input, $post_data );
+
+        if( !empty( $post_data[ 'meta_input' ][ 'rets_media' ] ) && is_array( $post_data[ 'meta_input' ][ 'rets_media' ] ) ) {
+
+          $_already_attached_media = array();
+          $_new_media = array();
+
+          $attached_media = get_attached_media( 'image', $_post_id );
+
+          // get simple url litst of already attached media
+          if( $attached_media ) {
+
+            foreach( (array)$attached_media as $_attached_media_id => $_media ) {
+              $_already_attached_media[ $_attached_media_id ] = $_media->guid;
+            }
+
+          }
+
+          // delete all old attachments if the count of new media doesn't match up with old media
+          if( count( $attached_media ) != count( $post_data[ 'meta_input' ][ 'rets_media' ] ) ) {
+
+            ud_get_wp_rets_client()->write_log( 'For ['.$_post_id.'] property media count has changed. Before ['.count( $attached_media ).'], now ['.count( $post_data[ 'meta_input' ][ 'rets_media' ] ).'].', 'debug' );
+
+            //ud_get_wp_rets_client()->write_log( 'Deleting [' .  $_single_media_item->ID . '] media item.', 'debug' );
+            foreach( $attached_media as $_single_media_item ) {
+              ud_get_wp_rets_client()->write_log( 'Deleting [' .  $_single_media_item->ID . '] media item.', 'debug' );
+              wp_delete_attachment( $_single_media_item->ID, true );
+            }
+
+
+          }
+
+          foreach( $post_data[ 'meta_input' ][ 'rets_media' ] as $media ) {
+
+            if( in_array( $media[ 'url' ], $_already_attached_media ) ) {
+              ud_get_wp_rets_client()->write_log( "Skipping [" . $media['url'] . "] because it's already attached to [" . $_post_id . "]", 'debug' );
             }
 
             // attach media if a URL is set and it isn't already attached
@@ -459,7 +741,6 @@ namespace UsabilityDynamics\WPRETSC {
 
           ud_get_wp_rets_client()->write_log( join( " ", $_message ), 'info' );
 
-
           /**
            * Do something after property is published
            */
@@ -490,7 +771,7 @@ namespace UsabilityDynamics\WPRETSC {
        * @param $_post_data_tax_input
        * @param array $post_data
        */
-      static public function insert_terms( $_post_id, $_post_data_tax_input, $post_data = array() ) {
+      static public function insert_property_terms( $_post_id, $_post_data_tax_input, $post_data = array() ) {
 
         ud_get_wp_rets_client()->write_log( "Have [" . count( $_post_data_tax_input ) . "] taxonomies to process.", 'debug' );
 
@@ -858,7 +1139,7 @@ namespace UsabilityDynamics\WPRETSC {
         }
 
         // @todo: probably term counting should be executed via different way. Because it takes forever to update counts.... peshkov@UD
-        //wp_defer_term_counting( false );
+        wp_defer_term_counting( false );
 
         ud_get_wp_rets_client()->write_log( 'wpp.removeDuplicatedMLS Done', 'info' );
 

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitc70b399bfa5b46d2002bda3c97ecef5d
+class ComposerStaticInitd8fb969de3fbce435922255a6439062d
 {
     public static $files = array (
         'aa33d7d08765e2232d2271599fc1e7eb' => __DIR__ . '/../../..' . '/vendor/plugins/wp-rets-client/loader.php',
@@ -217,10 +217,10 @@ class ComposerStaticInitc70b399bfa5b46d2002bda3c97ecef5d
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc70b399bfa5b46d2002bda3c97ecef5d::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitc70b399bfa5b46d2002bda3c97ecef5d::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitc70b399bfa5b46d2002bda3c97ecef5d::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitc70b399bfa5b46d2002bda3c97ecef5d::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitd8fb969de3fbce435922255a6439062d::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitd8fb969de3fbce435922255a6439062d::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitd8fb969de3fbce435922255a6439062d::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitd8fb969de3fbce435922255a6439062d::$classMap;
 
         }, null, ClassLoader::class);
     }

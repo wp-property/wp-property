@@ -6,6 +6,8 @@
  */
 namespace UsabilityDynamics\WPRETSC {
 
+  use WP_Query;
+
   if( !class_exists( 'UsabilityDynamics\WPRETSC\Utility' ) ) {
 
     final class Utility {
@@ -17,6 +19,15 @@ namespace UsabilityDynamics\WPRETSC {
        */
       static public function find_property_by_rets_id( $rets_id ) {
         global $wpdb;
+
+        $_cache_key = 'mls-id-' . $rets_id;
+
+        $_cache = wp_cache_get( $_cache_key, 'wp-rets-client' );
+
+        if( $_cache ) {
+          ud_get_wp_rets_client()->write_log( 'Found [' . $_cache . '] using $rets_id  [' . $rets_id . '] in cache.', 'debug' );
+          return $_cache;
+        }
 
         $_actual_post_id = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='rets_id' AND meta_value={$rets_id};" );
 
@@ -42,7 +53,12 @@ namespace UsabilityDynamics\WPRETSC {
 
         if( count( $query->posts ) > 0 ) {
           ud_get_wp_rets_client()->write_log( 'Found ' . $query->posts[0]->ID . ' using $rets_id: ' . $rets_id);
+
+          wp_cache_set( $_cache_key, $query->posts[0]->ID, 'wp-rets-client', 3600 );
+
           return $query->posts[0]->ID;
+
+
         } else {
           ud_get_wp_rets_client()->write_log( 'Did not find any post ID using $rets_id [' . $rets_id . '].' );
         }
