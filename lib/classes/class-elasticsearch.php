@@ -279,7 +279,7 @@ namespace UsabilityDynamics\WPP {
                 "output" => $term['name'],
                 "payload" => array_filter( array(
                   "term_id" => $term['term_id'],
-                  "term_type" => isset( $_term_metadata['term_type'] ) ? $_term_metadata['term_type'] : null,
+                  "term_type" => apply_filters( 'wpp:term_type', isset( $_term_metadata['term_type'] ) ? $_term_metadata['term_type'] : $_tax, $term, $_term_metadata ),
                   "slug" => $term['slug'],
                   "name" => str_replace( '&amp;', '&', $term['name'] ),
                   "tax" => $_tax,
