@@ -282,85 +282,85 @@ body,
   /* WP Property overview shortcode */
 
   /* WP Property overview shortcode V2 */
-  .wpp_pagination_slider_status {
-    line-height: 4em;
-    .clearfix;
-
-    .wpp_property_results {
-      float: left;
-      font-size: 20px;
-    }
-    .wpp_sorter_box {
-      float: right;
-      .wpp_sorter_options {
-        float: left;
-        .wpp_sort_by_text {
-          padding-right: 5px;
-          font-size: 14px;
-          font-weight: bold;
-        }
-        .wpp_sortable_link {
-          background-color: #145fc8;
-          color: #fff;
-          cursor: pointer;
-          padding: 1em 2em;
-        }
-
-        .wpp_sortable_dropdown {
-          display: inline-block;
-          float: none;
-          margin: 0;
-          width: auto;
-          height: 40px;
-          padding: 0 1em;
-        }
-      }
-      .wpp_template_view {
-        border: 1px solid #bbb;
-        float: right;
-        height: 40px;
-        margin: 8px 0 0 5px;
-        .wpp_template_view_button {
-          background-color: #fff;
-          color: #bbb;
-          cursor: pointer;
-          display: block;
-          float: left;
-          height: 38px;
-          width: 38px;
-          transition: color 0.15s ease-in-out 0s;
-          -moz-transition: color 0.15s ease-in-out 0s;
-          -webkit-transition: color 0.15s ease-in-out 0s;
-          &:after {
-            font-family: 'FontAwesome';
-            display: block;
-            text-align: center;
-            line-height: 38px;
-            font-size: 20px;
-          }
-          &.wpp_template_grid {
-            border-right: 1px solid #bbb;
-            &:after {
-              content: "\f009";
-            }
-          }
-          &.wpp_template_row:after {
-            content: "\f00b";
-          }
-          &:hover,
-          &.active {
-            color: #414141;
-          }
-        }
-      }
-    }
-  }
-
   .wpp_property_overview_shortcode_v2 {
     opacity: 0;
     transition: opacity 0.3s ease-in-out 0s;
     -moz-transition: opacity 0.3s ease-in-out 0s;
     -webkit-transition: opacity 0.3s ease-in-out 0s;
+
+    .wpp_pagination_slider_status {
+      line-height: 4em;
+      .clearfix;
+
+      .wpp_property_results {
+        float: left;
+        font-size: 20px;
+      }
+      .wpp_sorter_box {
+        float: right;
+        .wpp_sorter_options {
+          float: left;
+          .wpp_sort_by_text {
+            padding-right: 5px;
+            font-size: 14px;
+            font-weight: bold;
+          }
+          .wpp_sortable_link {
+            background-color: #145fc8;
+            color: #fff;
+            cursor: pointer;
+            padding: 1em 2em;
+          }
+
+          .wpp_sortable_dropdown {
+            display: inline-block;
+            float: none;
+            margin: 0;
+            width: auto;
+            height: 40px;
+            padding: 0 1em;
+          }
+        }
+        .wpp_template_view {
+          border: 1px solid #bbb;
+          float: right;
+          height: 40px;
+          margin: 8px 0 0 5px;
+          .wpp_template_view_button {
+            background-color: #fff;
+            color: #bbb;
+            cursor: pointer;
+            display: block;
+            float: left;
+            height: 38px;
+            width: 38px;
+            transition: color 0.15s ease-in-out 0s;
+            -moz-transition: color 0.15s ease-in-out 0s;
+            -webkit-transition: color 0.15s ease-in-out 0s;
+            &:after {
+              font-family: 'FontAwesome';
+              display: block;
+              text-align: center;
+              line-height: 38px;
+              font-size: 20px;
+            }
+            &.wpp_template_grid {
+              border-right: 1px solid #bbb;
+              &:after {
+                content: "\f009";
+              }
+            }
+            &.wpp_template_row:after {
+              content: "\f00b";
+            }
+            &:hover,
+            &.active {
+              color: #414141;
+            }
+          }
+        }
+      }
+    }
 
     &[wpp_template="grid"] {
       opacity: 1;
@@ -624,6 +624,51 @@ body,
 
   /* WP Property search widget */
   .wpp_search_properties_widget {
+
+    .wpp_shortcode_search_form {
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        li {
+          margin: 0;
+          list-style: none;
+          .wpp_search_group_title,
+          .wpp_search_label {
+            display: block;
+            font-weight: 600;
+            margin: 0 0 5px;
+          }
+          &.wpp_search_form_element {
+            margin: 0 0 10px;
+            input {
+              margin: 0;
+              &.wpp_range_input {
+                display: inline-block;
+                box-sizing: border-box;
+                width: 47%;
+                margin-right: -3px;
+              }
+            }
+            label {
+              display: inline-block;
+            }
+            .wpp_dash {
+              display: inline-block;
+              text-align: center;
+              width: 6%;
+              margin-right: -3px;
+            }
+          }
+        }
+      }
+    }
+  }
+  /* WP Property search widget */
+
+  /* WP Property search widget V2 */
+  .wpp_search_properties_widget_v2 {
     border: 1px solid #e3e3e3;
     padding: 2em 1em;
     .wpp_shortcode_search_form {
@@ -684,8 +729,14 @@ body,
               width: 100%;
               max-width: 100%;
               padding: 0 1em;
+              &.wpp_advanced_range_dropdown {
+                display: inline-block;
+                box-sizing: border-box;
+                width: 47%;
+                margin-right: -3px;
+              }
             }
-            input {
+            input[type="text"] {
               height: 40px;
               margin: 0;
               width: 100%;
@@ -697,10 +748,25 @@ body,
                 margin-right: -3px;
               }
             }
+            textarea {
+              height: 100px;
+              margin: 0;
+              width: 100%;
+              padding: 0.5em 1em;
+            }
+            ul.wpp_multi_checkbox {
+              margin: 0;
+              padding: 0;
+              list-style: none;
+              li {
+                margin: 0;
+              }
+            }
             label {
               display: inline-block;
             }
-            .wpp_dash {
+            .wpp_dash,
+            .delimiter {
               display: inline-block;
               text-align: center;
               width: 6%;
@@ -721,7 +787,7 @@ body,
     }
   }
 
-  /* WP Property search widget */
+  /* WP Property search widget V2 */
 
   /* Property MAP */
   .property_map_wrapper,
@@ -764,7 +830,7 @@ body,
 
         .wpp_google_maps_right_col {
           border: none;
-          padding: 0 0 0 10px;
+          padding: 0 0 0 1em;
           min-width: 200px;
           .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link {
             display: none;

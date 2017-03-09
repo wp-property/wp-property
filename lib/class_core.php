@@ -423,7 +423,7 @@ class WPP_Core {
     wp_register_script( 'wp-property-galleria', WPP_URL . 'scripts/galleria/galleria-1.2.5.js', array( 'jquery', 'wpp-localization' ) );
 
     /* New script for property search shortcode */
-    wp_register_script( 'wpp.search_form', WPP_URL . 'scripts/wpp.search_form.js', array( 'jquery' ) );
+    wp_register_script( 'wpp-search-form', WPP_URL . 'scripts/wpp.search_form.js', array( 'jquery' ) );
 
 
     // Load localized scripts
