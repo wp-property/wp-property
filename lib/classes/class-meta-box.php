@@ -182,7 +182,7 @@ namespace UsabilityDynamics\WPP {
 
         //$_meta_boxes[] =  $fields[] = $this->get_rooms_field( $post );
 
-        if( defined( 'WPP_FEATURE_FLAG_WPP_ROOMS' ) && WPP_FEATURE_FLAG_WPP_ROOMS === true ) {
+        if( WPP_FEATURE_FLAG_WPP_ROOMS ) {
 
           $_meta_boxes[] = array(
             'id' => 'wpp_rooms',

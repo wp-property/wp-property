@@ -174,7 +174,7 @@ namespace UsabilityDynamics\WPP {
         new Export();
 
         // Invoke Elasticsearch Handler.
-        if (defined('WP_PROPERTY_ELASTICSEARCH_SERVICE') && WP_PROPERTY_ELASTICSEARCH_SERVICE && class_exists('UsabilityDynamics\WPP\Elasticsearch')) {
+        if ( WP_PROPERTY_ELASTICSEARCH_SERVICE && class_exists('UsabilityDynamics\WPP\Elasticsearch')) {
           $this->elastic = new Elasticsearch();
         }
 

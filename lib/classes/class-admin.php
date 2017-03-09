@@ -28,7 +28,7 @@ namespace UsabilityDynamics\WPP {
         new Admin_Overview();
 
 
-        if( defined( 'WP_PROPERTY_SETUP_ASSISTANT' ) && WP_PROPERTY_SETUP_ASSISTANT ) {
+        if( WP_PROPERTY_SETUP_ASSISTANT ) {
           new Setup_Assistant();
         }
 
@@ -306,7 +306,7 @@ namespace UsabilityDynamics\WPP {
         do_action('wpp_metaboxes');
 
         // Advanced rewrite rules.
-        if( defined( 'WPP_FEATURE_FLAG_ADVANCED_REWRITE_RULES' ) && WPP_FEATURE_FLAG_ADVANCED_REWRITE_RULES ) {
+        if( WPP_FEATURE_FLAG_ADVANCED_REWRITE_RULES ) {
           register_setting( 'wp-property', 'wpp_permalinks' );
           add_settings_section( 'wpp-permalink', 'WP-Property Permalinks', array( 'UsabilityDynamics\WPP\Admin', 'render_permalink_settings' ), 'permalink' );
         }

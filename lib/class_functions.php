@@ -553,7 +553,7 @@ class WPP_F extends UsabilityDynamics\Utility
     $taxonomies = array();
 
     // Add [property_features] and [community_features] taxonomies.
-    if( defined( 'WP_PROPERTY_FLAG_ENABLE_LEGACY_TAXONOMIES') && WP_PROPERTY_FLAG_ENABLE_LEGACY_TAXONOMIES ) {
+    if( WP_PROPERTY_FLAG_ENABLE_LEGACY_TAXONOMIES ) {
 
       $taxonomies[ 'property_feature' ] = array(
         'default' => true,
@@ -624,7 +624,7 @@ class WPP_F extends UsabilityDynamics\Utility
   static public function wpp_standard_taxonomies( $taxonomies = array() ) {
 
     // Add [wpp_location] taxonomy.
-    if (defined('WPP_FEATURE_FLAG_WPP_LISTING_LOCATION') && WPP_FEATURE_FLAG_WPP_LISTING_LOCATION) {
+    if (WPP_FEATURE_FLAG_WPP_LISTING_LOCATION) {
       $taxonomies['wpp_location'] = array(
         'default' => true,
         'readonly' => true,
@@ -657,7 +657,7 @@ class WPP_F extends UsabilityDynamics\Utility
     }
 
     // Add [wpp_schools] taxonomy.
-    if (defined('WPP_FEATURE_FLAG_WPP_SCHOOLS') && WPP_FEATURE_FLAG_WPP_SCHOOLS) {
+    if (WPP_FEATURE_FLAG_WPP_SCHOOLS) {
       $taxonomies['wpp_schools'] = array(
         'default' => true,
         'readonly' => true,
@@ -690,7 +690,7 @@ class WPP_F extends UsabilityDynamics\Utility
     }
 
     // Add [wpp_listing_status] taxonomy.
-    if (defined('WPP_FEATURE_FLAG_WPP_LISTING_STATUS') && WPP_FEATURE_FLAG_WPP_LISTING_STATUS) {
+    if (WPP_FEATURE_FLAG_WPP_LISTING_STATUS) {
       $taxonomies['wpp_listing_status'] = array(
         'default' => true,
         'readonly' => true,
@@ -723,7 +723,7 @@ class WPP_F extends UsabilityDynamics\Utility
     }
 
     // Add [wpp_listing_policy] taxonomy.
-    if (defined('WPP_FEATURE_FLAG_WPP_LISTING_POLICY') && WPP_FEATURE_FLAG_WPP_LISTING_POLICY) {
+    if (WPP_FEATURE_FLAG_WPP_LISTING_POLICY) {
       $taxonomies['wpp_listing_policy'] = array(
         'default' => true,
         'readonly' => true,
@@ -754,7 +754,7 @@ class WPP_F extends UsabilityDynamics\Utility
     }
 
     // Add [wpp_listing_label] taxonomy.
-    if (defined('WP_PROPERTY_FLAG_WPP_LISTING_LABEL') && WP_PROPERTY_FLAG_WPP_LISTING_LABEL ) {
+    if ( WP_PROPERTY_FLAG_WPP_LISTING_LABEL ) {
       $taxonomies['wpp_listing_label'] = array(
         'default' => true,
         'readonly' => true,
@@ -787,7 +787,7 @@ class WPP_F extends UsabilityDynamics\Utility
     }
 
     // Generic [wpp_categorical] taxonomy for multiple terms.
-    if (defined('WPP_FEATURE_FLAG_WPP_CATEGORICAL') && WPP_FEATURE_FLAG_WPP_CATEGORICAL) {
+    if (WPP_FEATURE_FLAG_WPP_CATEGORICAL) {
       $taxonomies['wpp_categorical'] = array(
         'default' => true,
         'readonly' => true,
@@ -821,7 +821,7 @@ class WPP_F extends UsabilityDynamics\Utility
     }
 
     // Add [wpp_listing_category] taxonomy.
-    if (defined('WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY') && WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY) {
+    if (WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY) {
 
       $taxonomies['wpp_listing_category'] = array(
         'default' => true,
@@ -941,7 +941,7 @@ class WPP_F extends UsabilityDynamics\Utility
     // New standard taxonomies. Ran late, to force after Terms_Bootstrap::define_taxonomies
     add_filter('wpp_taxonomies', array('WPP_F', 'wpp_standard_taxonomies'), 10 );
 
-    if (defined('WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY') && WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY) {
+    if (WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY) {
       add_action( 'parse_tax_query', array( 'WPP_F', 'parse_tax_query' ), 50 );
     }
 
@@ -967,7 +967,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
     $supports = array('title', 'editor', 'thumbnail');
 
-    if( defined( 'WPP_FEATURE_FLAG_DISABLE_EDITOR' ) && WPP_FEATURE_FLAG_DISABLE_EDITOR ) {
+    if( WPP_FEATURE_FLAG_DISABLE_EDITOR ) {
       $supports = array('title', 'thumbnail');
     } else {
       $supports = array('title', 'editor', 'thumbnail');
@@ -2455,7 +2455,7 @@ class WPP_F extends UsabilityDynamics\Utility
         }
       }
 
-      if (defined('WPP_FEATURE_FLAG_WPP_LISTING_LOCATION')) {
+      if ( WPP_FEATURE_FLAG_WPP_LISTING_LOCATION ) {
         if (isset($wp_properties['taxonomies']['wpp_location'])) {
           $return['terms'] = self::update_location_terms($post_id, $geo_data);
         }
