@@ -56,7 +56,7 @@ $_standard = UsabilityDynamics\WPP\Setup_Assistant::get_standard_data();
       </div><!-- wpp_asst_screen wpp_asst_screen_2 -->
     </div><!-- item -->
 
-    <?php if ( defined( 'WP_PROPERTY_FLAG_ENABLE_AGENTS' ) && WP_PROPERTY_FLAG_ENABLE_AGENTS && defined( 'WP_PROPERTY_FLAG_ENABLE_SUPERMAP' ) && WP_PROPERTY_FLAG_ENABLE_SUPERMAP ) { ?>
+    <?php if ( WP_PROPERTY_FLAG_ENABLE_AGENTS && WP_PROPERTY_FLAG_ENABLE_SUPERMAP ) { ?>
     <div class="item  item-wider">
       <div class="wpp_asst_screen wpp_asst_screen_5">
 

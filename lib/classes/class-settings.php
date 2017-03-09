@@ -101,7 +101,7 @@ namespace UsabilityDynamics\WPP {
 
         $_stored_settings = $this->get();
 
-        if( defined( 'WP_PROPERTY_SETUP_ASSISTANT' ) && WP_PROPERTY_SETUP_ASSISTANT ) {
+        if( WP_PROPERTY_SETUP_ASSISTANT ) {
           if( !isset( $_stored_settings[ 'configuration' ] ) ) {
             $data[ 'configuration' ][ 'show_assistant' ] = "yes";
           }

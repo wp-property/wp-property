@@ -203,7 +203,7 @@ jQuery(document).ready(function($) {
               <input type="text" class="slug wpp_stats_slug_field" readonly='readonly' value="<%= slug %>"/>
             </label>
 
-            <?php if( defined( 'WP_PROPERTY_FIELD_ALIAS' ) && WP_PROPERTY_FIELD_ALIAS ) { ?>
+            <?php if( WP_PROPERTY_FIELD_ALIAS ) { ?>
             <label class="wpp-meta-alias-entry">
               <input type="text" class="slug wpp_field_alias" name="wpp_settings[field_alias][<%= slug %>]" placeholder="Alias for <%= slug %>" value="<%= filtered_field_alias[slug] %>" />
             </label>

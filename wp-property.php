@@ -40,7 +40,7 @@ if (!defined('WPP_Templates')) {
 }
 
 // Use Freemius is flag is enabled.
-if (defined('WPP_FEATURE_FLAG_FREEMIUS') && WPP_FEATURE_FLAG_FREEMIUS) {
+if ( defined( 'WPP_FEATURE_FLAG_FREEMIUS' ) && WPP_FEATURE_FLAG_FREEMIUS ) {
 
   // add_filter('connect_message_on_update', function($message, $user_first_name, $plugin_title, $user_login, $site_link, $freemius_link) {}, 10, 6 );
   // add_filter('connect_message', function() {});

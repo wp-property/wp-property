@@ -424,9 +424,7 @@ class class_agents
         continue;
       }
 
-      $role_object = get_role($role);
-
-      $name = $role_names[$role_object->name];
+      $name = $role_names[$role];
 
       if ($role == $_REQUEST['role']) {
         $current_role = $role;
@@ -1029,21 +1027,8 @@ class class_agents
     global $wp_properties, $menu;
 
     $label = ud_get_wp_property('configuration.feature_settings.agents.label.plural');
-    //add_submenu_page('edit.php?post_type=property', $label, $label, self::$capability, 'show_agents', array('class_agents', 'show_agents'));
-
-    $_wpp_menu_position = null;
-
-    // Find WPP position in menu.
-    foreach( $menu as $_position => $_menu ) {
-
-      if( $_menu[1] === 'edit_wpp_properties' ) {
-        $_wpp_menu_position = intval( $_position );
-
-      }
-
-    }
-
-    add_menu_page( $label, $label, self::$capability, 'wpp_agents', array('class_agents', 'show_agents'), 'dashicons-admin-home', ( $_wpp_menu_position + 1 ) );
+    add_submenu_page('edit.php?post_type=property', $label, $label, self::$capability, 'show_agents', array('class_agents', 'show_agents'));
+    
   }
 
   /**

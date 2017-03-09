@@ -111,6 +111,7 @@ class ComposerStaticInitd8fb969de3fbce435922255a6439062d
         'RWMB_Wpp_Address_Field' => __DIR__ . '/../../..' . '/lib/classes/fields/class-wpp-address.php',
         'RWMB_Wpp_Aggregated_Field' => __DIR__ . '/../../..' . '/lib/classes/fields/class-wpp-aggregated.php',
         'RWMB_Wpp_Checkbox_Field' => __DIR__ . '/../../..' . '/lib/classes/fields/class-wpp-checkbox.php',
+        'RWMB_Wpp_Child_Properties_Field' => __DIR__ . '/../../..' . '/lib/classes/fields/class-wpp-child-properties.php',
         'RWMB_Wpp_Inherited_Address_Field' => __DIR__ . '/../../..' . '/lib/classes/fields/class-wpp-inherited-address.php',
         'RWMB_Wpp_Inherited_Field' => __DIR__ . '/../../..' . '/lib/classes/fields/class-wpp-inherited.php',
         'RWMB_Wpp_Inherited_File_Advanced_Field' => __DIR__ . '/../../..' . '/lib/classes/fields/class-wpp-inherited-file-advanced.php',

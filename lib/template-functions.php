@@ -316,7 +316,7 @@ if ( !function_exists( 'prepare_property_for_display' ) ):
             Replace address with generated taxonomy links.
             depend on add_display_address();
           */
-          if(defined( 'WPP_FEATURE_FLAG_WPP_LISTING_LOCATION' )){
+          if( WPP_FEATURE_FLAG_WPP_LISTING_LOCATION ){
             $address_format = $wp_properties[ 'configuration' ][ 'display_address_format' ];
             preg_match_all('/\[(.*?)\]/', $address_format, $matches);
             if(isset($matches[1]) && is_array($matches[1])){

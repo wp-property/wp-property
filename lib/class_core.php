@@ -74,7 +74,7 @@ class WPP_Core {
     add_filter( 'wpp_get_properties_query', array( $this, 'fix_tax_property_query' ));
 
     // Apply alises.
-    if( defined( 'WP_PROPERTY_FIELD_ALIAS' ) && WP_PROPERTY_FIELD_ALIAS ) {
+    if( WP_PROPERTY_FIELD_ALIAS ) {
       add_filter( 'wpp_get_property', array( $this, 'apply_property_alias' ), 50, 2 );
       add_filter( 'wpp_get_properties_query', array( $this, 'apply_properties_query_alias' ), 50 );
       // add_filter( 'get_post_metadata', array( $this, 'alias_get_post_metadata' ), 50, 4 );

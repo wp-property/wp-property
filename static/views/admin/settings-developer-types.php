@@ -16,7 +16,6 @@ foreach ($filtered_property_types as $slug => $label) {
   $hidden_attributes_do_action[$slug] = ob_get_clean();
 
   ob_start();
-  do_action( 'wpp::types::inherited_attributes', $slug );
   WPP_F::do_action_deprecated( 'wpp::types::inherited_attributes', array($slug), '3.0.0', 'wpp::settings::developer::types::inherited_attributes', "New action expect underscore template and data should be passed by 'wpp::settings::developer::types' filter." );
   $inherited_attributes_do_action[$slug] = ob_get_clean();
 
