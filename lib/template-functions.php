@@ -1210,8 +1210,6 @@ if ( !function_exists( 'draw_property_search_form_v2' ) ):
   function draw_property_search_form_v2( $args = false ) {
     global $wp_properties;
 
-    WPP_F::force_style_inclusion( 'jquery-ui-datepicker' );
-
     WPP_F::force_script_inclusion( 'wpp-search-form' );
     WPP_F::force_script_inclusion( 'wpp-jquery-number-format' );
     WPP_F::force_script_inclusion( 'jquery-ui-datepicker' );

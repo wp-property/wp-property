@@ -11,6 +11,10 @@ class SearchPropertiesWidgetV2 extends WP_Widget {
    */
   function __construct() {
 
+    if(!is_admin()) {
+      wp_enqueue_style('jquery-ui-datepicker');
+    }
+    
     $property_label = strtolower( WPP_F::property_label() );
 
     parent::__construct(
