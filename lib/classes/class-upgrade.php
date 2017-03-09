@@ -79,45 +79,10 @@ namespace UsabilityDynamics\WPP {
             if($property_terms_widget_updated)
               update_option('widget_wpp_property_terms', $property_terms_widget);
 
-          case ( version_compare( $old_version, '2.3.0', '<' ) ):
-
-            if( function_exists( 'deactivate_plugins' ) ) {
-              deactivate_plugins( 'wp-property-terms/wp-property-terms.php', true );
-            }
-
-          case ( version_compare( $old_version, '3.0.0', '<' ) ):
-            add_action('init', array('UsabilityDynamics\WPP\Upgrade', 'migrate_meta_to_term'));
-
         }
         /* Additional stuff can be handled here */
         do_action( ud_get_wp_property()->slug . '::upgrade', $old_version, $new_version );
       }
-
-      static public function migrate_meta_to_term(){
-        global $wpdb;
-        $pp = $wpdb->get_results("SELECT ID from {$wpdb->posts} WHERE post_type='property'");
-        $wpp_settings = get_option('wpp_settings');
-
-        register_taxonomy('wpp_listing_type', 'property_type');
-        /* Generate Property type terms */
-        foreach ($wpp_settings['property_types'] as $_term => $label) {
-          $term = term_exists($label, 'wpp_listing_type');
-          if (!$term) {
-            $term = wp_insert_term($label, 'wpp_listing_type', array('slug' => $_term));
-          }
-        }
-
-        if (!empty($pp)) {
-          foreach ($pp as $p) {
-              $property_type = get_post_meta($p->ID, 'property_type', true);
-              if (!empty($property_type)) {
-                wp_set_object_terms($p->ID, $property_type, 'wpp_listing_type');
-              }
-          }
-        }
-
-      }
-
 
       /**
        * Saves backup of WPP settings to uploads and to DB.
