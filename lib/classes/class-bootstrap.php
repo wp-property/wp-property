@@ -70,6 +70,10 @@ namespace UsabilityDynamics\WPP {
           new Listing_Type();
         }
 
+        if( WP_PROPERTY_LEGACY_META_ATTRIBUTES ) {
+          new Legacy_Meta_Attributes();
+        }
+
         // Maybe load our built-in Add-ons
 
         // Enable Supermap

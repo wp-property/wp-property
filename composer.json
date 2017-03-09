@@ -101,13 +101,6 @@
         "enabled": false
       },
       {
-        "name": "Responsive Slideshow",
-        "constant": "WP_PROPERTY_RESPONSIVE_SLIDESHOW",
-        "description": "Responsive slideshow feature, use [property_responsive_slideshow] shortcode.",
-        "since": "2.2.1",
-        "enabled": false
-      },
-      {
         "name": "Freemius",
         "constant": "WPP_FEATURE_FLAG_FREEMIUS",
         "description": "Freemius for WP Property",
@@ -224,14 +217,21 @@
         "constant": "WP_PROPERTY_FLAG_ENABLE_SUPERMAP",
         "description": "Enable Supermap feature.",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "Enable Agents Feature",
         "constant": "WP_PROPERTY_FLAG_ENABLE_AGENTS",
         "description": "Enable Agent management.",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
+      },
+      {
+        "name": "Enable Responsive Slideshow Feature",
+        "constant": "WP_PROPERTY_RESPONSIVE_SLIDESHOW",
+        "description": "Responsive slideshow feature, use [property_responsive_slideshow] shortcode.",
+        "since": "2.2.1",
+        "enabled": true
       },
       {
         "name": "Enable Terms Feature",
@@ -273,7 +273,7 @@
         "constant": "RETSCI_FEATURE_FLAG",
         "description": "Integrated WP-RETS Client plugin",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
       }
     ],
     "saasProduct": "prod_AB8hYwVjwdfiSJ",

@@ -86,6 +86,7 @@ return array(
     'RWMB_Wpp_Taxonomy_Field' => $baseDir . '/features/wp-property-terms/lib/classes/fields/taxonomy.php',
     'RWMB_Wpp_Taxonomy_Inherited_Field' => $baseDir . '/features/wp-property-terms/lib/classes/fields/class-wpp-taxonomy-inherited.php',
     'UsabilityDynamics\\WPP\\Agents_Bootstrap' => $baseDir . '/features/wp-property-agents/lib/classes/class-agents-bootstrap.php',
+    'UsabilityDynamics\\WPP\\Legacy_Meta_Attributes' => $baseDir . '/features/legacy-meta-attributes/class-legacy-meta-attributes.php',
     'UsabilityDynamics\\WPP\\Listing_Type' => $baseDir . '/features/listing-type/class-listing-type.php',
     'UsabilityDynamics\\WPP\\RS_Bootstrap' => $baseDir . '/features/wp-property-responsive-slideshow/lib/classes/class-rs-bootstrap.php',
     'UsabilityDynamics\\WPP\\RS_Shortcode' => $baseDir . '/features/wp-property-responsive-slideshow/lib/classes/class-rs-shortcode.php',

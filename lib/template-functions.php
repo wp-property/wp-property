@@ -546,12 +546,14 @@ if ( !function_exists( 'draw_stats' ) ):
      */
     if ( $args['include_clsf'] === 'detail' ) {
       $sort_by_groups = 'false';
-      foreach ( $wp_properties[ 'property_meta' ] as $k => $v ) {
-        if ( $k == 'tagline' ) {
-          continue;
-        }
-        if ( !empty( $property->$k ) ) {
-          $property_stats[ $k ] = array( 'label' => $v, 'value' => $property->$k );
+      if( !empty( $wp_properties[ 'property_meta' ] ) ) {
+        foreach ( $wp_properties[ 'property_meta' ] as $k => $v ) {
+          if ( $k == 'tagline' ) {
+            continue;
+          }
+          if ( !empty( $property->$k ) ) {
+            $property_stats[ $k ] = array( 'label' => $v, 'value' => $property->$k );
+          }
         }
       }
     } else {

@@ -2968,32 +2968,28 @@ class WPP_F extends UsabilityDynamics\Utility
    */
   static public function get_total_attribute_array($args = '', $extra_values = false)
   {
-    global $wp_properties, $wpdb;
+    global $wp_properties;
 
     $defaults = array(
       'use_optgroups' => 'false'
     );
 
-    extract(wp_parse_args($args, $defaults), EXTR_SKIP);
-
-    $use_optgroups = isset($use_optgroups) ? $use_optgroups : 'false';
+    $args = wp_parse_args($args, $defaults);
 
     $property_stats = $wp_properties['property_stats'];
-    $property_meta = $wp_properties['property_meta'];
 
     if (!is_array($extra_values)) {
       $extra_values = array();
     }
 
-    if ($use_optgroups == 'true') {
+    if ($args[ 'use_optgroups' ] == 'true') {
       $attributes['Attributes'] = $property_stats;
-      $attributes['Meta'] = $property_meta;
       $attributes['Other'] = $extra_values;
     } else {
-      $attributes = (array) $property_stats + (array) $property_meta + (array) $extra_values;
+      $attributes = (array) $property_stats + (array) $extra_values;
     }
 
-    $attributes = apply_filters('wpp_total_attribute_array', $attributes);
+    $attributes = apply_filters('wpp_total_attribute_array', $attributes, $args );
 
     if (!is_array($attributes)) {
       $attributes = array();
