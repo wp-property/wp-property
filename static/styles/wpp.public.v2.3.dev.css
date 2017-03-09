@@ -74,6 +74,8 @@ body,
   /* WP Property overview shortcode V2 */
   /* WP Property search widget */
   /* WP Property search widget */
+  /* WP Property search widget V2 */
+  /* WP Property search widget V2 */
   /* Property MAP */
   /* Property MAP */
   /* Gallery widget */
@@ -738,11 +740,6 @@ body .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_
 #wpp_layout .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_buttons_wrapper.pagination-loadmore .wpp_to_top.shown {
   opacity: 1;
 }
-body .wpp_search_properties_widget,
-#wpp_layout .wpp_search_properties_widget {
-  border: 1px solid #e3e3e3;
-  padding: 2em 1em;
-}
 body .wpp_search_properties_widget .wpp_shortcode_search_form ul,
 #wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul {
   margin: 0;
@@ -751,41 +748,8 @@ body .wpp_search_properties_widget .wpp_shortcode_search_form ul,
 }
 body .wpp_search_properties_widget .wpp_shortcode_search_form ul li,
 #wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li {
-  margin: 0 0 1em;
+  margin: 0;
   list-style: none;
-}
-body .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_group .wpp_search_group_title,
-#wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_group .wpp_search_group_title {
-  cursor: pointer;
-  position: relative;
-  display: block;
-}
-body .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_group .wpp_search_group_title:after,
-#wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_group .wpp_search_group_title:after {
-  font-family: 'FontAwesome';
-  content: "\f0d7";
-  display: block;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-body .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_group ul.wpp_search_group,
-#wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_group ul.wpp_search_group {
-  display: none;
-}
-body .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_group ul.wpp_search_group > li.wpp_search_form_element label.wpp_search_label,
-#wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_group ul.wpp_search_group > li.wpp_search_form_element label.wpp_search_label {
-  font-weight: normal;
-}
-body .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_group.active .wpp_search_group_title:after,
-#wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_group.active .wpp_search_group_title:after {
-  transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-}
-body .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_group.active ul.wpp_search_group,
-#wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_group.active ul.wpp_search_group {
-  display: block;
 }
 body .wpp_search_properties_widget .wpp_shortcode_search_form ul li .wpp_search_group_title,
 #wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li .wpp_search_group_title,
@@ -799,19 +763,9 @@ body .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_f
 #wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element {
   margin: 0 0 10px;
 }
-body .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element select,
-#wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element select {
-  height: 40px;
-  width: 100%;
-  max-width: 100%;
-  padding: 0 1em;
-}
 body .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element input,
 #wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element input {
-  height: 40px;
   margin: 0;
-  width: 100%;
-  padding: 0 1em;
 }
 body .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element input.wpp_range_input,
 #wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_form_element input.wpp_range_input {
@@ -831,8 +785,101 @@ body .wpp_search_properties_widget .wpp_shortcode_search_form ul li.wpp_search_f
   width: 6%;
   margin-right: -3px;
 }
-body .wpp_search_properties_widget .wpp_shortcode_search_form input.wpp_search_button.submit,
-#wpp_layout .wpp_search_properties_widget .wpp_shortcode_search_form input.wpp_search_button.submit {
+body .wpp_search_properties_widget_v2,
+#wpp_layout .wpp_search_properties_widget_v2 {
+  border: 1px solid #e3e3e3;
+  padding: 2em 1em;
+}
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li {
+  margin: 0 0 1em;
+  list-style: none;
+}
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_group .wpp_search_group_title,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_group .wpp_search_group_title {
+  cursor: pointer;
+  position: relative;
+  display: block;
+}
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_group .wpp_search_group_title:after,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_group .wpp_search_group_title:after {
+  font-family: 'FontAwesome';
+  content: "\f0d7";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_group ul.wpp_search_group,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_group ul.wpp_search_group {
+  display: none;
+}
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_group ul.wpp_search_group > li.wpp_search_form_element label.wpp_search_label,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_group ul.wpp_search_group > li.wpp_search_form_element label.wpp_search_label {
+  font-weight: normal;
+}
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_group.active .wpp_search_group_title:after,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_group.active .wpp_search_group_title:after {
+  transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+}
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_group.active ul.wpp_search_group,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_group.active ul.wpp_search_group {
+  display: block;
+}
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li .wpp_search_group_title,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li .wpp_search_group_title,
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li .wpp_search_label,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li .wpp_search_label {
+  display: block;
+  font-weight: 600;
+  margin: 0 0 5px;
+}
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_form_element,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_form_element {
+  margin: 0 0 10px;
+}
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_form_element select,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_form_element select {
+  height: 40px;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 1em;
+}
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_form_element input,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_form_element input {
+  height: 40px;
+  margin: 0;
+  width: 100%;
+  padding: 0 1em;
+}
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_form_element input.wpp_range_input,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_form_element input.wpp_range_input {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 47%;
+  margin-right: -3px;
+}
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_form_element label,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_form_element label {
+  display: inline-block;
+}
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_form_element .wpp_dash,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_form_element .wpp_dash {
+  display: inline-block;
+  text-align: center;
+  width: 6%;
+  margin-right: -3px;
+}
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form input.wpp_search_button.submit,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form input.wpp_search_button.submit {
   background-color: #145fc8;
   border: medium none;
   color: #fff;
@@ -902,7 +949,7 @@ body .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_
 body #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col,
 #wpp_layout #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col {
   border: none;
-  padding: 0 0 0 10px;
+  padding: 0 0 0 1em;
   min-width: 200px;
 }
 body .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link,

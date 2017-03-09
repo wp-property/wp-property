@@ -624,6 +624,51 @@ body,
 
   /* WP Property search widget */
   .wpp_search_properties_widget {
+
+    .wpp_shortcode_search_form {
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        li {
+          margin: 0;
+          list-style: none;
+          .wpp_search_group_title,
+          .wpp_search_label {
+            display: block;
+            font-weight: 600;
+            margin: 0 0 5px;
+          }
+          &.wpp_search_form_element {
+            margin: 0 0 10px;
+            input {
+              margin: 0;
+              &.wpp_range_input {
+                display: inline-block;
+                box-sizing: border-box;
+                width: 47%;
+                margin-right: -3px;
+              }
+            }
+            label {
+              display: inline-block;
+            }
+            .wpp_dash {
+              display: inline-block;
+              text-align: center;
+              width: 6%;
+              margin-right: -3px;
+            }
+          }
+        }
+      }
+    }
+  }
+  /* WP Property search widget */
+
+  /* WP Property search widget V2 */
+  .wpp_search_properties_widget_v2 {
     border: 1px solid #e3e3e3;
     padding: 2em 1em;
     .wpp_shortcode_search_form {
@@ -721,7 +766,7 @@ body,
     }
   }
 
-  /* WP Property search widget */
+  /* WP Property search widget V2 */
 
   /* Property MAP */
   .property_map_wrapper,
@@ -764,7 +809,7 @@ body,
 
         .wpp_google_maps_right_col {
           border: none;
-          padding: 0 0 0 10px;
+          padding: 0 0 0 1em;
           min-width: 200px;
           .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link {
             display: none;
