@@ -21,7 +21,7 @@ namespace UsabilityDynamics\WPP\Widgets {
      * Init
      */
     public function __construct() {
-      parent::__construct( 'wpp_property_overview_v2', $name = sprintf( __( '%1s Overview V2', ud_get_wp_property()->domain ), \WPP_F::property_label( 'singular' ) ), array( 'description' => __( 'Property Overview Widget V2', ud_get_wp_property()->domain ) ) );
+      parent::__construct( 'wpp_property_overview_v2', $name = sprintf( __( '%1s Overview', ud_get_wp_property()->domain ), \WPP_F::property_label( 'singular' ) ), array( 'description' => __( 'Property Overview Widget', ud_get_wp_property()->domain ) ) );
     }
 
     /**
@@ -44,7 +44,7 @@ namespace UsabilityDynamics\WPP\Widgets {
         echo $before_title . $title . $after_title;
       }
       //die('[property_overview '.$this->shortcode_args( $instance ).']' );
-      echo do_shortcode( '[property_overview_v2 '.$this->shortcode_args( $instance ).']' );
+      echo do_shortcode( '[property_overview '.$this->shortcode_args( $instance ).']' );
 
       echo $after_widget;
     }
@@ -83,7 +83,9 @@ namespace UsabilityDynamics\WPP\Widgets {
   /**
    * Register this widget
    */
-  add_action( 'widgets_init', function() {
-    register_widget( 'UsabilityDynamics\WPP\Widgets\PropertyOverviewWidgetV2' );
-  });
+  if (!WPP_LEGACY_WIDGETS) {
+    add_action('widgets_init', function () {
+      register_widget('UsabilityDynamics\WPP\Widgets\PropertyOverviewWidgetV2');
+    });
+  }
 }

@@ -309,7 +309,9 @@ body,
             background-color: #145fc8;
             color: #fff;
             cursor: pointer;
-            padding: 1em 2em;
+            padding: 0 2em;
+            display: inline-block;
+            line-height: 40px;
           }
 
           .wpp_sortable_dropdown {
@@ -989,10 +991,69 @@ body,
       list-style: none;
       li {
         margin: 0;
+        list-style: none;
+        &.wpp_agent_stats_socials {
+
+          ul.wpp_agent_socials_list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+          }
+        }
+      }
+    }
+    dl.wpp_agent_info_list {
+      .clearfix;
+      dt {
+        display: inline-block;
+        padding-right: 5px;
+        font-weight: bold;
+      }
+      dd {
+        display: inline-block;
       }
     }
   }
   /* Agent widget */
+
+  /* Agent widget V2 */
+  .widget_agentwidget {
+
+    .wpp_agent_info_single_wrapper_v2 {
+      border: 1px solid #e3e3e3;
+      padding: 2em 1em;
+
+      ul.wpp_agent_info_list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        li {
+          margin: 0;
+          list-style: none;
+          &.wpp_agent_stats_socials {
+
+            ul.wpp_agent_socials_list {
+              margin: 0;
+              padding: 0;
+              list-style: none;
+            }
+          }
+        }
+      }
+      div.wpp_agent_info_list {
+
+        label {
+          font-weight: bold;
+          display: inline-block;
+          padding-right: 10px;
+        }
+        span {
+          display: inline-block;
+        }
+      }
+    }
+  }
+  /* Agent widget V2 */
 
   /* Property type list */
   ul.property_type_list {
