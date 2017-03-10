@@ -50,7 +50,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         $options = array(
-          'id' => WPP_LEGACY_WIDGETS ? 'property_overview_v2' : 'property_overview',
+          'id' => 'property_overview',
           'params' => array(
             'property_id' => array(
               'name' => __('Property ID', ud_get_wp_property()->domain),

@@ -382,7 +382,9 @@ body .wpp_property_overview_shortcode_v2 .wpp_pagination_slider_status .wpp_sort
   background-color: #145fc8;
   color: #fff;
   cursor: pointer;
-  padding: 1em 2em;
+  padding: 0 2em;
+  display: inline-block;
+  line-height: 40px;
 }
 body .wpp_property_overview_shortcode_v2 .wpp_pagination_slider_status .wpp_sorter_box .wpp_sorter_options .wpp_sortable_dropdown,
 #wpp_layout .wpp_property_overview_shortcode_v2 .wpp_pagination_slider_status .wpp_sorter_box .wpp_sorter_options .wpp_sortable_dropdown {
