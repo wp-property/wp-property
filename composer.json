@@ -94,6 +94,13 @@
         "enabled": false
       },
       {
+        "name": "Legacy widgets",
+        "constant": "WPP_LEGACY_WIDGETS",
+        "description": "Enable to use legacy widgets",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
         "name": "Setup Assistant",
         "constant": "WP_PROPERTY_SETUP_ASSISTANT",
         "description": "Automated setup assistant.",

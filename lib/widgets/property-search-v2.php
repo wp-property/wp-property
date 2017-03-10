@@ -19,7 +19,7 @@ class SearchPropertiesWidgetV2 extends WP_Widget {
 
     parent::__construct(
         false,
-        sprintf( __( '%1s Search V2', ud_get_wp_property()->domain ), WPP_F::property_label() ),
+        sprintf( __( '%1s Search', ud_get_wp_property()->domain ), WPP_F::property_label() ),
         array(
             'classname' => 'wpp_property_attributes',
             'description' => sprintf( __( 'Display a highly customizable  %1s search form.', ud_get_wp_property()->domain ), $property_label )
@@ -413,6 +413,8 @@ class SearchPropertiesWidgetV2 extends WP_Widget {
 /**
  * Register widget
  */
-add_action( 'widgets_init', function() {
-  register_widget( "SearchPropertiesWidgetV2" );
-});
+if (!WPP_LEGACY_WIDGETS) {
+  add_action('widgets_init', function () {
+    register_widget("SearchPropertiesWidgetV2");
+  });
+}
