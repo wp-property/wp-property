@@ -982,7 +982,9 @@ body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_searc
   padding: 0 1em;
 }
 body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_form_element input[type="text"].wpp_range_input,
-#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_form_element input[type="text"].wpp_range_input {
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_form_element input[type="text"].wpp_range_input,
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_form_element input[type="text"].wpp_range_date,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form ul li.wpp_search_form_element input[type="text"].wpp_range_date {
   display: inline-block;
   box-sizing: border-box;
   width: 47%;
@@ -1160,7 +1162,11 @@ body .widget_wpp_property_stats h2.wpp_stats_group,
 body .wpp_feature_list ul.wpp_property_stats,
 #wpp_layout .wpp_feature_list ul.wpp_property_stats,
 body .widget_wpp_property_stats ul.wpp_property_stats,
-#wpp_layout .widget_wpp_property_stats ul.wpp_property_stats {
+#wpp_layout .widget_wpp_property_stats ul.wpp_property_stats,
+body .wpp_feature_list ul.property_stats,
+#wpp_layout .wpp_feature_list ul.property_stats,
+body .widget_wpp_property_stats ul.property_stats,
+#wpp_layout .widget_wpp_property_stats ul.property_stats {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1168,7 +1174,11 @@ body .widget_wpp_property_stats ul.wpp_property_stats,
 body .wpp_feature_list ul.wpp_property_stats li,
 #wpp_layout .wpp_feature_list ul.wpp_property_stats li,
 body .widget_wpp_property_stats ul.wpp_property_stats li,
-#wpp_layout .widget_wpp_property_stats ul.wpp_property_stats li {
+#wpp_layout .widget_wpp_property_stats ul.wpp_property_stats li,
+body .wpp_feature_list ul.property_stats li,
+#wpp_layout .wpp_feature_list ul.property_stats li,
+body .widget_wpp_property_stats ul.property_stats li,
+#wpp_layout .widget_wpp_property_stats ul.property_stats li {
   list-style: none;
   margin: 0;
 }
