@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "zip": "git archive -o meta-box-group.zip --prefix=meta-box-group/ HEAD"
+  }
+}

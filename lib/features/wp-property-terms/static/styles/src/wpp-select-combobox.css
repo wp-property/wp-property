@@ -1,0 +1,52 @@
+.wpp-taxonomy-select-combobox .assign-parent {
+  display: inline-block;
+  padding: 5px;
+  margin: 5px 0px;
+  -webkit-user-select: none;
+  /* Chrome all / Safari all */
+  -moz-user-select: none;
+  /* Firefox all */
+  -ms-user-select: none;
+  /* IE 10+ */
+  user-select: none;
+  /* Likely future */
+}
+.wpp-taxonomy-select-combobox,
+.wpp-taxonomy-select-combobox > div {
+  position: relative;
+}
+.wpp-taxonomy-select-combobox .select-combobox-toggle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: auto;
+  margin-left: -1px;
+  padding: 0;
+  float: left;
+}
+.wpp-taxonomy-select-combobox .wpp-terms-input {
+  margin: 0;
+  padding: 5px 10px;
+  float: left;
+}
+.wpp-taxonomy-select-combobox .wpp-terms-input:focus + a {
+  border-color: #5b9dd9;
+  border-left: 0;
+  -webkit-box-shadow: 0 0 2px rgba(30, 140, 190, 0.8);
+  box-shadow: 0 0 2px rgba(30, 140, 190, 0.8);
+}
+.wpp-autocomplete {
+  max-height: 150px;
+  overflow-y: scroll;
+}
+.wpp-autocomplete .ui-menu-item {
+  padding: 0px;
+}
+.wpp-autocomplete .ui-menu-item a {
+  display: block;
+  padding: 4px 10px;
+}
+.wpp-autocomplete .ui-menu-item a.ui-state-selected {
+  background-color: #ddd;
+  cursor: pointer;
+}
