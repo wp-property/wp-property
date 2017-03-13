@@ -1,16 +1,19 @@
+var $property_overview_box = 'body .wpp_property_overview_shortcode_v2 .wpp_property_view_result .all-properties .property .property_div_box';
+
 /**
  *
  */
-function properties_height(minHeight, maxHeight) {
+function properties_height(container,minHeight, maxHeight) {
   tallest = (minHeight) ? minHeight : 0;
-  jQuery('body .wpp_property_overview_shortcode_v2 .wpp_property_view_result .all-properties .property .property_div_box').css('height', 'auto');
-  jQuery('body .wpp_property_overview_shortcode_v2 .wpp_property_view_result .all-properties .property .property_div_box').each(function () {
+  var box = jQuery(container);
+  box.css('height', 'auto');
+  box.each(function () {
     if (jQuery(this).height() > tallest) {
       tallest = jQuery(this).height();
     }
   });
   if ((maxHeight) && tallest > maxHeight) tallest = maxHeight;
-  return jQuery('body .wpp_property_overview_shortcode_v2 .wpp_property_view_result .all-properties .property .property_div_box').each(function () {
+  return box.each(function () {
     jQuery(this).height(tallest); //.css("overflow","auto");
   });
 }
@@ -375,9 +378,12 @@ function properties_height(minHeight, maxHeight) {
 
         if (type == 'loadmore' && window.wpp_query[unique_id].is_sort !== true) {
           p_wrapper.append(content);
-          properties_height();
+          properties_height($property_overview_box);
         } else {
           p_wrapper.html(content);
+          jQuery('img', $property_overview_box).load(function () {
+            properties_height($property_overview_box);
+          });
         }
 
         /* Update max page in slider and in display */
@@ -623,7 +629,7 @@ function properties_height(minHeight, maxHeight) {
         jQuery('#wpp_shortcode_' + vars.unique_id + ' .wpp_template_view .wpp_template_view_button').removeClass('active');
         jQuery(this).addClass('active');
         if (template_class == 'grid') {
-          properties_height();
+          properties_height($property_overview_box);
         }
         if (typeof window.localStorage != 'undefined') {
           localStorage.setItem('wpp_shortcode_template', template_class);
@@ -636,7 +642,7 @@ function properties_height(minHeight, maxHeight) {
 })(jQuery, _wpp_overview_pagination);
 
 jQuery(window).load(function () {
-  properties_height();
+  properties_height($property_overview_box);
 });
 
 jQuery(document).ready(function () {

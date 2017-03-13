@@ -288,82 +288,6 @@ body,
     -moz-transition: opacity 0.3s ease-in-out 0s;
     -webkit-transition: opacity 0.3s ease-in-out 0s;
 
-    .wpp_pagination_slider_status {
-      line-height: 4em;
-      .clearfix;
-
-      .wpp_property_results {
-        float: left;
-        font-size: 20px;
-      }
-      .wpp_sorter_box {
-        float: right;
-        .wpp_sorter_options {
-          float: left;
-          .wpp_sort_by_text {
-            padding-right: 5px;
-            font-size: 14px;
-            font-weight: bold;
-          }
-          .wpp_sortable_link {
-            background-color: #145fc8;
-            color: #fff;
-            cursor: pointer;
-            padding: 0 2em;
-            display: inline-block;
-            line-height: 40px;
-          }
-
-          .wpp_sortable_dropdown {
-            display: inline-block;
-            float: none;
-            margin: 0;
-            width: auto;
-            height: 40px;
-            padding: 0 1em;
-          }
-        }
-        .wpp_template_view {
-          border: 1px solid #bbb;
-          float: right;
-          height: 40px;
-          margin: 8px 0 0 5px;
-          .wpp_template_view_button {
-            background-color: #fff;
-            color: #bbb;
-            cursor: pointer;
-            display: block;
-            float: left;
-            height: 38px;
-            width: 38px;
-            transition: color 0.15s ease-in-out 0s;
-            -moz-transition: color 0.15s ease-in-out 0s;
-            -webkit-transition: color 0.15s ease-in-out 0s;
-            &:after {
-              font-family: 'FontAwesome';
-              display: block;
-              text-align: center;
-              line-height: 38px;
-              font-size: 20px;
-            }
-            &.wpp_template_grid {
-              border-right: 1px solid #bbb;
-              &:after {
-                content: "\f009";
-              }
-            }
-            &.wpp_template_row:after {
-              content: "\f00b";
-            }
-            &:hover,
-            &.active {
-              color: #414141;
-            }
-          }
-        }
-      }
-    }
-
     &[wpp_template="grid"] {
       opacity: 1;
 
@@ -566,6 +490,85 @@ body,
 
     .properties_pagination {
 
+      .wpp_pagination_slider_status {
+        line-height: 4em;
+        .clearfix;
+
+        .wpp_property_results {
+          float: left;
+          font-size: 20px;
+        }
+        .wpp_sorter_box {
+          float: right;
+          .wpp_sorter_options {
+            float: left;
+            .wpp_sort_by_text {
+              padding-right: 5px;
+              font-size: 14px;
+              font-weight: bold;
+            }
+            .wpp_sortable_link {
+              background-color: #145fc8;
+              color: #fff;
+              cursor: pointer;
+              padding: 0 2em;
+              line-height: 40px;
+              display: inline-block;
+              margin-right: 5px;
+            }
+
+            .wpp_sortable_dropdown {
+              display: inline-block;
+              float: none;
+              margin: 0;
+              width: auto;
+              height: 40px;
+              padding: 0 1em;
+              margin-right: 5px;
+            }
+          }
+          .wpp_template_view {
+            border: 1px solid #bbb;
+            float: right;
+            height: 40px;
+            margin: 8px 0 0;
+            .wpp_template_view_button {
+              background-color: #fff;
+              color: #bbb;
+              cursor: pointer;
+              display: block;
+              float: left;
+              height: 38px;
+              width: 38px;
+              transition: color 0.15s ease-in-out 0s;
+              -moz-transition: color 0.15s ease-in-out 0s;
+              -webkit-transition: color 0.15s ease-in-out 0s;
+              &:after {
+                font-family: 'FontAwesome';
+                display: block;
+                text-align: center;
+                line-height: 38px;
+                font-size: 20px;
+              }
+              &.wpp_template_grid {
+                border-right: 1px solid #bbb;
+                &:after {
+                  content: "\f009";
+                }
+              }
+              &.wpp_template_row:after {
+                content: "\f00b";
+              }
+              &:hover,
+              &.active {
+                color: #414141;
+              }
+            }
+          }
+        }
+      }
+      /* wpp_pagination_slider_status */
+
       .wpp_pagination_buttons_wrapper {
 
         &.pagination-loadmore {
@@ -616,6 +619,87 @@ body,
             }
             &.shown {
               opacity: 1;
+            }
+          }
+        }
+        /* pagination-loadmore */
+        &.pagination-numeric {
+          margin-bottom: 10px;
+          .property-overview-navigation {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            li {
+              display: inline-block;
+              margin: 0;
+              padding: 0;
+              list-style: none;
+              > ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                li.page {
+                  margin: 0 5px 0 0;
+                  padding: 0;
+                  list-style: none;
+                  &.current-page {
+                    a.btn {
+                      font-weight: bold;
+                    }
+                  }
+                }
+              }
+              a.btn {
+                background-color: #145fc8;
+                color: #fff;
+                display: block;
+                line-height: 40px;
+                padding: 0 1em;
+                text-decoration: none;
+              }
+              &.next-page-btn,
+              &.last-page-btn,
+              &.first-page-btn,
+              &.previous-page-btn {
+                margin-right: 5px;
+              }
+            }
+          }
+        }
+        /* pagination-numeric */
+      }
+      /* wpp_pagination_buttons_wrapper */
+      .wpp_pagination_slider_wrapper {
+        position: relative;
+        &.pagination-slider {
+          margin-bottom: 10px;
+          .clearfix;
+
+          .wpp_pagination_button {
+            background-color: #145fc8;
+            color: #FFF;
+            display: block;
+            float: left;
+            padding: 0 1em;
+            line-height: 40px;
+            cursor: pointer;
+            margin-right: 5px;
+          }
+          .wpp_pagination_slider {
+            float: right;
+            margin-top: 15px;
+            height: 10px;
+            .ui-slider-handle {
+              width: auto;
+              height: auto;
+              cursor: pointer;
+              padding: 0 0.5em;
+              line-height: 24px;
+              top: -8px !important;
+              border: none;
+              background-color: #145fc8;
+              background-image: none;
+              color: #FFF;
             }
           }
         }
