@@ -51,6 +51,13 @@ namespace UsabilityDynamics\WPP {
           add_filter( 'ep_keep_index', '__return_true' );
           add_filter( 'ep_sync_terms_allow_hierarchy', '__return_true' );
 
+          // Increase timeout on indexing posts, because
+          // in some cases default 30 seconds is not enough. peshkov@UD
+          add_filter( 'ep_bulk_index_posts_request_args', function( $args ) {
+            $args['timeout'] = 180;
+            return $args;
+          } );
+
         }
 
         add_filter( 'option_ep_index_meta', array( $this, 'option_ep_index_meta' ) );
@@ -168,7 +175,9 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       * Extend indexed post object with tax_input with term meta.
+       * Extend indexed post object with
+       * - tax_input with term meta.
+       * - wpp_location_pin
        *
        * @param $post_args
        * @param $post_id
@@ -182,6 +191,16 @@ namespace UsabilityDynamics\WPP {
 
         // Prepare our tax_input fields.
         $post_args['tax_input'] = $this->prepare_terms( $post );
+
+        if(
+          isset( $post_args['post_meta']['wpp_location_pin'] ) &&
+          count( $post_args['post_meta']['wpp_location_pin'] ) == 2
+        ) {
+          $post_args['wpp_location_pin'] = array(
+            "lat" => $post_args['post_meta']['wpp_location_pin'][0],
+            "lon" => $post_args['post_meta']['wpp_location_pin'][1]
+          );
+        }
 
         return $post_args;
 
@@ -219,16 +238,14 @@ namespace UsabilityDynamics\WPP {
           str_replace( array( ' ', '-', ',', '.' ), '', strtolower( sanitize_title( $post_args['post_title'] ) ) ),
         );
 
+        $parts = explode( ' ', $post_args['post_title'] );
+        foreach( $parts as $k => $v ) {
+          unset( $parts[ $k ] );
+          $input[] = trim( implode( ' ', $parts ) );
+        }
+
         $post_args['title_suggest'] = array(
           "input" => $input,
-          "output" => $post_args['post_title'],
-          "payload" => array(
-            "post_id" => $post_id,
-            "post_status" => $post_args['post_status'],
-            "post_title" => $post_args['post_title'],
-            "post_name" => $post_args['post_name'],
-            "permalink" => str_replace( array( get_home_url(), get_site_url() ), '', $post_args['permalink'] )
-          )
         );
 
         $post_args['title_suggest'] = apply_filters( 'wpp:elastic:title_suggest', $post_args['title_suggest'], $post_args, $post_id );
@@ -276,15 +293,18 @@ namespace UsabilityDynamics\WPP {
                   strtolower( str_replace( '&amp;', '&', $term['name'] ) ),
                   str_replace( array( ' ', '-', ',', '.' ), '', strtolower( sanitize_title( $term['name'] ) ) )
                 )),
-                "output" => $term['name'],
+                //"output" => $term['name'],
+                /*
                 "payload" => array_filter( array(
                   "term_id" => $term['term_id'],
                   "term_type" => apply_filters( 'wpp:term_type', isset( $_term_metadata['term_type'] ) ? $_term_metadata['term_type'] : $_tax, $term, $_term_metadata ),
                   "slug" => $term['slug'],
                   "name" => str_replace( '&amp;', '&', $term['name'] ),
                   "tax" => $_tax,
-                  "url_path" => isset( $_term_metadata['url_path'] ) ? $_term_metadata['url_path'] : null
+                  "url_path" => isset( $_term_metadata['url_path'] ) ? $_term_metadata['url_path'] : null,
+                  "output" => $term['name'],
                 ))
+                //*/
               );
 
             }
@@ -375,6 +395,8 @@ namespace UsabilityDynamics\WPP {
        * @return mixed
        */
       static public function ep_config_mapping( $mapping ) {
+
+        @$mapping['settings']['index']['mapping']['total_fields']['limit'] = 5000;
 
         $mapping['settings']['analysis']['filter']['autocomplete_filter'] = array(
           "min_gram" => 1,
@@ -520,8 +542,8 @@ namespace UsabilityDynamics\WPP {
           ),
         );
 
-        $mapping['mappings']['post']['properties']['post_meta']['properties']['wpp_location_pin'] = array(
-          "lat_lon" => true,
+        $mapping['mappings']['post']['properties']['wpp_location_pin'] = array(
+          //"lat_lon" => true,
           "ignore_malformed" => true,
           "type" => "geo_point"
         );
@@ -535,14 +557,14 @@ namespace UsabilityDynamics\WPP {
           'preserve_separators' => true,
           'preserve_position_increments' => true,
           'max_input_length' => 50,
-          'payloads' => true
+          //'payloads' => true
         );
 
         $mapping['mappings']['post']['properties']['term_suggest'] = array(
           'type' => 'completion',
           'analyzer' => 'whitespace',
           'search_analyzer' => 'whitespace_analyzer',
-          'payloads' => true
+          //'payloads' => true
         );
 
         //die(json_encode($mapping, JSON_PRETTY_PRINT));
