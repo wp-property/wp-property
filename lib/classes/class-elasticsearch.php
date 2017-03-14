@@ -76,7 +76,6 @@ namespace UsabilityDynamics\WPP {
         add_filter( 'ep_post_sync_args_post_prepare_meta', array( $this, 'ep_post_sync_args_post_prepare_meta' ), 40, 2 );
         add_filter( 'ep_post_sync_args', array( $this, 'ep_post_sync_args' ), 40, 2 );
         add_filter( 'ep_post_sync_args', array( $this, 'post_title_suggest' ), 50, 2 );
-        add_filter( 'ep_post_sync_args', array( $this, 'filter_term_suggest' ), 60, 2 );
 
         // Set index-name.
         add_filter( 'ep_index_name', array( $this, 'ep_index_name' ), 50, 2 );
@@ -257,71 +256,6 @@ namespace UsabilityDynamics\WPP {
 
         return $post_args;
 
-      }
-
-      /**
-       * Create [term_suggest] list.
-       *
-       *
-       *
-       * @param $post_args
-       * @param $post_id
-       * @return mixed
-       */
-      public function filter_term_suggest( $post_args, $post_id ) {
-
-        $_suggestion_taxonomies = array(
-          'wpp_location',
-          'wpp_schools',
-          'wpp_listing_type',
-          'wpp_listing_status',
-          'wpp_listing_label',
-          'wpp_agent',
-          'wpp_office',
-          //'wpp_listing_category'
-        );
-
-        if ( ! empty( $post_args['terms'] ) ) {
-          foreach ( $post_args['terms'] as $_tax => $taxonomy ) {
-
-            foreach ( $taxonomy as $term ) {
-
-              if( !in_array( $_tax, $_suggestion_taxonomies )) {
-                continue;
-              }
-
-              $_term_metadata = WPP_F::get_term_metadata( get_term( $term['term_id'], $_tax ) );
-
-              $suggest[] = array(
-                "input" => array_unique( array(
-                  str_replace( '&amp;', '&', $term['name'] ),
-                  strtolower( str_replace( '&amp;', '&', $term['name'] ) ),
-                  str_replace( array( ' ', '-', ',', '.' ), '', strtolower( sanitize_title( $term['name'] ) ) )
-                )),
-                //"output" => $term['name'],
-                /*
-                "payload" => array_filter( array(
-                  "term_id" => $term['term_id'],
-                  "term_type" => apply_filters( 'wpp:term_type', isset( $_term_metadata['term_type'] ) ? $_term_metadata['term_type'] : $_tax, $term, $_term_metadata ),
-                  "slug" => $term['slug'],
-                  "name" => str_replace( '&amp;', '&', $term['name'] ),
-                  "tax" => $_tax,
-                  "url_path" => isset( $_term_metadata['url_path'] ) ? $_term_metadata['url_path'] : null,
-                  "output" => $term['name'],
-                ))
-                //*/
-              );
-
-            }
-
-          }
-        }
-
-        if ( ! empty( $suggest ) ) {
-          $post_args['term_suggest'] = $suggest;
-        }
-
-        return $post_args;
       }
 
       /**
@@ -565,15 +499,6 @@ namespace UsabilityDynamics\WPP {
           'max_input_length' => 50,
           //'payloads' => true
         );
-
-        $mapping['mappings']['post']['properties']['term_suggest'] = array(
-          'type' => 'completion',
-          'analyzer' => 'whitespace',
-          'search_analyzer' => 'whitespace_analyzer',
-          //'payloads' => true
-        );
-
-        //die(json_encode($mapping, JSON_PRETTY_PRINT));
 
         return $mapping;
       }
