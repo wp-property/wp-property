@@ -37,13 +37,6 @@ namespace UsabilityDynamics\WPP {
        *
        */
       function add_meta_boxes() {
-        global $post, $wpdb;
-        /**
-         * Add metabox for child properties
-         */
-        if( isset( $post ) && $post->post_type == 'property' && $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_parent = '{$post->ID}' AND post_status = 'publish' " ) ) {
-          add_meta_box( 'wpp_property_children', sprintf( __( 'Child %s', ud_get_wp_property('domain') ), WPP_F::property_label( 'plural' ) ), array( $this, 'render_child_properties_meta_box' ), 'property', 'advanced', 'high' );
-        }
 
         // Template selection only used when layouts are not enabled.
         if( !WP_PROPERTY_LAYOUTS ) {
@@ -136,8 +129,9 @@ namespace UsabilityDynamics\WPP {
        * @return array
        */
       public function register_meta_boxes( $meta_boxes ) {
-        $_meta_boxes = array();
+        global $wpdb;
 
+        $_meta_boxes = array();
 
         $taxonomies = ud_get_wp_property( 'taxonomies', array() );
 
@@ -167,22 +161,64 @@ namespace UsabilityDynamics\WPP {
 
         }
 
+        $groups = ud_get_wp_property( 'property_groups', array() );
+        $property_stats_groups = ud_get_wp_property( 'property_stats_groups', array() );
+
         /* Register 'General Information' metabox for Edit Property page */
         $meta_box = $this->get_property_meta_box( array(
           'name' => __( 'General', ud_get_wp_property()->domain )
         ), $post );
 
-        $groups = ud_get_wp_property( 'property_groups', array() );
-        $property_stats_groups = ud_get_wp_property( 'property_stats_groups', array() );
-
         if( $meta_box ) {
           $_meta_boxes[] = $meta_box;
         }
 
+        if( WPP_FEATURE_FLAG_DISABLE_EDITOR ) {
+          $_meta_boxes[] = array(
+            'id' => 'wpp_content',
+            'title' => __( "Content", ud_get_wp_property()->domain ),
+            'pages' => array( 'property' ),
+            'context' => 'normal',
+            'priority' => 'high',
+            'fields' => array(
+              $this->get_editor_field( $post )
+            )
+          );
+        }
 
-        //$_meta_boxes[] =  $fields[] = $this->get_rooms_field( $post );
+        $_meta_boxes[] = array(
+          'id' => 'wpp_media',
+          'title' => __( "Media", ud_get_wp_property()->domain ),
+          'pages' => array( 'property' ),
+          'context' => 'normal',
+          'priority' => 'high',
+          'fields' => array(
+            $this->get_media_field( $post )
+          )
+        );
 
-        if( defined( 'WPP_FEATURE_FLAG_WPP_ROOMS' ) && WPP_FEATURE_FLAG_WPP_ROOMS === true ) {
+        /**
+         * Add meta box (Tab) for child properties
+         */
+        if( isset( $post ) && $post->post_type == 'property' && $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_parent = '{$post->ID}' AND post_status = 'publish' " ) ) {
+
+          $_meta_boxes[] = array(
+            'id' => 'wpp_child_properties',
+            'title' => sprintf( __( 'Child %s', ud_get_wp_property('domain') ), WPP_F::property_label( 'plural' ) ),
+            'pages' => array( 'property' ),
+            'context' => 'normal',
+            'priority' => 'high',
+            'fields' => array(
+              array(
+                'id' => 'wpp_child_properties_field',
+                'type' => 'wpp_child_properties',
+              )
+            )
+          );
+
+        }
+
+        if( WPP_FEATURE_FLAG_WPP_ROOMS ) {
 
           $_meta_boxes[] = array(
             'id' => 'wpp_rooms',
@@ -206,9 +242,6 @@ namespace UsabilityDynamics\WPP {
             }
           }
         }
-
-
-        //die( '<pre>' . print_r( $_meta_boxes, true ) . '</pre>' );
 
         /**
          * Allow to customize our meta boxes via external add-ons ( modules, or whatever else ).
@@ -365,16 +398,6 @@ namespace UsabilityDynamics\WPP {
               ) ), 'wpp_listing_status', $post );
 
           }
-
-          // @todo Add to own group.
-
-          if( WPP_FEATURE_FLAG_DISABLE_EDITOR ) {
-            $fields[] = array( 'type' => 'heading', 'name' => 'Content' );
-            $fields[] = $this->get_editor_field( $post );
-          }
-
-          $fields[] = array( 'type' => 'heading', 'name' => 'Media' );
-          $fields[] = $this->get_media_field( $post );
 
           /* May be add Meta fields */
           foreach( ud_get_wp_property()->get( 'property_meta', array() ) as $slug => $label ) {

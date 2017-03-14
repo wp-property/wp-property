@@ -70,6 +70,10 @@ namespace UsabilityDynamics\WPP {
           new Listing_Type();
         }
 
+        if( WP_PROPERTY_LEGACY_META_ATTRIBUTES ) {
+          new Legacy_Meta_Attributes();
+        }
+
         // Maybe load our built-in Add-ons
 
         // Enable Supermap
@@ -170,7 +174,7 @@ namespace UsabilityDynamics\WPP {
         new Export();
 
         // Invoke Elasticsearch Handler.
-        if (defined('WP_PROPERTY_ELASTICSEARCH_SERVICE') && WP_PROPERTY_ELASTICSEARCH_SERVICE && class_exists('UsabilityDynamics\WPP\Elasticsearch')) {
+        if ( WP_PROPERTY_ELASTICSEARCH_SERVICE && class_exists('UsabilityDynamics\WPP\Elasticsearch')) {
           $this->elastic = new Elasticsearch();
         }
 

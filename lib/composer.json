@@ -21,7 +21,8 @@
   },
   "autoload": {
     "classmap": [
-      "features/listing-type"
+      "features/listing-type",
+      "features/legacy-meta-attributes"
     ]
   },
   "extra": {

@@ -64,7 +64,7 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
 
   <h2 class='wpp_settings_page_header'><?php echo ud_get_wp_property('labels.name') . ' ' . __('Settings', ud_get_wp_property()->domain) ?>
 
-    <?php  if( defined( 'WP_PROPERTY_SETUP_ASSISTANT' ) && WP_PROPERTY_SETUP_ASSISTANT ) { ?>
+    <?php  if( WP_PROPERTY_SETUP_ASSISTANT ) { ?>
       <a class="wpp-setup-asst" href="<?php echo admin_url('edit.php?post_type=property&page=property_settings&splash=setup-assistant'); ?>">
         <?php echo __('Setup Assistant', ud_get_wp_property()->domain); ?>
       </a>
@@ -290,7 +290,7 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
             </td>
           </tr>
 
-          <?php if( defined( 'WP_PROPERTY_LEGACY_META_ATTRIBUTES' ) && WP_PROPERTY_LEGACY_META_ATTRIBUTES ) { ?>
+          <?php if( WP_PROPERTY_LEGACY_META_ATTRIBUTES ) { ?>
           <tr class="wpp-setting wpp-setting-default-phone-number">
             <th><?php _e('Default Phone Number', ud_get_wp_property()->domain); ?></th>
             <td><?php echo WPP_F::input("name=phone_number&label=" . sprintf(__('Phone number to use when a %1s-specific phone number is not specified.', ud_get_wp_property()->domain), WPP_F::property_label('singular')) . "&group=wpp_settings[configuration]&style=width: 200px;", (isset($wp_properties['configuration']['phone_number']) ? $wp_properties['configuration']['phone_number'] : false)); ?></td>
@@ -342,7 +342,7 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
                     <span class="description"><?php _e('Enabling this option may cause performance issues.', ud_get_wp_property()->domain); ?></span>
                   </li>
 
-                  <?php if( defined( 'WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING' ) && WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING ) { ?>
+                  <?php if( WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING ) { ?>
                   <li>
                     <?php //show standard attribute matching
                     echo WPP_F::checkbox("name=wpp_settings[configuration][show_advanced_options]&label=" . __('Enable Standard Attributes Matching and Terms', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['show_advanced_options']) ? $wp_properties['configuration']['show_advanced_options'] : false)); ?>
@@ -644,12 +644,12 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
 
           <?php
           //list automatic backups taken from setup-assistant screen
-          if ( defined( 'WPP_FEATURE_FLAG_SETTINGS_BACKUPS' ) && WPP_FEATURE_FLAG_SETTINGS_BACKUPS && get_option("wpp_property_backups")) { ?>
+          if ( WPP_FEATURE_FLAG_SETTINGS_BACKUPS && get_option("wpp_property_backups")) { ?>
             <div class="wpp_settings_block">
               <?php _e("Automatic Backups of WP-Property Configuration", ud_get_wp_property()->domain); ?>
               <input type="button" value="<?php _e('Backup Now', ud_get_wp_property()->domain); ?>" id="wpp_ajax_create_settings_backup" class="button">
 
-              <?php  if( defined( 'WP_PROPERTY_SETUP_ASSISTANT' ) && WP_PROPERTY_SETUP_ASSISTANT ) { ?>
+              <?php  if( WP_PROPERTY_SETUP_ASSISTANT ) { ?>
               <span class="description"><?php _e('Backups created when you use Setup Assistant,or create one now.', ud_get_wp_property()->domain); ?> </span>
               <?php } ?>
               <br>

@@ -3,7 +3,7 @@
 /**
  * Class SearchPropertiesWidget
  */
-class SearchPropertiesWidget extends WP_Widget {
+class SearchPropertiesWidgetV2 extends WP_Widget {
   var $id = false;
 
   /**
@@ -11,6 +11,10 @@ class SearchPropertiesWidget extends WP_Widget {
    */
   function __construct() {
 
+    if(!is_admin()) {
+      wp_enqueue_style('jquery-ui-datepicker');
+    }
+    
     $property_label = strtolower( WPP_F::property_label() );
 
     parent::__construct(
@@ -54,7 +58,7 @@ class SearchPropertiesWidget extends WP_Widget {
       return;
     }
 
-    if ( !function_exists( 'draw_property_search_form' ) ) {
+    if ( !function_exists( 'draw_property_search_form_v2' ) ) {
       return;
     }
 
@@ -66,7 +70,7 @@ class SearchPropertiesWidget extends WP_Widget {
 
     echo $before_widget;
 
-    echo '<div class="wpp_search_properties_widget">';
+    echo '<div class="wpp_search_properties_widget_v2">';
 
     if ( $title ) {
       echo $before_title . $title . $after_title;
@@ -113,7 +117,7 @@ class SearchPropertiesWidget extends WP_Widget {
     $search_args[ 'sort_order' ] = $sort_order;
     $search_args[ 'strict_search' ] = ( !empty( $instance[ 'strict_search' ] ) && $instance[ 'strict_search' ] == 'on' ? 'true' : 'false' ) ;
 
-    draw_property_search_form( $search_args );
+    draw_property_search_form_v2( $search_args );
 
     echo "<div class='cboth'></div></div>";
 
@@ -409,8 +413,8 @@ class SearchPropertiesWidget extends WP_Widget {
 /**
  * Register widget
  */
-if (WPP_LEGACY_WIDGETS) {
+if (!WPP_LEGACY_WIDGETS) {
   add_action('widgets_init', function () {
-    register_widget("SearchPropertiesWidget");
+    register_widget("SearchPropertiesWidgetV2");
   });
 }

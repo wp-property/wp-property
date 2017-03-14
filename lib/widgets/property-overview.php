@@ -83,7 +83,9 @@ namespace UsabilityDynamics\WPP\Widgets {
   /**
    * Register this widget
    */
-  add_action( 'widgets_init', function() {
-    register_widget( 'UsabilityDynamics\WPP\Widgets\PropertyOverviewWidget' );
-  });
+  if (WPP_LEGACY_WIDGETS) {
+    add_action('widgets_init', function () {
+      register_widget('UsabilityDynamics\WPP\Widgets\PropertyOverviewWidget');
+    });
+  }
 }

@@ -104,6 +104,36 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Migrates property types attributes to terms
+       * It's moved from class-upgrade.php
+       *
+       */
+      public function migrate_legacy_type_to_term(){
+        global $wpdb;
+        $pp = $wpdb->get_results("SELECT ID from {$wpdb->posts} WHERE post_type='property'");
+        $wpp_settings = get_option('wpp_settings');
+
+        register_taxonomy('wpp_listing_type', 'property_type');
+        /* Generate Property type terms */
+        foreach ($wpp_settings['property_types'] as $_term => $label) {
+          $term = term_exists($label, 'wpp_listing_type');
+          if (!$term) {
+            $term = wp_insert_term($label, 'wpp_listing_type', array('slug' => $_term));
+          }
+        }
+
+        if (!empty($pp)) {
+          foreach ($pp as $p) {
+            $property_type = get_post_meta($p->ID, 'property_type', true);
+            if (!empty($property_type)) {
+              wp_set_object_terms($p->ID, $property_type, 'wpp_listing_type');
+            }
+          }
+        }
+
+      }
+
+      /**
        * Insert or update wpp_listing_type terms
        * Based on property_types on settings developer tab.
        * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE

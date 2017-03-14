@@ -74,7 +74,7 @@ class WPP_Core {
     add_filter( 'wpp_get_properties_query', array( $this, 'fix_tax_property_query' ));
 
     // Apply alises.
-    if( defined( 'WP_PROPERTY_FIELD_ALIAS' ) && WP_PROPERTY_FIELD_ALIAS ) {
+    if( WP_PROPERTY_FIELD_ALIAS ) {
       add_filter( 'wpp_get_property', array( $this, 'apply_property_alias' ), 50, 2 );
       add_filter( 'wpp_get_properties_query', array( $this, 'apply_properties_query_alias' ), 50 );
       // add_filter( 'get_post_metadata', array( $this, 'alias_get_post_metadata' ), 50, 4 );
@@ -421,7 +421,9 @@ class WPP_Core {
     wp_register_script( 'wpp-jquery-validate', WPP_URL . 'scripts/jquery.validate.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'scripts/jquery.number.format.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wp-property-galleria', WPP_URL . 'scripts/galleria/galleria-1.2.5.js', array( 'jquery', 'wpp-localization' ) );
-    
+
+    /* New script for property search shortcode */
+    wp_register_script( 'wpp-search-form', WPP_URL . 'scripts/wpp.search_form.js', array( 'jquery' ) );
 
 
     // Load localized scripts

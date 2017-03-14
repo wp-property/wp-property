@@ -8,4 +8,5 @@
 ?>
 <div class="wpp_pagination_buttons_wrapper pagination-loadmore">
   <button class="wpp_loadmore_button" data-page="2"><?php _e('Load more', ud_get_wp_property()->domain); ?></button>
+  <span class="wpp_to_top"></span>
 </div>
