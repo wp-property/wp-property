@@ -332,7 +332,8 @@ namespace UsabilityDynamics\WPP {
        * @return mixed|void
        */
       static public function ep_index_name( $index_name, $blog_id = null ) {
-        return get_option( 'ud_site_id' );
+        $index = defined( 'EP_INDEX_NAME' ) ? EP_INDEX_NAME : get_option( 'ud_site_id' );
+        return $index;
       }
 
       /**
