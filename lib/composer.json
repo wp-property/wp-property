@@ -22,7 +22,8 @@
   "autoload": {
     "classmap": [
       "features/listing-type",
-      "features/legacy-meta-attributes"
+      "features/legacy-meta-attributes",
+      "features/elasticsearch"
     ]
   },
   "extra": {

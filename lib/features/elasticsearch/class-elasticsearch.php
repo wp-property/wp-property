@@ -1,7 +1,7 @@
 <?php
 /**
- * Setup Assistant
- *
+ * Elastisearch integration for WP-Property
+ * based on Elasticpress plugin
  *
  *
  * wp elasticpress index --posts-per-page=1 --nobulk
@@ -23,14 +23,24 @@ namespace UsabilityDynamics\WPP {
        * Elasticsearch constructor.
        */
       function __construct() {
+        add_action( 'plugins_loaded', array( $this, 'init' ) );
+      }
 
-        $_vendor_path = dirname( __FILE__, 3 ) . '/vendor/plugins/elasticpress/elasticpress.php';
+      /**
+       *
+       */
+      public function init() {
+
+        $_vendor_path = ud_get_wp_property( 'vendor/plugins/elasticpress/elasticpress.php', 'dir' );
 
         if( !get_option( 'ud_site_id' ) ) {
           return;
         }
 
         if( !defined( 'EP_VERSION' ) && file_exists( $_vendor_path ) ) {
+
+          // Handles indexing of Terms
+          new Elasticsearch_Terms();
 
           // Load plugin.
           require_once( $_vendor_path );
@@ -85,7 +95,6 @@ namespace UsabilityDynamics\WPP {
 
         // Parse/Analyze responses.
         add_action( 'ep_index_post_retrieve_raw_response', array( $this, 'ep_index_post_retrieve_raw_response' ), 50, 3 );
-        // add_filter( 'ep_config_mapping_request', array( $this, 'ep_config_mapping_request' ), 50, 3 );
 
       }
 
@@ -134,24 +143,6 @@ namespace UsabilityDynamics\WPP {
       public function ep_prepare_meta_excluded_public_keys( $exclude ) {
 
         return array( 'rets_media', 'wpp_import_time', 'wpp_import_schedule_id' );
-
-      }
-
-      /**
-       * Debug failed mapping update request's response.
-       *
-       * @param $request
-       * @param $index
-       * @param $mapping
-       * @return mixed
-       */
-      public function ep_config_mapping_request( $request, $index, $mapping ) {
-
-        if ( 200 !== wp_remote_retrieve_response_code( $request ) ) {
-          // error_log( 'WP-Property Elasticsearch mapping update error ' . print_r( $request, true ) );
-        }
-
-        return $request;
 
       }
 
