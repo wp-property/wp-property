@@ -1,5 +1,5 @@
 <?php
-
+if (WPP_LEGACY_WIDGETS) {
 /**
  * Class GalleryPropertiesWidget
  */
@@ -216,7 +216,6 @@ class GalleryPropertiesWidget extends WP_Widget
 /**
  * Register widget
  */
-if (WPP_LEGACY_WIDGETS) {
   add_action('widgets_init', function () {
     register_widget("GalleryPropertiesWidget");
   });

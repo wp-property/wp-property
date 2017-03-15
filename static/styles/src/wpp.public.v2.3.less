@@ -409,7 +409,7 @@ body,
             border: 1px solid #e3e3e3;
             display: block;
             margin: 0 0 1em;
-            width: 100%;
+            width: 100% !important;
             .property_div_box {
               .clearfix;
               height: auto !important;
@@ -464,7 +464,8 @@ body,
                   font-size: 20px;
                   margin-bottom: 0.5em;
                 }
-                ul.wpp_overview_data {
+                ul.wpp_overview_data,
+                ul#wpp_overview_data {
                   margin: 0;
                   padding: 0;
                   list-style: none;
@@ -759,13 +760,15 @@ body,
     padding: 2em 1em;
     .wpp_shortcode_search_form {
 
-      ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
+      ul.wpp_search_elements {
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
+
         li {
           margin: 0 0 1em;
           list-style: none;
+
           &.wpp_search_group {
 
             .wpp_search_group_title {
@@ -782,6 +785,9 @@ body,
               }
             }
             ul.wpp_search_group {
+              margin: 0 !important;
+              padding: 0 !important;
+              list-style: none !important;
               display: none;
               > li.wpp_search_form_element {
                 label.wpp_search_label {
@@ -894,6 +900,7 @@ body,
           border: none;
           padding: 0;
           max-width: 150px;
+          min-width: 100px;
           vertical-align: top;
           a.thumbnail {
             font-size: 14px;
@@ -918,7 +925,7 @@ body,
         .wpp_google_maps_right_col {
           border: none;
           padding: 0 0 0 1em;
-          min-width: 200px;
+          min-width: 160px;
           .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link {
             display: none;
             a {
@@ -963,8 +970,45 @@ body,
       }
     }
   }
-
   /* Gallery widget */
+
+  /* Gallery widget v2 */
+  .wpp_gallery_widget_v2 {
+
+    h3.widget-title {
+      font-size: 1.4em;
+      margin-bottom: 0.5em;
+    }
+    .swiper-container {
+      border: 1px solid #e3e3e3;
+      padding: 1em;
+
+      .swiper-wrapper {
+
+        .swiper-slide {
+
+          .swiper-slide-wrapper {
+            display: block;
+
+            a.thumbnail {
+              display: block;
+              margin-bottom: 0.5em;
+              img {
+                display: block;
+              }
+            }
+            .wpp_image_widget_caption {
+              margin-bottom: 0.5em;
+            }
+            .wpp_image_widget_description {
+
+            }
+          }
+        }
+      }
+    }
+  }
+  /* Gallery widget v2 */
 
   /* Features list */
   .wpp_feature_list,
@@ -1074,9 +1118,11 @@ body,
         span.attribute {
           font-weight: bold;
           padding-right: 5px;
+          display: inline-block;
         }
         span.value {
-
+          text-align: right;
+          display: inline-block;
         }
       }
     }
@@ -1318,4 +1364,49 @@ body,
     }
   }
   /* wpp shortcode search */
+
+  /* wpp_supermap_wrapper */
+  .wpp_supermap_wrapper {
+    border: 1px solid #e3e3e3;
+    .clearfix;
+
+    .super_map {
+      float: right;
+      width: calc(100% - 250px);
+    }
+    .super_map_list {
+      float: left;
+      height: 400px;
+      overflow-y: scroll;
+      width: 250px;
+      .super_map_list_property {
+        margin-bottom: 1em;
+        .clearfix;
+        .property_in_list {
+          padding: 1em;
+          .property_in_list_items {
+            border-bottom: 1px solid #e3e3e3;
+            list-style: outside none none !important;
+            margin: 0;
+            padding: 0 0 1em !important;
+          }
+          &:last-child {
+            .property_in_list_items {
+              border-bottom: none;
+            }
+          }
+        }
+      }
+      .show_more {
+        background-color: #145fc8;
+        color: #fff;
+        cursor: pointer;
+        display: block;
+        line-height: 40px;
+        text-align: center;
+        margin: 1em;
+      }
+    }
+  }
+  /* wpp_supermap_wrapper */
 }

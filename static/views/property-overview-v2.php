@@ -67,7 +67,7 @@ if (have_properties()) {
 
     <?php echo $list_price ? '<div class="property_price">' . $list_price . '</div>' : ''; ?>
 
-    <ul class="<?php wpp_css('property_overview::data', "wpp_overview_data"); ?>">
+    <ul id="wpp_overview_data" class="<?php wpp_css('property_overview::data', "wpp_overview_data"); ?>">
 
       <?php if (!empty($property['custom_attribute_overview']) || !empty($property['tagline'])): ?>
         <li class="property_tagline">
