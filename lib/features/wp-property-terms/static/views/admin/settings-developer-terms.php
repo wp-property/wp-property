@@ -193,11 +193,7 @@ jQuery(document).ready(function($) {
           <li class="wpp_development_advanced_option">
             <input type="text" class="slug" readonly='readonly' value="<%= slug %>"/>
 
-            <?php if( WP_PROPERTY_FIELD_ALIAS ) { ?>
-            <label class="wpp-meta-alias-entry">
-              <input type="text" class="slug wpp_field_alias" name="wpp_settings[field_alias][<%= slug %>]" placeholder="Alias for <%= slug %>" value="<%= filtered_field_alias[slug] %>" />
-            </label>
-            <?php } ?>
+            <?php //do_action( "wpp::settings_developer_terms::advanced_option" ); ?>
 
           </li>
           <li class="hide-on-new-row">

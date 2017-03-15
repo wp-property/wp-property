@@ -88,6 +88,7 @@ return array(
     'UsabilityDynamics\\WPP\\Agents_Bootstrap' => $baseDir . '/features/wp-property-agents/lib/classes/class-agents-bootstrap.php',
     'UsabilityDynamics\\WPP\\Elasticsearch' => $baseDir . '/features/elasticsearch/class-elasticsearch.php',
     'UsabilityDynamics\\WPP\\Elasticsearch_Terms' => $baseDir . '/features/elasticsearch/class-elasticsearch-terms.php',
+    'UsabilityDynamics\\WPP\\Field_Alias' => $baseDir . '/features/field-alias/class-field-alias.php',
     'UsabilityDynamics\\WPP\\Legacy_Meta_Attributes' => $baseDir . '/features/legacy-meta-attributes/class-legacy-meta-attributes.php',
     'UsabilityDynamics\\WPP\\Listing_Type' => $baseDir . '/features/listing-type/class-listing-type.php',
     'UsabilityDynamics\\WPP\\RS_Bootstrap' => $baseDir . '/features/wp-property-responsive-slideshow/lib/classes/class-rs-bootstrap.php',

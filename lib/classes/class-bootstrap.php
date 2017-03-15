@@ -77,6 +77,11 @@ namespace UsabilityDynamics\WPP {
           new Elasticsearch();
         }
 
+        // Apply alises.
+        if( WP_PROPERTY_FIELD_ALIAS ) {
+          new Field_Alias();
+        }
+
         // Maybe load our built-in Add-ons
 
         // Enable Supermap

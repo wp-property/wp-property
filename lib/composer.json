@@ -23,7 +23,8 @@
     "classmap": [
       "features/listing-type",
       "features/legacy-meta-attributes",
-      "features/elasticsearch"
+      "features/elasticsearch",
+      "features/field-alias"
     ]
   },
   "extra": {
