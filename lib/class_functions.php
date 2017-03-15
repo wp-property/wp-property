@@ -4725,6 +4725,9 @@ class WPP_F extends UsabilityDynamics\Utility
       $data = new stdClass();
 
       foreach ($array as $akey => $aval) {
+        if( empty( $akey ) ) {
+          continue;
+        }
         $data->{$akey} = $aval;
       }
 
