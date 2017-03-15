@@ -3,7 +3,7 @@
 /**
  * Class GalleryPropertiesWidget
  */
-class GalleryPropertiesWidget extends WP_Widget
+class GalleryPropertiesWidgetV2 extends WP_Widget
 {
 
   /**
@@ -70,7 +70,7 @@ class GalleryPropertiesWidget extends WP_Widget
     */
 
     $html[] = $before_widget;
-    $html[] = "<div class='wpp_gallery_widget'>";
+    $html[] = "<div class='wpp_gallery_widget_v2'>";
 
     if ($title) {
       $html[] = $before_title . $title . $after_title;
@@ -216,8 +216,8 @@ class GalleryPropertiesWidget extends WP_Widget
 /**
  * Register widget
  */
-if (WPP_LEGACY_WIDGETS) {
+if (!WPP_LEGACY_WIDGETS) {
   add_action('widgets_init', function () {
-    register_widget("GalleryPropertiesWidget");
+    register_widget("GalleryPropertiesWidgetV2");
   });
 }

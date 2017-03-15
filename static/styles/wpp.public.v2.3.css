@@ -1380,6 +1380,7 @@ body .widget_wpp_property_stats_v2 .wpp_features_box .wpp_feature_list .wpp_attr
 #wpp_layout .widget_wpp_property_stats_v2 .wpp_features_box .wpp_feature_list .wpp_attribute_row span.value {
   display: block;
   margin-left: 10px;
+  text-align: right;
 }
 body .widget_wpp_property_stats_v2 .wpp_features_box .wpp_feature_list .wpp_attribute_row,
 #wpp_layout .widget_wpp_property_stats_v2 .wpp_features_box .wpp_feature_list .wpp_attribute_row {
@@ -1404,7 +1405,7 @@ body .widget_wpp_property_stats_v2 .wpp_features_box .wpp_feature_list .wpp_attr
 body .widget_wpp_property_stats_v2 .wpp_features_box .wpp_feature_list .wpp_attribute_row p.value,
 #wpp_layout .widget_wpp_property_stats_v2 .wpp_features_box .wpp_feature_list .wpp_attribute_row p.value {
   display: block;
-  float: left;
+  text-align: right;
 }
 body ul.property_status_list,
 #wpp_layout ul.property_status_list {

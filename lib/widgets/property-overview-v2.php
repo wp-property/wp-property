@@ -15,7 +15,7 @@ namespace UsabilityDynamics\WPP\Widgets {
     /**
      * @var string
      */
-    public $shortcode_id = 'property_overview_v2';
+    public $shortcode_id = 'property_overview';
 
     /**
      * Init
