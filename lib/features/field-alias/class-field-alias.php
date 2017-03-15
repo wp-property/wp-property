@@ -33,8 +33,7 @@ namespace UsabilityDynamics\WPP {
               return $data;
             }
             $filtered_field_alias = array();
-            foreach( $data[ 'config' ]['taxonomies'] as $slug => $data ){
-              $_term_config['taxonomies'][$slug] = ud_get_wpp_terms()->prepare_taxonomy( $data, $slug );
+            foreach( $data[ 'config' ]['taxonomies'] as $slug => $_data ){
               $filtered_field_alias[$slug] = $this->get_alias_map( $slug ) ;
             }
             $data[ 'filtered_field_alias'] = $filtered_field_alias;
