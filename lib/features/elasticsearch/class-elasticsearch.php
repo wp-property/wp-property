@@ -31,7 +31,7 @@ namespace UsabilityDynamics\WPP {
        */
       public function init() {
 
-        $_vendor_path = ud_get_wp_property( 'vendor/plugins/elasticpress/elasticpress.php', 'dir' );
+        $_vendor_path = ud_get_wp_property()->path( 'vendor/plugins/elasticpress/elasticpress.php', 'dir' );
 
         if( !get_option( 'ud_site_id' ) ) {
           return;
@@ -61,7 +61,7 @@ namespace UsabilityDynamics\WPP {
           add_filter( 'ep_keep_index', '__return_true' );
           add_filter( 'ep_sync_terms_allow_hierarchy', '__return_true' );
 
-          // Increase timeout on indexing posts, because
+          // Increase timeout on indexing posts to 3 minutes, because
           // in some cases default 30 seconds is not enough. peshkov@UD
           add_filter( 'ep_bulk_index_posts_request_args', function( $args ) {
             $args['timeout'] = 180;
