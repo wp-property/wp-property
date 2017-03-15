@@ -44,7 +44,7 @@ foreach ($attributes as $slug => $label) {
   do_action( 'wpp::property_attributes::settings', $slug );
   $settings_do_action[$slug] = ob_get_clean();
 
-  $filtered_field_alias[$slug] = WPP_F::get_alias_map( $slug ) ;
+  //$filtered_field_alias[$slug] = WPP_F::get_alias_map( $slug ) ;
 }
 
 $searchable_attr_field_do_action  = array_filter($searchable_attr_field_do_action);
@@ -203,11 +203,7 @@ jQuery(document).ready(function($) {
               <input type="text" class="slug wpp_stats_slug_field" readonly='readonly' value="<%= slug %>"/>
             </label>
 
-            <?php if( WP_PROPERTY_FIELD_ALIAS ) { ?>
-            <label class="wpp-meta-alias-entry">
-              <input type="text" class="slug wpp_field_alias" name="wpp_settings[field_alias][<%= slug %>]" placeholder="Alias for <%= slug %>" value="<%= filtered_field_alias[slug] %>" />
-            </label>
-            <?php } ?>
+            <?php do_action( "wpp::settings::developer::attributes::item_advanced_options" ); ?>
 
             <% if( jQuery.inArray(slug, wp_properties.geo_type_attributes) != -1){ %>
               <div class="wpp_notice">

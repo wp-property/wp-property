@@ -1,6 +1,7 @@
 <?php
 /**
- * Term Advanced Option
+ * Advanced Option
+ * Used for Attributes/Taxonomies
  */
 ?>
 <label class="wpp-meta-alias-entry">

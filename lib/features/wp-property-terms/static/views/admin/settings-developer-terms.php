@@ -9,11 +9,9 @@ wp_enqueue_style( 'wpp-terms-settings', ud_get_wpp_terms()->path( '/static/style
 
 $_term_config = (array) ud_get_wpp_terms( 'config', array() );
 $_term_types = (array) ud_get_wpp_terms( 'types', array() );
-$filtered_field_alias = array();
 
 foreach( $_term_config['taxonomies'] as $slug => $data ){
   $_term_config['taxonomies'][$slug] = ud_get_wpp_terms()->prepare_taxonomy( $data, $slug );
-  $filtered_field_alias[$slug] = WPP_F::get_alias_map( $slug ) ;
 }
 
 $search_input = apply_filters( 'wpp::terms::search_input_fields', 
@@ -27,8 +25,7 @@ $wpp_property_types_variables = apply_filters( 'wpp::settings::developer::terms'
     'config'                => $_term_config,
     'types'                 => $_term_types,
     'search_input'          => $search_input,
-    'filtered_field_alias'  => $filtered_field_alias,
-  ) );
+) );
 
 ?>
 
@@ -193,7 +190,7 @@ jQuery(document).ready(function($) {
           <li class="wpp_development_advanced_option">
             <input type="text" class="slug" readonly='readonly' value="<%= slug %>"/>
 
-            <?php //do_action( "wpp::settings_developer_terms::advanced_option" ); ?>
+            <?php do_action( "wpp::settings::developer::terms::item_advanced_options" ); ?>
 
           </li>
           <li class="hide-on-new-row">
