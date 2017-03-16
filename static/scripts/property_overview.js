@@ -654,7 +654,7 @@ function properties_width() {
 
 jQuery(window).load(function () {
   properties_height($property_overview_box);
-  properties_width();
+  // properties_width();
 });
 
 jQuery(document).ready(function () {
