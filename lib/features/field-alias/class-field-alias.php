@@ -24,9 +24,38 @@ namespace UsabilityDynamics\WPP {
         // add_filter( 'get_post_metadata', array( $this, 'alias_get_post_metadata' ), 50, 4 );
 
         if( is_admin() ) {
+
+          /**
+           * Edit Property Page: Meta Box Fields HACKing
+           */
+
+          // We must use readonly field for our aliases
+          add_filter( 'wpp::rwmb_meta_box::field', function( $field ) {
+            $alias = $this->get_alias_map( $field[ 'id' ] );
+            if( !empty( $alias ) ) {
+              $field[ 'id' ] = '_wpp_alias:' . $field[ 'id' ] . ':' . $alias;
+              $field[ 'type' ] = 'wpp_readonly';
+            }
+            return $field;
+          } );
+
+          /**
+           * Developer Tab UI
+           */
+
           //
           add_action( "wpp::settings::developer::terms::item_advanced_options", array( $this, "draw_alias_option" ) );
           add_action( "wpp::settings::developer::attributes::item_advanced_options", array( $this, "draw_alias_option" ) );
+          //
+          add_filter( "wpp::settings::developer::attributes", function( $data ) {
+            $attributes = ud_get_wp_property()->get('property_stats', array());
+            $filtered_field_alias = array();
+            foreach( $attributes as $slug => $_data ){
+              $filtered_field_alias[$slug] = $this->get_alias_map( $slug ) ;
+            }
+            $data[ 'filtered_field_alias'] = $filtered_field_alias;
+            return $data;
+          }, 100 );
           //
           add_filter( "wpp::settings::developer::terms", function( $data ) {
             if( empty( $data[ 'config' ]['taxonomies'] ) ) {
