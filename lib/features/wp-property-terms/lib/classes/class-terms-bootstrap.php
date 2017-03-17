@@ -1083,6 +1083,8 @@ namespace UsabilityDynamics\WPP {
         foreach( $args as &$arg ) {
           if( is_string( $arg ) && $arg === 'true' ) {
             $arg = true;
+          } else if( is_string( $arg ) && $arg === 'false' ) {
+            $arg = false;
           }
         }
 

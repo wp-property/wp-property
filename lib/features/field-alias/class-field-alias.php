@@ -33,7 +33,7 @@ namespace UsabilityDynamics\WPP {
           add_filter( 'wpp::rwmb_meta_box::field', function( $field ) {
             $alias = $this->get_alias_map( $field[ 'id' ] );
             if( !empty( $alias ) ) {
-              $field[ 'id' ] = '_wpp_alias:' . $field[ 'id' ] . ':' . $alias;
+              $field[ 'id' ] = $alias;
               $field[ 'type' ] = 'wpp_readonly';
             }
             return $field;

@@ -194,7 +194,7 @@ jQuery(document).ready(function($) {
 
           </li>
           <li class="hide-on-new-row">
-            <a href="<?php echo admin_url( "edit-tags.php?taxonomy={<%= slug %>}&post_type=property" ); ?>"><?php _e( 'Manage Terms', ud_get_wpp_terms()->domain ); ?></a>
+            <a target="_blank" href="<?php echo admin_url( "edit-tags.php?taxonomy=<%= slug %>&post_type=property" ); ?>"><?php _e( 'Manage Terms', ud_get_wpp_terms()->domain ); ?></a>
           </li>
           <li>
             <span class="wpp_show_advanced"><?php _e( 'Toggle Advanced Settings', ud_get_wpp_terms()->domain ); ?></span>
