@@ -219,7 +219,7 @@ namespace UsabilityDynamics\WPP {
       /**
        * Makes sure WPP-Terms doesn't override read-only taxonomies.
        *
-       * @todo Update to allow labels to be overwritten for readonly taxonomies. - potanin@UD
+       * @todo Update to allow labels to be overwritten for system taxonomies. - potanin@UD
        *
        * @param $taxonomies - Passed down via wpp_taxonomies filter, not yet registered with WP.
        */
@@ -239,8 +239,8 @@ namespace UsabilityDynamics\WPP {
 
         foreach( $taxonomies as $_taxonomy => $_taxonomy_data ) {
 
-          // Make sure we dont override any [readonly] taxonomies.
-          if( isset( $_taxonomy_data[ 'readonly' ] ) && $_taxonomy_data[ 'readonly' ]) {
+          // Make sure we dont override any [system] taxonomies.
+          if( isset( $_taxonomy_data[ 'system' ] ) && $_taxonomy_data[ 'system' ]) {
 
             if( isset( $_taxonomies[ $_taxonomy ] ) ) {
               $_original_taxonomy = $_taxonomies[ $_taxonomy ];
@@ -811,20 +811,32 @@ namespace UsabilityDynamics\WPP {
 
             default:
               /** Do not add taxonomy field if native meta box is being used for it. */
-              if( (isset($d[ 'add_native_mtbox' ]) && $d[ 'add_native_mtbox' ])
-               || (isset($d['hidden']) && $d['hidden'])) {
+              if( (isset($d[ 'add_native_mtbox' ]) && $d[ 'add_native_mtbox' ])) {
                 break;
               }
-              $field = array(
-                'name' => $d['label'],
-                'id' => $k,
-                'type' => 'wpp_taxonomy',
-                'multiple' => ( isset( $types[ $k ] ) && $types[ $k ] == 'unique' ? false : true ),
-                'options' => array(
-                  'taxonomy' => $k,
-                  'type' => ( isset( $d[ 'hierarchical' ] ) && $d[ 'hierarchical' ] == true ? 'select_tree' : 'select_advanced' ),
-                  'args' => array(),
-              ) );
+              if( isset($d[ 'readonly' ]) && $d[ 'readonly' ] ) {
+                /*
+                $field = array(
+                  'name' => $d['label'],
+                  'id' => $k,
+                  'type' => 'wpp_taxonomy_hidden',
+                  'options' => array(
+                    'taxonomy' => $k,
+                    'args' => array(),
+                  ) );
+                //*/
+              } else {
+                $field = array(
+                  'name' => $d['label'],
+                  'id' => $k,
+                  'type' => 'wpp_taxonomy',
+                  'multiple' => ( isset( $types[ $k ] ) && $types[ $k ] == 'unique' ? false : true ),
+                  'options' => array(
+                    'taxonomy' => $k,
+                    'type' => ( isset( $d[ 'hierarchical' ] ) && $d[ 'hierarchical' ] == true ? 'select_tree' : 'select_advanced' ),
+                    'args' => array(),
+                  ) );
+              }
               break;
           }
 
@@ -1058,8 +1070,10 @@ namespace UsabilityDynamics\WPP {
         $args = wp_parse_args( $args, array(
           'default' => false,
           'readonly' => false,
-          'unique' => true,
+          'system' => false,
+          'meta' => false,
           'hidden' => false,
+          'unique' => true,
           'label' => $taxonomy,
           'labels' => array(),
           'public' => false,
