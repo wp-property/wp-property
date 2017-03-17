@@ -221,7 +221,7 @@ namespace UsabilityDynamics\WPP {
        *
        * @todo Update to allow labels to be overwritten for readonly taxonomies. - potanin@UD
        *
-       * @param $taxonomies - Paseed down via wpp_taxonomies filter, not yet registered with WP.
+       * @param $taxonomies - Passed down via wpp_taxonomies filter, not yet registered with WP.
        */
       public function prepare_taxonomies( $taxonomies ) {
 
@@ -238,7 +238,6 @@ namespace UsabilityDynamics\WPP {
         $_taxonomies = $this->get( 'config.taxonomies', array() );
 
         foreach( $taxonomies as $_taxonomy => $_taxonomy_data ) {
-
 
           // Make sure we dont override any [readonly] taxonomies.
           if( isset( $_taxonomy_data[ 'readonly' ] ) && $_taxonomy_data[ 'readonly' ]) {
@@ -813,7 +812,7 @@ namespace UsabilityDynamics\WPP {
             default:
               /** Do not add taxonomy field if native meta box is being used for it. */
               if( (isset($d[ 'add_native_mtbox' ]) && $d[ 'add_native_mtbox' ])
-               || (isset($wp_properties['taxonomies'][$k]['hidden']) && $wp_properties['taxonomies'][$k]['hidden'])) {
+               || (isset($d['hidden']) && $d['hidden'])) {
                 break;
               }
               $field = array(

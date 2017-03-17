@@ -24,6 +24,7 @@
       "features/listing-type",
       "features/legacy-meta-attributes",
       "features/elasticsearch",
+      "features/system-taxonomy",
       "features/field-alias"
     ]
   },

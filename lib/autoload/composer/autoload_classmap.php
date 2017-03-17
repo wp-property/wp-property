@@ -95,6 +95,7 @@ return array(
     'UsabilityDynamics\\WPP\\RS_Shortcode' => $baseDir . '/features/wp-property-responsive-slideshow/lib/classes/class-rs-shortcode.php',
     'UsabilityDynamics\\WPP\\Supermap_Bootstrap' => $baseDir . '/features/wp-property-supermap/lib/classes/class-supermap-bootstrap.php',
     'UsabilityDynamics\\WPP\\Supermap_Utility' => $baseDir . '/features/wp-property-supermap/lib/classes/class-supermap-utility.php',
+    'UsabilityDynamics\\WPP\\System_Taxonomy' => $baseDir . '/features/system-taxonomy/system-taxonomy.php',
     'UsabilityDynamics\\WPP\\Terms_Bootstrap' => $baseDir . '/features/wp-property-terms/lib/classes/class-terms-bootstrap.php',
     'UsabilityDynamics\\WPP\\Terms_Upgrade' => $baseDir . '/features/wp-property-terms/lib/classes/class-terms-upgrade.php',
 );

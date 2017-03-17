@@ -77,6 +77,9 @@ namespace UsabilityDynamics\WPP {
           new Elasticsearch();
         }
 
+        // Define System Taxonomies.
+        new System_Taxonomy();
+
         // Apply alises.
         if( WP_PROPERTY_FIELD_ALIAS ) {
           new Field_Alias();
