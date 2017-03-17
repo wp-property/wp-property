@@ -11,7 +11,7 @@
       "php": ">=5.3",
       "usabilitydynamics/lib-utility": "0.3.7",
       "usabilitydynamics/lib-wp-bootstrap": "1.2.1",
-      "usabilitydynamics/lib-wp-saas-util": "1.0.4"
+      "usabilitydynamics/lib-wp-saas-util": "1.0.5"
     },
   "repositories": [
     {

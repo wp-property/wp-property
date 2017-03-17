@@ -506,17 +506,17 @@
     },
     {
         "name": "usabilitydynamics/lib-wp-saas-util",
-        "version": "1.0.4",
-        "version_normalized": "1.0.4.0",
+        "version": "1.0.5",
+        "version_normalized": "1.0.5.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/lib-wp-saas-util",
-            "reference": "1.0.4"
+            "reference": "1.0.5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-wp-saas-util/archive/1.0.4.zip",
-            "reference": "1.0.4",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-saas-util/archive/1.0.5.zip",
+            "reference": "1.0.5",
             "shasum": null
         },
         "type": "library",
@@ -606,7 +606,7 @@
             "php": ">=5.3",
             "usabilitydynamics/lib-utility": "0.3.7",
             "usabilitydynamics/lib-wp-bootstrap": "1.2.1",
-            "usabilitydynamics/lib-wp-saas-util": "1.0.4"
+            "usabilitydynamics/lib-wp-saas-util": "1.0.5"
         },
         "type": "wordpress-plugin",
         "extra": {
@@ -682,23 +682,23 @@
     },
     {
         "name": "freemius/wordpress-sdk",
-        "version": "1.2.1.5",
-        "version_normalized": "1.2.1.5",
+        "version": "1.2.1.6",
+        "version_normalized": "1.2.1.6",
         "source": {
             "type": "git",
             "url": "https://github.com/Freemius/wordpress-sdk.git",
-            "reference": "0c132a52b69dd6bc160112d2cf7399702d95599b"
+            "reference": "a3f3af732acbd4fe0f040e911b6cf190e0d3d4cb"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Freemius/wordpress-sdk/zipball/0c132a52b69dd6bc160112d2cf7399702d95599b",
-            "reference": "0c132a52b69dd6bc160112d2cf7399702d95599b",
+            "url": "https://api.github.com/repos/Freemius/wordpress-sdk/zipball/a3f3af732acbd4fe0f040e911b6cf190e0d3d4cb",
+            "reference": "a3f3af732acbd4fe0f040e911b6cf190e0d3d4cb",
             "shasum": ""
         },
         "require": {
             "php": ">=5.2"
         },
-        "time": "2016-12-13T01:17:43+00:00",
+        "time": "2017-03-10T21:26:29+00:00",
         "type": "library",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",

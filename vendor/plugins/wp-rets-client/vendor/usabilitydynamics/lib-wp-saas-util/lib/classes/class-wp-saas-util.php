@@ -92,7 +92,7 @@ namespace UsabilityDynamics\SAAS_UTIL {
         // Determine if Registration is temporarily disabled.
         $_state = get_transient('ud_registration_state');
         if( $_state && is_array( $_state ) && $_state[ 'registration-backoff' ] ) {
-          //return;
+          return;
         }
         // Set registration back-off to avoid this being ran multiple times.
         set_transient('ud_registration_state', array( 'registration-backoff' => true, 'time' => time() ), 3600 );

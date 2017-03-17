@@ -20,7 +20,6 @@ return array(
     'UsabilityDynamics\\WPRETSC\\Dashboard_Widget' => $baseDir . '/lib/classes/class-dashboard-widget.php',
     'UsabilityDynamics\\WPRETSC\\Logger' => $baseDir . '/lib/classes/class-logger.php',
     'UsabilityDynamics\\WPRETSC\\Media' => $baseDir . '/lib/classes/class-media.php',
-    'UsabilityDynamics\\WPRETSC\\Register' => $baseDir . '/lib/classes/class-register.php',
     'UsabilityDynamics\\WPRETSC\\Utility' => $baseDir . '/lib/classes/class-utility.php',
     'UsabilityDynamics\\WPRETSC\\Widget' => $baseDir . '/lib/classes/class-widget.php',
     'UsabilityDynamics\\WPRETSC\\XMLRPC' => $baseDir . '/lib/classes/class-xmlrpc.php',

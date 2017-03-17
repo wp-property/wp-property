@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitfece72291fa9c8f6e19dd5b3e060991f
+class ComposerStaticInit141741f8b2c9db05f75dc36e804cc8fc
 {
     public static $files = array (
         'aa33d7d08765e2232d2271599fc1e7eb' => __DIR__ . '/../..' . '/loader.php',
@@ -25,7 +25,6 @@ class ComposerStaticInitfece72291fa9c8f6e19dd5b3e060991f
         'UsabilityDynamics\\WPRETSC\\Dashboard_Widget' => __DIR__ . '/../..' . '/lib/classes/class-dashboard-widget.php',
         'UsabilityDynamics\\WPRETSC\\Logger' => __DIR__ . '/../..' . '/lib/classes/class-logger.php',
         'UsabilityDynamics\\WPRETSC\\Media' => __DIR__ . '/../..' . '/lib/classes/class-media.php',
-        'UsabilityDynamics\\WPRETSC\\Register' => __DIR__ . '/../..' . '/lib/classes/class-register.php',
         'UsabilityDynamics\\WPRETSC\\Utility' => __DIR__ . '/../..' . '/lib/classes/class-utility.php',
         'UsabilityDynamics\\WPRETSC\\Widget' => __DIR__ . '/../..' . '/lib/classes/class-widget.php',
         'UsabilityDynamics\\WPRETSC\\XMLRPC' => __DIR__ . '/../..' . '/lib/classes/class-xmlrpc.php',
@@ -45,7 +44,7 @@ class ComposerStaticInitfece72291fa9c8f6e19dd5b3e060991f
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInitfece72291fa9c8f6e19dd5b3e060991f::$classMap;
+            $loader->classMap = ComposerStaticInit141741f8b2c9db05f75dc36e804cc8fc::$classMap;
 
         }, null, ClassLoader::class);
     }
