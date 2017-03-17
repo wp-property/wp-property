@@ -232,45 +232,47 @@ jQuery(document).ready(function($) {
           <% } %>
 
           <li class="">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][public]" <% if(data.readonly) print('disabled = "disabled"');%> <% if( data.public){ %>CHECKED<% } %> value="true"/> <?php _e( 'Public & Searchable', ud_get_wpp_terms()->domain ); ?></label>
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][public]" <% if(data.system) print('disabled = "disabled"');%> <% if( data.public){ %>CHECKED<% } %> value="true"/> <?php _e( 'Public & Searchable', ud_get_wpp_terms()->domain ); ?></label>
           </li>
 
           <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][hierarchical]" <% if(data.readonly) print('disabled = "disabled"');%> <% if( data.hierarchical){ %>CHECKED<% } %> value="true"/> <?php _e( 'Hierarchical', ud_get_wpp_terms()->domain ); ?></label>
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][hierarchical]" <% if(data.system) print('disabled = "disabled"');%> <% if( data.hierarchical){ %>CHECKED<% } %> value="true"/> <?php _e( 'Hierarchical', ud_get_wpp_terms()->domain ); ?></label>
           </li>
 
           <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][show_in_nav_menus]" <% if(data.readonly) print('disabled = "disabled"');%> <% if( data.show_in_nav_menus){ %>CHECKED<% } %> value="true"/> <?php _e( 'Show in Nav Menus', ud_get_wpp_terms()->domain ); ?></label>
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][show_in_nav_menus]" <% if(data.system) print('disabled = "disabled"');%> <% if( data.show_in_nav_menus){ %>CHECKED<% } %> value="true"/> <?php _e( 'Show in Nav Menus', ud_get_wpp_terms()->domain ); ?></label>
           </li>
 
           <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][show_tagcloud]" <% if(data.readonly) print('disabled = "disabled"');%> <% if( data.show_tagcloud){ %>CHECKED<% } %> value="true"/> <?php _e( 'Show in Tag Cloud', ud_get_wpp_terms()->domain ); ?></label>
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][show_tagcloud]" <% if(data.system) print('disabled = "disabled"');%> <% if( data.show_tagcloud){ %>CHECKED<% } %> value="true"/> <?php _e( 'Show in Tag Cloud', ud_get_wpp_terms()->domain ); ?></label>
           </li>
 
           <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][show_in_menu]" <% if(data.readonly) print('disabled = "disabled"');%> <% if( data.show_in_menu){ %>CHECKED<% } %> value="true"/> <?php _e( 'Show in Admin Menu', ud_get_wpp_terms()->domain ); ?></label>
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][show_in_menu]" <% if(data.system) print('disabled = "disabled"');%> <% if( data.show_in_menu){ %>CHECKED<% } %> value="true"/> <?php _e( 'Show in Admin Menu', ud_get_wpp_terms()->domain ); ?></label>
           </li>
 
           <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][add_native_mtbox]" <% if(data.readonly) print('disabled = "disabled"');%> <% if( data.add_native_mtbox){ %>CHECKED<% } %> value="true"/> <?php _e( 'Add native Meta Box', ud_get_wpp_terms()->domain ); ?></label>
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][add_native_mtbox]" <% if(data.system) print('disabled = "disabled"');%> <% if( data.add_native_mtbox){ %>CHECKED<% } %> value="true"/> <?php _e( 'Add native Meta Box', ud_get_wpp_terms()->domain ); ?></label>
           </li>
 
           <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][rich_taxonomy]" <% if(data.readonly) print('disabled = "disabled"');%> <% if( data.rich_taxonomy){ %>CHECKED<% } %> value="true"/> <?php _e( 'Add Term Post', ud_get_wpp_terms()->domain ); ?></label>
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][rich_taxonomy]" <% if(data.system) print('disabled = "disabled"');%> <% if( data.rich_taxonomy){ %>CHECKED<% } %> value="true"/> <?php _e( 'Add Term Post', ud_get_wpp_terms()->domain ); ?></label>
           </li>
 
           <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][admin_searchable]" <% if(data.readonly) print('disabled = "disabled"');%> <% if( data.admin_searchable){ %>CHECKED<% } %> value="true" class="wpp-terms-option-admin_searchable"/> <?php _e( 'Admin Searchable', ud_get_wpp_terms()->domain ); ?></label>
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][admin_searchable]" <% if(data.system) print('disabled = "disabled"');%> <% if( data.admin_searchable){ %>CHECKED<% } %> value="true" class="wpp-terms-option-admin_searchable"/> <?php _e( 'Admin Searchable', ud_get_wpp_terms()->domain ); ?></label>
           </li>
 
         </ul>
       </td>
 
       <td>
-        <button class="wpp_delete_row button <% if(data.readonly) print('disabled'); %>" <% if(data.readonly) print('disabled = "disabled"');%>><?php _e( 'Delete', ud_get_wpp_terms()->domain ); ?></button>
+        <button class="wpp_delete_row button <% if(data.system) print('disabled'); %>" <% if(data.system) print('disabled = "disabled"');%>><?php _e( 'Delete', ud_get_wpp_terms()->domain ); ?></button>
         <input type="hidden" name="wpp_terms[taxonomies][<%= slug %>][default]" value="<%= data.default %>">
         <input type="hidden" name="wpp_terms[taxonomies][<%= slug %>][readonly]" value="<%= data.readonly %>">
         <input type="hidden" name="wpp_terms[taxonomies][<%= slug %>][hidden]" value="<%= data.hidden %>">
+        <input type="hidden" name="wpp_terms[taxonomies][<%= slug %>][system]" value="<%= data.system %>">
+        <input type="hidden" name="wpp_terms[taxonomies][<%= slug %>][meta]" value="<%= data.meta %>">
       </td>
     </tr>
 

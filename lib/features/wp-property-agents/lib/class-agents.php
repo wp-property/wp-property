@@ -170,6 +170,8 @@ class class_agents
     // Add [wpp_agent] taxonomy.
     $taxonomies['wpp_agent'] = array(
       'default' => true,
+      'system' => true,
+      'meta' => true,
       'readonly' => true,
       'hidden' => true,
       'hierarchical' => false,
@@ -201,6 +203,8 @@ class class_agents
     $taxonomies['wpp_office'] = array(
       'default' => true,
       'readonly' => true,
+      'system' => true,
+      'meta' => true,
       'hidden' => true,
       'hierarchical' => false,
       'public' => true,
