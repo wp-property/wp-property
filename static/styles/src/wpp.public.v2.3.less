@@ -371,6 +371,34 @@ body,
                 .property_price {
                   display: none;
                 }
+                .property_options {
+                  margin: 1em 0;
+                  > ul {
+                    list-style: outside none none !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    li {
+                      float: left;
+                      font-weight: bold;
+                      margin-right: 0.5em;
+                      padding-right: 0.5em;
+                      position: relative;
+                      &:after {
+                        content: "\f111";
+                        font-family: FontAwesome;
+                        font-size: 6px;
+                        left: 1em;
+                        position: relative;
+                        top: -2px
+                      }
+                      &:last-child {
+                        &:after {
+                          display: none;
+                        }
+                      }
+                    }
+                  }
+                }
                 ul.wpp_overview_data {
                   margin: 0 !important;
                   padding: 0 !important;
@@ -383,6 +411,14 @@ body,
                       font-weight: bold;
                       display: inline-block;
                       padding-right: 5px;
+                    }
+                    a.button {
+                      background-color: #145fc8;
+                      color: #fff;
+                      display: inline-block;
+                      margin-top: 0.5em;
+                      padding: 0.5em 1em;
+                      text-decoration: none;
                     }
                   }
                 }

@@ -655,6 +655,16 @@ function properties_width() {
 jQuery(window).load(function () {
   properties_height($property_overview_box);
   // properties_width();
+
+  if (typeof window.localStorage != 'undefined') {
+    console.log(localStorage.getItem('wpp_shortcode_template'));
+    if (localStorage.getItem('wpp_shortcode_template') == '' || localStorage.getItem('wpp_shortcode_template') == 'null' || localStorage.getItem('wpp_shortcode_template') === null) {
+      jQuery('.wpp_property_overview_shortcode_v2').attr('wpp_template', 'grid');
+      jQuery('.wpp_property_overview_shortcode_v2 .wpp_template_view .wpp_template_view_button.wpp_template_grid').addClass('active');
+    }
+  } else {
+    jQuery('.wpp_property_overview_shortcode_v2').css('opacity', '1');
+  }
 });
 
 jQuery(document).ready(function () {
