@@ -796,253 +796,121 @@ if (!function_exists('draw_stats')):
     $alt = $args['first_alt'] == 'true' ? "" : "alt";
 
     //** Disable regular list if groups are NOT enabled, or if groups is not an array */
-    if (WPP_LEGACY_WIDGETS) { // If use old widget
+    if ($args['sort_by_groups'] != 'true' || !is_array($groups)) {
 
-      if ($args['sort_by_groups'] != 'true' || !is_array($groups)) {
+      foreach ($stats as $tag => $data) {
 
-        foreach ($stats as $tag => $data) {
+        $label = apply_filters('wpp::attribute::label', $data['label']);
+        //check if the tag is property type to get the translated value for it
+        $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type', $data['value']) : apply_filters('wpp::attribute::value', $data['value'], $tag);
+        $alt = ($alt == "alt") ? "" : "alt";
 
-          $label = apply_filters('wpp::attribute::label', $data['label']);
-          //check if the tag is property type to get the translated value for it
-          $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type', $data['value']) : apply_filters('wpp::attribute::value', $data['value'], $tag);
-          $alt = ($alt == "alt") ? "" : "alt";
+        switch ($args['display']) {
+          case 'dl_list':
+            ?>
+            <dt
+              class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> wpp_stat_dt_<?php echo $tag; ?>"><?php echo $label; ?>
+              <span class="wpp_colon">:</span></dt>
+            <dd
+              class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> wpp_stat_dd_<?php echo $tag; ?> <?php echo $alt; ?>"><?php echo $value; ?>
+              &nbsp;</dd>
+            <?php
+            break;
+          case 'list':
+            ?>
+            <li
+              class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> wpp_stat_plain_list_<?php echo $tag; ?> <?php echo $alt; ?>">
+              <span class="attribute"><?php echo $label; ?><span class="wpp_colon">:</span></span>
+              <span class="value"><?php echo $value; ?>&nbsp;</span>
+            </li>
+            <?php
+            break;
+          case 'plain_list':
+            ?>
+            <span class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> attribute"><?php echo $label; ?>
+              :</span>
+            <span class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> value"><?php echo $value; ?>
+              &nbsp;</span>
+            <br/>
+            <?php
+            break;
+          case 'detail':
+            ?>
+            <h4 class="wpp_attribute"><?php echo $label; ?><span class="separator">:</span></h4>
+            <p class="value"><?php echo $value; ?>&nbsp;</p>
+            <?php
+            break;
+        }
+      }
+    } else {
+
+      $stats_by_groups = sort_stats_by_groups($stats);
+      $main_stats_group = $wp_properties['configuration']['main_stats_group'];
+
+      foreach ($stats_by_groups as $gslug => $gstats) {
+        ?>
+        <div class="wpp_feature_list">
+          <?php
+          if ($main_stats_group != $gslug || !@array_key_exists($gslug, $groups)) {
+            $group_name = (@array_key_exists($gslug, $groups) ? $groups[$gslug]['name'] : __('Other', ud_get_wp_property()->domain));
+            ?>
+            <h2 class="wpp_stats_group"><?php echo $group_name; ?></h2>
+            <?php
+          }
 
           switch ($args['display']) {
             case 'dl_list':
               ?>
-              <dt
-                class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> wpp_stat_dt_<?php echo $tag; ?>"><?php echo $label; ?>
-                <span class="wpp_colon">:</span></dt>
-              <dd
-                class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> wpp_stat_dd_<?php echo $tag; ?> <?php echo $alt; ?>"><?php echo $value; ?>
-                &nbsp;</dd>
-              <?php
-              break;
-            case 'list':
-              ?>
-              <li
-                class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> wpp_stat_plain_list_<?php echo $tag; ?> <?php echo $alt; ?>">
-                <span class="attribute"><?php echo $label; ?><span class="wpp_colon">:</span></span>
-                <span class="value"><?php echo $value; ?>&nbsp;</span>
-              </li>
-              <?php
-              break;
-            case 'plain_list':
-              ?>
-              <span class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> attribute"><?php echo $label; ?>
-                :</span>
-              <span class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> value"><?php echo $value; ?>
-                &nbsp;</span>
-              <br/>
-              <?php
-              break;
-            case 'detail':
-              ?>
-              <h4 class="wpp_attribute"><?php echo $label; ?><span class="separator">:</span></h4>
-              <p class="value"><?php echo $value; ?>&nbsp;</p>
-              <?php
-              break;
-          }
-        }
-      } else {
-
-        $stats_by_groups = sort_stats_by_groups($stats);
-        $main_stats_group = $wp_properties['configuration']['main_stats_group'];
-
-        foreach ($stats_by_groups as $gslug => $gstats) {
-          ?>
-          <div class="wpp_feature_list">
-            <?php
-            if ($main_stats_group != $gslug || !@array_key_exists($gslug, $groups)) {
-              $group_name = (@array_key_exists($gslug, $groups) ? $groups[$gslug]['name'] : __('Other', ud_get_wp_property()->domain));
-              ?>
-              <h2 class="wpp_stats_group"><?php echo $group_name; ?></h2>
-              <?php
-            }
-
-            switch ($args['display']) {
-              case 'dl_list':
-                ?>
-                <dl class="wpp_property_stats overview_stats">
-                  <?php foreach ($gstats as $tag => $data) : ?>
-                    <?php
-                    $label = apply_filters('wpp::attribute::label', $data['label']);
-                    //check if the tag is property type to get the translated value for it
-                    $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type', $data['value']) : $data['value'];
-                    ?>
-                    <?php $alt = ($alt == "alt") ? "" : "alt"; ?>
-                    <dt
-                      class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_dt_<?php echo $tag; ?>"><?php echo $label; ?></dt>
-                    <dd
-                      class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_dd_<?php echo $tag; ?> <?php echo $alt; ?>"><?php echo $value; ?>
-                      &nbsp;</dd>
-                  <?php endforeach; ?>
-                </dl>
-                <?php
-                break;
-              case 'list':
-                ?>
-                <ul class="overview_stats wpp_property_stats list">
-                  <?php foreach ($gstats as $tag => $data) : ?>
-                    <?php
-                    $label = apply_filters('wpp::attribute::label', $data['label']);
-                    //check if the tag is property type to get the translated value for it
-                    $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type', $data['value']) : apply_filters('wpp::attribute::value', $data['value'], $tag);
-                    $alt = ($alt == "alt") ? "" : "alt";
-                    ?>
-                    <li
-                      class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_plain_list_<?php echo $tag; ?> <?php echo $alt; ?>">
-                      <span class="attribute"><?php echo $label; ?>:</span>
-                      <span class="value"><?php echo $value; ?>&nbsp;</span>
-                    </li>
-                  <?php endforeach; ?>
-                </ul>
-                <?php
-                break;
-              case 'plain_list':
-                foreach ($gstats as $tag => $data) {
+              <dl class="wpp_property_stats overview_stats">
+                <?php foreach ($gstats as $tag => $data) : ?>
+                  <?php
                   $label = apply_filters('wpp::attribute::label', $data['label']);
                   //check if the tag is property type to get the translated value for it
                   $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type', $data['value']) : $data['value'];
                   ?>
-                  <span class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> attribute"><?php echo $label; ?>:</span>
+                  <?php $alt = ($alt == "alt") ? "" : "alt"; ?>
+                  <dt
+                    class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_dt_<?php echo $tag; ?>"><?php echo $label; ?></dt>
+                  <dd
+                    class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_dd_<?php echo $tag; ?> <?php echo $alt; ?>"><?php echo $value; ?>
+                    &nbsp;</dd>
+                <?php endforeach; ?>
+              </dl>
+              <?php
+              break;
+            case 'list':
+              ?>
+              <ul class="overview_stats wpp_property_stats list">
+                <?php foreach ($gstats as $tag => $data) : ?>
+                  <?php
+                  $label = apply_filters('wpp::attribute::label', $data['label']);
+                  //check if the tag is property type to get the translated value for it
+                  $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type', $data['value']) : apply_filters('wpp::attribute::value', $data['value'], $tag);
+                  $alt = ($alt == "alt") ? "" : "alt";
+                  ?>
+                  <li
+                    class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_plain_list_<?php echo $tag; ?> <?php echo $alt; ?>">
+                    <span class="attribute"><?php echo $label; ?>:</span>
+                    <span class="value"><?php echo $value; ?>&nbsp;</span>
+                  </li>
+                <?php endforeach; ?>
+              </ul>
+              <?php
+              break;
+            case 'plain_list':
+              foreach ($gstats as $tag => $data) {
+                $label = apply_filters('wpp::attribute::label', $data['label']);
+                //check if the tag is property type to get the translated value for it
+                $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type', $data['value']) : $data['value'];
+                if (WPP_LEGACY_WIDGETS) { // If use old widget
+                  ?>
+                  <span class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> attribute"><?php echo $label; ?>
+                    :</span>
                   <span class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> value"><?php echo $value; ?>
                     &nbsp;</span>
                   <br/>
                   <?php
-                }
-                break;
-              case 'detail':
-                foreach ($gstats as $tag => $data) {
-                  $label = apply_filters('wpp::attribute::label', $data['label']);
-                  //check if the tag is property type to get the translated value for it
-                  $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type', $data['value']) : $data['value'];
-                  ?>
-                  <strong class="wpp_attribute <?php echo $stats_prefix; ?>_<?php echo $tag; ?>"><?php echo $label; ?>
-                    <span class="separator">:</span></strong>
-                  <p class="value"><?php echo $value; ?>&nbsp;</p>
-                  <br/>
-                  <?php
-                }
-                ?>
-                <?php
-                break;
-            }
-            ?>
-          </div>
-          <?php
-        }
-
-      }
-    } else { // if use new widget
-
-      if ($args['sort_by_groups'] != 'true' || !is_array($groups)) {
-
-        foreach ($stats as $tag => $data) {
-
-          $label = apply_filters('wpp::attribute::label', $data['label']);
-          //check if the tag is property type to get the translated value for it
-          $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type', $data['value']) : apply_filters('wpp::attribute::value', $data['value'], $tag);
-          $alt = ($alt == "alt") ? "" : "alt";
-
-          switch ($args['display']) {
-            case 'dl_list':
-              ?>
-              <dt
-                class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> wpp_stat_dt_<?php echo $tag; ?>"><?php echo $label; ?>
-                <span class="wpp_colon">:</span></dt>
-              <dd
-                class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> wpp_stat_dd_<?php echo $tag; ?> <?php echo $alt; ?>"><?php echo $value; ?>
-                &nbsp;</dd>
-              <?php
-              break;
-            case 'list':
-              ?>
-              <li
-                class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> wpp_stat_plain_list_<?php echo $tag; ?> <?php echo $alt; ?>">
-                <span class="attribute"><?php echo $label; ?><span class="wpp_colon">:</span></span>
-                <span class="value"><?php echo $value; ?>&nbsp;</span>
-              </li>
-              <?php
-              break;
-            case 'plain_list':
-              ?>
-              <span class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> attribute"><?php echo $label; ?>
-                :</span>
-              <span class="<?php echo $args['stats_prefix']; ?>_<?php echo $tag; ?> value"><?php echo $value; ?>
-                &nbsp;</span>
-              <br/>
-              <?php
-              break;
-            case 'detail':
-              ?>
-              <h4 class="wpp_attribute"><?php echo $label; ?><span class="separator">:</span></h4>
-              <p class="value"><?php echo $value; ?>&nbsp;</p>
-              <?php
-              break;
-          }
-        }
-      } else {
-
-        $stats_by_groups = sort_stats_by_groups($stats);
-        $main_stats_group = $wp_properties['configuration']['main_stats_group'];
-
-        echo '<div class="wpp_features_box">';
-        foreach ($stats_by_groups as $gslug => $gstats) {
-          ?>
-          <div class="wpp_feature_list">
-            <?php
-            if ($main_stats_group != $gslug || !@array_key_exists($gslug, $groups)) {
-              $group_name = (@array_key_exists($gslug, $groups) ? $groups[$gslug]['name'] : __('Other', ud_get_wp_property()->domain));
-              ?>
-              <h2 class="wpp_stats_group"><?php echo $group_name; ?></h2>
-              <?php
-            }
-
-            switch ($args['display']) {
-              case 'dl_list':
-                ?>
-                <dl class="wpp_property_stats overview_stats">
-                  <?php foreach ($gstats as $tag => $data) : ?>
-                    <?php
-                    $label = apply_filters('wpp::attribute::label', $data['label']);
-                    //check if the tag is property type to get the translated value for it
-                    $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type', $data['value']) : $data['value'];
-                    ?>
-                    <?php $alt = ($alt == "alt") ? "" : "alt"; ?>
-                    <dt
-                      class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_dt_<?php echo $tag; ?>"><?php echo $label; ?></dt>
-                    <dd
-                      class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_dd_<?php echo $tag; ?> <?php echo $alt; ?>"><?php echo $value; ?>
-                      &nbsp;</dd>
-                  <?php endforeach; ?>
-                </dl>
-                <?php
-                break;
-              case 'list':
-                ?>
-                <ul class="overview_stats wpp_property_stats list">
-                  <?php foreach ($gstats as $tag => $data) : ?>
-                    <?php
-                    $label = apply_filters('wpp::attribute::label', $data['label']);
-                    //check if the tag is property type to get the translated value for it
-                    $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type', $data['value']) : apply_filters('wpp::attribute::value', $data['value'], $tag);
-                    $alt = ($alt == "alt") ? "" : "alt";
-                    ?>
-                    <li
-                      class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> wpp_stat_plain_list_<?php echo $tag; ?> <?php echo $alt; ?>">
-                      <span class="attribute"><?php echo $label; ?>:</span>
-                      <span class="value"><?php echo $value; ?>&nbsp;</span>
-                    </li>
-                  <?php endforeach; ?>
-                </ul>
-                <?php
-                break;
-              case 'plain_list':
-                foreach ($gstats as $tag => $data) {
-                  $label = apply_filters('wpp::attribute::label', $data['label']);
-                  //check if the tag is property type to get the translated value for it
-                  $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type', $data['value']) : $data['value'];
+                } else {
                   ?>
                   <div class="wpp_attribute_row">
                     <span class="<?php echo $stats_prefix; ?>_<?php echo $tag; ?> attribute"><?php echo $label; ?>
@@ -1052,30 +920,38 @@ if (!function_exists('draw_stats')):
                   </div>
                   <?php
                 }
-                break;
-              case 'detail':
-                foreach ($gstats as $tag => $data) {
-                  $label = apply_filters('wpp::attribute::label', $data['label']);
-                  //check if the tag is property type to get the translated value for it
-                  $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type', $data['value']) : $data['value'];
+              }
+              break;
+            case 'detail':
+              foreach ($gstats as $tag => $data) {
+                $label = apply_filters('wpp::attribute::label', $data['label']);
+                //check if the tag is property type to get the translated value for it
+                $value = ($tag == 'property_type') ? apply_filters('wpp_stat_filter_property_type', $data['value']) : $data['value'];
+                if (WPP_LEGACY_WIDGETS) { // If use old widget
+                  ?>
+                  <strong class="wpp_attribute <?php echo $stats_prefix; ?>_<?php echo $tag; ?>"><?php echo $label; ?>
+                    <span class="separator">:</span></strong>
+                  <p class="value"><?php echo $value; ?>&nbsp;</p>
+                  <br/>
+                  <?php
+                } else {
                   ?>
                   <div class="wpp_attribute_row">
-                    <strong class="wpp_attribute <?php echo $stats_prefix; ?>_<?php echo $tag; ?>"><?php echo $label; ?>
+                    <strong
+                      class="wpp_attribute <?php echo $stats_prefix; ?>_<?php echo $tag; ?>"><?php echo $label; ?>
                       <span class="separator">:</span></strong>
                     <p class="value"><?php echo $value; ?>&nbsp;</p>
                   </div>
                   <?php
                 }
-                ?>
-                <?php
-                break;
-            }
-            ?>
-          </div>
-          <?php
-        }
-        echo '</div>';
-
+              }
+              ?>
+              <?php
+              break;
+          }
+          ?>
+        </div>
+        <?php
       }
     }
 
