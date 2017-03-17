@@ -33,8 +33,6 @@ namespace UsabilityDynamics\WPP {
 
       public $layouts = null;
 
-      public $elastic = null;
-
       /**
        * Handle some stuff very early
        *
@@ -72,6 +70,19 @@ namespace UsabilityDynamics\WPP {
 
         if( WP_PROPERTY_LEGACY_META_ATTRIBUTES ) {
           new Legacy_Meta_Attributes();
+        }
+
+        // Invoke Elasticsearch Handler.
+        if ( WP_PROPERTY_ELASTICSEARCH_SERVICE ) {
+          new Elasticsearch();
+        }
+
+        // Define System Taxonomies.
+        new System_Taxonomy();
+
+        // Apply alises.
+        if( WP_PROPERTY_FIELD_ALIAS ) {
+          new Field_Alias();
         }
 
         // Maybe load our built-in Add-ons
@@ -172,11 +183,6 @@ namespace UsabilityDynamics\WPP {
 
         //** Handles Export (XML/JSON/CSV) functionality */
         new Export();
-
-        // Invoke Elasticsearch Handler.
-        if ( WP_PROPERTY_ELASTICSEARCH_SERVICE && class_exists('UsabilityDynamics\WPP\Elasticsearch')) {
-          $this->elastic = new Elasticsearch();
-        }
 
         /** Initiate WPML class if WPML plugin activated. **/
         if (function_exists('icl_object_id')) {

@@ -1,7 +1,7 @@
 <?php
 /**
- * Setup Assistant
- *
+ * Elastisearch integration for WP-Property
+ * based on Elasticpress plugin
  *
  *
  * wp elasticpress index --posts-per-page=1 --nobulk
@@ -23,14 +23,24 @@ namespace UsabilityDynamics\WPP {
        * Elasticsearch constructor.
        */
       function __construct() {
+        add_action( 'plugins_loaded', array( $this, 'init' ) );
+      }
 
-        $_vendor_path = dirname( __FILE__, 3 ) . '/vendor/plugins/elasticpress/elasticpress.php';
+      /**
+       *
+       */
+      public function init() {
+
+        $_vendor_path = ud_get_wp_property()->path( 'vendor/plugins/elasticpress/elasticpress.php', 'dir' );
 
         if( !get_option( 'ud_site_id' ) ) {
           return;
         }
 
         if( !defined( 'EP_VERSION' ) && file_exists( $_vendor_path ) ) {
+
+          // Handles indexing of Terms
+          new Elasticsearch_Terms();
 
           // Load plugin.
           require_once( $_vendor_path );
@@ -51,7 +61,7 @@ namespace UsabilityDynamics\WPP {
           add_filter( 'ep_keep_index', '__return_true' );
           add_filter( 'ep_sync_terms_allow_hierarchy', '__return_true' );
 
-          // Increase timeout on indexing posts, because
+          // Increase timeout on indexing posts to 3 minutes, because
           // in some cases default 30 seconds is not enough. peshkov@UD
           add_filter( 'ep_bulk_index_posts_request_args', function( $args ) {
             $args['timeout'] = 180;
@@ -76,7 +86,6 @@ namespace UsabilityDynamics\WPP {
         add_filter( 'ep_post_sync_args_post_prepare_meta', array( $this, 'ep_post_sync_args_post_prepare_meta' ), 40, 2 );
         add_filter( 'ep_post_sync_args', array( $this, 'ep_post_sync_args' ), 40, 2 );
         add_filter( 'ep_post_sync_args', array( $this, 'post_title_suggest' ), 50, 2 );
-        add_filter( 'ep_post_sync_args', array( $this, 'filter_term_suggest' ), 60, 2 );
 
         // Set index-name.
         add_filter( 'ep_index_name', array( $this, 'ep_index_name' ), 50, 2 );
@@ -86,7 +95,6 @@ namespace UsabilityDynamics\WPP {
 
         // Parse/Analyze responses.
         add_action( 'ep_index_post_retrieve_raw_response', array( $this, 'ep_index_post_retrieve_raw_response' ), 50, 3 );
-        // add_filter( 'ep_config_mapping_request', array( $this, 'ep_config_mapping_request' ), 50, 3 );
 
       }
 
@@ -135,24 +143,6 @@ namespace UsabilityDynamics\WPP {
       public function ep_prepare_meta_excluded_public_keys( $exclude ) {
 
         return array( 'rets_media', 'wpp_import_time', 'wpp_import_schedule_id' );
-
-      }
-
-      /**
-       * Debug failed mapping update request's response.
-       *
-       * @param $request
-       * @param $index
-       * @param $mapping
-       * @return mixed
-       */
-      public function ep_config_mapping_request( $request, $index, $mapping ) {
-
-        if ( 200 !== wp_remote_retrieve_response_code( $request ) ) {
-          // error_log( 'WP-Property Elasticsearch mapping update error ' . print_r( $request, true ) );
-        }
-
-        return $request;
 
       }
 
@@ -260,71 +250,6 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       * Create [term_suggest] list.
-       *
-       *
-       *
-       * @param $post_args
-       * @param $post_id
-       * @return mixed
-       */
-      public function filter_term_suggest( $post_args, $post_id ) {
-
-        $_suggestion_taxonomies = array(
-          'wpp_location',
-          'wpp_schools',
-          'wpp_listing_type',
-          'wpp_listing_status',
-          'wpp_listing_label',
-          'wpp_agent',
-          'wpp_office',
-          //'wpp_listing_category'
-        );
-
-        if ( ! empty( $post_args['terms'] ) ) {
-          foreach ( $post_args['terms'] as $_tax => $taxonomy ) {
-
-            foreach ( $taxonomy as $term ) {
-
-              if( !in_array( $_tax, $_suggestion_taxonomies )) {
-                continue;
-              }
-
-              $_term_metadata = WPP_F::get_term_metadata( get_term( $term['term_id'], $_tax ) );
-
-              $suggest[] = array(
-                "input" => array_unique( array(
-                  str_replace( '&amp;', '&', $term['name'] ),
-                  strtolower( str_replace( '&amp;', '&', $term['name'] ) ),
-                  str_replace( array( ' ', '-', ',', '.' ), '', strtolower( sanitize_title( $term['name'] ) ) )
-                )),
-                //"output" => $term['name'],
-                /*
-                "payload" => array_filter( array(
-                  "term_id" => $term['term_id'],
-                  "term_type" => apply_filters( 'wpp:term_type', isset( $_term_metadata['term_type'] ) ? $_term_metadata['term_type'] : $_tax, $term, $_term_metadata ),
-                  "slug" => $term['slug'],
-                  "name" => str_replace( '&amp;', '&', $term['name'] ),
-                  "tax" => $_tax,
-                  "url_path" => isset( $_term_metadata['url_path'] ) ? $_term_metadata['url_path'] : null,
-                  "output" => $term['name'],
-                ))
-                //*/
-              );
-
-            }
-
-          }
-        }
-
-        if ( ! empty( $suggest ) ) {
-          $post_args['term_suggest'] = $suggest;
-        }
-
-        return $post_args;
-      }
-
-      /**
        * Set api.realty.ci Index Name
        *
        * @param $index_name
@@ -332,7 +257,8 @@ namespace UsabilityDynamics\WPP {
        * @return mixed|void
        */
       static public function ep_index_name( $index_name, $blog_id = null ) {
-        return get_option( 'ud_site_id' );
+        $index = defined( 'EP_INDEX_NAME' ) ? EP_INDEX_NAME : get_option( 'ud_site_id' );
+        return $index;
       }
 
       /**
@@ -564,15 +490,6 @@ namespace UsabilityDynamics\WPP {
           'max_input_length' => 50,
           //'payloads' => true
         );
-
-        $mapping['mappings']['post']['properties']['term_suggest'] = array(
-          'type' => 'completion',
-          'analyzer' => 'whitespace',
-          'search_analyzer' => 'whitespace_analyzer',
-          //'payloads' => true
-        );
-
-        //die(json_encode($mapping, JSON_PRETTY_PRINT));
 
         return $mapping;
       }

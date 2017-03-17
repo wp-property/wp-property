@@ -133,8 +133,6 @@ namespace UsabilityDynamics\WPP {
 
         $_meta_boxes = array();
 
-        $taxonomies = ud_get_wp_property( 'taxonomies', array() );
-
         /* May be determine property_type to know which attributes should be hidden and which ones just readable. */
         $post = new WP_Post( new \stdClass );
 

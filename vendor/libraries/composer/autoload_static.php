@@ -174,7 +174,6 @@ class ComposerStaticInitd8fb969de3fbce435922255a6439062d
         'UsabilityDynamics\\WPP\\Bootstrap' => __DIR__ . '/../../..' . '/lib/classes/class-bootstrap.php',
         'UsabilityDynamics\\WPP\\Children_List_Table' => __DIR__ . '/../../..' . '/lib/classes/class-children-list-table.php',
         'UsabilityDynamics\\WPP\\Dashboard_Widget' => __DIR__ . '/../../..' . '/lib/classes/class-dashboard-widget.php',
-        'UsabilityDynamics\\WPP\\Elasticsearch' => __DIR__ . '/../../..' . '/lib/classes/class-elasticsearch.php',
         'UsabilityDynamics\\WPP\\Export' => __DIR__ . '/../../..' . '/lib/classes/class-export.php',
         'UsabilityDynamics\\WPP\\Layouts' => __DIR__ . '/../../..' . '/lib/classes/class-layouts.php',
         'UsabilityDynamics\\WPP\\Layouts_API_Client' => __DIR__ . '/../../..' . '/lib/classes/class-layouts-api-client.php',
