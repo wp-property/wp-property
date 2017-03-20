@@ -70,8 +70,8 @@ if (have_properties()) {
     <div class="property_options clearfix">
       <ul>
         <?php echo $property['wpp_bedrooms_count'] ? '<li class="wpp_bedrooms_count">'.$property['wpp_bedrooms_count'] . __(' Bed', ud_get_wp_property()->domain) . '</li>' : ''; ?>
-        <?php echo $property['wpp_bedrooms_count'] ? '<li class="wpp_bathrooms_count">'.$property['wpp_bathrooms_count'] . __(' Bath', ud_get_wp_property()->domain) . '</li>' : ''; ?>
-        <?php echo $property['wpp_bedrooms_count'] ? '<li class="wpp_total_living_area">'.$property['wpp_total_living_area'] . __(' sqft', ud_get_wp_property()->domain) . '</li>' : ''; ?>
+        <?php echo $property['wpp_bathrooms_count'] ? '<li class="wpp_bathrooms_count">'.$property['wpp_bathrooms_count'] . __(' Bath', ud_get_wp_property()->domain) . '</li>' : ''; ?>
+        <?php echo $property['wpp_total_living_area'] ? '<li class="wpp_total_living_area">'.$property['wpp_total_living_area'] . __(' sqft', ud_get_wp_property()->domain) . '</li>' : ''; ?>
       </ul>
     </div>
 
