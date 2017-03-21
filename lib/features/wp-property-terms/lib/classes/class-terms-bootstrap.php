@@ -788,6 +788,8 @@ namespace UsabilityDynamics\WPP {
 
         foreach($taxonomies as $k => $d) {
 
+          $d = $this->prepare_taxonomy( $d );
+
           $field = array();
 
           switch( true ) {
@@ -815,16 +817,18 @@ namespace UsabilityDynamics\WPP {
                 break;
               }
               if( isset($d[ 'readonly' ]) && $d[ 'readonly' ] ) {
-                /*
                 $field = array(
                   'name' => $d['label'],
                   'id' => $k,
-                  'type' => 'wpp_taxonomy_hidden',
+                  //'type' => 'wpp_taxonomy_readonly',
+                  'type' => 'wpp_taxonomy',
                   'options' => array(
                     'taxonomy' => $k,
+                    'hierarchical' => ( isset( $d[ 'hierarchical' ] ) && $d[ 'hierarchical' ] == true ? true : false ),
+                    'type' => ( isset( $d[ 'hierarchical' ] ) && $d[ 'hierarchical' ] == true ? 'select_tree' : 'select_advanced' ),
+                    'meta' => ( isset( $d[ 'meta' ] ) && $d[ 'meta' ] == true ? true : false ),
                     'args' => array(),
                   ) );
-                //*/
               } else {
                 $field = array(
                   'name' => $d['label'],
