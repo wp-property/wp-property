@@ -1,6 +1,6 @@
 (function (jQuery, l10n) {
 
-  var property_overview_box = 'body .wpp_property_overview_shortcode_v2 .wpp_property_view_result .all-properties .property .property_div_box';
+  var property_overview_box = '.wpp_property_overview_shortcode_v2 .all-properties .property .property_div_box';
 
   /**
    *
@@ -24,11 +24,13 @@
    *
    */
   function properties_width() {
-    if (jQuery('body .wpp_property_overview_shortcode_v2 .wpp_property_view_result .all-properties').width() < 750) {
-      jQuery('body .wpp_property_overview_shortcode_v2 .wpp_property_view_result .all-properties .property').css('width', '50%');
-    } else if (jQuery('body .wpp_property_overview_shortcode_v2 .wpp_property_view_result .all-properties').width() < 450) {
-      jQuery('body .wpp_property_overview_shortcode_v2 .wpp_property_view_result .all-properties .property').css('width', '100%');
-    }
+    jQuery('.wpp_property_overview_shortcode_v2').each(function () {
+      if (jQuery(this).find('.all-properties').width() < 450) {
+        jQuery(this).find('.property').css('width', '100%');
+      } else if (jQuery(this).find('.all-properties').width() < 750) {
+        jQuery(this).find('.property').css('width', '50%');
+      }
+    });
   }
 
   /**
@@ -652,7 +654,7 @@
 
   jQuery(window).load(function () {
     properties_height(property_overview_box);
-    // properties_width();
+    properties_width();
 
     if (typeof window.localStorage != 'undefined') {
       console.log(localStorage.getItem('wpp_shortcode_template'));
