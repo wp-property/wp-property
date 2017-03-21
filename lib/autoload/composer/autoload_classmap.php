@@ -85,6 +85,7 @@ return array(
     'RWMB_Wpp_Select_Combobox_Field' => $baseDir . '/features/wp-property-terms/lib/classes/fields/select-combobox.php',
     'RWMB_Wpp_Taxonomy_Field' => $baseDir . '/features/wp-property-terms/lib/classes/fields/taxonomy.php',
     'RWMB_Wpp_Taxonomy_Inherited_Field' => $baseDir . '/features/wp-property-terms/lib/classes/fields/class-wpp-taxonomy-inherited.php',
+    'RWMB_Wpp_Taxonomy_Readonly_Field' => $baseDir . '/features/wp-property-terms/lib/classes/fields/taxonomy-readonly.php',
     'UsabilityDynamics\\WPP\\Agents_Bootstrap' => $baseDir . '/features/wp-property-agents/lib/classes/class-agents-bootstrap.php',
     'UsabilityDynamics\\WPP\\Elasticsearch' => $baseDir . '/features/elasticsearch/class-elasticsearch.php',
     'UsabilityDynamics\\WPP\\Elasticsearch_Terms' => $baseDir . '/features/elasticsearch/class-elasticsearch-terms.php',

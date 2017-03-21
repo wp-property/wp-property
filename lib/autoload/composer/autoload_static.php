@@ -107,6 +107,7 @@ class ComposerStaticInitf4ed7b6af105d2c0f95f0f768a166c7c
         'RWMB_Wpp_Select_Combobox_Field' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/fields/select-combobox.php',
         'RWMB_Wpp_Taxonomy_Field' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/fields/taxonomy.php',
         'RWMB_Wpp_Taxonomy_Inherited_Field' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/fields/class-wpp-taxonomy-inherited.php',
+        'RWMB_Wpp_Taxonomy_Readonly_Field' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/fields/taxonomy-readonly.php',
         'UsabilityDynamics\\WPP\\Agents_Bootstrap' => __DIR__ . '/../..' . '/features/wp-property-agents/lib/classes/class-agents-bootstrap.php',
         'UsabilityDynamics\\WPP\\Elasticsearch' => __DIR__ . '/../..' . '/features/elasticsearch/class-elasticsearch.php',
         'UsabilityDynamics\\WPP\\Elasticsearch_Terms' => __DIR__ . '/../..' . '/features/elasticsearch/class-elasticsearch-terms.php',
