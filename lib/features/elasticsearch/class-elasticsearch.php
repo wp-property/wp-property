@@ -23,6 +23,9 @@ namespace UsabilityDynamics\WPP {
        * Elasticsearch constructor.
        */
       function __construct() {
+
+        //define( 'EP_INDEX_NAME', 'rdc-maxim-test' );
+
         add_action( 'plugins_loaded', array( $this, 'init' ) );
       }
 

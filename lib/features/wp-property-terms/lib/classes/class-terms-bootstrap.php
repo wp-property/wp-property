@@ -788,7 +788,7 @@ namespace UsabilityDynamics\WPP {
 
         foreach($taxonomies as $k => $d) {
 
-          $d = $this->prepare_taxonomy( $d );
+          $d = $this->prepare_taxonomy( $d, $k );
 
           $field = array();
 
