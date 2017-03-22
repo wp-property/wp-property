@@ -104,6 +104,8 @@ body,
   /* wpp_supermap_wrapper */
   /* widget_property_responsive_slideshow */
   /* widget_property_responsive_slideshow */
+  /* widget_tag_cloud */
+  /* widget_tag_cloud */
 }
 body .wpp_property_overview_shortcode,
 #wpp_layout .wpp_property_overview_shortcode {
@@ -1857,4 +1859,12 @@ body .wpp_supermap_wrapper .super_map_list .show_more,
 body .widget_property_responsive_slideshow,
 #wpp_layout .widget_property_responsive_slideshow {
   position: relative;
+}
+body .widget_tag_cloud .tagcloud a,
+#wpp_layout .widget_tag_cloud .tagcloud a {
+  background-color: #145fc8;
+  color: #fff;
+  display: inline-block;
+  margin: 0 0.2em 0.2em 0;
+  padding: 0.5em 1em;
 }
