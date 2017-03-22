@@ -1103,6 +1103,10 @@ body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form div.wpp_search_
   width: 100%;
   padding: 0.5em 1em;
 }
+body .wpp_shortcode_search_v2 .wpp_shortcode_search_form div.wpp_search_elements_v2 div.wpp_search_group ul#wpp_search_group > li.wpp_search_form_element ul#wpp_multi_checkbox,
+#wpp_layout .wpp_shortcode_search_v2 .wpp_shortcode_search_form div.wpp_search_elements_v2 div.wpp_search_group ul#wpp_search_group > li.wpp_search_form_element ul#wpp_multi_checkbox,
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form div.wpp_search_elements_v2 div.wpp_search_group ul#wpp_search_group > li.wpp_search_form_element ul#wpp_multi_checkbox,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form div.wpp_search_elements_v2 div.wpp_search_group ul#wpp_search_group > li.wpp_search_form_element ul#wpp_multi_checkbox,
 body .wpp_shortcode_search_v2 .wpp_shortcode_search_form div.wpp_search_elements_v2 div.wpp_search_group ul#wpp_search_group > li.wpp_search_form_element ul.wpp_multi_checkbox,
 #wpp_layout .wpp_shortcode_search_v2 .wpp_shortcode_search_form div.wpp_search_elements_v2 div.wpp_search_group ul#wpp_search_group > li.wpp_search_form_element ul.wpp_multi_checkbox,
 body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form div.wpp_search_elements_v2 div.wpp_search_group ul#wpp_search_group > li.wpp_search_form_element ul.wpp_multi_checkbox,
@@ -1111,6 +1115,10 @@ body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form div.wpp_search_
   padding: 0;
   list-style: none;
 }
+body .wpp_shortcode_search_v2 .wpp_shortcode_search_form div.wpp_search_elements_v2 div.wpp_search_group ul#wpp_search_group > li.wpp_search_form_element ul#wpp_multi_checkbox li,
+#wpp_layout .wpp_shortcode_search_v2 .wpp_shortcode_search_form div.wpp_search_elements_v2 div.wpp_search_group ul#wpp_search_group > li.wpp_search_form_element ul#wpp_multi_checkbox li,
+body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form div.wpp_search_elements_v2 div.wpp_search_group ul#wpp_search_group > li.wpp_search_form_element ul#wpp_multi_checkbox li,
+#wpp_layout .wpp_search_properties_widget_v2 .wpp_shortcode_search_form div.wpp_search_elements_v2 div.wpp_search_group ul#wpp_search_group > li.wpp_search_form_element ul#wpp_multi_checkbox li,
 body .wpp_shortcode_search_v2 .wpp_shortcode_search_form div.wpp_search_elements_v2 div.wpp_search_group ul#wpp_search_group > li.wpp_search_form_element ul.wpp_multi_checkbox li,
 #wpp_layout .wpp_shortcode_search_v2 .wpp_shortcode_search_form div.wpp_search_elements_v2 div.wpp_search_group ul#wpp_search_group > li.wpp_search_form_element ul.wpp_multi_checkbox li,
 body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form div.wpp_search_elements_v2 div.wpp_search_group ul#wpp_search_group > li.wpp_search_form_element ul.wpp_multi_checkbox li,

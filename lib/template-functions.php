@@ -1501,7 +1501,7 @@ if (!function_exists('wpp_render_search_input')):
           break;
         case 'multi_checkbox':
           ?>
-          <ul class="wpp_multi_checkbox <?php echo $attribute_data['ui_class']; ?>">
+          <ul id="wpp_multi_checkbox" class="wpp_multi_checkbox <?php echo $attribute_data['ui_class']; ?>">
             <?php foreach ($search_values[$attrib] as $value_label) : ?>
               <?php $unique_id = rand(10000, 99999); ?>
               <li>
