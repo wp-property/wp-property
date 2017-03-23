@@ -420,6 +420,12 @@ namespace UsabilityDynamics\WPP {
                   'type' => 'string',
                   'index' => 'not_analyzed',
                 ),
+                'term_type' => array(
+                  'type' => 'keyword',
+                ),
+                'url_path' => array(
+                  'type' => 'keyword',
+                ),
                 'meta' => array(
                   'type' => 'object',
                   "dynamic" => true,
@@ -577,11 +583,16 @@ namespace UsabilityDynamics\WPP {
           foreach ( $object_terms as $term ) {
             if( ! isset( $terms_dic[ $term->term_id ] ) ) {
 
+              $meta = WPP_F::get_term_metadata( $term );
+              $term_type = isset( $meta['term_type'] ) ? $meta['term_type'] : null;
+
               $terms_dic[ $term->term_id ] = array_filter(array(
                 'term_id'  => $term->term_id,
                 'slug'     => $term->slug,
                 'name'     => $term->name,
                 'parent'   => $term->parent,
+                "term_type" => apply_filters( 'wpp:term_type', ( !empty( $term_type ) ? $term_type : $taxonomy ), $term, $meta ),
+                "url_path" => str_replace( home_url(), '', get_term_link( $term, $taxonomy ) ),
                 'meta'    => WPP_F::get_term_metadata( $term )
               ));
 
