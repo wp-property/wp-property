@@ -1125,9 +1125,9 @@ if (!function_exists('draw_property_search_form')):
       }
     }
     if (WPP_LEGACY_WIDGETS) { // If used old widget
-      include_once WPP_Path . 'static/views/property-search-widget.php';
+      include_once WPP_Path . 'static/views/property-search-form.php';
     } else { //If used new widget
-      include_once WPP_Path . 'static/views/property-search-widget-v2.php';
+      include_once WPP_Path . 'static/views/property-search-form-v2.php';
     }
   }
 endif;
