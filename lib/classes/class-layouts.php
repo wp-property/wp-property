@@ -369,12 +369,6 @@ namespace UsabilityDynamics\WPP {
        *
        */
       public function get_footer() {
-        global $wp_query;
-
-        // Reset original post ID.
-        if( isset( $wp_query->post ) && isset( $wp_query->post->_original_id ) ) {
-          $wp_query->post->ID = $wp_query->post->_original_id;
-        }
 
         // Remove our metadata override filter.
         remove_filter( 'get_post_metadata', array( 'UsabilityDynamics\WPP\Layouts', 'override_metadata' ), 50 );
@@ -445,6 +439,11 @@ namespace UsabilityDynamics\WPP {
         add_filter('the_excerpt', array($this, 'the_content'), 1000);
 
         self::debug( 'page_template', $_layout['templates'] );
+
+        // Reset original post ID.
+        if( isset( $wp_query->post ) && isset( $wp_query->post->_original_id ) ) {
+          $wp_query->post->ID = $wp_query->post->_original_id;
+        }
 
         $template = locate_template($_layout['templates']);
 

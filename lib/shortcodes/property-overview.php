@@ -356,11 +356,7 @@ namespace UsabilityDynamics\WPP {
         $defaults['unique_hash'] = rand(10000, 99900);
         $defaults['detail_button'] = false;
         $defaults['stats'] = '';
-        if (WPP_LEGACY_WIDGETS) {
-          $defaults['class'] = 'wpp_property_overview_shortcode';
-        } else {
-          $defaults['class'] = 'wpp_property_overview_shortcode_v2';
-        }
+        $defaults['class'] = WPP_LEGACY_WIDGETS ? 'wpp_property_overview_shortcode' : 'wpp_property_overview_shortcode_v2';
         $defaults['in_new_window'] = false;
         $defaults['attributes'] = array('phone_number', 'display_address', 'price');
 
@@ -557,19 +553,11 @@ namespace UsabilityDynamics\WPP {
         extract($wp_query->query_vars, EXTR_SKIP);
 
         //** Try find custom template */
-        if (WPP_LEGACY_WIDGETS) {
-          $template_found = \WPP_F::get_template_part(array(
-            "property-overview-{$template}",
-            "property-overview-" . sanitize_key($property_type),
-            "property-overview",
-          ), array(ud_get_wp_property()->path('static/views', 'dir')));
-        } else {
-          $template_found = \WPP_F::get_template_part(array(
-            "property-overview-{$template}",
-            "property-overview-" . sanitize_key($property_type),
-            "property-overview-v2",
-          ), array(ud_get_wp_property()->path('static/views', 'dir')));
-        }
+        $template_found = \WPP_F::get_template_part(array(
+          "property-overview-{$template}",
+          "property-overview-" . sanitize_key($property_type),
+          WPP_LEGACY_WIDGETS ? "property-overview" : "property-overview-v2"
+        ), array(ud_get_wp_property()->path('static/views', 'dir')));
 
         if ($template_found) {
           include $template_found;
