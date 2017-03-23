@@ -1339,39 +1339,36 @@ body,
   /* Agent widget */
 
   /* Agent widget V2 */
-  .widget_agentwidget {
+  .wpp_agent_info_single_wrapper_v2 {
+    border: 1px solid #e3e3e3;
+    padding: 2em 1em;
 
-    .wpp_agent_info_single_wrapper_v2 {
-      border: 1px solid #e3e3e3;
-      padding: 2em 1em;
-
-      ul.wpp_agent_info_list {
+    ul.wpp_agent_info_list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      li {
         margin: 0;
-        padding: 0;
         list-style: none;
-        li {
-          margin: 0;
-          list-style: none;
-          &.wpp_agent_stats_socials {
+        &.wpp_agent_stats_socials {
 
-            ul.wpp_agent_socials_list {
-              margin: 0;
-              padding: 0;
-              list-style: none;
-            }
+          ul.wpp_agent_socials_list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
           }
         }
       }
-      div.wpp_agent_info_list {
+    }
+    div.wpp_agent_info_list {
 
-        label {
-          font-weight: bold;
-          display: inline-block;
-          padding-right: 10px;
-        }
-        span {
-          display: inline-block;
-        }
+      label {
+        font-weight: bold;
+        display: inline-block;
+        padding-right: 10px;
+      }
+      span {
+        display: inline-block;
       }
     }
   }
