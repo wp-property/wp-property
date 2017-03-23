@@ -1,7 +1,5 @@
 <?php
 
-//define( 'EP_INDEX_NAME', 'rdc-maxim-test' );
-
 namespace UsabilityDynamics\WPP {
 
   use WPP_F;
@@ -33,7 +31,16 @@ namespace UsabilityDynamics\WPP {
       public function ep_config_mapping( $mapping ) {
         $mapping['mappings']['term'] = array(
           'date_detection' => false,
-          'dynamic_templates' => array(),
+          'dynamic_templates' => array(
+            array(
+              'meta' => array(
+                'path_match' => 'meta.*',
+                'mapping' => array(
+                  'type' => 'keyword'
+                ),
+              ),
+            ),
+          ),
           '_all' => array(
             'analyzer' => 'simple',
           ),
@@ -49,12 +56,39 @@ namespace UsabilityDynamics\WPP {
             ),
             'name' => array(
               'type' => 'text',
+              'fields' => array(
+                'name' => array(
+                  'type' => 'text',
+                  'analyzer' => 'standard'
+                ),
+                'raw' => array(
+                  'type' => 'keyword'
+                ),
+                'sortable' => array(
+                  'type' => 'keyword'
+                )
+              )
             ),
             'taxonomy' => array(
               'type' => 'keyword',
             ),
+            'parent' => array(
+              'type' => 'long',
+            ),
             'url_path' => array(
               'type' => 'text',
+              'fields' => array(
+                'url_path' => array(
+                  'type' => 'text',
+                  'analyzer' => 'standard'
+                ),
+                'raw' => array(
+                  'type' => 'keyword'
+                ),
+                'sortable' => array(
+                  'type' => 'keyword'
+                )
+              )
             ),
             'meta' => array(
               'type' => 'object'
@@ -132,10 +166,10 @@ namespace UsabilityDynamics\WPP {
 
         $args = array(
           "term_id" => $term['term_id'],
-          "term_type" => $term_type,
           "term_type" => apply_filters( 'wpp:term_type', ( !empty( $term_type ) ? $term_type : $taxonomy ), $term, $meta ),
           "slug" => $term['slug'],
           "name" => $term['name'],
+          "parent" => $_term->parent,
           "taxonomy" => $taxonomy,
           "url_path" => str_replace( home_url(), '', get_term_link( $_term, $taxonomy ) ),
           "meta" => $meta,
