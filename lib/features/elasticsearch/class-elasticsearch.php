@@ -591,8 +591,8 @@ namespace UsabilityDynamics\WPP {
                 'slug'     => $term->slug,
                 'name'     => $term->name,
                 'parent'   => $term->parent,
-                "term_type" => apply_filters( 'wpp:term_type', ( !empty( $term_type ) ? $term_type : $taxonomy ), $term, $meta ),
-                "url_path" => str_replace( home_url(), '', get_term_link( $term, $taxonomy ) ),
+                "term_type" => apply_filters( 'wpp:term_type', ( !empty( $term_type ) ? $term_type : $taxonomy->name ), $term, $meta ),
+                "url_path" => str_replace( home_url(), '', get_term_link( $term, $taxonomy->name ) ),
                 'meta'    => WPP_F::get_term_metadata( $term )
               ));
 
