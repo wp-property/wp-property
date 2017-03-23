@@ -11,10 +11,8 @@ class GalleryPropertiesWidget extends WP_Widget
    */
   function __construct()
   {
-    if (!WPP_LEGACY_WIDGETS) {
-      if (!is_admin()) {
-        wp_enqueue_script('wp-property-gallery');
-      }
+    if (!WPP_LEGACY_WIDGETS && !is_admin()) {
+      wp_enqueue_script('wp-property-gallery');
     }
 
     parent::__construct(false, $name = sprintf(__('%1s Gallery', ud_get_wp_property()->domain), WPP_F::property_label()), array('description' => __('List of all images attached to the current property', ud_get_wp_property()->domain)));
@@ -76,7 +74,7 @@ class GalleryPropertiesWidget extends WP_Widget
     */
 
     $html[] = $before_widget;
-    
+
     if (WPP_LEGACY_WIDGETS) {
       $html[] = "<div class='wpp_gallery_widget'>";
     } else {
