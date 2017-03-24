@@ -847,6 +847,8 @@ if (!function_exists('draw_stats')):
       $stats_by_groups = sort_stats_by_groups($stats);
       $main_stats_group = $wp_properties['configuration']['main_stats_group'];
 
+      if (!WPP_LEGACY_WIDGETS) echo '<div class="wpp_features_box">'; // for v2 widget
+
       foreach ($stats_by_groups as $gslug => $gstats) {
         ?>
         <div class="wpp_feature_list">
@@ -953,6 +955,7 @@ if (!function_exists('draw_stats')):
         </div>
         <?php
       }
+      if (!WPP_LEGACY_WIDGETS) echo '</div>'; // for v2 widget
     }
 
   }
