@@ -524,11 +524,13 @@ namespace UsabilityDynamics\WPP {
               'meta'    => $meta,
             ));
 
-            if( !isset( $terms_dic[ $term_type ] ) ) {
-              $terms_dic[ $term_type ] = array();
+            $_term_type = str_replace( '-', '_', $term_type );
+
+            if( !isset( $terms_dic[ $_term_type ] ) ) {
+              $terms_dic[ $_term_type ] = array();
             }
 
-            $terms_dic[ $term_type ][] = $_term;
+            $terms_dic[ $_term_type ][] = $_term;
 
           }
           $terms[ $taxonomy->name ] = $terms_dic;
