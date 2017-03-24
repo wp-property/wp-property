@@ -7,6 +7,7 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use WPP_F;
   use MatthiasMullie\Minify\Exception;
 
   if( !class_exists( 'UsabilityDynamics\WPP\Ajax' ) ) {
@@ -21,6 +22,7 @@ namespace UsabilityDynamics\WPP {
       var $actions = array(
         'wpp_clone_property',
         'wpp_autocomplete_property_parent',
+        'wpp_ajax_property_query',
       );
 
       /**
@@ -35,7 +37,7 @@ namespace UsabilityDynamics\WPP {
        *
        * @author peshkov@UD
        */
-      public function __construct(){
+      public function __construct() {
         parent::__construct();
 
         /**
@@ -66,26 +68,23 @@ namespace UsabilityDynamics\WPP {
           'html' => '',
         );
 
-        try{
+        try {
 
           $action = $_REQUEST[ 'action' ];
           /** Determine if the current class has the method to handle request */
-          if( is_callable( array( $this, 'action_'. $action ) ) ) {
+          if( is_callable( array( $this, 'action_' . $action ) ) ) {
             $response = call_user_func_array( array( $this, 'action_' . $action ), array( $_REQUEST ) );
-          }
-          /** Determine if external function exists to handle request */
-          elseif ( is_callable( 'action_' . $action ) ) {
+          } /** Determine if external function exists to handle request */
+          elseif( is_callable( 'action_' . $action ) ) {
             $response = call_user_func_array( $action, array( $_REQUEST ) );
-          }
-          elseif ( is_callable( $action ) ) {
+          } elseif( is_callable( $action ) ) {
             $response = call_user_func_array( $action, array( $_REQUEST ) );
-          }
-          /** Oops! */
+          } /** Oops! */
           else {
             throw new \Exception( __( 'Incorrect Request' ) );
           }
 
-        } catch( \Exception $e ) {
+        } catch ( \Exception $e ) {
           wp_send_json_error( $e->getMessage() );
         }
 
@@ -103,7 +102,7 @@ namespace UsabilityDynamics\WPP {
       public function send_json( $response ) {
         @header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
         echo wp_json_encode( $response );
-        if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+        if( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
           wp_die();
         } else {
           die;
@@ -119,15 +118,15 @@ namespace UsabilityDynamics\WPP {
        */
       public function action_wpp_clone_property( $args ) {
 
-        if( empty($args['post_id']) || !is_numeric($args['post_id']) ) {
-          throw new \Exception( __( 'Invalid Post ID', ud_get_wp_property('domain') ) );
+        if( empty( $args[ 'post_id' ] ) || !is_numeric( $args[ 'post_id' ] ) ) {
+          throw new \Exception( __( 'Invalid Post ID', ud_get_wp_property( 'domain' ) ) );
         }
 
-        if( get_post_type($args['post_id']) !== 'property' ) {
-          throw new \Exception( sprintf( __( 'Invalid Post ID. It does not belong to %s.', ud_get_wp_property('domain') ), \WPP_F::property_label() ) );
+        if( get_post_type( $args[ 'post_id' ] ) !== 'property' ) {
+          throw new \Exception( sprintf( __( 'Invalid Post ID. It does not belong to %s.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label() ) );
         }
 
-        $post = get_post( $args['post_id'], ARRAY_A );
+        $post = get_post( $args[ 'post_id' ], ARRAY_A );
 
         /* Clone Property */
 
@@ -146,32 +145,32 @@ namespace UsabilityDynamics\WPP {
         $_post = array();
         foreach( $post as $k => $v ) {
           if( in_array( $k, $postmap ) ) {
-            switch( $k ){
+            switch( $k ) {
               case 'post_title':
-                $v .= ' (' . __( 'Clone', ud_get_wp_property('domain') ) . ')';
+                $v .= ' (' . __( 'Clone', ud_get_wp_property( 'domain' ) ) . ')';
               default:
-                $_post[$k] = $v;
+                $_post[ $k ] = $v;
                 break;
             }
           }
         }
 
-        $post_id = wp_insert_post($_post);
+        $post_id = wp_insert_post( $_post );
 
         /* Clone Property Attributes and Meta */
 
-        if(is_wp_error($post_id) || !$post_id) {
-          throw new \Exception( __( 'Could not create new Post.', ud_get_wp_property('domain') ) );
+        if( is_wp_error( $post_id ) || !$post_id ) {
+          throw new \Exception( __( 'Could not create new Post.', ud_get_wp_property( 'domain' ) ) );
         }
 
         $meta = array_unique( array_merge(
           array( 'property_type' ),
-          array_keys( ud_get_wp_property('property_stats',array()) ),
-          array_keys( ud_get_wp_property('property_meta', array()) )
+          array_keys( ud_get_wp_property( 'property_stats', array() ) ),
+          array_keys( ud_get_wp_property( 'property_meta', array() ) )
         ) );
 
         foreach( $meta as $key ) {
-          $v = get_post_meta( $post['ID'], $key, true );
+          $v = get_post_meta( $post[ 'ID' ], $key, true );
           add_post_meta( $post_id, $key, $v );
         }
 
@@ -195,8 +194,8 @@ namespace UsabilityDynamics\WPP {
         ) );
 
         $response = $this->get_autocomplete_post( $args[ 'term' ], 'property' );
-        foreach($response as $i => $p) {
-          $response[$i]['excerpt'] = \RWMB_Wpp_Parent_Field::prepare_parent_label($p['excerpt']);
+        foreach( $response as $i => $p ) {
+          $response[ $i ][ 'excerpt' ] = \RWMB_Wpp_Parent_Field::prepare_parent_label( $p[ 'excerpt' ] );
         }
         $this->send_json( $response );
       }
@@ -226,6 +225,28 @@ namespace UsabilityDynamics\WPP {
         }
 
         return $response;
+
+      }
+
+      /**
+       * Property Object previewer
+       *
+       * @author potanin@UD
+       * @param array $args
+       * @return array
+       */
+      public function action_wpp_ajax_property_query($args = array( )) {
+
+        $_property_id = trim( $args[ "property_id" ] );
+
+        $class = WPP_F::get_property( $_property_id, array( 'load_gallery' => false, 'cache' => false ) );
+
+        $_display = prepare_property_for_display( $class );
+
+        return array(
+          'property' => $class,
+          'for_display' => $_display
+        );
 
       }
 

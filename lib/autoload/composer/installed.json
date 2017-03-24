@@ -1,0 +1,323 @@
+[
+    {
+        "name": "composer/installers",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/composer/installers.git",
+            "reference": "020d476ae2ea88ef5fc3f8d711c33ed27ad5ea3e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/composer/installers/zipball/020d476ae2ea88ef5fc3f8d711c33ed27ad5ea3e",
+            "reference": "020d476ae2ea88ef5fc3f8d711c33ed27ad5ea3e",
+            "shasum": ""
+        },
+        "require": {
+            "composer-plugin-api": "^1.0"
+        },
+        "replace": {
+            "roundcube/plugin-installer": "*",
+            "shama/baton": "*"
+        },
+        "require-dev": {
+            "composer/composer": "1.0.*@dev",
+            "phpunit/phpunit": "4.1.*"
+        },
+        "time": "2017-01-27T13:02:46+00:00",
+        "type": "composer-plugin",
+        "extra": {
+            "class": "Composer\\Installers\\Plugin",
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Composer\\Installers\\": "src/Composer/Installers"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Kyle Robinson Young",
+                "email": "kyle@dontkry.com",
+                "homepage": "https://github.com/shama"
+            }
+        ],
+        "description": "A multi-framework Composer library installer",
+        "homepage": "https://composer.github.io/installers/",
+        "keywords": [
+            "Craft",
+            "Dolibarr",
+            "Hurad",
+            "ImageCMS",
+            "Kanboard",
+            "MODX Evo",
+            "Mautic",
+            "Maya",
+            "OXID",
+            "Plentymarkets",
+            "Porto",
+            "RadPHP",
+            "SMF",
+            "Thelia",
+            "WolfCMS",
+            "agl",
+            "aimeos",
+            "annotatecms",
+            "attogram",
+            "bitrix",
+            "cakephp",
+            "chef",
+            "cockpit",
+            "codeigniter",
+            "concrete5",
+            "croogo",
+            "dokuwiki",
+            "drupal",
+            "elgg",
+            "expressionengine",
+            "fuelphp",
+            "grav",
+            "installer",
+            "joomla",
+            "kohana",
+            "laravel",
+            "lithium",
+            "magento",
+            "mako",
+            "mediawiki",
+            "modulework",
+            "moodle",
+            "phpbb",
+            "piwik",
+            "ppi",
+            "puppet",
+            "reindex",
+            "roundcube",
+            "shopware",
+            "silverstripe",
+            "symfony",
+            "typo3",
+            "wordpress",
+            "yawik",
+            "zend",
+            "zikula"
+        ]
+    },
+    {
+        "name": "wp-property/wp-property-agents",
+        "version": "dev-feature",
+        "version_normalized": "dev-feature",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:wp-property/wp-property-agents",
+            "reference": "feature"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/wp-property/wp-property-agents/archive/feature.zip",
+            "reference": "feature",
+            "shasum": null
+        },
+        "archive": {
+            "exclude": [
+                "node_modules",
+                ".gitignore",
+                "test",
+                "circle.yml",
+                "composer.lock",
+                "gruntfile.js",
+                "package.json"
+            ]
+        },
+        "type": "wordpress-plugin",
+        "extra": {
+            "schemas": {
+                "dependencies": {
+                    "modules": [],
+                    "plugins": []
+                },
+                "licenses": []
+            },
+            "installer-name": "wp-property-agents"
+        },
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "lib/classes"
+            ],
+            "files": [
+                "loader.php"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "homepage": "https://www.usabilitydynamics.com/product/wp-property-agents"
+    },
+    {
+        "name": "wp-property/wp-property-responsive-slideshow",
+        "version": "dev-feature",
+        "version_normalized": "dev-feature",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:wp-property/wp-property-responsive-slideshow",
+            "reference": "feature"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/wp-property/wp-property-responsive-slideshow/archive/feature.zip",
+            "reference": "feature",
+            "shasum": null
+        },
+        "archive": {
+            "exclude": [
+                "vendor",
+                "node_modules",
+                ".gitignore",
+                "test",
+                "circle.yml",
+                "composer.lock",
+                "gruntfile.js",
+                "package.json",
+                "changes.md",
+                "readme.md",
+                "faqs.md"
+            ]
+        },
+        "type": "wordpress-plugin",
+        "extra": {
+            "schemas": {
+                "dependencies": {
+                    "modules": [],
+                    "plugins": []
+                },
+                "licenses": []
+            },
+            "installer-name": "wp-property-responsive-slideshow"
+        },
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "lib/classes"
+            ],
+            "files": [
+                "loader.php"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "homepage": "https://www.usabilitydynamics.com/product/wp-property-responsive-slideshow"
+    },
+    {
+        "name": "wp-property/wp-property-supermap",
+        "version": "dev-feature",
+        "version_normalized": "dev-feature",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:wp-property/wp-property-supermap",
+            "reference": "feature"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/wp-property/wp-property-supermap/archive/feature.zip",
+            "reference": "feature",
+            "shasum": null
+        },
+        "archive": {
+            "exclude": [
+                "node_modules",
+                ".gitignore",
+                "test",
+                "circle.yml",
+                "composer.lock",
+                "gruntfile.js",
+                "package.json"
+            ]
+        },
+        "type": "wordpress-plugin",
+        "extra": {
+            "schemas": {
+                "dependencies": {
+                    "modules": [],
+                    "plugins": []
+                },
+                "licenses": []
+            },
+            "installer-name": "wp-property-supermap"
+        },
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "lib/classes"
+            ],
+            "files": [
+                "loader.php"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "homepage": "https://www.usabilitydynamics.com/product/wp-property-supermap/"
+    },
+    {
+        "name": "wp-property/wp-property-terms",
+        "version": "dev-feature",
+        "version_normalized": "dev-feature",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:wp-property/wp-property-terms",
+            "reference": "feature"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/wp-property/wp-property-terms/archive/feature.zip",
+            "reference": "feature",
+            "shasum": null
+        },
+        "archive": {
+            "exclude": [
+                "vendor",
+                "node_modules",
+                ".gitignore",
+                "test",
+                "circle.yml",
+                "composer.lock",
+                "gruntfile.js",
+                "package.json"
+            ]
+        },
+        "type": "wordpress-plugin",
+        "extra": {
+            "schemas": {
+                "dependencies": {
+                    "modules": [],
+                    "plugins": []
+                },
+                "licenses": []
+            },
+            "installer-name": "wp-property-terms"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib/classes"
+            ],
+            "files": [
+                "loader.php"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "homepage": "https://www.usabilitydynamics.com/product/wp-property-terms"
+    }
+]

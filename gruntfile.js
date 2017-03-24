@@ -49,21 +49,25 @@ module.exports = function build( grunt ) {
         },
         files: {
           'static/styles/wpp.admin.css': [ 'static/styles/src/wpp.admin.less' ],
-          'static/styles/wpp.admin.data.tables.css': [ 'static/styles/src/wpp.admin.data.tables.less' ],
+          // 'static/styles/wpp.admin.data.tables.css': [ 'static/styles/src/wpp.admin.data.tables.less' ],
           'static/styles/wpp.admin.jquery.ui.css': [ 'static/styles/src/wpp.admin.jquery.ui.less' ],
           
-          'static/styles/wp_properties.css': [ 'static/styles/src/wp_properties.less' ],
-          'static/styles/wp_properties-ie_7.css': [ 'static/styles/src/wp_properties-ie_7.less' ],
-          'static/styles/wp_properties-msie.css': [ 'static/styles/src/wp_properties-msie.less' ],
+          //'static/styles/wp_properties.css': [ 'static/styles/src/wp_properties.less' ],
+          //'static/styles/wp_properties-ie_7.css': [ 'static/styles/src/wp_properties-ie_7.less' ],
+          //'static/styles/wp_properties-msie.css': [ 'static/styles/src/wp_properties-msie.less' ],
           
-          'static/styles/theme-specific/denali.css': [ 'static/styles/src/theme-specific/denali.less' ],
-          'static/styles/theme-specific/twentyeleven.css': [ 'static/styles/src/theme-specific/twentyeleven.less' ],
-          'static/styles/theme-specific/twentyten.css': [ 'static/styles/src/theme-specific/twentyten.less' ],
-          'static/styles/theme-specific/twentytwelve.css': [ 'static/styles/src/theme-specific/twentytwelve.less' ],
+          //'static/styles/theme-specific/denali.css': [ 'static/styles/src/theme-specific/denali.less' ],
+          //'static/styles/theme-specific/twentyeleven.css': [ 'static/styles/src/theme-specific/twentyeleven.less' ],
+          //'static/styles/theme-specific/twentyten.css': [ 'static/styles/src/theme-specific/twentyten.less' ],
+          //'static/styles/theme-specific/twentytwelve.css': [ 'static/styles/src/theme-specific/twentytwelve.less' ],
 
           'static/styles/fields/wpp-parent.css': [ 'static/styles/src/fields/wpp-parent.less' ],
+          'static/styles/fields/wpp-property-type.css': [ 'static/styles/src/fields/wpp-property-type.less' ],
 
-          'static/styles/property_overview.css': [ 'static/styles/src/property_overview.less' ]
+          //'static/styles/property_overview.css': [ 'static/styles/src/property_overview.less' ],
+
+          'static/styles/wpp.public.v2.3.css': [ 'static/styles/src/wpp.public.v2.3.less' ]
+
         }
       },
       development: {
@@ -72,21 +76,25 @@ module.exports = function build( grunt ) {
         },
         files: {
           'static/styles/wpp.admin.dev.css': [ 'static/styles/src/wpp.admin.less' ],
-          'static/styles/wpp.admin.data.tables.dev.css': [ 'static/styles/src/wpp.admin.data.tables.less' ],
+          //'static/styles/wpp.admin.data.tables.dev.css': [ 'static/styles/src/wpp.admin.data.tables.less' ],
           'static/styles/wpp.admin.jquery.ui.dev.css': [ 'static/styles/src/wpp.admin.jquery.ui.less' ],
           
-          'static/styles/wp_properties.dev.css': [ 'static/styles/src/wp_properties.less' ],
-          'static/styles/wp_properties-ie_7.dev.css': [ 'static/styles/src/wp_properties-ie_7.less' ],
-          'static/styles/wp_properties-msie.dev.css': [ 'static/styles/src/wp_properties-msie.less' ],
+          // 'static/styles/wp_properties.dev.css': [ 'static/styles/src/wp_properties.less' ],
+          // 'static/styles/wp_properties-ie_7.dev.css': [ 'static/styles/src/wp_properties-ie_7.less' ],
+          // 'static/styles/wp_properties-msie.dev.css': [ 'static/styles/src/wp_properties-msie.less' ],
           
-          'static/styles/theme-specific/denali.dev.css': [ 'static/styles/src/theme-specific/denali.less' ],
-          'static/styles/theme-specific/twentyeleven.dev.css': [ 'static/styles/src/theme-specific/twentyeleven.less' ],
-          'static/styles/theme-specific/twentyten.dev.css': [ 'static/styles/src/theme-specific/twentyten.less' ],
-          'static/styles/theme-specific/twentytwelve.dev.css': [ 'static/styles/src/theme-specific/twentytwelve.less' ],
+          // 'static/styles/theme-specific/denali.dev.css': [ 'static/styles/src/theme-specific/denali.less' ],
+          // 'static/styles/theme-specific/twentyeleven.dev.css': [ 'static/styles/src/theme-specific/twentyeleven.less' ],
+          // 'static/styles/theme-specific/twentyten.dev.css': [ 'static/styles/src/theme-specific/twentyten.less' ],
+          // 'static/styles/theme-specific/twentytwelve.dev.css': [ 'static/styles/src/theme-specific/twentytwelve.less' ],
 
           'static/styles/fields/wpp-parent.dev.css': [ 'static/styles/src/fields/wpp-parent.less' ],
 
-          'static/styles/property_overview.dev.css': [ 'static/styles/src/property_overview.less' ]
+          // 'static/styles/property_overview.dev.css': [ 'static/styles/src/property_overview.less' ],
+
+
+          'static/styles/wpp.public.v2.3.dev.css': [ 'static/styles/src/wpp.public.v2.3.less' ]
+
         }
       }
     },

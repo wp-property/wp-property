@@ -15,9 +15,17 @@ namespace UsabilityDynamics\WPP {
        * Init
        */
       public function __construct() {
+        global $wp_properties;
 
         $attributes = ud_get_wp_property( 'property_stats', array() );
 
+        foreach ($wp_properties['taxonomies'] as $taxonomy => $data) {
+          if($data['public'] && ( function_exists( 'ud_get_wpp_terms' ) || !empty($data['default']) )){
+            $attributes[$taxonomy] = "<b>Term:</b> " . $data['label'];
+          }
+
+        }
+        
         /*
         $hidden_attributes = ud_get_wp_property( 'hidden_frontend_attributes', array() );
         foreach( $attributes as $k => $v ) {
@@ -98,6 +106,15 @@ namespace UsabilityDynamics\WPP {
                 'type' => 'multi_checkbox',
                 'options' => $attributes,
               ),
+              'make_terms_links' => array(
+                'name' => __( 'Make terms link', ud_get_wp_property()->domain ),
+                'description' => __( 'Make the term link to term page.', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
+                  'false' => __( 'No', ud_get_wp_property()->domain ),
+                )
+              ),
             ),
             'description' => sprintf( __( 'Renders %s Attributes List', ud_get_wp_property()->domain ), \WPP_F::property_label() ),
             'group' => 'WP-Property'
@@ -122,6 +139,8 @@ namespace UsabilityDynamics\WPP {
           'return_blank' => 'false',
           'include' => '',
           'exclude' => '',
+          'make_terms_links' => 'false',
+          'include_taxonomies' => 'true',
         ), $atts );
 
         return $this->get_template( 'property-attributes', $data, false );

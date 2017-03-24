@@ -1,8 +1,54 @@
+//  Hide Term editor on WP-Property taxonomy pages.
+body.post-type-property.wpp-disable-term-editing {
+
+  #col-container {
+
+    #col-left {
+      display: none;
+    }
+
+    #col-right {
+      width: 100%;
+    }
+
+  }
+
+}
+
+
+.wpp-depreciated-option {
+  display:none;
+}
+// Hide weird label on messages.
+.wpp_settings_page .fs-notice label.fs-plugin-title {
+  display:none;
+}
+
 .wpp-multi-checkbox-wrapper {
   padding:10px;
   max-height: 200px;
   border: 1px solid #ddd;
   overflow-y: scroll;
+}
+
+.wpp-feature-flag, .wpp-feature-flag .dashicons  {
+  line-height: 30px;
+}
+
+.wpp-feature-flag.wpp-feature-flag-enabled {
+
+   .dashicons-yes {
+    color: #33b333;
+  }
+
+}
+
+.wpp-feature-flag.wpp-feature-flag-disabled {
+
+   .dashicons-yes {
+    color: rgba(218, 218, 218, 0.69);
+  }
+
 }
 
 // TOOLTIP
@@ -1744,7 +1790,7 @@ td.wpp_premium_feature_image {
 .wpp_box_header strong {
   color: #000;
   display: block;
-  font-weight: strong;
+  font-weight: 400;
   margin-bottom: 10px;
 }
 
@@ -2197,7 +2243,7 @@ body.post-type-property {
       color:#999;
       font-weight:400;
     }
-    
+
   }
 }
 .wp-color-result:after{
@@ -2208,12 +2254,12 @@ body.post-type-property {
   position:relative;
   &.overlay:before{
     content:"";
-    top:0; 
-    left:0; 
-    right:0; 
+    top:0;
+    left:0;
+    right:0;
     bottom:0;
     z-index: 99;
-    position:absolute; 
+    position:absolute;
   }
 }
 
@@ -2221,7 +2267,7 @@ body.post-type-property {
 .combolist{
   margin-left: 14px;
   font-size: 12px;
-   span{ 
+   span{
     font-size: 13px;
     line-height: 1.8em;
     cursor: default;
@@ -2237,7 +2283,7 @@ body.post-type-property {
       height: 20px;
       text-indent: 0;
       position: absolute;
-      
+
       &:before {
         background: 0 0;
         color: #b4b9be;
@@ -2311,3 +2357,7 @@ body.post-type-property {
     }
   }
 }
+
+
+@import "wpp-json-viewer.less";
+@import "wpp.admin.customizer.less";

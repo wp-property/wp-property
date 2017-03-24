@@ -58,10 +58,19 @@ jQuery.fn.wppGroups = function(opt) {
   closeGroupBox = function () {
     groupsBlock.hide(300);
     wrapper.css('display','none');
-
-    statsRow.each(function(i, e){
+    var row = jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row');
+    row.each(function(i, e){
       jQuery(e).removeClass('groups_active');
-    })
+    });
+
+    jQuery.each(colorpicker, function(i, e) {
+      var _this = jQuery(e);
+      var gslug = _this.parent().parent().find('.slug').val();
+      console.log(gslug);
+      console.log(_this.val());
+      console.log(row.filter('tr[wpp_attribute_group=' + gslug + ']'));
+      row.filter('tr[wpp_attribute_group=' + gslug + ']').css('background-color', _this.val());
+    });
   };
 
   //* EVENTS */
@@ -82,44 +91,39 @@ jQuery.fn.wppGroups = function(opt) {
   //* Assign attribute to Group */
   assign.live('click', function(){
     var row = jQuery(this).parent().parent();
-    statsRow.each(function(i,e){
-      if(jQuery(e).hasClass('groups_active')) {
-        jQuery(e).css('background-color', jQuery('input.wpp_input_colorpicker' , row).val());
 
-        //* HACK FOR IE7 */
-        if(typeof jQuery.browser.msie != 'undefined' && (parseInt(jQuery.browser.version) == 7)) {
-          jQuery(e).find('td').css('background-color', jQuery('input.wpp_input_colorpicker' , row).val());
-        }
+    var active_groups = jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row.groups_active');
+    active_groups.css('background-color', jQuery('input.wpp_input_colorpicker' , row).val());
 
-        jQuery(e).attr('wpp_attribute_group' , row.attr('slug'));
-        jQuery('input.wpp_group_slug' , e).val(row.attr('slug'));
+    //* HACK FOR IE7 */
+    if(typeof jQuery.browser.msie != 'undefined' && (parseInt(jQuery.browser.version) == 7)) {
+      active_groups.find('td').css('background-color', jQuery('input.wpp_input_colorpicker' , row).val());
+    }
 
-        var groupName = jQuery('input.slug_setter' , row).val();
-        if(groupName == '') {
-          groupName = 'NO NAME';
-        }
+    active_groups.attr('wpp_attribute_group' , row.attr('slug'));
+    jQuery('input.wpp_group_slug' , active_groups).val(row.attr('slug'));
 
-        jQuery('input.wpp_attribute_group' , e).val(groupName);
-      }
-    });
+    var groupName = jQuery('input.slug_setter' , row).val();
+    if(groupName == '') {
+      groupName = 'NO NAME';
+    }
+
+    jQuery('input.wpp_attribute_group' , active_groups).val(groupName);
     closeGroupBox();
   });
 
   //* Unassign attribute from Group */
   unassign.live('click', function(){
-    statsRow.each(function(i,e){
-      if(jQuery(e).hasClass('groups_active')) {
-        jQuery(e).css('background-color', '');
-        //* HACK FOR IE7 */
-        if(typeof jQuery.browser.msie != 'undefined' && (parseInt(jQuery.browser.version) == 7)) {
-          jQuery(e).find('td').css('background-color', '');
-        }
+    var active_groups = jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row.groups_active');
+    jQuery(active_groups).css('background-color', '');
+    //* HACK FOR IE7 */
+    if(typeof jQuery.browser.msie != 'undefined' && (parseInt(jQuery.browser.version) == 7)) {
+      jQuery(active_groups).find('td').css('background-color', '');
+    }
 
-        jQuery(e).removeAttr('wpp_attribute_group');
-        jQuery('input.wpp_group_slug' , e).val('');
-        jQuery('input.wpp_attribute_group' , e).val('');
-      }
-    });
+    jQuery(active_groups).removeAttr('wpp_attribute_group');
+    jQuery('input.wpp_group_slug' , active_groups).val('');
+    jQuery('input.wpp_attribute_group' , active_groups).val('');
     closeGroupBox();
   });
 
@@ -173,6 +177,7 @@ jQuery.fn.wppGroups = function(opt) {
   //* Sorts all attributes by Groups */
   sortButton.live('click', function(){
     jQuery('tbody tr' , groupsBlock).each(function(gi,ge){
+      var statsRow = jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row');
       statsRow.each(function(si,se){
         if(typeof jQuery(se).attr('wpp_attribute_group') != 'undefined') {
           if(jQuery(se).attr('wpp_attribute_group') == jQuery(ge).attr('slug')) {
@@ -271,7 +276,7 @@ var updateRowNames = function(instance, allowRandomSlug) {
 
   var this_row = jQuery(instance).parents('tr.wpp_dynamic_table_row');
   // Slug of row in question
-  var old_slug = jQuery(this_row).attr('slug');
+  var old_slug = jQuery(this_row).attr('data-slug') || jQuery(this_row).attr('slug');
   // Get data from input.slug_setter
   var new_slug = jQuery(instance).val();
 
@@ -532,6 +537,9 @@ function wpp_add_row(element,hides) {
   jQuery("input[type=text]", added_row).val('');
   jQuery("input[type=checkbox]", added_row).attr('checked', false);
 
+  //* Remove hidden cass from delete button if the button of last row was hidden. */
+  jQuery(".wpp_delete_row", added_row).removeClass('hidden');
+
   //* Unset 'new_row' attribute */
   jQuery(added_row).attr('new_row', 'true');
 
@@ -746,4 +754,71 @@ jQuery(document).ready(function() {
       }
     });
   }
+  // for developer-settings-attributes
+  //toggle std attr
+  jQuery(".wpp-toggle-std-attr").live("click", function() {
+      jQuery(this).closest('li').find(".std-attr-mapper").fadeToggle();
+  });
+  
+  // apply notices on developer tab
+  applyNotices = function(notice,notice_cont){
+      
+    if(typeof(notice)!="undefined" && notice.trim().length >0){
+      notice_cont.text(notice).fadeIn();
+    }
+    else{
+      notice_cont.text('').fadeOut();
+    }
+  }
+  // for developer-settings-attributes
+  // load icon on page load
+  jQuery("#wpp_inquiry_attribute_fields tr").each(function(){
+
+    var iconClass =  jQuery(this).find(".std-attr-mapper .wpp_settings-prop_std_att_mapsto").val();
+    $x = jQuery(this).find(".wpp_std_attr_view i").addClass(iconClass);
+    
+    //if there are notices then display them
+    var notice = jQuery(this).find('.wpp_settings-prop_std_att_mapsto').find(':selected').data('notice');
+    var notice_cont = jQuery(this).find("i.std_att_notices");
+    applyNotices(notice,notice_cont);
+  });
+  
+  // for developer-settings-attributes
+  //change icon on select change
+  jQuery(".std-attr-mapper .wpp_settings-prop_std_att_mapsto").change(function(){
+    
+    var iconClass =  jQuery(this).val();
+    $x = jQuery(this).closest("tr").find(".wpp_std_attr_view i");
+    $x.removeClass().addClass(iconClass);
+    
+    //if there are notices then display them
+    var notice = jQuery(this).find(':selected').data('notice');
+    var notice_cont = jQuery(this).parent().find("i.std_att_notices");
+    applyNotices(notice,notice_cont);
+    toggleAttributesDropdown();
+  });
+  if(jQuery("#wpp_settings_base_slug").length>0)
+    jQuery("#wpp_settings_base_slug").select2();
+    //hide already choosen standard attributes
+  (toggleAttributesDropdown = function(){
+    var items = jQuery(".wpp_settings-prop_std_att_mapsto option:selected");
+    jQuery(".wpp_settings-prop_std_att_mapsto").each(function (ind,val) {
+        // Get the selected value
+        jQuery("option", jQuery(this)).each(function(){
+            jQuery(this).removeAttr("disabled");
+        });
+      
+      jQuery.each(items, function() {
+        if (jQuery.trim(jQuery(this).val()) == ''){
+          jQuery("option[value='" + jQuery(this).val() + "']", val).attr("disabled", true);
+        }
+      });
+    });
+  })();
+  
+    //notice popups to explain matched fields in Standard attributes
+  jQuery(".wpp-notice-for-match").click(function(e){
+    e.preventDefault();
+    jQuery(".wpp-notice-dialog").dialog('open');
+  });
 });
