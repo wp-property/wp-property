@@ -98,7 +98,7 @@
         "constant": "WPP_LEGACY_WIDGETS",
         "description": "Enable to use legacy widgets",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "Setup Assistant",

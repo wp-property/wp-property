@@ -313,6 +313,9 @@ class WPP_Core {
     /* New script for property search shortcode */
     wp_register_script( 'wpp-search-form', WPP_URL . 'scripts/wpp.search_form.js', array( 'jquery' ) );
 
+    /* New script for property gallery */
+    wp_register_script( 'wp-property-gallery', WPP_URL . 'scripts/wp-property-gallery.js', array( 'jquery' ) );
+
 
     // Load localized scripts
     $locale = str_replace('_', '-', get_locale());
