@@ -1339,7 +1339,8 @@ body,
   /* Agent widget */
 
   /* Agent widget V2 */
-  .wpp_agents_content_agent_card_v2 {
+  .wpp_agents_content_agent_card_v2,
+  .wpp_agent_info_single_wrapper_v2 {
     border: 1px solid #e3e3e3;
     padding: 2em 1em;
 
@@ -1475,12 +1476,26 @@ body,
         margin-bottom: 1em;
         .clearfix;
         .property_in_list {
+          border-bottom: 1px solid #e3e3e3;
           padding: 1em;
           .property_in_list_items {
-            border-bottom: 1px solid #e3e3e3;
             list-style: outside none none !important;
             margin: 0;
-            padding: 0 0 1em !important;
+            padding: 0 !important;
+            li {
+              padding: 0;
+              margin: 0;
+              list-style: none;
+              &.supermap_list_thumb {
+                text-align: center;
+                cursor: pointer;
+              }
+              &.supermap_list_title {
+                line-height: 1.4;
+                font-weight: bold;
+                cursor: pointer;
+              }
+            }
           }
           &:last-child {
             .property_in_list_items {
