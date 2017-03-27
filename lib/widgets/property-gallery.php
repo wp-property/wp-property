@@ -102,7 +102,9 @@ class GalleryPropertiesWidget extends WP_Widget
         $thumb_image_alt = !empty($alt) ? trim(strip_tags($alt)) : $thumb_image_title;
         ?>
         <div class="sidebar_gallery_item swiper-slide">
-          <?php if (!empty($big_image_type)) : ?>
+          <?php
+          if (!WPP_LEGACY_WIDGETS) echo '<div class="swiper-slide-wrapper">';
+          if (!empty($big_image_type)) : ?>
             <?php $big_image = wpp_get_image_link($image['attachment_id'], $big_image_type); ?>
             <a href="<?php echo $big_image; ?>" class="thumbnail" rel="property_gallery">
               <img src="<?php echo $thumb_image; ?>"
@@ -125,7 +127,9 @@ class GalleryPropertiesWidget extends WP_Widget
 
           <?php if ($show_description == 'on') { ?>
             <div class="wpp_image_widget_description"><?php echo $image['post_content']; ?></div>
-          <?php } ?>
+          <?php }
+          if (!WPP_LEGACY_WIDGETS) echo '</div>';
+          ?>
 
         </div>
         <?php
