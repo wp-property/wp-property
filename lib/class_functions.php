@@ -36,20 +36,13 @@ class WPP_F extends UsabilityDynamics\Utility
     $_meta[ 'term_id' ] = get_term_meta( $term->term_id, '_id', true );
     $_meta[ 'term_type' ] = get_term_meta( $term->term_id, '_type', true );
 
-    if( !isset( $_taxonomy[ 'wpp_term_meta_fields' ] ) ) {
-      return array();
+    if( isset( $_taxonomy[ 'wpp_term_meta_fields' ] ) ) {
+      foreach( (array) $_taxonomy[ 'wpp_term_meta_fields' ] as $_meta_field ) {
+        $_slug = str_replace( $term->taxonomy . '_', '', $_meta_field[ 'slug' ] );
+        $_meta_slug = $_type_prefix . '-' . $_slug;
+        $_meta[ $_meta_field[ 'slug' ] ] = get_term_meta( $term->term_id, $_meta_slug, true );
+      }
     }
-
-    foreach( (array) $_taxonomy[ 'wpp_term_meta_fields' ] as $_meta_field ) {
-
-      $_slug = str_replace( $term->taxonomy . '_', '', $_meta_field[ 'slug' ] );
-
-      $_meta_slug = $_type_prefix . '-' . $_slug;
-
-      $_meta[ $_meta_field[ 'slug' ] ] = get_term_meta( $term->term_id, $_meta_slug, true );
-
-    }
-
 
     return array_filter( $_meta );
 

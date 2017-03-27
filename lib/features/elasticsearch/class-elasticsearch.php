@@ -381,7 +381,7 @@ namespace UsabilityDynamics\WPP {
 
         $mapping['mappings']['post']['dynamic_templates'][] = array(
           'tax_input_meta' => array(
-            'path_match' => 'tax_input.meta.*',
+            'path_match' => 'tax_input.*.meta.*',
             'mapping' => array(
               'type' => 'string',
               "index" => "not_analyzed"
@@ -429,53 +429,7 @@ namespace UsabilityDynamics\WPP {
                 'meta' => array(
                   'type' => 'object',
                   "dynamic" => true,
-                  'properties' => array(
-                    'term_id' => array(
-                      'type' => 'string',
-                      'index' => 'not_analyzed',
-                    ),
-                    'term_type' => array(
-                      'type' => 'string',
-                      'index' => 'not_analyzed',
-                    ),
-                    'wpp_schools_city' => array(
-                      'type' => 'string',
-                      'index' => 'not_analyzed',
-                    ),
-                    'related_taxonomy' => array(
-                      'type' => 'string',
-                      'index' => 'not_analyzed',
-                    ),
-                    'related_term' => array(
-                      'type' => 'string',
-                      'index' => 'not_analyzed',
-                    ),
-                    'related_type' => array(
-                      'type' => 'string',
-                      'index' => 'not_analyzed',
-                    ),
-                    'pattern' => array(
-                      'type' => 'string',
-                      'index' => 'not_analyzed',
-                    ),
-                    'url_path' => array(
-                      'type' => 'string',
-                      'index' => 'not_analyzed',
-                    ),
-                    'url_slug' => array(
-                      'type' => 'string',
-                      'index' => 'not_analyzed',
-                    ),
-                    'wpp_schools_state' => array(
-                      'type' => 'string',
-                      'index' => 'not_analyzed',
-                    ),
-                    'wpp_schools_county' => array(
-                      'type' => 'string',
-                      'index' => 'not_analyzed',
-                    ),
-
-                  )
+                  'properties' => array()
                 )
               ),
             ),
@@ -483,7 +437,6 @@ namespace UsabilityDynamics\WPP {
         );
 
         $mapping['mappings']['post']['properties']['wpp_location_pin'] = array(
-          //"lat_lon" => true,
           "ignore_malformed" => true,
           "type" => "geo_point"
         );
@@ -496,8 +449,7 @@ namespace UsabilityDynamics\WPP {
           'search_analyzer' => 'whitespace_analyzer',
           'preserve_separators' => true,
           'preserve_position_increments' => true,
-          'max_input_length' => 50,
-          //'payloads' => true
+          'max_input_length' => 50
         );
 
         return $mapping;
@@ -516,31 +468,6 @@ namespace UsabilityDynamics\WPP {
         $headers[ 'x-site-secret-token' ] = get_option( 'ud_site_secret_token' );
 
         return $headers;
-      }
-
-      /**
-       * Recursively get all the ancestor terms of the given term
-       * @param $terms
-       * @param $term
-       * @param $tax_name
-       * @return array
-       */
-      private function get_parent_terms( $terms, $term, $tax_name ) {
-        $parent_term = get_term( $term->parent, $tax_name );
-        if( ! $parent_term || is_wp_error( $parent_term ) )
-          return $terms;
-        if( ! isset( $terms[ $parent_term->term_id ] ) ) {
-
-          $terms[ $parent_term->term_id ] = array_filter( array(
-            'term_id' => $parent_term->term_id,
-            'slug'    => $parent_term->slug,
-            'name'    => $parent_term->name,
-            'parent'  => $parent_term->parent,
-            'meta' => WPP_F::get_term_metadata( $term )
-          ));
-
-        }
-        return $this->get_parent_terms( $terms, $parent_term, $tax_name );
       }
 
       /**
@@ -569,8 +496,6 @@ namespace UsabilityDynamics\WPP {
 
         $terms = array();
 
-        $allow_hierarchy = apply_filters( 'ep_sync_terms_allow_hierarchy', false );
-
         foreach ( $selected_taxonomies as $taxonomy ) {
           $object_terms = get_the_terms( $post->ID, $taxonomy->name );
 
@@ -581,27 +506,34 @@ namespace UsabilityDynamics\WPP {
           $terms_dic = array();
 
           foreach ( $object_terms as $term ) {
-            if( ! isset( $terms_dic[ $term->term_id ] ) ) {
 
-              $meta = WPP_F::get_term_metadata( $term );
-              $term_type = isset( $meta['term_type'] ) ? $meta['term_type'] : null;
+            $meta = WPP_F::get_term_metadata( $term );
 
-              $terms_dic[ $term->term_id ] = array_filter(array(
-                'term_id'  => $term->term_id,
-                'slug'     => $term->slug,
-                'name'     => $term->name,
-                'parent'   => $term->parent,
-                "term_type" => apply_filters( 'wpp:term_type', ( !empty( $term_type ) ? $term_type : $taxonomy ), $term, $meta ),
-                "url_path" => str_replace( home_url(), '', get_term_link( $term, $taxonomy ) ),
-                'meta'    => WPP_F::get_term_metadata( $term )
-              ));
+            $term_type = isset( $meta['term_type'] ) ? $meta['term_type'] : null;
+            $term_type = apply_filters( 'wpp:term_type', ( !empty( $term_type ) ? $term_type : $taxonomy->name ), $term, $meta );
 
-              if( $allow_hierarchy ){
-                $terms_dic = $this->get_parent_terms( $terms_dic, $term, $taxonomy->name );
-              }
+            $url_path = str_replace( home_url(), '', get_term_link( $term, $taxonomy->name ) );
+
+            $_term = array_filter(array(
+              'term_id'  => $term->term_id,
+              'slug'     => $term->slug,
+              'name'     => $term->name,
+              'parent'   => $term->parent,
+              "term_type" => $term_type,
+              "url_path" => $url_path,
+              'meta'    => $meta,
+            ));
+
+            $_term_type = str_replace( '-', '_', $term_type );
+
+            if( !isset( $terms_dic[ $_term_type ] ) ) {
+              $terms_dic[ $_term_type ] = array();
             }
+
+            $terms_dic[ $_term_type ][] = $_term;
+
           }
-          $terms[ $taxonomy->name ] = array_values( $terms_dic );
+          $terms[ $taxonomy->name ] = $terms_dic;
         }
 
         return $terms;
