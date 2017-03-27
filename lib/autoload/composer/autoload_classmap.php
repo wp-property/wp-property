@@ -81,6 +81,7 @@ return array(
     'Composer\\Installers\\YawikInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/YawikInstaller.php',
     'Composer\\Installers\\ZendInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/ZendInstaller.php',
     'Composer\\Installers\\ZikulaInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/ZikulaInstaller.php',
+    'RWMB_Wpp_Alias_Field' => $baseDir . '/features/field-alias/fields/class-wpp-alias.php',
     'RWMB_Wpp_Select_Advanced_Field' => $baseDir . '/features/wp-property-terms/lib/classes/fields/select-advanced.php',
     'RWMB_Wpp_Select_Combobox_Field' => $baseDir . '/features/wp-property-terms/lib/classes/fields/select-combobox.php',
     'RWMB_Wpp_Taxonomy_Field' => $baseDir . '/features/wp-property-terms/lib/classes/fields/taxonomy.php',

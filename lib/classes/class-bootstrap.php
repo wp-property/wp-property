@@ -82,7 +82,7 @@ namespace UsabilityDynamics\WPP {
 
         // Apply alises.
         if( WP_PROPERTY_FIELD_ALIAS ) {
-          new Field_Alias();
+          $this->alias = new Field_Alias();
         }
 
         // Maybe load our built-in Add-ons
