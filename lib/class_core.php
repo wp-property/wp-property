@@ -361,14 +361,13 @@ class WPP_Core {
     } elseif( file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
       wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), WPP_Version );
     } elseif( $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-
-
-      // these are the legacy styles.
-      // wp_register_style( 'wp-property-frontend', WPP_URL . 'styles/wp_properties.css', array(), WPP_Version );
-
-      // load the new v2.3 styles
-      if( WP_PROPERTY_LAYOUTS ) {
-        wp_register_style( 'wp-property-frontend', WPP_URL . 'styles/wpp.public.v2.3.css', array(), WPP_Version );
+      
+      if (WP_PROPERTY_LAYOUTS) {
+        // load the new v2.3 styles
+        wp_register_style('wp-property-frontend', WPP_URL . 'styles/wpp.public.v2.3.css', array(), WPP_Version);
+      } else {
+        // these are the legacy styles.
+        wp_register_style('wp-property-frontend', WPP_URL . 'styles/wp_properties.css', array(), WPP_Version);
       }
 
 
