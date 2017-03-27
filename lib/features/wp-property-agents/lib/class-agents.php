@@ -1791,7 +1791,11 @@ class class_agents
 
     $class = isset($atts['class']) ? $atts['class'] : '';
 
-    $class[] = 'wpp_agents_content_agent_card';
+    if (WPP_LEGACY_WIDGETS) {
+      $class[] = 'wpp_agents_content_agent_card';
+    } else {
+      $class[] = 'wpp_agents_content_agent_card_v2';
+    }
 
     if (empty($user_id)) {
 
@@ -1863,10 +1867,10 @@ class class_agents
     }
 
     ob_start();
-    if (!WPP_LEGACY_WIDGETS) {
-      include ud_get_wpp_agents()->path('static/views/agent-widget-v2.php', 'dir');
-    } else {
+    if (WPP_LEGACY_WIDGETS) {
       include ud_get_wpp_agents()->path('static/views/agent-widget.php', 'dir');
+    } else {
+      include ud_get_wpp_agents()->path('static/views/agent-widget-v2.php', 'dir');
     }
     $content = ob_get_contents();
     ob_end_clean();
