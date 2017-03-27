@@ -39,6 +39,13 @@ if (!defined('WPP_Templates')) {
   define('WPP_Templates', WPP_Path . 'static/views');
 }
 
+/**
+ * WP CLI Commands
+ */
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+  require_once( 'bin/wp-cli.php' );
+}
+
 // Use Freemius is flag is enabled.
 if ( defined( 'WPP_FEATURE_FLAG_FREEMIUS' ) && WPP_FEATURE_FLAG_FREEMIUS ) {
 
@@ -46,8 +53,7 @@ if ( defined( 'WPP_FEATURE_FLAG_FREEMIUS' ) && WPP_FEATURE_FLAG_FREEMIUS ) {
   // add_filter('connect_message', function() {});
 
   // Create a helper function for easy SDK access.
-  function wpp_fs()
-  {
+  function wpp_fs() {
     global $wpp_fs;
 
     if (!isset($wpp_fs)) {
@@ -167,12 +173,9 @@ if (!function_exists('ud_my_wp_plugin_message')) {
 
 // An alias for "ud_get_wp_property"
 if (!function_exists('wpp')) {
-
-  function wpp($key = false, $default = null)
-  {
+  function wpp($key = false, $default = null) {
     return ud_get_wp_property($key, $default);
   }
-
 }
 
 //** Initialize. */

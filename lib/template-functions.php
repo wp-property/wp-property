@@ -955,7 +955,9 @@ if (!function_exists('draw_stats')):
         </div>
         <?php
       }
+
       if (!WPP_LEGACY_WIDGETS) echo '</div>'; // for v2 widget
+
     }
 
   }

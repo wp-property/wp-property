@@ -37,8 +37,6 @@ jQuery.fn.wppGroups = function(opt) {
 
   var
   groupsBlock = jQuery(opt.groupsBox),
-  statsRow = instance.parent().parent(),
-  statsTable = instance.parents('.wpp_inquiry_attribute_fields'),
   close = jQuery(opt.closeButton, groupsBlock),
   assign = jQuery(opt.assignButton),
   unassign = jQuery(opt.unassignButton),
@@ -189,13 +187,14 @@ jQuery.fn.wppGroups = function(opt) {
       });
     });
 
-    var sortlist = jQuery('tbody' , statsTable);
-    sortlist.each( function( i, e ){
+    jQuery( '.wpp_inquiry_attribute_fields tbody' ).each( function( i, e ){
       var currentlist = jQuery(e);
       var listitems = currentlist.children('tr').get();
       listitems.sort(function(a, b) {
         var compA = parseFloat(jQuery(a).attr('sortpos'));
         var compB = parseFloat(jQuery(b).attr('sortpos'));
+        if( isNaN( compA ) ) compA = 9999;
+        if( isNaN( compB ) ) compB = 9999;
         return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
       });
       jQuery.each(listitems, function(idx, itm) {
@@ -207,15 +206,6 @@ jQuery.fn.wppGroups = function(opt) {
 
   });
 
-  //* HACK FOR IE7 */
-  //* Set background-color for assigned attributes */
-  if(typeof jQuery.browser.msie != 'undefined' && (parseInt(jQuery.browser.version) == 7)) {
-    var sortlist = jQuery('tbody' , statsTable);
-    var listitems = sortlist.children('tr').get();
-    jQuery.each(listitems, function(i, e) {
-      jQuery(e).find('td').css('background-color', jQuery(e).css('background-color'));
-    });
-  }
 }
 
 /**
