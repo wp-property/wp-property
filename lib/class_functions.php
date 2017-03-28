@@ -366,6 +366,8 @@ class WPP_F extends UsabilityDynamics\Utility
 
     if (taxonomy_exists($taxonomy)) {
       return $taxonomy;
+    } else {
+      return false;
     }
 
   }
