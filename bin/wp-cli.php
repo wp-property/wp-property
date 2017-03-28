@@ -101,7 +101,7 @@ class WPP_CLI_Property_Command extends WP_CLI_Command {
         break;
       }
 
-      WP_CLI::log( 'Processed: ' . ( $query->post_count + $offset ) . '. Left:' . $query->found_posts . ' entries. . .' );
+      WP_CLI::log( 'Processed: ' . ( $query->post_count + $offset ) . '. Left: ' . $query->found_posts . ' entries. . .' );
 
       $offset += $posts_per_page;
 
@@ -200,7 +200,7 @@ class WPP_CLI_Terms_Command extends WP_CLI_Command {
     if ( ! empty( $assoc_args['posts-per-page'] ) ) {
       $assoc_args['posts-per-page'] = absint( $assoc_args['posts-per-page'] );
     } else {
-      $assoc_args['posts-per-page'] = 10;
+      $assoc_args['posts-per-page'] = 100;
     }
 
     $taxonomies = get_object_taxonomies( 'property' );
@@ -249,7 +249,7 @@ class WPP_CLI_Terms_Command extends WP_CLI_Command {
     $removed = 0;
     $errors = array();
 
-    $posts_per_page = 10;
+    $posts_per_page = 100;
     if ( ! empty( $args['posts-per-page'] ) ) {
       $posts_per_page = absint( $args['posts-per-page'] );
     }
@@ -269,7 +269,7 @@ class WPP_CLI_Terms_Command extends WP_CLI_Command {
       $args = apply_filters( 'wpp::cli::delete::args', array(
         'taxonomy'               => $taxonomy,
         'number'                 => $posts_per_page,
-        'fields'                 => 'ids',
+        'fields'                 => 'id=>name',
         'offset'                 => 0,
         'orderby'                => 'term_id',
         'order'                  => 'DESC',
@@ -279,25 +279,15 @@ class WPP_CLI_Terms_Command extends WP_CLI_Command {
 
       if ( !empty( $query->terms ) ) {
 
-        foreach ( $query->terms as $term ) {
-          WP_CLI::log( current_time( 'mysql' ) . ' Removed Term [' . $term->name . ']' );
-        }
-
-        /*
-        while ( $query->have_posts() ) {
-          $query->the_post();
-
-          $post_id = get_the_ID();
-
-          if( wp_delete_post( $post_id, true ) ) {
+        foreach ( $query->terms as $id => $name ) {
+          if( wp_delete_term( $id, $taxonomy ) ) {
             $removed ++;
-            WP_CLI::log( current_time( 'mysql' ) . ' Removed Property [' . $post_id . ']' );
+            WP_CLI::log( current_time( 'mysql' ) . ' Removed Term [' . $name . ']' );
           } else {
-            $errors[] = get_the_ID();
+            $errors[] = $id;
+            WP_CLI::error( sprintf( __( "Error occurred on trying to remove term '%s' [%d] for taxonomy [%s]" ), $id, $name, $taxonomy ) );
           }
-
         }
-        //*/
 
       } else {
         break;
@@ -310,8 +300,6 @@ class WPP_CLI_Terms_Command extends WP_CLI_Command {
       usleep( 500 );
 
     }
-
-    //wp_reset_postdata();
 
     return array( 'removed' => $removed, 'errors' => $errors );
   }
