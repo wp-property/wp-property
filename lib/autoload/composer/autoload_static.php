@@ -103,6 +103,7 @@ class ComposerStaticInitf4ed7b6af105d2c0f95f0f768a166c7c
         'Composer\\Installers\\YawikInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/YawikInstaller.php',
         'Composer\\Installers\\ZendInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ZendInstaller.php',
         'Composer\\Installers\\ZikulaInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ZikulaInstaller.php',
+        'RWMB_Wpp_Alias_Field' => __DIR__ . '/../..' . '/features/field-alias/fields/class-wpp-alias.php',
         'RWMB_Wpp_Select_Advanced_Field' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/fields/select-advanced.php',
         'RWMB_Wpp_Select_Combobox_Field' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/fields/select-combobox.php',
         'RWMB_Wpp_Taxonomy_Field' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/fields/taxonomy.php',

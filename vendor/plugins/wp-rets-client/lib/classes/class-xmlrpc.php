@@ -71,6 +71,9 @@ namespace UsabilityDynamics\WPRETSC {
       /**
        * Initialize REST routes for our internal XML-RPC routes.
        *
+       * https://usabilitydynamics-www-marcusrealty-com-production.c.rabbit.ci/wp-json/wp-rets-client/v1/cleanup/status
+       * https://usabilitydynamics-www-marcusrealty-com-production.c.rabbit.ci/wp-json/wp-rets-client/v1/cleanup/process
+       *
        * @author potanin@UD
        */
       public function api_init( ) {
@@ -115,7 +118,140 @@ namespace UsabilityDynamics\WPRETSC {
           'callback' => array( $this, 'rpc_flush_cache' ),
         ) );
 
+        register_rest_route( 'wp-rets-client/v1', '/cleanup/process', array(
+          'methods' => 'GET',
+          'callback' => array( $this, 'cleanup_handler' ),
+        ));
+
+        register_rest_route( 'wp-rets-client/v1', '/cleanup/status', array(
+          'methods' => 'GET',
+          'callback' => array( $this, 'cleanup_status_handler' ),
+        ));
+
       }
+
+      /**
+       * Show clean-up data status.
+       *
+       * @return array
+       */
+      static public function cleanup_status_handler() {
+        global $wpdb;
+        $_taxonomies = $wpdb->get_col( "SELECT distinct(taxonomy) FROM {$wpdb->term_taxonomy}" );
+
+        $_data = array();
+
+        foreach( $_taxonomies as $tax_name ) {
+
+          if( !taxonomy_exists( $tax_name ) ) {
+            register_taxonomy( $tax_name, array( 'property' ), array( 'hierarchical' => true ) );
+          }
+
+          $_data[] = array(
+            'taxonomy' => $tax_name,
+            'count' => intval( wp_count_terms( $tax_name ) )
+          );
+
+        }
+
+        return array( 'ok' => true, 'message' => 'API Online.', 'data' => $_data );
+      }
+
+      /**
+       * Process Taxonomy Cleanup
+       *
+       * @return array
+       */
+      static public function cleanup_handler() {
+        global $wpdb;
+
+        // get all taxonomies in DB....
+        $_taxonomies = $wpdb->get_col( "SELECT distinct(taxonomy) FROM {$wpdb->term_taxonomy} ORDER BY RAND() LIMIT 0, 5;" );
+
+        // randomize order of operations so this can be ran multiple times with less conflict.
+        shuffle( $_taxonomies );
+
+        foreach( $_taxonomies as $_tax ) {
+          self::clean_taxonomy( $_tax, array( 'limit' => 15 ) );
+        }
+
+        return array( 'ok' => true, 'time' => timer_stop(), 'taxonomies' => $_taxonomies );
+
+      }
+
+
+      /**
+       * This can/shold be ran multiple times, and will continue to remove some orphaned terms as its ran.
+       *
+       * This function may die while processing and now lose any state.
+       * @param string $tax_name
+       * @param array $args
+       */
+      static public function clean_taxonomy( $tax_name = '', $args = array() ) {
+        global $wpdb;
+
+        if( !taxonomy_exists( $tax_name ) ) {
+          register_taxonomy( $tax_name, array( 'property' ), array( 'hierarchical' => true ) );
+        }
+
+        //ud_get_wp_rets_client()->write_log( "Starting to clean [$tax_name] taxonomy. Current term count is [" . wp_count_terms( $tax_name ) . "]." );
+        ud_get_wp_rets_client()->write_log( "Starting to clean [$tax_name] taxonomy, using the [". DB_NAME ."] database.", 'debug' );
+
+        $orphaned_relationships = $wpdb->get_results( "SELECT tr.term_taxonomy_id as term_taxonomy_id, tt.term_id as term_id, object_id as post_id FROM $wpdb->term_relationships tr INNER JOIN $wpdb->term_taxonomy tt ON (tr.term_taxonomy_id = tt.term_taxonomy_id) WHERE tt.taxonomy = '$tax_name' AND tr.object_id NOT IN (SELECT ID FROM $wpdb->posts) LIMIT 0, " . $args['limit'] . ";");
+
+        $_removed = array();
+
+        if( !count( $orphaned_relationships ) ) {
+          self::clean_delete_zero_count_terms( $tax_name );
+          return;
+        }
+
+        ud_get_wp_rets_client()->write_log("Have at least [" . count( $orphaned_relationships ) . "] orphaned term taxonomy relationships for [$tax_name] taxonomy, about to remove them for each post that is now gone.");
+
+        foreach( $orphaned_relationships as $_relationship_data ) {
+
+          //wp_delete_object_term_relationships( $_relationship_data->post_id, $tax_name );
+          $_result = wp_remove_object_terms( $_relationship_data->post_id, array( $_relationship_data->term_id ), $tax_name );
+
+          if( is_wp_error( $_result ) ) {
+            die( '<pre>error...' . print_r( $_result, true ) . '</pre>' );
+          } else {
+            $_removed[] = $_relationship_data->post_id;
+          }
+        }
+
+        ud_get_wp_rets_client()->write_log( "Removed [" . count( $_removed ) . "] orphaned relationships for the [$tax_name] taxonomy." );
+
+        // After removing orphans, update term counts again. This will cause total count (select sum(count) FROM wp_term_taxonomy where taxonomy = 'mls_id';) to first go down, then go back up.
+        $_terms =  $wpdb->get_col( "SELECT term_taxonomy_id FROM $wpdb->term_taxonomy WHERE taxonomy='$tax_name';");
+
+        if( wp_update_term_count_now( $_terms, $tax_name ) ) {
+          ud_get_wp_rets_client()->write_log( "Updated term counts for [$tax_name]. New count is [" . wp_count_terms( $tax_name ) . "]." );
+        }
+
+        // @note probably shouldn't do this until all counts have been updated.
+        self::clean_delete_zero_count_terms( $tax_name );
+
+      }
+
+      /**
+       * Remove terms with zero count.
+       *
+       * @param string $tax_name
+       * @param array $args
+       */
+      static public function clean_delete_zero_count_terms( $tax_name = '', $args = array() ) {
+        global $wpdb;
+
+        $_terms_with_no_count = $wpdb->query("DELETE FROM {$wpdb->term_taxonomy} WHERE count = 0 AND taxonomy='$tax_name';");
+
+        //ud_get_wp_rets_client()->write_log("SELECT term_id FROM $wpdb->term_taxonomy tt INNER JOIN $wpdb->terms t ON (tt.term_id = t.term_id ) WHERE  tt.count = 0  AND tt.taxonomy='$tax_name');");
+        if( $_terms_with_no_count ) {
+          ud_get_wp_rets_client()->write_log( "Deleting all terms with 0 count for [$tax_name], query affected [$_terms_with_no_count] rows." );
+        }
+
+      }
+
 
       /**
        * Parse XML-RPC request

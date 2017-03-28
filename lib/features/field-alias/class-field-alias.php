@@ -26,15 +26,14 @@ namespace UsabilityDynamics\WPP {
         if( is_admin() ) {
 
           /**
-           * Edit Property Page: Meta Box Fields HACKing
+           * Edit Property Page: Meta Box Fields
            */
 
           // We must use readonly field for our aliases
           add_filter( 'wpp::rwmb_meta_box::field', function( $field ) {
             $alias = $this->get_alias_map( $field[ 'id' ] );
             if( !empty( $alias ) ) {
-              $field[ 'id' ] = $alias;
-              $field[ 'type' ] = 'wpp_readonly';
+              $field[ 'type' ] = 'wpp_alias';
             }
             return $field;
           } );
@@ -43,10 +42,8 @@ namespace UsabilityDynamics\WPP {
            * Developer Tab UI
            */
 
-          //
-          add_action( "wpp::settings::developer::terms::item_advanced_options", array( $this, "draw_alias_option" ) );
+          // Add alias UI for Attributes
           add_action( "wpp::settings::developer::attributes::item_advanced_options", array( $this, "draw_alias_option" ) );
-          //
           add_filter( "wpp::settings::developer::attributes", function( $data ) {
             $attributes = ud_get_wp_property()->get('property_stats', array());
             $filtered_field_alias = array();
@@ -56,7 +53,10 @@ namespace UsabilityDynamics\WPP {
             $data[ 'filtered_field_alias'] = $filtered_field_alias;
             return $data;
           }, 100 );
-          //
+
+          // Add alias UI for Taxonomies ( Terms )
+          /* Decided to not add aliases for Taxonomies to prevent a lot of issues.
+          add_action( "wpp::settings::developer::terms::item_advanced_options", array( $this, "draw_alias_option" ) );
           add_filter( "wpp::settings::developer::terms", function( $data ) {
             if( empty( $data[ 'config' ]['taxonomies'] ) ) {
               return $data;
@@ -68,7 +68,7 @@ namespace UsabilityDynamics\WPP {
             $data[ 'filtered_field_alias'] = $filtered_field_alias;
             return $data;
           }, 100 );
-
+          //*/
 
         }
 
@@ -97,34 +97,25 @@ namespace UsabilityDynamics\WPP {
 
         // add terms to object.
         // apply alias logic.
-        foreach( (array) $this->get_alias_map() as $_defined_field => $_target ) {
+        foreach( (array) $this->get_alias_map() as $_defined_field => $target ) {
 
-          $_alias_value = null;
+          $alias_values = array();
 
-          //UsabilityDynamics\WPP\Attributes::get_attribute_data( $_defined_field );
+          $_targets = explode( ',', $target );
+          foreach( $_targets as $_target ) {
+            $_target = trim( $_target );
 
-          // In an ideal world we would prefix all of our fields with tax_input/post_mea.
-          if( strpos( $_target, 'tax_input.' ) === 0 ) {
-            $_term_group_match = explode( '.', $_target );
-            $_alias_value = wp_get_object_terms( $property['ID'], $_term_group_match[1], array( 'fields' => 'names' ) );
+            $_alias_value = $this->get_alias_value( $_target, $property->ID );
+
+            // Alias value found.
+            if( $_alias_value ) {
+              $alias_values[] = $_alias_value;
+            }
+
           }
 
-          // try meta, defined taxonomy
-          if( !$_alias_value ) {
-            $_alias_value  = isset( $property[ $_target ] ) ? $property[ $_target ] : null;
-          }
-
-          // Support for dynamic taxonomies.
-          if( !$_alias_value ) {
-            WPP_F::verify_have_system_taxonomy( $_target );
-            $_alias_value = wp_get_object_terms( $property['ID'], $_target, array( 'fields' => 'names' ) );
-          }
-
-          // Alias value found.
-          if( $_alias_value ) {
-            $property[ $_defined_field ] = $_alias_value;
-            $_result[] = "Applied target [$_target] alias to [$_defined_field] with values";
-          }
+          $property[ $_defined_field ] = $alias_values;
+          $_result[] = "Applied target [$target] alias to [$_defined_field] with values";
 
         }
 
@@ -189,7 +180,7 @@ namespace UsabilityDynamics\WPP {
 
 
       /**
-       * Get Field Aliases
+       * Returns alias key for passed attribute
        *
        *
        * @param bool $field
@@ -205,6 +196,49 @@ namespace UsabilityDynamics\WPP {
         }
 
         return (array) $field_alias;
+
+      }
+
+
+      /**
+       * Returns Alias value
+       *
+       *
+       * @param bool $target
+       * @return mixed|void
+       */
+      public function get_alias_value( $target = false, $post_id ) {
+        $value = null;
+
+        // In an ideal world we would prefix all of our fields with tax_input/post_meta.
+        // If we have prefix we know to which stuff the target belongs to, so:
+
+        // Check taxonomy
+        if( strpos( $target, 'tax_input.' ) === 0 ) {
+          $_term_group_match = explode( '.', $target );
+          if( taxonomy_exists( $_term_group_match[1] ) ) {
+            $value = wp_get_object_terms( $post_id, $_term_group_match[1], array( 'fields' => 'names' ) );
+          }
+          return $value;
+        }
+
+        // Check post meta
+        if( strpos( $target, 'post_meta.' ) === 0 ) {
+          $_term_group_match = explode( '.', $target );
+          $value = get_post_meta( $post_id, $_term_group_match[1], true );
+          return $value;
+        }
+
+        if( !$value && taxonomy_exists( $target ) ) {
+          $value = wp_get_object_terms( $post_id, $target, array( 'fields' => 'names' ) );
+        }
+
+        // try meta, defined taxonomy
+        if( !$value ) {
+          $value = get_post_meta( $post_id, $target, true );
+        }
+
+        return $value;
 
       }
 
