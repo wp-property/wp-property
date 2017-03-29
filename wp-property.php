@@ -39,13 +39,6 @@ if (!defined('WPP_Templates')) {
   define('WPP_Templates', WPP_Path . 'static/views');
 }
 
-/**
- * WP CLI Commands
- */
-if ( defined( 'WP_CLI' ) && WP_CLI ) {
-  require_once( 'bin/wp-cli.php' );
-}
-
 // Use Freemius is flag is enabled.
 if ( defined( 'WPP_FEATURE_FLAG_FREEMIUS' ) && WPP_FEATURE_FLAG_FREEMIUS ) {
 
@@ -181,4 +174,11 @@ if (!function_exists('wpp')) {
 //** Initialize. */
 if (ud_check_wp_property()) {
   ud_get_wp_property();
+}
+
+/**
+ * WP CLI Commands
+ */
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+  require_once( 'bin/wp-cli.php' );
 }
