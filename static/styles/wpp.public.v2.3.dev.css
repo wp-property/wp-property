@@ -1673,46 +1673,34 @@ body .widget_agentwidget dl.wpp_agent_info_list dd,
 #wpp_layout .widget_agentwidget dl.wpp_agent_info_list dd {
   display: inline-block;
 }
-body .wpp_agents_content_agent_card_v2,
-#wpp_layout .wpp_agents_content_agent_card_v2,
 body .wpp_agent_info_single_wrapper_v2,
 #wpp_layout .wpp_agent_info_single_wrapper_v2 {
   border: 1px solid #e3e3e3;
   padding: 2em 1em;
 }
-body .wpp_agents_content_agent_card_v2 ul.wpp_agent_info_list,
-#wpp_layout .wpp_agents_content_agent_card_v2 ul.wpp_agent_info_list,
 body .wpp_agent_info_single_wrapper_v2 ul.wpp_agent_info_list,
 #wpp_layout .wpp_agent_info_single_wrapper_v2 ul.wpp_agent_info_list {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-body .wpp_agents_content_agent_card_v2 ul.wpp_agent_info_list li,
-#wpp_layout .wpp_agents_content_agent_card_v2 ul.wpp_agent_info_list li,
 body .wpp_agent_info_single_wrapper_v2 ul.wpp_agent_info_list li,
 #wpp_layout .wpp_agent_info_single_wrapper_v2 ul.wpp_agent_info_list li {
   margin: 0;
   list-style: none;
 }
-body .wpp_agents_content_agent_card_v2 ul.wpp_agent_info_list li.wpp_agent_stats_socials ul.wpp_agent_socials_list,
-#wpp_layout .wpp_agents_content_agent_card_v2 ul.wpp_agent_info_list li.wpp_agent_stats_socials ul.wpp_agent_socials_list,
 body .wpp_agent_info_single_wrapper_v2 ul.wpp_agent_info_list li.wpp_agent_stats_socials ul.wpp_agent_socials_list,
 #wpp_layout .wpp_agent_info_single_wrapper_v2 ul.wpp_agent_info_list li.wpp_agent_stats_socials ul.wpp_agent_socials_list {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-body .wpp_agents_content_agent_card_v2 div.wpp_agent_info_list label,
-#wpp_layout .wpp_agents_content_agent_card_v2 div.wpp_agent_info_list label,
 body .wpp_agent_info_single_wrapper_v2 div.wpp_agent_info_list label,
 #wpp_layout .wpp_agent_info_single_wrapper_v2 div.wpp_agent_info_list label {
   font-weight: bold;
   display: inline-block;
   padding-right: 10px;
 }
-body .wpp_agents_content_agent_card_v2 div.wpp_agent_info_list span,
-#wpp_layout .wpp_agents_content_agent_card_v2 div.wpp_agent_info_list span,
 body .wpp_agent_info_single_wrapper_v2 div.wpp_agent_info_list span,
 #wpp_layout .wpp_agent_info_single_wrapper_v2 div.wpp_agent_info_list span {
   display: inline-block;
