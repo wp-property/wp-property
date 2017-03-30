@@ -449,14 +449,21 @@ body,
             .property_div_box {
               .clearfix;
               height: auto !important;
-              display: table;
 
               .wpp_overview_top_side {
                 display: none;
                 vertical-align: top;
                 &.has_thumbnail {
+                  display: block;
+                  float: left;
+                  max-width: 35%;
+                  min-width: 150px;
                   position: relative;
-                  display: table-cell;
+                  .property_image {
+                    img {
+                      width: 100%;
+                    }
+                  }
                 }
                 .property_type,
                 .property_price {
@@ -1074,31 +1081,28 @@ body,
       font-size: 1.4em;
       margin-bottom: 0.5em;
     }
-    .swiper-container {
+    .wpp_gallery_widget_v2_container {
       border: 1px solid #e3e3e3;
       padding: 1em;
 
-      .swiper-wrapper {
+      .sidebar_gallery_item {
+        margin-bottom: 0.5em;
+        text-align: center;
+        &:last-child {
+          margin: 0;
+        }
 
-        .swiper-slide {
-
-          .swiper-slide-wrapper {
-            display: block;
-
-            a.thumbnail {
-              display: block;
-              margin-bottom: 0.5em;
-              img {
-                display: block;
-              }
-            }
-            .wpp_image_widget_caption {
-              margin-bottom: 0.5em;
-            }
-            .wpp_image_widget_description {
-
-            }
+        a.thumbnail {
+          display: block;
+          img {
+            max-width: 100%;
+            height: auto;
           }
+        }
+        .wpp_image_widget_caption,
+        .wpp_image_widget_description {
+          padding-top: 0.5em;
+          line-height: 1.4;
         }
       }
     }
@@ -1343,6 +1347,18 @@ body,
     border: 1px solid #e3e3e3;
     padding: 2em 1em;
 
+    .wpp_agent_image {
+      margin-bottom: 0.5em;
+    }
+    .wpp_agent_images {
+      border-radius: 100%;
+      display: inline-block;
+      overflow: hidden;
+      img {
+        display: block;
+        max-width: 100%;
+      }
+    }
     ul.wpp_agent_info_list {
       margin: 0;
       padding: 0;
@@ -1350,6 +1366,13 @@ body,
       li {
         margin: 0;
         list-style: none;
+        &.wpp_agent_stats_display_name {
+          text-align: center;
+          margin-bottom: 0.5em;
+        }
+        &.wpp_agent_stats_widget_bio {
+          margin-bottom: 0.5em;
+        }
         &.wpp_agent_stats_socials {
 
           ul.wpp_agent_socials_list {
@@ -1464,7 +1487,7 @@ body,
 
     .super_map {
       float: right;
-      width: calc(100% - 250px);
+      width: calc(~"100% - 250px");
     }
     .super_map_list {
       float: left;

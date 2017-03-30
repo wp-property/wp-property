@@ -11,10 +11,6 @@ class GalleryPropertiesWidget extends WP_Widget
    */
   function __construct()
   {
-    if (!WPP_LEGACY_WIDGETS && !is_admin()) {
-      wp_enqueue_script('wp-property-gallery');
-    }
-
     parent::__construct(false, $name = sprintf(__('%1s Gallery', ud_get_wp_property()->domain), WPP_F::property_label()), array('description' => __('List of all images attached to the current property', ud_get_wp_property()->domain)));
   }
 
@@ -88,25 +84,18 @@ class GalleryPropertiesWidget extends WP_Widget
     ob_start();
 
     if (is_array($gallery)) {
-
-      echo '<div class="swiper-container">';
-      echo '<div class="swiper-wrapper">';
-
+      echo WPP_LEGACY_WIDGETS ? '' : '<div class="wpp_gallery_widget_v2_container">';
       $real_count = 0;
-
       foreach ($gallery as $image) {
-
         $thumb_image = wpp_get_image_link($image['attachment_id'], $image_type);
         $thumb_image_title = !empty($image['post_title']) ? trim(strip_tags($image['post_title'])) : trim(strip_tags($post->post_title));
         $alt = get_post_meta($image['attachment_id'], '_wp_attachment_image_alt', true);
         $thumb_image_alt = !empty($alt) ? trim(strip_tags($alt)) : $thumb_image_title;
         ?>
-        <div class="sidebar_gallery_item swiper-slide">
-          <?php
-          if (!WPP_LEGACY_WIDGETS) echo '<div class="swiper-slide-wrapper">';
-          if (!empty($big_image_type)) : ?>
+        <div class="sidebar_gallery_item">
+          <?php if (!empty($big_image_type)) : ?>
             <?php $big_image = wpp_get_image_link($image['attachment_id'], $big_image_type); ?>
-            <a href="<?php echo $big_image; ?>" class="thumbnail" rel="property_gallery">
+            <a href="<?php echo $big_image; ?>" class="fancybox_image thumbnail" rel="property_gallery">
               <img src="<?php echo $thumb_image; ?>"
                    title="<?php echo $thumb_image_title; ?>"
                    alt="<?php echo $thumb_image_alt; ?>"
@@ -120,28 +109,25 @@ class GalleryPropertiesWidget extends WP_Widget
                  alt="<?php echo $thumb_image_alt; ?>"
                  class="wpp_gallery_widget_image size-thumbnail "
                  width="<?php echo $thumbnail_dimensions['width']; ?>"
-                 height="<?php echo $thumbnail_dimensions['height']; ?>"/>            <?php endif; ?>
+                 height="<?php echo $thumbnail_dimensions['height']; ?>"/>
+          <?php endif; ?>
+
           <?php if ($show_caption == 'on' && !empty($image['post_excerpt'])) { ?>
             <div class="wpp_image_widget_caption"><?php echo $image['post_excerpt']; ?></div>
           <?php } ?>
 
-          <?php if ($show_description == 'on') { ?>
+          <?php if ($show_description == 'on' && !empty($image['post_content'])) { ?>
             <div class="wpp_image_widget_description"><?php echo $image['post_content']; ?></div>
-          <?php }
-          if (!WPP_LEGACY_WIDGETS) echo '</div>';
-          ?>
+          <?php } ?>
 
         </div>
         <?php
         $real_count++;
-
         if (!empty($gallery_count) && $gallery_count == $real_count) {
           break;
         }
-
       }
-      echo '</div>';
-      echo '</div>';
+      echo WPP_LEGACY_WIDGETS ? '' : '</div>';
     }
 
     $html['images'] = ob_get_contents();
