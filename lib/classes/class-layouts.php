@@ -230,20 +230,20 @@ namespace UsabilityDynamics\WPP {
         // Property Terms
         if ( !is_property_overview_page() && is_tax() && get_queried_object() && get_queried_object()->taxonomy && in_array('property', get_taxonomy(get_queried_object()->taxonomy)->object_type) ) {
           $_options['render_type'] = 'term-overview';
-          $_options['layout_id'] = get_theme_mod('layouts_property_term_id', isset( $_layouts['term-overview'][0] ) ? $_layouts['term-overview'][0]->_id : null );
+          $_options['layout_id'] = get_theme_mod('layouts_property_term_id', isset( $_layouts['term-overview'] ) ? reset($_layouts['term-overview'])->_id : null );
           $_options['template_file'] = get_theme_mod('layouts_term_overview_select', null );
         }
 
         // For single property
         if (is_singular('property')) {
           $_options['render_type'] = 'single-property';
-          $_options['layout_id'] = get_theme_mod('layouts_property_single_id', isset( $_layouts['single-property'][0] ) ? $_layouts['single-property'][0]->_id : null );
+          $_options['layout_id'] = get_theme_mod('layouts_property_single_id', isset( $_layouts['single-property'] ) ? reset($_layouts['single-property'])->_id : null );
           $_options['template_file'] = get_theme_mod('layouts_property_single_select', null );
         }
 
         if (!empty($wp_query->wpp_search_page)) {
           $_options['render_type'] = 'property-search';
-          $_options['layout_id'] = get_theme_mod('layouts_property_overview_id', isset( $_layouts['property-overview'][0] ) ? $_layouts['property-overview'][0]->_id : null );
+          $_options['layout_id'] = get_theme_mod('layouts_property_overview_id', isset( $_layouts['property-overview'] ) ? reset($_layouts['property-overview'])->_id : null );
           $_options['template_file'] = get_theme_mod('layouts_property_overview_select', null );
         }
 
