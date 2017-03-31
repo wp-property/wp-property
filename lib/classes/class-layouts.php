@@ -223,7 +223,7 @@ namespace UsabilityDynamics\WPP {
         // Property Results / Property Overview
         if ( is_property_overview_page()) {
           $_options['render_type'] = 'property-overview';
-          $_options['layout_id'] = get_theme_mod('layouts_property_overview_id', isset( $_layouts['property-overview'][0] ) ? $_layouts['property-overview'][0]->_id : null );
+          $_options['layout_id'] = get_theme_mod('layouts_property_overview_id', isset( $_layouts['property-overview'] ) ? reset($_layouts['property-overview'])->_id : null );
           $_options['template_file'] = get_theme_mod('layouts_property_overview_select', null );
         }
 
