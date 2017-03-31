@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname(dirname($vendorDir));
 
 return array(
-    'aa33d7d08765e2232d2271599fc1e7eb' => $baseDir . '/vendor/plugins/wp-rets-client/loader.php',
+    '871169faccaf7d4a978a4f184d21d73d' => $baseDir . '/vendor/plugins/wp-rets-client/loader.php',
 );

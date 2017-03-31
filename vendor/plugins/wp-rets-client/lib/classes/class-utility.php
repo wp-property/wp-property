@@ -12,6 +12,40 @@ namespace UsabilityDynamics\WPRETSC {
 
     final class Utility {
 
+      static public function get_schedule_stats() {
+        global $wpdb;
+
+        $_stats  = array();
+
+        foreach( $wpdb->get_results( "SELECT meta_value as schedule_id, count(meta_value) as count from {$wpdb->postmeta} where meta_key = 'wpp_import_schedule_id' group by meta_value order by count DESC;" ) as $_data ) {
+          $_stats[ $_data->schedule_id ] = $_data->count;
+        }
+
+        $terms = get_terms( array(
+          'taxonomy' => 'rets_schedule',
+          'orderby' => 'count',
+          'order'=> 'DESC',
+          'hide_empty' => false,
+        ) );
+
+        $_data = array();
+
+        foreach( $terms as $_term ) {
+          $_data[] = array(
+            'schedule' => $_term->slug,
+            'term_count' => $_term->count,
+            'meta_count' => isset( $_stats[ $_term->slug ] ) ? intval( $_stats[ $_term->slug ] ) : null
+          );
+        }
+        //die( '<pre>' . print_r( $terms , true ) . '</pre>' );
+
+        return array(
+          'ok' => true,
+          'data' => $_data,
+          //'stats' => $_stats
+        );
+
+      }
       /**
        *
        * @param $rets_id
@@ -153,7 +187,9 @@ namespace UsabilityDynamics\WPRETSC {
       public static function query_modified_listings( $options ) {
         global $wpdb;
 
-        $options = (object) $options;
+        $options = (object) wp_parse_args( $options, array(
+          "limit" => 10
+        ));
 
         // automatically set end
         if( !$options->endOfStartDate ) {
@@ -175,7 +211,7 @@ namespace UsabilityDynamics\WPRETSC {
             pm_modified.meta_key='{$options->dateMetaField}' AND
             pm_modified.meta_value between DATE('{$options->startDate} 00:00:00') AND DATE('{$options->endOfStartDate} 00:00:00') AND 
             posts.post_type='property'  
-            {$limit}";
+            {$options->limit}";
 
         //echo($_query);
 
