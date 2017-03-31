@@ -577,17 +577,17 @@
         ]
     },
     {
-        "name": "usabilitydynamics/wp-rets-client",
+        "name": "rets-ci/wp-rets-client",
         "version": "dev-latest",
         "version_normalized": "dev-latest",
         "source": {
             "type": "git",
-            "url": "git@github.com:UsabilityDynamics/wp-rets-client",
+            "url": "git@github.com:rets-ci/wp-rets-client",
             "reference": "latest"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/wp-rets-client/archive/latest.zip",
+            "url": "https://github.com/rets-ci/wp-rets-client/archive/latest.zip",
             "reference": "latest",
             "shasum": null
         },
@@ -620,7 +620,7 @@
             },
             "installer-name": "wp-rets-client"
         },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "classmap": [
                 "lib/classes",
@@ -716,17 +716,17 @@
     },
     {
         "name": "10up/elasticpress",
-        "version": "2.2",
-        "version_normalized": "2.2.0.0",
+        "version": "2.2.1",
+        "version_normalized": "2.2.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/10up/ElasticPress.git",
-            "reference": "4bd2850ab79ef02a06d168ad0102ade8e0da520d"
+            "reference": "157e65b112d90bcc15e532dc33f86592805cdb13"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/10up/ElasticPress/zipball/4bd2850ab79ef02a06d168ad0102ade8e0da520d",
-            "reference": "4bd2850ab79ef02a06d168ad0102ade8e0da520d",
+            "url": "https://api.github.com/repos/10up/ElasticPress/zipball/157e65b112d90bcc15e532dc33f86592805cdb13",
+            "reference": "157e65b112d90bcc15e532dc33f86592805cdb13",
             "shasum": ""
         },
         "require": {
@@ -737,7 +737,7 @@
             "wp-cli/wp-cli": "*@stable",
             "wpackagist-plugin/woocommerce": "dev-trunk"
         },
-        "time": "2017-02-28T20:09:06+00:00",
+        "time": "2017-03-30T13:49:12+00:00",
         "type": "wordpress-plugin",
         "extra": {
             "installer-paths": {

@@ -9,7 +9,7 @@
  * Author URI: http://usabilitydynamics.com
  *
  * Requires at least: 4.0
- * Tested up to: 4.5.2
+ * Tested up to: 4.7.3
  * Domain Path: /static/languages/
  * Author URI: https://www.usabilitydynamics.com
  * GitHub Plugin URI: usabilitydynamics/wp-rets-client
