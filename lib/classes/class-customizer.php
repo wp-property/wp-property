@@ -319,12 +319,12 @@ namespace UsabilityDynamics\WPP {
         ));
 
         $wp_customize->add_setting('layouts_property_term_id', array(
-          'default' => isset( $layouts['term-overview'][0] ) ? reset($layouts['term-overview'])->_id : null,
+          'default' => isset( $layouts['term-overview'] ) ? reset($layouts['term-overview'])->_id : null,
           'transport' => 'refresh'
         ));
 
         $wp_customize->add_setting('layouts_property_single_id', array(
-          'default' => isset( $layouts['single-property'][0] ) ? reset($layouts['single-property'])->_id : null,
+          'default' => isset( $layouts['single-property'] ) ? reset($layouts['single-property'])->_id : null,
           'transport' => 'refresh'
         ));
 
