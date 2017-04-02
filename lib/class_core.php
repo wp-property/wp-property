@@ -1252,22 +1252,54 @@ class WPP_Core {
    * @author peshkov@UD
    */
   public function maybe_generate_l10n_script() {
-    $dir = untrailingslashit( ud_get_wp_property( 'cache_dir' ) );
-    $file = $dir . '/l10n.js';
-    $url = untrailingslashit( ud_get_wp_property( 'cache_url' ) ) . '/l10n.js';
-    //** File already created! */
-    if( file_exists( $file ) ) {
-      return $url;
+
+    $upload_dir = wp_upload_dir();
+    $filename   = 'wp-property-l10n.js';
+
+    // Move the file to the uploads dir.
+    $file   = $upload_dir['path'] . "/$filename";
+    // Compute the URL.
+    $url = $upload_dir['url'] . "/$filename";
+
+    $l10n_id = get_option('wp-property-l10n-attachment');
+    if($l10n_id != false && file_exists($file)){
+      return wp_get_attachment_url( $l10n_id );
     }
-    //** Try to create directory if it doesn't exist */
-    if( !is_dir( $dir ) && !wp_mkdir_p( $dir ) ) {
-      return false;
-    }
+
     //** Save file */
-    if( @file_put_contents( $file, 'var wpp = ( typeof wpp === \'object\' ) ? wpp : {}; wpp.strings = ' . json_encode( $this->get_l10n_data() ) . ';' ) ) {
+    if( false === @file_put_contents( $file, 'var wpp = ( typeof wpp === \'object\' ) ? wpp : {}; wpp.strings = ' . json_encode( $this->get_l10n_data() ) . ';' ) ) {
       return false;
     }
-    return $url;
+
+    // Set correct file permissions.
+    $stat = stat( dirname( $file ));
+    $perms = $stat['mode'] & 0000666;
+    @ chmod( $file, $perms );
+
+    if ( is_multisite() ) {
+        delete_transient( 'dirsize_cache' );
+    }
+
+    // Construct the attachment array
+    $attachment = array(
+        'guid' => $url,
+        'post_mime_type' => 'application/javascript',
+        'post_title' => "JS localization file of WP Property",
+    );
+
+    if($l10n_id){
+      $attachment['ID'] = $l10n_id;
+    }
+    
+    // Save the data
+    $id = wp_insert_attachment($attachment, $file);
+    if ( is_wp_error($id) ) {
+      delete_option('wp-property-l10n-attachment');
+      return false;
+    }
+
+    update_option('wp-property-l10n-attachment', $id);
+    return wp_get_attachment_url( $id );
   }
 
   /**

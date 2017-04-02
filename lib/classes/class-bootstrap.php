@@ -158,8 +158,6 @@ namespace UsabilityDynamics\WPP {
             'name' => $this->name,
             'version' => $this->args['version'],
             'domain' => $this->domain,
-            'cache_dir' => $upload_dir['basedir'] . '/wpp_cache',
-            'cache_url' => $upload_dir['baseurl'] . '/wpp_cache',
           )
         ));
 

@@ -57,6 +57,13 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
   return;
 }
 
+$l10n_url = '';
+$l10n_id = get_option('wp-property-l10n-attachment');
+if($l10n_id != false){
+  $l10n_url = wp_get_attachment_url( $l10n_id );
+  $l10n_edit_url = get_edit_post_link( $l10n_id );
+}
+
 ?>
 <div class="wrap <?php echo implode(' ', $wrapper_classes); ?>">
 
@@ -726,6 +733,10 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
           <div class="wpp_settings_block">
             <?php _e('Clear WPP Cache. Some shortcodes and widgets use cache, so the good practice is clear it after widget, shortcode changes.', ud_get_wp_property()->domain) ?>
             <input type="button" class="button" value="<?php _e('Clear Cache', ud_get_wp_property()->domain) ?>" id="wpp_clear_cache">
+            <?php if($l10n_url): ?>
+              <a class="button" id="wpp_open_attachment" href="<?php echo $l10n_url; ?>" target="_blank"><?php _e('Open File', ud_get_wp_property()->domain) ?></a>
+              <a class="button" id="wpp_open_attachment" href="<?php echo $l10n_edit_url; ?>" target="_blank"><?php _e('Open Attachment', ud_get_wp_property()->domain) ?></a>
+            <?php endif; ?>
           </div>
 
           <?php if (function_exists('icl_object_id')): ?>
