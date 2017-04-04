@@ -798,6 +798,8 @@ if (!function_exists('draw_stats')):
     //** Disable regular list if groups are NOT enabled, or if groups is not an array */
     if ($args['sort_by_groups'] != 'true' || !is_array($groups)) {
 
+      if (!WPP_LEGACY_WIDGETS) echo '<div class="wpp_features_box wpp_features_box_without_groups">'; // for v2 widget
+
       foreach ($stats as $tag => $data) {
 
         $label = apply_filters('wpp::attribute::label', $data['label']);
@@ -842,6 +844,9 @@ if (!function_exists('draw_stats')):
             break;
         }
       }
+
+      if (!WPP_LEGACY_WIDGETS) echo '</div>'; // for v2 widget
+
     } else {
 
       $stats_by_groups = sort_stats_by_groups($stats);

@@ -1210,6 +1210,10 @@ body,
       list-style: outside none none;
       margin: 0;
       padding: 1em 2em;
+      .wpp_features_box.wpp_features_box_without_groups {
+        padding: 0;
+        border: none;
+      }
       li {
         margin: 0;
         padding: 0;
@@ -1230,6 +1234,14 @@ body,
       border: 1px solid #e3e3e3;
       padding: 1em;
       .clearfix;
+      &.wpp_features_box_without_groups {
+        padding: 2em;
+
+        dt,
+        span.attribute {
+          font-weight: bold;
+        }
+      }
 
       .wpp_feature_list {
         display: inline-block;
@@ -1558,4 +1570,13 @@ body,
     }
   }
   /* widget_tag_cloud */
+
+  /* property_term_list_v2 */
+  #property_term_list_v2 {
+    border: 1px solid #e3e3e3;
+    list-style: outside none none !important;
+    margin: 0 !important;
+    padding: 1em !important;
+  }
+  /* property_term_list_v2 */
 }

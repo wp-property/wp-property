@@ -106,6 +106,8 @@ body,
   /* widget_property_responsive_slideshow */
   /* widget_tag_cloud */
   /* widget_tag_cloud */
+  /* property_term_list_v2 */
+  /* property_term_list_v2 */
 }
 body .wpp_property_overview_shortcode,
 #wpp_layout .wpp_property_overview_shortcode {
@@ -1536,6 +1538,11 @@ body .widget_wpp_property_stats_v2 ul.property_stats,
   margin: 0;
   padding: 1em 2em;
 }
+body .widget_wpp_property_stats_v2 ul.property_stats .wpp_features_box.wpp_features_box_without_groups,
+#wpp_layout .widget_wpp_property_stats_v2 ul.property_stats .wpp_features_box.wpp_features_box_without_groups {
+  padding: 0;
+  border: none;
+}
 body .widget_wpp_property_stats_v2 ul.property_stats li,
 #wpp_layout .widget_wpp_property_stats_v2 ul.property_stats li {
   margin: 0;
@@ -1566,6 +1573,16 @@ body .widget_wpp_property_stats_v2 .wpp_features_box:before,
   display: block;
   clear: both;
   content: '';
+}
+body .widget_wpp_property_stats_v2 .wpp_features_box.wpp_features_box_without_groups,
+#wpp_layout .widget_wpp_property_stats_v2 .wpp_features_box.wpp_features_box_without_groups {
+  padding: 2em;
+}
+body .widget_wpp_property_stats_v2 .wpp_features_box.wpp_features_box_without_groups dt,
+#wpp_layout .widget_wpp_property_stats_v2 .wpp_features_box.wpp_features_box_without_groups dt,
+body .widget_wpp_property_stats_v2 .wpp_features_box.wpp_features_box_without_groups span.attribute,
+#wpp_layout .widget_wpp_property_stats_v2 .wpp_features_box.wpp_features_box_without_groups span.attribute {
+  font-weight: bold;
 }
 body .widget_wpp_property_stats_v2 .wpp_features_box .wpp_feature_list,
 #wpp_layout .widget_wpp_property_stats_v2 .wpp_features_box .wpp_feature_list {
@@ -1922,4 +1939,11 @@ body .widget_tag_cloud .tagcloud a,
   display: inline-block;
   margin: 0 0.2em 0.2em 0;
   padding: 0.5em 1em;
+}
+body #property_term_list_v2,
+#wpp_layout #property_term_list_v2 {
+  border: 1px solid #e3e3e3;
+  list-style: outside none none !important;
+  margin: 0 !important;
+  padding: 1em !important;
 }
