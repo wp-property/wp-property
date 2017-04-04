@@ -1080,9 +1080,6 @@ namespace UsabilityDynamics\WPRETSC {
             continue;
           }
 
-          // Avoid hierarchical taxonomies since they do not allow simple-value passing.
-          WPP_F::verify_have_system_taxonomy( $tax_name, array( 'hierarchical' => false ) );
-
           // If WP-Property location flag is enabled, and we're doing the [wpp_listing_location] taxonomy, and the WPP_F::update_location_terms method is callable, process our wpp_listing_location terms.
           if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_LOCATION' ) && WPP_FEATURE_FLAG_WPP_LISTING_LOCATION && $tax_name === 'wpp_listing_location' && is_callable(array( 'WPP_F', 'update_location_terms' ) ) ) {
             ud_get_wp_rets_client()->write_log( 'Handling [wpp_listing_location] taxonomy for [' . $_post_id .'] listing.', 'debug' );
@@ -1092,6 +1089,8 @@ namespace UsabilityDynamics\WPRETSC {
               "county" => isset( $_post_data_tax_input["rets_location_county"] ) ? reset( $_post_data_tax_input["rets_location_county"] ) : null,
               "city" => isset( $_post_data_tax_input["rets_location_city"] ) ? reset( $_post_data_tax_input["rets_location_city"] ) : null,
               "route" => isset( $_post_data_tax_input["rets_location_route"] ) ? reset( $_post_data_tax_input["rets_location_route"] ) : null,
+              "subdivision" => isset( $_post_data_tax_input["rets_subdivision"] ) ? reset( $_post_data_tax_input["rets_subdivision"] ) : null,
+              "zip" => isset( $_post_data_tax_input["rets_location_zip"] ) ? reset( $_post_data_tax_input["rets_location_zip"] ) : null,
             );
 
             $_location_terms = WPP_F::update_location_terms( $_post_id, (object) $_geo_tag_fields);
@@ -1106,6 +1105,9 @@ namespace UsabilityDynamics\WPRETSC {
             continue;
 
           }
+
+          // Avoid hierarchical taxonomies since they do not allow simple-value passing.
+          WPP_F::verify_have_system_taxonomy( $tax_name, array( 'hierarchical' => false ) );
 
           if( is_taxonomy_hierarchical( $tax_name ) ) {
             ud_get_wp_rets_client()->write_log( "Handling hierarchical taxonomy [$tax_name].", 'debug' );

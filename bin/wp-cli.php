@@ -14,7 +14,7 @@ class WPP_CLI_Property_Command extends WP_CLI_Command {
   /**
    * Delete all 'property' posts for a site
    *
-   * @synopsis [--posts-per-page]
+   * @synopsis [--posts-per-page] [--force-delete-meta]
    * @param array $args
    * @param array $assoc_args
    */
@@ -27,6 +27,13 @@ class WPP_CLI_Property_Command extends WP_CLI_Command {
     }
 
     timer_start();
+
+    // May be in some cases we could delete meta at first
+    // So it might decrease operation time.
+    if ( ! empty( $assoc_args['force-delete-meta'] ) ) {
+      WP_CLI::log( __( 'Removing properties meta at first...', ud_get_wp_property()->domain ) );
+      $this->_delete_properties_meta();
+    }
 
     WP_CLI::log( __( 'Removing properties...', ud_get_wp_property()->domain ) );
 
@@ -41,6 +48,46 @@ class WPP_CLI_Property_Command extends WP_CLI_Command {
     WP_CLI::log( WP_CLI::colorize( '%Y' . __( 'Total time elapsed: ', ud_get_wp_property()->domain ) . '%N' . timer_stop() ) );
 
     WP_CLI::success( __( 'Done!', ud_get_wp_property()->domain ) );
+  }
+
+  /**
+   * Removes directly from DataBase all meta related to property post type.
+   */
+  function _delete_properties_meta() {
+    global $wpdb;
+
+    $total = 0;
+
+    while( true ) {
+
+      $meta_ids = $wpdb->get_col( "
+        SELECT wpm.meta_id
+	        FROM $wpdb->postmeta wpm
+	        INNER JOIN $wpdb->posts wp ON (wp.ID = wpm.post_id)
+		      WHERE wp.post_type = 'property'
+		        LIMIT 0, 1000;
+		  " );
+
+      // If there are no results just break the loop
+      if( empty( $meta_ids ) ) {
+        break;
+      }
+
+      $total += count( $meta_ids );
+
+      $meta_ids = explode( ",", $meta_ids );
+
+      $wpdb->query( "
+        DELETE
+          FROM $wpdb->postmeta
+          WHERE meta_id IN ( $meta_ids )
+
+      " );
+
+    }
+
+    WP_CLI::log( sprintf( __( 'Removed [%d] meta fields which belong to property type', ud_get_wp_property()->domain ), $total ) );
+
   }
 
   /**
@@ -191,6 +238,7 @@ class WPP_CLI_Terms_Command extends WP_CLI_Command {
   /**
    * Removes broken terms and not registered taxonomies.
    *
+   * @synopsis [--exclude-taxonomy]
    */
   public function cleanup( $args, $assoc_args ) {
     global $wpdb;
@@ -220,6 +268,19 @@ class WPP_CLI_Terms_Command extends WP_CLI_Command {
     // NOTE: Think twice before run the command.
 
     $exclude = get_taxonomies();
+
+    // In some cases you may want to exclude taxonomy which is not registered
+    // So you can set your custom list of taxonomies via comma which should be ignored
+    // using parameter --exclude-taxonomy
+    if ( ! empty( $assoc_args['exclude-taxonomy'] ) ) {
+      $custom_exclude = explode( ',', $assoc_args['exclude-taxonomy'] );
+      foreach( $custom_exclude as $taxonomy ) {
+        $taxonomy = trim( $taxonomy );
+        if( !in_array( $taxonomy, $exclude ) ) {
+          $exclude[$taxonomy] = $taxonomy;
+        }
+      }
+    }
 
     $condition = implode( "','", $exclude );
 

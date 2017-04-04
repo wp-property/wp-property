@@ -2244,14 +2244,69 @@ class WPP_F extends UsabilityDynamics\Utility
       return new WP_Error( 'No [geo_data] argument provided.' );
     }
 
-    self::verify_have_system_taxonomy('wpp_location');
+    $taxonomy = 'wpp_location';
+
+    self::verify_have_system_taxonomy( $taxonomy );
+
+    $rules = array(
+      'state' => array(
+        'parent' => false,
+        'meta' => array(
+          '_type' => 'wpp_location_state'
+        )
+      ),
+      'county' => array(
+        'parent' => 'state',
+        'meta' => array(
+          '_type' => 'wpp_location_county'
+        )
+      ),
+      'city' => array(
+        'parent' => 'county',
+        'meta' => array(
+          '_type' => 'wpp_location_city'
+        )
+      ),
+      'route' => array(
+        'parent' => 'city',
+        'meta' => array(
+          '_type' => 'wpp_location_route'
+        )
+      ),
+      'zip' => array(
+        'parent' => 'state',
+        'meta' => array(
+          '_type' => 'wpp_location_zip'
+        )
+      ),
+      'subdivision' => array(
+        'parent' => false,
+        'meta' => array(
+          '_type' => 'wpp_location_subdivision'
+        )
+      ),
+      'city_state' => array(
+        'parent' => false,
+        'meta' => array(
+          '_type' => 'wpp_location_city_state'
+        )
+      )
+    );
 
     $geo_data->terms = array();
 
-    $geo_data->terms['state'] = !empty($geo_data->state) ? get_term_by('name', $geo_data->state, 'wpp_location', OBJECT) : false;
-    $geo_data->terms['county'] = !empty($geo_data->county) ? get_term_by('name', $geo_data->county, 'wpp_location', OBJECT) : false;
-    $geo_data->terms['city'] = !empty($geo_data->city) ? get_term_by('name', $geo_data->city, 'wpp_location', OBJECT) : false;
-    $geo_data->terms['route'] = !empty($geo_data->route) ? get_term_by('name', $geo_data->route, 'wpp_location', OBJECT) : false;
+    // May be set city_state term
+    if( empty( $geo_data->city_state ) && !empty( $geo_data->city ) && !empty( $geo_data->state ) ) {
+      $geo_data->city_state = trim( $geo_data->city ) . ', ' . trim( $geo_data->state );
+    }
+
+    $geo_data->terms['state'] = !empty($geo_data->state) ? get_term_by('name', $geo_data->state, $taxonomy, OBJECT) : false;
+    $geo_data->terms['county'] = !empty($geo_data->county) ? get_term_by('name', $geo_data->county, $taxonomy, OBJECT) : false;
+    $geo_data->terms['city'] = !empty($geo_data->city) ? get_term_by('name', $geo_data->city, $taxonomy, OBJECT) : false;
+    $geo_data->terms['route'] = !empty($geo_data->route) ? get_term_by('name', $geo_data->route, $taxonomy, OBJECT) : false;
+    $geo_data->terms['zip'] = !empty($geo_data->zip) ? get_term_by('name', $geo_data->zip, $taxonomy, OBJECT) : false;
+    $geo_data->terms['subdivision'] = !empty($geo_data->subdivision) ? get_term_by('name', $geo_data->subdivision, $taxonomy, OBJECT) : false;
+    $geo_data->terms['city_state'] = !empty($geo_data->city_state) ? get_term_by('name', $geo_data->city_state, $taxonomy, OBJECT) : false;
 
     // validate, lookup and add all location terms to object.
     if (isset($geo_data->terms) && is_array($geo_data->terms)) {
@@ -2260,6 +2315,23 @@ class WPP_F extends UsabilityDynamics\Utility
         if ((!$_haveTerm || is_wp_error($_haveTerm)) && isset( $geo_data->{$_level} )) {
 
           $_value = $geo_data->{$_level};
+
+          $_detail = array();
+
+          $rule = isset( $rules[$_level] ) ? $rules[$_level] : false;
+
+          if( !$rule ) {
+            continue;
+          }
+
+          if( !empty( $rule[ 'parent' ] ) ) {
+            $_detail['description'] = $_value . ' is a ' . $_level . ' within ' . (!empty($geo_data->terms[$rule[ 'parent' ]]) ? $geo_data->terms[$rule[ 'parent' ]]->name : '') . ', a ' . $rule[ 'parent' ] . '.';
+            $_detail['parent'] = (!empty($geo_data->terms[$rule[ 'parent' ]]) ? $geo_data->terms[$rule[ 'parent' ]]->term_id : 0);
+          } else {
+            $_detail['description'] = $_value . ' is a ' . $_level . ' with nothing above it.';
+          }
+
+          /*
 
           $index_key = array_search($_level, array_keys($geo_data->terms), true);
           $_hl = array_slice($geo_data->terms, ($index_key - 1), 1, true);
@@ -2278,11 +2350,20 @@ class WPP_F extends UsabilityDynamics\Utility
 
           // $_detail[ 'slug' ] = 'city-slug';
 
-          $_inserted_term = wp_insert_term($_value, 'wpp_location', $_detail);
+          //*/
+
+          $_inserted_term = wp_insert_term( $_value, 'wpp_location', $_detail );
 
           if (!is_wp_error($_inserted_term) && isset($_inserted_term['term_id'])) {
             $geo_data->terms[$_level] = get_term_by('term_id', $_inserted_term['term_id'], 'wpp_location', OBJECT);
-            //die( '<pre>' . print_r( $geo_data->terms->{$_level}, true ) . '</pre>' );
+
+            // Set meta data if rule for particular item contain it.
+            if( !empty( $rule[ 'meta' ] ) ) {
+              foreach( $rule[ 'meta' ] as $meta_key => $meta_value ) {
+                add_term_meta( $_inserted_term['term_id'], $meta_key, $meta_value, true );
+              }
+            }
+
           } else {
             error_log('Could not insert [wpp_location] term [' . $_value . '], error: [' . $_inserted_term->get_error_message() . ']');
           }
