@@ -67,41 +67,6 @@ namespace UsabilityDynamics\WPP {
           );
         }
 
-        // Add [wpp_listing_status] taxonomy.
-        if ( WPP_FEATURE_FLAG_WPP_LISTING_STATUS ) {
-          $taxonomies['wpp_listing_status'] = array(
-            'default' => true,
-            'readonly' => true,
-            'system' => true,
-            'meta' => true,
-            'hidden' => false,
-            'hierarchical' => true,
-            'unique' => false,
-            'public' => true,
-            'show_in_nav_menus' => false,
-            'show_ui' => false,
-            'show_tagcloud' => false,
-            'add_native_mtbox' => false,
-            'label' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-            'labels' => array(
-              'name' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-              'singular_name' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-              'search_items' => _x('Search  Status', 'property type taxonomy', ud_get_wp_property()->domain),
-              'all_items' => _x('All Status', 'property type taxonomy', ud_get_wp_property()->domain),
-              'parent_item' => _x('Parent Status', 'property type taxonomy', ud_get_wp_property()->domain),
-              'parent_item_colon' => _x('Parent Status', 'property type taxonomy', ud_get_wp_property()->domain),
-              'edit_item' => _x('Edit Status', 'property type taxonomy', ud_get_wp_property()->domain),
-              'update_item' => _x('Update Status', 'property type taxonomy', ud_get_wp_property()->domain),
-              'add_new_item' => _x('Add New Status', 'property type taxonomy', ud_get_wp_property()->domain),
-              'new_item_name' => _x('New Status', 'property type taxonomy', ud_get_wp_property()->domain),
-              'not_found' => sprintf(_x('No %s Status found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-              'menu_name' => sprintf(_x('%s Status', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
-            ),
-            'query_var' => 'property-status',
-            'rewrite' => array('slug' => 'property-status')
-          );
-        }
-
         // Add [wpp_listing_policy] taxonomy.
         if ( WPP_FEATURE_FLAG_WPP_LISTING_POLICY ) {
           $taxonomies['wpp_listing_policy'] = array(

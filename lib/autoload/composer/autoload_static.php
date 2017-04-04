@@ -120,6 +120,7 @@ class ComposerStaticInitf4ed7b6af105d2c0f95f0f768a166c7c
         'UsabilityDynamics\\WPP\\Supermap_Bootstrap' => __DIR__ . '/../..' . '/features/wp-property-supermap/lib/classes/class-supermap-bootstrap.php',
         'UsabilityDynamics\\WPP\\Supermap_Utility' => __DIR__ . '/../..' . '/features/wp-property-supermap/lib/classes/class-supermap-utility.php',
         'UsabilityDynamics\\WPP\\System_Taxonomy' => __DIR__ . '/../..' . '/features/system-taxonomy/system-taxonomy.php',
+        'UsabilityDynamics\\WPP\\Taxonomy_WPP_Listing_Status' => __DIR__ . '/../..' . '/features/taxonomy-wpp-listing-status/taxonomy-wpp-listing-status.php',
         'UsabilityDynamics\\WPP\\Taxonomy_WPP_Location' => __DIR__ . '/../..' . '/features/taxonomy-wpp-location/taxonomy-wpp-location.php',
         'UsabilityDynamics\\WPP\\Terms_Bootstrap' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/class-terms-bootstrap.php',
         'UsabilityDynamics\\WPP\\Terms_Upgrade' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/class-terms-upgrade.php',

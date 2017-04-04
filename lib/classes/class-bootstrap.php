@@ -77,9 +77,14 @@ namespace UsabilityDynamics\WPP {
           new Elasticsearch();
         }
 
-        // Enables WPP_Location Taxonomy
+        // Enables [wpp_location] Taxonomy
         if ( WPP_FEATURE_FLAG_WPP_LISTING_LOCATION ) {
           new Taxonomy_WPP_Location();
+        }
+
+        // Enables [wpp_listing_status] Taxonomy
+        if ( WPP_FEATURE_FLAG_WPP_LISTING_STATUS ) {
+          new Taxonomy_WPP_Listing_Status();
         }
 
         // Define System Taxonomies.

@@ -75,7 +75,7 @@ class WPP_CLI_Property_Command extends WP_CLI_Command {
 
       $total += count( $meta_ids );
 
-      $meta_ids = explode( ",", $meta_ids );
+      $meta_ids = implode( ",", $meta_ids );
 
       $wpdb->query( "
         DELETE

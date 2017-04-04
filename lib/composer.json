@@ -25,6 +25,7 @@
       "features/legacy-meta-attributes",
       "features/elasticsearch",
       "features/taxonomy-wpp-location",
+      "features/taxonomy-wpp-listing-status",
       "features/system-taxonomy",
       "features/field-alias"
     ]
