@@ -6,6 +6,8 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use \WPP_F;
+
   if( !class_exists( 'UsabilityDynamics\WPP\Taxonomy_WPP_Schools' ) ) {
 
     class Taxonomy_WPP_Schools {

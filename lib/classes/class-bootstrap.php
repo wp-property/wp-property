@@ -77,7 +77,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         // Enables [wpp_listing_type] Taxonomy
-        if( WPP_FEATURE_FLAG_LISTING_TYPE ) {
+        if( WPP_FEATURE_FLAG_WPP_LISTING_TYPE ) {
           new Taxonomy_WPP_Listing_Type();
         }
 
@@ -116,9 +116,6 @@ namespace UsabilityDynamics\WPP {
         if ( WP_PROPERTY_ELASTICSEARCH_SERVICE ) {
           new Elasticsearch();
         }
-
-        // Define System Taxonomies.
-        new System_Taxonomy();
 
         // Apply alises.
         if( WP_PROPERTY_FIELD_ALIAS ) {
