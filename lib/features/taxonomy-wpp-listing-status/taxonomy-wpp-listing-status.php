@@ -87,7 +87,7 @@ namespace UsabilityDynamics\WPP {
           return $term_data;
         }
 
-        if( strpos( $term_data[ 'slug' ], 'sale' ) >= 0 || strpos( $term_data[ 'slug' ], 'rent' ) ) {
+        if( strpos( $term_data[ 'slug' ], 'sale' ) >= 0 || strpos( $term_data[ 'slug' ], 'rent' ) >= 0 ) {
           $term_data[ '_type' ] = 'listing_status_sale';
         }
 

@@ -126,7 +126,7 @@ namespace UsabilityDynamics\WPP {
 
           $this->update_location_terms( $args[ 'post_id' ], (object) $_geo_tag_fields);
 
-          return false;
+          return true;
 
         }
 
