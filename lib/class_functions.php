@@ -79,6 +79,8 @@ class WPP_F extends UsabilityDynamics\Utility
       'errors' => array()
     );
 
+    $term_data = apply_filters( 'wpp:insert_term', $term_data );
+
     if( !isset( $term_data['_type'] )) {
       return new WP_Error( 'missing-type' );
     }

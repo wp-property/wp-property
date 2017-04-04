@@ -27,6 +27,8 @@ namespace UsabilityDynamics\WPP {
 
         add_filter( 'wpp:elastic:title_suggest', array( $this, 'elastic_title_suggest' ), 10, 3 );
 
+        add_filter( 'wpp:insert_term', array( $this, 'insert_term' ), 10, 2 );
+
       }
 
       /**
@@ -74,6 +76,25 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Just improve our term_type for sale statuses ( for sale, rent )
+       *
+       * @param $term_data
+       * @return mixed
+       */
+      public function insert_term( $term_data ) {
+
+        if( !isset( $term_data[ '_taxonomy' ] ) || $term_data[ '_taxonomy' ] !== 'wpp_listing_status' ) {
+          return $term_data;
+        }
+
+        if( strpos( $term_data[ 'slug' ], 'sale' ) >= 0 || strpos( $term_data[ 'slug' ], 'rent' ) ) {
+          $term_data[ '_type' ] = 'listing_status_sale';
+        }
+
+        return $term_data;
+      }
+
+      /**
        * We apply contexts for title_suggest based on the [wpp_listing_status] taxonomy
        *
        * @param $title_suggest
@@ -92,6 +113,7 @@ namespace UsabilityDynamics\WPP {
                   "sale_type" => $sale_type
                 ) );
                 */
+
 
 
 

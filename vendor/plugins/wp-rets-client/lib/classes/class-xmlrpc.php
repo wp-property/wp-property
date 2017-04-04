@@ -1085,8 +1085,6 @@ namespace UsabilityDynamics\WPRETSC {
             continue;
           }
 
-          // @TODO: why we prohibit using hierarchical taxonomies here? peshkov@UD
-
           // Avoid hierarchical taxonomies since they do not allow simple-value passing.
           WPP_F::verify_have_system_taxonomy( $tax_name, array( 'hierarchical' => false ) );
 

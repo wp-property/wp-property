@@ -330,7 +330,7 @@ namespace UsabilityDynamics\WPP {
        */
       static public function ep_config_mapping( $mapping ) {
 
-        @$mapping['settings']['index']['mapping']['total_fields']['limit'] = 5000;
+        //@$mapping['settings']['index']['mapping']['total_fields']['limit'] = 10000;
 
         $mapping['settings']['analysis']['filter']['autocomplete_filter'] = array(
           "min_gram" => 1,
