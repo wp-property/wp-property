@@ -458,10 +458,6 @@ namespace UsabilityDynamics\WPP {
             array(
               'name' => 'listing_type',
               'type' => 'category'
-            ),
-            array(
-              'name' => 'sale_type',
-              'type' => 'category'
             )
           )
         );

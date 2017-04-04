@@ -87,7 +87,7 @@ namespace UsabilityDynamics\WPP {
           return $term_data;
         }
 
-        if( strpos( $term_data[ 'slug' ], 'sale' ) >= 0 || strpos( $term_data[ 'slug' ], 'rent' ) >= 0 ) {
+        if( strpos( $term_data[ 'slug' ], 'sale' ) !== false || strpos( $term_data[ 'slug' ], 'rent' ) !== false ) {
           $term_data[ '_type' ] = 'listing_status_sale';
         }
 
@@ -104,18 +104,29 @@ namespace UsabilityDynamics\WPP {
        */
       public function elastic_title_suggest( $title_suggest, $args, $post_id ) {
 
-        /*
-                $listing_status = "test";
-                $sale_type = "test";
+        $terms = wp_get_object_terms( $post_id, 'wpp_listing_status' );
 
-                $contexts = array_filter( array(
-                  "listing_status" => $listing_status,
-                  "sale_type" => $sale_type
-                ) );
-                */
+        if( empty( $terms ) ) {
+          return $title_suggest;
+        }
 
+        $listing_status = array();
+        foreach( $terms as $term ) {
+          $listing_status[] = $term->slug;
+          $listing_status[] = $term->name;
+        }
 
+        $listing_status = array_unique( $listing_status );
 
+        if( empty( $listing_status ) ) {
+          return $title_suggest;
+        }
+
+        if( !isset( $title_suggest[ 'contexts' ] ) ) {
+          $title_suggest[ 'contexts' ] = array();
+        }
+
+        $title_suggest[ 'contexts' ][ 'listing_status' ] = $listing_status;
 
         return $title_suggest;
       }

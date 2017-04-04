@@ -64,18 +64,7 @@ namespace UsabilityDynamics\WPP {
 
         // May be load Features
 
-        if( WPP_FEATURE_FLAG_LISTING_TYPE ) {
-          new Listing_Type();
-        }
-
-        if( WP_PROPERTY_LEGACY_META_ATTRIBUTES ) {
-          new Legacy_Meta_Attributes();
-        }
-
-        // Invoke Elasticsearch Handler.
-        if ( WP_PROPERTY_ELASTICSEARCH_SERVICE ) {
-          new Elasticsearch();
-        }
+        // Start Taxonomies
 
         // Enables [wpp_location] Taxonomy
         if ( WPP_FEATURE_FLAG_WPP_LISTING_LOCATION ) {
@@ -85,6 +74,47 @@ namespace UsabilityDynamics\WPP {
         // Enables [wpp_listing_status] Taxonomy
         if ( WPP_FEATURE_FLAG_WPP_LISTING_STATUS ) {
           new Taxonomy_WPP_Listing_Status();
+        }
+
+        // Enables [wpp_listing_type] Taxonomy
+        if( WPP_FEATURE_FLAG_LISTING_TYPE ) {
+          new Taxonomy_WPP_Listing_Type();
+        }
+
+        // Enables [wpp_schools] Taxonomy
+        if ( WPP_FEATURE_FLAG_WPP_SCHOOLS ) {
+          new Taxonomy_WPP_Schools();
+        }
+
+        // Enables [wpp_listing_policy] taxonomy.
+        if ( WPP_FEATURE_FLAG_WPP_LISTING_POLICY ) {
+          new Taxonomy_WPP_Listing_Policy();
+        }
+
+        // Enables [wpp_listing_label] taxonomy.
+        if ( WP_PROPERTY_FLAG_WPP_LISTING_LABEL ) {
+          new Taxonomy_WPP_Listing_Label();
+        }
+
+        // Enables [wpp_categorical] taxonomy for multiple terms.
+        if ( WPP_FEATURE_FLAG_WPP_CATEGORICAL ) {
+          new Taxonomy_WPP_Categorical();
+        }
+
+        // Enables [wpp_listing_category] taxonomy.
+        if ( WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY ) {
+          new Taxonomy_WPP_Listing_Category();
+        }
+
+        // End Taxonomies
+
+        if( WP_PROPERTY_LEGACY_META_ATTRIBUTES ) {
+          new Legacy_Meta_Attributes();
+        }
+
+        // Invoke Elasticsearch Handler.
+        if ( WP_PROPERTY_ELASTICSEARCH_SERVICE ) {
+          new Elasticsearch();
         }
 
         // Define System Taxonomies.

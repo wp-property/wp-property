@@ -10,9 +10,9 @@ namespace UsabilityDynamics\WPP {
 
   use WPP_F;
 
-  if( !class_exists( 'UsabilityDynamics\WPP\Listing_Type' ) ) {
+  if( !class_exists( 'UsabilityDynamics\WPP\Taxonomy_WPP_Listing_Type' ) ) {
 
-    class Listing_Type {
+    class Taxonomy_WPP_Listing_Type {
 
       /**
        * Loads all stuff for WPP_FEATURE_FLAG_LISTING_TYPE
