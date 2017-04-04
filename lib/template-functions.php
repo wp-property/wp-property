@@ -481,7 +481,13 @@ if (!function_exists('get_features')) {
 
       foreach ($features as $feature) {
         if ($args['links'] == 'true') {
-          array_push($features_html, '<a href="' . get_term_link($feature->slug, $args['type']) . '">' . $feature->name . '</a>');
+
+          $link = get_term_link($feature->slug, $args['type']);
+          if( is_wp_error( $link ) ) {
+            continue;
+          }
+
+          array_push($features_html, '<a href="' . $link . '">' . $feature->name . '</a>');
         } else {
           array_push($features_html, $feature->name);
         }

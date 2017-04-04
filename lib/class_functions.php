@@ -2171,12 +2171,6 @@ class WPP_F extends UsabilityDynamics\Utility
         }
       }
 
-      if ( WPP_FEATURE_FLAG_WPP_LISTING_LOCATION ) {
-        if (isset($wp_properties['taxonomies']['wpp_location'])) {
-          $return['terms'] = self::update_location_terms($post_id, $geo_data);
-        }
-      }
-
       update_post_meta($post_id, 'wpp::last_address_validation', time());
 
       if (isset($manual_coordinates)) {
@@ -2221,6 +2215,11 @@ class WPP_F extends UsabilityDynamics\Utility
     if (!metadata_exists('post', $post_id, 'exclude_from_supermap')) {
       add_post_meta($post_id, 'exclude_from_supermap', 'false');
     }
+
+    $return = apply_filters( 'wpp::revalidate_address::return', $return, wp_parse_args( $args, array(
+      'post_id' => $post_id,
+      'geo_data' => $geo_data
+    ) ) );
 
     return $return;
   }
