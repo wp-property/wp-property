@@ -1210,10 +1210,6 @@ body,
       list-style: outside none none;
       margin: 0;
       padding: 1em 2em;
-      .wpp_features_box.wpp_features_box_without_groups {
-        padding: 0;
-        border: none;
-      }
       li {
         margin: 0;
         padding: 0;
@@ -1230,78 +1226,73 @@ body,
       }
     }
     /* ul.property_stats (Simple list) */
-    .wpp_features_box {
-      border: 1px solid #e3e3e3;
-      padding: 1em;
-      .clearfix;
-      &.wpp_features_box_without_groups {
-        padding: 2em;
+  }
+  .wpp_features_box {
+    border: 1px solid #e3e3e3;
+    padding: 1em;
+    .clearfix;
 
-        dt,
-        span.attribute {
-          font-weight: bold;
-        }
-      }
-
-      .wpp_feature_list {
-        display: inline-block;
-        width: 50%;
-        vertical-align: top;
-        margin-right: -3px;
-        padding: 1em;
-        h2.wpp_stats_group {
-          font-size: 1.4em;
-          margin-bottom: 1em;
-        }
-
-        /* Definitions List */
-        dl.wpp_property_stats {
-
-        }
-        /* Definitions List */
-
-        /* Plain List */
-        .wpp_attribute_row {
-          border-bottom: 1px solid #e3e3e3;
-          margin-bottom: 0.5em;
-          padding-bottom: 0.5em;
-          .clearfix;
-
-          span.attribute {
-            display: block;
-            float: left;
-            padding-right: 5px;
-          }
-          span.value {
-            display: block;
-            margin-left: 10px;
-            text-align: right;
-          }
-        }
-        /* Plain List */
-
-        /* Detailed List */
-        .wpp_attribute_row {
-          border-bottom: 1px solid #e3e3e3;
-          margin-bottom: 0.5em;
-          padding-bottom: 0.5em;
-          .clearfix;
-
-          strong {
-            display: block;
-            float: left;
-            padding-right: 5px;
-          }
-          p.value {
-            display: block;
-            text-align: right;
-          }
-        }
-        /* Detailed List */
-      }
-      /* .wpp_feature_list */
-
+    &.wpp_features_box_content {
+      margin-bottom: 2em;
     }
+
+    .wpp_feature_list {
+      display: inline-block;
+      width: 50%;
+      vertical-align: top;
+      margin-right: -3px;
+      padding: 1em;
+      h2.wpp_stats_group {
+        font-size: 1.4em;
+        margin-bottom: 1em;
+      }
+
+      /* Definitions List */
+      dl.wpp_property_stats {
+
+      }
+      /* Definitions List */
+
+      /* Plain List */
+      .wpp_attribute_row {
+        border-bottom: 1px solid #e3e3e3;
+        margin-bottom: 0.5em;
+        padding-bottom: 0.5em;
+        .clearfix;
+
+        span.attribute {
+          display: block;
+          float: left;
+          padding-right: 5px;
+        }
+        span.value {
+          display: block;
+          margin-left: 10px;
+          text-align: right;
+        }
+      }
+      /* Plain List */
+
+      /* Detailed List */
+      .wpp_attribute_row {
+        border-bottom: 1px solid #e3e3e3;
+        margin-bottom: 0.5em;
+        padding-bottom: 0.5em;
+        .clearfix;
+
+        strong {
+          display: block;
+          float: left;
+          padding-right: 5px;
+        }
+        p.value {
+          display: block;
+          text-align: right;
+        }
+      }
+      /* Detailed List */
+    }
+    /* .wpp_feature_list */
   }
   /* Features list V2 */
 
@@ -1570,13 +1561,4 @@ body,
     }
   }
   /* widget_tag_cloud */
-
-  /* property_term_list_v2 */
-  #property_term_list_v2 {
-    border: 1px solid #e3e3e3;
-    list-style: outside none none !important;
-    margin: 0 !important;
-    padding: 1em !important;
-  }
-  /* property_term_list_v2 */
 }

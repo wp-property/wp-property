@@ -64,6 +64,12 @@ namespace UsabilityDynamics\WPP {
               'type' => 'text',
               'default' => ''
             ),
+            'wpp_agents' => array(
+              'name' => sprintf(__('Agent %s', ud_get_wp_property('domain')), \WPP_F::property_label()),
+              'description' => __('If not empty, result will show property, which Agent ID is set.', ud_get_wp_property()->domain),
+              'type' => 'text',
+              'default' => ''
+            ),
             'property_type' => array(
               'name' => sprintf(__('%s Type', ud_get_wp_property('domain')), \WPP_F::property_label()),
               'description' => sprintf(__('The list of %s types to be included. If no type checked, all available %s will be shown.', ud_get_wp_property('domain')), \WPP_F::property_label(), \WPP_F::property_label('plural')),
