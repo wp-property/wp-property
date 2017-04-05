@@ -243,7 +243,7 @@ namespace UsabilityDynamics\WPP {
         $input[] = str_replace( array( ' ', '-', ',', '.' ), '', strtolower( sanitize_title( $post_args['post_title'] ) ) );
 
         $post_args['title_suggest'] = array(
-          "input" => $input,
+          "input" => $input
         );
 
         $post_args['title_suggest'] = apply_filters( 'wpp:elastic:title_suggest', $post_args['title_suggest'], $post_args, $post_id );
@@ -330,7 +330,7 @@ namespace UsabilityDynamics\WPP {
        */
       static public function ep_config_mapping( $mapping ) {
 
-        @$mapping['settings']['index']['mapping']['total_fields']['limit'] = 5000;
+        //@$mapping['settings']['index']['mapping']['total_fields']['limit'] = 10000;
 
         $mapping['settings']['analysis']['filter']['autocomplete_filter'] = array(
           "min_gram" => 1,
@@ -449,7 +449,17 @@ namespace UsabilityDynamics\WPP {
           'search_analyzer' => 'whitespace_analyzer',
           'preserve_separators' => true,
           'preserve_position_increments' => true,
-          'max_input_length' => 50
+          'max_input_length' => 50,
+          'contexts' => array(
+            array(
+              'name' => 'listing_status',
+              'type' => 'category'
+            ),
+            array(
+              'name' => 'listing_type',
+              'type' => 'category'
+            )
+          )
         );
 
         return $mapping;

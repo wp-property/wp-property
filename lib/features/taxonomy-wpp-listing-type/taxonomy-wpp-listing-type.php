@@ -1,6 +1,6 @@
 <?php
 /**
- * WPP_FEATURE_FLAG_LISTING_TYPE
+ * WPP_FEATURE_FLAG_WPP_LISTING_TYPE
  *
  * Bootstrap
  *
@@ -10,12 +10,12 @@ namespace UsabilityDynamics\WPP {
 
   use WPP_F;
 
-  if( !class_exists( 'UsabilityDynamics\WPP\Listing_Type' ) ) {
+  if( !class_exists( 'UsabilityDynamics\WPP\Taxonomy_WPP_Listing_Type' ) ) {
 
-    class Listing_Type {
+    class Taxonomy_WPP_Listing_Type {
 
       /**
-       * Loads all stuff for WPP_FEATURE_FLAG_LISTING_TYPE
+       * Loads all stuff for WPP_FEATURE_FLAG_WPP_LISTING_TYPE
        */
       public function __construct(){
         global $wp_properties;
@@ -100,6 +100,8 @@ namespace UsabilityDynamics\WPP {
             delete_option('wpp_activated');
           }
         } );
+
+        add_filter( 'wpp:elastic:title_suggest', array( $this, 'elastic_title_suggest' ), 10, 3 );
 
       }
 
@@ -259,6 +261,43 @@ namespace UsabilityDynamics\WPP {
           ud_get_wp_property()->set('property_types_term_id', $wp_properties['property_types_term_id']);
           update_option('wpp_settings', $wp_properties);
         }
+      }
+
+      /**
+       * We apply contexts for title_suggest based on the [wpp_listing_type] taxonomy
+       *
+       * @param $title_suggest
+       * @param $args
+       * @param $post_id
+       * @return mixed
+       */
+      public function elastic_title_suggest( $title_suggest, $args, $post_id ) {
+
+        $terms = wp_get_object_terms( $post_id, 'wpp_listing_type' );
+
+        if( empty( $terms ) ) {
+          return $title_suggest;
+        }
+
+        $listing_type = array();
+        foreach( $terms as $term ) {
+          $listing_type[] = $term->slug;
+          $listing_type[] = $term->name;
+        }
+
+        $listing_type = array_unique( $listing_type );
+
+        if( empty( $listing_type ) ) {
+          return $title_suggest;
+        }
+
+        if( !isset( $title_suggest[ 'contexts' ] ) ) {
+          $title_suggest[ 'contexts' ] = array();
+        }
+
+        $title_suggest[ 'contexts' ][ 'listing_type' ] = $listing_type;
+
+        return $title_suggest;
       }
 
     }

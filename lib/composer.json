@@ -21,11 +21,17 @@
   },
   "autoload": {
     "classmap": [
-      "features/listing-type",
       "features/legacy-meta-attributes",
       "features/elasticsearch",
-      "features/system-taxonomy",
-      "features/field-alias"
+      "features/field-alias",
+      "features/taxonomy-wpp-listing-type",
+      "features/taxonomy-wpp-listing-status",
+      "features/taxonomy-wpp-listing-label",
+      "features/taxonomy-wpp-listing-policy",
+      "features/taxonomy-wpp-listing-category",
+      "features/taxonomy-wpp-location",
+      "features/taxonomy-wpp-schools",
+      "features/taxonomy-wpp-categorical"
     ]
   },
   "extra": {

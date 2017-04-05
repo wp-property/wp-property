@@ -172,7 +172,7 @@
       },
       {
         "name": "Standard Property Type",
-        "constant": "WPP_FEATURE_FLAG_LISTING_TYPE",
+        "constant": "WPP_FEATURE_FLAG_WPP_LISTING_TYPE",
         "description": "Standard property type taxonomy, stored in [wpp_listing_type].",
         "since": "2.2.1",
         "enabled": false
