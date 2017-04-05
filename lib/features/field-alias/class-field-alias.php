@@ -213,6 +213,7 @@ namespace UsabilityDynamics\WPP {
        *
        *
        * @param bool $target
+       * @param int $post_id
        * @return mixed|void
        */
       public function get_alias_value( $target = false, $post_id ) {
