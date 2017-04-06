@@ -20,8 +20,6 @@ namespace UsabilityDynamics\WPP {
         add_filter( 'wpp_get_property', array( $this, 'apply_property_alias' ), 50, 2 );
         //
         add_filter( 'wpp_get_properties_query', array( $this, 'apply_properties_query_alias' ), 50 );
-        //
-        // add_filter( 'get_post_metadata', array( $this, 'alias_get_post_metadata' ), 50, 4 );
 
         if( is_admin() ) {
 
@@ -69,6 +67,7 @@ namespace UsabilityDynamics\WPP {
             return $data;
           }, 100 );
           //*/
+
 
         }
 
@@ -164,30 +163,6 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       * Direct Meta Override
-       *
-       * @param $false
-       * @param $object_id
-       * @param $meta_key
-       * @param $single
-       * @return mixed
-       */
-      public function alias_get_post_metadata( $false, $object_id, $meta_key, $single ) {
-
-        if( $meta_key === 'short_address' ) {
-          return get_post_meta( $object_id, 'formatted_address_simple', $single );
-        }
-
-        if( $meta_key === 'address' ) {
-          return get_post_meta( $object_id, 'formatted_address', $single );
-        }
-
-        return $false;
-
-      }
-
-
-      /**
        * Returns alias key for passed attribute
        *
        *
@@ -206,7 +181,6 @@ namespace UsabilityDynamics\WPP {
         return (array) $field_alias;
 
       }
-
 
       /**
        * Returns Alias value
@@ -244,19 +218,23 @@ namespace UsabilityDynamics\WPP {
         // Try to figure out the type by
         // looking for the target in postmeta and taxonomy tables
         else {
-          $meta_counts = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $wpdb->postmeta WHERE meta_key=%s;", $target[0] ) );
-          $terms_counts = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $wpdb->term_taxonomy WHERE taxonomy=%s;", $target[0] ) );
-          // What the hell to do here since we have the target in both tables?
-          if( $meta_counts && $terms_counts ) {
-            // Nothing.. Let's try to find value in both instances below.
-          }
-          // We are sure it's postmeta
-          else if ( $meta_counts ) {
-            $type = 'post_meta';
-          }
-          // We are sure it's a taxonomy!
-          else if ( $terms_counts ) {
-            $type = 'tax_input';
+          $type = get_transient( 'alias_' . $target[0] );
+          if ( false === $type ) {
+            $meta_counts = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $wpdb->postmeta WHERE meta_key=%s;", $target[0] ) );
+            $terms_counts = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $wpdb->term_taxonomy WHERE taxonomy=%s;", $target[0] ) );
+            // Looks like we have to look for values in both instances...
+            if( $meta_counts && $terms_counts ) {
+              $type = 'both';
+            }
+            // We are sure it's postmeta
+            else if ( $meta_counts ) {
+              $type = 'post_meta';
+            }
+            // We are sure it's a taxonomy
+            else if ( $terms_counts ) {
+              $type = 'tax_input';
+            }
+            set_transient( 'alias_' . $target[0], $type );
           }
         }
 

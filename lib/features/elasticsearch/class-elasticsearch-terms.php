@@ -22,6 +22,8 @@ namespace UsabilityDynamics\WPP {
           add_action( 'ep_cli_post_bulk_index', array( $this, 'index' ) );
         }
 
+        //add_action( 'ep_after_index_post', array( $this, 'ep_after_index_post' ), 10, 2 );
+
       }
 
       /**
@@ -215,7 +217,7 @@ namespace UsabilityDynamics\WPP {
 
         // make sure we actually have something to index
         if ( empty( $this->bulk ) ) {
-          WP_CLI::error( 'There are no terms to index.' );
+          $this->cli_log( 'There are no terms to index.', 'error' );
         }
 
         $flatten = array();
@@ -230,7 +232,7 @@ namespace UsabilityDynamics\WPP {
 
         // show the content length in bytes if in debug
         if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-          WP_CLI::log( 'Request string length: ' . size_format( mb_strlen( $body, '8bit' ), 2 ) );
+          $this->cli_log( 'Request string length: ' . size_format( mb_strlen( $body, '8bit' ), 2 ) );
         }
 
         add_filter( 'ep_bulk_index_post_request_path', array( $this, 'get_ep_bulk_index_term_request_path' ), 100 );
@@ -241,7 +243,7 @@ namespace UsabilityDynamics\WPP {
         remove_action( 'ep_bulk_index_post_request_path', array( $this, 'get_ep_bulk_index_term_request_path' ), 100 );
 
         if ( is_wp_error( $response ) ) {
-          WP_CLI::error( implode( "\n", $response->get_error_messages() ) );
+          $this->cli_log( implode( "\n", $response->get_error_messages() ), 'error' );
         }
 
         // if we did have errors, try to add the documents again
@@ -269,6 +271,41 @@ namespace UsabilityDynamics\WPP {
 
         // Flush bulk body
         $this->bulk = array();
+      }
+
+      /**
+       * We are syncing terms for Elasticpress too
+       * after property is synced on wp_insert_post
+       */
+      public function ep_after_index_post( $post, $return ){
+        if( !empty( $post['terms'] ) && is_array( $post['terms'] ) ) {
+          foreach( $post['terms'] as $taxonomy => $terms ) {
+            foreach( $terms as $term ) {
+              $this->queue_term( $taxonomy, $term );
+            }
+          }
+        }
+        if( !empty( $this->bulk ) ) {
+          $this->bulk_index();
+        }
+      }
+
+      /**
+       * Wrapper for CLI logs
+       * since some methods may be called by WP_CLI commands
+       */
+      private function cli_log( $message, $type = 'log' ) {
+        if( !defined( 'WP_CLI' ) || !WP_CLI ) {
+          return;
+        }
+        switch( $type ) {
+          case "log":
+            WP_CLI::log( $message );
+            break;
+          case "error":
+            WP_CLI::error( $message );
+            break;
+        }
       }
 
     }
