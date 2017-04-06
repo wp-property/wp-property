@@ -16,35 +16,51 @@ if( !class_exists( 'RWMB_Wpp_Alias_Field' ) && class_exists( 'RWMB_Text_Field' )
     static function html( $meta, $field ) {
       global $post;
 
+      $alias_values = array();
+      $list = false;
       $targets = ud_get_wp_property()->alias->get_alias_map( $field[ 'id' ] );
-      $targets = explode( ',', $targets );
-      foreach( $targets as $target ) {
+      $_targets = explode( ',', $targets );
+      foreach( $_targets as $target ) {
         $target = trim( $target );
-        $value = ud_get_wp_property()->alias->get_alias_value( $target );
-
+        $_alias_value = ud_get_wp_property()->alias->get_alias_value( $target, $post->ID );
+        if( is_array( $_alias_value ) ) {
+          $list = true;
+        }
+        // Alias value found.
+        if( $_alias_value ) {
+          if( $list ) {
+            $alias_values = array_merge( $alias_values, $_alias_value );
+          } else {
+            $alias_values[] = $_alias_value;
+          }
+        }
       }
 
-
-      ob_start();
-      echo "<pre>";
-      print_r($targets);
-      echo "</pre>";
-      $html = ob_get_clean();
-
-      // fix "array" situation by only showing the first value
-      if( is_array( $meta ) ) {
-        $meta = array_shift(array_values($meta));
+      $html = '<ul style="margin:0;">';
+      if( !empty( $alias_values ) ) {
+        foreach( $alias_values as $value ) {
+          if( strlen( $value ) > 100 ) {
+            $html .= ( sprintf(
+              '<li><textarea data-field-type="wpp-readonly" readonly="readonly" class="rwmb-text" cols="%s" rows="5" >%s</textarea></li>',
+              $field[ 'size' ],
+              $value
+            ) );
+          } else {
+            $html .= ( sprintf(
+              '<li><input type="text" data-field-type="wpp-readonly" readonly="readonly" class="rwmb-text" value="%s" size="%s"></li>',
+              $value,
+              $field[ 'size' ]
+            ) );
+          }
+        }
+        $html .= '<li class="howto">' . sprintf( __( "Shown values for Alias [%s]", ud_get_wp_property()->domain ), $targets ) . '</li>';
+      } else {
+        $html .= '<li class="howto">' . sprintf( __( "Values for Alias [%s] not found", ud_get_wp_property()->domain ), $targets ) . '</li>';
       }
+      $html .= '<ul>';
 
-      return $html . ( sprintf(
-        '<input type="text" data-field-type="wpp-readonly" readonly="readonly" class="rwmb-text" id="%s" value="%s" placeholder="%s" size="%s" %s>',
-        // $field['field_name'],
-        $field[ 'id' ],
-        $meta,
-        $field[ 'placeholder' ],
-        $field[ 'size' ],
-        $field[ 'datalist' ] ? "list='{$field['datalist']['id']}'" : ''
-      ) );
+      return $html;
+
     }
 
   }

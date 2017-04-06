@@ -100,21 +100,29 @@ namespace UsabilityDynamics\WPP {
         foreach( (array) $this->get_alias_map() as $_defined_field => $target ) {
 
           $alias_values = array();
+          $list = false;
 
           $_targets = explode( ',', $target );
           foreach( $_targets as $_target ) {
             $_target = trim( $_target );
 
-            $_alias_value = $this->get_alias_value( $_target, $property->ID );
+            $_alias_value = $this->get_alias_value( $_target, $property[ 'ID' ] );
+            if( is_array( $_alias_value ) ) {
+              $list = true;
+            }
 
             // Alias value found.
             if( $_alias_value ) {
-              $alias_values[] = $_alias_value;
+              if( $list ) {
+                $alias_values = array_merge( $alias_values, $_alias_value );
+              } else {
+                $alias_values[] = $_alias_value;
+              }
             }
 
           }
 
-          $property[ $_defined_field ] = $alias_values;
+          $property[ $_defined_field ] = $list && count( $alias_values ) > 1 ? $alias_values : implode( ', ', $alias_values );
           $_result[] = "Applied target [$target] alias to [$_defined_field] with values";
 
         }
@@ -205,37 +213,109 @@ namespace UsabilityDynamics\WPP {
        *
        *
        * @param bool $target
+       * @param int $post_id
        * @return mixed|void
        */
       public function get_alias_value( $target = false, $post_id ) {
+        global $wpdb;
+
         $value = null;
+
+        // STEP 1. Figure out to which instance belongs target: taxonomy or postmeta
+
+        // We do not know the type of target
+        // So try to figure it out.
+        $type = null;
+        $target = explode( '.', $target );
 
         // In an ideal world we would prefix all of our fields with tax_input/post_meta.
         // If we have prefix we know to which stuff the target belongs to, so:
+        if( in_array( $target[0], array( 'tax_input', 'post_meta' ) ) ) {
+          $type = $target[0];
+          $target = array_shift( $target );
+        }
 
-        // Check taxonomy
-        if( strpos( $target, 'tax_input.' ) === 0 ) {
-          $_term_group_match = explode( '.', $target );
-          if( taxonomy_exists( $_term_group_match[1] ) ) {
-            $value = wp_get_object_terms( $post_id, $_term_group_match[1], array( 'fields' => 'names' ) );
+        // If we have more than one value, it means it's hierarchic taxonomy
+        // and we specify the parent terms
+        else if ( count( $target ) > 1 ) {
+          $type = 'tax_input';
+        }
+
+        // Try to figure out the type by
+        // looking for the target in postmeta and taxonomy tables
+        else {
+          $meta_counts = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $wpdb->postmeta WHERE meta_key=%s;", $target[0] ) );
+          $terms_counts = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $wpdb->term_taxonomy WHERE taxonomy=%s;", $target[0] ) );
+          // What the hell to do here since we have the target in both tables?
+          if( $meta_counts && $terms_counts ) {
+            // Nothing.. Let's try to find value in both instances below.
           }
-          return $value;
+          // We are sure it's postmeta
+          else if ( $meta_counts ) {
+            $type = 'post_meta';
+          }
+          // We are sure it's a taxonomy!
+          else if ( $terms_counts ) {
+            $type = 'tax_input';
+          }
         }
 
-        // Check post meta
-        if( strpos( $target, 'post_meta.' ) === 0 ) {
-          $_term_group_match = explode( '.', $target );
-          $value = get_post_meta( $post_id, $_term_group_match[1], true );
-          return $value;
+        // STEP 2. Get value(s)
+
+        // Looke like target belongs to taxonomy
+        if( $type == 'tax_input' ) {
+          // Do not combine this condition with above one!
+          // Or we break the logic for 'else'...
+          if( WPP_F::verify_have_system_taxonomy( $target[0] ) ) {
+            $terms = array();
+
+            // Looks like we want to get child terms only
+            if( !empty( $target[1] ) ) {
+              $term = get_term_by( 'id', $target[1], $target[0] );
+              if( !$term ) {
+                $term = get_term_by( 'slug', $target[1], $target[0] );
+              }
+              if( $term ) {
+                $term_ids = wp_get_object_terms( $post_id, $target[0], array( 'fields' => 'ids' ) );
+                $term_query = new \WP_Term_Query( array(
+                  'taxonomy' => $target[0],
+                  'include'  => $term_ids,
+                  'parent'   => $term->term_id,
+                  'fields'   => 'id=>name'
+                ) );
+                if( !empty( $term_query->terms ) ) {
+                  $terms = array_values( $term_query->terms );
+                }
+              }
+            }
+
+            else {
+              $terms = wp_get_object_terms( $post_id, $target[0], array( 'fields' => 'names' ) );
+            }
+
+            if( !empty( $terms ) && !is_wp_error( $terms ) ) {
+              $value = $terms;
+            }
+          }
         }
 
-        if( !$value && taxonomy_exists( $target ) ) {
-          $value = wp_get_object_terms( $post_id, $target, array( 'fields' => 'names' ) );
+        // Looks like target belongs to postmeta
+        else if( $type == 'post_meta' ) {
+          $value = get_post_meta( $post_id, $target[0], true );
         }
 
-        // try meta, defined taxonomy
-        if( !$value ) {
-          $value = get_post_meta( $post_id, $target, true );
+        // Could not determine the type?
+        // Try to find value in postmeta at first and then in taxonomy.
+        else {
+
+          $value = get_post_meta( $post_id, $target[0], true );
+          if( !$value && WPP_F::verify_have_system_taxonomy( $target[0] ) ) {
+            $terms = wp_get_object_terms( $post_id, $target[0], array( 'fields' => 'names' ) );
+            if( !empty( $terms ) && !is_wp_error( $terms ) ) {
+              $value = $terms;
+            }
+          }
+
         }
 
         return $value;
