@@ -22,7 +22,7 @@ namespace UsabilityDynamics\WPP {
           add_action( 'ep_cli_post_bulk_index', array( $this, 'index' ) );
         }
 
-        //add_action( 'ep_after_index_post', array( $this, 'ep_after_index_post' ), 10, 2 );
+        add_action( 'ep_after_index_post', array( $this, 'ep_after_index_post' ), 10, 2 );
 
       }
 
