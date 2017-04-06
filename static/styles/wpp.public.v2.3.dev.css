@@ -1222,6 +1222,8 @@ body .wpp_search_properties_widget_v2 .wpp_shortcode_search_form.wpp_search_one_
 }
 body .property_map_wrapper #infowindow .wpp_google_maps_attribute_row_property_title,
 #wpp_layout .property_map_wrapper #infowindow .wpp_google_maps_attribute_row_property_title,
+body .wpp_supermap_wrapper #infowindow .wpp_google_maps_attribute_row_property_title,
+#wpp_layout .wpp_supermap_wrapper #infowindow .wpp_google_maps_attribute_row_property_title,
 body #property_map #infowindow .wpp_google_maps_attribute_row_property_title,
 #wpp_layout #property_map #infowindow .wpp_google_maps_attribute_row_property_title {
   margin-bottom: 0.5em;
@@ -1233,12 +1235,16 @@ body #property_map #infowindow .wpp_google_maps_attribute_row_property_title,
 }
 body .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table,
 #wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table,
+body .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table,
+#wpp_layout .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table,
 body #property_map #infowindow table.wpp_google_maps_infobox_table,
 #wpp_layout #property_map #infowindow table.wpp_google_maps_infobox_table {
   border: none;
 }
 body .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col,
 #wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col,
+body .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col,
+#wpp_layout .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col,
 body #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col,
 #wpp_layout #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col {
   border: none;
@@ -1249,24 +1255,32 @@ body #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_m
 }
 body .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a.thumbnail,
 #wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a.thumbnail,
+body .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a.thumbnail,
+#wpp_layout .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a.thumbnail,
 body #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a.thumbnail,
 #wpp_layout #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a.thumbnail {
   font-size: 14px;
 }
 body .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a.thumbnail img,
 #wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a.thumbnail img,
+body .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a.thumbnail img,
+#wpp_layout .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a.thumbnail img,
 body #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a.thumbnail img,
 #wpp_layout #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col a.thumbnail img {
   max-width: 100%;
 }
 body .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link,
 #wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link,
+body .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link,
+#wpp_layout .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link,
 body #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link,
 #wpp_layout #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link {
   margin-top: 1em;
 }
 body .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link a.btn,
 #wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link a.btn,
+body .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link a.btn,
+#wpp_layout .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link a.btn,
 body #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link a.btn,
 #wpp_layout #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_left_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link a.btn {
   background-color: #145fc8;
@@ -1279,6 +1293,8 @@ body #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_m
 }
 body .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col,
 #wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col,
+body .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col,
+#wpp_layout .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col,
 body #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col,
 #wpp_layout #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col {
   border: none;
@@ -1287,18 +1303,24 @@ body #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_m
 }
 body .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link,
 #wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link,
+body .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link,
+#wpp_layout .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link,
 body #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link,
 #wpp_layout #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link {
   display: none;
 }
 body .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link a,
 #wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link a,
+body .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link a,
+#wpp_layout .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link a,
 body #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link a,
 #wpp_layout #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_attribute_row.wpp_google_maps_attribute_row_directions_link a {
   font-size: 14px;
 }
 body .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox,
 #wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox,
+body .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox,
+#wpp_layout .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox,
 body #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox,
 #wpp_layout #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox {
   margin: 0;
@@ -1307,6 +1329,8 @@ body #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_m
 }
 body .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li,
 #wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li,
+body .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li,
+#wpp_layout .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li,
 body #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li,
 #wpp_layout #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li {
   list-style: none;
@@ -1315,6 +1339,8 @@ body #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_m
 }
 body .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li .attribute,
 #wpp_layout .property_map_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li .attribute,
+body .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li .attribute,
+#wpp_layout .wpp_supermap_wrapper #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li .attribute,
 body #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li .attribute,
 #wpp_layout #property_map #infowindow table.wpp_google_maps_infobox_table .wpp_google_maps_right_col .wpp_google_maps_infobox li .attribute {
   padding-right: 5px;
