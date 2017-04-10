@@ -42,11 +42,15 @@ if ( ! class_exists( 'RWMB_Wpp_Select_Combobox_Field' ) ){
       $meta     = array_values($meta);
       $term_id  = '';
       $term_name  = '';
-      if(isset($meta[0])){
+
+      if(is_array($meta) && $meta = array_values($meta) && isset($meta[0])){
         $term_id = $meta[0];
         $term = get_term( $term_id , $options['taxonomy'] );
-        $term_name = $term->name;
-        $term_id = "tID_" . $term_id;
+
+        if($term && !is_wp_error($term)){
+          $term_name = $term->name; 
+          $term_id = "tID_" . $term_id;
+        }
       }
 
       ob_start();
