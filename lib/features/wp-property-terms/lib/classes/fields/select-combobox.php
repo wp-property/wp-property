@@ -36,10 +36,6 @@ if ( ! class_exists( 'RWMB_Wpp_Select_Combobox_Field' ) ){
         $terms[] = array('value' => $id, 'label' => $label);
       }
 
-      if(!is_array ($meta)) {
-        $meta = array();
-      }
-      $meta     = array_values($meta);
       $term_id  = '';
       $term_name  = '';
 
