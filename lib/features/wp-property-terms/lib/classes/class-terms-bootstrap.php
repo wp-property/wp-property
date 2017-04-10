@@ -276,6 +276,8 @@ namespace UsabilityDynamics\WPP {
               $_taxonomies[ $_taxonomy ]['public'] = $_original_taxonomy['public'];
             }
 
+          } else if ( !isset( $_taxonomies[ $_taxonomy ] ) ) {
+            $_taxonomies[ $_taxonomy ] = $_taxonomy_data;
           }
 
         }
