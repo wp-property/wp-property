@@ -60,7 +60,6 @@ if ($settings['type'] !== 'loadmore' || ($settings['type'] == 'loadmore' && $set
   $template_view_html .= '<span class="wpp_template_view_button wpp_template_row" wpp_template="row"></span>';
   $template_view_html .= '</div>';
   $sort_html .= $template_view_html;
-  $sort_html .= '</div>';
 
   $sort_html .= '<div class="clear"></div>';
   $sort_html .= '</div>';

@@ -42,6 +42,7 @@ if ( ! class_exists( 'RWMB_Wpp_Select_Combobox_Field' ) ){
       if(is_array($meta) && $meta = array_values($meta) && isset($meta[0])){
         $term_id = $meta[0];
         $term = get_term( $term_id , $options['taxonomy'] );
+
         if($term && !is_wp_error($term)){
           $term_name = $term->name; 
           $term_id = "tID_" . $term_id;
@@ -51,20 +52,20 @@ if ( ! class_exists( 'RWMB_Wpp_Select_Combobox_Field' ) ){
       ob_start();
 
       ?>
-      <div 
-        class="rwmb-field wpp-taxonomy-select-combobox wpp_ui" 
+      <div
+        class="rwmb-field wpp-taxonomy-select-combobox wpp_ui"
         data-taxonomy="<?php echo $options['taxonomy'];?>">
         <div class="clearfix term">
           <input
               type = "text"
-              class="ui-corner-left wpp-terms-input wpp-terms-term" 
+              class="ui-corner-left wpp-terms-input wpp-terms-term"
               autocomplete="off"
               value="<?php echo $term_name?>"
             >
           <input
               type = "hidden"
-              class="wpp-terms-id-input" 
-              name="<?php echo $field_name;?>[0][term]" 
+              class="wpp-terms-id-input"
+              name="<?php echo $field_name;?>[0][term]"
               value="<?php echo $term_id?>"
             >
           <a tabindex="-1" title="Show All Items" class="ui-widget ui-state-default ui-button-icon-only select-combobox-toggle ui-corner-right" role="button">
@@ -84,7 +85,7 @@ if ( ! class_exists( 'RWMB_Wpp_Select_Combobox_Field' ) ){
           <input
               type = "hidden"
               class="wpp-terms-id-input"
-              name="<?php echo $field_name;?>[0][parent]" 
+              name="<?php echo $field_name;?>[0][parent]"
             >
           <a tabindex="-1" title="Show All Items" class="ui-widget ui-state-default ui-button-icon-only select-combobox-toggle ui-corner-right" role="button">
             <span class="ui-button-icon-primary ui-icon ui-icon-triangle-1-s"></span>
