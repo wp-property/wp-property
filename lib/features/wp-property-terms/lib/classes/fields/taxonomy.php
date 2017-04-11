@@ -1,7 +1,10 @@
 <?php
 // Prevent loading this file directly
 defined( 'ABSPATH' ) || exit;
-require_once RWMB_FIELDS_DIR . 'checkbox-list.php';
+
+if( defined( 'RWMB_FIELDS_DIR ' ) ) {
+  require_once RWMB_FIELDS_DIR . 'checkbox-list.php';
+}
 
 if ( ! class_exists( 'RWMB_Wpp_Taxonomy_Field' ) ){
 	class RWMB_Wpp_Taxonomy_Field extends RWMB_Taxonomy_Field{

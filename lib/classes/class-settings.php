@@ -41,7 +41,6 @@ namespace UsabilityDynamics\WPP {
           'currency_symbol' => '$',
           'address_attribute' => 'location',
           'google_maps_localization' => 'en',
-          'enable_layouts' => 'false',
           'display_address_format' => '[city], [state]'
         );
 
@@ -67,6 +66,22 @@ namespace UsabilityDynamics\WPP {
         $data['default_coords']['latitude'] = '57.7973333';
         $data['default_coords']['longitude'] = '12.0502107';
 
+        //** Geo type attributes are predefined and should not be editable on property adding/updating */
+        // @notice All these fields are automatically added as post_meta on revalidation.
+        $data['geo_type_attributes'] = array(
+          'formatted_address',
+          'street_number',
+          'route',
+          'district',
+          'city',
+          'county',
+          'state',
+          'state_code',
+          'country',
+          'country_code',
+          'postal_code'
+        );
+
         //** Image URLs. */
         $data['images']['map_icon_shadow'] = WPP_URL . "images/map_icon_shadow.png";
 
@@ -86,7 +101,7 @@ namespace UsabilityDynamics\WPP {
 
         $_stored_settings = $this->get();
 
-        if( defined( 'WP_PROPERTY_SETUP_ASSISTANT' ) && WP_PROPERTY_SETUP_ASSISTANT ) {
+        if( WP_PROPERTY_SETUP_ASSISTANT ) {
           if( !isset( $_stored_settings[ 'configuration' ] ) ) {
             $data[ 'configuration' ][ 'show_assistant' ] = "yes";
           }

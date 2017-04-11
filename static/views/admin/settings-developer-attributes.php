@@ -43,8 +43,6 @@ foreach ($attributes as $slug => $label) {
   ob_start();
   do_action( 'wpp::property_attributes::settings', $slug );
   $settings_do_action[$slug] = ob_get_clean();
-
-  $filtered_field_alias[$slug] = WPP_F::get_alias_map( $slug ) ;
 }
 
 $searchable_attr_field_do_action  = array_filter($searchable_attr_field_do_action);
@@ -54,19 +52,22 @@ $settings_do_action               = array_filter($settings_do_action);
 
 $meta_box_fields = ud_get_wp_property('attributes.types', array());
 
+$wpp_property_attributes_variables = apply_filters( 'wpp::settings::developer::attributes', array(
+  'searchable_attr_fields_options'  => $searchable_attr_fields_options,
+  'searchable_attr_field_do_action' => $searchable_attr_field_do_action,
+  'admin_attr_field_do_action'      => $admin_attr_field_do_action,
+  'attribute_name_do_action'        => $attribute_name_do_action,
+  'settings_do_action'              => $settings_do_action,
+  'meta_box_fields'                 => $meta_box_fields,
+  'settings_do_action'              => $filtered_field_alias
+) );
+
 ?>
 <script type="text/javascript">
 jQuery(document).ready(function($) {
   var wp_properties = wpp.instance.settings;
-  var searchable_attr_fields_options  = <?php echo json_encode($searchable_attr_fields_options);?>;
-   
-  var searchable_attr_field_do_action = <?php echo json_encode($searchable_attr_field_do_action);?>;
-  var admin_attr_field_do_action      = <?php echo json_encode($admin_attr_field_do_action);?>;
-  var attribute_name_do_action        = <?php echo json_encode($attribute_name_do_action);?>;
-  var settings_do_action              = <?php echo json_encode($settings_do_action);?>;
 
-  var meta_box_fields       = <?php echo json_encode($meta_box_fields);?>;
-  var filtered_field_alias  = <?php echo json_encode($filtered_field_alias);?>;
+  var wpp_property_attributes_variables  = <?php echo json_encode($wpp_property_attributes_variables);?>;
 
   if(typeof wp_properties.property_stats == 'undefined'){
     wp_properties.property_stats = {'':''};
@@ -127,7 +128,7 @@ jQuery(document).ready(function($) {
     },
     addAttribute: function (model) {
       this.children[model.cid] = new wppAttributeView({ model: model });
-      this.el.append(this.children[model.cid].render().el);
+      jQuery(this.el).append(this.children[model.cid].render().el);
     },
 
   });
@@ -160,19 +161,16 @@ jQuery(document).ready(function($) {
       group = typeof wp_properties.property_groups[ gslug ] != 'undefined'  ? wp_properties[ 'property_groups' ][ gslug ] : '';
     }
 
-    var row = new wppAttribute({
-      slug                            : slug,
-      gslug                           : gslug,
-      group                           : group,
-      wp_properties                   : wp_properties,
-      meta_box_fields                 : meta_box_fields,
-      settings_do_action              : settings_do_action,
-      filtered_field_alias            : filtered_field_alias,
-      attribute_name_do_action        : attribute_name_do_action,
-      admin_attr_field_do_action      : admin_attr_field_do_action,
-      searchable_attr_fields_options  : searchable_attr_fields_options,
-      searchable_attr_field_do_action : searchable_attr_field_do_action,
-    });
+    var attributes = {
+      slug          : slug,
+      gslug         : gslug,
+      group         : group,
+      wp_properties : wp_properties
+    }
+
+    jQuery.extend( attributes, wpp_property_attributes_variables );
+
+    var row = new wppAttribute( attributes );
     _wppAttributes.add(row);
   });
 
@@ -203,11 +201,7 @@ jQuery(document).ready(function($) {
               <input type="text" class="slug wpp_stats_slug_field" readonly='readonly' value="<%= slug %>"/>
             </label>
 
-            <?php if( defined( 'WP_PROPERTY_FIELD_ALIAS' ) && WP_PROPERTY_FIELD_ALIAS ) { ?>
-            <label class="wpp-meta-alias-entry">
-              <input type="text" class="slug wpp_field_alias" name="wpp_settings[field_alias][<%= slug %>]" placeholder="Alias for <%= slug %>" value="<%= filtered_field_alias[slug] %>" />
-            </label>
-            <?php } ?>
+            <?php do_action( "wpp::settings::developer::attributes::item_advanced_options" ); ?>
 
             <% if( jQuery.inArray(slug, wp_properties.geo_type_attributes) != -1){ %>
               <div class="wpp_notice">

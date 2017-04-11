@@ -29,11 +29,9 @@ namespace UsabilityDynamics\WPP {
 
       public $layouts_settings = null;
 
+      public $property_customizer = null;
+
       public $layouts = null;
-
-      public $elastic = null;
-
-      private $register;
 
       /**
        * Handle some stuff very early
@@ -43,6 +41,12 @@ namespace UsabilityDynamics\WPP {
       public function boot()
       {
 
+        //** Initiate Meta Box Handler */
+        new Meta_Box();
+
+        // Parse feature falgs, set constants.
+        $this->parse_feature_flags();
+
         // Take care about our features before plugins loaded!
         $this->load_features();
 
@@ -51,37 +55,92 @@ namespace UsabilityDynamics\WPP {
       /**
        * May be load WP-Property Features
        *
-       * @todo Fix issue with Elasticpress activation triggering fatal error. (if (WP_PROPERTY_ELASTICSEARCH_SERVICE) flag is on)
-       * @TODO: Fix Flag conditions: constants are still not defined on this step.
-       *
        * @author peshkov@UD
        */
       public function load_features()
       {
         // Autoload all our features
-        require_once ( dirname( __DIR__ ) . '/autoload/autoload.php' );
+        require_once(dirname(__DIR__) . '/autoload/autoload.php');
+
+        // May be load Features
+
+        // Start Taxonomies
+
+        // Enables [wpp_location] Taxonomy
+        if ( WPP_FEATURE_FLAG_WPP_LISTING_LOCATION ) {
+          new Taxonomy_WPP_Location();
+        }
+
+        // Enables [wpp_listing_status] Taxonomy
+        if ( WPP_FEATURE_FLAG_WPP_LISTING_STATUS ) {
+          new Taxonomy_WPP_Listing_Status();
+        }
+
+        // Enables [wpp_listing_type] Taxonomy
+        if( WPP_FEATURE_FLAG_WPP_LISTING_TYPE ) {
+          new Taxonomy_WPP_Listing_Type();
+        }
+
+        // Enables [wpp_schools] Taxonomy
+        if ( WPP_FEATURE_FLAG_WPP_SCHOOLS ) {
+          new Taxonomy_WPP_Schools();
+        }
+
+        // Enables [wpp_listing_policy] taxonomy.
+        if ( WPP_FEATURE_FLAG_WPP_LISTING_POLICY ) {
+          new Taxonomy_WPP_Listing_Policy();
+        }
+
+        // Enables [wpp_listing_label] taxonomy.
+        if ( WP_PROPERTY_FLAG_WPP_LISTING_LABEL ) {
+          new Taxonomy_WPP_Listing_Label();
+        }
+
+        // Enables [wpp_categorical] taxonomy for multiple terms.
+        if ( WPP_FEATURE_FLAG_WPP_CATEGORICAL ) {
+          new Taxonomy_WPP_Categorical();
+        }
+
+        // Enables [wpp_listing_category] taxonomy.
+        if ( WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY ) {
+          new Taxonomy_WPP_Listing_Category();
+        }
+
+        // End Taxonomies
+
+        if( WP_PROPERTY_LEGACY_META_ATTRIBUTES ) {
+          new Legacy_Meta_Attributes();
+        }
+
+        // Invoke Elasticsearch Handler.
+        if ( WP_PROPERTY_ELASTICSEARCH_SERVICE ) {
+          new Elasticsearch();
+        }
+
+        // Apply alises.
+        if( WP_PROPERTY_FIELD_ALIAS ) {
+          $this->alias = new Field_Alias();
+        }
+
+        // Maybe load our built-in Add-ons
 
         // Enable Supermap
-        //if( defined( 'WP_PROPERTY_FLAG_ENABLE_SUPERMAP' ) && WP_PROPERTY_FLAG_ENABLE_SUPERMAP && !defined( 'WPP_SUPERMAP_VENDOR_LOAD' ) ) {
-        if( !defined( 'WPP_SUPERMAP_VENDOR_LOAD' ) ) {
-          define( 'WPP_SUPERMAP_VENDOR_LOAD', true );
+        if( WP_PROPERTY_FLAG_ENABLE_SUPERMAP && !defined( 'WPP_SUPERMAP_VENDOR_LOAD' ) ) {
+          define('WPP_SUPERMAP_VENDOR_LOAD', true );
         }
         // Enable Agents
-        //if( defined( 'WP_PROPERTY_FLAG_ENABLE_AGENTS' ) && WP_PROPERTY_FLAG_ENABLE_AGENTS && !defined( 'WPP_AGENTS_VENDOR_LOAD' )) {
-        if( !defined( 'WPP_AGENTS_VENDOR_LOAD' )) {
-          define( 'WPP_AGENTS_VENDOR_LOAD', true );
+        if( WP_PROPERTY_FLAG_ENABLE_AGENTS && !defined( 'WPP_AGENTS_VENDOR_LOAD' )) {
+          define('WPP_AGENTS_VENDOR_LOAD', true);
         }
 
         // Enable Terms
-        //if( defined( 'WP_PROPERTY_FLAG_ENABLE_TERMS' ) && WP_PROPERTY_FLAG_ENABLE_TERMS && !defined( 'WPP_TERMS_VENDOR_LOAD' )) {
-        if( !defined( 'WPP_TERMS_VENDOR_LOAD' )) {
-          define( 'WPP_TERMS_VENDOR_LOAD', true );
+        if( WP_PROPERTY_FLAG_ENABLE_TERMS && !defined( 'WPP_TERMS_VENDOR_LOAD' )) {
+          define('WPP_TERMS_VENDOR_LOAD', true);
         }
 
         // Enable RETS Client
-        //if( defined( 'RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET' ) && RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET && !defined( 'WP_RETS_CLIENT_VENDOR_LOAD' )) {
-        if( !defined( 'WP_RETS_CLIENT_VENDOR_LOAD' )) {
-          define( 'WP_RETS_CLIENT_VENDOR_LOAD', true );
+        if( RETSCI_FEATURE_FLAG && !defined( 'WP_RETS_CLIENT_VENDOR_LOAD' )) {
+          define('WP_RETS_CLIENT_VENDOR_LOAD', true);
         }
 
       }
@@ -92,9 +151,6 @@ namespace UsabilityDynamics\WPP {
       public function init()
       {
         global $wp_properties;
-
-        // Parse feature falgs, set constants.
-        $this->parse_feature_flags();
 
         add_action('admin_head', function () {
           global $wp_properties, $_wp_admin_css_colors;
@@ -139,16 +195,20 @@ namespace UsabilityDynamics\WPP {
             'name' => $this->name,
             'version' => $this->args['version'],
             'domain' => $this->domain,
-            'cache_dir' => $upload_dir['basedir'] . '/wpp_cache',
-            'cache_url' => $upload_dir['baseurl'] . '/wpp_cache',
           )
         ));
 
-        // Register site with SaaS Services.
-        $this->register = class_exists( 'UsabilityDynamics\SAAS_UTIL\Register' ) ? new Register( 'property' ) : null;
-
-        // $this->register->register_blog();
-        // $this->register->create_subscription();
+        // Register Product with SaaS Services.
+        if( class_exists( 'UsabilityDynamics\SAAS_UTIL\Register' ) && $this->get_schema( "extra.saasProduct", false ) ) {
+          Register::product( $this->get_schema( "extra.saasProduct" ), array(
+            "name" => $this->name,
+            "slug" => $this->slug,
+            "version" => $this->args[ "version" ],
+            "type" => "plugin",
+            // Commented for now since it may contain too big data
+            //"wpp_settings" => $this->settings->get()
+          ) );
+        }
 
         //** Initiate Attributes Handler */
         new Attributes();
@@ -159,22 +219,17 @@ namespace UsabilityDynamics\WPP {
         //** Handles Export (XML/JSON/CSV) functionality */
         new Export();
 
-        // Invoke Elasticsearch Handler.
-        if( defined( 'WP_PROPERTY_ELASTICSEARCH_SERVICE' ) && WP_PROPERTY_ELASTICSEARCH_SERVICE && class_exists( 'UsabilityDynamics\WPP\Elasticsearch' )) {
-          $this->elastic = new Elasticsearch();
-        }
-
         /** Initiate WPML class if WPML plugin activated. **/
         if (function_exists('icl_object_id')) {
           new \UsabilityDynamics\WPP\WPML();
         }
+
         //** Initiate Admin UI */
         if (is_admin()) {
           //** Initiate Admin Handler */
           new Admin();
 
-          //** Initiate Meta Box Handler */
-          new Meta_Box();
+
 
           //** Setup Gallery Meta Box ( wp-gallery-metabox ) */
           add_action('be_gallery_metabox_post_types', function ($post_types = array()) {
@@ -224,16 +279,12 @@ namespace UsabilityDynamics\WPP {
         add_filter('upgrader_process_complete', array('UsabilityDynamics\WPP\Bootstrap', 'upgrader_process_complete'), 10, 2);
 
         // New layout feature. Feature flag must be enabled.
-        if( defined( 'WP_PROPERTY_LAYOUTS' ) && WP_PROPERTY_LAYOUTS === true ) {
+        if ( WP_PROPERTY_LAYOUTS ) {
+          $this->layouts_settings = new Layouts_Settings();
+          $this->layouts = new Layouts();
 
-          if( !empty( $wp_properties[ 'configuration' ][ 'enable_layouts' ] ) && $wp_properties[ 'configuration' ][ 'enable_layouts' ] == 'false' ) {
-            $this->layouts_settings = new Layouts_Settings();
-            $this->layouts = new Layouts();
-
-            //** WP Property Customizer */
-            new WP_Property_Customizer();
-          }
-
+          //** WP Property Customizer */
+          $this->property_customizer = new WP_Property_Customizer();
         }
 
       }
@@ -331,74 +382,76 @@ namespace UsabilityDynamics\WPP {
        * @author potanin@UD
        * @return array|mixed
        */
-      static public function get_update_check_result() {
+      static public function get_update_check_result()
+      {
 
-        if( get_site_transient( 'wpp_product_updates' ) && !isset( $_GET['force-check'] ) ) {
+        if (get_site_transient('wpp_product_updates') && !isset($_GET['force-check'])) {
 
-          $_transient = get_site_transient( 'wpp_product_updates' );
+          $_transient = get_site_transient('wpp_product_updates');
 
-          if( is_array( $_transient ) ) {
+          if (is_array($_transient)) {
             return $_transient;
           }
 
         }
 
-        $_products = array( 'wp-property' => 'wp-property/wp-property.php' );
+        $_products = array('wp-property' => 'wp-property/wp-property.php');
 
-        foreach( $_products as $_product_name => $_product_path ) {
+        foreach ($_products as $_product_name => $_product_path) {
 
           try {
 
             // Must be able to parse composer.json from plugin file, hopefully to detect the "_build.sha" field.
-            $_composer = json_decode( @file_get_contents(  trailingslashit( WPP_Path ) .'/composer.json' )  );
+            $_composer = json_decode(@file_get_contents(trailingslashit(WPP_Path) . '/composer.json'));
 
-            if( is_object( $_composer ) && $_composer->extra && isset( $_composer->extra->_build ) && !isset( $_composer->extra->_build->sha ) ) {
+            if (is_object($_composer) && $_composer->extra && isset($_composer->extra->_build) && !isset($_composer->extra->_build->sha)) {
 
               continue;
             }
 
-            if( is_object( $_composer ) && $_composer->extra && isset( $_composer->extra->_build ) && isset( $_composer->extra->_build->sha ) ) {
+            if (is_object($_composer) && $_composer->extra && isset($_composer->extra->_build) && isset($_composer->extra->_build->sha)) {
               $_version = $_composer->extra->_build->sha;
             } else {
               $_version = null;
             }
 
-            $_detail[ $_product_name ] = array(
-              'request_url' => 'https://api.usabilitydynamics.com/v1/product/updates/' . $_product_name . '/latest/?version=' . ( isset( $_version ) ? $_version : '' ),
+            $_detail[$_product_name] = array(
+              'request_url' => 'https://api.usabilitydynamics.com/v1/product/updates/' . $_product_name . '/latest/?version=' . (isset($_version) ? $_version : ''),
               'product_path' => $_product_path,
               'response' => null,
-              'have_update' => isset( $_composer->extra->_build->sha ) ? null : false
+              'have_update' => isset($_composer->extra->_build->sha) ? null : false
             );
 
 
-            $_response = wp_remote_get( $_detail[ $_product_name ]['request_url'] );
+            $_response = wp_remote_get($_detail[$_product_name]['request_url']);
 
-            if( wp_remote_retrieve_response_code( $_response ) === 200 ) {
-              $_body = wp_remote_retrieve_body( $_response );
-              $_body = json_decode( $_body );
+            if (wp_remote_retrieve_response_code($_response) === 200) {
+              $_body = wp_remote_retrieve_body($_response);
+              $_body = json_decode($_body);
 
-              if( isset( $_body->data )) {
-                $_detail[ $_product_name ]['response'] = $_body->data;
+              if (isset($_body->data)) {
+                $_detail[$_product_name]['response'] = $_body->data;
 
-                if( !$_body->data->changesSince || $_body->data->changesSince > 0 )  {
-                  $_detail[ $_product_name ]['have_update'] = true;
+                if (!$_body->data->changesSince || $_body->data->changesSince > 0) {
+                  $_detail[$_product_name]['have_update'] = true;
                 }
 
               } else {
-                $_detail[ $_product_name ]['response'] = null;
-                $_detail[ $_product_name ]['have_update'] = false;
+                $_detail[$_product_name]['response'] = null;
+                $_detail[$_product_name]['have_update'] = false;
               }
             }
 
-          } catch ( \Exception $e ) {}
+          } catch (\Exception $e) {
+          }
 
         }
 
-        if( isset( $_detail ) ) {
-          $_transient_result = set_site_transient( 'wpp_product_updates', array( 'data' => $_detail, 'cached' => true ), 3600 );
+        if (isset($_detail)) {
+          $_transient_result = set_site_transient('wpp_product_updates', array('data' => $_detail, 'cached' => true), 3600);
         }
 
-        return array( 'data' => isset( $_detail ) ? $_detail : null, 'cached' => false, 'transient_result' => isset( $_transient_result ) ? $_transient_result : 0 );
+        return array('data' => isset($_detail) ? $_detail : null, 'cached' => false, 'transient_result' => isset($_transient_result) ? $_transient_result : 0);
 
       }
 
@@ -406,8 +459,9 @@ namespace UsabilityDynamics\WPP {
        * @param $response
        * @param null $old_value
        */
-      static public function upgrader_process_complete($response, $old_value = null) {
-        delete_site_transient( 'wpp_product_updates' );
+      static public function upgrader_process_complete($response, $old_value = null)
+      {
+        delete_site_transient('wpp_product_updates');
       }
 
       /**
@@ -437,9 +491,9 @@ namespace UsabilityDynamics\WPP {
 
         $_ud_get_product_updates = self::get_update_check_result();
 
-        foreach( (array) $_ud_get_product_updates['data']  as $_product_short_name => $_product_detail ) {
-          if( $_product_detail['have_update'] ) {
-            $response->response[ $_product_detail['product_path'] ] = $_product_detail['response'];
+        foreach ((array)$_ud_get_product_updates['data'] as $_product_short_name => $_product_detail) {
+          if ($_product_detail['have_update']) {
+            $response->response[$_product_detail['product_path']] = $_product_detail['response'];
           }
 
         }
@@ -467,10 +521,10 @@ namespace UsabilityDynamics\WPP {
             // throw new Error( "unable to parse."  );
           }
 
-          if( isset( $_parsed ) && isset( $_parsed->extra ) && isset( $_parsed->extra->featureFlags )) {
-            foreach( (array)$_parsed->extra->featureFlags as $_feature ) {
-              if( !defined( $_feature->constant ) ) {
-                define( $_feature->constant, $_feature->enabled );
+          if (isset($_parsed) && isset($_parsed->extra) && isset($_parsed->extra->featureFlags)) {
+            foreach ((array)$_parsed->extra->featureFlags as $_feature) {
+              if (!defined($_feature->constant)) {
+                define($_feature->constant, $_feature->enabled);
               }
             }
           }
@@ -494,8 +548,8 @@ namespace UsabilityDynamics\WPP {
             return array();
           }
 
-          if( isset( $_parsed ) && isset( $_parsed->extra ) && isset( $_parsed->extra->featureFlags )) {
-            return (array) $_parsed->extra->featureFlags;
+          if (isset($_parsed) && isset($_parsed->extra) && isset($_parsed->extra->featureFlags)) {
+            return (array)$_parsed->extra->featureFlags;
           }
 
         } catch (Exception $e) {

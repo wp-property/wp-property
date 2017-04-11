@@ -21,7 +21,7 @@ namespace UsabilityDynamics\WPP\Widgets {
      * Init
      */
     public function __construct() {
-      parent::__construct( 'wpp_property_terms', $name = sprintf( __( '%1s Terms', ud_get_wp_property()->domain ), \WPP_F::property_label() ), array( 'description' => __( 'Renders property terms for specific taxonomy.', ud_get_wp_property()->domain ) ) );
+      parent::__construct( WPP_LEGACY_WIDGETS ? 'wpp_property_terms' : 'wpp_property_terms_v2', $name = sprintf( __( '%1s Terms', ud_get_wp_property()->domain ), \WPP_F::property_label() ), array( 'description' => __( 'Renders property terms for specific taxonomy.', ud_get_wp_property()->domain ) ) );
     }
 
     /**

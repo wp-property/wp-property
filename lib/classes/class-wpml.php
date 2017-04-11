@@ -333,7 +333,7 @@ namespace UsabilityDynamics\WPP {
       global $wp_properties;
       $attributes = $wp_properties['property_stats'];
       $property_types = $wp_properties['property_types'];
-      $property_meta = $wp_properties['property_meta'];
+      $property_meta =  !empty( $wp_properties['property_meta'] ) ? $wp_properties['property_meta'] : array();
       $property_terms = $wp_properties['taxonomies'];
      
       if( $attr_key = array_search($v,$attributes) ){
@@ -400,18 +400,6 @@ namespace UsabilityDynamics\WPP {
         }
       }
       return false;
-    }
-    /**
-     * Get translated text for property meta
-     * @auther Fadi Yousef
-     */
-    public function get_property_meta_translation($v){
-      $meta_package = array(
-        'kind' => 'Property Meta',
-        'name' => 'custom-meta',
-      'title' => 'Property Meta',
-      );
-      return apply_filters( 'wpml_translate_string', $v,$v, $meta_package );
     }
 
     /**

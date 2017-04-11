@@ -39,49 +39,14 @@ if (!defined('WPP_Templates')) {
   define('WPP_Templates', WPP_Path . 'static/views');
 }
 
-if (!function_exists('parse_feature_flags')) {
-  /**
-   * Set Feature Flag constants by parsing composer.json
-   *
-   * @todo Make sure settings from DB can override these.
-   *
-   * @author potanin@UD
-   * @return array|mixed|null|object
-   */
-  function parse_feature_flags()
-  {
-    try {
-      $_raw = file_get_contents(plugin_dir_path(__FILE__) . 'composer.json');
-      $_parsed = json_decode($_raw);
-      // @todo Catch poorly formatted JSON.
-      if (!is_object($_parsed)) {
-        // throw new Error( "unable to parse."  );
-      }
-      foreach ((array)$_parsed->extra->featureFlags as $_feature) {
-        if (!defined($_feature->constant)) {
-          define($_feature->constant, $_feature->enabled);
-        }
-      }
-    } catch (Exception $e) {
-      echo 'Caught exception: ', $e->getMessage(), "\n";
-    }
-    return isset($_parsed) ? $_parsed : null;
-  }
-
-  // Init feature flags
-  parse_feature_flags();
-
-}
-
 // Use Freemius is flag is enabled.
-if (defined('WPP_FEATURE_FLAG_FREEMIUS') && WPP_FEATURE_FLAG_FREEMIUS) {
+if ( defined( 'WPP_FEATURE_FLAG_FREEMIUS' ) && WPP_FEATURE_FLAG_FREEMIUS ) {
 
   // add_filter('connect_message_on_update', function($message, $user_first_name, $plugin_title, $user_login, $site_link, $freemius_link) {}, 10, 6 );
   // add_filter('connect_message', function() {});
 
   // Create a helper function for easy SDK access.
-  function wpp_fs()
-  {
+  function wpp_fs() {
     global $wpp_fs;
 
     if (!isset($wpp_fs)) {
@@ -201,15 +166,19 @@ if (!function_exists('ud_my_wp_plugin_message')) {
 
 // An alias for "ud_get_wp_property"
 if (!function_exists('wpp')) {
-
-  function wpp($key = false, $default = null)
-  {
+  function wpp($key = false, $default = null) {
     return ud_get_wp_property($key, $default);
   }
-
 }
 
 //** Initialize. */
 if (ud_check_wp_property()) {
   ud_get_wp_property();
+}
+
+/**
+ * WP CLI Commands
+ */
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+  require_once( 'bin/wp-cli.php' );
 }

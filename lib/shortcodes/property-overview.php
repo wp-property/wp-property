@@ -24,7 +24,7 @@ namespace UsabilityDynamics\WPP {
 
         $custom_attributes = ud_get_wp_property('property_stats', array());
 
-        $image_sizes = array('' => __('No Image', ud_get_wp_property('domain')));
+        $image_sizes = array('' => __('No Image', ud_get_wp_property()->domain));
         foreach (get_intermediate_image_sizes() as $name) {
           $sizes = \WPP_F::image_sizes($name);
           if (!$sizes) {
@@ -34,10 +34,10 @@ namespace UsabilityDynamics\WPP {
         }
 
         $sort_by = array(
-          'post_date' => sprintf(__('Post Date (%s)', ud_get_wp_property('domain')), 'post_date'),
-          'post_modified' => sprintf(__('Modified Date (%s)', ud_get_wp_property('domain')), 'post_modified'),
-          'random' => sprintf(__('Random (%s)', ud_get_wp_property('domain')), 'random'),
-          'menu_order' => sprintf(__('Menu Order (%s)', ud_get_wp_property('domain')), 'menu_order'),
+          'post_date' => sprintf(__('Post Date (%s)', ud_get_wp_property()->domain), 'post_date'),
+          'post_modified' => sprintf(__('Modified Date (%s)', ud_get_wp_property()->domain), 'post_modified'),
+          'random' => sprintf(__('Random (%s)', ud_get_wp_property()->domain), 'random'),
+          'menu_order' => sprintf(__('Menu Order (%s)', ud_get_wp_property()->domain), 'menu_order'),
         );
 
         $sortable_atts = ud_get_wp_property('sortable_attributes', array());
@@ -59,24 +59,30 @@ namespace UsabilityDynamics\WPP {
               'default' => ''
             ),
             'post_parent' => array(
-              'name' => sprintf(__('Parent %s', ud_get_wp_property('domain')), \WPP_F::property_label()),
-              'description' => sprintf(__('If not empty, result will show children of particular property, which ID is set. You can use dynamic attributes instead of ID such as %1$s or %2$s.<br/>%1$s - to list all the listings that are a child of the current %3$s.<br/>%2$s - to list all listings that are children of the same parent (i.e. siblings) of the current %3$s', ud_get_wp_property('domain')), '<b>post_id</b>', '<b>post_parent</b>', \WPP_F::property_label()),
+              'name' => sprintf(__('Parent %s', ud_get_wp_property()->domain), \WPP_F::property_label()),
+              'description' => sprintf(__('If not empty, result will show children of particular property, which ID is set. You can use dynamic attributes instead of ID such as %1$s or %2$s.<br/>%1$s - to list all the listings that are a child of the current %3$s.<br/>%2$s - to list all listings that are children of the same parent (i.e. siblings) of the current %3$s', ud_get_wp_property()->domain), '<b>post_id</b>', '<b>post_parent</b>', \WPP_F::property_label()),
+              'type' => 'text',
+              'default' => ''
+            ),
+            'wpp_agents' => array(
+              'name' => __('Assigned Agent ID', ud_get_wp_property()->domain),
+              'description' => sprintf( __('Optional. If set, shows only %s to which Agent belongs', ud_get_wp_property()->domain), \WPP_F::property_label( 'plural' ) ),
               'type' => 'text',
               'default' => ''
             ),
             'property_type' => array(
-              'name' => sprintf(__('%s Type', ud_get_wp_property('domain')), \WPP_F::property_label()),
-              'description' => sprintf(__('The list of %s types to be included. If no type checked, all available %s will be shown.', ud_get_wp_property('domain')), \WPP_F::property_label(), \WPP_F::property_label('plural')),
+              'name' => sprintf(__('%s Type', ud_get_wp_property()->domain), \WPP_F::property_label()),
+              'description' => sprintf(__('The list of %s types to be included. If no type checked, all available %s will be shown.', ud_get_wp_property()->domain), \WPP_F::property_label(), \WPP_F::property_label('plural')),
               'type' => 'multi_checkbox',
               'options' => ud_get_wp_property('property_types'),
             ),
             'featured' => array(
-              'name' => sprintf(__('Show only Featured %s', ud_get_wp_property('domain')), \WPP_F::property_label('plural')),
+              'name' => sprintf(__('Show only Featured %s', ud_get_wp_property()->domain), \WPP_F::property_label('plural')),
               'type' => 'checkbox',
             ),
             'custom_query' => array(
               'name' => __('Custom Query by Attributes Values', ud_get_wp_property()->domain),
-              'description' => sprintf(__('Setup your custom query by providing values for specific attributes. Empty values will be ignored. Example:<br/>- to list only %1$s which have minimum 2 and maximum 4 bedrooms, you should set <b>2-4</b> value for your Bedrooms attribute.<br/>- to list only %1$s which have 1 or 3 bathrooms, you should set <b>1,3</b> value for your Bathrooms attribute.', ud_get_wp_property('domain')), \WPP_F::property_label()),
+              'description' => sprintf(__('Setup your custom query by providing values for specific attributes. Empty values will be ignored. Example:<br/>- to list only %1$s which have minimum 2 and maximum 4 bedrooms, you should set <b>2-4</b> value for your Bedrooms attribute.<br/>- to list only %1$s which have 1 or 3 bathrooms, you should set <b>1,3</b> value for your Bathrooms attribute.', ud_get_wp_property()->domain), \WPP_F::property_label()),
               'type' => 'custom_attributes',
               'options' => $custom_attributes,
             ),
@@ -148,7 +154,7 @@ namespace UsabilityDynamics\WPP {
             ),
             'template' => array(
               'name' => __('Template', ud_get_wp_property()->domain),
-              'description' => sprintf(__('Sets layout using PHP template name. Your custom template should be stored in your theme\'s root directory. Example:<br/>if your custom template is called %s, the value of template must be %s.', ud_get_wp_property('domain')), '<b>property-overview-grid.php</b>', '<b>grid</b>'),
+              'description' => sprintf(__('Sets layout using PHP template name. Your custom template should be stored in your theme\'s root directory. Example:<br/>if your custom template is called %s, the value of template must be %s.', ud_get_wp_property()->domain), '<b>property-overview-grid.php</b>', '<b>grid</b>'),
               'type' => 'text',
             ),
             'sorter_type' => array(
@@ -356,7 +362,7 @@ namespace UsabilityDynamics\WPP {
         $defaults['unique_hash'] = rand(10000, 99900);
         $defaults['detail_button'] = false;
         $defaults['stats'] = '';
-        $defaults['class'] = 'wpp_property_overview_shortcode';
+        $defaults['class'] = WPP_LEGACY_WIDGETS ? 'wpp_property_overview_shortcode' : 'wpp_property_overview_shortcode_v2';
         $defaults['in_new_window'] = false;
         $defaults['attributes'] = array('phone_number', 'display_address', 'price');
 
@@ -556,7 +562,7 @@ namespace UsabilityDynamics\WPP {
         $template_found = \WPP_F::get_template_part(array(
           "property-overview-{$template}",
           "property-overview-" . sanitize_key($property_type),
-          "property-overview",
+          WPP_LEGACY_WIDGETS ? "property-overview" : "property-overview-v2"
         ), array(ud_get_wp_property()->path('static/views', 'dir')));
 
         if ($template_found) {
@@ -674,10 +680,10 @@ namespace UsabilityDynamics\WPP {
           $script_path = apply_filters("wpp::property_overview::script::path", ud_get_wp_property()->path('static/scripts/property_overview.js', 'url'), $settings);
           wp_enqueue_script("property-overview", $script_path, array('jquery'));
           wp_localize_script("property-overview", "_wpp_overview_pagination", array(
-            "previous" => __('Previous', ud_get_wp_property('domain')),
-            "next" => __('Next', ud_get_wp_property('domain')),
-            "first" => __('First', ud_get_wp_property('domain')),
-            "last" => __('Last', ud_get_wp_property('domain')),
+            "previous" => __('Previous', ud_get_wp_property()->domain),
+            "next" => __('Next', ud_get_wp_property()->domain),
+            "first" => __('First', ud_get_wp_property()->domain),
+            "last" => __('Last', ud_get_wp_property()->domain),
           ));
 
           ob_start(); ?>

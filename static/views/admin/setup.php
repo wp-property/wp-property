@@ -33,8 +33,8 @@ $_standard = UsabilityDynamics\WPP\Setup_Assistant::get_standard_data();
             <li class="wpp_asst_label">
 
               <label>
-                <span><?php echo $_type->label; ?></span>
-                <input type="checkbox" class="wpp_box asst_prop_types" name="wpp_settings[property_types][<?php echo $_type->slug; ?>]" value="<?php echo $_type->label; ?>" <?php if( isset( $wp_properties[ 'property_types' ] ) && in_array( $_type->slug, array_keys( $wp_properties[ 'property_types' ] ) ) ) echo "checked"; ?> />
+                <span><?php echo $_type->displayTitle; ?></span>
+                <input type="checkbox" class="wpp_box asst_prop_types" name="wpp_settings[property_types][<?php echo $_type->slug; ?>]" value="<?php echo $_type->displayTitle; ?>" <?php if( isset( $wp_properties[ 'property_types' ] ) && in_array( $_type->slug, array_keys( $wp_properties[ 'property_types' ] ) ) ) echo "checked"; ?> />
                 <span></span>
               </label>
             </li>
@@ -56,7 +56,7 @@ $_standard = UsabilityDynamics\WPP\Setup_Assistant::get_standard_data();
       </div><!-- wpp_asst_screen wpp_asst_screen_2 -->
     </div><!-- item -->
 
-    <?php if ( defined( 'WP_PROPERTY_FLAG_ENABLE_AGENTS' ) && WP_PROPERTY_FLAG_ENABLE_AGENTS && defined( 'WP_PROPERTY_FLAG_ENABLE_SUPERMAP' ) && WP_PROPERTY_FLAG_ENABLE_SUPERMAP ) { ?>
+    <?php if ( WP_PROPERTY_FLAG_ENABLE_AGENTS && WP_PROPERTY_FLAG_ENABLE_SUPERMAP ) { ?>
     <div class="item  item-wider">
       <div class="wpp_asst_screen wpp_asst_screen_5">
 

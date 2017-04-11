@@ -21,7 +21,7 @@ class WPP_Core {
     global $wp_properties;
 
     // Determine if memory limit is low and increase it
-    if( (int)ini_get( 'memory_limit' ) < 128 ) {
+    if( (int)ini_get( 'memory_limit' ) < 128 && (int)ini_get( 'memory_limit' ) > 0 ) {
       ini_set( 'memory_limit', '128M' );
     }
 
@@ -72,113 +72,6 @@ class WPP_Core {
      */
 
     add_filter( 'wpp_get_properties_query', array( $this, 'fix_tax_property_query' ));
-
-    // Apply alises.
-    if( defined( 'WP_PROPERTY_FIELD_ALIAS' ) && WP_PROPERTY_FIELD_ALIAS ) {
-      add_filter( 'wpp_get_property', array( $this, 'apply_property_alias' ), 50, 2 );
-      add_filter( 'wpp_get_properties_query', array( $this, 'apply_properties_query_alias' ), 50 );
-      // add_filter( 'get_post_metadata', array( $this, 'alias_get_post_metadata' ), 50, 4 );
-    }
-
-  }
-
-  /**
-   * Direct Meta Override
-   *
-   * @param $false
-   * @param $object_id
-   * @param $meta_key
-   * @param $single
-   * @return mixed
-   */
-  static public function alias_get_post_metadata( $false, $object_id, $meta_key, $single ) {
-
-    if( $meta_key === 'short_address' ) {
-      return get_post_meta( $object_id, 'formatted_address_simple', $single );
-    }
-
-    if( $meta_key === 'address' ) {
-      return get_post_meta( $object_id, 'formatted_address', $single );
-    }
-
-    return $false;
-
-  }
-
-  /**
-   * Apply field alias to property object.
-   *
-   * - Alias will overwrite actual if alias exists, regardless of if actual exists.
-   *
-   * @param $property
-   * @param $args
-   * @return mixed
-   */
-  static public function apply_property_alias( $property, $args ) {
-
-    $_result = array();
-
-    // add terms to object.
-    // apply alias logic.
-    foreach( (array) WPP_F::get_alias_map() as $_defined_field => $_target ) {
-
-      if( strpos( $_target, 'tax_input.' ) === 0 ) {
-        $_term_group_match = explode( '.', $_target );
-        $_alias_value = wp_get_object_terms( $property['ID'], $_term_group_match[1], array( 'fields' => 'names' ) );
-      }
-
-      // try meta, defined taxonomy
-      if( !isset( $_alias_value ) || !$_alias_value ) {
-        $_alias_value  = isset( $property[ $_target ] ) ? $property[ $_target ] : null;
-      }
-
-      // Support for dynamic taxonomies.
-      if( !isset( $_alias_value ) || !$_alias_value ) {
-        WPP_F::verify_have_system_taxonomy( $_target );
-        $_alias_value = wp_get_object_terms( $property['ID'], $_target, array( 'fields' => 'names' ) );
-      }
-
-      // Alias value found.
-      if( $_alias_value ) {
-        $property[ $_defined_field ] = $_alias_value;
-        $_result[] = "Applied target [$_target] alias to [$_defined_field].";
-      }
-
-    }
-
-    WPP_F::debug( 'apply_property_alias', array( 'id' => $property['ID']) );
-
-    //die( '<pre>' . print_r( $_result, true ) . '</pre>' );
-    //WPP_F::debug( 'apply_property_alias:detail',$_result );
-
-    return $property;
-
-
-  }
-
-  /**
-   * Apply field alises to property query.
-   *
-   * @param $query
-   * @return mixed
-   */
-  static public function apply_properties_query_alias( $query ) {
-
-    $_result = array();
-
-    foreach( (array) WPP_F::get_alias_map() as $_alias => $_target ) {
-
-      if( isset( $query[ $_alias ] ) ) {
-        $query[ $_target ] = $query[ $_alias ];
-        $_result[] = "Applied target [$_target] alias to [$_alias].";
-        unset( $query[ $_alias ] );
-      }
-
-    }
-
-    //WPP_F::debug( 'apply_properties_query_alias', array( 'query' => $query, 'result' => $_result ) );
-
-    return $query;
 
   }
 
@@ -279,7 +172,6 @@ class WPP_Core {
    *
    */
   function init_upper() {
-    global $wp_properties;
 
     //** Init action hook */
     do_action( 'wpp_init' );
@@ -303,20 +195,6 @@ class WPP_Core {
     add_action( 'widgets_init', array( 'WPP_F', 'widgets_init' ) );
 
     do_action( 'wpp_init:end', $this );
-
-    if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_TYPE' ) && WPP_FEATURE_FLAG_WPP_LISTING_TYPE ) {
-      add_action( 'created_wpp_listing_type', array($this, 'term_created_wpp_listing_type'), 10, 2 );
-      add_action( 'edited_wpp_listing_type', array($this, 'term_created_wpp_listing_type'), 10, 2 );
-      add_action( 'delete_wpp_listing_type', array($this, 'term_delete_wpp_listing_type'), 10, 4 );
-      add_action( 'wpp_settings_save', array('WPP_F', 'create_property_type_terms'), 10, 2 );
-
-      // Run activation task after plugin fully activated.
-      if(get_option('wpp_activated') ){
-        WPP_F::add_wpp_listing_type_from_existing_terms();
-        WPP_F::create_property_type_terms($wp_properties, $wp_properties);
-        delete_option('wpp_activated');
-      }
-    }
 
   }
 
@@ -377,6 +255,7 @@ class WPP_Core {
 
     //** Contextual Help */
     add_action( 'wpp_contextual_help', array( $this, 'wpp_contextual_help' ) );
+    add_action( 'delete_attachment', array( $this, 'maybe_delete_l10n_script_option' ) );
 
     //** Page loading handlers */
     add_action( 'load-property_page_property_settings', array( 'WPP_F', 'property_page_property_settings_load' ) );
@@ -413,7 +292,7 @@ class WPP_Core {
 
     wp_register_script( 'wp-property-backend-global', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-backend-editor', WPP_URL . 'scripts/wpp.admin.editor.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable' ), WPP_Version );
+    wp_register_script( 'wp-property-global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable', 'wpp-jquery-fancybox' ), WPP_Version );
     wp_register_script( 'jquery-cookie', WPP_URL . 'scripts/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
 
     // Use Google Maps API Key, if provided.
@@ -431,7 +310,12 @@ class WPP_Core {
     wp_register_script( 'wpp-jquery-validate', WPP_URL . 'scripts/jquery.validate.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'scripts/jquery.number.format.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wp-property-galleria', WPP_URL . 'scripts/galleria/galleria-1.2.5.js', array( 'jquery', 'wpp-localization' ) );
-    
+
+    /* New script for property search shortcode */
+    wp_register_script( 'wpp-search-form', WPP_URL . 'scripts/wpp.search_form.js', array( 'jquery' ) );
+
+    /* New script for property gallery */
+    wp_register_script( 'wp-property-gallery', WPP_URL . 'scripts/wp-property-gallery.js', array( 'jquery' ) );
 
 
     // Load localized scripts
@@ -478,14 +362,13 @@ class WPP_Core {
     } elseif( file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
       wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), WPP_Version );
     } elseif( $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-
-
-      // these are the legacy styles.
-      // wp_register_style( 'wp-property-frontend', WPP_URL . 'styles/wp_properties.css', array(), WPP_Version );
-
-      // load the new v2.3 styles
-      if( isset( $wp_properties['configuration'] ) && isset( $wp_properties['configuration']['enable_layouts'] ) && $wp_properties['configuration']['enable_layouts'] == 'false') {
-        wp_register_style( 'wp-property-frontend', WPP_URL . 'styles/wpp.public.v2.3.css', array(), WPP_Version );
+      
+      if (WP_PROPERTY_LAYOUTS) {
+        // load the new v2.3 styles
+        wp_register_style('wp-property-frontend', WPP_URL . 'styles/wpp.public.v2.3.css', array(), WPP_Version);
+      } else {
+        // these are the legacy styles.
+        wp_register_style('wp-property-frontend', WPP_URL . 'styles/wp_properties.css', array(), WPP_Version);
       }
 
 
@@ -783,14 +666,6 @@ class WPP_Core {
 
     $update_data = $_REQUEST[ 'wpp_data' ][ 'meta' ];
 
-    if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_TYPE' ) ) {
-      // if wpp_listing_type is set then update property_type attribute.
-      if(isset($_REQUEST[ 'wpp_listing_type' ])){
-        $term   = get_the_terms($post_id, 'wpp_listing_type');
-        if(is_object($term[0]))
-          update_post_meta($post_id, 'property_type', $term[0]->slug);
-      }
-    }
     //** Neccessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
     if( empty( $_REQUEST[ 'exclude_from_supermap' ] ) ) {
       if( !metadata_exists( 'post', $post_id, 'exclude_from_supermap' ) ) {
@@ -1348,10 +1223,38 @@ class WPP_Core {
       return;
     }
 
+    $is_cap_added = false;
     foreach( $wpp_capabilities as $cap => $value ) {
       if( empty( $role->capabilities[ $cap ] ) ) {
         $role->add_cap( $cap );
+        $is_cap_added = true;
       }
+    }
+
+    // If current user with admin privileges
+    // And we just set new caps for admin role
+    // We re-set the current user with new caps
+    // Issue: https://github.com/wp-property/wp-property/issues/413
+    if ( $is_cap_added && current_user_can( 'manage_options' ) ) {
+      global $current_user;
+      $user_id = get_current_user_id();
+      $current_user = null;
+      WPP_F::debug( 'Update current user with new caps' );
+      wp_set_current_user($user_id);
+    }
+
+  }
+
+  /**
+   * Delete l10n option if attachment is deleted.
+   *
+   * @since 2.2.1
+   * @author Alim
+   */
+  public function maybe_delete_l10n_script_option($post_id){
+    $l10n_id = get_option('wp-property-l10n-attachment');
+    if($l10n_id == $post_id){
+      delete_option('wp-property-l10n-attachment');
     }
   }
 
@@ -1363,22 +1266,61 @@ class WPP_Core {
    * @author peshkov@UD
    */
   public function maybe_generate_l10n_script() {
-    $dir = untrailingslashit( ud_get_wp_property( 'cache_dir' ) );
-    $file = $dir . '/l10n.js';
-    $url = untrailingslashit( ud_get_wp_property( 'cache_url' ) ) . '/l10n.js';
-    //** File already created! */
-    if( file_exists( $file ) ) {
-      return $url;
+    $l10n_id = get_option('wp-property-l10n-attachment');
+
+    if($l10n_id != false && $attachment_url = wp_get_attachment_url( $l10n_id )){
+      return $attachment_url;
     }
-    //** Try to create directory if it doesn't exist */
-    if( !is_dir( $dir ) && !wp_mkdir_p( $dir ) ) {
-      return false;
-    }
+
+    $upload_dir = wp_upload_dir();
+    $filename   = 'wp-property-l10n.js';
+
+    // Move the file to the uploads dir.
+    $file   = $upload_dir['path'] . "/$filename";
+    // Compute the URL.
+    $url = $upload_dir['url'] . "/$filename";
+
     //** Save file */
-    if( @file_put_contents( $file, 'var wpp = ( typeof wpp === \'object\' ) ? wpp : {}; wpp.strings = ' . json_encode( $this->get_l10n_data() ) . ';' ) ) {
+    if( false === @file_put_contents( $file, 'var wpp = ( typeof wpp === \'object\' ) ? wpp : {}; wpp.strings = ' . json_encode( $this->get_l10n_data() ) . ';' ) ) {
       return false;
     }
-    return $url;
+
+    // Set correct file permissions.
+    $stat = stat( dirname( $file ));
+    $perms = $stat['mode'] & 0000666;
+    @ chmod( $file, $perms );
+
+    if ( is_multisite() ) {
+        delete_transient( 'dirsize_cache' );
+    }
+
+    // Construct the attachment array
+    $attachment = array(
+        'guid' => $url,
+        'post_mime_type' => 'application/javascript',
+        'post_title' => "JS localization file of WP Property",
+    );
+
+    if($l10n_id){
+      $attachment['ID'] = $l10n_id;
+    }
+    
+    // Save the data
+    $id = wp_insert_attachment($attachment, $file);
+    if ( is_wp_error($id) ) {
+      delete_option('wp-property-l10n-attachment');
+      return false;
+    }
+
+    // Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
+    require_once( ABSPATH . 'wp-admin/includes/image.php' );
+
+    // Generate the metadata for the attachment, and update the database record.
+    $attach_data = wp_generate_attachment_metadata( $id, $file );
+    wp_update_attachment_metadata( $id, $attach_data );
+
+    update_option('wp-property-l10n-attachment', $id);
+    return wp_get_attachment_url( $id );
   }
 
   /**
@@ -1495,57 +1437,6 @@ class WPP_Core {
   static function shortcode_property_overview( $atts = '' ) {
     //_deprecated_function( __FUNCTION__, '2.1.0', 'do_shortcode([property_overview])' );
     return UsabilityDynamics\WPP\Property_Overview_Shortcode::render( $atts );
-  }
-
-  /**
-   * Add/update Property Type to $wp_properties when wpp_listing_type
-   * created/updated outside of developer tab of settings page.
-   * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
-   * 
-   * @author Md. Alimuzzaman Alim
-   * 
-   * @param int $term_id
-   * @param int $tt_id
-   * 
-   */
-  function term_created_wpp_listing_type($term_id, $tt_id){
-    global $wp_properties;
-    $term = get_term($term_id, 'wpp_listing_type');
-
-    if(!in_array($term->slug, $wp_properties['property_types']) || $wp_properties['property_types'][$term->slug] != $term->name){
-
-      $wp_properties['property_types'][$term->slug] = $term->name;
-      $wp_properties['property_types_term_id'][$term->slug] = $term->term_id;
-
-      ud_get_wp_property()->set('property_types', $wp_properties['property_types']);
-      ud_get_wp_property()->set('property_types_term_id', $wp_properties['property_types_term_id']);
-      update_option('wpp_settings', $wp_properties);
-    }
-
-  }
-
-  /**
-   * Remove Property Type from $wp_properties when wpp_listing_type
-   * deleted outside of developer tab of settings page.
-   * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
-   * 
-   * @author Md. Alimuzzaman Alim
-   * 
-   * @param int $term_id
-   * @param int $tt_id
-   * @param int $term
-   * 
-   */
-  function term_delete_wpp_listing_type($term_id, $tt_id, $term){
-    global $wp_properties;
-    if(array_key_exists($term->slug, $wp_properties['property_types'])){
-      unset($wp_properties['property_types'][$term->slug]);
-      unset($wp_properties['property_types_term_id'][$term->slug]);
-
-      ud_get_wp_property()->set('property_types', $wp_properties['property_types']);
-      ud_get_wp_property()->set('property_types_term_id', $wp_properties['property_types_term_id']);
-      update_option('wpp_settings', $wp_properties);
-    }
   }
 
 }

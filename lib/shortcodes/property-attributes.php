@@ -38,6 +38,15 @@ namespace UsabilityDynamics\WPP {
         $options = array(
             'id' => 'property_attributes',
             'params' => array(
+              'show_post_content' => array(
+                'name' => __( 'Show post content', ud_get_wp_property()->domain ),
+                'description' => __( '', ud_get_wp_property()->domain ),
+                'type' => 'select',
+                'options' => array(
+                  'true' => __( 'Yes', ud_get_wp_property()->domain ),
+                  'false' => __( 'No', ud_get_wp_property()->domain )
+                )
+              ),
               'sort_by_groups' => array(
                 'name' => __( 'Sort by groups', ud_get_wp_property()->domain ),
                 'description' => __( 'Sort attributes by groups or not', ud_get_wp_property()->domain ),
@@ -130,6 +139,7 @@ namespace UsabilityDynamics\WPP {
       public function call( $atts = "" ) {
 
         $data = shortcode_atts( array(
+          'show_post_content' => 'false',
           'sort_by_groups' => 'true',
           'display' => 'list',
           'show_true_as_image' => 'false',

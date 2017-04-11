@@ -405,6 +405,7 @@ class class_wpp_supermap {
   static public function property_type_settings($settings) {
     ob_start();
     ?>
+    <li>
     <div class="wp-tab-panel supermap_marker_settings">
     <div class="wpp_property_type_supermap_settings">
       <div class="wpp_supermap_marker_image">
@@ -431,6 +432,7 @@ class class_wpp_supermap {
       <div class="clear"></div>
     </div>
     </div>
+    </li>
     <?php
     $content = ob_get_contents();
     ob_end_clean();
@@ -958,7 +960,9 @@ class class_wpp_supermap {
         foreach($area['paths'] as $coords) {
           if(empty($coords))
             continue;
-          $this_area_coords[] = "new google.maps.LatLng({$coords})";
+          $coords = trim($coords, "()" );
+          $coords = explode(',', $coords);
+          $this_area_coords[] = "{lat: {$coords[0]}, lng: {$coords[1]}}";
         }
 
         if(empty($this_area_coords)) {
