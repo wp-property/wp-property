@@ -1,22 +1,24 @@
 (function (jQuery, l10n) {
 
-  var property_overview_box = '.wpp_property_overview_shortcode_v2 .all-properties .property .property_div_box';
+  var property_overview_box = '.all-properties .property .property_div_box';
 
   /**
    *
    */
   function properties_height(container, minHeight, maxHeight) {
-    tallest = (minHeight) ? minHeight : 0;
-    var box = jQuery(container);
-    box.css('height', 'auto');
-    box.each(function () {
-      if (jQuery(this).height() > tallest) {
-        tallest = jQuery(this).height();
-      }
-    });
-    if ((maxHeight) && tallest > maxHeight) tallest = maxHeight;
-    return box.each(function () {
-      jQuery(this).height(tallest); //.css("overflow","auto");
+    jQuery('.wpp_property_overview_shortcode_v2').each(function (k, v) {
+      var tallest = (minHeight) ? minHeight : 0;
+      var box = jQuery(container, jQuery(v));
+      box.css('height', 'auto');
+      box.each(function () {
+        if (jQuery(this).height() > tallest) {
+          tallest = jQuery(this).height();
+        }
+      });
+      if ((maxHeight) && tallest > maxHeight) tallest = maxHeight;
+      box.each(function () {
+        jQuery(this).height(tallest); //.css("overflow","auto");
+      });
     });
   }
 
@@ -640,7 +642,7 @@
         var template_class = jQuery(this).attr('wpp_template');
         jQuery('#wpp_shortcode_' + vars.unique_id).attr('wpp_template', template_class);
         jQuery('#wpp_shortcode_' + vars.unique_id + ' .wpp_template_view .wpp_template_view_button').removeClass('active');
-        jQuery(this).addClass('active');
+        jQuery('#wpp_shortcode_' + vars.unique_id + ' .wpp_template_view .wpp_template_view_button.wpp_template_' + template_class).addClass('active');
         if (template_class == 'grid') {
           properties_height(property_overview_box);
         }
