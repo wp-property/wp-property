@@ -10,7 +10,7 @@ if(trim($list) != ""):
 if($title != ''){
 	echo '<div><strong>'. $title .'</strong></div>';
 }
-echo '<ul class="' . $taxonomy .'_list">';
+echo WPP_LEGACY_WIDGETS ? '<ul class="' . $taxonomy .'_list">' : '<ul id="property_term_list_v2" class="' . $taxonomy .'_list">';
 	echo $list;
 echo '</ul>';
 endif;

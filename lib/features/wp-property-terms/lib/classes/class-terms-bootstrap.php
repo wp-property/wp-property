@@ -49,13 +49,22 @@ namespace UsabilityDynamics\WPP {
             return $tabs;
           } );
 
+          add_filter( 'wpp::settings::developer::types', function($attributes = array()){
+            $inheritance = ud_get_wpp_terms()->get( 'config.inherited', array() );
+            $hidden = ud_get_wpp_terms()->get( 'config.hidden', array() );
+
+            $attributes['terms_hidden'] = $hidden;
+            $attributes['terms_inheritance'] = $inheritance;
+            return $attributes;
+          });
+
           /** Add Hidden Taxonomies on Types Tab */
-          add_action( 'wpp::types::hidden_attributes', function( $property_slug ){
+          add_action( 'wpp::settings::developer::types::hidden_attributes', function( $property_slug ){
             include ud_get_wpp_terms()->path( 'static/views/admin/settings-hidden-terms.php', 'dir' );
           } );
 
           /** Add Inherited Taxonomies on Types Tab */
-          add_action( 'wpp::types::inherited_attributes', function( $property_slug ){
+          add_action( 'wpp::settings::developer::types::inherited_attributes', function( $property_slug ){
             include ud_get_wpp_terms()->path( 'static/views/admin/settings-inherited-terms.php', 'dir' );
           } );
 
@@ -210,9 +219,9 @@ namespace UsabilityDynamics\WPP {
       /**
        * Makes sure WPP-Terms doesn't override read-only taxonomies.
        *
-       * @todo Update to allow labels to be overwritten for readonly taxonomies. - potanin@UD
+       * @todo Update to allow labels to be overwritten for system taxonomies. - potanin@UD
        *
-       * @param $taxonomies - Paseed down via wpp_taxonomies filter, not yet registered with WP.
+       * @param $taxonomies - Passed down via wpp_taxonomies filter, not yet registered with WP.
        */
       public function prepare_taxonomies( $taxonomies ) {
 
@@ -230,9 +239,8 @@ namespace UsabilityDynamics\WPP {
 
         foreach( $taxonomies as $_taxonomy => $_taxonomy_data ) {
 
-
-          // Make sure we dont override any [readonly] taxonomies.
-          if( isset( $_taxonomy_data[ 'readonly' ] ) && $_taxonomy_data[ 'readonly' ]) {
+          // Make sure we dont override any [system] taxonomies.
+          if( isset( $_taxonomy_data[ 'system' ] ) && $_taxonomy_data[ 'system' ]) {
 
             if( isset( $_taxonomies[ $_taxonomy ] ) ) {
               $_original_taxonomy = $_taxonomies[ $_taxonomy ];
@@ -245,6 +253,31 @@ namespace UsabilityDynamics\WPP {
               $_taxonomies[ $_taxonomy ]['wpp_term_meta_fields'] = $_original_taxonomy['wpp_term_meta_fields'];
             }
 
+            // Allow show_in_menu setting to be set
+            if( isset( $_original_taxonomy ) && !isset( $_taxonomies[ $_taxonomy ]['show_in_menu'] ) && isset( $_original_taxonomy['show_in_menu'] ) ) {
+              $_taxonomies[ $_taxonomy ]['show_in_menu'] = $_original_taxonomy['show_in_menu'];
+            }
+
+            // Allow rich_taxonomy to be enabled.
+            if( isset( $_original_taxonomy ) && !isset( $_taxonomies[ $_taxonomy ]['rich_taxonomy'] ) && isset( $_original_taxonomy['rich_taxonomy'] ) ) {
+              $_taxonomies[ $_taxonomy ]['rich_taxonomy'] = $_original_taxonomy['rich_taxonomy'];
+            }
+
+            // Allow rich_taxonomy to be enabled.
+            if( isset( $_original_taxonomy ) && !isset( $_taxonomies[ $_taxonomy ]['query_var'] ) && isset( $_original_taxonomy['query_var'] ) ) {
+              $_taxonomies[ $_taxonomy ]['query_var'] = $_original_taxonomy['query_var'];
+            }
+
+            if( isset( $_original_taxonomy ) && !isset( $_taxonomies[ $_taxonomy ]['rewrite'] ) && isset( $_original_taxonomy['rewrite'] ) ) {
+              $_taxonomies[ $_taxonomy ]['rewrite'] = $_original_taxonomy['rewrite'];
+            }
+
+            if( isset( $_original_taxonomy ) && !isset( $_taxonomies[ $_taxonomy ]['public'] ) && isset( $_original_taxonomy['public'] ) ) {
+              $_taxonomies[ $_taxonomy ]['public'] = $_original_taxonomy['public'];
+            }
+
+          } else if ( !isset( $_taxonomies[ $_taxonomy ] ) ) {
+            $_taxonomies[ $_taxonomy ] = $_taxonomy_data;
           }
 
         }
@@ -599,13 +632,17 @@ namespace UsabilityDynamics\WPP {
           }
 
           // Verify rewrite rules are legic.
-          if( isset( $_taxonomy_data['rewrite'] ) &&  isset( $_taxonomy_data['rewrite']['slug'] ) ) {
+          if( isset( $_taxonomy_data['rewrite'] ) && isset( $_taxonomy_data['rewrite']['slug'] ) ) {
 
-            $_wpp_terms['taxonomies'][ $_taxonomy ]['rewrite'] = array(
-              'slug' => isset( $_taxonomy_data['rewrite']['slug'] ) ? $_taxonomy_data['rewrite']['slug'] : null,
-              'hierarchical' => isset( $_taxonomy_data['rewrite']['hierarchical'] ) ? $_taxonomy_data['rewrite']['hierarchical'] : true,
-              'with_front' => isset( $_taxonomy_data['rewrite']['with_front'] ) ? $_taxonomy_data['rewrite']['with_front'] : false
-            );
+            if( $_wpp_terms['taxonomies'][ $_taxonomy ]['rewrite'] !== false ) {
+
+              $_wpp_terms['taxonomies'][ $_taxonomy ]['rewrite'] = array(
+                'slug' => isset( $_taxonomy_data['rewrite']['slug'] ) ? $_taxonomy_data['rewrite']['slug'] : null,
+                'hierarchical' => isset( $_taxonomy_data['rewrite']['hierarchical'] ) ? $_taxonomy_data['rewrite']['hierarchical'] : true,
+                'with_front' => isset( $_taxonomy_data['rewrite']['with_front'] ) ? $_taxonomy_data['rewrite']['with_front'] : false
+              );
+
+            }
 
           } else {
             unset( $_wpp_terms['taxonomies'][ $_taxonomy ]['rewrite'] );
@@ -753,6 +790,8 @@ namespace UsabilityDynamics\WPP {
 
         foreach($taxonomies as $k => $d) {
 
+          $d = $this->prepare_taxonomy( $d, $k );
+
           $field = array();
 
           switch( true ) {
@@ -776,20 +815,34 @@ namespace UsabilityDynamics\WPP {
 
             default:
               /** Do not add taxonomy field if native meta box is being used for it. */
-              if( (isset($d[ 'add_native_mtbox' ]) && $d[ 'add_native_mtbox' ])
-               || (isset($wp_properties['taxonomies'][$k]['hidden']) && $wp_properties['taxonomies'][$k]['hidden'])) {
+              if( (isset($d[ 'add_native_mtbox' ]) && $d[ 'add_native_mtbox' ])) {
                 break;
               }
-              $field = array(
-                'name' => $d['label'],
-                'id' => $k,
-                'type' => 'wpp_taxonomy',
-                'multiple' => ( isset( $types[ $k ] ) && $types[ $k ] == 'unique' ? false : true ),
-                'options' => array(
-                  'taxonomy' => $k,
-                  'type' => ( isset( $d[ 'hierarchical' ] ) && $d[ 'hierarchical' ] == true ? 'select_tree' : 'select_advanced' ),
-                  'args' => array(),
-              ) );
+              if( isset($d[ 'readonly' ]) && $d[ 'readonly' ] ) {
+                $field = array(
+                  'name' => $d['label'],
+                  'id' => $k,
+                  //'type' => 'wpp_taxonomy_readonly',
+                  'type' => 'wpp_taxonomy',
+                  'options' => array(
+                    'taxonomy' => $k,
+                    'hierarchical' => ( isset( $d[ 'hierarchical' ] ) && $d[ 'hierarchical' ] == true ? true : false ),
+                    'type' => ( isset( $d[ 'hierarchical' ] ) && $d[ 'hierarchical' ] == true ? 'select_tree' : 'select_advanced' ),
+                    'meta' => ( isset( $d[ 'meta' ] ) && $d[ 'meta' ] == true ? true : false ),
+                    'args' => array(),
+                  ) );
+              } else {
+                $field = array(
+                  'name' => $d['label'],
+                  'id' => $k,
+                  'type' => 'wpp_taxonomy',
+                  'multiple' => ( isset( $types[ $k ] ) && $types[ $k ] == 'unique' ? false : true ),
+                  'options' => array(
+                    'taxonomy' => $k,
+                    'type' => ( isset( $d[ 'hierarchical' ] ) && $d[ 'hierarchical' ] == true ? 'select_tree' : 'select_advanced' ),
+                    'args' => array(),
+                  ) );
+              }
               break;
           }
 
@@ -1023,8 +1076,10 @@ namespace UsabilityDynamics\WPP {
         $args = wp_parse_args( $args, array(
           'default' => false,
           'readonly' => false,
-          'unique' => true,
+          'system' => false,
+          'meta' => false,
           'hidden' => false,
+          'unique' => true,
           'label' => $taxonomy,
           'labels' => array(),
           'public' => false,
@@ -1047,10 +1102,13 @@ namespace UsabilityDynamics\WPP {
         foreach( $args as &$arg ) {
           if( is_string( $arg ) && $arg === 'true' ) {
             $arg = true;
+          } else if( is_string( $arg ) && $arg === 'false' ) {
+            $arg = false;
           }
         }
 
-        if( $args[ 'hierarchical' ] ) {
+        // Ensure [hierarchical] is set unless [rewrite] is explicitly set to false.
+        if( $args[ 'hierarchical' ] && isset( $args[ 'rewrite' ] ) && $args[ 'rewrite' ] !== false ) {
           $args[ 'rewrite' ][ 'hierarchical' ] = true;
         }
 
@@ -1097,9 +1155,9 @@ namespace UsabilityDynamics\WPP {
 
           if( !empty( $_terms ) ) {
             $_values[ $_tax_key ] = end( $_terms );
-            WPP_F::debug("Getting single-value terms for [$_tax_key], setting to [" . $_values[ $_tax_key ] . ']' );
+            //WPP_F::debug("Getting single-value terms for [$_tax_key], setting to [" . $_values[ $_tax_key ] . ']' );
           } else {
-            WPP_F::debug("Getting single-value terms for [$_tax_key], no values found." );
+            //WPP_F::debug("Getting single-value terms for [$_tax_key], no values found." );
           }
 
         }
@@ -1114,9 +1172,9 @@ namespace UsabilityDynamics\WPP {
 
           if( !empty( $_terms ) ) {
             $_values[ $_tax_key ] = $_terms;
-            WPP_F::debug("Getting multi-value terms for [$_tax_key], setting to [" . join( ', ', $_terms ) . ']' );
+            //WPP_F::debug("Getting multi-value terms for [$_tax_key], setting to [" . join( ', ', $_terms ) . ']' );
           } else {
-            WPP_F::debug("Getting multi-value terms for [$_tax_key], no values found." );
+            //WPP_F::debug("Getting multi-value terms for [$_tax_key], no values found." );
           }
 
         }

@@ -28,12 +28,12 @@ namespace UsabilityDynamics\WPP {
         );
 
         // New attribut type that uses [wpp_categorical] taxonomy.
-        if( defined( 'WPP_FEATURE_FLAG_WPP_CATEGORICAL' ) && WPP_FEATURE_FLAG_WPP_CATEGORICAL ) {
+        if( WPP_FEATURE_FLAG_WPP_CATEGORICAL ) {
           $_attribute_types[ 'categorical-term' ] = __( 'Common Terms', ud_get_wp_property( 'domain' ) );
         }
 
         // Legacy attribute types we no longer use.
-        if( defined( 'WP_PROPERTY_LEGACY_ATTRIBUTE_INPUT_TYPES' ) && WP_PROPERTY_LEGACY_ATTRIBUTE_INPUT_TYPES ) {
+        if( WP_PROPERTY_LEGACY_ATTRIBUTE_INPUT_TYPES ) {
 
           $_attribute_types = array_merge( $_attribute_types, array(
             'wysiwyg' => __( 'Text Editor', ud_get_wp_property('domain') ),
@@ -290,7 +290,7 @@ namespace UsabilityDynamics\WPP {
           $ui_class[ ]                 = $return[ 'data_input_type' ];
         }
 
-        if( defined( 'WPP_FEATURE_FLAG_WPP_CATEGORICAL' ) && WPP_FEATURE_FLAG_WPP_CATEGORICAL ) {
+        if( WPP_FEATURE_FLAG_WPP_CATEGORICAL ) {
 
           if( isset( $return[ 'data_input_type' ] ) && $return[ 'data_input_type' ] === 'categorical-term' ) {
             $return[ 'storage_type' ] = 'taxonomy';

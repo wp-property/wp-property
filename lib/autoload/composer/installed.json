@@ -319,58 +319,5 @@
             "MIT"
         ],
         "homepage": "https://www.usabilitydynamics.com/product/wp-property-terms"
-    },
-    {
-        "name": "usabilitydynamics/wp-rets-client",
-        "version": "dev-feature",
-        "version_normalized": "dev-feature",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:UsabilityDynamics/wp-rets-client",
-            "reference": "feature"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/wp-rets-client/archive/feature.zip",
-            "reference": "feature",
-            "shasum": null
-        },
-        "archive": {
-            "exclude": [
-                "vendor",
-                "node_modules",
-                ".gitignore",
-                "test",
-                "circle.yml",
-                "composer.lock",
-                "gruntfile.js",
-                "package.json"
-            ]
-        },
-        "type": "wordpress-plugin",
-        "extra": {
-            "schemas": {
-                "dependencies": {
-                    "modules": [],
-                    "plugins": []
-                },
-                "licenses": []
-            },
-            "installer-name": "wp-rets-client"
-        },
-        "installation-source": "source",
-        "autoload": {
-            "classmap": [
-                "lib/classes",
-                "lib/connectors"
-            ],
-            "files": [
-                "loader.php"
-            ]
-        },
-        "license": [
-            "MIT"
-        ],
-        "homepage": "https://usabilitydynamics.com"
     }
 ]

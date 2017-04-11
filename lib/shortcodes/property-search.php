@@ -134,7 +134,7 @@ namespace UsabilityDynamics\WPP {
         $widget_id = $post->ID . "_search";
 
         ob_start();
-        echo '<div class="wpp_shortcode_search">';
+        echo WPP_LEGACY_WIDGETS ? '<div class="wpp_shortcode_search">' : '<div class="wpp_shortcode_search_v2">';
 
         $search_args[ 'searchable_attributes' ] = $searchable_attributes;
         $search_args[ 'searchable_property_types' ] = $searchable_property_types;

@@ -1,0 +1,122 @@
+.rwmb-tab-nav {
+	margin-bottom: -1px;
+}
+.rwmb-tab-nav li {
+	margin: 0;
+	display: inline-block;
+}
+.rwmb-tab-nav .rwmb-tab-active {
+	border: 1px solid #dfdfdf;
+	border-bottom-color: transparent;
+	background: #fdfdfd;
+}
+.rwmb-tab-nav a {
+	display: block;
+	padding: 3px 5px 5px;
+	text-decoration: none;
+}
+.rwmb-tab-nav a:active,
+.rwmb-tab-nav a:focus {
+	outline: none;
+	box-shadow: none;
+}
+.rwmb-tab-nav i,
+.rwmb-tab-nav img {
+	vertical-align: middle;
+	margin-right: .3em;
+}
+.rwmb-tab-nav i {
+	width: 16px;
+	height: 16px;
+	font-size: 16px;
+}
+.rwmb-tab-nav img {
+	width: 12px;
+	height: 12px;
+	display: inline-block;
+}
+.rwmb-tab-active a {
+	color: #333;
+}
+.rwmb-tab-panel {
+	padding: 10px 5px 0;
+	border: solid 1px #dfdfdf;
+	background: #fdfdfd;
+	display: none;
+}
+.rwmb-tabs-box .rwmb-tab-nav li {
+	background: #ebebeb;
+	border: 1px solid #dedede;
+	margin-right: 5px;
+}
+.rwmb-tabs-box .rwmb-tab-nav li:hover {
+	background: #fff;
+}
+.rwmb-tabs-box .rwmb-tab-nav a {
+	color: #777;
+}
+.rwmb-tabs-box .rwmb-tab-nav .rwmb-tab-active {
+	border-bottom-color: transparent;
+}
+.rwmb-tabs-box .rwmb-tab-nav .rwmb-tab-active,
+.rwmb-tabs-box .rwmb-tab-nav .rwmb-tab-active:hover {
+	background: #f5f5f5;
+}
+.rwmb-tabs-box .rwmb-tab-nav .rwmb-tab-active a {
+	color: #555;
+}
+.rwmb-tabs-box .rwmb-tab-panel {
+	background: #f5f5f5;
+	border: solid 1px #dedede;
+}
+.rwmb-tabs-left {
+	overflow: hidden;
+	margin: -6px -12px -12px;
+}
+.rwmb-tabs-left .rwmb-tab-nav {
+	float: left;
+	margin: 0 -1px 0 0;
+	background: #fdfdfd;
+	border-right: 1px solid #dfdfdf;
+	z-index: 9;
+}
+.rwmb-tabs-left .rwmb-tab-nav li {
+	display: block;
+}
+.rwmb-tabs-left .rwmb-tab-nav li:first-child {
+	border-top: none;
+}
+.rwmb-tabs-left .rwmb-tab-nav a {
+	padding: 5px 20px 8px 10px;
+}
+.rwmb-tabs-left .rwmb-tab-active {
+	border: 1px solid #dfdfdf;
+	border-right-color: #fff;
+	border-left: 2px #2ea2cc;
+	box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02), 0 1px 0 rgba(0, 0, 0, 0.02);
+	background: #fff;
+	position: relative;
+	right: -1px;
+}
+.rwmb-tabs-left .rwmb-tab-panels {
+	overflow: auto;
+	border-left: 1px solid #dfdfdf;
+	z-index: 1;
+}
+.rwmb-tabs-left .rwmb-tab-panel {
+	padding: 10px 20px 0;
+	background: transparent;
+	border: none;
+}
+.rwmb-tabs-no-controls {
+	border: 0;
+	background: transparent;
+}
+.rwmb-tabs-no-controls .hndle,
+.rwmb-tabs-no-controls .handlediv {
+	display: none;
+}
+.rwmb-tabs-no-controls .inside {
+	margin: 0;
+	padding: 0;
+}

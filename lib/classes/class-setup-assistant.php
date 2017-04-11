@@ -90,6 +90,8 @@ namespace UsabilityDynamics\WPP {
 
         $_modified_settings = WPP_F::extend( $_current_settings, $_setup['schema'] );
 
+        //die( '<pre>' . print_r( $_modified_settings['field_alias'], true ) . '</pre>' );
+
         if( is_array( $_modified_settings['property_stats_groups'] ) ) {
           // $_modified_settings['property_stats_groups'] = array_unique( $_modified_settings['property_stats_groups'] );
         }
@@ -98,6 +100,9 @@ namespace UsabilityDynamics\WPP {
         if( is_array( $_modified_settings['searchable_attributes'] ) ) {
           // $_modified_settings[ 'searchable_attributes' ] = array_unique( $_modified_settings[ 'searchable_attributes' ] );
         }
+
+        // preserve field aliases
+        $_modified_settings['field_alias'] = $_current_settings['field_alias'];
 
         $_modified_settings['_updated'] = time();
 
@@ -126,11 +131,11 @@ namespace UsabilityDynamics\WPP {
        * Also need to flush Memcached.
        *
        * deletes wpp_categorical_children
-       * deletes wpp_listing_location_children
+       * deletes wpp_location_children
        */
       static public function flush_cache( ) {
 
-        foreach( array( 'wpp_categorical', 'wpp_listing_location') as $taxonomy ) {
+        foreach( array( 'wpp_categorical', 'wpp_location') as $taxonomy ) {
           wp_cache_delete( 'all_ids', $taxonomy );
           wp_cache_delete( 'get', $taxonomy );
           delete_option( "{$taxonomy}_children" );

@@ -57,6 +57,9 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
   return;
 }
 
+$l10n_url = '';
+$l10n_id = get_option('wp-property-l10n-attachment');
+
 ?>
 <div class="wrap <?php echo implode(' ', $wrapper_classes); ?>">
 
@@ -64,7 +67,7 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
 
   <h2 class='wpp_settings_page_header'><?php echo ud_get_wp_property('labels.name') . ' ' . __('Settings', ud_get_wp_property()->domain) ?>
 
-    <?php  if( defined( 'WP_PROPERTY_SETUP_ASSISTANT' ) && WP_PROPERTY_SETUP_ASSISTANT ) { ?>
+    <?php  if( WP_PROPERTY_SETUP_ASSISTANT ) { ?>
       <a class="wpp-setup-asst" href="<?php echo admin_url('edit.php?post_type=property&page=property_settings&splash=setup-assistant'); ?>">
         <?php echo __('Setup Assistant', ud_get_wp_property()->domain); ?>
       </a>
@@ -94,7 +97,7 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
 
     <div id="wpp_settings_tabs" class="wpp_tabs clearfix">
 
-      <?php if( defined( 'WP_PROPERTY_SETTINGS_SEARCH' ) && WP_PROPERTY_SETTINGS_SEARCH ) { ?>
+      <?php if( WP_PROPERTY_SETTINGS_SEARCH ) { ?>
         <div id="label-search-text"><input type="text" id="wpp_search_tags" placeholder="Settings search" name="search_tags"/></div>
       <?php } ?>
 
@@ -124,12 +127,7 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
             <td>
               <ul>
                 <li class="configuration_enable_comments"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][enable_comments]&label=" . __('Enable comments', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['enable_comments']) ? $wp_properties['configuration']['enable_comments'] : false)); ?></li>
-                <li class="configuration_enable_revisions" data-feature-since="2.0.0"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][enable_revisions]&label=" . __('Enable revisions', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['enable_revisions']) ? $wp_properties['configuration']['enable_revisions'] : false)); ?></li>
-
-                <?php if( defined( 'WP_PROPERTY_LAYOUTS' ) && WP_PROPERTY_LAYOUTS === true ) { ?>
-                <li class="configuration_enable_layouts" data-feature-since="2.2.1"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][enable_layouts]&label=" . __('Disable layouts', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['enable_layouts']) ? $wp_properties['configuration']['enable_layouts'] : false)); ?></li>
-                <?php } ?>
-
+                <li class="configuration_enable_revsions" data-feature-since="2.0.0"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][enable_revisions]&label=" . __('Enable revisions', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['enable_revisions']) ? $wp_properties['configuration']['enable_revisions'] : false)); ?></li>
                 <li class="wpp-setting-exclude-from-regular-search-results"><?php echo WPP_F::checkbox("name=wpp_settings[configuration][exclude_from_regular_search_results]&label=" . sprintf(__('Exclude %1s from regular search results.', ud_get_wp_property()->domain), $object_label['plural']), (isset($wp_properties['configuration']['exclude_from_regular_search_results']) ? $wp_properties['configuration']['exclude_from_regular_search_results'] : false)); ?></li>
 
               </ul>
@@ -176,9 +174,7 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
             </td>
           </tr>
 
-          <?php if(defined( 'WP_PROPERTY_LAYOUTS' ) && WP_PROPERTY_LAYOUTS === false )  {
-
-            if( !isset($wp_properties['configuration']['enable_layouts']) || $wp_properties['configuration']['enable_layouts'] != "false")  { ?>
+          <?php if( !WP_PROPERTY_LAYOUTS )  { ?>
 
             <tr class="wpp-setting wpp-setting-single-template">
               <th><?php printf(__('Single %s Template', ud_get_wp_property()->domain), WPP_F::property_label()); ?></th>
@@ -254,7 +250,7 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
             </tr>
           <?php } ?>
 
-          <?php if ((!isset($wp_properties['configuration']['do_not_register_sidebars']) || (isset($wp_properties['configuration']['do_not_register_sidebars']) && $wp_properties['configuration']['do_not_register_sidebars'] != 'true')) && ($wp_properties['configuration']['enable_layouts'] == 'true')) : ?>
+          <?php if ((!isset($wp_properties['configuration']['do_not_register_sidebars']) || (isset($wp_properties['configuration']['do_not_register_sidebars']) && $wp_properties['configuration']['do_not_register_sidebars'] != 'true')) && !WP_PROPERTY_LAYOUTS ) : ?>
             <tr class="wpp-setting wpp-setting-widget-sidebars">
               <th><?php printf(__('Widget Sidebars', ud_get_wp_property()->domain), WPP_F::property_label()); ?></th>
               <td>
@@ -272,8 +268,6 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
               </td>
             </tr>
           <?php endif; ?>
-
-          <?php } ?>
 
           <tr>
             <th><?php printf(__('Automatic Geolocation', ud_get_wp_property()->domain), WPP_F::property_label()); ?></th>
@@ -299,7 +293,7 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
             </td>
           </tr>
 
-          <?php if( defined( 'WP_PROPERTY_LEGACY_META_ATTRIBUTES' ) && WP_PROPERTY_LEGACY_META_ATTRIBUTES ) { ?>
+          <?php if( WP_PROPERTY_LEGACY_META_ATTRIBUTES ) { ?>
           <tr class="wpp-setting wpp-setting-default-phone-number">
             <th><?php _e('Default Phone Number', ud_get_wp_property()->domain); ?></th>
             <td><?php echo WPP_F::input("name=phone_number&label=" . sprintf(__('Phone number to use when a %1s-specific phone number is not specified.', ud_get_wp_property()->domain), WPP_F::property_label('singular')) . "&group=wpp_settings[configuration]&style=width: 200px;", (isset($wp_properties['configuration']['phone_number']) ? $wp_properties['configuration']['phone_number'] : false)); ?></td>
@@ -346,12 +340,12 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
                   </li>
                   <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][auto_delete_attachments]&label=" . sprintf(__('Automatically delete all %1s images and attachments when a %2s is deleted.', ud_get_wp_property()->domain), $object_label['singular'], $object_label['singular']), (isset($wp_properties['configuration']['auto_delete_attachments']) ? $wp_properties['configuration']['auto_delete_attachments'] : false)); ?></li>
 
-                  <li class="hidden">
+                  <li class="wpp-legacy-feature">
                     <?php echo WPP_F::checkbox("name=wpp_settings[configuration][automatically_regenerate_thumbnail]&label=" . __('Enable "on-the-fly" image regeneration.', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['automatically_regenerate_thumbnail']) ? $wp_properties['configuration']['automatically_regenerate_thumbnail'] : true)); ?>
                     <span class="description"><?php _e('Enabling this option may cause performance issues.', ud_get_wp_property()->domain); ?></span>
                   </li>
 
-                  <?php if( defined( 'WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING' ) && WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING ) { ?>
+                  <?php if( WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING ) { ?>
                   <li>
                     <?php //show standard attribute matching
                     echo WPP_F::checkbox("name=wpp_settings[configuration][show_advanced_options]&label=" . __('Enable Standard Attributes Matching and Terms', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['show_advanced_options']) ? $wp_properties['configuration']['show_advanced_options'] : false)); ?>
@@ -653,12 +647,12 @@ if( isset( $_GET['splash'] ) && $_GET['splash'] === 'setup-assistant' ) {
 
           <?php
           //list automatic backups taken from setup-assistant screen
-          if ( defined( 'WPP_FEATURE_FLAG_SETTINGS_BACKUPS' ) && WPP_FEATURE_FLAG_SETTINGS_BACKUPS && get_option("wpp_property_backups")) { ?>
+          if ( WPP_FEATURE_FLAG_SETTINGS_BACKUPS && get_option("wpp_property_backups")) { ?>
             <div class="wpp_settings_block">
               <?php _e("Automatic Backups of WP-Property Configuration", ud_get_wp_property()->domain); ?>
               <input type="button" value="<?php _e('Backup Now', ud_get_wp_property()->domain); ?>" id="wpp_ajax_create_settings_backup" class="button">
 
-              <?php  if( defined( 'WP_PROPERTY_SETUP_ASSISTANT' ) && WP_PROPERTY_SETUP_ASSISTANT ) { ?>
+              <?php  if( WP_PROPERTY_SETUP_ASSISTANT ) { ?>
               <span class="description"><?php _e('Backups created when you use Setup Assistant,or create one now.', ud_get_wp_property()->domain); ?> </span>
               <?php } ?>
               <br>

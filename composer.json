@@ -25,17 +25,16 @@
     "usabilitydynamics/lib-ui": "0.3.4",
     "usabilitydynamics/lib-utility": "0.3.7",
     "usabilitydynamics/lib-settings": "0.2.3",
-    "usabilitydynamics/lib-wp-saas-util": "1.0.3",
+    "usabilitydynamics/lib-wp-saas-util": "1.0.5",
     "usabilitydynamics/lib-wp-bootstrap": "1.2.1",
     "usabilitydynamics/lib-ud-api-client": "1.1.5.1",
     "usabilitydynamics/lib-wp-list-table": "1.0.8",
     "usabilitydynamics/lib-wp-shortcode": "0.1.2",
-    "usabilitydynamics/wp-meta-box": "4.5.2.1",
-    "usabilitydynamics/wp-meta-box-utilities": "1.0.2",
-    "UsabilityDynamics/wp-gallery-metabox": "2.0.1",
     "usabilitydynamics/wp-tax-post-binding": "2.0.5",
+    "rets-ci/wp-rets-client": "dev-latest",
     "freemius/wordpress-sdk": "^1.1.7",
-    "ccampbell/chromephp": "^4.1"
+    "ccampbell/chromephp": "^4.1",
+    "10up/elasticpress": "^2.1"
   },
   "require-dev": {
     "usabilitydynamics/lib-wp-phpunit": "master",
@@ -95,18 +94,18 @@
         "enabled": false
       },
       {
+        "name": "Legacy widgets",
+        "constant": "WPP_LEGACY_WIDGETS",
+        "description": "Enable to use legacy widgets",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
         "name": "Setup Assistant",
         "constant": "WP_PROPERTY_SETUP_ASSISTANT",
         "description": "Automated setup assistant.",
         "since": "2.2.1",
         "enabled": false
-      },
-      {
-        "name": "Responsive Slideshow",
-        "constant": "WP_PROPERTY_RESPONSIVE_SLIDESHOW",
-        "description": "Responsive slideshow feature, use [property_responsive_slideshow] shortcode.",
-        "since": "2.2.1",
-        "enabled": true
       },
       {
         "name": "Freemius",
@@ -120,7 +119,7 @@
         "constant": "WPP_FEATURE_FLAG_SETTINGS_BACKUPS",
         "description": "Enables automaic backups of the WP-Property settings. Backups stored in [wpp_property_backups] option.",
         "since": "2.2.1",
-        "enabled": true
+        "enabled": false
       },
       {
         "name": "Disable Editor",
@@ -130,32 +129,32 @@
         "enabled": false
       },
       {
-        "name": "Listing Permissions",
+        "name": "Listing Policies",
         "constant": "WPP_FEATURE_FLAG_WPP_LISTING_POLICY",
         "description": "Sets listing display permissions, stored in [wpp_listing_policy].",
         "since": "2.2.1",
-        "enabled": true
+        "enabled": false
       },
       {
         "name": "Schools Standard Taxonomy",
         "constant": "WPP_FEATURE_FLAG_WPP_SCHOOLS",
         "description": "Adds standard taxonomy for schools as [wpp_schools].",
         "since": "2.2.1",
-        "enabled": true
+        "enabled": false
       },
       {
         "name": "Listing Labels",
         "constant": "WP_PROPERTY_FLAG_WPP_LISTING_LABEL",
         "description": "Property flags, for highlighting important information, stored in [wpp_listing_label]. Can be used to identify 'featured' properties.",
         "since": "2.2.1",
-        "enabled": true
+        "enabled": false
       },
       {
         "name": "Standard Location Taxonomy",
         "constant": "WPP_FEATURE_FLAG_WPP_LISTING_LOCATION",
-        "description": "Standard property location taxonomy, stored in [wpp_listing_location].",
+        "description": "Standard property location taxonomy, stored in [wpp_location].",
         "since": "2.2.1",
-        "enabled": true
+        "enabled": false
       },
       {
         "name": "Advanced Rewrite Rules",
@@ -165,9 +164,9 @@
         "enabled": false
       },
       {
-        "name": "Landing Page Taxonomy",
-        "constant": "WPP_FEATURE_FLAG_WPP_SEARCH_LANDING",
-        "description": "Dynamic terms for landing pages, stored in [wpp_search_landing].",
+        "name": "Landing Page Categories",
+        "constant": "WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY",
+        "description": "Dynamic terms for landing pages, stored in [wpp_listing_category].",
         "since": "2.2.1",
         "enabled": false
       },
@@ -176,42 +175,49 @@
         "constant": "WPP_FEATURE_FLAG_WPP_LISTING_TYPE",
         "description": "Standard property type taxonomy, stored in [wpp_listing_type].",
         "since": "2.2.1",
-        "enabled": true
+        "enabled": false
       },
       {
         "name": "Standard Property Status",
         "constant": "WPP_FEATURE_FLAG_WPP_LISTING_STATUS",
         "description": "Standard property status taxonomy [wpp_listing_status].",
         "since": "2.2.1",
-        "enabled": true
+        "enabled": false
       },
       {
-        "name": "Property Categories",
+        "name": "Rooms",
+        "constant": "WPP_FEATURE_FLAG_WPP_ROOMS",
+        "description": "Adds UI for adding standard rooms.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Categorical Taxonomy",
         "constant": "WPP_FEATURE_FLAG_WPP_CATEGORICAL",
         "description": "Taxonomy for general property terms, stored in [wpp_categorical]",
         "since": "2.2.1",
-        "enabled": true
+        "enabled": false
       },
       {
         "name": "Field Aliases",
         "constant": "WP_PROPERTY_FIELD_ALIAS",
         "description": "Meta aliases for WP-Property.",
         "since": "2.2.1",
-        "enabled": true
+        "enabled": false
       },
       {
         "name": "Meta Attributes",
         "constant": "WP_PROPERTY_LEGACY_META_ATTRIBUTES",
         "description": "Legacy Meta fields. In v2.2.1 meta fields have been merged with attributes. This includes default Phone Number.",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "Legacy Attribute Input Types",
         "constant": "WP_PROPERTY_LEGACY_ATTRIBUTE_INPUT_TYPES",
         "description": "Enables legacy input types such as radio, wysiwyg, etc.",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "Enable Supermap Feature",
@@ -225,14 +231,21 @@
         "constant": "WP_PROPERTY_FLAG_ENABLE_AGENTS",
         "description": "Enable Agent management.",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
+      },
+      {
+        "name": "Enable Responsive Slideshow Feature",
+        "constant": "WP_PROPERTY_RESPONSIVE_SLIDESHOW",
+        "description": "Responsive slideshow feature, use [property_responsive_slideshow] shortcode.",
+        "since": "2.2.1",
+        "enabled": true
       },
       {
         "name": "Enable Terms Feature",
         "constant": "WP_PROPERTY_FLAG_ENABLE_TERMS",
         "description": "Enable Terms management.",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "Enable Settings Search",
@@ -253,14 +266,7 @@
         "constant": "WP_PROPERTY_FLAG_ENABLE_LEGACY_TAXONOMIES",
         "description": "Enable legacy [property_features] and [community_features] taxonomies. These have been replaced by [wpp_categorical].",
         "since": "2.2.1",
-        "enabled": false
-      },
-      {
-        "name": "RETS Client Dashboard Widget",
-        "constant": "RETSCI_FEATURE_FLAG_DASHBOARD_WIDGET",
-        "description": "Dashboard widget for wp-rets-client, shows stats.",
-        "since": "2.2.1",
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "Elasticsearch Service",
@@ -268,8 +274,16 @@
         "description": "Hosted Elasticsearch synchronization for listing data.",
         "since": "2.2.1",
         "enabled": false
+      },
+      {
+        "name": "RETSCI Client",
+        "constant": "RETSCI_FEATURE_FLAG",
+        "description": "Integrated WP-RETS Client plugin",
+        "since": "2.2.1",
+        "enabled": true
       }
     ],
+    "saasProduct": "prod_AB8hYwVjwdfiSJ",
     "schemas": {
       "dependencies" : {
         "modules": {},

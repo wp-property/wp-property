@@ -28,7 +28,7 @@ namespace UsabilityDynamics\WPP {
         new Admin_Overview();
 
 
-        if( defined( 'WP_PROPERTY_SETUP_ASSISTANT' ) && WP_PROPERTY_SETUP_ASSISTANT ) {
+        if( WP_PROPERTY_SETUP_ASSISTANT ) {
           new Setup_Assistant();
         }
 
@@ -47,29 +47,12 @@ namespace UsabilityDynamics\WPP {
         // wpp-disable-term-editing
         add_filter( 'admin_body_class', array($this, 'admin_body_class'), 20, 2);
 
-        // If wpp_categorical used, add term page UI.
-        if( defined( 'WPP_FEATURE_FLAG_WPP_CATEGORICAL' ) && WPP_FEATURE_FLAG_WPP_CATEGORICAL ) {
-          add_action( 'wpp_categorical_edit_form_fields', array( $this, 'edit_form_fields' ), 20, 2 );
-          add_action( 'manage_wpp_categorical_custom_column', array( $this, 'wpp_categorical_custom_column' ), 20, 3 );
-          add_filter( 'manage_edit-wpp_categorical_columns', array( $this, 'wpp_categorical_columns' ), 20 );
-        }
-
-        if( defined( 'WPP_FEATURE_FLAG_WPP_SCHOOLS' ) && WPP_FEATURE_FLAG_WPP_SCHOOLS ) {
-          add_action( 'wpp_schools_edit_form_fields', array( $this, 'edit_form_fields' ), 20, 2 );
-          //add_action( 'manage_wpp_schools_custom_column', array( $this, 'wpp_schools_custom_column' ), 20, 3 );
-          //add_filter( 'manage_edit-wpp_schools_columns', array( $this, 'wpp_schools_columns' ), 20 );
-        }
-
-        // Add custom columns to Taxonomy table.
-        if( defined( 'WPP_FEATURE_FLAG_WPP_LISTING_LOCATION' ) && WPP_FEATURE_FLAG_WPP_LISTING_LOCATION ) {
-          add_filter( 'manage_wpp_listing_location_custom_columns', array( $this, 'wpp_listing_location_custom_columns' ), 20  );
-          //add_filter( 'manage_edit-wpp_listing_location_columns', array( $this, 'wpp_listing_location_columns' ), 20, 3 );
-        }
-
       }
 
       /**
-       * Categorical Term Data
+       * Term Meta Column Data
+       *
+       * @todo Fix hardcoded /listing/ prefix.
        *
        * @author potanin@UD
        *
@@ -77,38 +60,57 @@ namespace UsabilityDynamics\WPP {
        * @param $column_name
        * @param $term_id
        */
-      public function wpp_categorical_custom_column( $nothing, $column_name, $term_id ) {
+      public function term_meta_columns( $nothing, $column_name, $term_id ) {
+
+        $_type = get_term_meta( $term_id, '_type', true );
+
+        if( $column_name === 'term_id' ) {
+          echo $term_id;
+          return;
+        }
 
         if( $column_name === 'source' ) {
-          $source = get_term_meta( $term_id, 'source', true );
+          $source = get_term_meta( $term_id, $column_name, true );
           echo $source ? $source : '-';
+          return;
         }
 
         if( $column_name === '_id' ) {
           $type = get_term_meta( $term_id, '_id', true );
           echo $type ? $type : '-';
+          return;
         }
 
-      }
+        if( $column_name === '_type' ) {
+          $type = get_term_meta( $term_id, '_type', true );
+          echo $type ? $type : '-';
+          return;
+        }
 
-      /**
-       * Display values for custom meta fields.
-       *
-       * @param $nothing
-       * @param $column_name
-       * @param $term_id
-       */
-      public function wpp_listing_location_columns( $nothing, $column_name, $term_id ) {
+        if( $column_name === '_updated' ) {
+          $_value = get_term_meta( $term_id, '_updated', true );
+          echo $_value ? human_time_diff( $_value ) . ' ago' : '-';
+          return;
+        }
 
-        if( $column_name === 'source' ) {
-          $source = get_term_meta( $term_id, 'source', true );
+        if( $column_name === '_created' ) {
+          $_value = get_term_meta( $term_id, '_created', true );
+          echo $_value ? human_time_diff( $_value ) . ' ago' : '-';
+          return;
+        }
+
+        if( $column_name === 'url_path' ) {
+          $_value = get_term_meta( $term_id, $_type . '-' . $column_name, true );
+          echo $_value ? ( '<a href="' . home_url( '/listings' . $_value . '' ) . '" target="_blank">/listings' . $_value . '</a>' ) : '-';
+          return;
+        }
+
+
+        if( $_type ) {
+          $source = get_term_meta( $term_id, $_type .'-'.$column_name, true );
           echo $source ? $source : '-';
         }
 
-        if( $column_name === '_id' ) {
-          $type = get_term_meta( $term_id, '_id', true );
-          echo $type ? $type : '-';
-        }
 
       }
 
@@ -120,22 +122,20 @@ namespace UsabilityDynamics\WPP {
        * @param $columns
        * @return mixed
        */
-      public function wpp_categorical_columns( $columns ) {
-        $columns['source'] = 'Source';
-        //$columns['_id'] = 'ID';
-        return $columns;
-      }
+      public function taxonomy_meta_columns( $columns ) {
 
-      /**
-       * Term Overview Columns
-       *
-       * @author potanin@UD
-       *
-       * @param $columns
-       * @return mixed
-       */
-      public function wpp_listing_location_custom_columns( $columns ) {
-        $columns['source'] = 'Source';
+        //$columns['slug'];
+
+        $columns['_id'] = 'Unique ID';
+        $columns['term_id'] = 'ID';
+
+        $columns['url_slug'] = 'Slug';
+        $columns['url_path'] = 'Path';
+
+        $columns['_type'] = 'Type';
+        $columns['_updated'] = 'Updated';
+        $columns['_created'] = 'Created';
+
         //$columns['_id'] = 'ID';
         return $columns;
       }
@@ -178,7 +178,7 @@ namespace UsabilityDynamics\WPP {
 
         foreach( $wp_properties['taxonomies'] as $_tax => $_tax_detail ) {
 
-          if( $_tax_detail['readonly'] === 'true' || $_tax_detail['readonly'] == 1 || $_tax_detail['readonly'] === '1' ) {
+          if( isset( $_tax_detail['readonly'] ) && ( $_tax_detail['readonly'] === 'true' || $_tax_detail['readonly'] == 1 || $_tax_detail['readonly'] === '1' ) ) {
             $_readonly_taxonomies[] = $_tax;
           }
         }
@@ -300,12 +300,13 @@ namespace UsabilityDynamics\WPP {
        */
       public function admin_init()
       {
+        global $wp_properties;
 
         // Add metaboxes
         do_action('wpp_metaboxes');
 
         // Advanced rewrite rules.
-        if( defined( 'WPP_FEATURE_FLAG_ADVANCED_REWRITE_RULES' ) && WPP_FEATURE_FLAG_ADVANCED_REWRITE_RULES ) {
+        if( WPP_FEATURE_FLAG_ADVANCED_REWRITE_RULES ) {
           register_setting( 'wp-property', 'wpp_permalinks' );
           add_settings_section( 'wpp-permalink', 'WP-Property Permalinks', array( 'UsabilityDynamics\WPP\Admin', 'render_permalink_settings' ), 'permalink' );
         }
@@ -315,10 +316,25 @@ namespace UsabilityDynamics\WPP {
           self::download_settings_backup();
         }
 
+        // Add custom columns and fields to taxonomies that have custom term-meta defined.
+        foreach( (array) $wp_properties['taxonomies'] as $_tax => $_tax_detail ) {
+
+          if( isset( $_tax_detail[ 'wpp_term_meta_fields' ] ) ) {
+            add_action( $_tax . '_edit_form_fields', array( $this, 'edit_form_fields' ), 20, 2 );
+            add_action( 'manage_' . $_tax . '_custom_column', array( $this, 'term_meta_columns' ), 20, 3 );
+            add_filter( 'manage_edit-' . $_tax. '_columns', array( $this, 'taxonomy_meta_columns' ), 20 );
+
+          }
+
+        }
+
+
       }
 
       /**
        * Add Rewrite Options section.
+       *
+       * @todo Implement permalink selection UI based on available rewrite patterns.
        *
        * @author potanin@UD
        */
@@ -407,12 +423,13 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
+       * Add Settings page, under Property menu.
        *
        */
       public function admin_menu()
       {
 
-        $settings_page = add_submenu_page('edit.php?post_type=property', __('Settings', ud_get_wp_property()->domain), __('Settings', ud_get_wp_property()->domain), 'manage_wpp_settings', 'property_settings', array( 'UsabilityDynamics\WPP\Settings', 'render_page' ) );
+        add_submenu_page('edit.php?post_type=property', __('Settings', ud_get_wp_property()->domain), __('Settings', ud_get_wp_property()->domain), 'manage_wpp_settings', 'property_settings', array( 'UsabilityDynamics\WPP\Settings', 'render_page' ) );
 
       }
 
