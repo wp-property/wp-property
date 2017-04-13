@@ -483,7 +483,7 @@ if (!function_exists('get_features')) {
         if ($args['links'] == 'true') {
 
           $link = get_term_link($feature->slug, $args['type']);
-          if( is_wp_error( $link ) ) {
+          if (is_wp_error($link)) {
             continue;
           }
 
@@ -1199,12 +1199,12 @@ if (!function_exists('wpp_render_search_input')):
           <input id="<?php echo $random_element_id; ?>"
                  class="wpp_search_input_field wpp_search_input_field_min wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
                  type="text" name="wpp_search[<?php echo $attrib; ?>][min]" value="<?php echo $value['min']; ?>"
-                 placeholder="<?php echo $placeholder['min']; ?>"/>
+                 placeholder="<?php echo $placeholder ? $placeholder['min'] : __('Min', ud_get_wp_property()->domain); ?>"/>
           <span class="wpp_dash">-</span>
           <input
             class="wpp_search_input_field wpp_search_input_field_max wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
             type="text" name="wpp_search[<?php echo $attrib; ?>][max]" value="<?php echo $value['max']; ?>"
-            placeholder="<?php echo $placeholder['max']; ?>"/>
+            placeholder="<?php echo $placeholder ? $placeholder['max'] : __('Max', ud_get_wp_property()->domain); ?>"/>
           <?php
           break;
         case 'range_dropdown':
