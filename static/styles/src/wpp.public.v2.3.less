@@ -91,6 +91,11 @@
 body,
 #wpp_layout {
 
+  h3.widget-title {
+    font-size: 1.4em;
+    margin-bottom: 0.5em;
+  }
+
   /* WP Property overview shortcode */
   .wpp_property_overview_shortcode {
     position: relative;
@@ -563,78 +568,76 @@ body,
     .properties_pagination {
 
       .wpp_pagination_slider_status {
-        line-height: 4em;
         .clearfix;
 
         .wpp_property_results {
           float: left;
           font-size: 20px;
+          line-height: 38px;
         }
-        .wpp_sorter_box {
-          float: right;
-          .wpp_sorter_options {
-            float: left;
-            .wpp_sort_by_text {
-              padding-right: 5px;
-              font-size: 14px;
-              font-weight: bold;
-            }
-            .wpp_sortable_link {
-              background-color: #145fc8;
-              color: #fff;
-              cursor: pointer;
-              padding: 0 2em;
-              line-height: 40px;
-              display: inline-block;
-              margin-right: 5px;
-            }
-
-            .wpp_sortable_dropdown {
-              display: inline-block;
-              float: none;
-              margin: 0;
-              width: auto;
-              height: 40px;
-              padding: 0 1em;
-              margin-right: 5px;
-            }
+        .wpp_sorter_options {
+          padding: 1em 0;
+          .clearfix;
+          .wpp_sort_by_text {
+            padding-right: 5px;
+            font-size: 14px;
+            font-weight: bold;
           }
-          .wpp_template_view {
-            border: 1px solid #bbb;
-            float: right;
+          .wpp_sortable_link {
+            background-color: #145fc8;
+            color: #fff;
+            cursor: pointer;
+            padding: 0 2em;
+            line-height: 40px;
+            display: inline-block;
+            margin-right: 5px;
+            margin-bottom: 10px;
+          }
+
+          .wpp_sortable_dropdown {
+            display: inline-block;
+            float: none;
+            margin: 0;
+            width: auto;
             height: 40px;
-            margin: 8px 0 0;
-            .wpp_template_view_button {
-              background-color: #fff;
-              color: #bbb;
-              cursor: pointer;
+            padding: 0 1em;
+            margin-right: 5px;
+          }
+        }
+        .wpp_template_view {
+          border: 1px solid #bbb;
+          float: right;
+          height: 40px;
+          .wpp_template_view_button {
+            background-color: #fff;
+            color: #bbb;
+            cursor: pointer;
+            display: block;
+            float: left;
+            height: 38px;
+            width: 38px;
+            transition: color 0.15s ease-in-out 0s;
+            -moz-transition: color 0.15s ease-in-out 0s;
+            -webkit-transition: color 0.15s ease-in-out 0s;
+            &:after {
+              font-family: 'FontAwesome';
               display: block;
-              float: left;
-              height: 38px;
-              width: 38px;
-              transition: color 0.15s ease-in-out 0s;
-              -moz-transition: color 0.15s ease-in-out 0s;
-              -webkit-transition: color 0.15s ease-in-out 0s;
+              text-align: center;
+              line-height: 38px;
+              font-size: 20px;
+            }
+            &.wpp_template_grid {
+              border-right: 1px solid #bbb;
               &:after {
-                font-family: 'FontAwesome';
-                display: block;
-                text-align: center;
-                line-height: 38px;
-                font-size: 20px;
+                content: "\f009";
               }
-              &.wpp_template_grid {
-                border-right: 1px solid #bbb;
-                &:after {
-                  content: "\f009";
-                }
-              }
-              &.wpp_template_row:after {
-                content: "\f00b";
-              }
-              &:hover,
-              &.active {
-                color: #414141;
-              }
+            }
+            &.wpp_template_row:after {
+              content: "\f00b";
+            }
+            &:hover,
+            &.active {
+              color: #414141;
             }
           }
         }
@@ -782,9 +785,7 @@ body,
 
   /* WP Property search widget */
   .wpp_search_properties_widget {
-
     .wpp_shortcode_search_form {
-
       ul {
         margin: 0;
         padding: 0;
@@ -797,6 +798,7 @@ body,
             display: block;
             font-weight: 600;
             margin: 0 0 5px;
+            min-height: 1em;
           }
           &.wpp_search_form_element {
             margin: 0 0 10px;
@@ -828,9 +830,9 @@ body,
   /* WP Property search widget V2 */
   .wpp_shortcode_search_v2,
   .wpp_search_properties_widget_v2 {
-    border: 1px solid #e3e3e3;
-    padding: 2em 1em;
     .wpp_shortcode_search_form {
+      border: 1px solid #e3e3e3;
+      padding: 2em 1em;
 
       div.wpp_search_elements_v2 {
         margin: 0 !important;
@@ -939,6 +941,7 @@ body,
           display: block;
           font-weight: 600;
           margin: 0 0 5px;
+          min-height: 1em;
         }
 
       }
@@ -1294,6 +1297,12 @@ body,
       /* Detailed List */
     }
     /* .wpp_feature_list */
+    &.wpp_features_box_full_width {
+      padding: 0;
+      .wpp_feature_list {
+        width: 100%;
+      }
+    }
   }
   /* Features list V2 */
 
@@ -1314,6 +1323,11 @@ body,
 
   /* Agent widget */
   .widget_agentwidget {
+
+    h3.widget-title {
+      font-size: 1.4em;
+      margin-bottom: 0.5em;
+    }
 
     ul.wpp_agent_info_list {
       margin: 0;
@@ -1543,12 +1557,6 @@ body,
   }
   /* wpp_supermap_wrapper */
 
-  /* widget_property_responsive_slideshow */
-  .widget_property_responsive_slideshow {
-    position: relative;
-  }
-  /* widget_property_responsive_slideshow */
-
   /* widget_tag_cloud */
   .widget_tag_cloud {
     .tagcloud {
@@ -1562,4 +1570,61 @@ body,
     }
   }
   /* widget_tag_cloud */
+
+  /* wpp_latest_properties_widget */
+  .wpp_latest_properties_widget_wrapper {
+    border: 1px solid #e3e3e3;
+    padding: 2em 1em;
+    .property_widget_block {
+      margin: 0 auto 1em;
+      max-width: 100%;
+      text-align: center;
+    }
+    .view-all {
+      a.btn {
+        background-color: #145fc8;
+        color: #fff;
+        cursor: pointer;
+        display: block;
+        line-height: 40px;
+        margin-right: 5px;
+        padding: 0 2em;
+        text-align: center;
+        text-decoration: none !important;
+      }
+    }
+  }
+  /* wpp_latest_properties_widget */
+
+  /* property-resp-slideshow */
+  .property-resp-slideshow {
+    border: 1px solid #e3e3e3;
+    padding: 2em 1em;
+  }
+  /* property-resp-slideshow */
+
+  /* wpp_featured_properties_widget */
+  .wpp_featured_properties_widget_wrapper {
+    border: 1px solid #e3e3e3;
+    padding: 2em 1em;
+    .property_widget_block {
+      margin: 0 auto 1em;
+      max-width: 100%;
+      text-align: center;
+    }
+    .view-all {
+      a.btn {
+        background-color: #145fc8;
+        color: #fff;
+        cursor: pointer;
+        display: block;
+        line-height: 40px;
+        margin-right: 5px;
+        padding: 0 2em;
+        text-align: center;
+        text-decoration: none !important;
+      }
+    }
+  }
+  /* wpp_featured_properties_widget */
 }

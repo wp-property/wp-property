@@ -61,6 +61,8 @@ class LatestPropertiesWidget extends WP_Widget {
       echo $before_title . $title . $after_title;
     }
 
+    echo !WPP_LEGACY_WIDGETS ? '<div class="wpp_latest_properties_widget_wrapper">' : '';
+
     foreach ( $postslist as $post ) {
       $this_property = WPP_F::get_property( $post->ID, 'return_object=true' );
       $image = isset( $this_property->featured_image ) ? wpp_get_image_link( $this_property->featured_image, $image_type, array( 'return' => 'array' ) ) : false;
@@ -68,7 +70,10 @@ class LatestPropertiesWidget extends WP_Widget {
       $height = ( !empty( $image_size[ 'height' ] ) ? $image_size[ 'height' ] : ( !empty( $image[ 'height' ] ) ? $image[ 'height' ] : '' ) );
       ?>
       <div class="property_widget_block latest_entry clearfix"
-           style="<?php echo( $width ? 'width: ' . ( $width + 5 ) . 'px;' : '' ); ?>">
+        <?php if (WPP_LEGACY_WIDGETS) { ?>
+          style="<?php echo($width ? 'width: ' . ($width + 5) . 'px;' : ''); ?>"
+        <?php } ?>
+      >
         <?php if ( $hide_image !== 'on' ) { ?>
           <?php if ( !empty( $image ) ) : ?>
             <a class="sidebar_property_thumbnail latest_property_thumbnail thumbnail"
@@ -127,6 +132,7 @@ class LatestPropertiesWidget extends WP_Widget {
       echo '<p class="view-all"><a href="' . site_url() . '/' . $wp_properties[ 'configuration' ][ 'base_slug' ] . '" class="btn btn-large">' . __( 'View All', ud_get_wp_property()->domain ) . '</a></p>';
     }
     echo '<div class="clear"></div>';
+    echo !WPP_LEGACY_WIDGETS ? '</div>' : '';
     echo '</div>';
     echo $after_widget;
   }

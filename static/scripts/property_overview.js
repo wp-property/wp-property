@@ -649,6 +649,7 @@
         if (typeof window.localStorage != 'undefined') {
           localStorage.setItem('wpp_shortcode_template', template_class);
         }
+        properties_width();
       });
     });
 
