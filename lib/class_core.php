@@ -1468,7 +1468,7 @@ class WPP_Core {
 
   public function wpp_settings_lock_heartbeat_received( $response, $data, $screen_id ){
     if(isset( $data['property_settings_lock'] )){
-      if($data['property_settings_lock']) {
+      if($data['property_settings_lock'] === true || $data['property_settings_lock'] == 'true') {
         if ( $new_lock = $this->wpp_settings_set_lock() )
           $response['property_settings_lock']['new_lock'] = implode( ':', $new_lock );
       }

@@ -3214,8 +3214,16 @@ class WPP_F extends UsabilityDynamics\Utility
       WPP_F::clear_cache();
       
       if(WPP_FEATURE_FLAG_SETTINGS_V2){
+        $wp_properties = $wpp_settings;
+        ud_get_wp_property()->core->wpp_settings_remove_lock();
+        $return['lock_removed'] = true;
+
+        $settings = new UsabilityDynamics\WPP\Settings(array(
+          'key' => 'wpp_settings',
+          'store' => 'options',
+        ));
         ob_start();
-        include ud_get_wp_property()->path("static/views/admin/settings.php", 'dir');
+          $settings->render_page();
         $return['wpp_settings_page'] = ob_get_clean();
       }
 

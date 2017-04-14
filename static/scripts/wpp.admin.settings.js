@@ -129,9 +129,6 @@ jQuery.extend( wpp = wpp || {}, {
                * @param response
                */
               function onSaveSettingsResponse( response ) {
-                // releasing lock
-                wp.heartbeat.enqueue( 'property_settings_lock', false, true);
-                wp.heartbeat.connectNow();
 
                 try {
                   var data = jQuery.parseJSON( response );
@@ -149,7 +146,7 @@ jQuery.extend( wpp = wpp || {}, {
                     wppShowMessage('updated');
                   }
                   else{
-                  window.location.href = data.redirect;
+                    window.location.href = data.redirect;
                   }
                 } else {
                   console.error( "Error saving WP-Property settings." );
@@ -165,6 +162,10 @@ jQuery.extend( wpp = wpp || {}, {
 
               var data = jQuery( this ).serialize();
 
+              if(featureFlags.WPP_FEATURE_FLAG_SETTINGS_V2){
+                wp.heartbeat.dequeue('property_settings_lock');
+              }
+
               jQuery.ajax( {
                 type: 'POST',
                 url: wpp.instance.ajax_url,
@@ -178,7 +179,7 @@ jQuery.extend( wpp = wpp || {}, {
                     wppShowMessage('error');
                   }
                   else{
-                  alert( wpp.strings.undefined_error );
+                    alert( wpp.strings.undefined_error );
                   }
                   btn.prop( 'disabled', false );
                 }
@@ -727,7 +728,7 @@ jQuery.extend( wpp = wpp || {}, {
                 wppShowMessage('updated', "You are editing the settings. Settings page is on readonly mode for other users.");
               }
               else if(response.hasOwnProperty('lock_removed')){
-                wppShowMessage('updated', "Lock removed.");
+                //wppShowMessage('updated', "Lock removed.");
               }
               else{
                 wppShowMessage(false);
