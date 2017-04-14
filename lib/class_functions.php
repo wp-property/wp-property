@@ -3184,6 +3184,7 @@ class WPP_F extends UsabilityDynamics\Utility
     $return = array(
       'success' => true,
       'message' => '',
+      'wpp_settings_page' => '',
       'redirect' => admin_url("edit.php?post_type=property&page=property_settings&message=updated")
     );
 
@@ -3211,6 +3212,12 @@ class WPP_F extends UsabilityDynamics\Utility
       }
       /* Flush WPP cache */
       WPP_F::clear_cache();
+      
+      if(WPP_FEATURE_FLAG_SETTINGS_V2){
+        ob_start();
+        include ud_get_wp_property()->path("static/views/admin/settings.php", 'dir');
+        $return['wpp_settings_page'] = ob_get_clean();
+      }
 
     } catch (Exception $e) {
       $return['success'] = false;
