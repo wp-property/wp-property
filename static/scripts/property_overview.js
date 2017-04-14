@@ -655,10 +655,11 @@
 
   };
 
+  jQuery('img', property_overview_box).load(function () {
+    properties_height(property_overview_box);
+  });
   jQuery(window).load(function () {
-    jQuery('img', property_overview_box).load(function () {
-      properties_height(property_overview_box);
-    });
+    properties_height(property_overview_box);
     properties_width();
 
     if (typeof window.localStorage != 'undefined') {
