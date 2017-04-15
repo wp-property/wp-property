@@ -3184,7 +3184,6 @@ class WPP_F extends UsabilityDynamics\Utility
     $return = array(
       'success' => true,
       'message' => '',
-      'wpp_settings_page' => '',
       'redirect' => admin_url("edit.php?post_type=property&page=property_settings&message=updated")
     );
 
@@ -3213,19 +3212,6 @@ class WPP_F extends UsabilityDynamics\Utility
       /* Flush WPP cache */
       WPP_F::clear_cache();
       
-      if(WPP_FEATURE_FLAG_SETTINGS_V2){
-        $wp_properties = $wpp_settings;
-        ud_get_wp_property()->core->wpp_settings_remove_lock();
-        $return['lock_removed'] = true;
-
-        $settings = new UsabilityDynamics\WPP\Settings(array(
-          'key' => 'wpp_settings',
-          'store' => 'options',
-        ));
-        ob_start();
-          $settings->render_page();
-        $return['wpp_settings_page'] = ob_get_clean();
-      }
 
     } catch (Exception $e) {
       $return['success'] = false;
@@ -3233,6 +3219,31 @@ class WPP_F extends UsabilityDynamics\Utility
     }
 
     return json_encode($return);
+  }
+
+
+  /**
+   * Get settings page html and wpp_settings
+   *
+   * @author alim
+   * @param none
+   * @return array
+   */
+  public static function wpp_ajax_get_settings_page() {
+    ud_get_wp_property()->core->wpp_settings_remove_lock();
+    $return['lock_removed'] = true;
+
+    $settings = new UsabilityDynamics\WPP\Settings(array(
+      'key' => 'wpp_settings',
+      'store' => 'options',
+    ));
+    ob_start();
+      $settings->render_page();
+    $return['wpp_settings_page'] = ob_get_clean();
+
+    $return['wpp_settings'] = apply_filters( 'wpp::localization::instance', ud_get_wp_property()->get() );
+
+    wp_send_json($return);
   }
 
   /**

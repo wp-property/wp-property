@@ -59,7 +59,6 @@ jQuery.extend( wpp = wpp || {}, {
        */
       ready: function () {
         var $form = jQuery( '#wpp_settings_form' );
-        console.log($form);
 
         if( typeof jQuery.fn.tooltip == 'function' ) {
           jQuery( document ).tooltip( {
@@ -141,9 +140,25 @@ jQuery.extend( wpp = wpp || {}, {
 
                 if( data && data.success ) {
                   if(featureFlags.WPP_FEATURE_FLAG_SETTINGS_V2){
-                    jQuery('.wrap.wpp_settings_page').html(data.wpp_settings_page);
-                    wpp.ui.settings.ready();
-                    wppShowMessage('updated');
+                    jQuery.ajax( {
+                      type: 'POST',
+                      url: wpp.instance.ajax_url,
+                      dataType: 'json',
+                      data: {
+                        action: 'wpp_get_settings_page',
+                      },
+                      success: function (data) {
+                        wpp.instance.settings = data.wpp_settings;
+                        jQuery('.wrap.wpp_settings_page').hide().html(data.wpp_settings_page).fadeIn();
+                        wpp.ui.settings.ready();
+                        wppShowMessage('updated');
+                        jQuery('html, body').animate({scrollTop : 0},800);
+                      },
+                      error: function () {
+                        wppShowMessage('error');
+                      }
+                    } );
+                    
                   }
                   else{
                     window.location.href = data.redirect;
@@ -165,6 +180,8 @@ jQuery.extend( wpp = wpp || {}, {
               if(featureFlags.WPP_FEATURE_FLAG_SETTINGS_V2){
                 wp.heartbeat.dequeue('property_settings_lock');
               }
+
+              wppShowMessage(false);
 
               jQuery.ajax( {
                 type: 'POST',
@@ -736,7 +753,10 @@ jQuery.extend( wpp = wpp || {}, {
             }
           });
         } // end if WPP_FEATURE_FLAG_SETTINGS_V2;
-      },
+
+        jQuery(document).trigger('wpp.ui.settings.ready');
+
+      }, // End ready();
 
       /**
        * Renders specified image in upload section
