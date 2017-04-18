@@ -1687,6 +1687,10 @@ body .wpp_features_box.wpp_features_box_full_width .wpp_feature_list,
 #wpp_layout .wpp_features_box.wpp_features_box_full_width .wpp_feature_list {
   width: 100%;
 }
+body .wpp_features_box.wpp_features_box_full_width.wpp_features_box_content,
+#wpp_layout .wpp_features_box.wpp_features_box_full_width.wpp_features_box_content {
+  padding: 1em;
+}
 body ul.property_status_list,
 #wpp_layout ul.property_status_list {
   margin: 0;

@@ -702,7 +702,7 @@ if (!function_exists('draw_stats')):
       }
 
       // Taxonomies. Adding terms link, only if multi-value taxonomy.
-      if (isset($attribute_data['storage_type']) && $attribute_data['storage_type'] == 'taxonomy' && $attribute_data['multiple']) {
+      if (isset($attribute_data['storage_type']) && $attribute_data['storage_type'] == 'taxonomy') {
 
         $terms = wp_get_post_terms($property->ID, $tag);
         if (count($terms) == 0) {
