@@ -91,9 +91,11 @@
 body,
 #wpp_layout {
 
-  h3.widget-title {
+  h3.widget-title,
+  h3.widgettitle {
     font-size: 1.4em;
     margin-bottom: 0.5em;
+    text-transform: none;
   }
 
   /* WP Property overview shortcode */
@@ -404,14 +406,18 @@ body,
                     }
                   }
                 }
+                ul#wpp_overview_data,
                 ul.wpp_overview_data {
-                  margin: 0 !important;
-                  padding: 0 !important;
-                  list-style: none !important;
+                  margin: 0;
+                  padding: 0;
+                  list-style: none;
                   li {
                     margin: 0;
                     padding: 0;
                     list-style: none;
+                    &.property_price {
+                      margin-bottom: 0.5em;
+                    }
                     span {
                       font-weight: bold;
                       display: inline-block;
@@ -467,6 +473,8 @@ body,
                   .property_image {
                     img {
                       width: 100%;
+                      min-width: 100%;
+                      max-width: 100%;
                     }
                   }
                 }
@@ -550,10 +558,21 @@ body,
                     margin: 0;
                     padding: 0;
                     list-style: none;
+                    &.property_price {
+                      margin-bottom: 0.5em;
+                    }
                     span {
                       font-weight: bold;
                       display: inline-block;
                       padding-right: 5px;
+                    }
+                    a.button {
+                      background-color: #145fc8;
+                      color: #fff;
+                      display: inline-block;
+                      margin-top: 0.5em;
+                      padding: 0.5em 1em;
+                      text-decoration: none;
                     }
                   }
                 }
@@ -834,6 +853,9 @@ body,
       border: 1px solid #e3e3e3;
       padding: 2em 1em;
 
+      br {
+        display: none;
+      }
       div.wpp_search_elements_v2 {
         margin: 0 !important;
         padding: 0 !important;
@@ -1521,6 +1543,8 @@ body,
         .property_in_list {
           border-bottom: 1px solid #e3e3e3;
           padding: 1em;
+          .clearfix;
+
           .property_in_list_items {
             list-style: outside none none !important;
             margin: 0;
@@ -1599,12 +1623,35 @@ body,
   }
   /* wpp_latest_properties_widget */
 
+  /* wpp_other_properties_widget_wrapper */
+  .wpp_other_properties_widget_wrapper {
+    border: 1px solid #e3e3e3;
+    padding: 2em 1em;
+    .property_widget_block {
+      margin: 0 auto 1em;
+      text-align: center;
+    }
+  }
+  /* wpp_other_properties_widget_wrapper */
+
   /* property-resp-slideshow */
   .property-resp-slideshow {
     border: 1px solid #e3e3e3;
     padding: 2em 1em;
   }
   /* property-resp-slideshow */
+
+  /* property_term_list_v2 */
+  .widget #property_term_list_v2,
+  .widget ul#property_term_list_v2,
+  #property_term_list_v2,
+  ul#property_term_list_v2 {
+    margin: 0;
+    padding: 2em 1em;
+    list-style: none;
+    border: 1px solid #e3e3e3;
+  }
+  /* property_term_list_v2 */
 
   /* wpp_featured_properties_widget */
   .wpp_featured_properties_widget_wrapper {
