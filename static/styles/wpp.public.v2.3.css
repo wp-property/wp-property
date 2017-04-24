@@ -842,6 +842,14 @@ body .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_
   /* pagination-loadmore */
   /* pagination-numeric */
 }
+body .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_buttons_wrapper:after,
+#wpp_layout .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_buttons_wrapper:after,
+body .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_buttons_wrapper:before,
+#wpp_layout .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_buttons_wrapper:before {
+  display: block;
+  clear: both;
+  content: '';
+}
 body .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_buttons_wrapper.pagination-loadmore,
 #wpp_layout .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_buttons_wrapper.pagination-loadmore {
   position: relative;
@@ -921,6 +929,7 @@ body .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_
   margin: 0;
   padding: 0;
   list-style: none;
+  float: none;
 }
 body .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_buttons_wrapper.pagination-numeric .property-overview-navigation li > ul li.page,
 #wpp_layout .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_buttons_wrapper.pagination-numeric .property-overview-navigation li > ul li.page {
