@@ -46,7 +46,7 @@ namespace UsabilityDynamics\WPP {
         // Update taxonomy terms on saving property
         add_action( "save_property", function( $post_id ){
           // if wpp_listing_type is set then update property_type attribute.
-          if(isset($_REQUEST[ 'wpp_listing_type' ])){
+          if(isset($_REQUEST[ 'wpp_listing_type' ]) && taxonomy_exists('wpp_listing_type')){
             $term = get_the_terms( $post_id, 'wpp_listing_type');
             if(is_object( $term[0] ) )
               update_post_meta( $post_id, 'property_type', $term[0]->slug);
@@ -62,6 +62,7 @@ namespace UsabilityDynamics\WPP {
           $taxonomies['wpp_listing_type'] = array(
             'default' => true,
             'readonly' => true,
+            'system' => true,
             'hidden' => true,
             'hierarchical' => false,
             'unique' => true,

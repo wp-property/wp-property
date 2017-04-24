@@ -1,31 +1,5 @@
 jQuery(document).ready(function () {
 
-  if (typeof jQuery.fn.fancybox === 'function') {
-    jQuery('a.fancybox_image').live('click', function () {
-      if (!jQuery(this).hasClass('activated')) {
-        jQuery(this).fancybox({
-          'type': "image",
-          'transitionIn': 'elastic',
-          'transitionOut': 'elastic',
-          'speedIn': 600,
-          'speedOut': 200,
-          'overlayShow': false
-        });
-        jQuery(this).addClass('activated');
-        jQuery(this).trigger('click');
-      }
-      return false;
-    });
-  }
-
-  jQuery("a.fancybox_image img").click(function (e) {
-    /* Do nothing in FancyBox is set */
-    if (typeof jQuery.fn.fancybox === 'function') {
-      return null;
-    }
-    /* Fancybox is not set as expected, do not open the image URL */
-    e.preventDefault();
-  });
 
   /* Scroll to top of pagination */
   jQuery(document).bind('wpp_pagination_change', function (e, data) {

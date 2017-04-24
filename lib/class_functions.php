@@ -2932,8 +2932,7 @@ class WPP_F extends UsabilityDynamics\Utility
   {
     $l10n_id = get_option('wp-property-l10n-attachment');
     if($l10n_id != false){
-      $l10n_path = get_attached_file( $l10n_id );
-      wp_delete_file( $l10n_path );
+      wp_delete_attachment( $l10n_id );
     }
     return __('Cache was successfully cleared', ud_get_wp_property()->domain);
   }
@@ -4615,7 +4614,7 @@ class WPP_F extends UsabilityDynamics\Utility
       if (!empty($image) && is_array($image)) {
         $imageHTML = "<img width=\"{$image['width']}\" height=\"{$image['height']}\" src=\"{$image['link']}\" alt=\"" . addslashes($post->post_title) . "\" />";
         if (@$wp_properties['configuration']['property_overview']['fancybox_preview'] == 'true' && !empty($property['featured_image_url'])) {
-          $imageHTML = "<a href=\"{$property['featured_image_url']}\" class=\"thumbnail\">{$imageHTML}</a>";
+          $imageHTML = "<a href=\"{$property['featured_image_url']}\" class=\"fancybox_image thumbnail\">{$imageHTML}</a>";
         }
       }
     }
