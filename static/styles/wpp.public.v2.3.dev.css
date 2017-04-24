@@ -2094,8 +2094,30 @@ body .wpp_featured_properties_widget_wrapper .property_widget_block,
   max-width: 100%;
   text-align: center;
 }
+body .wpp_featured_properties_widget_wrapper .property_widget_block ul,
+#wpp_layout .wpp_featured_properties_widget_wrapper .property_widget_block ul,
+body .wpp_featured_properties_widget_wrapper .property_widget_block ul li,
+#wpp_layout .wpp_featured_properties_widget_wrapper .property_widget_block ul li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+body .wpp_featured_properties_widget_wrapper .view-all:after,
+#wpp_layout .wpp_featured_properties_widget_wrapper .view-all:after,
+body .wpp_featured_properties_widget_wrapper p.more:after,
+#wpp_layout .wpp_featured_properties_widget_wrapper p.more:after,
+body .wpp_featured_properties_widget_wrapper .view-all:before,
+#wpp_layout .wpp_featured_properties_widget_wrapper .view-all:before,
+body .wpp_featured_properties_widget_wrapper p.more:before,
+#wpp_layout .wpp_featured_properties_widget_wrapper p.more:before {
+  display: block;
+  clear: both;
+  content: '';
+}
 body .wpp_featured_properties_widget_wrapper .view-all a.btn,
-#wpp_layout .wpp_featured_properties_widget_wrapper .view-all a.btn {
+#wpp_layout .wpp_featured_properties_widget_wrapper .view-all a.btn,
+body .wpp_featured_properties_widget_wrapper p.more a.btn,
+#wpp_layout .wpp_featured_properties_widget_wrapper p.more a.btn {
   background-color: #145fc8;
   color: #fff;
   cursor: pointer;

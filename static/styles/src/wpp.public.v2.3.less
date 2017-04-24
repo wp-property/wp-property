@@ -1661,8 +1661,16 @@ body,
       margin: 0 auto 1em;
       max-width: 100%;
       text-align: center;
+      ul,
+      ul li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
     }
-    .view-all {
+    .view-all,
+    p.more {
+      .clearfix;
       a.btn {
         background-color: #145fc8;
         color: #fff;
