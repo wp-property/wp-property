@@ -5,19 +5,19 @@
   /**
    *
    */
-  function properties_height(container, minHeight, maxHeight) {
+  function properties_height(container) {
     jQuery('.wpp_property_overview_shortcode_v2').each(function (k, v) {
-      var tallest = (minHeight) ? minHeight : 0;
+      var tallest = 0;
+      console.log(jQuery(v));
       var box = jQuery(container, jQuery(v));
       box.css('height', 'auto');
-      box.each(function () {
-        if (jQuery(this).height() > tallest) {
-          tallest = jQuery(this).height();
+      box.each(function (j, i) {
+        if (jQuery(i).height() > tallest) {
+          tallest = jQuery(i).height();
         }
       });
-      if ((maxHeight) && tallest > maxHeight) tallest = maxHeight;
-      box.each(function () {
-        jQuery(this).height(tallest); //.css("overflow","auto");
+      box.each(function (t, y) {
+        jQuery(y).height(tallest); //.css("overflow","auto");
       });
     });
   }
