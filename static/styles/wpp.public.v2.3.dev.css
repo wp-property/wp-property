@@ -1563,6 +1563,7 @@ body .wpp_feature_list span.value,
 body .widget_wpp_property_stats span.value,
 #wpp_layout .widget_wpp_property_stats span.value {
   margin: 0 0 0 10px;
+  word-break: break-all;
 }
 body .wpp_feature_list span.value ul,
 #wpp_layout .wpp_feature_list span.value ul,
@@ -1645,6 +1646,7 @@ body .widget_wpp_property_stats_v2 ul.property_stats li span.value,
 #wpp_layout .widget_wpp_property_stats_v2 ul.property_stats li span.value {
   text-align: right;
   display: inline-block;
+  word-break: break-all;
 }
 body .wpp_features_box,
 #wpp_layout .wpp_features_box {
