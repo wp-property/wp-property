@@ -1291,7 +1291,7 @@ class WPP_Core {
    * @author peshkov@UD
    */
   public function maybe_generate_l10n_script() {
-    $l10n_id = get_option('wp-property-l10n-attachment');
+    $l10n_id = get_option('wp-property-l10n-attachment', false);
 
     if($l10n_id != false && $attachment_url = wp_get_attachment_url( $l10n_id )){
       return $attachment_url;

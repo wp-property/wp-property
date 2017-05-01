@@ -2933,6 +2933,7 @@ class WPP_F extends UsabilityDynamics\Utility
     $l10n_id = get_option('wp-property-l10n-attachment');
     if($l10n_id != false){
       wp_delete_attachment( $l10n_id );
+      delete_option('wp-property-l10n-attachment');
     }
     return __('Cache was successfully cleared', ud_get_wp_property()->domain);
   }
