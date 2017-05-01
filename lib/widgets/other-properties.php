@@ -82,6 +82,10 @@ class OtherPropertiesWidget extends WP_Widget {
       $html[ ] = $before_title . $title . $after_title;
     }
 
+    if (!WPP_LEGACY_WIDGETS) {
+      $html[] = "<div class='wpp_other_properties_widget_wrapper'>";
+    }
+
     if ( $shuffle_order == 'on' ) {
       shuffle( $properties );
     }
@@ -164,6 +168,10 @@ class OtherPropertiesWidget extends WP_Widget {
     }
 
     $html[ ] = '</div>';
+
+    if (!WPP_LEGACY_WIDGETS) {
+      $html[] = '</div>';
+    }
 
     $html[ ] = $after_widget;
 

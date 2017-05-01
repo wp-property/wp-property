@@ -224,23 +224,29 @@ namespace UsabilityDynamics\WPP {
        */
       public function post_title_suggest( $post_args, $post_id ) {
 
-        $input = array( $post_args['post_title'] );
+        $input = array();
 
-        // Split Title to the parts for better Completion Suggestion
-        $parts = explode( ' ', $post_args['post_title'] );
-        foreach( $parts as $k => $v ) {
-          unset( $parts[ $k ] );
-          $_parts = $parts;
-          if( isset( $_parts[ ( $k + 1 ) ] ) && strlen( $_parts[ ( $k + 1 ) ] ) <= 3 ) {
-            unset( $_parts[ ( $k + 1 ) ] );
+        if( !empty( $post_args['post_title'] ) ) {
+
+          $input[] = $post_args['post_title'];
+
+          // Split Title to the parts for better Completion Suggestion
+          $parts = explode( ' ', $post_args['post_title'] );
+          foreach( $parts as $k => $v ) {
+            unset( $parts[ $k ] );
+            $_parts = $parts;
+            if( isset( $_parts[ ( $k + 1 ) ] ) && strlen( $_parts[ ( $k + 1 ) ] ) <= 3 ) {
+              unset( $_parts[ ( $k + 1 ) ] );
+            }
+            $part = trim( implode( ' ', $_parts ) );
+            if( strlen( $part ) >= 5 && !in_array( $part, $input ) ) {
+              $input[] = $part;
+            }
           }
-          $part = trim( implode( ' ', $_parts ) );
-          if( strlen( $part ) >= 5 && !in_array( $part, $input ) ) {
-            $input[] = $part;
-          }
+
+          $input[] = str_replace( array( ' ', '-', ',', '.' ), '', strtolower( sanitize_title( $post_args['post_title'] ) ) );
+
         }
-
-        $input[] = str_replace( array( ' ', '-', ',', '.' ), '', strtolower( sanitize_title( $post_args['post_title'] ) ) );
 
         $post_args['title_suggest'] = array(
           "input" => $input
