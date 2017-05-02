@@ -50,7 +50,7 @@ class class_wpp_supermap {
     if(current_user_can(self::$capability)) {
       add_filter('wpp_settings_nav', array('class_wpp_supermap', 'settings_nav'));
       add_filter('wpp::settings::developer::types', array('class_wpp_supermap', 'wpp_property_types_variables'));
-      add_action('wpp::settings::developer::types::settings', array('class_wpp_supermap', 'property_type_settings'));
+      add_filter('wpp::settings::developer::types::settings', array('class_wpp_supermap', 'property_type_settings'));
 
       //* Add Settings Page */
       add_action('wpp_settings_content_supermap', array('class_wpp_supermap', 'settings_page'));

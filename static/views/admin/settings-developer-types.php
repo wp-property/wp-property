@@ -39,6 +39,132 @@ $wpp_property_types_variables = apply_filters( 'wpp::settings::developer::types'
 <script type="text/template" id="wpp-property-types-variables">
   <?php echo json_encode($wpp_property_types_variables);?>
 </script>
+  
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+  var wp_properties = wpp.instance.settings;
+  var configuration = wp_properties.configuration;
+  var supermap_configuration = {};
+
+  if( typeof configuration.feature_settings != 'undefined' && typeof configuration.feature_settings.supermap != 'undefined' ) {
+    supermap_configuration = configuration.feature_settings.supermap;
+  }
+
+  var filtered_property_types           = <?php echo json_encode($filtered_property_types);?>;
+  var hidden_attributes_do_action       = <?php echo json_encode($hidden_attributes_do_action);?>;
+  var inherited_attributes_do_action    = <?php echo json_encode($inherited_attributes_do_action);?>;
+  var property_type_settings_do_action  = <?php echo json_encode($property_type_settings_do_action);?>;
+
+
+  var wpp_property_types_variables  = <?php echo json_encode($wpp_property_types_variables);?>;
+
+  jQuery.each(wpp_property_types_variables.globals, function(index, val){
+    window[index] = val;
+  });
+  delete wpp_property_types_variables.globals;
+
+  // Defining property of object wp_properties(if not defined) to avoid checking of typeof != 'undefined' in template
+  var requiredProps = [
+    'configuration.default_image', 
+    'configuration.default_image.types', 
+    'searchable_property_types', 
+    'location_matters',
+    'hidden_attributes', 
+    'property_stats',
+    'property_meta', 
+  ];
+  
+  jQuery.each(requiredProps, function(index, item) {
+    if(typeof  wp_properties[item] == 'undefined' ) {
+      wp_properties[item] = {};
+    }
+  });
+
+  if(typeof  wp_properties.property_types == 'undefined' ) {
+    wp_properties.property_types = {'': ''};
+  }
+
+  window.selected = function(selected, current) {
+    var result = '';
+    current = current || true;
+
+    if ( selected === current )
+      result = " selected='selected' ";
+ 
+    return result;
+  }
+  
+  var wppTypes = Backbone.Model.extend({
+  });
+
+  var wppTypesCollection = Backbone.Collection.extend({
+    model: wppTypes,
+  });
+
+  var wppTypesView = Backbone.View.extend({
+    tagName: 'tr',
+    className: 'wpp_dynamic_table_row',
+    attributes: function(){
+      return {
+        slug: this.model.get('property_slug'),
+        'data-property-slug': this.model.get('property_slug'),
+        new_row: this.model.get('property_slug') == '' ? true : false,
+        style: this.model.get('property_slug') == '' ? "display:none;" : "",
+      };
+    },
+    template: _.template($('#settings-developer-types-template').html()),
+    render: function() {
+      this.el.innerHTML = this.template(this.model.toJSON());
+      return this;
+    }
+  });
+
+
+
+  var wppTypesWrapperView = Backbone.View.extend({
+    el: '#wpp_inquiry_property_types tbody',
+    render: function() {
+      this.collection.each(this.addAttribute.bind(this));
+      return this;
+    },
+    addAttribute: function (model) {
+      var row = new wppTypesView({ model: model });
+      jQuery(this.el).append(row.render().el);
+    },
+
+  });
+
+
+  var _wppTypes = new wppTypesCollection();
+
+  jQuery.each(filtered_property_types, function(property_slug, label) {
+
+    if(typeof configuration.default_image.types[property_slug] == 'undefined'){
+      configuration.default_image.types[property_slug] = {url: '', id: ''}
+    }
+
+    var attributes = {
+      label                             : label,
+      slug                              : property_slug,
+      property_slug                     : property_slug,
+      wp_properties                     : wp_properties,
+      supermap_configuration            : supermap_configuration,
+      hidden_attributes_do_action       : hidden_attributes_do_action,
+      inherited_attributes_do_action    : inherited_attributes_do_action,
+      property_type_settings_do_action  : property_type_settings_do_action,
+    };
+    jQuery.extend(attributes, wpp_property_types_variables);
+    var row = new wppTypes(attributes);
+    _wppTypes.add(row);
+
+
+  });
+
+  var wrapper = new wppTypesWrapperView({ collection: _wppTypes });
+  jQuery("#wpp_inquiry_property_types tbody").empty().append(wrapper.render().el);
+
+});
+</script>
 
 <h3><?php printf( __( '%1s Types', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></h3>
 <table id="wpp_inquiry_property_types" class="ud_ui_dynamic_table widefat last_delete_row" allow_random_slug="true">
@@ -109,7 +235,12 @@ $wpp_property_types_variables = apply_filters( 'wpp::settings::developer::types'
             </label>
           </li>
 
-          <?php do_action( 'wpp::settings::developer::types::settings'); /* The action should output underscore template. Template should pass variable to filter "wpp::settings::developer::types" to use in template or global wp_properties is available.*/ ?>
+          <?php $property_type_settings = apply_filters( 'wpp::settings::developer::types::settings', array()); ?>
+          <?php foreach( (array) $property_type_settings as $property_type_setting ) : ?>
+            <li>
+              <?php echo $property_type_setting; ?>
+            </li>
+          <?php endforeach; ?>
 
           <% if( typeof property_type_settings_do_action[property_slug] != 'undefined'){
 
