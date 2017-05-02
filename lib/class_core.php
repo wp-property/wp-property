@@ -1289,12 +1289,32 @@ class WPP_Core {
    *
    * @since 1.41.5
    * @author peshkov@UD
+   * @param array $args
+   * @return bool|false|string
    */
-  public function maybe_generate_l10n_script() {
-    $l10n_id = get_option('wp-property-l10n-attachment', false);
+  public function maybe_generate_l10n_script( $args = array( )) {
+    $l10n_id = get_option('wp-property-l10n-attachment');
+
+    $args = wp_parse_args( $args, array(
+      'check_existence' => true
+    ) );
 
     if($l10n_id != false && $attachment_url = wp_get_attachment_url( $l10n_id )){
-      return $attachment_url;
+
+      // no existence check, return whatever we have
+      if( !isset( $args ) || !isset( $args['check_existence'] ) || !$args['check_existence'] ) {
+        return $attachment_url;
+      }
+
+      // get file path to verify it exists.
+      if( isset( $args ) && isset( $args['check_existence'] ) && $args['check_existence'] && $_attachment_path = get_attached_file( $l10n_id) ) {
+
+        if( file_exists( $_attachment_path ) ) {
+          return $attachment_url;
+        }
+
+      }
+
     }
 
     $upload_dir = wp_upload_dir();
@@ -1329,7 +1349,7 @@ class WPP_Core {
     if($l10n_id){
       $attachment['ID'] = $l10n_id;
     }
-    
+  
     // Save the data
     $id = wp_insert_attachment($attachment, $file);
     if ( is_wp_error($id) ) {
