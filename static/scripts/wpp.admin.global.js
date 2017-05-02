@@ -701,6 +701,9 @@ jQuery(document).ready(function() {
 
   // Delete dynamic row
   jQuery(".wpp_delete_row").live("click", function() {
+    if(jQuery(this).hasClass('disabled'))
+      return false;
+    
     var parent = jQuery(this).parents('tr.wpp_dynamic_table_row');
     var table = jQuery(jQuery(this).parents('table').get(0));
     var row_count = table.find(".wpp_delete_row").length;
