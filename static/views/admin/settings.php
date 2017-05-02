@@ -726,11 +726,6 @@ $l10n_id = get_option('wp-property-l10n-attachment');
             <pre id="wpp_show_settings_array_result" class="wpp_class_pre hidden"></pre>
           </div>
 
-          <div class="wpp_settings_block">
-            <?php _e('Clear WPP Cache. Some shortcodes and widgets use cache, so the good practice is clear it after widget, shortcode changes.', ud_get_wp_property()->domain) ?>
-            <input type="button" class="button" value="<?php _e('Clear Cache', ud_get_wp_property()->domain) ?>" id="wpp_clear_cache">
-          </div>
-
           <?php if (function_exists('icl_object_id')): ?>
             <div class="wpp_settings_block">
               <?php _e('Generate images for duplicates of properties (WPML plugin option). ', ud_get_wp_property()->domain) ?>
