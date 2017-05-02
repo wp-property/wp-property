@@ -270,7 +270,6 @@ namespace UsabilityDynamics\WPP {
          * Flush WP-Property cache
          */
         if (get_transient('wpp_cache_flush')) {
-          WPP_F::clear_cache();
           delete_transient('wpp_cache_flush');
         }
 
