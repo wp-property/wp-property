@@ -62,6 +62,8 @@ jQuery(document).ready(function($) {
 
   // Defining property of object wp_properties(if not defined) to avoid checking of typeof != 'undefined' in template
   var requiredProps = [
+    'configuration.default_image', 
+    'configuration.default_image.types', 
     'searchable_property_types', 
     'location_matters',
     'hidden_attributes', 
@@ -74,13 +76,6 @@ jQuery(document).ready(function($) {
       wp_properties[item] = {};
     }
   });
-
-  if(typeof  configuration.default_image == 'undefined' ) {
-    configuration.default_image = {};
-  }
-  if(typeof  configuration.default_image.types == 'undefined' ) {
-    configuration.default_image.types = {};
-  }
 
   if(typeof  wp_properties.property_types == 'undefined' ) {
     wp_properties.property_types = {'': ''};
@@ -239,7 +234,12 @@ jQuery(document).ready(function($) {
             </label>
           </li>
 
-          <?php do_action( 'wpp::settings::developer::types::settings'); /* The action should output underscore template. Template should pass variable to filter "wpp::settings::developer::types" to use in template or global wp_properties is available.*/ ?>
+          <?php $property_type_settings = apply_filters( 'wpp::settings::developer::types::settings', array()); ?>
+          <?php foreach( (array) $property_type_settings as $property_type_setting ) : ?>
+            <li>
+              <?php echo $property_type_setting; ?>
+            </li>
+          <?php endforeach; ?>
 
           <% if( typeof property_type_settings_do_action[property_slug] != 'undefined'){
 
