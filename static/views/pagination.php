@@ -23,11 +23,17 @@ if ($settings['type'] !== 'loadmore' || ($settings['type'] == 'loadmore' && $set
     $sort_html .= '<span class="wpp_total_page_count">' . $pages . '</span>.';
   }
   $sort_html .= '</span>';
+
+  /* View template */
+  $sort_html .= '<div class="wpp_template_view">';
+  $sort_html .= '<span class="wpp_template_view_button wpp_template_grid" wpp_template="grid"></span>';
+  $sort_html .= '<span class="wpp_template_view_button wpp_template_row" wpp_template="row"></span>';
+  $sort_html .= '</div>';
+  $sort_html .= '<div class="clearfix"></div>';
+
   if ($sortable_attrs) {
 
-    $sort_html .= '<div class="wpp_sorter_box">'; // .wpp_sorter_box
-
-    $sort_html .= '<span class="wpp_sorter_options"><span class="wpp_sort_by_text"> ' . $settings['sort_by_text'] . ' </span>';
+    $sort_html .= '<div class="wpp_sorter_options"><span class="wpp_sort_by_text"> ' . $settings['sort_by_text'] . ' </span>';
     if ($settings['sorter_type'] == 'buttons') {
       foreach ($sortable_attrs as $slug => $label) {
         $sort_html .= ' <span class="wpp_sortable_link ';
@@ -50,19 +56,10 @@ if ($settings['type'] !== 'loadmore' || ($settings['type'] == 'loadmore' && $set
     } else {
       $sort_html .= do_action('wpp_custom_sorter', array('settings' => $settings, 'wpp_query' => $wpp_query, 'sorter_type' => $settings['sorter_type']));
     }
-    $sort_html .= ' </span>'; // .wpp_sorter_options
-    $sort_html .= '</div>'; // .wpp_sorter_box
+    $sort_html .= ' </div>';
   }
 
-  /* View template */
-  $template_view_html = '';
-  $template_view_html .= '<div class="wpp_template_view">';
-  $template_view_html .= '<span class="wpp_template_view_button wpp_template_grid" wpp_template="grid"></span>';
-  $template_view_html .= '<span class="wpp_template_view_button wpp_template_row" wpp_template="row"></span>';
-  $template_view_html .= '</div>';
-  $sort_html .= $template_view_html;
-
-  $sort_html .= '<div class="clear"></div>';
+  $sort_html .= '<div class="clearfix"></div>';
   $sort_html .= '</div>';
 }
 

@@ -1,4 +1,5 @@
 ### 2.2.1 
+* Updated `maybe_generate_l10n_script` method to check for existence of file on disk, regenerating in needed.
 * Added term meta UI for standard taxonomies.
 * Added standard [wpp_schools] taxonomy, enabled by default with [WPP_FEATURE_FLAG_WPP_SCHOOLS] feature flag.
 * Improved logic for updating Taxonomies.

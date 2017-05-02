@@ -74,6 +74,8 @@ class FeaturedPropertiesWidget extends WP_Widget {
       echo $before_title . $title . $after_title;
     }
 
+    echo !WPP_LEGACY_WIDGETS ? '<div class="wpp_featured_properties_widget_wrapper">' : '';
+
     $count = 0;
 
     foreach ( $all_featured as $featured ) {
@@ -90,7 +92,11 @@ class FeaturedPropertiesWidget extends WP_Widget {
       }
 
       ?>
-      <div class="property_widget_block clearfix" style="<?php echo( $width ? 'width: ' . ( $width + 5 ) . 'px;' : '' ); ?> min-height: <?php echo $height; ?>px;">
+      <div class="property_widget_block clearfix"
+        <?php if (WPP_LEGACY_WIDGETS) { ?>
+          style="<?php echo($width ? 'width: ' . ($width + 5) . 'px;' : ''); ?> min-height: <?php echo $height; ?>px;"
+        <?php } ?>
+      >
         <?php if ( $hide_image !== 'on' ) : ?>
           <?php if ( !empty( $image ) ) : ?>
             <a class="sidebar_property_thumbnail thumbnail" href="<?php echo $this_property->permalink; ?>">
@@ -145,6 +151,7 @@ class FeaturedPropertiesWidget extends WP_Widget {
       echo '<p class="view-all"><a href="' . site_url() . '/' . $wp_properties[ 'configuration' ][ 'base_slug' ] . '" class="btn btn-large">' . __( 'View All', ud_get_wp_property()->domain ) . '</a></p>';
     }
     echo '<div class="clear"></div>';
+    echo !WPP_LEGACY_WIDGETS ? '</div>' : '';
     echo '</div>';
     echo $after_widget;
   }

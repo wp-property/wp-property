@@ -20,4 +20,11 @@ jQuery(document).ready(function () {
     jQuery(document).trigger("wpp::ui-tabs::tabsselect", panel);
   });
 
+  // .wpp_features_box
+  jQuery('.wpp_features_box').each(function (k, v) {
+    if (jQuery(v).width() < 600) {
+      jQuery(v).addClass('wpp_features_box_full_width');
+    }
+  });
+
 });

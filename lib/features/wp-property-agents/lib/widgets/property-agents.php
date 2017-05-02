@@ -15,9 +15,6 @@ class AgentWidget extends WP_Widget {
 
   function widget($args, $instance) {
 
-    /** Make display it only if it is a property single page */
-    if ( !is_singular( 'property' ) ) return false;
-
     global $post, $property, $wp_properties;
     $before_widget = $after_widget = $after_title = $before_title = '';
 
@@ -25,8 +22,10 @@ class AgentWidget extends WP_Widget {
 
     $saved_fields = !empty( $instance['saved_fields'] ) ? $instance['saved_fields'] : false;
     $widget_title = apply_filters('widget_title', $instance['title']);
+    $widget_agent_id = ( !empty( $instance['agent_id'] ) ? $instance['agent_id'] : false );
+    $widget_agent_id = explode(',', $widget_agent_id);
 
-    $agents = !empty( $post->wpp_agents ) ? $post->wpp_agents : ( !empty( $property['wpp_agents'] ) ? $property['wpp_agents'] : false );
+    $agents = !empty ($widget_agent_id) ? $widget_agent_id : (!empty( $post->wpp_agents ) ? $post->wpp_agents : ( !empty( $property['wpp_agents'] ) ? $property['wpp_agents'] : false ));
 
     if( empty( $agents ) || !is_array( $agents ) ) {
       return false;
@@ -73,6 +72,7 @@ class AgentWidget extends WP_Widget {
   function form($instance) {
     global $wp_properties;
     $title = isset( $instance['title'] ) ? esc_attr( $instance['title'] ) : '';
+    $agent_id = isset( $instance['agent_id'] ) ? esc_attr( $instance['agent_id'] ) : '';
     $saved_fields = isset( $instance['saved_fields'] ) ? $instance['saved_fields'] : array();
 
     $display_fields['display_name'] = __('Display Name', ud_get_wpp_agents()->domain);
@@ -97,6 +97,10 @@ class AgentWidget extends WP_Widget {
       <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
       <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
     </p>
+    <p>
+      <label for="<?php echo $this->get_field_id('agent_id'); ?>"><?php _e('Agent ID:'); ?></label>
+      <input class="widefat" id="<?php echo $this->get_field_id('agent_id'); ?>" name="<?php echo $this->get_field_name('agent_id'); ?>" type="text" value="<?php echo $agent_id; ?>" />
+    </p>
 
     <div class="wp-tab-panel">
       <ul>
@@ -112,7 +116,7 @@ class AgentWidget extends WP_Widget {
       </ul>
 
     </div>
-  <?php
+    <?php
   }
 } // end class AgentWidget
 
