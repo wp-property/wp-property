@@ -409,7 +409,7 @@ class class_wpp_supermap {
     <div class="wp-tab-panel supermap_marker_settings">
     <div class="wpp_property_type_supermap_settings">
       <div class="wpp_supermap_marker_image">
-      <% if (typeof supermap_configuration.property_type_markers[slug] != 'undefined' && supermap_configuration.property_type_markers[slug] ){ 
+      <% if ( _.get(supermap_configuration, 'property_type_markers.' + slug, false) ){ 
         var marker_image_url = /^(http|https):\/\//.exec(supermap_configuration.property_type_markers[slug]) ? supermap_configuration.property_type_markers[slug] : markers_url + "/" + supermap_configuration.property_type_markers[slug];
       %>
         <img src="<%= marker_image_url %>" alt="" />
@@ -421,10 +421,9 @@ class class_wpp_supermap {
       <label for="wpp_setting_property_type_<%= slug %>_marker"><?php _e('Map Marker', ud_get_wpp_supermap()->domain); ?>:</label>
       <select class="wpp_setting_property_type_marker" id="wpp_setting_property_type_<%= slug %>_marker" name="wpp_settings[configuration][feature_settings][supermap][property_type_markers][<%= slug %>]" >
         <option value=""><?php _e('Default by Google', ud_get_wpp_supermap()->domain); ?></option>
-        <% if( typeof supermap_configuration.markers != 'undefined'){ %>
+        <% if( _.get(supermap_configuration, 'markers', false)){ %>
           <% jQuery.each(supermap_configuration.markers, function(mslug, mvalue){ %>
-            <option value="<%= mvalue.file %>" <% selected(
-              typeof supermap_configuration.property_type_markers[slug] != 'undefined' && supermap_configuration.property_type_markers[slug] ? supermap_configuration.property_type_markers[slug] : null, mvalue.file); %>><%= mvalue.name %></option>
+            <option value="<%= mvalue.file %>" <% selected(_.get(supermap_configuration, 'property_type_markers.' + slug, null), mvalue.file); %>><%= mvalue.name %></option>
           <% }); %>
         <% } %>
       </select>

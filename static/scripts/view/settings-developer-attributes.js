@@ -10,18 +10,9 @@ jQuery(document).on('wpp.ui.settings.ready', function() {
     return;
   }
 
-  if(typeof wp_properties.property_stats == 'undefined'){
-    wp_properties.property_stats = {'':''};
-  }
-
-  // Defining property of object wp_properties(if not defined) to avoid checking of typeof != 'undefined' in template
-  var requiredProps = ['property_stats_groups', 'property_groups', 'sortable_attributes', 'prop_std_att', 'prop_std_att_mapsto', 'en_default_value', 'searchable_attr_fields', 'predefined_search_values', 'admin_attr_fields', 'predefined_values', 'default_values'];
-  
-  jQuery.each(requiredProps, function(index, item) {
-    if(typeof  wp_properties[item] == 'undefined' ) {
-      wp_properties[item] = {};
-    }
-  });
+  //if(typeof wp_properties.property_stats == 'undefined'){
+    wp_properties.property_stats = {};
+  //}
 
   window.selected = function(selected, current) {
     var result = '';
@@ -29,6 +20,15 @@ jQuery(document).on('wpp.ui.settings.ready', function() {
 
     if ( selected === current )
       result = " selected='selected' ";
+ 
+    return result;
+  }
+
+  _.wppChecked = function(obj, property, val) {
+    var result = '';
+    var items = _.get(obj, property, []);
+    if ( jQuery.inArray(val, items) != -1)
+      result = " CHECKED ";
  
     return result;
   }
@@ -73,33 +73,24 @@ jQuery(document).on('wpp.ui.settings.ready', function() {
 
   });
 
+  var attributes = {
+    slug          : '',
+    gslug         : '',
+    group         : '',
+    wp_properties : wp_properties
+  }
+
+  jQuery.extend( attributes, wpp_property_attributes_variables );
+
+  var row      = new wppAttribute( attributes );
+  var rowView  = new wppAttributeView({ model: row });
+  jQuery('#wpp_inquiry_attribute_fields').data('newRow', rowView.render().$el);
+
   var _wppAttributes = new wppAttributes();
-  // attributes needed in every rows
-  var _requiredProps = 
-  [
-    'searchable_attr_fields',
-    'predefined_search_values',
-    'admin_attr_fields',
-    'predefined_values',
-    'default_values',
-    'prop_std_att_mapsto'
-  ];
 
   jQuery.each(wp_properties.property_stats, function(slug, value) {
-    var gslug = '';
-    var group = '';
-
-    // Defining value of property in object wp_properties(if not defined) to avoid checking of typeof != 'undefined' in template
-    jQuery.each(_requiredProps, function(index, props){
-      if (typeof wp_properties[props][slug] == 'undefined') {
-        wp_properties[props][slug] = '';
-      }
-    });
-
-    if(typeof wp_properties.property_stats_groups[ slug ] != 'undefined'){
-      gslug = wp_properties.property_stats_groups[ slug ];
-      group = typeof wp_properties.property_groups[ gslug ] != 'undefined'  ? wp_properties[ 'property_groups' ][ gslug ] : '';
-    }
+    var gslug = _.get(wp_properties, ['property_stats_groups', slug], '');
+    var group = _.get(wp_properties, ['property_groups', gslug], '');
 
     var attributes = {
       slug          : slug,
@@ -111,6 +102,7 @@ jQuery(document).on('wpp.ui.settings.ready', function() {
     jQuery.extend( attributes, wpp_property_attributes_variables );
 
     var row = new wppAttribute( attributes );
+    console.log(row)
     _wppAttributes.add(row);
   });
 

@@ -461,7 +461,7 @@ function wpp_add_row(element,hides) {
   }
 
   //* Clone last row */
-  var cloned = jQuery(".wpp_dynamic_table_row:last", table).clone();
+  var cloned = table.data('newRow') || jQuery(".wpp_dynamic_table_row:last", table).clone();
 
   //return;
   //* Set unique 'id's and 'for's for elements of the new row */
