@@ -58,11 +58,39 @@ jQuery.extend( wpp = wpp || {}, {
        * @method ready
        */
       ready: function () {
+        var $form = jQuery( '#wpp_settings_form' );
 
         if( typeof jQuery.fn.tooltip == 'function' ) {
           jQuery( document ).tooltip( {
             track: true
           } );
+        }
+
+        function wppShowMessage(type, message) {
+          var msgWrapper = jQuery('#wpp-settings-save-message');
+          if(!msgWrapper.length){
+            msgWrapper = jQuery('<div id="wpp-settings-save-message" class="fade"></div>');
+            jQuery('.wpp_settings_page_header').after(msgWrapper);
+          }
+
+
+          if(type === false || type == 'remove'){
+            msgWrapper.empty();
+            return;
+          }
+          else if(type == 'updated'){
+            message = message || "Your settings have been updated.";
+            msgWrapper.removeClass('error');
+            msgWrapper.addClass('updated');
+          }
+          else if(type == 'error'){
+            message = message || "We're having trouble saving your settings.";
+            msgWrapper.removeClass('updated');
+            msgWrapper.addClass('error');
+          }
+
+          msgWrapper.html('<p>' + message + '</p>');
+
         }
 
         /**
@@ -71,7 +99,7 @@ jQuery.extend( wpp = wpp || {}, {
          *
          * @author peshkov@UD
          */
-        jQuery( '#wpp_settings_form' ).submit( function () {
+        $form.submit( function () {
           if( !jQuery( '#wpp_backup_file' ).val() ) {
             var btn = jQuery( "input[type='submit']" );
             jQuery( "#wpp_inquiry_property_types tbody tr" ).each( function () {
@@ -104,13 +132,42 @@ jQuery.extend( wpp = wpp || {}, {
                 try {
                   var data = jQuery.parseJSON( response );
                 } catch( error ) {
+                  if(featureFlags.WPP_FEATURE_FLAG_SETTINGS_V2){
+                    wppShowMessage('error');
+                  }
                   console.error( error );
                 }
 
                 if( data && data.success ) {
-                  window.location.href = data.redirect;
+                  if(featureFlags.WPP_FEATURE_FLAG_SETTINGS_V2){
+                    jQuery.ajax( {
+                      type: 'POST',
+                      url: wpp.instance.ajax_url,
+                      dataType: 'json',
+                      data: {
+                        action: 'wpp_get_settings_page',
+                      },
+                      success: function (data) {
+                        wpp.instance.settings = data.wpp_settings;
+                        jQuery('.wrap.wpp_settings_page').hide().html(data.wpp_settings_page).fadeIn();
+                        wpp.ui.settings.ready();
+                        wppShowMessage('updated');
+                        jQuery('html, body').animate({scrollTop : 0},800);
+                      },
+                      error: function () {
+                        wppShowMessage('error');
+                      }
+                    } );
+                    
+                  }
+                  else{
+                    window.location.href = data.redirect;
+                  }
                 } else {
                   console.error( "Error saving WP-Property settings." );
+                  if(featureFlags.WPP_FEATURE_FLAG_SETTINGS_V2){
+                    wppShowMessage('error');
+                  }
                   btn.prop( 'disabled', false );
                 }
 
@@ -119,6 +176,12 @@ jQuery.extend( wpp = wpp || {}, {
               btn.prop( 'disabled', true );
 
               var data = jQuery( this ).serialize();
+
+              if(featureFlags.WPP_FEATURE_FLAG_SETTINGS_V2){
+                wp.heartbeat.dequeue('property_settings_lock');
+              }
+
+              wppShowMessage(false);
 
               jQuery.ajax( {
                 type: 'POST',
@@ -129,7 +192,12 @@ jQuery.extend( wpp = wpp || {}, {
                 },
                 success: onSaveSettingsResponse,
                 error: function () {
-                  alert( wpp.strings.undefined_error );
+                  if(featureFlags.WPP_FEATURE_FLAG_SETTINGS_V2){
+                    wppShowMessage('error');
+                  }
+                  else{
+                    alert( wpp.strings.undefined_error );
+                  }
                   btn.prop( 'disabled', false );
                 }
               } );
@@ -637,7 +705,58 @@ jQuery.extend( wpp = wpp || {}, {
           screenMeta.open( jQuery( '#contextual-help-wrap' ), jQuery( '#contextual-help-link' ) );
         } );
 
-      },
+        if(featureFlags.WPP_FEATURE_FLAG_SETTINGS_V2){
+
+          var originalFormState = $form.serialize();
+
+          jQuery(document).ready(function($) {
+            wp.heartbeat.connectNow();
+            $form.on('change input', ':input', function() {
+              // If form is changed.
+              if(originalFormState != $form.serialize()){
+                wp.heartbeat.enqueue( 'property_settings_lock', true, true);
+              }
+              // If form isn't changed.
+              else{
+                // releasing lock
+                wp.heartbeat.enqueue( 'property_settings_lock', false, true);
+              }
+              
+            });
+          });
+
+          jQuery(document).on( 'heartbeat-tick', function( event, data ) {
+            if ( data.hasOwnProperty( 'property_settings_lock' ) ) {
+              var response = data.property_settings_lock;
+
+              if(response.hasOwnProperty('lock_error')){
+                var user = response.lock_error;
+                var message = user.text;
+
+                if(typeof user.avatar_src != 'undefined'){
+                  message += " <img src='" + user.avatar_src + "' />";
+                }
+                wppShowMessage('error', message);
+                $form.find(':input').not('.wpp_all_advanced_settings, .sort_stats_by_groups').attr('disabled', 'disabled');
+                $form.find('.wpp_delete_row').addClass('disabled');
+              // Prints to the console { 'hello' : 'world' }
+              }
+              else if(response.hasOwnProperty('new_lock')){
+                wppShowMessage('updated', "You are editing the settings. Settings page is on readonly mode for other users.");
+              }
+              else if(response.hasOwnProperty('lock_removed')){
+                //wppShowMessage('updated', "Lock removed.");
+              }
+              else{
+                wppShowMessage(false);
+              }
+            }
+          });
+        } // end if WPP_FEATURE_FLAG_SETTINGS_V2;
+
+        jQuery(document).trigger('wpp.ui.settings.ready');
+
+      }, // End ready();
 
       /**
        * Renders specified image in upload section

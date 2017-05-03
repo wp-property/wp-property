@@ -26,9 +26,9 @@ $hidden_attributes_do_action    = array_filter($hidden_attributes_do_action);
 $inherited_attributes_do_action = array_filter($inherited_attributes_do_action);
 $property_type_settings_do_action = array_filter($property_type_settings_do_action);
 
-
 $wpp_property_types_variables = apply_filters( 'wpp::settings::developer::types', array(
     'globals'                           => array(),
+    'filtered_property_types'           => $filtered_property_types,
     'hidden_attributes_do_action'       => $hidden_attributes_do_action,
     'inherited_attributes_do_action'    => $inherited_attributes_do_action,
     'property_type_settings_do_action'  => $property_type_settings_do_action,
@@ -36,8 +36,11 @@ $wpp_property_types_variables = apply_filters( 'wpp::settings::developer::types'
 
 ?>
 
-<script type="text/javascript">
+<script type="text/template" id="wpp-property-types-variables">
+  <?php echo json_encode($wpp_property_types_variables);?>
+</script>
   
+<script type="text/javascript">
 jQuery(document).ready(function($) {
   var wp_properties = wpp.instance.settings;
   var configuration = wp_properties.configuration;
@@ -161,8 +164,6 @@ jQuery(document).ready(function($) {
   jQuery("#wpp_inquiry_property_types tbody").empty().append(wrapper.render().el);
 
 });
-
-
 </script>
 
 <h3><?php printf( __( '%1s Types', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></h3>

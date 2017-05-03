@@ -1916,3 +1916,8 @@ body.post-type-property .uisf-date {
   width: 100%;
   height: auto;
 }
+
+.wpp_delete_row.disabled {
+  color: #8c8997;
+  cursor: not-allowed;
+}
