@@ -3,7 +3,7 @@ jQuery(document).on('wpp.ui.settings.ready', function() {
   var wp_properties = wpp.instance.settings;
   var configuration = wp_properties.configuration;
   var supermap_configuration = {};
-  var supermap_configuration = _.get(configuration, 'feature_settings.supermap', {});
+  var supermap_configuration = __.get(configuration, 'feature_settings.supermap', {});
 
   try{
     wpp_property_types_variables = JSON.parse(jQuery('#wpp-property-types-variables').html());
@@ -91,7 +91,7 @@ jQuery(document).on('wpp.ui.settings.ready', function() {
   var wrapper = new wppTypesWrapperView({ collection: _wppTypes });
   table.find("body").empty().append(wrapper.render().el);
 
-  if(!_.get(_wppTypes, 'length', 0)){
+  if(!__.get(_wppTypes, 'length', 0)){
     // Adding empty row if there no row.
     wpp_add_row(table.find('.wpp_add_row'));
   }

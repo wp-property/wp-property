@@ -77,7 +77,7 @@ $wpp_property_attributes_variables = apply_filters( 'wpp::settings::developer::a
       <td class="wpp_attribute_name_col">
         <ul class="wpp_attribute_name">
           <li>
-            <input class="slug_setter" type="text" name="wpp_settings[property_stats][<%= slug %>]" value="<%= _.get(wp_properties, ['property_stats', slug], '') %>"/>
+            <input class="slug_setter" type="text" name="wpp_settings[property_stats][<%= slug %>]" value="<%= __.get(wp_properties, ['property_stats', slug], '') %>"/>
           </li>
           <li class="wpp_development_advanced_option">
 
@@ -87,7 +87,7 @@ $wpp_property_attributes_variables = apply_filters( 'wpp::settings::developer::a
 
             <?php do_action( "wpp::settings::developer::attributes::item_advanced_options" ); ?>
 
-            <% if( jQuery.inArray(slug, _.get(wp_properties, 'geo_type_attributes', [])) != -1){ %>
+            <% if( jQuery.inArray(slug, __.get(wp_properties, 'geo_type_attributes', [])) != -1){ %>
               <div class="wpp_notice">
                 <span><?php _e( 'Attention! This attribute (slug) is used by Google Validator and Address Display functionality. It is set automaticaly and can not be edited on Property Adding/Updating page.', ud_get_wp_property()->domain ); ?></span>
               </div>
@@ -113,23 +113,23 @@ $wpp_property_attributes_variables = apply_filters( 'wpp::settings::developer::a
              <div  class='std-attr-mapper'>
               <select  name='wpp_settings[prop_std_att_mapsto][<%= slug %>]' id="wpp_prop_std_att_mapsto_<%= slug %>" class=' wpp_settings-prop_std_att_mapsto'><option value=''> - </option>
 
-              <% _.each( _.get(wp_properties, 'prop_std_att', []), function(std_attr_type){%>
+              <% _.each( __.get(wp_properties, 'prop_std_att', []), function(std_attr_type){%>
                 <% _.each(std_attr_type, function(std_val, std_key){%>
                   <option value="<%= std_key %>" 
-                    data-notice="<%= _.get(std_val, 'notice', '') %>"
+                    data-notice="<%= __.get(std_val, 'notice', '') %>"
                     <?php
                     // check if the attribute type is "address" from legacy system  @raj
                     ?>
-                    <% if ( slug == _.get(wp_properties, 'configuration.address_attribute', '') ){
+                    <% if ( slug == __.get(wp_properties, 'configuration.address_attribute', '') ){
                        print(_.wppSelected(  std_key,'address'));
                     }
                     %> 
                     <?php
                      // if the user has updated to new standard attributes then this is the one we select
                     ?>
-                    <%= _.wppSelected( _.get(wp_properties, ['prop_std_att_mapsto', slug], ''), std_key ) %> 
+                    <%= _.wppSelected( __.get(wp_properties, ['prop_std_att_mapsto', slug], ''), std_key ) %> 
                    > 
-                    <%= _.get(std_val, 'label', '') %>
+                    <%= __.get(std_val, 'label', '') %>
                   </option>
                 <% }); %>
               <% }); %>
@@ -143,7 +143,7 @@ $wpp_property_attributes_variables = apply_filters( 'wpp::settings::developer::a
           ?>
                   
           </li>
-          <%= _.get(attribute_name_do_action, slug, '') %>
+          <%= __.get(attribute_name_do_action, slug, '') %>
           <li>
             <span class="wpp_show_advanced"><?php _e( 'Toggle Advanced Settings', ud_get_wp_property()->domain ); ?></span>
           </li>
@@ -151,7 +151,7 @@ $wpp_property_attributes_variables = apply_filters( 'wpp::settings::developer::a
       </td>
 
       <td class="wpp_attribute_group_col">
-        <input type="text" class="wpp_attribute_group wpp_group" value="<%= _.get(group, 'name', '') %>"/>
+        <input type="text" class="wpp_attribute_group wpp_group" value="<%= __.get(group, 'name', '') %>"/>
         <input type="hidden" class="wpp_group_slug" name="wpp_settings[property_stats_groups][<%= slug %>]" value="<%= gslug %>">
       </td>
 
@@ -188,7 +188,7 @@ $wpp_property_attributes_variables = apply_filters( 'wpp::settings::developer::a
             </label>
           
           </li>
-          <%= _.get(settings_do_action, slug, '') %>
+          <%= __.get(settings_do_action, slug, '') %>
           <li class="wpp_development_advanced_option">
             <span class="wpp_delete_row wpp_link"><?php _e( 'Delete Attribute', ud_get_wp_property()->domain ) ?></span>
           </li>
@@ -200,13 +200,13 @@ $wpp_property_attributes_variables = apply_filters( 'wpp::settings::developer::a
           <li>
             <select name="wpp_settings[searchable_attr_fields][<%= slug %>]" class="wpp_pre_defined_value_setter wpp_searchable_attr_fields">
               <% _.each(searchable_attr_fields_options, function(label, key){ %>
-                <option value="<%= key %>" <%= _.wppSelected( _.get(wp_properties, ['searchable_attr_fields', slug], ''), key ) %>><%= label %></option>
+                <option value="<%= key %>" <%= _.wppSelected( __.get(wp_properties, ['searchable_attr_fields', slug], ''), key ) %>><%= label %></option>
               <% }); %>
-              <%= _.get(searchable_attr_field_do_action, slug, '') %>
+              <%= __.get(searchable_attr_field_do_action, slug, '') %>
             </select>
           </li>
           <li>
-            <textarea class="wpp_attribute_pre_defined_values" name="wpp_settings[predefined_search_values][<%= slug %>]"><%= _.get(wp_properties, ['predefined_search_values', slug], '') %></textarea>
+            <textarea class="wpp_attribute_pre_defined_values" name="wpp_settings[predefined_search_values][<%= slug %>]"><%= __.get(wp_properties, ['predefined_search_values', slug], '') %></textarea>
           </li>
         </ul>
       </td>
@@ -216,19 +216,19 @@ $wpp_property_attributes_variables = apply_filters( 'wpp::settings::developer::a
           <li>
             <select name="wpp_settings[admin_attr_fields][<%= slug %>]" class="wpp_pre_defined_value_setter wpp_default_value_setter wpp_searchable_attr_fields">
               <% _.each( meta_box_fields, function(label, key){ %>
-                <option value="<%= key %>" <%= _.wppSelected( _.get(wp_properties, ['admin_attr_fields', slug], ''), key) %>><%= label %></option>
+                <option value="<%= key %>" <%= _.wppSelected( __.get(wp_properties, ['admin_attr_fields', slug], ''), key) %>><%= label %></option>
               <% }); %>
-              <%= _.get(admin_attr_field_do_action, slug, '') %>
+              <%= __.get(admin_attr_field_do_action, slug, '') %>
             </select>
           </li>
           <li>
-            <textarea class="wpp_attribute_pre_defined_values" name="wpp_settings[predefined_values][<%= slug %>]"><%= _.get(wp_properties, ['predefined_values', slug], '') %></textarea>
+            <textarea class="wpp_attribute_pre_defined_values" name="wpp_settings[predefined_values][<%= slug %>]"><%= __.get(wp_properties, ['predefined_values', slug], '') %></textarea>
           </li>
-          <li class="wpp_attribute_default_values <%= jQuery.inArray(slug, _.get(wp_properties, 'en_default_value', [])) != -1? 'show':'hidden' %>">
+          <li class="wpp_attribute_default_values <%= jQuery.inArray(slug, __.get(wp_properties, 'en_default_value', [])) != -1? 'show':'hidden' %>">
             <?php
             echo __("<label>Default Value</label>", ud_get_wp_property()->domain);
             echo "<br />";
-            echo "<div class='default_value_container' data-name='wpp_settings[default_values][<%= slug %>]' data-value='<%= _.get(wp_properties, ['default_values', slug], '') %>' ></div>";
+            echo "<div class='default_value_container' data-name='wpp_settings[default_values][<%= slug %>]' data-value='<%= __.get(wp_properties, ['default_values', slug], '') %>' ></div>";
             ?>
             <a class="button apply-to-all" data-attribute="<%= slug %>" href="#" title="<?php _e("Apply to listings that have no value for this field.", ud_get_wp_property()->domain);?>" ><?php _e("Apply to all", ud_get_wp_property()->domain);?></a> <br/>
           </li>

@@ -8,6 +8,7 @@
 if( !wpp ) {
 }
 
+var __ = _.noConflict();
   
 _.wppSelected = function(selected, current) {
   var result = '';
@@ -21,7 +22,7 @@ _.wppSelected = function(selected, current) {
 
 _.wppChecked = function(obj, property, val) {
   var result = '';
-  var items = _.get(obj, property, []);
+  var items = __.get(obj, property, []);
 
   if ( jQuery.inArray(val, items) != -1 || (val === false && items))
     result = " CHECKED ";
@@ -482,7 +483,13 @@ function wpp_add_row(element,hides) {
   }
 
   //* Clone last row */
-  var cloned = table.data('newRow').clone() || jQuery(".wpp_dynamic_table_row:last", table).clone();
+  var cloned;
+  if(table.data('newRow')){
+    cloned = table.data('newRow').clone();
+  }
+  else{
+    cloned = jQuery(".wpp_dynamic_table_row:last", table).clone();
+  }
 
   //return;
   //* Set unique 'id's and 'for's for elements of the new row */
