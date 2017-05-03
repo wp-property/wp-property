@@ -482,7 +482,7 @@ function wpp_add_row(element,hides) {
   }
 
   //* Clone last row */
-  var cloned = table.data('newRow') || jQuery(".wpp_dynamic_table_row:last", table).clone();
+  var cloned = table.data('newRow').clone() || jQuery(".wpp_dynamic_table_row:last", table).clone();
 
   //return;
   //* Set unique 'id's and 'for's for elements of the new row */
@@ -721,7 +721,8 @@ jQuery(document).ready(function() {
   });
 
   // Delete dynamic row
-  jQuery(".wpp_delete_row").live("click", function() {
+  jQuery(".wpp_delete_row").live("click", function(event) {
+    event.preventDefault();
     if(jQuery(this).hasClass('disabled'))
       return false;
     

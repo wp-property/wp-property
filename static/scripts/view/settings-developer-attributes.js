@@ -90,7 +90,7 @@ jQuery(document).on('wpp.ui.settings.ready', function() {
   wppAttributesView = new WPPAttributesView({ collection: _wppAttributes });
   table.find("tbody").empty().append(wppAttributesView.render().el);
 
-  if(_.get(_wppAttributes, 'length', 0)){
+  if(!_.get(_wppAttributes, 'length', 0)){
     // Adding empty row if there no row.
     wpp_add_row(table.find('.wpp_add_row'));
   }

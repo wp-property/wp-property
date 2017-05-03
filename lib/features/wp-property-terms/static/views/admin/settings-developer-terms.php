@@ -45,7 +45,7 @@ $wpp_property_types_variables = apply_filters( 'wpp::settings::developer::terms'
 
 <p style="margin-top: 0;"><?php printf( __( 'Manage your %s Taxonomies here. Note, you can not remove all taxonomies, in this case default WP-Property taxonomies will be returned back.', ud_get_wpp_terms()->domain ), WPP_F::property_label() ); ?></p>
 
-<table id="wpp_inquiry_property_terms" class="wpp_sortable wpp_inquiry_attribute_fields ud_ui_dynamic_table widefat">
+<table id="wpp_inquiry_property_terms" class="wpp_sortable wpp_inquiry_attribute_fields ud_ui_dynamic_table widefat last_delete_row">
   <thead>
   <tr>
     <th class='wpp_draggable_handle'>&nbsp;</th>
