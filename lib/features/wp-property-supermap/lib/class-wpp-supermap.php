@@ -303,6 +303,9 @@ class class_wpp_supermap {
                 /* Remove image from new Row */
                 jQuery('#wpp_supermap_markers tr').live('added', function(){
                   jQuery('input.slug', this).trigger('change');
+                  jQuery('.wpp_ajax_image_upload', this).map_marker_select({
+                    image: "img"
+                  });
                 });
 
                 /* Fire event after row removing to check table's DOM */
