@@ -742,10 +742,10 @@ jQuery(document).ready(function() {
       jQuery(parent).remove();
     } else {
 	   if(jQuery(table).hasClass('last_delete_row')){
-	    wpp_add_row(this,true);
-            jQuery(parent).remove();
+	       wpp_add_row(this);
+         jQuery(parent).remove();
 	   } else{
-            jQuery(parent).attr( 'new_row', 'true' );
+         jQuery(parent).attr( 'new_row', 'true' );
 	   }
     }
 
