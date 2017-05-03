@@ -10,9 +10,9 @@ jQuery(document).on('wpp.ui.settings.ready', function() {
     return;
   }
 
-  //if(typeof wp_properties.property_stats == 'undefined'){
-    wp_properties.property_stats = {};
-  //}
+  if(typeof wp_properties.property_stats == 'undefined'){
+    wp_properties.property_stats = {'': ''};
+  }
 
   window.selected = function(selected, current) {
     var result = '';
