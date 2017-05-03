@@ -121,13 +121,13 @@ $wpp_property_attributes_variables = apply_filters( 'wpp::settings::developer::a
                     // check if the attribute type is "address" from legacy system  @raj
                     ?>
                     <% if ( slug == _.get(wp_properties, 'configuration.address_attribute', '') ){
-                       print(selected(  std_key,'address'));
+                       print(_.wppSelected(  std_key,'address'));
                     }
                     %> 
                     <?php
                      // if the user has updated to new standard attributes then this is the one we select
                     ?>
-                    <%= selected( _.get(wp_properties, ['prop_std_att_mapsto', slug], ''), std_key ) %> 
+                    <%= _.wppSelected( _.get(wp_properties, ['prop_std_att_mapsto', slug], ''), std_key ) %> 
                    > 
                     <%= _.get(std_val, 'label', '') %>
                   </option>
@@ -200,7 +200,7 @@ $wpp_property_attributes_variables = apply_filters( 'wpp::settings::developer::a
           <li>
             <select name="wpp_settings[searchable_attr_fields][<%= slug %>]" class="wpp_pre_defined_value_setter wpp_searchable_attr_fields">
               <% _.each(searchable_attr_fields_options, function(label, key){ %>
-                <option value="<%= key %>" <%= selected( _.get(wp_properties, ['searchable_attr_fields', slug], ''), key ) %>><%= label %></option>
+                <option value="<%= key %>" <%= _.wppSelected( _.get(wp_properties, ['searchable_attr_fields', slug], ''), key ) %>><%= label %></option>
               <% }); %>
               <%= _.get(searchable_attr_field_do_action, slug, '') %>
             </select>
@@ -216,7 +216,7 @@ $wpp_property_attributes_variables = apply_filters( 'wpp::settings::developer::a
           <li>
             <select name="wpp_settings[admin_attr_fields][<%= slug %>]" class="wpp_pre_defined_value_setter wpp_default_value_setter wpp_searchable_attr_fields">
               <% _.each( meta_box_fields, function(label, key){ %>
-                <option value="<%= key %>" <%= selected( _.get(wp_properties, ['admin_attr_fields', slug], ''), key) %>><%= label %></option>
+                <option value="<%= key %>" <%= _.wppSelected( _.get(wp_properties, ['admin_attr_fields', slug], ''), key) %>><%= label %></option>
               <% }); %>
               <%= _.get(admin_attr_field_do_action, slug, '') %>
             </select>

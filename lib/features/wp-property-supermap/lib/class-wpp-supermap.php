@@ -423,7 +423,7 @@ class class_wpp_supermap {
         <option value=""><?php _e('Default by Google', ud_get_wpp_supermap()->domain); ?></option>
         <% if( _.get(supermap_configuration, 'markers', false)){ %>
           <% jQuery.each(supermap_configuration.markers, function(mslug, mvalue){ %>
-            <option value="<%= mvalue.file %>" <% selected(_.get(supermap_configuration, 'property_type_markers.' + slug, null), mvalue.file); %>><%= mvalue.name %></option>
+            <option value="<%= mvalue.file %>" <% _.wppSelected(_.get(supermap_configuration, 'property_type_markers.' + slug, null), mvalue.file); %>><%= mvalue.name %></option>
           <% }); %>
         <% } %>
       </select>

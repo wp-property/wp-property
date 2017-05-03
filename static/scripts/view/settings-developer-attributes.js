@@ -1,4 +1,5 @@
 jQuery(document).on('wpp.ui.settings.ready', function() {
+  var table = jQuery('#wpp_inquiry_attribute_fields');
   var wp_properties = wpp.instance.settings;
   var wpp_property_attributes_variables = {};
 
@@ -11,28 +12,8 @@ jQuery(document).on('wpp.ui.settings.ready', function() {
   }
 
   if(typeof wp_properties.property_stats == 'undefined'){
-    wp_properties.property_stats = {'': ''};
+    wp_properties.property_stats = [];
   }
-
-  window.selected = function(selected, current) {
-    var result = '';
-    current = current || true;
-
-    if ( selected === current )
-      result = " selected='selected' ";
- 
-    return result;
-  }
-
-  _.wppChecked = function(obj, property, val) {
-    var result = '';
-    var items = _.get(obj, property, []);
-    if ( jQuery.inArray(val, items) != -1)
-      result = " CHECKED ";
- 
-    return result;
-  }
-
 
   var wppAttribute = Backbone.Model.extend({
   });
@@ -84,7 +65,7 @@ jQuery(document).on('wpp.ui.settings.ready', function() {
 
   var row      = new wppAttribute( attributes );
   var rowView  = new wppAttributeView({ model: row });
-  jQuery('#wpp_inquiry_attribute_fields').data('newRow', rowView.render().$el);
+  table.data('newRow', rowView.render().$el);
 
   var _wppAttributes = new wppAttributes();
 
@@ -107,7 +88,12 @@ jQuery(document).on('wpp.ui.settings.ready', function() {
   });
 
   wppAttributesView = new WPPAttributesView({ collection: _wppAttributes });
-  jQuery("#wpp_inquiry_attribute_fields tbody").empty().append(wppAttributesView.render().el);
+  table.find("tbody").empty().append(wppAttributesView.render().el);
+
+  if(_.get(_wppAttributes, 'length', 0)){
+    // Adding empty row if there no row.
+    wpp_add_row(table.find('.wpp_add_row'));
+  }
 
   jQuery( ".wpp_admin_input_col .wpp_default_value_setter" ).each( function () {
     wpp.ui.settings.default_values_for_attribute( this );

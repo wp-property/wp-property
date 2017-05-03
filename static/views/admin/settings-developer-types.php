@@ -39,133 +39,6 @@ $wpp_property_types_variables = apply_filters( 'wpp::settings::developer::types'
 <script type="text/template" id="wpp-property-types-variables">
   <?php echo json_encode($wpp_property_types_variables);?>
 </script>
-  
-<script type="text/javascript">
-jQuery(document).ready(function($) {
-  var wp_properties = wpp.instance.settings;
-  var configuration = wp_properties.configuration;
-  var supermap_configuration = {};
-
-  if( typeof configuration.feature_settings != 'undefined' && typeof configuration.feature_settings.supermap != 'undefined' ) {
-    supermap_configuration = configuration.feature_settings.supermap;
-  }
-
-  var filtered_property_types           = <?php echo json_encode($filtered_property_types);?>;
-  var hidden_attributes_do_action       = <?php echo json_encode($hidden_attributes_do_action);?>;
-  var inherited_attributes_do_action    = <?php echo json_encode($inherited_attributes_do_action);?>;
-  var property_type_settings_do_action  = <?php echo json_encode($property_type_settings_do_action);?>;
-
-
-  var wpp_property_types_variables  = <?php echo json_encode($wpp_property_types_variables);?>;
-
-  jQuery.each(wpp_property_types_variables.globals, function(index, val){
-    window[index] = val;
-  });
-  delete wpp_property_types_variables.globals;
-
-  // Defining property of object wp_properties(if not defined) to avoid checking of typeof != 'undefined' in template
-  var requiredProps = [
-    'configuration.default_image', 
-    'configuration.default_image.types', 
-    'searchable_property_types', 
-    'location_matters',
-    'hidden_attributes', 
-    'property_stats',
-    'property_meta', 
-  ];
-  
-  jQuery.each(requiredProps, function(index, item) {
-    if(typeof  wp_properties[item] == 'undefined' ) {
-      wp_properties[item] = {};
-    }
-  });
-
-  if(typeof  wp_properties.property_types == 'undefined' ) {
-    wp_properties.property_types = {'': ''};
-  }
-
-  window.selected = function(selected, current) {
-    var result = '';
-    current = current || true;
-
-    if ( selected === current )
-      result = " selected='selected' ";
- 
-    return result;
-  }
-  
-  var wppTypes = Backbone.Model.extend({
-  });
-
-  var wppTypesCollection = Backbone.Collection.extend({
-    model: wppTypes,
-  });
-
-  var wppTypesView = Backbone.View.extend({
-    tagName: 'tr',
-    className: 'wpp_dynamic_table_row',
-    attributes: function(){
-      return {
-        slug: this.model.get('property_slug'),
-        'data-property-slug': this.model.get('property_slug'),
-        new_row: this.model.get('property_slug') == '' ? true : false,
-        style: this.model.get('property_slug') == '' ? "display:none;" : "",
-      };
-    },
-    template: _.template($('#settings-developer-types-template').html()),
-    render: function() {
-      this.el.innerHTML = this.template(this.model.toJSON());
-      return this;
-    }
-  });
-
-
-
-  var wppTypesWrapperView = Backbone.View.extend({
-    el: '#wpp_inquiry_property_types tbody',
-    render: function() {
-      this.collection.each(this.addAttribute.bind(this));
-      return this;
-    },
-    addAttribute: function (model) {
-      var row = new wppTypesView({ model: model });
-      jQuery(this.el).append(row.render().el);
-    },
-
-  });
-
-
-  var _wppTypes = new wppTypesCollection();
-
-  jQuery.each(filtered_property_types, function(property_slug, label) {
-
-    if(typeof configuration.default_image.types[property_slug] == 'undefined'){
-      configuration.default_image.types[property_slug] = {url: '', id: ''}
-    }
-
-    var attributes = {
-      label                             : label,
-      slug                              : property_slug,
-      property_slug                     : property_slug,
-      wp_properties                     : wp_properties,
-      supermap_configuration            : supermap_configuration,
-      hidden_attributes_do_action       : hidden_attributes_do_action,
-      inherited_attributes_do_action    : inherited_attributes_do_action,
-      property_type_settings_do_action  : property_type_settings_do_action,
-    };
-    jQuery.extend(attributes, wpp_property_types_variables);
-    var row = new wppTypes(attributes);
-    _wppTypes.add(row);
-
-
-  });
-
-  var wrapper = new wppTypesWrapperView({ collection: _wppTypes });
-  jQuery("#wpp_inquiry_property_types tbody").empty().append(wrapper.render().el);
-
-});
-</script>
-
 <h3><?php printf( __( '%1s Types', ud_get_wp_property()->domain ), WPP_F::property_label() ); ?></h3>
 <table id="wpp_inquiry_property_types" class="ud_ui_dynamic_table widefat last_delete_row" allow_random_slug="true">
   <thead>
@@ -203,8 +76,8 @@ jQuery(document).ready(function($) {
 
       <td>
         <div class="upload-image-section">
-          <input type="hidden" name="wpp_settings[configuration][default_image][types][<%= property_slug %>][url]" class="input-image-url" value="<%= wp_properties.configuration.default_image.types[property_slug].url %>">
-          <input type="hidden" name="wpp_settings[configuration][default_image][types][<%= property_slug %>][id]" class="input-image-id" value="<%= wp_properties.configuration.default_image.types[property_slug].id %>">
+          <input type="hidden" name="wpp_settings[configuration][default_image][types][<%= property_slug %>][url]" class="input-image-url" value="<%= _.get(wp_properties, ['configuration', 'default_image', 'types', property_slug, 'url'], '') %>">
+          <input type="hidden" name="wpp_settings[configuration][default_image][types][<%= property_slug %>][id]" class="input-image-id" value="<%= _.get(wp_properties, ['configuration', 'default_image', 'types', property_slug, 'id'], '') %>">
           <div class="image-actions">
             <input type="button" class="button-secondary button-setup-image" value="<?php _e( 'Setup Image', ud_get_wp_property('domain') ); ?>" title="<?php printf( __( 'If %1$s has no any image, the default one based on %1$s Type will be shown.', ud_get_wp_property('domain') ), \WPP_F::property_label() ); ?>">
           </div>
@@ -216,21 +89,21 @@ jQuery(document).ready(function($) {
         <ul>
           <li>
             <label for="<%= property_slug %>_searchable_property_types">
-              <input class="slug" id="<%= property_slug %>_searchable_property_types" <% if( jQuery.inArray(property_slug, wp_properties.searchable_property_types) != -1){ print( 'CHECKED'); } %> type="checkbox" name="wpp_settings[searchable_property_types][]" value="<%= property_slug %>"/>
+              <input class="slug" id="<%= property_slug %>_searchable_property_types" <%= _.wppChecked(wp_properties, 'searchable_property_types', property_slug) %> type="checkbox" name="wpp_settings[searchable_property_types][]" value="<%= property_slug %>"/>
               <?php _e( 'Searchable', ud_get_wp_property()->domain ) ?>
             </label>
           </li>
 
           <li>
             <label for="<%= property_slug %>_location_matters">
-              <input class="slug" id="<%= property_slug %>_location_matters"  <% if( jQuery.inArray(property_slug, wp_properties.location_matters) != -1){ print( 'CHECKED'); } %> type="checkbox" name="wpp_settings[location_matters][]" value="<%= property_slug %>"/>
+              <input class="slug" id="<%= property_slug %>_location_matters"  <%= _.wppChecked(wp_properties, 'location_matters', property_slug) %> type="checkbox" name="wpp_settings[location_matters][]" value="<%= property_slug %>"/>
               <?php _e( 'Location Matters', ud_get_wp_property()->domain ) ?>
             </label>
           </li>
 
           <li>
             <label>
-              <input class="slug" <% if( jQuery.inArray(property_slug, wp_properties.type_supports_hierarchy) != -1){ print( 'CHECKED'); } %> type="checkbox" name="wpp_settings[type_supports_hierarchy][]" value="<%= property_slug %>"/>
+              <input class="slug" <%= _.wppChecked(wp_properties, 'type_supports_hierarchy', property_slug) %> type="checkbox" name="wpp_settings[type_supports_hierarchy][]" value="<%= property_slug %>"/>
               <?php _e( 'Supports Hiearchy', ud_get_wp_property()->domain ) ?>
             </label>
           </li>
@@ -242,15 +115,13 @@ jQuery(document).ready(function($) {
             </li>
           <?php endforeach; ?>
 
-          <% if( typeof property_type_settings_do_action[property_slug] != 'undefined'){
-
-            jQuery.each(property_type_settings_do_action[ property_slug ], function(index, property_type_setting){
+          <% 
+            jQuery.each(_.get(property_type_settings_do_action, property_slug, []), function(index, property_type_setting){
               print('<li>');
                 print(property_type_setting);
               print('</li>');
             });
-
-          } %>
+          %>
         </ul>
       </td>
 
@@ -259,31 +130,31 @@ jQuery(document).ready(function($) {
 
           <li class="wpp_show_advanced" wrapper="wpp_something_advanced_wrapper"><?php _e( 'Toggle Attributes Selection', ud_get_wp_property()->domain ); ?></li>
 
-          <% jQuery.each( wp_properties.property_stats, function(property_stat_slug, property_stat_label ){ %>
+          <% jQuery.each( _.get(wp_properties, 'property_stats', []), function(property_stat_slug, property_stat_label ){ %>
             <li class="wpp_development_advanced_option">
-              <input id="<% print( property_slug + "_" + property_stat_slug) %>_hidden_attributes" <% if( typeof wp_properties.hidden_attributes[ property_slug ] != 'undefined' && jQuery.inArray(property_stat_slug, wp_properties.hidden_attributes[ property_slug ]) != -1){ print( 'CHECKED'); } %> type="checkbox" name="wpp_settings[hidden_attributes][<%= property_slug %>][]" value="<%= property_stat_slug %>"/>
+              <input id="<% print( property_slug + "_" + property_stat_slug) %>_hidden_attributes" <%= _.wppChecked(wp_properties, ['hidden_attributes', property_slug], property_stat_slug) %> type="checkbox" name="wpp_settings[hidden_attributes][<%= property_slug %>][]" value="<%= property_stat_slug %>"/>
               <label for="<% print( property_slug + "_" + property_stat_slug) %>_hidden_attributes">
                 <%= property_stat_label %>
               </label>
             </li>
           <% }); %>
 
-          <% jQuery.each( wp_properties.property_meta, function(property_meta_slug, property_meta_label ){ %>
+          <% jQuery.each( _.get(wp_properties, 'property_meta', []), function(property_meta_slug, property_meta_label ){ %>
             <li class="wpp_development_advanced_option">
-              <input id="<% print( property_slug + "_" + property_meta_slug) %>_hidden_attributes" <% if( typeof wp_properties.hidden_attributes[ property_slug ] != 'undefined' && jQuery.inArray(property_meta_slug, wp_properties.hidden_attributes[ property_slug ]) != -1){ print( 'CHECKED'); } %> type="checkbox" name="wpp_settings[hidden_attributes][<%= property_slug %>][]" value="<%= property_meta_slug %>"/>
+              <input id="<% print( property_slug + "_" + property_meta_slug) %>_hidden_attributes" <%= _.wppChecked(wp_properties, ['hidden_attributes', property_slug], property_meta_slug) %> type="checkbox" name="wpp_settings[hidden_attributes][<%= property_slug %>][]" value="<%= property_meta_slug %>"/>
               <label for="<% print( property_slug + "_" + property_meta_slug) %>_hidden_attributes">
                 <%= property_meta_label %>
               </label>
             </li>
           <% }); %>
 
-          <% if( typeof wp_properties.property_stats[ 'parent' ] == 'undefined'){ %>
+          <% if( _.get(wp_properties, 'property_stats.parent', false) ){ %>
             <li class="wpp_development_advanced_option">
-              <input id="<%= property_slug %>parent_hidden_attributes" <% if( typeof wp_properties.hidden_attributes[ property_slug ] != 'undefined' && jQuery.inArray('parent', wp_properties.hidden_attributes[ property_slug ]) != -1){ print( 'CHECKED'); } %>type="checkbox" name="wpp_settings[hidden_attributes][<%= property_slug %>][]" value="parent"/>
+              <input id="<%= property_slug %>parent_hidden_attributes" <%= _.wppChecked(wp_properties, ['hidden_attributes', property_slug], 'parent') %>type="checkbox" name="wpp_settings[hidden_attributes][<%= property_slug %>][]" value="parent"/>
               <label for="<%= property_slug %>parent_hidden_attributes"><?php _e( 'Parent Selection', ud_get_wp_property()->domain ); ?></label>
             </li>
           <% } %>
-          <% typeof hidden_attributes_do_action[property_slug] != 'undefined'? print(hidden_attributes_do_action[ property_slug ]):''; %>
+          <%= _.get(hidden_attributes_do_action, property_slug, '') %>
           <?php do_action( 'wpp::settings::developer::types::hidden_attributes'); /* The action should output underscore template. Template should pass variable to filter "wpp::settings::developer::types" to use in template or global wp_properties is available.*/ ?>
         </ul>
       </td>
@@ -292,15 +163,15 @@ jQuery(document).ready(function($) {
         <ul class="wp-tab-panel wpp_inherited_property_attributes wpp_something_advanced_wrapper">
           <li class="wpp_show_advanced" wrapper="wpp_something_advanced_wrapper"><?php _e( 'Toggle Attributes Selection', ud_get_wp_property()->domain ); ?></li>
 
-          <% jQuery.each( wp_properties.property_stats, function(property_stat_slug, property_stat_label ){ %>
+          <% jQuery.each( _.get(wp_properties, 'property_stats', []), function(property_stat_slug, property_stat_label ){ %>
             <li class="wpp_development_advanced_option">
-              <input id="<% print( property_slug + "_" + property_stat_slug) %>_inheritance" <% if( typeof wp_properties.property_inheritance[ property_slug ] != 'undefined' && jQuery.inArray(property_stat_slug, wp_properties.property_inheritance[ property_slug ]) != -1){ print( 'CHECKED'); } %> type="checkbox" name="wpp_settings[property_inheritance][<%= property_slug %>][]" value="<%= property_stat_slug %>"/>
+              <input id="<% print( property_slug + "_" + property_stat_slug) %>_inheritance" <%= _.wppChecked(wp_properties, ['property_inheritance', property_slug], property_stat_slug) %> type="checkbox" name="wpp_settings[property_inheritance][<%= property_slug %>][]" value="<%= property_stat_slug %>"/>
               <label for="<% print( property_slug + "_" + property_stat_slug) %>_inheritance">
                 <%= property_stat_label %>
               </label>
             </li>
           <% }); %>
-          <% typeof inherited_attributes_do_action[property_slug] != 'undefined'? print(inherited_attributes_do_action[ property_slug ]):''; %>
+          <%= _.get(inherited_attributes_do_action, property_slug, '') %>
         <?php do_action( 'wpp::settings::developer::types::inherited_attributes'); /* The action should output underscore template. Template should pass variable to filter "wpp::settings::developer::types" to use in template or global wp_properties is available.*/ ?>
         </ul>
       </td>

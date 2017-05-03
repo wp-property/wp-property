@@ -8,6 +8,27 @@
 if( !wpp ) {
 }
 
+  
+_.wppSelected = function(selected, current) {
+  var result = '';
+  current = current || true;
+
+  if ( selected === current )
+    result = " selected='selected' ";
+
+  return result;
+}
+
+_.wppChecked = function(obj, property, val) {
+  var result = '';
+  var items = _.get(obj, property, []);
+
+  if ( jQuery.inArray(val, items) != -1 || (val === false && items))
+    result = " CHECKED ";
+
+  return result;
+}
+
 /**
  * Assign Property Stat to Group Functionality
  *
