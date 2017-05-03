@@ -303,8 +303,9 @@ class WPP_Core {
     wp_register_script( 'wp-property-admin-widgets', WPP_URL . 'scripts/wpp.admin.widgets.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-admin-settings', WPP_URL . 'scripts/wpp.admin.settings.js', array( 'jquery', 'heartbeat', 'wpp-localization' ), WPP_Version );
     // _ template js
-    wp_register_script( 'wpp-settings-developer-attributes', WPP_URL . 'scripts/view/settings-developer-attributes.js', array( 'wp-property-admin-settings' ), WPP_Version );
-    wp_register_script( 'wpp-settings-developer-types', WPP_URL . 'scripts/view/settings-developer-types.js', array( 'wp-property-admin-settings' ), WPP_Version );
+    wp_register_script( 'lodash-js', WPP_URL . 'scripts/lodash.js', array('jquery', 'underscore'), WPP_Version );
+    wp_register_script( 'wpp-settings-developer-attributes', WPP_URL . 'scripts/view/settings-developer-attributes.js', array( 'wp-property-admin-settings', 'lodash-js' ), WPP_Version );
+    wp_register_script( 'wpp-settings-developer-types', WPP_URL . 'scripts/view/settings-developer-types.js', array( 'wp-property-admin-settings', 'lodash-js' ), WPP_Version );
     
     if(WPP_FEATURE_FLAG_SETTINGS_V2){
       $_featureFlags = array();
@@ -315,7 +316,7 @@ class WPP_Core {
       wp_localize_script( 'wp-property-admin-settings', 'featureFlags', $_featureFlags );
     }
 
-    wp_register_script( 'wp-property-backend-global', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-backend-global', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization', 'lodash-js' ), WPP_Version );
     wp_register_script( 'wp-property-backend-editor', WPP_URL . 'scripts/wpp.admin.editor.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable', 'wpp-jquery-fancybox' ), WPP_Version );
     wp_register_script( 'jquery-cookie', WPP_URL . 'scripts/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );

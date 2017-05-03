@@ -8,6 +8,27 @@
 if( !wpp ) {
 }
 
+  
+_.wppSelected = function(selected, current) {
+  var result = '';
+  current = current || true;
+
+  if ( selected === current )
+    result = " selected='selected' ";
+
+  return result;
+}
+
+_.wppChecked = function(obj, property, val) {
+  var result = '';
+  var items = _.get(obj, property, []);
+
+  if ( jQuery.inArray(val, items) != -1 || (val === false && items))
+    result = " CHECKED ";
+
+  return result;
+}
+
 /**
  * Assign Property Stat to Group Functionality
  *
@@ -461,7 +482,7 @@ function wpp_add_row(element,hides) {
   }
 
   //* Clone last row */
-  var cloned = jQuery(".wpp_dynamic_table_row:last", table).clone();
+  var cloned = table.data('newRow').clone() || jQuery(".wpp_dynamic_table_row:last", table).clone();
 
   //return;
   //* Set unique 'id's and 'for's for elements of the new row */
@@ -700,7 +721,8 @@ jQuery(document).ready(function() {
   });
 
   // Delete dynamic row
-  jQuery(".wpp_delete_row").live("click", function() {
+  jQuery(".wpp_delete_row").live("click", function(event) {
+    event.preventDefault();
     if(jQuery(this).hasClass('disabled'))
       return false;
     
@@ -720,10 +742,10 @@ jQuery(document).ready(function() {
       jQuery(parent).remove();
     } else {
 	   if(jQuery(table).hasClass('last_delete_row')){
-	    wpp_add_row(this,true);
-            jQuery(parent).remove();
+	       wpp_add_row(this);
+         jQuery(parent).remove();
 	   } else{
-            jQuery(parent).attr( 'new_row', 'true' );
+         jQuery(parent).attr( 'new_row', 'true' );
 	   }
     }
 
