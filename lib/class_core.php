@@ -73,6 +73,16 @@ class WPP_Core {
 
     add_filter( 'wpp_get_properties_query', array( $this, 'fix_tax_property_query' ));
 
+
+    /**
+     * Heartbeat filter for locking settings page.
+     * 
+     */
+
+    if(WPP_FEATURE_FLAG_SETTINGS_V2){
+      add_filter( 'heartbeat_received', array($this, 'wpp_settings_lock_heartbeat_received'), 10, 3 );
+      add_filter( 'heartbeat_send', array($this, 'wpp_settings_lock_heartbeat_send'), 10, 2 );
+    }
   }
 
   /**
@@ -218,6 +228,9 @@ class WPP_Core {
     add_action( 'wp_ajax_wpp_ajax_revalidate_all_addresses', create_function( "", '  echo WPP_F::revalidate_all_addresses(); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_create_settings_backup', create_function( "", '  echo WPP_F::create_settings_backup(); die();' ) );
     add_action( 'wp_ajax_wpp_save_settings', create_function( "", ' die(WPP_F::save_settings());' ) );
+    if(WPP_FEATURE_FLAG_SETTINGS_V2){
+      add_action( 'wp_ajax_wpp_get_settings_page', create_function( "", ' die(WPP_F::wpp_ajax_get_settings_page());' ) );
+    }
     add_action( 'wp_ajax_wpp_save_freemius_settings', create_function( "", ' die(WPP_F::save_freemius_settings());' ) );
     add_action( 'wp_ajax_wpp_apply_default_value', create_function( "", ' die(WPP_F::apply_default_value());' ) );
     add_action( 'wp_ajax_wpp_ajax_print_wp_properties', create_function( "", ' global $wp_properties; print_r($wp_properties); die();' ) );
@@ -281,9 +294,22 @@ class WPP_Core {
     wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'scripts/fileuploader.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wp-property-admin-overview', WPP_URL . 'scripts/wpp.admin.overview.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-admin-widgets', WPP_URL . 'scripts/wpp.admin.widgets.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-admin-settings', WPP_URL . 'scripts/wpp.admin.settings.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-admin-settings', WPP_URL . 'scripts/wpp.admin.settings.js', array( 'jquery', 'heartbeat', 'wpp-localization' ), WPP_Version );
+    // _ template js
+    wp_register_script( 'lodash-js', WPP_URL . 'scripts/lodash.js', array('jquery', 'underscore'), WPP_Version );
+    wp_register_script( 'wpp-settings-developer-attributes', WPP_URL . 'scripts/view/settings-developer-attributes.js', array( 'wp-property-admin-settings', 'lodash-js' ), WPP_Version );
+    wp_register_script( 'wpp-settings-developer-types', WPP_URL . 'scripts/view/settings-developer-types.js', array( 'wp-property-admin-settings', 'lodash-js' ), WPP_Version );
+    
+    if(WPP_FEATURE_FLAG_SETTINGS_V2){
+      $_featureFlags = array();
+      $featureFlags = ud_get_wp_property()->get_feature_flags();
+      foreach ($featureFlags as $flag) {
+        $_featureFlags[$flag->constant] = $flag->enabled;
+      }
+      wp_localize_script( 'wp-property-admin-settings', 'featureFlags', $_featureFlags );
+    }
 
-    wp_register_script( 'wp-property-backend-global', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-backend-global', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization', 'lodash-js' ), WPP_Version );
     wp_register_script( 'wp-property-backend-editor', WPP_URL . 'scripts/wpp.admin.editor.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable', 'wpp-jquery-fancybox' ), WPP_Version );
     wp_register_script( 'jquery-cookie', WPP_URL . 'scripts/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
@@ -1351,6 +1377,84 @@ class WPP_Core {
   static function shortcode_property_overview( $atts = '' ) {
     //_deprecated_function( __FUNCTION__, '2.1.0', 'do_shortcode([property_overview])' );
     return UsabilityDynamics\WPP\Property_Overview_Shortcode::render( $atts );
+  }
+
+  /**
+   * Heartbeat filter for locking settings page.
+   *
+   * 
+   *
+   *
+   */
+
+  public function wpp_settings_lock_heartbeat_received( $response, $data, $screen_id ){
+    if(isset( $data['property_settings_lock'] )){
+      if($data['property_settings_lock'] === true || $data['property_settings_lock'] == 'true') {
+        if ( $new_lock = $this->wpp_settings_set_lock() )
+          $response['property_settings_lock']['new_lock'] = implode( ':', $new_lock );
+      }
+      else{
+        $response['property_settings_lock']['lock_removed'] = $this->wpp_settings_remove_lock();
+      }
+    }
+
+    return $response;
+  }
+  /**
+   * Heartbeat filter for locking settings page.
+   *
+   * 
+   *
+   *
+   */
+
+  public function wpp_settings_lock_heartbeat_send( $response, $screen_id ){
+    // Checking if it's being edited by other user
+    if ( ( $user_id = $this->wpp_settings_check_lock() ) && ( $user = get_userdata( $user_id ) ) ) {
+      $lock_error = &$response['property_settings_lock']['lock_error'];
+      $lock_error['text'] = sprintf( __( '%s is currently editing settings.' ), $user->display_name );
+
+      if ( $avatar = get_avatar( $user->ID, 64 ) ) {
+        if ( preg_match( "|src='([^']+)'|", $avatar, $matches ) )
+          $lock_error['avatar_src'] = $matches[1];
+      }
+    }
+
+    return $response;
+  }
+
+
+  public function wpp_settings_set_lock() {
+    if ( 0 == ($user_id = get_current_user_id()) )
+      return false;
+    
+    $now = time();
+    $lock = "$now:$user_id";
+
+    update_option( 'wpp_settings_lock', $lock );
+    return array( $now, $user_id );
+  }
+
+  public function wpp_settings_remove_lock() {
+    delete_option('wpp_settings_lock');
+    return true;
+  }
+
+  public function wpp_settings_check_lock() {
+    //$lock = get_option( 'wpp_settings_lock' );
+    if ( !$lock = get_option( 'wpp_settings_lock' ) )
+      return false;
+
+    $lock = explode( ':', $lock );
+    $time = $lock[0];
+    $user = isset( $lock[1] ) ? $lock[1] : 0;
+    
+    /** This filter is similar to wp_check_post_lock_window */
+    $time_window = apply_filters( 'wpp_settings_lock_window', 150 );
+ 
+    if ( $time && $time > time() - $time_window && $user != get_current_user_id() )
+      return $user;
+    return false;
   }
 
 }

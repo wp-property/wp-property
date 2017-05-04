@@ -122,6 +122,13 @@
         "enabled": false
       },
       {
+        "name": "Settings Version 2",
+        "constant": "WPP_FEATURE_FLAG_SETTINGS_V2",
+        "description": "",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
         "name": "Disable Editor",
         "constant": "WPP_FEATURE_FLAG_DISABLE_EDITOR",
         "description": "Disables native WordPress post editor.",
