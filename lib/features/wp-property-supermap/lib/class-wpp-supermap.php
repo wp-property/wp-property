@@ -50,7 +50,7 @@ class class_wpp_supermap {
     if(current_user_can(self::$capability)) {
       add_filter('wpp_settings_nav', array('class_wpp_supermap', 'settings_nav'));
       add_filter('wpp::settings::developer::types', array('class_wpp_supermap', 'wpp_property_types_variables'));
-      add_action('wpp::settings::developer::types::settings', array('class_wpp_supermap', 'property_type_settings'));
+      add_filter('wpp::settings::developer::types::settings', array('class_wpp_supermap', 'property_type_settings'));
 
       //* Add Settings Page */
       add_action('wpp_settings_content_supermap', array('class_wpp_supermap', 'settings_page'));
@@ -303,6 +303,9 @@ class class_wpp_supermap {
                 /* Remove image from new Row */
                 jQuery('#wpp_supermap_markers tr').live('added', function(){
                   jQuery('input.slug', this).trigger('change');
+                  jQuery('.wpp_ajax_image_upload', this).map_marker_select({
+                    image: "img"
+                  });
                 });
 
                 /* Fire event after row removing to check table's DOM */
@@ -409,8 +412,8 @@ class class_wpp_supermap {
     <div class="wp-tab-panel supermap_marker_settings">
     <div class="wpp_property_type_supermap_settings">
       <div class="wpp_supermap_marker_image">
-      <% if (typeof supermap_configuration.property_type_markers[slug] != 'undefined' && supermap_configuration.property_type_markers[slug] ){ 
-        var marker_image_url = /^(http|https):\/\//.exec(supermap_configuration.property_type_markers[slug]) ? supermap_configuration.property_type_markers[slug] : markers_url + "/" + supermap_configuration.property_type_markers[slug];
+      <% if ( url = __.get(supermap_configuration, ['property_type_markers', slug], false) ){ 
+        var marker_image_url = /^(http|https):\/\//.exec(url) ? url : markers_url + "/" + url;
       %>
         <img src="<%= marker_image_url %>" alt="" />
       <% }else{ %>
@@ -421,10 +424,9 @@ class class_wpp_supermap {
       <label for="wpp_setting_property_type_<%= slug %>_marker"><?php _e('Map Marker', ud_get_wpp_supermap()->domain); ?>:</label>
       <select class="wpp_setting_property_type_marker" id="wpp_setting_property_type_<%= slug %>_marker" name="wpp_settings[configuration][feature_settings][supermap][property_type_markers][<%= slug %>]" >
         <option value=""><?php _e('Default by Google', ud_get_wpp_supermap()->domain); ?></option>
-        <% if( typeof supermap_configuration.markers != 'undefined'){ %>
-          <% jQuery.each(supermap_configuration.markers, function(mslug, mvalue){ %>
-            <option value="<%= mvalue.file %>" <% selected(
-              typeof supermap_configuration.property_type_markers[slug] != 'undefined' && supermap_configuration.property_type_markers[slug] ? supermap_configuration.property_type_markers[slug] : null, mvalue.file); %>><%= mvalue.name %></option>
+        <% if( __.get(supermap_configuration, 'markers', false)){ %>
+          <% jQuery.each(__.get(supermap_configuration, 'markers', []), function(mslug, mvalue){ %>
+            <option value="<%= mvalue.file %>" <% _.wppSelected(__.get(supermap_configuration, ['property_type_markers', slug], null), mvalue.file); %>><%= mvalue.name %></option>
           <% }); %>
         <% } %>
       </select>

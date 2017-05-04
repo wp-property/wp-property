@@ -136,6 +136,10 @@ namespace UsabilityDynamics\WPP {
             wp_enqueue_style( 'wpp-terms-admin-property', $this->path( '/static/styles/wpp.terms.property.css', 'url' ) );
             break;
 
+          //** Settings Page */
+          case 'property_page_property_settings':
+            wp_enqueue_script( 'settings-developer-terms', $this->path( '/static/scripts/admin/settings-developer-terms.js', 'url' ), array( 'wp-property-admin-settings' ) );
+
         }
 
       }

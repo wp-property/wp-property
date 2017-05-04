@@ -293,7 +293,7 @@ namespace UsabilityDynamics {
       /**
        * Parses Query.
        * HACK. The current logic solves the issue of max_input_vars in the case if query is huge.
-       * 
+       *
        * @see parse_str() Default PHP function
        * @param mixed $request
        * @version 1.1
@@ -1743,7 +1743,7 @@ namespace UsabilityDynamics {
        *
        * @param mixed $name List of requested templates. Will be return the first found
        * @param array $path [optional]. Method tries to find template in theme, but also it can be found in given list of pathes.
-       * @param array $opts [optional]. Set of additional params: 
+       * @param array $opts [optional]. Set of additional params:
        *   - string $instance. Template can depend on instance. For example: facebook, PDF, etc. Uses filter: ud::template_part::{instance}
        *   - boolean $load. if true, rendered HTML will be returned, in other case, only found template's path.
        * @load boolean [optional]. If true and a template is found, the template will be loaded via load_template() and returned as a string
@@ -1764,7 +1764,7 @@ namespace UsabilityDynamics {
           'instance' => $instance,
           'load' => false,
         ) );
-        
+
         //** Allows to add/change templates storage directory. */
         $path = apply_filters( "ud::template_part::path", $path, $name, $opts );
 
@@ -1783,7 +1783,7 @@ namespace UsabilityDynamics {
         }
 
         $template = apply_filters( "ud::template_part::{$opts['instance']}", $template, array( 'name' => $name, 'path' => $path, 'opts' => $opts ) );
-        
+
         //** If match and load was requested, get template and return */
         if( !empty( $template ) && $opts[ 'load' ] == true ) {
           ob_start();
@@ -1894,7 +1894,13 @@ namespace UsabilityDynamics {
               continue;
             }
             if( @is_array( $value ) or @is_array( $base[ $key ] ) ) {
-              $base[ $key ] = self::extend( $base[ $key ], $append[ $key ] );
+
+              if( isset( $base[ $key ] ) ) {
+                $base[ $key ] = self::extend( $base[ $key ], $append[ $key ] );
+              } else {
+                $base[ $key ] = $append[ $key ];
+              }
+
             } else if( is_numeric( $key ) ) {
               if( !in_array( $value, $base ) ) $base[ ] = $value;
             } else {
@@ -2518,7 +2524,7 @@ namespace UsabilityDynamics {
 
         return $data;
       }
-      
+
       /**
        * Wrapper for json_encode function.
        * Emulates JSON_UNESCAPED_UNICODE.
@@ -2532,7 +2538,7 @@ namespace UsabilityDynamics {
         array_walk_recursive( $arr, create_function( '&$item, $key', 'if (is_string($item)) $item = mb_encode_numericentity($item, array (0x80, 0xffff, 0, 0xffff), "UTF-8");' ) );
         return mb_decode_numericentity( json_encode( $arr ), array( 0x80, 0xffff, 0, 0xffff ), 'UTF-8' );
       }
-      
+
       /**
        * Merges any number of arrays / parameters recursively,
        *
