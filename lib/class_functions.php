@@ -3203,6 +3203,30 @@ class WPP_F extends UsabilityDynamics\Utility
   }
 
   /**
+   * Get settings page html and wpp_settings
+   *
+   * @author alim
+   * @param none
+   * @return array
+   */
+  public static function wpp_ajax_get_settings_page() {
+    ud_get_wp_property()->core->wpp_settings_remove_lock();
+    $return['lock_removed'] = true;
+
+    $settings = new UsabilityDynamics\WPP\Settings(array(
+      'key' => 'wpp_settings',
+      'store' => 'options',
+    ));
+    ob_start();
+      $settings->render_page();
+    $return['wpp_settings_page'] = ob_get_clean();
+
+    $return['wpp_settings'] = apply_filters( 'wpp::localization::instance', ud_get_wp_property()->get() );
+
+    wp_send_json($return);
+  }
+
+  /**
    * Loads settings into global variable
    * Also restores data from backup file.
    *
