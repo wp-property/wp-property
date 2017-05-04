@@ -70,8 +70,8 @@ jQuery(document).on('wpp.ui.settings.ready', function() {
   var _wppAttributes = new wppAttributes();
 
   jQuery.each(wp_properties.property_stats, function(slug, value) {
-    var gslug = _.get(wp_properties, ['property_stats_groups', slug], '');
-    var group = _.get(wp_properties, ['property_groups', gslug], '');
+    var gslug = __.get(wp_properties, ['property_stats_groups', slug], '');
+    var group = __.get(wp_properties, ['property_groups', gslug], '');
 
     var attributes = {
       slug          : slug,
@@ -83,14 +83,13 @@ jQuery(document).on('wpp.ui.settings.ready', function() {
     jQuery.extend( attributes, wpp_property_attributes_variables );
 
     var row = new wppAttribute( attributes );
-    console.log(row)
     _wppAttributes.add(row);
   });
 
   wppAttributesView = new WPPAttributesView({ collection: _wppAttributes });
   table.find("tbody").empty().append(wppAttributesView.render().el);
 
-  if(!_.get(_wppAttributes, 'length', 0)){
+  if(!__.get(_wppAttributes, 'length', 0)){
     // Adding empty row if there no row.
     wpp_add_row(table.find('.wpp_add_row'));
   }
