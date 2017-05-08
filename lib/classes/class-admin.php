@@ -234,6 +234,8 @@ namespace UsabilityDynamics\WPP {
 
           //** Settings Page */
           case 'property_page_property_settings':
+            wp_enqueue_script('underscore');
+            wp_enqueue_script('lodash-js');
             wp_enqueue_script('wp-property-backend-global');
             wp_enqueue_script('wp-property-global');
             wp_enqueue_script('jquery');
