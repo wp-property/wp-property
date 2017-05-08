@@ -156,6 +156,7 @@ jQuery.extend( wpp = wpp || {}, {
                       },
                       error: function () {
                         wppShowMessage('error');
+                        btn.prop( 'disabled', false );
                       }
                     } );
                     
