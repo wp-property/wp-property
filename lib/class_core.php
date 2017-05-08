@@ -225,7 +225,6 @@ class WPP_Core {
     add_action( 'wp_ajax_wpp_ajax_max_set_property_type', create_function( "", ' die(WPP_F::mass_set_property_type($_REQUEST["property_type"]));' ) );
 
     add_action( 'wp_ajax_wpp_ajax_image_query', create_function( "", ' $class = WPP_F::get_property_image_data($_REQUEST["image_id"]); if($class)  print_r($class); else echo __("No image found.","wpp"); die();' ) );
-    add_action( 'wp_ajax_wpp_ajax_clear_cache', create_function( "", '  echo WPP_F::clear_cache(); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_revalidate_all_addresses', create_function( "", '  echo WPP_F::revalidate_all_addresses(); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_create_settings_backup', create_function( "", '  echo WPP_F::create_settings_backup(); die();' ) );
     add_action( 'wp_ajax_wpp_save_settings', create_function( "", ' die(WPP_F::save_settings());' ) );
@@ -268,7 +267,6 @@ class WPP_Core {
 
     //** Contextual Help */
     add_action( 'wpp_contextual_help', array( $this, 'wpp_contextual_help' ) );
-    add_action( 'delete_attachment', array( $this, 'maybe_delete_l10n_script_option' ) );
 
     //** Page loading handlers */
     add_action( 'load-property_page_property_settings', array( 'WPP_F', 'property_page_property_settings_load' ) );
@@ -282,13 +280,8 @@ class WPP_Core {
     $scheme = ( is_ssl() && !is_admin() ? 'https' : 'http' );
 
     //** Load Localization early so plugins can use them as well */
-    //** Try to generate static localization script. It can be flushed on Clear Cache! */
-    if( $l10n_url = $this->maybe_generate_l10n_script() ) {
-      wp_register_script( 'wpp-localization', $l10n_url, array(), WPP_Version );
-    } else {
-      wp_register_script( 'wpp-localization', ud_get_wp_property()->path( 'static/scripts/l10n.js', 'url' ), array(), WPP_Version );
-      wp_localize_script( 'wpp-localization', 'wpp_l10n', $this->get_l10n_data() );
-    }
+    wp_register_script( 'wpp-localization', ud_get_wp_property()->path( 'static/scripts/l10n.js', 'url' ), array(), WPP_Version );
+    wp_localize_script( 'wpp-localization', 'wpp_l10n', $this->get_l10n_data() );
 
     // wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox.2.1.5/jquery.fancybox.pack.js', array( 'jquery', 'wpp-localization' ), '2.1.5' );
     wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
@@ -303,8 +296,9 @@ class WPP_Core {
     wp_register_script( 'wp-property-admin-widgets', WPP_URL . 'scripts/wpp.admin.widgets.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-admin-settings', WPP_URL . 'scripts/wpp.admin.settings.js', array( 'jquery', 'heartbeat', 'wpp-localization' ), WPP_Version );
     // _ template js
-    wp_register_script( 'wpp-settings-developer-attributes', WPP_URL . 'scripts/view/settings-developer-attributes.js', array( 'wp-property-admin-settings' ), WPP_Version );
-    wp_register_script( 'wpp-settings-developer-types', WPP_URL . 'scripts/view/settings-developer-types.js', array( 'wp-property-admin-settings' ), WPP_Version );
+    wp_register_script( 'lodash-js', WPP_URL . 'scripts/lodash.js', array('jquery', 'underscore'), WPP_Version );
+    wp_register_script( 'wpp-settings-developer-attributes', WPP_URL . 'scripts/view/settings-developer-attributes.js', array( 'wp-property-admin-settings', 'lodash-js' ), WPP_Version );
+    wp_register_script( 'wpp-settings-developer-types', WPP_URL . 'scripts/view/settings-developer-types.js', array( 'wp-property-admin-settings', 'lodash-js' ), WPP_Version );
     
     if(WPP_FEATURE_FLAG_SETTINGS_V2){
       $_featureFlags = array();
@@ -315,7 +309,7 @@ class WPP_Core {
       wp_localize_script( 'wp-property-admin-settings', 'featureFlags', $_featureFlags );
     }
 
-    wp_register_script( 'wp-property-backend-global', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-backend-global', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization', 'underscore' ), WPP_Version );
     wp_register_script( 'wp-property-backend-editor', WPP_URL . 'scripts/wpp.admin.editor.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable', 'wpp-jquery-fancybox' ), WPP_Version );
     wp_register_script( 'jquery-cookie', WPP_URL . 'scripts/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
@@ -791,7 +785,6 @@ class WPP_Core {
     /**
      * Flush WP-Property caches
      */
-    \WPP_F::clear_cache();
 
   }
 
@@ -1268,104 +1261,6 @@ class WPP_Core {
       wp_set_current_user($user_id);
     }
 
-  }
-
-  /**
-   * Delete l10n option if attachment is deleted.
-   *
-   * @since 2.2.1
-   * @author Alim
-   */
-  public function maybe_delete_l10n_script_option($post_id){
-    $l10n_id = get_option('wp-property-l10n-attachment');
-    if($l10n_id == $post_id){
-      delete_option('wp-property-l10n-attachment');
-    }
-  }
-
-  /**
-   * Generates javascript file with localization.
-   * Adds localization support to all WP-Property scripts.
-   *
-   * @since 1.41.5
-   * @author peshkov@UD
-   * @param array $args
-   * @return bool|false|string
-   */
-  public function maybe_generate_l10n_script( $args = array( )) {
-    $l10n_id = get_option('wp-property-l10n-attachment');
-
-    $args = wp_parse_args( $args, array(
-      'check_existence' => true
-    ) );
-
-    if($l10n_id != false && $attachment_url = wp_get_attachment_url( $l10n_id )){
-
-      // no existence check, return whatever we have
-      if( !isset( $args ) || !isset( $args['check_existence'] ) || !$args['check_existence'] ) {
-        return $attachment_url;
-      }
-
-      // get file path to verify it exists.
-      if( isset( $args ) && isset( $args['check_existence'] ) && $args['check_existence'] && $_attachment_path = get_attached_file( $l10n_id) ) {
-
-        if( file_exists( $_attachment_path ) ) {
-          return $attachment_url;
-        }
-
-      }
-
-    }
-
-    $upload_dir = wp_upload_dir();
-    $filename   = 'wp-property-l10n.js';
-
-    // Move the file to the uploads dir.
-    $file   = $upload_dir['path'] . "/$filename";
-    // Compute the URL.
-    $url = $upload_dir['url'] . "/$filename";
-
-    //** Save file */
-    if( false === @file_put_contents( $file, 'var wpp = ( typeof wpp === \'object\' ) ? wpp : {}; wpp.strings = ' . json_encode( $this->get_l10n_data() ) . ';' ) ) {
-      return false;
-    }
-
-    // Set correct file permissions.
-    $stat = stat( dirname( $file ));
-    $perms = $stat['mode'] & 0000666;
-    @ chmod( $file, $perms );
-
-    if ( is_multisite() ) {
-        delete_transient( 'dirsize_cache' );
-    }
-
-    // Construct the attachment array
-    $attachment = array(
-        'guid' => $url,
-        'post_mime_type' => 'application/javascript',
-        'post_title' => "JS localization file of WP Property",
-    );
-
-    if($l10n_id){
-      $attachment['ID'] = $l10n_id;
-    }
-  
-    // Save the data
-    $id = wp_insert_attachment($attachment, $file);
-    if ( is_wp_error($id) ) {
-      delete_option('wp-property-l10n-attachment');
-      return false;
-    }
-
-    // Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
-    require_once( ABSPATH . 'wp-admin/includes/image.php' );
-
-    // Generate the metadata for the attachment, and update the database record.
-    $attach_data = wp_generate_attachment_metadata( $id, $file );
-    wp_update_attachment_metadata( $id, $attach_data );
-
-    update_option('wp-property-l10n-attachment', $id);
-    return wp_get_attachment_url( $id );
   }
 
   /**

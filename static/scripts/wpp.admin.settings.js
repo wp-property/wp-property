@@ -156,6 +156,7 @@ jQuery.extend( wpp = wpp || {}, {
                       },
                       error: function () {
                         wppShowMessage('error');
+                        btn.prop( 'disabled', false );
                       }
                     } );
                     
@@ -272,17 +273,6 @@ jQuery.extend( wpp = wpp || {}, {
         jQuery( "#wpp_ajax_image_query_cancel" ).click( function () {
           jQuery( "#wpp_ajax_image_result" ).hide();
           jQuery( this ).hide();
-        } );
-
-        /* Clear Cache */
-        jQuery( "#wpp_clear_cache" ).click( function () {
-          jQuery( '.clear_cache_status' ).remove();
-          jQuery.post( wpp.instance.ajax_url, {
-            action: 'wpp_ajax_clear_cache'
-          }, function ( data ) {
-            message = "<div class='clear_cache_status updated fade'><p>" + data + "</p></div>";
-            jQuery( message ).insertAfter( "h2" );
-          } );
         } );
 
         /* Generate _is_remote meta */

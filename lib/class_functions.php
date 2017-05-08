@@ -2921,24 +2921,6 @@ class WPP_F extends UsabilityDynamics\Utility
   }
 
   /**
-   * Removes all WPP cache files
-   *
-   * @return string Response
-   * @version 0.1
-   * @since 1.32.2
-   * @author Maxim Peshkov
-   */
-  static public function clear_cache()
-  {
-    $l10n_id = get_option('wp-property-l10n-attachment');
-    if($l10n_id != false){
-      wp_delete_attachment( $l10n_id );
-      delete_option('wp-property-l10n-attachment');
-    }
-    return __('Cache was successfully cleared', ud_get_wp_property()->domain);
-  }
-
-  /**
    * Makes a given property featured, usuall called via ajax
    *
    * @since 0.721
@@ -3211,8 +3193,6 @@ class WPP_F extends UsabilityDynamics\Utility
         wp_cache_flush();
       }
       /* Flush WPP cache */
-      WPP_F::clear_cache();
-      
 
     } catch (Exception $e) {
       $return['success'] = false;
@@ -3221,7 +3201,6 @@ class WPP_F extends UsabilityDynamics\Utility
 
     return json_encode($return);
   }
-
 
   /**
    * Get settings page html and wpp_settings
