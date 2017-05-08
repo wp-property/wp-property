@@ -8,7 +8,10 @@
 if( !wpp ) {
 }
 
-var __ = _.noConflict();
+var __ = {};
+if(_.name == 'lodash'){
+  __ = _.noConflict();
+}
   
 _.wppSelected = function(selected, current) {
   var result = '';
@@ -20,6 +23,7 @@ _.wppSelected = function(selected, current) {
   return result;
 }
 
+// Only usable in settings page  
 _.wppChecked = function(obj, property, val) {
   var result = '';
   var items = __.get(obj, property, []);
