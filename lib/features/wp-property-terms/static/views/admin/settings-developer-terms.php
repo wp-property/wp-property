@@ -122,7 +122,7 @@ $wpp_property_types_variables = apply_filters( 'wpp::settings::developer::terms'
           <% } %>
 
           <li class="">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][public]" <% if(__.get(data, 'system', false)) print('disabled = "disabled"');%> <%= _.wppChecked(data, 'system', false) %> value="true"/> <?php _e( 'Public & Searchable', ud_get_wpp_terms()->domain ); ?></label>
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][public]" <% if(__.get(data, 'system', false)) print('disabled = "disabled"');%> <%= _.wppChecked(data, 'public', false) %> value="true"/> <?php _e( 'Public & Searchable', ud_get_wpp_terms()->domain ); ?></label>
           </li>
 
           <li class="wpp_development_advanced_option">
