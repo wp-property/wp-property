@@ -300,14 +300,12 @@ class WPP_Core {
     wp_register_script( 'wpp-settings-developer-attributes', WPP_URL . 'scripts/view/settings-developer-attributes.js', array( 'wp-property-admin-settings', 'lodash-js' ), WPP_Version );
     wp_register_script( 'wpp-settings-developer-types', WPP_URL . 'scripts/view/settings-developer-types.js', array( 'wp-property-admin-settings', 'lodash-js' ), WPP_Version );
     
-    if(WPP_FEATURE_FLAG_SETTINGS_V2){
-      $_featureFlags = array();
-      $featureFlags = ud_get_wp_property()->get_feature_flags();
-      foreach ($featureFlags as $flag) {
-        $_featureFlags[$flag->constant] = $flag->enabled;
-      }
-      wp_localize_script( 'wp-property-admin-settings', 'featureFlags', $_featureFlags );
+    $_featureFlags = array();
+    $featureFlags = ud_get_wp_property()->get_feature_flags();
+    foreach ($featureFlags as $flag) {
+      $_featureFlags[$flag->constant] = $flag->enabled;
     }
+    wp_localize_script( 'wp-property-admin-settings', 'featureFlags', $_featureFlags );
 
     wp_register_script( 'wp-property-backend-global', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization', 'underscore' ), WPP_Version );
     wp_register_script( 'wp-property-backend-editor', WPP_URL . 'scripts/wpp.admin.editor.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
