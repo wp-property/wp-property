@@ -28,8 +28,9 @@ _.wppChecked = function(obj, property, val) {
   var result = '';
   var items = __.get(obj, property, []);
 
-  if ( jQuery.inArray(val, items) != -1 || (val === false && items))
+  if ( (val === false && items) || _.contains(items, val)){
     result = " CHECKED ";
+  }
 
   return result;
 }
