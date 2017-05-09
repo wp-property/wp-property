@@ -89,21 +89,21 @@ $wpp_property_types_variables = apply_filters( 'wpp::settings::developer::types'
         <ul>
           <li>
             <label for="<%= property_slug %>_searchable_property_types">
-              <input class="slug" id="<%= property_slug %>_searchable_property_types" <%= _.wppChecked(wp_properties, 'searchable_property_types', property_slug) %> type="checkbox" name="wpp_settings[searchable_property_types][]" value="<%= property_slug %>"/>
+              <input class="slug wpp_no_change_name" id="<%= property_slug %>_searchable_property_types" <%= _.wppChecked(wp_properties, 'searchable_property_types', property_slug) %> type="checkbox" name="wpp_settings[searchable_property_types][]" value="<%= property_slug %>"/>
               <?php _e( 'Searchable', ud_get_wp_property()->domain ) ?>
             </label>
           </li>
 
           <li>
             <label for="<%= property_slug %>_location_matters">
-              <input class="slug" id="<%= property_slug %>_location_matters"  <%= _.wppChecked(wp_properties, 'location_matters', property_slug) %> type="checkbox" name="wpp_settings[location_matters][]" value="<%= property_slug %>"/>
+              <input class="slug wpp_no_change_name" id="<%= property_slug %>_location_matters"  <%= _.wppChecked(wp_properties, 'location_matters', property_slug) %> type="checkbox" name="wpp_settings[location_matters][]" value="<%= property_slug %>"/>
               <?php _e( 'Location Matters', ud_get_wp_property()->domain ) ?>
             </label>
           </li>
 
           <li>
             <label>
-              <input class="slug" <%= _.wppChecked(wp_properties, 'type_supports_hierarchy', property_slug) %> type="checkbox" name="wpp_settings[type_supports_hierarchy][]" value="<%= property_slug %>"/>
+              <input class="slug wpp_no_change_name" <%= _.wppChecked(wp_properties, 'type_supports_hierarchy', property_slug) %> type="checkbox" name="wpp_settings[type_supports_hierarchy][]" value="<%= property_slug %>"/>
               <?php _e( 'Supports Hiearchy', ud_get_wp_property()->domain ) ?>
             </label>
           </li>

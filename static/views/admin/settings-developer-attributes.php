@@ -159,31 +159,31 @@ $wpp_property_attributes_variables = apply_filters( 'wpp::settings::developer::a
         <ul>
           <li>
             <label>
-              <input <%= _.wppChecked(wp_properties, 'sortable_attributes', slug) %> type="checkbox" class="slug" name="wpp_settings[sortable_attributes][]" value="<%= slug %>"/>
+              <input <%= _.wppChecked(wp_properties, 'sortable_attributes', slug) %> type="checkbox" class="slug wpp_no_change_name" name="wpp_settings[sortable_attributes][]" value="<%= slug %>"/>
               <?php _e( 'Sortable.', ud_get_wp_property()->domain ); ?>
             </label>
           </li>
           <li>
             <label>
-              <input <%= _.wppChecked(wp_properties, 'searchable_attributes', slug) %> type="checkbox" class="slug" name="wpp_settings[searchable_attributes][]" value="<%= slug %>"/>
+              <input <%= _.wppChecked(wp_properties, 'searchable_attributes', slug) %> type="checkbox" class="slug wpp_no_change_name" name="wpp_settings[searchable_attributes][]" value="<%= slug %>"/>
               <?php _e( 'Searchable.', ud_get_wp_property()->domain ); ?>
             </label>
           </li>
           <li class="wpp_development_advanced_option">
             <label>
-              <input <%= _.wppChecked(wp_properties, 'hidden_frontend_attributes', slug) %>  type="checkbox" class="slug" name="wpp_settings[hidden_frontend_attributes][]" value="<%= slug %>"/>
+              <input <%= _.wppChecked(wp_properties, 'hidden_frontend_attributes', slug) %>  type="checkbox" class="slug wpp_no_change_name" name="wpp_settings[hidden_frontend_attributes][]" value="<%= slug %>"/>
               <?php _e( 'Admin only.', ud_get_wp_property()->domain ); ?>
             </label>
           </li>
           <li class="wpp-setting wpp_development_advanced_option wpp-setting-attribute-admin-sortable">
             <label>
-              <input <%= _.wppChecked(wp_properties, 'column_attributes', slug) %> type="checkbox" class="slug" name="wpp_settings[column_attributes][]" value="<%= slug %>"/>
+              <input <%= _.wppChecked(wp_properties, 'column_attributes', slug) %> type="checkbox" class="slug wpp_no_change_name" name="wpp_settings[column_attributes][]" value="<%= slug %>"/>
               <?php _e( 'Admin sortable.', ud_get_wp_property()->domain ); ?>
             </label>
           </li>
           <li class="wpp_development_advanced_option en_default_value_container">
             <label>
-              <input <%= _.wppChecked(wp_properties, 'en_default_value', slug) %> type="checkbox" class="slug en_default_value" name="wpp_settings[en_default_value][]" value="<%= slug %>"/>
+              <input <%= _.wppChecked(wp_properties, 'en_default_value', slug) %> type="checkbox" class="slug wpp_no_change_name en_default_value" name="wpp_settings[en_default_value][]" value="<%= slug %>"/>
               <?php _e( 'Set default value.', ud_get_wp_property()->domain ); ?>
             </label>
           
