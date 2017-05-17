@@ -468,12 +468,22 @@ namespace UsabilityDynamics\WPP {
               if( empty( $_REQUEST[ 'post_ids' ] ) || !is_array( $_REQUEST[ 'post_ids' ] ) ) {
                 throw new \Exception( sprintf( __( 'Invalid request: no %s IDs provided.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label() ) );
               }
+              $unauthorized = 0;
               $post_ids = $_REQUEST[ 'post_ids' ];
               foreach( $post_ids as $post_id ) {
                 $post_id = (int)$post_id;
-                wp_untrash_post( $post_id );
+                if(current_user_can('delete_wpp_property', $post_id)){
+                  wp_untrash_post( $post_id );
+                }
+                else{
+                  $unauthorized++;
+                }
               }
-              $this->message = sprintf( __( 'Selected %s have been successfully restored from Trash.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label( 'plural' ) );
+              if( $unauthorized > 0 ) {
+                $this->message = sprintf( __( 'You don\'t have permission to restore one or more selected %s.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label( 'plural' ) );
+              } else{
+                $this->message = sprintf( __( 'Selected %s have been successfully restored from Trash.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label( 'plural' ) );
+              }
               break;
 
             case 'delete':
@@ -481,11 +491,15 @@ namespace UsabilityDynamics\WPP {
                 throw new \Exception( sprintf( __( 'Invalid request: no %s IDs provided.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label() ) );
               }
               $post_ids = $_REQUEST[ 'post_ids' ];
+              $unauthorized = 0;
               $trashed = 0;
               $deleted = 0;
               foreach( $post_ids as $post_id ) {
                 $post_id = (int)$post_id;
-                if( get_post_status( $post_id ) == 'trash' ) {
+                if(!current_user_can('delete_wpp_property', $post_id)){
+                  $unauthorized++;
+                }
+                elseif( get_post_status( $post_id ) == 'trash' ) {
                   $deleted++;
                   wp_delete_post( $post_id );
                 } else {
@@ -493,7 +507,10 @@ namespace UsabilityDynamics\WPP {
                   wp_trash_post( $post_id );
                 }
               }
-              if( $trashed > 0 && $deleted > 0 ) {
+
+              if( $unauthorized > 0 ) {
+                $this->message = sprintf( __( 'You don\'t have permission to delete one or more selected %s.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label( 'plural' ) );
+              } elseif( $trashed > 0 && $deleted > 0 ) {
                 $this->message = sprintf( __( 'Selected %s have been successfully moved to Trash or deleted.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label( 'plural' ) );
               } elseif( $trashed > 0 ) {
                 $this->message = sprintf( __( 'Selected %s have been successfully moved to Trash.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label( 'plural' ) );

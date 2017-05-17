@@ -1219,17 +1219,29 @@ class WPP_Core {
     //* General WPP capabilities */
     $wpp_capabilities = array(
       //* Manage WPP Properties Capabilities */
-      'edit_wpp_properties' => __( 'View Properties', ud_get_wp_property()->domain ),
-      'edit_wpp_property' => __( 'Add/Edit Properties', ud_get_wp_property()->domain ),
-      'edit_others_wpp_properties' => __( 'Edit Other Properties', ud_get_wp_property()->domain ),
-      'delete_wpp_property' => __( 'Delete Properties', ud_get_wp_property()->domain ),
-      'publish_wpp_properties' => __( 'Publish Properties', ud_get_wp_property()->domain ),
+      'edit_wpp_properties' => sprintf(__( 'View %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
+
+      'edit_wpp_property' => sprintf(__( 'Add/Edit %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
+      'delete_wpp_property' => sprintf(__( 'Delete %s', ud_get_wp_property()->domain ), WPP_F::property_label()),
+      'delete_wpp_properties' => sprintf(__( 'Delete Multiple %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
+
+      'publish_wpp_properties' => sprintf(__( 'Publish %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
+      'edit_published_wpp_properties' => sprintf(__( 'Edit Published %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
+      'delete_published_wpp_properties' => sprintf(__( 'Delete Published %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
+
+      //* WPP others property capability */
+      'edit_others_wpp_properties' => sprintf(__( 'Edit Others %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
+      'delete_others_wpp_properties' => sprintf(__( 'Delete Others %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
+      //* WPP private property capability */
+      'edit_private_wpp_properties' => sprintf(__( 'Edit Private %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
+      'delete_private_wpp_properties' => sprintf(__( 'Delete Private %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
+
       //* WPP make featured capability */
-      'manage_wpp_make_featured' => __( 'Allow to mark properties as featured', ud_get_wp_property()->domain ),
+      'manage_wpp_make_featured' => sprintf(__( 'Allow to mark %s as featured', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
       //* WPP Settings capability */
       'manage_wpp_settings' => __( 'Manage Settings', ud_get_wp_property()->domain ),
       //* WPP Taxonomies capability */
-      'manage_wpp_categories' => __( 'Manage Taxonomies', ud_get_wp_property()->domain )
+      'manage_wpp_categories' => __( 'Manage Taxonomies', ud_get_wp_property()->domain ),
     );
 
     //* Adds Premium Feature Capabilities */
