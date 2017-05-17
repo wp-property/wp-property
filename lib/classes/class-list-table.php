@@ -444,7 +444,7 @@ namespace UsabilityDynamics\WPP {
       public function get_bulk_actions() {
         $actions = array();
 
-        if( current_user_can( 'delete_wpp_property' ) ) {
+        if( current_user_can( 'delete_wpp_properties' ) ) {
           $actions[ 'untrash' ] = __( 'Restore', ud_get_wp_property( 'domain' ) );
           //$actions[ 'refresh' ] = __( 'Refresh', ud_get_wp_property( 'domain' ) );
           $actions[ 'delete' ] = __( 'Delete', ud_get_wp_property( 'domain' ) );
