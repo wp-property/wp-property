@@ -102,7 +102,7 @@ if (have_properties()) {
       }
       ?>
 
-      <?php if ($show_children && !empty($property['children'])): ?>
+      <?php if (($show_children == "true" || $show_children === true) && !empty($property['children'])): ?>
         <li class="child_properties">
           <div class="wpd_floorplans_title"><?php echo $child_properties_title; ?></div>
           <table class="wpp_overview_child_properties_table">
