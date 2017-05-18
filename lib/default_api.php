@@ -60,7 +60,7 @@ add_filter( 'the_password_form', 'wpp_password_protected_property_form' );
 // Coordinate manual override
 //add_filter( 'wpp_property_stats_input_' . $wp_properties[ 'configuration' ][ 'address_attribute' ], 'wpp_property_stats_input_address', 0, 3 );
 
-  add_action('save_property', 'wpp_save_property_aggregated_data' );
+  add_action('save_property', 'wpp_save_property_aggregated_data', 10, 2 );
 
 //add_action("wpp_ui_after_attribute_{$wp_properties['configuration']['address_attribute']}", 'wpp_show_coords');
 add_action( 'wpp_ui_after_attribute_price', 'wpp_show_week_month_selection' );
@@ -271,12 +271,14 @@ function wpp_property_stats_input_address( $content, $slug, $object ) {
  * @author peshkov@UD
  * @return null
  */
-function wpp_save_property_aggregated_data( $post_id ) {
+function wpp_save_property_aggregated_data( $post_id, $args ) {
   global $wpdb, $wp_properties;
 
-  if( empty( $_REQUEST[ 'parent_id' ] ) ) {
+  if( empty( $_REQUEST[ 'parent_id' ] ) && empty($args['parent_id']) ) {
     return null;
   }
+
+  $parent_id = !empty( $_REQUEST[ 'parent_id' ] )? $_REQUEST[ 'parent_id' ] : $args['parent_id'];
 
   //** Get all children */
   $children = $wpdb->get_col( $wpdb->prepare( "
@@ -286,7 +288,7 @@ function wpp_save_property_aggregated_data( $post_id ) {
         AND post_status = 'publish'
         AND post_parent = %s
           ORDER BY menu_order ASC
-  ", $_REQUEST[ 'parent_id' ] ) );
+  ", $parent_id ) );
 
   if ( count( $children ) > 0 ) {
 
@@ -344,7 +346,7 @@ function wpp_save_property_aggregated_data( $post_id ) {
       $val = @array_sum( $range_values );
       $val = is_numeric( $val ) && $val > 0 ? ( $average == 'true' ? ceil( $val / count( $range_values ) ) : $val ) : 0;
 
-      update_post_meta( $_REQUEST[ 'parent_id' ], $range_attribute, $val );
+      update_post_meta( $parent_id, $range_attribute, $val );
 
     }
 
