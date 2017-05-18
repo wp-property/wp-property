@@ -740,7 +740,7 @@ class WPP_Core {
     ) );
 
     // Checking if this is a child property if then add it to children array.
-    if($parent_id = wp_get_post_parent_id($post_id)){
+    if($prev_parent_id = wp_get_post_parent_id($post_id)){
       $children[$post_id] = null;
     }
 
@@ -780,6 +780,7 @@ class WPP_Core {
 
     // We need to do it after flashing the cache.
     do_action( 'save_property', $post_id, array(
+      'parent_id' => $prev_parent_id,
       'children' => $children,
       'gpid' => $_gpid,
       'update_data' => $update_data,
