@@ -71,12 +71,19 @@ namespace UsabilityDynamics\WPP {
               if( empty( $_REQUEST[ 'post_ids' ] ) || !is_array( $_REQUEST[ 'post_ids' ] ) ) {
                 throw new \Exception( sprintf( __( 'Invalid request: no %s IDs provided.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label() ) );
               }
+              $unauthorized = 0;
               $post_ids = $_REQUEST[ 'post_ids' ];
               foreach( $post_ids as $post_id ) {
                 $post_id = (int)$post_id;
                 if( !$post_id ) {
                   throw new \Exception( sprintf( __( 'Invalid request: incorrect %s IDs provided.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label() ) );
                 }
+
+                if(!current_user_can('edit_wpp_property', $post_id)){
+                  $unauthorized++;
+                  continue;
+                }
+
                 $wpdb->query( $wpdb->prepare( "
                   UPDATE {$wpdb->posts}
                   SET post_parent = '0'
@@ -84,8 +91,14 @@ namespace UsabilityDynamics\WPP {
                 ", $post_id ) );
                 clean_post_cache( $post_id );
               }
-              $label = count($post_ids) > 1 ? __( 'Children', ud_get_wp_property('domain') ) : __( 'Child', ud_get_wp_property('domain') );
-              $this->message = sprintf( __( 'Selected %s have been successfully un-assigned from current %s.', ud_get_wp_property( 'domain' ) ), $label, \WPP_F::property_label() );
+
+              if( $unauthorized > 0 ) {
+                $this->message = sprintf( __( 'You don\'t have permission to edit one or more selected %s.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label() );
+              }else{
+                $label = count($post_ids) > 1 ? __( 'Children', ud_get_wp_property('domain') ) : __( 'Child', ud_get_wp_property('domain') );
+                $this->message = sprintf( __( 'Selected %s have been successfully un-assigned from current %s.', ud_get_wp_property( 'domain' ) ), $label, \WPP_F::property_label() );
+              }
+
               break;
 
             default:

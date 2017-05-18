@@ -707,6 +707,7 @@ class WPP_F extends UsabilityDynamics\Utility
       'show_ui' => true,
       '_edit_link' => 'post.php?post=%d',
       'capability_type' => array('wpp_property', 'wpp_properties'),
+      'map_meta_cap' => true,
       'hierarchical' => true,
       'rewrite' => array(
         'slug' => $wp_properties['configuration']['base_slug']
