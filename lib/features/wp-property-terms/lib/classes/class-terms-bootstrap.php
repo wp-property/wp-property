@@ -208,7 +208,6 @@ namespace UsabilityDynamics\WPP {
         $hidden = $this->get( 'config.hidden.' . $type, array() );
         if( !empty( $hidden ) && is_array( $hidden ) ) {
           foreach( $hidden as $taxonomy ) {
-            print_r($taxonomy);
             $args = $taxonomies[$taxonomy];
             if($args['hierarchical'])
               $_id = $taxonomy . "div";

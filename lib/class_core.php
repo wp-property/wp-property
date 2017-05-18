@@ -683,7 +683,7 @@ class WPP_Core {
 
     $update_data = $_REQUEST[ 'wpp_data' ][ 'meta' ];
 
-    //** Neccessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
+    //** Necessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
     if( empty( $_REQUEST[ 'exclude_from_supermap' ] ) ) {
       if( !metadata_exists( 'post', $post_id, 'exclude_from_supermap' ) ) {
         $update_data[ 'exclude_from_supermap' ] = 'false';
@@ -751,12 +751,12 @@ class WPP_Core {
       //* Determine child property_type */
       $child_property_type = get_post_meta( $child_id, 'property_type', true );
 
-      //* Check if child's property type has inheritence rules, and if meta_key exists in inheritance array */
+      //* Check if child's property type has inheritance rules, and if meta_key exists in inheritance array */
       if(
         isset( $wp_properties[ 'property_inheritance' ][ $child_property_type ] ) &&
         is_array( $wp_properties[ 'property_inheritance' ][ $child_property_type ] )
       ) {
-        // Getting parret id //because current property could be a child.
+        // Getting parent id //because current property could be a child.
         $parent_id = wp_get_post_parent_id($child_id);
 
         foreach( $wp_properties[ 'property_inheritance' ][ $child_property_type ] as $i_meta_key ) {
@@ -769,12 +769,6 @@ class WPP_Core {
 
     $_gpid = WPP_F::maybe_set_gpid( $post_id );
 
-    do_action( 'save_property', $post_id, array(
-      'children' => $children,
-      'gpid' => $_gpid,
-      'update_data' => $update_data,
-      'geo_data' => $geo_data
-    ));
 
     /**
      * Flush all object caches related to current property
@@ -783,6 +777,14 @@ class WPP_Core {
     /**
      * Flush WP-Property caches
      */
+
+    // We need to do it after flashing the cache.
+    do_action( 'save_property', $post_id, array(
+      'children' => $children,
+      'gpid' => $_gpid,
+      'update_data' => $update_data,
+      'geo_data' => $geo_data
+    ));
 
   }
 

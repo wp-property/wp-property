@@ -33,8 +33,8 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) 
         $field['class']       = "readonly";
       }
       
-      $field_class = RW_Meta_Box::get_class_name( $field );
-      $field = call_user_func(array($field_class , 'normalize_field'), $field);
+      $field_class = self::get_class_name( $field );
+      $field = call_user_func(array($field_class , 'normalize'), $field);
       call_user_func(array($field_class, 'admin_enqueue_scripts'));
       add_filter( "rwmb_{$type}_html", array(__CLASS__, 'make_readonly'), 10, 3);
       self::_show( $field, $saved );
@@ -56,7 +56,7 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) 
 
       global $post;
 
-      $field_class = RW_Meta_Box::get_class_name( $field );
+      $field_class = self::get_class_name( $field );
       $meta        = self::meta($post->ID, $saved, $field ); // Modification made here to get meta() function from this class.
 
       // Apply filter to field meta value
@@ -218,7 +218,7 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Field' ) && class_exists( 'RWMB_Field' ) 
       $meta = ( !$saved && '' === $meta || array() === $meta ) ? $field[ 'std' ] : $meta;
 
       // Escape attributes
-      $meta = call_user_func( array( RW_Meta_Box::get_class_name( $field ), 'esc_meta' ), $meta );
+      $meta = call_user_func( array( self::get_class_name( $field ), 'esc_meta' ), $meta );
 
       return $meta;
     }

@@ -705,7 +705,7 @@ if (!function_exists('draw_stats')):
       if (isset($attribute_data['storage_type']) && $attribute_data['storage_type'] == 'taxonomy' && isset($attribute_data['multiple']) && $attribute_data['multiple']) {
 
         $terms = wp_get_post_terms($property->ID, $tag);
-        if (count($terms) == 0) {
+        if (count($terms) == 0 || is_wp_error($terms)) {
           continue;
         }
 
@@ -725,7 +725,7 @@ if (!function_exists('draw_stats')):
 
       if ($tag == "property_type" || $tag == "wpp_listing_type") {
         $terms = wp_get_post_terms($property->ID, "wpp_listing_type");
-        if (count($terms)) {
+        if (count($terms) && !is_wp_error($terms)) {
           foreach ($terms as $key => $term) {
             $value = "<a href='" . get_term_link($term->term_id, "wpp_listing_type") . "'>{$term->name}</a>";
           }
