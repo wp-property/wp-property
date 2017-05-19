@@ -26,6 +26,8 @@ class WPP_Core {
       ini_set( 'memory_limit', '128M' );
     }
 
+    //** Modifing post query according to capability */    
+    add_filter('pre_get_posts', array( $this, 'capability_wpp_property' ));
     //** Modify request to change feed */
     add_filter( 'request', 'property_feed' );
 
@@ -1115,11 +1117,31 @@ class WPP_Core {
       global $current_user;
       $user_id = get_current_user_id();
       $current_user = null;
-      WPP_F::debug( 'Update current user with new caps' );
       wp_set_current_user($user_id);
     }
   }
 
+  /**
+   * Limiting to view only own property only if 
+   * user don't have edit_others_posts capability.
+   * 
+   * @since 2.2.0.1
+   * @author alim
+   */
+
+  public function capability_wpp_property($query) {
+    global $current_screen;
+
+    if( 'property' != $query->query['post_type'] || !$query->is_admin )
+        return $query;
+
+    if( !current_user_can( 'edit_others_posts' ) ) {
+      global $user_ID;
+      $query->set('author', $user_ID );
+    }
+    return $query;
+  }
+  
   /**
    * Generates javascript file with localization.
    * Adds localization support to all WP-Property scripts.
