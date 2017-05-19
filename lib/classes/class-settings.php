@@ -84,6 +84,9 @@ namespace UsabilityDynamics\WPP {
 
         //** Image URLs. */
         $data['images']['map_icon_shadow'] = WPP_URL . "images/map_icon_shadow.png";
+        if(!isset($data['property_meta'])){
+          $data['property_meta'] = array();
+        }
 
         $data['configuration']['google_maps']['infobox_settings'] = array(
           'show_direction_link' => true,
