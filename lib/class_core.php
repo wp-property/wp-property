@@ -1229,8 +1229,6 @@ class WPP_Core {
       'delete_wpp_properties' => sprintf(__( 'Delete Multiple %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
 
       'publish_wpp_properties' => sprintf(__( 'Publish %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
-      'edit_published_wpp_properties' => sprintf(__( 'Edit Published %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
-      'delete_published_wpp_properties' => sprintf(__( 'Delete Published %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
 
       //* WPP others property capability */
       'edit_others_wpp_properties' => sprintf(__( 'Edit Others %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
@@ -1259,6 +1257,9 @@ class WPP_Core {
       if( empty( $role->capabilities[ $cap ] ) ) {
         $role->add_cap( $cap );
         $is_cap_added = true;
+      }
+      if($cap == 'edit_wpp_property' && empty($role->capabilities[ 'create_wpp_properties' ])){
+        $role->add_cap( 'create_wpp_properties' );
       }
     }
 
