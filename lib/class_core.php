@@ -1132,7 +1132,7 @@ class WPP_Core {
   public function capability_wpp_property($query) {
     global $current_screen;
 
-    if( 'property' != $query->query['post_type'] || !$query->is_admin )
+    if( (!empty($query->query['post_type']) && 'property' != $query->query['post_type']) || !$query->is_admin )
         return $query;
 
     if( !current_user_can( 'edit_others_posts' ) ) {
