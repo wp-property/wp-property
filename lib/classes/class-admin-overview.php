@@ -58,7 +58,7 @@ namespace UsabilityDynamics\WPP {
               array_unshift( $submenu[ 'edit.php?post_type=property' ], $page );
             } elseif( $page[ 2 ] == 'post-new.php?post_type=property' ) {
               // Removes 'Add Property' from menu if user can not edit properties. peshkov@UD
-              if( !current_user_can( 'edit_wpp_property' ) ) {
+              if( !current_user_can( 'edit_wpp_properties' ) ) {
                 unset( $submenu[ 'edit.php?post_type=property' ][ $key ] );
               }
             }
