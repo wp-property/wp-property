@@ -252,6 +252,12 @@ class WPP_F extends UsabilityDynamics\Utility {
       'show_ui'             => true,
       '_edit_link'          => 'post.php?post=%d',
       'capability_type'     => array( 'wpp_property', 'wpp_properties' ),
+      'capabilities' => array(
+            'create_posts' => 'create_wpp_properties',
+            'edit_published_posts' => 'edit_wpp_properties',
+            'delete_published_posts' => 'delete_wpp_properties',
+        ),
+      'map_meta_cap' => true,
       'hierarchical'        => true,
       'rewrite'             => array( 'slug' => $wp_properties[ 'configuration' ][ 'base_slug' ]
       ),
@@ -4179,13 +4185,20 @@ class WPP_F extends UsabilityDynamics\Utility {
    */
   static public function get_properties_quantity( $post_status = array( 'publish' ) ) {
     global $wpdb;
+    $where = '';
+    
+    /** Limiting to view only own property only if user don't have edit_others_posts capability. */
+    if(!current_user_can( 'edit_others_posts' )){
+      global $user_ID;
+      $where .= " AND post_author = $user_ID";
+    }
 
     $results = $wpdb->get_col( "
       SELECT ID
       FROM {$wpdb->posts}
       WHERE post_status IN ('" . implode( "','", $post_status ) . "')
         AND post_type = 'property'
-    " );
+    " . $where );
 
     $results = apply_filters( 'wpp_get_properties_quantity', $results, $post_status );
 
