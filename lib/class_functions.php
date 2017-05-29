@@ -474,14 +474,17 @@ class WPP_F extends UsabilityDynamics\Utility
   static public function property_label($type = 'singular')
   {
     global $wp_post_types;
+    $label = '';
 
     if ($type == 'plural') {
-      return (!empty($wp_post_types['property']->labels->name) ? $wp_post_types['property']->labels->name : __('Properties'));
+      $label = (!empty($wp_post_types['property']->labels->name) ? $wp_post_types['property']->labels->name : __('Properties'));
     }
 
     if ($type == 'singular') {
-      return (!empty($wp_post_types['property']->labels->singular_name) ? $wp_post_types['property']->labels->singular_name : __('Property'));
+      $label = (!empty($wp_post_types['property']->labels->singular_name) ? $wp_post_types['property']->labels->singular_name : __('Property'));
     }
+    $label = apply_filters('property_label', $label, $type);
+    return $label;
 
   }
 
