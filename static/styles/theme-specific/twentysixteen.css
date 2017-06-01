@@ -1,0 +1,19 @@
+@media screen and (min-width: 56.875em) {
+	.property-template-default .property_content {
+	    float: left;
+	    margin-right: -100%;
+	    width: 70%;
+	}
+
+	.property-template-default .wpp_sidebar_commercial_unit  {
+		float: left;
+		margin-left: 75%;
+		padding: 0;
+		width: 25%;
+	}
+	
+	.property-template-default #primary.widget-area .wpp_widget{
+		list-style: none;
+	}
+}
+
