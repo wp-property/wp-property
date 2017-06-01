@@ -244,7 +244,7 @@ namespace UsabilityDynamics\WPP {
         // Try to figure out the type by
         // looking for the target in postmeta and taxonomy tables
         else {
-          $meta_counts = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $wpdb->postmeta WHERE meta_key=%s;", $target[0] ) );
+          $meta_counts = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $wpdb->postmeta WHERE meta_key=%s AND post_id=".$post_id." ;", $target[0] ) );
           $terms_counts = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $wpdb->term_taxonomy WHERE taxonomy=%s;", $target[0] ) );
           // What the hell to do here since we have the target in both tables?
           if( $meta_counts && $terms_counts ) {
