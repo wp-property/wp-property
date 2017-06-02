@@ -42,7 +42,7 @@ if (have_properties()) {
     echo $image ? ' has_thumbnail' : '';
     ?>">
       <?php
-      $list_price = $property['wpp_list_price'];
+      $list_price = $property['wpp_list_price'] ? $property['wpp_list_price'] : ($property['price'] ? $property['price'] : '');
       $wpp_address = $property['wpp_address'];
       $property_type = get_property_type($property['ID']);
 
@@ -62,18 +62,20 @@ if (have_properties()) {
         <?php _e('of', ud_get_wp_property()->domain); ?> <a <?php echo $in_new_window; ?>
           href='<?php echo $property['parent_link']; ?>'><?php echo $property['parent_title']; ?></a>
       <?php endif; ?>
-      <?php echo $wpp_address ? '<span>'.$wpp_address.'</span>' : ''; ?>
+      <?php echo $wpp_address ? '<span>' . $wpp_address . '</span>' : ''; ?>
     </div>
 
     <?php echo $list_price ? '<div class="property_price">' . $list_price . '</div>' : ''; ?>
 
-    <div class="property_options clearfix">
-      <ul>
-        <?php echo $property['wpp_bedrooms_count'] ? '<li class="wpp_bedrooms_count">'.$property['wpp_bedrooms_count'] . __(' Bed', ud_get_wp_property()->domain) . '</li>' : ''; ?>
-        <?php echo $property['wpp_bathrooms_count'] ? '<li class="wpp_bathrooms_count">'.$property['wpp_bathrooms_count'] . __(' Bath', ud_get_wp_property()->domain) . '</li>' : ''; ?>
-        <?php echo $property['wpp_total_living_area'] ? '<li class="wpp_total_living_area">'.$property['wpp_total_living_area'] . __(' sqft', ud_get_wp_property()->domain) . '</li>' : ''; ?>
-      </ul>
-    </div>
+    <?php if (!empty($property['wpp_bedrooms_count']) || !empty($property['wpp_bathrooms_count']) || !empty($property['wpp_total_living_area'])) { ?>
+      <div class="property_options clearfix">
+        <ul>
+          <?php echo $property['wpp_bedrooms_count'] ? '<li class="wpp_bedrooms_count">' . $property['wpp_bedrooms_count'] . __(' Bed', ud_get_wp_property()->domain) . '</li>' : ''; ?>
+          <?php echo $property['wpp_bathrooms_count'] ? '<li class="wpp_bathrooms_count">' . $property['wpp_bathrooms_count'] . __(' Bath', ud_get_wp_property()->domain) . '</li>' : ''; ?>
+          <?php echo $property['wpp_total_living_area'] ? '<li class="wpp_total_living_area">' . $property['wpp_total_living_area'] . __(' sqft', ud_get_wp_property()->domain) . '</li>' : ''; ?>
+        </ul>
+      </div>
+    <?php } ?>
 
     <ul id="wpp_overview_data" class="<?php wpp_css('property_overview::data', "wpp_overview_data"); ?>">
 

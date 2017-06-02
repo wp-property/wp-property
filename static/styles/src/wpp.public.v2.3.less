@@ -314,7 +314,7 @@ body,
             width: 33.333%;
             .property_div_box {
               border: 1px solid #e3e3e3;
-
+              overflow: hidden;
               .wpp_overview_top_side {
                 position: relative;
                 width: 100%;
@@ -366,7 +366,7 @@ body,
               .wpp_overview_bottom_side {
                 padding: 1em 1.5em;
                 .property_title {
-                  margin-bottom: 0.5em;
+                  padding-bottom: 0.5em;
                   a {
                     font-size: 18px;
                     display: block;
@@ -411,6 +411,7 @@ body,
                   margin: 0;
                   padding: 0;
                   list-style: none;
+                  float: none;
                   li {
                     margin: 0;
                     padding: 0;
@@ -478,7 +479,6 @@ body,
                     }
                   }
                 }
-                .property_type,
                 .property_price {
                   display: none;
                 }
@@ -559,7 +559,7 @@ body,
                     padding: 0;
                     list-style: none;
                     &.property_price {
-                      margin-bottom: 0.5em;
+                      display: none;
                     }
                     span {
                       font-weight: bold;
@@ -664,6 +664,7 @@ body,
       /* wpp_pagination_slider_status */
 
       .wpp_pagination_buttons_wrapper {
+        .clearfix;
 
         &.pagination-loadmore {
           position: relative;
@@ -732,6 +733,7 @@ body,
                 margin: 0;
                 padding: 0;
                 list-style: none;
+                float: none;
                 li.page {
                   margin: 0 5px 0 0;
                   padding: 0;
@@ -1182,6 +1184,7 @@ body,
       }
       &.value {
         margin: 0 0 0 10px;
+        word-break: break-all;
         ul {
           margin: 0;
           padding: 0;
@@ -1248,6 +1251,7 @@ body,
         span.value {
           text-align: right;
           display: inline-block;
+          word-break: break-all;
         }
       }
     }

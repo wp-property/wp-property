@@ -409,6 +409,7 @@ body .wpp_property_overview_shortcode_v2[wpp_template="grid"] .wpp_property_view
 body .wpp_property_overview_shortcode_v2[wpp_template="grid"] .wpp_property_view_result .all-properties .property_div .property_div_box,
 #wpp_layout .wpp_property_overview_shortcode_v2[wpp_template="grid"] .wpp_property_view_result .all-properties .property_div .property_div_box {
   border: 1px solid #e3e3e3;
+  overflow: hidden;
 }
 body .wpp_property_overview_shortcode_v2[wpp_template="grid"] .wpp_property_view_result .all-properties .property_div .property_div_box .wpp_overview_top_side,
 #wpp_layout .wpp_property_overview_shortcode_v2[wpp_template="grid"] .wpp_property_view_result .all-properties .property_div .property_div_box .wpp_overview_top_side {
@@ -465,7 +466,7 @@ body .wpp_property_overview_shortcode_v2[wpp_template="grid"] .wpp_property_view
 }
 body .wpp_property_overview_shortcode_v2[wpp_template="grid"] .wpp_property_view_result .all-properties .property_div .property_div_box .wpp_overview_bottom_side .property_title,
 #wpp_layout .wpp_property_overview_shortcode_v2[wpp_template="grid"] .wpp_property_view_result .all-properties .property_div .property_div_box .wpp_overview_bottom_side .property_title {
-  margin-bottom: 0.5em;
+  padding-bottom: 0.5em;
 }
 body .wpp_property_overview_shortcode_v2[wpp_template="grid"] .wpp_property_view_result .all-properties .property_div .property_div_box .wpp_overview_bottom_side .property_title a,
 #wpp_layout .wpp_property_overview_shortcode_v2[wpp_template="grid"] .wpp_property_view_result .all-properties .property_div .property_div_box .wpp_overview_bottom_side .property_title a {
@@ -518,6 +519,7 @@ body .wpp_property_overview_shortcode_v2[wpp_template="grid"] .wpp_property_view
   margin: 0;
   padding: 0;
   list-style: none;
+  float: none;
 }
 body .wpp_property_overview_shortcode_v2[wpp_template="grid"] .wpp_property_view_result .all-properties .property_div .property_div_box .wpp_overview_bottom_side ul#wpp_overview_data li,
 #wpp_layout .wpp_property_overview_shortcode_v2[wpp_template="grid"] .wpp_property_view_result .all-properties .property_div .property_div_box .wpp_overview_bottom_side ul#wpp_overview_data li,
@@ -611,8 +613,6 @@ body .wpp_property_overview_shortcode_v2[wpp_template="row"] .wpp_property_view_
   min-width: 100%;
   max-width: 100%;
 }
-body .wpp_property_overview_shortcode_v2[wpp_template="row"] .wpp_property_view_result .all-properties .property_div .property_div_box .wpp_overview_top_side .property_type,
-#wpp_layout .wpp_property_overview_shortcode_v2[wpp_template="row"] .wpp_property_view_result .all-properties .property_div .property_div_box .wpp_overview_top_side .property_type,
 body .wpp_property_overview_shortcode_v2[wpp_template="row"] .wpp_property_view_result .all-properties .property_div .property_div_box .wpp_overview_top_side .property_price,
 #wpp_layout .wpp_property_overview_shortcode_v2[wpp_template="row"] .wpp_property_view_result .all-properties .property_div .property_div_box .wpp_overview_top_side .property_price {
   display: none;
@@ -713,7 +713,7 @@ body .wpp_property_overview_shortcode_v2[wpp_template="row"] .wpp_property_view_
 #wpp_layout .wpp_property_overview_shortcode_v2[wpp_template="row"] .wpp_property_view_result .all-properties .property_div .property_div_box .wpp_overview_bottom_side ul.wpp_overview_data li.property_price,
 body .wpp_property_overview_shortcode_v2[wpp_template="row"] .wpp_property_view_result .all-properties .property_div .property_div_box .wpp_overview_bottom_side ul#wpp_overview_data li.property_price,
 #wpp_layout .wpp_property_overview_shortcode_v2[wpp_template="row"] .wpp_property_view_result .all-properties .property_div .property_div_box .wpp_overview_bottom_side ul#wpp_overview_data li.property_price {
-  margin-bottom: 0.5em;
+  display: none;
 }
 body .wpp_property_overview_shortcode_v2[wpp_template="row"] .wpp_property_view_result .all-properties .property_div .property_div_box .wpp_overview_bottom_side ul.wpp_overview_data li span,
 #wpp_layout .wpp_property_overview_shortcode_v2[wpp_template="row"] .wpp_property_view_result .all-properties .property_div .property_div_box .wpp_overview_bottom_side ul.wpp_overview_data li span,
@@ -842,6 +842,14 @@ body .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_
   /* pagination-loadmore */
   /* pagination-numeric */
 }
+body .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_buttons_wrapper:after,
+#wpp_layout .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_buttons_wrapper:after,
+body .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_buttons_wrapper:before,
+#wpp_layout .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_buttons_wrapper:before {
+  display: block;
+  clear: both;
+  content: '';
+}
 body .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_buttons_wrapper.pagination-loadmore,
 #wpp_layout .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_buttons_wrapper.pagination-loadmore {
   position: relative;
@@ -921,6 +929,7 @@ body .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_
   margin: 0;
   padding: 0;
   list-style: none;
+  float: none;
 }
 body .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_buttons_wrapper.pagination-numeric .property-overview-navigation li > ul li.page,
 #wpp_layout .wpp_property_overview_shortcode_v2 .properties_pagination .wpp_pagination_buttons_wrapper.pagination-numeric .property-overview-navigation li > ul li.page {
@@ -1554,6 +1563,7 @@ body .wpp_feature_list span.value,
 body .widget_wpp_property_stats span.value,
 #wpp_layout .widget_wpp_property_stats span.value {
   margin: 0 0 0 10px;
+  word-break: break-all;
 }
 body .wpp_feature_list span.value ul,
 #wpp_layout .wpp_feature_list span.value ul,
@@ -1636,6 +1646,7 @@ body .widget_wpp_property_stats_v2 ul.property_stats li span.value,
 #wpp_layout .widget_wpp_property_stats_v2 ul.property_stats li span.value {
   text-align: right;
   display: inline-block;
+  word-break: break-all;
 }
 body .wpp_features_box,
 #wpp_layout .wpp_features_box {
