@@ -1,0 +1,31 @@
+@media screen and (min-width: 56.875em) {
+	.property-template-default #content #primary.wpp_sidebar_commercial_unit  {
+		margin: 0 8.3333%;
+	}
+	.property-template-default #content #primary.wpp_sidebar_commercial_unit .xoxo  {
+		padding: 0 10% 10%;
+	}
+	.property-template-default #primary.wpp_sidebar_commercial_unit .wpp_widget{
+		list-style: none;
+	}
+
+	.site-main {
+		overflow: hidden;
+	}
+
+	.site-main div#container {
+	    width: 70%;
+	    float: left;
+	}
+
+
+	.site-main div#container .entry-content {
+	    padding: 0;
+	}
+
+	.site-main div#primary {
+	    width: 30%;
+	    float: left;
+	}
+}
+

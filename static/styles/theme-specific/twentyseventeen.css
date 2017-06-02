@@ -1,0 +1,26 @@
+@media screen and (min-width: 56.875em) {
+	.property-template-default .site-content {
+	    max-width: 1000px;
+	    padding-left: 3em;
+	    padding-right: 3em;
+	    margin: 0 auto;
+	}
+
+	.property-template-default .property_content {
+	    float: left;
+	    margin-right: -100%;
+	    width: 70%;
+	}
+
+	.property-template-default #content #primary.widget-area  {
+		float: left;
+		margin-left: 75%;
+		padding: 0;
+		width: 25% ;
+	}
+	
+	.property-template-default #primary.widget-area .wpp_widget{
+		list-style: none;
+	}
+}
+

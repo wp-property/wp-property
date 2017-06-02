@@ -82,3 +82,6 @@ body.single-property #container #content .entry-subtitle {
   margin-top: -8px;
 }
 /* END Property Search */
+ul#property_stats.list li, ul.wpp_property_stats.list li {
+    margin: 0px;
+}
