@@ -22,8 +22,12 @@ class AgentWidget extends WP_Widget {
 
     $saved_fields = !empty( $instance['saved_fields'] ) ? $instance['saved_fields'] : false;
     $widget_title = apply_filters('widget_title', $instance['title']);
-    $widget_agent_id = ( !empty( $instance['agent_id'] ) ? $instance['agent_id'] : false );
-    $widget_agent_id = explode(',', $widget_agent_id);
+    $widget_agent_id = false;
+
+    if(!empty( $instance['agent_id'] )){
+      $widget_agent_id = explode(',', $instance['agent_id']);
+    }
+    
 
     $agents = !empty ($widget_agent_id) ? $widget_agent_id : (!empty( $post->wpp_agents ) ? $post->wpp_agents : ( !empty( $property['wpp_agents'] ) ? $property['wpp_agents'] : false ));
 
@@ -36,7 +40,6 @@ class AgentWidget extends WP_Widget {
     }
 
     $agents = array_unique( $agents );
-
     foreach($agents as $agent_id) {
       $this_agent = class_agents::display_agent_card($agent_id,"fields=" . implode(',',$saved_fields));
 
