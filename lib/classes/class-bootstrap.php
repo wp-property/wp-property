@@ -515,6 +515,7 @@ namespace UsabilityDynamics\WPP {
         try {
           $_raw = file_get_contents(wp_normalize_path($this->root_path) . 'composer.json');
           $_parsed = json_decode($_raw);
+          $legacy = get_option('wpp_legacy_2_2_0_2', false);
           // @todo Catch poorly formatted JSON.
           if (!is_object($_parsed)) {
             // throw new Error( "unable to parse."  );
@@ -523,6 +524,9 @@ namespace UsabilityDynamics\WPP {
           if (isset($_parsed) && isset($_parsed->extra) && isset($_parsed->extra->featureFlags)) {
             foreach ((array)$_parsed->extra->featureFlags as $_feature) {
               if (!defined($_feature->constant)) {
+                if($legacy){
+                  $_feature->enabled = isset($_feature->enable_on_old_install)? $_feature->enable_on_old_install: false;
+                }
                 define($_feature->constant, $_feature->enabled);
               }
             }
@@ -540,6 +544,7 @@ namespace UsabilityDynamics\WPP {
       public function get_feature_flags()
       {
         try {
+          $legacy = get_option('wpp_legacy_2_2_0_2', false);
           $_raw = file_get_contents(wp_normalize_path($this->root_path) . 'composer.json');
           $_parsed = json_decode($_raw);
 
@@ -548,6 +553,11 @@ namespace UsabilityDynamics\WPP {
           }
 
           if (isset($_parsed) && isset($_parsed->extra) && isset($_parsed->extra->featureFlags)) {
+            if($legacy){
+              foreach ((array)$_parsed->extra->featureFlags as $key => $_feature) {
+                $_parsed->extra->featureFlags[$key]->enabled = isset($_feature->enable_on_old_install)? $_feature->enable_on_old_install: false;
+              }
+            }
             return (array)$_parsed->extra->featureFlags;
           }
 
