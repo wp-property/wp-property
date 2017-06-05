@@ -217,7 +217,7 @@ class ChildPropertiesWidget extends \UsabilityDynamics\WPP\Widget {
  * Register widget
  */
 add_action( 'widgets_init', function() {
-  if( ud_get_wp_property( 'configuration.enable_legacy_features' ) == 'true' ) {
+  if( WPP_LEGACY_WIDGETS || ud_get_wp_property( 'configuration.enable_legacy_features' ) == 'true' ) {
     register_widget( "ChildPropertiesWidget" );
   }
 });

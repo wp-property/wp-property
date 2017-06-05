@@ -297,7 +297,7 @@ namespace UsabilityDynamics {
             if( strpos( $key, '.' ) ) {
               self::set_val( $this->_data, $key, $value );
             } else {
-              $this->_data[ $key ] = array_unique( array_merge( isset( $this->_data[ $key ] ) ? (array) $this->_data[ $key ] : array(), $value ) );
+              $this->_data[ $key ] = array_unique( array_merge( isset( $this->_data[ $key ] ) ? (array) $this->_data[ $key ] : array(), $value ), SORT_REGULAR );
             }
 
           }

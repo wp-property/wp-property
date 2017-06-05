@@ -98,7 +98,8 @@
         "constant": "WPP_LEGACY_WIDGETS",
         "description": "Enable to use legacy widgets",
         "since": "2.2.1",
-        "enabled": true
+        "enable_on_old_install": true,
+        "enabled": false
       },
       {
         "name": "Setup Assistant",
@@ -108,24 +109,19 @@
         "enabled": false
       },
       {
-        "name": "Freemius",
-        "constant": "WPP_FEATURE_FLAG_FREEMIUS",
-        "description": "Freemius for WP Property",
-        "since": "2.2.1",
-        "enabled": false
-      },
-      {
         "name": "Settings Backups",
         "constant": "WPP_FEATURE_FLAG_SETTINGS_BACKUPS",
         "description": "Enables automaic backups of the WP-Property settings. Backups stored in [wpp_property_backups] option.",
         "since": "2.2.1",
-        "enabled": false
+        "enable_on_old_install": true,
+        "enabled": true
       },
       {
         "name": "Settings Version 2",
         "constant": "WPP_FEATURE_FLAG_SETTINGS_V2",
-        "description": "",
+        "description": "This feature flag enables faster saving of developer tab's attributes.",
         "since": "2.2.1",
+        "enable_on_old_install": true,
         "enabled": true
       },
       {
@@ -161,7 +157,7 @@
         "constant": "WPP_FEATURE_FLAG_WPP_LISTING_LOCATION",
         "description": "Standard property location taxonomy, stored in [wpp_location].",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "Advanced Rewrite Rules",
@@ -182,7 +178,7 @@
         "constant": "WPP_FEATURE_FLAG_WPP_LISTING_TYPE",
         "description": "Standard property type taxonomy, stored in [wpp_listing_type].",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "Standard Property Status",
@@ -217,13 +213,15 @@
         "constant": "WP_PROPERTY_LEGACY_META_ATTRIBUTES",
         "description": "Legacy Meta fields. In v2.2.1 meta fields have been merged with attributes. This includes default Phone Number.",
         "since": "2.2.1",
-        "enabled": true
+        "enable_on_old_install": true,
+        "enabled": false
       },
       {
         "name": "Legacy Attribute Input Types",
         "constant": "WP_PROPERTY_LEGACY_ATTRIBUTE_INPUT_TYPES",
         "description": "Enables legacy input types such as radio, wysiwyg, etc.",
         "since": "2.2.1",
+        "enable_on_old_install": true,
         "enabled": true
       },
       {
@@ -259,7 +257,8 @@
         "constant": "WP_PROPERTY_SETTINGS_SEARCH",
         "description": "Search settings.",
         "since": "2.2.1",
-        "enabled": false
+        "enable_on_old_install": true,
+        "enabled": true
       },
       {
         "name": "Standard Attributes Matching and Terms",
@@ -273,7 +272,8 @@
         "constant": "WP_PROPERTY_FLAG_ENABLE_LEGACY_TAXONOMIES",
         "description": "Enable legacy [property_features] and [community_features] taxonomies. These have been replaced by [wpp_categorical].",
         "since": "2.2.1",
-        "enabled": true
+        "enable_on_old_install": true,
+        "enabled": false
       },
       {
         "name": "Elasticsearch Service",
