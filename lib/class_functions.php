@@ -2184,7 +2184,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
       update_post_meta($post_id, 'wpp::last_address_validation', time());
 
-      if (isset($manual_coordinates)) {
+      if (isset($manual_coordinates) && $manual_coordinates == true) {
         $lat = !empty($coordinates['lat']) ? $coordinates['lat'] : 0;
         $lng = !empty($coordinates['lng']) ? $coordinates['lng'] : 0;
       } else {

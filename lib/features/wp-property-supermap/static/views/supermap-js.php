@@ -295,4 +295,5 @@ ob_start();
 </script>
 <?php
 $script = ob_get_contents();
+ob_end_clean();
 echo WPP_F::minify_js($script);
