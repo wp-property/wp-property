@@ -96,8 +96,8 @@ namespace UsabilityDynamics\WPP {
           global $wp_properties;
           // Run activation task after plugin fully activated.
           if( get_option('wpp_activated') ){
-            $this->add_wpp_listing_type_from_existing_terms();
-            $this->create_property_type_terms( $wp_properties, $wp_properties );
+            Taxonomy_WPP_Listing_Type::add_wpp_listing_type_from_existing_terms();
+            Taxonomy_WPP_Listing_Type::create_property_type_terms( $wp_properties, $wp_properties );
             delete_option('wpp_activated');
           }
         } );
@@ -145,7 +145,7 @@ namespace UsabilityDynamics\WPP {
        * @param $wp_properties : Old settings
        *
        */
-      public function create_property_type_terms( $wpp_settings, $wp_properties ) {
+      public static function create_property_type_terms( $wpp_settings, $wp_properties ) {
         $terms = get_terms(array(
           'taxonomy' => 'wpp_listing_type',
           'hide_empty' => false,
@@ -191,7 +191,7 @@ namespace UsabilityDynamics\WPP {
        * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
        *
        */
-      public function add_wpp_listing_type_from_existing_terms(){
+      public static function add_wpp_listing_type_from_existing_terms(){
         global $wp_properties;
         $updated = false;
         $terms = get_terms(array(
