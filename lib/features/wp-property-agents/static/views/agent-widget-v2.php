@@ -46,7 +46,7 @@
 
 
   <?php if ($ul_print_rows):
-    if ($agent_image):
+    if (!empty($agent_image)):
       echo '<div class="wpp_agent_image">' . $agent_image . '</div>';
     endif;
     ?>

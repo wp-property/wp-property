@@ -42,8 +42,8 @@ if (have_properties()) {
     echo $image ? ' has_thumbnail' : '';
     ?>">
       <?php
-      $list_price = $property['wpp_list_price'] ? $property['wpp_list_price'] : ($property['price'] ? $property['price'] : '');
-      $wpp_address = $property['wpp_address'];
+      $list_price = !empty($property['wpp_list_price']) ? $property['wpp_list_price'] : ($property['price'] ? $property['price'] : '');
+      $wpp_address = isset($property['wpp_address'])? $property['wpp_address']: '';
       $property_type = get_property_type($property['ID']);
 
       property_overview_image();

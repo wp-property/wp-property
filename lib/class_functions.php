@@ -2184,7 +2184,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
       update_post_meta($post_id, 'wpp::last_address_validation', time());
 
-      if (isset($manual_coordinates)) {
+      if (isset($manual_coordinates) && $manual_coordinates == true) {
         $lat = !empty($coordinates['lat']) ? $coordinates['lat'] : 0;
         $lng = !empty($coordinates['lng']) ? $coordinates['lng'] : 0;
       } else {
@@ -2435,7 +2435,7 @@ class WPP_F extends UsabilityDynamics\Utility
     $obj = wp_remote_get($url);
     $body = json_decode(wp_remote_retrieve_body($obj));
 
-    if ($body->status != "OK") {
+    if (!$body || $body->status != "OK") {
 
       // Return Google result if needed instead of just false
       if ($return_obj_on_fail) {

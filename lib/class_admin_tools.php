@@ -113,6 +113,8 @@ if( !class_exists( 'class_admin_tools' ) ) {
       $data[ 'Google Map API key' ][ ] = '<li>' . __( "Copy API key from <b>Your API key</b> field.", ud_get_wp_property()->domain ) . '</li>';
       $data[ 'Google Map API key' ][ ] = '</ol>';
 
+      $data[ 'Google Map API key' ][ ] = '<p>You can use this key for both Browser Key and Server Key, or follow the below step to secure your key.</p>';
+
       $data[ 'Google Map API key' ][ ] = '<h4>Optional but highly recommended (To to prevent unauthorized use in production):</h4>';
 
       $data[ 'Google Map API key' ][ ] = '<ol start="7">';

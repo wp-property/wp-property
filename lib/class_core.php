@@ -370,7 +370,6 @@ class WPP_Core {
 
 
 
-
     /** Find and register stylesheet  */
     if( file_exists( STYLESHEETPATH . '/wp-properties.css' ) ) {
       wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp-properties.css', array(), WPP_Version );
@@ -392,9 +391,10 @@ class WPP_Core {
 
 
       //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
-      if(
-        isset( $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] ) &&
-        $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] != 'true' &&
+      if((
+          empty( $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] ) ||
+          $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] != 'true'
+        ) &&
         WPP_F::has_theme_specific_stylesheet()
       ) {
         wp_register_style( 'wp-property-theme-specific', WPP_URL . "styles/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), WPP_Version );
