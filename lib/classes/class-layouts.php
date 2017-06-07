@@ -60,7 +60,7 @@ namespace UsabilityDynamics\WPP {
         ));
 
         // Remove all template include handlers
-        remove_all_filters('template_include', 99);
+        remove_all_filters('template_include');
 
         // Identify page template to use.
         add_filter('template_include', array($this, 'page_template'), 99);
