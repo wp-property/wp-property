@@ -59,11 +59,8 @@ namespace UsabilityDynamics\WPP {
           'url' => defined('UD_API_LAYOUTS_URL') ? UD_API_LAYOUTS_URL : 'https://api.usabilitydynamics.com/product/property/layouts/v1'
         ));
 
-        // Remove all template include handlers
-        remove_all_filters('template_include');
-
         // Identify page template to use.
-        add_filter('template_include', array($this, 'page_template'), 99);
+        add_filter('template_include', array($this, 'page_template'), 98);
 
         // Override Layout metadata.
         add_action( 'get_header', array( $this, 'get_header' ), 50 );
@@ -409,6 +406,10 @@ namespace UsabilityDynamics\WPP {
        */
       public function page_template($template)
       {
+
+        // Remove all template include handlers
+        remove_all_filters('template_include');
+
         global $wp_query;
 
         $_layout = apply_filters('wpp::layouts::configuration', false);
