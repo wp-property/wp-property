@@ -59,6 +59,9 @@ namespace UsabilityDynamics\WPP {
           'url' => defined('UD_API_LAYOUTS_URL') ? UD_API_LAYOUTS_URL : 'https://api.usabilitydynamics.com/product/property/layouts/v1'
         ));
 
+        // Remove all template include handlers
+        remove_all_filters('template_include', 99);
+
         // Identify page template to use.
         add_filter('template_include', array($this, 'page_template'), 99);
 
