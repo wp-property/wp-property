@@ -587,7 +587,7 @@ if (!function_exists('draw_stats')):
     if (($args['include_taxonomies'] === 'true' || $args['include_taxonomies'] === true) && is_array($wp_properties['taxonomies'])) {
       foreach ($wp_properties['taxonomies'] as $taxonomy => $data) {
         if ($data['public'] && empty($wp_properties['taxonomies'][$taxonomy]['hidden']))
-          $property_stats[$taxonomy] = array('label' => $data['label'], 'value' => $data['label']);
+          $property_stats[$taxonomy] = array('label' => $data['label'], 'value' => $property->$taxonomy);
       }
     }
 
@@ -747,10 +747,40 @@ if (!function_exists('draw_stats')):
       }
 
       //* Make URLs into clickable links */
-      if ($args['make_link'] == 'true' && WPP_F::isURL($value)) {
-        $value = str_replace('&ndash;', '-', $value);
-        $label = $data['label'];
-        $value = "<a href='{$value}' title='{$label}'>{$value}</a>";
+      $label = $data['label'];
+      if (is_array($value)) {
+        if ($args['make_link'] == 'true') {
+          $link_value = [];
+          foreach ($value as $val) {
+            if (WPP_F::isURL($val)) {
+              $link = "<a href='{$val}' title='{$label}'>{$label}</a>";
+            } else {
+              $term = get_term_by('name', $val, $tag);
+              $term_url = get_term_link($term->term_taxonomy_id, $term->taxonomy);
+              if (!is_wp_error($term_url)) {
+                $link = "<a href='{$term_url}' title='{$term->name}'>{$term->name}</a>";
+              } else {
+                $link = $val;
+              }
+            }
+            array_push($link_value, $link);
+          }
+          $value = $link_value;
+        }
+        $value = implode(', ', $value);
+      } else {
+        if ($args['make_link'] == 'true') {
+          if (WPP_F::isURL($value)) {
+            $value = str_replace('&ndash;', '-', $value);
+            $value = "<a href='{$value}' title='{$label}'>{$value}</a>";
+          } else {
+            $term = get_term_by('name', $value, $tag);
+            $term_url = get_term_link($term->term_taxonomy_id, $term->taxonomy);
+            if (!is_wp_error($term_url)) {
+              $value = "<a href='{$term_url}' title='{$term->name}'>{$term->name}</a>";
+            }
+          }
+        }
       }
 
       //* Make emails into clickable links */
