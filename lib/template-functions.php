@@ -749,8 +749,8 @@ if (!function_exists('draw_stats')):
       //* Make URLs into clickable links */
       $label = $data['label'];
       if (is_array($value)) {
-        $link_value = [];
         if ($args['make_link'] == 'true') {
+          $link_value = [];
           foreach ($value as $val) {
             if (WPP_F::isURL($val)) {
               $link = "<a href='{$val}' title='{$label}'>{$label}</a>";
@@ -765,8 +765,8 @@ if (!function_exists('draw_stats')):
             }
             array_push($link_value, $link);
           }
+          $value = $link_value;
         }
-        $value = $link_value;
         $value = implode(', ', $value);
       } else {
         if ($args['make_link'] == 'true') {
