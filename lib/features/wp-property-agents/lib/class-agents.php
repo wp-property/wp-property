@@ -1970,11 +1970,14 @@ class class_agents
             WHERE meta_key = 'wpp_agents'
               AND meta_value = '{$current_user->ID}';
         ");
-        $prefill_meta = $wpdb->get_col("
+        
+        if(!empty($meta_ids)){
+          $prefill_meta = $wpdb->get_col("
             SELECT meta_value FROM {$wpdb->prefix}postmeta
             WHERE post_id IN (" . implode(",", $meta_ids) . ")
             AND meta_value IN ('" . implode("','", $prefill_meta) . "')
-        ");
+          ");
+        }
       }
 
       $prefill_meta = array_unique($prefill_meta);
@@ -1988,12 +1991,14 @@ class class_agents
             WHERE meta_key = 'wpp_agents'
               AND meta_value = '{$current_user->ID}';
         ");
-        $prefill_meta = $wpdb->get_col("
+
+        if(!empty($meta_ids)){
+          $prefill_meta = $wpdb->get_col("
             SELECT $slug FROM {$wpdb->posts}
             WHERE ID IN (" . implode(",", $meta_ids) . ")
               AND post_type = 'property'
-        ");
-
+          ");
+        }
       }
 
       $prefill_meta = array_unique($prefill_meta);
