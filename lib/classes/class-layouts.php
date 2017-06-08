@@ -45,6 +45,12 @@ namespace UsabilityDynamics\WPP {
       private $api_client;
 
       /**
+       * Is already layouts displayed flag
+       * @var bool
+       */
+      private $already_displayed = false;
+
+      /**
        * Layouts constructor.
        */
       public function __construct()  {
@@ -502,6 +508,11 @@ namespace UsabilityDynamics\WPP {
       public function the_content($data)
       {
 
+        /** Exclude situation of double layouts displayed fq.jony@UD */
+        if($this->already_displayed){
+          return $data;
+        }
+
         global $post;
 
         $render = apply_filters('wpp::layouts::configuration', false);
@@ -519,6 +530,7 @@ namespace UsabilityDynamics\WPP {
         // $modified_data = $this->standard_render($render['layout_id'], $_layout_config);
 
         if( isset( $modified_data ) ) {
+          $this->already_displayed = true;
           return $modified_data;
         }
 
