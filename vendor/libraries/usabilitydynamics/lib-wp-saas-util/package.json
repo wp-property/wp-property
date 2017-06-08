@@ -1,0 +1,24 @@
+{
+  "name": "lib-wp-saas-util",
+  "description": "Saas utils.",
+  "version": "1.0.4",
+  "homepage": "http://github.com/UsabilityDynamics/lib-wp-saas-util",
+  "author": {
+    "name": "Usability Dynamics",
+    "email": "info@UsabilityDynamics.com",
+    "url": "http://UsabilityDynamics.com"
+  },
+  "bugs": {
+    "url": "http://github.com/UsabilityDynamics/lib-wp-saas-util/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/UsabilityDynamics/lib-wp-saas-util/blob/master/LICENSE-MIT"
+    }
+  ],
+  "keywords": [
+    "library",
+    "composer"
+  ]
+}

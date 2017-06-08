@@ -1,0 +1,2393 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Property\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-29 13:49+0200\n"
+"PO-Revision-Date: 2014-09-29 13:49+0200\n"
+"Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Poedit-KeywordsList: __;_e;_x;_n\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: lib/class-wpp-supermap.php:70
+#, fuzzy
+msgid "Manage Supermap"
+msgstr "Supermap"
+
+#: lib/class-wpp-supermap.php:84
+msgid "Supermap"
+msgstr "Supermap"
+
+#: lib/class-wpp-supermap.php:115
+msgid "Example Area"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:157
+#, fuzzy
+msgid "Sidebar Attributes"
+msgstr "Verborgene Attribute"
+
+#: lib/class-wpp-supermap.php:159
+#, fuzzy
+msgid ""
+"Select the attributes you want to display in the left sidebar on the "
+"supermap."
+msgstr "Wählen Sie die Attribute, die Sie durchsuchen möchten."
+
+#: lib/class-wpp-supermap.php:173
+msgid ""
+"Display \"View Property\" link in the left sidebar. It directs user to "
+"Property Page."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:179
+#, fuzzy
+msgid "Supermap Sidebar Thumbnail:"
+msgstr "Thumbnail der Supermap-Seitenleiste:"
+
+#: lib/class-wpp-supermap.php:184
+msgid "Do not show a property thumbnail in sidebar."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:187
+msgid ""
+"If you create a new image size, please be sure to regenerate all thumbnails. "
+msgstr ""
+"Wenn Sie eine neue Größe für Abbildungen erstellen, vergewissern Sie sich "
+"alle Thumbnails zu erneuern. "
+
+#: lib/class-wpp-supermap.php:192
+msgid "Map Markers:"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:198
+#, fuzzy
+msgid "Image"
+msgstr "Größe der Abbildung"
+
+#: lib/class-wpp-supermap.php:199 lib/class-wpp-supermap.php:341
+msgid "Name"
+msgstr "Name"
+
+#: lib/class-wpp-supermap.php:200
+msgid "Slug"
+msgstr "Titelform"
+
+#: lib/class-wpp-supermap.php:227 lib/class-wpp-supermap.php:374
+msgid "Delete"
+msgstr "Entfernen"
+
+#: lib/class-wpp-supermap.php:235
+msgid "Add Marker"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:335
+msgid "Map Areas:"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:337
+msgid ""
+"<p>Map areas let you draw our areas on the map, such as neighborhoods.</"
+"p><p>Just add to shortcode attribute <b>show_areas=all</b> to draw all areas "
+"on the map. Also You can use area's slugs to show them on the map, like as "
+"<b>show_areas=new_york,washington</b>. Please, use coordinates in this "
+"format: <b>(82.72, -37.79)(69.54, -57.48)(68.93, -18.63).</b></p><p><i>This "
+"is an experimental feature, you may not want to use it on a live site.  "
+"We're eager to hear your feedback regarding this feature and the "
+"capabilities that would be useful to you.</i></p>"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:342
+msgid "Coordinates"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:343
+msgid "Fill Color"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:344
+msgid "Opacity"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:345
+msgid "Stoke Color"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:346
+msgid "Hover Color"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:382
+msgid "Add Row"
+msgstr "Reihe hinzufügen"
+
+#: lib/class-wpp-supermap.php:424 lib/class-wpp-supermap.php:675
+msgid "Map Marker"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:426 lib/class-wpp-supermap.php:677
+#, fuzzy
+msgid "Default by Google"
+msgstr "Standardvorlage"
+
+#: lib/class-wpp-supermap.php:493
+msgid "File should be an image"
+msgstr ""
+
+#: lib/class-wpp-supermap.php:546
+msgid "Looks like, Image can not be uploaded."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:624
+msgid "Supermap Options"
+msgstr "Supermap-Optionen"
+
+#: lib/class-wpp-supermap.php:637
+#, fuzzy
+msgid "Exclude property from Supermap"
+msgstr "Objekt aus Supermap ausschließen"
+
+#: lib/class-wpp-supermap.php:828 lib/class-wpp-supermap.php:1170
+msgid "Options"
+msgstr "Optionen"
+
+#: lib/class-wpp-supermap.php:840
+#, php-format
+msgid "Element cannot be rendered, missing %1s script."
+msgstr ""
+
+#: lib/class-wpp-supermap.php:928
+#, fuzzy, php-format
+msgid "Sorry, no %s found, try expanding your search."
+msgstr ""
+"Es tut uns leid, es wurden keine Objekte gefunden. Versuchen Sie es mit "
+"einer detaillierten Suche oder <a href=\"%s\">view all</a>."
+
+#: lib/class-wpp-supermap.php:1052 lib/class-wpp-supermap.php:1641
+msgid "Yes"
+msgstr "Ja"
+
+#: lib/class-wpp-supermap.php:1068 lib/class-wpp-supermap.php:1656
+msgid "View Property"
+msgstr "Objekt betrachten"
+
+#: lib/class-wpp-supermap.php:1131
+#, fuzzy
+msgid "No results found."
+msgstr "Keine Objekte gefunden"
+
+#: lib/class-wpp-supermap.php:1677
+#, fuzzy
+msgid "Show More"
+msgstr "Zeigen \"Mehr\" Link?"
+
+#: lib/class-wpp-supermap.php:1678
+#, fuzzy
+msgid "Loading..."
+msgstr "Lade"
+
+#: lib/class-wpp-supermap.php:1790
+msgid "Loading"
+msgstr "Lade"
+
+#: wp-property-supermap.php:43
+msgid ""
+"Distributive is broken. composer.json is missed. Try to remove and upload "
+"plugin again."
+msgstr ""
+
+#: wp-property-supermap.php:51
+#, php-format
+msgid "Plugin requires PHP %s or higher. Your current PHP version is %s"
+msgstr ""
+
+#: wp-property-supermap.php:59
+#, php-format
+msgid ""
+"Distributive is broken. %s file is missed. Try to remove and upload plugin "
+"again."
+msgstr ""
+
+#: wp-property-supermap.php:63
+msgid ""
+"Distributive is broken. Plugin loader is not available. Try to remove and "
+"upload plugin again."
+msgstr ""
+
+#: wp-property-supermap.php:84
+#, php-format
+msgid "<p><b>%s</b> can not be initialized. %s</p>"
+msgstr ""
+
+#~ msgid "Building"
+#~ msgstr "Gebäude"
+
+#~ msgid "Floorplan"
+#~ msgstr "Grundriss"
+
+#~ msgid "Single Family Home"
+#~ msgstr "Einfamilienhaus"
+
+#~ msgid "Address"
+#~ msgstr "Adresse"
+
+#~ msgid "Price"
+#~ msgstr "Preis"
+
+#~ msgid "Bedrooms"
+#~ msgstr "Schlafzimmer"
+
+#~ msgid "Bathrooms"
+#~ msgstr "Badezimmer"
+
+#~ msgid "Deposit"
+#~ msgstr "Anzahlung"
+
+#~ msgid "Area"
+#~ msgstr "Gebiet"
+
+#~ msgid "Phone Number"
+#~ msgstr "Telefonnummer"
+
+#~ msgid "Lease Terms"
+#~ msgstr "Mietbedingungen"
+
+#~ msgid "Pet Policy"
+#~ msgstr "Richtlinien zur Haustierhaltung"
+
+#~ msgid "School"
+#~ msgstr "Schule"
+
+#~ msgid "Tagline"
+#~ msgstr "Werbespruch"
+
+#~ msgid "Studio"
+#~ msgstr "Studio"
+
+#~ msgid "The property type will determine the layout."
+#~ msgstr "Die Art des Objekts bestimmt das Layout."
+
+#~ msgid ""
+#~ "Customize what appears in search results in the attribute section.  For "
+#~ "example: 1bed, 2baths, area varies slightly."
+#~ msgstr ""
+#~ "Die Attribute, die in Suchergebnissen angezeigt werden anpassen. Zum "
+#~ "Beispiel: 1 Schlafzimmer, 2 Badezimmer, die Fläche kann geringfügig "
+#~ "variieren."
+
+#~ msgid "Will appear on overview pages and on top of every listing page."
+#~ msgstr "Erscheint auf den Übersichtsseiten und am Anfang jeder Auflistung."
+
+#, fuzzy
+#~ msgid "View "
+#~ msgstr "Alle betrachten"
+
+#~ msgid "Property Type"
+#~ msgstr "Art der Immobilie"
+
+#~ msgid "City"
+#~ msgstr "Stadt"
+
+#~ msgid "For Sale"
+#~ msgstr "Zu verkaufen"
+
+#~ msgid "For Rent"
+#~ msgstr "Zu vermieten"
+
+#~ msgid "This is a rental property."
+#~ msgstr "Das ist ein Mietobjekt."
+
+#~ msgid "This property is for sale."
+#~ msgstr "Dieses Objekt steht zum Verkauf."
+
+#~ msgid "Latitude"
+#~ msgstr "Breitengrad"
+
+#~ msgid "Longitude"
+#~ msgstr "Längengrad"
+
+#, fuzzy
+#~ msgid "Format phone number."
+#~ msgstr "Standard-Telefonnummer"
+
+#, fuzzy
+#~ msgid " sq. ft."
+#~ msgstr "m2"
+
+#, fuzzy
+#~ msgid "Address was validated by Google Maps."
+#~ msgstr ""
+#~ "<span class='description'>Adresse wurde von Google Maps überprüft.</span>"
+
+#, fuzzy
+#~ msgid ""
+#~ "Address has not yet been validated, should be formatted as: street, city, "
+#~ "state, postal code, country. Locations are validated through Google Maps."
+#~ msgstr ""
+#~ "<span class='description'>Die Adresse wurde noch nicht überprüft und "
+#~ "sollte wie folgt formatiert sein: Straße, Stadt, Bundesland, "
+#~ "Postleitzahl, Land. Die Ortsangaben werden durch Google Maps überprüft.</"
+#~ "span>"
+
+#, fuzzy
+#~ msgid "Show"
+#~ msgstr "Diashow"
+
+#~ msgid "Featured"
+#~ msgstr "Vorgestellt"
+
+#, fuzzy
+#~ msgid "Add to Featured"
+#~ msgstr "Neues Objekt hinzufügen"
+
+#~ msgid "Processing..."
+#~ msgstr "Bearbeite..."
+
+#, fuzzy
+#~ msgid "Uploading"
+#~ msgstr "Lade"
+
+#, fuzzy
+#~ msgid "Upload Image"
+#~ msgstr "Alle Abbildungen"
+
+#~ msgid "Cancel"
+#~ msgstr "Abbruch"
+
+#, fuzzy
+#~ msgid "Previous"
+#~ msgstr "Vorige"
+
+#~ msgid "Next"
+#~ msgstr "Nächste"
+
+#, fuzzy
+#~ msgid "Show %s entries"
+#~ msgstr " %s Abbildungen anzeigen"
+
+#, fuzzy
+#~ msgid "No matching records found"
+#~ msgstr "Keine Objekte gefunden"
+
+#, fuzzy
+#~ msgid "Search:"
+#~ msgstr "Suche"
+
+#, fuzzy
+#~ msgid "Display:"
+#~ msgstr "Darstellung"
+
+#, fuzzy
+#~ msgid "Automatically Match"
+#~ msgstr "Automatisch Standard-CSS einbinden."
+
+#~ msgid "Settings"
+#~ msgstr "Einstellungen"
+
+#, fuzzy
+#~ msgid "Enabled Options"
+#~ msgstr "Optionen"
+
+#~ msgid "Developer"
+#~ msgstr "Entwickler"
+
+#, fuzzy
+#~ msgid ""
+#~ "Property attributes are meant to be short entries that can be searchable, "
+#~ "on the back-end attributes will be displayed as single-line input boxes. "
+#~ "On the front-end they are displayed using a definitions list."
+#~ msgstr ""
+#~ "<p>Objektattribute sollten kurze Einträge sein, die suchbar sein können. "
+#~ "Auf dem Back-End werden die Attribute als Einzeilige Eingabefelder "
+#~ "dargestellt. Auf der Front-End werden sie mit Hilfe einer "
+#~ "Definitionsliste dargestellt.</p>\n"
+#~ "\t\t\t\t<p>Die Definition eines Attributs als \"searchable\", wird dieses "
+#~ "als eine der suchbaren Optionen in den Einstellungen des Immobilien-Such-"
+#~ "Widgets auflisten.</p>\n"
+#~ "\t\t\t\t<p>Seien Sie beraten, dass Attribute die mit der add_filter() "
+#~ "Funktion hinzugefügt werden, die Einstellungen dieser Seite ersetzen.</p>"
+
+#, fuzzy
+#~ msgid "%1s Attributes"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid "Advanced Stats Settings:"
+#~ msgstr "Allgemeine Einstellungen"
+
+#~ msgid "Main"
+#~ msgstr "Hauptseite"
+
+#, fuzzy
+#~ msgid "Add Group"
+#~ msgstr "Reihe hinzufügen"
+
+#, fuzzy
+#~ msgid "Attribute Name"
+#~ msgstr "Name der Funktion"
+
+#, fuzzy
+#~ msgid "Search Input"
+#~ msgstr "Suche"
+
+#, fuzzy
+#~ msgid "Toggle Advanced Settings"
+#~ msgstr "Allgemeine Einstellungen"
+
+#, fuzzy
+#~ msgid "Sortable."
+#~ msgstr "Sortierbar"
+
+#, fuzzy
+#~ msgid "Searchable."
+#~ msgstr "Suchbar"
+
+#, fuzzy
+#~ msgid "Admin Only."
+#~ msgstr "Admin UI"
+
+#, fuzzy
+#~ msgid "Show in \"All Properties\" table."
+#~ msgstr "Zugeordnete Objekte anzeigen."
+
+#, fuzzy
+#~ msgid "Delete Attribute"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid "Range Dropdown"
+#~ msgstr "Bereich (Ausgliederung)"
+
+#, fuzzy
+#~ msgid "Single Checkbox"
+#~ msgstr "Markierungsfeld"
+
+#, fuzzy
+#~ msgid "Multi-Checkbox"
+#~ msgstr "Markierungsfeld"
+
+#~ msgid ""
+#~ "Meta is used for descriptions,  on the back-end  meta fields will be "
+#~ "displayed as textareas.  On the front-end they will be displayed as "
+#~ "individual sections."
+#~ msgstr ""
+#~ "Metadaten werden für Beschreibungen benutzt. Auf dem Back-End werden  "
+#~ "Metafelder als Textbereiche und auf der Front-End als einzelne Abschnitte "
+#~ "dargestellt."
+
+#, fuzzy
+#~ msgid "%1s Types"
+#~ msgstr "Art"
+
+#~ msgid "Type"
+#~ msgstr "Art"
+
+#~ msgid "Hidden Attributes"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid "Inherit from Parent"
+#~ msgstr "Erbgut"
+
+#~ msgid "Searchable"
+#~ msgstr "Suchbar"
+
+#~ msgid "Location Matters"
+#~ msgstr "Ort ist von Bedeutung"
+
+#, fuzzy
+#~ msgid "Parent Selection"
+#~ msgstr "Objekt-Einstellungen"
+
+#, fuzzy
+#~ msgid "Advanced Options"
+#~ msgstr "Optionen"
+
+#~ msgid "Show Log."
+#~ msgstr "Protokoll anzeigen."
+
+#~ msgid ""
+#~ "The log is always active, but the UI is hidden.  If enabled, it will be "
+#~ "visible in the admin sidebar."
+#~ msgstr ""
+#~ "Das Protokoll ist immer aktiv, aber das UI ist verborgen. Falls "
+#~ "aktiviert, wird es in der Admin-Seitenleiste sichtbar sein."
+
+#~ msgid "Child Properties"
+#~ msgstr "Zugeordnete Objekte"
+
+#~ msgid "Menu Sort Order:"
+#~ msgstr "Menü sortiert nach:"
+
+#, fuzzy
+#~ msgid "Display in featured listings."
+#~ msgstr "Objekt in vorgestellten Auflistungen darstellen."
+
+#, fuzzy
+#~ msgid "Property updated. <a href=\"%s\">view property</a>"
+#~ msgstr "Objekt aktualisiert. <a href=\"%s\">View property</a>"
+
+#~ msgid "Custom field updated."
+#~ msgstr "Benutzerdefiniertes Feld aktualisiert"
+
+#~ msgid "Custom field deleted."
+#~ msgstr "Benutzerdefiniertes Feld entfernt"
+
+#~ msgid "Property updated."
+#~ msgstr "Objekt aktualisiert."
+
+#~ msgid "Property restored to revision from %s"
+#~ msgstr "Objekt zur Änderung von %s wieder hergestellt"
+
+#~ msgid "Property published. <a href=\"%s\">View property</a>"
+#~ msgstr "Objekt veröffentlicht. <a href=\"%s\">View property</a>"
+
+#~ msgid "Property saved."
+#~ msgstr "Objekt gespeichert."
+
+#~ msgid ""
+#~ "Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+#~ msgstr ""
+#~ "Objekt bereitgestellt. <a target=\"_blank\" href=\"%s\">Preview property</"
+#~ "a>"
+
+#~ msgid ""
+#~ "Property scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href="
+#~ "\"%2$s\">Preview property</a>"
+#~ msgstr ""
+#~ "Objekt vorgesehen für: <strong>%1$s</strong>. <a target=\"_blank\" href="
+#~ "\"%2$s\">Preview property</a>"
+
+#~ msgid "M j, Y @ G:i"
+#~ msgstr "M j, Y @ G:i"
+
+#~ msgid ""
+#~ "Property draft updated. <a target=\"_blank\" href=\"%s\">Preview "
+#~ "property</a>"
+#~ msgstr ""
+#~ "Objektvorlage aktualisiert. <a target=\"_blank\" href=\"%s\">Preview "
+#~ "property</a>"
+
+#~ msgid "Title"
+#~ msgstr "Titel"
+
+#~ msgid "Overview"
+#~ msgstr "Übersicht"
+
+#~ msgid "Order"
+#~ msgstr "Reihenfolge"
+
+#~ msgid "Thumbnail"
+#~ msgstr "Thumbnail"
+
+#~ msgid "General Information"
+#~ msgstr "Allgemeine Hinweise"
+
+#~ msgid "Search"
+#~ msgstr "Suche"
+
+#~ msgid "Floor plans at location:"
+#~ msgstr "Grundrisse vor Ort:"
+
+#, fuzzy
+#~ msgid "View Properties"
+#~ msgstr "Objekt betrachten"
+
+#, fuzzy
+#~ msgid "Add/Edit Properties"
+#~ msgstr "Objekt bearbeiten"
+
+#, fuzzy
+#~ msgid "Edit Other Properties"
+#~ msgstr "Weitere Objekte"
+
+#, fuzzy
+#~ msgid "Delete Properties"
+#~ msgstr "Weitere Objekte"
+
+#, fuzzy
+#~ msgid "Publish Properties"
+#~ msgstr "Objekte"
+
+#, fuzzy
+#~ msgid "Manage Settings"
+#~ msgstr "Allgemeine Einstellungen"
+
+#, fuzzy
+#~ msgid "Manage Taxonomies"
+#~ msgstr "Diashow"
+
+#, fuzzy
+#~ msgid "For more information:"
+#~ msgstr "Allgemeine Hinweise"
+
+#, fuzzy
+#~ msgid "An error occurred during API key request: <b>%s</b>."
+#~ msgstr ""
+#~ "Ein Fehler trat während der Prüfung der Premium-Funktion auf: <b> %s </b>."
+
+#~ msgid "Properties"
+#~ msgstr "Objekte"
+
+#~ msgid "Property"
+#~ msgstr "Objekt"
+
+#~ msgid "Property: %s"
+#~ msgstr "Objekt: %s"
+
+#~ msgid "Features"
+#~ msgstr "Funktionen"
+
+#~ msgid "Feature"
+#~ msgstr "Funktion"
+
+#, fuzzy
+#~ msgid "Search Features"
+#~ msgstr "Objekte durchsuchen"
+
+#, fuzzy
+#~ msgid "All Features"
+#~ msgstr "Funktionen"
+
+#, fuzzy
+#~ msgid "Parent Feature"
+#~ msgstr "Funktion"
+
+#, fuzzy
+#~ msgid "Parent Feature:"
+#~ msgstr "Funktion"
+
+#, fuzzy
+#~ msgid "Edit Feature"
+#~ msgstr "Funktion"
+
+#, fuzzy
+#~ msgid "Update Feature"
+#~ msgstr "Funktion"
+
+#, fuzzy
+#~ msgid "Add New Feature"
+#~ msgstr "Neues Objekt hinzufügen"
+
+#, fuzzy
+#~ msgid "New Feature Name"
+#~ msgstr "Name der Funktion"
+
+#~ msgid "Community Features"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "Community Feature"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "Search Community Features"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "All Community Features"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "Parent Community Feature"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "Parent Community Feature:"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "Edit Community Feature"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "Update Community Feature"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "Add New Community Feature"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "New Community Feature Name"
+#~ msgstr "Gemeinschafts-Funktionen"
+
+#, fuzzy
+#~ msgid "All Properties"
+#~ msgstr "Objekte"
+
+#, fuzzy
+#~ msgid "Add Property"
+#~ msgstr "Neues Objekt hinzufügen"
+
+#~ msgid "Add New Property"
+#~ msgstr "Neues Objekt hinzufügen"
+
+#~ msgid "Edit Property"
+#~ msgstr "Objekt bearbeiten"
+
+#~ msgid "New Property"
+#~ msgstr "Neues Objekt"
+
+#~ msgid "Search Properties"
+#~ msgstr "Objekte durchsuchen"
+
+#~ msgid "No properties found"
+#~ msgstr "Keine Objekte gefunden"
+
+#~ msgid "No properties found in Trash"
+#~ msgstr "Keine Objekte im Papierkorb gefunden"
+
+#, fuzzy
+#~ msgid "Default"
+#~ msgstr "Entfernen"
+
+#~ msgid ""
+#~ "One of the folders that is necessary for downloading additional features "
+#~ "for the WP-Property plugin is not writable.  This means features cannot "
+#~ "be downloaded.  To fix this, you need to set the <b>wp-content/plugins/wp-"
+#~ "property/core/premium</b> permissions to 0755."
+#~ msgstr ""
+#~ "Ein Ordner, der für das Herunterladen zusätzlicher Funktionen für das WP-"
+#~ "Property-Plugin nötig ist, ist nicht beschreibbar. Das bedeutet, dass die "
+#~ "Funktionen nicht geladen werden können. Um dies zu beheben, müssen Sie "
+#~ "die <b>wp-content/plugins/wp-property/core/premium</b>Rechte auf 0755 "
+#~ "setzen."
+
+#, fuzzy
+#~ msgid "Cache was successfully cleared"
+#~ msgstr "Die Aktualisierung war erfolgreich."
+
+#, fuzzy
+#~ msgid ""
+#~ "An error occurred during premium feature check. API Key '<b>%s</b>' is "
+#~ "incorrect."
+#~ msgstr ""
+#~ "Ein Fehler trat während der Prüfung der Premium-Funktion auf: <b> %s </b>."
+
+#, fuzzy
+#~ msgid "There are no available premium features."
+#~ msgstr "Erzwinge Prüfung erlaubter Premium-Funktionen"
+
+#, fuzzy
+#~ msgid "WP-Property Premium Feature: %s"
+#~ msgstr "WP-Property Premium-Funktionen"
+
+#~ msgid "Update ran successfully."
+#~ msgstr "Die Aktualisierung war erfolgreich."
+
+#, fuzzy
+#~ msgid "You have the latest premium features versions."
+#~ msgstr "Erzwinge Prüfung erlaubter Premium-Funktionen"
+
+#, fuzzy
+#~ msgid "An error occurred during premium feature check: <b> %s </b>."
+#~ msgstr ""
+#~ "Ein Fehler trat während der Prüfung der Premium-Funktion auf: <b> %s </b>."
+
+#~ msgid " sq ft."
+#~ msgstr "m2"
+
+#~ msgid "Get Directions"
+#~ msgstr "Wegbeschreibung"
+
+#~ msgid "General Settings"
+#~ msgstr "Allgemeine Einstellungen"
+
+#, fuzzy
+#~ msgid "Login"
+#~ msgstr "Protokoll"
+
+#, fuzzy
+#~ msgid "Date"
+#~ msgstr "Entfernen"
+
+#, fuzzy
+#~ msgid "Published"
+#~ msgstr "Diashow-Abbildungen:"
+
+#, fuzzy
+#~ msgid "Pending"
+#~ msgstr "Lade"
+
+#~ msgid "Any"
+#~ msgstr "Alle"
+
+#, fuzzy
+#~ msgid "Show all dates"
+#~ msgstr " %s Abbildungen anzeigen"
+
+#, fuzzy
+#~ msgid "General Help"
+#~ msgstr "Allgemeine Einstellungen"
+
+#, fuzzy
+#~ msgid "Default Properties Page"
+#~ msgstr "Vorgestellte Objekte"
+
+#, fuzzy
+#~ msgid ""
+#~ "The default <b>property page</b> will be used to display property search "
+#~ "results, as well as be the base for property URLs. "
+#~ msgstr ""
+#~ "Die <b>property page</b> wird als die Grundlage für URLs des Objekts "
+#~ "benutzt und um das Objekt in den Suchergebnissen darzustellen. Zum "
+#~ "Beispiel, wenn die URL Ihrer Objektseite  "
+
+#~ msgid "Display"
+#~ msgstr "Darstellung"
+
+#, fuzzy
+#~ msgid "Premium Features"
+#~ msgstr "WP-Property Premium-Funktionen"
+
+#, fuzzy
+#~ msgid "Tab allows you to manage your WP-Property Premium Features"
+#~ msgstr "WP-Property Premium-Funktionen"
+
+#, fuzzy
+#~ msgid "More Help"
+#~ msgstr "Mehr"
+
+#, fuzzy
+#~ msgid "published"
+#~ msgstr "Diashow-Abbildungen:"
+
+#, fuzzy
+#~ msgid "pending"
+#~ msgstr "Lade"
+
+#, fuzzy
+#~ msgid "Nothing found."
+#~ msgstr "Keine Objekte gefunden"
+
+#, fuzzy
+#~ msgid "New User account created."
+#~ msgstr "Verzeichnis nicht erstellt."
+
+#, fuzzy
+#~ msgid "Status Updated"
+#~ msgstr "Objekt aktualisiert."
+
+#, fuzzy
+#~ msgid "or"
+#~ msgstr "Mehr"
+
+#, fuzzy
+#~ msgid "No published properties."
+#~ msgstr "Zugeordnete Objekte anzeigen."
+
+#~ msgid "Title:"
+#~ msgstr "Titel"
+
+#, fuzzy
+#~ msgid "Attributes to Display:"
+#~ msgstr "Adressenanzeige"
+
+#~ msgid "%s at %s for %s"
+#~ msgstr "%s zu %s für %s"
+
+#~ msgid "More"
+#~ msgstr "Mehr"
+
+#~ msgid "View All"
+#~ msgstr "Alle betrachten"
+
+#, fuzzy
+#~ msgid ""
+#~ "The widget will show other properties that share a parent with the "
+#~ "currently displayed property."
+#~ msgstr ""
+#~ "Zugeordnete Objekte (falls vorhanden) für das aktuell dargestellte "
+#~ "anzeigen"
+
+#, fuzzy
+#~ msgid "Hide images."
+#~ msgstr "Abbildungen ausblenden"
+
+#~ msgid "Image Size:"
+#~ msgstr "Größe der Abbildung"
+
+#~ msgid "Listings to display?"
+#~ msgstr "Darzustellende Auflistungen"
+
+#, fuzzy
+#~ msgid "Select the attributes you want to display: "
+#~ msgstr "Wählen Sie die Merkmale die Sie darstellen möchten"
+
+#~ msgid "Address Format:"
+#~ msgstr "Adressenformat:"
+
+#~ msgid "Show \"More\" link?"
+#~ msgstr "Zeigen \"Mehr\" Link?"
+
+#~ msgid "Show \"View All\" link?"
+#~ msgstr "Zeigen \"Alle betrachten\" Link?"
+
+#~ msgid "Show child properties (if any) for currently displayed property"
+#~ msgstr ""
+#~ "Zugeordnete Objekte (falls vorhanden) für das aktuell dargestellte "
+#~ "anzeigen"
+
+#~ msgid ""
+#~ "The widget will not be displayed if the currently viewed property has no "
+#~ "children."
+#~ msgstr ""
+#~ "Das Widget wird nicht dargestellt falls die zur Zeit betrachtete "
+#~ "Immobilie über keine zugeordneten Objekte verfügt."
+
+#~ msgid "Hide Images?"
+#~ msgstr "Abbildungen ausblenden"
+
+#~ msgid "Select the stats you want to display"
+#~ msgstr "Wählen Sie die Merkmale die Sie darstellen möchten"
+
+#, fuzzy
+#~ msgid "Featured %1s"
+#~ msgstr "Funktionen"
+
+#~ msgid "List of properties that were marked as Featured"
+#~ msgstr "Liste, als vorgestellt gekennzeichneter Objekte"
+
+#, fuzzy
+#~ msgid "Featured Properies"
+#~ msgstr "Vorgestellte Objekte"
+
+#~ msgid "List of the latest properties created on this site"
+#~ msgstr "Liste neuester Objekte, die auf dieser Seite erstellt wurden"
+
+#~ msgid "Latest Properties"
+#~ msgstr "Neueste Objekte"
+
+#~ msgid "Select stats you want to display"
+#~ msgstr "Wählen Sie die Merkmale die Sie darstellen möchten"
+
+#, fuzzy
+#~ msgid "%1s Search"
+#~ msgstr "Suche"
+
+#, fuzzy
+#~ msgid "Display a highly customizable  %1s search form."
+#~ msgstr "Ein hochanpassbares Objektsuchformular anzeigen"
+
+#~ msgid "No searchable property types were found."
+#~ msgstr "Es wurden keine durchsuchbaren Immobilienarten gefunden."
+
+#~ msgid "Property types to search:"
+#~ msgstr "Zu suchende Immobilienarten:"
+
+#~ msgid "Select the attributes you want to search."
+#~ msgstr "Wählen Sie die Attribute, die Sie durchsuchen möchten."
+
+#, fuzzy
+#~ msgid "All Attributes"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid "Grouped Attributes"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid "Default Sort Order"
+#~ msgstr "Menü sortiert nach:"
+
+#~ msgid "Items per page"
+#~ msgstr "Einträge pro Seite"
+
+#~ msgid "Search Properies"
+#~ msgstr "Objekte durchsuchen"
+
+#~ msgid "List of all images attached to the current property"
+#~ msgstr "Liste aller, zu diesem Objekt beigefügten Abbildungen"
+
+#, fuzzy
+#~ msgid "Large Image Size:"
+#~ msgstr "Größe der Abbildung"
+
+#~ msgid "Show %s Images"
+#~ msgstr " %s Abbildungen anzeigen"
+
+#, fuzzy
+#~ msgid "Show Image Captions"
+#~ msgstr " %s Abbildungen anzeigen"
+
+#, fuzzy
+#~ msgid "Show Image Descriptions."
+#~ msgstr "Beschreibung"
+
+#, fuzzy
+#~ msgid "API Failure: %1s."
+#~ msgstr "Funktionen"
+
+#~ msgid "Log Started."
+#~ msgstr "Protokollierung begonnen"
+
+#, fuzzy
+#~ msgid "Log Page for"
+#~ msgstr "UD Log Seite für"
+
+#~ msgid "Clear Log"
+#~ msgstr "Protokoll löschen"
+
+#~ msgid "Timestamp"
+#~ msgstr "Zeitstempel"
+
+#~ msgid "Event"
+#~ msgstr "Ereignis"
+
+#~ msgid "User"
+#~ msgstr "Nutzer"
+
+#, fuzzy
+#~ msgid "Agent Shortcodes"
+#~ msgstr "Übersicht Shortcode"
+
+#, fuzzy
+#~ msgid "Show agent information:"
+#~ msgstr "Allgemeine Hinweise"
+
+#, fuzzy
+#~ msgid "To query agent properties:"
+#~ msgstr "Zugeordnete Objekte anzeigen."
+
+#, fuzzy
+#~ msgid "Shortcode Attribute Fields"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid "Agent Image Size"
+#~ msgstr "Größe der Abbildung"
+
+#, fuzzy
+#~ msgid "Agent Information"
+#~ msgstr "Allgemeine Hinweise"
+
+#, fuzzy
+#~ msgid "Agent"
+#~ msgstr "Ereignis"
+
+#, fuzzy
+#~ msgid "No Properties."
+#~ msgstr "Objekte"
+
+#, fuzzy
+#~ msgid "Display Name"
+#~ msgstr "Darstellung"
+
+#, fuzzy
+#~ msgid "Username"
+#~ msgstr "Nutzer"
+
+#, fuzzy
+#~ msgid "E-Mail"
+#~ msgstr "Hauptseite"
+
+#, fuzzy
+#~ msgid "Associated Properties"
+#~ msgstr "Vorgestellte Objekte"
+
+#, fuzzy
+#~ msgid "Images"
+#~ msgstr "Alle Abbildungen"
+
+#, fuzzy
+#~ msgid "Agent Fields"
+#~ msgstr "Objektfelder"
+
+#~ msgid "Add New"
+#~ msgstr "Neue hinzufügen"
+
+#, fuzzy
+#~ msgid "Agent updated."
+#~ msgstr "Objekt aktualisiert."
+
+#, fuzzy
+#~ msgid "Agent created."
+#~ msgstr "Verzeichnis nicht erstellt."
+
+#, fuzzy
+#~ msgid "Edit Agent"
+#~ msgstr "Objekt bearbeiten"
+
+#, fuzzy
+#~ msgid "No images found."
+#~ msgstr "Keine Objekte gefunden"
+
+#, fuzzy
+#~ msgid "Add Image"
+#~ msgstr "Alle Abbildungen"
+
+#, fuzzy
+#~ msgid "Edit posts"
+#~ msgstr "Objekt bearbeiten"
+
+#, fuzzy
+#~ msgid "Edit pages"
+#~ msgstr "Objekt bearbeiten"
+
+#, fuzzy
+#~ msgid "Publish pages"
+#~ msgstr "Diashow-Abbildungen:"
+
+#, fuzzy
+#~ msgid "Delete pages"
+#~ msgstr "Entfernen"
+
+#, fuzzy
+#~ msgid "Delete posts"
+#~ msgstr "Entfernen"
+
+#, fuzzy
+#~ msgid "Email Address"
+#~ msgstr "Adresse"
+
+#, fuzzy
+#~ msgid "<b>Page Settings</b><br/>"
+#~ msgstr "Allgemeine Einstellungen"
+
+#, fuzzy
+#~ msgid "Name:"
+#~ msgstr "Name"
+
+#, fuzzy
+#~ msgid "Page:"
+#~ msgstr "Übergeordnetes"
+
+#, fuzzy
+#~ msgid "Page"
+#~ msgstr "Übergeordnetes"
+
+#, fuzzy
+#~ msgid "Search..."
+#~ msgstr "Suche"
+
+#, fuzzy
+#~ msgid "Template Settings:"
+#~ msgstr "Allgemeine Einstellungen"
+
+#, fuzzy
+#~ msgid "Template:"
+#~ msgstr "Vorlage"
+
+#, fuzzy
+#~ msgid "Disable default CSS."
+#~ msgstr "Automatisch Standard-CSS einbinden."
+
+#~ msgid "Save Changes"
+#~ msgstr "Änderungen speichern"
+
+#, fuzzy
+#~ msgid "Property Form"
+#~ msgstr "Objekt: %s"
+
+#, fuzzy
+#~ msgid "Subscription Plan"
+#~ msgstr "Beschreibung"
+
+#, fuzzy
+#~ msgid "Templates"
+#~ msgstr "Vorlage"
+
+#, fuzzy
+#~ msgid "Overview Page"
+#~ msgstr "Übersicht"
+
+#, fuzzy
+#~ msgid "Edit Page"
+#~ msgstr "Objekt bearbeiten"
+
+#, fuzzy
+#~ msgid "Administration"
+#~ msgstr "Einstellungen"
+
+#, fuzzy
+#~ msgid "Form Name"
+#~ msgstr "Zu verkaufen"
+
+#, fuzzy
+#~ msgid "Shortcode"
+#~ msgstr "Übersicht Shortcode"
+
+#, fuzzy
+#~ msgid "General Options"
+#~ msgstr "Allgemeine Einstellungen"
+
+#, fuzzy
+#~ msgid "Subscriptions Plans"
+#~ msgstr "Beschreibung"
+
+#, fuzzy
+#~ msgid "Propery Attributes"
+#~ msgstr "WP-Property Premium-Funktionen"
+
+#, fuzzy
+#~ msgid "Available shortcode attributes"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid "Just a name of Subscription plan."
+#~ msgstr "Beschreibung"
+
+#, fuzzy
+#~ msgid "Duration"
+#~ msgstr "Beschreibung"
+
+#, fuzzy
+#~ msgid "Is Featured"
+#~ msgstr "Vorgestellt"
+
+#, fuzzy
+#~ msgid "Images Limit"
+#~ msgstr "Alle Abbildungen"
+
+#~ msgid "Description"
+#~ msgstr "Beschreibung"
+
+#, fuzzy
+#~ msgid "Property Forms"
+#~ msgstr "Objekt: %s"
+
+#, fuzzy
+#~ msgid "Edit %s Page"
+#~ msgstr "Objekt bearbeiten"
+
+#~ msgid "Price:"
+#~ msgstr "Preis:"
+
+#, fuzzy
+#~ msgid "Duration:"
+#~ msgstr "Beschreibung"
+
+#, fuzzy
+#~ msgid "Images:"
+#~ msgstr "Alle Abbildungen"
+
+#, fuzzy
+#~ msgid "Renewal of Subscription Plan"
+#~ msgstr "Beschreibung"
+
+#, fuzzy
+#~ msgid "Options:"
+#~ msgstr "Optionen"
+
+#, fuzzy
+#~ msgid "day"
+#~ msgstr "Heute"
+
+#, fuzzy
+#~ msgid "created"
+#~ msgstr "Vorgestellt"
+
+#, fuzzy
+#~ msgid "updated"
+#~ msgstr "Objekt aktualisiert."
+
+#, fuzzy
+#~ msgid "Publish Now"
+#~ msgstr "Diashow"
+
+#, fuzzy
+#~ msgid "Add New %s"
+#~ msgstr "Neue hinzufügen"
+
+#, fuzzy
+#~ msgid "Expired"
+#~ msgstr "Objektseite"
+
+#, fuzzy
+#~ msgid "Wrong FEPS form used"
+#~ msgstr "Objekt aktualisiert."
+
+#, fuzzy
+#~ msgid "FEPS forms updated."
+#~ msgstr "Objekt aktualisiert."
+
+#, fuzzy
+#~ msgid "%1$s Content"
+#~ msgstr "Titel"
+
+#, fuzzy
+#~ msgid "%1$s Type"
+#~ msgstr "Art"
+
+#, fuzzy
+#~ msgid "Form Name:"
+#~ msgstr "Zu verkaufen"
+
+#, fuzzy
+#~ msgid "Shortcode:"
+#~ msgstr "Übersicht Shortcode"
+
+#, fuzzy
+#~ msgid "General Options:"
+#~ msgstr "Allgemeine Einstellungen"
+
+#, fuzzy
+#~ msgid "%1$s Type:"
+#~ msgstr "Art"
+
+#, fuzzy
+#~ msgid "Preview Thumbnail Size:"
+#~ msgstr "Thumbnail-Größe:"
+
+#, fuzzy
+#~ msgid "%1$s Attributes"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid "Attribute"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid "%1$s Title"
+#~ msgstr "Titel"
+
+#, fuzzy
+#~ msgid "Required"
+#~ msgstr "Vorgestellt"
+
+#, fuzzy
+#~ msgid "Subscription Plans"
+#~ msgstr "Beschreibung"
+
+#, fuzzy
+#~ msgid "Actions"
+#~ msgstr "Optionen"
+
+#, fuzzy
+#~ msgid "Update"
+#~ msgstr "Auf Aktualisierungen prüfen"
+
+#, fuzzy
+#~ msgid "FEPS Information"
+#~ msgstr "Allgemeine Hinweise"
+
+#, fuzzy
+#~ msgid "PDF Flyer Options"
+#~ msgstr "Supermap-Optionen"
+
+#, fuzzy
+#~ msgid "Exclude %1s from PDF Lists"
+#~ msgstr "Objekt aus Supermap ausschließen"
+
+#, fuzzy
+#~ msgid "Full Description"
+#~ msgstr "Beschreibung"
+
+#, fuzzy
+#~ msgid "Attributes"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid "File Name:"
+#~ msgstr "Name der Funktion"
+
+#, fuzzy
+#~ msgid "Actions:"
+#~ msgstr "Optionen"
+
+#, fuzzy
+#~ msgid "View PDF"
+#~ msgstr "Alle betrachten"
+
+#, fuzzy
+#~ msgid "Properties per page:"
+#~ msgstr "Einträge pro Seite"
+
+#, fuzzy
+#~ msgid "Show child properties."
+#~ msgstr "Zugeordnete Objekte anzeigen."
+
+#, fuzzy
+#~ msgid "Contact Information"
+#~ msgstr "Allgemeine Hinweise"
+
+#, fuzzy
+#~ msgid "Refresh Page"
+#~ msgstr "Übersichtsseite"
+
+#, fuzzy
+#~ msgid "Location"
+#~ msgstr "Lade"
+
+#, fuzzy
+#~ msgid "Flyer Display"
+#~ msgstr "Darstellung"
+
+#, fuzzy
+#~ msgid "Description (if exists)"
+#~ msgstr "Beschreibung"
+
+#, fuzzy
+#~ msgid "Location on Map (if exists)"
+#~ msgstr "Ort ist von Bedeutung"
+
+#, fuzzy
+#~ msgid "Secondary Images"
+#~ msgstr "Diashow-Abbildungen:"
+
+#, fuzzy
+#~ msgid "Show %1$s images."
+#~ msgstr " %s Abbildungen anzeigen"
+
+#, fuzzy
+#~ msgid "\" is generated."
+#~ msgstr "Verzeichnis nicht erstellt."
+
+#, fuzzy
+#~ msgid "Allows user to publish properties."
+#~ msgstr "Zugeordnete Objekte anzeigen."
+
+#, fuzzy
+#~ msgid "WP Property Capabilities"
+#~ msgstr "WP-Property Diashow"
+
+#, fuzzy
+#~ msgid "Singular Property:"
+#~ msgstr "Objekt bearbeiten"
+
+#, fuzzy
+#~ msgid "Plural Property:"
+#~ msgstr "Objekt"
+
+#, fuzzy
+#~ msgid "Overview Page Contextual Help:"
+#~ msgstr "Übersichtsseite"
+
+#, fuzzy
+#~ msgid "Add "
+#~ msgstr "Neue hinzufügen"
+
+#, fuzzy
+#~ msgid "Add New "
+#~ msgstr "Neue hinzufügen"
+
+#, fuzzy
+#~ msgid "Search "
+#~ msgstr "Suche"
+
+#, fuzzy
+#~ msgid "Property Title"
+#~ msgstr "Art der Immobilie"
+
+#, fuzzy
+#~ msgid "Property Content"
+#~ msgstr "Metadaten zum Objekt"
+
+#, fuzzy
+#~ msgid "Property Excerpt"
+#~ msgstr "Metadaten zum Objekt"
+
+#, fuzzy
+#~ msgid "Property Status"
+#~ msgstr "Merkmale des Objekts"
+
+#, fuzzy
+#~ msgid "Property Order"
+#~ msgstr "Objektsuche"
+
+#, fuzzy
+#~ msgid "Property Date"
+#~ msgstr "Objektseite"
+
+#, fuzzy
+#~ msgid "Property Author"
+#~ msgstr "Metadaten zum Objekt"
+
+#, fuzzy
+#~ msgid "Starting "
+#~ msgstr "Einstellungen"
+
+#, fuzzy
+#~ msgid "Time: "
+#~ msgstr "Titel"
+
+#, fuzzy
+#~ msgid "No objects found."
+#~ msgstr "Keine Objekte gefunden"
+
+#, fuzzy
+#~ msgid "Available tags in source: %1s"
+#~ msgstr "Verfügbare Schlüsselworte:"
+
+#, fuzzy
+#~ msgid "Property Importer"
+#~ msgstr "Art der Immobilie"
+
+#, fuzzy
+#~ msgid "Sort by:"
+#~ msgstr "Sortierbar"
+
+#, fuzzy
+#~ msgid "Created Properties"
+#~ msgstr "Vorgestellte Objekte"
+
+#, fuzzy
+#~ msgid "Updated Properties"
+#~ msgstr "Vorgestellte Objekte"
+
+#, fuzzy
+#~ msgid "Total Properties"
+#~ msgstr "Objekte"
+
+#, fuzzy
+#~ msgid "Created "
+#~ msgstr "Vorgestellt"
+
+#, fuzzy
+#~ msgid "Total Properties: "
+#~ msgstr "Objekte"
+
+#, fuzzy
+#~ msgid "Delete All Properties"
+#~ msgstr "Weitere Objekte"
+
+#, fuzzy
+#~ msgid "Source"
+#~ msgstr "Mehr"
+
+#, fuzzy
+#~ msgid "Type:"
+#~ msgstr "Art"
+
+#, fuzzy
+#~ msgid "Google Spreadsheet"
+#~ msgstr "Google Maps"
+
+#, fuzzy
+#~ msgid "WP-Property Feed"
+#~ msgstr "Objektfelder"
+
+#, fuzzy
+#~ msgid "Google Username"
+#~ msgstr "Google Maps"
+
+#, fuzzy
+#~ msgid "Google Password"
+#~ msgstr "Google Maps"
+
+#, fuzzy
+#~ msgid "Property Resource."
+#~ msgstr "Objekt gespeichert."
+
+#, fuzzy
+#~ msgid "Default is \"Property\""
+#~ msgstr "Art der Immobilie"
+
+#, fuzzy
+#~ msgid "Property Resource Class."
+#~ msgstr "Objekt gespeichert."
+
+#, fuzzy
+#~ msgid "RETS Version."
+#~ msgstr "Version"
+
+#, fuzzy
+#~ msgid "Property Query."
+#~ msgstr "Galerie"
+
+#, fuzzy
+#~ msgid "Default Property Type"
+#~ msgstr "Art der Immobilie"
+
+#, fuzzy
+#~ msgid "properties in the feed."
+#~ msgstr "Keine Objekte gefunden"
+
+#, fuzzy
+#~ msgid " valid images."
+#~ msgstr "Abbildungen ausblenden"
+
+#, fuzzy
+#~ msgid "hour(s) ago."
+#~ msgstr "vor %s Stunden"
+
+#, fuzzy
+#~ msgid "Attribute Map"
+#~ msgstr "Verborgene Attribute"
+
+#, fuzzy
+#~ msgid "WP-Property Attribute"
+#~ msgstr "WP-Property Premium-Funktionen"
+
+#, fuzzy
+#~ msgid "WordPress Attributes"
+#~ msgstr "Adressenattribut"
+
+#, fuzzy
+#~ msgid "Street Number"
+#~ msgstr "Telefonnummer"
+
+#, fuzzy
+#~ msgid "County"
+#~ msgstr "Stadt"
+
+#, fuzzy
+#~ msgid "State"
+#~ msgstr "Sortierbar"
+
+#, fuzzy
+#~ msgid "WP-Property Attributes"
+#~ msgstr "WP-Property Premium-Funktionen"
+
+#, fuzzy
+#~ msgid "Property Agent"
+#~ msgstr "Metadaten zum Objekt"
+
+#, fuzzy
+#~ msgid "Global Property ID"
+#~ msgstr "Objekt"
+
+#, fuzzy
+#~ msgid "Display Address"
+#~ msgstr "Adresse"
+
+#, fuzzy
+#~ msgid "Address validation has failed."
+#~ msgstr "Adresse nicht überprüft."
+
+#, fuzzy
+#~ msgid "Manage Slideshow"
+#~ msgstr "Diashow"
+
+#, fuzzy
+#~ msgid "Slide"
+#~ msgstr "Diashow"
+
+#, fuzzy
+#~ msgid "Carousel Thumbnail Size:"
+#~ msgstr "Thumbnail-Größe Karte:"
+
+#~ msgid "Slideshow Options"
+#~ msgstr "Diashow-Optionen"
+
+#~ msgid "Slideshow Images:"
+#~ msgstr "Diashow-Abbildungen:"
+
+#~ msgid "All Images:"
+#~ msgstr "Alle Abbildungen"
+
+#~ msgid "Slideshow"
+#~ msgstr "Diashow"
+
+#~ msgid "Global Slideshow"
+#~ msgstr "Globale Diashow"
+
+#, fuzzy
+#~ msgid "Slideshow Size: "
+#~ msgstr "Diashow-Abbildungen:"
+
+#, fuzzy
+#~ msgid "Display in Global Slideshow Caption:"
+#~ msgstr "Globale Diashow"
+
+#, fuzzy
+#~ msgid "Title."
+#~ msgstr "Titel"
+
+#, fuzzy
+#~ msgid "Tagline."
+#~ msgstr "Werbespruch"
+
+#~ msgid "Single Listing Slideshow"
+#~ msgstr "Diashow einzelner Auflistungen"
+
+#~ msgid "Slideshow image size to be used for single property pages."
+#~ msgstr ""
+#~ "Größe der Diashow-Abbildung, die für einzelne Objektseiten benutzt wird."
+
+#, fuzzy
+#~ msgid "Thumbnail Size"
+#~ msgstr "Thumbnail-Größe:"
+
+#~ msgid ""
+#~ "This width is used on \"Slideshow\" page on the Property editing page to "
+#~ "display available images, this setting <b>does not</b> affect the actual "
+#~ "slideshow on the front-end."
+#~ msgstr ""
+#~ "Diese Breite wird auf der \"Slideshow\" benutzt, die sich auf der Seite "
+#~ "zur Bearbeitung des Objekts befindet, um verfügbare Abbildungen "
+#~ "darzustellen. Diese Einstellung <b>beeinflusst nicht</b> die eigentliche "
+#~ "Diashow auf der Front-End."
+
+#, fuzzy
+#~ msgid "Slices:"
+#~ msgstr "Diashow"
+
+#~ msgid "Slideshow selection and order saved."
+#~ msgstr "Auswahl und Reihenfolge der Diashow gespeichert."
+
+#~ msgid "WP-Property Slideshow"
+#~ msgstr "WP-Property Diashow"
+
+#~ msgid ""
+#~ "This slideshow can be integrated into your front-end pages by either "
+#~ "using the shortcode, or pasting PHP code into your theme."
+#~ msgstr ""
+#~ "Diese Diashow kann, entweder durch die Benutzung von Shortcodes oder das "
+#~ "Einfügen vom PHP-Codes in Ihre Front-End-Seiten in Ihrem Thema integriert "
+#~ "werden."
+
+#~ msgid ""
+#~ "Drag images from selection on the left to the selection on the right, and "
+#~ "then click save."
+#~ msgstr ""
+#~ "Ziehen Sie die Abbildungen aus der Auswahl links in die Auswahl rechts "
+#~ "und bestätigen Sie mit Speichern."
+
+#~ msgid ""
+#~ "This list gets all images from your media library that are over %s pixels "
+#~ "wide and %s pixels tall."
+#~ msgstr ""
+#~ "Diese Liste holt alle Abbildungen aus Ihrer Medienbibliothek die größer "
+#~ "wie %s Pixel in Breite und %s Pixel in Höhe sind."
+
+#~ msgid "Save Selection and Order"
+#~ msgstr "Auswahl und Reihenfolge speichern"
+
+#, fuzzy
+#~ msgid "View"
+#~ msgstr "Alle betrachten"
+
+#, fuzzy
+#~ msgid "Settings updated."
+#~ msgstr "Objekt aktualisiert."
+
+#, fuzzy
+#~ msgid "Feature Updates"
+#~ msgstr "Name der Funktion"
+
+#~ msgid "Check Updates"
+#~ msgstr "Auf Aktualisierungen prüfen"
+
+#, fuzzy
+#~ msgid "Enable comments."
+#~ msgstr "Optionen"
+
+#, fuzzy
+#~ msgid "Default %1s Page"
+#~ msgstr "Standardvorlage"
+
+#~ msgid "Property (Default)"
+#~ msgstr "Objekt (Standard)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Automatically overwrite this page's content with [property_overview]."
+#~ msgstr ""
+#~ "Den Inhalt dieser Seite immer mit [property_overview] überschreiben."
+
+#, fuzzy
+#~ msgid ""
+#~ "When showing property search results, don't override the page content "
+#~ "with [property_overview]."
+#~ msgstr ""
+#~ "Den Inhalt dieser Seite immer mit [property_overview] überschreiben."
+
+#~ msgid ""
+#~ "If checked, be sure to include [property_overview] somewhere in the "
+#~ "content, or no properties will be displayed."
+#~ msgstr ""
+#~ "Falls markiert vergewissern Sie sich, [property_overview] irgendwo in den "
+#~ "Inhalt einzufügen, andernfalls werden keine Objekte dargestellt."
+
+#, fuzzy
+#~ msgid "Automatic Geolocation"
+#~ msgstr "Automatisch Standard-CSS einbinden."
+
+#, fuzzy
+#~ msgid "Attribute to use for physical addresses:"
+#~ msgstr "Attribut zur Nutzung für die Adresse:"
+
+#, fuzzy
+#~ msgid "Load default CSS."
+#~ msgstr "Automatisch Standard-CSS einbinden."
+
+#~ msgid "Default Phone Number"
+#~ msgstr "Standard-Telefonnummer"
+
+#, fuzzy
+#~ msgid ""
+#~ "Phone number to use when a %1s-specific phone number is not specified."
+#~ msgstr ""
+#~ "Telefonnummer die benutzt werden soll wenn keine objektspezifische "
+#~ "Telefonnummer angegeben wurde."
+
+#~ msgid "Image Sizes"
+#~ msgstr "Größe der Abbildungen"
+
+#~ msgid "Image sizes used throughout the plugin."
+#~ msgstr "Größe der Abbildungen die im Plugin benutzt werden"
+
+#~ msgid "Width"
+#~ msgstr "Breite"
+
+#~ msgid "Height"
+#~ msgstr "Höhe"
+
+#~ msgid "Overview Shortcode"
+#~ msgstr "Übersicht Shortcode"
+
+#, fuzzy
+#~ msgid ""
+#~ "These are the settings for the [property_overview] shortcode.  The "
+#~ "shortcode displays a list of all building / root %1s.<br />The display "
+#~ "settings may be edited further by customizing the <b>wp-content/plugins/"
+#~ "wp-properties/templates/property-overview.php</b> file.  To avoid losing "
+#~ "your changes during updates, create a <b>property-overview.php</b> file "
+#~ "in your template directory, which will be automatically loaded."
+#~ msgstr ""
+#~ "Das sind Einstellungen für den [property_overview] Shortcode. Der "
+#~ "Shortcode stellt eine Liste aller Gebäude / Top-Level-Gebäude dar.<br />\n"
+#~ "\t\t\t\tDie Einstellungen für die Darstellung können weiter angepasst "
+#~ "werden in dem die <b>wp-content/plugins/wp-properties/templates/property-"
+#~ "overview.php</b> Datei bearbeitet wird. Um den Verlust von Änderungen zu "
+#~ "vermeiden, erstellen Sie eine <b>property-overview.php</b> Datei in Ihrem "
+#~ "Vorlagenverzeichnis, welches automatisch geladen wird."
+
+#~ msgid "Thumbnail size:"
+#~ msgstr "Thumbnail-Größe:"
+
+#, fuzzy
+#~ msgid "Show children %1s."
+#~ msgstr "Zugeordnete Objekte anzeigen."
+
+#, fuzzy
+#~ msgid "Show larger image of %1s when image is clicked using fancybox."
+#~ msgstr ""
+#~ "Größere Abbildung des Objekts anzeigen wenn die Abbildung durch die "
+#~ "Benutzung von Fancybox aktiviert ist."
+
+#, fuzzy
+#~ msgid "Show pagination on bottom of results."
+#~ msgstr "Seitenumbruch-Optionen für Suchergebnisse"
+
+#, fuzzy
+#~ msgid "%1s Page"
+#~ msgstr "Objekt bearbeiten"
+
+#, fuzzy
+#~ msgid ""
+#~ "The display settings may be edited further by customizing the <b>wp-"
+#~ "content/plugins/wp-properties/templates/property.php</b> file.  To avoid "
+#~ "losing your changes during updates, create a <b>property.php</b> file in "
+#~ "your template directory, which will be automatically loaded."
+#~ msgstr ""
+#~ "Das sind Einstellungen für den [property_overview] Shortcode. Der "
+#~ "Shortcode stellt eine Liste aller Gebäude / Top-Level-Gebäude dar.<br />\n"
+#~ "\t\t\t\tDie Einstellungen für die Darstellung können weiter angepasst "
+#~ "werden in dem die <b>wp-content/plugins/wp-properties/templates/property-"
+#~ "overview.php</b> Datei bearbeitet wird. Um den Verlust von Änderungen zu "
+#~ "vermeiden, erstellen Sie eine <b>property-overview.php</b> Datei in Ihrem "
+#~ "Vorlagenverzeichnis, welches automatisch geladen wird."
+
+#~ msgid "Google Maps"
+#~ msgstr "Google Maps"
+
+#~ msgid "Map Thumbnail Size:"
+#~ msgstr "Thumbnail-Größe Karte:"
+
+#~ msgid "Map Zoom Level:"
+#~ msgstr "Zoom-Level Karte:"
+
+#, fuzzy
+#~ msgid "Default is \"%s\""
+#~ msgstr "Standardvorlage"
+
+#, fuzzy
+#~ msgid "Show %1s Title"
+#~ msgstr "Titel"
+
+#, fuzzy
+#~ msgid "Show Directions Link"
+#~ msgstr "Wegbeschreibung"
+
+#~ msgid "Address Display"
+#~ msgstr "Adressenanzeige"
+
+#~ msgid "Available tags:"
+#~ msgstr "Verfügbare Schlüsselworte:"
+
+#, fuzzy
+#~ msgid "Currency & Numbers"
+#~ msgstr "Währungssymbol"
+
+#~ msgid "Currency symbol."
+#~ msgstr "Währungssymbol"
+
+#, fuzzy
+#~ msgid "Currency symbol placement:"
+#~ msgstr "Währungssymbol"
+
+#, fuzzy
+#~ msgid "Before number"
+#~ msgstr "Telefonnummer"
+
+#, fuzzy
+#~ msgid "Admin Settings"
+#~ msgstr "Einstellungen"
+
+#~ msgid "Disable plugin."
+#~ msgstr "Plugin deaktivieren."
+
+#~ msgid "Feature installed, using version"
+#~ msgstr "Funktion installiert, benutze Version"
+
+#, fuzzy
+#~ msgid ""
+#~ "Please visit <a href=\"%s\">UsabilityDynamics.com</a> to purchase this "
+#~ "feature."
+#~ msgstr ""
+#~ "Bitte besuchen Sie <a href=\"%s\">TwinCitiesTech.com</a> um diese  "
+#~ "Funktion zu erwerben."
+
+#~ msgid "Revalidate"
+#~ msgstr "Erneut prüfen"
+
+#, fuzzy
+#~ msgid ""
+#~ "Enter in the ID of the %1s you want to look up, and the class will be "
+#~ "displayed below."
+#~ msgstr ""
+#~ "Die Kennzahl des Objekts, dass Sie prüfen möchten eintragen und die "
+#~ "Klasse wird unten dargestellt."
+
+#~ msgid "Lookup"
+#~ msgstr "Prüfen"
+
+#, fuzzy
+#~ msgid "Get %1s image data."
+#~ msgstr "Objekt gespeichert."
+
+#~ msgid ""
+#~ "Look up the <b>$wp_properties</b> global settings array.  This array "
+#~ "stores all the default settings, which are overwritten by database "
+#~ "settings, and custom filters."
+#~ msgstr ""
+#~ "Prüfen Sie die <b>$wp_properties</b> globale Schaltmatrix der "
+#~ "Einstellungen. Diese Schaltmatrix enthält alle Standardeinstellungen, die "
+#~ "von den Datenbankeinstellungen und anpassbaren Filtern überschrieben "
+#~ "werden."
+
+#~ msgid "Show $wp_properties"
+#~ msgstr "$wp_properties anzeigen"
+
+#, fuzzy
+#~ msgid "Clear Cache"
+#~ msgstr "Protokoll löschen"
+
+#~ msgid "(no parent)"
+#~ msgstr "(keine übergeordneten)"
+
+#~ msgid "Parent"
+#~ msgstr "Übergeordnetes"
+
+#~ msgid "Template"
+#~ msgstr "Vorlage"
+
+#~ msgid "Page Template"
+#~ msgstr "Seitenvorlage"
+
+#~ msgid "Default Template"
+#~ msgstr "Standardvorlage"
+
+#~ msgid "Need help? Use the Help tab in the upper right of your screen."
+#~ msgstr ""
+#~ "Brauchen Sie Hilfe? Nutzen Sie den Hilfe-Tab oben rechts auf Ihrem "
+#~ "Bildschirm."
+
+#~ msgid "Falls Under"
+#~ msgstr "Fällt unter"
+
+#, fuzzy
+#~ msgid "ID of parent property"
+#~ msgstr "Das ist ein Mietobjekt."
+
+#~ msgid "Editing %s is disabled, it may be inherited."
+#~ msgstr "Das Bearbeiten %s ist nicht möglich, es könnte vererbt sein."
+
+#, fuzzy
+#~ msgid "%1s Type"
+#~ msgstr "Art"
+
+#~ msgid "Return to building page."
+#~ msgstr "Kehren Sie zur Gebäudeseite zurück."
+
+#, fuzzy
+#~ msgid "Change"
+#~ msgstr "Änderungen speichern"
+
+#, fuzzy
+#~ msgid "Featured:"
+#~ msgstr "Vorgestellt"
+
+#, fuzzy
+#~ msgid "Current Balance"
+#~ msgstr "Währung"
+
+#, fuzzy
+#~ msgid "Publish the current %s"
+#~ msgstr "Objekte"
+
+#, fuzzy
+#~ msgid "Add Credits"
+#~ msgstr "Neues Objekt hinzufügen"
+
+#, fuzzy
+#~ msgid "Choose Subscription Plan"
+#~ msgstr "Beschreibung"
+
+#, fuzzy
+#~ msgid "Subscription Plan Options"
+#~ msgstr "Beschreibung"
+
+#, fuzzy
+#~ msgid "Information"
+#~ msgstr "Allgemeine Hinweise"
+
+#, fuzzy
+#~ msgid "Expiry Date"
+#~ msgstr "Objektseite"
+
+#~ msgid ""
+#~ "Sorry, we could not find what you were looking for.  Since you are here, "
+#~ "take a look at some of our properties."
+#~ msgstr ""
+#~ "Es tut uns leid, aber das Gesuchte kann nicht gefunden werden. Da Sie "
+#~ "schon mal hier sind, werfen Sie doch einen Blick auf unsere Immmobilien."
+
+#~ msgid ""
+#~ "Sorry, no properties found - try expanding your search, or <a href=\"%s"
+#~ "\">view all</a>."
+#~ msgstr ""
+#~ "Es tut uns leid, es wurden keine Objekte gefunden. Versuchen Sie es mit "
+#~ "einer detaillierten Suche oder <a href=\"%s\">view all</a>."
+
+#~ msgid "Prev"
+#~ msgstr "Vorige"
+
+#, fuzzy
+#~ msgid "Other"
+#~ msgstr "Reihenfolge"
+
+#, fuzzy
+#~ msgid "Cancel reply"
+#~ msgstr "Abbruch"
+
+#, fuzzy
+#~ msgid "Payment Method"
+#~ msgstr "Objekt-Einstellungen"
+
+#~ msgid "Version"
+#~ msgstr "Version"
+
+#~ msgid "Property Page"
+#~ msgstr "Objektseite"
+
+#, fuzzy
+#~ msgid "Show Property Title"
+#~ msgstr "Art der Immobilie"
+
+#, fuzzy
+#~ msgid "Property ID:"
+#~ msgstr "Objekt"
+
+#~ msgid "Interested?"
+#~ msgstr "Interessiert?"
+
+#, fuzzy
+#~ msgid "Read Property"
+#~ msgstr "Neues Objekt"
+
+#, fuzzy
+#~ msgid "Delete Property"
+#~ msgstr "Neues Objekt"
+
+#, fuzzy
+#~ msgid "Read Private Properties"
+#~ msgstr "Vorgestellte Objekte"
+
+#~ msgid "Feature Name"
+#~ msgstr "Name der Funktion"
+
+#~ msgid "WP-Property Premium Feature: %s updated to version %s from %s."
+#~ msgstr ""
+#~ "WP-Property Premium-Funktion: %s aktualisiert auf Version %s von %s."
+
+#~ msgid "WP-Property Premium Feature: %s updated to version %s."
+#~ msgstr "WP-Property Premium-Funktion: %s aktualisiert auf Version %s."
+
+#, fuzzy
+#~ msgid "General"
+#~ msgstr "Allgemeine Einstellungen"
+
+#, fuzzy
+#~ msgid "Slug:"
+#~ msgstr "Titelform"
+
+#, fuzzy
+#~ msgid "Property Status:"
+#~ msgstr "Merkmale des Objekts"
+
+#, fuzzy
+#~ msgid "Property Type:"
+#~ msgstr "Art der Immobilie"
+
+#~ msgid "Cache table does not exist. Attempting to create:"
+#~ msgstr "Cache-Verzeichnis existiert nicht. Versuche es zu erstellen:"
+
+#~ msgid "SQL Ran: %s , verifying existance."
+#~ msgstr "SQL ergab: %s , prüfe Existenz."
+
+#~ msgid "Table created and exists."
+#~ msgstr "Verzeichnis erstellt und vorhanden."
+
+#~ msgid "Table not created."
+#~ msgstr "Verzeichnis nicht erstellt."
+
+#, fuzzy
+#~ msgid "Tomorrow "
+#~ msgstr "Morgen"
+
+#, fuzzy
+#~ msgid "Yesterday "
+#~ msgstr "Gestern"
+
+#, fuzzy
+#~ msgid " in %d days "
+#~ msgstr "in %d Tagen"
+
+#~ msgid "%d days ago"
+#~ msgstr "vor %d Tagen"
+
+#~ msgid "Automatically logged failed JSON response: "
+#~ msgstr "Automatisch gesicherte, fehlgeschlagene JSON-Rückinformation: "
+
+#~ msgid "%s hours ago"
+#~ msgstr "vor %s Stunden"
+
+#~ msgid "%s minutes ago"
+#~ msgstr "vor %s Minuten"
+
+#~ msgid "Address Attribute"
+#~ msgstr "Adressenattribut"
+
+#~ msgid "and localize for:"
+#~ msgstr "und lokalisieren  für"
+
+#~ msgid "Order By:"
+#~ msgstr "Ausrichten nach:"
+
+#~ msgid "Bed(s):"
+#~ msgstr "Bett(en):"
+
+#~ msgid "Bath(s):"
+#~ msgstr "Badezimmer:"
+
+#~ msgid "Square Ft:"
+#~ msgstr "Quadratmeter:"
+
+#~ msgid ""
+#~ "Set Coordinates Manually (When unchecked the coordinates will be set (and "
+#~ "validated) by Google Maps)"
+#~ msgstr ""
+#~ "Die Koordinaten manuell setzen. (Falls nicht markiert, werden die "
+#~ "Koordinaten von Google Maps gesetzt (und überprüft)"
+
+#~ msgid ""
+#~ "Be advised, since you don't have permalinks enabled, you must visit the "
+#~ "<a href=\"%s\">Settings Page</a> and set a custom property overview page."
+#~ msgstr ""
+#~ "Da Sie keine Permalinks aktiviert haben, seien Sie beraten, dass Sie <a "
+#~ "href=\"%s\">Settings Page</a> aufrufen sollten und eine "
+#~ "benutzerdefinierte Objektnübersicht wählen müssen."
+
+#~ msgid ""
+#~ "By default, your property overview will be displayed on the <a href=\"%s"
+#~ "\">%s</a> page. You may change the overview page on the <a href=\"%s"
+#~ "\">Settings Page</a>"
+#~ msgstr ""
+#~ "Standardgemäß wird die Übersicht Ihrer Objekte auf dieser Seite <a href="
+#~ "\"%s\">%s</a> dargesetllt. Sie können die Übersichtsseite in den <a href="
+#~ "\"%s\">Settings Page</a> ändern."
+
+#~ msgid "Thank you for installing WP-Property!"
+#~ msgstr "Vielen Dank, dass Sie WP-Property installiert haben!"
+
+#~ msgid ""
+#~ "<p>You may also visit <a href=\"http://twincitiestech.com/plugins/wp-"
+#~ "property/\">TwinCitiesTech.com</a> for more information, and <a href="
+#~ "\"http://twincitiestech.com/plugins/wp-property/screencasts/"
+#~ "\">screencasts</a>.</div>"
+#~ msgstr ""
+#~ "<p>Für mehr Informationen können Sie auch <a href=\"http://twincitiestech."
+#~ "com/plugins/wp-property/\">TwinCitiesTech.com</a> und <a href=\"http://"
+#~ "twincitiestech.com/plugins/wp-property/screencasts/\">screencasts</a>.</"
+#~ "div> besuchen."
+
+#~ msgid "Validated:"
+#~ msgstr "Überprüft:"
+
+#~ msgid "view on map"
+#~ msgstr "auf Karte betrachten"
+
+#~ msgid "Show other properties (if any) with the same Parent"
+#~ msgstr ""
+#~ "Weitere zugeordnete Objekte (falls vorhanden) für das aktuell "
+#~ "dargestellte anzeigen"
+
+#~ msgid "Do you want to use pagination?"
+#~ msgstr "Möchten Sie Seitenumbrüche benutzen?"
+
+#~ msgid ""
+#~ "City is an automatically created attribute once the address is validated."
+#~ msgstr ""
+#~ "Stadt ist ein automatisch erstelltes Attribut, dass erzeugt wird sobald "
+#~ "die Adresse überprüft wurde."
+
+#~ msgid "Popup Image Size:"
+#~ msgstr "Größe der Popup-Abbildungen:"
+
+#~ msgid "Thumbnail Width"
+#~ msgstr "Thumbnail-Breite"
+
+#~ msgid ""
+#~ "To include the slideshow into the content of a property, use the "
+#~ "following shortcode: [property_slideshow]"
+#~ msgstr ""
+#~ "Um die Diashow in den Inhalt eines Objekts aufzunehmen nutzen Sie den "
+#~ "folgenden Shortcode: [property_slideshow]"
+
+#~ msgid ""
+#~ "Developers: Include the slideshow in your PHP files by using "
+#~ "global_slideshow(); for the global slideshow and "
+#~ "property_slideshow(property_id); for property-specific slideshows. "
+#~ msgstr ""
+#~ "Entwickler: Nehmen Sie die Diashow durch den Gebrauch von "
+#~ "global_slideshow(); für globale Diashows und "
+#~ "property_slideshow(property_id); für objektspezifische Diashows in Ihre "
+#~ "PHP-Datei auf. "
+
+#~ msgid "Disable slideshow on property page."
+#~ msgstr "Diashow auf der Objektseite deaktivieren."
+
+#~ msgid "Some Slideshow Options"
+#~ msgstr "Einige Diashow-Optionen"
+
+#~ msgid "WPP Slideshow"
+#~ msgstr "WPP Diashow"
+
+#~ msgid "WPP Slideshow with options"
+#~ msgstr "WPP Diashow mit Optionen"
+
+#~ msgid "Property Types"
+#~ msgstr "Arten von Immobilien"
+
+#~ msgid ""
+#~ "<p>Create new property types using this menu. </p>\n"
+#~ "\t\t\t\t<p>The <b>slug</b> is automatically created from the title and is "
+#~ "used in the back-end.  It is also used for template selection, example: "
+#~ "floorplan will look for a template called property-floorplan.php in your "
+#~ "theme folder, or default to property.php if nothing is found.</p>\n"
+#~ "\t\t\t\t<p>If <b>Searchable</b> is checked then the property will be "
+#~ "loaded for search, and available on the property search widget.</p>\n"
+#~ "\t\t\t\t<p>If <b>Location Matters</b> is checked, then an address field "
+#~ "will be displayed for the property, and validated against Google Maps "
+#~ "API.  Additionally, the property will be displayed on the SuperMap, if "
+#~ "the feature is installed.</p>\n"
+#~ "\t\t\t\t<p><b>Hidden Attributes</b> determine which attributes are not "
+#~ "applicable to the given property type, and will be grayed out in the back-"
+#~ "end.</p>\n"
+#~ "\t\t\t\t<p><b>Inheritance</b> determines which attributes should be "
+#~ "automatically inherited from the parent property.</p>"
+#~ msgstr ""
+#~ "<p>Erstellen Sie neue Immobilienarten indem Sie dieses Menü benutzen. </"
+#~ "p>\n"
+#~ "\t\t\t\t<p>Die <b>Titelform</b> wird automatisch aus dem Titel erzeugt "
+#~ "und wird im Back-End benutzt. Es wird auch für die Vorlagenauswahl "
+#~ "benutzt, z.B.: der Grundriss wird nach einer Vorlage in Ihrem Themen-"
+#~ "Ordner gesucht, der mit property-floorplan.php benannt ist oder "
+#~ "standardgemäß nach property.php falls nichts gefunden wurde.</p>\n"
+#~ "\t\t\t\t<p>Wenn <b>Suchbar</b> markiert ist, ist das Objekt für die Suche "
+#~ "geladen  und auf dem Immobilien-Such-Widget verfügbar.</p>\n"
+#~ "\t\t\t\t<p>Wenn <b>Ort ist von Bedeutung</b> markiert ist, dann wird ein "
+#~ "Adressenfeld für das Objekt dargestellt und mit den Daten des Google Maps "
+#~ "API verglichen. Zusätzlich, falls die Funktion installiert ist, wird das "
+#~ "Objekt auf der Supermap dargestellt.</p>\n"
+#~ "\t\t\t\t<p><b>Verborgene Attribute</b> bestimmen welche Attribute nicht "
+#~ "anwendbar sind für die gegebene Immobilienart und wird im Back-End "
+#~ "ausgegraut.</p>\n"
+#~ "\t\t\t\t<p><b>Vererbbar</b> bestimmt welche Attribute automatisch von dem "
+#~ "übergeordneten Objekt übernommen werden sollen.</p>"
+
+#~ msgid "input"
+#~ msgstr "Input"
+
+#~ msgid "range (input)"
+#~ msgstr "Bereich (Input)"
+
+#~ msgid "dropdown"
+#~ msgstr "Ausgliederung"
+
+#~ msgid "Show common values."
+#~ msgstr "Gemeinsame Werte anzeigen."
+
+#~ msgid "Cancel."
+#~ msgstr "Abbruch."
+
+#~ msgid "Plugins"
+#~ msgstr "Plugins"
+
+#~ msgid "Troubleshooting"
+#~ msgstr "Fehlerbehebung"
+
+#~ msgid "View list of available shortcodes."
+#~ msgstr "Die Liste verfügbarer Shortcodes anzeigen."
+
+#~ msgid "These are the general display settings"
+#~ msgstr "Allgemeine Einstellungen für die Darstellung"
+
+#~ msgid ""
+#~ "After adding/removing image size, be sure to <a href=\"%s\">regenerate "
+#~ "thumbnails</a> using the Regenerate Thumbnails plugin."
+#~ msgstr ""
+#~ "Vergewissern Sie sich, nach dem Hinzufügen/Entfernen der Größe für "
+#~ "Abbildungen, die <a href=\"%s\">regenerate thumbnails</a> durch die "
+#~ "Nutzung des Thumbnails-Erneuerungs-Plugins zu erneuern."
+
+#~ msgid ""
+#~ "We strongly recommend to <a href=\"http://wordpress.org/extend/plugins/"
+#~ "regenerate-thumbnails/\">Regenerate Thumbnails</a> plugin by Viper007Bond."
+#~ msgstr ""
+#~ "Wir empfehlen wärmstens das <a href=\"http://wordpress.org/extend/plugins/"
+#~ "regenerate-thumbnails/\">Regenerate Thumbnails</a> Plugin von "
+#~ "Viper007Bond."
+
+#~ msgid ""
+#~ "Display larger image, or slideshow, at the top of the property listing."
+#~ msgstr ""
+#~ "Größere Abbildungen oder Diashow am Anfang der Objekt-Auflistung "
+#~ "darstellen."
+
+#~ msgid "These settings are for the main property page on the back-end."
+#~ msgstr ""
+#~ "Diese Einstellungen sind für die Hauptobjektseite auf dem Back-End "
+#~ "bestimmt."
+
+#~ msgid ""
+#~ "Premium features will become available shortly, we are still waiting on "
+#~ "more feedback on the core of the plugin."
+#~ msgstr ""
+#~ "Premium-Funktionen werden in Kürze verfügbar sein, wir warten noch auf "
+#~ "mehr Rückinformationen über den Kern des Plugins."
+
+#~ msgid "[learn more]"
+#~ msgstr "[mehr]"

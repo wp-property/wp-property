@@ -1,0 +1,97 @@
+/**
+ *
+ */
+.wpp-json-viewer {
+  font-size: 12px;
+  height: 600px;
+  line-height: 1.1em;
+  margin-top: 17px;
+  overflow: scroll;
+  padding: 6px;
+  width: auto;
+  overflow-x: hidden;
+}
+.wpp-json-viewer .jjson-container {
+  font-size: 13px;
+  line-height: 1.2;
+  font-family: monospace;
+  padding-left: 0;
+  margin-left: 20px;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+.wpp-json-viewer .jjson-container,
+.wpp-json-viewer .jjson-container ul {
+  list-style: none !important;
+}
+.wpp-json-viewer .jjson-container ul {
+  padding: 0px !important;
+  padding-left: 20px !important;
+  margin: 0px !important;
+}
+.wpp-json-viewer .jjson-container li {
+  position: relative;
+}
+.wpp-json-viewer .jjson-container > li > .key,
+.wpp-json-viewer .jjson-container .array .key {
+  display: none;
+}
+.wpp-json-viewer .jjson-container .array .object .key {
+  display: inline;
+}
+.wpp-json-viewer .jjson-container li:after {
+  content: ",";
+}
+.wpp-json-viewer .jjson-container li:last-child:after {
+  content: "";
+}
+.wpp-json-viewer .jjson-container .null {
+  color: #999;
+}
+.wpp-json-viewer .jjson-container .string {
+  color: #4e9a06;
+}
+.wpp-json-viewer .jjson-container .number {
+  color: #a40000;
+}
+.wpp-json-viewer .jjson-container .boolean {
+  color: #c4a000;
+}
+.wpp-json-viewer .jjson-container .key {
+  color: #204a87;
+}
+.wpp-json-viewer .jjson-error {
+  margin: 10px;
+  color: #ef3e3e;
+}
+.wpp-json-viewer .jjson-container .expanded {
+  cursor: pointer;
+}
+.wpp-json-viewer .jjson-container .expanded:before {
+  content: "-";
+  font-size: 1.2em;
+  width: 13px;
+  text-align: center;
+  line-height: 13px;
+  font-family: sans-serif;
+  color: #933;
+  position: absolute;
+  left: -15px;
+  top: 3px;
+}
+.wpp-json-viewer .jjson-container .collapsed:before {
+  content: "+";
+  font-size: 1.1em;
+  color: #000;
+  top: 1px;
+}
+.wpp-json-viewer .jjson-container li .collapsed ~ .close:before {
+  content: "... ";
+  color: #999;
+}
+.wpp-json-viewer .jjson-container .hidden ~ ul {
+  display: none;
+}
+.wpp-json-viewer .jjson-container span {
+  position: static !important;
+}

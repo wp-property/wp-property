@@ -1,0 +1,531 @@
+/**
+ * Markdown
+ *
+ *
+ */
+body.udx-markdown {
+  background: #ffffff;
+  margin: 0px;
+  padding: 0px;
+  font-size: 12px;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-weight: normal;
+  color: #444444;
+
+  .container {
+    width: 960px;
+    margin: 0px auto;
+  }
+
+  .slider-wrapper {
+    background: #FFF;
+    border-top: 1px solid #ededed;
+    border-bottom: 1px solid #ededed;
+  }
+
+  img {
+    border: 0;
+    outline: 0;
+  }
+
+  .clear {
+    clear: both;
+    height: 0 !important;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0px;
+  }
+
+  h1 {
+    font-size: 30px;
+    font-weight: normal;
+  }
+
+  h1.page-header {
+    border-top: 1px solid #EFEFEF;
+    border-bottom: 1px solid #EFEFEF;
+    padding: 20px 0px;
+    margin: 0 0 40px 0;
+    color: #555555;
+  }
+
+  h2 {
+    font-size: 28px;
+    font-weight: normal;
+    color: #ACB3BA;
+  }
+
+  h3 {
+    font-size: 24px;
+    font-weight: normal;
+    margin: 0 0 8px 0;
+  }
+
+  h4 {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  h5 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  h6 {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  a {
+    outline: none;
+    color: #429CB3;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #f26535;
+  }
+
+  pre {
+    border: 1px solid #dddddd;
+    padding: 15px;
+    font-size: 10px;
+    margin: 0 0 20px 0;
+  }
+
+  blockquote {
+    padding: 15px;
+    border: 1px solid #dddddd;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-style: italic;
+    margin: 0 0 20px 0;
+    font-size: 18px;
+    line-height: 34px;
+  }
+
+  blockquote span {
+    font-size: 34px;
+  }
+
+  p {
+    color: #777777;
+    line-height: 23px;
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  p strong {
+    color: #454545;
+  }
+
+  p.justify {
+    text-align: justify;
+  }
+
+  .grid p {
+    margin-bottom: 20px;
+  }
+
+  /*-----------------------------------------------------------------------------------*/
+  /*	Header CSS
+  /*-----------------------------------------------------------------------------------*/
+
+  #header {
+    padding: 5px 0 5px 0;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    background: #F8F8F8;
+    height: 25px;
+  }
+
+  #header span.separator,
+  #header a {
+    font-weight: normal;
+    color: #000;
+    opacity: 0.6;
+    float: right;
+    margin-left: 0.6em;
+  }
+
+  .header-right {
+    float: right;
+    width: 243px;
+    margin: 5px 0 0 0;
+  }
+
+  #bottom-content {
+    background-color: #F2F2F2;
+  }
+
+  /*-----------------------------------------------------------------------------------*/
+  /*	Content
+  /*-----------------------------------------------------------------------------------*/
+
+  .slide-break {
+    color: transparent;
+  }
+
+  .cloud-container {
+    width: 874px;
+    height: 318px;
+  }
+
+  .cloud-container .cloud-icons {
+    height: 318px;
+    position: absolute;
+    left: 0;
+    top: 30;
+    width: 580px;
+  }
+
+  .app-cloud {
+    margin-bottom: 50px;
+    z-index: 5;
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 318px;
+  }
+
+  #clouds-460 {
+    margin: 0 0 30px 0;
+  }
+
+  /*-----------------------------------------------------------------------------------*/
+  /*	Swagger Explorer
+  /*-----------------------------------------------------------------------------------*/
+
+  div.gist {
+    margin: 20px 0 25px 0 !important
+  }
+
+  p.big,
+  div.big p {
+    font-size: 1em;
+    margin-bottom: 10px;
+  }
+
+  span.weak {
+    color: #666666
+  }
+
+  span.blank,
+  span.empty {
+    color: #888888;
+    font-style: italic;
+  }
+
+  a {
+    color: #547f00
+  }
+
+  strong {
+    font-family: "Droid Sans", sans-serif;
+    font-weight: bold;
+    font-weight: bold;
+  }
+
+  .code {
+    font-family: "Anonymous Pro", "Menlo", "Consolas", "Bitstream Vera Sans Mono", "Courier New", monospace
+  }
+
+  pre {
+    /* white-space: pre-line */;
+    background-color: #fcf6db;
+    border: 1px solid black;
+    border-color: #e5e0c6;
+    font-family: "Anonymous Pro", "Menlo", "Consolas", "Bitstream Vera Sans Mono", "Courier New", monospace;
+    padding: 10px;
+  }
+
+  .required {
+    font-weight: bold
+  }
+
+  table.fullwidth {
+    width: 100%
+  }
+
+  form.form_box {
+    background-color: #ebf3f9;
+    border: 1px solid black;
+    border-color: #c3d9ec;
+    padding: 10px;
+  }
+
+  form.form_box input[type=submit] {
+    display: block;
+    padding: 10px;
+  }
+
+  form.form_box p.weak {
+    font-size: 0.8em
+  }
+
+  form.form_box label {
+    color: #0f6ab4 !important
+  }
+
+  form.form_box p {
+    color: #7e7b6d;
+    font-size: 0.9em;
+    padding: 0 0 15px 0;
+  }
+
+  form.form_box p strong {
+    color: black
+  }
+
+  form.form_box p a {
+    color: #646257
+  }
+
+  form.formtastic fieldset.inputs ol li p.inline-hints {
+    font-size: 0.9em;
+    font-style: italic;
+    margin: 0;
+    margin-left: 0;
+  }
+
+  form.formtastic fieldset.inputs ol li label {
+    clear: both;
+    color: #666666;
+    display: block;
+    padding: 0 0 3px 0;
+    width: auto;
+  }
+
+  form.formtastic fieldset.inputs ol li label abbr {
+    color: #888888;
+    padding-left: 3px;
+  }
+
+  form.formtastic fieldset.inputs ol li.required label {
+    color: black
+  }
+
+  form.formtastic fieldset.inputs ol li.string input,
+  form.formtastic fieldset.inputs ol li.url input,
+  form.formtastic fieldset.inputs ol li.numeric input {
+    clear: both;
+    display: block;
+    padding: 4px;
+    width: auto;
+  }
+
+  form.formtastic fieldset.inputs ol li.string input.title,
+  form.formtastic fieldset.inputs ol li.url input.title,
+  form.formtastic fieldset.inputs ol li.numeric input.title {
+    font-size: 1.3em
+  }
+
+  form.formtastic fieldset.inputs ol li.text textarea {
+    clear: both;
+    display: block;
+    font-family: "Droid Sans", sans-serif;
+    height: 250px;
+    padding: 4px;
+  }
+
+  form.formtastic fieldset.inputs ol li.select select {
+    clear: both;
+    display: block;
+  }
+
+  form.formtastic fieldset.inputs ol li.boolean {
+    clear: both;
+    display: block;
+    float: none;
+    overflow: hidden;
+  }
+
+  form.formtastic fieldset.inputs ol li.boolean label {
+    clear: none;
+    display: block;
+    float: left;
+    margin: 0;
+    padding: 0;
+  }
+
+  form.formtastic fieldset.inputs ol li.boolean input {
+    clear: none;
+    display: block;
+    float: left;
+    margin: 0 5px 0 0;
+  }
+
+  form.formtastic fieldset.buttons {
+    margin: 0;
+    padding: 0;
+  }
+
+  form.fullwidth ol li.string input,
+  form.fullwidth ol li.url input,
+  form.fullwidth ol li.text textarea,
+  form.fullwidth ol li.numeric input {
+    width: 500px !important
+  }
+
+  body {
+    font-family: "Droid Sans", sans-serif
+  }
+
+  .swagger-ui-wrap {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 960px;
+  }
+
+  .icon-btn {
+    cursor: pointer
+  }
+
+  #message-bar {
+    text-align: center;
+    margin-top: 20px;
+    border-radius: 10px;
+    line-height: 60px;
+  }
+
+  .message-success {
+    color: #89BF04;
+    background: rgba(0, 0, 0, 0.04);
+
+  }
+
+  .message-fail {
+    background: rgba(0, 0, 0, 0.04);
+
+    color: #cc0000
+  }
+
+  .base_url {
+    display: none
+  }
+
+  /**
+   *  Very Small Screens (iPhone 3)
+   *
+   */
+  @media ( max-width: 480px ) {
+
+    .phone-only {
+      display: block;
+    }
+
+  }
+
+  /**
+   * {description missing}
+   *
+   */
+  @media ( max-width: 767px ) {
+
+    body {
+      padding: 10px;
+    }
+
+    body #header a#logo {
+      display: none;
+    }
+
+    body #header form#api_selector .input input#input_baseurl {
+      width: 250px;
+    }
+
+    #swagger-ui-container {
+      padding: 20px;
+    }
+
+    body ul#resources li.resource div.heading ul.options {
+      display: none;
+    }
+
+    .hidden-phone {
+      display: none;
+    }
+
+  }
+
+  /*-----------------------------------------------------------------------------------*/
+  /*	Footer CSS
+  /*-----------------------------------------------------------------------------------*/
+
+  #footer {
+    min-height: 120px;
+    padding: 20px 0 0 0;
+    color: #6F6F6F;
+    line-height: 24px;
+    background: #F2F2F2;
+    border-top: 1px solid #EDEDED;
+  }
+
+  #footer-right {
+    float: right;
+    text-align: right;
+    line-height: 26px;
+  }
+
+  #footer .social {
+    margin: 0 0 0 20px;
+  }
+
+  #logo.container {
+    padding: 100px 0 150px 0;
+  }
+
+  #logo .product {
+    display: block;
+    font: 400 60px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #353535;
+    width: 100%;
+  }
+
+  #logo .version {
+    font-style: italic;
+    font-weight: 100;
+    font-size: 50px;
+    color: #999;
+    margin-left: 5px;
+  }
+
+  #logo .description {
+    position: relative;
+    top: 15px;
+    font: 100 30px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #CECECE;
+    line-height: .75;
+    max-width: 600px;
+    display: block;
+  }
+
+  /**
+   * iPads, mid-size Tablets and iPhone 4, but not iPhone 3
+   *
+   */
+  @media ( min-width: 768px ) and ( max-width: 979px ) {
+
+    .hidden-tablet {
+      display: none;
+    }
+
+  }
+
+  /**
+   * iPads and mid-size Tablets and Phones
+   *
+   * Screens below this size have a collapsed Navbar.
+   *
+   */
+  @media ( max-width: 979px ) {
+
+    .hidden-mobile {
+      display: none;
+    }
+
+  }
+
+}

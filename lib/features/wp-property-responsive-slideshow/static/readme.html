@@ -1,0 +1,338 @@
+<!DOCTYPE  html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>doc</title>
+    <style>
+      /*github.com style (c) Vasily Polovnyov <vast@whiteants.net>*/
+      pre code {
+        display: block; padding: 0.5em;
+        color: #333;
+        background: #f8f8ff
+      }
+      pre .comment,
+      pre .template_comment,
+      pre .diff .header,
+      pre .javadoc {
+        color: #998;
+        font-style: italic
+      }
+      pre .keyword,
+      pre .css .rule .keyword,
+      pre .winutils,
+      pre .javascript .title,
+      pre .nginx .title,
+      pre .subst,
+      pre .request,
+      pre .status {
+        color: #333;
+        font-weight: bold
+      }
+      pre .number,
+      pre .hexcolor,
+      pre .ruby .constant {
+        color: #099;
+      }
+      pre .string,
+      pre .tag .value,
+      pre .phpdoc,
+      pre .tex .formula {
+        color: #d14
+      }
+      pre .title,
+      pre .id {
+        color: #900;
+        font-weight: bold
+      }
+      pre .javascript .title,
+      pre .lisp .title,
+      pre .clojure .title,
+      pre .subst {
+        font-weight: normal
+      }
+      pre .class .title,
+      pre .haskell .type,
+      pre .vhdl .literal,
+      pre .tex .command {
+        color: #458;
+        font-weight: bold
+      }
+      pre .tag,
+      pre .tag .title,
+      pre .rules .property,
+      pre .django .tag .keyword {
+        color: #000080;
+        font-weight: normal
+      }
+      pre .attribute,
+      pre .variable,
+      pre .lisp .body {
+        color: #008080
+      }
+      pre .regexp {
+        color: #009926
+      }
+      pre .class {
+        color: #458;
+        font-weight: bold
+      }
+      pre .symbol,
+      pre .ruby .symbol .string,
+      pre .lisp .keyword,
+      pre .tex .special,
+      pre .prompt {
+        color: #990073
+      }
+      pre .built_in,
+      pre .lisp .title,
+      pre .clojure .built_in {
+        color: #0086b3
+      }
+      pre .preprocessor,
+      pre .pi,
+      pre .doctype,
+      pre .shebang,
+      pre .cdata {
+        color: #999;
+        font-weight: bold
+      }
+      pre .deletion {
+        background: #fdd
+      }
+      pre .addition {
+        background: #dfd
+      }
+      pre .diff .change {
+        background: #0086b3
+      }
+      pre .chunk {
+        color: #aaa
+      }
+    </style>
+  </head>
+  <body>  
+    <h3 id="wp-property-responsive-slideshow-plugin">WP-Property: Responsive Slideshow Plugin</h3>
+<p>Responsive Slideshow for WP-Property plugin</p>
+<hr>
+<p><a href="http://waffle.io/wp-property/wp-property-responsive-slideshow"><img src="https://badge.waffle.io/wp-property/wp-property-responsive-slideshow.png?label=bug&amp;title=Bugs" alt="Issues - Bug"></a>
+<a href="http://waffle.io/wp-property/wp-property-responsive-slideshow/"><img src="https://badge.waffle.io/wp-property/wp-property-responsive-slideshow.png?label=backlog&amp;title=Backlog" alt="Issues - Backlog"></a>
+<a href="http://waffle.io/wp-property/wp-property-responsive-slideshow/"><img src="https://badge.waffle.io/wp-property/wp-property-responsive-slideshow.png?label=in progress&amp;title=Active" alt="Issues - Active"></a></p>
+<hr>
+<h2 id="requirements">Requirements</h2>
+<p>This Required install wp property installed**.</p>
+<p>This plugin contains a <code>composer.json</code> file for those of you who manage your PHP dependencies with <a href="https://getcomposer.org">Composer</a>.</p>
+<h2 id="shortcode-reference">Shortcode Reference</h2>
+<p>Shortcode: <code>[property_responsive_slideshow]</code></p>
+<h1 id="usage">Usage</h1>
+<h4 id="parameters">parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Name</th>
+<th>Short Description</th>
+<th>Values</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#property_id">property_id</a></td>
+<td>Property ID</td>
+<td>ID of property to show.</td>
+<td>Property ID</td>
+<td>Current property</td>
+</tr>
+<tr>
+<td><a href="#slideshow_layout">slideshow_layout</a></td>
+<td>Slideshow layout</td>
+<td>Slideshow layout</td>
+<td>auto, strict, fullwidth</td>
+<td>auto</td>
+</tr>
+<tr>
+<td><a href="#slideshow_type">slideshow_type</a></td>
+<td>Slideshow Types</td>
+<td>Type of slideshow</td>
+<td>standard, thumbnailCarousel</td>
+<td>thumbnailCarousel</td>
+</tr>
+<tr>
+<td><a href="#slider_type">slider_type</a></td>
+<td>Slider Type</td>
+<td>Type of slider</td>
+<td>standard, carousel, 12grid, 12mosaic</td>
+<td>standard</td>
+</tr>
+<tr>
+<td><a href="#grid_image_size">grid_image_size</a></td>
+<td>Image size for grid</td>
+<td>Image size for 12grid and 12mosaic.</td>
+<td>Image sizes</td>
+<td>medium</td>
+</tr>
+<tr>
+<td><a href="#slider_width">slider_width</a></td>
+<td>Slider Width</td>
+<td>Set width of the slideshow</td>
+<td>in px or %</td>
+<td>none</td>
+</tr>
+<tr>
+<td><a href="#slider_auto_height">slider_auto_height</a></td>
+<td>Slider Auto Height</td>
+<td>Automatic height based on image size.</td>
+<td>true, false</td>
+<td>false</td>
+</tr>
+<tr>
+<td><a href="#slider_height">slider_height</a></td>
+<td>Slider Height</td>
+<td>Set Slider height</td>
+<td>in px or %</td>
+<td>16:9</td>
+</tr>
+<tr>
+<td><a href="#slider_min_height">slider_min_height</a></td>
+<td>Slider Minimum Height</td>
+<td>Minimum slider height.</td>
+<td>in px or %</td>
+<td>none</td>
+</tr>
+<tr>
+<td><a href="#slider_max_height">slider_max_height</a></td>
+<td>Slider Maximum Height</td>
+<td>Maximum slider height.</td>
+<td>in px or %</td>
+<td>none</td>
+</tr>
+<tr>
+<td><a href="#lb_title_1">lb_title_1</a></td>
+<td>Lightbox Title line 1</td>
+<td>Lightbox Title line 1. Select any attribute.</td>
+<td>attributes</td>
+<td>none</td>
+</tr>
+<tr>
+<td><a href="#lb_title_2">lb_title_2</a></td>
+<td>Lightbox Title line 2</td>
+<td>Lightbox Title line 2. Select any attribute.</td>
+<td>attributes</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h4 id="property_id">property_id</h4>
+<p>If not empty, Slideshow will show for particular property, which ID is set. If not provided will show slideshow for current property.</p>
+<h4 id="slideshow_layout">slideshow_layout</h4>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Name</th>
+<th>Description                            </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>auto</td>
+<td>Responsive</td>
+<td>Responsive slideshow. It take width of container and get height from height parameter.</td>
+</tr>
+<tr>
+<td>strict</td>
+<td>Strict</td>
+<td>Apply the exact width and height of the slider based on the slider_width and slider_height parameters.</td>
+</tr>
+<tr>
+<td>fullwidth</td>
+<td>Full Width</td>
+<td>Force the width of the slider to always fill the full browser width. The height will still be calculated via slider_height or via slider_auto_height if enabled.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="slideshow_type">slideshow_type</h4>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>standard</td>
+<td>Standard Slideshow</td>
+<td>Slideshow without thumbnail carousel.  </td>
+</tr>
+<tr>
+<td>thumbnailCarousel</td>
+<td>Thumbnail Carousel Slideshow</td>
+<td>Slideshow with thumbnail carousel.     </td>
+</tr>
+</tbody>
+</table>
+<h4 id="slider_type">slider_type</h4>
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>standard</td>
+<td>Standard Slider</td>
+<td>The Standard Slider shows one slide at a time.</td>
+</tr>
+<tr>
+<td>carousel</td>
+<td>Carousel Slider</td>
+<td>It shows previews of the previous and next images. If have space.</td>
+</tr>
+<tr>
+<td>12grid</td>
+<td>1:2 Grid Slider</td>
+<td>One large image followed by stacked smaller images.</td>
+</tr>
+<tr>
+<td>12mosaic</td>
+<td>1:2 Mosaic Slider</td>
+<td>Same as 1:2 Grid Slider but slide with be automatic based on aspect ration.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="grid_image_size">grid_image_size</h4>
+<h5 id="image-size-for-grid">Image size for grid</h5>
+<p>Image size for 12grid and 12mosaic. Will not apply on first image.</p>
+<h4 id="slider_width">slider_width</h4>
+<h5 id="slider-width">Slider Width</h5>
+<p>Set width of the slideshow. 
+Dependency Only work with strict slideshow layout.</p>
+<h4 id="slider_auto_height">slider_auto_height</h4>
+<h5 id="slider-auto-height">Slider Auto Height</h5>
+<p>Allows the height of the carousel to adjust based on the image size. If the image size is short or tall, the carousel will rollup/rolldown to new height.
+Dependency Not work with grid slider type. Ex. 1:2 Grid Slider or 1:2 Mosaic Slider</p>
+<h4 id="slider_height">slider_height</h4>
+<h5 id="slider-height">Slider Height</h5>
+<p>Sets the height of the slider container.
+Ignore if slider_auto_height parameter is set. When slideshow layout is not strict slider_width and slider_height is use to calculate ratio and use slider width as base to calculate height.</p>
+<h4 id="slider_min_height">slider_min_height</h4>
+<h5 id="slider-minimum-height">Slider Minimum Height</h5>
+<p>Sets the minimum height of the slider.</p>
+<h4 id="slider_max_height">slider_max_height</h4>
+<h5 id="slider-maximum-height">Slider Maximum Height</h5>
+<p>Sets the maximum height of the slider.</p>
+<h4 id="lb_title_1">lb_title_1</h4>
+<h5 id="lightbox-title-line-1">Lightbox Title line 1</h5>
+<p>You can provide one or more attribute to show on lightbox title on line no 1. You need to separate with comma(,) if you provide more than one attribute. You can find attributes on Developer tab on setting page of Property.</p>
+<h4 id="lb_title_2">lb_title_2</h4>
+<h5 id="lightbox-title-line-2">Lightbox Title line 2</h5>
+<p>You can provide one or more attribute to show on lightbox title on line no 2. You need to separate with comma(,) if you provide more than one attribute. You can find attributes on Developer tab on setting page of Property.</p>
+
+  </body>
+</html>

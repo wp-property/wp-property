@@ -1,0 +1,374 @@
+{
+  "name": "wp-property/wp-property",
+  "type": "wordpress-plugin",
+  "minimum-stability": "dev",
+  "homepage": "https://www.usabilitydynamics.com/product/wp-property",
+  "author": {
+    "name": "UsabilityDynamics, Inc.",
+    "url": "https://www.usabilitydynamics.com"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "github-protocols": [ "ssh" ],
+    "vendor-dir": "vendor/libraries",
+    "bin-dir": "vendor/bin",
+    "optimize-autoloader": true
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://repository.usabilitydynamics.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3",
+    "usabilitydynamics/lib-ui": "0.3.4",
+    "usabilitydynamics/lib-utility": "0.3.7",
+    "usabilitydynamics/lib-settings": "0.2.3",
+    "usabilitydynamics/lib-wp-saas-util": "1.0.5",
+    "usabilitydynamics/lib-wp-bootstrap": "1.2.1",
+    "usabilitydynamics/lib-ud-api-client": "1.1.5.1",
+    "usabilitydynamics/lib-wp-list-table": "1.0.8",
+    "usabilitydynamics/lib-wp-shortcode": "0.1.2",
+    "usabilitydynamics/wp-tax-post-binding": "2.0.5",
+    "rets-ci/wp-rets-client": "dev-latest",
+    "freemius/wordpress-sdk": "^1.1.7",
+    "ccampbell/chromephp": "^4.1",
+    "10up/elasticpress": "^2.1"
+  },
+  "require-dev": {
+    "usabilitydynamics/lib-wp-phpunit": "master",
+    "codeclimate/php-test-reporter": "dev-master"
+  },
+  "autoload": {
+    "classmap": [ "lib/classes" ]
+  },
+  "archive": {
+    "exclude": [
+      ".gitignore",
+      ".scrutinizer.yml",
+      "alpha.php",
+      "beta.php",
+      "build.sh",
+      "makefile",
+      "node_modules",
+      "test",
+      "static/cache",
+      "static/wiki",
+      "circle.yml",
+      "composer.lock",
+      "gruntfile.js",
+      "vendor/libraries/usabilitydynamics/lib-ui/static/scripts/src",
+      "vendor/libraries/usabilitydynamics/lib-ui/static/scripts/editor",
+      "vendor/libraries/usabilitydynamics/lib-ui/static/styles/src",
+      "vendor/libraries/usabilitydynamics/lib-ui/static/test",
+      "vendor/libraries/usabilitydynamics/lib-ui/static/examples",
+      "vendor/libraries/usabilitydynamics/lib-ud-api-client/static/css/src",
+      "vendor/libraries/usabilitydynamics/lib-settings/test",
+      "vendor/libraries/usabilitydynamics/lib-utility/test",
+      "vendor/libraries/usabilitydynamics/lib-utility/scripts/src",
+      "package.json"
+    ]
+  },
+  "extra": {
+    "_build": {},
+    "installer-paths": {
+      "vendor/plugins/{$name}": [
+        "type:wordpress-muplugin",
+        "type:wordpress-plugin",
+        "type:wpackagist-plugin"
+      ],
+      "vendor/modules/{$name}": [
+        "type:wordpress-module"
+      ],
+      "vendor/libraries/{$vendor}/{$name}": [
+        "type:wordpress-library"
+      ]
+    },
+    "featureFlags": [
+      {
+        "name": "Layouts",
+        "constant": "WP_PROPERTY_LAYOUTS",
+        "description": "Layouts for WP Property. When enabled, disabled legacy Sidebars and PHP Templates.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Legacy widgets",
+        "constant": "WPP_LEGACY_WIDGETS",
+        "description": "Enable to use legacy widgets",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
+        "name": "Setup Assistant",
+        "constant": "WP_PROPERTY_SETUP_ASSISTANT",
+        "description": "Automated setup assistant.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Freemius",
+        "constant": "WPP_FEATURE_FLAG_FREEMIUS",
+        "description": "Freemius for WP Property",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Settings Backups",
+        "constant": "WPP_FEATURE_FLAG_SETTINGS_BACKUPS",
+        "description": "Enables automaic backups of the WP-Property settings. Backups stored in [wpp_property_backups] option.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Settings Version 2",
+        "constant": "WPP_FEATURE_FLAG_SETTINGS_V2",
+        "description": "",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
+        "name": "Disable Editor",
+        "constant": "WPP_FEATURE_FLAG_DISABLE_EDITOR",
+        "description": "Disables native WordPress post editor.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Listing Policies",
+        "constant": "WPP_FEATURE_FLAG_WPP_LISTING_POLICY",
+        "description": "Sets listing display permissions, stored in [wpp_listing_policy].",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Schools Standard Taxonomy",
+        "constant": "WPP_FEATURE_FLAG_WPP_SCHOOLS",
+        "description": "Adds standard taxonomy for schools as [wpp_schools].",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Listing Labels",
+        "constant": "WP_PROPERTY_FLAG_WPP_LISTING_LABEL",
+        "description": "Property flags, for highlighting important information, stored in [wpp_listing_label]. Can be used to identify 'featured' properties.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Standard Location Taxonomy",
+        "constant": "WPP_FEATURE_FLAG_WPP_LISTING_LOCATION",
+        "description": "Standard property location taxonomy, stored in [wpp_location].",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Advanced Rewrite Rules",
+        "constant": "WPP_FEATURE_FLAG_ADVANCED_REWRITE_RULES",
+        "description": "Improved rewrite rules.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Landing Page Categories",
+        "constant": "WPP_FEATURE_FLAG_WPP_LISTING_CATEGORY",
+        "description": "Dynamic terms for landing pages, stored in [wpp_listing_category].",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Standard Property Type",
+        "constant": "WPP_FEATURE_FLAG_WPP_LISTING_TYPE",
+        "description": "Standard property type taxonomy, stored in [wpp_listing_type].",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Standard Property Status",
+        "constant": "WPP_FEATURE_FLAG_WPP_LISTING_STATUS",
+        "description": "Standard property status taxonomy [wpp_listing_status].",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Rooms",
+        "constant": "WPP_FEATURE_FLAG_WPP_ROOMS",
+        "description": "Adds UI for adding standard rooms.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Categorical Taxonomy",
+        "constant": "WPP_FEATURE_FLAG_WPP_CATEGORICAL",
+        "description": "Taxonomy for general property terms, stored in [wpp_categorical]",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Field Aliases",
+        "constant": "WP_PROPERTY_FIELD_ALIAS",
+        "description": "Meta aliases for WP-Property.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Meta Attributes",
+        "constant": "WP_PROPERTY_LEGACY_META_ATTRIBUTES",
+        "description": "Legacy Meta fields. In v2.2.1 meta fields have been merged with attributes. This includes default Phone Number.",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
+        "name": "Legacy Attribute Input Types",
+        "constant": "WP_PROPERTY_LEGACY_ATTRIBUTE_INPUT_TYPES",
+        "description": "Enables legacy input types such as radio, wysiwyg, etc.",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
+        "name": "Enable Supermap Feature",
+        "constant": "WP_PROPERTY_FLAG_ENABLE_SUPERMAP",
+        "description": "Enable Supermap feature.",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
+        "name": "Enable Agents Feature",
+        "constant": "WP_PROPERTY_FLAG_ENABLE_AGENTS",
+        "description": "Enable Agent management.",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
+        "name": "Enable Responsive Slideshow Feature",
+        "constant": "WP_PROPERTY_RESPONSIVE_SLIDESHOW",
+        "description": "Responsive slideshow feature, use [property_responsive_slideshow] shortcode.",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
+        "name": "Enable Terms Feature",
+        "constant": "WP_PROPERTY_FLAG_ENABLE_TERMS",
+        "description": "Enable Terms management.",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
+        "name": "Enable Settings Search",
+        "constant": "WP_PROPERTY_SETTINGS_SEARCH",
+        "description": "Search settings.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Standard Attributes Matching and Terms",
+        "constant": "WP_PROPERTY_FLAG_ENABLE_STANDARD_ATTRIBUTES_MATCHING",
+        "description": "Enable Standard Attributes Matching and Terms.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "Legacy Taxonomies",
+        "constant": "WP_PROPERTY_FLAG_ENABLE_LEGACY_TAXONOMIES",
+        "description": "Enable legacy [property_features] and [community_features] taxonomies. These have been replaced by [wpp_categorical].",
+        "since": "2.2.1",
+        "enabled": true
+      },
+      {
+        "name": "Elasticsearch Service",
+        "constant": "WP_PROPERTY_ELASTICSEARCH_SERVICE",
+        "description": "Hosted Elasticsearch synchronization for listing data.",
+        "since": "2.2.1",
+        "enabled": false
+      },
+      {
+        "name": "RETSCI Client",
+        "constant": "RETSCI_FEATURE_FLAG",
+        "description": "Integrated WP-RETS Client plugin",
+        "since": "2.2.1",
+        "enabled": true
+      }
+    ],
+    "saasProduct": "prod_AB8hYwVjwdfiSJ",
+    "schemas": {
+      "dependencies" : {
+        "modules": {},
+        "plugins": []
+      },
+      "licenses" : {
+        "client" : {
+          "slug": "wp-property/wp-property",
+          "screen": {
+            "parent": "edit.php?post_type=property",
+            "page_title": "l10n.licenses_page_title",
+            "menu_title": "l10n.licenses_menu_title"
+          }
+        },
+        "product" : false
+      },
+      "standard_attributes":{
+        "pdf": {
+          "price": {
+            "label": "l10n.price",
+            "notice": ""
+          },
+          "address": {
+            "label": "l10n.address",
+            "notice": "This attribute will be used for automatic geolocation."
+          },
+          "bedrooms": {
+            "label": "l10n.bedrooms",
+            "notice": ""
+          },
+          "bathrooms": {
+            "label": "l10n.bathrooms",
+            "notice": ""
+          },
+          "living_space_size": {
+            "label": "l10n.living_space_size_sq_ft",
+            "notice": ""
+          },
+          "features": {
+            "label": "l10n.features",
+            "notice": ""
+          },
+          "community_features": {
+            "label": "l10n.community_features",
+            "notice": ""
+          }
+       },
+        "importer": {
+          "total_rooms": {
+            "label": "l10n.total_rooms",
+            "notice": ""
+          },
+          "year_built": {
+            "label": "l10n.year_built",
+            "notice": ""
+          },
+          "no_of_floors": {
+            "label": "l10n.no_of_floors",
+            "notice": ""
+          },
+          "lot_size_acres": {
+            "label": "l10n.lot_size_acres",
+            "notice": ""
+          },
+          "neighborhood": {
+            "label": "l10n.neighborhood_(term)",
+            "notice": ""
+          },
+          "fees": {
+            "label": "l10n.fees",
+            "notice": ""
+          },
+          "status": {
+            "label": "l10n.status",
+            "notice": ""
+          }
+        }
+      }
+    }
+  }
+}
