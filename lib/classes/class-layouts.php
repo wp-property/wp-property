@@ -45,6 +45,12 @@ namespace UsabilityDynamics\WPP {
       private $api_client;
 
       /**
+       * Is already layouts displayed flag
+       * @var bool
+       */
+      private $already_displayed = false;
+
+      /**
        * Layouts constructor.
        */
       public function __construct()  {
@@ -60,7 +66,7 @@ namespace UsabilityDynamics\WPP {
         ));
 
         // Identify page template to use.
-        add_filter('template_include', array($this, 'page_template'), 99);
+        add_filter('template_include', array($this, 'page_template'), 98);
 
         // Override Layout metadata.
         add_action( 'get_header', array( $this, 'get_header' ), 50 );
@@ -228,7 +234,7 @@ namespace UsabilityDynamics\WPP {
         }
 
         // Property Terms
-        if ( !is_property_overview_page() && is_tax() && get_queried_object() && get_queried_object()->taxonomy && in_array('property', get_taxonomy(get_queried_object()->taxonomy)->object_type) ) {
+        if ( !is_property_overview_page() && (is_tax() || (get_queried_object() && get_queried_object()->taxonomy && in_array('property', get_taxonomy(get_queried_object()->taxonomy)->object_type)))) {
           $_options['render_type'] = 'term-overview';
           $_options['layout_id'] = get_theme_mod('layouts_property_term_id', isset( $_layouts['term-overview'] ) ? reset($_layouts['term-overview'])->_id : null );
           $_options['template_file'] = get_theme_mod('layouts_term_overview_select', null );
@@ -406,6 +412,7 @@ namespace UsabilityDynamics\WPP {
        */
       public function page_template($template)
       {
+
         global $wp_query;
 
         $_layout = apply_filters('wpp::layouts::configuration', false);
@@ -500,6 +507,12 @@ namespace UsabilityDynamics\WPP {
        */
       public function the_content($data)
       {
+
+        /** Exclude situation of double layouts displayed fq.jony@UD */
+        if($this->already_displayed){
+          return $data;
+        }
+
         global $post;
 
         $render = apply_filters('wpp::layouts::configuration', false);
@@ -514,9 +527,10 @@ namespace UsabilityDynamics\WPP {
         }
 
         // $_layout_config = apply_filters('wpp::layouts::layout_override', false, $render, $post);
-       // $modified_data = $this->standard_render($render['layout_id'], $_layout_config);
+        // $modified_data = $this->standard_render($render['layout_id'], $_layout_config);
 
         if( isset( $modified_data ) ) {
+          $this->already_displayed = true;
           return $modified_data;
         }
 
