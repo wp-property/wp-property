@@ -68,9 +68,6 @@ class class_agents
       $wp_roles = new WP_Roles();
     }
 
-    $wp_roles->roles['agent']['name'] = ud_get_wp_property('configuration.feature_settings.agents.label.single', 'Agent');
-    $wp_roles->role_objects['agent']->name = ud_get_wp_property('configuration.feature_settings.agents.label.single', 'Agents'); // This will cover get_role() function;
-    $wp_roles->role_names['agent'] = ud_get_wp_property('configuration.feature_settings.agents.label.single', 'Agents');
 
     if (current_user_can(self::$capability)) {
       // Add settings page
