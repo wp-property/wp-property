@@ -50,6 +50,8 @@ namespace UsabilityDynamics\WPP {
        */
       private $already_displayed = false;
 
+      private $disable_buffering = false;
+
       /**
        * Layouts constructor.
        */
@@ -78,6 +80,8 @@ namespace UsabilityDynamics\WPP {
 
         // Add footer CSS. (Hopefully not used).
         add_action('wp_footer', array($this, 'panels_print_inline_css'));
+
+        $this->disable_buffering = defined('DISABLE_LAYOUTS_BUFFERING') && DISABLE_LAYOUTS_BUFFERING;
 
       }
 
@@ -610,6 +614,9 @@ namespace UsabilityDynamics\WPP {
         }
 
         $html = '';
+        if(!$this->disable_buffering){
+          ob_start();
+        }
 
         $panel_layout_classes = apply_filters('wpp::layouts::panels_layout_classes', array(), $post_id, $panels_data);
 
@@ -717,6 +724,9 @@ namespace UsabilityDynamics\WPP {
         }
 
         $html .= '</div>';
+        if(!$this->disable_buffering){
+          ob_get_clean();
+        }
 
         $html .= apply_filters('wpp::layouts::after_container', '</div>');
 
