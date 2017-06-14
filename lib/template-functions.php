@@ -269,6 +269,7 @@ if (!function_exists('prepare_property_for_display')):
     if (is_numeric($property)) {
 
       $property_id = $property;
+      $property = get_property($property);
 
     } elseif (is_object($property)) {
 

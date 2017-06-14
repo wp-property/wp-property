@@ -543,8 +543,18 @@ $l10n_id = get_option('wp-property-l10n-attachment');
 
                   <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][google_maps][infobox_settings][show_direction_link]&label=" . __('Show Directions Link', ud_get_wp_property()->domain), $wp_properties['configuration']['google_maps']['infobox_settings']['show_direction_link']); ?></li>
                   <li><?php echo WPP_F::checkbox("name=wpp_settings[configuration][google_maps][infobox_settings][do_not_show_child_properties]&label=" . sprintf(__('Do not show a list of child %1s in Infobox. ', ud_get_wp_property()->domain), WPP_F::property_label('plural')), isset( $wp_properties['configuration']['google_maps']['infobox_settings']['do_not_show_child_properties']) ? $wp_properties['configuration']['google_maps']['infobox_settings']['do_not_show_child_properties'] : false ); ?></li>
+                  <li><?php echo WPP_F::checkbox( "name=wpp_settings[configuration][google_maps][infobox_settings][show_child_property_attributes]&label=" . sprintf(__( 'Show attributes of child %1s in Infobox. ', ud_get_wp_property()->domain ),  WPP_F::property_label( 'plural' )), isset( $wp_properties['configuration']['google_maps']['infobox_settings']['show_child_property_attributes']) ? $wp_properties['configuration']['google_maps']['infobox_settings']['show_child_property_attributes'] : false ); ?></li>
                 </ul>
               </div>
+              <ul>
+                <li>
+                  <?php _e("Infobox window style", ud_get_wp_property()->domain) ?>:
+                  <select name="wpp_settings[configuration][google_maps][infobox_settings][infowindow_styles]">
+                    <option value="default" <?php if (isset($wp_properties['configuration']['google_maps']['infobox_settings']['infowindow_styles'])) selected($wp_properties['configuration']['google_maps']['infobox_settings']['infowindow_styles'], 'default'); ?>><?php _e('Default', ud_get_wp_property()->domain); ?></option>
+                    <option value="new" <?php if (isset($wp_properties['configuration']['google_maps']['infobox_settings']['infowindow_styles'])) selected($wp_properties['configuration']['google_maps']['infobox_settings']['infowindow_styles'], 'new'); ?>><?php _e('New', ud_get_wp_property()->domain); ?></option>
+                  </select>
+                </li>
+              </ul>
             </td>
           </tr>
 

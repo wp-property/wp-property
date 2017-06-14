@@ -45,6 +45,11 @@
 
       if(typeof google == 'object') {
         initialize_this_map();
+        setTimeout(function () {
+          if (jQuery('#infowindow').parents('.gm-style-iw').height() > 0) {
+            jQuery('#infowindow').parents('.gm-style-iw').addClass('scrollable');
+          }
+        }, 1500);
       } else {
         jQuery("#property_map").hide();
       }
@@ -78,6 +83,7 @@
     google.maps.event.addListener(infowindow, 'domready', function() {
     document.getElementById('infowindow').parentNode.style.overflow='hidden';
     document.getElementById('infowindow').parentNode.parentNode.style.overflow='hidden';
+    document.getElementById('infowindow').parentNode.parentNode.parentNode.classList.add('scrollable');
    });
 
    setTimeout("infowindow.open(map,marker);",1000);
@@ -110,7 +116,7 @@
           <?php @draw_stats("display=list&make_link=true"); ?>
         <?php endif; ?>
 
-        <?php 
+        <?php
         if(!empty($wp_properties['taxonomies'])) foreach($wp_properties['taxonomies'] as $tax_slug => $tax_data):
           if( ( isset( $tax_data['unique'] ) && $tax_data['unique'] ) || !empty($tax_data['hidden'])) continue;
         ?>
@@ -143,9 +149,9 @@
         <?php endif; ?>
 
       </div><!-- .entry-content -->
-      
+
       <?php comments_template(); ?>
-      
+
     </div><!-- #post-## -->
 
     </div><!-- #content -->
