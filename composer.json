@@ -99,7 +99,7 @@
         "description": "Enable to use legacy widgets",
         "since": "2.2.1",
         "enable_on_old_install": true,
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "Setup Assistant",
