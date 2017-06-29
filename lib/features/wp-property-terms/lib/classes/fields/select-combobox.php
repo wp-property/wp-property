@@ -2,11 +2,6 @@
 // Prevent loading this file directly
 defined( 'ABSPATH' ) || exit;
 
-// Make sure "select" field is loaded
-if( defined( 'RWMB_FIELDS_DIR ' ) ) {
-  require_once RWMB_FIELDS_DIR . 'select.php';
-}
-
 if ( ! class_exists( 'RWMB_Wpp_Select_Combobox_Field' ) ){
   class RWMB_Wpp_Select_Combobox_Field extends RWMB_Select_Field{
     /**
@@ -28,20 +23,22 @@ if ( ! class_exists( 'RWMB_Wpp_Select_Combobox_Field' ) ){
      * @return string
      */
     static function html( $meta, $field ){
-      $terms = array();
-      $options = $field['_options'];
-      $field_name = trim($field['field_name'], '[]');
-
-      foreach ($field['options'] as $id => $label) {
-        $terms[] = array('value' => $id, 'label' => $label);
+      $options = $field['options'];
+      
+      $field_name = $field['field_name'];
+      if(substr_compare($field_name, '[]', -2) === 0){
+        $field_name = substr_replace($field_name, '', -2);
       }
 
       $term_id  = '';
       $term_name  = '';
 
-      if(is_array($meta) && $meta = array_values($meta) && isset($meta[0])){
-        $term_id = $meta[0];
-        $term = get_term( $term_id , $options['taxonomy'] );
+      if(is_array($meta) ){
+        $meta = reset($meta);
+      }
+
+      if($meta){
+        $term = get_term( $meta , $options['taxonomy'] );
 
         if($term && !is_wp_error($term)){
           $term_name = $term->name; 
