@@ -3856,7 +3856,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
       $numeric = (isset($wp_properties['numeric_attributes']) && in_array($meta_key, (array)$wp_properties['numeric_attributes'])) ? true : false;
 
-      if (!in_array($meta_key, (array)$commas_ignore) && substr_count($criteria, ',') || (substr_count($criteria, '-') && $numeric) || substr_count($criteria, '--') || substr_count($criteria, '/')) {
+      if (!in_array($meta_key, (array)$commas_ignore) && substr_count($criteria, ',') || (substr_count($criteria, '-') && $numeric) || substr_count($criteria, '--')) {
 
         if (substr_count($criteria, '-') && !substr_count($criteria, ',')) {
           $cr = explode('-', $criteria);
