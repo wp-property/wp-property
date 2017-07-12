@@ -3,12 +3,13 @@ jQuery(document).ready(function($){
     var wraper = $('.wpp-property-type');
     wraper.each(function(){
         var $this = $(this);
+        var terms = $this.data('terms');
         var input_terms = $this.find('.wpp-terms-input');
         var btntoggle  = $this.find('.select-combobox-toggle');
 
         var autocomplete = input_terms.autocomplete({
             minLength: 0,
-            source: $this.data('terms'),
+            source: terms,
         });
 
         input_terms.autocomplete( "instance" )._renderItem = function( ul, item ) {
@@ -39,6 +40,15 @@ jQuery(document).ready(function($){
  
             // Pass empty string as value to search for, displaying all results
             input.autocomplete( "search", input.val() );
+        });
+
+        input_terms.on('focusout', function(){
+            var input = $(this);
+            var value = input.val().trim();
+            var exist = jQuery.inArray(value, terms);
+            if(exist == -1){
+                input.val('');
+            }
         });
 
         if(input_terms.is(':focus'))
