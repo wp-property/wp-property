@@ -148,7 +148,7 @@ $wpp_property_types_variables = apply_filters( 'wpp::settings::developer::types'
             </li>
           <% }); %>
 
-          <% if( __.get(wp_properties, 'property_stats.parent', false) ){ %>
+          <% if( !__.get(wp_properties, 'property_stats.parent', false) ){ %>
             <li class="wpp_development_advanced_option">
               <input id="<%= property_slug %>parent_hidden_attributes" <%= _.wppChecked(wp_properties, ['hidden_attributes', property_slug], 'parent') %>type="checkbox" name="wpp_settings[hidden_attributes][<%= property_slug %>][]" value="parent"/>
               <label for="<%= property_slug %>parent_hidden_attributes"><?php _e( 'Parent Selection', ud_get_wp_property()->domain ); ?></label>
