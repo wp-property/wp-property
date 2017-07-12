@@ -20,11 +20,6 @@ namespace UsabilityDynamics\WPP {
       public function __construct(){
         global $wp_properties;
 
-        // Meta Box fields
-        add_filter( "wpp::rwmb_meta_box::field::parent_property", function( $field, $post ) {
-          return null;
-        }, 10, 2 );
-
         add_filter( "wpp::rwmb_meta_box::field::property_type", function( $field, $post ){
           $taxonomies = ud_get_wp_property( 'taxonomies', array() );
 
