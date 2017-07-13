@@ -20,18 +20,13 @@ namespace UsabilityDynamics\WPP {
       public function __construct(){
         global $wp_properties;
 
-        // Meta Box fields
-        add_filter( "wpp::rwmb_meta_box::field::parent_property", function( $field, $post ) {
-          return null;
-        }, 10, 2 );
-
         add_filter( "wpp::rwmb_meta_box::field::property_type", function( $field, $post ){
           $taxonomies = ud_get_wp_property( 'taxonomies', array() );
 
           $field = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
             'id' => 'wpp_listing_type',
             'name' => $taxonomies['wpp_listing_type']['label'],
-            'type' => 'taxonomy', // Metabox field name
+            'type' => 'wpp_property_type', // Metabox field name
             'placeholder' => sprintf( __( 'Select %s Type', ud_get_wp_property()->domain ), WPP_F::property_label() ),
             'multiple' => false,
             'options' => array(
@@ -104,6 +99,14 @@ namespace UsabilityDynamics\WPP {
 
         add_filter( 'wpp:elastic:title_suggest', array( $this, 'elastic_title_suggest' ), 10, 3 );
 
+        // Worthless, unless it's enabled on old install.
+        add_action( 'wp-property::upgrade', function($old_version, $new_version){
+          switch( true ) {
+            case ( version_compare( $old_version, '2.2.1', '<' ) ):
+              self::migrate_legacy_type_to_term();
+          }
+        }, 10, 2);
+
       }
 
       /**
@@ -111,7 +114,7 @@ namespace UsabilityDynamics\WPP {
        * It's moved from class-upgrade.php
        *
        */
-      public function migrate_legacy_type_to_term(){
+      public static function migrate_legacy_type_to_term(){
         global $wpdb;
         $pp = $wpdb->get_results("SELECT ID from {$wpdb->posts} WHERE post_type='property'");
         $wpp_settings = get_option('wpp_settings');
@@ -168,12 +171,12 @@ namespace UsabilityDynamics\WPP {
             $term = get_term($wp_properties['property_types_term_id'][$_term], 'wpp_listing_type', ARRAY_A);
           }
 
-          if ( !is_wp_error($term) && isset($term['term_id'])) {
+          if ( $term && !is_wp_error($term) && isset($term['term_id'])) {
             if ($label != $term['name']) {
               $term = wp_update_term($term['term_id'], 'wpp_listing_type', array('name' => $label));
             }
           } // Find term by label
-          elseif ($term == term_exists($label, 'wpp_listing_type')) {
+          elseif ( $term && $term == term_exists($label, 'wpp_listing_type')) {
 
           } else {
             $term = wp_insert_term($label, 'wpp_listing_type', array('slug' => $_term));

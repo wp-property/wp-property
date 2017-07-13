@@ -2,10 +2,6 @@
 // Prevent loading this file directly
 defined( 'ABSPATH' ) || exit;
 
-if( defined( 'RWMB_FIELDS_DIR ' ) ) {
-  require_once RWMB_FIELDS_DIR . 'checkbox-list.php';
-}
-
 if ( ! class_exists( 'RWMB_Wpp_Taxonomy_Field' ) ){
 	class RWMB_Wpp_Taxonomy_Field extends RWMB_Taxonomy_Field{
 		/**
@@ -29,8 +25,6 @@ if ( ! class_exists( 'RWMB_Wpp_Taxonomy_Field' ) ){
 		 */
 		static function html( $meta, $field ){
 			$options = $field['options'];
-			$field['display_type'] = $options['type'];
-			$field['_options']      = $options;
 
 			$html = '';
 
@@ -46,7 +40,7 @@ if ( ! class_exists( 'RWMB_Wpp_Taxonomy_Field' ) ){
 					break;
 				case 'select':
 				default:
-					$html = RWMB_Select_Field::html( $meta, $field );
+					$html = RWMB_Wpp_Select_Combobox_Field::html( $meta, $field );
 			}
 
 			return $html;
@@ -80,9 +74,9 @@ if ( ! class_exists( 'RWMB_Wpp_Taxonomy_Field' ) ){
 						$p	= array('term_id'=>$id);
 					}
 					// Doing another check before insert.
-					else if($parent && !($p = term_exists($parent, $field['options']['taxonomy']))){
+					else if($parent && !($p = term_exists($parent, $field['taxonomy']))){
 						// Inserting new new term.
-						$p = wp_insert_term( $parent, $field['options']['taxonomy']);
+						$p = wp_insert_term( $parent, $field['taxonomy']);
 					}
 					else{
 						$p = array('term_id'=> 0);
@@ -93,9 +87,9 @@ if ( ! class_exists( 'RWMB_Wpp_Taxonomy_Field' ) ){
 						$t		= array('term_id'=>$id);
 					}
 					// Doing another check before insert.
-					else if(!$t = term_exists($name, $field['options']['taxonomy'])){
+					else if(!$t = term_exists($name, $field['taxonomy'])){
 						// Inserting new new term.
-						$t 		= wp_insert_term( $name, $field['options']['taxonomy'], array('parent'=>$p['term_id']));
+						$t 		= wp_insert_term( $name, $field['taxonomy'], array('parent'=>$p['term_id']));
 					}
 
 					if(!is_wp_error($t))
@@ -104,7 +98,7 @@ if ( ! class_exists( 'RWMB_Wpp_Taxonomy_Field' ) ){
 			}
 
 			$term_ids = array_map( 'intval', $term_ids );
-			wp_set_object_terms( $post_id, $term_ids, $field['options']['taxonomy'] );
+			wp_set_object_terms( $post_id, $term_ids, $field['taxonomy'] );
 		}
 	}
 }

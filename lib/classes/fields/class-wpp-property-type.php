@@ -2,7 +2,6 @@
 // Prevent loading this file directly
 // Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
 defined( 'ABSPATH' ) || exit;
-require_once RWMB_FIELDS_DIR . 'checkbox-list.php';
 
 if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 	class RWMB_Wpp_Property_Type_Field extends RWMB_Taxonomy_Field{
@@ -38,12 +37,15 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 			foreach ($_terms as $term) {
 				$terms[] = $term->name;
 			}
-
-			$meta     = array_values($meta);
+			if(is_array($meta)){
+				$meta = array_values($meta);
+				$meta = $meta[0];
+			}
+			
 			$term_id  = '';
 			$term_name  = '';
-			if(isset($meta[0])){
-				$term_id = $meta[0];
+			if($meta){
+				$term_id = $meta;
 				$term = get_term( $term_id , $options['taxonomy'] );
 				$term_name  = $term->name;
 			}

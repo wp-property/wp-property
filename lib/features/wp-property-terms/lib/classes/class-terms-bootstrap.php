@@ -233,7 +233,8 @@ namespace UsabilityDynamics\WPP {
           $this->set( 'config.taxonomies', $taxonomies );
           $types = array();
           foreach ($taxonomies as $taxonomy => $data) {
-            $types[$taxonomy] = isset($data['unique']) && $data['unique'] ? 'unique' : '';
+            $taxonomies[$taxonomy] = $data = $this->prepare_taxonomy($data, $taxonomy);
+            $types[$taxonomy] = isset($data['unique']) && $data['unique'] ? 'unique' : 'multiple';
           }
           $this->set( 'config.types', $types );
         }
@@ -249,7 +250,7 @@ namespace UsabilityDynamics\WPP {
               $_original_taxonomy = $_taxonomies[ $_taxonomy ];
             }
 
-            $_taxonomies[ $_taxonomy ] = $_taxonomy_data;
+            $_taxonomies[ $_taxonomy ] = $this->prepare_taxonomy($_taxonomy_data, $_taxonomy);
 
             // Preserve [wpp_term_meta_fields] fields.
             if( isset( $_original_taxonomy ) && !isset( $_taxonomies[ $_taxonomy ]['wpp_term_meta_fields'] ) && isset( $_original_taxonomy['wpp_term_meta_fields'] ) ) {
@@ -533,7 +534,7 @@ namespace UsabilityDynamics\WPP {
       /**
        * Save Custom Taxonomies
        *
-       * This runs after [update_option_wpp_settings] action therefore ovewriting anything it set.
+       * This runs after [update_option_wpp_settings] action therefore overwriting anything it set.
        *
        * @param array $data
        */
@@ -799,7 +800,7 @@ namespace UsabilityDynamics\WPP {
 
           switch( true ) {
             // Hidden
-            case ( in_array( $k, $hidden ) ):
+            case ( in_array( $k, $hidden ) || !empty($d['hidden'])  ):
               // Ignore field, since it's hidden.
               break;
             case ( in_array( $k, $inherited ) ):
@@ -1082,7 +1083,7 @@ namespace UsabilityDynamics\WPP {
           'system' => false,
           'meta' => false,
           'hidden' => false,
-          'unique' => true,
+          'unique' => false,
           'label' => $taxonomy,
           'labels' => array(),
           'public' => false,

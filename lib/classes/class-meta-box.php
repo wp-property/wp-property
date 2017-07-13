@@ -368,8 +368,15 @@ namespace UsabilityDynamics\WPP {
 
           /* May be add Property Parent field - 'Falls Under' */
           $field = apply_filters( "wpp::rwmb_meta_box::field::parent_property", $this->get_parent_property_field( $post ), $post );
-          if( !empty($field) ) {
-            $fields[] = $field;
+          //* Ignore Hidden Attributes */
+          if (
+            empty( $post->property_type )
+            || empty( $hidden_attributes[ $post->property_type ] )
+            || !in_array( 'parent', (array)$hidden_attributes[ $post->property_type ] )
+          ) {
+            if( !empty($field) ) {
+              $fields[] = $field;
+            }
           }
 
           /* May be add Property Type field. */
