@@ -101,9 +101,15 @@ namespace UsabilityDynamics\WPP {
 
         // Worthless, unless it's enabled on old install.
         add_action( 'wp-property::upgrade', function($old_version, $new_version){
+
           switch( true ) {
             case ( version_compare( $old_version, '2.2.1', '<' ) ):
-              self::migrate_legacy_type_to_term();
+
+              // Run further upgrade actions on init hook, so things are loaded.
+              add_action( 'init', array('UsabilityDynamics\WPP\Taxonomy_WPP_Listing_Type', 'migrate_legacy_type_to_term') );
+
+            break;
+
           }
         }, 10, 2);
 
@@ -113,13 +119,17 @@ namespace UsabilityDynamics\WPP {
        * Migrates property types attributes to terms
        * It's moved from class-upgrade.php
        *
+       * @note This must be ran after the 'init' hook since we call 'register_taxonomy'
+       *
        */
       public static function migrate_legacy_type_to_term(){
         global $wpdb;
+
         $pp = $wpdb->get_results("SELECT ID from {$wpdb->posts} WHERE post_type='property'");
+
+        // don't we have a better way of getting the settings?
         $wpp_settings = get_option('wpp_settings');
 
-        register_taxonomy('wpp_listing_type', 'property_type');
         /* Generate Property type terms */
         foreach ($wpp_settings['property_types'] as $_term => $label) {
           $term = term_exists($label, 'wpp_listing_type');
@@ -147,6 +157,7 @@ namespace UsabilityDynamics\WPP {
        * @param $wpp_settings : New settings
        * @param $wp_properties : Old settings
        *
+       * @return mixed
        */
       public static function create_property_type_terms( $wpp_settings, $wp_properties ) {
         $terms = get_terms(array(
