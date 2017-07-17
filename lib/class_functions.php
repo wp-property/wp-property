@@ -3856,7 +3856,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
       $numeric = (isset($wp_properties['numeric_attributes']) && in_array($meta_key, (array)$wp_properties['numeric_attributes'])) ? true : false;
 
-      if (!in_array($meta_key, (array)$commas_ignore) && substr_count($criteria, ',') || (substr_count($criteria, '-') && $numeric) || substr_count($criteria, '--') || substr_count($criteria, '/')) {
+      if (!in_array($meta_key, (array)$commas_ignore) && substr_count($criteria, ',') || (substr_count($criteria, '-') && $numeric) || substr_count($criteria, '--')) {
 
         if (substr_count($criteria, '-') && !substr_count($criteria, ',')) {
           $cr = explode('-', $criteria);
@@ -4585,18 +4585,6 @@ class WPP_F extends UsabilityDynamics\Utility
       'scope' => 'google_map_infobox'
     ));
 
-    //** Check if we have children */
-    if (
-      !empty($property['children'])
-      && (!isset($wp_properties['configuration']['google_maps']['infobox_settings']['do_not_show_child_properties'])
-        || $wp_properties['configuration']['google_maps']['infobox_settings']['do_not_show_child_properties'] != 'true')
-    ) {
-      foreach ($property['children'] as $child_property) {
-        $child_property = (array)$child_property;
-        $html_child_properties[] = '<li class="infobox_child_property"><a href="' . $child_property['permalink'] . '">' . $child_property['post_title'] . '</a></li>';
-      }
-    }
-
     if (empty($infobox_attributes)) {
       $infobox_attributes = array(
         'price',
@@ -4624,6 +4612,24 @@ class WPP_F extends UsabilityDynamics\Utility
       'property_stats' => $property_stats
     ));
 
+    //** Check if we have children */
+    if (!empty($property['children']) && (!isset($wp_properties['configuration']['google_maps']['infobox_settings']['do_not_show_child_properties']) || $wp_properties['configuration']['google_maps']['infobox_settings']['do_not_show_child_properties'] != 'true')) {
+      foreach ($property['children'] as $child_property) {
+        $child_property = (array)$child_property;
+        if ($infobox_settings['show_child_property_attributes'] === 'true') {
+          $html_child_properties_attributes = '<ul class="ir__child_property_attributes">';
+          foreach ($infobox_attributes as $attribute) {
+            if (!empty($child_property[$attribute])) {
+              $attribute_data = WPP_F::get_attribute_data($attribute);
+              $html_child_properties_attributes .= '<li>' . $attribute_data['title'] . ': ' . $child_property[$attribute] . '</li>';
+            }
+          }
+          $html_child_properties_attributes .= '</ul>';
+        }
+        $html_child_properties[] = '<a href="' . get_permalink($child_property['ID']) . '">' . $child_property['post_title'] . '</a>' . $html_child_properties_attributes;
+      }
+    }
+
     if (!empty($property['featured_image'])) {
       $image = wpp_get_image_link($property['featured_image'], $map_image_type, array('return' => 'array'));
       if (!empty($image) && is_array($image)) {
@@ -4634,43 +4640,55 @@ class WPP_F extends UsabilityDynamics\Utility
       }
     }
 
-    ob_start(); ?>
+    ob_start();
+    if($infobox_settings['infowindow_styles'] === 'new') {
+      ?>
 
-    <div id="infowindow" <?php echo $infobox_style; ?>>
-      <?php if ($infobox_settings['show_property_title'] == 'true') { ?>
-        <div class="wpp_google_maps_attribute_row_property_title">
-          <a href="<?php echo get_permalink($property['ID']); ?>"><?php echo $property['post_title']; ?></a>
-        </div>
-      <?php } ?>
+      <div id="infowindow" <?php echo $infobox_style; ?>>
 
-      <table cellpadding="0" cellspacing="0" class="wpp_google_maps_infobox_table" style="">
-        <tr>
+        <div class="infowindow_box">
           <?php if (!empty($imageHTML)) { ?>
-            <td class="wpp_google_maps_left_col" style=" width: <?php echo $image['width']; ?>px">
-              <?php echo $imageHTML; ?>
-              <?php if ($infobox_settings['show_direction_link'] == 'true' && !empty($property['latitude']) && !empty($property['longitude'])): ?>
-                <div class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_directions_link">
+            <div class="infowindow_left">
+              <div class="il__image">
+                <?php echo $imageHTML; ?>
+              </div>
+              <div class="il__title">
+                <?php if (!empty($property['price'])) : ?><label><?php echo $property['price']; ?></label><?php endif; ?>
+                <?php if (!empty($property['post_title'])) : ?>
+                  <div class="property-title"><a
+                    href="<?php echo get_permalink($property['ID']); ?>"><?php echo $property['post_title']; ?></a>
+                  </div><?php endif; ?>
+                <?php if (!empty($property['display_address']) && !empty($property['latitude']) && !empty($property['longitude'])) : ?>
                   <a target="_blank"
                      href="http://maps.google.com/maps?gl=us&daddr=<?php echo $property['latitude'] ?>,<?php echo $property['longitude']; ?>"
-                     class="btn btn-info"><?php _e('Get Directions', ud_get_wp_property()->domain) ?></a>
-                </div>
-              <?php endif; ?>
-            </td>
+                     target="_blank"><?php echo $property['display_address']; ?></a><?php endif; ?>
+              </div>
+            </div>
           <?php } ?>
 
-          <td class="wpp_google_maps_right_col" vertical-align="top" style="vertical-align: top;">
-            <?php if (!empty($imageHTML) && $infobox_settings['show_direction_link'] == 'true' && !empty($property['latitude']) && !empty($property['longitude'])) { ?>
-              <div class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_directions_link">
+          <div class="infowindow_right <?php echo !empty($imageHTML) ? '' : ' infowindow_full_width'; ?> ">
+            <?php if (empty($imageHTML)) : ?>
+              <div class="ib__title"><?php echo $property['post_title']; ?></div>
+              <div class="ib__location_link">
                 <a target="_blank"
                    href="http://maps.google.com/maps?gl=us&daddr=<?php echo $property['latitude'] ?>,<?php echo $property['longitude']; ?>"
-                   class="btn btn-info"><?php _e('Get Directions', ud_get_wp_property()->domain) ?></a>
+                   target="_blank"><?php echo $property['display_address']; ?></a>
               </div>
-              <?php
-            }
+              <div class="ib__price"><?php echo $property['price']; ?></div>
+            <?php endif; ?>
 
+            <?php
+            $content = $property['post_content'];
+            if (!empty($content)) :
+              echo '<div class="ir__title ir__title_description">' . __('Description', ud_get_wp_property()->domain) . '</div>';
+              echo '<div class="ir__description">' . substr($content, 0, 100) . '...</div>';
+            endif;
+            ?>
+
+            <?php
             $attributes = array();
 
-            $labels_to_keys = array_flip( (array) $wp_properties['property_stats']);
+            $labels_to_keys = array_flip($wp_properties['property_stats']);
 
             if (is_array($property_stats)) {
               foreach ($property_stats as $attribute_label => $value) {
@@ -4689,8 +4707,13 @@ class WPP_F extends UsabilityDynamics\Utility
                     $value = __('Yes', ud_get_wp_property()->domain);
                   }
                 } elseif ($value == 'false') {
-                  continue;
+                  if ($wp_properties['configuration']['google_maps']['show_true_as_image'] == 'true') {
+                    $value = '<div class="false-checkbox-image"></div>';
+                  } else {
+                    $value = __('No', ud_get_wp_property()->domain);
+                  }
                 }
+
                 // to get attribute label and value translation @auther fadi
                 $attribute_label = apply_filters('wpp::attribute::label', $attribute_label, $attribute_slug);
                 if ($attribute_slug == 'property_type') {
@@ -4698,31 +4721,132 @@ class WPP_F extends UsabilityDynamics\Utility
                 } elseif (!empty($wp_properties["predefined_values"][$attribute_slug])) {
                   $value = apply_filters("wpp::attribute::value", $value, $attribute_slug);
                 }
-
-                $attributes[] = '<li class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_' . $attribute_slug . '">';
-                $attributes[] = '<span class="attribute">' . $attribute_label . '</span>';
-                $attributes[] = '<span class="value">' . $value . '</span>';
+                $attributes[] = '<li class="' . $attribute_slug . '">';
+                $attributes[] = '<label>' . $attribute_label . '</label>';
+                $attributes[] = '<span>' . $value . '</span>';
                 $attributes[] = '</li>';
               }
             }
 
             if (count($attributes) > 0) {
-              echo '<ul class="wpp_google_maps_infobox">' . implode('', $attributes) . '<li class="wpp_google_maps_attribute_row wpp_fillter_element">&nbsp;</li></ul>';
+              echo "<div class='ir__title'>" . __('Overview', ud_get_wp_property()->domain) . "</div>";
+              echo '<ul class="ir__list">' . implode('', $attributes) . '</ul>';
             }
 
             if (!empty($html_child_properties)) {
-              echo '<ul class="infobox_child_property_list">' . implode('', $html_child_properties) . '<li class="infobox_child_property wpp_fillter_element">&nbsp;</li></ul>';
+              echo '<div class="ir__title">' . __('Child Properties', ud_get_wp_property()->domain) . '</div>';
+              echo '<ul class="ir__child_properties_list">';
+              foreach ($html_child_properties as $value) {
+                echo '<li>' . $value . '</li>';
+              }
+              echo '</ul>';
             }
 
-            ?>
+            if (!empty($imageHTML) && $infobox_settings['show_direction_link'] == 'true' && !empty($property['latitude']) && !empty($property['longitude'])) {
+              ?>
+              <div class="ir__directions">
+                <a target="_blank"
+                   href="http://maps.google.com/maps?gl=us&daddr=<?php echo $property['latitude'] ?>,<?php echo $property['longitude']; ?>"
+                   target="_blank"><?php _e('Get directions', ud_get_wp_property()->domain); ?></a>
+              </div>
+            <?php } ?>
+          </div>
+        </div>
+      </div>
 
-          </td>
-        </tr>
-      </table>
+      <?php
+    } else {
+      ?>
 
-    </div>
+      <div id="infowindow" <?php echo $infobox_style; ?>>
+        <?php if ($infobox_settings['show_property_title'] == 'true') { ?>
+          <div class="wpp_google_maps_attribute_row_property_title">
+            <a href="<?php echo get_permalink($property['ID']); ?>"><?php echo $property['post_title']; ?></a>
+          </div>
+        <?php } ?>
 
+        <table cellpadding="0" cellspacing="0" class="wpp_google_maps_infobox_table" style="">
+          <tr>
+            <?php if (!empty($imageHTML)) { ?>
+              <td class="wpp_google_maps_left_col" style=" width: <?php echo $image['width']; ?>px">
+                <?php echo $imageHTML; ?>
+                <?php if ($infobox_settings['show_direction_link'] == 'true' && !empty($property['latitude']) && !empty($property['longitude'])): ?>
+                  <div class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_directions_link">
+                    <a target="_blank"
+                       href="http://maps.google.com/maps?gl=us&daddr=<?php echo $property['latitude'] ?>,<?php echo $property['longitude']; ?>"
+                       class="btn btn-info"><?php _e('Get Directions', ud_get_wp_property()->domain) ?></a>
+                  </div>
+                <?php endif; ?>
+              </td>
+            <?php } ?>
+
+            <td class="wpp_google_maps_right_col" vertical-align="top" style="vertical-align: top;">
+              <?php if (!empty($imageHTML) && $infobox_settings['show_direction_link'] == 'true' && !empty($property['latitude']) && !empty($property['longitude'])) { ?>
+                <div class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_directions_link">
+                  <a target="_blank"
+                     href="http://maps.google.com/maps?gl=us&daddr=<?php echo $property['latitude'] ?>,<?php echo $property['longitude']; ?>"
+                     class="btn btn-info"><?php _e('Get Directions', ud_get_wp_property()->domain) ?></a>
+                </div>
+                <?php
+              }
+
+              $attributes = array();
+
+              $labels_to_keys = array_flip((array)$wp_properties['property_stats']);
+
+              if (is_array($property_stats)) {
+                foreach ($property_stats as $attribute_label => $value) {
+
+                  $attribute_slug = $labels_to_keys[$attribute_label];
+                  $attribute_data = UsabilityDynamics\WPP\Attributes::get_attribute_data($attribute_slug);
+
+                  if (empty($value)) {
+                    continue;
+                  }
+
+                  if ((!empty($attribute_data['data_input_type']) && $attribute_data['data_input_type'] == 'checkbox' && ($value == 'true' || $value == 1))) {
+                    if ($wp_properties['configuration']['google_maps']['show_true_as_image'] == 'true') {
+                      $value = '<div class="true-checkbox-image"></div>';
+                    } else {
+                      $value = __('Yes', ud_get_wp_property()->domain);
+                    }
+                  } elseif ($value == 'false') {
+                    continue;
+                  }
+                  // to get attribute label and value translation @auther fadi
+                  $attribute_label = apply_filters('wpp::attribute::label', $attribute_label, $attribute_slug);
+                  if ($attribute_slug == 'property_type') {
+                    $value = apply_filters("wpp_stat_filter_property_type_label", $value);
+                  } elseif (!empty($wp_properties["predefined_values"][$attribute_slug])) {
+                    $value = apply_filters("wpp::attribute::value", $value, $attribute_slug);
+                  }
+
+                  $attributes[] = '<li class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_' . $attribute_slug . '">';
+                  $attributes[] = '<span class="attribute">' . $attribute_label . '</span>';
+                  $attributes[] = '<span class="value">' . $value . '</span>';
+                  $attributes[] = '</li>';
+                }
+              }
+
+              if (count($attributes) > 0) {
+                echo '<ul class="wpp_google_maps_infobox">' . implode('', $attributes) . '<li class="wpp_google_maps_attribute_row wpp_fillter_element">&nbsp;</li></ul>';
+              }
+
+              if (!empty($html_child_properties)) {
+                echo '<ul class="infobox_child_property_list">' . implode('', $html_child_properties) . '<li class="infobox_child_property wpp_fillter_element">&nbsp;</li></ul>';
+              }
+
+              ?>
+
+            </td>
+          </tr>
+        </table>
+
+      </div>
+      
     <?php
+    }
+      
     $data = ob_get_contents();
     $data = preg_replace(array('/[\r\n]+/'), array(""), $data);
     $data = addslashes($data);

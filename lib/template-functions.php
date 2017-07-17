@@ -269,6 +269,7 @@ if (!function_exists('prepare_property_for_display')):
     if (is_numeric($property)) {
 
       $property_id = $property;
+      $property = get_property($property);
 
     } elseif (is_object($property)) {
 
@@ -750,7 +751,7 @@ if (!function_exists('draw_stats')):
       $label = $data['label'];
       if (is_array($value)) {
         if ($args['make_link'] == 'true') {
-          $link_value = [];
+          $link_value = array();
           foreach ($value as $val) {
             if (WPP_F::isURL($val)) {
               $link = "<a href='{$val}' title='{$label}'>{$label}</a>";

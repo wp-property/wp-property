@@ -86,7 +86,7 @@ namespace UsabilityDynamics\WPP {
 
         }
         /* Additional stuff can be handled here */
-        do_action( ud_get_wp_property()->slug . '::upgrade', $old_version, $new_version );
+        do_action( 'wp-property::upgrade', $old_version, $new_version );
       }
 
       /**
