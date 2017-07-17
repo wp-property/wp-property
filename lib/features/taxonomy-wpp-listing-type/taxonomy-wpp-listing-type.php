@@ -99,19 +99,21 @@ namespace UsabilityDynamics\WPP {
 
         add_filter( 'wpp:elastic:title_suggest', array( $this, 'elastic_title_suggest' ), 10, 3 );
 
-        // Worthless, unless it's enabled on old install.
-        add_action( 'wp-property::upgrade', function($old_version, $new_version){
+        if(defined('WP_PROPERTY_FLAG_ENABLE_TERMS')){
+          // Worthless, unless it's "enable_on_old_install": true in WP_PROPERTY_FLAG_ENABLE_TERMS.
+          add_action( 'wp-property::upgrade', function($old_version, $new_version){
 
-          switch( true ) {
-            case ( version_compare( $old_version, '2.2.1', '<' ) ):
+            switch( true ) {
+              case ( version_compare( $old_version, '2.2.1', '<' ) ):
 
-              // Run further upgrade actions on init hook, so things are loaded.
-              add_action( 'init', array('UsabilityDynamics\WPP\Taxonomy_WPP_Listing_Type', 'migrate_legacy_type_to_term') );
+                // Run further upgrade actions on init hook, so things are loaded.
+                add_action( 'init', array('UsabilityDynamics\WPP\Taxonomy_WPP_Listing_Type', 'migrate_legacy_type_to_term') );
 
-            break;
+              break;
 
-          }
-        }, 10, 2);
+            }
+          }, 10, 2);
+        }
 
       }
 
@@ -123,15 +125,11 @@ namespace UsabilityDynamics\WPP {
        *
        */
       public static function migrate_legacy_type_to_term(){
-        global $wpdb;
-
+        global $wpdb, $wp_properties;
         $pp = $wpdb->get_results("SELECT ID from {$wpdb->posts} WHERE post_type='property'");
 
-        // don't we have a better way of getting the settings?
-        $wpp_settings = get_option('wpp_settings');
-
         /* Generate Property type terms */
-        foreach ($wpp_settings['property_types'] as $_term => $label) {
+        foreach ($wp_properties['property_types'] as $_term => $label) {
           $term = term_exists($label, 'wpp_listing_type');
           if (!$term) {
             $term = wp_insert_term($label, 'wpp_listing_type', array('slug' => $_term));
