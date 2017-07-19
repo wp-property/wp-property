@@ -108,7 +108,7 @@ namespace UsabilityDynamics\WPP {
               // Run further upgrade actions on init hook, so things are loaded.
               add_action( 'init', array('UsabilityDynamics\WPP\Taxonomy_WPP_Listing_Type', 'migrate_legacy_type_to_term') );
 
-            break;
+              break;
 
           }
         }, 10, 2);
