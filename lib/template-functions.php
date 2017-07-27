@@ -757,9 +757,11 @@ if (!function_exists('draw_stats')):
               $link = "<a href='{$val}' title='{$label}'>{$label}</a>";
             } else {
               $term = get_term_by('name', $val, $tag);
-              $term_url = get_term_link($term->term_taxonomy_id, $term->taxonomy);
-              if (!is_wp_error($term_url)) {
-                $link = "<a href='{$term_url}' title='{$term->name}'>{$term->name}</a>";
+              if ($term && !is_wp_error($term)) {
+                $term_url = get_term_link($term->term_taxonomy_id, $term->taxonomy);
+                if (!is_wp_error($term_url)) {
+                  $link = "<a href='{$term_url}' title='{$term->name}'>{$term->name}</a>";
+                }
               } else {
                 $link = $val;
               }
@@ -776,9 +778,11 @@ if (!function_exists('draw_stats')):
             $value = "<a href='{$value}' title='{$label}'>{$value}</a>";
           } else {
             $term = get_term_by('name', $value, $tag);
-            $term_url = get_term_link($term->term_taxonomy_id, $term->taxonomy);
-            if (!is_wp_error($term_url)) {
-              $value = "<a href='{$term_url}' title='{$term->name}'>{$term->name}</a>";
+            if($term && !is_wp_error($term)){
+              $term_url = get_term_link($term->term_taxonomy_id, $term->taxonomy);
+              if (!is_wp_error($term_url)) {
+                $value = "<a href='{$term_url}' title='{$term->name}'>{$term->name}</a>";
+              }
             }
           }
         }

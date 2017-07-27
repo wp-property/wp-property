@@ -20,31 +20,38 @@ namespace UsabilityDynamics\WPP {
       public function __construct(){
         global $wp_properties;
 
-        add_filter( "wpp::rwmb_meta_box::field::property_type", function( $field, $post ){
-          $taxonomies = ud_get_wp_property( 'taxonomies', array() );
-
-          $field = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
-            'id' => 'wpp_listing_type',
-            'name' => $taxonomies['wpp_listing_type']['label'],
-            'type' => 'wpp_property_type', // Metabox field name
-            'placeholder' => sprintf( __( 'Select %s Type', ud_get_wp_property()->domain ), WPP_F::property_label() ),
-            'multiple' => false,
-            'options' => array(
-              'taxonomy' => 'wpp_listing_type',
-              'type' => 'select', // Metabox filed to use in taxonomy
-              'args' => array(),
-            )
-          ) ), 'wpp_listing_type', $post );
-          return $field;
-        }, 10, 2 );
-
         // Update taxonomy terms on saving property
         add_action( "save_property", function( $post_id ){
-          // if wpp_listing_type is set then update property_type attribute.
-          if(isset($_REQUEST[ 'wpp_listing_type' ]) && taxonomy_exists('wpp_listing_type')){
+          global $wp_properties;
+
+          // if property_type is set then update wpp_listing_type term.
+          if(!empty($_REQUEST[ 'property_type' ]) && $property_type = $_REQUEST[ 'property_type' ]){
+            $property_type_label = ucwords($property_type);
             $term = get_the_terms( $post_id, 'wpp_listing_type');
-            if(is_object( $term[0] ) )
-              update_post_meta( $post_id, 'property_type', $term[0]->slug);
+
+            if(isset($wp_properties['property_types'][$property_type])){
+              $property_type_label = $wp_properties['property_types'][$property_type];
+            }
+
+            // Checking whether Property type changed or not.
+            if(!is_wp_error( $term ) && !empty($term[0]->slug) && $term[0]->slug == $property_type){
+              return; // Property type not changed. Nothing need to do.
+            }
+
+            $term_ids = array();
+            // Checking for existing terms
+            if(!$t = term_exists($property_type, 'wpp_listing_type')){
+              // Inserting new term.
+              $t = wp_insert_term( $property_type_label, 'wpp_listing_type', array('slug' => $property_type) );
+            }
+
+            if($t && !is_wp_error($t)){
+              $term_ids[] = $t['term_id'];
+            }
+
+            $term_ids = array_map( 'intval', $term_ids );
+            wp_set_object_terms( $post_id, $term_ids, 'wpp_listing_type' );
+
           }
         } );
 
