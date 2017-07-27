@@ -59,7 +59,7 @@ namespace UsabilityDynamics\WPP {
             'readonly' => true,
             'system' => true,
             'hidden' => true,
-            'hierarchical' => false,
+            'hierarchical' => true,
             'unique' => true,
             'public' => true,
             'show_in_nav_menus' => true,

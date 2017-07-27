@@ -731,7 +731,7 @@ class WPP_F extends UsabilityDynamics\Utility
         $data['show_ui'] = (current_user_can('manage_wpp_categories') ? true : false);
       }
 
-      register_taxonomy($taxonomy, 'property', $wp_properties['taxonomies'][$taxonomy] = apply_filters('wpp::register_taxonomy', array(
+      $wp_properties['taxonomies'][$taxonomy] = apply_filters('wpp::register_taxonomy', array(
         'hierarchical' => isset($data['hierarchical']) ? $data['hierarchical'] : false,
         'label' => isset($data['label']) ? $data['label'] : $taxonomy,
         'labels' => isset($data['labels']) ? $data['labels'] : array(),
@@ -749,7 +749,9 @@ class WPP_F extends UsabilityDynamics\Utility
           'delete_terms' => 'manage_wpp_categories',
           'assign_terms' => 'manage_wpp_categories'
         )
-      ), $taxonomy));
+      ), $taxonomy);
+
+      register_taxonomy($taxonomy, 'property', $wp_properties['taxonomies'][$taxonomy] );
 
     }
 
