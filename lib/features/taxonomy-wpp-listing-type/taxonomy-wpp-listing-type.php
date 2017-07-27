@@ -99,8 +99,8 @@ namespace UsabilityDynamics\WPP {
 
         add_filter( 'wpp:elastic:title_suggest', array( $this, 'elastic_title_suggest' ), 10, 3 );
 
-        if(defined('WP_PROPERTY_FLAG_ENABLE_TERMS')){
-          // Worthless, unless it's "enable_on_old_install": true in WP_PROPERTY_FLAG_ENABLE_TERMS.
+        if( defined('WP_PROPERTY_FLAG_ENABLE_TERMS')) {
+          // Worthless, unless it's enabled on old install.
           add_action( 'wp-property::upgrade', function($old_version, $new_version){
 
             switch( true ) {
@@ -109,7 +109,7 @@ namespace UsabilityDynamics\WPP {
                 // Run further upgrade actions on init hook, so things are loaded.
                 add_action( 'init', array('UsabilityDynamics\WPP\Taxonomy_WPP_Listing_Type', 'migrate_legacy_type_to_term') );
 
-              break;
+                break;
 
             }
           }, 10, 2);
@@ -126,6 +126,7 @@ namespace UsabilityDynamics\WPP {
        */
       public static function migrate_legacy_type_to_term(){
         global $wpdb, $wp_properties;
+
         $pp = $wpdb->get_results("SELECT ID from {$wpdb->posts} WHERE post_type='property'");
 
         /* Generate Property type terms */
