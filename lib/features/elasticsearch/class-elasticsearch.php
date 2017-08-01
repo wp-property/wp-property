@@ -103,7 +103,7 @@ namespace UsabilityDynamics\WPP {
         // Because, if some extra update of post is proceeded, we save the post to sync queue
         // which is being executed on 'shutdown' action.
         //
-        // But on 'shutdown' action we may have already disabled filters and actions,
+        // But on 'shutdown' action we may have new specific added or disabled filters and actions,
         // so, post's data may be broken on running ep_prepare_post() function.
         //
         //
@@ -115,7 +115,7 @@ namespace UsabilityDynamics\WPP {
         // https://github.com/wp-property/wp-property/blob/5ff06a4e48df89916e47499d2fe374ba12cd4e7e/vendor/plugins/elasticpress/classes/class-ep-sync-manager.php#L46
         //
         // And 'post_content' meta on 'shutdown' is being broken because of using 'the_content' filter,
-        // when specific hooks already removed....
+        // when specific hooks added/removed....
         //
         // @author peshkov@UD
         //
