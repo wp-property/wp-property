@@ -120,9 +120,7 @@ namespace UsabilityDynamics\WPP {
         // @author peshkov@UD
         //
         add_filter( 'ep_post_sync_kill', function( $bool, $post_args, $post_id ) {
-          // Prevent Multiple Sync of the property on WP-REST request
           if( doing_action( 'shutdown' ) ) {
-            ud_get_wp_rets_client()->write_log( 'FUCK OFF', 'info' );
             return true;
           }
           return $bool;
