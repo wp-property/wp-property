@@ -99,6 +99,35 @@ namespace UsabilityDynamics\WPP {
         // Parse/Analyze responses.
         add_action( 'ep_index_post_retrieve_raw_response', array( $this, 'ep_index_post_retrieve_raw_response' ), 50, 3 );
 
+        // We prevent multiple sync of the same post during some kind of requests.
+        // Because, if some extra update of post is proceeded, we save the post to sync queue
+        // which is being executed on 'shutdown' action.
+        //
+        // But on 'shutdown' action we may have already disabled filters and actions,
+        // so, post's data may be broken on running ep_prepare_post() function.
+        //
+        //
+        // Example, we may update 'wpp_gpid' post meta after post indexed.
+        //
+        // See: https://github.com/wp-property/wp-property/blob/5ff06a4e48df89916e47499d2fe374ba12cd4e7e/lib/class_functions.php#L4990
+        //
+        // So, it is causing EP indexing of post one more time on 'shutdown' function, here:
+        // https://github.com/wp-property/wp-property/blob/5ff06a4e48df89916e47499d2fe374ba12cd4e7e/vendor/plugins/elasticpress/classes/class-ep-sync-manager.php#L46
+        //
+        // And 'post_content' meta on 'shutdown' is being broken because of using 'the_content' filter,
+        // when specific hooks already removed....
+        //
+        // @author peshkov@UD
+        //
+        add_filter( 'ep_post_sync_kill', function( $bool, $post_args, $post_id ) {
+          // Prevent Multiple Sync of the property on WP-REST request
+          if( doing_action( 'shutdown' ) ) {
+            ud_get_wp_rets_client()->write_log( 'FUCK OFF', 'info' );
+            return true;
+          }
+          return $bool;
+        }, 3, 100 );
+
       }
 
       /**
