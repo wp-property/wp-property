@@ -45,8 +45,13 @@ jQuery(document).ready(function($){
         input_terms.on('focusout', function(){
             var input = $(this);
             var value = input.val().trim();
-            var exist = jQuery.inArray(value, terms);
-            if(exist == -1){
+            var exist = false;
+            jQuery.each( terms, function( k, i ) {
+                if( (typeof i == 'string' && value == i) || value == i.label ) {
+                    exist = true;
+                }
+            } );
+            if(!exist){
                 input.val('');
             }
         });

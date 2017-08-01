@@ -24,24 +24,37 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 		 * @return string
 		 */
 		static function html( $meta, $field ){
+
 			$terms = array();
 			$_terms = get_terms( array(
-						'taxonomy' => 'wpp_listing_type',
-						'hide_empty' => false,
-					) );
+				'taxonomy' => 'wpp_listing_type',
+				'hide_empty' => false,
+			) );
+
+			if( is_taxonomy_hierarchical( $field['options']['taxonomy'] ) ) {
+				$_terms = self::prepare_terms_hierarchicaly( $_terms );
+				foreach ($_terms as $term) {
+					$terms[] = array(
+						'value' => $term[ 'term_id' ],
+						'label' => $term[ 'name' ]
+					);
+				}
+			} else {
+				foreach ($_terms as $term) {
+					$terms[] = $term->name;
+				}
+			}
+
 			$options = $field['options'];
 			$field_name = $field['field_name'];
 			if(substr($field_name, -2) == '[]')
 				$field_name = substr_replace($field_name, '', -2);
 
-			foreach ($_terms as $term) {
-				$terms[] = $term->name;
-			}
 			if(is_array($meta)){
 				$meta = array_values($meta);
 				$meta = $meta[0];
 			}
-			
+
 			$term_id  = '';
 			$term_name  = '';
 			if($meta){
@@ -51,18 +64,18 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 			}
 			ob_start();
 			?>
-			<div class="rwmb-field wpp-property-type wpp_ui" 
-				 data-taxonomy="<?php echo $options['taxonomy'];?>" 
-				 data-terms='<?php echo json_encode($terms);?>'
-			>
+			<div class="rwmb-field wpp-property-type wpp_ui"
+			     data-taxonomy="<?php echo $options['taxonomy'];?>"
+			     data-terms='<?php echo json_encode($terms);?>'
+				>
 				<div class="clearfix term">
 					<input
-					  type = "text"
-					  name="<?php echo $field_name;?>" 
-					  class="ui-corner-left wpp-terms-input wpp-terms-term" 
-					  autocomplete="off"
-					  value="<?php echo $term_name;?>"
-					>
+						type = "text"
+						name="<?php echo $field_name;?>"
+						class="ui-corner-left wpp-terms-input wpp-terms-term"
+						autocomplete="off"
+						value="<?php echo $term_name;?>"
+						>
 					<a tabindex="-1" title="Show All Items" class="ui-widget ui-state-default ui-button-icon-only select-combobox-toggle ui-corner-right" role="button">
 						<span class="ui-button-icon-primary ui-icon ui-icon-triangle-1-s"></span>
 					</a>
@@ -72,6 +85,13 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 			$html = ob_get_clean();
 
 			return $html;
+
+			if( is_taxonomy_hierarchical( $field['options']['taxonomy'] ) ) {
+				return self::_html_hierarchical( $meta, $field );
+			} else {
+				return self::_html_default( $meta, $field );
+			}
+
 		}
 
 		/**
@@ -124,5 +144,51 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 			$term_ids = array_map( 'intval', $term_ids );
 			wp_set_object_terms( $post_id, $term_ids, $field['options']['taxonomy'] );
 		}
+
+		/**
+		 * Prepare_terms_hierarchicaly
+		 *
+		 * @param $terms
+		 * @return array
+		 */
+		static public function prepare_terms_hierarchicaly($terms){
+			$_terms = array();
+			$return = array();
+
+			if(count($terms) == 0)
+				return $return;
+
+			// Prepering terms
+			foreach ($terms as $term) {
+				$_terms[$term->parent][] = array('term_id' => $term->term_id, 'name' => $term->name);
+			}
+
+			// Making terms as hierarchical by prefix
+			foreach ($_terms[0] as $term) { // $_terms[0] is parent or parentless terms
+				$return[] = $term;
+				self::get_children($term['term_id'], $_terms, $return, ( $term['name'] . ' -' ));
+			}
+
+			return $return;
+		}
+
+		/**
+		 * Helper function for prepare_terms_hierarchicaly
+		 *
+		 * @param $term_id
+		 * @param $terms
+		 * @param $return
+		 * @param string $prefix
+		 */
+		static public function get_children($term_id, $terms, &$return, $prefix = "-"){
+			if(isset($terms[$term_id])){
+				foreach ($terms[$term_id] as $child) {
+					$child['name'] = $prefix . " " . $child['name'];
+					$return[] = $child;
+					self::get_children($child['term_id'], $terms, $return, ( $prefix . ' ' . $child['name'] . ' -' ));
+				}
+			}
+		}
+
 	}
 }
