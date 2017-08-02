@@ -33,35 +33,29 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 
 			if( is_taxonomy_hierarchical( $field['options']['taxonomy'] ) ) {
 				$_terms = self::prepare_terms_hierarchicaly( $_terms );
-				foreach ($_terms as $term) {
-					$terms[] = array(
-						'value' => $term[ 'term_id' ],
-						'label' => $term[ 'name' ]
-					);
-				}
-			} else {
-				foreach ($_terms as $term) {
-					$terms[] = $term->name;
+			}
+
+			foreach ($_terms as $term) {
+				$terms[] = array(
+					'value' => $term->term_id,
+					'label' => $term->name
+				);
+			}
+
+			$term = false;
+			foreach( $_terms as $_term ) {
+				if( $meta == $_term->term_id ) {
+					$term = $_term;
+					break;
 				}
 			}
 
 			$options = $field['options'];
 			$field_name = $field['field_name'];
+
 			if(substr($field_name, -2) == '[]')
 				$field_name = substr_replace($field_name, '', -2);
 
-			if(is_array($meta)){
-				$meta = array_values($meta);
-				$meta = $meta[0];
-			}
-
-			$term_id  = '';
-			$term_name  = '';
-			if($meta){
-				$term_id = $meta;
-				$term = get_term( $term_id , $options['taxonomy'] );
-				$term_name  = $term->name;
-			}
 			ob_start();
 			?>
 			<div class="rwmb-field wpp-property-type wpp_ui"
@@ -70,11 +64,17 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 				>
 				<div class="clearfix term">
 					<input
-						type = "text"
+						type = "hidden"
 						name="<?php echo $field_name;?>"
-						class="ui-corner-left wpp-terms-input wpp-terms-term"
+						class="ui-corner-left wpp-terms-term wpp-terms-term-id"
 						autocomplete="off"
-						value="<?php echo $term_name;?>"
+						value="<?php echo $term ? $term->term_id : '';?>"
+						>
+					<input
+						type = "text"
+						class="ui-corner-left wpp-terms-input wpp-terms-term wpp-terms-term-label"
+						autocomplete="off"
+						value="<?php echo $term ? $term->name : '';?>"
 						>
 					<a tabindex="-1" title="Show All Items" class="ui-widget ui-state-default ui-button-icon-only select-combobox-toggle ui-corner-right" role="button">
 						<span class="ui-button-icon-primary ui-icon ui-icon-triangle-1-s"></span>
@@ -86,16 +86,10 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 
 			return $html;
 
-			if( is_taxonomy_hierarchical( $field['options']['taxonomy'] ) ) {
-				return self::_html_hierarchical( $meta, $field );
-			} else {
-				return self::_html_default( $meta, $field );
-			}
-
 		}
 
 		/**
-		 * Standard meta retrieval
+		 * Meta retrieval
 		 *
 		 * @param int   $post_id
 		 * @param bool  $saved
@@ -105,19 +99,42 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 		 */
 		static function meta( $post_id, $saved, $field )
 		{
-			$options = $field['options'];
+			$taxonomy = $field['options']['taxonomy'];
+			$terms = wp_get_object_terms( $post_id, $taxonomy );
 
-			$meta = parent::meta( $post_id, $saved, $field );
-			if (empty($meta)) {
-				$_meta = get_post_meta($post_id, 'property_type', true);
-				$term = get_term_by('slug', $_meta, 'wpp_listing_type');
-				$meta = isset($term->term_id)? (array) $term->term_id : $meta;
+			if( !$terms || !count( $terms ) ) {
+				// @TODO: add back compatibility with property_type meta if no term provided
+				return '';
 			}
-			return $meta;
+
+			$meta = false;
+			$map = array();
+			$_terms = array();
+
+			foreach( $terms as $term ) {
+				$_terms[ $term->term_id ] = $term;
+				if( !$term->parent ) {
+					$meta = $term;
+				}
+				if( $term->parent ) {
+					$map[ $term->parent ] = $term->term_id;
+				}
+			}
+
+			if( $meta ) {
+				while( isset( $map[ $meta->term_id ] ) && isset( $_terms[ $map[ $meta->term_id ] ] ) ) {
+					$meta = $_terms[ $map[ $meta->term_id ] ];
+				}
+			} else {
+				return '';
+			}
+
+			return $meta->term_id;
+
 		}
 
 		/**
-		 * Save meta value
+		 * Assign terms to post
 		 *
 		 * @param mixed $new
 		 * @param mixed $old
@@ -127,22 +144,39 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 		 * @return string
 		 */
 		static function save( $new, $old, $post_id, $field ){
-			$term_ids = array();
-			
-			if($new){
-				// Checking for existing terms
-				if(!$t = term_exists($new, $field['options']['taxonomy'])){
-					// Inserting new new term.
-					$t = wp_insert_term( $new, $field['options']['taxonomy'], array('parent'=>$p['term_id']));
+
+			if( $new !== $old ){
+
+				$taxonomy = $field['options']['taxonomy'];
+
+				$term = get_term_by('id', $new, $taxonomy);
+
+				// Prevent adding non existing listing type term!
+				if( !$term || is_wp_error($term) ) {
+					return false;
 				}
 
-				if($t && !is_wp_error($t)){
-					$term_ids[] = $t['term_id'];
+				$terms = [];
+
+				array_push($terms, $term->term_id);
+
+				if( $term->parent ) {
+					$parent = get_term_by('id', $term->parent, $taxonomy);
+					array_push( $terms, $parent->term_id );
+					while ($parent->parent != '0'){
+						$term_id = $parent->parent;
+						$parent  = get_term_by( 'id', $term_id, $taxonomy);
+						array_push( $terms, $parent->term_id );
+					}
 				}
+
+				$terms = array_reverse( $terms );
+				$terms = array_map( 'intval', $terms );
+
+				wp_set_object_terms( $post_id, $terms, $taxonomy );
+
 			}
 
-			$term_ids = array_map( 'intval', $term_ids );
-			wp_set_object_terms( $post_id, $term_ids, $field['options']['taxonomy'] );
 		}
 
 		/**
@@ -160,13 +194,13 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 
 			// Prepering terms
 			foreach ($terms as $term) {
-				$_terms[$term->parent][] = array('term_id' => $term->term_id, 'name' => $term->name);
+				$_terms[$term->parent][] = (object)array('term_id' => $term->term_id, 'name' => $term->name);
 			}
 
 			// Making terms as hierarchical by prefix
 			foreach ($_terms[0] as $term) { // $_terms[0] is parent or parentless terms
 				$return[] = $term;
-				self::get_children($term['term_id'], $_terms, $return, ( $term['name'] . ' -' ));
+				self::get_children($term->term_id, $_terms, $return, ( $term->name . ' >' ));
 			}
 
 			return $return;
@@ -183,9 +217,9 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 		static public function get_children($term_id, $terms, &$return, $prefix = "-"){
 			if(isset($terms[$term_id])){
 				foreach ($terms[$term_id] as $child) {
-					$child['name'] = $prefix . " " . $child['name'];
+					$child->name = $prefix . " " . $child->name;
 					$return[] = $child;
-					self::get_children($child['term_id'], $terms, $return, ( $prefix . ' ' . $child['name'] . ' -' ));
+					self::get_children($child->term_id, $terms, $return, ( $prefix . ' ' . $child->name . ' >' ));
 				}
 			}
 		}
