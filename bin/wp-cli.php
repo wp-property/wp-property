@@ -12,6 +12,71 @@ WP_CLI::add_command( 'wpp-term', 'WPP_CLI_Terms_Command' );
 class WPP_CLI_Property_Command extends WP_CLI_Command {
 
   /**
+   * May trigger custom actions.
+   * Just set the action you want to execute
+   *
+   * e.g., the following command:
+   *
+   * `wp property trigger --do-action=upgrade_property_types`
+   *
+   * will trigger do_action( 'wpp::cli::trigger::upgrade_property_types' );
+   *
+   * @synopsis [--posts-per-page] [--do-action]
+   * @param array $args
+   * @param array $assoc_args
+   */
+  public function trigger( $args, $assoc_args ) {
+
+    if( empty( $assoc_args['do-action'] ) ) {
+      WP_CLI::error( __( '--do-action argument must be provided' ) );
+    }
+
+    timer_start();
+
+    $action = 'wpp::cli::trigger::' . $assoc_args['do-action'];
+
+    WP_CLI::log( sprintf( __( 'Triggering [%s] action...', ud_get_wp_property()->domain ), $action ) );
+
+    do_action( $action, $assoc_args );
+
+    WP_CLI::log( WP_CLI::colorize( '%Y' . __( 'Total time elapsed: ', ud_get_wp_property()->domain ) . '%N' . timer_stop() ) );
+
+    WP_CLI::success( __( 'Done!', ud_get_wp_property()->domain ) );
+
+  }
+
+  /**
+   * Scrolls all 'property' posts for a site
+   * and call action 'wpp::cli::scroll' which can be used for different purposes
+   * e.g. to update/fix specific post's data
+   *
+   * @synopsis [--posts-per-page] [--do-action]
+   * @param array $args
+   * @param array $assoc_args
+   */
+  public function scroll( $args, $assoc_args ) {
+
+    if ( ! empty( $assoc_args['posts-per-page'] ) ) {
+      $assoc_args['posts-per-page'] = absint( $assoc_args['posts-per-page'] );
+    } else {
+      $assoc_args['posts-per-page'] = 10;
+    }
+
+    $assoc_args['do-action'] = !empty( $assoc_args['do-action'] ) ? $assoc_args['do-action'] : '';
+
+    timer_start();
+
+    WP_CLI::log( __( 'Scrolling properties...', ud_get_wp_property()->domain ) );
+
+    $this->_scroll_helper( $assoc_args );
+
+    WP_CLI::log( WP_CLI::colorize( '%Y' . __( 'Total time elapsed: ', ud_get_wp_property()->domain ) . '%N' . timer_stop() ) );
+
+    WP_CLI::success( __( 'Done!', ud_get_wp_property()->domain ) );
+
+  }
+
+  /**
    * Delete all 'property' posts for a site
    *
    * @synopsis [--posts-per-page] [--force-delete-meta]
@@ -87,6 +152,80 @@ class WPP_CLI_Property_Command extends WP_CLI_Command {
     }
 
     WP_CLI::log( sprintf( __( 'Removed [%d] meta fields which belong to property type', ud_get_wp_property()->domain ), $total ) );
+
+  }
+
+  /**
+   * Helper method for scrolling property posts
+   *
+   * @param array $args
+   * @return array
+   */
+  private function _scroll_helper( $args ) {
+
+    $posts_per_page = 10;
+    if ( ! empty( $args['posts-per-page'] ) ) {
+      $posts_per_page = absint( $args['posts-per-page'] );
+    }
+
+    $do_action = '';
+    if ( ! empty( $args['do-action'] ) ) {
+      $do_action = $args['do-action'];
+    }
+
+    $offset = 0;
+    if ( ! empty( $args['offset'] ) ) {
+      $offset = absint( $args['offset'] );
+    }
+
+    /**
+     * Create WP_Query here and reuse it in the loop to avoid high memory consumption.
+     */
+    $query = new WP_Query();
+
+    while ( true ) {
+
+      $args = apply_filters( 'wpp::cli::scroll::args', array(
+        'posts_per_page'         => $posts_per_page,
+        'post_type'              => 'property',
+        'post_status'            => array( 'publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash' ),
+        'offset'                 => $offset,
+        'ignore_sticky_posts'    => true,
+        'orderby'                => 'ID',
+        'order'                  => 'DESC',
+      ) );
+
+      $query->query( $args );
+
+      if ( $query->have_posts() ) {
+
+        while ( $query->have_posts() ) {
+          $query->the_post();
+
+          $action = 'wpp::cli::scroll';
+          if( !empty( $do_action ) ) {
+            $action .= "::" . $do_action;
+          }
+
+          do_action( $action, get_the_ID(), $args );
+
+        }
+      } else {
+        break;
+      }
+
+      WP_CLI::log( 'Processed: ' . ( $query->post_count + $offset ) . '. Total: ' . $query->found_posts . ' entries. . .' );
+
+      $offset += $posts_per_page;
+
+      usleep( 500 );
+
+      // Avoid running out of memory
+      $this->_stop_the_insanity();
+
+    }
+
+    wp_reset_postdata();
 
   }
 

@@ -185,7 +185,7 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 		 * @param $terms
 		 * @return array
 		 */
-		static public function prepare_terms_hierarchicaly($terms){
+		static public function prepare_terms_hierarchicaly($terms, $prefix = '>'){
 			$_terms = array();
 			$return = array();
 
@@ -200,7 +200,7 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 			// Making terms as hierarchical by prefix
 			foreach ($_terms[0] as $term) { // $_terms[0] is parent or parentless terms
 				$return[] = $term;
-				self::get_children($term->term_id, $_terms, $return, ( $term->name . ' >' ));
+				self::get_children($term->term_id, $_terms, $return, ( $term->name . ' ' . $prefix ));
 			}
 
 			return $return;
@@ -214,7 +214,7 @@ if ( ! class_exists( 'RWMB_Wpp_Property_Type_Field' ) ){
 		 * @param $return
 		 * @param string $prefix
 		 */
-		static public function get_children($term_id, $terms, &$return, $prefix = "-"){
+		static public function get_children($term_id, $terms, &$return, $prefix = ">"){
 			if(isset($terms[$term_id])){
 				foreach ($terms[$term_id] as $child) {
 					$child->name = $prefix . " " . $child->name;
