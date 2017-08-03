@@ -88,6 +88,16 @@ namespace UsabilityDynamics\WPRETSC {
         }, 10, 4 );
 
         /**
+         * Added filter for rebuild broken(several url in one string) links in srcset
+         */
+        add_filter ('wp_calculate_image_srcset', function($sources) {
+          foreach ($sources as &$source) {
+            $source['url'] = substr_count($source['url'], 'http') > 1 ? substr($source['url'], strrpos($source['url'], 'http')) : $source['url'];
+          }
+          return $sources;
+        }, 10, 1);
+
+        /**
          * Filters in order to make remote images to work
          */
         add_filter( 'wp_prepare_attachment_for_js', function ( $response, $attachment, $meta ) {
