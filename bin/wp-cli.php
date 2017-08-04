@@ -21,7 +21,7 @@ class WPP_CLI_Property_Command extends WP_CLI_Command {
    *
    * will trigger do_action( 'wpp::cli::trigger::upgrade_property_types' );
    *
-   * @synopsis [--posts-per-page] [--do-action]
+   * @synopsis [--posts-per-page] [--do-action] [--force]
    * @param array $args
    * @param array $assoc_args
    */
