@@ -1225,6 +1225,10 @@ namespace UsabilityDynamics\WPP {
         foreach( self::get_single_value_taxonomies() as $_tax_key => $_tax_data ) {
 
           if( is_object( $property ) ) {
+            if(!isset($property->{$_tax_key})){
+              $term = get_the_terms( $property->ID, $_tax_key);
+              $property->{$_tax_key} = isset($term[0])?$term[0]->name:'';
+            }
 
             $_item = array(
               'label' => $_tax_data['label'],
@@ -1234,6 +1238,10 @@ namespace UsabilityDynamics\WPP {
           }
 
           if( is_array( $property ) ) {
+            if(!isset($property[$_tax_key])){
+              $term = get_the_terms( $property['ID'], $_tax_key);
+              $property[$_tax_key] = isset($term[0])?$term[0]->name:'';
+            }
 
             $_item = array(
               'label' => $_tax_data['label'],
