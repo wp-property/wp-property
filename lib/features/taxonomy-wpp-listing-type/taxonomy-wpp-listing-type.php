@@ -115,6 +115,9 @@ namespace UsabilityDynamics\WPP {
        */
       public function save_property( $post_id ) {
         $term = self::get_property_direct_term( $post_id );
+        if( !$term ) {
+          return;
+        }
         $term = self::get_term( $term->term_id );
         if( isset( $term->meta[ self::$meta_property_type ] ) ) {
           update_post_meta( $post_id, 'property_type', $term->meta[ self::$meta_property_type ] );
