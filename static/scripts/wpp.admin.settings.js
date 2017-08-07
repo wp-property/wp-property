@@ -390,12 +390,12 @@ jQuery.extend( wpp = wpp || {}, {
           delay: 200
         } );
 
-        jQuery( "#wpp_inquiry_attribute_fields tbody tr, #wpp_inquiry_meta_fields tbody tr" ).live( "mouseover", function () {
+        jQuery( "#wpp_inquiry_attribute_fields tbody tr, #wpp_inquiry_meta_fields tbody tr" ).on( "mouseover", function () {
           jQuery( this ).addClass( "wpp_draggable_handle_show" );
         } );
         ;
 
-        jQuery( "#wpp_inquiry_attribute_fields tbody tr, #wpp_inquiry_meta_fields tbody tr" ).live( "mouseout", function () {
+        jQuery( "#wpp_inquiry_attribute_fields tbody tr, #wpp_inquiry_meta_fields tbody tr" ).on( "mouseout", function () {
           jQuery( this ).removeClass( "wpp_draggable_handle_show" );
         } );
         ;
@@ -403,13 +403,13 @@ jQuery.extend( wpp = wpp || {}, {
         /* Show advanced settings for an attribute when a certain value is changed */
 
         /*
-         jQuery(".wpp_searchable_attr_fields").live("change", function() {
+         jQuery(".wpp_searchable_attr_fields").on("change", function() {
          var parent = jQuery(this).closest(".wpp_dynamic_table_row");
          jQuery(".wpp_development_advanced_option", parent).show();
          });
          */
 
-        jQuery( ".wpp_all_advanced_settings" ).live( "click", function () {
+        jQuery( ".wpp_all_advanced_settings" ).on( "click", function () {
           var action = jQuery( this ).attr( "data-action" ) || jQuery( this ).attr( "action" );
 
           if( action == "expand" ) {
@@ -426,7 +426,7 @@ jQuery.extend( wpp = wpp || {}, {
         jQuery( '.wpp_attribute_group' ).wppGroups();
 
         //* Fire Event after Row is added */
-        jQuery( '#wpp_inquiry_attribute_fields tr' ).live( 'added', function () {
+        jQuery( '#wpp_inquiry_attribute_fields tr' ).on( 'added', function () {
           //* Remove notice block if it exists */
           var notice = jQuery( this ).find( '.wpp_notice' );
           if( notice.length > 0 ) {
@@ -460,7 +460,7 @@ jQuery.extend( wpp = wpp || {}, {
         } );
 
         //* Determine if slug of property stat is the same as Geo Type has and show notice */
-        jQuery( '#wpp_inquiry_attribute_fields tr .wpp_stats_slug_field' ).live( 'change', function () {
+        jQuery( '#wpp_inquiry_attribute_fields tr .wpp_stats_slug_field' ).on( 'change', function () {
           var slug = jQuery( this ).val();
           var geo_type = false;
           if( typeof wpp.instance.settings.geo_type_attributes == 'object' ) {
@@ -492,21 +492,21 @@ jQuery.extend( wpp = wpp || {}, {
           }
         } );
 
-        jQuery( ".wpp_pre_defined_value_setter" ).live( "change", function () {
+        jQuery( ".wpp_pre_defined_value_setter" ).on( "change", function () {
           wpp.ui.settings.set_pre_defined_values_for_attribute( this );
         } );
         jQuery( ".wpp_pre_defined_value_setter" ).each( function () {
           wpp.ui.settings.set_pre_defined_values_for_attribute( this );
         } );
         // Assigning  default value
-        jQuery( ".wpp_admin_input_col .wpp_default_value_setter" ).live( "change", function () {
+        jQuery( ".wpp_admin_input_col .wpp_default_value_setter" ).on( "change", function () {
           wpp.ui.settings.default_values_for_attribute( this );
         } );
 
         /**
          * Upload Image
          */
-        jQuery( '.button-setup-image' ).live( 'click', function ( e ) {
+        jQuery( '.button-setup-image' ).on( 'click', function ( e ) {
           e.preventDefault();
           var section = jQuery( this ).parents( '.upload-image-section' );
           if( !section.length > 0 ) {
@@ -536,7 +536,7 @@ jQuery.extend( wpp = wpp || {}, {
           wpp.ui.settings.append_default_image( jQuery( e ) );
         } );
 
-        jQuery( '#wpp_inquiry_property_types tr' ).live( 'added', function () {
+        jQuery( '#wpp_inquiry_property_types tr' ).on( 'added', function () {
           var section = jQuery( this ).find( '.upload-image-section' );
           if( !section.length > 0 ) {
             return;

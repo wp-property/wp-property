@@ -216,7 +216,7 @@ class OtherPropertiesWidget extends WP_Widget {
     <script type="text/javascript">
 
       jQuery( document ).ready( function ( $ ) {
-        jQuery( 'input.check_me_other' ).live( 'change', function () {
+        jQuery( 'input.check_me_other' ).on( 'change', function () {
           var parent = jQuery( this ).closest( '.widget-content' );
           if ( jQuery( this ).is( ':checked' ) ) {
             jQuery( 'p.choose_thumb_other', parent ).hide();

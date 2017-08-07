@@ -99,22 +99,22 @@ jQuery.fn.wppGroups = function(opt) {
   };
 
   //* EVENTS */
-  instance.live('click', function(){
+  instance.on('click', function(){
     showGroupBox();
     jQuery(this).parent().parent().addClass('groups_active');
   });
 
-  instance.live('focus', function(){
+  instance.on('focus', function(){
     jQuery(this).trigger('blur');
   });
 
   //* Close Group Box */
-  close.live('click', function(){
+  close.on('click', function(){
     closeGroupBox();
   });
 
   //* Assign attribute to Group */
-  assign.live('click', function(){
+  assign.on('click', function(){
     var row = jQuery(this).parent().parent();
 
     var active_groups = jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row.groups_active');
@@ -138,7 +138,7 @@ jQuery.fn.wppGroups = function(opt) {
   });
 
   //* Unassign attribute from Group */
-  unassign.live('click', function(){
+  unassign.on('click', function(){
     var active_groups = jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row.groups_active');
     jQuery(active_groups).css('background-color', '');
     //* HACK FOR IE7 */
@@ -153,7 +153,7 @@ jQuery.fn.wppGroups = function(opt) {
   });
 
   //* Refresh background of all attributes on color change */
-  colorpicker.live('change', function(){
+  colorpicker.on('change', function(){
     var cp = jQuery(this);
     var s = cp.parent().parent().attr('slug');
     instance.each(function(i,e){
@@ -168,7 +168,7 @@ jQuery.fn.wppGroups = function(opt) {
   });
 
   //* Refresh Group Name field of all assigned attributes on group name change */
-  groupname.live('change', function(){
+  groupname.on('change', function(){
     var gn = ( jQuery(this).val() != '' ) ? jQuery(this).val() : 'NO NAME';
     var s = jQuery(this).parent().parent().attr('slug');
     instance.each(function(i,e){
@@ -179,7 +179,7 @@ jQuery.fn.wppGroups = function(opt) {
   });
 
   //* Remove group from the list */
-  remove.live('click', function(){
+  remove.on('click', function(){
     var s = jQuery(this).parent().parent().attr('slug');
     instance.each(function(i,e){
       if(s == jQuery(e).next().val()) {
@@ -195,12 +195,12 @@ jQuery.fn.wppGroups = function(opt) {
   });
 
   //* Close Groups Box on wrapper click */
-  wrapper.live('click', function(){
+  wrapper.on('click', function(){
     closeGroupBox();
   });
 
   //* Sorts all attributes by Groups */
-  sortButton.live('click', function(){
+  sortButton.on('click', function(){
     jQuery('tbody tr' , groupsBlock).each(function(gi,ge){
       var statsRow = jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row');
       statsRow.each(function(si,se){
@@ -377,7 +377,7 @@ var updateRowNames = function(instance, allowRandomSlug) {
  * Copyright 2011 Usability Dynamics, Inc. <info@usabilitydynamics.com>
  */
 function toggle_advanced_options() {
-  jQuery(".wpp_show_advanced").live("click", function() {
+  jQuery(".wpp_show_advanced").on("click", function() {
     var advanced_option_class = false;
     var show_type = false;
     var show_type_element_attribute = false;
@@ -703,7 +703,7 @@ jQuery(document).ready(function() {
   toggle_advanced_options();
 
   //* Easy way of displaying the contextual help dropdown */
-  jQuery(".wpp_toggle_contextual_help").live("click", function( event ) {
+  jQuery(".wpp_toggle_contextual_help").on("click", function( event ) {
     wpp_toggle_contextual_help(this , event );
   });
 
@@ -720,20 +720,20 @@ jQuery(document).ready(function() {
   bindColorPicker();
 
   // Add row to UD UI Dynamic Table
-  jQuery(".wpp_add_row").live("click" , function() {
+  jQuery(".wpp_add_row").on("click" , function() {
     wpp_add_row(this);
   });
 
   // When the .slug_setter input field is modified, we update names of other elements in row
-  jQuery(".wpp_dynamic_table_row[new_row=true] input.slug_setter").live("keyup", function() {
+  jQuery(".wpp_dynamic_table_row[new_row=true] input.slug_setter").on("keyup", function() {
     updateRowNames(this, true);
   });
-  jQuery(".wpp_dynamic_table_row[new_row=true] select.slug_setter").live("change", function() {
+  jQuery(".wpp_dynamic_table_row[new_row=true] select.slug_setter").on("change", function() {
     updateRowNames(this, true);
   });
 
   // Delete dynamic row
-  jQuery(".wpp_delete_row").live("click", function(event) {
+  jQuery(".wpp_delete_row").on("click", function(event) {
     event.preventDefault();
     if(jQuery(this).hasClass('disabled'))
       return false;
@@ -764,7 +764,7 @@ jQuery(document).ready(function() {
     table.trigger('row_removed', [parent]);
   });
 
-  jQuery('.wpp_attach_to_agent').live('click', function(){
+  jQuery('.wpp_attach_to_agent').on('click', function(){
     var agent_image_id = jQuery(this).attr('id');
     if (agent_image_id != '')
       jQuery('#library-form').append('<input name="wpp_agent_post_id" type="text" value="' + agent_image_id + '" />').submit();
@@ -773,7 +773,7 @@ jQuery(document).ready(function() {
   //* Add Sort functionality to Table */
   if(typeof jQuery.fn.sortable == 'function') {
     jQuery('table.wpp_sortable tbody').sortable();
-    jQuery('table.wpp_sortable tbody tr').live("mouseover mouseout", function(event) {
+    jQuery('table.wpp_sortable tbody tr').on("mouseover mouseout", function(event) {
       if ( event.type == "mouseover" ) {
         jQuery(this).addClass("wpp_draggable_handle_show");
       } else {
@@ -783,7 +783,7 @@ jQuery(document).ready(function() {
   }
   // for developer-settings-attributes
   //toggle std attr
-  jQuery(".wpp-toggle-std-attr").live("click", function() {
+  jQuery(".wpp-toggle-std-attr").on("click", function() {
       jQuery(this).closest('li').find(".std-attr-mapper").fadeToggle();
   });
   

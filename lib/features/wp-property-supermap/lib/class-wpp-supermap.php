@@ -289,7 +289,7 @@ class class_wpp_supermap {
                 });
 
                 /* Remove ajaxuploader and image on Slug changing */
-                jQuery('#wpp_supermap_markers input.slug').live('change', function(){
+                jQuery('#wpp_supermap_markers input.slug').on('change', function(){
                   var e = this;
                   var row = jQuery(e).parents('.wpp_dynamic_table_row');
                   if(row.length > 0) {
@@ -301,7 +301,7 @@ class class_wpp_supermap {
                 });
 
                 /* Remove image from new Row */
-                jQuery('#wpp_supermap_markers tr').live('added', function(){
+                jQuery('#wpp_supermap_markers tr').on('added', function(){
                   jQuery('input.slug', this).trigger('change');
                   jQuery('.wpp_ajax_image_upload', this).map_marker_select({
                     image: "img"
@@ -309,7 +309,7 @@ class class_wpp_supermap {
                 });
 
                 /* Fire event after row removing to check table's DOM */
-                jQuery('#wpp_supermap_markers').live('row_removed', function(){
+                jQuery('#wpp_supermap_markers').on('row_removed', function(){
                   var row_count = jQuery(this).find(".wpp_delete_row:visible").length;
                   if(row_count == 1) {
                     var slug = jQuery(this).find('input.wpp_marker_slug').val();
@@ -587,7 +587,7 @@ class class_wpp_supermap {
 
         jQuery(document).ready(function(){
           /* Change marker image */
-          jQuery('#wpp_setting_supermap_marker').live('change', function(){
+          jQuery('#wpp_setting_supermap_marker').on('change', function(){
             var e = jQuery('#wpp_supermap_marker_settings');
             var filename = jQuery(this).val();
             var rand = Math.random();
@@ -601,7 +601,7 @@ class class_wpp_supermap {
           });
 
           /* Change supermap marker on Property Type 'change' Event */
-          jQuery('#wpp_meta_property_type').live('change', function(){
+          jQuery('#wpp_meta_property_type').on('change', function(){
             var property_type = jQuery(this).val();
             for(var i in property_type_markers) {
               if(property_type == i) {
