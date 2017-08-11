@@ -42,6 +42,10 @@ foreach( (array) $property_stats as $attribute_label => $attribute_value) {
     continue;
   }
 
+  if(is_array($attribute_value)){
+    $attribute_value = implode(', ', $attribute_value);
+  }
+
   $attributes[] =  '<li class="supermap_list_' . $attribute_slug . ' wpp_supermap_attribute_row">';
   $attributes[] =  '<span class="attribute">' . $attribute_label . (!$boolean_field ? ':' : '') . ' </span>';
   $attributes[] =  '<span class="value">' . $attribute_value . '</span>';
