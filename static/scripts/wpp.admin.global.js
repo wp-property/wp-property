@@ -12,7 +12,7 @@ var __ = {};
 if(_.name == 'lodash'){
   __ = _.noConflict();
 }
-  
+
 _.wppSelected = function(selected, current) {
   var result = '';
   current = current || true;
@@ -54,6 +54,12 @@ jQuery.fn.wppGroups = function(opt) {
     removeButton: '.wpp_delete_row',
     sortButton: ".sort_stats_by_groups"
   };
+
+  // get element class
+  var elementClass = jQuery(this).attr('class');
+  elementClass = elementClass.replace(/\s/ig, '.');
+  elementClass = elementClass.split('.')[0];
+  elementClass = '.' + elementClass;
 
   opt = jQuery.extend({}, defaults, opt);
 
@@ -99,22 +105,22 @@ jQuery.fn.wppGroups = function(opt) {
   };
 
   //* EVENTS */
-  instance.on('click', function(){
+  jQuery(document).on('click', elementClass, function(){
     showGroupBox();
     jQuery(this).parent().parent().addClass('groups_active');
   });
 
-  instance.on('focus', function(){
+  jQuery(document).on('focus', elementClass, function(){
     jQuery(this).trigger('blur');
   });
 
   //* Close Group Box */
-  close.on('click', function(){
+  jQuery(groupsBlock).on('click', opt.closeButton, function(){
     closeGroupBox();
   });
 
   //* Assign attribute to Group */
-  assign.on('click', function(){
+  jQuery(document).on('click', opt.assignButton, function(){
     var row = jQuery(this).parent().parent();
 
     var active_groups = jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row.groups_active');
@@ -138,7 +144,7 @@ jQuery.fn.wppGroups = function(opt) {
   });
 
   //* Unassign attribute from Group */
-  unassign.on('click', function(){
+  jQuery(document).on('click', opt.unassignButton, function(){
     var active_groups = jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row.groups_active');
     jQuery(active_groups).css('background-color', '');
     //* HACK FOR IE7 */
@@ -153,7 +159,7 @@ jQuery.fn.wppGroups = function(opt) {
   });
 
   //* Refresh background of all attributes on color change */
-  colorpicker.on('change', function(){
+  jQuery(groupsBlock).on('change', 'input.wpp_input_colorpicker', function(){
     var cp = jQuery(this);
     var s = cp.parent().parent().attr('slug');
     instance.each(function(i,e){
@@ -168,7 +174,7 @@ jQuery.fn.wppGroups = function(opt) {
   });
 
   //* Refresh Group Name field of all assigned attributes on group name change */
-  groupname.on('change', function(){
+  jQuery(groupsBlock).on('change', 'input.slug_setter', function(){
     var gn = ( jQuery(this).val() != '' ) ? jQuery(this).val() : 'NO NAME';
     var s = jQuery(this).parent().parent().attr('slug');
     instance.each(function(i,e){
@@ -179,7 +185,7 @@ jQuery.fn.wppGroups = function(opt) {
   });
 
   //* Remove group from the list */
-  remove.on('click', function(){
+  jQuery(groupsBlock).on('click', opt.removeButton, function(){
     var s = jQuery(this).parent().parent().attr('slug');
     instance.each(function(i,e){
       if(s == jQuery(e).next().val()) {
@@ -195,12 +201,12 @@ jQuery.fn.wppGroups = function(opt) {
   });
 
   //* Close Groups Box on wrapper click */
-  wrapper.on('click', function(){
+  jQuery(document).on('click', opt.groupWrapper, function(){
     closeGroupBox();
   });
 
   //* Sorts all attributes by Groups */
-  sortButton.on('click', function(){
+  jQuery(document).on('click', opt.sortButton, function(){
     jQuery('tbody tr' , groupsBlock).each(function(gi,ge){
       var statsRow = jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row');
       statsRow.each(function(si,se){
@@ -377,7 +383,7 @@ var updateRowNames = function(instance, allowRandomSlug) {
  * Copyright 2011 Usability Dynamics, Inc. <info@usabilitydynamics.com>
  */
 function toggle_advanced_options() {
-  jQuery(".wpp_show_advanced").on("click", function() {
+  jQuery(document).on("click", ".wpp_show_advanced", function() {
     var advanced_option_class = false;
     var show_type = false;
     var show_type_element_attribute = false;
@@ -703,7 +709,7 @@ jQuery(document).ready(function() {
   toggle_advanced_options();
 
   //* Easy way of displaying the contextual help dropdown */
-  jQuery(".wpp_toggle_contextual_help").on("click", function( event ) {
+  jQuery(document).on("click", ".wpp_toggle_contextual_help", function( event ) {
     wpp_toggle_contextual_help(this , event );
   });
 
@@ -725,19 +731,19 @@ jQuery(document).ready(function() {
   });
 
   // When the .slug_setter input field is modified, we update names of other elements in row
-  jQuery(".wpp_dynamic_table_row[new_row=true] input.slug_setter").on("keyup", function() {
+  jQuery(document).on("keyup", ".wpp_dynamic_table_row[new_row=true] input.slug_setter", function() {
     updateRowNames(this, true);
   });
-  jQuery(".wpp_dynamic_table_row[new_row=true] select.slug_setter").on("change", function() {
+  jQuery(document).on("change", ".wpp_dynamic_table_row[new_row=true] select.slug_setter", function() {
     updateRowNames(this, true);
   });
 
   // Delete dynamic row
-  jQuery(".wpp_delete_row").on("click", function(event) {
+  jQuery(document).on("click", ".wpp_delete_row", function(event) {
     event.preventDefault();
     if(jQuery(this).hasClass('disabled'))
       return false;
-    
+
     var parent = jQuery(this).parents('tr.wpp_dynamic_table_row');
     var table = jQuery(jQuery(this).parents('table').get(0));
     var row_count = table.find(".wpp_delete_row").length;
@@ -764,7 +770,7 @@ jQuery(document).ready(function() {
     table.trigger('row_removed', [parent]);
   });
 
-  jQuery('.wpp_attach_to_agent').on('click', function(){
+  jQuery(document).on('click', '.wpp_attach_to_agent', function(){
     var agent_image_id = jQuery(this).attr('id');
     if (agent_image_id != '')
       jQuery('#library-form').append('<input name="wpp_agent_post_id" type="text" value="' + agent_image_id + '" />').submit();
@@ -773,7 +779,7 @@ jQuery(document).ready(function() {
   //* Add Sort functionality to Table */
   if(typeof jQuery.fn.sortable == 'function') {
     jQuery('table.wpp_sortable tbody').sortable();
-    jQuery('table.wpp_sortable tbody tr').on("mouseover mouseout", function(event) {
+    jQuery(document).on("mouseover mouseout", 'table.wpp_sortable tbody tr', function(event) {
       if ( event.type == "mouseover" ) {
         jQuery(this).addClass("wpp_draggable_handle_show");
       } else {
@@ -783,13 +789,13 @@ jQuery(document).ready(function() {
   }
   // for developer-settings-attributes
   //toggle std attr
-  jQuery(".wpp-toggle-std-attr").on("click", function() {
+  jQuery(document).on("click", ".wpp-toggle-std-attr", function() {
       jQuery(this).closest('li').find(".std-attr-mapper").fadeToggle();
   });
-  
+
   // apply notices on developer tab
   applyNotices = function(notice,notice_cont){
-      
+
     if(typeof(notice)!="undefined" && notice.trim().length >0){
       notice_cont.text(notice).fadeIn();
     }
@@ -803,21 +809,21 @@ jQuery(document).ready(function() {
 
     var iconClass =  jQuery(this).find(".std-attr-mapper .wpp_settings-prop_std_att_mapsto").val();
     $x = jQuery(this).find(".wpp_std_attr_view i").addClass(iconClass);
-    
+
     //if there are notices then display them
     var notice = jQuery(this).find('.wpp_settings-prop_std_att_mapsto').find(':selected').data('notice');
     var notice_cont = jQuery(this).find("i.std_att_notices");
     applyNotices(notice,notice_cont);
   });
-  
+
   // for developer-settings-attributes
   //change icon on select change
   jQuery(".std-attr-mapper .wpp_settings-prop_std_att_mapsto").change(function(){
-    
+
     var iconClass =  jQuery(this).val();
     $x = jQuery(this).closest("tr").find(".wpp_std_attr_view i");
     $x.removeClass().addClass(iconClass);
-    
+
     //if there are notices then display them
     var notice = jQuery(this).find(':selected').data('notice');
     var notice_cont = jQuery(this).parent().find("i.std_att_notices");
@@ -834,7 +840,7 @@ jQuery(document).ready(function() {
         jQuery("option", jQuery(this)).each(function(){
             jQuery(this).removeAttr("disabled");
         });
-      
+
       jQuery.each(items, function() {
         if (jQuery.trim(jQuery(this).val()) == ''){
           jQuery("option[value='" + jQuery(this).val() + "']", val).attr("disabled", true);
@@ -842,7 +848,7 @@ jQuery(document).ready(function() {
       });
     });
   })();
-  
+
     //notice popups to explain matched fields in Standard attributes
   jQuery(".wpp-notice-for-match").click(function(e){
     e.preventDefault();
