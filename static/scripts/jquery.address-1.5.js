@@ -667,7 +667,7 @@
                     $.address.value(value);
                 }
             };
-            $(sel ? sel : this).live('click', f).live('submit', function(e) {
+            $(sel ? sel : this).on('click', f).on('submit', function(e) {
                 if ($(this).is('form')) {
                     e.preventDefault();
                     var action = $(this).attr('action'),

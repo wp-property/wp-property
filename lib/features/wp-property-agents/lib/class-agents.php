@@ -1409,6 +1409,12 @@ class class_agents
         update_user_meta($user_id, $key, $agent_field);
       }
     }
+
+    global $wpdb;
+    $user = $wpdb->get_row( $wpdb->prepare(
+      "SELECT * FROM $wpdb->users WHERE ID = %s", $user_id
+    ) );
+    wp_cache_set($user_id, $user, 'users');
   }
 
   /**

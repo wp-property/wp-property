@@ -577,65 +577,6 @@
         ]
     },
     {
-        "name": "rets-ci/wp-rets-client",
-        "version": "dev-latest",
-        "version_normalized": "dev-latest",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:rets-ci/wp-rets-client",
-            "reference": "latest"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/rets-ci/wp-rets-client/archive/latest.zip",
-            "reference": "latest",
-            "shasum": null
-        },
-        "archive": {
-            "exclude": [
-                "node_modules",
-                ".gitignore",
-                "test",
-                "circle.yml",
-                "composer.lock",
-                "gruntfile.js",
-                "package.json"
-            ]
-        },
-        "require": {
-            "php": ">=5.3",
-            "usabilitydynamics/lib-utility": "0.3.7",
-            "usabilitydynamics/lib-wp-bootstrap": "1.2.1",
-            "usabilitydynamics/lib-wp-saas-util": "1.0.5"
-        },
-        "type": "wordpress-plugin",
-        "extra": {
-            "saasProduct": "prod_ADfpGniA1kxNep",
-            "schemas": {
-                "dependencies": {
-                    "modules": [],
-                    "plugins": []
-                },
-                "licenses": []
-            },
-            "installer-name": "wp-rets-client"
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "lib/classes",
-                "lib/connectors"
-            ],
-            "files": [
-                "loader.php"
-            ]
-        },
-        "license": [
-            "MIT"
-        ],
-        "homepage": "https://usabilitydynamics.com"
-    },
-    {
         "name": "ccampbell/chromephp",
         "version": "4.1.0",
         "version_normalized": "4.1.0.0",
@@ -775,5 +716,64 @@
             "search",
             "wordpress"
         ]
+    },
+    {
+        "name": "rets-ci/wp-rets-client",
+        "version": "dev-latest",
+        "version_normalized": "dev-latest",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:rets-ci/wp-rets-client",
+            "reference": "latest"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/rets-ci/wp-rets-client/archive/latest.zip",
+            "reference": "latest",
+            "shasum": null
+        },
+        "archive": {
+            "exclude": [
+                "node_modules",
+                ".gitignore",
+                "test",
+                "circle.yml",
+                "composer.lock",
+                "gruntfile.js",
+                "package.json"
+            ]
+        },
+        "require": {
+            "php": ">=5.3",
+            "usabilitydynamics/lib-utility": "0.3.7",
+            "usabilitydynamics/lib-wp-bootstrap": "1.2.1",
+            "usabilitydynamics/lib-wp-saas-util": "1.0.5"
+        },
+        "type": "wordpress-plugin",
+        "extra": {
+            "saasProduct": "prod_ADfpGniA1kxNep",
+            "schemas": {
+                "dependencies": {
+                    "modules": [],
+                    "plugins": []
+                },
+                "licenses": []
+            },
+            "installer-name": "wp-rets-client"
+        },
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "lib/classes",
+                "lib/connectors"
+            ],
+            "files": [
+                "loader.php"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "homepage": "https://usabilitydynamics.com"
     }
 ]

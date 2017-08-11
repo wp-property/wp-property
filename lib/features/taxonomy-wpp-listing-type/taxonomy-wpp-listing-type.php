@@ -14,59 +14,47 @@ namespace UsabilityDynamics\WPP {
 
     class Taxonomy_WPP_Listing_Type {
 
+      static $taxonomy = 'wpp_listing_type';
+      static $meta_property_type = 'property_type';
+
       /**
        * Loads all stuff for WPP_FEATURE_FLAG_WPP_LISTING_TYPE
        */
       public function __construct(){
-        global $wp_properties;
 
-        // Update taxonomy terms on saving property
-        add_action( "save_property", function( $post_id ){
-          global $wp_properties;
+        add_filter( "wpp::rwmb_meta_box::field::property_type", function( $field, $post ){
+          $taxonomies = ud_get_wp_property( 'taxonomies', array() );
 
-          // if property_type is set then update wpp_listing_type term.
-          if(!empty($_REQUEST[ 'property_type' ]) && $property_type = $_REQUEST[ 'property_type' ]){
-            $property_type_label = ucwords($property_type);
-            $term = get_the_terms( $post_id, 'wpp_listing_type');
+          $field = apply_filters( 'wpp::rwmb_meta_box::field', array_filter( array(
+            'id' => 'wpp_listing_type',
+            'name' => $taxonomies['wpp_listing_type']['label'],
+            'type' => 'wpp_property_type', // Metabox field type
+            'placeholder' => sprintf( __( 'Select %s Type', ud_get_wp_property()->domain ), WPP_F::property_label() ),
+            'multiple' => false,
+            'options' => array(
+              'taxonomy' => 'wpp_listing_type',
+              'type' => 'select',
+              'args' => array(),
+            )
+          ) ), 'wpp_listing_type', $post );
+          return $field;
+        }, 10, 2 );
 
-            if(isset($wp_properties['property_types'][$property_type])){
-              $property_type_label = $wp_properties['property_types'][$property_type];
-            }
-
-            // Checking whether Property type changed or not.
-            if(!is_wp_error( $term ) && !empty($term[0]->slug) && $term[0]->slug == $property_type){
-              return; // Property type not changed. Nothing need to do.
-            }
-
-            $term_ids = array();
-            // Checking for existing terms
-            if(!$t = term_exists($property_type, 'wpp_listing_type')){
-              // Inserting new term.
-              $t = wp_insert_term( $property_type_label, 'wpp_listing_type', array('slug' => $property_type) );
-            }
-
-            if($t && !is_wp_error($t)){
-              $term_ids[] = $t['term_id'];
-            }
-
-            $term_ids = array_map( 'intval', $term_ids );
-            wp_set_object_terms( $post_id, $term_ids, 'wpp_listing_type' );
-
-          }
-        } );
+        // Update legacy property_type on saving property
+        add_action( "save_property", array( $this, 'save_property' ), 10, 1 );
 
         add_action( 'created_wpp_listing_type', array($this, 'term_created_wpp_listing_type'), 10, 2 );
         add_action( 'edited_wpp_listing_type', array($this, 'term_created_wpp_listing_type'), 10, 2 );
-        add_action( 'delete_wpp_listing_type', array($this, 'term_delete_wpp_listing_type'), 10, 4 );
-        add_action( 'wpp_settings_save', array( $this, 'create_property_type_terms'), 10, 2 );
+        add_action( 'pre_delete_term', array($this, 'pre_delete_term'), 10, 4 );
+        add_action( 'wpp_settings_save', array( $this, 'sync_property_type_terms'), 10, 2 );
 
         add_filter('wpp_taxonomies', function( $taxonomies = array() ) {
-          $taxonomies['wpp_listing_type'] = array(
+          $taxonomies[ self::$taxonomy ] = array(
             'default' => true,
             'readonly' => true,
             'system' => true,
             'hidden' => true,
-            'hierarchical' => false,
+            'hierarchical' => true,
             'unique' => true,
             'public' => true,
             'show_in_nav_menus' => true,
@@ -94,16 +82,6 @@ namespace UsabilityDynamics\WPP {
           return $taxonomies;
         }, 10 );
 
-        add_action( 'wpp_init:end', function() {
-          global $wp_properties;
-          // Run activation task after plugin fully activated.
-          if( get_option('wpp_activated') ){
-            Taxonomy_WPP_Listing_Type::add_wpp_listing_type_from_existing_terms();
-            Taxonomy_WPP_Listing_Type::create_property_type_terms( $wp_properties, $wp_properties );
-            delete_option('wpp_activated');
-          }
-        } );
-
         add_filter( 'wpp:elastic:title_suggest', array( $this, 'elastic_title_suggest' ), 10, 3 );
 
         if( defined('WP_PROPERTY_FLAG_ENABLE_TERMS')) {
@@ -122,6 +100,208 @@ namespace UsabilityDynamics\WPP {
           }, 10, 2);
         }
 
+        // WP-CLI commands:
+        // `wp property scroll --do-action=wpp_listing_type`
+        add_action( 'wpp::cli::scroll::wpp_listing_type', array( $this, 'cli_update_post_property_type' ), 10, 2 );
+        // `wp property trigger --do-action=upgrade_property_types`
+        add_action( 'wpp::cli::trigger::upgrade_property_types', array( $this, 'cli_sync_property_types' ), 10, 1 );
+
+      }
+
+      /**
+       * Setup property_type on saving post
+       *
+       * @param $post_id
+       */
+      public function save_property( $post_id ) {
+        $term = self::get_property_direct_term( $post_id );
+        if( !$term ) {
+          return;
+        }
+        $term = self::get_term( $term->term_id );
+        if( isset( $term->meta[ self::$meta_property_type ] ) ) {
+          update_post_meta( $post_id, 'property_type', $term->meta[ self::$meta_property_type ] );
+        }
+      }
+
+      /**
+       * On WPP Settings Update event
+       * we're syncing property types with wpp_listing_type terms
+       *
+       *
+       */
+      public function sync_property_type_terms( $wpp_settings, $wp_properties ) {
+
+        remove_action( 'created_wpp_listing_type', array( $this, 'term_created_wpp_listing_type' ), 10, 2 );
+        remove_action( 'edited_wpp_listing_type', array( $this, 'term_created_wpp_listing_type' ), 10, 2 );
+
+        $terms = get_terms( self::$taxonomy, [
+          'hide_empty' => false
+        ]);
+
+        // Add missing terms
+
+        $property_types = $wpp_settings[ 'property_types' ];
+        $terms = $this->get_terms_hierarchicaly( $terms, '/' );
+
+        foreach( $terms as $term ) {
+          // It must not happen, actually
+          if( !isset( $term->meta[ self::$meta_property_type ] ) ) {
+            continue;
+          }
+          $slug = $term->meta[ self::$meta_property_type ];
+
+          if( !isset( $property_types[ $slug ] ) ) {
+            $property_types[ $slug ] = $term->name;
+            update_term_meta( $term->term_id, self::$meta_property_type, $slug );
+          }
+        }
+
+        ksort($property_types);
+
+        foreach( $property_types as $slug => $label ){
+          $exist = false;
+          foreach( $terms as $term ) {
+            if( $term->meta[ self::$meta_property_type ] == $slug ) {
+              $exist = true;
+            }
+          }
+          if( !$exist ) {
+            $term = term_exists($slug, self::$taxonomy);
+            if (!$term) {
+              $term = wp_insert_term( $label, self::$taxonomy, array(
+                'slug' => $slug,
+                'description' => 'Assigned property_type [' . $slug . ']'
+              ));
+              update_term_meta( $term['term_id'], self::$meta_property_type, $slug );
+            } else {
+              // Honestly it had not to happen...
+              // Removing property type to exclude conflicts...
+              unset( $property_types[$slug] );
+            }
+
+          }
+        }
+
+        $wpp_settings[ 'property_types' ] = $property_types;
+
+        return $wpp_settings;
+
+      }
+
+      /**
+       *
+       * WP-CLI: `wp property trigger --do-action=upgrade_property_types`
+       *
+       * Used on action: 'wpp::cli::trigger::upgrade_property_types'
+       *
+       */
+      public function cli_sync_property_types( $args ) {
+
+        remove_action( 'created_wpp_listing_type', array( $this, 'term_created_wpp_listing_type' ), 10, 2 );
+        remove_action( 'edited_wpp_listing_type', array( $this, 'term_created_wpp_listing_type' ), 10, 2 );
+
+        $terms = get_terms( self::$taxonomy, [
+          'hide_empty' => false
+        ]);
+
+        if( is_wp_error( $terms ) ) {
+          \WP_CLI::error( $terms->get_error_message() );
+          return;
+        }
+
+        if( empty( $terms ) ) {
+          \WP_CLI::log( 'No terms found' );
+          return;
+        }
+
+        \WP_CLI::log( 'STEP 1. Merging property types with wpp_listing_type_taxonomy terms...' );
+
+        $terms = $this->get_terms_hierarchicaly( $terms, '/' );
+        $property_types = ud_get_wp_property( 'property_types' );
+
+        foreach( $terms as $term ) {
+          // It must not happen, actually
+          if( !isset( $term->meta[ self::$meta_property_type ] ) ) {
+            continue;
+          }
+          $slug = $term->meta[ self::$meta_property_type ];
+          if( !isset( $property_types[ $slug ] ) ) {
+            \WP_CLI::log( sprintf( __( 'Creating property type [%s]. Slug [%s]. Term ID [%s]' ), $term->name, $slug, $term->term_id ) );
+            $property_types[ $slug ] = $term->name;
+            update_term_meta( $term->term_id, self::$meta_property_type, $slug );
+          }
+
+          // if 'force' argument provided, we update property types labels as well
+          else if( isset( $args[ 'force' ] ) ) {
+            \WP_CLI::log( sprintf( __( 'Forcing to update property type with slug [%s]. Term ID [%s]. Old label [%s]. New label [%s]' ), $slug, $term->term_id, $property_types[ $slug ], $term->name ) );
+            $property_types[ $slug ] = $term->name;
+          }
+
+        }
+
+        \WP_CLI::log( 'STEP 2. Merging wpp_listing_type_taxonomy terms with property types...' );
+
+        foreach( $property_types as $slug => $label ){
+          $exist = false;
+          foreach( $terms as $term ) {
+            if( $term->meta[ self::$meta_property_type ] == $slug ) {
+              $exist = true;
+            }
+          }
+          if( !$exist ) {
+            \WP_CLI::log( sprintf( __( 'No term assigned to property type [%s]. Trying to assign term' ), $slug ) );
+            $term = term_exists($slug, self::$taxonomy);
+            if (!$term) {
+              $term = wp_insert_term( $label, self::$taxonomy, array(
+                'slug' => $slug,
+                'description' => 'Assigned property_type [' . $slug . ']'
+              ));
+              update_term_meta( $term['term_id'], self::$meta_property_type, $slug );
+            } else {
+              // Honestly it had not to happen...
+              // Removing property type to exclude conflicts...
+              \WP_CLI::log( sprintf( __( 'Conflict between term and property type [%s]' ), $slug ) );
+              unset( $property_types[$slug] );
+            }
+
+          }
+        }
+
+        \WP_CLI::log( 'STEP 3. Updating wpp_settings..' );
+
+        asort($property_types);
+        print_r( $property_types );
+        ud_get_wp_property()->set( 'property_types', $property_types );
+        $wpp_settings = ud_get_wp_property()->get();
+        update_option('wpp_settings', $wpp_settings);
+
+      }
+
+      /**
+       * Updates/fixes property type of current property based on wpp_listing_type.
+       * If property type does not exist, - it creates it.
+       *
+       * Note: the functions must be called ONLY on WP-CLI running
+       *
+       * See: wp-property/bin/wp-cli.php
+       * Used on action: 'wpp::cli::scroll:wpp_listing_type'
+       *
+       * WP-CLI command: `wp property scroll --do-action=wpp_listing_type`
+       *
+       * @param $post_id
+       */
+      public function cli_update_post_property_type( $post_id, $args ) {
+        $term = self::get_property_direct_term( $post_id );
+        if( !$term ) {
+          \WP_CLI::log( sprintf( __( 'No wpp_listing_type term found for [%s] property' ), $post_id ) );
+          return;
+        }
+        $term = self::get_term( $term->term_id );
+        if( isset( $term->meta[ self::$meta_property_type ] ) ) {
+          \WP_CLI::log( sprintf( __( 'Updating property_type [%s] for [%s] property' ), $term->meta[ self::$meta_property_type ], $post_id ) );
+          update_post_meta( $post_id, 'property_type', $term->meta[ self::$meta_property_type ] );
+        }
       }
 
       /**
@@ -129,18 +309,21 @@ namespace UsabilityDynamics\WPP {
        * It's moved from class-upgrade.php
        *
        * @note This must be ran after the 'init' hook since we call 'register_taxonomy'
-       *
        */
       public static function migrate_legacy_type_to_term(){
+
+        //@TODO: disabled for now. It must be refactored. -> Term must be assigned to property type by it's meta 'property_type'. peshkov@UD
+        return;
+
         global $wpdb, $wp_properties;
 
         $pp = $wpdb->get_results("SELECT ID from {$wpdb->posts} WHERE post_type='property'");
 
         /* Generate Property type terms */
         foreach ($wp_properties['property_types'] as $_term => $label) {
-          $term = term_exists($label, 'wpp_listing_type');
+          $term = term_exists($label, self::$taxonomy);
           if (!$term) {
-            $term = wp_insert_term($label, 'wpp_listing_type', array('slug' => $_term));
+            $term = wp_insert_term($label, self::$taxonomy, array('slug' => $_term));
           }
         }
 
@@ -148,89 +331,11 @@ namespace UsabilityDynamics\WPP {
           foreach ($pp as $p) {
             $property_type = get_post_meta($p->ID, 'property_type', true);
             if (!empty($property_type)) {
-              wp_set_object_terms($p->ID, $property_type, 'wpp_listing_type');
+              wp_set_object_terms($p->ID, $property_type, self::$taxonomy );
             }
           }
         }
 
-      }
-
-      /**
-       * Insert or update wpp_listing_type terms
-       * Based on property_types on settings developer tab.
-       * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
-       *
-       * @param $wpp_settings : New settings
-       * @param $wp_properties : Old settings
-       *
-       * @return mixed
-       */
-      public static function create_property_type_terms( $wpp_settings, $wp_properties ) {
-        $terms = get_terms(array(
-          'taxonomy' => 'wpp_listing_type',
-          'hide_empty' => false,
-        ));
-
-        /* Delete terms if not exist in $wpp_settings */
-        if (!empty($terms) && !is_wp_error($terms))
-          foreach ($terms as $_term) {
-            if (!array_key_exists($_term->slug, $wpp_settings['property_types'])) {
-              wp_delete_term($_term->term_id, 'wpp_listing_type');
-            }
-          }
-
-        /* Generate Property type terms */
-        foreach ($wpp_settings['property_types'] as $_term => $label) {
-
-          $term = null;
-
-          if(isset($wp_properties['property_types_term_id']) && isset($wp_properties['property_types_term_id'][$_term])) {
-            $term = get_term($wp_properties['property_types_term_id'][$_term], 'wpp_listing_type', ARRAY_A);
-          }
-
-          if ( $term && !is_wp_error($term) && isset($term['term_id'])) {
-            if ($label != $term['name']) {
-              $term = wp_update_term($term['term_id'], 'wpp_listing_type', array('name' => $label));
-            }
-          } // Find term by label
-          elseif ( $term && $term == term_exists($label, 'wpp_listing_type')) {
-
-          } else {
-            $term = wp_insert_term($label, 'wpp_listing_type', array('slug' => $_term));
-          }
-
-          if (!is_wp_error($term) && isset($term['term_id'])) {
-            $wpp_settings['property_types_term_id'][$_term] = $term['term_id'];
-          }
-        }
-        return $wpp_settings;
-      }
-
-      /**
-       * Add property type from terms if not already exists.
-       * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
-       *
-       */
-      public static function add_wpp_listing_type_from_existing_terms(){
-        global $wp_properties;
-        $updated = false;
-        $terms = get_terms(array(
-          'taxonomy' => 'wpp_listing_type',
-          'hide_empty' => false,
-        ));
-
-        /* Add property type from terms */
-        if (!empty($terms) && !is_wp_error($terms))
-          foreach ($terms as $term) {
-            if (!array_key_exists($term->slug, $wp_properties['property_types'])) {
-              $wp_properties['property_types'][$term->slug] = $term->name;
-              $wp_properties['property_types_term_id'][$term->slug] = $term->term_id;
-              $updated = true;
-            }
-          }
-        if ($updated) {
-          update_option('wpp_settings', $wp_properties);
-        }
       }
 
       /**
@@ -238,23 +343,38 @@ namespace UsabilityDynamics\WPP {
        * created/updated outside of developer tab of settings page.
        * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
        *
-       * @author Md. Alimuzzaman Alim
-       *
        * @param int $term_id
-       * @param int $tt_id
+       * @param int $taxonomy_id
        *
        */
-      public function term_created_wpp_listing_type($term_id, $tt_id){
+      public function term_created_wpp_listing_type( $term_id, $taxonomy_id ){
         global $wp_properties;
-        $term = get_term($term_id, 'wpp_listing_type');
 
-        if(!in_array($term->slug, $wp_properties['property_types']) || $wp_properties['property_types'][$term->slug] != $term->name){
+        $term = self::get_term( $term_id );
+        // Should not happen
+        if(!$term) {
+          return;
+        }
 
-          $wp_properties['property_types'][$term->slug] = $term->name;
-          $wp_properties['property_types_term_id'][$term->slug] = $term->term_id;
+        $slug = get_term_meta( $term_id, self::$meta_property_type, true );
+        if(!$slug) {
+          // Should not happen
+          if( !isset( $term->meta[ self::$meta_property_type ] ) ) {
+            return;
+          }
+          $slug = $term->meta[ self::$meta_property_type ];
+          update_term_meta( $term_id, self::$meta_property_type, $slug );
+        }
 
-          ud_get_wp_property()->set('property_types', $wp_properties['property_types']);
-          ud_get_wp_property()->set('property_types_term_id', $wp_properties['property_types_term_id']);
+        $_property_types = $property_types = ud_get_wp_property( 'property_types' );
+
+        if( !isset( $property_types[ $slug ] ) ) {
+          $property_types[ $slug ] = $term->name;
+        }
+
+        if( array_diff( $property_types, $_property_types ) ) {
+          ud_get_wp_property()->set( 'property_types', $property_types );
+          $wp_properties = ud_get_wp_property()->get();
           update_option('wpp_settings', $wp_properties);
         }
 
@@ -265,27 +385,160 @@ namespace UsabilityDynamics\WPP {
        * deleted outside of developer tab of settings page.
        * Feature Flag: WPP_FEATURE_FLAG_WPP_LISTING_TYPE
        *
-       * @author Md. Alimuzzaman Alim
+       * Note, we must use 'pre_delete_term' hook, because we have to get
+       * term's meta data before it will be deleted.....
        *
        * @param int $term_id
-       * @param int $tt_id
-       * @param int $term
+       * @param string $taxonomy
        *
        */
-      public function term_delete_wpp_listing_type($term_id, $tt_id, $term){
+      public function pre_delete_term($term_id, $taxonomy){
         global $wp_properties;
-        if(array_key_exists($term->slug, $wp_properties['property_types'])){
-          unset($wp_properties['property_types'][$term->slug]);
-          unset($wp_properties['property_types_term_id'][$term->slug]);
 
-          ud_get_wp_property()->set('property_types', $wp_properties['property_types']);
-          ud_get_wp_property()->set('property_types_term_id', $wp_properties['property_types_term_id']);
+        // Ignore non-wpp_listing_type taxonomy terms
+        if( self::$taxonomy !== $taxonomy ) {
+          return;
+        }
+
+        $slug = get_term_meta( $term_id, self::$meta_property_type, true );
+        $property_types = ud_get_wp_property( 'property_types' );
+
+        if( isset( $property_types[$slug] ) ) {
+          unset( $property_types[$slug] );
+          $wp_properties = ud_get_wp_property()->get();
+          $wp_properties['property_types'] = $property_types;
           update_option('wpp_settings', $wp_properties);
+        }
+
+      }
+
+      /**
+       * Returns term with extended label (based on hierarchic values )
+       * and with meta property_type
+       *
+       * @TODO: need to get term with more sexy way instead of looping through all existing terms....
+       *
+       * @param $term_id
+       * @param string $prefix
+       * @return null
+       */
+      static public function get_term( $term_id, $prefix = '/' ) {
+        $term = null;
+
+        $terms = get_terms( self::$taxonomy, [
+          'hide_empty' => false
+        ]);
+        $terms = self::get_terms_hierarchicaly( $terms, $prefix );
+        foreach( $terms as $_term ){
+          if( $_term->term_id == $term_id ) {
+            $term = $_term;
+            break;
+          }
+        }
+
+        return $term;
+
+      }
+
+      /**
+       * Get direct property term ( the direct child term of hierarchic structure )
+       *
+       * @param $post_id
+       * @return object|null
+       */
+      static public function get_property_direct_term( $post_id ) {
+        $terms = wp_get_object_terms( $post_id, self::$taxonomy );
+        $_terms = array();
+        $map = array();
+        $term = null;
+
+        foreach( $terms as $_term ) {
+          $_terms[ $_term->term_id ] = $_term;
+          if( !$_term->parent ) {
+            $term = $_term;
+          }
+          if( $_term->parent ) {
+            $map[ $_term->parent ] = $_term->term_id;
+          }
+        }
+
+        if( $term ) {
+          while( isset( $map[ $term->term_id ] ) && isset( $_terms[ $map[ $term->term_id ] ] ) ) {
+            $term = $_terms[ $map[ $term->term_id ] ];
+          }
+        }
+
+        return $term;
+      }
+
+      /**
+       * Returns assigned property_type (slug) of term
+       * If property_type meta does not exist, generate it from current term's name
+       *
+       * @param $term
+       * @return mixed
+       */
+      static public function get_meta_property_type( $term ){
+        $slug = get_term_meta( $term->term_id, self::$meta_property_type, true );
+        if( !$slug ) {
+          $slug = preg_replace( '/[\-]/', '_', sanitize_title( $term->name ) );
+        }
+        return $slug;
+      }
+
+      /**
+       * Prepare terms hierarchicaly
+       *
+       * @param $terms
+       * @return array
+       */
+      static public function get_terms_hierarchicaly($terms, $prefix = '/'){
+        $_terms = array();
+        $return = array();
+
+        if(count($terms) == 0)
+          return $return;
+
+        // Prepering terms
+        foreach ($terms as $term) {
+          $term->meta = array(
+            self::$meta_property_type => self::get_meta_property_type( $term )
+          );
+          $_terms[$term->parent][] = $term;
+        }
+
+        // Making terms as hierarchical by prefix
+        foreach ($_terms[0] as $term) { // $_terms[0] is parent or parentless terms
+          $return[] = $term;
+          self::get_children($term->term_id, $_terms, $return, ( $term->name . ' ' . $prefix ));
+        }
+
+        return $return;
+      }
+
+      /**
+       * Helper function for prepare_terms_hierarchicaly
+       *
+       * @param $term_id
+       * @param $terms
+       * @param $return
+       * @param string $prefix
+       */
+      static public function get_children($term_id, $terms, &$return, $prefix = "/"){
+        if(isset($terms[$term_id])){
+          foreach ($terms[$term_id] as $child) {
+            $child->name = $prefix . " " . $child->name;
+            $child->meta[ self::$meta_property_type ] = self::get_meta_property_type( $child );
+            $return[] = $child;
+            self::get_children($child->term_id, $terms, $return, ( $prefix . ' ' . $child->name . ' ' . $prefix ));
+          }
         }
       }
 
       /**
        * We apply contexts for title_suggest based on the [wpp_listing_type] taxonomy
+       *
+       * Used by: elasticsearch feature.
        *
        * @param $title_suggest
        * @param $args
@@ -294,7 +547,7 @@ namespace UsabilityDynamics\WPP {
        */
       public function elastic_title_suggest( $title_suggest, $args, $post_id ) {
 
-        $terms = wp_get_object_terms( $post_id, 'wpp_listing_type' );
+        $terms = wp_get_object_terms( $post_id, self::$taxonomy );
 
         if( empty( $terms ) ) {
           return $title_suggest;

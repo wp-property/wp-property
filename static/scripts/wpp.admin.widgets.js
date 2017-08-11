@@ -112,7 +112,7 @@ wpp.widgets.run = function() {
 jQuery( document ).ready( function() {
 
   /* After every ajax call. Some callbacks on ajax call update DOM structure. */
-  jQuery( document ).live( 'ajaxComplete', function(){ wpp.widgets.run() });
+  jQuery( document ).on( 'ajaxComplete', function(){ wpp.widgets.run() });
 
   /* */
   jQuery( 'div.widgets-sortables' ).on( 'sortstop', function( event, ui ) {

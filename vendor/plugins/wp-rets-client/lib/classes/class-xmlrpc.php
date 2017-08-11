@@ -57,8 +57,11 @@ namespace UsabilityDynamics\WPRETSC {
       public function xmlrpc_methods( $_methods ) {
 
         $_methods[ 'wpp.systemCheck' ] = array( $this, 'rpc_system_check' );
-        $_methods[ 'wpp.deleteProperty' ] = array( $this, 'rpc_delete_property' );
-        $_methods[ 'wpp.editProperty' ] = array( $this, 'rpc_edit_property' );
+        $_methods[ 'wpp.systemPing' ] = array( $this, 'rpc_system_ping' );
+        $_methods[ 'wpp.deleteProperty' ] = array( $this, 'delete_property' );
+        $_methods[ 'wpp.trashProperty' ] = array( $this, 'trash_property' );
+        $_methods[ 'wpp.getPostIdByMlsId' ] = array( $this, 'get_post_id_by_mls_id' );
+        $_methods[ 'wpp.editProperty' ] = array( $this, 'edit_property' );
         $_methods[ 'wpp.removeDuplicatedMLS' ] = array( $this, 'rpc_remove_duplicated_mls' );
         $_methods[ 'wpp.modifiedHistogram' ] = array( $this, 'rpc_get_modified_histogram' );
         $_methods[ 'wpp.flushCache' ] = array( $this, 'rpc_flush_cache' );
@@ -66,6 +69,8 @@ namespace UsabilityDynamics\WPRETSC {
         // New full/partial updates
         $_methods[ 'wpp.createProperty' ] = array( $this, 'create_property' );
         $_methods[ 'wpp.updateProperty' ] = array( $this, 'update_property' );
+        $_methods[ 'wpp.insertMedia' ] = array( $this, 'insert_media' );
+        $_methods[ 'wpp.getProperty' ] = array( $this, 'get_property' );
 
         // Schedule stats/listings for data integrity
         $_methods[ 'wpp.scheduleStats' ] = array( $this, 'get_schedule_stats' );
@@ -89,19 +94,50 @@ namespace UsabilityDynamics\WPRETSC {
           'callback' => array( $this, 'rpc_system_check' ),
         ) );
 
+        register_rest_route( 'wp-rets-client/v1', '/systemPing', array(
+          'methods' => 'GET',
+          'callback' => array( $this, 'rpc_system_ping' ),
+        ) );
+
         register_rest_route( 'wp-rets-client/v1', '/deleteProperty', array(
           'methods' => array( 'POST', 'GET' ),
-          'callback' => array( $this, 'rpc_delete_property' ),
+          'callback' => array( $this, 'delete_property' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/trashProperty', array(
+          'methods' => array( 'POST', 'GET' ),
+          'callback' => array( $this, 'trash_property' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/getPostIdByMlsId', array(
+          'methods' => array( 'POST', 'GET' ),
+          'callback' => array( $this, 'get_post_id_by_mls_id' ),
         ) );
 
         register_rest_route( 'wp-rets-client/v1', '/editProperty', array(
           'methods' => 'POST',
-          'callback' => array( $this, 'rpc_edit_property' ),
+          'callback' => array( $this, 'edit_property' ),
         ) );
 
         register_rest_route( 'wp-rets-client/v1', '/updateProperty', array(
           'methods' => 'POST',
           'callback' => array( $this, 'update_property' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/getProperty', array(
+          'methods'   => array('GET', 'POST' ),
+          'callback'  => array( $this, 'get_property' ),
+          'args'      => array(
+            'ID' => array(
+              'default' => null,
+            ),
+            'mls_number' => array(
+              'default' => null
+            ),
+            'detail' => array(
+              'default' => true
+            ),
+          )
         ) );
 
         register_rest_route( 'wp-rets-client/v1', '/createProperty', array(
@@ -146,6 +182,16 @@ namespace UsabilityDynamics\WPRETSC {
               'default' => 10,
               'sanitize_callback' => 'absint',
             ),
+            'offset' => array(
+              'default' => 0,
+              'sanitize_callback' => 'absint',
+            ),
+            'unique' => array(
+              'default' => 'wpp::rets_pk'
+            ),
+            'post_status' => array(
+              'default' => array( 'publish', 'private', 'future', 'draft' )
+            ),
             'schedule_id' => array(
               'default' => false,
               'sanitize_callback' => 'sanitize_title',
@@ -166,6 +212,23 @@ namespace UsabilityDynamics\WPRETSC {
           'callback' => array( $this, 'get_schedule_listings' ),
         ));
 
+        register_rest_route( 'wp-rets-client/v1', '/insertMedia', array(
+          'methods' => 'POST',
+          'callback' => array( $this, 'insert_media' ),
+          'args'      => array(
+            'post_id' => array(
+              'default' => null,
+            ),
+            'mls_number' => array(
+              'default' => null
+            ),
+            'media' => array(
+              'default' => null
+            ),
+          )
+
+        ) );
+
       }
 
       /**
@@ -177,29 +240,100 @@ namespace UsabilityDynamics\WPRETSC {
        * - rets_id - the unique meta key we use to find property. seems to be same as [wpp::rets_pk]
        *
        * /wp-json/wp-rets-client/v1/schedule/listings?order=desc&schedule_id=1463079227
+       * /wp-json/wp-rets-client/v1/schedule/listings?type=index
+       * /wp-json/wp-rets-client/v1/schedule/listings?type=index&unique=rets_id
+       *
+       * - type - mls_numbers - will return a summary of post_id -> rets_id. No consideration given to post_status or schedule.
        *
        * @param $request_data
        *
        * @return array
        */
       static public function get_schedule_listings( $request_data ) {
+        global $wp_xmlrpc_server, $wpdb;
+
+        $post_data = self::parseRequest( $request_data );
+
+        if( ( isset( $wp_xmlrpc_server ) && !empty( $wp_xmlrpc_server->error ) ) || isset( $post_data['error'] ) ) {
+          return $post_data;
+        }
+
+        // handle wp-json reqests
+        if( is_callable( array( $request_data, 'get_param' ) ) ) {
+
+          $post_data = wp_parse_args($post_data, array(
+            'type' => $request_data->get_param( 'type' ),
+            'per_page' => $request_data->get_param( 'per_page' ),
+            'offset' => $request_data->get_param( 'offset' ),
+            'post_status' => $request_data->get_param( 'post_status' ),
+            'order' => $request_data->get_param( 'order' ),
+            'unique' => $request_data->get_param( 'unique' )
+          ));
+
+        };
+
+        // Quick summary of all listings, fetched by a meta key.
+        if( $post_data['type'] === 'index' ) {
+          $_per_page = $post_data[ 'per_page' ];
+          $offset = $post_data[ 'offset' ];
+          $unique_key = $post_data[ 'unique' ];
+
+          if( is_string( $post_data[ 'post_status' ] ) ) {
+            $_post_status = explode( ',', $post_data[ 'post_status' ] );
+            $post_status = join( "','", $_post_status );
+          }
+
+          if( is_array( $post_data[ 'post_status' ] ) ) {
+            $post_status = join( "','", $post_data[ 'post_status' ] );
+          }
+
+          $_queries = array(
+            "all" => "SELECT post_id, meta_value as unique_field, post_status, post_date, post_modified FROM $wpdb->postmeta LEFT JOIN $wpdb->posts ON post_id=ID WHERE meta_key='$unique_key' AND post_status IN ('$post_status') LIMIT $offset, $_per_page;",
+            "total" => "SELECT count( post_id ) FROM $wpdb->postmeta LEFT JOIN $wpdb->posts ON post_id=ID WHERE meta_key='$unique_key' AND post_status IN ('$post_status')  LIMIT $offset, $_per_page;"
+          );
+
+          $_total = $wpdb->get_var( $_queries['total' ]);
+
+          $_list = $wpdb->get_results( $_queries['all' ] );
+
+          $_result = array(
+            'ok' => true,
+            'total' => intval($_total),
+            'data' => $_list,
+            'unique' => $unique_key,
+            'offset' => $post_data[ 'offset' ],
+            'post_status' => explode( "','", $post_status ),
+            'per_page' => $post_data[ 'per_page' ],
+            'time' => timer_stop(),
+          );
+
+          ud_get_wp_rets_client()->write_log( "Using query [" . $_queries['all'] . "] to get index list." );
+
+          return $_result;
+        }
 
         $_query = array(
-          'post_status' => array( 'draft', 'trash',  'publish' ),
+          'post_status' => $post_data[ 'post_status' ],
           'post_type' => 'property',
-          'posts_per_page' => $request_data->get_param( 'per_page' ),
+          'posts_per_page' => $post_data[ 'per_page' ],
           'update_post_meta_cache' => false,
           'update_post_term_cache' => false,
           'orderby' => 'modified',
-          'order' => strtoupper( $request_data->get_param( 'order' ) ),
+          'order' => strtoupper( $post_data[ 'order' ] ),
           'tax_query' => array(
             array(
               'taxonomy' => 'rets_schedule',
               'field'    => 'slug',
-              'terms'    => $request_data->get_param( 'schedule_id' ),
+              'terms'    => $post_data[ 'schedule_id' ],
             ),
           ),
         );
+
+        if( $post_data[ 'offset' ] ) {
+          $_query['offset'] = $post_data[ 'offset' ];
+        }
+
+        //error_log(print_r($_query,true));
 
         $_query = array_merge( $_query, array(
           'meta_key' => 'wpp_import_time',
@@ -237,8 +371,8 @@ namespace UsabilityDynamics\WPRETSC {
 
         return array(
           'ok' => true,
-          'per_page' => $request_data->get_param( 'per_page' ),
-          'schedule' => $request_data->get_param( 'schedule_id' ),
+          'per_page' => $post_data[ 'per_page' ],
+          'schedule' => $post_data[ 'schedule_id' ],
           'total' => intval( $query->found_posts ),
           'data' => $_listings,
           'time' => timer_stop()
@@ -254,11 +388,17 @@ namespace UsabilityDynamics\WPRETSC {
        */
       static public function get_schedule_stats() {
 
+        $_stats = Utility::get_schedule_stats(array(
+          'cache' => false
+        ));
+
         return array(
           'ok' => true,
-          'data' => Utility::get_schedule_stats(),
+          'kind' => isset($_GET['kind']) ? $_GET['kind'] : '',
+          'message' => 'There are [' . count( $_stats['terms'] ) . '] schedules with [' . $_stats['total'] . '] total listings.',
+          'data' => $_stats['data'],
           'time' => timer_stop()
-          );
+        );
 
       }
 
@@ -400,12 +540,15 @@ namespace UsabilityDynamics\WPRETSC {
 
             if( !self::token_login( isset( $_SERVER[ 'HTTP_X_ACCESS_USER' ] ) ? $_SERVER[ 'HTTP_X_ACCESS_USER' ] : null, isset( $_SERVER[ 'HTTP_X_ACCESS_PASSWORD' ] ) ? $_SERVER[ 'HTTP_X_ACCESS_PASSWORD' ] : null ) ) {
 
-              return array(
+              http_response_code( 401 );
+
+              return array_filter(array(
                 'ok' => false,
                 'error' => "Unable to login.",
+                'errorCode' => 401,
                 'username' => isset( $_SERVER[ 'HTTP_X_ACCESS_USER' ] ) ? $_SERVER[ 'HTTP_X_ACCESS_USER' ] : '',
-                'password' => isset( $_SERVER[ 'HTTP_X_ACCESS_PASSWORD' ] ) ? $_SERVER[ 'HTTP_X_ACCESS_PASSWORD' ] : '',
-              );
+                'password' => isset( $_SERVER[ 'HTTP_X_ACCESS_PASSWORD' ] ) ? $_SERVER[ 'HTTP_X_ACCESS_PASSWORD' ] : ''
+              ));
 
             }
 
@@ -460,11 +603,22 @@ namespace UsabilityDynamics\WPRETSC {
           return false;
         }
 
-        if( !get_site_option( 'ud_site_id' ) || !get_site_option( 'ud_site_secret_token' ) ) {
+        $ud_site_id = get_site_option( 'ud_site_id' );
+        $ud_site_secret_token = get_site_option( 'ud_site_secret_token' );
+
+        if( defined( 'WP_UD_SITE_ID' ) && WP_UD_SITE_ID ) {
+          $ud_site_id = WP_UD_SITE_ID;
+        }
+
+        if( defined( 'WP_UD_SITE_SECRET_TOKEN' ) && WP_UD_SITE_SECRET_TOKEN ) {
+          $ud_site_secret_token = WP_UD_SITE_SECRET_TOKEN;
+        }
+
+        if( !$ud_site_id || !$ud_site_secret_token ) {
           return false;
         }
 
-        if( $site_id === get_site_option( 'ud_site_id' ) && $secret_token === get_site_option( 'ud_site_secret_token' ) ) {
+        if( $site_id === $ud_site_id && $secret_token === $ud_site_secret_token ) {
 
           if( isset ( $wp_xmlrpc_server ) ) {
             $wp_xmlrpc_server->error = null;
@@ -509,8 +663,6 @@ namespace UsabilityDynamics\WPRETSC {
 
         ud_get_wp_rets_client()->write_log( 'Have system check [wpp.systemCheck] request.', 'debug' );
 
-        // swets blog
-
         $post_data = self::parseRequest( $args );
         if( !empty( $post_data['error'] ) ) {
           return $post_data;
@@ -526,7 +678,12 @@ namespace UsabilityDynamics\WPRETSC {
           "template" => get_option( 'stylesheet' ),
           "post_types" => get_post_types(),
           "activePlugins" => self::get_plugins(),
+          "time" => timer_stop(),
           "support" => array(
+            "insert_media",
+            "schedule_stats",
+            "schedule_listings",
+            "get_property",
             "create_property",
             "update_property",
             "edit_property"
@@ -544,6 +701,27 @@ namespace UsabilityDynamics\WPRETSC {
       }
 
       /**
+       * Minimal check.
+       *
+       */
+      public function rpc_system_ping( $args ) {
+        global $wp_xmlrpc_server;
+
+        ud_get_wp_rets_client()->write_log( 'Have system ping [wpp.systemPing] request.', 'debug' );
+
+        // swets blog
+
+        $_response = self::send(array(
+          "ok" => true,
+          "time" => timer_stop()
+        ));
+
+        // Send response to wherever.
+        return $_response;
+
+      }
+
+      /**
        * Create New Property Object
        *
        * @param $args
@@ -552,11 +730,19 @@ namespace UsabilityDynamics\WPRETSC {
       public function create_property( $args ) {
         global $wp_xmlrpc_server;
 
+        add_filter( 'ep_sync_insert_permissions_bypass', '__return_true', 99, 2 );
+
         $post_data = self::parseRequest( $args );
 
         if( ( isset( $wp_xmlrpc_server ) && !empty( $wp_xmlrpc_server->error ) ) || isset( $post_data['error'] ) ) {
           return $post_data;
         }
+
+        $options = wp_parse_args( isset( $post_data['_options'] ) ? $post_data['_options'] : array(), array(
+          'skipTermCounting' => false,
+          'skipTermUpdates' => false,
+          'skipMediaUpdate' => false
+        ));
 
         ud_get_wp_rets_client()->write_log( 'Have request [wpp.createProperty] request.', 'debug' );
 
@@ -605,6 +791,12 @@ namespace UsabilityDynamics\WPRETSC {
           ud_get_wp_rets_client()->write_log( 'Inserted lat/lon from _system ' . $post_data['_system']['location']['lat'], 'debug' );
         }
 
+        // Backwards compat, can be removed shortly...
+        if( isset( $post_data[ 'meta_input' ][ 'rets_media' ] ) && !isset( $post_data[ '_media' ] ) ) {
+          $post_data['_media'] = array( 'items' => $post_data[ 'meta_input' ][ 'rets_media' ] );
+          unset( $post_data[ 'meta_input' ][ 'rets_media' ] );
+        }
+
         $_post_id = wp_insert_post( $post_data, true );
 
         if( is_wp_error( $_post_id ) ) {
@@ -619,95 +811,12 @@ namespace UsabilityDynamics\WPRETSC {
         }
 
         // Insert all the terms and creates taxonomies.
-        // self::insert_terms( $_post_id, $_post_data_tax_input, $post_data );
-
-        if( !empty( $post_data[ 'meta_input' ][ 'rets_media' ] ) && is_array( $post_data[ 'meta_input' ][ 'rets_media' ] ) ) {
-
-          $_already_attached_media = array();
-          $_new_media = array();
-
-          $attached_media = get_attached_media( 'image', $_post_id );
-
-          // get simple url litst of already attached media
-          if( $attached_media ) {
-
-            foreach( (array)$attached_media as $_attached_media_id => $_media ) {
-              $_already_attached_media[ $_attached_media_id ] = $_media->guid;
-            }
-
-          }
-
-          // delete all old attachments if the count of new media doesn't match up with old media
-          if( count( $attached_media ) != count( $post_data[ 'meta_input' ][ 'rets_media' ] ) ) {
-
-            ud_get_wp_rets_client()->write_log( 'For ['.$_post_id.'] property media count has changed. Before ['.count( $attached_media ).'], now ['.count( $post_data[ 'meta_input' ][ 'rets_media' ] ).'].', 'debug' );
-
-            //ud_get_wp_rets_client()->write_log( 'Deleting [' .  $_single_media_item->ID . '] media item.', 'debug' );
-            foreach( $attached_media as $_single_media_item ) {
-              ud_get_wp_rets_client()->write_log( 'Deleting [' .  $_single_media_item->ID . '] media item. (Skipping)', 'debug' );
-              // wp_delete_attachment( $_single_media_item->ID, true );
-            }
-
-
-          }
-
-          foreach( $post_data[ 'meta_input' ][ 'rets_media' ] as $media ) {
-
-            if( in_array( $media[ 'url' ], $_already_attached_media ) ) {
-              ud_get_wp_rets_client()->write_log( "Skipping [" . $media['url'] . "] because it's already attached to [" . $_post_id . "]", 'debug' );
-            }
-
-            // attach media if a URL is set and it isn't already attached
-
-            $filetype = wp_check_filetype( basename( $media[ 'url' ] ), null );
-
-            $attachment = array(
-              'guid' => $media[ 'url' ],
-              'post_mime_type' => ( !empty( $filetype[ 'type' ] ) ? $filetype[ 'type' ] : 'image/jpeg' ),
-              'post_title' => preg_replace( '/\.[^.]+$/', '', basename( $media[ 'url' ] ) ),
-              'post_content' => '',
-              'post_status' => 'inherit',
-              'menu_order' => $media[ 'order' ] ? ( (int)$media[ 'order' ] ) : null
-            );
-
-            $attach_id = wp_insert_attachment( $attachment, $media[ 'url' ], $_post_id );
-
-            $_new_media[] = $media[ 'url' ];
-
-            update_post_meta( $attach_id, '_is_remote', '1' );
-
-            // set the item with order of 1 as the thumbnail
-            if( (int)$media[ 'order' ] === 1 ) {
-              //set_post_thumbnail( $_post_id, $attach_id );
-
-              // No idea why but set_post_thumbnail() fails routinely as does update_post_meta, testing this method.
-              delete_post_meta( $_post_id, '_thumbnail_id' );
-              $_thumbnail_setting = add_post_meta( $_post_id, '_thumbnail_id', (int)$attach_id );
-
-              if( $_thumbnail_setting ) {
-                ud_get_wp_rets_client()->write_log( 'Setting thumbnail [' . $attach_id . '] to post [' . $_post_id . '] because it has order of 1, result: ', 'debug' );
-              } else {
-                ud_get_wp_rets_client()->write_log( 'Error! Failured at setting thumbnail [' . $attach_id . '] to post [' . $_post_id . ']', 'error' );
-              }
-
-              //die('dying early!' );
-            }
-
-            // old logic of first checking that a new media url exists
-            if( !empty( $media[ 'url' ] ) && !in_array( $media[ 'url' ], $_already_attached_media ) ) {
-            }
-
-          }
-
-          // newly inserted media is in $_new_media
-          // old media is in $_already_attached_media
-          // we get media that was attached before but not in new media
-
+        if( !isset( $options[ 'skipTermUpdates' ] ) || !$options[ 'skipTermUpdates' ] ) {
+          Utility::insert_property_terms( $_post_id, $_post_data_tax_input, $post_data );
         }
 
-        // We dont need to store this once the Media inserting is working well, besides we can always get it from api. - potanin@UD
-        if( isset( $post_data[ 'meta_input' ][ 'rets_media' ] ) ) {
-          unset( $post_data[ 'meta_input' ][ 'rets_media' ] );
+        if( !isset( $options[ 'skipMediaUpdate' ] ) || !$options[ 'skipMediaUpdate' ] ) {
+          Utility::insert_media( $_post_id, $post_data[ '_media' ] );
         }
 
         if( $_post_id ) {
@@ -756,10 +865,16 @@ namespace UsabilityDynamics\WPRETSC {
           ud_get_wp_rets_client()->write_log( '<pre>' . print_r( $_update_post, true ) . '</pre>', 'error' );
         }
 
-        // Term counts can/may be updated now.
-        wp_defer_term_counting( false );
+        if( isset( $options[ 'skipTermCounting' ] ) && $options[ 'skipTermCounting' ] ) {
+          ud_get_wp_rets_client()->write_log( 'Skipping term counts for [' . $_post_id  . '] update.', 'debug' );
+        } else {
+          ud_get_wp_rets_client()->write_log( 'Updating deferred term counts [' . $_post_id  . '].', 'debug' );
+          wp_defer_term_counting( false );
+          ud_get_wp_rets_client()->write_log( 'Term count complete [' . $_post_id  . '].', 'debug' );
+        }
 
         ud_get_wp_rets_client()->write_log( 'Term counting complete for [' . $_post_id . '].', 'info' );
+
         return array(
           "ok" => true,
           "post_id" => $_post_id,
@@ -778,11 +893,19 @@ namespace UsabilityDynamics\WPRETSC {
       public function update_property( $args ) {
         global $wp_xmlrpc_server, $wpdb;
 
+        add_filter( 'ep_sync_insert_permissions_bypass', '__return_true', 99, 2 );
+
         $post_data = self::parseRequest( $args );
 
         if( ( isset( $wp_xmlrpc_server ) && !empty( $wp_xmlrpc_server->error ) ) || isset( $post_data['error'] ) ) {
           return $post_data;
         }
+
+        $options = wp_parse_args( isset( $post_data['_options'] ) ? $post_data['_options'] : array(), array(
+          'skipTermCounting' => false,
+          'skipTermUpdates' => false,
+          'skipMediaUpdate' => false
+        ));
 
         ud_get_wp_rets_client()->write_log( 'Have request [wpp.updateProperty] request.', 'debug' );
 
@@ -815,8 +938,8 @@ namespace UsabilityDynamics\WPRETSC {
           update_post_meta( $post_data['ID' ], $_meta_key, $_meta_value );
         }
 
-        if( isset( $post_data[ 'tax_input' ] ) ) {
-          self::insert_property_terms( $post_data[ 'ID' ], $post_data['tax_input'], $post_data );
+        if( (isset( $options[ 'skipTermUpdates' ] ) || !$options[ 'skipTermUpdates' ]) && isset($post_data[ 'tax_input' ]) ) {
+          Utility::insert_property_terms( $post_data[ 'ID' ], $post_data[ 'tax_input' ], $post_data );
           ud_get_wp_rets_client()->write_log( 'Updated terms.', 'debug' );
         }
 
@@ -840,8 +963,10 @@ namespace UsabilityDynamics\WPRETSC {
        * @param $args
        * @return array
        */
-      public function rpc_edit_property( $args ) {
+      public function edit_property( $args ) {
         global $wp_xmlrpc_server;
+
+        add_filter( 'ep_sync_insert_permissions_bypass', '__return_true', 99, 2 );
 
         $post_data = self::parseRequest( $args );
 
@@ -849,7 +974,13 @@ namespace UsabilityDynamics\WPRETSC {
           return $post_data;
         }
 
-        ud_get_wp_rets_client()->write_log( 'Have request [wpp.editProperty] request.', 'debug' );
+        ud_get_wp_rets_client()->write_log( 'Have request [wpp.editProperty] request.', 'info' );
+
+        $options = wp_parse_args( isset( $post_data['_options'] ) ? $post_data['_options'] : array(), array(
+          'skipTermCounting' => false,
+          'skipTermUpdates' => false,
+          'skipMediaUpdate' => false
+        ));
 
         // Defer term counting until method called again.
         wp_defer_term_counting( true );
@@ -866,7 +997,7 @@ namespace UsabilityDynamics\WPRETSC {
           return array( 'ok' => false, 'error' => "Property missing RETS ID.", "data" => $post_data );
         }
 
-        $_new_post_status = $post_data[ 'post_status' ];
+        $_new_post_status = isset( $post_data[ 'post_status' ] ) ? $post_data[ 'post_status' ] : 'publish';
 
         // set post status to draft since it may be inserting for a while due to large amount of terms
         $post_data[ 'post_status' ] = 'draft';
@@ -874,13 +1005,8 @@ namespace UsabilityDynamics\WPRETSC {
         if( !empty( $post_data[ 'ID' ] ) ) {
           ud_get_wp_rets_client()->write_log( 'Running wp_insert_post for [' . $post_data[ 'ID' ] . '].', 'debug' );
           $_post = get_post( $post_data[ 'ID' ] );
-          // If post_date is not set wp_insert_post function sets the current datetime.
-          // So we are preventing to do it by setting already existing post_date. peshkov@UD
           $post_data[ 'post_date' ] = $_post->post_date;
-          // Status could be changed manually by administrator.
-          // So we are preventing to publish property again in case it was trashed. peshkov@UD
           $post_data[ 'post_status' ] = $_post->post_status;
-
         } else {
           ud_get_wp_rets_client()->write_log( 'Running wp_insert_post for [new post].', 'debug' );
         }
@@ -889,12 +1015,20 @@ namespace UsabilityDynamics\WPRETSC {
 
         $post_data['tax_input'] = array();
 
+        // legacy support.
+        if( isset( $post_data[ 'meta_input' ][ 'rets_media' ] ) && !isset( $post_data['_media'] )) {
+          $post_data['_media'] = array( 'items' => $post_data[ 'meta_input' ][ 'rets_media' ] );
+          unset( $post_data[ 'meta_input' ][ 'rets_media' ] );
+        }
+
         // Ensure we have lat/log meta fields. @note May be a better place to set this up?
         if( ( !isset( $post_data[ 'meta_input' ][ 'latitude' ] ) || !$post_data[ 'meta_input' ][ 'latitude' ] ) && isset( $post_data['_system']['location']['lat'] ) ) {
           $post_data[ 'meta_input' ][ 'latitude' ] = $post_data['_system']['location']['lat'];
           $post_data[ 'meta_input' ][ 'longitude' ] = $post_data['_system']['location']['lon'];
           ud_get_wp_rets_client()->write_log( 'Inserted lat/lon from _system ' . $post_data['_system']['location']['lat'], 'debug' );
         }
+
+        //error_log(print_r($post_data,true));
 
         $_post_id = wp_insert_post( $post_data, true );
 
@@ -910,95 +1044,12 @@ namespace UsabilityDynamics\WPRETSC {
         }
 
         // Insert all the terms and creates taxonomies.
-        self::insert_property_terms( $_post_id, $_post_data_tax_input, $post_data );
-
-        if( !empty( $post_data[ 'meta_input' ][ 'rets_media' ] ) && is_array( $post_data[ 'meta_input' ][ 'rets_media' ] ) ) {
-
-          $_already_attached_media = array();
-          $_new_media = array();
-
-          $attached_media = get_attached_media( 'image', $_post_id );
-
-          // get simple url litst of already attached media
-          if( $attached_media ) {
-
-            foreach( (array)$attached_media as $_attached_media_id => $_media ) {
-              $_already_attached_media[ $_attached_media_id ] = $_media->guid;
-            }
-
-          }
-
-          // delete all old attachments if the count of new media doesn't match up with old media
-          if( count( $attached_media ) != count( $post_data[ 'meta_input' ][ 'rets_media' ] ) ) {
-
-            ud_get_wp_rets_client()->write_log( 'For ['.$_post_id.'] property media count has changed. Before ['.count( $attached_media ).'], now ['.count( $post_data[ 'meta_input' ][ 'rets_media' ] ).'].', 'debug' );
-
-            //ud_get_wp_rets_client()->write_log( 'Deleting [' .  $_single_media_item->ID . '] media item.', 'debug' );
-            foreach( $attached_media as $_single_media_item ) {
-              ud_get_wp_rets_client()->write_log( 'Deleting [' .  $_single_media_item->ID . '] media item.', 'debug' );
-              wp_delete_attachment( $_single_media_item->ID, true );
-            }
-
-
-          }
-
-          foreach( $post_data[ 'meta_input' ][ 'rets_media' ] as $media ) {
-
-            if( in_array( $media[ 'url' ], $_already_attached_media ) ) {
-              ud_get_wp_rets_client()->write_log( "Skipping [" . $media['url'] . "] because it's already attached to [" . $_post_id . "]", 'debug' );
-            }
-
-            // attach media if a URL is set and it isn't already attached
-
-            $filetype = wp_check_filetype( basename( $media[ 'url' ] ), null );
-
-            $attachment = array(
-              'guid' => $media[ 'url' ],
-              'post_mime_type' => ( !empty( $filetype[ 'type' ] ) ? $filetype[ 'type' ] : 'image/jpeg' ),
-              'post_title' => preg_replace( '/\.[^.]+$/', '', basename( $media[ 'url' ] ) ),
-              'post_content' => '',
-              'post_status' => 'inherit',
-              'menu_order' => $media[ 'order' ] ? ( (int)$media[ 'order' ] ) : null
-            );
-
-            $attach_id = wp_insert_attachment( $attachment, $media[ 'url' ], $_post_id );
-
-            $_new_media[] = $media[ 'url' ];
-
-            update_post_meta( $attach_id, '_is_remote', '1' );
-
-            // set the item with order of 1 as the thumbnail
-            if( (int)$media[ 'order' ] === 1 ) {
-              //set_post_thumbnail( $_post_id, $attach_id );
-
-              // No idea why but set_post_thumbnail() fails routinely as does update_post_meta, testing this method.
-              delete_post_meta( $_post_id, '_thumbnail_id' );
-              $_thumbnail_setting = add_post_meta( $_post_id, '_thumbnail_id', (int)$attach_id );
-
-              if( $_thumbnail_setting ) {
-                ud_get_wp_rets_client()->write_log( 'Setting thumbnail [' . $attach_id . '] to post [' . $_post_id . '] because it has order of 1, result: ', 'debug' );
-              } else {
-                ud_get_wp_rets_client()->write_log( 'Error! Failured at setting thumbnail [' . $attach_id . '] to post [' . $_post_id . ']', 'error' );
-              }
-
-              //die('dying early!' );
-            }
-
-            // old logic of first checking that a new media url exists
-            if( !empty( $media[ 'url' ] ) && !in_array( $media[ 'url' ], $_already_attached_media ) ) {
-            }
-
-          }
-
-          // newly inserted media is in $_new_media
-          // old media is in $_already_attached_media
-          // we get media that was attached before but not in new media
-
+        if( !isset( $options[ 'skipTermUpdates' ] ) || !$options[ 'skipTermUpdates' ] ) {
+          Utility::insert_property_terms( $_post_id, $_post_data_tax_input, $post_data );
         }
 
-        // We dont need to store this once the Media inserting is working well, besides we can always get it from api. - potanin@UD
-        if( isset( $post_data[ 'meta_input' ][ 'rets_media' ] ) ) {
-          unset( $post_data[ 'meta_input' ][ 'rets_media' ] );
+        if( !isset( $options[ 'skipMediaUpdate' ] ) || !$options[ 'skipMediaUpdate' ] ) {
+          Utility::insert_media( $_post_id, $post_data[ '_media' ] );
         }
 
         if( $_post_id ) {
@@ -1025,10 +1076,10 @@ namespace UsabilityDynamics\WPRETSC {
 
           $_message = array();
 
-          if( isset( $_post_id ) && !is_wp_error( $_post_id ) && isset( $post_data[ 'ID' ] ) && $post_data[ 'ID' ] === $_post_id ) {
-            $_message[] = 'Updated property [' . $_post_id  . '] in [' . timer_stop() . '] seconds with [' .$_post_status .'] status.';
+          if( isset( $_post ) && $_post ) {
+            $_message[] = 'Updated property [' . $post_data[ 'meta_input' ][ 'rets_id' ] . '], post ID [' . $_post_id  . '] in [' . timer_stop() . '] seconds with [' .$_post_status .'] status.';
           } else {
-            $_message[] = 'Created property [' . $_post_id  . '] in [' . timer_stop() . '] seconds with [' .$_post_status .'] status.';
+            $_message[] = 'Created property [' . $post_data[ 'meta_input' ][ 'rets_id' ]  . '], post ID [' . $_post_id  . '] in [' . timer_stop() . '] seconds with [' .$_post_status .'] status.';
           }
 
           if( $_post_status === 'publish' ) {
@@ -1047,178 +1098,108 @@ namespace UsabilityDynamics\WPRETSC {
           ud_get_wp_rets_client()->write_log( '<pre>' . print_r( $_update_post, true ) . '</pre>', 'error' );
         }
 
-        // Term counts can/may be updated now.
-        wp_defer_term_counting( false );
+        if( isset( $options[ 'skipTermCounting' ] ) && $options[ 'skipTermCounting' ] ) {
+          ud_get_wp_rets_client()->write_log( 'Skipping term counts for [' . $_post_id  . '] update.', 'debug' );
+        } else {
+          ud_get_wp_rets_client()->write_log( 'Updating deferred term counts [' . $_post_id  . '].', 'debug' );
+          wp_defer_term_counting( false );
+          ud_get_wp_rets_client()->write_log( 'Term count complete [' . $_post_id  . '].', 'debug' );
+        }
 
-        return array(
+        $_response = array(
           "ok" => true,
           "post_id" => $_post_id,
-          "post" => get_post( $_post_id ),
           "permalink" => isset( $_permalink ) ? $_permalink : null
         );
+
+        ud_get_wp_rets_client()->write_log( 'Sending [wpp.editProperty] reponse.', 'debug' );
+
+        return $_response;
 
       }
 
       /**
-       * Creates taxonomies and terms. Also handles hierarchies.
+       * Get property by ID ro mls_number
        *
-       * @author potanin@UD
-       * @param $_post_id
-       * @param $_post_data_tax_input
-       * @param array $post_data
+       *
+       *
+       *
+       * @param $args
+       * @return array
+       *
        */
-      static public function insert_property_terms( $_post_id, $_post_data_tax_input, $post_data = array() ) {
+      public function get_property( $args ) {
+        global $wp_xmlrpc_server;
 
-        ud_get_wp_rets_client()->write_log( "Have [" . count( $_post_data_tax_input ) . "] taxonomies to process.", 'debug' );
+        $post_data = self::parseRequest( $args );
 
-        foreach( (array) $_post_data_tax_input as $tax_name => $tax_tags ) {
-          ud_get_wp_rets_client()->write_log( "Starting to process [$tax_name] taxonomy.", 'debug' );
+        if( ( isset( $wp_xmlrpc_server ) && !empty( $wp_xmlrpc_server->error ) ) || isset( $post_data['error'] ) ) {
+          return $post_data;
+        }
 
-          $handled = apply_filters( 'retsci::insert_property_terms::handle', false, $tax_name, array(
-            'post_id' => $_post_id,
-            'post_data_tax_input' => $_post_data_tax_input,
-            'post_data' => $post_data,
-          ) );
+        if( method_exists( $args, 'get_param' ) ) {
+          $post_data['ID'] = $args->get_param( 'ID' );
+          $post_data['mls_number'] = $args->get_param( 'mls_number' );
+          $post_data['detail'] = $args->get_param( 'detail' );
+        }
 
-          if( $handled ) {
-            ud_get_wp_rets_client()->write_log( 'Taxonomy [' . $tax_name . '] has been handled via filter [wpp::insert_property_terms::handle]', 'debug' );
-            continue;
-          }
+        // ud_get_wp_rets_client()->write_log( 'Have request [wpp.getProperty] request.', 'debug' );
 
-          // Avoid hierarchical taxonomies since they do not allow simple-value passing.
-          WPP_F::verify_have_system_taxonomy( $tax_name, array( 'hierarchical' => false ) );
+        $_post_id = null;
 
-          if( is_taxonomy_hierarchical( $tax_name ) ) {
-            ud_get_wp_rets_client()->write_log( "Handling hierarchical taxonomy [$tax_name].", 'debug' );
+        if( is_array($post_data ) && isset( $post_data['ID'] ) ) {
+          $_post_id = $post_data['ID'];
+        } elseif( is_array( $post_data ) && isset( $post_data[ 'mls_number' ]))  {
+          $_post_id = ud_get_wp_rets_client()->find_property_by_rets_id( $post_data[ 'mls_number' ] );
+        } else {
+          $_post_id = $post_data;
+        }
 
-            $_terms = array();
+        ud_get_wp_rets_client()->write_log( 'Have request [wpp.getProperty] request using [' . $_post_id . '] post_id.', 'debug' );
 
-            foreach( $tax_tags as $_term_name ) {
+        $_post = get_post( $_post_id );
 
-              if( is_object( $_term_name ) || is_array( $_term_name ) ) {
+        $_resposne = array(
+          "ok" => $_post ? true : false,
+          "exists" => $_post ? true : false,
+          "time" => timer_stop()
+        );
 
-                if( isset( $_term_name[ '_id'] ) ) {
-                  ud_get_wp_rets_client()->write_log( "Have hierarchical object term [$tax_name] with [" . $_term_name[ '_id'] . "] _id.", 'debug' );
-                  $_insert_result = WPP_F::insert_terms($_post_id, array($_term_name), array( '_taxonomy' => $tax_name ) );
-                  ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_insert_result['set_terms'] ) . "] terms for [$tax_name] taxonomy.", 'debug' );
-                }
+        if( $_post ) {
+          $_resposne["post_id"] = intval( $_post_id );
+          $_resposne["post_status"] = $_post->post_status;
 
-                continue;
-              }
-
-              ud_get_wp_rets_client()->write_log( "Handling inserting term [$_term_name] for [$tax_name].", 'debug' );
-
-              $_term_parts = explode( ' > ', $_term_name );
-
-              $_term_parent_value = $_term_parts[0];
-
-              if( isset( $_term_parts[1] ) && $_term_parts[1] ) {
-                $_term_child_value = $_term_parts[1];
-              } else {
-                $_term_child_value = null;
-              }
-
-              $_term = get_term_by( 'slug', sanitize_title( $_term_name ), $tax_name, ARRAY_A );
-              $_term_parent = get_term_by( 'slug', sanitize_title( $_term_parent_value ), $tax_name, ARRAY_A );
-
-              if( is_wp_error( $_term_parent ) ) {
-                ud_get_wp_rets_client()->write_log( "Error inserting term [$tax_name]: " . $_term_parent->get_error_message(), 'error' );
-                //continue;
-              }
-
-              if( !$_term_parent ) {
-                ud_get_wp_rets_client()->write_log( "Did not find parent term [$tax_name] - [$_term_parent_value].", 'warn' );
-
-                $_term_parent = wp_insert_term( $_term_parent_value, $tax_name, array(
-                  "slug" => sanitize_title( $_term_parent_value )
-                ));
-
-                if( is_wp_error( $_term_parent ) ) {
-                  ud_get_wp_rets_client()->write_log( "Error creating term [$_term_parent_value] with [" . $_term_parent->get_error_message() ."].", 'error' );
-                } else {
-                  ud_get_wp_rets_client()->write_log( "Created parent term [$_term_parent_value] with [" . $_term_parent['term_id'] ."].", 'info' );
-                }
-
-              }
-
-              if( $_term_parent && !$_term && isset( $_term_parts ) && $_term_child_value  ) {
-
-                ud_get_wp_rets_client()->write_log( "Did not find child term [$_term_child_value] with slug [" .sanitize_title( $_term_name ) . "].", 'info' );
-                $_term = wp_insert_term( $_term_name, $tax_name, array(
-                  "parent" => $_term_parent['term_id'],
-                  "slug" => sanitize_title( $_term_name ),
-                  "description" => $_term_child_value
-                ));
-
-                // add_term_meta();
-
-                if( $_term && !is_wp_error( $_term ) ) {
-
-                  $_child_term_name_change = wp_update_term( $_term['term_id'], $tax_name, array(
-                    'name' => $_term_parent_value,
-                    'slug' => sanitize_title( $_term_name )
-                  ));
-
-
-                }
-
-                ud_get_wp_rets_client()->write_log( "Created child term [$_term_name] with [" . $_term['term_id'] ."] for [$_term_parent_value] parent.", 'debug' );
-              }
-
-              if( $_term_parent && $_term_parent['term_id'] ) {
-                $_terms[] = $_term_parent['term_id'];
-              }
-
-              if( $_term && $_term['term_id'] ) {
-                // ud_get_wp_rets_client()->write_log( "Did not find and could not create child term [$_term_parent_value] using [".sanitize_title( $_term_parts[1] )."] slug" );
-                $_terms[] = $_term['term_id'];
-              }
-
-            }
-
-            if( isset( $_terms ) && !empty( $_terms ) ) {
-              $_inserted_terms = wp_set_post_terms( $_post_id, $_terms, $tax_name );
-              ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_inserted_terms ) . "] terms.", 'info' );
-            }
-
-          }
-
-          if( !is_taxonomy_hierarchical( $tax_name ) ) {
-            ud_get_wp_rets_client()->write_log( "Handling non-hierarchical taxonomy [$tax_name].", 'debug' );
-
-            $_terms = array();
-
-            // check each tag, make sure its NOT an an array.
-            foreach( $tax_tags as $_term_name ) {
-
-              // Item is an array, which means this entry includes term meta.
-              if( is_object( $_term_name ) || is_array( $_term_name ) && isset( $_term_name[ '_id'] ) ) {
-                $_insert_result = WPP_F::insert_terms($_post_id, array($_term_name), array( '_taxonomy' => $tax_name ) );
-                ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_insert_result['set_terms'] ) . "] non-hierarchical terms for [$tax_name] taxonomy with [" . $_term_name[ '_id'] . "] _id.", 'debug' );
-              } else {
-                $_terms[] = $_term_name;
-              }
-
-            }
-
-            if( isset( $_terms ) && !empty( $_terms ) ) {
-              $_inserted_terms = wp_set_post_terms( $_post_id, $_terms, $tax_name );
-              ud_get_wp_rets_client()->write_log( "Inserted [" . count( $_inserted_terms ) . "] terms into [$tax_name] taxonomy.", "debug" );
-            }
-
+          if( isset( $post_data['detail'] ) ) {
+            $_resposne[ "permalink" ] = $_post ? get_permalink( $_post_id ) : null;
+            $_resposne[ 'meta_input' ] = array(
+              'modification_timestamp' => get_post_meta( $_post_id, 'rets_modified_datetime', true ),
+              'rets_listed_date' => get_post_meta( $_post_id, 'rets_listed_date', true ),
+              'rets_id' => get_post_meta( $_post_id, 'rets_id', true ),
+              'rets_schedule' => get_post_meta( $_post_id, 'rets_schedule', true ),
+              'wpp_import_time' => get_post_meta( $_post_id, 'wpp_import_time', true ),
+              'mls_number' => get_post_meta( $_post_id, 'mls_number', true ),
+              //'attachment' => wp_count_attachments()
+            );
           }
 
         }
 
+        ud_get_wp_rets_client()->write_log( 'Completed [wpp.getProperty] request.', 'debug' );
+
+        return $_resposne;
+
       }
 
       /**
+       * Delete Property.
        *
        * @param $args
        * @return array
        */
-      public function rpc_delete_property( $args ) {
+      public function delete_property( $args ) {
         global $wp_xmlrpc_server, $wpdb;
+
+        add_filter( 'ep_sync_insert_permissions_bypass', '__return_true', 99, 2 );
 
         $data = self::parseRequest( $args );
         if( !empty( $wp_xmlrpc_server->error ) ) {
@@ -1227,8 +1208,7 @@ namespace UsabilityDynamics\WPRETSC {
 
         $response = array(
           "ok" => true,
-          "request" => $data,
-          "logs" => array(),
+          "request" => $data
         );
 
         $post_id = 0;
@@ -1242,9 +1222,7 @@ namespace UsabilityDynamics\WPRETSC {
         ud_get_wp_rets_client()->write_log( 'Have wpp.deleteProperty request.', 'info' );
 
         if( !$post_id || !is_numeric( $post_id ) ) {
-          $log = 'No post ID provided';
-          array_push( $response[ 'logs' ], $log );
-          ud_get_wp_rets_client()->write_log( $log, 'info' );
+          ud_get_wp_rets_client()->write_log(  'No post ID provided', 'info' );
           $response['ok'] = false;
           return $response;
         }
@@ -1264,11 +1242,10 @@ namespace UsabilityDynamics\WPRETSC {
 
           // Looks like post was deleted. But postmeta ( and probably terms ) still exist... Remove it.
           wp_delete_object_term_relationships( $post_id, get_object_taxonomies( 'property' ) );
+
           $wpdb->delete( $wpdb->postmeta, array( 'post_id' => $post_id ) );
 
-          $log = "Removed postmeta and terms for Property [{$post_id}].";
-          array_push( $response[ 'logs' ], $log );
-          ud_get_wp_rets_client()->write_log( $log, 'debug' );
+          ud_get_wp_rets_client()->write_log( "Removed postmeta and terms for Property [{$post_id}].", 'info' );
 
           do_action( 'wrc_property_deleted', $post_id );
 
@@ -1276,23 +1253,161 @@ namespace UsabilityDynamics\WPRETSC {
 
           ud_get_wp_rets_client()->write_log( "Post [$post_id] found. Removing it.", "info" );
 
-          if( wp_delete_post( $post_id, true ) ) {
-            $log = "Removed Property [{$post_id}]";
-            /**
-             * Do something after property is deleted
-             */
+          if( wp_delete_post( $post_id, false ) ) {
             do_action( 'wrc_property_deleted', $post_id );
+            $response[ "ok" ] = true;
           } else {
-            $log = "Property [{$post_id}] could not be removed";
+            ud_get_wp_rets_client()->write_log( "Property [{$post_id}] could not be removed", 'debug' );
             $response[ "ok" ] = false;
           }
 
-          array_push( $response[ 'logs' ], $log );
-          ud_get_wp_rets_client()->write_log( $log, 'debug' );
-
         }
 
+        ud_get_wp_rets_client()->write_log( "Finished removing [$post_id].", "info" );
+
+        $response['time' ] = timer_stop();
+
         return $response;
+
+      }
+
+      /**
+       * Quick status change, real removal to occur later.
+       *
+       * @param $args
+       * @return array
+       */
+      public function trash_property( $args ) {
+        global $wp_xmlrpc_server, $wpdb;
+
+        add_filter( 'ep_sync_insert_permissions_bypass', '__return_true', 99, 2 );
+
+        $data = self::parseRequest( $args );
+
+        if( !empty( $wp_xmlrpc_server->error ) ) {
+          return $data;
+        }
+
+        $response = array(
+          "ok" => true,
+          "request" => $data
+        );
+
+        $post_id = 0;
+
+        if( is_numeric( $data ) ) {
+          $post_id = $data;
+        } else if( !empty( $data[ 'id' ] ) ) {
+          $post_id = $data[ 'id' ];
+          ud_get_wp_rets_client()->logfile = !empty( $data[ 'logfile' ] ) ? $data[ 'logfile' ] : ud_get_wp_rets_client()->logfile;
+        }
+
+        ud_get_wp_rets_client()->write_log( 'Have [wpp.trashProperty] request. Post id: ' . $post_id, 'info' );
+
+        if( !$post_id || !is_numeric( $post_id ) ) {
+          ud_get_wp_rets_client()->write_log(  'No post ID provided', 'info' );
+          $response['ok'] = false;
+          return $response;
+        }
+
+        ud_get_wp_rets_client()->write_log( "Checking post ID [$post_id]." );
+
+        $wpdb->update( $wpdb->posts, array( 'post_status' => 'trash' ), array( 'ID' => $post_id ) );
+
+        ud_get_wp_rets_client()->write_log( "Property [$post_id] trashed." );
+
+        $response['time' ] = timer_stop();
+
+        return $response;
+
+      }
+
+      /**
+       * Get post ID by mls number
+       *
+       * @param $args
+       * @return array
+       */
+      public function get_post_id_by_mls_id( $args ) {
+        global $wp_xmlrpc_server, $wpdb;
+
+        $data = self::parseRequest( $args );
+
+        if( !empty( $wp_xmlrpc_server->error ) ) {
+          return $data;
+        }
+
+        $response = array(
+          "ok" => true,
+          "request" => $data
+        );
+
+        $post_id = 0;
+
+        if( isset($data['id']) && !empty( $data[ 'id' ] ) ) {
+          $post_id = $wpdb->get_var( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='".( defined( 'RETS_ID_KEY' ) ? RETS_ID_KEY : 'wpp::rets_pk' )."' AND meta_value={$data['id']};" );
+        }
+
+        $response['post_id'] = $post_id;
+
+        ud_get_wp_rets_client()->write_log( 'Have [wpp.getPostIdByMlsId] request.', 'info' );
+
+        if( !$post_id || !is_numeric( $post_id ) ) {
+          ud_get_wp_rets_client()->write_log(  'No post ID provided for mls id:' . $data['id'] , 'info' );
+          $response['ok'] = false;
+          return $response;
+        }
+
+        ud_get_wp_rets_client()->write_log( 'Returned post_id:' . $post_id, 'info' );
+
+        return $response;
+
+      }
+
+      /**
+       * Insert media for a property.
+       *
+       * @param $args
+       * @return array
+       */
+      public function insert_media( $args ) {
+
+        add_filter( 'ep_sync_insert_permissions_bypass', '__return_true', 99, 2 );
+
+        $post_data = self::parseRequest( $args );
+
+        if( ( isset( $wp_xmlrpc_server ) && !empty( $wp_xmlrpc_server->error ) ) || isset( $post_data['error'] ) ) {
+          ud_get_wp_rets_client()->write_log( 'Failed [wpp.insertMedia] request.', 'debug' );
+          return $post_data;
+        }
+
+        if( is_callable( array( $args, 'get_param' ) ) ) {
+
+          $post_data = wp_parse_args($post_data, array_filter(array(
+            'post_id' => $args->get_param( 'post_id' ),
+            'mls_number' => $args->get_param( 'mls_number' ),
+            'media' => $args->get_param( 'media' )
+          )));
+
+        };
+
+        // try go get post_id by mls_number, if it spassed
+        if( !isset( $post_data['post_id' ]) ) {
+          $post_data['post_id' ] = ud_get_wp_rets_client()->find_property_by_rets_id( $post_data[ 'mls_number' ] );
+        }
+
+        ud_get_wp_rets_client()->write_log( 'Have request [wpp.insertMedia] request for ['  . $post_data['post_id' ]. '].', 'debug' );
+
+        if( !isset( $post_data['post_id' ] ) || !$post_data['post_id' ]) {
+          return array( 'ok' => false );
+        }
+
+        $_result = Utility::insert_media( $post_data['post_id' ], $post_data[ 'media' ] );
+
+        return array(
+          'ok' => true,
+          'result' => $_result
+        );
 
       }
 
@@ -1462,9 +1577,9 @@ namespace UsabilityDynamics\WPRETSC {
         if( !$args[ 'noCache' ] && wp_cache_get( $args[ 'cacheKey' ], 'wpp' ) ) {
           return self::send( array(
             "schedule" => $args['schedule'],
-            "data" => wp_cache_get( $args[ 'cacheKey' ], 'wpp' ), 
-            "time" => timer_stop(), 
-            "cached" => true 
+            "data" => wp_cache_get( $args[ 'cacheKey' ], 'wpp' ),
+            "time" => timer_stop(),
+            "cached" => true
           ) );
         }
 
