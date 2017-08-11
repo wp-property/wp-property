@@ -55,13 +55,15 @@ jQuery.fn.wppGroups = function(opt) {
     sortButton: ".sort_stats_by_groups"
   };
 
+  opt = jQuery.extend({}, defaults, opt);
+
   // get element class
-  var elementClass = jQuery(this).attr('class');
+  var elementClass = opt.elementClass;
+  elementClass = jQuery(this).attr('class');
+  console.log(elementClass);
   elementClass = elementClass.replace(/\s/ig, '.');
   elementClass = elementClass.split('.')[0];
   elementClass = '.' + elementClass;
-
-  opt = jQuery.extend({}, defaults, opt);
 
   //* Determine if dialog Wrapper exist */
   if(!jQuery(opt.groupWrapper).length > 0) {
@@ -726,7 +728,7 @@ jQuery(document).ready(function() {
   bindColorPicker();
 
   // Add row to UD UI Dynamic Table
-  jQuery(".wpp_add_row").on("click" , function() {
+  jQuery(document).on("click", ".wpp_add_row", function() {
     wpp_add_row(this);
   });
 
