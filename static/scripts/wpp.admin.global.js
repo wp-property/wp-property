@@ -46,6 +46,7 @@ jQuery.fn.wppGroups = function(opt) {
   instance = jQuery(this),
   //* Default params */
   defaults = {
+    elementClass: '.wpp_attribute_group',
     groupsBox: '#wpp_attribute_groups',
     groupWrapper: '#wpp_dialog_wrapper_for_groups',
     closeButton: '.wpp_close_dialog',
@@ -59,11 +60,12 @@ jQuery.fn.wppGroups = function(opt) {
 
   // get element class
   var elementClass = opt.elementClass;
-  elementClass = jQuery(this).attr('class');
-  console.log(elementClass);
-  elementClass = elementClass.replace(/\s/ig, '.');
-  elementClass = elementClass.split('.')[0];
-  elementClass = '.' + elementClass;
+  if (instance.length > 0) {
+    elementClass = instance.attr('class');
+    elementClass = elementClass.replace(/\s/ig, '.');
+    elementClass = elementClass.split('.')[0];
+    elementClass = '.' + elementClass;
+  }
 
   //* Determine if dialog Wrapper exist */
   if(!jQuery(opt.groupWrapper).length > 0) {
