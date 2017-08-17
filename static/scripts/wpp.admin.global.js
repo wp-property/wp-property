@@ -56,6 +56,9 @@ jQuery.fn.wppGroups = function(opt) {
     sortButton: ".sort_stats_by_groups"
   };
 
+  if(instance.length == 0)
+    return;
+  
   opt = jQuery.extend({}, defaults, opt);
 
   // get element class
