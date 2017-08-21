@@ -98,7 +98,8 @@ if (have_properties()) {
             if (is_array($data)) {
               $data = implode(', ', $data);
             }
-            echo "<li class='property_attributes property_$attribute'><span class='title'>{$attribute_data['title']}:</span> {$property[$attribute]}</li>";
+            $attribute_name = WPP_F::de_slug($property[$attribute]);
+            echo "<li class='property_attributes property_$attribute'><span class='title'>{$attribute_data['title']}:</span> {$attribute_name}</li>";
           }
         }
       }
