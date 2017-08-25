@@ -133,27 +133,27 @@ $wpp_property_types_variables = apply_filters( 'wpp::settings::developer::terms'
           </li>
 
           <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][show_in_nav_menus]" <%= _.wppChecked(data, 'show_in_nav_menus', false) %> value="true"/> <?php _e( 'Show in Nav Menus', ud_get_wpp_terms()->domain ); ?></label>
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][show_in_nav_menus]" <% if(__.get(data, 'system', false)) print('disabled = "disabled"');%> <%= _.wppChecked(data, 'show_in_nav_menus', false) %> value="true"/> <?php _e( 'Show in Nav Menus', ud_get_wpp_terms()->domain ); ?></label>
           </li>
 
           <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][show_tagcloud]" <%= _.wppChecked(data, 'show_tagcloud', false) %> value="true"/> <?php _e( 'Show in Tag Cloud', ud_get_wpp_terms()->domain ); ?></label>
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][show_tagcloud]" <% if(__.get(data, 'system', false)) print('disabled = "disabled"');%> <%= _.wppChecked(data, 'show_tagcloud', false) %> value="true"/> <?php _e( 'Show in Tag Cloud', ud_get_wpp_terms()->domain ); ?></label>
           </li>
 
           <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][show_in_menu]" <%= _.wppChecked(data, 'show_in_menu', false) %> value="true"/> <?php _e( 'Show in Admin Menu', ud_get_wpp_terms()->domain ); ?></label>
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][show_in_menu]" <% if(__.get(data, 'system', false)) print('disabled = "disabled"');%> <%= _.wppChecked(data, 'show_in_menu', false) %> value="true"/> <?php _e( 'Show in Admin Menu', ud_get_wpp_terms()->domain ); ?></label>
           </li>
 
           <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][add_native_mtbox]" <% if(__.get(data, 'system', false)) print('disabled = "disabled"');%> <%= _.wppChecked(data, 'add_native_mtbox', false) %> value="true"/> <?php _e( 'Add native Meta Box', ud_get_wpp_terms()->domain ); ?></label>
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][add_native_mtbox]" <% if(__.get(data, 'system', false)) print('disabled = "disabled"');%> <% if(__.get(data, 'system', false)) print('disabled = "disabled"');%> <%= _.wppChecked(data, 'add_native_mtbox', false) %> value="true"/> <?php _e( 'Add native Meta Box', ud_get_wpp_terms()->domain ); ?></label>
           </li>
 
           <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][rich_taxonomy]" <%= _.wppChecked(data, 'rich_taxonomy', false) %> value="true"/> <?php _e( 'Add Term Post', ud_get_wpp_terms()->domain ); ?></label>
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][rich_taxonomy]" <% if(__.get(data, 'system', false)) print('disabled = "disabled"');%> <%= _.wppChecked(data, 'rich_taxonomy', false) %> value="true"/> <?php _e( 'Add Term Post', ud_get_wpp_terms()->domain ); ?></label>
           </li>
 
           <li class="wpp_development_advanced_option">
-            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][admin_searchable]" <%= _.wppChecked(data, 'admin_searchable', false) %> value="true" class="wpp-terms-option-admin_searchable"/> <?php _e( 'Admin Searchable', ud_get_wpp_terms()->domain ); ?></label>
+            <label><input type="checkbox" name="wpp_terms[taxonomies][<%= slug %>][admin_searchable]" <% if(__.get(data, 'system', false)) print('disabled = "disabled"');%> <%= _.wppChecked(data, 'admin_searchable', false) %> value="true" class="wpp-terms-option-admin_searchable"/> <?php _e( 'Admin Searchable', ud_get_wpp_terms()->domain ); ?></label>
           </li>
 
         </ul>
