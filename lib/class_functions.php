@@ -4644,7 +4644,7 @@ class WPP_F extends UsabilityDynamics\Utility
     if($infobox_settings['infowindow_styles'] === 'new') {
       ?>
 
-      <div id="infowindow" <?php echo $infobox_style; ?>>
+      <div id="infowindow" class="infowindow-style-new" <?php echo $infobox_style; ?>>
 
         <div class="infowindow_box">
           <?php if (!empty($imageHTML)) { ?>
