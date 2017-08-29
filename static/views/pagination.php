@@ -14,11 +14,11 @@ if ($settings['type'] !== 'loadmore' || ($settings['type'] == 'loadmore' && $set
   if ($hide_count != 'true') {
     $wpp_property_results = '<span class="wpp_property_results">';
     $wpp_property_results .= ($properties['total'] > 0 ? \WPP_F::format_numeric($properties['total']) : __('None', ud_get_wp_property()->domain));
-    $wpp_property_results .= __(' found . ', ud_get_wp_property()->domain);
+    $wpp_property_results .= __(' found. ', ud_get_wp_property()->domain);
     $sort_html .= apply_filters('wpp::wpp_draw_pagination::wpp_property_results', $wpp_property_results, array('properties' => $properties, 'settings' => $settings));
   }
   if (!empty($use_pagination)) {
-    $sort_html .= __('Viewing page', ud_get_wp_property()->domain);
+    $sort_html .= __('Viewing page ', ud_get_wp_property()->domain);
     $sort_html .= '<span class="wpp_current_page_count">1</span>' . __(" of ", ud_get_wp_property()->domain);
     $sort_html .= '<span class="wpp_total_page_count">' . $pages . '</span>.';
   }
