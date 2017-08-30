@@ -12,7 +12,7 @@ $property_stats = WPP_F::get_stat_values_and_labels($property, array(
 ));
 
 $labels_to_keys = array_flip( (array) $wp_properties['property_stats']);
-
+if($property_stats)
 foreach( (array) $property_stats as $attribute_label => $attribute_value) {
   $boolean_field = false;
   $attribute_slug = false;
