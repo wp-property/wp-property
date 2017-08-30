@@ -233,6 +233,7 @@ class class_wpp_supermap {
                 <tr>
                   <th style="width:10px;" class="wpp_draggable_handle">&nbsp;</th>
                   <th style="width:50px;"><?php _e('Image',ud_get_wpp_supermap()->domain) ?></th>
+                  <th style="width:50px;"><?php _e('Default',ud_get_wpp_supermap()->domain) ?></th>
                   <th style="width:150px;"><?php _e('Name',ud_get_wpp_supermap()->domain) ?></th>
                   <th style="width:250px;"><?php _e('Slug',ud_get_wpp_supermap()->domain) ?></th>
                   <th style="width:50px;">&nbsp;</th>
@@ -262,10 +263,13 @@ class class_wpp_supermap {
                     <input type="hidden" class="wpp_supermap_marker_file" name="wpp_settings[configuration][feature_settings][supermap][markers][<?php echo $slug; ?>][file]" value="<?php echo $marker['file']; ?>" />
                   </td>
                   <td>
+                    <input type="radio" name="wpp_settings[configuration][feature_settings][supermap][default_marker]" value="<?php echo $slug; ?>" <?php checked($supermap_configuration['default_marker'], $slug);?>>
+                  </td>
+                  <td>
                     <input class="slug_setter" type="text" name="wpp_settings[configuration][feature_settings][supermap][markers][<?php echo $slug; ?>][name]" value="<?php echo $marker['name']; ?>" />
                   </td>
                   <td>
-                    <input type="text" value="<?php echo $slug; ?>" readonly="readonly" class="slug wpp_marker_slug">
+                    <input type="text" readonly="readonly" class="slug wpp_marker_slug" value="<?php echo $slug; ?>">
                   </td>
                   <td>
                     <span class="wpp_delete_row wpp_link"><?php _e('Delete',ud_get_wpp_supermap()->domain) ?></span>
@@ -309,14 +313,18 @@ class class_wpp_supermap {
                 });
 
                 /* Fire event after row removing to check table's DOM */
-                jQuery(document).on('row_removed', '#wpp_supermap_markers', function(){
+                jQuery(document).on('row_removed', '#wpp_supermap_markers', function(event, row){
+                  console.log(row);
+                  console.log(row.attr('new_row'));
+                  console.log(row.html());
                   var row_count = jQuery(this).find(".wpp_delete_row:visible").length;
-                  if(row_count == 1) {
+                  var new_row = jQuery(this).find(".wpp_dynamic_table_row:visible").attr('new_row');
+                  
+                  if(row_count == 1 && new_row == 'true') {
                     var slug = jQuery(this).find('input.wpp_marker_slug').val();
                     if(slug == '') {
                       jQuery('.wpp_supermap_ajax_uploader', this).html('');
                       jQuery('input.wpp_supermap_marker_file', this).val('');
-                      jQuery('tr', this).attr('new_row', 'true');
                     }
                   };
                 });
@@ -386,14 +394,26 @@ class class_wpp_supermap {
   }
 
   static public function wpp_property_types_variables($variables = array()){
+    global $wp_properties;
+    $config = isset( $wp_properties['configuration']['feature_settings']['supermap'] ) ? 
+      $wp_properties['configuration']['feature_settings']['supermap'] : array();
+
     $upload_dir = wp_upload_dir();
     $markers_url = $upload_dir['baseurl'] . '/supermap_files/markers';
     $markers_dir = $upload_dir['basedir'] . '/supermap_files/markers';
     
-    $default_marker = apply_filters( 'wpp:default_pin_icon', WPP_URL . 'images/google_maps_marker.png' );
+    $google_map_marker = apply_filters( 'wpp:default_pin_icon', WPP_URL . 'images/google_maps_marker.png' );
 
     $variables['markers_url'] = $markers_url;
-    $variables['globals']['wpp_supermap_default_marker'] = $default_marker;
+    $variables['globals']['supermap_configuration'] = $config;
+    $variables['globals']['default_google_map_marker'] = $google_map_marker;
+
+    if(!empty($config['default_marker'])){
+      $default_marker = $config['default_marker'];
+      $default_marker_url = $config['markers'][$default_marker]['file'];
+    }
+
+    $variables['globals']['wpp_supermap_default_marker'] = !empty($default_marker_url)?$default_marker_url:$google_map_marker;
     return $variables;
   }
 
@@ -408,25 +428,21 @@ class class_wpp_supermap {
   static public function property_type_settings($settings) {
     ob_start();
     ?>
+    <% marker_slug = __.get(supermap_configuration, ['property_type_markers', slug], null) %>
     <li>
     <div class="wp-tab-panel supermap_marker_settings">
     <div class="wpp_property_type_supermap_settings">
       <div class="wpp_supermap_marker_image">
-      <% if ( url = __.get(supermap_configuration, ['property_type_markers', slug], false) ){ 
-        var marker_image_url = /^(http|https):\/\//.exec(url) ? url : markers_url + "/" + url;
-      %>
-        <img src="<%= marker_image_url %>" alt="" />
-      <% }else{ %>
-      <img src="<%= wpp_supermap_default_marker %>" alt="" />
-      <% } %>
+        <img src="<%= _.wppMarkerUrl(marker_slug, supermap_configuration, wpp_supermap_default_marker, default_google_map_marker ) %>" alt="" />
       </div>
       <div class="wpp_supermap_marker_selector">
       <label for="wpp_setting_property_type_<%= slug %>_marker"><?php _e('Map Marker', ud_get_wpp_supermap()->domain); ?>:</label>
       <select class="wpp_setting_property_type_marker" id="wpp_setting_property_type_<%= slug %>_marker" name="wpp_settings[configuration][feature_settings][supermap][property_type_markers][<%= slug %>]" >
-        <option value=""><?php _e('Default by Google', ud_get_wpp_supermap()->domain); ?></option>
+        <option value=""><?php _e('Select Marker', ud_get_wpp_supermap()->domain); ?></option>
+        <option value="default_google_map_marker" <%= _.wppSelected(__.get(supermap_configuration, ['property_type_markers', slug], null), 'default_google_map_marker') %>><?php _e('Default by Google', ud_get_wpp_supermap()->domain); ?></option>
         <% if( __.get(supermap_configuration, 'markers', false)){ %>
           <% jQuery.each(__.get(supermap_configuration, 'markers', []), function(mslug, mvalue){ %>
-            <option value="<%= mvalue.file %>" <% _.wppSelected(__.get(supermap_configuration, ['property_type_markers', slug], null), mvalue.file); %>><%= mvalue.name %></option>
+            <option value="<%= mslug %>" <%= _.wppSelected(marker_slug, mvalue.file) %> <%= _.wppSelected(marker_slug, mslug) %>><%= mvalue.name %></option>
           <% }); %>
         <% } %>
       </select>
@@ -529,53 +545,39 @@ class class_wpp_supermap {
     //* START Renders Supermap Marker's settings */
     //* Get supermap marker for the current property */
     $supermap_marker = get_post_meta($post_id, 'supermap_marker', true);
+    $default_marker = $default_google_map_marker = apply_filters( 'wpp:default_google_map_marker', WPP_URL . 'images/google_maps_marker.png' );
 
-    $default_marker = apply_filters( 'wpp:default_pin_icon', WPP_URL . 'images/google_maps_marker.png' );
 
     $supermap_configuration = !empty( $wp_properties['configuration']['feature_settings']['supermap'] ) ? $wp_properties['configuration']['feature_settings']['supermap'] : array();
     if(empty($supermap_configuration['property_type_markers'])) {
       $supermap_configuration['property_type_markers'] = array();
     }
-
-    $property_type = get_post_meta($post_id, 'property_type', true);
-    if(empty($supermap_marker) && !empty($property_type) && isset( $supermap_configuration['property_type_markers'][$property_type] ) ) {
-      $supermap_marker = $supermap_configuration['property_type_markers'][$property_type];
+    
+    if(!empty($supermap_configuration['default_marker'])){
+      $_default_marker = $supermap_configuration['default_marker'];
+      $default_marker = !empty($supermap_configuration['markers'][$_default_marker]['file']) ? $supermap_configuration['markers'][$_default_marker]['file'] : '';
     }
+    
+    $default_marker = apply_filters( 'wpp:default_pin_icon', $default_marker );
+    $supermap_marker_url = self::get_marker_by_post_id( WPP_URL . 'images/google_maps_marker.png', $post_id );
 
-    $upload_dir = wp_upload_dir();
-    $markers_url = $upload_dir['baseurl'] . '/supermap_files/markers';
-    $markers_dir = $upload_dir['basedir'] . '/supermap_files/markers';
-
-    //* Set default marker image */
-    if(empty($supermap_marker)) {
-      $marker_url = $default_marker;
-    } else {
-      if ( preg_match( '/(http|https):\/\//', $supermap_marker ) ) {
-        $marker_url = $supermap_marker;
-      } else {
-        $marker_url = $markers_url . "/" . $supermap_marker;
-        $marker_dir = $markers_dir . "/" . $supermap_marker;
-        if (!file_exists($marker_dir)) {
-          $marker_url = $default_marker;
-        }
-      }
-    }
     ?>
     <div class="wp-tab-panel supermap_marker_settings" id="wpp_supermap_marker_settings" style="margin-top:10px;">
       <div class="wpp_supermap_marker_image">
-        <img src="<?php echo $marker_url; ?>" alt="" />
+        <img src="<?php echo $supermap_marker_url; ?>" alt="" />
       </div>
       <div class="wpp_supermap_marker_selector">
       <label for="wpp_setting_supermap_marker"><?php _e('Map Marker', ud_get_wpp_supermap()->domain); ?>:</label>
       <select id="wpp_setting_supermap_marker" name="supermap_marker">
-        <option value="default_google_map_marker"><?php _e('Default by Google', ud_get_wpp_supermap()->domain); ?></option>
+        <option value=""><?php _e('Select Marker', ud_get_wpp_supermap()->domain); ?></option>
+        <option value="default_google_map_marker" data-marker-url="default_google_map_marker"><?php _e('Default by Google', ud_get_wpp_supermap()->domain); ?></option>
         <?php if(!empty($supermap_configuration['markers'])) : ?>
           <?php foreach ($supermap_configuration['markers'] as $mslug => $mvalue) : ?>
             <?php
             $marker_image_url = preg_match( '/(http|https):\/\//', $mvalue['file'] )
                 ? $mvalue['file'] : $marker_url . '/' . $mvalue['file'];
             ?>
-            <option value="<?php echo $marker_image_url; ?>" <?php selected($supermap_marker, $marker_image_url); ?>><?php echo $mvalue['name']; ?></option>
+            <option value="<?php echo $mslug; ?>" data-marker-url="<?php echo $marker_image_url; ?>" <?php selected($supermap_marker, $mslug); ?> <?php selected($supermap_marker, $marker_image_url); ?>><?php echo $mvalue['name']; ?></option>
           <?php endforeach; ?>
         <?php endif; ?>
       </select>
@@ -589,24 +591,37 @@ class class_wpp_supermap {
           /* Change marker image */
           jQuery(document).on('change', '#wpp_setting_supermap_marker', function(){
             var e = jQuery('#wpp_supermap_marker_settings');
-            var filename = jQuery(this).val();
+            var filename = jQuery(this).find(":selected").attr('data-marker-url');
+            console.log(filename);
             var rand = Math.random();
             var HTML = '';
-            if(filename != '' && filename != 'default_google_map_marker') {
+            if(filename == 'default_google_map_marker') {
+              HTML = '<img src="<?php echo $default_google_map_marker;?>" alt="" />';
+            } else if(filename != '' && typeof filename != 'undefined') {
               HTML = '<img src="' + filename + '?' + rand + '" alt="" />';
             } else {
-              HTML = '<img src="<?php echo $default_marker; ?>" alt="" />';
+              var property_type = jQuery('#wpp_meta_property_type, #property_type').val();
+              var default_marker = '<?php echo $default_marker;?>';
+              for(var i in property_type_markers) {
+                if(property_type == i && property_type_markers[i] != 'default_google_map_marker') {
+                  // jQuery('#wpp_setting_supermap_marker').val(property_type_markers[i]);
+                  default_marker = property_type_markers[i] || default_marker;
+                  break;
+                }
+              }
+
+              HTML = '<img src="' + default_marker + '" alt="" />';
             }
             e.find('.wpp_supermap_marker_image').html(HTML);
           });
 
           /* Change supermap marker on Property Type 'change' Event */
-          jQuery(document).on('change', '#wpp_meta_property_type', function(){
+          jQuery(document).on('change', '#wpp_meta_property_type, #property_type', function(){
             var property_type = jQuery(this).val();
             for(var i in property_type_markers) {
               if(property_type == i) {
-                jQuery('#wpp_setting_supermap_marker').val(property_type_markers[i]);
                 jQuery('#wpp_setting_supermap_marker').trigger('change');
+                // jQuery('#wpp_setting_supermap_marker').val(property_type_markers[i]);
               }
             }
           });
@@ -669,26 +684,42 @@ class class_wpp_supermap {
       return $marker_url;
     }
 
+    $supermap_configuration = $wp_properties['configuration']['feature_settings']['supermap'];
+    if(empty($supermap_configuration['property_type_markers'])) {
+      $supermap_configuration['property_type_markers'] = array();
+    }
+
     //* Get supermap marker for the current property */
-    $supermap_marker = get_post_meta($post_id, 'supermap_marker', true);
+    $property_marker = get_post_meta($post_id, 'supermap_marker', true);
+
+    //* Return empty string if property uses default marker */
+    if($property_marker == 'default_google_map_marker') {
+      return $marker_url;
+    }
+
+    // Supermap default marker
+    if(!empty($supermap_configuration['default_marker'])){
+      $default_marker = $supermap_configuration['default_marker'];
+      $supermap_marker = !empty($supermap_configuration['markers'][$default_marker]['file'])?$supermap_configuration['markers'][$default_marker]['file']:$supermap_marker;
+    }
+
+    // Property type default marker
+    $property_type = get_post_meta($post_id, 'property_type', true);
+    if(
+      !empty($property_type) &&
+      !empty( $supermap_configuration['property_type_markers'][$property_type] )
+    ) {
+      $supermap_marker = $supermap_configuration['property_type_markers'][$property_type];
+    }
 
     //* Return empty string if property uses default marker */
     if($supermap_marker == 'default_google_map_marker') {
       return $marker_url;
     }
 
-    $supermap_configuration = $wp_properties['configuration']['feature_settings']['supermap'];
-    if(empty($supermap_configuration['property_type_markers'])) {
-      $supermap_configuration['property_type_markers'] = array();
-    }
-
-    $property_type = get_post_meta($post_id, 'property_type', true);
-    if(
-      empty($supermap_marker) &&
-      !empty($property_type) &&
-      !empty( $supermap_configuration['property_type_markers'][$property_type] )
-    ) {
-      $supermap_marker = $supermap_configuration['property_type_markers'][$property_type];
+    // Marker by property meta.
+    if(!empty($property_marker)){
+      $supermap_marker = $property_marker;
     }
 
     $upload_dir = wp_upload_dir();
@@ -699,6 +730,9 @@ class class_wpp_supermap {
     if(empty($supermap_marker)) {
       $marker_url = '';
     } else {
+      if ( isset($supermap_configuration['markers'][$supermap_marker]['file']) ) {
+       $marker_url = $supermap_configuration['markers'][$supermap_marker]['file'];
+      } else 
       if ( preg_match( '/(http|https):\/\//', $supermap_marker ) ) {
         $marker_url = $supermap_marker;
       } else {

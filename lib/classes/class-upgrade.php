@@ -83,6 +83,15 @@ namespace UsabilityDynamics\WPP {
           case ( version_compare( $old_version, '2.2.1', '<' ) ):
             update_option( 'wpp_legacy_2_2_0_2', $old_version );
 
+            /*
+             * Remove supermap_marker where it's set to default_google_map_marker.
+             */
+            $wpdb->query( "
+              DELETE FROM {$wpdb->postmeta}
+                WHERE meta_key = 'supermap_marker'
+                  AND meta_value = 'default_google_map_marker' AND post_id IN ( SELECT ID FROM {$wpdb->posts} WHERE post_type='property' );
+            " );
+
 
         }
         /* Additional stuff can be handled here */

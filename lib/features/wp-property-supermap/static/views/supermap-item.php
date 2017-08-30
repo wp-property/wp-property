@@ -12,7 +12,7 @@ $property_stats = WPP_F::get_stat_values_and_labels($property, array(
 ));
 
 $labels_to_keys = array_flip( (array) $wp_properties['property_stats']);
-
+if($property_stats)
 foreach( (array) $property_stats as $attribute_label => $attribute_value) {
   $boolean_field = false;
   $attribute_slug = false;
@@ -40,6 +40,10 @@ foreach( (array) $property_stats as $attribute_label => $attribute_value) {
     $boolean_field = true;
   } elseif ($attribute_value == 'false') {
     continue;
+  }
+
+  if(is_array($attribute_value)){
+    $attribute_value = implode(', ', $attribute_value);
   }
 
   $attributes[] =  '<li class="supermap_list_' . $attribute_slug . ' wpp_supermap_attribute_row">';
