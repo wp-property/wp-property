@@ -86,11 +86,14 @@ namespace UsabilityDynamics\WPP {
             /*
              * Remove supermap_marker where it's set to default_google_map_marker.
              */
-            $wpdb->query( "
+            if(defined('WP_PROPERTY_FLAG_ENABLE_SUPERMAP')){
+              $wpdb->query( "
               DELETE FROM {$wpdb->postmeta}
                 WHERE meta_key = 'supermap_marker'
                   AND meta_value = 'default_google_map_marker' AND post_id IN ( SELECT ID FROM {$wpdb->posts} WHERE post_type='property' );
             " );
+            }
+            
 
 
         }
