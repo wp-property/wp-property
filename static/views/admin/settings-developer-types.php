@@ -9,6 +9,7 @@ $filtered_property_types = apply_filters( 'wpp::property_types', $wp_properties[
 $property_type_settings = array();
 $hidden_attributes_do_action    = array();
 $inherited_attributes_do_action = array();
+$property_type_settings_do_action = array();
 
 foreach ($filtered_property_types as $slug => $label) {
   ob_start();
