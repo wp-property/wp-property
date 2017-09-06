@@ -82,11 +82,6 @@ return array(
     'Composer\\Installers\\ZendInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/ZendInstaller.php',
     'Composer\\Installers\\ZikulaInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/ZikulaInstaller.php',
     'RWMB_Wpp_Alias_Field' => $baseDir . '/features/field-alias/fields/class-wpp-alias.php',
-    'RWMB_Wpp_Select_Advanced_Field' => $baseDir . '/features/wp-property-terms/lib/classes/fields/select-advanced.php',
-    'RWMB_Wpp_Select_Combobox_Field' => $baseDir . '/features/wp-property-terms/lib/classes/fields/select-combobox.php',
-    'RWMB_Wpp_Taxonomy_Field' => $baseDir . '/features/wp-property-terms/lib/classes/fields/taxonomy.php',
-    'RWMB_Wpp_Taxonomy_Inherited_Field' => $baseDir . '/features/wp-property-terms/lib/classes/fields/class-wpp-taxonomy-inherited.php',
-    'RWMB_Wpp_Taxonomy_Readonly_Field' => $baseDir . '/features/wp-property-terms/lib/classes/fields/taxonomy-readonly.php',
     'UsabilityDynamics\\WPP\\Agents_Bootstrap' => $baseDir . '/features/wp-property-agents/lib/classes/class-agents-bootstrap.php',
     'UsabilityDynamics\\WPP\\Elasticsearch' => $baseDir . '/features/elasticsearch/class-elasticsearch.php',
     'UsabilityDynamics\\WPP\\Elasticsearch_Terms' => $baseDir . '/features/elasticsearch/class-elasticsearch-terms.php',
@@ -104,6 +99,4 @@ return array(
     'UsabilityDynamics\\WPP\\Taxonomy_WPP_Listing_Type' => $baseDir . '/features/taxonomy-wpp-listing-type/taxonomy-wpp-listing-type.php',
     'UsabilityDynamics\\WPP\\Taxonomy_WPP_Location' => $baseDir . '/features/taxonomy-wpp-location/taxonomy-wpp-location.php',
     'UsabilityDynamics\\WPP\\Taxonomy_WPP_Schools' => $baseDir . '/features/taxonomy-wpp-schools/taxonomy-wpp-schools.php',
-    'UsabilityDynamics\\WPP\\Terms_Bootstrap' => $baseDir . '/features/wp-property-terms/lib/classes/class-terms-bootstrap.php',
-    'UsabilityDynamics\\WPP\\Terms_Upgrade' => $baseDir . '/features/wp-property-terms/lib/classes/class-terms-upgrade.php',
 );

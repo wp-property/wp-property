@@ -85,22 +85,6 @@ namespace UsabilityDynamics\WPP {
 
         add_filter( 'wpp:elastic:title_suggest', array( $this, 'elastic_title_suggest' ), 10, 3 );
 
-        if( defined('WP_PROPERTY_FLAG_ENABLE_TERMS')) {
-          // Worthless, unless it's enabled on old install.
-          add_action( 'wp-property::upgrade', function($old_version, $new_version){
-
-            switch( true ) {
-              case ( version_compare( $old_version, '2.2.1', '<' ) ):
-
-                // Run further upgrade actions on init hook, so things are loaded.
-                add_action( 'init', array('UsabilityDynamics\WPP\Taxonomy_WPP_Listing_Type', 'migrate_legacy_type_to_term') );
-
-                break;
-
-            }
-          }, 10, 2);
-        }
-
         // Add our custom class to Property Types table on Settings page
         // So we could hide 'add/delete options' in property types UI.
         add_filter( 'wpp::css::wpp_inquiry_property_types::classes', function( $classes ) {

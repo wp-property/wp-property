@@ -133,11 +133,6 @@ namespace UsabilityDynamics\WPP {
           define('WPP_AGENTS_VENDOR_LOAD', true);
         }
 
-        // Enable Terms
-        if( WP_PROPERTY_FLAG_ENABLE_TERMS && !defined( 'WPP_TERMS_VENDOR_LOAD' )) {
-          define('WPP_TERMS_VENDOR_LOAD', true);
-        }
-
         // Enable RETS Client
         if( RETSCI_FEATURE_FLAG && !defined( 'WP_RETS_CLIENT_VENDOR_LOAD' )) {
           define('WP_RETS_CLIENT_VENDOR_LOAD', true);

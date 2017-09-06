@@ -10,7 +10,6 @@ class ComposerStaticInitf4ed7b6af105d2c0f95f0f768a166c7c
         'a5a44e23ace0d7091d26d072cca21cdb' => __DIR__ . '/../..' . '/features/wp-property-agents/loader.php',
         '51586b10f6b255677916528b236fc466' => __DIR__ . '/../..' . '/features/wp-property-responsive-slideshow/loader.php',
         '908b1da117a8a871817a375f7853341a' => __DIR__ . '/../..' . '/features/wp-property-supermap/loader.php',
-        'f32e97dedfe851d55e4522a8b09dcb5a' => __DIR__ . '/../..' . '/features/wp-property-terms/loader.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -104,11 +103,6 @@ class ComposerStaticInitf4ed7b6af105d2c0f95f0f768a166c7c
         'Composer\\Installers\\ZendInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ZendInstaller.php',
         'Composer\\Installers\\ZikulaInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ZikulaInstaller.php',
         'RWMB_Wpp_Alias_Field' => __DIR__ . '/../..' . '/features/field-alias/fields/class-wpp-alias.php',
-        'RWMB_Wpp_Select_Advanced_Field' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/fields/select-advanced.php',
-        'RWMB_Wpp_Select_Combobox_Field' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/fields/select-combobox.php',
-        'RWMB_Wpp_Taxonomy_Field' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/fields/taxonomy.php',
-        'RWMB_Wpp_Taxonomy_Inherited_Field' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/fields/class-wpp-taxonomy-inherited.php',
-        'RWMB_Wpp_Taxonomy_Readonly_Field' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/fields/taxonomy-readonly.php',
         'UsabilityDynamics\\WPP\\Agents_Bootstrap' => __DIR__ . '/../..' . '/features/wp-property-agents/lib/classes/class-agents-bootstrap.php',
         'UsabilityDynamics\\WPP\\Elasticsearch' => __DIR__ . '/../..' . '/features/elasticsearch/class-elasticsearch.php',
         'UsabilityDynamics\\WPP\\Elasticsearch_Terms' => __DIR__ . '/../..' . '/features/elasticsearch/class-elasticsearch-terms.php',
@@ -126,8 +120,6 @@ class ComposerStaticInitf4ed7b6af105d2c0f95f0f768a166c7c
         'UsabilityDynamics\\WPP\\Taxonomy_WPP_Listing_Type' => __DIR__ . '/../..' . '/features/taxonomy-wpp-listing-type/taxonomy-wpp-listing-type.php',
         'UsabilityDynamics\\WPP\\Taxonomy_WPP_Location' => __DIR__ . '/../..' . '/features/taxonomy-wpp-location/taxonomy-wpp-location.php',
         'UsabilityDynamics\\WPP\\Taxonomy_WPP_Schools' => __DIR__ . '/../..' . '/features/taxonomy-wpp-schools/taxonomy-wpp-schools.php',
-        'UsabilityDynamics\\WPP\\Terms_Bootstrap' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/class-terms-bootstrap.php',
-        'UsabilityDynamics\\WPP\\Terms_Upgrade' => __DIR__ . '/../..' . '/features/wp-property-terms/lib/classes/class-terms-upgrade.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
