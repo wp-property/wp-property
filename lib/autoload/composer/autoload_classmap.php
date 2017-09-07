@@ -82,7 +82,6 @@ return array(
     'Composer\\Installers\\ZendInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/ZendInstaller.php',
     'Composer\\Installers\\ZikulaInstaller' => $vendorDir . '/composer/installers/src/Composer/Installers/ZikulaInstaller.php',
     'RWMB_Wpp_Alias_Field' => $baseDir . '/features/field-alias/fields/class-wpp-alias.php',
-    'UsabilityDynamics\\WPP\\Agents_Bootstrap' => $baseDir . '/features/wp-property-agents/lib/classes/class-agents-bootstrap.php',
     'UsabilityDynamics\\WPP\\Elasticsearch' => $baseDir . '/features/elasticsearch/class-elasticsearch.php',
     'UsabilityDynamics\\WPP\\Elasticsearch_Terms' => $baseDir . '/features/elasticsearch/class-elasticsearch-terms.php',
     'UsabilityDynamics\\WPP\\Field_Alias' => $baseDir . '/features/field-alias/class-field-alias.php',

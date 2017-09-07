@@ -231,13 +231,6 @@
         "enabled": false
       },
       {
-        "name": "Enable Agents Feature",
-        "constant": "WP_PROPERTY_FLAG_ENABLE_AGENTS",
-        "description": "Enable Agent management.",
-        "since": "2.2.1",
-        "enabled": false
-      },
-      {
         "name": "Enable Responsive Slideshow Feature",
         "constant": "WP_PROPERTY_RESPONSIVE_SLIDESHOW",
         "description": "Responsive slideshow feature, use [property_responsive_slideshow] shortcode.",

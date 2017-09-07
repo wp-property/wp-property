@@ -128,10 +128,6 @@ namespace UsabilityDynamics\WPP {
         if( WP_PROPERTY_FLAG_ENABLE_SUPERMAP && !defined( 'WPP_SUPERMAP_VENDOR_LOAD' ) ) {
           define('WPP_SUPERMAP_VENDOR_LOAD', true );
         }
-        // Enable Agents
-        if( WP_PROPERTY_FLAG_ENABLE_AGENTS && !defined( 'WPP_AGENTS_VENDOR_LOAD' )) {
-          define('WPP_AGENTS_VENDOR_LOAD', true);
-        }
 
         // Enable RETS Client
         if( RETSCI_FEATURE_FLAG && !defined( 'WP_RETS_CLIENT_VENDOR_LOAD' )) {

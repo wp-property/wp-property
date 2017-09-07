@@ -7,7 +7,6 @@ namespace Composer\Autoload;
 class ComposerStaticInitf4ed7b6af105d2c0f95f0f768a166c7c
 {
     public static $files = array (
-        'a5a44e23ace0d7091d26d072cca21cdb' => __DIR__ . '/../..' . '/features/wp-property-agents/loader.php',
         '51586b10f6b255677916528b236fc466' => __DIR__ . '/../..' . '/features/wp-property-responsive-slideshow/loader.php',
         '908b1da117a8a871817a375f7853341a' => __DIR__ . '/../..' . '/features/wp-property-supermap/loader.php',
     );
@@ -103,7 +102,6 @@ class ComposerStaticInitf4ed7b6af105d2c0f95f0f768a166c7c
         'Composer\\Installers\\ZendInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ZendInstaller.php',
         'Composer\\Installers\\ZikulaInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ZikulaInstaller.php',
         'RWMB_Wpp_Alias_Field' => __DIR__ . '/../..' . '/features/field-alias/fields/class-wpp-alias.php',
-        'UsabilityDynamics\\WPP\\Agents_Bootstrap' => __DIR__ . '/../..' . '/features/wp-property-agents/lib/classes/class-agents-bootstrap.php',
         'UsabilityDynamics\\WPP\\Elasticsearch' => __DIR__ . '/../..' . '/features/elasticsearch/class-elasticsearch.php',
         'UsabilityDynamics\\WPP\\Elasticsearch_Terms' => __DIR__ . '/../..' . '/features/elasticsearch/class-elasticsearch-terms.php',
         'UsabilityDynamics\\WPP\\Field_Alias' => __DIR__ . '/../..' . '/features/field-alias/class-field-alias.php',
