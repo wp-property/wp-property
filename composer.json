@@ -224,13 +224,6 @@
         "enabled": true
       },
       {
-        "name": "Enable Supermap Feature",
-        "constant": "WP_PROPERTY_FLAG_ENABLE_SUPERMAP",
-        "description": "Enable Supermap feature.",
-        "since": "2.2.1",
-        "enabled": false
-      },
-      {
         "name": "Enable Settings Search",
         "constant": "WP_PROPERTY_SETTINGS_SEARCH",
         "description": "Search settings.",
