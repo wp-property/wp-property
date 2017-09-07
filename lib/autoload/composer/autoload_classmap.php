@@ -86,8 +86,6 @@ return array(
     'UsabilityDynamics\\WPP\\Elasticsearch_Terms' => $baseDir . '/features/elasticsearch/class-elasticsearch-terms.php',
     'UsabilityDynamics\\WPP\\Field_Alias' => $baseDir . '/features/field-alias/class-field-alias.php',
     'UsabilityDynamics\\WPP\\Legacy_Meta_Attributes' => $baseDir . '/features/legacy-meta-attributes/class-legacy-meta-attributes.php',
-    'UsabilityDynamics\\WPP\\RS_Bootstrap' => $baseDir . '/features/wp-property-responsive-slideshow/lib/classes/class-rs-bootstrap.php',
-    'UsabilityDynamics\\WPP\\RS_Shortcode' => $baseDir . '/features/wp-property-responsive-slideshow/lib/classes/class-rs-shortcode.php',
     'UsabilityDynamics\\WPP\\Supermap_Bootstrap' => $baseDir . '/features/wp-property-supermap/lib/classes/class-supermap-bootstrap.php',
     'UsabilityDynamics\\WPP\\Supermap_Utility' => $baseDir . '/features/wp-property-supermap/lib/classes/class-supermap-utility.php',
     'UsabilityDynamics\\WPP\\Taxonomy_WPP_Categorical' => $baseDir . '/features/taxonomy-wpp-categorical/taxonomy-wpp-categorical.php',

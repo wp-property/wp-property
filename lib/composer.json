@@ -14,7 +14,6 @@
   ],
   "require": {
     "composer/installers": "*",
-    "wp-property/wp-property-responsive-slideshow": "dev-feature",
     "wp-property/wp-property-supermap": "dev-feature"
   },
   "autoload": {

@@ -4,7 +4,6 @@
 * Added standard [wpp_schools] taxonomy, enabled by default with [WPP_FEATURE_FLAG_WPP_SCHOOLS] feature flag.
 * Improved logic for updating Taxonomies.
 * If WP-Property settings fails to save (due to server error), the Save Settings button is re-enabled to avoid being locked out of saving settings.
-* Added [WP_PROPERTY_RESPONSIVE_SLIDESHOW] feature flag, enabled by default.
 * Disabled legacy "on-the-fly" image regeneration.
 * Added wp-json / wp-rest support to wp-rest-client as an alternative to XML-RPC requests.
 * Added support for single-value taxonomies to be treated as standard meta attributes for display purposes.

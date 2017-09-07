@@ -6,6 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    '51586b10f6b255677916528b236fc466' => $baseDir . '/features/wp-property-responsive-slideshow/loader.php',
     '908b1da117a8a871817a375f7853341a' => $baseDir . '/features/wp-property-supermap/loader.php',
 );

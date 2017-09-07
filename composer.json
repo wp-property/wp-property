@@ -231,13 +231,6 @@
         "enabled": false
       },
       {
-        "name": "Enable Responsive Slideshow Feature",
-        "constant": "WP_PROPERTY_RESPONSIVE_SLIDESHOW",
-        "description": "Responsive slideshow feature, use [property_responsive_slideshow] shortcode.",
-        "since": "2.2.1",
-        "enabled": false
-      },
-      {
         "name": "Enable Settings Search",
         "constant": "WP_PROPERTY_SETTINGS_SEARCH",
         "description": "Search settings.",

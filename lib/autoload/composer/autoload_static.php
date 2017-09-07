@@ -7,7 +7,6 @@ namespace Composer\Autoload;
 class ComposerStaticInitf4ed7b6af105d2c0f95f0f768a166c7c
 {
     public static $files = array (
-        '51586b10f6b255677916528b236fc466' => __DIR__ . '/../..' . '/features/wp-property-responsive-slideshow/loader.php',
         '908b1da117a8a871817a375f7853341a' => __DIR__ . '/../..' . '/features/wp-property-supermap/loader.php',
     );
 
@@ -106,8 +105,6 @@ class ComposerStaticInitf4ed7b6af105d2c0f95f0f768a166c7c
         'UsabilityDynamics\\WPP\\Elasticsearch_Terms' => __DIR__ . '/../..' . '/features/elasticsearch/class-elasticsearch-terms.php',
         'UsabilityDynamics\\WPP\\Field_Alias' => __DIR__ . '/../..' . '/features/field-alias/class-field-alias.php',
         'UsabilityDynamics\\WPP\\Legacy_Meta_Attributes' => __DIR__ . '/../..' . '/features/legacy-meta-attributes/class-legacy-meta-attributes.php',
-        'UsabilityDynamics\\WPP\\RS_Bootstrap' => __DIR__ . '/../..' . '/features/wp-property-responsive-slideshow/lib/classes/class-rs-bootstrap.php',
-        'UsabilityDynamics\\WPP\\RS_Shortcode' => __DIR__ . '/../..' . '/features/wp-property-responsive-slideshow/lib/classes/class-rs-shortcode.php',
         'UsabilityDynamics\\WPP\\Supermap_Bootstrap' => __DIR__ . '/../..' . '/features/wp-property-supermap/lib/classes/class-supermap-bootstrap.php',
         'UsabilityDynamics\\WPP\\Supermap_Utility' => __DIR__ . '/../..' . '/features/wp-property-supermap/lib/classes/class-supermap-utility.php',
         'UsabilityDynamics\\WPP\\Taxonomy_WPP_Categorical' => __DIR__ . '/../..' . '/features/taxonomy-wpp-categorical/taxonomy-wpp-categorical.php',
