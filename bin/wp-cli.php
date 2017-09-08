@@ -79,7 +79,7 @@ class WPP_CLI_Property_Command extends WP_CLI_Command {
   /**
    * Delete all 'property' posts for a site
    *
-   * @synopsis [--posts-per-page] [--force-delete-meta]
+   * @synopsis [--posts-per-page] [--post-status]
    * @param array $args
    * @param array $assoc_args
    */
@@ -92,13 +92,6 @@ class WPP_CLI_Property_Command extends WP_CLI_Command {
     }
 
     timer_start();
-
-    // May be in some cases we could delete meta at first
-    // So it might decrease operation time.
-    if ( ! empty( $assoc_args['force-delete-meta'] ) ) {
-      WP_CLI::log( __( 'Removing properties meta at first...', ud_get_wp_property()->domain ) );
-      $this->_delete_properties_meta();
-    }
 
     WP_CLI::log( __( 'Removing properties...', ud_get_wp_property()->domain ) );
 
@@ -249,6 +242,14 @@ class WPP_CLI_Property_Command extends WP_CLI_Command {
       $offset = absint( $args['offset'] );
     }
 
+    $post_status = array( 'publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash' );
+    if( ! empty( $args['post-status'] ) ) {
+      $post_status = explode( ',', $args['post-status'] );
+      foreach( $post_status as $k => $v ) {
+        $post_status[$k] = trim($v);
+      }
+    }
+
     /**
      * Create WP_Query here and reuse it in the loop to avoid high memory consumption.
      */
@@ -259,7 +260,7 @@ class WPP_CLI_Property_Command extends WP_CLI_Command {
       $args = apply_filters( 'wpp::cli::delete::args', array(
         'posts_per_page'         => $posts_per_page,
         'post_type'              => 'property',
-        'post_status'            => array( 'publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash' ),
+        'post_status'            => $post_status,
         'offset'                 => 0,
         'ignore_sticky_posts'    => true,
         'orderby'                => 'ID',
