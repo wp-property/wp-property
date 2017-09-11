@@ -99,7 +99,7 @@ namespace UsabilityDynamics\WPP {
         // Parse/Analyze responses.
         add_action( 'ep_index_post_retrieve_raw_response', array( $this, 'ep_index_post_retrieve_raw_response' ), 50, 3 );
 
-        // We prevent multiple sync of the same post during some kind of requests.
+        // We prevent multiple sync of the same post during one request.
         // Because, if some extra update of post is proceeded, we save the post to sync queue
         // which is being executed on 'shutdown' action.
         //
@@ -119,12 +119,12 @@ namespace UsabilityDynamics\WPP {
         //
         // @author peshkov@UD
         //
-        add_filter( 'ep_post_sync_kill', function( $bool, $post_args, $post_id ) {
-          if( doing_action( 'shutdown' ) ) {
-            return true;
-          }
-          return $bool;
-        }, 3, 100 );
+        //add_filter( 'ep_post_sync_kill', function( $bool, $post_args, $post_id ) {
+        //  if( doing_action( 'shutdown' ) ) {
+        //    return true;
+        //  }
+        //  return $bool;
+        //}, 100, 3 );
 
       }
 
@@ -172,7 +172,15 @@ namespace UsabilityDynamics\WPP {
        */
       public function ep_prepare_meta_excluded_public_keys( $exclude ) {
 
-        return array( 'rets_media', 'wpp_import_time', 'wpp_import_schedule_id' );
+        $_exclude = array( 'rets_media' );
+
+        if( !empty( $exclude ) && is_array( $exclude ) ) {
+          $exclude = array_unique( $exclude + $_exclude );
+        } else {
+          $exclude = $_exclude;
+        }
+
+        return $exclude;
 
       }
 
