@@ -85,21 +85,19 @@ namespace UsabilityDynamics\WPP {
 
         add_filter( 'wpp:elastic:title_suggest', array( $this, 'elastic_title_suggest' ), 10, 3 );
 
-        if( defined('WP_PROPERTY_FLAG_ENABLE_TERMS')) {
-          // Worthless, unless it's enabled on old install.
-          add_action( 'wp-property::upgrade', function($old_version, $new_version){
-
-            switch( true ) {
-              case ( version_compare( $old_version, '2.2.1', '<' ) ):
-
-                // Run further upgrade actions on init hook, so things are loaded.
-                add_action( 'init', array('UsabilityDynamics\WPP\Taxonomy_WPP_Listing_Type', 'migrate_legacy_type_to_term') );
-
-                break;
-
-            }
-          }, 10, 2);
-        }
+        // Add our custom class to Property Types table on Settings page
+        // So we could hide 'add/delete options' in property types UI.
+        add_filter( 'wpp::css::wpp_inquiry_property_types::classes', function( $classes ) {
+          if( is_string( $classes ) ) $classes .= " active-wpp-listing-type-terms";
+          else if ( is_array( $classes ) ) array_push( $classes, "active-wpp-listing-type-terms" );
+          return $classes;
+        } );
+        add_action('admin_enqueue_scripts', function() {
+          global $current_screen;
+          if( $current_screen->id == 'property_page_property_settings' ) {
+            wp_enqueue_style( 'wpp-terms-listing-type-settings', ud_get_wp_property()->path( 'lib/features/taxonomy-wpp-listing-type/static/styles/wpp.terms.listing_type.settings.css', 'url' ) );
+          }
+        });
 
         // Add our custom class to Property Types table on Settings page
         // So we could hide 'add/delete options' in property types UI.

@@ -83,7 +83,6 @@ namespace UsabilityDynamics\WPP {
           case ( version_compare( $old_version, '2.2.1', '<' ) ):
             update_option( 'wpp_legacy_2_2_0_2', $old_version );
 
-
         }
         /* Additional stuff can be handled here */
         do_action( 'wp-property::upgrade', $old_version, $new_version );

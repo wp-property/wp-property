@@ -35,6 +35,34 @@ _.wppChecked = function(obj, property, val) {
   return result;
 }
 
+// Only usable in settings page  
+_.wppMarkerUrl = function(marker_slug, supermap_configuration, wpp_supermap_default_marker, default_google_map_marker) {
+  var regex = /(http|https):\/\//;
+  var marker_url = '';
+
+  console.log(marker_slug);
+  if(!marker_slug || marker_slug == 'undefined'){
+    marker_slug = __.get(supermap_configuration, 'default_marker', '');
+  }
+
+  if(marker_slug == ''){
+    return wpp_supermap_default_marker;
+  }
+  else if(marker_slug == 'default_google_map_marker'){
+    return default_google_map_marker;
+  }
+  else if(marker_slug && regex.exec(marker_slug)){
+    return marker_slug;
+  }
+  
+  marker_url = __.get(supermap_configuration, ['markers', marker_slug, 'file'], '');
+  console.log(marker_slug, marker_url);
+
+
+
+  return marker_url;
+}
+
 /**
  * Assign Property Stat to Group Functionality
  *
@@ -56,6 +84,9 @@ jQuery.fn.wppGroups = function(opt) {
     sortButton: ".sort_stats_by_groups"
   };
 
+  if(instance.length == 0)
+    return;
+  
   opt = jQuery.extend({}, defaults, opt);
 
   // get element class
@@ -549,6 +580,14 @@ function wpp_add_row(element,hides) {
     }
   }
 
+  //* Blank out all values */
+  jQuery("textarea", cloned).val('');
+  jQuery("select", cloned).val('');
+  jQuery("input[type=text]", cloned).val('');
+  jQuery("input[type=checkbox]", cloned).attr('checked', false);
+  jQuery("input[type=radio]", cloned).val('');
+  jQuery("input[type=radio]", cloned).attr('checked', false);
+
   //* Insert new row after last one */
   jQuery(cloned).appendTo(table);
 
@@ -563,12 +602,6 @@ function wpp_add_row(element,hides) {
   } else{
    jQuery(added_row).show();
   }
-
-  //* Blank out all values */
-  jQuery("textarea", added_row).val('');
-  jQuery("select", added_row).val('');
-  jQuery("input[type=text]", added_row).val('');
-  jQuery("input[type=checkbox]", added_row).attr('checked', false);
 
   //* Remove hidden cass from delete button if the button of last row was hidden. */
   jQuery(".wpp_delete_row", added_row).removeClass('hidden');
@@ -758,6 +791,8 @@ jQuery(document).ready(function() {
     // Blank out all values
     jQuery("input[type=text]", parent).val('');
     jQuery("input[type=checkbox]", parent).attr('checked', false);
+    jQuery("input[type=radio]", parent).val('');
+    jQuery("input[type=radio]", parent).attr('checked', false);
     // Don't hide last row
     if(row_count > 1) {
       jQuery(parent).hide();
