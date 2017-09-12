@@ -119,6 +119,18 @@ namespace UsabilityDynamics\WPP {
         // `wp property trigger --do-action=upgrade_property_types`
         add_action( 'wpp::cli::trigger::upgrade_property_types', array( $this, 'cli_sync_property_types' ), 10, 1 );
 
+        /*
+        add_action( 'updated_postmeta', function( $meta_id, $object_id, $meta_key, $meta_value ) {
+          if( $meta_key == self::$meta_property_type ){
+            ud_get_wp_rets_client()->write_log( 'EVENT [updated_postmeta]', 'info' );
+          }
+        }, 10, 4 );
+
+        add_action( "edited_" . self::$taxonomy, function( $term_id, $tt_id ) {
+          ud_get_wp_rets_client()->write_log( 'EVENT [edited_wpp_listing_type]', 'info' );
+        }, 10, 2 );
+        //*/
+
       }
 
       /**
