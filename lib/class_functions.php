@@ -4684,7 +4684,7 @@ class WPP_F extends UsabilityDynamics\Utility
                    href="http://maps.google.com/maps?gl=us&daddr=<?php echo $property['latitude'] ?>,<?php echo $property['longitude']; ?>"
                    target="_blank"><?php echo $property['display_address']; ?></a>
               </div>
-              <div class="ib__price"><?php echo $property['price']; ?></div>
+              <div class="ib__price"><?php echo !empty($property['price'])?$property['price']:''; ?></div>
             <?php endif; ?>
 
             <?php
