@@ -3608,6 +3608,13 @@ class WPP_F extends UsabilityDynamics\Utility
       }
     }
 
+    foreach ($result as $attribute_slug => &$value) {
+      $value = apply_filters('wpp::attribute::value', $value, $attribute_slug);
+      if(!is_array($value))
+        $value = explode(',', $value);
+      $value = array_map('trim', $value );
+    }
+    
     return apply_filters('wpp::get_search_values', $result, array(
       'search_attributes' => $search_attributes,
       'searchable_property_types' => $searchable_property_types,
