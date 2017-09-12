@@ -320,9 +320,9 @@ namespace UsabilityDynamics\WPP {
         $d = $this->get('configuration.google_maps.infobox_attributes', false);
         if (!is_array($d)) {
           $this->set('configuration.google_maps.infobox_attributes', array(
-            'bedrooms',
-            'bathrooms',
-            'price'
+            //'bedrooms',
+            //'bathrooms',
+            //'price'
           ));
         }
 
