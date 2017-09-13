@@ -119,18 +119,42 @@ namespace UsabilityDynamics\WPP {
         // `wp property trigger --do-action=upgrade_property_types`
         add_action( 'wpp::cli::trigger::upgrade_property_types', array( $this, 'cli_sync_property_types' ), 10, 1 );
 
-        /*
+        // May be fix property_type
+        // It must be equal to wpp_listing_type term association
         add_action( 'updated_postmeta', function( $meta_id, $object_id, $meta_key, $meta_value ) {
-          if( $meta_key == self::$meta_property_type ){
-            ud_get_wp_rets_client()->write_log( 'EVENT [updated_postmeta]', 'info' );
+          if( $meta_key == self::$meta_property_type && get_post_type( $object_id ) == 'property' ){
+            self::update_old_property_type( $object_id, $meta_value );
           }
         }, 10, 4 );
 
-        add_action( "edited_" . self::$taxonomy, function( $term_id, $tt_id ) {
-          ud_get_wp_rets_client()->write_log( 'EVENT [edited_wpp_listing_type]', 'info' );
-        }, 10, 2 );
-        //*/
+        // May be fix property_type
+        // It must be equal to wpp_listing_type term association
+        add_action( 'set_object_terms', function( $object_id, $terms, $tt_ids, $taxonomy, $append, $old_tt_ids ) {
+          if( self::$taxonomy == $taxonomy ) {
+            self::update_old_property_type( $object_id, get_post_meta( $object_id, 'property_type', true ) );
+          }
+        }, 10, 6 );
 
+      }
+
+      /**
+       * Updates old wpp property type to match
+       * new term of wpp_listing_type taxonomy
+       *
+       * @param $post_id
+       * @param string $old_value
+       */
+      static public function update_old_property_type( $post_id, $old_value = "" ) {
+        $term = self::get_property_direct_term( $post_id );
+        if( !$term ) {
+          return;
+        }
+        if( $term ) {
+          $property_type = self::get_meta_property_type( $term );
+          if( !empty( $property_type ) && $property_type !== $old_value ) {
+            update_post_meta( $post_id, 'property_type', $property_type );
+          }
+        }
       }
 
       /**
@@ -139,14 +163,7 @@ namespace UsabilityDynamics\WPP {
        * @param $post_id
        */
       public function save_property( $post_id ) {
-        $term = self::get_property_direct_term( $post_id );
-        if( !$term ) {
-          return;
-        }
-        $term = self::get_term( $term->term_id );
-        if( isset( $term->meta[ self::$meta_property_type ] ) ) {
-          update_post_meta( $post_id, 'property_type', $term->meta[ self::$meta_property_type ] );
-        }
+        self::update_old_property_type( $post_id );
       }
 
       /**
