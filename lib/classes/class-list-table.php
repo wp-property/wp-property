@@ -490,6 +490,7 @@ namespace UsabilityDynamics\WPP {
               if( empty( $_REQUEST[ 'post_ids' ] ) || !is_array( $_REQUEST[ 'post_ids' ] ) ) {
                 throw new \Exception( sprintf( __( 'Invalid request: no %s IDs provided.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label() ) );
               }
+              $unauthorized = 0;
               $post_ids = $_REQUEST[ 'post_ids' ];
               $unauthorized = 0;
               $trashed = 0;

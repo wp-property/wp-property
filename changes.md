@@ -39,6 +39,10 @@
 * Added `wpp::property_types` filter, utilized on admin UI only for now.
 * Fixed missing Properties menu items on first plugin activation. 
 
+### 2.2.0.2 ( May 22, 2011 )
+* Added settings search in Settings tab.
+* Updated/fixed users capabilities for Power Tools add-on.
+
 ### 2.2.0.1 ( December 13, 2016 )
 * Compatibility with WordPress 4.7
 
