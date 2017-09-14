@@ -240,11 +240,17 @@ class WPP_F extends UsabilityDynamics\Utility
       'term_group' => isset( $term_data['term_group'] ) ? $term_data['term_group'] : null
     ));
 
-    if( $_exists && isset( $_exists['name'] ) && isset( $_term_update_detail[ 'name' ] ) && $_exists['name'] == $_term_update_detail[ 'name' ]) {
+    // If term already exists, we allow to use already existing name
+    // So, administrator has ability to re-name Term label
+    // Note: it makes sense ONLY if term has system '_id'
+    if( $_exists && isset( $_exists['name'] ) && isset( $_term_update_detail[ 'name' ] ) ) {
       unset( $_term_update_detail['name']);
     }
 
-    if( $_exists && isset( $_exists['slug'] ) && isset( $_term_update_detail[ 'slug' ] ) && $_exists['slug'] == $_term_update_detail[ 'slug' ]) {
+    // If term already exists, we allow to use already existing slug
+    // So, administrator has ability to re-name Term slug
+    // Note: it makes sense ONLY if term has system '_id'
+    if( $_exists && isset( $_exists['slug'] ) && isset( $_term_update_detail[ 'slug' ] ) ) {
       unset( $_term_update_detail['slug']);
     }
 
