@@ -22,7 +22,9 @@ if ($settings['type'] !== 'loadmore' || ($settings['type'] == 'loadmore' && $set
     $sort_html .= '<span class="wpp_current_page_count">1</span>' . __(" of ", ud_get_wp_property()->domain);
     $sort_html .= '<span class="wpp_total_page_count">' . $pages . '</span>.';
   }
-  $sort_html .= '</span>';
+  if ($hide_count != 'true') {
+    $sort_html .= '</span>';
+  }
 
   /* View template */
   $sort_html .= '<div class="wpp_template_view">';
