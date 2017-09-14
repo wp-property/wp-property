@@ -369,35 +369,33 @@ class WPP_Core {
     wp_register_style( 'wpp-fa-icons', WPP_URL . 'fonts/icons/fa/css/font-awesome.min.css', array(), '4.5.0' );
 
 
-
     /** Find and register stylesheet  */
-    if( file_exists( STYLESHEETPATH . '/wp-properties.css' ) ) {
-      wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp-properties.css', array(), WPP_Version );
-    } elseif( file_exists( STYLESHEETPATH . '/wp_properties.css' ) ) {
-      wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.css', array(), WPP_Version );
-    } elseif( file_exists( TEMPLATEPATH . '/wp-properties.css' ) ) {
-      wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp-properties.css', array(), WPP_Version );
-    } elseif( file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
-      wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), WPP_Version );
-    } elseif( $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-      
-      if (WP_PROPERTY_LAYOUTS) {
-        // load the new v2.3 styles
-        wp_register_style('wp-property-frontend', WPP_URL . 'styles/wpp.public.v2.3.css', array(), WPP_Version);
-      } else {
-        // these are the legacy styles.
+    if (!WPP_LEGACY_WIDGETS) {
+      // load the new v2.3 styles
+      wp_register_style('wp-property-frontend', WPP_URL . 'styles/wpp.public.v2.3.css', array(), WPP_Version);
+    } else {
+      // these are the legacy styles.
+      if (file_exists(STYLESHEETPATH . '/wp-properties.css')) {
+        wp_register_style('wp-property-frontend', get_bloginfo('stylesheet_directory') . '/wp-properties.css', array(), WPP_Version);
+      } elseif (file_exists(STYLESHEETPATH . '/wp_properties.css')) {
+        wp_register_style('wp-property-frontend', get_bloginfo('stylesheet_directory') . '/wp_properties.css', array(), WPP_Version);
+      } elseif (file_exists(TEMPLATEPATH . '/wp-properties.css')) {
+        wp_register_style('wp-property-frontend', get_bloginfo('template_url') . '/wp-properties.css', array(), WPP_Version);
+      } elseif (file_exists(TEMPLATEPATH . '/wp_properties.css')) {
+        wp_register_style('wp-property-frontend', get_bloginfo('template_url') . '/wp_properties.css', array(), WPP_Version);
+      } elseif ($wp_properties['configuration']['autoload_css'] == 'true') {
+
         wp_register_style('wp-property-frontend', WPP_URL . 'styles/wp_properties.css', array(), WPP_Version);
-      }
 
-
-      //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
-      if((
-          empty( $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] ) ||
-          $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] != 'true'
-        ) &&
-        WPP_F::has_theme_specific_stylesheet()
-      ) {
-        wp_register_style( 'wp-property-theme-specific', WPP_URL . "styles/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), WPP_Version );
+        //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
+        if ((
+            empty($wp_properties['configuration']['do_not_load_theme_specific_css']) ||
+            $wp_properties['configuration']['do_not_load_theme_specific_css'] != 'true'
+          ) &&
+          WPP_F::has_theme_specific_stylesheet()
+        ) {
+          wp_register_style('wp-property-theme-specific', WPP_URL . "styles/theme-specific/" . get_option('template') . ".css", array('wp-property-frontend'), WPP_Version);
+        }
       }
     }
 
