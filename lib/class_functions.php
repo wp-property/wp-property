@@ -4783,7 +4783,7 @@ class WPP_F extends UsabilityDynamics\Utility
         <?php 
 
         $show_direction_link = (!empty($imageHTML) && $infobox_settings['show_direction_link'] == 'true' && !empty($property['latitude']) && !empty($property['longitude']));
-        $show_right_col = ($show_direction_link || (is_array($property_stats) && count($property_stats)) || !empty($html_child_properties));
+        $show_right_col = ((is_array($property_stats) && count($property_stats)) || !empty($html_child_properties));
           
         if(!empty($imageHTML) || $show_right_col){
         ?>
