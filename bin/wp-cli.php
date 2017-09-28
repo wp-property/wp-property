@@ -1,5 +1,8 @@
 <?php
 /**
+ * The file can be used separately of plugin.
+ * Just copy it to mu-plugins folder ( `wp-content/mu-plugins/` ).
+ *
  * Adds WP-CLI commands:
  *
  * wp property trigger
@@ -13,6 +16,10 @@
 
 if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly.
+}
+
+if ( !defined('WP_CLI') || !WP_CLI ) {
+  return;
 }
 
 if( !class_exists( 'WPP_CLI_Property_Command' ) ) {
