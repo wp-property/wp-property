@@ -68,7 +68,7 @@ if ($settings['type'] !== 'loadmore' || ($settings['type'] == 'loadmore' && $set
 echo $sort_html;
 
 /* Render Pagination Template based on pagination type */
-if (!empty($use_pagination)) {
+if ($settings['type'] == 'loadmore' || !empty($use_pagination)) {
   if ($settings['type'] !== 'loadmore' || ($settings['type'] == 'loadmore' && $settings['class'] == 'wpp_bottom_pagination')) {
     $template = self::get_pagination_template_based_on_type($settings['type']);
     if (file_exists($template)) {

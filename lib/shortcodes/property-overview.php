@@ -588,7 +588,7 @@ namespace UsabilityDynamics\WPP {
         ));
         $result['result'] = $ob_get_contents;
 
-        if ($wpp_query['bottom_pagination_flag'] == 'true') {
+        if ($wpp_query['bottom_pagination_flag'] == 'true' || $wpp_query['pagination_type'] == 'loadmore') {
           $result['bottom_pagination'] = self::draw_pagination(array(
             'type' => $wpp_query['pagination_type'],
             'class' => 'wpp_bottom_pagination',

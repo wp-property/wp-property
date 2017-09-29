@@ -4647,9 +4647,9 @@ class WPP_F extends UsabilityDynamics\Utility
     }
 
     if (!empty($property['featured_image'])) {
-      $image = wp_get_attachment_image_src($property['featured_image'], $map_image_type);
+      $image = wpp_get_image_link($property['featured_image'], $map_image_type, array('return' => 'array'));
       if (!empty($image) && is_array($image)) {
-        $imageHTML = "<img width=\"{$image[1]}\" height=\"{$image[2]}\" src=\"{$image[0]}\" alt=\"" . addslashes($post->post_title) . "\" />";
+        $imageHTML = "<img width=\"{$image['width']}\" height=\"{$image['height']}\" src=\"{$image['link']}\" alt=\"" . addslashes($post->post_title) . "\" />";
         if (@$wp_properties['configuration']['property_overview']['fancybox_preview'] == 'true' && !empty($property['featured_image_url'])) {
           $imageHTML = "<a href=\"{$property['featured_image_url']}\" class=\"fancybox_image thumbnail\">{$imageHTML}</a>";
         }
@@ -4783,14 +4783,14 @@ class WPP_F extends UsabilityDynamics\Utility
         <?php 
 
         $show_direction_link = (!empty($imageHTML) && $infobox_settings['show_direction_link'] == 'true' && !empty($property['latitude']) && !empty($property['longitude']));
-        $show_right_col = ((is_array($property_stats) && count($property_stats)) || !empty($html_child_properties));
+        $show_right_col = ($show_direction_link || (is_array($property_stats) && count($property_stats)) || !empty($html_child_properties));
           
         if(!empty($imageHTML) || $show_right_col){
         ?>
         <table cellpadding="0" cellspacing="0" class="wpp_google_maps_infobox_table" style="">
           <tr>
             <?php if (!empty($imageHTML)) { ?>
-              <td class="wpp_google_maps_left_col" style="width: <?php echo $image[1]; ?>px">
+              <td class="wpp_google_maps_left_col" style=" width: <?php echo $image['width']; ?>px">
                 <?php echo $imageHTML; ?>
                 <?php if ($infobox_settings['show_direction_link'] == 'true' && !empty($property['latitude']) && !empty($property['longitude'])): ?>
                   <div class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_directions_link">
@@ -4806,7 +4806,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
             if ($show_right_col) { ?>
             <td class="wpp_google_maps_right_col" vertical-align="top" style="vertical-align: top;">
-              <?php if ($show_direction_link && empty($imageHTML)) { ?>
+              <?php if ($show_direction_link) { ?>
                 <div class="wpp_google_maps_attribute_row wpp_google_maps_attribute_row_directions_link">
                   <a target="_blank"
                      href="http://maps.google.com/maps?gl=us&daddr=<?php echo $property['latitude'] ?>,<?php echo $property['longitude']; ?>"
