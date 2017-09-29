@@ -1232,14 +1232,14 @@ if (!function_exists('wpp_render_search_input')):
           $value['max'] = (in_array('max', $value) ? $value['max'] : '');
           ?>
           <input id="<?php echo $random_element_id; ?>"
-                 class="wpp_search_input_field wpp_search_input_field_min wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
+                 class="wpp_search_input_field wpp_range_field wpp_search_input_field_min wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
                  type="text" name="wpp_search[<?php echo $attrib; ?>][min]" value="<?php echo $value['min']; ?>"
-                 placeholder="<?php echo $placeholder ? $placeholder['min'] : __('Min', ud_get_wp_property()->domain); ?>"/>
+                 placeholder="<?php _e('Min', ud_get_wp_property()->domain); ?>"/>
           <span class="wpp_dash">-</span>
           <input
-            class="wpp_search_input_field wpp_search_input_field_max wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
+            class="wpp_search_input_field wpp_range_field wpp_search_input_field_max wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
             type="text" name="wpp_search[<?php echo $attrib; ?>][max]" value="<?php echo $value['max']; ?>"
-            placeholder="<?php echo $placeholder ? $placeholder['max'] : __('Max', ud_get_wp_property()->domain); ?>"/>
+            placeholder="<?php _e('Max', ud_get_wp_property()->domain); ?>"/>
           <?php
           break;
         case 'range_dropdown':
@@ -1262,7 +1262,7 @@ if (!function_exists('wpp_render_search_input')):
           ?>
           <?php $grouped_values = !empty($search_values[$attrib]) ? $search_values[$attrib] : group_search_values($search_values[$attrib]); ?>
           <select id="<?php echo $random_element_id; ?>"
-                  class="wpp_search_select_field wpp_search_select_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
+                  class="wpp_search_select_field wpp_range_field wpp_search_select_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
                   name="wpp_search[<?php echo $attrib; ?>][min]">
             <option value=""><?php _e('Min', ud_get_wp_property()->domain) ?></option>
             <?php foreach ($grouped_values as $v) : ?>
@@ -1274,7 +1274,7 @@ if (!function_exists('wpp_render_search_input')):
           </select>
           <span class="delimiter">-</span>
           <select id="<?php echo $random_element_id; ?>"
-                  class="wpp_search_select_field wpp_search_select_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
+                  class="wpp_search_select_field wpp_range_field wpp_search_select_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
                   name="wpp_search[<?php echo $attrib; ?>][max]">
             <option value=""><?php _e('Max', ud_get_wp_property()->domain) ?></option>
             <?php foreach ($grouped_values as $v) : ?>
@@ -1326,11 +1326,11 @@ if (!function_exists('wpp_render_search_input')):
         case 'range_date':
           ?>
           <input id="<?php echo $random_element_id; ?>"
-                 class="uisf-date wpp_search_input_field wpp_search_date_field_from wpp_search_date_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
+                 class="uisf-date wpp_search_input_field wpp_range_field wpp_search_date_field_from wpp_search_date_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
                  type="text" name="wpp_search[<?php echo $attrib; ?>][from]" value="" placeholder=""/>
           <span class="wpp_dash">-</span>
           <input
-            class="uisf-date wpp_search_input_field wpp_search_date_field_to wpp_search_date_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
+            class="uisf-date wpp_search_input_field wpp_range_field wpp_search_date_field_to wpp_search_date_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
             type="text" name="wpp_search[<?php echo $attrib; ?>][to]" value="" placeholder=""/>
           <?php
           break;
@@ -1347,12 +1347,12 @@ if (!function_exists('wpp_render_search_input')):
         <?php //* Determine if attribute is a numeric range */ ?>
       <?php elseif (WPP_F::is_numeric_range($search_values[$attrib])) : ?>
         <input
-          class="wpp_search_input_field wpp_range_input wpp_search_input_field_min wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
+          class="wpp_search_input_field wpp_range_field wpp_range_input wpp_search_input_field_min wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
           type="text" name="wpp_search[<?php echo $attrib; ?>][min]"
           value="<?php echo isset($value['min']) ? $value['min'] : ''; ?>"/> -
         <span class="wpp_dash">-</span>
         <input
-          class="wpp_search_input_field wpp_range_input wpp_search_input_field_max wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
+          class="wpp_search_input_field wpp_range_field wpp_range_input wpp_search_input_field_max wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
           type="text" name="wpp_search[<?php echo $attrib; ?>][max]"
           value="<?php echo isset($value['max']) ? $value['max'] : ''; ?>"/>
       <?php else : ?>

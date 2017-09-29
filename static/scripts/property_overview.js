@@ -448,8 +448,13 @@
       jQuery(document).on('click', '.wpp_pagination_buttons_wrapper.pagination-loadmore button.wpp_loadmore_button', function () {
         window.wpp_query[vars.unique_id].is_sort = false;
         var page = jQuery(this).data('page');
+        var pages = jQuery(this).data('pages')
         do_ajax_pagination(vars.unique_id, 'loadmore', page, false);
         jQuery(this).data('page', page + 1);
+        if (pages < page) {
+          jQuery(this).attr('disabled', 'disabled');
+          jQuery(this).html('No more properties found');
+        }
         if (!jQuery('.wpp_pagination_buttons_wrapper.pagination-loadmore .wpp_to_top').hasClass('shown')) {
           jQuery('.wpp_pagination_buttons_wrapper.pagination-loadmore .wpp_to_top').addClass('shown');
         }
@@ -552,7 +557,7 @@
 
       max_slider_pos = vars.pages;
 
-      if (vars.use_pagination) {
+      if (vars.use_pagination || vars.type == 'loadmore') {
         switch (vars.type) {
           case 'slider':
             init_slider_pagination();
