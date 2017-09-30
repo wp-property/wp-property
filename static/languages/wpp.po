@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Property\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 12:18+0200\n"
-"PO-Revision-Date: 2015-10-14 12:18+0200\n"
+"POT-Creation-Date: 2017-09-30 14:28+0600\n"
+"PO-Revision-Date: 2017-09-30 14:28+0600\n"
 "Last-Translator: rotcod <denys.kostin@usabilitydynamics.com>\n"
 "Language-Team: Usability Dynamics, Inc\n"
 "Language: en_US\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 2.0.4\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: l10n.php:14
@@ -23,10 +23,10 @@ msgstr ""
 msgid "Clone %s"
 msgstr ""
 
-#: l10n.php:15 lib/classes/class-list-table.php:369
+#: l10n.php:15 lib/classes/class-list-table.php:415
 #: lib/classes/fields/class-wpp-parent.php:73
 #: static/views/admin/settings-developer.php:75
-#: static/views/admin/settings.php:328
+#: static/views/admin/settings.php:337
 #: vendor/plugins/wp-meta-box/inc/fields/autocomplete.php:18
 #: vendor/plugins/wp-meta-box/inc/fields/autocomplete.php:83
 #: vendor/plugins/wp-meta-box/inc/fields/autocomplete.php:100
@@ -47,12 +47,12 @@ msgstr ""
 
 #: l10n.php:20 lib/classes/class-admin-overview.php:161
 #: lib/classes/class-children-list-table.php:41
-#: lib/classes/class-list-table.php:92 lib/classes/class-list-table.php:291
-#: lib/classes/class-list-table.php:296
+#: lib/classes/class-list-table.php:104 lib/classes/class-list-table.php:304
+#: lib/classes/class-list-table.php:309
 msgid "Featured"
 msgstr ""
 
-#: l10n.php:21 lib/classes/class-list-table.php:293
+#: l10n.php:21 lib/classes/class-list-table.php:306
 msgid "Add to Featured"
 msgstr ""
 
@@ -61,12 +61,11 @@ msgid "Undefined Error."
 msgstr ""
 
 #: l10n.php:25
-msgid ""
-"You are about to set ALL your properties to the selected property type. Are "
-"you sure?"
+#, php-format
+msgid "You are about to set ALL your %s to the selected %s type. Are you sure?"
 msgstr ""
 
-#: l10n.php:26 l10n.php:42
+#: l10n.php:26 l10n.php:44
 msgid "Processing..."
 msgstr ""
 
@@ -77,140 +76,145 @@ msgid ""
 "Property Adding/Updating page."
 msgstr ""
 
-#: l10n.php:30
-msgid "Uploading"
+#: l10n.php:28
+#, php-format
+msgid "Default %s Image"
 msgstr ""
 
-#: l10n.php:31
-msgid "Drop files here to upload"
+#: l10n.php:29
+msgid "Remove Image"
+msgstr ""
+
+#: l10n.php:30
+msgid "Settings can't be saved. You need to enter at least one property type."
 msgstr ""
 
 #: l10n.php:32
-msgid "Upload Image"
+msgid "Uploading"
 msgstr ""
 
-#: l10n.php:33 static/views/admin/settings.php:522
-#: static/views/admin/settings.php:529 static/views/admin/settings.php:535
-msgid "Cancel"
+#: l10n.php:33
+msgid "Drop files here to upload"
 msgstr ""
 
 #: l10n.php:34
+msgid "Upload Image"
+msgstr ""
+
+#: l10n.php:35 static/views/admin/settings.php:540
+#: static/views/admin/settings.php:547 static/views/admin/settings.php:553
+msgid "Cancel"
+msgstr ""
+
+#: l10n.php:36
 msgid "Failed"
 msgstr ""
 
-#: l10n.php:38
+#: l10n.php:40 lib/shortcodes/property-overview.php:661
 msgid "First"
 msgstr ""
 
-#: l10n.php:39
+#: l10n.php:41 lib/shortcodes/property-overview.php:659
 msgid "Previous"
 msgstr ""
 
-#: l10n.php:40 lib/template-functions.php:667
+#: l10n.php:42 lib/shortcodes/property-overview.php:660
+#: static/views/pagination-slider.php:11
 msgid "Next"
 msgstr ""
 
-#: l10n.php:41
+#: l10n.php:43 lib/shortcodes/property-overview.php:662
 msgid "Last"
 msgstr ""
 
-#: l10n.php:43
+#: l10n.php:45
 #, php-format
 msgid "Show %s entries"
 msgstr ""
 
-#: l10n.php:44
+#: l10n.php:46
 msgid "No matching records found"
 msgstr ""
 
-#: l10n.php:45
+#: l10n.php:47
 msgid "No data available in table"
 msgstr ""
 
-#: l10n.php:46
-msgid "Loading..."
-msgstr ""
-
-#: l10n.php:47
-#, php-format
-msgid "Showing %s to %s of %s entries"
-msgstr ""
-
 #: l10n.php:48
-msgid "Showing % to % of % entries"
+msgid "Loading..."
 msgstr ""
 
 #: l10n.php:49
 #, php-format
-msgid "(filtered from %s total entries)"
+msgid "Showing %s to %s of %s entries"
 msgstr ""
 
 #: l10n.php:50
-msgid "Search:"
+msgid "Showing % to % of % entries"
 msgstr ""
 
 #: l10n.php:51
-msgid "Display:"
+#, php-format
+msgid "(filtered from %s total entries)"
 msgstr ""
 
 #: l10n.php:52
+msgid "Search:"
+msgstr ""
+
+#: l10n.php:53
+msgid "Display:"
+msgstr ""
+
+#: l10n.php:54
 msgid "records"
 msgstr ""
 
-#: l10n.php:53 lib/classes/class-admin-overview.php:148
+#: l10n.php:55 lib/classes/class-admin-overview.php:148
 msgid "All"
 msgstr ""
 
-#: l10n.php:57
+#: l10n.php:59
 msgid "Unnamed Form"
 msgstr ""
 
-#: l10n.php:58
+#: l10n.php:60
 msgid "Form could not be removed because of some server error."
 msgstr ""
 
-#: l10n.php:59
+#: l10n.php:61
 msgid "Form could not be removed because form ID is undefined."
 msgstr ""
 
-#: l10n.php:63
+#: l10n.php:65
 msgid "Unnamed Canvas"
 msgstr ""
 
-#: wp-property.php:73
-msgid ""
-"Distributive is broken. composer.json is missed. Try to remove and upload "
-"plugin again."
+#: l10n.php:67
+msgid "Default Value not supported for this data entry."
 msgstr ""
 
-#: wp-property.php:81
-#, php-format
-msgid "Plugin requires PHP %s or higher. Your current PHP version is %s"
+#: l10n.php:68 static/views/property-overview-my-feps.php:59
+msgid "Are you sure?"
 msgstr ""
 
-#: wp-property.php:89
-#, php-format
-msgid ""
-"Distributive is broken. %s file is missed. Try to remove and upload plugin "
-"again."
+#: l10n.php:69
+msgid "Replace all"
 msgstr ""
 
-#: wp-property.php:93
-msgid ""
-"Distributive is broken. Plugin loader is not available. Try to remove and "
-"upload plugin again."
+#: l10n.php:70
+msgid "Replace only empty"
 msgstr ""
 
-#: wp-property.php:114
-#, php-format
-msgid "<p><b>%s</b> can not be initialized. %s</p>"
+#: l10n.php:71
+msgid "Done!"
 msgstr ""
 
 #: lib/class_admin_tools.php:65
 msgid "Manage Admin Tools"
 msgstr ""
 
-#: lib/class_admin_tools.php:80 lib/class_admin_tools.php:107
+#: lib/class_admin_tools.php:80 lib/class_admin_tools.php:135
 msgid "Developer"
 msgstr ""
 
@@ -237,183 +241,294 @@ msgid ""
 msgstr ""
 
 #: lib/class_admin_tools.php:84
+#, php-format
 msgid ""
-"If <b>Not Public</b> is checked, then listings of type will not be displayed "
-"on front-end."
+"<b>Hidden Attributes</b> determine which attributes are not applicable to "
+"the given %s type, and will be grayed out in the back-end."
 msgstr ""
 
 #: lib/class_admin_tools.php:85
-msgid ""
-"<b>Hidden Attributes</b> determine which attributes are not applicable to "
-"the given property type, and will be grayed out in the back-end."
-msgstr ""
-
-#: lib/class_admin_tools.php:86
 msgid ""
 "<b>Inheritance</b> determines which attributes should be automatically "
 "inherited from the parent property"
 msgstr ""
 
-#: lib/class_admin_tools.php:87
+#: lib/class_admin_tools.php:86
 msgid ""
 "Property attributes are meant to be short entries that can be searchable, on "
 "the back-end attributes will be displayed as single-line input boxes. On the "
 "front-end they are displayed using a definitions list."
 msgstr ""
 
-#: lib/class_admin_tools.php:88
+#: lib/class_admin_tools.php:87
 msgid ""
 "Making an attribute as \"searchable\" will list it as one of the searchable "
 "options in the Property Search widget settings."
 msgstr ""
 
-#: lib/class_admin_tools.php:89
+#: lib/class_admin_tools.php:88
 msgid ""
 "Be advised, attributes added via add_filter() function supercede the "
 "settings on this page."
 msgstr ""
 
-#: lib/class_admin_tools.php:90
+#: lib/class_admin_tools.php:89
 msgid ""
 "<b>Search Input:</b> Select and input type and enter comma-separated values "
 "that you would like to be used in property search, on the front-end."
 msgstr ""
 
-#: lib/class_admin_tools.php:91
+#: lib/class_admin_tools.php:90
 msgid ""
 "<b>Data Entry:</b> Enter comma-separated values that you would like to use "
 "on the back-end when editing properties."
 msgstr ""
 
-#: lib/class_admin_tools.php:122
+#: lib/class_admin_tools.php:94
+msgid "Google Map API key"
+msgstr ""
+
+#: lib/class_admin_tools.php:95
+msgid ""
+"Google Maps has its own limit of usage. Google map API key is needed for map "
+"in frontend (browser key) and to validate address in backend (server key)."
+msgstr ""
+
+#: lib/class_admin_tools.php:97
+msgid "Browser Key"
+msgstr ""
+
+#: lib/class_admin_tools.php:99
+msgid ""
+"Go to the <a target=\"_blank\" href=\"https://console.developers.google.com/"
+"flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,"
+"distance_matrix_backend,elevation_backend,places_backend&amp;"
+"keyType=CLIENT_SIDE&amp;reusekey=true\" target=\"_blank\">Google API "
+"Console</a>."
+msgstr ""
+
+#: lib/class_admin_tools.php:100 lib/class_admin_tools.php:112
+msgid "Create or select a project."
+msgstr ""
+
+#: lib/class_admin_tools.php:101
+msgid "Click <b>Continue</b> to enable the API and any related services."
+msgstr ""
+
+#: lib/class_admin_tools.php:102
+msgid ""
+"On the<b> Credentials</b> page, get a <b>Browser key</b> (and set the API "
+"Credentials).<br>Note: If you have an existing <b>Browser key</b>, you may "
+"use that key."
+msgstr ""
+
+#: lib/class_admin_tools.php:103 lib/class_admin_tools.php:115
+msgid ""
+"To prevent quota theft, <a target=\"_blank\" href=\"https://support.google."
+"com/cloud/answer/6310037\">secure your API key following these best "
+"practices</a>."
+msgstr ""
+
+#: lib/class_admin_tools.php:104
+msgid ""
+"(Optional) Enable billing. See <a target=\"_blank\" href=\"https://"
+"developers.google.com/maps/documentation/javascript/usage\">Usage Limits</a> "
+"for more information."
+msgstr ""
+
+#: lib/class_admin_tools.php:105
+msgid ""
+"For more info <a target=\"_blank\" href=\"https://developers.google.com/maps/"
+"documentation/javascript/get-api-key\">click here</a>"
+msgstr ""
+
+#: lib/class_admin_tools.php:109
+msgid "Server Key"
+msgstr ""
+
+#: lib/class_admin_tools.php:111
+msgid ""
+"Go to the <a target=\"_blank\" href=\"https://console.developers.google.com/"
+"flows/enableapi?apiid=geocoding_backend&amp;keyType=SERVER_SIDE&amp;"
+"reusekey=true\">Google API Console</a>."
+msgstr ""
+
+#: lib/class_admin_tools.php:113
+msgid "Click <b>Continue</b> to Enable the API."
+msgstr ""
+
+#: lib/class_admin_tools.php:114
+msgid ""
+"On the <b>Credentials</b> page, get a <b>Server key</b> (and set the API "
+"Credentials).<br>Note: If you have an existing <b>Server key</b>, you may "
+"use that key."
+msgstr ""
+
+#: lib/class_admin_tools.php:116
+msgid ""
+"(Optional) Enable billing. See <a target=\"_blank\" href=\"https://"
+"developers.google.com/maps/documentation/geocoding/usage-limits\">Usage "
+"Limits</a> for more information."
+msgstr ""
+
+#: lib/class_admin_tools.php:117
+msgid ""
+"For more info <a target=\"_blank\" href=\"https://developers.google.com/maps/"
+"documentation/geocoding/get-api-key\">click here</a>"
+msgstr ""
+
+#: lib/class_admin_tools.php:150
 msgid "Attributes"
 msgstr ""
 
-#: lib/class_admin_tools.php:127
+#: lib/class_admin_tools.php:155
 msgid "Meta"
 msgstr ""
 
-#: lib/class_admin_tools.php:132
+#: lib/class_admin_tools.php:160
 msgid "Types"
 msgstr ""
 
-#: lib/class_core.php:581
+#: lib/class_core.php:361
+msgid "Properties Page"
+msgstr ""
+
+#: lib/class_core.php:657
 msgid "Menu Sort Order:"
 msgstr ""
 
-#: lib/class_core.php:583
+#: lib/class_core.php:659
 msgid "Display in featured listings."
 msgstr ""
 
-#: lib/class_core.php:623
+#: lib/class_core.php:699
 #, php-format
-msgid "Property updated. <a href=\"%s\">view property</a>"
+msgid "%2$s updated. <a href=\"%s\">View %2$s</a>"
 msgstr ""
 
-#: lib/class_core.php:624
+#: lib/class_core.php:700
 msgid "Custom field updated."
 msgstr ""
 
-#: lib/class_core.php:625
+#: lib/class_core.php:701
 msgid "Custom field deleted."
 msgstr ""
 
-#: lib/class_core.php:626
-msgid "Property updated."
-msgstr ""
-
-#: lib/class_core.php:628
+#: lib/class_core.php:702
 #, php-format
-msgid "Property restored to revision from %s"
+msgid "%s updated."
 msgstr ""
 
-#: lib/class_core.php:629
+#: lib/class_core.php:704
 #, php-format
-msgid "Property published. <a href=\"%s\">View property</a>"
+msgid "%2$s restored to revision from %s"
 msgstr ""
 
-#: lib/class_core.php:630
-msgid "Property saved."
+#: lib/class_core.php:705
+#, php-format
+msgid "%2$s published. <a href=\"%s\">View %2$s</a>"
 msgstr ""
 
-#: lib/class_core.php:631
+#: lib/class_core.php:706
+#, php-format
+msgid "%s saved."
+msgstr ""
+
+#: lib/class_core.php:707
+#, php-format
+msgid "%2$s submitted. <a target=\"_blank\" href=\"%s\">Preview %2$s</a>"
+msgstr ""
+
+#: lib/class_core.php:708
 #, php-format
 msgid ""
-"Property submitted. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+"%2$s scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
+"\">Preview %2$s</a>"
 msgstr ""
 
-#: lib/class_core.php:632
-#, php-format
-msgid ""
-"Property scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href="
-"\"%2$s\">Preview property</a>"
-msgstr ""
-
-#: lib/class_core.php:634
+#: lib/class_core.php:710
 msgid "M j, Y @ G:i"
 msgstr ""
 
-#: lib/class_core.php:635
+#: lib/class_core.php:711
 #, php-format
-msgid ""
-"Property draft updated. <a target=\"_blank\" href=\"%s\">Preview property</a>"
+msgid "%2$s draft updated. <a target=\"_blank\" href=\"%s\">Preview %2$s</a>"
 msgstr ""
 
-#: lib/class_core.php:993
+#: lib/class_core.php:1073
 msgid "View Properties"
 msgstr ""
 
-#: lib/class_core.php:994
+#: lib/class_core.php:1074
 msgid "Add/Edit Properties"
 msgstr ""
 
-#: lib/class_core.php:995
+#: lib/class_core.php:1075
 msgid "Edit Other Properties"
 msgstr ""
 
-#: lib/class_core.php:996
+#: lib/class_core.php:1076
+#, php-format
+msgid "Delete Others %s"
+msgstr ""
+
+#: lib/class_core.php:1077
 msgid "Delete Properties"
 msgstr ""
 
-#: lib/class_core.php:997
+#: lib/class_core.php:1078
 msgid "Publish Properties"
 msgstr ""
 
-#: lib/class_core.php:999
+#: lib/class_core.php:1080
+#, php-format
+msgid "Edit Private %s"
+msgstr ""
+
+#: lib/class_core.php:1081
+#, php-format
+msgid "Delete Private %s"
+msgstr ""
+
+#: lib/class_core.php:1083
+msgid "Allow to mark properties as featured"
+msgstr ""
+
+#: lib/class_core.php:1085
 msgid "Manage Settings"
 msgstr ""
 
-#: lib/class_core.php:1001
+#: lib/class_core.php:1087
 msgid "Manage Taxonomies"
 msgstr ""
 
-#: lib/class_core.php:1099
+#: lib/class_core.php:1227
 msgid "For more information:"
 msgstr ""
 
-#: lib/class_core.php:1100
+#: lib/class_core.php:1228
 msgid ""
 "<a href=\"https://usabilitydynamics.com/products/wp-property/\" target="
 "\"_blank\">WP-Property Product Page</a>"
 msgstr ""
 
-#: lib/class_core.php:1101
+#: lib/class_core.php:1229
 msgid ""
 "<a href=\"https://usabilitydynamics.com/products/wp-property/forum/\" target="
 "\"_blank\">WP-Property Forums</a>"
 msgstr ""
 
-#: lib/class_core.php:1102
+#: lib/class_core.php:1230
 msgid ""
 "<a href=\"https://usabilitydynamics.com/help/\" target=\"_blank\">WP-"
 "Property Tutorials</a>"
 msgstr ""
 
-#: lib/class_core.php:1107
+#: lib/class_core.php:1235
 msgid "Please upgrade Wordpress to the latest version for detailed help."
 msgstr ""
 
-#: lib/class_core.php:1107
+#: lib/class_core.php:1235
 msgid ""
 "Or visit <a href=\"https://usabilitydynamics.com/tutorials/wp-property-help/"
 "\" target=\"_blank\">WP-Property Help Page</a> on UsabilityDynamics.com"
@@ -425,7 +540,7 @@ msgid "An error occurred during API key request: <b>%s</b>."
 msgstr ""
 
 #: lib/class_functions.php:112 lib/class_functions.php:223
-#: lib/class_functions.php:1110
+#: lib/class_functions.php:1129
 msgid "Properties"
 msgstr ""
 
@@ -559,70 +674,70 @@ msgstr ""
 msgid "No properties found in Trash"
 msgstr ""
 
-#: lib/class_functions.php:619
+#: lib/class_functions.php:638
 msgid "Could not detect."
 msgstr ""
 
-#: lib/class_functions.php:739
+#: lib/class_functions.php:758
 #, php-format
-msgid "Set %1s properties to \"%2s\" property type"
+msgid "Set %s %s to \"%s\" %s type"
 msgstr ""
 
-#: lib/class_functions.php:949 lib/classes/class-children-list-table.php:38
-#: lib/classes/class-list-table.php:86 lib/widgets/child-properties.php:172
-#: lib/widgets/featured-properties.php:234
-#: lib/widgets/latest-properties.php:203 lib/widgets/list-attachments.php:58
-#: lib/widgets/other-properties.php:254 lib/widgets/property-attributes.php:58
-#: lib/widgets/property-map.php:58 lib/widgets/property-meta.php:58
-#: lib/widgets/property-overview.php:58 lib/widgets/property-terms.php:58
-#: static/views/property-featured-shortcode.php:8
+#: lib/class_functions.php:968 lib/classes/class-children-list-table.php:38
+#: lib/classes/class-export.php:284 lib/classes/class-list-table.php:98
+#: lib/shortcodes/property-terms.php:31 lib/widgets/child-properties.php:173
+#: lib/widgets/featured-properties.php:237
+#: lib/widgets/latest-properties.php:207 lib/widgets/list-attachments.php:58
+#: lib/widgets/other-properties.php:258 lib/widgets/property-attributes.php:62
+#: lib/widgets/property-map.php:58 lib/widgets/property-meta.php:62
+#: lib/widgets/property-overview.php:58
+#: static/views/property-overview-featured-shortcode.php:8
 #: vendor/libraries/usabilitydynamics/lib-wp-list-table/lib/classes/class-wp-list-table.php:223
 msgid "Title"
 msgstr ""
 
-#: lib/class_functions.php:962
+#: lib/class_functions.php:981
 msgid "Default"
 msgstr ""
 
-#: lib/class_functions.php:1481
+#: lib/class_functions.php:1500
 #, php-format
 msgid "Updated %1$d %2$s using the %3$s localization."
 msgstr ""
 
-#: lib/class_functions.php:1484
+#: lib/class_functions.php:1503
 #, php-format
 msgid "%1$d %2$s has empty address."
 msgstr ""
 
-#: lib/class_functions.php:1488
+#: lib/class_functions.php:1507
 #, php-format
 msgid "%1$d %2$s could not be updated."
 msgstr ""
 
-#: lib/class_functions.php:1492
+#: lib/class_functions.php:1511
 #, php-format
 msgid "%1$d %2$s was ignored because query limit was exceeded."
 msgstr ""
 
-#: lib/class_functions.php:2176
+#: lib/class_functions.php:2195
 msgid "Cache was successfully cleared"
 msgstr ""
 
-#: lib/class_functions.php:2346
+#: lib/class_functions.php:2365
 msgid "Request can not be verified."
 msgstr ""
 
-#: lib/class_functions.php:3754
+#: lib/class_functions.php:3463
 msgid " sq ft."
 msgstr ""
 
-#: lib/class_functions.php:4010 lib/class_functions.php:4021
+#: lib/class_functions.php:3762 lib/class_functions.php:3773
 msgid "Get Directions"
 msgstr ""
 
-#: lib/class_functions.php:4044 lib/default_api.php:40 lib/default_api.php:357
-#: lib/default_api.php:362 lib/template-functions.php:1055
-#: lib/shortcodes/featured-properties.php:62
+#: lib/class_functions.php:3796 lib/default_api.php:40 lib/default_api.php:357
+#: lib/default_api.php:362 lib/shortcodes/featured-properties.php:62
 #: lib/shortcodes/featured-properties.php:72
 #: lib/shortcodes/featured-properties.php:82
 #: lib/shortcodes/featured-properties.php:92
@@ -631,29 +746,29 @@ msgstr ""
 #: lib/shortcodes/property-attributes.php:59
 #: lib/shortcodes/property-attributes.php:67
 #: lib/shortcodes/property-attributes.php:77
-#: lib/shortcodes/property-attributes.php:86
-#: lib/shortcodes/property-map.php:52 lib/shortcodes/property-overview.php:85
-#: lib/shortcodes/property-overview.php:101
-#: lib/shortcodes/property-overview.php:111
-#: lib/shortcodes/property-overview.php:204
-#: lib/shortcodes/property-overview.php:214
-#: lib/shortcodes/property-overview.php:224
+#: lib/shortcodes/property-attributes.php:86 lib/shortcodes/property-map.php:52
+#: lib/shortcodes/property-overview.php:86
+#: lib/shortcodes/property-overview.php:102
+#: lib/shortcodes/property-overview.php:112
+#: lib/shortcodes/property-overview.php:215
+#: lib/shortcodes/property-overview.php:225
+#: lib/shortcodes/property-overview.php:235
 #: lib/shortcodes/property-search.php:39 lib/shortcodes/property-search.php:49
-#: lib/shortcodes/property-search.php:66 static/views/admin/settings.php:162
-#: static/views/admin/settings.php:396
+#: lib/shortcodes/property-search.php:66 lib/template-functions.php:638
+#: static/views/admin/settings.php:164 static/views/admin/settings.php:421
 #: vendor/plugins/wp-meta-box/inc/fields/checkbox.php:75
 msgid "Yes"
 msgstr ""
 
-#: lib/class_functions.php:4249
+#: lib/class_functions.php:4008
 msgid "General Settings"
 msgstr ""
 
-#: lib/class_functions.php:4250
+#: lib/class_functions.php:4009
 msgid "Find your property"
 msgstr ""
 
-#: lib/class_functions.php:4251 static/views/property-overview-my-feps.php:56
+#: lib/class_functions.php:4010 static/views/property-overview-my-feps.php:56
 #: vendor/libraries/usabilitydynamics/lib-wp-list-table/lib/classes/class-wp-list-table.php:765
 #: vendor/plugins/wp-meta-box/inc/fields/file-advanced.php:104
 #: vendor/plugins/wp-meta-box/inc/fields/file.php:169
@@ -662,117 +777,117 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: lib/class_functions.php:4252 lib/default_api.php:80
+#: lib/class_functions.php:4011 lib/default_api.php:80
 msgid "City"
 msgstr ""
 
-#: lib/class_functions.php:4253
+#: lib/class_functions.php:4012
 msgid "Contact us"
 msgstr ""
 
-#: lib/class_functions.php:4254
+#: lib/class_functions.php:4013
 msgid "Login"
 msgstr ""
 
-#: lib/class_functions.php:4255
+#: lib/class_functions.php:4014
 msgid "Explore"
 msgstr ""
 
-#: lib/class_functions.php:4256
+#: lib/class_functions.php:4015
 msgid "Message"
 msgstr ""
 
-#: lib/class_functions.php:4257 lib/classes/class-settings.php:142
+#: lib/class_functions.php:4016 lib/classes/class-settings.php:150
 msgid "Phone Number"
 msgstr ""
 
-#: lib/class_functions.php:4258 lib/template-functions.php:1765
+#: lib/class_functions.php:4017 lib/template-functions.php:1394
 #: vendor/plugins/wp-meta-box/demo/fieldset-text.php:26
 msgid "Name"
 msgstr ""
 
-#: lib/class_functions.php:4259
+#: lib/class_functions.php:4018
 msgid "E-mail"
 msgstr ""
 
-#: lib/class_functions.php:4260
+#: lib/class_functions.php:4019
 msgid "Send Message"
 msgstr ""
 
-#: lib/class_functions.php:4261
+#: lib/class_functions.php:4020
 msgid "Submit Inquiry"
 msgstr ""
 
-#: lib/class_functions.php:4262
+#: lib/class_functions.php:4021
 msgid "Inquiry"
 msgstr ""
 
-#: lib/class_functions.php:4263
+#: lib/class_functions.php:4022
 msgid "Comment About"
 msgstr ""
 
-#: lib/class_functions.php:4264
+#: lib/class_functions.php:4023
 msgid "Inquire About"
 msgstr ""
 
-#: lib/class_functions.php:4265
+#: lib/class_functions.php:4024
 msgid "Inquiry About:"
 msgstr ""
 
-#: lib/class_functions.php:4266
+#: lib/class_functions.php:4025
 msgid "Inquiry message:"
 msgstr ""
 
-#: lib/class_functions.php:4267
+#: lib/class_functions.php:4026
 msgid "You forgot to enter your e-mail."
 msgstr ""
 
-#: lib/class_functions.php:4268
+#: lib/class_functions.php:4027
 msgid "You forgot to enter a message."
 msgstr ""
 
-#: lib/class_functions.php:4269
+#: lib/class_functions.php:4028
 msgid "You forgot to enter your  name."
 msgstr ""
 
-#: lib/class_functions.php:4270
+#: lib/class_functions.php:4029
 msgid "Error with sending message. Please contact site administrator."
 msgstr ""
 
-#: lib/class_functions.php:4271
+#: lib/class_functions.php:4030
 msgid "Thank you for your message."
 msgstr ""
 
-#: lib/class_functions.php:4373
+#: lib/class_functions.php:4132
 msgid "Default Properties Page"
 msgstr ""
 
-#: lib/class_functions.php:4374
+#: lib/class_functions.php:4133
 msgid ""
 "The default <b>property page</b> will be used to display property search "
 "results, as well as be the base for property URLs. "
 msgstr ""
 
-#: lib/class_functions.php:4375
+#: lib/class_functions.php:4134
 #, php-format
 msgid ""
 "By default, the <b>Default Properties Page</b> is set to <b>%s</b>, which is "
 "a dynamically created page used for displaying property search results. "
 msgstr ""
 
-#: lib/class_functions.php:4376
+#: lib/class_functions.php:4135
 msgid ""
 "We recommend you create an actual WordPress page to be used as the "
 "<b>Default Properties Page</b>. For example, you may create a root page "
 "called \"Real Estate\" - the URL of the default property page will be "
 msgstr ""
 
-#: lib/class_functions.php:4378 lib/shortcodes/property-attributes.php:43
-#: static/views/admin/settings.php:81
+#: lib/class_functions.php:4137 lib/shortcodes/property-attributes.php:43
+#: static/views/admin/settings.php:82
 msgid "Display"
 msgstr ""
 
-#: lib/class_functions.php:4379
+#: lib/class_functions.php:4138
 msgid ""
 "This tab allows you to do many things. Make custom picture sizes that will "
 "let you to make posting pictures easier. Change the way you view property "
@@ -783,35 +898,27 @@ msgid ""
 "currency and placement of symbols."
 msgstr ""
 
-#: lib/class_functions.php:4381
-msgid "Premium Features"
-msgstr ""
-
-#: lib/class_functions.php:4382
-msgid "Tab allows you to manage your WP-Property Premium Features"
-msgstr ""
-
-#: lib/class_functions.php:4384 static/views/admin/settings.php:90
+#: lib/class_functions.php:4140 static/views/admin/settings.php:91
 msgid "Help"
 msgstr ""
 
-#: lib/class_functions.php:4385
+#: lib/class_functions.php:4141
 msgid ""
 "This tab will help you troubleshoot your plugin, do exports and check for "
 "updates for Premium Features"
 msgstr ""
 
-#: lib/class_functions.php:4390
+#: lib/class_functions.php:4146
 msgid "More Help"
 msgstr ""
 
-#: lib/class_functions.php:4391
+#: lib/class_functions.php:4147
 msgid ""
 "Visit <a target=\"_blank\" href=\"https://usabilitydynamics.com/products/wp-"
 "property/\">WP-Property Help Page</a> on UsabilityDynamics.com for more help."
 msgstr ""
 
-#: lib/class_functions.php:4527
+#: lib/class_functions.php:4290
 #, php-format
 msgid ""
 "You cannot use your site as Facebook Application. You should <a href=\"%s"
@@ -819,24 +926,55 @@ msgid ""
 "Facebook Tabs."
 msgstr ""
 
-#: lib/class_functions.php:4910
+#: lib/class_functions.php:4674
 msgid "published"
 msgstr ""
 
-#: lib/class_functions.php:4913
+#: lib/class_functions.php:4677
 msgid "pending"
 msgstr ""
 
-#: lib/class_functions.php:4916
+#: lib/class_functions.php:4680
 msgid "trashed"
 msgstr ""
 
-#: lib/class_functions.php:4919
+#: lib/class_functions.php:4683
 msgid "inherited"
 msgstr ""
 
-#: lib/class_functions.php:4922
+#: lib/class_functions.php:4686
 msgid "drafted"
+msgstr ""
+
+#: lib/class_functions.php:4771
+#, php-format
+msgid "Attributes replaced in %d %s and added in %d %s."
+msgstr ""
+
+#: lib/class_functions.php:4778
+msgid "those"
+msgstr ""
+
+#: lib/class_functions.php:4779
+msgid "values"
+msgstr ""
+
+#: lib/class_functions.php:4780
+msgid "that"
+msgstr ""
+
+#: lib/class_functions.php:4781
+msgid "value"
+msgstr ""
+
+#: lib/class_functions.php:4784
+#, php-format
+msgid "Attribute value already exist (In %d %s). Do you want to replace %s %s?"
+msgstr ""
+
+#: lib/class_functions.php:4805
+#, php-format
+msgid "Applied to %d %s."
 msgstr ""
 
 #: lib/class_mail.php:35
@@ -895,7 +1033,8 @@ msgstr ""
 msgid "FEPS %1$s ([property_title]) status has been changed."
 msgstr ""
 
-#: lib/class_mail.php:163 lib/class_mail.php:167
+#: lib/class_mail.php:163 lib/class_mail.php:167 lib/class_mail.php:200
+#: lib/class_mail.php:204
 msgid "Submission Received"
 msgstr ""
 
@@ -906,246 +1045,16 @@ msgid ""
 "URL:%1$s[pending_url]"
 msgstr ""
 
-#: lib/class_mail.php:165
+#: lib/class_mail.php:165 lib/class_mail.php:202
 #, php-format
 msgid "User submitted %1$s ([property_title]) using FEPS."
 msgstr ""
 
-#: lib/class_property_export.php:34
-msgid "Feed URL:"
-msgstr ""
-
-#: lib/class_property_export.php:36
-msgid "Open"
-msgstr ""
-
-#: lib/class_property_export.php:38
-msgid "You may append the export URL with the following arguments:"
-msgstr ""
-
-#: lib/class_property_export.php:45
-msgid "Slug for the property type."
-msgstr ""
-
-#: lib/class_property_export.php:46
-#: vendor/plugins/wp-meta-box/inc/fields/plupload-image.php:106
-msgid "or"
-msgstr ""
-
-#: lib/class_property_export.php:61
-msgid "There has been an error retreiving your API key."
-msgstr ""
-
-#: lib/class_property_export.php:102
-msgid "XML_Serializer could not be loaded."
-msgstr ""
-
-#: lib/class_property_export.php:110
-msgid "Could not convert data to XML."
-msgstr ""
-
-#: lib/class_property_export.php:150
-msgid "Invalid API key."
-msgstr ""
-
-#: lib/class_property_export.php:190
-msgid "No published properties."
-msgstr ""
-
-#: lib/class_property_export.php:264
-msgid "There is an Error on trying to create XML feed."
-msgstr ""
-
-#: lib/default_api.php:38 lib/template-functions.php:1061
-#: lib/shortcodes/featured-properties.php:63
-#: lib/shortcodes/featured-properties.php:73
-#: lib/shortcodes/featured-properties.php:83
-#: lib/shortcodes/featured-properties.php:93
-#: lib/shortcodes/property-attribute.php:58
-#: lib/shortcodes/property-attributes.php:39
-#: lib/shortcodes/property-attributes.php:58
-#: lib/shortcodes/property-attributes.php:68
-#: lib/shortcodes/property-attributes.php:76
-#: lib/shortcodes/property-attributes.php:85
-#: lib/shortcodes/property-map.php:53 lib/shortcodes/property-overview.php:86
-#: lib/shortcodes/property-overview.php:102
-#: lib/shortcodes/property-overview.php:112
-#: lib/shortcodes/property-overview.php:205
-#: lib/shortcodes/property-overview.php:215
-#: lib/shortcodes/property-overview.php:225
-#: lib/shortcodes/property-search.php:40 lib/shortcodes/property-search.php:50
-#: lib/shortcodes/property-search.php:67 static/views/admin/settings.php:162
-#: static/views/admin/settings.php:396
-#: vendor/plugins/wp-meta-box/inc/fields/checkbox.php:75
-msgid "No"
-msgstr ""
-
-#: lib/default_api.php:76 lib/template-functions.php:1337
-#: lib/shortcodes/featured-properties.php:23
-#: lib/shortcodes/featured-properties.php:24
-#: lib/widgets/featured-properties.php:53
-#: lib/widgets/featured-properties.php:178
-#: lib/widgets/latest-properties.php:42 lib/widgets/latest-properties.php:155
-#: lib/widgets/property-search.php:184
-msgid "Property Type"
-msgstr ""
-
-#: lib/default_api.php:183
-msgid "For Sale"
-msgstr ""
-
-#: lib/default_api.php:184
-msgid "For Rent"
-msgstr ""
-
-#: lib/default_api.php:191
-msgid "This is a rental property."
-msgstr ""
-
-#: lib/default_api.php:196
-msgid "This property is for sale."
-msgstr ""
-
-#: lib/default_api.php:215 lib/classes/fields/class-wpp-address.php:77
-msgid "Set Coordinates Manually."
-msgstr ""
-
-#: lib/default_api.php:220 lib/classes/fields/class-wpp-address.php:82
-msgid "Latitude"
-msgstr ""
-
-#: lib/default_api.php:225 lib/classes/fields/class-wpp-address.php:87
-msgid "Longitude"
-msgstr ""
-
-#: lib/default_api.php:373
-msgid "Convert \"Yes\" and \"True\" values to checked icons on the front-end."
-msgstr ""
-
-#: lib/default_api.php:430
-msgid " sq. ft."
-msgstr ""
-
-#: lib/default_api.php:603
-msgid "Address was validated by Google Maps."
-msgstr ""
-
-#: lib/default_api.php:605
-msgid ""
-"Address has not yet been validated, should be formatted as: street, city, "
-"state, postal code, country. Locations are validated through Google Maps."
-msgstr ""
-
-#: lib/template-functions.php:131
-msgid " of "
-msgstr ""
-
-#: lib/template-functions.php:629 lib/shortcodes/featured-properties.php:51
-#: lib/shortcodes/property-overview.php:156
-#: vendor/libraries/usabilitydynamics/lib-utility/lib/class-utility.php:2053
-msgid "None"
-msgstr ""
-
-#: lib/template-functions.php:630
-msgid " found."
-msgstr ""
-
-#: lib/template-functions.php:635
-msgid "Viewing page"
-msgstr ""
-
-#: lib/template-functions.php:636
-msgid "of"
-msgstr ""
-
-#: lib/template-functions.php:666
-msgid "Prev"
-msgstr ""
-
-#: lib/template-functions.php:700
-msgid ""
-"Conditional query tags do not work before the query is run. Before then, "
-"they always return false."
-msgstr ""
-
-#: lib/template-functions.php:1143
-msgid "Other"
-msgstr ""
-
-#: lib/template-functions.php:1470 lib/classes/class-admin-overview.php:126
-msgid "Search"
-msgstr ""
-
-#: lib/template-functions.php:1532 lib/template-functions.php:1566
-#: lib/template-functions.php:1606 lib/classes/class-admin-overview.php:331
-msgid "Any"
-msgstr ""
-
-#: lib/template-functions.php:1545
-msgid "Min"
-msgstr ""
-
-#: lib/template-functions.php:1554
-msgid "Max"
-msgstr ""
-
-#: lib/template-functions.php:1767
-#: vendor/plugins/wp-meta-box/demo/demo.php:263
-#: vendor/plugins/wp-meta-box/demo/fieldset-text.php:28
-msgid "Email"
-msgstr ""
-
-#: lib/template-functions.php:1769
-msgid "Website"
-msgstr ""
-
-#: lib/template-functions.php:1772
-#, php-format
-msgid "Required fields are marked %s"
-msgstr ""
-
-#: lib/template-functions.php:1775
-msgid "Comment"
-msgstr ""
-
-#: lib/template-functions.php:1776
-#, php-format
-msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
-msgstr ""
-
-#: lib/template-functions.php:1777
+#: lib/class_mail.php:201
 #, php-format
 msgid ""
-"Logged in as <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\" title=\"Log out of "
-"this account\">Log out?</a>"
-msgstr ""
-
-#: lib/template-functions.php:1778
-msgid "Your email address will not be published."
-msgstr ""
-
-#: lib/template-functions.php:1779
-#, php-format
-msgid ""
-"You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags "
-"and attributes: %s"
-msgstr ""
-
-#: lib/template-functions.php:1782
-msgid "Leave a Reply"
-msgstr ""
-
-#: lib/template-functions.php:1783
-#, php-format
-msgid "Leave a Reply to %s"
-msgstr ""
-
-#: lib/template-functions.php:1784
-msgid "Cancel reply"
-msgstr ""
-
-#: lib/template-functions.php:1785
-msgid "Post Comment"
+"Hello.%1$s%1$s A %2$s has been added to your site by [user_name] "
+"[user_email].%1$s%1$sYou can view it using this URL:%1$s[property_link]"
 msgstr ""
 
 #: lib/classes/class-admin-overview.php:94
@@ -1156,21 +1065,30 @@ msgstr ""
 msgid "Global Search"
 msgstr ""
 
+#: lib/classes/class-admin-overview.php:126 lib/template-functions.php:1093
+msgid "Search"
+msgstr ""
+
 #: lib/classes/class-admin-overview.php:131
 #: lib/classes/class-children-list-table.php:39
-#: lib/classes/class-list-table.php:87
+#: lib/classes/class-list-table.php:99
 #: static/views/property-overview-my-feps.php:41
 #: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-tgm-list-table.php:383
 msgid "Status"
 msgstr ""
 
-#: lib/classes/class-admin-overview.php:140
+#: lib/classes/class-admin-overview.php:140 lib/classes/class-export.php:290
 msgid "Author"
 msgstr ""
 
 #: lib/classes/class-admin-overview.php:152
-#: lib/classes/class-attributes.php:211 lib/classes/class-meta-box.php:509
-#: lib/shortcodes/property-overview.php:65
+#: lib/classes/class-attributes.php:230 lib/classes/class-meta-box.php:523
+#: lib/default_api.php:76 lib/shortcodes/featured-properties.php:23
+#: lib/shortcodes/featured-properties.php:24
+#: lib/shortcodes/property-overview.php:66 lib/template-functions.php:956
+#: lib/widgets/featured-properties.php:53
+#: lib/widgets/featured-properties.php:181 lib/widgets/latest-properties.php:42
+#: lib/widgets/latest-properties.php:159 lib/widgets/property-search.php:184
 #, php-format
 msgid "%s Type"
 msgstr ""
@@ -1183,40 +1101,45 @@ msgstr ""
 msgid "Added Date to"
 msgstr ""
 
-#: lib/classes/class-admin-overview.php:276
+#: lib/classes/class-admin-overview.php:311
 #: lib/classes/class-children-list-table.php:40
-#: lib/classes/class-list-table.php:89
+#: lib/classes/class-list-table.php:101
 msgid "Overview"
 msgstr ""
 
-#: lib/classes/class-admin-overview.php:277
+#: lib/classes/class-admin-overview.php:312
 #, php-format
 msgid "%s Search"
 msgstr ""
 
-#: lib/classes/class-admin-overview.php:309
-#: lib/classes/class-list-table.php:177
+#: lib/classes/class-admin-overview.php:345
+#: lib/classes/class-list-table.php:190
 msgid "Published"
 msgstr ""
 
-#: lib/classes/class-admin-overview.php:313
-#: lib/classes/class-list-table.php:180
+#: lib/classes/class-admin-overview.php:349
+#: lib/classes/class-list-table.php:193
 msgid "Pending"
 msgstr ""
 
-#: lib/classes/class-admin-overview.php:317
-#: lib/classes/class-list-table.php:183
+#: lib/classes/class-admin-overview.php:353
+#: lib/classes/class-list-table.php:196
 msgid "Trashed"
 msgstr ""
 
-#: lib/classes/class-admin-overview.php:320
+#: lib/classes/class-admin-overview.php:356
 msgid "Auto-Draft"
 msgstr ""
 
-#: lib/classes/class-admin.php:165
-#: static/views/admin/settings-developer-attributes.php:26
+#: lib/classes/class-admin-overview.php:367 lib/template-functions.php:1154
+#: lib/template-functions.php:1188 lib/template-functions.php:1235
+msgid "Any"
+msgstr ""
+
+#: lib/classes/class-admin.php:176
+#: static/views/admin/settings-developer-attributes.php:29
 #: static/views/admin/settings-developer-meta.php:20
-#: static/views/admin/settings-developer-types.php:16
+#: static/views/admin/settings-developer-types.php:14
 #: static/views/admin/settings.php:53
 msgid "Settings"
 msgstr ""
@@ -1231,7 +1154,8 @@ msgid "Invalid Post ID"
 msgstr ""
 
 #: lib/classes/class-ajax.php:127
-msgid "Invalid Post ID. It does not belong to Property."
+#, php-format
+msgid "Invalid Post ID. It does not belong to %s."
 msgstr ""
 
 #: lib/classes/class-ajax.php:151
@@ -1243,7 +1167,7 @@ msgid "Could not create new Post."
 msgstr ""
 
 #: lib/classes/class-attributes.php:24
-#: static/views/admin/settings-developer-attributes.php:106
+#: static/views/admin/settings-developer-attributes.php:122
 msgid "Free Text"
 msgstr ""
 
@@ -1257,7 +1181,7 @@ msgid "Text Editor"
 msgstr ""
 
 #: lib/classes/class-attributes.php:27
-#: static/views/admin/settings-developer-attributes.php:110
+#: static/views/admin/settings-developer-attributes.php:126
 msgid "Dropdown Selection"
 msgstr ""
 
@@ -1266,12 +1190,12 @@ msgid "Advanced Dropdown"
 msgstr ""
 
 #: lib/classes/class-attributes.php:29
-#: static/views/admin/settings-developer-attributes.php:111
+#: static/views/admin/settings-developer-attributes.php:127
 msgid "Single Checkbox"
 msgstr ""
 
 #: lib/classes/class-attributes.php:30
-#: static/views/admin/settings-developer-attributes.php:112
+#: static/views/admin/settings-developer-attributes.php:128
 msgid "Multi-Checkbox"
 msgstr ""
 
@@ -1322,27 +1246,23 @@ msgid "Image upload"
 msgstr ""
 
 #: lib/classes/class-attributes.php:41
-msgid "Images upload"
-msgstr ""
-
-#: lib/classes/class-attributes.php:42
 msgid "Files upload"
 msgstr ""
 
-#: lib/classes/class-attributes.php:43
+#: lib/classes/class-attributes.php:42
 msgid "File URL"
 msgstr ""
 
-#: lib/classes/class-bootstrap.php:144
+#: lib/classes/class-bootstrap.php:163
 msgid "Add-ons"
 msgstr ""
 
-#: lib/classes/class-bootstrap.php:145
+#: lib/classes/class-bootstrap.php:164
 msgid "WP-Property Add-ons Manager"
 msgstr ""
 
 #: lib/classes/class-children-list-table.php:42
-#: lib/classes/class-list-table.php:103
+#: lib/classes/class-list-table.php:116
 msgid "Thumbnail"
 msgstr ""
 
@@ -1352,96 +1272,178 @@ msgid "Un-Assign from current %s"
 msgstr ""
 
 #: lib/classes/class-children-list-table.php:72
-#: lib/classes/class-list-table.php:388 lib/classes/class-list-table.php:400
+#: lib/classes/class-list-table.php:434 lib/classes/class-list-table.php:457
 #, php-format
 msgid "Invalid request: no %s IDs provided."
 msgstr ""
 
-#: lib/classes/class-children-list-table.php:78
+#: lib/classes/class-children-list-table.php:79
 #, php-format
 msgid "Invalid request: incorrect %s IDs provided."
 msgstr ""
 
-#: lib/classes/class-children-list-table.php:87
+#: lib/classes/class-children-list-table.php:96
+#, php-format
+msgid "You don't have permission to edit one or more selected %s."
+msgstr ""
+
+#: lib/classes/class-children-list-table.php:98
 msgid "Children"
 msgstr ""
 
-#: lib/classes/class-children-list-table.php:87
+#: lib/classes/class-children-list-table.php:98
 msgid "Child"
 msgstr ""
 
-#: lib/classes/class-children-list-table.php:88
+#: lib/classes/class-children-list-table.php:99
 #, php-format
 msgid "Selected %s have been successfully un-assigned from current %s."
 msgstr ""
 
-#: lib/classes/class-list-table.php:88
+#: lib/classes/class-export.php:64
+msgid "XML_Serializer could not be loaded."
+msgstr ""
+
+#: lib/classes/class-export.php:72
+msgid "Could not convert data to XML."
+msgstr ""
+
+#: lib/classes/class-export.php:112
+msgid "Invalid API key."
+msgstr ""
+
+#: lib/classes/class-export.php:152
+msgid "No published properties."
+msgstr ""
+
+#: lib/classes/class-export.php:234
+msgid "There is an Error on trying to create XML feed."
+msgstr ""
+
+#: lib/classes/class-export.php:258
+msgid "There has been an error retreiving your API key."
+msgstr ""
+
+#: lib/classes/class-export.php:283
+msgid "ID"
+msgstr ""
+
+#: lib/classes/class-export.php:285
+msgid "Content"
+msgstr ""
+
+#: lib/classes/class-export.php:286
+#: vendor/plugins/wp-meta-box/demo/date-time-js-options.php:12
+msgid "Date"
+msgstr ""
+
+#: lib/classes/class-export.php:287
+msgid "Modified Date"
+msgstr ""
+
+#: lib/classes/class-export.php:288 lib/classes/class-meta-box.php:498
+msgid "Falls Under"
+msgstr ""
+
+#: lib/classes/class-export.php:289
+msgid "Menu Order"
+msgstr ""
+
+#: lib/classes/class-export.php:291
+msgid "Property Type"
+msgstr ""
+
+#: lib/classes/class-export.php:300 lib/classes/fields/class-wpp-address.php:82
+#: lib/default_api.php:220
+msgid "Latitude"
+msgstr ""
+
+#: lib/classes/class-export.php:301 lib/classes/fields/class-wpp-address.php:87
+#: lib/default_api.php:225
+msgid "Longitude"
+msgstr ""
+
+#: lib/classes/class-export.php:302
+msgid "Permalink"
+msgstr ""
+
+#: lib/classes/class-list-table.php:100
 #: lib/shortcodes/featured-properties.php:29
 #: lib/shortcodes/featured-properties.php:30
 #: lib/shortcodes/list-attachments.php:21
-#: static/views/admin/settings-developer-types.php:14
+#: static/views/admin/settings-developer-types.php:12
 #: vendor/libraries/usabilitydynamics/lib-utility/lib/class-utility.php:2040
 #: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-tgm-list-table.php:382
 msgid "Type"
 msgstr ""
 
-#: lib/classes/class-list-table.php:90
+#: lib/classes/class-list-table.php:102
 msgid "Added"
 msgstr ""
 
-#: lib/classes/class-list-table.php:91
+#: lib/classes/class-list-table.php:103
 msgid "Updated"
 msgstr ""
 
-#: lib/classes/class-list-table.php:186
-msgid "Auto Draft"
-msgstr ""
-
-#: lib/classes/class-list-table.php:272
-#, php-format
-msgid "Toggle %1s more."
-msgstr ""
-
-#: lib/classes/class-list-table.php:354
-msgid "(no name)"
-msgstr ""
-
-#: lib/classes/class-list-table.php:367
-#: vendor/libraries/usabilitydynamics/lib-wp-list-table/lib/classes/class-wp-list-table.php:769
-msgid "Restore"
-msgstr ""
-
-#: lib/classes/class-list-table.php:395
-#, php-format
-msgid "Selected %s have been successfully restored from Trash."
-msgstr ""
-
-#: lib/classes/class-list-table.php:416
-#, php-format
-msgid "Selected %s have been successfully moved to Trash or deleted."
-msgstr ""
-
-#: lib/classes/class-list-table.php:418
-#, php-format
-msgid "Selected %s have been successfully moved to Trash."
-msgstr ""
-
-#: lib/classes/class-list-table.php:420
-#, php-format
-msgid "Selected %s have been successfully deleted."
-msgstr ""
-
-#: lib/classes/class-list-table.php:422
-#, php-format
-msgid "No one %s was deleted."
-msgstr ""
-
-#: lib/classes/class-meta-box.php:40
+#: lib/classes/class-list-table.php:105 lib/classes/class-meta-box.php:40
 #, php-format
 msgid "Child %s"
 msgstr ""
 
-#: lib/classes/class-meta-box.php:43 lib/shortcodes/property-overview.php:147
+#: lib/classes/class-list-table.php:199
+msgid "Auto Draft"
+msgstr ""
+
+#: lib/classes/class-list-table.php:285 lib/classes/class-list-table.php:346
+#, php-format
+msgid "Toggle %1s more."
+msgstr ""
+
+#: lib/classes/class-list-table.php:400
+msgid "(no name)"
+msgstr ""
+
+#: lib/classes/class-list-table.php:413
+#: vendor/libraries/usabilitydynamics/lib-wp-list-table/lib/classes/class-wp-list-table.php:769
+msgid "Restore"
+msgstr ""
+
+#: lib/classes/class-list-table.php:449
+#, php-format
+msgid "You don't have permission to restore one or more selected %s."
+msgstr ""
+
+#: lib/classes/class-list-table.php:451
+#, php-format
+msgid "Selected %s have been successfully restored from Trash."
+msgstr ""
+
+#: lib/classes/class-list-table.php:477
+#, php-format
+msgid "You don't have permission to delete one or more selected %s."
+msgstr ""
+
+#: lib/classes/class-list-table.php:479
+#, php-format
+msgid "Selected %s have been successfully moved to Trash or deleted."
+msgstr ""
+
+#: lib/classes/class-list-table.php:481
+#, php-format
+msgid "Selected %s have been successfully moved to Trash."
+msgstr ""
+
+#: lib/classes/class-list-table.php:483
+#, php-format
+msgid "Selected %s have been successfully deleted."
+msgstr ""
+
+#: lib/classes/class-list-table.php:485
+#, php-format
+msgid "No one %s was deleted."
+msgstr ""
+
+#: lib/classes/class-meta-box.php:43 lib/shortcodes/property-overview.php:148
 msgid "Template"
 msgstr ""
 
@@ -1458,111 +1460,177 @@ msgstr ""
 msgid "NO NAME"
 msgstr ""
 
-#: lib/classes/class-meta-box.php:300
+#: lib/classes/class-meta-box.php:301
 msgid "Meta description."
 msgstr ""
 
-#: lib/classes/class-meta-box.php:358
+#: lib/classes/class-meta-box.php:360
 msgid "Numbers only."
 msgstr ""
 
-#: lib/classes/class-meta-box.php:370
+#: lib/classes/class-meta-box.php:372
 msgid ""
 "The value is being generated automatically on Google Address Validation."
 msgstr ""
 
-#: lib/classes/class-meta-box.php:396
+#: lib/classes/class-meta-box.php:398
 msgid "Currency."
 msgstr ""
 
-#: lib/classes/class-meta-box.php:419
+#: lib/classes/class-meta-box.php:422
 #, php-format
 msgid "The value is inherited from Parent %s."
 msgstr ""
 
-#: lib/classes/class-meta-box.php:425
+#: lib/classes/class-meta-box.php:428
 #, php-format
 msgid "The value is aggregated from Child %s."
 msgstr ""
 
-#: lib/classes/class-meta-box.php:443
+#: lib/classes/class-meta-box.php:446
 msgid "Not Selected"
 msgstr ""
 
-#: lib/classes/class-meta-box.php:484
-msgid "Falls Under"
-msgstr ""
-
-#: lib/classes/class-meta-box.php:506
+#: lib/classes/class-meta-box.php:520
 msgid "No Selected"
 msgstr ""
 
-#: lib/classes/class-settings.php:92
-msgid "The property type will determine the layout."
+#: lib/classes/class-settings.php:94
+#, php-format
+msgid "The %s type will determine the layout."
 msgstr ""
 
-#: lib/classes/class-settings.php:93
+#: lib/classes/class-settings.php:95
 msgid ""
 "Customize what appears in search results in the attribute section.  For "
 "example: 1bed, 2baths, area varies slightly."
 msgstr ""
 
-#: lib/classes/class-settings.php:94
+#: lib/classes/class-settings.php:96
 msgid "Will appear on overview pages and on top of every listing page."
 msgstr ""
 
-#: lib/classes/class-settings.php:120
+#: lib/classes/class-settings.php:123
 msgid "Building"
 msgstr ""
 
-#: lib/classes/class-settings.php:121
+#: lib/classes/class-settings.php:124
 msgid "Floorplan"
 msgstr ""
 
-#: lib/classes/class-settings.php:122
+#: lib/classes/class-settings.php:125
 msgid "Single Family Home"
 msgstr ""
 
-#: lib/classes/class-settings.php:138
+#: lib/classes/class-settings.php:146
 #: vendor/plugins/wp-meta-box/demo/fieldset-text.php:27
 #: vendor/plugins/wp-meta-box/demo/map.php:10
 msgid "Address"
 msgstr ""
 
-#: lib/classes/class-settings.php:139
+#: lib/classes/class-settings.php:147
 msgid "Price"
 msgstr ""
 
-#: lib/classes/class-settings.php:140
+#: lib/classes/class-settings.php:148
 msgid "Deposit"
 msgstr ""
 
-#: lib/classes/class-settings.php:141
+#: lib/classes/class-settings.php:149
 msgid "Area"
 msgstr ""
 
-#: lib/classes/class-settings.php:150
+#: lib/classes/class-settings.php:170
 msgid "Lease Terms"
 msgstr ""
 
-#: lib/classes/class-settings.php:151
+#: lib/classes/class-settings.php:171
 msgid "Pet Policy"
 msgstr ""
 
-#: lib/classes/class-settings.php:152
+#: lib/classes/class-settings.php:172
 msgid "School"
 msgstr ""
 
-#: lib/classes/class-settings.php:153
+#: lib/classes/class-settings.php:173
 msgid "Tagline"
 msgstr ""
 
-#: lib/classes/class-settings.php:202
+#: lib/classes/class-settings.php:246
 msgid "Studio"
+msgstr ""
+
+#: lib/classes/class-wpml.php:102
+msgid "All languages"
+msgstr ""
+
+#: lib/classes/class-wpml.php:384 lib/template-functions.php:754
+msgid "Other"
 msgstr ""
 
 #: lib/classes/fields/class-wpp-address.php:46
 msgid "Show Address on Map"
+msgstr ""
+
+#: lib/classes/fields/class-wpp-address.php:77 lib/default_api.php:215
+msgid "Set Coordinates Manually."
+msgstr ""
+
+#: lib/default_api.php:38 lib/shortcodes/featured-properties.php:63
+#: lib/shortcodes/featured-properties.php:73
+#: lib/shortcodes/featured-properties.php:83
+#: lib/shortcodes/featured-properties.php:93
+#: lib/shortcodes/property-attribute.php:58
+#: lib/shortcodes/property-attributes.php:39
+#: lib/shortcodes/property-attributes.php:58
+#: lib/shortcodes/property-attributes.php:68
+#: lib/shortcodes/property-attributes.php:76
+#: lib/shortcodes/property-attributes.php:85 lib/shortcodes/property-map.php:53
+#: lib/shortcodes/property-overview.php:87
+#: lib/shortcodes/property-overview.php:103
+#: lib/shortcodes/property-overview.php:113
+#: lib/shortcodes/property-overview.php:216
+#: lib/shortcodes/property-overview.php:226
+#: lib/shortcodes/property-overview.php:236
+#: lib/shortcodes/property-search.php:40 lib/shortcodes/property-search.php:50
+#: lib/shortcodes/property-search.php:67 lib/template-functions.php:644
+#: static/views/admin/settings.php:164 static/views/admin/settings.php:421
+#: vendor/plugins/wp-meta-box/inc/fields/checkbox.php:75
+msgid "No"
+msgstr ""
+
+#: lib/default_api.php:183
+msgid "For Sale"
+msgstr ""
+
+#: lib/default_api.php:184
+msgid "For Rent"
+msgstr ""
+
+#: lib/default_api.php:191
+msgid "This is a rental property."
+msgstr ""
+
+#: lib/default_api.php:196
+msgid "This property is for sale."
+msgstr ""
+
+#: lib/default_api.php:373
+msgid "Convert \"Yes\" and \"True\" values to checked icons on the front-end."
+msgstr ""
+
+#: lib/default_api.php:430
+msgid " sq. ft."
+msgstr ""
+
+#: lib/default_api.php:604
+msgid "Address was validated by Google Maps."
+msgstr ""
+
+#: lib/default_api.php:606
+msgid ""
+"Address has not yet been validated, should be formatted as: street, city, "
+"state, postal code, country. Locations are validated through Google Maps."
 msgstr ""
 
 #: lib/shortcodes/featured-properties.php:35
@@ -1574,7 +1642,7 @@ msgid "CSS Class"
 msgstr ""
 
 #: lib/shortcodes/featured-properties.php:41
-#: lib/shortcodes/property-overview.php:183
+#: lib/shortcodes/property-overview.php:194
 #: lib/shortcodes/property-search.php:55
 msgid "Per Page"
 msgstr ""
@@ -1586,23 +1654,29 @@ msgstr ""
 
 #: lib/shortcodes/featured-properties.php:47
 #: lib/shortcodes/featured-properties.php:48
-#: lib/shortcodes/property-overview.php:152
 #: lib/shortcodes/property-overview.php:153
+#: lib/shortcodes/property-overview.php:154
 msgid "Sorter Type"
 msgstr ""
 
+#: lib/shortcodes/featured-properties.php:51
+#: lib/shortcodes/property-overview.php:157 static/views/pagination.php:15
+#: vendor/libraries/usabilitydynamics/lib-utility/lib/class-utility.php:2053
+msgid "None"
+msgstr ""
+
 #: lib/shortcodes/featured-properties.php:52
-#: lib/shortcodes/property-overview.php:157
+#: lib/shortcodes/property-overview.php:158
 msgid "Buttons"
 msgstr ""
 
 #: lib/shortcodes/featured-properties.php:53
-#: lib/shortcodes/property-overview.php:158
+#: lib/shortcodes/property-overview.php:159
 msgid "Dropdown"
 msgstr ""
 
 #: lib/shortcodes/featured-properties.php:58
-#: lib/shortcodes/property-overview.php:81
+#: lib/shortcodes/property-overview.php:82
 msgid "Show Children"
 msgstr ""
 
@@ -1612,22 +1686,22 @@ msgstr ""
 
 #: lib/shortcodes/featured-properties.php:68
 #: lib/shortcodes/featured-properties.php:69
-#: lib/shortcodes/property-overview.php:200
+#: lib/shortcodes/property-overview.php:211
 msgid "Hide Count"
 msgstr ""
 
 #: lib/shortcodes/featured-properties.php:78
-#: lib/shortcodes/property-overview.php:97
+#: lib/shortcodes/property-overview.php:98
 msgid "Fancybox Preview"
 msgstr ""
 
 #: lib/shortcodes/featured-properties.php:79
-#: lib/shortcodes/property-overview.php:98
+#: lib/shortcodes/property-overview.php:99
 msgid "Use fancybox preview."
 msgstr ""
 
 #: lib/shortcodes/featured-properties.php:88
-#: lib/shortcodes/property-overview.php:107
+#: lib/shortcodes/property-overview.php:108
 msgid "Bottom Pagination"
 msgstr ""
 
@@ -1637,20 +1711,20 @@ msgstr ""
 
 #: lib/shortcodes/featured-properties.php:98
 #: lib/shortcodes/featured-properties.php:99
-#: lib/shortcodes/property-overview.php:173
+#: lib/shortcodes/property-overview.php:174
 #: lib/shortcodes/property-search.php:35
 msgid "Pagination"
 msgstr ""
 
 #: lib/shortcodes/featured-properties.php:102
-#: lib/shortcodes/property-overview.php:167
-#: lib/shortcodes/property-overview.php:177
+#: lib/shortcodes/property-overview.php:168
+#: lib/shortcodes/property-overview.php:178
 msgid "On"
 msgstr ""
 
 #: lib/shortcodes/featured-properties.php:103
-#: lib/shortcodes/property-overview.php:168
-#: lib/shortcodes/property-overview.php:178
+#: lib/shortcodes/property-overview.php:169
+#: lib/shortcodes/property-overview.php:179
 msgid "Off"
 msgstr ""
 
@@ -1663,7 +1737,7 @@ msgid "CSV stats"
 msgstr ""
 
 #: lib/shortcodes/featured-properties.php:114
-#: lib/shortcodes/property-overview.php:117
+#: lib/shortcodes/property-overview.php:118
 msgid "Thumbnail Size"
 msgstr ""
 
@@ -1672,7 +1746,8 @@ msgid "Thumbnail Size."
 msgstr ""
 
 #: lib/shortcodes/featured-properties.php:120
-msgid "Renders Featured Properties"
+#, php-format
+msgid "Renders Featured %s"
 msgstr ""
 
 #: lib/shortcodes/list-attachments.php:22
@@ -1681,9 +1756,9 @@ msgid ""
 msgstr ""
 
 #: lib/shortcodes/list-attachments.php:27
-#: lib/shortcodes/property-overview.php:137
 #: lib/shortcodes/property-overview.php:138
-#: lib/widgets/child-properties.php:157
+#: lib/shortcodes/property-overview.php:139
+#: lib/widgets/child-properties.php:158
 msgid "Sort Order"
 msgstr ""
 
@@ -1811,7 +1886,8 @@ msgid "Strip tags"
 msgstr ""
 
 #: lib/shortcodes/property-attribute.php:75
-msgid "Renders Property Attribute"
+#, php-format
+msgid "Renders %s Attribute"
 msgstr ""
 
 #: lib/shortcodes/property-attributes.php:34
@@ -1894,10 +1970,11 @@ msgid "The list of attributes which will not be shown."
 msgstr ""
 
 #: lib/shortcodes/property-attributes.php:102
-msgid "Renders Property Attributes List"
+#, php-format
+msgid "Renders %s Attributes List"
 msgstr ""
 
-#: lib/shortcodes/property-map.php:23 lib/shortcodes/property-terms.php:31
+#: lib/shortcodes/property-map.php:23 lib/shortcodes/property-terms.php:37
 #, php-format
 msgid "%s ID"
 msgstr ""
@@ -1907,7 +1984,7 @@ msgstr ""
 msgid "If empty, current %s will be used."
 msgstr ""
 
-#: lib/shortcodes/property-map.php:29 static/views/admin/settings.php:290
+#: lib/shortcodes/property-map.php:29 static/views/admin/settings.php:299
 msgid "Width"
 msgstr ""
 
@@ -1915,7 +1992,7 @@ msgstr ""
 msgid "Set width of map. (e.g. 100%, 500px)"
 msgstr ""
 
-#: lib/shortcodes/property-map.php:35 static/views/admin/settings.php:291
+#: lib/shortcodes/property-map.php:35 static/views/admin/settings.php:300
 msgid "Height"
 msgstr ""
 
@@ -1940,15 +2017,15 @@ msgid "Set infobox hidden or not"
 msgstr ""
 
 #: lib/shortcodes/property-map.php:58
-msgid "Renders Property Map"
+#, php-format
+msgid "Renders %s Map"
 msgstr ""
 
-#: lib/shortcodes/property-meta.php:25 lib/shortcodes/property-overview.php:53
+#: lib/shortcodes/property-meta.php:25 lib/shortcodes/property-overview.php:54
 msgid "Property ID"
 msgstr ""
 
-#: lib/shortcodes/property-meta.php:26 lib/shortcodes/property-overview.php:54
-#: lib/shortcodes/property-terms.php:32
+#: lib/shortcodes/property-meta.php:26 lib/shortcodes/property-overview.php:55
 msgid "If not empty, result will show particular property, which ID is set."
 msgstr ""
 
@@ -1959,7 +2036,8 @@ msgid ""
 msgstr ""
 
 #: lib/shortcodes/property-meta.php:37
-msgid "Renders Property Meta"
+#, php-format
+msgid "Renders %s Meta"
 msgstr ""
 
 #: lib/shortcodes/property-overview.php:25
@@ -1968,25 +2046,30 @@ msgstr ""
 
 #: lib/shortcodes/property-overview.php:35
 #, php-format
-msgid "Date (%s)"
+msgid "Post Date (%s)"
 msgstr ""
 
 #: lib/shortcodes/property-overview.php:36
 #, php-format
-msgid "Random (%s)"
+msgid "Modified Date (%s)"
 msgstr ""
 
 #: lib/shortcodes/property-overview.php:37
 #, php-format
+msgid "Random (%s)"
+msgstr ""
+
+#: lib/shortcodes/property-overview.php:38
+#, php-format
 msgid "Menu Order (%s)"
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:59
+#: lib/shortcodes/property-overview.php:60
 #, php-format
 msgid "Parent %s"
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:60
+#: lib/shortcodes/property-overview.php:61
 #, php-format
 msgid ""
 "If not empty, result will show children of particular property, which ID is "
@@ -1996,77 +2079,80 @@ msgid ""
 "siblings) of the current %3$s"
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:66
+#: lib/shortcodes/property-overview.php:67
 #, php-format
 msgid ""
 "The list of %s types to be included. If no type checked, all available %s "
 "will be shown."
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:71
+#: lib/shortcodes/property-overview.php:72
 #, php-format
 msgid "Show only Featured %s"
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:75
+#: lib/shortcodes/property-overview.php:76
 msgid "Custom Query by Attributes Values"
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:76
+#: lib/shortcodes/property-overview.php:77
 #, php-format
 msgid ""
 "Setup your custom query by providing values for specific attributes. Empty "
 "values will be ignored. Example:<br/>- to list only %1$s which have minimum "
 "2 and maximum 4 bedrooms, you should set <b>2-4</b> value for your Bedrooms "
 "attribute.<br/>- to list only %1$s which have 1 or 3 bathrooms, you should "
-"set <b>1,3</b> value for your Batrooms attribute."
+"set <b>1,3</b> value for your Bathrooms attribute."
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:82
-msgid "Switches children property displaying."
-msgstr ""
-
-#: lib/shortcodes/property-overview.php:91
-msgid "Child Properties Title"
+#: lib/shortcodes/property-overview.php:83
+#, php-format
+msgid "Switches children %s displaying."
 msgstr ""
 
 #: lib/shortcodes/property-overview.php:92
-msgid "Title for child properties section."
+#, php-format
+msgid "Child %s Title"
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:94
-#: lib/shortcodes/property-overview.php:311
+#: lib/shortcodes/property-overview.php:93
+#, php-format
+msgid "Title for Child %s section."
+msgstr ""
+
+#: lib/shortcodes/property-overview.php:95
+#: lib/shortcodes/property-overview.php:323
 msgid "Floor plans at location:"
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:108
+#: lib/shortcodes/property-overview.php:109
 msgid "Show Bottom Pagination."
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:118
+#: lib/shortcodes/property-overview.php:119
 msgid "Show image with specific image size"
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:124
+#: lib/shortcodes/property-overview.php:125
 msgid "Sort By Text"
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:125
+#: lib/shortcodes/property-overview.php:126
 msgid "Renames \"Sort By:\" text."
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:127
-#: lib/shortcodes/property-overview.php:130
-#: lib/widgets/child-properties.php:149
+#: lib/shortcodes/property-overview.php:128
+#: lib/shortcodes/property-overview.php:131
+#: lib/widgets/child-properties.php:150
 msgid "Sort By"
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:131
+#: lib/shortcodes/property-overview.php:132
 #, php-format
 msgid "Sets sorting by sortable attribute or %s."
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:148
+#: lib/shortcodes/property-overview.php:149
 #, php-format
 msgid ""
 "Sets layout using PHP template name. Your custom template should be stored "
@@ -2074,64 +2160,82 @@ msgid ""
 "called %s, the value of template must be %s."
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:163
+#: lib/shortcodes/property-overview.php:164
 msgid "Sorter"
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:164
+#: lib/shortcodes/property-overview.php:165
 msgid "Show Sort UI"
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:174
+#: lib/shortcodes/property-overview.php:175
 msgid "Show Pagination"
 msgstr ""
 
 #: lib/shortcodes/property-overview.php:184
-msgid "Property quantity per page."
+msgid "Pagination Type"
+msgstr ""
+
+#: lib/shortcodes/property-overview.php:185
+msgid "Determine pagination UI"
+msgstr ""
+
+#: lib/shortcodes/property-overview.php:188
+msgid "slider"
 msgstr ""
 
 #: lib/shortcodes/property-overview.php:189
-msgid "Starting Row"
-msgstr ""
-
-#: lib/shortcodes/property-overview.php:190
-msgid "Sets starting row."
+msgid "numeric"
 msgstr ""
 
 #: lib/shortcodes/property-overview.php:195
-msgid "Detail Button"
+#, php-format
+msgid "%s quantity per page."
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:196
-msgid "Name of Detail Button. Button will not be shown if the value is empty."
+#: lib/shortcodes/property-overview.php:200
+msgid "Starting Row"
 msgstr ""
 
 #: lib/shortcodes/property-overview.php:201
-msgid "Hide the “10 found.” text."
+msgid "Sets starting row."
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:210
+#: lib/shortcodes/property-overview.php:206
+msgid "Detail Button"
+msgstr ""
+
+#: lib/shortcodes/property-overview.php:207
+msgid "Name of Detail Button. Button will not be shown if the value is empty."
+msgstr ""
+
+#: lib/shortcodes/property-overview.php:212
+msgid "Hide the \"10 found.\" text."
+msgstr ""
+
+#: lib/shortcodes/property-overview.php:221
 msgid "In new window?"
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:211
+#: lib/shortcodes/property-overview.php:222
 msgid "Open links in new window."
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:220
+#: lib/shortcodes/property-overview.php:231
 #: lib/shortcodes/property-search.php:62 lib/widgets/property-search.php:384
 msgid "Strict Search"
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:221
+#: lib/shortcodes/property-overview.php:232
 msgid "Provides strict search"
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:230
-msgid "Renders Property Attributes"
+#: lib/shortcodes/property-overview.php:241
+#, php-format
+msgid "Renders %s Attributes"
 msgstr ""
 
-#: lib/shortcodes/property-overview.php:315
+#: lib/shortcodes/property-overview.php:327
 msgid "Sort By:"
 msgstr ""
 
@@ -2144,7 +2248,8 @@ msgid "CSV attributes list"
 msgstr ""
 
 #: lib/shortcodes/property-search.php:29
-msgid "Searchable Property Types"
+#, php-format
+msgid "Searchable %s Types"
 msgstr ""
 
 #: lib/shortcodes/property-search.php:30
@@ -2168,21 +2273,108 @@ msgid "Use strict search"
 msgstr ""
 
 #: lib/shortcodes/property-search.php:72
-msgid "Renders Property Search form"
+#, php-format
+msgid "Renders %s Search form"
 msgstr ""
 
-#: lib/shortcodes/property-terms.php:37
-#: vendor/plugins/wp-meta-box/demo/demo.php:312
-msgid "Taxonomy"
+#: lib/shortcodes/property-terms.php:32
+msgid "Will show title before terms."
 msgstr ""
 
 #: lib/shortcodes/property-terms.php:38
 #, php-format
-msgid "Renders %s terms of particular taxonomy"
+msgid "If not empty, result will show particular %s, which ID is set."
 msgstr ""
 
 #: lib/shortcodes/property-terms.php:43
-msgid "Renders Property Terms for specific taxonomy"
+#: vendor/plugins/wp-meta-box/demo/demo.php:312
+msgid "Taxonomy"
+msgstr ""
+
+#: lib/shortcodes/property-terms.php:44
+#, php-format
+msgid "Renders %s terms of particular taxonomy"
+msgstr ""
+
+#: lib/shortcodes/property-terms.php:49
+#, php-format
+msgid "Renders %s Terms for specific taxonomy"
+msgstr ""
+
+#: lib/template-functions.php:160
+msgid " of "
+msgstr ""
+
+#: lib/template-functions.php:219
+msgid ""
+"Conditional query tags do not work before the query is run. Before then, "
+"they always return false."
+msgstr ""
+
+#: lib/template-functions.php:1167
+msgid "Min"
+msgstr ""
+
+#: lib/template-functions.php:1176
+msgid "Max"
+msgstr ""
+
+#: lib/template-functions.php:1396 vendor/plugins/wp-meta-box/demo/demo.php:263
+#: vendor/plugins/wp-meta-box/demo/fieldset-text.php:28
+msgid "Email"
+msgstr ""
+
+#: lib/template-functions.php:1398
+msgid "Website"
+msgstr ""
+
+#: lib/template-functions.php:1401
+#, php-format
+msgid "Required fields are marked %s"
+msgstr ""
+
+#: lib/template-functions.php:1404
+msgid "Comment"
+msgstr ""
+
+#: lib/template-functions.php:1405
+#, php-format
+msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
+msgstr ""
+
+#: lib/template-functions.php:1406
+#, php-format
+msgid ""
+"Logged in as <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\" title=\"Log out of "
+"this account\">Log out?</a>"
+msgstr ""
+
+#: lib/template-functions.php:1407
+msgid "Your email address will not be published."
+msgstr ""
+
+#: lib/template-functions.php:1408
+#, php-format
+msgid ""
+"You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags "
+"and attributes: %s"
+msgstr ""
+
+#: lib/template-functions.php:1411
+msgid "Leave a Reply"
+msgstr ""
+
+#: lib/template-functions.php:1412
+#, php-format
+msgid "Leave a Reply to %s"
+msgstr ""
+
+#: lib/template-functions.php:1413
+msgid "Cancel reply"
+msgstr ""
+
+#: lib/template-functions.php:1414
+msgid "Post Comment"
 msgstr ""
 
 #: lib/widgets/child-properties.php:14
@@ -2194,57 +2386,49 @@ msgstr ""
 msgid "Show child properties (if any) for currently displayed property"
 msgstr ""
 
-#: lib/widgets/child-properties.php:114
+#: lib/widgets/child-properties.php:115
 msgid ""
 "The widget will not be displayed if the currently viewed property has no "
 "children."
 msgstr ""
 
-#: lib/widgets/child-properties.php:116
-#: lib/widgets/featured-properties.php:194
-#: lib/widgets/latest-properties.php:171 lib/widgets/other-properties.php:221
-#: lib/widgets/property-gallery.php:157 lib/widgets/property-search.php:238
+#: lib/widgets/child-properties.php:117 lib/widgets/featured-properties.php:197
+#: lib/widgets/latest-properties.php:175 lib/widgets/other-properties.php:225
+#: lib/widgets/property-gallery.php:160 lib/widgets/property-search.php:238
 msgid "Title:"
 msgstr ""
 
-#: lib/widgets/child-properties.php:127
-#: lib/widgets/featured-properties.php:204
-#: lib/widgets/latest-properties.php:182
+#: lib/widgets/child-properties.php:128 lib/widgets/featured-properties.php:207
+#: lib/widgets/latest-properties.php:186
 msgid "Hide Images?"
 msgstr ""
 
-#: lib/widgets/child-properties.php:136
-#: lib/widgets/featured-properties.php:209
-#: lib/widgets/latest-properties.php:186 lib/widgets/other-properties.php:235
+#: lib/widgets/child-properties.php:137 lib/widgets/featured-properties.php:212
+#: lib/widgets/latest-properties.php:190 lib/widgets/other-properties.php:239
 msgid "Image Size:"
 msgstr ""
 
-#: lib/widgets/child-properties.php:141
-#: lib/widgets/featured-properties.php:214
-#: lib/widgets/latest-properties.php:191 lib/widgets/other-properties.php:241
+#: lib/widgets/child-properties.php:142 lib/widgets/featured-properties.php:217
+#: lib/widgets/latest-properties.php:195 lib/widgets/other-properties.php:245
 msgid "Listings to display?"
 msgstr ""
 
-#: lib/widgets/child-properties.php:165
-#: lib/widgets/featured-properties.php:228
+#: lib/widgets/child-properties.php:166 lib/widgets/featured-properties.php:231
 msgid "Select the stats you want to display"
 msgstr ""
 
-#: lib/widgets/child-properties.php:188
-#: lib/widgets/featured-properties.php:247
-#: lib/widgets/latest-properties.php:216 lib/widgets/other-properties.php:269
+#: lib/widgets/child-properties.php:189 lib/widgets/featured-properties.php:250
+#: lib/widgets/latest-properties.php:220 lib/widgets/other-properties.php:273
 msgid "Address Format:"
 msgstr ""
 
-#: lib/widgets/child-properties.php:198
-#: lib/widgets/featured-properties.php:257
-#: lib/widgets/latest-properties.php:226 lib/widgets/other-properties.php:281
+#: lib/widgets/child-properties.php:199 lib/widgets/featured-properties.php:260
+#: lib/widgets/latest-properties.php:230 lib/widgets/other-properties.php:285
 msgid "Show \"More\" link?"
 msgstr ""
 
-#: lib/widgets/child-properties.php:207
-#: lib/widgets/featured-properties.php:265
-#: lib/widgets/latest-properties.php:234 lib/widgets/other-properties.php:288
+#: lib/widgets/child-properties.php:208 lib/widgets/featured-properties.php:268
+#: lib/widgets/latest-properties.php:238 lib/widgets/other-properties.php:292
 msgid "Show \"View All\" link?"
 msgstr ""
 
@@ -2257,19 +2441,19 @@ msgstr ""
 msgid "List of properties that were marked as Featured"
 msgstr ""
 
-#: lib/widgets/featured-properties.php:135
-#: lib/widgets/latest-properties.php:114 lib/widgets/other-properties.php:146
-#: static/views/child-properties.php:68
+#: lib/widgets/featured-properties.php:138
+#: lib/widgets/latest-properties.php:118 lib/widgets/other-properties.php:150
+#: static/views/child-properties.php:71
 msgid "More"
 msgstr ""
 
-#: lib/widgets/featured-properties.php:142
-#: lib/widgets/latest-properties.php:123 lib/widgets/other-properties.php:159
-#: static/views/child-properties.php:76
+#: lib/widgets/featured-properties.php:145
+#: lib/widgets/latest-properties.php:127 lib/widgets/other-properties.php:163
+#: static/views/child-properties.php:79
 msgid "View All"
 msgstr ""
 
-#: lib/widgets/featured-properties.php:225
+#: lib/widgets/featured-properties.php:228
 msgid "Display properties in random order?"
 msgstr ""
 
@@ -2282,16 +2466,16 @@ msgstr ""
 msgid "List of the latest properties created on this site"
 msgstr ""
 
-#: lib/widgets/latest-properties.php:77 static/views/child-properties.php:29
+#: lib/widgets/latest-properties.php:78 static/views/child-properties.php:29
 #, php-format
 msgid "%s at %s for %s"
 msgstr ""
 
-#: lib/widgets/latest-properties.php:174
+#: lib/widgets/latest-properties.php:178
 msgid "Latest Properties"
 msgstr ""
 
-#: lib/widgets/latest-properties.php:197
+#: lib/widgets/latest-properties.php:201
 msgid "Select stats you want to display"
 msgstr ""
 
@@ -2304,9 +2488,9 @@ msgstr ""
 msgid "Used to display attachments of a %s, can also be used in a post."
 msgstr ""
 
-#: lib/widgets/list-attachments.php:62 lib/widgets/property-attributes.php:62
-#: lib/widgets/property-map.php:62 lib/widgets/property-meta.php:62
-#: lib/widgets/property-overview.php:62 lib/widgets/property-terms.php:62
+#: lib/widgets/list-attachments.php:62 lib/widgets/property-attributes.php:66
+#: lib/widgets/property-map.php:62 lib/widgets/property-meta.php:66
+#: lib/widgets/property-overview.php:62
 msgid "Widget's Title"
 msgstr ""
 
@@ -2322,30 +2506,30 @@ msgid ""
 "property."
 msgstr ""
 
-#: lib/widgets/other-properties.php:218
+#: lib/widgets/other-properties.php:222
 msgid ""
 "The widget will show other properties that share a parent with the currently "
 "displayed property."
 msgstr ""
 
-#: lib/widgets/other-properties.php:230
+#: lib/widgets/other-properties.php:234
 msgid "Hide images."
 msgstr ""
 
-#: lib/widgets/other-properties.php:247
+#: lib/widgets/other-properties.php:251
 msgid "Select the attributes you want to display: "
 msgstr ""
 
-#: lib/widgets/other-properties.php:295
+#: lib/widgets/other-properties.php:299
 msgid "If property has no parent, show other properties of same type."
 msgstr ""
 
-#: lib/widgets/other-properties.php:302
+#: lib/widgets/other-properties.php:306
 msgid "Randomize order of displayed properties."
 msgstr ""
 
 #: lib/widgets/property-attributes.php:24
-#: static/views/admin/settings-developer-attributes.php:11
+#: static/views/admin/settings-developer-attributes.php:14
 #, php-format
 msgid "%1s Attributes"
 msgstr ""
@@ -2363,24 +2547,24 @@ msgstr ""
 msgid "List of all images attached to the current property"
 msgstr ""
 
-#: lib/widgets/property-gallery.php:163
+#: lib/widgets/property-gallery.php:166
 msgid "Regular Size:"
 msgstr ""
 
-#: lib/widgets/property-gallery.php:168
+#: lib/widgets/property-gallery.php:171
 msgid "Large Image Size:"
 msgstr ""
 
-#: lib/widgets/property-gallery.php:175
+#: lib/widgets/property-gallery.php:178
 #, php-format
 msgid "Show %s Images"
 msgstr ""
 
-#: lib/widgets/property-gallery.php:183
+#: lib/widgets/property-gallery.php:186
 msgid "Show Image Captions"
 msgstr ""
 
-#: lib/widgets/property-gallery.php:191
+#: lib/widgets/property-gallery.php:194
 msgid "Show Image Descriptions."
 msgstr ""
 
@@ -2423,11 +2607,13 @@ msgid "Display a highly customizable  %1s search form."
 msgstr ""
 
 #: lib/widgets/property-search.php:228
-msgid "No searchable property types were found."
+#, php-format
+msgid "No searchable %s types were found."
 msgstr ""
 
 #: lib/widgets/property-search.php:245
-msgid "Property types to search:"
+#, php-format
+msgid "%s types to search:"
 msgstr ""
 
 #: lib/widgets/property-search.php:266
@@ -2525,22 +2711,22 @@ msgstr ""
 msgid "WP-Property %s important changes"
 msgstr ""
 
-#: static/splashes/install.php:85 static/splashes/upgrade.php:85
+#: static/splashes/install.php:70 static/splashes/upgrade.php:70
 msgid "User license management"
 msgstr ""
 
-#: static/splashes/install.php:87 static/splashes/upgrade.php:87
+#: static/splashes/install.php:72 static/splashes/upgrade.php:72
 msgid "Installation"
 msgstr ""
 
-#: static/splashes/install.php:89 static/splashes/upgrade.php:89
+#: static/splashes/install.php:74 static/splashes/upgrade.php:74
 msgid ""
 "In new version of WP-Property all your premium features are separate "
 "plugins. If you are upgrading from old WP-Property ( < 2.0.0 ) you will need "
 "to install and activate them one more time."
 msgstr ""
 
-#: static/splashes/install.php:91 static/splashes/upgrade.php:91
+#: static/splashes/install.php:76 static/splashes/upgrade.php:76
 #, php-format
 msgid ""
 "After you purchased the product, visit your <a href=\"%s\">UD Account</a>. "
@@ -2548,65 +2734,31 @@ msgid ""
 "ons. Download plugins to your computer and Upload as new plugin on your site."
 msgstr ""
 
-#: static/splashes/install.php:97 static/splashes/upgrade.php:97
+#: static/splashes/install.php:82 static/splashes/upgrade.php:82
 msgid "Adding License Keys"
 msgstr ""
 
-#: static/splashes/install.php:99 static/splashes/upgrade.php:99
+#: static/splashes/install.php:84 static/splashes/upgrade.php:84
 msgid ""
 "Click to activate plugin, you will see link to the Add-ons admin screen. On "
 "the Add-ons admin screen, you should see all your installed activated "
 "products, with an option to add your license key."
 msgstr ""
 
-#: static/splashes/install.php:101 static/splashes/upgrade.php:101
+#: static/splashes/install.php:86 static/splashes/upgrade.php:86
 msgid "To add a license key:"
 msgstr ""
 
-#: static/splashes/install.php:104 static/splashes/upgrade.php:104
+#: static/splashes/install.php:89 static/splashes/upgrade.php:89
 msgid "copy the license key from your UD Account page or receipt email;"
 msgstr ""
 
-#: static/splashes/install.php:105 static/splashes/upgrade.php:105
+#: static/splashes/install.php:90 static/splashes/upgrade.php:90
 msgid "paste the license key into input field for your product;"
 msgstr ""
 
-#: static/splashes/install.php:106 static/splashes/upgrade.php:106
+#: static/splashes/install.php:91 static/splashes/upgrade.php:91
 msgid "save changes;"
-msgstr ""
-
-#: static/views/property-overview-my-feps.php:46
-msgid "Not set"
-msgstr ""
-
-#: static/views/property-overview-my-feps.php:48
-msgid "Expiry Date"
-msgstr ""
-
-#: static/views/property-overview-my-feps.php:59
-msgid "Are you sure?"
-msgstr ""
-
-#: static/views/property-overview-my-feps.php:59
-#: vendor/plugins/wp-meta-box/inc/fields/file-input.php:42
-msgid "Remove"
-msgstr ""
-
-#: static/views/property-overview-page.php:19
-msgid ""
-"Sorry, we could not find what you were looking for.  Since you are here, "
-"take a look at some of our properties."
-msgstr ""
-
-#: static/views/property-overview.php:103
-#, php-format
-msgid ""
-"Sorry, no properties found - try expanding your search, or <a href=\"%s"
-"\">view all</a>."
-msgstr ""
-
-#: static/views/property.php:138
-msgid "Return to building page."
 msgstr ""
 
 #: static/views/admin/metabox-template.php:22
@@ -2614,7 +2766,7 @@ msgid "Page Template"
 msgstr ""
 
 #: static/views/admin/metabox-template.php:24
-#: static/views/admin/settings.php:177
+#: static/views/admin/settings.php:179
 msgid "Default Template"
 msgstr ""
 
@@ -2625,82 +2777,102 @@ msgid ""
 "%s Settings page."
 msgstr ""
 
-#: static/views/admin/settings-developer-attributes.php:13
+#: static/views/admin/settings-developer-attributes.php:16
 msgid "Expand all"
 msgstr ""
 
-#: static/views/admin/settings-developer-attributes.php:14
+#: static/views/admin/settings-developer-attributes.php:17
 msgid "Collapse all"
 msgstr ""
 
-#: static/views/admin/settings-developer-attributes.php:15
+#: static/views/admin/settings-developer-attributes.php:18
 msgid "Sort by Groups"
 msgstr ""
 
-#: static/views/admin/settings-developer-attributes.php:24
+#: static/views/admin/settings-developer-attributes.php:27
 #: static/views/admin/settings-developer-meta.php:18
 msgid "Attribute Name"
 msgstr ""
 
-#: static/views/admin/settings-developer-attributes.php:25
+#: static/views/admin/settings-developer-attributes.php:28
 msgid "Group"
 msgstr ""
 
-#: static/views/admin/settings-developer-attributes.php:27
+#: static/views/admin/settings-developer-attributes.php:30
 msgid "Search Input"
 msgstr ""
 
-#: static/views/admin/settings-developer-attributes.php:28
+#: static/views/admin/settings-developer-attributes.php:31
 msgid "Data Entry"
 msgstr ""
 
-#: static/views/admin/settings-developer-attributes.php:52
+#: static/views/admin/settings-developer-attributes.php:62
 msgid ""
 "Attention! This attribute (slug) is used by Google Validator and Address "
 "Display functionality. It is set automaticaly and can not be edited on "
 "Property Adding/Updating page."
 msgstr ""
 
-#: static/views/admin/settings-developer-attributes.php:58
+#: static/views/admin/settings-developer-attributes.php:68
 msgid "Toggle Advanced Settings"
 msgstr ""
 
-#: static/views/admin/settings-developer-attributes.php:73
+#: static/views/admin/settings-developer-attributes.php:83
 msgid "Sortable."
 msgstr ""
 
-#: static/views/admin/settings-developer-attributes.php:79
+#: static/views/admin/settings-developer-attributes.php:89
 msgid "Searchable."
 msgstr ""
 
-#: static/views/admin/settings-developer-attributes.php:85
+#: static/views/admin/settings-developer-attributes.php:95
 msgid "Admin Only."
 msgstr ""
 
-#: static/views/admin/settings-developer-attributes.php:91
+#: static/views/admin/settings-developer-attributes.php:101
 msgid "Add Column on \"All Properties\" page."
 msgstr ""
 
-#: static/views/admin/settings-developer-attributes.php:96
+#: static/views/admin/settings-developer-attributes.php:107
+msgid "Enable default value assign."
+msgstr ""
+
+#: static/views/admin/settings-developer-attributes.php:112
 msgid "Delete Attribute"
 msgstr ""
 
-#: static/views/admin/settings-developer-attributes.php:107
+#: static/views/admin/settings-developer-attributes.php:123
 msgid "Text Input Range"
 msgstr ""
 
-#: static/views/admin/settings-developer-attributes.php:108
+#: static/views/admin/settings-developer-attributes.php:124
 msgid "Range Dropdown"
 msgstr ""
 
-#: static/views/admin/settings-developer-attributes.php:109
+#: static/views/admin/settings-developer-attributes.php:125
 msgid "Advanced Range Dropdown"
 msgstr ""
 
-#: static/views/admin/settings-developer-attributes.php:145
-#: static/views/admin/settings-developer-meta.php:62
-#: static/views/admin/settings-developer-types.php:114
-#: static/views/admin/settings.php:353
+#: static/views/admin/settings-developer-attributes.php:129
+msgid "Date Input Range"
+msgstr ""
+
+#: static/views/admin/settings-developer-attributes.php:159
+msgid "<label>Default Value</label>"
+msgstr ""
+
+#: static/views/admin/settings-developer-attributes.php:163
+msgid "Apply to listings that have no value for this field."
+msgstr ""
+
+#: static/views/admin/settings-developer-attributes.php:163
+msgid "Apply to all"
+msgstr ""
+
+#: static/views/admin/settings-developer-attributes.php:176
+#: static/views/admin/settings-developer-meta.php:68
+#: static/views/admin/settings-developer-types.php:136
+#: static/views/admin/settings.php:362
 msgid "Add Row"
 msgstr ""
 
@@ -2722,47 +2894,56 @@ msgstr ""
 msgid "Attribute Slug"
 msgstr ""
 
-#: static/views/admin/settings-developer-meta.php:46
+#: static/views/admin/settings-developer-meta.php:50
 msgid "Show in Admin Only"
 msgstr ""
 
-#: static/views/admin/settings-developer-meta.php:52
+#: static/views/admin/settings-developer-meta.php:56
 msgid "Delete Meta Attribute"
 msgstr ""
 
-#: static/views/admin/settings-developer-types.php:10
+#: static/views/admin/settings-developer-types.php:8
 #, php-format
 msgid "%1s Types"
 msgstr ""
 
-#: static/views/admin/settings-developer-types.php:15
-#: static/views/admin/settings-developer.php:38
-#: static/views/admin/settings.php:289
-msgid "Slug"
+#: static/views/admin/settings-developer-types.php:13
+msgid "Default Image"
 msgstr ""
 
-#: static/views/admin/settings-developer-types.php:17
+#: static/views/admin/settings-developer-types.php:15
 msgid "Hidden Attributes"
 msgstr ""
 
-#: static/views/admin/settings-developer-types.php:18
+#: static/views/admin/settings-developer-types.php:16
 msgid "Inherit from Parent"
 msgstr ""
 
-#: static/views/admin/settings-developer-types.php:38
+#: static/views/admin/settings-developer-types.php:41
+#: static/views/admin/settings.php:381
+msgid "Setup Image"
+msgstr ""
+
+#: static/views/admin/settings-developer-types.php:41
+#, php-format
+msgid ""
+"If %1$s has no any image, the default one based on %1$s Type will be shown."
+msgstr ""
+
+#: static/views/admin/settings-developer-types.php:52
 msgid "Searchable"
 msgstr ""
 
-#: static/views/admin/settings-developer-types.php:45
+#: static/views/admin/settings-developer-types.php:59
 msgid "Location Matters"
 msgstr ""
 
-#: static/views/admin/settings-developer-types.php:61
-#: static/views/admin/settings-developer-types.php:93
+#: static/views/admin/settings-developer-types.php:75
+#: static/views/admin/settings-developer-types.php:113
 msgid "Toggle Attributes Selection"
 msgstr ""
 
-#: static/views/admin/settings-developer-types.php:84
+#: static/views/admin/settings-developer-types.php:104
 msgid "Parent Selection"
 msgstr ""
 
@@ -2775,8 +2956,13 @@ msgstr ""
 msgid "Group Name"
 msgstr ""
 
+#: static/views/admin/settings-developer.php:38
+#: static/views/admin/settings.php:298
+msgid "Slug"
+msgstr ""
+
 #: static/views/admin/settings-developer.php:39
-#: static/views/admin/settings.php:80
+#: static/views/admin/settings.php:81
 msgid "Main"
 msgstr ""
 
@@ -2801,531 +2987,644 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
+#: static/views/admin/settings-help-export.php:2
+#, php-format
+msgid "Export All %s to CSV file"
+msgstr ""
+
+#: static/views/admin/settings-help-export.php:3
+msgid "Export"
+msgstr ""
+
+#: static/views/admin/settings-help-export.php:6
+msgid "Feed URL:"
+msgstr ""
+
+#: static/views/admin/settings-help-export.php:8
+msgid "Open"
+msgstr ""
+
+#: static/views/admin/settings-help-export.php:10
+msgid "You may append the export URL with the following arguments:"
+msgstr ""
+
+#: static/views/admin/settings-help-export.php:17
+#, php-format
+msgid "Slug for the %s type."
+msgstr ""
+
+#: static/views/admin/settings-help-export.php:18
+#: vendor/plugins/wp-meta-box/inc/fields/plupload-image.php:106
+msgid "or"
+msgstr ""
+
 #: static/views/admin/settings.php:30
 msgid "Settings updated."
 msgstr ""
 
-#: static/views/admin/settings.php:100
+#: static/views/admin/settings.php:102
 msgid "Options"
 msgstr ""
 
-#: static/views/admin/settings.php:103
+#: static/views/admin/settings.php:105
 msgid "Enable comments."
 msgstr ""
 
-#: static/views/admin/settings.php:104
+#: static/views/admin/settings.php:106
 msgid "Enable revisions."
 msgstr ""
 
-#: static/views/admin/settings.php:105
+#: static/views/admin/settings.php:107
 #, php-format
 msgid "Exclude %1s from regular search results."
 msgstr ""
 
-#: static/views/admin/settings.php:106
+#: static/views/admin/settings.php:108
 #, php-format
 msgid ""
 "Automatically delete all %1s images and attachments when a %2s is deleted."
 msgstr ""
 
-#: static/views/admin/settings.php:112
+#: static/views/admin/settings.php:114
 #, php-format
 msgid "Default %1s Page"
 msgstr ""
 
-#: static/views/admin/settings.php:117
-msgid "Property (Default)"
+#: static/views/admin/settings.php:119
+#, php-format
+msgid "%s (Default)"
 msgstr ""
 
-#: static/views/admin/settings.php:122
+#: static/views/admin/settings.php:124
 msgid "What is this?"
 msgstr ""
 
-#: static/views/admin/settings.php:125
+#: static/views/admin/settings.php:127
 #, php-format
 msgid "You must have permalinks enabled to change the Default %1s page."
 msgstr ""
 
-#: static/views/admin/settings.php:136
+#: static/views/admin/settings.php:138
 msgid "Automatically overwrite this page's content with [property_overview]."
 msgstr ""
 
-#: static/views/admin/settings.php:139
+#: static/views/admin/settings.php:141
 msgid ""
 "When showing property search results, don't override the page content with "
 "[property_overview]."
 msgstr ""
 
-#: static/views/admin/settings.php:140
+#: static/views/admin/settings.php:142
 msgid ""
 "If checked, be sure to include [property_overview] somewhere in the content, "
 "or no properties will be displayed."
 msgstr ""
 
-#: static/views/admin/settings.php:147
+#: static/views/admin/settings.php:149
 #, php-format
 msgid "Single %s Template"
 msgstr ""
 
-#: static/views/admin/settings.php:149
+#: static/views/admin/settings.php:151
 #, php-format
 msgid "Select template which will be used to render Single %s page."
 msgstr ""
 
-#: static/views/admin/settings.php:150
+#: static/views/admin/settings.php:152
 #, php-format
 msgid ""
 "You also can redeclare selected template for specific %s on Edit %s page."
 msgstr ""
 
-#: static/views/admin/settings.php:151
+#: static/views/admin/settings.php:153
 #, php-format
 msgid ""
 "Note, you can use Single or Page templates for building your own layouts via "
 "%s or another Layouts Framework."
 msgstr ""
 
-#: static/views/admin/settings.php:155
+#: static/views/admin/settings.php:157
 #, php-format
 msgid ""
 "By default, %s plugin uses custom <b>%s</b> template for rendering Single %s "
 "page."
 msgstr ""
 
-#: static/views/admin/settings.php:156
+#: static/views/admin/settings.php:158
 msgid ""
 "The template contains predefined sections such as attributes list, map and "
 "registered sidebars areas."
 msgstr ""
 
-#: static/views/admin/settings.php:157
+#: static/views/admin/settings.php:159
 #, php-format
 msgid ""
 "The display settings may be edited further by customizing the <b>%s</b> file."
 msgstr ""
 
-#: static/views/admin/settings.php:158
+#: static/views/admin/settings.php:160
 #, php-format
 msgid ""
 "To avoid losing your changes during updates, copy <b>%s</b> file to your "
 "template directory, which will be automatically loaded."
 msgstr ""
 
-#: static/views/admin/settings.php:159
+#: static/views/admin/settings.php:161
 #, php-format
 msgid "Additional settings for Default %s Template"
 msgstr ""
 
-#: static/views/admin/settings.php:161
+#: static/views/admin/settings.php:163
 #, php-format
 msgid "Sort %1s stats by groups."
 msgstr ""
 
-#: static/views/admin/settings.php:162 static/views/admin/settings.php:396
+#: static/views/admin/settings.php:164 static/views/admin/settings.php:421
 #, php-format
 msgid ""
 "Show Checkboxed Image instead of \"%s\" and hide \"%s\" for %s/%s values"
 msgstr ""
 
-#: static/views/admin/settings.php:168
+#: static/views/admin/settings.php:170
 #, php-format
 msgid ""
 "The single post template file <b>%s</b> in your theme will be used to render "
 "a Single %s page"
 msgstr ""
 
-#: static/views/admin/settings.php:169
+#: static/views/admin/settings.php:171
 #, php-format
 msgid ""
 "You can create your own single post template file <b>%s</b> in your theme "
 "which will be used instead of <b>%s</b>. %sMore Details%s."
 msgstr ""
 
-#: static/views/admin/settings.php:170 static/views/admin/settings.php:184
+#: static/views/admin/settings.php:172 static/views/admin/settings.php:186
 #, php-format
 msgid ""
 "Note, registered <b>%s sidebars</b> are defined only in default <b>%s</b> "
 "template. You have to add them manually to your theme's template."
 msgstr ""
 
-#: static/views/admin/settings.php:175
+#: static/views/admin/settings.php:177
 #, php-format
 msgid "Select page template which you want to use on single %s page"
 msgstr ""
 
-#: static/views/admin/settings.php:183
+#: static/views/admin/settings.php:185
 #, php-format
 msgid ""
 "Page template will be used to render a Single %s page. %sMore Details%s."
 msgstr ""
 
-#: static/views/admin/settings.php:192
+#: static/views/admin/settings.php:194
 msgid "Widget Sidebars"
 msgstr ""
 
-#: static/views/admin/settings.php:194
+#: static/views/admin/settings.php:196
 #, php-format
 msgid ""
-"By default, %s registers widget sidebars for <b>Single %s page</b> based on "
-"defined property types. But you can disable any of them here."
+"By default, %1$s registers widget sidebars for <b>Single %2$s page</b> based "
+"on defined %2$s types. But you can disable any of them here."
 msgstr ""
 
-#: static/views/admin/settings.php:195
+#: static/views/admin/settings.php:197
 #, php-format
 msgid ""
 "Note, the following sidebar are added only on default <b>%s</b> ( Default %s "
 "Template )."
 msgstr ""
 
-#: static/views/admin/settings.php:199
+#: static/views/admin/settings.php:201
 #, php-format
 msgid "Disable <b>%s</b> Sidebar."
 msgstr ""
 
-#: static/views/admin/settings.php:209
+#: static/views/admin/settings.php:211
 msgid "Automatic Geolocation"
 msgstr ""
 
-#: static/views/admin/settings.php:212
+#: static/views/admin/settings.php:214
 msgid "Attribute to use for physical addresses:"
 msgstr ""
 
-#: static/views/admin/settings.php:213
+#: static/views/admin/settings.php:215
 msgid "Localize addresses in:"
 msgstr ""
 
-#: static/views/admin/settings.php:215
-msgid "Google Maps API (optional):"
+#: static/views/admin/settings.php:217
+msgid "Google Maps API (Browser Key):"
 msgstr ""
 
-#: static/views/admin/settings.php:216
+#: static/views/admin/settings.php:220
 #, php-format
 msgid ""
-"Note, Google Maps has its own limit of usage. You can provide Google Maps "
-"API license ( key ) above to increase limit. See more details %shere%s."
+"Note, Google Maps has its own limit of usage. You need to provide Google "
+"Maps API license ( browser key ) above to increase limit. See more details "
+"in %shelp tab%s."
 msgstr ""
 
 #: static/views/admin/settings.php:223
+msgid "Google Maps API (Server Key):"
+msgstr ""
+
+#: static/views/admin/settings.php:226
+#, php-format
+msgid ""
+"You need to  provide Google Maps API license ( server key ) above. See more "
+"details in %shelp tab%s."
+msgstr ""
+
+#: static/views/admin/settings.php:233
 msgid "Default Phone Number"
 msgstr ""
 
-#: static/views/admin/settings.php:224
+#: static/views/admin/settings.php:234
 #, php-format
 msgid "Phone number to use when a %1s-specific phone number is not specified."
 msgstr ""
 
-#: static/views/admin/settings.php:228
+#: static/views/admin/settings.php:238
 msgid "Advanced Options"
 msgstr ""
 
-#: static/views/admin/settings.php:235
+#: static/views/admin/settings.php:244
 msgid "Load default CSS."
 msgstr ""
 
-#: static/views/admin/settings.php:236
+#: static/views/admin/settings.php:245
 #, php-format
 msgid "If unchecked, the %s in your theme folder will not be loaded."
 msgstr ""
 
-#: static/views/admin/settings.php:240
+#: static/views/admin/settings.php:249
 msgid "Do not load theme-specific stylesheet."
 msgstr ""
 
-#: static/views/admin/settings.php:241
+#: static/views/admin/settings.php:250
 msgid ""
 "This version of WP-Property has a stylesheet made specifically for the theme "
 "you are using."
 msgstr ""
 
-#: static/views/admin/settings.php:246
+#: static/views/admin/settings.php:255
 msgid "Enable Legacy Features."
 msgstr ""
 
-#: static/views/admin/settings.php:247
+#: static/views/admin/settings.php:256
 #, php-format
 msgid ""
 "If checked deprecated features will be enabled. E.g.: Child %1$s and "
-"Featured %1$s Widgets."
+"Featured %1$s Widgets, etc"
 msgstr ""
 
-#: static/views/admin/settings.php:250
+#: static/views/admin/settings.php:259
 msgid "Enable 'Falls Under' deep depth."
 msgstr ""
 
-#: static/views/admin/settings.php:251
+#: static/views/admin/settings.php:260
 #, php-format
 msgid "Allows to set child %1s as parent."
 msgstr ""
 
-#: static/views/admin/settings.php:254
+#: static/views/admin/settings.php:263
 msgid "Disable WordPress update_post_caches() function."
 msgstr ""
 
-#: static/views/admin/settings.php:255
+#: static/views/admin/settings.php:264
 #, php-format
 msgid "This may solve Out of Memory issues if you have a lot of %1s."
 msgstr ""
 
-#: static/views/admin/settings.php:258
+#: static/views/admin/settings.php:267
 msgid ""
 "Enable developer mode - some extra information displayed via Firebug console."
 msgstr ""
 
-#: static/views/admin/settings.php:262
+#: static/views/admin/settings.php:271
 msgid "Disable \"on-the-fly\" image regeneration."
 msgstr ""
 
-#: static/views/admin/settings.php:263
+#: static/views/admin/settings.php:272
 msgid "Enabling this option may cause performance issues."
 msgstr ""
 
-#: static/views/admin/settings.php:282
+#: static/views/admin/settings.php:291
 msgid "Image Sizes"
 msgstr ""
 
-#: static/views/admin/settings.php:284
+#: static/views/admin/settings.php:293
 msgid "Image sizes used throughout the plugin."
 msgstr ""
 
-#: static/views/admin/settings.php:366
-msgid "Overview Shortcode"
-msgstr ""
-
-#: static/views/admin/settings.php:369
+#: static/views/admin/settings.php:371
 #, php-format
-msgid ""
-"These are the settings for the <b>%s</b> shortcode. The shortcode displays a "
-"list of all %s.<br />The display settings may be edited further by "
-"customizing the <b>%s</b> file.  To avoid losing your changes during "
-"updates, copy <b>%s</b> file in your theme's root directory, which will be "
-"automatically loaded."
-msgstr ""
-
-#: static/views/admin/settings.php:372
-msgid "Thumbnail size:"
-msgstr ""
-
-#: static/views/admin/settings.php:373
-#, php-format
-msgid "Show children %1s."
+msgid "Default %s image"
 msgstr ""
 
 #: static/views/admin/settings.php:374
 #, php-format
-msgid "Show larger image of %1s when image is clicked using fancybox."
+msgid "Setup image which will be used by default for all %s without images."
 msgstr ""
 
 #: static/views/admin/settings.php:375
+#, php-format
+msgid ""
+"Note, you also can setup default image for every %s type on Developer tab. "
+"So, that image will be used instead of current one."
+msgstr ""
+
+#: static/views/admin/settings.php:389
+msgid "Overview Shortcode"
+msgstr ""
+
+#: static/views/admin/settings.php:392
+#, php-format
+msgid ""
+"These are the settings for the <b>%s</b> shortcode and %s Overview widget. "
+"The shortcode (widget) displays a list of all %s.<br />The display settings "
+"may be edited further by customizing the <b>%s</b> file.  To avoid losing "
+"your changes during updates, copy <b>%s</b> file in your theme's root "
+"directory, which will be automatically loaded."
+msgstr ""
+
+#: static/views/admin/settings.php:396
+msgid "Thumbnail size:"
+msgstr ""
+
+#: static/views/admin/settings.php:397
+msgid "Default Type of Pagination"
+msgstr ""
+
+#: static/views/admin/settings.php:399
+#: vendor/plugins/wp-meta-box/demo/demo.php:161
+#: vendor/plugins/wp-meta-box/demo/slider.php:9
+msgid "Slider"
+msgstr ""
+
+#: static/views/admin/settings.php:400
+msgid "Numeric"
+msgstr ""
+
+#: static/views/admin/settings.php:402
+#, php-format
+msgid ""
+"You always can set pagination type for specific shortcode or widget "
+"manually. Example: %s"
+msgstr ""
+
+#: static/views/admin/settings.php:404
+#, php-format
+msgid "Show children %1s."
+msgstr ""
+
+#: static/views/admin/settings.php:405
+#, php-format
+msgid "Show larger image of %1s when image is clicked using fancybox."
+msgstr ""
+
+#: static/views/admin/settings.php:406
 msgid "Show pagination on bottom of results."
 msgstr ""
 
-#: static/views/admin/settings.php:376
+#: static/views/admin/settings.php:407
 #, php-format
 msgid "Add sorting by %1s's title."
 msgstr ""
 
-#: static/views/admin/settings.php:384
+#: static/views/admin/settings.php:415
 msgid "Google Maps"
 msgstr ""
 
-#: static/views/admin/settings.php:388
+#: static/views/admin/settings.php:419
 msgid "Map Thumbnail Size:"
 msgstr ""
 
-#: static/views/admin/settings.php:389
+#: static/views/admin/settings.php:420
 msgid "Map Zoom Level:"
 msgstr ""
 
-#: static/views/admin/settings.php:390
-msgid "Custom Latitude Coordinate"
-msgstr ""
-
-#: static/views/admin/settings.php:392 static/views/admin/settings.php:395
-#, php-format
-msgid "Default is \"%s\""
-msgstr ""
-
-#: static/views/admin/settings.php:393
-msgid "Custom Longitude Coordinate"
-msgstr ""
-
-#: static/views/admin/settings.php:399
+#: static/views/admin/settings.php:424
 #, php-format
 msgid "Attributes to display in popup after a %1s on a map is clicked."
 msgstr ""
 
-#: static/views/admin/settings.php:403
+#: static/views/admin/settings.php:428
 #, php-format
 msgid "Show %1s Title"
 msgstr ""
 
-#: static/views/admin/settings.php:412
+#: static/views/admin/settings.php:437
 msgid "Show Directions Link"
 msgstr ""
 
-#: static/views/admin/settings.php:413
+#: static/views/admin/settings.php:438
 #, php-format
 msgid "Do not show a list of child %1s in Infobox. "
 msgstr ""
 
-#: static/views/admin/settings.php:420
+#: static/views/admin/settings.php:445
 msgid "Address Display"
 msgstr ""
 
-#: static/views/admin/settings.php:427
+#: static/views/admin/settings.php:452
 msgid "Available tags:"
 msgstr ""
 
-#: static/views/admin/settings.php:433
+#: static/views/admin/settings.php:458
 msgid "Currency & Numbers"
 msgstr ""
 
-#: static/views/admin/settings.php:436
+#: static/views/admin/settings.php:461
 msgid "Currency symbol."
 msgstr ""
 
-#: static/views/admin/settings.php:438
+#: static/views/admin/settings.php:463
 msgid "Thousands separator symbol:"
 msgstr ""
 
-#: static/views/admin/settings.php:441
+#: static/views/admin/settings.php:466
 msgid ". (period)"
 msgstr ""
 
-#: static/views/admin/settings.php:442
+#: static/views/admin/settings.php:467
 msgid ", (comma)"
 msgstr ""
 
-#: static/views/admin/settings.php:444
+#: static/views/admin/settings.php:469
 msgid "The character separating the 1 and the 5: $1<b>,</b>500"
 msgstr ""
 
-#: static/views/admin/settings.php:449
+#: static/views/admin/settings.php:474
 msgid "Currency symbol placement:"
 msgstr ""
 
-#: static/views/admin/settings.php:452
+#: static/views/admin/settings.php:477
 msgid "Before number"
 msgstr ""
 
-#: static/views/admin/settings.php:453
+#: static/views/admin/settings.php:478
 msgid "After number"
 msgstr ""
 
-#: static/views/admin/settings.php:459
+#: static/views/admin/settings.php:484
 msgid ""
 "Parent property's aggregated value should be set as average of children "
 "values. If not, - the aggregated value will be set as sum of children values."
 msgstr ""
 
-#: static/views/admin/settings.php:460
+#: static/views/admin/settings.php:485
 #, php-format
 msgid ""
 "Aggregated value is set only for numeric and currency attributes and can be "
 "updated ( set ) only on child %1s's saving."
 msgstr ""
 
-#: static/views/admin/settings.php:470
+#: static/views/admin/settings.php:495
 msgid "Admin Settings"
 msgstr ""
 
-#: static/views/admin/settings.php:474
+#: static/views/admin/settings.php:499
 #, php-format
 msgid "Thumbnail size for %1s images displayed on %2s page: "
 msgstr ""
 
-#: static/views/admin/settings.php:476
+#: static/views/admin/settings.php:501
 #, php-format
 msgid "Completely hide hidden attributes when editing %1s."
 msgstr ""
 
-#: static/views/admin/settings.php:502
-msgid ""
-"If prompted for your domain name during a premium feature purchase, enter as "
-"appears here:"
-msgstr ""
-
-#: static/views/admin/settings.php:508
+#: static/views/admin/settings.php:526
 msgid "Restore Backup of WP-Property Configuration"
 msgstr ""
 
-#: static/views/admin/settings.php:510
+#: static/views/admin/settings.php:528
 msgid "Download Backup of Current WP-Property Configuration."
 msgstr ""
 
-#: static/views/admin/settings.php:515
+#: static/views/admin/settings.php:533
 msgid "Revalidate all addresses using"
 msgstr ""
 
-#: static/views/admin/settings.php:516
+#: static/views/admin/settings.php:534
 msgid "localization"
 msgstr ""
 
-#: static/views/admin/settings.php:517
+#: static/views/admin/settings.php:535
 msgid "Revalidate"
 msgstr ""
 
-#: static/views/admin/settings.php:520
+#: static/views/admin/settings.php:538
 #, php-format
 msgid ""
 "Enter in the ID of the %1s you want to look up, and the class will be "
 "displayed below."
 msgstr ""
 
-#: static/views/admin/settings.php:522 static/views/admin/settings.php:529
+#: static/views/admin/settings.php:540 static/views/admin/settings.php:547
 msgid "Lookup"
 msgstr ""
 
-#: static/views/admin/settings.php:526
+#: static/views/admin/settings.php:544
 #, php-format
 msgid "Get %1s image data."
 msgstr ""
 
-#: static/views/admin/settings.php:527
+#: static/views/admin/settings.php:545
 #, php-format
 msgid "%1s ID:"
 msgstr ""
 
-#: static/views/admin/settings.php:534
+#: static/views/admin/settings.php:552
 msgid ""
 "Look up the <b>$wp_properties</b> global settings array.  This array stores "
 "all the default settings, which are overwritten by database settings, and "
 "custom filters."
 msgstr ""
 
-#: static/views/admin/settings.php:535
+#: static/views/admin/settings.php:553
 msgid "Show $wp_properties"
 msgstr ""
 
-#: static/views/admin/settings.php:540
+#: static/views/admin/settings.php:558
 msgid ""
 "Clear WPP Cache. Some shortcodes and widgets use cache, so the good practice "
 "is clear it after widget, shortcode changes."
 msgstr ""
 
-#: static/views/admin/settings.php:541
+#: static/views/admin/settings.php:559
 msgid "Clear Cache"
 msgstr ""
 
-#: static/views/admin/settings.php:544
+#: static/views/admin/settings.php:562
 #, php-format
 msgid "Set all %1s to same %2s type:"
 msgstr ""
 
-#: static/views/admin/settings.php:549
+#: static/views/admin/settings.php:567
 msgid "Set"
 msgstr ""
 
-#: static/views/admin/settings.php:555
+#: static/views/admin/settings.php:573
 msgid "Memory Usage:"
 msgstr ""
 
-#: static/views/admin/settings.php:558
+#: static/views/admin/settings.php:576
 msgid "Peak Memory Usage:"
 msgstr ""
 
-#: static/views/admin/settings.php:572
+#: static/views/admin/settings.php:590
 msgid "Save Changes"
+msgstr ""
+
+#: static/views/pagination-slider.php:10
+msgid "Prev"
+msgstr ""
+
+#: static/views/pagination.php:16
+msgid " found."
+msgstr ""
+
+#: static/views/pagination.php:20
+msgid "Viewing page"
+msgstr ""
+
+#: static/views/pagination.php:21 static/views/property-overview.php:49
+msgid "of"
+msgstr ""
+
+#: static/views/pagination.php:51
+msgid "No Pagination Template Found"
+msgstr ""
+
+#: static/views/property-overview-my-feps.php:46
+msgid "Not set"
+msgstr ""
+
+#: static/views/property-overview-my-feps.php:48
+msgid "Expiry Date"
+msgstr ""
+
+#: static/views/property-overview-my-feps.php:59
+#: vendor/plugins/wp-meta-box/inc/fields/file-input.php:42
+msgid "Remove"
+msgstr ""
+
+#: static/views/property-overview-page.php:19
+msgid ""
+"Sorry, we could not find what you were looking for.  Since you are here, "
+"take a look at some of our properties."
+msgstr ""
+
+#: static/views/property-overview.php:103
+#, php-format
+msgid ""
+"Sorry, no properties found - try expanding your search, or <a href=\"%s"
+"\">view all</a>."
+msgstr ""
+
+#: static/views/property.php:138
+msgid "Return to building page."
 msgstr ""
 
 #: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-admin.php:83
@@ -3465,111 +3764,131 @@ msgstr ""
 msgid "<strong>Compatible</strong> with your version of WordPress"
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:353
+#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:358
+#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:444
 #, php-format
 msgid ""
 "A license key for %s could not be found. Maybe you forgot to enter a license "
 "key when setting up %s, or the key was deactivated in your account. You can "
 "reactivate or purchase a license key from your account <a href=\"%s\" target="
-"\"_blank\">Licences</a>."
+"\"_blank\">Licences</a> | <a class=\"dismiss-error dismiss\" data-key="
+"\"dismissed_error_%s_no_key\" href=\"#\">dismiss</a>."
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:354
-#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:386
+#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:364
+#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:428
 #, php-format
 msgid ""
 "A subscription for %s could not be found. You can purchase a subscription "
-"from your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+"from your account <a href=\"%s\" target=\"_blank\">dashboard</a> | <a class="
+"\"dismiss-error dismiss\" data-key=\"dismissed_error_%s_no_subscription\" "
+"href=\"#\">dismiss</a>."
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:358
+#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:372
 #, php-format
 msgid ""
 "The license key for %s has expired. You can reactivate or purchase a license "
-"key from your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+"key from your account <a href=\"%s\" target=\"_blank\">dashboard</a> | <a "
+"class=\"dismiss-error dismiss\" data-key=\"dismissed_error_%s_exp_license\" "
+"href=\"#\">dismiss</a>."
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:362
+#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:380
 #, php-format
 msgid ""
 "The subscription for %s is on-hold. You can reactivate the subscription from "
-"your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+"your account <a href=\"%s\" target=\"_blank\">dashboard</a> | <a class="
+"\"dismiss-error dismiss\" data-key=\"dismissed_error_%s_hold_subscription\" "
+"href=\"#\">dismiss</a>."
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:366
+#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:388
 #, php-format
 msgid ""
 "The subscription for %s has been cancelled. You can renew the subscription "
 "from your account <a href=\"%s\" target=\"_blank\">dashboard</a>. A new "
-"license key will be emailed to you after your order has been completed."
+"license key will be emailed to you after your order has been completed. <a "
+"class=\"dismiss-error dismiss\" data-key=\"dismissed_error_"
+"%s_cancelled_subscription\" href=\"#\">dismiss</a>."
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:370
+#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:396
 #, php-format
 msgid ""
 "The subscription for %s has expired. You can reactivate the subscription "
-"from your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+"from your account <a href=\"%s\" target=\"_blank\">dashboard</a> | <a class="
+"\"dismiss-error dismiss\" data-key=\"dismissed_error_%s_exp_subscription\" "
+"href=\"#\">dismiss</a>."
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:374
+#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:404
 #, php-format
 msgid ""
 "The subscription for %s has been suspended. You can reactivate the "
 "subscription from your account <a href=\"%s\" target=\"_blank\">dashboard</"
-"a>."
+"a> | <a class=\"dismiss-error dismiss\" data-key=\"dismissed_error_"
+"%s_suspended_subscription\" href=\"#\">dismiss</a>."
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:378
+#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:412
 #, php-format
 msgid ""
 "The subscription for %s is still pending. You can check on the status of the "
 "subscription from your account <a href=\"%s\" target=\"_blank\">dashboard</"
-"a>."
+"a> | <a class=\"dismiss-error dismiss\" data-key=\"dismissed_error_"
+"%s_pending_subscription\" href=\"#\">dismiss</a>."
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:382
+#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:420
 #, php-format
 msgid ""
 "The subscription for %s has been placed in the trash and will be deleted "
 "soon. You can purchase a new subscription from your account <a href=\"%s\" "
-"target=\"_blank\">dashboard</a>."
+"target=\"_blank\">dashboard</a> | <a class=\"dismiss-error dismiss\" data-"
+"key=\"dismissed_error_%s_trash_subscription\" href=\"#\">dismiss</a>."
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:390
+#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:436
 #, php-format
 msgid ""
 "%s has not been activated. Go to the settings page and enter the license key "
-"and license email to activate %s."
+"and license email to activate %s. <a class=\"dismiss-error dismiss\" data-"
+"key=\"dismissed_error_%s_no_activation\" href=\"#\">dismiss</a>."
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:394
-#, php-format
-msgid ""
-"A license key for %s could not be found. Maybe you forgot to enter a license "
-"key when setting up %s, or the key was deactivated in your account. You can "
-"reactivate or purchase a license key from your account <a href=\"%s\" target="
-"\"_blank\">dashboard</a>."
-msgstr ""
-
-#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:398
+#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:452
 #, php-format
 msgid ""
 "Download permission for %s has been revoked possibly due to a license key or "
 "subscription expiring. You can reactivate or purchase a license key from "
-"your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+"your account <a href=\"%s\" target=\"_blank\">dashboard</a> | <a class="
+"\"dismiss-error dismiss\" data-key=\"dismissed_error_%s_download_revoked\" "
+"href=\"#\">dismiss</a>."
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:402
+#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:460
 #, php-format
 msgid ""
 "You changed the subscription for %s, so you will need to enter your new API "
 "License Key in the settings page. The License Key should have arrived in "
 "your email inbox, if not you can get it by logging into your account <a href="
-"\"%s\" target=\"_blank\">dashboard</a>."
+"\"%s\" target=\"_blank\">dashboard</a> | <a class=\"dismiss-error dismiss\" "
+"data-key=\"dismissed_error_%s_switched_subscription\" href=\"#\">dismiss</a>."
+msgstr ""
+
+#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:546
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap.php:591
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-errors.php:227
+msgid "There was an error in request."
+msgstr ""
+
+#: vendor/libraries/usabilitydynamics/lib-ud-api-client/lib/classes/class-update-checker.php:551
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-errors.php:232
+msgid "Invalid key"
 msgstr ""
 
 #: vendor/libraries/usabilitydynamics/lib-ud-api-client/static/templates/admin-notice.php:72
-#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/static/views/install_notice.php:92
 #, php-format
 msgid "<a href=\"%s\" class=\"\">Dismiss this notice</a>"
 msgstr ""
@@ -3786,34 +4105,38 @@ msgid ""
 "to solve the issue!"
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap.php:471
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap.php:478
 #, php-format
 msgid ""
 "Module <b>%s</b> is not installed or the version is old, class <b>%s</b> "
 "does not exist."
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap.php:475
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap.php:482
 #, php-format
 msgid ""
 "Module <b>%s</b> should be updated to the latest version, class <b>%s</b> "
 "must have version <b>%s</b> or higher."
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap.php:530
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap.php:537
 msgid ""
 "Class \\UsabilityDynamics\\UD_API\\Bootstrap does not exist. Be sure all "
 "required plugins and (or) composer modules installed and activated."
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap.php:543
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap.php:550
 msgid "Licenses client can not be activated due to invalid 'licenses' schema."
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap.php:564
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap.php:571
 msgid ""
 "Product requires license, but product ID and (or) referrer is undefined. "
 "Please, be sure, that license schema has all required data."
+msgstr ""
+
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-bootstrap.php:600
+msgid "Invalid values"
 msgstr ""
 
 #: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-dashboard.php:81
@@ -3840,27 +4163,31 @@ msgstr ""
 msgid "Go to Dashboard"
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-errors.php:175
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-errors.php:167
 #, php-format
 msgid "<p><b>%s</b> is not active due to following errors:</p> %s"
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-errors.php:185
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-errors.php:180
 #, php-format
 msgid "<p><b>%s</b> has the following warnings:</p> %s"
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-errors.php:199
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-errors.php:182
+msgid "Dismiss this warning"
+msgstr ""
+
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-errors.php:197
 #, php-format
 msgid "<p><b>%s</b> has the following additional notices:</p> %s"
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-errors.php:201
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-errors.php:199
 #, php-format
 msgid "<p><b>%s</b> is active, but has the following notices:</p> %s"
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-errors.php:204
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-errors.php:202
 #: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-tgm-plugin-activation.php:196
 msgid "Dismiss this notice"
 msgstr ""
@@ -4048,7 +4375,7 @@ msgstr ""
 msgid "All plugins installed and activated successfully. %1$s"
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/static/views/install_notice.php:73
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/static/views/install_notice.php:101
 #, php-format
 msgid ""
 "Thank you for using <a href=\"%s\" target=\"_blank\">Usability Dynamics</a>' "
@@ -4056,17 +4383,24 @@ msgid ""
 "details."
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/static/views/install_notice.php:84
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/static/views/install_notice.php:112
 #, php-format
 msgid "<a href=\"%s\" target=\"_blank\" class=\"\">%s's Home page</a>"
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/static/views/install_notice.php:87
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/static/views/install_notice.php:115
 msgid "Support"
 msgstr ""
 
-#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/static/views/install_notice.php:90
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/static/views/install_notice.php:118
 msgid "Post your idea"
+msgstr ""
+
+#: vendor/libraries/usabilitydynamics/lib-wp-bootstrap/static/views/install_notice.php:120
+#, php-format
+msgid ""
+"<a data-key=\"%s\" data-slug=\"%s\" data-type=\"%s\" data-version=\"%s\" "
+"href=\"#\" class=\"dismiss-notice dismiss\">Dismiss this notice</a>"
 msgstr ""
 
 #: vendor/libraries/usabilitydynamics/lib-wp-list-table/lib/classes/class-ajax.php:105
@@ -4168,6 +4502,10 @@ msgstr ""
 msgid "No images"
 msgstr ""
 
+#: vendor/plugins/wp-meta-box-utilities/lib/fields/group.php:145
+msgid "+ Add more"
+msgstr ""
+
 #: vendor/plugins/wp-meta-box/demo/all-custom-post-types.php:15
 msgid "Personal Information"
 msgstr ""
@@ -4188,10 +4526,6 @@ msgstr ""
 
 #: vendor/plugins/wp-meta-box/demo/date-time-js-options.php:8
 msgid "Date Time Picker With JS Options"
-msgstr ""
-
-#: vendor/plugins/wp-meta-box/demo/date-time-js-options.php:12
-msgid "Date"
 msgstr ""
 
 #: vendor/plugins/wp-meta-box/demo/date-time-js-options.php:18
@@ -4294,11 +4628,6 @@ msgstr ""
 
 #: vendor/plugins/wp-meta-box/demo/demo.php:157
 msgid "Optional description for this heading"
-msgstr ""
-
-#: vendor/plugins/wp-meta-box/demo/demo.php:161
-#: vendor/plugins/wp-meta-box/demo/slider.php:9
-msgid "Slider"
 msgstr ""
 
 #: vendor/plugins/wp-meta-box/demo/demo.php:166
@@ -4459,10 +4788,6 @@ msgstr ""
 msgid "Extensions"
 msgstr ""
 
-#: vendor/plugins/wp-meta-box/inc/meta-box.php:245
-msgid "Please correct the errors highlighted below and try again."
-msgstr ""
-
 #: vendor/plugins/wp-meta-box/inc/fields/button.php:35
 msgid "Click me"
 msgstr ""
@@ -4534,6 +4859,35 @@ msgstr ""
 msgid "Select an user"
 msgstr ""
 
-#: vendor/plugins/wp-meta-box-utilities/lib/fields/group.php:145
-msgid "+ Add more"
+#: vendor/plugins/wp-meta-box/inc/meta-box.php:245
+msgid "Please correct the errors highlighted below and try again."
+msgstr ""
+
+#: wp-property.php:73
+msgid ""
+"Distributive is broken. composer.json is missed. Try to remove and upload "
+"plugin again."
+msgstr ""
+
+#: wp-property.php:81
+#, php-format
+msgid "Plugin requires PHP %s or higher. Your current PHP version is %s"
+msgstr ""
+
+#: wp-property.php:89
+#, php-format
+msgid ""
+"Distributive is broken. %s file is missed. Try to remove and upload plugin "
+"again."
+msgstr ""
+
+#: wp-property.php:93
+msgid ""
+"Distributive is broken. Plugin loader is not available. Try to remove and "
+"upload plugin again."
+msgstr ""
+
+#: wp-property.php:114
+#, php-format
+msgid "<p><b>%s</b> can not be initialized. %s</p>"
 msgstr ""
