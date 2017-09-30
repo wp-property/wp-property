@@ -98,7 +98,7 @@ jQuery.extend( wpp = wpp || {}, { overview: {
     
     // Toggle Featured Setting
     if ( jQuery.fn.live && typeof jQuery.fn.live == 'function' && !wpp.overview.initialized ) {
-      jQuery( ".wpp_featured_toggle" ).live( 'click', wpp.overview.toggle_featured );
+      jQuery( document ).on( 'click', ".wpp_featured_toggle", wpp.overview.toggle_featured );
     }
     
     wpp.overview.initialized = true;

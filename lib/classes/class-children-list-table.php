@@ -83,7 +83,7 @@ namespace UsabilityDynamics\WPP {
                   $unauthorized++;
                   continue;
                 }
-                
+
                 $wpdb->query( $wpdb->prepare( "
                   UPDATE {$wpdb->posts}
                   SET post_parent = '0'
@@ -98,6 +98,7 @@ namespace UsabilityDynamics\WPP {
                 $label = count($post_ids) > 1 ? __( 'Children', ud_get_wp_property('domain') ) : __( 'Child', ud_get_wp_property('domain') );
                 $this->message = sprintf( __( 'Selected %s have been successfully un-assigned from current %s.', ud_get_wp_property( 'domain' ) ), $label, \WPP_F::property_label() );
               }
+
               break;
 
             default:

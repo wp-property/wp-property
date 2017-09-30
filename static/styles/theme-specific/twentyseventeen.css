@@ -1,0 +1,35 @@
+@media screen and (min-width: 56.875em) {
+	.property-template-default .site-content {
+	    max-width: 1000px;
+	    padding-left: 2em;
+	    padding-right: 2em;
+	    margin: 0 auto;
+	}
+
+	.property-template-default #container {
+	    float: left;
+	    margin: 0px;
+	    width: 70%;
+	    padding-right: 20px;
+	}
+
+	.property-template-default #container #content.property_content {
+	    margin: 0px;
+	}
+
+	.property-template-default #content #primary.widget-area  {
+		float: right;
+		padding: 0;
+		width: 30% ;
+		padding-left: 20px;
+	}
+	
+	.property-template-default #primary.widget-area .wpp_widget{
+		list-style: none;
+	}
+
+	ul.wpp_agent_info_list li.wpp_agent_stats_display_name{
+		font-size: initial;
+	}
+}
+

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * WP-Property Core Framework
  *
@@ -22,7 +21,7 @@ class WPP_Core {
     global $wp_properties;
 
     // Determine if memory limit is low and increase it
-    if( (int)ini_get( 'memory_limit' ) < 128 ) {
+    if( (int)ini_get( 'memory_limit' ) < 128 && (int)ini_get( 'memory_limit' ) > 0 ) {
       ini_set( 'memory_limit', '128M' );
     }
 
@@ -70,6 +69,110 @@ class WPP_Core {
      */
     add_filter( 'get_post_metadata', array( $this, 'maybe_get_thumbnail_id' ), 10, 4 );
 
+    /**
+     * Updated remote settings to UD
+     */
+
+    add_filter( 'wpp_get_properties_query', array( $this, 'fix_tax_property_query' ));
+
+
+    /**
+     * Heartbeat filter for locking settings page.
+     * 
+     */
+
+    if(WPP_FEATURE_FLAG_SETTINGS_V2){
+      add_filter( 'heartbeat_received', array($this, 'wpp_settings_lock_heartbeat_received'), 10, 3 );
+      add_filter( 'heartbeat_send', array($this, 'wpp_settings_lock_heartbeat_send'), 10, 2 );
+    }
+  }
+
+  /**
+   * @param $query
+   * @return mixed
+   */
+  public function fix_tax_property_query( $query ) {
+    global $wp_query;
+
+    if ( !is_tax() || empty( $wp_query->queried_object )
+        || !is_a( $wp_query->queried_object, 'WP_Term' )
+        || !is_object_in_taxonomy( 'property', $wp_query->queried_object->taxonomy )
+        || !function_exists( 'ud_get_wpp_terms' )
+        || !empty( $query[$wp_query->queried_object->taxonomy] )) return $query;
+
+    $query[$wp_query->queried_object->taxonomy] = $wp_query->queried_object->slug;
+
+    return $query;
+  }
+
+  /**
+   * Update remote settings
+   *
+   * @depreciated
+   *
+   */
+  public function update_site_settings() {
+    global $wpdb, $wp_properties;
+
+    $ud_site_secret_token = get_site_option('ud_site_secret_token');
+    if(is_multisite()){
+      $site_url = network_site_url();
+    } else{
+      $site_url = get_site_url();
+    }
+    $ud_site_id = get_site_option('ud_site_id');
+    $ud_site_public_key = get_site_option('ud_site_public_key');
+    $url = 'https://api.usabilitydynamics.com/product/property/settings/v1/update';
+    $find = array( 'http://', 'https://' );
+    $replace = '';
+    $output = str_replace( $find, $replace, $site_url );
+
+    $configuration = array(
+        'searchable_attributes' => !empty( $wp_properties['searchable_attributes'] ) ? $wp_properties['searchable_attributes'] : array(),
+        'property_stats' => !empty( $wp_properties['property_stats'] ) ? $wp_properties['property_stats'] : array(),
+        'property_types' => !empty( $wp_properties['property_types'] ) ? $wp_properties['property_types'] : array(),
+        'geo_type_attributes' => !empty( $wp_properties['geo_type_attributes'] ) ? $wp_properties['geo_type_attributes'] : array(),
+        'predefined_values' => !empty( $wp_properties['predefined_values'] ) ? $wp_properties['predefined_values'] : array(),
+        'searchable_attr_fields' => !empty( $wp_properties['searchable_attr_fields'] ) ? $wp_properties['searchable_attr_fields'] : array(),
+        'admin_attr_fields' => !empty( $wp_properties['admin_attr_fields'] ) ? $wp_properties['admin_attr_fields'] : array(),
+        'numeric_attributes' => !empty( $wp_properties['numeric_attributes'] ) ? $wp_properties['numeric_attributes'] : array(),
+        'currency_attributes' => !empty( $wp_properties['currency_attributes'] ) ? $wp_properties['currency_attributes'] : array()
+    );
+
+    $data_settings = apply_filters( 'wpp::backup::data', array( 'wpp_settings' => $configuration ) );
+    $data_settings_json = json_encode($data_settings);
+
+    $args = array(
+        'method' => 'POST',
+        'timeout' => 45,
+        'redirection' => 5,
+        'httpversion' => '1.0',
+        'headers' => array(),
+        'body' => array(
+            'host' => $output,
+            'ud_site_secret_token' => $ud_site_secret_token,
+            'ud_site_id' => $ud_site_id,
+	          'ud_site_public_key' => $ud_site_public_key,
+            'db_name' => DB_NAME,
+            'home_url' => $site_url,
+            'table_refix' => $wpdb->prefix,
+            'wpp_settings' => $data_settings_json,
+            'message' => "Hello, I'm WP-property plugin. Give me ID, please."
+        ),
+    );
+
+    $response = wp_remote_post( $url, $args );
+
+    $api_body = json_decode(wp_remote_retrieve_body($response));
+
+    if ( !is_wp_error( $response ) ) {
+      if( !empty( $api_body->ud_site_id ) && $api_body->ud_site_secret_token == $ud_site_secret_token){
+        add_site_option('ud_site_id', $api_body->ud_site_id);
+        if( !empty( $api_body->ud_site_public_key ) ){
+          add_site_option('ud_site_public_key', $api_body->ud_site_public_key);
+        }
+      }
+    }
   }
 
   /**
@@ -81,7 +184,6 @@ class WPP_Core {
    *
    */
   function init_upper() {
-    global $wp_properties;
 
     //** Init action hook */
     do_action( 'wpp_init' );
@@ -98,8 +200,13 @@ class WPP_Core {
     //** Load settings into $wp_properties and save settings if nonce exists */
     WPP_F::settings_action();
 
+    //** Set up our default page for properties */
+    WPP_F::register_properties_page();
+
     //** Load all widgets and register widget areas */
     add_action( 'widgets_init', array( 'WPP_F', 'widgets_init' ) );
+
+    do_action( 'wpp_init:end', $this );
 
   }
 
@@ -118,13 +225,18 @@ class WPP_Core {
 
     /** Ajax functions */
     add_action( 'wp_ajax_wpp_ajax_max_set_property_type', create_function( "", ' die(WPP_F::mass_set_property_type($_REQUEST["property_type"]));' ) );
-    add_action( 'wp_ajax_wpp_ajax_property_query', create_function( "", ' $class = WPP_F::get_property(trim($_REQUEST["property_id"])); if($class) { echo "WPP_F::get_property() output: \n\n"; print_r($class); echo "\nAfter prepare_property_for_display() filter:\n\n"; print_r(prepare_property_for_display($class));  } else { echo __("No property found.","wpp"); } die();' ) );
+
     add_action( 'wp_ajax_wpp_ajax_image_query', create_function( "", ' $class = WPP_F::get_property_image_data($_REQUEST["image_id"]); if($class)  print_r($class); else echo __("No image found.","wpp"); die();' ) );
-    add_action( 'wp_ajax_wpp_ajax_clear_cache', create_function( "", '  echo WPP_F::clear_cache(); die();' ) );
     add_action( 'wp_ajax_wpp_ajax_revalidate_all_addresses', create_function( "", '  echo WPP_F::revalidate_all_addresses(); die();' ) );
+    add_action( 'wp_ajax_wpp_ajax_create_settings_backup', create_function( "", '  echo WPP_F::create_settings_backup(); die();' ) );
     add_action( 'wp_ajax_wpp_save_settings', create_function( "", ' die(WPP_F::save_settings());' ) );
+    if(WPP_FEATURE_FLAG_SETTINGS_V2){
+      add_action( 'wp_ajax_wpp_get_settings_page', create_function( "", ' die(WPP_F::wpp_ajax_get_settings_page());' ) );
+    }
+    add_action( 'wp_ajax_wpp_save_freemius_settings', create_function( "", ' die(WPP_F::save_freemius_settings());' ) );
     add_action( 'wp_ajax_wpp_apply_default_value', create_function( "", ' die(WPP_F::apply_default_value());' ) );
     add_action( 'wp_ajax_wpp_ajax_print_wp_properties', create_function( "", ' global $wp_properties; print_r($wp_properties); die();' ) );
+    add_action( 'wp_ajax_wpp_ajax_generate_is_remote_meta', create_function( "", ' WPP_F::generate_is_remote_meta(); die();' ) );
 
     /** Called in setup_postdata().  We add property values here to make available in global $post variable on frontend */
     add_action( 'the_post', array( 'WPP_F', 'the_post' ) );
@@ -170,25 +282,36 @@ class WPP_Core {
     $scheme = ( is_ssl() && !is_admin() ? 'https' : 'http' );
 
     //** Load Localization early so plugins can use them as well */
-    //** Try to generate static localization script. It can be flushed on Clear Cache! */
-    if( $l10n_url = $this->maybe_generate_l10n_script() ) {
-      wp_register_script( 'wpp-localization', $l10n_url, array(), WPP_Version );
-    } else {
-      wp_register_script( 'wpp-localization', ud_get_wp_property()->path( 'static/scripts/l10n.js', 'url' ), array(), WPP_Version );
-      wp_localize_script( 'wpp-localization', 'wpp_l10n', $this->get_l10n_data() );
-    }
+    wp_register_script( 'wpp-localization', ud_get_wp_property()->path( 'static/scripts/l10n.js', 'url' ), array(), WPP_Version );
+    wp_localize_script( 'wpp-localization', 'wpp_l10n', $this->get_l10n_data() );
 
+    // wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox.2.1.5/jquery.fancybox.pack.js', array( 'jquery', 'wpp-localization' ), '2.1.5' );
     wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
+    wp_register_script( 'wpp-jquery-swiper', WPP_URL . 'scripts/swiper.jquery.min.js', array( 'jquery' ), '1.7.3' );
+
     wp_register_script( 'wpp-jquery-colorpicker', WPP_URL . 'scripts/colorpicker/colorpicker.js', array( 'jquery', 'wpp-localization' ) );
+    wp_register_script( 'wpp-select2', WPP_URL . 'scripts/select2.min.js', array( 'jquery' ));
     wp_register_script( 'wpp-jquery-easing', WPP_URL . 'scripts/fancybox/jquery.easing-1.3.pack.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
+
     wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'scripts/fileuploader.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wp-property-admin-overview', WPP_URL . 'scripts/wpp.admin.overview.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-admin-widgets', WPP_URL . 'scripts/wpp.admin.widgets.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-admin-settings', WPP_URL . 'scripts/wpp.admin.settings.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-admin-settings', WPP_URL . 'scripts/wpp.admin.settings.js', array( 'jquery', 'heartbeat', 'wpp-localization' ), WPP_Version );
+    // _ template js
+    wp_register_script( 'lodash-js', WPP_URL . 'scripts/lodash.js', array('jquery', 'underscore'), WPP_Version );
+    wp_register_script( 'wpp-settings-developer-attributes', WPP_URL . 'scripts/view/settings-developer-attributes.js', array( 'wp-property-admin-settings', 'lodash-js' ), WPP_Version );
+    wp_register_script( 'wpp-settings-developer-types', WPP_URL . 'scripts/view/settings-developer-types.js', array( 'wp-property-admin-settings', 'lodash-js' ), WPP_Version );
+    
+    $_featureFlags = array();
+    $featureFlags = ud_get_wp_property()->get_feature_flags();
+    foreach ($featureFlags as $flag) {
+      $_featureFlags[$flag->constant] = $flag->enabled;
+    }
+    wp_localize_script( 'wp-property-admin-settings', 'featureFlags', $_featureFlags );
 
-    wp_register_script( 'wp-property-backend-global', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-backend-global', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization', 'underscore' ), WPP_Version );
     wp_register_script( 'wp-property-backend-editor', WPP_URL . 'scripts/wpp.admin.editor.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable' ), WPP_Version );
+    wp_register_script( 'wp-property-global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable', 'wpp-jquery-fancybox' ), WPP_Version );
     wp_register_script( 'jquery-cookie', WPP_URL . 'scripts/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
 
     // Use Google Maps API Key, if provided.
@@ -206,6 +329,12 @@ class WPP_Core {
     wp_register_script( 'wpp-jquery-validate', WPP_URL . 'scripts/jquery.validate.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wpp-jquery-number-format', WPP_URL . 'scripts/jquery.number.format.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wp-property-galleria', WPP_URL . 'scripts/galleria/galleria-1.2.5.js', array( 'jquery', 'wpp-localization' ) );
+
+    /* New script for property search shortcode */
+    wp_register_script( 'wpp-search-form', WPP_URL . 'scripts/wpp.search_form.js', array( 'jquery' ) );
+
+    /* New script for property gallery */
+    wp_register_script( 'wp-property-gallery', WPP_URL . 'scripts/wp-property-gallery.js', array( 'jquery' ) );
 
 
     // Load localized scripts
@@ -231,31 +360,42 @@ class WPP_Core {
 
 
     wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.css' );
+    wp_register_style( 'wpp-jquery-swiper', WPP_URL . 'styles/swiper.min.css' );
     wp_register_style( 'wpp-jquery-colorpicker-css', WPP_URL . 'scripts/colorpicker/colorpicker.css' );
     wp_register_style( 'jquery-ui', WPP_URL . 'styles/wpp.admin.jquery.ui.css' );
+    wp_register_style( 'select2', WPP_URL . 'styles/select2.min.css' );
     wp_register_style( 'wpp-jquery-ui-dialog', WPP_URL . 'styles/jquery-ui-dialog.min.css' );
 
     wp_register_style( 'wpp-fa-icons', WPP_URL . 'fonts/icons/fa/css/font-awesome.min.css', array(), '4.5.0' );
 
-    /** Find and register stylesheet  */
-    if( file_exists( STYLESHEETPATH . '/wp-properties.css' ) ) {
-      wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp-properties.css', array(), WPP_Version );
-    } elseif( file_exists( STYLESHEETPATH . '/wp_properties.css' ) ) {
-      wp_register_style( 'wp-property-frontend', get_bloginfo( 'stylesheet_directory' ) . '/wp_properties.css', array(), WPP_Version );
-    } elseif( file_exists( TEMPLATEPATH . '/wp-properties.css' ) ) {
-      wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp-properties.css', array(), WPP_Version );
-    } elseif( file_exists( TEMPLATEPATH . '/wp_properties.css' ) ) {
-      wp_register_style( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.css', array(), WPP_Version );
-    } elseif( $wp_properties[ 'configuration' ][ 'autoload_css' ] == 'true' ) {
-      wp_register_style( 'wp-property-frontend', WPP_URL . 'styles/wp_properties.css', array(), WPP_Version );
 
-      //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
-      if(
-        isset( $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] ) &&
-        $wp_properties[ 'configuration' ][ 'do_not_load_theme_specific_css' ] != 'true' &&
-        WPP_F::has_theme_specific_stylesheet()
-      ) {
-        wp_register_style( 'wp-property-theme-specific', WPP_URL . "styles/theme-specific/" . get_option( 'template' ) . ".css", array( 'wp-property-frontend' ), WPP_Version );
+    /** Find and register stylesheet  */
+    if (!WPP_LEGACY_WIDGETS) {
+      // load the new v2.3 styles
+      wp_register_style('wp-property-frontend', WPP_URL . 'styles/wpp.public.v2.3.css', array(), WPP_Version);
+    } else {
+      // these are the legacy styles.
+      if (file_exists(STYLESHEETPATH . '/wp-properties.css')) {
+        wp_register_style('wp-property-frontend', get_bloginfo('stylesheet_directory') . '/wp-properties.css', array(), WPP_Version);
+      } elseif (file_exists(STYLESHEETPATH . '/wp_properties.css')) {
+        wp_register_style('wp-property-frontend', get_bloginfo('stylesheet_directory') . '/wp_properties.css', array(), WPP_Version);
+      } elseif (file_exists(TEMPLATEPATH . '/wp-properties.css')) {
+        wp_register_style('wp-property-frontend', get_bloginfo('template_url') . '/wp-properties.css', array(), WPP_Version);
+      } elseif (file_exists(TEMPLATEPATH . '/wp_properties.css')) {
+        wp_register_style('wp-property-frontend', get_bloginfo('template_url') . '/wp_properties.css', array(), WPP_Version);
+      } elseif ($wp_properties['configuration']['autoload_css'] == 'true') {
+
+        wp_register_style('wp-property-frontend', WPP_URL . 'styles/wp_properties.css', array(), WPP_Version);
+
+        //** Find and register theme-specific style if a custom wp_properties.css does not exist in theme */
+        if ((
+            empty($wp_properties['configuration']['do_not_load_theme_specific_css']) ||
+            $wp_properties['configuration']['do_not_load_theme_specific_css'] != 'true'
+          ) &&
+          WPP_F::has_theme_specific_stylesheet()
+        ) {
+          wp_register_style('wp-property-theme-specific', WPP_URL . "styles/theme-specific/" . get_option('template') . ".css", array('wp-property-frontend'), WPP_Version);
+        }
       }
     }
 
@@ -265,30 +405,26 @@ class WPP_Core {
     } elseif( file_exists( TEMPLATEPATH . '/wp_properties.js' ) ) {
       wp_register_script( 'wp-property-frontend', get_bloginfo( 'template_url' ) . '/wp_properties.js', array( 'jquery-ui-core', 'wpp-localization' ), WPP_Version, true );
     } else {
-      wp_register_script( 'wp-property-frontend', WPP_URL . 'scripts/wp_properties.js', array( 'jquery-ui-core', 'wpp-localization' ), WPP_Version, true );
+      wp_register_script( 'wp-property-frontend', WPP_URL . 'scripts/wp_properties.js', array( 'jquery-ui-core', 'wpp-localization', 'wpp-jquery-swiper' ), WPP_Version, true );
     }
 
     //** Add troubleshoot log page */
     //** Modify admin body class */
     add_filter( 'admin_body_class', array( $this, 'admin_body_class' ), 5 );
-	  
+
     add_filter( 'display_post_states', array( $this, 'display_post_states' ), 10, 2 );
-    
+
     //** Modify Front-end property body class */
     add_filter( 'body_class', array( $this, 'properties_body_class' ) );
 
     add_filter( 'wp_get_attachment_link', array( 'WPP_F', 'wp_get_attachment_link' ), 10, 6 );
 
     //** Make Property Featured Via AJAX */
-    if(
-      isset( $_REQUEST[ 'post_id' ] )
-      && isset( $_REQUEST[ '_wpnonce' ] )
-      && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], "wpp_make_featured_" . $_REQUEST[ 'post_id' ] )
-    ) {
+    if( isset( $_REQUEST[ 'post_id' ] ) && isset( $_REQUEST[ '_wpnonce' ] ) && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], "wpp_make_featured_" . $_REQUEST[ 'post_id' ] ) ) {
       add_action( 'wp_ajax_wpp_make_featured', create_function( "", '  $post_id = $_REQUEST[\'post_id\']; echo WPP_F::toggle_featured( $post_id ); die();' ) );
     }
 
-    add_filter( 'wpp::draw_stats::attributes', array( __CLASS__, 'make_attributes_hidden' ), 10, 2 );
+    add_filter( 'wpp::draw_stats::attributes', array( __CLASS__, 'make_attributes_hidden' ), 100, 2 );
 
     //** Post-init action hook */
     do_action( 'wpp_post_init' );
@@ -315,6 +451,27 @@ class WPP_Core {
     return $attributes;
   }
 
+  /**
+   * Limiting to view only own property if 
+   * user don't have edit_others_posts capability.
+   * 
+   * @since 2.2.0.1
+   * @author alim
+   */
+
+  public function capability_wpp_property($query) {
+    global $current_screen;
+
+    if( (!empty($query->query['post_type']) && 'property' != $query->query['post_type']) || !$query->is_admin )
+        return $query;
+
+    if( !current_user_can( 'edit_others_posts' ) ) {
+      global $user_ID;
+      $query->set('author', $user_ID );
+    }
+    return $query;
+  }
+  
   /**
    * May be return thumbnail ID for property.
    * HOOK on get_post_meta
@@ -375,6 +532,7 @@ class WPP_Core {
    * @param $query
    *
    * @since 0.5
+   * @return mixed
    */
   function parse_request( $query ) {
     global $wp, $wp_query, $wp_properties, $wpdb;
@@ -546,7 +704,7 @@ class WPP_Core {
 
     $update_data = $_REQUEST[ 'wpp_data' ][ 'meta' ];
 
-    //** Neccessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
+    //** Necessary meta data which is required by Supermap Premium Feature. Should be always set even the Supermap disabled. peshkov@UD */
     if( empty( $_REQUEST[ 'exclude_from_supermap' ] ) ) {
       if( !metadata_exists( 'post', $post_id, 'exclude_from_supermap' ) ) {
         $update_data[ 'exclude_from_supermap' ] = 'false';
@@ -602,6 +760,11 @@ class WPP_Core {
       'post_type' => 'property'
     ) );
 
+    // Checking if this is a child property if then add it to children array.
+    if($prev_parent_id = wp_get_post_parent_id($post_id)){
+      $children[$post_id] = null;
+    }
+
     //* Write any data to children properties that are supposed to inherit things */
     //* 1) Go through all children */
     foreach( (array) $children as $child_id => $child_data ) {
@@ -609,13 +772,16 @@ class WPP_Core {
       //* Determine child property_type */
       $child_property_type = get_post_meta( $child_id, 'property_type', true );
 
-      //* Check if child's property type has inheritence rules, and if meta_key exists in inheritance array */
+      //* Check if child's property type has inheritance rules, and if meta_key exists in inheritance array */
       if(
         isset( $wp_properties[ 'property_inheritance' ][ $child_property_type ] ) &&
         is_array( $wp_properties[ 'property_inheritance' ][ $child_property_type ] )
       ) {
+        // Getting parent id //because current property could be a child.
+        $parent_id = wp_get_post_parent_id($child_id);
+
         foreach( $wp_properties[ 'property_inheritance' ][ $child_property_type ] as $i_meta_key ) {
-          $parent_meta_value = get_post_meta( $post_id, $i_meta_key, true );
+          $parent_meta_value = get_post_meta( $parent_id, $i_meta_key, true );
           //* inheritance rule exists for this property_type for this meta_key */
           update_post_meta( $child_id, $i_meta_key, $parent_meta_value );
         }
@@ -624,12 +790,6 @@ class WPP_Core {
 
     $_gpid = WPP_F::maybe_set_gpid( $post_id );
 
-    do_action( 'save_property', $post_id, array(
-      'children' => $children,
-      'gpid' => $_gpid,
-      'update_data' => $update_data,
-      'geo_data' => $geo_data
-    ));
 
     /**
      * Flush all object caches related to current property
@@ -638,7 +798,15 @@ class WPP_Core {
     /**
      * Flush WP-Property caches
      */
-    \WPP_F::clear_cache();
+
+    // We need to do it after flashing the cache.
+    do_action( 'save_property', $post_id, array(
+      'parent_id' => $prev_parent_id,
+      'children' => $children,
+      'gpid' => $_gpid,
+      'update_data' => $update_data,
+      'geo_data' => $geo_data
+    ));
 
   }
 
@@ -673,7 +841,7 @@ class WPP_Core {
    * @since 0.5
    * @param $actions
    * @param $post
-   * @return
+   * @return mixed
    */
   function property_row_actions( $actions, $post ) {
     if( $post->post_type != 'property' )
@@ -833,7 +1001,7 @@ class WPP_Core {
       $wp_query->is_page = true;
     }
 
-    wp_localize_script( 'wpp-localization', 'wpp', array( 'instance' => $this->get_instance() ) );
+    wp_localize_script( 'wpp-localization', 'wpp',array( 'instance' =>  apply_filters( 'wpp::localization::instance', $this->get_instance() ) ) );
 
     //** Load global wp-property script on all frontend pages */
     wp_enqueue_script( 'wp-property-global' );
@@ -841,6 +1009,7 @@ class WPP_Core {
     if( apply_filters( 'wpp::custom_styles', false ) === false ) {
       //** Possibly load essential styles that are used in widgets */
       wp_enqueue_style( 'wp-property-frontend' );
+      wp_enqueue_style( 'wpp-public-frontend' );
       //** Possibly load theme specific styles */
       wp_enqueue_style( 'wp-property-theme-specific' );
     }
@@ -856,7 +1025,7 @@ class WPP_Core {
       wp_redirect( get_permalink( $post->ID ) );
       die();
     }
-    
+
     /* (count($wp_query->posts) < 2) added post 1.31.1 release */
     /* to avoid taxonomy archives from being broken by single property pages */
     if(
@@ -1035,6 +1204,10 @@ class WPP_Core {
           }
         }
       }
+      
+      if(empty($wpp_settings['configuration']['google_maps_api_server']) && !empty($wpp_settings['configuration']['google_maps_api'])){
+        $wpp_settings['configuration']['google_maps_api_server'] = $wpp_settings['configuration']['google_maps_api'];
+      }
     }
 
     return $wpp_settings;
@@ -1070,21 +1243,26 @@ class WPP_Core {
     //* General WPP capabilities */
     $wpp_capabilities = array(
       //* Manage WPP Properties Capabilities */
-      'edit_wpp_properties' => __( 'View Properties', ud_get_wp_property()->domain ),
-      'edit_wpp_property' => __( 'Add/Edit Properties', ud_get_wp_property()->domain ),
-      'edit_others_wpp_properties' => __( 'Edit Other Properties', ud_get_wp_property()->domain ),
+      'edit_wpp_properties' => sprintf(__( 'View %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
+
+      'edit_wpp_property' => sprintf(__( 'Add/Edit %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
+      'delete_wpp_property' => sprintf(__( 'Delete %s', ud_get_wp_property()->domain ), WPP_F::property_label()),
+
+      'publish_wpp_properties' => sprintf(__( 'Publish %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
+
+      //* WPP others property capability */
+      'edit_others_wpp_properties' => sprintf(__( 'Edit Others %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
       'delete_others_wpp_properties' => sprintf(__( 'Delete Others %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
-      'delete_wpp_property' => __( 'Delete Properties', ud_get_wp_property()->domain ),
-      'publish_wpp_properties' => __( 'Publish Properties', ud_get_wp_property()->domain ),
       //* WPP private property capability */
       'edit_private_wpp_properties' => sprintf(__( 'Edit Private %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
       'delete_private_wpp_properties' => sprintf(__( 'Delete Private %s', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
+
       //* WPP make featured capability */
-      'manage_wpp_make_featured' => __( 'Allow to mark properties as featured', ud_get_wp_property()->domain ),
+      'manage_wpp_make_featured' => sprintf(__( 'Allow to mark %s as featured', ud_get_wp_property()->domain ), WPP_F::property_label('plural')),
       //* WPP Settings capability */
       'manage_wpp_settings' => __( 'Manage Settings', ud_get_wp_property()->domain ),
       //* WPP Taxonomies capability */
-      'manage_wpp_categories' => __( 'Manage Taxonomies', ud_get_wp_property()->domain )
+      'manage_wpp_categories' => __( 'Manage Taxonomies', ud_get_wp_property()->domain ),
     );
 
     //* Adds Premium Feature Capabilities */
@@ -1094,7 +1272,6 @@ class WPP_Core {
       return;
     }
 
-    
     $is_cap_added = false;
     foreach( $wpp_capabilities as $cap => $value ) {
       if( empty( $role->capabilities[ $cap ] ) ) {
@@ -1117,61 +1294,17 @@ class WPP_Core {
       global $current_user;
       $user_id = get_current_user_id();
       $current_user = null;
+      WPP_F::debug( 'Update current user with new caps' );
       wp_set_current_user($user_id);
     }
-  }
 
-  /**
-   * Limiting to view only own property only if 
-   * user don't have edit_others_posts capability.
-   * 
-   * @since 2.2.0.1
-   * @author alim
-   */
-
-  public function capability_wpp_property($query) {
-    global $current_screen;
-
-    if( (!empty($query->query['post_type']) && 'property' != $query->query['post_type']) || !$query->is_admin )
-        return $query;
-
-    if( !current_user_can( 'edit_others_posts' ) ) {
-      global $user_ID;
-      $query->set('author', $user_ID );
-    }
-    return $query;
-  }
-  
-  /**
-   * Generates javascript file with localization.
-   * Adds localization support to all WP-Property scripts.
-   *
-   * @since 1.41.5
-   * @author peshkov@UD
-   */
-  public function maybe_generate_l10n_script() {
-    $dir = untrailingslashit( ud_get_wp_property( 'cache_dir' ) );
-    $file = $dir . '/l10n.js';
-    $url = untrailingslashit( ud_get_wp_property( 'cache_url' ) ) . '/l10n.js';
-    //** File already created! */
-    if( file_exists( $file ) ) {
-      return $url;
-    }
-    //** Try to create directory if it doesn't exist */
-    if( !is_dir( $dir ) && !wp_mkdir_p( $dir ) ) {
-      return false;
-    }
-    //** Save file */
-    if( @file_put_contents( $file, 'var wpp = ( typeof wpp === \'object\' ) ? wpp : {}; wpp.strings = ' . json_encode( $this->get_l10n_data() ) . ';' ) ) {
-      return false;
-    }
-    return $url;
   }
 
   /**
    *
    */
   public function get_l10n_data() {
+
     $l10n = array();
     //** Include the list of translations */
     $l10n_dir = ud_get_wp_property()->path( 'l10n.php', 'dir' );
@@ -1281,6 +1414,84 @@ class WPP_Core {
   static function shortcode_property_overview( $atts = '' ) {
     //_deprecated_function( __FUNCTION__, '2.1.0', 'do_shortcode([property_overview])' );
     return UsabilityDynamics\WPP\Property_Overview_Shortcode::render( $atts );
+  }
+
+  /**
+   * Heartbeat filter for locking settings page.
+   *
+   * 
+   *
+   *
+   */
+
+  public function wpp_settings_lock_heartbeat_received( $response, $data, $screen_id ){
+    if(isset( $data['property_settings_lock'] )){
+      if($data['property_settings_lock'] === true || $data['property_settings_lock'] == 'true') {
+        if ( $new_lock = $this->wpp_settings_set_lock() )
+          $response['property_settings_lock']['new_lock'] = implode( ':', $new_lock );
+      }
+      else{
+        $response['property_settings_lock']['lock_removed'] = $this->wpp_settings_remove_lock();
+      }
+    }
+
+    return $response;
+  }
+  /**
+   * Heartbeat filter for locking settings page.
+   *
+   * 
+   *
+   *
+   */
+
+  public function wpp_settings_lock_heartbeat_send( $response, $screen_id ){
+    // Checking if it's being edited by other user
+    if ( ( $user_id = $this->wpp_settings_check_lock() ) && ( $user = get_userdata( $user_id ) ) ) {
+      $lock_error = &$response['property_settings_lock']['lock_error'];
+      $lock_error['text'] = sprintf( __( '%s is currently editing settings.' ), $user->display_name );
+
+      if ( $avatar = get_avatar( $user->ID, 64 ) ) {
+        if ( preg_match( "|src='([^']+)'|", $avatar, $matches ) )
+          $lock_error['avatar_src'] = $matches[1];
+      }
+    }
+
+    return $response;
+  }
+
+
+  public function wpp_settings_set_lock() {
+    if ( 0 == ($user_id = get_current_user_id()) )
+      return false;
+    
+    $now = time();
+    $lock = "$now:$user_id";
+
+    update_option( 'wpp_settings_lock', $lock );
+    return array( $now, $user_id );
+  }
+
+  public function wpp_settings_remove_lock() {
+    delete_option('wpp_settings_lock');
+    return true;
+  }
+
+  public function wpp_settings_check_lock() {
+    //$lock = get_option( 'wpp_settings_lock' );
+    if ( !$lock = get_option( 'wpp_settings_lock' ) )
+      return false;
+
+    $lock = explode( ':', $lock );
+    $time = $lock[0];
+    $user = isset( $lock[1] ) ? $lock[1] : 0;
+    
+    /** This filter is similar to wp_check_post_lock_window */
+    $time_window = apply_filters( 'wpp_settings_lock_window', 150 );
+ 
+    if ( $time && $time > time() - $time_window && $user != get_current_user_id() )
+      return $user;
+    return false;
   }
 
 }

@@ -21,7 +21,7 @@ namespace UsabilityDynamics\WPP\Widgets {
      * Init
      */
     public function __construct() {
-      parent::__construct( 'wpp_property_stats', $name = sprintf( __( '%1s Attributes', ud_get_wp_property()->domain ), \WPP_F::property_label() ), array( 'description' => __( 'Widget for Single Property page that renders property attributes table.', ud_get_wp_property()->domain ) ) );
+      parent::__construct( WPP_LEGACY_WIDGETS ? 'wpp_property_stats' : 'wpp_property_stats_v2', $name = sprintf( __( '%1s Details', ud_get_wp_property()->domain ), \WPP_F::property_label() ), array( 'description' => __( 'Widget for Single Property page that renders property details.', ud_get_wp_property()->domain ) ) );
     }
 
     /**
@@ -55,6 +55,7 @@ namespace UsabilityDynamics\WPP\Widgets {
      * Renders form based on Shortcode's params
      *
      * @param array $instance
+     * @return bool|void
      */
     public function form( $instance ) {
       ?>

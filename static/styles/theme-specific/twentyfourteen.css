@@ -1,0 +1,13 @@
+@media screen and (min-width: 56.875em) {
+	.property-template-default #main{
+		margin-left: 222px;
+		padding: 30px;
+	}
+	.property-template-default #primary.wpp_sidebar_commercial_unit .wpp_widget{
+		list-style: none;
+	}
+	.property-template-default #primary.widget-area .xoxo  {
+		margin: 0 0px 24px 0px;
+	}
+}
+

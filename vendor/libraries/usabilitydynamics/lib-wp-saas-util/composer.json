@@ -1,0 +1,29 @@
+{
+  "name": "usabilitydynamics/lib-wp-saas-util",
+  "type": "library",
+  "version": "1.0.4",
+  "description": "Saas utils.",
+  "require": {},
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://repository.usabilitydynamics.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "homepage": "http://github.com/UsabilityDynamics/lib-wp-saas-util",
+  "autoload": {
+    "classmap": [
+      "lib"
+    ]
+  },
+  "config": {
+    "vendor-dir": "vendor/libraries",
+    "bin-dir": "vendor/bin",
+    "optimize-autoloader": true
+  },
+  "support": {
+    "issues": "http://github.com/UsabilityDynamics/lib-wp-saas-util/issues"
+  },
+  "license": "MIT"
+}

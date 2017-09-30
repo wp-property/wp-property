@@ -82,6 +82,10 @@ class OtherPropertiesWidget extends WP_Widget {
       $html[ ] = $before_title . $title . $after_title;
     }
 
+    if (!WPP_LEGACY_WIDGETS) {
+      $html[] = "<div class='wpp_other_properties_widget_wrapper'>";
+    }
+
     if ( $shuffle_order == 'on' ) {
       shuffle( $properties );
     }
@@ -165,6 +169,10 @@ class OtherPropertiesWidget extends WP_Widget {
 
     $html[ ] = '</div>';
 
+    if (!WPP_LEGACY_WIDGETS) {
+      $html[] = '</div>';
+    }
+
     $html[ ] = $after_widget;
 
     if ( !empty( $html[ 'widget_content' ] ) ) {
@@ -208,7 +216,7 @@ class OtherPropertiesWidget extends WP_Widget {
     <script type="text/javascript">
 
       jQuery( document ).ready( function ( $ ) {
-        jQuery( 'input.check_me_other' ).live( 'change', function () {
+        jQuery( document ).on( 'change', 'input.check_me_other', function () {
           var parent = jQuery( this ).closest( '.widget-content' );
           if ( jQuery( this ).is( ':checked' ) ) {
             jQuery( 'p.choose_thumb_other', parent ).hide();
@@ -316,7 +324,7 @@ class OtherPropertiesWidget extends WP_Widget {
  * Register widget
  */
 add_action( 'widgets_init', function() {
-  if( ud_get_wp_property( 'configuration.enable_legacy_features' ) == 'true' ) {
+  if( WPP_LEGACY_WIDGETS || ud_get_wp_property( 'configuration.enable_legacy_features' ) == 'true' ) {
     register_widget("OtherPropertiesWidget");
   }
 });

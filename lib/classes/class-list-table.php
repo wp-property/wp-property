@@ -5,9 +5,12 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use WPP_F;
+  use UsabilityDynamics\WPLT\WP_List_Table;
+
   if( !class_exists( 'UsabilityDynamics\WPP\List_Table' ) ) {
 
-    class List_Table extends \UsabilityDynamics\WPLT\WP_List_Table {
+    class List_Table extends WP_List_Table {
 
       /**
        * @param array $args
@@ -21,9 +24,9 @@ namespace UsabilityDynamics\WPP {
 
         $this->args = wp_parse_args( $args, array(
           //singular name of the listed records
-          'singular' => \WPP_F::property_label(),
+          'singular' => WPP_F::property_label(),
           //plural name of the listed records
-          'plural' => \WPP_F::property_label( 'plural' ),
+          'plural' => WPP_F::property_label( 'plural' ),
           // Post Type
           'post_type' => 'property',
           'orderby' => 'ID',
@@ -47,6 +50,7 @@ namespace UsabilityDynamics\WPP {
        * @access public
        */
       public function ajax_response() {
+        do_action('wplt::ajax_response_action');
         $response = parent::ajax_response();
         $response['pagination']['_pagination_args'] = $this->_pagination_args;
         return $response;
@@ -79,7 +83,9 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * Determines if orderby values are numeric.
-       *
+       * @param $bool
+       * @param $column
+       * @return bool
        */
       public function is_numeric_column( $bool, $column ) {
         $types = ud_get_wp_property( 'admin_attr_fields', array() );
@@ -102,7 +108,7 @@ namespace UsabilityDynamics\WPP {
           'created' => __( 'Added', ud_get_wp_property( 'domain' ) ),
           'modified' => __( 'Updated', ud_get_wp_property( 'domain' ) ),
           'featured' => __( 'Featured', ud_get_wp_property( 'domain' ) ),
-          'children' => sprintf( __( 'Child %s', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label('plural') ),
+          'related' => sprintf( __( 'Related %s', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label('plural') ),
         ) );
 
         $meta = ud_get_wp_property( 'property_stats', array() );
@@ -226,20 +232,29 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       * Return Property Type
+       * Shows Property Type
+       *
+       * - includes link to view type in admin UI
        *
        * @param $post
        * @return mixed|string
        */
       public function column_property_type( $post ) {
-        $property_types = (array)ud_get_wp_property( 'property_types' );
-        $type = get_post_meta( $post->ID, 'property_type', true );
+        $property_types = (array) ud_get_wp_property( 'property_types' );
 
-        if( isset( $type ) && is_string( $type ) && is_array( $property_types ) && !empty( $property_types[ $type ] ) ) {
-          $type = $property_types[ $type ];
+        $type_slug = $post->property_type;
+
+        if( isset( $type_slug ) && is_string( $type_slug ) && is_array( $property_types ) && !empty( $property_types[ $type_slug ] ) ) {
+          $type_label = $property_types[ $type_slug ];
         }
 
-        return !empty( $type ) ? $type : '-';
+        if( isset( $type_label ) && isset( $type_slug ) ) {
+          $_html = '<a href="' . admin_url( 'edit.php?post_type=property&page=all_properties&wpp_listing_type=' . $type_slug ) . '" target="_blank" class="wpp-type-label" data-type="' . $type_slug . '">' . $type_label . '</a>';
+        } else {
+          $_html = '-';
+        }
+
+        return $_html;
 
       }
 
@@ -312,16 +327,29 @@ namespace UsabilityDynamics\WPP {
       }
 
       /**
-       * Return Featured
+       * Return Related Properties
+       *
+       * @todo Return children and/or parents in list.
+       * @todo Use get_children()
        *
        * @param $post
        * @return mixed|string
        */
-      public function column_children( $post ) {
+      public function column_related( $post ) {
         global $wpdb;
 
         $count = 0;
         $hidden_count = 0;
+
+        $_response = array();
+
+        $_parent_id = wp_get_post_parent_id( $post->ID );
+
+        // If a parent is found and it is not same as the current property (can happen by mistake during imports) - potanin@UD
+        if( $_parent_id && $_parent_id !== 0 && $_parent_id !== $post->ID) {
+          $_parent_post = get_post($_parent_id);
+          $_response[] = '<div class="wpp-property-parent"><a href="' . get_edit_post_link($_parent_id) . '">' . $_parent_post->post_title . '</a>' . '</div>';
+        }
 
         $posts = $wpdb->get_results( "
           SELECT ID, post_title
@@ -340,15 +368,15 @@ namespace UsabilityDynamics\WPP {
               $class = 'hidden wpp_overview_hidden_stats';
               $hidden_count++;
             }
-            $data[] = '<li class="' . $class . '"><a href="' . admin_url() . 'post.php?post=' . $post['ID'] . '&action=edit">' . $post[ 'post_title' ] . '</a></li>';
+            $data[] = '<li class="' . $class . '"><a href="' . get_edit_post_link($post['ID']) . '">' . $post[ 'post_title' ] . '</a></li>';
           }
           if( $count > 3 ) {
             $data[] = '<li class="wpp_show_advanced" advanced_option_class="wpp_overview_hidden_stats">' . sprintf( __( 'Toggle %1s more.', ud_get_wp_property()->domain ), $hidden_count ) . '</li>';
           }
-          return '<div class="child-properties"><ul class="wpp_something_advanced_wrapper">' . implode( '', $data ) . '</ul>';
+          $_response[] =  '<div class="child-properties"><ul class="wpp_something_advanced_wrapper">' . implode( '', $data ) . '</ul>';
         }
 
-        return '';
+        return implode( '', $_response );
       }
 
       /**
@@ -363,6 +391,7 @@ namespace UsabilityDynamics\WPP {
 
         $wp_image_sizes = get_intermediate_image_sizes();
         $thumbnail_id = Property_Factory::get_thumbnail_id( $post->ID );
+
         if( $thumbnail_id ) {
           foreach( $wp_image_sizes as $image_name ) {
             $this_url = wp_get_attachment_image_src( $thumbnail_id, $image_name, true );
@@ -381,11 +410,11 @@ namespace UsabilityDynamics\WPP {
           $overview_thumb_type = 'thumbnail';
         }
 
-        $image_large_obj = wpp_get_image_link( $featured_image_id, 'large', array( 'return' => 'array' ) );
-        $image_thumb_obj = wpp_get_image_link( $featured_image_id, $overview_thumb_type, array( 'return' => 'array' ) );
+        $image_large_obj = wp_get_attachment_image_src( $featured_image_id, 'medium' );
+        $image_thumb_obj = wp_get_attachment_image_src( $featured_image_id, $overview_thumb_type );
 
         if( !empty( $image_large_obj ) && !empty( $image_thumb_obj ) ) {
-          $data = '<a href="' . $image_large_obj[ 'url' ] . '" class="fancybox" rel="overview_group" title="' . $post->post_title . '"><img src="' . $image_thumb_obj[ 'url' ] . '" width="' . $image_thumb_obj[ 'width' ] . '" height="' . $image_thumb_obj[ 'height' ] . '" /></a>';
+          $data = '<a href="' . $image_large_obj[ '0' ] . '" class="fancybox" rel="overview_group" title="' . $post->post_title . '"><img src="' . $image_thumb_obj[ '0' ] . '" width="' . $image_thumb_obj[ '1' ] . '" height="' . $image_thumb_obj[ '2' ] . '" /></a>';
         }
 
         return $data;
@@ -393,11 +422,17 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * Returns label for Title Column
+       * @param $post
+       * @return string|void
+       * @internal param $title
        */
       public function get_column_title_label( $title, $post ) {
         $title = get_the_title( $post );
-        if( empty( $title ) )
+
+        if( empty( $title ) ) {
           $title = __( '(no name)' );
+        }
+
         return $title;
       }
 
@@ -444,7 +479,6 @@ namespace UsabilityDynamics\WPP {
                   $unauthorized++;
                 }
               }
-
               if( $unauthorized > 0 ) {
                 $this->message = sprintf( __( 'You don\'t have permission to restore one or more selected %s.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label( 'plural' ) );
               } else{
@@ -458,6 +492,7 @@ namespace UsabilityDynamics\WPP {
               }
               $unauthorized = 0;
               $post_ids = $_REQUEST[ 'post_ids' ];
+              $unauthorized = 0;
               $trashed = 0;
               $deleted = 0;
               foreach( $post_ids as $post_id ) {
@@ -473,6 +508,7 @@ namespace UsabilityDynamics\WPP {
                   wp_trash_post( $post_id );
                 }
               }
+
               if( $unauthorized > 0 ) {
                 $this->message = sprintf( __( 'You don\'t have permission to delete one or more selected %s.', ud_get_wp_property( 'domain' ) ), \WPP_F::property_label( 'plural' ) );
               } elseif( $trashed > 0 && $deleted > 0 ) {

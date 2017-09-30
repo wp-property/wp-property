@@ -1,17 +1,17 @@
 [
     {
         "name": "composer/installers",
-        "version": "v1.1.0",
-        "version_normalized": "1.1.0.0",
+        "version": "v1.2.0",
+        "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/composer/installers.git",
-            "reference": "a3595c5272a6f247228abb20076ed27321e4aae9"
+            "reference": "d78064c68299743e0161004f2de3a0204e33b804"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/installers/zipball/a3595c5272a6f247228abb20076ed27321e4aae9",
-            "reference": "a3595c5272a6f247228abb20076ed27321e4aae9",
+            "url": "https://api.github.com/repos/composer/installers/zipball/d78064c68299743e0161004f2de3a0204e33b804",
+            "reference": "d78064c68299743e0161004f2de3a0204e33b804",
             "shasum": ""
         },
         "require": {
@@ -25,7 +25,7 @@
             "composer/composer": "1.0.*@dev",
             "phpunit/phpunit": "4.1.*"
         },
-        "time": "2016-07-05 06:18:20",
+        "time": "2016-08-13T20:53:52+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "Composer\\Installers\\Plugin",
@@ -60,6 +60,7 @@
             "MODX Evo",
             "Mautic",
             "OXID",
+            "Plentymarkets",
             "RadPHP",
             "SMF",
             "Thelia",
@@ -67,9 +68,11 @@
             "agl",
             "aimeos",
             "annotatecms",
+            "attogram",
             "bitrix",
             "cakephp",
             "chef",
+            "cockpit",
             "codeigniter",
             "concrete5",
             "croogo",
@@ -93,12 +96,14 @@
             "piwik",
             "ppi",
             "puppet",
+            "reindex",
             "roundcube",
             "shopware",
             "silverstripe",
             "symfony",
             "typo3",
             "wordpress",
+            "yawik",
             "zend",
             "zikula"
         ]
@@ -237,44 +242,6 @@
         ]
     },
     {
-        "name": "usabilitydynamics/lib-wp-bootstrap",
-        "version": "1.2.1",
-        "version_normalized": "1.2.1.0",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:UsabilityDynamics/lib-wp-bootstrap",
-            "reference": "1.2.1"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.2.1.zip",
-            "reference": "1.2.1",
-            "shasum": null
-        },
-        "require": {
-            "php": ">=5.3",
-            "usabilitydynamics/lib-utility": "~0.3"
-        },
-        "type": "library",
-        "extra": {
-            "installer-name": "lib-wp-bootstrap"
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "lib/classes"
-            ]
-        },
-        "license": [
-            "MIT"
-        ],
-        "description": "Wordpress bootstrap library created by UsabilityDynamics",
-        "homepage": "https://github.com/UsabilityDynamics/lib-wp-bootstrap",
-        "keywords": [
-            "wordpress"
-        ]
-    },
-    {
         "name": "usabilitydynamics/lib-ud-api-client",
         "version": "1.1.5.1",
         "version_normalized": "1.1.5.1",
@@ -296,7 +263,7 @@
         "extra": {
             "installer-name": "lib-ud-api-client"
         },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "classmap": [
                 "lib/classes"
@@ -487,18 +454,18 @@
         }
     },
     {
-        "name": "usabilitydynamics/wp-meta-box",
-        "version": "4.5.2.1",
-        "version_normalized": "4.5.2.1",
+        "name": "usabilitydynamics/wp-tax-post-binding",
+        "version": "2.0.5",
+        "version_normalized": "2.0.5.0",
         "source": {
             "type": "git",
-            "url": "git@github.com:UsabilityDynamics/wp-meta-box",
-            "reference": "4.5.2.1"
+            "url": "git@github.com:UsabilityDynamics/wp-tax-post-binding",
+            "reference": "2.0.5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/wp-meta-box/archive/4.5.2.1.zip",
-            "reference": "4.5.2.1",
+            "url": "https://github.com/UsabilityDynamics/wp-tax-post-binding/archive/2.0.5.zip",
+            "reference": "2.0.5",
             "shasum": null
         },
         "require": {
@@ -506,20 +473,12 @@
         },
         "type": "wordpress-plugin",
         "extra": {
-            "installer-name": "wp-meta-box"
+            "installer-name": "wp-tax-post-binding"
         },
         "installation-source": "dist",
         "autoload": {
-            "files": [
-                "meta-box-loader.php"
-            ],
             "classmap": [
-                "inc/fields",
-                "inc/common.php",
-                "inc/field.php",
-                "inc/field-multiple-values.php",
-                "inc/helpers.php",
-                "inc/meta-box.php"
+                "lib"
             ]
         },
         "license": [
@@ -527,93 +486,287 @@
         ],
         "authors": [
             {
-                "name": "Tran Ngoc Tuan Anh",
-                "email": "rilwis@gmail.com",
-                "homepage": "http://www.deluxeblogtips.com/",
+                "name": "Crowd Favorite",
+                "homepage": "http://crowdfavorite.com"
+            },
+            {
+                "name": "UsabilityDynamics",
+                "email": "maxim.peshkov@usabilitydynamics.com",
+                "homepage": "https://www.usabilitydynamics.com/",
                 "role": "Developer"
             }
         ],
-        "description": "Easily create custom meta boxes in WordPress.",
-        "homepage": "http://www.deluxeblogtips.com/meta-box/",
+        "description": "A WordPress plugin that provides extended functionality for taxonomies such as post meta and featured image through creating a custom post type and associating it to that taxonomy.",
         "keywords": [
-            "meta-box",
-            "select2",
-            "ui",
+            "taxonomy",
+            "term",
             "wordpress",
-            "wordpress-plugin",
-            "wp-admin"
+            "wordpress-plugin"
         ]
     },
     {
-        "name": "usabilitydynamics/wp-meta-box-utilities",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
+        "name": "usabilitydynamics/lib-wp-saas-util",
+        "version": "1.0.5",
+        "version_normalized": "1.0.5.0",
         "source": {
             "type": "git",
-            "url": "git@github.com:UsabilityDynamics/wp-meta-box-utilities",
-            "reference": "1.0.2"
+            "url": "git@github.com:UsabilityDynamics/lib-wp-saas-util",
+            "reference": "1.0.5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/wp-meta-box-utilities/archive/1.0.2.zip",
-            "reference": "1.0.2",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-saas-util/archive/1.0.5.zip",
+            "reference": "1.0.5",
             "shasum": null
         },
-        "require": {
-            "composer/installers": "~1.0"
-        },
-        "type": "wordpress-plugin",
+        "type": "library",
         "extra": {
-            "installer-name": "wp-meta-box-utilities"
+            "installer-name": "lib-wp-saas-util"
         },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
-            "files": [
-                "wp-meta-box-utilities.php"
+            "classmap": [
+                "lib"
             ]
         },
         "license": [
             "MIT"
         ],
-        "description": "Set of Utilities to extend default Meta Box plugin functionality in WordPress.",
-        "keywords": [
-            "meta-box",
-            "select2",
-            "ui",
-            "wordpress",
-            "wordpress-plugin",
-            "wp-admin"
-        ]
+        "description": "Saas utils.",
+        "homepage": "http://github.com/UsabilityDynamics/lib-wp-saas-util",
+        "support": {
+            "issues": "http://github.com/UsabilityDynamics/lib-wp-saas-util/issues"
+        }
     },
     {
-        "name": "usabilitydynamics/wp-gallery-metabox",
-        "version": "2.0.1",
-        "version_normalized": "2.0.1.0",
+        "name": "usabilitydynamics/lib-wp-bootstrap",
+        "version": "1.2.1",
+        "version_normalized": "1.2.1.0",
         "source": {
             "type": "git",
-            "url": "git@github.com:UsabilityDynamics/wp-gallery-metabox",
-            "reference": "2.0.1"
+            "url": "git@github.com:UsabilityDynamics/lib-wp-bootstrap",
+            "reference": "1.2.1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/wp-gallery-metabox/archive/2.0.1.zip",
-            "reference": "2.0.1",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.2.1.zip",
+            "reference": "1.2.1",
             "shasum": null
         },
         "require": {
-            "composer/installers": "~1.0",
-            "php": ">=5.3"
+            "php": ">=5.3",
+            "usabilitydynamics/lib-utility": "~0.3"
         },
-        "require-dev": {
-            "codeclimate/php-test-reporter": "dev-master",
-            "usabilitydynamics/lib-wp-phpunit": "master"
-        },
-        "type": "wordpress-plugin",
+        "type": "library",
         "extra": {
-            "installer-name": "wp-gallery-metabox"
+            "installer-name": "lib-wp-bootstrap"
         },
         "installation-source": "dist",
         "autoload": {
+            "classmap": [
+                "lib/classes"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "Wordpress bootstrap library created by UsabilityDynamics",
+        "homepage": "https://github.com/UsabilityDynamics/lib-wp-bootstrap",
+        "keywords": [
+            "wordpress"
+        ]
+    },
+    {
+        "name": "ccampbell/chromephp",
+        "version": "4.1.0",
+        "version_normalized": "4.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ccampbell/chromephp.git",
+            "reference": "c3c297615d48ae5b2a86a82311152d1ed095fcef"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/ccampbell/chromephp/zipball/c3c297615d48ae5b2a86a82311152d1ed095fcef",
+            "reference": "c3c297615d48ae5b2a86a82311152d1ed095fcef",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.0.0"
+        },
+        "time": "2013-06-26T03:44:33+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "ChromePhp": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Craig Campbell",
+                "email": "iamcraigcampbell@gmail.com",
+                "homepage": "http://craig.is",
+                "role": "Developer"
+            }
+        ],
+        "description": "Log variables to the Chrome console (via Chrome Logger Google Chrome extension).",
+        "homepage": "http://github.com/ccampbell/chromephp",
+        "keywords": [
+            "log",
+            "logging"
+        ]
+    },
+    {
+        "name": "freemius/wordpress-sdk",
+        "version": "1.2.1.6",
+        "version_normalized": "1.2.1.6",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Freemius/wordpress-sdk.git",
+            "reference": "a3f3af732acbd4fe0f040e911b6cf190e0d3d4cb"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Freemius/wordpress-sdk/zipball/a3f3af732acbd4fe0f040e911b6cf190e0d3d4cb",
+            "reference": "a3f3af732acbd4fe0f040e911b6cf190e0d3d4cb",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2"
+        },
+        "time": "2017-03-10T21:26:29+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "description": "Freemius WordPress SDK",
+        "homepage": "https://freemius.com",
+        "keywords": [
+            "freemius",
+            "plugin",
+            "sdk",
+            "wordpress"
+        ]
+    },
+    {
+        "name": "10up/elasticpress",
+        "version": "2.2.1",
+        "version_normalized": "2.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/10up/ElasticPress.git",
+            "reference": "157e65b112d90bcc15e532dc33f86592805cdb13"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/10up/ElasticPress/zipball/157e65b112d90bcc15e532dc33f86592805cdb13",
+            "reference": "157e65b112d90bcc15e532dc33f86592805cdb13",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "*@stable",
+            "wp-cli/wp-cli": "*@stable",
+            "wpackagist-plugin/woocommerce": "dev-trunk"
+        },
+        "time": "2017-03-30T13:49:12+00:00",
+        "type": "wordpress-plugin",
+        "extra": {
+            "installer-paths": {
+                "vendor/{$name}/": [
+                    "type:wordpress-plugin",
+                    "type:wordpress-theme"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPLv2"
+        ],
+        "authors": [
+            {
+                "name": "Aaron Holbrook",
+                "email": "aaron@10up.com",
+                "homepage": "http://aaronjholbrook.com"
+            },
+            {
+                "name": "10up",
+                "homepage": "http://10up.com"
+            },
+            {
+                "name": "Taylor Lovett",
+                "email": "taylorl@get10up.com"
+            }
+        ],
+        "description": "Supercharge WordPress with Elasticsearch.",
+        "keywords": [
+            "elasticpress",
+            "elasticsearch",
+            "plugin",
+            "search",
+            "wordpress"
+        ]
+    },
+    {
+        "name": "rets-ci/wp-rets-client",
+        "version": "dev-latest",
+        "version_normalized": "dev-latest",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:rets-ci/wp-rets-client",
+            "reference": "latest"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/rets-ci/wp-rets-client/archive/latest.zip",
+            "reference": "latest",
+            "shasum": null
+        },
+        "archive": {
+            "exclude": [
+                "node_modules",
+                ".gitignore",
+                "test",
+                "circle.yml",
+                "composer.lock",
+                "gruntfile.js",
+                "package.json"
+            ]
+        },
+        "require": {
+            "php": ">=5.3",
+            "usabilitydynamics/lib-utility": "0.3.7",
+            "usabilitydynamics/lib-wp-bootstrap": "1.2.1",
+            "usabilitydynamics/lib-wp-saas-util": "1.0.5"
+        },
+        "type": "wordpress-plugin",
+        "extra": {
+            "saasProduct": "prod_ADfpGniA1kxNep",
+            "schemas": {
+                "dependencies": {
+                    "modules": [],
+                    "plugins": []
+                },
+                "licenses": []
+            },
+            "installer-name": "wp-rets-client"
+        },
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "lib/classes",
+                "lib/connectors"
+            ],
             "files": [
                 "loader.php"
             ]
@@ -621,7 +774,6 @@
         "license": [
             "MIT"
         ],
-        "description": "WP Repository plugin.",
         "homepage": "https://usabilitydynamics.com"
     }
 ]

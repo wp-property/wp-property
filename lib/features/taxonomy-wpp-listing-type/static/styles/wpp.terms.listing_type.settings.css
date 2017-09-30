@@ -1,0 +1,4 @@
+#wpp_inquiry_property_types.active-wpp-listing-type-terms .wpp_delete_row,
+#wpp_inquiry_property_types.active-wpp-listing-type-terms tfoot {
+  display: none;
+}

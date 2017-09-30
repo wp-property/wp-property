@@ -24,11 +24,11 @@ global $wp_properties;
   <tbody>
   <?php 
   if(empty($wp_properties[ 'property_meta' ])){
-	  $wp_properties[ 'property_meta' ] = array("first" => "");
+	  $wp_properties[ 'property_meta' ] = array("" => "");
   }
   foreach( $wp_properties[ 'property_meta' ] as $slug => $label ): ?>
 
-    <tr class="wpp_dynamic_table_row" slug="<?php echo $slug; ?>" new_row='false' style="<?php echo( empty( $label ) ? "display:none;" : ""); ?>">
+    <tr class="wpp_dynamic_table_row" slug="<?php echo $slug; ?>" new_row='false' style="<?php echo( empty( $slug ) ? "display:none;" : ""); ?>">
       <th class='wpp_draggable_handle'>&nbsp;</th>
       <td>
         <ul>

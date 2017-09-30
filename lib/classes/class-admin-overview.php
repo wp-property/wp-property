@@ -6,6 +6,9 @@
  */
 namespace UsabilityDynamics\WPP {
 
+  use WPP_F;
+  use UsabilityDynamics\UI;
+
   if (!class_exists('UsabilityDynamics\WPP\Admin_Overview')) {
 
     /**
@@ -38,7 +41,7 @@ namespace UsabilityDynamics\WPP {
         global $wp_properties, $submenu;
 
         /* Add submenu page using already existing UI for overview page */
-        $this->page = new \UsabilityDynamics\UI\Page( 'edit.php?post_type=property', $this->get( 'labels.all_items' ), $this->get( 'labels.all_items' ), 'edit_wpp_properties', 'all_properties' );
+        $this->page = new UI\Page( 'edit.php?post_type=property', $this->get( 'labels.all_items' ), $this->get( 'labels.all_items' ), 'edit_wpp_properties', 'all_properties' );
 
         add_action( 'load-' . $this->page->screen_id, array( $this, 'preload' ) );
         /* Register meta boxes */
@@ -145,11 +148,11 @@ namespace UsabilityDynamics\WPP {
             'map' => array(
               'class' => 'post'
             ),
-            'options' => array( 0 => __( 'All', ud_get_wp_property()->domain ) ) + (array)\WPP_F::get_users_of_post_type('property')
+            'options' => array( 0 => __( 'All', ud_get_wp_property()->domain ) ) + (array) WPP_F::get_users_of_post_type('property')
           ),
           array(
             'id' => 'property_type',
-            'name' => sprintf( __( '%s Type', $this->get('domain') ), \WPP_F::property_label( 'plural' ) ),
+            'name' => sprintf( __( '%s Type', $this->get('domain') ), WPP_F::property_label( 'plural' ) ),
             'type' => 'select_advanced',
             'js_options' => array(
               'allowClear' => true,
@@ -204,11 +207,13 @@ namespace UsabilityDynamics\WPP {
         $search_types = ud_get_wp_property( 'searchable_attr_fields', array() );
         $entry_types = ud_get_wp_property( 'admin_attr_fields', array() );
         $search_schema = ud_get_wp_property('attributes.searchable', array());
+
         foreach( $searchable_attributes as $attribute ) {
           /** Ignore current attribute if field with the same name already exists */
           if( in_array( $attribute, $defined ) ) {
             continue;
           }
+
           /**
            * Determine if type is searchable:
            *
@@ -218,17 +223,22 @@ namespace UsabilityDynamics\WPP {
            * - be searchable
            * - have valid 'Search Input'. See schema: ud_get_wp_property('attributes.searchable', array())
            */
-          if(
-            empty( $entry_types[ $attribute ] ) ||
-            empty( $search_schema[ $entry_types[ $attribute ] ] ) ||
-            !in_array( $search_types[ $attribute ], $search_schema[ $entry_types[ $attribute ] ] )
-          ) {
+          if( !isset( $attribute ) || !isset( $entry_types[ $attribute ] ) || empty( $entry_types[ $attribute ] ) ) {
+            continue;
+          }
+          
+          if( !isset( $search_schema[ $entry_types[ $attribute ] ] ) || empty( $search_schema[ $entry_types[ $attribute ] ] ) ) {
+            continue;
+          }
+
+          if( !isset( $search_types[ $attribute ] ) || !isset( $entry_types[ $attribute ] ) || !in_array( $search_types[ $attribute ], $search_schema[ $entry_types[ $attribute ] ] ) ) {
             continue;
           }
 
           $type = $search_types[ $attribute ];
           $options = array();
           $map = array();
+
           /** Maybe Convert input types to valid ones and prepare options. */
           switch($type) {
             case 'input':
@@ -241,11 +251,11 @@ namespace UsabilityDynamics\WPP {
             case 'range_dropdown':
             case 'advanced_range_dropdown':
             case 'dropdown':
-              $values = \WPP_F::get_all_attribute_values( $attribute );
+              $values = WPP_F::get_all_attribute_values( $attribute );
               $type = 'select_advanced';
               break;
             case 'multi_checkbox':
-              $values = \WPP_F::get_all_attribute_values( $attribute );
+              $values = WPP_F::get_all_attribute_values( $attribute );
               $type = 'checkbox_list';
               break;
           }
@@ -309,7 +319,7 @@ namespace UsabilityDynamics\WPP {
       public function add_meta_boxes() {
         $screen = get_current_screen();
         add_meta_box( 'posts_list', __('Overview',ud_get_wp_property('domain')), array($this, 'render_list_table'), $screen->id,'normal');
-        add_meta_box( 'posts_filter', sprintf( __('%s Search',ud_get_wp_property('domain')), \WPP_F::property_label('plural') ), array($this, 'render_filter'), $screen->id,'side');
+        add_meta_box( 'posts_filter', sprintf( __('%s Search',ud_get_wp_property('domain')), WPP_F::property_label('plural') ), array($this, 'render_filter'), $screen->id,'side');
       }
 
       /**
@@ -335,11 +345,11 @@ namespace UsabilityDynamics\WPP {
        */
       public function get_post_statuses() {
         $all   = 0;
-        $_attrs = \WPP_F::get_all_attribute_values('post_status');
+        $_attrs = WPP_F::get_all_attribute_values('post_status');
         $attrs = array();
         if( is_array( $_attrs ) ) {
           foreach( $_attrs as $attr ) {
-            $count = \WPP_F::get_properties_quantity( array( $attr ) );
+            $count = WPP_F::get_properties_quantity( array( $attr ) );
             switch( $attr ) {
               case 'publish':
                 $label = __( 'Published', $this->get('domain') );
@@ -359,13 +369,14 @@ namespace UsabilityDynamics\WPP {
                 $label = strtoupper( substr( $attr, 0, 1 ) ) . substr( $attr, 1, strlen( $attr ) );
                 $all += $count;
             }
-            $attrs[ $attr ] = $label . ' (' . \WPP_F::format_numeric( $count ) . ')';
+            $attrs[ $attr ] = $label . ' (' . WPP_F::format_numeric( $count ) . ')';
           }
         } else {
           return array();
         }
-        $attrs[ 'any' ] = __( 'Any', $this->get('domain') ) . ' (' . \WPP_F::format_numeric( $all ) . ')';
+        $attrs[ 'any' ] = __( 'Any', $this->get('domain') ) . ' (' . WPP_F::format_numeric( $all ) . ')';
         ksort( $attrs );
+        $attrs = apply_filters('admin_overview_post_statuses', $attrs);
         return $attrs;
       }
 

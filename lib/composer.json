@@ -1,0 +1,48 @@
+{
+  "minimum-stability": "dev",
+  "config": {
+    "preferred-install": "dist",
+    "github-protocols": [ "ssh" ],
+    "vendor-dir": "autoload",
+    "optimize-autoloader": true
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://repository.usabilitydynamics.com/"
+    }
+  ],
+  "require": {
+    "composer/installers": "*",
+    "wp-property/wp-property-supermap": "dev-feature"
+  },
+  "autoload": {
+    "classmap": [
+      "features/legacy-meta-attributes",
+      "features/elasticsearch",
+      "features/field-alias",
+      "features/taxonomy-wpp-listing-type",
+      "features/taxonomy-wpp-listing-status",
+      "features/taxonomy-wpp-listing-label",
+      "features/taxonomy-wpp-listing-policy",
+      "features/taxonomy-wpp-listing-category",
+      "features/taxonomy-wpp-location",
+      "features/taxonomy-wpp-schools",
+      "features/taxonomy-wpp-categorical"
+    ]
+  },
+  "extra": {
+    "_build": {},
+    "installer-paths": {
+      "features/{$name}": [
+        "type:wordpress-muplugin",
+        "type:wordpress-plugin",
+        "type:wpackagist-plugin"
+      ],
+      "etc/{$name}": [
+        "type:wordpress-module",
+        "type:wordpress-library"
+      ]
+    }
+  }
+}

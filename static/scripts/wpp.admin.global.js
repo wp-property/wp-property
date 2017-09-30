@@ -8,6 +8,61 @@
 if( !wpp ) {
 }
 
+var __ = {};
+if(_.name == 'lodash'){
+  __ = _.noConflict();
+}
+
+_.wppSelected = function(selected, current) {
+  var result = '';
+  current = current || true;
+
+  if ( selected === current )
+    result = " selected='selected' ";
+
+  return result;
+}
+
+// Only usable in settings page  
+_.wppChecked = function(obj, property, val) {
+  var result = '';
+  var items = __.get(obj, property, []);
+
+  if ( (val === false && items) || _.contains(items, val)){
+    result = " CHECKED ";
+  }
+
+  return result;
+}
+
+// Only usable in settings page  
+_.wppMarkerUrl = function(marker_slug, supermap_configuration, wpp_supermap_default_marker, default_google_map_marker) {
+  var regex = /(http|https):\/\//;
+  var marker_url = '';
+
+  console.log(marker_slug);
+  if(!marker_slug || marker_slug == 'undefined'){
+    marker_slug = __.get(supermap_configuration, 'default_marker', '');
+  }
+
+  if(marker_slug == ''){
+    return wpp_supermap_default_marker;
+  }
+  else if(marker_slug == 'default_google_map_marker'){
+    return default_google_map_marker;
+  }
+  else if(marker_slug && regex.exec(marker_slug)){
+    return marker_slug;
+  }
+  
+  marker_url = __.get(supermap_configuration, ['markers', marker_slug, 'file'], '');
+  console.log(marker_slug, marker_url);
+
+
+
+  return marker_url;
+}
+
 /**
  * Assign Property Stat to Group Functionality
  *
@@ -19,6 +74,7 @@ jQuery.fn.wppGroups = function(opt) {
   instance = jQuery(this),
   //* Default params */
   defaults = {
+    elementClass: '.wpp_attribute_group',
     groupsBox: '#wpp_attribute_groups',
     groupWrapper: '#wpp_dialog_wrapper_for_groups',
     closeButton: '.wpp_close_dialog',
@@ -28,7 +84,19 @@ jQuery.fn.wppGroups = function(opt) {
     sortButton: ".sort_stats_by_groups"
   };
 
+  if(instance.length == 0)
+    return;
+  
   opt = jQuery.extend({}, defaults, opt);
+
+  // get element class
+  var elementClass = opt.elementClass;
+  if (instance.length > 0) {
+    elementClass = instance.attr('class');
+    elementClass = elementClass.replace(/\s/ig, '.');
+    elementClass = elementClass.split('.')[0];
+    elementClass = '.' + elementClass;
+  }
 
   //* Determine if dialog Wrapper exist */
   if(!jQuery(opt.groupWrapper).length > 0) {
@@ -37,8 +105,6 @@ jQuery.fn.wppGroups = function(opt) {
 
   var
   groupsBlock = jQuery(opt.groupsBox),
-  statsRow = instance.parent().parent(),
-  statsTable = instance.parents('.wpp_inquiry_attribute_fields'),
   close = jQuery(opt.closeButton, groupsBlock),
   assign = jQuery(opt.assignButton),
   unassign = jQuery(opt.unassignButton),
@@ -58,73 +124,77 @@ jQuery.fn.wppGroups = function(opt) {
   closeGroupBox = function () {
     groupsBlock.hide(300);
     wrapper.css('display','none');
-
-    statsRow.each(function(i, e){
+    var row = jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row');
+    row.each(function(i, e){
       jQuery(e).removeClass('groups_active');
-    })
+    });
+
+    jQuery.each(colorpicker, function(i, e) {
+      var _this = jQuery(e);
+      var gslug = _this.parent().parent().find('.slug').val();
+      console.log(gslug);
+      console.log(_this.val());
+      console.log(row.filter('tr[wpp_attribute_group=' + gslug + ']'));
+      row.filter('tr[wpp_attribute_group=' + gslug + ']').css('background-color', _this.val());
+    });
   };
 
   //* EVENTS */
-  instance.live('click', function(){
+  jQuery(document).on('click', elementClass, function(){
     showGroupBox();
     jQuery(this).parent().parent().addClass('groups_active');
   });
 
-  instance.live('focus', function(){
+  jQuery(document).on('focus', elementClass, function(){
     jQuery(this).trigger('blur');
   });
 
   //* Close Group Box */
-  close.live('click', function(){
+  jQuery(groupsBlock).on('click', opt.closeButton, function(){
     closeGroupBox();
   });
 
   //* Assign attribute to Group */
-  assign.live('click', function(){
+  jQuery(document).on('click', opt.assignButton, function(){
     var row = jQuery(this).parent().parent();
-    statsRow.each(function(i,e){
-      if(jQuery(e).hasClass('groups_active')) {
-        jQuery(e).css('background-color', jQuery('input.wpp_input_colorpicker' , row).val());
 
-        //* HACK FOR IE7 */
-        if(typeof jQuery.browser.msie != 'undefined' && (parseInt(jQuery.browser.version) == 7)) {
-          jQuery(e).find('td').css('background-color', jQuery('input.wpp_input_colorpicker' , row).val());
-        }
+    var active_groups = jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row.groups_active');
+    active_groups.css('background-color', jQuery('input.wpp_input_colorpicker' , row).val());
 
-        jQuery(e).attr('wpp_attribute_group' , row.attr('slug'));
-        jQuery('input.wpp_group_slug' , e).val(row.attr('slug'));
+    //* HACK FOR IE7 */
+    if(typeof jQuery.browser.msie != 'undefined' && (parseInt(jQuery.browser.version) == 7)) {
+      active_groups.find('td').css('background-color', jQuery('input.wpp_input_colorpicker' , row).val());
+    }
 
-        var groupName = jQuery('input.slug_setter' , row).val();
-        if(groupName == '') {
-          groupName = 'NO NAME';
-        }
+    active_groups.attr('wpp_attribute_group' , row.attr('slug'));
+    jQuery('input.wpp_group_slug' , active_groups).val(row.attr('slug'));
 
-        jQuery('input.wpp_attribute_group' , e).val(groupName);
-      }
-    });
+    var groupName = jQuery('input.slug_setter' , row).val();
+    if(groupName == '') {
+      groupName = 'NO NAME';
+    }
+
+    jQuery('input.wpp_attribute_group' , active_groups).val(groupName);
     closeGroupBox();
   });
 
   //* Unassign attribute from Group */
-  unassign.live('click', function(){
-    statsRow.each(function(i,e){
-      if(jQuery(e).hasClass('groups_active')) {
-        jQuery(e).css('background-color', '');
-        //* HACK FOR IE7 */
-        if(typeof jQuery.browser.msie != 'undefined' && (parseInt(jQuery.browser.version) == 7)) {
-          jQuery(e).find('td').css('background-color', '');
-        }
+  jQuery(document).on('click', opt.unassignButton, function(){
+    var active_groups = jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row.groups_active');
+    jQuery(active_groups).css('background-color', '');
+    //* HACK FOR IE7 */
+    if(typeof jQuery.browser.msie != 'undefined' && (parseInt(jQuery.browser.version) == 7)) {
+      jQuery(active_groups).find('td').css('background-color', '');
+    }
 
-        jQuery(e).removeAttr('wpp_attribute_group');
-        jQuery('input.wpp_group_slug' , e).val('');
-        jQuery('input.wpp_attribute_group' , e).val('');
-      }
-    });
+    jQuery(active_groups).removeAttr('wpp_attribute_group');
+    jQuery('input.wpp_group_slug' , active_groups).val('');
+    jQuery('input.wpp_attribute_group' , active_groups).val('');
     closeGroupBox();
   });
 
   //* Refresh background of all attributes on color change */
-  colorpicker.live('change', function(){
+  jQuery(groupsBlock).on('change', 'input.wpp_input_colorpicker', function(){
     var cp = jQuery(this);
     var s = cp.parent().parent().attr('slug');
     instance.each(function(i,e){
@@ -139,7 +209,7 @@ jQuery.fn.wppGroups = function(opt) {
   });
 
   //* Refresh Group Name field of all assigned attributes on group name change */
-  groupname.live('change', function(){
+  jQuery(groupsBlock).on('change', 'input.slug_setter', function(){
     var gn = ( jQuery(this).val() != '' ) ? jQuery(this).val() : 'NO NAME';
     var s = jQuery(this).parent().parent().attr('slug');
     instance.each(function(i,e){
@@ -150,7 +220,7 @@ jQuery.fn.wppGroups = function(opt) {
   });
 
   //* Remove group from the list */
-  remove.live('click', function(){
+  jQuery(groupsBlock).on('click', opt.removeButton, function(){
     var s = jQuery(this).parent().parent().attr('slug');
     instance.each(function(i,e){
       if(s == jQuery(e).next().val()) {
@@ -166,13 +236,14 @@ jQuery.fn.wppGroups = function(opt) {
   });
 
   //* Close Groups Box on wrapper click */
-  wrapper.live('click', function(){
+  jQuery(document).on('click', opt.groupWrapper, function(){
     closeGroupBox();
   });
 
   //* Sorts all attributes by Groups */
-  sortButton.live('click', function(){
+  jQuery(document).on('click', opt.sortButton, function(){
     jQuery('tbody tr' , groupsBlock).each(function(gi,ge){
+      var statsRow = jQuery('.wpp_inquiry_attribute_fields .wpp_dynamic_table_row');
       statsRow.each(function(si,se){
         if(typeof jQuery(se).attr('wpp_attribute_group') != 'undefined') {
           if(jQuery(se).attr('wpp_attribute_group') == jQuery(ge).attr('slug')) {
@@ -184,13 +255,14 @@ jQuery.fn.wppGroups = function(opt) {
       });
     });
 
-    var sortlist = jQuery('tbody' , statsTable);
-    sortlist.each( function( i, e ){
+    jQuery( '.wpp_inquiry_attribute_fields tbody' ).each( function( i, e ){
       var currentlist = jQuery(e);
       var listitems = currentlist.children('tr').get();
       listitems.sort(function(a, b) {
         var compA = parseFloat(jQuery(a).attr('sortpos'));
         var compB = parseFloat(jQuery(b).attr('sortpos'));
+        if( isNaN( compA ) ) compA = 9999;
+        if( isNaN( compB ) ) compB = 9999;
         return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
       });
       jQuery.each(listitems, function(idx, itm) {
@@ -202,15 +274,6 @@ jQuery.fn.wppGroups = function(opt) {
 
   });
 
-  //* HACK FOR IE7 */
-  //* Set background-color for assigned attributes */
-  if(typeof jQuery.browser.msie != 'undefined' && (parseInt(jQuery.browser.version) == 7)) {
-    var sortlist = jQuery('tbody' , statsTable);
-    var listitems = sortlist.children('tr').get();
-    jQuery.each(listitems, function(i, e) {
-      jQuery(e).find('td').css('background-color', jQuery(e).css('background-color'));
-    });
-  }
 }
 
 /**
@@ -271,7 +334,7 @@ var updateRowNames = function(instance, allowRandomSlug) {
 
   var this_row = jQuery(instance).parents('tr.wpp_dynamic_table_row');
   // Slug of row in question
-  var old_slug = jQuery(this_row).attr('slug');
+  var old_slug = jQuery(this_row).attr('data-slug') || jQuery(this_row).attr('slug');
   // Get data from input.slug_setter
   var new_slug = jQuery(instance).val();
 
@@ -355,7 +418,7 @@ var updateRowNames = function(instance, allowRandomSlug) {
  * Copyright 2011 Usability Dynamics, Inc. <info@usabilitydynamics.com>
  */
 function toggle_advanced_options() {
-  jQuery(".wpp_show_advanced").live("click", function() {
+  jQuery(document).on("click", ".wpp_show_advanced", function() {
     var advanced_option_class = false;
     var show_type = false;
     var show_type_element_attribute = false;
@@ -466,7 +529,13 @@ function wpp_add_row(element,hides) {
   }
 
   //* Clone last row */
-  var cloned = jQuery(".wpp_dynamic_table_row:last", table).clone();
+  var cloned;
+  if(table.data('newRow')){
+    cloned = table.data('newRow').clone();
+  }
+  else{
+    cloned = jQuery(".wpp_dynamic_table_row:last", table).clone();
+  }
 
   //return;
   //* Set unique 'id's and 'for's for elements of the new row */
@@ -511,6 +580,14 @@ function wpp_add_row(element,hides) {
     }
   }
 
+  //* Blank out all values */
+  jQuery("textarea", cloned).val('');
+  jQuery("select", cloned).val('');
+  jQuery("input[type=text]", cloned).val('');
+  jQuery("input[type=checkbox]", cloned).attr('checked', false);
+  jQuery("input[type=radio]", cloned).val('');
+  jQuery("input[type=radio]", cloned).attr('checked', false);
+
   //* Insert new row after last one */
   jQuery(cloned).appendTo(table);
 
@@ -526,11 +603,8 @@ function wpp_add_row(element,hides) {
    jQuery(added_row).show();
   }
 
-  //* Blank out all values */
-  jQuery("textarea", added_row).val('');
-  jQuery("select", added_row).val('');
-  jQuery("input[type=text]", added_row).val('');
-  jQuery("input[type=checkbox]", added_row).attr('checked', false);
+  //* Remove hidden cass from delete button if the button of last row was hidden. */
+  jQuery(".wpp_delete_row", added_row).removeClass('hidden');
 
   //* Unset 'new_row' attribute */
   jQuery(added_row).attr('new_row', 'true');
@@ -672,7 +746,7 @@ jQuery(document).ready(function() {
   toggle_advanced_options();
 
   //* Easy way of displaying the contextual help dropdown */
-  jQuery(".wpp_toggle_contextual_help").live("click", function( event ) {
+  jQuery(document).on("click", ".wpp_toggle_contextual_help", function( event ) {
     wpp_toggle_contextual_help(this , event );
   });
 
@@ -689,20 +763,24 @@ jQuery(document).ready(function() {
   bindColorPicker();
 
   // Add row to UD UI Dynamic Table
-  jQuery(".wpp_add_row").live("click" , function() {
+  jQuery(document).on("click", ".wpp_add_row", function() {
     wpp_add_row(this);
   });
 
   // When the .slug_setter input field is modified, we update names of other elements in row
-  jQuery(".wpp_dynamic_table_row[new_row=true] input.slug_setter").live("keyup", function() {
+  jQuery(document).on("keyup", ".wpp_dynamic_table_row[new_row=true] input.slug_setter", function() {
     updateRowNames(this, true);
   });
-  jQuery(".wpp_dynamic_table_row[new_row=true] select.slug_setter").live("change", function() {
+  jQuery(document).on("change", ".wpp_dynamic_table_row[new_row=true] select.slug_setter", function() {
     updateRowNames(this, true);
   });
 
   // Delete dynamic row
-  jQuery(".wpp_delete_row").live("click", function() {
+  jQuery(document).on("click", ".wpp_delete_row", function(event) {
+    event.preventDefault();
+    if(jQuery(this).hasClass('disabled'))
+      return false;
+
     var parent = jQuery(this).parents('tr.wpp_dynamic_table_row');
     var table = jQuery(jQuery(this).parents('table').get(0));
     var row_count = table.find(".wpp_delete_row").length;
@@ -713,23 +791,25 @@ jQuery(document).ready(function() {
     // Blank out all values
     jQuery("input[type=text]", parent).val('');
     jQuery("input[type=checkbox]", parent).attr('checked', false);
+    jQuery("input[type=radio]", parent).val('');
+    jQuery("input[type=radio]", parent).attr('checked', false);
     // Don't hide last row
     if(row_count > 1) {
       jQuery(parent).hide();
       jQuery(parent).remove();
     } else {
 	   if(jQuery(table).hasClass('last_delete_row')){
-	    wpp_add_row(this,true);
-            jQuery(parent).remove();
+	       wpp_add_row(this);
+         jQuery(parent).remove();
 	   } else{
-            jQuery(parent).attr( 'new_row', 'true' );
+         jQuery(parent).attr( 'new_row', 'true' );
 	   }
     }
 
     table.trigger('row_removed', [parent]);
   });
 
-  jQuery('.wpp_attach_to_agent').live('click', function(){
+  jQuery(document).on('click', '.wpp_attach_to_agent', function(){
     var agent_image_id = jQuery(this).attr('id');
     if (agent_image_id != '')
       jQuery('#library-form').append('<input name="wpp_agent_post_id" type="text" value="' + agent_image_id + '" />').submit();
@@ -738,7 +818,7 @@ jQuery(document).ready(function() {
   //* Add Sort functionality to Table */
   if(typeof jQuery.fn.sortable == 'function') {
     jQuery('table.wpp_sortable tbody').sortable();
-    jQuery('table.wpp_sortable tbody tr').live("mouseover mouseout", function(event) {
+    jQuery(document).on("mouseover mouseout", 'table.wpp_sortable tbody tr', function(event) {
       if ( event.type == "mouseover" ) {
         jQuery(this).addClass("wpp_draggable_handle_show");
       } else {
@@ -746,4 +826,71 @@ jQuery(document).ready(function() {
       }
     });
   }
+  // for developer-settings-attributes
+  //toggle std attr
+  jQuery(document).on("click", ".wpp-toggle-std-attr", function() {
+      jQuery(this).closest('li').find(".std-attr-mapper").fadeToggle();
+  });
+
+  // apply notices on developer tab
+  applyNotices = function(notice,notice_cont){
+
+    if(typeof(notice)!="undefined" && notice.trim().length >0){
+      notice_cont.text(notice).fadeIn();
+    }
+    else{
+      notice_cont.text('').fadeOut();
+    }
+  }
+  // for developer-settings-attributes
+  // load icon on page load
+  jQuery("#wpp_inquiry_attribute_fields tr").each(function(){
+
+    var iconClass =  jQuery(this).find(".std-attr-mapper .wpp_settings-prop_std_att_mapsto").val();
+    $x = jQuery(this).find(".wpp_std_attr_view i").addClass(iconClass);
+
+    //if there are notices then display them
+    var notice = jQuery(this).find('.wpp_settings-prop_std_att_mapsto').find(':selected').data('notice');
+    var notice_cont = jQuery(this).find("i.std_att_notices");
+    applyNotices(notice,notice_cont);
+  });
+
+  // for developer-settings-attributes
+  //change icon on select change
+  jQuery(".std-attr-mapper .wpp_settings-prop_std_att_mapsto").change(function(){
+
+    var iconClass =  jQuery(this).val();
+    $x = jQuery(this).closest("tr").find(".wpp_std_attr_view i");
+    $x.removeClass().addClass(iconClass);
+
+    //if there are notices then display them
+    var notice = jQuery(this).find(':selected').data('notice');
+    var notice_cont = jQuery(this).parent().find("i.std_att_notices");
+    applyNotices(notice,notice_cont);
+    toggleAttributesDropdown();
+  });
+  if(jQuery("#wpp_settings_base_slug").length>0)
+    jQuery("#wpp_settings_base_slug").select2();
+    //hide already choosen standard attributes
+  (toggleAttributesDropdown = function(){
+    var items = jQuery(".wpp_settings-prop_std_att_mapsto option:selected");
+    jQuery(".wpp_settings-prop_std_att_mapsto").each(function (ind,val) {
+        // Get the selected value
+        jQuery("option", jQuery(this)).each(function(){
+            jQuery(this).removeAttr("disabled");
+        });
+
+      jQuery.each(items, function() {
+        if (jQuery.trim(jQuery(this).val()) == ''){
+          jQuery("option[value='" + jQuery(this).val() + "']", val).attr("disabled", true);
+        }
+      });
+    });
+  })();
+
+    //notice popups to explain matched fields in Standard attributes
+  jQuery(".wpp-notice-for-match").click(function(e){
+    e.preventDefault();
+    jQuery(".wpp-notice-dialog").dialog('open');
+  });
 });

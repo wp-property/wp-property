@@ -50,7 +50,7 @@ if( !class_exists( 'RWMB_Wpp_Parent_Field' ) && class_exists( 'RWMB_Field' ) ) {
         $field[ 'id' ],
         $field[ 'field_name' ],
         esc_attr( $options ),
-        $field[ 'size' ]
+        ( isset( $field[ 'size' ] ) ? $field[ 'size' ] : 20 )
       );
 
       $html .= '<div class="rwmb-autocomplete-results">';

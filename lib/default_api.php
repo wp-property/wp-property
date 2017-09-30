@@ -60,7 +60,7 @@ add_filter( 'the_password_form', 'wpp_password_protected_property_form' );
 // Coordinate manual override
 //add_filter( 'wpp_property_stats_input_' . $wp_properties[ 'configuration' ][ 'address_attribute' ], 'wpp_property_stats_input_address', 0, 3 );
 
-  add_action('save_property', 'wpp_save_property_aggregated_data' );
+  add_action('save_property', 'wpp_save_property_aggregated_data', 10, 2 );
 
 //add_action("wpp_ui_after_attribute_{$wp_properties['configuration']['address_attribute']}", 'wpp_show_coords');
 add_action( 'wpp_ui_after_attribute_price', 'wpp_show_week_month_selection' );
@@ -271,12 +271,14 @@ function wpp_property_stats_input_address( $content, $slug, $object ) {
  * @author peshkov@UD
  * @return null
  */
-function wpp_save_property_aggregated_data( $post_id ) {
+function wpp_save_property_aggregated_data( $post_id, $args ) {
   global $wpdb, $wp_properties;
 
-  if( empty( $_REQUEST[ 'parent_id' ] ) ) {
+  if( empty( $_REQUEST[ 'parent_id' ] ) && empty($args['parent_id']) ) {
     return null;
   }
+
+  $parent_id = !empty( $_REQUEST[ 'parent_id' ] )? $_REQUEST[ 'parent_id' ] : $args['parent_id'];
 
   //** Get all children */
   $children = $wpdb->get_col( $wpdb->prepare( "
@@ -286,7 +288,7 @@ function wpp_save_property_aggregated_data( $post_id ) {
         AND post_status = 'publish'
         AND post_parent = %s
           ORDER BY menu_order ASC
-  ", $_REQUEST[ 'parent_id' ] ) );
+  ", $parent_id ) );
 
   if ( count( $children ) > 0 ) {
 
@@ -344,7 +346,7 @@ function wpp_save_property_aggregated_data( $post_id ) {
       $val = @array_sum( $range_values );
       $val = is_numeric( $val ) && $val > 0 ? ( $average == 'true' ? ceil( $val / count( $range_values ) ) : $val ) : 0;
 
-      update_post_meta( $_REQUEST[ 'parent_id' ], $range_attribute, $val );
+      update_post_meta( $parent_id, $range_attribute, $val );
 
     }
 
@@ -462,14 +464,15 @@ function add_display_address( $property ) {
   ) {
 
     if ( get_post_meta( $property[ 'parent_id' ], 'address_is_formatted', true ) ) {
-      $street_number = get_post_meta( $property[ 'parent_id' ], 'street_number', true );
-      $route = get_post_meta( $property[ 'parent_id' ], 'route', true );
-      $city = get_post_meta( $property[ 'parent_id' ], 'city', true );
-      $state = get_post_meta( $property[ 'parent_id' ], 'state', true );
-      $state_code = get_post_meta( $property[ 'parent_id' ], 'state_code', true );
-      $postal_code = get_post_meta( $property[ 'parent_id' ], 'postal_code', true );
-      $county = get_post_meta( $property[ 'parent_id' ], 'county', true );
-      $country = get_post_meta( $property[ 'parent_id' ], 'country', true );
+      // Also assign to $property[] to make data accessible later.
+      $property[ 'street_number' ] = $street_number = get_post_meta( $property[ 'parent_id' ], 'street_number', true );
+      $property[ 'route' ] = $route = get_post_meta( $property[ 'parent_id' ], 'route', true );
+      $property[ 'city' ] = $city = get_post_meta( $property[ 'parent_id' ], 'city', true );
+      $property[ 'state' ] = $state = get_post_meta( $property[ 'parent_id' ], 'state', true );
+      $property[ 'state_code' ] = $state_code = get_post_meta( $property[ 'parent_id' ], 'state_code', true );
+      $property[ 'postal_code' ] = $postal_code = get_post_meta( $property[ 'parent_id' ], 'postal_code', true );
+      $property[ 'county' ] = $county = get_post_meta( $property[ 'parent_id' ], 'county', true );
+      $property[ 'country' ] = $country = get_post_meta( $property[ 'parent_id' ], 'country', true );
 
       $display_address = str_replace( "[street_number]", $street_number, $display_address );
       $display_address = str_replace( "[street_name]", $route, $display_address );
@@ -569,7 +572,9 @@ function add_dollar_sign( $content ) {
   $currency_symbol = ( !empty( $wp_properties[ 'configuration' ][ 'currency_symbol' ] ) ? $wp_properties[ 'configuration' ][ 'currency_symbol' ] : "$" );
   $currency_symbol_placement = ( !empty( $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ] ) ? $wp_properties[ 'configuration' ][ 'currency_symbol_placement' ] : "before" );
 
-  $content = trim( str_replace( array( $currency_symbol, "," ), "", $content ) );
+  if( is_string( $content ) ) {
+    $content = trim( str_replace( array( $currency_symbol, "," ), "", $content ) );
+  }
 
   if ( !is_numeric( $content ) ) {
     return preg_replace_callback( '/(\d+)/', create_function(

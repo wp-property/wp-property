@@ -8,6 +8,8 @@
 
 namespace UsabilityDynamics\WPP {
 
+  use ChromePhp;
+
   if (!class_exists('UsabilityDynamics\WPP\Scaffold')) {
 
     /**
@@ -46,7 +48,8 @@ namespace UsabilityDynamics\WPP {
 
       /**
        * Renders template part.
-       *
+       * @param $name
+       * @param array $data
        */
       public function get_template_part($name, $data = array()) {
         if (is_array($data)) {
@@ -82,6 +85,8 @@ namespace UsabilityDynamics\WPP {
        * Store all custom properties in $this->properties
        *
        * @author peshkov@UD
+       * @param $name
+       * @param $value
        */
       public function __set($name, $value) {
         $this->properties[$name] = $value;
@@ -91,10 +96,25 @@ namespace UsabilityDynamics\WPP {
        * Get custom properties
        *
        * @author peshkov@UD
+       * @param $name
+       * @return null
        */
       public function __get($name) {
         return isset($this->properties[$name]) ? $this->properties[$name] : NULL;
       }
+
+      /**
+       *
+       * @param $data
+       */
+      static public function log( $data = '' ) {
+
+        if( class_exists( '\ChromePhp' ) ) {
+          ChromePhp::log('wp-property', $data );
+        }
+
+      }
+
 
     }
 

@@ -26,6 +26,10 @@ namespace UsabilityDynamics\WPP {
       add_filter( "wpp_stat_filter_property_type_label", array($this,"get_property_type_translation") );
       add_filter( "wpp::taxonomies::labels", array($this,"get_property_taxonomies_translation") );
       add_action( "template_redirect", array( $this, "template_redirect" ) );
+      add_action( "wpml_media_create_duplicate_attachment", array( $this, "wpml_media_meta_update") );
+      add_filter( "admin_overview_post_statuses", array( $this, "add_lang_count") );
+      add_filter( "wpp::all_properties::wp_query::args", array( $this, "lang_post_statuses") );
+      add_action( "wplt::ajax_response_action", array($this, "wplt_ajax_response"));
     }
 
     /**
@@ -36,9 +40,11 @@ namespace UsabilityDynamics\WPP {
     public function template_redirect() {
       global $wp_properties;
 
-      foreach( ud_get_wp_property()->get( 'property_groups' ) as $k => $v ) {
-        $v[ 'name' ] = $this->get_groups_translation( $v[ 'name' ], $k );
-        ud_get_wp_property()->set( "property_groups.{$k}", $v );
+      if(is_array(ud_get_wp_property()->get( 'property_groups' ))){
+        foreach( ud_get_wp_property()->get( 'property_groups' ) as $k => $v ) {
+          $v[ 'name' ] = $this->get_groups_translation( $v[ 'name' ], $k );
+          ud_get_wp_property()->set( "property_groups.{$k}", $v );
+        }
       }
 
       if( !ud_get_wp_property()->get( 'property_groups._other' ) ) {
@@ -57,7 +63,7 @@ namespace UsabilityDynamics\WPP {
      * @param $lang string
      * @author Fadi Yousef  frontend-expert@outlook.com
      */
-    public function get_property_posts_count_bylang( $lang ){
+    public function get_property_posts_count_bylang( $lang, $post_status = '' ){
       $lang_now = apply_filters( 'wpml_current_language', NULL );
       $lang_changed = 0;
       if($lang_now != $lang){
@@ -69,6 +75,9 @@ namespace UsabilityDynamics\WPP {
         'post_type' => 'property',
         'suppress_filters' => false
       );
+      if($post_status){
+        $args['post_status'] = $post_status;
+      }
       $result = new \WP_Query($args);
       if($lang_changed) do_action( 'wpml_switch_language', $lang_now );
       return $result->post_count;
@@ -103,6 +112,61 @@ namespace UsabilityDynamics\WPP {
         </ul>
       <?php }
       }
+    }
+
+    /**
+     * Add language count to property status filter on overview page.
+     * 
+     * @param $post_statuses: Post status from Admin_Overview::get_post_statuses();
+     * 
+     * @return $post_statuses
+     */
+    public function add_lang_count($post_statuses){
+      $new_post_statuses = array();
+      $languages = apply_filters( 'wpml_active_languages', NULL, 'orderby=id&order=desc' );
+      if ( !empty( $languages ) ) {
+        foreach ($post_statuses as $post_status => $attr) {
+          $new_post_statuses[$post_status] = $attr;
+          foreach( $languages as $l ){
+            if($count = $this->get_property_posts_count_bylang($l['language_code'], $post_status)){
+              $new_post_statuses[$post_status . "_" . $l['default_locale']] = " - " . $l['native_name'] . " ($count) ";
+            }
+          }
+        }
+      }
+      return $new_post_statuses;
+    }
+
+    /**
+     * If lang code passes in $args[post_status] then replace it by any.
+     * And switch lang by the lang code.
+     * 
+     * @param $args: come from submitted form.
+     * 
+     * @return $args
+     */
+    public function lang_post_statuses($args){
+      global $sitepress;
+      $languages = apply_filters( 'wpml_active_languages', NULL, 'orderby=id&order=desc' );
+
+      if (!empty( $languages ) && !empty($args[ 'post_status' ])) {
+        foreach( $languages as $l ){
+          if($l['default_locale'] == $args[ 'post_status' ]){
+            $args[ 'post_status' ] = 'any';
+            $sitepress->switch_lang($l[ 'code' ]);
+          }
+        }
+      }
+      return $args;
+    }
+
+    /**
+     * Reset the language by switching it to all.
+     * Unless default language will be applied.
+     */
+    public function wplt_ajax_response(){
+      global $sitepress;
+      $sitepress->switch_lang('all');
     }
 
     /**
@@ -269,7 +333,7 @@ namespace UsabilityDynamics\WPP {
       global $wp_properties;
       $attributes = $wp_properties['property_stats'];
       $property_types = $wp_properties['property_types'];
-      $property_meta = $wp_properties['property_meta'];
+      $property_meta =  !empty( $wp_properties['property_meta'] ) ? $wp_properties['property_meta'] : array();
       $property_terms = $wp_properties['taxonomies'];
      
       if( $attr_key = array_search($v,$attributes) ){
@@ -302,7 +366,7 @@ namespace UsabilityDynamics\WPP {
         
         return apply_filters( 'wpml_translate_string', $v,$attribute_slug, $meta_package );
         
-      }elseif( ($term_key = array_search($v,$property_terms)) || is_array($property_terms[$attribute_slug]) ){
+      }elseif( $term_key = $this->get_term_slug_by_label($property_terms, $v) ){
         $attribute_slug = ($attribute_slug === null)? $term_key : $attribute_slug;
         
         $terms_package = array(
@@ -321,16 +385,21 @@ namespace UsabilityDynamics\WPP {
     }
 
     /**
-     * Get translated text for property meta
-     * @auther Fadi Yousef
+     * Get term slug by label.
+     * 
+     * @param array $property_terms : The array of terms.
+     * @param string $leabel : The leabel to search in $property_terms.
+     * 
+     * @return array of term slug found.
      */
-    public function get_property_meta_translation($v){
-      $meta_package = array(
-        'kind' => 'Property Meta',
-        'name' => 'custom-meta',
-      'title' => 'Property Meta',
-      );
-      return apply_filters( 'wpml_translate_string', $v,$v, $meta_package );
+    private function get_term_slug_by_label($property_terms, $leabel){
+      if (is_array($property_terms)) {
+        foreach ($property_terms as $tax => $v) {
+          if ($v['label'] == $leabel)
+            return $tax;
+        }
+      }
+      return false;
     }
 
     /**
@@ -371,7 +440,7 @@ namespace UsabilityDynamics\WPP {
      */
     public function get_groups_translation($name,$slug){
       global $wp_properties;
-      $property_groups = array_keys($wp_properties['property_groups']);
+      $property_groups = (isset($wp_properties['property_groups']) && is_array($wp_properties['property_groups']))?array_keys($wp_properties['property_groups']):array();
       if( array_search($slug,$property_groups,true) !== false ){
         $groups_package = array(
           'kind' => 'Property Groups',
@@ -391,7 +460,7 @@ namespace UsabilityDynamics\WPP {
     public function get_attribute_value_translation($v, $attribute_slug = false){
       global $wp_properties;
       $not_translatable_atts = array('currency','number','oembed','datetime','date','time','color','image_advanced','file_advanced','file_input','checkbox');
-      
+
       if( empty($wp_properties['predefined_values'][$attribute_slug]) || in_array($wp_properties["admin_attr_fields"][$attribute_slug],$not_translatable_atts)){
         return $v;
       }
@@ -404,7 +473,7 @@ namespace UsabilityDynamics\WPP {
 
       $default_values = explode(',', str_replace(', ', ',', $wp_properties['predefined_values'][$attribute_slug]) );
       $translated_values = explode(',',str_replace(', ', ',',apply_filters( 'wpml_translate_string', $attribute_slug,$attribute_slug, $attributes_values_package )));
-      
+
       if( $wp_properties['predefined_values'][$attribute_slug] == $v ){
         return apply_filters( 'wpml_translate_string', $v,$attribute_slug, $attributes_values_package );
       }elseif( !is_array($v) && (strpos( $v, ',' ) !== false) ){
@@ -420,6 +489,12 @@ namespace UsabilityDynamics\WPP {
         return $translated_values[$value_pos];
       }
       
+    }
+
+    public function wpml_media_meta_update($attachment_id, $duplicated_attachment_id){
+      $_is_remote = get_post_meta($attachment_id, '_is_remote', true);
+      if($_is_remote)
+        update_post_meta($duplicated_attachment_id, '_is_remote', $_is_remote);
     }
 
   }

@@ -17,7 +17,7 @@ namespace UsabilityDynamics\WPP {
        * @param $old_version
        * @param $new_version
        */
-      static public function run( $old_version, $new_version ){
+      static public function run( $old_version, $new_version ) {
         global $wpdb;
 
         self::do_backup( $old_version, $new_version );
@@ -79,10 +79,13 @@ namespace UsabilityDynamics\WPP {
             if($property_terms_widget_updated)
               update_option('widget_wpp_property_terms', $property_terms_widget);
 
-        }
+          // Saving if this is a old install
+          case ( version_compare( $old_version, '2.2.1', '<' ) ):
+            update_option( 'wpp_legacy_2_2_0_2', $old_version );
 
+        }
         /* Additional stuff can be handled here */
-        do_action( ud_get_wp_property()->slug . '::upgrade', $old_version, $new_version );
+        do_action( 'wp-property::upgrade', $old_version, $new_version );
       }
 
       /**
