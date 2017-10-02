@@ -22,7 +22,9 @@ if ($settings['type'] !== 'loadmore' || ($settings['type'] == 'loadmore' && $set
     $sort_html .= '<span class="wpp_current_page_count">1</span>' . __(" of ", ud_get_wp_property()->domain);
     $sort_html .= '<span class="wpp_total_page_count">' . $pages . '</span>.';
   }
-  $sort_html .= '</span>';
+  if ($hide_count != 'true') {
+    $sort_html .= '</span>';
+  }
 
   /* View template */
   $sort_html .= '<div class="wpp_template_view">';
@@ -66,7 +68,7 @@ if ($settings['type'] !== 'loadmore' || ($settings['type'] == 'loadmore' && $set
 echo $sort_html;
 
 /* Render Pagination Template based on pagination type */
-if (!empty($use_pagination)) {
+if ($settings['type'] == 'loadmore' || !empty($use_pagination)) {
   if ($settings['type'] !== 'loadmore' || ($settings['type'] == 'loadmore' && $settings['class'] == 'wpp_bottom_pagination')) {
     $template = self::get_pagination_template_based_on_type($settings['type']);
     if (file_exists($template)) {
