@@ -254,6 +254,14 @@ namespace UsabilityDynamics\WPP {
 
               //*/
 
+              // Define slug for location term
+              $_detail['slug'] = sanitize_title( $_value );
+
+              // Add prefix for county slug for prevent duplicates with city
+              if( $_level === 'county' ) {
+                $_detail['slug'] = 'county_' . sanitize_title( $_value );
+              }
+
               $_inserted_term = wp_insert_term( $_value, 'wpp_location', $_detail );
 
               if (!is_wp_error($_inserted_term) && isset($_inserted_term['term_id'])) {
