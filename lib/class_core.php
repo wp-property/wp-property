@@ -193,9 +193,9 @@ class WPP_Core {
 
     // Use Google Maps API Key, if provided.
     if( ud_get_wp_property( 'configuration.google_maps_api' ) ) {
-      wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?key='.ud_get_wp_property( 'configuration.google_maps_api' ) );
+      wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?v=3.29&key='.ud_get_wp_property( 'configuration.google_maps_api' ) );
     } else {
-      wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?sensor=true' );
+      wp_register_script( 'google-maps', 'https://maps.google.com/maps/api/js?v=3.29&sensor=true' );
     }
 
     wp_register_script( 'wpp-md5', WPP_URL . 'scripts/md5.js', array( 'wpp-localization' ), WPP_Version );
