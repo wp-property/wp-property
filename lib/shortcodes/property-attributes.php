@@ -40,7 +40,7 @@ namespace UsabilityDynamics\WPP {
             'params' => array(
               'show_post_content' => array(
                 'name' => __( 'Show post content', ud_get_wp_property()->domain ),
-                'description' => __( '', ud_get_wp_property()->domain ),
+                'description' => __( 'Show post content', ud_get_wp_property()->domain ),
                 'type' => 'select',
                 'options' => array(
                   'true' => __( 'Yes', ud_get_wp_property()->domain ),

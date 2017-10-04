@@ -89,6 +89,8 @@ if( !class_exists( 'WPP_CLI_Property_Command' ) ) {
 
       $this->_scroll_helper( $assoc_args );
 
+      do_action( 'wpp::cli::scroll::complete', $assoc_args );
+
       WP_CLI::log( WP_CLI::colorize( '%Y' . __( 'Total time elapsed: ', ud_get_wp_property()->domain ) . '%N' . timer_stop() ) );
 
       WP_CLI::success( __( 'Done!', ud_get_wp_property()->domain ) );
@@ -98,7 +100,7 @@ if( !class_exists( 'WPP_CLI_Property_Command' ) ) {
     /**
      * Delete all 'property' posts for a site
      *
-     * Example: wp property delete --post-status=trash
+     * Example: wp property delete --posts-per-page=10 --post-status=trash
      *
      * @synopsis [--posts-per-page] [--post-status]
      * @param array $args

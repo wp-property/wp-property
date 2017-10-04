@@ -460,7 +460,7 @@ namespace UsabilityDynamics\WPP {
     public function get_attribute_value_translation($v, $attribute_slug = false){
       global $wp_properties;
       $not_translatable_atts = array('currency','number','oembed','datetime','date','time','color','image_advanced','file_advanced','file_input','checkbox');
-      
+
       if( empty($wp_properties['predefined_values'][$attribute_slug]) || in_array($wp_properties["admin_attr_fields"][$attribute_slug],$not_translatable_atts)){
         return $v;
       }
@@ -473,7 +473,7 @@ namespace UsabilityDynamics\WPP {
 
       $default_values = explode(',', str_replace(', ', ',', $wp_properties['predefined_values'][$attribute_slug]) );
       $translated_values = explode(',',str_replace(', ', ',',apply_filters( 'wpml_translate_string', $attribute_slug,$attribute_slug, $attributes_values_package )));
-      
+
       if( $wp_properties['predefined_values'][$attribute_slug] == $v ){
         return apply_filters( 'wpml_translate_string', $v,$attribute_slug, $attributes_values_package );
       }elseif( !is_array($v) && (strpos( $v, ',' ) !== false) ){

@@ -54,9 +54,10 @@ wp_cache_flush();
     <h3><?php printf( __( 'WP-Property %s important changes', ud_get_wp_property()->domain ), ud_get_wp_property( 'version' ) ); ?>:</h3>
 
     <ul>
-      <li>Added default Search Input and Data Entry types for Property Attributes on first WP-Property install.</li>
-      <li>Fixed default list of Property Types on first WP-Property install.</li>
-      <li>Fixed issue with duplicated Currency symbol on Single Property page.</li>
+      <?php $changes = wpp_get_update_changes();
+      foreach ($changes as $change) : ?>
+        <li><?php echo $change; ?></li>
+      <?php endforeach; ?>
     </ul>
 
   </div>
