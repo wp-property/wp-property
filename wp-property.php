@@ -39,48 +39,6 @@ if (!defined('WPP_Templates')) {
   define('WPP_Templates', WPP_Path . 'static/views');
 }
 
-// Use Freemius is flag is enabled.
-if ( defined( 'WPP_FEATURE_FLAG_FREEMIUS' ) && WPP_FEATURE_FLAG_FREEMIUS ) {
-
-  // add_filter('connect_message_on_update', function($message, $user_first_name, $plugin_title, $user_login, $site_link, $freemius_link) {}, 10, 6 );
-  // add_filter('connect_message', function() {});
-
-  // Create a helper function for easy SDK access.
-  function wpp_fs() {
-    global $wpp_fs;
-
-    if (!isset($wpp_fs)) {
-      // Include Freemius SDK.
-      require_once dirname(__FILE__) . '/vendor/libraries/freemius/wordpress-sdk/start.php';
-
-      $wpp_fs = fs_dynamic_init(array(
-        'id' => '504',
-        'slug' => 'wp-property',
-        'type' => 'plugin',
-        'public_key' => 'pk_806be0ef60e25dd84a77d6e49dfa8',
-        'has_addons' => true,
-        'is_premium' => false,
-        'has_paid_plans' => false,
-        'menu' => array(
-          'slug' => "edit.php?post_type=property",
-          'first-path' => 'edit.php?post_type=property&page=all_properties',
-          'account' => false,
-          'support' => false,
-          'contact' => false
-        ),
-      ));
-
-      //die( '<pre>' . print_r( $wpp_fs, true ) . '</pre>' );
-    }
-
-    return $wpp_fs;
-  }
-
-  // Init Freemius.
-  wpp_fs();
-
-}
-
 if (!function_exists('ud_get_wp_property')) {
 
   /**
