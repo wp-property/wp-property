@@ -202,13 +202,14 @@ namespace UsabilityDynamics\WPP {
 
         $geo_data->terms = array();
 
-        $geo_data->state = !empty($geo_data->state) ? $geo_data->state : 'no_state';
-        $geo_data->county = !empty($geo_data->county) ? $geo_data->county : 'no_county';
-        $geo_data->city = !empty($geo_data->city) ? $geo_data->city : 'no_city';
-        $geo_data->subdivision = !empty($geo_data->subdivision) ? $geo_data->subdivision : 'no_subdivision';
-        $geo_data->neighborhood = !empty($geo_data->neighborhood) ? $geo_data->neighborhood : 'no_neighborhood';
-        $geo_data->zip = !empty($geo_data->zip) ? $geo_data->zip : 'no_zip';
-        $geo_data->route = !empty($geo_data->route) ? $geo_data->route : 'no_route';
+        // Set defaults value if some of geo data is missing
+        $geo_data->state = !empty($geo_data->state) ? $geo_data->state : 'No State';
+        $geo_data->county = !empty($geo_data->county) ? $geo_data->county : 'No County';
+        $geo_data->city = !empty($geo_data->city) ? $geo_data->city : 'No City';
+        $geo_data->subdivision = !empty($geo_data->subdivision) ? $geo_data->subdivision : 'No Subdivision';
+        $geo_data->neighborhood = !empty($geo_data->neighborhood) ? $geo_data->neighborhood : 'No Neighborhood';
+        $geo_data->zip = !empty($geo_data->zip) ? $geo_data->zip : 'No Zip';
+        $geo_data->route = !empty($geo_data->route) ? $geo_data->route : 'No Route';
 
         $geo_data->terms['state'] = get_term_by('name', $geo_data->state, $taxonomy, OBJECT);
         $geo_data->terms['county'] = get_term_by('name', $geo_data->county, $taxonomy, OBJECT);
