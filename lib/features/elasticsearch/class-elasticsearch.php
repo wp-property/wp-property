@@ -486,11 +486,12 @@ namespace UsabilityDynamics\WPP {
 
         $mapping['mappings']['post']['properties']['title_suggest'] = array(
           'type' => 'completion',
-          'analyzer' => 'nGram_analyzer',
-          'search_analyzer' => 'whitespace_analyzer',
-          'preserve_separators' => true,
-          'preserve_position_increments' => true,
-          'max_input_length' => 50,
+          //'analyzer' => 'nGram_analyzer',
+          'analyzer' => 'standard',
+          //'search_analyzer' => 'whitespace_analyzer',
+          //'preserve_separators' => true,
+          //'preserve_position_increments' => true,
+          //'max_input_length' => 50,
           'contexts' => array(
             array(
               'name' => 'listing_status',
