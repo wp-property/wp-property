@@ -185,8 +185,10 @@ namespace UsabilityDynamics\WPP {
       $sql_query = "SELECT ID FROM {$wpdb->posts}
       LEFT JOIN {$wpdb->prefix}icl_translations ON
       ({$wpdb->posts}.ID = {$wpdb->prefix}icl_translations.element_id) WHERE ID IN ($matching_ids)";
-      $sql_query .= " AND {$wpdb->prefix}icl_translations.language_code ='".$language_code."' GROUP BY ID";
-
+      $sql_query .= " AND {$wpdb->prefix}icl_translations.language_code ='".$language_code."'";
+      $sql_query .= " AND {$wpdb->prefix}icl_translations.element_type ='post_property'";
+      $sql_query .= " GROUP BY ID";
+      
       return $wpdb->get_col($sql_query);
     }
 
