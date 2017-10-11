@@ -431,7 +431,9 @@ jQuery.extend( wpp = wpp || {}, {
         } );
 
         //* Stats to group functionality */
-        jQuery( '.wpp_attribute_group' ).wppGroups();
+        setTimeout( function () {
+          jQuery('.wpp_attribute_group').wppGroups();
+        }, 50);
 
         //* Fire Event after Row is added */
         jQuery( document ).on( 'added', '#wpp_inquiry_attribute_fields tr', function () {

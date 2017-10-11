@@ -154,11 +154,11 @@ namespace UsabilityDynamics\WPP {
         $meta = WPP_F::get_term_metadata( $_term );
         $term_type = isset( $meta['term_type'] ) ? $meta['term_type'] : null;
 
-        $input = array_unique( array(
+        $input = array_values( array_unique( array(
           str_replace( '&amp;', '&', $term['name'] ),
           strtolower( str_replace( '&amp;', '&', $term['name'] ) ),
           str_replace( array( ' ', '-', ',', '.' ), '', strtolower( sanitize_title( $term['name'] ) ) )
-        ) );
+        ) ) );
 
         $context_term_type = array( $taxonomy );
         if( !empty( $term_type ) ) {

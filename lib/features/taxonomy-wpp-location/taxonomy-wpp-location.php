@@ -202,13 +202,22 @@ namespace UsabilityDynamics\WPP {
 
         $geo_data->terms = array();
 
-        $geo_data->terms['state'] = !empty($geo_data->state) ? get_term_by('name', $geo_data->state, $taxonomy, OBJECT) : false;
-        $geo_data->terms['county'] = !empty($geo_data->county) ? get_term_by('name', $geo_data->county, $taxonomy, OBJECT) : false;
-        $geo_data->terms['city'] = !empty($geo_data->city) ? get_term_by('name', $geo_data->city, $taxonomy, OBJECT) : false;
-        $geo_data->terms['subdivision'] = !empty($geo_data->subdivision) ? get_term_by('name', $geo_data->subdivision, $taxonomy, OBJECT) : false;
-        $geo_data->terms['neighborhood'] = !empty($geo_data->neighborhood) ? get_term_by('name', $geo_data->neighborhood, $taxonomy, OBJECT) : false;
-        $geo_data->terms['zip'] = !empty($geo_data->zip) ? get_term_by('name', $geo_data->zip, $taxonomy, OBJECT) : false;
-        $geo_data->terms['route'] = !empty($geo_data->route) ? get_term_by('name', $geo_data->route, $taxonomy, OBJECT) : false;
+        // Set defaults value if some of geo data is missing
+        $geo_data->state = !empty($geo_data->state) ? $geo_data->state : 'No State';
+        $geo_data->county = !empty($geo_data->county) ? $geo_data->county : 'No County';
+        $geo_data->city = !empty($geo_data->city) ? $geo_data->city : 'No City';
+        $geo_data->subdivision = !empty($geo_data->subdivision) ? $geo_data->subdivision : 'No Subdivision';
+        $geo_data->neighborhood = !empty($geo_data->neighborhood) ? $geo_data->neighborhood : 'No Neighborhood';
+        $geo_data->zip = !empty($geo_data->zip) ? $geo_data->zip : 'No Zip';
+        $geo_data->route = !empty($geo_data->route) ? $geo_data->route : 'No Route';
+
+        $geo_data->terms['state'] = get_term_by('name', $geo_data->state, $taxonomy, OBJECT);
+        $geo_data->terms['county'] = get_term_by('name', $geo_data->county, $taxonomy, OBJECT);
+        $geo_data->terms['city'] = get_term_by('name', $geo_data->city, $taxonomy, OBJECT);
+        $geo_data->terms['subdivision'] = get_term_by('name', $geo_data->subdivision, $taxonomy, OBJECT);
+        $geo_data->terms['neighborhood'] = get_term_by('name', $geo_data->neighborhood, $taxonomy, OBJECT);
+        $geo_data->terms['zip'] = get_term_by('name', $geo_data->zip, $taxonomy, OBJECT);
+        $geo_data->terms['route'] = get_term_by('name', $geo_data->route, $taxonomy, OBJECT);
 
         // validate, lookup and add all location terms to object.
         if (isset($geo_data->terms) && is_array($geo_data->terms)) {
