@@ -54,13 +54,13 @@ if( !class_exists( 'WPP_CLI_Property_Command' ) ) {
 
       $action = 'wpp::cli::trigger::' . $assoc_args['do-action'];
 
-      WP_CLI::log( sprintf( __( 'Triggering [%s] action...', ud_get_wp_property()->domain ), $action ) );
+      WP_CLI::log( sprintf( __( 'Triggering [%s] action...' ), $action ) );
 
       do_action( $action, $assoc_args );
 
-      WP_CLI::log( WP_CLI::colorize( '%Y' . __( 'Total time elapsed: ', ud_get_wp_property()->domain ) . '%N' . timer_stop() ) );
+      WP_CLI::log( WP_CLI::colorize( '%Y' . __( 'Total time elapsed: ' ) . '%N' . timer_stop() ) );
 
-      WP_CLI::success( __( 'Done!', ud_get_wp_property()->domain ) );
+      WP_CLI::success( __( 'Done!' ) );
 
     }
 
@@ -85,15 +85,15 @@ if( !class_exists( 'WPP_CLI_Property_Command' ) ) {
 
       timer_start();
 
-      WP_CLI::log( __( 'Scrolling properties...', ud_get_wp_property()->domain ) );
+      WP_CLI::log( __( 'Scrolling properties...' ) );
 
       $this->_scroll_helper( $assoc_args );
 
       do_action( 'wpp::cli::scroll::complete', $assoc_args );
 
-      WP_CLI::log( WP_CLI::colorize( '%Y' . __( 'Total time elapsed: ', ud_get_wp_property()->domain ) . '%N' . timer_stop() ) );
+      WP_CLI::log( WP_CLI::colorize( '%Y' . __( 'Total time elapsed: ' ) . '%N' . timer_stop() ) );
 
-      WP_CLI::success( __( 'Done!', ud_get_wp_property()->domain ) );
+      WP_CLI::success( __( 'Done!' ) );
 
     }
 
@@ -102,7 +102,7 @@ if( !class_exists( 'WPP_CLI_Property_Command' ) ) {
      *
      * Example: wp property delete --posts-per-page=10 --post-status=trash
      *
-     * @synopsis [--posts-per-page] [--post-status]
+     * @synopsis [--posts-per-page] [--post-status] [--delete-attachments]
      * @param array $args
      * @param array $assoc_args
      */
@@ -116,59 +116,41 @@ if( !class_exists( 'WPP_CLI_Property_Command' ) ) {
 
       timer_start();
 
-      WP_CLI::log( __( 'Removing properties...', ud_get_wp_property()->domain ) );
+      WP_CLI::log( __( 'Removing properties...' ) );
+
+      do_action( 'wpp::cli::delete::before', $assoc_args );
+
+      // Take care about removing all property attachments
+      if( empty( $assoc_args['delete-attachments'] ) || !in_array( $assoc_args['delete-attachments'], array( '0','false','no', 0 ) ) ) {
+        add_action( 'before_delete_post', array( $this, '_delete_post_inherits' ) );
+      }
 
       $result = $this->_delete_helper( $assoc_args );
 
-      WP_CLI::log( sprintf( __( 'Number of properties removed from site %d: %d', ud_get_wp_property()->domain ), get_current_blog_id(), $result['removed'] ) );
+      WP_CLI::log( sprintf( __( 'Number of properties removed from site %d: %d' ), get_current_blog_id(), $result['removed'] ) );
 
       if ( ! empty( $result['errors'] ) ) {
-        WP_CLI::error( sprintf( __( 'Number of errors on site %d: %d', ud_get_wp_property()->domain ), get_current_blog_id(), count( $result['errors'] ) ) );
+        WP_CLI::error( sprintf( __( 'Number of errors on site %d: %d' ), get_current_blog_id(), count( $result['errors'] ) ) );
       }
 
-      WP_CLI::log( WP_CLI::colorize( '%Y' . __( 'Total time elapsed: ', ud_get_wp_property()->domain ) . '%N' . timer_stop() ) );
+      WP_CLI::log( WP_CLI::colorize( '%Y' . __( 'Total time elapsed: ' ) . '%N' . timer_stop() ) );
 
-      WP_CLI::success( __( 'Done!', ud_get_wp_property()->domain ) );
+      WP_CLI::success( __( 'Done!' ) );
     }
 
     /**
-     * Removes directly from DataBase all meta related to property post type.
+     * Removes ALL inherits ( attachments, revisions, etc ) for particular post
+     *
      */
-    function _delete_properties_meta() {
+    function  _delete_post_inherits( $post_id ) {
       global $wpdb;
-
-      $total = 0;
-
-      while( true ) {
-
-        $meta_ids = $wpdb->get_col( "
-        SELECT wpm.meta_id
-	        FROM $wpdb->postmeta wpm
-	        INNER JOIN $wpdb->posts wp ON (wp.ID = wpm.post_id)
-		      WHERE wp.post_type = 'property'
-		        LIMIT 0, 1000;
-		  " );
-
-        // If there are no results just break the loop
-        if( empty( $meta_ids ) ) {
-          break;
+      $posts = $wpdb->get_results( $wpdb->prepare( "SELECT ID, post_type FROM $wpdb->posts WHERE post_parent=%s AND post_status='inherit'", $post_id ), ARRAY_A );
+      if( !empty( $posts ) && is_array( $posts ) ) {
+        foreach( $posts as $post ) {
+          WP_CLI::log( WP_CLI::colorize( '%G' . sprintf( __( 'Removing inherited post [%s]. Post type [%s]' ), $post['ID'], $post['post_type'] ) . '%N' ) );
+          wp_delete_post( $post['ID'], true );
         }
-
-        $total += count( $meta_ids );
-
-        $meta_ids = implode( ",", $meta_ids );
-
-        $wpdb->query( "
-        DELETE
-          FROM $wpdb->postmeta
-          WHERE meta_id IN ( $meta_ids )
-
-      " );
-
       }
-
-      WP_CLI::log( sprintf( __( 'Removed [%d] meta fields which belong to property type', ud_get_wp_property()->domain ), $total ) );
-
     }
 
     /**
@@ -423,7 +405,7 @@ if( !class_exists( 'WPP_CLI_Terms_Command' ) ) {
     " );
 
       if( !empty( $term_ids ) ) {
-        WP_CLI::log( sprintf( __( 'Removing [%d] terms which do not belong to any taxonomy', ud_get_wp_property()->domain ), count( $term_ids ) ) );
+        WP_CLI::log( sprintf( __( 'Removing [%d] terms which do not belong to any taxonomy' ), count( $term_ids ) ) );
         $condition = implode( "','", $term_ids );
         // Remove all term meta fields which belong to broken terms
         $wpdb->query("DELETE FROM $wpdb->termmeta WHERE term_id IN ( '$condition' );");
@@ -460,7 +442,7 @@ if( !class_exists( 'WPP_CLI_Terms_Command' ) ) {
     " );
 
       if( !empty( $term_ids ) ) {
-        WP_CLI::log( sprintf( __( 'Removing [%d] terms which do not belong to any registered taxonomy', ud_get_wp_property()->domain ), count( $term_ids ) ) );
+        WP_CLI::log( sprintf( __( 'Removing [%d] terms which do not belong to any registered taxonomy' ), count( $term_ids ) ) );
         $condition = implode( "','", $term_ids );
         // Remove all term meta fields which belong to the terms
         $wpdb->query("DELETE FROM $wpdb->termmeta WHERE term_id IN ( '$condition' );");
@@ -481,7 +463,7 @@ if( !class_exists( 'WPP_CLI_Terms_Command' ) ) {
     " );
 
       if( !empty( $taxonomy_ids ) ) {
-        WP_CLI::log( sprintf( __( 'Removing [%d] taxonomies which are not registered', ud_get_wp_property()->domain ), count( $taxonomy_ids ) ) );
+        WP_CLI::log( sprintf( __( 'Removing [%d] taxonomies which are not registered' ), count( $taxonomy_ids ) ) );
         $condition = implode( "','", $taxonomy_ids );
         // Remove all term meta fields which belong to the terms
         $wpdb->query("DELETE FROM $wpdb->term_relationships WHERE term_taxonomy_id IN ( '$condition' );");
@@ -491,9 +473,9 @@ if( !class_exists( 'WPP_CLI_Terms_Command' ) ) {
         WP_CLI::log( 'No taxonomies, which are not registered, found.' );
       }
 
-      WP_CLI::log( WP_CLI::colorize( '%Y' . __( 'Total time elapsed: ', ud_get_wp_property()->domain ) . '%N' . timer_stop() ) );
+      WP_CLI::log( WP_CLI::colorize( '%Y' . __( 'Total time elapsed: ' ) . '%N' . timer_stop() ) );
 
-      WP_CLI::success( __( 'Done!', ud_get_wp_property()->domain ) );
+      WP_CLI::success( __( 'Done!' ) );
 
     }
 
@@ -522,7 +504,7 @@ if( !class_exists( 'WPP_CLI_Terms_Command' ) ) {
         } else if ( !taxonomy_exists( $taxonomy ) && WPP_F::verify_have_system_taxonomy( $taxonomy ) ) {
           $taxonomies = array( $taxonomy );
         } else {
-          WP_CLI::error( __( 'Provided taxonomy does not belong to property', ud_get_wp_property()->domain ) );
+          WP_CLI::error( __( 'Provided taxonomy does not belong to property' ) );
           exit();
         }
       }
@@ -532,21 +514,21 @@ if( !class_exists( 'WPP_CLI_Terms_Command' ) ) {
       $results = array();
       $total = 0;
       foreach( $taxonomies as $taxonomy ) {
-        WP_CLI::log( sprintf( __( 'Removing terms for [%s] taxonomy...', ud_get_wp_property()->domain ), $taxonomy ) );
+        WP_CLI::log( sprintf( __( 'Removing terms for [%s] taxonomy...' ), $taxonomy ) );
         $result = $this->_delete_helper( $taxonomy, $assoc_args );
-        WP_CLI::log( sprintf( __( 'Number of [%s] terms removed from site %d: %d', ud_get_wp_property()->domain ), $taxonomy, get_current_blog_id(), $result['removed'] ) );
+        WP_CLI::log( sprintf( __( 'Number of [%s] terms removed from site %d: %d' ), $taxonomy, get_current_blog_id(), $result['removed'] ) );
         if ( ! empty( $result['errors'] ) ) {
-          WP_CLI::warning( sprintf( __( 'Number of errors for taxonomy [%s] on site %d: %d', ud_get_wp_property()->domain ), $taxonomy, get_current_blog_id(), count( $result['errors'] ) ) );
+          WP_CLI::warning( sprintf( __( 'Number of errors for taxonomy [%s] on site %d: %d' ), $taxonomy, get_current_blog_id(), count( $result['errors'] ) ) );
         }
         $total += $result['removed'];
         $results[] = $result;
       }
 
-      WP_CLI::log( sprintf( __( 'Total number of terms removed from site %d: %d', ud_get_wp_property()->domain ), get_current_blog_id(), $total ) );
+      WP_CLI::log( sprintf( __( 'Total number of terms removed from site %d: %d' ), get_current_blog_id(), $total ) );
 
-      WP_CLI::log( WP_CLI::colorize( '%Y' . __( 'Total time elapsed: ', ud_get_wp_property()->domain ) . '%N' . timer_stop() ) );
+      WP_CLI::log( WP_CLI::colorize( '%Y' . __( 'Total time elapsed: ' ) . '%N' . timer_stop() ) );
 
-      WP_CLI::success( __( 'Done!', ud_get_wp_property()->domain ) );
+      WP_CLI::success( __( 'Done!' ) );
     }
 
     /**
