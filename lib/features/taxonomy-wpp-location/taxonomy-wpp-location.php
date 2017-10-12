@@ -26,7 +26,8 @@ namespace UsabilityDynamics\WPP {
         add_filter('wpp_taxonomies', array( $this, 'define_taxonomies'), 10 );
 
         // Handle importing data related to [wpp_location] taxonomy ( WP-RETS-Client )
-        add_filter('retsci::insert_property_terms::handle', array( $this, 'retsci_insert_property_terms' ), 10, 3);
+        // @TODO logic is moved to api.rets.ci, so after checking it can be removed
+        //add_filter('retsci::insert_property_terms::handle', array( $this, 'retsci_insert_property_terms' ), 10, 3);
 
         // Handle revalidate address
         add_filter( 'wpp::revalidate_address::return', array( $this, 'revalidate_address' ), 10, 2 );
