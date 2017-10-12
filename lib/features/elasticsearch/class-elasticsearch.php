@@ -306,7 +306,7 @@ namespace UsabilityDynamics\WPP {
           }
         }
 
-        $post_args['title_suggest']['contexts'] = $contexts;
+        $title_suggest['contexts'] = $contexts;
 
         if( !empty( $title_suggest[ 'contexts' ] ) && is_array( $title_suggest[ 'contexts' ] ) ) {
           foreach( $title_suggest[ 'contexts' ] as $key => $data ) {
