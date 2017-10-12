@@ -112,8 +112,8 @@ namespace UsabilityDynamics\WPP {
 
         $listing_status = array();
         foreach( $terms as $term ) {
-          $listing_status[] = $term->slug;
-          $listing_status[] = $term->name;
+          $listing_status[ sanitize_title( 'slug-' . $term->slug ) ] = $term->slug;
+          $listing_status[ sanitize_title( 'name-' . $term->name ) ] = $term->name;
         }
 
         $listing_status = array_unique( $listing_status );

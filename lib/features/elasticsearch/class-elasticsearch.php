@@ -283,11 +283,40 @@ namespace UsabilityDynamics\WPP {
 
         }
 
-        $post_args['title_suggest'] = array(
+        $title_suggest = apply_filters( 'wpp:elastic:title_suggest', array(
           "input" => $input
-        );
+        ), $post_args, $post_id );
 
-        $post_args['title_suggest'] = apply_filters( 'wpp:elastic:title_suggest', $post_args['title_suggest'], $post_args, $post_id );
+        $contexts = !empty( $title_suggest['contexts'] ) ? $title_suggest['contexts'] : array();
+        $contexts[ 'listing_type_status' ] = array();
+
+        if(
+          !empty( $contexts['listing_type'] ) && is_array( $contexts['listing_type'] ) &&
+          !empty( $contexts['listing_status'] ) && is_array( $contexts['listing_status'] )
+        ) {
+          foreach( $contexts['listing_type'] as $type_slug => $type_value ) {
+            foreach( $contexts['listing_status'] as $status_slug => $status_value ) {
+              if( strpos( $type_slug, 'slug-' ) === 0 && strpos( $status_slug, 'slug-' ) === 0 ) {
+                array_push( $contexts[ 'listing_type_status' ], $type_value . '-' . $status_value );
+              }
+              else if( strpos( $type_slug, 'name-' ) === 0 && strpos( $status_slug, 'name-' ) === 0 ) {
+                array_push( $contexts[ 'listing_type_status' ], $type_value . ' ' . $status_value );
+              }
+            }
+          }
+        }
+
+        $post_args['title_suggest']['contexts'] = $contexts;
+
+        if( !empty( $title_suggest[ 'contexts' ] ) && is_array( $title_suggest[ 'contexts' ] ) ) {
+          foreach( $title_suggest[ 'contexts' ] as $key => $data ) {
+            if( is_array( $data ) ) {
+              $title_suggest[ 'contexts' ][ $key ] = array_values( $data );
+            }
+          }
+        }
+
+        $post_args['title_suggest'] = $title_suggest;
 
         return $post_args;
 
@@ -499,6 +528,10 @@ namespace UsabilityDynamics\WPP {
             ),
             array(
               'name' => 'listing_type',
+              'type' => 'category'
+            ),
+            array(
+              'name' => 'listing_type_status',
               'type' => 'category'
             )
           )

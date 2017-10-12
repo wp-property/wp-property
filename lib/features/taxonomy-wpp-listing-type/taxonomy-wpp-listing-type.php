@@ -597,8 +597,8 @@ namespace UsabilityDynamics\WPP {
 
         $listing_type = array();
         foreach( $terms as $term ) {
-          $listing_type[] = $term->slug;
-          $listing_type[] = $term->name;
+          $listing_type[ sanitize_title( 'slug-' . $term->slug ) ] = $term->slug;
+          $listing_type[ sanitize_title( 'name-' . $term->name ) ] = $term->name;
         }
 
         $listing_type = array_unique( $listing_type );
