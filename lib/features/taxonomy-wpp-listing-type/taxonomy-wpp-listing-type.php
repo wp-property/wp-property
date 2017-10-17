@@ -52,7 +52,7 @@ namespace UsabilityDynamics\WPP {
         add_filter('wpp_taxonomies', function( $taxonomies = array() ) {
           $taxonomies[ self::$taxonomy ] = array(
             'default' => true,
-            'readonly' => true,
+            'readonly' => false,
             'system' => true,
             'hidden' => true,
             'hierarchical' => true,
@@ -83,7 +83,7 @@ namespace UsabilityDynamics\WPP {
           );
           $taxonomies[ self::$sub_taxonomy ] = array(
             'default' => true,
-            'readonly' => true,
+            'readonly' => false,
             'system' => true,
             'hidden' => true,
             'hierarchical' => false,
@@ -110,8 +110,8 @@ namespace UsabilityDynamics\WPP {
               'not_found' => sprintf(_x('No %s Sub type found', 'property sub type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
               'menu_name' => sprintf(_x('%s Sub Type', 'property sub type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
             ),
-            'query_var' => 'type',
-            'rewrite' => array('slug' => 'type')
+            'query_var' => 'sub_type',
+            'rewrite' => array('slug' => 'sub_type')
           );
           return $taxonomies;
         }, 10 );
