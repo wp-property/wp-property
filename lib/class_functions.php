@@ -112,36 +112,35 @@ class WPP_F extends UsabilityDynamics\Utility
               WHERE tm.meta_key=%s AND tm.meta_value=%s AND tt.taxonomy=%s;
           ", array( '_id', $term_data['_parent'], $term_data['_taxonomy']))) );
 
-      // Parent not found, we try findint it using [parent_name] instead of the [_parent], which is its UID.
+      // Parent not found, we try finding it using slug as [_parent].
       if( !$term_data['meta']['parent_term_id'] ) {
-        $_exists = term_exists( $term_data['meta']['parent_name'], $term_data['_taxonomy'] );
+        $_exists = get_term_by( 'slug', $term_data['meta']['_parent'], $term_data['_taxonomy'], ARRAY_A );
         // If parent found, we record the actual [term_id] of parent into our main term's meta.
         if( $_exists ) {
           $term_data['meta']['parent_term_id'] = $_exists['term_id'];
         }
       }
+
       // Parent could not be found, we will attempt to create.
       if( !$term_data['meta']['parent_term_id'] ) {
         // Insert new term, using the parent's name, from main terms' meta.
-        $_parent_term = wp_insert_term( $term_data['meta']['parent_name'], $term_data['_taxonomy'], array(
-          'slug' => $term_data['meta']['parent_slug'],
-          'description' => "Parent term for [" . $term_data['name'] . "]."
-        ));
-        // If parent still could not be created, then we have a serious error. Otherwise, updat the parent's meta.
+        $_parent_term = self::insert_term( array(
+          '_id' => $term_data[ '_parent' ],
+          '_type' => $term_data[ '_type' ],
+          '_taxonomy' => $term_data[ '_taxonomy' ],
+          'name' => $term_data[ '_parent' ],
+        ) );
+        // If parent still could not be created, then we have a serious error. Otherwise, update the parent's meta.
         if( isset( $_parent_term ) && is_wp_error( $_parent_term ) ) {
-          error_log( "Unable to insert term [" . $term_data['meta']['parent_name'] . "] for parent [" . $term_data['_taxonomy']. "]." );
+          error_log( "Unable to insert parent term [" . $term_data['_parent'] . "] for taxonomy [" . $term_data['_taxonomy']. "]." );
           error_log( print_r($_parent_term,true));
         } else {
-          // record the unique _id, timestamp and a few meta fields from main term
-          update_term_meta( $_parent_term['term_id'], '_id', $term_data[ '_parent' ] );
-          update_term_meta( $_parent_term['term_id'], '_created', time() );
-          update_term_meta( $_parent_term['term_id'], '_type',  $term_data['meta']['parent_slug']  );
-          update_term_meta( $_parent_term['term_id'], $term_data['meta']['parent_slug'] . '-_id', $term_data[ '_parent' ] );
-          update_term_meta( $_parent_term['term_id'], $term_data['meta']['parent_slug'] . '-source', $term_data['meta']['source']);
           $term_data['meta']['parent_term_id'] = $_parent_term['term_id'];
         }
       }
+
     }
+
     // try to get by [name]
     if( !$term_data['term_id'] ) {
       $_exists = term_exists( $term_data['name'], $term_data['_taxonomy'] );
@@ -157,6 +156,7 @@ class WPP_F extends UsabilityDynamics\Utility
         $term_data['term_id'] = $_exists['term_id'];
       }
     }
+
     // Term not found, new term
     if( !$term_data['term_id'] ) {
       $_term_args = array( 'description' => isset( $term_data['description'] ) ? $term_data['description'] : null );
@@ -179,37 +179,45 @@ class WPP_F extends UsabilityDynamics\Utility
       $_exists = get_term( $term_data[ 'term_id'], $term_data['_taxonomy'], ARRAY_A );
       $_existings_metadata = get_term_meta( $term_data[ 'term_id'] );
     }
+
     // Could not create term.
     if( !isset( $term_data[ 'term_id'] ) ) {
       // error_log( '$_term_created' . print_r($_term_created,true ));
       // error_log( '$term_data' . print_r($term_data,true ));
       return new WP_Error('unable-to-create-term', 'Can not create term.' );
     }
+
     $result['_type'] = $term_data['_type'];
     $result['_taxonomy'] = $term_data['_taxonomy'];
     $result['_created'] = isset( $_exists ) && isset( $_exists['term_id'] ) ? false : true;
     $result['term_id'] = $term_data['term_id'];
+
     if( isset( $term_data['meta']['parent_term_id'] ) ) {
       $result['parent'] = $term_data['meta']['parent_term_id'];
     }
+
     $result['name'] = isset( $term_data['name'] ) ? $term_data['name'] : null;
     $result['slug'] = isset( $term_data['slug'] ) ? $term_data['slug'] : sanitize_title( $term_data['name'] );
     $term_data[ 'meta' ]['_id'] = $term_data[ '_id' ];
     $result['updated'] = array();
+
     // set _id
     if( !isset( $_existings_metadata['_id'] ) || ( isset( $_existings_metadata['_id'][0] ) && $_existings_metadata['_id'][0] !== $term_data[ '_id' ] ) ) {
       update_term_meta($term_data['term_id'], '_id', $term_data[ '_id' ] );
       $result['updated'][] = '_id';
     }
+
     // set _type, same as _prefix, I suppose.
     if( !isset( $_existings_metadata['_type'] ) || ( isset( $_existings_metadata['_type'][0] ) && $_existings_metadata['_type'][0] !== $term_data[ '_type' ] ) ) {
       update_term_meta( $term_data[ 'term_id' ], '_type', $term_data[ '_type' ] );
       $result['updated'][] = '_type';
     }
+
     // This is most likely going to be removed.
     if( $result['_created'] ) {
       update_term_meta( $term_data['term_id'], '_created', time() );
     }
+
     foreach( $term_data[ 'meta' ] as $_meta_key => $meta_value ) {
       if( $_meta_key === '_id' ) { continue; }
       if( $_meta_key === 'parent_slug' ) { continue; }
