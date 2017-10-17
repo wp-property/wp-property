@@ -51,7 +51,7 @@ namespace UsabilityDynamics\WPP {
           'hierarchical' => true,
           'public' => true,
           'show_in_nav_menus' => true,
-          'show_in_menu' => false,
+          'show_in_menu' => true,
           'show_ui' => false,
           'show_tagcloud' => false,
           'add_native_mtbox' => false,
