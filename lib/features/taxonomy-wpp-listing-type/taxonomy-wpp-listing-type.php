@@ -15,6 +15,7 @@ namespace UsabilityDynamics\WPP {
     class Taxonomy_WPP_Listing_Type {
 
       static $taxonomy = 'wpp_listing_type';
+      static $sub_taxonomy = 'wpp_listing_subtype';
       static $meta_property_type = 'property_type';
 
       /**
@@ -51,7 +52,7 @@ namespace UsabilityDynamics\WPP {
         add_filter('wpp_taxonomies', function( $taxonomies = array() ) {
           $taxonomies[ self::$taxonomy ] = array(
             'default' => true,
-            'readonly' => false,
+            'readonly' => true,
             'system' => true,
             'hidden' => true,
             'hierarchical' => true,
@@ -76,6 +77,37 @@ namespace UsabilityDynamics\WPP {
               'new_item_name' => _x('New Type', 'property type taxonomy', ud_get_wp_property()->domain),
               'not_found' => sprintf(_x('No %s type found', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
               'menu_name' => sprintf(_x('%s Type', 'property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            ),
+            'query_var' => 'type',
+            'rewrite' => array('slug' => 'type')
+          );
+          $taxonomies[ self::$sub_taxonomy ] = array(
+            'default' => true,
+            'readonly' => true,
+            'system' => true,
+            'hidden' => true,
+            'hierarchical' => false,
+            'unique' => false,
+            'public' => true,
+            'show_in_nav_menus' => true,
+            'show_ui' => false,
+            'show_in_menu' => true,
+            'show_tagcloud' => false,
+            'add_native_mtbox' => false,
+            'label' => sprintf(_x('Sub %s Type', 'sub property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+            'labels' => array(
+              'name' => sprintf(_x('Sub %s Type', 'sub property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+              'singular_name' => sprintf(_x('Sub %s Type', 'sub property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+              'search_items' => _x('Search Type', 'sub property type taxonomy', ud_get_wp_property()->domain),
+              'all_items' => _x('All Type', 'sub property type taxonomy', ud_get_wp_property()->domain),
+              'parent_item' => _x('Parent Type', 'sub property type taxonomy', ud_get_wp_property()->domain),
+              'parent_item_colon' => _x('Parent Type', 'sub property type taxonomy', ud_get_wp_property()->domain),
+              'edit_item' => _x('Edit Type', 'sub property type taxonomy', ud_get_wp_property()->domain),
+              'update_item' => _x('Update Type', 'sub property type taxonomy', ud_get_wp_property()->domain),
+              'add_new_item' => _x('Add New Type', 'sub property type taxonomy', ud_get_wp_property()->domain),
+              'new_item_name' => _x('New Type', 'sub property type taxonomy', ud_get_wp_property()->domain),
+              'not_found' => sprintf(_x('No Sub %s type found', 'sub property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
+              'menu_name' => sprintf(_x('Sub %s Type', 'sub property type taxonomy', ud_get_wp_property()->domain), WPP_F::property_label()),
             ),
             'query_var' => 'type',
             'rewrite' => array('slug' => 'type')
@@ -211,19 +243,12 @@ namespace UsabilityDynamics\WPP {
           if( !$exist ) {
             $term = term_exists($slug, self::$taxonomy);
             if (!$term) {
-              $term = wp_insert_term( $label, self::$taxonomy, array(
-                'slug' => $slug,
-                'description' => 'Assigned property_type [' . $slug . ']'
-              ));
-              update_term_meta( $term['term_id'], self::$meta_property_type, $slug );
-            } else {
-              // Honestly it had not to happen...
-              // Removing property type to exclude conflicts...
               unset( $property_types[$slug] );
             }
-
           }
         }
+
+        ksort($property_types);
 
         $wpp_settings[ 'property_types' ] = $property_types;
 
