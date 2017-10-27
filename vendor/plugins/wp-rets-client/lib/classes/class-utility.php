@@ -147,6 +147,9 @@ namespace UsabilityDynamics\WPRETSC {
             continue;
           }
 
+          // Flush all old terms for particular taxonomy, before we set new terms.
+          wp_delete_object_term_relationships( $_post_id, $tax_name );
+
           // Avoid hierarchical taxonomies since they do not allow simple-value passing.
           if( method_exists( 'WPP_F', 'verify_have_system_taxonomy' ) ) {
             WPP_F::verify_have_system_taxonomy( $tax_name, array( 'hierarchical' => false ) );
