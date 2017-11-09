@@ -160,6 +160,17 @@ namespace UsabilityDynamics\WPP {
           str_replace( array( ' ', '-', ',', '.' ), '', strtolower( sanitize_title( $term['name'] ) ) )
         ) ) );
 
+        // Split Term's name to the parts for better Completion Suggestion
+        $parts = explode( ' ', $term['name'] );
+        foreach( $parts as $k => $v ) {
+          unset( $parts[ $k ] );
+          $_parts = $parts;
+          $part = trim( implode( ' ', $_parts ) );
+          if( strlen( $part ) >= 3 && !in_array( $part, $input ) ) {
+            $input[] = $part;
+          }
+        }
+
         $context_term_type = array( $taxonomy );
         if( !empty( $term_type ) ) {
           $context_term_type[] = $term_type;
