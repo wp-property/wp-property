@@ -97,8 +97,9 @@ namespace UsabilityDynamics\WPP {
             ),
             'term_suggest' => array(
               'type' => 'completion',
-              'analyzer' => 'whitespace',
-              'search_analyzer' => 'whitespace_analyzer',
+              'analyzer' => 'standard',
+              //'analyzer' => 'whitespace',
+              //'search_analyzer' => 'whitespace_analyzer',
               'contexts' => array(
                 array(
                   'name' => 'term_type',
