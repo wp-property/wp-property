@@ -524,7 +524,7 @@ namespace UsabilityDynamics\WPP {
           //'preserve_separators' => true,
           //'preserve_position_increments' => true,
           //'max_input_length' => 50,
-          'contexts' => array(
+          'contexts' => apply_filters( 'wpp:elastic:title_suggest:contexts', array(
             array(
               'name' => 'listing_status',
               'type' => 'category'
@@ -537,7 +537,7 @@ namespace UsabilityDynamics\WPP {
               'name' => 'listing_type_status',
               'type' => 'category'
             )
-          )
+          ) )
         );
 
         return $mapping;
