@@ -288,7 +288,10 @@ namespace UsabilityDynamics\WPP {
         ), $post_args, $post_id );
 
         $contexts = !empty( $title_suggest['contexts'] ) ? $title_suggest['contexts'] : array();
-        $contexts[ 'listing_type_status' ] = array();
+
+        if( !isset( $contexts[ 'listing_type_status' ] ) || !is_array( $contexts[ 'listing_type_status' ] ) ) {
+          $contexts[ 'listing_type_status' ] = array();
+        }
 
         if(
           !empty( $contexts['listing_type'] ) && is_array( $contexts['listing_type'] ) &&
