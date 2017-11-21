@@ -112,11 +112,6 @@ namespace UsabilityDynamics\WPP {
           new Legacy_Meta_Attributes();
         }
 
-        // Invoke Elasticsearch Handler.
-        if ( WP_PROPERTY_ELASTICSEARCH_SERVICE ) {
-          new Elasticsearch();
-        }
-
         // Apply alises.
         if( WP_PROPERTY_FIELD_ALIAS ) {
           $this->alias = new Field_Alias();

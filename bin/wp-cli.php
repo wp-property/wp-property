@@ -574,6 +574,9 @@ if( !class_exists( 'WPP_CLI_Terms_Command' ) ) {
         if ( !empty( $query->terms ) ) {
 
           foreach ( $query->terms as $id => $name ) {
+
+            WP_CLI::log( current_time( 'mysql' ) . ' Removing Term [' . $name . ']' );
+
             if( wp_delete_term( $id, $taxonomy ) ) {
               $removed ++;
               WP_CLI::log( current_time( 'mysql' ) . ' Removed Term [' . $name . ']' );
