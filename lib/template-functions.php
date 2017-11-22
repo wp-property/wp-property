@@ -1349,7 +1349,7 @@ if (!function_exists('wpp_render_search_input')):
         <input
           class="wpp_search_input_field wpp_range_field wpp_range_input wpp_search_input_field_min wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
           type="text" name="wpp_search[<?php echo $attrib; ?>][min]"
-          value="<?php echo isset($value['min']) ? $value['min'] : ''; ?>"/> -
+          value="<?php echo isset($value['min']) ? $value['min'] : ''; ?>"/>
         <span class="wpp_dash">-</span>
         <input
           class="wpp_search_input_field wpp_range_field wpp_range_input wpp_search_input_field_max wpp_search_input_field_<?php echo $attrib; ?> <?php echo $attribute_data['ui_class']; ?>"
