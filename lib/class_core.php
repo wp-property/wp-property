@@ -25,8 +25,6 @@ class WPP_Core {
       ini_set( 'memory_limit', '128M' );
     }
 
-    //** Modifing post query according to capability */    
-    add_filter('pre_get_posts', array( $this, 'capability_wpp_property' ));
     //** Modify request to change feed */
     add_filter( 'request', 'property_feed' );
 

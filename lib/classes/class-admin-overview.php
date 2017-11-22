@@ -191,13 +191,7 @@ namespace UsabilityDynamics\WPP {
         );
 
         $defined = array();
-        foreach($fields as $key => $field) {
-          /** Removing author field if current user don't have edit_others_posts capability. */
-          if($field['id'] == 'author' && !current_user_can( 'edit_others_posts' )){
-            unset($fields[$key]);
-            continue;
-          }
-
+        foreach($fields as $field) {
           array_push( $defined, $field['id'] );
         }
 
