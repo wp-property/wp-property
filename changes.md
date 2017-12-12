@@ -39,7 +39,10 @@
 * Added `wpp::property_types` filter, utilized on admin UI only for now.
 * Fixed missing Properties menu items on first plugin activation. 
 
-### 2.2.0.2 ( May 22, 2011 )
+### 2.2.0.3 ( December 12, 2017 )
+* Fixed history pagination for [property_overview] shortcode.
+
+### 2.2.0.2 ( May 22, 2017 )
 * Added settings search in Settings tab.
 * Updated/fixed users capabilities for Power Tools add-on.
 

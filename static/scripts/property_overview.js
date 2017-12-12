@@ -127,7 +127,7 @@
           /* get current shortcode's object */
           var q = false;
           for (var i in wpp_query) {
-            if (wpp_query[i].unique_hash == history.unique_hash) {
+            if (wpp_query[i].index == history.i) {
               q = wpp_query[i];
               break;
             }
