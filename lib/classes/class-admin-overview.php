@@ -58,7 +58,7 @@ namespace UsabilityDynamics\WPP {
               array_unshift( $submenu[ 'edit.php?post_type=property' ], $page );
             } elseif( $page[ 2 ] == 'post-new.php?post_type=property' ) {
               // Removes 'Add Property' from menu if user can not edit properties. peshkov@UD
-              if( !current_user_can( 'edit_wpp_property' ) ) {
+              if( !current_user_can( 'edit_wpp_properties' ) ) {
                 unset( $submenu[ 'edit.php?post_type=property' ][ $key ] );
               }
             }
@@ -188,7 +188,13 @@ namespace UsabilityDynamics\WPP {
         );
 
         $defined = array();
-        foreach($fields as $field) {
+        foreach($fields as $key => $field) {
+          /** Removing author field if current user don't have edit_others_posts capability. */
+          if($field['id'] == 'author' && !current_user_can( 'edit_others_posts' )){
+            unset($fields[$key]);
+            continue;
+          }
+
           array_push( $defined, $field['id'] );
         }
 

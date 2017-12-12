@@ -3,8 +3,8 @@ Contributors: usability_dynamics, andypotanin, jbrw1984, maxim.peshkov, Anton Ko
 Donate link: http://usabilitydynamics.com/product/wp-property/
 Tags: property management, real estate, listings, properties, property, wp-property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 4.0
-Tested up to: 4.7
-Stable tag: 2.2.0.1
+Tested up to: 4.7.5
+Stable tag: 2.2.0.2
 
 == Description ==
 
@@ -76,7 +76,7 @@ Although WP-Property is the most downloaded WordPress real estate plugin, it can
 * List Attachments. Displays attachments of current property.
 
 = Shortcodes =
-We have setup a ["Shortcode Cheatsheet" page](https://www.usabilitydynamics.com/tutorials/wp-property-help/wp-property-shortcode-cheat-sheet/) for your convenience.
+We have setup a ["Shortcode Cheatsheet" page](https://www.usabilitydynamics.com/product/wp-property/docs/wp-property-shortcode-cheatsheet) for your convenience.
 
 * [property_overview]
 * [property_search]
@@ -227,6 +227,10 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 * Security fixes
 
 == Changelog ==
+
+= 2.2.0.2 =
+* Added settings search in Settings tab.
+* Updated/fixed users capabilities for Power Tools add-on.
 
 = 2.2.0.1 =
 * Compatibility with WordPress 4.7
