@@ -61,7 +61,7 @@ if ($settings['type'] !== 'loadmore' || ($settings['type'] == 'loadmore' && $set
     $sort_html .= ' </div>';
   }
 
-  $sort_html .= '<div class="clearfix"></div>';
+  $sort_html .= '<div class="clear"></div>';
   $sort_html .= '</div>';
 }
 

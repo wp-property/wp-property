@@ -514,6 +514,9 @@ ul.feps_property_input_fields .description {
 .properties_pagination.wpp_bottom_pagination {
   margin-bottom: 1em;
 }
+.properties_pagination .wpp_template_view {
+  display: none;
+}
 .wpp_sorter_options .wpp_sortable_link.wpp_sorted_element {
   background: none repeat scroll 0 0 #D36E09;
   color: #1C1711;
