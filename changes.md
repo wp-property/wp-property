@@ -1,3 +1,7 @@
+### 2.2.0.4 ( February 12, 2018 )
+* Added Feedback to settings page.
+* Other small fixes.
+
 ### 2.2.0.3 ( December 12, 2017 )
 * Fixed history pagination for [property_overview] shortcode.
 
