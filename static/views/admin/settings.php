@@ -49,7 +49,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
 
 ?>
 <div class="wrap <?php echo implode( ' ', $wrapper_classes ); ?>">
-<?php screen_icon(); ?>
+
 <h2 class='wpp_settings_page_header'><?php echo ud_get_wp_property( 'labels.name' ) . ' ' . __( 'Settings', ud_get_wp_property()->domain ) ?>
   <div class="wpp_fb_like">
   <div class="fb-like" data-href="https://www.facebook.com/wpproperty" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
@@ -89,6 +89,7 @@ if ( get_option( 'permalink_structure' ) == '' ) {
     }
     ?>
     <li><a href="#tab_troubleshooting"><?php _e( 'Help', ud_get_wp_property()->domain ); ?></a></li>
+    <li><a href="#tab_feedback"><?php _e( 'Feedback', ud_get_wp_property()->domain ); ?></a></li>
 	<!--<li id="label-search-text"></li>-->
   </ul>
 
@@ -578,6 +579,21 @@ if ( get_option( 'permalink_structure' ) == '' ) {
       </div>
 
       <?php do_action( 'wpp_settings_help_tab' ); ?>
+    </div>
+  </div>
+
+  <div id="tab_feedback">
+    <div class="wpp_inner_tab wp-core-ui">
+      <!--[if lte IE 8]>
+      <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+      <![endif]-->
+      <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+      <script>
+        hbspt.forms.create({
+          portalId: '3453418',
+          formId: '16a6f927-9a75-43f2-9444-57034db38930'
+        });
+      </script>
     </div>
   </div>
 
