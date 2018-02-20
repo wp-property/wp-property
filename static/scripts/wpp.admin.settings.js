@@ -87,6 +87,19 @@ jQuery.extend( wpp = wpp || {}, { ui: { settings: {
       jQuery( "#wpp_settings_tabs" ).tabs( { cookie: {  name: 'wpp_settings_tabs', expires: 30 } } );
     }
 
+    $("#wpp_settings_tabs").on("tabsactivate", function(event, ui) {
+      if(ui.newTab.attr("aria-controls") == 'tab_feedback'){
+        $("#hbspt_feedback_form").show();
+        $(".wpp_save_changes_row").hide();
+        ui.newPanel.hide();
+      }
+      else{
+        $("#hbspt_feedback_form").hide();
+        $(".wpp_save_changes_row").show();
+      }
+    });
+
+
     /* Show settings array */
     jQuery( "#wpp_show_settings_array" ).click( function () {
       var $this = jQuery(this),
