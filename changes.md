@@ -1,3 +1,6 @@
+### 2.2.0.5 ( February 20, 2018 )
+* Fixed the bug which was forcing to fill out the Feedback form to save wp-property settings.
+
 ### 2.2.0.4 ( February 12, 2018 )
 * Added Feedback to settings page.
 * Other small fixes.
