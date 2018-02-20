@@ -228,6 +228,7 @@ class WPP_Core {
     wp_register_style('jquery-ui-theme', ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/styles/fields/jqueryui/jquery.ui.theme.css', 'url' ), array(), '1.8.17');
     wp_register_style('jquery-ui-datepicker', ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/styles/fields/jqueryui/jquery.ui.datepicker.css', 'url' ), array('jquery-ui-core', 'jquery-ui-theme'), '1.8.17');
     wp_register_script('uisf-date', ud_get_wp_property()->path( 'vendor/libraries/usabilitydynamics/lib-ui/static/scripts/fields/date.js', 'url' ), array('jquery-ui-datepicker'), false, true);
+    wp_register_script('wpp-jquery-ui-js', WPP_URL . 'scripts/jquery-ui.js', array('jquery'), false, true);
 
 
     wp_register_style( 'wpp-jquery-fancybox-css', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.css' );
