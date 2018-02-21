@@ -23,7 +23,7 @@ global $wp_properties;
   }
   foreach( $wp_properties[ 'property_types' ] as $property_slug => $label ): ?>
 
-    <tr class="wpp_dynamic_table_row" slug="<?php echo $property_slug; ?>"  data-property-slug="<?php echo $property_slug; ?>" new_row='false'>
+    <tr class="wpp_dynamic_table_row" slug="<?php echo $property_slug; ?>" style="<?php echo( empty( $label ) ? "display:none;" : ""); ?>" data-property-slug="<?php echo $property_slug; ?>" new_row='false'>
 
       <td>
         <ul>
