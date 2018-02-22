@@ -1,3 +1,6 @@
+### 2.2.0.6 ( February 22, 2018 )
+* Fixed the bug with empty Property Types which was blocking to save settings on the Settings page.
+
 ### 2.2.0.5 ( February 20, 2018 )
 * Fixed the bug which was forcing to fill out the Feedback form to save wp-property settings.
 
