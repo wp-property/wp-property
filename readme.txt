@@ -1,5 +1,5 @@
-=== WP-Property - WordPress Powered Real Estate and Property Management ===
-Contributors: usability_dynamics, andypotanin, jbrw1984, maxim.peshkov, Anton Korotkoff, ideric, MariaKravchenko, lena60942, SoSeductive
+﻿=== WP-Property - WordPress Powered Real Estate and Property Management ===
+Contributors: usability_dynamics, andypotanin, jbrw1984, maxim.peshkov, Anton Korotkoff, ideric, MariaKravchenko, smoot328
 Donate link: http://usabilitydynamics.com/product/wp-property/
 Tags: property management, real estate, listings, properties, property, wp-property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 4.0
@@ -8,13 +8,16 @@ Stable tag: 2.2.0.3
 
 == Description ==
 
-WP-Property is the leading WordPress plugin for creating and managing highly customizable real estate, property management, and completely custom listing showcase websites. Packed full of features, it gives you possibilities that no other real estate system for WordPress does. Try it out, you will be impressed.
+WP-Property is WordPress plugin for creating and managing highly customizable real estate, property management, and completely custom listing showcase websites.
 
-Although WP-Property is the most downloaded WordPress real estate plugin, it can handle so much more than real estate. Showcase any kind of entity you want, from livestock, golf carts, to properties and products, experiencing unparalleled ease of use and flexibility on the way.
+Although WP-Property can handle so much more than real estate. Showcase any kind of entity you want, from livestock, golf carts, to properties and products, experiencing unparalleled ease of use and flexibility on the way.
 
-> Do you want to see the plugin in action? Just proceed to our <a href="http://madison.ci.usabilitydynamics.com/">Madison</a> and <a href="http://denali.ci.usabilitydynamics.com/">Denali</a> Demo sites.
+Is the current functionality still not enough to cover all your needs? Learn more about the WP-Property free <a href ="https://www.usabilitydynamics.com/product/wp-property/addons"> Add-ons </a>
+and <a href ="https://www.usabilitydynamics.com/product/wp-property/themes"> Themes. </a>
 
-> Free theme <a href="https://www.usabilitydynamics.com/product/avalon">Avalon</a> especially for WP-Property plugin and all it's add-ons. It has responsive style layouts so that it can be displayed nicely in any device, desktop or mobile. Customizable sidebars and different widgets to suit every taste. All colors from the site are also customizable to fit your brand's colors.
+
+> Do you want to see the plugin in action? Just proceed to our <a href ="https://demo.usabilitydynamics.com/avalon/"> Avalon demo site. </a>
+ <a href ="https://www.usabilitydynamics.com/product/avalon"> Avalon theme</a> was created especially for WP-Property plugin and all its add-ons.
 
 <strong>Dynamic Property Listings - No Coding Required!</strong><br>
 
@@ -38,16 +41,15 @@ Although WP-Property is the most downloaded WordPress real estate plugin, it can
 
 * Not just a mere plugin, but a whole real estate management system at your fingertips!
 * Smooth operation, user friendly interface, comes with its own vast collection of property listing functionality and compatible premium features.
-* Expandable, customizable and fully supported by us!
+* Expandable, customizable!
 
 > See the plugin on [GitHub](https://github.com/wp-property/wp-property)
 
 = Features =
 * Flexible Extendable Filter on All Properties page.
 * Fields such as price, bathrooms, bedrooms, features, address, work out of the box.
-* Any amount of custom attributes (fields) and property types.
 * Different attributes' fields inputs are available, e.g. Text Editor, Number, Currency, File and Image Upload, URL, Date and Color Pickers, etc.
-* Free and Paid [Add-ons and Themes](https://www.usabilitydynamics.com/products#category-wp-property) available.
+* Free [Add-ons and Themes](https://www.usabilitydynamics.com/products#category-wp-property) available.
 * Flexible Search.
 * Pagination and sorting works on search results.
 * Property result pagination via AJAX.
@@ -59,9 +61,6 @@ Although WP-Property is the most downloaded WordPress real estate plugin, it can
 * Google Maps API to automatically validate physical addresses behind-the-scenes.
 * Integrates with Media Library, avoiding the need for additional third-party Gallery plugins.
 * Advanced image type configuration using UI.
-* Out of the box support for two property types, Building and Floorplan. More can be added via WP-Property API.
-* Property types follow a hierarchical format, having the ability of inheriting settings - i.e. buildings (or communities) will automatically calculate the price range of all floor-plans below them.
-* Free!
 
 = Widgets =
 * Child Properties. Show child properties (if any) for currently displayed property
