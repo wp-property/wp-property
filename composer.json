@@ -99,7 +99,7 @@
         "description": "Enable to use legacy widgets",
         "since": "2.2.1",
         "enable_on_old_install": true,
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "Setup Assistant",
@@ -113,15 +113,15 @@
         "constant": "WPP_FEATURE_FLAG_SETTINGS_BACKUPS",
         "description": "Enables automaic backups of the WP-Property settings. Backups stored in [wpp_property_backups] option.",
         "since": "2.2.1",
-        "enable_on_old_install": true,
-        "enabled": true
+        "enable_on_old_install": false,
+        "enabled": false
       },
       {
         "name": "Settings Version 2",
         "constant": "WPP_FEATURE_FLAG_SETTINGS_V2",
         "description": "This feature flag enables faster saving of developer tab's attributes.",
         "since": "2.2.1",
-        "enabled": false
+        "enabled": true
       },
       {
         "name": "Disable Editor",

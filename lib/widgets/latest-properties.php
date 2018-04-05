@@ -253,7 +253,7 @@ class LatestPropertiesWidget extends WP_Widget {
  * Register widget
  */
 add_action( 'widgets_init', function() {
-  if( WPP_LEGACY_WIDGETS || ud_get_wp_property( 'configuration.enable_legacy_features' ) == 'true' ) {
+  if( ud_get_wp_property( 'configuration.enable_legacy_features' ) == 'true' ) {
     register_widget("LatestPropertiesWidget");
   }
 });

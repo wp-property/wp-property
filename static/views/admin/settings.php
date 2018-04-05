@@ -320,7 +320,7 @@ $l10n_id = get_option('wp-property-l10n-attachment');
                     <?php endif; /* WPP_F::has_theme_specific_stylesheet() */ ?>
                   <?php endif; ?>
 
-                  <li class="wpp-depreciated-option">
+                  <li>
                     <?php echo WPP_F::checkbox("name=wpp_settings[configuration][enable_legacy_features]&label=" . __('Enable Legacy Features.', ud_get_wp_property()->domain), (isset($wp_properties['configuration']['enable_legacy_features']) ? $wp_properties['configuration']['enable_legacy_features'] : false)); ?>
                     <span class="description"><?php printf(__('If checked deprecated features will be enabled. E.g.: Child %1$s and Featured %1$s Widgets, etc', ud_get_wp_property()->domain), WPP_F::property_label('plural')) ?></span>
                   </li>
