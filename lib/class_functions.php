@@ -770,7 +770,7 @@ class WPP_F extends UsabilityDynamics\Utility
 
     //check if Properties page existed
     $pageName = "Properties";
-    if (!get_page_by_path($pageName)) {
+    if (!get_page_by_path($pageName) && !get_page_by_path($wp_properties['configuration']['base_slug'])) {
       $new_page = array(
         'post_type' => 'page',
         'post_title' => $pageName,
