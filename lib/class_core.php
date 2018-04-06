@@ -842,8 +842,16 @@ class WPP_Core {
    * @return mixed
    */
   function property_row_actions( $actions, $post ) {
-    if( $post->post_type != 'property' )
+    if( $post->post_type != 'property' ) {
+
+      global $wp_properties;
+      if ($post->post_type == 'page' && $post->post_name == $wp_properties['configuration']['base_slug']) {
+        unset($actions['trash']); // remove Trash action for current property overview page
+        return $actions;
+      }
+
       return $actions;
+    }
 
     unset( $actions[ 'inline' ] );
 
