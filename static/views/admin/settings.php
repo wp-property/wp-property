@@ -676,38 +676,6 @@ $l10n_id = get_option('wp-property-l10n-attachment');
             </div>
           <?php } ?>
 
-          <div class="wpp_settings_block" data-wpp-section="feature-flags">
-            <p><?php _e( 'Available feature flags and their status.', ud_get_wp_property()->domain ); ?></p>
-
-            <ul class="wpp-feature-flag-list">
-            <?php foreach( ud_get_wp_property()->get_feature_flags() as $_flagDetail ) { ?>
-              <li class="wpp-feature-flag wpp-feature-flag-<?php echo defined( $_flagDetail->constant ) && constant( $_flagDetail->constant ) ? 'enabled': 'disabled';  ?>">
-                <span class="dashicons dashicons-yes"></span>
-                <b class="wpp-feature-name"><?php echo $_flagDetail->name; ?></b>
-                <span class="wpp-feature-description"><?php echo $_flagDetail->description; ?></span>
-              </li>
-            <?php } ?>
-            </ul>
-
-          </div>
-
-          <div class="wpp_settings_block" data-wpp-section="api-registration-status">
-            <p><?php _e( 'API Registration Status', ud_get_wp_property()->domain ); ?></p>
-
-            <ul class="wpp-feature-api-status-list">
-            <?php foreach( array( 'ud_site_secret_token' => 'Secret Token', 'ud_site_id' => 'Site ID', 'ud_site_public_key' => 'Public Key', 'ud_api_key' => 'Generic API Key' ) as $_option => $_option_label) { ?>
-              <li class="wpp-feature-flag wpp-feature-flag-<?php echo get_site_option( $_option ) ? 'enabled': 'disabled';  ?>">
-                <span class="dashicons dashicons-yes"></span>
-                <label>
-                  <b class="wpp-feature-name"><?php echo $_option_label; ?>:</b>
-                  <span class="wpp-feature-description"><input type="text" size="48" readonly="readonly" value="<?php echo get_option($_option); ?>" /></span>
-                  </label>
-              </li>
-            <?php } ?>
-            </ul>
-
-          </div>
-
           <div class="wpp_settings_block">
             <?php $google_map_localizations = WPP_F::draw_localization_dropdown('return_array=true'); ?>
             <?php _e('Revalidate all addresses using', ud_get_wp_property()->domain); ?>
@@ -759,6 +727,38 @@ $l10n_id = get_option('wp-property-l10n-attachment');
             <?php if (function_exists('memory_get_peak_usage')): ?>
               <?php _e('Peak Memory Usage:', ud_get_wp_property()->domain); ?><?php echo round((memory_get_peak_usage() / 1048576), 2); ?> megabytes.
             <?php endif; ?>
+          </div>
+
+          <div class="wpp_settings_block" data-wpp-section="api-registration-status">
+            <p><?php _e( 'API Registration Status', ud_get_wp_property()->domain ); ?></p>
+
+            <ul class="wpp-feature-api-status-list">
+              <?php foreach( array( 'ud_site_secret_token' => 'Secret Token', 'ud_site_id' => 'Site ID', 'ud_site_public_key' => 'Public Key', 'ud_api_key' => 'Generic API Key' ) as $_option => $_option_label) { ?>
+                <li class="wpp-feature-flag wpp-feature-flag-<?php echo get_site_option( $_option ) ? 'enabled': 'disabled';  ?>">
+                  <span class="dashicons dashicons-yes"></span>
+                  <label>
+                    <b class="wpp-feature-name"><?php echo $_option_label; ?>:</b>
+                    <span class="wpp-feature-description"><input type="text" size="48" readonly="readonly" value="<?php echo get_option($_option); ?>" /></span>
+                  </label>
+                </li>
+              <?php } ?>
+            </ul>
+
+          </div>
+
+          <div class="wpp_settings_block" data-wpp-section="feature-flags">
+            <p><?php _e( 'Available feature flags and their status.', ud_get_wp_property()->domain ); ?></p>
+
+            <ul class="wpp-feature-flag-list">
+              <?php foreach( ud_get_wp_property()->get_feature_flags() as $_flagDetail ) { ?>
+                <li class="wpp-feature-flag wpp-feature-flag-<?php echo defined( $_flagDetail->constant ) && constant( $_flagDetail->constant ) ? 'enabled': 'disabled';  ?>">
+                  <span class="dashicons dashicons-yes"></span>
+                  <b class="wpp-feature-name"><?php echo $_flagDetail->name; ?></b>
+                  <span class="wpp-feature-description"><?php echo $_flagDetail->description; ?></span>
+                </li>
+              <?php } ?>
+            </ul>
+
           </div>
 
           <?php do_action('wpp_settings_help_tab'); ?>
