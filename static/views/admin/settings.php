@@ -729,8 +729,12 @@ $l10n_id = get_option('wp-property-l10n-attachment');
             <?php endif; ?>
           </div>
 
-          <div class="wpp_settings_block" data-wpp-section="api-registration-status">
-            <p><?php _e( 'API Registration Status', ud_get_wp_property()->domain ); ?></p>
+          <div class="wpp_settings_block wpp_settings_block_toggle hidden_setting" data-wpp-section="api-registration-status">
+            <p>
+              <?php _e( 'API Registration Status', ud_get_wp_property()->domain ); ?>
+              <i class="dashicons dashicons-arrow-down"></i>
+              <i class="dashicons dashicons-arrow-up"></i>
+            </p>
 
             <ul class="wpp-feature-api-status-list">
               <?php foreach( array( 'ud_site_secret_token' => 'Secret Token', 'ud_site_id' => 'Site ID', 'ud_site_public_key' => 'Public Key', 'ud_api_key' => 'Generic API Key' ) as $_option => $_option_label) { ?>
@@ -746,8 +750,12 @@ $l10n_id = get_option('wp-property-l10n-attachment');
 
           </div>
 
-          <div class="wpp_settings_block" data-wpp-section="feature-flags">
-            <p><?php _e( 'Available feature flags and their status.', ud_get_wp_property()->domain ); ?></p>
+          <div class="wpp_settings_block wpp_settings_block_toggle hidden_setting" data-wpp-section="feature-flags">
+            <p>
+              <?php _e( 'Available feature flags and their status.', ud_get_wp_property()->domain ); ?>
+              <i class="dashicons dashicons-arrow-down"></i>
+              <i class="dashicons dashicons-arrow-up"></i>
+            </p>
 
             <ul class="wpp-feature-flag-list">
               <?php foreach( ud_get_wp_property()->get_feature_flags() as $_flagDetail ) { ?>

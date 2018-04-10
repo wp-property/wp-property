@@ -1916,8 +1916,28 @@ body.post-type-property .uisf-date {
   width: 100%;
   height: auto;
 }
-
 .wpp_delete_row.disabled {
   color: #8c8997;
   cursor: not-allowed;
 }
+/* wpp_settings_block_toggle */
+.wpp_settings_block_toggle > p {
+  cursor: pointer;
+}
+.wpp_settings_block_toggle > p .dashicons-arrow-up {
+  display: inline-block;
+}
+.wpp_settings_block_toggle > p .dashicons-arrow-down {
+  display: none;
+}
+.wpp_settings_block_toggle ul {
+  display: block;
+}
+.wpp_settings_block_toggle.hidden_setting > p .dashicons-arrow-down {
+  display: inline-block;
+}
+.wpp_settings_block_toggle.hidden_setting > p .dashicons-arrow-up,
+.wpp_settings_block_toggle.hidden_setting > p > ul {
+  display: none;
+}
+/* wpp_settings_block_toggle */

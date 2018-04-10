@@ -2361,3 +2361,40 @@ body.post-type-property {
 
 @import "wpp-json-viewer.less";
 @import "wpp.admin.customizer.less";
+
+
+.wpp_delete_row.disabled {
+  color: #8c8997;
+  cursor: not-allowed;
+}
+
+/* wpp_settings_block_toggle */
+.wpp_settings_block_toggle {
+  > p {
+    cursor: pointer;
+
+    .dashicons-arrow-up {
+      display: inline-block;
+    }
+    .dashicons-arrow-down {
+      display: none;
+    }
+  }
+  ul {
+    display: block;
+  }
+  &.hidden_setting {
+
+    > p {
+
+      .dashicons-arrow-down {
+        display: inline-block;
+      }
+      .dashicons-arrow-up,
+      > ul {
+        display: none;
+      }
+    }
+  }
+}
+/* wpp_settings_block_toggle */

@@ -754,6 +754,12 @@ jQuery.extend( wpp = wpp || {}, {
           });
         } // end if WPP_FEATURE_FLAG_SETTINGS_V2;
 
+        /* wpp_settings_block_toggle */
+        jQuery(document).on('click', '.wpp_settings_block_toggle > p', function(){
+          jQuery(this).parent().toggleClass('hidden_setting');
+        });
+        /* wpp_settings_block_toggle */
+
         jQuery(document).trigger('wpp.ui.settings.ready');
 
       }, // End ready();
