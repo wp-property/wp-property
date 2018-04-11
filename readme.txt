@@ -3,8 +3,8 @@ Contributors: usability_dynamics, andypotanin, jbrw1984, maxim.peshkov, Anton Ko
 Donate link: http://usabilitydynamics.com/product/wp-property/
 Tags: property management, real estate, listings, properties, property, wp-property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 4.0
-Tested up to: 4.9.1
-Stable tag: 2.2.0.3
+Tested up to: 4.9.5
+Stable tag: 2.3.0
 
 == Description ==
 
@@ -202,9 +202,6 @@ Due to contributions from the plugin users we currently have it in Danish, Germa
 = Side Bar disappears =
 This is a theme issue. Once again you can customize your own theme, email us and we can give you a quote or you can purchase the Denali premium theme.
 
-= How do I suggest an idea? =
-You can send us a message via our website, or, preferably, visit our [feedback.usabilitydynamics.com](http://feedback.usabilitydynamics.com/forums/95259-wp-property) page to submit new, and vote on existing, ideas.
-
 = I like where this is going, but how do I get customization? =
 If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.  If you need something custom, and urgent, [contact us](https://www.usabilitydynamics.com/contact-us)
 
@@ -226,6 +223,17 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 * Security fixes
 
 == Changelog ==
+
+= 2.3.0 =
+* Code cleaning, warnings, notices fixes.
+* Fixed WPML compatibility issues (404 page and custom attributes values).
+* Updated Google Maps API settings and docs.
+* Added pre-release updates option.
+* Added default Properties page. Removed default one.
+* Fixed Property type was not showing in Search filters.
+* Fixed Property Search issue with attributes which contain slashes.
+* Fixed scroll to the top option on all properties page.
+* Added Feedback form in Settings tab.
 
 = 2.2.0.3 =
 * Fixed history pagination for [property_overview] shortcode.

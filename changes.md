@@ -1,3 +1,14 @@
+### 2.3.0 ( April 11, 2018 )
+* Code cleaning, warnings, notices fixes.
+* Fixed WPML compatibility issues (404 page and custom attributes values).
+* Updated Google Maps API settings and docs.
+* Added pre-release updates option.
+* Added default Properties page. Removed default one.
+* Fixed Property type was not showing in Search filters.
+* Fixed Property Search issue with attributes which contain slashes.
+* Fixed scroll to the top option on all properties page.
+* Added Feedback form in Settings tab.
+
 ### 2.2.1 
 * Updated `maybe_generate_l10n_script` method to check for existence of file on disk, regenerating in needed.
 * Added term meta UI for standard taxonomies.
