@@ -1364,9 +1364,9 @@ class WPP_Core {
       //** Add help sidebar with More Links */
       get_current_screen()->set_help_sidebar(
         '<p><strong>' . __( 'For more information:', ud_get_wp_property()->domain ) . '</strong></p>' .
-        '<p>' . __( '<a href="https://usabilitydynamics.com/products/wp-property/" target="_blank">WP-Property Product Page</a>', ud_get_wp_property()->domain ) . '</p>' .
-        '<p>' . __( '<a href="https://usabilitydynamics.com/products/wp-property/forum/" target="_blank">WP-Property Forums</a>', ud_get_wp_property()->domain ) . '</p>' .
-        '<p>' . __( '<a href="https://usabilitydynamics.com/help/" target="_blank">WP-Property Tutorials</a>', ud_get_wp_property()->domain ) . '</p>'
+        '<p>' . __( '<a href="https://www.usabilitydynamics.com/product/wp-property/" target="_blank">WP-Property Product Page</a>', ud_get_wp_property()->domain ) . '</p>' .
+        '<p>' . __( '<a href="https://wordpress.org/support/plugin/wp-property/" target="_blank">WP-Property Forums</a>', ud_get_wp_property()->domain ) . '</p>' .
+        '<p>' . __( '<a href="https://www.usabilitydynamics.com/product/wp-property/docs/home" target="_blank">WP-Property Tutorials</a>', ud_get_wp_property()->domain ) . '</p>'
       );
 
     } else {
