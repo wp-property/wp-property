@@ -615,6 +615,12 @@ namespace UsabilityDynamics\WPLT {
                 }
 
                 break;
+
+              case apply_filters( 'wp_list_table_filter_map_class', null ):
+
+                $_query = apply_filters( 'wp_list_table_filter_query_'.apply_filters( 'wp_list_table_filter_map_class', null ), $_query, $q, $map );
+
+                break;
             }
           }
 

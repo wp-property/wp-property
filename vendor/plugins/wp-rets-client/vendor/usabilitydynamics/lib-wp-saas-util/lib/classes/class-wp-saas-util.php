@@ -210,7 +210,7 @@ namespace UsabilityDynamics\SAAS_UTIL {
             'user_id' => get_current_user_id(),
             'user_email' => wp_get_current_user()->user_email,
             'home_url' => get_site_url(),
-            'products' => $products
+            'products' => json_encode($products)
           )
         );
 

@@ -45,482 +45,6 @@ namespace UsabilityDynamics\WPRETSC {
         // REST API
         add_action( 'rest_api_init', array( $this, 'api_init' ), 100 );
 
-
-      }
-
-      /**
-       * Add custom XML-RPC methods
-       *
-       * @param $_methods
-       * @return mixed
-       */
-      public function xmlrpc_methods( $_methods ) {
-
-        $_methods[ 'wpp.systemCheck' ] = array( $this, 'rpc_system_check' );
-        $_methods[ 'wpp.systemPing' ] = array( $this, 'rpc_system_ping' );
-        $_methods[ 'wpp.deleteProperty' ] = array( $this, 'delete_property' );
-        $_methods[ 'wpp.trashProperty' ] = array( $this, 'trash_property' );
-        $_methods[ 'wpp.getPostIdByMlsId' ] = array( $this, 'get_post_id_by_mls_id' );
-        $_methods[ 'wpp.editProperty' ] = array( $this, 'edit_property' );
-        $_methods[ 'wpp.removeDuplicatedMLS' ] = array( $this, 'rpc_remove_duplicated_mls' );
-        $_methods[ 'wpp.modifiedHistogram' ] = array( $this, 'rpc_get_modified_histogram' );
-        $_methods[ 'wpp.flushCache' ] = array( $this, 'rpc_flush_cache' );
-
-        // New full/partial updates
-        $_methods[ 'wpp.createProperty' ] = array( $this, 'create_property' );
-        $_methods[ 'wpp.updateProperty' ] = array( $this, 'update_property' );
-        $_methods[ 'wpp.insertMedia' ] = array( $this, 'insert_media' );
-        $_methods[ 'wpp.getProperty' ] = array( $this, 'get_property' );
-
-        // Schedule stats/listings for data integrity
-        $_methods[ 'wpp.scheduleStats' ] = array( $this, 'get_schedule_stats' );
-        $_methods[ 'wpp.scheduleListings' ] = array( $this, 'get_schedule_listings' );
-
-        return $_methods;
-      }
-
-      /**
-       * Initialize REST routes for our internal XML-RPC routes.
-       *
-       * https://usabilitydynamics-www-marcusrealty-com-production.c.rabbit.ci/wp-json/wp-rets-client/v1/cleanup/status
-       * https://usabilitydynamics-www-marcusrealty-com-production.c.rabbit.ci/wp-json/wp-rets-client/v1/cleanup/process
-       *
-       * @author potanin@UD
-       */
-      public function api_init( ) {
-
-        register_rest_route( 'wp-rets-client/v1', '/systemCheck', array(
-          'methods' => 'GET',
-          'callback' => array( $this, 'rpc_system_check' ),
-        ) );
-
-        register_rest_route( 'wp-rets-client/v1', '/systemPing', array(
-          'methods' => 'GET',
-          'callback' => array( $this, 'rpc_system_ping' ),
-        ) );
-
-        register_rest_route( 'wp-rets-client/v1', '/deleteProperty', array(
-          'methods' => array( 'POST', 'GET' ),
-          'callback' => array( $this, 'delete_property' ),
-        ) );
-
-        register_rest_route( 'wp-rets-client/v1', '/trashProperty', array(
-          'methods' => array( 'POST', 'GET' ),
-          'callback' => array( $this, 'trash_property' ),
-        ) );
-
-        register_rest_route( 'wp-rets-client/v1', '/getPostIdByMlsId', array(
-          'methods' => array( 'POST', 'GET' ),
-          'callback' => array( $this, 'get_post_id_by_mls_id' ),
-        ) );
-
-        register_rest_route( 'wp-rets-client/v1', '/editProperty', array(
-          'methods' => 'POST',
-          'callback' => array( $this, 'edit_property' ),
-        ) );
-
-        register_rest_route( 'wp-rets-client/v1', '/updateProperty', array(
-          'methods' => 'POST',
-          'callback' => array( $this, 'update_property' ),
-        ) );
-
-        register_rest_route( 'wp-rets-client/v1', '/getProperty', array(
-          'methods'   => array('GET', 'POST' ),
-          'callback'  => array( $this, 'get_property' ),
-          'args'      => array(
-            'ID' => array(
-              'default' => null,
-            ),
-            'mls_number' => array(
-              'default' => null
-            ),
-            'detail' => array(
-              'default' => true
-            ),
-          )
-        ) );
-
-        register_rest_route( 'wp-rets-client/v1', '/createProperty', array(
-          'methods' => 'POST',
-          'callback' => array( $this, 'create_property' ),
-        ) );
-
-        register_rest_route( 'wp-rets-client/v1', '/removeDuplicates', array(
-          'methods' => 'POST',
-          'callback' => array( $this, 'rpc_remove_duplicated_mls' ),
-        ) );
-
-        register_rest_route( 'wp-rets-client/v1', '/getHistogram', array(
-          'methods' => 'GET',
-          'callback' => array( $this, 'rpc_get_modified_histogram' ),
-        ) );
-
-        register_rest_route( 'wp-rets-client/v1', '/flushCache', array(
-          'methods' => 'GET',
-          'callback' => array( $this, 'rpc_flush_cache' ),
-        ) );
-
-        register_rest_route( 'wp-rets-client/v1', '/cleanup/process', array(
-          'methods' => 'GET',
-          'callback' => array( $this, 'cleanup_handler' ),
-        ));
-
-        register_rest_route( 'wp-rets-client/v1', '/cleanup/status', array(
-          'methods' => 'GET',
-          'callback' => array( $this, 'cleanup_status_handler' ),
-        ));
-
-        register_rest_route( 'wp-rets-client/v1', '/scheduleStats', array(
-          'methods' => array( 'POST', 'GET' ),
-          'callback' => array( $this, 'get_schedule_stats' ),
-        ));
-
-        register_rest_route( 'wp-rets-client/v1', '/scheduleListings', array(
-          'methods' => array( 'POST', 'GET' ),
-          'args'            => array(
-            'per_page' => array(
-              'default' => 10,
-              'sanitize_callback' => 'absint',
-            ),
-            'offset' => array(
-              'default' => 0,
-              'sanitize_callback' => 'absint',
-            ),
-            'unique' => array(
-              'default' => 'wpp::rets_pk'
-            ),
-            'post_status' => array(
-              'default' => array( 'publish', 'private', 'future', 'draft' )
-            ),
-            'schedule_id' => array(
-              'default' => false,
-              'sanitize_callback' => 'sanitize_title',
-            ),
-            'order' => array(
-              'default' => 'asc',
-              'sanitize_callback' => 'sanitize_title',
-            ),
-            'detail' => array(
-              'default' => false,
-              'sanitize_callback' => 'sanitize_title',
-            ),
-            'slug' => array(
-              'default' => false,
-              'sanitize_callback' => 'sanitize_title',
-            )
-          ),
-          'callback' => array( $this, 'get_schedule_listings' ),
-        ));
-
-        register_rest_route( 'wp-rets-client/v1', '/insertMedia', array(
-          'methods' => 'POST',
-          'callback' => array( $this, 'insert_media' ),
-          'args'      => array(
-            'post_id' => array(
-              'default' => null,
-            ),
-            'mls_number' => array(
-              'default' => null
-            ),
-            'media' => array(
-              'default' => null
-            ),
-          )
-
-        ) );
-
-      }
-
-      /**
-       *
-       * The [wpp_import_time] meta is [checked]
-       *
-       * - rets_ok - we now set [rets_primary_key] but historical it was [wpp::rets_pk] which we still support
-       * - rets_mls_number - removed for now since it wasnt always standard.
-       * - rets_id - the unique meta key we use to find property. seems to be same as [wpp::rets_pk]
-       *
-       * /wp-json/wp-rets-client/v1/schedule/listings?order=desc&schedule_id=1463079227
-       * /wp-json/wp-rets-client/v1/schedule/listings?type=index
-       * /wp-json/wp-rets-client/v1/schedule/listings?type=index&unique=rets_id
-       *
-       * - type - mls_numbers - will return a summary of post_id -> rets_id. No consideration given to post_status or schedule.
-       *
-       * @param $request_data
-       *
-       * @return array
-       */
-      static public function get_schedule_listings( $request_data ) {
-        global $wp_xmlrpc_server, $wpdb;
-
-        $post_data = self::parseRequest( $request_data );
-
-        if( ( isset( $wp_xmlrpc_server ) && !empty( $wp_xmlrpc_server->error ) ) || isset( $post_data['error'] ) ) {
-          return $post_data;
-        }
-
-        // handle wp-json reqests
-        if( is_callable( array( $request_data, 'get_param' ) ) ) {
-
-          $post_data = wp_parse_args($post_data, array(
-            'type' => $request_data->get_param( 'type' ),
-            'per_page' => $request_data->get_param( 'per_page' ),
-            'offset' => $request_data->get_param( 'offset' ),
-            'post_status' => $request_data->get_param( 'post_status' ),
-            'order' => $request_data->get_param( 'order' ),
-            'unique' => $request_data->get_param( 'unique' )
-          ));
-
-        };
-
-        // Quick summary of all listings, fetched by a meta key.
-        if( $post_data['type'] === 'index' ) {
-          $_per_page = $post_data[ 'per_page' ];
-          $offset = $post_data[ 'offset' ];
-          $unique_key = $post_data[ 'unique' ];
-
-          if( is_string( $post_data[ 'post_status' ] ) ) {
-            $_post_status = explode( ',', $post_data[ 'post_status' ] );
-            $post_status = join( "','", $_post_status );
-          }
-
-          if( is_array( $post_data[ 'post_status' ] ) ) {
-            $post_status = join( "','", $post_data[ 'post_status' ] );
-          }
-
-          $_queries = array(
-            "all" => "SELECT post_id, meta_value as unique_field, post_status, post_date, post_modified FROM $wpdb->postmeta LEFT JOIN $wpdb->posts ON post_id=ID WHERE meta_key='$unique_key' AND post_status IN ('$post_status') LIMIT $offset, $_per_page;",
-            "total" => "SELECT count( post_id ) FROM $wpdb->postmeta LEFT JOIN $wpdb->posts ON post_id=ID WHERE meta_key='$unique_key' AND post_status IN ('$post_status')  LIMIT $offset, $_per_page;"
-          );
-
-          $_total = $wpdb->get_var( $_queries['total' ]);
-
-          $_list = $wpdb->get_results( $_queries['all' ] );
-
-          $_result = array(
-            'ok' => true,
-            'total' => intval($_total),
-            'data' => $_list,
-            'unique' => $unique_key,
-            'offset' => $post_data[ 'offset' ],
-            'post_status' => explode( "','", $post_status ),
-            'per_page' => $post_data[ 'per_page' ],
-            'time' => timer_stop(),
-          );
-
-          ud_get_wp_rets_client()->write_log( "Using query [" . $_queries['all'] . "] to get index list." );
-
-          return $_result;
-        }
-
-        $_query = array(
-          'post_status' => $post_data[ 'post_status' ],
-          'post_type' => 'property',
-          'posts_per_page' => $post_data[ 'per_page' ],
-          'update_post_meta_cache' => false,
-          'update_post_term_cache' => false,
-          'orderby' => 'modified',
-          'order' => strtoupper( $post_data[ 'order' ] ),
-          'tax_query' => array(
-            array(
-              'taxonomy' => 'rets_schedule',
-              'field'    => 'slug',
-              'terms'    => $post_data[ 'schedule_id' ],
-            ),
-          ),
-        );
-
-        if( $post_data[ 'offset' ] ) {
-          $_query['offset'] = $post_data[ 'offset' ];
-        }
-
-        //error_log(print_r($_query,true));
-
-        $_query = array_merge( $_query, array(
-          'meta_key' => 'wpp_import_time',
-          'orderby' => 'meta_value_num',
-        ));
-
-        $query = new WP_Query($_query);
-
-        $_listings = array();
-
-        foreach( $query->posts as $_item ) {
-
-          $_wpp_import_time = get_post_meta( $_item->ID, 'wpp_import_time', true ) ;
-
-          $_listings[] = array(
-            "id" => $_item->ID,
-            //"title" => $_item->post_title,
-            "status" => $_item->post_status,
-            "created" => $_item->post_date,
-            "checked" => $_wpp_import_time,
-            "checked_human" => human_time_diff( $_wpp_import_time ) . " ago",
-            "modified" => $_item->post_modified,
-            "rets" => array(
-              "rets_id" => get_post_meta( $_item->ID, 'rets_id', true ),
-              //"query" => get_post_meta( $_item->ID, 'rets_query', true ),
-              //"primary_key" => get_post_meta( $_item->ID, 'rets_primary_key', true ),
-              "primary_key" => get_post_meta( $_item->ID, 'wpp::rets_pk', true ),
-              //"primary_key" => get_post_meta( $_item->ID, 'wpp::rets_pk', true ),
-              //"mls_number" => get_post_meta( $_item->ID, 'rets_mls_number', true ),
-              "modified_datetime" => get_post_meta( $_item->ID, 'rets_modified_datetime', true ),
-            )
-          );
-
-        }
-
-        return array(
-          'ok' => true,
-          'per_page' => $post_data[ 'per_page' ],
-          'schedule' => $post_data[ 'schedule_id' ],
-          'total' => intval( $query->found_posts ),
-          'data' => $_listings,
-          'time' => timer_stop()
-        );
-
-      }
-
-      /**
-       * Summary broken down by schedules.
-       *
-       *
-       * @return array
-       */
-      static public function get_schedule_stats() {
-
-        $_stats = Utility::get_schedule_stats(array(
-          'cache' => false
-        ));
-
-        return array(
-          'ok' => true,
-          'kind' => isset($_GET['kind']) ? $_GET['kind'] : '',
-          'message' => 'There are [' . count( $_stats['terms'] ) . '] schedules with [' . $_stats['total'] . '] total listings.',
-          'data' => $_stats['data'],
-          'time' => timer_stop()
-        );
-
-      }
-
-      /**
-       * Show clean-up data status.
-       *
-       * @return array
-       */
-      static public function cleanup_status_handler() {
-        global $wpdb;
-        $_taxonomies = $wpdb->get_col( "SELECT distinct(taxonomy) FROM {$wpdb->term_taxonomy}" );
-
-        $_data = array();
-
-        foreach( $_taxonomies as $tax_name ) {
-
-          if( !taxonomy_exists( $tax_name ) ) {
-            register_taxonomy( $tax_name, array( 'property' ), array( 'hierarchical' => true ) );
-          }
-
-          $_data[] = array(
-            'taxonomy' => $tax_name,
-            'count' => intval( wp_count_terms( $tax_name ) )
-          );
-
-        }
-
-        return array( 'ok' => true, 'message' => 'API Online.', 'data' => $_data );
-      }
-
-      /**
-       * Process Taxonomy Cleanup
-       *
-       * @return array
-       */
-      static public function cleanup_handler() {
-        global $wpdb;
-
-        // get all taxonomies in DB....
-        $_taxonomies = $wpdb->get_col( "SELECT distinct(taxonomy) FROM {$wpdb->term_taxonomy} ORDER BY RAND() LIMIT 0, 5;" );
-
-        // randomize order of operations so this can be ran multiple times with less conflict.
-        shuffle( $_taxonomies );
-
-        foreach( $_taxonomies as $_tax ) {
-          self::clean_taxonomy( $_tax, array( 'limit' => 15 ) );
-        }
-
-        return array( 'ok' => true, 'time' => timer_stop(), 'taxonomies' => $_taxonomies );
-
-      }
-
-      /**
-       * This can/shold be ran multiple times, and will continue to remove some orphaned terms as its ran.
-       *
-       * This function may die while processing and now lose any state.
-       * @param string $tax_name
-       * @param array $args
-       */
-      static public function clean_taxonomy( $tax_name = '', $args = array() ) {
-        global $wpdb;
-
-        if( !taxonomy_exists( $tax_name ) ) {
-          register_taxonomy( $tax_name, array( 'property' ), array( 'hierarchical' => true ) );
-        }
-
-        //ud_get_wp_rets_client()->write_log( "Starting to clean [$tax_name] taxonomy. Current term count is [" . wp_count_terms( $tax_name ) . "]." );
-        ud_get_wp_rets_client()->write_log( "Starting to clean [$tax_name] taxonomy, using the [". DB_NAME ."] database.", 'debug' );
-
-        $orphaned_relationships = $wpdb->get_results( "SELECT tr.term_taxonomy_id as term_taxonomy_id, tt.term_id as term_id, object_id as post_id FROM $wpdb->term_relationships tr INNER JOIN $wpdb->term_taxonomy tt ON (tr.term_taxonomy_id = tt.term_taxonomy_id) WHERE tt.taxonomy = '$tax_name' AND tr.object_id NOT IN (SELECT ID FROM $wpdb->posts) LIMIT 0, " . $args['limit'] . ";");
-
-        $_removed = array();
-
-        if( !count( $orphaned_relationships ) ) {
-          self::clean_delete_zero_count_terms( $tax_name );
-          return;
-        }
-
-        ud_get_wp_rets_client()->write_log("Have at least [" . count( $orphaned_relationships ) . "] orphaned term taxonomy relationships for [$tax_name] taxonomy, about to remove them for each post that is now gone.");
-
-        foreach( $orphaned_relationships as $_relationship_data ) {
-
-          //wp_delete_object_term_relationships( $_relationship_data->post_id, $tax_name );
-          $_result = wp_remove_object_terms( $_relationship_data->post_id, array( $_relationship_data->term_id ), $tax_name );
-
-          if( is_wp_error( $_result ) ) {
-            die( '<pre>error...' . print_r( $_result, true ) . '</pre>' );
-          } else {
-            $_removed[] = $_relationship_data->post_id;
-          }
-        }
-
-        ud_get_wp_rets_client()->write_log( "Removed [" . count( $_removed ) . "] orphaned relationships for the [$tax_name] taxonomy." );
-
-        // After removing orphans, update term counts again. This will cause total count (select sum(count) FROM wp_term_taxonomy where taxonomy = 'mls_id';) to first go down, then go back up.
-        $_terms =  $wpdb->get_col( "SELECT term_taxonomy_id FROM $wpdb->term_taxonomy WHERE taxonomy='$tax_name';");
-
-        if( wp_update_term_count_now( $_terms, $tax_name ) ) {
-          ud_get_wp_rets_client()->write_log( "Updated term counts for [$tax_name]. New count is [" . wp_count_terms( $tax_name ) . "]." );
-        }
-
-        // @note probably shouldn't do this until all counts have been updated.
-        self::clean_delete_zero_count_terms( $tax_name );
-
-      }
-
-      /**
-       * Remove terms with zero count.
-       *
-       * @param string $tax_name
-       * @param array $args
-       */
-      static public function clean_delete_zero_count_terms( $tax_name = '', $args = array() ) {
-        global $wpdb;
-
-        $_terms_with_no_count = $wpdb->query("DELETE FROM {$wpdb->term_taxonomy} WHERE count = 0 AND taxonomy='$tax_name';");
-
-        //ud_get_wp_rets_client()->write_log("SELECT term_id FROM $wpdb->term_taxonomy tt INNER JOIN $wpdb->terms t ON (tt.term_id = t.term_id ) WHERE  tt.count = 0  AND tt.taxonomy='$tax_name');");
-        if( $_terms_with_no_count ) {
-          ud_get_wp_rets_client()->write_log( "Deleting all terms with 0 count for [$tax_name], query affected [$_terms_with_no_count] rows." );
-        }
-
       }
 
       /**
@@ -589,6 +113,184 @@ namespace UsabilityDynamics\WPRETSC {
       }
 
       /**
+       * Add custom XML-RPC methods
+       *
+       * @param $_methods
+       * @return mixed
+       */
+      public function xmlrpc_methods( $_methods ) {
+
+        //
+        $_methods[ 'wpp.systemCheck' ]          = array( $this, 'rpc_system_check' );
+        $_methods[ 'wpp.systemPing' ]           = array( $this, 'rpc_system_ping' );
+
+        // Flush/clean up data (properties, terms, )
+        $_methods[ 'wpp.cleanupProcess' ]       = array( $this, 'rpc_cleanup_process' );
+
+        //
+        $_methods[ 'wpp.getPostIdByMlsId' ]     = array( $this, 'rpc_get_post_id_by_mls_id' );
+        $_methods[ 'wpp.removeDuplicates' ]     = array( $this, 'rpc_remove_duplicated_mls' );
+        $_methods[ 'wpp.modifiedHistogram' ]    = array( $this, 'rpc_get_modified_histogram' );
+
+        // Property management
+        $_methods[ 'wpp.createProperty' ]       = array( $this, 'rpc_create_property' );
+        $_methods[ 'wpp.editProperty' ]         = array( $this, 'rpc_edit_property' );
+        $_methods[ 'wpp.updateProperty' ]       = array( $this, 'rpc_update_property' );
+        $_methods[ 'wpp.insertMedia' ]          = array( $this, 'rpc_insert_media' );
+        $_methods[ 'wpp.getProperty' ]          = array( $this, 'rpc_get_property' );
+        $_methods[ 'wpp.deleteProperty' ]       = array( $this, 'rpc_delete_property' );
+        $_methods[ 'wpp.trashProperty' ]        = array( $this, 'rpc_trash_property' );
+
+        // Schedule stats/listings for data integrity
+        $_methods[ 'wpp.scheduleStats' ]        = array( $this, 'rpc_get_schedule_stats' );
+        $_methods[ 'wpp.scheduleListings' ]     = array( $this, 'rpc_get_schedule_listings' );
+
+        return $_methods;
+      }
+
+      /**
+       * Initialize REST routes for our internal XML-RPC routes.
+       *
+       * https://usabilitydynamics-www-marcusrealty-com-production.c.rabbit.ci/wp-json/wp-rets-client/v1/cleanup/status
+       * https://usabilitydynamics-www-marcusrealty-com-production.c.rabbit.ci/wp-json/wp-rets-client/v1/cleanup/process
+       *
+       * @author potanin@UD
+       */
+      public function api_init( ) {
+
+        register_rest_route( 'wp-rets-client/v1', '/systemCheck', array(
+          'methods' => 'GET',
+          'callback' => array( $this, 'rpc_system_check' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/systemPing', array(
+          'methods' => 'GET',
+          'callback' => array( $this, 'rpc_system_ping' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/deleteProperty', array(
+          'methods' => array( 'POST', 'GET' ),
+          'callback' => array( $this, 'rpc_delete_property' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/trashProperty', array(
+          'methods' => array( 'POST', 'GET' ),
+          'callback' => array( $this, 'rpc_trash_property' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/getPostIdByMlsId', array(
+          'methods' => array( 'POST', 'GET' ),
+          'callback' => array( $this, 'rpc_get_post_id_by_mls_id' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/editProperty', array(
+          'methods' => 'POST',
+          'callback' => array( $this, 'rpc_edit_property' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/updateProperty', array(
+          'methods' => 'POST',
+          'callback' => array( $this, 'rpc_update_property' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/getProperty', array(
+          'methods'   => array('GET', 'POST' ),
+          'callback'  => array( $this, 'rpc_get_property' ),
+          'args'      => array(
+            'ID' => array(
+              'default' => null,
+            ),
+            'mls_number' => array(
+              'default' => null
+            ),
+            'detail' => array(
+              'default' => true
+            ),
+          )
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/createProperty', array(
+          'methods' => 'POST',
+          'callback' => array( $this, 'rpc_create_property' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/removeDuplicates', array(
+          'methods' => 'POST',
+          'callback' => array( $this, 'rpc_remove_duplicated_mls' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/getHistogram', array(
+          'methods' => 'GET',
+          'callback' => array( $this, 'rpc_get_modified_histogram' ),
+        ) );
+
+        register_rest_route( 'wp-rets-client/v1', '/cleanupProcess', array(
+          'methods' => 'GET',
+          'callback' => array( $this, 'rpc_cleanup_process' ),
+        ));
+
+        register_rest_route( 'wp-rets-client/v1', '/scheduleStats', array(
+          'methods' => array( 'POST', 'GET' ),
+          'callback' => array( $this, 'rpc_get_schedule_stats' ),
+        ));
+
+        register_rest_route( 'wp-rets-client/v1', '/scheduleListings', array(
+          'methods' => array( 'POST', 'GET' ),
+          'args'            => array(
+            'per_page' => array(
+              'default' => 10,
+              'sanitize_callback' => 'absint',
+            ),
+            'offset' => array(
+              'default' => 0,
+              'sanitize_callback' => 'absint',
+            ),
+            'unique' => array(
+              'default' => 'wpp::rets_pk'
+            ),
+            'post_status' => array(
+              'default' => array( 'publish', 'private', 'future', 'draft' )
+            ),
+            'schedule_id' => array(
+              'default' => false,
+              'sanitize_callback' => 'sanitize_title',
+            ),
+            'order' => array(
+              'default' => 'asc',
+              'sanitize_callback' => 'sanitize_title',
+            ),
+            'detail' => array(
+              'default' => false,
+              'sanitize_callback' => 'sanitize_title',
+            ),
+            'slug' => array(
+              'default' => false,
+              'sanitize_callback' => 'sanitize_title',
+            )
+          ),
+          'callback' => array( $this, 'rpc_get_schedule_listings' ),
+        ));
+
+        register_rest_route( 'wp-rets-client/v1', '/insertMedia', array(
+          'methods' => 'POST',
+          'callback' => array( $this, 'rpc_insert_media' ),
+          'args'      => array(
+            'post_id' => array(
+              'default' => null,
+            ),
+            'mls_number' => array(
+              'default' => null
+            ),
+            '_media' => array(
+              'default' => null
+            ),
+          )
+
+        ) );
+
+      }
+
+      /**
        * Login with UD Site ID and Secret Token.
        *
        * @author potanin@UD
@@ -633,22 +335,249 @@ namespace UsabilityDynamics\WPRETSC {
       }
 
       /**
-       * Return list of plugins.
+       * Handle Sending Response
        *
        * @author potanin@UD
-       * @param $args
-       * @return array
+       * @param array $response
+       * @return null
        */
-      static public function get_plugins( $args = null ) {
+      static public function send( $response = array() ) {
 
-        $_active = wp_get_active_and_valid_plugins();
-        $result = array();
-
-        foreach( $_active as $_plugin ) {
-          $result[] = basename( dirname($_plugin) );
+        if( is_wp_error( $response ) ) {
+          $response = array(
+            'ok' => false,
+            'version' => ud_get_wp_rets_client()->get_version(),
+            'error' => $response->get_error_message(),
+          );
+        } else if( !is_array( $response ) ) {
+          $response = array();
         }
 
-        return $result;
+        $response = wp_parse_args( $response, array(
+          'ok' => true,
+          'version' => ud_get_wp_rets_client()->get_version(),
+          'error' => null,
+          'message' => null,
+          'data' => array()
+        ) );
+
+        // Do nothing if we really are RPC.
+        if( defined( 'XMLRPC_REQUEST' ) ) {
+          return $response;
+        }
+
+        wp_send_json( $response );
+
+      }
+
+      /**
+       *
+       * The [wpp_import_time] meta is [checked]
+       *
+       * - rets_ok - we now set [rets_primary_key] but historical it was [wpp::rets_pk] which we still support
+       * - rets_mls_number - removed for now since it wasnt always standard.
+       * - rets_id - the unique meta key we use to find property. seems to be same as [wpp::rets_pk]
+       *
+       * /wp-json/wp-rets-client/v1/schedule/listings?order=desc&schedule_id=1463079227
+       * /wp-json/wp-rets-client/v1/schedule/listings?type=index
+       * /wp-json/wp-rets-client/v1/schedule/listings?type=index&unique=rets_id
+       *
+       * - type - mls_numbers - will return a summary of post_id -> rets_id. No consideration given to post_status or schedule.
+       *
+       * @param $request_data
+       *
+       * @return array
+       */
+      public function rpc_get_schedule_listings( $request_data ) {
+        global $wp_xmlrpc_server, $wpdb;
+
+        $post_data = self::parseRequest( $request_data );
+
+        if( ( isset( $wp_xmlrpc_server ) && !empty( $wp_xmlrpc_server->error ) ) || isset( $post_data['error'] ) ) {
+          return self::send($post_data);
+        }
+
+        // handle wp-json reqests
+        if( is_callable( array( $request_data, 'get_param' ) ) ) {
+
+          $post_data = wp_parse_args($post_data, array(
+            'type' => $request_data->get_param( 'type' ),
+            'per_page' => $request_data->get_param( 'per_page' ),
+            'offset' => $request_data->get_param( 'offset' ),
+            'post_status' => $request_data->get_param( 'post_status' ),
+            'order' => $request_data->get_param( 'order' ),
+            'unique' => $request_data->get_param( 'unique' )
+          ));
+
+        };
+
+        // Quick summary of all listings, fetched by a meta key.
+        if( $post_data['type'] === 'index' ) {
+          $_per_page = $post_data[ 'per_page' ];
+          $offset = $post_data[ 'offset' ];
+          $unique_key = $post_data[ 'unique' ];
+
+          if( is_string( $post_data[ 'post_status' ] ) ) {
+            $_post_status = explode( ',', $post_data[ 'post_status' ] );
+            $post_status = join( "','", $_post_status );
+          }
+
+          if( is_array( $post_data[ 'post_status' ] ) ) {
+            $post_status = join( "','", $post_data[ 'post_status' ] );
+          }
+
+          $_queries = array(
+            "all" => "SELECT post_id, meta_value as unique_field, post_status, post_date, post_modified FROM $wpdb->postmeta LEFT JOIN $wpdb->posts ON post_id=ID WHERE meta_key='$unique_key' AND post_status IN ('$post_status') LIMIT $offset, $_per_page;",
+            "total" => "SELECT count( post_id ) FROM $wpdb->postmeta LEFT JOIN $wpdb->posts ON post_id=ID WHERE meta_key='$unique_key' AND post_status IN ('$post_status')  LIMIT $offset, $_per_page;"
+          );
+
+          $_total = $wpdb->get_var( $_queries['total' ]);
+
+          $_list = $wpdb->get_results( $_queries['all' ] );
+
+          $_result = array(
+            'ok' => true,
+            'total' => intval($_total),
+            'data' => $_list,
+            'unique' => $unique_key,
+            'offset' => $post_data[ 'offset' ],
+            'post_status' => explode( "','", $post_status ),
+            'per_page' => $post_data[ 'per_page' ],
+            'time' => timer_stop(),
+          );
+
+          ud_get_wp_rets_client()->write_log( "Using query [" . $_queries['all'] . "] to get index list." );
+
+          return self::send($_result);
+        }
+
+        $_query = array(
+          'post_status' => $post_data[ 'post_status' ],
+          'post_type' => 'property',
+          'posts_per_page' => $post_data[ 'per_page' ],
+          'update_post_meta_cache' => false,
+          'update_post_term_cache' => false,
+          'orderby' => 'modified',
+          'order' => strtoupper( $post_data[ 'order' ] ),
+          'tax_query' => array(
+            array(
+              'taxonomy' => 'rets_schedule',
+              'field'    => 'slug',
+              'terms'    => $post_data[ 'schedule_id' ],
+            ),
+          ),
+        );
+
+        if( $post_data[ 'offset' ] ) {
+          $_query['offset'] = $post_data[ 'offset' ];
+        }
+
+        //error_log(print_r($_query,true));
+
+        $_query = array_merge( $_query, array(
+          'meta_key' => 'wpp_import_time',
+          'orderby' => 'meta_value_num',
+        ));
+
+        $query = new WP_Query($_query);
+
+        $_listings = array();
+
+        foreach( $query->posts as $_item ) {
+
+          $_wpp_import_time = get_post_meta( $_item->ID, 'wpp_import_time', true ) ;
+
+          $_listings[] = array(
+            "id" => $_item->ID,
+            //"title" => $_item->post_title,
+            "status" => $_item->post_status,
+            "created" => $_item->post_date,
+            "checked" => $_wpp_import_time,
+            "checked_human" => human_time_diff( $_wpp_import_time ) . " ago",
+            "modified" => $_item->post_modified,
+            "rets" => array(
+              "rets_id" => get_post_meta( $_item->ID, 'rets_id', true ),
+              //"query" => get_post_meta( $_item->ID, 'rets_query', true ),
+              //"primary_key" => get_post_meta( $_item->ID, 'rets_primary_key', true ),
+              "primary_key" => get_post_meta( $_item->ID, 'wpp::rets_pk', true ),
+              //"primary_key" => get_post_meta( $_item->ID, 'wpp::rets_pk', true ),
+              //"mls_number" => get_post_meta( $_item->ID, 'rets_mls_number', true ),
+              "modified_datetime" => get_post_meta( $_item->ID, 'rets_modified_datetime', true ),
+            )
+          );
+
+        }
+
+        return self::send( array(
+          'ok' => true,
+          'per_page' => $post_data[ 'per_page' ],
+          'schedule' => $post_data[ 'schedule_id' ],
+          'total' => intval( $query->found_posts ),
+          'data' => $_listings,
+          'time' => timer_stop()
+        ) );
+
+      }
+
+      /**
+       * Summary broken down by schedules.
+       *
+       *
+       * @return array
+       */
+      public function rpc_get_schedule_stats() {
+
+        $_stats = Utility::get_schedule_stats(array(
+          'cache' => false
+        ));
+
+        return self::send( array(
+          'ok' => true,
+          'kind' => isset($_GET['kind']) ? $_GET['kind'] : '',
+          'message' => 'There are [' . count( $_stats['terms'] ) . '] schedules with [' . $_stats['total'] . '] total listings.',
+          'data' => $_stats['data'],
+          'time' => timer_stop()
+        ) );
+
+      }
+
+      /**
+       * Process Taxonomy Cleanup
+       *
+       * @return array
+       */
+      public function rpc_cleanup_process( $args ) {
+        global $_terms_counts_details;
+
+        $_terms_counts_details = array();
+        $response = array();
+
+        $data = self::parseRequest( $args );
+        if( !empty( $data['error'] ) ) {
+          return self::send( $data );
+        }
+
+        Utility::write_log( "rpc_cleanup_process", "info" );
+
+        add_action( 'wrc::_update_terms_counts_helper::done', function( $terms, $query, $error ) {
+          global $_terms_counts_details;
+          array_push( $_terms_counts_details, array(
+            "taxonomy" => $query["taxonomy"],
+            "terms" => !empty($terms) ? count( $terms ) : 0,
+            "error" => !empty($error) && is_wp_error($error) ? $error->get_error_message() : null
+          ) );
+        }, 10, 3 );
+
+        $response = Utility::update_terms_counts();
+        if( !is_wp_error( $response ) ) {
+          $response = array(
+            "message" => sprintf( __( "%s taxonomies were cleaned up.", ud_get_wp_rets_client()->domain ), count($_terms_counts_details ) ),
+            "data" => $_terms_counts_details
+          );
+        }
+
+        return self::send( $response );
+
       }
 
       /**
@@ -665,11 +594,12 @@ namespace UsabilityDynamics\WPRETSC {
 
         $post_data = self::parseRequest( $args );
         if( !empty( $post_data['error'] ) ) {
-          return $post_data;
+          return self::send($post_data);
         }
 
         $_response = self::send(array(
           "ok" => true,
+          "version" => ud_get_wp_rets_client()->get_version(),
           "home_url" => home_url(),
           "blog_id" => get_current_blog_id(),
           "themeName" => wp_get_theme()->get( 'Name' ),
@@ -677,7 +607,7 @@ namespace UsabilityDynamics\WPRETSC {
           "stylesheet" => get_option( 'stylesheet' ),
           "template" => get_option( 'stylesheet' ),
           "post_types" => get_post_types(),
-          "activePlugins" => self::get_plugins(),
+          "activePlugins" => Utility::get_plugins(),
           "time" => timer_stop(),
           "support" => array(
             "insert_media",
@@ -696,7 +626,7 @@ namespace UsabilityDynamics\WPRETSC {
         }
 
         // Send response to wherever.
-        return $_response;
+        return self::send($_response);
 
       }
 
@@ -727,7 +657,7 @@ namespace UsabilityDynamics\WPRETSC {
        * @param $args
        * @return array
        */
-      public function create_property( $args ) {
+      public function rpc_create_property( $args ) {
         global $wp_xmlrpc_server;
 
         add_filter( 'ep_sync_insert_permissions_bypass', '__return_true', 99, 2 );
@@ -735,13 +665,18 @@ namespace UsabilityDynamics\WPRETSC {
         $post_data = self::parseRequest( $args );
 
         if( ( isset( $wp_xmlrpc_server ) && !empty( $wp_xmlrpc_server->error ) ) || isset( $post_data['error'] ) ) {
-          return $post_data;
+          return self::send($post_data);
         }
+
+        do_action('wrc::manage_property::before_update');
 
         $options = wp_parse_args( isset( $post_data['_options'] ) ? $post_data['_options'] : array(), array(
           'skipTermCounting' => false,
           'skipTermUpdates' => false,
-          'skipMediaUpdate' => false
+          'skipMediaUpdate' => false,
+          'skipSlideshowImages' => true,
+          'createWPPAttributes' => false,
+          'createWPPTerms' => false
         ));
 
         ud_get_wp_rets_client()->write_log( 'Have request [wpp.createProperty] request.', 'debug' );
@@ -758,7 +693,7 @@ namespace UsabilityDynamics\WPRETSC {
         if( !empty( $post_data[ 'meta_input' ][ 'rets_id' ] ) ) {
           $post_data[ 'ID' ] = ud_get_wp_rets_client()->find_property_by_rets_id( $post_data[ 'meta_input' ][ 'rets_id' ] );
         } else {
-          return array( 'ok' => false, 'error' => "Property missing RETS ID.", "data" => $post_data );
+          return self::send(array( 'ok' => false, 'error' => "Property missing RETS ID.", "data" => $post_data ));
         }
 
         $_new_post_status = $post_data[ 'post_status' ];
@@ -801,23 +736,30 @@ namespace UsabilityDynamics\WPRETSC {
 
         if( is_wp_error( $_post_id ) ) {
           ud_get_wp_rets_client()->write_log( 'wp_insert_post error <pre>' . print_r( $_post_id, true ) . '</pre>', 'error' );
-          ud_get_wp_rets_client()->write_log( 'wp_insert_post $post_data <pre>' . print_r( $post_data, true ) . '</pre>', 'error' );
+          //ud_get_wp_rets_client()->write_log( 'wp_insert_post $post_data <pre>' . print_r( $post_data, true ) . '</pre>', 'error' );
 
-          return array(
+          return self::send(array(
             "ok" => false,
             "message" => "Unable to insert post.",
             "error" => $_post_id->get_error_message()
-          );
+          ));
         }
 
         // Insert all the terms and creates taxonomies.
         if( !isset( $options[ 'skipTermUpdates' ] ) || !$options[ 'skipTermUpdates' ] ) {
           Utility::insert_property_terms( $_post_id, $_post_data_tax_input, $post_data );
+          do_action( 'wrc::manage_property::taxonomies', $_post_data_tax_input, $options );
         }
 
         if( !isset( $options[ 'skipMediaUpdate' ] ) || !$options[ 'skipMediaUpdate' ] ) {
           Utility::insert_media( $_post_id, $post_data[ '_media' ] );
         }
+
+        if( !isset( $options[ 'skipSlideshowImages' ] ) || !$options[ 'skipSlideshowImages' ] ) {
+          Utility::insert_slideshow_images( $_post_id );
+        }
+
+        do_action( 'wrc::manage_property::postmeta', $post_data, $options );
 
         if( $_post_id ) {
           ud_get_wp_rets_client()->write_log( 'Updating property post [' . $_post_id  . '].', 'debug' );
@@ -858,7 +800,7 @@ namespace UsabilityDynamics\WPRETSC {
           /**
            * Do something after property is published
            */
-          do_action( 'wrc_property_published', $_post_id );
+          do_action( 'wrc_property_published', $_post_id, $post_data );
 
         } else {
           ud_get_wp_rets_client()->write_log( 'Error publishing post ' . $_post_id, 'error' );
@@ -875,12 +817,14 @@ namespace UsabilityDynamics\WPRETSC {
 
         ud_get_wp_rets_client()->write_log( 'Term counting complete for [' . $_post_id . '].', 'info' );
 
-        return array(
+        ud_get_wp_rets_client()->flush_cache( $_post_id );
+
+        return self::send(array(
           "ok" => true,
           "post_id" => $_post_id,
           "post" => get_post( $_post_id ),
           "permalink" => isset( $_permalink ) ? $_permalink : null
-        );
+        ));
 
       }
 
@@ -890,7 +834,7 @@ namespace UsabilityDynamics\WPRETSC {
        * @param $args
        * @return array
        */
-      public function update_property( $args ) {
+      public function rpc_update_property( $args ) {
         global $wp_xmlrpc_server, $wpdb;
 
         add_filter( 'ep_sync_insert_permissions_bypass', '__return_true', 99, 2 );
@@ -898,16 +842,21 @@ namespace UsabilityDynamics\WPRETSC {
         $post_data = self::parseRequest( $args );
 
         if( ( isset( $wp_xmlrpc_server ) && !empty( $wp_xmlrpc_server->error ) ) || isset( $post_data['error'] ) ) {
-          return $post_data;
+          return self::send($post_data);
         }
+
+        do_action('wrc::manage_property::before_update');
 
         $options = wp_parse_args( isset( $post_data['_options'] ) ? $post_data['_options'] : array(), array(
           'skipTermCounting' => false,
           'skipTermUpdates' => false,
-          'skipMediaUpdate' => false
+          'skipMediaUpdate' => false,
+          'skipSlideshowImages' => true,
+          'createWPPAttributes' => false,
+          'createWPPTerms' => false
         ));
 
-        ud_get_wp_rets_client()->write_log( 'Have request [wpp.updateProperty] request.', 'debug' );
+        ud_get_wp_rets_client()->write_log( 'Have request [wpp.updateProperty] request.', 'info' );
 
         //if( !empty( $post_data[ 'ID' ] ) ) {}
 
@@ -916,7 +865,7 @@ namespace UsabilityDynamics\WPRETSC {
         }
 
         if( !isset( $post_data[ 'ID' ] ) ) {
-          return array( 'ok' => false, 'error' => "Property missing RETS ID.", "data" => $post_data );
+          return self::send(array( 'ok' => false, 'error' => "Property missing RETS ID.", "data" => $post_data ));
         }
 
         // update import time
@@ -938,22 +887,34 @@ namespace UsabilityDynamics\WPRETSC {
           update_post_meta( $post_data['ID' ], $_meta_key, $_meta_value );
         }
 
+        do_action( 'wrc::manage_property::postmeta', $post_data, $options );
+
         if( (isset( $options[ 'skipTermUpdates' ] ) || !$options[ 'skipTermUpdates' ]) && isset($post_data[ 'tax_input' ]) ) {
           Utility::insert_property_terms( $post_data[ 'ID' ], $post_data[ 'tax_input' ], $post_data );
+          do_action( 'wrc::manage_property::taxonomies', $post_data[ 'tax_input' ], $options );
           ud_get_wp_rets_client()->write_log( 'Updated terms.', 'debug' );
         }
 
         ud_get_wp_rets_client()->write_log( 'Property update finished, clearing cache.', 'debug' );
 
-        clean_post_cache( $post_data[ 'ID' ] );
+        //if( function_exists( 'ep_sync_post' ) ) {
+        //  ep_sync_post( $post_data[ 'ID' ] );
+        //}
 
-        return array(
+        /**
+         * Do something after property is published
+         */
+        do_action( 'wrc_property_published', $post_data[ 'ID' ], $post_data );
+
+        ud_get_wp_rets_client()->flush_cache( $post_data[ 'ID' ] );
+
+        return self::send(array(
           "ok" => true,
           "post_id" => $post_data[ 'ID' ],
           //"post" => get_post( $post_data[ 'ID' ] ),
           "permalink" => get_the_permalink( $post_data[ 'ID' ] ),
           "time" => timer_stop()
-        );
+        ));
 
       }
 
@@ -963,7 +924,7 @@ namespace UsabilityDynamics\WPRETSC {
        * @param $args
        * @return array
        */
-      public function edit_property( $args ) {
+      public function rpc_edit_property( $args ) {
         global $wp_xmlrpc_server;
 
         add_filter( 'ep_sync_insert_permissions_bypass', '__return_true', 99, 2 );
@@ -971,15 +932,21 @@ namespace UsabilityDynamics\WPRETSC {
         $post_data = self::parseRequest( $args );
 
         if( ( isset( $wp_xmlrpc_server ) && !empty( $wp_xmlrpc_server->error ) ) || isset( $post_data['error'] ) ) {
-          return $post_data;
+          return self::send($post_data);
         }
+
+        do_action('wrc::manage_property::before_update');
 
         ud_get_wp_rets_client()->write_log( 'Have request [wpp.editProperty] request.', 'info' );
 
         $options = wp_parse_args( isset( $post_data['_options'] ) ? $post_data['_options'] : array(), array(
           'skipTermCounting' => false,
           'skipTermUpdates' => false,
-          'skipMediaUpdate' => false
+          'skipMediaUpdate' => false,
+          'skipSlideshowImages' => true,
+          'createWPPAttributes' => false,
+          'createWPPTerms' => false,
+          'resetPostName' => false
         ));
 
         // Defer term counting until method called again.
@@ -994,7 +961,7 @@ namespace UsabilityDynamics\WPRETSC {
         if( !empty( $post_data[ 'meta_input' ][ 'rets_id' ] ) ) {
           $post_data[ 'ID' ] = ud_get_wp_rets_client()->find_property_by_rets_id( $post_data[ 'meta_input' ][ 'rets_id' ] );
         } else {
-          return array( 'ok' => false, 'error' => "Property missing RETS ID.", "data" => $post_data );
+          return self::send(array( 'ok' => false, 'error' => "Property missing RETS ID.", "data" => $post_data ));
         }
 
         $_new_post_status = isset( $post_data[ 'post_status' ] ) ? $post_data[ 'post_status' ] : 'publish';
@@ -1007,11 +974,19 @@ namespace UsabilityDynamics\WPRETSC {
           $_post = get_post( $post_data[ 'ID' ] );
           $post_data[ 'post_date' ] = $_post->post_date;
           $post_data[ 'post_status' ] = $_post->post_status;
+
+          // Set empty post name for refreshing it on updating post
+          if($options['resetPostName']){
+            $post_data[ 'post_name' ] = '';
+          }
+
         } else {
           ud_get_wp_rets_client()->write_log( 'Running wp_insert_post for [new post].', 'debug' );
         }
 
         $_post_data_tax_input = $post_data['tax_input'];
+
+        //ud_get_wp_rets_client()->write_log( "TAX INPUT: " . json_encode( $_post_data_tax_input ), 'info' );
 
         $post_data['tax_input'] = array();
 
@@ -1036,21 +1011,28 @@ namespace UsabilityDynamics\WPRETSC {
           ud_get_wp_rets_client()->write_log( 'wp_insert_post error <pre>' . print_r( $_post_id, true ) . '</pre>', 'error' );
           ud_get_wp_rets_client()->write_log( 'wp_insert_post $post_data <pre>' . print_r( $post_data, true ) . '</pre>', 'error' );
 
-          return array(
+          return self::send(array(
             "ok" => false,
             "message" => "Unable to insert post.",
             "error" => $_post_id->get_error_message()
-          );
+          ));
         }
 
         // Insert all the terms and creates taxonomies.
         if( !isset( $options[ 'skipTermUpdates' ] ) || !$options[ 'skipTermUpdates' ] ) {
           Utility::insert_property_terms( $_post_id, $_post_data_tax_input, $post_data );
+          do_action( 'wrc::manage_property::taxonomies', $_post_data_tax_input, $options );
         }
 
         if( !isset( $options[ 'skipMediaUpdate' ] ) || !$options[ 'skipMediaUpdate' ] ) {
           Utility::insert_media( $_post_id, $post_data[ '_media' ] );
         }
+
+        if( !isset( $options[ 'skipSlideshowImages' ] ) || !$options[ 'skipSlideshowImages' ] ) {
+          Utility::insert_slideshow_images( $_post_id );
+        }
+
+        do_action( 'wrc::manage_property::postmeta', $post_data, $options );
 
         if( $_post_id ) {
           ud_get_wp_rets_client()->write_log( 'Updating property post [' . $_post_id  . '].', 'debug' );
@@ -1091,7 +1073,7 @@ namespace UsabilityDynamics\WPRETSC {
           /**
            * Do something after property is published
            */
-          do_action( 'wrc_property_published', $_post_id );
+          do_action( 'wrc_property_published', $_post_id, $post_data );
 
         } else {
           ud_get_wp_rets_client()->write_log( 'Error publishing post ' . $_post_id, 'error' );
@@ -1112,9 +1094,11 @@ namespace UsabilityDynamics\WPRETSC {
           "permalink" => isset( $_permalink ) ? $_permalink : null
         );
 
-        ud_get_wp_rets_client()->write_log( 'Sending [wpp.editProperty] reponse.', 'debug' );
+        ud_get_wp_rets_client()->write_log( 'Sending [wpp.editProperty] response.', 'debug' );
 
-        return $_response;
+        ud_get_wp_rets_client()->flush_cache( $_post_id );
+
+        return self::send($_response);
 
       }
 
@@ -1128,13 +1112,13 @@ namespace UsabilityDynamics\WPRETSC {
        * @return array
        *
        */
-      public function get_property( $args ) {
+      public function rpc_get_property( $args ) {
         global $wp_xmlrpc_server;
 
         $post_data = self::parseRequest( $args );
 
         if( ( isset( $wp_xmlrpc_server ) && !empty( $wp_xmlrpc_server->error ) ) || isset( $post_data['error'] ) ) {
-          return $post_data;
+          return self::send($post_data);
         }
 
         if( method_exists( $args, 'get_param' ) ) {
@@ -1186,7 +1170,7 @@ namespace UsabilityDynamics\WPRETSC {
 
         ud_get_wp_rets_client()->write_log( 'Completed [wpp.getProperty] request.', 'debug' );
 
-        return $_resposne;
+        return self::send($_resposne);
 
       }
 
@@ -1196,14 +1180,17 @@ namespace UsabilityDynamics\WPRETSC {
        * @param $args
        * @return array
        */
-      public function delete_property( $args ) {
-        global $wp_xmlrpc_server, $wpdb;
+      public function rpc_delete_property( $args ) {
+        global $wp_xmlrpc_server, $wpdb, $wrc_rets_id;
 
-        add_filter( 'ep_sync_insert_permissions_bypass', '__return_true', 99, 2 );
+        add_filter( 'ep_sync_delete_permissions_bypass', '__return_true', 99, 2 );
 
         $data = self::parseRequest( $args );
+
+        ud_get_wp_rets_client()->logfile = !empty( $data[ 'logfile' ] ) ? $data[ 'logfile' ] : ud_get_wp_rets_client()->logfile;
+
         if( !empty( $wp_xmlrpc_server->error ) ) {
-          return $data;
+          return self::send($data);
         }
 
         $response = array(
@@ -1211,20 +1198,32 @@ namespace UsabilityDynamics\WPRETSC {
           "request" => $data
         );
 
+        ud_get_wp_rets_client()->write_log( 'Have request [wpp.deleteProperty].', 'info' );
+
         $post_id = 0;
-        if( is_numeric( $data ) ) {
-          $post_id = $data;
-        } else if( !empty( $data[ 'id' ] ) ) {
-          $post_id = $data[ 'id' ];
-          ud_get_wp_rets_client()->logfile = !empty( $data[ 'logfile' ] ) ? $data[ 'logfile' ] : ud_get_wp_rets_client()->logfile;
+
+        if( !empty( $data[ 'post_id' ] ) ) {
+          $post_id = $data[ 'post_id' ];
+          $wrc_rets_id = get_post_meta( $post_id, 'rets_id', true );
+        } else if( !empty( $data[ 'rets_id' ] ) ) {
+          $wrc_rets_id = $data[ 'rets_id' ];
+          $post_id = ud_get_wp_rets_client()->find_property_by_rets_id( $wrc_rets_id );
+          /**
+           * It's normal behaviour to not detect post ID when we know only MLS ID,
+           * because the MLS property may not fetch poller's filter and, as fact, does not exist in WordPress at all
+           * so we just break here without any error.
+           * peshkov@UD
+           */
+          if( !is_numeric( $post_id ) ){
+            ud_get_wp_rets_client()->write_log( "No post found by MLS ID [$wrc_rets_id]. Ignoring [wpp.deleteProperty] request.", 'info' );
+            return self::send($response);
+          }
         }
 
-        ud_get_wp_rets_client()->write_log( 'Have wpp.deleteProperty request.', 'info' );
-
-        if( !$post_id || !is_numeric( $post_id ) ) {
-          ud_get_wp_rets_client()->write_log(  'No post ID provided', 'info' );
+        if( !$wrc_rets_id || !is_numeric( $post_id ) ) {
+          ud_get_wp_rets_client()->write_log(  'No Post found', 'info' );
           $response['ok'] = false;
-          return $response;
+          return self::send($response);
         }
 
         /**
@@ -1263,11 +1262,13 @@ namespace UsabilityDynamics\WPRETSC {
 
         }
 
-        ud_get_wp_rets_client()->write_log( "Finished removing [$post_id].", "info" );
+        ud_get_wp_rets_client()->write_log( "Finished removing [$post_id].  MLS ID [$wrc_rets_id]", "info" );
 
         $response['time' ] = timer_stop();
 
-        return $response;
+        ud_get_wp_rets_client()->flush_cache( $post_id );
+
+        return self::send($response);
 
       }
 
@@ -1277,15 +1278,18 @@ namespace UsabilityDynamics\WPRETSC {
        * @param $args
        * @return array
        */
-      public function trash_property( $args ) {
-        global $wp_xmlrpc_server, $wpdb;
+      public function rpc_trash_property( $args ) {
+        global $wp_xmlrpc_server, $wpdb, $wrc_rets_id;
 
         add_filter( 'ep_sync_insert_permissions_bypass', '__return_true', 99, 2 );
+        add_filter( 'ep_sync_delete_permissions_bypass', '__return_true', 99, 2 );
 
         $data = self::parseRequest( $args );
 
+        ud_get_wp_rets_client()->logfile = !empty( $data[ 'logfile' ] ) ? $data[ 'logfile' ] : ud_get_wp_rets_client()->logfile;
+
         if( !empty( $wp_xmlrpc_server->error ) ) {
-          return $data;
+          return self::send($data);
         }
 
         $response = array(
@@ -1295,30 +1299,47 @@ namespace UsabilityDynamics\WPRETSC {
 
         $post_id = 0;
 
-        if( is_numeric( $data ) ) {
-          $post_id = $data;
-        } else if( !empty( $data[ 'id' ] ) ) {
-          $post_id = $data[ 'id' ];
-          ud_get_wp_rets_client()->logfile = !empty( $data[ 'logfile' ] ) ? $data[ 'logfile' ] : ud_get_wp_rets_client()->logfile;
+        if( !empty( $data[ 'post_id' ] ) ) {
+          $post_id = $data[ 'post_id' ];
+          $wrc_rets_id = get_post_meta( $post_id, 'rets_id', true );
+        } else if( !empty( $data[ 'rets_id' ] ) ) {
+          $wrc_rets_id = $data[ 'rets_id' ];
+          $post_id = ud_get_wp_rets_client()->find_property_by_rets_id( $wrc_rets_id );
+          /**
+           * It's normal behaviour to not detect post ID when we know only MLS ID,
+           * because the MLS property may not fetch poller's filter and, as fact, does not exist in WordPress at all
+           * so we just break here without any error.
+           * peshkov@UD
+           */
+          if( !is_numeric( $post_id ) ){
+            ud_get_wp_rets_client()->write_log( "No post found by MLS ID [$wrc_rets_id]. Ignoring [wpp.trashProperty] request.", 'info' );
+            return self::send($response);
+          }
         }
 
-        ud_get_wp_rets_client()->write_log( 'Have [wpp.trashProperty] request. Post id: ' . $post_id, 'info' );
+        ud_get_wp_rets_client()->write_log( 'Have request [wpp.trashProperty]. Post id: ' . $post_id, 'info' );
 
         if( !$post_id || !is_numeric( $post_id ) ) {
-          ud_get_wp_rets_client()->write_log(  'No post ID provided', 'info' );
+          ud_get_wp_rets_client()->write_log(  'No post ID detected', 'info' );
           $response['ok'] = false;
-          return $response;
+          return self::send($response);
         }
 
-        ud_get_wp_rets_client()->write_log( "Checking post ID [$post_id]." );
+        ud_get_wp_rets_client()->write_log( "Checking post ID [$post_id].", 'info' );
 
-        $wpdb->update( $wpdb->posts, array( 'post_status' => 'trash' ), array( 'ID' => $post_id ) );
+        // We must do 'trash' post using native function, instead of direct SQL requests....
+        // because of different bugs and issues with property status on end.... peshkov@UD
+        wp_trash_post( $post_id );
 
-        ud_get_wp_rets_client()->write_log( "Property [$post_id] trashed." );
+        ud_get_wp_rets_client()->write_log( $wpdb->last_error, 'info' );
+
+        ud_get_wp_rets_client()->write_log( "Property [$post_id] trashed. MLS ID [$wrc_rets_id]", 'info' );
 
         $response['time' ] = timer_stop();
 
-        return $response;
+        ud_get_wp_rets_client()->flush_cache( $post_id );
+
+        return self::send($response);
 
       }
 
@@ -1328,13 +1349,13 @@ namespace UsabilityDynamics\WPRETSC {
        * @param $args
        * @return array
        */
-      public function get_post_id_by_mls_id( $args ) {
+      public function rpc_get_post_id_by_mls_id( $args ) {
         global $wp_xmlrpc_server, $wpdb;
 
         $data = self::parseRequest( $args );
 
         if( !empty( $wp_xmlrpc_server->error ) ) {
-          return $data;
+          return self::send($data);
         }
 
         $response = array(
@@ -1355,12 +1376,12 @@ namespace UsabilityDynamics\WPRETSC {
         if( !$post_id || !is_numeric( $post_id ) ) {
           ud_get_wp_rets_client()->write_log(  'No post ID provided for mls id:' . $data['id'] , 'info' );
           $response['ok'] = false;
-          return $response;
+          return self::send($response);
         }
 
         ud_get_wp_rets_client()->write_log( 'Returned post_id:' . $post_id, 'info' );
 
-        return $response;
+        return self::send($response);
 
       }
 
@@ -1370,7 +1391,7 @@ namespace UsabilityDynamics\WPRETSC {
        * @param $args
        * @return array
        */
-      public function insert_media( $args ) {
+      public function rpc_insert_media( $args ) {
 
         add_filter( 'ep_sync_insert_permissions_bypass', '__return_true', 99, 2 );
 
@@ -1378,36 +1399,44 @@ namespace UsabilityDynamics\WPRETSC {
 
         if( ( isset( $wp_xmlrpc_server ) && !empty( $wp_xmlrpc_server->error ) ) || isset( $post_data['error'] ) ) {
           ud_get_wp_rets_client()->write_log( 'Failed [wpp.insertMedia] request.', 'debug' );
-          return $post_data;
+          return self::send($post_data);
         }
 
         if( is_callable( array( $args, 'get_param' ) ) ) {
 
           $post_data = wp_parse_args($post_data, array_filter(array(
             'post_id' => $args->get_param( 'post_id' ),
-            'mls_number' => $args->get_param( 'mls_number' ),
-            'media' => $args->get_param( 'media' )
+            'rets_id' => $args->get_param( 'rets_id' ),
+            '_media' => $args->get_param( 'media' )
           )));
 
         };
 
-        // try go get post_id by mls_number, if it spassed
-        if( !isset( $post_data['post_id' ]) ) {
-          $post_data['post_id' ] = ud_get_wp_rets_client()->find_property_by_rets_id( $post_data[ 'mls_number' ] );
+        $post_id = null;
+
+        if( !empty( $post_data['post_id' ] ) ) {
+          $post_id = $post_data['post_id'];
+        } else if( !empty( $post_data['ID' ] ) ) {
+          $post_id = $post_data['ID' ];
         }
 
-        ud_get_wp_rets_client()->write_log( 'Have request [wpp.insertMedia] request for ['  . $post_data['post_id' ]. '].', 'debug' );
+        // try go get post_id by mls_number, if it passed
+        if( !$post_id ) {
+          $post_id = ud_get_wp_rets_client()->find_property_by_rets_id( $post_data[ 'rets_id' ] );
+        }
 
-        if( !isset( $post_data['post_id' ] ) || !$post_data['post_id' ]) {
+        ud_get_wp_rets_client()->write_log( 'Have request [wpp.insertMedia] request for ['  . $post_id . '].', 'info' );
+
+        if( !$post_id || empty( $post_data[ '_media' ] ) ) {
           return array( 'ok' => false );
         }
 
-        $_result = Utility::insert_media( $post_data['post_id' ], $post_data[ 'media' ] );
+        $_result = Utility::insert_media( $post_id, $post_data[ '_media' ] );
 
-        return array(
+        return self::send(array(
           'ok' => true,
           'result' => $_result
-        );
+        ));
 
       }
 
@@ -1422,7 +1451,7 @@ namespace UsabilityDynamics\WPRETSC {
 
         $data = self::parseRequest( $args );
         if( !empty( $wp_xmlrpc_server->error ) ) {
-          return $data;
+          return self::send($data);
         }
 
         ud_get_wp_rets_client()->logfile = !empty( $data[ 'logfile' ] ) ? $data[ 'logfile' ] : ud_get_wp_rets_client()->logfile;
@@ -1448,7 +1477,7 @@ namespace UsabilityDynamics\WPRETSC {
         ud_get_wp_rets_client()->write_log( $log, 'debug' );
 
         if( empty( $_duplicates ) ) {
-          return $response;
+          return self::send($response);
         } else {
           $response[ 'total' ] = count( $_duplicates );
         }
@@ -1536,7 +1565,7 @@ namespace UsabilityDynamics\WPRETSC {
 
         ud_get_wp_rets_client()->write_log( 'wpp.removeDuplicatedMLS Done', 'info' );
 
-        return $response;
+        return self::send($response);
 
       }
 
@@ -1603,35 +1632,6 @@ namespace UsabilityDynamics\WPRETSC {
       }
 
       /**
-       * Flush Cache.
-       *
-       * Mostly a placeholder for future.
-       *
-       * @author potanin@UD
-       * @param null $args
-       * @return null
-       */
-      public function rpc_flush_cache( $args = null ) {
-
-        $args = self::parseRequest( $args, array(
-          'taxonomies' => true
-        ) );
-
-        foreach( array( 'wpp_categorical') as $taxonomy ) {
-          wp_cache_delete( 'all_ids', $taxonomy );
-          wp_cache_delete( 'get', $taxonomy );
-          delete_option( "{$taxonomy}_children" );
-          _get_term_hierarchy( $taxonomy );
-
-        }
-
-        return self::send( array(
-          "ok" => true
-        ) );
-
-      }
-
-      /**
        * Allows you to get property detail histogram properties.
        *
        *
@@ -1671,27 +1671,6 @@ namespace UsabilityDynamics\WPRETSC {
         }
 
         return self::send($_detail);
-
-      }
-
-      /**
-       * Handle Sending Response
-       *
-       * @todo Make this handle both XMLRPC and REST.
-       * @author potanin@UD
-       * @param null $data
-       * @return null
-       */
-      static public function send( $data = null ) {
-
-        // Do nothing if we really are RPC.
-        if( defined( 'XMLRPC_REQUEST' ) ) {
-          return $data;
-        }
-
-        @header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
-
-        die( json_encode( $data, JSON_PRETTY_PRINT ) );
 
       }
 

@@ -33,6 +33,15 @@ namespace UsabilityDynamics\WPRETSC {
       public $debug_file = 'wp-content/rets-debug.log';
 
       /**
+       * Returns the version of plugin
+       *
+       * @return string
+       */
+      public function get_version() {
+        return $this->args['version'];
+      }
+
+      /**
        * Instantaite class.
        */
       public function init() {

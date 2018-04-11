@@ -18,9 +18,9 @@ class EP_Feature_Requirements_Status {
 
 	/**
 	 * Initialize class
-	 * 
+	 *
 	 * @param int $code
-	 * @param string $message
+	 * @param string|array $message
 	 * @since  2.2
 	 */
 	public function __construct( $code, $message = null ) {
@@ -43,8 +43,8 @@ class EP_Feature_Requirements_Status {
 
 	/**
 	 * Optional message to describe status code
-	 * 
-	 * @var    string
+	 *
+	 * @var    string|array
 	 * @since  2.2
 	 */
 	public $message;
@@ -53,7 +53,7 @@ class EP_Feature_Requirements_Status {
 class EP_Feature {
 	/**
 	 * Feature slug
-	 * 
+	 *
 	 * @var string
 	 * @since  2.1
 	 */
@@ -61,7 +61,7 @@ class EP_Feature {
 
 	/**
 	 * Feature pretty title
-	 * 
+	 *
 	 * @var string
 	 * @since  2.1
 	 */
@@ -77,7 +77,7 @@ class EP_Feature {
 
 	/**
 	 * Contains registered callback to execute after setup
-	 * 
+	 *
 	 * @since 2.1
 	 * @var callback
 	 */
@@ -85,7 +85,7 @@ class EP_Feature {
 
 	/**
 	 * Contains registered callback to output feature summary in feature box
-	 * 
+	 *
 	 * @since 2.1
 	 * @var callback
 	 */
@@ -93,7 +93,7 @@ class EP_Feature {
 
 	/**
 	 * Contains registered callback to output feature long description in feature box
-	 * 
+	 *
 	 * @since 2.1
 	 * @var callback
 	 */
@@ -109,7 +109,7 @@ class EP_Feature {
 
 	/**
 	 * Contains registered callback to execute after activation
-	 * 
+	 *
 	 * @since 2.1
 	 * @var callback
 	 */
@@ -117,7 +117,7 @@ class EP_Feature {
 
 	/**
 	 * True if the feature requires content reindexing after activating
-	 * 
+	 *
 	 * @since 2.1
 	 * @var [type]
 	 */
@@ -259,34 +259,46 @@ class EP_Feature {
 
 	public function output_settings_box() {
 		$requirements_status = $this->requirements_status();
+
+
 		?>
 
-		<?php if ( ! empty( $requirements_status->message ) ) : ?>
-			<div class="requirements-status-notice">
-				<?php echo wp_kses_post( $requirements_status->message ); ?>
-			</div>
+		<?php if ( ! empty( $requirements_status->message ) ) : $messages = (array) $requirements_status->message; ?>
+			<?php foreach ( $messages as $message ) : ?>
+				<div class="requirements-status-notice">
+					<?php echo wp_kses_post( $message ); ?>
+				</div>
+			<?php endforeach; ?>
 		<?php endif; ?>
 
 		<h3><?php esc_html_e( 'Settings', 'elasticpress' ); ?></h3>
 
-		<div class="field js-toggle-feature" data-feature="<?php echo esc_attr( $this->slug ); ?>">
-			<div class="field-name status"><?php esc_html_e( 'Status', 'elasticpress' ); ?></div>
-			<div class="input-wrap <?php if ( 2 === $requirements_status->code ) : ?>disabled<?php endif; ?>">
-				<label for="feature_active_<?php echo esc_attr( $this->slug ); ?>_enabled"><input name="feature_active_<?php echo esc_attr( $this->slug ); ?>" id="feature_active_<?php echo esc_attr( $this->slug ); ?>_enabled" data-field-name="active" class="setting-field" <?php if ( 2 === $requirements_status->code ) : ?>disabled<?php endif; ?> type="radio" <?php if ( $this->is_active() ) : ?>checked<?php endif; ?> value="1"><?php esc_html_e( 'Enabled', 'elasticpress' ); ?></label><br>
-				<label for="feature_active_<?php echo esc_attr( $this->slug ); ?>_disabled"><input name="feature_active_<?php echo esc_attr( $this->slug ); ?>" id="feature_active_<?php echo esc_attr( $this->slug ); ?>_disabled" data-field-name="active" class="setting-field" <?php if ( 2 === $requirements_status->code ) : ?>disabled<?php endif; ?> type="radio" <?php if ( ! $this->is_active() ) : ?>checked<?php endif; ?> value="0"><?php esc_html_e( 'Disabled', 'elasticpress' ); ?></label>
+		<div class="feature-fields">
+			<div class="field js-toggle-feature" data-feature="<?php echo esc_attr( $this->slug ); ?>">
+				<div class="field-name status"><?php esc_html_e( 'Status', 'elasticpress' ); ?></div>
+				<div class="input-wrap <?php if ( 2 === $requirements_status->code ) : ?>disabled<?php endif; ?>">
+					<label for="feature_active_<?php echo esc_attr( $this->slug ); ?>_enabled"><input name="feature_active_<?php echo esc_attr( $this->slug ); ?>" id="feature_active_<?php echo esc_attr( $this->slug ); ?>_enabled" data-field-name="active" class="setting-field" <?php if ( 2 === $requirements_status->code ) : ?>disabled<?php endif; ?> type="radio" <?php if ( $this->is_active() ) : ?>checked<?php endif; ?> value="1"><?php esc_html_e( 'Enabled', 'elasticpress' ); ?></label><br>
+					<label for="feature_active_<?php echo esc_attr( $this->slug ); ?>_disabled"><input name="feature_active_<?php echo esc_attr( $this->slug ); ?>" id="feature_active_<?php echo esc_attr( $this->slug ); ?>_disabled" data-field-name="active" class="setting-field" <?php if ( 2 === $requirements_status->code ) : ?>disabled<?php endif; ?> type="radio" <?php if ( ! $this->is_active() ) : ?>checked<?php endif; ?> value="0"><?php esc_html_e( 'Disabled', 'elasticpress' ); ?></label>
+				</div>
 			</div>
+
+			<?php
+			if ( ! empty( $this->feature_box_settings_cb ) ) {
+				call_user_func( $this->feature_box_settings_cb, $this );
+				return;
+			}
+
+			do_action( 'ep_feature_box_settings_' . $this->slug, $this );
+
+			?>
 		</div>
 
-		<?php
-		if ( ! empty( $this->feature_box_settings_cb ) ) {
-			call_user_func( $this->feature_box_settings_cb, $this );
-			return;
-		}
-		do_action( 'ep_feature_box_settings', $this->slug, $this );
-		?>
-
 		<div class="action-wrap">
-			<a data-feature="<?php echo esc_attr( $this->slug ); ?>" class="button button-primary save-settings"><?php esc_html_e( 'Save', 'elasticpress' ); ?></a>
+			<span class="no-dash-sync">
+				<?php esc_html_e('Setting adjustments to this feature require a re-sync. Use WP-CLI.', 'elasticpress' ); ?>
+			</span>
+
+			<a data-feature="<?php echo esc_attr( $this->slug ); ?>" class="<?php if ( $this->requires_install_reindex && defined( 'EP_DASHBOARD_SYNC' ) && ! EP_DASHBOARD_SYNC ) : ?>disabled<?php endif; ?> button button-primary save-settings"><?php esc_html_e( 'Save', 'elasticpress' ); ?></a>
 		</div>
 		<?php
 	}

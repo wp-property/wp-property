@@ -1,114 +1,5 @@
 [
     {
-        "name": "composer/installers",
-        "version": "v1.2.0",
-        "version_normalized": "1.2.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/composer/installers.git",
-            "reference": "d78064c68299743e0161004f2de3a0204e33b804"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/composer/installers/zipball/d78064c68299743e0161004f2de3a0204e33b804",
-            "reference": "d78064c68299743e0161004f2de3a0204e33b804",
-            "shasum": ""
-        },
-        "require": {
-            "composer-plugin-api": "^1.0"
-        },
-        "replace": {
-            "roundcube/plugin-installer": "*",
-            "shama/baton": "*"
-        },
-        "require-dev": {
-            "composer/composer": "1.0.*@dev",
-            "phpunit/phpunit": "4.1.*"
-        },
-        "time": "2016-08-13T20:53:52+00:00",
-        "type": "composer-plugin",
-        "extra": {
-            "class": "Composer\\Installers\\Plugin",
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Composer\\Installers\\": "src/Composer/Installers"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Kyle Robinson Young",
-                "email": "kyle@dontkry.com",
-                "homepage": "https://github.com/shama"
-            }
-        ],
-        "description": "A multi-framework Composer library installer",
-        "homepage": "https://composer.github.io/installers/",
-        "keywords": [
-            "Craft",
-            "Dolibarr",
-            "Hurad",
-            "ImageCMS",
-            "MODX Evo",
-            "Mautic",
-            "OXID",
-            "Plentymarkets",
-            "RadPHP",
-            "SMF",
-            "Thelia",
-            "WolfCMS",
-            "agl",
-            "aimeos",
-            "annotatecms",
-            "attogram",
-            "bitrix",
-            "cakephp",
-            "chef",
-            "cockpit",
-            "codeigniter",
-            "concrete5",
-            "croogo",
-            "dokuwiki",
-            "drupal",
-            "elgg",
-            "expressionengine",
-            "fuelphp",
-            "grav",
-            "installer",
-            "joomla",
-            "kohana",
-            "laravel",
-            "lithium",
-            "magento",
-            "mako",
-            "mediawiki",
-            "modulework",
-            "moodle",
-            "phpbb",
-            "piwik",
-            "ppi",
-            "puppet",
-            "reindex",
-            "roundcube",
-            "shopware",
-            "silverstripe",
-            "symfony",
-            "typo3",
-            "wordpress",
-            "yawik",
-            "zend",
-            "zikula"
-        ]
-    },
-    {
         "name": "usabilitydynamics/lib-utility",
         "version": "0.3.7",
         "version_normalized": "0.3.7.0",
@@ -357,49 +248,6 @@
         ]
     },
     {
-        "name": "usabilitydynamics/lib-wp-list-table",
-        "version": "1.0.8",
-        "version_normalized": "1.0.8.0",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:UsabilityDynamics/lib-wp-list-table",
-            "reference": "1.0.8"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-wp-list-table/archive/1.0.8.zip",
-            "reference": "1.0.8",
-            "shasum": null
-        },
-        "require": {
-            "php": ">=5.3",
-            "usabilitydynamics/lib-ui": "~0.3"
-        },
-        "type": "library",
-        "extra": {
-            "installer-name": "lib-wp-list-table"
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "lib/classes"
-            ]
-        },
-        "license": [
-            "MIT"
-        ],
-        "description": "Advanced Ajax List Table & Filter library for Wordpress",
-        "homepage": "https://github.com/UsabilityDynamics/lib-wp-list-table",
-        "keywords": [
-            "ajax",
-            "filter",
-            "library",
-            "search",
-            "wordpress",
-            "wp-list-table"
-        ]
-    },
-    {
         "name": "usabilitydynamics/lib-wp-shortcode",
         "version": "0.1.2",
         "version_normalized": "0.1.2.0",
@@ -505,78 +353,6 @@
         ]
     },
     {
-        "name": "usabilitydynamics/lib-wp-saas-util",
-        "version": "1.0.5",
-        "version_normalized": "1.0.5.0",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:UsabilityDynamics/lib-wp-saas-util",
-            "reference": "1.0.5"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-wp-saas-util/archive/1.0.5.zip",
-            "reference": "1.0.5",
-            "shasum": null
-        },
-        "type": "library",
-        "extra": {
-            "installer-name": "lib-wp-saas-util"
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "lib"
-            ]
-        },
-        "license": [
-            "MIT"
-        ],
-        "description": "Saas utils.",
-        "homepage": "http://github.com/UsabilityDynamics/lib-wp-saas-util",
-        "support": {
-            "issues": "http://github.com/UsabilityDynamics/lib-wp-saas-util/issues"
-        }
-    },
-    {
-        "name": "usabilitydynamics/lib-wp-bootstrap",
-        "version": "1.2.1",
-        "version_normalized": "1.2.1.0",
-        "source": {
-            "type": "git",
-            "url": "git@github.com:UsabilityDynamics/lib-wp-bootstrap",
-            "reference": "1.2.1"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.2.1.zip",
-            "reference": "1.2.1",
-            "shasum": null
-        },
-        "require": {
-            "php": ">=5.3",
-            "usabilitydynamics/lib-utility": "~0.3"
-        },
-        "type": "library",
-        "extra": {
-            "installer-name": "lib-wp-bootstrap"
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "lib/classes"
-            ]
-        },
-        "license": [
-            "MIT"
-        ],
-        "description": "Wordpress bootstrap library created by UsabilityDynamics",
-        "homepage": "https://github.com/UsabilityDynamics/lib-wp-bootstrap",
-        "keywords": [
-            "wordpress"
-        ]
-    },
-    {
         "name": "ccampbell/chromephp",
         "version": "4.1.0",
         "version_normalized": "4.1.0.0",
@@ -622,114 +398,255 @@
         ]
     },
     {
-        "name": "freemius/wordpress-sdk",
-        "version": "1.2.1.6",
-        "version_normalized": "1.2.1.6",
+        "name": "composer/installers",
+        "version": "v1.5.0",
+        "version_normalized": "1.5.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/Freemius/wordpress-sdk.git",
-            "reference": "a3f3af732acbd4fe0f040e911b6cf190e0d3d4cb"
+            "url": "https://github.com/composer/installers.git",
+            "reference": "049797d727261bf27f2690430d935067710049c2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Freemius/wordpress-sdk/zipball/a3f3af732acbd4fe0f040e911b6cf190e0d3d4cb",
-            "reference": "a3f3af732acbd4fe0f040e911b6cf190e0d3d4cb",
+            "url": "https://api.github.com/repos/composer/installers/zipball/049797d727261bf27f2690430d935067710049c2",
+            "reference": "049797d727261bf27f2690430d935067710049c2",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.2"
+            "composer-plugin-api": "^1.0"
         },
-        "time": "2017-03-10T21:26:29+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "GPL-2.0+"
-        ],
-        "description": "Freemius WordPress SDK",
-        "homepage": "https://freemius.com",
-        "keywords": [
-            "freemius",
-            "plugin",
-            "sdk",
-            "wordpress"
-        ]
-    },
-    {
-        "name": "10up/elasticpress",
-        "version": "2.2.1",
-        "version_normalized": "2.2.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/10up/ElasticPress.git",
-            "reference": "157e65b112d90bcc15e532dc33f86592805cdb13"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/10up/ElasticPress/zipball/157e65b112d90bcc15e532dc33f86592805cdb13",
-            "reference": "157e65b112d90bcc15e532dc33f86592805cdb13",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2"
+        "replace": {
+            "roundcube/plugin-installer": "*",
+            "shama/baton": "*"
         },
         "require-dev": {
-            "phpunit/phpunit": "*@stable",
-            "wp-cli/wp-cli": "*@stable",
-            "wpackagist-plugin/woocommerce": "dev-trunk"
+            "composer/composer": "1.0.*@dev",
+            "phpunit/phpunit": "^4.8.36"
         },
-        "time": "2017-03-30T13:49:12+00:00",
-        "type": "wordpress-plugin",
+        "time": "2017-12-29T09:13:20+00:00",
+        "type": "composer-plugin",
         "extra": {
-            "installer-paths": {
-                "vendor/{$name}/": [
-                    "type:wordpress-plugin",
-                    "type:wordpress-theme"
-                ]
+            "class": "Composer\\Installers\\Plugin",
+            "branch-alias": {
+                "dev-master": "1.0-dev"
             }
         },
         "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Composer\\Installers\\": "src/Composer/Installers"
+            }
+        },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "GPLv2"
+            "MIT"
         ],
         "authors": [
             {
-                "name": "Aaron Holbrook",
-                "email": "aaron@10up.com",
-                "homepage": "http://aaronjholbrook.com"
-            },
-            {
-                "name": "10up",
-                "homepage": "http://10up.com"
-            },
-            {
-                "name": "Taylor Lovett",
-                "email": "taylorl@get10up.com"
+                "name": "Kyle Robinson Young",
+                "email": "kyle@dontkry.com",
+                "homepage": "https://github.com/shama"
             }
         ],
-        "description": "Supercharge WordPress with Elasticsearch.",
+        "description": "A multi-framework Composer library installer",
+        "homepage": "https://composer.github.io/installers/",
         "keywords": [
-            "elasticpress",
-            "elasticsearch",
-            "plugin",
+            "Craft",
+            "Dolibarr",
+            "Eliasis",
+            "Hurad",
+            "ImageCMS",
+            "Kanboard",
+            "Lan Management System",
+            "MODX Evo",
+            "Mautic",
+            "Maya",
+            "OXID",
+            "Plentymarkets",
+            "Porto",
+            "RadPHP",
+            "SMF",
+            "Thelia",
+            "WolfCMS",
+            "agl",
+            "aimeos",
+            "annotatecms",
+            "attogram",
+            "bitrix",
+            "cakephp",
+            "chef",
+            "cockpit",
+            "codeigniter",
+            "concrete5",
+            "croogo",
+            "dokuwiki",
+            "drupal",
+            "eZ Platform",
+            "elgg",
+            "expressionengine",
+            "fuelphp",
+            "grav",
+            "installer",
+            "itop",
+            "joomla",
+            "kohana",
+            "laravel",
+            "lavalite",
+            "lithium",
+            "magento",
+            "majima",
+            "mako",
+            "mediawiki",
+            "modulework",
+            "modx",
+            "moodle",
+            "osclass",
+            "phpbb",
+            "piwik",
+            "ppi",
+            "puppet",
+            "pxcms",
+            "reindex",
+            "roundcube",
+            "shopware",
+            "silverstripe",
+            "sydes",
+            "symfony",
+            "typo3",
+            "wordpress",
+            "yawik",
+            "zend",
+            "zikula"
+        ]
+    },
+    {
+        "name": "usabilitydynamics/lib-wp-list-table",
+        "version": "1.0.9",
+        "version_normalized": "1.0.9.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-wp-list-table",
+            "reference": "1.0.9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-list-table/archive/1.0.9.zip",
+            "reference": "1.0.9",
+            "shasum": null
+        },
+        "require": {
+            "php": ">=5.3",
+            "usabilitydynamics/lib-ui": "~0.3"
+        },
+        "type": "library",
+        "extra": {
+            "installer-name": "lib-wp-list-table"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib/classes"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "Advanced Ajax List Table & Filter library for Wordpress",
+        "homepage": "https://github.com/UsabilityDynamics/lib-wp-list-table",
+        "keywords": [
+            "ajax",
+            "filter",
+            "library",
             "search",
+            "wordpress",
+            "wp-list-table"
+        ]
+    },
+    {
+        "name": "usabilitydynamics/lib-wp-saas-util",
+        "version": "1.0.6",
+        "version_normalized": "1.0.6.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-wp-saas-util",
+            "reference": "1.0.6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-saas-util/archive/1.0.6.zip",
+            "reference": "1.0.6",
+            "shasum": null
+        },
+        "type": "library",
+        "extra": {
+            "installer-name": "lib-wp-saas-util"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "Saas utils.",
+        "homepage": "http://github.com/UsabilityDynamics/lib-wp-saas-util",
+        "support": {
+            "issues": "http://github.com/UsabilityDynamics/lib-wp-saas-util/issues"
+        }
+    },
+    {
+        "name": "usabilitydynamics/lib-wp-bootstrap",
+        "version": "1.2.3",
+        "version_normalized": "1.2.3.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:UsabilityDynamics/lib-wp-bootstrap",
+            "reference": "1.2.3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.2.3.zip",
+            "reference": "1.2.3",
+            "shasum": null
+        },
+        "require": {
+            "php": ">=5.3",
+            "usabilitydynamics/lib-utility": "~0.3"
+        },
+        "type": "library",
+        "extra": {
+            "installer-name": "lib-wp-bootstrap"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "lib/classes"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "Wordpress bootstrap library created by UsabilityDynamics",
+        "homepage": "https://github.com/UsabilityDynamics/lib-wp-bootstrap",
+        "keywords": [
             "wordpress"
         ]
     },
     {
         "name": "rets-ci/wp-rets-client",
-        "version": "dev-latest",
-        "version_normalized": "dev-latest",
+        "version": "0.3.9",
+        "version_normalized": "0.3.9.0",
         "source": {
             "type": "git",
             "url": "git@github.com:rets-ci/wp-rets-client",
-            "reference": "latest"
+            "reference": "0.3.9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/rets-ci/wp-rets-client/archive/latest.zip",
-            "reference": "latest",
+            "url": "https://github.com/rets-ci/wp-rets-client/archive/0.3.9.zip",
+            "reference": "0.3.9",
             "shasum": null
         },
         "archive": {
@@ -746,8 +663,8 @@
         "require": {
             "php": ">=5.3",
             "usabilitydynamics/lib-utility": "0.3.7",
-            "usabilitydynamics/lib-wp-bootstrap": "1.2.1",
-            "usabilitydynamics/lib-wp-saas-util": "1.0.5"
+            "usabilitydynamics/lib-wp-bootstrap": "1.2.3",
+            "usabilitydynamics/lib-wp-saas-util": "1.0.6"
         },
         "type": "wordpress-plugin",
         "extra": {
@@ -775,5 +692,67 @@
             "MIT"
         ],
         "homepage": "https://usabilitydynamics.com"
+    },
+    {
+        "name": "10up/elasticpress",
+        "version": "2.4.2",
+        "version_normalized": "2.4.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/10up/ElasticPress.git",
+            "reference": "4ae14e6505eba1a2c5b398d84fd074b47c32f69a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/10up/ElasticPress/zipball/4ae14e6505eba1a2c5b398d84fd074b47c32f69a",
+            "reference": "4ae14e6505eba1a2c5b398d84fd074b47c32f69a",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "*@stable",
+            "wp-cli/wp-cli": "*@stable",
+            "wpackagist-plugin/woocommerce": "dev-trunk"
+        },
+        "time": "2018-02-01T05:12:19+00:00",
+        "type": "wordpress-plugin",
+        "extra": {
+            "installer-paths": {
+                "vendor/{$name}/": [
+                    "type:wordpress-plugin",
+                    "type:wordpress-theme"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-2.0-only"
+        ],
+        "authors": [
+            {
+                "name": "Aaron Holbrook",
+                "email": "aaron@10up.com",
+                "homepage": "http://aaronjholbrook.com"
+            },
+            {
+                "name": "10up",
+                "homepage": "http://10up.com"
+            },
+            {
+                "name": "Taylor Lovett",
+                "email": "taylorl@get10up.com"
+            }
+        ],
+        "description": "Supercharge WordPress with Elasticsearch.",
+        "keywords": [
+            "elasticpress",
+            "elasticsearch",
+            "plugin",
+            "search",
+            "wordpress"
+        ]
     }
 ]

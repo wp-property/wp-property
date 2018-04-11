@@ -15,8 +15,12 @@ return array(
     'UsabilityDynamics\\Utility\\Guid_Fix' => $vendorDir . '/usabilitydynamics/lib-utility/lib/class-guid-fix.php',
     'UsabilityDynamics\\WPRETSC\\Ajax' => $baseDir . '/lib/classes/class-ajax.php',
     'UsabilityDynamics\\WPRETSC\\Bootstrap' => $baseDir . '/lib/classes/class-bootstrap.php',
+    'UsabilityDynamics\\WPRETSC\\Connectors\\Houzez' => $baseDir . '/lib/connectors/class-theme-houzez.php',
     'UsabilityDynamics\\WPRETSC\\Connectors\\Loader' => $baseDir . '/lib/connectors/class-loader.php',
+    'UsabilityDynamics\\WPRETSC\\Connectors\\RealHomes' => $baseDir . '/lib/connectors/class-theme-real-homes.php',
     'UsabilityDynamics\\WPRETSC\\Connectors\\WPML' => $baseDir . '/lib/connectors/class-wpml.php',
+    'UsabilityDynamics\\WPRETSC\\Connectors\\WPProperty' => $baseDir . '/lib/connectors/class-wp-property.php',
+    'UsabilityDynamics\\WPRETSC\\Connectors\\WPRABBIT' => $baseDir . '/lib/connectors/class-wprabbit.php',
     'UsabilityDynamics\\WPRETSC\\Dashboard_Widget' => $baseDir . '/lib/classes/class-dashboard-widget.php',
     'UsabilityDynamics\\WPRETSC\\Logger' => $baseDir . '/lib/classes/class-logger.php',
     'UsabilityDynamics\\WPRETSC\\Media' => $baseDir . '/lib/classes/class-media.php',
@@ -34,4 +38,5 @@ return array(
     'UsabilityDynamics\\WP\\TGM_Bulk_Installer_Skin' => $vendorDir . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-tgm-bulk-installer.php',
     'UsabilityDynamics\\WP\\TGM_Plugin_Activation' => $vendorDir . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-tgm-plugin-activation.php',
     'UsabilityDynamics\\WP\\Utility' => $vendorDir . '/usabilitydynamics/lib-wp-bootstrap/lib/classes/class-utility.php',
+    'UsabilityDynamics\\WP_Query_Scroller' => $baseDir . '/lib/classes/class-query-scroller.php',
 );

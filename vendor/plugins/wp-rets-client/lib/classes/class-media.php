@@ -129,6 +129,9 @@ namespace UsabilityDynamics\WPRETSC {
           return $response;
         }, 10, 3 );
 
+        /**
+         *
+         */
         add_filter( 'wp_get_attachment_metadata', function ( $data, $post_id ) {
           global $_wp_additional_image_sizes;
 
@@ -205,6 +208,43 @@ namespace UsabilityDynamics\WPRETSC {
           return $data;
 
         }, 10, 2 );
+
+        /**
+         *
+         */
+        add_filter( 'max_srcset_image_width', create_function( '', 'return 1;' ) );
+
+        /**
+         * Take care about removing all property attachments
+         */
+        add_action( 'before_delete_post', array( $this, 'delete_post_attachments' ) );
+
+      }
+
+      /**
+       * Take care about removing all property attachments
+       *
+       */
+      function delete_post_attachments($post_id){
+
+        ud_get_wp_rets_client()->write_log( "Removing all attachments for post [$post_id]", "debug" );
+
+        if( get_post_type( $post_id ) !== 'property' ) {
+          return;
+        }
+
+        $media = get_children( array(
+          'post_parent' => $post_id,
+          'post_type'   => 'attachment'
+        ) );
+
+        if( empty( $media ) ) {
+          return;
+        }
+
+        foreach( $media as $file ) {
+          wp_delete_attachment( $file->ID, true );
+        }
 
       }
 

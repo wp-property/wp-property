@@ -64,17 +64,17 @@
     },
     {
         "name": "usabilitydynamics/lib-wp-bootstrap",
-        "version": "1.2.1",
-        "version_normalized": "1.2.1.0",
+        "version": "1.2.3",
+        "version_normalized": "1.2.3.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/lib-wp-bootstrap",
-            "reference": "1.2.1"
+            "reference": "1.2.3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.2.1.zip",
-            "reference": "1.2.1",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-bootstrap/archive/1.2.3.zip",
+            "reference": "1.2.3",
             "shasum": null
         },
         "require": {
@@ -102,17 +102,17 @@
     },
     {
         "name": "usabilitydynamics/lib-wp-saas-util",
-        "version": "1.0.5",
-        "version_normalized": "1.0.5.0",
+        "version": "1.0.6",
+        "version_normalized": "1.0.6.0",
         "source": {
             "type": "git",
             "url": "git@github.com:UsabilityDynamics/lib-wp-saas-util",
-            "reference": "1.0.5"
+            "reference": "1.0.6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/UsabilityDynamics/lib-wp-saas-util/archive/1.0.5.zip",
-            "reference": "1.0.5",
+            "url": "https://github.com/UsabilityDynamics/lib-wp-saas-util/archive/1.0.6.zip",
+            "reference": "1.0.6",
             "shasum": null
         },
         "type": "library",
