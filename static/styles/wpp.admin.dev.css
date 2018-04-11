@@ -1943,3 +1943,14 @@ body.post-type-property .uisf-date {
   display: none;
 }
 /* wpp_settings_block_toggle */
+/* HubSpot form */
+.hbspt-form {
+  margin-left: 10px !important;
+}
+.hbspt-form input.hs-input[type=checkbox] {
+  border: 1px solid #b4b9be !important;
+  height: 16px !important;
+  width: 16px !important;
+  margin-top: -2px !important;
+}
+/* HubSpot form */
