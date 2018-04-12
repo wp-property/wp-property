@@ -68,11 +68,13 @@ namespace UsabilityDynamics\WPP {
           }
         }
 
-        $post_data = get_post($_GET['post']); // disable 'trash' post button from edit post page
-        if ($post_data->post_name == $wp_properties['configuration']['base_slug']) {
-          add_action('post_submitbox_start', function () {
-            echo '<style>form#post #delete-action {display: none}</style>';
-          });
+        if (isset($_GET['post'])) {
+          $post_data = get_post($_GET['post']); // disable 'trash' post button from edit post page
+          if ($post_data->post_name == $wp_properties['configuration']['base_slug']) {
+            add_action('post_submitbox_start', function () {
+              echo '<style>form#post #delete-action {display: none}</style>';
+            });
+          }
         }
 
         do_action( 'wpp_admin_menu' );
