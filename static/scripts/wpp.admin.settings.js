@@ -233,6 +233,21 @@ jQuery.extend( wpp = wpp || {}, {
           } );
         }
 
+        jQuery("#wpp_settings_tabs").on("tabsactivate", function (event, ui) {
+          console.log('123');
+          if (ui.newTab.attr("aria-controls") == 'tab_feedback') {
+            console.log('123456');
+            jQuery("#hbspt_feedback_form").show();
+            jQuery(".wpp_save_changes_row").hide();
+            ui.newPanel.hide();
+          }
+          else {
+            console.log('123456789');
+            jQuery("#hbspt_feedback_form").hide();
+            jQuery(".wpp_save_changes_row").show();
+          }
+        });
+
         /* Show settings array */
         jQuery( "#wpp_show_settings_array" ).click( function () {
           var $this = jQuery( this ),

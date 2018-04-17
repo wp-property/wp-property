@@ -3231,7 +3231,7 @@ class WPP_F extends UsabilityDynamics\Utility
       'store' => 'options',
     ));
     ob_start();
-      $settings->render_page();
+      $settings->render_settings();
     $return['wpp_settings_page'] = ob_get_clean();
 
     $return['wpp_settings'] = apply_filters( 'wpp::localization::instance', ud_get_wp_property()->get() );
