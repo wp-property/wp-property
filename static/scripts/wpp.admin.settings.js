@@ -233,18 +233,6 @@ jQuery.extend( wpp = wpp || {}, {
           } );
         }
 
-        jQuery("#wpp_settings_tabs").on("tabsactivate", function (event, ui) {
-          if (ui.newTab.attr("aria-controls") == 'tab_feedback') {
-            jQuery("#hbspt_feedback_form").show();
-            jQuery(".wpp_save_changes_row").hide();
-            ui.newPanel.hide();
-          }
-          else {
-            jQuery("#hbspt_feedback_form").hide();
-            jQuery(".wpp_save_changes_row").show();
-          }
-        });
-
         /* Show settings array */
         jQuery( "#wpp_show_settings_array" ).click( function () {
           var $this = jQuery( this ),
@@ -767,7 +755,7 @@ jQuery.extend( wpp = wpp || {}, {
         } // end if WPP_FEATURE_FLAG_SETTINGS_V2;
 
         /* wpp_settings_block_toggle */
-        jQuery(document).on('click', '.wpp_settings_block_toggle > p', function(){
+        jQuery('.wpp_settings_block_toggle > p').click( function(){
           jQuery(this).parent().toggleClass('hidden_setting');
         });
         /* wpp_settings_block_toggle */

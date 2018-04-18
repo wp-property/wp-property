@@ -337,14 +337,6 @@ namespace UsabilityDynamics\WPP {
       {
 
         include ud_get_wp_property()->path("static/views/admin/settings.php", 'dir');
-        include ud_get_wp_property()->path("static/views/admin/hubspot_form.php", 'dir');
-
-      }
-
-      static public function render_settings()
-      {
-
-        include ud_get_wp_property()->path("static/views/admin/settings.php", 'dir');
 
       }
 
