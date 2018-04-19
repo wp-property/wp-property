@@ -11,7 +11,7 @@
  * Domain Path: /static/languages/
  * Author URI: https://www.usabilitydynamics.com
  * GitHub Plugin URI: wp-property/wp-property
- * GitHub Branch: v2.0
+ * GitHub Branch: v2.3
  * Support: https://wordpress.org/support/plugin/wp-property
  * UserVoice: http://feedback.usabilitydynamics.com/forums/95259-wp-property
  * 

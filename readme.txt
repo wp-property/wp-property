@@ -226,14 +226,15 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 
 = 2.3.0 =
 * Code cleaning, warnings, notices fixes.
-* Fixed WPML compatibility issues (404 page and custom attributes values).
+* Fixed WPML compatibility issues.
 * Updated Google Maps API settings and docs.
 * Added pre-release updates option.
-* Added default Properties page. Removed default one.
+* Added default static Properties page. Removed default Property page which was generated on the fly.
 * Fixed Property type was not showing in Search filters.
 * Fixed Property Search issue with attributes which contain slashes.
 * Fixed scroll to the top option on all properties page.
-* Added Feedback form in Settings tab.
+* Added Feedback form in the Settings tab.
+* Added option to see who is editing the Settings tab right now.
 
 = 2.2.0.3 =
 * Fixed history pagination for [property_overview] shortcode.
