@@ -5335,7 +5335,7 @@ class WPP_F extends UsabilityDynamics\Utility
       if (!empty($_REQUEST['signed_request']) && strstr($_SERVER['HTTP_REFERER'], 'facebook.com')) {
 
         //** Show message */
-        die(sprintf(__('You cannot use your site as Facebook Application. You should <a href="%s">purchase</a> WP-Property Premium Feature "Facebook Tabs" to manage your Facebook Tabs.', ud_get_wp_property()->domain), 'https://usabilitydynamics.com/products/wp-property/premium/'));
+        die(sprintf(__('You cannot use your site as Facebook Application. You should <a href="%s">get</a> WP-Property Premium Feature "Facebook Tabs" to manage your Facebook Tabs.', ud_get_wp_property()->domain), 'https://usabilitydynamics.com/products/wp-property/premium/'));
       }
     }
   }
