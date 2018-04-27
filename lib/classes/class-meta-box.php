@@ -727,7 +727,7 @@ namespace UsabilityDynamics\WPP {
           'type' => 'image_advanced',
           //'max_file_uploads' => 15,
           'js_options' => array(
-            'ids' => array_merge( $_attached, is_array( $_meta_attached ) ? $_meta_attached : array() )
+            'ids' => !empty( $_meta_attached ) ? $_meta_attached : $_attached
           )
         );
       }
