@@ -355,13 +355,13 @@ namespace UsabilityDynamics\UD_API {
             $no_key_dismissed = get_option( 'dismissed_error_' .  sanitize_key( $name ) . '_no_key', '' );
             $show_no_key_error = $this->check_dismiss_time( $no_key_dismissed );
             if( $show_no_key_error ) {
-                $this->errors[] = sprintf( __( 'A license key for %s could not be found. Maybe you forgot to enter a license key when setting up %s, or the key was deactivated in your account. You can reactivate or get a license key from your account <a href="%s" target="_blank">Licences</a> | <a class="dismiss-error dismiss" data-key="dismissed_error_%s_no_key" href="#">dismiss</a>.', $this->text_domain ), $name, $name, $this->renew_license_url, sanitize_key( $name ) );
+              $this->errors[] = sprintf( __( 'A license key for %s could not be found. Maybe you forgot to enter a license key when setting up %s, or the key was deactivated in your account. You can reactivate or purchase a license key from your account <a href="%s" target="_blank">Licences</a> | <a class="dismiss-error dismiss" data-key="dismissed_error_%s_no_key" href="#">dismiss</a>.', $this->text_domain ), $name, $name, $this->renew_license_url, sanitize_key( $name ) );
             }
 
             $no_subscription_dismissed = get_option( 'dismissed_error_' .  sanitize_key( $name ) . '_no_subscription', '' );
             $show_no_subscription_error = $this->check_dismiss_time( $no_subscription_dismissed );
             if( $show_no_subscription_error ) {
-                $this->errors[] = sprintf( __( 'A subscription for %s could not be found. You can get a subscription from your account <a href="%s" target="_blank">dashboard</a> | <a class="dismiss-error dismiss" data-key="dismissed_error_%s_no_subscription" href="#">dismiss</a>.', $this->text_domain ), $name, $this->renew_license_url, sanitize_key( $name ) );
+              $this->errors[] = sprintf( __( 'A subscription for %s could not be found. You can purchase a subscription from your account <a href="%s" target="_blank">dashboard</a> | <a class="dismiss-error dismiss" data-key="dismissed_error_%s_no_subscription" href="#">dismiss</a>.', $this->text_domain ), $name, $this->renew_license_url, sanitize_key( $name ) );
             }
 
           } else if ( isset( $response->errors['exp_license'] ) && $response->errors['exp_license'] == 'exp_license' ) {
@@ -369,7 +369,7 @@ namespace UsabilityDynamics\UD_API {
             $exp_license_dismissed = get_option( 'dismissed_error_' .  sanitize_key( $name ) . '_exp_license', '' );
             $show_exp_license_error = $this->check_dismiss_time( $exp_license_dismissed );
             if( $show_exp_license_error ) {
-                $this->errors[] = sprintf( __( 'The license key for %s has expired. You can reactivate or get a license key from your account <a href="%s" target="_blank">dashboard</a> | <a class="dismiss-error dismiss" data-key="dismissed_error_%s_exp_license" href="#">dismiss</a>.', $this->text_domain ), $name, $this->renew_license_url, sanitize_key( $name ) );
+              $this->errors[] = sprintf( __( 'The license key for %s has expired. You can reactivate or purchase a license key from your account <a href="%s" target="_blank">dashboard</a> | <a class="dismiss-error dismiss" data-key="dismissed_error_%s_exp_license" href="#">dismiss</a>.', $this->text_domain ), $name, $this->renew_license_url, sanitize_key( $name ) );
             }
 
           }  else if ( isset( $response->errors['hold_subscription'] ) && $response->errors['hold_subscription'] == 'hold_subscription' ) {
@@ -417,7 +417,7 @@ namespace UsabilityDynamics\UD_API {
             $trash_subscription_dismissed = get_option( 'dismissed_error_' .  sanitize_key( $name ) . '_trash_subscription', '' );
             $show_trash_subscription_error = $this->check_dismiss_time( $trash_subscription_dismissed );
             if( $show_trash_subscription_error ) {
-                $this->errors[] = sprintf( __( 'The subscription for %s has been placed in the trash and will be deleted soon. You can get a new subscription from your account <a href="%s" target="_blank">dashboard</a> | <a class="dismiss-error dismiss" data-key="dismissed_error_%s_trash_subscription" href="#">dismiss</a>.', $this->text_domain ), $name, $this->renew_license_url, sanitize_key( $name ) ) ;
+              $this->errors[] = sprintf( __( 'The subscription for %s has been placed in the trash and will be deleted soon. You can purchase a new subscription from your account <a href="%s" target="_blank">dashboard</a> | <a class="dismiss-error dismiss" data-key="dismissed_error_%s_trash_subscription" href="#">dismiss</a>.', $this->text_domain ), $name, $this->renew_license_url, sanitize_key( $name ) ) ;
             }
 
           } else if ( isset( $response->errors['no_subscription'] ) && $response->errors['no_subscription'] == 'no_subscription' ) {
@@ -425,7 +425,7 @@ namespace UsabilityDynamics\UD_API {
             $no_subscription_dismissed = get_option( 'dismissed_error_' .  sanitize_key( $name ) . '_no_subscription', '' );
             $show_no_subscription_error = $this->check_dismiss_time( $no_subscription_dismissed );
             if( $show_no_subscription_error ) {
-                $this->errors[] = sprintf( __( 'A subscription for %s could not be found. You can get a subscription from your account <a href="%s" target="_blank">dashboard</a> | <a class="dismiss-error dismiss" data-key="dismissed_error_%s_no_subscription" href="#">dismiss</a>.', $this->text_domain ), $name, $this->renew_license_url, sanitize_key( $name ) );
+              $this->errors[] = sprintf( __( 'A subscription for %s could not be found. You can purchase a subscription from your account <a href="%s" target="_blank">dashboard</a> | <a class="dismiss-error dismiss" data-key="dismissed_error_%s_no_subscription" href="#">dismiss</a>.', $this->text_domain ), $name, $this->renew_license_url, sanitize_key( $name ) );
             }
 
           } else if ( isset( $response->errors['no_activation'] ) && $response->errors['no_activation'] == 'no_activation' ) {
@@ -441,7 +441,7 @@ namespace UsabilityDynamics\UD_API {
             $no_key_dismissed = get_option( 'dismissed_error_' .  sanitize_key( $name ) . '_no_key', '' );
             $show_no_key_error = $this->check_dismiss_time( $no_key_dismissed );
             if( $show_no_key_error ) {
-                $this->errors[] = sprintf( __( 'A license key for %s could not be found. Maybe you forgot to enter a license key when setting up %s, or the key was deactivated in your account. You can reactivate or get a license key from your account <a href="%s" target="_blank">Licences</a> | <a class="dismiss-error dismiss" data-key="dismissed_error_%s_no_key" href="#">dismiss</a>.', $this->text_domain ), $name, $name, $this->renew_license_url, sanitize_key( $name ) );
+              $this->errors[] = sprintf( __( 'A license key for %s could not be found. Maybe you forgot to enter a license key when setting up %s, or the key was deactivated in your account. You can reactivate or purchase a license key from your account <a href="%s" target="_blank">Licences</a> | <a class="dismiss-error dismiss" data-key="dismissed_error_%s_no_key" href="#">dismiss</a>.', $this->text_domain ), $name, $name, $this->renew_license_url, sanitize_key( $name ) );
             }
 
           } else if ( isset( $response->errors['download_revoked'] ) && $response->errors['download_revoked'] == 'download_revoked' ) {
@@ -449,7 +449,7 @@ namespace UsabilityDynamics\UD_API {
             $download_revoked_dismissed = get_option( 'dismissed_error_' .  sanitize_key( $name ) . '_download_revoked', '' );
             $show_download_revoked_error = $this->check_dismiss_time( $download_revoked_dismissed );
             if( $show_download_revoked_error ) {
-                $this->errors[] = sprintf( __( 'Download permission for %s has been revoked possibly due to a license key or subscription expiring. You can reactivate or get a license key from your account <a href="%s" target="_blank">dashboard</a> | <a class="dismiss-error dismiss" data-key="dismissed_error_%s_download_revoked" href="#">dismiss</a>.', $this->text_domain ), $name, $this->renew_license_url, sanitize_key( $name ) ) ;
+              $this->errors[] = sprintf( __( 'Download permission for %s has been revoked possibly due to a license key or subscription expiring. You can reactivate or purchase a license key from your account <a href="%s" target="_blank">dashboard</a> | <a class="dismiss-error dismiss" data-key="dismissed_error_%s_download_revoked" href="#">dismiss</a>.', $this->text_domain ), $name, $this->renew_license_url, sanitize_key( $name ) ) ;
             }
 
           } else if ( isset( $response->errors['switched_subscription'] ) && $response->errors['switched_subscription'] == 'switched_subscription' ) {
