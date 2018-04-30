@@ -1,3 +1,8 @@
+### 2.3.1 ( April 30, 2018 )
+* Fixed issue with image ordering.
+* Added notice to update Terms plugin if not compatible version installed.
+* Updated libraries.
+
 ### 2.3.0 ( April 19, 2018 )
 * Code cleaning, warnings, notices fixes.
 * Fixed WPML compatibility issues.
