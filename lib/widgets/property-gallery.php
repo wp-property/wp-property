@@ -41,9 +41,21 @@ class GalleryPropertiesWidget extends WP_Widget
     $gallery_order = maybe_unserialize(!empty($post->gallery_images) ? $post->gallery_images : (!empty($property['gallery_images']) ? $property['gallery_images'] : false));
 
     //** Calculate order of images */
-    if (is_array($slideshow_order) || is_array($gallery_order)) {
+    $_meta_attached = get_post_meta($post->ID, 'wpp_media');
+    $prepared_gallery_images = array();
+    if (!empty($_meta_attached) && is_array($_meta_attached)) {
+      //** Get images from the list of images by order */
+      foreach ($_meta_attached as $_meta_attached_id) {
+        foreach ($gallery as $image_slug => $gallery_image_data) {
+          if ($gallery_image_data['attachment_id'] == $_meta_attached_id) {
+            $prepared_gallery_images[$image_slug] = $gallery_image_data;
+            unset($gallery[$image_slug]);
+          }
+        }
+      }
+      $gallery = $prepared_gallery_images;
+    } else if (is_array($slideshow_order) || is_array($gallery_order)) {
       $order = array_unique(array_merge((array)$slideshow_order, (array)$gallery_order));
-      $prepared_gallery_images = array();
       //** Get images from the list of images by order */
       foreach ($order as $order_id) {
         foreach ($gallery as $image_slug => $gallery_image_data) {
