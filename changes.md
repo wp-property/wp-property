@@ -1,3 +1,7 @@
+### 2.3.2 ( May 17, 2018 )
+* Fixed issue when images weren't attaching to the property
+* Reverted back Importer schedules filter on all properties page on backend
+
 ### 2.3.1 ( April 30, 2018 )
 * Fixed issue with image ordering.
 * Added notice to update Terms plugin if not compatible version installed.
