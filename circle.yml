@@ -1,4 +1,6 @@
 machine:
+  node:
+    version: 6.10.3
   hosts:
     wp-property-tests.github.com: 192.30.253.112
   services:
