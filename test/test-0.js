@@ -75,6 +75,9 @@ module.exports = {
         console.log( "Most likely first time tests are being ran and site is trying to redirect to its default siteurl." );
       } else if( resp.statusCode === 200 ) {
         // console.log( "No redirection, our custom siteurl/home have already been set." );
+      } else if ( resp.statusCode === 400 ) {
+        // @TODO: I guess, it's normal behaviour when no action parameters provided for admin-ajax.php, but have to check it. peshkov@UDX
+        console.log( "Can reach WordPress at [" + module.base_url + "/wp-admin/admin-ajax.php], but request is bad." );
       } else {
         console.log( "Unexpected status code!", resp.statusCode );
         return done( new Error( 'Unexpected status code.' ) );

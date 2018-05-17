@@ -30,6 +30,12 @@ namespace UsabilityDynamics\WPP {
         //** Add metaboxes hook */
         add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 );
 
+        /**
+         *  Add media to property gallery in case wasn't added.
+         * 
+         */
+        add_filter( 'rwmb_wpp_media_value', array( $this, 'attach_missing_media'), 10, 3);
+
       }
 
       /**
@@ -762,6 +768,23 @@ namespace UsabilityDynamics\WPP {
         }
 
         return $field;
+      }
+
+      /**
+       * Add media to gallery.
+       * 
+       */
+      public function attach_missing_media($new, $field, $old){
+        if(!empty($_POST['ID']) && is_array($new)){
+          $gallery_images = get_post_meta( $_POST['ID'], 'gallery_images', true );
+          if(!is_array($gallery_images)){
+            $gallery_images = array();
+          }
+          $gallery_images = array_merge($gallery_images, $new);
+          $gallery_images = array_values(array_unique($gallery_images));
+          update_post_meta( $_POST['ID'], 'gallery_images', $gallery_images );
+        }
+        return $new;
       }
 
     }

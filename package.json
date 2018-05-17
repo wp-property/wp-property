@@ -2,7 +2,7 @@
   "name": "wp-property",
   "title": "WP-Property",
   "description": "Property and Real Estate Management Plugin for WordPress.  Create a directory of real estate / rental properties and integrate them into you WordPress CMS.",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "homepage": "http://usabilitydynamics.com/products/wp-property/",
   "author": {
     "name": "UsabilityDynamics, Inc.",
@@ -32,6 +32,7 @@
     "grunt-phpunit": "~0.3.3",
     "grunt-shell": "~0.6.0",
     "intercept-stdout": "^0.1.2",
+    "mocha": "^5.1.1",
     "ngrok": "^2.2.3",
     "request": "^2.75.0",
     "requestretry": "^1.12.0",

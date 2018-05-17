@@ -199,6 +199,25 @@ namespace UsabilityDynamics\WPP {
           )
         );
 
+        if (!empty($wpp_property_import['schedules'])) {
+          $schedules_list = $this->get_post_schedule_id();
+          $schedules_list = array_reverse($schedules_list, true);
+          $schedules_list[""] = '';
+          $schedules_list = array_reverse($schedules_list, true);
+
+          $schedules_array = array(
+            'id' => 'wpp_import_schedule_id',
+            'name' => __('Schedule', $this->get('domain')),
+            'type' => 'select_advanced',
+            'js_options' => array(
+              'allowClear' => true,
+            ),
+            'options' => $schedules_list,
+          );
+
+          array_push($fields, $schedules_array);
+        }
+
         $defined = array();
         foreach($fields as $field) {
           array_push( $defined, $field['id'] );
@@ -339,6 +358,25 @@ namespace UsabilityDynamics\WPP {
        */
       public function render_filter() {
         $this->list_table->filter();
+      }
+
+      /**
+       * Returns the list of schedules.
+       *
+       * @return array
+       */
+      public function get_post_schedule_id()
+      {
+        global $wpp_property_import;
+        $schedules = array();
+        if (!empty($wpp_property_import['schedules'])) {
+          foreach ($wpp_property_import['schedules'] as $key => $schedule) {
+            $schedules[$key] = mb_strimwidth($schedule['name'], 0, 35, '...');
+          }
+          return $schedules;
+        } else {
+          return array();
+        }
       }
 
       /**

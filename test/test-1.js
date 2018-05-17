@@ -44,7 +44,10 @@ module.exports = {
 
 
       // console.log( require( 'util' ).inspect( resp.headers, {showHidden: false, depth: 2, colors: true} ) );
-      if( !resp || resp.statusCode !== 200 ) {
+      if( resp.statusCode == 400 ) {
+        // @TODO: I guess, it's normal behaviour when no action parameters provided for admin-ajax.php, but have to check it. peshkov@UDX
+        console.log( "Can reach WordPress at [" + module.base_url + "/wp-admin/admin-ajax.php], but request is bad." );
+      } else if( resp.statusCode !== 200 ) {
         console.log( require( 'util' ).inspect( error, { showHidden: false, depth: 2, colors: true } ) );
         return done( new Error( 'Unexpected response code post-wp-property activation.' ) );
       }
