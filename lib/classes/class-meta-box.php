@@ -726,14 +726,28 @@ namespace UsabilityDynamics\WPP {
        */
       public function get_media_field( $post ) {
 
-        $_attached = array_keys( get_attached_media( 'image', $post->ID ) );
         $_meta_attached = get_post_meta( $post->ID, 'wpp_media' );
+        if(empty($_meta_attached)){
+          $_attached        = array_keys( get_attached_media( 'image', $post->ID ));
+          $slideshow_order  = get_post_meta($post->ID, 'slideshow_images', true);
+          $gallery_order    = get_post_meta( $post->ID, 'gallery_images', true );
+          $ordered          = array_unique(array_merge((array) $slideshow_order, (array) $gallery_order));
+          foreach ($ordered as $order_id) {
+            $key = array_search($order_id, $_attached);
+            if($key !== false){
+              unset($_attached[$key]);
+            }
+          }
+          
+          $_meta_attached = array_values(array_merge($ordered, $_attached));
+        }
+
         return array(
           'id' => 'wpp_media',
           'type' => 'image_advanced',
           //'max_file_uploads' => 15,
           'js_options' => array(
-            'ids' => !empty( $_meta_attached ) ? $_meta_attached : $_attached
+            'ids' => $_meta_attached
           )
         );
       }
