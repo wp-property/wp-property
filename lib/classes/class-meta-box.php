@@ -721,11 +721,18 @@ namespace UsabilityDynamics\WPP {
       public function get_media_field( $post ) {
 
         $_meta_attached = get_post_meta( $post->ID, 'wpp_media' );
+        // Backward compatibility
         if(empty($_meta_attached)){
+          // getting unordered media.
           $_attached        = array_keys( get_attached_media( 'image', $post->ID ));
+          // wpp slideshow field
           $slideshow_order  = get_post_meta($post->ID, 'slideshow_images', true);
+          // wpp slideshow field
           $gallery_order    = get_post_meta( $post->ID, 'gallery_images', true );
           $ordered          = array_unique(array_merge((array) $slideshow_order, (array) $gallery_order));
+          
+          // removing ordered images from unordered image
+          // so that we can add unordered images at the end.
           foreach ($ordered as $order_id) {
             $key = array_search($order_id, $_attached);
             if($key !== false){
