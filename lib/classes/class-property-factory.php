@@ -183,7 +183,14 @@ namespace UsabilityDynamics\WPP {
          * Load all attached images and their sizes
          */
         if( $load_gallery ) {
-          $gallery = self::get_images( $id, $cache );
+          $_meta_attached = get_post_meta($id, 'wpp_media');
+          if(is_array($_meta_attached) && count($_meta_attached)){
+            $_meta_attached = array_map('intval', $_meta_attached);
+            $gallery = self::get_images( $_meta_attached, $cache, 'ids');
+          }
+          else{
+            $gallery = self::get_images( $id, $cache);
+          }
           $property[ 'gallery' ] = !empty( $gallery ) ? $gallery : false;
         }
 
@@ -508,9 +515,9 @@ namespace UsabilityDynamics\WPP {
        * @param bool $cache
        * @return array
        */
-      static public function get_images( $id, $cache = true ) {
-
-        if( $cache && $data = wp_cache_get( $id, 'property_images' ) ) {
+      static public function get_images( $id, $cache = true, $type = 'parent' ) {
+        $cache_id = is_array($id) ? md5(json_encode($id)) : $id;
+        if( $cache && $data = wp_cache_get( $cache_id, 'property_images_' . $type ) ) {
 
           // Do nothing here.
 
@@ -518,13 +525,32 @@ namespace UsabilityDynamics\WPP {
 
           $data = array();
 
-          $attachments = get_children( array(
-            'post_parent' => $id,
-            'post_type' => 'attachment',
-            'post_mime_type' => 'image',
-            'orderby' => 'menu_order ASC, ID',
-            'order' => 'ASC'
-          ) );
+          switch ($type) {
+            case 'ids':
+              $attachments = get_posts( array(
+                'post_type' => 'attachment',
+                'include'   => (array) $id,
+                'post_mime_type' => 'image',
+                'orderby' => 'menu_order ASC, ID',
+                'order' => 'ASC'
+              ) );
+              foreach ($attachments as $key => $attachment) {
+                $attachments[$attachment->ID] = $attachment;
+                unset($attachments[$key]);
+              }
+              break;
+              
+            case 'parent':
+            default:
+              $attachments = get_children( array(
+                'post_parent' => $id,
+                'post_type' => 'attachment',
+                'post_mime_type' => 'image',
+                'orderby' => 'menu_order ASC, ID',
+                'order' => 'ASC'
+              ) );
+              break;
+          }
 
           /* Get property images */
           if( !empty( $attachments ) ) {
@@ -542,7 +568,7 @@ namespace UsabilityDynamics\WPP {
             }
           }
 
-          wp_cache_add( $id, $data, 'property_images' );
+          wp_cache_add( $cache_id, $data, 'property_images_' . $type );
 
         }
 

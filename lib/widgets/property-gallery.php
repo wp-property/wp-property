@@ -47,7 +47,7 @@ class GalleryPropertiesWidget extends WP_Widget
       //** Get images from the list of images by order */
       foreach ($_meta_attached as $_meta_attached_id) {
         foreach ($gallery as $image_slug => $gallery_image_data) {
-          if ($gallery_image_data['attachment_id'] == $_meta_attached_id) {
+          if ($gallery_image_data['attachment_id'] == (int) $_meta_attached_id) {
             $prepared_gallery_images[$image_slug] = $gallery_image_data;
             unset($gallery[$image_slug]);
           }
