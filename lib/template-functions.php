@@ -115,6 +115,8 @@ if (!function_exists('get_attribute')) {
       'args' => $args,
       'property' => $this_property
     ));
+    // Getting translation
+    $return[ 'value' ] = apply_filters( 'wpp::attribute::value', $value, $attribute );
 
     if ($args['return'] == 'true') {
       return $value;

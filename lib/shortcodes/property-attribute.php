@@ -166,8 +166,8 @@ namespace UsabilityDynamics\WPP {
         }
 
         $return[ 'value' ] = apply_filters( 'wpp_property_attribute_shortcode', $value, $this_property );
-        // Getting translation 
-        $return[ 'value' ] = apply_filters( 'wpp::attribute::value', $value, $this_property );
+        // Getting translation
+        $return[ 'value' ] = apply_filters( 'wpp::attribute::value', $value, $attribute );
 
         if( $args[ 'strip_tags' ] == "true" && !empty( $return[ 'value' ] ) ) {
           $return[ 'value' ] = strip_tags( $return[ 'value' ] );
