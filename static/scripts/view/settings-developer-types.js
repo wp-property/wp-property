@@ -38,7 +38,11 @@ jQuery(document).on('wpp.ui.settings.ready', function() {
         new_row: this.model.get('property_slug') == '' ? true : false,
       };
     },
-    template: _.template(jQuery('#settings-developer-types-template').html()),
+    template: _.template(jQuery('#settings-developer-types-template').html(), {
+      evaluate:    /{{([\s\S]+?)}}/g,
+      interpolate: /{{=([\s\S]+?)}}/g,
+      escape:      /{{-([\s\S]+?)}}/g
+    }),
     render: function() {
       this.el.innerHTML = this.template(this.model.toJSON());
       return this;
