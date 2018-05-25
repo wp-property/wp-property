@@ -107,7 +107,7 @@ namespace UsabilityDynamics\WPP {
               }
 
               // Handle keys with multiple values
-              if( count( $value ) > 1 ) {
+              if( is_array($value) && count( $value ) > 1 ) {
                 $property[ $key ] = $value;
               } else {
                 $property[ $key ] = $real_value;
