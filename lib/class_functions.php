@@ -796,13 +796,13 @@ class WPP_F extends UsabilityDynamics\Utility
   {
     global $post, $property, $wp_properties;
 
-    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('jquery-ui-slider');"));
-    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('jquery-ui-mouse');"));
-    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('jquery-ui-widget');"));
-    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wpp-jquery-fancybox');"));
-    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wpp-jquery-address');"));
-    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wpp-jquery-scrollTo');"));
-    add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('wp-property-frontend');"));
+    add_action('wp_enqueue_scripts', function(){wp_enqueue_script('jquery-ui-slider');});
+    add_action('wp_enqueue_scripts', function(){wp_enqueue_script('jquery-ui-mouse');});
+    add_action('wp_enqueue_scripts', function(){wp_enqueue_script('jquery-ui-widget');});
+    add_action('wp_enqueue_scripts', function(){wp_enqueue_script('wpp-jquery-fancybox');});
+    add_action('wp_enqueue_scripts', function(){wp_enqueue_script('wpp-jquery-address');});
+    add_action('wp_enqueue_scripts', function(){wp_enqueue_script('wpp-jquery-scrollTo');});
+    add_action('wp_enqueue_scripts', function(){wp_enqueue_script('wp-property-frontend');});
     wp_enqueue_style('wpp-jquery-fancybox-css');
     wp_enqueue_style('jquery-ui');
 
@@ -813,7 +813,7 @@ class WPP_F extends UsabilityDynamics\Utility
         case 'single':
 
           if (!isset($wp_properties['configuration']['do_not_use']['locations']) || $wp_properties['configuration']['do_not_use']['locations'] != 'true') {
-            add_action('wp_enqueue_scripts', create_function('', "wp_enqueue_script('google-maps');"));
+            add_action('wp_enqueue_scripts', function(){wp_enqueue_script('google-maps');});
           }
 
           break;
@@ -934,32 +934,9 @@ class WPP_F extends UsabilityDynamics\Utility
    *
    * @since 1.32.0
    */
-  static public function console_log($text = false)
-  {
-    global $wp_properties;
-
+  static public function console_log( $text = false ) {
     self::debug( $text );
     return;
-
-    if (!isset($wp_properties['configuration']['developer_mode']) || $wp_properties['configuration']['developer_mode'] != 'true') {
-      return false;
-    }
-
-    if (empty($text)) {
-      return false;
-    }
-
-    if (is_array($text) || is_object($text)) {
-      $text = str_replace("\n", '', print_r($text, true));
-    }
-
-    //** Cannot use quotes */
-    $text = str_replace('"', '-', $text);
-
-    add_filter('wp_footer', create_function('$nothing,$echo_text = "' . $text . '"', 'echo \'<script type="text/javascript">if(typeof console == "object"){console.log("\' . $echo_text . \'");}</script>\'; '));
-    add_filter('admin_footer', create_function('$nothing,$echo_text = "' . $text . '"', 'echo \'<script type="text/javascript">if(typeof console == "object"){console.log("\' . $echo_text . \'");}</script>\'; '));
-
-    return true;
   }
 
   /**
@@ -3128,40 +3105,6 @@ class WPP_F extends UsabilityDynamics\Utility
     update_option("wpp_property_backups", $backups);
     $message = '<a href="' . wp_nonce_url("edit.php?post_type=property&page=property_settings&wpp_action=download-wpp-backup&timestamp=" . $timestamp, 'download-wpp-backup') . '">' . date('d-m-Y H:i', $timestamp) . '</a>&nbsp;&nbsp;&nbsp;';
     echo json_encode(array("success" => true, 'message' => $message));
-  }
-
-  /**
-   * AJAX Handler for Setup Assistant + Freemius options.
-   *
-   * @author raj
-   */
-
-  static public function save_freemius_settings()
-  {
-    $rawData = $_REQUEST['data'];
-    $rawData = urldecode($rawData);
-    parse_str($rawData, $data);
-    $return_url = $data['return_url'] . '&_wpnonce=' . $data['_wpnonce'];
-
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_HEADER, 1);
-    curl_setopt($ch, CURLOPT_VERBOSE, 1);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_URL, $data['post_url']);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-    $result = curl_exec($ch);
-    $responseInfo = curl_getinfo($ch);
-    curl_close($ch);
-    if ($responseInfo && $responseInfo['redirect_url']) {
-      $return['redirect_url'] = $responseInfo['redirect_url'] . '&_wpnonce=' . $data['_wpnonce'] . '&page=' . $data['plugin_slug'];
-    }
-    $return['data'] = $data;
-    $return['success'] = '1';
-    echo json_encode($return);
-    exit;
   }
 
   /**

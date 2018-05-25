@@ -577,10 +577,9 @@ function add_dollar_sign( $content ) {
   }
 
   if ( !is_numeric( $content ) ) {
-    return preg_replace_callback( '/(\d+)/', create_function(
-      '$matches',
-      'return add_dollar_sign( $matches[0] );'
-    ), $content );
+    return preg_replace_callback( '/(\d+)/', function( $matches ) {
+      return add_dollar_sign( $matches[0] );
+    }, $content );
   } else {
     return ( $currency_symbol_placement == 'before' ? $currency_symbol : '' ) . WPP_F::format_numeric( $content ) . ( $currency_symbol_placement == 'after' ? $currency_symbol : '' );
   }

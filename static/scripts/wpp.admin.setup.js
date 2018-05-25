@@ -144,38 +144,6 @@ jQuery(document).ready(function () {
     $('.wpp_asst_screen .foot-note .wpp_toggl_desctiption').toggle("slow")
   });
 
-
-  /*BEGIN : start code for freemius */
-  function submitFreemiusData(data) {
-
-    jQuery.ajax({
-      type: 'POST',
-      url: ajaxurl,
-      data: {
-        action: 'wpp_save_freemius_settings',
-        data: data
-      },
-      beforeSend: function () {
-        $showLoader();
-      },
-      success: function (response) {
-        $hideLoader();
-        response = JSON.parse(response);
-
-        //move slider one step ahead
-        var wpp_owl = $("#wpp-splash-screen-owl").data('owlCarousel');
-        wpp_owl.next();
-
-        if (response && response.success == 1) {
-          if (response.redirect_url) {
-            console.info(response.redirect_url);
-            $.get(response.redirect_url);
-          }
-        }
-      }
-    });
-  }
-
   if (typeof (wpp_owl) != 'undefined') {
     $(".fs-actions > a").click(function (e) {
       e.preventDefault();
@@ -185,7 +153,6 @@ jQuery(document).ready(function () {
     $(".fs-actions > a,.fs-actions > button").click(function (e) {
       e.preventDefault();
       data = $(".fs-actions input").serialize();
-      //submitFreemiusData(data);
       return false;
     });
   }
