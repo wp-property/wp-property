@@ -28,7 +28,11 @@ jQuery(document).on('wpp.ui.settings.ready', function() {
         style: typeof this.model.get('group').color != 'undefined' ? 'background-color:' + this.model.get('group').color : '',
       };
     },
-    template: _.template(jQuery('#settings-developer-attributes-template').html()),
+    template: _.template(jQuery('#settings-developer-attributes-template').html(), {
+      evaluate:    /{{([\s\S]+?)}}/g,
+      interpolate: /{{=([\s\S]+?)}}/g,
+      escape:      /{{-([\s\S]+?)}}/g
+    }),
     render: function() {
       this.el.innerHTML = this.template(this.model.toJSON());
       return this;
