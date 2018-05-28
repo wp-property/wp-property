@@ -1,3 +1,8 @@
+### 2.3.3 ( May 28, 2018 )
+* Fixed WPML compatibility issue with [property_attributes] shortcode.
+* Fixed images issue in Slidehow add-on.
+* Fixed compatibility issue with PHP 5.5 about asp_tags.
+
 ### 2.3.2 ( May 17, 2018 )
 * Fixed issue when images weren't attaching to the property
 * Reverted back Importer schedules filter on all properties page on backend
