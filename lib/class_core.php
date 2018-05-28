@@ -222,19 +222,39 @@ class WPP_Core {
     global $wp_properties;
 
     /** Ajax functions */
-    add_action( 'wp_ajax_wpp_ajax_max_set_property_type', create_function( "", ' die(WPP_F::mass_set_property_type($_REQUEST["property_type"]));' ) );
-
-    add_action( 'wp_ajax_wpp_ajax_image_query', create_function( "", ' $class = WPP_F::get_property_image_data($_REQUEST["image_id"]); if($class)  print_r($class); else echo __("No image found.","wpp"); die();' ) );
-    add_action( 'wp_ajax_wpp_ajax_revalidate_all_addresses', create_function( "", '  echo WPP_F::revalidate_all_addresses(); die();' ) );
-    add_action( 'wp_ajax_wpp_ajax_create_settings_backup', create_function( "", '  echo WPP_F::create_settings_backup(); die();' ) );
-    add_action( 'wp_ajax_wpp_save_settings', create_function( "", ' die(WPP_F::save_settings());' ) );
+    add_action( 'wp_ajax_wpp_ajax_max_set_property_type', function() {
+      die(WPP_F::mass_set_property_type($_REQUEST["property_type"]));
+    } );
+    add_action( 'wp_ajax_wpp_ajax_image_query', function() {
+      $class = WPP_F::get_property_image_data($_REQUEST["image_id"]);
+      if($class) print_r($class);
+      else echo __("No image found.","wpp"); die();
+    } );
+    add_action( 'wp_ajax_wpp_ajax_revalidate_all_addresses', function() {
+      echo WPP_F::revalidate_all_addresses(); die();
+    } );
+    add_action( 'wp_ajax_wpp_ajax_create_settings_backup', function() {
+      echo WPP_F::create_settings_backup(); die();
+    } );
+    add_action( 'wp_ajax_wpp_save_settings', function() {
+      die(WPP_F::save_settings());
+    } );
     if(WPP_FEATURE_FLAG_SETTINGS_V2){
-      add_action( 'wp_ajax_wpp_get_settings_page', create_function( "", ' die(WPP_F::wpp_ajax_get_settings_page());' ) );
+      add_action( 'wp_ajax_wpp_get_settings_page', function() {
+        die(WPP_F::wpp_ajax_get_settings_page());
+      } );
     }
-    add_action( 'wp_ajax_wpp_save_freemius_settings', create_function( "", ' die(WPP_F::save_freemius_settings());' ) );
-    add_action( 'wp_ajax_wpp_apply_default_value', create_function( "", ' die(WPP_F::apply_default_value());' ) );
-    add_action( 'wp_ajax_wpp_ajax_print_wp_properties', create_function( "", ' global $wp_properties; print_r($wp_properties); die();' ) );
-    add_action( 'wp_ajax_wpp_ajax_generate_is_remote_meta', create_function( "", ' WPP_F::generate_is_remote_meta(); die();' ) );
+    add_action( 'wp_ajax_wpp_apply_default_value', function() {
+      die(WPP_F::apply_default_value());
+    } );
+    add_action( 'wp_ajax_wpp_ajax_print_wp_properties', function() {
+      global $wp_properties;
+      print_r($wp_properties);
+      die();
+    } );
+    add_action( 'wp_ajax_wpp_ajax_generate_is_remote_meta', function() {
+      WPP_F::generate_is_remote_meta(); die();
+    } );
 
     /** Called in setup_postdata().  We add property values here to make available in global $post variable on frontend */
     add_action( 'the_post', array( 'WPP_F', 'the_post' ) );
@@ -245,7 +265,9 @@ class WPP_Core {
     add_action( 'save_post', array( $this, 'save_property' ), 11 );
 
     //** Address revalidation @since 1.37.2 @author odokienko@UD */
-    add_action( 'save_property', create_function( '$post_id', 'WPP_F::revalidate_address($post_id);' ) );
+    add_action( 'save_property', function( $post_id ) {
+      WPP_F::revalidate_address($post_id);
+    } );
 
     add_action( 'before_delete_post', array( 'WPP_F', 'before_delete_post' ) );
     add_filter( 'post_updated_messages', array( $this, 'property_updated_messages' ), 5 );
@@ -294,7 +316,7 @@ class WPP_Core {
     wp_register_script( 'wpp-jquery-ajaxupload', WPP_URL . 'scripts/fileuploader.js', array( 'jquery', 'wpp-localization' ) );
     wp_register_script( 'wp-property-admin-overview', WPP_URL . 'scripts/wpp.admin.overview.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
     wp_register_script( 'wp-property-admin-widgets', WPP_URL . 'scripts/wpp.admin.widgets.js', array( 'jquery', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-admin-settings', WPP_URL . 'scripts/wpp.admin.settings.js', array( 'jquery', 'heartbeat', 'wpp-localization' ), WPP_Version );
+    wp_register_script( 'wp-property-admin-settings', WPP_URL . 'scripts/wpp.admin.settings.js', array( 'jquery', 'heartbeat', 'wpp-localization', 'backbone' ), WPP_Version );
     // _ template js
     wp_register_script( 'lodash-js', WPP_URL . 'scripts/lodash.js', array('jquery', 'underscore'), WPP_Version );
     wp_register_script( 'wpp-settings-developer-attributes', WPP_URL . 'scripts/view/settings-developer-attributes.js', array( 'wp-property-admin-settings', 'lodash-js' ), WPP_Version );
@@ -419,7 +441,11 @@ class WPP_Core {
 
     //** Make Property Featured Via AJAX */
     if( isset( $_REQUEST[ 'post_id' ] ) && isset( $_REQUEST[ '_wpnonce' ] ) && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], "wpp_make_featured_" . $_REQUEST[ 'post_id' ] ) ) {
-      add_action( 'wp_ajax_wpp_make_featured', create_function( "", '  $post_id = $_REQUEST[\'post_id\']; echo WPP_F::toggle_featured( $post_id ); die();' ) );
+      add_action( 'wp_ajax_wpp_make_featured', function() {
+        $post_id = $_REQUEST['post_id'];
+        echo WPP_F::toggle_featured( $post_id );
+        die();
+      } );
     }
 
     add_filter( 'wpp::draw_stats::attributes', array( __CLASS__, 'make_attributes_hidden' ), 100, 2 );
@@ -586,10 +612,15 @@ class WPP_Core {
       WPP_F::console_log( 'Overriding default 404 page status.' );
 
       /** Set to override the 404 status */
-      add_action( 'wp', create_function( '', 'status_header( 200 );' ) );
+      add_action( 'wp', function() {
+        status_header( 200 );
+      } );
 
       //** Prevent is_404() in template files from returning true */
-      add_action( 'template_redirect', create_function( '', ' global $wp_query; $wp_query->is_404 = false;' ), 0, 10 );
+      add_action( 'template_redirect', function() {
+        global $wp_query;
+        $wp_query->is_404 = false;
+      }, 0, 10 );
     }
 
     $wpp_pages = array();
@@ -1108,7 +1139,9 @@ class WPP_Core {
 
       do_action( 'template_redirect_single_property' );
 
-      add_action( 'wp_head', create_function( '', "do_action('wp_head_single_property'); " ) );
+      add_action( 'wp_head', function() {
+        do_action('wp_head_single_property');
+      });
 
       $property = (array) WPP_F::get_property( $post->ID, "load_gallery=true" );
 
@@ -1160,7 +1193,9 @@ class WPP_Core {
 
       do_action( 'template_redirect_property_overview' );
 
-      add_action( 'wp_head', create_function( '', "do_action('wp_head_property_overview'); " ) );
+      add_action( 'wp_head', function() {
+        do_action('wp_head_property_overview');
+      } );
 
     }
 

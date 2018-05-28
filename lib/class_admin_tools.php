@@ -174,7 +174,12 @@ if( !class_exists( 'class_admin_tools' ) ) {
       $tabs = apply_filters( 'wpp::settings_developer::tabs',  $developer_tabs);
 
       /* Sort Tabs by 'order' */
-      uasort( $tabs, create_function( '$a,$b', 'if ($a[\'order\'] == $b[\'order\']) { return 0; } return ($a[\'order\'] > $b[\'order\']) ? 1 : -1;' ) );
+      uasort( $tabs, function( $a, $b ) {
+        if ($a['order'] == $b['order']) {
+          return 0;
+        }
+        return ($a['order'] > $b['order']) ? 1 : -1;
+      } );
 
       $template = ud_get_wp_property()->path( 'static/views/admin/settings-developer.php', 'dir' );
       include( $template );

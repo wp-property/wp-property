@@ -3,8 +3,8 @@ Contributors: usability_dynamics, andypotanin, jbrw1984, maxim.peshkov, Anton Ko
 Donate link: http://usabilitydynamics.com/product/wp-property/
 Tags: property management, real estate, listings, properties, property, wp-property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 4.0
-Tested up to: 4.9.5
-Stable tag: 2.3.2
+Tested up to: 4.9.6
+Stable tag: 2.3.3
 
 == Description ==
 
@@ -223,6 +223,11 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 * Security fixes
 
 == Changelog ==
+
+= 2.3.3 =
+* Fixed WPML compatibility issue with [property_attributes] shortcode.
+* Fixed images issue in Slidehow add-on.
+* Fixed compatibility issue with PHP 5.5 about asp_tags.
 
 = 2.3.2 =
 * Fixed issue when images weren't attaching to the property

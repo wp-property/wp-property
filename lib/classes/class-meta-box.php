@@ -30,12 +30,6 @@ namespace UsabilityDynamics\WPP {
         //** Add metaboxes hook */
         add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 );
 
-        /**
-         *  Add media to property gallery in case wasn't added.
-         * 
-         */
-        add_filter( 'rwmb_wpp_media_value', array( $this, 'attach_missing_media'), 10, 3);
-
       }
 
       /**
@@ -725,15 +719,39 @@ namespace UsabilityDynamics\WPP {
        * @return array
        */
       public function get_media_field( $post ) {
+        $_meta_attached = array();
+        
+        if(!empty($post->ID)){
+          $_meta_attached = get_post_meta( $post->ID, 'wpp_media' );
+          // Backward compatibility
+          if(empty($_meta_attached)){
+            // getting unordered media.
+            $_attached        = array_keys( get_attached_media( 'image', $post->ID ));
+            // wpp slideshow field
+            $slideshow_order  = get_post_meta($post->ID, 'slideshow_images', true);
+            // wpp slideshow field
+            $gallery_order    = get_post_meta( $post->ID, 'gallery_images', true );
+            $ordered          = array_unique(array_merge((array) $slideshow_order, (array) $gallery_order));
+            
+            // removing ordered images from unordered image
+            // so that we can add unordered images at the end.
+            foreach ($ordered as $order_id) {
+              $key = array_search($order_id, $_attached);
+              if($key !== false){
+                unset($_attached[$key]);
+              }
+            }
+            
+            $_meta_attached = array_values(array_merge($ordered, $_attached));
+          }
+        }
 
-        $_attached = array_keys( get_attached_media( 'image', $post->ID ) );
-        $_meta_attached = get_post_meta( $post->ID, 'wpp_media' );
         return array(
           'id' => 'wpp_media',
           'type' => 'image_advanced',
           //'max_file_uploads' => 15,
           'js_options' => array(
-            'ids' => !empty( $_meta_attached ) ? $_meta_attached : $_attached
+            'ids' => $_meta_attached
           )
         );
       }
@@ -768,23 +786,6 @@ namespace UsabilityDynamics\WPP {
         }
 
         return $field;
-      }
-
-      /**
-       * Add media to gallery.
-       * 
-       */
-      public function attach_missing_media($new, $field, $old){
-        if(!empty($_POST['ID']) && is_array($new)){
-          $gallery_images = get_post_meta( $_POST['ID'], 'gallery_images', true );
-          if(!is_array($gallery_images)){
-            $gallery_images = array();
-          }
-          $gallery_images = array_merge($gallery_images, $new);
-          $gallery_images = array_values(array_unique($gallery_images));
-          update_post_meta( $_POST['ID'], 'gallery_images', $gallery_images );
-        }
-        return $new;
       }
 
     }
