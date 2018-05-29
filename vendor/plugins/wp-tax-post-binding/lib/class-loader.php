@@ -116,7 +116,7 @@ namespace UsabilityDynamics\CFTPB {
                 'hierarchical' => $_taxonomy->hierarchical,
                 'public' => true,
                 'publicly_queryable' => true,
-                'show_ui' => false,
+                'show_ui' => true,
                 'show_in_menu' => false,
                 'rewrite' => $rewrite,
                 'rewrite' => $_taxonomy->rewrite,

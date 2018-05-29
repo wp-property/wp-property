@@ -568,7 +568,7 @@ jQuery(document).ready(function($) {
 		return $thumbnail;
 	}
 	
-	public static function handle_taxonomy_archive($posts, &$query) {
+	public static function handle_taxonomy_archive($posts, $query) {
 		if ($query->is_main_query() && $query->is_page() && empty($posts) && $post_type_archive = self::supports($query->get('pagename'))) {
 			global $wp_the_query, $wp_query;
 			// We want the "taxonomy" archive, which should actually be the hidden post-type archive.
