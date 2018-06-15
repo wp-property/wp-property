@@ -103,14 +103,7 @@ namespace UsabilityDynamics\WPP {
         require_once 'Serializer.php';
         require_once 'Unserializer.php';
 
-        $api_key = \WPP_F::get_api_key();
-
         $taxonomies = $wp_properties[ 'taxonomies' ];
-
-        // If the API key isn't valid, we quit
-        if ( !isset( $_REQUEST[ 'api' ] ) || $_REQUEST[ 'api' ] != $api_key ) {
-          die( __( 'Invalid API key.', ud_get_wp_property()->domain ) );
-        }
 
         if ( isset( $_REQUEST[ 'limit' ] ) ) {
           $per_page = $_REQUEST[ 'limit' ];
@@ -187,7 +180,7 @@ namespace UsabilityDynamics\WPP {
           );
 
           // Set unique site ID
-          $property[ 'wpp_unique_id' ] = md5( $api_key . $property[ 'ID' ] );
+          $property[ 'wpp_unique_id' ] = md5( get_site_url() . $property[ 'ID' ] );
 
           if(is_array($property['wpp_agents']) && count($property['wpp_agents'])){
             foreach ($property['wpp_agents'] as $key => $agent_id) {
@@ -253,14 +246,7 @@ namespace UsabilityDynamics\WPP {
        * @returns string URL to site's export feed
        */
       public function get_property_export_url() {
-        if ( $apikey = \WPP_F::get_api_key() ) {
-          if ( empty( $apikey ) )
-            return __( "There has been an error retreiving your API key.", "wpp" );
-          // We have the API key, we need to build the url
-          return admin_url( 'admin-ajax.php' ) . "?action=wpp_export_properties&api=" . $apikey;
-        }
-        //return __("There has been an error retreiving your API key.", "wpp");
-        return false;
+        return admin_url( 'admin-ajax.php' ) . "?action=wpp_export_properties";
       }
 
       /**
