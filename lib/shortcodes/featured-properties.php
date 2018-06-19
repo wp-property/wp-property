@@ -204,7 +204,7 @@ namespace UsabilityDynamics\WPP {
         $args[ 'disable_wrapper' ] = 'true';
 
         $args[ 'featured' ] = 'true';
-        $args[ 'template' ] = 'featured-shortcode';
+        $args[ 'template' ] = 'property-overview-featured-shortcode';
         $args[ 'unique_hash' ] = rand( 10000, 99900 );
 
         unset( $args[ 'image_type' ] );
