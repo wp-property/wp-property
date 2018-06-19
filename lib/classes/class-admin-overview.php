@@ -199,6 +199,7 @@ namespace UsabilityDynamics\WPP {
           )
         );
 
+        global $wpp_property_import;
         if (!empty($wpp_property_import['schedules'])) {
           $schedules_list = $this->get_post_schedule_id();
           $schedules_list = array_reverse($schedules_list, true);
