@@ -24,3 +24,4 @@ composer.lock
 *.out
 *.pid
 *.gz
+.vscode

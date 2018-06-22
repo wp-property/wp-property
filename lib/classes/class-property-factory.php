@@ -531,7 +531,7 @@ namespace UsabilityDynamics\WPP {
                 'post_type' => 'attachment',
                 'include'   => (array) $id,
                 'post_mime_type' => 'image',
-                'orderby' => 'menu_order ASC, ID',
+                'orderby' => 'post__in',
                 'order' => 'ASC'
               ) );
               foreach ($attachments as $key => $attachment) {
