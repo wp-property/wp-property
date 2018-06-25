@@ -429,7 +429,9 @@ function add_city_to_searchable( $array ) {
  * @return string $area
  */
 function add_square_foot( $area ) {
-  return $area . __( " sq. ft.", ud_get_wp_property()->domain );
+  global $wp_properties;
+  $area_dimensions = $wp_properties['configuration']['area_dimensions'] ? $wp_properties['configuration']['area_dimensions'] : 'sq. ft';
+  return $area . ' ' . $area_dimensions;
 }
 
 /**

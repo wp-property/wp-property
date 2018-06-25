@@ -41,7 +41,8 @@
               <?php echo $property[custom_attribute_overview]; ?>
       <?php else: ?>
               <?php echo $property[bedrooms]; ?> beds, <?php echo $property[bathrooms]; ?> baths <br />
-              <?php echo $property[area]; ?> sq. ft.
+              <?php echo $property[area]; ?>
+        <?php echo $wp_properties['configuration']['area_dimensions'] ? $wp_properties['configuration']['area_dimensions'] : 'sq. ft'; ?>
       <?php endif; ?>
     </div>
   </div>

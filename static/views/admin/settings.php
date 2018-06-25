@@ -572,6 +572,21 @@ $l10n_id = get_option('wp-property-l10n-attachment');
             </td>
           </tr>
 
+          <tr>
+            <th><?php _e('Area dimensions', ud_get_wp_property()->domain) ?></th>
+            <td>
+              <p>
+                <?php _e('Choose which dimension will have Area attribute'); ?>
+              </p>
+              <p>
+                <?php _e('Attribute with the slug area should be added in developer tab and numeric data entry should be set up. Then you will see following dimension after attribute\'s value'); ?>
+              </p>
+              <br/>
+              <ul>
+                <li><?php echo WPP_F::input("name=area_dimensions&group=wpp_settings[configuration]&style=width: 150px;", $wp_properties['configuration']['area_dimensions'] ? $wp_properties['configuration']['area_dimensions'] : 'sq. ft'); ?></li>
+              </ul>
+            </td>
+          </tr>
 
           <tr>
             <th><?php _e('Currency & Numbers', ud_get_wp_property()->domain); ?></th>

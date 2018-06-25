@@ -41,7 +41,8 @@ namespace UsabilityDynamics\WPP {
           'currency_symbol' => '$',
           'address_attribute' => 'location',
           'google_maps_localization' => 'en',
-          'display_address_format' => '[city], [state]'
+          'display_address_format' => '[city], [state]',
+          'area_dimensions' => 'sq. ft'
         );
 
         //** Default setings for [property_overview] shortcode */
