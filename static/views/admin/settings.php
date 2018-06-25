@@ -576,10 +576,11 @@ $l10n_id = get_option('wp-property-l10n-attachment');
             <th><?php _e('Area dimensions', ud_get_wp_property()->domain) ?></th>
             <td>
               <p>
-                <?php _e('Choose which dimension will have Area attribute'); ?>
-              </p>
-              <p>
-                <?php _e('Attribute with the slug area should be added in developer tab and numeric data entry should be set up. Then you will see following dimension after attribute\'s value'); ?>
+                <?php _e('Choose which dimension will have Area attribute.', ud_get_wp_property()->domain); ?>
+                <br/>
+                <i>
+                  <?php _e('Attribute with the slug area should be added in developer tab and numeric data entry should be set up. Then you will see following dimension after attribute’s value', ud_get_wp_property()->domain); ?>
+                </i>
               </p>
               <br/>
               <ul>
