@@ -30,6 +30,12 @@ namespace UsabilityDynamics\WPP {
         //** Add metaboxes hook */
         add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 );
 
+        //** add attachement id to a temporary post meta in which the attachment is attached.
+        //** this will process later by add_attached_image_to_wpp_media method  */
+        add_action( 'add_attachment', array( $this, 'add_attachment' ));
+        //** Add push recently attached image to wpp_media meta. */
+        add_filter( 'rwmb_wpp_media_value', array( $this, 'add_attached_image_to_wpp_media'), 9, 3);
+
       }
 
       /**
@@ -754,6 +760,44 @@ namespace UsabilityDynamics\WPP {
             'ids' => $_meta_attached
           )
         );
+      }
+
+      /**
+       * add attachement id to a temporary post meta in which the attachment is attached.
+       * this will process later by add_attached_image_to_wpp_media method  
+       */
+      public function add_attachment($attachment_id){
+        $parent_id = wp_get_post_parent_id($attachment_id);
+        if($parent_id){
+          $new_attached_media = get_post_meta( $parent_id, 'new_attached_media', true );
+          if(!is_array($new_attached_media)){
+            $new_attached_media = array();
+          }
+          $new_attached_media[] = $attachment_id;
+          update_post_meta($parent_id, 'new_attached_media', $new_attached_media);
+        }
+      }
+
+      /**
+       * Push recently attached image to wpp_media meta.
+       * And delete the temporary meta.
+       */
+      public function add_attached_image_to_wpp_media($new, $field, $old){
+        if(!empty($_POST['ID'])){
+          $pid = $_POST['ID'];
+          $new_attached_media = get_post_meta( $pid, 'new_attached_media', true );
+          
+          if($new_attached_media && is_array($new_attached_media)){
+            foreach($new_attached_media as $attachment_id){
+              if(!in_array($attachment_id, $new)){
+                $new[] = $attachment_id;
+              }
+            }
+          }
+          
+          delete_post_meta( $pid, 'new_attached_media' );
+        }
+        return $new;
       }
 
       /**
