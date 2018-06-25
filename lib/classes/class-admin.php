@@ -288,7 +288,7 @@ namespace UsabilityDynamics\WPP {
 
         //** Enqueue CSS styles on all pages */
         if (file_exists($this->instance->path('static/styles/wpp.admin.css', 'dir'))) {
-          if ($current_screen->id == 'property_page_all_properties') {
+          if ($current_screen->id == 'property_page_all_properties' || $current_screen->post_type == 'property') {
             wp_register_style('wpp-admin-styles', $this->instance->path('static/styles/wpp.admin.css', 'url'), array(), WPP_Version);
             wp_enqueue_style('wpp-admin-styles');
           }
