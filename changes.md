@@ -1,3 +1,11 @@
+### 2.3.4 ( June 26, 2018 )
+* Disabled legacy API key system.
+* Fixed admin CSS conflicts with Comet Cache accordions.
+* Fixed issues with Media tab on edit property page.
+* Updated wp-tax-post-binding library.
+* Added search by property id on backend and id number on edit property page.
+* Added option to set up area dimension in settings/display tab.
+
 ### 2.3.3 ( May 28, 2018 )
 * Fixed WPML compatibility issue with [property_attributes] shortcode.
 * Fixed images issue in Slidehow add-on.
