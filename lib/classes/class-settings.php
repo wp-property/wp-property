@@ -49,6 +49,7 @@ namespace UsabilityDynamics\WPP {
         $data['configuration']['property_overview'] = array(
           'thumbnail_size' => 'medium',
           'fancybox_preview' => 'true',
+          'using_fancybox' => 'true',
           'display_slideshow' => 'false',
           'show_children' => 'true',
           'pagination_type' => 'loadmore' // @todo: change to 'numeric' when compatibility will be added to Madison theme. peshkov@UD

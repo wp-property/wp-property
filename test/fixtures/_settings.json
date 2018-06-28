@@ -17,6 +17,7 @@
       "pagination_type": "slider",
       "show_children": "true",
       "fancybox_preview": "true",
+      "using_fancybox": "true",
       "add_sort_by_title": "false"
     },
     "disable_widgets": {
