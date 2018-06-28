@@ -756,7 +756,7 @@ if (!function_exists('draw_stats')):
           $link_value = array();
           foreach ($value as $val) {
             if (WPP_F::isURL($val)) {
-              $link = "<a href='{$val}' title='{$label}'>{$label}</a>";
+              $link = "<a href='{$val}' title='{$label}' target='_blank'>{$label}</a>";
             } else {
               $term = get_term_by('name', $val, $tag);
               if ($term && !is_wp_error($term)) {
@@ -777,7 +777,7 @@ if (!function_exists('draw_stats')):
         if ($args['make_link'] == 'true') {
           if (WPP_F::isURL($value)) {
             $value = str_replace('&ndash;', '-', $value);
-            $value = "<a href='{$value}' title='{$label}'>{$value}</a>";
+            $value = "<a href='{$value}' title='{$label}' target='_blank'>{$value}</a>";
           } else {
             $term = get_term_by('name', $value, $tag);
             if($term && !is_wp_error($term)){
