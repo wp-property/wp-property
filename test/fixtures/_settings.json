@@ -17,7 +17,6 @@
       "pagination_type": "slider",
       "show_children": "true",
       "fancybox_preview": "true",
-      "using_fancybox": "true",
       "add_sort_by_title": "false"
     },
     "disable_widgets": {
@@ -40,6 +39,7 @@
     "auto_delete_attachments": "false",
     "automatically_regenerate_thumbnail": "false",
     "pre_release_update": "false",
+    "using_fancybox": "false",
     "default_image": {
       "default": {
         "url": "",

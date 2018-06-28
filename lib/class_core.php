@@ -306,7 +306,7 @@ class WPP_Core {
     wp_localize_script( 'wpp-localization', 'wpp_l10n', $this->get_l10n_data() );
 
     // wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox.2.1.5/jquery.fancybox.pack.js', array( 'jquery', 'wpp-localization' ), '2.1.5' );
-    if(isset($wp_properties['configuration']['property_overview']['using_fancybox']) && $wp_properties['configuration']['property_overview']['using_fancybox'] == 'true') {
+    if(isset($wp_properties['configuration']['using_fancybox']) && $wp_properties['configuration']['using_fancybox'] == 'false') {
       wp_register_script('wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.pack.js', array('jquery', 'wpp-localization'), '1.7.3');
     }
     wp_register_script( 'wpp-jquery-swiper', WPP_URL . 'scripts/swiper.jquery.min.js', array( 'jquery' ), '1.7.3' );
