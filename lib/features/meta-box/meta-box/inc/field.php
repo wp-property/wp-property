@@ -48,13 +48,11 @@ abstract class RWMB_Field {
 	 * That ensures the returned value are always been applied filters.
 	 * This method is not meant to be overwritten in specific fields.
 	 *
-	 * @param array $field Field parameters.
-	 * @param bool  $saved Whether the meta box is saved at least once.
+	 * @param array $field   Field parameters.
+	 * @param bool  $saved   Whether the meta box is saved at least once.
+	 * @param int   $post_id Post ID.
 	 */
-	public static function show( $field, $saved ) {
-		$post    = get_post();
-		$post_id = isset( $post->ID ) ? $post->ID : 0;
-
+	public static function show( $field, $saved, $post_id = 0 ) {
 		$meta = self::call( $field, 'meta', $post_id, $saved );
 		$meta = self::filter( 'field_meta', $meta, $field, $saved );
 
@@ -175,18 +173,34 @@ abstract class RWMB_Field {
 	/**
 	 * Get raw meta value.
 	 *
-	 * @param int   $post_id Post ID.
-	 * @param array $field   Field parameters.
+	 * @param int   $object_id Object ID.
+	 * @param array $field     Field parameters.
+	 * @param array $args      Arguments of {@see rwmb_meta()} helper.
 	 *
 	 * @return mixed
 	 */
-	public static function raw_meta( $post_id, $field ) {
+	public static function raw_meta( $object_id, $field, $args = array() ) {
 		if ( empty( $field['id'] ) ) {
 			return '';
 		}
 
-		$single = $field['clone'] || ! $field['multiple'];
-		return get_post_meta( $post_id, $field['id'], $single );
+		if ( isset( $args['object_type'] ) ) {
+			$storage = rwmb_get_storage( $args['object_type'] );
+		} elseif ( isset( $field['storage'] ) ) {
+			$storage = $field['storage'];
+		} else {
+			$storage = rwmb_get_storage( 'post' );
+		}
+
+		if ( ! isset( $args['single'] ) ) {
+			$args['single'] = $field['clone'] || ! $field['multiple'];
+		}
+
+		if ( $field['clone'] && $field['clone_as_multiple'] ) {
+			$args['single'] = false;
+		}
+
+		return $storage->get( $object_id, $field['id'], $args );
 	}
 
 	/**
@@ -213,6 +227,17 @@ abstract class RWMB_Field {
 		// Use $field['std'] only when the meta box hasn't been saved (i.e. the first time we run).
 		$meta = ! $saved ? $field['std'] : $meta;
 
+		// Ensure multiple fields are arrays.
+		if ( $field['multiple'] ) {
+			if ( $field['clone'] ) {
+				$meta = (array) $meta;
+				foreach ( $meta as $key => $m ) {
+					$meta[ $key ] = (array) $m;
+				}
+			} else {
+				$meta = (array) $meta;
+			}
+		}
 		// Escape attributes.
 		$meta = self::call( $field, 'esc_meta', $meta );
 
@@ -265,11 +290,47 @@ abstract class RWMB_Field {
 	 * @param array $field   The field parameters.
 	 */
 	public static function save( $new, $old, $post_id, $field ) {
+		if ( empty( $field['id'] ) ) {
+			return;
+		}
 		$name = $field['id'];
+		$storage = $field['storage'];
 
 		// Remove post meta if it's empty.
 		if ( '' === $new || array() === $new ) {
-			delete_post_meta( $post_id, $name );
+			$storage->delete( $post_id, $name );
+			return;
+		}
+
+		// Save cloned fields as multiple values instead serialized array.
+		if ( $field['clone'] && $field['clone_as_multiple'] ) {
+			$old = array_filter( (array) $old );
+			$new = array_filter( (array) $new );
+
+			if ( empty( $new ) ) {
+				$storage->delete( $post_id, $name );
+			}
+
+			if ( $field['sort_clone'] && array_values( $new ) != array_values( $old ) ) {
+				$storage->delete( $post_id, $name );
+
+				foreach ( $new as $new_value ) {
+					$storage->add( $post_id, $name, $new_value, false );
+				}
+
+				return;
+			}
+
+			$new_values = array_diff( $new, $old );
+			foreach ( $new_values as $new_value ) {
+				$storage->add( $post_id, $name, $new_value, false );
+			}
+
+			$old_values = array_diff( $old, $new );
+			foreach ( $old_values as $old_value ) {
+				$storage->delete( $post_id, $name, $old_value );
+			}
+
 			return;
 		}
 
@@ -284,25 +345,27 @@ abstract class RWMB_Field {
 			}
 			// Reset indexes.
 			$new = array_values( $new );
-			update_post_meta( $post_id, $name, $new );
+			$storage->update( $post_id, $name, $new );
 			return;
 		}
 
 		// If field is multiple, value is saved as multiple entries in the database (WordPress behaviour).
 		if ( $field['multiple'] ) {
+			$old = (array) $old;
+			$new = (array) $new;
 			$new_values = array_diff( $new, $old );
 			foreach ( $new_values as $new_value ) {
-				add_post_meta( $post_id, $name, $new_value, false );
+				$storage->add( $post_id, $name, $new_value, false );
 			}
 			$old_values = array_diff( $old, $new );
 			foreach ( $old_values as $old_value ) {
-				delete_post_meta( $post_id, $name, $old_value );
+				$storage->delete( $post_id, $name, $old_value );
 			}
 			return;
 		}
 
 		// Default: just update post meta.
-		update_post_meta( $post_id, $name, $new );
+		$storage->update( $post_id, $name, $new );
 	}
 
 	/**
@@ -326,15 +389,26 @@ abstract class RWMB_Field {
 			'field_name'        => isset( $field['id'] ) ? $field['id'] : '',
 			'placeholder'       => '',
 
-			'clone'      => false,
-			'max_clone'  => 0,
-			'sort_clone' => false,
+			'clone'             => false,
+			'max_clone'         => 0,
+			'sort_clone'        => false,
+			'add_button'        => __( '+ Add more', 'meta-box' ),
+			'clone_default'     => false,
+			'clone_as_multiple' => false,
 
 			'class'      => '',
 			'disabled'   => false,
 			'required'   => false,
+			'autofocus'  => false,
 			'attributes' => array(),
 		) );
+
+		if ( $field['clone_default'] ) {
+			$field['attributes'] = wp_parse_args( $field['attributes'], array(
+				'data-default'       => $field['std'],
+				'data-clone-default' => 'true',
+			) );
+		}
 
 		return $field;
 	}
@@ -349,14 +423,15 @@ abstract class RWMB_Field {
 	 */
 	public static function get_attributes( $field, $value = null ) {
 		$attributes = wp_parse_args( $field['attributes'], array(
-			'disabled' => $field['disabled'],
-			'required' => $field['required'],
-			'id'       => $field['id'],
-			'class'    => '',
-			'name'     => $field['field_name'],
+			'disabled'  => $field['disabled'],
+			'autofocus' => $field['autofocus'],
+			'required'  => $field['required'],
+			'id'        => $field['id'],
+			'class'     => '',
+			'name'      => $field['field_name'],
 		) );
 
-		$attributes['class'] = implode( ' ', array_merge( array( "rwmb-{$field['type']}" ), (array) $attributes['class'] ) );
+		$attributes['class'] = trim( implode( ' ', array_merge( array( "rwmb-{$field['type']}" ), (array) $attributes['class'] ) ) );
 
 		return $attributes;
 	}
@@ -412,7 +487,7 @@ abstract class RWMB_Field {
 		}
 
 		// Get raw meta value in the database, no escape.
-		$value  = self::call( $field, 'raw_meta', $post_id );
+		$value  = self::call( $field, 'raw_meta', $post_id, $args );
 
 		// Make sure meta value is an array for cloneable and multiple fields.
 		if ( $field['clone'] || $field['multiple'] ) {
@@ -441,23 +516,53 @@ abstract class RWMB_Field {
 	 */
 	public static function the_value( $field, $args = array(), $post_id = null ) {
 		$value = self::call( 'get_value', $field, $args, $post_id );
-		return self::call( 'format_value', $field, $value );
+
+		if ( false === $value ) {
+			return '';
+		}
+
+		return self::call( 'format_value', $field, $value, $args, $post_id );
 	}
 
 	/**
 	 * Format value for the helper functions.
 	 *
-	 * @param array        $field Field parameters.
-	 * @param string|array $value The field meta value.
+	 * @param array        $field   Field parameters.
+	 * @param string|array $value   The field meta value.
+	 * @param array        $args    Additional arguments. Rarely used. See specific fields for details.
+	 * @param int|null     $post_id Post ID. null for current post. Optional.
+	 *
 	 * @return string
 	 */
-	public static function format_value( $field, $value ) {
-		if ( ! is_array( $value ) ) {
-			return self::call( 'format_single_value', $field, $value );
+	public static function format_value( $field, $value, $args, $post_id ) {
+		if ( ! $field['clone'] ) {
+			return self::call( 'format_clone_value', $field, $value, $args, $post_id );
 		}
 		$output = '<ul>';
-		foreach ( $value as $subvalue ) {
-			$output .= '<li>' . self::call( 'format_value', $field, $subvalue ) . '</li>';
+		foreach ( $value as $clone ) {
+			$output .= '<li>' . self::call( 'format_clone_value', $field, $clone, $args, $post_id ) . '</li>';
+		}
+		$output .= '</ul>';
+		return $output;
+	}
+
+	/**
+	 * Format value for a clone.
+	 *
+	 * @param array        $field   Field parameters.
+	 * @param string|array $value   The field meta value.
+	 * @param array        $args    Additional arguments. Rarely used. See specific fields for details.
+	 * @param int|null     $post_id Post ID. null for current post. Optional.
+	 *
+	 * @return string
+	 */
+	public static function format_clone_value( $field, $value, $args, $post_id ) {
+		if ( ! $field['multiple'] ) {
+			return self::call( 'format_single_value', $field, $value, $args, $post_id );
+		}
+		$output = '<ul>';
+		foreach ( $value as $single ) {
+			$output .= '<li>' . self::call( 'format_single_value', $field, $single, $args, $post_id ) . '</li>';
 		}
 		$output .= '</ul>';
 		return $output;
@@ -466,11 +571,14 @@ abstract class RWMB_Field {
 	/**
 	 * Format a single value for the helper functions. Sub-fields should overwrite this method if necessary.
 	 *
-	 * @param array  $field Field parameters.
-	 * @param string $value The value.
+	 * @param array    $field   Field parameters.
+	 * @param string   $value   The value.
+	 * @param array    $args    Additional arguments. Rarely used. See specific fields for details.
+	 * @param int|null $post_id Post ID. null for current post. Optional.
+	 *
 	 * @return string
 	 */
-	public static function format_single_value( $field, $value ) {
+	public static function format_single_value( $field, $value, $args, $post_id ) {
 		return $value;
 	}
 
@@ -492,7 +600,13 @@ abstract class RWMB_Field {
 		} else {
 			$field  = array_shift( $args );
 			$method = array_shift( $args );
-			$args[] = $field; // Add field as last param.
+
+			if ( 'raw_meta' === $method ) {
+				// Add field param after object id.
+				array_splice( $args, 1, 0, array( $field ) );
+			} else {
+				$args[] = $field; // Add field as last param.
+			}
 		}
 
 		return call_user_func_array( array( self::get_class_name( $field ), $method ), $args );

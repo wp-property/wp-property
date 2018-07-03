@@ -3,13 +3,16 @@
  * Plugin Name: Meta Box Group
  * Plugin URI: https://metabox.io/plugins/meta-box-group/
  * Description: Add-on for meta box plugin, allows you to add field type 'group' which put child fields into 1 group which are displayed/accessed easier and can be cloneable.
- * Version: 1.1.6
- * Author: Rilwis
- * Author URI: http://www.deluxeblogtips.com
+ * Version: 1.2.14
+ * Author: MetaBox.io
+ * Author URI: https://metabox.io
  * License: GPL2+
+ *
+ * @package Meta Box
+ * @subpackage Meta Box Group
  */
 
-// Prevent loading this file directly
+// Prevent loading this file directly.
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'RWMB_Group' ) ) {
@@ -23,15 +26,13 @@ if ( ! class_exists( 'RWMB_Group' ) ) {
 		 *
 		 * @var bool
 		 */
-		static $saved = false;
+		public static $saved = false;
 
 		/**
 		 * Add hooks to meta box.
 		 */
-		public function __construct() {
-			/**
-			 * Hook to 'init' with priority 5 to make sure all actions are registered before Meta Box 4.9.0 runs
-			 */
+		public function init() {
+			// Hook to 'init' with priority 5 to make sure all actions are registered before Meta Box 4.9.0 runs.
 			add_action( 'init', array( $this, 'load_files' ), 5 );
 
 			add_action( 'rwmb_before', array( $this, 'set_saved' ) );
@@ -43,7 +44,7 @@ if ( ! class_exists( 'RWMB_Group' ) ) {
 		 */
 		public function load_files() {
 			if ( class_exists( 'RWMB_Field' ) && ! class_exists( 'RWMB_Group_Field' ) ) {
-				require plugin_dir_path( __FILE__ ) . 'class-rwmb-group-field.php';
+				require_once dirname( __FILE__ ) . '/class-rwmb-group-field.php';
 			}
 		}
 
@@ -51,7 +52,7 @@ if ( ! class_exists( 'RWMB_Group' ) ) {
 		 * Check if current meta box is saved.
 		 * This variable is used inside group field to show child fields.
 		 *
-		 * @param object $obj Meta Box object
+		 * @param object $obj Meta Box object.
 		 */
 		public function set_saved( $obj ) {
 			self::$saved = $obj->is_saved();
@@ -65,5 +66,6 @@ if ( ! class_exists( 'RWMB_Group' ) ) {
 		}
 	}
 
-	new RWMB_Group;
-}
+	$group = new RWMB_Group();
+	$group->init();
+} // End if().

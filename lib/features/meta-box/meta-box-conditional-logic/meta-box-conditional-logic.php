@@ -1,15 +1,18 @@
 <?php
-/*
-Plugin Name: Meta Box Conditional Logic
-Plugin URI: https://www.metabox.io/plugins/meta-box-conditional-logic
-Description: Control the Visibility of Meta Boxes and Fields or even HTML elements with ease.
-Version: 1.4
-Author: Tan Nguyen
-Author URI: https://giga.ai
-License: GPL2+
-*/
+/**
+ * Plugin Name: Meta Box Conditional Logic
+ * Plugin URI: https://metabox.io/plugins/meta-box-conditional-logic/
+ * Description: Control the Visibility of Meta Boxes and Fields or even HTML elements with ease.
+ * Version: 1.5.5
+ * Author: MetaBox.io
+ * Author URI: https://metabox.io
+ * License: GPL2+
+ *
+ * @package Meta Box
+ * @subpackage Meta Box Conditional Logic
+ */
 
-//Prevent loading this file directly
+// Prevent loading this file directly.
 defined( 'ABSPATH' ) || exit;
 
 if ( ! function_exists( 'mb_conditional_logic_load' ) ) {
@@ -27,8 +30,9 @@ if ( ! function_exists( 'mb_conditional_logic_load' ) ) {
 			return;
 		}
 
-		require dirname( __FILE__ ) . '/inc/class-conditional-logic.php';
-		
-		new MB_Conditional_Logic;
+		require dirname( __FILE__ ) . '/inc/class-mb-conditional-logic.php';
+
+		$conditional_logic = new MB_Conditional_Logic();
+		$conditional_logic->init();
 	}
 }

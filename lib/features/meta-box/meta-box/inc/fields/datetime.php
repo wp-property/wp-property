@@ -57,10 +57,11 @@ class RWMB_Datetime_Field extends RWMB_Text_Field {
 		$url = RWMB_CSS_URL . 'jqueryui';
 		wp_register_style( 'jquery-ui-core', "$url/jquery.ui.core.css", array(), '1.8.17' );
 		wp_register_style( 'jquery-ui-theme', "$url/jquery.ui.theme.css", array(), '1.8.17' );
-		wp_register_style( 'wp-datepicker', RWMB_CSS_URL . 'datepicker.css', array( 'jquery-ui-core', 'jquery-ui-theme' ), '1.8.17' );
-		wp_register_style( 'jquery-ui-datepicker', "$url/jquery.ui.datepicker.css", array( 'wp-datepicker' ), '1.8.17' );
+		wp_register_style( 'jquery-ui-datepicker', "$url/jquery.ui.datepicker.css", array( 'jquery-ui-core', 'jquery-ui-theme' ), '1.8.17' );
+		wp_register_style( 'rwmb-date', RWMB_CSS_URL . 'datepicker.css', array( 'jquery-ui-datepicker' ), '1.8.17' );
+
 		wp_register_style( 'jquery-ui-slider', "$url/jquery.ui.slider.css", array( 'jquery-ui-core', 'jquery-ui-theme' ), '1.8.17' );
-		wp_register_style( 'jquery-ui-timepicker', "$url/jquery-ui-timepicker-addon.min.css", array( 'jquery-ui-datepicker', 'jquery-ui-slider', 'wp-datepicker' ), '1.5.0' );
+		wp_register_style( 'jquery-ui-timepicker', "$url/jquery-ui-timepicker-addon.min.css", array( 'rwmb-date', 'jquery-ui-slider' ), '1.5.0' );
 
 		$url = RWMB_JS_URL . 'jqueryui';
 		wp_register_script( 'jquery-ui-timepicker', "$url/jquery-ui-timepicker-addon.min.js", array( 'jquery-ui-datepicker', 'jquery-ui-slider' ), '1.5.0', true );
@@ -238,5 +239,25 @@ class RWMB_Datetime_Field extends RWMB_Text_Field {
 		return strtr( $field['js_options']['dateFormat'], self::$date_formats )
 		. $field['js_options']['separator']
 		. strtr( $field['js_options']['timeFormat'], self::$time_formats );
+	}
+
+	/**
+	 * Format a single value for the helper functions. Sub-fields should overwrite this method if necessary.
+	 *
+	 * @param array    $field   Field parameters.
+	 * @param string   $value   The value.
+	 * @param array    $args    Additional arguments. Rarely used. See specific fields for details.
+	 * @param int|null $post_id Post ID. null for current post. Optional.
+	 *
+	 * @return string
+	 */
+	public static function format_single_value( $field, $value, $args, $post_id ) {
+		if ( ! isset( $args['format'] ) ) {
+			return $value;
+		}
+		if ( ! $field['timestamp'] ) {
+			$value = strtotime( $value );
+		}
+		return date( $args['format'], $value );
 	}
 }

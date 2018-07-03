@@ -3,9 +3,9 @@
  * Plugin Name: Meta Box Tabs
  * Plugin URI: https://metabox.io/plugins/meta-box-tabs/
  * Description: Create tabs for meta boxes easily. Support 3 WordPress-native tab styles.
- * Version: 1.0.1
- * Author: Anh Tran
- * Author URI: https://www.deluxeblogtips.com
+ * Version: 1.0.3
+ * Author: MetaBox.io
+ * Author URI: https://metabox.io
  * License: GPL2+
  *
  * @package Meta Box
@@ -61,7 +61,7 @@ if ( ! class_exists( 'MB_Tabs' ) ) {
 		 */
 		public function enqueue() {
 			list( , $url ) = RWMB_Loader::get_path( dirname( __FILE__ ) );
-			wp_enqueue_style( 'rwmb-tabs', $url . 'tabs.css', '', '1.0.0' );
+			wp_enqueue_style( 'rwmb-tabs', $url . 'tabs.css', '', '1.0.3' );
 			wp_enqueue_script( 'rwmb-tabs', $url . 'tabs.js', array( 'jquery' ), '1.0.0', true );
 		}
 
@@ -122,7 +122,9 @@ if ( ! class_exists( 'MB_Tabs' ) ) {
 			$i = 0;
 			foreach ( $tabs as $key => $tab_data ) {
 				if ( is_string( $tab_data ) ) {
-					$tab_data = array( 'label' => $tab_data );
+					$tab_data = array(
+						'label' => $tab_data,
+					);
 				}
 				$tab_data = wp_parse_args( $tab_data, array(
 					'icon'  => '',
@@ -156,7 +158,7 @@ if ( ! class_exists( 'MB_Tabs' ) ) {
 					$tab_data['label']
 				);
 				$i ++;
-			}
+			} // End foreach().
 
 			echo '</ul>';
 		}
@@ -165,18 +167,35 @@ if ( ! class_exists( 'MB_Tabs' ) ) {
 		 * Display tab panels.
 		 * Note that: this public function is hooked to 'rwmb_after', when all fields are outputted.
 		 * (and captured by 'capture_fields' public function).
+		 *
+		 * @param RW_Meta_Box $obj Meta Box object.
 		 */
-		public function show_panels() {
+		public function show_panels( RW_Meta_Box $obj ) {
 			if ( ! $this->active ) {
 				return;
 			}
 
+			// Store all tabs.
+			$tabs = $obj->meta_box['tabs'];
+
 			echo '<div class="rwmb-tab-panels">';
 			foreach ( $this->fields_output as $tab => $fields ) {
+				// Remove rendered tab.
+				if ( isset( $tabs[ $tab ] ) ) {
+					unset( $tabs[ $tab ] );
+				}
+
 				echo '<div class="rwmb-tab-panel rwmb-tab-panel-' . esc_attr( $tab ) . '">';
 				echo implode( '', $fields ); // WPCS: XSS OK.
 				echo '</div>';
 			}
+
+			// Print unrendered tabs.
+			foreach ( $tabs as $tab_id => $tab_data ) {
+				echo '<div class="rwmb-tab-panel rwmb-tab-panel-' . esc_attr( $tab_id ) . '">';
+				echo '</div>';
+			}
+
 			echo '</div>';
 		}
 
@@ -206,8 +225,6 @@ if ( ! class_exists( 'MB_Tabs' ) ) {
 		}
 	}
 
-	if ( is_admin() ) {
-		$mb_tabs = new MB_Tabs;
-		$mb_tabs->init();
-	}
-}
+	$mb_tabs = new MB_Tabs;
+	$mb_tabs->init();
+} // End if().

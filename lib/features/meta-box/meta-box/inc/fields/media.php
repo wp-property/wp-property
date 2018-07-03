@@ -14,6 +14,9 @@ class RWMB_Media_Field extends RWMB_File_Field {
 	 */
 	public static function admin_enqueue_scripts() {
 		wp_enqueue_media();
+		if ( ! is_admin() ) {
+			wp_register_script( 'media-grid', includes_url( 'js/media-grid.min.js' ), array( 'media-editor' ), '', true );
+		}
 		wp_enqueue_style( 'rwmb-media', RWMB_CSS_URL . 'media.css', array(), RWMB_VER );
 		wp_enqueue_script( 'rwmb-media', RWMB_JS_URL . 'media.js', array( 'jquery-ui-sortable', 'underscore', 'backbone', 'media-grid' ), RWMB_VER, true );
 
@@ -25,7 +28,7 @@ class RWMB_Media_Field extends RWMB_File_Field {
 			'edit'               => apply_filters( 'rwmb_media_edit_string', _x( 'Edit', 'media', 'meta-box' ) ),
 			'view'               => apply_filters( 'rwmb_media_view_string', _x( 'View', 'media', 'meta-box' ) ),
 			'noTitle'            => _x( 'No Title', 'media', 'meta-box' ),
-			'loadingUrl'         => RWMB_URL . 'img/loader.gif',
+			'loadingUrl'         => admin_url( 'images/spinner.gif' ),
 			'extensions'         => self::get_mime_extensions(),
 			'select'             => apply_filters( 'rwmb_media_select_string', _x( 'Select Files', 'media', 'meta-box' ) ),
 			'or'                 => apply_filters( 'rwmb_media_or_string', _x( 'or', 'media', 'meta-box' ) ),
@@ -53,11 +56,10 @@ class RWMB_Media_Field extends RWMB_File_Field {
 	public static function html( $meta, $field ) {
 		$meta       = (array) $meta;
 		$meta       = implode( ',', $meta );
-		$attributes = self::get_attributes( $field, $meta );
+		$attributes = self::call( 'get_attributes', $field, $meta );
 
 		$html = sprintf(
-			'<input %s>
-			<div class="rwmb-media-view" data-options="%s"></div>',
+			'<input %s data-options="%s">',
 			self::render_attributes( $attributes ),
 			esc_attr( wp_json_encode( $field['js_options'] ) )
 		);
@@ -104,12 +106,11 @@ class RWMB_Media_Field extends RWMB_File_Field {
 	 * @return array
 	 */
 	public static function get_attributes( $field, $value = null ) {
-		$attributes         = parent::get_attributes( $field, $value );
-		$attributes['type'] = 'hidden';
-		$attributes['name'] .= ! $field['clone'] && $field['multiple'] ? '[]' : '';
-		$attributes['disabled'] = true;
-		$attributes['id']       = false;
-		$attributes['value']    = $value;
+		$attributes          = parent::get_attributes( $field, $value );
+		$attributes['type']  = 'hidden';
+		$attributes['name']  = $field['clone'] ? str_replace( '[]', '', $attributes['name'] ) : $attributes['name'];
+		$attributes['id']    = false;
+		$attributes['value'] = $value;
 
 		return $attributes;
 	}
@@ -123,7 +124,7 @@ class RWMB_Media_Field extends RWMB_File_Field {
 		$mime_types = wp_get_mime_types();
 		$extensions = array();
 		foreach ( $mime_types as $ext => $mime ) {
-			$ext               = explode( '|', $ext );
+			$ext                 = explode( '|', $ext );
 			$extensions[ $mime ] = $ext;
 
 			$mime_parts = explode( '/', $mime );
@@ -148,6 +149,7 @@ class RWMB_Media_Field extends RWMB_File_Field {
 	 * @return array|mixed
 	 */
 	public static function value( $new, $old, $post_id, $field ) {
+		$new = ! is_array( $new ) && is_string( $new ) ? explode( ',', $new ) : $new;
 		array_walk( $new, 'absint' );
 		return array_filter( array_unique( $new ) );
 	}
@@ -161,7 +163,8 @@ class RWMB_Media_Field extends RWMB_File_Field {
 	 * @param array $field   The field parameters.
 	 */
 	public static function save( $new, $old, $post_id, $field ) {
-		delete_post_meta( $post_id, $field['id'] );
+		$storage = $field['storage'];
+		$storage->delete( $post_id, $field['id'] );
 		parent::save( $new, array(), $post_id, $field );
 	}
 

@@ -10,13 +10,6 @@
  */
 class RWMB_Checkbox_Field extends RWMB_Input_Field {
 	/**
-	 * Enqueue scripts and styles.
-	 */
-	public static function admin_enqueue_scripts() {
-		wp_enqueue_style( 'rwmb-checkbox', RWMB_CSS_URL . 'checkbox.css', array(), RWMB_VER );
-	}
-
-	/**
 	 * Get field HTML.
 	 *
 	 * @param mixed $meta  Meta value.
@@ -47,23 +40,16 @@ class RWMB_Checkbox_Field extends RWMB_Input_Field {
 	}
 
 	/**
-	 * Do not show field label description.
+	 * Format a single value for the helper functions. Sub-fields should overwrite this method if necessary.
 	 *
-	 * @param array $field Field parameters.
+	 * @param array    $field   Field parameters.
+	 * @param string   $value   The value.
+	 * @param array    $args    Additional arguments. Rarely used. See specific fields for details.
+	 * @param int|null $post_id Post ID. null for current post. Optional.
+	 *
 	 * @return string
 	 */
-	public static function label_description( $field ) {
-		return '';
-	}
-
-	/**
-	 * Format a single value for the helper functions.
-	 *
-	 * @param array  $field Field parameters.
-	 * @param string $value The value.
-	 * @return string
-	 */
-	public static function format_single_value( $field, $value ) {
+	public static function format_single_value( $field, $value, $args, $post_id ) {
 		return $value ? __( 'Yes', 'meta-box' ) : __( 'No', 'meta-box' );
 	}
 }
