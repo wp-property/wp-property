@@ -306,7 +306,7 @@ class WPP_Core {
     wp_localize_script( 'wpp-localization', 'wpp_l10n', $this->get_l10n_data() );
 
     // wp_register_script( 'wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox.2.1.5/jquery.fancybox.pack.js', array( 'jquery', 'wpp-localization' ), '2.1.5' );
-    if(isset($wp_properties['configuration']['using_fancybox']) && $wp_properties['configuration']['using_fancybox'] == 'false') {
+    if(isset($wp_properties['configuration']['using_fancybox']) && $wp_properties['configuration']['using_fancybox'] == 'false' && !is_admin()) {
       wp_register_script('wpp-jquery-fancybox', WPP_URL . 'scripts/fancybox/jquery.fancybox-1.3.4.pack.js', array('jquery', 'wpp-localization'), '1.7.3');
     }
     wp_register_script( 'wpp-jquery-swiper', WPP_URL . 'scripts/swiper.jquery.min.js', array( 'jquery' ), '1.7.3' );
@@ -333,7 +333,7 @@ class WPP_Core {
 
     wp_register_script( 'wp-property-backend-global', WPP_URL . 'scripts/wpp.admin.global.js', array( 'jquery', 'wp-property-global', 'wpp-localization', 'underscore' ), WPP_Version );
     wp_register_script( 'wp-property-backend-editor', WPP_URL . 'scripts/wpp.admin.editor.js', array( 'jquery', 'wp-property-global', 'wpp-localization' ), WPP_Version );
-    wp_register_script( 'wp-property-global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable', 'wpp-jquery-fancybox' ), WPP_Version );
+    wp_register_script( 'wp-property-global', WPP_URL . 'scripts/wpp.global.js', array( 'jquery', 'wpp-localization', 'jquery-ui-tabs', 'jquery-ui-sortable' ), WPP_Version );
     wp_register_script( 'jquery-cookie', WPP_URL . 'scripts/jquery.smookie.js', array( 'jquery', 'wpp-localization' ), '1.7.3' );
 
     // Use Google Maps API Key, if provided.
