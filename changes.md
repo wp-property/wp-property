@@ -1,3 +1,8 @@
+### 2.3.5 ( July 9, 2018 )
+* Updated MetaBox library.
+* URL attributes now opens in a new tab.
+* Added option to disable fancybox.
+
 ### 2.3.4 ( June 26, 2018 )
 * Disabled legacy API key system.
 * Fixed admin CSS conflicts with Comet Cache accordions.
