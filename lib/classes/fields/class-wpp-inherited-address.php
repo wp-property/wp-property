@@ -117,6 +117,28 @@ if( !class_exists( 'RWMB_Wpp_Inherited_Address_Field' ) && class_exists( 'RWMB_T
 
       return $meta;
     }
+    
+    /**
+     * Create datalist, if any
+     *
+     * @param array $field
+     *
+     * @return array
+     */
+    static public function datalist_html( $field ) {
+      if( !$field->datalist ) {
+        return '';
+      }
+      $datalist = $field->datalist;
+      $html = sprintf( '<datalist id="%s">', $datalist[ 'id' ] );
 
+      foreach( $datalist[ 'options' ] as $option ) {
+        $html.= sprintf( '<option value="%s"></option>', $option );
+      }
+
+      $html .= '</datalist>';
+
+      return $html;
+    }
   }
 }
