@@ -113,6 +113,7 @@ $l10n_id = get_option('wp-property-l10n-attachment');
         }
         ?>
         <li><a href="#tab_troubleshooting"><?php _e('Help', ud_get_wp_property()->domain); ?></a></li>
+        <li><a href="#tab_feedback"><?php _e('Feedback', ud_get_wp_property()->domain); ?></a></li>
         <!--<li id="label-search-text"></li>-->
       </ul>
 
@@ -789,6 +790,19 @@ $l10n_id = get_option('wp-property-l10n-attachment');
 
           <?php do_action('wpp_settings_help_tab'); ?>
         </div>
+      </div>
+
+      <div id="tab_feedback">
+        <!--[if lte IE 8]>
+        <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+        <![endif]-->
+        <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+        <script>
+          hbspt.forms.create({
+            portalId: "3453418",
+            formId: "16a6f927-9a75-43f2-9444-57034db38930"
+          });
+        </script>
       </div>
 
     </div>
