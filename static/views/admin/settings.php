@@ -793,16 +793,41 @@ $l10n_id = get_option('wp-property-l10n-attachment');
       </div>
 
       <div id="tab_feedback">
-        <!--[if lte IE 8]>
-        <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
-        <![endif]-->
-        <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
-        <script>
-          hbspt.forms.create({
-            portalId: "3453418",
-            formId: "16a6f927-9a75-43f2-9444-57034db38930"
-          });
-        </script>
+
+        <style type="text/css">
+          input.hs-input[type="checkbox"] {
+            height: 16px !important;
+          }
+        </style>
+        <div class="tab_feedback_form">
+          <!--[if lte IE 8]>
+          <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+          <![endif]-->
+          <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+          <script>
+            jQuery(window).load(function () {
+              if (jQuery("#tab_feedback").attr('aria-hidden') == 'false') {
+                hbspt.forms.create({
+                  portalId: "3453418",
+                  formId: "16a6f927-9a75-43f2-9444-57034db38930",
+                  target: '.tab_feedback_form'
+                });
+              }
+              jQuery(document).on('click', '#wpp_settings_form ul.tabs li', function () {
+                if (jQuery(this).attr('aria-controls') == 'tab_feedback') {
+                  hbspt.forms.create({
+                    portalId: "3453418",
+                    formId: "16a6f927-9a75-43f2-9444-57034db38930",
+                    target: '.tab_feedback_form'
+                  });
+                } else {
+                  jQuery('#tab_feedback form.hbspt-form').remove();
+                }
+              });
+            });
+          </script>
+        </div>
+
       </div>
 
     </div>
