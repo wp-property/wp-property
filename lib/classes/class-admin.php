@@ -188,7 +188,6 @@ namespace UsabilityDynamics\WPP {
           return $classes . ' wpp-disable-term-editing wpp-readonly-taxonomy ';
         }
 
-        return $classes;
       }
 
       /**
