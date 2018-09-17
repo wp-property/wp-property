@@ -161,17 +161,17 @@ namespace UsabilityDynamics\WPP {
        * @author potanin@UD
        * @return string
        */
-      public function admin_body_class() {
+      public function admin_body_class( $classes ) {
         global $current_screen, $wp_properties;
 
         // Do nothing.
         if( !isset( $current_screen->base ) || !isset( $current_screen->post_type ) || !isset( $current_screen->taxonomy ) || $current_screen->post_type !== 'property' ) {
-          return;
+          return $classes;
         }
 
         // When developer mode is enabeld, allow editing.
         if( isset( $wp_properties['configuration'] ) && isset( $wp_properties['configuration']['developer_mode'] ) && $wp_properties['configuration']['developer_mode'] === 'true' ) {
-          return;
+          return $classes;
         }
 
         $_readonly_taxonomies = array();
@@ -185,7 +185,7 @@ namespace UsabilityDynamics\WPP {
 
         // Hide term editing UI.
         if( $current_screen->base === 'edit-tags' && in_array($current_screen->taxonomy, $_readonly_taxonomies ) ) {
-          return 'wpp-disable-term-editing wpp-readonly-taxonomy';
+          return $classes . ' wpp-disable-term-editing wpp-readonly-taxonomy ';
         }
 
       }

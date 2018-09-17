@@ -82,7 +82,11 @@ $wpp_property_types_variables = apply_filters( 'wpp::settings::developer::types'
           <div class="image-actions">
             <input type="button" class="button-secondary button-setup-image" value="<?php _e( 'Setup Image', ud_get_wp_property('domain') ); ?>" title="<?php printf( __( 'If %1$s has no any image, the default one based on %1$s Type will be shown.', ud_get_wp_property('domain') ), \WPP_F::property_label() ); ?>">
           </div>
-          <div class="image-wrapper"></div>
+          <div class="image-wrapper">
+            {{ if( __.get(wp_properties, ['configuration', 'default_image', 'types', property_slug, 'url'], '')) { }}
+              <img src="{{= __.get(wp_properties, ['configuration', 'default_image', 'types', property_slug, 'url'], '') }}" alt="" />
+            {{ } }}
+          </div>
         </div>
       </td>
 

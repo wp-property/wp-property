@@ -528,13 +528,14 @@ class WPP_Core {
     global $current_screen;
 
     if( $current_screen->id == 'edit-property' ) {
-      return 'wp-list-table ';
+      $content .= ' wp-list-table ';
     }
 
     if( $current_screen->id == 'property' ) {
-      return 'wpp_property_edit';
+      $content .= ' wpp_property_edit ';
     }
 
+    return $content;
   }
 
   function display_post_states( $post_states, $post ) {
