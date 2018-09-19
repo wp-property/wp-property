@@ -729,32 +729,34 @@ class WPP_F extends UsabilityDynamics\Utility
       'menu_icon' => 'dashicons-admin-home'
     )));
 
-    foreach ((array)$wp_properties['taxonomies'] as $taxonomy => $data) {
+    if (!empty($wp_properties['taxonomies']) && is_array($wp_properties['taxonomies'])) {
+      foreach ((array)$wp_properties['taxonomies'] as $taxonomy => $data) {
 
-      if (!isset($data['show_ui'])) {
-        $data['show_ui'] = (current_user_can('manage_wpp_categories') ? true : false);
+        if (!isset($data['show_ui'])) {
+          $data['show_ui'] = (current_user_can('manage_wpp_categories') ? true : false);
+        }
+
+        register_taxonomy($taxonomy, 'property', $wp_properties['taxonomies'][$taxonomy] = apply_filters('wpp::register_taxonomy', array(
+          'hierarchical' => isset($data['hierarchical']) ? $data['hierarchical'] : false,
+          'label' => isset($data['label']) ? $data['label'] : $taxonomy,
+          'labels' => isset($data['labels']) ? $data['labels'] : array(),
+          'query_var' => $taxonomy,
+          'rewrite' => isset($data['rewrite']) ? $data['rewrite'] : array('slug' => $taxonomy),
+          'public' => isset($data['public']) ? $data['public'] : true,
+          'show_ui' => isset($data['show_ui']) ? $data['show_ui'] : true,
+          'show_in_nav_menus' => isset($data['show_in_nav_menus']) ? $data['show_in_nav_menus'] : true,
+          'show_tagcloud' => isset($data['show_tagcloud']) ? $data['show_tagcloud'] : true,
+          'update_count_callback' => '_update_post_term_count',
+          'wpp_term_meta_fields' => isset($data['wpp_term_meta_fields']) ? $data['wpp_term_meta_fields'] : null,
+          'capabilities' => array(
+            'manage_terms' => 'manage_wpp_categories',
+            'edit_terms' => 'manage_wpp_categories',
+            'delete_terms' => 'manage_wpp_categories',
+            'assign_terms' => 'manage_wpp_categories'
+          )
+        ), $taxonomy));
+
       }
-
-      register_taxonomy($taxonomy, 'property', $wp_properties['taxonomies'][$taxonomy] = apply_filters('wpp::register_taxonomy', array(
-        'hierarchical' => isset($data['hierarchical']) ? $data['hierarchical'] : false,
-        'label' => isset($data['label']) ? $data['label'] : $taxonomy,
-        'labels' => isset($data['labels']) ? $data['labels'] : array(),
-        'query_var' => $taxonomy,
-        'rewrite' => isset($data['rewrite']) ? $data['rewrite'] : array('slug' => $taxonomy),
-        'public' => isset($data['public']) ? $data['public'] : true,
-        'show_ui' => isset($data['show_ui']) ? $data['show_ui'] : true,
-        'show_in_nav_menus' => isset($data['show_in_nav_menus']) ? $data['show_in_nav_menus'] : true,
-        'show_tagcloud' => isset($data['show_tagcloud']) ? $data['show_tagcloud'] : true,
-        'update_count_callback' => '_update_post_term_count',
-        'wpp_term_meta_fields' => isset( $data['wpp_term_meta_fields' ] ) ? $data['wpp_term_meta_fields'] : null,
-        'capabilities' => array(
-          'manage_terms' => 'manage_wpp_categories',
-          'edit_terms' => 'manage_wpp_categories',
-          'delete_terms' => 'manage_wpp_categories',
-          'assign_terms' => 'manage_wpp_categories'
-        )
-      ), $taxonomy));
-
     }
 
   }

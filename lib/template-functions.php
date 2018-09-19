@@ -587,7 +587,7 @@ if (!function_exists('draw_stats')):
     }
 
     /* Extend $property_stats with property taxonomy */
-    if (($args['include_taxonomies'] === 'true' || $args['include_taxonomies'] === true) && is_array($wp_properties['taxonomies'])) {
+    if (($args['include_taxonomies'] === 'true' || $args['include_taxonomies'] === true) && !empty($wp_properties['taxonomies']) && is_array($wp_properties['taxonomies'])) {
       foreach ($wp_properties['taxonomies'] as $taxonomy => $data) {
         if ($data['public'] && empty($wp_properties['taxonomies'][$taxonomy]['hidden']))
           $property_stats[$taxonomy] = array('label' => $data['label'], 'value' => $property->$taxonomy);
