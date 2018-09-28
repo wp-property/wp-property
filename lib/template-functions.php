@@ -1177,11 +1177,15 @@ if (!function_exists('draw_property_search_form')):
         }
       }
     }
-    if (WPP_LEGACY_WIDGETS) { // If used old widget
-      include ud_get_wp_property()->path('static/views/property-search-form.php', 'dir');
-    } else { //If used new widget
-      include ud_get_wp_property()->path('static/views/property-search-form-v2.php', 'dir');
+
+    $template_found = \WPP_F::get_template_part(array(
+      WPP_LEGACY_WIDGETS ? "property-search-form" : "property-search-form-v2"
+    ), array(ud_get_wp_property()->path('static/views', 'dir')));
+
+    if ($template_found) {
+      include $template_found;
     }
+    
   }
 endif;
 
