@@ -474,10 +474,10 @@ namespace UsabilityDynamics\WPP {
       );
 
       $default_values = explode(',', str_replace(', ', ',', $wp_properties['predefined_values'][$attribute_slug]) );
-      $translated_values = explode(',',str_replace(', ', ',',apply_filters( 'wpml_translate_string', $attribute_slug,$attribute_slug, $attributes_values_package )));
+      $translated_values = explode(',',str_replace(', ', ',',apply_filters( 'wpml_translate_string', $v, $attribute_slug, $attributes_values_package )));
 
       if( $wp_properties['predefined_values'][$attribute_slug] == $v ){
-        return apply_filters( 'wpml_translate_string', $v,$attribute_slug, $attributes_values_package );
+        return apply_filters( 'wpml_translate_string', $v, $attribute_slug, $attributes_values_package );
       }elseif( !is_array($v) && (strpos( $v, ',' ) !== false) ){
         $selected_values = explode(',', str_replace(', ', ',',$v));
         $s_values_arr = array();

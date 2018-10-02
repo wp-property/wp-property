@@ -252,12 +252,7 @@
     "schemas": {
       "dependencies" : {
         "modules": {},
-        "plugins": [{
-          "name": "WP-Property: Terms",
-          "slug": "wp-property-terms",
-          "version": "1.1.0",
-          "required": false
-        }]
+        "plugins": []
       },
       "licenses" : {
         "client" : {

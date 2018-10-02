@@ -19,13 +19,14 @@ namespace UsabilityDynamics\WPP {
 
         $attributes = ud_get_wp_property( 'property_stats', array() );
 
-        foreach ($wp_properties['taxonomies'] as $taxonomy => $data) {
-          if($data['public'] && ( function_exists( 'ud_get_wpp_terms' ) || !empty($data['default']) )){
-            $attributes[$taxonomy] = "<b>Term:</b> " . $data['label'];
+        if (!empty($wp_properties['taxonomies']) && is_array($wp_properties['taxonomies'])) {
+          foreach ($wp_properties['taxonomies'] as $taxonomy => $data) {
+            if ($data['public'] && (function_exists('ud_get_wpp_terms') || !empty($data['default']))) {
+              $attributes[$taxonomy] = "<b>Term:</b> " . $data['label'];
+            }
           }
-
         }
-        
+
         /*
         $hidden_attributes = ud_get_wp_property( 'hidden_frontend_attributes', array() );
         foreach( $attributes as $k => $v ) {

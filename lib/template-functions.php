@@ -587,7 +587,7 @@ if (!function_exists('draw_stats')):
     }
 
     /* Extend $property_stats with property taxonomy */
-    if (($args['include_taxonomies'] === 'true' || $args['include_taxonomies'] === true) && is_array($wp_properties['taxonomies'])) {
+    if (($args['include_taxonomies'] === 'true' || $args['include_taxonomies'] === true) && !empty($wp_properties['taxonomies']) && is_array($wp_properties['taxonomies'])) {
       foreach ($wp_properties['taxonomies'] as $taxonomy => $data) {
         if ($data['public'] && empty($wp_properties['taxonomies'][$taxonomy]['hidden']))
           $property_stats[$taxonomy] = array('label' => $data['label'], 'value' => $property->$taxonomy);
@@ -1177,11 +1177,15 @@ if (!function_exists('draw_property_search_form')):
         }
       }
     }
-    if (WPP_LEGACY_WIDGETS) { // If used old widget
-      include ud_get_wp_property()->path('static/views/property-search-form.php', 'dir');
-    } else { //If used new widget
-      include ud_get_wp_property()->path('static/views/property-search-form-v2.php', 'dir');
+
+    $template_found = \WPP_F::get_template_part(array(
+      WPP_LEGACY_WIDGETS ? "property-search-form" : "property-search-form-v2"
+    ), array(ud_get_wp_property()->path('static/views', 'dir')));
+
+    if ($template_found) {
+      include $template_found;
     }
+    
   }
 endif;
 
