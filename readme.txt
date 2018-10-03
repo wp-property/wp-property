@@ -3,8 +3,8 @@ Contributors: usability_dynamics, andypotanin, jbrw1984, maxim.peshkov, Anton Ko
 Donate link: http://usabilitydynamics.com/product/wp-property/
 Tags: property management, real estate, listings, properties, property, wp-property, real estate cms, wordpress real estate, listings, estate, MLS, IDX, RETS, XML Import
 Requires at least: 4.0
-Tested up to: 4.9.7
-Stable tag: 2.3.5
+Tested up to: 4.9.8
+Stable tag: 2.3.7
 
 == Description ==
 
@@ -223,6 +223,12 @@ If you submit a popular idea on UserVoice, we WILL integrate it sooner or later.
 * Security fixes
 
 == Changelog ==
+
+= 2.3.7 =
+* Added checks on empty taxonomies
+* Added ability to create a custom template for the search form
+* Fixed issue with duplicate results on Property Overview page
+* Fix issue with WPML translate attribute value string
 
 = 2.3.5 =
 * Updated MetaBox library.

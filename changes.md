@@ -1,3 +1,9 @@
+###  2.3.7 ( October 3, 2019 )
+* Added checks on empty taxonomies
+* Added ability to create a custom template for the search form
+* Fixed issue with duplicate results on Property Overview page
+* Fix issue with WPML translate attribute value string
+
 ### 2.3.5 ( July 9, 2018 )
 * Updated MetaBox library.
 * URL attributes now opens in a new tab.
