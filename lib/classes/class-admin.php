@@ -176,10 +176,12 @@ namespace UsabilityDynamics\WPP {
 
         $_readonly_taxonomies = array();
 
-        foreach( $wp_properties['taxonomies'] as $_tax => $_tax_detail ) {
+        if (!empty($wp_properties['taxonomies']) && is_array($wp_properties['taxonomies'])) {
+          foreach ($wp_properties['taxonomies'] as $_tax => $_tax_detail) {
 
-          if( isset( $_tax_detail['readonly'] ) && ( $_tax_detail['readonly'] === 'true' || $_tax_detail['readonly'] == 1 || $_tax_detail['readonly'] === '1' ) ) {
-            $_readonly_taxonomies[] = $_tax;
+            if (isset($_tax_detail['readonly']) && ($_tax_detail['readonly'] === 'true' || $_tax_detail['readonly'] == 1 || $_tax_detail['readonly'] === '1')) {
+              $_readonly_taxonomies[] = $_tax;
+            }
           }
         }
 
@@ -323,15 +325,17 @@ namespace UsabilityDynamics\WPP {
         }
 
         // Add custom columns and fields to taxonomies that have custom term-meta defined.
-        foreach( (array) $wp_properties['taxonomies'] as $_tax => $_tax_detail ) {
+        if (!empty($wp_properties['taxonomies']) && is_array($wp_properties['taxonomies'])) {
+          foreach ((array)$wp_properties['taxonomies'] as $_tax => $_tax_detail) {
 
-          if( isset( $_tax_detail[ 'wpp_term_meta_fields' ] ) ) {
-            add_action( $_tax . '_edit_form_fields', array( $this, 'edit_form_fields' ), 20, 2 );
-            add_action( 'manage_' . $_tax . '_custom_column', array( $this, 'term_meta_columns' ), 20, 3 );
-            add_filter( 'manage_edit-' . $_tax. '_columns', array( $this, 'taxonomy_meta_columns' ), 20 );
+            if (isset($_tax_detail['wpp_term_meta_fields'])) {
+              add_action($_tax . '_edit_form_fields', array($this, 'edit_form_fields'), 20, 2);
+              add_action('manage_' . $_tax . '_custom_column', array($this, 'term_meta_columns'), 20, 3);
+              add_filter('manage_edit-' . $_tax . '_columns', array($this, 'taxonomy_meta_columns'), 20);
+
+            }
 
           }
-
         }
 
 
