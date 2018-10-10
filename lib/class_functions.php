@@ -4040,7 +4040,7 @@ class WPP_F extends UsabilityDynamics\Utility
           if ((isset($wp_properties['numeric_attributes']) && in_array($sql_sort_by, $wp_properties['numeric_attributes'])) ||
             self::meta_has_number_data_type($matching_ids, $sql_sort_by)
           ) {
-            $meta_value = "CAST( meta_value AS DECIMAL(20,3)), p.ID";
+            $meta_value = "CAST( meta_value AS DECIMAL(20,3)) {$sql_sort_order}, p.ID";
           } else {
             $meta_value = "meta_value";
           }
