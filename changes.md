@@ -1,3 +1,7 @@
+###  2.3.8 ( October 10, 2019 )
+* Fixed sorting issue.
+* Fixed warnings and notices
+
 ###  2.3.7 ( October 3, 2019 )
 * Added checks on empty taxonomies
 * Added ability to create a custom template for the search form
