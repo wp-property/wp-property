@@ -1,3 +1,9 @@
+#### 0.3.10
+* Added metabox for debugging the property on Edit Property page for WP-Property plugin.
+* Added Settings UI for WP-RETS Client.
+* Added ability to enable/disable outputting debug logs to file.
+* Fixed re-counting of terms on `wpp.cleanupProcess` WP-REST request.
+
 #### 0.3.9
 * Libraries updated.
 

@@ -230,11 +230,8 @@ class EP_API {
 
 			$response = json_decode( $response_body, true );
 
-			if ( $this->is_empty_query( $response ) ) {
-				return array( 'found_posts' => 0, 'posts' => array() );
-			}
-
-			$hits = $response['hits']['hits'];
+			$hits = $this->get_hits_from_query( $response );
+			$total_hits = $this->get_total_hits_from_query( $response );
 
 			// Check for and store aggregations
 			if ( ! empty( $response['aggregations'] ) ) {
@@ -260,11 +257,43 @@ class EP_API {
 			 * @param object $response The response body retrieved from Elasticsearch.
 			 */
 
-			return apply_filters( 'ep_search_results_array', array( 'found_posts' => $response['hits']['total'], 'posts' => $posts ), $response, $args, $scope );
+			return apply_filters( 'ep_search_results_array', array( 'found_posts' => $total_hits, 'posts' => $posts ), $response, $args, $scope );
 		}
 
 		return false;
 	}
+
+    /**
+     * Returns the number of total results that ElasticSearch found for the given query
+     *
+     * @param array $response
+     * @since  2.5
+     * @return int
+     */
+	public function get_total_hits_from_query( $response ) {
+
+	    if ( $this->is_empty_query( $response ) ) {
+	        return 0;
+        }
+
+        return $response['hits']['total'];
+    }
+
+    /**
+     * Returns array containing hits returned from query, if such exist
+     *
+     * @param array $response
+     * @since  2.5
+     * @return array
+     */
+	public function get_hits_from_query( $response ) {
+
+        if ( $this->is_empty_query( $response ) ) {
+            return [];
+        }
+
+        return $response['hits']['hits'];
+    }
 
 	/**
 	 * Check if a response array contains results or not
@@ -585,31 +614,31 @@ class EP_API {
 		remove_action( 'updated_postmeta', array( EP_Sync_Manager::factory(), 'action_queue_meta_sync' ), 10 );
 
 		$post_args = array(
-			'post_id'           => $post_id,
-			'ID'                => $post_id,
-			'post_author'       => $user_data,
-			'post_date'         => $post_date,
-			'post_date_gmt'     => $post_date_gmt,
-			'post_title'        => $this->prepare_text_content( get_the_title( $post_id ) ),
-			'post_excerpt'      => $this->prepare_text_content( $post->post_excerpt ),
-			'post_content'      => $this->prepare_text_content( apply_filters( 'the_content', $post->post_content ) ),
-			'post_status'       => $post->post_status,
-			'post_name'         => $post->post_name,
-			'post_modified'     => $post_modified,
-			'post_modified_gmt' => $post_modified_gmt,
-			'post_parent'       => $post->post_parent,
-			'post_type'         => $post->post_type,
-			'post_mime_type'    => $post->post_mime_type,
-			'permalink'         => get_permalink( $post_id ),
-			'terms'             => $this->prepare_terms( $post ),
-			'meta'              => $this->prepare_meta_types( $this->prepare_meta( $post ) ), // post_meta removed in 2.4
-			'date_terms'        => $this->prepare_date_terms( $post_date ),
-			'comment_count'     => $comment_count,
-			'comment_status'    => $comment_status,
-			'ping_status'       => $ping_status,
-			'menu_order'        => $menu_order,
-			'guid'				=> $post->guid
-			//'site_id'         => get_current_blog_id(),
+			'post_id'               => $post_id,
+			'ID'                    => $post_id,
+			'post_author'           => $user_data,
+			'post_date'             => $post_date,
+			'post_date_gmt'         => $post_date_gmt,
+			'post_title'            => $post->post_title,
+			'post_excerpt'          => $post->post_excerpt,
+			'post_content_filtered' => apply_filters( 'the_content', $post->post_content ),
+			'post_content'          => $post->post_content,
+			'post_status'           => $post->post_status,
+			'post_name'             => $post->post_name,
+			'post_modified'         => $post_modified,
+			'post_modified_gmt'     => $post_modified_gmt,
+			'post_parent'           => $post->post_parent,
+			'post_type'             => $post->post_type,
+			'post_mime_type'        => $post->post_mime_type,
+			'permalink'             => get_permalink( $post_id ),
+			'terms'                 => $this->prepare_terms( $post ),
+			'meta'                  => $this->prepare_meta_types( $this->prepare_meta( $post ) ), // post_meta removed in 2.4
+			'date_terms'            => $this->prepare_date_terms( $post_date ),
+			'comment_count'         => $comment_count,
+			'comment_status'        => $comment_status,
+			'ping_status'           => $ping_status,
+			'menu_order'            => $menu_order,
+			'guid'                  => $post->guid,
 		);
 
 		/**
@@ -1020,7 +1049,7 @@ class EP_API {
 
 		// Default sort for non-searches to date
 		if ( empty( $args['orderby'] ) && ( ! isset( $args['s'] ) || '' === $args['s'] ) ) {
-			$args['orderby'] = 'date';
+			$args['orderby'] = apply_filters( 'ep_set_default_sort', 'date', $order );
 		}
 
 		// Set sort type
@@ -1093,8 +1122,8 @@ class EP_API {
 			$es_tax_query = array();
 
 			foreach( $args['tax_query'] as $single_tax_query ) {
-				if ( ! empty( $single_tax_query['terms'] ) ) {
-					$terms = (array) $single_tax_query['terms'];
+				if ( ! empty( $single_tax_query['taxonomy'] ) ) {
+					$terms = isset( $single_tax_query['terms'] ) ? (array) $single_tax_query['terms'] : array();
 
 					$field = ( ! empty( $single_tax_query['field'] ) ) ? $single_tax_query['field'] : 'term_id';
 
@@ -1109,44 +1138,83 @@ class EP_API {
 
 					$operator = ( ! empty( $single_tax_query['operator'] ) ) ? strtolower( $single_tax_query['operator'] ) : 'in';
 
-					if ( 'not in' === $operator ) {
-						/**
-						 * add support for "NOT IN" operator
-						 *
-						 * @since 2.1
-						 */
-
-						// If "NOT IN" than it should filter as must_not
-						$tax_must_not_filter[]['terms'] = $terms_obj;
-					} elseif ( 'and' === $operator ) {
-						/**
-						 * add support for "and" operator
-						 *
-						 * @since 2.4
-						 */
-
-						$and_nest = array(
-							'bool' => array(
-								'must' => array()
-							),
-						);
-
-						foreach ( $terms as $term ) {
-							$and_nest['bool']['must'][] = array(
-								'terms' => array(
-									'terms.' . $single_tax_query['taxonomy'] . '.' . $field => (array) $term,
-								)
+					switch ( $operator ) {
+						case 'exists':
+							/**
+							 * add support for "EXISTS" operator
+							 *
+							 * @since 2.5
+							 */
+							$tax_filter[]['bool'] = array(
+								'must' => array(
+									array(
+										'exists' => array(
+											'field' => key( $terms_obj ),
+										),
+									),
+								),
 							);
-						}
+							break;
+						case 'not exists':
+							/**
+							 * add support for "NOT EXISTS" operator
+							 *
+							 * @since 2.5
+							 */
+							$tax_filter[]['bool'] = array(
+								'must_not' => array(
+									array(
+										'exists' => array(
+											'field' => key( $terms_obj ),
+										),
+									),
+								),
+							);
+							break;
+						case 'not in':
+							/**
+							 * add support for "NOT IN" operator
+							 *
+							 * @since 2.1
+							 */
 
-						$tax_filter[] = $and_nest;
-					} else {
-						/**
-						 * Default to IN operator
-						 */
+							// If "NOT IN" than it should filter as must_not
+							$tax_must_not_filter[]['terms'] = $terms_obj;
+							break;
 
-						// Add the tax query filter
-						$tax_filter[]['terms'] = $terms_obj;
+						case 'and':
+							/**
+							 * add support for "and" operator
+							 *
+							 * @since 2.4
+							 */
+
+							$and_nest = array(
+								'bool' => array(
+									'must' => array()
+								),
+							);
+
+							foreach ( $terms as $term ) {
+								$and_nest['bool']['must'][] = array(
+									'terms' => array(
+										'terms.' . $single_tax_query['taxonomy'] . '.' . $field => (array) $term,
+									)
+								);
+							}
+
+							$tax_filter[] = $and_nest;
+							break;
+
+						case 'in':
+						default:
+							/**
+							 * Default to IN operator
+							 */
+
+							// Add the tax query filter
+							$tax_filter[]['terms'] = $terms_obj;
+							break;
 					}
 				}
 			}
@@ -1689,7 +1757,7 @@ class EP_API {
 					} elseif ( $type && isset( $meta_query_type_mapping[ $type ] ) ) {
 						// Map specific meta field types to different Elasticsearch core types
 						$meta_key_path = 'meta.' . $single_meta_query['key'] . '.' . $meta_query_type_mapping[ $type ];
-					} elseif ( in_array( $compare, array( '>=', '<=', '>', '<', 'between' ) ) ) {
+					} elseif ( in_array( $compare, array( '>=', '<=', '>', '<', 'between', 'not between' ) ) ) {
 						$meta_key_path = 'meta.' . $single_meta_query['key'] . '.double';
 					} else {
 						$meta_key_path = 'meta.' . $single_meta_query['key'] . '.raw';
@@ -1769,6 +1837,31 @@ class EP_API {
 												'range' => array(
 													$meta_key_path => array(
 														"lte" => $single_meta_query['value'][1],
+													),
+												),
+											),
+										),
+									),
+								);
+							}
+
+							break;
+						case 'not between':
+							if ( isset( $single_meta_query['value'] ) && is_array( $single_meta_query['value'] ) && 2 === count( $single_meta_query['value'] ) ) {
+								$terms_obj = array(
+									'bool' => array(
+										'should' => array(
+											array(
+												'range' => array(
+													$meta_key_path => array(
+														"lte" => $single_meta_query['value'][0],
+													),
+												),
+											),
+											array(
+												'range' => array(
+													$meta_key_path => array(
+														"gte" => $single_meta_query['value'][1],
 													),
 												),
 											),
