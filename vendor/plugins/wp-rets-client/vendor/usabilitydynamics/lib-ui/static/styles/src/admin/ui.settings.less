@@ -1,0 +1,131 @@
+div.updated, div.error {
+  padding: 10px 12px;
+}
+
+/******************
+ * Tabs
+*******************/
+
+#tabs.ui-widget-content {
+  border: 0;
+  margin-top: 10px;
+  
+  ul.tabs {
+    border-bottom: 1px solid #CBCBCB;
+    float: left;
+    height: 33px;
+    list-style: none;
+    margin: 0;
+    background: transparent;
+    border: none;
+    width: 100%;
+    padding: 0 0 0 10px;
+  
+    li {
+      background: none repeat scroll 0 0 #F4F4F4;
+      border-color: #D0D0D0;
+      border-style: solid solid none;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      border-width: 1px 1px 0;
+      float: left;
+      margin: 0 10px -1px 0;
+      overflow: hidden;
+      position: relative;
+      
+      &.ui-tabs-selected,
+      &.ui-state-active {
+        border-bottom: 1px solid #F1F1F1;
+      }
+      
+      &.ui-tabs-selected a:hover {
+        background: #FFFFFF;
+        border-bottom: 1px solid #FFFFFF;
+      }
+      
+      a {
+        color: #000000;
+        line-height: 32px;
+        outline: medium none;
+        padding: 7px 10px;
+        text-decoration: none;
+        
+        &:hover {
+          color: #9D611D;
+        }
+        
+      }
+      
+    }
+  
+  }
+  
+  .ui-tabs-panel {
+    background: none;
+    border-color: #DEDEDE;
+    border-top: 1px solid #DEDEDE;
+    border-style: solid;
+    border-width: 1px;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    clear: both;
+    float: left;
+    padding: 20px 0 20px;
+    width: 100%;
+  }
+  
+}
+
+/******************
+ * Content
+*******************/
+
+.ui-tabs-panel .settings-tab {
+  
+  .desc {
+    border-left: 4px solid #DEDEDE;
+    padding: 10px 12px;
+    margin-bottom: 20px;
+  }
+  
+  /******************
+   * Accordion
+  *******************/
+  .accordion-section {
+    
+    h1, h2, h3, h4, h5 {
+      font-weight: 400;
+    }
+    
+    &:first-child {
+      border-top: 1px solid #DFDFDF;
+    }
+    
+    h3.accordion-section-title {
+      font-size: 125%;
+    }
+    
+  }
+  
+  
+  
+}
+
+/******************
+ * Field
+*******************/
+
+.uisf-field {
+  margin: 10px 0; 
+
+  .uisf-label {
+    float: left;
+    width: 175px;
+  }
+  
+  .uisf-input {
+    
+  }
+
+}

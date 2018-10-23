@@ -1,1 +1,90 @@
-{"name":"usabilitydynamics/wp-rets-client","type":"wordpress-plugin","minimum-stability":"dev","homepage":"https://usabilitydynamics.com","author":{"name":"UsabilityDynamics, Inc.","url":"https://usabilitydynamics.com"},"require":{"php":">=5.3","usabilitydynamics/lib-utility":"0.3.7","usabilitydynamics/lib-wp-bootstrap":"1.2.3","usabilitydynamics/lib-wp-saas-util":"1.0.6"},"repositories":[{"type":"composer","url":"https://repository.usabilitydynamics.com"}],"repository":{"type":"git","url":"https://github.com/usabilitydynamics/wp-rets-client.git"},"autoload":{"classmap":["lib/classes","lib/connectors"],"files":["loader.php"]},"archive":{"exclude":["node_modules",".gitignore","test","circle.yml","composer.lock","gruntfile.js","package.json"]},"extra":{"saasProduct":"prod_ADfpGniA1kxNep","schemas":{"dependencies":{"modules":{},"plugins":[]},"licenses":{}}}}
+{
+  "name": "usabilitydynamics/wp-rets-client",
+  "type": "wordpress-plugin",
+  "minimum-stability": "dev",
+  "homepage": "https://usabilitydynamics.com",
+  "author": {
+    "name": "UsabilityDynamics, Inc.",
+    "url": "https://usabilitydynamics.com"
+  },
+  "require": {
+      "php": ">=5.3",
+      "usabilitydynamics/lib-ui": "~0.3.5",
+      "usabilitydynamics/lib-utility": "~0.3.7",
+      "usabilitydynamics/lib-settings": "~0.2.3",
+      "usabilitydynamics/lib-wp-bootstrap": "~1.2.4",
+      "usabilitydynamics/lib-wp-saas-util": "~1.0.6"
+    },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://repository.usabilitydynamics.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/usabilitydynamics/wp-rets-client.git"
+  },
+  "autoload": {
+    "classmap": [ "lib/classes", "lib/connectors" ],
+    "files": [ "loader.php" ]
+  },
+  "archive": {
+    "exclude": [
+      "node_modules",
+      ".gitignore",
+      "test",
+      "circle.yml",
+      "composer.lock",
+      "gruntfile.js",
+      "package.json"
+    ]
+  },
+  "extra": {
+    "saasProduct": "prod_ADfpGniA1kxNep",
+    "ui": {
+      "configuration": {
+        "secondary_menu": {
+          "page_title": "l10n.settings_page_title",
+          "menu_title": "l10n.wp_rets_client",
+          "parent_slug": "options-general.php",
+          "menu_slug": "wp_rets_client"
+        }
+      },
+      "menu": {
+        "general": {
+          "id": "general",
+          "name": "l10n.general"
+        }
+      },
+      "sections": {
+        "debug": {
+          "id": "debug",
+          "name": "l10n.debug",
+          "desc": "l10n.desc_debug_settings",
+          "menu": "general"
+        }
+      },
+      "fields": [
+        {
+          "id": "config.enable_debug_logs",
+          "name": "l10n.enable_debug_logs",
+          "desc": "l10n.desc_enable_debug_logs",
+          "type": "select",
+          "options": {
+            "0": "no",
+            "1": "yes"
+          },
+          "section": "debug"
+        }
+      ]
+    },
+    "schemas": {
+      "dependencies" : {
+        "modules": {},
+        "plugins": []
+      },
+      "licenses" : {}
+    }
+  }
+}

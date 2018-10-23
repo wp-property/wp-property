@@ -419,7 +419,7 @@ namespace UsabilityDynamics\WPRETSC {
 
         do_action( 'wrc_inserted_media', $_post_id, $_rets_media );
 
-        ud_get_wp_rets_client()->write_log( "Inserted or updated [" .  count( $_rets_media['items'] ) . "] that are older than our new updated [" . ( isset( $_rets_media['updated'] ) ? $_rets_media['updated'] : '-' ) ."] timestamp.", 'debug' );
+        ud_get_wp_rets_client()->write_log( "Media Inserted or updated [" .  count( $_rets_media['items'] ) . "] that are older than our new updated [" . ( isset( $_rets_media['updated'] ) ? $_rets_media['updated'] : '-' ) ."] timestamp.", 'debug' );
 
         return true;
 
@@ -435,7 +435,7 @@ namespace UsabilityDynamics\WPRETSC {
        */
       static public function insert_property_terms( $_post_id, $_post_data_tax_input, $post_data = array() ) {
 
-        ud_get_wp_rets_client()->write_log( "Have [" . count( $_post_data_tax_input ) . "] taxonomies to process.", 'debug' );
+        ud_get_wp_rets_client()->write_log( "Have [" . count( $_post_data_tax_input ) . "] taxonomies to process for post [" . $_post_id . "].", 'debug' );
 
         foreach( (array) $_post_data_tax_input as $tax_name => $tax_tags ) {
           ud_get_wp_rets_client()->write_log( "Starting to process [$tax_name] taxonomy.", 'debug' );
@@ -857,7 +857,7 @@ namespace UsabilityDynamics\WPRETSC {
           return true;
         }
 
-        if( file_exists( ud_get_wp_rets_client()->debug_file ) ) {
+        if( ud_get_wp_rets_client( 'config.enable_debug_logs' ) == '1' ) {
           file_put_contents( ABSPATH . rtrim( ud_get_wp_rets_client()->debug_file, '/\\' ), $_content, FILE_APPEND  );
           return true;
         }
@@ -1008,7 +1008,16 @@ namespace UsabilityDynamics\WPRETSC {
        */
       static public function _update_terms_counts_helper( $terms, $query ) {
         $error = null;
-        $term_ids = is_array($terms) ? array_column( $terms, 'term_taxonomy_id' ) : array();
+        $term_ids = array();
+        if( is_array($terms) ) {
+          foreach( $terms as $term ) {
+            if( is_object($term) && isset($term->term_taxonomy_id) ) {
+              array_push($term_ids, $term->term_taxonomy_id);
+            } else if ( is_array($term) && isset($term['term_taxonomy_id']) ) {
+              array_push($term_ids, $term['term_taxonomy_id']);
+            }
+          }
+        }
         $taxonomy = isset( $query[ 'taxonomy' ] ) ? $query[ 'taxonomy' ] : null;
 
         if( count( $term_ids ) < 1 ) {

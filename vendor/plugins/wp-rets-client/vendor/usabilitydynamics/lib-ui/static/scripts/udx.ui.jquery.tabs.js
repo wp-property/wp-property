@@ -1,0 +1,1 @@
+define("udx.ui.jquery.tabs",["jquery.ui"],function(){return function(){if(!jQuery.fn.tabs)return console.error("jQuery.fn.tabs not defined");var a=jQuery(this).tabs({collapsible:!0});return a.hasClass("hidden")&&a.removeClass("hidden"),a}});

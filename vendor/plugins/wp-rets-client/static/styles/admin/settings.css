@@ -1,0 +1,8 @@
+.uisf-checkbox-wrapper label span.description {
+  display: none;
+}
+
+.uisf-checkbox-wrapper p.description {
+  display: block !important;
+  font-style: italic;
+}

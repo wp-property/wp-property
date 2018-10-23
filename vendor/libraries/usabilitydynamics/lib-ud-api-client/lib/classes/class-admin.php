@@ -39,6 +39,11 @@ namespace UsabilityDynamics\UD_API {
       /**
        *
        */
+      public $error;
+
+      /**
+       *
+       */
       public $ui;
       
       /**
@@ -607,6 +612,7 @@ namespace UsabilityDynamics\UD_API {
           $target_url = $this->api_url . 'products.json';
           $request = wp_remote_get( $target_url, array( 'sslverify' => false ) );
           if( is_wp_error( $request ) || wp_remote_retrieve_response_code( $request ) != 200 ) {
+            $this->error = $request;
             return $more_products;
           } else {
             $response = wp_remote_retrieve_body( $request );
@@ -641,7 +647,12 @@ namespace UsabilityDynamics\UD_API {
                 }
               }
               //** Sort the list */
-              usort( $more_products, create_function( '$a,$b', 'if ($a[\'order\'] == $b[\'order\']) { return 0; } return ($a[\'order\'] < $b[\'order\']) ? -1 : 1;' ) );
+              usort($more_products, function( $a,$b ) {
+                if ( $a['order'] == $b['order'] ) {
+                  return 0;
+                }
+                return ( $a['order'] < $b['order'] ) ? -1 : 1;
+              });
               //** Set transient for one day */
               set_transient( $this->token . "-more", $more_products, (60 * 60 * 24) );
             }

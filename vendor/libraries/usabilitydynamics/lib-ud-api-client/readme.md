@@ -7,7 +7,7 @@
 
 ### API
 
-Every API request is being done only for every product separately. So, e.g., if user has installed and activated four products, it does four API requests to UD to determine current status for every product separately.
+Every API request is being done only for every product separately. So, e.g., if user has installed and activated four products, it does four API requests to UD to determine current status for every product separately. 
 
 #### Status
 
@@ -18,7 +18,7 @@ Request is being called in the following cases:
 * on loading 'Installed Plugins' page once per 12 hours.
 * on loading 'Add-ons' ( licenses ) page every time.
 
-Note, 'Status' request on loading 'Add-ons' ( licenses ) page must be called every time to be synced with UD server since user can directly remove activated license on their account on UD site.
+Note, 'Status' request on loading 'Add-ons' ( licenses ) page must be called every time to be synced with UD server since user can directly remove activated license on their account on UD site. 
 
 ```php
 $api = new UsabilityDynamics\UD_API\API( $args );
