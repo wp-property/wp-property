@@ -67,10 +67,6 @@
   },
   "extra": {
     "_build": {},
-    "splashes": {
-      "install": "static/splashes/upgrade.php",
-      "upgrade": "static/splashes/upgrade.php"
-    },
     "installer-paths": {
       "vendor/plugins/{$name}": [
         "type:wordpress-muplugin",
