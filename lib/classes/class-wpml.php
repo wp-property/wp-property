@@ -474,7 +474,7 @@ namespace UsabilityDynamics\WPP {
       );
 
       $default_values = explode(',', str_replace(', ', ',', $wp_properties['predefined_values'][$attribute_slug]) );
-      $translated_values = explode(',',str_replace(', ', ',',apply_filters( 'wpml_translate_string', $v, $attribute_slug, $attributes_values_package )));
+      $translated_values = explode(',',str_replace(', ', ',',apply_filters( 'wpml_translate_string', $wp_properties['predefined_values'][$attribute_slug], $attribute_slug, $attributes_values_package )));
 
       if( $wp_properties['predefined_values'][$attribute_slug] == $v ){
         return apply_filters( 'wpml_translate_string', $v, $attribute_slug, $attributes_values_package );
