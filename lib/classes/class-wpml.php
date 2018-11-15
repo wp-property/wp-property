@@ -26,7 +26,7 @@ namespace UsabilityDynamics\WPP {
       add_filter( "wpp_stat_filter_property_type_label", array($this,"get_property_type_translation") );
       add_filter( "wpp::taxonomies::labels", array($this,"get_property_taxonomies_translation") );
       add_action( "template_redirect", array( $this, "template_redirect" ) );
-      add_action( "wpml_media_create_duplicate_attachment", array( $this, "wpml_media_meta_update") );
+      add_action( "wpml_media_create_duplicate_attachment", array( $this, "wpml_media_meta_update"), 10, 2 );
       add_filter( "admin_overview_post_statuses", array( $this, "add_lang_count") );
       add_filter( "wpp::all_properties::wp_query::args", array( $this, "lang_post_statuses") );
       add_action( "wplt::ajax_response_action", array($this, "wplt_ajax_response"));

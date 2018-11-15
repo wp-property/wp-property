@@ -46,6 +46,8 @@ namespace UsabilityDynamics\WPRETSC {
        */
       public function init() {
 
+        $this->define_settings();
+
         // Initialize XML-RPC handler
         new XMLRPC();
 
@@ -75,6 +77,13 @@ namespace UsabilityDynamics\WPRETSC {
           }
 
         } );
+
+        /**
+         * Load Admin UI
+         */
+        if( is_admin() ) {
+          new Admin();
+        }
 
         add_action('init', function() {
 
@@ -139,6 +148,22 @@ namespace UsabilityDynamics\WPRETSC {
       }
 
       /**
+       * Define Plugin Settings
+       *
+       */
+      private function define_settings() {
+        $this->settings = new \UsabilityDynamics\Settings( array(
+          'key'  => 'wpretsc_settings',
+          'store'  => 'options',
+          'data' => array(
+            'name' => $this->name,
+            'version' => $this->args[ 'version' ],
+            'domain' => $this->domain,
+          )
+        ) );
+      }
+
+      /**
        * Plugin Activation
        *
        */
@@ -149,6 +174,36 @@ namespace UsabilityDynamics\WPRETSC {
        *
        */
       public function deactivate() {}
+
+      /**
+       * Return localization's list.
+       *
+       * Example:
+       * If schema in composer.json contains l10n.{key} values:
+       *
+       * { 'config': 'l10n.hello_world' }
+       *
+       * the current function should return something below:
+       *
+       * return array(
+       *   'hello_world' => __( 'Hello World', $this->domain ),
+       * );
+       *
+       * @author peshkov@UD
+       * @return array
+       */
+      public function get_localization() {
+        return apply_filters( 'wpretsc::localization', array(
+          'general' => __( 'General', $this->domain ),
+          'settings_page_title' => __( 'WP-RETS Client Settings', $this->domain ),
+          'wp_rets_client' => __( 'WP-RETS Client', $this->domain ),
+          'debug' => __( 'Debug', $this->domain ),
+          'debug_logs' => __( 'Debug Logs', $this->domain ),
+          'enable_debug_logs' => __( 'Enable Debug Logs', $this->domain ),
+          'desc_enable_debug_logs' => sprintf( __( 'Outputs debug logs tied to RETSCI requests to file stored in <code>%s</code>', $this->domain ), $this->debug_file ),
+          'desc_debug_settings' => __( 'Tools for Debugging WP-RETS Client', $this->domain ),
+        ) );
+      }
 
       /**
        * Determine if Utility class contains missed function

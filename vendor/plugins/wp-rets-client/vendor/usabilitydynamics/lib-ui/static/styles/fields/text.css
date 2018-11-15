@@ -1,0 +1,7 @@
+/* =Styles for 'text' field
+-------------------------------------------------------------- */
+
+.uisf-text-wrapper .ui-autocomplete-input {
+  width: 30em;
+  max-width: 100%;
+}

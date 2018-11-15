@@ -47,12 +47,8 @@ namespace UsabilityDynamics\WPRETSC\Connectors {
           }
         } );
 
-        // WP-Rabbit plugin connector
-        // check if wp-rabbit plugin enabled by constant
-        // which set in wp-rabbit plugin init
-        if( defined( 'WP_RABBIT_ENABLED' ) ) {
-          $this->connectors[] = new WPRABBIT();
-        }
+        // Can be init in any case since it's required for preventing CF invalidation on each retsci updates
+        $this->connectors[] = new RabbitLoader();
 
       }
 

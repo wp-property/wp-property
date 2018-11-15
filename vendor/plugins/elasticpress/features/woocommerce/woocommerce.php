@@ -163,6 +163,37 @@ function ep_wc_whitelist_taxonomies( $taxonomies, $post ) {
 }
 
 /**
+ * Disallow duplicated ES queries on Orders page.
+ *
+ * @since 2.4
+ *
+ * @param array    $value Original filter values.
+ * @param WP_Query $query WP_Query
+ *
+ * @return array
+ */
+function ep_wc_disallow_duplicated_query( $value, $query ) {
+	global $pagenow;
+
+	/**
+	 * Make sure we're on edit.php in admin dashboard.
+	 */
+	if ( 'edit.php' !== $pagenow || ! is_admin() || 'shop_order' !== $query->get( 'post_type' ) ) {
+		return $value;
+	}
+
+	/**
+	 * Check if EP API request was already done. If request was sent return its results.
+	 */
+	if ( isset( $query->elasticsearch_success ) && $query->elasticsearch_success ) {
+		return $query->posts;
+	}
+
+	return $value;
+
+}
+
+/**
  * Translate args to ElasticPress compat format. This is the meat of what the feature does
  *
  * @param  WP_Query $query
@@ -431,6 +462,9 @@ function ep_wc_translate_args( $query ) {
 			} elseif ( 'product' === $post_type ) {
 				$search_fields = $query->get( 'search_fields', array( 'post_title', 'post_content', 'post_excerpt' ) );
 
+				// Remove author_name from this search.
+				$search_fields = ep_wc_remove_author($search_fields);
+
 				// Make sure we search skus on the front end
 				$search_fields['meta'] = array( '_sku' );
 
@@ -588,8 +622,12 @@ function ep_wc_search_order( $wp ){
 	}
 
 	$search_key_safe = str_replace( array( 'Order #', '#' ), '', wc_clean( $_GET['s'] ) );
+	$order_id        = absint( $search_key_safe );
 
-	$order = wc_get_order( absint( $search_key_safe ) );
+	/**
+	 * Order ID 0 is not valid value.
+	 */
+	$order = $order_id > 0 ? wc_get_order( $order_id ) : false;
 
 	//If the order doesn't exist, fallback to other fields
 	if ( ! $order ) {
@@ -657,7 +695,9 @@ function ep_wc_setup() {
 		add_filter( 'ep_sync_taxonomies', 'ep_wc_whitelist_taxonomies', 10, 2 );
 		add_filter( 'ep_post_sync_args_post_prepare_meta', 'ep_wc_remove_legacy_meta', 10, 2 );
 		add_filter( 'ep_post_sync_args_post_prepare_meta', 'ep_wc_add_order_items_search', 20, 2 );
+		add_filter( 'ep_term_suggest_post_type', 'ep_wc_add_post_type' );
 		add_action( 'pre_get_posts', 'ep_wc_translate_args', 11, 1 );
+		add_action( 'ep_wp_query_search_cached_posts', 'ep_wc_disallow_duplicated_query', 10, 2 );
 		add_action( 'parse_query', 'ep_wc_search_order', 11, 1 );
 	}
 }
@@ -698,6 +738,39 @@ function ep_wc_requirements_status( $status ) {
 	}
 
 	return $status;
+}
+
+/**
+ * Remove the author_name from search fields.
+ *
+ * @param array $search_fields Array of search fields.
+ *
+ * @return array
+ */
+function ep_wc_remove_author( $search_fields ) {
+	foreach ( $search_fields as $field_key => $field ) {
+		if ( 'author_name' === $field ) {
+			unset( $search_fields[ $field_key ] );
+		}
+	}
+
+	return $search_fields;
+}
+
+/**
+ * Add the product post type to an array of post types.
+ * Use with filters.
+ *
+ * @param array $post_types Array of post types (e.g. post, page).
+ *
+ * @return array
+ */
+function ep_wc_add_post_type( $post_types ) {
+	if ( ! in_array( 'product', $post_types, true ) ) {
+		$post_types[] = 'product';
+	}
+
+	return $post_types;
 }
 
 /**

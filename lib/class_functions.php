@@ -1413,7 +1413,7 @@ class WPP_F extends UsabilityDynamics\Utility
     }
 
     //** Check if script has dependancies that have not been loaded */
-    if (is_array($wp_scripts->registered[$handle]->deps)) {
+    if (!empty($wp_scripts->registered[$handle]) && is_array($wp_scripts->registered[$handle]->deps)) {
       foreach ($wp_scripts->registered[$handle]->deps as $dep_handle) {
         if (!wp_script_is($dep_handle, 'done')) {
           $wp_scripts->in_footer[] = $dep_handle;
