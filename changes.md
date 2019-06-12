@@ -1,8 +1,15 @@
-###  2.3.8 ( October 10, 2019 )
+### 2.3.9 ( June 12, 2019 )
+* Fixed WPML compatibility issue related to updating properties.
+* Fixed WPML compatibility issue related to duplicate values in dropdowns.
+* Added Polish Translation.
+* Updated libraries.
+* Other minor fixes.
+
+### 2.3.8 ( October 10, 2018 )
 * Fixed sorting issue.
 * Fixed warnings and notices
 
-###  2.3.7 ( October 3, 2019 )
+### 2.3.7 ( October 3, 2018 )
 * Added checks on empty taxonomies
 * Added ability to create a custom template for the search form
 * Fixed issue with duplicate results on Property Overview page
